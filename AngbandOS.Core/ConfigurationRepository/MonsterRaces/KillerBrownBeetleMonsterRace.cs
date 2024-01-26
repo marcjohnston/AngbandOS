@@ -13,11 +13,11 @@ internal class KillerBrownBeetleMonsterRace : MonsterRace
     protected KillerBrownBeetleMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperKSymbol));
-    public override ColourEnum Colour => ColourEnum.Brown;
+    public override ColorEnum Color => ColorEnum.Brown;
     public override string Name => "Killer brown beetle";
 
     public override bool Animal => true;
-    public override int ArmourClass => 40;
+    public override int ArmorClass => 40;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
         new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 3, 4),
     };

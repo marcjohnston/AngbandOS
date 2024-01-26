@@ -20,10 +20,10 @@ internal class YoungMultiHuedDragonMonsterRace : MonsterRace
         SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BreathePoisonMonsterSpell)),
         SaveGame.SingletonRepository.MonsterSpells.Get(nameof(ScareMonsterSpell)));
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerDSymbol));
-    public override ColourEnum Colour => ColourEnum.Purple;
+    public override ColorEnum Color => ColorEnum.Purple;
     public override string Name => "Young multi-hued dragon";
 
-    public override int ArmourClass => 60;
+    public override int ArmorClass => 60;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
         new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(ClawAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 1, 9),
         new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(ClawAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 1, 9),
@@ -31,7 +31,7 @@ internal class YoungMultiHuedDragonMonsterRace : MonsterRace
     };
     public override bool AttrMulti => true;
     public override bool BashDoor => true;
-    public override string Description => "It has a form that legends are made of. Beautiful scales of shimmering and magical colours cover it.";
+    public override string Description => "It has a form that legends are made of. Beautiful scales of shimmering and magical colors cover it.";
     public override bool Dragon => true;
     public override bool Drop_1D2 => true;
     public override bool Drop_4D2 => true;

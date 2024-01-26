@@ -20,12 +20,12 @@ internal class IronSkinPassiveMutation : Mutation
     public override void OnGain(Genome genome)
     {
         genome.DexterityBonus -= 1;
-        genome.ArmourClassBonus += 25;
+        genome.ArmorClassBonus += 25;
     }
 
     public override void OnLose(Genome genome)
     {
         genome.DexterityBonus += 1;
-        genome.ArmourClassBonus -= 25;
+        genome.ArmorClassBonus -= 25;
     }
 }

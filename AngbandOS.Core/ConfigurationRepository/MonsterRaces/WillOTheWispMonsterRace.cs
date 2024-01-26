@@ -18,10 +18,10 @@ internal class WillOTheWispMonsterRace : MonsterRace
         SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BlinkMonsterSpell)),
         SaveGame.SingletonRepository.MonsterSpells.Get(nameof(TeleportSelfMonsterSpell)));
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperESymbol));
-    public override ColourEnum Colour => ColourEnum.BrightTurquoise;
+    public override ColorEnum Color => ColorEnum.BrightTurquoise;
     public override string Name => "Will o' the wisp";
 
-    public override int ArmourClass => 150;
+    public override int ArmorClass => 150;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
         new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 1, 9),
         new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 1, 9),

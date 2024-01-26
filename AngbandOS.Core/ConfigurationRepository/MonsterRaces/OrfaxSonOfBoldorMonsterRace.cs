@@ -20,11 +20,11 @@ internal class OrfaxSonOfBoldorMonsterRace : MonsterRace
         SaveGame.SingletonRepository.MonsterSpells.Get(nameof(SummonMonsterMonsterSpell)),
         SaveGame.SingletonRepository.MonsterSpells.Get(nameof(TeleportToMonsterSpell)));
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerYSymbol));
-    public override ColourEnum Colour => ColourEnum.BrightBlue;
+    public override ColorEnum Color => ColorEnum.BrightBlue;
     public override string Name => "Orfax, Son of Boldor";
 
     public override bool Animal => true;
-    public override int ArmourClass => 20;
+    public override int ArmorClass => 20;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
         new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 1, 9),
         new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 1, 8),

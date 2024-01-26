@@ -17,27 +17,27 @@ internal class RedrawHungerFlaggedAction : FlaggedAction
     {
         if (SaveGame.Food < Constants.PyFoodFaint)
         {
-            SaveGame.Screen.Print(ColourEnum.Red, "Weak  ", RowHungry, ColHungry);
+            SaveGame.Screen.Print(ColorEnum.Red, "Weak  ", RowHungry, ColHungry);
         }
         else if (SaveGame.Food < Constants.PyFoodWeak)
         {
-            SaveGame.Screen.Print(ColourEnum.Orange, "Weak  ", RowHungry, ColHungry);
+            SaveGame.Screen.Print(ColorEnum.Orange, "Weak  ", RowHungry, ColHungry);
         }
         else if (SaveGame.Food < Constants.PyFoodAlert)
         {
-            SaveGame.Screen.Print(ColourEnum.Yellow, "Hungry", RowHungry, ColHungry);
+            SaveGame.Screen.Print(ColorEnum.Yellow, "Hungry", RowHungry, ColHungry);
         }
         else if (SaveGame.Food < Constants.PyFoodFull)
         {
-            SaveGame.Screen.Print(ColourEnum.BrightGreen, "      ", RowHungry, ColHungry);
+            SaveGame.Screen.Print(ColorEnum.BrightGreen, "      ", RowHungry, ColHungry);
         }
         else if (SaveGame.Food < Constants.PyFoodMax)
         {
-            SaveGame.Screen.Print(ColourEnum.BrightGreen, "Full  ", RowHungry, ColHungry);
+            SaveGame.Screen.Print(ColorEnum.BrightGreen, "Full  ", RowHungry, ColHungry);
         }
         else
         {
-            SaveGame.Screen.Print(ColourEnum.Green, "Gorged", RowHungry, ColHungry);
+            SaveGame.Screen.Print(ColorEnum.Green, "Gorged", RowHungry, ColHungry);
         }
     }
 }

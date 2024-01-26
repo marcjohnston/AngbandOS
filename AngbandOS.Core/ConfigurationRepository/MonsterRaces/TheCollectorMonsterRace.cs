@@ -28,10 +28,10 @@ internal class TheCollectorMonsterRace : MonsterRace
         SaveGame.SingletonRepository.MonsterSpells.Get(nameof(SummonUniqueMonsterSpell)),
         SaveGame.SingletonRepository.MonsterSpells.Get(nameof(TeleportAwayMonsterSpell)));
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerHSymbol));
-    public override ColourEnum Colour => ColourEnum.Copper;
+    public override ColorEnum Color => ColorEnum.Copper;
     public override string Name => "The Collector";
 
-    public override int ArmourClass => 100;
+    public override int ArmorClass => 100;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
         new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(LoseChaAttackEffect)), 5, 5),
         new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(TouchAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(EatItemAttackEffect)), 0, 0),

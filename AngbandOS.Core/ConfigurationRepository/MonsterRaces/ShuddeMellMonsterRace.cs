@@ -23,10 +23,10 @@ internal class ShuddeMellMonsterRace : MonsterRace
         SaveGame.SingletonRepository.MonsterSpells.Get(nameof(HealMonsterSpell)),
         SaveGame.SingletonRepository.MonsterSpells.Get(nameof(SummonCthuloidMonsterSpell)));
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperXSymbol));
-    public override ColourEnum Colour => ColourEnum.Brown;
+    public override ColorEnum Color => ColorEnum.Brown;
     public override string Name => "Shudde M'ell";
 
-    public override int ArmourClass => 90;
+    public override int ArmorClass => 90;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
         new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(CrushAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(ShatterAttackEffect)), 3, 11),
         new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(CrushAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(ShatterAttackEffect)), 3, 11),

@@ -13,10 +13,10 @@ internal class FlyingSkullMonsterRace : MonsterRace
     protected FlyingSkullMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerSSymbol));
-    public override ColourEnum Colour => ColourEnum.Beige;
+    public override ColorEnum Color => ColorEnum.Beige;
     public override string Name => "Flying skull";
 
-    public override int ArmourClass => 30;
+    public override int ArmorClass => 30;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
         new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(PoisonAttackEffect)), 1, 3),
         new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(LoseStrAttackEffect)), 1, 4),

@@ -8,13 +8,13 @@
 namespace AngbandOS.Core.Items;
 
 [Serializable]
-internal abstract class DragonScaleMailArmorItem : ArmourItem
+internal abstract class DragonScaleMailArmorItem : ArmorItem
 {
     public DragonScaleMailArmorItem(SaveGame saveGame, ItemFactory itemClass) : base(saveGame, itemClass) { }
     public override int WieldSlot => InventorySlot.Body;
 
     /// <summary>
-    /// Applies special magic to dragon scale mail armour.
+    /// Applies special magic to dragon scale mail armor.
     /// </summary>
     /// <param name="item"></param>
     /// <param name="level"></param>
@@ -23,7 +23,7 @@ internal abstract class DragonScaleMailArmorItem : ArmourItem
     {
         if (power != 0)
         {
-            // Apply the standard armour characteristics.
+            // Apply the standard armor characteristics.
             base.ApplyMagic(level, power, null);
 
             SaveGame.TreasureRating += 30;

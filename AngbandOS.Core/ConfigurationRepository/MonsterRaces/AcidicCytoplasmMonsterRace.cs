@@ -13,10 +13,10 @@ internal class AcidicCytoplasmMonsterRace : MonsterRace
     protected AcidicCytoplasmMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerJSymbol));
-    public override ColourEnum Colour => ColourEnum.Chartreuse;
+    public override ColorEnum Color => ColorEnum.Chartreuse;
     public override string Name => "Acidic cytoplasm";
 
-    public override int ArmourClass => 18;
+    public override int ArmorClass => 18;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
         new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(TouchAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(AcidAttackEffect)), 1, 10),
         new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(TouchAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(AcidAttackEffect)), 1, 10),

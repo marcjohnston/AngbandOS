@@ -1,5 +1,5 @@
 import { ElementRef } from "@angular/core";
-import { ColourEnum } from "../colour-enum/colour-enum.module";
+import { ColorEnum } from "../color-enum/color-enum.module";
 import { SoundEffectsMap } from "../sound-effects-map/sound-effects-map.module";
 import { ConsoleConfiguration } from "./console-configuration";
 import { PrintLine } from "./print-line";
@@ -78,16 +78,16 @@ export class HtmlConsole {
     }
   }
 
-  public print(row: number, col: number, text: string, foreColourEnum: ColourEnum, backColourEnum: ColourEnum) {
-    const backColour = this.configuration.colours[backColourEnum];
-    const foreColour = this.configuration.colours[foreColourEnum];
-    this.printUnmappedColor(row, col, text, foreColour, backColour);
+  public print(row: number, col: number, text: string, foreColorEnum: ColorEnum, backColorEnum: ColorEnum) {
+    const backColor = this.configuration.colors[backColorEnum];
+    const foreColor = this.configuration.colors[foreColorEnum];
+    this.printUnmappedColor(row, col, text, foreColor, backColor);
   }
 
   public batchPrint(printLines: PrintLine[]) {
     for (let i = 0; i < printLines.length; i++) {
       const printLine = printLines[i];
-      this.print(printLine.row!, printLine.col!, printLine.text!, printLine.foreColour!, printLine.backColour!);
+      this.print(printLine.row!, printLine.col!, printLine.text!, printLine.foreColor!, printLine.backColor!);
     }
   }
 }

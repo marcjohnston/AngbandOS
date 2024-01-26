@@ -40,10 +40,10 @@ internal class GreatCthulhuMonsterRace : MonsterRace
         SaveGame.SingletonRepository.MonsterSpells.Get(nameof(SummonReaverMonsterSpell)),
         SaveGame.SingletonRepository.MonsterSpells.Get(nameof(TeleportSelfMonsterSpell)));
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperXSymbol));
-    public override ColourEnum Colour => ColourEnum.Green;
+    public override ColorEnum Color => ColorEnum.Green;
     public override string Name => "Great Cthulhu";
 
-    public override int ArmourClass => 140;
+    public override int ArmorClass => 140;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
         new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(CrushAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 50, 4),
         new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(ClawAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(UnPowerAttackEffect)), 15, 2),

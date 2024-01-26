@@ -20,11 +20,11 @@ internal class MasterYeekMonsterRace : MonsterRace
         SaveGame.SingletonRepository.MonsterSpells.Get(nameof(SummonMonsterMonsterSpell)),
         SaveGame.SingletonRepository.MonsterSpells.Get(nameof(TeleportSelfMonsterSpell)));
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerYSymbol));
-    public override ColourEnum Colour => ColourEnum.Green;
+    public override ColorEnum Color => ColorEnum.Green;
     public override string Name => "Master yeek";
 
     public override bool Animal => true;
-    public override int ArmourClass => 24;
+    public override int ArmorClass => 24;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
         new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 1, 8),
     };

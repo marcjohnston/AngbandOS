@@ -12,7 +12,7 @@ internal class OrbOfIrritationRareItem : RareItem
 {
     private OrbOfIrritationRareItem(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(TildeSymbol));
-    public override ColourEnum Colour => ColourEnum.Purple;
+    public override ColorEnum Color => ColorEnum.Purple;
     public override string Name => "Orb of Irritation";
     public override bool Aggravate => true;
     public override int Cost => 0;

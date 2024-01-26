@@ -12,6 +12,6 @@ internal class GoldRodFlavour : RodFlavour
 {
     private GoldRodFlavour(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(MinusSignSymbol));
-    public override ColourEnum Colour => ColourEnum.Gold;
+    public override ColorEnum Color => ColorEnum.Gold;
     public override string Name => "Gold";
 }

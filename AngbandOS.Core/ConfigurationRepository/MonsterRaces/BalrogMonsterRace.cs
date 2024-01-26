@@ -23,10 +23,10 @@ internal class BalrogMonsterRace : MonsterRace
         SaveGame.SingletonRepository.MonsterSpells.Get(nameof(SummonHiUndeadMonsterSpell)),
         SaveGame.SingletonRepository.MonsterSpells.Get(nameof(SummonUndeadMonsterSpell)));
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperUSymbol));
-    public override ColourEnum Colour => ColourEnum.BrightRed;
+    public override ColorEnum Color => ColorEnum.BrightRed;
     public override string Name => "Balrog";
 
-    public override int ArmourClass => 80;
+    public override int ArmorClass => 80;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
         new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(FireAttackEffect)), 2, 6),
         new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 5, 6),

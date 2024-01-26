@@ -41,7 +41,7 @@ internal class LibraryStoreFactory : StoreFactory
     };
 
     public override string FeatureType => "Bookstore";
-    public override ColourEnum Colour => ColourEnum.Orange;
+    public override ColorEnum Color => ColorEnum.Orange;
     protected override string SymbolName => nameof(NumberNineSymbol);
 
     public override StockStoreInventoryItem[] GetStoreTable()

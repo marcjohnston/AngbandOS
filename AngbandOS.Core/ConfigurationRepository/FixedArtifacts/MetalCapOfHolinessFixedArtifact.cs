@@ -22,7 +22,7 @@ internal class MetalCapOfHolinessFixedArtifact : FixedArtifact
     public override ItemFactory BaseItemCategory => _baseItemCategory;
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(CloseBraceSymbol));
-    public override ColourEnum Colour => ColourEnum.Grey;
+    public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "The Metal Cap of Holiness";
     public override int Ac => 3;
     public override bool Cha => true;

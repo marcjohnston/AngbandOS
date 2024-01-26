@@ -12,6 +12,6 @@ internal class TransparentRingFlavour : RingFlavour
 {
     private TransparentRingFlavour(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(EqualSignSymbol));
-    public override ColourEnum Colour => ColourEnum.Grey;
+    public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "Transparent";
 }

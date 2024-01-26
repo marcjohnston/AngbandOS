@@ -30,7 +30,7 @@ internal class BrassLanternLightSourceItemFactory : LightSourceItemFactory
     public override bool IsFuelForLantern => true;
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(TildeSymbol));
-    public override ColourEnum Colour => ColourEnum.BrightBrown;
+    public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "Brass Lantern";
 
     public override int[] Chance => new int[] { 1, 0, 0, 0 };

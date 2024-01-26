@@ -15,10 +15,10 @@ internal class PoltergeistMonsterRace : MonsterRace
     public override MonsterSpellList Spells => new MonsterSpellList(
         SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BlinkMonsterSpell)));
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperGSymbol));
-    public override ColourEnum Colour => ColourEnum.Grey;
+    public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "Poltergeist";
 
-    public override int ArmourClass => 15;
+    public override int ArmorClass => 15;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
         new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(TouchAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(TerrifyAttackEffect)), 0, 0),
     };

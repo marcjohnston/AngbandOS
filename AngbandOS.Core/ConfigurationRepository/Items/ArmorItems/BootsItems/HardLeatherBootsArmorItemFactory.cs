@@ -13,7 +13,7 @@ internal class HardLeatherBootsArmorItemFactory : BootsArmorItemFactory
     private HardLeatherBootsArmorItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(CloseBraceSymbol));
-    public override ColourEnum Colour => ColourEnum.BrightBrown;
+    public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "Pair of Hard Leather Boots";
 
     public override int Ac => 3;

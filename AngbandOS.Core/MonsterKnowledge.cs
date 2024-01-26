@@ -45,11 +45,11 @@ internal class MonsterKnowledge
     {
         SaveGame.MsgPrint(null);
         SaveGame.Screen.Erase(1, 0);
-        DisplayBody(ColourEnum.White);
+        DisplayBody(ColorEnum.White);
         DisplayHeader();
     }
 
-    public void DisplayBody(ColourEnum bodyColour)
+    public void DisplayBody(ColorEnum bodyColor)
     {
         int m;
         int msex = 0;
@@ -834,9 +834,9 @@ internal class MonsterKnowledge
             }
             _description.Append(". ");
         }
-        if (KnowArmour(_monsterType, knowledge))
+        if (KnowArmor(_monsterType, knowledge))
         {
-            _description.Append(_wdHeCap[msex]).Append(" is AC ").Append(_monsterType.ArmourClass);
+            _description.Append(_wdHeCap[msex]).Append(" is AC ").Append(_monsterType.ArmorClass);
             if (_monsterType.Hdice == 1 && _monsterType.Hside == 1)
             {
                 _description.Append(" and has 1hp. ");
@@ -1351,26 +1351,26 @@ internal class MonsterKnowledge
         {
             _description.Append("You feel an intense desire to kill this monster... ");
         }
-        SaveGame.Screen.PrintWrap(bodyColour, _description.ToString());
+        SaveGame.Screen.PrintWrap(bodyColor, _description.ToString());
     }
 
     private void DisplayHeader()
     {
         char c1 = _monsterType.Symbol.Character;
-        ColourEnum a1 = _monsterType.Colour;
+        ColorEnum a1 = _monsterType.Color;
         SaveGame.Screen.Erase(0, 0);
         SaveGame.Screen.Goto(0, 0);
         if (!_monsterType.Unique)
         {
-            SaveGame.Screen.Print(ColourEnum.White, "The ");
+            SaveGame.Screen.Print(ColorEnum.White, "The ");
         }
-        SaveGame.Screen.Print(ColourEnum.White, _monsterType.Name);
-        SaveGame.Screen.Print(ColourEnum.White, " ('");
+        SaveGame.Screen.Print(ColorEnum.White, _monsterType.Name);
+        SaveGame.Screen.Print(ColorEnum.White, " ('");
         SaveGame.Screen.Print(a1, c1.ToString());
-        SaveGame.Screen.Print(ColourEnum.White, "')");
+        SaveGame.Screen.Print(ColorEnum.White, "')");
     }
 
-    private bool KnowArmour(MonsterRace monsterType, MonsterKnowledge knowledge)
+    private bool KnowArmor(MonsterRace monsterType, MonsterKnowledge knowledge)
     {
         int kills = knowledge.RTkills;
         if ((kills > 304 / (4 + monsterType.Level)) || knowledge.RProbed)

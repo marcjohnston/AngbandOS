@@ -37,7 +37,7 @@ internal class MysticCharacterClass : BaseCharacterClass
         "Mystics master both martial and psionic arts, which they",
         "power using WIS. Can resist confusion (at lvl 10), fear",
         "(lvl 25), paralysis (lvl 30). Telepathy (lvl 40). While",
-        "wearing only light armour they can move faster and dodge,",
+        "wearing only light armor they can move faster and dodge,",
         "and while not wielding a weapon they do increased damage."
     };
     public override int SpellWeight => 300;

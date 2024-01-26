@@ -12,6 +12,6 @@ internal class PinkPotionFlavour : PotionFlavour
 {
     private PinkPotionFlavour(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(ExclamationPointSymbol));
-    public override ColourEnum Colour => ColourEnum.Pink;
+    public override ColorEnum Color => ColorEnum.Pink;
     public override string Name => "Pink";
 }

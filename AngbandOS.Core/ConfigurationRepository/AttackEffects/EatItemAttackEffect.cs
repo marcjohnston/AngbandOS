@@ -13,7 +13,7 @@ internal class EatItemAttackEffect : AttackEffect
     private EatItemAttackEffect(SaveGame saveGame) : base(saveGame) { }
     public override int Power => 5;
     public override string Description => "steal items";
-    public override void ApplyToPlayer(int monsterLevel, int monsterIndex, int armourClass, string monsterDescription, Monster monster, ref bool obvious, ref int damage, ref bool blinked)
+    public override void ApplyToPlayer(int monsterLevel, int monsterIndex, int armorClass, string monsterDescription, Monster monster, ref bool obvious, ref int damage, ref bool blinked)
     {
         // Steal an item
         SaveGame.TakeHit(damage, monsterDescription);
@@ -51,7 +51,7 @@ internal class EatItemAttackEffect : AttackEffect
             }
         }
     }
-    public override void ApplyToMonster(Monster monster, int armourClass, ref int damage, ref Projectile? pt, ref bool blinked)
+    public override void ApplyToMonster(Monster monster, int armorClass, ref int damage, ref Projectile? pt, ref bool blinked)
     {
         // Monsters don't actually steal from other monsters
         pt = null;

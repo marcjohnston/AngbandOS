@@ -17,11 +17,11 @@ internal class GreaterDraconicQuylthulgMonsterRace : MonsterRace
         SaveGame.SingletonRepository.MonsterSpells.Get(nameof(SummonHiDragonMonsterSpell)),
         SaveGame.SingletonRepository.MonsterSpells.Get(nameof(TeleportToMonsterSpell)));
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperQSymbol));
-    public override ColourEnum Colour => ColourEnum.Green;
+    public override ColorEnum Color => ColorEnum.Green;
     public override string Name => "Greater draconic quylthulg";
 
     public override bool Animal => true;
-    public override int ArmourClass => 1;
+    public override int ArmorClass => 1;
     public override MonsterAttack[]? Attacks => null;
     public override string Description => "A massive mound of scaled flesh, throbbing and pulsating with multi-hued light.";
     public override bool EmptyMind => true;

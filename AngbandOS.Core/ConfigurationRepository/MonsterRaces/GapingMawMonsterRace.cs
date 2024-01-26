@@ -15,7 +15,7 @@ internal class GapingMawMonsterRace : MonsterRace
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(PeriodSymbol));
     public override string Name => "Gaping Maw";
 
-    public override int ArmourClass => 14;
+    public override int ArmorClass => 14;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
         new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(TerrifyAttackEffect)), 1, 4),
     };

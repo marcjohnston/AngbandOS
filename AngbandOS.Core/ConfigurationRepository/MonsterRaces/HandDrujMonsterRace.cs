@@ -21,10 +21,10 @@ internal class HandDrujMonsterRace : MonsterRace
         SaveGame.SingletonRepository.MonsterSpells.Get(nameof(ForgetMonsterSpell)),
         SaveGame.SingletonRepository.MonsterSpells.Get(nameof(TeleportAwayMonsterSpell)));
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerSSymbol));
-    public override ColourEnum Colour => ColourEnum.BrightGrey;
+    public override ColorEnum Color => ColorEnum.BrightGrey;
     public override string Name => "Hand druj";
 
-    public override int ArmourClass => 110;
+    public override int ArmorClass => 110;
     public override MonsterAttack[]? Attacks => null;
     public override bool ColdBlood => true;
     public override string Description => "A skeletal hand floating in the air, motionless except for its flexing fingers.";

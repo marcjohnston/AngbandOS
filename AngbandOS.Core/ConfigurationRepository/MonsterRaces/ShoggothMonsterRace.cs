@@ -13,10 +13,10 @@ internal class ShoggothMonsterRace : MonsterRace
     protected ShoggothMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperASymbol));
-    public override ColourEnum Colour => ColourEnum.Black;
+    public override ColorEnum Color => ColorEnum.Black;
     public override string Name => "Shoggoth";
 
-    public override int ArmourClass => 80;
+    public override int ArmorClass => 80;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
         new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(CrushAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(AcidAttackEffect)), 5, 6),
         new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(CrushAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(AcidAttackEffect)), 5, 6),

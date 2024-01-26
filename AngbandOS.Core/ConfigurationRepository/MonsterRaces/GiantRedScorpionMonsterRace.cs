@@ -13,11 +13,11 @@ internal class GiantRedScorpionMonsterRace : MonsterRace
     protected GiantRedScorpionMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperSSymbol));
-    public override ColourEnum Colour => ColourEnum.BrightRed;
+    public override ColorEnum Color => ColorEnum.BrightRed;
     public override string Name => "Giant red scorpion";
 
     public override bool Animal => true;
-    public override int ArmourClass => 44;
+    public override int ArmorClass => 44;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
         new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 2, 4),
         new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(StingAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(LoseStrAttackEffect)), 1, 7),

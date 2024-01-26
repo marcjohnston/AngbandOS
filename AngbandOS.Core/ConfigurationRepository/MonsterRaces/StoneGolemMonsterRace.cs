@@ -13,10 +13,10 @@ internal class StoneGolemMonsterRace : MonsterRace
     protected StoneGolemMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerGSymbol));
-    public override ColourEnum Colour => ColourEnum.BrightBrown;
+    public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "Stone golem";
 
-    public override int ArmourClass => 75;
+    public override int ArmorClass => 75;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
         new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 1, 10),
         new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 1, 10),

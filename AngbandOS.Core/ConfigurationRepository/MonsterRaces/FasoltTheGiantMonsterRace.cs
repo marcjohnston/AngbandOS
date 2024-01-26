@@ -13,10 +13,10 @@ internal class FasoltTheGiantMonsterRace : MonsterRace
     protected FasoltTheGiantMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperPSymbol));
-    public override ColourEnum Colour => ColourEnum.Brown;
+    public override ColorEnum Color => ColorEnum.Brown;
     public override string Name => "Fasolt the Giant";
 
-    public override int ArmourClass => 70;
+    public override int ArmorClass => 70;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
         new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 5, 5),
         new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 2, 10),

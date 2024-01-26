@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Items;
 
 [Serializable]
-internal abstract class GlovesArmorItem : ArmourItem
+internal abstract class GlovesArmorItem : ArmorItem
 {
     public GlovesArmorItem(SaveGame saveGame, ItemFactory itemClass) : base(saveGame, itemClass) { }
     public override int WieldSlot => InventorySlot.Hands;
@@ -75,7 +75,7 @@ internal abstract class GlovesArmorItem : ArmourItem
     {
         if (power != 0)
         {
-            // Apply the standard armour characteristics.
+            // Apply the standard armor characteristics.
             base.ApplyMagic(level, power, null);
 
             if (power > 1)

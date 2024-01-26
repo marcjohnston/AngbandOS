@@ -19,10 +19,10 @@ internal class DeathKnightMonsterRace : MonsterRace
         SaveGame.SingletonRepository.MonsterSpells.Get(nameof(ScareMonsterSpell)),
         SaveGame.SingletonRepository.MonsterSpells.Get(nameof(SummonMonstersMonsterSpell)));
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerPSymbol));
-    public override ColourEnum Colour => ColourEnum.Grey;
+    public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "Death knight";
 
-    public override int ArmourClass => 100;
+    public override int ArmorClass => 100;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
         new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 6, 5),
         new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 5, 5),
@@ -31,7 +31,7 @@ internal class DeathKnightMonsterRace : MonsterRace
     };
     public override bool BashDoor => true;
     public override bool ColdBlood => true;
-    public override string Description => "It is a humanoid form dressed in armour of an ancient form. From beneath its helmet, eyes glow a baleful red and seem to pierce you like lances of fire.";
+    public override string Description => "It is a humanoid form dressed in armor of an ancient form. From beneath its helmet, eyes glow a baleful red and seem to pierce you like lances of fire.";
     public override bool Drop_1D2 => true;
     public override bool Drop_2D2 => true;
     public override bool Evil => true;

@@ -18,10 +18,10 @@ internal class TenguMonsterRace : MonsterRace
         SaveGame.SingletonRepository.MonsterSpells.Get(nameof(TeleportToMonsterSpell)),
         SaveGame.SingletonRepository.MonsterSpells.Get(nameof(TeleportSelfMonsterSpell)));
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerUSymbol));
-    public override ColourEnum Colour => ColourEnum.Blue;
+    public override ColorEnum Color => ColorEnum.Blue;
     public override string Name => "Tengu";
 
-    public override int ArmourClass => 32;
+    public override int ArmorClass => 32;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
         new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 1, 8),
     };

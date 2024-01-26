@@ -12,6 +12,6 @@ internal class CopperWandFlavour : WandFlavour
 {
     private CopperWandFlavour(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(MinusSignSymbol));
-    public override ColourEnum Colour => ColourEnum.Copper;
+    public override ColorEnum Color => ColorEnum.Copper;
     public override string Name => "Copper";
 }

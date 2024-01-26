@@ -13,10 +13,10 @@ internal class GremlinMonsterRace : MonsterRace
     protected GremlinMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerUSymbol));
-    public override ColourEnum Colour => ColourEnum.BrightChartreuse;
+    public override ColorEnum Color => ColorEnum.BrightChartreuse;
     public override string Name => "Gremlin";
 
-    public override int ArmourClass => 30;
+    public override int ArmorClass => 30;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
         new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(ClawAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(EatFoodAttackEffect)), 1, 2),
         new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(ClawAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(EatFoodAttackEffect)), 1, 2),

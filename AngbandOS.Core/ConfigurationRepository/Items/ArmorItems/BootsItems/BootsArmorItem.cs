@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Items;
 
 [Serializable]
-internal abstract class BootsArmorItem : ArmourItem
+internal abstract class BootsArmorItem : ArmorItem
 {
     public override int WieldSlot => InventorySlot.Feet;
     public BootsArmorItem(SaveGame saveGame, ItemFactory itemClass) : base(saveGame, itemClass) { }
@@ -89,7 +89,7 @@ internal abstract class BootsArmorItem : ArmourItem
     {
         if (power != 0)
         {
-            // Apply the standard armour characteristics.
+            // Apply the standard armor characteristics.
             base.ApplyMagic(level, power, null);
 
             if (power > 1)

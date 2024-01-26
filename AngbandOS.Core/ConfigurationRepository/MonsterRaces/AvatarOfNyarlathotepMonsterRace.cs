@@ -13,10 +13,10 @@ internal class AvatarOfNyarlathotepMonsterRace : MonsterRace
     protected AvatarOfNyarlathotepMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerPSymbol));
-    public override ColourEnum Colour => ColourEnum.BrightRed;
+    public override ColorEnum Color => ColorEnum.BrightRed;
     public override string Name => "Avatar of Nyarlathotep";
 
-    public override int ArmourClass => 70;
+    public override int ArmorClass => 70;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
         new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 5, 5),
         new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 5, 5),

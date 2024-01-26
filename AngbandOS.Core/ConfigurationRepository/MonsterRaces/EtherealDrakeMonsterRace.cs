@@ -19,10 +19,10 @@ internal class EtherealDrakeMonsterRace : MonsterRace
         SaveGame.SingletonRepository.MonsterSpells.Get(nameof(ScareMonsterSpell)),
         SaveGame.SingletonRepository.MonsterSpells.Get(nameof(SlowMonsterSpell)));
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerDSymbol));
-    public override ColourEnum Colour => ColourEnum.BrightGrey;
+    public override ColorEnum Color => ColorEnum.BrightGrey;
     public override string Name => "Ethereal drake";
 
-    public override int ArmourClass => 100;
+    public override int ArmorClass => 100;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
         new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(ClawAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 1, 8),
         new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(ClawAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 1, 8),

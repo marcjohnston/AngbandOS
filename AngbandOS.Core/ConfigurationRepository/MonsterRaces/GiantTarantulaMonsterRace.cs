@@ -13,11 +13,11 @@ internal class GiantTarantulaMonsterRace : MonsterRace
     protected GiantTarantulaMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperSSymbol));
-    public override ColourEnum Colour => ColourEnum.BrightGreen;
+    public override ColorEnum Color => ColorEnum.BrightGreen;
     public override string Name => "Giant tarantula";
 
     public override bool Animal => true;
-    public override int ArmourClass => 32;
+    public override int ArmorClass => 32;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
         new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(PoisonAttackEffect)), 1, 6),
         new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(PoisonAttackEffect)), 1, 6),

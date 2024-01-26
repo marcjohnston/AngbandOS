@@ -16,10 +16,10 @@ internal class MagmaElementalMonsterRace : MonsterRace
         SaveGame.SingletonRepository.MonsterSpells.Get(nameof(FireBallMonsterSpell)),
         SaveGame.SingletonRepository.MonsterSpells.Get(nameof(PlasmaBoltMonsterSpell)));
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperESymbol));
-    public override ColourEnum Colour => ColourEnum.Orange;
+    public override ColorEnum Color => ColorEnum.Orange;
     public override string Name => "Magma elemental";
 
-    public override int ArmourClass => 70;
+    public override int ArmorClass => 70;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
         new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 4, 6),
         new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(FireAttackEffect)), 3, 7),

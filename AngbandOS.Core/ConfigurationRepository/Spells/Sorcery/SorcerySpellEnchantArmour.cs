@@ -8,14 +8,14 @@
 namespace AngbandOS.Core.Spells.Sorcery;
 
 [Serializable]
-internal class SorcerySpellEnchantArmour : Spell
+internal class SorcerySpellEnchantArmor : Spell
 {
-    private SorcerySpellEnchantArmour(SaveGame saveGame) : base(saveGame) { }
+    private SorcerySpellEnchantArmor(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
         SaveGame.EnchantItem(0, 0, SaveGame.Rng.RandomLessThan(3) + 2);
     }
 
-    public override string Name => "Enchant Armour";
+    public override string Name => "Enchant Armor";
     
 }

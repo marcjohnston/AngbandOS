@@ -13,10 +13,10 @@ internal class BrigandMonsterRace : MonsterRace
     protected BrigandMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerPSymbol));
-    public override ColourEnum Colour => ColourEnum.Black;
+    public override ColorEnum Color => ColorEnum.Black;
     public override string Name => "Brigand";
 
-    public override int ArmourClass => 32;
+    public override int ArmorClass => 32;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
         new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 2, 6),
         new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(TouchAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(EatGoldAttackEffect)), 0, 0),

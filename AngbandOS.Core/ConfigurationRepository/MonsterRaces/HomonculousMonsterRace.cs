@@ -13,10 +13,10 @@ internal class HomonculousMonsterRace : MonsterRace
     protected HomonculousMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerUSymbol));
-    public override ColourEnum Colour => ColourEnum.Yellow;
+    public override ColorEnum Color => ColorEnum.Yellow;
     public override string Name => "Homonculous";
 
-    public override int ArmourClass => 32;
+    public override int ArmorClass => 32;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
         new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(ParalyzeAttackEffect)), 1, 2),
         new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 1, 10),

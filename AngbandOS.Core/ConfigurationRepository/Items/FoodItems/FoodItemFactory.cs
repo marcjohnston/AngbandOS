@@ -17,7 +17,7 @@ internal abstract class FoodItemFactory : ItemFactory
     public override int PackSort => 9;
     public override int BaseValue => 5;
     //public override bool CanBeConsumed => true;
-    public override ColourEnum Colour => ColourEnum.Green;
+    public override ColorEnum Color => ColorEnum.Green;
     public virtual bool VanishesWhenEatenBySkeletons => false;
 
     /// <summary>

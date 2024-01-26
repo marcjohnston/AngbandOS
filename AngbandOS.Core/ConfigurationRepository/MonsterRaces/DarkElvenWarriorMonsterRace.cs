@@ -15,16 +15,16 @@ internal class DarkElvenWarriorMonsterRace : MonsterRace
     public override MonsterSpellList Spells => new MonsterSpellList(
         SaveGame.SingletonRepository.MonsterSpells.Get(nameof(MagicMissileMonsterSpell)));
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerHSymbol));
-    public override ColourEnum Colour => ColourEnum.Black;
+    public override ColorEnum Color => ColorEnum.Black;
     public override string Name => "Dark elven warrior";
 
-    public override int ArmourClass => 16;
+    public override int ArmorClass => 16;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
         new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 1, 8),
         new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 1, 8),
     };
     public override bool BashDoor => true;
-    public override string Description => "A dark elven figure in armour and ready with his sword.";
+    public override string Description => "A dark elven figure in armor and ready with his sword.";
     public override bool Drop_1D2 => true;
     public override bool Evil => true;
     public override int FreqInate => 12;

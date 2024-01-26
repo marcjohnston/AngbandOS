@@ -12,8 +12,8 @@ internal class BlackFlashAnimation : Animation
 {
     private BlackFlashAnimation(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override char Character => '*';
-    public override ColourEnum Colour => ColourEnum.Black;
+    public override ColorEnum Color => ColorEnum.Black;
     public override string Name => "BlackFlash";
-    public override ColourEnum AlternateColour => ColourEnum.Grey;
+    public override ColorEnum AlternateColor => ColorEnum.Grey;
     public override string Sequence => @"********";
 }

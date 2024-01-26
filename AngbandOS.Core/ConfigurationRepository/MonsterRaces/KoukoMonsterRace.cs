@@ -16,10 +16,10 @@ internal class KoukoMonsterRace : MonsterRace
         SaveGame.SingletonRepository.MonsterSpells.Get(nameof(DrainManaMonsterSpell)),
         SaveGame.SingletonRepository.MonsterSpells.Get(nameof(ScareMonsterSpell)));
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperWSymbol));
-    public override ColourEnum Colour => ColourEnum.BrightGreen;
+    public override ColorEnum Color => ColorEnum.BrightGreen;
     public override string Name => "Kouko";
 
-    public override int ArmourClass => 30;
+    public override int ArmorClass => 30;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
         new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 1, 6),
         new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 1, 6),

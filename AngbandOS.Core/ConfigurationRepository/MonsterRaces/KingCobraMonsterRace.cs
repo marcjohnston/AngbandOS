@@ -13,11 +13,11 @@ internal class KingCobraMonsterRace : MonsterRace
     protected KingCobraMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperJSymbol));
-    public override ColourEnum Colour => ColourEnum.Yellow;
+    public override ColorEnum Color => ColorEnum.Yellow;
     public override string Name => "King cobra";
 
     public override bool Animal => true;
-    public override int ArmourClass => 30;
+    public override int ArmorClass => 30;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
         new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(SpitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(BlindAttackEffect)), 1, 2),
         new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(PoisonAttackEffect)), 3, 4),

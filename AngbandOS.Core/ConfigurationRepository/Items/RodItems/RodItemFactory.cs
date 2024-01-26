@@ -28,6 +28,6 @@ internal abstract class RodItemFactory : ItemFactory, IFlavour
     public override int PackSort => 13;
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Rod;
     public override int BaseValue => 90;
-    public override ColourEnum Colour => ColourEnum.Turquoise;
+    public override ColorEnum Color => ColorEnum.Turquoise;
     public abstract void Execute(ZapRodEvent zapRodEvent);
 }

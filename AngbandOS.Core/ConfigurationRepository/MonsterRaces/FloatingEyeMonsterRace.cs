@@ -15,7 +15,7 @@ internal class FloatingEyeMonsterRace : MonsterRace
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerESymbol));
     public override string Name => "Floating eye";
 
-    public override int ArmourClass => 6;
+    public override int ArmorClass => 6;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
         new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(GazeAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(ParalyzeAttackEffect)), 0, 0),
     };

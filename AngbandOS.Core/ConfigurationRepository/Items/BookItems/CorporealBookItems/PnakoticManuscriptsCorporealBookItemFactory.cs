@@ -13,7 +13,7 @@ internal class PnakoticManuscriptsCorporealBookItemFactory : CorporealBookItemFa
     private PnakoticManuscriptsCorporealBookItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(QuestionMarkSymbol));
-    public override ColourEnum Colour => ColourEnum.BrightYellow;
+    public override ColorEnum Color => ColorEnum.BrightYellow;
     public override string Name => "[Pnakotic Manuscripts]";
 
     public override int[] Chance => new int[] { 3, 0, 0, 0 };

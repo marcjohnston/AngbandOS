@@ -13,15 +13,15 @@ internal class FullPlateHardArmorItemFactory : HardArmorItemFactory
     private FullPlateHardArmorItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(OpenBraceSymbol));
-    public override ColourEnum Colour => ColourEnum.BrightWhite;
-    public override string Name => "Full Plate Armour";
+    public override ColorEnum Color => ColorEnum.BrightWhite;
+    public override string Name => "Full Plate Armor";
 
     public override int Ac => 25;
     public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int Cost => 1350;
     public override int Dd => 2;
     public override int Ds => 4;
-    public override string FriendlyName => "Full Plate Armour~";
+    public override string FriendlyName => "Full Plate Armor~";
     public override int Level => 45;
     public override int[] Locale => new int[] { 45, 0, 0, 0 };
     public override int ToH => -3;

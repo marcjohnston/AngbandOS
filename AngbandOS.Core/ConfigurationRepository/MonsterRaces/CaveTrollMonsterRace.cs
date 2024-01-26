@@ -13,10 +13,10 @@ internal class CaveTrollMonsterRace : MonsterRace
     protected CaveTrollMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperTSymbol));
-    public override ColourEnum Colour => ColourEnum.Brown;
+    public override ColorEnum Color => ColorEnum.Brown;
     public override string Name => "Cave troll";
 
-    public override int ArmourClass => 50;
+    public override int ArmorClass => 50;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
         new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 3, 5),
         new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 1, 8),

@@ -16,10 +16,10 @@ internal class BansheeMonsterRace : MonsterRace
         SaveGame.SingletonRepository.MonsterSpells.Get(nameof(DrainManaMonsterSpell)),
         SaveGame.SingletonRepository.MonsterSpells.Get(nameof(TeleportSelfMonsterSpell)));
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperGSymbol));
-    public override ColourEnum Colour => ColourEnum.BrightBlue;
+    public override ColorEnum Color => ColorEnum.BrightBlue;
     public override string Name => "Banshee";
 
-    public override int ArmourClass => 24;
+    public override int ArmorClass => 24;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
         new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(WailAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(TerrifyAttackEffect)), 0, 0),
         new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(TouchAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(Exp20AttackEffect)), 0, 0),

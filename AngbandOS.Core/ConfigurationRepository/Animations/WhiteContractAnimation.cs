@@ -14,6 +14,6 @@ internal class WhiteContractAnimation : Animation
     public override char Character => '*';
     public override string Name => "WhiteContract";
     public override string Sequence => @"Oo·";
-    public override ColourEnum Colour => ColourEnum.White;
-    public override ColourEnum AlternateColour => ColourEnum.White;
+    public override ColorEnum Color => ColorEnum.White;
+    public override ColorEnum AlternateColor => ColorEnum.White;
 }

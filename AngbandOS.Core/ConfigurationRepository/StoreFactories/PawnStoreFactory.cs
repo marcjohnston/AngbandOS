@@ -37,7 +37,7 @@ internal class PawnStoreFactory : StoreFactory
     };
 
     public override string FeatureType => "Pawnbrokers";
-    public override ColourEnum Colour => ColourEnum.Turquoise;
+    public override ColorEnum Color => ColorEnum.Turquoise;
     protected override string SymbolName => nameof(NumberZeroSymbol);
 
     /// <summary>

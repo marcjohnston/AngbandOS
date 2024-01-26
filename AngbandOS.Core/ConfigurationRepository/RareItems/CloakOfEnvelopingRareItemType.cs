@@ -12,7 +12,7 @@ internal class CloakOfEnvelopingRareItem : RareItem
 {
     private CloakOfEnvelopingRareItem(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(OpenParenthesisSymbol));
-    public override ColourEnum Colour => ColourEnum.BrightBrown;
+    public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "Cloak of Enveloping";
     public override int Cost => 0;
     public override string FriendlyName => "of Enveloping";

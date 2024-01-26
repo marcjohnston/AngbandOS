@@ -12,8 +12,8 @@ internal class GoldCloudAnimation : Animation
 {
     private GoldCloudAnimation(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override char Character => '*';
-    public override ColourEnum Colour => ColourEnum.Gold;
+    public override ColorEnum Color => ColorEnum.Gold;
     public override string Name => "GoldCloud";
-    public override ColourEnum AlternateColour => ColourEnum.Gold;
+    public override ColorEnum AlternateColor => ColorEnum.Gold;
     public override string Sequence => @"+*+*+*+";
 }

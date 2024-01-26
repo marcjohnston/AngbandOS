@@ -73,7 +73,7 @@ internal class Store
     /// </summary>
     public int StoreTop { get; private set; }
 
-    public StoreFloorTile CreateFloorTileType() => new StoreFloorTile(SaveGame, StoreFactory.Symbol, StoreFactory.Colour, StoreFactory.FeatureType, StoreFactory.FeatureType, StoreFactory.Description);
+    public StoreFloorTile CreateFloorTileType() => new StoreFloorTile(SaveGame, StoreFactory.Symbol, StoreFactory.Color, StoreFactory.FeatureType, StoreFactory.FeatureType, StoreFactory.Description);
 
     public bool DoorsLocked() => StoreFactory.DoorsLocked();
 
@@ -139,7 +139,7 @@ internal class Store
         Item oPtr = StoreInventoryList[itemIndex];
         string outVal = $"{letter}) ";
         SaveGame.Screen.PrintLine(outVal, row, 0);
-        ColourEnum a = oPtr.Factory.FlavorColour;
+        ColorEnum a = oPtr.Factory.FlavorColor;
         char c = oPtr.Factory.FlavorSymbol.Character;
         SaveGame.Screen.Print(a, c.ToString(), row, 3);
         string oName = StoreFactory.GetItemDescription(oPtr);
@@ -147,7 +147,7 @@ internal class Store
         {
             oName = oName.Substring(0, maxwid);
         }
-        SaveGame.Screen.Print(oPtr.Factory.Colour, oName, row, 5);
+        SaveGame.Screen.Print(oPtr.Factory.Color, oName, row, 5);
         int wgt = oPtr.Weight;
         outVal = $"{wgt / 10,3}.{wgt % 10}{(StoreFactory.RenderWeightUnitOfMeasurement ? " lb" : "")}";
         SaveGame.Screen.Print(outVal, row, 61);

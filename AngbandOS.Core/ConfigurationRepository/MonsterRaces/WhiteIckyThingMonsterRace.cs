@@ -15,7 +15,7 @@ internal class WhiteIckyThingMonsterRace : MonsterRace
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerISymbol));
     public override string Name => "White icky thing";
 
-    public override int ArmourClass => 7;
+    public override int ArmorClass => 7;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
         new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(TouchAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 1, 2),
     };

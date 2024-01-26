@@ -13,10 +13,10 @@ internal class RedNagaMonsterRace : MonsterRace
     protected RedNagaMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerNSymbol));
-    public override ColourEnum Colour => ColourEnum.BrightRed;
+    public override ColorEnum Color => ColorEnum.BrightRed;
     public override string Name => "Red naga";
 
-    public override int ArmourClass => 40;
+    public override int ArmorClass => 40;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
         new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(CrushAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 1, 10),
         new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(LoseStrAttackEffect)), 1, 4),

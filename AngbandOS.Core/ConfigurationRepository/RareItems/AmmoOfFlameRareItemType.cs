@@ -12,7 +12,7 @@ internal class AmmoOfFlameRareItem : RareItem
 {
     private AmmoOfFlameRareItem(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(OpenBracketSymbol));
-    public override ColourEnum Colour => ColourEnum.BrightBrown;
+    public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "Ammo of Flame";
     public override bool BrandFire => true;
     public override int Cost => 30;

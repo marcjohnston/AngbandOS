@@ -46,7 +46,7 @@ internal class ViewMapScript : Script, IScript, IRepeatableScript
             SaveGame.DisplayMap(out cy, out cx);
         }
         // Give us a prompt, and display the cursor in the player's location
-        SaveGame.Screen.Print(ColourEnum.Orange, "[Press any key to continue]", 43, 26);
+        SaveGame.Screen.Print(ColorEnum.Orange, "[Press any key to continue]", 43, 26);
         if (SaveGame.CurrentDepth == 0)
         {
             SaveGame.Screen.Goto(SaveGame.WildernessY + 2, SaveGame.WildernessX + 2);

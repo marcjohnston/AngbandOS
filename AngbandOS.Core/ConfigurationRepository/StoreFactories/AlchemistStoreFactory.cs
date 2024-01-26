@@ -37,7 +37,7 @@ internal partial class AlchemistStoreFactory : StoreFactory
     };
 
     public override string FeatureType => "Alchemist";
-    public override ColourEnum Colour => ColourEnum.Blue;
+    public override ColorEnum Color => ColorEnum.Blue;
     protected override string SymbolName => nameof(NumberFiveSymbol);
     public override string Description => "Alchemy Shop";
 

@@ -13,11 +13,11 @@ internal class BlackMambaMonsterRace : MonsterRace
     protected BlackMambaMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperJSymbol));
-    public override ColourEnum Colour => ColourEnum.Black;
+    public override ColorEnum Color => ColorEnum.Black;
     public override string Name => "Black mamba";
 
     public override bool Animal => true;
-    public override int ArmourClass => 32;
+    public override int ArmorClass => 32;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
         new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(PoisonAttackEffect)), 4, 4),
     };

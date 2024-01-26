@@ -13,7 +13,7 @@ internal class Copper2GoldItemFactory : GoldItemFactory
     private Copper2GoldItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(DollarSignSymbol));
-    public override ColourEnum Colour => ColourEnum.Copper;
+    public override ColorEnum Color => ColorEnum.Copper;
     public override string Name => "copper**";
 
     public override int Cost => 5;

@@ -13,7 +13,7 @@ internal class OpalsGoldItemFactory : GoldItemFactory
     private OpalsGoldItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(DollarSignSymbol));
-    public override ColourEnum Colour => ColourEnum.BrightWhite;
+    public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "opals";
 
     public override int Cost => 18;

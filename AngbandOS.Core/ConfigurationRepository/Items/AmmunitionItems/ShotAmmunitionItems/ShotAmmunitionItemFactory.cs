@@ -14,5 +14,5 @@ internal abstract class ShotAmmunitionItemFactory : AmmunitionItemFactory
     public override ItemClass ItemClass => SaveGame.SingletonRepository.ItemClasses.Get(nameof(ShotsItemClass));
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Shot;
     public override int PackSort => 35;
-    public override ColourEnum Colour => ColourEnum.BrightBrown;
+    public override ColorEnum Color => ColorEnum.BrightBrown;
 }

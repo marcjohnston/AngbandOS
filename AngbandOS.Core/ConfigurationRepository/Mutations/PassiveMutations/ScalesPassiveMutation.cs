@@ -20,12 +20,12 @@ internal class ScalesPassiveMutation : Mutation
     public override void OnGain(Genome genome)
     {
         genome.CharismaBonus -= 1;
-        genome.ArmourClassBonus += 10;
+        genome.ArmorClassBonus += 10;
     }
 
     public override void OnLose(Genome genome)
     {
         genome.CharismaBonus += 1;
-        genome.ArmourClassBonus -= 10;
+        genome.ArmorClassBonus -= 10;
     }
 }

@@ -8,12 +8,12 @@
 namespace AngbandOS.Core.RareItems;
 
 [Serializable]
-internal class ArmourOfYithRareItem : RareItem
+internal class ArmorOfYithRareItem : RareItem
 {
-    private ArmourOfYithRareItem(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private ArmorOfYithRareItem(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(OpenBraceSymbol));
-    public override ColourEnum Colour => ColourEnum.Grey;
-    public override string Name => "Armour of Yith";
+    public override ColorEnum Color => ColorEnum.Grey;
+    public override string Name => "Armor of Yith";
     public override int Cost => 15000;
     public override string FriendlyName => "of Yith";
     public override bool IgnoreAcid => true;
@@ -25,7 +25,7 @@ internal class ArmourOfYithRareItem : RareItem
     public override int MaxToA => 10;
     public override int MaxToD => 0;
     public override int MaxToH => 0;
-    public override RareItemTypeEnum RareItemType => RareItemTypeEnum.ArmourOfYith;
+    public override RareItemTypeEnum RareItemType => RareItemTypeEnum.ArmorOfYith;
     public override int Rarity => 0;
     public override int Rating => 25;
     public override bool ResAcid => true;

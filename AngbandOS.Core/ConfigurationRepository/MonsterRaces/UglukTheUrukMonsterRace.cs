@@ -13,10 +13,10 @@ internal class UglukTheUrukMonsterRace : MonsterRace
     protected UglukTheUrukMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerOSymbol));
-    public override ColourEnum Colour => ColourEnum.BrightWhite;
+    public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "Ugluk, the Uruk";
 
-    public override int ArmourClass => 90;
+    public override int ArmorClass => 90;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
         new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 3, 5),
         new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 3, 5),

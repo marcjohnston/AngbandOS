@@ -13,18 +13,18 @@ internal class FrumiousBandersnatchMonsterRace : MonsterRace
     protected FrumiousBandersnatchMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerCSymbol));
-    public override ColourEnum Colour => ColourEnum.BrightOrange;
+    public override ColorEnum Color => ColorEnum.BrightOrange;
     public override string Name => "Frumious bandersnatch";
 
     public override bool Animal => true;
-    public override int ArmourClass => 30;
+    public override int ArmorClass => 30;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
         new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 2, 4),
         new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 2, 4),
         new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(StingAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 2, 4),
     };
     public override bool BashDoor => true;
-    public override string Description => "It is a vast armoured centipede with massive mandibles and a spiked tail.";
+    public override string Description => "It is a vast armored centipede with massive mandibles and a spiked tail.";
     public override int FreqInate => 0;
     public override int FreqSpell => 0;
     public override string FriendlyName => "Frumious bandersnatch";

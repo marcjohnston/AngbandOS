@@ -22,10 +22,10 @@ internal class IllusionistMonsterRace : MonsterRace
         SaveGame.SingletonRepository.MonsterSpells.Get(nameof(HasteMonsterSpell)),
         SaveGame.SingletonRepository.MonsterSpells.Get(nameof(TeleportSelfMonsterSpell)));
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerPSymbol));
-    public override ColourEnum Colour => ColourEnum.Pink;
+    public override ColorEnum Color => ColorEnum.Pink;
     public override string Name => "Illusionist";
 
-    public override int ArmourClass => 10;
+    public override int ArmorClass => 10;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
         new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 2, 2),
     };

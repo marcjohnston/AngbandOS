@@ -73,9 +73,9 @@ internal class AbilityScore
     };
 
     /// <summary>
-    /// Dex bonus to armour class (stored as bonus)
+    /// Dex bonus to armor class (stored as bonus)
     /// </summary>
-    private readonly int[] _adjDexArmourClassBonus =
+    private readonly int[] _adjDexArmorClassBonus =
     {
         -4, -3, -2, -1, 0, 0, 0, 0, 0, 0, 0,
         0, 1, 1, 1, 2, 2, 2, 2, 2, 3, 3, 3,
@@ -258,9 +258,9 @@ internal class AbilityScore
     public int ConRecoverySpeed => _adjConRecoverySpeed[TableIndex];
 
     /// <summary>
-    /// Dex bonus to armour class (stored as bonus)
+    /// Dex bonus to armor class (stored as bonus)
     /// </summary>
-    public int DexArmourClassBonus => _adjDexArmourClassBonus[TableIndex];
+    public int DexArmorClassBonus => _adjDexArmorClassBonus[TableIndex];
 
     /// <summary>
     /// Dex bonus for attacks (stored as bonus)

@@ -12,6 +12,6 @@ internal class SilverPlatedWandFlavour : WandFlavour
 {
     private SilverPlatedWandFlavour(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(MinusSignSymbol));
-    public override ColourEnum Colour => ColourEnum.Silver;
+    public override ColorEnum Color => ColorEnum.Silver;
     public override string Name => "Silver-Plated";
 }

@@ -13,10 +13,10 @@ internal class SkeletonHumanMonsterRace : MonsterRace
     protected SkeletonHumanMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerSSymbol));
-    public override ColourEnum Colour => ColourEnum.BrightBeige;
+    public override ColorEnum Color => ColorEnum.BrightBeige;
     public override string Name => "Skeleton human";
 
-    public override int ArmourClass => 30;
+    public override int ArmorClass => 30;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
         new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 1, 8),
     };

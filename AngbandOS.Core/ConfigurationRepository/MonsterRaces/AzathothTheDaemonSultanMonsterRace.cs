@@ -31,10 +31,10 @@ internal class AzathothTheDaemonSultanMonsterRace : MonsterRace
         SaveGame.SingletonRepository.MonsterSpells.Get(nameof(SummonReaverMonsterSpell)),
         SaveGame.SingletonRepository.MonsterSpells.Get(nameof(SummonUniqueMonsterSpell)));
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperXSymbol));
-    public override ColourEnum Colour => ColourEnum.Pink;
+    public override ColorEnum Color => ColorEnum.Pink;
     public override string Name => "Azathoth, The Daemon Sultan";
 
-    public override int ArmourClass => 175;
+    public override int ArmorClass => 175;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
         new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(CrushAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(ShatterAttackEffect)), 22, 10),
         new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(CrushAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(ShatterAttackEffect)), 20, 10),

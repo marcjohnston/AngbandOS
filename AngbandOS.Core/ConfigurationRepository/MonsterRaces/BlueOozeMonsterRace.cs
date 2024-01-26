@@ -13,10 +13,10 @@ internal class BlueOozeMonsterRace : MonsterRace
     protected BlueOozeMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerJSymbol));
-    public override ColourEnum Colour => ColourEnum.BrightBlue;
+    public override ColorEnum Color => ColorEnum.BrightBlue;
     public override string Name => "Blue ooze";
 
-    public override int ArmourClass => 16;
+    public override int ArmorClass => 16;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
         new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(CrawlAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(ColdAttackEffect)), 1, 4),
     };

@@ -80,8 +80,8 @@
 //            {
 //                SaveGame.Clear();
 //                SaveGame.SetBackground(BackgroundImage.Normal);
-//                SaveGame.Print(Colour.Yellow, "High Scores", 1, 34);
-//                SaveGame.Print(Colour.Yellow, "===========", 2, 34);
+//                SaveGame.Print(Color.Yellow, "High Scores", 1, 34);
+//                SaveGame.Print(Color.Yellow, "===========", 2, 34);
 //                SaveGame.AnyKey(43);
 //                return;
 //            }
@@ -95,8 +95,8 @@
 //                {
 //                    SaveGame.Clear();
 //                    SaveGame.SetBackground(BackgroundImage.Normal);
-//                    SaveGame.Print(Colour.Yellow, "High Scores", 1, 34);
-//                    SaveGame.Print(Colour.Yellow, "===========", 2, 34);
+//                    SaveGame.Print(Color.Yellow, "High Scores", 1, 34);
+//                    SaveGame.Print(Color.Yellow, "===========", 2, 34);
 //                }
 //                ShowScore(collectedScores[0], line);
 //                line++;
@@ -260,18 +260,18 @@
 
 //        private void ShowScore(HighScore score, int line)
 //        {
-//            Colour color = Colour.White;
+//            Color color = Color.White;
 //            if (line % 2 == 1)
 //            {
-//                color = Colour.Grey;
+//                color = Color.Grey;
 //            }
 //            if (score.Hilight)
 //            {
-//                color = Colour.BrightRed;
+//                color = Color.BrightRed;
 //            }
 //            if (score.Living)
 //            {
-//                color = Colour.BrightGreen;
+//                color = Color.BrightGreen;
 //                SaveGame.Print(color, $"{score.Index,2}) {score.Pts,5} {score.Who}", (line * 3) + 5, 1);
 //                SaveGame.Print(color, $"killed by {score.How}", (line * 3) + 6, 11);
 //                SaveGame.Print(color, $"{score.Where}", (line * 3) + 7, 11);

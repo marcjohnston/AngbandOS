@@ -16,7 +16,7 @@ internal abstract class SwordItemClass : MeleeWeaponItemClass
     public override bool HatesAcid => true;
     public override int PackSort => 28;
 
-    public override ColourEnum Colour => ColourEnum.BrightWhite;
+    public override ColorEnum Color => ColorEnum.BrightWhite;
     public override bool CanApplyBlessedArtifactBias => true;
 
 }

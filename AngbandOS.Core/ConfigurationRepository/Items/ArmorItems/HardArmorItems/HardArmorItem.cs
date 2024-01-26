@@ -8,13 +8,13 @@
 namespace AngbandOS.Core.Items;
 
 [Serializable]
-internal abstract class HardArmorItem : ArmourItem
+internal abstract class HardArmorItem : ArmorItem
 {
     public override int WieldSlot => InventorySlot.Body;
     public HardArmorItem(SaveGame saveGame, ItemFactory itemClass) : base(saveGame, itemClass) { }
 
     /// <summary>
-    /// Applies standard magic to hard armour.
+    /// Applies standard magic to hard armor.
     /// </summary>
     /// <param name="item"></param>
     /// <param name="level"></param>
@@ -23,7 +23,7 @@ internal abstract class HardArmorItem : ArmourItem
     {
         if (power != 0)
         {
-            // Apply the standard armour characteristics.
+            // Apply the standard armor characteristics.
             base.ApplyMagic(level, power, null);
 
             if (power > 1)

@@ -13,11 +13,11 @@ internal class MetallicGreenCentipedeMonsterRace : MonsterRace
     protected MetallicGreenCentipedeMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerCSymbol));
-    public override ColourEnum Colour => ColourEnum.BrightGreen;
+    public override ColorEnum Color => ColorEnum.BrightGreen;
     public override string Name => "Metallic green centipede";
 
     public override bool Animal => true;
-    public override int ArmourClass => 4;
+    public override int ArmorClass => 4;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
         new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(CrawlAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 1, 1),
     };

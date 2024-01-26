@@ -151,12 +151,12 @@ internal abstract class BaseInventorySlot : IEnumerable<int>, IItemContainer, IG
     public virtual bool ProvidesLight => false;
 
     /// <summary>
-    /// Returns the message to be rendered to inform the player when wielding.  Returns a message for wearing armour, by default.
+    /// Returns the message to be rendered to inform the player when wielding.  Returns a message for wearing armor, by default.
     /// </summary>
     public virtual string WieldPhrase => "You are wearing";
 
     /// <summary>
-    /// Returns true, if the item can be cursed; false, otherwise.  Only the body armour returns true.
+    /// Returns true, if the item can be cursed; false, otherwise.  Only the body armor returns true.
     /// </summary>
     public virtual bool CanBeCursed => false;
 
@@ -178,22 +178,22 @@ internal abstract class BaseInventorySlot : IEnumerable<int>, IItemContainer, IG
     public virtual bool IsMeleeWeapon => false;
 
     /// <summary>
-    /// Returns true, if the item in the inventory slot can be disenchanted; false, otherwise.  All armour (Body, head, cloak, arms, hands and feet) and
+    /// Returns true, if the item in the inventory slot can be disenchanted; false, otherwise.  All armor (Body, head, cloak, arms, hands and feet) and
     /// melee (melee and ranged) positions, return true.
     /// </summary>
-    public virtual bool CanBeDisenchanted => IsArmour || IsWeapon;
+    public virtual bool CanBeDisenchanted => IsArmor || IsWeapon;
 
     /// <summary>
-    /// Returns true, if the inventory slot is considered armour that the player is wearing.  Body, head, cloak, arms, hands and feet
+    /// Returns true, if the inventory slot is considered armor that the player is wearing.  Body, head, cloak, arms, hands and feet
     /// are all return true.
     /// </summary>
-    public virtual bool IsArmour => false;
+    public virtual bool IsArmor => false;
 
     /// <summary>
     /// Returns true, if items in the slot restrict player movement.  When true, the weight of the item may adversely affect the movement of the
-    /// player.  By default, items denoted as armour (IsArmour = true), return true.
+    /// player.  By default, items denoted as armor (IsArmor = true), return true.
     /// </summary>
-    public virtual bool IsWeightRestricting => IsArmour;
+    public virtual bool IsWeightRestricting => IsArmor;
 
     /// <summary>
     /// Returns true, if the inventory slot represents equipment; false, if the inventory slot represents a pack.  Defaults to false.
@@ -260,9 +260,9 @@ internal abstract class BaseInventorySlot : IEnumerable<int>, IItemContainer, IG
     public virtual int this[int index] => InventorySlots[index];
 
     /// <summary>
-    /// Returns a bonus for armour class, for Monk and Mystic character classes when the player doesn't have use the slot.
+    /// Returns a bonus for armor class, for Monk and Mystic character classes when the player doesn't have use the slot.
     /// </summary>
-    public virtual int BareArmourClassBonus => 0;
+    public virtual int BareArmorClassBonus => 0;
 
 
     public virtual string Key => GetType().Name;

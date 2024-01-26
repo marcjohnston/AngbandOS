@@ -22,10 +22,10 @@ internal class AncientMultiHuedDragonMonsterRace : MonsterRace
         SaveGame.SingletonRepository.MonsterSpells.Get(nameof(ConfuseMonsterSpell)),
         SaveGame.SingletonRepository.MonsterSpells.Get(nameof(ScareMonsterSpell)));
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperDSymbol));
-    public override ColourEnum Colour => ColourEnum.Purple;
+    public override ColorEnum Color => ColorEnum.Purple;
     public override string Name => "Ancient multi-hued dragon";
 
-    public override int ArmourClass => 100;
+    public override int ArmorClass => 100;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
         new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(ClawAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 4, 12),
         new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(ClawAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 4, 12),
@@ -33,7 +33,7 @@ internal class AncientMultiHuedDragonMonsterRace : MonsterRace
     };
     public override bool AttrMulti => true;
     public override bool BashDoor => true;
-    public override string Description => "A huge draconic form. Many colours ripple down its massive frame. Few live to see another.";
+    public override string Description => "A huge draconic form. Many colors ripple down its massive frame. Few live to see another.";
     public override bool Dragon => true;
     public override bool Drop_2D2 => true;
     public override bool Drop_3D2 => true;

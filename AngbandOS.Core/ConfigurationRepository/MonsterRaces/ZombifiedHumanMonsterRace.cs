@@ -13,10 +13,10 @@ internal class ZombifiedHumanMonsterRace : MonsterRace
     protected ZombifiedHumanMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerZSymbol));
-    public override ColourEnum Colour => ColourEnum.Chartreuse;
+    public override ColorEnum Color => ColorEnum.Chartreuse;
     public override string Name => "Zombified human";
 
-    public override int ArmourClass => 24;
+    public override int ArmorClass => 24;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
         new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 1, 4),
         new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 1, 4),

@@ -13,7 +13,7 @@ internal class SmallWoodenChestItemFactory : ChestItemFactory
     private SmallWoodenChestItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(TildeSymbol));
-    public override ColourEnum Colour => ColourEnum.Grey;
+    public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "Small wooden chest";
 
     public override int[] Chance => new int[] { 1, 0, 0, 0 };

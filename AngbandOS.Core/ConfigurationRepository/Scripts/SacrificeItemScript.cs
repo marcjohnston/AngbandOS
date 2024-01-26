@@ -112,9 +112,9 @@ internal class SacrificeItemScript : Script, IStoreScript
             string outVal = $"Destination town ({keys[0].ToString().ToLower()} to {keys[keys.Count - 1].ToString().ToLower()})? ";
             for (int i = 0; i < keys.Count; i++)
             {
-                SaveGame.Screen.Print(ColourEnum.White, $" {keys[i].ToString().ToLower()}) {names[i]}".PadRight(60), i + 1, 20);
+                SaveGame.Screen.Print(ColorEnum.White, $" {keys[i].ToString().ToLower()}) {names[i]}".PadRight(60), i + 1, 20);
             }
-            SaveGame.Screen.Print(ColourEnum.White, "".PadRight(60), keys.Count + 1, 20);
+            SaveGame.Screen.Print(ColorEnum.White, "".PadRight(60), keys.Count + 1, 20);
             while (SaveGame.GetCom(outVal, out char choice))
             {
                 choice = choice.ToString().ToUpper()[0];

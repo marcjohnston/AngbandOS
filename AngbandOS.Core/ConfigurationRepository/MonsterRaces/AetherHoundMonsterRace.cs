@@ -33,11 +33,11 @@ internal class AetherHoundMonsterRace : MonsterRace
         SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BreatheSoundMonsterSpell)),
         SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BreatheTimeMonsterSpell)));
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperZSymbol));
-    public override ColourEnum Colour => ColourEnum.BrightGrey;
+    public override ColorEnum Color => ColorEnum.BrightGrey;
     public override string Name => "Aether hound";
 
     public override bool Animal => true;
-    public override int ArmourClass => 100;
+    public override int ArmorClass => 100;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
         new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 2, 12),
         new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 2, 12),
@@ -47,7 +47,7 @@ internal class AetherHoundMonsterRace : MonsterRace
     public override bool AttrAny => true;
     public override bool AttrMulti => true;
     public override bool BashDoor => true;
-    public override string Description => "A shifting, swirling form. It seems to be all colours and sizes and shapes, though the dominant form is that of a huge dog. You feel very uncertain all of a sudden.";
+    public override string Description => "A shifting, swirling form. It seems to be all colors and sizes and shapes, though the dominant form is that of a huge dog. You feel very uncertain all of a sudden.";
     public override bool FireAura => true;
     public override bool ForceSleep => true;
     public override int FreqInate => 5;

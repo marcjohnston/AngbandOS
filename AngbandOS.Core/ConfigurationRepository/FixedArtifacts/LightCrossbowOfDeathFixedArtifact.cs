@@ -43,7 +43,7 @@ internal class LightCrossbowOfDeathFixedArtifact : FixedArtifact, IFixedArtifact
     public override ItemFactory BaseItemCategory => _baseItemCategory;
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(CloseBracketSymbol));
-    public override ColourEnum Colour => ColourEnum.Grey;
+    public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "The Light Crossbow of Death";
     public override int Ac => 0;
     public override bool Activate => true;

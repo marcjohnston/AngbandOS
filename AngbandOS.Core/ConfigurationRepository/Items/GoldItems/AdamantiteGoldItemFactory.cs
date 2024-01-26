@@ -13,7 +13,7 @@ internal class AdamantiteGoldItemFactory : GoldItemFactory
     private AdamantiteGoldItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(DollarSignSymbol));
-    public override ColourEnum Colour => ColourEnum.Chartreuse;
+    public override ColorEnum Color => ColorEnum.Chartreuse;
     public override string Name => "adamantite";
 
     public override int Cost => 80;

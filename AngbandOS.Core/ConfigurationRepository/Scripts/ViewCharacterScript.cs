@@ -47,7 +47,7 @@ internal class ViewCharacterScript : Script, IScript, IRepeatableScript, IStoreS
         {
             RenderCharacterScript showCharacterSheet = (RenderCharacterScript)SaveGame.SingletonRepository.Scripts.Get(nameof(RenderCharacterScript));
             showCharacterSheet.ExecuteScript();
-            SaveGame.Screen.Print(ColourEnum.Orange, "[Press 'c' to change name, or ESC]", 43, 23);
+            SaveGame.Screen.Print(ColorEnum.Orange, "[Press 'c' to change name, or ESC]", 43, 23);
             char keyPress = SaveGame.Inkey();
             // Escape breaks us out of the loop
             if (keyPress == '\x1b')

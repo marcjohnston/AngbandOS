@@ -17,7 +17,7 @@ internal abstract class PolearmItemClass : MeleeWeaponItemClass
     public override int PackSort => 29;
     public override bool HatesAcid => true;
 
-    public override ColourEnum Colour => ColourEnum.BrightWhite;
+    public override ColorEnum Color => ColorEnum.BrightWhite;
     public override bool CanApplyBlessedArtifactBias => true;
 
 }

@@ -13,7 +13,7 @@ internal class LoseWisAttackEffect : AttackEffect
     private LoseWisAttackEffect(SaveGame saveGame) : base(saveGame) { }
     public override int Power => 0;
     public override string Description => "reduce wisdom";
-    public override void ApplyToPlayer(int monsterLevel, int monsterIndex, int armourClass, string monsterDescription, Monster monster, ref bool obvious, ref int damage, ref bool blinked)
+    public override void ApplyToPlayer(int monsterLevel, int monsterIndex, int armorClass, string monsterDescription, Monster monster, ref bool obvious, ref int damage, ref bool blinked)
     {
         SaveGame.TakeHit(damage, monsterDescription);
         if (SaveGame.TryDecreasingAbilityScore(Ability.Wisdom))

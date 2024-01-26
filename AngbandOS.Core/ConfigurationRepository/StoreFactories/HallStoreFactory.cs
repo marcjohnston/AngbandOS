@@ -18,7 +18,7 @@ internal class HallStoreFactory : StoreFactory
     };
 
     public override string FeatureType => "HallOfRecords";
-    public override ColourEnum Colour => ColourEnum.Yellow;
+    public override ColorEnum Color => ColorEnum.Yellow;
     protected override string SymbolName => nameof(NumberEightSymbol);
     public override string Description => "Hall of Records";
 

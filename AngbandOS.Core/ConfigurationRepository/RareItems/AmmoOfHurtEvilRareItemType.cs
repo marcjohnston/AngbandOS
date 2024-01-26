@@ -12,7 +12,7 @@ internal class AmmoOfHurtEvilRareItem : RareItem
 {
     private AmmoOfHurtEvilRareItem(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(OpenBracketSymbol));
-    public override ColourEnum Colour => ColourEnum.BrightBrown;
+    public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "Ammo of Hurt Evil";
     public override int Cost => 25;
     public override string FriendlyName => "of Hurt Evil";

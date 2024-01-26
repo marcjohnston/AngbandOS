@@ -25,8 +25,8 @@ internal class WizardHelpScript : Script, IScript
             SaveGame.UpdateScreen();
             SaveGame.Screen.Clear();
             SaveGame.SetBackground(BackgroundImageEnum.Normal);
-            SaveGame.Screen.Print(ColourEnum.Red, "Wizard Commands", 1, 31);
-            SaveGame.Screen.Print(ColourEnum.Red, "===============", 2, 31);
+            SaveGame.Screen.Print(ColorEnum.Red, "Wizard Commands", 1, 31);
+            SaveGame.Screen.Print(ColorEnum.Red, "===============", 2, 31);
 
             List<IHelpCommand> allCommands = new List<IHelpCommand>();
             foreach (IHelpCommand command in SaveGame.SingletonRepository.WizardCommands)
@@ -57,12 +57,12 @@ internal class WizardHelpScript : Script, IScript
                     .ToList();
 
                 ConsoleCard card = new ConsoleCard();
-                card.Print(0, 0, ColourEnum.Red, helpGroup.Title);
-                card.Print(0, 1, ColourEnum.Red, new string('=', helpGroup.Title.Length));
+                card.Print(0, 0, ColorEnum.Red, helpGroup.Title);
+                card.Print(0, 1, ColorEnum.Red, new string('=', helpGroup.Title.Length));
                 int row = 3;
                 foreach (IHelpCommand command in groupCommands)
                 {
-                    card.Print(0, row, ColourEnum.White, $"{command.KeyChar} = {command.HelpDescription}");
+                    card.Print(0, row, ColorEnum.White, $"{command.KeyChar} = {command.HelpDescription}");
                     row++;
                 }
                 consoleGrid.AddCard(card);

@@ -13,7 +13,7 @@ internal class OfDeflectionShieldArmorItemFactory : ShieldArmorItemFactory
     private OfDeflectionShieldArmorItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(OpenBraceSymbol));
-    public override ColourEnum Colour => ColourEnum.BrightBlue;
+    public override ColorEnum Color => ColorEnum.BrightBlue;
     public override string Name => "Shield of Deflection";
 
     public override int Ac => 10;

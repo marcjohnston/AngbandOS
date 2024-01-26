@@ -13,11 +13,11 @@ internal class SabreToothTigerMonsterRace : MonsterRace
     protected SabreToothTigerMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerFSymbol));
-    public override ColourEnum Colour => ColourEnum.Yellow;
+    public override ColorEnum Color => ColorEnum.Yellow;
     public override string Name => "Sabre-tooth tiger";
 
     public override bool Animal => true;
-    public override int ArmourClass => 50;
+    public override int ArmorClass => 50;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
         new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(ClawAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 1, 10),
         new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(ClawAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 1, 10),
@@ -25,7 +25,7 @@ internal class SabreToothTigerMonsterRace : MonsterRace
         new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 1, 10)
     };
     public override bool BashDoor => true;
-    public override string Description => "A fierce and dangerous cat, its huge tusks and sharp claws would lacerate even the strongest armour.";
+    public override string Description => "A fierce and dangerous cat, its huge tusks and sharp claws would lacerate even the strongest armor.";
     public override int FreqInate => 0;
     public override int FreqSpell => 0;
     public override string FriendlyName => "Sabre-tooth tiger";

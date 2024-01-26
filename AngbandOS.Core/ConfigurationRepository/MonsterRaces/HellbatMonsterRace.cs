@@ -13,11 +13,11 @@ internal class HellbatMonsterRace : MonsterRace
     protected HellbatMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerBSymbol));
-    public override ColourEnum Colour => ColourEnum.Red;
+    public override ColorEnum Color => ColorEnum.Red;
     public override string Name => "Hellbat";
 
     public override bool Animal => true;
-    public override int ArmourClass => 80;
+    public override int ArmorClass => 80;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
         new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(ClawAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 1, 4),
         new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(ClawAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 1, 4),

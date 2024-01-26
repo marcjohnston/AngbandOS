@@ -23,19 +23,19 @@ public class PrintLine
     /// <summary>
     /// The foreground color to render the text.
     /// </summary>
-    public ColourEnum foreColour { get; set; }
+    public ColorEnum foreColor { get; set; }
 
     /// <summary>
     /// The background color to render the text.
     /// </summary>
-    public ColourEnum backColour { get; set; }
+    public ColorEnum backColor { get; set; }
 
-    public PrintLine(int row, int col, string text, ColourEnum foreColour, ColourEnum backColour)
+    public PrintLine(int row, int col, string text, ColorEnum foreColor, ColorEnum backColor)
     {
         this.row = row;
         this.col = col;
         this.text = text;
-        this.foreColour = foreColour;
-        this.backColour = backColour;
+        this.foreColor = foreColor;
+        this.backColor = backColor;
     }
 }

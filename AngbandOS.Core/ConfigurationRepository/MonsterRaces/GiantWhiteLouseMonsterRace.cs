@@ -16,7 +16,7 @@ internal class GiantWhiteLouseMonsterRace : MonsterRace
     public override string Name => "Giant white louse";
 
     public override bool Animal => true;
-    public override int ArmourClass => 5;
+    public override int ArmorClass => 5;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
         new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 1, 1),
     };

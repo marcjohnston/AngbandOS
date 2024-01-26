@@ -13,7 +13,7 @@ internal class HaftedMightyHammer : HaftedItemClass
     private HaftedMightyHammer(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(BackSlashSymbol));
-    public override ColourEnum Colour => ColourEnum.Black;
+    public override ColorEnum Color => ColorEnum.Black;
     public override string Name => "Mighty Hammer";
 
     public override int Cost => 1000;

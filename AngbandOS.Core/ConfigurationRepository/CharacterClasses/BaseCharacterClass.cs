@@ -86,7 +86,7 @@ internal abstract class BaseCharacterClass : IGetKey<string>
     public abstract string[] Info { get; }
 
     /// <summary>
-    /// Returns the maximum amount of armour weight that the player carry before it affects spellcasting.  Returns 0, by default.
+    /// Returns the maximum amount of armor weight that the player carry before it affects spellcasting.  Returns 0, by default.
     /// </summary>
     /// <value>The spell weight.</value>
     public virtual int SpellWeight => 0;

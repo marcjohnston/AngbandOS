@@ -13,7 +13,7 @@ internal class HlanithTown : Town
     private HlanithTown(SaveGame saveGame) : base(saveGame) { }
     protected override string[] StoreFactoryNames => new string[] {
         nameof(GeneralStoreFactory),
-        nameof(ArmouryStoreFactory),
+        nameof(ArmoryStoreFactory),
         nameof(EmptyLotStoreFactory),
         nameof(WeaponStoreFactory),
         nameof(EmptyLotStoreFactory),

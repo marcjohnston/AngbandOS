@@ -30,5 +30,5 @@ internal abstract class WandItemFactory : ItemFactory, IFlavour
     public override bool HatesElectricity => true;
 
     //public override bool IsCharged => true;
-    public override ColourEnum Colour => ColourEnum.Chartreuse;
+    public override ColorEnum Color => ColorEnum.Chartreuse;
 }

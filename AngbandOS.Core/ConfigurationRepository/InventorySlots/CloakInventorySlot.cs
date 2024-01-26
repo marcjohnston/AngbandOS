@@ -17,8 +17,8 @@ internal class CloakInventorySlot : EquipmentInventorySlot
     public override string MentionUse(int? index) => "About body";
     public override string DescribeWieldLocation(int index) => "wearing on your back";
     public override string DescribeItemLocation(Item oPtr) => "wearing on your back";
-    public override int BareArmourClassBonus => SaveGame.ExperienceLevel > 15 ? (SaveGame.ExperienceLevel - 13) / 3 : 0;
+    public override int BareArmorClassBonus => SaveGame.ExperienceLevel > 15 ? (SaveGame.ExperienceLevel - 13) / 3 : 0;
     public override bool IsWeightRestricting => true;
-    public override bool IsArmour => true;
+    public override bool IsArmor => true;
     public override int SortOrder => 9;
 }

@@ -13,7 +13,7 @@ internal class PowerRingItemFactory : RingItemFactory
     private PowerRingItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(EqualSignSymbol));
-    public override ColourEnum Colour => ColourEnum.Yellow;
+    public override ColorEnum Color => ColorEnum.Yellow;
     public override string Name => "Power";
 
     public override int Cost => 5000000;

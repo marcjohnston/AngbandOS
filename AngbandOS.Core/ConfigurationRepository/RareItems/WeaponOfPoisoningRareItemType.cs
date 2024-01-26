@@ -12,7 +12,7 @@ internal class WeaponOfPoisoningRareItem : RareItem
 {
     private WeaponOfPoisoningRareItem(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(VerticalBarSymbol));
-    public override ColourEnum Colour => ColourEnum.BrightWhite;
+    public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "Weapon of Poisoning";
     public override bool BrandPois => true;
     public override int Cost => 4500;

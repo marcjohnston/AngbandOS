@@ -14,15 +14,15 @@ internal enum RareItemTypeEnum
     SpecialPower,
     SpecialAbility,
 
-    // Armour
-    ArmourOfResistAcid,
+    // Armor
+    ArmorOfResistAcid,
 
-    ArmourOfResistLightning,
-    ArmourOfResistFire,
-    ArmourOfResistCold,
-    ArmourOfResistance,
-    ArmourOfYith,
-    ArmourOfPermanence,
+    ArmorOfResistLightning,
+    ArmorOfResistFire,
+    ArmorOfResistCold,
+    ArmorOfResistance,
+    ArmorOfYith,
+    ArmorOfPermanence,
 
     // Shield
     ShieldOfResistAcid,
@@ -135,7 +135,7 @@ internal enum RareItemTypeEnum
     AmmoOfWounding,
     AmmoOfBackbiting,
     WeaponShattered,
-    ArmourBlasted,
+    ArmorBlasted,
 
     // Orbs
     OrbOfFlame,

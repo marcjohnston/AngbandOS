@@ -13,7 +13,7 @@ internal class LotOfGarnetsGoldItemFactory : GoldItemFactory
     private LotOfGarnetsGoldItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(DollarSignSymbol));
-    public override ColourEnum Colour => ColourEnum.Red;
+    public override ColorEnum Color => ColorEnum.Red;
     public override string Name => "lot of garnets";
 
     public override int Cost => 10;

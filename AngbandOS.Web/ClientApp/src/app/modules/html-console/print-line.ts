@@ -1,9 +1,9 @@
-import { ColourEnum } from "../colour-enum/colour-enum.module";
+import { ColorEnum } from "../color-enum/color-enum.module";
 
 export class PrintLine {
   public row: number | undefined;
   public col: number | undefined;
   public text: string | undefined;
-  public foreColour: ColourEnum | undefined;
-  public backColour: ColourEnum | undefined;
+  public foreColor: ColorEnum | undefined;
+  public backColor: ColorEnum | undefined;
 }

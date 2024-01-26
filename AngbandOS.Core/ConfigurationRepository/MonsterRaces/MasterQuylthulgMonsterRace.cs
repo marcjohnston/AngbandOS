@@ -20,11 +20,11 @@ internal class MasterQuylthulgMonsterRace : MonsterRace
         SaveGame.SingletonRepository.MonsterSpells.Get(nameof(SummonMonstersMonsterSpell)),
         SaveGame.SingletonRepository.MonsterSpells.Get(nameof(SummonUndeadMonsterSpell)));
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperQSymbol));
-    public override ColourEnum Colour => ColourEnum.Blue;
+    public override ColorEnum Color => ColorEnum.Blue;
     public override string Name => "Master quylthulg";
 
     public override bool Animal => true;
-    public override int ArmourClass => 1;
+    public override int ArmorClass => 1;
     public override MonsterAttack[]? Attacks => null;
     public override string Description => "A pulsating mound of flesh, shining with silver pulses of throbbing light.";
     public override bool EmptyMind => true;

@@ -18,17 +18,17 @@ internal class CrystalDrakeMonsterRace : MonsterRace
         SaveGame.SingletonRepository.MonsterSpells.Get(nameof(ScareMonsterSpell)),
         SaveGame.SingletonRepository.MonsterSpells.Get(nameof(SlowMonsterSpell)));
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerDSymbol));
-    public override ColourEnum Colour => ColourEnum.Diamond;
+    public override ColorEnum Color => ColorEnum.Diamond;
     public override string Name => "Crystal drake";
 
-    public override int ArmourClass => 100;
+    public override int ArmorClass => 100;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
         new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(ClawAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 1, 4),
         new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(ClawAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 1, 4),
         new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 2, 5),
     };
     public override bool BashDoor => true;
-    public override string Description => "A dragon of strange crystalline form. Light shines through it, dazzling your eyes with spectrums of colour.";
+    public override string Description => "A dragon of strange crystalline form. Light shines through it, dazzling your eyes with spectrums of color.";
     public override bool Dragon => true;
     public override bool Drop_4D2 => true;
     public override bool Evil => true;

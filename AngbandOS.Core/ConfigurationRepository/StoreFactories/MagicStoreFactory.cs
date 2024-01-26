@@ -41,7 +41,7 @@ internal class MagicStoreFactory : StoreFactory
     };
 
     public override string FeatureType => "MagicShop";
-    public override ColourEnum Colour => ColourEnum.Red;
+    public override ColorEnum Color => ColorEnum.Red;
     protected override string SymbolName => nameof(NumberSixSymbol);
     public override string Description => "Magic Shop";
 

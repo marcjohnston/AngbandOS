@@ -12,6 +12,6 @@ internal class BrightWhiteSplatProjectileGraphic : ProjectileGraphic
 {
     private BrightWhiteSplatProjectileGraphic(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override char Character => '*';
-    public override ColourEnum Colour => ColourEnum.BrightWhite;
+    public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "BrightWhiteSplat";
 }

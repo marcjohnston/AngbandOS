@@ -26,9 +26,9 @@ internal abstract class Animation : IGetKey<string>
     public virtual void Bind() { }
 
     public abstract char Character { get; }
-    public abstract ColourEnum Colour { get; }
+    public abstract ColorEnum Color { get; }
     public abstract string Name { get; }
-    public abstract ColourEnum AlternateColour { get; }
+    public abstract ColorEnum AlternateColor { get; }
     public abstract string Sequence { get; }
 
     public void Animate(int[] y, int[] x)
@@ -43,8 +43,8 @@ internal abstract class Animation : IGetKey<string>
             {
                 if (SaveGame.PlayerHasLosBold(y[j], x[j]) && SaveGame.PanelContains(y[j], x[j]))
                 {
-                    ColourEnum colour = oddFrame ? Colour : AlternateColour;
-                    SaveGame.PrintCharacterAtMapLocation(character, colour, y[j], x[j]);
+                    ColorEnum color = oddFrame ? Color : AlternateColor;
+                    SaveGame.PrintCharacterAtMapLocation(character, color, y[j], x[j]);
                     drawn = true;
                 }
             }

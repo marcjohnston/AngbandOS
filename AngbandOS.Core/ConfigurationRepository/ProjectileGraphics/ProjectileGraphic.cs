@@ -29,7 +29,7 @@ internal abstract class ProjectileGraphic : IGetKey<string>
     /// <summary>
     /// The row from which to take the graphical tile
     /// </summary>
-    public virtual ColourEnum Colour => ColourEnum.White; // TODO: Inject the color ... we have 3 variations of every object because of this.
+    public virtual ColorEnum Color => ColorEnum.White; // TODO: Inject the color ... we have 3 variations of every object because of this.
 
     /// <summary>
     /// A unique identifier for the entity.  

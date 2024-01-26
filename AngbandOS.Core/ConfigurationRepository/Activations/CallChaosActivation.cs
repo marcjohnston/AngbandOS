@@ -16,7 +16,7 @@ internal class CallChaosActivation : Activation
     private CallChaosActivation(SaveGame saveGame) : base(saveGame) { }
     public override int RandomChance => 25;
 
-    public override string? PreActivationMessage => "It glows in scintillating colours...";
+    public override string? PreActivationMessage => "It glows in scintillating colors...";
 
     public override int RechargeTime() => 350;
 

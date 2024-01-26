@@ -12,6 +12,6 @@ internal class BrassRingFlavour : RingFlavour
 {
     private BrassRingFlavour(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(EqualSignSymbol));
-    public override ColourEnum Colour => ColourEnum.Copper;
+    public override ColorEnum Color => ColorEnum.Copper;
     public override string Name => "Brass";
 }

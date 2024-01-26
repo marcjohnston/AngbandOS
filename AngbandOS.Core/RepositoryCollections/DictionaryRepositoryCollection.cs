@@ -19,7 +19,7 @@ internal abstract class DictionaryRepositoryCollection<TKey, TValue> : ListRepos
     {
         if (!dictionary.TryGetValue(key, out TValue? value))
         {
-            throw new Exception("Item missing from keyed dictionary.");
+            throw new Exception($"The {key.ToString()} item is not found.");
         }
         return value;
     }

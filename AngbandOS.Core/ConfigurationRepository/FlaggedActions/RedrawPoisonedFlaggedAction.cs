@@ -17,7 +17,7 @@ internal class RedrawPoisonedFlaggedAction : FlaggedAction
     {
         if (SaveGame.TimedPoison.TurnsRemaining > 0)
         {
-            SaveGame.Screen.Print(ColourEnum.Orange, "Poisoned", RowPoisoned, ColPoisoned);
+            SaveGame.Screen.Print(ColorEnum.Orange, "Poisoned", RowPoisoned, ColPoisoned);
         }
         else
         {

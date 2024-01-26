@@ -12,7 +12,7 @@ internal class WeaponShatteredRareItem : RareItem
 {
     private WeaponShatteredRareItem(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(VerticalBarSymbol));
-    public override ColourEnum Colour => ColourEnum.BrightWhite;
+    public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "Weapon (Shattered)";
     public override int Cost => 0;
     public override string FriendlyName => "(Shattered)";

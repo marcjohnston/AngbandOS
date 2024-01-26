@@ -12,8 +12,8 @@ internal class BrightChartreuseSwirlAnimation : Animation
 {
     private BrightChartreuseSwirlAnimation(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override char Character => '*';
-    public override ColourEnum Colour => ColourEnum.BrightChartreuse;
+    public override ColorEnum Color => ColorEnum.BrightChartreuse;
     public override string Name => "BrightChartreuseSwirl";
-    public override ColourEnum AlternateColour => ColourEnum.BrightChartreuse;
+    public override ColorEnum AlternateColor => ColorEnum.BrightChartreuse;
     public override string Sequence => @"|/-\|/-\|/-\|/-\";
 }

@@ -14,6 +14,6 @@ internal class WhiteSwirlAnimation : Animation
     public override char Character => '*';
     public override string Name => "WhiteSwirl";
     public override string Sequence => @"|/-\|/-\|/-\|/-\";
-    public override ColourEnum Colour => ColourEnum.White;
-    public override ColourEnum AlternateColour => ColourEnum.White;
+    public override ColorEnum Color => ColorEnum.White;
+    public override ColorEnum AlternateColor => ColorEnum.White;
 }

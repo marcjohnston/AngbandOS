@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.ItemClasses;
 
 [Serializable]
-internal abstract class CloakArmorItemFactory : ArmourItemFactory
+internal abstract class CloakArmorItemFactory : ArmorItemFactory
 {
     public CloakArmorItemFactory(SaveGame saveGame) : base(saveGame) { }
     public override ItemClass ItemClass => SaveGame.SingletonRepository.ItemClasses.Get(nameof(CloaksItemClass));
@@ -17,7 +17,7 @@ internal abstract class CloakArmorItemFactory : ArmourItemFactory
     public override bool HatesFire => true;
     public override bool HatesAcid => true;
 
-    public override ColourEnum Colour => ColourEnum.BrightBrown;
+    public override ColorEnum Color => ColorEnum.BrightBrown;
     public override int PackSort => 22;
 
     public override bool CanProvideSheathOfElectricity => true;

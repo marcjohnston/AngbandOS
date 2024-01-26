@@ -18,7 +18,7 @@ internal class GenderSelectionBirthStage : BirthStage
         string[]? menuItems = SaveGame.SingletonRepository.Genders
             .Select(_gender => _gender.Title)
             .ToArray();
-        SaveGame.Screen.Print(ColourEnum.Orange, "[Use up and down to select an option, right to confirm, or left to go back.]", 43, 1);
+        SaveGame.Screen.Print(ColorEnum.Orange, "[Use up and down to select an option, right to confirm, or left to go back.]", 43, 1);
         while (!SaveGame.Shutdown)
         {
             SaveGame.MenuDisplay(currentSelection, menuItems);
@@ -52,7 +52,7 @@ internal class GenderSelectionBirthStage : BirthStage
 
     private bool RenderSelection(int index)
     {
-        SaveGame.Screen.Print(ColourEnum.Purple, "Your sex has no effect on gameplay.", 35, 21);
+        SaveGame.Screen.Print(ColorEnum.Purple, "Your sex has no effect on gameplay.", 35, 21);
         return true;
     }
     private BirthStage? GoForward(int index)

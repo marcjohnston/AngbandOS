@@ -20,7 +20,7 @@ internal class DragonShieldArmorItem : ShieldArmorItem
     /// <param name="power"></param>
     protected override void ApplyMagic(int level, int power, Store? store)
     {
-        // Apply the standard armour characteristics, regardless of the power level.
+        // Apply the standard armor characteristics, regardless of the power level.
         base.ApplyMagic(level, power, null);
 
         SaveGame.TreasureRating += 5;

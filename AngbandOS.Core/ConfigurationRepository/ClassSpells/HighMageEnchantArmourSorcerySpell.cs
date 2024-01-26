@@ -8,10 +8,10 @@
 namespace AngbandOS.Core.ClassSpells;
 
 [Serializable]
-internal class HighMageEnchantArmourSorcerySpell : ClassSpell
+internal class HighMageEnchantArmorSorcerySpell : ClassSpell
 {
-    private HighMageEnchantArmourSorcerySpell(SaveGame saveGame) : base(saveGame) { }
-    public override Type Spell => typeof(SorcerySpellEnchantArmour);
+    private HighMageEnchantArmorSorcerySpell(SaveGame saveGame) : base(saveGame) { }
+    public override Type Spell => typeof(SorcerySpellEnchantArmor);
     public override Type CharacterClass => typeof(HighMageCharacterClass);
     public override int Level => 35;
     public override int ManaCost => 80;

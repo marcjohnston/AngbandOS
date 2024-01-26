@@ -15,6 +15,6 @@ internal abstract class SpikeItemClass : ItemFactory
     public override bool EasyKnow => true;
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Spike;
     public override int PackSort => 37;
-    public override ColourEnum Colour => ColourEnum.Grey;
+    public override ColorEnum Color => ColorEnum.Grey;
 
 }

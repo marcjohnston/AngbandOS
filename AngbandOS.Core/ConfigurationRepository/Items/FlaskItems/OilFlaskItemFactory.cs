@@ -17,7 +17,7 @@ internal class OilFlaskItemFactory : FlaskItemFactory
     /// </summary>
     public override bool IsFuelForLantern => true;
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(ExclamationPointSymbol));
-    public override ColourEnum Colour => ColourEnum.Yellow;
+    public override ColorEnum Color => ColorEnum.Yellow;
     public override string Name => "Flask of oil";
 
     public override int[] Chance => new int[] { 1, 0, 0, 0 };

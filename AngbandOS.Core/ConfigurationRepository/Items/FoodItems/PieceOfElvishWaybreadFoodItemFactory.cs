@@ -13,7 +13,7 @@ internal class PieceOfElvishWaybreadFoodItemFactory : FoodItemFactory
     private PieceOfElvishWaybreadFoodItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(CommaSymbol));
-    public override ColourEnum Colour => ColourEnum.BrightBlue;
+    public override ColorEnum Color => ColorEnum.BrightBlue;
     public override string Name => "Piece of Elvish Waybread";
 
     public override int[] Chance => new int[] { 1, 1, 1, 0 };

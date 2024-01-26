@@ -37,7 +37,7 @@ internal class DruidCharacterClass : BaseCharacterClass
         "Nature priests who use WIS based spell casting and who are",
         "limited to the Nature realm. As priests, they can't use",
         "edged weapons unless those weapons are holy; but they can",
-        "wear heavy armour without it disrupting their casting."
+        "wear heavy armor without it disrupting their casting."
     };
     public override int SpellWeight => 350;
     public override CastingType SpellCastingType => SaveGame.SingletonRepository.CastingTypes.Get(nameof(DivineCastingType));

@@ -13,11 +13,11 @@ internal class DisenchanterWormMassMonsterRace : MonsterRace
     protected DisenchanterWormMassMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerWSymbol));
-    public override ColourEnum Colour => ColourEnum.Chartreuse;
+    public override ColorEnum Color => ColorEnum.Chartreuse;
     public override string Name => "Disenchanter worm mass";
 
     public override bool Animal => true;
-    public override int ArmourClass => 5;
+    public override int ArmorClass => 5;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
         new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(CrawlAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(UnBonusAttackEffect)), 1, 4),
     };

@@ -13,7 +13,7 @@ internal class SmallMetalShieldArmorItemFactory : ShieldArmorItemFactory
     private SmallMetalShieldArmorItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(CloseParenthesisSymbol));
-    public override ColourEnum Colour => ColourEnum.Grey;
+    public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "Small Metal Shield";
 
     public override int Ac => 3;

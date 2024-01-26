@@ -4,7 +4,7 @@ import * as SignalR from "@microsoft/signalr";
 import { Subscription } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { HtmlConsole } from '../modules/html-console/html-console.module';
-import { ColourEnum } from '../modules/colour-enum/colour-enum.module';
+import { ColorEnum } from '../modules/color-enum/color-enum.module';
 import { PrintLine } from '../modules/html-console/print-line';
 
 @Component({

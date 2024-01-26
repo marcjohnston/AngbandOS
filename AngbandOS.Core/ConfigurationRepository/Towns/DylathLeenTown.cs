@@ -13,7 +13,7 @@ internal class DylathLeenTown : Town
     private DylathLeenTown(SaveGame saveGame) : base(saveGame) { }
     protected override string[] StoreFactoryNames => new string[] {
         nameof(GeneralStoreFactory),
-        nameof(ArmouryStoreFactory),
+        nameof(ArmoryStoreFactory),
         nameof(WeaponStoreFactory),
         nameof(BlackStoreFactory),
         nameof(BlackStoreFactory),

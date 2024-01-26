@@ -64,13 +64,13 @@ internal class ConsoleCard : ConsoleElement
     }
 
     /// <summary>
-    /// Prints a string using a single colour at a position in the card.  Wrapping is not supported.  Any previous content printed at the same location is replaced.
+    /// Prints a string using a single color at a position in the card.  Wrapping is not supported.  Any previous content printed at the same location is replaced.
     /// </summary>
     /// <param name="col">0-based column to start printing.</param>
     /// <param name="row">0-based row to print on.</param>
-    /// <param name="colour"></param>
+    /// <param name="color"></param>
     /// <param name="text"></param>
-    public void Print(int col, int row, ColourEnum colour, string text)
+    public void Print(int col, int row, ColorEnum color, string text)
     {
         if (text.Length > 0)
         {
@@ -79,7 +79,7 @@ internal class ConsoleCard : ConsoleElement
 
             foreach (char c in text)
             {
-                screen[row][col] = new ConsoleChar(colour, c);
+                screen[row][col] = new ConsoleChar(color, c);
                 col++;
             }
         }

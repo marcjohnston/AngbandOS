@@ -13,7 +13,7 @@ internal class LiberIvonisSorceryBookItemFactory : SorceryBookItemFactory
     private LiberIvonisSorceryBookItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(QuestionMarkSymbol));
-    public override ColourEnum Colour => ColourEnum.Blue;
+    public override ColorEnum Color => ColorEnum.Blue;
     public override string Name => "[Liber Ivonis]";
 
     public override int[] Chance => new int[] { 3, 0, 0, 0 };
@@ -43,7 +43,7 @@ internal class LiberIvonisSorceryBookItemFactory : SorceryBookItemFactory
         SaveGame.SingletonRepository.Spells.Get(nameof(SorcerySpellYellowSign)),
         SaveGame.SingletonRepository.Spells.Get(nameof(SorcerySpellClairvoyance)),
         SaveGame.SingletonRepository.Spells.Get(nameof(SorcerySpellEnchantWeapon)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(SorcerySpellEnchantArmour)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(SorcerySpellEnchantArmor)),
         SaveGame.SingletonRepository.Spells.Get(nameof(SorcerySpellAlchemy)),
         SaveGame.SingletonRepository.Spells.Get(nameof(SorcerySpellGlobeOfInvulnerability))
     };

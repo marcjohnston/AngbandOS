@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.ItemClasses;
 
 [Serializable]
-internal abstract class BootsArmorItemFactory : ArmourItemFactory
+internal abstract class BootsArmorItemFactory : ArmorItemFactory
 {
     public BootsArmorItemFactory(SaveGame saveGame) : base(saveGame) { }
     public override ItemClass ItemClass => SaveGame.SingletonRepository.ItemClasses.Get(nameof(BootsItemClass));
@@ -18,5 +18,5 @@ internal abstract class BootsArmorItemFactory : ArmourItemFactory
     public override bool HatesAcid => true;
     public override int PackSort => 27;
 
-    public override ColourEnum Colour => ColourEnum.BrightBrown;
+    public override ColorEnum Color => ColorEnum.BrightBrown;
 }

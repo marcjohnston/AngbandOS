@@ -12,7 +12,7 @@ internal class PathBaseTile : Tile
 {
     private PathBaseTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(PeriodSymbol));
-    public override ColourEnum Colour => ColourEnum.BrightBrown;
+    public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "PathBase";
     public override string AppearAs => "PathBase";
     public override string Description => "path base";

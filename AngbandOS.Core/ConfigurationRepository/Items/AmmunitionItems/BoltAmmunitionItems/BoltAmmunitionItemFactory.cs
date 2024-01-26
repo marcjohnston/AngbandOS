@@ -14,7 +14,7 @@ internal abstract class BoltAmmunitionItemFactory : AmmunitionItemFactory
     public override ItemClass ItemClass => SaveGame.SingletonRepository.ItemClasses.Get(nameof(BoltsItemClass));
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Bolt;
     public override int PackSort => 33;
-    public override ColourEnum Colour => ColourEnum.BrightBrown;
+    public override ColorEnum Color => ColorEnum.BrightBrown;
 
     /// <summary>
     /// Returns true for all bolts.

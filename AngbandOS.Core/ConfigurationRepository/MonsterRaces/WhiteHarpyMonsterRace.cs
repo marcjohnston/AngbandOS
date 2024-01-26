@@ -16,7 +16,7 @@ internal class WhiteHarpyMonsterRace : MonsterRace
     public override string Name => "White harpy";
 
     public override bool Animal => true;
-    public override int ArmourClass => 17;
+    public override int ArmorClass => 17;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
         new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(ClawAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 1, 1),
         new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(ClawAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 1, 1),

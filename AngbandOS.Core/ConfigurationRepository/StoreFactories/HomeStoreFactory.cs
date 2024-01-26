@@ -19,7 +19,7 @@ internal class HomeStoreFactory : StoreFactory
     };
 
     public override string FeatureType => "Home";
-    public override ColourEnum Colour => ColourEnum.Pink;
+    public override ColorEnum Color => ColorEnum.Pink;
     protected override string SymbolName => nameof(AtSymbol);
 
     /// <summary>

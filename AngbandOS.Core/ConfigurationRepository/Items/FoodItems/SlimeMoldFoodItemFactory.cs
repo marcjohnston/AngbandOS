@@ -13,7 +13,7 @@ internal class SlimeMoldFoodItemFactory : FoodItemFactory
     private SlimeMoldFoodItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(CommaSymbol));
-    public override ColourEnum Colour => ColourEnum.Green;
+    public override ColorEnum Color => ColorEnum.Green;
     public override string Name => "Slime Mold";
 
     public override int[] Chance => new int[] { 1, 0, 0, 0 };

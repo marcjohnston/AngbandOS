@@ -12,6 +12,6 @@ internal class HexagonalWandFlavour : WandFlavour
 {
     private HexagonalWandFlavour(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(MinusSignSymbol));
-    public override ColourEnum Colour => ColourEnum.Pink;
+    public override ColorEnum Color => ColorEnum.Pink;
     public override string Name => "Hexagonal";
 }

@@ -19,10 +19,10 @@ internal class BabyMultiHuedDragonMonsterRace : MonsterRace
         SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BreatheFireMonsterSpell)),
         SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BreathePoisonMonsterSpell)));
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerDSymbol));
-    public override ColourEnum Colour => ColourEnum.Purple;
+    public override ColorEnum Color => ColorEnum.Purple;
     public override string Name => "Baby multi-hued dragon";
 
-    public override int ArmourClass => 30;
+    public override int ArmorClass => 30;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
         new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(ClawAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 1, 3),
         new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(ClawAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 1, 3),
@@ -30,7 +30,7 @@ internal class BabyMultiHuedDragonMonsterRace : MonsterRace
     };
     public override bool AttrMulti => true;
     public override bool BashDoor => true;
-    public override string Description => "This hatchling dragon is still soft, its eyes unaccustomed to light and its scales shimmering with a hint of colour.";
+    public override string Description => "This hatchling dragon is still soft, its eyes unaccustomed to light and its scales shimmering with a hint of color.";
     public override bool Dragon => true;
     public override bool Drop_1D2 => true;
     public override bool Drop60 => true;

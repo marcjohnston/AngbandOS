@@ -12,7 +12,7 @@ internal class DownStairTile : Tile
 {
     private DownStairTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(GreaterThanSymbol));
-    public override ColourEnum Colour => ColourEnum.BrightBrown;
+    public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "DownStair";
     public override string AppearAs => "DownStair";
     public override string Description => "down staircase";

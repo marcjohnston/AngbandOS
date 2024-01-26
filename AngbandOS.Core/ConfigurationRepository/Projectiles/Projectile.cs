@@ -111,7 +111,7 @@ internal abstract class Projectile : IGetKey<string>
             {
                 if (ImpactProjectileGraphic != null)
                 {
-                    SaveGame.PrintCharacterAtMapLocation(ImpactProjectileGraphic.Character, ImpactProjectileGraphic.Colour, y, x);
+                    SaveGame.PrintCharacterAtMapLocation(ImpactProjectileGraphic.Character, ImpactProjectileGraphic.Color, y, x);
                 }
             }
             cPtr = SaveGame.Grid[y][x];
@@ -148,7 +148,7 @@ internal abstract class Projectile : IGetKey<string>
                         {
                             directionalCharacter = BoltChar(y, x, y9, x9);
                         }
-                        SaveGame.PrintCharacterAtMapLocation(directionalCharacter, BoltProjectileGraphic.Colour, y9, x9);
+                        SaveGame.PrintCharacterAtMapLocation(directionalCharacter, BoltProjectileGraphic.Color, y9, x9);
                         SaveGame.MoveCursorRelative(y9, x9);
                         SaveGame.UpdateScreen();
                         visual = true;
@@ -290,7 +290,7 @@ internal abstract class Projectile : IGetKey<string>
                         if (ImpactProjectileGraphic != null)
                         {
                             drawn = true;
-                            SaveGame.PrintCharacterAtMapLocation(ImpactProjectileGraphic.Character, ImpactProjectileGraphic.Colour, y, x);
+                            SaveGame.PrintCharacterAtMapLocation(ImpactProjectileGraphic.Character, ImpactProjectileGraphic.Color, y, x);
                         }
                     }
                 }

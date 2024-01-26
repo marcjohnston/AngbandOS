@@ -12,8 +12,8 @@ internal class BrightPinkContractAnimation : Animation
 {
     private BrightPinkContractAnimation(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override char Character => '*';
-    public override ColourEnum Colour => ColourEnum.BrightPink;
+    public override ColorEnum Color => ColorEnum.BrightPink;
     public override string Name => "BrightPinkContract";
-    public override ColourEnum AlternateColour => ColourEnum.BrightPink;
+    public override ColorEnum AlternateColor => ColorEnum.BrightPink;
     public override string Sequence => @"Oo·";
 }

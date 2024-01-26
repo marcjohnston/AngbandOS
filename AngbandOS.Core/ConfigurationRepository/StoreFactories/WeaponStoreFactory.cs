@@ -41,7 +41,7 @@ internal partial class WeaponStoreFactory : StoreFactory
     };
 
     public override string FeatureType => "Weaponsmiths";
-    public override ColourEnum Colour => ColourEnum.White;
+    public override ColorEnum Color => ColorEnum.White;
     protected override string SymbolName => nameof(NumberThreeSymbol);
 
     public override StockStoreInventoryItem[] GetStoreTable()

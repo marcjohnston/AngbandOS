@@ -13,7 +13,7 @@ internal class FilthyRagSoftArmorItemFactory : SoftArmorItemFactory
     private FilthyRagSoftArmorItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(OpenParenthesisSymbol));
-    public override ColourEnum Colour => ColourEnum.Black;
+    public override ColorEnum Color => ColorEnum.Black;
     public override string Name => "Filthy Rag";
 
     public override int Ac => 1;

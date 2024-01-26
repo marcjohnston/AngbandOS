@@ -34,7 +34,7 @@ internal class LongSwordExcaliburFixedArtifact : FixedArtifact, IFixedArtifactAc
     public override ItemFactory BaseItemCategory => _baseItemCategory;
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(VerticalBarSymbol));
-    public override ColourEnum Colour => ColourEnum.BrightWhite;
+    public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "The Long Sword 'Excalibur'";
     public override int Ac => 0;
     public override bool Activate => true;

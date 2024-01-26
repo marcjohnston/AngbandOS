@@ -45,7 +45,7 @@ internal class GeneralStoreFactory : StoreFactory
     };
 
     public override string FeatureType => "GeneralStore";
-    public override ColourEnum Colour => ColourEnum.BrightBrown;
+    public override ColorEnum Color => ColorEnum.BrightBrown;
     protected override string SymbolName => nameof(NumberOneSymbol);
     public override string Description => "General Store";
 

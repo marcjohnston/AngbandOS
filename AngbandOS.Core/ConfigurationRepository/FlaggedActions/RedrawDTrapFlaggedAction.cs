@@ -18,7 +18,7 @@ internal class RedrawDTrapFlaggedAction : FlaggedAction
         int count = 0;
         if (SaveGame.Grid[SaveGame.MapY][SaveGame.MapX].TileFlags.IsClear(GridTile.TrapsDetected))
         {
-            SaveGame.Screen.Print(ColourEnum.Green, "     ", RowDtrap, ColDtrap);
+            SaveGame.Screen.Print(ColorEnum.Green, "     ", RowDtrap, ColDtrap);
             return;
         }
         if (SaveGame.Grid[SaveGame.MapY - 1][SaveGame.MapX].TileFlags.IsSet(GridTile.TrapsDetected))
@@ -39,11 +39,11 @@ internal class RedrawDTrapFlaggedAction : FlaggedAction
         }
         if (count == 4)
         {
-            SaveGame.Screen.Print(ColourEnum.Green, "DTrap", RowDtrap, ColDtrap);
+            SaveGame.Screen.Print(ColorEnum.Green, "DTrap", RowDtrap, ColDtrap);
         }
         else
         {
-            SaveGame.Screen.Print(ColourEnum.Yellow, "DTRAP", RowDtrap, ColDtrap);
+            SaveGame.Screen.Print(ColorEnum.Yellow, "DTRAP", RowDtrap, ColDtrap);
         }
     }
 }

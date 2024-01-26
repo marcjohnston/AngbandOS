@@ -16,7 +16,7 @@ internal class GiantWhiteMouseMonsterRace : MonsterRace
     public override string Name => "Giant white mouse";
 
     public override bool Animal => true;
-    public override int ArmourClass => 4;
+    public override int ArmorClass => 4;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
         new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 1, 2),
     };

@@ -9,7 +9,7 @@ namespace AngbandOS.Core.ItemClasses;
 
 [Serializable]
 /// <summary>
-/// Represents jewellery items.  Amulets and rings are both armour classes.
+/// Represents jewellery items.  Amulets and rings are both armor classes.
 /// </summary>
 internal abstract class JewelleryItemFactory : ItemFactory
 {

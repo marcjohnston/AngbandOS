@@ -64,7 +64,7 @@ internal class FireScript : Script, IScript, IRepeatableScript
         SaveGame.PlaySound(SoundEffectEnum.Shoot);
         // Get the details of the shot
         string missileName = individualAmmunition.Description(false, 3);
-        ColourEnum missileColour = individualAmmunition.Factory.FlavorColour;
+        ColorEnum missileColor = individualAmmunition.Factory.FlavorColor;
         char missileCharacter = individualAmmunition.Factory.FlavorSymbol.Character;
         int shotSpeed = SaveGame.MissileAttacksPerRound;
         int shotDamage = SaveGame.Rng.DiceRoll(individualAmmunition.DamageDice, individualAmmunition.DamageDiceSides) + individualAmmunition.BonusDamage + missileWeapon.BonusDamage;
@@ -116,7 +116,7 @@ internal class FireScript : Script, IScript, IRepeatableScript
             // If we can see the current projectile location, show it briefly
             if (SaveGame.PanelContains(y, x) && SaveGame.PlayerCanSeeBold(y, x))
             {
-                SaveGame.PrintCharacterAtMapLocation(missileCharacter, missileColour, y, x);
+                SaveGame.PrintCharacterAtMapLocation(missileCharacter, missileColor, y, x);
                 SaveGame.MoveCursorRelative(y, x);
                 SaveGame.UpdateScreen();
                 SaveGame.Pause(msec);
@@ -138,7 +138,7 @@ internal class FireScript : Script, IScript, IRepeatableScript
                 bool visible = monster.IsVisible;
                 hitBody = true;
                 // Check if we actually hit it
-                if (SaveGame.PlayerCheckRangedHitOnMonster(chanceToHit - curDis, race.ArmourClass, monster.IsVisible))
+                if (SaveGame.PlayerCheckRangedHitOnMonster(chanceToHit - curDis, race.ArmorClass, monster.IsVisible))
                 {
                     string noteDies = " dies.";
                     if (race.Demon || race.Undead || race.Cthuloid || race.Stupid || "Evg".Contains(race.Symbol.Character.ToString()))

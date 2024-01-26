@@ -22,7 +22,7 @@ internal class FlailTotilaFixedArtifact : FixedArtifact, IFixedArtifactActivatib
     // Totila does confusion
     public void ActivateItem(SaveGame saveGame, Item item)
     {
-        saveGame.MsgPrint("Your flail glows in scintillating colours...");
+        saveGame.MsgPrint("Your flail glows in scintillating colors...");
         if (!saveGame.GetDirectionWithAim(out int dir))
         {
             return;
@@ -34,7 +34,7 @@ internal class FlailTotilaFixedArtifact : FixedArtifact, IFixedArtifactActivatib
     public override ItemFactory BaseItemCategory => _baseItemCategory;
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(BackSlashSymbol));
-    public override ColourEnum Colour => ColourEnum.Black;
+    public override ColorEnum Color => ColorEnum.Black;
     public override string Name => "The Flail 'Totila'";
     public override int Ac => 0;
     public override bool Activate => true;

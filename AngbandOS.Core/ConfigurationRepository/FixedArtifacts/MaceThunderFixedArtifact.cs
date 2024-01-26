@@ -37,7 +37,7 @@ internal class MaceThunderFixedArtifact : FixedArtifact, IFixedArtifactActivatib
     public override ItemFactory BaseItemCategory => _baseItemCategory;
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(BackSlashSymbol));
-    public override ColourEnum Colour => ColourEnum.Black;
+    public override ColorEnum Color => ColorEnum.Black;
     public override string Name => "The Mace 'Thunder'";
     public override int Ac => 0;
     public override bool Activate => true;

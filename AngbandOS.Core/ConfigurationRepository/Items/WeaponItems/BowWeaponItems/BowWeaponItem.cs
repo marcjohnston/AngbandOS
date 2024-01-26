@@ -111,12 +111,12 @@ internal abstract class BowWeaponItem : WeaponItem
 
             if (BaseArmorClass != 0)
             {
-                // Add base armour class for all types of armour and when the base armour class is greater than zero.
+                // Add base armor class for all types of armor and when the base armor class is greater than zero.
                 basenm += $" [{BaseArmorClass},{GetSignedValue(BonusArmorClass)}]";
             }
             else if (BonusArmorClass != 0)
             {
-                // This is not armour, only show bonus armour class, if it is not zero and we know about it.
+                // This is not armor, only show bonus armor class, if it is not zero and we know about it.
                 basenm += $" [{GetSignedValue(BonusArmorClass)}]";
             }
         }

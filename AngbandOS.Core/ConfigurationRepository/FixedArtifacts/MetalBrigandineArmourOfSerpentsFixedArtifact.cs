@@ -8,10 +8,10 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class MetalBrigandineArmourOfSerpentsFixedArtifact : FixedArtifact
+internal class MetalBrigandineArmorOfSerpentsFixedArtifact : FixedArtifact
 {
     private ItemFactory _baseItemCategory;
-    private MetalBrigandineArmourOfSerpentsFixedArtifact(SaveGame saveGame) : base(saveGame) { }
+    private MetalBrigandineArmorOfSerpentsFixedArtifact(SaveGame saveGame) : base(saveGame) { }
 
     public override void Bind()
     {
@@ -27,8 +27,8 @@ internal class MetalBrigandineArmourOfSerpentsFixedArtifact : FixedArtifact
     public override ItemFactory BaseItemCategory => _baseItemCategory;
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(OpenBraceSymbol));
-    public override ColourEnum Colour => ColourEnum.Grey;
-    public override string Name => "The Metal Brigandine Armour of Serpents";
+    public override ColorEnum Color => ColorEnum.Grey;
+    public override string Name => "The Metal Brigandine Armor of Serpents";
     public override int Ac => 19;
     public override int Cost => 30000;
     public override int Dd => 1;

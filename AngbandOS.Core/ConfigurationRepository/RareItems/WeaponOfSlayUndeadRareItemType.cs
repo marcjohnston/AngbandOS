@@ -12,7 +12,7 @@ internal class WeaponOfSlayUndeadRareItem : RareItem
 {
     private WeaponOfSlayUndeadRareItem(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(VerticalBarSymbol));
-    public override ColourEnum Colour => ColourEnum.BrightWhite;
+    public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "Weapon of Slay Undead";
     public override int Cost => 3500;
     public override string FriendlyName => "of Slay Undead";

@@ -21,10 +21,10 @@ internal class FlyingPolypMonsterRace : MonsterRace
         SaveGame.SingletonRepository.MonsterSpells.Get(nameof(SummonMonstersMonsterSpell)),
         SaveGame.SingletonRepository.MonsterSpells.Get(nameof(TeleportAwayMonsterSpell)));
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperASymbol));
-    public override ColourEnum Colour => ColourEnum.Diamond;
+    public override ColorEnum Color => ColorEnum.Diamond;
     public override string Name => "Flying polyp";
 
-    public override int ArmourClass => 68;
+    public override int ArmorClass => 68;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
         new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 4, 6),
     };

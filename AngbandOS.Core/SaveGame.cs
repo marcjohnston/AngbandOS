@@ -194,13 +194,13 @@ internal class SaveGame
     public readonly int[] PlayerHp = new int[Constants.PyMaxLevel];
     public int Age;
     public ItemTypeEnum AmmunitionItemCategory; // TODO: This needs to be a property of the missileweaponitemcategory
-    public int ArmourClassBonus;
+    public int ArmorClassBonus;
     public int AttackBonus;
-    public int BaseArmourClass;
+    public int BaseArmorClass;
     public int DamageBonus;
-    public int DisplayedArmourClassBonus;
+    public int DisplayedArmorClassBonus;
     public int DisplayedAttackBonus;
-    public int DisplayedBaseArmourClass;
+    public int DisplayedBaseArmorClass;
     public int DisplayedDamageBonus;
     public int Energy;
     public int ExperienceMultiplier;
@@ -277,7 +277,7 @@ internal class SaveGame
     public bool HasRandomTeleport;
     public bool HasReflection;
     public bool HasRegeneration;
-    public bool HasRestrictingArmour;
+    public bool HasRestrictingArmor;
     public bool HasRestrictingGloves;
     public bool HasSeeInvisibility;
     public bool HasShardResistance;
@@ -857,12 +857,12 @@ internal class SaveGame
                     split = check;
                 }
             }
-            Screen.Print(ColourEnum.White, t.Substring(0, split), 0, 0);
+            Screen.Print(ColorEnum.White, t.Substring(0, split), 0, 0);
             MsgFlush(split + 1);
             t = t.Substring(split);
             messageLength -= split;
         }
-        Screen.Print(ColourEnum.White, t.Substring(0, messageLength), 0, MessageXCursorPos);
+        Screen.Print(ColorEnum.White, t.Substring(0, messageLength), 0, MessageXCursorPos);
         MessageAppendNextMessage = true;
         MessageXCursorPos += messageLength + 1;
     }
@@ -873,7 +873,7 @@ internal class SaveGame
     /// <param name="cursorXPosition"></param>
     private void MsgFlush(int cursorXPosition)
     {
-        Screen.Print(ColourEnum.BrightBlue, "-more-", 0, cursorXPosition);
+        Screen.Print(ColorEnum.BrightBlue, "-more-", 0, cursorXPosition);
         while (!Shutdown)
         {
             Inkey();
@@ -1845,34 +1845,34 @@ internal class SaveGame
             for (int x = 0; x < 12; x++)
             {
                 string wildMapSymbol = "^";
-                ColourEnum wildMapAttr = ColourEnum.Green;
+                ColorEnum wildMapAttr = ColorEnum.Green;
                 if (Wilderness[y][x].Dungeon != null)
                 {
                     Dungeon dungeon = Wilderness[y][x].Dungeon;
                     wildMapSymbol = dungeon.Visited ? dungeon.MapSymbol : "?";
-                    wildMapAttr = Wilderness[y][x].Town != null ? ColourEnum.Grey : ColourEnum.Brown;
+                    wildMapAttr = Wilderness[y][x].Town != null ? ColorEnum.Grey : ColorEnum.Brown;
 
                     // Check to see if there are any active quests in the dungeon and show them in bright red.
                     if (Wilderness[y][x].Dungeon.ActiveQuestCount() != 0) 
                     {
-                        wildMapAttr = ColourEnum.BrightRed;
+                        wildMapAttr = ColorEnum.BrightRed;
                     }
                 }
                 if (x == 0 || y == 0 || x == 11 || y == 11)
                 {
                     wildMapSymbol = "~";
-                    wildMapAttr = ColourEnum.Blue;
+                    wildMapAttr = ColorEnum.Blue;
                 }
                 Screen.Print(wildMapAttr, wildMapSymbol, y + 2, x + 2);
             }
         }
-        Screen.Print(ColourEnum.Purple, "+------------+", 1, 1);
+        Screen.Print(ColorEnum.Purple, "+------------+", 1, 1);
         for (y = 0; y < 12; y++)
         {
-            Screen.Print(ColourEnum.Purple, "|", y + 2, 1);
-            Screen.Print(ColourEnum.Purple, "|", y + 2, 14);
+            Screen.Print(ColorEnum.Purple, "|", y + 2, 1);
+            Screen.Print(ColorEnum.Purple, "|", y + 2, 14);
         }
-        Screen.Print(ColourEnum.Purple, "+------------+", 14, 1);
+        Screen.Print(ColorEnum.Purple, "+------------+", 14, 1);
         for (y = 0; y < DungeonCount; y++)
         {
             Dungeon dungeon = SingletonRepository.Dungeons[y];
@@ -1890,21 +1890,21 @@ internal class SaveGame
             {
                 buffer = $"? = {SingletonRepository.Dungeons[y].Name} (L:{depth}, D:{difficulty}, Q:{activeQuestCount})";
             }
-            ColourEnum keyAttr = ColourEnum.Brown;
+            ColorEnum keyAttr = ColorEnum.Brown;
             if (y < SingletonRepository.Towns.Count)
             {
-                keyAttr = ColourEnum.Grey;
+                keyAttr = ColorEnum.Grey;
             }
             if (activeQuestCount != 0)
             {
-                keyAttr = ColourEnum.BrightRed;
+                keyAttr = ColorEnum.BrightRed;
             }
             Screen.Print(keyAttr, buffer, y + 1, 19);
         }
-        Screen.Print(ColourEnum.Purple, "L:levels", 16, 1);
-        Screen.Print(ColourEnum.Purple, "D:difficulty", 17, 1);
-        Screen.Print(ColourEnum.Purple, "Q:quests", 18, 1);
-        Screen.Print(ColourEnum.Purple, "(Your position is marked with the cursor)", DungeonCount + 2, 19);
+        Screen.Print(ColorEnum.Purple, "L:levels", 16, 1);
+        Screen.Print(ColorEnum.Purple, "D:difficulty", 17, 1);
+        Screen.Print(ColorEnum.Purple, "Q:quests", 18, 1);
+        Screen.Print(ColorEnum.Purple, "(Your position is marked with the cursor)", DungeonCount + 2, 19);
     }
 
     /// <summary>
@@ -2562,7 +2562,7 @@ internal class SaveGame
                 }
 
                 kPtr.FlavorSymbol = flavourFactory.Flavor.Symbol;
-                kPtr.FlavorColour = flavourFactory.Flavor.Colour;
+                kPtr.FlavorColor = flavourFactory.Flavor.Color;
             }
         }
     }
@@ -2975,7 +2975,7 @@ internal class SaveGame
                 {
                     int index = Rng.RandomLessThan(SingletonRepository.ScrollFlavours.Count);
                     BaseScrollFlavour baseFlavour = SingletonRepository.ScrollFlavours[index];
-                    ScrollFlavour flavour = new ScrollFlavour(this, baseFlavour.Symbol, baseFlavour.Colour, name);
+                    ScrollFlavour flavour = new ScrollFlavour(this, baseFlavour.Symbol, baseFlavour.Color, name);
                     ScrollFlavours.Add(flavour);
                     break;
                 }
@@ -7114,7 +7114,7 @@ internal class SaveGame
     private bool MinusAc()
     {
         // Generate a weighted random for armor inventory slots.
-        WeightedRandom<BaseInventorySlot> inventorySlotsWeightedRandom = new WeightedRandom<BaseInventorySlot>(this, SingletonRepository.InventorySlots, _inventorySlot => _inventorySlot.IsArmour);
+        WeightedRandom<BaseInventorySlot> inventorySlotsWeightedRandom = new WeightedRandom<BaseInventorySlot>(this, SingletonRepository.InventorySlots, _inventorySlot => _inventorySlot.IsArmor);
 
         // Choose one of those inventory slots.
         BaseInventorySlot? inventorySlot = inventorySlotsWeightedRandom.Choose();
@@ -7866,10 +7866,10 @@ internal class SaveGame
     }
 
     /// <summary>
-    /// Heavily curse the players armour
+    /// Heavily curse the players armor
     /// </summary>
-    /// <returns> true if there was armour to curse, false otherwise </returns>
-    public bool CurseArmour()
+    /// <returns> true if there was armor to curse, false otherwise </returns>
+    public bool CurseArmor()
     {
         BaseInventorySlot? inventorySlot = SingletonRepository.InventorySlots.ToWeightedRandom(_inventorySlot => _inventorySlot.CanBeCursed).Choose();
 
@@ -7882,23 +7882,23 @@ internal class SaveGame
         // Choose an item from the slot.
         Item? item = GetInventoryItem(inventorySlot.WeightedRandom.Choose());
 
-        // If we're not wearing armour then nothing can happen
+        // If we're not wearing armor then nothing can happen
         if (item == null)
         {
             return false;
         }
-        // Artifacts can't be cursed, and normal armour has a chance to save
+        // Artifacts can't be cursed, and normal armor has a chance to save
         string itemName = item.Description(false, 3);
         if ((!string.IsNullOrEmpty(item.RandartName) || item.FixedArtifact != null) && Rng.RandomLessThan(100) < 50)
         {
-            MsgPrint($"A terrible black aura tries to surround your armour, but your {itemName} resists the effects!");
+            MsgPrint($"A terrible black aura tries to surround your armor, but your {itemName} resists the effects!");
         }
         else
         {
-            // Completely remake the armour into a set of blasted armour
+            // Completely remake the armor into a set of blasted armor
             MsgPrint($"A terrible black aura blasts your {itemName}!");
             item.FixedArtifact = null;
-            item.RareItemTypeIndex = RareItemTypeEnum.ArmourBlasted;
+            item.RareItemTypeIndex = RareItemTypeEnum.ArmorBlasted;
             item.BonusArmorClass = 0 - Rng.DieRoll(5) - Rng.DieRoll(5);
             item.BonusToHit = 0;
             item.BonusDamage = 0;
@@ -8697,7 +8697,7 @@ internal class SaveGame
         while (num++ < MeleeAttacksPerRound)
         {
             // Check if we hit
-            if (PlayerCheckHitOnMonster(chance, race.ArmourClass, monster.IsVisible))
+            if (PlayerCheckHitOnMonster(chance, race.ArmorClass, monster.IsVisible))
             {
                 PlaySound(SoundEffectEnum.MeleeHit);
                 // Tell the player they hit it with the appropriate message
@@ -9040,10 +9040,10 @@ internal class SaveGame
     /// Check whether a ranged attack by the player hits a monster
     /// </summary>
     /// <param name="attackBonus"> The player's attack bonus </param>
-    /// <param name="armourClass"> The monster's armour class </param>
+    /// <param name="armorClass"> The monster's armor class </param>
     /// <param name="monsterIsVisible"> Whether or not the monster is visible </param>
     /// <returns> True if the player hit the monster, false otherwise </returns>
-    public bool PlayerCheckRangedHitOnMonster(int attackBonus, int armourClass, bool monsterIsVisible)
+    public bool PlayerCheckRangedHitOnMonster(int attackBonus, int armorClass, bool monsterIsVisible)
     {
         int k = Rng.RandomLessThan(100);
         // Always a 5% chance to hit and a 5% chance to miss
@@ -9062,7 +9062,7 @@ internal class SaveGame
             attackBonus = (attackBonus + 1) / 2;
         }
         // Return the hit or miss
-        return Rng.RandomLessThan(attackBonus) >= armourClass * 3 / 4;
+        return Rng.RandomLessThan(attackBonus) >= armorClass * 3 / 4;
     }
 
     /// <summary>
@@ -9140,12 +9140,12 @@ internal class SaveGame
     }
 
     /// <summary>
-    /// Make a piece of armour immune to acid damage, removing any penalty at the same time
+    /// Make a piece of armor immune to acid damage, removing any penalty at the same time
     /// </summary>
     public void Rustproof()
     {
-        // Get a piece of armour
-        if (!SelectItem(out Item? item, "Rustproof which piece of armour? ", true, true, true, SingletonRepository.ItemFilters.Get(nameof(ArmorItemsItemFilter))))
+        // Get a piece of armor
+        if (!SelectItem(out Item? item, "Rustproof which piece of armor? ", true, true, true, SingletonRepository.ItemFilters.Get(nameof(ArmorItemsItemFilter))))
         {
             MsgPrint("You have nothing to rustproof.");
             return;
@@ -9272,7 +9272,7 @@ internal class SaveGame
         }
         item.ItemOptimize();
         string missileName = missile.Description(false, 3);
-        ColourEnum missileColour = missile.Factory.FlavorColour;
+        ColorEnum missileColor = missile.Factory.FlavorColor;
         char missileCharacter = missile.Factory.FlavorSymbol.Character;
         // Thrown distance is based on the weight of the missile
         int multiplier = 10 + (2 * (damageMultiplier - 1));
@@ -9322,7 +9322,7 @@ internal class SaveGame
             // If we can see, display the thrown item with a suitable delay
             if (PanelContains(y, x) && PlayerCanSeeBold(y, x))
             {
-                PrintCharacterAtMapLocation(missileCharacter, missileColour, y, x);
+                PrintCharacterAtMapLocation(missileCharacter, missileColor, y, x);
                 MoveCursorRelative(y, x);
                 UpdateScreen();
                 Pause(msec);
@@ -9344,7 +9344,7 @@ internal class SaveGame
                 bool visible = monster.IsVisible;
                 hitBody = true;
                 // See if it actually hit the monster
-                if (PlayerCheckRangedHitOnMonster(chance - curDis, race.ArmourClass, monster.IsVisible))
+                if (PlayerCheckRangedHitOnMonster(chance - curDis, race.ArmorClass, monster.IsVisible))
                 {
                     string noteDies = " dies.";
                     if (race.Demon || race.Undead ||
@@ -9751,10 +9751,10 @@ internal class SaveGame
     /// Determine if a player's attack hits a monster
     /// </summary>
     /// <param name="power"> The strength of the attack </param>
-    /// <param name="armourClass"> The monster's armour class </param>
+    /// <param name="armorClass"> The monster's armor class </param>
     /// <param name="isVisible"> Whether or not the monster is visible </param>
     /// <returns> True if the attack hit, false if not </returns>
-    private bool PlayerCheckHitOnMonster(int power, int armourClass, bool isVisible)
+    private bool PlayerCheckHitOnMonster(int power, int armorClass, bool isVisible)
     {
         // Always have a 5% chance to hit or miss
         int roll = Rng.RandomLessThan(100);
@@ -9772,7 +9772,7 @@ internal class SaveGame
             power = (power + 1) / 2;
         }
         // Work out whether we hit or not
-        return Rng.RandomLessThan(power) >= armourClass * 3 / 4;
+        return Rng.RandomLessThan(power) >= armorClass * 3 / 4;
     }
 
     /// <summary>
@@ -9838,7 +9838,7 @@ internal class SaveGame
         // See if the player hit the monster
         int bonus = AttackBonus;
         int chance = SkillMelee + (bonus * Constants.BthPlusAdj);
-        if (PlayerCheckHitOnMonster(chance, race.ArmourClass, monster.IsVisible))
+        if (PlayerCheckHitOnMonster(chance, race.ArmorClass, monster.IsVisible))
         {
             // It was a hit, so let the player know
             PlaySound(SoundEffectEnum.MeleeHit);
@@ -10162,7 +10162,7 @@ internal class SaveGame
             case "ConfuseGas":
                 {
                     // Confuse the player
-                    MsgPrint("A gas of scintillating colours surrounds you!");
+                    MsgPrint("A gas of scintillating colors surrounds you!");
                     if (!HasConfusionResistance)
                     {
                         TimedConfusion.AddTimer(Rng.RandomLessThan(20) + 10);
@@ -10268,8 +10268,8 @@ internal class SaveGame
             return false;
         }
         // Roll for the attack
-        int armourClass = BaseArmourClass + ArmourClassBonus;
-        return Rng.DieRoll(attackStrength) > armourClass * 3 / 4;
+        int armorClass = BaseArmorClass + ArmorClassBonus;
+        return Rng.DieRoll(attackStrength) > armorClass * 3 / 4;
     }
 
     // Artificial Intelligence
@@ -10447,7 +10447,7 @@ internal class SaveGame
     public void AnyKey(int row)
     {
         Screen.PrintLine("", row, 0);
-        Screen.Print(ColourEnum.Orange, "[Press any key to continue]", row, 27);
+        Screen.Print(ColorEnum.Orange, "[Press any key to continue]", row, 27);
         Inkey();
         Screen.PrintLine("", row, 0);
     }
@@ -10472,7 +10472,7 @@ internal class SaveGame
             len = Screen.Width - cursorPosition.X;
         }
         Screen.Erase(cursorPosition.Y, cursorPosition.X, len);
-        Screen.Print(ColourEnum.Grey, buf, cursorPosition.Y, cursorPosition.X);
+        Screen.Print(ColorEnum.Grey, buf, cursorPosition.Y, cursorPosition.X);
         while (!done && !Shutdown)
         {
             Screen.Goto(cursorPosition.Y, cursorPosition.X + k);
@@ -10508,7 +10508,7 @@ internal class SaveGame
                     break;
             }
             Screen.Erase(cursorPosition.Y, cursorPosition.X, len);
-            Screen.Print(ColourEnum.Black, buf, cursorPosition.Y, cursorPosition.X);
+            Screen.Print(ColorEnum.Black, buf, cursorPosition.Y, cursorPosition.X);
         }
         return i != '\x1b';
     }
@@ -10957,7 +10957,7 @@ internal class SaveGame
     public void DisplayAPlusB(int x, int y, int initial, int bonus)
     {
         string buf = $"{initial:00}% + {bonus / 10}.{bonus % 10}%/lv";
-        Screen.Print(ColourEnum.Black, buf, y, x);
+        Screen.Print(ColorEnum.Black, buf, y, x);
     }
 
     public void DisplayRealmInfo(Realm prealm)
@@ -10965,7 +10965,7 @@ internal class SaveGame
         int y = 30;
         foreach (string info in prealm.Info)
         {
-            Screen.Print(ColourEnum.Purple, info, y, 20);
+            Screen.Print(ColorEnum.Purple, info, y, 20);
             y++;
         }
     }
@@ -10975,17 +10975,17 @@ internal class SaveGame
         string buf;
         if (bonus == 0)
         {
-            Screen.Print(ColourEnum.Black, "+0", y, x);
+            Screen.Print(ColorEnum.Black, "+0", y, x);
         }
         else if (bonus < 0)
         {
             buf = bonus.ToString();
-            Screen.Print(ColourEnum.BrightRed, buf, y, x);
+            Screen.Print(ColorEnum.BrightRed, buf, y, x);
         }
         else
         {
             buf = "+" + bonus;
-            Screen.Print(ColourEnum.Green, buf, y, x);
+            Screen.Print(ColorEnum.Green, buf, y, x);
         }
     }
 
@@ -11107,16 +11107,16 @@ internal class SaveGame
     public void MenuDisplay(int current, string[] menuItems)
     {
         Screen.Clear(30);
-        Screen.Print(ColourEnum.Orange, "=>", 35, 0);
+        Screen.Print(ColorEnum.Orange, "=>", 35, 0);
         for (int i = 0; i < menuItems.Length; i++)
         {
             int row = 35 + i - current;
             if (row >= 30 && row <= 40)
             {
-                ColourEnum a = ColourEnum.Purple;
+                ColorEnum a = ColorEnum.Purple;
                 if (i == current)
                 {
-                    a = ColourEnum.Pink;
+                    a = ColorEnum.Pink;
                 }
                 Screen.Print(a, menuItems[i], row, 2);
             }
@@ -11344,7 +11344,7 @@ internal class SaveGame
         new PlayerHistory("wavy ", 90, 51, 52, 50),
         new PlayerHistory("curly ", 100, 51, 52, 50),
         // Group 52: Great
-        // One/Human/Half-Elf/Hobbit/Gnome/Half-Orc/Half-Ogre/Half-Giant/Half-Titan hair colour 52->53->End
+        // One/Human/Half-Elf/Hobbit/Gnome/Half-Orc/Half-Ogre/Half-Giant/Half-Titan hair color 52->53->End
         new PlayerHistory("black hair, ", 30, 52, 53, 50),
         new PlayerHistory("brown hair, ", 70, 52, 53, 50),
         new PlayerHistory("auburn hair, ", 80, 52, 53, 50),
@@ -11364,7 +11364,7 @@ internal class SaveGame
         // Group 55: Elf/High-Elf hairstyle 55->56->End
         new PlayerHistory("straight ", 75, 55, 56, 50),
         new PlayerHistory("wavy ", 100, 55, 56, 50),
-        // Group 56: Elf/High-Elf colour 56->End
+        // Group 56: Elf/High-Elf color 56->End
         new PlayerHistory("black hair, and a pale complexion.", 75, 56, 0, 50),
         new PlayerHistory("brown hair, and a pale complexion.", 85, 56, 0, 50),
         new PlayerHistory("blond hair, and a pale complexion.", 95, 56, 0, 50),
@@ -11375,7 +11375,7 @@ internal class SaveGame
         // Group 58: Dwarf/Nibelung hairstyle 58->59->60->61->End
         new PlayerHistory("straight ", 90, 58, 59, 50),
         new PlayerHistory("wavy ", 100, 58, 59, 50),
-        // Group 59: Dwarf/Nibelung hair colour 59->60->61->End
+        // Group 59: Dwarf/Nibelung hair color 59->60->61->End
         new PlayerHistory("black hair, ", 75, 59, 60, 50),
         new PlayerHistory("brown hair, ", 100, 59, 60, 50),
         // Group 60: Dwarf/Nibelung beard 60->61->End
@@ -11398,7 +11398,7 @@ internal class SaveGame
         new PlayerHistory("sea-weed green hair, ", 33, 64, 65, 50),
         new PlayerHistory("bright red hair, ", 66, 64, 65, 50),
         new PlayerHistory("dark purple hair, ", 100, 64, 65, 50),
-        // Group 65: Half-Troll/Zombie skin colour 65->66->End
+        // Group 65: Half-Troll/Zombie skin color 65->66->End
         new PlayerHistory("and green ", 25, 65, 66, 50),
         new PlayerHistory("and blue ", 50, 65, 66, 50),
         new PlayerHistory("and white ", 75, 65, 66, 50),
@@ -11531,7 +11531,7 @@ internal class SaveGame
         new PlayerHistory("Priest. ", 65, 90, 91, 65),
         new PlayerHistory("Mage. ", 85, 90, 91, 70),
         new PlayerHistory("Noble. ", 100, 90, 91, 100),
-        // Group 91: Draconian colour 91->End
+        // Group 91: Draconian color 91->End
         new PlayerHistory("You have green wings, green skin and yellow belly.", 30, 91, 0, 50),
         new PlayerHistory("You have green wings, and green skin.", 55, 91, 0, 50),
         new PlayerHistory("You have red wings, and red skin.", 80, 91, 0, 50),
@@ -11615,7 +11615,7 @@ internal class SaveGame
         new PlayerHistory("straight ", 70, 110, 111, 50),
         new PlayerHistory("wavy ", 90, 110, 111, 50),
         new PlayerHistory("curly ", 100, 110, 111, 50),
-        // Group 111: Cyclops hair colour 111->112->End
+        // Group 111: Cyclops hair color 111->112->End
         new PlayerHistory("black hair, ", 30, 111, 112, 50),
         new PlayerHistory("brown hair, ", 70, 111, 112, 50),
         new PlayerHistory("auburn hair, ", 80, 111, 112, 50),
@@ -11688,10 +11688,10 @@ internal class SaveGame
         new PlayerHistory("straight blond hair, ", 80, 127, 128, 50),
         new PlayerHistory("wavy blond hair, ", 100, 127, 128, 50),
         // Group 128: Sprite eyes 128->End
-        new PlayerHistory("blue eyes, and skin the colour of pine.", 25, 128, 0, 50),
-        new PlayerHistory("blue eyes, and skin the colour of ash.", 50, 128, 0, 50),
-        new PlayerHistory("blue eyes, and skin the colour of oak.", 75, 128, 0, 50),
-        new PlayerHistory("blue eyes, and skin the colour of mahogany.", 100, 128, 0, 50),
+        new PlayerHistory("blue eyes, and skin the color of pine.", 25, 128, 0, 50),
+        new PlayerHistory("blue eyes, and skin the color of ash.", 50, 128, 0, 50),
+        new PlayerHistory("blue eyes, and skin the color of oak.", 75, 128, 0, 50),
+        new PlayerHistory("blue eyes, and skin the color of mahogany.", 100, 128, 0, 50),
         // Group 129: Miri-Nigri start 129->130->131->132->133->End
         new PlayerHistory("You were summoned by a cult. ", 30, 129, 130, 40),
         new PlayerHistory("You crawled out from a fissure in the ground. ", 50, 129, 130, 50),
@@ -11708,7 +11708,7 @@ internal class SaveGame
         new PlayerHistory("smooth ", 33, 131, 132, 50),
         new PlayerHistory("slippery ", 66, 131, 132, 50),
         new PlayerHistory("oily ", 100, 131, 132, 50),
-        // Group 132: Miri-Nigri skin colour 132->133->End
+        // Group 132: Miri-Nigri skin color 132->133->End
         new PlayerHistory("green skin, ", 33, 132, 133, 50),
         new PlayerHistory("black skin, ", 66, 132, 133, 50),
         new PlayerHistory("pale skin, ", 100, 132, 133, 50),
@@ -11722,7 +11722,7 @@ internal class SaveGame
         new PlayerHistory("and no ears.", 100, 133, 0, 50),
         // Group 134: Spectre join 134->120->121->122->123->End
         new PlayerHistory("You have ", 100, 134, 120, 50),
-        // Group 135: Yeek fur colour 135->136->137->End
+        // Group 135: Yeek fur color 135->136->137->End
         new PlayerHistory("blue fur, ", 40, 135, 136, 50),
         new PlayerHistory("brown fur, ", 60, 135, 136, 50),
         new PlayerHistory("striped fur, ", 95, 135, 136, 50),
@@ -14124,7 +14124,7 @@ internal class SaveGame
                         {
                             ScreenBuffer savedScreen = Screen.Clone();
                             rPtr.Knowledge.Display();
-                            Screen.Print(ColourEnum.White, $"  [r,{info}]");
+                            Screen.Print(ColorEnum.White, $"  [r,{info}]");
                             query = Inkey();
                             Screen.Restore(savedScreen);
                         }
@@ -14307,7 +14307,7 @@ internal class SaveGame
         return GetInventoryItem(InventorySlot.MeleeWeapon) == null;
     }
 
-    public bool MartialArtistHeavyArmour()
+    public bool MartialArtistHeavyArmor()
     {
         int martialArtistArmWgt = 0;
         if (BaseCharacterClass.ID != CharacterClass.Monk && BaseCharacterClass.ID != CharacterClass.Mystic)
@@ -14316,7 +14316,7 @@ internal class SaveGame
         }
         foreach (BaseInventorySlot inventorySlot in SingletonRepository.InventorySlots)
         {
-            if (inventorySlot.IsArmour)
+            if (inventorySlot.IsArmor)
             {
                 foreach (int index in inventorySlot)
                 {
@@ -14565,11 +14565,11 @@ internal class SaveGame
     {
         if (isSet)
         {
-            Screen.Print(ColourEnum.Blue, '*', row, col);
+            Screen.Print(ColorEnum.Blue, '*', row, col);
         }
         else
         {
-            Screen.Print(ColourEnum.White, '-', row, col);
+            Screen.Print(ColorEnum.White, '-', row, col);
         }
     }
 
@@ -14884,15 +14884,15 @@ internal class SaveGame
             foreach (int index in inventorySlot.InventorySlots)
             {
                 Item? item = GetInventoryItem(index);
-                ColourEnum colour = ColourEnum.Background;
+                ColorEnum color = ColorEnum.Background;
                 char character = ' ';
                 // Only print items that exist
                 if (item != null)
                 {
-                    colour = item.Factory.FlavorColour;
+                    color = item.Factory.FlavorColor;
                     character = item.Factory.FlavorSymbol.Character;
                 }
-                Screen.Print(colour, character, screenRow, screenCol + column);
+                Screen.Print(color, character, screenRow, screenCol + column);
                 column++;
             }
         }
@@ -15312,11 +15312,11 @@ internal class SaveGame
         {
             itemCharacteristics.ResChaos = true;
         }
-        if (BaseCharacterClass.ID == CharacterClass.Monk && ExperienceLevel > 9 && !MartialArtistHeavyArmour())
+        if (BaseCharacterClass.ID == CharacterClass.Monk && ExperienceLevel > 9 && !MartialArtistHeavyArmor())
         {
             itemCharacteristics.Speed = true;
         }
-        if (BaseCharacterClass.ID == CharacterClass.Monk && ExperienceLevel > 24 && !MartialArtistHeavyArmour())
+        if (BaseCharacterClass.ID == CharacterClass.Monk && ExperienceLevel > 24 && !MartialArtistHeavyArmor())
         {
             itemCharacteristics.FreeAct = true;
         }
@@ -15345,7 +15345,7 @@ internal class SaveGame
             {
                 itemCharacteristics.ResConf = true;
             }
-            if (ExperienceLevel > 9 && !MartialArtistHeavyArmour())
+            if (ExperienceLevel > 9 && !MartialArtistHeavyArmor())
             {
                 itemCharacteristics.Speed = true;
             }
@@ -15353,7 +15353,7 @@ internal class SaveGame
             {
                 itemCharacteristics.ResFear = true;
             }
-            if (ExperienceLevel > 29 && !MartialArtistHeavyArmour())
+            if (ExperienceLevel > 29 && !MartialArtistHeavyArmor())
             {
                 itemCharacteristics.FreeAct = true;
             }
@@ -15572,7 +15572,7 @@ internal class SaveGame
     public void InputPlayerName()
     {
         Screen.Clear(42);
-        Screen.PrintLine(ColourEnum.Orange, "[Enter your player's name above, or hit ESCAPE]", 43, 2);
+        Screen.PrintLine(ColorEnum.Orange, "[Enter your player's name above, or hit ESCAPE]", 43, 2);
         const int col = 15;
         while (!Shutdown)
         {
@@ -15591,7 +15591,7 @@ internal class SaveGame
             break;
         }
         Name = Name.PadRight(12);
-        Screen.Print(ColourEnum.Brown, Name, 2, col);
+        Screen.Print(ColorEnum.Brown, Name, 2, col);
         //Screen.Clear(22);
     }
 
@@ -16604,35 +16604,35 @@ internal class SaveGame
                 if (oPtr != null && (itemFilter == null || itemFilter.ItemMatches(oPtr)))
                 {
                     ConsoleTableRow consoleRow = consoleTable.AddRow();
-                    consoleRow["label"] = new ConsoleString(ColourEnum.White, $"{index.IndexToLabel()})");
+                    consoleRow["label"] = new ConsoleString(ColorEnum.White, $"{index.IndexToLabel()})");
 
                     if (oPtr.Factory != null)
                     {
                         // Apply flavour visuals
-                        consoleRow["flavour"] = new ConsoleChar(oPtr.Factory.FlavorColour, oPtr.Factory.FlavorSymbol.Character);
+                        consoleRow["flavour"] = new ConsoleChar(oPtr.Factory.FlavorColor, oPtr.Factory.FlavorSymbol.Character);
                     }
                     else
                     {
                         // There is no item.
-                        consoleRow["flavour"] = new ConsoleChar(ColourEnum.Background, ' ');
+                        consoleRow["flavour"] = new ConsoleChar(ColorEnum.Background, ' ');
                     }
-                    consoleRow["usage"] = new ConsoleString(ColourEnum.White, $"{inventorySlot.MentionUse(index)}:");
+                    consoleRow["usage"] = new ConsoleString(ColorEnum.White, $"{inventorySlot.MentionUse(index)}:");
 
-                    ColourEnum colour = oPtr.Factory == null ? ColourEnum.White : oPtr.Factory.Colour;
-                    consoleRow["description"] = new ConsoleString(colour, oPtr.Description(true, 3));
+                    ColorEnum color = oPtr.Factory == null ? ColorEnum.White : oPtr.Factory.Color;
+                    consoleRow["description"] = new ConsoleString(color, oPtr.Description(true, 3));
 
                     int wgt = oPtr.Weight * oPtr.Count;
-                    consoleRow["weight"] = new ConsoleString(ColourEnum.White, $"{wgt / 10}.{wgt % 10} lb");
+                    consoleRow["weight"] = new ConsoleString(ColorEnum.White, $"{wgt / 10}.{wgt % 10} lb");
                     slotIsEmpty = false;
                 }
             }
             if (options.ShowEmptySlotsAsNothing && slotIsEmpty)
             {
                 ConsoleTableRow consoleRow = consoleTable.AddRow();
-                consoleRow["label"] = new ConsoleString(ColourEnum.White, $"{labels[consoleTable.Rows.Count() - 1]})");
-                consoleRow["usage"] = new ConsoleString(ColourEnum.White, $"{inventorySlot.MentionUse(null)}:");
-                consoleRow["description"] = new ConsoleString(ColourEnum.White, "(nothing)");
-                consoleRow["weight"] = new ConsoleString(ColourEnum.White, $"0.0 lb");
+                consoleRow["label"] = new ConsoleString(ColorEnum.White, $"{labels[consoleTable.Rows.Count() - 1]})");
+                consoleRow["usage"] = new ConsoleString(ColorEnum.White, $"{inventorySlot.MentionUse(null)}:");
+                consoleRow["description"] = new ConsoleString(ColorEnum.White, "(nothing)");
+                consoleRow["weight"] = new ConsoleString(ColorEnum.White, $"0.0 lb");
             }
         }
 
@@ -16641,7 +16641,7 @@ internal class SaveGame
             if (consoleTable.Width < 29)
             {
                 ConsoleWindow container = new ConsoleWindow(50, 1, 79, consoleTable.Height);
-                container.Clear(this, ColourEnum.Background);
+                container.Clear(this, ColorEnum.Background);
                 consoleTable.Render(this, container, new ConsoleTopLeftAlignment());
             }
             else
@@ -16883,12 +16883,12 @@ internal class SaveGame
     public void DisplayMap(out int cy, out int cx)
     {
         int x, y, maxy;
-        ColourEnum ta;
+        ColorEnum ta;
         char tc;
-        ColourEnum[][] ma = new ColourEnum[_mapHgt + 2][];
+        ColorEnum[][] ma = new ColorEnum[_mapHgt + 2][];
         for (int i = 0; i < _mapHgt + 2; i++)
         {
-            ma[i] = new ColourEnum[_mapWid + 2];
+            ma[i] = new ColorEnum[_mapWid + 2];
         }
         char[][] mc = new char[_mapHgt + 2][];
         for (int i = 0; i < _mapHgt + 2; i++)
@@ -16904,7 +16904,7 @@ internal class SaveGame
         {
             for (x = 0; x < _mapWid + 2; ++x)
             {
-                ma[y][x] = ColourEnum.White;
+                ma[y][x] = ColorEnum.White;
                 mc[y][x] = ' ';
                 mp[y][x] = 0;
             }
@@ -16926,7 +16926,7 @@ internal class SaveGame
                 }
                 MapInfo(j, i, out ta, out tc);
                 int tp = Grid[j][i].FeatureType.MapPriority;
-                if (ta == ColourEnum.Background)
+                if (ta == ColorEnum.Background)
                 {
                     tp = 0;
                 }
@@ -16943,26 +16943,26 @@ internal class SaveGame
         int xOffset = (Screen.Width - x) / 2;
         int yOffset = (Screen.Height - 1 - y) / 2;
         mc[0][0] = '+';
-        ma[0][0] = ColourEnum.Purple;
+        ma[0][0] = ColorEnum.Purple;
         mc[0][x] = '+';
-        ma[0][x] = ColourEnum.Purple;
+        ma[0][x] = ColorEnum.Purple;
         mc[y][0] = '+';
-        ma[y][0] = ColourEnum.Purple;
+        ma[y][0] = ColorEnum.Purple;
         mc[y][x] = '+';
-        ma[y][x] = ColourEnum.Purple;
+        ma[y][x] = ColorEnum.Purple;
         for (x = 1; x <= maxx; x++)
         {
             mc[0][x] = '-';
-            ma[0][x] = ColourEnum.Purple;
+            ma[0][x] = ColorEnum.Purple;
             mc[maxy + 1][x] = '-';
-            ma[maxy + 1][x] = ColourEnum.Purple;
+            ma[maxy + 1][x] = ColorEnum.Purple;
         }
         for (y = 1; y <= maxy; y++)
         {
             mc[y][0] = '|';
-            ma[y][0] = ColourEnum.Purple;
+            ma[y][0] = ColorEnum.Purple;
             mc[y][maxx + 1] = '|';
-            ma[y][maxx + 1] = ColourEnum.Purple;
+            ma[y][maxx + 1] = ColorEnum.Purple;
         }
         for (y = 0; y < maxy + 2; ++y)
         {
@@ -16973,11 +16973,11 @@ internal class SaveGame
                 tc = mc[y][x];
                 if (TimedInvulnerability.TurnsRemaining != 0)
                 {
-                    ta = ColourEnum.White;
+                    ta = ColorEnum.White;
                 }
                 else if (TimedEtherealness.TurnsRemaining != 0)
                 {
-                    ta = ColourEnum.Black;
+                    ta = ColorEnum.Black;
                 }
                 Screen.Print(ta, tc.ToString());
             }
@@ -17700,17 +17700,17 @@ internal class SaveGame
         return Grid[y][x].TileFlags.IsSet(GridTile.IsVisible);
     }
 
-    public void PrintCharacterAtMapLocation(char c, ColourEnum a, int y, int x)
+    public void PrintCharacterAtMapLocation(char c, ColorEnum a, int y, int x)
     {
         if (PanelContains(y, x))
         {
             if (TimedInvulnerability.TurnsRemaining != 0)
             {
-                a = ColourEnum.White;
+                a = ColorEnum.White;
             }
             else if (TimedEtherealness.TurnsRemaining != 0)
             {
-                a = ColourEnum.Black;
+                a = ColorEnum.Black;
             }
             Screen.PutChar(a, c, y - PanelRowPrt, x - PanelColPrt);
         }
@@ -17739,14 +17739,14 @@ internal class SaveGame
     {
         if (PanelContains(y, x))
         {
-            MapInfo(y, x, out ColourEnum a, out char c);
+            MapInfo(y, x, out ColorEnum a, out char c);
             if (TimedInvulnerability.TurnsRemaining != 0)
             {
-                a = ColourEnum.White;
+                a = ColorEnum.White;
             }
             else if (TimedEtherealness.TurnsRemaining != 0)
             {
-                a = ColourEnum.Black;
+                a = ColorEnum.Black;
             }
             Screen.Print(a, c, y - PanelRowPrt, x - PanelColPrt);
         }
@@ -17870,54 +17870,54 @@ internal class SaveGame
         SingletonRepository.FlaggedActions.Get(nameof(RedrawMapFlaggedAction)).Set();
     }
 
-    private ColourEnum DimColour(ColourEnum a)
+    private ColorEnum DimColor(ColorEnum a)
     {
         switch (a)
         {
-            case ColourEnum.BrightBlue:
-                return ColourEnum.Blue;
+            case ColorEnum.BrightBlue:
+                return ColorEnum.Blue;
 
-            case ColourEnum.BrightGreen:
-                return ColourEnum.Green;
+            case ColorEnum.BrightGreen:
+                return ColorEnum.Green;
 
-            case ColourEnum.BrightRed:
-                return ColourEnum.Red;
+            case ColorEnum.BrightRed:
+                return ColorEnum.Red;
 
-            case ColourEnum.BrightWhite:
-                return ColourEnum.White;
+            case ColorEnum.BrightWhite:
+                return ColorEnum.White;
 
-            case ColourEnum.BrightBeige:
-                return ColourEnum.Beige;
+            case ColorEnum.BrightBeige:
+                return ColorEnum.Beige;
 
-            case ColourEnum.BrightChartreuse:
-                return ColourEnum.Chartreuse;
+            case ColorEnum.BrightChartreuse:
+                return ColorEnum.Chartreuse;
 
-            case ColourEnum.BrightGrey:
-                return ColourEnum.Grey;
+            case ColorEnum.BrightGrey:
+                return ColorEnum.Grey;
 
-            case ColourEnum.BrightOrange:
-                return ColourEnum.Orange;
+            case ColorEnum.BrightOrange:
+                return ColorEnum.Orange;
 
-            case ColourEnum.BrightYellow:
-                return ColourEnum.Yellow;
+            case ColorEnum.BrightYellow:
+                return ColorEnum.Yellow;
 
-            case ColourEnum.BrightBrown:
-                return ColourEnum.Brown;
+            case ColorEnum.BrightBrown:
+                return ColorEnum.Brown;
 
-            case ColourEnum.BrightTurquoise:
-                return ColourEnum.Turquoise;
+            case ColorEnum.BrightTurquoise:
+                return ColorEnum.Turquoise;
 
-            case ColourEnum.BrightPink:
-                return ColourEnum.Pink;
+            case ColorEnum.BrightPink:
+                return ColorEnum.Pink;
 
-            case ColourEnum.Grey:
-                return ColourEnum.Black;
+            case ColorEnum.Grey:
+                return ColorEnum.Black;
 
-            case ColourEnum.White:
-                return ColourEnum.Grey;
+            case ColorEnum.White:
+                return ColorEnum.Grey;
 
-            case ColourEnum.Yellow:
-                return ColourEnum.BrightBrown;
+            case ColorEnum.Yellow:
+                return ColorEnum.BrightBrown;
 
             default:
                 return a;
@@ -17929,19 +17929,19 @@ internal class SaveGame
         return Grid[y][x].FeatureType.BlocksLos;
     }
 
-    private void ImageMonster(out ColourEnum ap, out char cp)
+    private void ImageMonster(out ColorEnum ap, out char cp)
     {
         cp = SingletonRepository.MonsterRaces[Rng.DieRoll(SingletonRepository.MonsterRaces.Count - 2)].Symbol.Character;
-        ap = SingletonRepository.MonsterRaces[Rng.DieRoll(SingletonRepository.MonsterRaces.Count - 2)].Colour;
+        ap = SingletonRepository.MonsterRaces[Rng.DieRoll(SingletonRepository.MonsterRaces.Count - 2)].Color;
     }
 
-    private void ImageObject(out ColourEnum ap, out char cp)
+    private void ImageObject(out ColorEnum ap, out char cp)
     {
         cp = SingletonRepository.ItemFactories[Rng.DieRoll(SingletonRepository.ItemFactories.Count - 1)].FlavorSymbol.Character;
-        ap = SingletonRepository.ItemFactories[Rng.DieRoll(SingletonRepository.ItemFactories.Count - 1)].FlavorColour;
+        ap = SingletonRepository.ItemFactories[Rng.DieRoll(SingletonRepository.ItemFactories.Count - 1)].FlavorColor;
     }
 
-    private void ImageRandom(out ColourEnum ap, out char cp)
+    private void ImageRandom(out ColorEnum ap, out char cp)
     {
         if (Rng.RandomLessThan(100) < 75)
         {
@@ -17953,9 +17953,9 @@ internal class SaveGame
         }
     }
 
-    public void MapInfo(int y, int x, out ColourEnum ap, out char cp)
+    public void MapInfo(int y, int x, out ColorEnum ap, out char cp)
     {
-        ColourEnum a;
+        ColorEnum a;
         char c;
         GridTile cPtr = Grid[y][x];
         Tile feat = cPtr.FeatureType;
@@ -17966,27 +17966,27 @@ internal class SaveGame
                  cPtr.TileFlags.IsSet(GridTile.IsVisible))) && TimedBlindness.TurnsRemaining == 0))
             {
                 c = feat.Symbol.Character;
-                a = feat.Colour;
+                a = feat.Color;
                 if (feat.DimsOutsideLOS)
                 {
                     if (TimedBlindness.TurnsRemaining != 0)
                     {
-                        a = ColourEnum.Black;
+                        a = ColorEnum.Black;
                     }
                     else if (cPtr.TileFlags.IsSet(GridTile.PlayerLit))
                     {
                         if (feat.YellowInTorchlight)
                         {
-                            a = ColourEnum.BrightYellow;
+                            a = ColorEnum.BrightYellow;
                         }
                     }
                     else if (cPtr.TileFlags.IsClear(GridTile.SelfLit))
                     {
-                        a = ColourEnum.Black;
+                        a = ColorEnum.Black;
                     }
                     else if (cPtr.TileFlags.IsClear(GridTile.IsVisible))
                     {
-                        a = DimColour(a);
+                        a = DimColor(a);
                     }
                     if (cPtr.TileFlags.IsSet(GridTile.TrapsDetected))
                     {
@@ -18009,14 +18009,14 @@ internal class SaveGame
                         }
                         if (count != 4)
                         {
-                            a = ColourEnum.BrightChartreuse;
+                            a = ColorEnum.BrightChartreuse;
                         }
                     }
                 }
             }
             else
             {
-                a = SingletonRepository.Tiles.Get("Nothing").Colour;
+                a = SingletonRepository.Tiles.Get("Nothing").Color;
                 c = SingletonRepository.Tiles.Get("Nothing").Symbol.Character;
             }
         }
@@ -18028,29 +18028,29 @@ internal class SaveGame
                     ? SingletonRepository.Tiles.Get(cPtr.BackgroundFeature.AppearAs)
                     : SingletonRepository.Tiles.Get(feat.AppearAs);
                 c = feat.Symbol.Character;
-                a = feat.Colour;
+                a = feat.Color;
                 if (feat.DimsOutsideLOS)
                 {
                     if (TimedBlindness.TurnsRemaining != 0)
                     {
-                        a = ColourEnum.Black;
+                        a = ColorEnum.Black;
                     }
                     else if (cPtr.TileFlags.IsSet(GridTile.PlayerLit))
                     {
                         if (feat.YellowInTorchlight)
                         {
-                            a = ColourEnum.Yellow;
+                            a = ColorEnum.Yellow;
                         }
                     }
                     else
                     {
                         if (cPtr.TileFlags.IsClear(GridTile.IsVisible))
                         {
-                            a = DimColour(a);
+                            a = DimColor(a);
                         }
                         else if (cPtr.TileFlags.IsClear(GridTile.SelfLit))
                         {
-                            a = DimColour(a);
+                            a = DimColor(a);
                         }
                         else
                         {
@@ -18058,7 +18058,7 @@ internal class SaveGame
                             int xx = x < MapX ? x + 1 : x > MapX ? x - 1 : x;
                             if (Grid[yy][xx].TileFlags.IsClear(GridTile.SelfLit))
                             {
-                                a = DimColour(a);
+                                a = DimColor(a);
                             }
                         }
                     }
@@ -18066,7 +18066,7 @@ internal class SaveGame
             }
             else
             {
-                a = SingletonRepository.Tiles.Get("Nothing").Colour;
+                a = SingletonRepository.Tiles.Get("Nothing").Color;
                 c = SingletonRepository.Tiles.Get("Nothing").Symbol.Character;
             }
         }
@@ -18084,7 +18084,7 @@ internal class SaveGame
             if (oPtr.Marked)
             {
                 cp = oPtr.Factory.FlavorSymbol.Character;
-                ap = oPtr.Factory.FlavorColour;
+                ap = oPtr.Factory.FlavorColor;
                 if (TimedHallucinations.TurnsRemaining != 0)
                 {
                     ImageObject(out ap, out cp);
@@ -18098,7 +18098,7 @@ internal class SaveGame
             if (mPtr.IsVisible)
             {
                 MonsterRace rPtr = mPtr.Race;
-                a = rPtr.Colour;
+                a = rPtr.Color;
                 c = rPtr.Symbol.Character;
                 if (rPtr.AttrMulti)
                 {
@@ -18114,38 +18114,38 @@ internal class SaveGame
                     }
                     if (rPtr.AttrAny)
                     {
-                        ap = (ColourEnum)Rng.DieRoll(15);
+                        ap = (ColorEnum)Rng.DieRoll(15);
                     }
                     else
                     {
                         switch (Rng.DieRoll(7))
                         {
                             case 1:
-                                ap = ColourEnum.Red;
+                                ap = ColorEnum.Red;
                                 break;
 
                             case 2:
-                                ap = ColourEnum.BrightRed;
+                                ap = ColorEnum.BrightRed;
                                 break;
 
                             case 3:
-                                ap = ColourEnum.White;
+                                ap = ColorEnum.White;
                                 break;
 
                             case 4:
-                                ap = ColourEnum.BrightGreen;
+                                ap = ColorEnum.BrightGreen;
                                 break;
 
                             case 5:
-                                ap = ColourEnum.Blue;
+                                ap = ColorEnum.Blue;
                                 break;
 
                             case 6:
-                                ap = ColourEnum.Black;
+                                ap = ColorEnum.Black;
                                 break;
 
                             case 7:
-                                ap = ColourEnum.Green;
+                                ap = ColorEnum.Green;
                                 break;
                         }
                     }
@@ -18175,7 +18175,7 @@ internal class SaveGame
         if (y == MapY && x == MapX)
         {
             MonsterRace rPtr = SingletonRepository.MonsterRaces[0];
-            a = rPtr.Colour;
+            a = rPtr.Color;
             c = rPtr.Symbol.Character;
             ap = a;
             cp = c;

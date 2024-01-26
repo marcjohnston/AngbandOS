@@ -20,12 +20,12 @@ internal class WartSkinPassiveMutation : Mutation
     public override void OnGain(Genome genome)
     {
         genome.CharismaBonus -= 2;
-        genome.ArmourClassBonus += 5;
+        genome.ArmorClassBonus += 5;
     }
 
     public override void OnLose(Genome genome)
     {
         genome.CharismaBonus += 2;
-        genome.ArmourClassBonus -= 5;
+        genome.ArmorClassBonus -= 5;
     }
 }

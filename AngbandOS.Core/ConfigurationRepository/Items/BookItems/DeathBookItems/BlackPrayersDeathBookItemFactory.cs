@@ -13,7 +13,7 @@ internal class BlackPrayersDeathBookItemFactory : DeathBookItemFactory
     private BlackPrayersDeathBookItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(QuestionMarkSymbol));
-    public override ColourEnum Colour => ColourEnum.Grey;
+    public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "[Black Prayers]";
 
     public override int[] Chance => new int[] { 1, 0, 0, 0 };

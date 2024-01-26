@@ -17,7 +17,7 @@ internal abstract class LightSourceItemFactory : ItemFactory
     public override int PackSort => 18;
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Light;
     public override bool HatesFire => true;
-    public override ColourEnum Colour => ColourEnum.BrightYellow;
+    public override ColorEnum Color => ColorEnum.BrightYellow;
 
     public virtual void Refill(SaveGame saveGame, Item item)
     {

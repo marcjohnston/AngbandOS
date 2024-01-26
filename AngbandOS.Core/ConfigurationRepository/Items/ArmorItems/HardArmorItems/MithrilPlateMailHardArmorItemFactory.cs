@@ -13,7 +13,7 @@ internal class MithrilPlateMailHardArmorItemFactory : HardArmorItemFactory
     private MithrilPlateMailHardArmorItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(OpenBraceSymbol));
-    public override ColourEnum Colour => ColourEnum.BrightBlue;
+    public override ColorEnum Color => ColorEnum.BrightBlue;
     public override string Name => "Mithril Plate Mail";
 
     public override int Ac => 35;

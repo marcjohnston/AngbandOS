@@ -15,6 +15,6 @@ internal abstract class ChaosBookItemFactory : BookItemFactory
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.ChaosBook;
     public override int PackSort => 5;
     public override bool HatesFire => true;
-    public override ColourEnum Colour => ColourEnum.BrightRed;
+    public override ColorEnum Color => ColorEnum.BrightRed;
     public override Realm? ToRealm => SaveGame.SingletonRepository.Realms.Get(nameof(ChaosRealm));
 }

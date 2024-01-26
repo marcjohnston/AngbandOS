@@ -52,7 +52,7 @@ internal class MonkCharacterClass : BaseCharacterClass
     }
     public override int PrimeStat => Ability.Dexterity;
     public override string[] Info => new string[] {
-        "Masters of unarmed combat. While wearing only light armour",
+        "Masters of unarmed combat. While wearing only light armor",
         "they can move faster and dodge blows and can learn to",
         "resist paralysis (at lvl 25). While not wielding a weapon",
         "they have extra attacks and do increased damage. They are",

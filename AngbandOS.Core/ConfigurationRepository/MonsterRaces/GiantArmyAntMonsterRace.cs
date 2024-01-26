@@ -13,16 +13,16 @@ internal class GiantArmyAntMonsterRace : MonsterRace
     protected GiantArmyAntMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerASymbol));
-    public override ColourEnum Colour => ColourEnum.Orange;
+    public override ColorEnum Color => ColorEnum.Orange;
     public override string Name => "Giant army ant";
 
     public override bool Animal => true;
-    public override int ArmourClass => 40;
+    public override int ArmorClass => 40;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
         new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 2, 12),
     };
     public override bool BashDoor => true;
-    public override string Description => "An armoured form moving with purpose. Powerful on its own, flee when hordes of them march.";
+    public override string Description => "An armored form moving with purpose. Powerful on its own, flee when hordes of them march.";
     public override int FreqInate => 0;
     public override int FreqSpell => 0;
     public override string FriendlyName => "Giant army ant";

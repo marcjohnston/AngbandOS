@@ -21,10 +21,10 @@ internal class NightwalkerMonsterRace : MonsterRace
         SaveGame.SingletonRepository.MonsterSpells.Get(nameof(ScareMonsterSpell)),
         SaveGame.SingletonRepository.MonsterSpells.Get(nameof(SummonUndeadMonsterSpell)));
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerZSymbol));
-    public override ColourEnum Colour => ColourEnum.Black;
+    public override ColorEnum Color => ColorEnum.Black;
     public override string Name => "Nightwalker";
 
-    public override int ArmourClass => 175;
+    public override int ArmorClass => 175;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
         new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(UnBonusAttackEffect)), 10, 10),
         new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(UnBonusAttackEffect)), 10, 10),
@@ -33,7 +33,7 @@ internal class NightwalkerMonsterRace : MonsterRace
     };
     public override bool BashDoor => true;
     public override bool ColdBlood => true;
-    public override string Description => "A huge giant garbed in black, more massive than a titan and stronger than a dragon. With terrible blows, it breaks your armour from your back, leaving you defenseless against its evil wrath. It can smell your fear, and you in turn smell the awful stench of death as this ghastly figure strides towards you menacingly.";
+    public override string Description => "A huge giant garbed in black, more massive than a titan and stronger than a dragon. With terrible blows, it breaks your armor from your back, leaving you defenseless against its evil wrath. It can smell your fear, and you in turn smell the awful stench of death as this ghastly figure strides towards you menacingly.";
     public override bool Drop_4D2 => true;
     public override bool DropGood => true;
     public override bool Evil => true;

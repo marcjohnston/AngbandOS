@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Mutations;
 internal class Genome // TODO: This is just a container
 {
     public readonly List<Mutation> NaturalAttacks = new List<Mutation>();
-    public int ArmourClassBonus;
+    public int ArmorClassBonus;
     public bool ChaosGift;
     public int CharismaBonus;
     public bool CharismaOverride;

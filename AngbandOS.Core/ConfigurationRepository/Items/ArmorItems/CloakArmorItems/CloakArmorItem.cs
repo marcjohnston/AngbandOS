@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Items;
 
 [Serializable]
-internal abstract class CloakArmorItem : ArmourItem
+internal abstract class CloakArmorItem : ArmorItem
 {
     public override int WieldSlot => InventorySlot.Cloak;
     public CloakArmorItem(SaveGame saveGame, ItemFactory itemClass) : base(saveGame, itemClass) { }
@@ -45,7 +45,7 @@ internal abstract class CloakArmorItem : ArmourItem
     {
         if (power != 0)
         {
-            // Apply the standard armour characteristics.
+            // Apply the standard armor characteristics.
             base.ApplyMagic(level, power, null);
 
             if (power > 1)

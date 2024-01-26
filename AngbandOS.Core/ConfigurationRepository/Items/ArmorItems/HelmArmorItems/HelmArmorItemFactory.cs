@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.ItemClasses;
 
 [Serializable]
-internal abstract class HelmArmorItemFactory : ArmourItemFactory
+internal abstract class HelmArmorItemFactory : ArmorItemFactory
 {
     public HelmArmorItemFactory(SaveGame saveGame) : base(saveGame) { }
     public override ItemClass ItemClass => SaveGame.SingletonRepository.ItemClasses.Get(nameof(HelmsItemClass));
@@ -17,6 +17,6 @@ internal abstract class HelmArmorItemFactory : ArmourItemFactory
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Helm;
     public override bool HatesAcid => true;
 
-    public override ColourEnum Colour => ColourEnum.BrightBrown;
+    public override ColorEnum Color => ColorEnum.BrightBrown;
     public override bool CanReflectBoltsAndArrows => true;
 }

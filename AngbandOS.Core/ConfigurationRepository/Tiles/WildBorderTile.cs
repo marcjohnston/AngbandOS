@@ -12,7 +12,7 @@ internal class WildBorderTile : Tile
 {
     private WildBorderTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(PeriodSymbol));
-    public override ColourEnum Colour => ColourEnum.BrightGreen;
+    public override ColorEnum Color => ColorEnum.BrightGreen;
     public override string Name => "WildBorder";
     public override string AppearAs => "Grass";
     public override bool BlocksLos => true;

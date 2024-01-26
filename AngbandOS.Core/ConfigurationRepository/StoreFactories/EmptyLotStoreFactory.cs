@@ -18,7 +18,7 @@ internal class EmptyLotStoreFactory : StoreFactory
     };
 
     public override string FeatureType => "";
-    public override ColourEnum Colour => ColourEnum.White;
+    public override ColorEnum Color => ColorEnum.White;
     protected override string SymbolName => nameof(SpaceBarSymbol);
 
     /// <summary>

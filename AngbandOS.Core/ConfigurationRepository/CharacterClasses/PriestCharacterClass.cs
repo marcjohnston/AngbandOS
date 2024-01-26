@@ -47,7 +47,7 @@ internal class PriestCharacterClass : BaseCharacterClass
         "Devout followers of the Great Ones, Priests use WIS based",
         "spell casting. They may choose either Life or Death magic,",
         "and another realm of their choice. Priests can't use edged",
-        "weapons unless they are blessed, but can use any armour."
+        "weapons unless they are blessed, but can use any armor."
     };
     public override int SpellWeight => 350;
     public override CastingType SpellCastingType => SaveGame.SingletonRepository.CastingTypes.Get(nameof(DivineCastingType));

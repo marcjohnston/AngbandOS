@@ -8,12 +8,12 @@
 namespace AngbandOS.Core.RareItems;
 
 [Serializable]
-internal class ArmourOfResistanceRareItem : RareItem
+internal class ArmorOfResistanceRareItem : RareItem
 {
-    private ArmourOfResistanceRareItem(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private ArmorOfResistanceRareItem(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(OpenBraceSymbol));
-    public override ColourEnum Colour => ColourEnum.Grey;
-    public override string Name => "Armour of Resistance";
+    public override ColorEnum Color => ColorEnum.Grey;
+    public override string Name => "Armor of Resistance";
     public override int Cost => 12500;
     public override string FriendlyName => "of Resistance";
     public override bool IgnoreAcid => true;
@@ -25,7 +25,7 @@ internal class ArmourOfResistanceRareItem : RareItem
     public override int MaxToA => 10;
     public override int MaxToD => 0;
     public override int MaxToH => 0;
-    public override RareItemTypeEnum RareItemType => RareItemTypeEnum.ArmourOfResistance;
+    public override RareItemTypeEnum RareItemType => RareItemTypeEnum.ArmorOfResistance;
     public override int Rarity => 0;
     public override int Rating => 20;
     public override bool ResAcid => true;

@@ -31,7 +31,7 @@ internal class WrathReward : Reward
         }
         if (SaveGame.Rng.DieRoll(2) == 1)
         {
-            SaveGame.CurseArmour();
+            SaveGame.CurseArmor();
         }
     }
 }

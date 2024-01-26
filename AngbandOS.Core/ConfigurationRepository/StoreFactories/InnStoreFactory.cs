@@ -45,7 +45,7 @@ internal class InnStoreFactory : StoreFactory
     };
 
     public override string FeatureType => "Inn";
-    public override ColourEnum Colour => ColourEnum.Purple;
+    public override ColorEnum Color => ColorEnum.Purple;
     protected override string SymbolName => nameof(AmpersandSymbol);
 
     /// <summary>

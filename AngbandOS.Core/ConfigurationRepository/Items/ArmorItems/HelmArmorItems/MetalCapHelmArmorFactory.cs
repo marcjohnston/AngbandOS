@@ -13,7 +13,7 @@ internal class MetalCapHelmArmorFactory : HelmArmorItemFactory
     private MetalCapHelmArmorFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(CloseBraceSymbol));
-    public override ColourEnum Colour => ColourEnum.Grey;
+    public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "Metal Cap";
 
     public override int Ac => 3;

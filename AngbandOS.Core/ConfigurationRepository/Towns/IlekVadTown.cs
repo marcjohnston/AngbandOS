@@ -14,7 +14,7 @@ internal class IlekVadTown : Town
 
     protected override string[] StoreFactoryNames => new string[] {
         nameof(GeneralStoreFactory),
-        nameof(ArmouryStoreFactory),
+        nameof(ArmoryStoreFactory),
         nameof(WeaponStoreFactory),
         nameof(TempleStoreFactory),
         nameof(AlchemistStoreFactory),

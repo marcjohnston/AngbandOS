@@ -12,7 +12,7 @@ internal class HatOfTelepathyRareItem : RareItem
 {
     private HatOfTelepathyRareItem(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(CloseBraceSymbol));
-    public override ColourEnum Colour => ColourEnum.Brown;
+    public override ColorEnum Color => ColorEnum.Brown;
     public override string Name => "Hat of Telepathy";
     public override int Cost => 50000;
     public override string FriendlyName => "of Telepathy";

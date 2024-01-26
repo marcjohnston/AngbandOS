@@ -16,6 +16,6 @@ internal abstract class NatureBookItemFactory : BookItemFactory
 
     public override int PackSort => 6;
     public override bool HatesFire => true;
-    public override ColourEnum Colour => ColourEnum.BrightGreen;
+    public override ColorEnum Color => ColorEnum.BrightGreen;
     public override Realm? ToRealm => SaveGame.SingletonRepository.Realms.Get(nameof(NatureRealm));
 }

@@ -14,6 +14,6 @@ internal class WhiteExpandAnimation : Animation
     public override char Character => '*';
     public override string Name => "WhiteExpand";
     public override string Sequence => @"·oO";
-    public override ColourEnum Colour => ColourEnum.White;
-    public override ColourEnum AlternateColour => ColourEnum.White;
+    public override ColorEnum Color => ColorEnum.White;
+    public override ColorEnum AlternateColor => ColorEnum.White;
 }

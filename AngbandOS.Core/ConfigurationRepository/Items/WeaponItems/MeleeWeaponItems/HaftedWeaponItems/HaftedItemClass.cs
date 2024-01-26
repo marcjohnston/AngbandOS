@@ -17,7 +17,7 @@ internal abstract class HaftedItemClass : MeleeWeaponItemClass
     public override bool HatesFire => true;
     public override bool HatesAcid => true;
 
-    public override ColourEnum Colour => ColourEnum.BrightWhite;
+    public override ColorEnum Color => ColorEnum.BrightWhite;
 
 
 }

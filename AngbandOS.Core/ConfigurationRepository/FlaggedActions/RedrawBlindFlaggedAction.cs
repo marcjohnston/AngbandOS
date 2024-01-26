@@ -17,7 +17,7 @@ internal class RedrawBlindFlaggedAction : FlaggedAction
     {
         if (SaveGame.TimedBlindness.TurnsRemaining > 0)
         {
-            SaveGame.Screen.Print(ColourEnum.Orange, "Blind", RowBlind, ColBlind);
+            SaveGame.Screen.Print(ColorEnum.Orange, "Blind", RowBlind, ColBlind);
         }
         else
         {

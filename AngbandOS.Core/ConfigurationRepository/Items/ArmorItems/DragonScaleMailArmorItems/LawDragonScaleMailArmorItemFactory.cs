@@ -14,7 +14,7 @@ internal class LawDragonScaleMailArmorItemFactory : DragonScaleMailArmorItemFact
 
     public override string? DescribeActivationEffect => "breathe sound/shards (230) every 300+d300 turns";
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(OpenBraceSymbol));
-    public override ColourEnum Colour => ColourEnum.Grey;
+    public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "Law Dragon Scale Mail";
 
     public override int Ac => 30;

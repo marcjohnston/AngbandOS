@@ -13,7 +13,7 @@ internal class InganokTown : Town
     private InganokTown(SaveGame saveGame) : base(saveGame) { }
     protected override string[] StoreFactoryNames => new string[] {
         nameof(GeneralStoreFactory),
-        nameof(ArmouryStoreFactory),
+        nameof(ArmoryStoreFactory),
         nameof(WeaponStoreFactory),
         nameof(TempleStoreFactory),
         nameof(AlchemistStoreFactory),

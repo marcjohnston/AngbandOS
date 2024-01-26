@@ -13,7 +13,7 @@ internal class WoodenArrowAmmunitionItemFactory : ArrowAmmunitionItemFactory
     private WoodenArrowAmmunitionItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(OpenBracketSymbol));
-    public override ColourEnum Colour => ColourEnum.BrightBrown;
+    public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "Arrow";
 
     public override int[] Chance => new int[] { 1, 1, 0, 0 };

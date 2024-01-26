@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ColourEnum } from '../modules/colour-enum/colour-enum.module';
+import { ColorEnum } from '../modules/color-enum/color-enum.module';
 import { StringDesignerPropertyDataType } from './api/string-designer-property-data-type';
 import { BooleanDesignerPropertyDataType } from './api/boolean-designer-property-data-type';
 import { ColorDesignerPropertyDataType } from './api/color-designer-property-data-type';
@@ -52,7 +52,7 @@ export class GameDesignerComponent implements OnInit {
 export class SampleData {
   public text: string | undefined = "sample text";
   public bool: boolean | undefined = false;
-  public color: ColourEnum | undefined = ColourEnum.Blue;
+  public color: ColorEnum | undefined = ColorEnum.Blue;
   public diceRoll: IRandom | undefined = {
     dice: 2,
     sides: 4,

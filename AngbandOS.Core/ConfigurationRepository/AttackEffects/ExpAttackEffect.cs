@@ -14,7 +14,7 @@ internal abstract class ExpAttackEffect : AttackEffect
     protected abstract int HoldLifePercentChange { get; }
     protected abstract int DiceCount { get; }
 
-    public override void ApplyToPlayer(int monsterLevel, int monsterIndex, int armourClass, string monsterDescription, Monster monster, ref bool obvious, ref int damage, ref bool blinked)
+    public override void ApplyToPlayer(int monsterLevel, int monsterIndex, int armorClass, string monsterDescription, Monster monster, ref bool obvious, ref int damage, ref bool blinked)
     {
         obvious = true;
         SaveGame.TakeHit(damage, monsterDescription);
@@ -42,7 +42,7 @@ internal abstract class ExpAttackEffect : AttackEffect
             }
         }
     }
-    public override void ApplyToMonster(Monster monster, int armourClass, ref int damage, ref Projectile? pt, ref bool blinked)
+    public override void ApplyToMonster(Monster monster, int armorClass, ref int damage, ref Projectile? pt, ref bool blinked)
     {
         pt = SaveGame.SingletonRepository.Projectiles.Get(nameof(NetherProjectile));
     }

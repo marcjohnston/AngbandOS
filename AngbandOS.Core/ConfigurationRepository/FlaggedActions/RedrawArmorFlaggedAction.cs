@@ -16,7 +16,7 @@ internal class RedrawArmorFlaggedAction : FlaggedAction
     protected override void Execute()
     {
         SaveGame.Screen.Print("Cur AC ", RowAc, ColAc);
-        string tmp = (SaveGame.DisplayedBaseArmourClass + SaveGame.DisplayedArmourClassBonus).ToString().PadLeft(5);
-        SaveGame.Screen.Print(ColourEnum.BrightGreen, tmp, RowAc, ColAc + 7);
+        string tmp = (SaveGame.DisplayedBaseArmorClass + SaveGame.DisplayedArmorClassBonus).ToString().PadLeft(5);
+        SaveGame.Screen.Print(ColorEnum.BrightGreen, tmp, RowAc, ColAc + 7);
     }
 }

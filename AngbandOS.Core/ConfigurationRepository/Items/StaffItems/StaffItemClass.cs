@@ -38,5 +38,5 @@ internal abstract class StaffItemClass : ItemFactory, IFlavour
     public override bool HatesAcid => true;
 
     //public override bool IsCharged => true;
-    public override ColourEnum Colour => ColourEnum.Purple;
+    public override ColorEnum Color => ColorEnum.Purple;
 }

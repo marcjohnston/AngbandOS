@@ -74,7 +74,7 @@ internal abstract class MonsterRace : IMonsterCharacteristics, IGetKey<string>
     /// <summary>
     /// The color to display the monster as.
     /// </summary>
-    public virtual ColourEnum Colour => ColourEnum.White;
+    public virtual ColorEnum Color => ColorEnum.White;
 
     /// <summary>
     /// A unique identifier for the entity
@@ -87,9 +87,9 @@ internal abstract class MonsterRace : IMonsterCharacteristics, IGetKey<string>
     public virtual bool Animal => false;
 
     /// <summary>
-    /// The monsters armour class.
+    /// The monsters armor class.
     /// </summary>
-    public abstract int ArmourClass { get; }
+    public abstract int ArmorClass { get; }
 
     /// <summary>
     /// Returns all of the attacks that the monster can perform in a single round.
@@ -97,7 +97,7 @@ internal abstract class MonsterRace : IMonsterCharacteristics, IGetKey<string>
     public virtual MonsterAttack[]? Attacks => null;
 
     /// <summary>
-    /// The monster's colour can be anything (if 'AttrMulti' is set).
+    /// The monster's color can be anything (if 'AttrMulti' is set).
     /// </summary>
     public virtual bool AttrAny => false;
 
@@ -107,7 +107,7 @@ internal abstract class MonsterRace : IMonsterCharacteristics, IGetKey<string>
     public virtual bool AttrClear => false;
 
     /// <summary>
-    /// The monster changes colour.
+    /// The monster changes color.
     /// </summary>
     public virtual bool AttrMulti => false;
 

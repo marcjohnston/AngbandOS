@@ -8,10 +8,10 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class HalberdArmourbaneFixedArtifact : FixedArtifact
+internal class HalberdArmorbaneFixedArtifact : FixedArtifact
 {
     private ItemFactory _baseItemCategory;
-    private HalberdArmourbaneFixedArtifact(SaveGame saveGame) : base(saveGame) { }
+    private HalberdArmorbaneFixedArtifact(SaveGame saveGame) : base(saveGame) { }
 
     public override void Bind()
     {
@@ -22,8 +22,8 @@ internal class HalberdArmourbaneFixedArtifact : FixedArtifact
     public override ItemFactory BaseItemCategory => _baseItemCategory;
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(ForwardSlashSymbol));
-    public override ColourEnum Colour => ColourEnum.Grey;
-    public override string Name => "The Halberd 'Armourbane'";
+    public override ColorEnum Color => ColorEnum.Grey;
+    public override string Name => "The Halberd 'Armorbane'";
     public override int Ac => 0;
     public override bool BrandFire => true;
     public override bool Cha => true;
@@ -31,7 +31,7 @@ internal class HalberdArmourbaneFixedArtifact : FixedArtifact
     public override int Dd => 3;
     public override int Ds => 5;
     public override bool Feather => true;
-    public override string FriendlyName => "'Armourbane'";
+    public override string FriendlyName => "'Armorbane'";
     public override bool HideType => true;
     public override bool IgnoreAcid => true;
     public override bool IgnoreCold => true;

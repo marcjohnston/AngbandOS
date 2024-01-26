@@ -22,7 +22,7 @@ internal class SteelHelmOfHammerhandFixedArtifact : FixedArtifact
     public override ItemFactory BaseItemCategory => _baseItemCategory;
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(CloseBraceSymbol));
-    public override ColourEnum Colour => ColourEnum.BrightWhite;
+    public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "The Steel Helm of Hammerhand";
     public override int Ac => 6;
     public override bool Con => true;

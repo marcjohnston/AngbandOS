@@ -34,7 +34,7 @@ internal abstract class Flavour : IGetKey<string>
     /// <summary>
     /// The color to use for the visual.
     /// </summary>
-    public virtual ColourEnum Colour => ColourEnum.White;
+    public virtual ColorEnum Color => ColorEnum.White;
 
     /// <summary>
     /// A unique identifier for the inscription.

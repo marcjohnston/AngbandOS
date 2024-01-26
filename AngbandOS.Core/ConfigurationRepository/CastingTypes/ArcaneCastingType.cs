@@ -20,7 +20,7 @@ internal class ArcaneCastingType : CastingType
     public override bool CoveredHandsRestrictCasting => true;
 
     /// <summary>
-    /// Returns true, because arcane spell casting movement can be encumbered by the spell weight of the players armour.
+    /// Returns true, because arcane spell casting movement can be encumbered by the spell weight of the players armor.
     /// </summary>
     public override bool WeightEncumbersMovement => true;
 }

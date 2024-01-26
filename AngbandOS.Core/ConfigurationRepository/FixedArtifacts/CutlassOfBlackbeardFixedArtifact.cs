@@ -22,7 +22,7 @@ internal class CutlassOfBlackbeardFixedArtifact : FixedArtifact
     public override ItemFactory BaseItemCategory => _baseItemCategory;
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(VerticalBarSymbol));
-    public override ColourEnum Colour => ColourEnum.BrightWhite;
+    public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "The Cutlass of Blackbeard";
     public override int Ac => 0;
     public override int Cost => 28000;

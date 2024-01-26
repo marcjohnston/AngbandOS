@@ -14,7 +14,7 @@ internal class PseudoDragonScaleMailArmorItemFactory : DragonScaleMailArmorItemF
 
     public override string? DescribeActivationEffect => "breathe light/darkness (200) every 300+d300 turns";
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(OpenBraceSymbol));
-    public override ColourEnum Colour => ColourEnum.Pink;
+    public override ColorEnum Color => ColorEnum.Pink;
     public override string Name => "Pseudo Dragon Scale Mail";
 
     public override int Ac => 30;

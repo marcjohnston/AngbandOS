@@ -24,59 +24,59 @@ internal class RedrawHealthFlaggedAction : FlaggedAction
         }
         else if (!SaveGame.Monsters[SaveGame.TrackedMonsterIndex].IsVisible)
         {
-            SaveGame.Screen.Print(ColourEnum.White, "[----------]", RowInfo, ColInfo);
+            SaveGame.Screen.Print(ColorEnum.White, "[----------]", RowInfo, ColInfo);
         }
         else if (SaveGame.TimedHallucinations.TurnsRemaining != 0)
         {
-            SaveGame.Screen.Print(ColourEnum.White, "[----------]", RowInfo, ColInfo);
+            SaveGame.Screen.Print(ColorEnum.White, "[----------]", RowInfo, ColInfo);
         }
         else if (SaveGame.Monsters[SaveGame.TrackedMonsterIndex].Health < 0)
         {
-            SaveGame.Screen.Print(ColourEnum.White, "[----------]", RowInfo, ColInfo);
+            SaveGame.Screen.Print(ColorEnum.White, "[----------]", RowInfo, ColInfo);
         }
         else
         {
             Monster mPtr = SaveGame.Monsters[SaveGame.TrackedMonsterIndex];
-            ColourEnum attr = ColourEnum.Red;
+            ColorEnum attr = ColorEnum.Red;
             string smb = "**********";
             int pct = 100 * mPtr.Health / mPtr.MaxHealth;
             if (pct >= 10)
             {
-                attr = ColourEnum.BrightRed;
+                attr = ColorEnum.BrightRed;
             }
             if (pct >= 25)
             {
-                attr = ColourEnum.Orange;
+                attr = ColorEnum.Orange;
             }
             if (pct >= 60)
             {
-                attr = ColourEnum.Yellow;
+                attr = ColorEnum.Yellow;
             }
             if (pct >= 100)
             {
-                attr = ColourEnum.BrightGreen;
+                attr = ColorEnum.BrightGreen;
             }
             if (mPtr.FearLevel != 0)
             {
-                attr = ColourEnum.Purple;
+                attr = ColorEnum.Purple;
                 smb = "AFRAID****";
             }
             if (mPtr.SleepLevel != 0)
             {
-                attr = ColourEnum.Blue;
+                attr = ColorEnum.Blue;
                 smb = "SLEEPING**";
             }
             if (mPtr.SmFriendly)
             {
-                attr = ColourEnum.BrightBrown;
+                attr = ColorEnum.BrightBrown;
                 smb = "FRIENDLY**";
             }
             int len = pct < 10 ? 1 : pct < 90 ? (pct / 10) + 1 : 10;
-            SaveGame.Screen.Print(ColourEnum.White, "[----------]", RowInfo, ColInfo);
+            SaveGame.Screen.Print(ColorEnum.White, "[----------]", RowInfo, ColInfo);
             SaveGame.Screen.Print(attr, smb.Substring(0, len), RowInfo, ColInfo + 1);
-            SaveGame.Screen.Print(ColourEnum.White, mPtr.Race.SplitName1, RowInfo - 3, ColInfo);
-            SaveGame.Screen.Print(ColourEnum.White, mPtr.Race.SplitName2, RowInfo - 2, ColInfo);
-            SaveGame.Screen.Print(ColourEnum.White, mPtr.Race.SplitName3, RowInfo - 1, ColInfo);
+            SaveGame.Screen.Print(ColorEnum.White, mPtr.Race.SplitName1, RowInfo - 3, ColInfo);
+            SaveGame.Screen.Print(ColorEnum.White, mPtr.Race.SplitName2, RowInfo - 2, ColInfo);
+            SaveGame.Screen.Print(ColorEnum.White, mPtr.Race.SplitName3, RowInfo - 1, ColInfo);
         }
     }
 }

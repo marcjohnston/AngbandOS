@@ -13,7 +13,7 @@ internal class UnPowerAttackEffect : AttackEffect
     private UnPowerAttackEffect(SaveGame saveGame) : base(saveGame) { }
     public override int Power => 15;
     public override string Description => "drain charges";
-    public override void ApplyToPlayer(int monsterLevel, int monsterIndex, int armourClass, string monsterDescription, Monster monster, ref bool obvious, ref int damage, ref bool blinked)
+    public override void ApplyToPlayer(int monsterLevel, int monsterIndex, int armorClass, string monsterDescription, Monster monster, ref bool obvious, ref int damage, ref bool blinked)
     {
         // Unpower might drain charges from our items
         SaveGame.TakeHit(damage, monsterDescription);
@@ -42,7 +42,7 @@ internal class UnPowerAttackEffect : AttackEffect
             }
         }
     }
-    public override void ApplyToMonster(Monster monster, int armourClass, ref int damage, ref Projectile? pt, ref bool blinked)
+    public override void ApplyToMonster(Monster monster, int armorClass, ref int damage, ref Projectile? pt, ref bool blinked)
     {
         pt = SaveGame.SingletonRepository.Projectiles.Get(nameof(DisenchantProjectile));
     }

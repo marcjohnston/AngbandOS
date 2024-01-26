@@ -55,7 +55,7 @@ internal class MessagesScript : Script, IScript, IRepeatableScript, IStoreScript
             {
                 string msg = SaveGame.GetMessageText((short)(index + row));
                 msg = msg.Length >= horizontalOffset ? msg.Substring(horizontalOffset) : "";
-                SaveGame.Screen.Print(ColourEnum.White, msg, 41 - row, 0);
+                SaveGame.Screen.Print(ColorEnum.White, msg, 41 - row, 0);
             }
 
             // Get a command

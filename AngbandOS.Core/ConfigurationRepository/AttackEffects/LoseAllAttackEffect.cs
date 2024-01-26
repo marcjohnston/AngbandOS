@@ -13,7 +13,7 @@ internal class LoseAllAttackEffect : AttackEffect
     private LoseAllAttackEffect(SaveGame saveGame) : base(saveGame) { }
     public override int Power => 2;
     public override string Description => "reduce all stats";
-    public override void ApplyToPlayer(int monsterLevel, int monsterIndex, int armourClass, string monsterDescription, Monster monster, ref bool obvious, ref int damage, ref bool blinked)
+    public override void ApplyToPlayer(int monsterLevel, int monsterIndex, int armorClass, string monsterDescription, Monster monster, ref bool obvious, ref int damage, ref bool blinked)
     {
         // Try to decrease all six ability scores
         SaveGame.TakeHit(damage, monsterDescription);

@@ -16,7 +16,7 @@ internal class IntroductionBirthStage : BirthStage
     public override BirthStage? Render()
     {
         string[]? menuItems = GetMenu();
-        SaveGame.Screen.Print(ColourEnum.Orange, "[Use up and down to select an option, right to confirm, or left to go back.]", 43, 1);
+        SaveGame.Screen.Print(ColorEnum.Orange, "[Use up and down to select an option, right to confirm, or left to go back.]", 43, 1);
         while (!SaveGame.Shutdown)
         {
             SaveGame.MenuDisplay(currentSelection, menuItems);
@@ -69,17 +69,17 @@ internal class IntroductionBirthStage : BirthStage
         switch (index)
         {
             case 0:
-                SaveGame.Screen.Print(ColourEnum.Purple, "Choose your character's race, sex, and class; and select", 35, 20);
-                SaveGame.Screen.Print(ColourEnum.Purple, "which realms of magic your character will use.", 36, 20);
+                SaveGame.Screen.Print(ColorEnum.Purple, "Choose your character's race, sex, and class; and select", 35, 20);
+                SaveGame.Screen.Print(ColorEnum.Purple, "which realms of magic your character will use.", 36, 20);
                 break;
 
             case 1:
-                SaveGame.Screen.Print(ColourEnum.Purple, "Let the game generate a character for you randomly.", 35, 20);
+                SaveGame.Screen.Print(ColorEnum.Purple, "Let the game generate a character for you randomly.", 35, 20);
                 break;
 
             case 2:
-                SaveGame.Screen.Print(ColourEnum.Purple, "Re-play with a character similar to the one you played", 35, 20);
-                SaveGame.Screen.Print(ColourEnum.Purple, "last time.", 36, 20);
+                SaveGame.Screen.Print(ColorEnum.Purple, "Re-play with a character similar to the one you played", 35, 20);
+                SaveGame.Screen.Print(ColorEnum.Purple, "last time.", 36, 20);
                 break;
         }
         return true;

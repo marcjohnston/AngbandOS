@@ -8,9 +8,9 @@
 namespace AngbandOS.Core.MonsterRaces;
 
 [Serializable]
-internal class SarumanOfManyColoursMonsterRace : MonsterRace
+internal class SarumanOfManyColorsMonsterRace : MonsterRace
 {
-    protected SarumanOfManyColoursMonsterRace(SaveGame saveGame) : base(saveGame) { }
+    protected SarumanOfManyColorsMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
         SaveGame.SingletonRepository.MonsterSpells.Get(nameof(AcidBallMonsterSpell)),
@@ -33,10 +33,10 @@ internal class SarumanOfManyColoursMonsterRace : MonsterRace
         SaveGame.SingletonRepository.MonsterSpells.Get(nameof(TeleportAwayMonsterSpell)),
         SaveGame.SingletonRepository.MonsterSpells.Get(nameof(TeleportSelfMonsterSpell)));
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerPSymbol));
-    public override ColourEnum Colour => ColourEnum.Purple;
-    public override string Name => "Saruman of Many Colours";
+    public override ColorEnum Color => ColorEnum.Purple;
+    public override string Name => "Saruman of Many Colors";
 
-    public override int ArmourClass => 100;
+    public override int ArmorClass => 100;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
         new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(UnBonusAttackEffect)), 6, 8),
         new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(UnBonusAttackEffect)), 6, 8),
@@ -55,7 +55,7 @@ internal class SarumanOfManyColoursMonsterRace : MonsterRace
     public override bool ForceSleep => true;
     public override int FreqInate => 2;
     public override int FreqSpell => 2;
-    public override string FriendlyName => "Saruman of Many Colours";
+    public override string FriendlyName => "Saruman of Many Colors";
     public override int Hdice => 50;
     public override int Hside => 100;
     public override bool ImmuneCold => true;
@@ -78,6 +78,6 @@ internal class SarumanOfManyColoursMonsterRace : MonsterRace
     public override int Speed => 120;
     public override string SplitName1 => "  Saruman   ";
     public override string SplitName2 => "  of Many   ";
-    public override string SplitName3 => "  Colours   ";
+    public override string SplitName3 => "  Colors   ";
     public override bool Unique => true;
 }

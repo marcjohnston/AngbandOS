@@ -1,4 +1,4 @@
-export enum ColourEnum {
+export enum ColorEnum {
   Background = 0,
   Black = 1,
   Grey = 2,

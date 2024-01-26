@@ -13,7 +13,7 @@ internal class HaftedQuarterstaff : HaftedItemClass
     private HaftedQuarterstaff(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(BackSlashSymbol));
-    public override ColourEnum Colour => ColourEnum.BrightBrown;
+    public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "Quarterstaff";
 
     public override int[] Chance => new int[] { 1, 0, 0, 0 };

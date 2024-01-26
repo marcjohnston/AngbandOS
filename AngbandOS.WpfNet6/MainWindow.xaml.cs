@@ -31,7 +31,7 @@ public partial class MainWindow : Window, IConsoleViewPort
     public TextBlock[][] Cells = new TextBlock[45][];
     private BackgroundImageEnum _backgroundImage = BackgroundImageEnum.None;
     public Mixer Mixer = new Mixer();
-    private string[] coloursMap = new string[32];
+    private string[] colorsMap = new string[32];
     private BackgroundWorker thread = new BackgroundWorker();
 
     public int ViewPortHeight => 45;
@@ -72,7 +72,7 @@ public partial class MainWindow : Window, IConsoleViewPort
         {
             if (Mixer.SoundVolume > 0)
             {
-                Color backColor = FromHex(coloursMap[(int)ColourEnum.Background]);
+                Color backColor = FromHex(colorsMap[(int)ColorEnum.Background]);
                 foreach (TextBlock[] line in Cells)
                 {
                     foreach (TextBlock textBlock in line)
@@ -90,14 +90,14 @@ public partial class MainWindow : Window, IConsoleViewPort
         Dispatcher.Invoke(new Action(() =>
         {
             foreach (PrintLine printLine in printLines)
-                Print(printLine.row, printLine.col, printLine.text, printLine.foreColour, printLine.backColour);
+                Print(printLine.row, printLine.col, printLine.text, printLine.foreColor, printLine.backColor);
         }));
     }
 
-    private void Print(int row, int col, string text, ColourEnum foreColour, ColourEnum backColour)
+    private void Print(int row, int col, string text, ColorEnum foreColor, ColorEnum backColor)
     {
-        Color foreColor = FromHex(coloursMap[(int)foreColour]);
-        Color backColor = FromHex(coloursMap[(int)backColour]);
+        Color mappedForeColor = FromHex(colorsMap[(int)foreColor]);
+        Color mappedBackColor = FromHex(colorsMap[(int)backColor]);
         foreach (char c in text)
         {
             if (row >= 0 && row < ViewPortHeight && col >= 0 && col < 80)
@@ -108,8 +108,8 @@ public partial class MainWindow : Window, IConsoleViewPort
                     printable = '?';
                 }
                 TextBlock t = Cells[row][col];
-                t.Foreground = new SolidColorBrush(foreColor);
-                t.Background = new SolidColorBrush(backColor);
+                t.Foreground = new SolidColorBrush(mappedForeColor);
+                t.Background = new SolidColorBrush(mappedBackColor);
                 t.Text = printable.ToString();
                 col++;
             }
@@ -156,38 +156,38 @@ public partial class MainWindow : Window, IConsoleViewPort
     {
         InitializeComponent();
 
-        coloursMap[(int)ColourEnum.Background] = "#000000";
-        coloursMap[(int)ColourEnum.Black] = "#2F4F4F";
-        coloursMap[(int)ColourEnum.Grey] = "#696969";
-        coloursMap[(int)ColourEnum.BrightGrey] = "#A9A9A9";
-        coloursMap[(int)ColourEnum.Silver] = "#778899";
-        coloursMap[(int)ColourEnum.Beige] = "#FFE4B5";
-        coloursMap[(int)ColourEnum.BrightBeige] = "#F5F5DC";
-        coloursMap[(int)ColourEnum.White] = "#D3D3D3";
-        coloursMap[(int)ColourEnum.BrightWhite] = "#FFFFFF";
-        coloursMap[(int)ColourEnum.Red] = "#8B0000";
-        coloursMap[(int)ColourEnum.BrightRed] = "#FF0000";
-        coloursMap[(int)ColourEnum.Copper] = "#D2691E";
-        coloursMap[(int)ColourEnum.Orange] = "#FF4500";
-        coloursMap[(int)ColourEnum.BrightOrange] = "#FFA500";
-        coloursMap[(int)ColourEnum.Brown] = "#8B4513";
-        coloursMap[(int)ColourEnum.BrightBrown] = "#DEB887";
-        coloursMap[(int)ColourEnum.Gold] = "#FFD700";
-        coloursMap[(int)ColourEnum.Yellow] = "#F0E68C";
-        coloursMap[(int)ColourEnum.BrightYellow] = "#FFFF00";
-        coloursMap[(int)ColourEnum.Chartreuse] = "#9ACD32";
-        coloursMap[(int)ColourEnum.BrightChartreuse] = "#7FFF00";
-        coloursMap[(int)ColourEnum.Green] = "#006400";
-        coloursMap[(int)ColourEnum.BrightGreen] = "#32CD32";
-        coloursMap[(int)ColourEnum.Turquoise] = "#00CED1";
-        coloursMap[(int)ColourEnum.BrightTurquoise] = "#00FFFF";
-        coloursMap[(int)ColourEnum.Blue] = "#0000CD";
-        coloursMap[(int)ColourEnum.BrightBlue] = "#00BFFF";
-        coloursMap[(int)ColourEnum.Diamond] = "#E0FFFF";
-        coloursMap[(int)ColourEnum.Purple] = "#800080";
-        coloursMap[(int)ColourEnum.BrightPurple] = "#EE82EE";
-        coloursMap[(int)ColourEnum.Pink] = "#FF1493";
-        coloursMap[(int)ColourEnum.BrightPink] = "#FF69B4";
+        colorsMap[(int)ColorEnum.Background] = "#000000";
+        colorsMap[(int)ColorEnum.Black] = "#2F4F4F";
+        colorsMap[(int)ColorEnum.Grey] = "#696969";
+        colorsMap[(int)ColorEnum.BrightGrey] = "#A9A9A9";
+        colorsMap[(int)ColorEnum.Silver] = "#778899";
+        colorsMap[(int)ColorEnum.Beige] = "#FFE4B5";
+        colorsMap[(int)ColorEnum.BrightBeige] = "#F5F5DC";
+        colorsMap[(int)ColorEnum.White] = "#D3D3D3";
+        colorsMap[(int)ColorEnum.BrightWhite] = "#FFFFFF";
+        colorsMap[(int)ColorEnum.Red] = "#8B0000";
+        colorsMap[(int)ColorEnum.BrightRed] = "#FF0000";
+        colorsMap[(int)ColorEnum.Copper] = "#D2691E";
+        colorsMap[(int)ColorEnum.Orange] = "#FF4500";
+        colorsMap[(int)ColorEnum.BrightOrange] = "#FFA500";
+        colorsMap[(int)ColorEnum.Brown] = "#8B4513";
+        colorsMap[(int)ColorEnum.BrightBrown] = "#DEB887";
+        colorsMap[(int)ColorEnum.Gold] = "#FFD700";
+        colorsMap[(int)ColorEnum.Yellow] = "#F0E68C";
+        colorsMap[(int)ColorEnum.BrightYellow] = "#FFFF00";
+        colorsMap[(int)ColorEnum.Chartreuse] = "#9ACD32";
+        colorsMap[(int)ColorEnum.BrightChartreuse] = "#7FFF00";
+        colorsMap[(int)ColorEnum.Green] = "#006400";
+        colorsMap[(int)ColorEnum.BrightGreen] = "#32CD32";
+        colorsMap[(int)ColorEnum.Turquoise] = "#00CED1";
+        colorsMap[(int)ColorEnum.BrightTurquoise] = "#00FFFF";
+        colorsMap[(int)ColorEnum.Blue] = "#0000CD";
+        colorsMap[(int)ColorEnum.BrightBlue] = "#00BFFF";
+        colorsMap[(int)ColorEnum.Diamond] = "#E0FFFF";
+        colorsMap[(int)ColorEnum.Purple] = "#800080";
+        colorsMap[(int)ColorEnum.BrightPurple] = "#EE82EE";
+        colorsMap[(int)ColorEnum.Pink] = "#FF1493";
+        colorsMap[(int)ColorEnum.BrightPink] = "#FF69B4";
 
         KeyDown += MainWindow_KeyDown;
         Closing += MainWindow_Closing;

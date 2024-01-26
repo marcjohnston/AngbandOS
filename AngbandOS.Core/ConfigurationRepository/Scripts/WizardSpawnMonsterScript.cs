@@ -30,9 +30,9 @@ internal class WizardSpawnMonsterScript : Script, IScript
             foreach (MonsterRace monsterRace in monsterRaces)
             {
                 ConsoleTableRow tableRow = table.AddRow();
-                tableRow["Name"] = new ConsoleString(ColourEnum.White, monsterRace.Name);
-                tableRow["Character"] = new ConsoleString(ColourEnum.White, monsterRace.Symbol.Character.ToString());
-                tableRow["Level"] = new ConsoleString(ColourEnum.White, monsterRace.LevelFound.ToString());
+                tableRow["Name"] = new ConsoleString(ColorEnum.White, monsterRace.Name);
+                tableRow["Character"] = new ConsoleString(ColorEnum.White, monsterRace.Symbol.Character.ToString());
+                tableRow["Level"] = new ConsoleString(ColorEnum.White, monsterRace.LevelFound.ToString());
             }
 
             ConsoleWindow consoleWindow = new ConsoleWindow(0, 1, 79, 42);
@@ -59,7 +59,7 @@ internal class WizardSpawnMonsterScript : Script, IScript
                 ConsoleString s = (ConsoleString)table.Rows[selectedIndex]["Name"];
                 foreach (ConsoleChar c in s)
                 {
-                    c.Colour = ColourEnum.Red;
+                    c.Color = ColorEnum.Red;
                 }
 
                 table.Render(SaveGame, consoleWindow, new ConsoleTopLeftAlignment());
@@ -71,7 +71,7 @@ internal class WizardSpawnMonsterScript : Script, IScript
 
                 foreach (ConsoleChar c in s)
                 {
-                    c.Colour = ColourEnum.White;
+                    c.Color = ColorEnum.White;
                 }
                 switch (ch)
                 {

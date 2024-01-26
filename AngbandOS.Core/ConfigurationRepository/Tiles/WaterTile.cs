@@ -12,7 +12,7 @@ internal class WaterTile : Tile
 {
     private WaterTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(TildeSymbol));
-    public override ColourEnum Colour => ColourEnum.Blue;
+    public override ColorEnum Color => ColorEnum.Blue;
     public override string Name => "Water";
     public override string AppearAs => "Water";
     public override string Description => "water";

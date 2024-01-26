@@ -14,7 +14,7 @@ internal class BalanceDragonScaleMailArmorItemFactory : DragonScaleMailArmorItem
 
     public override string? DescribeActivationEffect => "You breathe balance (250) every 300+d300 turns";
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(OpenBraceSymbol));
-    public override ColourEnum Colour => ColourEnum.Silver;
+    public override ColorEnum Color => ColorEnum.Silver;
     public override string Name => "Balance Dragon Scale Mail";
 
     public override int Ac => 30;

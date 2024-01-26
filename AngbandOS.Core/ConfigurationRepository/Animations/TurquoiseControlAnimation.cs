@@ -12,8 +12,8 @@ internal class TurquoiseControlAnimation : Animation
 {
     private TurquoiseControlAnimation(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override char Character => '*';
-    public override ColourEnum Colour => ColourEnum.Turquoise;
+    public override ColorEnum Color => ColorEnum.Turquoise;
     public override string Name => "TurquoiseControl";
-    public override ColourEnum AlternateColour => ColourEnum.BrightTurquoise;
+    public override ColorEnum AlternateColor => ColorEnum.BrightTurquoise;
     public override string Sequence => @"!!!!";
 }

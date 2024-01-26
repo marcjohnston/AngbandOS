@@ -13,15 +13,15 @@ internal class HardLeatherSoftArmorItemFactory : SoftArmorItemFactory
     private HardLeatherSoftArmorItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(OpenParenthesisSymbol));
-    public override ColourEnum Colour => ColourEnum.BrightBrown;
-    public override string Name => "Hard Leather Armour";
+    public override ColorEnum Color => ColorEnum.BrightBrown;
+    public override string Name => "Hard Leather Armor";
 
     public override int Ac => 6;
     public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int Cost => 150;
     public override int Dd => 1;
     public override int Ds => 1;
-    public override string FriendlyName => "Hard Leather Armour~";
+    public override string FriendlyName => "Hard Leather Armor~";
     public override int Level => 5;
     public override int[] Locale => new int[] { 5, 0, 0, 0 };
     public override int ToH => -1;

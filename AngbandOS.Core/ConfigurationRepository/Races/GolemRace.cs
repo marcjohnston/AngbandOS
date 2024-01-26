@@ -35,7 +35,7 @@ internal class GolemRace : Race
     public override int FemaleWeightRange => 6;
     public override int Infravision => 4;
     public override uint Choice => 0x4001;
-    public override string Description => "Golems are animated statues. Their inorganic bodies make it\nhard for them to digest food properly, but they have innate\nnatural armour and can't be stunned or made to bleed. They\nalso resist poison and can see invisible creatures. Golems\ncan learn to use their armour more efficiently (at lvl 20)\nand avoid having their life force drained (at lvl 35).";
+    public override string Description => "Golems are animated statues. Their inorganic bodies make it\nhard for them to digest food properly, but they have innate\nnatural armor and can't be stunned or made to bleed. They\nalso resist poison and can see invisible creatures. Golems\ncan learn to use their armor more efficiently (at lvl 20)\nand avoid having their life force drained (at lvl 35).";
 
     /// <summary>
     /// Golem 98->99->100->101->End
@@ -76,8 +76,8 @@ internal class GolemRace : Race
         SaveGame.HasFreeAction = true;
         SaveGame.HasSeeInvisibility = true;
         SaveGame.HasPoisonResistance = true;
-        SaveGame.ArmourClassBonus += 20 + (SaveGame.ExperienceLevel / 5);
-        SaveGame.DisplayedArmourClassBonus += 20 + (SaveGame.ExperienceLevel / 5);
+        SaveGame.ArmorClassBonus += 20 + (SaveGame.ExperienceLevel / 5);
+        SaveGame.DisplayedArmorClassBonus += 20 + (SaveGame.ExperienceLevel / 5);
     }
 
     public override void Eat(FoodItem item)

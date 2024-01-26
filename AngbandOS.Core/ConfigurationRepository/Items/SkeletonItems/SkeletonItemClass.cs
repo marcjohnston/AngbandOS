@@ -17,5 +17,5 @@ internal abstract class SkeletonItemClass : ItemFactory
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Skeleton;
     public override bool HatesAcid => true;
 
-    public override ColourEnum Colour => ColourEnum.Beige;
+    public override ColorEnum Color => ColorEnum.Beige;
 }

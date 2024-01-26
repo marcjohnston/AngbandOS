@@ -15,7 +15,7 @@ internal abstract class DeathBookItemFactory : BookItemFactory
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.DeathBook;
     public override bool HatesFire => true;
     public override int PackSort => 4;
-    public override ColourEnum Colour => ColourEnum.Black;
+    public override ColorEnum Color => ColorEnum.Black;
 
     public override Realm? ToRealm => SaveGame.SingletonRepository.Realms.Get(nameof(DeathRealm));
 }

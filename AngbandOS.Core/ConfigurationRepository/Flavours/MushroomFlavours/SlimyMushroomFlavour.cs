@@ -12,6 +12,6 @@ internal class SlimyMushroomFlavour : MushroomFlavour
 {
     private SlimyMushroomFlavour(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(CommaSymbol));
-    public override ColourEnum Colour => ColourEnum.BrightChartreuse;
+    public override ColorEnum Color => ColorEnum.BrightChartreuse;
     public override string Name => "Slimy";
 }

@@ -12,8 +12,8 @@ internal class YellowBlueFlashAnimation : Animation
 {
     private YellowBlueFlashAnimation(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override char Character => '*';
-    public override ColourEnum Colour => ColourEnum.BrightBlue;
+    public override ColorEnum Color => ColorEnum.BrightBlue;
     public override string Name => "YellowBlueFlash";
-    public override ColourEnum AlternateColour => ColourEnum.BrightYellow;
+    public override ColorEnum AlternateColor => ColorEnum.BrightYellow;
     public override string Sequence => @"********";
 }

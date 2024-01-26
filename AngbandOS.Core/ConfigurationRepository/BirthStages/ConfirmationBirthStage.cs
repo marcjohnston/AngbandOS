@@ -49,7 +49,7 @@ internal class ConfirmationBirthStage : BirthStage
         SaveGame.Energy = 150;
         while (!SaveGame.Shutdown)
         {
-            SaveGame.Screen.Print(ColourEnum.Orange, "[Use return to confirm, or left to go back.]", 43, 1);
+            SaveGame.Screen.Print(ColorEnum.Orange, "[Use return to confirm, or left to go back.]", 43, 1);
             RenderCharacterScript showCharacterSheet = (RenderCharacterScript)SaveGame.SingletonRepository.Scripts.Get(nameof(RenderCharacterScript));
             showCharacterSheet.ExecuteScript();
             char c = SaveGame.Inkey();

@@ -8,9 +8,9 @@
 namespace AngbandOS.Core.StoreFactories;
 
 [Serializable]
-internal class ArmouryStoreFactory : StoreFactory
+internal class ArmoryStoreFactory : StoreFactory
 {
-    private ArmouryStoreFactory(SaveGame saveGame) : base(saveGame) { }
+    private ArmoryStoreFactory(SaveGame saveGame) : base(saveGame) { }
 
     protected override string[] StoreOwnerNames => new string[]
     {
@@ -40,8 +40,8 @@ internal class ArmouryStoreFactory : StoreFactory
         nameof(ZzathathTheImpStoreOwner)
     };
 
-    public override string FeatureType => "Armoury";
-    public override ColourEnum Colour => ColourEnum.Grey;
+    public override string FeatureType => "Armory";
+    public override ColorEnum Color => ColorEnum.Grey;
     protected override string SymbolName => nameof(NumberTwoSymbol);
 
     public override StockStoreInventoryItem[] GetStoreTable()

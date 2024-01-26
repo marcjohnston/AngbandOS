@@ -17,7 +17,7 @@ internal class ExamineStoreItemCommand : StoreCommand
 
     protected override string[]? ValidStoreNames => new string[] {
         nameof(AlchemistStoreFactory),
-        nameof(ArmouryStoreFactory),
+        nameof(ArmoryStoreFactory),
         nameof(BlackStoreFactory),
         nameof(GeneralStoreFactory),
         nameof(HomeStoreFactory),

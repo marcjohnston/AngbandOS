@@ -12,7 +12,7 @@ internal class WeaponChaoticRareItem : RareItem
 {
     private WeaponChaoticRareItem(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(VerticalBarSymbol));
-    public override ColourEnum Colour => ColourEnum.BrightWhite;
+    public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "Weapon (Chaotic)";
     public override bool Chaotic => true;
     public override int Cost => 10000;

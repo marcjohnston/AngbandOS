@@ -13,15 +13,15 @@ internal class MetalBrigandineHardArmorItemFactory : HardArmorItemFactory
     private MetalBrigandineHardArmorItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(OpenBraceSymbol));
-    public override ColourEnum Colour => ColourEnum.Grey;
-    public override string Name => "Metal Brigandine Armour";
+    public override ColorEnum Color => ColorEnum.Grey;
+    public override string Name => "Metal Brigandine Armor";
 
     public override int Ac => 19;
     public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int Cost => 1100;
     public override int Dd => 1;
     public override int Ds => 4;
-    public override string FriendlyName => "Metal Brigandine Armour~";
+    public override string FriendlyName => "Metal Brigandine Armor~";
     public override int Level => 35;
     public override int[] Locale => new int[] { 35, 0, 0, 0 };
     public override int ToH => -3;

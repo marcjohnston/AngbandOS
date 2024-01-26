@@ -32,7 +32,7 @@ internal class PissOffReward : Reward
                 }
                 else
                 {
-                    SaveGame.CurseArmour();
+                    SaveGame.CurseArmor();
                 }
                 break;
 

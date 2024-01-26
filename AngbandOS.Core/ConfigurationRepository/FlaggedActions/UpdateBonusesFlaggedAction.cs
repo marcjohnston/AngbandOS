@@ -26,7 +26,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         new[] {3, 3, 4, 4, 4, 4, 5, 5, 6, 6, 6, 6}
     };
 
-    private bool MartialArtistArmourAux;
+    private bool MartialArtistArmorAux;
     private bool MartialArtistNotifyAux;
     private bool OldUnpriestlyWeapon;
     private bool OldHeavyBow;
@@ -39,21 +39,21 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         int oldSpeed = SaveGame.Speed;
         bool oldTelepathy = SaveGame.HasTelepathy;
         bool oldSeeInv = SaveGame.HasSeeInvisibility;
-        int oldDisAc = SaveGame.DisplayedBaseArmourClass;
-        int oldDisToA = SaveGame.DisplayedArmourClassBonus;
+        int oldDisAc = SaveGame.DisplayedBaseArmorClass;
+        int oldDisToA = SaveGame.DisplayedArmorClassBonus;
         int extraBlows = extraShots = 0;
         for (int i = 0; i < 6; i++)
         {
             SaveGame.AbilityScores[i].Bonus = 0;
         }
-        SaveGame.DisplayedBaseArmourClass = 0;
-        SaveGame.BaseArmourClass = 0;
+        SaveGame.DisplayedBaseArmorClass = 0;
+        SaveGame.BaseArmorClass = 0;
         SaveGame.DisplayedAttackBonus = 0;
         SaveGame.AttackBonus = 0;
         SaveGame.DisplayedDamageBonus = 0;
         SaveGame.DamageBonus = 0;
-        SaveGame.DisplayedArmourClassBonus = 0;
-        SaveGame.ArmourClassBonus = 0;
+        SaveGame.DisplayedArmorClassBonus = 0;
+        SaveGame.ArmorClassBonus = 0;
         SaveGame.HasAggravation = false;
         SaveGame.HasRandomTeleport = false;
         SaveGame.HasExperienceDrain = false;
@@ -146,7 +146,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                 SaveGame.HasTelepathy = true;
             }
         }
-        if (SaveGame.BaseCharacterClass.ID == CharacterClass.Monk && SaveGame.ExperienceLevel > 24 && !SaveGame.MartialArtistHeavyArmour())
+        if (SaveGame.BaseCharacterClass.ID == CharacterClass.Monk && SaveGame.ExperienceLevel > 24 && !SaveGame.MartialArtistHeavyArmor())
         {
             SaveGame.HasFreeAction = true;
         }
@@ -160,7 +160,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
             {
                 SaveGame.HasFearResistance = true;
             }
-            if (SaveGame.ExperienceLevel > 29 && !SaveGame.MartialArtistHeavyArmour())
+            if (SaveGame.ExperienceLevel > 29 && !SaveGame.MartialArtistHeavyArmor())
             {
                 SaveGame.HasFreeAction = true;
             }
@@ -296,8 +296,8 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         SaveGame.HasLightningShield |= SaveGame.Dna.ElecHit;
         SaveGame.HasFireShield |= SaveGame.Dna.FireHit;
         SaveGame.HasGlow |= SaveGame.Dna.FireHit;
-        SaveGame.ArmourClassBonus += SaveGame.Dna.ArmourClassBonus;
-        SaveGame.DisplayedArmourClassBonus += SaveGame.Dna.ArmourClassBonus;
+        SaveGame.ArmorClassBonus += SaveGame.Dna.ArmorClassBonus;
+        SaveGame.DisplayedArmorClassBonus += SaveGame.Dna.ArmorClassBonus;
         SaveGame.HasFeatherFall |= SaveGame.Dna.FeatherFall;
         SaveGame.HasFearResistance |= SaveGame.Dna.ResFear;
         SaveGame.HasTimeResistance |= SaveGame.Dna.ResTime;
@@ -593,12 +593,12 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                     {
                         SaveGame.HasSustainCharisma = true;
                     }
-                    SaveGame.BaseArmourClass += oPtr.BaseArmorClass;
-                    SaveGame.DisplayedBaseArmourClass += oPtr.BaseArmorClass;
-                    SaveGame.ArmourClassBonus += oPtr.BonusArmorClass;
+                    SaveGame.BaseArmorClass += oPtr.BaseArmorClass;
+                    SaveGame.DisplayedBaseArmorClass += oPtr.BaseArmorClass;
+                    SaveGame.ArmorClassBonus += oPtr.BonusArmorClass;
                     if (oPtr.IsKnown())
                     {
-                        SaveGame.DisplayedArmourClassBonus += oPtr.BonusArmorClass;
+                        SaveGame.DisplayedArmorClassBonus += oPtr.BonusArmorClass;
                     }
                     if (inventorySlot.IsWeapon)
                     {
@@ -617,15 +617,15 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                 }
             }
         }
-        if ((SaveGame.BaseCharacterClass.ID == CharacterClass.Monk || SaveGame.BaseCharacterClass.ID == CharacterClass.Mystic) && !SaveGame.MartialArtistHeavyArmour())
+        if ((SaveGame.BaseCharacterClass.ID == CharacterClass.Monk || SaveGame.BaseCharacterClass.ID == CharacterClass.Mystic) && !SaveGame.MartialArtistHeavyArmor())
         {
             foreach (BaseInventorySlot inventorySlot in SaveGame.SingletonRepository.InventorySlots)
             {
                 if (inventorySlot.Count == 0)
                 {
-                    int bareArmourBonus = inventorySlot.BareArmourClassBonus;
-                    SaveGame.ArmourClassBonus += bareArmourBonus;
-                    SaveGame.DisplayedArmourClassBonus += bareArmourBonus;
+                    int bareArmorBonus = inventorySlot.BareArmorClassBonus;
+                    SaveGame.ArmorClassBonus += bareArmorBonus;
+                    SaveGame.DisplayedArmorClassBonus += bareArmorBonus;
                 }
             }
         }
@@ -718,26 +718,26 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         }
         if (SaveGame.TimedInvulnerability.TurnsRemaining != 0)
         {
-            SaveGame.ArmourClassBonus += 100;
-            SaveGame.DisplayedArmourClassBonus += 100;
+            SaveGame.ArmorClassBonus += 100;
+            SaveGame.DisplayedArmorClassBonus += 100;
         }
         if (SaveGame.TimedEtherealness.TurnsRemaining != 0)
         {
-            SaveGame.ArmourClassBonus += 100;
-            SaveGame.DisplayedArmourClassBonus += 100;
+            SaveGame.ArmorClassBonus += 100;
+            SaveGame.DisplayedArmorClassBonus += 100;
             SaveGame.HasReflection = true;
         }
         if (SaveGame.TimedBlessing.TurnsRemaining != 0)
         {
-            SaveGame.ArmourClassBonus += 5;
-            SaveGame.DisplayedArmourClassBonus += 5;
+            SaveGame.ArmorClassBonus += 5;
+            SaveGame.DisplayedArmorClassBonus += 5;
             SaveGame.AttackBonus += 10;
             SaveGame.DisplayedAttackBonus += 10;
         }
         if (SaveGame.TimedStoneskin.TurnsRemaining != 0)
         {
-            SaveGame.ArmourClassBonus += 50;
-            SaveGame.DisplayedArmourClassBonus += 50;
+            SaveGame.ArmorClassBonus += 50;
+            SaveGame.DisplayedArmorClassBonus += 50;
         }
         if (SaveGame.TimedHeroism.TurnsRemaining != 0)
         {
@@ -748,8 +748,8 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         {
             SaveGame.AttackBonus += 24;
             SaveGame.DisplayedAttackBonus += 24;
-            SaveGame.ArmourClassBonus -= 10;
-            SaveGame.DisplayedArmourClassBonus -= 10;
+            SaveGame.ArmorClassBonus -= 10;
+            SaveGame.DisplayedArmorClassBonus -= 10;
         }
         if (SaveGame.TimedHaste.TurnsRemaining != 0)
         {
@@ -759,7 +759,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         {
             SaveGame.Speed -= 10;
         }
-        if ((SaveGame.BaseCharacterClass.ID == CharacterClass.Monk || SaveGame.BaseCharacterClass.ID == CharacterClass.Mystic) && !SaveGame.MartialArtistHeavyArmour())
+        if ((SaveGame.BaseCharacterClass.ID == CharacterClass.Monk || SaveGame.BaseCharacterClass.ID == CharacterClass.Mystic) && !SaveGame.MartialArtistHeavyArmor())
         {
             SaveGame.Speed += SaveGame.ExperienceLevel / 10;
         }
@@ -812,15 +812,15 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         {
             SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawSpeedFlaggedAction)).Set();
         }
-        SaveGame.ArmourClassBonus += SaveGame.AbilityScores[Ability.Dexterity].DexArmourClassBonus;
+        SaveGame.ArmorClassBonus += SaveGame.AbilityScores[Ability.Dexterity].DexArmorClassBonus;
         SaveGame.DamageBonus += SaveGame.AbilityScores[Ability.Strength].StrDamageBonus;
         SaveGame.AttackBonus += SaveGame.AbilityScores[Ability.Dexterity].DexAttackBonus;
         SaveGame.AttackBonus += SaveGame.AbilityScores[Ability.Strength].StrAttackBonus;
-        SaveGame.DisplayedArmourClassBonus += SaveGame.AbilityScores[Ability.Dexterity].DexArmourClassBonus;
+        SaveGame.DisplayedArmorClassBonus += SaveGame.AbilityScores[Ability.Dexterity].DexArmorClassBonus;
         SaveGame.DisplayedDamageBonus += SaveGame.AbilityScores[Ability.Strength].StrDamageBonus;
         SaveGame.DisplayedAttackBonus += SaveGame.AbilityScores[Ability.Dexterity].DexAttackBonus;
         SaveGame.DisplayedAttackBonus += SaveGame.AbilityScores[Ability.Strength].StrAttackBonus;
-        if (SaveGame.DisplayedBaseArmourClass != oldDisAc || SaveGame.DisplayedArmourClassBonus != oldDisToA)
+        if (SaveGame.DisplayedBaseArmorClass != oldDisAc || SaveGame.DisplayedArmorClassBonus != oldDisToA)
         {
             SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawArmorFlaggedAction)).Set();
         }
@@ -952,12 +952,12 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                     {
                         SaveGame.MeleeAttacksPerRound++;
                     }
-                    if (SaveGame.MartialArtistHeavyArmour())
+                    if (SaveGame.MartialArtistHeavyArmor())
                     {
                         SaveGame.MeleeAttacksPerRound /= 2;
                     }
                     SaveGame.MeleeAttacksPerRound += 1 + extraBlows;
-                    if (!SaveGame.MartialArtistHeavyArmour())
+                    if (!SaveGame.MartialArtistHeavyArmor())
                     {
                         SaveGame.AttackBonus += SaveGame.ExperienceLevel / 3;
                         SaveGame.DamageBonus += SaveGame.ExperienceLevel / 3;
@@ -967,7 +967,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                 }
 
                 SaveGame.HasUnpriestlyWeapon = false;
-                MartialArtistArmourAux = false;
+                MartialArtistArmorAux = false;
                 if (SaveGame.BaseCharacterClass.ID == CharacterClass.Warrior)
                 {
                     SaveGame.AttackBonus += SaveGame.ExperienceLevel / 5;
@@ -985,9 +985,9 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                 }
 
                 SaveGame.BaseCharacterClass.UpdateBonusesForMeleeWeapon(oPtr);
-                if (SaveGame.MartialArtistHeavyArmour())
+                if (SaveGame.MartialArtistHeavyArmor())
                 {
-                    MartialArtistArmourAux = true;
+                    MartialArtistArmorAux = true;
                 }
             }
         }
@@ -1079,12 +1079,12 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
             }
             OldUnpriestlyWeapon = SaveGame.HasUnpriestlyWeapon;
         }
-        if ((SaveGame.BaseCharacterClass.ID == CharacterClass.Monk || SaveGame.BaseCharacterClass.ID == CharacterClass.Mystic) && MartialArtistArmourAux != MartialArtistNotifyAux) // TODO: This should be moved to the wield action
+        if ((SaveGame.BaseCharacterClass.ID == CharacterClass.Monk || SaveGame.BaseCharacterClass.ID == CharacterClass.Mystic) && MartialArtistArmorAux != MartialArtistNotifyAux) // TODO: This should be moved to the wield action
         {
-            SaveGame.MsgPrint(SaveGame.MartialArtistHeavyArmour()
-                ? "The weight of your armour disrupts your balance."
+            SaveGame.MsgPrint(SaveGame.MartialArtistHeavyArmor()
+                ? "The weight of your armor disrupts your balance."
                 : "You regain your balance.");
-            MartialArtistNotifyAux = MartialArtistArmourAux;
+            MartialArtistNotifyAux = MartialArtistArmorAux;
         }
     }
 

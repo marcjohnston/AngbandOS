@@ -13,7 +13,7 @@ internal class UnaussprechlichenKultenSorceryBookItemFactory : SorceryBookItemFa
     private UnaussprechlichenKultenSorceryBookItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(QuestionMarkSymbol));
-    public override ColourEnum Colour => ColourEnum.Blue;
+    public override ColorEnum Color => ColorEnum.Blue;
     public override string Name => "[Unaussprechlichen Kulten]";
 
     public override int[] Chance => new int[] { 1, 0, 0, 0 };

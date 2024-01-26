@@ -13,7 +13,7 @@ internal class MajorMagicksFolkBookItemFactory : FolkBookItemFactory
     private MajorMagicksFolkBookItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(QuestionMarkSymbol));
-    public override ColourEnum Colour => ColourEnum.BrightPurple;
+    public override ColorEnum Color => ColorEnum.BrightPurple;
     public override string Name => "[Major Magicks]";
 
     public override int[] Chance => new int[] { 1, 0, 0, 0 };

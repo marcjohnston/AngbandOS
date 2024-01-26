@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.ItemClasses;
 
 [Serializable]
-internal abstract class DragonScaleMailArmorItemFactory : ArmourItemFactory 
+internal abstract class DragonScaleMailArmorItemFactory : ArmorItemFactory 
 {
     public DragonScaleMailArmorItemFactory(SaveGame saveGame) : base(saveGame) { }
     public override ItemClass ItemClass => SaveGame.SingletonRepository.ItemClasses.Get(nameof(DragonScaleMailsItemClass));
@@ -17,5 +17,5 @@ internal abstract class DragonScaleMailArmorItemFactory : ArmourItemFactory
     public override int PackSort => 19;
     public override bool HatesAcid => true;
 
-    public override ColourEnum Colour => ColourEnum.Grey;
+    public override ColorEnum Color => ColorEnum.Grey;
 }

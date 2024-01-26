@@ -16,7 +16,7 @@ internal class YetiMonsterRace : MonsterRace
     public override string Name => "Yeti";
 
     public override bool Animal => true;
-    public override int ArmourClass => 24;
+    public override int ArmorClass => 24;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
         new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(ClawAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 1, 3),
         new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 1, 3),

@@ -23,10 +23,10 @@ internal abstract class AttackEffect : IGetKey<string>
 
     public abstract string Description { get; }
     public abstract int Power { get; }
-    public abstract void ApplyToPlayer(int monsterLevel, int monsterIndex, int armourClass, string monsterDescription, Monster monster, ref bool obvious, ref int damage, ref bool blinked);
+    public abstract void ApplyToPlayer(int monsterLevel, int monsterIndex, int armorClass, string monsterDescription, Monster monster, ref bool obvious, ref int damage, ref bool blinked);
 
     /// <summary>
     /// Apply the attack to another monster.  Does nothing by default.
     /// </summary>
-    public virtual void ApplyToMonster(Monster monster, int armourClass, ref int damage, ref Projectile? pt, ref bool blinked) { }
+    public virtual void ApplyToMonster(Monster monster, int armorClass, ref int damage, ref Projectile? pt, ref bool blinked) { }
 }

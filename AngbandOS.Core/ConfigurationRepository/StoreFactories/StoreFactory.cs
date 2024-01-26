@@ -212,7 +212,7 @@ internal abstract class StoreFactory : IItemFilter, IGetKey<string>
 
     protected abstract string SymbolName { get; }
 
-    public abstract ColourEnum Colour { get; }
+    public abstract ColorEnum Color { get; }
 
     /// <summary>
     /// Returns a description of the store.   By default, the feature type is returned.

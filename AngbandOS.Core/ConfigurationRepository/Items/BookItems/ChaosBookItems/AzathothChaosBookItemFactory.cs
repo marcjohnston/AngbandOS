@@ -13,7 +13,7 @@ internal class AzathothChaosBookItemFactory : ChaosBookItemFactory
     private AzathothChaosBookItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(QuestionMarkSymbol));
-    public override ColourEnum Colour => ColourEnum.Red;
+    public override ColorEnum Color => ColorEnum.Red;
     public override string Name => "[The Book of Azathoth]";
 
     public override int[] Chance => new int[] { 3, 0, 0, 0 };

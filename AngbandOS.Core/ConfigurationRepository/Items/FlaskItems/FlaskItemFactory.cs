@@ -16,5 +16,5 @@ internal abstract class FlaskItemFactory : ItemFactory
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Flask;
     public override bool HatesCold => true;
     public override int PackSort => 10;
-    public override ColourEnum Colour => ColourEnum.Yellow;
+    public override ColorEnum Color => ColorEnum.Yellow;
 }

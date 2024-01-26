@@ -12,11 +12,11 @@ internal class BlackStoreFactory : StoreFactory
 {
     private BlackStoreFactory(SaveGame saveGame) : base(saveGame) { }
 
-    public override int MaxInventory => 175;
-    public override int MinInventory => 135;
+    public override int MaxInventory => 75;
+    public override int MinInventory => 35;
     public override int StoreTurnover => 5;
     public override string FeatureType => "BlackMarket";
-    public override ColourEnum Colour => ColourEnum.Black;
+    public override ColorEnum Color => ColorEnum.Black;
     protected override string SymbolName => nameof(NumberSevenSymbol);
     public override string Description => "Black Market";
 

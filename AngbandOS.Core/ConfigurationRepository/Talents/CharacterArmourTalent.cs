@@ -8,10 +8,10 @@
 namespace AngbandOS.Core.Talents;
 
 [Serializable]
-internal class CharacterArmourTalent : Talent
+internal class CharacterArmorTalent : Talent
 {
-    private CharacterArmourTalent(SaveGame saveGame) : base(saveGame) { }
-    public override string Name => "Character Armour";
+    private CharacterArmorTalent(SaveGame saveGame) : base(saveGame) { }
+    public override string Name => "Character Armor";
     public override void Initialize(int characterClass)
     {
         Level = 13;

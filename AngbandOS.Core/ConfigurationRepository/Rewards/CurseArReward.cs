@@ -15,6 +15,6 @@ internal class CurseArReward : Reward
     {
         SaveGame.MsgPrint($"The voice of {patron.ShortName} booms out:");
         SaveGame.MsgPrint("'Thou reliest too much on thine equipment.'");
-        SaveGame.CurseArmour();
+        SaveGame.CurseArmor();
     }
 }

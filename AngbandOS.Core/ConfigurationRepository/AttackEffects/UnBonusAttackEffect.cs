@@ -13,7 +13,7 @@ internal class UnBonusAttackEffect : AttackEffect
     private UnBonusAttackEffect(SaveGame saveGame) : base(saveGame) { }
     public override int Power => 20;
     public override string Description => "disenchant";
-    public override void ApplyToPlayer(int monsterLevel, int monsterIndex, int armourClass, string monsterDescription, Monster monster, ref bool obvious, ref int damage, ref bool blinked)
+    public override void ApplyToPlayer(int monsterLevel, int monsterIndex, int armorClass, string monsterDescription, Monster monster, ref bool obvious, ref int damage, ref bool blinked)
     {
         // Disenchantment might ruin our items
         SaveGame.TakeHit(damage, monsterDescription);
@@ -26,7 +26,7 @@ internal class UnBonusAttackEffect : AttackEffect
         }
         SaveGame.UpdateSmartLearn(monster, SaveGame.SingletonRepository.SpellResistantDetections.Get(nameof(DisenSpellResistantDetection)));
     }
-    public override void ApplyToMonster(Monster monster, int armourClass, ref int damage, ref Projectile? pt, ref bool blinked)
+    public override void ApplyToMonster(Monster monster, int armorClass, ref int damage, ref Projectile? pt, ref bool blinked)
     {
         pt = SaveGame.SingletonRepository.Projectiles.Get(nameof(DisenchantProjectile));
     }

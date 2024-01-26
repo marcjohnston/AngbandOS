@@ -8,12 +8,12 @@
 namespace AngbandOS.Core.RareItems;
 
 [Serializable]
-internal class ArmourOfPermanenceRareItem : RareItem
+internal class ArmorOfPermanenceRareItem : RareItem
 {
-    private ArmourOfPermanenceRareItem(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private ArmorOfPermanenceRareItem(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(OpenBraceSymbol));
-    public override ColourEnum Colour => ColourEnum.Grey;
-    public override string Name => "Armour of Permanence";
+    public override ColorEnum Color => ColorEnum.Grey;
+    public override string Name => "Armor of Permanence";
     public override int Cost => 30000;
     public override string FriendlyName => "of Permanence";
     public override bool HoldLife => true;
@@ -26,7 +26,7 @@ internal class ArmourOfPermanenceRareItem : RareItem
     public override int MaxToA => 10;
     public override int MaxToD => 0;
     public override int MaxToH => 0;
-    public override RareItemTypeEnum RareItemType => RareItemTypeEnum.ArmourOfPermanence;
+    public override RareItemTypeEnum RareItemType => RareItemTypeEnum.ArmorOfPermanence;
     public override int Rarity => 0;
     public override int Rating => 30;
     public override bool ResAcid => true;

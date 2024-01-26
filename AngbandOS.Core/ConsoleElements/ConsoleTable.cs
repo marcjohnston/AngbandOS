@@ -89,7 +89,7 @@ internal class ConsoleTable : ConsoleElement
     {
         ConsoleAlignment alignment = Alignment ?? parentAlignment;
         ConsoleLocation rowLocation = alignment.ComputeTopLeftLocation(this, containerWindow);
-        rowLocation.ToWindow(Width, Height).Clear(saveGame, ColourEnum.Background);
+        rowLocation.ToWindow(Width, Height).Clear(saveGame, ColorEnum.Background);
         Dictionary<ConsoleTableColumn, int> columnWidths = new Dictionary<ConsoleTableColumn, int>();
 
         int rowIndex = TopRow;

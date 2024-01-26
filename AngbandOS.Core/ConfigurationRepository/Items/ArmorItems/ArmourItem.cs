@@ -8,9 +8,9 @@
 namespace AngbandOS.Core.Items;
 
 [Serializable]
-internal abstract class ArmourItem : Item
+internal abstract class ArmorItem : Item
 {
-    public ArmourItem(SaveGame saveGame, ItemFactory itemClass) : base(saveGame, itemClass) { }
+    public ArmorItem(SaveGame saveGame, ItemFactory itemClass) : base(saveGame, itemClass) { }
     public override bool IdentityCanBeSensed => true;
     public override int? GetBonusRealValue(int value)
     {
@@ -38,7 +38,7 @@ internal abstract class ArmourItem : Item
     }
 
     /// <summary>
-    /// Applies a good random rare characteristics to an item of armour.
+    /// Applies a good random rare characteristics to an item of armor.
     /// </summary>
     /// <param name="item"></param>
     protected virtual void ApplyRandomGoodRareCharacteristics()
@@ -49,30 +49,30 @@ internal abstract class ArmourItem : Item
             case 2:
             case 3:
             case 4:
-                RareItemTypeIndex = RareItemTypeEnum.ArmourOfResistAcid;
+                RareItemTypeIndex = RareItemTypeEnum.ArmorOfResistAcid;
                 break;
             case 5:
             case 6:
             case 7:
             case 8:
-                RareItemTypeIndex = RareItemTypeEnum.ArmourOfResistLightning;
+                RareItemTypeIndex = RareItemTypeEnum.ArmorOfResistLightning;
                 break;
             case 9:
             case 10:
             case 11:
             case 12:
-                RareItemTypeIndex = RareItemTypeEnum.ArmourOfResistFire;
+                RareItemTypeIndex = RareItemTypeEnum.ArmorOfResistFire;
                 break;
             case 13:
             case 14:
             case 15:
             case 16:
-                RareItemTypeIndex = RareItemTypeEnum.ArmourOfResistCold;
+                RareItemTypeIndex = RareItemTypeEnum.ArmorOfResistCold;
                 break;
             case 17:
             case 18:
                 IArtifactBias artifactBias = null;
-                RareItemTypeIndex = RareItemTypeEnum.ArmourOfResistance;
+                RareItemTypeIndex = RareItemTypeEnum.ArmorOfResistance;
                 if (SaveGame.Rng.DieRoll(4) == 1)
                 {
                     RandartItemCharacteristics.ResPois = true;
@@ -84,13 +84,13 @@ internal abstract class ArmourItem : Item
                 break;
             case 20:
             case 21:
-                RareItemTypeIndex = RareItemTypeEnum.ArmourOfYith;
+                RareItemTypeIndex = RareItemTypeEnum.ArmorOfYith;
                 break;
         }
     }
 
     /// <summary>
-    /// Applies a poor random rare characteristics to an item of armour.  Does nothing by default.  Various derived class may override
+    /// Applies a poor random rare characteristics to an item of armor.  Does nothing by default.  Various derived class may override
     /// this method and apply a random poor characteristic to the item.
     /// </summary>
     /// <param name="item"></param>
@@ -99,7 +99,7 @@ internal abstract class ArmourItem : Item
     }
 
     /// <summary>
-    /// Applies a standard BonusArmourClass and IdentCursed to armour class items.  Derived items must call this base to have these
+    /// Applies a standard BonusArmorClass and IdentCursed to armor class items.  Derived items must call this base to have these
     /// standard characteristics applied, when needed.
     /// </summary>
     /// <param name="item"></param>
@@ -190,7 +190,7 @@ internal abstract class ArmourItem : Item
                 s += $" ({GetSignedValue(BonusDamage)})";
             }
 
-            // Add base armour class for all types of armour and when the base armour class is greater than zero.
+            // Add base armor class for all types of armor and when the base armor class is greater than zero.
             s += $" [{BaseArmorClass},{GetSignedValue(BonusArmorClass)}]";
         }
         else if (BaseArmorClass != 0)

@@ -22,15 +22,15 @@ internal class RobeSoftArmorItem : SoftArmorItem
     {
         if (power != 0)
         {
-            // Apply the standard armour characteristics.
+            // Apply the standard armor characteristics.
             base.ApplyMagic(level, power, null);
 
             if (power > 1)
             {
-                // Robes have a chance of having the armour of permanence instead of a random characteristic.
+                // Robes have a chance of having the armor of permanence instead of a random characteristic.
                 if (SaveGame.Rng.RandomLessThan(100) < 10)
                 {
-                    RareItemTypeIndex = RareItemTypeEnum.ArmourOfPermanence;
+                    RareItemTypeIndex = RareItemTypeEnum.ArmorOfPermanence;
                 }
                 else
                 {

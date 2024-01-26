@@ -10,33 +10,33 @@ using System.Collections;
 namespace AngbandOS.Core.ConsoleElements;
 
 /// <summary>
-/// Represents a string that can be rendered via the console.  Each character in the string can have a separate colour.
+/// Represents a string that can be rendered via the console.  Each character in the string can have a separate color.
 /// </summary>
 internal class ConsoleString : ConsoleElement, IEnumerable<ConsoleChar>
 {
     private List<ConsoleChar> characters = new List<ConsoleChar>();
 
-    public ConsoleString(ColourEnum colour, string text)
+    public ConsoleString(ColorEnum color, string text)
     {
         foreach (char c in text)
         {
-            Append(colour, c);
+            Append(color, c);
         }
     }
 
-    public ConsoleString(string text) : this(ColourEnum.White, text) { }
+    public ConsoleString(string text) : this(ColorEnum.White, text) { }
 
-    public void Append(ColourEnum colour, string text)
+    public void Append(ColorEnum color, string text)
     {
         foreach (char c in text)
         {
-            Append(colour, c);
+            Append(color, c);
         }
     }
 
-    public void Append(ColourEnum colour, char c)
+    public void Append(ColorEnum color, char c)
     {
-        characters.Add(new ConsoleChar(colour, c));
+        characters.Add(new ConsoleChar(color, c));
     }
 
     public IEnumerator<ConsoleChar> GetEnumerator()
@@ -53,7 +53,7 @@ internal class ConsoleString : ConsoleElement, IEnumerable<ConsoleChar>
     {
         ConsoleAlignment alignment = Alignment ?? parentAlignment;
         ConsoleLocation location = alignment.ComputeTopLeftLocation(this, containerWindow);
-        location.ToWindow(Width, Height).Clear(saveGame, ColourEnum.Background);
+        location.ToWindow(Width, Height).Clear(saveGame, ColorEnum.Background);
 
         foreach (ConsoleChar consoleChar in characters)
         {

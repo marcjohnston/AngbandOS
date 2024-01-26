@@ -16,10 +16,10 @@ internal class ShimmeringVortexMonsterRace : MonsterRace
         SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BreatheLightMonsterSpell)),
         SaveGame.SingletonRepository.MonsterSpells.Get(nameof(ShriekMonsterSpell)));
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerVSymbol));
-    public override ColourEnum Colour => ColourEnum.Purple;
+    public override ColorEnum Color => ColorEnum.Purple;
     public override string Name => "Shimmering vortex";
 
-    public override int ArmourClass => 30;
+    public override int ArmorClass => 30;
     public override MonsterAttack[]? Attacks => null;
     public override bool AttrMulti => true;
     public override bool BashDoor => true;

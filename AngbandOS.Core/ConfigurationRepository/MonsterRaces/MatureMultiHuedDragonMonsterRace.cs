@@ -22,10 +22,10 @@ internal class MatureMultiHuedDragonMonsterRace : MonsterRace
         SaveGame.SingletonRepository.MonsterSpells.Get(nameof(ConfuseMonsterSpell)),
         SaveGame.SingletonRepository.MonsterSpells.Get(nameof(ScareMonsterSpell)));
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerDSymbol));
-    public override ColourEnum Colour => ColourEnum.Purple;
+    public override ColorEnum Color => ColorEnum.Purple;
     public override string Name => "Mature multi-hued dragon";
 
-    public override int ArmourClass => 65;
+    public override int ArmorClass => 65;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
         new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(ClawAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 1, 10),
         new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(ClawAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 1, 10),
@@ -33,7 +33,7 @@ internal class MatureMultiHuedDragonMonsterRace : MonsterRace
     };
     public override bool AttrMulti => true;
     public override bool BashDoor => true;
-    public override string Description => "A large dragon, scales shimmering many colours.";
+    public override string Description => "A large dragon, scales shimmering many colors.";
     public override bool Dragon => true;
     public override bool Drop_3D2 => true;
     public override bool Drop_4D2 => true;

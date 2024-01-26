@@ -2186,12 +2186,12 @@ internal abstract class Item : IComparable<Item>, IGetKey<string>
                         }
                         break;
                     }
-                case RareItemTypeEnum.ArmourOfPermanence:
+                case RareItemTypeEnum.ArmorOfPermanence:
                     {
                         BonusPowerType = RareItemTypeEnum.SpecialPower;
                         break;
                     }
-                case RareItemTypeEnum.ArmourOfYith:
+                case RareItemTypeEnum.ArmorOfYith:
                     {
                         BonusPowerType = RareItemTypeEnum.SpecialPower;
                         break;
@@ -3424,12 +3424,12 @@ internal abstract class Item : IComparable<Item>, IGetKey<string>
 
             if (BaseArmorClass != 0)
             {
-                // Add base armour class for all types of armour and when the base armour class is greater than zero.
+                // Add base armor class for all types of armor and when the base armor class is greater than zero.
                 s += $" [{BaseArmorClass},{GetSignedValue(BonusArmorClass)}]";
             }
             else if (BonusArmorClass != 0)
             {
-                // This is not armour, only show bonus armour class, if it is not zero and we know about it.
+                // This is not armor, only show bonus armor class, if it is not zero and we know about it.
                 s += $" [{GetSignedValue(BonusArmorClass)}]";
             }
         }

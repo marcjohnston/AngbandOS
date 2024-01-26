@@ -8,10 +8,10 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class SoftLeatherArmourOfTheKoboldChiefFixedArtifact : FixedArtifact
+internal class SoftLeatherArmorOfTheKoboldChiefFixedArtifact : FixedArtifact
 {
     private ItemFactory _baseItemCategory;
-    private SoftLeatherArmourOfTheKoboldChiefFixedArtifact(SaveGame saveGame) : base(saveGame) { }
+    private SoftLeatherArmorOfTheKoboldChiefFixedArtifact(SaveGame saveGame) : base(saveGame) { }
 
     public override void Bind()
     {
@@ -27,8 +27,8 @@ internal class SoftLeatherArmourOfTheKoboldChiefFixedArtifact : FixedArtifact
     public override ItemFactory BaseItemCategory => _baseItemCategory;
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(OpenParenthesisSymbol));
-    public override ColourEnum Colour => ColourEnum.BrightBrown;
-    public override string Name => "The Soft Leather Armour of the Kobold Chief";
+    public override ColorEnum Color => ColorEnum.BrightBrown;
+    public override string Name => "The Soft Leather Armor of the Kobold Chief";
     public override int Ac => 4;
     public override int Cost => 45000;
     public override int Dd => 0;

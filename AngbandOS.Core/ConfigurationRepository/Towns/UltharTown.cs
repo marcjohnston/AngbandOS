@@ -13,7 +13,7 @@ internal class UltharTown : Town
     private UltharTown(SaveGame saveGame) : base(saveGame) { }
     protected override string[] StoreFactoryNames => new string[] {
         nameof(GeneralStoreFactory),
-        nameof(ArmouryStoreFactory),
+        nameof(ArmoryStoreFactory),
         nameof(WeaponStoreFactory),
         nameof(TempleStoreFactory),
         nameof(AlchemistStoreFactory),

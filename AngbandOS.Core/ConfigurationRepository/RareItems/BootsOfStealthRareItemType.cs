@@ -12,7 +12,7 @@ internal class BootsOfStealthRareItem : RareItem
 {
     private BootsOfStealthRareItem(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(CloseBraceSymbol));
-    public override ColourEnum Colour => ColourEnum.BrightBrown;
+    public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "Boots of Stealth";
     public override int Cost => 500;
     public override string FriendlyName => "of Stealth";

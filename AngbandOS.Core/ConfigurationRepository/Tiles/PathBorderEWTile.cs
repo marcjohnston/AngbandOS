@@ -12,7 +12,7 @@ internal class PathBorderEWTile : Tile
 {
     private PathBorderEWTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(MinusSignSymbol));
-    public override ColourEnum Colour => ColourEnum.BrightBrown;
+    public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "PathBorderEW";
     public override string AppearAs => "PathBorderEW";
     public override bool BlocksLos => true;

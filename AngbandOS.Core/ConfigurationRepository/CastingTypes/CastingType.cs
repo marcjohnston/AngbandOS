@@ -151,7 +151,7 @@ internal class CastingType : IGetKey<string>
     }
 
     /// <summary>
-    /// Returns true, if the spell weight of the armour can encumber movement.  Returns false, by default.  Arcane returns true.
+    /// Returns true, if the spell weight of the armor can encumber movement.  Returns false, by default.  Arcane returns true.
     /// </summary>
     public virtual bool WeightEncumbersMovement => false;
 

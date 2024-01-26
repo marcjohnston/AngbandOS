@@ -8,9 +8,9 @@
 namespace AngbandOS.Core.MonsterRaces;
 
 [Serializable]
-internal class GreatWyrmOfManyColoursMonsterRace : MonsterRace
+internal class GreatWyrmOfManyColorsMonsterRace : MonsterRace
 {
-    protected GreatWyrmOfManyColoursMonsterRace(SaveGame saveGame) : base(saveGame) { }
+    protected GreatWyrmOfManyColorsMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
     public override MonsterSpellList Spells => new MonsterSpellList(
         SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BreatheAcidMonsterSpell)),
@@ -22,10 +22,10 @@ internal class GreatWyrmOfManyColoursMonsterRace : MonsterRace
         SaveGame.SingletonRepository.MonsterSpells.Get(nameof(ConfuseMonsterSpell)),
         SaveGame.SingletonRepository.MonsterSpells.Get(nameof(ScareMonsterSpell)));
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperDSymbol));
-    public override ColourEnum Colour => ColourEnum.Purple;
-    public override string Name => "Great Wyrm of Many Colours";
+    public override ColorEnum Color => ColorEnum.Purple;
+    public override string Name => "Great Wyrm of Many Colors";
 
-    public override int ArmourClass => 170;
+    public override int ArmorClass => 170;
     public override MonsterAttack[]? Attacks => new MonsterAttack[] {
         new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(ClawAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 6, 12),
         new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(ClawAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 6, 12),
@@ -45,7 +45,7 @@ internal class GreatWyrmOfManyColoursMonsterRace : MonsterRace
     public override bool ForceSleep => true;
     public override int FreqInate => 3;
     public override int FreqSpell => 3;
-    public override string FriendlyName => "Great Wyrm of Many Colours";
+    public override string FriendlyName => "Great Wyrm of Many Colors";
     public override int Hdice => 52;
     public override int Hside => 100;
     public override bool ImmuneAcid => true;
@@ -68,5 +68,5 @@ internal class GreatWyrmOfManyColoursMonsterRace : MonsterRace
     public override int Speed => 120;
     public override string SplitName1 => " Great Wyrm ";
     public override string SplitName2 => "  of Many   ";
-    public override string SplitName3 => "  Colours   ";
+    public override string SplitName3 => "  Colors   ";
 }

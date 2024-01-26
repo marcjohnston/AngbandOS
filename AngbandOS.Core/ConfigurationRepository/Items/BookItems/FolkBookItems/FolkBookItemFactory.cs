@@ -15,6 +15,6 @@ internal abstract class FolkBookItemFactory : BookItemFactory
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.FolkBook;
     public override int PackSort => 2;
     public override bool HatesFire => true;
-    public override ColourEnum Colour => ColourEnum.BrightPurple;
+    public override ColorEnum Color => ColorEnum.BrightPurple;
     public override Realm? ToRealm => SaveGame.SingletonRepository.Realms.Get(nameof(FolkRealm));
 }

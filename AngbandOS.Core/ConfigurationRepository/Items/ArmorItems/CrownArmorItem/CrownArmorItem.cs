@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Items;
 
 [Serializable]
-internal abstract class CrownArmorItem : ArmourItem
+internal abstract class CrownArmorItem : ArmorItem
 {
     public override int WieldSlot => InventorySlot.Head;
     public CrownArmorItem(SaveGame saveGame, ItemFactory itemClass) : base(saveGame, itemClass) { }
@@ -83,7 +83,7 @@ internal abstract class CrownArmorItem : ArmourItem
     {
         if (power != 0)
         {
-            // Apply the standard armour characteristics.
+            // Apply the standard armor characteristics.
             base.ApplyMagic(level, power, null);
 
             if (power > 1)

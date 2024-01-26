@@ -12,7 +12,7 @@ internal class YellowSignSigilTile : Tile
 {
     private YellowSignSigilTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(SemiColonSymbol));
-    public override ColourEnum Colour => ColourEnum.BrightYellow;
+    public override ColorEnum Color => ColorEnum.BrightYellow;
     public override string Name => "YellowSign";
     public override string AppearAs => "YellowSign";
     public override string Description => "Yellow Sign";

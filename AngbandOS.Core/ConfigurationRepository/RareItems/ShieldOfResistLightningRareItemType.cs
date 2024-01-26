@@ -12,7 +12,7 @@ internal class ShieldOfResistLightningRareItem : RareItem
 {
     private ShieldOfResistLightningRareItem(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(CloseParenthesisSymbol));
-    public override ColourEnum Colour => ColourEnum.Brown;
+    public override ColorEnum Color => ColorEnum.Brown;
     public override string Name => "Shield of Resist Lightning";
     public override int Cost => 400;
     public override string FriendlyName => "of Resist Lightning";

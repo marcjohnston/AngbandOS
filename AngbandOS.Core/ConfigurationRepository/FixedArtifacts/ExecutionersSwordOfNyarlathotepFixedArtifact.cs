@@ -22,7 +22,7 @@ internal class ExecutionersSwordOfNyarlathotepFixedArtifact : FixedArtifact
     public override ItemFactory BaseItemCategory => _baseItemCategory;
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(VerticalBarSymbol));
-    public override ColourEnum Colour => ColourEnum.Red;
+    public override ColorEnum Color => ColorEnum.Red;
     public override string Name => "The Executioner's Sword of Nyarlathotep";
     public override int Ac => 0;
     public override bool BrandPois => true;

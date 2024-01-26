@@ -16,7 +16,7 @@ internal class ElvenCloakArmorItem : CloakArmorItem
     {
         if (power != 0)
         {
-            // Apply the standard armour characteristics.
+            // Apply the standard armor characteristics.
             base.ApplyMagic(level, power, null);
 
             TypeSpecificValue = SaveGame.Rng.DieRoll(4);

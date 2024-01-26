@@ -71,7 +71,7 @@ internal class HighMageCharacterClass : BaseCharacterClass
         "of magic. They may choose any realm, and are better at",
         "casting spells from that realm than a normal mage. High",
         "mages also get more mana than other spell casters do.",
-        "Wearing too much armour disrupts their casting."
+        "Wearing too much armor disrupts their casting."
     };
     public override int SpellWeight => 300;
     public override CastingType SpellCastingType => SaveGame.SingletonRepository.CastingTypes.Get(nameof(ArcaneCastingType));

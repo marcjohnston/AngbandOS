@@ -30,7 +30,7 @@ internal abstract class ScrollItemClass : ItemFactory, IFlavour
     public override bool HatesFire => true;
     public override bool HatesAcid => true;
 
-    public override ColourEnum Colour => ColourEnum.BrightBeige;
+    public override ColorEnum Color => ColorEnum.BrightBeige;
 
     public abstract void Read(ReadScrollEvent eventArgs);
 }

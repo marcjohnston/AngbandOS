@@ -13,10 +13,10 @@ internal class EnchantArmorStoreCommand : StoreCommand
     private EnchantArmorStoreCommand(SaveGame saveGame) : base(saveGame) { }
     public override char KeyChar => 'r';
 
-    public override string Description => "Enchant your armour";
+    public override string Description => "Enchant your armor";
 
     protected override string[]? ValidStoreNames => new string[] {
-        nameof(ArmouryStoreFactory)
+        nameof(ArmoryStoreFactory)
     };
 
     protected override string ExecuteScriptName => nameof(EnhanceArmorScript);

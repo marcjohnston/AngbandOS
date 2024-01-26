@@ -13,7 +13,7 @@ internal class EatFoodAttackEffect : AttackEffect
     private EatFoodAttackEffect(SaveGame saveGame) : base(saveGame) { }
     public override int Power => 5;
     public override string Description => "eat your food";
-    public override void ApplyToPlayer(int monsterLevel, int monsterIndex, int armourClass, string monsterDescription, Monster monster, ref bool obvious, ref int damage, ref bool blinked)
+    public override void ApplyToPlayer(int monsterLevel, int monsterIndex, int armorClass, string monsterDescription, Monster monster, ref bool obvious, ref int damage, ref bool blinked)
     {
         SaveGame.TakeHit(damage, monsterDescription);
         // Have ten tries at grabbing a food item from the player
@@ -35,7 +35,7 @@ internal class EatFoodAttackEffect : AttackEffect
             }
         }
     }
-    public override void ApplyToMonster(Monster monster, int armourClass, ref int damage, ref Projectile? pt, ref bool blinked)
+    public override void ApplyToMonster(Monster monster, int armorClass, ref int damage, ref Projectile? pt, ref bool blinked)
     {
         pt = null;
         damage = 0;

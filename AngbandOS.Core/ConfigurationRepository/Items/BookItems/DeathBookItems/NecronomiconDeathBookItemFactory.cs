@@ -13,7 +13,7 @@ internal class NecronomiconDeathBookItemFactory : DeathBookItemFactory
     private NecronomiconDeathBookItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(QuestionMarkSymbol));
-    public override ColourEnum Colour => ColourEnum.Black;
+    public override ColorEnum Color => ColorEnum.Black;
     public override string Name => "[Necronomicon]";
 
     public override int[] Chance => new int[] { 3, 0, 0, 0 };

@@ -1239,7 +1239,7 @@ internal class Monster : IItemContainer
         {
             return false;
         }
-        int armourClass = targetRace.ArmourClass;
+        int armorClass = targetRace.ArmorClass;
         int monsterLevel = Race.Level >= 1 ? Race.Level : 1;
         string monsterName = Name;
 
@@ -1282,7 +1282,7 @@ internal class Monster : IItemContainer
                 }
 
                 // If we hit the monster, describe the type of hit
-                if (effect == null || CheckHitMonsterVersusMonster(effect.Power, monsterLevel, armourClass))
+                if (effect == null || CheckHitMonsterVersusMonster(effect.Power, monsterLevel, armorClass))
                 {
                     saveGame.Disturb(true);
                     if (method.AttackAwakensTarget)
@@ -1307,7 +1307,7 @@ internal class Monster : IItemContainer
                         pt = null;
                     }
                     else
-                        effect.ApplyToMonster(this, armourClass, ref damage, ref pt, ref blinked);
+                        effect.ApplyToMonster(this, armorClass, ref damage, ref pt, ref blinked);
 
                     // Implement the attack as a projectile
                     if (pt != null)
@@ -2693,7 +2693,7 @@ internal class Monster : IItemContainer
             return;
         }
 
-        int armourClass = saveGame.BaseArmourClass + saveGame.ArmourClassBonus;
+        int armorClass = saveGame.BaseArmorClass + saveGame.ArmorClassBonus;
         int monsterLevel = Race.Level >= 1 ? Race.Level : 1;
         string monsterName = Name;
         string monsterDescription = IndefiniteVisibleName;
@@ -2760,7 +2760,7 @@ internal class Monster : IItemContainer
                     }
                     else
                     {
-                        effect.ApplyToPlayer(monsterLevel, GetMonsterIndex(), armourClass, monsterDescription, this, ref obvious, ref damage, ref blinked);
+                        effect.ApplyToPlayer(monsterLevel, GetMonsterIndex(), armorClass, monsterDescription, this, ref obvious, ref damage, ref blinked);
                     }
 
                     // Be nice and don't let us be both stunned and cut by the same blow
@@ -3118,9 +3118,9 @@ internal class Monster : IItemContainer
     /// </summary>
     /// <param name="power"> The power of the attack type </param>
     /// <param name="level"> The level of the attacking monster </param>
-    /// <param name="armourClass"> The armour class of the defending monster </param>
+    /// <param name="armorClass"> The armor class of the defending monster </param>
     /// <returns> True for a hit or false for a miss </returns>
-    private bool CheckHitMonsterVersusMonster(int power, int level, int armourClass)
+    private bool CheckHitMonsterVersusMonster(int power, int level, int armorClass)
     {
         // Base 5% chance to hit and 5% chance to miss
         int k = SaveGame.Rng.RandomLessThan(100);
@@ -3130,7 +3130,7 @@ internal class Monster : IItemContainer
         }
         // If we didn't auto hit or miss, use the standard formula for attacking
         int i = power + (level * 3);
-        return i > 0 && SaveGame.Rng.DieRoll(i) > armourClass * 3 / 4;
+        return i > 0 && SaveGame.Rng.DieRoll(i) > armorClass * 3 / 4;
     }
 
     /// <summary>
@@ -3309,9 +3309,9 @@ internal class Monster : IItemContainer
         {
             return k < 5;
         }
-        // Otherwise, compare the power and level to the player's armour class
+        // Otherwise, compare the power and level to the player's armor class
         int i = attackPower + (monsterLevel * 3);
-        int ac = saveGame.BaseArmourClass + saveGame.ArmourClassBonus;
+        int ac = saveGame.BaseArmorClass + saveGame.ArmorClassBonus;
         return i > 0 && SaveGame.Rng.DieRoll(i) > ac * 3 / 4;
     }
 

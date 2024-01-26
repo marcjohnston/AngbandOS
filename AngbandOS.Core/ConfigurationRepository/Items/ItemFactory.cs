@@ -86,7 +86,7 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey<string>
     public virtual void Bind()
     {
         FlavorSymbol = Symbol;
-        FlavorColour = Colour;
+        FlavorColor = Color;
     }
 
     public abstract ItemClass ItemClass { get; }
@@ -141,7 +141,7 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey<string>
     /// that have flavor may override this color and replace it with a different color from the flavor.
     /// </summary>
     [Obsolete("This property is available via the IFlavour.Flavour property.")]
-    public ColourEnum FlavorColour;
+    public ColorEnum FlavorColor;
 
     /// <summary>
     /// Returns true, if the item category has any of the following properties: Str, Int, Wis, Dex, Con, Cha, Stealth, Search, Infra, Tunnel, Speed or Blows.
@@ -156,7 +156,7 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey<string>
     }
 
     /// <summary>
-    /// Returns true, if the object has quality.  Returns false, by default.  Armour, weapons and orbs of light return true.  All others types return false.
+    /// Returns true, if the object has quality.  Returns false, by default.  Armor, weapons and orbs of light return true.  All others types return false.
     /// </summary>
     public virtual bool HasQuality => false;
 
@@ -185,7 +185,7 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey<string>
     /// Returns the color that items of this type should be rendered with.  This color will be initially used to set the FlavorColor and item categories
     /// that have flavor may change the FlavorColor based on the flavor.
     /// </summary>
-    public virtual ColourEnum Colour => ColourEnum.White;
+    public virtual ColorEnum Color => ColorEnum.White;
 
     /// <summary>
     /// A unique identifier for the entity
@@ -467,7 +467,7 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey<string>
     public virtual bool CanReflectBoltsAndArrows => false;
 
     /// <summary>
-    /// Returns a 1-in-chance for a random artifact to have activation applied.  Returns 3 by default.  Armour returns double the default.
+    /// Returns a 1-in-chance for a random artifact to have activation applied.  Returns 3 by default.  Armor returns double the default.
     /// </summary>
     public virtual int RandartActivationChance => 3;
 

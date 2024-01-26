@@ -13,7 +13,7 @@ internal class DragonShieldArmorItemFactory : ShieldArmorItemFactory
     private DragonShieldArmorItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(OpenBraceSymbol));
-    public override ColourEnum Colour => ColourEnum.BrightGreen;
+    public override ColorEnum Color => ColorEnum.BrightGreen;
     public override string Name => "Dragon Shield";
 
     public override int Ac => 8;

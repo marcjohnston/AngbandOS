@@ -13,7 +13,7 @@ internal class PolearmTrident : PolearmItemClass
     private PolearmTrident(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(ForwardSlashSymbol));
-    public override ColourEnum Colour => ColourEnum.Yellow;
+    public override ColorEnum Color => ColorEnum.Yellow;
     public override string Name => "Trident";
 
     public override int[] Chance => new int[] { 1, 0, 0, 0 };
