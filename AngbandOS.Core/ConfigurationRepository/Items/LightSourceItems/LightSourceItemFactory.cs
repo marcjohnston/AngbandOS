@@ -14,6 +14,7 @@ internal abstract class LightSourceItemFactory : ItemFactory
     public override ItemClass ItemClass => SaveGame.SingletonRepository.ItemClasses.Get(nameof(LightSourcesItemClass));
     public override BaseInventorySlot BaseWieldSlot => SaveGame.SingletonRepository.InventorySlots.Get(nameof(LightsourceInventorySlot));
 
+    public override int PercentageBreakageChance => 50;
     public override int PackSort => 18;
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Light;
     public override bool HatesFire => true;

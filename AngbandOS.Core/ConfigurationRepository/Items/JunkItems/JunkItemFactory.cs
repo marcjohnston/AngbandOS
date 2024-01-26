@@ -15,6 +15,7 @@ internal abstract class JunkItemFactory : ItemFactory
     public override int PackSort => 38;
     public override bool EasyKnow => true;
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Junk;
+    public override int PercentageBreakageChance => 100;
     public override bool HatesAcid => true;
 
 }

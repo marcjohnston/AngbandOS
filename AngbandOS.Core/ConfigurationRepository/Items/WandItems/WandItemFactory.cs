@@ -20,6 +20,7 @@ internal abstract class WandItemFactory : ItemFactory, IFlavour
 
     /// <inheritdoc/>
     public Flavour Flavor { get; set; }
+    public override int PercentageBreakageChance => 25;
     public override bool IsRechargable => true;
 
     public override int PackSort => 14;

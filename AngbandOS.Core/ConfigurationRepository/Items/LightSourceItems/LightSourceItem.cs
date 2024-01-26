@@ -13,8 +13,6 @@ internal abstract class LightSourceItem : ArmorItem
     public override int WieldSlot => InventorySlot.Lightsource;
     public LightSourceItem(SaveGame saveGame, ItemFactory itemClass) : base(saveGame, itemClass) { }
 
-    public override int PercentageBreakageChance => 50;
-
     /// <summary>
     /// Returns an intensity of 3, if the item is an artifact; otherwise, 0 is returned.
     /// </summary>

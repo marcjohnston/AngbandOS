@@ -16,6 +16,7 @@ internal abstract class BottleItemFactory : ItemFactory
     public override int PackSort => 39;
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Bottle;
     public override bool HatesCold => true;
+    public override int PercentageBreakageChance => 100;
     public override bool HatesAcid => true;
 
 }

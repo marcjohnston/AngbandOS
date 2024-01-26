@@ -193,7 +193,7 @@ internal class FireScript : Script, IScript, IRepeatableScript
         }
         // If we hit something we have a chance to break the ammo, otherwise it just drops at
         // the end of its travel
-        int j = hitBody ? individualAmmunition.BreakageChance() : 0;
+        int j = hitBody ? individualAmmunition.Factory.PercentageBreakageChance : 0;
         SaveGame.DropNear(individualAmmunition, j, y, x);
     }
 }

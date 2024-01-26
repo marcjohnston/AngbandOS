@@ -18,6 +18,7 @@ internal abstract class ScrollItemFactory : ItemFactory, IFlavour
     /// </summary>
     public IEnumerable<Flavour>? GetFlavorRepository() => SaveGame.ScrollFlavours;
 
+    public override int PercentageBreakageChance => 50;
     public override bool CanBeRead => true;
 
     /// <inheritdoc/>

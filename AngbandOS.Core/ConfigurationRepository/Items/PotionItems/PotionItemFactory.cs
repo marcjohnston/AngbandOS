@@ -19,6 +19,7 @@ internal abstract class PotionItemFactory : ItemFactory, IFlavour
     /// </summary>
     public virtual IEnumerable<Flavour>? GetFlavorRepository() => SaveGame.SingletonRepository.PotionFlavours;
 
+    public override int PercentageBreakageChance => 100;
     public override bool CanBeQuaffed => true;
 
     /// <inheritdoc/>

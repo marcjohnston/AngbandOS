@@ -9400,7 +9400,7 @@ internal class SaveGame
             }
         }
         // There's a chance of breakage if we hit a creature
-        int chanceToBreak = hitBody ? missile.BreakageChance() : 0;
+        int chanceToBreak = hitBody ? missile.Factory.PercentageBreakageChance : 0;
         // If we hit with a potion, the potion might affect the creature
         if (missile.Factory.CategoryEnum == ItemTypeEnum.Potion)
         {

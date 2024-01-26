@@ -12,8 +12,6 @@ internal abstract class ArrowAmmunitionItem : AmmunitionItem
 {
     public ArrowAmmunitionItem(SaveGame saveGame, ItemFactory itemClass) : base(saveGame, itemClass) { }
 
-    public override int PercentageBreakageChance => 25;
-
     protected override bool FactoryCanAbsorbItem(Item other)
     {
         if (!StatsAreSame(other))

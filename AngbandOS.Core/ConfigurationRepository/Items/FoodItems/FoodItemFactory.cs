@@ -12,6 +12,7 @@ internal abstract class FoodItemFactory : ItemFactory
 {
     public FoodItemFactory(SaveGame saveGame) : base(saveGame) { }
     public override ItemClass ItemClass => SaveGame.SingletonRepository.ItemClasses.Get(nameof(FoodItemClass));
+    public override int PercentageBreakageChance => 100;
     public override bool EasyKnow => true;
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Food;
     public override int PackSort => 9;
