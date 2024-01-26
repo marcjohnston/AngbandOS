@@ -25,5 +25,5 @@ internal class CestiGlovesArmorItemFactory : GlovesArmorItemFactory
     public override int Level => 50;
     public override int[] Locale => new int[] { 50, 0, 0, 0 };
     public override int Weight => 40;
-    public override Item CreateItem() => new CestiGlovesArmourItem(SaveGame);
+    public override Item CreateItem() => new CestiGlovesArmorItem(SaveGame);
 }

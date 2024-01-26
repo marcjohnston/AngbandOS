@@ -15,7 +15,7 @@ internal class DragonHelmOfPowerFixedArtifact : FixedArtifact, IFixedArtifactAct
 
     public override void Bind()
     {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(HelmDragonHelm));
+        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(DragonHelmArmorItemFactory));
     }
 
 

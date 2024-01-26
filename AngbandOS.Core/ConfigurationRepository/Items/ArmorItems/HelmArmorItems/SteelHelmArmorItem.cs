@@ -10,5 +10,5 @@ namespace AngbandOS.Core.Items;
 [Serializable]
 internal class SteelHelmArmorItem : HelmArmorItem
 {
-    public SteelHelmArmorItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get(nameof(HelmSteelHelm))) { }
+    public SteelHelmArmorItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get(nameof(SteelHelmArmorItemFactory))) { }
 }

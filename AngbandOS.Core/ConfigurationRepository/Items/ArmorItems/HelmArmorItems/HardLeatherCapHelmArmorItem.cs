@@ -10,5 +10,5 @@ namespace AngbandOS.Core.Items;
 [Serializable]
 internal class HardLeatherCapHelmArmorItem : HelmArmorItem
 {
-    public HardLeatherCapHelmArmorItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get(nameof(HelmHardLeatherCap))) { }
+    public HardLeatherCapHelmArmorItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get(nameof(HardLeatherCapHelmArmorItemFactory))) { }
 }

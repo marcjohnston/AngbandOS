@@ -15,7 +15,7 @@ internal class IronHelmTerrorMaskFixedArtifact : FixedArtifact, IFixedArtifactAc
 
     public override void Bind()
     {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(HelmIronHelm));
+        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(IronHelmArmorItemFactory));
     }
 
 

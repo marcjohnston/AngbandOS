@@ -15,7 +15,7 @@ internal class MetalCapOfHolinessFixedArtifact : FixedArtifact
 
     public override void Bind()
     {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(HelmMetalCap));
+        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(MetalCapHelmArmorFactory));
     }
 
 

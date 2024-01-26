@@ -25,5 +25,5 @@ internal class GauntletGlovesArmorItemFactory : GlovesArmorItemFactory
     public override int Level => 10;
     public override int[] Locale => new int[] { 10, 0, 0, 0 };
     public override int Weight => 25;
-    public override Item CreateItem() => new GauntletGlovesArmourItem(SaveGame);
+    public override Item CreateItem() => new GauntletGlovesArmorItem(SaveGame);
 }
