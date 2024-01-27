@@ -13,7 +13,7 @@ internal class DeathSpellPoisonBranding : Spell
     private DeathSpellPoisonBranding(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.BrandWeapon(2);
+        SaveGame.RunScript(nameof(BrandWeaponWithPoisonScript));
     }
 
     public override void CastFailed()

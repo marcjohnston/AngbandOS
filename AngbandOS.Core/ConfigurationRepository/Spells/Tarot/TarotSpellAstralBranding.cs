@@ -13,7 +13,7 @@ internal class TarotSpellAstralBranding : Spell
     private TarotSpellAstralBranding(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.BrandWeapon(4);
+        SaveGame.RunScript(nameof(BrandWeaponWithAstraScript));
     }
 
     public override string Name => "Astral Branding";

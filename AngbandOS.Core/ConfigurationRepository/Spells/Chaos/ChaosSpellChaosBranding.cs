@@ -13,7 +13,7 @@ internal class ChaosSpellChaosBranding : Spell
     private ChaosSpellChaosBranding(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.BrandWeapon(1);
+        SaveGame.RunScript(nameof(BrandWeaponWithChaosScript));
     }
 
     public override void CastFailed()

@@ -13,7 +13,7 @@ internal class NatureSpellElementalBranding : Spell
     private NatureSpellElementalBranding(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.BrandWeapon(0);
+        SaveGame.RunScript(nameof(BrandWeaponWithFireOrIceScript));
     }
 
     public override string Name => "Elemental Branding";
