@@ -20,14 +20,14 @@ internal class MorningStarFirestarterFixedArtifact : FixedArtifact, IFixedArtifa
 
 
     // Firestarter does fire ball
-    public void ActivateItem(SaveGame saveGame, Item item)
+    public void ActivateItem(Item item)
     {
-        saveGame.MsgPrint("Your morning star rages in fire...");
-        if (!saveGame.GetDirectionWithAim(out int dir))
+        SaveGame.MsgPrint("Your morning star rages in fire...");
+        if (!SaveGame.GetDirectionWithAim(out int dir))
         {
             return;
         }
-        saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get(nameof(FireProjectile)), dir, 72, 3);
+        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(FireProjectile)), dir, 72, 3);
         item.RechargeTimeLeft = 100;
     }
     public string DescribeActivationEffect() => "large fire ball (72) every 100 turns";

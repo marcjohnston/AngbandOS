@@ -20,15 +20,15 @@ internal class SetOfGauntletsOfTheDeadFixedArtifact : FixedArtifact, IFixedArtif
 
 
     // The Dead shoot acid bolts
-    public void ActivateItem(SaveGame saveGame, Item item)
+    public void ActivateItem(Item item)
     {
-        saveGame.MsgPrint("Your gauntlets are covered in acid...");
-        if (!saveGame.GetDirectionWithAim(out int dir))
+        SaveGame.MsgPrint("Your gauntlets are covered in acid...");
+        if (!SaveGame.GetDirectionWithAim(out int dir))
         {
             return;
         }
-        saveGame.FireBolt(saveGame.SingletonRepository.Projectiles.Get(nameof(AcidProjectile)), dir, SaveGame.Rng.DiceRoll(5, 8));
-        item.RechargeTimeLeft = SaveGame.Rng.RandomLessThan(5) + 5;
+        SaveGame.FireBolt(SaveGame.SingletonRepository.Projectiles.Get(nameof(Projection.AcidProjectile)), dir, base.SaveGame.Rng.DiceRoll(5, 8));
+        item.RechargeTimeLeft = base.SaveGame.Rng.RandomLessThan(5) + 5;
     }
     public string DescribeActivationEffect() => "acid bolt (5d8) every 5+d5 turns";
     public override ItemFactory BaseItemCategory => _baseItemCategory;

@@ -20,17 +20,17 @@ internal class DaggerCharityFixedArtifact : FixedArtifact, IFixedArtifactActivat
 
 
     // Charity shoots a lightning bolt
-    public void ActivateItem(SaveGame saveGame, Item item)
+    public void ActivateItem(Item item)
     {
-        saveGame.MsgPrint("Your dagger is covered in sparks...");
-        if (!saveGame.GetDirectionWithAim(out int dir))
+        SaveGame.MsgPrint("Your dagger is covered in sparks...");
+        if (!SaveGame.GetDirectionWithAim(out int dir))
         {
             return;
         }
-        saveGame.FireBolt(saveGame.SingletonRepository.Projectiles.Get(nameof(ElecProjectile)), dir, SaveGame.Rng.DiceRoll(4, 8));
+        SaveGame.FireBolt(SaveGame.SingletonRepository.Projectiles.Get(nameof(ElecProjectile)), dir, SaveGame.Rng.DiceRoll(4, 8));
         item.RechargeTimeLeft = SaveGame.Rng.RandomLessThan(6) + 6;
     }
-    public override void ApplyResistances(SaveGame saveGame, Item item)
+    public override void ApplyResistances(Item item)
     {
         IArtifactBias artifactBias = null;
         item.ApplyRandomResistance(ref artifactBias, SaveGame.Rng.DieRoll(22) + 16);

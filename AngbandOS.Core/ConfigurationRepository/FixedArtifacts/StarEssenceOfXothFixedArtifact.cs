@@ -20,12 +20,12 @@ internal class StarEssenceOfXothFixedArtifact : FixedArtifact, IFixedArtifactAct
 
 
     // Star essence of Xoth lights and maps the area
-    public void ActivateItem(SaveGame saveGame, Item item)
+    public void ActivateItem(Item item)
     {
-        saveGame.MsgPrint("The essence shines brightly...");
-        saveGame.MapArea();
-        saveGame.LightArea(SaveGame.Rng.DiceRoll(2, 15), 3);
-        item.RechargeTimeLeft = SaveGame.Rng.RandomLessThan(50) + 50;
+        SaveGame.MsgPrint("The essence shines brightly...");
+        SaveGame.MapArea();
+        SaveGame.LightArea(base.SaveGame.Rng.DiceRoll(2, 15), 3);
+        item.RechargeTimeLeft = base.SaveGame.Rng.RandomLessThan(50) + 50;
     }
     public string DescribeActivationEffect() => "magic mapping and light every 50+d50 turns";
     public override ItemFactory BaseItemCategory => _baseItemCategory;

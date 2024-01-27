@@ -20,18 +20,18 @@ internal class DaggerHopeFixedArtifact : FixedArtifact, IFixedArtifactActivatibl
 
 
     // Hope shoots a frost bolt
-    public void ActivateItem(SaveGame saveGame, Item item)
+    public void ActivateItem(Item item)
     {
-        saveGame.MsgPrint("Your dagger is covered in frost...");
-        if (!saveGame.GetDirectionWithAim(out int dir))
+        SaveGame.MsgPrint("Your dagger is covered in frost...");
+        if (!SaveGame.GetDirectionWithAim(out int dir))
         {
             return;
         }
-        saveGame.FireBolt(saveGame.SingletonRepository.Projectiles.Get(nameof(ColdProjectile)), dir, SaveGame.Rng.DiceRoll(6, 8));
-        item.RechargeTimeLeft = SaveGame.Rng.RandomLessThan(7) + 7;
+        SaveGame.FireBolt(SaveGame.SingletonRepository.Projectiles.Get(nameof(Projection.ColdProjectile)), dir, base.SaveGame.Rng.DiceRoll(6, 8));
+        item.RechargeTimeLeft = base.SaveGame.Rng.RandomLessThan(7) + 7;
     }
     public string DescribeActivationEffect() => "frost bolt (6d8) every 7+d7 turns";
-    public override void ApplyResistances(SaveGame saveGame, Item item)
+    public override void ApplyResistances(Item item)
     {
         IArtifactBias artifactBias = null;
         item.ApplyRandomResistance(ref artifactBias, SaveGame.Rng.DieRoll(22) + 16);

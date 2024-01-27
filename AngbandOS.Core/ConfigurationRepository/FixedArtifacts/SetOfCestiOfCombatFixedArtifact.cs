@@ -20,17 +20,17 @@ internal class SetOfCestiOfCombatFixedArtifact : FixedArtifact, IFixedArtifactAc
 
 
     // Cesti shoot arrows
-    public void ActivateItem(SaveGame saveGame, Item item)
+    public void ActivateItem(Item item)
     {
-        saveGame.MsgPrint("Your cesti grows magical spikes...");
-        if (!saveGame.GetDirectionWithAim(out int dir))
+        SaveGame.MsgPrint("Your cesti grows magical spikes...");
+        if (!SaveGame.GetDirectionWithAim(out int dir))
         {
             return;
         }
-        saveGame.FireBolt(saveGame.SingletonRepository.Projectiles.Get(nameof(ArrowProjectile)), dir, 150);
-        item.RechargeTimeLeft = SaveGame.Rng.RandomLessThan(90) + 90;
+        SaveGame.FireBolt(SaveGame.SingletonRepository.Projectiles.Get(nameof(ArrowProjectile)), dir, 150);
+        item.RechargeTimeLeft = base.SaveGame.Rng.RandomLessThan(90) + 90;
     }
-    public override void ApplyResistances(SaveGame saveGame, Item item)
+    public override void ApplyResistances(Item item)
     {
         item.BonusPowerType = RareItemTypeEnum.SpecialAbility;
         item.BonusPowerSubType= SaveGame.SingletonRepository.Activations.ToWeightedRandom().Choose();

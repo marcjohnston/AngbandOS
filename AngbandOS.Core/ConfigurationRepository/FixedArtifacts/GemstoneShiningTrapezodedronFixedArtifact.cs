@@ -21,20 +21,20 @@ internal class GemstoneShiningTrapezodedronFixedArtifact : FixedArtifact, IFixed
 
     // Shining Trapezohedron lights the entire level and recalls us, but drains
     // health to do so
-    public void ActivateItem(SaveGame saveGame, Item item)
+    public void ActivateItem(Item item)
     {
-        saveGame.MsgPrint("The gemstone flashes bright red!");
-        saveGame.WizLight();
-        saveGame.MsgPrint("The gemstone drains your vitality...");
-        saveGame.TakeHit(SaveGame.Rng.DiceRoll(3, 8), "the Gemstone 'Trapezohedron'");
-        saveGame.DetectTraps();
-        saveGame.DetectDoors();
-        saveGame.DetectStairs();
-        if (saveGame.GetCheck("Activate recall? "))
+        SaveGame.MsgPrint("The gemstone flashes bright red!");
+        SaveGame.WizLight();
+        SaveGame.MsgPrint("The gemstone drains your vitality...");
+        SaveGame.TakeHit(base.SaveGame.Rng.DiceRoll(3, 8), "the Gemstone 'Trapezohedron'");
+        SaveGame.DetectTraps();
+        SaveGame.DetectDoors();
+        SaveGame.DetectStairs();
+        if (SaveGame.GetCheck("Activate recall? "))
         {
-            saveGame.ToggleRecall();
+            SaveGame.ToggleRecall();
         }
-        item.RechargeTimeLeft = SaveGame.Rng.RandomLessThan(20) + 20;
+        item.RechargeTimeLeft = base.SaveGame.Rng.RandomLessThan(20) + 20;
     }
     public string DescribeActivationEffect() => "clairvoyance and recall, draining you";
     public override ItemFactory BaseItemCategory => _baseItemCategory;

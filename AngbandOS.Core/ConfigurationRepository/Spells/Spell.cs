@@ -236,7 +236,7 @@ internal abstract class Spell : IGetKey<string>
                 break;
 
             case 15:
-                SaveGame.DestroyDoorsTouch();
+                SaveGame.RunScript(nameof(DestroyAdjacentDoorsScript));
                 break;
 
             case 16:

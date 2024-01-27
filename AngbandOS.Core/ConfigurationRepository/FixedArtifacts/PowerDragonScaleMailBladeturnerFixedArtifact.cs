@@ -20,24 +20,24 @@ internal class PowerDragonScaleMailBladeturnerFixedArtifact : FixedArtifact, IFi
 
 
     // Bladeturner heals you and gives you timed resistances
-    public void ActivateItem(SaveGame saveGame, Item item)
+    public void ActivateItem(Item item)
     {
-        if (!saveGame.GetDirectionWithAim(out int dir))
+        if (!SaveGame.GetDirectionWithAim(out int dir))
         {
             return;
         }
-        saveGame.MsgPrint("You breathe the elements.");
-        saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get(nameof(MissileProjectile)), dir, 300, 4);
-        saveGame.MsgPrint("Your armor glows many colors...");
-        saveGame.TimedFear.ResetTimer();
-        saveGame.TimedSuperheroism.AddTimer(SaveGame.Rng.DieRoll(50) + 50);
-        saveGame.RestoreHealth(30);
-        saveGame.TimedBlessing.AddTimer(SaveGame.Rng.DieRoll(50) + 50);
-        saveGame.TimedAcidResistance.AddTimer(SaveGame.Rng.DieRoll(50) + 50);
-        saveGame.TimedLightningResistance.AddTimer(SaveGame.Rng.DieRoll(50) + 50);
-        saveGame.TimedFireResistance.AddTimer(SaveGame.Rng.DieRoll(50) + 50);
-        saveGame.TimedColdResistance.AddTimer(SaveGame.Rng.DieRoll(50) + 50);
-        saveGame.TimedPoisonResistance.AddTimer(SaveGame.Rng.DieRoll(50) + 50);
+        SaveGame.MsgPrint("You breathe the elements.");
+        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(MissileProjectile)), dir, 300, 4);
+        SaveGame.MsgPrint("Your armor glows many colors...");
+        SaveGame.TimedFear.ResetTimer();
+        SaveGame.TimedSuperheroism.AddTimer(base.SaveGame.Rng.DieRoll(50) + 50);
+        SaveGame.RestoreHealth(30);
+        SaveGame.TimedBlessing.AddTimer(base.SaveGame.Rng.DieRoll(50) + 50);
+        SaveGame.TimedAcidResistance.AddTimer(base.SaveGame.Rng.DieRoll(50) + 50);
+        SaveGame.TimedLightningResistance.AddTimer(base.SaveGame.Rng.DieRoll(50) + 50);
+        SaveGame.TimedFireResistance.AddTimer(base.SaveGame.Rng.DieRoll(50) + 50);
+        SaveGame.TimedColdResistance.AddTimer(base.SaveGame.Rng.DieRoll(50) + 50);
+        SaveGame.TimedPoisonResistance.AddTimer(base.SaveGame.Rng.DieRoll(50) + 50);
         item.RechargeTimeLeft = 400;
     }
     public string DescribeActivationEffect() => "breathe elements (300), berserk rage, bless, and resistance";

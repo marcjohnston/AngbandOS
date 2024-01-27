@@ -37,7 +37,7 @@ internal abstract class FixedArtifact : IItemCharacteristics, IGetKey<string>
     /// Allows the fixed artifact to apply resistances and power as needed.  Does nothing, by default.
     /// </summary>
     /// <returns></returns>
-    public virtual void ApplyResistances(SaveGame saveGame, Item item)
+    public virtual void ApplyResistances(Item item)
     {
     }
 

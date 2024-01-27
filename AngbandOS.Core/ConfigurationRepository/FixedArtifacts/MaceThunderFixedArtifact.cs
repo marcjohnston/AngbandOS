@@ -20,18 +20,18 @@ internal class MaceThunderFixedArtifact : FixedArtifact, IFixedArtifactActivatib
 
 
     // Thunder does haste
-    public void ActivateItem(SaveGame saveGame, Item item)
+    public void ActivateItem(Item item)
     {
-        saveGame.MsgPrint("Your mace glows bright green...");
-        if (saveGame.TimedHaste.TurnsRemaining == 0)
+        SaveGame.MsgPrint("Your mace glows bright green...");
+        if (SaveGame.TimedHaste.TurnsRemaining == 0)
         {
-            saveGame.TimedHaste.SetTimer(SaveGame.Rng.DieRoll(20) + 20);
+            SaveGame.TimedHaste.SetTimer(base.SaveGame.Rng.DieRoll(20) + 20);
         }
         else
         {
-            saveGame.TimedHaste.AddTimer(5);
+            SaveGame.TimedHaste.AddTimer(5);
         }
-        item.RechargeTimeLeft = SaveGame.Rng.RandomLessThan(100) + 100;
+        item.RechargeTimeLeft = base.SaveGame.Rng.RandomLessThan(100) + 100;
     }
     public string DescribeActivationEffect() => "haste self (20+d20 turns) every 100+d100 turns";
     public override ItemFactory BaseItemCategory => _baseItemCategory;

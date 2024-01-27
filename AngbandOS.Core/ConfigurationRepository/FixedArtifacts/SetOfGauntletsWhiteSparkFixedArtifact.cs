@@ -20,15 +20,15 @@ internal class SetOfGauntletsWhiteSparkFixedArtifact : FixedArtifact, IFixedArti
 
 
     // White Spark shoot lightning bolts
-    public void ActivateItem(SaveGame saveGame, Item item)
+    public void ActivateItem(Item item)
     {
-        saveGame.MsgPrint("Your gauntlets are covered in sparks...");
-        if (!saveGame.GetDirectionWithAim(out int dir))
+        SaveGame.MsgPrint("Your gauntlets are covered in sparks...");
+        if (!SaveGame.GetDirectionWithAim(out int dir))
         {
             return;
         }
-        saveGame.FireBolt(saveGame.SingletonRepository.Projectiles.Get(nameof(ElecProjectile)), dir, SaveGame.Rng.DiceRoll(4, 8));
-        item.RechargeTimeLeft = SaveGame.Rng.RandomLessThan(6) + 6;
+        SaveGame.FireBolt(SaveGame.SingletonRepository.Projectiles.Get(nameof(Projection.ElecProjectile)), dir, base.SaveGame.Rng.DiceRoll(4, 8));
+        item.RechargeTimeLeft = base.SaveGame.Rng.RandomLessThan(6) + 6;
     }
     public string DescribeActivationEffect() => "lightning bolt (4d8) every 6+d6 turns";
     public override ItemFactory BaseItemCategory => _baseItemCategory;

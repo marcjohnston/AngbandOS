@@ -20,15 +20,15 @@ internal class SetOfGauntletsOfGhoulsFixedArtifact : FixedArtifact, IFixedArtifa
 
 
     // Ghouls shoot cold bolts
-    public void ActivateItem(SaveGame saveGame, Item item)
+    public void ActivateItem(Item item)
     {
-        saveGame.MsgPrint("Your gauntlets are covered in frost...");
-        if (!saveGame.GetDirectionWithAim(out int dir))
+        SaveGame.MsgPrint("Your gauntlets are covered in frost...");
+        if (!SaveGame.GetDirectionWithAim(out int dir))
         {
             return;
         }
-        saveGame.FireBolt(saveGame.SingletonRepository.Projectiles.Get(nameof(ColdProjectile)), dir, SaveGame.Rng.DiceRoll(6, 8));
-        item.RechargeTimeLeft = SaveGame.Rng.RandomLessThan(7) + 7;
+        SaveGame.FireBolt(SaveGame.SingletonRepository.Projectiles.Get(nameof(Projection.ColdProjectile)), dir, base.SaveGame.Rng.DiceRoll(6, 8));
+        item.RechargeTimeLeft = base.SaveGame.Rng.RandomLessThan(7) + 7;
     }
     public string DescribeActivationEffect() => "frost bolt (6d8) every 7+d7 turns";
     public override ItemFactory BaseItemCategory => _baseItemCategory;

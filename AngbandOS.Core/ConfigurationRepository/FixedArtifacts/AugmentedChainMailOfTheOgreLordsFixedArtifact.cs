@@ -20,14 +20,14 @@ internal class AugmentedChainMailOfTheOgreLordsFixedArtifact : FixedArtifact, IF
 
 
     // Ogre Lords destroys doors
-    public void ActivateItem(SaveGame saveGame, Item item)
+    public void ActivateItem(Item item)
     {
-        saveGame.MsgPrint("Your armor glows bright red...");
-        saveGame.DestroyDoorsTouch();
+        SaveGame.MsgPrint("Your armor glows bright red...");
+        SaveGame.RunScript(nameof(DestroyAdjacentDoorsScript));
         item.RechargeTimeLeft = 10;
     }
     public string DescribeActivationEffect() => "door and trap destruction every 10 turns";
-    public override void ApplyResistances(SaveGame saveGame, Item item)
+    public override void ApplyResistances(Item item)
     {
         IArtifactBias artifactBias = null;
         item.ApplyRandomResistance(ref artifactBias, SaveGame.Rng.DieRoll(22) + 16);

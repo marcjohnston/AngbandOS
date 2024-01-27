@@ -20,10 +20,10 @@ internal class ScytheOfGharneFixedArtifact : FixedArtifact, IFixedArtifactActiva
 
 
     // G'Harne does Word of Recall
-    public void ActivateItem(SaveGame saveGame, Item item)
+    public void ActivateItem(Item item)
     {
-        saveGame.MsgPrint("Your scythe glows soft white...");
-        saveGame.ToggleRecall();
+        SaveGame.MsgPrint("Your scythe glows soft white...");
+        SaveGame.ToggleRecall();
         item.RechargeTimeLeft = 200;
     }
     public string DescribeActivationEffect() => "word of recall every 200 turns";

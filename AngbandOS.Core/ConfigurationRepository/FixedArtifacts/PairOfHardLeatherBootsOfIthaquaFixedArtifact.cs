@@ -20,16 +20,16 @@ internal class PairOfHardLeatherBootsOfIthaquaFixedArtifact : FixedArtifact, IFi
 
 
     // Boots haste you
-    public void ActivateItem(SaveGame saveGame, Item item)
+    public void ActivateItem(Item item)
     {
-        saveGame.MsgPrint("A wind swirls around your boots...");
-        if (saveGame.TimedHaste.TurnsRemaining == 0)
+        SaveGame.MsgPrint("A wind swirls around your boots...");
+        if (SaveGame.TimedHaste.TurnsRemaining == 0)
         {
-            saveGame.TimedHaste.SetTimer(SaveGame.Rng.DieRoll(20) + 20);
+            SaveGame.TimedHaste.SetTimer(base.SaveGame.Rng.DieRoll(20) + 20);
         }
         else
         {
-            saveGame.TimedHaste.AddTimer(5);
+            SaveGame.TimedHaste.AddTimer(5);
         }
         item.RechargeTimeLeft = 200;
     }

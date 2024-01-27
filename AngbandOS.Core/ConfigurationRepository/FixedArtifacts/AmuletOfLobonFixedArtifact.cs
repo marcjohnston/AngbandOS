@@ -20,12 +20,12 @@ internal class AmuletOfLobonFixedArtifact : FixedArtifact, IFixedArtifactActivat
 
 
     // Amulet of Lobon protects us from evil
-    public void ActivateItem(SaveGame saveGame, Item item)
+    public void ActivateItem(Item item)
     {
-        saveGame.MsgPrint("The amulet lets out a shrill wail...");
-        int k = 3 * saveGame.ExperienceLevel;
-        saveGame.TimedProtectionFromEvil.AddTimer(SaveGame.Rng.DieRoll(25) + k);
-        item.RechargeTimeLeft = SaveGame.Rng.RandomLessThan(225) + 225;
+        SaveGame.MsgPrint("The amulet lets out a shrill wail...");
+        int k = 3 * SaveGame.ExperienceLevel;
+        SaveGame.TimedProtectionFromEvil.AddTimer(base.SaveGame.Rng.DieRoll(25) + k);
+        item.RechargeTimeLeft = base.SaveGame.Rng.RandomLessThan(225) + 225;
     }
     public string DescribeActivationEffect() => "protection from evil every 225+d225 turns";
     public override ItemFactory BaseItemCategory => _baseItemCategory;

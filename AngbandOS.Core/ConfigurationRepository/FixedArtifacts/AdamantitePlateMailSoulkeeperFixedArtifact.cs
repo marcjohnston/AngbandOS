@@ -20,12 +20,12 @@ internal class AdamantitePlateMailSoulkeeperFixedArtifact : FixedArtifact, IFixe
 
 
     // Soulkeeper heals you a lot
-    public void ActivateItem(SaveGame saveGame, Item item)
+    public void ActivateItem(Item item)
     {
-        saveGame.MsgPrint("Your armor glows a bright white...");
-        saveGame.MsgPrint("You feel much better...");
-        saveGame.RestoreHealth(1000);
-        saveGame.TimedBleeding.ResetTimer();
+        SaveGame.MsgPrint("Your armor glows a bright white...");
+        SaveGame.MsgPrint("You feel much better...");
+        SaveGame.RestoreHealth(1000);
+        SaveGame.TimedBleeding.ResetTimer();
         item.RechargeTimeLeft = 888;
     }
     public string DescribeActivationEffect() => "heal (1000) every 888 turns";

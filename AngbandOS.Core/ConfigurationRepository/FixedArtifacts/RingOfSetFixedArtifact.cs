@@ -20,18 +20,18 @@ internal class RingOfSetFixedArtifact : FixedArtifact, IFixedArtifactActivatible
 
 
     // Ring of Set has a random effect
-    public void ActivateItem(SaveGame saveGame, Item item)
+    public void ActivateItem(Item item)
     {
-        saveGame.MsgPrint("The ring glows intensely black...");
-        if (!saveGame.GetDirectionWithAim(out int dir))
+        SaveGame.MsgPrint("The ring glows intensely black...");
+        if (!SaveGame.GetDirectionWithAim(out int dir))
         {
             return;
         }
         RingOfSetPower(dir);
-        item.RechargeTimeLeft = SaveGame.Rng.RandomLessThan(450) + 450;
+        item.RechargeTimeLeft = base.SaveGame.Rng.RandomLessThan(450) + 450;
     }
     public string DescribeActivationEffect() => "bizarre things every 450+d450 turns";
-    public override void ApplyResistances(SaveGame saveGame, Item item)
+    public override void ApplyResistances(Item item)
     {
         item.BonusPowerType = RareItemTypeEnum.SpecialAbility;
         item.BonusPowerSubType= SaveGame.SingletonRepository.Activations.ToWeightedRandom().Choose();

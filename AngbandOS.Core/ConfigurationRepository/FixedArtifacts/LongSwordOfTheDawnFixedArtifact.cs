@@ -20,11 +20,11 @@ internal class LongSwordOfTheDawnFixedArtifact : FixedArtifact, IFixedArtifactAc
 
 
     // Dawn Sword summons a reaver
-    public void ActivateItem(SaveGame saveGame, Item item)
+    public void ActivateItem(Item item)
     {
-        saveGame.MsgPrint("Your sword flickers black for a moment...");
-        saveGame.SummonSpecificFriendly(saveGame.MapY, saveGame.MapX, saveGame.Difficulty, new ReaverMonsterSelector(), true);
-        item.RechargeTimeLeft = 500 + SaveGame.Rng.DieRoll(500);
+        SaveGame.MsgPrint("Your sword flickers black for a moment...");
+        SaveGame.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, SaveGame.Difficulty, new ReaverMonsterSelector(), true);
+        item.RechargeTimeLeft = 500 + base.SaveGame.Rng.DieRoll(500);
     }
     public string DescribeActivationEffect() => "summon a Black Reaver every 500+d500 turns";
     public override ItemFactory BaseItemCategory => _baseItemCategory;

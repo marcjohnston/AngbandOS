@@ -20,10 +20,10 @@ internal class QuarterstaffEririlFixedArtifact : FixedArtifact, IFixedArtifactAc
 
 
     // Ereril does identify
-    public void ActivateItem(SaveGame saveGame, Item item)
+    public void ActivateItem(Item item)
     {
-        saveGame.MsgPrint("Your quarterstaff glows yellow...");
-        if (!saveGame.IdentifyItem())
+        SaveGame.MsgPrint("Your quarterstaff glows yellow...");
+        if (!SaveGame.IdentifyItem())
         {
             return;
         }

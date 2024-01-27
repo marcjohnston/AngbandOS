@@ -20,14 +20,14 @@ internal class LongSwordExcaliburFixedArtifact : FixedArtifact, IFixedArtifactAc
 
 
     // Excalibur shoots a frost ball
-    public void ActivateItem(SaveGame saveGame, Item item)
+    public void ActivateItem(Item item)
     {
-        saveGame.MsgPrint("Your sword glows an intense blue...");
-        if (!saveGame.GetDirectionWithAim(out int dir))
+        SaveGame.MsgPrint("Your sword glows an intense blue...");
+        if (!SaveGame.GetDirectionWithAim(out int dir))
         {
             return;
         }
-        saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get(nameof(ColdProjectile)), dir, 100, 2);
+        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(ColdProjectile)), dir, 100, 2);
         item.RechargeTimeLeft = 300;
     }
     public string DescribeActivationEffect() => "frost ball (100) every 300 turns";

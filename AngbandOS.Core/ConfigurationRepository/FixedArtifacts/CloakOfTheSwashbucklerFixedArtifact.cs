@@ -20,14 +20,14 @@ internal class CloakOfTheSwashbucklerFixedArtifact : FixedArtifact, IFixedArtifa
 
 
     // Swashbuckler recharges items
-    public void ActivateItem(SaveGame saveGame, Item item)
+    public void ActivateItem(Item item)
     {
-        saveGame.MsgPrint("Your cloak glows bright yellow...");
-        saveGame.Recharge(60);
+        SaveGame.MsgPrint("Your cloak glows bright yellow...");
+        SaveGame.Recharge(60);
         item.RechargeTimeLeft = 70;
     }
     public string DescribeActivationEffect() => "recharge item I every 70 turns";
-    public override void ApplyResistances(SaveGame saveGame, Item item)
+    public override void ApplyResistances(Item item)
     {
         item.BonusPowerType = RareItemTypeEnum.SpecialAbility;
         item.BonusPowerSubType= SaveGame.SingletonRepository.Activations.ToWeightedRandom().Choose();

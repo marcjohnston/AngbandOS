@@ -20,10 +20,10 @@ internal class GreatAxeOfTheTrollsFixedArtifact : FixedArtifact, IFixedArtifactA
 
 
     // Trolls does mass carnage
-    public void ActivateItem(SaveGame saveGame, Item item)
+    public void ActivateItem(Item item)
     {
-        saveGame.MsgPrint("Your axe lets out a long, shrill note...");
-        saveGame.MassCarnage(true);
+        SaveGame.MsgPrint("Your axe lets out a long, shrill note...");
+        SaveGame.MassCarnage(true);
         item.RechargeTimeLeft = 1000;
     }
     public string DescribeActivationEffect() => "mass carnage every 1000 turns";

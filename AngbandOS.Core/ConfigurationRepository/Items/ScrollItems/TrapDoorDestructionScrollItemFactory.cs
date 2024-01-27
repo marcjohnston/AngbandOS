@@ -24,7 +24,7 @@ internal class TrapDoorDestructionScrollItemFactory : ScrollItemFactory
 
     public override void Read(ReadScrollEvent eventArgs)
     {
-        if (SaveGame.DestroyDoorsTouch())
+        if (SaveGame.RunSuccessfulScript(nameof(DestroyAdjacentDoorsScript)))
         {
             eventArgs.Identified = true;
         }

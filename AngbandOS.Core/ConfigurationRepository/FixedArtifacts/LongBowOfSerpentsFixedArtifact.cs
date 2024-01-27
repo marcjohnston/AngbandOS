@@ -21,7 +21,7 @@ internal class LongBowOfSerpentsFixedArtifact : FixedArtifact
 
     public override ItemFactory BaseItemCategory => _baseItemCategory;
 
-    public override void ApplyResistances(SaveGame saveGame, Item item)
+    public override void ApplyResistances(Item item)
     {
         if (SaveGame.Rng.DieRoll(2) == 1)
         {

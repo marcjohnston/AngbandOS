@@ -20,12 +20,12 @@ internal class IronHelmSkullkeeperFixedArtifact : FixedArtifact, IFixedArtifactA
 
 
     // Skull Keeper detects everything
-    public void ActivateItem(SaveGame saveGame, Item item)
+    public void ActivateItem(Item item)
     {
-        saveGame.MsgPrint("Your helm glows bright white...");
-        saveGame.MsgPrint("An image forms in your mind...");
-        saveGame.DetectAll();
-        item.RechargeTimeLeft = SaveGame.Rng.RandomLessThan(55) + 55;
+        SaveGame.MsgPrint("Your helm glows bright white...");
+        SaveGame.MsgPrint("An image forms in your mind...");
+        SaveGame.DetectAll();
+        item.RechargeTimeLeft = base.SaveGame.Rng.RandomLessThan(55) + 55;
     }
     public string DescribeActivationEffect() => "detection every 55+d55 turns";
     public override ItemFactory BaseItemCategory => _baseItemCategory;

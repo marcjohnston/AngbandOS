@@ -20,16 +20,16 @@ internal class GoldenCrownOfTheSunFixedArtifact : FixedArtifact, IFixedArtifactA
 
 
     // Sun Crown heals
-    public void ActivateItem(SaveGame saveGame, Item item)
+    public void ActivateItem(Item item)
     {
-        saveGame.MsgPrint("Your crown glows deep yellow...");
-        saveGame.MsgPrint("You feel a warm tingling inside...");
-        saveGame.RestoreHealth(700);
-        saveGame.TimedBleeding.ResetTimer();
+        SaveGame.MsgPrint("Your crown glows deep yellow...");
+        SaveGame.MsgPrint("You feel a warm tingling inside...");
+        SaveGame.RestoreHealth(700);
+        SaveGame.TimedBleeding.ResetTimer();
         item.RechargeTimeLeft = 250;
     }
     public string DescribeActivationEffect() => "heal (700) every 250 turns";
-    public override void ApplyResistances(SaveGame saveGame, Item item)
+    public override void ApplyResistances(Item item)
     {
         item.BonusPowerType = RareItemTypeEnum.SpecialAbility;
         item.BonusPowerSubType= SaveGame.SingletonRepository.Activations.ToWeightedRandom().Choose();

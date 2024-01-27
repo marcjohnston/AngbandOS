@@ -20,15 +20,15 @@ internal class RingOfElementalPowerFireFixedArtifact : FixedArtifact, IFixedArti
 
 
     // Ring of Elemental Fire casts a fireball
-    public void ActivateItem(SaveGame saveGame, Item item)
+    public void ActivateItem(Item item)
     {
-        saveGame.MsgPrint("The ring glows deep red...");
-        if (!saveGame.GetDirectionWithAim(out int dir))
+        SaveGame.MsgPrint("The ring glows deep red...");
+        if (!SaveGame.GetDirectionWithAim(out int dir))
         {
             return;
         }
-        saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get(nameof(FireProjectile)), dir, 120, 3);
-        item.RechargeTimeLeft = SaveGame.Rng.RandomLessThan(225) + 225;
+        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(FireProjectile)), dir, 120, 3);
+        item.RechargeTimeLeft = base.SaveGame.Rng.RandomLessThan(225) + 225;
     }
     public string DescribeActivationEffect() => "large fire ball (120) every 225+d225 turns";
     public override ItemFactory BaseItemCategory => _baseItemCategory;

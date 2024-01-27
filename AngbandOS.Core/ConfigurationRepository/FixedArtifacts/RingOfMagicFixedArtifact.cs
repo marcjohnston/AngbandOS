@@ -20,16 +20,16 @@ internal class RingOfMagicFixedArtifact : FixedArtifact, IFixedArtifactActivatib
 
 
     // Ring of Magic has a djinn in it that drains life from an opponent
-    public void ActivateItem(SaveGame saveGame, Item item)
+    public void ActivateItem(Item item)
     {
-        saveGame.MsgPrint("You order Frakir to strangle your opponent.");
-        if (!saveGame.GetDirectionWithAim(out int dir))
+        SaveGame.MsgPrint("You order Frakir to strangle your opponent.");
+        if (!SaveGame.GetDirectionWithAim(out int dir))
         {
             return;
         }
-        if (saveGame.DrainLife(dir, 100))
+        if (SaveGame.DrainLife(dir, 100))
         {
-            item.RechargeTimeLeft = SaveGame.Rng.RandomLessThan(100) + 100;
+            item.RechargeTimeLeft = base.SaveGame.Rng.RandomLessThan(100) + 100;
         }
     }
     public string DescribeActivationEffect() => "a strangling attack (100) every 100+d100 turns";

@@ -20,19 +20,19 @@ internal class RingOfElementalPowerIceFixedArtifact : FixedArtifact, IFixedArtif
 
 
     // Ring of Elemental Ice casts a coldball
-    public void ActivateItem(SaveGame saveGame, Item item)
+    public void ActivateItem(Item item)
     {
-        saveGame.MsgPrint("The ring glows bright white...");
-        if (!saveGame.GetDirectionWithAim(out int dir))
+        SaveGame.MsgPrint("The ring glows bright white...");
+        if (!SaveGame.GetDirectionWithAim(out int dir))
         {
             return;
         }
-        saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get(nameof(ColdProjectile)), dir, 200, 3);
-        item.RechargeTimeLeft = SaveGame.Rng.RandomLessThan(325) + 325;
+        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(ColdProjectile)), dir, 200, 3);
+        item.RechargeTimeLeft = base.SaveGame.Rng.RandomLessThan(325) + 325;
     }
     public string DescribeActivationEffect() => "large frost ball (200) every 325+d325 turns";
 
-    public override void ApplyResistances(SaveGame saveGame, Item item)
+    public override void ApplyResistances(Item item)
     {
         item.BonusPowerType = RareItemTypeEnum.SpecialAbility;
         item.BonusPowerSubType= SaveGame.SingletonRepository.Activations.ToWeightedRandom().Choose();

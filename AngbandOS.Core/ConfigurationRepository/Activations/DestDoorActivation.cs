@@ -20,7 +20,7 @@ internal class DestDoorActivation : Activation
 
     public override bool Activate()
     {
-        SaveGame.DestroyDoorsTouch();
+        SaveGame.RunScript(nameof(DestroyAdjacentDoorsScript));
         return true;
     }
 

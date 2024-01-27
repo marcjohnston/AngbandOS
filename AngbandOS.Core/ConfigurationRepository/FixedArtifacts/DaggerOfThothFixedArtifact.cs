@@ -20,15 +20,15 @@ internal class DaggerOfThothFixedArtifact : FixedArtifact, IFixedArtifactActivat
 
 
     // Thoth shoots a poison ball
-    public void ActivateItem(SaveGame saveGame, Item item)
+    public void ActivateItem(Item item)
     {
-        saveGame.MsgPrint("Your dagger throbs deep green...");
-        if (!saveGame.GetDirectionWithAim(out int dir))
+        SaveGame.MsgPrint("Your dagger throbs deep green...");
+        if (!SaveGame.GetDirectionWithAim(out int dir))
         {
             return;
         }
-        saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get(nameof(PoisProjectile)), dir, 12, 3);
-        item.RechargeTimeLeft = SaveGame.Rng.RandomLessThan(4) + 4;
+        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(PoisProjectile)), dir, 12, 3);
+        item.RechargeTimeLeft = base.SaveGame.Rng.RandomLessThan(4) + 4;
     }
     public string DescribeActivationEffect() => "stinking cloud (12) every 4+d4 turns";
     public override ItemFactory BaseItemCategory => _baseItemCategory;

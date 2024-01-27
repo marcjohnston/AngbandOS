@@ -20,14 +20,14 @@ internal class BeakedAxeOfTheodenFixedArtifact : FixedArtifact, IFixedArtifactAc
 
 
     // Theoden drains life
-    public void ActivateItem(SaveGame saveGame, Item item)
+    public void ActivateItem(Item item)
     {
-        saveGame.MsgPrint("Your axe blade glows black...");
-        if (!saveGame.GetDirectionWithAim(out int dir))
+        SaveGame.MsgPrint("Your axe blade glows black...");
+        if (!SaveGame.GetDirectionWithAim(out int dir))
         {
             return;
         }
-        saveGame.DrainLife(dir, 120);
+        SaveGame.DrainLife(dir, 120);
         item.RechargeTimeLeft = 400;
     }
     public string DescribeActivationEffect() => "drain life (120) every 400 turns";

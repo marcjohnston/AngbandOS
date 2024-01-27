@@ -20,11 +20,11 @@ internal class StarEssenceOfPolarisFixedArtifact : FixedArtifact, IFixedArtifact
 
 
     // Star Essence of Polaris lights the area
-    public void ActivateItem(SaveGame saveGame, Item item)
+    public void ActivateItem(Item item)
     {
-        saveGame.MsgPrint("The essence wells with clear light...");
-        saveGame.LightArea(SaveGame.Rng.DiceRoll(2, 15), 3);
-        item.RechargeTimeLeft = SaveGame.Rng.RandomLessThan(10) + 10;
+        SaveGame.MsgPrint("The essence wells with clear light...");
+        SaveGame.LightArea(base.SaveGame.Rng.DiceRoll(2, 15), 3);
+        item.RechargeTimeLeft = base.SaveGame.Rng.RandomLessThan(10) + 10;
     }
 
     public string DescribeActivationEffect() => "illumination every 10+d10 turns";

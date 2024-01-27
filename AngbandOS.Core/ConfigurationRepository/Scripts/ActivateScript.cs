@@ -108,7 +108,7 @@ internal class ActivateScript : Script, IScript, IRepeatableScript, ISuccessfulS
         if (item.FixedArtifact != null && typeof(IFixedArtifactActivatible).IsAssignableFrom(item.FixedArtifact.GetType()))
         {
             IFixedArtifactActivatible activatibleFixedArtifact = (IFixedArtifactActivatible)item.FixedArtifact;
-            activatibleFixedArtifact.ActivateItem(SaveGame, item);
+            activatibleFixedArtifact.ActivateItem(item);
             return true;
         }
 

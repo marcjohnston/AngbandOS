@@ -227,7 +227,7 @@ internal class TarotSpellTarotDraw : Spell
                 break;
 
             case 15:
-                SaveGame.DestroyDoorsTouch();
+                SaveGame.RunScript(nameof(DestroyAdjacentDoorsScript));
                 break;
 
             case 16:

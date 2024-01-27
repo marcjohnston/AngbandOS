@@ -20,17 +20,17 @@ internal class TridentOfTheGnorriFixedArtifact : FixedArtifact, IFixedArtifactAc
 
 
     // Gnorri teleports monsters away
-    public void ActivateItem(SaveGame saveGame, Item item)
+    public void ActivateItem(Item item)
     {
-        saveGame.MsgPrint("Your trident glows deep red...");
-        if (!saveGame.GetDirectionWithAim(out int dir))
+        SaveGame.MsgPrint("Your trident glows deep red...");
+        if (!SaveGame.GetDirectionWithAim(out int dir))
         {
             return;
         }
-        saveGame.TeleportMonster(dir);
+        SaveGame.TeleportMonster(dir);
         item.RechargeTimeLeft = 150;
     }
-    public override void ApplyResistances(SaveGame saveGame, Item item)
+    public override void ApplyResistances(Item item)
     {
         item.BonusPowerType = RareItemTypeEnum.SpecialAbility;
         item.BonusPowerSubType= SaveGame.SingletonRepository.Activations.ToWeightedRandom().Choose();

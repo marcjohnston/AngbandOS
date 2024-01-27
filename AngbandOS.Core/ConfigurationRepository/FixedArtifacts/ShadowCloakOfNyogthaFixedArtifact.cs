@@ -20,14 +20,14 @@ internal class ShadowCloakOfNyogthaFixedArtifact : FixedArtifact, IFixedArtifact
 
 
     // Nyogtha restores experience
-    public void ActivateItem(SaveGame saveGame, Item item)
+    public void ActivateItem(Item item)
     {
-        saveGame.MsgPrint("Your cloak glows a deep red...");
-        saveGame.RestoreLevel();
+        SaveGame.MsgPrint("Your cloak glows a deep red...");
+        SaveGame.RestoreLevel();
         item.RechargeTimeLeft = 450;
     }
     public string DescribeActivationEffect() => "restore life levels every 450 turns";
-    public override void ApplyResistances(SaveGame saveGame, Item item)
+    public override void ApplyResistances(Item item)
     {
         IArtifactBias artifactBias = null;
         item.ApplyRandomResistance(ref artifactBias, SaveGame.Rng.DieRoll(22) + 16);

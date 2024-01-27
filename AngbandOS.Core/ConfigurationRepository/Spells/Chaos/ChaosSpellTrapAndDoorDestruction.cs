@@ -13,7 +13,7 @@ internal class ChaosSpellTrapAndDoorDestruction : Spell
     private ChaosSpellTrapAndDoorDestruction(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.DestroyDoorsTouch();
+        SaveGame.RunScript(nameof(DestroyAdjacentDoorsScript));
     }
 
     public override void CastFailed()

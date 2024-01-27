@@ -20,18 +20,18 @@ internal class LongSwordOfEverflameFixedArtifact : FixedArtifact, IFixedArtifact
 
 
     // Everflame shoots a fire ball
-    public void ActivateItem(SaveGame saveGame, Item item)
+    public void ActivateItem(Item item)
     {
-        saveGame.MsgPrint("Your sword glows an intense red...");
-        if (!saveGame.GetDirectionWithAim(out int dir))
+        SaveGame.MsgPrint("Your sword glows an intense red...");
+        if (!SaveGame.GetDirectionWithAim(out int dir))
         {
             return;
         }
-        saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get(nameof(FireProjectile)), dir, 72, 2);
+        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(FireProjectile)), dir, 72, 2);
         item.RechargeTimeLeft = 400;
     }
     public string DescribeActivationEffect() => "fire ball (72) every 400 turns";
-    public override void ApplyResistances(SaveGame saveGame, Item item)
+    public override void ApplyResistances(Item item)
     {
         if (SaveGame.Rng.DieRoll(2) == 1)
         {

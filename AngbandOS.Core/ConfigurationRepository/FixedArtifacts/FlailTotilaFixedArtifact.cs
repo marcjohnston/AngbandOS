@@ -20,14 +20,14 @@ internal class FlailTotilaFixedArtifact : FixedArtifact, IFixedArtifactActivatib
 
 
     // Totila does confusion
-    public void ActivateItem(SaveGame saveGame, Item item)
+    public void ActivateItem(Item item)
     {
-        saveGame.MsgPrint("Your flail glows in scintillating colors...");
-        if (!saveGame.GetDirectionWithAim(out int dir))
+        SaveGame.MsgPrint("Your flail glows in scintillating colors...");
+        if (!SaveGame.GetDirectionWithAim(out int dir))
         {
             return;
         }
-        saveGame.ConfuseMonster(dir, 20);
+        SaveGame.ConfuseMonster(dir, 20);
         item.RechargeTimeLeft = 15;
     }
     public string DescribeActivationEffect() => "confuse monster every 15 turns";

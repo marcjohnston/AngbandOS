@@ -20,18 +20,18 @@ internal class TheLucerneHammerJusticeFixedArtifact : FixedArtifact, IFixedArtif
 
 
     // Justice drains life
-    public void ActivateItem(SaveGame saveGame, Item item)
+    public void ActivateItem(Item item)
     {
-        saveGame.MsgPrint("Your hammer glows white...");
-        if (!saveGame.GetDirectionWithAim(out int dir))
+        SaveGame.MsgPrint("Your hammer glows white...");
+        if (!SaveGame.GetDirectionWithAim(out int dir))
         {
             return;
         }
-        saveGame.DrainLife(dir, 90);
+        SaveGame.DrainLife(dir, 90);
         item.RechargeTimeLeft = 70;
     }
     public string DescribeActivationEffect() => "drain life (90) every 70 turns";
-    public override void ApplyResistances(SaveGame saveGame, Item item)
+    public override void ApplyResistances(Item item)
     {
         IArtifactBias artifactBias = null;
         item.ApplyRandomResistance(ref artifactBias, SaveGame.Rng.DieRoll(22) + 16);

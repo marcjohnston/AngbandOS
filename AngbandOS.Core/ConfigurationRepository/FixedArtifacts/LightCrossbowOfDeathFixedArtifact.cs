@@ -20,13 +20,13 @@ internal class LightCrossbowOfDeathFixedArtifact : FixedArtifact, IFixedArtifact
 
 
     // Death brands your bolts
-    public void ActivateItem(SaveGame saveGame, Item item)
+    public void ActivateItem(Item item)
     {
-        saveGame.MsgPrint("Your crossbow glows deep red...");
-        saveGame.BrandBolts();
+        SaveGame.MsgPrint("Your crossbow glows deep red...");
+        SaveGame.BrandBolts();
         item.RechargeTimeLeft = 999;
     }
-    public override void ApplyResistances(SaveGame saveGame, Item item)
+    public override void ApplyResistances(Item item)
     {
         if (SaveGame.Rng.DieRoll(2) == 1)
         {

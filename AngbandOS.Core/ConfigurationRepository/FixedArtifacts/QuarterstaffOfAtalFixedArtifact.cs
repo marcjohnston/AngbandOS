@@ -20,15 +20,15 @@ internal class QuarterstaffOfAtalFixedArtifact : FixedArtifact, IFixedArtifactAc
 
 
     // Atal does full identify
-    public void ActivateItem(SaveGame saveGame, Item item)
+    public void ActivateItem(Item item)
     {
-        saveGame.MsgPrint("Your quarterstaff glows brightly...");
-        saveGame.DetectAll();
-        saveGame.Probing();
-        saveGame.IdentifyFully();
+        SaveGame.MsgPrint("Your quarterstaff glows brightly...");
+        SaveGame.DetectAll();
+        SaveGame.Probing();
+        SaveGame.IdentifyFully();
         item.RechargeTimeLeft = 1000;
     }
-    public override void ApplyResistances(SaveGame saveGame, Item item)
+    public override void ApplyResistances(Item item)
     {
         item.BonusPowerType = RareItemTypeEnum.SpecialAbility;
         item.BonusPowerSubType= SaveGame.SingletonRepository.Activations.ToWeightedRandom().Choose();

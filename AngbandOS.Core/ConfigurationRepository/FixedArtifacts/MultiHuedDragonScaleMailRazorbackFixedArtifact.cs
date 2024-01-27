@@ -20,12 +20,12 @@ internal class MultiHuedDragonScaleMailRazorbackFixedArtifact : FixedArtifact, I
 
 
     // Razorback gives you a point-blank lightning ball
-    public void ActivateItem(SaveGame saveGame, Item item)
+    public void ActivateItem(Item item)
     {
-        saveGame.MsgPrint("Your armor is surrounded by lightning...");
+        SaveGame.MsgPrint("Your armor is surrounded by lightning...");
         for (int i = 0; i < 8; i++)
         {
-            saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get(nameof(ElecProjectile)), saveGame.OrderedDirection[i], 150, 3);
+            SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(ElecProjectile)), SaveGame.OrderedDirection[i], 150, 3);
         }
         item.RechargeTimeLeft = 1000;
     }

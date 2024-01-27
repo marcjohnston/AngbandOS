@@ -14,7 +14,7 @@ internal interface IFixedArtifactActivatible
     /// </summary>
     /// <param name="saveGame"></param>
     /// <param name="item"></param>
-    public abstract void ActivateItem(SaveGame saveGame, Item item);
+    public abstract void ActivateItem(Item item);
 
     /// <summary>
     /// Returns the description of the activation effect for the fixed artifact.

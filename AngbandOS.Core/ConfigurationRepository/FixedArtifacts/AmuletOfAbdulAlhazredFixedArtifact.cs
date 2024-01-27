@@ -20,11 +20,11 @@ internal class AmuletOfAbdulAlhazredFixedArtifact : FixedArtifact, IFixedArtifac
 
 
     // Amulet of Abdul Alhazred dispels evil
-    public void ActivateItem(SaveGame saveGame, Item item)
+    public void ActivateItem(Item item)
     {
-        saveGame.MsgPrint("The amulet floods the area with goodness...");
-        saveGame.DispelEvil(saveGame.ExperienceLevel * 5);
-        item.RechargeTimeLeft = SaveGame.Rng.RandomLessThan(300) + 300;
+        SaveGame.MsgPrint("The amulet floods the area with goodness...");
+        SaveGame.DispelEvil(SaveGame.ExperienceLevel * 5);
+        item.RechargeTimeLeft = base.SaveGame.Rng.RandomLessThan(300) + 300;
     }
     public string DescribeActivationEffect() => "dispel evil (x5) every 300+d300 turns";
     public override ItemFactory BaseItemCategory => _baseItemCategory;

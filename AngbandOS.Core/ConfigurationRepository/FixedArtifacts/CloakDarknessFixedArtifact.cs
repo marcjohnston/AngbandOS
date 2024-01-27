@@ -20,10 +20,10 @@ internal class CloakDarknessFixedArtifact : FixedArtifact, IFixedArtifactActivat
 
 
     // Darkness sends monsters to sleep
-    public void ActivateItem(SaveGame saveGame, Item item)
+    public void ActivateItem(Item item)
     {
-        saveGame.MsgPrint("Your cloak glows deep blue...");
-        saveGame.SleepMonstersTouch();
+        SaveGame.MsgPrint("Your cloak glows deep blue...");
+        SaveGame.SleepMonstersTouch();
         item.RechargeTimeLeft = 55;
     }
     public string DescribeActivationEffect() => "Sleep II every 55 turns";

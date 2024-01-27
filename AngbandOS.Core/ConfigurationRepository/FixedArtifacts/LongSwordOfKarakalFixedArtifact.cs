@@ -20,16 +20,16 @@ internal class LongSwordOfKarakalFixedArtifact : FixedArtifact, IFixedArtifactAc
 
 
     // Karakal teleports you randomly
-    public void ActivateItem(SaveGame saveGame, Item item)
+    public void ActivateItem(Item item)
     {
-        switch (SaveGame.Rng.DieRoll(13))
+        switch (base.SaveGame.Rng.DieRoll(13))
         {
             case 1:
             case 2:
             case 3:
             case 4:
             case 5:
-                saveGame.TeleportPlayer(10);
+                SaveGame.TeleportPlayer(10);
                 break;
 
             case 6:
@@ -37,22 +37,22 @@ internal class LongSwordOfKarakalFixedArtifact : FixedArtifact, IFixedArtifactAc
             case 8:
             case 9:
             case 10:
-                saveGame.TeleportPlayer(222);
+                SaveGame.TeleportPlayer(222);
                 break;
 
             case 11:
             case 12:
-                saveGame.StairCreation();
+                SaveGame.StairCreation();
                 break;
 
             default:
-                if (saveGame.GetCheck("Leave this level? "))
+                if (SaveGame.GetCheck("Leave this level? "))
                 {
                     {
-                        saveGame.DoCmdSaveGame(true);
+                        SaveGame.DoCmdSaveGame(true);
                     }
-                    saveGame.NewLevelFlag = true;
-                    saveGame.CameFrom = LevelStart.StartRandom;
+                    SaveGame.NewLevelFlag = true;
+                    SaveGame.CameFrom = LevelStart.StartRandom;
                 }
                 break;
         }

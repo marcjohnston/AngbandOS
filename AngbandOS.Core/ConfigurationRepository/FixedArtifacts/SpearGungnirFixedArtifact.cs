@@ -20,14 +20,14 @@ internal class SpearGungnirFixedArtifact : FixedArtifact, IFixedArtifactActivati
 
 
     // Grungnir shoots a lightning ball
-    public void ActivateItem(SaveGame saveGame, Item item)
+    public void ActivateItem(Item item)
     {
-        saveGame.MsgPrint("Your spear crackles with electricity...");
-        if (!saveGame.GetDirectionWithAim(out int dir))
+        SaveGame.MsgPrint("Your spear crackles with electricity...");
+        if (!SaveGame.GetDirectionWithAim(out int dir))
         {
             return;
         }
-        saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get(nameof(ElecProjectile)), dir, 100, 3);
+        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(ElecProjectile)), dir, 100, 3);
         item.RechargeTimeLeft = 500;
     }
     public string DescribeActivationEffect() => "lightning ball (100) every 500 turns";

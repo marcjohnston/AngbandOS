@@ -19,17 +19,17 @@ internal class MetalScaleMailOfTheOrcsFixedArtifact : FixedArtifact, IFixedArtif
     }
 
 
-    public override void ApplyResistances(SaveGame saveGame, Item item)
+    public override void ApplyResistances(Item item)
     {
         IArtifactBias artifactBias = null;
         item.ApplyRandomResistance(ref artifactBias, SaveGame.Rng.DieRoll(22) + 16);
     }
 
     // Orc does Carnage
-    public void ActivateItem(SaveGame saveGame, Item item)
+    public void ActivateItem(Item item)
     {
-        saveGame.MsgPrint("Your armor glows deep blue...");
-        saveGame.Carnage(true);
+        SaveGame.MsgPrint("Your armor glows deep blue...");
+        SaveGame.Carnage(true);
         item.RechargeTimeLeft = 500;
     }
     public string DescribeActivationEffect() => "carnage every 500 turns";

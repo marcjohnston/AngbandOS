@@ -20,15 +20,15 @@ internal class DaggerIcicleFixedArtifact : FixedArtifact, IFixedArtifactActivati
 
 
     // Icicle shoots a cold ball
-    public void ActivateItem(SaveGame saveGame, Item item)
+    public void ActivateItem(Item item)
     {
-        saveGame.MsgPrint("Your dagger is covered in frost...");
-        if (!saveGame.GetDirectionWithAim(out int dir))
+        SaveGame.MsgPrint("Your dagger is covered in frost...");
+        if (!SaveGame.GetDirectionWithAim(out int dir))
         {
             return;
         }
-        saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get(nameof(ColdProjectile)), dir, 48, 2);
-        item.RechargeTimeLeft = SaveGame.Rng.RandomLessThan(5) + 5;
+        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(ColdProjectile)), dir, 48, 2);
+        item.RechargeTimeLeft = base.SaveGame.Rng.RandomLessThan(5) + 5;
     }
     public string DescribeActivationEffect() => "frost ball (48) every 5+d5 turns";
     public override ItemFactory BaseItemCategory => _baseItemCategory;

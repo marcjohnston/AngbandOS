@@ -20,14 +20,14 @@ internal class SpearOfDestinyFixedArtifact : FixedArtifact, IFixedArtifactActiva
 
 
     // Destiny does rock to mud
-    public void ActivateItem(SaveGame saveGame, Item item)
+    public void ActivateItem(Item item)
     {
-        saveGame.MsgPrint("Your spear pulsates...");
-        if (!saveGame.GetDirectionWithAim(out int dir))
+        SaveGame.MsgPrint("Your spear pulsates...");
+        if (!SaveGame.GetDirectionWithAim(out int dir))
         {
             return;
         }
-        saveGame.WallToMud(dir);
+        SaveGame.WallToMud(dir);
         item.RechargeTimeLeft = 5;
     }
     public string DescribeActivationEffect() => "stone to mud every 5 turns";

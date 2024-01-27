@@ -4488,12 +4488,6 @@ internal class SaveGame
         return TargetedProject(SingletonRepository.Projectiles.Get(nameof(KillDoorProjectile)), dir, 0, flg);
     }
 
-    public bool DestroyDoorsTouch()
-    {
-        ProjectionFlag flg = ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectHide;
-        return Project(0, 1, MapY, MapX, 0, SingletonRepository.Projectiles.Get(nameof(KillDoorProjectile)), flg);
-    }
-
     public bool DetectAll()
     {
         bool detect = DetectTraps();
@@ -9263,6 +9257,23 @@ internal class SaveGame
         }
         IScript castedScript = (IScript)script;
         castedScript.ExecuteScript();
+    }
+
+    public bool RunSuccessfulScript(string scriptName)
+    {
+        // Get the script from the singleton repository.
+        Script? script = SingletonRepository.Scripts.Get(scriptName);
+
+        if (script == null)
+        {
+            throw new Exception($"The {scriptName} script specified to run does not exist.");
+        }
+        if (!typeof(ISuccessfulScript).IsInstanceOfType(script))
+        {
+            throw new Exception($"The {scriptName} script specified to run does not implement the {nameof(ISuccessfulScript)} interface.");
+        }
+        ISuccessfulScript castedScript = (ISuccessfulScript)script;
+        return castedScript.ExecuteSuccessfulScript();
     }
 
     /// <summary>

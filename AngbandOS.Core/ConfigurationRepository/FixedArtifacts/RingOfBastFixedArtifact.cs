@@ -20,18 +20,18 @@ internal class RingOfBastFixedArtifact : FixedArtifact, IFixedArtifactActivatibl
 
 
     // Ring of Bast hastes you
-    public void ActivateItem(SaveGame saveGame, Item item)
+    public void ActivateItem(Item item)
     {
-        saveGame.MsgPrint("The ring glows brightly...");
-        if (saveGame.TimedHaste.TurnsRemaining == 0)
+        SaveGame.MsgPrint("The ring glows brightly...");
+        if (SaveGame.TimedHaste.TurnsRemaining == 0)
         {
-            saveGame.TimedHaste.SetTimer(SaveGame.Rng.DieRoll(75) + 75);
+            SaveGame.TimedHaste.SetTimer(base.SaveGame.Rng.DieRoll(75) + 75);
         }
         else
         {
-            saveGame.TimedHaste.AddTimer(5);
+            SaveGame.TimedHaste.AddTimer(5);
         }
-        item.RechargeTimeLeft = SaveGame.Rng.RandomLessThan(150) + 150;
+        item.RechargeTimeLeft = base.SaveGame.Rng.RandomLessThan(150) + 150;
     }
     public string DescribeActivationEffect() => "haste self (75+d75 turns) every 150+d150 turns";
     public override ItemFactory BaseItemCategory => _baseItemCategory;

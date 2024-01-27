@@ -2624,7 +2624,7 @@ internal abstract class Item : IComparable<Item>, IGetKey<string>
     {
         if (FixedArtifact != null)
         {
-            FixedArtifact.ApplyResistances(SaveGame, this);
+            FixedArtifact.ApplyResistances(this);
         }
     }
 

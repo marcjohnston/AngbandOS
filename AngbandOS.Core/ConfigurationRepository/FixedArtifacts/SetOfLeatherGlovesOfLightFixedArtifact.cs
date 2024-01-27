@@ -20,14 +20,14 @@ internal class SetOfLeatherGlovesOfLightFixedArtifact : FixedArtifact, IFixedArt
 
 
     // Light shoots magic missiles
-    public void ActivateItem(SaveGame saveGame, Item item)
+    public void ActivateItem(Item item)
     {
-        saveGame.MsgPrint("Your gloves glow extremely brightly...");
-        if (!saveGame.GetDirectionWithAim(out int dir))
+        SaveGame.MsgPrint("Your gloves glow extremely brightly...");
+        if (!SaveGame.GetDirectionWithAim(out int dir))
         {
             return;
         }
-        saveGame.FireBolt(saveGame.SingletonRepository.Projectiles.Get(nameof(MissileProjectile)), dir, SaveGame.Rng.DiceRoll(2, 6));
+        SaveGame.FireBolt(SaveGame.SingletonRepository.Projectiles.Get(nameof(Projection.MissileProjectile)), dir, base.SaveGame.Rng.DiceRoll(2, 6));
         item.RechargeTimeLeft = 2;
     }
     public string DescribeActivationEffect() => "magic missile (2d6) every 2 turns";

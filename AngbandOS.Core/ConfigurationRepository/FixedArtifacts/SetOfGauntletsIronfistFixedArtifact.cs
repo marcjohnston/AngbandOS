@@ -20,15 +20,15 @@ internal class SetOfGauntletsIronfistFixedArtifact : FixedArtifact, IFixedArtifa
 
 
     // Iron Fist shoots fire bolts
-    public void ActivateItem(SaveGame saveGame, Item item)
+    public void ActivateItem(Item item)
     {
-        saveGame.MsgPrint("Your gauntlets are covered in fire...");
-        if (!saveGame.GetDirectionWithAim(out int dir))
+        SaveGame.MsgPrint("Your gauntlets are covered in fire...");
+        if (!SaveGame.GetDirectionWithAim(out int dir))
         {
             return;
         }
-        saveGame.FireBolt(saveGame.SingletonRepository.Projectiles.Get(nameof(FireProjectile)), dir, SaveGame.Rng.DiceRoll(9, 8));
-        item.RechargeTimeLeft = SaveGame.Rng.RandomLessThan(8) + 8;
+        SaveGame.FireBolt(SaveGame.SingletonRepository.Projectiles.Get(nameof(Projection.FireProjectile)), dir, base.SaveGame.Rng.DiceRoll(9, 8));
+        item.RechargeTimeLeft = base.SaveGame.Rng.RandomLessThan(8) + 8;
     }
     public string DescribeActivationEffect() => "fire bolt (9d8) every 8+d8 turns";
     public override ItemFactory BaseItemCategory => _baseItemCategory;

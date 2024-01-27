@@ -20,10 +20,10 @@ internal class CloakShifterFixedArtifact : FixedArtifact, IFixedArtifactActivati
 
 
     // Shifter teleports you
-    public void ActivateItem(SaveGame saveGame, Item item)
+    public void ActivateItem(Item item)
     {
-        saveGame.MsgPrint("Your cloak twists space around you...");
-        saveGame.TeleportPlayer(100);
+        SaveGame.MsgPrint("Your cloak twists space around you...");
+        SaveGame.TeleportPlayer(100);
         item.RechargeTimeLeft = 45;
     }
     public string DescribeActivationEffect() => "teleport every 45 turns";
