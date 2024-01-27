@@ -20,7 +20,7 @@ internal class RecallActivation : Activation
 
     public override bool Activate()
     {
-        SaveGame.ToggleRecall();
+        SaveGame.RunScript(nameof(ToggleRecallScript));
         return true;
     }
 

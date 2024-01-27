@@ -32,7 +32,7 @@ internal class GemstoneShiningTrapezodedronFixedArtifact : FixedArtifact, IFixed
         SaveGame.DetectStairs();
         if (SaveGame.GetCheck("Activate recall? "))
         {
-            SaveGame.ToggleRecall();
+            SaveGame.RunScript(nameof(ToggleRecallScript));
         }
         item.RechargeTimeLeft = base.SaveGame.Rng.RandomLessThan(20) + 20;
     }

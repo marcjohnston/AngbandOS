@@ -17,7 +17,7 @@ internal class RecallActiveMutation : Mutation
         {
             return;
         }
-        SaveGame.ToggleRecall();
+        SaveGame.RunScript(nameof(ToggleRecallScript));
     }
 
     public override string ActivationSummary(int lvl)

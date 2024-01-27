@@ -518,6 +518,107 @@ internal class SaveGame
     public int WordOfRecallDelay;
 
     /// <summary>
+    /// Returns the maximum height of any level.
+    /// </summary>
+    public const int MaxHgt = 126;
+
+    /// <summary>
+    /// Returns the maximum width of any level.
+    /// </summary>
+    public const int MaxWid = 198;
+
+    public readonly GridTile[][] Grid = new GridTile[MaxHgt][];
+    public readonly int[] KeypadDirectionXOffset = { 0, -1, 0, 1, -1, 0, 1, -1, 0, 1 };
+    public readonly int[] KeypadDirectionYOffset = { 0, 1, 1, 1, 0, 0, 0, -1, -1, -1 };
+    public readonly int[] OrderedDirection = { 2, 8, 6, 4, 3, 1, 9, 7, 5 };
+    public readonly int[] OrderedDirectionXOffset = { 0, 0, 1, -1, 1, -1, 1, -1, 0 };
+    public readonly int[] OrderedDirectionYOffset = { 1, -1, 0, 0, 1, 1, -1, -1, 0 };
+    public readonly int[] TempX = new int[Constants.TempMax]; // TODO: Use CursorPositon and combine TempX and TempY into a list to absolve TempN
+    public readonly int[] TempY = new int[Constants.TempMax];
+
+    /// <summary>
+    /// Appears to be the height of the level.
+    /// </summary>
+    public int CurHgt;
+
+    /// <summary>
+    /// Appears to be the width of the level.
+    /// </summary>
+    public int CurWid;
+
+    public int DangerFeeling;
+    public int DangerRating;
+    public int MaxPanelCols;
+    public int MaxPanelRows;
+    public int MCnt;
+    public int MMax = 1;
+    public int MonsterLevel;
+    public int ObjectLevel;
+
+    /// <summary>
+    /// Returns the map sector.
+    /// </summary>
+    public int PanelCol;
+
+    /// <summary>
+    /// Returns the map sector.
+    /// </summary>
+    public int PanelRow;
+
+    /// <summary>
+    /// Returns the last level column of the playable area that is visible in the viewport.
+    /// </summary>
+    public int PanelColMax;
+
+    /// <summary>
+    /// Returns the first level column of the playable area that is visible in the viewport.
+    /// </summary>
+    public int PanelColMin;
+
+    /// <summary>
+    /// Returns the last level row of the playable area that is visible in the viewport.
+    /// </summary>
+    public int PanelRowMax;
+
+    /// <summary>
+    /// Returns the first level row of the playable area that is visible in the viewport.
+    /// </summary>
+    public int PanelRowMin;
+
+    /// <summary>
+    /// Returns the first level row that is visible in the viewport.
+    /// </summary>
+    public int PanelRowPrt;
+
+    /// <summary>
+    /// Returns the first level column that is visible in the viewport.
+    /// </summary>
+    public int PanelColPrt;
+
+    public bool SpecialDanger;
+    public bool SpecialTreasure;
+    public int TempN;
+    public int TreasureFeeling;
+    public int TreasureRating;
+
+    private const string _imageMonsterHack = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    private const string _imageObjectHack = "?/|\\\"!$()_-=[]{},~";
+    private const int _mapHgt = MaxHgt / _ratio;
+    private const int _mapWid = MaxWid / _ratio;
+    private const int _ratio = 3;
+
+    public readonly List<GridCoordinate> Light = new List<GridCoordinate>(); // TODO: This belongs to UpdateLightFlaggedActions and should be private.
+    public readonly List<GridCoordinate> View = new List<GridCoordinate>(); // TODO: This belongs to UpdateViewFlaggedActions and should be private.
+    public int CurrentlyActingMonster;
+    public MonsterSelector? DunBias = null; // The dungeon does not have a bias for monsters.
+    public int NumRepro;
+    public bool RepairMonsters;
+    public bool ShimmerMonsters;
+
+    public Monster[] Monsters;
+    private int _hackMIdxIi;
+
+    /// <summary>
     /// Creates a new game.
     /// </summary>
     /// <param name="configuration">Represents configuration data to use when generating a new game.</param>
@@ -15804,20 +15905,6 @@ internal class SaveGame
         }
     }
 
-    public void ToggleRecall()
-    {
-        if (WordOfRecallDelay == 0)
-        {
-            WordOfRecallDelay = Rng.DieRoll(20) + 15;
-            MsgPrint("The air about you becomes charged...");
-        }
-        else
-        {
-            WordOfRecallDelay = 0;
-            MsgPrint("A tension leaves the air around you...");
-        }
-    }
-
     public bool TryDecreasingAbilityScore(int stat)
     {
         bool sust = false;
@@ -16368,124 +16455,6 @@ internal class SaveGame
             return true;
         }
         return false;
-    }
-    //////////////////////////////////////////////
-    // PLAYER END
-    //////////////////////////////////////////////
-
-    //////////////////////////////////////////////
-    // LEVEL START
-    //////////////////////////////////////////////
-
-    /// <summary>
-    /// Returns the maximum height of any level.
-    /// </summary>
-    public const int MaxHgt = 126;
-
-    /// <summary>
-    /// Returns the maximum width of any level.
-    /// </summary>
-    public const int MaxWid = 198;
-
-    public readonly GridTile[][] Grid = new GridTile[MaxHgt][];
-    public readonly int[] KeypadDirectionXOffset = { 0, -1, 0, 1, -1, 0, 1, -1, 0, 1 };
-    public readonly int[] KeypadDirectionYOffset = { 0, 1, 1, 1, 0, 0, 0, -1, -1, -1 };
-    public readonly int[] OrderedDirection = { 2, 8, 6, 4, 3, 1, 9, 7, 5 };
-    public readonly int[] OrderedDirectionXOffset = { 0, 0, 1, -1, 1, -1, 1, -1, 0 };
-    public readonly int[] OrderedDirectionYOffset = { 1, -1, 0, 0, 1, 1, -1, -1, 0 };
-    public readonly int[] TempX = new int[Constants.TempMax]; // TODO: Use CursorPositon and combine TempX and TempY into a list to absolve TempN
-    public readonly int[] TempY = new int[Constants.TempMax];
-
-    /// <summary>
-    /// Appears to be the height of the level.
-    /// </summary>
-    public int CurHgt;
-
-    /// <summary>
-    /// Appears to be the width of the level.
-    /// </summary>
-    public int CurWid;
-
-    public int DangerFeeling;
-    public int DangerRating;
-    public int MaxPanelCols;
-    public int MaxPanelRows;
-    public int MCnt;
-    public int MMax = 1;
-    public int MonsterLevel;
-    public int ObjectLevel;
-
-    /// <summary>
-    /// Returns the map sector.
-    /// </summary>
-    public int PanelCol;
-
-    /// <summary>
-    /// Returns the map sector.
-    /// </summary>
-    public int PanelRow;
-
-    /// <summary>
-    /// Returns the last level column of the playable area that is visible in the viewport.
-    /// </summary>
-    public int PanelColMax;
-
-    /// <summary>
-    /// Returns the first level column of the playable area that is visible in the viewport.
-    /// </summary>
-    public int PanelColMin;
-
-    /// <summary>
-    /// Returns the last level row of the playable area that is visible in the viewport.
-    /// </summary>
-    public int PanelRowMax;
-
-    /// <summary>
-    /// Returns the first level row of the playable area that is visible in the viewport.
-    /// </summary>
-    public int PanelRowMin;
-
-    /// <summary>
-    /// Returns the first level row that is visible in the viewport.
-    /// </summary>
-    public int PanelRowPrt;
-
-    /// <summary>
-    /// Returns the first level column that is visible in the viewport.
-    /// </summary>
-    public int PanelColPrt;
-
-    public bool SpecialDanger;
-    public bool SpecialTreasure;
-    public int TempN;
-    public int TreasureFeeling;
-    public int TreasureRating;
-
-    private const string _imageMonsterHack = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    private const string _imageObjectHack = "?/|\\\"!$()_-=[]{},~";
-    private const int _mapHgt = MaxHgt / _ratio;
-    private const int _mapWid = MaxWid / _ratio;
-    private const int _ratio = 3;
-
-    public readonly List<GridCoordinate> Light = new List<GridCoordinate>(); // TODO: This belongs to UpdateLightFlaggedActions and should be private.
-    public readonly List<GridCoordinate> View = new List<GridCoordinate>(); // TODO: This belongs to UpdateViewFlaggedActions and should be private.
-    public int CurrentlyActingMonster;
-    public MonsterSelector? DunBias = null; // The dungeon does not have a bias for monsters.
-    public int NumRepro;
-    public bool RepairMonsters;
-    public bool ShimmerMonsters;
-
-    public Monster[] Monsters;
-    private int _hackMIdxIi;
-
-    public void PanelBounds()
-    {
-        PanelRowMin = PanelRow * (Constants.PlayableScreenHeight / 2);
-        PanelRowMax = PanelRowMin + Constants.PlayableScreenHeight - 1;
-        PanelRowPrt = PanelRowMin - 1;
-        PanelColMin = PanelCol * (Constants.PlayableScreenWidth / 2);
-        PanelColMax = PanelColMin + Constants.PlayableScreenWidth - 1;
-        PanelColPrt = PanelColMin - 13;
     }
 
     public void PanelBoundsCenter()
@@ -17091,10 +17060,6 @@ internal class SaveGame
             }
         }
         return true;
-    }
-
-    public void MapArea()
-    {
     }
 
     /// <summary>

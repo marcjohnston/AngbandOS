@@ -90,7 +90,12 @@ internal class LocateScript : Script, IScript, IRepeatableScript
             {
                 SaveGame.PanelRow = currentRow;
                 SaveGame.PanelCol = currentCol;
-                SaveGame.PanelBounds();
+                SaveGame.PanelRowMin = SaveGame.PanelRow * (Constants.PlayableScreenHeight / 2);
+                SaveGame.PanelRowMax = SaveGame.PanelRowMin + Constants.PlayableScreenHeight - 1;
+                SaveGame.PanelRowPrt = SaveGame.PanelRowMin - 1;
+                SaveGame.PanelColMin = SaveGame.PanelCol * (Constants.PlayableScreenWidth / 2);
+                SaveGame.PanelColMax = SaveGame.PanelColMin + Constants.PlayableScreenWidth - 1;
+                SaveGame.PanelColPrt = SaveGame.PanelColMin - 13;
                 SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateMonstersFlaggedAction)).Set();
                 SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawMapFlaggedAction)).Set();
                 SaveGame.HandleStuff();

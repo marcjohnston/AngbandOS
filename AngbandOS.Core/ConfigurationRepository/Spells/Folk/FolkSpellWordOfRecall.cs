@@ -13,7 +13,7 @@ internal class FolkSpellWordOfRecall : Spell
     private FolkSpellWordOfRecall(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.ToggleRecall();
+        SaveGame.RunScript(nameof(ToggleRecallScript));
     }
 
     public override string Name => "Word of Recall";
