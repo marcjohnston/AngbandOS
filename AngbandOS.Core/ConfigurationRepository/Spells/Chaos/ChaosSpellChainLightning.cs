@@ -13,10 +13,7 @@ internal class ChaosSpellChainLightning : Spell
     private ChaosSpellChainLightning(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        for (int dir = 0; dir <= 9; dir++)
-        {
-            SaveGame.FireBeam(SaveGame.SingletonRepository.Projectiles.Get(nameof(ElecProjectile)), dir, SaveGame.Rng.DiceRoll(5 + (SaveGame.ExperienceLevel / 10), 8));
-        }
+        SaveGame.RunScript(nameof(ChainLightingScript));
     }
 
     public override void CastFailed()
