@@ -13,12 +13,7 @@ internal class ChaosSpellGravityBeam : Spell
     private ChaosSpellGravityBeam(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        if (!SaveGame.GetDirectionWithAim(out int dir))
-        {
-            return;
-        }
-        SaveGame.FireBeam(SaveGame.SingletonRepository.Projectiles.Get(nameof(GravityProjectile)), dir,
-            SaveGame.Rng.DiceRoll(9 + ((SaveGame.ExperienceLevel - 5) / 4), 8));
+        SaveGame.RunScript(nameof(GravityBeamScript));
     }
 
     public override void CastFailed()
