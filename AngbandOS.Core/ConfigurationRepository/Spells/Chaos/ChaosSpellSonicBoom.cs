@@ -13,8 +13,7 @@ internal class ChaosSpellSonicBoom : Spell
     private ChaosSpellSonicBoom(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.Project(0, 2 + (SaveGame.ExperienceLevel / 10), SaveGame.MapY, SaveGame.MapX, 45 + SaveGame.ExperienceLevel,
-            SaveGame.SingletonRepository.Projectiles.Get(nameof(SoundProjectile)), ProjectionFlag.ProjectKill | ProjectionFlag.ProjectItem);
+        SaveGame.RunScript(nameof(SonicBoomScript));
     }
 
     public override void CastFailed()
