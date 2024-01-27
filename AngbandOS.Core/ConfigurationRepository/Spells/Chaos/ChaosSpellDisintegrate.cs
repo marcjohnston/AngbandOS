@@ -13,12 +13,7 @@ internal class ChaosSpellDisintegrate : Spell
     private ChaosSpellDisintegrate(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        if (!SaveGame.GetDirectionWithAim(out int dir))
-        {
-            return;
-        }
-        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(DisintegrateProjectile)), dir, 80 + SaveGame.ExperienceLevel,
-            3 + (SaveGame.ExperienceLevel / 40));
+        SaveGame.RunScript(nameof(DisintegrateScript));
     }
 
     public override void CastFailed()
