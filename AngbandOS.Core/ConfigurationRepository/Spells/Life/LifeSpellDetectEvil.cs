@@ -13,9 +13,8 @@ internal class LifeSpellDetectEvil : Spell
     private LifeSpellDetectEvil(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.DetectMonstersEvil();
+        SaveGame.RunScript(nameof(DetectEvilMonstersScript));
     }
 
     public override string Name => "Detect Evil";
-    
 }

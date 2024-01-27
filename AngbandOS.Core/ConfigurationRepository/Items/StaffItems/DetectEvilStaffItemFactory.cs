@@ -26,7 +26,7 @@ internal class DetectEvilStaffItemFactory : StaffItemFactory
 
     public override void UseStaff(UseStaffEvent eventArgs)
     {
-        if (SaveGame.DetectMonstersEvil())
+        if (SaveGame.RunSuccessfulScript(nameof(DetectEvilMonstersScript)));
         {
             eventArgs.Identified = true;
         }

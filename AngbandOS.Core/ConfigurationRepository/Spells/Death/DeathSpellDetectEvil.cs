@@ -13,7 +13,7 @@ internal class DeathSpellDetectEvil : Spell
     private DeathSpellDetectEvil(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.DetectMonstersEvil();
+        SaveGame.RunScript(nameof(DetectEvilMonstersScript));
     }
 
     public override void CastFailed()
