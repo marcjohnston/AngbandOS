@@ -13,11 +13,7 @@ internal class ChaosSpellShardBall : Spell
     private ChaosSpellShardBall(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        if (!SaveGame.GetDirectionWithAim(out int dir))
-        {
-            return;
-        }
-        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(ShardProjectile)), dir, 120 + SaveGame.ExperienceLevel, 2);
+        SaveGame.RunScript(nameof(ShardBallScript));
     }
 
     public override void CastFailed()
