@@ -8,17 +8,9 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class _template : Script, IScript, IRepeatableScript, ISuccessfulScript, IStoreScript
+internal class AlterRealityScript : Script, IScript, IRepeatableScript
 {
-    private _template(SaveGame saveGame) : base(saveGame) { }
-
-    /// <summary>
-    /// Executes the script.  Does not modify any of the store flags.
-    /// </summary>
-    /// <returns></returns>
-    public void ExecuteStoreScript(StoreCommandEvent storeCommandEvent)
-    {
-    }
+    private AlterRealityScript(SaveGame saveGame) : base(saveGame) { }
 
     /// <summary>
     /// Executes the script and returns false.
@@ -31,19 +23,14 @@ internal class _template : Script, IScript, IRepeatableScript, ISuccessfulScript
     }
 
     /// <summary>
-    /// Executes the script and returns a success result.
-    /// </summary>
-    /// <returns></returns>
-    public bool ExecuteSuccessfulScript()
-    {
-        return false;
-    }
-
-    /// <summary>
-    /// Executes the script.
+    /// Takes the player to a new level with a random starting location.
     /// </summary>
     /// <returns></returns>
     public void ExecuteScript()
     {
+        SaveGame.MsgPrint("The world changes!");
+        SaveGame.DoCmdSaveGame(true);
+        SaveGame.NewLevelFlag = true;
+        SaveGame.CameFrom = LevelStart.StartRandom;
     }
 }

@@ -13,10 +13,7 @@ internal class ChaosSpellAlterReality : Spell
     private ChaosSpellAlterReality(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.MsgPrint("The world changes!");
-        SaveGame.DoCmdSaveGame(true);
-        SaveGame.NewLevelFlag = true;
-        SaveGame.CameFrom = LevelStart.StartRandom;
+        SaveGame.RunScript(nameof(AlterRealityScript));
     }
 
     public override void CastFailed()
