@@ -15591,18 +15591,6 @@ internal class SaveGame
         return false;
     }
 
-    public bool RestoreLevel()
-    {
-        if (ExperiencePoints < MaxExperienceGained)
-        {
-            MsgPrint("You feel your life energies returning.");
-            ExperiencePoints = MaxExperienceGained;
-            CheckExperience();
-            return true;
-        }
-        return false;
-    }
-
     public bool SetFood(int v)
     {
         int oldAux, newAux;

@@ -26,7 +26,7 @@ internal class RestorationRodItemFactory : RodItemFactory
     public override int Weight => 15;
     public override void Execute(ZapRodEvent zapRodEvent)
     {
-        if (SaveGame.RestoreLevel())
+        if (SaveGame.RunSuccessfulScript(nameof(RestoreLevelScript)))
         {
             zapRodEvent.Identified = true;
         }

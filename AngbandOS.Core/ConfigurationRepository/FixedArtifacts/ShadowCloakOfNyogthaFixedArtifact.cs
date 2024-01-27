@@ -23,7 +23,7 @@ internal class ShadowCloakOfNyogthaFixedArtifact : FixedArtifact, IFixedArtifact
     public void ActivateItem(Item item)
     {
         SaveGame.MsgPrint("Your cloak glows a deep red...");
-        SaveGame.RestoreLevel();
+        SaveGame.RunScript(nameof(RestoreLevelScript));
         item.RechargeTimeLeft = 450;
     }
     public string DescribeActivationEffect() => "restore life levels every 450 turns";

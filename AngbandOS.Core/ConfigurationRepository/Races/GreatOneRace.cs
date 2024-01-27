@@ -113,7 +113,7 @@ internal class GreatOneRace : Race
                 SaveGame.TryRestoringAbilityScore(Ability.Dexterity);
                 SaveGame.TryRestoringAbilityScore(Ability.Constitution);
                 SaveGame.TryRestoringAbilityScore(Ability.Charisma);
-                SaveGame.RestoreLevel();
+                SaveGame.RunScript(nameof(RestoreLevelScript));
             }
         }
         else if (dreamPower == 2)

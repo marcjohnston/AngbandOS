@@ -19,7 +19,7 @@ internal class LifeSpellRestoration : Spell
         SaveGame.TryRestoringAbilityScore(Ability.Dexterity);
         SaveGame.TryRestoringAbilityScore(Ability.Constitution);
         SaveGame.TryRestoringAbilityScore(Ability.Charisma);
-        SaveGame.RestoreLevel();
+        SaveGame.RunScript(nameof(RestoreLevelScript));
     }
 
     public override string Name => "Restoration";

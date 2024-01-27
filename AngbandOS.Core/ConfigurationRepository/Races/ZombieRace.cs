@@ -93,7 +93,7 @@ internal class ZombieRace : Race
         if (SaveGame.CheckIfRacialPowerWorks(30, 30, Ability.Wisdom, 18))
         {
             SaveGame.MsgPrint("You attempt to restore your lost energies.");
-            SaveGame.RestoreLevel();
+            SaveGame.RunScript(nameof(RestoreLevelScript));
         }
     }
 

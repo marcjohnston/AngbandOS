@@ -28,7 +28,7 @@ internal class LifePotionItemFactory : PotionItemFactory
         // Life heals you 5000 health, removes experience and ability score drains, and
         // cures blindness, confusion, stun, poison, and bleeding
         SaveGame.MsgPrint("You feel life flow through your body!");
-        SaveGame.RestoreLevel();
+        SaveGame.RunScript(nameof(RestoreLevelScript));
         SaveGame.RestoreHealth(5000);
         SaveGame.TimedPoison.ResetTimer();
         SaveGame.TimedBlindness.ResetTimer();

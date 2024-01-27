@@ -25,7 +25,7 @@ internal class WizardCureAllScript : Script, IScript
         SaveGame.RestoreAbilityScore(Ability.Constitution);
         SaveGame.RestoreAbilityScore(Ability.Dexterity);
         SaveGame.RestoreAbilityScore(Ability.Charisma);
-        SaveGame.RestoreLevel();
+        SaveGame.RunScript(nameof(RestoreLevelScript));
         SaveGame.Health = SaveGame.MaxHealth;
         SaveGame.FractionalHealth = 0;
         SaveGame.Mana = SaveGame.MaxMana;

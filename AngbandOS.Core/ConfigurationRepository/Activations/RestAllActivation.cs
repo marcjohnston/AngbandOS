@@ -26,7 +26,7 @@ internal class RestAllActivation : Activation
         SaveGame.TryRestoringAbilityScore(Ability.Dexterity);
         SaveGame.TryRestoringAbilityScore(Ability.Constitution);
         SaveGame.TryRestoringAbilityScore(Ability.Charisma);
-        SaveGame.RestoreLevel();
+        SaveGame.RunScript(nameof(RestoreLevelScript));
         return true;
     }
 
