@@ -12,7 +12,6 @@ internal abstract class WeaponItem : Item
 {
     public WeaponItem(SaveGame saveGame, ItemFactory itemClass) : base(saveGame, itemClass) { }
     public override bool CanApplyBlowsBonus => true;
-    public override bool CanApplyBonusArmorClassMiscPower => true;
     public override int? GetBonusRealValue(int value)
     {
         if (BonusToHit + BonusDamage < 0)

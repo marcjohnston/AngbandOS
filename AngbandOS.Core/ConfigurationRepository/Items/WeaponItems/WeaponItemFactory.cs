@@ -15,6 +15,7 @@ internal abstract class WeaponItemFactory : ItemFactory
 {
     public WeaponItemFactory(SaveGame saveGame) : base(saveGame) { }
     public override bool HasQuality => true;
+    public override bool CanApplyBonusArmorClassMiscPower => true;
 
     public override bool IdentityCanBeSensed => true;
     public override bool IsWeapon => true;

@@ -16,11 +16,6 @@ internal abstract class Item : IComparable<Item>, IGetKey<string>
     public int PackSort => Factory.PackSort;
 
     /// <summary>
-    /// Returns true, if the item can apply a bonus armor class for miscellaneous power.  Only weapons return true.  Returns false, by default.
-    /// </summary>
-    public virtual bool CanApplyBonusArmorClassMiscPower => false;
-
-    /// <summary>
     /// Returns true, if the item can apply a blows bonus.  All weapons, except for the bow, return true.  Returns false, by default.
     /// </summary>
     public virtual bool CanApplyBlowsBonus => false;
@@ -2850,7 +2845,7 @@ internal abstract class Item : IComparable<Item>, IGetKey<string>
             case 24:
             case 25:
             case 26:
-                if (!CanApplyBonusArmorClassMiscPower)
+                if (!Factory.CanApplyBonusArmorClassMiscPower)
                 {
                     ApplyRandomMiscPower(ref artifactBias);
                 }
