@@ -13,12 +13,7 @@ internal class ChaosSpellFistOfForce : Spell
     private ChaosSpellFistOfForce(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        if (!SaveGame.GetDirectionWithAim(out int dir))
-        {
-            return;
-        }
-        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(DisintegrateProjectile)), dir,
-            SaveGame.Rng.DiceRoll(8 + ((SaveGame.ExperienceLevel - 5) / 4), 8), 0);
+        SaveGame.RunScript(nameof(FistOfForceScript));
     }
 
     public override void CastFailed()
