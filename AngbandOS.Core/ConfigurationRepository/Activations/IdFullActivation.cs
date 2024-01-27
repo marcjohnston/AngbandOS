@@ -20,7 +20,7 @@ internal class IdFullActivation : Activation
 
     public override bool Activate()
     {
-        SaveGame.IdentifyFully();
+        SaveGame.RunScript(nameof(IdentifyFullyScript));
         return true;
     }
 

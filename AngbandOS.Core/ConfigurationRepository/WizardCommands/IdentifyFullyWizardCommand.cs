@@ -20,6 +20,6 @@ internal class IdentifyFullyWizardCommand : WizardCommand
 
     public override void Execute()
     {
-        SaveGame.IdentifyFully();
+        SaveGame.RunScript(nameof(IdentifyFullyScript));
     }
 }

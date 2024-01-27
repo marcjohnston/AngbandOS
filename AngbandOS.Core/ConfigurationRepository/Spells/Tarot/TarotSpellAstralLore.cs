@@ -13,7 +13,7 @@ internal class TarotSpellAstralLore : Spell
     private TarotSpellAstralLore(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.IdentifyFully();
+        SaveGame.RunScript(nameof(IdentifyFullyScript));
     }
 
     public override string Name => "Astral Lore";

@@ -22,7 +22,7 @@ internal class DetectXtraActivation : Activation
     {
         SaveGame.DetectAll();
         SaveGame.Probing();
-        SaveGame.IdentifyFully();
+        SaveGame.RunScript(nameof(IdentifyFullyScript));
         return true;
     }
 

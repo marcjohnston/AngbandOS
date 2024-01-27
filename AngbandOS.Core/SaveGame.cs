@@ -5466,41 +5466,6 @@ internal class SaveGame
         return TargetedProject(SingletonRepository.Projectiles.Get(nameof(OldHealProjectile)), dir, Rng.DiceRoll(4, 6), flg);
     }
 
-    public bool IdentifyFully()
-    {
-        if (!SelectItem(out Item? oPtr, "Identify which item? ", true, true, true, null))
-        {
-            MsgPrint("You have nothing to identify.");
-            return false;
-        }
-        if (oPtr == null)
-        {
-            return false;
-        }
-        oPtr.BecomeFlavourAware();
-        oPtr.BecomeKnown();
-        oPtr.IdentMental = true;
-        SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
-        SingletonRepository.FlaggedActions.Get(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
-        HandleStuff();
-        string oName = oPtr.Description(true, 3);
-
-        MsgPrint($"{oPtr.DescribeLocation()}: {oName} ({oPtr.Label}).");
-
-        // Check to see if the player is carrying the item and it is stompable.
-        if (oPtr.IsInInventory && oPtr.Stompable())
-        {
-            string itemName = oPtr.Description(true, 3);
-            MsgPrint($"You destroy {oName}.");
-            int amount = oPtr.Count;
-            oPtr.ItemIncrease(-amount);
-            oPtr.ItemOptimize();
-        }
-
-        oPtr.IdentifyFully();
-        return true;
-    }
-
     public bool IdentifyItem()
     {
         if (!SelectItem(out Item oPtr, "Identify which item? ", true, true, true, null))

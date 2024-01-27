@@ -13,7 +13,7 @@ internal class SorcerySpellIdentifyTrue : Spell
     private SorcerySpellIdentifyTrue(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.IdentifyFully();
+        SaveGame.RunScript(nameof(IdentifyFullyScript));
     }
 
     public override string Name => "Identify True";

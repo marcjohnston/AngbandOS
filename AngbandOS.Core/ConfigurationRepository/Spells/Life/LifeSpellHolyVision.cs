@@ -13,7 +13,7 @@ internal class LifeSpellHolyVision : Spell
     private LifeSpellHolyVision(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.IdentifyFully();
+        SaveGame.RunScript(nameof(IdentifyFullyScript));
     }
 
     public override string Name => "Holy Vision";

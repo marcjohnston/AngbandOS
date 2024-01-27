@@ -13,7 +13,7 @@ internal class CorporealSpellAttunement : Spell
     private CorporealSpellAttunement(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.IdentifyFully();
+        SaveGame.RunScript(nameof(IdentifyFullyScript));
     }
 
     public override string Name => "Attunement";

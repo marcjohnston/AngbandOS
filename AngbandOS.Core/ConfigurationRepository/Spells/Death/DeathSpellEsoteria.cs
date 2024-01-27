@@ -19,7 +19,7 @@ internal class DeathSpellEsoteria : Spell
         }
         else
         {
-            SaveGame.IdentifyFully();
+            SaveGame.RunScript(nameof(IdentifyFullyScript));
         }
     }
 
