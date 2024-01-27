@@ -152,7 +152,7 @@ internal class TarotSpellTarotDraw : Spell
         else if (die < 111)
         {
             SaveGame.MsgPrint("It's the Judgement.");
-            SaveGame.RerollHitPoints();
+            SaveGame.RunScript(nameof(RerollHitPointsScript));
             if (SaveGame.Dna.HasMutations)
             {
                 SaveGame.MsgPrint("You are cured of all mutations.");

@@ -15518,36 +15518,6 @@ internal class SaveGame
         }
     }
 
-    public void RerollHitPoints()
-    {
-        int i;
-        PlayerHp[0] = HitDie;
-        int lastroll = HitDie;
-        for (i = 1; i < Constants.PyMaxLevel; i++)
-        {
-            PlayerHp[i] = lastroll;
-            lastroll--;
-            if (lastroll < 1)
-            {
-                lastroll = HitDie;
-            }
-        }
-        for (i = 1; i < Constants.PyMaxLevel; i++)
-        {
-            int j = Rng.DieRoll(Constants.PyMaxLevel - 1);
-            lastroll = PlayerHp[i];
-            PlayerHp[i] = PlayerHp[j];
-            PlayerHp[j] = lastroll;
-        }
-        for (i = 1; i < Constants.PyMaxLevel; i++)
-        {
-            PlayerHp[i] = PlayerHp[i - 1] + PlayerHp[i];
-        }
-        SingletonRepository.FlaggedActions.Get(nameof(UpdateHealthFlaggedAction)).Set();
-        SingletonRepository.FlaggedActions.Get(nameof(RedrawHpFlaggedAction)).Set();
-        HandleStuff();
-    }
-
     public bool RestoreAbilityScore(int stat)
     {
         if (AbilityScores[stat].Innate != AbilityScores[stat].InnateMax)
