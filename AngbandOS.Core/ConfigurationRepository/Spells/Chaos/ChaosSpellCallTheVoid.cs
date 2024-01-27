@@ -13,7 +13,7 @@ internal class ChaosSpellCallTheVoid : Spell
     private ChaosSpellCallTheVoid(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.CallTheVoid();
+        SaveGame.RunScript(nameof(CallTheVoidScript));
     }
 
     public override void CastFailed()

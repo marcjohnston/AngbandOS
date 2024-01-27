@@ -7443,54 +7443,6 @@ internal class SaveGame
     }
 
     /// <summary>
-    /// Blast energy in all directions
-    /// </summary>
-    public void CallTheVoid()
-    {
-        // Make sure we're not next to a wall
-        if (GridPassable(MapY - 1, MapX - 1) && GridPassable(MapY - 1, MapX) &&
-            GridPassable(MapY - 1, MapX + 1) && GridPassable(MapY, MapX - 1) &&
-            GridPassable(MapY, MapX + 1) && GridPassable(MapY + 1, MapX - 1) &&
-            GridPassable(MapY + 1, MapX) && GridPassable(MapY + 1, MapX + 1))
-        {
-            // Fire area effect shards, mana, and nukes in all directions
-            int i;
-            for (i = 1; i < 10; i++)
-            {
-                if (i - 5 != 0)
-                {
-                    FireBall(SingletonRepository.Projectiles.Get(nameof(ShardProjectile)), i, 175, 2);
-                }
-            }
-            for (i = 1; i < 10; i++)
-            {
-                if (i - 5 != 0)
-                {
-                    FireBall(SingletonRepository.Projectiles.Get(nameof(ManaProjectile)), i, 175, 3);
-                }
-            }
-            for (i = 1; i < 10; i++)
-            {
-                if (i - 5 != 0)
-                {
-                    FireBall(SingletonRepository.Projectiles.Get(nameof(NukeProjectile)), i, 175, 4);
-                }
-            }
-        }
-        else
-        {
-            // We were too close to a wall, so earthquake instead
-            string cast = BaseCharacterClass.SpellCastingType.CastVerb;
-            string spell = BaseCharacterClass.SpellCastingType.SpellNoun;
-            MsgPrint($"You {cast} the {spell} too close to a wall!");
-            MsgPrint("There is a loud explosion!");
-            DestroyArea(MapY, MapX, 20 + ExperienceLevel);
-            MsgPrint("The dungeon collapses...");
-            TakeHit(100 + Rng.DieRoll(150), "a suicidal Call the Void");
-        }
-    }
-
-    /// <summary>
     /// Check to see if a racial power works
     /// </summary>
     /// <param name="minLevel"> The minimum level for the power </param>
