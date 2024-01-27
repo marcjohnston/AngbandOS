@@ -17512,38 +17512,6 @@ internal class SaveGame
         SingletonRepository.FlaggedActions.Get(nameof(RedrawMapFlaggedAction)).Set();
     }
 
-    public void WizLight()
-    {
-        for (int y = 1; y < CurHgt - 1; y++)
-        {
-            for (int x = 1; x < CurWid - 1; x++)
-            {
-                GridTile cPtr = Grid[y][x];
-                if (!cPtr.FeatureType.IsWall)
-                {
-                    for (int i = 0; i < 9; i++)
-                    {
-                        int yy = y + OrderedDirectionYOffset[i];
-                        int xx = x + OrderedDirectionXOffset[i];
-                        cPtr = Grid[yy][xx];
-                        cPtr.TileFlags.Set(GridTile.SelfLit);
-                        if (!cPtr.FeatureType.IsOpenFloor)
-                        {
-                            cPtr.TileFlags.Set(GridTile.PlayerMemorized);
-                        }
-                        cPtr.TileFlags.Set(GridTile.PlayerMemorized);
-                    }
-                }
-                foreach (Item oPtr in cPtr.Items)
-                {
-                    oPtr.Marked = true;
-                }
-            }
-        }
-        SingletonRepository.FlaggedActions.Get(nameof(UpdateMonstersFlaggedAction)).Set();
-        SingletonRepository.FlaggedActions.Get(nameof(RedrawMapFlaggedAction)).Set();
-    }
-
     private ColorEnum DimColor(ColorEnum a)
     {
         switch (a)

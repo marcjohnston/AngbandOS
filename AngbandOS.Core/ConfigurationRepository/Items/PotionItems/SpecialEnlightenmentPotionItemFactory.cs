@@ -29,7 +29,7 @@ internal class SpecialEnlightenmentPotionItemFactory : PotionItemFactory
         // wisdom, identifies all your items, and detects everything
         SaveGame.MsgPrint("You begin to feel more enlightened...");
         SaveGame.MsgPrint(null);
-        SaveGame.WizLight();
+        SaveGame.RunScript(nameof(WizardLightScript));
         SaveGame.TryIncreasingAbilityScore(Ability.Intelligence);
         SaveGame.TryIncreasingAbilityScore(Ability.Wisdom);
         SaveGame.DetectTraps();

@@ -14,7 +14,7 @@ internal class NatureSpellCallSunlight : Spell
     public override void Cast()
     {
         SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(LightProjectile)), 0, 150, 8);
-        SaveGame.WizLight();
+        SaveGame.RunScript(nameof(WizardLightScript));
         if (!SaveGame.Race.IsBurnedBySunlight || SaveGame.HasLightResistance)
         {
             return;

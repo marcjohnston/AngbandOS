@@ -23,7 +23,7 @@ internal class PrecognitionTalent : Talent
     {
         if (SaveGame.ExperienceLevel > 44)
         {
-            SaveGame.WizLight();
+            SaveGame.RunScript(nameof(WizardLightScript));
         }
         else if (SaveGame.ExperienceLevel > 19)
         {
