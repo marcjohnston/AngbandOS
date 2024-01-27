@@ -13,30 +13,7 @@ internal class ChaosSpellSummonDemon : Spell
     private ChaosSpellSummonDemon(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        if (SaveGame.Rng.DieRoll(3) == 1)
-        {
-            if (SaveGame.SummonSpecific(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel * 3 / 2, new DemonMonsterSelector()))
-            {
-                SaveGame.MsgPrint("The area fills with a stench of sulphur and brimstone.");
-                SaveGame.MsgPrint("'NON SERVIAM! Wretch! I shall feast on thy mortal soul!'");
-            }
-            else
-            {
-                SaveGame.MsgPrint("No-one ever turns up.");
-            }
-        }
-        else
-        {
-            if (SaveGame.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel * 3 / 2, new DemonMonsterSelector(), SaveGame.ExperienceLevel == 50))
-            {
-                SaveGame.MsgPrint("The area fills with a stench of sulphur and brimstone.");
-                SaveGame.MsgPrint("'What is thy bidding... Master?'");
-            }
-            else
-            {
-                SaveGame.MsgPrint("No-one ever turns up.");
-            }
-        }
+        SaveGame.RunScript(nameof(SummonDemonScript));
     }
 
     public override void CastFailed()
