@@ -13,11 +13,7 @@ internal class ChaosSpellDoomBolt : Spell
     private ChaosSpellDoomBolt(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        if (!SaveGame.GetDirectionWithAim(out int dir))
-        {
-            return;
-        }
-        SaveGame.FireBeam(SaveGame.SingletonRepository.Projectiles.Get(nameof(ManaProjectile)), dir, SaveGame.Rng.DiceRoll(11 + ((SaveGame.ExperienceLevel - 5) / 4), 8));
+        SaveGame.RunScript(nameof(DoomBoltScript));
     }
 
     public override void CastFailed()
