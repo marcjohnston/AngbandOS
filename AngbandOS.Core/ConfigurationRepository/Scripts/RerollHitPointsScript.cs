@@ -19,30 +19,30 @@ internal class RerollHitPointsScript : Script, IScript
     public void ExecuteScript()
     {
         int i;
-        PlayerHp[0] = HitDie;
-        int lastroll = HitDie;
+        SaveGame.PlayerHp[0] = SaveGame.HitDie;
+        int lastroll = SaveGame.HitDie;
         for (i = 1; i < Constants.PyMaxLevel; i++)
         {
-            PlayerHp[i] = lastroll;
+            SaveGame.PlayerHp[i] = lastroll;
             lastroll--;
             if (lastroll < 1)
             {
-                lastroll = HitDie;
+                lastroll = SaveGame.HitDie;
             }
         }
         for (i = 1; i < Constants.PyMaxLevel; i++)
         {
-            int j = Rng.DieRoll(Constants.PyMaxLevel - 1);
-            lastroll = PlayerHp[i];
-            PlayerHp[i] = PlayerHp[j];
-            PlayerHp[j] = lastroll;
+            int j = SaveGame.Rng.DieRoll(Constants.PyMaxLevel - 1);
+            lastroll = SaveGame.PlayerHp[i];
+            SaveGame.PlayerHp[i] = SaveGame.PlayerHp[j];
+            SaveGame.PlayerHp[j] = lastroll;
         }
         for (i = 1; i < Constants.PyMaxLevel; i++)
         {
-            PlayerHp[i] = PlayerHp[i - 1] + PlayerHp[i];
+            SaveGame.PlayerHp[i] = SaveGame.PlayerHp[i - 1] + SaveGame.PlayerHp[i];
         }
-        SingletonRepository.FlaggedActions.Get(nameof(UpdateHealthFlaggedAction)).Set();
-        SingletonRepository.FlaggedActions.Get(nameof(RedrawHpFlaggedAction)).Set();
-        HandleStuff();
+        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateHealthFlaggedAction)).Set();
+        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawHpFlaggedAction)).Set();
+        SaveGame.HandleStuff();
     }
 }

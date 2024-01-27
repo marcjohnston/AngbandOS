@@ -618,6 +618,10 @@ internal class SaveGame
     public Monster[] Monsters;
     private int _hackMIdxIi;
 
+    private const int _maxQuests = 50;
+
+    public int ActiveQuests => Quests.Where(q => q.IsActive).Count();
+
     /// <summary>
     /// Creates a new game.
     /// </summary>
@@ -14454,10 +14458,6 @@ internal class SaveGame
         SingletonRepository.FlaggedActions.Get(nameof(NoticeReorderFlaggedAction)).Set();
     }
 
-    private const int _maxQuests = 50;
-
-    public int ActiveQuests => Quests.Where(q => q.IsActive).Count();
-
     /// <summary>
     /// Returns the quest number for the current dungeon and the current 
     /// </summary>
@@ -14492,7 +14492,7 @@ internal class SaveGame
         return false;
     }
 
-    public void PlayerBirthQuests()
+    private void PlayerBirthQuests()
     {
         ResetUniqueOnlyGuardianStatus();
         int index = 0;
@@ -14593,7 +14593,7 @@ internal class SaveGame
         }
     }
 
-    public void QuestDiscovery()
+    private void QuestDiscovery()
     {
         int qIdx = GetQuestNumber();
         MonsterRace rPtr = SingletonRepository.MonsterRaces[Quests[qIdx].RIdx];
@@ -14716,10 +14716,6 @@ internal class SaveGame
         }
     }
 
-
-    //////////////////////////////////////////////
-    // PLAYER START
-    //////////////////////////////////////////////
     private void InitializePlayer()
     {
         TimedAcidResistance = new AcidResistanceTimedAction(this);
@@ -15421,10 +15417,6 @@ internal class SaveGame
         }
         ExperiencePoints -= amount;
         CheckExperience();
-    }
-
-    public void PolymorphWounds()
-    {
     }
 
     [Obsolete("Use PrintSpells(Spell[], int, int)")]
