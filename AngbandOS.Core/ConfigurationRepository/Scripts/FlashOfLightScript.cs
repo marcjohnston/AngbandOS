@@ -5,21 +5,19 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Spells.Corporeal;
+namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class CorporealSpellCureCriticalWounds : Spell
+internal class FlashOfLightScript : Script, IScript
 {
-    private CorporealSpellCureCriticalWounds(SaveGame saveGame) : base(saveGame) { }
-    public override void Cast()
-    {
-        SaveGame.RunScript(nameof(CureCriticalWoundsScript));
-    }
+    private FlashOfLightScript(SaveGame saveGame) : base(saveGame) { }
 
-    public override string Name => "Cure Critical Wounds";
-    
-    protected override string? Info()
+    /// <summary>
+    /// Executes the script.
+    /// </summary>
+    /// <returns></returns>
+    public void ExecuteScript()
     {
-        return "heal 8d10";
+        SaveGame.LightArea(SaveGame.Rng.DiceRoll(2, SaveGame.ExperienceLevel / 2), (SaveGame.ExperienceLevel / 10) + 1);
     }
 }

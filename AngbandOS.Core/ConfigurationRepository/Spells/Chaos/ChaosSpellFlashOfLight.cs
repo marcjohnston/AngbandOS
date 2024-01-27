@@ -13,7 +13,7 @@ internal class ChaosSpellFlashOfLight : Spell
     private ChaosSpellFlashOfLight(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.LightArea(SaveGame.Rng.DiceRoll(2, SaveGame.ExperienceLevel / 2), (SaveGame.ExperienceLevel / 10) + 1);
+        SaveGame.RunScript(nameof(FlashOfLightScript));
     }
 
     public override void CastFailed()
