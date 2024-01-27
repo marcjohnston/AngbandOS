@@ -15,6 +15,6 @@ internal class DoHavocReward : Reward
     {
         SaveGame.MsgPrint($"The voice of {patron.ShortName} whispers out:");
         SaveGame.MsgPrint("'Death and destruction! This pleaseth me!'");
-        SaveGame.CallChaos();
+        SaveGame.RunScript(nameof(CallChaosScript));
     }
 }

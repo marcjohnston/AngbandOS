@@ -26,7 +26,7 @@ internal class HavocRodItemFactory : RodItemFactory
     public override int Weight => 15;
     public override void Execute(ZapRodEvent zapRodEvent)
     {
-        SaveGame.CallChaos();
+        SaveGame.RunScript(nameof(CallChaosScript));
         zapRodEvent.Identified = true;
         zapRodEvent.Item.TypeSpecificValue = 250;
     }

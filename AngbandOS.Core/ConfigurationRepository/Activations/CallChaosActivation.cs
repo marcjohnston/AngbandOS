@@ -22,7 +22,7 @@ internal class CallChaosActivation : Activation
 
     public override bool Activate()
     {
-        SaveGame.CallChaos();
+        SaveGame.RunScript(nameof(CallChaosScript));
         return true;
     }
 

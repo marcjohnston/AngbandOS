@@ -13,7 +13,7 @@ internal class ChaosSpellCallChaos : Spell
     private ChaosSpellCallChaos(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.CallChaos();
+        SaveGame.RunScript(nameof(CallChaosScript));
     }
 
     public override void CastFailed()
