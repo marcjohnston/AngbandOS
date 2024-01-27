@@ -51,10 +51,10 @@ internal class BoozePotionItemFactory : PotionItemFactory
                 }
                 else
                 {
-                    SaveGame.WizDark();
+                    SaveGame.RunScript(nameof(WizardDarkScript));
                 }
                 SaveGame.TeleportPlayer(100);
-                SaveGame.WizDark();
+                SaveGame.RunScript(nameof(WizardDarkScript));
                 SaveGame.MsgPrint("You wake up somewhere with a sore head...");
                 SaveGame.MsgPrint("You can't remember a thing, or how you got here!");
             }

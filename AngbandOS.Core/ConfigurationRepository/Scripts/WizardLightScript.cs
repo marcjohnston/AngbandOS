@@ -13,7 +13,7 @@ internal class WizardLightScript : Script, IScript
     private WizardLightScript(SaveGame saveGame) : base(saveGame) { }
 
     /// <summary>
-    /// Executes the script.
+    /// Lights the map.
     /// </summary>
     /// <returns></returns>
     public void ExecuteScript()

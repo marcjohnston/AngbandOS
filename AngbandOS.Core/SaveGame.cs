@@ -5500,7 +5500,7 @@ internal class SaveGame
         }
         SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
         SingletonRepository.FlaggedActions.Get(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
-        WizDark();
+        RunScript(nameof(WizardDarkScript));
         return true;
     }
 
@@ -17488,28 +17488,6 @@ internal class SaveGame
             yp = ny;
             xp = nx;
         }
-    }
-
-    public void WizDark()
-    {
-        for (int y = 0; y < CurHgt; y++)
-        {
-            for (int x = 0; x < CurWid; x++)
-            {
-                GridTile cPtr = Grid[y][x];
-                cPtr.TileFlags.Clear(GridTile.PlayerMemorized);
-                foreach (Item oPtr in cPtr.Items)
-                {
-                    oPtr.Marked = false;
-                }
-            }
-        }
-        SingletonRepository.FlaggedActions.Get(nameof(RemoveLightFlaggedAction)).Set();
-        SingletonRepository.FlaggedActions.Get(nameof(RemoveViewFlaggedAction)).Set();
-        SingletonRepository.FlaggedActions.Get(nameof(UpdateLightFlaggedAction)).Set();
-        SingletonRepository.FlaggedActions.Get(nameof(UpdateViewFlaggedAction)).Set();
-        SingletonRepository.FlaggedActions.Get(nameof(UpdateMonstersFlaggedAction)).Set();
-        SingletonRepository.FlaggedActions.Get(nameof(RedrawMapFlaggedAction)).Set();
     }
 
     private ColorEnum DimColor(ColorEnum a)
