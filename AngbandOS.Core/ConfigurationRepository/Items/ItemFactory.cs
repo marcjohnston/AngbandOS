@@ -18,6 +18,11 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey<string>
     protected readonly SaveGame SaveGame;
 
     /// <summary>
+    /// Returns true, if the item is capable of vorpal slaying.  Only swords return true.  Returns false, by default.
+    /// </summary>
+    public virtual bool CanVorpalSlay => false;
+
+    /// <summary>
     /// Returns false, if any of the stats between two items are different.
     /// </summary>
     /// <param name="a"></param>

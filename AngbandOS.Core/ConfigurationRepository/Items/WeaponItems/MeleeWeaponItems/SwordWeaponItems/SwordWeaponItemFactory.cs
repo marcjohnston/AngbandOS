@@ -18,5 +18,5 @@ internal abstract class SwordWeaponItemFactory : MeleeWeaponItemFactory
 
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override bool CanApplyBlessedArtifactBias => true;
-
+    public override bool CanVorpalSlay => true;
 }

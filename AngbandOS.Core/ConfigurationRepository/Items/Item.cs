@@ -16,11 +16,6 @@ internal abstract class Item : IComparable<Item>, IGetKey<string>
     public int PackSort => Factory.PackSort;
 
     /// <summary>
-    /// Returns true, if the item is capable of vorpal slaying.  Only swords return true.  Returns false, by default.
-    /// </summary>
-    public virtual bool CanVorpalSlay => false;
-
-    /// <summary>
     /// Returns true, if the item can apply a bonus armor class for miscellaneous power.  Only weapons return true.  Returns false, by default.
     /// </summary>
     public virtual bool CanApplyBonusArmorClassMiscPower => false;
@@ -797,19 +792,6 @@ internal abstract class Item : IComparable<Item>, IGetKey<string>
         return total < Constants.MaxStackSize;
     }
 
-
-    /// <summary>
-    /// Returns true, if an item can absorb another item of the same type.  Returns false, by default, if either item is known.  The ability for
-    /// two items to be absorbed into one is based on whether both items are known and have the same stats/characteristics.
-    /// </summary>
-    protected virtual bool FactoryCanAbsorbItem(Item other)
-    {
-        if (!IsKnown() || !other.IsKnown())
-        {
-            return false;
-        }
-        return true;
-    }
 
     /// <summary>
     /// 
@@ -2971,7 +2953,7 @@ internal abstract class Item : IComparable<Item>, IGetKey<string>
 
             case 18:
             case 19:
-                if (CanVorpalSlay)
+                if (Factory.CanVorpalSlay)
                 {
                     RandartItemCharacteristics.Vorpal = true;
                     if (artifactBias == null && SaveGame.Rng.DieRoll(9) == 1)
