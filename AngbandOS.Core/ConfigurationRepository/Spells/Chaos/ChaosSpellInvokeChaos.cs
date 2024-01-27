@@ -13,11 +13,7 @@ internal class ChaosSpellInvokeChaos : Spell
     private ChaosSpellInvokeChaos(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        if (!SaveGame.GetDirectionWithAim(out int dir))
-        {
-            return;
-        }
-        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(ChaosProjectile)), dir, 66 + SaveGame.ExperienceLevel, SaveGame.ExperienceLevel / 5);
+        SaveGame.RunScript(nameof(InvokeChaosScript));
     }
 
     public override void CastFailed()
