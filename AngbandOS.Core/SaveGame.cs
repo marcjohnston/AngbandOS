@@ -3770,7 +3770,7 @@ internal class SaveGame
         {
             SingletonRepository.FlaggedActions.Get(nameof(NoticeCombineFlaggedAction)).Set();
         }
-        SenseInventory();
+        RunScript(nameof(SenseInventoryScript));
         for (int y = 1; y < CurHgt - 1; y++)
         {
             for (int x = 1; x < CurWid - 1; x++)
@@ -15601,65 +15601,6 @@ internal class SaveGame
             return true;
         }
         return false;
-    }
-
-    public void SenseInventory()
-    {
-        int playerLevel = ExperienceLevel;
-        if (TimedConfusion.TurnsRemaining != 0)
-        {
-            return;
-        }
-        if (!BaseCharacterClass.SenseInventoryTest(ExperienceLevel))
-        {
-            return;
-        }
-        bool detailed = BaseCharacterClass.DetailedSenseInventory;
-
-        // Enumerate each of the inventory slots.
-        foreach (BaseInventorySlot inventorySlot in SingletonRepository.InventorySlots)
-        {
-            // Enumerate each of the items in the inventory slot.
-            foreach (int i in inventorySlot)
-            {
-                Item? item = GetInventoryItem(i);
-                if (item == null)
-                {
-                    continue;
-                }
-                bool okay = item.Factory.IdentityCanBeSensed;
-                if (!okay)
-                {
-                    continue;
-                }
-                if (item.IdentSense)
-                {
-                    continue;
-                }
-                if (item.IsKnown())
-                {
-                    continue;
-                }
-                if (!inventorySlot.IdentitySenseChanceTest)
-                {
-                    continue;
-                }
-                string feel = detailed ? item.GetDetailedFeeling() : item.GetVagueFeeling();
-                if (string.IsNullOrEmpty(feel))
-                {
-                    continue;
-                }
-                string oName = item.Description(false, 0);
-                string isare = item.Count == 1 ? "is" : "are";
-                MsgPrint($"You feel the {oName} ({i.IndexToLabel()}) {inventorySlot.SenseLocation(i)} {isare} {feel}...");
-                item.IdentSense = true;
-                if (string.IsNullOrEmpty(item.Inscription))
-                {
-                    item.Inscription = feel;
-                }
-                SingletonRepository.FlaggedActions.Get(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
-            }
-        }
     }
 
     public bool SetFood(int v)

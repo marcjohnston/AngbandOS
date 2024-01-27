@@ -20,6 +20,6 @@ internal class SenseInventoryWizardCommand : WizardCommand
 
     public override void Execute()
     {
-        SaveGame.SenseInventory();
+        SaveGame.RunScript(nameof(SenseInventoryScript));
     }
 }
