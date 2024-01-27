@@ -13,11 +13,7 @@ internal class ChaosSpellPolymorphOther : Spell
     private ChaosSpellPolymorphOther(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        if (!SaveGame.GetDirectionWithAim(out int dir))
-        {
-            return;
-        }
-        SaveGame.PolyMonster(dir);
+        SaveGame.RunScript(nameof(PolymorphOtherScript));
     }
 
     public override void CastFailed()
