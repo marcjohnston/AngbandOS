@@ -17162,49 +17162,6 @@ internal class SaveGame
 
     public void MapArea()
     {
-        int y1 = PanelRowMin - Rng.DieRoll(10);
-        int y2 = PanelRowMax + Rng.DieRoll(10);
-        int x1 = PanelColMin - Rng.DieRoll(20);
-        int x2 = PanelColMax + Rng.DieRoll(20);
-        if (y1 < 1)
-        {
-            y1 = 1;
-        }
-        if (y2 > CurHgt - 2)
-        {
-            y2 = CurHgt - 2;
-        }
-        if (x1 < 1)
-        {
-            x1 = 1;
-        }
-        if (x2 > CurWid - 2)
-        {
-            x2 = CurWid - 2;
-        }
-        for (int y = y1; y <= y2; y++)
-        {
-            for (int x = x1; x <= x2; x++)
-            {
-                GridTile cPtr = Grid[y][x];
-                if (!cPtr.FeatureType.IsWall)
-                {
-                    if (!cPtr.FeatureType.IsOpenFloor)
-                    {
-                        cPtr.TileFlags.Set(GridTile.PlayerMemorized);
-                    }
-                    for (int i = 0; i < 8; i++)
-                    {
-                        cPtr = Grid[y + OrderedDirectionYOffset[i]][x + OrderedDirectionXOffset[i]];
-                        if (cPtr.FeatureType.IsWall)
-                        {
-                            cPtr.TileFlags.Set(GridTile.PlayerMemorized);
-                        }
-                    }
-                }
-            }
-        }
-        SingletonRepository.FlaggedActions.Get(nameof(RedrawMapFlaggedAction)).Set();
     }
 
     /// <summary>

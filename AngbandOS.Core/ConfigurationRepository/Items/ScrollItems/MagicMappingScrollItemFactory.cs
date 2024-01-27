@@ -24,7 +24,7 @@ internal class MagicMappingScrollItemFactory : ScrollItemFactory
 
     public override void Read(ReadScrollEvent eventArgs)
     {
-        SaveGame.MapArea();
+        SaveGame.RunScript(nameof(MapAreaScript));
         eventArgs.Identified = true;
     }
     public override Item CreateItem() => new MagicMappingScrollItem(SaveGame);

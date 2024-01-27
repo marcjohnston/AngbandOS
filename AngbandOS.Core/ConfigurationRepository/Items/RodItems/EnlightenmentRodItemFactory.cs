@@ -26,7 +26,7 @@ internal class EnlightenmentRodItemFactory : RodItemFactory
     public override int Weight => 15;
     public override void Execute(ZapRodEvent zapRodEvent)
     {
-        SaveGame.MapArea();
+        SaveGame.RunScript(nameof(MapAreaScript));
         zapRodEvent.Identified = true;
         zapRodEvent.Item.TypeSpecificValue = 99;
     }

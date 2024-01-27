@@ -20,7 +20,7 @@ internal class MapLightActivation : Activation
 
     public override bool Activate()
     {
-        SaveGame.MapArea();
+        SaveGame.RunScript(nameof(MapAreaScript));
         SaveGame.LightArea(SaveGame.Rng.DiceRoll(2, 15), 3);
         return true;
     }

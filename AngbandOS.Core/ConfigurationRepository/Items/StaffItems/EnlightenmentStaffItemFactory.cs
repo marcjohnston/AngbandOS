@@ -26,7 +26,7 @@ internal class EnlightenmentStaffItemFactory : StaffItemFactory
 
     public override void UseStaff(UseStaffEvent eventArgs)
     {
-        SaveGame.MapArea();
+        SaveGame.RunScript(nameof(MapAreaScript));
         eventArgs.Identified = true;
     }
     public override Item CreateItem() => new EnlightenmentStaffItem(SaveGame);

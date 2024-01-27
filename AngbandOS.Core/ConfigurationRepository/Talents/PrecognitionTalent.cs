@@ -27,7 +27,7 @@ internal class PrecognitionTalent : Talent
         }
         else if (SaveGame.ExperienceLevel > 19)
         {
-            SaveGame.MapArea();
+            SaveGame.RunScript(nameof(MapAreaScript));
         }
         bool b;
         if (SaveGame.ExperienceLevel < 30)

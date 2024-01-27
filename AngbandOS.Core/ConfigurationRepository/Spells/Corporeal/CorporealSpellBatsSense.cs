@@ -13,7 +13,7 @@ internal class CorporealSpellBatsSense : Spell
     private CorporealSpellBatsSense(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.MapArea();
+        SaveGame.RunScript(nameof(MapAreaScript));
     }
 
     public override string Name => "Bat's Sense";

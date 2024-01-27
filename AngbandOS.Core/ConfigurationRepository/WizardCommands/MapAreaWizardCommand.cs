@@ -20,6 +20,6 @@ internal class MapAreaWizardCommand : WizardCommand
 
     public override void Execute()
     {
-        SaveGame.MapArea();
+        SaveGame.RunScript(nameof(MapAreaScript));
     }
 }
