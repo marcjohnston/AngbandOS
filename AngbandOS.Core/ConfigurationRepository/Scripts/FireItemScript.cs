@@ -8,9 +8,9 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class FireScript : Script, IScript, IRepeatableScript
+internal class FireItemScript : Script, IScript, IRepeatableScript
 {
-    private FireScript(SaveGame saveGame) : base(saveGame) { }
+    private FireItemScript(SaveGame saveGame) : base(saveGame) { }
 
     /// <summary>
     /// Executes the fire script and returns false.
