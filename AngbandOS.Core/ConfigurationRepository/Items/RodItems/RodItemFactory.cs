@@ -13,6 +13,19 @@ internal abstract class RodItemFactory : ItemFactory, IFlavour
     public RodItemFactory(SaveGame saveGame) : base(saveGame) { }
     public override ItemClass ItemClass => SaveGame.SingletonRepository.ItemClasses.Get(nameof(RodsItemClass));
 
+    public override bool ItemsCanBeMerged(Item a, Item b)
+    {
+        if (!base.ItemsCanBeMerged(a, b))
+        {
+            return false;
+        }
+        if (a.TypeSpecificValue != b.TypeSpecificValue)
+        {
+            return false;
+        }
+        return true;
+    }
+
     /// <summary>
     /// Returns the rod flavours repository because rods have flavours that need to be identified.
     /// </summary>

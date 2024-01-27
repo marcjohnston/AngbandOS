@@ -36,11 +36,6 @@ internal abstract class ChestItem : Item
             }
         }
     }
-    protected override bool FactoryCanAbsorbItem(Item other)
-    {
-        return false;
-    }
-
     public override string GetDetailedDescription()
     {
         string s = string.Empty;

@@ -18,6 +18,85 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey<string>
     protected readonly SaveGame SaveGame;
 
     /// <summary>
+    /// Returns false, if any of the stats between two items are different.
+    /// </summary>
+    /// <param name="a"></param>
+    /// <param name="b"></param>
+    /// <returns></returns>
+    protected bool StatsAreSame(Item a, Item b)
+    {
+        if (a.BonusToHit != b.BonusToHit)
+        {
+            return false;
+        }
+        if (a.BonusDamage != b.BonusDamage)
+        {
+            return false;
+        }
+        if (a.BonusArmorClass != b.BonusArmorClass)
+        {
+            return false;
+        }
+        if (a.TypeSpecificValue != b.TypeSpecificValue)
+        {
+            return false;
+        }
+        if (a.FixedArtifact != b.FixedArtifact)
+        {
+            return false;
+        }
+        if (!string.IsNullOrEmpty(a.RandartName) || !string.IsNullOrEmpty(b.RandartName))
+        {
+            return false;
+        }
+        if (a.RareItemTypeIndex != b.RareItemTypeIndex)
+        {
+            return false;
+        }
+        if (a.BonusPowerType != 0 || b.BonusPowerType != 0)
+        {
+            return false;
+        }
+        if (a.RechargeTimeLeft != 0 || b.RechargeTimeLeft != 0)
+        {
+            return false;
+        }
+        if (a.BaseArmorClass != b.BaseArmorClass)
+        {
+            return false;
+        }
+        if (a.DamageDice != b.DamageDice)
+        {
+            return false;
+        }
+        if (a.DamageDiceSides != b.DamageDiceSides)
+        {
+            return false;
+        }
+        return true;
+    }
+
+    /// <summary>
+    /// Returns true, if two item can be merged.  By default, returns true, if both items are from the same factory and are both known.
+    /// </summary>
+    public virtual bool ItemsCanBeMerged(Item a, Item b)
+    {
+        // Ensure both items belong to the same factory.  This works because factories are singletons.  Items from different factories cannot
+        // be merged.
+        if (a.Factory != b.Factory)
+        {
+            return false;
+        }
+
+        // If either item is not known, they cannot be merged.
+        if (!a.IsKnown() || !b.IsKnown())
+        {
+            return false;
+        }
+        return true;
+    }
+
+    /// <summary>
     /// Returns the percentage chance that an thrown or fired item breaks.  Returns 10, or 10%, by default.  A value of 101, guarantees the item will break.
     /// </summary>
     public virtual int PercentageBreakageChance => 10;

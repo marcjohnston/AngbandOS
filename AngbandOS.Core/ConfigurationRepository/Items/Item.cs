@@ -759,67 +759,6 @@ internal abstract class Item : IComparable<Item>, IGetKey<string>
         IdentKnown = true;
     }
 
-    public bool StatsAreSame(Item other)
-    {
-        if (!IsKnown())
-        {
-            return false;
-        }
-        if (IsKnown() != other.IsKnown())
-        {
-            return false;
-        }
-        if (BonusToHit != other.BonusToHit)
-        {
-            return false;
-        }
-        if (BonusDamage != other.BonusDamage)
-        {
-            return false;
-        }
-        if (BonusArmorClass != other.BonusArmorClass)
-        {
-            return false;
-        }
-        if (TypeSpecificValue != other.TypeSpecificValue)
-        {
-            return false;
-        }
-        if (FixedArtifact != other.FixedArtifact)
-        {
-            return false;
-        }
-        if (!string.IsNullOrEmpty(RandartName) || !string.IsNullOrEmpty(other.RandartName))
-        {
-            return false;
-        }
-        if (RareItemTypeIndex != other.RareItemTypeIndex)
-        {
-            return false;
-        }
-        if (BonusPowerType != 0 || other.BonusPowerType != 0)
-        {
-            return false;
-        }
-        if (RechargeTimeLeft != 0 || other.RechargeTimeLeft != 0)
-        {
-            return false;
-        }
-        if (BaseArmorClass != other.BaseArmorClass)
-        {
-            return false;
-        }
-        if (DamageDice != other.DamageDice)
-        {
-            return false;
-        }
-        if (DamageDiceSides != other.DamageDiceSides)
-        {
-            return false;
-        }
-        return true;
-    }
-
     /// <summary>
     /// Returns true, if two objects can be absorbed into one for the home store.
     /// </summary>
@@ -828,11 +767,9 @@ internal abstract class Item : IComparable<Item>, IGetKey<string>
     public bool CanAbsorb(Item other)
     {
         int total = Count + other.Count;
-        if (Factory != other.Factory)
-        {
-            return false;
-        }
-        if (!FactoryCanAbsorbItem(other))
+
+        // Ask our factory, if these items can be merged.
+        if (!Factory.ItemsCanBeMerged(this, other))
         {
             return false;
         }

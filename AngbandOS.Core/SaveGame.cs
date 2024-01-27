@@ -14394,7 +14394,6 @@ internal class SaveGame
             Screen.Print(ColorEnum.White, '-', row, col);
         }
     }
-
     
     public void WizCreateNamedArt(int aIdx)
     {

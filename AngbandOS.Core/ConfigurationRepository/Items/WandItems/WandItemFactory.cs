@@ -13,6 +13,19 @@ internal abstract class WandItemFactory : ItemFactory, IFlavour
     public WandItemFactory(SaveGame saveGame) : base(saveGame) { }
     public override ItemClass ItemClass => SaveGame.SingletonRepository.ItemClasses.Get(nameof(WandsItemClass));
 
+    public override bool ItemsCanBeMerged(Item a, Item b)
+    {
+        if (!base.ItemsCanBeMerged(a, b))
+        {
+            return false;
+        }
+        if (a.TypeSpecificValue != b.TypeSpecificValue)
+        {
+            return false;
+        }
+        return true;
+    }
+
     /// <summary>
     /// Returns the want flavours repository because wands have flavours that need to be identified.
     /// </summary>

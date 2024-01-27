@@ -135,19 +135,6 @@ internal abstract class ArmorItem : Item
         BonusArmorClass += SaveGame.Rng.DieRoll(BonusArmorClass > 19 ? 1 : 20 - BonusArmorClass);
     }
 
-    protected override bool FactoryCanAbsorbItem(Item other)
-    {
-        if (!IsKnown() || !other.IsKnown())
-        {
-            return false;
-        }
-        if (!StatsAreSame(other))
-        {
-            return false;
-        }
-        return true;
-    }
-
     public override int? GetTypeSpecificRealValue(int value)
     {
         return ComputeTypeSpecificRealValue(value);

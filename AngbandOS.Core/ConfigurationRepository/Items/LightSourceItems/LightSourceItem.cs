@@ -143,18 +143,6 @@ internal abstract class LightSourceItem : ArmorItem
             return $"It provides light (radius {Factory.Radius}) {burnRate}.";
         }
     }
-    protected override bool FactoryCanAbsorbItem(Item other)
-    {
-        if (!IsKnown() || !other.IsKnown())
-        {
-            return false;
-        }
-        if (!StatsAreSame(other))
-        {
-            return false;
-        }
-        return true;
-    }
 
     public override int? GetTypeSpecificRealValue(int value)
     {

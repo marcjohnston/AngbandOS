@@ -15,18 +15,6 @@ internal abstract class WandItem : Item
     {
         return value / 20 * TypeSpecificValue;
     }
-    protected override bool FactoryCanAbsorbItem(Item other)
-    {
-        if (!IsKnown() || !other.IsKnown())
-        {
-            return false;
-        }
-        if (TypeSpecificValue != other.TypeSpecificValue)
-        {
-            return false;
-        }
-        return true;
-    }
 
     /// <summary>
     /// Returns the factory that this item was created by; casted as an IFlavour.

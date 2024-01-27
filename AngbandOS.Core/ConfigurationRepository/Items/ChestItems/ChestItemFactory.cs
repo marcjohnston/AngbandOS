@@ -5,6 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+
 namespace AngbandOS.Core.ItemClasses;
 
 [Serializable]
@@ -15,6 +16,17 @@ internal abstract class ChestItemFactory : ItemFactory
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Chest;
     public override bool HatesFire => true;
     public override bool HatesAcid => true;
+
+    /// <summary>
+    /// Returns false, because chests cannot be merged.
+    /// </summary>
+    /// <param name="a"></param>
+    /// <param name="b"></param>
+    /// <returns></returns>
+    public override bool ItemsCanBeMerged(Item a, Item b)
+    {
+        return false;
+    }
 
     /// <summary>
     /// Returns whether or not the chest is small.  Small chests have a 75% chance that the items in the chest are gold.  Large chest always return items.

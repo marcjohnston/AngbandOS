@@ -14,6 +14,20 @@ namespace AngbandOS.Core.ItemClasses;
 internal abstract class ArmorItemFactory : ItemFactory
 {
     public ArmorItemFactory(SaveGame saveGame) : base(saveGame) { }
+
+    public override bool ItemsCanBeMerged(Item a, Item b)
+    {
+        if (!base.ItemsCanBeMerged(a, b))
+        {
+            return false;
+        }
+        if (!StatsAreSame(a, b))
+        {
+            return false;
+        }
+        return true;
+    }
+
     public override bool HasQuality => true;
     public override bool IsArmor => true;
     public override bool IdentityCanBeSensed => true;

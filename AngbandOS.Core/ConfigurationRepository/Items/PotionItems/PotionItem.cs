@@ -11,10 +11,6 @@ namespace AngbandOS.Core.Items;
 internal abstract class PotionItem : Item
 {
     public PotionItem(SaveGame saveGame, ItemFactory itemClass) : base(saveGame, itemClass) { }
-    protected override bool FactoryCanAbsorbItem(Item other)
-    {
-        return true;
-    }
 
     public override int GetAdditionalMassProduceCount()
     {

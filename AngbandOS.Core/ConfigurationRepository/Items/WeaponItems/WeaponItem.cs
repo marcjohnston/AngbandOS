@@ -70,19 +70,6 @@ internal abstract class WeaponItem : Item
         BonusDamage += SaveGame.Rng.DieRoll(BonusDamage > 19 ? 1 : 20 - BonusDamage);
     }
 
-    protected override bool FactoryCanAbsorbItem(Item other)
-    {
-        if (!IsKnown() || !other.IsKnown())
-        {
-            return false;
-        }
-        if (!StatsAreSame(other))
-        {
-            return false;
-        }
-        return true;
-    }
-
     public override int? GetTypeSpecificRealValue(int value)
     {
         return ComputeTypeSpecificRealValue(value);

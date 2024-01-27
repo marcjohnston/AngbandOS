@@ -12,14 +12,6 @@ internal abstract class ArrowAmmunitionItem : AmmunitionItem
 {
     public ArrowAmmunitionItem(SaveGame saveGame, ItemFactory itemClass) : base(saveGame, itemClass) { }
 
-    protected override bool FactoryCanAbsorbItem(Item other)
-    {
-        if (!StatsAreSame(other))
-        {
-            return false;
-        }
-        return true;
-    }
     public override int GetAdditionalMassProduceCount()
     {
         int cost = Value();

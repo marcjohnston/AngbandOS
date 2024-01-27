@@ -11,14 +11,6 @@ namespace AngbandOS.Core.Items;
 internal abstract class RodItem : Item
 {
     public RodItem(SaveGame saveGame, ItemFactory itemClass) : base(saveGame, itemClass) { }
-    protected override bool FactoryCanAbsorbItem(Item other)
-    {
-        if (TypeSpecificValue != other.TypeSpecificValue)
-        {
-            return false;
-        }
-        return true;
-    }
 
     /// <summary>
     /// Returns the factory that this item was created by; casted as an IFlavour.

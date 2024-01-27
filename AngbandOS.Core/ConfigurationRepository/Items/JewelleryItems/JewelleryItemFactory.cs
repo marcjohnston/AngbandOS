@@ -15,4 +15,16 @@ internal abstract class JewelleryItemFactory : ItemFactory
 {
     public JewelleryItemFactory(SaveGame saveGame) : base(saveGame) { }
     public override bool IsWearable => true;
+    public override bool ItemsCanBeMerged(Item a, Item b)
+    {
+        if (!base.ItemsCanBeMerged(a, b))
+        {
+            return false;
+        }
+        if (!StatsAreSame(a, b))
+        {
+            return false;
+        }
+        return true;
+    }
 }

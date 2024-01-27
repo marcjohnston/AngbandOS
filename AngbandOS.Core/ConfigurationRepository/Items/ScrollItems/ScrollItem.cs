@@ -11,10 +11,7 @@ namespace AngbandOS.Core.Items;
 internal abstract class ScrollItem : Item
 {
     public ScrollItem(SaveGame saveGame, ItemFactory itemClass) : base(saveGame, itemClass) { }
-    protected override bool FactoryCanAbsorbItem(Item other)
-    {
-        return true;
-    }
+
     public override int GetAdditionalMassProduceCount()
     {
         int cost = Value();
