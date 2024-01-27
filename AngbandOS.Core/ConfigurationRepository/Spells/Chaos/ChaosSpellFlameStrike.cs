@@ -13,7 +13,7 @@ internal class ChaosSpellFlameStrike : Spell
     private ChaosSpellFlameStrike(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(FireProjectile)), 0, 150 + (2 * SaveGame.ExperienceLevel), 8);
+        SaveGame.RunScript(nameof(FlameStrikeScript));
     }
 
     public override void CastFailed()
