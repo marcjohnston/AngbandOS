@@ -13,7 +13,7 @@ internal class NatureSpellDetectCreatures : Spell
     private NatureSpellDetectCreatures(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.DetectMonstersNormal();
+        SaveGame.RunScript(nameof(DetectNormalMonstersScript));
     }
 
     public override string Name => "Detect Creatures";

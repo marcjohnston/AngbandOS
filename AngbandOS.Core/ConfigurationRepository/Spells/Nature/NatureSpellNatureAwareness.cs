@@ -17,7 +17,7 @@ internal class NatureSpellNatureAwareness : Spell
         SaveGame.DetectTraps();
         SaveGame.DetectDoors();
         SaveGame.DetectStairs();
-        SaveGame.DetectMonstersNormal();
+        SaveGame.RunScript(nameof(DetectNormalMonstersScript));
     }
 
     public override string Name => "Nature Awareness";

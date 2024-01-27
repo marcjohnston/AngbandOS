@@ -4497,7 +4497,7 @@ internal class SaveGame
         detect |= DetectObjectsGold();
         detect |= DetectObjectsNormal();
         detect |= DetectMonstersInvis();
-        detect |= DetectMonstersNormal();
+        detect |= RunSuccessfulScript(nameof(DetectNormalMonstersScript));
         return detect;
     }
 
@@ -4526,10 +4526,6 @@ internal class SaveGame
             MsgPrint("You sense the presence of doors!");
         }
         return detect;
-    }
-
-    public bool DetectMonstersEvil()
-    {
     }
 
     public bool DetectMonstersInvis()
@@ -4597,39 +4593,6 @@ internal class SaveGame
         {
             MsgPrint("You sense the presence of unnatural beings!");
         }
-    }
-
-    public bool DetectMonstersNormal()
-    {
-        bool flag = false;
-        for (int i = 1; i < MMax; i++)
-        {
-            Monster mPtr = Monsters[i];
-            MonsterRace rPtr = mPtr.Race;
-            if (mPtr.Race == null)
-            {
-                continue;
-            }
-            int y = mPtr.MapY;
-            int x = mPtr.MapX;
-            if (!PanelContains(y, x))
-            {
-                continue;
-            }
-            if (!rPtr.Invisible || HasSeeInvisibility || TimedSeeInvisibility.TurnsRemaining != 0)
-            {
-                RepairMonsters = true;
-                mPtr.IndividualMonsterFlags |= Constants.MflagMark | Constants.MflagShow;
-                mPtr.IsVisible = true;
-                RedrawSingleLocation(y, x);
-                flag = true;
-            }
-        }
-        if (flag)
-        {
-            MsgPrint("You sense the presence of monsters!");
-        }
-        return flag;
     }
 
     public bool DetectObjectsGold()

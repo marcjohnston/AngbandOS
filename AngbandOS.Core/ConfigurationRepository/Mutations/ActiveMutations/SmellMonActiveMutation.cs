@@ -15,7 +15,7 @@ internal class SmellMonActiveMutation : Mutation
     {
         if (SaveGame.CheckIfRacialPowerWorks(5, 4, Ability.Intelligence, 15))
         {
-            SaveGame.DetectMonstersNormal();
+            SaveGame.RunScript(nameof(DetectNormalMonstersScript));
         }
     }
 

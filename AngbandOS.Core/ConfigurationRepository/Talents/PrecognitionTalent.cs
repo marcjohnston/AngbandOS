@@ -32,7 +32,7 @@ internal class PrecognitionTalent : Talent
         bool b;
         if (SaveGame.ExperienceLevel < 30)
         {
-            b = SaveGame.DetectMonstersNormal();
+            b = SaveGame.RunSuccessfulScript(nameof(DetectNormalMonstersScript));
             if (SaveGame.ExperienceLevel > 14)
             {
                 b |= SaveGame.DetectMonstersInvis();
