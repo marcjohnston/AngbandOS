@@ -5,17 +5,19 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Spells.Corporeal;
+namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class CorporealSpellBravery : Spell
+internal class BraveryScript : Script, IScript
 {
-    private CorporealSpellBravery(SaveGame saveGame) : base(saveGame) { }
-    public override void Cast()
-    {
-        SaveGame.RunScript(nameof(BraveryScript));
-    }
+    private BraveryScript(SaveGame saveGame) : base(saveGame) { }
 
-    public override string Name => "Bravery";
-    
+    /// <summary>
+    /// Resets the timed fear.
+    /// </summary>
+    /// <returns></returns>
+    public void ExecuteScript()
+    {
+        SaveGame.TimedFear.ResetTimer();
+    }
 }
