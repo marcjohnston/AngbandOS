@@ -13,13 +13,7 @@ internal class ChaosSpellManaBurst : Spell
     private ChaosSpellManaBurst(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        if (!SaveGame.GetDirectionWithAim(out int dir))
-        {
-            return;
-        }
-        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(MissileProjectile)), dir, SaveGame.Rng.DiceRoll(3, 5) + SaveGame.ExperienceLevel + (SaveGame.ExperienceLevel /
-            (SaveGame.BaseCharacterClass.ID == CharacterClass.Mage || SaveGame.BaseCharacterClass.ID == CharacterClass.HighMage ? 2 : 4)),
-            SaveGame.ExperienceLevel < 30 ? 2 : 3);
+        SaveGame.RunScript(nameof(ManaBurstScript));
     }
 
     public override void CastFailed()
