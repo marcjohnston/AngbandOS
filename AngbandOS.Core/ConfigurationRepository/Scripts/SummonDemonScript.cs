@@ -13,7 +13,7 @@ internal class SummonDemonScript : Script, IScript
     private SummonDemonScript(SaveGame saveGame) : base(saveGame) { }
 
     /// <summary>
-    /// Executes the script.
+    /// Summons a demon monster.
     /// </summary>
     /// <returns></returns>
     public void ExecuteScript()
