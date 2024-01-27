@@ -20,7 +20,6 @@ internal class ChaosSpellArcaneBinding : Spell
         DoWildChaoticMagic(18);
     }
 
-
     public override string Name => "Arcane Binding";
     
 }

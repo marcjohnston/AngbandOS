@@ -13,11 +13,7 @@ internal class ChaosSpellBreatheChaos : Spell
     private ChaosSpellBreatheChaos(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        if (!SaveGame.GetDirectionWithAim(out int dir))
-        {
-            return;
-        }
-        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(ChaosProjectile)), dir, SaveGame.Health, -2);
+        SaveGame.RunScript(nameof(BreatheChaosScript));
     }
 
     public override void CastFailed()
