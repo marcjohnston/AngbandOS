@@ -1796,7 +1796,7 @@ internal class Item : IComparable<Item>, IGetKey<string>
         {
             return 0;
         }
-        int? typeSpecificValue = GetTypeSpecificRealValue(value);
+        int? typeSpecificValue = Factory.GetTypeSpecificRealValue(this, value);
         if (typeSpecificValue == null)
         {
             return 0;
@@ -2945,8 +2945,6 @@ internal class Item : IComparable<Item>, IGetKey<string>
         return value;
     }
 
-    public virtual int? GetTypeSpecificRealValue(int value) => 0;
-
     /// <summary>
     /// Provides base functionality for the type specific real value.  Returns a real value for the type specific characteristics of the item.  Returns
     /// null, if the item is worthless.
@@ -2954,7 +2952,7 @@ internal class Item : IComparable<Item>, IGetKey<string>
     /// <param name="item"></param>
     /// <param name="value"></param>
     /// <returns></returns>
-    protected int? ComputeTypeSpecificRealValue(int value)
+    public int? ComputeTypeSpecificRealValue(int value)
     {
         if (TypeSpecificValue < 0)
         {

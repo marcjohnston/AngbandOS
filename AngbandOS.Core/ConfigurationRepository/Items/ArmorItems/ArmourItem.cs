@@ -11,10 +11,6 @@ namespace AngbandOS.Core.Items;
 internal abstract class ArmorItem : Item
 {
     public ArmorItem(SaveGame saveGame, ItemFactory itemClass) : base(saveGame, itemClass) { }
-    public override int? GetTypeSpecificRealValue(int value)
-    {
-        return ComputeTypeSpecificRealValue(value);
-    }
     public override int GetAdditionalMassProduceCount()
     {
         int cost = Value();

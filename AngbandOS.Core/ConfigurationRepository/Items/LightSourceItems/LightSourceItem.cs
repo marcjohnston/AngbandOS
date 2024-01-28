@@ -17,10 +17,6 @@ internal abstract class LightSourceItem : ArmorItem
     /// </summary>
     public override LightSourceItemFactory Factory => (LightSourceItemFactory)base.Factory;
 
-    public override int? GetTypeSpecificRealValue(int value)
-    {
-        return ComputeTypeSpecificRealValue(value);
-    }
     public override int GetAdditionalMassProduceCount()
     {
         int cost = Value();

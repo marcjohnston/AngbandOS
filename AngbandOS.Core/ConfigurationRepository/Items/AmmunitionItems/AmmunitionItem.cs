@@ -11,8 +11,4 @@ namespace AngbandOS.Core.Items;
 internal abstract class AmmunitionItem : Item
 {
     public AmmunitionItem(SaveGame saveGame, ItemFactory itemClass) : base(saveGame, itemClass) { }
-    public override int? GetTypeSpecificRealValue(int value)
-    {
-        return ComputeTypeSpecificRealValue(value);
-    }
 }

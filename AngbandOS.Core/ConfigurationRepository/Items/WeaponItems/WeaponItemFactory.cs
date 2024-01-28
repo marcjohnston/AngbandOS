@@ -17,6 +17,11 @@ internal abstract class WeaponItemFactory : ItemFactory
     public override bool HasQuality => true;
     public override bool CanApplyBonusArmorClassMiscPower => true;
 
+    public override int? GetTypeSpecificRealValue(Item item, int value)
+    {
+        return item.ComputeTypeSpecificRealValue(value);
+    }
+
     public override void ApplyRandartBonus(Item item)
     {
         item.BonusToHit += SaveGame.Rng.DieRoll(item.BonusToHit > 19 ? 1 : 20 - item.BonusToHit);

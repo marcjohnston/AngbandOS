@@ -17,6 +17,11 @@ internal abstract class ArmorItemFactory : ItemFactory
 {
     public ArmorItemFactory(SaveGame saveGame) : base(saveGame) { }
 
+    public override int? GetTypeSpecificRealValue(Item item, int value)
+    {
+        return item.ComputeTypeSpecificRealValue(value);
+    }
+
     public override void ApplyRandartBonus(Item item)
     {
         item.BonusArmorClass += SaveGame.Rng.DieRoll(item.BonusArmorClass > 19 ? 1 : 20 - item.BonusArmorClass);

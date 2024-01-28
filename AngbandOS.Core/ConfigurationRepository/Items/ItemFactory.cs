@@ -17,6 +17,8 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey<string>
 {
     protected readonly SaveGame SaveGame;
 
+    public virtual int? GetTypeSpecificRealValue(Item item, int value) => 0;
+
     /// <summary>
     /// Applies an additional bonus to random artifacts.  Does nothing by default.
     /// </summary>

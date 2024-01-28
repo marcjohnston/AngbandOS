@@ -11,10 +11,6 @@ namespace AngbandOS.Core.Items;
 internal abstract class JewelleryItem : Item
 {
     public JewelleryItem(SaveGame saveGame, ItemFactory itemClass) : base(saveGame, itemClass) { }
-    public override int? GetTypeSpecificRealValue(int value)
-    {
-        return ComputeTypeSpecificRealValue(value);
-    }
     public override bool IsStompable()
     {
         if (BonusDamage < 0 || BonusArmorClass < 0 || BonusToHit < 0 || TypeSpecificValue < 0)

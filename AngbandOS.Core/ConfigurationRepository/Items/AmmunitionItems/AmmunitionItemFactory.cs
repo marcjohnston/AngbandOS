@@ -11,6 +11,10 @@ namespace AngbandOS.Core.ItemClasses;
 internal abstract class AmmunitionItemFactory : WeaponItemFactory
 {
     public AmmunitionItemFactory(SaveGame saveGame) : base(saveGame) { }
+    public override int? GetTypeSpecificRealValue(Item item, int value)
+    {
+        return item.ComputeTypeSpecificRealValue(value);
+    }
     public override int? GetBonusRealValue(Item item, int value)
     {
         if (item.BonusToHit + item.BonusDamage < 0)
