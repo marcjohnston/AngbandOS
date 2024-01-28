@@ -11,15 +11,4 @@ namespace AngbandOS.Core.Items;
 internal class MagiAmuletJeweleryItem : AmuletJeweleryItem
 {
     public MagiAmuletJeweleryItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get(nameof(MagiAmuletJeweleryItemFactory))) { }
-
-    protected override void ApplyMagic(int level, int power, Store? store)
-    {
-        TypeSpecificValue = SaveGame.Rng.DieRoll(5) + GetBonusValue(5, level);
-        BonusArmorClass = SaveGame.Rng.DieRoll(5) + GetBonusValue(5, level);
-        if (SaveGame.Rng.DieRoll(3) == 1)
-        {
-            RandartItemCharacteristics.SlowDigest = true;
-        }
-        SaveGame.TreasureRating += 25;
-    }
 }

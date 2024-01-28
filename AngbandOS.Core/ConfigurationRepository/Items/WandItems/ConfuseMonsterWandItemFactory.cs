@@ -15,6 +15,10 @@ internal class ConfuseMonsterWandItemFactory : WandItemFactory
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(MinusSignSymbol));
     public override string Name => "Confuse Monster";
 
+    public override void ApplyMagic(Item item, int level, int power, Store? store)
+    {
+        item.TypeSpecificValue = SaveGame.Rng.DieRoll(12) + 6;
+    }
     public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int Cost => 500;
     public override int Dd => 1;

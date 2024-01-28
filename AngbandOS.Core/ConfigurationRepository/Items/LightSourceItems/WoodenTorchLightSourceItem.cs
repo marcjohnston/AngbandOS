@@ -11,16 +11,4 @@ namespace AngbandOS.Core.Items;
 internal class WoodenTorchLightSourceItem : LightSourceItem
 {
     public WoodenTorchLightSourceItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get(nameof(WoodenTorchLightSourceItemFactory))) { }
-
-    protected override void ApplyMagic(int level, int power, Store? store)
-    {
-        if (store != null)
-        {
-            TypeSpecificValue = Constants.FuelTorch / 2;
-        }
-        else if (TypeSpecificValue != 0)
-        {
-            TypeSpecificValue = SaveGame.Rng.DieRoll(TypeSpecificValue);
-        }
-    }
 }

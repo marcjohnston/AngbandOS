@@ -11,19 +11,4 @@ namespace AngbandOS.Core.Items;
 internal class DragonShieldArmorItem : ShieldArmorItem
 {
     public DragonShieldArmorItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get(nameof(DragonShieldArmorItemFactory))) { }
-
-    /// <summary>
-    /// Applies special magic to this dragon shield.
-    /// </summary>
-    /// <param name="item"></param>
-    /// <param name="level"></param>
-    /// <param name="power"></param>
-    protected override void ApplyMagic(int level, int power, Store? store)
-    {
-        // Apply the standard armor characteristics, regardless of the power level.
-        base.ApplyMagic(level, power, null);
-
-        SaveGame.TreasureRating += 5;
-        ApplyDragonscaleResistance();
-    }
 }

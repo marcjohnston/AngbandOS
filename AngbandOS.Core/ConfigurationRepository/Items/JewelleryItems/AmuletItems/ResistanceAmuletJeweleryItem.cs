@@ -11,18 +11,4 @@ namespace AngbandOS.Core.Items;
 internal class ResistanceAmuletJeweleryItem : AmuletJeweleryItem
 {
     public ResistanceAmuletJeweleryItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get(nameof(ResistanceAmuletJeweleryItemFactory))) { }
-
-    protected override void ApplyMagic(int level, int power, Store? store)
-    {
-        if (SaveGame.Rng.DieRoll(3) == 1)
-        {
-            IArtifactBias? artifactBias = null;
-            ApplyRandomResistance(ref artifactBias, SaveGame.Rng.DieRoll(34) + 4);
-        }
-        if (SaveGame.Rng.DieRoll(5) == 1)
-        {
-            RandartItemCharacteristics.ResPois = true;
-        }
-    }
-
 }

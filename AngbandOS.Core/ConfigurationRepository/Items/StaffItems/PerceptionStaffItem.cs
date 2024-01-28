@@ -11,8 +11,4 @@ namespace AngbandOS.Core.Items;
 internal class PerceptionStaffItem : StaffItem
 {
     public PerceptionStaffItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get(nameof(PerceptionStaffItemFactory))) { }
-    protected override void ApplyMagic(int level, int power, Store? store)
-    {
-        TypeSpecificValue = SaveGame.Rng.DieRoll(15) + 5;
-    }
 }

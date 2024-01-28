@@ -16,6 +16,89 @@ internal abstract class GlovesArmorItemFactory : ArmorItemFactory
     public override int WieldSlot => InventorySlot.Hands;
     public GlovesArmorItemFactory(SaveGame saveGame) : base(saveGame) { }
     public override ItemClass ItemClass => SaveGame.SingletonRepository.ItemClasses.Get(nameof(GlovesItemClass));
+
+    /// <summary>
+    /// Applies a good random rare characteristics to gloves.
+    /// </summary>
+    /// <param name="item"></param>
+    protected override void ApplyRandomGoodRareCharacteristics(Item item)
+    {
+        switch (SaveGame.Rng.DieRoll(10))
+        {
+            case 1:
+            case 2:
+            case 3:
+            case 4:
+                item.RareItemTypeIndex = RareItemTypeEnum.GlovesOfFreeAction;
+                break;
+            case 5:
+            case 6:
+            case 7:
+                item.RareItemTypeIndex = RareItemTypeEnum.GlovesOfSlaying;
+                break;
+            case 8:
+            case 9:
+                item.RareItemTypeIndex = RareItemTypeEnum.GlovesOfAgility;
+                break;
+            case 10:
+                IArtifactBias artifactBias = null;
+                item.RareItemTypeIndex = RareItemTypeEnum.GlovesOfPower;
+                item.ApplyRandomResistance(ref artifactBias, SaveGame.Rng.DieRoll(22) + 16);
+                break;
+        }
+    }
+
+    /// <summary>
+    /// Applies a poor random rare characteristics to gloves.
+    /// </summary>
+    /// <param name="item"></param>
+    protected override void ApplyRandomPoorRareCharacteristics(Item item)
+    {
+        switch (SaveGame.Rng.DieRoll(2))
+        {
+            case 1:
+                {
+                    item.RareItemTypeIndex = RareItemTypeEnum.GlovesOfClumsiness;
+                    break;
+                }
+            default:
+                {
+                    item.RareItemTypeIndex = RareItemTypeEnum.GlovesOfWeakness;
+                    break;
+                }
+        }
+    }
+
+    /// <summary>
+    /// Applies standard magic to gloves.
+    /// </summary>
+    /// <param name="item"></param>
+    /// <param name="level"></param>
+    /// <param name="power"></param>
+    public override void ApplyMagic(Item item, int level, int power, Store? store)
+    {
+        if (power != 0)
+        {
+            // Apply the standard armor characteristics.
+            base.ApplyMagic(item, level, power, null);
+
+            if (power > 1)
+            {
+                if (SaveGame.Rng.DieRoll(20) == 1)
+                {
+                    item.CreateRandart(false);
+                }
+                else
+                {
+                    ApplyRandomGoodRareCharacteristics(item);
+                }
+            }
+            else if (power < -1)
+            {
+                ApplyRandomPoorRareCharacteristics(item);
+            }
+        }
+    }
     public override int PackSort => 26;
     public override BaseInventorySlot BaseWieldSlot => SaveGame.SingletonRepository.InventorySlots.Get(nameof(HandsInventorySlot));
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Gloves;

@@ -11,11 +11,4 @@ namespace AngbandOS.Core.Items;
 internal class AntiTeleportationAmuletJeweleryItem : AmuletJeweleryItem
 {
     public AntiTeleportationAmuletJeweleryItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get(nameof(AntiTeleportationAmuletJeweleryItemFactory))) { }
-    protected override void ApplyMagic(int level, int power, Store? store)
-    {
-        if (power < 0 || (power == 0 && SaveGame.Rng.RandomLessThan(100) < 50))
-        {
-            IdentCursed = true;
-        }
-    }
 }

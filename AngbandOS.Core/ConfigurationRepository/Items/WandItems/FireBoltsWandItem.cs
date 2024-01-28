@@ -11,8 +11,4 @@ namespace AngbandOS.Core.Items;
 internal class FireBoltsWandItem : WandItem
 {
     public FireBoltsWandItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get(nameof(FireBoltsWandItemFactory))) { }
-    protected override void ApplyMagic(int level, int power, Store? store)
-    {
-        TypeSpecificValue = SaveGame.Rng.DieRoll(8) + 6;
-    }
 }

@@ -11,15 +11,4 @@ namespace AngbandOS.Core.Items;
 internal class SearchingAmuletJeweleryItem : AmuletJeweleryItem
 {
     public SearchingAmuletJeweleryItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get(nameof(SearchingAmuletJeweleryItemFactory))) { }
-
-    protected override void ApplyMagic(int level, int power, Store? store)
-    {
-        TypeSpecificValue = SaveGame.Rng.DieRoll(5) + GetBonusValue(5, level);
-        if (power < 0 || (power == 0 && SaveGame.Rng.RandomLessThan(100) < 50))
-        {
-            IdentBroken = true;
-            IdentCursed = true;
-            TypeSpecificValue = 0 - TypeSpecificValue;
-        }
-    }
 }

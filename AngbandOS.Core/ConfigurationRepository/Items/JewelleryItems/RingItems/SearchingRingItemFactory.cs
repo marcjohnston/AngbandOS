@@ -15,6 +15,21 @@ internal class SearchingRingItemFactory : RingItemFactory
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(EqualSignSymbol));
     public override string Name => "Searching";
 
+    public override void ApplyMagic(Item item, int level, int power, Store? store)
+    {
+        if (power == 0 && SaveGame.Rng.RandomLessThan(100) < 50)
+        {
+            power = -1;
+        }
+        item.TypeSpecificValue = 1 + item.GetBonusValue(5, level);
+        if (power < 0)
+        {
+            item.IdentBroken = true;
+            item.IdentCursed = true;
+            item.TypeSpecificValue = 0 - item.TypeSpecificValue;
+        }
+    }
+
     public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int Cost => 250;
     public override string FriendlyName => "Searching";

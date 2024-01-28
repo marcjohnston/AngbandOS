@@ -14,6 +14,18 @@ internal class BrassLanternLightSourceItemFactory : LightSourceItemFactory
 {
     private BrassLanternLightSourceItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
+    public override void ApplyMagic(Item item, int level, int power, Store? store)
+    {
+        if (store != null)
+        {
+            item.TypeSpecificValue = Constants.FuelLamp / 2;
+        }
+        else if (item.TypeSpecificValue != 0)
+        {
+            item.TypeSpecificValue = SaveGame.Rng.DieRoll(item.TypeSpecificValue);
+        }
+    }
+
     /// <summary>
     /// Returns an intensity of light provided by the lantern.  2, if the lantern has turns remaining, plus an additional 3
     /// if the lantern is an artifact.

@@ -11,8 +11,4 @@ namespace AngbandOS.Core.Items;
 internal class TameMonsterWandItem : WandItem
 {
     public TameMonsterWandItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get(nameof(TameMonsterWandItemFactory))) { }
-    protected override void ApplyMagic(int level, int power, Store? store)
-    {
-        TypeSpecificValue = SaveGame.Rng.DieRoll(6) + 2;
-    }
 }

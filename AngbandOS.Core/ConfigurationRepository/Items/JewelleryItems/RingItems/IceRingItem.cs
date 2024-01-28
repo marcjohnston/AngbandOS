@@ -21,8 +21,4 @@ internal class IceRingItem : RingItem, IItemActivatable
         SaveGame.TimedColdResistance.AddTimer(SaveGame.Rng.DieRoll(20) + 20);
         RechargeTimeLeft = SaveGame.Rng.RandomLessThan(50) + 50;
     }
-    protected override void ApplyMagic(int level, int power, Store? store)
-    {
-        BonusArmorClass = 5 + SaveGame.Rng.DieRoll(5) + GetBonusValue(10, level);
-    }
 }

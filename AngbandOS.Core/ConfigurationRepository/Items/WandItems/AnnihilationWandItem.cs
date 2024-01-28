@@ -11,8 +11,4 @@ namespace AngbandOS.Core.Items;
 internal class AnnihilationWandItem : WandItem
 {
     public AnnihilationWandItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get(nameof(AnnihilationWandItemFactory))) { }
-    protected override void ApplyMagic(int level, int power, Store? store)
-    {
-        TypeSpecificValue = SaveGame.Rng.DieRoll(2) + 1;
-    }
 }

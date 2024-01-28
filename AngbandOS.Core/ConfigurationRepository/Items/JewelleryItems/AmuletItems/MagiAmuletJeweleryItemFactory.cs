@@ -15,6 +15,17 @@ internal class MagiAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(DoubleQuoteSymbol));
     public override string Name => "the Magi";
 
+    public override void ApplyMagic(Item item, int level, int power, Store? store)
+    {
+        item.TypeSpecificValue = SaveGame.Rng.DieRoll(5) + item.GetBonusValue(5, level);
+        item.BonusArmorClass = SaveGame.Rng.DieRoll(5) + item.GetBonusValue(5, level);
+        if (SaveGame.Rng.DieRoll(3) == 1)
+        {
+            item.RandartItemCharacteristics.SlowDigest = true;
+        }
+        SaveGame.TreasureRating += 25;
+    }
+
     public override int[] Chance => new int[] { 4, 3, 0, 0 };
     public override int Cost => 30000;
     public override bool FreeAct => true;

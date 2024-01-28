@@ -12,6 +12,20 @@ internal class AccuracyRingItemFactory : RingItemFactory
 {
     private AccuracyRingItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
+    public override void ApplyMagic(Item item, int level, int power, Store? store)
+    {
+        if (power == 0 && SaveGame.Rng.RandomLessThan(100) < 50)
+        {
+            power = -1;
+        }
+        item.BonusToHit = 5 + SaveGame.Rng.DieRoll(8) + item.GetBonusValue(10, level);
+        if (power < 0)
+        {
+            item.IdentBroken = true;
+            item.IdentCursed = true;
+            item.BonusToHit = 0 - item.BonusToHit;
+        }
+    }
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(EqualSignSymbol));
     public override string Name => "Accuracy";
 

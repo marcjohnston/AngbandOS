@@ -11,8 +11,4 @@ namespace AngbandOS.Core.Items;
 internal class SpeedStaffItem : StaffItem
 {
     public SpeedStaffItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get(nameof(SpeedStaffItemFactory))) { }
-    protected override void ApplyMagic(int level, int power, Store? store)
-    {
-        TypeSpecificValue = SaveGame.Rng.DieRoll(3) + 4;
-    }
 }

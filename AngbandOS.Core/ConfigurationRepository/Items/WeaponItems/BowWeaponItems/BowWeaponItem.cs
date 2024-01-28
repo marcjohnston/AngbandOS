@@ -49,49 +49,6 @@ internal abstract class BowWeaponItem : WeaponItem
 
     public BowWeaponItem(SaveGame saveGame, ItemFactory itemClass) : base(saveGame, itemClass) { }
 
-    protected override void ApplyMagic(int level, int power, Store? store)
-    {
-        base.ApplyMagic(level, power, null);
-        if (power > 1)
-        {
-            switch (SaveGame.Rng.DieRoll(21))
-            {
-                case 1:
-                case 11:
-                    RareItemTypeIndex = RareItemTypeEnum.BowOfExtraMight;
-                    IArtifactBias artifactBias = null;
-                    ApplyRandomResistance(ref artifactBias, SaveGame.Rng.DieRoll(34) + 4);
-                    break;
-                case 2:
-                case 12:
-                    RareItemTypeIndex = RareItemTypeEnum.BowOfExtraShots;
-                    break;
-                case 3:
-                case 4:
-                case 5:
-                case 6:
-                case 13:
-                case 14:
-                case 15:
-                case 16:
-                    RareItemTypeIndex = RareItemTypeEnum.BowOfVelocity;
-                    break;
-                case 7:
-                case 8:
-                case 9:
-                case 10:
-                case 17:
-                case 18:
-                case 19:
-                case 20:
-                    RareItemTypeIndex = RareItemTypeEnum.BowOfAccuracy;
-                    break;
-                case 21:
-                    CreateRandart(false);
-                    break;
-            }
-        }
-    }
     public override string GetDetailedDescription()
     {
         string basenm = "";

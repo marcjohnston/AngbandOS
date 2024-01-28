@@ -15,6 +15,10 @@ internal class OfTheMagiStaffItemFactory : StaffItemFactory
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UnderscoreSymbol));
     public override string Name => "the Magi";
 
+    public override void ApplyMagic(Item item, int level, int power, Store? store)
+    {
+        item.TypeSpecificValue = SaveGame.Rng.DieRoll(2) + 2;
+    }
     public override int[] Chance => new int[] { 2, 0, 0, 0 };
     public override int Cost => 4500;
     public override int Dd => 1;

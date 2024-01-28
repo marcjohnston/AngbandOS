@@ -16,6 +16,20 @@ internal class DragonHelmArmorItemFactory : HelmArmorItemFactory
     public override ColorEnum Color => ColorEnum.BrightGreen;
     public override string Name => "Dragon Helm";
 
+    /// <summary>
+    /// Applies special magic to this dragon helm.
+    /// </summary>
+    /// <param name="item"></param>
+    /// <param name="level"></param>
+    /// <param name="power"></param>
+    public override void ApplyMagic(Item item, int level, int power, Store? store)
+    {
+        // Apply the standard armor characteristics, regardless of the power.
+        base.ApplyMagic(item, level, power, null);
+
+        SaveGame.TreasureRating += 5;
+        ApplyDragonscaleResistance(item);
+    }
     public override int Ac => 8;
     public override int[] Chance => new int[] { 4, 0, 0, 0 };
     public override int Cost => 10000;

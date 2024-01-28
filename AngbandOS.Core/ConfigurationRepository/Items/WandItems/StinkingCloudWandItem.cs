@@ -11,8 +11,4 @@ namespace AngbandOS.Core.Items;
 internal class StinkingCloudWandItem : WandItem
 {
     public StinkingCloudWandItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get(nameof(StinkingCloudWandItemFactory))) { }
-    protected override void ApplyMagic(int level, int power, Store? store)
-    {
-        TypeSpecificValue = SaveGame.Rng.DieRoll(8) + 6;
-    }
 }

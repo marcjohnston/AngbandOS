@@ -16,6 +16,33 @@ internal class ElvenCloakArmorItemFactory : CloakArmorItemFactory
     public override ColorEnum Color => ColorEnum.BrightGreen;
     public override string Name => "Elven Cloak";
 
+
+    public override void ApplyMagic(Item item, int level, int power, Store? store)
+    {
+        if (power != 0)
+        {
+            // Apply the standard armor characteristics.
+            base.ApplyMagic(item, level, power, null);
+
+            item.TypeSpecificValue = SaveGame.Rng.DieRoll(4);
+            if (power > 1)
+            {
+                if (SaveGame.Rng.DieRoll(20) == 1)
+                {
+                    item.CreateRandart(false);
+                }
+                else
+                {
+                    ApplyRandomGoodRareCharacteristics(item);
+                }
+            }
+            else if (power < -1)
+            {
+                ApplyRandomPoorRareCharacteristics(item);
+            }
+        }
+    }
+
     public override int Ac => 4;
     public override int[] Chance => new int[] { 4, 0, 0, 0 };
     public override int Cost => 1500;

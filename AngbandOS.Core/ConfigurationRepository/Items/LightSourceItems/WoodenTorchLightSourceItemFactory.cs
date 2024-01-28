@@ -14,6 +14,18 @@ internal class WoodenTorchLightSourceItemFactory : LightSourceItemFactory
 {
     private WoodenTorchLightSourceItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
+    public override void ApplyMagic(Item item, int level, int power, Store? store)
+    {
+        if (store != null)
+        {
+            item.TypeSpecificValue = Constants.FuelTorch / 2;
+        }
+        else if (item.TypeSpecificValue != 0)
+        {
+            item.TypeSpecificValue = SaveGame.Rng.DieRoll(item.TypeSpecificValue);
+        }
+    }
+
     /// <summary>
     /// Returns true because a torch can be used as fuel for another torch.
     /// </summary>

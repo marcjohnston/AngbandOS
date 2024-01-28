@@ -11,30 +11,4 @@ namespace AngbandOS.Core.Items;
 internal class ElvenCloakArmorItem : CloakArmorItem
 {
     public ElvenCloakArmorItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get(nameof(ElvenCloakArmorItemFactory))) { }
-
-    protected override void ApplyMagic(int level, int power, Store? store)
-    {
-        if (power != 0)
-        {
-            // Apply the standard armor characteristics.
-            base.ApplyMagic(level, power, null);
-
-            TypeSpecificValue = SaveGame.Rng.DieRoll(4);
-            if (power > 1)
-            {
-                if (SaveGame.Rng.DieRoll(20) == 1)
-                {
-                    CreateRandart(false);
-                }
-                else
-                {
-                    ApplyRandomGoodRareCharacteristics();
-                }
-            }
-            else if (power < -1)
-            {
-                ApplyRandomPoorRareCharacteristics();
-            }
-        }
-    }
 }

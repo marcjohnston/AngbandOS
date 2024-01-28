@@ -18,6 +18,31 @@ internal abstract class ChestItemFactory : ItemFactory
     public override bool HatesAcid => true;
 
     /// <summary>
+    /// Assigns the TypeSpecificValue for this chest.
+    /// </summary>
+    /// <param name="level"></param>
+    /// <param name="power"></param>
+    /// <remarks>
+    /// Logic:
+    /// If the chest is on the town level (level == 0 [not sure where the wilderness is]), it is not trapped (default TypeSpecificValue).
+    /// A die roll from 1 to the level of the chest is made.  Any value >55 will convert to a random chest trap between 55 and 63.
+    /// </remarks>
+    /// <param name="store"></param>
+    public override void ApplyMagic(Item item, int level, int power, Store? store)
+    {
+        if (item.Factory.Level > 0)
+        {
+            item.TypeSpecificValue = SaveGame.Rng.DieRoll(item.Factory.Level);
+            if (item.TypeSpecificValue > 55)
+            {
+                int chestTrapConfigurationCount = SaveGame.SingletonRepository.ChestTrapConfigurations.Count;
+                int randomRemaining = chestTrapConfigurationCount - 55;
+                item.TypeSpecificValue = (55 + SaveGame.Rng.RandomLessThan(randomRemaining));
+            }
+        }
+    }
+
+    /// <summary>
     /// Returns false, because chests cannot be merged.
     /// </summary>
     /// <param name="a"></param>

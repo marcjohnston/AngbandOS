@@ -11,8 +11,4 @@ namespace AngbandOS.Core.Items;
 internal class CarnageStaffItem : StaffItem
 {
     public CarnageStaffItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get(nameof(CarnageStaffItemFactory))) { }
-    protected override void ApplyMagic(int level, int power, Store? store)
-    {
-        TypeSpecificValue = SaveGame.Rng.DieRoll(2) + 1;
-    }
 }

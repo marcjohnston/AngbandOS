@@ -15,6 +15,27 @@ internal abstract class SoftArmorItemFactory : ArmorItemFactory
     /// </summary>
     public override int WieldSlot => InventorySlot.OnBody;
 
+
+    /// <summary>
+    /// Applies standard magic to soft armor.
+    /// </summary>
+    /// <param name="item"></param>
+    /// <param name="level"></param>
+    /// <param name="power"></param>
+    public override void ApplyMagic(Item item, int level, int power, Store? store)
+    {
+        if (power != 0)
+        {
+            // Apply the standard armor characteristics.
+            base.ApplyMagic(item, level, power, null);
+
+            if (power > 1)
+            {
+                ApplyRandomGoodRareCharacteristics(item);
+            }
+        }
+    }
+
     public SoftArmorItemFactory(SaveGame saveGame) : base(saveGame) { }
     public override ItemClass ItemClass => SaveGame.SingletonRepository.ItemClasses.Get(nameof(SoftArmorsItemClass));
     public override BaseInventorySlot BaseWieldSlot => SaveGame.SingletonRepository.InventorySlots.Get(nameof(OnBodyInventorySlot));

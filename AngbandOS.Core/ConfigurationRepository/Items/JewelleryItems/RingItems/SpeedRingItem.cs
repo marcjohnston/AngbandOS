@@ -11,26 +11,4 @@ namespace AngbandOS.Core.Items;
 internal class SpeedRingItem : RingItem
 {
     public SpeedRingItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get(nameof(SpeedRingItemFactory))) { }
-    protected override void ApplyMagic(int level, int power, Store? store)
-    {
-        if (power == 0 && SaveGame.Rng.RandomLessThan(100) < 50)
-        {
-            power = -1;
-        }
-        TypeSpecificValue = SaveGame.Rng.DieRoll(5) + GetBonusValue(5, level);
-        while (SaveGame.Rng.RandomLessThan(100) < 50)
-        {
-            TypeSpecificValue++;
-        }
-        if (power < 0)
-        {
-            IdentBroken = true;
-            IdentCursed = true;
-            TypeSpecificValue = 0 - TypeSpecificValue;
-        }
-        else
-        {
-            SaveGame.TreasureRating += 25;
-        }
-    }
 }

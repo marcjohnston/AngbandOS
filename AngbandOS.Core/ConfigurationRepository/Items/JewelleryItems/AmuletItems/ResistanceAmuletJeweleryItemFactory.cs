@@ -15,6 +15,19 @@ internal class ResistanceAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(DoubleQuoteSymbol));
     public override string Name => "Resistance";
 
+    public override void ApplyMagic(Item item, int level, int power, Store? store)
+    {
+        if (SaveGame.Rng.DieRoll(3) == 1)
+        {
+            IArtifactBias? artifactBias = null;
+            item.ApplyRandomResistance(ref artifactBias, SaveGame.Rng.DieRoll(34) + 4);
+        }
+        if (SaveGame.Rng.DieRoll(5) == 1)
+        {
+            item.RandartItemCharacteristics.ResPois = true;
+        }
+    }
+
     public override int[] Chance => new int[] { 4, 0, 0, 0 };
     public override int Cost => 25000;
     public override string FriendlyName => "Resistance";

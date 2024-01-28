@@ -16,6 +16,22 @@ internal abstract class DiggingWeaponItemFactory : WeaponItemFactory
     public override int WieldSlot => InventorySlot.Digger;
     public DiggingWeaponItemFactory(SaveGame saveGame) : base(saveGame) { }
     public override ItemClass ItemClass => SaveGame.SingletonRepository.ItemClasses.Get(nameof(DiggersItemClass));
+    public override void ApplyMagic(Item item, int level, int power, Store? store)
+    {
+        base.ApplyMagic(item, level, power, null);
+        if (power > 1)
+        {
+            item.RareItemTypeIndex = RareItemTypeEnum.WeaponOfDigging;
+        }
+        else if (power < -1)
+        {
+            item.TypeSpecificValue = 0 - (5 + SaveGame.Rng.DieRoll(5));
+        }
+        else if (power < 0)
+        {
+            item.TypeSpecificValue = 0 - item.TypeSpecificValue;
+        }
+    }
     public override BaseInventorySlot BaseWieldSlot => SaveGame.SingletonRepository.InventorySlots.Get(nameof(DiggerInventorySlot));
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Digging;
     public override int PackSort => 31;

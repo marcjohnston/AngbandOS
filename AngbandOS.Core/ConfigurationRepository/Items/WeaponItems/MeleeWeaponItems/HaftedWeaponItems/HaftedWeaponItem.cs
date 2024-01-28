@@ -11,5 +11,4 @@ namespace AngbandOS.Core.Items;
 internal abstract class HaftedWeaponItem : MeleeWeaponItem
 {
     public HaftedWeaponItem(SaveGame saveGame, ItemFactory itemClass) : base(saveGame, itemClass) { }
-    protected override bool CanBeWeaponOfLaw => true;
 }

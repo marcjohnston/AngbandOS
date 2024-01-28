@@ -15,6 +15,21 @@ internal class DamageRingItemFactory : RingItemFactory
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(EqualSignSymbol));
     public override string Name => "Damage";
 
+    public override void ApplyMagic(Item item, int level, int power, Store? store)
+    {
+        if (power == 0 && SaveGame.Rng.RandomLessThan(100) < 50)
+        {
+            power = -1;
+        }
+        item.BonusDamage = 5 + SaveGame.Rng.DieRoll(8) + item.GetBonusValue(10, level);
+        if (power < 0)
+        {
+            item.IdentBroken = true;
+            item.IdentCursed = true;
+            item.BonusDamage = 0 - item.BonusDamage;
+        }
+    }
+
     public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int Cost => 500;
     public override string FriendlyName => "Damage";

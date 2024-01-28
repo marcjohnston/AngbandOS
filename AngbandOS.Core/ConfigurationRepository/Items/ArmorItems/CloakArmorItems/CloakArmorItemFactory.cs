@@ -15,6 +15,58 @@ internal abstract class CloakArmorItemFactory : ArmorItemFactory
     /// </summary>
     public override int WieldSlot => InventorySlot.AboutBody;
 
+    protected override void ApplyRandomGoodRareCharacteristics(Item item)
+    {
+        WeightedRandom<RareItemTypeEnum> weightedRandom = new WeightedRandom<RareItemTypeEnum>(SaveGame);
+        weightedRandom.Add(8, RareItemTypeEnum.CloakOfProtection);
+        weightedRandom.Add(8, RareItemTypeEnum.CloakOfStealth);
+        weightedRandom.Add(1, RareItemTypeEnum.CloakOfAman);
+        weightedRandom.Add(1, RareItemTypeEnum.CloakOfElectricity);
+        weightedRandom.Add(1, RareItemTypeEnum.CloakOfImmolation);
+        item.RareItemTypeIndex = weightedRandom.Choose();
+    }
+
+    protected override void ApplyRandomPoorRareCharacteristics(Item item)
+    {
+        switch (SaveGame.Rng.DieRoll(3))
+        {
+            case 1:
+                item.RareItemTypeIndex = RareItemTypeEnum.CloakOfIrritation;
+                break;
+            case 2:
+                item.RareItemTypeIndex = RareItemTypeEnum.CloakOfVulnerability;
+                break;
+            case 3:
+                item.RareItemTypeIndex = RareItemTypeEnum.CloakOfEnveloping;
+                break;
+        }
+    }
+
+    public override void ApplyMagic(Item item, int level, int power, Store? store)
+    {
+        if (power != 0)
+        {
+            // Apply the standard armor characteristics.
+            base.ApplyMagic(item, level, power, null);
+
+            if (power > 1)
+            {
+                if (SaveGame.Rng.DieRoll(20) == 1)
+                {
+                    item.CreateRandart(false);
+                }
+                else
+                {
+                    ApplyRandomGoodRareCharacteristics(item);
+                }
+            }
+            else if (power < -1)
+            {
+                ApplyRandomPoorRareCharacteristics(item);
+            }
+        }
+    }
+
     public CloakArmorItemFactory(SaveGame saveGame) : base(saveGame) { }
     public override ItemClass ItemClass => SaveGame.SingletonRepository.ItemClasses.Get(nameof(CloaksItemClass));
     public override BaseInventorySlot BaseWieldSlot => SaveGame.SingletonRepository.InventorySlots.Get(nameof(AboutBodyInventorySlot));

@@ -11,8 +11,4 @@ namespace AngbandOS.Core.Items;
 internal class AcidBoltsWandItem : WandItem
 {
     public AcidBoltsWandItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get(nameof(AcidBoltsWandItemFactory))) { }
-    protected override void ApplyMagic(int level, int power, Store? store)
-    {
-        TypeSpecificValue = SaveGame.Rng.DieRoll(8) + 6;
-    }
 }

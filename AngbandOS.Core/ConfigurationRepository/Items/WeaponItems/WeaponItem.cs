@@ -25,43 +25,6 @@ internal abstract class WeaponItem : Item
         return bonusValue;
     }
 
-    protected override void ApplyMagic(int level, int power, Store? store)
-    {
-        if (power == 0)
-        {
-            return;
-        }
-
-        int tohit1 = SaveGame.Rng.DieRoll(5) + GetBonusValue(5, level);
-        int todam1 = SaveGame.Rng.DieRoll(5) + GetBonusValue(5, level);
-        int tohit2 = GetBonusValue(10, level);
-        int todam2 = GetBonusValue(10, level);
-        if (power > 0)
-        {
-            BonusToHit += tohit1;
-            BonusDamage += todam1;
-            if (power > 1)
-            {
-                BonusToHit += tohit2;
-                BonusDamage += todam2;
-            }
-        }
-        else if (power < 0)
-        {
-            BonusToHit -= tohit1;
-            BonusDamage -= todam1;
-            if (power < -1)
-            {
-                BonusToHit -= tohit2;
-                BonusDamage -= todam2;
-            }
-            if (BonusToHit + BonusDamage < 0)
-            {
-                IdentCursed = true;
-            }
-        }
-    }
-
     public override void ApplyRandartBonus()
     {
         BonusToHit += SaveGame.Rng.DieRoll(BonusToHit > 19 ? 1 : 20 - BonusToHit);

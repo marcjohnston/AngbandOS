@@ -11,6 +11,7 @@ namespace AngbandOS.Core.ItemClasses;
 internal abstract class HaftedWeaponItemFactory : MeleeWeaponItemFactory
 {
     public HaftedWeaponItemFactory(SaveGame saveGame) : base(saveGame) { }
+    protected override bool CanBeWeaponOfLaw => true;
     public override ItemClass ItemClass => SaveGame.SingletonRepository.ItemClasses.Get(nameof(HaftedWeaponsItemClass));
     public override int PackSort => 30;
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Hafted;

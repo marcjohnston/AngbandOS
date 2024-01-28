@@ -15,6 +15,17 @@ internal class SearchingAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(DoubleQuoteSymbol));
     public override string Name => "Searching";
 
+
+    public override void ApplyMagic(Item item, int level, int power, Store? store)
+    {
+        item.TypeSpecificValue = SaveGame.Rng.DieRoll(5) + item.GetBonusValue(5, level);
+        if (power < 0 || (power == 0 && SaveGame.Rng.RandomLessThan(100) < 50))
+        {
+            item.IdentBroken = true;
+            item.IdentCursed = true;
+            item.TypeSpecificValue = 0 - item.TypeSpecificValue;
+        }
+    }
     public override int[] Chance => new int[] { 4, 0, 0, 0 };
     public override int Cost => 600;
     public override string FriendlyName => "Searching";

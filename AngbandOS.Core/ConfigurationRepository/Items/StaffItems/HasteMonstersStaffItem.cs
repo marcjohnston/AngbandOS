@@ -11,8 +11,4 @@ namespace AngbandOS.Core.Items;
 internal class HasteMonstersStaffItem : StaffItem
 {
     public HasteMonstersStaffItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get(nameof(HasteMonstersStaffItemFactory))) { }
-    protected override void ApplyMagic(int level, int power, Store? store)
-    {
-        TypeSpecificValue = SaveGame.Rng.DieRoll(8) + 8;
-    }
 }

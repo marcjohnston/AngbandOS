@@ -12,6 +12,10 @@ internal class AcidBallsWandItemFactory : WandItemFactory
 {
     private AcidBallsWandItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
+    public override void ApplyMagic(Item item, int level, int power, Store? store)
+    {
+        item.TypeSpecificValue = SaveGame.Rng.DieRoll(5) + 2;
+    }
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(MinusSignSymbol));
     public override string Name => "Acid Balls";
 

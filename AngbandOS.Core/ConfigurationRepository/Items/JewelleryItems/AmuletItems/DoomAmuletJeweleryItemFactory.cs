@@ -15,6 +15,13 @@ internal class DoomAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(DoubleQuoteSymbol));
     public override string Name => "DOOM";
 
+    public override void ApplyMagic(Item item, int level, int power, Store? store)
+    {
+        item.IdentBroken = true;
+        item.IdentCursed = true;
+        item.TypeSpecificValue = 0 - (SaveGame.Rng.DieRoll(5) + item.GetBonusValue(5, level));
+        item.BonusArmorClass = 0 - (SaveGame.Rng.DieRoll(5) + item.GetBonusValue(5, level));
+    }
     public override bool Cha => true;
     public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override bool Con => true;

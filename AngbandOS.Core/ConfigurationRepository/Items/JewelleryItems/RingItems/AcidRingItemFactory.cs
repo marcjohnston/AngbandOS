@@ -12,6 +12,10 @@ internal class AcidRingItemFactory : RingItemFactory
 {
     private AcidRingItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
+    public override void ApplyMagic(Item item, int level, int power, Store? store)
+    {
+        item.BonusArmorClass = 5 + SaveGame.Rng.DieRoll(5) + item.GetBonusValue(10, level);
+    }
     public override string? DescribeActivationEffect => "ball of acid and resist acid";
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(EqualSignSymbol));
     public override string Name => "Acid";

@@ -2002,7 +2002,7 @@ internal class Item : IComparable<Item>, IGetKey<string>
             SaveGame.SpecialTreasure = true;
             return;
         }
-        ApplyMagic(lev, power, store);
+        Factory.ApplyMagic(this, lev, power, store);
         if (!string.IsNullOrEmpty(RandartName))
         {
             SaveGame.TreasureRating += 40;
@@ -2121,14 +2121,6 @@ internal class Item : IComparable<Item>, IGetKey<string>
             }
         }
     }
-
-    /// <summary>
-    /// Applies magic to the item.  Does nothing, by default.
-    /// </summary>
-    /// <param name="item"></param>
-    /// <param name="level"></param>
-    /// <param name="power"></param>
-    protected virtual void ApplyMagic(int level, int power, Store? store) { }
 
     public void ApplyRandomResistance(ref IArtifactBias artifactBias, int specific)
     {
@@ -3095,7 +3087,7 @@ internal class Item : IComparable<Item>, IGetKey<string>
     public virtual int? GetBonusRealValue(int value) => 0;
 
 
-    protected int GetBonusValue(int max, int level)
+    public int GetBonusValue(int max, int level)
     {
         if (level > Constants.MaxDepth - 1)
         {

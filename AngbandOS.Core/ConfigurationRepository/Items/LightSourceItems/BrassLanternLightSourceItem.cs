@@ -11,15 +11,4 @@ namespace AngbandOS.Core.Items;
 internal class BrassLanternLightSourceItem : LightSourceItem
 {
     public BrassLanternLightSourceItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get(nameof(BrassLanternLightSourceItemFactory))) { }
-    protected override void ApplyMagic(int level, int power, Store? store)
-    {
-        if (store != null)
-        {
-            TypeSpecificValue = Constants.FuelLamp / 2;
-        }
-        else if (TypeSpecificValue != 0)
-        {
-            TypeSpecificValue = SaveGame.Rng.DieRoll(TypeSpecificValue);
-        }
-    }
 }

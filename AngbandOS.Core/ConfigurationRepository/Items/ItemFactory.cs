@@ -20,6 +20,14 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey<string>
     protected readonly SaveGame SaveGame;
 
     /// <summary>
+    /// Applies magic to the item.  Does nothing, by default.
+    /// </summary>
+    /// <param name="item"></param>
+    /// <param name="level"></param>
+    /// <param name="power"></param>
+    public virtual void ApplyMagic(Item item, int level, int power, Store? store) { }
+
+    /// <summary>
     /// Hook into the ProcessWorld, when the item is being carried in a pack inventory slot.  Does nothing, by default..
     /// </summary>
     /// <param name="saveGame"></param>

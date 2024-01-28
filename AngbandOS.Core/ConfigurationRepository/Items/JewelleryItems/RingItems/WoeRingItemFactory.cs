@@ -15,6 +15,14 @@ internal class WoeRingItemFactory : RingItemFactory
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(EqualSignSymbol));
     public override string Name => "Woe";
 
+    public override void ApplyMagic(Item item, int level, int power, Store? store)
+    {
+        item.IdentBroken = true;
+        item.IdentCursed = true;
+        item.BonusArmorClass = 0 - (5 + item.GetBonusValue(10, level));
+        item.TypeSpecificValue = 0 - (1 + item.GetBonusValue(5, level));
+    }
+
     public override bool Cha => true;
     public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override bool Cursed => true;

@@ -11,19 +11,4 @@ namespace AngbandOS.Core.Items;
 internal class DragonHelmArmorItem : HelmArmorItem
 {
     public DragonHelmArmorItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get(nameof(DragonHelmArmorItemFactory))) { }
-
-    /// <summary>
-    /// Applies special magic to this dragon helm.
-    /// </summary>
-    /// <param name="item"></param>
-    /// <param name="level"></param>
-    /// <param name="power"></param>
-    protected override void ApplyMagic(int level, int power, Store? store)
-    {
-        // Apply the standard armor characteristics, regardless of the power.
-        base.ApplyMagic(level, power, null);
-
-        SaveGame.TreasureRating += 5;
-        ApplyDragonscaleResistance();
-    }
 }

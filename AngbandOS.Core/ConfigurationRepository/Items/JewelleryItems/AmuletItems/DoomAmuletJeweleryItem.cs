@@ -12,11 +12,4 @@ internal class DoomAmuletJeweleryItem : AmuletJeweleryItem
 {
     public DoomAmuletJeweleryItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get(nameof(DoomAmuletJeweleryItemFactory))) { }
 
-    protected override void ApplyMagic(int level, int power, Store? store)
-    {
-        IdentBroken = true;
-        IdentCursed = true;
-        TypeSpecificValue = 0 - (SaveGame.Rng.DieRoll(5) + GetBonusValue(5, level));
-        BonusArmorClass = 0 - (SaveGame.Rng.DieRoll(5) + GetBonusValue(5, level));
-    }
 }

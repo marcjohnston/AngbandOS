@@ -11,8 +11,4 @@ namespace AngbandOS.Core.Items;
 internal class DetectEvilStaffItem : StaffItem
 {
     public DetectEvilStaffItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get(nameof(DetectEvilStaffItemFactory))) { }
-    protected override void ApplyMagic(int level, int power, Store? store)
-    {
-        TypeSpecificValue = SaveGame.Rng.DieRoll(15) + 8;
-    }
 }

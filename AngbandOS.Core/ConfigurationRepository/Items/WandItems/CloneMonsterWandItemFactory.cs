@@ -15,6 +15,11 @@ internal class CloneMonsterWandItemFactory : WandItemFactory
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(MinusSignSymbol));
     public override string Name => "Clone Monster";
 
+    public override void ApplyMagic(Item item, int level, int power, Store? store)
+    {
+        item.TypeSpecificValue = SaveGame.Rng.DieRoll(5) + 3;
+    }
+
     public override int[] Chance => new int[] { 1, 1, 0, 0 };
     public override int Dd => 1;
     public override int Ds => 1;

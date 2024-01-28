@@ -15,6 +15,10 @@ internal class DetectInvisibleStaffItemFactory : StaffItemFactory
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UnderscoreSymbol));
     public override string Name => "Detect Invisible";
 
+    public override void ApplyMagic(Item item, int level, int power, Store? store)
+    {
+        item.TypeSpecificValue = SaveGame.Rng.DieRoll(15) + 8;
+    }
     public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int Cost => 200;
     public override int Dd => 1;

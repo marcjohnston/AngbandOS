@@ -14,6 +14,26 @@ internal abstract class HardArmorItemFactory : ArmorItemFactory
     /// Returns the on-body inventory slot for hard armor.
     /// </summary>
     public override int WieldSlot => InventorySlot.OnBody;
+
+    /// <summary>
+    /// Applies standard magic to hard armor.
+    /// </summary>
+    /// <param name="item"></param>
+    /// <param name="level"></param>
+    /// <param name="power"></param>
+    public override void ApplyMagic(Item item, int level, int power, Store? store)
+    {
+        if (power != 0)
+        {
+            // Apply the standard armor characteristics.
+            base.ApplyMagic(item, level, power, null);
+
+            if (power > 1)
+            {
+                ApplyRandomGoodRareCharacteristics(item);
+            }
+        }
+    }
     public HardArmorItemFactory(SaveGame saveGame) : base(saveGame) { }
     public override ItemClass ItemClass => SaveGame.SingletonRepository.ItemClasses.Get(nameof(HardArmorsItemClass));
     public override BaseInventorySlot BaseWieldSlot => SaveGame.SingletonRepository.InventorySlots.Get(nameof(OnBodyInventorySlot));

@@ -15,6 +15,16 @@ internal class LordlyProtectionRingItemFactory : RingItemFactory
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(EqualSignSymbol));
     public override string Name => "Lordly Protection";
 
+    public override void ApplyMagic(Item item, int level, int power, Store? store)
+    {
+        IArtifactBias artifactBias = null;
+        do
+        {
+            item.ApplyRandomResistance(ref artifactBias, SaveGame.Rng.DieRoll(20) + 18);
+        } while (SaveGame.Rng.DieRoll(4) == 1);
+        item.BonusArmorClass = 10 + SaveGame.Rng.DieRoll(5) + item.GetBonusValue(10, level);
+        SaveGame.TreasureRating += 5;
+    }
     public override int[] Chance => new int[] { 5, 0, 0, 0 };
     public override int Cost => 100000;
     public override bool FreeAct => true;

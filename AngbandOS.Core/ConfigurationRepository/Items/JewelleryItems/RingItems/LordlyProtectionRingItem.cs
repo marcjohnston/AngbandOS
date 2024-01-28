@@ -11,14 +11,4 @@ namespace AngbandOS.Core.Items;
 internal class LordlyProtectionRingItem : RingItem
 {
     public LordlyProtectionRingItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get(nameof(LordlyProtectionRingItemFactory))) { }
-    protected override void ApplyMagic(int level, int power, Store? store)
-    {
-        IArtifactBias artifactBias = null;
-        do
-        {
-            ApplyRandomResistance(ref artifactBias, SaveGame.Rng.DieRoll(20) + 18);
-        } while (SaveGame.Rng.DieRoll(4) == 1);
-        BonusArmorClass = 10 + SaveGame.Rng.DieRoll(5) + GetBonusValue(10, level);
-        SaveGame.TreasureRating += 5;
-    }
 }

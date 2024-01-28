@@ -15,6 +15,16 @@ internal class CharismaAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(DoubleQuoteSymbol));
     public override string Name => "Charisma";
 
+    public override void ApplyMagic(Item item, int level, int power, Store? store)
+    {
+        item.TypeSpecificValue = 1 + item.GetBonusValue(5, level);
+        if (power < 0 || (power == 0 && SaveGame.Rng.RandomLessThan(100) < 50))
+        {
+            item.IdentBroken = true;
+            item.IdentCursed = true;
+            item.TypeSpecificValue = 0 - item.TypeSpecificValue;
+        }
+    }
     public override bool Cha => true;
     public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int Cost => 500;

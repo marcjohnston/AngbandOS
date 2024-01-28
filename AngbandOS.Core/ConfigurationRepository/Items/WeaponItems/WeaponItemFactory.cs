@@ -17,6 +17,44 @@ internal abstract class WeaponItemFactory : ItemFactory
     public override bool HasQuality => true;
     public override bool CanApplyBonusArmorClassMiscPower => true;
 
+
+    public override void ApplyMagic(Item item, int level, int power, Store? store)
+    {
+        if (power == 0)
+        {
+            return;
+        }
+
+        int tohit1 = SaveGame.Rng.DieRoll(5) + item.GetBonusValue(5, level);
+        int todam1 = SaveGame.Rng.DieRoll(5) + item.GetBonusValue(5, level);
+        int tohit2 = item.GetBonusValue(10, level);
+        int todam2 = item.GetBonusValue(10, level);
+        if (power > 0)
+        {
+            item.BonusToHit += tohit1;
+            item.BonusDamage += todam1;
+            if (power > 1)
+            {
+                item.BonusToHit += tohit2;
+                item.BonusDamage += todam2;
+            }
+        }
+        else if (power < 0)
+        {
+            item.BonusToHit -= tohit1;
+            item.BonusDamage -= todam1;
+            if (power < -1)
+            {
+                item.BonusToHit -= tohit2;
+                item.BonusDamage -= todam2;
+            }
+            if (item.BonusToHit + item.BonusDamage < 0)
+            {
+                item.IdentCursed = true;
+            }
+        }
+    }
+
     public override bool IdentityCanBeSensed => true;
     public override bool IsWeapon => true;
     public override bool IsWearable => true;

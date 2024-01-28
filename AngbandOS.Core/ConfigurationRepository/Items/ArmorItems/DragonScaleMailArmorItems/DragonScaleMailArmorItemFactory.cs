@@ -15,6 +15,24 @@ internal abstract class DragonScaleMailArmorItemFactory : ArmorItemFactory
     /// </summary>
     public override int WieldSlot => InventorySlot.OnBody;
 
+
+    /// <summary>
+    /// Applies special magic to dragon scale mail armor.
+    /// </summary>
+    /// <param name="item"></param>
+    /// <param name="level"></param>
+    /// <param name="power"></param>
+    public override void ApplyMagic(Item item, int level, int power, Store? store)
+    {
+        if (power != 0)
+        {
+            // Apply the standard armor characteristics.
+            base.ApplyMagic(item, level, power, null);
+
+            SaveGame.TreasureRating += 30;
+        }
+    }
+
     public DragonScaleMailArmorItemFactory(SaveGame saveGame) : base(saveGame) { }
     public override ItemClass ItemClass => SaveGame.SingletonRepository.ItemClasses.Get(nameof(DragonScaleMailsItemClass));
     public override BaseInventorySlot BaseWieldSlot => SaveGame.SingletonRepository.InventorySlots.Get(nameof(OnBodyInventorySlot));

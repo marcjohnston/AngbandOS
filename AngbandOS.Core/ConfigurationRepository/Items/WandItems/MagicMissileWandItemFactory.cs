@@ -15,6 +15,10 @@ internal class MagicMissileWandItemFactory : WandItemFactory
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(MinusSignSymbol));
     public override string Name => "Magic Missile";
 
+    public override void ApplyMagic(Item item, int level, int power, Store? store)
+    {
+        item.TypeSpecificValue = SaveGame.Rng.DieRoll(10) + 6;
+    }
     public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int Cost => 200;
     public override int Dd => 1;

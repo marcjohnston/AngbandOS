@@ -8,12 +8,17 @@
 namespace AngbandOS.Core.ItemCategories;
 
 [Serializable]
-internal class StonetoMudWandItemFactory : WandItemFactory
+internal class StoneToMudWandItemFactory : WandItemFactory
 {
-    private StonetoMudWandItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private StoneToMudWandItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(MinusSignSymbol));
     public override string Name => "Stone to Mud";
+
+    public override void ApplyMagic(Item item, int level, int power, Store? store)
+    {
+        item.TypeSpecificValue = SaveGame.Rng.DieRoll(8) + 3;
+    }
 
     public override int[] Chance => new int[] { 1, 1, 1, 0 };
     public override int Cost => 300;

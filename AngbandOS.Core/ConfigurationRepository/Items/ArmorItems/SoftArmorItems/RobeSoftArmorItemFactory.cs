@@ -16,6 +16,35 @@ internal class RobeSoftArmorItemFactory : SoftArmorItemFactory
     public override ColorEnum Color => ColorEnum.Blue;
     public override string Name => "Robe";
 
+
+    /// <summary>
+    /// Applies special magic to this robe.
+    /// </summary>
+    /// <param name="item"></param>
+    /// <param name="level"></param>
+    /// <param name="power"></param>
+    public override void ApplyMagic(Item item, int level, int power, Store? store)
+    {
+        if (power != 0)
+        {
+            // Apply the standard armor characteristics.
+            base.ApplyMagic(item, level, power, null);
+
+            if (power > 1)
+            {
+                // Robes have a chance of having the armor of permanence instead of a random characteristic.
+                if (SaveGame.Rng.RandomLessThan(100) < 10)
+                {
+                    item.RareItemTypeIndex = RareItemTypeEnum.ArmorOfPermanence;
+                }
+                else
+                {
+                    ApplyRandomGoodRareCharacteristics(item);
+                }
+            }
+        }
+    }
+
     public override int Ac => 2;
     public override int[] Chance => new int[] { 1, 1, 0, 0 };
     public override int Cost => 4;
