@@ -16,11 +16,6 @@ internal abstract class Item : IComparable<Item>, IGetKey<string>
     public int PackSort => Factory.PackSort;
 
     /// <summary>
-    /// Returns true, if the item can apply a blows bonus.  All weapons, except for the bow, return true.  Returns false, by default.
-    /// </summary>
-    public virtual bool CanApplyBlowsBonus => false;
-
-    /// <summary>
     /// Returns the intensity of light that the object emits.  By default, a value of 1 is returned, if the item has a 
     /// light-source characteristic.
     /// </summary>
@@ -2702,19 +2697,12 @@ internal abstract class Item : IComparable<Item>, IGetKey<string>
 
             case 20:
             case 21:
-                if (!Factory.CanApplyTunnelBonus)
-                {
-                    ApplyRandomBonuses(ref artifactBias);
-                }
-                else
-                {
-                    RandartItemCharacteristics.Tunnel = true;
-                }
+                RandartItemCharacteristics.Tunnel = true;
                 break;
 
             case 22:
             case 23:
-                if (!CanApplyBlowsBonus)
+                if (Factory.CanApplyBlowsBonus)
                 {
                     ApplyRandomBonuses(ref artifactBias);
                 }

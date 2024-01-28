@@ -13,6 +13,7 @@ internal abstract class BowWeaponItemFactory : WeaponItemFactory // TODO: Should
     public BowWeaponItemFactory(SaveGame saveGame) : base(saveGame) { }
     public override ItemClass ItemClass => SaveGame.SingletonRepository.ItemClasses.Get(nameof(BowsItemClass));
     public override BaseInventorySlot BaseWieldSlot => SaveGame.SingletonRepository.InventorySlots.Get(nameof(RangedWeaponInventorySlot));
+    public override bool CanApplyBlowsBonus => true;
     /// <summary>
     /// Returns a damage multiplier when the missile weapon is used.
     /// </summary>

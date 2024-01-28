@@ -55,6 +55,4 @@ internal abstract class WeaponItemFactory : ItemFactory
 
 
     public override bool CanApplySlayingBonus => true;
-
-    public override bool CanApplyTunnelBonus => true;
 }

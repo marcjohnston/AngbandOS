@@ -23,6 +23,11 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey<string>
     public virtual bool CanApplyBonusArmorClassMiscPower => false;
 
     /// <summary>
+    /// Returns true, if the item can apply a blows bonus.  Returns false, by default. Bows, return true.
+    /// </summary>
+    public virtual bool CanApplyBlowsBonus => false;
+
+    /// <summary>
     /// Returns true, if the item is capable of vorpal slaying.  Only swords return true.  Returns false, by default.
     /// </summary>
     public virtual bool CanVorpalSlay => false;
@@ -579,11 +584,6 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey<string>
     /// Returns a 1-in-chance for a random artifact to have activation applied.  Returns 3 by default.  Armor returns double the default.
     /// </summary>
     public virtual int RandartActivationChance => 3;
-
-    /// <summary>
-    /// Returns true, if the item can apply a tunnel bonus.  Only weapons, return true.  Returns false, by default.
-    /// </summary>
-    public virtual bool CanApplyTunnelBonus => false;
 
     /// <summary>
     /// Returns true, if the item provides sunlight, which burns certain races.  Returns false, by default.
