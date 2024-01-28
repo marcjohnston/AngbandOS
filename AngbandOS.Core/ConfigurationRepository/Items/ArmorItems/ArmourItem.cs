@@ -74,17 +74,4 @@ internal abstract class ArmorItem : Item
         }
         return s;
     }
-
-    public override bool IsWorthless()
-    {
-        if (TypeSpecificValue < 0)
-        {
-            return true;
-        }
-        if (BonusArmorClass < 0)
-        {
-            return true;
-        }
-        return false;
-    }
 }

@@ -58,5 +58,4 @@ internal abstract class LightSourceItem : ArmorItem
         s += base.GetVerboseDescription();
         return s;
     }
-    public override bool IsWorthless() => TypeSpecificValue < 0;
 }

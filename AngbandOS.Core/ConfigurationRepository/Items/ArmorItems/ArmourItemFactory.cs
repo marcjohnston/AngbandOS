@@ -15,6 +15,19 @@ internal abstract class ArmorItemFactory : ItemFactory
 {
     public ArmorItemFactory(SaveGame saveGame) : base(saveGame) { }
 
+    public override bool IsWorthless(Item item)
+    {
+        if (item.TypeSpecificValue < 0)
+        {
+            return true;
+        }
+        if (item.BonusArmorClass < 0)
+        {
+            return true;
+        }
+        return false;
+    }
+
     public void ApplyDragonscaleResistance(Item item)
     {
         do

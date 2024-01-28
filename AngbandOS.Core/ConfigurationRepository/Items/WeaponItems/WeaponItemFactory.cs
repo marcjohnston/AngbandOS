@@ -17,6 +17,18 @@ internal abstract class WeaponItemFactory : ItemFactory
     public override bool HasQuality => true;
     public override bool CanApplyBonusArmorClassMiscPower => true;
 
+    public override bool IsWorthless(Item item)
+    {
+        if (item.TypeSpecificValue < 0)
+        {
+            return true;
+        }
+        if (item.BonusToHit + item.BonusDamage < 0)
+        {
+            return true;
+        }
+        return false;
+    }
 
     public override void ApplyMagic(Item item, int level, int power, Store? store)
     {

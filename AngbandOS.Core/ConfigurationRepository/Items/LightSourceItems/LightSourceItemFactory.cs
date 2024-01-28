@@ -17,6 +17,7 @@ internal abstract class LightSourceItemFactory : ItemFactory
     public LightSourceItemFactory(SaveGame saveGame) : base(saveGame) { }
     public override ItemClass ItemClass => SaveGame.SingletonRepository.ItemClasses.Get(nameof(LightSourcesItemClass));
     public override BaseInventorySlot BaseWieldSlot => SaveGame.SingletonRepository.InventorySlots.Get(nameof(LightsourceInventorySlot));
+    public override bool IsWorthless(Item item) => item.TypeSpecificValue < 0;
 
 
     public override void ApplyMagic(Item item, int level, int power, Store? store)

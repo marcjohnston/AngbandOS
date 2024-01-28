@@ -5,8 +5,6 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-using System.Reflection.PortableExecutable;
-
 namespace AngbandOS.Core.ItemClasses;
 
 /// <summary>
@@ -18,6 +16,11 @@ namespace AngbandOS.Core.ItemClasses;
 internal abstract class ItemFactory : IItemCharacteristics, IGetKey<string>
 {
     protected readonly SaveGame SaveGame;
+
+    /// <summary>
+    /// Returns true, if the item is deemed as worthless.  Worthless items will ignore their RealValue and will always have 0 real value.  Returns false by default.
+    /// </summary>
+    public virtual bool IsWorthless(Item item) => false;
 
     public virtual void ApplyRandomSlaying(Item item, ref IArtifactBias artifactBias)
     {

@@ -1792,7 +1792,7 @@ internal class Item : IComparable<Item>, IGetKey<string>
             }
             value += ePtr.Cost;
         }
-        if (IsWorthless())
+        if (Factory.IsWorthless(this))
         {
             return 0;
         }
@@ -2922,7 +2922,6 @@ internal class Item : IComparable<Item>, IGetKey<string>
     /// <returns></returns>
     public virtual int? GetBonusRealValue(int value) => 0;
 
-
     public int GetBonusValue(int max, int level)
     {
         if (level > Constants.MaxDepth - 1)
@@ -3233,11 +3232,6 @@ internal class Item : IComparable<Item>, IGetKey<string>
         }
         return Factory.Stompable[StompableType.Broken];
     }
-
-    /// <summary>
-    /// Returns true, if the item is deemed as worthless.  Worthless items will ignore their RealValue and will always have 0 real value.  Returns false by default.
-    /// </summary>
-    public virtual bool IsWorthless() => false;
 
     /// <summary>
     /// Returns true, if the item is ignored by monsters.  Returns false for all items, except gold.  Gold isn't picked up by monsters.

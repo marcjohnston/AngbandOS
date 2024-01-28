@@ -31,12 +31,4 @@ internal abstract class JewelleryItem : Item
         }
         return base.IsStompable();
     }
-    public override bool IsWorthless()
-    {
-        if (TypeSpecificValue < 0 || BonusArmorClass < 0 || BonusToHit < 0 || BonusDamage < 0)
-        {
-            return true;
-        }
-        return false;
-    }
 }
