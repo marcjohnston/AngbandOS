@@ -1803,7 +1803,7 @@ internal class Item : IComparable<Item>, IGetKey<string>
         }
         value += typeSpecificValue.Value;
 
-        int? bonusValue = GetBonusRealValue(value);
+        int? bonusValue = Factory.GetBonusRealValue(this, value);
         if (bonusValue == null)
             return 0;
 
@@ -2914,13 +2914,6 @@ internal class Item : IComparable<Item>, IGetKey<string>
         RandartItemCharacteristics.Activate = true;
         RechargeTimeLeft = 0;
     }
-
-    /// <summary>
-    /// Gets an additional bonus gold real value associated with the item.  Returns 0, by default.  Returns null, if the item is worthless.
-    /// </summary>
-    /// <param name="item"></param>
-    /// <returns></returns>
-    public virtual int? GetBonusRealValue(int value) => 0;
 
     public int GetBonusValue(int max, int level)
     {

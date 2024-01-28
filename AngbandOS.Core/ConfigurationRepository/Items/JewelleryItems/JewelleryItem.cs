@@ -11,14 +11,6 @@ namespace AngbandOS.Core.Items;
 internal abstract class JewelleryItem : Item
 {
     public JewelleryItem(SaveGame saveGame, ItemFactory itemClass) : base(saveGame, itemClass) { }
-    public override int? GetBonusRealValue(int value)
-    {
-        if (BonusArmorClass < 0 || BonusToHit < 0 || BonusDamage < 0)
-            return 0;
-
-        return (BonusToHit + BonusDamage + BonusArmorClass) * 100;
-    }
-
     public override int? GetTypeSpecificRealValue(int value)
     {
         return ComputeTypeSpecificRealValue(value);

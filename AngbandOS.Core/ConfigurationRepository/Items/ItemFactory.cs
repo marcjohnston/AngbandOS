@@ -22,6 +22,13 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey<string>
     /// </summary>
     public virtual bool IsWorthless(Item item) => false;
 
+    /// <summary>
+    /// Gets an additional bonus gold real value associated with the item.  Returns 0, by default.  Returns null, if the item is worthless.
+    /// </summary>
+    /// <param name="item"></param>
+    /// <returns></returns>
+    public virtual int? GetBonusRealValue(Item item, int value) => 0;
+
     public virtual void ApplyRandomSlaying(Item item, ref IArtifactBias artifactBias)
     {
         if (artifactBias != null)

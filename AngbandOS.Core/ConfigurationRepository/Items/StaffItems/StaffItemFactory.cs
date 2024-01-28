@@ -13,6 +13,11 @@ internal abstract class StaffItemFactory : ItemFactory, IFlavour
     public StaffItemFactory(SaveGame saveGame) : base(saveGame) { }
     public override ItemClass ItemClass => SaveGame.SingletonRepository.ItemClasses.Get(nameof(StaffsItemClass));
 
+    public override int? GetBonusRealValue(Item item, int value)
+    {
+        return value / 20 * item.TypeSpecificValue;
+    }
+
     public override bool ItemsCanBeMerged(Item a, Item b)
     {
         if (!base.ItemsCanBeMerged(a, b))

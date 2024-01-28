@@ -11,19 +11,6 @@ namespace AngbandOS.Core.Items;
 internal abstract class AmmunitionItem : Item
 {
     public AmmunitionItem(SaveGame saveGame, ItemFactory itemClass) : base(saveGame, itemClass) { }
-    public override int? GetBonusRealValue(int value)
-    {
-        if (BonusToHit + BonusDamage < 0)
-            return null;
-
-        int bonusValue = (BonusToHit + BonusDamage) * 5;
-        if (DamageDice > Factory.Dd && DamageDiceSides == Factory.Ds)
-        {
-            bonusValue += (DamageDice - Factory.Dd) * DamageDiceSides * 5;
-        }
-        return bonusValue;
-    }
-
     public override int? GetTypeSpecificRealValue(int value)
     {
         return ComputeTypeSpecificRealValue(value);

@@ -11,20 +11,6 @@ namespace AngbandOS.Core.Items;
 internal abstract class WeaponItem : Item
 {
     public WeaponItem(SaveGame saveGame, ItemFactory itemClass) : base(saveGame, itemClass) { }
-    public override int? GetBonusRealValue(int value)
-    {
-        if (BonusToHit + BonusDamage < 0)
-            return null;
-
-        int bonusValue = 0;
-        bonusValue += (BonusToHit + BonusDamage + BonusArmorClass) * 100;
-        if (DamageDice > Factory.Dd && DamageDiceSides == Factory.Ds)
-        {
-            bonusValue += (DamageDice - Factory.Dd) * DamageDiceSides * 100;
-        }
-        return bonusValue;
-    }
-
     public override void ApplyRandartBonus()
     {
         BonusToHit += SaveGame.Rng.DieRoll(BonusToHit > 19 ? 1 : 20 - BonusToHit);

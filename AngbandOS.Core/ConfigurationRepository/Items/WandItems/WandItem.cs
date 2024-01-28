@@ -11,11 +11,6 @@ namespace AngbandOS.Core.Items;
 internal abstract class WandItem : Item
 {
     public WandItem(SaveGame saveGame, ItemFactory itemClass) : base(saveGame, itemClass) { }
-    public override int? GetBonusRealValue(int value)
-    {
-        return value / 20 * TypeSpecificValue;
-    }
-
     /// <summary>
     /// Returns the factory that this item was created by; casted as an IFlavour.
     /// </summary>

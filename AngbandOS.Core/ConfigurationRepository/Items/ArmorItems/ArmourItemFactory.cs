@@ -15,6 +15,14 @@ internal abstract class ArmorItemFactory : ItemFactory
 {
     public ArmorItemFactory(SaveGame saveGame) : base(saveGame) { }
 
+    public override int? GetBonusRealValue(Item item, int value)
+    {
+        if (item.BonusArmorClass < 0)
+            return null;
+
+        return (item.BonusToHit + item.BonusDamage + item.BonusArmorClass) * 100;
+    }
+
     public override bool IsWorthless(Item item)
     {
         if (item.TypeSpecificValue < 0)

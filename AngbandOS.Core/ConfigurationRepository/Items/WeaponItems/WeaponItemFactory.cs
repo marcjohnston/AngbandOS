@@ -17,6 +17,20 @@ internal abstract class WeaponItemFactory : ItemFactory
     public override bool HasQuality => true;
     public override bool CanApplyBonusArmorClassMiscPower => true;
 
+    public override int? GetBonusRealValue(Item item, int value)
+    {
+        if (item.BonusToHit + item.BonusDamage < 0)
+            return null;
+
+        int bonusValue = 0;
+        bonusValue += (item.BonusToHit + item.BonusDamage + item.BonusArmorClass) * 100;
+        if (item.DamageDice > Dd && item.DamageDiceSides == Ds)
+        {
+            bonusValue += (item.DamageDice - Dd) * item.DamageDiceSides * 100;
+        }
+        return bonusValue;
+    }
+
     public override bool IsWorthless(Item item)
     {
         if (item.TypeSpecificValue < 0)

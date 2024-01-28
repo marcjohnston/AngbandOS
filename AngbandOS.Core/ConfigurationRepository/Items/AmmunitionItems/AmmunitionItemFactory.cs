@@ -11,6 +11,19 @@ namespace AngbandOS.Core.ItemClasses;
 internal abstract class AmmunitionItemFactory : WeaponItemFactory
 {
     public AmmunitionItemFactory(SaveGame saveGame) : base(saveGame) { }
+    public override int? GetBonusRealValue(Item item, int value)
+    {
+        if (item.BonusToHit + item.BonusDamage < 0)
+            return null;
+
+        int bonusValue = (item.BonusToHit + item.BonusDamage) * 5;
+        if (item.DamageDice > Dd && item.DamageDiceSides == Ds)
+        {
+            bonusValue += (item.DamageDice - Dd) * item.DamageDiceSides * 5;
+        }
+        return bonusValue;
+    }
+
     public override void ApplyMagic(Item item, int level, int power, Store? store)
     {
         base.ApplyMagic(item, level, power, null);
