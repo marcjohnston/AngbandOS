@@ -19,6 +19,170 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey<string>
 {
     protected readonly SaveGame SaveGame;
 
+    public virtual void ApplyRandomSlaying(Item item, ref IArtifactBias artifactBias)
+    {
+        if (artifactBias != null)
+        {
+            if (artifactBias.ApplySlaying(item))
+            {
+                return;
+            }
+        }
+
+        switch (SaveGame.Rng.DieRoll(34))
+        {
+            case 1:
+            case 2:
+                item.RandartItemCharacteristics.SlayAnimal = true;
+                break;
+
+            case 3:
+            case 4:
+                item.RandartItemCharacteristics.SlayEvil = true;
+                if (artifactBias == null && SaveGame.Rng.DieRoll(2) == 1)
+                {
+                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(LawArtifactBias));
+                }
+                else if (artifactBias == null && SaveGame.Rng.DieRoll(9) == 1)
+                {
+                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(PriestlyArtifactBias));
+                }
+                break;
+
+            case 5:
+            case 6:
+                item.RandartItemCharacteristics.SlayUndead = true;
+                if (artifactBias == null && SaveGame.Rng.DieRoll(9) == 1)
+                {
+                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(PriestlyArtifactBias));
+                }
+                break;
+
+            case 7:
+            case 8:
+                item.RandartItemCharacteristics.SlayDemon = true;
+                if (artifactBias == null && SaveGame.Rng.DieRoll(9) == 1)
+                {
+                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(PriestlyArtifactBias));
+                }
+                break;
+
+            case 9:
+            case 10:
+                item.RandartItemCharacteristics.SlayOrc = true;
+                break;
+
+            case 11:
+            case 12:
+                item.RandartItemCharacteristics.SlayTroll = true;
+                break;
+
+            case 13:
+            case 14:
+                item.RandartItemCharacteristics.SlayGiant = true;
+                break;
+
+            case 15:
+            case 16:
+                item.RandartItemCharacteristics.SlayDragon = true;
+                break;
+
+            case 17:
+                item.RandartItemCharacteristics.KillDragon = true;
+                break;
+
+            case 18:
+            case 19:
+                if (CanVorpalSlay)
+                {
+                    item.RandartItemCharacteristics.Vorpal = true;
+                    if (artifactBias == null && SaveGame.Rng.DieRoll(9) == 1)
+                    {
+                        artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(WarriorArtifactBias));
+                    }
+                }
+                else
+                {
+                    ApplyRandomSlaying(item, ref artifactBias);
+                }
+                break;
+
+            case 20:
+                item.RandartItemCharacteristics.Impact = true;
+                break;
+
+            case 21:
+            case 22:
+                item.RandartItemCharacteristics.BrandFire = true;
+                if (artifactBias == null)
+                {
+                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(FireArtifactBias));
+                }
+                break;
+
+            case 23:
+            case 24:
+                item.RandartItemCharacteristics.BrandCold = true;
+                if (artifactBias == null)
+                {
+                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(ColdArtifactBias));
+                }
+                break;
+
+            case 25:
+            case 26:
+                item.RandartItemCharacteristics.BrandElec = true;
+                if (artifactBias == null)
+                {
+                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(ElectricityArtifactBias));
+                }
+                break;
+
+            case 27:
+            case 28:
+                item.RandartItemCharacteristics.BrandAcid = true;
+                if (artifactBias == null)
+                {
+                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(AcidArtifactBias));
+                }
+                break;
+
+            case 29:
+            case 30:
+                item.RandartItemCharacteristics.BrandPois = true;
+                if (artifactBias == null && SaveGame.Rng.DieRoll(3) != 1)
+                {
+                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(PoisonArtifactBias));
+                }
+                else if (artifactBias == null && SaveGame.Rng.DieRoll(6) == 1)
+                {
+                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(NecromanticArtifactBias));
+                }
+                else if (artifactBias == null)
+                {
+                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(RogueArtifactBias));
+                }
+                break;
+
+            case 31:
+            case 32:
+                item.RandartItemCharacteristics.Vampiric = true;
+                if (artifactBias == null)
+                {
+                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(NecromanticArtifactBias));
+                }
+                break;
+
+            default:
+                item.RandartItemCharacteristics.Chaotic = true;
+                if (artifactBias == null)
+                {
+                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(ChaosArtifactBias));
+                }
+                break;
+        }
+    }
+
     /// <summary>
     /// Applies magic to the item.  Does nothing, by default.
     /// </summary>

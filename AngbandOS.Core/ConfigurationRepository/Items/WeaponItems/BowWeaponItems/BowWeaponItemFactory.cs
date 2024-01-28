@@ -15,6 +15,38 @@ internal abstract class BowWeaponItemFactory : WeaponItemFactory // TODO: Should
     /// </summary>
     public override int WieldSlot => InventorySlot.RangedWeapon;
 
+    public override void ApplyRandomSlaying(Item item, ref IArtifactBias artifactBias)
+    {
+        if (artifactBias != null)
+        {
+            if (artifactBias.ApplySlaying(item))
+            {
+                return;
+            }
+        }
+
+        switch (SaveGame.Rng.DieRoll(6))
+        {
+            case 1:
+            case 2:
+            case 3:
+                item.RandartItemCharacteristics.XtraMight = true;
+                if (artifactBias == null && SaveGame.Rng.DieRoll(9) == 1)
+                {
+                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(RangerArtifactBias));
+                }
+                break;
+
+            default:
+                item.RandartItemCharacteristics.XtraShots = true;
+                if (artifactBias == null && SaveGame.Rng.DieRoll(9) == 1)
+                {
+                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(RangerArtifactBias));
+                }
+                break;
+        }
+    }
+
     public override void ApplyMagic(Item item, int level, int power, Store? store)
     {
         base.ApplyMagic(item, level, power, null);

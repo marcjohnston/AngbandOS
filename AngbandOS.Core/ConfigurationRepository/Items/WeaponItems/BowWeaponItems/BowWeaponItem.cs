@@ -15,38 +15,6 @@ internal abstract class BowWeaponItem : WeaponItem
     /// </summary>
     public override BowWeaponItemFactory Factory => (BowWeaponItemFactory)base.Factory;
 
-    public override void ApplyRandomSlaying(ref IArtifactBias artifactBias)
-    {
-        if (artifactBias != null)
-        {
-            if (artifactBias.ApplySlaying(this))
-            {
-                return;
-            }
-        }
-
-        switch (SaveGame.Rng.DieRoll(6))
-        {
-            case 1:
-            case 2:
-            case 3:
-                RandartItemCharacteristics.XtraMight = true;
-                if (artifactBias == null && SaveGame.Rng.DieRoll(9) == 1)
-                {
-                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(RangerArtifactBias));
-                }
-                break;
-
-            default:
-                RandartItemCharacteristics.XtraShots = true;
-                if (artifactBias == null && SaveGame.Rng.DieRoll(9) == 1)
-                {
-                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(RangerArtifactBias));
-                }
-                break;
-        }
-    }
-
     public BowWeaponItem(SaveGame saveGame, ItemFactory itemClass) : base(saveGame, itemClass) { }
 
     public override string GetDetailedDescription()
