@@ -2446,7 +2446,7 @@ internal class Item : IComparable<Item>, IGetKey<string>
                 TypeSpecificValue = 4;
             }
         }
-        ApplyRandartBonus();
+        Factory.ApplyRandartBonus(this);
         RandartItemCharacteristics.IgnoreAcid = true;
         RandartItemCharacteristics.IgnoreElec = true;
         RandartItemCharacteristics.IgnoreFire = true;
@@ -2944,13 +2944,6 @@ internal class Item : IComparable<Item>, IGetKey<string>
         }
         return value;
     }
-
-    /// <summary>
-    /// Applies an additional bonus to random artifacts.  Does nothing by default.
-    /// </summary>
-    /// <param name="item"></param>
-    /// <returns></returns>
-    public virtual void ApplyRandartBonus() { }
 
     public virtual int? GetTypeSpecificRealValue(int value) => 0;
 

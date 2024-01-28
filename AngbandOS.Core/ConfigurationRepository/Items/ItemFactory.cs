@@ -18,6 +18,13 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey<string>
     protected readonly SaveGame SaveGame;
 
     /// <summary>
+    /// Applies an additional bonus to random artifacts.  Does nothing by default.
+    /// </summary>
+    /// <param name="item"></param>
+    /// <returns></returns>
+    public virtual void ApplyRandartBonus(Item item) { }
+
+    /// <summary>
     /// Returns an additional description when identified fully.  Returns null by default.  Only light sources provide an additional description.
     /// </summary>
     public virtual string Identify(Item item) => null;

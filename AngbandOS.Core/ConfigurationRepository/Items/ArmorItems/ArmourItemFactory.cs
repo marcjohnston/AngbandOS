@@ -5,6 +5,8 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using AngbandOS.Core.Items;
+
 namespace AngbandOS.Core.ItemClasses;
 
 [Serializable]
@@ -14,6 +16,11 @@ namespace AngbandOS.Core.ItemClasses;
 internal abstract class ArmorItemFactory : ItemFactory
 {
     public ArmorItemFactory(SaveGame saveGame) : base(saveGame) { }
+
+    public override void ApplyRandartBonus(Item item)
+    {
+        item.BonusArmorClass += SaveGame.Rng.DieRoll(item.BonusArmorClass > 19 ? 1 : 20 - item.BonusArmorClass);
+    }
 
     public override int? GetBonusRealValue(Item item, int value)
     {

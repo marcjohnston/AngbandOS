@@ -11,12 +11,6 @@ namespace AngbandOS.Core.Items;
 internal abstract class WeaponItem : Item
 {
     public WeaponItem(SaveGame saveGame, ItemFactory itemClass) : base(saveGame, itemClass) { }
-    public override void ApplyRandartBonus()
-    {
-        BonusToHit += SaveGame.Rng.DieRoll(BonusToHit > 19 ? 1 : 20 - BonusToHit);
-        BonusDamage += SaveGame.Rng.DieRoll(BonusDamage > 19 ? 1 : 20 - BonusDamage);
-    }
-
     public override int? GetTypeSpecificRealValue(int value)
     {
         return ComputeTypeSpecificRealValue(value);

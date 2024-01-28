@@ -11,11 +11,6 @@ namespace AngbandOS.Core.Items;
 internal abstract class ArmorItem : Item
 {
     public ArmorItem(SaveGame saveGame, ItemFactory itemClass) : base(saveGame, itemClass) { }
-    public override void ApplyRandartBonus()
-    {
-        BonusArmorClass += SaveGame.Rng.DieRoll(BonusArmorClass > 19 ? 1 : 20 - BonusArmorClass);
-    }
-
     public override int? GetTypeSpecificRealValue(int value)
     {
         return ComputeTypeSpecificRealValue(value);
