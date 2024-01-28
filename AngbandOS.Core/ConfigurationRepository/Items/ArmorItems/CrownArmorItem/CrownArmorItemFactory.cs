@@ -10,6 +10,11 @@ namespace AngbandOS.Core.ItemClasses;
 [Serializable]
 internal abstract class CrownArmorItemFactory : ArmorItemFactory
 {
+    /// <summary>
+    /// Returns the head inventory slot, for crowns.
+    /// </summary>
+    public override int WieldSlot => InventorySlot.Head;
+
     public CrownArmorItemFactory(SaveGame saveGame) : base(saveGame) { }
     public override ItemClass ItemClass => SaveGame.SingletonRepository.ItemClasses.Get(nameof(CrownsItemClass));
     public override BaseInventorySlot BaseWieldSlot => SaveGame.SingletonRepository.InventorySlots.Get(nameof(HeadInventorySlot));

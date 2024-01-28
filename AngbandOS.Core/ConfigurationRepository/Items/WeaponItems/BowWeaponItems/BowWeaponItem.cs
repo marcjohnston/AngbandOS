@@ -47,7 +47,6 @@ internal abstract class BowWeaponItem : WeaponItem
         }
     }
 
-    public override int WieldSlot => InventorySlot.RangedWeapon;
     public BowWeaponItem(SaveGame saveGame, ItemFactory itemClass) : base(saveGame, itemClass) { }
 
     protected override void ApplyMagic(int level, int power, Store? store)

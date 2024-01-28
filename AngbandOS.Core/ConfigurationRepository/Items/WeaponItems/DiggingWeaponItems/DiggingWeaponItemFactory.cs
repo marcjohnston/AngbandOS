@@ -10,6 +10,10 @@ namespace AngbandOS.Core.ItemClasses;
 [Serializable]
 internal abstract class DiggingWeaponItemFactory : WeaponItemFactory
 {
+    /// <summary>
+    /// Returns the digger inventory slot for shovels.
+    /// </summary>
+    public override int WieldSlot => InventorySlot.Digger;
     public DiggingWeaponItemFactory(SaveGame saveGame) : base(saveGame) { }
     public override ItemClass ItemClass => SaveGame.SingletonRepository.ItemClasses.Get(nameof(DiggersItemClass));
     public override BaseInventorySlot BaseWieldSlot => SaveGame.SingletonRepository.InventorySlots.Get(nameof(DiggerInventorySlot));

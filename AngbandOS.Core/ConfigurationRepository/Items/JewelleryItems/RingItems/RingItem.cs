@@ -15,17 +15,6 @@ internal abstract class RingItem : JewelleryItem
     /// </summary>
     public IFlavour FlavourFactory => (IFlavour)Factory;
 
-    public override int WieldSlot
-    {
-        get
-        {
-            if (SaveGame.GetInventoryItem(InventorySlot.RightHand) == null)
-            {
-                return InventorySlot.RightHand;
-            }
-            return InventorySlot.LeftHand;
-        }
-    }
     public RingItem(SaveGame saveGame, ItemFactory itemClass) : base(saveGame, itemClass) { }
     public override string GetDescription(bool includeCountPrefix)
     {

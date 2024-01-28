@@ -10,9 +10,14 @@ namespace AngbandOS.Core.ItemClasses;
 [Serializable]
 internal abstract class SoftArmorItemFactory : ArmorItemFactory
 {
+    /// <summary>
+    /// Returns the on-body inventory slot for soft armor.
+    /// </summary>
+    public override int WieldSlot => InventorySlot.OnBody;
+
     public SoftArmorItemFactory(SaveGame saveGame) : base(saveGame) { }
     public override ItemClass ItemClass => SaveGame.SingletonRepository.ItemClasses.Get(nameof(SoftArmorsItemClass));
-    public override BaseInventorySlot BaseWieldSlot => SaveGame.SingletonRepository.InventorySlots.Get(nameof(BodyInventorySlot));
+    public override BaseInventorySlot BaseWieldSlot => SaveGame.SingletonRepository.InventorySlots.Get(nameof(OnBodyInventorySlot));
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.SoftArmor;
     public override int PackSort => 21;
     public override bool HatesFire => true;

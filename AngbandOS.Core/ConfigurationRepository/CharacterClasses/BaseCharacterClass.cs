@@ -179,7 +179,7 @@ internal abstract class BaseCharacterClass : IGetKey<string>
             item.IdentStoreb = true;
             item.BecomeFlavourAware();
             item.BecomeKnown();
-            int slot = item.WieldSlot;
+            int slot = item.Factory.WieldSlot;
             if (slot == -1)
             {
                 SaveGame.InvenCarry(item);

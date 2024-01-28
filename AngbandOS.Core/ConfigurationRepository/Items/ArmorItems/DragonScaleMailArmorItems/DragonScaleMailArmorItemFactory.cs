@@ -10,9 +10,14 @@ namespace AngbandOS.Core.ItemClasses;
 [Serializable]
 internal abstract class DragonScaleMailArmorItemFactory : ArmorItemFactory 
 {
+    /// <summary>
+    /// Returns the on-body inventory slot for scale mail.
+    /// </summary>
+    public override int WieldSlot => InventorySlot.OnBody;
+
     public DragonScaleMailArmorItemFactory(SaveGame saveGame) : base(saveGame) { }
     public override ItemClass ItemClass => SaveGame.SingletonRepository.ItemClasses.Get(nameof(DragonScaleMailsItemClass));
-    public override BaseInventorySlot BaseWieldSlot => SaveGame.SingletonRepository.InventorySlots.Get(nameof(BodyInventorySlot));
+    public override BaseInventorySlot BaseWieldSlot => SaveGame.SingletonRepository.InventorySlots.Get(nameof(OnBodyInventorySlot));
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.DragArmor;
     public override int PackSort => 19;
     public override bool HatesAcid => true;

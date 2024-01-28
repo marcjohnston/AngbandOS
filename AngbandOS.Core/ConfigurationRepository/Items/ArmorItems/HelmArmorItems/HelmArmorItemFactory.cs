@@ -10,6 +10,10 @@ namespace AngbandOS.Core.ItemClasses;
 [Serializable]
 internal abstract class HelmArmorItemFactory : ArmorItemFactory
 {
+    /// <summary>
+    /// Returns the head inventory slot for helms.
+    /// </summary>
+    public override int WieldSlot => InventorySlot.Head;
     public HelmArmorItemFactory(SaveGame saveGame) : base(saveGame) { }
     public override ItemClass ItemClass => SaveGame.SingletonRepository.ItemClasses.Get(nameof(HelmsItemClass));
     public override BaseInventorySlot BaseWieldSlot => SaveGame.SingletonRepository.InventorySlots.Get(nameof(HeadInventorySlot));

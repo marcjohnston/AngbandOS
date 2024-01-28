@@ -49,7 +49,7 @@ internal class WieldScript : Script, IScript, IRepeatableScript, IStoreScript
         }
 
         // Find the inventory slot where the item is to be wielded.
-        int slot = item.WieldSlot;
+        int slot = item.Factory.WieldSlot;
 
         // Can't replace a cursed item
         Item? wieldingItem = SaveGame.GetInventoryItem(slot);

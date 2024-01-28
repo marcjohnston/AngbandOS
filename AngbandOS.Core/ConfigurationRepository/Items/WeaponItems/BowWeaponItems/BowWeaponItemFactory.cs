@@ -10,6 +10,11 @@ namespace AngbandOS.Core.ItemClasses;
 [Serializable]
 internal abstract class BowWeaponItemFactory : WeaponItemFactory // TODO: Should be renamed to RangedWeaponItemClass
 {
+    /// <summary>
+    /// Returns the ranged weapon inventory slot for bows.
+    /// </summary>
+    public override int WieldSlot => InventorySlot.RangedWeapon;
+
     public BowWeaponItemFactory(SaveGame saveGame) : base(saveGame) { }
     public override ItemClass ItemClass => SaveGame.SingletonRepository.ItemClasses.Get(nameof(BowsItemClass));
     public override BaseInventorySlot BaseWieldSlot => SaveGame.SingletonRepository.InventorySlots.Get(nameof(RangedWeaponInventorySlot));

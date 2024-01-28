@@ -8,12 +8,12 @@
 namespace AngbandOS.Core.InventorySlots;
 
 [Serializable]
-internal class BodyInventorySlot : EquipmentInventorySlot
+internal class OnBodyInventorySlot : EquipmentInventorySlot
 {
-    private BodyInventorySlot(SaveGame saveGame) : base(saveGame) { }
+    private OnBodyInventorySlot(SaveGame saveGame) : base(saveGame) { }
     public override string Label(int index) => "h";
     public override string Label(Item oPtr) => "h";
-    public override int[] InventorySlots => new int[] { InventorySlot.Body };
+    public override int[] InventorySlots => new int[] { InventorySlot.OnBody };
     public override string MentionUse(int? index) => "On body";
     public override string DescribeWieldLocation(int index) => "wearing on your body";
     public override string DescribeItemLocation(Item oPtr) => "wearing on your body";

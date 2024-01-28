@@ -11,7 +11,6 @@ namespace AngbandOS.Core.Items;
 internal abstract class GlovesArmorItem : ArmorItem
 {
     public GlovesArmorItem(SaveGame saveGame, ItemFactory itemClass) : base(saveGame, itemClass) { }
-    public override int WieldSlot => InventorySlot.Hands;
 
     /// <summary>
     /// Applies a good random rare characteristics to gloves.

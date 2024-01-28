@@ -11,7 +11,6 @@ namespace AngbandOS.Core.Items;
 internal abstract class DragonScaleMailArmorItem : ArmorItem
 {
     public DragonScaleMailArmorItem(SaveGame saveGame, ItemFactory itemClass) : base(saveGame, itemClass) { }
-    public override int WieldSlot => InventorySlot.Body;
 
     /// <summary>
     /// Applies special magic to dragon scale mail armor.

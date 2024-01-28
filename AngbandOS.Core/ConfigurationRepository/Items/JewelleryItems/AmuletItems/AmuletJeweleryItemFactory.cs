@@ -11,6 +11,12 @@ namespace AngbandOS.Core.ItemClasses;
 internal abstract class AmuletJeweleryItemFactory : JewelleryItemFactory, IFlavour
 {
     public AmuletJeweleryItemFactory(SaveGame saveGame) : base(saveGame) { }
+
+    /// <summary>
+    /// Returns the neck inventory slot for amulets.
+    /// </summary>
+    public override int WieldSlot => InventorySlot.Neck;
+
     public override ItemClass ItemClass => SaveGame.SingletonRepository.ItemClasses.Get(nameof(AmuletsItemClass));
     public override BaseInventorySlot BaseWieldSlot => SaveGame.SingletonRepository.InventorySlots.Get(nameof(NeckInventorySlot));
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Amulet;

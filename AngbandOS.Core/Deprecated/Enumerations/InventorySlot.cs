@@ -10,8 +10,8 @@ namespace AngbandOS.Core;
 internal static class InventorySlot
 {
     public const int Arm = 36; // DONE
-    public const int Body = 34; // DONE
-    public const int Cloak = 35; // DONE
+    public const int OnBody = 34; // DONE
+    public const int AboutBody = 35; // DONE
     public const int Digger = 29; // DONE
     public const int Feet = 39; // DONE
     public const int Hands = 38; // DONE

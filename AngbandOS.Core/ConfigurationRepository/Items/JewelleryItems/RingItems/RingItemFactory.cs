@@ -10,6 +10,21 @@ namespace AngbandOS.Core.ItemClasses;
 [Serializable]
 internal abstract class RingItemFactory : JewelleryItemFactory, IFlavour
 {
+    /// <summary>
+    /// Returns either the right or left hand inventory slot for rings.
+    /// </summary>
+    public override int WieldSlot
+    {
+        get
+        {
+            if (SaveGame.GetInventoryItem(InventorySlot.RightHand) == null)
+            {
+                return InventorySlot.RightHand;
+            }
+            return InventorySlot.LeftHand;
+        }
+    }
+
     public RingItemFactory(SaveGame saveGame) : base(saveGame) { }
     public override ItemClass ItemClass => SaveGame.SingletonRepository.ItemClasses.Get(nameof(RingsItemClass));
 

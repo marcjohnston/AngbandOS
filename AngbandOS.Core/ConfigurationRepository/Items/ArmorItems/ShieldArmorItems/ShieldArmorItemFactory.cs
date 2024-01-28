@@ -10,6 +10,11 @@ namespace AngbandOS.Core.ItemClasses;
 [Serializable]
 internal abstract class ShieldArmorItemFactory : ArmorItemFactory
 {
+    /// <summary>
+    /// Returns the arm inventory slot for shields.
+    /// </summary>
+    public override int WieldSlot => InventorySlot.Arm;
+
     public ShieldArmorItemFactory(SaveGame saveGame) : base(saveGame) { }
     public override ItemClass ItemClass => SaveGame.SingletonRepository.ItemClasses.Get(nameof(ShieldsItemClass));
     public override BaseInventorySlot BaseWieldSlot => SaveGame.SingletonRepository.InventorySlots.Get(nameof(ArmInventorySlot));

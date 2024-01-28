@@ -10,7 +10,6 @@ namespace AngbandOS.Core.Items;
 [Serializable]
 internal abstract class AmuletJeweleryItem : JewelleryItem
 {
-    public override int WieldSlot => InventorySlot.Neck;
     public AmuletJeweleryItem(SaveGame saveGame, ItemFactory itemClass) : base(saveGame, itemClass) { }
 
     /// <summary>

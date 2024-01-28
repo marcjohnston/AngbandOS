@@ -10,6 +10,11 @@ namespace AngbandOS.Core.ItemClasses;
 [Serializable]
 internal abstract class BootsArmorItemFactory : ArmorItemFactory
 {
+    /// <summary>
+    /// Returns the feet inventory slot for boots.
+    /// </summary>
+    public override int WieldSlot => InventorySlot.Feet;
+
     public BootsArmorItemFactory(SaveGame saveGame) : base(saveGame) { }
     public override ItemClass ItemClass => SaveGame.SingletonRepository.ItemClasses.Get(nameof(BootsItemClass));
     public override BaseInventorySlot BaseWieldSlot => SaveGame.SingletonRepository.InventorySlots.Get(nameof(FeetInventorySlot));

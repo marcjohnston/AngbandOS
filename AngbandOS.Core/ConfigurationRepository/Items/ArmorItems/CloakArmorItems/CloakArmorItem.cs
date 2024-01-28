@@ -10,7 +10,6 @@ namespace AngbandOS.Core.Items;
 [Serializable]
 internal abstract class CloakArmorItem : ArmorItem
 {
-    public override int WieldSlot => InventorySlot.Cloak;
     public CloakArmorItem(SaveGame saveGame, ItemFactory itemClass) : base(saveGame, itemClass) { }
 
     protected override void ApplyRandomGoodRareCharacteristics()

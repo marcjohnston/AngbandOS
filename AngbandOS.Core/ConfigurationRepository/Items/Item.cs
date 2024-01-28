@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Items;
 
 [Serializable]
-internal abstract class Item : IComparable<Item>, IGetKey<string>
+internal class Item : IComparable<Item>, IGetKey<string>
 {
     /// <summary>
     /// Returns a sort order index for sorting items in a pack.  Lower numbers show before higher numbers.
@@ -19,11 +19,6 @@ internal abstract class Item : IComparable<Item>, IGetKey<string>
 
     public string GetKey => Key;
     public virtual void Bind() { }
-
-    /// <summary>
-    /// Returns the inventory slot where the item is wielded.  Returns the pack, by default.
-    /// </summary>
-    public virtual int WieldSlot => InventorySlot.Pack;
 
     /// <summary>
     /// Returns true, if the item has already been identify sensed.  This property used to be a flag in the IdentifyFlags.

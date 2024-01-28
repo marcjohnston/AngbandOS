@@ -10,6 +10,10 @@ namespace AngbandOS.Core.ItemClasses;
 [Serializable]
 internal abstract class GlovesArmorItemFactory : ArmorItemFactory
 {
+    /// <summary>
+    /// Returns the hands inventory slots for gloves.
+    /// </summary>
+    public override int WieldSlot => InventorySlot.Hands;
     public GlovesArmorItemFactory(SaveGame saveGame) : base(saveGame) { }
     public override ItemClass ItemClass => SaveGame.SingletonRepository.ItemClasses.Get(nameof(GlovesItemClass));
     public override int PackSort => 26;

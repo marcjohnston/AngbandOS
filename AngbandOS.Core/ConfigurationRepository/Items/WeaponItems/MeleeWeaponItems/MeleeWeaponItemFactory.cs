@@ -13,6 +13,11 @@ namespace AngbandOS.Core.ItemClasses;
 [Serializable]
 internal abstract class MeleeWeaponItemFactory : WeaponItemFactory
 {
+    /// <summary>
+    /// Returns the melee weapon inventory slot for melee weapons.
+    /// </summary>
+    public override int WieldSlot => InventorySlot.MeleeWeapon;
+
     public MeleeWeaponItemFactory(SaveGame saveGame) : base(saveGame) { }
     public override BaseInventorySlot BaseWieldSlot => SaveGame.SingletonRepository.InventorySlots.Get(nameof(MeleeWeaponInventorySlot));
     public override bool GetsDamageMultiplier => true;
