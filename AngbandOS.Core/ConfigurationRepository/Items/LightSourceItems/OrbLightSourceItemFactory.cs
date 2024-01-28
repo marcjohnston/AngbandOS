@@ -16,6 +16,17 @@ internal class OrbLightSourceItemFactory : LightSourceItemFactory
     public override ColorEnum Color => ColorEnum.BrightYellow;
     public override string Name => "Orb";
 
+    /// <summary>
+    /// Returns an intensity of light provided by the orb.  A value of 2 is returned, plus an additional 3
+    /// if the orb is an artifact.
+    /// </summary>
+    /// <param name="oPtr"></param>
+    /// <returns></returns>
+    public override int CalculateTorch(Item item)
+    {
+        return base.CalculateTorch(item) + 2;
+    }
+
     public override bool IdentityCanBeSensed => true;
     public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int Cost => 1000;

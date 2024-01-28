@@ -5,6 +5,8 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using System.Reflection.PortableExecutable;
+
 namespace AngbandOS.Core.ItemClasses;
 
 /// <summary>
@@ -16,6 +18,25 @@ namespace AngbandOS.Core.ItemClasses;
 internal abstract class ItemFactory : IItemCharacteristics, IGetKey<string>
 {
     protected readonly SaveGame SaveGame;
+
+    /// <summary>
+    /// Returns the intensity of light that the object emits.  By default, a value of 1 is returned, if the item has a 
+    /// light-source characteristic.
+    /// </summary>
+    /// <param name="oPtr"></param>
+    /// <returns></returns>
+    public virtual int CalculateTorch(Item item)
+    {
+        item.RefreshFlagBasedProperties();
+        if (item.Characteristics.Lightsource)
+        {
+            return 1;
+        }
+        else
+        {
+            return 0;
+        }
+    }
 
     /// <summary>
     /// Returns true, if the item can apply a bonus armor class for miscellaneous power.  Only weapons return true.  Returns false, by default.

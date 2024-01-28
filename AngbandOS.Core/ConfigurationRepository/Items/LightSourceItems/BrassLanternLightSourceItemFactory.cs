@@ -15,6 +15,17 @@ internal class BrassLanternLightSourceItemFactory : LightSourceItemFactory
     private BrassLanternLightSourceItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
     /// <summary>
+    /// Returns an intensity of light provided by the lantern.  2, if the lantern has turns remaining, plus an additional 3
+    /// if the lantern is an artifact.
+    /// </summary>
+    /// <param name="oPtr"></param>
+    /// <returns></returns>
+    public override int CalculateTorch(Item item)
+    {
+        return base.CalculateTorch(item) + item.TypeSpecificValue > 0 ? 2 : 0;
+    }
+
+    /// <summary>
     /// Returns 1 because a latern consumes a turn of light for every world turn.
     /// </summary>
     public override int BurnRate => 1;

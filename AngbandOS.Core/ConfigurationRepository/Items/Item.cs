@@ -15,25 +15,6 @@ internal abstract class Item : IComparable<Item>, IGetKey<string>
     /// </summary>
     public int PackSort => Factory.PackSort;
 
-    /// <summary>
-    /// Returns the intensity of light that the object emits.  By default, a value of 1 is returned, if the item has a 
-    /// light-source characteristic.
-    /// </summary>
-    /// <param name="oPtr"></param>
-    /// <returns></returns>
-    public virtual int CalculateTorch()
-    {
-        RefreshFlagBasedProperties();
-        if (Characteristics.Lightsource)
-        {
-            return 1;
-        }
-        else
-        {
-            return 0;
-        }
-    }
-
     public virtual string Key => GetType().Name;
 
     public string GetKey => Key;

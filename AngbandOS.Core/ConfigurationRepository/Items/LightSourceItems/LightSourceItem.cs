@@ -13,23 +13,6 @@ internal abstract class LightSourceItem : ArmorItem
     public override int WieldSlot => InventorySlot.Lightsource;
     public LightSourceItem(SaveGame saveGame, ItemFactory itemClass) : base(saveGame, itemClass) { }
 
-    /// <summary>
-    /// Returns an intensity of 3, if the item is an artifact; otherwise, 0 is returned.
-    /// </summary>
-    /// <param name="oPtr"></param>
-    /// <returns></returns>
-    public override int CalculateTorch()
-    {
-        if (FixedArtifact != null)
-        {
-            return 3;
-        }
-        else
-        {
-            return 0;
-        }
-    }
-
     protected override void ApplyMagic(int level, int power, Store? store)
     {
         if (power < 0) // Cursed

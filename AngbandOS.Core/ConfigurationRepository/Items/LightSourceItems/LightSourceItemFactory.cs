@@ -14,6 +14,23 @@ internal abstract class LightSourceItemFactory : ItemFactory
     public override ItemClass ItemClass => SaveGame.SingletonRepository.ItemClasses.Get(nameof(LightSourcesItemClass));
     public override BaseInventorySlot BaseWieldSlot => SaveGame.SingletonRepository.InventorySlots.Get(nameof(LightsourceInventorySlot));
 
+    /// <summary>
+    /// Returns an intensity of 3, if the item is an artifact; otherwise, 0 is returned.
+    /// </summary>
+    /// <param name="oPtr"></param>
+    /// <returns></returns>
+    public override int CalculateTorch(Item item)
+    {
+        if (item.FixedArtifact != null)
+        {
+            return 3;
+        }
+        else
+        {
+            return 0;
+        }
+    }
+
     public override int PercentageBreakageChance => 50;
     public override int PackSort => 18;
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Light;

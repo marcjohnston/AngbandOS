@@ -11,14 +11,4 @@ namespace AngbandOS.Core.Items;
 internal class OrbLightSourceItem : LightSourceItem
 {
     public OrbLightSourceItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get(nameof(OrbLightSourceItemFactory))) { }
-    /// <summary>
-    /// Returns an intensity of light provided by the orb.  A value of 2 is returned, plus an additional 3
-    /// if the orb is an artifact.
-    /// </summary>
-    /// <param name="oPtr"></param>
-    /// <returns></returns>
-    public override int CalculateTorch()
-    {
-        return base.CalculateTorch() + 2;
-    }
 }

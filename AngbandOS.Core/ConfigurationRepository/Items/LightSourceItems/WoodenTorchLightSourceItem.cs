@@ -12,17 +12,6 @@ internal class WoodenTorchLightSourceItem : LightSourceItem
 {
     public WoodenTorchLightSourceItem(SaveGame saveGame) : base(saveGame, saveGame.SingletonRepository.ItemFactories.Get(nameof(WoodenTorchLightSourceItemFactory))) { }
 
-    /// <summary>
-    /// Returns an intensity of light provided by the torch.  1, if the torch has turns remaining, plus an optional 3
-    /// if the torch is an artifact.
-    /// </summary>
-    /// <param name="oPtr"></param>
-    /// <returns></returns>
-    public override int CalculateTorch()
-    {
-        return base.CalculateTorch() + TypeSpecificValue > 0 ? 1 : 0;
-    }
-
     protected override void ApplyMagic(int level, int power, Store? store)
     {
         if (store != null)
