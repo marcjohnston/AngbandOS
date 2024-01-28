@@ -18,6 +18,11 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey<string>
     protected readonly SaveGame SaveGame;
 
     /// <summary>
+    /// Returns an additional description when identified fully.  Returns null by default.  Only light sources provide an additional description.
+    /// </summary>
+    public virtual string Identify(Item item) => null;
+
+    /// <summary>
     /// Returns true, if the item is deemed as worthless.  Worthless items will ignore their RealValue and will always have 0 real value.  Returns false by default.
     /// </summary>
     public virtual bool IsWorthless(Item item) => false;

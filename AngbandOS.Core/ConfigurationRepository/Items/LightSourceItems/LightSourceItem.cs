@@ -17,19 +17,6 @@ internal abstract class LightSourceItem : ArmorItem
     /// </summary>
     public override LightSourceItemFactory Factory => (LightSourceItemFactory)base.Factory;
 
-    public override string Identify()
-    {
-        if (FixedArtifact != null)
-        {
-            return "It provides light (radius 3) forever.";
-        }
-        else
-        {
-            string burnRate = Factory.BurnRate == 0 ? "forever" : "when fueled";
-            return $"It provides light (radius {Factory.Radius}) {burnRate}.";
-        }
-    }
-
     public override int? GetTypeSpecificRealValue(int value)
     {
         return ComputeTypeSpecificRealValue(value);

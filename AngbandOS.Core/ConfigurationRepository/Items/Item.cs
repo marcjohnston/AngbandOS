@@ -1336,7 +1336,7 @@ internal class Item : IComparable<Item>, IGetKey<string>
             info[i++] = DescribeActivationEffect();
             info[i++] = "...if it is being worn.";
         }
-        string categoryIdentity = Identify();
+        string categoryIdentity = Factory.Identify(this);
         if (categoryIdentity != null)
         {
             info[i++] = categoryIdentity;
@@ -2944,11 +2944,6 @@ internal class Item : IComparable<Item>, IGetKey<string>
         }
         return value;
     }
-
-    /// <summary>
-    /// Returns an additional description when identified fully.  Returns null by default.  Only light sources provide an additional description.
-    /// </summary>
-    public virtual string Identify() => null;
 
     /// <summary>
     /// Applies an additional bonus to random artifacts.  Does nothing by default.

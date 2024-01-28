@@ -19,6 +19,19 @@ internal abstract class LightSourceItemFactory : ItemFactory
     public override BaseInventorySlot BaseWieldSlot => SaveGame.SingletonRepository.InventorySlots.Get(nameof(LightsourceInventorySlot));
     public override bool IsWorthless(Item item) => item.TypeSpecificValue < 0;
 
+    public override string Identify(Item item)
+    {
+        if (item.FixedArtifact != null)
+        {
+            return "It provides light (radius 3) forever.";
+        }
+        else
+        {
+            string burnRate = BurnRate == 0 ? "forever" : "when fueled";
+            return $"It provides light (radius {Radius}) {burnRate}.";
+        }
+    }
+
 
     public override void ApplyMagic(Item item, int level, int power, Store? store)
     {
