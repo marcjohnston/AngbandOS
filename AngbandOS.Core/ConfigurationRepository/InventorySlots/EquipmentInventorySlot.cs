@@ -49,7 +49,7 @@ internal abstract class EquipmentInventorySlot : BaseInventorySlot
             Item? oPtr = SaveGame.GetInventoryItem(index);
             if (oPtr != null)
             {
-                oPtr.EquipmentProcessWorldHook();
+                oPtr.Factory.EquipmentProcessWorldHook();
             }
         }
 

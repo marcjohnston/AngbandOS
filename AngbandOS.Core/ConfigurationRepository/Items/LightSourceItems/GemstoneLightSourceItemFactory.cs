@@ -12,6 +12,17 @@ internal class GemstoneLightSourceItemFactory : LightSourceItemFactory
 {
     private GemstoneLightSourceItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
+    public override void EquipmentProcessWorldHook()
+    {
+        if (SaveGame.Rng.DieRoll(999) == 1 && !SaveGame.HasAntiMagic)
+        {
+            if (SaveGame.TimedInvulnerability.TurnsRemaining == 0)
+            {
+                SaveGame.MsgPrint("The Jewel of Judgement drains life from you!");
+                SaveGame.TakeHit(Math.Min(SaveGame.ExperienceLevel, 50), "the Jewel of Judgement");
+            }
+        }
+    }
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(AsteriskSymbol));
     public override ColorEnum Color => ColorEnum.Diamond;
     public override string Name => "Gemstone";
