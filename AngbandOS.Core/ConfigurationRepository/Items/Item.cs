@@ -301,12 +301,6 @@ internal class Item : IComparable<Item>, IGetKey<string>
     }
 
     /// <summary>
-    /// Hook into the ProcessWorld, when the item is being carried in a pack inventory slot.  Does nothing, by default..
-    /// </summary>
-    /// <param name="saveGame"></param>
-    public virtual void PackProcessWorldHook() { }
-
-    /// <summary>
     /// Compares two items for sorting.  Returns -1, if this item sorts before the oPtr item; 1, if this item sorts after or 0 if they are equivalent.
     /// </summary>
     /// <param name="obj"></param>

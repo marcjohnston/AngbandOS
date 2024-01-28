@@ -76,7 +76,7 @@ internal class PackInventorySlot : BaseInventorySlot
             Item? oPtr = SaveGame.GetInventoryItem(index);
             if (oPtr != null)
             {
-                oPtr.PackProcessWorldHook();
+                oPtr.Factory.PackProcessWorldHook();
             }
         }
     }

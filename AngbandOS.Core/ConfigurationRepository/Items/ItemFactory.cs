@@ -20,6 +20,12 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey<string>
     protected readonly SaveGame SaveGame;
 
     /// <summary>
+    /// Hook into the ProcessWorld, when the item is being carried in a pack inventory slot.  Does nothing, by default..
+    /// </summary>
+    /// <param name="saveGame"></param>
+    public virtual void PackProcessWorldHook() { }
+
+    /// <summary>
     /// Hook into the ProcessWorld, when the item is being worn/wielded.  Does nothing, by default.
     /// </summary>
     /// <param name="saveGame"></param>
