@@ -5,13 +5,45 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.ItemCategories;
+namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
-internal class MultiHuedDragonScaleMailArmorItemFactory : DragonScaleMailArmorItemFactory
+internal class MultiHuedDragonScaleMailArmorItemFactory : DragonScaleMailArmorItemFactory, IItemsCanBeActivated
 {
     private MultiHuedDragonScaleMailArmorItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
+    public void ActivateItem(Item item)
+    {
+        if (!SaveGame.GetDirectionWithAim(out int dir))
+        {
+            return;
+        }
+        int chance = SaveGame.Rng.RandomLessThan(5);
+        string element = chance == 1 ? "lightning" : (chance == 2 ? "frost" : (chance == 3 ? "acid" : (chance == 4 ? "poison gas" : "fire")));
+        SaveGame.MsgPrint($"You breathe {element}.");
+        switch (chance)
+        {
+            case 0:
+                SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(FireProjectile)), dir, 250, -2);
+                return;
+            case 1:
+                SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(ElecProjectile)), dir, 250, -2);
+                return;
+
+            case 2:
+                SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(ColdProjectile)), dir, 250, -2);
+                return;
+
+            case 3:
+                SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(AcidProjectile)), dir, 250, -2);
+                return;
+
+            case 4:
+                SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(PoisProjectile)), dir, 250, -2);
+                return;
+        }
+        item.RechargeTimeLeft = SaveGame.Rng.RandomLessThan(225) + 225;
+    }
     public override string? DescribeActivationEffect => "breathe multi-hued (250) every 225+d225 turns";
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(OpenBraceSymbol));
     public override ColorEnum Color => ColorEnum.Purple;
@@ -38,5 +70,5 @@ internal class MultiHuedDragonScaleMailArmorItemFactory : DragonScaleMailArmorIt
     public override int ToA => 10;
     public override int ToH => -2;
     public override int Weight => 200;
-    public override Item CreateItem() => new MultiHuedDragonScaleMailArmorItem(SaveGame);
+    public override Item CreateItem() => new Item(SaveGame, this);
 }

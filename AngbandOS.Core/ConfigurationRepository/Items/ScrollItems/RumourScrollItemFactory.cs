@@ -5,7 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.ItemCategories;
+namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
 internal class RumourScrollItemFactory : ScrollItemFactory
@@ -29,5 +29,5 @@ internal class RumourScrollItemFactory : ScrollItemFactory
         SaveGame.RunScript(nameof(GetRumourScript));
         eventArgs.Identified = true;
     }
-    public override Item CreateItem() => new RumourScrollItem(SaveGame);
+    public override Item CreateItem() => new Item(SaveGame, this);
 }

@@ -7,7 +7,7 @@
 
 using AngbandOS.Core.ConfigurationRepository.ItemMatchingCriterion;
 
-namespace AngbandOS.Core.ItemCategories;
+namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
 internal class WoodenTorchLightSourceItemFactory : LightSourceItemFactory
@@ -64,7 +64,7 @@ internal class WoodenTorchLightSourceItemFactory : LightSourceItemFactory
     public override string FriendlyName => "& Wooden Torch~";
     public override int Level => 1;
     public override int[] Locale => new int[] { 1, 0, 0, 0 };
-    public override int Pval => 4000;
+    public override int InitialTypeSpecificValue => 4000;
     public override int Weight => 30;
     /// <summary>
     /// Refill a torch from another torch
@@ -118,7 +118,7 @@ internal class WoodenTorchLightSourceItemFactory : LightSourceItemFactory
     /// Returns a new WoodenTorchLightSourceItem.
     /// </summary>
     /// <returns></returns>
-    public override Item CreateItem() => new WoodenTorchLightSourceItem(SaveGame);
+    public override Item CreateItem() => new Item(SaveGame, this);
 
     /// <summary>
     /// Returns a radius of 1 because a torch provides light shorter than the default 2 radius for a typical light source.

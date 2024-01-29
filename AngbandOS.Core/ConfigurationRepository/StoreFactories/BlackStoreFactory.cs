@@ -70,12 +70,12 @@ internal class BlackStoreFactory : StoreFactory
     {
         int level;
         level = 35 + SaveGame.Rng.RandomLessThan(35);
-        ItemFactory itemType = SaveGame.RandomItemType(level, false, false);
-        if (itemType == null)
+        ItemFactory itemFactory = SaveGame.RandomItemType(level, false, false);
+        if (itemFactory == null)
         {
             return null; ;
         }
-        Item qPtr = itemType.CreateItem();
+        Item qPtr = itemFactory.CreateItem();
         qPtr.ApplyMagic(level, false, false, false, store);
         return qPtr;
     }

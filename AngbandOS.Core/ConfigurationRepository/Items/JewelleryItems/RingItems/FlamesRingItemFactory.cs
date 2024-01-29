@@ -5,12 +5,23 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.ItemCategories;
+namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
-internal class FlamesRingItemFactory : RingItemFactory
+internal class FlamesRingItemFactory : RingItemFactory, IItemsCanBeActivated
 {
     private FlamesRingItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+
+    public void ActivateItem(Item item)
+    {
+        if (!SaveGame.GetDirectionWithAim(out int dir))
+        {
+            return;
+        }
+        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(FireProjectile)), dir, 50, 2);
+        SaveGame.TimedFireResistance.AddTimer(SaveGame.Rng.DieRoll(20) + 20);
+        item.RechargeTimeLeft = SaveGame.Rng.RandomLessThan(50) + 50;
+    }
 
     public override string? DescribeActivationEffect => "ball of fire and resist fire";
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(EqualSignSymbol));
@@ -30,5 +41,5 @@ internal class FlamesRingItemFactory : RingItemFactory
     public override bool ResFire => true;
     public override int ToA => 15;
     public override int Weight => 2;
-    public override Item CreateItem() => new FlamesRingItem(SaveGame);
+    public override Item CreateItem() => new Item(SaveGame, this);
 }

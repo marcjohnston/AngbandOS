@@ -5,7 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.ItemCategories;
+namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
 internal class WeaknessRingItemFactory : RingItemFactory
@@ -21,8 +21,8 @@ internal class WeaknessRingItemFactory : RingItemFactory
     public override bool HideType => true;
     public override int Level => 5;
     public override int[] Locale => new int[] { 5, 0, 0, 0 };
-    public override int Pval => -5;
+    public override int InitialTypeSpecificValue => -5;
     public override bool Str => true;
     public override int Weight => 2;
-    public override Item CreateItem() => new WeaknessRingItem(SaveGame);
+    public override Item CreateItem() => new Item(SaveGame, this);
 }

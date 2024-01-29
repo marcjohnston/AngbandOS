@@ -5,7 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.ItemCategories;
+namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
 internal class WonderWandItemFactory : WandItemFactory
@@ -123,5 +123,5 @@ internal class WonderWandItemFactory : WandItemFactory
                 throw new Exception("Internal error.");
         }
     }
-    public override Item CreateItem() => new WonderWandItem(SaveGame);
+    public override Item CreateItem() => new Item(SaveGame, this);
 }

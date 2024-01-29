@@ -5,7 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.ItemCategories;
+namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
 internal class SomeGarnetsGoldItemFactory : GoldItemFactory
@@ -15,9 +15,8 @@ internal class SomeGarnetsGoldItemFactory : GoldItemFactory
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(DollarSignSymbol));
     public override ColorEnum Color => ColorEnum.Red;
     public override string Name => "some garnets";
-
     public override int Cost => 9;
     public override string FriendlyName => "some garnets";
     public override int Level => 1;
-    public override Item CreateItem() => new SomeGarnetsGoldItem(SaveGame);
+    public override Item CreateItem() => new Item(SaveGame, this);
 }

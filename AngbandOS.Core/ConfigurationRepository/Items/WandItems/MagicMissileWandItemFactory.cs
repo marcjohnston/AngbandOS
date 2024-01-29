@@ -5,7 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.ItemCategories;
+namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
 internal class MagicMissileWandItemFactory : WandItemFactory
@@ -32,5 +32,5 @@ internal class MagicMissileWandItemFactory : WandItemFactory
         saveGame.FireBoltOrBeam(20, saveGame.SingletonRepository.Projectiles.Get(nameof(MissileProjectile)), dir, SaveGame.Rng.DiceRoll(2, 6));
         return true;
     }
-    public override Item CreateItem() => new MagicMissileWandItem(SaveGame);
+    public override Item CreateItem() => new Item(SaveGame, this);
 }

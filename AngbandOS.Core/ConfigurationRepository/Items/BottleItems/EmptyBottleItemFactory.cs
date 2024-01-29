@@ -5,7 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.ItemCategories;
+namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
 internal class EmptyBottleItemFactory : BottleItemFactory
@@ -21,5 +21,5 @@ internal class EmptyBottleItemFactory : BottleItemFactory
     public override int Ds => 1;
     public override string FriendlyName => "& Empty Bottle~";
     public override int Weight => 2;
-    public override Item CreateItem() => new EmptyBottle(SaveGame);
+    public override Item CreateItem() => new Item(SaveGame, this);
 }

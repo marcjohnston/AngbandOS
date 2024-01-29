@@ -5,15 +5,23 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-using AngbandOS.Core.Items;
-
-namespace AngbandOS.Core.ItemCategories;
+namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
-internal class WhiteDragonScaleMailArmorItemFactory : DragonScaleMailArmorItemFactory
+internal class WhiteDragonScaleMailArmorItemFactory : DragonScaleMailArmorItemFactory, IItemsCanBeActivated
 {
     private WhiteDragonScaleMailArmorItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
+    public void ActivateItem(Item item)
+    {
+        if (!SaveGame.GetDirectionWithAim(out int dir))
+        {
+            return;
+        }
+        SaveGame.MsgPrint("You breathe frost.");
+        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(ColdProjectile)), dir, 110, -2);
+        item.RechargeTimeLeft = SaveGame.Rng.RandomLessThan(450) + 450;
+    }
     public override string? DescribeActivationEffect => "breathe frost (110) every 450+d450 turns";
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(OpenBraceSymbol));
     public override string Name => "White Dragon Scale Mail";
@@ -35,5 +43,5 @@ internal class WhiteDragonScaleMailArmorItemFactory : DragonScaleMailArmorItemFa
     public override int ToA => 10;
     public override int ToH => -2;
     public override int Weight => 200;
-    public override Item CreateItem() => new WhiteDragonScaleMailArmorItem(SaveGame);
+    public override Item CreateItem() => new Item(SaveGame, this);
 }

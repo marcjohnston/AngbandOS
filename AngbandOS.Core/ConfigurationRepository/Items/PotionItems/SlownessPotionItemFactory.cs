@@ -5,7 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.ItemCategories;
+namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
 internal class SlownessPotionItemFactory : PotionItemFactory
@@ -21,7 +21,7 @@ internal class SlownessPotionItemFactory : PotionItemFactory
     public override string FriendlyName => "Slowness";
     public override int Level => 1;
     public override int[] Locale => new int[] { 1, 0, 0, 0 };
-    public override int Pval => 50;
+    public override int InitialTypeSpecificValue => 50;
     public override int Weight => 4;
 
     public override bool Quaff()
@@ -35,5 +35,5 @@ internal class SlownessPotionItemFactory : PotionItemFactory
         SaveGame.Project(who, 2, y, x, 5, SaveGame.SingletonRepository.Projectiles.Get(nameof(OldSlowProjectile)), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
         return true;
     }
-    public override Item CreateItem() => new SlownessPotionItem(SaveGame);
+    public override Item CreateItem() => new Item(SaveGame, this);
 }

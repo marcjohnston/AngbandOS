@@ -5,7 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.ItemCategories;
+namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
 internal class StupidityMushroomFoodItemFactory : MushroomFoodItemFactory
@@ -19,7 +19,7 @@ internal class StupidityMushroomFoodItemFactory : MushroomFoodItemFactory
     public override string FriendlyName => "Stupidity";
     public override int Level => 15;
     public override int[] Locale => new int[] { 15, 0, 0, 0 };
-    public override int Pval => 500;
+    public override int InitialTypeSpecificValue => 500;
     public override int Weight => 1;
     public override bool Eat()
     {
@@ -28,5 +28,5 @@ internal class StupidityMushroomFoodItemFactory : MushroomFoodItemFactory
         SaveGame.TryDecreasingAbilityScore(Ability.Intelligence);
         return true;
     }
-    public override Item CreateItem() => new StupidityMushroomFoodItem(SaveGame);
+    public override Item CreateItem() => new Item(SaveGame, this);
 }

@@ -5,7 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.ItemCategories;
+namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
 internal class DwarfSkeletonSkeletonItemFactory : SkeletonItemFactory
@@ -23,5 +23,5 @@ internal class DwarfSkeletonSkeletonItemFactory : SkeletonItemFactory
     public override int Level => 5;
     public override int[] Locale => new int[] { 5, 0, 0, 0 };
     public override int Weight => 50;
-    public override Item CreateItem() => new DwarfSkeletonItem(SaveGame);
+    public override Item CreateItem() => new Item(SaveGame, this);
 }

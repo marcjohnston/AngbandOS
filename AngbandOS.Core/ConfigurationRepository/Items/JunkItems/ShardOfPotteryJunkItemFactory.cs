@@ -5,7 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.ItemCategories;
+namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
 internal class ShardOfPotteryJunkItemFactory : JunkItemFactory
@@ -21,5 +21,5 @@ internal class ShardOfPotteryJunkItemFactory : JunkItemFactory
     public override int Ds => 1;
     public override string FriendlyName => "& Shard~ of Pottery";
     public override int Weight => 5;
-    public override Item CreateItem() => new ShardOfPotteryJunkItem(SaveGame);
+    public override Item CreateItem() => new Item(SaveGame, this);
 }

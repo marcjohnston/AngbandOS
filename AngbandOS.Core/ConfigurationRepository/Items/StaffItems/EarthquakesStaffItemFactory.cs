@@ -5,7 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.ItemCategories;
+namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
 internal class EarthquakesStaffItemFactory : StaffItemFactory
@@ -32,5 +32,5 @@ internal class EarthquakesStaffItemFactory : StaffItemFactory
         SaveGame.Earthquake(SaveGame.MapY, SaveGame.MapX, 10);
         eventArgs.Identified = true;
     }
-    public override Item CreateItem() => new EarthquakesStaffItem(SaveGame);
+    public override Item CreateItem() => new Item(SaveGame, this);
 }

@@ -5,7 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.ItemCategories;
+namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
 internal class RestoreLifeLevelsPotionItemFactory : PotionItemFactory
@@ -28,5 +28,5 @@ internal class RestoreLifeLevelsPotionItemFactory : PotionItemFactory
         // Restore life levels restores any lost experience
         return SaveGame.RunSuccessfulScript(nameof(RestoreLevelScript));
     }
-    public override Item CreateItem() => new RestoreLifeLevelsPotionItem(SaveGame);
+    public override Item CreateItem() => new Item(SaveGame, this);
 }

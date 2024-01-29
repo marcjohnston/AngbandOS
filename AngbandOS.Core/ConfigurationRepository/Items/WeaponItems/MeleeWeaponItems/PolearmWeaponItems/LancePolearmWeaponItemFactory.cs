@@ -5,7 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.ItemCategories;
+namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
 internal class LancePolearmWeaponItemFactory : PolearmWeaponItemFactory
@@ -25,5 +25,5 @@ internal class LancePolearmWeaponItemFactory : PolearmWeaponItemFactory
     public override int[] Locale => new int[] { 10, 0, 0, 0 };
     public override bool ShowMods => true;
     public override int Weight => 300;
-    public override Item CreateItem() => new LancePolearmWeaponItem(SaveGame);
+    public override Item CreateItem() => new Item(SaveGame, this);
 }

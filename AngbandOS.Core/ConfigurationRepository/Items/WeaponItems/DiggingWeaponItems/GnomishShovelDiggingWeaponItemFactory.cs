@@ -5,7 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.ItemCategories;
+namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
 internal class GnomishShovelDiggingWeaponItemFactory : DiggingWeaponItemFactory
@@ -23,9 +23,9 @@ internal class GnomishShovelDiggingWeaponItemFactory : DiggingWeaponItemFactory
     public override string FriendlyName => "& Gnomish Shovel~";
     public override int Level => 20;
     public override int[] Locale => new int[] { 20, 0, 0, 0 };
-    public override int Pval => 2;
+    public override int InitialTypeSpecificValue => 2;
     public override bool ShowMods => true;
     public override bool Tunnel => true;
     public override int Weight => 60;
-    public override Item CreateItem() => new GnomishShovelDiggingWeaponItem(SaveGame);
+    public override Item CreateItem() => new Item(SaveGame, this);
 }

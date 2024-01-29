@@ -5,7 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.ItemCategories;
+namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
 internal class LiberIvonisSorceryBookItemFactory : SorceryBookItemFactory
@@ -14,6 +14,12 @@ internal class LiberIvonisSorceryBookItemFactory : SorceryBookItemFactory
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(QuestionMarkSymbol));
     public override ColorEnum Color => ColorEnum.Blue;
+
+    /// <summary>
+    /// Returns a divisor of 1 because this is the most powerful book for this realm of magic.  Destroying this book provides the most experience.
+    /// </summary>
+    public override int ExperienceGainDivisorForDestroying => 1;
+
     public override string Name => "[Liber Ivonis]";
 
     public override int[] Chance => new int[] { 3, 0, 0, 0 };
@@ -34,7 +40,7 @@ internal class LiberIvonisSorceryBookItemFactory : SorceryBookItemFactory
     public override bool IsHighLevelBook => true;
     public override int Weight => 30;
     public override bool KindIsGood => true;
-    public override Item CreateItem() => new LiberIvonisSorceryBookItem(SaveGame);
+    public override Item CreateItem() => new Item(SaveGame, this);
 
     public override Spell[] Spells => new Spell[]
     {

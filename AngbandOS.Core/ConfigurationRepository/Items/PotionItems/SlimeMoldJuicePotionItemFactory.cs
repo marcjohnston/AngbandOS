@@ -5,7 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.ItemCategories;
+namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
 internal class SlimeMoldJuicePotionItemFactory : PotionItemFactory
@@ -20,7 +20,7 @@ internal class SlimeMoldJuicePotionItemFactory : PotionItemFactory
     public override int Dd => 1;
     public override int Ds => 1;
     public override string FriendlyName => "Slime Mold Juice";
-    public override int Pval => 400;
+    public override int InitialTypeSpecificValue => 400;
     public override int Weight => 4;
     public override bool Quaff()
     {
@@ -163,5 +163,5 @@ internal class SlimeMoldJuicePotionItemFactory : PotionItemFactory
                 throw new Exception("Invalid random potion chosen.");
         }
     }
-    public override Item CreateItem() => new SlimeMoldJuicePotionItem(SaveGame);
+    public override Item CreateItem() => new Item(SaveGame, this);
 }

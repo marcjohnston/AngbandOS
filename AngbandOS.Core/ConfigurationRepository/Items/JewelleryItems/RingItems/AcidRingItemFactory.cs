@@ -5,13 +5,23 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.ItemCategories;
+namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
-internal class AcidRingItemFactory : RingItemFactory
+internal class AcidRingItemFactory : RingItemFactory, IItemsCanBeActivated
 {
     private AcidRingItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
+    public void ActivateItem(Item item)
+    {
+        if (!SaveGame.GetDirectionWithAim(out int dir))
+        {
+            return;
+        }
+        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(AcidProjectile)), dir, 50, 2);
+        SaveGame.TimedAcidResistance.AddTimer(SaveGame.Rng.DieRoll(20) + 20);
+        item.RechargeTimeLeft = SaveGame.Rng.RandomLessThan(50) + 50;
+    }
     public override void ApplyMagic(Item item, int level, int power, Store? store)
     {
         item.BonusArmorClass = 5 + SaveGame.Rng.DieRoll(5) + item.GetBonusValue(10, level);
@@ -30,5 +40,5 @@ internal class AcidRingItemFactory : RingItemFactory
     public override bool ResAcid => true;
     public override int ToA => 15;
     public override int Weight => 2;
-    public override Item CreateItem() => new AcidRingItem(SaveGame);
+    public override Item CreateItem() => new Item(SaveGame, this);
 }

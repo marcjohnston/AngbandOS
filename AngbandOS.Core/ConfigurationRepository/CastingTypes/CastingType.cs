@@ -53,9 +53,10 @@ internal class CastingType : IGetKey<string>
     /// </summary>
     public virtual bool CanUseManaInsteadOfConsumingItem => false;
 
-    public virtual string GetBookTitle(BookItem bookItem)
+    public virtual string GetBookTitle(Item bookItem)
     {
-        return $"{bookItem.RealmName} {Pluralize("Spellbook", bookItem.Count)}";
+        BookItemFactory bookItemFactory = (BookItemFactory)bookItem.Factory;
+        return $"{bookItemFactory.RealmName} {Pluralize("Spellbook", bookItem.Count)}";
     }
     /// <summary>
     /// Cast a spell.  SaveGame.DoCast is called by default.  Mentalism casting type calls SaveGame.DoMentalism.
@@ -87,11 +88,10 @@ internal class CastingType : IGetKey<string>
         {
             return;
         }
-        BookItem bookItem = (BookItem)oPtr;
         SaveGame.HandleStuff();
 
         // Allow the player to select the spell.
-        if (!SaveGame.GetSpell(out Spell? sPtr, SaveGame.BaseCharacterClass.SpellCastingType.CastVerb, bookItem, true))
+        if (!SaveGame.GetSpell(out Spell? sPtr, SaveGame.BaseCharacterClass.SpellCastingType.CastVerb, oPtr, true))
         {
             SaveGame.MsgPrint($"You don't know any {prayer}s in that book.");
             return;

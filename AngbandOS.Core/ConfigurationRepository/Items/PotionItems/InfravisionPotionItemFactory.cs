@@ -5,7 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.ItemCategories;
+namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
 internal class InfravisionPotionItemFactory : PotionItemFactory
@@ -28,5 +28,5 @@ internal class InfravisionPotionItemFactory : PotionItemFactory
         // Infravision gives you timed infravision
         return SaveGame.TimedInfravision.AddTimer(100 + SaveGame.Rng.DieRoll(100));
     }
-    public override Item CreateItem() => new InfravisionPotionItem(SaveGame);
+    public override Item CreateItem() => new Item(SaveGame, this);
 }

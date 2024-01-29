@@ -5,9 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-using AngbandOS.Core.Items;
-
-namespace AngbandOS.Core.ItemCategories;
+namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
 internal class DetectInvisiblePotionItemFactory : PotionItemFactory
@@ -30,5 +28,5 @@ internal class DetectInvisiblePotionItemFactory : PotionItemFactory
         // Detect invisible gives you times see invisibility
         return SaveGame.TimedSeeInvisibility.AddTimer(12 + SaveGame.Rng.DieRoll(12));
     }
-    public override Item CreateItem() => new DetectInvisiblePotionItem(SaveGame);
+    public override Item CreateItem() => new Item(SaveGame, this);
 }

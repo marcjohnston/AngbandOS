@@ -37,8 +37,8 @@ internal class EatLightRandomMutation : Mutation
         Item? oPtr = SaveGame.GetInventoryItem(index);
         if (oPtr != null)
         {
-            LightSourceItem? lightSourceItem = oPtr.TryCast<LightSourceItem>();
-            if (lightSourceItem != null && lightSourceItem.Factory.BurnRate > 0 && oPtr.TypeSpecificValue > 0)
+            LightSourceItemFactory? lightSourceItemFactory = oPtr.TryGetFactory<LightSourceItemFactory>();
+            if (lightSourceItemFactory != null && lightSourceItemFactory.BurnRate > 0 && oPtr.TypeSpecificValue > 0)
             {
                 SaveGame.RestoreHealth(oPtr.TypeSpecificValue / 20);
                 oPtr.TypeSpecificValue /= 2;

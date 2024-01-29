@@ -33,8 +33,8 @@ internal class WizardCreateItemScript : Script, IScript
         {
             return;
         }
-        ItemFactory itemClass = SaveGame.SingletonRepository.ItemFactories[kIdx];
-        Item qPtr = itemClass.CreateItem();
+        ItemFactory itemFactory = SaveGame.SingletonRepository.ItemFactories[kIdx];
+        Item qPtr = itemFactory.CreateItem();
         qPtr.ApplyMagic(SaveGame.Difficulty, false, false, false, null);
         SaveGame.DropNear(qPtr, -1, SaveGame.MapY, SaveGame.MapX);
         SaveGame.MsgPrint("Allocated.");

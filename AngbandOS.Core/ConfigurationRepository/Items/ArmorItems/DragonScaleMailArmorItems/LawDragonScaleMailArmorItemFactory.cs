@@ -5,13 +5,25 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.ItemCategories;
+namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
-internal class LawDragonScaleMailArmorItemFactory : DragonScaleMailArmorItemFactory
+internal class LawDragonScaleMailArmorItemFactory : DragonScaleMailArmorItemFactory, IItemsCanBeActivated
 {
     private LawDragonScaleMailArmorItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
+    public void ActivateItem(Item item)
+    {
+        if (!SaveGame.GetDirectionWithAim(out int dir))
+        {
+            return;
+        }
+        int chance = SaveGame.Rng.RandomLessThan(2);
+        string element = chance == 1 ? "sound" : "shards";
+        SaveGame.MsgPrint($"You breathe {element}.");
+        SaveGame.FireBall(chance == 1 ? (Projectile)SaveGame.SingletonRepository.Projectiles.Get(nameof(SoundProjectile)) : SaveGame.SingletonRepository.Projectiles.Get(nameof(ExplodeProjectile)), dir, 230, -2);
+        item.RechargeTimeLeft = SaveGame.Rng.RandomLessThan(300) + 300;
+    }
     public override string? DescribeActivationEffect => "breathe sound/shards (230) every 300+d300 turns";
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(OpenBraceSymbol));
     public override ColorEnum Color => ColorEnum.Grey;
@@ -35,5 +47,5 @@ internal class LawDragonScaleMailArmorItemFactory : DragonScaleMailArmorItemFact
     public override int ToA => 10;
     public override int ToH => -2;
     public override int Weight => 200;
-    public override Item CreateItem() => new LawDragonScaleMailArmorItem(SaveGame);
+    public override Item CreateItem() => new Item(SaveGame, this);
 }

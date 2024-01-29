@@ -5,7 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.ItemCategories;
+namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
 internal class AcidBoltsRodItemFactory : RodItemFactory
@@ -30,5 +30,5 @@ internal class AcidBoltsRodItemFactory : RodItemFactory
         zapRodEvent.Identified = true;
         zapRodEvent.Item.TypeSpecificValue = 12;
     }
-    public override Item CreateItem() => new AcidBoltsRodItem(SaveGame);
+    public override Item CreateItem() => new Item(SaveGame, this);
 }

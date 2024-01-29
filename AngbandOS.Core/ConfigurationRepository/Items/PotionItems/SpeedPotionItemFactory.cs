@@ -5,7 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.ItemCategories;
+namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
 internal class SpeedPotionItemFactory : PotionItemFactory
@@ -45,5 +45,5 @@ internal class SpeedPotionItemFactory : PotionItemFactory
         SaveGame.Project(who, 2, y, x, 0, SaveGame.SingletonRepository.Projectiles.Get(nameof(OldSpeedProjectile)), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
         return false;
     }
-    public override Item CreateItem() => new SpeedPotionItem(SaveGame);
+    public override Item CreateItem() => new Item(SaveGame, this);
 }

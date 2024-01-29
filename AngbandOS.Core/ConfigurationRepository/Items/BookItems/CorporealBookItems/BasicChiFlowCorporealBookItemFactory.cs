@@ -5,7 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.ItemCategories;
+namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
 internal class BasicChiFlowCorporealBookItemFactory : CorporealBookItemFactory
@@ -25,7 +25,7 @@ internal class BasicChiFlowCorporealBookItemFactory : CorporealBookItemFactory
     public override int[] Locale => new int[] { 10, 0, 0, 0 };
     public override int Weight => 30;
     public override bool KindIsGood => false;
-    public override Item CreateItem() => new BasicChiFlowCorporealBookItem(SaveGame);
+    public override Item CreateItem() => new Item(SaveGame, this);
 
     public override Spell[] Spells => new Spell[]
     {

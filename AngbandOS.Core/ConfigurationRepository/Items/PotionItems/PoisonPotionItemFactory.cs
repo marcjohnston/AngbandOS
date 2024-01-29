@@ -5,7 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.ItemCategories;
+namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
 internal class PoisonPotionItemFactory : PotionItemFactory
@@ -46,5 +46,5 @@ internal class PoisonPotionItemFactory : PotionItemFactory
         SaveGame.Project(who, 2, y, x, 3, SaveGame.SingletonRepository.Projectiles.Get(nameof(PoisProjectile)), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
         return true;
     }
-    public override Item CreateItem() => new PoisonPotionItem(SaveGame);
+    public override Item CreateItem() => new Item(SaveGame, this);
 }

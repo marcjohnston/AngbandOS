@@ -77,10 +77,11 @@ internal class SkeletonRace : Race
     public override bool RestsTillDuskInsteadOfDawn => true;
 
     // Skeletons get no food sustenance
-    public override void Eat(FoodItem item)
+    public override void Eat(Item item)
     {
         // Check to see if the food item is a waybread, warpstones or a biscuit.
-        if (item.Factory.VanishesWhenEatenBySkeletons)
+        FoodItemFactory foodItemFactory = (FoodItemFactory)item.Factory;
+        if (foodItemFactory.VanishesWhenEatenBySkeletons)
         {
             // These magical food types vanish.
             SaveGame.MsgPrint("The food falls through your jaws and vanishes!");

@@ -5,7 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.ItemCategories;
+namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
 internal class SoftStuddedLeatherSoftArmorItemFactory : SoftArmorItemFactory
@@ -25,5 +25,5 @@ internal class SoftStuddedLeatherSoftArmorItemFactory : SoftArmorItemFactory
     public override int Level => 3;
     public override int[] Locale => new int[] { 3, 0, 0, 0 };
     public override int Weight => 90;
-    public override Item CreateItem() => new SoftStuddedLeatherSoftArmorItem(SaveGame);
+    public override Item CreateItem() => new Item(SaveGame, this);
 }

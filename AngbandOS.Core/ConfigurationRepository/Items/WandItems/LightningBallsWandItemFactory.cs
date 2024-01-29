@@ -5,7 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.ItemCategories;
+namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
 internal class LightningBallsWandItemFactory : WandItemFactory
@@ -33,5 +33,5 @@ internal class LightningBallsWandItemFactory : WandItemFactory
         saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get(nameof(ElecProjectile)), dir, 32, 2);
         return true;
     }
-    public override Item CreateItem() => new LightningBallsWandItem(SaveGame);
+    public override Item CreateItem() => new Item(SaveGame, this);
 }

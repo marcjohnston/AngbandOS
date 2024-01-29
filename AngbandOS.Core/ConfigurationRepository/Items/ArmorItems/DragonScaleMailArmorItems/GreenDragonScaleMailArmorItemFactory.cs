@@ -5,13 +5,23 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.ItemCategories;
+namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
-internal class GreenDragonScaleMailArmorItemFactory : DragonScaleMailArmorItemFactory
+internal class GreenDragonScaleMailArmorItemFactory : DragonScaleMailArmorItemFactory, IItemsCanBeActivated
 {
     private GreenDragonScaleMailArmorItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
+    public void ActivateItem(Item item)
+    {
+        if (!SaveGame.GetDirectionWithAim(out int dir))
+        {
+            return;
+        }
+        SaveGame.MsgPrint("You breathe poison gas.");
+        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(PoisProjectile)), dir, 150, -2);
+        item.RechargeTimeLeft = SaveGame.Rng.RandomLessThan(450) + 450;
+    }
     public override string? DescribeActivationEffect => "breathe poison gas (150) every 450+d450 turns";
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(OpenBraceSymbol));
     public override ColorEnum Color => ColorEnum.Green;
@@ -34,5 +44,5 @@ internal class GreenDragonScaleMailArmorItemFactory : DragonScaleMailArmorItemFa
     public override int ToA => 10;
     public override int ToH => -2;
     public override int Weight => 200;
-    public override Item CreateItem() => new GreenDragonScaleMailArmorItem(SaveGame);
+    public override Item CreateItem() => new Item(SaveGame, this);
 }

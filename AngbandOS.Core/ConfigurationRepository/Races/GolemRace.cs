@@ -80,7 +80,7 @@ internal class GolemRace : Race
         SaveGame.DisplayedArmorClassBonus += 20 + (SaveGame.ExperienceLevel / 5);
     }
 
-    public override void Eat(FoodItem item)
+    public override void Eat(Item item)
     {
         // This race only gets 1/20th of the food value
         SaveGame.MsgPrint("The food of mortals is poor sustenance for you.");

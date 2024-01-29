@@ -5,7 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.ItemCategories;
+namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
 internal class BoozePotionItemFactory : PotionItemFactory
@@ -19,7 +19,7 @@ internal class BoozePotionItemFactory : PotionItemFactory
     public override int Dd => 1;
     public override int Ds => 1;
     public override string FriendlyName => "Booze";
-    public override int Pval => 50;
+    public override int InitialTypeSpecificValue => 50;
     public override int Weight => 4;
     public override bool Quaff()
     {
@@ -67,5 +67,5 @@ internal class BoozePotionItemFactory : PotionItemFactory
         SaveGame.Project(who, 2, y, x, 0, SaveGame.SingletonRepository.Projectiles.Get(nameof(OldConfProjectile)), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
         return true;
     }
-    public override Item CreateItem() => new BoozePotionItem(SaveGame);
+    public override Item CreateItem() => new Item(SaveGame, this);
 }

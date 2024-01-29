@@ -39,8 +39,8 @@ internal class EatScript : Script, IScript, IRepeatableScript
         }
 
         // Make sure the item is edible
-        FoodItem? foodItem = item.TryCast<FoodItem>();
-        if (foodItem == null)
+        FoodItemFactory? foodItemFactory = item.TryGetFactory<FoodItemFactory>();
+        if (foodItemFactory == null)
         {
             SaveGame.MsgPrint("You can't eat that!");
             return;
@@ -51,7 +51,7 @@ internal class EatScript : Script, IScript, IRepeatableScript
         int itemLevel = item.Factory.Level;
 
         // Allow the food item to process the consumption.
-        bool ident = foodItem.Factory.Eat();
+        bool ident = foodItemFactory.Eat();
 
         SaveGame.SingletonRepository.FlaggedActions.Get(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
 
@@ -66,10 +66,10 @@ internal class EatScript : Script, IScript, IRepeatableScript
         }
 
         // Now races process the sustenance.
-        SaveGame.Race.Eat(foodItem);
+        SaveGame.Race.Eat(item);
 
         // Dwarf bread isn't actually eaten so return early
-        if (!foodItem.Factory.IsConsumedWhenEaten)
+        if (!foodItemFactory.IsConsumedWhenEaten)
         {
             return;
         }

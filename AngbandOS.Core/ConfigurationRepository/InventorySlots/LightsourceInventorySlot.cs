@@ -36,13 +36,14 @@ internal class LightsourceInventorySlot : EquipmentInventorySlot
         int maxLight = 0; // The amount of light remaining on the lightsource with the most light.
         foreach (int index in InventorySlots)
         {
-            LightSourceItem? oPtr = (LightSourceItem?)SaveGame.GetInventoryItem(index);
+            Item? oPtr = SaveGame.GetInventoryItem(index);
             if (oPtr != null && oPtr.Category == ItemTypeEnum.Light)
             {
-                if (oPtr.Factory.BurnRate > 0 && oPtr.TypeSpecificValue > 0)
+                LightSourceItemFactory lightSourceItemFactory = (LightSourceItemFactory)oPtr.Factory;
+                if (lightSourceItemFactory.BurnRate > 0 && oPtr.TypeSpecificValue > 0)
                 {
                     hadLight = true;
-                    oPtr.TypeSpecificValue -= oPtr.Factory.BurnRate;
+                    oPtr.TypeSpecificValue -= lightSourceItemFactory.BurnRate;
 
                     // If the player is blind, do not allow the light to go out completely.
                     if (SaveGame.TimedBlindness.TurnsRemaining != 0)

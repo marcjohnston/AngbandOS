@@ -124,8 +124,8 @@ internal class ActivateScript : Script, IScript, IRepeatableScript, ISuccessfulS
         // Check to see if the item can be activated.
         if (item.Factory.Activate)
         {
-            IItemActivatable activatibleItem = (IItemActivatable)item;
-            activatibleItem.DoActivate();
+            IItemsCanBeActivated factory = (IItemsCanBeActivated)item.Factory;
+            factory.ActivateItem(item);
             return true;
         }
 

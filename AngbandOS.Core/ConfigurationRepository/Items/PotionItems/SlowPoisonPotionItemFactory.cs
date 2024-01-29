@@ -5,7 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.ItemCategories;
+namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
 internal class SlowPoisonPotionItemFactory : PotionItemFactory
@@ -28,5 +28,5 @@ internal class SlowPoisonPotionItemFactory : PotionItemFactory
         // Slow poison halves the remaining duration of any poison you have
         return SaveGame.TimedPoison.SetTimer(SaveGame.TimedPoison.TurnsRemaining / 2);
     }
-    public override Item CreateItem() => new SlowPoisonPotionItem(SaveGame);
+    public override Item CreateItem() => new Item(SaveGame, this);
 }

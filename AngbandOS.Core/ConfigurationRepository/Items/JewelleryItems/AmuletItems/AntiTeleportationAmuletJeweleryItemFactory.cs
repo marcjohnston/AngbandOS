@@ -5,9 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-using AngbandOS.Core.Items;
-
-namespace AngbandOS.Core.ItemCategories;
+namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
 internal class AntiTeleportationAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
@@ -36,5 +34,5 @@ internal class AntiTeleportationAmuletJeweleryItemFactory : AmuletJeweleryItemFa
     public override bool NoTele => true;
     public override int Weight => 3;
 
-    public override Item CreateItem() => new AntiTeleportationAmuletJeweleryItem(SaveGame);
+    public override Item CreateItem() => new Item(SaveGame, this);
 }

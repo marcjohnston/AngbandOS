@@ -7,7 +7,7 @@
 
 using AngbandOS.Core.ConfigurationRepository.ItemMatchingCriterion;
 
-namespace AngbandOS.Core.ItemCategories;
+namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
 internal class BrassLanternLightSourceItemFactory : LightSourceItemFactory
@@ -65,7 +65,7 @@ internal class BrassLanternLightSourceItemFactory : LightSourceItemFactory
     public override bool IgnoreFire => true;
     public override int Level => 3;
     public override int[] Locale => new int[] { 3, 0, 0, 0 };
-    public override int Pval => 7500;
+    public override int InitialTypeSpecificValue => 7500;
     public override int Weight => 50;
 
     /// <summary>
@@ -113,5 +113,5 @@ internal class BrassLanternLightSourceItemFactory : LightSourceItemFactory
         fuelSource.ItemOptimize();
         SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateTorchRadiusFlaggedAction)).Set();
     }
-    public override Item CreateItem() => new BrassLanternLightSourceItem(SaveGame);
+    public override Item CreateItem() => new Item(SaveGame, this);
 }

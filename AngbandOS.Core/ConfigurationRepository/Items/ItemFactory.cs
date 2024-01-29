@@ -5,7 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.ItemClasses;
+namespace AngbandOS.Core.ItemFactories;
 
 /// <summary>
 /// Represents different variations (ItemType) of item categories (ItemCategory).  E.g. different types of food that belong to the food category.  Several of the
@@ -362,12 +362,12 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey<string>
     }
 
     /// <summary>
-    /// Applies magic to the item.  Does nothing, by default.
+    /// Applies magic to the item.  Does nothing, by default.  This apply magic method is called after an object is created (new Item())
     /// </summary>
     /// <param name="item"></param>
     /// <param name="level"></param>
     /// <param name="power"></param>
-    public virtual void ApplyMagic(Item item, int level, int power, Store? store) { }
+    public virtual void ApplyMagic(Item item, int level, int power, Store? store) { } // TODO: Needs to be built into the new Item(), should be renamed
 
     /// <summary>
     /// Hook into the ProcessWorld, when the item is being carried in a pack inventory slot.  Does nothing, by default..
@@ -811,7 +811,13 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey<string>
     public virtual bool NoMagic { get; set; } = false;
     public virtual bool NoTele { get; set; } = false;
     public virtual bool PermaCurse { get; set; } = false;
-    public virtual int Pval => 0;
+
+    /// <summary>
+    /// Returns the initial value to be assigned to the type specific value.  Most items will override a default value.  Gold will
+    /// compute a value based on the cost property.
+    /// </summary>
+    public virtual int InitialTypeSpecificValue => 0;
+
     public virtual bool Reflect { get; set; } = false;
     public virtual bool Regen { get; set; } = false;
     public virtual bool ResAcid { get; set; } = false;

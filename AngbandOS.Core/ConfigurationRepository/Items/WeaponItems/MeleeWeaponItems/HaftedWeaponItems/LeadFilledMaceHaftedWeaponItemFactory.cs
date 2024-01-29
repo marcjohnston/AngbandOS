@@ -5,7 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.ItemCategories;
+namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
 internal class LeadFilledMaceHaftedWeaponItemFactory : HaftedWeaponItemFactory
@@ -25,5 +25,5 @@ internal class LeadFilledMaceHaftedWeaponItemFactory : HaftedWeaponItemFactory
     public override int[] Locale => new int[] { 15, 0, 0, 0 };
     public override bool ShowMods => true;
     public override int Weight => 180;
-    public override Item CreateItem() => new LeadFilledMaceHaftedWeaponItem(SaveGame);
+    public override Item CreateItem() => new Item(SaveGame, this);
 }

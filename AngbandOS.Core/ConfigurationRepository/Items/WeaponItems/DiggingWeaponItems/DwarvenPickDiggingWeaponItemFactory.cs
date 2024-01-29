@@ -5,7 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.ItemCategories;
+namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
 internal class DwarvenPickDiggingWeaponItemFactory : DiggingWeaponItemFactory
@@ -23,9 +23,9 @@ internal class DwarvenPickDiggingWeaponItemFactory : DiggingWeaponItemFactory
     public override string FriendlyName => "& Dwarven Pick~";
     public override int Level => 50;
     public override int[] Locale => new int[] { 50, 0, 0, 0 };
-    public override int Pval => 3;
+    public override int InitialTypeSpecificValue => 3;
     public override bool ShowMods => true;
     public override bool Tunnel => true;
     public override int Weight => 200;
-    public override Item CreateItem() => new DwarvenPickDiggingWeaponItem(SaveGame);
+    public override Item CreateItem() => new Item(SaveGame, this);
 }

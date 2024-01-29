@@ -5,7 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.ItemCategories;
+namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
 internal class PintOfFineWineFoodItemFactory : FoodItemFactory
@@ -18,7 +18,7 @@ internal class PintOfFineWineFoodItemFactory : FoodItemFactory
 
     public override int Cost => 2;
     public override string FriendlyName => "& Pint~ of Fine Wine";
-    public override int Pval => 1000;
+    public override int InitialTypeSpecificValue => 1000;
     public override int Weight => 10;
     public override bool Eat()
     {
@@ -26,5 +26,5 @@ internal class PintOfFineWineFoodItemFactory : FoodItemFactory
         SaveGame.MsgPrint("That tastes good.");
         return true;
     }
-    public override Item CreateItem() => new PintOfFineWineFoodItem(SaveGame);
+    public override Item CreateItem() => new Item(SaveGame, this);
 }

@@ -5,7 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.ItemCategories;
+namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
 internal class LordlyProtectionRingItemFactory : RingItemFactory
@@ -35,5 +35,5 @@ internal class LordlyProtectionRingItemFactory : RingItemFactory
     public override bool ResDisen => true;
     public override bool ResPois => true;
     public override int Weight => 2;
-    public override Item CreateItem() => new LordlyProtectionRingItem(SaveGame);
+    public override Item CreateItem() => new Item(SaveGame, this);
 }

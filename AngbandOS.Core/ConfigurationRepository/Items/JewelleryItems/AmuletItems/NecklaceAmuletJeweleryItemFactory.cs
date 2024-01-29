@@ -5,7 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.ItemCategories;
+namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
 internal class NecklaceAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
@@ -20,5 +20,5 @@ internal class NecklaceAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
     public override bool InstaArt => true;
     public override int Level => 70;
     public override int Weight => 3;
-    public override Item CreateItem() => new NecklaceAmuletJeweleryItem(SaveGame);
+    public override Item CreateItem() => new Item(SaveGame, this);
 }

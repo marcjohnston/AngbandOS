@@ -5,7 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.ItemCategories;
+namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
 internal class AdamantitePlateMailHardArmorItemFactory : HardArmorItemFactory
@@ -27,5 +27,5 @@ internal class AdamantitePlateMailHardArmorItemFactory : HardArmorItemFactory
     public override int[] Locale => new int[] { 75, 0, 0, 0 };
     public override int ToH => -4;
     public override int Weight => 420;
-    public override Item CreateItem() => new AdamantitePlateMailHardArmorItem(SaveGame);
+    public override Item CreateItem() => new Item(SaveGame, this);
 }

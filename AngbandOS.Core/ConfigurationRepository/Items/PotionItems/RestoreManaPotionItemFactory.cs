@@ -5,7 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.ItemCategories;
+namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
 internal class RestoreManaPotionItemFactory : PotionItemFactory
@@ -42,5 +42,5 @@ internal class RestoreManaPotionItemFactory : PotionItemFactory
         SaveGame.Project(who, 1, y, x, SaveGame.Rng.DiceRoll(10, 10), SaveGame.SingletonRepository.Projectiles.Get(nameof(ManaProjectile)), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
         return false;
     }
-    public override Item CreateItem() => new RestoreManaPotionItem(SaveGame);
+    public override Item CreateItem() => new Item(SaveGame, this);
 }

@@ -5,7 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.ItemCategories;
+namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
 internal class BoldnessPotionItemFactory : PotionItemFactory
@@ -28,5 +28,5 @@ internal class BoldnessPotionItemFactory : PotionItemFactory
         // Boldness stops you being afraid
         return SaveGame.TimedFear.ResetTimer();
     }
-    public override Item CreateItem() => new BoldnessPotionItem(SaveGame);
+    public override Item CreateItem() => new Item(SaveGame, this);
 }

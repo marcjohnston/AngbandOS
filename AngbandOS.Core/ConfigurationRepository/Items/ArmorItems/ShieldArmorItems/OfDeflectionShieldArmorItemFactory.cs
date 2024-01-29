@@ -5,7 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.ItemCategories;
+namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
 internal class OfDeflectionShieldArmorItemFactory : ShieldArmorItemFactory
@@ -27,5 +27,5 @@ internal class OfDeflectionShieldArmorItemFactory : ShieldArmorItemFactory
     public override int[] Locale => new int[] { 70, 0, 0, 0 };
     public override int ToA => 10;
     public override int Weight => 100;
-    public override Item CreateItem() => new OfDeflectionShieldArmorItem(SaveGame);
+    public override Item CreateItem() => new Item(SaveGame, this);
 }

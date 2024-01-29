@@ -5,13 +5,23 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.ItemCategories;
+namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
-internal class PowerDragonScaleMailArmorItemFactory : DragonScaleMailArmorItemFactory
+internal class PowerDragonScaleMailArmorItemFactory : DragonScaleMailArmorItemFactory, IItemsCanBeActivated
 {
     private PowerDragonScaleMailArmorItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
+    public void ActivateItem(Item item)
+    {
+        if (!SaveGame.GetDirectionWithAim(out int dir))
+        {
+            return;
+        }
+        SaveGame.MsgPrint("You breathe the elements.");
+        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(MissileProjectile)), dir, 300, -3);
+        item.RechargeTimeLeft = SaveGame.Rng.RandomLessThan(300) + 300;
+    }
     public override string? DescribeActivationEffect => "breathe the elements (300) every 300+d300 turns";
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(OpenBraceSymbol));
     public override ColorEnum Color => ColorEnum.Yellow;
@@ -47,5 +57,5 @@ internal class PowerDragonScaleMailArmorItemFactory : DragonScaleMailArmorItemFa
     public override int ToA => 15;
     public override int ToH => -3;
     public override int Weight => 250;
-    public override Item CreateItem() => new PowerDragonScaleMailArmorItem(SaveGame);
+    public override Item CreateItem() => new Item(SaveGame, this);
 }

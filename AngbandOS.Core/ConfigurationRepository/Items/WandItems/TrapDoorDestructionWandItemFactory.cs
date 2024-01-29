@@ -5,7 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.ItemCategories;
+namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
 internal class TrapDoorDestructionWandItemFactory : WandItemFactory
@@ -32,5 +32,5 @@ internal class TrapDoorDestructionWandItemFactory : WandItemFactory
     {
         return saveGame.DestroyDoor(dir);
     }
-    public override Item CreateItem() => new TrapDoorDestructionWandItem(SaveGame);
+    public override Item CreateItem() => new Item(SaveGame, this);
 }

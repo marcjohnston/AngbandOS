@@ -141,7 +141,7 @@ internal abstract class Race : IGetKey<string>
     /// </summary>
     /// <param name="saveGame"></param>
     /// <param name="item"></param>
-    public virtual void Eat(FoodItem item)
+    public virtual void Eat(Item item)
     {
         // Everyone else gets the full value
         SaveGame.SetFood(SaveGame.Food + item.TypeSpecificValue);

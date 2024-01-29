@@ -1514,7 +1514,7 @@ internal class SaveGame
     /// Returns the one-in-probability that found gold is great.
     /// </summary>
     public int OneInProbabilityGoldItemIsGreat => 20;
-    public GoldItem MakeGold(int? goldType = null)
+    public Item MakeGold(int? goldType = null)
     {
         if (goldType == null)
         {
@@ -1529,13 +1529,13 @@ internal class SaveGame
         }
 
         // Get a list of all of the item classes that are considered gold.  Sort them by the cost.
-        ItemFactory[] goldItemClasses = SingletonRepository.ItemFactories.Where(_itemClass => _itemClass.TryCast<GoldItemFactory>() != null).OrderBy(_goldItemClass => _goldItemClass.Cost).ToArray();
+        ItemFactory[] goldItemFactories = SingletonRepository.ItemFactories.Where(_itemClass => _itemClass.TryCast<GoldItemFactory>() != null).OrderBy(_goldItemClass => _goldItemClass.Cost).ToArray();
 
-        if (goldType >= goldItemClasses.Length)
+        if (goldType >= goldItemFactories.Length)
         {
-            goldType = goldItemClasses.Length - 1;
+            goldType = goldItemFactories.Length - 1;
         }
-        return (GoldItem)goldItemClasses[goldType.Value].CreateItem();
+        return goldItemFactories[goldType.Value].CreateItem();
     }
 
     public int GetMonsterIndexFromName(string name)
@@ -2489,7 +2489,7 @@ internal class SaveGame
         {
             if (doGold && (!doItem || Rng.RandomLessThan(100) < 50))
             {
-                GoldItem qPtr = MakeGold(forceCoin);
+                Item qPtr = MakeGold(forceCoin);
                 DropNear(qPtr, -1, y, x);
                 dumpGold++;
             }
@@ -7633,13 +7633,13 @@ internal class SaveGame
             MsgPrint("You are not wielding a light source.");
             return;
         }
-        LightSourceItem? lightSourceItem = item.TryCast<LightSourceItem>();
-        if (lightSourceItem == null)
+        LightSourceItemFactory? lightSourceItemFactory = item.TryGetFactory<LightSourceItemFactory>();
+        if (lightSourceItemFactory == null)
         {
             return;
         }
         // Maximum phlogiston is the capacity of the light source
-        int? maxPhlogiston = lightSourceItem.Factory.MaxPhlogiston;
+        int? maxPhlogiston = lightSourceItemFactory.MaxPhlogiston;
 
         // Probably using an orb or a star essence (or maybe not holding a light source at all)
         if  (maxPhlogiston == null)
@@ -7989,8 +7989,8 @@ internal class SaveGame
     /// <returns> True if the item is a high level book </returns>
     public bool ItemFilterHighLevelBook(Item item)
     {
-        BookItem? bookItem = item.TryCast<BookItem>();
-        return bookItem.Factory.IsHighLevelBook;
+        BookItemFactory? bookItemFactory = item.TryGetFactory<BookItemFactory>();
+        return bookItemFactory.IsHighLevelBook;
     }
 
     /// <summary>
@@ -8975,10 +8975,11 @@ internal class SaveGame
         MsgPrint($"{your} {itenName} {s} now protected against corrosion.");
     }
 
-    public Spell[] OkaySpells(BookItem spellBook, bool known)
+    public Spell[] OkaySpells(Item spellBook, bool known)
     {
         List<Spell> okaySpells = new List<Spell>();
-        foreach (Spell spell in spellBook.Factory.Spells)
+        BookItemFactory bookItemFactory = (BookItemFactory)spellBook.Factory;
+        foreach (Spell spell in bookItemFactory.Spells)
         {
             if (SpellOkay(spell, known))
             {
@@ -8992,7 +8993,7 @@ internal class SaveGame
     /// Returns an spell selected by the player.  If the player doesn't have any spells capable of being selected, false is returned; otherwise the spell selected by the user is returned on the output
     /// parameter.  If the user cancels the selection, a true value is returned and the output spell parameter is set to null.
     /// </summary>
-    public bool GetSpell(out Spell? selectedSpell, string prompt, BookItem spellBook, bool known)
+    public bool GetSpell(out Spell? selectedSpell, string prompt, Item spellBook, bool known)
     {
         selectedSpell = null;
         Spell[] okaySpells = OkaySpells(spellBook, known);

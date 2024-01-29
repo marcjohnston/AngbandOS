@@ -5,7 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.ItemCategories;
+namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
 internal class ResistancePotionItemFactory : PotionItemFactory
@@ -26,7 +26,7 @@ internal class ResistancePotionItemFactory : PotionItemFactory
     public override bool IgnoreFire => true;
     public override int Level => 20;
     public override int[] Locale => new int[] { 20, 45, 80, 100 };
-    public override int Pval => 100;
+    public override int InitialTypeSpecificValue => 100;
     public override int Weight => 4;
     public override bool Quaff()
     {
@@ -38,5 +38,5 @@ internal class ResistancePotionItemFactory : PotionItemFactory
         SaveGame.TimedPoisonResistance.AddTimer(SaveGame.Rng.DieRoll(20) + 20);
         return true;
     }
-    public override Item CreateItem() => new ResistancePotionItem(SaveGame);
+    public override Item CreateItem() => new Item(SaveGame, this);
 }

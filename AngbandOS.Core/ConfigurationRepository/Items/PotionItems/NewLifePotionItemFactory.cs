@@ -5,7 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.ItemCategories;
+namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
 internal class NewLifePotionItemFactory : PotionItemFactory
@@ -22,7 +22,7 @@ internal class NewLifePotionItemFactory : PotionItemFactory
     public override string FriendlyName => "New Life";
     public override int Level => 50;
     public override int[] Locale => new int[] { 50, 100, 120, 0 };
-    public override int Pval => 100;
+    public override int InitialTypeSpecificValue => 100;
     public override int Weight => 4;
     public override bool Quaff()
     {
@@ -44,5 +44,5 @@ internal class NewLifePotionItemFactory : PotionItemFactory
         }
         return true;
     }
-    public override Item CreateItem() => new NewLifePotionItem(SaveGame);
+    public override Item CreateItem() => new Item(SaveGame, this);
 }

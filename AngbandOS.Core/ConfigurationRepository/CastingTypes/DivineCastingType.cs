@@ -33,8 +33,9 @@ internal class DivineCastingType : CastingType
     /// </summary>
     public override bool CanChooseSpellToStudy => false;
 
-    public override string GetBookTitle(BookItem bookItem)
+    public override string GetBookTitle(Item bookItem)
     {
-        return $"{Pluralize("Book", bookItem.Count)} of {bookItem.DivineTitle}";
+        BookItemFactory bookItemFactory = (BookItemFactory)bookItem.Factory;
+        return $"{Pluralize("Book", bookItem.Count)} of {bookItemFactory.DivineTitle}";
     }
 }

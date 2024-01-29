@@ -5,7 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.ItemCategories;
+namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
 internal class FrostBoltsWandItemFactory : WandItemFactory
@@ -32,5 +32,5 @@ internal class FrostBoltsWandItemFactory : WandItemFactory
         saveGame.FireBoltOrBeam(20, saveGame.SingletonRepository.Projectiles.Get(nameof(ColdProjectile)), dir, SaveGame.Rng.DiceRoll(3, 8));
         return true;
     }
-    public override Item CreateItem() => new FrostBoltsWandItem(SaveGame);
+    public override Item CreateItem() => new Item(SaveGame, this);
 }

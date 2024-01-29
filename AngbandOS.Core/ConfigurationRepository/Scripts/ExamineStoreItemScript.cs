@@ -35,10 +35,10 @@ internal class ExamineStoreItemScript : Script, IStoreScript
         }
         item += storeCommandEvent.Store.StoreTop;
         Item oPtr = storeCommandEvent.Store.StoreInventoryList[item];
-        BookItem? bookItem = oPtr.TryCast<BookItem>();
-        if (bookItem != null)
+        BookItemFactory? bookItemFactory = oPtr.TryGetFactory<BookItemFactory>();
+        if (bookItemFactory != null)
         {
-            if (SaveGame.PrimaryRealm?.SpellBookItemCategory == bookItem.Category || SaveGame.SecondaryRealm?.SpellBookItemCategory == bookItem.Category)
+            if (SaveGame.PrimaryRealm?.SpellBookItemCategory == oPtr.Category || SaveGame.SecondaryRealm?.SpellBookItemCategory == oPtr.Category)
             {
                 DoStoreBrowse(oPtr);
             }

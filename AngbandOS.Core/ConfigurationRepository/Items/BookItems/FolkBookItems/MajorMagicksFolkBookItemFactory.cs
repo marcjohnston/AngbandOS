@@ -5,7 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.ItemCategories;
+namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
 internal class MajorMagicksFolkBookItemFactory : FolkBookItemFactory
@@ -30,7 +30,7 @@ internal class MajorMagicksFolkBookItemFactory : FolkBookItemFactory
     public override bool IsHighLevelBook => true;
     public override int Weight => 30;
     public override bool KindIsGood => true;
-    public override Item CreateItem() => new MajorMagicksFolkBookItem(SaveGame);
+    public override Item CreateItem() => new Item(SaveGame, this);
     public override Spell[] Spells => new Spell[]
     {
         SaveGame.SingletonRepository.Spells.Get(nameof(FolkSpellResistLightning)),

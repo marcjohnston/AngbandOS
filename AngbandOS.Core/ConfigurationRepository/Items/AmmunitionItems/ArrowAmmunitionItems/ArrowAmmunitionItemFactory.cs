@@ -6,7 +6,7 @@
 // copies. Other copyrights may also apply.”
 
 
-namespace AngbandOS.Core.ItemClasses;
+namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
 internal abstract class ArrowAmmunitionItemFactory : AmmunitionItemFactory

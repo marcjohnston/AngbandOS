@@ -5,7 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.ItemCategories;
+namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
 internal class PieceOfElvishWaybreadFoodItemFactory : FoodItemFactory
@@ -21,7 +21,7 @@ internal class PieceOfElvishWaybreadFoodItemFactory : FoodItemFactory
     public override string FriendlyName => "& Piece~ of Elvish Waybread";
     public override int Level => 5;
     public override int[] Locale => new int[] { 5, 10, 20, 0 };
-    public override int Pval => 7500;
+    public override int InitialTypeSpecificValue => 7500;
     public override int Weight => 3;
     public override bool Eat()
     {
@@ -37,5 +37,5 @@ internal class PieceOfElvishWaybreadFoodItemFactory : FoodItemFactory
     /// </summary>
     public override bool VanishesWhenEatenBySkeletons => true;
     
-    public override Item CreateItem() => new PieceOfElvishWaybreadFoodItem(SaveGame);
+    public override Item CreateItem() => new Item(SaveGame, this);
 }

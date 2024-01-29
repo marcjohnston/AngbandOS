@@ -5,7 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.ItemCategories;
+namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
 internal class TwoHandedSwordWeaponItemFactory : SwordWeaponItemFactory
@@ -25,5 +25,5 @@ internal class TwoHandedSwordWeaponItemFactory : SwordWeaponItemFactory
     public override int[] Locale => new int[] { 30, 40, 0, 0 };
     public override bool ShowMods => true;
     public override int Weight => 200;
-    public override Item CreateItem() => new TwoHandedSwordWeaponItem(SaveGame);
+    public override Item CreateItem() => new Item(SaveGame, this);
 }

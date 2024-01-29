@@ -5,7 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.ItemCategories;
+namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
 internal class HealingPotionItemFactory : PotionItemFactory
@@ -22,7 +22,7 @@ internal class HealingPotionItemFactory : PotionItemFactory
     public override string FriendlyName => "Healing";
     public override int Level => 15;
     public override int[] Locale => new int[] { 15, 30, 60, 0 };
-    public override int Pval => 200;
+    public override int InitialTypeSpecificValue => 200;
     public override int Weight => 4;
     public override bool Quaff()
     {
@@ -62,5 +62,5 @@ internal class HealingPotionItemFactory : PotionItemFactory
         SaveGame.Project(who, 2, y, x, SaveGame.Rng.DiceRoll(10, 10), SaveGame.SingletonRepository.Projectiles.Get(nameof(OldHealProjectile)), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
         return false;
     }
-    public override Item CreateItem() => new HealingPotionItem(SaveGame);
+    public override Item CreateItem() => new Item(SaveGame, this);
 }

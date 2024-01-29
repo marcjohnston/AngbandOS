@@ -5,7 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.ItemCategories;
+namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
 internal class IronShotAmmunitionItemFactory : ShotAmmunitionItemFactory
@@ -25,5 +25,5 @@ internal class IronShotAmmunitionItemFactory : ShotAmmunitionItemFactory
     public override int[] Locale => new int[] { 3, 0, 0, 0 };
     public override bool ShowMods => true;
     public override int Weight => 5;
-    public override Item CreateItem() => new IronShotAmmunitionItem(SaveGame);
+    public override Item CreateItem() => new Item(SaveGame, this);
 }

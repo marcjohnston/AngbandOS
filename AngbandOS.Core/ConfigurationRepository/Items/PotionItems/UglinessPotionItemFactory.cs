@@ -5,7 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.ItemCategories;
+namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
 internal class UglinessPotionItemFactory : PotionItemFactory
@@ -27,5 +27,5 @@ internal class UglinessPotionItemFactory : PotionItemFactory
         // Ugliness tries to reduce your charisma
         return SaveGame.TryDecreasingAbilityScore(Ability.Charisma);
     }
-    public override Item CreateItem() => new UglinessPotionItem(SaveGame);
+    public override Item CreateItem() => new Item(SaveGame, this);
 }

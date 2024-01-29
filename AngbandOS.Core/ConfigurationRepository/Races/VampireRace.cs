@@ -78,7 +78,7 @@ internal class VampireRace : Race
 
     public override bool IsDamagedByDarkness => false;
 
-    public override void Eat(FoodItem item)
+    public override void Eat(Item item)
     {
         // Vampires only get 1/10th of the food value
         SaveGame.SetFood(SaveGame.Food + (item.TypeSpecificValue / 10));

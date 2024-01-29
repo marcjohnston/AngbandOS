@@ -5,7 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.ItemCategories;
+namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
 internal class CureSeriousWoundsMushroomFoodItemFactory : MushroomFoodItemFactory
@@ -20,7 +20,7 @@ internal class CureSeriousWoundsMushroomFoodItemFactory : MushroomFoodItemFactor
     public override string FriendlyName => "Cure Serious Wounds";
     public override int Level => 15;
     public override int[] Locale => new int[] { 15, 0, 0, 0 };
-    public override int Pval => 500;
+    public override int InitialTypeSpecificValue => 500;
     public override int Weight => 2;
     public override bool Eat()
     {
@@ -31,5 +31,5 @@ internal class CureSeriousWoundsMushroomFoodItemFactory : MushroomFoodItemFactor
         }
         return false;
     }
-    public override Item CreateItem() => new CureSeriousWoundsMushroomFoodItem(SaveGame);
+    public override Item CreateItem() => new Item(SaveGame, this);
 }

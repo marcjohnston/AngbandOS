@@ -5,7 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.ItemCategories;
+namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
 internal class SummonUndeadScrollItemFactory : ScrollItemFactory
@@ -31,5 +31,5 @@ internal class SummonUndeadScrollItemFactory : ScrollItemFactory
             }
         }
     }
-    public override Item CreateItem() => new SummonUndeadScrollItem(SaveGame);
+    public override Item CreateItem() => new Item(SaveGame, this);
 }

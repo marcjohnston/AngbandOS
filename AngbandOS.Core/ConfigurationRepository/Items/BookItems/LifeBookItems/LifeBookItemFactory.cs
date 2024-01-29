@@ -5,13 +5,14 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.ItemClasses;
+namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
 internal abstract class LifeBookItemFactory : BookItemFactory
 {
     public LifeBookItemFactory(SaveGame saveGame) : base(saveGame) { }
     public override ItemClass ItemClass => SaveGame.SingletonRepository.ItemClasses.Get(nameof(LifeSpellBooksItemClass));
+    public override string RealmName => "Life";
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.LifeBook;
     public override bool HatesFire => true;
     public override int PackSort => 8;

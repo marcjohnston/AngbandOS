@@ -5,7 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.ItemCategories;
+namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
 internal class DexterityPotionItemFactory : PotionItemFactory
@@ -28,5 +28,5 @@ internal class DexterityPotionItemFactory : PotionItemFactory
         // Dexterity increases your dexterity
         return SaveGame.TryIncreasingAbilityScore(Ability.Dexterity);
     }
-    public override Item CreateItem() => new DexterityPotionItem(SaveGame);
+    public override Item CreateItem() => new Item(SaveGame, this);
 }

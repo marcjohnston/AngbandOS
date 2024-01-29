@@ -5,7 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.ItemCategories;
+namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
 internal class RustyChainMailHardArmorItemFactory : HardArmorItemFactory
@@ -27,5 +27,5 @@ internal class RustyChainMailHardArmorItemFactory : HardArmorItemFactory
     public override int ToA => -8;
     public override int ToH => -5;
     public override int Weight => 200;
-    public override Item CreateItem() => new RustyChainMailHardArmorItem(SaveGame);
+    public override Item CreateItem() => new Item(SaveGame, this);
 }

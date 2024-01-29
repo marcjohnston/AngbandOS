@@ -5,7 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.ItemCategories;
+namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
 internal class MinorMagicksFolkBookItemFactory : FolkBookItemFactory
@@ -38,5 +38,5 @@ internal class MinorMagicksFolkBookItemFactory : FolkBookItemFactory
         SaveGame.SingletonRepository.Spells.Get(nameof(FolkSpellResistFire))
     };
 
-    public override Item CreateItem() => new MinorMagicksFolkBookItem(SaveGame);
+    public override Item CreateItem() => new Item(SaveGame, this);
 }

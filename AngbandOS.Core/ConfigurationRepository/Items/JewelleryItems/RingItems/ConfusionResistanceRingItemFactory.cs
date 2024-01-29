@@ -5,7 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.ItemCategories;
+namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
 internal class ConfusionResistanceRingItemFactory : RingItemFactory
@@ -23,5 +23,5 @@ internal class ConfusionResistanceRingItemFactory : RingItemFactory
     public override int[] Locale => new int[] { 22, 0, 0, 0 };
     public override bool ResConf => true;
     public override int Weight => 2;
-    public override Item CreateItem() => new ConfusionResistanceRingItem(SaveGame);
+    public override Item CreateItem() => new Item(SaveGame, this);
 }

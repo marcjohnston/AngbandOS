@@ -5,7 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.ItemCategories;
+namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
 internal class SomeGoldGoldItemFactory : GoldItemFactory
@@ -19,5 +19,5 @@ internal class SomeGoldGoldItemFactory : GoldItemFactory
     public override int Cost => 14;
     public override string FriendlyName => "some gold";
     public override int Level => 1;
-    public override Item CreateItem() => new SomeGoldGoldItem(SaveGame);
+    public override Item CreateItem() => new Item(SaveGame, this);
 }

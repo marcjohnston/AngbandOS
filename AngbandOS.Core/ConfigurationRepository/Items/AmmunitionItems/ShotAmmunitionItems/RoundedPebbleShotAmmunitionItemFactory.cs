@@ -5,7 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.ItemCategories;
+namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
 internal class RoundedPebbleShotAmmunitionItemFactory : ShotAmmunitionItemFactory
@@ -23,5 +23,5 @@ internal class RoundedPebbleShotAmmunitionItemFactory : ShotAmmunitionItemFactor
     public override string FriendlyName => "& Rounded Pebble~";
     public override bool ShowMods => true;
     public override int Weight => 4;
-    public override Item CreateItem() => new RoundedPebbleShotAmmunitionItem(SaveGame);
+    public override Item CreateItem() => new Item(SaveGame, this);
 }

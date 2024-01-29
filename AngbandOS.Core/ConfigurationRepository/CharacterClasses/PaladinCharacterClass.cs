@@ -70,19 +70,18 @@ internal class PaladinCharacterClass : BaseCharacterClass
         // Warriors and paladins get experience for destroying magic books
         if (SaveGame.ItemFilterHighLevelBook(item))
         {
-            BookItem bookItem = (BookItem)item;
             if (SaveGame.Studies<LifeRealm>())
             {
                 if (item.Category == ItemTypeEnum.DeathBook)
                 {
-                    GainExperienceFromSpellBookDestroy(bookItem, amount);
+                    GainExperienceFromSpellBookDestroy(item, amount);
                 }
             }
             else
             {
                 if (item.Category == ItemTypeEnum.LifeBook)
                 {
-                    GainExperienceFromSpellBookDestroy(bookItem, amount);
+                    GainExperienceFromSpellBookDestroy(item, amount);
                 }
             }
         }

@@ -5,7 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.ItemCategories;
+namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
 internal class ResistColdPotionItemFactory : PotionItemFactory
@@ -28,5 +28,5 @@ internal class ResistColdPotionItemFactory : PotionItemFactory
         // Resist cold gives you timed frost resistance
         return SaveGame.TimedColdResistance.AddTimer(SaveGame.Rng.DieRoll(10) + 10);
     }
-    public override Item CreateItem() => new ResistColdPotionItem(SaveGame);
+    public override Item CreateItem() => new Item(SaveGame, this);
 }

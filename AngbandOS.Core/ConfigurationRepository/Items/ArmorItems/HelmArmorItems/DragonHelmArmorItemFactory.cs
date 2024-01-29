@@ -5,7 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.ItemCategories;
+namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
 internal class DragonHelmArmorItemFactory : HelmArmorItemFactory
@@ -44,5 +44,5 @@ internal class DragonHelmArmorItemFactory : HelmArmorItemFactory
     public override int[] Locale => new int[] { 80, 0, 0, 0 };
     public override int ToA => 10;
     public override int Weight => 50;
-    public override Item CreateItem() => new DragonHelmArmorItem(SaveGame);
+    public override Item CreateItem() => new Item(SaveGame, this);
 }

@@ -5,7 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.ItemCategories;
+namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
 internal class TeleportOtherWandItemFactory : WandItemFactory
@@ -32,5 +32,5 @@ internal class TeleportOtherWandItemFactory : WandItemFactory
     {
         return saveGame.TeleportMonster(dir);
     }
-    public override Item CreateItem() => new TeleportOtherWandItem(SaveGame);
+    public override Item CreateItem() => new Item(SaveGame, this);
 }

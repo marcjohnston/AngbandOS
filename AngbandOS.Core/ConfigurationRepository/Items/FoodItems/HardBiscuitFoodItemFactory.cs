@@ -5,7 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.ItemCategories;
+namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
 internal class HardBiscuitFoodItemFactory : FoodItemFactory
@@ -18,7 +18,7 @@ internal class HardBiscuitFoodItemFactory : FoodItemFactory
 
     public override int Cost => 1;
     public override string FriendlyName => "& Hard Biscuit~";
-    public override int Pval => 500;
+    public override int InitialTypeSpecificValue => 500;
     public override int Weight => 2;
     public override bool Eat()
     {
@@ -37,5 +37,5 @@ internal class HardBiscuitFoodItemFactory : FoodItemFactory
     /// </summary>
     public override bool VanishesWhenEatenBySkeletons => true;
 
-    public override Item CreateItem() => new HardBiscuitFoodItem(SaveGame);
+    public override Item CreateItem() => new Item(SaveGame, this);
 }

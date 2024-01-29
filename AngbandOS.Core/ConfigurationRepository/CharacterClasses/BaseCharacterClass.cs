@@ -133,7 +133,7 @@ internal abstract class BaseCharacterClass : IGetKey<string>
     /// </summary>
     /// <param name="item">The item.</param>
     /// <param name="amount">The amount.</param>
-    protected void GainExperienceFromSpellBookDestroy(BookItem item, int amount)
+    protected void GainExperienceFromSpellBookDestroy(Item item, int amount)
     {
         if (SaveGame.ExperiencePoints < Constants.PyMaxExp)
         {
@@ -142,7 +142,8 @@ internal abstract class BaseCharacterClass : IGetKey<string>
             {
                 testerExp = 10000;
             }
-            testerExp /= item.ExperienceGainDivisorForDestroying;
+            BookItemFactory bookItemFactory = (BookItemFactory)item.Factory;
+            testerExp /= bookItemFactory.ExperienceGainDivisorForDestroying;
             if (testerExp < 1)
             {
                 testerExp = 1;

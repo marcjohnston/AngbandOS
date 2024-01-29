@@ -5,7 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.ItemCategories;
+namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
 internal class ShortBowWeaponItemFactory : BowWeaponItemFactory
@@ -25,5 +25,5 @@ internal class ShortBowWeaponItemFactory : BowWeaponItemFactory
     public override int Weight => 30;
     public override int MissileDamageMultiplier => 2;
     public override ItemTypeEnum AmmunitionItemCategory => ItemTypeEnum.Arrow;
-    public override Item CreateItem() => new ShortBowWeaponItem(SaveGame);
+    public override Item CreateItem() => new Item(SaveGame, this);
 }

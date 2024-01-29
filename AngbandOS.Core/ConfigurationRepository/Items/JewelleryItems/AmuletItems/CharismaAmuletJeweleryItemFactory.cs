@@ -5,7 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.ItemCategories;
+namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
 internal class CharismaAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
@@ -34,5 +34,5 @@ internal class CharismaAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
     public override int[] Locale => new int[] { 20, 0, 0, 0 };
     public override int Weight => 3;
 
-    public override Item CreateItem() => new CharismaAmuletJeweleryItem(SaveGame);
+    public override Item CreateItem() => new Item(SaveGame, this);
 }

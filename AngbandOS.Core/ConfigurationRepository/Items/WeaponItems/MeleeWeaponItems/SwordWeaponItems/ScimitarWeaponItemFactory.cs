@@ -5,7 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.ItemCategories;
+namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
 internal class ScimitarWeaponItemFactory : SwordWeaponItemFactory
@@ -25,5 +25,5 @@ internal class ScimitarWeaponItemFactory : SwordWeaponItemFactory
     public override int[] Locale => new int[] { 10, 0, 0, 0 };
     public override bool ShowMods => true;
     public override int Weight => 130;
-    public override Item CreateItem() => new ScimitarSwordWeaponItem(SaveGame);
+    public override Item CreateItem() => new Item(SaveGame, this);
 }

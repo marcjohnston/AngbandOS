@@ -5,7 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.ItemCategories;
+namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
 internal class EnlightenmentStaffItemFactory : StaffItemFactory
@@ -33,5 +33,5 @@ internal class EnlightenmentStaffItemFactory : StaffItemFactory
         SaveGame.RunScript(nameof(MapAreaScript));
         eventArgs.Identified = true;
     }
-    public override Item CreateItem() => new EnlightenmentStaffItem(SaveGame);
+    public override Item CreateItem() => new Item(SaveGame, this);
 }

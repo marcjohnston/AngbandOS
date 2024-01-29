@@ -65,7 +65,6 @@ internal class ResearchSpellScript : Script, IScript, IStoreScript
         {
             return;
         }
-        BookItem bookItem = (BookItem)item;
         SaveGame.HandleStuff();
 
         // Arcane casters can choose their spell
@@ -73,7 +72,7 @@ internal class ResearchSpellScript : Script, IScript, IStoreScript
         if (SaveGame.BaseCharacterClass.SpellCastingType.CanChooseSpellToStudy)
         {
             // Allow the user to select a spell.
-            if (!SaveGame.GetSpell(out spell, "study", bookItem, false))
+            if (!SaveGame.GetSpell(out spell, "study", item, false))
             {
                 // There are no spells.
                 SaveGame.MsgPrint($"You cannot learn any {spellType}s from that book.");
@@ -90,8 +89,11 @@ internal class ResearchSpellScript : Script, IScript, IStoreScript
         {
             // We need to choose a spell at random
             int k = 0;
+
+            BookItemFactory bookItemFactory = (BookItemFactory)item.Factory;
+
             // Gather the potential spells from the book
-            foreach (Spell sPtr in bookItem.Factory.Spells)
+            foreach (Spell sPtr in bookItemFactory.Spells)
             {
                 if (SaveGame.SpellOkay(sPtr, false))
                 {

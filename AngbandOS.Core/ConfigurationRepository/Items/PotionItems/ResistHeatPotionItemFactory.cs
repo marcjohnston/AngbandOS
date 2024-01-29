@@ -5,9 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-using AngbandOS.Core.Items;
-
-namespace AngbandOS.Core.ItemCategories;
+namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
 internal class ResistHeatPotionItemFactory : PotionItemFactory
@@ -30,5 +28,5 @@ internal class ResistHeatPotionItemFactory : PotionItemFactory
         // Resist heat gives you timed fire resistance
         return SaveGame.TimedFireResistance.AddTimer(SaveGame.Rng.DieRoll(10) + 10);
     }
-    public override Item CreateItem() => new ResistHeatPotionItem(SaveGame);
+    public override Item CreateItem() => new Item(SaveGame, this);
 }

@@ -5,7 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.ItemCategories;
+namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
 internal class TeleportationStaffItemFactory : StaffItemFactory
@@ -32,5 +32,5 @@ internal class TeleportationStaffItemFactory : StaffItemFactory
         SaveGame.TeleportPlayer(100);
         eventArgs.Identified = true;
     }
-    public override Item CreateItem() => new TeleportationStaffItem(SaveGame);
+    public override Item CreateItem() => new Item(SaveGame, this);
 }

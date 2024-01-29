@@ -5,7 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.ItemCategories;
+namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
 internal class LargeIronChestItemFactory : ChestItemFactory
@@ -26,5 +26,5 @@ internal class LargeIronChestItemFactory : ChestItemFactory
     public override int Weight => 1000;
     public override bool IsSmall => false;
     public override int NumberOfItemsContained => 4;
-    public override Item CreateItem() => new LargeIronChestItem(SaveGame);
+    public override Item CreateItem() => new Item(SaveGame, this);
 }

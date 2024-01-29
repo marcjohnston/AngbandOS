@@ -5,7 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.ItemCategories;
+namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
 internal class NaryaRingItemFactory : RingItemFactory
@@ -20,5 +20,5 @@ internal class NaryaRingItemFactory : RingItemFactory
     public override bool InstaArt => true;
     public override int Level => 80;
     public override int Weight => 2;
-    public override Item CreateItem() => new NaryaRingItem(SaveGame);
+    public override Item CreateItem() => new Item(SaveGame, this);
 }

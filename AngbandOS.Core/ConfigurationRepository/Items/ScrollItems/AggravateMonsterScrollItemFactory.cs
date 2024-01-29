@@ -5,7 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.ItemCategories;
+namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
 internal class AggravateMonsterScrollItemFactory : ScrollItemFactory
@@ -27,5 +27,5 @@ internal class AggravateMonsterScrollItemFactory : ScrollItemFactory
         SaveGame.AggravateMonsters();
         eventArgs.Identified = true;
     }
-    public override Item CreateItem() => new AggravateMonsterScrollItem(SaveGame);
+    public override Item CreateItem() => new Item(SaveGame, this);
 }

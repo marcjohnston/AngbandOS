@@ -5,7 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.ItemCategories;
+namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
 internal class PieceOfDwarfBreadFoodItemFactory : FoodItemFactory
@@ -23,7 +23,7 @@ internal class PieceOfDwarfBreadFoodItemFactory : FoodItemFactory
     public override string FriendlyName => "& Piece~ of Dwarf Bread";
     public override int Level => 15;
     public override int[] Locale => new int[] { 15, 0, 0, 0 };
-    public override int Pval => 7500;
+    public override int InitialTypeSpecificValue => 7500;
     public override int Weight => 3;
 
     /// <summary>
@@ -36,5 +36,5 @@ internal class PieceOfDwarfBreadFoodItemFactory : FoodItemFactory
         SaveGame.MsgPrint("You look at the dwarf bread, and don't feel quite so hungry anymore.");
         return true;
     }
-    public override Item CreateItem() => new PieceOfDwarfBreadFoodItem(SaveGame);
+    public override Item CreateItem() => new Item(SaveGame, this);
 }

@@ -5,11 +5,23 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.ItemCategories;
+namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
-internal class BalanceDragonScaleMailArmorItemFactory : DragonScaleMailArmorItemFactory
+internal class BalanceDragonScaleMailArmorItemFactory : DragonScaleMailArmorItemFactory, IItemsCanBeActivated
 {
+    public void ActivateItem(Item item)
+    {
+        if (!SaveGame.GetDirectionWithAim(out int dir))
+        {
+            return;
+        }
+        int chance = SaveGame.Rng.RandomLessThan(4);
+        string element = chance == 1 ? "chaos" : (chance == 2 ? "disenchantment" : (chance == 3 ? "sound" : "shards"));
+        SaveGame.MsgPrint($"You breathe {element}.");
+        SaveGame.FireBall(chance == 1 ? SaveGame.SingletonRepository.Projectiles.Get(nameof(ChaosProjectile)) : (chance == 2 ? SaveGame.SingletonRepository.Projectiles.Get(nameof(DisenchantProjectile)) : (chance == 3 ? (Projectile)SaveGame.SingletonRepository.Projectiles.Get(nameof(SoundProjectile)) : SaveGame.SingletonRepository.Projectiles.Get(nameof(ExplodeProjectile)))), dir, 250, -2);
+        item.RechargeTimeLeft = SaveGame.Rng.RandomLessThan(300) + 300;
+    }
     private BalanceDragonScaleMailArmorItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
     public override string? DescribeActivationEffect => "You breathe balance (250) every 300+d300 turns";
@@ -37,5 +49,5 @@ internal class BalanceDragonScaleMailArmorItemFactory : DragonScaleMailArmorItem
     public override int ToA => 10;
     public override int ToH => -2;
     public override int Weight => 200;
-    public override Item CreateItem() => new BalanceDragonScaleMailArmorItem(SaveGame);
+    public override Item CreateItem() => new Item(SaveGame, this);
 }
