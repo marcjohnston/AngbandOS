@@ -3032,7 +3032,7 @@ internal class Item : IComparable<Item>, IGetKey<string>
     /// By default, returns the description for inscriptions, cursed, empty, tried and on discount.
     /// </summary>
     /// <returns></returns>
-    public virtual string GetFullDescription()
+    public string GetFullDescription()
     {
         string tmpVal2 = "";
         if (!string.IsNullOrEmpty(Inscription))
