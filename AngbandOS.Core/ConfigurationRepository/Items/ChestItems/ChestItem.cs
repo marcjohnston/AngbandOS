@@ -11,30 +11,4 @@ namespace AngbandOS.Core.Items;
 internal abstract class ChestItem : Item
 {
     public ChestItem(SaveGame saveGame, ItemFactory itemClass) : base(saveGame, itemClass) { }
-    public override bool IsStompable()
-    {
-        if (!IsKnown())
-        {
-            return false;
-        }
-        else if (TypeSpecificValue == 0)
-        {
-            return Factory.Stompable[StompableType.Broken];
-        }
-        else if (TypeSpecificValue < 0)
-        {
-            return Factory.Stompable[StompableType.Average];
-        }
-        else
-        {
-            if (SaveGame.SingletonRepository.ChestTrapConfigurations[TypeSpecificValue].Traps.Length == 0)
-            {
-                return Factory.Stompable[StompableType.Good];
-            }
-            else
-            {
-                return Factory.Stompable[StompableType.Excellent];
-            }
-        }
-    }
 }

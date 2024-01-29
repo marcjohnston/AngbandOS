@@ -17,6 +17,33 @@ internal abstract class ChestItemFactory : ItemFactory
     public override bool HatesFire => true;
     public override bool HatesAcid => true;
 
+    public override bool IsStompable(Item item)
+    {
+        if (!item.IsKnown())
+        {
+            return false;
+        }
+        else if (item.TypeSpecificValue == 0)
+        {
+            return Stompable[StompableType.Broken];
+        }
+        else if (item.TypeSpecificValue < 0)
+        {
+            return Stompable[StompableType.Average];
+        }
+        else
+        {
+            if (SaveGame.SingletonRepository.ChestTrapConfigurations[item.TypeSpecificValue].Traps.Length == 0)
+            {
+                return Stompable[StompableType.Good];
+            }
+            else
+            {
+                return Stompable[StompableType.Excellent];
+            }
+        }
+    }
+
     public override string GetDetailedDescription(Item item)
     {
         string s = string.Empty;

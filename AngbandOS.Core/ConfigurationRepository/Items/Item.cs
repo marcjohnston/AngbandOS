@@ -1827,7 +1827,7 @@ internal class Item : IComparable<Item>, IGetKey<string>
                 return false;
             }
         }
-        return IsStompable();
+        return Factory.IsStompable(this);
     }
 
     public string StoreDescription(bool pref, int mode)
@@ -3115,41 +3115,5 @@ internal class Item : IComparable<Item>, IGetKey<string>
             tmpVal2 = $" {{{tmpVal2}}}";
         }
         return tmpVal2;
-    }
-
-    /// <summary>
-    /// Returns true, if the item can be stomped.  Returns the stompable status based on the item "Feeling", by default.
-    /// </summary>
-    /// <param name="item"></param>
-    /// <returns></returns>
-    public virtual bool IsStompable()
-    {
-        if (Factory.HasQuality)
-        {
-            switch (GetDetailedFeeling()) // TODO: This is poor
-            {
-                case "terrible":
-                case "worthless":
-                case "cursed":
-                case "broken":
-                    return Factory.Stompable[StompableType.Broken];
-
-                case "average":
-                    return Factory.Stompable[StompableType.Average];
-
-                case "good":
-                    return Factory.Stompable[StompableType.Good];
-
-                case "excellent":
-                    return Factory.Stompable[StompableType.Excellent];
-
-                case "special":
-                    return false;
-
-                default:
-                    throw new InvalidDataException($"Unrecognised item quality ({GetDetailedFeeling()})");
-            }
-        }
-        return Factory.Stompable[StompableType.Broken];
     }
 }

@@ -18,6 +18,42 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey<string>
     protected readonly SaveGame SaveGame;
 
     /// <summary>
+    /// Returns true, if the item can be stomped.  Returns the stompable status based on the item "Feeling", by default.
+    /// </summary>
+    /// <param name="item"></param>
+    /// <returns></returns>
+    public virtual bool IsStompable(Item item)
+    {
+        if (HasQuality)
+        {
+            switch (item.GetDetailedFeeling()) // TODO: This is poor
+            {
+                case "terrible":
+                case "worthless":
+                case "cursed":
+                case "broken":
+                    return Stompable[StompableType.Broken];
+
+                case "average":
+                    return Stompable[StompableType.Average];
+
+                case "good":
+                    return Stompable[StompableType.Good];
+
+                case "excellent":
+                    return Stompable[StompableType.Excellent];
+
+                case "special":
+                    return false;
+
+                default:
+                    throw new InvalidDataException($"Unrecognised item quality ({item.GetDetailedFeeling()})");
+            }
+        }
+        return Stompable[StompableType.Broken];
+    }
+
+    /// <summary>
     /// Returns true, if the item is ignored by monsters.  Returns false for all items, except gold.  Gold isn't picked up by monsters.
     /// </summary>
     public virtual bool IsIgnoredByMonsters => false;
