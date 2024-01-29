@@ -16,15 +16,4 @@ internal abstract class LightSourceItem : ArmorItem
     /// Returns the factory that created this light source item.
     /// </summary>
     public override LightSourceItemFactory Factory => (LightSourceItemFactory)base.Factory;
-
-    public override string GetVerboseDescription()
-    {
-        string s = "";
-        if (Factory.BurnRate > 0)
-        {
-            s += $" (with {TypeSpecificValue} {Pluralize("turn", TypeSpecificValue)} of light)";
-        }
-        s += base.GetVerboseDescription();
-        return s;
-    }
 }

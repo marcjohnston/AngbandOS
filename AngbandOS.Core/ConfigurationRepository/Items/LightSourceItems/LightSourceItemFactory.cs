@@ -19,6 +19,17 @@ internal abstract class LightSourceItemFactory : ItemFactory
     public override BaseInventorySlot BaseWieldSlot => SaveGame.SingletonRepository.InventorySlots.Get(nameof(LightsourceInventorySlot));
     public override bool IsWorthless(Item item) => item.TypeSpecificValue < 0;
 
+    public override string GetVerboseDescription(Item item)
+    {
+        string s = "";
+        if (BurnRate > 0)
+        {
+            s += $" (with {item.TypeSpecificValue} {Pluralize("turn", item.TypeSpecificValue)} of light)";
+        }
+        s += base.GetVerboseDescription(item);
+        return s;
+    }
+
     public override int GetAdditionalMassProduceCount(Item item)
     {
         int cost = item.Value();

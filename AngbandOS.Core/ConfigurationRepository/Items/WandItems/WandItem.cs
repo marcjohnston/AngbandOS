@@ -11,14 +11,4 @@ namespace AngbandOS.Core.Items;
 internal abstract class WandItem : Item
 {
     public WandItem(SaveGame saveGame, ItemFactory itemClass) : base(saveGame, itemClass) { }
-    public override string GetVerboseDescription()
-    {
-        string s = "";
-        if (IsKnown())
-        {
-            s += $" ({TypeSpecificValue} {Pluralize("charge", TypeSpecificValue)})";
-        }
-        s += base.GetVerboseDescription();
-        return s;
-    }
 }

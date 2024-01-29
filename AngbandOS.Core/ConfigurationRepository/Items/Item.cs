@@ -792,7 +792,7 @@ internal class Item : IComparable<Item>, IGetKey<string>
             return basenm;
         }
 
-        basenm += GetVerboseDescription();
+        basenm += Factory.GetVerboseDescription(this);
 
         // This is the verbose description.
         if (mode < 3)
@@ -3025,60 +3025,6 @@ internal class Item : IComparable<Item>, IGetKey<string>
             t += SaveGame.Rng.RandomLessThan(max);
         }
         return t;
-    }
-
-    /// <summary>
-    /// Returns an additional description of the item that is appended to the detailed description, when needed.  
-    /// By default, empty is returned, if the item is known; otherwise, the HideType, Speed, Blows, Stealth, Search, Infra, Tunnel and recharging time characteristics are returned.
-    /// </summary>
-    /// <returns></returns>
-    public virtual string GetVerboseDescription()
-    {
-        string s = "";
-        RefreshFlagBasedProperties();
-        if (IsKnown() && Factory.HasAnyPvalMask)
-        {
-            s += $" ({GetSignedValue(TypeSpecificValue)}";
-            if (Factory.HideType)
-            {
-            }
-            else if (Factory.Speed)
-            {
-                s += " speed";
-            }
-            else if (Factory.Blows)
-            {
-                if (TypeSpecificValue > 1)
-                {
-                    s += " attacks";
-                }
-                else
-                {
-                    s += " attack";
-                }
-            }
-            else if (Factory.Stealth)
-            {
-                s += " stealth";
-            }
-            else if (Factory.Search)
-            {
-                s += " searching";
-            }
-            else if (Factory.Infra)
-            {
-                s += " infravision";
-            }
-            else if (Factory.Tunnel)
-            {
-            }
-            s += ")";
-        }
-        if (IsKnown() && RechargeTimeLeft != 0)
-        {
-            s += " (charging)";
-        }
-        return s;
     }
 
     /// <summary>

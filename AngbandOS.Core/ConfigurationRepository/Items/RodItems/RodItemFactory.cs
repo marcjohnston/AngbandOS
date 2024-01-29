@@ -18,6 +18,17 @@ internal abstract class RodItemFactory : ItemFactory, IFlavour
     /// </summary>
     public IFlavour FlavourFactory => (IFlavour)this;
 
+    public override string GetVerboseDescription(Item item)
+    {
+        string s = "";
+        if (item.IsKnown() && item.TypeSpecificValue != 0)
+        {
+            s += $" (charging)";
+        }
+        s += base.GetVerboseDescription(item);
+        return s;
+    }
+
     public override string GetDescription(Item item, bool includeCountPrefix)
     {
         string flavour = item.IdentStoreb ? "" : $"{FlavourFactory.Flavor.Name} ";

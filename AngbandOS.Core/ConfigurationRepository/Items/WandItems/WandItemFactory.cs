@@ -18,6 +18,16 @@ internal abstract class WandItemFactory : ItemFactory, IFlavour
     /// </summary>
     public IFlavour FlavourFactory => (IFlavour)this;
 
+    public override string GetVerboseDescription(Item item)
+    {
+        string s = "";
+        if (item.IsKnown())
+        {
+            s += $" ({item.TypeSpecificValue} {Pluralize("charge", item.TypeSpecificValue)})";
+        }
+        s += base.GetVerboseDescription(item);
+        return s;
+    }
     public override string GetDescription(Item item, bool includeCountPrefix)
     {
         string flavour = item.IdentStoreb ? "" : $"{FlavourFactory.Flavor.Name} ";

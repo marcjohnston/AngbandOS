@@ -96,6 +96,60 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey<string>
     }
 
     /// <summary>
+    /// Returns an additional description of the item that is appended to the detailed description, when needed.  
+    /// By default, empty is returned, if the item is known; otherwise, the HideType, Speed, Blows, Stealth, Search, Infra, Tunnel and recharging time characteristics are returned.
+    /// </summary>
+    /// <returns></returns>
+    public virtual string GetVerboseDescription(Item item)
+    {
+        string s = "";
+        item.RefreshFlagBasedProperties();
+        if (item.IsKnown() && HasAnyPvalMask)
+        {
+            s += $" ({GetSignedValue(item.TypeSpecificValue)}";
+            if (HideType)
+            {
+            }
+            else if (Speed)
+            {
+                s += " speed";
+            }
+            else if (Blows)
+            {
+                if (item.TypeSpecificValue > 1)
+                {
+                    s += " attacks";
+                }
+                else
+                {
+                    s += " attack";
+                }
+            }
+            else if (Stealth)
+            {
+                s += " stealth";
+            }
+            else if (Search)
+            {
+                s += " searching";
+            }
+            else if (Infra)
+            {
+                s += " infravision";
+            }
+            else if (Tunnel)
+            {
+            }
+            s += ")";
+        }
+        if (item.IsKnown() && item.RechargeTimeLeft != 0)
+        {
+            s += " (charging)";
+        }
+        return s;
+    }
+
+    /// <summary>
     /// Returns a description for the item.  Returns a macro processed description, by default.
     /// </summary>
     /// <param name="item"></param>

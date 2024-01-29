@@ -11,14 +11,4 @@ namespace AngbandOS.Core.Items;
 internal abstract class RodItem : Item
 {
     public RodItem(SaveGame saveGame, ItemFactory itemClass) : base(saveGame, itemClass) { }
-    public override string GetVerboseDescription()
-    {
-        string s = "";
-        if (IsKnown() && TypeSpecificValue != 0)
-        {
-            s += $" (charging)";
-        }
-        s += base.GetVerboseDescription();
-        return s;
-    }
 }
