@@ -11,6 +11,23 @@ namespace AngbandOS.Core.ItemClasses;
 internal abstract class RingItemFactory : JewelleryItemFactory, IFlavour
 {
     /// <summary>
+    /// Returns the factory that this item was created by; casted as an IFlavour.
+    /// </summary>
+    public IFlavour FlavourFactory => (IFlavour)this;
+
+    public override string GetDescription(Item item, bool includeCountPrefix)
+    {
+        if (item.FixedArtifact != null && item.IsFlavourAware())
+        {
+            return base.GetDescription(item, includeCountPrefix);
+        }
+        string flavour = item.IdentStoreb ? "" : $"{FlavourFactory.Flavor.Name} ";
+        string ofName = item.IsFlavourAware() ? $" of {FriendlyName}" : "";
+        string name = $"{flavour}{Pluralize("Ring", item.Count)}{ofName}";
+        return includeCountPrefix ? GetPrefixCount(true, name, item.Count, item.IsKnownArtifact) : name;
+    }
+
+    /// <summary>
     /// Returns either the right or left hand inventory slot for rings.
     /// </summary>
     public override int WieldSlot

@@ -16,6 +16,13 @@ internal abstract class BookItemFactory : ItemFactory
     /// </summary>
     public override bool EasyKnow => true;
 
+    public override string GetDescription(Item item, bool includeCountPrefix)
+    {
+        string name = SaveGame.BaseCharacterClass.SpellCastingType.GetBookTitle((BookItem)item);
+        name = $"{name} {FriendlyName}";
+        return includeCountPrefix ? GetPrefixCount(true, name, item.Count, item.IsKnownArtifact) : name;
+    }
+
     public override int GetAdditionalMassProduceCount(Item item)
     {
         int cost = item.Value();

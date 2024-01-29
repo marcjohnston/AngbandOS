@@ -760,7 +760,7 @@ internal class Item : IComparable<Item>, IGetKey<string>
         {
             return "(nothing)";
         }
-        string basenm = GetDescription(includeCountPrefix);
+        string basenm = Factory.GetDescription(this, includeCountPrefix);
         if (IsKnown())
         {
             if (!string.IsNullOrEmpty(RandartName))
@@ -3025,19 +3025,6 @@ internal class Item : IComparable<Item>, IGetKey<string>
             t += SaveGame.Rng.RandomLessThan(max);
         }
         return t;
-    }
-
-    /// <summary>
-    /// Returns a description for the item.  Returns a macro processed description, by default.
-    /// </summary>
-    /// <param name="item"></param>
-    /// <param name="includeCountPrefix">Specify true, to include the number of items as the prefix; false, to excluse the count.  Pluralization will still
-    /// occur when the count is not included.</param>
-    /// <returns></returns>
-    public virtual string GetDescription(bool includeCountPrefix)
-    {
-        string pluralizedName = ApplyPlurizationMacro(Factory.FriendlyName, Count);
-        return ApplyGetPrefixCountMacro(includeCountPrefix, pluralizedName, Count, IsKnownArtifact);
     }
 
     /// <summary>

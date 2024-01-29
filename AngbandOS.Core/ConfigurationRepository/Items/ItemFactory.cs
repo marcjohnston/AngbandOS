@@ -17,6 +17,20 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey<string>
 {
     protected readonly SaveGame SaveGame;
 
+
+    /// <summary>
+    /// Returns a description for the item.  Returns a macro processed description, by default.
+    /// </summary>
+    /// <param name="item"></param>
+    /// <param name="includeCountPrefix">Specify true, to include the number of items as the prefix; false, to excluse the count.  Pluralization will still
+    /// occur when the count is not included.</param>
+    /// <returns></returns>
+    public virtual string GetDescription(Item item, bool includeCountPrefix)
+    {
+        string pluralizedName = ApplyPlurizationMacro(FriendlyName, item.Count);
+        return ApplyGetPrefixCountMacro(includeCountPrefix, pluralizedName, item.Count, item.IsKnownArtifact);
+    }
+
     public virtual int? GetTypeSpecificRealValue(Item item, int value) => 0;
 
     /// <summary>

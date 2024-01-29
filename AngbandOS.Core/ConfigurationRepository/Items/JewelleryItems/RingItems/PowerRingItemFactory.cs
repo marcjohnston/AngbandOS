@@ -16,6 +16,22 @@ internal class PowerRingItemFactory : RingItemFactory
     public override ColorEnum Color => ColorEnum.Yellow;
     public override string Name => "Power";
 
+    public override string GetDescription(Item item, bool includeCountPrefix)
+    {
+        if (item.FixedArtifact != null && item.IsFlavourAware())
+        {
+            return base.GetDescription(item, includeCountPrefix);
+        }
+        string flavour = item.IdentStoreb ? "" : $"{FlavourFactory.Flavor.Name} ";
+        if (!item.IsFlavourAware())
+        {
+            flavour = "Plain Gold ";
+        }
+        string ofName = item.IsFlavourAware() ? $" of {FriendlyName}" : "";
+        string name = $"{flavour}{Pluralize("Ring", item.Count)}{ofName}";
+        return includeCountPrefix ? GetPrefixCount(true, name, item.Count, item.IsKnownArtifact) : name;
+    }
+
     public override int Cost => 5000000;
     public override string FriendlyName => "Power";
     public override bool InstaArt => true;

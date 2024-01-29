@@ -14,6 +14,19 @@ internal abstract class ScrollItemFactory : ItemFactory, IFlavour
     public override ItemClass ItemClass => SaveGame.SingletonRepository.ItemClasses.Get(nameof(ScrollsItemClass));
 
     /// <summary>
+    /// Returns the factory that this item was created by; casted as an IFlavour.
+    /// </summary>
+    public IFlavour FlavourFactory => (IFlavour)this;
+
+    public override string GetDescription(Item item, bool includeCountPrefix)
+    {
+        string flavour = item.IdentStoreb ? "" : $" titled \"{FlavourFactory.Flavor.Name}\"";
+        string ofName = item.IsFlavourAware() ? $" of {FriendlyName}" : "";
+        string name = $"{Pluralize("Scroll", item.Count)}{flavour}{ofName}";
+        return includeCountPrefix ? GetPrefixCount(true, name, item.Count, item.IsKnownArtifact) : name;
+    }
+
+    /// <summary>
     /// Returns the scroll flavours repository because scrolls have flavours that need to be identified.
     /// </summary>
     public IEnumerable<Flavour>? GetFlavorRepository() => SaveGame.ScrollFlavours;

@@ -13,6 +13,19 @@ internal abstract class PotionItemFactory : ItemFactory, IFlavour
     public PotionItemFactory(SaveGame saveGame) : base(saveGame) { }
     public override ItemClass ItemClass => SaveGame.SingletonRepository.ItemClasses.Get(nameof(PotionsItemClass));
 
+    /// <summary>
+    /// Returns the factory that this item was created by; casted as an IFlavour.
+    /// </summary>
+    public IFlavour FlavourFactory => (IFlavour)this;
+
+    public override string GetDescription(Item item, bool includeCountPrefix)
+    {
+        string flavour = item.IdentStoreb ? "" : $"{FlavourFactory.Flavor.Name} ";
+        string ofName = item.IsFlavourAware() ? $" of {FriendlyName}" : "";
+        string name = $"{flavour}{Pluralize("Potion", item.Count)}{ofName}";
+        return includeCountPrefix ? GetPrefixCount(true, name, item.Count, item.IsKnownArtifact) : name;
+    }
+
     public override int GetAdditionalMassProduceCount(Item item)
     {
         int cost = item.Value();

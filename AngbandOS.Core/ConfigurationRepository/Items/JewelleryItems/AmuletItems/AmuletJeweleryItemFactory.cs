@@ -17,6 +17,23 @@ internal abstract class AmuletJeweleryItemFactory : JewelleryItemFactory, IFlavo
     /// </summary>
     public override int WieldSlot => InventorySlot.Neck;
 
+    /// <summary>
+    /// Returns the factory that this item was created by; casted as an IFlavour.
+    /// </summary>
+    public IFlavour FlavourFactory => (IFlavour)this;
+
+    public override string GetDescription(Item item, bool includeCountPrefix)
+    {
+        if (item.FixedArtifact != null && item.IsFlavourAware())
+        {
+            return base.GetDescription(item, includeCountPrefix);
+        }
+        string flavour = item.IdentStoreb ? "" : $"{FlavourFactory.Flavor.Name} ";
+        string ofName = item.IsFlavourAware() ? $" of {item.Factory.FriendlyName}" : "";
+        string name = $"{flavour}{Pluralize("Amulet", item.Count)}{ofName}";
+        return includeCountPrefix ? GetPrefixCount(true, name, item.Count, item.IsKnownArtifact) : name;
+    }
+
     public override ItemClass ItemClass => SaveGame.SingletonRepository.ItemClasses.Get(nameof(AmuletsItemClass));
     public override BaseInventorySlot BaseWieldSlot => SaveGame.SingletonRepository.InventorySlots.Get(nameof(NeckInventorySlot));
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Amulet;

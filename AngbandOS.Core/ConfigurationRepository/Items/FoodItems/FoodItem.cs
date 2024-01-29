@@ -13,9 +13,4 @@ internal abstract class FoodItem : Item
     public FoodItem(SaveGame saveGame, ItemFactory itemClass) : base(saveGame, itemClass) { }
 
     public override FoodItemFactory Factory => (FoodItemFactory)base.Factory;
-
-    public override string GetDescription(bool includeCountPrefix)
-    {
-        return base.GetDescription(includeCountPrefix);
-    }
 }

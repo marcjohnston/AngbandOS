@@ -22,13 +22,6 @@ internal abstract class BookItem : Item
     /// </summary>
     public virtual string DivineTitle => $"{RealmName} Magic";
 
-    public override string GetDescription(bool includeCountPrefix)
-    {
-        string name = SaveGame.BaseCharacterClass.SpellCastingType.GetBookTitle(this);
-        name = $"{name} {Factory.FriendlyName}";
-        return includeCountPrefix ? GetPrefixCount(true, name, Count, IsKnownArtifact) : name;
-    }
-
     public override BookItemFactory Factory => (BookItemFactory)base.Factory;
 
     public BookItem(SaveGame saveGame, ItemFactory itemClass) : base(saveGame, itemClass) { }

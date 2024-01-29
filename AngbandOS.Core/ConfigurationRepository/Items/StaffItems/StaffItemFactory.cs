@@ -13,6 +13,19 @@ internal abstract class StaffItemFactory : ItemFactory, IFlavour
     public StaffItemFactory(SaveGame saveGame) : base(saveGame) { }
     public override ItemClass ItemClass => SaveGame.SingletonRepository.ItemClasses.Get(nameof(StaffsItemClass));
 
+    /// <summary>
+    /// Returns the factory that this item was created by; casted as an IFlavour.
+    /// </summary>
+    public IFlavour FlavourFactory => (IFlavour)this;
+
+    public override string GetDescription(Item item, bool includeCountPrefix)
+    {
+        string flavour = item.IdentStoreb ? "" : $"{FlavourFactory.Flavor.Name} ";
+        string ofName = item.IsFlavourAware() ? $" of {FriendlyName}" : "";
+        string name = $"{flavour}{Pluralize("Staff", item.Count)}{ofName}";
+        return includeCountPrefix ? GetPrefixCount(true, name, item.Count, item.IsKnownArtifact) : name;
+    }
+
     public override int? GetBonusRealValue(Item item, int value)
     {
         return value / 20 * item.TypeSpecificValue;

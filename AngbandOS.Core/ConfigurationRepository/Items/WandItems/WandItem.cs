@@ -11,18 +11,6 @@ namespace AngbandOS.Core.Items;
 internal abstract class WandItem : Item
 {
     public WandItem(SaveGame saveGame, ItemFactory itemClass) : base(saveGame, itemClass) { }
-    /// <summary>
-    /// Returns the factory that this item was created by; casted as an IFlavour.
-    /// </summary>
-    public IFlavour FlavourFactory => (IFlavour)Factory;
-
-    public override string GetDescription(bool includeCountPrefix)
-    {
-        string flavour = IdentStoreb ? "" : $"{FlavourFactory.Flavor.Name} ";
-        string ofName = IsFlavourAware() ? $" of {Factory.FriendlyName}" : "";
-        string name = $"{flavour}{Pluralize("Wand", Count)}{ofName}";
-        return includeCountPrefix ? GetPrefixCount(true, name, Count, IsKnownArtifact) : name;
-    }
     public override string GetVerboseDescription()
     {
         string s = "";
