@@ -18,6 +18,11 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey<string>
     protected readonly SaveGame SaveGame;
 
     /// <summary>
+    /// Returns true, if the item is ignored by monsters.  Returns false for all items, except gold.  Gold isn't picked up by monsters.
+    /// </summary>
+    public virtual bool IsIgnoredByMonsters => false;
+
+    /// <summary>
     /// Returns an additional description of the item that is appended to the base description, when needed.  Returns string.empty by default.
     /// </summary>
     /// <returns></returns>

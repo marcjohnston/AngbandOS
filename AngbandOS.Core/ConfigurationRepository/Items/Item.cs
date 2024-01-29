@@ -3152,9 +3152,4 @@ internal class Item : IComparable<Item>, IGetKey<string>
         }
         return Factory.Stompable[StompableType.Broken];
     }
-
-    /// <summary>
-    /// Returns true, if the item is ignored by monsters.  Returns false for all items, except gold.  Gold isn't picked up by monsters.
-    /// </summary>
-    public virtual bool IsIgnoredByMonsters => false;
 }

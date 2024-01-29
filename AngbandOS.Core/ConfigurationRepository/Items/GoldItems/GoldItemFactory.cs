@@ -14,5 +14,6 @@ internal abstract class GoldItemFactory : ItemFactory
     public override ItemClass ItemClass => SaveGame.SingletonRepository.ItemClasses.Get(nameof(GoldItemClass));
     public override int PackSort => 0;
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Gold;
-    //public override bool IgnoredByMonsters => true;
+
+    public override bool IsIgnoredByMonsters => true;
 }
