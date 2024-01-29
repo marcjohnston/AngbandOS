@@ -11,32 +11,4 @@ namespace AngbandOS.Core.Items;
 internal abstract class ArmorItem : Item
 {
     public ArmorItem(SaveGame saveGame, ItemFactory itemClass) : base(saveGame, itemClass) { }
-    public override string GetDetailedDescription()
-    {
-        string s = "";
-        if (IsKnown())
-        {
-            RefreshFlagBasedProperties();
-            if (Factory.ShowMods || BonusToHit != 0 && BonusDamage != 0)
-            {
-                s += $" ({GetSignedValue(BonusToHit)},{GetSignedValue(BonusDamage)})";
-            }
-            else if (BonusToHit != 0)
-            {
-                s += $" ({GetSignedValue(BonusToHit)})";
-            }
-            else if (BonusDamage != 0)
-            {
-                s += $" ({GetSignedValue(BonusDamage)})";
-            }
-
-            // Add base armor class for all types of armor and when the base armor class is greater than zero.
-            s += $" [{BaseArmorClass},{GetSignedValue(BonusArmorClass)}]";
-        }
-        else if (BaseArmorClass != 0)
-        {
-            s += $" [{BaseArmorClass}]";
-        }
-        return s;
-    }
 }

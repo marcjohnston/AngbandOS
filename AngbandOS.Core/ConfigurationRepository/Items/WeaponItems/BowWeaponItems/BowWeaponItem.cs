@@ -16,36 +16,4 @@ internal abstract class BowWeaponItem : WeaponItem
     public override BowWeaponItemFactory Factory => (BowWeaponItemFactory)base.Factory;
 
     public BowWeaponItem(SaveGame saveGame, ItemFactory itemClass) : base(saveGame, itemClass) { }
-
-    public override string GetDetailedDescription()
-    {
-        string basenm = "";
-        RefreshFlagBasedProperties();
-        int power = Factory.MissileDamageMultiplier;
-        if (Factory.XtraMight)
-        {
-            power++;
-        }
-        basenm += $" (x{power})";
-        if (IsKnown())
-        {
-            basenm += $" ({GetSignedValue(BonusToHit)},{GetSignedValue(BonusDamage)})";
-
-            if (BaseArmorClass != 0)
-            {
-                // Add base armor class for all types of armor and when the base armor class is greater than zero.
-                basenm += $" [{BaseArmorClass},{GetSignedValue(BonusArmorClass)}]";
-            }
-            else if (BonusArmorClass != 0)
-            {
-                // This is not armor, only show bonus armor class, if it is not zero and we know about it.
-                basenm += $" [{GetSignedValue(BonusArmorClass)}]";
-            }
-        }
-        else if (BaseArmorClass != 0)
-        {
-            basenm += $" [{BaseArmorClass}]";
-        }
-        return basenm;
-    }
 }

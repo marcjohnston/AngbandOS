@@ -11,29 +11,4 @@ namespace AngbandOS.Core.Items;
 internal abstract class WeaponItem : Item
 {
     public WeaponItem(SaveGame saveGame, ItemFactory itemClass) : base(saveGame, itemClass) { }
-    public override string GetDetailedDescription()
-    {
-        string s = "";
-        s += $" ({DamageDice}d{DamageDiceSides})";
-        if (IsKnown())
-        {
-            s += $" ({GetSignedValue(BonusToHit)},{GetSignedValue(BonusDamage)})";
-
-            if (BaseArmorClass != 0)
-            {
-                // Add base armor class for all types of armor and when the base armor class is greater than zero.
-                s += $" [{BaseArmorClass},{GetSignedValue(BonusArmorClass)}]";
-            }
-            else if (BonusArmorClass != 0)
-            {
-                // This is not armor, only show bonus armor class, if it is not zero and we know about it.
-                s += $" [{GetSignedValue(BonusArmorClass)}]";
-            }
-        }
-        else if (BaseArmorClass != 0)
-        {
-            s += $" [{BaseArmorClass}]";
-        }
-        return s;
-    }
 }

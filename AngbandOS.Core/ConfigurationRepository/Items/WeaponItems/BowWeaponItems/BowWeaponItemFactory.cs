@@ -15,6 +15,38 @@ internal abstract class BowWeaponItemFactory : WeaponItemFactory // TODO: Should
     /// </summary>
     public override int WieldSlot => InventorySlot.RangedWeapon;
 
+    public override string GetDetailedDescription(Item item)
+    {
+        string basenm = "";
+        item.RefreshFlagBasedProperties();
+        int power = MissileDamageMultiplier;
+        if (XtraMight)
+        {
+            power++;
+        }
+        basenm += $" (x{power})";
+        if (item.IsKnown())
+        {
+            basenm += $" ({GetSignedValue(item.BonusToHit)},{GetSignedValue(item.BonusDamage)})";
+
+            if (item.BaseArmorClass != 0)
+            {
+                // Add base armor class for all types of armor and when the base armor class is greater than zero.
+                basenm += $" [{item.BaseArmorClass},{GetSignedValue(item.BonusArmorClass)}]";
+            }
+            else if (item.BonusArmorClass != 0)
+            {
+                // This is not armor, only show bonus armor class, if it is not zero and we know about it.
+                basenm += $" [{GetSignedValue(item.BonusArmorClass)}]";
+            }
+        }
+        else if (item.BaseArmorClass != 0)
+        {
+            basenm += $" [{item.BaseArmorClass}]";
+        }
+        return basenm;
+    }
+
     public override void ApplyRandomSlaying(Item item, ref IArtifactBias artifactBias)
     {
         if (artifactBias != null)

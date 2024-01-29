@@ -17,6 +17,42 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey<string>
 {
     protected readonly SaveGame SaveGame;
 
+    /// <summary>
+    /// Returns an additional description of the item that is appended to the base description, when needed.  Returns string.empty by default.
+    /// </summary>
+    /// <returns></returns>
+    public virtual string GetDetailedDescription(Item item)
+    {
+        string s = "";
+        if (item.IsKnown())
+        {
+            item.RefreshFlagBasedProperties();
+            if (ShowMods || item.BonusToHit != 0 && item.BonusDamage != 0)
+            {
+                s += $" ({GetSignedValue(item.BonusToHit)},{GetSignedValue(item.BonusDamage)})";
+            }
+            else if (item.BonusToHit != 0)
+            {
+                s += $" ({GetSignedValue(item.BonusToHit)})";
+            }
+            else if (item.BonusDamage != 0)
+            {
+                s += $" ({GetSignedValue(item.BonusDamage)})";
+            }
+
+            if (item.BaseArmorClass != 0)
+            {
+                // Add base armor class for all types of armor and when the base armor class is greater than zero.
+                s += $" [{item.BaseArmorClass},{GetSignedValue(item.BonusArmorClass)}]";
+            }
+            else if (item.BonusArmorClass != 0)
+            {
+                // This is not armor, only show bonus armor class, if it is not zero and we know about it.
+                s += $" [{GetSignedValue(item.BonusArmorClass)}]";
+            }
+        }
+        return s;
+    }
 
     /// <summary>
     /// Returns a description for the item.  Returns a macro processed description, by default.

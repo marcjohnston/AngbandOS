@@ -786,7 +786,7 @@ internal class Item : IComparable<Item>, IGetKey<string>
         }
 
         // This is the detailed description.
-        basenm += GetDetailedDescription();
+        basenm += Factory.GetDetailedDescription(this);
         if (mode < 2)
         {
             return basenm;
@@ -3025,43 +3025,6 @@ internal class Item : IComparable<Item>, IGetKey<string>
             t += SaveGame.Rng.RandomLessThan(max);
         }
         return t;
-    }
-
-    /// <summary>
-    /// Returns an additional description of the item that is appended to the base description, when needed.  Returns string.empty by default.
-    /// </summary>
-    /// <returns></returns>
-    public virtual string GetDetailedDescription()
-    {
-        string s = "";
-        if (IsKnown())
-        {
-            RefreshFlagBasedProperties();
-            if (Factory.ShowMods || BonusToHit != 0 && BonusDamage != 0)
-            {
-                s += $" ({GetSignedValue(BonusToHit)},{GetSignedValue(BonusDamage)})";
-            }
-            else if (BonusToHit != 0)
-            {
-                s += $" ({GetSignedValue(BonusToHit)})";
-            }
-            else if (BonusDamage != 0)
-            {
-                s += $" ({GetSignedValue(BonusDamage)})";
-            }
-
-            if (BaseArmorClass != 0)
-            {
-                // Add base armor class for all types of armor and when the base armor class is greater than zero.
-                s += $" [{BaseArmorClass},{GetSignedValue(BonusArmorClass)}]";
-            }
-            else if (BonusArmorClass != 0)
-            {
-                // This is not armor, only show bonus armor class, if it is not zero and we know about it.
-                s += $" [{GetSignedValue(BonusArmorClass)}]";
-            }
-        }
-        return s;
     }
 
     /// <summary>

@@ -17,6 +17,36 @@ internal abstract class ChestItemFactory : ItemFactory
     public override bool HatesFire => true;
     public override bool HatesAcid => true;
 
+    public override string GetDetailedDescription(Item item)
+    {
+        string s = string.Empty;
+        if (!item.IsKnown())
+        {
+        }
+        else if (item.TypeSpecificValue == 0)
+        {
+            s += " (empty)";
+        }
+        else if (item.TypeSpecificValue < 0)
+        {
+            if (SaveGame.SingletonRepository.ChestTrapConfigurations[-item.TypeSpecificValue].IsTrapped)
+            {
+                s += " (disarmed)";
+            }
+            else
+            {
+                s += " (unlocked)";
+            }
+        }
+        else
+        {
+            s += $" {SaveGame.SingletonRepository.ChestTrapConfigurations[item.TypeSpecificValue].Description}";
+        }
+
+        // Chests do not have Mods, Damage or Bonus.  We are omitting the description for those features.
+        return s;
+    }
+
     /// <summary>
     /// Assigns the TypeSpecificValue for this chest.
     /// </summary>

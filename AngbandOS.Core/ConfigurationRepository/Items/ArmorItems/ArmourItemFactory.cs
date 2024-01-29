@@ -22,6 +22,35 @@ internal abstract class ArmorItemFactory : ItemFactory
         return item.ComputeTypeSpecificRealValue(value);
     }
 
+    public override string GetDetailedDescription(Item item)
+    {
+        string s = "";
+        if (item.IsKnown())
+        {
+            item.RefreshFlagBasedProperties();
+            if (ShowMods || item.BonusToHit != 0 && item.BonusDamage != 0)
+            {
+                s += $" ({GetSignedValue(item.BonusToHit)},{GetSignedValue(item.BonusDamage)})";
+            }
+            else if (item.BonusToHit != 0)
+            {
+                s += $" ({GetSignedValue(item.BonusToHit)})";
+            }
+            else if (item.BonusDamage != 0)
+            {
+                s += $" ({GetSignedValue(item.BonusDamage)})";
+            }
+
+            // Add base armor class for all types of armor and when the base armor class is greater than zero.
+            s += $" [{item.BaseArmorClass},{GetSignedValue(item.BonusArmorClass)}]";
+        }
+        else if (item.BaseArmorClass != 0)
+        {
+            s += $" [{item.BaseArmorClass}]";
+        }
+        return s;
+    }
+
     public override int GetAdditionalMassProduceCount(Item item)
     {
         int cost = item.Value();
