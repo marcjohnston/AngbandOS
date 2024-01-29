@@ -13,6 +13,20 @@ internal abstract class PotionItemFactory : ItemFactory, IFlavour
     public PotionItemFactory(SaveGame saveGame) : base(saveGame) { }
     public override ItemClass ItemClass => SaveGame.SingletonRepository.ItemClasses.Get(nameof(PotionsItemClass));
 
+    public override int GetAdditionalMassProduceCount(Item item)
+    {
+        int cost = item.Value();
+        if (cost <= 60)
+        {
+            return item.MassRoll(3, 5);
+        }
+        if (cost <= 240)
+        {
+            return item.MassRoll(1, 5);
+        }
+        return 0;
+    }
+
     /// <summary>
     /// Returns the potions flavours repository because potions have flavours that need to be identified.  The Apple Juice, Water and Slime-Mold
     /// potions override this

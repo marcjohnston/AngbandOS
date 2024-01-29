@@ -18,6 +18,20 @@ internal abstract class ScrollItemFactory : ItemFactory, IFlavour
     /// </summary>
     public IEnumerable<Flavour>? GetFlavorRepository() => SaveGame.ScrollFlavours;
 
+    public override int GetAdditionalMassProduceCount(Item item)
+    {
+        int cost = item.Value();
+        if (cost <= 60)
+        {
+            return item.MassRoll(3, 5);
+        }
+        if (cost <= 240)
+        {
+            return item.MassRoll(1, 5);
+        }
+        return 0;
+    }
+
     public override int PercentageBreakageChance => 50;
     public override bool CanBeRead => true;
 

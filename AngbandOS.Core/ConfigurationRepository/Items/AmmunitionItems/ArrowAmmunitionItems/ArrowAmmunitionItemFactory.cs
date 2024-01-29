@@ -17,6 +17,7 @@ internal abstract class ArrowAmmunitionItemFactory : AmmunitionItemFactory
     public override int PackSort => 34;
     public override bool HatesFire => true;
     public override bool HatesAcid => true;
+
     /// <summary>
     /// Returns true, for all arrows.
     /// </summary>

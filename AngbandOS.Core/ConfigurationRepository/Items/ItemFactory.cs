@@ -20,6 +20,15 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey<string>
     public virtual int? GetTypeSpecificRealValue(Item item, int value) => 0;
 
     /// <summary>
+    /// Returns the number of additional items to be produced, when the item is mass produced for a store.  Returns 0, by default.  When an item
+    /// is created for stores, this mass produce count can be used to create additional stores of the item based on the value of the item.  An item
+    /// with a high value may not produce as many as other items of lower value.
+    /// </summary>
+    /// <param name="item"></param>
+    /// <returns></returns>
+    public virtual int GetAdditionalMassProduceCount(Item item) => 0;
+
+    /// <summary>
     /// Applies an additional bonus to random artifacts.  Does nothing by default.
     /// </summary>
     /// <param name="item"></param>

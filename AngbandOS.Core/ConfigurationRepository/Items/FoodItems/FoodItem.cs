@@ -14,20 +14,6 @@ internal abstract class FoodItem : Item
 
     public override FoodItemFactory Factory => (FoodItemFactory)base.Factory;
 
-    public override int GetAdditionalMassProduceCount()
-    {
-        int cost = Value();
-        if (cost <= 5)
-        {
-            return MassRoll(3, 5);
-        }
-        if (cost <= 20)
-        {
-            return MassRoll(3, 5);
-        }
-        return 0;
-    }
-
     public override string GetDescription(bool includeCountPrefix)
     {
         return base.GetDescription(includeCountPrefix);

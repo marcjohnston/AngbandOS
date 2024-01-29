@@ -22,6 +22,24 @@ internal abstract class ArmorItemFactory : ItemFactory
         return item.ComputeTypeSpecificRealValue(value);
     }
 
+    public override int GetAdditionalMassProduceCount(Item item)
+    {
+        int cost = item.Value();
+        if (item.RareItemTypeIndex != 0)
+        {
+            return 0;
+        }
+        if (cost <= 10)
+        {
+            return item.MassRoll(3, 5);
+        }
+        if (cost <= 100)
+        {
+            return item.MassRoll(3, 5);
+        }
+        return 0;
+    }
+
     public override void ApplyRandartBonus(Item item)
     {
         item.BonusArmorClass += SaveGame.Rng.DieRoll(item.BonusArmorClass > 19 ? 1 : 20 - item.BonusArmorClass);

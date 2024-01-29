@@ -502,7 +502,7 @@ internal class Store
         int size = 1;
         int discount = 0;
         int cost = oPtr.Value();
-        size += oPtr.GetAdditionalMassProduceCount();
+        size += oPtr.Factory.GetAdditionalMassProduceCount(oPtr);
         if (cost < 5)
         {
             discount = 0;

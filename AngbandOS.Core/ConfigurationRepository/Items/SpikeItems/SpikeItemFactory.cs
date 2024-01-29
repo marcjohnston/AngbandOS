@@ -12,6 +12,25 @@ internal abstract class SpikeItemFactory : ItemFactory
 {
     public SpikeItemFactory(SaveGame saveGame) : base(saveGame) { }
     public override ItemClass ItemClass => SaveGame.SingletonRepository.ItemClasses.Get(nameof(SpikesItemClass));
+
+    public override int GetAdditionalMassProduceCount(Item item)
+    {
+        int cost = item.Value();
+        if (cost <= 5)
+        {
+            return item.MassRoll(5, 5);
+        }
+        if (cost <= 50)
+        {
+            return item.MassRoll(5, 5);
+        }
+        if (cost <= 500)
+        {
+            return item.MassRoll(5, 5);
+        }
+        return 0;
+    }
+
     public override int MakeObjectCount => SaveGame.Rng.DiceRoll(6, 7);
     public override bool EasyKnow => true;
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Spike;

@@ -11,22 +11,4 @@ namespace AngbandOS.Core.Items;
 internal abstract class ArrowAmmunitionItem : AmmunitionItem
 {
     public ArrowAmmunitionItem(SaveGame saveGame, ItemFactory itemClass) : base(saveGame, itemClass) { }
-
-    public override int GetAdditionalMassProduceCount()
-    {
-        int cost = Value();
-        if (cost <= 5)
-        {
-            return MassRoll(5, 5);
-        }
-        if (cost <= 50)
-        {
-            return MassRoll(5, 5);
-        }
-        if (cost <= 500)
-        {
-            return MassRoll(5, 5);
-        }
-        return 0;
-    }
 }

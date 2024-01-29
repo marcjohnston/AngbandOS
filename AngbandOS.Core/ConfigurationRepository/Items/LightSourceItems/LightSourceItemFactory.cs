@@ -19,6 +19,20 @@ internal abstract class LightSourceItemFactory : ItemFactory
     public override BaseInventorySlot BaseWieldSlot => SaveGame.SingletonRepository.InventorySlots.Get(nameof(LightsourceInventorySlot));
     public override bool IsWorthless(Item item) => item.TypeSpecificValue < 0;
 
+    public override int GetAdditionalMassProduceCount(Item item)
+    {
+        int cost = item.Value();
+        if (cost <= 5)
+        {
+            return item.MassRoll(3, 5);
+        }
+        if (cost <= 20)
+        {
+            return item.MassRoll(3, 5);
+        }
+        return 0;
+    }
+
     public override int? GetTypeSpecificRealValue(Item item, int value)
     {
         return item.ComputeTypeSpecificRealValue(value);

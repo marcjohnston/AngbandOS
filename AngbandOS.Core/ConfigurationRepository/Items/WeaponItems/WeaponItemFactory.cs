@@ -17,6 +17,24 @@ internal abstract class WeaponItemFactory : ItemFactory
     public override bool HasQuality => true;
     public override bool CanApplyBonusArmorClassMiscPower => true;
 
+    public override int GetAdditionalMassProduceCount(Item item)
+    {
+        int cost = item.Value();
+        if (item.RareItemTypeIndex != 0)
+        {
+            return 0;
+        }
+        if (cost <= 10)
+        {
+            return item.MassRoll(3, 5);
+        }
+        if (cost <= 100)
+        {
+            return item.MassRoll(3, 5);
+        }
+        return 0;
+    }
+
     public override int? GetTypeSpecificRealValue(Item item, int value)
     {
         return item.ComputeTypeSpecificRealValue(value);

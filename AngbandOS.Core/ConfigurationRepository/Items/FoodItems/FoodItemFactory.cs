@@ -15,6 +15,20 @@ internal abstract class FoodItemFactory : ItemFactory
     public override int PercentageBreakageChance => 100;
     public override bool EasyKnow => true;
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Food;
+    public override int GetAdditionalMassProduceCount(Item item)
+    {
+        int cost = item.Value();
+        if (cost <= 5)
+        {
+            return item.MassRoll(3, 5);
+        }
+        if (cost <= 20)
+        {
+            return item.MassRoll(3, 5);
+        }
+        return 0;
+    }
+
     public override int PackSort => 9;
     public override int BaseValue => 5;
     //public override bool CanBeConsumed => true;

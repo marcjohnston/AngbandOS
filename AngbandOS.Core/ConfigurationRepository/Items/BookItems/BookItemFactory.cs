@@ -16,6 +16,20 @@ internal abstract class BookItemFactory : ItemFactory
     /// </summary>
     public override bool EasyKnow => true;
 
+    public override int GetAdditionalMassProduceCount(Item item)
+    {
+        int cost = item.Value();
+        if (cost <= 50)
+        {
+            return item.MassRoll(2, 3) + 1;
+        }
+        if (cost <= 500)
+        {
+            return item.MassRoll(1, 3) + 1;
+        }
+        return 0;
+    }
+
     public abstract Realm? ToRealm { get; }
 
     public abstract Spell[] Spells { get; }

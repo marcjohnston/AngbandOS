@@ -11,6 +11,24 @@ namespace AngbandOS.Core.ItemClasses;
 internal abstract class AmmunitionItemFactory : WeaponItemFactory
 {
     public AmmunitionItemFactory(SaveGame saveGame) : base(saveGame) { }
+
+    public override int GetAdditionalMassProduceCount(Item item)
+    {
+        int cost = item.Value();
+        if (cost <= 5)
+        {
+            return item.MassRoll(5, 5);
+        }
+        if (cost <= 50)
+        {
+            return item.MassRoll(5, 5);
+        }
+        if (cost <= 500)
+        {
+            return item.MassRoll(5, 5);
+        }
+        return 0;
+    }
     public override int? GetTypeSpecificRealValue(Item item, int value)
     {
         return item.ComputeTypeSpecificRealValue(value);

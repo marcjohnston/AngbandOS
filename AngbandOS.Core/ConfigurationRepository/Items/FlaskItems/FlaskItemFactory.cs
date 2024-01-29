@@ -13,6 +13,19 @@ internal abstract class FlaskItemFactory : ItemFactory
     public FlaskItemFactory(SaveGame saveGame) : base(saveGame) { }
     public override ItemClass ItemClass => SaveGame.SingletonRepository.ItemClasses.Get(nameof(FlasksItemClass));
     public override bool EasyKnow => true;
+    public override int GetAdditionalMassProduceCount(Item item)
+    {
+        int cost = item.Value();
+        if (cost <= 5)
+        {
+            return item.MassRoll(3, 5);
+        }
+        if (cost <= 20)
+        {
+            return item.MassRoll(3, 5);
+        }
+        return 0;
+    }
     public override int PercentageBreakageChance => 100;
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Flask;
     public override bool HatesCold => true;

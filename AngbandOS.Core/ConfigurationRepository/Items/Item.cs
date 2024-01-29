@@ -3017,7 +3017,7 @@ internal class Item : IComparable<Item>, IGetKey<string>
         return bonusValue;
     }
 
-    protected int MassRoll(int num, int max)
+    public int MassRoll(int num, int max)
     {
         int t = 0;
         for (int i = 0; i < num; i++)
@@ -3026,15 +3026,6 @@ internal class Item : IComparable<Item>, IGetKey<string>
         }
         return t;
     }
-
-    /// <summary>
-    /// Returns the number of additional items to be produced, when the item is mass produced for a store.  Returns 0, by default.  When an item
-    /// is created for stores, this mass produce count can be used to create additional stores of the item based on the value of the item.  An item
-    /// with a high value may not produce as many as other items of lower value.
-    /// </summary>
-    /// <param name="item"></param>
-    /// <returns></returns>
-    public virtual int GetAdditionalMassProduceCount() => 0;
 
     /// <summary>
     /// Returns a description for the item.  Returns a macro processed description, by default.
