@@ -5,10 +5,13 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using AngbandOS.Core.Interface.Definitions;
+using System.Text.Json;
+
 namespace AngbandOS.Core.HelpGroups;
 
 [Serializable]
-internal abstract class HelpGroup : IGetKey<string>
+internal abstract class HelpGroup : IGetKey<string>, IToJson
 {
     protected SaveGame SaveGame { get; }
     protected HelpGroup(SaveGame saveGame) 
@@ -20,6 +23,17 @@ internal abstract class HelpGroup : IGetKey<string>
 
     public string GetKey => Key;
     public virtual void Bind() { }
+
+    public string ToJson()
+    {
+        HelpGroupDefinition helpGroupDefinition = new()
+        {
+            Key = Key,
+            Title = Title,
+            SortIndex= SortIndex,
+        };
+        return JsonSerializer.Serialize<HelpGroupDefinition>(helpGroupDefinition);
+    }
 
     public abstract string Title { get; }
     public abstract int SortIndex { get; }
