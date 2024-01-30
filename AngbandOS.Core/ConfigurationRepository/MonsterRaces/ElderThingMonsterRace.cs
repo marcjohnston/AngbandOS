@@ -23,16 +23,17 @@ internal class ElderThingMonsterRace : MonsterRace
         nameof(TeleportAwayMonsterSpell)
     };
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperASymbol));
+    protected override string SymbolName => nameof(UpperASymbol);
     public override ColorEnum Color => ColorEnum.Purple;
     public override string Name => "Elder thing";
 
     public override int ArmorClass => 70;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(CrushAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 4, 6),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(CrushAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 4, 6),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(CrushAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 4, 6),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(TouchAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(LoseWisAttackEffect)), 0, 0)
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(CrushAttack), nameof(HurtAttackEffect), 4, 6),
+        new MonsterAttackDefinition(nameof(CrushAttack), nameof(HurtAttackEffect), 4, 6),
+        new MonsterAttackDefinition(nameof(CrushAttack), nameof(HurtAttackEffect), 4, 6),
+        new MonsterAttackDefinition(nameof(TouchAttack), nameof(LoseWisAttackEffect), 0, 0)
     };
     public override bool BashDoor => true;
     public override bool Cthuloid => true;

@@ -12,15 +12,16 @@ internal class WhiteHarpyMonsterRace : MonsterRace
 {
     protected WhiteHarpyMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperHSymbol));
+    protected override string SymbolName => nameof(UpperHSymbol);
     public override string Name => "White harpy";
 
     public override bool Animal => true;
     public override int ArmorClass => 17;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(ClawAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 1, 1),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(ClawAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 1, 1),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 1, 2),
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(ClawAttack), nameof(HurtAttackEffect), 1, 1),
+        new MonsterAttackDefinition(nameof(ClawAttack), nameof(HurtAttackEffect), 1, 1),
+        new MonsterAttackDefinition(nameof(BiteAttack), nameof(HurtAttackEffect), 1, 2),
     };
     public override string Description => "A flying, screeching bird with a woman's face.";
     public override bool Evil => true;

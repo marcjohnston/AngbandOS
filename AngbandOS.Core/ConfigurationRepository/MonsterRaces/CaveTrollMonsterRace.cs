@@ -12,16 +12,17 @@ internal class CaveTrollMonsterRace : MonsterRace
 {
     protected CaveTrollMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperTSymbol));
+    protected override string SymbolName => nameof(UpperTSymbol);
     public override ColorEnum Color => ColorEnum.Brown;
     public override string Name => "Cave troll";
 
     public override int ArmorClass => 50;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 3, 5),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 1, 8),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 1, 8),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 1, 8)
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 3, 5),
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 1, 8),
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 1, 8),
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 1, 8)
     };
     public override bool BashDoor => true;
     public override string Description => "He is a vicious monster, feared for his ferocity.";

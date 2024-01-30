@@ -12,14 +12,15 @@ internal class YellowWormMassMonsterRace : MonsterRace
 {
     protected YellowWormMassMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerWSymbol));
+    protected override string SymbolName => nameof(LowerWSymbol);
     public override ColorEnum Color => ColorEnum.Yellow;
     public override string Name => "Yellow worm mass";
 
     public override bool Animal => true;
     public override int ArmorClass => 4;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(CrawlAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(LoseDexAttackEffect)), 1, 3),
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(CrawlAttack), nameof(LoseDexAttackEffect), 1, 3),
     };
     public override string Description => "It is a large slimy mass of worms.";
     public override int FreqInate => 0;

@@ -27,16 +27,17 @@ internal class TheWitchKingOfAngmarMonsterRace : MonsterRace
         nameof(TeleportAwayMonsterSpell)
     };
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperWSymbol));
+    protected override string SymbolName => nameof(UpperWSymbol);
     public override ColorEnum Color => ColorEnum.Black;
     public override string Name => "The Witch-King of Angmar";
 
     public override int ArmorClass => 120;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 10, 10),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 10, 10),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(Exp80AttackEffect)), 5, 5),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(Exp80AttackEffect)), 5, 5)
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 10, 10),
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 10, 10),
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(Exp80AttackEffect), 5, 5),
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(Exp80AttackEffect), 5, 5)
     };
     public override bool BashDoor => true;
     public override bool ColdBlood => true;

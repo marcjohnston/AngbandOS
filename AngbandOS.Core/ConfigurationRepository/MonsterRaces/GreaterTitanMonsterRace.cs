@@ -18,16 +18,17 @@ internal class GreaterTitanMonsterRace : MonsterRace
         nameof(TeleportToMonsterSpell)
     };
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperPSymbol));
+    protected override string SymbolName => nameof(UpperPSymbol);
     public override ColorEnum Color => ColorEnum.BrightYellow;
     public override string Name => "Greater titan";
 
     public override int ArmorClass => 125;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(ConfuseAttackEffect)), 12, 12),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(ConfuseAttackEffect)), 12, 12),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(ConfuseAttackEffect)), 12, 12),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(ConfuseAttackEffect)), 12, 12)
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(ConfuseAttackEffect), 12, 12),
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(ConfuseAttackEffect), 12, 12),
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(ConfuseAttackEffect), 12, 12),
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(ConfuseAttackEffect), 12, 12)
     };
     public override bool BashDoor => true;
     public override string Description => "A forty foot tall humanoid that shakes the ground as it walks. The power radiating from its frame shakes your courage, its hatred inspired by your defiance.";

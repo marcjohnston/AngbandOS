@@ -18,16 +18,17 @@ internal class BlueIckyThingMonsterRace : MonsterRace
         nameof(ScareMonsterSpell)
     };
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerISymbol));
+    protected override string SymbolName => nameof(LowerISymbol);
     public override ColorEnum Color => ColorEnum.Blue;
     public override string Name => "Blue icky thing";
 
     public override int ArmorClass => 20;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(CrawlAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(PoisonAttackEffect)), 1, 4),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(CrawlAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(EatFoodAttackEffect)), 0, 0),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 1, 4),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 1, 4)
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(CrawlAttack), nameof(PoisonAttackEffect), 1, 4),
+        new MonsterAttackDefinition(nameof(CrawlAttack), nameof(EatFoodAttackEffect), 0, 0),
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 1, 4),
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 1, 4)
     };
     public override bool BashDoor => true;
     public override string Description => "It is a strange, slimy, icky creature, with rudimentary intelligence, but evil cunning. It hungers for food, and you look tasty.";

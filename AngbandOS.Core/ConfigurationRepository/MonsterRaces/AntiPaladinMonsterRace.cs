@@ -23,15 +23,16 @@ internal class AntiPaladinMonsterRace : MonsterRace
         nameof(HasteMonsterSpell)
     };
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerPSymbol));
+    protected override string SymbolName => nameof(LowerPSymbol);
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "Anti-paladin";
 
     public override int ArmorClass => 50;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 2, 6),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 1, 6),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 1, 6),
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 2, 6),
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 1, 6),
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 1, 6),
     };
     public override bool BashDoor => true;
     public override string Description => "An embodiment of all the cardinal vices, he beholds you scornfully.";

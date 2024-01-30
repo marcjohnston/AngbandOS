@@ -40,14 +40,15 @@ internal class GlaakiMonsterRace : MonsterRace
         nameof(TeleportSelfMonsterSpell)
     };
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperXSymbol));
+    protected override string SymbolName => nameof(UpperXSymbol);
     public override string Name => "Glaaki";
 
     public override int ArmorClass => 100;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 10, 15),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 10, 15),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(LoseConAttackEffect)), 10, 15),
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 10, 15),
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 10, 15),
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(LoseConAttackEffect), 10, 15),
     };
     public override bool BashDoor => true;
     public override string Description => "Oval bodied with countless thin spines, and three baleful yellow eyes on thin stalks.";

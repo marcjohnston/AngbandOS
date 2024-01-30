@@ -17,15 +17,16 @@ internal class MagmaElementalMonsterRace : MonsterRace
         nameof(PlasmaBoltMonsterSpell)
     };
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperESymbol));
+    protected override string SymbolName => nameof(UpperESymbol);
     public override ColorEnum Color => ColorEnum.Orange;
     public override string Name => "Magma elemental";
 
     public override int ArmorClass => 70;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 4, 6),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(FireAttackEffect)), 3, 7),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(FireAttackEffect)), 3, 7),
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 4, 6),
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(FireAttackEffect), 3, 7),
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(FireAttackEffect), 3, 7),
     };
     public override string Description => "It is a towering glowing form of molten hate.";
     public override bool EmptyMind => true;

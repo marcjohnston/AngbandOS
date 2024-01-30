@@ -18,16 +18,17 @@ internal class StraashaQueenOfAirMonsterRace : MonsterRace
         nameof(LightningBoltMonsterSpell)
     };
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperESymbol));
+    protected override string SymbolName => nameof(UpperESymbol);
     public override ColorEnum Color => ColorEnum.BrightBlue;
     public override string Name => "Straasha, Queen of Air";
 
     public override int ArmorClass => 50;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 4, 6),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(ConfuseAttackEffect)), 1, 4),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 4, 6),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(ConfuseAttackEffect)), 1, 4)
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 4, 6),
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(ConfuseAttackEffect), 1, 4),
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 4, 6),
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(ConfuseAttackEffect), 1, 4)
     };
     public override bool BashDoor => true;
     public override bool ColdBlood => true;

@@ -17,12 +17,11 @@ internal class NexusQuylthulgMonsterRace : MonsterRace
         nameof(TeleportAwayMonsterSpell)
     };
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperQSymbol));
+    protected override string SymbolName => nameof(UpperQSymbol);
     public override ColorEnum Color => ColorEnum.Pink;
     public override string Name => "Nexus quylthulg";
 
     public override int ArmorClass => 1;
-    public override MonsterAttack[]? Attacks => null;
     public override string Description => "It is a very unstable, strange pulsing mound of flesh.";
     public override bool EmptyMind => true;
     public override bool ForceSleep => true;

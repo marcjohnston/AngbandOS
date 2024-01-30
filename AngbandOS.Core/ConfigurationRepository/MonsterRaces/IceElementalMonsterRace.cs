@@ -17,14 +17,15 @@ internal class IceElementalMonsterRace : MonsterRace
         nameof(IceBoltMonsterSpell)
     };
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperESymbol));
+    protected override string SymbolName => nameof(UpperESymbol);
     public override string Name => "Ice elemental";
 
     public override int ArmorClass => 60;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(ColdAttackEffect)), 1, 3),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 4, 6),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(ColdAttackEffect)), 1, 3),
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(BiteAttack), nameof(ColdAttackEffect), 1, 3),
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 4, 6),
+        new MonsterAttackDefinition(nameof(BiteAttack), nameof(ColdAttackEffect), 1, 3),
     };
     public override bool BashDoor => true;
     public override bool ColdBlood => true;

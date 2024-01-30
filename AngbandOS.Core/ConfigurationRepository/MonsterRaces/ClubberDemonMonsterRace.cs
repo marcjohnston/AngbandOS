@@ -17,15 +17,16 @@ internal class ClubberDemonMonsterRace : MonsterRace
         nameof(ConfuseMonsterSpell)
     };
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperUSymbol));
+    protected override string SymbolName => nameof(UpperUSymbol);
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "Clubber demon";
 
     public override int ArmorClass => 50;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 3, 4),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 8, 12),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 8, 12),
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 3, 4),
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 8, 12),
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 8, 12),
     };
     public override bool BashDoor => true;
     public override bool Demon => true;

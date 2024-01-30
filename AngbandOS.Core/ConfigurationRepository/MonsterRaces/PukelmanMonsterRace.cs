@@ -18,14 +18,15 @@ internal class PukelmanMonsterRace : MonsterRace
         nameof(SlowMonsterSpell)
     };
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerGSymbol));
+    protected override string SymbolName => nameof(LowerGSymbol);
     public override ColorEnum Color => ColorEnum.Brown;
     public override string Name => "Pukelman";
 
     public override int ArmorClass => 80;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 3, 6),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 1, 12),
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 3, 6),
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 1, 12),
     };
     public override bool BashDoor => true;
     public override bool ColdBlood => true;

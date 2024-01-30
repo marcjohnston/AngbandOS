@@ -12,14 +12,15 @@ internal class StoneGiantMonsterRace : MonsterRace
 {
     protected StoneGiantMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperPSymbol));
+    protected override string SymbolName => nameof(UpperPSymbol);
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "Stone giant";
 
     public override int ArmorClass => 75;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 3, 8),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 3, 8),
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 3, 8),
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 3, 8),
     };
     public override bool BashDoor => true;
     public override string Description => "It is eighteen feet tall and looking at you.";

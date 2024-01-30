@@ -24,15 +24,16 @@ internal class IronLichMonsterRace : MonsterRace
         nameof(SummonUndeadMonsterSpell)
     };
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperLSymbol));
+    protected override string SymbolName => nameof(UpperLSymbol);
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "Iron lich";
 
     public override int ArmorClass => 100;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(ButtAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(ColdAttackEffect)), 3, 6),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(ButtAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(FireAttackEffect)), 3, 6),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(ButtAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(ElectricityAttackEffect)), 3, 6),
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(ButtAttack), nameof(ColdAttackEffect), 3, 6),
+        new MonsterAttackDefinition(nameof(ButtAttack), nameof(FireAttackEffect), 3, 6),
+        new MonsterAttackDefinition(nameof(ButtAttack), nameof(ElectricityAttackEffect), 3, 6),
     };
     public override bool BashDoor => true;
     public override bool ColdBlood => true;

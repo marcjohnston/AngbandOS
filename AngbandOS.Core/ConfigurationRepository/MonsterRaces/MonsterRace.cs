@@ -34,6 +34,23 @@ internal abstract class MonsterRace : IMonsterCharacteristics, IGetKey<string>
                 Spells.Add(SaveGame.SingletonRepository.MonsterSpells.Get(spellName));
             }
         }
+
+        // Bind the symbol.
+        Symbol = SaveGame.SingletonRepository.Symbols.Get(SymbolName);
+
+        // Bind the monster attacks.
+        List<MonsterAttack> attackList = new();
+        foreach (MonsterAttackDefinition monsterAttackDefinition in AttackDefinitions)
+        {
+            Attack attack = SaveGame.SingletonRepository.Attacks.Get(monsterAttackDefinition.MethodName);
+            AttackEffect? attackEffect = null;
+            if (monsterAttackDefinition.EffectName != null)
+            {
+                 attackEffect = SaveGame.SingletonRepository.AttackEffects.Get(monsterAttackDefinition.EffectName);
+            }
+            attackList.Add(new MonsterAttack(attack, attackEffect, monsterAttackDefinition.DDice, monsterAttackDefinition.DSide));
+        }
+        Attacks = attackList.ToArray();
     }
 
     protected virtual string[]? SpellNames => null;
@@ -78,9 +95,15 @@ internal abstract class MonsterRace : IMonsterCharacteristics, IGetKey<string>
     }
 
     /// <summary>
+    /// Returns the key for the symbol to be used.  The actual Symbol object is bound to the Symbol property during the
+    /// bind phase.
+    /// </summary>
+    protected abstract string SymbolName { get; }
+
+    /// <summary>
     /// Returns the symbol to use for rendering.
     /// </summary>
-    public abstract Symbol Symbol { get; }
+    public Symbol Symbol { get; private set; }
 
     /// <summary>
     /// The color to display the monster as.
@@ -103,9 +126,15 @@ internal abstract class MonsterRace : IMonsterCharacteristics, IGetKey<string>
     public abstract int ArmorClass { get; }
 
     /// <summary>
+    /// Returns an array of the definitions for the attacks abilities of the monster; or null, if the monster cannot attack.  Returns
+    /// null, by default.
+    /// </summary>
+    protected virtual MonsterAttackDefinition[]? AttackDefinitions => null;
+
+    /// <summary>
     /// Returns all of the attacks that the monster can perform in a single round.
     /// </summary>
-    public virtual MonsterAttack[]? Attacks => null;
+    public MonsterAttack[]? Attacks { get; private set; } = null;
 
     /// <summary>
     /// The monster's color can be anything (if 'AttrMulti' is set).

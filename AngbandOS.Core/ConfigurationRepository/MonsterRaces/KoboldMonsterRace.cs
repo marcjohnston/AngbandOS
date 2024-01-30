@@ -12,13 +12,14 @@ internal class KoboldMonsterRace : MonsterRace
 {
     protected KoboldMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerKSymbol));
+    protected override string SymbolName => nameof(LowerKSymbol);
     public override ColorEnum Color => ColorEnum.Green;
     public override string Name => "Kobold";
 
     public override int ArmorClass => 16;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 1, 6),
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 1, 6),
     };
     public override bool BashDoor => true;
     public override string Description => "It is a small, dog-headed humanoid.";

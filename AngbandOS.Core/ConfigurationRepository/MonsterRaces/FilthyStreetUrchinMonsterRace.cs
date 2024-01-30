@@ -12,14 +12,15 @@ internal class FilthyStreetUrchinMonsterRace : MonsterRace
 {
     protected FilthyStreetUrchinMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerTSymbol));
+    protected override string SymbolName => nameof(LowerTSymbol);
     public override ColorEnum Color => ColorEnum.BrightGrey;
     public override string Name => "Filthy street urchin";
 
     public override int ArmorClass => 1;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BegAttack)), null, 0, 0),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(TouchAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(EatGoldAttackEffect)), 0, 0),
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(BegAttack), null, 0, 0),
+        new MonsterAttackDefinition(nameof(TouchAttack), nameof(EatGoldAttackEffect), 0, 0),
     };
     public override string Description => "He looks squalid and thoroughly revolting.";
     public override bool Evil => true;

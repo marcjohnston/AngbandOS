@@ -16,13 +16,14 @@ internal class GrapeJellyMonsterRace : MonsterRace
         nameof(DrainManaMonsterSpell)
     };
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerJSymbol));
+    protected override string SymbolName => nameof(LowerJSymbol);
     public override ColorEnum Color => ColorEnum.Purple;
     public override string Name => "Grape jelly";
 
     public override int ArmorClass => 1;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(TouchAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(Exp10AttackEffect)), 0, 0),
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(TouchAttack), nameof(Exp10AttackEffect), 0, 0),
     };
     public override string Description => "It is a pulsing mound of glowing flesh.";
     public override bool EmptyMind => true;

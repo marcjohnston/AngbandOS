@@ -12,15 +12,16 @@ internal class FasoltTheGiantMonsterRace : MonsterRace
 {
     protected FasoltTheGiantMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperPSymbol));
+    protected override string SymbolName => nameof(UpperPSymbol);
     public override ColorEnum Color => ColorEnum.Brown;
     public override string Name => "Fasolt the Giant";
 
     public override int ArmorClass => 70;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 5, 5),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 2, 10),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(EatGoldAttackEffect)), 2, 2),
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 5, 5),
+        new MonsterAttackDefinition(nameof(BiteAttack), nameof(HurtAttackEffect), 2, 10),
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(EatGoldAttackEffect), 2, 2),
     };
     public override bool BashDoor => true;
     public override string Description => "Big, brawny, powerful and with a greed for gold.";

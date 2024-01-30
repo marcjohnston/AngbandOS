@@ -12,17 +12,18 @@ internal class WyvernMonsterRace : MonsterRace
 {
     protected WyvernMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerDSymbol));
+    protected override string SymbolName => nameof(LowerDSymbol);
     public override ColorEnum Color => ColorEnum.Brown;
     public override string Name => "Wyvern";
 
     public override bool Animal => true;
     public override int ArmorClass => 65;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 2, 6),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 2, 6),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 2, 6),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(StingAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(PoisonAttackEffect)), 1, 6)
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(BiteAttack), nameof(HurtAttackEffect), 2, 6),
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 2, 6),
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 2, 6),
+        new MonsterAttackDefinition(nameof(StingAttack), nameof(PoisonAttackEffect), 1, 6)
     };
     public override bool BashDoor => true;
     public override string Description => "A fast-moving and deadly dragonian animal. Beware its poisonous sting!";

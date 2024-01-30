@@ -12,14 +12,15 @@ internal class AgentOfTheBlackMarketMonsterRace : MonsterRace
 {
     protected AgentOfTheBlackMarketMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerTSymbol));
+    protected override string SymbolName => nameof(LowerTSymbol);
     public override ColorEnum Color => ColorEnum.Black;
     public override string Name => "Agent of the black market";
 
     public override int ArmorClass => 8;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 1, 6),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(TouchAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(EatItemAttackEffect)), 0, 0),
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 1, 6),
+        new MonsterAttackDefinition(nameof(TouchAttack), nameof(EatItemAttackEffect), 0, 0),
     };
     public override bool BashDoor => true;
     public override string Description => "He 'finds' new wares for the Black Market. From unwary adventurers...";

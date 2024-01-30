@@ -23,14 +23,15 @@ internal class ImpMonsterRace : MonsterRace
         nameof(TeleportSelfMonsterSpell)
     };
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerUSymbol));
+    protected override string SymbolName => nameof(LowerUSymbol);
     public override ColorEnum Color => ColorEnum.Red;
     public override string Name => "Imp";
 
     public override int ArmorClass => 30;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(PoisonAttackEffect)), 3, 4),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(PoisonAttackEffect)), 3, 4),
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(PoisonAttackEffect), 3, 4),
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(PoisonAttackEffect), 3, 4),
     };
     public override bool BashDoor => true;
     public override bool ColdBlood => true;

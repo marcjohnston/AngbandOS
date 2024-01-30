@@ -24,16 +24,17 @@ internal class ChthonianMonsterRace : MonsterRace
         nameof(SummonDemonMonsterSpell)
     };
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperASymbol));
+    protected override string SymbolName => nameof(UpperASymbol);
     public override ColorEnum Color => ColorEnum.Yellow;
     public override string Name => "Chthonian";
 
     public override int ArmorClass => 90;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(CrushAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(ShatterAttackEffect)), 3, 11),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(CrushAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(ShatterAttackEffect)), 3, 11),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(TouchAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(LoseConAttackEffect)), 1, 2),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(TouchAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(LoseConAttackEffect)), 1, 2)
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(CrushAttack), nameof(ShatterAttackEffect), 3, 11),
+        new MonsterAttackDefinition(nameof(CrushAttack), nameof(ShatterAttackEffect), 3, 11),
+        new MonsterAttackDefinition(nameof(TouchAttack), nameof(LoseConAttackEffect), 1, 2),
+        new MonsterAttackDefinition(nameof(TouchAttack), nameof(LoseConAttackEffect), 1, 2)
     };
     public override bool Cthuloid => true;
     public override string Description => "A huge subterranean worm whose body ends in a mass of groping tentacles.";

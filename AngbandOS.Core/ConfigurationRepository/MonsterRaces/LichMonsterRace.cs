@@ -25,16 +25,17 @@ internal class LichMonsterRace : MonsterRace
         nameof(TeleportToMonsterSpell)
     };
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperLSymbol));
+    protected override string SymbolName => nameof(UpperLSymbol);
     public override ColorEnum Color => ColorEnum.BrightBeige;
     public override string Name => "Lich";
 
     public override int ArmorClass => 60;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(TouchAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(Exp40AttackEffect)), 0, 0),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(TouchAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(UnPowerAttackEffect)), 0, 0),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(TouchAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(LoseDexAttackEffect)), 2, 8),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(TouchAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(LoseDexAttackEffect)), 2, 8)
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(TouchAttack), nameof(Exp40AttackEffect), 0, 0),
+        new MonsterAttackDefinition(nameof(TouchAttack), nameof(UnPowerAttackEffect), 0, 0),
+        new MonsterAttackDefinition(nameof(TouchAttack), nameof(LoseDexAttackEffect), 2, 8),
+        new MonsterAttackDefinition(nameof(TouchAttack), nameof(LoseDexAttackEffect), 2, 8)
     };
     public override bool BashDoor => true;
     public override bool ColdBlood => true;

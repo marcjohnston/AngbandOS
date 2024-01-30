@@ -12,14 +12,15 @@ internal class CloudGiantMonsterRace : MonsterRace
 {
     protected CloudGiantMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperPSymbol));
+    protected override string SymbolName => nameof(UpperPSymbol);
     public override ColorEnum Color => ColorEnum.BrightBlue;
     public override string Name => "Cloud giant";
 
     public override int ArmorClass => 60;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(ElectricityAttackEffect)), 3, 8),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 3, 8),
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(ElectricityAttackEffect), 3, 8),
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 3, 8),
     };
     public override bool BashDoor => true;
     public override string Description => "It is a twenty foot tall giant wreathed in clouds.";

@@ -25,17 +25,18 @@ internal class AtlachNachaTheSpiderGodMonsterRace : MonsterRace
         nameof(SummonSpiderMonsterSpell)
     };
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperSSymbol));
+    protected override string SymbolName => nameof(UpperSSymbol);
     public override ColorEnum Color => ColorEnum.Red;
     public override string Name => "Atlach-Nacha, the Spider God";
 
     public override bool Animal => true;
     public override int ArmorClass => 160;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(PoisonAttackEffect)), 3, 9),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(LoseStrAttackEffect)), 3, 9),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(StingAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(PoisonAttackEffect)), 2, 5),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(StingAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(LoseStrAttackEffect)), 2, 5)
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(BiteAttack), nameof(PoisonAttackEffect), 3, 9),
+        new MonsterAttackDefinition(nameof(BiteAttack), nameof(LoseStrAttackEffect), 3, 9),
+        new MonsterAttackDefinition(nameof(StingAttack), nameof(PoisonAttackEffect), 2, 5),
+        new MonsterAttackDefinition(nameof(StingAttack), nameof(LoseStrAttackEffect), 2, 5)
     };
     public override bool BashDoor => true;
     public override string Description => "'...there was a kind of face on the squat ebon body, low down amid the several-jointed legs. The face peered up with a weird expression of doubt and inquiry...'";

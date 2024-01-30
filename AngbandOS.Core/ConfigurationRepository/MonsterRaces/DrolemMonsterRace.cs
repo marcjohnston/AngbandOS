@@ -20,16 +20,17 @@ internal class DrolemMonsterRace : MonsterRace
         nameof(SlowMonsterSpell)
     };
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerGSymbol));
+    protected override string SymbolName => nameof(LowerGSymbol);
     public override ColorEnum Color => ColorEnum.Green;
     public override string Name => "Drolem";
 
     public override int ArmorClass => 130;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 5, 8),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 5, 8),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(ClawAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(PoisonAttackEffect)), 3, 3),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(ClawAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(PoisonAttackEffect)), 3, 3)
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(BiteAttack), nameof(HurtAttackEffect), 5, 8),
+        new MonsterAttackDefinition(nameof(BiteAttack), nameof(HurtAttackEffect), 5, 8),
+        new MonsterAttackDefinition(nameof(ClawAttack), nameof(PoisonAttackEffect), 3, 3),
+        new MonsterAttackDefinition(nameof(ClawAttack), nameof(PoisonAttackEffect), 3, 3)
     };
     public override bool BashDoor => true;
     public override bool ColdBlood => true;

@@ -12,15 +12,16 @@ internal class WoodSpiderMonsterRace : MonsterRace
 {
     protected WoodSpiderMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperSSymbol));
+    protected override string SymbolName => nameof(UpperSSymbol);
     public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "Wood spider";
 
     public override bool Animal => true;
     public override int ArmorClass => 16;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 1, 3),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(StingAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(PoisonAttackEffect)), 1, 4),
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(BiteAttack), nameof(HurtAttackEffect), 1, 3),
+        new MonsterAttackDefinition(nameof(StingAttack), nameof(PoisonAttackEffect), 1, 4),
     };
     public override bool BashDoor => true;
     public override string Description => "It scuttles towards you.";

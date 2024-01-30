@@ -12,13 +12,14 @@ internal class GreenIckyThingMonsterRace : MonsterRace
 {
     protected GreenIckyThingMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerISymbol));
+    protected override string SymbolName => nameof(LowerISymbol);
     public override ColorEnum Color => ColorEnum.BrightGreen;
     public override string Name => "Green icky thing";
 
     public override int ArmorClass => 12;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(TouchAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(AcidAttackEffect)), 2, 5),
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(TouchAttack), nameof(AcidAttackEffect), 2, 5),
     };
     public override string Description => "It is a smallish, slimy, icky, acidic creature.";
     public override bool EmptyMind => true;

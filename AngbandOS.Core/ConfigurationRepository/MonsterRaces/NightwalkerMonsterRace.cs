@@ -22,16 +22,17 @@ internal class NightwalkerMonsterRace : MonsterRace
         nameof(SummonUndeadMonsterSpell)
     };
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerZSymbol));
+    protected override string SymbolName => nameof(LowerZSymbol);
     public override ColorEnum Color => ColorEnum.Black;
     public override string Name => "Nightwalker";
 
     public override int ArmorClass => 175;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(UnBonusAttackEffect)), 10, 10),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(UnBonusAttackEffect)), 10, 10),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(UnBonusAttackEffect)), 7, 7),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(UnBonusAttackEffect)), 7, 7)
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(UnBonusAttackEffect), 10, 10),
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(UnBonusAttackEffect), 10, 10),
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(UnBonusAttackEffect), 7, 7),
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(UnBonusAttackEffect), 7, 7)
     };
     public override bool BashDoor => true;
     public override bool ColdBlood => true;

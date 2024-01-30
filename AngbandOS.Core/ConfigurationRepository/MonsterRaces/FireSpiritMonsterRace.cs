@@ -12,14 +12,15 @@ internal class FireSpiritMonsterRace : MonsterRace
 {
     protected FireSpiritMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperESymbol));
+    protected override string SymbolName => nameof(UpperESymbol);
     public override ColorEnum Color => ColorEnum.BrightRed;
     public override string Name => "Fire spirit";
 
     public override int ArmorClass => 30;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(FireAttackEffect)), 2, 6),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(FireAttackEffect)), 2, 6),
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(FireAttackEffect), 2, 6),
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(FireAttackEffect), 2, 6),
     };
     public override bool BashDoor => true;
     public override string Description => "A whirlwind of sentient flame.";

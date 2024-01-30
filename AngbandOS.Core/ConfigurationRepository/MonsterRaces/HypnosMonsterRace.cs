@@ -31,16 +31,17 @@ internal class HypnosMonsterRace : MonsterRace
         nameof(TeleportSelfMonsterSpell)
     };
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerPSymbol));
+    protected override string SymbolName => nameof(LowerPSymbol);
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "Hypnos";
 
     public override int ArmorClass => 100;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 13, 13),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 13, 13),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 13, 13),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 13, 13)
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 13, 13),
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 13, 13),
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 13, 13),
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 13, 13)
     };
     public override bool BashDoor => true;
     public override string Description => "Beautiful and youthful, this Outer God appears almost human. But appearances can be deceptive.";

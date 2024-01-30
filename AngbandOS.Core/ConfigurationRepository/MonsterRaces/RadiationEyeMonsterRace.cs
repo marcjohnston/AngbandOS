@@ -16,13 +16,14 @@ internal class RadiationEyeMonsterRace : MonsterRace
         nameof(DrainManaMonsterSpell)
     };
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerESymbol));
+    protected override string SymbolName => nameof(LowerESymbol);
     public override ColorEnum Color => ColorEnum.BrightRed;
     public override string Name => "Radiation eye";
 
     public override int ArmorClass => 6;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(GazeAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(LoseStrAttackEffect)), 1, 6),
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(GazeAttack), nameof(LoseStrAttackEffect), 1, 6),
     };
     public override string Description => "A disembodied eye, crackling with energy.";
     public override int FreqInate => 11;

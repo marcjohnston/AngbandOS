@@ -12,16 +12,17 @@ internal class HobbesTheTigerMonsterRace : MonsterRace
 {
     protected HobbesTheTigerMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerFSymbol));
+    protected override string SymbolName => nameof(LowerFSymbol);
     public override ColorEnum Color => ColorEnum.BrightYellow;
     public override string Name => "Hobbes the Tiger";
 
     public override bool Animal => true;
     public override int ArmorClass => 30;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(ClawAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 1, 11),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(ClawAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 1, 11),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 1, 4),
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(ClawAttack), nameof(HurtAttackEffect), 1, 11),
+        new MonsterAttackDefinition(nameof(ClawAttack), nameof(HurtAttackEffect), 1, 11),
+        new MonsterAttackDefinition(nameof(BiteAttack), nameof(HurtAttackEffect), 1, 4),
     };
     public override bool BashDoor => true;
     public override string Description => "Fast-moving, with a taste for tuna sandwiches.";

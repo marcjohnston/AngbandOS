@@ -12,14 +12,15 @@ internal class WolfMonsterRace : MonsterRace
 {
     protected WolfMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperCSymbol));
+    protected override string SymbolName => nameof(UpperCSymbol);
     public override ColorEnum Color => ColorEnum.Brown;
     public override string Name => "Wolf";
 
     public override bool Animal => true;
     public override int ArmorClass => 30;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 1, 6),
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(BiteAttack), nameof(HurtAttackEffect), 1, 6),
     };
     public override bool BashDoor => true;
     public override string Description => "It howls and snaps at you.";

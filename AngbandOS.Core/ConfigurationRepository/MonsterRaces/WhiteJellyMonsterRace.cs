@@ -12,13 +12,14 @@ internal class WhiteJellyMonsterRace : MonsterRace
 {
     protected WhiteJellyMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerJSymbol));
+    protected override string SymbolName => nameof(LowerJSymbol);
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "White jelly";
 
     public override int ArmorClass => 1;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(TouchAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(PoisonAttackEffect)), 1, 2),
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(TouchAttack), nameof(PoisonAttackEffect), 1, 2),
     };
     public override string Description => "Its a large pile of white flesh.";
     public override bool EmptyMind => true;

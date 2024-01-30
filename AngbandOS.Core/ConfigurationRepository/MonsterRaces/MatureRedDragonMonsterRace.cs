@@ -18,15 +18,16 @@ internal class MatureRedDragonMonsterRace : MonsterRace
         nameof(ScareMonsterSpell)
     };
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerDSymbol));
+    protected override string SymbolName => nameof(LowerDSymbol);
     public override ColorEnum Color => ColorEnum.Red;
     public override string Name => "Mature red dragon";
 
     public override int ArmorClass => 80;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(ClawAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 1, 4),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(ClawAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 1, 10),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 2, 12),
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(ClawAttack), nameof(HurtAttackEffect), 1, 4),
+        new MonsterAttackDefinition(nameof(ClawAttack), nameof(HurtAttackEffect), 1, 10),
+        new MonsterAttackDefinition(nameof(BiteAttack), nameof(HurtAttackEffect), 2, 12),
     };
     public override bool BashDoor => true;
     public override string Description => "A large dragon, scales tinted deep red.";

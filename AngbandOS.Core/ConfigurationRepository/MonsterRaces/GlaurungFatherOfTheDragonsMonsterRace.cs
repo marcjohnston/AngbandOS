@@ -19,16 +19,17 @@ internal class GlaurungFatherOfTheDragonsMonsterRace : MonsterRace
         nameof(SummonDragonMonsterSpell)
     };
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperDSymbol));
+    protected override string SymbolName => nameof(UpperDSymbol);
     public override ColorEnum Color => ColorEnum.Orange;
     public override string Name => "Glaurung, Father of the Dragons";
 
     public override int ArmorClass => 120;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(ClawAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 7, 12),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(ClawAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 7, 12),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 8, 14),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 8, 14)
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(ClawAttack), nameof(HurtAttackEffect), 7, 12),
+        new MonsterAttackDefinition(nameof(ClawAttack), nameof(HurtAttackEffect), 7, 12),
+        new MonsterAttackDefinition(nameof(BiteAttack), nameof(HurtAttackEffect), 8, 14),
+        new MonsterAttackDefinition(nameof(BiteAttack), nameof(HurtAttackEffect), 8, 14)
     };
     public override bool BashDoor => true;
     public override string Description => "Glaurung is the father of all dragons, and was for a long time the most powerful. Nevertheless, he still has full command over his brood and can command them to appear whenever he so wishes. He is the definition of dragonfire.";

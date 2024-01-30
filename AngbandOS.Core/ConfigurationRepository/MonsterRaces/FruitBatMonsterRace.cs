@@ -12,14 +12,15 @@ internal class FruitBatMonsterRace : MonsterRace
 {
     protected FruitBatMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerBSymbol));
+    protected override string SymbolName => nameof(LowerBSymbol);
     public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "Fruit bat";
 
     public override bool Animal => true;
     public override int ArmorClass => 3;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 1, 1),
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(BiteAttack), nameof(HurtAttackEffect), 1, 1),
     };
     public override string Description => "A fast-moving pest.";
     public override int FreqInate => 0;

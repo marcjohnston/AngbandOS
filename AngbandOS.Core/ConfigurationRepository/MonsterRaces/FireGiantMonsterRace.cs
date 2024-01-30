@@ -12,14 +12,15 @@ internal class FireGiantMonsterRace : MonsterRace
 {
     protected FireGiantMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperPSymbol));
+    protected override string SymbolName => nameof(UpperPSymbol);
     public override ColorEnum Color => ColorEnum.Red;
     public override string Name => "Fire giant";
 
     public override int ArmorClass => 60;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(FireAttackEffect)), 3, 7),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 3, 7),
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(FireAttackEffect), 3, 7),
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 3, 7),
     };
     public override bool BashDoor => true;
     public override string Description => "A glowing fourteen foot tall giant. Flames drip from its red skin.";

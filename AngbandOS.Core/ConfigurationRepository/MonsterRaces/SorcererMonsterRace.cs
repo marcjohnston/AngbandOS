@@ -27,15 +27,16 @@ internal class SorcererMonsterRace : MonsterRace
         nameof(TeleportToMonsterSpell)
     };
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerPSymbol));
+    protected override string SymbolName => nameof(LowerPSymbol);
     public override ColorEnum Color => ColorEnum.Gold;
     public override string Name => "Sorcerer";
 
     public override int ArmorClass => 60;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 2, 8),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 2, 8),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 2, 8),
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 2, 8),
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 2, 8),
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 2, 8),
     };
     public override bool BashDoor => true;
     public override string Description => "A human figure in robes, he moves with magically improved speed, and his hands are ablur with spell casting.";

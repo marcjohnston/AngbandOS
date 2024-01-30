@@ -12,13 +12,14 @@ internal class BrownMoldMonsterRace : MonsterRace
 {
     protected BrownMoldMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerMSymbol));
+    protected override string SymbolName => nameof(LowerMSymbol);
     public override ColorEnum Color => ColorEnum.Brown;
     public override string Name => "Brown mold";
 
     public override int ArmorClass => 12;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(ConfuseAttackEffect)), 1, 4),
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(ConfuseAttackEffect), 1, 4),
     };
     public override string Description => "A strange brown growth on the dungeon floor.";
     public override bool EmptyMind => true;

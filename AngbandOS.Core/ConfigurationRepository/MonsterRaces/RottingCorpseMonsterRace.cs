@@ -12,14 +12,15 @@ internal class RottingCorpseMonsterRace : MonsterRace
 {
     protected RottingCorpseMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerZSymbol));
+    protected override string SymbolName => nameof(LowerZSymbol);
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "Rotting corpse";
 
     public override int ArmorClass => 20;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(ClawAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(PoisonAttackEffect)), 1, 3),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(ClawAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(PoisonAttackEffect)), 1, 3),
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(ClawAttack), nameof(PoisonAttackEffect), 1, 3),
+        new MonsterAttackDefinition(nameof(ClawAttack), nameof(PoisonAttackEffect), 1, 3),
     };
     public override bool BashDoor => true;
     public override bool ColdBlood => true;

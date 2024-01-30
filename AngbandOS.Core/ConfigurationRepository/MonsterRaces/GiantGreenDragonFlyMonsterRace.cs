@@ -16,14 +16,15 @@ internal class GiantGreenDragonFlyMonsterRace : MonsterRace
         nameof(BreathePoisonMonsterSpell)
     };
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperFSymbol));
+    protected override string SymbolName => nameof(UpperFSymbol);
     public override ColorEnum Color => ColorEnum.BrightGreen;
     public override string Name => "Giant green dragon fly";
 
     public override bool Animal => true;
     public override int ArmorClass => 20;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(PoisonAttackEffect)), 1, 6),
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(BiteAttack), nameof(PoisonAttackEffect), 1, 6),
     };
     public override bool BashDoor => true;
     public override string Description => "A vast, foul-smelling dragonfly.";

@@ -12,13 +12,14 @@ internal class GreenOozeMonsterRace : MonsterRace
 {
     protected GreenOozeMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerJSymbol));
+    protected override string SymbolName => nameof(LowerJSymbol);
     public override ColorEnum Color => ColorEnum.BrightGreen;
     public override string Name => "Green ooze";
 
     public override int ArmorClass => 16;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(CrawlAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(AcidAttackEffect)), 1, 3),
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(CrawlAttack), nameof(AcidAttackEffect), 1, 3),
     };
     public override string Description => "It's green and it's oozing.";
     public override bool Drop90 => true;

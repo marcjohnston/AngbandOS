@@ -16,14 +16,15 @@ internal class BloodshotIckyThingMonsterRace : MonsterRace
         nameof(DrainManaMonsterSpell)
     };
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerISymbol));
+    protected override string SymbolName => nameof(LowerISymbol);
     public override ColorEnum Color => ColorEnum.Red;
     public override string Name => "Bloodshot icky thing";
 
     public override int ArmorClass => 18;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(TouchAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 1, 4),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(CrawlAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(AcidAttackEffect)), 2, 4),
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(TouchAttack), nameof(HurtAttackEffect), 1, 4),
+        new MonsterAttackDefinition(nameof(CrawlAttack), nameof(AcidAttackEffect), 2, 4),
     };
     public override string Description => "It is a strange, slimy, icky creature.";
     public override bool EmptyMind => true;

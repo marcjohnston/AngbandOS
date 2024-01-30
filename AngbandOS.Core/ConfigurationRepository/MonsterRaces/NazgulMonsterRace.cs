@@ -19,16 +19,17 @@ internal class NazgulMonsterRace : MonsterRace
         nameof(ScareMonsterSpell)
     };
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperWSymbol));
+    protected override string SymbolName => nameof(UpperWSymbol);
     public override ColorEnum Color => ColorEnum.Black;
     public override string Name => "Nazgul";
 
     public override int ArmorClass => 60;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(TerrifyAttackEffect)), 6, 6),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(TerrifyAttackEffect)), 6, 6),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(Exp80AttackEffect)), 4, 6),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(Exp80AttackEffect)), 4, 6)
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(TerrifyAttackEffect), 6, 6),
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(TerrifyAttackEffect), 6, 6),
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(Exp80AttackEffect), 4, 6),
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(Exp80AttackEffect), 4, 6)
     };
     public override bool BashDoor => true;
     public override bool ColdBlood => true;

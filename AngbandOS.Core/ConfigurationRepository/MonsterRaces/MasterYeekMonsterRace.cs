@@ -21,14 +21,15 @@ internal class MasterYeekMonsterRace : MonsterRace
         nameof(TeleportSelfMonsterSpell)
     };
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerYSymbol));
+    protected override string SymbolName => nameof(LowerYSymbol);
     public override ColorEnum Color => ColorEnum.Green;
     public override string Name => "Master yeek";
 
     public override bool Animal => true;
     public override int ArmorClass => 24;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 1, 8),
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 1, 8),
     };
     public override bool BashDoor => true;
     public override string Description => "A small humanoid that radiates some power.";

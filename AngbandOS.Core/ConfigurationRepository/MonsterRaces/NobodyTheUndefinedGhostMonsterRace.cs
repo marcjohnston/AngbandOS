@@ -12,11 +12,10 @@ internal class NobodyTheUndefinedGhostMonsterRace : MonsterRace
 {
     protected NobodyTheUndefinedGhostMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperGSymbol));
+    protected override string SymbolName => nameof(UpperGSymbol);
     public override string Name => "Nobody, the Undefined Ghost";
 
     public override int ArmorClass => 0;
-    public override MonsterAttack[]? Attacks => null;
     public override string Description => "It seems strangely familiar...";
     public override int FreqInate => 0;
     public override int FreqSpell => 0;

@@ -12,15 +12,16 @@ internal class KillerStagBeetleMonsterRace : MonsterRace
 {
     protected KillerStagBeetleMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperKSymbol));
+    protected override string SymbolName => nameof(UpperKSymbol);
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "Killer stag beetle";
 
     public override bool Animal => true;
     public override int ArmorClass => 55;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(ClawAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 1, 12),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(ClawAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 1, 12),
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(ClawAttack), nameof(HurtAttackEffect), 1, 12),
+        new MonsterAttackDefinition(nameof(ClawAttack), nameof(HurtAttackEffect), 1, 12),
     };
     public override bool BashDoor => true;
     public override string Description => "It is a giant beetle with vicious claws.";

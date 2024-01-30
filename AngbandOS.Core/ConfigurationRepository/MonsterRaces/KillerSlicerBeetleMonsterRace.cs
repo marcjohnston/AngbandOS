@@ -12,15 +12,16 @@ internal class KillerSlicerBeetleMonsterRace : MonsterRace
 {
     protected KillerSlicerBeetleMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperKSymbol));
+    protected override string SymbolName => nameof(UpperKSymbol);
     public override ColorEnum Color => ColorEnum.Orange;
     public override string Name => "Killer slicer beetle";
 
     public override bool Animal => true;
     public override int ArmorClass => 60;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 5, 8),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 5, 8),
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(BiteAttack), nameof(HurtAttackEffect), 5, 8),
+        new MonsterAttackDefinition(nameof(BiteAttack), nameof(HurtAttackEffect), 5, 8),
     };
     public override bool BashDoor => true;
     public override string Description => "It is a beetle with deadly sharp cutting mandibles and a rock-hard carapace.";

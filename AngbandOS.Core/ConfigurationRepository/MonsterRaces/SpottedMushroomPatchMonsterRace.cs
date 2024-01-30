@@ -12,13 +12,14 @@ internal class SpottedMushroomPatchMonsterRace : MonsterRace
 {
     protected SpottedMushroomPatchMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(CommaSymbol));
+    protected override string SymbolName => nameof(CommaSymbol);
     public override ColorEnum Color => ColorEnum.Orange;
     public override string Name => "Spotted mushroom patch";
 
     public override int ArmorClass => 1;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(SporeAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(PoisonAttackEffect)), 2, 4),
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(SporeAttack), nameof(PoisonAttackEffect), 2, 4),
     };
     public override string Description => "Yum! It looks quite tasty.";
     public override bool EmptyMind => true;

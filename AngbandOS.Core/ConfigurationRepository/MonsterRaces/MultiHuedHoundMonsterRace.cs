@@ -20,17 +20,18 @@ internal class MultiHuedHoundMonsterRace : MonsterRace
         nameof(BreathePoisonMonsterSpell)
     };
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperZSymbol));
+    protected override string SymbolName => nameof(UpperZSymbol);
     public override ColorEnum Color => ColorEnum.Purple;
     public override string Name => "Multi-hued hound";
 
     public override bool Animal => true;
     public override int ArmorClass => 40;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(ClawAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 3, 6),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(ClawAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 3, 6),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 4, 4),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 4, 4)
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(ClawAttack), nameof(HurtAttackEffect), 3, 6),
+        new MonsterAttackDefinition(nameof(ClawAttack), nameof(HurtAttackEffect), 3, 6),
+        new MonsterAttackDefinition(nameof(BiteAttack), nameof(HurtAttackEffect), 4, 4),
+        new MonsterAttackDefinition(nameof(BiteAttack), nameof(HurtAttackEffect), 4, 4)
     };
     public override bool AttrMulti => true;
     public override bool BashDoor => true;

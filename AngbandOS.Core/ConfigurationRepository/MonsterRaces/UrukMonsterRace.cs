@@ -16,13 +16,14 @@ internal class UrukMonsterRace : MonsterRace
         nameof(Arrow1D6MonsterSpell)
     };
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerOSymbol));
+    protected override string SymbolName => nameof(LowerOSymbol);
     public override string Name => "Uruk";
 
     public override int ArmorClass => 50;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 3, 5),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 3, 5),
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 3, 5),
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 3, 5),
     };
     public override bool BashDoor => true;
     public override string Description => "He is a cunning orc of power, as tall as a man, and stronger. He fears little.";

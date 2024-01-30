@@ -12,15 +12,16 @@ internal class CarrionCrawlerMonsterRace : MonsterRace
 {
     protected CarrionCrawlerMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerCSymbol));
+    protected override string SymbolName => nameof(LowerCSymbol);
     public override ColorEnum Color => ColorEnum.Green;
     public override string Name => "Carrion crawler";
 
     public override bool Animal => true;
     public override int ArmorClass => 40;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(StingAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(ParalyzeAttackEffect)), 2, 6),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(StingAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(ParalyzeAttackEffect)), 2, 6),
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(StingAttack), nameof(ParalyzeAttackEffect), 2, 6),
+        new MonsterAttackDefinition(nameof(StingAttack), nameof(ParalyzeAttackEffect), 2, 6),
     };
     public override bool BashDoor => true;
     public override string Description => "A hideous centipede covered in slime and with glowing tentacles around its head.";

@@ -17,12 +17,11 @@ internal class ShimmeringVortexMonsterRace : MonsterRace
         nameof(ShriekMonsterSpell)
     };
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerVSymbol));
+    protected override string SymbolName => nameof(LowerVSymbol);
     public override ColorEnum Color => ColorEnum.Purple;
     public override string Name => "Shimmering vortex";
 
     public override int ArmorClass => 30;
-    public override MonsterAttack[]? Attacks => null;
     public override bool AttrMulti => true;
     public override bool BashDoor => true;
     public override string Description => "A strange pillar of shining light that hurts your eyes. Its shape changes constantly as it cuts through the air towards you. It is like a beacon, waking monsters from their slumber.";

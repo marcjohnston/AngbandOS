@@ -12,15 +12,16 @@ internal class GiantRedScorpionMonsterRace : MonsterRace
 {
     protected GiantRedScorpionMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperSSymbol));
+    protected override string SymbolName => nameof(UpperSSymbol);
     public override ColorEnum Color => ColorEnum.BrightRed;
     public override string Name => "Giant red scorpion";
 
     public override bool Animal => true;
     public override int ArmorClass => 44;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 2, 4),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(StingAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(LoseStrAttackEffect)), 1, 7),
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(BiteAttack), nameof(HurtAttackEffect), 2, 4),
+        new MonsterAttackDefinition(nameof(StingAttack), nameof(LoseStrAttackEffect), 1, 7),
     };
     public override bool BashDoor => true;
     public override string Description => "It is fast and poisonous.";

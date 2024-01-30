@@ -12,16 +12,17 @@ internal class SasquatchMonsterRace : MonsterRace
 {
     protected SasquatchMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperYSymbol));
+    protected override string SymbolName => nameof(UpperYSymbol);
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "Sasquatch";
 
     public override bool Animal => true;
     public override int ArmorClass => 40;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(ClawAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 1, 10),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(ClawAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 1, 10),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 2, 8),
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(ClawAttack), nameof(HurtAttackEffect), 1, 10),
+        new MonsterAttackDefinition(nameof(ClawAttack), nameof(HurtAttackEffect), 1, 10),
+        new MonsterAttackDefinition(nameof(BiteAttack), nameof(HurtAttackEffect), 2, 8),
     };
     public override bool BashDoor => true;
     public override string Description => "A tall shaggy, furry humanoid, it could call the yeti brother.";

@@ -12,13 +12,14 @@ internal class BlackNagaMonsterRace : MonsterRace
 {
     protected BlackNagaMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerNSymbol));
+    protected override string SymbolName => nameof(LowerNSymbol);
     public override ColorEnum Color => ColorEnum.Black;
     public override string Name => "Black naga";
 
     public override int ArmorClass => 40;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(CrushAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 1, 8),
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(CrushAttack), nameof(HurtAttackEffect), 1, 8),
     };
     public override bool BashDoor => true;
     public override string Description => "A large black serpent's body with a female torso.";

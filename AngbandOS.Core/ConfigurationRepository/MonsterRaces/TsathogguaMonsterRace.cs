@@ -21,16 +21,17 @@ internal class TsathogguaMonsterRace : MonsterRace
         nameof(SummonCthuloidMonsterSpell)
     };
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperXSymbol));
+    protected override string SymbolName => nameof(UpperXSymbol);
     public override ColorEnum Color => ColorEnum.Purple;
     public override string Name => "Tsathoggua";
 
     public override int ArmorClass => 150;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(ClawAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 35, 5),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(TouchAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(AcidAttackEffect)), 35, 5),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(ClawAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 35, 5),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(TouchAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(AcidAttackEffect)), 35, 5)
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(ClawAttack), nameof(HurtAttackEffect), 35, 5),
+        new MonsterAttackDefinition(nameof(TouchAttack), nameof(AcidAttackEffect), 35, 5),
+        new MonsterAttackDefinition(nameof(ClawAttack), nameof(HurtAttackEffect), 35, 5),
+        new MonsterAttackDefinition(nameof(TouchAttack), nameof(AcidAttackEffect), 35, 5)
     };
     public override bool AttrAny => true;
     public override bool AttrMulti => true;

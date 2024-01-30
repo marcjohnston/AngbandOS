@@ -40,16 +40,17 @@ internal class GreatWyrmOfPowerMonsterRace : MonsterRace
         nameof(SummonKinMonsterSpell)
     };
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperDSymbol));
+    protected override string SymbolName => nameof(UpperDSymbol);
     public override ColorEnum Color => ColorEnum.Yellow;
     public override string Name => "Great Wyrm of Power";
 
     public override int ArmorClass => 111;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(CrushAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(PoisonAttackEffect)), 8, 12),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(CrushAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(FireAttackEffect)), 8, 12),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(CrushAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(ElectricityAttackEffect)), 8, 12),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(CrushAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 10, 18)
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(CrushAttack), nameof(PoisonAttackEffect), 8, 12),
+        new MonsterAttackDefinition(nameof(CrushAttack), nameof(FireAttackEffect), 8, 12),
+        new MonsterAttackDefinition(nameof(CrushAttack), nameof(ElectricityAttackEffect), 8, 12),
+        new MonsterAttackDefinition(nameof(CrushAttack), nameof(HurtAttackEffect), 10, 18)
     };
     public override bool BashDoor => true;
     public override string Description => "The mightiest of all dragonkind, a great wyrm of power is seldom encountered in our world. It can crush stars with its might.";

@@ -16,14 +16,15 @@ internal class FireElementalMonsterRace : MonsterRace
         nameof(FireBoltMonsterSpell)
     };
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperESymbol));
+    protected override string SymbolName => nameof(UpperESymbol);
     public override ColorEnum Color => ColorEnum.Red;
     public override string Name => "Fire elemental";
 
     public override int ArmorClass => 50;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(FireAttackEffect)), 4, 6),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(FireAttackEffect)), 4, 6),
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(FireAttackEffect), 4, 6),
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(FireAttackEffect), 4, 6),
     };
     public override bool BashDoor => true;
     public override string Description => "It is a towering inferno of flames.";

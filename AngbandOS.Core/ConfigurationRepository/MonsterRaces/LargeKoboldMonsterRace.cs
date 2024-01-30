@@ -12,12 +12,13 @@ internal class LargeKoboldMonsterRace : MonsterRace
 {
     protected LargeKoboldMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerKSymbol));
+    protected override string SymbolName => nameof(LowerKSymbol);
     public override string Name => "Large kobold";
 
     public override int ArmorClass => 32;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 1, 10),
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 1, 10),
     };
     public override bool BashDoor => true;
     public override string Description => "It a man-sized figure with the all too recognizable face of a kobold.";

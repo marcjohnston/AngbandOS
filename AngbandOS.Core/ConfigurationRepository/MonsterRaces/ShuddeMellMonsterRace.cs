@@ -24,16 +24,17 @@ internal class ShuddeMellMonsterRace : MonsterRace
         nameof(SummonCthuloidMonsterSpell)
     };
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperXSymbol));
+    protected override string SymbolName => nameof(UpperXSymbol);
     public override ColorEnum Color => ColorEnum.Brown;
     public override string Name => "Shudde M'ell";
 
     public override int ArmorClass => 90;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(CrushAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(ShatterAttackEffect)), 3, 11),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(CrushAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(ShatterAttackEffect)), 3, 11),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(TouchAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(LoseConAttackEffect)), 1, 2),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(TouchAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(LoseConAttackEffect)), 1, 2)
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(CrushAttack), nameof(ShatterAttackEffect), 3, 11),
+        new MonsterAttackDefinition(nameof(CrushAttack), nameof(ShatterAttackEffect), 3, 11),
+        new MonsterAttackDefinition(nameof(TouchAttack), nameof(LoseConAttackEffect), 1, 2),
+        new MonsterAttackDefinition(nameof(TouchAttack), nameof(LoseConAttackEffect), 1, 2)
     };
     public override bool Cthuloid => true;
     public override string Description => "The largest of the cthonians and leader of his kind.";

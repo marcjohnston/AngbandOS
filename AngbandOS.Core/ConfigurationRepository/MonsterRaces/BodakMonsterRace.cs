@@ -18,15 +18,16 @@ internal class BodakMonsterRace : MonsterRace
         nameof(SummonDemonMonsterSpell)
     };
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerUSymbol));
+    protected override string SymbolName => nameof(LowerUSymbol);
     public override ColorEnum Color => ColorEnum.Black;
     public override string Name => "Bodak";
 
     public override int ArmorClass => 68;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(FireAttackEffect)), 4, 6),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(FireAttackEffect)), 4, 6),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(GazeAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(Exp20AttackEffect)), 0, 0),
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(FireAttackEffect), 4, 6),
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(FireAttackEffect), 4, 6),
+        new MonsterAttackDefinition(nameof(GazeAttack), nameof(Exp20AttackEffect), 0, 0),
     };
     public override bool BashDoor => true;
     public override bool Demon => true;

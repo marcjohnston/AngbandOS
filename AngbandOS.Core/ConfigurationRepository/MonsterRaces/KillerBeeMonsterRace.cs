@@ -12,15 +12,16 @@ internal class KillerBeeMonsterRace : MonsterRace
 {
     protected KillerBeeMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperISymbol));
+    protected override string SymbolName => nameof(UpperISymbol);
     public override ColorEnum Color => ColorEnum.BrightYellow;
     public override string Name => "Killer bee";
 
     public override bool Animal => true;
     public override int ArmorClass => 34;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(StingAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(PoisonAttackEffect)), 1, 4),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(StingAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(LoseStrAttackEffect)), 1, 4),
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(StingAttack), nameof(PoisonAttackEffect), 1, 4),
+        new MonsterAttackDefinition(nameof(StingAttack), nameof(LoseStrAttackEffect), 1, 4),
     };
     public override string Description => "It is poisonous and aggressive.";
     public override int FreqInate => 0;

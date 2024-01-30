@@ -20,17 +20,18 @@ internal class CarcharothTheJawsOfThirstMonsterRace : MonsterRace
         nameof(SummonHoundMonsterSpell)
     };
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperCSymbol));
+    protected override string SymbolName => nameof(UpperCSymbol);
     public override ColorEnum Color => ColorEnum.Black;
     public override string Name => "Carcharoth, the Jaws of Thirst";
 
     public override bool Animal => true;
     public override int ArmorClass => 110;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(ClawAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 3, 3),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(ClawAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 3, 3),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(PoisonAttackEffect)), 4, 4),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(PoisonAttackEffect)), 4, 4)
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(ClawAttack), nameof(HurtAttackEffect), 3, 3),
+        new MonsterAttackDefinition(nameof(ClawAttack), nameof(HurtAttackEffect), 3, 3),
+        new MonsterAttackDefinition(nameof(BiteAttack), nameof(PoisonAttackEffect), 4, 4),
+        new MonsterAttackDefinition(nameof(BiteAttack), nameof(PoisonAttackEffect), 4, 4)
     };
     public override bool BashDoor => true;
     public override string Description => "The first guard of Angband, Carcharoth, also known as 'The Red Maw', is the largest wolf to ever walk the earth. He is highly intelligent and a deadly opponent in combat.";

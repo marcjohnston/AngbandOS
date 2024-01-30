@@ -24,16 +24,17 @@ internal class ThuringwethilMonsterRace : MonsterRace
         nameof(SummonKinMonsterSpell)
     };
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperVSymbol));
+    protected override string SymbolName => nameof(UpperVSymbol);
     public override ColorEnum Color => ColorEnum.Black;
     public override string Name => "Thuringwethil";
 
     public override int ArmorClass => 145;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 5, 8),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(Exp80AttackEffect)), 6, 6),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(ConfuseAttackEffect)), 6, 6),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(ConfuseAttackEffect)), 6, 6)
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(BiteAttack), nameof(HurtAttackEffect), 5, 8),
+        new MonsterAttackDefinition(nameof(BiteAttack), nameof(Exp80AttackEffect), 6, 6),
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(ConfuseAttackEffect), 6, 6),
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(ConfuseAttackEffect), 6, 6)
     };
     public override bool BashDoor => true;
     public override bool ColdBlood => true;

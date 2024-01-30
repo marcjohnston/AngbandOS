@@ -12,14 +12,15 @@ internal class NightStalkerMonsterRace : MonsterRace
 {
     protected NightStalkerMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperESymbol));
+    protected override string SymbolName => nameof(UpperESymbol);
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "Night stalker";
 
     public override int ArmorClass => 46;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(GazeAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 6, 6),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(GazeAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 6, 6),
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(GazeAttack), nameof(HurtAttackEffect), 6, 6),
+        new MonsterAttackDefinition(nameof(GazeAttack), nameof(HurtAttackEffect), 6, 6),
     };
     public override bool BashDoor => true;
     public override bool ColdBlood => true;

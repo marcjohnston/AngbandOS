@@ -19,15 +19,16 @@ internal class SpectatorMonsterRace : MonsterRace
         nameof(ForgetMonsterSpell)
     };
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerESymbol));
+    protected override string SymbolName => nameof(LowerESymbol);
     public override ColorEnum Color => ColorEnum.BrightGreen;
     public override string Name => "Spectator";
 
     public override int ArmorClass => 1;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(GazeAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(ParalyzeAttackEffect)), 1, 4),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(GazeAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(ConfuseAttackEffect)), 1, 4),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(GazeAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(UnBonusAttackEffect)), 0, 0),
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(GazeAttack), nameof(ParalyzeAttackEffect), 1, 4),
+        new MonsterAttackDefinition(nameof(GazeAttack), nameof(ConfuseAttackEffect), 1, 4),
+        new MonsterAttackDefinition(nameof(GazeAttack), nameof(UnBonusAttackEffect), 0, 0),
     };
     public override string Description => "It has three small eyestalks and a large central eye.";
     public override bool EmptyMind => true;

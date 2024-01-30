@@ -12,15 +12,16 @@ internal class VampireBatMonsterRace : MonsterRace
 {
     protected VampireBatMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerBSymbol));
+    protected override string SymbolName => nameof(LowerBSymbol);
     public override ColorEnum Color => ColorEnum.Black;
     public override string Name => "Vampire bat";
 
     public override bool Animal => true;
     public override int ArmorClass => 40;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(Exp40AttackEffect)), 1, 4),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(Exp40AttackEffect)), 1, 4),
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(BiteAttack), nameof(Exp40AttackEffect), 1, 4),
+        new MonsterAttackDefinition(nameof(BiteAttack), nameof(Exp40AttackEffect), 1, 4),
     };
     public override bool ColdBlood => true;
     public override string Description => "An undead bat that flies at your neck hungrily.";

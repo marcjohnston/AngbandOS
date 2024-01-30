@@ -12,12 +12,13 @@ internal class GapingMawMonsterRace : MonsterRace
 {
     protected GapingMawMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(PeriodSymbol));
+    protected override string SymbolName => nameof(PeriodSymbol);
     public override string Name => "Gaping Maw";
 
     public override int ArmorClass => 14;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(TerrifyAttackEffect)), 1, 4),
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(TerrifyAttackEffect), 1, 4),
     };
     public override string Description => "A hole in the fabric of reality, leading to who knows what plane... ";
     public override int FreqInate => 0;

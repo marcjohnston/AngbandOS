@@ -27,16 +27,17 @@ internal class IthaquaTheWindwalkerMonsterRace : MonsterRace
         nameof(SummonKinMonsterSpell)
     };
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperXSymbol));
+    protected override string SymbolName => nameof(UpperXSymbol);
     public override ColorEnum Color => ColorEnum.BrightBlue;
     public override string Name => "Ithaqua the Windwalker";
 
     public override int ArmorClass => 125;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(ClawAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(ColdAttackEffect)), 12, 12),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(ClawAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(ColdAttackEffect)), 12, 12),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(CrushAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 12, 12),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(CrushAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 12, 12)
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(ClawAttack), nameof(ColdAttackEffect), 12, 12),
+        new MonsterAttackDefinition(nameof(ClawAttack), nameof(ColdAttackEffect), 12, 12),
+        new MonsterAttackDefinition(nameof(CrushAttack), nameof(HurtAttackEffect), 12, 12),
+        new MonsterAttackDefinition(nameof(CrushAttack), nameof(HurtAttackEffect), 12, 12)
     };
     public override bool BashDoor => true;
     public override bool Demon => true;

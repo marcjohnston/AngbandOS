@@ -12,15 +12,16 @@ internal class GremlinMonsterRace : MonsterRace
 {
     protected GremlinMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerUSymbol));
+    protected override string SymbolName => nameof(LowerUSymbol);
     public override ColorEnum Color => ColorEnum.BrightChartreuse;
     public override string Name => "Gremlin";
 
     public override int ArmorClass => 30;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(ClawAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(EatFoodAttackEffect)), 1, 2),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(ClawAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(EatFoodAttackEffect)), 1, 2),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(EatFoodAttackEffect)), 1, 3),
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(ClawAttack), nameof(EatFoodAttackEffect), 1, 2),
+        new MonsterAttackDefinition(nameof(ClawAttack), nameof(EatFoodAttackEffect), 1, 2),
+        new MonsterAttackDefinition(nameof(BiteAttack), nameof(EatFoodAttackEffect), 1, 3),
     };
     public override bool Demon => true;
     public override string Description => "Don't feed them after midnight!";

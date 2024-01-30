@@ -12,16 +12,17 @@ internal class SlimeMoldMonsterRace : MonsterRace
 {
     protected SlimeMoldMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(CommaSymbol));
+    protected override string SymbolName => nameof(CommaSymbol);
     public override ColorEnum Color => ColorEnum.Green;
     public override string Name => "Slime mold";
 
     public override int ArmorClass => 4;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(CrawlAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(PoisonAttackEffect)), 1, 4),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(CrawlAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(EatFoodAttackEffect)), 0, 0),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(DroolAttack)), null, 0, 0),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(DroolAttack)), null, 0, 0)
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(CrawlAttack), nameof(PoisonAttackEffect), 1, 4),
+        new MonsterAttackDefinition(nameof(CrawlAttack), nameof(EatFoodAttackEffect), 0, 0),
+        new MonsterAttackDefinition(nameof(DroolAttack), null, 0, 0),
+        new MonsterAttackDefinition(nameof(DroolAttack), null, 0, 0)
     };
     public override string Description => "It is a smallish, slimy, icky, hungry creature.";
     public override bool Drop90 => true;

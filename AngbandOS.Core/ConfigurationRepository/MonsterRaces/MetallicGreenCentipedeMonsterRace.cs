@@ -12,14 +12,15 @@ internal class MetallicGreenCentipedeMonsterRace : MonsterRace
 {
     protected MetallicGreenCentipedeMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerCSymbol));
+    protected override string SymbolName => nameof(LowerCSymbol);
     public override ColorEnum Color => ColorEnum.BrightGreen;
     public override string Name => "Metallic green centipede";
 
     public override bool Animal => true;
     public override int ArmorClass => 4;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(CrawlAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 1, 1),
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(CrawlAttack), nameof(HurtAttackEffect), 1, 1),
     };
     public override bool BashDoor => true;
     public override string Description => "It is about four feet long and carnivorous.";

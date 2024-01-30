@@ -16,15 +16,16 @@ internal class GrandMasterThiefMonsterRace : MonsterRace
         nameof(CreateTrapsMonsterSpell)
     };
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerPSymbol));
+    protected override string SymbolName => nameof(LowerPSymbol);
     public override ColorEnum Color => ColorEnum.Black;
     public override string Name => "Grand master thief";
 
     public override int ArmorClass => 90;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 3, 6),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(TouchAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(EatGoldAttackEffect)), 5, 5),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(TouchAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(EatItemAttackEffect)), 5, 5),
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 3, 6),
+        new MonsterAttackDefinition(nameof(TouchAttack), nameof(EatGoldAttackEffect), 5, 5),
+        new MonsterAttackDefinition(nameof(TouchAttack), nameof(EatItemAttackEffect), 5, 5),
     };
     public override bool BashDoor => true;
     public override string Description => "A furtive figure who makes you want to hide all your valuables.";

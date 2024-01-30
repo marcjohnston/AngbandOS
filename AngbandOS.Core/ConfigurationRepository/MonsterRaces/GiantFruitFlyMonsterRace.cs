@@ -12,14 +12,15 @@ internal class GiantFruitFlyMonsterRace : MonsterRace
 {
     protected GiantFruitFlyMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperISymbol));
+    protected override string SymbolName => nameof(UpperISymbol);
     public override ColorEnum Color => ColorEnum.BrightOrange;
     public override string Name => "Giant fruit fly";
 
     public override bool Animal => true;
     public override int ArmorClass => 14;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 1, 2),
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(BiteAttack), nameof(HurtAttackEffect), 1, 2),
     };
     public override string Description => "A fast-breeding, annoying pest.";
     public override int FreqInate => 0;

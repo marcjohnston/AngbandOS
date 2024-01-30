@@ -12,14 +12,15 @@ internal class GiantBlackAntMonsterRace : MonsterRace
 {
     protected GiantBlackAntMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerASymbol));
+    protected override string SymbolName => nameof(LowerASymbol);
     public override ColorEnum Color => ColorEnum.Black;
     public override string Name => "Giant black ant";
 
     public override bool Animal => true;
     public override int ArmorClass => 20;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 1, 4),
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(BiteAttack), nameof(HurtAttackEffect), 1, 4),
     };
     public override bool BashDoor => true;
     public override string Description => "It is about three feet long.";

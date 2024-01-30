@@ -18,13 +18,12 @@ internal class DraconicQuylthulgMonsterRace : MonsterRace
         nameof(TeleportSelfMonsterSpell)
     };
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperQSymbol));
+    protected override string SymbolName => nameof(UpperQSymbol);
     public override ColorEnum Color => ColorEnum.BrightGreen;
     public override string Name => "Draconic quylthulg";
 
     public override bool Animal => true;
     public override int ArmorClass => 1;
-    public override MonsterAttack[]? Attacks => null;
     public override string Description => "It looks like it was once a dragon corpse, now deeply infected with magical bacteria that make it pulse in a foul and degrading way.";
     public override bool EmptyMind => true;
     public override bool Evil => true;

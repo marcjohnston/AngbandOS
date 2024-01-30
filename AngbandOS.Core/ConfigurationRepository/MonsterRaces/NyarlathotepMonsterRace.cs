@@ -42,16 +42,17 @@ internal class NyarlathotepMonsterRace : MonsterRace
         nameof(TeleportSelfMonsterSpell)
     };
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperXSymbol));
+    protected override string SymbolName => nameof(UpperXSymbol);
     public override ColorEnum Color => ColorEnum.Red;
     public override string Name => "Nyarlathotep";
 
     public override int ArmorClass => 165;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(UnBonusAttackEffect)), 12, 12),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(UnPowerAttackEffect)), 12, 12),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(ConfuseAttackEffect)), 10, 2),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(BlindAttackEffect)), 3, 2)
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(UnBonusAttackEffect), 12, 12),
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(UnPowerAttackEffect), 12, 12),
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(ConfuseAttackEffect), 10, 2),
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(BlindAttackEffect), 3, 2)
     };
     public override bool AttrMulti => true;
     public override bool BashDoor => true;

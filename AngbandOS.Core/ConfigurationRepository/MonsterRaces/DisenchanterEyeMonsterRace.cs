@@ -16,13 +16,14 @@ internal class DisenchanterEyeMonsterRace : MonsterRace
         nameof(DrainManaMonsterSpell)
     };
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerESymbol));
+    protected override string SymbolName => nameof(LowerESymbol);
     public override ColorEnum Color => ColorEnum.Chartreuse;
     public override string Name => "Disenchanter eye";
 
     public override int ArmorClass => 10;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(GazeAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(UnBonusAttackEffect)), 0, 0),
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(GazeAttack), nameof(UnBonusAttackEffect), 0, 0),
     };
     public override bool AttrAny => true;
     public override bool AttrMulti => true;

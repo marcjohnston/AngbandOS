@@ -16,13 +16,14 @@ internal class GiantWhiteDragonFlyMonsterRace : MonsterRace
         nameof(BreatheColdMonsterSpell)
     };
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperFSymbol));
+    protected override string SymbolName => nameof(UpperFSymbol);
     public override string Name => "Giant white dragon fly";
 
     public override bool Animal => true;
     public override int ArmorClass => 20;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(ColdAttackEffect)), 1, 6),
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(BiteAttack), nameof(ColdAttackEffect), 1, 6),
     };
     public override bool BashDoor => true;
     public override string Description => "It is a large fly that drips frost.";

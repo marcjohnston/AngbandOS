@@ -25,16 +25,17 @@ internal class TheNorsaMonsterRace : MonsterRace
         nameof(SummonMonstersMonsterSpell)
     };
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperHSymbol));
+    protected override string SymbolName => nameof(UpperHSymbol);
     public override ColorEnum Color => ColorEnum.BrightBlue;
     public override string Name => "The Norsa";
 
     public override int ArmorClass => 125;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(CrushAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(AcidAttackEffect)), 8, 12),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(CrushAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(FireAttackEffect)), 8, 12),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(CrushAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(ElectricityAttackEffect)), 8, 12),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(CrushAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(PoisonAttackEffect)), 10, 14)
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(CrushAttack), nameof(AcidAttackEffect), 8, 12),
+        new MonsterAttackDefinition(nameof(CrushAttack), nameof(FireAttackEffect), 8, 12),
+        new MonsterAttackDefinition(nameof(CrushAttack), nameof(ElectricityAttackEffect), 8, 12),
+        new MonsterAttackDefinition(nameof(CrushAttack), nameof(PoisonAttackEffect), 10, 14)
     };
     public override bool AttrMulti => true;
     public override bool BashDoor => true;

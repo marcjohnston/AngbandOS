@@ -19,14 +19,15 @@ internal class EyeDrujMonsterRace : MonsterRace
         nameof(SummonUndeadMonsterSpell)
     };
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerSSymbol));
+    protected override string SymbolName => nameof(LowerSSymbol);
     public override ColorEnum Color => ColorEnum.BrightGrey;
     public override string Name => "Eye druj";
 
     public override int ArmorClass => 90;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(GazeAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(Exp80AttackEffect)), 0, 0),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(GazeAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(Exp80AttackEffect)), 0, 0),
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(GazeAttack), nameof(Exp80AttackEffect), 0, 0),
+        new MonsterAttackDefinition(nameof(GazeAttack), nameof(Exp80AttackEffect), 0, 0),
     };
     public override bool ColdBlood => true;
     public override string Description => "A bloodshot eyeball floating in the air, you'd be forgiven for assuming it harmless.";

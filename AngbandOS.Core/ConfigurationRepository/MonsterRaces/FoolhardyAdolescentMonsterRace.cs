@@ -12,13 +12,14 @@ internal class FoolhardyAdolescentMonsterRace : MonsterRace
 {
     protected FoolhardyAdolescentMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerTSymbol));
+    protected override string SymbolName => nameof(LowerTSymbol);
     public override ColorEnum Color => ColorEnum.Blue;
     public override string Name => "Foolhardy adolescent";
 
     public override int ArmorClass => 15;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 1, 6),
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 1, 6),
     };
     public override bool BashDoor => true;
     public override string Description => "He wants to kill a hero to prove that he's hard.";

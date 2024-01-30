@@ -16,14 +16,15 @@ internal class GiantGoldDragonFlyMonsterRace : MonsterRace
         nameof(BreatheSoundMonsterSpell)
     };
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperFSymbol));
+    protected override string SymbolName => nameof(UpperFSymbol);
     public override ColorEnum Color => ColorEnum.Gold;
     public override string Name => "Giant gold dragon fly";
 
     public override bool Animal => true;
     public override int ArmorClass => 20;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 1, 3),
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(BiteAttack), nameof(HurtAttackEffect), 1, 3),
     };
     public override bool BashDoor => true;
     public override string Description => "Large beating wings support this dazzling insect. A loud buzzing noise pervades the air.";

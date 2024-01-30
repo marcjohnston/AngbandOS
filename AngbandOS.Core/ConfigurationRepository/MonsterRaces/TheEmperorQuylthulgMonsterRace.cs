@@ -18,13 +18,12 @@ internal class TheEmperorQuylthulgMonsterRace : MonsterRace
         nameof(SummonHiUndeadMonsterSpell)
     };
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperQSymbol));
+    protected override string SymbolName => nameof(UpperQSymbol);
     public override ColorEnum Color => ColorEnum.BrightPink;
     public override string Name => "The Emperor Quylthulg";
 
     public override bool Animal => true;
     public override int ArmorClass => 1;
-    public override MonsterAttack[]? Attacks => null;
     public override string Description => "A huge seething mass of flesh with a rudimentary intelligence, the Emperor Quylthulg changes colors in front of your eyes. Pulsating first one color then the next, it knows only it must bring help to protect itself.";
     public override bool Drop_4D2 => true;
     public override bool Evil => true;

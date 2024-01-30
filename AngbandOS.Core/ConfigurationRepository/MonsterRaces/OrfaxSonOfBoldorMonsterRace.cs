@@ -21,17 +21,18 @@ internal class OrfaxSonOfBoldorMonsterRace : MonsterRace
         nameof(TeleportToMonsterSpell)
     };
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerYSymbol));
+    protected override string SymbolName => nameof(LowerYSymbol);
     public override ColorEnum Color => ColorEnum.BrightBlue;
     public override string Name => "Orfax, Son of Boldor";
 
     public override bool Animal => true;
     public override int ArmorClass => 20;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 1, 9),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 1, 8),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(InsultAttack)), null, 0, 0),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(InsultAttack)), null, 0, 0)
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 1, 9),
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 1, 8),
+        new MonsterAttackDefinition(nameof(InsultAttack), null, 0, 0),
+        new MonsterAttackDefinition(nameof(InsultAttack), null, 0, 0)
     };
     public override bool BashDoor => true;
     public override string Description => "He's just like daddy! He knows mighty spells, but fortunately he is a yeek.";

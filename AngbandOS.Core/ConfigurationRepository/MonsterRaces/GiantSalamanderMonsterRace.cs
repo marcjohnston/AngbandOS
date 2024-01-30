@@ -16,14 +16,15 @@ internal class GiantSalamanderMonsterRace : MonsterRace
         nameof(BreatheFireMonsterSpell)
     };
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperRSymbol));
+    protected override string SymbolName => nameof(UpperRSymbol);
     public override ColorEnum Color => ColorEnum.Red;
     public override string Name => "Giant salamander";
 
     public override bool Animal => true;
     public override int ArmorClass => 40;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(FireAttackEffect)), 3, 6),
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(BiteAttack), nameof(FireAttackEffect), 3, 6),
     };
     public override string Description => "A large black and yellow lizard. You'd better run away!";
     public override bool ForceSleep => true;

@@ -16,15 +16,16 @@ internal class BlueDragonBatMonsterRace : MonsterRace
         nameof(BreatheLightningMonsterSpell)
     };
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerBSymbol));
+    protected override string SymbolName => nameof(LowerBSymbol);
     public override ColorEnum Color => ColorEnum.Blue;
     public override string Name => "Blue dragon bat";
 
     public override bool Animal => true;
     public override int ArmorClass => 26;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(ElectricityAttackEffect)), 1, 3),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(StingAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(ElectricityAttackEffect)), 1, 3),
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(BiteAttack), nameof(ElectricityAttackEffect), 1, 3),
+        new MonsterAttackDefinition(nameof(StingAttack), nameof(ElectricityAttackEffect), 1, 3),
     };
     public override bool BashDoor => true;
     public override string Description => "It is a glowing blue bat with a sharp tail.";

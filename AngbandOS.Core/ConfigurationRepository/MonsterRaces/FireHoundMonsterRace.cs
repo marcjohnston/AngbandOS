@@ -16,16 +16,17 @@ internal class FireHoundMonsterRace : MonsterRace
         nameof(BreatheFireMonsterSpell)
     };
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperZSymbol));
+    protected override string SymbolName => nameof(UpperZSymbol);
     public override ColorEnum Color => ColorEnum.Red;
     public override string Name => "Fire hound";
 
     public override bool Animal => true;
     public override int ArmorClass => 30;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(FireAttackEffect)), 1, 3),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(FireAttackEffect)), 1, 3),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(FireAttackEffect)), 1, 3),
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(BiteAttack), nameof(FireAttackEffect), 1, 3),
+        new MonsterAttackDefinition(nameof(BiteAttack), nameof(FireAttackEffect), 1, 3),
+        new MonsterAttackDefinition(nameof(BiteAttack), nameof(FireAttackEffect), 1, 3),
     };
     public override bool BashDoor => true;
     public override string Description => "Flames lick at its feet and its tongue is a blade of fire. You can feel a furnace heat radiating from the creature.";

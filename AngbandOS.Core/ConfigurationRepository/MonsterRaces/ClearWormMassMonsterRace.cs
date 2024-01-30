@@ -12,14 +12,15 @@ internal class ClearWormMassMonsterRace : MonsterRace
 {
     protected ClearWormMassMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerWSymbol));
+    protected override string SymbolName => nameof(LowerWSymbol);
     public override ColorEnum Color => ColorEnum.Diamond;
     public override string Name => "Clear worm mass";
 
     public override bool Animal => true;
     public override int ArmorClass => 1;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(CrawlAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(PoisonAttackEffect)), 1, 2),
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(CrawlAttack), nameof(PoisonAttackEffect), 1, 2),
     };
     public override bool AttrClear => true;
     public override string Description => "It is a disgusting mass of poisonous worms.";

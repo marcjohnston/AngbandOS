@@ -19,15 +19,16 @@ internal class HuntingHorrorMonsterRace : MonsterRace
         nameof(SummonCthuloidMonsterSpell)
     };
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperUSymbol));
+    protected override string SymbolName => nameof(UpperUSymbol);
     public override ColorEnum Color => ColorEnum.Black;
     public override string Name => "Hunting horror";
 
     public override int ArmorClass => 90;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(LoseDexAttackEffect)), 1, 3),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(PoisonAttackEffect)), 1, 3),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(CrushAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 9, 4),
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(BiteAttack), nameof(LoseDexAttackEffect), 1, 3),
+        new MonsterAttackDefinition(nameof(BiteAttack), nameof(PoisonAttackEffect), 1, 3),
+        new MonsterAttackDefinition(nameof(CrushAttack), nameof(HurtAttackEffect), 9, 4),
     };
     public override bool BashDoor => true;
     public override bool Cthuloid => true;

@@ -12,14 +12,15 @@ internal class BlueYeekMonsterRace : MonsterRace
 {
     protected BlueYeekMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerYSymbol));
+    protected override string SymbolName => nameof(LowerYSymbol);
     public override ColorEnum Color => ColorEnum.Blue;
     public override string Name => "Blue yeek";
 
     public override bool Animal => true;
     public override int ArmorClass => 14;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 1, 5),
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 1, 5),
     };
     public override bool BashDoor => true;
     public override string Description => "A small humanoid figure.";

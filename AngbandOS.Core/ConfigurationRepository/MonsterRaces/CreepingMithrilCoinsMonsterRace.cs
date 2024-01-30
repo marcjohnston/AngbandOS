@@ -12,15 +12,16 @@ internal class CreepingMithrilCoinsMonsterRace : MonsterRace
 {
     protected CreepingMithrilCoinsMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(DollarSignSymbol));
+    protected override string SymbolName => nameof(DollarSignSymbol);
     public override ColorEnum Color => ColorEnum.BrightBlue;
     public override string Name => "Creeping mithril coins";
 
     public override bool Animal => true;
     public override int ArmorClass => 50;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 2, 5),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(TouchAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(PoisonAttackEffect)), 3, 5),
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 2, 5),
+        new MonsterAttackDefinition(nameof(TouchAttack), nameof(PoisonAttackEffect), 3, 5),
     };
     public override bool BashDoor => true;
     public override bool ColdBlood => true;

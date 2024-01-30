@@ -12,14 +12,15 @@ internal class CaveLizardMonsterRace : MonsterRace
 {
     protected CaveLizardMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperRSymbol));
+    protected override string SymbolName => nameof(UpperRSymbol);
     public override ColorEnum Color => ColorEnum.Brown;
     public override string Name => "Cave lizard";
 
     public override bool Animal => true;
     public override int ArmorClass => 16;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 1, 5),
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(BiteAttack), nameof(HurtAttackEffect), 1, 5),
     };
     public override string Description => "It is an armored lizard with a powerful bite.";
     public override int FreqInate => 0;

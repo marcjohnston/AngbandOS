@@ -20,16 +20,17 @@ internal class ShadowDrakeMonsterRace : MonsterRace
         nameof(HasteMonsterSpell)
     };
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerDSymbol));
+    protected override string SymbolName => nameof(LowerDSymbol);
     public override ColorEnum Color => ColorEnum.Black;
     public override string Name => "Shadow drake";
 
     public override bool Animal => true;
     public override int ArmorClass => 50;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(ColdAttackEffect)), 1, 6),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(ColdAttackEffect)), 1, 6),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(ColdAttackEffect)), 1, 6),
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(BiteAttack), nameof(ColdAttackEffect), 1, 6),
+        new MonsterAttackDefinition(nameof(BiteAttack), nameof(ColdAttackEffect), 1, 6),
+        new MonsterAttackDefinition(nameof(BiteAttack), nameof(ColdAttackEffect), 1, 6),
     };
     public override bool BashDoor => true;
     public override string Description => "It is a dragon-like form wrapped in shadow. Glowing red eyes shine out in the dark.";

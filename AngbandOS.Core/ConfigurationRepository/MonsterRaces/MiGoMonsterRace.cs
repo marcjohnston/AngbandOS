@@ -18,15 +18,16 @@ internal class MiGoMonsterRace : MonsterRace
         nameof(SummonMonsterMonsterSpell)
     };
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperASymbol));
+    protected override string SymbolName => nameof(UpperASymbol);
     public override ColorEnum Color => ColorEnum.BrightPink;
     public override string Name => "Mi-Go";
 
     public override bool Animal => true;
     public override int ArmorClass => 30;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(StingAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(PoisonAttackEffect)), 1, 4),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(LoseStrAttackEffect)), 1, 2),
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(StingAttack), nameof(PoisonAttackEffect), 1, 4),
+        new MonsterAttackDefinition(nameof(BiteAttack), nameof(LoseStrAttackEffect), 1, 2),
     };
     public override bool ColdBlood => true;
     public override bool Cthuloid => true;

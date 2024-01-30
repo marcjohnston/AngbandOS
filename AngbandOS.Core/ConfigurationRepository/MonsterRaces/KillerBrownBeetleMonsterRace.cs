@@ -12,14 +12,15 @@ internal class KillerBrownBeetleMonsterRace : MonsterRace
 {
     protected KillerBrownBeetleMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperKSymbol));
+    protected override string SymbolName => nameof(UpperKSymbol);
     public override ColorEnum Color => ColorEnum.Brown;
     public override string Name => "Killer brown beetle";
 
     public override bool Animal => true;
     public override int ArmorClass => 40;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 3, 4),
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(BiteAttack), nameof(HurtAttackEffect), 3, 4),
     };
     public override bool BashDoor => true;
     public override string Description => "It is a vicious insect with a tough carapace.";

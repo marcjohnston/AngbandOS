@@ -19,16 +19,17 @@ internal class DarkYoungOfShubNiggurathMonsterRace : MonsterRace
         nameof(SummonCthuloidMonsterSpell)
     };
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperASymbol));
+    protected override string SymbolName => nameof(UpperASymbol);
     public override ColorEnum Color => ColorEnum.Green;
     public override string Name => "Dark young of Shub-Niggurath";
 
     public override int ArmorClass => 75;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(CrushAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 5, 6),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(CrushAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 5, 6),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(LoseStrAttackEffect)), 1, 6),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(LoseStrAttackEffect)), 1, 6)
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(CrushAttack), nameof(HurtAttackEffect), 5, 6),
+        new MonsterAttackDefinition(nameof(CrushAttack), nameof(HurtAttackEffect), 5, 6),
+        new MonsterAttackDefinition(nameof(BiteAttack), nameof(LoseStrAttackEffect), 1, 6),
+        new MonsterAttackDefinition(nameof(BiteAttack), nameof(LoseStrAttackEffect), 1, 6)
     };
     public override bool BashDoor => true;
     public override bool Cthuloid => true;

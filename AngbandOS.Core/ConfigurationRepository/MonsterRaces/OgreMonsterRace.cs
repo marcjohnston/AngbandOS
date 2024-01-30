@@ -12,13 +12,14 @@ internal class OgreMonsterRace : MonsterRace
 {
     protected OgreMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperOSymbol));
+    protected override string SymbolName => nameof(UpperOSymbol);
     public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "Ogre";
 
     public override int ArmorClass => 33;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 2, 8),
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 2, 8),
     };
     public override bool BashDoor => true;
     public override string Description => "A hideous, smallish giant that is often found near or with orcs.";

@@ -12,14 +12,15 @@ internal class RattlesnakeMonsterRace : MonsterRace
 {
     protected RattlesnakeMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperJSymbol));
+    protected override string SymbolName => nameof(UpperJSymbol);
     public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "Rattlesnake";
 
     public override bool Animal => true;
     public override int ArmorClass => 24;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(PoisonAttackEffect)), 2, 5),
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(BiteAttack), nameof(PoisonAttackEffect), 2, 5),
     };
     public override bool BashDoor => true;
     public override string Description => "It is recognized by the hard-scaled end of its body that is often rattled to frighten its prey.";

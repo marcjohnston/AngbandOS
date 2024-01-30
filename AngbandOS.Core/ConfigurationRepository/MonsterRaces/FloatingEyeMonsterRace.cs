@@ -12,12 +12,13 @@ internal class FloatingEyeMonsterRace : MonsterRace
 {
     protected FloatingEyeMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerESymbol));
+    protected override string SymbolName => nameof(LowerESymbol);
     public override string Name => "Floating eye";
 
     public override int ArmorClass => 6;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(GazeAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(ParalyzeAttackEffect)), 0, 0),
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(GazeAttack), nameof(ParalyzeAttackEffect), 0, 0),
     };
     public override string Description => "A disembodied eye, floating a few feet above the ground.";
     public override int FreqInate => 0;

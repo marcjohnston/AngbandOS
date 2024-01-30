@@ -16,16 +16,17 @@ internal class DholeMonsterRace : MonsterRace
         nameof(BreatheAcidMonsterSpell)
     };
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperASymbol));
+    protected override string SymbolName => nameof(UpperASymbol);
     public override ColorEnum Color => ColorEnum.Beige;
     public override string Name => "Dhole";
 
     public override bool Animal => true;
     public override int ArmorClass => 64;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(SpitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(AcidAttackEffect)), 1, 8),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(EngulfAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(AcidAttackEffect)), 2, 8),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(CrushAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 4, 8),
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(SpitAttack), nameof(AcidAttackEffect), 1, 8),
+        new MonsterAttackDefinition(nameof(EngulfAttack), nameof(AcidAttackEffect), 2, 8),
+        new MonsterAttackDefinition(nameof(CrushAttack), nameof(HurtAttackEffect), 4, 8),
     };
     public override bool Cthuloid => true;
     public override string Description => "A gigantic worm dripping with acid.";

@@ -12,14 +12,15 @@ internal class GiantWhiteCentipedeMonsterRace : MonsterRace
 {
     protected GiantWhiteCentipedeMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerCSymbol));
+    protected override string SymbolName => nameof(LowerCSymbol);
     public override string Name => "Giant white centipede";
 
     public override bool Animal => true;
     public override int ArmorClass => 10;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 1, 2),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(StingAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 1, 2),
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(BiteAttack), nameof(HurtAttackEffect), 1, 2),
+        new MonsterAttackDefinition(nameof(StingAttack), nameof(HurtAttackEffect), 1, 2),
     };
     public override bool BashDoor => true;
     public override string Description => "It is about four feet long and carnivorous.";

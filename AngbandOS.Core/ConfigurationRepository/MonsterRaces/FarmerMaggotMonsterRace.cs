@@ -12,14 +12,15 @@ internal class FarmerMaggotMonsterRace : MonsterRace
 {
     protected FarmerMaggotMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerTSymbol));
+    protected override string SymbolName => nameof(LowerTSymbol);
     public override ColorEnum Color => ColorEnum.BrightPink;
     public override string Name => "Farmer Maggot";
 
     public override int ArmorClass => 10;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(MoanAttack)), null, 0, 0),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(MoanAttack)), null, 0, 0),
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(MoanAttack), null, 0, 0),
+        new MonsterAttackDefinition(nameof(MoanAttack), null, 0, 0),
     };
     public override bool BashDoor => true;
     public override string Description => "He's lost his dogs. He's had his mushrooms stolen. He's not a happy hobbit!";

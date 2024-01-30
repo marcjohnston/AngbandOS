@@ -17,14 +17,15 @@ internal class LostSoulMonsterRace : MonsterRace
         nameof(TeleportSelfMonsterSpell)
     };
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperGSymbol));
+    protected override string SymbolName => nameof(UpperGSymbol);
     public override ColorEnum Color => ColorEnum.Brown;
     public override string Name => "Lost soul";
 
     public override int ArmorClass => 10;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 2, 2),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(TouchAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(LoseWisAttackEffect)), 0, 0),
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 2, 2),
+        new MonsterAttackDefinition(nameof(TouchAttack), nameof(LoseWisAttackEffect), 0, 0),
     };
     public override bool ColdBlood => true;
     public override string Description => "It is almost insubstantial.";

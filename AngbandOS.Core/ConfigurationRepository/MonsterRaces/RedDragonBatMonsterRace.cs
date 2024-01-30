@@ -16,14 +16,15 @@ internal class RedDragonBatMonsterRace : MonsterRace
         nameof(BreatheFireMonsterSpell)
     };
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerBSymbol));
+    protected override string SymbolName => nameof(LowerBSymbol);
     public override ColorEnum Color => ColorEnum.BrightRed;
     public override string Name => "Red dragon bat";
 
     public override bool Animal => true;
     public override int ArmorClass => 28;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(FireAttackEffect)), 1, 3),
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(BiteAttack), nameof(FireAttackEffect), 1, 3),
     };
     public override bool BashDoor => true;
     public override string Description => "It is a sharp-tailed bat, wreathed in fire.";

@@ -22,16 +22,17 @@ internal class KhufuTheMummifiedKingMonsterRace : MonsterRace
         nameof(SummonUndeadMonsterSpell)
     };
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerZSymbol));
+    protected override string SymbolName => nameof(LowerZSymbol);
     public override ColorEnum Color => ColorEnum.Gold;
     public override string Name => "Khufu the mummified King";
 
     public override int ArmorClass => 40;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(GazeAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(TerrifyAttackEffect)), 0, 0),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(PoisonAttackEffect)), 6, 6),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(ClawAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(LoseConAttackEffect)), 0, 0),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(ClawAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(LoseConAttackEffect)), 0, 0)
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(GazeAttack), nameof(TerrifyAttackEffect), 0, 0),
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(PoisonAttackEffect), 6, 6),
+        new MonsterAttackDefinition(nameof(ClawAttack), nameof(LoseConAttackEffect), 0, 0),
+        new MonsterAttackDefinition(nameof(ClawAttack), nameof(LoseConAttackEffect), 0, 0)
     };
     public override bool BashDoor => true;
     public override bool ColdBlood => true;

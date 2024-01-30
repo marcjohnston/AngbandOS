@@ -12,14 +12,15 @@ internal class GiantFleaMonsterRace : MonsterRace
 {
     protected GiantFleaMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperISymbol));
+    protected override string SymbolName => nameof(UpperISymbol);
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "Giant flea";
 
     public override bool Animal => true;
     public override int ArmorClass => 7;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 1, 2),
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(BiteAttack), nameof(HurtAttackEffect), 1, 2),
     };
     public override string Description => "It makes you itch just to look at it. ";
     public override int FreqInate => 0;

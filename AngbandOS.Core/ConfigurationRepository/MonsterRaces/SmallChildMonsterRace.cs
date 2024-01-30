@@ -12,13 +12,14 @@ internal class SmallChildMonsterRace : MonsterRace
 {
     protected SmallChildMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerTSymbol));
+    protected override string SymbolName => nameof(LowerTSymbol);
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "Small child";
 
     public override int ArmorClass => 1;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(WorshipAttack)), null, 0, 0),
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(WorshipAttack), null, 0, 0),
     };
     public override string Description => "A rather cute child with large trusting eyes.";
     public override int FreqInate => 0;

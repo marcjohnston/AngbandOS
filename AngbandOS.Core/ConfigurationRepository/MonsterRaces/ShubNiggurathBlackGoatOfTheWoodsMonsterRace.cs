@@ -29,16 +29,17 @@ internal class ShubNiggurathBlackGoatOfTheWoodsMonsterRace : MonsterRace
         nameof(SummonUniqueMonsterSpell)
     };
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperXSymbol));
+    protected override string SymbolName => nameof(UpperXSymbol);
     public override ColorEnum Color => ColorEnum.BrightGreen;
     public override string Name => "Shub-Niggurath, Black Goat of the Woods";
 
     public override int ArmorClass => 100;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(CrushAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(LoseWisAttackEffect)), 20, 5),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(CrushAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(LoseIntAttackEffect)), 20, 5),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(LoseStrAttackEffect)), 10, 2),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(LoseConAttackEffect)), 10, 2)
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(CrushAttack), nameof(LoseWisAttackEffect), 20, 5),
+        new MonsterAttackDefinition(nameof(CrushAttack), nameof(LoseIntAttackEffect), 20, 5),
+        new MonsterAttackDefinition(nameof(BiteAttack), nameof(LoseStrAttackEffect), 10, 2),
+        new MonsterAttackDefinition(nameof(BiteAttack), nameof(LoseConAttackEffect), 10, 2)
     };
     public override bool AttrAny => true;
     public override bool AttrMulti => true;

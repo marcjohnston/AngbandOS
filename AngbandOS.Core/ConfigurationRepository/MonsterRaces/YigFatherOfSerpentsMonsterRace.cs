@@ -18,16 +18,17 @@ internal class YigFatherOfSerpentsMonsterRace : MonsterRace
         nameof(BreathePoisonMonsterSpell)
     };
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperJSymbol));
+    protected override string SymbolName => nameof(UpperJSymbol);
     public override ColorEnum Color => ColorEnum.Green;
     public override string Name => "Yig, Father of Serpents";
 
     public override int ArmorClass => 185;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(ClawAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(PoisonAttackEffect)), 5, 10),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(ClawAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(PoisonAttackEffect)), 5, 10),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 20, 10),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(CrushAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(UnBonusAttackEffect)), 5, 12)
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(ClawAttack), nameof(PoisonAttackEffect), 5, 10),
+        new MonsterAttackDefinition(nameof(ClawAttack), nameof(PoisonAttackEffect), 5, 10),
+        new MonsterAttackDefinition(nameof(BiteAttack), nameof(HurtAttackEffect), 20, 10),
+        new MonsterAttackDefinition(nameof(CrushAttack), nameof(UnBonusAttackEffect), 5, 12)
     };
     public override bool BashDoor => true;
     public override string Description => "A humanoid snake, Yig is one of the most poisonous entities in existance.";

@@ -12,14 +12,15 @@ internal class GiantBrownRatMonsterRace : MonsterRace
 {
     protected GiantBrownRatMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerRSymbol));
+    protected override string SymbolName => nameof(LowerRSymbol);
     public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "Giant brown rat";
 
     public override bool Animal => true;
     public override int ArmorClass => 7;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(PoisonAttackEffect)), 1, 3),
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(BiteAttack), nameof(PoisonAttackEffect), 1, 3),
     };
     public override string Description => "It is a very vicious rodent.";
     public override int FreqInate => 0;

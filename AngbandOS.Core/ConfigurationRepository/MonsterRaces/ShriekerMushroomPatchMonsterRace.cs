@@ -16,12 +16,11 @@ internal class ShriekerMushroomPatchMonsterRace : MonsterRace
         nameof(ShriekMonsterSpell)
     };
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(CommaSymbol));
+    protected override string SymbolName => nameof(CommaSymbol);
     public override ColorEnum Color => ColorEnum.BrightRed;
     public override string Name => "Shrieker mushroom patch";
 
     public override int ArmorClass => 1;
-    public override MonsterAttack[]? Attacks => null;
     public override string Description => "Yum! These look quite tasty.";
     public override bool EmptyMind => true;
     public override bool ForceSleep => true;

@@ -12,13 +12,14 @@ internal class GreenGluttonGhostMonsterRace : MonsterRace
 {
     protected GreenGluttonGhostMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperGSymbol));
+    protected override string SymbolName => nameof(UpperGSymbol);
     public override ColorEnum Color => ColorEnum.Green;
     public override string Name => "Green glutton ghost";
 
     public override int ArmorClass => 20;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(TouchAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(EatFoodAttackEffect)), 1, 1),
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(TouchAttack), nameof(EatFoodAttackEffect), 1, 1),
     };
     public override bool ColdBlood => true;
     public override string Description => "It is a very ugly green ghost with a voracious appetite.";

@@ -18,14 +18,15 @@ internal class NightgauntMonsterRace : MonsterRace
         nameof(FireBoltMonsterSpell)
     };
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperUSymbol));
+    protected override string SymbolName => nameof(UpperUSymbol);
     public override ColorEnum Color => ColorEnum.Purple;
     public override string Name => "Nightgaunt";
 
     public override int ArmorClass => 50;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(CrushAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(LoseStrAttackEffect)), 1, 5),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(TouchAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(ParalyzeAttackEffect)), 3, 4),
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(CrushAttack), nameof(LoseStrAttackEffect), 1, 5),
+        new MonsterAttackDefinition(nameof(TouchAttack), nameof(ParalyzeAttackEffect), 3, 4),
     };
     public override bool BashDoor => true;
     public override bool Demon => true;

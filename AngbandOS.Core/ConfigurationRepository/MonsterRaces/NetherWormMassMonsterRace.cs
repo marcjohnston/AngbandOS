@@ -12,14 +12,15 @@ internal class NetherWormMassMonsterRace : MonsterRace
 {
     protected NetherWormMassMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerWSymbol));
+    protected override string SymbolName => nameof(LowerWSymbol);
     public override ColorEnum Color => ColorEnum.Black;
     public override string Name => "Nether worm mass";
 
     public override bool Animal => true;
     public override int ArmorClass => 15;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(TouchAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(Exp10AttackEffect)), 0, 0),
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(TouchAttack), nameof(Exp10AttackEffect), 0, 0),
     };
     public override bool BashDoor => true;
     public override string Description => "It is a disgusting mass of dark worms, eating each other, the floor, the air, you....";

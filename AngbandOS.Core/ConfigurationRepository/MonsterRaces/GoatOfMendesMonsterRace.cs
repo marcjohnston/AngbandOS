@@ -26,16 +26,17 @@ internal class GoatOfMendesMonsterRace : MonsterRace
         nameof(SummonUndeadMonsterSpell)
     };
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerQSymbol));
+    protected override string SymbolName => nameof(LowerQSymbol);
     public override ColorEnum Color => ColorEnum.Red;
     public override string Name => "Goat of Mendes";
 
     public override int ArmorClass => 66;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(GazeAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(TerrifyAttackEffect)), 0, 0),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(ButtAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 6, 6),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(Exp40AttackEffect)), 0, 0),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(LoseConAttackEffect)), 0, 0)
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(GazeAttack), nameof(TerrifyAttackEffect), 0, 0),
+        new MonsterAttackDefinition(nameof(ButtAttack), nameof(HurtAttackEffect), 6, 6),
+        new MonsterAttackDefinition(nameof(BiteAttack), nameof(Exp40AttackEffect), 0, 0),
+        new MonsterAttackDefinition(nameof(BiteAttack), nameof(LoseConAttackEffect), 0, 0)
     };
     public override bool BashDoor => true;
     public override bool Demon => true;

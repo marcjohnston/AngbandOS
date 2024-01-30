@@ -21,17 +21,18 @@ internal class ThePhoenixMonsterRace : MonsterRace
         nameof(PlasmaBoltMonsterSpell)
     };
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperBSymbol));
+    protected override string SymbolName => nameof(UpperBSymbol);
     public override ColorEnum Color => ColorEnum.Red;
     public override string Name => "The Phoenix";
 
     public override bool Animal => true;
     public override int ArmorClass => 130;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(FireAttackEffect)), 12, 6),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(FireAttackEffect)), 12, 6),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(FireAttackEffect)), 9, 12),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(FireAttackEffect)), 9, 12)
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(BiteAttack), nameof(FireAttackEffect), 12, 6),
+        new MonsterAttackDefinition(nameof(BiteAttack), nameof(FireAttackEffect), 12, 6),
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(FireAttackEffect), 9, 12),
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(FireAttackEffect), 9, 12)
     };
     public override bool BashDoor => true;
     public override string Description => "A massive glowing eagle bathed in flames. The searing heat chars your skin and melts your armor.";

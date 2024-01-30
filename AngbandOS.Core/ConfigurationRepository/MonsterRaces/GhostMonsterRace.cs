@@ -18,15 +18,16 @@ internal class GhostMonsterRace : MonsterRace
         nameof(HoldMonsterSpell)
     };
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperGSymbol));
+    protected override string SymbolName => nameof(UpperGSymbol);
     public override string Name => "Ghost";
 
     public override int ArmorClass => 30;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(WailAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(TerrifyAttackEffect)), 0, 0),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(TouchAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(Exp20AttackEffect)), 0, 0),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(ClawAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(LoseIntAttackEffect)), 1, 6),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(ClawAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(LoseWisAttackEffect)), 1, 6)
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(WailAttack), nameof(TerrifyAttackEffect), 0, 0),
+        new MonsterAttackDefinition(nameof(TouchAttack), nameof(Exp20AttackEffect), 0, 0),
+        new MonsterAttackDefinition(nameof(ClawAttack), nameof(LoseIntAttackEffect), 1, 6),
+        new MonsterAttackDefinition(nameof(ClawAttack), nameof(LoseWisAttackEffect), 1, 6)
     };
     public override bool ColdBlood => true;
     public override string Description => "You don't believe in them.";

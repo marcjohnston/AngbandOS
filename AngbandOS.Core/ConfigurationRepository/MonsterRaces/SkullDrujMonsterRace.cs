@@ -24,16 +24,17 @@ internal class SkullDrujMonsterRace : MonsterRace
         nameof(SummonUndeadMonsterSpell)
     };
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerSSymbol));
+    protected override string SymbolName => nameof(LowerSSymbol);
     public override ColorEnum Color => ColorEnum.BrightGrey;
     public override string Name => "Skull druj";
 
     public override int ArmorClass => 120;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(Exp80AttackEffect)), 4, 4),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(ParalyzeAttackEffect)), 4, 4),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(LoseIntAttackEffect)), 4, 4),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(LoseWisAttackEffect)), 4, 4)
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(BiteAttack), nameof(Exp80AttackEffect), 4, 4),
+        new MonsterAttackDefinition(nameof(BiteAttack), nameof(ParalyzeAttackEffect), 4, 4),
+        new MonsterAttackDefinition(nameof(BiteAttack), nameof(LoseIntAttackEffect), 4, 4),
+        new MonsterAttackDefinition(nameof(BiteAttack), nameof(LoseWisAttackEffect), 4, 4)
     };
     public override bool ColdBlood => true;
     public override string Description => "A glowing skull possessed by sorcerous power. It need not move, but merely blast you with mighty magic.";

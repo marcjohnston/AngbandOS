@@ -18,17 +18,18 @@ internal class NineHeadedHydraMonsterRace : MonsterRace
         nameof(ScareMonsterSpell)
     };
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperMSymbol));
+    protected override string SymbolName => nameof(UpperMSymbol);
     public override ColorEnum Color => ColorEnum.BrightGreen;
     public override string Name => "9-headed hydra";
 
     public override bool Animal => true;
     public override int ArmorClass => 95;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(FireAttackEffect)), 3, 6),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(FireAttackEffect)), 3, 6),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(FireAttackEffect)), 3, 6),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(FireAttackEffect)), 3, 6)
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(BiteAttack), nameof(FireAttackEffect), 3, 6),
+        new MonsterAttackDefinition(nameof(BiteAttack), nameof(FireAttackEffect), 3, 6),
+        new MonsterAttackDefinition(nameof(BiteAttack), nameof(FireAttackEffect), 3, 6),
+        new MonsterAttackDefinition(nameof(BiteAttack), nameof(FireAttackEffect), 3, 6)
     };
     public override bool BashDoor => true;
     public override string Description => "A strange reptilian hybrid with nine smouldering heads.";

@@ -16,13 +16,14 @@ internal class RedweedMonsterRace : MonsterRace
         nameof(BlinkMonsterSpell)
     };
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerMSymbol));
+    protected override string SymbolName => nameof(LowerMSymbol);
     public override ColorEnum Color => ColorEnum.BrightRed;
     public override string Name => "Redweed";
 
     public override int ArmorClass => 3;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(TouchAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 1, 1),
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(TouchAttack), nameof(HurtAttackEffect), 1, 1),
     };
     public override string Description => "A strange fibrous growth springing up everywhere.";
     public override bool EmptyMind => true;

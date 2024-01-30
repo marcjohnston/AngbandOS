@@ -16,12 +16,11 @@ internal class ChaosVortexMonsterRace : MonsterRace
         nameof(BreatheChaosMonsterSpell)
     };
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerVSymbol));
+    protected override string SymbolName => nameof(LowerVSymbol);
     public override ColorEnum Color => ColorEnum.Purple;
     public override string Name => "Chaos vortex";
 
     public override int ArmorClass => 80;
-    public override MonsterAttack[]? Attacks => null;
     public override bool AttrAny => true;
     public override bool AttrMulti => true;
     public override bool BashDoor => true;

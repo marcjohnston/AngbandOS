@@ -12,16 +12,17 @@ internal class JubjubBirdMonsterRace : MonsterRace
 {
     protected JubjubBirdMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperBSymbol));
+    protected override string SymbolName => nameof(UpperBSymbol);
     public override ColorEnum Color => ColorEnum.Pink;
     public override string Name => "Jubjub bird";
 
     public override bool Animal => true;
     public override int ArmorClass => 70;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(CrushAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 8, 12),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(CrushAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 8, 12),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(ElectricityAttackEffect)), 12, 12),
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(CrushAttack), nameof(HurtAttackEffect), 8, 12),
+        new MonsterAttackDefinition(nameof(CrushAttack), nameof(HurtAttackEffect), 8, 12),
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(ElectricityAttackEffect), 12, 12),
     };
     public override bool BashDoor => true;
     public override string Description => "A vast legendary bird, its iron talons rake the most impenetrable of surfaces and its screech echoes through the many winding dungeon corridors.";

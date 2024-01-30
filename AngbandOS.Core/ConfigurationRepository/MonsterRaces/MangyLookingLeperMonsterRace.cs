@@ -12,14 +12,15 @@ internal class MangyLookingLeperMonsterRace : MonsterRace
 {
     protected MangyLookingLeperMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerTSymbol));
+    protected override string SymbolName => nameof(LowerTSymbol);
     public override ColorEnum Color => ColorEnum.Brown;
     public override string Name => "Mangy looking leper";
 
     public override int ArmorClass => 1;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BegAttack)), null, 0, 0),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(TouchAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(LoseConAttackEffect)), 0, 0),
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(BegAttack), null, 0, 0),
+        new MonsterAttackDefinition(nameof(TouchAttack), nameof(LoseConAttackEffect), 0, 0),
     };
     public override string Description => "You feel it isn't safe to touch him.";
     public override int FreqInate => 0;

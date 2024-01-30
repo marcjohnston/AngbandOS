@@ -16,15 +16,16 @@ internal class ChimeraMonsterRace : MonsterRace
         nameof(BreatheFireMonsterSpell)
     };
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperHSymbol));
+    protected override string SymbolName => nameof(UpperHSymbol);
     public override ColorEnum Color => ColorEnum.Yellow;
     public override string Name => "Chimera";
 
     public override int ArmorClass => 15;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 1, 10),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(FireAttackEffect)), 1, 3),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(ButtAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 1, 3),
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(BiteAttack), nameof(HurtAttackEffect), 1, 10),
+        new MonsterAttackDefinition(nameof(BiteAttack), nameof(FireAttackEffect), 1, 3),
+        new MonsterAttackDefinition(nameof(ButtAttack), nameof(HurtAttackEffect), 1, 3),
     };
     public override bool BashDoor => true;
     public override string Description => "It is a strange concoction of lion, dragon and goat. It looks very odd but very avoidable.";

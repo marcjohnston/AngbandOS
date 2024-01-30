@@ -12,15 +12,16 @@ internal class OchreJellyMonsterRace : MonsterRace
 {
     protected OchreJellyMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerJSymbol));
+    protected override string SymbolName => nameof(LowerJSymbol);
     public override ColorEnum Color => ColorEnum.Yellow;
     public override string Name => "Ochre jelly";
 
     public override int ArmorClass => 18;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(TouchAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(AcidAttackEffect)), 2, 6),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(TouchAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(AcidAttackEffect)), 2, 6),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(TouchAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(AcidAttackEffect)), 1, 10),
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(TouchAttack), nameof(AcidAttackEffect), 2, 6),
+        new MonsterAttackDefinition(nameof(TouchAttack), nameof(AcidAttackEffect), 2, 6),
+        new MonsterAttackDefinition(nameof(TouchAttack), nameof(AcidAttackEffect), 1, 10),
     };
     public override bool BashDoor => true;
     public override bool ColdBlood => true;

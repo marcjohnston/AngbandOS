@@ -12,13 +12,14 @@ internal class IceTrollMonsterRace : MonsterRace
 {
     protected IceTrollMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperTSymbol));
+    protected override string SymbolName => nameof(UpperTSymbol);
     public override string Name => "Ice troll";
 
     public override int ArmorClass => 56;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(ClawAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 1, 5),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(ColdAttackEffect)), 3, 6),
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(ClawAttack), nameof(HurtAttackEffect), 1, 5),
+        new MonsterAttackDefinition(nameof(BiteAttack), nameof(ColdAttackEffect), 3, 6),
     };
     public override bool BashDoor => true;
     public override string Description => "He is a white troll with powerfully clawed hands.";

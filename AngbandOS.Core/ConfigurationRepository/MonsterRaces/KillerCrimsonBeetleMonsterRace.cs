@@ -12,14 +12,15 @@ internal class KillerCrimsonBeetleMonsterRace : MonsterRace
 {
     protected KillerCrimsonBeetleMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperKSymbol));
+    protected override string SymbolName => nameof(UpperKSymbol);
     public override ColorEnum Color => ColorEnum.BrightRed;
     public override string Name => "Killer crimson beetle";
 
     public override bool Animal => true;
     public override int ArmorClass => 50;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(LoseStrAttackEffect)), 4, 4),
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(BiteAttack), nameof(LoseStrAttackEffect), 4, 4),
     };
     public override bool BashDoor => true;
     public override string Description => "A giant beetle with poisonous mandibles.";

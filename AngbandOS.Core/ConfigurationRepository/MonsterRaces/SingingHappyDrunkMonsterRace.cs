@@ -12,13 +12,14 @@ internal class SingingHappyDrunkMonsterRace : MonsterRace
 {
     protected SingingHappyDrunkMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerTSymbol));
+    protected override string SymbolName => nameof(LowerTSymbol);
     public override ColorEnum Color => ColorEnum.Yellow;
     public override string Name => "Singing, happy drunk";
 
     public override int ArmorClass => 1;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BegAttack)), null, 0, 0),
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(BegAttack), null, 0, 0),
     };
     public override bool BashDoor => true;
     public override string Description => "He makes you glad to be sober.";

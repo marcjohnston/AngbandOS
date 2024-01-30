@@ -23,16 +23,17 @@ internal class NightcrawlerMonsterRace : MonsterRace
         nameof(SummonUndeadMonsterSpell)
     };
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerZSymbol));
+    protected override string SymbolName => nameof(LowerZSymbol);
     public override ColorEnum Color => ColorEnum.Black;
     public override string Name => "Nightcrawler";
 
     public override int ArmorClass => 160;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(StingAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(LoseConAttackEffect)), 8, 8),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(StingAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(LoseConAttackEffect)), 8, 8),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(AcidAttackEffect)), 10, 10),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(AcidAttackEffect)), 10, 10)
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(StingAttack), nameof(LoseConAttackEffect), 8, 8),
+        new MonsterAttackDefinition(nameof(StingAttack), nameof(LoseConAttackEffect), 8, 8),
+        new MonsterAttackDefinition(nameof(BiteAttack), nameof(AcidAttackEffect), 10, 10),
+        new MonsterAttackDefinition(nameof(BiteAttack), nameof(AcidAttackEffect), 10, 10)
     };
     public override bool BashDoor => true;
     public override bool ColdBlood => true;

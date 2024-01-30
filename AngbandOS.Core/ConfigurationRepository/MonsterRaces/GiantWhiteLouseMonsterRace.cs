@@ -12,13 +12,14 @@ internal class GiantWhiteLouseMonsterRace : MonsterRace
 {
     protected GiantWhiteLouseMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerLSymbol));
+    protected override string SymbolName => nameof(LowerLSymbol);
     public override string Name => "Giant white louse";
 
     public override bool Animal => true;
     public override int ArmorClass => 5;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 1, 1),
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(BiteAttack), nameof(HurtAttackEffect), 1, 1),
     };
     public override string Description => "It is six inches long.";
     public override int FreqInate => 0;

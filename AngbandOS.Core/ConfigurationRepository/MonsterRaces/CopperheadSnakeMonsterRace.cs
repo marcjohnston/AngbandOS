@@ -12,14 +12,15 @@ internal class CopperheadSnakeMonsterRace : MonsterRace
 {
     protected CopperheadSnakeMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperJSymbol));
+    protected override string SymbolName => nameof(UpperJSymbol);
     public override ColorEnum Color => ColorEnum.Orange;
     public override string Name => "Copperhead snake";
 
     public override bool Animal => true;
     public override int ArmorClass => 20;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(PoisonAttackEffect)), 2, 4),
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(BiteAttack), nameof(PoisonAttackEffect), 2, 4),
     };
     public override bool BashDoor => true;
     public override string Description => "It has a copper head and sharp venomous fangs.";

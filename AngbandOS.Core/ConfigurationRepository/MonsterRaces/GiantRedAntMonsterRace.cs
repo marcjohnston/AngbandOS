@@ -12,15 +12,16 @@ internal class GiantRedAntMonsterRace : MonsterRace
 {
     protected GiantRedAntMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerASymbol));
+    protected override string SymbolName => nameof(LowerASymbol);
     public override ColorEnum Color => ColorEnum.BrightRed;
     public override string Name => "Giant red ant";
 
     public override bool Animal => true;
     public override int ArmorClass => 34;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 1, 4),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(StingAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(LoseStrAttackEffect)), 1, 4),
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(BiteAttack), nameof(HurtAttackEffect), 1, 4),
+        new MonsterAttackDefinition(nameof(StingAttack), nameof(LoseStrAttackEffect), 1, 4),
     };
     public override bool BashDoor => true;
     public override string Description => "It is large and has venomous mandibles.";

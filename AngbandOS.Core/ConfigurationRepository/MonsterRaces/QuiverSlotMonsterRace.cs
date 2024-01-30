@@ -16,13 +16,14 @@ internal class QuiverSlotMonsterRace : MonsterRace
         nameof(Arrow1D6MonsterSpell)
     };
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(CommaSymbol));
+    protected override string SymbolName => nameof(CommaSymbol);
     public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "Quiver slot";
 
     public override int ArmorClass => 1;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(SporeAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(ConfuseAttackEffect)), 1, 1),
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(SporeAttack), nameof(ConfuseAttackEffect), 1, 1),
     };
     public override bool ColdBlood => true;
     public override string Description => "An arrow hole in the floor, covered in fungal tendrils.";

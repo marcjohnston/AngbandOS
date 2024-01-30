@@ -30,13 +30,12 @@ internal class QlzqqlzuupTheLordOfFleshMonsterRace : MonsterRace
         nameof(SummonUniqueMonsterSpell)
     };
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperQSymbol));
+    protected override string SymbolName => nameof(UpperQSymbol);
     public override ColorEnum Color => ColorEnum.BrightBlue;
     public override string Name => "Qlzqqlzuup, the Lord of Flesh";
 
     public override bool Animal => true;
     public override int ArmorClass => 1;
-    public override MonsterAttack[]? Attacks => null;
     public override bool AttrMulti => true;
     public override string Description => "This disgusting creature squeals and snorts as it writhes on the floor. It pulsates with evil. Its intent is to overwhelm you with monster after monster, until it can greedily dine on your remains.";
     public override bool Drop_4D2 => true;

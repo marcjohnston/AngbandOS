@@ -18,16 +18,17 @@ internal class BastGoddessOfCatsMonsterRace : MonsterRace
         nameof(TeleportToMonsterSpell)
     };
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerFSymbol));
+    protected override string SymbolName => nameof(LowerFSymbol);
     public override ColorEnum Color => ColorEnum.Orange;
     public override string Name => "Bast, Goddess of Cats";
 
     public override int ArmorClass => 200;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(ConfuseAttackEffect)), 12, 12),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(TouchAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(LoseDexAttackEffect)), 2, 12),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(BlindAttackEffect)), 10, 5),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(ParalyzeAttackEffect)), 15, 1)
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(ConfuseAttackEffect), 12, 12),
+        new MonsterAttackDefinition(nameof(TouchAttack), nameof(LoseDexAttackEffect), 2, 12),
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(BlindAttackEffect), 10, 5),
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(ParalyzeAttackEffect), 15, 1)
     };
     public override bool BashDoor => true;
     public override string Description => "She looks like a mortal female with a cat's head.";

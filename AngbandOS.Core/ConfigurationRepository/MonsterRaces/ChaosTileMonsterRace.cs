@@ -21,14 +21,15 @@ internal class ChaosTileMonsterRace : MonsterRace
         nameof(SummonMonsterMonsterSpell)
     };
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(PeriodSymbol));
+    protected override string SymbolName => nameof(PeriodSymbol);
     public override ColorEnum Color => ColorEnum.Purple;
     public override string Name => "Chaos tile";
 
     public override int ArmorClass => 60;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(PoisonAttackEffect)), 3, 4),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(ConfuseAttackEffect)), 3, 4),
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(PoisonAttackEffect), 3, 4),
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(ConfuseAttackEffect), 3, 4),
     };
     public override bool AttrAny => true;
     public override bool AttrMulti => true;

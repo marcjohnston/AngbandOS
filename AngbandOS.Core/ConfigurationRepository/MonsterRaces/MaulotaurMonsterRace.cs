@@ -18,16 +18,17 @@ internal class MaulotaurMonsterRace : MonsterRace
         nameof(PlasmaBoltMonsterSpell)
     };
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperHSymbol));
+    protected override string SymbolName => nameof(UpperHSymbol);
     public override ColorEnum Color => ColorEnum.Brown;
     public override string Name => "Maulotaur";
 
     public override int ArmorClass => 50;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(ButtAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 4, 6),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(ButtAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 4, 6),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(ShatterAttackEffect)), 5, 6),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(ShatterAttackEffect)), 5, 6)
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(ButtAttack), nameof(HurtAttackEffect), 4, 6),
+        new MonsterAttackDefinition(nameof(ButtAttack), nameof(HurtAttackEffect), 4, 6),
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(ShatterAttackEffect), 5, 6),
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(ShatterAttackEffect), 5, 6)
     };
     public override bool BashDoor => true;
     public override string Description => "It is a belligrent minotaur with some destructive magical arsenal, armed with a hammer.";

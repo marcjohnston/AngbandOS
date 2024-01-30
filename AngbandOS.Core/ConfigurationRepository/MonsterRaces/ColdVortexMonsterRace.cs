@@ -16,13 +16,14 @@ internal class ColdVortexMonsterRace : MonsterRace
         nameof(BreatheColdMonsterSpell)
     };
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerVSymbol));
+    protected override string SymbolName => nameof(LowerVSymbol);
     public override ColorEnum Color => ColorEnum.Diamond;
     public override string Name => "Cold vortex";
 
     public override int ArmorClass => 30;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(EngulfAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(ColdAttackEffect)), 3, 3),
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(EngulfAttack), nameof(ColdAttackEffect), 3, 3),
     };
     public override bool BashDoor => true;
     public override string Description => "A twisting whirlpool of frost.";

@@ -12,13 +12,14 @@ internal class HoboMonsterRace : MonsterRace
 {
     protected HoboMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerTSymbol));
+    protected override string SymbolName => nameof(LowerTSymbol);
     public override ColorEnum Color => ColorEnum.Green;
     public override string Name => "Hobo";
 
     public override int ArmorClass => 1;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(DroolAttack)), null, 0, 0),
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(DroolAttack), null, 0, 0),
     };
     public override bool BashDoor => true;
     public override string Description => "Ugly doesn't begin to describe him.";

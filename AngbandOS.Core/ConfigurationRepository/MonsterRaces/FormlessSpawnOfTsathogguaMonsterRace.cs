@@ -20,16 +20,17 @@ internal class FormlessSpawnOfTsathogguaMonsterRace : MonsterRace
         nameof(SummonCthuloidMonsterSpell)
     };
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperASymbol));
+    protected override string SymbolName => nameof(UpperASymbol);
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "Formless spawn of Tsathoggua";
 
     public override int ArmorClass => 40;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(AcidAttackEffect)), 2, 4),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(AcidAttackEffect)), 2, 4),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(CrushAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 3, 4),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(AcidAttackEffect)), 6, 6)
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(AcidAttackEffect), 2, 4),
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(AcidAttackEffect), 2, 4),
+        new MonsterAttackDefinition(nameof(CrushAttack), nameof(HurtAttackEffect), 3, 4),
+        new MonsterAttackDefinition(nameof(BiteAttack), nameof(AcidAttackEffect), 6, 6)
     };
     public override bool BashDoor => true;
     public override bool Cthuloid => true;

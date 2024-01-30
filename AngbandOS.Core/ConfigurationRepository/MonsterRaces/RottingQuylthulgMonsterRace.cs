@@ -18,13 +18,12 @@ internal class RottingQuylthulgMonsterRace : MonsterRace
         nameof(TeleportSelfMonsterSpell)
     };
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperQSymbol));
+    protected override string SymbolName => nameof(UpperQSymbol);
     public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "Rotting quylthulg";
 
     public override bool Animal => true;
     public override int ArmorClass => 1;
-    public override MonsterAttack[]? Attacks => null;
     public override string Description => "It is a pulsing flesh mound that reeks of death and putrefaction.";
     public override bool EmptyMind => true;
     public override bool Evil => true;

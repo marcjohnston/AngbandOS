@@ -12,14 +12,15 @@ internal class ScrawnyCatMonsterRace : MonsterRace
 {
     protected ScrawnyCatMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerFSymbol));
+    protected override string SymbolName => nameof(LowerFSymbol);
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "Scrawny cat";
 
     public override bool Animal => true;
     public override int ArmorClass => 1;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(ClawAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 1, 1),
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(ClawAttack), nameof(HurtAttackEffect), 1, 1),
     };
     public override string Description => "A skinny little furball with sharp claws and a menacing look.";
     public override int FreqInate => 0;

@@ -12,14 +12,15 @@ internal class JackalMonsterRace : MonsterRace
 {
     protected JackalMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperCSymbol));
+    protected override string SymbolName => nameof(UpperCSymbol);
     public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "Jackal";
 
     public override bool Animal => true;
     public override int ArmorClass => 3;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 1, 1),
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(BiteAttack), nameof(HurtAttackEffect), 1, 1),
     };
     public override string Description => "It is a yapping snarling dog, dangerous when in a pack.";
     public override int FreqInate => 0;

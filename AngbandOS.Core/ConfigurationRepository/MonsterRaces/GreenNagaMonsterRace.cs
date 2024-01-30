@@ -12,14 +12,15 @@ internal class GreenNagaMonsterRace : MonsterRace
 {
     protected GreenNagaMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerNSymbol));
+    protected override string SymbolName => nameof(LowerNSymbol);
     public override ColorEnum Color => ColorEnum.Green;
     public override string Name => "Green naga";
 
     public override int ArmorClass => 40;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(CrushAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 1, 8),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(SpitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(AcidAttackEffect)), 2, 6),
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(CrushAttack), nameof(HurtAttackEffect), 1, 8),
+        new MonsterAttackDefinition(nameof(SpitAttack), nameof(AcidAttackEffect), 2, 6),
     };
     public override bool BashDoor => true;
     public override string Description => "A large green serpent with a female's torso. Her green skin glistens with acid.";

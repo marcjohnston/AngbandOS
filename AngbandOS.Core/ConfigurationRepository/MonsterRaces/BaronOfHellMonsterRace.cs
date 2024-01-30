@@ -16,15 +16,16 @@ internal class BaronOfHellMonsterRace : MonsterRace
         nameof(PlasmaBoltMonsterSpell)
     };
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperUSymbol));
+    protected override string SymbolName => nameof(UpperUSymbol);
     public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "Baron of hell";
 
     public override int ArmorClass => 130;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(ClawAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 11, 2),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(ClawAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 11, 2),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(ClawAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 11, 2),
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(ClawAttack), nameof(HurtAttackEffect), 11, 2),
+        new MonsterAttackDefinition(nameof(ClawAttack), nameof(HurtAttackEffect), 11, 2),
+        new MonsterAttackDefinition(nameof(ClawAttack), nameof(HurtAttackEffect), 11, 2),
     };
     public override bool BashDoor => true;
     public override bool Demon => true;

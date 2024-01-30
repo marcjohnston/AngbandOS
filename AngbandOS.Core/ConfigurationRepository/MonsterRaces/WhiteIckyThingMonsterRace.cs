@@ -12,12 +12,13 @@ internal class WhiteIckyThingMonsterRace : MonsterRace
 {
     protected WhiteIckyThingMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerISymbol));
+    protected override string SymbolName => nameof(LowerISymbol);
     public override string Name => "White icky thing";
 
     public override int ArmorClass => 7;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(TouchAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 1, 2),
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(TouchAttack), nameof(HurtAttackEffect), 1, 2),
     };
     public override string Description => "It is a smallish, slimy, icky creature.";
     public override bool EmptyMind => true;

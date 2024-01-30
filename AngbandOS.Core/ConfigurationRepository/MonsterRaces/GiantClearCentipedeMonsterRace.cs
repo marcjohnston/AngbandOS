@@ -12,15 +12,16 @@ internal class GiantClearCentipedeMonsterRace : MonsterRace
 {
     protected GiantClearCentipedeMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerCSymbol));
+    protected override string SymbolName => nameof(LowerCSymbol);
     public override ColorEnum Color => ColorEnum.Diamond;
     public override string Name => "Giant clear centipede";
 
     public override bool Animal => true;
     public override int ArmorClass => 30;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 2, 4),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(StingAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 2, 4),
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(BiteAttack), nameof(HurtAttackEffect), 2, 4),
+        new MonsterAttackDefinition(nameof(StingAttack), nameof(HurtAttackEffect), 2, 4),
     };
     public override bool AttrClear => true;
     public override bool BashDoor => true;

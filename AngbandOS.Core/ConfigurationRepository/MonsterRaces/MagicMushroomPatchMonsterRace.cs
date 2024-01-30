@@ -19,12 +19,11 @@ internal class MagicMushroomPatchMonsterRace : MonsterRace
         nameof(DarknessMonsterSpell)
     };
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(CommaSymbol));
+    protected override string SymbolName => nameof(CommaSymbol);
     public override ColorEnum Color => ColorEnum.BrightBlue;
     public override string Name => "Magic mushroom patch";
 
     public override int ArmorClass => 10;
-    public override MonsterAttack[]? Attacks => null;
     public override string Description => "Yum! It looks quite tasty. It seems to glow with an unusual light.";
     public override bool ForceSleep => true;
     public override int FreqInate => 1;

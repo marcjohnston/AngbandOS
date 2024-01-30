@@ -12,15 +12,16 @@ internal class PurpleMushroomPatchMonsterRace : MonsterRace
 {
     protected PurpleMushroomPatchMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(CommaSymbol));
+    protected override string SymbolName => nameof(CommaSymbol);
     public override ColorEnum Color => ColorEnum.Purple;
     public override string Name => "Purple mushroom patch";
 
     public override int ArmorClass => 1;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(SporeAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(LoseConAttackEffect)), 1, 2),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(SporeAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(LoseConAttackEffect)), 1, 2),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(SporeAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(LoseConAttackEffect)), 1, 2),
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(SporeAttack), nameof(LoseConAttackEffect), 1, 2),
+        new MonsterAttackDefinition(nameof(SporeAttack), nameof(LoseConAttackEffect), 1, 2),
+        new MonsterAttackDefinition(nameof(SporeAttack), nameof(LoseConAttackEffect), 1, 2),
     };
     public override string Description => "Yum! It looks quite tasty.";
     public override bool EmptyMind => true;

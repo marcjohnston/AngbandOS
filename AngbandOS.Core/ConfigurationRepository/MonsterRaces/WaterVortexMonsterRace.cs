@@ -16,13 +16,14 @@ internal class WaterVortexMonsterRace : MonsterRace
         nameof(BreatheAcidMonsterSpell)
     };
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerVSymbol));
+    protected override string SymbolName => nameof(LowerVSymbol);
     public override ColorEnum Color => ColorEnum.Blue;
     public override string Name => "Water vortex";
 
     public override int ArmorClass => 30;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(EngulfAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(AcidAttackEffect)), 3, 3),
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(EngulfAttack), nameof(AcidAttackEffect), 3, 3),
     };
     public override bool BashDoor => true;
     public override string Description => "A caustic spinning whirlpool of water.";

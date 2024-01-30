@@ -12,14 +12,15 @@ internal class RockLizardMonsterRace : MonsterRace
 {
     protected RockLizardMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperRSymbol));
+    protected override string SymbolName => nameof(UpperRSymbol);
     public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "Rock lizard";
 
     public override bool Animal => true;
     public override int ArmorClass => 4;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(BiteAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 1, 1),
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(BiteAttack), nameof(HurtAttackEffect), 1, 1),
     };
     public override string Description => "It is a small lizard with a hardened hide.";
     public override int FreqInate => 0;

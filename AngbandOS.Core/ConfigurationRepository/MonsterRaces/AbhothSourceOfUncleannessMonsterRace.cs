@@ -37,17 +37,20 @@ internal class AbhothSourceOfUncleannessMonsterRace : MonsterRace
         nameof(TeleportSelfMonsterSpell)
     };
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperXSymbol));
+    protected override string SymbolName => nameof(UpperXSymbol);
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "Abhoth, Source of Uncleanness";
 
     public override int ArmorClass => 100;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(CrushAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(LoseConAttackEffect)), 30, 4),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(LoseStrAttackEffect)), 30, 4),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(TouchAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(LoseIntAttackEffect)), 1, 50),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(CrawlAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(LoseWisAttackEffect)), 1, 50)
+
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(CrushAttack), nameof(LoseConAttackEffect), 30, 4),
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(LoseStrAttackEffect), 30, 4),
+        new MonsterAttackDefinition(nameof(TouchAttack), nameof(LoseIntAttackEffect), 1, 50),
+        new MonsterAttackDefinition(nameof(CrawlAttack), nameof(LoseWisAttackEffect), 1, 50)
     };
+
     public override bool AttrAny => true;
     public override bool AttrMulti => true;
     public override bool BashDoor => true;

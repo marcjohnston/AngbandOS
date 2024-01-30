@@ -23,12 +23,11 @@ internal class TheKingInYellowMonsterRace : MonsterRace
         nameof(WaterBoltMonsterSpell)
     };
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(QuestionMarkSymbol));
+    protected override string SymbolName => nameof(QuestionMarkSymbol);
     public override ColorEnum Color => ColorEnum.BrightYellow;
     public override string Name => "The King in Yellow";
 
     public override int ArmorClass => 150;
-    public override MonsterAttack[]? Attacks => null;
     public override bool CharMulti => true;
     public override bool ColdBlood => true;
     public override string Description => "A sentient arcane tome casting spells with malevolent intent.";

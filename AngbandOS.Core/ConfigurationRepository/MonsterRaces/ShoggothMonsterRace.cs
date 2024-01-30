@@ -12,16 +12,17 @@ internal class ShoggothMonsterRace : MonsterRace
 {
     protected ShoggothMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperASymbol));
+    protected override string SymbolName => nameof(UpperASymbol);
     public override ColorEnum Color => ColorEnum.Black;
     public override string Name => "Shoggoth";
 
     public override int ArmorClass => 80;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(CrushAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(AcidAttackEffect)), 5, 6),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(CrushAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(AcidAttackEffect)), 5, 6),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(CrushAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(AcidAttackEffect)), 5, 6),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(CrushAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 6, 6)
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(CrushAttack), nameof(AcidAttackEffect), 5, 6),
+        new MonsterAttackDefinition(nameof(CrushAttack), nameof(AcidAttackEffect), 5, 6),
+        new MonsterAttackDefinition(nameof(CrushAttack), nameof(AcidAttackEffect), 5, 6),
+        new MonsterAttackDefinition(nameof(CrushAttack), nameof(HurtAttackEffect), 6, 6)
     };
     public override bool BashDoor => true;
     public override bool Cthuloid => true;

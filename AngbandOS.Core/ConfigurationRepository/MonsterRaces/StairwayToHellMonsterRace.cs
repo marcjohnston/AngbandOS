@@ -17,16 +17,17 @@ internal class StairwayToHellMonsterRace : MonsterRace
         nameof(SummonDemonMonsterSpell)
     };
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(GreaterThanSymbol));
+    protected override string SymbolName => nameof(GreaterThanSymbol);
     public override ColorEnum Color => ColorEnum.Red;
     public override string Name => "Stairway to hell";
 
     public override int ArmorClass => 40;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(WailAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(UnBonusAttackEffect)), 0, 0),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(WailAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(Exp20AttackEffect)), 0, 0),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(WailAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(EatGoldAttackEffect)), 0, 0),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(WailAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(EatItemAttackEffect)), 0, 0)
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(WailAttack), nameof(UnBonusAttackEffect), 0, 0),
+        new MonsterAttackDefinition(nameof(WailAttack), nameof(Exp20AttackEffect), 0, 0),
+        new MonsterAttackDefinition(nameof(WailAttack), nameof(EatGoldAttackEffect), 0, 0),
+        new MonsterAttackDefinition(nameof(WailAttack), nameof(EatItemAttackEffect), 0, 0)
     };
     public override bool CharMulti => true;
     public override bool ColdBlood => true;

@@ -19,16 +19,17 @@ internal class ChaosMasterMonsterRace : MonsterRace
         nameof(SummonSpiderMonsterSpell)
     };
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerPSymbol));
+    protected override string SymbolName => nameof(LowerPSymbol);
     public override ColorEnum Color => ColorEnum.Purple;
     public override string Name => "Chaos master";
 
     public override int ArmorClass => 50;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(HitAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 10, 2),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(KickAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 10, 2),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(PunchAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 10, 2),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(KickAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 10, 2)
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 10, 2),
+        new MonsterAttackDefinition(nameof(KickAttack), nameof(HurtAttackEffect), 10, 2),
+        new MonsterAttackDefinition(nameof(PunchAttack), nameof(HurtAttackEffect), 10, 2),
+        new MonsterAttackDefinition(nameof(KickAttack), nameof(HurtAttackEffect), 10, 2)
     };
     public override bool AttrAny => true;
     public override bool BashDoor => true;

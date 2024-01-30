@@ -12,16 +12,17 @@ internal class TheUltimateDungeonCleanerMonsterRace : MonsterRace
 {
     protected TheUltimateDungeonCleanerMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerGSymbol));
+    protected override string SymbolName => nameof(LowerGSymbol);
     public override ColorEnum Color => ColorEnum.Black;
     public override string Name => "The Ultimate Dungeon Cleaner";
 
     public override int ArmorClass => 80;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(CrushAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 2, 10),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(CrushAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 2, 10),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(CrushAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 2, 10),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(CrushAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 2, 10)
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(CrushAttack), nameof(HurtAttackEffect), 2, 10),
+        new MonsterAttackDefinition(nameof(CrushAttack), nameof(HurtAttackEffect), 2, 10),
+        new MonsterAttackDefinition(nameof(CrushAttack), nameof(HurtAttackEffect), 2, 10),
+        new MonsterAttackDefinition(nameof(CrushAttack), nameof(HurtAttackEffect), 2, 10)
     };
     public override bool BashDoor => true;
     public override bool ColdBlood => true;

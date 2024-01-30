@@ -16,13 +16,12 @@ internal class GiantBronzeDragonFlyMonsterRace : MonsterRace
         nameof(BreatheConfusionMonsterSpell)
     };
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperFSymbol));
+    protected override string SymbolName => nameof(UpperFSymbol);
     public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "Giant bronze dragon fly";
 
     public override bool Animal => true;
     public override int ArmorClass => 20;
-    public override MonsterAttack[]? Attacks => null;
     public override bool BashDoor => true;
     public override string Description => "This vast gleaming bronze fly has wings which beat mesmerically fast.";
     public override bool ForceSleep => true;

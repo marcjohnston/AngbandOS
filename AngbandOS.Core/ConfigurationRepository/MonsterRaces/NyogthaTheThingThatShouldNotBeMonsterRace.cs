@@ -27,16 +27,17 @@ internal class NyogthaTheThingThatShouldNotBeMonsterRace : MonsterRace
         nameof(TeleportSelfMonsterSpell)
     };
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperXSymbol));
+    protected override string SymbolName => nameof(UpperXSymbol);
     public override ColorEnum Color => ColorEnum.Black;
     public override string Name => "Nyogtha, the Thing that Should not Be";
 
     public override int ArmorClass => 120;
-    public override MonsterAttack[]? Attacks => new MonsterAttack[] {
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(CrushAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(AcidAttackEffect)), 10, 6),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(CrushAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(ColdAttackEffect)), 10, 6),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(CrushAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(AcidAttackEffect)), 10, 6),
-        new MonsterAttack(SaveGame.SingletonRepository.Attacks.Get(nameof(CrushAttack)), SaveGame.SingletonRepository.AttackEffects.Get(nameof(HurtAttackEffect)), 16, 6)
+    protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
+    {
+        new MonsterAttackDefinition(nameof(CrushAttack), nameof(AcidAttackEffect), 10, 6),
+        new MonsterAttackDefinition(nameof(CrushAttack), nameof(ColdAttackEffect), 10, 6),
+        new MonsterAttackDefinition(nameof(CrushAttack), nameof(AcidAttackEffect), 10, 6),
+        new MonsterAttackDefinition(nameof(CrushAttack), nameof(HurtAttackEffect), 16, 6)
     };
     public override bool BashDoor => true;
     public override string Description => "A nightmarish fetid, black irididescence oozing towards you.";

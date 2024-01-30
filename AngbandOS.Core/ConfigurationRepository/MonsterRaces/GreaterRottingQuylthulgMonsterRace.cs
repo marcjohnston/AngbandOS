@@ -18,13 +18,12 @@ internal class GreaterRottingQuylthulgMonsterRace : MonsterRace
         nameof(TeleportToMonsterSpell)
     };
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperQSymbol));
+    protected override string SymbolName => nameof(UpperQSymbol);
     public override ColorEnum Color => ColorEnum.Brown;
     public override string Name => "Greater rotting quylthulg";
 
     public override bool Animal => true;
     public override int ArmorClass => 1;
-    public override MonsterAttack[]? Attacks => null;
     public override string Description => "A massive pile of rotting flesh. A disgusting stench fills the air as it throbs and writhes.";
     public override bool EmptyMind => true;
     public override bool Evil => true;

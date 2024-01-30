@@ -12,12 +12,11 @@ internal class PlayerMonsterRace : MonsterRace
 {
     protected PlayerMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(AtSymbol));
+    protected override string SymbolName => nameof(AtSymbol);
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "Player";
 
     public override int ArmorClass => 0;
-    public override MonsterAttack[]? Attacks => null;
     public override string Description => "You";
     public override int FreqInate => 0;
     public override int FreqSpell => 0;

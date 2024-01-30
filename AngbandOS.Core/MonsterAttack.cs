@@ -10,10 +10,10 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class MonsterAttack
 {
-    public int DDice;
-    public int DSide;
-    public AttackEffect? Effect;
-    public Attack Method;
+    public int DDice { get; }
+    public int DSide { get; }
+    public AttackEffect? Effect { get; }
+    public Attack Method { get; }
 
     public MonsterAttack(Attack method, AttackEffect? effect, int dice, int sides)
     {
