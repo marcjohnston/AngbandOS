@@ -187,11 +187,8 @@ internal class TarotSpellTarotDraw : Spell
     }
 
     public override string Name => "Tarot Draw";
-    
-    protected override string? Info()
-    {
-        return "random";
-    }
+
+    protected override string LearnedDetails => "random";
 
     private void WildMagic(SaveGame saveGame, int spell)
     {

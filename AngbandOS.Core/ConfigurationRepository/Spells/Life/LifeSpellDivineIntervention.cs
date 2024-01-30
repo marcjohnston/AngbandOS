@@ -36,9 +36,6 @@ internal class LifeSpellDivineIntervention : Spell
     }
 
     public override string Name => "Divine Intervention";
-    
-    protected override string? Info()
-    {
-        return $"h300/d{SaveGame.ExperienceLevel * 4}+777";
-    }
+
+    protected override string LearnedDetails => $"h300/d{SaveGame.ExperienceLevel * 4}+777";
 }

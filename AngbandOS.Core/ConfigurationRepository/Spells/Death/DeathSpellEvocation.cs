@@ -24,9 +24,6 @@ internal class DeathSpellEvocation : Spell
     }
 
     public override string Name => "Evocation";
-    
-    protected override string? Info()
-    {
-        return $"dam {SaveGame.ExperienceLevel * 4}";
-    }
+
+    protected override string LearnedDetails => $"dam {SaveGame.ExperienceLevel * 4}";
 }

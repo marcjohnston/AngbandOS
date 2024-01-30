@@ -22,9 +22,6 @@ internal class NatureSpellRayOfSunlight : Spell
     }
 
     public override string Name => "Ray of Sunlight";
-    
-    protected override string? Info()
-    {
-        return "dam 6d8";
-    }
+
+    protected override string LearnedDetails => "dam 6d8";
 }

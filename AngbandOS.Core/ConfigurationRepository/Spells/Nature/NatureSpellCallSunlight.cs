@@ -24,9 +24,6 @@ internal class NatureSpellCallSunlight : Spell
     }
 
     public override string Name => "Whirlpool";
-    
-    protected override string? Info()
-    {
-        return "dam 150";
-    }
+
+    protected override string LearnedDetails => "dam 150";
 }

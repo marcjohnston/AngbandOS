@@ -48,9 +48,6 @@ internal class DeathSpellRaiseTheDead : Spell
     }
 
     public override string Name => "Raise the Dead";
-    
-    protected override string? Info()
-    {
-        return "control 67%";
-    }
+
+    protected override string LearnedDetails => "control 67%";
 }

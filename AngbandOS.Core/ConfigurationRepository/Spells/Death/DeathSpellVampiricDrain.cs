@@ -36,9 +36,6 @@ internal class DeathSpellVampiricDrain : Spell
     }
 
     public override string Name => "Vampiric Drain";
-    
-    protected override string? Info()
-    {
-        return $"dam {Math.Max(1, SaveGame.ExperienceLevel / 10)}d{SaveGame.ExperienceLevel}+{SaveGame.ExperienceLevel}";
-    }
+
+    protected override string LearnedDetails => $"dam {Math.Max(1, SaveGame.ExperienceLevel / 10)}d{SaveGame.ExperienceLevel}+{SaveGame.ExperienceLevel}";
 }

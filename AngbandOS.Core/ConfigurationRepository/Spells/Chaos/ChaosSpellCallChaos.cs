@@ -23,8 +23,5 @@ internal class ChaosSpellCallChaos : Spell
 
     public override string Name => "Call Chaos";
     
-    protected override string? Info()
-    {
-        return "dam 75 / 150";
-    }
+    protected override string LearnedDetails => "dam 75 / 150";
 }

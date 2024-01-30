@@ -17,9 +17,6 @@ internal class LifeSpellPrayer : Spell
     }
 
     public override string Name => "Prayer";
-    
-    protected override string? Info()
-    {
-        return "dur 48+d48";
-    }
+
+    protected override string LearnedDetails => "dur 48+d48";
 }

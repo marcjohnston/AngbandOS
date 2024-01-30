@@ -17,9 +17,6 @@ internal class FolkSpellSeeInvisible : Spell
     }
 
     public override string Name => "See Invisible";
-    
-    protected override string? Info()
-    {
-        return "dur 24+d24";
-    }
+
+    protected override string LearnedDetails => "dur 24+d24";
 }

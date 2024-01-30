@@ -17,9 +17,6 @@ internal class FolkSpellLightArea : Spell
     }
 
     public override string Name => "Light Area";
-    
-    protected override string? Info()
-    {
-        return $"dam 2d{SaveGame.ExperienceLevel / 2}";
-    }
+
+    protected override string LearnedDetails => $"dam 2d{SaveGame.ExperienceLevel / 2}";
 }

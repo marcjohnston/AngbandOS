@@ -17,9 +17,6 @@ internal class NatureSpellEarthquake : Spell
     }
 
     public override string Name => "Earthquake";
-    
-    protected override string? Info()
-    {
-        return "rad 10";
-    }
+
+    protected override string LearnedDetails => "rad 10";
 }

@@ -22,9 +22,6 @@ internal class ChaosSpellWonder : Spell
     }
 
     public override string Name => "Wonder";
-    
-    protected override string? Info()
-    {
-        return "random";
-    }
+
+    protected override string LearnedDetails => "random";
 }

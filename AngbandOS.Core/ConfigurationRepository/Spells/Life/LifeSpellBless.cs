@@ -17,9 +17,6 @@ internal class LifeSpellBless : Spell
     }
 
     public override string Name => "Bless";
-    
-    protected override string? Info()
-    {
-        return "dur 12+d12 turns";
-    }
+
+    protected override string LearnedDetails => "dur 12+d12 turns";
 }

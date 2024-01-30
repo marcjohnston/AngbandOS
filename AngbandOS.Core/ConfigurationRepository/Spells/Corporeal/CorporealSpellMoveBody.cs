@@ -34,9 +34,6 @@ internal class CorporealSpellMoveBody : Spell
     }
 
     public override string Name => "Move Body";
-    
-    protected override string? Info()
-    {
-        return $"range {SaveGame.ExperienceLevel + 2}";
-    }
+
+    protected override string LearnedDetails => $"range {SaveGame.ExperienceLevel + 2}";
 }

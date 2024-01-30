@@ -45,9 +45,6 @@ internal class DeathSpellMalediction : Spell
     }
 
     public override string Name => "Malediction";
-    
-    protected override string? Info()
-    {
-        return $"dam {3 + ((SaveGame.ExperienceLevel - 1) / 5)}d3";
-    }
+
+    protected override string LearnedDetails => $"dam {3 + ((SaveGame.ExperienceLevel - 1) / 5)}d3";
 }

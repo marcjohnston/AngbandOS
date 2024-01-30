@@ -22,9 +22,6 @@ internal class ChaosSpellFistOfForce : Spell
     }
 
     public override string Name => "Fist of Force";
-    
-    protected override string? Info()
-    {
-        return $"dam {8 + ((SaveGame.ExperienceLevel - 5) / 4)}d8";
-    }
+
+    protected override string LearnedDetails => $"dam {8 + ((SaveGame.ExperienceLevel - 5) / 4)}d8";
 }

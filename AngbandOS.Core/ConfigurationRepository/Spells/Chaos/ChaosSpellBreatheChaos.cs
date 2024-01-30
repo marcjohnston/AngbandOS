@@ -23,8 +23,5 @@ internal class ChaosSpellBreatheChaos : Spell
 
     public override string Name => "Breathe Chaos";
     
-    protected override string? Info()
-    {
-        return $"dam {SaveGame.Health}";
-    }
+    protected override string LearnedDetails => $"dam {SaveGame.Health}";
 }

@@ -21,9 +21,6 @@ internal class SorcerySpellClairvoyance : Spell
     }
 
     public override string Name => "Clairvoyance";
-    
-    protected override string? Info()
-    {
-        return "dur 25+d30";
-    }
+
+    protected override string LearnedDetails => "dur 25+d30";
 }

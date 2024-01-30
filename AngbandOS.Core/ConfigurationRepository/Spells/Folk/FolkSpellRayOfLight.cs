@@ -22,9 +22,6 @@ internal class FolkSpellRayOfLight : Spell
     }
 
     public override string Name => "Ray of Light";
-    
-    protected override string? Info()
-    {
-        return "dam 6d8";
-    }
+
+    protected override string LearnedDetails => "dam 6d8";
 }

@@ -22,9 +22,6 @@ internal class ChaosSpellMeteorSwarm : Spell
     }
 
     public override string Name => "Meteor Swarm";
-    
-    protected override string? Info()
-    {
-        return $"dam {3 * SaveGame.ExperienceLevel / 2} each";
-    }
+
+    protected override string LearnedDetails => $"dam {3 * SaveGame.ExperienceLevel / 2} each";
 }

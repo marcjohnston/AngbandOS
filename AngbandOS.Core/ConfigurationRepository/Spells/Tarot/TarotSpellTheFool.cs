@@ -49,9 +49,6 @@ internal class TarotSpellTheFool : Spell
     }
 
     public override string Name => "The Fool";
-    
-    protected override string? Info()
-    {
-        return "control 50%";
-    }
+
+    protected override string LearnedDetails => "control 50%";
 }

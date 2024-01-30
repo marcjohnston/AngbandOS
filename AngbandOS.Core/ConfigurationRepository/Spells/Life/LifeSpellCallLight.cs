@@ -17,9 +17,6 @@ internal class LifeSpellCallLight : Spell
     }
 
     public override string Name => "Call Light";
-    
-    protected override string? Info()
-    {
-        return $"dam {10 + (SaveGame.ExperienceLevel / 2)}";
-    }
+
+    protected override string LearnedDetails => $"dam {10 + (SaveGame.ExperienceLevel / 2)}";
 }

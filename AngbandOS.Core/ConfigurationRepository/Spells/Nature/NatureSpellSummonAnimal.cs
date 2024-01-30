@@ -20,9 +20,6 @@ internal class NatureSpellSummonAnimal : Spell
     }
 
     public override string Name => "Summon Animal";
-    
-    protected override string? Info()
-    {
-        return "control 100%";
-    }
+
+    protected override string LearnedDetails => "control 100%";
 }

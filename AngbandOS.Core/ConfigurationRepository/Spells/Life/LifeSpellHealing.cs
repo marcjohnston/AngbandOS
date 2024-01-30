@@ -19,9 +19,6 @@ internal class LifeSpellHealing : Spell
     }
 
     public override string Name => "Healing";
-    
-    protected override string? Info()
-    {
-        return "heal 300";
-    }
+
+    protected override string LearnedDetails => "heal 300";
 }

@@ -29,10 +29,13 @@ internal class DeathSpellOrbOfEntropy : Spell
     }
 
     public override string Name => "Orb of Entropy";
-    
-    protected override string? Info()
+
+    protected override string LearnedDetails
     {
-        int s = SaveGame.ExperienceLevel + (SaveGame.ExperienceLevel / (SaveGame.BaseCharacterClass.ID == CharacterClass.Mage || SaveGame.BaseCharacterClass.ID == CharacterClass.HighMage ? 2 : 4));
-        return $"dam 3d6+{s}";
+        get
+        {
+            int s = SaveGame.ExperienceLevel + (SaveGame.ExperienceLevel / (SaveGame.BaseCharacterClass.ID == CharacterClass.Mage || SaveGame.BaseCharacterClass.ID == CharacterClass.HighMage ? 2 : 4));
+            return $"dam 3d6+{s}";
+        }
     }
 }

@@ -37,9 +37,6 @@ internal class NatureSpellFrostBolt : Spell
     }
 
     public override string Name => "Frost Bolt";
-    
-    protected override string? Info()
-    {
-        return $"dam {5 + ((SaveGame.ExperienceLevel - 5) / 4)}d8";
-    }
+
+    protected override string LearnedDetails => $"dam {5 + ((SaveGame.ExperienceLevel - 5) / 4)}d8";
 }

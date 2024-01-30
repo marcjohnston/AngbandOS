@@ -22,9 +22,6 @@ internal class ChaosSpellCallTheVoid : Spell
     }
 
     public override string Name => "Call the Void";
-    
-    protected override string? Info()
-    {
-        return "dam 3 * 175";
-    }
+
+    protected override string LearnedDetails => "dam 3 * 175";
 }

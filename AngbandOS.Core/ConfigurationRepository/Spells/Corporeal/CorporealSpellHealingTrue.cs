@@ -19,9 +19,6 @@ internal class CorporealSpellHealingTrue : Spell
     }
 
     public override string Name => "Healing True";
-    
-    protected override string? Info()
-    {
-        return "heal 2000";
-    }
+
+    protected override string LearnedDetails => "heal 2000";
 }

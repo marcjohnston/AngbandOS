@@ -24,9 +24,6 @@ internal class SorcerySpellHasteSelf : Spell
     }
 
     public override string Name => "Haste Self";
-    
-    protected override string? Info()
-    {
-        return $"dur {SaveGame.ExperienceLevel}+d{SaveGame.ExperienceLevel + 20}";
-    }
+
+    protected override string LearnedDetails => $"dur {SaveGame.ExperienceLevel}+d{SaveGame.ExperienceLevel + 20}";
 }

@@ -32,9 +32,6 @@ internal class TarotSpellSummonGreaterUndead : Spell
     }
 
     public override string Name => "Summon Greater Undead";
-    
-    protected override string? Info()
-    {
-        return "control 70%";
-    }
+
+    protected override string LearnedDetails => "control 70%";
 }

@@ -19,9 +19,6 @@ internal class LifeSpellCureCriticalWounds : Spell
     }
 
     public override string Name => "Cure Critical Wounds";
-    
-    protected override string? Info()
-    {
-        return "heal 8d10";
-    }
+
+    protected override string LearnedDetails => "heal 8d10";
 }

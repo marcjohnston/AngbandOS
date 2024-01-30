@@ -17,9 +17,6 @@ internal class TarotSpellAstralSpying : Spell
     }
 
     public override string Name => "Astral Spying";
-    
-    protected override string? Info()
-    {
-        return "dur 25+d30";
-    }
+
+    protected override string LearnedDetails => "dur 25+d30";
 }

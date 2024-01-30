@@ -17,9 +17,6 @@ internal class NatureSpellStoneSkin : Spell
     }
 
     public override string Name => "Stone Skin";
-    
-    protected override string? Info()
-    {
-        return "dur 20+d30";
-    }
+
+    protected override string LearnedDetails => "dur 20+d30";
 }

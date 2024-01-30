@@ -22,9 +22,6 @@ internal class DeathSpellWraithform : Spell
     }
 
     public override string Name => "Wraithform";
-    
-    protected override string? Info()
-    {
-        return $"dur {SaveGame.ExperienceLevel / 2}+d{SaveGame.ExperienceLevel / 2}";
-    }
+
+    protected override string LearnedDetails => $"dur {SaveGame.ExperienceLevel / 2}+d{SaveGame.ExperienceLevel / 2}";
 }

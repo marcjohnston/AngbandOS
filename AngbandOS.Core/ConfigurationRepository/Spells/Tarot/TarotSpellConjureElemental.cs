@@ -31,9 +31,6 @@ internal class TarotSpellConjureElemental : Spell
     }
 
     public override string Name => "Conjure Elemental";
-    
-    protected override string? Info()
-    {
-        return "control 50%";
-    }
+
+    protected override string LearnedDetails => "control 50%";
 }

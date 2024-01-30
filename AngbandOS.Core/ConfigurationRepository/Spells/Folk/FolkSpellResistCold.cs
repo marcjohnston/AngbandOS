@@ -17,9 +17,6 @@ internal class FolkSpellResistCold : Spell
     }
 
     public override string Name => "Resist Cold";
-    
-    protected override string? Info()
-    {
-        return "dur 20+d20";
-    }
+
+    protected override string LearnedDetails => "dur 20+d20";
 }

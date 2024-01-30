@@ -21,9 +21,6 @@ internal class CorporealSpellResistTrue : Spell
     }
 
     public override string Name => "Resist True";
-    
-    protected override string? Info()
-    {
-        return "dur 20+d20";
-    }
+
+    protected override string LearnedDetails => "dur 20+d20";
 }

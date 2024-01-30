@@ -25,11 +25,12 @@ internal class LifeSpellHolyOrb : Spell
 
     public override string Name => "Holy Orb";
     
-    protected override string? Info()
+    protected override string LearnedDetails
     {
-        int orb = SaveGame.ExperienceLevel / (SaveGame.BaseCharacterClass.ID == CharacterClass.Priest || SaveGame.BaseCharacterClass.ID == CharacterClass.HighMage
-                      ? 2
-                      : 4);
-        return $" dam 3d6+{SaveGame.ExperienceLevel + orb}";
+        get
+        {
+            int orb = SaveGame.ExperienceLevel / (SaveGame.BaseCharacterClass.ID == CharacterClass.Priest || SaveGame.BaseCharacterClass.ID == CharacterClass.HighMage ? 2 : 4);
+            return $" dam 3d6+{SaveGame.ExperienceLevel + orb}";
+        }
     }
 }

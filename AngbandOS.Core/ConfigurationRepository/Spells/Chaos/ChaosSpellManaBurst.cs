@@ -21,10 +21,13 @@ internal class ChaosSpellManaBurst : Spell
         SaveGame.RunScriptInt(nameof(WildChaoticMagicScript), 4);
     }
     public override string Name => "Mana Burst";
-    
-    protected override string? Info() // TODO: Player to SaveGame
+
+    protected override string LearnedDetails 
     {
-        int i = SaveGame.ExperienceLevel + (SaveGame.ExperienceLevel / (SaveGame.BaseCharacterClass.ID == CharacterClass.Mage || SaveGame.BaseCharacterClass.ID == CharacterClass.HighMage ? 2 : 4));
-        return $"dam 3d5+{i}";
+        get
+        {
+            int i = SaveGame.ExperienceLevel + (SaveGame.ExperienceLevel / (SaveGame.BaseCharacterClass.ID == CharacterClass.Mage || SaveGame.BaseCharacterClass.ID == CharacterClass.HighMage ? 2 : 4));
+            return $"dam 3d5+{i}";
+        }
     }
 }

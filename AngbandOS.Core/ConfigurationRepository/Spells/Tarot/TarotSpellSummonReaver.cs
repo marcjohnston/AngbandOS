@@ -32,9 +32,6 @@ internal class TarotSpellSummonReaver : Spell
     }
 
     public override string Name => "Summon Reaver";
-    
-    protected override string? Info()
-    {
-        return "control 70%";
-    }
+
+    protected override string LearnedDetails => "control 70%";
 }

@@ -31,9 +31,6 @@ internal class TarotSpellDimensionDoor : Spell
     }
 
     public override string Name => "Dimension Door";
-    
-    protected override string? Info()
-    {
-        return $"range {SaveGame.ExperienceLevel + 2}";
-    }
+
+    protected override string LearnedDetails => $"range {SaveGame.ExperienceLevel + 2}";
 }

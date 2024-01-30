@@ -17,9 +17,6 @@ internal class SorcerySpellSenseMinds : Spell
     }
 
     public override string Name => "Sense Minds";
-    
-    protected override string? Info()
-    {
-        return "dur 25+d30";
-    }
+
+    protected override string LearnedDetails => "dur 25+d30";
 }

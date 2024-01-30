@@ -22,9 +22,6 @@ internal class ChaosSpellChaosBolt : Spell
     }
 
     public override string Name => "Chaos Bolt";
-    
-    protected override string? Info()
-    {
-        return $"dam {10 + ((SaveGame.ExperienceLevel - 5) / 4)}d8";
-    }
+
+    protected override string LearnedDetails => $"dam {10 + ((SaveGame.ExperienceLevel - 5) / 4)}d8";
 }

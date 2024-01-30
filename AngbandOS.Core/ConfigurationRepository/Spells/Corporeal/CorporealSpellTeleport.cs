@@ -17,9 +17,6 @@ internal class CorporealSpellTeleport : Spell
     }
 
     public override string Name => "Teleport";
-    
-    protected override string? Info()
-    {
-        return $"range {SaveGame.ExperienceLevel * 3}";
-    }
+
+    protected override string LearnedDetails => $"range {SaveGame.ExperienceLevel * 3}";
 }

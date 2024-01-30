@@ -32,9 +32,6 @@ internal class DeathSpellVampirismTrue : Spell
     }
 
     public override string Name => "Vampirism True";
-    
-    protected override string? Info()
-    {
-        return "dam 3*100";
-    }
+
+    protected override string LearnedDetails => "dam 3*100";
 }

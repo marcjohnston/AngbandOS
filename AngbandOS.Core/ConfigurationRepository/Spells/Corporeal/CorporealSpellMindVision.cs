@@ -17,9 +17,6 @@ internal class CorporealSpellMindVision : Spell
     }
 
     public override string Name => "Mind Vision";
-    
-    protected override string? Info()
-    {
-        return "dur 25+d30";
-    }
+
+    protected override string LearnedDetails => "dur 25+d30";
 }

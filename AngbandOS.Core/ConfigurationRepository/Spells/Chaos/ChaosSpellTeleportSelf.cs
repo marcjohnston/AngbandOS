@@ -22,9 +22,6 @@ internal class ChaosSpellTeleportSelf : Spell
     }
 
     public override string Name => "Teleport Self";
-    
-    protected override string? Info()
-    {
-        return $"range {SaveGame.ExperienceLevel * 5}";
-    }
+
+    protected override string LearnedDetails => $"range {SaveGame.ExperienceLevel * 5}";
 }

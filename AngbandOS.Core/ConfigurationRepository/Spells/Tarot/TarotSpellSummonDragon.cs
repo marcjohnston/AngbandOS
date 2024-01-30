@@ -32,9 +32,6 @@ internal class TarotSpellSummonDragon : Spell
     }
 
     public override string Name => "Summon Dragon";
-    
-    protected override string? Info()
-    {
-        return "control 70%";
-    }
+
+    protected override string LearnedDetails => "control 70%";
 }

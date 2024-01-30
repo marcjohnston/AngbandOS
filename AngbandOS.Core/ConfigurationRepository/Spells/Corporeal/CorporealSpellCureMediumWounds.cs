@@ -17,9 +17,6 @@ internal class CorporealSpellCureMediumWounds : Spell
     }
 
     public override string Name => "Cure Medium Wounds";
-    
-    protected override string? Info()
-    {
-        return "heal 4d10";
-    }
+
+    protected override string LearnedDetails => "heal 4d10";
 }

@@ -124,24 +124,6 @@ internal abstract class Spell : IGetKey<string>
         return chance;
     }
 
-    /// <summary>
-    /// Returns detailed information about the spell.
-    /// </summary>
-    /// <returns></returns>
-    public string GetInfo()
-    {
-        if (Forgotten)
-        {
-            return "forgotten";
-        }
-        if (!Learned)
-        {
-            return "unknown";
-        }
-        string spellComment = Info() ?? "";
-        return !Worked ? "untried" : spellComment;
-    }
-
     public void Initialize(BaseCharacterClass characterClass)
     {
         foreach (ClassSpell classSpell in SaveGame.SingletonRepository.ClassSpells)
@@ -166,9 +148,19 @@ internal abstract class Spell : IGetKey<string>
         //FirstCastExperience = 0;
     }
 
-    public string SummaryLine()
+    public string Title()
     {
-        return Level >= 99 ? "(illegible)" : $"{Name,-30} {Level,3} {ManaCost,4} {FailureChance(),3}% {GetInfo()}";
+        if (Forgotten)
+        {
+            return "forgotten";
+        }
+        if (!Learned)
+        {
+            return "unknown";
+        }
+        string info = !Worked ? "untried" : LearnedDetails;
+
+        return Level >= 99 ? "(illegible)" : $"{Name,-30} {Level,3} {ManaCost,4} {FailureChance(),3}% {info}";
     }
 
     public override string ToString()
@@ -177,10 +169,10 @@ internal abstract class Spell : IGetKey<string>
     }
 
     /// <summary>
-    /// Returns information about the spell.  If there is no detailed information, null is returned.  Returns null, by default.
+    /// Returns information about the spell, or blank if there is no detailed information.  Returns blank, by default.
     /// </summary>
     /// <returns></returns>
-    protected virtual string? Info() => null;
+    protected virtual string LearnedDetails => "";
 
     protected void DoWildDeathMagic(int spell, int subCategory)
     {

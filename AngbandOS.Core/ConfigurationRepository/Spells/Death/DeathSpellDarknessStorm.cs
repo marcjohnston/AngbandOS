@@ -26,9 +26,6 @@ internal class DeathSpellDarknessStorm : Spell
     }
 
     public override string Name => "Darkness Storm";
-    
-    protected override string? Info()
-    {
-        return "dam 120";
-    }
+
+    protected override string LearnedDetails => "dam 120";
 }

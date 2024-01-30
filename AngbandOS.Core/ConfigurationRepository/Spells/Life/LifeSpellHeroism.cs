@@ -19,9 +19,6 @@ internal class LifeSpellHeroism : Spell
     }
 
     public override string Name => "Heroism";
-    
-    protected override string? Info()
-    {
-        return "dur 25 + d25";
-    }
+
+    protected override string LearnedDetails => "dur 25 + d25";
 }

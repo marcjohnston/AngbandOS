@@ -32,9 +32,6 @@ internal class TarotSpellSummonReptiles : Spell
     }
 
     public override string Name => "Summon Reptiles";
-    
-    protected override string? Info()
-    {
-        return "control 60%";
-    }
+
+    protected override string LearnedDetails => "control 60%";
 }

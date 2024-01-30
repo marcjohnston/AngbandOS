@@ -37,9 +37,6 @@ internal class TarotSpellMassSummons : Spell
     }
 
     public override string Name => "Mass Summons";
-    
-    protected override string? Info()
-    {
-        return "control 70%";
-    }
+
+    protected override string LearnedDetails => "control 70%";
 }

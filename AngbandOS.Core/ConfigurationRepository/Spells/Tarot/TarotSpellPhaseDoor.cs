@@ -17,9 +17,6 @@ internal class TarotSpellPhaseDoor : Spell
     }
 
     public override string Name => "Phase Door";
-    
-    protected override string? Info()
-    {
-        return "range 10";
-    }
+
+    protected override string LearnedDetails => "range 10";
 }

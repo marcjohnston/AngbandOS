@@ -22,9 +22,6 @@ internal class ChaosSpellFlameStrike : Spell
     }
 
     public override string Name => "Flame Strike";
-    
-    protected override string? Info()
-    {
-        return $"dam {150 + (SaveGame.ExperienceLevel * 2)}";
-    }
+
+    protected override string LearnedDetails => $"dam {150 + (SaveGame.ExperienceLevel * 2)}";
 }

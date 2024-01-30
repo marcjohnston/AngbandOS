@@ -150,9 +150,6 @@ internal class DeathSpellInvokeSpirits : Spell
     }
 
     public override string Name => "Invoke Spirits";
-    
-    protected override string? Info()
-    {
-        return "random";
-    }
+
+    protected override string LearnedDetails => "random";
 }

@@ -18,8 +18,5 @@ internal class FolkSpellWordOfRecall : Spell
 
     public override string Name => "Word of Recall";
 
-    protected override string? Info()
-    {
-        return "delay 15+d21";
-    }
+    protected override string LearnedDetails => "delay 15+d21";
 }

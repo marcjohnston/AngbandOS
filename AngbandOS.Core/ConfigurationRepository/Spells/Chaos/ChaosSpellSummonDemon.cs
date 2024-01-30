@@ -22,9 +22,6 @@ internal class ChaosSpellSummonDemon : Spell
     }
 
     public override string Name => "Summon Demon";
-    
-    protected override string? Info()
-    {
-        return "control 67%";
-    }
+
+    protected override string LearnedDetails => "control 67%";
 }

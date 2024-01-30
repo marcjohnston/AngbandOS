@@ -20,9 +20,6 @@ internal class NatureSpellHerbalHealing : Spell
     }
 
     public override string Name => "Herbal Healing";
-    
-    protected override string? Info()
-    {
-        return "heal 1000";
-    }
+
+    protected override string LearnedDetails => "heal 1000";
 }

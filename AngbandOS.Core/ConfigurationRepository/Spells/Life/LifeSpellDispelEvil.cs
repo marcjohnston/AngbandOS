@@ -17,9 +17,6 @@ internal class LifeSpellDispelEvil : Spell
     }
 
     public override string Name => "Dispel Evil";
-    
-    protected override string? Info()
-    {
-        return $"dam {4 * SaveGame.ExperienceLevel}";
-    }
+
+    protected override string LearnedDetails => $"dam {4 * SaveGame.ExperienceLevel}";
 }

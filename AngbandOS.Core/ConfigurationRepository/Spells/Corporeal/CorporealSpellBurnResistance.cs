@@ -19,9 +19,6 @@ internal class CorporealSpellBurnResistance : Spell
     }
 
     public override string Name => "Burn Resistance";
-    
-    protected override string? Info()
-    {
-        return "dur 20+d20";
-    }
+
+    protected override string LearnedDetails => "dur 20+d20";
 }

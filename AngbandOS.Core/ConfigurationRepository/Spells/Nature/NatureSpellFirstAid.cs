@@ -18,9 +18,6 @@ internal class NatureSpellFirstAid : Spell
     }
 
     public override string Name => "First Aid";
-    
-    protected override string? Info()
-    {
-        return "heal 2d8";
-    }
+
+    protected override string LearnedDetails => "heal 2d8";
 }

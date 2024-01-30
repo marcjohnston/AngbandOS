@@ -15288,23 +15288,6 @@ internal class SaveGame
         CheckExperience();
     }
 
-    [Obsolete("Use PrintSpells(Spell[], int, int)")]
-    public void PrintSpells(int[] spells, int y, int x, Realm? realm)
-    {
-        int i;
-        int set = realm == PrimaryRealm ? 0 : 1;
-        Screen.PrintLine("", y, x);
-        Screen.Print("Name", y, x + 5);
-        Screen.Print("Lv Mana Fail Info", y, x + 35);
-        for (i = 0; i < spells.Length; i++)
-        {
-            int spell = spells[i];
-            Spell sPtr = Spells[set][spell];
-            Screen.PrintLine($"{i.IndexToLetter()}) {sPtr.SummaryLine()}", y + i + 1, x);
-        }
-        Screen.PrintLine("", y + i + 1, x);
-    }
-
     public void PrintSpells(Spell[] spells, int y, int x)
     {
         int i;
@@ -15313,8 +15296,8 @@ internal class SaveGame
         Screen.Print("Lv Mana Fail Info", y, x + 35);
         for (i = 0; i < spells.Length; i++)
         {
-            Spell sPtr = spells[i];
-            Screen.PrintLine($"{i.IndexToLetter()}) {sPtr.SummaryLine()}", y + i + 1, x);
+            Spell spell = spells[i];
+            Screen.PrintLine($"{i.IndexToLetter()}) {spell.Title()}", y + i + 1, x);
         }
         Screen.PrintLine("", y + i + 1, x);
     }

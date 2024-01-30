@@ -18,9 +18,6 @@ internal class FolkSpellCureLightWounds : Spell
     }
 
     public override string Name => "Cure Light Wounds";
-    
-    protected override string? Info()
-    {
-        return "heal 2d8";
-    }
+
+    protected override string LearnedDetails => "heal 2d8";
 }

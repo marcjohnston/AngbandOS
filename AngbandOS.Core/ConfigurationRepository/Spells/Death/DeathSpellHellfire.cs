@@ -27,9 +27,6 @@ internal class DeathSpellHellfire : Spell
     }
 
     public override string Name => "Hellfire";
-    
-    protected override string? Info()
-    {
-        return "dam 666";
-    }
+
+    protected override string LearnedDetails => "dam 666";
 }

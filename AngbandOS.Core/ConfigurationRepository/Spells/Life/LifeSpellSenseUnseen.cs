@@ -17,9 +17,6 @@ internal class LifeSpellSenseUnseen : Spell
     }
 
     public override string Name => "Sense Unseen";
-    
-    protected override string? Info()
-    {
-        return "dur 24+d24";
-    }
+
+    protected override string LearnedDetails => "dur 24+d24";
 }

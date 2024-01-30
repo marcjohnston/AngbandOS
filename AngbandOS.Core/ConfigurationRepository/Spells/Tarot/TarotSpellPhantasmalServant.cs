@@ -20,9 +20,6 @@ internal class TarotSpellPhantasmalServant : Spell
     }
 
     public override string Name => "Phantasmal Servant";
-    
-    protected override string? Info()
-    {
-        return "control 100%";
-    }
+
+    protected override string LearnedDetails => "control 100%";
 }

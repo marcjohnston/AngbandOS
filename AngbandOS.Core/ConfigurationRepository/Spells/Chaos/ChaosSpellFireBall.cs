@@ -22,9 +22,6 @@ internal class ChaosSpellFireBall : Spell
     }
 
     public override string Name => "Fire Ball";
-    
-    protected override string? Info()
-    {
-        return $"dam {55 + SaveGame.ExperienceLevel}";
-    }
+
+    protected override string LearnedDetails => $"dam {55 + SaveGame.ExperienceLevel}";
 }

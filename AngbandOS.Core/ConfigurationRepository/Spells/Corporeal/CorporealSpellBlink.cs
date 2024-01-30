@@ -17,9 +17,6 @@ internal class CorporealSpellBlink : Spell
     }
 
     public override string Name => "Blink";
-    
-    protected override string? Info()
-    {
-        return "range 10";
-    }
+
+    protected override string LearnedDetails => "range 10";
 }

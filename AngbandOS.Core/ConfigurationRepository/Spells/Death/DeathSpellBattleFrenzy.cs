@@ -32,9 +32,6 @@ internal class DeathSpellBattleFrenzy : Spell
     }
 
     public override string Name => "Battle Frenzy";
-    
-    protected override string? Info()
-    {
-        return "max dur 50";
-    }
+
+    protected override string LearnedDetails => "max dur 50";
 }
