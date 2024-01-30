@@ -12,14 +12,16 @@ internal class KhufuTheMummifiedKingMonsterRace : MonsterRace
 {
     protected KhufuTheMummifiedKingMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override MonsterSpellList Spells => new MonsterSpellList(
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(CauseCriticalWoundsMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(ScareMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(SlowMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(CreateTrapsMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(DarknessMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(SummonKinMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(SummonUndeadMonsterSpell)));
+    protected override string[]? SpellNames =>new string[] {
+        nameof(CauseCriticalWoundsMonsterSpell),
+        nameof(ScareMonsterSpell),
+        nameof(SlowMonsterSpell),
+        nameof(CreateTrapsMonsterSpell),
+        nameof(DarknessMonsterSpell),
+        nameof(SummonKinMonsterSpell),
+        nameof(SummonUndeadMonsterSpell)
+    };
+
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerZSymbol));
     public override ColorEnum Color => ColorEnum.Gold;
     public override string Name => "Khufu the mummified King";

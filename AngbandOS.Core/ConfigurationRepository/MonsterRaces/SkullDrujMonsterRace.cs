@@ -12,16 +12,18 @@ internal class SkullDrujMonsterRace : MonsterRace
 {
     protected SkullDrujMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override MonsterSpellList Spells => new MonsterSpellList(
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BrainSmashMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(CauseMortalWoundsMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(MindBlastMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(NetherBoltMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(PlasmaBoltMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(SlowMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(WaterBallMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(CreateTrapsMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(SummonUndeadMonsterSpell)));
+    protected override string[]? SpellNames =>new string[] {
+        nameof(BrainSmashMonsterSpell),
+        nameof(CauseMortalWoundsMonsterSpell),
+        nameof(MindBlastMonsterSpell),
+        nameof(NetherBoltMonsterSpell),
+        nameof(PlasmaBoltMonsterSpell),
+        nameof(SlowMonsterSpell),
+        nameof(WaterBallMonsterSpell),
+        nameof(CreateTrapsMonsterSpell),
+        nameof(SummonUndeadMonsterSpell)
+    };
+
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerSSymbol));
     public override ColorEnum Color => ColorEnum.BrightGrey;
     public override string Name => "Skull druj";

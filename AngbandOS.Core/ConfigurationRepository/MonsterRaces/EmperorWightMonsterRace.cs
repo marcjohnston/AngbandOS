@@ -12,11 +12,13 @@ internal class EmperorWightMonsterRace : MonsterRace
 {
     protected EmperorWightMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override MonsterSpellList Spells => new MonsterSpellList(
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(CauseCriticalWoundsMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(HoldMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(NetherBoltMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(ScareMonsterSpell)));
+    protected override string[]? SpellNames =>new string[] {
+        nameof(CauseCriticalWoundsMonsterSpell),
+        nameof(HoldMonsterSpell),
+        nameof(NetherBoltMonsterSpell),
+        nameof(ScareMonsterSpell)
+    };
+
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperWSymbol));
     public override ColorEnum Color => ColorEnum.Yellow;
     public override string Name => "Emperor wight";

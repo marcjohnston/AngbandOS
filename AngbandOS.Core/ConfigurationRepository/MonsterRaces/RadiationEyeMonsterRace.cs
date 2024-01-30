@@ -12,8 +12,10 @@ internal class RadiationEyeMonsterRace : MonsterRace
 {
     protected RadiationEyeMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override MonsterSpellList Spells => new MonsterSpellList(
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(DrainManaMonsterSpell)));
+    protected override string[]? SpellNames =>new string[] {
+        nameof(DrainManaMonsterSpell)
+    };
+
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerESymbol));
     public override ColorEnum Color => ColorEnum.BrightRed;
     public override string Name => "Radiation eye";

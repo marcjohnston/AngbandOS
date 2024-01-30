@@ -12,16 +12,18 @@ internal class GothmogTheHighCaptainOfBalrogsMonsterRace : MonsterRace
 {
     protected GothmogTheHighCaptainOfBalrogsMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override MonsterSpellList Spells => new MonsterSpellList(
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BreatheDisintegrationMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BreatheFireMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BlindnessMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(ConfuseMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(ScareMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(SummonDemonMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(SummonHiUndeadMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(SummonKinMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(SummonReaverMonsterSpell)));
+    protected override string[]? SpellNames =>new string[] {
+        nameof(BreatheDisintegrationMonsterSpell),
+        nameof(BreatheFireMonsterSpell),
+        nameof(BlindnessMonsterSpell),
+        nameof(ConfuseMonsterSpell),
+        nameof(ScareMonsterSpell),
+        nameof(SummonDemonMonsterSpell),
+        nameof(SummonHiUndeadMonsterSpell),
+        nameof(SummonKinMonsterSpell),
+        nameof(SummonReaverMonsterSpell)
+    };
+
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperUSymbol));
     public override ColorEnum Color => ColorEnum.Red;
     public override string Name => "Gothmog, the High Captain of Balrogs";

@@ -12,10 +12,12 @@ internal class RobinHoodTheOutlawMonsterRace : MonsterRace
 {
     protected RobinHoodTheOutlawMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override MonsterSpellList Spells => new MonsterSpellList(
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(Arrow3D6MonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(CreateTrapsMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(HealMonsterSpell)));
+    protected override string[]? SpellNames =>new string[] {
+        nameof(Arrow3D6MonsterSpell),
+        nameof(CreateTrapsMonsterSpell),
+        nameof(HealMonsterSpell)
+    };
+
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerPSymbol));
     public override ColorEnum Color => ColorEnum.BrightChartreuse;
     public override string Name => "Robin Hood, the Outlaw";

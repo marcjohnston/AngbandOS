@@ -12,11 +12,13 @@ internal class AncientGoldDragonMonsterRace : MonsterRace
 {
     protected AncientGoldDragonMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override MonsterSpellList Spells => new MonsterSpellList(
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BreatheSoundMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BlindnessMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(ConfuseMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(ScareMonsterSpell)));
+    protected override string[]? SpellNames =>new string[] {
+        nameof(BreatheSoundMonsterSpell),
+        nameof(BlindnessMonsterSpell),
+        nameof(ConfuseMonsterSpell),
+        nameof(ScareMonsterSpell)
+    };
+
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperDSymbol));
     public override ColorEnum Color => ColorEnum.Gold;
     public override string Name => "Ancient gold dragon";

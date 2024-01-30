@@ -12,21 +12,23 @@ internal class DarkElvenThaumaturgeMonsterRace : MonsterRace
 {
     protected DarkElvenThaumaturgeMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override MonsterSpellList Spells => new MonsterSpellList(
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(AcidBoltMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BlindnessMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(CauseCriticalWoundsMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(ColdBallMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(ConfuseMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(FireBallMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(MagicMissileMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BlinkMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(DarknessMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(HealMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(SummonDemonMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(SummonMonsterMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(SummonUndeadMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(TeleportToMonsterSpell)));
+    protected override string[]? SpellNames =>new string[] {
+        nameof(AcidBoltMonsterSpell),
+        nameof(BlindnessMonsterSpell),
+        nameof(CauseCriticalWoundsMonsterSpell),
+        nameof(ColdBallMonsterSpell),
+        nameof(ConfuseMonsterSpell),
+        nameof(FireBallMonsterSpell),
+        nameof(MagicMissileMonsterSpell),
+        nameof(BlinkMonsterSpell),
+        nameof(DarknessMonsterSpell),
+        nameof(HealMonsterSpell),
+        nameof(SummonDemonMonsterSpell),
+        nameof(SummonMonsterMonsterSpell),
+        nameof(SummonUndeadMonsterSpell),
+        nameof(TeleportToMonsterSpell)
+    };
+
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerHSymbol));
     public override ColorEnum Color => ColorEnum.Red;
     public override string Name => "Dark elven thaumaturge";

@@ -12,11 +12,13 @@ internal class NoviceMageMonsterRace : MonsterRace
 {
     protected NoviceMageMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override MonsterSpellList Spells => new MonsterSpellList(
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BlindnessMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(ConfuseMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(MagicMissileMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BlinkMonsterSpell)));
+    protected override string[]? SpellNames =>new string[] {
+        nameof(BlindnessMonsterSpell),
+        nameof(ConfuseMonsterSpell),
+        nameof(MagicMissileMonsterSpell),
+        nameof(BlinkMonsterSpell)
+    };
+
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerPSymbol));
     public override ColorEnum Color => ColorEnum.BrightRed;
     public override string Name => "Novice mage";

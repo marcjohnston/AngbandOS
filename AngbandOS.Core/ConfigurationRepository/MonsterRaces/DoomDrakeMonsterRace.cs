@@ -12,8 +12,10 @@ internal class DoomDrakeMonsterRace : MonsterRace
 {
     protected DoomDrakeMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override MonsterSpellList Spells => new MonsterSpellList(
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BreatheFireMonsterSpell)));
+    protected override string[]? SpellNames =>new string[] {
+        nameof(BreatheFireMonsterSpell)
+    };
+
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerDSymbol));
     public override ColorEnum Color => ColorEnum.Beige;
     public override string Name => "Doom drake";

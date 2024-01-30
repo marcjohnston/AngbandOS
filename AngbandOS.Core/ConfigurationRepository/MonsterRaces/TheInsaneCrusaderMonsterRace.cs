@@ -12,10 +12,12 @@ internal class TheInsaneCrusaderMonsterRace : MonsterRace
 {
     protected TheInsaneCrusaderMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override MonsterSpellList Spells => new MonsterSpellList(
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(ShriekMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(ScareMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(TeleportToMonsterSpell)));
+    protected override string[]? SpellNames =>new string[] {
+        nameof(ShriekMonsterSpell),
+        nameof(ScareMonsterSpell),
+        nameof(TeleportToMonsterSpell)
+    };
+
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerPSymbol));
     public override ColorEnum Color => ColorEnum.BrightYellow;
     public override string Name => "The Insane Crusader";

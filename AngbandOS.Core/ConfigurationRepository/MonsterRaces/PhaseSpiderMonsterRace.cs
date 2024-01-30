@@ -12,9 +12,11 @@ internal class PhaseSpiderMonsterRace : MonsterRace
 {
     protected PhaseSpiderMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override MonsterSpellList Spells => new MonsterSpellList(
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BlinkMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(TeleportToMonsterSpell)));
+    protected override string[]? SpellNames =>new string[] {
+        nameof(BlinkMonsterSpell),
+        nameof(TeleportToMonsterSpell)
+    };
+
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperSSymbol));
     public override ColorEnum Color => ColorEnum.Pink;
     public override string Name => "Phase spider";

@@ -12,9 +12,11 @@ internal class MoaningSpiritMonsterRace : MonsterRace
 {
     protected MoaningSpiritMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override MonsterSpellList Spells => new MonsterSpellList(
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(ScareMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(TeleportSelfMonsterSpell)));
+    protected override string[]? SpellNames =>new string[] {
+        nameof(ScareMonsterSpell),
+        nameof(TeleportSelfMonsterSpell)
+    };
+
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperGSymbol));
     public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "Moaning spirit";

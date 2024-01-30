@@ -12,11 +12,13 @@ internal class ChaosGhostMonsterRace : MonsterRace
 {
     protected ChaosGhostMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override MonsterSpellList Spells => new MonsterSpellList(
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BlindnessMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(DrainManaMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(HoldMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(ForgetMonsterSpell)));
+    protected override string[]? SpellNames =>new string[] {
+        nameof(BlindnessMonsterSpell),
+        nameof(DrainManaMonsterSpell),
+        nameof(HoldMonsterSpell),
+        nameof(ForgetMonsterSpell)
+    };
+
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperGSymbol));
     public override ColorEnum Color => ColorEnum.Purple;
     public override string Name => "Chaos ghost";

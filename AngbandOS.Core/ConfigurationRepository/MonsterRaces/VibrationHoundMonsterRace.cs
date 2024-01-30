@@ -12,8 +12,10 @@ internal class VibrationHoundMonsterRace : MonsterRace
 {
     protected VibrationHoundMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override MonsterSpellList Spells => new MonsterSpellList(
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BreatheSoundMonsterSpell)));
+    protected override string[]? SpellNames =>new string[] {
+        nameof(BreatheSoundMonsterSpell)
+    };
+
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperZSymbol));
     public override ColorEnum Color => ColorEnum.BrightOrange;
     public override string Name => "Vibration hound";

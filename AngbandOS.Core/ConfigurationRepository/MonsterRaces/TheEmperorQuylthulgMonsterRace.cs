@@ -12,10 +12,12 @@ internal class TheEmperorQuylthulgMonsterRace : MonsterRace
 {
     protected TheEmperorQuylthulgMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override MonsterSpellList Spells => new MonsterSpellList(
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BrainSmashMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(SummonHiDragonMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(SummonHiUndeadMonsterSpell)));
+    protected override string[]? SpellNames =>new string[] {
+        nameof(BrainSmashMonsterSpell),
+        nameof(SummonHiDragonMonsterSpell),
+        nameof(SummonHiUndeadMonsterSpell)
+    };
+
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperQSymbol));
     public override ColorEnum Color => ColorEnum.BrightPink;
     public override string Name => "The Emperor Quylthulg";

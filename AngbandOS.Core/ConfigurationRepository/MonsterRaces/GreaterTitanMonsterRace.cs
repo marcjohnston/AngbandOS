@@ -12,10 +12,12 @@ internal class GreaterTitanMonsterRace : MonsterRace
 {
     protected GreaterTitanMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override MonsterSpellList Spells => new MonsterSpellList(
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(HealMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(SummonMonstersMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(TeleportToMonsterSpell)));
+    protected override string[]? SpellNames =>new string[] {
+        nameof(HealMonsterSpell),
+        nameof(SummonMonstersMonsterSpell),
+        nameof(TeleportToMonsterSpell)
+    };
+
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperPSymbol));
     public override ColorEnum Color => ColorEnum.BrightYellow;
     public override string Name => "Greater titan";

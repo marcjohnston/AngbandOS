@@ -12,13 +12,15 @@ internal class BoldorKingOfTheYeeksMonsterRace : MonsterRace
 {
     protected BoldorKingOfTheYeeksMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override MonsterSpellList Spells => new MonsterSpellList(
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BlindnessMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(SlowMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BlinkMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(HealMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(SummonKinMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(TeleportSelfMonsterSpell)));
+    protected override string[]? SpellNames =>new string[] {
+        nameof(BlindnessMonsterSpell),
+        nameof(SlowMonsterSpell),
+        nameof(BlinkMonsterSpell),
+        nameof(HealMonsterSpell),
+        nameof(SummonKinMonsterSpell),
+        nameof(TeleportSelfMonsterSpell)
+    };
+
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerYSymbol));
     public override ColorEnum Color => ColorEnum.Purple;
     public override string Name => "Boldor, King of the Yeeks";

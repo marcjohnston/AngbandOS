@@ -12,14 +12,16 @@ internal class SilentWatcherMonsterRace : MonsterRace
 {
     protected SilentWatcherMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override MonsterSpellList Spells => new MonsterSpellList(
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(ShriekMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(ConfuseMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(DrainManaMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(HoldMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(MindBlastMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(SummonMonsterMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(SummonMonstersMonsterSpell)));
+    protected override string[]? SpellNames =>new string[] {
+        nameof(ShriekMonsterSpell),
+        nameof(ConfuseMonsterSpell),
+        nameof(DrainManaMonsterSpell),
+        nameof(HoldMonsterSpell),
+        nameof(MindBlastMonsterSpell),
+        nameof(SummonMonsterMonsterSpell),
+        nameof(SummonMonstersMonsterSpell)
+    };
+
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerGSymbol));
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "Silent watcher";

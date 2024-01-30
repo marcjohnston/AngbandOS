@@ -12,13 +12,15 @@ internal class OrfaxSonOfBoldorMonsterRace : MonsterRace
 {
     protected OrfaxSonOfBoldorMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override MonsterSpellList Spells => new MonsterSpellList(
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(ConfuseMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(SlowMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BlinkMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(HealMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(SummonMonsterMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(TeleportToMonsterSpell)));
+    protected override string[]? SpellNames =>new string[] {
+        nameof(ConfuseMonsterSpell),
+        nameof(SlowMonsterSpell),
+        nameof(BlinkMonsterSpell),
+        nameof(HealMonsterSpell),
+        nameof(SummonMonsterMonsterSpell),
+        nameof(TeleportToMonsterSpell)
+    };
+
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerYSymbol));
     public override ColorEnum Color => ColorEnum.BrightBlue;
     public override string Name => "Orfax, Son of Boldor";

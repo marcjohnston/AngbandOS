@@ -12,8 +12,10 @@ internal class FireElementalMonsterRace : MonsterRace
 {
     protected FireElementalMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override MonsterSpellList Spells => new MonsterSpellList(
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(FireBoltMonsterSpell)));
+    protected override string[]? SpellNames =>new string[] {
+        nameof(FireBoltMonsterSpell)
+    };
+
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperESymbol));
     public override ColorEnum Color => ColorEnum.Red;
     public override string Name => "Fire elemental";

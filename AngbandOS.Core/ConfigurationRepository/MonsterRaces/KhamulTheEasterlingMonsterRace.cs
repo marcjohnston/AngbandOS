@@ -12,19 +12,21 @@ internal class KhamulTheEasterlingMonsterRace : MonsterRace
 {
     protected KhamulTheEasterlingMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override MonsterSpellList Spells => new MonsterSpellList(
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BlindnessMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(CauseCriticalWoundsMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(CauseMortalWoundsMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(ColdBallMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(FireBallMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(HoldMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(ManaBoltMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(NetherBallMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(ScareMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(SummonKinMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(SummonUndeadMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(TeleportLevelMonsterSpell)));
+    protected override string[]? SpellNames =>new string[] {
+        nameof(BlindnessMonsterSpell),
+        nameof(CauseCriticalWoundsMonsterSpell),
+        nameof(CauseMortalWoundsMonsterSpell),
+        nameof(ColdBallMonsterSpell),
+        nameof(FireBallMonsterSpell),
+        nameof(HoldMonsterSpell),
+        nameof(ManaBoltMonsterSpell),
+        nameof(NetherBallMonsterSpell),
+        nameof(ScareMonsterSpell),
+        nameof(SummonKinMonsterSpell),
+        nameof(SummonUndeadMonsterSpell),
+        nameof(TeleportLevelMonsterSpell)
+    };
+
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperWSymbol));
     public override ColorEnum Color => ColorEnum.Black;
     public override string Name => "Khamul the Easterling";

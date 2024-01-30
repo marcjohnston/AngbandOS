@@ -12,12 +12,14 @@ internal class PotionMimicMonsterRace : MonsterRace
 {
     protected PotionMimicMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override MonsterSpellList Spells => new MonsterSpellList(
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BlindnessMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(CauseSeriousWoundsMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(ColdBoltMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(ConfuseMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(ScareMonsterSpell)));
+    protected override string[]? SpellNames =>new string[] {
+        nameof(BlindnessMonsterSpell),
+        nameof(CauseSeriousWoundsMonsterSpell),
+        nameof(ColdBoltMonsterSpell),
+        nameof(ConfuseMonsterSpell),
+        nameof(ScareMonsterSpell)
+    };
+
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(ExclamationPointSymbol));
     public override string Name => "Potion mimic";
 

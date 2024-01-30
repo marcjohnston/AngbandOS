@@ -12,11 +12,13 @@ internal class AncientBlackDragonMonsterRace : MonsterRace
 {
     protected AncientBlackDragonMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override MonsterSpellList Spells => new MonsterSpellList(
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BreatheAcidMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BlindnessMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(ConfuseMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(ScareMonsterSpell)));
+    protected override string[]? SpellNames =>new string[] {
+        nameof(BreatheAcidMonsterSpell),
+        nameof(BlindnessMonsterSpell),
+        nameof(ConfuseMonsterSpell),
+        nameof(ScareMonsterSpell)
+    };
+
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperDSymbol));
     public override ColorEnum Color => ColorEnum.Black;
     public override string Name => "Ancient black dragon";

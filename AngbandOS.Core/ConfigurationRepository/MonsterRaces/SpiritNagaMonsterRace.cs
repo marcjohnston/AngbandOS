@@ -12,11 +12,13 @@ internal class SpiritNagaMonsterRace : MonsterRace
 {
     protected SpiritNagaMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override MonsterSpellList Spells => new MonsterSpellList(
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BlindnessMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(MindBlastMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(DarknessMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(HealMonsterSpell)));
+    protected override string[]? SpellNames =>new string[] {
+        nameof(BlindnessMonsterSpell),
+        nameof(MindBlastMonsterSpell),
+        nameof(DarknessMonsterSpell),
+        nameof(HealMonsterSpell)
+    };
+
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerNSymbol));
     public override ColorEnum Color => ColorEnum.Turquoise;
     public override string Name => "Spirit naga";

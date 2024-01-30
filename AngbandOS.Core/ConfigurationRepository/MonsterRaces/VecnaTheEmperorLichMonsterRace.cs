@@ -12,23 +12,25 @@ internal class VecnaTheEmperorLichMonsterRace : MonsterRace
 {
     protected VecnaTheEmperorLichMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override MonsterSpellList Spells => new MonsterSpellList(
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BlindnessMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BrainSmashMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(CauseCriticalWoundsMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(CauseMortalWoundsMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(ConfuseMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(HoldMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(ManaBallMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(ManaBoltMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(NetherBallMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(ScareMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BlinkMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(CreateTrapsMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(SummonKinMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(SummonMonstersMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(SummonUndeadMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(TeleportToMonsterSpell)));
+    protected override string[]? SpellNames =>new string[] {
+        nameof(BlindnessMonsterSpell),
+        nameof(BrainSmashMonsterSpell),
+        nameof(CauseCriticalWoundsMonsterSpell),
+        nameof(CauseMortalWoundsMonsterSpell),
+        nameof(ConfuseMonsterSpell),
+        nameof(HoldMonsterSpell),
+        nameof(ManaBallMonsterSpell),
+        nameof(ManaBoltMonsterSpell),
+        nameof(NetherBallMonsterSpell),
+        nameof(ScareMonsterSpell),
+        nameof(BlinkMonsterSpell),
+        nameof(CreateTrapsMonsterSpell),
+        nameof(SummonKinMonsterSpell),
+        nameof(SummonMonstersMonsterSpell),
+        nameof(SummonUndeadMonsterSpell),
+        nameof(TeleportToMonsterSpell)
+    };
+
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperLSymbol));
     public override ColorEnum Color => ColorEnum.Gold;
     public override string Name => "Vecna, the Emperor Lich";

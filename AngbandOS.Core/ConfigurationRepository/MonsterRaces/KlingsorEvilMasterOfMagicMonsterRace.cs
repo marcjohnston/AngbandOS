@@ -12,21 +12,23 @@ internal class KlingsorEvilMasterOfMagicMonsterRace : MonsterRace
 {
     protected KlingsorEvilMasterOfMagicMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override MonsterSpellList Spells => new MonsterSpellList(
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(ChaosBallMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(CauseCriticalWoundsMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(DarkBallMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(DrainManaMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(FireBallMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(HoldMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(ManaBallMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(NetherBallMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(PlasmaBoltMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(WaterBallMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(CreateTrapsMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(DreadCurseMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(SummonHiUndeadMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(TeleportToMonsterSpell)));
+    protected override string[]? SpellNames =>new string[] {
+        nameof(ChaosBallMonsterSpell),
+        nameof(CauseCriticalWoundsMonsterSpell),
+        nameof(DarkBallMonsterSpell),
+        nameof(DrainManaMonsterSpell),
+        nameof(FireBallMonsterSpell),
+        nameof(HoldMonsterSpell),
+        nameof(ManaBallMonsterSpell),
+        nameof(NetherBallMonsterSpell),
+        nameof(PlasmaBoltMonsterSpell),
+        nameof(WaterBallMonsterSpell),
+        nameof(CreateTrapsMonsterSpell),
+        nameof(DreadCurseMonsterSpell),
+        nameof(SummonHiUndeadMonsterSpell),
+        nameof(TeleportToMonsterSpell)
+    };
+
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerPSymbol));
     public override ColorEnum Color => ColorEnum.Yellow;
     public override string Name => "Klingsor, Evil Master of Magic";

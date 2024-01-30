@@ -12,11 +12,13 @@ internal class TenguMonsterRace : MonsterRace
 {
     protected TenguMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override MonsterSpellList Spells => new MonsterSpellList(
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BlinkMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(TeleportAwayMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(TeleportToMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(TeleportSelfMonsterSpell)));
+    protected override string[]? SpellNames =>new string[] {
+        nameof(BlinkMonsterSpell),
+        nameof(TeleportAwayMonsterSpell),
+        nameof(TeleportToMonsterSpell),
+        nameof(TeleportSelfMonsterSpell)
+    };
+
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerUSymbol));
     public override ColorEnum Color => ColorEnum.Blue;
     public override string Name => "Tengu";

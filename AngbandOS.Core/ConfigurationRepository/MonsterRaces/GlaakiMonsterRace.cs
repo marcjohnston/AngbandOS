@@ -12,32 +12,34 @@ internal class GlaakiMonsterRace : MonsterRace
 {
     protected GlaakiMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override MonsterSpellList Spells => new MonsterSpellList(
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(AcidBoltMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BrainSmashMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(CauseCriticalWoundsMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(CauseMortalWoundsMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(ColdBallMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(ConfuseMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(DrainManaMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(FireBallMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(HoldMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(ManaBoltMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(NetherBallMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(NetherBoltMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(PlasmaBoltMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(ScareMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(WaterBallMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(WaterBoltMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(CreateTrapsMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(DarknessMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(ForgetMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(HealMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(SummonMonsterMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(SummonUndeadMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(TeleportAwayMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(TeleportToMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(TeleportSelfMonsterSpell)));
+    protected override string[]? SpellNames =>new string[] {
+        nameof(AcidBoltMonsterSpell),
+        nameof(BrainSmashMonsterSpell),
+        nameof(CauseCriticalWoundsMonsterSpell),
+        nameof(CauseMortalWoundsMonsterSpell),
+        nameof(ColdBallMonsterSpell),
+        nameof(ConfuseMonsterSpell),
+        nameof(DrainManaMonsterSpell),
+        nameof(FireBallMonsterSpell),
+        nameof(HoldMonsterSpell),
+        nameof(ManaBoltMonsterSpell),
+        nameof(NetherBallMonsterSpell),
+        nameof(NetherBoltMonsterSpell),
+        nameof(PlasmaBoltMonsterSpell),
+        nameof(ScareMonsterSpell),
+        nameof(WaterBallMonsterSpell),
+        nameof(WaterBoltMonsterSpell),
+        nameof(CreateTrapsMonsterSpell),
+        nameof(DarknessMonsterSpell),
+        nameof(ForgetMonsterSpell),
+        nameof(HealMonsterSpell),
+        nameof(SummonMonsterMonsterSpell),
+        nameof(SummonUndeadMonsterSpell),
+        nameof(TeleportAwayMonsterSpell),
+        nameof(TeleportToMonsterSpell),
+        nameof(TeleportSelfMonsterSpell)
+    };
+
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperXSymbol));
     public override string Name => "Glaaki";
 

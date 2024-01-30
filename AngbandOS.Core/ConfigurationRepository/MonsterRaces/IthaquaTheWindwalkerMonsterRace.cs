@@ -12,19 +12,21 @@ internal class IthaquaTheWindwalkerMonsterRace : MonsterRace
 {
     protected IthaquaTheWindwalkerMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override MonsterSpellList Spells => new MonsterSpellList(
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BreatheColdMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(ChaosBallMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(CauseMortalWoundsMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(LightningBallMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(LightningBoltMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(ManaBoltMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(MindBlastMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(ScareMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(WaterBallMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(SummonCthuloidMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(SummonHiUndeadMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(SummonKinMonsterSpell)));
+    protected override string[]? SpellNames =>new string[] {
+        nameof(BreatheColdMonsterSpell),
+        nameof(ChaosBallMonsterSpell),
+        nameof(CauseMortalWoundsMonsterSpell),
+        nameof(LightningBallMonsterSpell),
+        nameof(LightningBoltMonsterSpell),
+        nameof(ManaBoltMonsterSpell),
+        nameof(MindBlastMonsterSpell),
+        nameof(ScareMonsterSpell),
+        nameof(WaterBallMonsterSpell),
+        nameof(SummonCthuloidMonsterSpell),
+        nameof(SummonHiUndeadMonsterSpell),
+        nameof(SummonKinMonsterSpell)
+    };
+
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperXSymbol));
     public override ColorEnum Color => ColorEnum.BrightBlue;
     public override string Name => "Ithaqua the Windwalker";

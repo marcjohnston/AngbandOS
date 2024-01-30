@@ -12,8 +12,10 @@ internal class BloodshotIckyThingMonsterRace : MonsterRace
 {
     protected BloodshotIckyThingMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override MonsterSpellList Spells => new MonsterSpellList(
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(DrainManaMonsterSpell)));
+    protected override string[]? SpellNames =>new string[] {
+        nameof(DrainManaMonsterSpell)
+    };
+
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerISymbol));
     public override ColorEnum Color => ColorEnum.Red;
     public override string Name => "Bloodshot icky thing";

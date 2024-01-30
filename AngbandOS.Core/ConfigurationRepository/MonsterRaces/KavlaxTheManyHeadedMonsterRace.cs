@@ -12,16 +12,18 @@ internal class KavlaxTheManyHeadedMonsterRace : MonsterRace
 {
     protected KavlaxTheManyHeadedMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override MonsterSpellList Spells => new MonsterSpellList(
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BreatheAcidMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BreatheColdMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BreatheConfusionMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BreatheLightningMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BreatheFireMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BreatheGravityMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BreatheNexusMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BreatheShardsMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BreatheSoundMonsterSpell)));
+    protected override string[]? SpellNames =>new string[] {
+        nameof(BreatheAcidMonsterSpell),
+        nameof(BreatheColdMonsterSpell),
+        nameof(BreatheConfusionMonsterSpell),
+        nameof(BreatheLightningMonsterSpell),
+        nameof(BreatheFireMonsterSpell),
+        nameof(BreatheGravityMonsterSpell),
+        nameof(BreatheNexusMonsterSpell),
+        nameof(BreatheShardsMonsterSpell),
+        nameof(BreatheSoundMonsterSpell)
+    };
+
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerDSymbol));
     public override ColorEnum Color => ColorEnum.Purple;
     public override string Name => "Kavlax the Many-Headed";

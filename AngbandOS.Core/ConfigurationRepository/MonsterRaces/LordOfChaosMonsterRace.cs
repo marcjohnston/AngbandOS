@@ -12,13 +12,15 @@ internal class LordOfChaosMonsterRace : MonsterRace
 {
     protected LordOfChaosMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override MonsterSpellList Spells => new MonsterSpellList(
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(ChaosBallMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(MindBlastMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(HealMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(SummonDemonMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(SummonHoundMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(SummonSpiderMonsterSpell)));
+    protected override string[]? SpellNames =>new string[] {
+        nameof(ChaosBallMonsterSpell),
+        nameof(MindBlastMonsterSpell),
+        nameof(HealMonsterSpell),
+        nameof(SummonDemonMonsterSpell),
+        nameof(SummonHoundMonsterSpell),
+        nameof(SummonSpiderMonsterSpell)
+    };
+
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerPSymbol));
     public override ColorEnum Color => ColorEnum.Purple;
     public override string Name => "Lord of Chaos";

@@ -12,16 +12,18 @@ internal class ChthonianMonsterRace : MonsterRace
 {
     protected ChthonianMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override MonsterSpellList Spells => new MonsterSpellList(
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BrainSmashMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(ConfuseMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(HoldMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(MindBlastMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(ScareMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(ForgetMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(HasteMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(HealMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(SummonDemonMonsterSpell)));
+    protected override string[]? SpellNames =>new string[] {
+        nameof(BrainSmashMonsterSpell),
+        nameof(ConfuseMonsterSpell),
+        nameof(HoldMonsterSpell),
+        nameof(MindBlastMonsterSpell),
+        nameof(ScareMonsterSpell),
+        nameof(ForgetMonsterSpell),
+        nameof(HasteMonsterSpell),
+        nameof(HealMonsterSpell),
+        nameof(SummonDemonMonsterSpell)
+    };
+
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperASymbol));
     public override ColorEnum Color => ColorEnum.Yellow;
     public override string Name => "Chthonian";

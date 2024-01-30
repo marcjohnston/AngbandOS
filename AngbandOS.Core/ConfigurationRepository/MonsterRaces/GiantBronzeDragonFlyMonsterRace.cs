@@ -12,8 +12,10 @@ internal class GiantBronzeDragonFlyMonsterRace : MonsterRace
 {
     protected GiantBronzeDragonFlyMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override MonsterSpellList Spells => new MonsterSpellList(
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BreatheConfusionMonsterSpell)));
+    protected override string[]? SpellNames =>new string[] {
+        nameof(BreatheConfusionMonsterSpell)
+    };
+
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperFSymbol));
     public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "Giant bronze dragon fly";

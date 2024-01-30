@@ -12,8 +12,10 @@ internal class OrcCaptainMonsterRace : MonsterRace
 {
     protected OrcCaptainMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override MonsterSpellList Spells => new MonsterSpellList(
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(Arrow1D6MonsterSpell)));
+    protected override string[]? SpellNames =>new string[] {
+        nameof(Arrow1D6MonsterSpell)
+    };
+
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerOSymbol));
     public override ColorEnum Color => ColorEnum.Green;
     public override string Name => "Orc captain";

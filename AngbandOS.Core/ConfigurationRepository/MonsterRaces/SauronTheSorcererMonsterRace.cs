@@ -12,28 +12,30 @@ internal class SauronTheSorcererMonsterRace : MonsterRace
 {
     protected SauronTheSorcererMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override MonsterSpellList Spells => new MonsterSpellList(
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BlindnessMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BrainSmashMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(CauseMortalWoundsMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(ConfuseMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(DarkBallMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(FireBallMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(IceBoltMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(ManaBallMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(ManaBoltMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(NetherBallMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(PlasmaBoltMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(ScareMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(WaterBallMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(DreadCurseMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(ForgetMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(SummonDemonMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(SummonHiDragonMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(SummonHiUndeadMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(SummonMonstersMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(TeleportLevelMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(TeleportSelfMonsterSpell)));
+    protected override string[]? SpellNames =>new string[] {
+        nameof(BlindnessMonsterSpell),
+        nameof(BrainSmashMonsterSpell),
+        nameof(CauseMortalWoundsMonsterSpell),
+        nameof(ConfuseMonsterSpell),
+        nameof(DarkBallMonsterSpell),
+        nameof(FireBallMonsterSpell),
+        nameof(IceBoltMonsterSpell),
+        nameof(ManaBallMonsterSpell),
+        nameof(ManaBoltMonsterSpell),
+        nameof(NetherBallMonsterSpell),
+        nameof(PlasmaBoltMonsterSpell),
+        nameof(ScareMonsterSpell),
+        nameof(WaterBallMonsterSpell),
+        nameof(DreadCurseMonsterSpell),
+        nameof(ForgetMonsterSpell),
+        nameof(SummonDemonMonsterSpell),
+        nameof(SummonHiDragonMonsterSpell),
+        nameof(SummonHiUndeadMonsterSpell),
+        nameof(SummonMonstersMonsterSpell),
+        nameof(TeleportLevelMonsterSpell),
+        nameof(TeleportSelfMonsterSpell)
+    };
+
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerPSymbol));
     public override ColorEnum Color => ColorEnum.Gold;
     public override string Name => "Sauron, the Sorcerer";

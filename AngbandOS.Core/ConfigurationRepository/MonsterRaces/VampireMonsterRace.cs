@@ -12,14 +12,16 @@ internal class VampireMonsterRace : MonsterRace
 {
     protected VampireMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override MonsterSpellList Spells => new MonsterSpellList(
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(CauseSeriousWoundsMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(HoldMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(MindBlastMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(ScareMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(DarknessMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(ForgetMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(TeleportToMonsterSpell)));
+    protected override string[]? SpellNames =>new string[] {
+        nameof(CauseSeriousWoundsMonsterSpell),
+        nameof(HoldMonsterSpell),
+        nameof(MindBlastMonsterSpell),
+        nameof(ScareMonsterSpell),
+        nameof(DarknessMonsterSpell),
+        nameof(ForgetMonsterSpell),
+        nameof(TeleportToMonsterSpell)
+    };
+
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperVSymbol));
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "Vampire";

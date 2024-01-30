@@ -12,8 +12,10 @@ internal class BasiliskMonsterRace : MonsterRace
 {
     protected BasiliskMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override MonsterSpellList Spells => new MonsterSpellList(
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BreathePoisonMonsterSpell)));
+    protected override string[]? SpellNames =>new string[] {
+        nameof(BreathePoisonMonsterSpell)
+    };
+
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperRSymbol));
     public override ColorEnum Color => ColorEnum.Black;
     public override string Name => "Basilisk";

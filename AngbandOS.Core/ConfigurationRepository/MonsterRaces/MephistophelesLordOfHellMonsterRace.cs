@@ -12,18 +12,20 @@ internal class MephistophelesLordOfHellMonsterRace : MonsterRace
 {
     protected MephistophelesLordOfHellMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override MonsterSpellList Spells => new MonsterSpellList(
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BreatheFireMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BreatheNetherMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BrainSmashMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(HoldMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(ScareMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(DreadCurseMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(SummonDemonMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(SummonHiUndeadMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(SummonReaverMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(SummonUndeadMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(TeleportToMonsterSpell)));
+    protected override string[]? SpellNames =>new string[] {
+        nameof(BreatheFireMonsterSpell),
+        nameof(BreatheNetherMonsterSpell),
+        nameof(BrainSmashMonsterSpell),
+        nameof(HoldMonsterSpell),
+        nameof(ScareMonsterSpell),
+        nameof(DreadCurseMonsterSpell),
+        nameof(SummonDemonMonsterSpell),
+        nameof(SummonHiUndeadMonsterSpell),
+        nameof(SummonReaverMonsterSpell),
+        nameof(SummonUndeadMonsterSpell),
+        nameof(TeleportToMonsterSpell)
+    };
+
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperUSymbol));
     public override ColorEnum Color => ColorEnum.Red;
     public override string Name => "Mephistopheles, Lord of Hell";

@@ -12,26 +12,28 @@ internal class SarumanOfManyColorsMonsterRace : MonsterRace
 {
     protected SarumanOfManyColorsMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override MonsterSpellList Spells => new MonsterSpellList(
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(AcidBallMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BlindnessMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(CauseMortalWoundsMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(ColdBallMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(ConfuseMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(FireBallMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(IceBoltMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(MindBlastMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(ScareMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(WaterBallMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(CreateTrapsMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(ForgetMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(HasteMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(HealMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(SummonDemonMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(SummonDragonMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(SummonUndeadMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(TeleportAwayMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(TeleportSelfMonsterSpell)));
+    protected override string[]? SpellNames =>new string[] {
+        nameof(AcidBallMonsterSpell),
+        nameof(BlindnessMonsterSpell),
+        nameof(CauseMortalWoundsMonsterSpell),
+        nameof(ColdBallMonsterSpell),
+        nameof(ConfuseMonsterSpell),
+        nameof(FireBallMonsterSpell),
+        nameof(IceBoltMonsterSpell),
+        nameof(MindBlastMonsterSpell),
+        nameof(ScareMonsterSpell),
+        nameof(WaterBallMonsterSpell),
+        nameof(CreateTrapsMonsterSpell),
+        nameof(ForgetMonsterSpell),
+        nameof(HasteMonsterSpell),
+        nameof(HealMonsterSpell),
+        nameof(SummonDemonMonsterSpell),
+        nameof(SummonDragonMonsterSpell),
+        nameof(SummonUndeadMonsterSpell),
+        nameof(TeleportAwayMonsterSpell),
+        nameof(TeleportSelfMonsterSpell)
+    };
+
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerPSymbol));
     public override ColorEnum Color => ColorEnum.Purple;
     public override string Name => "Saruman of Many Colors";

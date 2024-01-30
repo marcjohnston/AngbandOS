@@ -12,18 +12,20 @@ internal class BeholderMonsterRace : MonsterRace
 {
     protected BeholderMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override MonsterSpellList Spells => new MonsterSpellList(
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(AcidBoltMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BlindnessMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(ColdBoltMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(ConfuseMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(DrainManaMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(FireBoltMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(MindBlastMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(ScareMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(SlowMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(DarknessMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(ForgetMonsterSpell)));
+    protected override string[]? SpellNames =>new string[] {
+        nameof(AcidBoltMonsterSpell),
+        nameof(BlindnessMonsterSpell),
+        nameof(ColdBoltMonsterSpell),
+        nameof(ConfuseMonsterSpell),
+        nameof(DrainManaMonsterSpell),
+        nameof(FireBoltMonsterSpell),
+        nameof(MindBlastMonsterSpell),
+        nameof(ScareMonsterSpell),
+        nameof(SlowMonsterSpell),
+        nameof(DarknessMonsterSpell),
+        nameof(ForgetMonsterSpell)
+    };
+
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerESymbol));
     public override ColorEnum Color => ColorEnum.Green;
     public override string Name => "Beholder";

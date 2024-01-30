@@ -12,13 +12,15 @@ internal class ThePhoenixMonsterRace : MonsterRace
 {
     protected ThePhoenixMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override MonsterSpellList Spells => new MonsterSpellList(
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BreatheFireMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BreatheLightMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BreathePlasmaMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(FireBallMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(FireBoltMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(PlasmaBoltMonsterSpell)));
+    protected override string[]? SpellNames =>new string[] {
+        nameof(BreatheFireMonsterSpell),
+        nameof(BreatheLightMonsterSpell),
+        nameof(BreathePlasmaMonsterSpell),
+        nameof(FireBallMonsterSpell),
+        nameof(FireBoltMonsterSpell),
+        nameof(PlasmaBoltMonsterSpell)
+    };
+
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperBSymbol));
     public override ColorEnum Color => ColorEnum.Red;
     public override string Name => "The Phoenix";

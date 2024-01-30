@@ -12,8 +12,10 @@ internal class GorgimeraMonsterRace : MonsterRace
 {
     protected GorgimeraMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override MonsterSpellList Spells => new MonsterSpellList(
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BreatheFireMonsterSpell)));
+    protected override string[]? SpellNames =>new string[] {
+        nameof(BreatheFireMonsterSpell)
+    };
+
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperHSymbol));
     public override ColorEnum Color => ColorEnum.Chartreuse;
     public override string Name => "Gorgimera";

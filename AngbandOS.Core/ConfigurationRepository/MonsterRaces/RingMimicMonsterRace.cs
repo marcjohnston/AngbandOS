@@ -12,17 +12,19 @@ internal class RingMimicMonsterRace : MonsterRace
 {
     protected RingMimicMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override MonsterSpellList Spells => new MonsterSpellList(
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(AcidBoltMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BlindnessMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(CauseSeriousWoundsMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(ColdBoltMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(ConfuseMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(FireBoltMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(LightningBoltMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(ScareMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(ForgetMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(SummonMonsterMonsterSpell)));
+    protected override string[]? SpellNames =>new string[] {
+        nameof(AcidBoltMonsterSpell),
+        nameof(BlindnessMonsterSpell),
+        nameof(CauseSeriousWoundsMonsterSpell),
+        nameof(ColdBoltMonsterSpell),
+        nameof(ConfuseMonsterSpell),
+        nameof(FireBoltMonsterSpell),
+        nameof(LightningBoltMonsterSpell),
+        nameof(ScareMonsterSpell),
+        nameof(ForgetMonsterSpell),
+        nameof(SummonMonsterMonsterSpell)
+    };
+
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(EqualSignSymbol));
     public override ColorEnum Color => ColorEnum.Gold;
     public override string Name => "Ring mimic";

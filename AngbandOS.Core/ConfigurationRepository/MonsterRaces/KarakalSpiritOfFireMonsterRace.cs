@@ -12,9 +12,11 @@ internal class KarakalSpiritOfFireMonsterRace : MonsterRace
 {
     protected KarakalSpiritOfFireMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override MonsterSpellList Spells => new MonsterSpellList(
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(FireBallMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(PlasmaBoltMonsterSpell)));
+    protected override string[]? SpellNames =>new string[] {
+        nameof(FireBallMonsterSpell),
+        nameof(PlasmaBoltMonsterSpell)
+    };
+
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperESymbol));
     public override ColorEnum Color => ColorEnum.Red;
     public override string Name => "Karakal, Spirit of Fire";

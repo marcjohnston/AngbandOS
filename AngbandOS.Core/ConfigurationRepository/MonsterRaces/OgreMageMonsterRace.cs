@@ -12,12 +12,14 @@ internal class OgreMageMonsterRace : MonsterRace
 {
     protected OgreMageMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override MonsterSpellList Spells => new MonsterSpellList(
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(ColdBallMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(HoldMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(CreateTrapsMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(HealMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(SummonMonsterMonsterSpell)));
+    protected override string[]? SpellNames =>new string[] {
+        nameof(ColdBallMonsterSpell),
+        nameof(HoldMonsterSpell),
+        nameof(CreateTrapsMonsterSpell),
+        nameof(HealMonsterSpell),
+        nameof(SummonMonsterMonsterSpell)
+    };
+
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperOSymbol));
     public override ColorEnum Color => ColorEnum.Orange;
     public override string Name => "Ogre mage";

@@ -12,13 +12,15 @@ internal class TsathogguaMonsterRace : MonsterRace
 {
     protected TsathogguaMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override MonsterSpellList Spells => new MonsterSpellList(
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BreatheChaosMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BreatheDisenchantMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BreatheDisintegrationMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BreatheManaMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(WaterBallMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(SummonCthuloidMonsterSpell)));
+    protected override string[]? SpellNames =>new string[] {
+        nameof(BreatheChaosMonsterSpell),
+        nameof(BreatheDisenchantMonsterSpell),
+        nameof(BreatheDisintegrationMonsterSpell),
+        nameof(BreatheManaMonsterSpell),
+        nameof(WaterBallMonsterSpell),
+        nameof(SummonCthuloidMonsterSpell)
+    };
+
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperXSymbol));
     public override ColorEnum Color => ColorEnum.Purple;
     public override string Name => "Tsathoggua";

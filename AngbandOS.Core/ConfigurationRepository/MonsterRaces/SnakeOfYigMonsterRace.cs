@@ -12,8 +12,10 @@ internal class SnakeOfYigMonsterRace : MonsterRace
 {
     protected SnakeOfYigMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override MonsterSpellList Spells => new MonsterSpellList(
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BreathePoisonMonsterSpell)));
+    protected override string[]? SpellNames =>new string[] {
+        nameof(BreathePoisonMonsterSpell)
+    };
+
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperJSymbol));
     public override ColorEnum Color => ColorEnum.BrightGreen;
     public override string Name => "Snake of Yig";

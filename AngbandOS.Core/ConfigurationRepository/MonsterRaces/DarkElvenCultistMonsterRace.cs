@@ -12,13 +12,15 @@ internal class DarkElvenCultistMonsterRace : MonsterRace
 {
     protected DarkElvenCultistMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override MonsterSpellList Spells => new MonsterSpellList(
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(ConfuseMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(MagicMissileMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(DarknessMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(HealMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(SummonMonsterMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(SummonSpiderMonsterSpell)));
+    protected override string[]? SpellNames =>new string[] {
+        nameof(ConfuseMonsterSpell),
+        nameof(MagicMissileMonsterSpell),
+        nameof(DarknessMonsterSpell),
+        nameof(HealMonsterSpell),
+        nameof(SummonMonsterMonsterSpell),
+        nameof(SummonSpiderMonsterSpell)
+    };
+
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerHSymbol));
     public override ColorEnum Color => ColorEnum.Turquoise;
     public override string Name => "Dark elven cultist";

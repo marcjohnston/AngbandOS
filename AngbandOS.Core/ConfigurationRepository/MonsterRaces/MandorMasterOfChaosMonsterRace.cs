@@ -12,17 +12,19 @@ internal class MandorMasterOfChaosMonsterRace : MonsterRace
 {
     protected MandorMasterOfChaosMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override MonsterSpellList Spells => new MonsterSpellList(
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(ChaosBallMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(ColdBoltMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(FireBoltMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(HoldMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(IceBoltMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(ManaBoltMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(PlasmaBoltMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(CreateTrapsMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(HealMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(SummonMonsterMonsterSpell)));
+    protected override string[]? SpellNames =>new string[] {
+        nameof(ChaosBallMonsterSpell),
+        nameof(ColdBoltMonsterSpell),
+        nameof(FireBoltMonsterSpell),
+        nameof(HoldMonsterSpell),
+        nameof(IceBoltMonsterSpell),
+        nameof(ManaBoltMonsterSpell),
+        nameof(PlasmaBoltMonsterSpell),
+        nameof(CreateTrapsMonsterSpell),
+        nameof(HealMonsterSpell),
+        nameof(SummonMonsterMonsterSpell)
+    };
+
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerPSymbol));
     public override ColorEnum Color => ColorEnum.Purple;
     public override string Name => "Mandor, Master of Chaos";

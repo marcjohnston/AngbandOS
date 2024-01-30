@@ -12,18 +12,20 @@ internal class YogSothothTheAllInOneMonsterRace : MonsterRace
 {
     protected YogSothothTheAllInOneMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override MonsterSpellList Spells => new MonsterSpellList(
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BreatheDisintegrationMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BreatheManaMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(ChaosBallMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BrainSmashMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(ManaBallMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(ManaBoltMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(SummonCthuloidMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(SummonHiUndeadMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(SummonHoundMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(SummonMonstersMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(SummonReaverMonsterSpell)));
+    protected override string[]? SpellNames =>new string[] {
+        nameof(BreatheDisintegrationMonsterSpell),
+        nameof(BreatheManaMonsterSpell),
+        nameof(ChaosBallMonsterSpell),
+        nameof(BrainSmashMonsterSpell),
+        nameof(ManaBallMonsterSpell),
+        nameof(ManaBoltMonsterSpell),
+        nameof(SummonCthuloidMonsterSpell),
+        nameof(SummonHiUndeadMonsterSpell),
+        nameof(SummonHoundMonsterSpell),
+        nameof(SummonMonstersMonsterSpell),
+        nameof(SummonReaverMonsterSpell)
+    };
+
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperXSymbol));
     public override ColorEnum Color => ColorEnum.Orange;
     public override string Name => "Yog-Sothoth, the All-in-One";

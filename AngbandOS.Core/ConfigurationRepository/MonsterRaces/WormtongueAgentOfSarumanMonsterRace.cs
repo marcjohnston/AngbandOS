@@ -12,12 +12,14 @@ internal class WormtongueAgentOfSarumanMonsterRace : MonsterRace
 {
     protected WormtongueAgentOfSarumanMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override MonsterSpellList Spells => new MonsterSpellList(
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(ColdBoltMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(PoisonBallMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(SlowMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(CreateTrapsMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(HealMonsterSpell)));
+    protected override string[]? SpellNames =>new string[] {
+        nameof(ColdBoltMonsterSpell),
+        nameof(PoisonBallMonsterSpell),
+        nameof(SlowMonsterSpell),
+        nameof(CreateTrapsMonsterSpell),
+        nameof(HealMonsterSpell)
+    };
+
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerPSymbol));
     public override ColorEnum Color => ColorEnum.Yellow;
     public override string Name => "Wormtongue, Agent of Saruman";

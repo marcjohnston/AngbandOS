@@ -12,8 +12,10 @@ internal class MemoryMossMonsterRace : MonsterRace
 {
     protected MemoryMossMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override MonsterSpellList Spells => new MonsterSpellList(
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(ForgetMonsterSpell)));
+    protected override string[]? SpellNames =>new string[] {
+        nameof(ForgetMonsterSpell)
+    };
+
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(CommaSymbol));
     public override ColorEnum Color => ColorEnum.Blue;
     public override string Name => "Memory moss";

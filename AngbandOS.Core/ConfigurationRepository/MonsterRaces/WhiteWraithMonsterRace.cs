@@ -12,10 +12,12 @@ internal class WhiteWraithMonsterRace : MonsterRace
 {
     protected WhiteWraithMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override MonsterSpellList Spells => new MonsterSpellList(
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(CauseSeriousWoundsMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(ScareMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(DarknessMonsterSpell)));
+    protected override string[]? SpellNames =>new string[] {
+        nameof(CauseSeriousWoundsMonsterSpell),
+        nameof(ScareMonsterSpell),
+        nameof(DarknessMonsterSpell)
+    };
+
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperWSymbol));
     public override string Name => "White wraith";
 

@@ -12,8 +12,10 @@ internal class WaterElementalMonsterRace : MonsterRace
 {
     protected WaterElementalMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override MonsterSpellList Spells => new MonsterSpellList(
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(ColdBoltMonsterSpell)));
+    protected override string[]? SpellNames =>new string[] {
+        nameof(ColdBoltMonsterSpell)
+    };
+
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperESymbol));
     public override ColorEnum Color => ColorEnum.Blue;
     public override string Name => "Water elemental";

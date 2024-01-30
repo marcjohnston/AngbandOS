@@ -24,9 +24,20 @@ internal abstract class MonsterRace : IMonsterCharacteristics, IGetKey<string>
     public virtual string Key => GetType().Name;
 
     public string GetKey => Key;
-    public virtual void Bind() { }
+    public virtual void Bind()
+    {
+        // Bind the monster spell names.
+        if (SpellNames != null)
+        {
+            foreach (string spellName in SpellNames)
+            {
+                Spells.Add(SaveGame.SingletonRepository.MonsterSpells.Get(spellName));
+            }
+        }
+    }
 
-    public virtual MonsterSpellList Spells => new MonsterSpellList();
+    protected virtual string[]? SpellNames => null;
+    public MonsterSpellList Spells = new MonsterSpellList();
     public bool BreatheAcid => Spells.Contains(typeof(BreatheAcidMonsterSpell));
     public bool BreatheCold => Spells.Contains(typeof(BreatheColdMonsterSpell));
     public bool BreatheFire => Spells.Contains(typeof(BreatheFireMonsterSpell));

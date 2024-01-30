@@ -12,8 +12,10 @@ internal class BaronOfHellMonsterRace : MonsterRace
 {
     protected BaronOfHellMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override MonsterSpellList Spells => new MonsterSpellList(
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(PlasmaBoltMonsterSpell)));
+    protected override string[]? SpellNames =>new string[] {
+        nameof(PlasmaBoltMonsterSpell)
+    };
+
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperUSymbol));
     public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "Baron of hell";

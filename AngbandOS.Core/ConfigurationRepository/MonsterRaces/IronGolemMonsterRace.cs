@@ -12,8 +12,10 @@ internal class IronGolemMonsterRace : MonsterRace
 {
     protected IronGolemMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override MonsterSpellList Spells => new MonsterSpellList(
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(SlowMonsterSpell)));
+    protected override string[]? SpellNames =>new string[] {
+        nameof(SlowMonsterSpell)
+    };
+
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerGSymbol));
     public override ColorEnum Color => ColorEnum.BrightGrey;
     public override string Name => "Iron golem";

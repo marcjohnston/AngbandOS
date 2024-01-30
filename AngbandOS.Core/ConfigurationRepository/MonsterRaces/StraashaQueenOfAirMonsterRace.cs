@@ -12,10 +12,12 @@ internal class StraashaQueenOfAirMonsterRace : MonsterRace
 {
     protected StraashaQueenOfAirMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override MonsterSpellList Spells => new MonsterSpellList(
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(ColdBallMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(LightningBallMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(LightningBoltMonsterSpell)));
+    protected override string[]? SpellNames =>new string[] {
+        nameof(ColdBallMonsterSpell),
+        nameof(LightningBallMonsterSpell),
+        nameof(LightningBoltMonsterSpell)
+    };
+
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperESymbol));
     public override ColorEnum Color => ColorEnum.BrightBlue;
     public override string Name => "Straasha, Queen of Air";

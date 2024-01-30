@@ -12,9 +12,11 @@ internal class ShimmeringVortexMonsterRace : MonsterRace
 {
     protected ShimmeringVortexMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override MonsterSpellList Spells => new MonsterSpellList(
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BreatheLightMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(ShriekMonsterSpell)));
+    protected override string[]? SpellNames =>new string[] {
+        nameof(BreatheLightMonsterSpell),
+        nameof(ShriekMonsterSpell)
+    };
+
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerVSymbol));
     public override ColorEnum Color => ColorEnum.Purple;
     public override string Name => "Shimmering vortex";

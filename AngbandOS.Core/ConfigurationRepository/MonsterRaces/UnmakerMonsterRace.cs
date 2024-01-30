@@ -12,8 +12,10 @@ internal class UnmakerMonsterRace : MonsterRace
 {
     protected UnmakerMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override MonsterSpellList Spells => new MonsterSpellList(
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BreatheChaosMonsterSpell)));
+    protected override string[]? SpellNames =>new string[] {
+        nameof(BreatheChaosMonsterSpell)
+    };
+
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperESymbol));
     public override ColorEnum Color => ColorEnum.Purple;
     public override string Name => "Unmaker";

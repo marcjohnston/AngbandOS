@@ -12,8 +12,10 @@ internal class DarkElvenWarriorMonsterRace : MonsterRace
 {
     protected DarkElvenWarriorMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override MonsterSpellList Spells => new MonsterSpellList(
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(MagicMissileMonsterSpell)));
+    protected override string[]? SpellNames =>new string[] {
+        nameof(MagicMissileMonsterSpell)
+    };
+
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerHSymbol));
     public override ColorEnum Color => ColorEnum.Black;
     public override string Name => "Dark elven warrior";

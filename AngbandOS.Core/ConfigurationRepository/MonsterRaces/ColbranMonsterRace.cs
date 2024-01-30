@@ -12,8 +12,10 @@ internal class ColbranMonsterRace : MonsterRace
 {
     protected ColbranMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override MonsterSpellList Spells => new MonsterSpellList(
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(LightningBoltMonsterSpell)));
+    protected override string[]? SpellNames =>new string[] {
+        nameof(LightningBoltMonsterSpell)
+    };
+
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerGSymbol));
     public override ColorEnum Color => ColorEnum.Blue;
     public override string Name => "Colbran";

@@ -12,8 +12,10 @@ internal class ShadowHoundMonsterRace : MonsterRace
 {
     protected ShadowHoundMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override MonsterSpellList Spells => new MonsterSpellList(
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BreatheDarkMonsterSpell)));
+    protected override string[]? SpellNames =>new string[] {
+        nameof(BreatheDarkMonsterSpell)
+    };
+
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperZSymbol));
     public override ColorEnum Color => ColorEnum.Black;
     public override string Name => "Shadow hound";

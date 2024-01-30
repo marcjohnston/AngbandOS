@@ -12,8 +12,10 @@ internal class TwoHeadedHydraMonsterRace : MonsterRace
 {
     protected TwoHeadedHydraMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override MonsterSpellList Spells => new MonsterSpellList(
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(ScareMonsterSpell)));
+    protected override string[]? SpellNames =>new string[] {
+        nameof(ScareMonsterSpell)
+    };
+
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperMSymbol));
     public override ColorEnum Color => ColorEnum.BrightChartreuse;
     public override string Name => "2-headed hydra";

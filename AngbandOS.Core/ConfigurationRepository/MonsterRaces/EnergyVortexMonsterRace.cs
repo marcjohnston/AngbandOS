@@ -12,8 +12,10 @@ internal class EnergyVortexMonsterRace : MonsterRace
 {
     protected EnergyVortexMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override MonsterSpellList Spells => new MonsterSpellList(
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BreatheLightningMonsterSpell)));
+    protected override string[]? SpellNames =>new string[] {
+        nameof(BreatheLightningMonsterSpell)
+    };
+
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerVSymbol));
     public override ColorEnum Color => ColorEnum.Yellow;
     public override string Name => "Energy vortex";

@@ -12,8 +12,10 @@ internal class ManticoreMonsterRace : MonsterRace
 {
     protected ManticoreMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override MonsterSpellList Spells => new MonsterSpellList(
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(Arrow7D6MonsterSpell)));
+    protected override string[]? SpellNames =>new string[] {
+        nameof(Arrow7D6MonsterSpell)
+    };
+
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperHSymbol));
     public override ColorEnum Color => ColorEnum.Orange;
     public override string Name => "Manticore";

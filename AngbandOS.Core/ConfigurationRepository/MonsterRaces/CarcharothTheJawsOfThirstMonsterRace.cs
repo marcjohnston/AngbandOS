@@ -12,12 +12,14 @@ internal class CarcharothTheJawsOfThirstMonsterRace : MonsterRace
 {
     protected CarcharothTheJawsOfThirstMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override MonsterSpellList Spells => new MonsterSpellList(
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BreatheFireMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BrainSmashMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(ScareMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(HealMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(SummonHoundMonsterSpell)));
+    protected override string[]? SpellNames =>new string[] {
+        nameof(BreatheFireMonsterSpell),
+        nameof(BrainSmashMonsterSpell),
+        nameof(ScareMonsterSpell),
+        nameof(HealMonsterSpell),
+        nameof(SummonHoundMonsterSpell)
+    };
+
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperCSymbol));
     public override ColorEnum Color => ColorEnum.Black;
     public override string Name => "Carcharoth, the Jaws of Thirst";

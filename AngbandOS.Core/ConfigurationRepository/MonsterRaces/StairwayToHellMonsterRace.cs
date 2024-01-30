@@ -12,9 +12,11 @@ internal class StairwayToHellMonsterRace : MonsterRace
 {
     protected StairwayToHellMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override MonsterSpellList Spells => new MonsterSpellList(
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(ShriekMonsterSpell)),
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(SummonDemonMonsterSpell)));
+    protected override string[]? SpellNames =>new string[] {
+        nameof(ShriekMonsterSpell),
+        nameof(SummonDemonMonsterSpell)
+    };
+
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(GreaterThanSymbol));
     public override ColorEnum Color => ColorEnum.Red;
     public override string Name => "Stairway to hell";

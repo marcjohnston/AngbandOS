@@ -12,8 +12,10 @@ internal class TimeHoundMonsterRace : MonsterRace
 {
     protected TimeHoundMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override MonsterSpellList Spells => new MonsterSpellList(
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BreatheTimeMonsterSpell)));
+    protected override string[]? SpellNames =>new string[] {
+        nameof(BreatheTimeMonsterSpell)
+    };
+
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperZSymbol));
     public override ColorEnum Color => ColorEnum.BrightGreen;
     public override string Name => "Time hound";

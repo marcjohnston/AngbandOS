@@ -12,8 +12,10 @@ internal class GiantSlimeMoldMonsterRace : MonsterRace
 {
     protected GiantSlimeMoldMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override MonsterSpellList Spells => new MonsterSpellList(
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(ShriekMonsterSpell)));
+    protected override string[]? SpellNames =>new string[] {
+        nameof(ShriekMonsterSpell)
+    };
+
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(CommaSymbol));
     public override ColorEnum Color => ColorEnum.Green;
     public override string Name => "Giant slime mold";

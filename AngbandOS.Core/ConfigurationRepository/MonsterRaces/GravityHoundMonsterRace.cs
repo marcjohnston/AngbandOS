@@ -12,8 +12,10 @@ internal class GravityHoundMonsterRace : MonsterRace
 {
     protected GravityHoundMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override MonsterSpellList Spells => new MonsterSpellList(
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(BreatheGravityMonsterSpell)));
+    protected override string[]? SpellNames =>new string[] {
+        nameof(BreatheGravityMonsterSpell)
+    };
+
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UpperZSymbol));
     public override ColorEnum Color => ColorEnum.Turquoise;
     public override string Name => "Gravity hound";

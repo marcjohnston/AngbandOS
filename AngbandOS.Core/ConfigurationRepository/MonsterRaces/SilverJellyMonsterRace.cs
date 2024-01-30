@@ -12,8 +12,10 @@ internal class SilverJellyMonsterRace : MonsterRace
 {
     protected SilverJellyMonsterRace(SaveGame saveGame) : base(saveGame) { }
 
-    public override MonsterSpellList Spells => new MonsterSpellList(
-        SaveGame.SingletonRepository.MonsterSpells.Get(nameof(DrainManaMonsterSpell)));
+    protected override string[]? SpellNames =>new string[] {
+        nameof(DrainManaMonsterSpell)
+    };
+
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerJSymbol));
     public override ColorEnum Color => ColorEnum.Silver;
     public override string Name => "Silver jelly";
