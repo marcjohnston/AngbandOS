@@ -8,102 +8,19 @@
 namespace AngbandOS.Core.MonsterRaces;
 
 [Serializable]
-internal abstract class MonsterRace : IMonsterCharacteristics, IGetKey<string>
+internal abstract class MonsterRace : IMonsterCharacteristics, IGetKey<string>, IToJson
 {
-    protected readonly SaveGame SaveGame;
-    protected MonsterRace(SaveGame saveGame)
-    {
-        SaveGame = saveGame;
-        Knowledge = new MonsterKnowledge(saveGame, this);
-        int freqInate = (FreqInate == 0 ? 0 : 100 / FreqInate);
-        int freqSpell = (FreqSpell == 0 ? 0 : 100 / FreqSpell);
-        FrequencyChance = (freqInate + freqSpell) / 2;
+    #region Serialized Members
 
-        Level = (LevelFound < 0 || LevelFound > 100) ? 0 : LevelFound;
-    }
     public virtual string Key => GetType().Name;
 
-    public string GetKey => Key;
-    public virtual void Bind()
-    {
-        // Bind the monster spell names.
-        if (SpellNames != null)
-        {
-            foreach (string spellName in SpellNames)
-            {
-                Spells.Add(SaveGame.SingletonRepository.MonsterSpells.Get(spellName));
-            }
-        }
-
-        // Bind the symbol.
-        Symbol = SaveGame.SingletonRepository.Symbols.Get(SymbolName);
-
-        // Bind the monster attacks.
-        List<MonsterAttack> attackList = new();
-        foreach (MonsterAttackDefinition monsterAttackDefinition in AttackDefinitions)
-        {
-            Attack attack = SaveGame.SingletonRepository.Attacks.Get(monsterAttackDefinition.MethodName);
-            AttackEffect? attackEffect = null;
-            if (monsterAttackDefinition.EffectName != null)
-            {
-                 attackEffect = SaveGame.SingletonRepository.AttackEffects.Get(monsterAttackDefinition.EffectName);
-            }
-            attackList.Add(new MonsterAttack(attack, attackEffect, monsterAttackDefinition.DDice, monsterAttackDefinition.DSide));
-        }
-        Attacks = attackList.ToArray();
-    }
-
     protected virtual string[]? SpellNames => null;
-    public MonsterSpellList Spells = new MonsterSpellList();
-    public bool BreatheAcid => Spells.Contains(typeof(BreatheAcidMonsterSpell));
-    public bool BreatheCold => Spells.Contains(typeof(BreatheColdMonsterSpell));
-    public bool BreatheFire => Spells.Contains(typeof(BreatheFireMonsterSpell));
-    public bool BreatheLightning => Spells.Contains(typeof(BreatheLightningMonsterSpell));
-    public bool BreathePoison => Spells.Contains(typeof(BreathePoisonMonsterSpell));
-    public bool BreatheChaos => Spells.Contains(typeof(BreatheChaosMonsterSpell));
-    public bool BreatheConfusion => Spells.Contains(typeof(BreatheConfusionMonsterSpell));
-    public bool BreatheDark => Spells.Contains(typeof(BreatheDarkMonsterSpell));
-    public bool BreatheSound => Spells.Contains(typeof(BreatheSoundMonsterSpell));
-    public bool BreatheForce => Spells.Contains(typeof(BreatheForceMonsterSpell));
-    public bool BreatheShards => Spells.Contains(typeof(BreatheShardsMonsterSpell));
-    public bool BreatheGravity => Spells.Contains(typeof(BreatheGravityMonsterSpell));
-    public bool BreatheInertia => Spells.Contains(typeof(BreatheInertiaMonsterSpell));
-    public bool BreatheTime => Spells.Contains(typeof(BreatheTimeMonsterSpell));
-    public bool TeleportSelf => Spells.Contains(typeof(TeleportSelfMonsterSpell));
-
-    public int CurNum;
-    public bool Guardian;
-    public bool OnlyGuardian;
-    public int MaxNum;
-    public MonsterKnowledge Knowledge;
-
-    /// <summary>
-    /// Returns a standard message note for a monster of either it 'dies' or is 'destroyed' based on whether
-    /// or not the monster is already dead.  If it is already dead, a 'destroyed' message is returned and it 'dies'
-    /// is returned for all living monsters.  Other variations are that dispel projectiles will dissolve and
-    /// PSI will "collapses, a mindless husk".
-    /// </summary>
-    /// <param name="rPtr"></param>
-    /// <returns></returns>
-    public virtual string DeathNote()
-    {
-        if (Demon || Undead || Cthuloid || Stupid || Nonliving || "Evg".Contains(Symbol.Character.ToString()))
-        {
-            return " is destroyed.";
-        }
-        return " dies.";
-    }
 
     /// <summary>
     /// Returns the key for the symbol to be used.  The actual Symbol object is bound to the Symbol property during the
     /// bind phase.
     /// </summary>
     protected abstract string SymbolName { get; }
-
-    /// <summary>
-    /// Returns the symbol to use for rendering.
-    /// </summary>
-    public Symbol Symbol { get; private set; }
 
     /// <summary>
     /// The color to display the monster as.
@@ -130,11 +47,6 @@ internal abstract class MonsterRace : IMonsterCharacteristics, IGetKey<string>
     /// null, by default.
     /// </summary>
     protected virtual MonsterAttackDefinition[]? AttackDefinitions => null;
-
-    /// <summary>
-    /// Returns all of the attacks that the monster can perform in a single round.
-    /// </summary>
-    public MonsterAttack[]? Attacks { get; private set; } = null;
 
     /// <summary>
     /// The monster's color can be anything (if 'AttrMulti' is set).
@@ -285,21 +197,6 @@ internal abstract class MonsterRace : IMonsterCharacteristics, IGetKey<string>
     /// The number of hit dice the monster has.
     /// </summary>
     public abstract int Hdice { get; }
-
-    /// <summary>
-    /// The number of hit points the monster has (click to update).
-    /// </summary>
-    public string HitPoints
-    {
-        get
-        {
-            if (ForceMaxHp)
-            {
-                return $"{Hdice}d{Hside} (max. {Hdice * Hside})";
-            }
-            return $"{Hdice}d{Hside} (avg. {(Hdice * Hside / 2) + (Hdice / 2)})";
-        }
-    }
 
     /// <summary>
     /// The number of sides of the monster's hit dice.
@@ -453,6 +350,116 @@ internal abstract class MonsterRace : IMonsterCharacteristics, IGetKey<string>
     public virtual bool Unique => false;
 
     public virtual bool WeirdMind => false;
+    #endregion
+
+    #region
+    protected readonly SaveGame SaveGame;
+    protected MonsterRace(SaveGame saveGame)
+    {
+        SaveGame = saveGame;
+        Knowledge = new MonsterKnowledge(saveGame, this);
+        int freqInate = (FreqInate == 0 ? 0 : 100 / FreqInate);
+        int freqSpell = (FreqSpell == 0 ? 0 : 100 / FreqSpell);
+        FrequencyChance = (freqInate + freqSpell) / 2;
+
+        Level = (LevelFound < 0 || LevelFound > 100) ? 0 : LevelFound;
+    }
+
+    public string GetKey => Key;
+    public void Bind()
+    {
+        // Bind the monster spell names.
+        if (SpellNames != null)
+        {
+            foreach (string spellName in SpellNames)
+            {
+                Spells.Add(SaveGame.SingletonRepository.MonsterSpells.Get(spellName));
+            }
+        }
+
+        // Bind the symbol.
+        Symbol = SaveGame.SingletonRepository.Symbols.Get(SymbolName);
+
+        // Bind the monster attacks.
+        List<MonsterAttack> attackList = new();
+        foreach (MonsterAttackDefinition monsterAttackDefinition in AttackDefinitions)
+        {
+            Attack attack = SaveGame.SingletonRepository.Attacks.Get(monsterAttackDefinition.MethodName);
+            AttackEffect? attackEffect = null;
+            if (monsterAttackDefinition.EffectName != null)
+            {
+                 attackEffect = SaveGame.SingletonRepository.AttackEffects.Get(monsterAttackDefinition.EffectName);
+            }
+            attackList.Add(new MonsterAttack(attack, attackEffect, monsterAttackDefinition.DDice, monsterAttackDefinition.DSide));
+        }
+        Attacks = attackList.ToArray();
+    }
+
+    public MonsterSpellList Spells = new MonsterSpellList();
+    public bool BreatheAcid => Spells.Contains(typeof(BreatheAcidMonsterSpell));
+    public bool BreatheCold => Spells.Contains(typeof(BreatheColdMonsterSpell));
+    public bool BreatheFire => Spells.Contains(typeof(BreatheFireMonsterSpell));
+    public bool BreatheLightning => Spells.Contains(typeof(BreatheLightningMonsterSpell));
+    public bool BreathePoison => Spells.Contains(typeof(BreathePoisonMonsterSpell));
+    public bool BreatheChaos => Spells.Contains(typeof(BreatheChaosMonsterSpell));
+    public bool BreatheConfusion => Spells.Contains(typeof(BreatheConfusionMonsterSpell));
+    public bool BreatheDark => Spells.Contains(typeof(BreatheDarkMonsterSpell));
+    public bool BreatheSound => Spells.Contains(typeof(BreatheSoundMonsterSpell));
+    public bool BreatheForce => Spells.Contains(typeof(BreatheForceMonsterSpell));
+    public bool BreatheShards => Spells.Contains(typeof(BreatheShardsMonsterSpell));
+    public bool BreatheGravity => Spells.Contains(typeof(BreatheGravityMonsterSpell));
+    public bool BreatheInertia => Spells.Contains(typeof(BreatheInertiaMonsterSpell));
+    public bool BreatheTime => Spells.Contains(typeof(BreatheTimeMonsterSpell));
+    public bool TeleportSelf => Spells.Contains(typeof(TeleportSelfMonsterSpell));
+
+    public int CurNum;
+    public bool Guardian;
+    public bool OnlyGuardian;
+    public int MaxNum;
+    public MonsterKnowledge Knowledge;
+
+    /// <summary>
+    /// Returns a standard message note for a monster of either it 'dies' or is 'destroyed' based on whether
+    /// or not the monster is already dead.  If it is already dead, a 'destroyed' message is returned and it 'dies'
+    /// is returned for all living monsters.  Other variations are that dispel projectiles will dissolve and
+    /// PSI will "collapses, a mindless husk".
+    /// </summary>
+    /// <param name="rPtr"></param>
+    /// <returns></returns>
+    public string DeathNote()
+    {
+        if (Demon || Undead || Cthuloid || Stupid || Nonliving || "Evg".Contains(Symbol.Character.ToString()))
+        {
+            return " is destroyed.";
+        }
+        return " dies.";
+    }
+
+    /// <summary>
+    /// Returns the symbol to use for rendering.
+    /// </summary>
+    public Symbol Symbol { get; private set; }
+
+
+    /// <summary>
+    /// Returns all of the attacks that the monster can perform in a single round.
+    /// </summary>
+    public MonsterAttack[]? Attacks { get; private set; } = null;
+    /// <summary>
+    /// The number of hit points the monster has (click to update).
+    /// </summary>
+    public string HitPoints
+    {
+        get
+        {
+            if (ForceMaxHp)
+            {
+                return $"{Hdice}d{Hside} (max. {Hdice * Hside})";
+            }
+            return $"{Hdice}d{Hside} (avg. {(Hdice * Hside / 2) + (Hdice / 2)})";
+        }
+    }
+
     /// <summary>
     /// Represents a percentage chance (0-100) of successfully casting as spell.
     /// </summary>
@@ -520,4 +527,10 @@ internal abstract class MonsterRace : IMonsterCharacteristics, IGetKey<string>
     {
         return $"{Name} (lvl {Level})";
     }
+
+    public string ToJson()
+    {
+        throw new NotImplementedException();
+    }
+    #endregion
 }
