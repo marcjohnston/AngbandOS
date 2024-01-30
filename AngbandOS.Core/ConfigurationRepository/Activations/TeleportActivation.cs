@@ -20,7 +20,7 @@ internal class TeleportActivation : Activation
 
     public override bool Activate()
     {
-        SaveGame.TeleportPlayer(100);
+        SaveGame.RunScriptInt(nameof(TeleportSelfScript), 100);
         return true;
     }
 

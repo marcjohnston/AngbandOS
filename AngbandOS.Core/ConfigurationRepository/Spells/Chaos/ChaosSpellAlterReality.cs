@@ -18,7 +18,7 @@ internal class ChaosSpellAlterReality : Spell
 
     public override void CastFailed()
     {
-        DoWildChaoticMagic(20);
+        SaveGame.RunScriptInt(nameof(WildChaoticMagicScript), 20);
     }
 
     public override string Name => "Alter Reality";

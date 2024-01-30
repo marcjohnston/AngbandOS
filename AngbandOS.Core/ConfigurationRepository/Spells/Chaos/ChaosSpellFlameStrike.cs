@@ -18,7 +18,7 @@ internal class ChaosSpellFlameStrike : Spell
 
     public override void CastFailed()
     {
-        DoWildChaoticMagic(26);
+        SaveGame.RunScriptInt(nameof(WildChaoticMagicScript), 26);
     }
 
     public override string Name => "Flame Strike";

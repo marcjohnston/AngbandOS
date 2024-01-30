@@ -126,7 +126,7 @@ internal class GravityProjectile : Projectile
             SaveGame.MsgPrint("You are hit by something heavy!");
         }
         SaveGame.MsgPrint("Gravity warps around you.");
-        SaveGame.TeleportPlayer(5);
+        SaveGame.RunScriptInt(nameof(TeleportSelfScript), 5);
         if (!SaveGame.HasFeatherFall)
         {
             SaveGame.TimedSlow.AddTimer(SaveGame.Rng.RandomLessThan(4) + 4);

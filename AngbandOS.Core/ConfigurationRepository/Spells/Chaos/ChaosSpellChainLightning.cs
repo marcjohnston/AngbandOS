@@ -18,7 +18,7 @@ internal class ChaosSpellChainLightning : Spell
 
     public override void CastFailed()
     {
-        DoWildChaoticMagic(17);
+        SaveGame.RunScriptInt(nameof(WildChaoticMagicScript), 17);
     }
 
     public override string Name => "Chain Lightning";

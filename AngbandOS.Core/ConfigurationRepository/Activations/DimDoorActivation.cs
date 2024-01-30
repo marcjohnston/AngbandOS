@@ -32,7 +32,7 @@ internal class DimDoorActivation : Activation
         {
             SaveGame.MsgPrint("You fail to exit the astral plane correctly!");
             SaveGame.Energy -= 100;
-            SaveGame.TeleportPlayer(10);
+            SaveGame.RunScriptInt(nameof(TeleportSelfScript), 10);
         }
         else
         {

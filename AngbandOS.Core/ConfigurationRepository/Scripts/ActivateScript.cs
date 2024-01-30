@@ -116,7 +116,7 @@ internal class ActivateScript : Script, IScript, IRepeatableScript, ISuccessfulS
         // weapon teleports you
         if (item.RareItemTypeIndex == RareItemTypeEnum.WeaponPlanarWeapon)
         {
-            SaveGame.TeleportPlayer(100);
+            SaveGame.RunScriptInt(nameof(TeleportSelfScript), 100);
             item.RechargeTimeLeft = 50 + SaveGame.Rng.DieRoll(50);
             return true;
         }

@@ -13,12 +13,12 @@ internal class ChaosSpellWordOfDestruction : Spell
     private ChaosSpellWordOfDestruction(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.DestroyArea(SaveGame.MapY, SaveGame.MapX, 15);
+        SaveGame.RunScript(nameof(WordOfDestructionScript));
     }
 
     public override void CastFailed()
     {
-        DoWildChaoticMagic(14);
+        SaveGame.RunScriptInt(nameof(WildChaoticMagicScript), 14);
     }
 
     public override string Name => "Word of Destruction";

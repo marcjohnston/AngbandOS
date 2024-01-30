@@ -18,7 +18,7 @@ internal class ChaosSpellGravityBeam : Spell
 
     public override void CastFailed()
     {
-        DoWildChaoticMagic(24);
+        SaveGame.RunScriptInt(nameof(WildChaoticMagicScript), 24);
     }
 
     public override string Name => "Gravity Beam";

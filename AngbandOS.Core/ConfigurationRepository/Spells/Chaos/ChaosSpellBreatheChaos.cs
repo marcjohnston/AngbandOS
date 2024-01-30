@@ -18,7 +18,7 @@ internal class ChaosSpellBreatheChaos : Spell
 
     public override void CastFailed()
     {
-        DoWildChaoticMagic(30);
+        SaveGame.RunScriptInt(nameof(WildChaoticMagicScript), 30);
     }
 
     public override string Name => "Breathe Chaos";

@@ -22,7 +22,7 @@ internal class TeleportAwayMonsterSpell : MonsterSpell
 
     public override void ExecuteOnPlayer(SaveGame saveGame, Monster monster)
     {
-        saveGame.TeleportPlayer(100);
+        SaveGame.RunScriptInt(nameof(TeleportSelfScript), 100);
     }
 
     public override void ExecuteOnMonster(SaveGame saveGame, Monster monster, Monster target)

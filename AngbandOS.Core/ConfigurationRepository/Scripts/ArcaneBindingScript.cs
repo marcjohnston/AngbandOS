@@ -5,21 +5,19 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Spells.Folk;
+namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class FolkSpellBlink : Spell
+internal class ArcaneBindingScript : Script, IScript
 {
-    private FolkSpellBlink(SaveGame saveGame) : base(saveGame) { }
-    public override void Cast()
-    {
-        SaveGame.RunScriptInt(nameof(TeleportSelfScript), 10);
-    }
+    private ArcaneBindingScript(SaveGame saveGame) : base(saveGame) { }
 
-    public override string Name => "Blink";
-    
-    protected override string? Info()
+    /// <summary>
+    /// Executes the script.
+    /// </summary>
+    /// <returns></returns>
+    public void ExecuteScript()
     {
-        return "range 10";
+        SaveGame.Recharge(40);
     }
 }

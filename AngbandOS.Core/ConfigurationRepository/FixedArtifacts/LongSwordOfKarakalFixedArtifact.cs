@@ -29,7 +29,7 @@ internal class LongSwordOfKarakalFixedArtifact : FixedArtifact, IFixedArtifactAc
             case 3:
             case 4:
             case 5:
-                SaveGame.TeleportPlayer(10);
+                SaveGame.RunScriptInt(nameof(TeleportSelfScript), 10);
                 break;
 
             case 6:
@@ -37,7 +37,7 @@ internal class LongSwordOfKarakalFixedArtifact : FixedArtifact, IFixedArtifactAc
             case 8:
             case 9:
             case 10:
-                SaveGame.TeleportPlayer(222);
+                SaveGame.RunScriptInt(nameof(TeleportSelfScript), 222);
                 break;
 
             case 11:

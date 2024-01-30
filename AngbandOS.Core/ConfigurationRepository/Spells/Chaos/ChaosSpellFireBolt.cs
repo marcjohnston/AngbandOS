@@ -18,7 +18,7 @@ internal class ChaosSpellFireBolt : Spell
 
     public override void CastFailed()
     {
-        DoWildChaoticMagic(5);
+        SaveGame.RunScriptInt(nameof(WildChaoticMagicScript), 5);
     }
 
     public override string Name => "Fire Bolt";

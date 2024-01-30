@@ -18,7 +18,7 @@ internal class ChaosSpellDisintegrate : Spell
 
     public override void CastFailed()
     {
-        DoWildChaoticMagic(19);
+        SaveGame.RunScriptInt(nameof(WildChaoticMagicScript), 19);
     }
 
     public override string Name => "Disintegrate";

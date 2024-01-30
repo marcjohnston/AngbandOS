@@ -20,6 +20,6 @@ internal class TeleportWizardCommand : WizardCommand
 
     public override void Execute()
     {
-        SaveGame.TeleportPlayer(100);
+        SaveGame.RunScriptInt(nameof(TeleportSelfScript), 100);
     }
 }

@@ -18,7 +18,7 @@ internal class ChaosSpellFistOfForce : Spell
 
     public override void CastFailed()
     {
-        DoWildChaoticMagic(6);
+        SaveGame.RunScriptInt(nameof(WildChaoticMagicScript), 6);
     }
 
     public override string Name => "Fist of Force";

@@ -20,6 +20,6 @@ internal class PhaseDoorWizardCommand : WizardCommand
 
     public override void Execute()
     {
-        SaveGame.TeleportPlayer(10);
+        SaveGame.RunScriptInt(nameof(TeleportSelfScript), 10);
     }
 }

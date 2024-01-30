@@ -40,7 +40,7 @@ internal class AlcoholRandomMutation : Mutation
             {
                 SaveGame.RunScript(nameof(WizardDarkScript));
             }
-            SaveGame.TeleportPlayer(100);
+            SaveGame.RunScriptInt(nameof(TeleportSelfScript), 100);
             SaveGame.RunScript(nameof(WizardDarkScript));
             SaveGame.MsgPrint("You wake up somewhere with a sore head...");
             SaveGame.MsgPrint("You can't remember a thing, or how you got here!");

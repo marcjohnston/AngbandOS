@@ -18,7 +18,7 @@ internal class ChaosSpellShardBall : Spell
 
     public override void CastFailed()
     {
-        DoWildChaoticMagic(28);
+        SaveGame.RunScriptInt(nameof(WildChaoticMagicScript), 28);
     }
 
     public override string Name => "Shard Ball";

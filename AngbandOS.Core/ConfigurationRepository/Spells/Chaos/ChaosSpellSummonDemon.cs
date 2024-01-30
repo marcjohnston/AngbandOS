@@ -18,7 +18,7 @@ internal class ChaosSpellSummonDemon : Spell
 
     public override void CastFailed()
     {
-        DoWildChaoticMagic(23);
+        SaveGame.RunScriptInt(nameof(WildChaoticMagicScript), 23);
     }
 
     public override string Name => "Summon Demon";

@@ -13,16 +13,12 @@ internal class ChaosSpellManaStorm : Spell
     private ChaosSpellManaStorm(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        if (!SaveGame.GetDirectionWithAim(out int dir))
-        {
-            return;
-        }
-        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(ManaProjectile)), dir, 300 + (SaveGame.ExperienceLevel * 2), 4);
+        SaveGame.RunScript(nameof(ManaStormScript));
     }
 
     public override void CastFailed()
     {
-        DoWildChaoticMagic(29);
+        SaveGame.RunScriptInt(nameof(WildChaoticMagicScript), 29);
     }
 
     public override string Name => "Mana Storm";

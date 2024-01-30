@@ -13,11 +13,12 @@ internal class ChaosSpellArcaneBinding : Spell
     private ChaosSpellArcaneBinding(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.Recharge(40);
+        SaveGame.RunScript(nameof(ArcaneBindingScript));
     }
+
     public override void CastFailed()
     {
-        DoWildChaoticMagic(18);
+        SaveGame.RunScriptInt(nameof(WildChaoticMagicScript), 18);
     }
 
     public override string Name => "Arcane Binding";

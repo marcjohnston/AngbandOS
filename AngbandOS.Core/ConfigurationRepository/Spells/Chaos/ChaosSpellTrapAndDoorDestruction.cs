@@ -18,7 +18,7 @@ internal class ChaosSpellTrapAndDoorDestruction : Spell
 
     public override void CastFailed()
     {
-        DoWildChaoticMagic(1);
+        SaveGame.RunScriptInt(nameof(WildChaoticMagicScript), 1);
     }
 
     public override string Name => "Trap and Door Destruction";

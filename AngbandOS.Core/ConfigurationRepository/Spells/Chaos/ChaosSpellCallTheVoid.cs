@@ -18,7 +18,7 @@ internal class ChaosSpellCallTheVoid : Spell
 
     public override void CastFailed()
     {
-        DoWildChaoticMagic(31);
+        SaveGame.RunScriptInt(nameof(WildChaoticMagicScript), 31);
     }
 
     public override string Name => "Call the Void";

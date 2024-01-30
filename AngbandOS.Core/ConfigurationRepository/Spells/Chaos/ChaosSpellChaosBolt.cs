@@ -18,7 +18,7 @@ internal class ChaosSpellChaosBolt : Spell
 
     public override void CastFailed()
     {
-        DoWildChaoticMagic(9);
+        SaveGame.RunScriptInt(nameof(WildChaoticMagicScript), 9);
     }
 
     public override string Name => "Chaos Bolt";

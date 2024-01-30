@@ -18,7 +18,7 @@ internal class ChaosSpellManaBurst : Spell
 
     public override void CastFailed()
     {
-        DoWildChaoticMagic(4);
+        SaveGame.RunScriptInt(nameof(WildChaoticMagicScript), 4);
     }
     public override string Name => "Mana Burst";
     

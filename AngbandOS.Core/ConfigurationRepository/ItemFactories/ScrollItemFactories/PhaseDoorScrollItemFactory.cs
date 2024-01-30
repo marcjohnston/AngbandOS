@@ -24,7 +24,7 @@ internal class PhaseDoorScrollItemFactory : ScrollItemFactory
 
     public override void Read(ReadScrollEvent eventArgs)
     {
-        SaveGame.TeleportPlayer(10);
+        SaveGame.RunScriptInt(nameof(TeleportSelfScript), 10);
         eventArgs.Identified = true;
     }
     public override Item CreateItem() => new Item(SaveGame, this);

@@ -71,7 +71,7 @@ internal class TarotSpellTarotDraw : Spell
         else if (die < 40)
         {
             SaveGame.MsgPrint("It's a teleport card.");
-            SaveGame.TeleportPlayer(10);
+            SaveGame.RunScriptInt(nameof(TeleportSelfScript), 10);
         }
         else if (die < 42)
         {
@@ -81,12 +81,12 @@ internal class TarotSpellTarotDraw : Spell
         else if (die < 47)
         {
             SaveGame.MsgPrint("It's a teleport card.");
-            SaveGame.TeleportPlayer(100);
+            SaveGame.RunScriptInt(nameof(TeleportSelfScript), 100);
         }
         else if (die < 52)
         {
             SaveGame.MsgPrint("It's a teleport card.");
-            SaveGame.TeleportPlayer(200);
+            SaveGame.RunScriptInt(nameof(TeleportSelfScript), 200);
         }
         else if (die < 60)
         {
@@ -200,18 +200,18 @@ internal class TarotSpellTarotDraw : Spell
             case 1:
             case 2:
             case 3:
-                SaveGame.TeleportPlayer(10);
+                SaveGame.RunScriptInt(nameof(TeleportSelfScript), 10);
                 break;
 
             case 4:
             case 5:
             case 6:
-                SaveGame.TeleportPlayer(100);
+                SaveGame.RunScriptInt(nameof(TeleportSelfScript), 100);
                 break;
 
             case 7:
             case 8:
-                SaveGame.TeleportPlayer(200);
+                SaveGame.RunScriptInt(nameof(TeleportSelfScript), 200);
                 break;
 
             case 9:

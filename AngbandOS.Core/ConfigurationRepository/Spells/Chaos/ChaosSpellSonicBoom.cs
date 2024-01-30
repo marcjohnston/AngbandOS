@@ -18,7 +18,7 @@ internal class ChaosSpellSonicBoom : Spell
 
     public override void CastFailed()
     {
-        DoWildChaoticMagic(10);
+        SaveGame.RunScriptInt(nameof(WildChaoticMagicScript), 10);
     }
 
     public override string Name => "Sonic Boom";

@@ -3732,14 +3732,14 @@ internal class SaveGame
                     if (oPtr.IdentCursed && !HasAntiTeleport)
                     {
                         Disturb(true);
-                        TeleportPlayer(40);
+                        RunScriptInt(nameof(TeleportSelfScript), 40);
                     }
                     else
                     {
                         if (GetCheck("Teleport? "))
                         {
                             Disturb(false);
-                            TeleportPlayer(50);
+                            RunScriptInt(nameof(TeleportSelfScript), 50);
                         }
                     }
                 }
@@ -4228,7 +4228,7 @@ internal class SaveGame
             case 2:
             case 3:
                 {
-                    TeleportPlayer(200);
+                    RunScriptInt(nameof(TeleportSelfScript), 200);
                     break;
                 }
             case 4:
@@ -6545,98 +6545,6 @@ internal class SaveGame
         return TargetedProject(SingletonRepository.Projectiles.Get(nameof(TeleportAwayAllProjectile)), dir, Constants.MaxSight * 5, flg);
     }
 
-    public void TeleportPlayer(int dis)
-    {
-        int x = MapY, y = MapX;
-        int xx = -1;
-        bool look = true;
-        if (HasAntiTeleport)
-        {
-            MsgPrint("A mysterious force prevents you from teleporting!");
-            return;
-        }
-        if (dis > 200)
-        {
-            dis = 200;
-        }
-        int min = dis / 2;
-        while (look)
-        {
-            if (dis > 200)
-            {
-                dis = 200;
-            }
-            for (int i = 0; i < 500; i++)
-            {
-                while (true)
-                {
-                    y = Rng.RandomSpread(MapY, dis);
-                    x = Rng.RandomSpread(MapX, dis);
-                    int d = Distance(MapY, MapX, y, x);
-                    if (d >= min && d <= dis)
-                    {
-                        break;
-                    }
-                }
-                if (!InBounds(y, x))
-                {
-                    continue;
-                }
-                if (!GridOpenNoItemOrCreature(y, x))
-                {
-                    continue;
-                }
-                if (Grid[y][x].TileFlags.IsSet(GridTile.InVault))
-                {
-                    continue;
-                }
-                look = false;
-                break;
-            }
-            dis *= 2;
-            min /= 2;
-        }
-        PlaySound(SoundEffectEnum.Teleport);
-        int oy = MapY;
-        int ox = MapX;
-        MapY = y;
-        MapX = x;
-        RedrawSingleLocation(oy, ox);
-        while (xx < 2)
-        {
-            int yy = -1;
-            while (yy < 2)
-            {
-                if (xx == 0 && yy == 0)
-                {
-                }
-                else
-                {
-                    if (Grid[oy + yy][ox + xx].MonsterIndex != 0)
-                    {
-                        if (Monsters[Grid[oy + yy][ox + xx].MonsterIndex].Race.TeleportSelf &&
-                            !Monsters[Grid[oy + yy][ox + xx].MonsterIndex].Race.ResistTeleport)
-                        {
-                            if (Monsters[Grid[oy + yy][ox + xx].MonsterIndex].SleepLevel == 0)
-                            {
-                                TeleportToPlayer(Grid[oy + yy][ox + xx].MonsterIndex);
-                            }
-                        }
-                    }
-                }
-                yy++;
-            }
-            xx++;
-        }
-        RedrawSingleLocation(MapY, MapX);
-        RecenterScreenAroundPlayer();
-        SingletonRepository.FlaggedActions.Get(nameof(UpdateScentFlaggedAction)).Set();
-        SingletonRepository.FlaggedActions.Get(nameof(UpdateLightFlaggedAction)).Set();
-        SingletonRepository.FlaggedActions.Get(nameof(UpdateViewFlaggedAction)).Set();
-        SingletonRepository.FlaggedActions.Get(nameof(UpdateDistancesFlaggedAction)).Set();
-        HandleStuff();
-    }
-
     public void TeleportPlayerLevel()
     {
         if (HasAntiTeleport)
@@ -7176,79 +7084,6 @@ internal class SaveGame
             ty = TargetRow;
         }
         return Project(0, 0, ty, tx, dam, projectile, flg);
-    }
-
-    private void TeleportToPlayer(int mIdx)
-    {
-        int ny = MapY;
-        int nx = MapX;
-        int dis = 2;
-        bool look = true;
-        Monster mPtr = Monsters[mIdx];
-        int attempts = 500;
-        if (mPtr.Race == null)
-        {
-            return;
-        }
-        if (Rng.DieRoll(100) > mPtr.Race.Level)
-        {
-            return;
-        }
-        int oy = mPtr.MapY;
-        int ox = mPtr.MapX;
-        int min = dis / 2;
-        while (look && --attempts != 0)
-        {
-            if (dis > 200)
-            {
-                dis = 200;
-            }
-            for (int i = 0; i < 500; i++)
-            {
-                while (true)
-                {
-                    ny = Rng.RandomSpread(MapY, dis);
-                    nx = Rng.RandomSpread(MapX, dis);
-                    int d = Distance(MapY, MapX, ny, nx);
-                    if (d >= min && d <= dis)
-                    {
-                        break;
-                    }
-                }
-                if (!InBounds(ny, nx))
-                {
-                    continue;
-                }
-                if (!GridPassableNoCreature(ny, nx))
-                {
-                    continue;
-                }
-                if (Grid[ny][nx].FeatureType.Name == "ElderSign")
-                {
-                    continue;
-                }
-                if (Grid[ny][nx].FeatureType.Name == "YellowSign")
-                {
-                    continue;
-                }
-                look = false;
-                break;
-            }
-            dis *= 2;
-            min /= 2;
-        }
-        if (attempts < 1)
-        {
-            return;
-        }
-        PlaySound(SoundEffectEnum.Teleport);
-        Grid[ny][nx].MonsterIndex = mIdx;
-        Grid[oy][ox].MonsterIndex = 0;
-        mPtr.MapY = ny;
-        mPtr.MapX = nx;
-        UpdateMonsterVisibility(mIdx, true);
-        RedrawSingleLocation(oy, ox);
-        RedrawSingleLocation(ny, nx);
     }
 
     // CommandHandler
@@ -9263,6 +9098,40 @@ internal class SaveGame
         castedScript.ExecuteScript();
     }
 
+    public void RunScriptInt(string scriptName, int value)
+    {
+        // Get the script from the singleton repository.
+        Script? script = SingletonRepository.Scripts.Get(scriptName);
+
+        if (script == null)
+        {
+            throw new Exception($"The {scriptName} script specified to run does not exist.");
+        }
+        if (!typeof(IScriptInt).IsInstanceOfType(script))
+        {
+            throw new Exception($"The {scriptName} script specified to run does not implement the {nameof(IScriptInt)} interface.");
+        }
+        IScriptInt castedScript = (IScriptInt)script;
+        castedScript.ExecuteScriptInt(value);
+    }
+
+    public void RunScriptIntInt(string scriptName, int value1, int value2)
+    {
+        // Get the script from the singleton repository.
+        Script? script = SingletonRepository.Scripts.Get(scriptName);
+
+        if (script == null)
+        {
+            throw new Exception($"The {scriptName} script specified to run does not exist.");
+        }
+        if (!typeof(IScriptIntInt).IsInstanceOfType(script))
+        {
+            throw new Exception($"The {scriptName} script specified to run does not implement the {nameof(IScriptIntInt)} interface.");
+        }
+        IScriptIntInt castedScript = (IScriptIntInt)script;
+        castedScript.ExecuteScriptIntInt(value1, value2);
+    }
+
     public bool RunSuccessfulScript(string scriptName)
     {
         // Get the script from the singleton repository.
@@ -9885,7 +9754,7 @@ internal class SaveGame
                 {
                     // Teleport the player up to 100 squares
                     MsgPrint("You hit a teleport trap!");
-                    TeleportPlayer(100);
+                    RunScriptInt(nameof(TeleportSelfScript), 100);
                     break;
                 }
             case "FireTrap":

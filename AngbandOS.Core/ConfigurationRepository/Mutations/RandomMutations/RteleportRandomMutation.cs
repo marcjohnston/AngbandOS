@@ -29,6 +29,6 @@ internal class RteleportRandomMutation : Mutation
         SaveGame.Disturb(false);
         SaveGame.MsgPrint("Your position suddenly seems very uncertain...");
         SaveGame.MsgPrint(null);
-        SaveGame.TeleportPlayer(40);
+        SaveGame.RunScriptInt(nameof(TeleportSelfScript), 40);
     }
 }

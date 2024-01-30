@@ -63,10 +63,16 @@ internal abstract class Spell : IGetKey<string>
     public abstract void Cast();
 
     /// <summary>
-    /// 
+    /// This event is thrown when a spell cast fails by chance. When a spell cast fails, a second roll is made with the same failure
+    /// chance to determine if a failure cast should happen.
     /// </summary>
     public virtual void CastFailed() { }
 
+    /// <summary>
+    /// Returns a percentage of failure chance for a character if the specified class when casting the specific spell.  This value
+    /// will be in the range of 0-100.  100% means, the spell will fail every time.  0% means, the spell will never fail.
+    /// </summary>
+    /// <returns></returns>
     public int FailureChance() 
     {
         BaseCharacterClass baseCharacterClass = SaveGame.BaseCharacterClass;
@@ -178,139 +184,18 @@ internal abstract class Spell : IGetKey<string>
 
     protected void DoWildDeathMagic(int spell, int subCategory)
     {
-        if (SaveGame.Rng.DieRoll(100) < spell)
+        if (subCategory == 3 && SaveGame.Rng.DieRoll(2) == 1)
         {
-            if (subCategory == 3 && SaveGame.Rng.DieRoll(2) == 1)
-            {
-                SaveGame.Monsters[0].SanityBlast(true);
-            }
-            else
-            {
-                SaveGame.MsgPrint("It hurts!");
-                SaveGame.TakeHit(SaveGame.Rng.DiceRoll(subCategory + 1, 6), "a miscast Death spell");
-                if (spell > 15 && SaveGame.Rng.DieRoll(6) == 1 && !SaveGame.HasHoldLife)
-                {
-                    SaveGame.LoseExperience(spell * 250);
-                }
-            }
+            SaveGame.Monsters[0].SanityBlast(true);
         }
-    }
-
-    protected void DoWildChaoticMagic(int spell)
-    {
-        if (SaveGame.Rng.DieRoll(100) >= spell)
+        else
         {
-            return;
-        }
-
-        SaveGame.MsgPrint("You produce a chaotic effect!");
-        switch (SaveGame.Rng.DieRoll(spell) + SaveGame.Rng.DieRoll(8) + 1) // TODO: Convert this to WeightedRandom
-        {
-            case 1:
-            case 2:
-            case 3:
-                SaveGame.TeleportPlayer(10);
-                break;
-
-            case 4:
-            case 5:
-            case 6:
-                SaveGame.TeleportPlayer(100);
-                break;
-
-            case 7:
-            case 8:
-                SaveGame.TeleportPlayer(200);
-                break;
-
-            case 9:
-            case 10:
-            case 11:
-                SaveGame.UnlightArea(10, 3);
-                break;
-
-            case 12:
-            case 13:
-            case 14:
-                SaveGame.LightArea(SaveGame.Rng.DiceRoll(2, 3), 2);
-                break;
-
-            case 15:
-                SaveGame.RunScript(nameof(DestroyAdjacentDoorsScript));
-                break;
-
-            case 16:
-            case 17:
-                SaveGame.WallBreaker();
-                break;
-
-            case 18:
-                SaveGame.SleepMonstersTouch();
-                break;
-
-            case 19:
-            case 20:
-                SaveGame.TrapCreation();
-                break;
-
-            case 21:
-            case 22:
-                SaveGame.DoorCreation();
-                break;
-
-            case 23:
-            case 24:
-            case 25:
-                SaveGame.AggravateMonsters();
-                break;
-
-            case 26:
-                SaveGame.Earthquake(SaveGame.MapY, SaveGame.MapX, 5);
-                break;
-
-            case 27:
-            case 28:
-                SaveGame.Dna.GainMutation();
-                break;
-
-            case 29:
-            case 30:
-                SaveGame.ApplyDisenchant();
-                break;
-
-            case 31:
-                SaveGame.LoseAllInfo();
-                break;
-
-            case 32:
-                SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(ChaosProjectile)), 0, spell + 5, 1 + (spell / 10));
-                break;
-
-            case 33:
-                SaveGame.WallStone();
-                break;
-
-            case 34:
-            case 35:
-                int counter = 0;
-                while (counter++ < 8)
-                {
-                    SaveGame.SummonSpecific(SaveGame.MapY, SaveGame.MapX, SaveGame.Difficulty * 3 / 2, SaveGame.GetRandomBizarreMonsterSelector());
-                }
-                break;
-
-            case 36:
-            case 37:
-                SaveGame.ActivateHiSummon();
-                break;
-
-            case 38:
-                SaveGame.SummonReaver();
-                break;
-
-            default:
-                SaveGame.ActivateDreadCurse();
-                break;
+            SaveGame.MsgPrint("It hurts!");
+            SaveGame.TakeHit(SaveGame.Rng.DiceRoll(subCategory + 1, 6), "a miscast Death spell");
+            if (spell > 15 && SaveGame.Rng.DieRoll(6) == 1 && !SaveGame.HasHoldLife)
+            {
+                SaveGame.LoseExperience(spell * 250);
+            }
         }
     }
 }

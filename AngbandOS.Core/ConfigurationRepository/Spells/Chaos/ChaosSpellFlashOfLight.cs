@@ -18,7 +18,7 @@ internal class ChaosSpellFlashOfLight : Spell
 
     public override void CastFailed()
     {
-        DoWildChaoticMagic(2);
+        SaveGame.RunScriptInt(nameof(WildChaoticMagicScript), 2);
     }
 
     public override string Name => "Flash of Light";

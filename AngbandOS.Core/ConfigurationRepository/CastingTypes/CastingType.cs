@@ -91,19 +91,19 @@ internal class CastingType : IGetKey<string>
         SaveGame.HandleStuff();
 
         // Allow the player to select the spell.
-        if (!SaveGame.GetSpell(out Spell? sPtr, SaveGame.BaseCharacterClass.SpellCastingType.CastVerb, oPtr, true))
+        if (!SaveGame.GetSpell(out Spell? spell, SaveGame.BaseCharacterClass.SpellCastingType.CastVerb, oPtr, true))
         {
             SaveGame.MsgPrint($"You don't know any {prayer}s in that book.");
             return;
         }
 
         // Check to see if the user cancelled the selection.
-        if (sPtr == null)
+        if (spell == null)
         {
             return;
         }
 
-        if (sPtr.ManaCost > SaveGame.Mana)
+        if (spell.ManaCost > SaveGame.Mana)
         {
             string cast = SaveGame.BaseCharacterClass.SpellCastingType.CastVerb;
             SaveGame.MsgPrint($"You do not have enough mana to {cast} this {prayer}.");
@@ -112,30 +112,35 @@ internal class CastingType : IGetKey<string>
                 return;
             }
         }
-        int chance = sPtr.FailureChance();
-        if (SaveGame.Rng.RandomLessThan(100) < chance)
+        int failureChance = spell.FailureChance();
+        if (SaveGame.Rng.DieRoll(100) <= failureChance)
         {
             SaveGame.MsgPrint($"You failed to get the {prayer} off!");
-            sPtr.CastFailed();
+
+            // Reroll again with the save failure chance to run the failed script.
+            if (SaveGame.Rng.DieRoll(100) <= failureChance)
+            {
+                spell.CastFailed();
+            }
         }
         else
         {
-            sPtr.Cast();
-            if (!sPtr.Worked)
+            spell.Cast();
+            if (!spell.Worked)
             {
-                int e = sPtr.FirstCastExperience;
-                sPtr.Worked = true;
-                SaveGame.GainExperience(e * sPtr.Level);
+                int e = spell.FirstCastExperience;
+                spell.Worked = true;
+                SaveGame.GainExperience(e * spell.Level);
             }
         }
         SaveGame.EnergyUse = 100;
-        if (sPtr.ManaCost <= SaveGame.Mana)
+        if (spell.ManaCost <= SaveGame.Mana)
         {
-            SaveGame.Mana -= sPtr.ManaCost;
+            SaveGame.Mana -= spell.ManaCost;
         }
         else
         {
-            int oops = sPtr.ManaCost - SaveGame.Mana;
+            int oops = spell.ManaCost - SaveGame.Mana;
             SaveGame.Mana = 0;
             SaveGame.FractionalMana = 0;
             SaveGame.MsgPrint("You faint from the effort!");

@@ -25,7 +25,7 @@ internal class CorporealSpellMoveBody : Spell
         {
             SaveGame.MsgPrint("You fail to concentrate correctly!");
             SaveGame.Energy -= 100;
-            SaveGame.TeleportPlayer(10);
+            SaveGame.RunScriptInt(nameof(TeleportSelfScript), 10);
         }
         else
         {

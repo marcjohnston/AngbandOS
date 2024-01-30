@@ -18,7 +18,7 @@ internal class ChaosSpellTeleportOther : Spell
 
     public override void CastFailed()
     {
-        DoWildChaoticMagic(13);
+        SaveGame.RunScriptInt(nameof(WildChaoticMagicScript), 13);
     }
 
     public override string Name => "Teleport Other";
