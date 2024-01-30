@@ -9,26 +9,22 @@ using AngbandOS.Core.Interface.Definitions;
 
 namespace AngbandOS.Core.StoreCommands;
 
+[Serializable]
+
 internal class GenericStoreCommand : StoreCommand
 {
-    private readonly string _key;
-    private readonly char _keyChar;
-    private readonly string _description;
-    private readonly string[]? _validStoreNames;
-    private readonly string _executeScriptName;
-
     public GenericStoreCommand(SaveGame saveGame, StoreCommandDefinition storeCommandDefinition) : base(saveGame)
     {
-        _key = storeCommandDefinition.Key;
-        _keyChar = storeCommandDefinition.KeyChar;
-        _description = storeCommandDefinition.Description;
-        _validStoreNames = storeCommandDefinition.ValidStoreNames;
-        _executeScriptName = storeCommandDefinition.ExecuteScriptName;
+        Key = storeCommandDefinition.Key;
+        KeyChar = storeCommandDefinition.KeyChar;
+        Description = storeCommandDefinition.Description;
+        ValidStoreNames = storeCommandDefinition.ValidStoreNames;
+        ExecuteScriptName = storeCommandDefinition.ExecuteScriptName;
     }
 
-    public override string Key => _key;
-    public override char KeyChar => _keyChar;
-    public override string Description => _description;
-    protected override string[]? ValidStoreNames => _validStoreNames;
-    protected override string ExecuteScriptName => _executeScriptName;
+    public override string Key { get; }
+    public override char KeyChar { get; }
+    public override string Description { get; }
+    protected override string[]? ValidStoreNames { get; }
+    protected override string ExecuteScriptName { get; }
 }

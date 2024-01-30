@@ -12,24 +12,18 @@ namespace AngbandOS.Core.Towns;
 [Serializable]
 internal class GenericTown : Town
 {
-    private readonly string _key;
-    private readonly int _housePrice;
-    private readonly string _name;
-    private readonly char _char;
-    private readonly string[] _storeFactoryNames;
-
     public GenericTown(SaveGame saveGame, TownDefinition townDefinition) : base(saveGame)
     {
-        _key = townDefinition.Key;
-        _housePrice = townDefinition.HousePrice;
-        _name = townDefinition.Name;
-        _char = townDefinition.Char;
-        _storeFactoryNames = townDefinition.StoreFactoryNames;
+        Key = townDefinition.Key;
+        HousePrice = townDefinition.HousePrice;
+        Name = townDefinition.Name;
+        Char = townDefinition.Char;
+        StoreFactoryNames = townDefinition.StoreFactoryNames;
     }
 
-    public override string Key => _key;
-    public override int HousePrice => _housePrice;
-    public override string Name => _name;
-    public override char Char => _char;
-    protected override string[] StoreFactoryNames => _storeFactoryNames;
+    public override string Key { get; }
+    public override int HousePrice { get; }
+    public override string Name { get; }
+    public override char Char { get; }
+    protected override string[] StoreFactoryNames { get; }
 }

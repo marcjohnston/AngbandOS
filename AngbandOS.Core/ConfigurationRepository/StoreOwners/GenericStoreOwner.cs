@@ -12,28 +12,22 @@ namespace AngbandOS.Core.ConfigurationRepository.StoreOwners;
 [Serializable]
 internal class GenericStoreOwner : StoreOwner
 {
-    private readonly string _key;
-    private readonly int _maxCost;
-    private readonly int _minInflate;
-    private readonly string _ownerName;
-    private readonly string? _ownerRaceName;
-
     public GenericStoreOwner(SaveGame saveGame, StoreOwnerDefinition storeOwner) : base(saveGame)
     {
-        _key = storeOwner.Key;
-        _maxCost = storeOwner.MaxCost;
-        _minInflate = storeOwner.MinInflate;
-        _ownerName = storeOwner.OwnerName;
-        _ownerRaceName = storeOwner.OwnerRaceName;
+        Key = storeOwner.Key;
+        MaxCost = storeOwner.MaxCost;
+        MinInflate = storeOwner.MinInflate;
+        OwnerName = storeOwner.OwnerName;
+        OwnerRaceName = storeOwner.OwnerRaceName;
     }
 
-    public override string Key => _key;
+    public override string Key { get; }
 
-    public override int MaxCost => _maxCost;
+    public override int MaxCost { get; }
 
-    public override int MinInflate => _minInflate;
+    public override int MinInflate { get; }
 
-    public override string OwnerName => _ownerName;
+    public override string OwnerName { get; }
 
-    protected override string? OwnerRaceName => _ownerRaceName;
+    protected override string? OwnerRaceName { get; }
 }

@@ -9,26 +9,21 @@ using AngbandOS.Core.Interface.Definitions;
 
 namespace AngbandOS.Core.Commands;
 
+[Serializable]
 internal class GenericGameCommand : GameCommand
 {
-    private readonly string _key;
-    private readonly char _keyChar;
-    private readonly bool _isEnabled;
-    private readonly int? _repeat;
-    private readonly string _executeScriptName;
-
     public GenericGameCommand(SaveGame saveGame, GameCommandDefinition gameCommandDefinition) : base(saveGame)
     {
-        _key = gameCommandDefinition.Key;
-        _keyChar = gameCommandDefinition.KeyChar;
-        _isEnabled = gameCommandDefinition.IsEnabled;
-        _repeat = gameCommandDefinition.Repeat;
-        _executeScriptName = gameCommandDefinition.ExecuteScriptName;
+        Key = gameCommandDefinition.Key;
+        KeyChar = gameCommandDefinition.KeyChar;
+        IsEnabled = gameCommandDefinition.IsEnabled;
+        Repeat = gameCommandDefinition.Repeat;
+        ExecuteScriptName = gameCommandDefinition.ExecuteScriptName;
     }
 
-    public override string Key => _key;
-    public override char KeyChar => _keyChar;
-    public override bool IsEnabled => _isEnabled;
-    public override int? Repeat => _repeat;
-    protected override string ExecuteScriptName => _executeScriptName;
+    public override string Key { get; }
+    public override char KeyChar { get; }
+    public override bool IsEnabled { get; }
+    public override int? Repeat { get; }
+    protected override string ExecuteScriptName { get; }
 }

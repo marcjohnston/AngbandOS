@@ -36,4 +36,5 @@ public class Configuration
 
     public GameCommandDefinition[]? GameCommands { get; set; } = null;
     public StoreCommandDefinition[]? StoreCommands { get; set; } = null;
+    public HelpGroupDefinition[]? HelpGroups { get; set; } = null;
 }
