@@ -13,7 +13,7 @@ internal class CorporealSpellMutateBody : Spell
     private CorporealSpellMutateBody(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.Dna.GainMutation();
+        SaveGame.RunScript(nameof(MutateBodyScript));
     }
 
     public override string Name => "Mutate Body";

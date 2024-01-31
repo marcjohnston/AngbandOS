@@ -4237,7 +4237,7 @@ internal class SaveGame
                         MsgPrint("You resist the effects!");
                         break;
                     }
-                    TeleportPlayerLevel();
+                    RunScript(nameof(TeleportLevelScript));
                     break;
                 }
             case 7:
@@ -4730,38 +4730,6 @@ internal class SaveGame
 
     public void DetectObjectsMagic()
     {
-        bool detect = false;
-        for (int y = 1; y < CurHgt - 1; y++)
-        {
-            for (int x = 1; x < CurWid - 1; x++)
-            {
-                GridTile cPtr = Grid[y][x];
-                foreach (Item oPtr in cPtr.Items)
-                {
-                    if (!PanelContains(y, x))
-                    {
-                        continue;
-                    }
-                    ItemTypeEnum tv = oPtr.Category;
-                    if (oPtr.FixedArtifact != null || oPtr.IsRare() || string.IsNullOrEmpty(oPtr.RandartName) == false ||
-                        tv == ItemTypeEnum.Amulet || tv == ItemTypeEnum.Ring || tv == ItemTypeEnum.Staff ||
-                        tv == ItemTypeEnum.Wand || tv == ItemTypeEnum.Rod || tv == ItemTypeEnum.Scroll ||
-                        tv == ItemTypeEnum.Potion || tv == ItemTypeEnum.LifeBook || tv == ItemTypeEnum.SorceryBook ||
-                        tv == ItemTypeEnum.NatureBook || tv == ItemTypeEnum.ChaosBook || tv == ItemTypeEnum.DeathBook ||
-                        tv == ItemTypeEnum.CorporealBook || tv == ItemTypeEnum.TarotBook || tv == ItemTypeEnum.FolkBook ||
-                        oPtr.BonusArmorClass > 0 || oPtr.BonusToHit + oPtr.BonusDamage > 0)
-                    {
-                        oPtr.Marked = true;
-                        RedrawSingleLocation(y, x);
-                        detect = true;
-                    }
-                }
-            }
-        }
-        if (detect)
-        {
-            MsgPrint("You sense the presence of magic objects!");
-        }
     }
 
     public bool DetectObjectsNormal()
@@ -5939,10 +5907,6 @@ internal class SaveGame
         Screen.Restore(savedScreen);
     }
 
-    public void SelfKnowledge()
-    {
-    }
-
     public bool SetAcidDestroy(Item oPtr)
     {
         if (!oPtr.HatesAcid())
@@ -6096,51 +6060,6 @@ internal class SaveGame
     {
         ProjectionFlag flg = ProjectionFlag.ProjectBeam | ProjectionFlag.ProjectKill;
         return TargetedProject(SingletonRepository.Projectiles.Get(nameof(TeleportAwayAllProjectile)), dir, Constants.MaxSight * 5, flg);
-    }
-
-    public void TeleportPlayerLevel()
-    {
-        if (HasAntiTeleport)
-        {
-            MsgPrint("A mysterious force prevents you from teleporting!");
-            return;
-        }
-        var downDesc = CurDungeon.Tower ? "You rise up through the ceiling." : "You sink through the floor.";
-        var upDesc = CurDungeon.Tower ? "You sink through the floor." : "You rise up through the ceiling.";
-        if (CurrentDepth <= 0)
-        {
-            MsgPrint(downDesc);
-            DoCmdSaveGame(true);
-            CurrentDepth++;
-            NewLevelFlag = true;
-        }
-        else if (IsQuest(CurrentDepth) ||
-                 CurrentDepth >= CurDungeon.MaxLevel)
-        {
-            MsgPrint(upDesc);
-            DoCmdSaveGame(true);
-            CurrentDepth--;
-            NewLevelFlag = true;
-        }
-        else if (Rng.RandomLessThan(100) < 50)
-        {
-            MsgPrint(upDesc);
-            DoCmdSaveGame(true);
-            CurrentDepth--;
-            NewLevelFlag = true;
-            CameFrom = LevelStart.StartRandom;
-        }
-        else
-        {
-            MsgPrint(downDesc);
-            DoCmdSaveGame(true);
-            CurrentDepth++;
-            NewLevelFlag = true;
-        }
-        DoCmdSaveGame(true);
-        CurrentDepth++;
-        NewLevelFlag = true;
-        PlaySound(SoundEffectEnum.TeleportLevel);
     }
 
     public void TeleportPlayerTo(int ny, int nx)

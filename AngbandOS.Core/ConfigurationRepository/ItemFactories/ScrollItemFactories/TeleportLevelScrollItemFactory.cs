@@ -23,7 +23,7 @@ internal class TeleportLevelScrollItemFactory : ScrollItemFactory
     public override int Weight => 5;
     public override void Read(ReadScrollEvent eventArgs)
     {
-        SaveGame.TeleportPlayerLevel();
+        SaveGame.RunScript(nameof(TeleportLevelScript));
         eventArgs.Identified = true;
     }
     public override Item CreateItem() => new Item(SaveGame, this);

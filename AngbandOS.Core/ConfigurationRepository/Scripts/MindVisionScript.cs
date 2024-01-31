@@ -5,17 +5,19 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Spells.Sorcery;
+namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class SorcerySpellTeleportLevel : Spell
+internal class MindVisionScript : Script, IScript
 {
-    private SorcerySpellTeleportLevel(SaveGame saveGame) : base(saveGame) { }
-    public override void Cast()
-    {
-        SaveGame.RunScript(nameof(TeleportLevelScript));
-    }
+    private MindVisionScript(SaveGame saveGame) : base(saveGame) { }
 
-    public override string Name => "Teleport Level";
-    
+    /// <summary>
+    /// Add between 25 and 55 turns of telepathy.
+    /// </summary>
+    /// <returns></returns>
+    public void ExecuteScript()
+    {
+        SaveGame.TimedTelepathy.AddTimer(SaveGame.Rng.DieRoll(30) + 25);
+    }
 }

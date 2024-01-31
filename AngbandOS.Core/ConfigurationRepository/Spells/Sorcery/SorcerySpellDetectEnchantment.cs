@@ -13,7 +13,7 @@ internal class SorcerySpellDetectEnchantment : Spell
     private SorcerySpellDetectEnchantment(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.DetectObjectsMagic();
+        SaveGame.RunScript(nameof(DetectMagicalObjectsScript));
     }
 
     public override string Name => "Detect Enchantment";

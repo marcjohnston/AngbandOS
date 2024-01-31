@@ -13,7 +13,7 @@ internal class CorporealSpellStoneSkin : Spell
     private CorporealSpellStoneSkin(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.TimedStoneskin.AddTimer(SaveGame.Rng.DieRoll(20) + 30);
+        SaveGame.RunScript(nameof(StoneskinTimedAction));
     }
 
     public override string Name => "Stone Skin";

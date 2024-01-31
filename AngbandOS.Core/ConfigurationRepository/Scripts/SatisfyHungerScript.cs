@@ -5,17 +5,19 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Spells.Sorcery;
+namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class SorcerySpellTeleportLevel : Spell
+internal class SatisfyHungerScript : Script, IScript
 {
-    private SorcerySpellTeleportLevel(SaveGame saveGame) : base(saveGame) { }
-    public override void Cast()
-    {
-        SaveGame.RunScript(nameof(TeleportLevelScript));
-    }
+    private SatisfyHungerScript(SaveGame saveGame) : base(saveGame) { }
 
-    public override string Name => "Teleport Level";
-    
+    /// <summary>
+    /// Maximizes the satiation.
+    /// </summary>
+    /// <returns></returns>
+    public void ExecuteScript()
+    {
+        SaveGame.SetFood(Constants.PyFoodMax - 1);
+    }
 }

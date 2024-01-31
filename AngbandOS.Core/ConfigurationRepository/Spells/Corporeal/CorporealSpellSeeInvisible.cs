@@ -13,7 +13,7 @@ internal class CorporealSpellSeeInvisible : Spell
     private CorporealSpellSeeInvisible(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.TimedSeeInvisibility.AddTimer(SaveGame.Rng.DieRoll(24) + 24);
+        SaveGame.RunScript(nameof(SeeInvisibilityScript));
     }
 
     public override string Name => "See Invisible";

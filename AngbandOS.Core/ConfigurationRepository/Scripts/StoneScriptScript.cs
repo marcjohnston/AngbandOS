@@ -5,17 +5,19 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Spells.Sorcery;
+namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class SorcerySpellTeleportLevel : Spell
+internal class StoneScriptScript : Script, IScript
 {
-    private SorcerySpellTeleportLevel(SaveGame saveGame) : base(saveGame) { }
-    public override void Cast()
-    {
-        SaveGame.RunScript(nameof(TeleportLevelScript));
-    }
+    private StoneScriptScript(SaveGame saveGame) : base(saveGame) { }
 
-    public override string Name => "Teleport Level";
-    
+    /// <summary>
+    /// Adds between 30 and 50 turns of stoneskin.
+    /// </summary>
+    /// <returns></returns>
+    public void ExecuteScript()
+    {
+        SaveGame.TimedStoneskin.AddTimer(SaveGame.Rng.DieRoll(20) + 30);
+    }
 }

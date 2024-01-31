@@ -31,7 +31,7 @@ internal class TeleportLevelMonsterSpell : MonsterSpell
         }
         else
         {
-            saveGame.TeleportPlayerLevel();
+            SaveGame.RunScript(nameof(TeleportLevelScript));
         }
         saveGame.UpdateSmartLearn(monster, SaveGame.SingletonRepository.SpellResistantDetections.Get(nameof(NexusSpellResistantDetection)));
     }

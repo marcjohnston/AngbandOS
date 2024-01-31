@@ -13,24 +13,7 @@ internal class CorporealSpellMoveBody : Spell
     private CorporealSpellMoveBody(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.MsgPrint("You focus your Chi. Choose a destination.");
-        if (!SaveGame.TgtPt(out int ii, out int ij))
-        {
-            return;
-        }
-        SaveGame.Energy -= 60 - SaveGame.ExperienceLevel;
-        if (!SaveGame.GridPassableNoCreature(ij, ii) || SaveGame.Grid[ij][ii].TileFlags.IsSet(GridTile.InVault) ||
-            SaveGame.Distance(ij, ii, SaveGame.MapY, SaveGame.MapX) > SaveGame.ExperienceLevel + 2 ||
-            SaveGame.Rng.RandomLessThan(SaveGame.ExperienceLevel * SaveGame.ExperienceLevel / 2) == 0)
-        {
-            SaveGame.MsgPrint("You fail to concentrate correctly!");
-            SaveGame.Energy -= 100;
-            SaveGame.RunScriptInt(nameof(TeleportSelfScript), 10);
-        }
-        else
-        {
-            SaveGame.TeleportPlayerTo(ij, ii);
-        }
+        SaveGame.RunScript(nameof(MoveBodyScript));
     }
 
     public override string Name => "Move Body";

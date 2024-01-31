@@ -5,17 +5,19 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Spells.Sorcery;
+namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class SorcerySpellTeleportLevel : Spell
+internal class MutateBodyScript : Script, IScript
 {
-    private SorcerySpellTeleportLevel(SaveGame saveGame) : base(saveGame) { }
-    public override void Cast()
-    {
-        SaveGame.RunScript(nameof(TeleportLevelScript));
-    }
+    private MutateBodyScript(SaveGame saveGame) : base(saveGame) { }
 
-    public override string Name => "Teleport Level";
-    
+    /// <summary>
+    /// Gains a mutation.
+    /// </summary>
+    /// <returns></returns>
+    public void ExecuteScript()
+    {
+        SaveGame.Dna.GainMutation();
+    }
 }

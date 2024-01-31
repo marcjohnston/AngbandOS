@@ -13,12 +13,7 @@ internal class CorporealSpellRestoreBody : Spell
     private CorporealSpellRestoreBody(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.TryRestoringAbilityScore(Ability.Strength);
-        SaveGame.TryRestoringAbilityScore(Ability.Intelligence);
-        SaveGame.TryRestoringAbilityScore(Ability.Wisdom);
-        SaveGame.TryRestoringAbilityScore(Ability.Dexterity);
-        SaveGame.TryRestoringAbilityScore(Ability.Constitution);
-        SaveGame.TryRestoringAbilityScore(Ability.Charisma);
+        SaveGame.RunScript(nameof(RestoreBodyScript));
     }
 
     public override string Name => "Restore Body";
