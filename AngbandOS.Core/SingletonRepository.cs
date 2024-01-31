@@ -195,38 +195,4 @@ internal class SingletonRepository
         LoadRepositoryItems();
         BindRepositoryItems();
     }
-
-    /// <summary>
-    /// Persist the entities to the core persistent storage medium.  This method is only being used to generate database entities from objects.
-    /// </summary>
-    /// <param name="corePersistentStorage"></param>
-    private void Persist<T>(ICorePersistentStorage corePersistentStorage, RepositoryCollection<T> repository, string name) where T : IToJson
-    {
-        // Check to see if there is a name.  If not, then the persist isn't enabled for this repository.
-        if (name != null)
-        {
-            List<string> jsonEntityList = new();
-            foreach (T item in repository)
-            {
-                string serializedEntity = item.ToJson();
-                if (serializedEntity == null)
-                {
-                    throw new Exception("Entity did not serialize.");
-                }
-                jsonEntityList.Add(serializedEntity);
-            }
-            corePersistentStorage.PersistEntities(name, jsonEntityList.ToArray());
-        }
-    }
-
-    public void Persist(ICorePersistentStorage corePersistentStorage)
-    {
-        //Persist<StoreOwner>(corePersistentStorage, StoreOwners, nameof(StoreOwner));
-        //Persist<Town>(corePersistentStorage, Towns, nameof(Town));
-        //Persist<GameCommand>(corePersistentStorage, GameCommands, nameof(GameCommand));
-        //Persist<StoreCommand>(corePersistentStorage, StoreCommands, nameof(StoreCommand));
-        //Persist<HelpGroup>(corePersistentStorage, HelpGroups, nameof(HelpGroup));
-        //Persist<MonsterRace>(corePersistentStorage, MonsterRaces, nameof(MonsterRace));
-        //Persist<Symbol>(corePersistentStorage, Symbols, nameof(Symbol));
-    }
 }

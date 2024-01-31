@@ -130,7 +130,7 @@ internal class SaveGame
     /// Represents the object responsible for saving the game, when needed.  If null, the game cannot be saved.
     /// </summary>
     [NonSerialized]
-    private ICorePersistentStorage? CorePersistentStorage;
+    public ICorePersistentStorage? CorePersistentStorage;
 
     /// <summary>
     /// Returns the object that the calling application provided to be used to connect the game input and output to the calling application.
@@ -1713,13 +1713,6 @@ internal class SaveGame
         KeyQueue = new char[ConsoleViewPort.MaximumKeyQueueLength];
         Screen = new Screen(consoleViewPort);
         MapMovementKeys();
-
-        // Write the entities to persistent storage.
-        if (CorePersistentStorage != null)
-        {
-            // TODO: Comment the persistance of the entities.
-            SingletonRepository.Persist(CorePersistentStorage);
-        }
 
         FullScreenOverlay = true;
         SetBackground(BackgroundImageEnum.Normal);

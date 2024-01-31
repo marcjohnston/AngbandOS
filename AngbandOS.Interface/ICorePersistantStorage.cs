@@ -27,5 +27,4 @@ public interface ICorePersistentStorage
 
     void PersistEntities(string repositoryName, string[] jsonEntities);
     string[] RetrieveEntities(string repositoryName);
-
 }
