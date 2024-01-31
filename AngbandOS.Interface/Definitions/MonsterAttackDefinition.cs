@@ -5,8 +5,9 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core;
+namespace AngbandOS.Core.Interface.Definitions;
 
+[Serializable]
 public class MonsterAttackDefinition
 {
     public string MethodName { get; set; }
@@ -17,9 +18,9 @@ public class MonsterAttackDefinition
     public MonsterAttackDefinition() { }
     public MonsterAttackDefinition(string methodName, string? effectName, int dice, int sides)
     {
-        MethodName = methodName; 
-        EffectName = effectName; 
-        DDice = dice; 
+        MethodName = methodName;
+        EffectName = effectName;
+        DDice = dice;
         DSide = sides;
     }
 }

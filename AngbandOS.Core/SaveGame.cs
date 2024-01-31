@@ -17958,14 +17958,11 @@ internal class SaveGame
         Monster mPtr = Monsters[mIdx];
         MonsterRace rPtr = mPtr.Race;
         var knowledge = rPtr.Knowledge;
-        if (rPtr.Attacks != null)
+        for (var m = 0; m < rPtr.Attacks.Length; m++)
         {
-            for (var m = 0; m < rPtr.Attacks.Length; m++)
+            if (rPtr.Attacks[m].Effect != null || rPtr.Attacks[m].Method != null)
             {
-                if (rPtr.Attacks[m].Effect != null || rPtr.Attacks[m].Method != null)
-                {
-                    knowledge.RBlows[m] = Constants.MaxUchar;
-                }
+                knowledge.RBlows[m] = Constants.MaxUchar;
             }
         }
         knowledge.RProbed = true;

@@ -1250,124 +1250,121 @@ internal class Monster : IItemContainer
             saveGame.MsgPrint("You hear noise.");
         }
         // We have up to four attacks
-        if (Race.Attacks != null)
+        for (int attackNumber = 0; attackNumber < Race.Attacks.Length; attackNumber++)
         {
-            for (int attackNumber = 0; attackNumber < Race.Attacks.Length; attackNumber++)
+            bool visible = false;
+            bool obvious = false;
+            int damage = 0;
+            AttackEffect? effect = Race.Attacks[attackNumber].Effect;
+            Attack method = Race.Attacks[attackNumber].Method;
+            int dDice = Race.Attacks[attackNumber].DDice;
+            int dSide = Race.Attacks[attackNumber].DSide;
+            // Can't attack ourselves
+            if (target == this)
             {
-                bool visible = false;
-                bool obvious = false;
-                int damage = 0;
-                AttackEffect? effect = Race.Attacks[attackNumber].Effect;
-                Attack method = Race.Attacks[attackNumber].Method;
-                int dDice = Race.Attacks[attackNumber].DDice;
-                int dSide = Race.Attacks[attackNumber].DSide;
-                // Can't attack ourselves
-                if (target == this)
+                break;
+            }
+            // If the target has moved, abort
+            if (target.MapX != xSaver || target.MapY != ySaver)
+            {
+                break;
+            }
+            // If we blinked away after stealing on a previous attack, abort
+            if (blinked)
+            {
+                break;
+            }
+            if (IsVisible)
+            {
+                visible = true;
+            }
+
+            // If we hit the monster, describe the type of hit
+            if (effect == null || CheckHitMonsterVersusMonster(effect.Power, monsterLevel, armorClass))
+            {
+                saveGame.Disturb(true);
+                if (method.AttackAwakensTarget)
                 {
-                    break;
-                }
-                // If the target has moved, abort
-                if (target.MapX != xSaver || target.MapY != ySaver)
-                {
-                    break;
-                }
-                // If we blinked away after stealing on a previous attack, abort
-                if (blinked)
-                {
-                    break;
-                }
-                if (IsVisible)
-                {
-                    visible = true;
+                    target.SleepLevel = 0;
                 }
 
-                // If we hit the monster, describe the type of hit
-                if (effect == null || CheckHitMonsterVersusMonster(effect.Power, monsterLevel, armorClass))
+                // Display the attack description
+                if (IsVisible || target.IsVisible)
                 {
-                    saveGame.Disturb(true);
-                    if (method.AttackAwakensTarget)
-                    {
-                        target.SleepLevel = 0;
-                    }
-
-                    // Display the attack description
-                    if (IsVisible || target.IsVisible)
-                    {
-                        saveGame.MsgPrint($"{monsterName} {method.MonsterAction(target)}.");
-                    }
-                    obvious = true;
-                    damage = SaveGame.Rng.DiceRoll(dDice, dSide);
-                    // Default to a missile attack
-                    Projectile pt = saveGame.SingletonRepository.Projectiles.Get(nameof(MissileProjectile));
-                    // Choose the correct type of attack to display, as well as any other special
-                    // effects for the attack
-                    if (effect == null)
-                    {
-                        damage = 0;
-                        pt = null;
-                    }
-                    else
-                        effect.ApplyToMonster(this, armorClass, ref damage, ref pt, ref blinked);
-
-                    // Implement the attack as a projectile
-                    if (pt != null)
-                    {
-                        saveGame.Project(GetMonsterIndex(), 0, target.MapY, target.MapX, damage, pt, ProjectionFlag.ProjectKill | ProjectionFlag.ProjectStop);
-                        // If we touched the target we might get burned or zapped
-                        if (method.AttackTouchesTarget)
-                        {
-                            if (targetRace.FireAura && !Race.ImmuneFire)
-                            {
-                                if (IsVisible || target.IsVisible)
-                                {
-                                    // Auras prevent us blinking away
-                                    blinked = false;
-                                    // The player may see and learn that the target has the aura
-                                    saveGame.MsgPrint($"{monsterName} is suddenly very hot!");
-                                    if (target.IsVisible)
-                                    {
-                                        targetRace.Knowledge.Characteristics.FireAura = true;
-                                    }
-                                }
-                                saveGame.Project(targetIndex, 0, MapY, MapX, SaveGame.Rng.DiceRoll(1 + (targetRace.Level / 26), 1 + (targetRace.Level / 17)), saveGame.SingletonRepository.Projectiles.Get(nameof(FireProjectile)), ProjectionFlag.ProjectKill | ProjectionFlag.ProjectStop);
-                            }
-                            if (targetRace.LightningAura && !Race.ImmuneLightning)
-                            {
-                                if (IsVisible || target.IsVisible)
-                                {
-                                    // Auras prevent us blinking away
-                                    blinked = false;
-                                    // The player may see and learn that the target has the aura
-                                    saveGame.MsgPrint($"{monsterName} gets zapped!");
-                                    if (target.IsVisible)
-                                    {
-                                        targetRace.Knowledge.Characteristics.LightningAura = true;
-                                    }
-                                }
-                                saveGame.Project(targetIndex, 0, MapY, MapX, SaveGame.Rng.DiceRoll(1 + (targetRace.Level / 26), 1 + (targetRace.Level / 17)),
-                                    saveGame.SingletonRepository.Projectiles.Get(nameof(ElecProjectile)), ProjectionFlag.ProjectKill | ProjectionFlag.ProjectStop);
-                            }
-                        }
-                    }
+                    saveGame.MsgPrint($"{monsterName} {method.MonsterAction(target)}.");
+                }
+                obvious = true;
+                damage = SaveGame.Rng.DiceRoll(dDice, dSide);
+                // Default to a missile attack
+                Projectile pt = saveGame.SingletonRepository.Projectiles.Get(nameof(MissileProjectile));
+                // Choose the correct type of attack to display, as well as any other special
+                // effects for the attack
+                if (effect == null)
+                {
+                    damage = 0;
+                    pt = null;
                 }
                 else
+                    effect.ApplyToMonster(this, armorClass, ref damage, ref pt, ref blinked);
+
+                // Implement the attack as a projectile
+                if (pt != null)
                 {
-                    // We didn't hit, so just let the player know that if we are visible
-                    if (method.AttackTouchesTarget && !method.RendersMissMessage && IsVisible)
+                    saveGame.Project(GetMonsterIndex(), 0, target.MapY, target.MapX, damage, pt, ProjectionFlag.ProjectKill | ProjectionFlag.ProjectStop);
+                    // If we touched the target we might get burned or zapped
+                    if (method.AttackTouchesTarget)
                     {
-                        saveGame.Disturb(false);
-                        saveGame.MsgPrint($"{monsterName} misses {target.Name}.");
+                        if (targetRace.FireAura && !Race.ImmuneFire)
+                        {
+                            if (IsVisible || target.IsVisible)
+                            {
+                                // Auras prevent us blinking away
+                                blinked = false;
+                                // The player may see and learn that the target has the aura
+                                saveGame.MsgPrint($"{monsterName} is suddenly very hot!");
+                                if (target.IsVisible)
+                                {
+                                    targetRace.Knowledge.Characteristics.FireAura = true;
+                                }
+                            }
+                            saveGame.Project(targetIndex, 0, MapY, MapX, SaveGame.Rng.DiceRoll(1 + (targetRace.Level / 26), 1 + (targetRace.Level / 17)), saveGame.SingletonRepository.Projectiles.Get(nameof(FireProjectile)), ProjectionFlag.ProjectKill | ProjectionFlag.ProjectStop);
+                        }
+                        if (targetRace.LightningAura && !Race.ImmuneLightning)
+                        {
+                            if (IsVisible || target.IsVisible)
+                            {
+                                // Auras prevent us blinking away
+                                blinked = false;
+                                // The player may see and learn that the target has the aura
+                                saveGame.MsgPrint($"{monsterName} gets zapped!");
+                                if (target.IsVisible)
+                                {
+                                    targetRace.Knowledge.Characteristics.LightningAura = true;
+                                }
+                            }
+                            saveGame.Project(targetIndex, 0, MapY, MapX, SaveGame.Rng.DiceRoll(1 + (targetRace.Level / 26), 1 + (targetRace.Level / 17)),
+                                saveGame.SingletonRepository.Projectiles.Get(nameof(ElecProjectile)), ProjectionFlag.ProjectKill | ProjectionFlag.ProjectStop);
+                        }
                     }
                 }
-                // If the player saw what happened, they know more abouyt what attacks we have
-                if (visible)
+            }
+            else
+            {
+                // We didn't hit, so just let the player know that if we are visible
+                if (method.AttackTouchesTarget && !method.RendersMissMessage && IsVisible)
                 {
-                    if (obvious || damage != 0 || Race.Knowledge.RBlows[attackNumber] > 10)
+                    saveGame.Disturb(false);
+                    saveGame.MsgPrint($"{monsterName} misses {target.Name}.");
+                }
+            }
+            // If the player saw what happened, they know more abouyt what attacks we have
+            if (visible)
+            {
+                if (obvious || damage != 0 || Race.Knowledge.RBlows[attackNumber] > 10)
+                {
+                    if (Race.Knowledge.RBlows[attackNumber] < Constants.MaxUchar)
                     {
-                        if (Race.Knowledge.RBlows[attackNumber] < Constants.MaxUchar)
-                        {
-                            Race.Knowledge.RBlows[attackNumber]++;
-                        }
+                        Race.Knowledge.RBlows[attackNumber]++;
                     }
                 }
             }
@@ -2699,238 +2696,235 @@ internal class Monster : IItemContainer
         string monsterDescription = IndefiniteVisibleName;
         bool blinked = false;
         // Monsters get up to four attacks
-        if (Race.Attacks != null)
+        for (attackNumber = 0; attackNumber < Race.Attacks.Length; attackNumber++)
         {
-            for (attackNumber = 0; attackNumber < Race.Attacks.Length; attackNumber++)
+            bool visible = false;
+            bool obvious = false;
+            int power = 0;
+            int damage = 0;
+            AttackEffect? effect = Race.Attacks[attackNumber].Effect;
+            Attack method = Race.Attacks[attackNumber].Method;
+            int damageDice = Race.Attacks[attackNumber].DDice;
+            int damageSides = Race.Attacks[attackNumber].DSide;
+
+            // Stop if player is dead or gone
+            if (!alive || saveGame.IsDead || saveGame.NewLevelFlag)
             {
-                bool visible = false;
-                bool obvious = false;
-                int power = 0;
-                int damage = 0;
-                AttackEffect? effect = Race.Attacks[attackNumber].Effect;
-                Attack method = Race.Attacks[attackNumber].Method;
-                int damageDice = Race.Attacks[attackNumber].DDice;
-                int damageSides = Race.Attacks[attackNumber].DSide;
-
-                // Stop if player is dead or gone
-                if (!alive || saveGame.IsDead || saveGame.NewLevelFlag)
-                {
-                    break;
-                }
-                if (IsVisible)
-                {
-                    visible = true;
-                }
-                // Get the basic attack power from the attack type
-                if (effect != null)
-                {
-                    power = effect.Power;
-                }
+                break;
+            }
+            if (IsVisible)
+            {
+                visible = true;
+            }
+            // Get the basic attack power from the attack type
+            if (effect != null)
+            {
+                power = effect.Power;
+            }
                 
-                // Check if the monster actually hits us
-                if (effect == null || MonsterCheckHitOnPlayer(SaveGame, power, monsterLevel))
+            // Check if the monster actually hits us
+            if (effect == null || MonsterCheckHitOnPlayer(SaveGame, power, monsterLevel))
+            {
+                saveGame.Disturb(true);
+                // Protection From Evil might repel the attack
+                if (saveGame.TimedProtectionFromEvil.TurnsRemaining > 0 && Race.Evil && saveGame.ExperienceLevel >= monsterLevel && SaveGame.Rng.RandomLessThan(100) + saveGame.ExperienceLevel > 50)
                 {
-                    saveGame.Disturb(true);
-                    // Protection From Evil might repel the attack
-                    if (saveGame.TimedProtectionFromEvil.TurnsRemaining > 0 && Race.Evil && saveGame.ExperienceLevel >= monsterLevel && SaveGame.Rng.RandomLessThan(100) + saveGame.ExperienceLevel > 50)
+                    if (IsVisible)
                     {
-                        if (IsVisible)
-                        {
-                            // If it does, then they player knows the monster is evil
-                            Race.Knowledge.Characteristics.Evil = true;
-                        }
-                        saveGame.MsgPrint($"{monsterName} is repelled.");
-                        continue;
+                        // If it does, then they player knows the monster is evil
+                        Race.Knowledge.Characteristics.Evil = true;
                     }
+                    saveGame.MsgPrint($"{monsterName} is repelled.");
+                    continue;
+                }
 
-                    // Print the message
-                    string action = method.PlayerAction;
-                    if (!string.IsNullOrEmpty(action))
-                    {
-                        saveGame.MsgPrint($"{monsterName} {action}.");
-                    }
+                // Print the message
+                string action = method.PlayerAction;
+                if (!string.IsNullOrEmpty(action))
+                {
+                    saveGame.MsgPrint($"{monsterName} {action}.");
+                }
+                obvious = true;
+                // Work out base damage done by the attack
+                damage = SaveGame.Rng.DiceRoll(damageDice, damageSides);
+                // Apply any modifiers to the damage
+                if (effect == null)
+                {
                     obvious = true;
-                    // Work out base damage done by the attack
-                    damage = SaveGame.Rng.DiceRoll(damageDice, damageSides);
-                    // Apply any modifiers to the damage
-                    if (effect == null)
-                    {
-                        obvious = true;
-                        damage = 0;
-                    }
-                    else
-                    {
-                        effect.ApplyToPlayer(monsterLevel, GetMonsterIndex(), armorClass, monsterDescription, this, ref obvious, ref damage, ref blinked);
-                    }
-
-                    // Be nice and don't let us be both stunned and cut by the same blow
-                    bool doCut = method.AttackCutsTarget;
-                    bool doStun = method.AttackStunsTarget;
-                    if (doCut && doStun)
-                    {
-                        if (SaveGame.Rng.RandomLessThan(100) < 50)
-                        {
-                            doCut = false;
-                        }
-                        else
-                        {
-                            doStun = false;
-                        }
-                    }
-                    int critLevel;
-                    if (doCut)
-                    {
-                        // Get how bad the hit was based on the actual damage out of the possible damage
-                        critLevel = MonsterCritical(damageDice, damageSides, damage);
-                        int k;
-                        switch (critLevel)
-                        {
-                            case 0:
-                                k = 0;
-                                break;
-
-                            case 1:
-                                k = SaveGame.Rng.DieRoll(5);
-                                break;
-
-                            case 2:
-                                k = SaveGame.Rng.DieRoll(5) + 5;
-                                break;
-
-                            case 3:
-                                k = SaveGame.Rng.DieRoll(20) + 20;
-                                break;
-
-                            case 4:
-                                k = SaveGame.Rng.DieRoll(50) + 50;
-                                break;
-
-                            case 5:
-                                k = SaveGame.Rng.DieRoll(100) + 100;
-                                break;
-
-                            case 6:
-                                k = 300;
-                                break;
-
-                            default:
-                                k = 500;
-                                break;
-                        }
-                        if (k != 0)
-                        {
-                            saveGame.TimedBleeding.AddTimer(k);
-                        }
-                    }
-                    if (doStun)
-                    {
-                        // Get how bad the hit was based on the actual damage out of the possible damage
-                        critLevel = MonsterCritical(damageDice, damageSides, damage);
-                        int k;
-                        switch (critLevel)
-                        {
-                            case 0:
-                                k = 0;
-                                break;
-
-                            case 1:
-                                k = SaveGame.Rng.DieRoll(5);
-                                break;
-
-                            case 2:
-                                k = SaveGame.Rng.DieRoll(10) + 10;
-                                break;
-
-                            case 3:
-                                k = SaveGame.Rng.DieRoll(20) + 20;
-                                break;
-
-                            case 4:
-                                k = SaveGame.Rng.DieRoll(30) + 30;
-                                break;
-
-                            case 5:
-                                k = SaveGame.Rng.DieRoll(40) + 40;
-                                break;
-
-                            case 6:
-                                k = 100;
-                                break;
-
-                            default:
-                                k = 200;
-                                break;
-                        }
-                        if (k != 0)
-                        {
-                            saveGame.TimedStun.AddTimer(k);
-                        }
-                    }
-                    // If the monster touched us then it may take damage from our defensive abilities
-                    if (touched)
-                    {
-                        if (saveGame.HasFireShield && alive)
-                        {
-                            if (!Race.ImmuneFire)
-                            {
-                                saveGame.MsgPrint($"{monsterName} is suddenly very hot!");
-                                if (saveGame.DamageMonster(GetMonsterIndex(), SaveGame.Rng.DiceRoll(2, 6), out fear,
-                                    " turns into a pile of ash."))
-                                {
-                                    blinked = false;
-                                    alive = false;
-                                }
-                            }
-                            else
-                            {
-                                // The player noticed that the monster took no fire damage
-                                if (IsVisible)
-                                {
-                                    Race.Knowledge.Characteristics.ImmuneFire = true;
-                                }
-                            }
-                        }
-                        if (saveGame.HasLightningShield && alive)
-                        {
-                            if (!Race.ImmuneLightning)
-                            {
-                                saveGame.MsgPrint($"{monsterName} gets zapped!");
-                                if (saveGame.DamageMonster(GetMonsterIndex(), SaveGame.Rng.DiceRoll(2, 6), out fear,
-                                    " turns into a pile of cinder."))
-                                {
-                                    blinked = false;
-                                    alive = false;
-                                }
-                            }
-                            else
-                            {
-                                // The player noticed that the monster took no lightning damage
-                                if (IsVisible)
-                                {
-                                    Race.Knowledge.Characteristics.ImmuneLightning = true;
-                                }
-                            }
-                        }
-                    }
+                    damage = 0;
                 }
                 else
                 {
-                    // It missed us, so give us the appropriate message
-                    if (method.RendersMissMessage && IsVisible)
+                    effect.ApplyToPlayer(monsterLevel, GetMonsterIndex(), armorClass, monsterDescription, this, ref obvious, ref damage, ref blinked);
+                }
+
+                // Be nice and don't let us be both stunned and cut by the same blow
+                bool doCut = method.AttackCutsTarget;
+                bool doStun = method.AttackStunsTarget;
+                if (doCut && doStun)
+                {
+                    if (SaveGame.Rng.RandomLessThan(100) < 50)
                     {
-                        saveGame.Disturb(true);
-                        saveGame.MsgPrint($"{monsterName} misses you.");
+                        doCut = false;
+                    }
+                    else
+                    {
+                        doStun = false;
                     }
                 }
-                // If the player saw the monster, they now know more about what attacks it can do
-                if (visible)
+                int critLevel;
+                if (doCut)
                 {
-                    if (obvious || damage != 0 || Race.Knowledge.RBlows[attackNumber] > 10)
+                    // Get how bad the hit was based on the actual damage out of the possible damage
+                    critLevel = MonsterCritical(damageDice, damageSides, damage);
+                    int k;
+                    switch (critLevel)
                     {
-                        if (Race.Knowledge.RBlows[attackNumber] < Constants.MaxUchar)
+                        case 0:
+                            k = 0;
+                            break;
+
+                        case 1:
+                            k = SaveGame.Rng.DieRoll(5);
+                            break;
+
+                        case 2:
+                            k = SaveGame.Rng.DieRoll(5) + 5;
+                            break;
+
+                        case 3:
+                            k = SaveGame.Rng.DieRoll(20) + 20;
+                            break;
+
+                        case 4:
+                            k = SaveGame.Rng.DieRoll(50) + 50;
+                            break;
+
+                        case 5:
+                            k = SaveGame.Rng.DieRoll(100) + 100;
+                            break;
+
+                        case 6:
+                            k = 300;
+                            break;
+
+                        default:
+                            k = 500;
+                            break;
+                    }
+                    if (k != 0)
+                    {
+                        saveGame.TimedBleeding.AddTimer(k);
+                    }
+                }
+                if (doStun)
+                {
+                    // Get how bad the hit was based on the actual damage out of the possible damage
+                    critLevel = MonsterCritical(damageDice, damageSides, damage);
+                    int k;
+                    switch (critLevel)
+                    {
+                        case 0:
+                            k = 0;
+                            break;
+
+                        case 1:
+                            k = SaveGame.Rng.DieRoll(5);
+                            break;
+
+                        case 2:
+                            k = SaveGame.Rng.DieRoll(10) + 10;
+                            break;
+
+                        case 3:
+                            k = SaveGame.Rng.DieRoll(20) + 20;
+                            break;
+
+                        case 4:
+                            k = SaveGame.Rng.DieRoll(30) + 30;
+                            break;
+
+                        case 5:
+                            k = SaveGame.Rng.DieRoll(40) + 40;
+                            break;
+
+                        case 6:
+                            k = 100;
+                            break;
+
+                        default:
+                            k = 200;
+                            break;
+                    }
+                    if (k != 0)
+                    {
+                        saveGame.TimedStun.AddTimer(k);
+                    }
+                }
+                // If the monster touched us then it may take damage from our defensive abilities
+                if (touched)
+                {
+                    if (saveGame.HasFireShield && alive)
+                    {
+                        if (!Race.ImmuneFire)
                         {
-                            Race.Knowledge.RBlows[attackNumber]++;
+                            saveGame.MsgPrint($"{monsterName} is suddenly very hot!");
+                            if (saveGame.DamageMonster(GetMonsterIndex(), SaveGame.Rng.DiceRoll(2, 6), out fear,
+                                " turns into a pile of ash."))
+                            {
+                                blinked = false;
+                                alive = false;
+                            }
                         }
+                        else
+                        {
+                            // The player noticed that the monster took no fire damage
+                            if (IsVisible)
+                            {
+                                Race.Knowledge.Characteristics.ImmuneFire = true;
+                            }
+                        }
+                    }
+                    if (saveGame.HasLightningShield && alive)
+                    {
+                        if (!Race.ImmuneLightning)
+                        {
+                            saveGame.MsgPrint($"{monsterName} gets zapped!");
+                            if (saveGame.DamageMonster(GetMonsterIndex(), SaveGame.Rng.DiceRoll(2, 6), out fear,
+                                " turns into a pile of cinder."))
+                            {
+                                blinked = false;
+                                alive = false;
+                            }
+                        }
+                        else
+                        {
+                            // The player noticed that the monster took no lightning damage
+                            if (IsVisible)
+                            {
+                                Race.Knowledge.Characteristics.ImmuneLightning = true;
+                            }
+                        }
+                    }
+                }
+            }
+            else
+            {
+                // It missed us, so give us the appropriate message
+                if (method.RendersMissMessage && IsVisible)
+                {
+                    saveGame.Disturb(true);
+                    saveGame.MsgPrint($"{monsterName} misses you.");
+                }
+            }
+            // If the player saw the monster, they now know more about what attacks it can do
+            if (visible)
+            {
+                if (obvious || damage != 0 || Race.Knowledge.RBlows[attackNumber] > 10)
+                {
+                    if (Race.Knowledge.RBlows[attackNumber] < Constants.MaxUchar)
+                    {
+                        Race.Knowledge.RBlows[attackNumber]++;
                     }
                 }
             }

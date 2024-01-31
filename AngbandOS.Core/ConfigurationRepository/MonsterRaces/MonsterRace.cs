@@ -5,12 +5,14 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using System.Text.Json;
+
 namespace AngbandOS.Core.MonsterRaces;
 
 [Serializable]
 internal abstract class MonsterRace : IMonsterCharacteristics, IGetKey<string>, IToJson
 {
-    #region Serialized Members
+    #region 102 Serialized Members
 
     public virtual string Key => GetType().Name;
 
@@ -382,15 +384,18 @@ internal abstract class MonsterRace : IMonsterCharacteristics, IGetKey<string>, 
 
         // Bind the monster attacks.
         List<MonsterAttack> attackList = new();
-        foreach (MonsterAttackDefinition monsterAttackDefinition in AttackDefinitions)
+        if (AttackDefinitions != null)
         {
-            Attack attack = SaveGame.SingletonRepository.Attacks.Get(monsterAttackDefinition.MethodName);
-            AttackEffect? attackEffect = null;
-            if (monsterAttackDefinition.EffectName != null)
+            foreach (MonsterAttackDefinition monsterAttackDefinition in AttackDefinitions)
             {
-                 attackEffect = SaveGame.SingletonRepository.AttackEffects.Get(monsterAttackDefinition.EffectName);
+                Attack attack = SaveGame.SingletonRepository.Attacks.Get(monsterAttackDefinition.MethodName);
+                AttackEffect? attackEffect = null;
+                if (monsterAttackDefinition.EffectName != null)
+                {
+                    attackEffect = SaveGame.SingletonRepository.AttackEffects.Get(monsterAttackDefinition.EffectName);
+                }
+                attackList.Add(new MonsterAttack(attack, attackEffect, monsterAttackDefinition.DDice, monsterAttackDefinition.DSide));
             }
-            attackList.Add(new MonsterAttack(attack, attackEffect, monsterAttackDefinition.DDice, monsterAttackDefinition.DSide));
         }
         Attacks = attackList.ToArray();
     }
@@ -442,9 +447,11 @@ internal abstract class MonsterRace : IMonsterCharacteristics, IGetKey<string>, 
 
 
     /// <summary>
-    /// Returns all of the attacks that the monster can perform in a single round.
+    /// Returns all of the attacks that the monster can perform in a single round.  This property is bound from the AttackDefinitions
+    /// during the bind phase.  If there are no attacks, the array will be empty.  Null is not supported.
     /// </summary>
-    public MonsterAttack[]? Attacks { get; private set; } = null;
+    public MonsterAttack[] Attacks { get; private set; }
+
     /// <summary>
     /// The number of hit points the monster has (click to update).
     /// </summary>
@@ -530,7 +537,114 @@ internal abstract class MonsterRace : IMonsterCharacteristics, IGetKey<string>, 
 
     public string ToJson()
     {
-        throw new NotImplementedException();
+        MonsterRaceDefinition monsterRaceDefinition = new()
+        {
+            // 102 Properties
+            Key = Key,
+            SpellNames = SpellNames,
+            SymbolName = SymbolName,
+            Color = Color,
+            Name = Name,
+            Animal = Animal,
+            ArmorClass = ArmorClass,
+            AttackDefinitions = AttackDefinitions,
+            AttrAny = AttrAny,
+            AttrClear = AttrClear,
+            AttrMulti = AttrMulti,
+            BashDoor = BashDoor,
+            CharClear = CharClear,
+            CharMulti = CharMulti,
+            ColdBlood = ColdBlood,
+            Cthuloid = Cthuloid,
+            Demon = Demon,
+            Description = Description,
+            Dragon = Dragon,
+            Drop_1D2 = Drop_1D2,
+            Drop_2D2 = Drop_2D2,
+            Drop_3D2 = Drop_3D2,
+            Drop_4D2 = Drop_4D2,
+            Drop60 = Drop60,
+            Drop90 = Drop90,
+            DropGood = DropGood,
+            DropGreat = DropGreat,
+            EldritchHorror = EldritchHorror,
+            EmptyMind = EmptyMind,
+            Escorted = Escorted,
+            EscortsGroup = EscortsGroup,
+            Evil = Evil,
+            Female = Female,
+            FireAura = FireAura,
+            ForceMaxHp = ForceMaxHp,
+            ForceSleep = ForceSleep,
+            FreqInate = FreqInate,
+            FreqSpell = FreqSpell,
+            FriendlyName = FriendlyName,
+            Friends = Friends,
+            Giant = Giant,
+            Good = Good,
+            GreatOldOne = GreatOldOne,
+            Hdice = Hdice,
+            Hside = Hside,
+            HurtByCold = HurtByCold,
+            HurtByFire = HurtByFire,
+            HurtByLight = HurtByLight,
+            HurtByRock = HurtByRock,
+            ImmuneAcid = ImmuneAcid,
+            ImmuneCold = ImmuneCold,
+            ImmuneConfusion = ImmuneConfusion,
+            ImmuneFear = ImmuneFear,
+            ImmuneFire = ImmuneFire,
+            ImmuneLightning = ImmuneLightning,
+            ImmunePoison = ImmunePoison,
+            ImmuneSleep = ImmuneSleep,
+            ImmuneStun = ImmuneStun,
+            Invisible = Invisible,
+            KillBody = KillBody,
+            KillItem = KillItem,
+            KillWall = KillWall,
+            LevelFound = LevelFound,
+            LightningAura = LightningAura,
+            Male = Male,
+            Mexp = Mexp,
+            MoveBody = MoveBody,
+            Multiply = Multiply,
+            NeverAttack = NeverAttack,
+            NeverMove = NeverMove,
+            Nonliving = Nonliving,
+            NoticeRange = NoticeRange,
+            OnlyDropGold = OnlyDropGold,
+            OnlyDropItem = OnlyDropItem,
+            OpenDoor = OpenDoor,
+            Orc = Orc,
+            PassWall = PassWall,
+            Powerful = Powerful,
+            RandomMove25 = RandomMove25,
+            RandomMove50 = RandomMove50,
+            Rarity = Rarity,
+            Reflecting = Reflecting,
+            Regenerate = Regenerate,
+            ResistDisenchant = ResistDisenchant,
+            ResistNether = ResistNether,
+            ResistNexus = ResistNexus,
+            ResistPlasma = ResistPlasma,
+            ResistTeleport = ResistTeleport,
+            ResistWater = ResistWater,
+            Shapechanger = Shapechanger,
+            Sleep = Sleep,
+            Smart = Smart,
+            Speed = Speed,
+            SplitName1 = SplitName1,
+            SplitName2 = SplitName2,
+            SplitName3 = SplitName3,
+            Stupid = Stupid,
+            TakeItem = TakeItem,
+            Troll = Troll,
+            Undead = Undead,
+            Unique = Unique,
+            WeirdMind = WeirdMind
+        };
+        return JsonSerializer.Serialize<MonsterRaceDefinition>(monsterRaceDefinition);
     }
     #endregion
+
 }

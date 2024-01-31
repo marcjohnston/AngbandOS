@@ -77,3 +77,5 @@ global using AngbandOS.Core.TimedActions;
 global using AngbandOS.Core.Towns;
 global using AngbandOS.Core.Vaults;
 global using AngbandOS.Core.WizardCommands;
+
+global using AngbandOS.Core.Interface.Definitions;

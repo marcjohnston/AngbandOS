@@ -59,14 +59,11 @@ internal class MonsterKnowledge
         if (SaveGame.IsWizard)
         {
             knowledge = new MonsterKnowledge(SaveGame, _monsterType);
-            if (_monsterType.Attacks != null)
+            for (m = 0; m < _monsterType.Attacks.Length; m++)
             {
-                for (m = 0; m < _monsterType.Attacks.Length; m++)
+                if (_monsterType.Attacks[m].Effect != null || _monsterType.Attacks[m].Method != null)
                 {
-                    if (_monsterType.Attacks[m].Effect != null || _monsterType.Attacks[m].Method != null)
-                    {
-                        knowledge.RBlows[m] = Constants.MaxUchar;
-                    }
+                    knowledge.RBlows[m] = Constants.MaxUchar;
                 }
             }
             knowledge.RProbed = true;
@@ -1213,71 +1210,65 @@ internal class MonsterKnowledge
             _description.Append(". ");
         }
         n = 0;
-        if (_monsterType.Attacks != null)
+        for (m = 0; m < _monsterType.Attacks.Length; m++)
         {
-            for (m = 0; m < _monsterType.Attacks.Length; m++)
+            if (_monsterType.Attacks[m].Method == null)
             {
-                if (_monsterType.Attacks[m].Method == null)
-                {
-                    continue;
-                }
-                if (knowledge.RBlows[m] != 0)
-                {
-                    n++;
-                }
+                continue;
+            }
+            if (knowledge.RBlows[m] != 0)
+            {
+                n++;
             }
         }
         int r = 0;
-        if (_monsterType.Attacks != null)
+        for (m = 0; m < _monsterType.Attacks.Length; m++)
         {
-            for (m = 0; m < _monsterType.Attacks.Length; m++)
+            if (_monsterType.Attacks[m].Method == null)
             {
-                if (_monsterType.Attacks[m].Method == null)
-                {
-                    continue;
-                }
-                if (knowledge.RBlows[m] == 0)
-                {
-                    continue;
-                }
-                Attack method = _monsterType.Attacks[m].Method;
-                AttackEffect? effect = _monsterType.Attacks[m].Effect;
-                int d1 = _monsterType.Attacks[m].DDice;
-                int d2 = _monsterType.Attacks[m].DSide;
-                p = method.KnowledgeAction;
-                if (effect == null)
-                    q = null;
-                else
-                    q = effect.Description;
-
-                if (r == 0)
-                {
-                    _description.Append(_wdHeCap[msex]).Append(" can ");
-                }
-                else if (r < n - 1)
-                {
-                    _description.Append(", ");
-                }
-                else
-                {
-                    _description.Append(", and ");
-                }
-                if (string.IsNullOrEmpty(p))
-                {
-                    p = "do something weird";
-                }
-                _description.Append(p);
-                if (!string.IsNullOrEmpty(q))
-                {
-                    _description.Append(" to ");
-                    _description.Append(q);
-                    if (d1 != 0 && d2 != 0 && KnowDamage(_monsterType, knowledge, m))
-                    {
-                        _description.Append(" for ").Append(d1).Append('d').Append(d2).Append(" damage");
-                    }
-                }
-                r++;
+                continue;
             }
+            if (knowledge.RBlows[m] == 0)
+            {
+                continue;
+            }
+            Attack method = _monsterType.Attacks[m].Method;
+            AttackEffect? effect = _monsterType.Attacks[m].Effect;
+            int d1 = _monsterType.Attacks[m].DDice;
+            int d2 = _monsterType.Attacks[m].DSide;
+            p = method.KnowledgeAction;
+            if (effect == null)
+                q = null;
+            else
+                q = effect.Description;
+
+            if (r == 0)
+            {
+                _description.Append(_wdHeCap[msex]).Append(" can ");
+            }
+            else if (r < n - 1)
+            {
+                _description.Append(", ");
+            }
+            else
+            {
+                _description.Append(", and ");
+            }
+            if (string.IsNullOrEmpty(p))
+            {
+                p = "do something weird";
+            }
+            _description.Append(p);
+            if (!string.IsNullOrEmpty(q))
+            {
+                _description.Append(" to ");
+                _description.Append(q);
+                if (d1 != 0 && d2 != 0 && KnowDamage(_monsterType, knowledge, m))
+                {
+                    _description.Append(" for ").Append(d1).Append('d').Append(d2).Append(" damage");
+                }
+            }
+            r++;
         }
         if (r != 0)
         {

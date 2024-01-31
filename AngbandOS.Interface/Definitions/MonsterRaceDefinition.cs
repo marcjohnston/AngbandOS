@@ -1,0 +1,357 @@
+﻿// AngbandOS: 2022 Marc Johnston
+//
+// This game is released under the “Angband License”, defined as: “© 1997 Ben Harrison, James E.
+// Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
+// and not for profit purposes provided that this copyright and statement are included in all such
+// copies. Other copyrights may also apply.”
+
+namespace AngbandOS.Core.Interface.Definitions;
+
+/// <summary>
+/// 
+/// </summary>
+/// <remarks>
+/// 102 Properties
+/// </remarks>
+[Serializable]
+public class MonsterRaceDefinition
+{
+    public virtual string Key { get; set; }
+
+    public virtual string[]? SpellNames { get; set; } = null;
+
+    /// <summary>
+    /// Returns the key for the symbol to be used.  The actual Symbol object is bound to the Symbol property during the
+    /// bind phase.
+    /// </summary>
+    public virtual string SymbolName { get; set; }
+
+    /// <summary>
+    /// The color to display the monster as.
+    /// </summary>
+    public virtual ColorEnum Color { get; set; } = ColorEnum.White;
+
+    /// <summary>
+    /// A unique identifier for the entity
+    /// </summary>
+    public virtual string Name { get; set; }
+
+    /// <summary>
+    /// The monster is an animal.
+    /// </summary>
+    public virtual bool Animal { get; set; } = false;
+
+    /// <summary>
+    /// The monsters armor class.
+    /// </summary>
+    public virtual int ArmorClass { get; set; }
+
+    /// <summary>
+    /// Returns an array of the definitions for the attacks abilities of the monster; or null, if the monster cannot attack.  Returns
+    /// null, by default.
+    /// </summary>
+    public virtual MonsterAttackDefinition[]? AttackDefinitions { get; set; } = null;
+
+    /// <summary>
+    /// The monster's color can be anything (if 'AttrMulti' is set).
+    /// </summary>
+    public virtual bool AttrAny { get; set; } = false;
+
+    /// <summary>
+    /// The monster is transparent.
+    /// </summary>
+    public virtual bool AttrClear { get; set; } = false;
+
+    /// <summary>
+    /// The monster changes color.
+    /// </summary>
+    public virtual bool AttrMulti { get; set; } = false;
+
+    /// <summary>
+    /// The monster can break open doors.
+    /// </summary>
+    public virtual bool BashDoor { get; set; } = false;
+
+    /// <summary>
+    /// The monster is never seen, even with see invisible.
+    /// </summary>
+    public virtual bool CharClear { get; set; } = false;
+
+    /// <summary>
+    /// The monster is changes shape randomly.
+    /// </summary>
+    public virtual bool CharMulti { get; set; } = false;
+
+    public virtual bool ColdBlood { get; set; } = false;
+
+    public virtual bool Cthuloid { get; set; } = false;
+
+
+    public virtual bool Demon { get; set; } = false;
+
+    /// <summary>
+    /// The descriptive text.
+    /// </summary>
+    public virtual string Description { get; set; }
+
+    public virtual bool Dragon { get; set; } = false;
+
+    /// <summary>
+    /// The monster drops 1d2 items.
+    /// </summary>
+    public virtual bool Drop_1D2 { get; set; } = false;
+
+    /// <summary>
+    /// The monster drops 2d2 items.
+    /// </summary>
+    public virtual bool Drop_2D2 { get; set; } = false;
+
+    /// <summary>
+    /// The monster drops 3d2 items.
+    /// </summary>
+    public virtual bool Drop_3D2 { get; set; } = false;
+
+    /// <summary>
+    /// The monster drops 4d2 items.
+    /// </summary>
+    public virtual bool Drop_4D2 { get; set; } = false;
+
+    /// <summary>
+    /// The monster drops an item 60% of the time.
+    /// </summary>
+    public virtual bool Drop60 { get; set; } = false;
+
+    /// <summary>
+    /// The monster drops an item 90% of the time.
+    /// </summary>
+    public virtual bool Drop90 { get; set; } = false;
+
+    /// <summary>
+    /// The monster drops good items.
+    /// </summary>
+    public virtual bool DropGood { get; set; } = false;
+
+    /// <summary>
+    /// The monster drops great items.
+    /// </summary>
+    public virtual bool DropGreat { get; set; } = false;
+
+    public virtual bool EldritchHorror { get; set; } = false;
+
+    public virtual bool EmptyMind { get; set; } = false;
+
+    /// <summary>
+    /// The monster comes with minions of the same character.
+    /// </summary>
+    public virtual bool Escorted { get; set; } = false;
+
+    /// <summary>
+    /// The monster's minions come in groups (this doesn't force minions if 'Escort' isn't set).
+    /// </summary>
+    public virtual bool EscortsGroup { get; set; } = false;
+
+    public virtual bool Evil { get; set; } = false;
+
+    /// <summary>
+    /// The monster should use feminine pronouns.
+    /// </summary>
+    public virtual bool Female { get; set; } = false;
+
+    /// <summary>
+    /// The monster has an aura of fire around it.
+    /// </summary>
+    public virtual bool FireAura { get; set; } = false;
+
+    /// The monster has maximum hit points.
+    /// </summary>
+    public virtual bool ForceMaxHp { get; set; } = false;
+
+    /// <summary>
+    /// The monster always starts asleep.
+    /// </summary>
+    public virtual bool ForceSleep { get; set; } = false;
+
+    /// <summary>
+    /// The 1-in-X frequency with which the monster uses special abilities.
+    /// </summary>
+    public virtual int FreqInate { get; set; }
+
+    /// <summary>
+    /// The 1-in-X frequency with which the monster uses spells.
+    /// </summary>
+    public virtual int FreqSpell { get; set; }
+
+    /// <summary>
+    /// The name that the game shows the player (may have duplicates).
+    /// </summary>
+    public virtual string FriendlyName { get; set; }
+
+    /// <summary>
+    /// The monster comes with friends of the same race.
+    /// </summary>
+    public virtual bool Friends { get; set; } = false;
+
+    public virtual bool Giant { get; set; } = false;
+
+    public virtual bool Good { get; set; } = false;
+
+    public virtual bool GreatOldOne { get; set; } = false;
+
+    /// <summary>
+    /// The number of hit dice the monster has.
+    /// </summary>
+    public virtual int Hdice { get; set; }
+
+    /// <summary>
+    /// The number of sides of the monster's hit dice.
+    /// </summary>
+    public virtual int Hside { get; set; }
+
+    public virtual bool HurtByCold { get; set; } = false;
+
+    public virtual bool HurtByFire { get; set; } = false;
+
+    public virtual bool HurtByLight { get; set; } = false;
+
+    public virtual bool HurtByRock { get; set; } = false;
+
+    public virtual bool ImmuneAcid { get; set; } = false;
+
+    public virtual bool ImmuneCold { get; set; } = false;
+
+    public virtual bool ImmuneConfusion { get; set; } = false;
+
+    public virtual bool ImmuneFear { get; set; } = false;
+
+    public virtual bool ImmuneFire { get; set; } = false;
+
+    public virtual bool ImmuneLightning { get; set; } = false;
+
+    public virtual bool ImmunePoison { get; set; } = false;
+
+    public virtual bool ImmuneSleep { get; set; } = false;
+
+    public virtual bool ImmuneStun { get; set; } = false;
+
+    public virtual bool Invisible { get; set; } = false;
+
+    public virtual bool KillBody { get; set; } = false;
+
+    public virtual bool KillItem { get; set; } = false;
+
+    public virtual bool KillWall { get; set; } = false;
+
+    /// <summary>
+    /// The level on which the monster is normally found.
+    /// </summary>
+    public virtual int LevelFound { get; set; }
+
+    /// <summary>
+    /// The monster has an aura of electricity around it.
+    /// </summary>
+    public virtual bool LightningAura { get; set; } = false;
+
+
+    public virtual bool Male { get; set; } = false;
+
+    /// <summary>
+    /// The experience value for killing one of these.
+    /// </summary>
+    public virtual int Mexp { get; set; }
+
+    public virtual bool MoveBody { get; set; } = false;
+
+    public virtual bool Multiply { get; set; } = false;
+    public virtual bool NeverAttack { get; set; } = false;
+
+    public virtual bool NeverMove { get; set; } = false;
+
+    public virtual bool Nonliving { get; set; } = false;
+
+    /// <summary>
+    /// The distance at which the monster notices the player.
+    /// </summary>
+    public virtual int NoticeRange { get; set; }
+
+    public virtual bool OnlyDropGold { get; set; } = false;
+
+    public virtual bool OnlyDropItem { get; set; } = false;
+
+    public virtual bool OpenDoor { get; set; } = false;
+
+    public virtual bool Orc { get; set; } = false;
+
+    public virtual bool PassWall { get; set; } = false;
+
+    public virtual bool Powerful { get; set; } = false;
+
+    public virtual bool RandomMove25 { get; set; } = false;
+
+    public virtual bool RandomMove50 { get; set; } = false;
+
+    /// <summary>
+    /// The rarity with which the monster is usually found.
+    /// </summary>
+    public virtual int Rarity { get; set; }
+
+    public virtual bool Reflecting { get; set; } = false;
+
+    public virtual bool Regenerate { get; set; } = false;
+
+    public virtual bool ResistDisenchant { get; set; } = false;
+
+    public virtual bool ResistNether { get; set; } = false;
+
+    public virtual bool ResistNexus { get; set; } = false;
+
+    public virtual bool ResistPlasma { get; set; } = false;
+
+    public virtual bool ResistTeleport { get; set; } = false;
+
+    public virtual bool ResistWater { get; set; } = false;
+
+    public virtual bool Shapechanger { get; set; } = false;
+
+    /// <summary>
+    /// How deeply the monster sleeps.
+    /// </summary>
+    public virtual int Sleep { get; set; }
+
+    /// <summary>
+    /// Returns true, if the monster is smart.  When badly injured, the monster will want to prioritise spells that disable the
+    /// player, summon help, or let it escape over spells that do direct damage.
+    /// </summary>
+    public virtual bool Smart { get; set; } = false;
+
+    /// <summary>
+    /// how fast the monster moves (110 = normal speed, higher is better).
+    /// </summary>
+    public virtual int Speed { get; set; }
+
+    /// <summary>
+    /// The shortened name of the monster.
+    /// </summary>
+    public virtual string SplitName1 { get; set; }
+
+    /// <summary>
+    /// The shortened name of the monster.
+    /// </summary>
+    public virtual string SplitName2 { get; set; }
+
+    /// <summary>
+    /// The shortened name of the monster.
+    /// </summary>
+    public virtual string SplitName3 { get; set; }
+
+    public virtual bool Stupid { get; set; } = false;
+
+    public virtual bool TakeItem { get; set; } = false;
+
+    public virtual bool Troll { get; set; } = false;
+
+    public virtual bool Undead { get; set; } = false;
+
+    public virtual bool Unique { get; set; } = false;
+
+    public virtual bool WeirdMind { get; set; } = false;
+}

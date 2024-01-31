@@ -204,7 +204,8 @@ public class GameServer
                 Towns = RetrieveEntities<TownDefinition, JsonTown>(persistentStorage, nameof(Town)),
                 GameCommands = RetrieveEntities<GameCommandDefinition, JsonGameCommand>(persistentStorage, nameof(GameCommand)),
                 StoreCommands = RetrieveEntities<StoreCommandDefinition, JsonStoreCommand>(persistentStorage, nameof(StoreCommand)),
-                HelpGroups = RetrieveEntities<HelpGroupDefinition, JsonHelpGroup>(persistentStorage, nameof(HelpGroup))
+                HelpGroups = RetrieveEntities<HelpGroupDefinition, JsonHelpGroup>(persistentStorage, nameof(HelpGroup)),
+                MonsterRaces = RetrieveEntities<MonsterRaceDefinition, JsonMonsterRace>(persistentStorage, nameof(MonsterRace))
             };
         }
 
