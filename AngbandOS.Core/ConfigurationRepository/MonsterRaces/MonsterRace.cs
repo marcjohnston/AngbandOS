@@ -359,17 +359,17 @@ internal abstract class MonsterRace : IMonsterCharacteristics, IGetKey<string>, 
     protected MonsterRace(SaveGame saveGame)
     {
         SaveGame = saveGame;
-        Knowledge = new MonsterKnowledge(saveGame, this);
-        int freqInate = (FreqInate == 0 ? 0 : 100 / FreqInate);
-        int freqSpell = (FreqSpell == 0 ? 0 : 100 / FreqSpell);
-        FrequencyChance = (freqInate + freqSpell) / 2;
-
-        Level = (LevelFound < 0 || LevelFound > 100) ? 0 : LevelFound;
     }
 
     public string GetKey => Key;
     public void Bind()
     {
+        Knowledge = new MonsterKnowledge(SaveGame, this);
+        int freqInate = (FreqInate == 0 ? 0 : 100 / FreqInate);
+        int freqSpell = (FreqSpell == 0 ? 0 : 100 / FreqSpell);
+        FrequencyChance = (freqInate + freqSpell) / 2;
+        Level = (LevelFound < 0 || LevelFound > 100) ? 0 : LevelFound; // TODO: Something isn't right here.  
+
         // Bind the monster spell names.
         if (SpellNames != null)
         {
@@ -470,12 +470,12 @@ internal abstract class MonsterRace : IMonsterCharacteristics, IGetKey<string>, 
     /// <summary>
     /// Represents a percentage chance (0-100) of successfully casting as spell.
     /// </summary>
-    public int FrequencyChance { get; }
+    public int FrequencyChance { get; private set; }
 
     /// <summary>
     /// Returns the level at which the monster will appear.  This is typically same as LevelFound but Player and the NobodyGhost are moved to the town level.
     /// </summary>
-    public int Level { get; }
+    public int Level { get; private set; }
 
     /// <summary>
     /// Returns the index into the monster race array where the monster is.  Set just after construction.

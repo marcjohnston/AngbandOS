@@ -38,4 +38,5 @@ public class Configuration
     public StoreCommandDefinition[]? StoreCommands { get; set; } = null;
     public HelpGroupDefinition[]? HelpGroups { get; set; } = null;
     public MonsterRaceDefinition[]? MonsterRaces { get; set; } = null;
+    public SymbolDefinition[]? Symbols { get; set; } = null;
 }

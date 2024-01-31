@@ -47,7 +47,7 @@ internal class QuerySymbolScript : Script, IScript, IRepeatableScript, IStoreScr
         bool found = false;
         foreach (Symbol symbol in SaveGame.SingletonRepository.Symbols)
         {
-            if (querySymbol == symbol.Character)
+            if (querySymbol == symbol.Character || querySymbol == symbol.QueryCharacter)
             {
                 SaveGame.MsgPrint($"{querySymbol} - {symbol.Name}");
                 found = true;

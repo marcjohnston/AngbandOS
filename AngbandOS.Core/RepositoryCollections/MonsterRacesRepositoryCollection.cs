@@ -14,8 +14,18 @@ internal class MonsterRacesRepositoryCollection : DictionaryRepositoryCollection
 
     public override void Load()
     {
-        // Monster races must be loaded in a sorted order for the player birth quests to not hang.
-        Add(LoadTypesFromAssembly<MonsterRace>().OrderBy(_monsterRace => _monsterRace.LevelFound));
+        if (SaveGame.Configuration.StoreCommands == null)
+        {
+            // Monster races must be loaded in a sorted order for the player birth quests to not hang.
+            Add(LoadTypesFromAssembly<MonsterRace>().OrderBy(_monsterRace => _monsterRace.LevelFound));
+        }
+        else
+        {
+            foreach (MonsterRaceDefinition mosterRaceDefinition in SaveGame.Configuration.MonsterRaces.OrderBy(_monsterRace => _monsterRace.LevelFound))
+            {
+                Add(new GenericMonsterRace(SaveGame, mosterRaceDefinition));
+            }
+        }
     }
 
     /// <summary>

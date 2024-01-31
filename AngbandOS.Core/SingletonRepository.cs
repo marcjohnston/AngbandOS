@@ -227,5 +227,6 @@ internal class SingletonRepository
         //Persist<StoreCommand>(corePersistentStorage, StoreCommands, nameof(StoreCommand));
         //Persist<HelpGroup>(corePersistentStorage, HelpGroups, nameof(HelpGroup));
         //Persist<MonsterRace>(corePersistentStorage, MonsterRaces, nameof(MonsterRace));
+        //Persist<Symbol>(corePersistentStorage, Symbols, nameof(Symbol));
     }
 }

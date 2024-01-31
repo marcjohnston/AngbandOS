@@ -11,4 +11,18 @@ namespace AngbandOS.Core.RepositoryCollections;
 internal class GameCommandsRepositoryCollection : DictionaryRepositoryCollection<string, GameCommand>
 {
     public GameCommandsRepositoryCollection(SaveGame saveGame) : base(saveGame) { }
+    public override void Load()
+    {
+        if (SaveGame.Configuration.StoreCommands == null)
+        {
+            base.Load();
+        }
+        else
+        {
+            foreach (GameCommandDefinition gameCommandDefinition in SaveGame.Configuration.GameCommands)
+            {
+                Add(new GenericGameCommand(SaveGame, gameCommandDefinition));
+            }
+        }
+    }
 }
