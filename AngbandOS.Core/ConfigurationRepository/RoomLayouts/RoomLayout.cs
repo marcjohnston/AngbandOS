@@ -214,5 +214,4 @@ internal abstract class RoomLayout : IGetKey<string>
         GridTile cPtr = SaveGame.Grid[y][x];
         cPtr.SetFeature("SecretDoor");
     }
-
 }

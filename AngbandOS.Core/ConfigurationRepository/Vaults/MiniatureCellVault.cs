@@ -11,7 +11,6 @@ namespace AngbandOS.Core.Vaults;
 internal class MiniatureCellVault : Vault
 {
     private MiniatureCellVault(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(PoundSignSymbol));
     public override string Name => "Miniature Cell";
     public override int Category => 7;
     public override int Height => 5;

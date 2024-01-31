@@ -11,8 +11,7 @@ namespace AngbandOS.Core.Vaults;
 internal class RockHardVault : Vault
 {
     private RockHardVault(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(PoundSignSymbol));
-    public override string Name => "Rock-Hard";
+       public override string Name => "Rock-Hard";
     public override int Category => 7;
     public override int Height => 11;
     public override int Rating => 10;

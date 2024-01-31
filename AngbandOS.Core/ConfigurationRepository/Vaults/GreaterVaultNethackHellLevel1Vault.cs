@@ -11,7 +11,6 @@ namespace AngbandOS.Core.Vaults;
 internal class GreaterVaultNethackHellLevel1Vault : Vault
 {
     private GreaterVaultNethackHellLevel1Vault(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(PoundSignSymbol));
     public override string Name => "Greater vault (nethack hell level #1)";
     public override int Category => 8;
     public override int Height => 17;

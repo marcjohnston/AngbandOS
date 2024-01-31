@@ -11,7 +11,6 @@ namespace AngbandOS.Core.Vaults;
 internal class LesserVaultosirisHallsVault : Vault
 {
     private LesserVaultosirisHallsVault(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(PoundSignSymbol));
     public override string Name => "Lesser vault (osiris halls)";
     public override int Category => 7;
     public override int Height => 17;
