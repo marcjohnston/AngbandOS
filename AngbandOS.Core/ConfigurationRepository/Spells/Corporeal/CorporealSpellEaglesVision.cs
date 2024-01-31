@@ -13,9 +13,7 @@ internal class CorporealSpellEaglesVision : Spell
     private CorporealSpellEaglesVision(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.DetectTraps();
-        SaveGame.DetectDoors();
-        SaveGame.DetectStairs();
+        SaveGame.RunScript(nameof(EaglesVisionScript));
     }
 
     public override string Name => "Eagle's Vision";

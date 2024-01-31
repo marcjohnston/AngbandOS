@@ -20,6 +20,6 @@ internal class SelfKnowledgeWizardCommand : WizardCommand
 
     public override void Execute()
     {
-        SaveGame.SelfKnowledge();
+        SaveGame.RunScript(nameof(SelfKnowledgeScript));
     }
 }

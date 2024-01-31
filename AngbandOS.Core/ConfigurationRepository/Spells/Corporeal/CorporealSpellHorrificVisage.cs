@@ -13,12 +13,7 @@ internal class CorporealSpellHorrificVisage : Spell
     private CorporealSpellHorrificVisage(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        if (!SaveGame.GetDirectionWithAim(out int dir))
-        {
-            return;
-        }
-        SaveGame.FearMonster(dir, SaveGame.ExperienceLevel);
-        SaveGame.StunMonster(dir, SaveGame.ExperienceLevel);
+        SaveGame.RunScript(nameof(HorrificVisageScript));
     }
 
     public override string Name => "Horrific Visage";

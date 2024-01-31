@@ -13,11 +13,7 @@ internal class CorporealSpellHypnoticEyes : Spell
     private CorporealSpellHypnoticEyes(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        if (!SaveGame.GetDirectionWithAim(out int dir))
-        {
-            return;
-        }
-        SaveGame.CharmMonster(dir, SaveGame.ExperienceLevel);
+        SaveGame.RunScript(nameof(HypnoticEyesScript));
     }
 
     public override string Name => "Hypnotic Eyes";

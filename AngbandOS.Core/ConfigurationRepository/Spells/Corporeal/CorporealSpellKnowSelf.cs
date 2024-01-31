@@ -13,7 +13,7 @@ internal class CorporealSpellKnowSelf : Spell
     private CorporealSpellKnowSelf(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.SelfKnowledge();
+        SaveGame.RunScript(nameof(SelfKnowledgeScript));
     }
 
     public override string Name => "Know Self";

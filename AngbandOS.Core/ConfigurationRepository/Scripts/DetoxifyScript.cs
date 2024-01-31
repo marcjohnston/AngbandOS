@@ -5,17 +5,19 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Spells.Corporeal;
+namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class CorporealSpellDetoxify : Spell
+internal class DetoxifyScript : Script, IScript
 {
-    private CorporealSpellDetoxify(SaveGame saveGame) : base(saveGame) { }
-    public override void Cast()
-    {
-        SaveGame.RunScript(nameof(DetoxifyScript));
-    }
+    private DetoxifyScript(SaveGame saveGame) : base(saveGame) { }
 
-    public override string Name => "Detoxify";
-    
+    /// <summary>
+    /// Instantly cures poison.
+    /// </summary>
+    /// <returns></returns>
+    public void ExecuteScript()
+    {
+        SaveGame.TimedPoison.ResetTimer();
+    }
 }

@@ -13,7 +13,7 @@ internal class SorcerySpellSelfKnowledge : Spell
     private SorcerySpellSelfKnowledge(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.SelfKnowledge();
+        SaveGame.RunScript(nameof(SelfKnowledgeScript));
     }
 
     public override string Name => "Self Knowledge";

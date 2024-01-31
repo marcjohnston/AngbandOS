@@ -28,7 +28,7 @@ internal class SelfKnowledgePotionItemFactory : PotionItemFactory
         // Self knowledge gives you information about yourself
         SaveGame.MsgPrint("You begin to know yourself a little better...");
         SaveGame.MsgPrint(null);
-        SaveGame.SelfKnowledge();
+        SaveGame.RunScript(nameof(SelfKnowledgeScript));
         return true;
     }
     public override Item CreateItem() => new Item(SaveGame, this);

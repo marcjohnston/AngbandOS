@@ -13,14 +13,7 @@ internal class CorporealSpellHaste : Spell
     private CorporealSpellHaste(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        if (SaveGame.TimedHaste.TurnsRemaining == 0)
-        {
-            SaveGame.TimedHaste.SetTimer(SaveGame.Rng.DieRoll(20 + SaveGame.ExperienceLevel) + SaveGame.ExperienceLevel);
-        }
-        else
-        {
-            SaveGame.TimedHaste.AddTimer(SaveGame.Rng.DieRoll(5));
-        }
+        SaveGame.RunScript(nameof(HasteScript));
     }
 
     public override string Name => "Haste";
