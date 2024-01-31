@@ -10,9 +10,9 @@ namespace AngbandOS.Core.Interface.Definitions;
 [Serializable]
 public class HelpGroupDefinition
 {
-    public string Key { get; set; }
+    public virtual string Key { get; set; }
 
-    public int SortIndex { get; set; }
+    public virtual int SortIndex { get; set; }
 
-    public string Title { get; set; }
+    public virtual string Title { get; set; }
 }

@@ -5,18 +5,11 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Interface.Definitions;
+namespace AngbandOS.GamePacks.Cthangband;
 
 [Serializable]
-public class StoreOwnerDefinition
+internal class WizardMovementHelpGroup : HelpGroupDefinition
 {
-    public virtual string Key { get; set; }
-
-    public virtual int MaxCost { get; set; }
-
-    public virtual int MinInflate { get; set; }
-
-    public virtual string OwnerName { get; set; }
-
-    public virtual string? OwnerRaceName { get; set; }
+    public override string Title => "Movement";
+    public override int SortIndex => 4;
 }

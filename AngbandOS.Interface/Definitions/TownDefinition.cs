@@ -10,14 +10,14 @@ namespace AngbandOS.Core.Interface.Definitions;
 [Serializable]
 public class TownDefinition
 {
-    public string Key { get; set; }
-    public char Char { get; set; }
-    public int HousePrice { get; set; }
-    public string Name { get; set; }
-    public string[] StoreFactoryNames { get; set; }
-    public bool CanBeEscortedHere { get; set; } = true;
+    public virtual string Key { get; set; }
+    public virtual char Char { get; set; }
+    public virtual int HousePrice { get; set; }
+    public virtual string Name { get; set; }
+    public virtual string[] StoreFactoryNames { get; set; }
+    public virtual bool CanBeEscortedHere { get; set; } = true;
 
-    public bool AllowStartupTown { get; set; } = true;
+    public virtual bool AllowStartupTown { get; set; } = true;
 
-    public bool UnusedStoreLotsAreGraveyards { get; set; } = false;
+    public virtual bool UnusedStoreLotsAreGraveyards { get; set; } = false;
 }

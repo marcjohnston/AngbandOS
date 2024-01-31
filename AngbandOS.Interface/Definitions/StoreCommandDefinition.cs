@@ -10,9 +10,9 @@ namespace AngbandOS.Core.Interface.Definitions;
 [Serializable]
 public class StoreCommandDefinition
 {
-    public string Key { get; set; }
-    public char KeyChar { get; set; }
-    public string Description { get; set; }
-    public string[]? ValidStoreNames { get; set; }
-    public string ExecuteScriptName { get; set; }
+    public virtual string Key { get; set; }
+    public virtual char KeyChar { get; set; }
+    public virtual string Description { get; set; }
+    public virtual string[]? ValidStoreNames { get; set; }
+    public virtual string ExecuteScriptName { get; set; }
 }

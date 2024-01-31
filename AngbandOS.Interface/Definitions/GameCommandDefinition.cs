@@ -3,9 +3,9 @@
 [Serializable]
 public class GameCommandDefinition
 {
-    public string Key { get; set; }
-    public char KeyChar { get; set; }
-    public int? Repeat { get; set; } = 0;
-    public bool IsEnabled { get; set; } = true;
-    public string ExecuteScriptName { get; set; }
+    public virtual string Key { get; set; }
+    public virtual char KeyChar { get; set; }
+    public virtual int? Repeat { get; set; } = 0;
+    public virtual bool IsEnabled { get; set; } = true;
+    public virtual string ExecuteScriptName { get; set; }
 }
