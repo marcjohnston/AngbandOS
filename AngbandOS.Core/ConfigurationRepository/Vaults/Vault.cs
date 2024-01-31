@@ -5,10 +5,12 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using System.Text.Json;
+
 namespace AngbandOS.Core.Vaults;
 
 [Serializable]
-internal abstract class Vault : IGetKey<string>
+internal abstract class Vault : IGetKey<string>, IToJson
 {
     protected SaveGame SaveGame;
     protected Vault(SaveGame saveGame)
@@ -19,7 +21,7 @@ internal abstract class Vault : IGetKey<string>
     public virtual string Key => GetType().Name;
 
     public string GetKey => Key;
-    public virtual void Bind() { }
+    public void Bind() { }
 
     public virtual ColorEnum Color => ColorEnum.White;
     public abstract string Name { get; }
@@ -28,4 +30,20 @@ internal abstract class Vault : IGetKey<string>
     public abstract int Rating { get; }
     public abstract string Text { get; }
     public abstract int Width { get; }
+
+    public string ToJson()
+    {
+        VaultDefinition vaultDefinition = new()
+        {
+            Key = Key,
+            Color = Color,
+            Name = Name,
+            Category = Category,
+            Height = Height,
+            Rating = Rating,
+            Text = Text,
+            Width = Width
+        };
+        return JsonSerializer.Serialize<VaultDefinition>(vaultDefinition);
+    }
 }

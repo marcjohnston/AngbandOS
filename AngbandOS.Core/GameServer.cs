@@ -207,6 +207,7 @@ public class GameServer
                 //HelpGroups = RetrieveEntities<HelpGroupDefinition, JsonHelpGroup>(persistentStorage, nameof(HelpGroup)),
                 //MonsterRaces = RetrieveEntities<MonsterRaceDefinition, JsonMonsterRace>(persistentStorage, nameof(MonsterRace)),
                 //Symbols = RetrieveEntities<SymbolDefinition, JsonSymbol>(persistentStorage, nameof(Symbol))
+                //Vaults = RetrieveEntities<VaultDefinition, JsonVault>(persistentStorage, nameof(Vault))
             };
         }
 
