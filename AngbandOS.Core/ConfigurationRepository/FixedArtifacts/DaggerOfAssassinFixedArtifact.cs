@@ -10,16 +10,10 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class DaggerOfAssassinFixedArtifact : FixedArtifact
 {
-    private ItemFactory _baseItemCategory;
     private DaggerOfAssassinFixedArtifact(SaveGame saveGame) : base(saveGame) { }
 
-    public override void Bind()
-    {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(DaggerWeaponItemFactory));
-    }
+    protected override string BaseItemFactoryName => nameof(DaggerWeaponItemFactory);
 
-
-    public override ItemFactory BaseItemCategory => _baseItemCategory;
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(VerticalBarSymbol));
     public override ColorEnum Color => ColorEnum.BrightWhite;

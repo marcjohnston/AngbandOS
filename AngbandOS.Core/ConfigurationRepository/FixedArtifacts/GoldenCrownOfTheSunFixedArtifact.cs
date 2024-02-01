@@ -10,14 +10,9 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class GoldenCrownOfTheSunFixedArtifact : FixedArtifact, IFixedArtifactActivatible
 {
-    private ItemFactory _baseItemCategory;
     private GoldenCrownOfTheSunFixedArtifact(SaveGame saveGame) : base(saveGame) { }
 
-    public override void Bind()
-    {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(GoldenCrownArmorItemFactory));
-    }
-
+    protected override string BaseItemFactoryName => nameof(GoldenCrownArmorItemFactory);
 
     // Sun Crown heals
     public void ActivateItem(Item item)
@@ -37,7 +32,6 @@ internal class GoldenCrownOfTheSunFixedArtifact : FixedArtifact, IFixedArtifactA
         IArtifactBias artifactBias = null;
         item.ApplyRandomResistance(ref artifactBias, SaveGame.Rng.DieRoll(22) + 16);
     }
-    public override ItemFactory BaseItemCategory => _baseItemCategory;
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(CloseBraceSymbol));
     public override ColorEnum Color => ColorEnum.Yellow;

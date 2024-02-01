@@ -10,16 +10,10 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class LongBowOfSerpentsFixedArtifact : FixedArtifact
 {
-    private ItemFactory _baseItemCategory;
     private LongBowOfSerpentsFixedArtifact(SaveGame saveGame) : base(saveGame) { }
 
-    public override void Bind()
-    {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(LongBowWeaponItemFactory));
-    }
+    protected override string BaseItemFactoryName => nameof(LongBowWeaponItemFactory);
 
-
-    public override ItemFactory BaseItemCategory => _baseItemCategory;
 
     public override void ApplyResistances(Item item)
     {

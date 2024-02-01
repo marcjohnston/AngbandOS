@@ -10,14 +10,9 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class IronHelmSkullkeeperFixedArtifact : FixedArtifact, IFixedArtifactActivatible
 {
-    private ItemFactory _baseItemCategory;
     private IronHelmSkullkeeperFixedArtifact(SaveGame saveGame) : base(saveGame) { }
 
-    public override void Bind()
-    {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(IronHelmArmorItemFactory));
-    }
-
+    protected override string BaseItemFactoryName => nameof(IronHelmArmorItemFactory);
 
     // Skull Keeper detects everything
     public void ActivateItem(Item item)
@@ -28,7 +23,6 @@ internal class IronHelmSkullkeeperFixedArtifact : FixedArtifact, IFixedArtifactA
         item.RechargeTimeLeft = base.SaveGame.Rng.RandomLessThan(55) + 55;
     }
     public string DescribeActivationEffect() => "detection every 55+d55 turns";
-    public override ItemFactory BaseItemCategory => _baseItemCategory;
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(CloseBraceSymbol));
     public override ColorEnum Color => ColorEnum.Grey;

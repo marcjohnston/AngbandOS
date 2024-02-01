@@ -10,16 +10,10 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class TwoHandedSwordFiretongueFixedArtifact : FixedArtifact
 {
-    private ItemFactory _baseItemCategory;
     private TwoHandedSwordFiretongueFixedArtifact(SaveGame saveGame) : base(saveGame) { }
 
-    public override void Bind()
-    {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(TwoHandedSwordWeaponItemFactory));
-    }
+    protected override string BaseItemFactoryName => nameof(TwoHandedSwordWeaponItemFactory);
 
-
-    public override ItemFactory BaseItemCategory => _baseItemCategory;
 
     public override void ApplyResistances(Item item)
     {

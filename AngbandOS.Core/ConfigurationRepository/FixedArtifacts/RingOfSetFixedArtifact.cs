@@ -10,14 +10,9 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class RingOfSetFixedArtifact : FixedArtifact, IFixedArtifactActivatible
 {
-    private ItemFactory _baseItemCategory;
     private RingOfSetFixedArtifact(SaveGame saveGame) : base(saveGame) { }
 
-    public override void Bind()
-    {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(PowerRingItemFactory));
-    }
-
+    protected override string BaseItemFactoryName => nameof(PowerRingItemFactory);
 
     // Ring of Set has a random effect
     public void ActivateItem(Item item)
@@ -39,7 +34,6 @@ internal class RingOfSetFixedArtifact : FixedArtifact, IFixedArtifactActivatible
         IArtifactBias artifactBias = null;
         item.ApplyRandomResistance(ref artifactBias, SaveGame.Rng.DieRoll(22) + 16);
     }
-    public override ItemFactory BaseItemCategory => _baseItemCategory;
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(EqualSignSymbol));
     public override ColorEnum Color => ColorEnum.Yellow;

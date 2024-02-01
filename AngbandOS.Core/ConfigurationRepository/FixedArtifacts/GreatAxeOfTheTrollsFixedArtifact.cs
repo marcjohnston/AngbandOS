@@ -10,14 +10,9 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class GreatAxeOfTheTrollsFixedArtifact : FixedArtifact, IFixedArtifactActivatible
 {
-    private ItemFactory _baseItemCategory;
     private GreatAxeOfTheTrollsFixedArtifact(SaveGame saveGame) : base(saveGame) { }
 
-    public override void Bind()
-    {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(GreatAxePolearmWeaponItemFactory));
-    }
-
+    protected override string BaseItemFactoryName => nameof(GreatAxePolearmWeaponItemFactory);
 
     // Trolls does mass carnage
     public void ActivateItem(Item item)
@@ -27,7 +22,6 @@ internal class GreatAxeOfTheTrollsFixedArtifact : FixedArtifact, IFixedArtifactA
         item.RechargeTimeLeft = 1000;
     }
     public string DescribeActivationEffect() => "mass carnage every 1000 turns";
-    public override ItemFactory BaseItemCategory => _baseItemCategory;
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(ForwardSlashSymbol));
     public override ColorEnum Color => ColorEnum.Grey;

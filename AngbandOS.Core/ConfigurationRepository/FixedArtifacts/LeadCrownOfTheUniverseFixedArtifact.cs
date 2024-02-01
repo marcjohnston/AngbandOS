@@ -10,16 +10,10 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class LeadCrownOfTheUniverseFixedArtifact : FixedArtifact
 {
-    private ItemFactory _baseItemCategory;
     private LeadCrownOfTheUniverseFixedArtifact(SaveGame saveGame) : base(saveGame) { }
 
-    public override void Bind()
-    {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(LeadCrownArmorItemFactory));
-    }
+    protected override string BaseItemFactoryName => nameof(LeadCrownArmorItemFactory);
 
-
-    public override ItemFactory BaseItemCategory => _baseItemCategory;
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(CloseBraceSymbol));
     public override ColorEnum Color => ColorEnum.Black;

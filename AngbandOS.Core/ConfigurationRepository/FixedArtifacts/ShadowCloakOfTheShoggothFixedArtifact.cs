@@ -10,16 +10,10 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class ShadowCloakOfTheShoggothFixedArtifact : FixedArtifact
 {
-    private ItemFactory _baseItemCategory;
     private ShadowCloakOfTheShoggothFixedArtifact(SaveGame saveGame) : base(saveGame) { }
 
-    public override void Bind()
-    {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(ShadowCloakArmorItemFactory));
-    }
+    protected override string BaseItemFactoryName => nameof(ShadowCloakArmorItemFactory);
 
-
-    public override ItemFactory BaseItemCategory => _baseItemCategory;
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(OpenParenthesisSymbol));
     public override ColorEnum Color => ColorEnum.Black;

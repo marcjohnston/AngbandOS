@@ -10,21 +10,15 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class LargeLeatherShieldRawhideFixedArtifact : FixedArtifact
 {
-    private ItemFactory _baseItemCategory;
     private LargeLeatherShieldRawhideFixedArtifact(SaveGame saveGame) : base(saveGame) { }
 
-    public override void Bind()
-    {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(LargeLeatherShieldArmorItemFactory));
-    }
-
+    protected override string BaseItemFactoryName => nameof(LargeLeatherShieldArmorItemFactory);
 
     public override void ApplyResistances(Item item)
     {
         IArtifactBias artifactBias = null;
         item.ApplyRandomResistance(ref artifactBias, SaveGame.Rng.DieRoll(22) + 16);
     }
-    public override ItemFactory BaseItemCategory => _baseItemCategory;
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(CloseParenthesisSymbol));
     public override ColorEnum Color => ColorEnum.BrightBrown;

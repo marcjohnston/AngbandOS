@@ -10,16 +10,10 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class SteelHelmOfHammerhandFixedArtifact : FixedArtifact
 {
-    private ItemFactory _baseItemCategory;
     private SteelHelmOfHammerhandFixedArtifact(SaveGame saveGame) : base(saveGame) { }
 
-    public override void Bind()
-    {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(SteelHelmArmorItemFactory));
-    }
+    protected override string BaseItemFactoryName => nameof(SteelHelmArmorItemFactory);
 
-
-    public override ItemFactory BaseItemCategory => _baseItemCategory;
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(CloseBraceSymbol));
     public override ColorEnum Color => ColorEnum.BrightWhite;

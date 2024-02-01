@@ -10,14 +10,9 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class MorningStarFirestarterFixedArtifact : FixedArtifact, IFixedArtifactActivatible
 {
-    private ItemFactory _baseItemCategory;
     private MorningStarFirestarterFixedArtifact(SaveGame saveGame) : base(saveGame) { }
 
-    public override void Bind()
-    {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(MorningStarHaftedWeaponItemFactory));
-    }
-
+    protected override string BaseItemFactoryName => nameof(MorningStarHaftedWeaponItemFactory);
 
     // Firestarter does fire ball
     public void ActivateItem(Item item)
@@ -31,7 +26,6 @@ internal class MorningStarFirestarterFixedArtifact : FixedArtifact, IFixedArtifa
         item.RechargeTimeLeft = 100;
     }
     public string DescribeActivationEffect() => "large fire ball (72) every 100 turns";
-    public override ItemFactory BaseItemCategory => _baseItemCategory;
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(BackSlashSymbol));
     public override ColorEnum Color => ColorEnum.Black;

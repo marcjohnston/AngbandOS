@@ -10,16 +10,10 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class MaceOfDisruptionDeathwreakerFixedArtifact : FixedArtifact
 {
-    private ItemFactory _baseItemCategory;
     private MaceOfDisruptionDeathwreakerFixedArtifact(SaveGame saveGame) : base(saveGame) { }
 
-    public override void Bind()
-    {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(MaceHaftedWeaponItemFactory));
-    }
+    protected override string BaseItemFactoryName => nameof(MaceHaftedWeaponItemFactory);
 
-
-    public override ItemFactory BaseItemCategory => _baseItemCategory;
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(BackSlashSymbol));
     public override ColorEnum Color => ColorEnum.Purple;

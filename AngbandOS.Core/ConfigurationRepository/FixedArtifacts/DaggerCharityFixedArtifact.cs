@@ -10,14 +10,9 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class DaggerCharityFixedArtifact : FixedArtifact, IFixedArtifactActivatible
 {
-    private ItemFactory _baseItemCategory;
     private DaggerCharityFixedArtifact(SaveGame saveGame) : base(saveGame) { }
 
-    public override void Bind()
-    {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(DaggerWeaponItemFactory));
-    }
-
+    protected override string BaseItemFactoryName => nameof(DaggerWeaponItemFactory);
 
     // Charity shoots a lightning bolt
     public void ActivateItem(Item item)
@@ -36,7 +31,6 @@ internal class DaggerCharityFixedArtifact : FixedArtifact, IFixedArtifactActivat
         item.ApplyRandomResistance(ref artifactBias, SaveGame.Rng.DieRoll(22) + 16);
     }
     public string DescribeActivationEffect() => "lightning bolt (4d8) every 6+d6 turns";
-    public override ItemFactory BaseItemCategory => _baseItemCategory;
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(VerticalBarSymbol));
     public override ColorEnum Color => ColorEnum.BrightWhite;

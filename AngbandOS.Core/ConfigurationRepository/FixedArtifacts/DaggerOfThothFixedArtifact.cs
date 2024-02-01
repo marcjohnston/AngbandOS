@@ -10,14 +10,9 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class DaggerOfThothFixedArtifact : FixedArtifact, IFixedArtifactActivatible
 {
-    private ItemFactory _baseItemCategory;
     private DaggerOfThothFixedArtifact(SaveGame saveGame) : base(saveGame) { }
 
-    public override void Bind()
-    {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(DaggerWeaponItemFactory));
-    }
-
+    protected override string BaseItemFactoryName => nameof(DaggerWeaponItemFactory);
 
     // Thoth shoots a poison ball
     public void ActivateItem(Item item)
@@ -31,7 +26,6 @@ internal class DaggerOfThothFixedArtifact : FixedArtifact, IFixedArtifactActivat
         item.RechargeTimeLeft = base.SaveGame.Rng.RandomLessThan(4) + 4;
     }
     public string DescribeActivationEffect() => "stinking cloud (12) every 4+d4 turns";
-    public override ItemFactory BaseItemCategory => _baseItemCategory;
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(VerticalBarSymbol));
     public override ColorEnum Color => ColorEnum.BrightWhite;

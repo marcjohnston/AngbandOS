@@ -10,16 +10,10 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class IronCrownOfMiseryFixedArtifact : FixedArtifact
 {
-    private ItemFactory _baseItemCategory;
     private IronCrownOfMiseryFixedArtifact(SaveGame saveGame) : base(saveGame) { }
 
-    public override void Bind()
-    {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(IronCrownArmorItemFactory));
-    }
+    protected override string BaseItemFactoryName => nameof(IronCrownArmorItemFactory);
 
-
-    public override ItemFactory BaseItemCategory => _baseItemCategory;
 
     public override void ApplyResistances(Item item)
     {

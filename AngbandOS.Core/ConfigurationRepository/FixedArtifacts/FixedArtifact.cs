@@ -21,7 +21,10 @@ internal abstract class FixedArtifact : IItemCharacteristics, IGetKey<string>
 
     public string GetKey => Key;
 
-    public abstract void Bind();
+    public void Bind()
+    {
+        BaseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(BaseItemFactoryName);
+    }
 
     /// <summary>
     /// Represents the quantity of this artifact currently in existence.
@@ -41,7 +44,9 @@ internal abstract class FixedArtifact : IItemCharacteristics, IGetKey<string>
     {
     }
 
-    public abstract ItemFactory BaseItemCategory { get; } // Inherit this 
+    protected abstract string BaseItemFactoryName { get; }
+
+    public ItemFactory BaseItemCategory { get; private set; } // Inherit this 
 
     /// <summary>
     /// Returns a 1-in-chance value of the weapon doing extra vorpal damage.  Does not affect non-vorpal cutting weapons.  Default to a 1-in-6 chance.

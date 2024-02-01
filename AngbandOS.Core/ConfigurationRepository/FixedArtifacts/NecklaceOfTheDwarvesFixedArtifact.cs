@@ -10,16 +10,10 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class NecklaceOfTheDwarvesFixedArtifact : FixedArtifact
 {
-    private ItemFactory _baseItemCategory;
     private NecklaceOfTheDwarvesFixedArtifact(SaveGame saveGame) : base(saveGame) { }
 
-    public override void Bind()
-    {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(NecklaceAmuletJeweleryItemFactory));
-    }
+    protected override string BaseItemFactoryName => nameof(NecklaceAmuletJeweleryItemFactory);
 
-
-    public override ItemFactory BaseItemCategory => _baseItemCategory;
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(DoubleQuoteSymbol));
     public override string Name => "The Necklace of the Dwarves";

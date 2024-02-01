@@ -10,16 +10,10 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class ShortSwordOfMerlinFixedArtifact : FixedArtifact
 {
-    private ItemFactory _baseItemCategory;
     private ShortSwordOfMerlinFixedArtifact(SaveGame saveGame) : base(saveGame) { }
 
-    public override void Bind()
-    {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(ShortSwordWeaponItemFactory));
-    }
+    protected override string BaseItemFactoryName => nameof(ShortSwordWeaponItemFactory);
 
-
-    public override ItemFactory BaseItemCategory => _baseItemCategory;
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(VerticalBarSymbol));
     public override ColorEnum Color => ColorEnum.BrightWhite;

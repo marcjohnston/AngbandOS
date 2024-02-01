@@ -10,21 +10,15 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class SmallSwordStingFixedArtifact : FixedArtifact
 {
-    private ItemFactory _baseItemCategory;
     private SmallSwordStingFixedArtifact(SaveGame saveGame) : base(saveGame) { }
 
-    public override void Bind()
-    {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(ShortSwordWeaponItemFactory));
-    }
-
+    protected override string BaseItemFactoryName => nameof(ShortSwordWeaponItemFactory);
 
     public override void ApplyResistances(Item item)
     {
         IArtifactBias artifactBias = null;
         item.ApplyRandomResistance(ref artifactBias, SaveGame.Rng.DieRoll(22) + 16);
     }
-    public override ItemFactory BaseItemCategory => _baseItemCategory;
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(VerticalBarSymbol));
     public override ColorEnum Color => ColorEnum.BrightWhite;

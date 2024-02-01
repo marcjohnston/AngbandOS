@@ -10,14 +10,9 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class BeakedAxeOfTheodenFixedArtifact : FixedArtifact, IFixedArtifactActivatible
 {
-    private ItemFactory _baseItemCategory;
     private BeakedAxeOfTheodenFixedArtifact(SaveGame saveGame) : base(saveGame) { }
 
-    public override void Bind()
-    {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(BeakedAxePolearmWeaponItemFactory));
-    }
-
+    protected override string BaseItemFactoryName => nameof(BeakedAxePolearmWeaponItemFactory);
 
     // Theoden drains life
     public void ActivateItem(Item item)
@@ -31,7 +26,6 @@ internal class BeakedAxeOfTheodenFixedArtifact : FixedArtifact, IFixedArtifactAc
         item.RechargeTimeLeft = 400;
     }
     public string DescribeActivationEffect() => "drain life (120) every 400 turns";
-    public override ItemFactory BaseItemCategory => _baseItemCategory;
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(ForwardSlashSymbol));
     public override ColorEnum Color => ColorEnum.Grey;

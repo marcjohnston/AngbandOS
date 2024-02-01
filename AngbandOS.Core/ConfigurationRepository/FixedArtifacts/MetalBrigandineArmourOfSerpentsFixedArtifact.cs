@@ -10,21 +10,15 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class MetalBrigandineArmorOfSerpentsFixedArtifact : FixedArtifact
 {
-    private ItemFactory _baseItemCategory;
     private MetalBrigandineArmorOfSerpentsFixedArtifact(SaveGame saveGame) : base(saveGame) { }
 
-    public override void Bind()
-    {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(MetalBrigandineHardArmorItemFactory));
-    }
-
+    protected override string BaseItemFactoryName => nameof(MetalBrigandineHardArmorItemFactory);
 
     public override void ApplyResistances(Item item)
     {
         IArtifactBias artifactBias = null;
         item.ApplyRandomResistance(ref artifactBias, SaveGame.Rng.DieRoll(22) + 16);
     }
-    public override ItemFactory BaseItemCategory => _baseItemCategory;
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(OpenBraceSymbol));
     public override ColorEnum Color => ColorEnum.Grey;

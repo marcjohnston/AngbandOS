@@ -10,14 +10,9 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class PowerDragonScaleMailBladeturnerFixedArtifact : FixedArtifact, IFixedArtifactActivatible
 {
-    private ItemFactory _baseItemCategory;
     private PowerDragonScaleMailBladeturnerFixedArtifact(SaveGame saveGame) : base(saveGame) { }
 
-    public override void Bind()
-    {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(PowerDragonScaleMailArmorItemFactory));
-    }
-
+    protected override string BaseItemFactoryName => nameof(PowerDragonScaleMailArmorItemFactory);
 
     // Bladeturner heals you and gives you timed resistances
     public void ActivateItem(Item item)
@@ -41,7 +36,6 @@ internal class PowerDragonScaleMailBladeturnerFixedArtifact : FixedArtifact, IFi
         item.RechargeTimeLeft = 400;
     }
     public string DescribeActivationEffect() => "breathe elements (300), berserk rage, bless, and resistance";
-    public override ItemFactory BaseItemCategory => _baseItemCategory;
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(OpenBraceSymbol));
     public override ColorEnum Color => ColorEnum.Purple;

@@ -10,16 +10,10 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class FullPlateArmorOfTheGodsFixedArtifact : FixedArtifact
 {
-    private ItemFactory _baseItemCategory;
     private FullPlateArmorOfTheGodsFixedArtifact(SaveGame saveGame) : base(saveGame) { }
 
-    public override void Bind()
-    {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(FullPlateHardArmorItemFactory));
-    }
+    protected override string BaseItemFactoryName => nameof(FullPlateHardArmorItemFactory);
 
-
-    public override ItemFactory BaseItemCategory => _baseItemCategory;
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(OpenBraceSymbol));
     public override ColorEnum Color => ColorEnum.BrightWhite;

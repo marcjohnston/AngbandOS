@@ -10,21 +10,15 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class ChainMailHeartguardFixedArtifact : FixedArtifact
 {
-    private ItemFactory _baseItemCategory;
     private ChainMailHeartguardFixedArtifact(SaveGame saveGame) : base(saveGame) { }
 
-    public override void Bind()
-    {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(ChainMailHardArmorItemFactory));
-    }
-
+    protected override string BaseItemFactoryName => nameof(ChainMailHardArmorItemFactory);
 
     public override void ApplyResistances(Item item)
     {
         IArtifactBias artifactBias = null;
         item.ApplyRandomResistance(ref artifactBias, SaveGame.Rng.DieRoll(22) + 16);
     }
-    public override ItemFactory BaseItemCategory => _baseItemCategory;
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(OpenBraceSymbol));
     public override ColorEnum Color => ColorEnum.Grey;

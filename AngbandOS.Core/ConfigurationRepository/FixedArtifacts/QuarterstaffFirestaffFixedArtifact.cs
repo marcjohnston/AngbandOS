@@ -10,16 +10,10 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class QuarterstaffFirestaffFixedArtifact : FixedArtifact
 {
-    private ItemFactory _baseItemCategory;
     private QuarterstaffFirestaffFixedArtifact(SaveGame saveGame) : base(saveGame) { }
 
-    public override void Bind()
-    {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(QuarterstaffHaftedWeaponItemFactory));
-    }
+    protected override string BaseItemFactoryName => nameof(QuarterstaffHaftedWeaponItemFactory);
 
-
-    public override ItemFactory BaseItemCategory => _baseItemCategory;
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(BackSlashSymbol));
     public override ColorEnum Color => ColorEnum.BrightBrown;

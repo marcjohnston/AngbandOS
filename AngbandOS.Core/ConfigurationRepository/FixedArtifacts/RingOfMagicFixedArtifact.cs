@@ -10,14 +10,9 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class RingOfMagicFixedArtifact : FixedArtifact, IFixedArtifactActivatible
 {
-    private ItemFactory _baseItemCategory;
     private RingOfMagicFixedArtifact(SaveGame saveGame) : base(saveGame) { }
 
-    public override void Bind()
-    {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(BarahirRingItemFactory));
-    }
-
+    protected override string BaseItemFactoryName => nameof(BarahirRingItemFactory);
 
     // Ring of Magic has a djinn in it that drains life from an opponent
     public void ActivateItem(Item item)
@@ -33,7 +28,6 @@ internal class RingOfMagicFixedArtifact : FixedArtifact, IFixedArtifactActivatib
         }
     }
     public string DescribeActivationEffect() => "a strangling attack (100) every 100+d100 turns";
-    public override ItemFactory BaseItemCategory => _baseItemCategory;
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(EqualSignSymbol));
     public override string Name => "The Ring of Magic";

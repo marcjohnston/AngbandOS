@@ -10,14 +10,9 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class FlailTotilaFixedArtifact : FixedArtifact, IFixedArtifactActivatible
 {
-    private ItemFactory _baseItemCategory;
     private FlailTotilaFixedArtifact(SaveGame saveGame) : base(saveGame) { }
 
-    public override void Bind()
-    {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(FlailHaftedWeaponItemFactory));
-    }
-
+    protected override string BaseItemFactoryName => nameof(FlailHaftedWeaponItemFactory);
 
     // Totila does confusion
     public void ActivateItem(Item item)
@@ -31,7 +26,6 @@ internal class FlailTotilaFixedArtifact : FixedArtifact, IFixedArtifactActivatib
         item.RechargeTimeLeft = 15;
     }
     public string DescribeActivationEffect() => "confuse monster every 15 turns";
-    public override ItemFactory BaseItemCategory => _baseItemCategory;
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(BackSlashSymbol));
     public override ColorEnum Color => ColorEnum.Black;

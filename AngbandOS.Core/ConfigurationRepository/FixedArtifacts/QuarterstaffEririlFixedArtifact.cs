@@ -10,14 +10,9 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class QuarterstaffEririlFixedArtifact : FixedArtifact, IFixedArtifactActivatible
 {
-    private ItemFactory _baseItemCategory;
     private QuarterstaffEririlFixedArtifact(SaveGame saveGame) : base(saveGame) { }
 
-    public override void Bind()
-    {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(QuarterstaffHaftedWeaponItemFactory));
-    }
-
+    protected override string BaseItemFactoryName => nameof(QuarterstaffHaftedWeaponItemFactory);
 
     // Ereril does identify
     public void ActivateItem(Item item)
@@ -30,7 +25,6 @@ internal class QuarterstaffEririlFixedArtifact : FixedArtifact, IFixedArtifactAc
         item.RechargeTimeLeft = 10;
     }
     public string DescribeActivationEffect() => "identify every 10 turns";
-    public override ItemFactory BaseItemCategory => _baseItemCategory;
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(BackSlashSymbol));
     public override ColorEnum Color => ColorEnum.BrightBrown;

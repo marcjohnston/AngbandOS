@@ -10,16 +10,10 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class MightyHammerOfWorldsFixedArtifact : FixedArtifact
 {
-    private ItemFactory _baseItemCategory;
     private MightyHammerOfWorldsFixedArtifact(SaveGame saveGame) : base(saveGame) { }
 
-    public override void Bind()
-    {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(MightyHammerHaftedWeaponItemFactory));
-    }
+    protected override string BaseItemFactoryName => nameof(MightyHammerHaftedWeaponItemFactory);
 
-
-    public override ItemFactory BaseItemCategory => _baseItemCategory;
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(BackSlashSymbol));
     public override ColorEnum Color => ColorEnum.Black;

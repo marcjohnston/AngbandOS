@@ -10,16 +10,10 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class LochaberAxeOfTheDwarvesFixedArtifact : FixedArtifact
 {
-    private ItemFactory _baseItemCategory;
     private LochaberAxeOfTheDwarvesFixedArtifact(SaveGame saveGame) : base(saveGame) { }
 
-    public override void Bind()
-    {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(LochaberAxePolearmWeaponItemFactory));
-    }
+    protected override string BaseItemFactoryName => nameof(LochaberAxePolearmWeaponItemFactory);
 
-
-    public override ItemFactory BaseItemCategory => _baseItemCategory;
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(ForwardSlashSymbol));
     public override ColorEnum Color => ColorEnum.Black;

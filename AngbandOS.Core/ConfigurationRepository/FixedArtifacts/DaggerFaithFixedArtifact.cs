@@ -10,14 +10,9 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class DaggerFaithFixedArtifact : FixedArtifact, IFixedArtifactActivatible
 {
-    private ItemFactory _baseItemCategory;
     private DaggerFaithFixedArtifact(SaveGame saveGame) : base(saveGame) { }
 
-    public override void Bind()
-    {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(DaggerWeaponItemFactory));
-    }
-
+    protected override string BaseItemFactoryName => nameof(DaggerWeaponItemFactory);
 
     // Faith shoots a fire bolt
     public void ActivateItem(Item item)
@@ -38,7 +33,6 @@ internal class DaggerFaithFixedArtifact : FixedArtifact, IFixedArtifactActivatib
     }
     public string DescribeActivationEffect() => "fire bolt (9d8) every 8+d8 turns";
 
-    public override ItemFactory BaseItemCategory => _baseItemCategory;
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(VerticalBarSymbol));
     public override ColorEnum Color => ColorEnum.BrightWhite;

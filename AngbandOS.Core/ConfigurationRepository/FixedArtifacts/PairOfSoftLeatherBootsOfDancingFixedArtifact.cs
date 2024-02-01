@@ -10,14 +10,9 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class PairOfSoftLeatherBootsOfDancingFixedArtifact : FixedArtifact, IFixedArtifactActivatible
 {
-    private ItemFactory _baseItemCategory;
     private PairOfSoftLeatherBootsOfDancingFixedArtifact(SaveGame saveGame) : base(saveGame) { }
 
-    public override void Bind()
-    {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(SoftLeatherBootsArmorItemFactory));
-    }
-
+    protected override string BaseItemFactoryName => nameof(SoftLeatherBootsArmorItemFactory);
 
     // Dancing heal poison and fear
     public void ActivateItem(Item item)
@@ -28,7 +23,6 @@ internal class PairOfSoftLeatherBootsOfDancingFixedArtifact : FixedArtifact, IFi
         item.RechargeTimeLeft = 5;
     }
     public string DescribeActivationEffect() => "remove fear and cure poison every 5 turns";
-    public override ItemFactory BaseItemCategory => _baseItemCategory;
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(CloseBraceSymbol));
     public override ColorEnum Color => ColorEnum.BrightBrown;

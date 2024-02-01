@@ -10,16 +10,10 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class MainGaucheOfDefenceFixedArtifact : FixedArtifact
 {
-    private ItemFactory _baseItemCategory;
     private MainGaucheOfDefenceFixedArtifact(SaveGame saveGame) : base(saveGame) { }
 
-    public override void Bind()
-    {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(MainGaucheWeaponItemFactory));
-    }
+    protected override string BaseItemFactoryName => nameof(MainGaucheWeaponItemFactory);
 
-
-    public override ItemFactory BaseItemCategory => _baseItemCategory;
 
     public override void ApplyResistances(Item item)
     {

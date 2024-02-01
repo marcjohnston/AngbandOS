@@ -10,16 +10,10 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class BladeOfChaosDoomcallerFixedArtifact : FixedArtifact
 {
-    private ItemFactory _baseItemCategory;
     private BladeOfChaosDoomcallerFixedArtifact(SaveGame saveGame) : base(saveGame) { }
 
-    public override void Bind()
-    {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(BladeOfChaosWeaponItemFactory));
-    }
+    protected override string BaseItemFactoryName => nameof(BladeOfChaosWeaponItemFactory);
 
-
-    public override ItemFactory BaseItemCategory => _baseItemCategory;
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(VerticalBarSymbol));
     public override ColorEnum Color => ColorEnum.Purple;

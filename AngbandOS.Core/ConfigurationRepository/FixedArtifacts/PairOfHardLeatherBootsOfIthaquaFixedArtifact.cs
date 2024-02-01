@@ -10,14 +10,9 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class PairOfHardLeatherBootsOfIthaquaFixedArtifact : FixedArtifact, IFixedArtifactActivatible
 {
-    private ItemFactory _baseItemCategory;
     private PairOfHardLeatherBootsOfIthaquaFixedArtifact(SaveGame saveGame) : base(saveGame) { }
 
-    public override void Bind()
-    {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(HardLeatherBootsArmorItemFactory));
-    }
-
+    protected override string BaseItemFactoryName => nameof(HardLeatherBootsArmorItemFactory);
 
     // Boots haste you
     public void ActivateItem(Item item)
@@ -34,7 +29,6 @@ internal class PairOfHardLeatherBootsOfIthaquaFixedArtifact : FixedArtifact, IFi
         item.RechargeTimeLeft = 200;
     }
     public string DescribeActivationEffect() => "haste self (20+d20 turns) every 200 turns";
-    public override ItemFactory BaseItemCategory => _baseItemCategory;
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(CloseBraceSymbol));
     public override ColorEnum Color => ColorEnum.BrightBrown;

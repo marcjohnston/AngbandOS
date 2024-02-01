@@ -10,16 +10,10 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class BroadAxeOfNodensFixedArtifact : FixedArtifact
 {
-    private ItemFactory _baseItemCategory;
     private BroadAxeOfNodensFixedArtifact(SaveGame saveGame) : base(saveGame) { }
 
-    public override void Bind()
-    {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(BroadAxePolearmWeaponItemFactory));
-    }
+    protected override string BaseItemFactoryName => nameof(BroadAxePolearmWeaponItemFactory);
 
-
-    public override ItemFactory BaseItemCategory => _baseItemCategory;
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(ForwardSlashSymbol));
     public override ColorEnum Color => ColorEnum.Grey;

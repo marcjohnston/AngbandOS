@@ -10,14 +10,9 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class StarEssenceOfPolarisFixedArtifact : FixedArtifact, IFixedArtifactActivatible
 {
-    private ItemFactory _baseItemCategory;
     private StarEssenceOfPolarisFixedArtifact(SaveGame saveGame) : base(saveGame) { }
 
-    public override void Bind()
-    {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(StarEssenceGaladrielLightSourceItemFactory));
-    }
-
+    protected override string BaseItemFactoryName => nameof(StarEssenceGaladrielLightSourceItemFactory);
 
     // Star Essence of Polaris lights the area
     public void ActivateItem(Item item)
@@ -28,7 +23,6 @@ internal class StarEssenceOfPolarisFixedArtifact : FixedArtifact, IFixedArtifact
     }
 
     public string DescribeActivationEffect() => "illumination every 10+d10 turns";
-    public override ItemFactory BaseItemCategory => _baseItemCategory;
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(AsteriskSymbol));
     public override ColorEnum Color => ColorEnum.Yellow;

@@ -10,14 +10,9 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class RingOfElementalPowerFireFixedArtifact : FixedArtifact, IFixedArtifactActivatible
 {
-    private ItemFactory _baseItemCategory;
     private RingOfElementalPowerFireFixedArtifact(SaveGame saveGame) : base(saveGame) { }
 
-    public override void Bind()
-    {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(NaryaRingItemFactory));
-    }
-
+    protected override string BaseItemFactoryName => nameof(NaryaRingItemFactory);
 
     // Ring of Elemental Fire casts a fireball
     public void ActivateItem(Item item)
@@ -31,7 +26,6 @@ internal class RingOfElementalPowerFireFixedArtifact : FixedArtifact, IFixedArti
         item.RechargeTimeLeft = base.SaveGame.Rng.RandomLessThan(225) + 225;
     }
     public string DescribeActivationEffect() => "large fire ball (120) every 225+d225 turns";
-    public override ItemFactory BaseItemCategory => _baseItemCategory;
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(EqualSignSymbol));
     public override string Name => "The Ring of Elemental Power (Fire)";

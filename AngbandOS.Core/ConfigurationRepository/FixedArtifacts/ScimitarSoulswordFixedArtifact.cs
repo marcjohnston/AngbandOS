@@ -10,16 +10,10 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class ScimitarSoulswordFixedArtifact : FixedArtifact
 {
-    private ItemFactory _baseItemCategory;
     private ScimitarSoulswordFixedArtifact(SaveGame saveGame) : base(saveGame) { }
 
-    public override void Bind()
-    {
-        _baseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(nameof(ScimitarWeaponItemFactory));
-    }
+    protected override string BaseItemFactoryName => nameof(ScimitarWeaponItemFactory);
 
-
-    public override ItemFactory BaseItemCategory => _baseItemCategory;
 
     public override void ApplyResistances(Item item)
     {
