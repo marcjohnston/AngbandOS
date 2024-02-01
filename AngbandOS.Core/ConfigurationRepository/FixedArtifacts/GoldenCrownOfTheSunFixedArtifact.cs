@@ -23,7 +23,7 @@ internal class GoldenCrownOfTheSunFixedArtifact : FixedArtifact, IFixedArtifactA
         SaveGame.TimedBleeding.ResetTimer();
         item.RechargeTimeLeft = 250;
     }
-    public string DescribeActivationEffect() => "heal (700) every 250 turns";
+    public string DescribeActivationEffect => "heal (700) every 250 turns";
     public override void ApplyResistances(Item item)
     {
         item.BonusPowerType = RareItemTypeEnum.SpecialAbility;

@@ -1920,7 +1920,7 @@ internal sealed class Item : IComparable<Item>
         if (FixedArtifact != null && typeof(IFixedArtifactActivatible).IsAssignableFrom(FixedArtifact.GetType()))
         {
             IFixedArtifactActivatible activatibleFixedArtifact = (IFixedArtifactActivatible)FixedArtifact;
-            return activatibleFixedArtifact.DescribeActivationEffect();
+            return activatibleFixedArtifact.DescribeActivationEffect;
         }
         if (RareItemTypeIndex == RareItemTypeEnum.WeaponPlanarWeapon)
         {

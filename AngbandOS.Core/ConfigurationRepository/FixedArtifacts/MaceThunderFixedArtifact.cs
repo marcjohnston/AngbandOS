@@ -28,7 +28,7 @@ internal class MaceThunderFixedArtifact : FixedArtifact, IFixedArtifactActivatib
         }
         item.RechargeTimeLeft = base.SaveGame.Rng.RandomLessThan(100) + 100;
     }
-    public string DescribeActivationEffect() => "haste self (20+d20 turns) every 100+d100 turns";
+    public string DescribeActivationEffect => "haste self (20+d20 turns) every 100+d100 turns";
 
     public override ColorEnum Color => ColorEnum.Black;
     public override string Name => "The Mace 'Thunder'";

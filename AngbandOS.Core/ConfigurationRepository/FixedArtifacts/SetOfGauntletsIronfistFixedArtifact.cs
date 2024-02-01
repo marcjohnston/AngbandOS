@@ -25,7 +25,7 @@ internal class SetOfGauntletsIronfistFixedArtifact : FixedArtifact, IFixedArtifa
         SaveGame.FireBolt(SaveGame.SingletonRepository.Projectiles.Get(nameof(Projection.FireProjectile)), dir, base.SaveGame.Rng.DiceRoll(9, 8));
         item.RechargeTimeLeft = base.SaveGame.Rng.RandomLessThan(8) + 8;
     }
-    public string DescribeActivationEffect() => "fire bolt (9d8) every 8+d8 turns";
+    public string DescribeActivationEffect => "fire bolt (9d8) every 8+d8 turns";
 
     public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "The Set of Gauntlets 'Ironfist'";

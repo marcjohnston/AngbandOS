@@ -30,7 +30,7 @@ internal class TridentOfTheGnorriFixedArtifact : FixedArtifact, IFixedArtifactAc
         item.BonusPowerType = RareItemTypeEnum.SpecialAbility;
         item.BonusPowerSubType= SaveGame.SingletonRepository.Activations.ToWeightedRandom().Choose();
     }
-    public string DescribeActivationEffect() => "teleport away every 150 turns";
+    public string DescribeActivationEffect => "teleport away every 150 turns";
 
     public override ColorEnum Color => ColorEnum.Yellow;
     public override string Name => "The Trident of the Gnorri";

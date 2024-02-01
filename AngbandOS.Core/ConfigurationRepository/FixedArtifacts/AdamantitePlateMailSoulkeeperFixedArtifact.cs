@@ -23,7 +23,7 @@ internal class AdamantitePlateMailSoulkeeperFixedArtifact : FixedArtifact, IFixe
         SaveGame.TimedBleeding.ResetTimer();
         item.RechargeTimeLeft = 888;
     }
-    public string DescribeActivationEffect() => "heal (1000) every 888 turns";
+    public string DescribeActivationEffect => "heal (1000) every 888 turns";
 
     public override ColorEnum Color => ColorEnum.BrightGreen;
     public override string Name => "The Adamantite Plate Mail 'Soulkeeper'";

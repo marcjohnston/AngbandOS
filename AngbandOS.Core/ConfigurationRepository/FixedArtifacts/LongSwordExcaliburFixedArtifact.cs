@@ -25,7 +25,7 @@ internal class LongSwordExcaliburFixedArtifact : FixedArtifact, IFixedArtifactAc
         SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(ColdProjectile)), dir, 100, 2);
         item.RechargeTimeLeft = 300;
     }
-    public string DescribeActivationEffect() => "frost ball (100) every 300 turns";
+    public string DescribeActivationEffect => "frost ball (100) every 300 turns";
 
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "The Long Sword 'Excalibur'";

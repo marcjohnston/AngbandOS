@@ -53,7 +53,7 @@ internal class LongSwordOfKarakalFixedArtifact : FixedArtifact, IFixedArtifactAc
         }
         item.RechargeTimeLeft = 35;
     }
-    public string DescribeActivationEffect() => "a getaway every 35 turns";
+    public string DescribeActivationEffect => "a getaway every 35 turns";
 
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "The Long Sword of Karakal";

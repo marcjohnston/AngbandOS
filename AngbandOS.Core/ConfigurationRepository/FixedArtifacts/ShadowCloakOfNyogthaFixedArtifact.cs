@@ -21,7 +21,7 @@ internal class ShadowCloakOfNyogthaFixedArtifact : FixedArtifact, IFixedArtifact
         SaveGame.RunScript(nameof(RestoreLevelScript));
         item.RechargeTimeLeft = 450;
     }
-    public string DescribeActivationEffect() => "restore life levels every 450 turns";
+    public string DescribeActivationEffect => "restore life levels every 450 turns";
     public override void ApplyResistances(Item item)
     {
         IArtifactBias artifactBias = null;

@@ -25,7 +25,7 @@ internal class LongSwordOfEverflameFixedArtifact : FixedArtifact, IFixedArtifact
         SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(FireProjectile)), dir, 72, 2);
         item.RechargeTimeLeft = 400;
     }
-    public string DescribeActivationEffect() => "fire ball (72) every 400 turns";
+    public string DescribeActivationEffect => "fire ball (72) every 400 turns";
     public override void ApplyResistances(Item item)
     {
         if (SaveGame.Rng.DieRoll(2) == 1)

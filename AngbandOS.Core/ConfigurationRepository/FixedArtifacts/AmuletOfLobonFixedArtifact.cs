@@ -22,7 +22,7 @@ internal class AmuletOfLobonFixedArtifact : FixedArtifact, IFixedArtifactActivat
         SaveGame.TimedProtectionFromEvil.AddTimer(base.SaveGame.Rng.DieRoll(25) + k);
         item.RechargeTimeLeft = base.SaveGame.Rng.RandomLessThan(225) + 225;
     }
-    public string DescribeActivationEffect() => "protection from evil every 225+d225 turns";
+    public string DescribeActivationEffect => "protection from evil every 225+d225 turns";
 
     public override string Name => "The Amulet of Lobon";
     public override int Ac => 0;

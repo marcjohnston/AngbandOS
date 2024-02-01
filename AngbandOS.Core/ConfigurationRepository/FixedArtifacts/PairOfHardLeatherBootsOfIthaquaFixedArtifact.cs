@@ -28,7 +28,7 @@ internal class PairOfHardLeatherBootsOfIthaquaFixedArtifact : FixedArtifact, IFi
         }
         item.RechargeTimeLeft = 200;
     }
-    public string DescribeActivationEffect() => "haste self (20+d20 turns) every 200 turns";
+    public string DescribeActivationEffect => "haste self (20+d20 turns) every 200 turns";
 
     public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "The Pair of Hard Leather Boots of Ithaqua";

@@ -21,7 +21,7 @@ internal class GreatAxeOfTheTrollsFixedArtifact : FixedArtifact, IFixedArtifactA
         SaveGame.MassCarnage(true);
         item.RechargeTimeLeft = 1000;
     }
-    public string DescribeActivationEffect() => "mass carnage every 1000 turns";
+    public string DescribeActivationEffect => "mass carnage every 1000 turns";
 
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "The Great Axe of the Trolls";

@@ -30,7 +30,7 @@ internal class DaggerCharityFixedArtifact : FixedArtifact, IFixedArtifactActivat
         IArtifactBias artifactBias = null;
         item.ApplyRandomResistance(ref artifactBias, SaveGame.Rng.DieRoll(22) + 16);
     }
-    public string DescribeActivationEffect() => "lightning bolt (4d8) every 6+d6 turns";
+    public string DescribeActivationEffect => "lightning bolt (4d8) every 6+d6 turns";
 
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "The Dagger 'Charity'";

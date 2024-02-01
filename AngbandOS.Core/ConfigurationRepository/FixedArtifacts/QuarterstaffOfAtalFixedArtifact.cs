@@ -28,7 +28,7 @@ internal class QuarterstaffOfAtalFixedArtifact : FixedArtifact, IFixedArtifactAc
         item.BonusPowerType = RareItemTypeEnum.SpecialAbility;
         item.BonusPowerSubType= SaveGame.SingletonRepository.Activations.ToWeightedRandom().Choose();
     }
-    public string DescribeActivationEffect() => "probing, detection and full id  every 1000 turns";
+    public string DescribeActivationEffect => "probing, detection and full id  every 1000 turns";
 
     public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "The Quarterstaff of Atal";

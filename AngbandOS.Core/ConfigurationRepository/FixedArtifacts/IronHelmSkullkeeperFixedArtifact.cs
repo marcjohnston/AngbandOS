@@ -22,7 +22,7 @@ internal class IronHelmSkullkeeperFixedArtifact : FixedArtifact, IFixedArtifactA
         SaveGame.DetectAll();
         item.RechargeTimeLeft = base.SaveGame.Rng.RandomLessThan(55) + 55;
     }
-    public string DescribeActivationEffect() => "detection every 55+d55 turns";
+    public string DescribeActivationEffect => "detection every 55+d55 turns";
 
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "The Iron Helm 'Skullkeeper'";

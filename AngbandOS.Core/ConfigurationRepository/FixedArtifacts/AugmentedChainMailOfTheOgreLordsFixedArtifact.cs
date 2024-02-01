@@ -21,7 +21,7 @@ internal class AugmentedChainMailOfTheOgreLordsFixedArtifact : FixedArtifact, IF
         SaveGame.RunScript(nameof(DestroyAdjacentDoorsScript));
         item.RechargeTimeLeft = 10;
     }
-    public string DescribeActivationEffect() => "door and trap destruction every 10 turns";
+    public string DescribeActivationEffect => "door and trap destruction every 10 turns";
     public override void ApplyResistances(Item item)
     {
         IArtifactBias artifactBias = null;

@@ -28,7 +28,7 @@ internal class RingOfBastFixedArtifact : FixedArtifact, IFixedArtifactActivatibl
         }
         item.RechargeTimeLeft = base.SaveGame.Rng.RandomLessThan(150) + 150;
     }
-    public string DescribeActivationEffect() => "haste self (75+d75 turns) every 150+d150 turns";
+    public string DescribeActivationEffect => "haste self (75+d75 turns) every 150+d150 turns";
 
     public override string Name => "The Ring of Bast";
     public override int Ac => 0;

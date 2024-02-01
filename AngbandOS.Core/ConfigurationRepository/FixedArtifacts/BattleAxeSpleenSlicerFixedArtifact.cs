@@ -22,7 +22,7 @@ internal class BattleAxeSpleenSlicerFixedArtifact : FixedArtifact, IFixedArtifac
         SaveGame.TimedBleeding.SetTimer((SaveGame.TimedBleeding.TurnsRemaining / 2) - 50);
         item.RechargeTimeLeft = base.SaveGame.Rng.RandomLessThan(3) + 3;
     }
-    public string DescribeActivationEffect() => "cure wounds (4d7) every 3+d3 turns";
+    public string DescribeActivationEffect => "cure wounds (4d7) every 3+d3 turns";
 
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "The Battle Axe 'Spleen Slicer'";

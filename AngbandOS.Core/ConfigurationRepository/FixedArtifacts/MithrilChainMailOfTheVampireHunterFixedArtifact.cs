@@ -27,7 +27,7 @@ internal class MithrilChainMailOfTheVampireHunterFixedArtifact : FixedArtifact, 
         SaveGame.RestoreHealth(777);
         item.RechargeTimeLeft = 300;
     }
-    public string DescribeActivationEffect() => "heal (777), curing and heroism every 300 turns";
+    public string DescribeActivationEffect => "heal (777), curing and heroism every 300 turns";
 
     public override ColorEnum Color => ColorEnum.BrightBlue;
     public override string Name => "The Mithril Chain Mail of the Vampire Hunter";

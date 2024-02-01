@@ -25,7 +25,7 @@ internal class MorningStarFirestarterFixedArtifact : FixedArtifact, IFixedArtifa
         SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(FireProjectile)), dir, 72, 3);
         item.RechargeTimeLeft = 100;
     }
-    public string DescribeActivationEffect() => "large fire ball (72) every 100 turns";
+    public string DescribeActivationEffect => "large fire ball (72) every 100 turns";
 
     public override ColorEnum Color => ColorEnum.Black;
     public override string Name => "The Morning Star 'Firestarter'";

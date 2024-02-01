@@ -25,7 +25,7 @@ internal class SetOfLeatherGlovesOfLightFixedArtifact : FixedArtifact, IFixedArt
         SaveGame.FireBolt(SaveGame.SingletonRepository.Projectiles.Get(nameof(Projection.MissileProjectile)), dir, base.SaveGame.Rng.DiceRoll(2, 6));
         item.RechargeTimeLeft = 2;
     }
-    public string DescribeActivationEffect() => "magic missile (2d6) every 2 turns";
+    public string DescribeActivationEffect => "magic missile (2d6) every 2 turns";
 
     public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "The Set of Leather Gloves of Light";

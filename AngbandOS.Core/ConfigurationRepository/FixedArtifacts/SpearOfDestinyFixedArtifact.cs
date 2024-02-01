@@ -25,7 +25,7 @@ internal class SpearOfDestinyFixedArtifact : FixedArtifact, IFixedArtifactActiva
         SaveGame.WallToMud(dir);
         item.RechargeTimeLeft = 5;
     }
-    public string DescribeActivationEffect() => "stone to mud every 5 turns";
+    public string DescribeActivationEffect => "stone to mud every 5 turns";
 
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "The Spear of Destiny";

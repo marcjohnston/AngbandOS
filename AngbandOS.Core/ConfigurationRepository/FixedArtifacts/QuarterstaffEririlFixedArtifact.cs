@@ -24,7 +24,7 @@ internal class QuarterstaffEririlFixedArtifact : FixedArtifact, IFixedArtifactAc
         }
         item.RechargeTimeLeft = 10;
     }
-    public string DescribeActivationEffect() => "identify every 10 turns";
+    public string DescribeActivationEffect => "identify every 10 turns";
 
     public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "The Quarterstaff 'Eriril'";

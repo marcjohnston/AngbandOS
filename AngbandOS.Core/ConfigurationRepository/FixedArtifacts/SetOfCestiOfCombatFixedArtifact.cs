@@ -30,7 +30,7 @@ internal class SetOfCestiOfCombatFixedArtifact : FixedArtifact, IFixedArtifactAc
         item.BonusPowerType = RareItemTypeEnum.SpecialAbility;
         item.BonusPowerSubType= SaveGame.SingletonRepository.Activations.ToWeightedRandom().Choose();
     }
-    public string DescribeActivationEffect() => "a magical arrow (150) every 90+d90 turns";
+    public string DescribeActivationEffect => "a magical arrow (150) every 90+d90 turns";
 
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "The Set of Cesti of Combat";

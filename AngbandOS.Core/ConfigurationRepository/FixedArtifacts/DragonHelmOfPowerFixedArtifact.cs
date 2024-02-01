@@ -20,7 +20,7 @@ internal class DragonHelmOfPowerFixedArtifact : FixedArtifact, IFixedArtifactAct
         SaveGame.TurnMonsters(40 + SaveGame.ExperienceLevel);
         item.RechargeTimeLeft = 3 * (SaveGame.ExperienceLevel + 10);
     }
-    public string DescribeActivationEffect() => "rays of fear in every direction";
+    public string DescribeActivationEffect => "rays of fear in every direction";
 
     public override ColorEnum Color => ColorEnum.BrightGreen;
     public override string Name => "The Dragon Helm of Power";

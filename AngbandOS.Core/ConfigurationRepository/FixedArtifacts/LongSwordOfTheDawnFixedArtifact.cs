@@ -21,7 +21,7 @@ internal class LongSwordOfTheDawnFixedArtifact : FixedArtifact, IFixedArtifactAc
         SaveGame.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, SaveGame.Difficulty, new ReaverMonsterSelector(), true);
         item.RechargeTimeLeft = 500 + base.SaveGame.Rng.DieRoll(500);
     }
-    public string DescribeActivationEffect() => "summon a Black Reaver every 500+d500 turns";
+    public string DescribeActivationEffect => "summon a Black Reaver every 500+d500 turns";
 
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "The Long Sword of the Dawn";

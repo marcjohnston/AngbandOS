@@ -25,7 +25,7 @@ internal class RingOfElementalPowerFireFixedArtifact : FixedArtifact, IFixedArti
         SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(FireProjectile)), dir, 120, 3);
         item.RechargeTimeLeft = base.SaveGame.Rng.RandomLessThan(225) + 225;
     }
-    public string DescribeActivationEffect() => "large fire ball (120) every 225+d225 turns";
+    public string DescribeActivationEffect => "large fire ball (120) every 225+d225 turns";
 
     public override string Name => "The Ring of Elemental Power (Fire)";
     public override int Ac => 0;

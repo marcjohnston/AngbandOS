@@ -25,7 +25,7 @@ internal class CloakOfBarzaiFixedArtifact : FixedArtifact, IFixedArtifactActivat
         SaveGame.TimedPoisonResistance.AddTimer(base.SaveGame.Rng.DieRoll(20) + 20);
         item.RechargeTimeLeft = 111;
     }
-    public string DescribeActivationEffect() => "resistance (20+d20 turns) every 111 turns";
+    public string DescribeActivationEffect => "resistance (20+d20 turns) every 111 turns";
 
     public override ColorEnum Color => ColorEnum.Green;
     public override string Name => "The Cloak of Barzai";

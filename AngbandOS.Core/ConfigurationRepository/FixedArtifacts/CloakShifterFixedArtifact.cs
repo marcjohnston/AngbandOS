@@ -21,7 +21,7 @@ internal class CloakShifterFixedArtifact : FixedArtifact, IFixedArtifactActivati
         SaveGame.RunScriptInt(nameof(TeleportSelfScript), 100);
         item.RechargeTimeLeft = 45;
     }
-    public string DescribeActivationEffect() => "teleport every 45 turns";
+    public string DescribeActivationEffect => "teleport every 45 turns";
 
     public override ColorEnum Color => ColorEnum.Green;
     public override string Name => "The Cloak 'Shifter'";

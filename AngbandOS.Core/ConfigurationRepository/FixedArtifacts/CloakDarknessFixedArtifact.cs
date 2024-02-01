@@ -21,7 +21,7 @@ internal class CloakDarknessFixedArtifact : FixedArtifact, IFixedArtifactActivat
         SaveGame.SleepMonstersTouch();
         item.RechargeTimeLeft = 55;
     }
-    public string DescribeActivationEffect() => "Sleep II every 55 turns";
+    public string DescribeActivationEffect => "Sleep II every 55 turns";
 
     public override ColorEnum Color => ColorEnum.Green;
     public override string Name => "The Cloak 'Darkness'";

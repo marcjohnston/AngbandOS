@@ -25,7 +25,7 @@ internal class FlailTotilaFixedArtifact : FixedArtifact, IFixedArtifactActivatib
         SaveGame.ConfuseMonster(dir, 20);
         item.RechargeTimeLeft = 15;
     }
-    public string DescribeActivationEffect() => "confuse monster every 15 turns";
+    public string DescribeActivationEffect => "confuse monster every 15 turns";
 
     public override ColorEnum Color => ColorEnum.Black;
     public override string Name => "The Flail 'Totila'";

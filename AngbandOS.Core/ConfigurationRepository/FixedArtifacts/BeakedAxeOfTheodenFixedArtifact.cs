@@ -25,7 +25,7 @@ internal class BeakedAxeOfTheodenFixedArtifact : FixedArtifact, IFixedArtifactAc
         SaveGame.DrainLife(dir, 120);
         item.RechargeTimeLeft = 400;
     }
-    public string DescribeActivationEffect() => "drain life (120) every 400 turns";
+    public string DescribeActivationEffect => "drain life (120) every 400 turns";
 
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "The Beaked Axe of Theoden";

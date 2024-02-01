@@ -20,5 +20,5 @@ internal interface IFixedArtifactActivatible
     /// Returns the description of the activation effect for the fixed artifact.
     /// </summary>
     /// <returns></returns>
-    public abstract string DescribeActivationEffect();
+    public abstract string DescribeActivationEffect { get; }
 }

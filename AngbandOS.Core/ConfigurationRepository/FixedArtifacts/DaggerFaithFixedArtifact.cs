@@ -31,7 +31,7 @@ internal class DaggerFaithFixedArtifact : FixedArtifact, IFixedArtifactActivatib
         IArtifactBias artifactBias = null;
         item.ApplyRandomResistance(ref artifactBias, SaveGame.Rng.DieRoll(22) + 16);
     }
-    public string DescribeActivationEffect() => "fire bolt (9d8) every 8+d8 turns";
+    public string DescribeActivationEffect => "fire bolt (9d8) every 8+d8 turns";
 
 
     public override ColorEnum Color => ColorEnum.BrightWhite;

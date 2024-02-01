@@ -25,7 +25,7 @@ internal class TheLucerneHammerJusticeFixedArtifact : FixedArtifact, IFixedArtif
         SaveGame.DrainLife(dir, 90);
         item.RechargeTimeLeft = 70;
     }
-    public string DescribeActivationEffect() => "drain life (90) every 70 turns";
+    public string DescribeActivationEffect => "drain life (90) every 70 turns";
     public override void ApplyResistances(Item item)
     {
         IArtifactBias artifactBias = null;

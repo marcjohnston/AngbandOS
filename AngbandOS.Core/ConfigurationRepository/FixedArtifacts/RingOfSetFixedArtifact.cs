@@ -25,7 +25,7 @@ internal class RingOfSetFixedArtifact : FixedArtifact, IFixedArtifactActivatible
         RingOfSetPower(dir);
         item.RechargeTimeLeft = base.SaveGame.Rng.RandomLessThan(450) + 450;
     }
-    public string DescribeActivationEffect() => "bizarre things every 450+d450 turns";
+    public string DescribeActivationEffect => "bizarre things every 450+d450 turns";
     public override void ApplyResistances(Item item)
     {
         item.BonusPowerType = RareItemTypeEnum.SpecialAbility;

@@ -21,7 +21,7 @@ internal class ScytheOfGharneFixedArtifact : FixedArtifact, IFixedArtifactActiva
         SaveGame.RunScript(nameof(ToggleRecallScript));
         item.RechargeTimeLeft = 200;
     }
-    public string DescribeActivationEffect() => "word of recall every 200 turns";
+    public string DescribeActivationEffect => "word of recall every 200 turns";
 
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "The Scythe of G'harne";

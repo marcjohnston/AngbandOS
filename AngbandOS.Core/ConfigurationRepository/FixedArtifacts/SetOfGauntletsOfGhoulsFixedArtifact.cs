@@ -25,7 +25,7 @@ internal class SetOfGauntletsOfGhoulsFixedArtifact : FixedArtifact, IFixedArtifa
         SaveGame.FireBolt(SaveGame.SingletonRepository.Projectiles.Get(nameof(Projection.ColdProjectile)), dir, base.SaveGame.Rng.DiceRoll(6, 8));
         item.RechargeTimeLeft = base.SaveGame.Rng.RandomLessThan(7) + 7;
     }
-    public string DescribeActivationEffect() => "frost bolt (6d8) every 7+d7 turns";
+    public string DescribeActivationEffect => "frost bolt (6d8) every 7+d7 turns";
 
     public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "The Set of Gauntlets of Ghouls";

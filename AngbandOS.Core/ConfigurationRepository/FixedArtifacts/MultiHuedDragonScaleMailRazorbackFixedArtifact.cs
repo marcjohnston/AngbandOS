@@ -25,7 +25,7 @@ internal class MultiHuedDragonScaleMailRazorbackFixedArtifact : FixedArtifact, I
         item.RechargeTimeLeft = 1000;
     }
 
-    public string DescribeActivationEffect() => "star ball (150) every 1000 turns";
+    public string DescribeActivationEffect => "star ball (150) every 1000 turns";
 
     public override ColorEnum Color => ColorEnum.Purple;
     public override string Name => "The Multi-Hued Dragon Scale Mail 'Razorback'";

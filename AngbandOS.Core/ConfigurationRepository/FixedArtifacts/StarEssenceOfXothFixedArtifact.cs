@@ -22,7 +22,7 @@ internal class StarEssenceOfXothFixedArtifact : FixedArtifact, IFixedArtifactAct
         SaveGame.LightArea(base.SaveGame.Rng.DiceRoll(2, 15), 3);
         item.RechargeTimeLeft = base.SaveGame.Rng.RandomLessThan(50) + 50;
     }
-    public string DescribeActivationEffect() => "magic mapping and light every 50+d50 turns";
+    public string DescribeActivationEffect => "magic mapping and light every 50+d50 turns";
 
     public override ColorEnum Color => ColorEnum.Yellow;
     public override string Name => "The Star Essence of Xoth";

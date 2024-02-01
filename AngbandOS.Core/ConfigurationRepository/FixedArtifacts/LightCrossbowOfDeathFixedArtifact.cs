@@ -34,7 +34,7 @@ internal class LightCrossbowOfDeathFixedArtifact : FixedArtifact, IFixedArtifact
             item.BonusPowerSubType= SaveGame.SingletonRepository.Activations.ToWeightedRandom().Choose();
         }
     }
-    public string DescribeActivationEffect() => "fire branding of bolts every 999 turns";
+    public string DescribeActivationEffect => "fire branding of bolts every 999 turns";
 
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "The Light Crossbow of Death";

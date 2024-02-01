@@ -31,7 +31,7 @@ internal class GemstoneShiningTrapezodedronFixedArtifact : FixedArtifact, IFixed
         }
         item.RechargeTimeLeft = base.SaveGame.Rng.RandomLessThan(20) + 20;
     }
-    public string DescribeActivationEffect() => "clairvoyance and recall, draining you";
+    public string DescribeActivationEffect => "clairvoyance and recall, draining you";
 
     public override ColorEnum Color => ColorEnum.Red;
     public override string Name => "The Gemstone 'Shining Trapezodedron'";

@@ -25,7 +25,7 @@ internal class SetOfGauntletsWhiteSparkFixedArtifact : FixedArtifact, IFixedArti
         SaveGame.FireBolt(SaveGame.SingletonRepository.Projectiles.Get(nameof(Projection.ElecProjectile)), dir, base.SaveGame.Rng.DiceRoll(4, 8));
         item.RechargeTimeLeft = base.SaveGame.Rng.RandomLessThan(6) + 6;
     }
-    public string DescribeActivationEffect() => "lightning bolt (4d8) every 6+d6 turns";
+    public string DescribeActivationEffect => "lightning bolt (4d8) every 6+d6 turns";
 
     public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "The Set of Gauntlets 'White Spark'";

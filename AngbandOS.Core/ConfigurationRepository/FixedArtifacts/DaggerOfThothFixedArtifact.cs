@@ -25,7 +25,7 @@ internal class DaggerOfThothFixedArtifact : FixedArtifact, IFixedArtifactActivat
         SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(PoisProjectile)), dir, 12, 3);
         item.RechargeTimeLeft = base.SaveGame.Rng.RandomLessThan(4) + 4;
     }
-    public string DescribeActivationEffect() => "stinking cloud (12) every 4+d4 turns";
+    public string DescribeActivationEffect => "stinking cloud (12) every 4+d4 turns";
 
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "The Dagger of Thoth";

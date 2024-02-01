@@ -27,7 +27,7 @@ internal class MetalScaleMailOfTheOrcsFixedArtifact : FixedArtifact, IFixedArtif
         SaveGame.Carnage(true);
         item.RechargeTimeLeft = 500;
     }
-    public string DescribeActivationEffect() => "carnage every 500 turns";
+    public string DescribeActivationEffect => "carnage every 500 turns";
 
 
     public override ColorEnum Color => ColorEnum.Grey;

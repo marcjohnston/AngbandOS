@@ -35,7 +35,7 @@ internal class PowerDragonScaleMailBladeturnerFixedArtifact : FixedArtifact, IFi
         SaveGame.TimedPoisonResistance.AddTimer(base.SaveGame.Rng.DieRoll(50) + 50);
         item.RechargeTimeLeft = 400;
     }
-    public string DescribeActivationEffect() => "breathe elements (300), berserk rage, bless, and resistance";
+    public string DescribeActivationEffect => "breathe elements (300), berserk rage, bless, and resistance";
 
     public override ColorEnum Color => ColorEnum.Purple;
     public override string Name => "The Power Dragon Scale Mail 'Bladeturner'";

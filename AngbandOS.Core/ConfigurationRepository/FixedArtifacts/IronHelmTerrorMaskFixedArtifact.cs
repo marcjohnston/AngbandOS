@@ -41,7 +41,7 @@ internal class IronHelmTerrorMaskFixedArtifact : FixedArtifact, IFixedArtifactAc
         SaveGame.TurnMonsters(40 + SaveGame.ExperienceLevel);
         item.RechargeTimeLeft = 3 * (SaveGame.ExperienceLevel + 10);
     }
-    public string DescribeActivationEffect() => "rays of fear in every direction";
+    public string DescribeActivationEffect => "rays of fear in every direction";
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "The Iron Helm 'Terror Mask'";
     public override int Ac => 5;
