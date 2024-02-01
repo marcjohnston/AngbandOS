@@ -23,7 +23,7 @@ internal abstract class FixedArtifact : IItemCharacteristics, IGetKey<string>
 
     public void Bind()
     {
-        BaseItemCategory = SaveGame.SingletonRepository.ItemFactories.Get(BaseItemFactoryName);
+        BaseItemFactory = SaveGame.SingletonRepository.ItemFactories.Get(BaseItemFactoryName);
     }
 
     /// <summary>
@@ -40,13 +40,14 @@ internal abstract class FixedArtifact : IItemCharacteristics, IGetKey<string>
     /// Allows the fixed artifact to apply resistances and power as needed.  Does nothing, by default.
     /// </summary>
     /// <returns></returns>
-    public virtual void ApplyResistances(Item item)
-    {
-    }
+    public virtual void ApplyResistances(Item item) { }
 
     protected abstract string BaseItemFactoryName { get; }
 
-    public ItemFactory BaseItemCategory { get; private set; } // Inherit this 
+    /// <summary>
+    /// Returns the item factory that acts as the base item for fixed artifacts of this type.
+    /// </summary>
+    public ItemFactory BaseItemFactory { get; private set; }
 
     /// <summary>
     /// Returns a 1-in-chance value of the weapon doing extra vorpal damage.  Does not affect non-vorpal cutting weapons.  Default to a 1-in-6 chance.

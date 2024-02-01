@@ -2519,7 +2519,7 @@ internal sealed class Item : IComparable<Item>
                 continue;
             }
 
-            if (aPtr.BaseItemCategory != Factory)
+            if (aPtr.BaseItemFactory != Factory)
             {
                 continue;
             }

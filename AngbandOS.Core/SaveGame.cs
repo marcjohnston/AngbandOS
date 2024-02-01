@@ -1462,7 +1462,7 @@ internal class SaveGame
             {
                 return null;
             }
-            ItemFactory kIdx = aPtr.BaseItemCategory;
+            ItemFactory kIdx = aPtr.BaseItemFactory;
             if (kIdx.Level > ObjectLevel)
             {
                 int d = (kIdx.Level - ObjectLevel) * 5;
@@ -13749,7 +13749,7 @@ internal class SaveGame
             return;
         }
         aPtr.CurNum = 1;
-        Item qPtr = aPtr.BaseItemCategory.CreateItem();
+        Item qPtr = aPtr.BaseItemFactory.CreateItem();
         qPtr.FixedArtifact = SingletonRepository.FixedArtifacts[aIdx];
         qPtr.TypeSpecificValue = aPtr.Pval;
         qPtr.BaseArmorClass = aPtr.Ac;
