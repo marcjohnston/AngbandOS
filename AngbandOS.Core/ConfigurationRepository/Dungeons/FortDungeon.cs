@@ -17,8 +17,10 @@ internal class FortDungeon : Dungeon
     public override bool Tower => true;
     public override int MaxLevel => 5;
     protected override string? BiasMonsterFilterName => nameof(KoboldMonsterFilter);
-    public override string FirstGuardian => "Vort the Kobold Queen";
-    public override int FirstLevel => 5;
+    protected override string[]? DungeonGuardianNames => new string[]
+    {
+        nameof(VortTheKoboldQueenDungeonGuardian)
+    };
     public override string Name => "the Kobold Fort";
     public override string Shortname => "Fort";
     public override string MapSymbol => "f";

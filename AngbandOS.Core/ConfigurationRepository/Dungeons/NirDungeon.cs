@@ -13,8 +13,10 @@ internal class NirDungeon : Dungeon
     public override int BaseOffset => 0;
     public override int MaxLevel => 7;
     protected override string? BiasMonsterFilterName => nameof(HumanMonsterFilter);
-    public override string FirstGuardian => "Robin Hood, the Outlaw";
-    public override int FirstLevel => 7;
+    protected override string[]? DungeonGuardianNames => new string[]
+    {
+        nameof(RobinHoodTheOutlawDungeonGuardian)
+    };
     public override string Name => "the Sewers under Nir";
     public override string Shortname => "Nir";
     public override string MapSymbol => "N";

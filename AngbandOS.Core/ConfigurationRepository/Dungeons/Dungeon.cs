@@ -32,6 +32,16 @@ internal abstract class Dungeon : IGetKey<string>
         {
             Bias = SaveGame.SingletonRepository.MonsterFilters.Get(BiasMonsterFilterName);
         }
+
+        List<DungeonGuardian> dungeonGuardianList = new List<DungeonGuardian>();
+        if (DungeonGuardianNames != null)
+        {
+            foreach (string dungeonGuardianName in DungeonGuardianNames)
+            {
+                dungeonGuardianList.Add(SaveGame.SingletonRepository.DungeonGuardians.Get(dungeonGuardianName));
+            }
+        }
+        DungeonGuardians = dungeonGuardianList.ToArray();
     }
 
     /// <summary>
@@ -56,14 +66,15 @@ internal abstract class Dungeon : IGetKey<string>
     public MonsterFilter? Bias { get; private set; } = null;
 
     /// <summary>
-    /// The race of the first fixed quest monster
+    /// Returns the quests that are associated to this dungeon; or an empty array, if there are none.  This property is bound during
+    /// the binding phase from the DungeonQuestDefinitions property.
     /// </summary>
-    public virtual string FirstGuardian => ""; // TODO: Needs to be nullable Monster
+    public DungeonGuardian[] DungeonGuardians { get; private set; }
 
     /// <summary>
-    /// The level of the first fixed quest
+    /// Returns all of the quests associated to the dungeon.
     /// </summary>
-    public virtual int FirstLevel => 0; // TODO: Should belong to first guardian as a separate object
+    protected virtual string[]? DungeonGuardianNames => null;
 
     /// <summary>
     /// The symbol used for the dungeon on the wilderness map
@@ -79,16 +90,6 @@ internal abstract class Dungeon : IGetKey<string>
     /// The full name of the dungeon
     /// </summary>
     public abstract string Name { get; }
-
-    /// <summary>
-    /// The race of the second fixed quest monster
-    /// </summary>
-    public virtual string SecondGuardian => ""; // TODO: Needs to be a nullable monster
-
-    /// <summary>
-    /// The level of the second fixed quest
-    /// </summary>
-    public virtual int SecondLevel => 0; // TODO: Should belong to first guardian as a separate object
 
     /// <summary>
     /// The shortened name of the dungeon for display purposes

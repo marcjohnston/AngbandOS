@@ -2666,7 +2666,12 @@ internal class Monster : IItemContainer
     /// </summary>
     public int GetMonsterIndex() // TODO: Needs to be removed.
     {
-        return SaveGame.GetMonsterIndex(this);
+        for (int i = 0; i < SaveGame.Monsters.Length; i++)
+        {
+            if (SaveGame.Monsters[i] == this)
+                return i;
+        }
+        throw new Exception("Internal error monster not found for get monster index.");
     }
 
     /// <summary>

@@ -13,10 +13,11 @@ internal class TombDungeon : Dungeon
     public override int BaseOffset => 4;
     public override int MaxLevel => 21;
     protected override string? BiasMonsterFilterName => nameof(UndeadMonsterFilter);
-    public override string FirstGuardian => "The disembodied hand";
-    public override string SecondGuardian => "Khufu the mummified King";
-    public override int FirstLevel => 1;
-    public override int SecondLevel => 21;
+    protected override string[]? DungeonGuardianNames => new string[]
+    {
+        nameof(TheDisembodiedHandDungeonGuardian),
+        nameof(KhufuTheMummifiedKingDungeonGuardian)
+    };
     public override string Name => "Khufu's Tomb";
     public override string Shortname => "Tomb";
     public override string MapSymbol => "t";

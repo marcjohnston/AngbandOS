@@ -86,6 +86,7 @@ internal class SingletonRepository
     public FindQuestsRepositoryCollection FindQuests;
     public ItemFiltersRepositoryCollection ItemFilters;
     public MonsterFiltersRepositoryCollection MonsterFilters;
+    public DungeonGuardiansRepositoryCollection DungeonGuardians;
 
     public SingletonRepository(SaveGame saveGame)
     {
@@ -192,6 +193,7 @@ internal class SingletonRepository
         FindQuests = AddRepositoryCollection<FindQuestsRepositoryCollection>(new FindQuestsRepositoryCollection(SaveGame));
         ItemFilters = AddRepositoryCollection<ItemFiltersRepositoryCollection>(new ItemFiltersRepositoryCollection(SaveGame));
         MonsterFilters = AddRepositoryCollection<MonsterFiltersRepositoryCollection>(new MonsterFiltersRepositoryCollection(SaveGame));
+        DungeonGuardians = AddRepositoryCollection<DungeonGuardiansRepositoryCollection>(new DungeonGuardiansRepositoryCollection(SaveGame));
 
         // Load all of the objects into each repository.  This is where the assembly will be scanned or the database will be read.
         LoadRepositoryItems();

@@ -13,10 +13,11 @@ internal class YeekDungeon : Dungeon
     public override int BaseOffset => 2;
     public override int MaxLevel => 8;
     protected override string? BiasMonsterFilterName => nameof(YeekMonsterFilter);
-    public override string FirstGuardian => "Orfax, Son of Boldor";
-    public override string SecondGuardian => "Boldor, King of the Yeeks";
-    public override int FirstLevel => 7;
-    public override int SecondLevel => 8;
+    protected override string[]? DungeonGuardianNames => new string[]
+    {
+        nameof(OrfaxSonOfBoldorDungeonGuardian),
+        nameof(BoldorKingOfTheYeeksDungeonGuardian)
+    };
     public override string Name => "the Yeek King's Lair";
     public override string Shortname => "Yeek Lair";
     public override string MapSymbol => "y";

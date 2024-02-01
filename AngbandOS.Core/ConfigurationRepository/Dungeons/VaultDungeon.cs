@@ -12,8 +12,10 @@ internal class VaultDungeon : Dungeon
     private VaultDungeon(SaveGame saveGame) : base(saveGame) { }
     public override int BaseOffset => 10;
     public override int MaxLevel => 30;
-    public override string FirstGuardian => "The Stormbringer";
-    public override int FirstLevel => 30;
+    protected override string[]? DungeonGuardianNames => new string[]
+    {
+        nameof(TheStormbringerDungeonGuardian)
+    };
     public override string Name => "the Vault of the Sword";
     public override string Shortname => "Vault";
     public override string MapSymbol => "v";

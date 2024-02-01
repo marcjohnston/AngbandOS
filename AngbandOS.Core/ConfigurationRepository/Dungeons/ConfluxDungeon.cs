@@ -17,10 +17,11 @@ internal class ConfluxDungeon : Dungeon
     public override bool Tower => true;
     public override int MaxLevel => 20;
     protected override string? BiasMonsterFilterName => nameof(ElementalMonsterFilter);
-    public override string FirstGuardian => "Lasha, Mistress of Water";
-    public override string SecondGuardian => "Grom, Master of Earth";
-    public override int FirstLevel => 15;
-    public override int SecondLevel => 20;
+    protected override string[]? DungeonGuardianNames => new string[]
+    {
+        nameof(LashaMistressOfWaterDungeonGuardian),
+        nameof(GromMasterOfEarthDungeonGuardian)
+    };
     public override string Name => "the Conflux of the Elements";
     public override string Shortname => "Conflux";
     public override string MapSymbol => "e";

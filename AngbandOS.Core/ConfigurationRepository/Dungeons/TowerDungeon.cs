@@ -17,8 +17,10 @@ internal class TowerDungeon : Dungeon
     public override bool Tower => true;
     public override int MaxLevel => 17;
     protected override string? BiasMonsterFilterName => nameof(SpiderMonsterFilter);
-    public override string FirstGuardian => "Shelob, Spider of Darkness";
-    public override int FirstLevel => 17;
+    protected override string[]? DungeonGuardianNames => new string[]
+    {
+        nameof(ShelobSpiderOfDarknessDungeonGuardian)
+    };
     public override string Name => "Shelob's Tower";
     public override string Shortname => "Tower";
     public override string MapSymbol => "s";

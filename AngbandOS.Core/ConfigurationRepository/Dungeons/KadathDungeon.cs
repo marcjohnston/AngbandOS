@@ -13,10 +13,11 @@ internal class KadathDungeon : Dungeon
     public override int BaseOffset => 50;
     public override int MaxLevel => 75;
     protected override string? BiasMonsterFilterName => nameof(CthuloidMonsterFilter);
-    public override string FirstGuardian => "Nyarlathotep";
-    public override string SecondGuardian => "Azathoth, The Daemon Sultan";
-    public override int FirstLevel => 49;
-    public override int SecondLevel => 50;
+    protected override string[]? DungeonGuardianNames => new string[]
+    {
+        nameof(NyarlathotepDungeonGuardian),
+        nameof(AzathothTheDaemonSultanDungeonGuardian)
+    };
     public override string Name => "the Catacombs under Kadath";
     public override string Shortname => "Kadath";
     public override string MapSymbol => "K";

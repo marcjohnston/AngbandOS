@@ -17,10 +17,11 @@ internal class NecropolisDungeon : Dungeon
     public override bool Tower => true;
     public override int MaxLevel => 40;
     protected override string? BiasMonsterFilterName => nameof(HiUndeadMonsterFilter);
-    public override string FirstGuardian => "Fire Phantom";
-    public override string SecondGuardian => "Vecna, the Emperor Lich";
-    public override int FirstLevel => 1;
-    public override int SecondLevel => 40;
+    protected override string[]? DungeonGuardianNames => new string[]
+    {
+        nameof(FirePhantomDungeonGuardian),
+        nameof(VecnaTheEmperorLichDungeonGuardian)
+    };
     public override string Name => "the Necropolis";
     public override string Shortname => "Necropolis";
     public override string MapSymbol => "n";

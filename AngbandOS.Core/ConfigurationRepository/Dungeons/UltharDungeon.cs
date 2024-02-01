@@ -4,6 +4,8 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
+using static AngbandOS.Core.DungeonGuardians.ShelobSpiderOfDarknessDungeonGuardian;
+
 namespace AngbandOS.Core.Dungeons;
 
 [Serializable]
@@ -13,9 +15,10 @@ internal class UltharDungeon : Dungeon
     public override int BaseOffset => 0;
     public override int MaxLevel => 7;
     protected override string? BiasMonsterFilterName => nameof(AnimalMonsterFilter);
-    public override string FirstGuardian => "Hobbes the Tiger";
-    public override int FirstLevel => 7;
-
+    protected override string[]? DungeonGuardianNames => new string[]
+    {
+        nameof(HobbesTheTigerMonsterRaceDungeonGuardian)
+    };
     public override string Name => "the Sewers under Ulthar";
     public override string Shortname => "Ulthar";
     public override string MapSymbol => "U";

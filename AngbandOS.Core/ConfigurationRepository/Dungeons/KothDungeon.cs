@@ -17,10 +17,11 @@ internal class KothDungeon : Dungeon
     public override bool Tower => true;
     public override int MaxLevel => 20;
     protected override string? BiasMonsterFilterName => nameof(CthuloidMonsterFilter);
-    public override string FirstGuardian => "Father Dagon";
-    public override string SecondGuardian => "Tulzscha";
-    public override int FirstLevel => 1;
-    public override int SecondLevel => 20;
+    protected override string[]? DungeonGuardianNames => new string[]
+    {
+        nameof(FatherDagonDungeonGuardian),
+        nameof(TulzschaDungeonGuardian)
+    };
     public override string Name => "the Tower of Koth";
     public override string Shortname => "Koth";
     public override string MapSymbol => "k";

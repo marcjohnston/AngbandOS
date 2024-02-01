@@ -12,7 +12,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class SaveGame
 {
-    public const int DungeonCount = 20;
+    public const int DungeonCount = 20; // TODO: Use the Singleton.Dungeons.Count property
     public readonly Configuration Configuration;
     public bool IsDead;
 
@@ -1550,7 +1550,7 @@ internal class SaveGame
         return 0;
     }
 
-    public void ResetUniqueOnlyGuardianStatus()
+    private void ResetUniqueOnlyGuardianStatus()
     {
         foreach (MonsterRace race in SingletonRepository.MonsterRaces)
         {
@@ -13833,6 +13833,11 @@ internal class SaveGame
         return false;
     }
 
+    /// <summary>
+    /// 1. Resets the OnlyGuardian flag for all monster races.  
+    /// 2. Clears the quests and creates _maxQuests (50) quests.
+    /// 3. Creates a quest for all of the quests (24) for all of the dungeons (20).
+    /// </summary>
     private void PlayerBirthQuests()
     {
         ResetUniqueOnlyGuardianStatus();
@@ -13842,22 +13847,14 @@ internal class SaveGame
         {
             Quests.Add(new Quest(this));
         }
+
+        // These are the fixed quests
         for (int i = 0; i < DungeonCount; i++)
         {
-            if (SingletonRepository.Dungeons[i].FirstGuardian != "")
+            foreach (DungeonGuardian dungeonGuardian in SingletonRepository.Dungeons[i].DungeonGuardians)
             {
-                Quests[index].Level = SingletonRepository.Dungeons[i].FirstLevel;
-                Quests[index].RIdx = GetMonsterIndexFromName(SingletonRepository.Dungeons[i].FirstGuardian);
-                SingletonRepository.MonsterRaces[Quests[index].RIdx].OnlyGuardian = true;
-                Quests[index].Dungeon = SingletonRepository.Dungeons[i];
-                Quests[index].ToKill = 1;
-                Quests[index].Killed = 0;
-                index++;
-            }
-            if (SingletonRepository.Dungeons[i].SecondGuardian != "")
-            {
-                Quests[index].Level = SingletonRepository.Dungeons[i].SecondLevel;
-                Quests[index].RIdx = GetMonsterIndexFromName(SingletonRepository.Dungeons[i].SecondGuardian);
+                Quests[index].Level = dungeonGuardian.LevelFound;
+                Quests[index].RIdx = dungeonGuardian.MonsterRace.Index;
                 SingletonRepository.MonsterRaces[Quests[index].RIdx].OnlyGuardian = true;
                 Quests[index].Dungeon = SingletonRepository.Dungeons[i];
                 Quests[index].ToKill = 1;
@@ -13865,19 +13862,29 @@ internal class SaveGame
                 index++;
             }
         }
-        for (int i = 0; i < 26; i++)
+
+        // These are the random quests
+        for (int i = 0; i < _maxQuests - index; i++) // TODO: This should be _maxQuests - index to populate the remaining quests
         {
             int j;
             bool sameLevel;
             do
             {
-                sameLevel = false;
+
+                // Find a valid random quest monster.
                 do
                 {
-                    Quests[index].RIdx = GetRndQMonster(index);
+                    Quests[index].RIdx = GetRandomQuestMonster(index);
                 } while (Quests[index].RIdx == 0);
+
+                // Assign the quest level as the level of the monster that was chosen.
                 Quests[index].Level = SingletonRepository.MonsterRaces[Quests[index].RIdx].Level;
+
+                // Adjust the quest level between 2 and 1/6 the quest levels.
                 Quests[index].Level -= Rng.RandomBetween(2, 3 + (Quests[index].Level / 6));
+
+                // Scan all of the previous quests to see if a quest is already on the same level.  Do not allow same level quests.
+                sameLevel = false;
                 for (j = 0; j < index; j++)
                 {
                     if (Quests[index].Level == Quests[j].Level)
@@ -13887,24 +13894,32 @@ internal class SaveGame
                     }
                 }
             } while (sameLevel);
+
+            // If the monster race select is a unique, turn on the only guardian flag.
             if (SingletonRepository.MonsterRaces[Quests[index].RIdx].Unique)
             {
                 SingletonRepository.MonsterRaces[Quests[index].RIdx].OnlyGuardian = true;
             }
-            j = Rng.RandomBetween(1, DungeonCount) - 1;
 
-            // Find a dungeon that matches the criteria for the quest:
-            // 1. The dungeon cannot start at a level that is past the quest level
-            // 2. The dungeon has to have enough levels that it includes the quest level
-            // 3. 
+            // We need to attach the quest to a dungeon.  To do this, we need to find a qualifying dungeon.  To qualify, a dungeon:
+            // 1. cannot start at a level that is at or past the quest level; the dungeon must have at least one level prior to the start of the quest;
+            // 2. has to have enough levels that it includes the quest level
+            // 3. the random quest cannot be on the same level as any of the guardians for that dungeon
             // For this algorithm to work, the MonsterRaces repository collection must be sorted by the LevelFound property.
+            //while (Quests[index].Level <= SingletonRepository.Dungeons[j].Offset ||
+            //       Quests[index].Level > SingletonRepository.Dungeons[j].MaxLevel + SingletonRepository.Dungeons[j].Offset ||
+            //       Quests[index].Level == SingletonRepository.Dungeons[j].FirstLevel + SingletonRepository.Dungeons[j].Offset ||
+            //       Quests[index].Level == SingletonRepository.Dungeons[j].SecondLevel + SingletonRepository.Dungeons[j].Offset)
+            j = Rng.RandomBetween(1, DungeonCount) - 1;
             while (Quests[index].Level <= SingletonRepository.Dungeons[j].Offset ||
                    Quests[index].Level > SingletonRepository.Dungeons[j].MaxLevel + SingletonRepository.Dungeons[j].Offset ||
-                   Quests[index].Level == SingletonRepository.Dungeons[j].FirstLevel + SingletonRepository.Dungeons[j].Offset || 
-                   Quests[index].Level == SingletonRepository.Dungeons[j].SecondLevel + SingletonRepository.Dungeons[j].Offset)
+                   SingletonRepository.Dungeons[j].DungeonGuardians.Where(_dungeonGuardian => 
+                    _dungeonGuardian.LevelFound + SingletonRepository.Dungeons[j].Offset == Quests[index].Level).Count() > 0)
             {
                 j = Rng.RandomBetween(1, DungeonCount) - 1;
             }
+
+            // Attach the random quest to the dungeon.
             Quests[index].Dungeon = SingletonRepository.Dungeons[j];
             Quests[index].Level -= SingletonRepository.Dungeons[j].Offset;
             Quests[index].ToKill = GetNumberMonster(index);
@@ -13965,7 +13980,7 @@ internal class SaveGame
         return num;
     }
 
-    private int GetRndQMonster(int qIdx)
+    private int GetRandomQuestMonster(int qIdx)
     {
         int rIdx;
         int tmp = Rng.RandomBetween(1, 10);
@@ -14015,10 +14030,14 @@ internal class SaveGame
                 rIdx = Rng.RandomBetween(87, 573);
                 break;
         }
+
+        // Do not allow a monster that can multiply.
         if (SingletonRepository.MonsterRaces[rIdx].Multiply)
         {
             return 0;
         }
+
+        // Do not allow the quest monster to be the same as another quest (except quests 0 and 1???? huh)
         for (int j = 2; j < qIdx; j++)
         {
             if (Quests[j].RIdx == rIdx)
@@ -16982,21 +17001,6 @@ internal class SaveGame
         }
     }
 
-    /// <summary>
-    /// Returns the index of this monster in the monster list.  This method is provided for backwards compatability and should NOT be used.  Will be deleted when no longer needed.
-    /// </summary>
-    /// <param name="monster"></param>
-    /// <returns></returns>
-    /// <exception cref="Exception"></exception>
-    public int GetMonsterIndex(Monster monster) // TODO: Needs to be removed.
-    {
-        for (int i = 0; i < Monsters.Length; i++)
-        {
-            if (Monsters[i] == monster)
-                return i;
-        }
-        throw new Exception("Internal error monster not found for get monster index.");
-    }
     public bool AllocHorde(int y, int x)
     {
         MonsterRace rPtr = null;

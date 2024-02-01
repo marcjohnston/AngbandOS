@@ -17,10 +17,11 @@ internal class OrcTowerDungeon : Dungeon
     public override bool Tower => true;
     public override int MaxLevel => 17;
     protected override string? BiasMonsterFilterName => nameof(OrcMonsterFilter);
-    public override string FirstGuardian => "Bolg, Son of Azog";
-    public override string SecondGuardian => "Azog, King of the Uruk-Hai";
-    public override int FirstLevel => 16;
-    public override int SecondLevel => 17;
+    protected override string[]? DungeonGuardianNames => new string[]
+    {
+        nameof(BolgSonOfAzogDungeonGuardian),
+        nameof(AzogKingOfTheUrukHaiDungeonGuardian)
+    };
     public override string Name => "the Orc Tower";
     public override string Shortname => "Orc Tower";
     public override string MapSymbol => "o";

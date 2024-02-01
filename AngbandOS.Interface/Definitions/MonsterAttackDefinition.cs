@@ -15,7 +15,18 @@ public class MonsterAttackDefinition
     public int DDice { get; set; }
     public int DSide { get; set; }
 
+    /// <summary>
+    /// The constructor to use for Json deserialization.
+    /// </summary>
     public MonsterAttackDefinition() { }
+
+    /// <summary>
+    /// The constructor to use for gamepacks.
+    /// </summary>
+    /// <param name="methodName"></param>
+    /// <param name="effectName"></param>
+    /// <param name="dice"></param>
+    /// <param name="sides"></param>
     public MonsterAttackDefinition(string methodName, string? effectName, int dice, int sides)
     {
         MethodName = methodName;
