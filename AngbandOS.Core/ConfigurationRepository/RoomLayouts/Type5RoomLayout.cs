@@ -22,7 +22,7 @@ internal class Type5RoomLayout : RoomLayout
         int y2 = yval + 4;
         int x1 = xval - 11;
         int x2 = xval + 11;
-        MonsterSelector getMonNumHook;
+        IMonsterFilter getMonNumHook;
         for (y = y1 - 1; y <= y2 + 1; y++)
         {
             for (x = x1 - 1; x <= x2 + 1; x++)
@@ -95,41 +95,41 @@ internal class Type5RoomLayout : RoomLayout
                      SaveGame.Difficulty + SaveGame.Rng.DieRoll(5));
             if (SaveGame.Rng.DieRoll(2) != 1 && SaveGame.Difficulty >= 25 + SaveGame.Rng.DieRoll(15))
             {
-                getMonNumHook = new SymbolMonsterSelector(SaveGame.SingletonRepository.MonsterRaces[_templateRace].Symbol.Character);
+                getMonNumHook = new SymbolDynamicMonsterFilter(SaveGame, SaveGame.SingletonRepository.MonsterRaces[_templateRace].Symbol.Character);
             }
             else
             {
-                getMonNumHook = new CloneMonsterSelector(SaveGame.SingletonRepository.MonsterRaces[_templateRace]);
+                getMonNumHook = new CloneDynamicMonsterFilter(SaveGame, SaveGame.SingletonRepository.MonsterRaces[_templateRace]);
             }
         }
         else if (tmp < 25)
         {
-            getMonNumHook = new JellyMonsterSelector();
+            getMonNumHook = SaveGame.SingletonRepository.MonsterFilters.Get(nameof(JellyMonsterFilter));
         }
         else if (tmp < 50)
         {
-            getMonNumHook = new TreasureMonsterSelector();
+            getMonNumHook = SaveGame.SingletonRepository.MonsterFilters.Get(nameof(TreasureMonsterFilter));
         }
         else if (tmp < 65)
         {
             if (SaveGame.Rng.DieRoll(3) == 1)
             {
-                getMonNumHook = new KennelMonsterSelector();
+                getMonNumHook = SaveGame.SingletonRepository.MonsterFilters.Get(nameof(KennelMonsterFilter));
             }
             else
             {
-                getMonNumHook = new AnimalMonsterSelector();
+                getMonNumHook = SaveGame.SingletonRepository.MonsterFilters.Get(nameof(AnimalMonsterFilter));
             }
         }
         else
         {
             if (SaveGame.Rng.DieRoll(3) == 1)
             {
-                getMonNumHook = new ChapelMonsterSelector();
+                getMonNumHook = SaveGame.SingletonRepository.MonsterFilters.Get(nameof(ChapelMonsterFilter));
             }
             else
             {
-                getMonNumHook = new UndeadMonsterSelector();
+                getMonNumHook = SaveGame.SingletonRepository.MonsterFilters.Get(nameof(UndeadMonsterFilter));
             }
         }
         for (int i = 0; i < 64; i++)

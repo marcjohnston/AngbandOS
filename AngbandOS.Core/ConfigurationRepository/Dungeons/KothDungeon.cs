@@ -16,7 +16,7 @@ internal class KothDungeon : Dungeon
     /// </summary>
     public override bool Tower => true;
     public override int MaxLevel => 20;
-    public override MonsterSelector? Bias => new CthuloidMonsterSelector();
+    public override MonsterFilter? Bias => SaveGame.SingletonRepository.MonsterFilters.Get(nameof(CthuloidMonsterFilter));
     public override string FirstGuardian => "Father Dagon";
     public override string SecondGuardian => "Tulzscha";
     public override int FirstLevel => 1;

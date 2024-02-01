@@ -19,7 +19,7 @@ internal class TarotSpellMassSummons : Spell
         {
             if (SaveGame.Rng.DieRoll(10) > 3)
             {
-                if (SaveGame.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel, new NoUniquesMonsterSelector(), false))
+                if (SaveGame.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel, SaveGame.SingletonRepository.MonsterFilters.Get(nameof(NoUniquesMonsterFilter)), false))
                 {
                     noneCame = false;
                 }

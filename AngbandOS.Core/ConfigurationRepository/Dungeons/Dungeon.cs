@@ -41,7 +41,7 @@ internal abstract class Dungeon : IGetKey<string>
     /// <summary>
     /// The bias for monster generation in the dungeon
     /// </summary>
-    public virtual MonsterSelector? Bias => null;
+    public virtual MonsterFilter? Bias => null;
 
     /// <summary>
     /// The race of the first fixed quest monster

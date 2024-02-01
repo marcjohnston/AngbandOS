@@ -22,5 +22,5 @@ internal class SummonReaverMonsterSpell : SummonMonsterSpell
     /// </summary>
     /// <param name="monster"></param>
     /// <returns></returns>
-    protected override MonsterSelector? MonsterSelector(Monster monster) => new ReaverMonsterSelector();
+    protected override MonsterFilter? MonsterSelector(Monster monster) => SaveGame.SingletonRepository.MonsterFilters.Get(nameof(ReaverMonsterFilter));
 }

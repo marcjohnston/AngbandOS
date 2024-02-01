@@ -13,24 +13,24 @@ internal class TarotSpellTheFool : Spell
     private TarotSpellTheFool(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        MonsterSelector? summonType = null;
+        MonsterFilter? summonType = null;
         SaveGame.MsgPrint("You concentrate on the Fool card...");
         switch (SaveGame.Rng.DieRoll(4))
         {
             case 1:
-                summonType = new Bizarre1MonsterSelector();
+                summonType = SaveGame.SingletonRepository.MonsterFilters.Get(nameof(Bizarre1MonsterFilter));
                 break;
 
             case 2:
-                summonType = new Bizarre2MonsterSelector();
+                summonType = SaveGame.SingletonRepository.MonsterFilters.Get(nameof(Bizarre2MonsterFilter));
                 break;
 
             case 3:
-                summonType = new Bizarre4MonsterSelector();
+                summonType = SaveGame.SingletonRepository.MonsterFilters.Get(nameof(Bizarre4MonsterFilter));
                 break;
 
             case 4:
-                summonType = new Bizarre5MonsterSelector();
+                summonType = SaveGame.SingletonRepository.MonsterFilters.Get(nameof(Bizarre5MonsterFilter));
                 break;
         }
         if (SaveGame.Rng.DieRoll(2) == 1)

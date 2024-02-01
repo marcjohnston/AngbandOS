@@ -16,7 +16,7 @@ internal class TarotSpellSummonMonster : Spell
         SaveGame.MsgPrint("You concentrate on the image of a monster...");
         if (SaveGame.Rng.DieRoll(5) > 2)
         {
-            if (!SaveGame.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel, new NoUniquesMonsterSelector(), false))
+            if (!SaveGame.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel, SaveGame.SingletonRepository.MonsterFilters.Get(nameof(NoUniquesMonsterFilter)), false))
             {
                 SaveGame.MsgPrint("No-one ever turns up.");
             }

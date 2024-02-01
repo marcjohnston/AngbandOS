@@ -16,7 +16,7 @@ internal class TowerDungeon : Dungeon
     /// </summary>
     public override bool Tower => true;
     public override int MaxLevel => 17;
-    public override MonsterSelector? Bias => new SpiderMonsterSelector();
+    public override MonsterFilter? Bias => SaveGame.SingletonRepository.MonsterFilters.Get(nameof(SpiderMonsterFilter));
     public override string FirstGuardian => "Shelob, Spider of Darkness";
     public override int FirstLevel => 17;
     public override string Name => "Shelob's Tower";

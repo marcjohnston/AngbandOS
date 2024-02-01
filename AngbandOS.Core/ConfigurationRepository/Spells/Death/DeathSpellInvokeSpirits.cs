@@ -41,7 +41,7 @@ internal class DeathSpellInvokeSpirits : Spell
         if (die < 8)
         {
             SaveGame.MsgPrint("Oh no! Mouldering forms rise from the earth around you!");
-            SaveGame.SummonSpecific(SaveGame.MapY, SaveGame.MapX, SaveGame.Difficulty, new UndeadMonsterSelector());
+            SaveGame.SummonSpecific(SaveGame.MapY, SaveGame.MapX, SaveGame.Difficulty, SaveGame.SingletonRepository.MonsterFilters.Get(nameof(UndeadMonsterFilter)));
         }
         if (die < 14)
         {

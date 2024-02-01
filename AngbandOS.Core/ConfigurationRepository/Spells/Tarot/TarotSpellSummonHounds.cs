@@ -16,12 +16,12 @@ internal class TarotSpellSummonHounds : Spell
         SaveGame.MsgPrint("You concentrate on the image of a hound...");
         if (SaveGame.Rng.DieRoll(5) > 2)
         {
-            if (!SaveGame.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel, new HoundMonsterSelector(), true))
+            if (!SaveGame.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel, SaveGame.SingletonRepository.MonsterFilters.Get(nameof(HoundMonsterFilter)), true))
             {
                 SaveGame.MsgPrint("No-one ever turns up.");
             }
         }
-        else if (SaveGame.SummonSpecific(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel, new HoundMonsterSelector()))
+        else if (SaveGame.SummonSpecific(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel, SaveGame.SingletonRepository.MonsterFilters.Get(nameof(HoundMonsterFilter))))
         {
             SaveGame.MsgPrint("The summoned hounds get angry!");
         }

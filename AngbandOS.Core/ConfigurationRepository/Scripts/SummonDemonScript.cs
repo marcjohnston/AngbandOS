@@ -20,7 +20,7 @@ internal class SummonDemonScript : Script, IScript
     {
         if (SaveGame.Rng.DieRoll(3) == 1)
         {
-            if (SaveGame.SummonSpecific(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel * 3 / 2, new DemonMonsterSelector()))
+            if (SaveGame.SummonSpecific(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel * 3 / 2, SaveGame.SingletonRepository.MonsterFilters.Get(nameof(DemonMonsterFilter))))
             {
                 SaveGame.MsgPrint("The area fills with a stench of sulphur and brimstone.");
                 SaveGame.MsgPrint("'NON SERVIAM! Wretch! I shall feast on thy mortal soul!'");
@@ -32,7 +32,7 @@ internal class SummonDemonScript : Script, IScript
         }
         else
         {
-            if (SaveGame.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel * 3 / 2, new DemonMonsterSelector(), SaveGame.ExperienceLevel == 50))
+            if (SaveGame.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel * 3 / 2, SaveGame.SingletonRepository.MonsterFilters.Get(nameof(DemonMonsterFilter)), SaveGame.ExperienceLevel == 50))
             {
                 SaveGame.MsgPrint("The area fills with a stench of sulphur and brimstone.");
                 SaveGame.MsgPrint("'What is thy bidding... Master?'");

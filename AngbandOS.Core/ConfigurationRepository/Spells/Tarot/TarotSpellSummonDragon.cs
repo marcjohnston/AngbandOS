@@ -16,12 +16,12 @@ internal class TarotSpellSummonDragon : Spell
         SaveGame.MsgPrint("You concentrate on the image of a dragon...");
         if (SaveGame.Rng.DieRoll(10) > 3)
         {
-            if (!SaveGame.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel, new DragonMonsterSelector(), true))
+            if (!SaveGame.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel, SaveGame.SingletonRepository.MonsterFilters.Get(nameof(DragonMonsterFilter)), true))
             {
                 SaveGame.MsgPrint("No-one ever turns up.");
             }
         }
-        else if (SaveGame.SummonSpecific(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel, new DragonMonsterSelector()))
+        else if (SaveGame.SummonSpecific(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel, SaveGame.SingletonRepository.MonsterFilters.Get(nameof(DragonMonsterFilter))))
         {
             SaveGame.MsgPrint("The summoned dragon gets angry!");
         }

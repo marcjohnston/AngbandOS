@@ -12,7 +12,7 @@ internal class TombDungeon : Dungeon
     private TombDungeon(SaveGame saveGame) : base(saveGame) { }
     public override int BaseOffset => 4;
     public override int MaxLevel => 21;
-    public override MonsterSelector? Bias => new UndeadMonsterSelector();
+    public override MonsterFilter? Bias => SaveGame.SingletonRepository.MonsterFilters.Get(nameof(UndeadMonsterFilter));
     public override string FirstGuardian => "The disembodied hand";
     public override string SecondGuardian => "Khufu the mummified King";
     public override int FirstLevel => 1;

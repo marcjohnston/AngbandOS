@@ -25,11 +25,11 @@ internal class AttDragonRandomMutation : Mutation
         bool dSummon;
         if (base.SaveGame.Rng.DieRoll(5) == 1)
         {
-            dSummon = SaveGame.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, SaveGame.Difficulty, new DragonMonsterSelector(), true);
+            dSummon = SaveGame.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, SaveGame.Difficulty, SaveGame.SingletonRepository.MonsterFilters.Get(nameof(DragonMonsterFilter)), true);
         }
         else
         {
-            dSummon = SaveGame.SummonSpecific(SaveGame.MapY, SaveGame.MapX, SaveGame.Difficulty, new DragonMonsterSelector());
+            dSummon = SaveGame.SummonSpecific(SaveGame.MapY, SaveGame.MapX, SaveGame.Difficulty, SaveGame.SingletonRepository.MonsterFilters.Get(nameof(DragonMonsterFilter)));
         }
         if (!dSummon)
         {

@@ -15,5 +15,5 @@ internal class SummonGreatOldOneMonsterSpell : SummonMonsterSpell
 
     protected override int MaximumSummonCount(SaveGame saveGame) => 8;
 
-    protected override MonsterSelector? MonsterSelector(Monster monster) => new GooMonsterSelector();
+    protected override MonsterFilter? MonsterSelector(Monster monster) => SaveGame.SingletonRepository.MonsterFilters.Get(nameof(GooMonsterFilter));
 }

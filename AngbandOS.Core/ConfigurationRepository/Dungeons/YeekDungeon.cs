@@ -12,7 +12,7 @@ internal class YeekDungeon : Dungeon
     private YeekDungeon(SaveGame saveGame) : base(saveGame) { }
     public override int BaseOffset => 2;
     public override int MaxLevel => 8;
-    public override MonsterSelector? Bias => new YeekMonsterSelector();
+    public override MonsterFilter? Bias => SaveGame.SingletonRepository.MonsterFilters.Get(nameof(YeekMonsterFilter));
     public override string FirstGuardian => "Orfax, Son of Boldor";
     public override string SecondGuardian => "Boldor, King of the Yeeks";
     public override int FirstLevel => 7;

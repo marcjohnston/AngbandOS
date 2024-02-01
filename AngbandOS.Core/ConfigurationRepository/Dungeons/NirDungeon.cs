@@ -12,7 +12,7 @@ internal class NirDungeon : Dungeon
     private NirDungeon(SaveGame saveGame) : base(saveGame) { }
     public override int BaseOffset => 0;
     public override int MaxLevel => 7;
-    public override MonsterSelector? Bias => new HumanMonsterSelector();
+    public override MonsterFilter? Bias => SaveGame.SingletonRepository.MonsterFilters.Get(nameof(HumanMonsterFilter));
     public override string FirstGuardian => "Robin Hood, the Outlaw";
     public override int FirstLevel => 7;
     public override string Name => "the Sewers under Nir";

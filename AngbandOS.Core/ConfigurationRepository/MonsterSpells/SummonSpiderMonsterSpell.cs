@@ -13,5 +13,5 @@ internal class SummonSpiderMonsterSpell : SummonMonsterSpell
     private SummonSpiderMonsterSpell(SaveGame saveGame) : base(saveGame) { }
     protected override string SummonName(Monster monster) => "spiders";
 
-    protected override MonsterSelector? MonsterSelector(Monster monster) => new SpiderMonsterSelector();
+    protected override MonsterFilter? MonsterSelector(Monster monster) => SaveGame.SingletonRepository.MonsterFilters.Get(nameof(SpiderMonsterFilter));
 }

@@ -85,6 +85,7 @@ internal class SingletonRepository
     public WorshipPlayerAttacksRepositoryCollection WorshipPlayerAttacks;
     public FindQuestsRepositoryCollection FindQuests;
     public ItemFiltersRepositoryCollection ItemFilters;
+    public MonsterFiltersRepositoryCollection MonsterFilters;
 
     public SingletonRepository(SaveGame saveGame)
     {
@@ -190,6 +191,7 @@ internal class SingletonRepository
         WorshipPlayerAttacks = AddRepositoryCollection<WorshipPlayerAttacksRepositoryCollection>(new WorshipPlayerAttacksRepositoryCollection(SaveGame));
         FindQuests = AddRepositoryCollection<FindQuestsRepositoryCollection>(new FindQuestsRepositoryCollection(SaveGame));
         ItemFilters = AddRepositoryCollection<ItemFiltersRepositoryCollection>(new ItemFiltersRepositoryCollection(SaveGame));
+        MonsterFilters = AddRepositoryCollection<MonsterFiltersRepositoryCollection>(new MonsterFiltersRepositoryCollection(SaveGame));
 
         // Load all of the objects into each repository.  This is where the assembly will be scanned or the database will be read.
         LoadRepositoryItems();

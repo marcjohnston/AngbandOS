@@ -21,7 +21,7 @@ internal class LifeSpellDivineIntervention : Spell
         SaveGame.ConfuseMonsters(SaveGame.ExperienceLevel * 4);
         SaveGame.TurnMonsters(SaveGame.ExperienceLevel * 4);
         SaveGame.StasisMonsters(SaveGame.ExperienceLevel * 4);
-        SaveGame.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel, new CthuloidMonsterSelector(), true);
+        SaveGame.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel, SaveGame.SingletonRepository.MonsterFilters.Get(nameof(CthuloidMonsterFilter)), true);
         SaveGame.TimedSuperheroism.AddTimer(SaveGame.Rng.DieRoll(25) + 25);
         SaveGame.RestoreHealth(300);
         if (SaveGame.TimedHaste.TurnsRemaining == 0)

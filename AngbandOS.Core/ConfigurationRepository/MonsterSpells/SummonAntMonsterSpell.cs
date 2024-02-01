@@ -13,5 +13,5 @@ internal class SummonAntMonsterSpell : SummonMonsterSpell
     private SummonAntMonsterSpell(SaveGame saveGame) : base(saveGame) { }
     protected override string SummonName(Monster monster) => "ants";
 
-    protected override MonsterSelector? MonsterSelector(Monster monster) => new AntMonsterSelector();
+    protected override MonsterFilter? MonsterSelector(Monster monster) => SaveGame.SingletonRepository.MonsterFilters.Get(nameof(AntMonsterFilter));
 }

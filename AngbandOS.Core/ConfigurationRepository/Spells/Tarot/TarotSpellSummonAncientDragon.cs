@@ -16,12 +16,12 @@ internal class TarotSpellSummonAncientDragon : Spell
         SaveGame.MsgPrint("You concentrate on the image of an ancient dragon...");
         if (SaveGame.Rng.DieRoll(10) > 3)
         {
-            if (!SaveGame.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel, new HiDragonNoUniquesMonsterSelector(), true))
+            if (!SaveGame.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel, SaveGame.SingletonRepository.MonsterFilters.Get(nameof(HiDragonNoUniquesMonsterFilter)), true))
             {
                 SaveGame.MsgPrint("No-one ever turns up.");
             }
         }
-        else if (SaveGame.SummonSpecific(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel, new HiDragonNoUniquesMonsterSelector()))
+        else if (SaveGame.SummonSpecific(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel, SaveGame.SingletonRepository.MonsterFilters.Get(nameof(HiDragonNoUniquesMonsterFilter))))
         {
             SaveGame.MsgPrint("The summoned dragon gets angry!");
         }

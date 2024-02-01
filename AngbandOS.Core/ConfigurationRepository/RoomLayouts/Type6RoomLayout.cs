@@ -22,7 +22,7 @@ internal class Type6RoomLayout : RoomLayout
         int y2 = yval + 4;
         int x1 = xval - 11;
         int x2 = xval + 11;
-        MonsterSelector getMonNumHook;
+        IMonsterFilter getMonNumHook;
         for (y = y1 - 1; y <= y2 + 1; y++)
         {
             for (x = x1 - 1; x <= x2 + 1; x++)
@@ -85,15 +85,15 @@ internal class Type6RoomLayout : RoomLayout
         int tmp = SaveGame.Rng.DieRoll(SaveGame.Difficulty);
         if (tmp < 20)
         {
-            getMonNumHook = new OrcMonsterSelector();
+            getMonNumHook = SaveGame.SingletonRepository.MonsterFilters.Get(nameof(OrcMonsterFilter));
         }
         else if (tmp < 40)
         {
-            getMonNumHook = new TrollMonsterSelector();
+            getMonNumHook = SaveGame.SingletonRepository.MonsterFilters.Get(nameof(TrollMonsterFilter));
         }
         else if (tmp < 55)
         {
-            getMonNumHook = new GiantMonsterSelector();
+            getMonNumHook = SaveGame.SingletonRepository.MonsterFilters.Get(nameof(GiantMonsterFilter));
         }
         else if (tmp < 70)
         {
@@ -106,17 +106,17 @@ internal class Type6RoomLayout : RoomLayout
                 } while (SaveGame.SingletonRepository.MonsterRaces[_templateRace].Unique ||
                          SaveGame.SingletonRepository.MonsterRaces[_templateRace].Level + SaveGame.Rng.DieRoll(5) >
                          SaveGame.Difficulty + SaveGame.Rng.DieRoll(5));
-                getMonNumHook = new SymbolMonsterSelector(SaveGame.SingletonRepository.MonsterRaces[_templateRace].Symbol.Character);
+                getMonNumHook = new SymbolDynamicMonsterFilter(SaveGame, SaveGame.SingletonRepository.MonsterRaces[_templateRace].Symbol.Character);
             }
             else
             {
                 if (SaveGame.Rng.DieRoll(2) == 1)
                 {
-                    getMonNumHook = new CultMonsterSelector();
+                    getMonNumHook = SaveGame.SingletonRepository.MonsterFilters.Get(nameof(CultMonsterFilter));
                 }
                 else
                 {
-                    getMonNumHook = new ChapelMonsterSelector();
+                    getMonNumHook = SaveGame.SingletonRepository.MonsterFilters.Get(nameof(ChapelMonsterFilter));
                 }
             }
         }
@@ -126,39 +126,39 @@ internal class Type6RoomLayout : RoomLayout
             {
                 case 0:
                     {
-                        getMonNumHook = new AcidBreathingDragonMonsterSelector();
+                        getMonNumHook = SaveGame.SingletonRepository.MonsterFilters.Get(nameof(AcidBreathingDragonMonsterFilter));
                         break;
                     }
                 case 1:
                     {
-                        getMonNumHook = new LightningBreathingDragonMonsterSelector();
+                        getMonNumHook = SaveGame.SingletonRepository.MonsterFilters.Get(nameof(LightningBreathingDragonMonsterFilter));
                         break;
                     }
                 case 2:
                     {
-                        getMonNumHook = new FireBreathingDragonMonsterSelector();
+                        getMonNumHook = SaveGame.SingletonRepository.MonsterFilters.Get(nameof(FireBreathingDragonMonsterFilter));
                         break;
                     }
                 case 3:
                     {
-                        getMonNumHook = new ColdBreathingDragonMonsterSelector();
+                        getMonNumHook = SaveGame.SingletonRepository.MonsterFilters.Get(nameof(ColdBreathingDragonMonsterFilter));
                         break;
                     }
                 case 4:
                     {
-                        getMonNumHook = new PoisonBreathingDragonMonsterSelector();
+                        getMonNumHook = SaveGame.SingletonRepository.MonsterFilters.Get(nameof(PoisonBreathingDragonMonsterFilter));
                         break;
                     }
                 default:
                     {
-                        getMonNumHook = new AnyBreathingDragonMonsterSelector();
+                        getMonNumHook = SaveGame.SingletonRepository.MonsterFilters.Get(nameof(AnyBreathingDragonMonsterFilter));
                         break;
                     }
             }
         }
         else
         {
-            getMonNumHook = new SymbolMonsterSelector('U');
+            getMonNumHook = new SymbolDynamicMonsterFilter(SaveGame, 'U');
         }
         for (i = 0; i < 16; i++)
         {

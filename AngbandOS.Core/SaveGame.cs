@@ -610,7 +610,7 @@ internal class SaveGame
     public readonly List<GridCoordinate> Light = new List<GridCoordinate>(); // TODO: This belongs to UpdateLightFlaggedActions and should be private.
     public readonly List<GridCoordinate> View = new List<GridCoordinate>(); // TODO: This belongs to UpdateViewFlaggedActions and should be private.
     public int CurrentlyActingMonster;
-    public MonsterSelector? DunBias = null; // The dungeon does not have a bias for monsters.
+    public MonsterFilter? DunBias = null; // The dungeon does not have a bias for monsters.
     public int NumRepro;
     public bool RepairMonsters;
     public bool ShimmerMonsters;
@@ -716,22 +716,22 @@ internal class SaveGame
     }
 
 
-    public MonsterSelector GetRandomBizarreMonsterSelector()
+    public MonsterFilter GetRandomBizarreMonsterSelector()
     {
         switch (Rng.DieRoll(6))
         {
             case 1:
-                return new Bizarre1MonsterSelector();
+                return SingletonRepository.MonsterFilters.Get(nameof(Bizarre1MonsterFilter));
             case 2:
-                return new Bizarre2MonsterSelector();
+                return SingletonRepository.MonsterFilters.Get(nameof(Bizarre2MonsterFilter));
             case 3:
-                return new Bizarre3MonsterSelector();
+                return SingletonRepository.MonsterFilters.Get(nameof(Bizarre3MonsterFilter));
             case 4:
-                return new Bizarre4MonsterSelector();
+                return SingletonRepository.MonsterFilters.Get(nameof(Bizarre4MonsterFilter));
             case 5:
-                return new Bizarre5MonsterSelector();
+                return SingletonRepository.MonsterFilters.Get(nameof(Bizarre5MonsterFilter));
             default:
-                return new Bizarre6MonsterSelector();
+                return SingletonRepository.MonsterFilters.Get(nameof(Bizarre6MonsterFilter));
         }
     }
 
@@ -3418,7 +3418,7 @@ internal class SaveGame
         if (GameTime.IsHalloween)
         {
             MsgPrint("All Hallows Eve and the ghouls come out to play...");
-            SummonSpecific(MapY, MapX, Difficulty, new UndeadMonsterSelector());
+            SummonSpecific(MapY, MapX, Difficulty, SingletonRepository.MonsterFilters.Get(nameof(UndeadMonsterFilter)));
         }
         if (CurrentDepth <= 0)
         {
@@ -3951,66 +3951,66 @@ internal class SaveGame
             {
                 case 1:
                 case 2:
-                    SummonSpecific(MapY, MapX, Difficulty, new AntMonsterSelector());
+                    SummonSpecific(MapY, MapX, Difficulty, SingletonRepository.MonsterFilters.Get(nameof(AntMonsterFilter)));
                     break;
 
                 case 3:
                 case 4:
-                    SummonSpecific(MapY, MapX, Difficulty, new SpiderMonsterSelector());
+                    SummonSpecific(MapY, MapX, Difficulty, SingletonRepository.MonsterFilters.Get(nameof(SpiderMonsterFilter)));
                     break;
 
                 case 5:
                 case 6:
-                    SummonSpecific(MapY, MapX, Difficulty, new HoundMonsterSelector());
+                    SummonSpecific(MapY, MapX, Difficulty, SingletonRepository.MonsterFilters.Get(nameof(HoundMonsterFilter)));
                     break;
 
                 case 7:
                 case 8:
-                    SummonSpecific(MapY, MapX, Difficulty, new HydraMonsterSelector());
+                    SummonSpecific(MapY, MapX, Difficulty, SingletonRepository.MonsterFilters.Get(nameof(HydraMonsterFilter)));
                     break;
 
                 case 9:
                 case 10:
-                    SummonSpecific(MapY, MapX, Difficulty, new CthuloidMonsterSelector());
+                    SummonSpecific(MapY, MapX, Difficulty, SingletonRepository.MonsterFilters.Get(nameof(CthuloidMonsterFilter)));
                     break;
 
                 case 11:
                 case 12:
-                    SummonSpecific(MapY, MapX, Difficulty, new UndeadMonsterSelector());
+                    SummonSpecific(MapY, MapX, Difficulty, SingletonRepository.MonsterFilters.Get(nameof(UndeadMonsterFilter)));
                     break;
 
                 case 13:
                 case 14:
-                    SummonSpecific(MapY, MapX, Difficulty, new DragonMonsterSelector());
+                    SummonSpecific(MapY, MapX, Difficulty, SingletonRepository.MonsterFilters.Get(nameof(DragonMonsterFilter)));
                     break;
 
                 case 15:
                 case 16:
-                    SummonSpecific(MapY, MapX, Difficulty, new DemonMonsterSelector());
+                    SummonSpecific(MapY, MapX, Difficulty, SingletonRepository.MonsterFilters.Get(nameof(DemonMonsterFilter)));
                     break;
 
                 case 17:
-                    SummonSpecific(MapY, MapX, Difficulty, new GooMonsterSelector());
+                    SummonSpecific(MapY, MapX, Difficulty, SingletonRepository.MonsterFilters.Get(nameof(GooMonsterFilter)));
                     break;
 
                 case 18:
                 case 19:
-                    SummonSpecific(MapY, MapX, Difficulty, new UniqueMonsterSelector());
+                    SummonSpecific(MapY, MapX, Difficulty, SingletonRepository.MonsterFilters.Get(nameof(UniqueMonsterFilter)));
                     break;
 
                 case 20:
                 case 21:
-                    SummonSpecific(MapY, MapX, Difficulty, new HiUndeadMonsterSelector());
+                    SummonSpecific(MapY, MapX, Difficulty, SingletonRepository.MonsterFilters.Get(nameof(HiUndeadMonsterFilter)));
                     break;
 
                 case 22:
                 case 23:
-                    SummonSpecific(MapY, MapX, Difficulty, new HiDragonMonsterSelector());
+                    SummonSpecific(MapY, MapX, Difficulty, SingletonRepository.MonsterFilters.Get(nameof(HiDragonMonsterFilter)));
                     break;
 
                 case 24:
                 case 25:
-                    SummonSpecific(MapY, MapX, 100, new ReaverMonsterSelector());
+                    SummonSpecific(MapY, MapX, 100, SingletonRepository.MonsterFilters.Get(nameof(ReaverMonsterFilter)));
                     break;
 
                 default:
@@ -6052,7 +6052,7 @@ internal class SaveGame
         int maxReaver = (Difficulty / 50) + Rng.DieRoll(6);
         for (int i = 0; i < maxReaver; i++)
         {
-            SummonSpecific(MapY, MapX, 100, new ReaverMonsterSelector());
+            SummonSpecific(MapY, MapX, 100, SingletonRepository.MonsterFilters.Get(nameof(ReaverMonsterFilter)));
         }
     }
 
@@ -11050,7 +11050,7 @@ internal class SaveGame
                     if (Wilderness[WildernessY][WildernessX].Town.Char == 'K')
                     {
                         DungeonDifficulty = 35;
-                        DunBias = new CthuloidMonsterSelector();
+                        DunBias = SingletonRepository.MonsterFilters.Get(nameof(CthuloidMonsterFilter));
                     }
                 }
                 else if (Wilderness[WildernessY][WildernessX].Dungeon != null)
@@ -11065,7 +11065,7 @@ internal class SaveGame
                 else
                 {
                     DungeonDifficulty = 2;
-                    DunBias = new AnimalMonsterSelector();
+                    DunBias = SingletonRepository.MonsterFilters.Get(nameof(AnimalMonsterFilter));
                 }
                 CurHgt = Constants.PlayableScreenHeight;
                 CurWid = Constants.PlayableScreenWidth;
@@ -17033,7 +17033,7 @@ internal class SaveGame
         Monster mPtr = Monsters[_hackMIdxIi];
         for (attempts = Rng.DieRoll(10) + 5; attempts != 0; attempts--)
         {
-            SummonSpecific(mPtr.MapY, mPtr.MapX, Difficulty, new KinMonsterSelector(rPtr.Symbol.Character));
+            SummonSpecific(mPtr.MapY, mPtr.MapX, Difficulty, new KinDynamicMonsterFilter(this, rPtr.Symbol.Character));
         }
         return true;
     }
@@ -17312,7 +17312,7 @@ internal class SaveGame
     /// <param name="level"></param>
     /// <param name="getMonNumHook"></param>
     /// <returns></returns>
-    public int GetMonNum(int level, MonsterSelector? getMonNumHook)
+    public int GetMonNum(int level, IMonsterFilter? getMonNumHook)
     {
         int i, j;
         AllocationEntry[] table = AllocRaceTable;
@@ -17350,7 +17350,7 @@ internal class SaveGame
                 continue;
             }
 
-            if (getMonNumHook == null || getMonNumHook.Matches(this, rPtr))
+            if (getMonNumHook == null || getMonNumHook.Matches(rPtr))
             {
                 table[i].FinalProbability = table[i].BaseProbability;
             }
@@ -17676,7 +17676,7 @@ internal class SaveGame
                 {
                     continue;
                 }
-                int z = GetMonNum(rPtr.Level, new PlaceMonsterOkayMonsterSelector(rPtr.Index));
+                int z = GetMonNum(rPtr.Level, new PlaceOkayDynamicMonsterFilter(this, rPtr.Index));
                 if (z == 0)
                 {
                     break;
@@ -17751,7 +17751,7 @@ internal class SaveGame
         }
     }
 
-    public bool SummonSpecific(int y1, int x1, int lev, MonsterSelector? monsterSelector, bool groupOk = true)
+    public bool SummonSpecific(int y1, int x1, int lev, IMonsterFilter? monsterSelector, bool groupOk = true)
     {
         int i;
         int x = x1;
@@ -17787,7 +17787,7 @@ internal class SaveGame
         return true;
     }
 
-    public bool SummonSpecificFriendly(int y1, int x1, int lev, MonsterSelector? monsterSelector, bool groupOk) // TODO: The floor Sigil and Charm are the only differences from SummonSpecific.
+    public bool SummonSpecificFriendly(int y1, int x1, int lev, IMonsterFilter? monsterSelector, bool groupOk) // TODO: The floor Sigil and Charm are the only differences from SummonSpecific.
     {
         int i;
         int x = 0;

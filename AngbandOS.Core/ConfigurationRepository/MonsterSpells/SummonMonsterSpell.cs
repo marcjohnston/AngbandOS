@@ -34,9 +34,9 @@ internal abstract class SummonMonsterSpell : MonsterSpell
     protected virtual int MaximumSummonCount(SaveGame saveGame) => 6;
 
     /// <summary>
-    /// Returns a monster selector that is used to specify which type of monster to be summoned or null, for any monster.
+    /// Returns a monster filter that is used to specify which type of monster to be summoned or null, for any monster.
     /// </summary>
-    protected abstract MonsterSelector? MonsterSelector(Monster monster);
+    protected abstract IMonsterFilter? MonsterSelector(Monster monster);
 
     /// <summary>
     /// Returns a monster selector that is used to specify which type of monster to be summoned when a friendly monster is attacking
@@ -44,7 +44,7 @@ internal abstract class SummonMonsterSpell : MonsterSpell
     /// </summary>
     /// <param name="monster"></param>
     /// <returns></returns>
-    protected virtual MonsterSelector? FriendlyMonsterSelector(Monster monster) => MonsterSelector(monster);
+    protected virtual IMonsterFilter? FriendlyMonsterSelector(Monster monster) => MonsterSelector(monster);
 
     protected virtual int SummonLevel(Monster monster) => monster.Race.Level >= 1 ? monster.Race.Level : 1;
 
