@@ -16,7 +16,7 @@ internal class OrcTowerDungeon : Dungeon
     /// </summary>
     public override bool Tower => true;
     public override int MaxLevel => 17;
-    public override MonsterFilter? Bias => SaveGame.SingletonRepository.MonsterFilters.Get(nameof(OrcMonsterFilter));
+    protected override string? BiasMonsterFilterName => nameof(OrcMonsterFilter);
     public override string FirstGuardian => "Bolg, Son of Azog";
     public override string SecondGuardian => "Azog, King of the Uruk-Hai";
     public override int FirstLevel => 16;

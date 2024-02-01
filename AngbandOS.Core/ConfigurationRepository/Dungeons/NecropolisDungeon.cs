@@ -16,7 +16,7 @@ internal class NecropolisDungeon : Dungeon
     /// </summary>
     public override bool Tower => true;
     public override int MaxLevel => 40;
-    public override MonsterFilter? Bias => SaveGame.SingletonRepository.MonsterFilters.Get(nameof(HiUndeadMonsterFilter));
+    protected override string? BiasMonsterFilterName => nameof(HiUndeadMonsterFilter);
     public override string FirstGuardian => "Fire Phantom";
     public override string SecondGuardian => "Vecna, the Emperor Lich";
     public override int FirstLevel => 1;

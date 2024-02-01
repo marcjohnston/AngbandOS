@@ -16,7 +16,7 @@ internal class FortDungeon : Dungeon
     /// </summary>
     public override bool Tower => true;
     public override int MaxLevel => 5;
-    public override MonsterFilter? Bias => SaveGame.SingletonRepository.MonsterFilters.Get(nameof(KoboldMonsterFilter));
+    protected override string? BiasMonsterFilterName => nameof(KoboldMonsterFilter);
     public override string FirstGuardian => "Vort the Kobold Queen";
     public override int FirstLevel => 5;
     public override string Name => "the Kobold Fort";

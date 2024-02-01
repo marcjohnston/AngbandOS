@@ -12,7 +12,7 @@ internal class UltharDungeon : Dungeon
     private UltharDungeon(SaveGame saveGame) : base(saveGame) { }
     public override int BaseOffset => 0;
     public override int MaxLevel => 7;
-    public override MonsterFilter? Bias => SaveGame.SingletonRepository.MonsterFilters.Get(nameof(AnimalMonsterFilter));
+    protected override string? BiasMonsterFilterName => nameof(AnimalMonsterFilter);
     public override string FirstGuardian => "Hobbes the Tiger";
     public override int FirstLevel => 7;
 

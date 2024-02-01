@@ -16,7 +16,7 @@ internal class ConfluxDungeon : Dungeon
     /// </summary>
     public override bool Tower => true;
     public override int MaxLevel => 20;
-    public override MonsterFilter? Bias => SaveGame.SingletonRepository.MonsterFilters.Get(nameof(ElementalMonsterFilter));
+    protected override string? BiasMonsterFilterName => nameof(ElementalMonsterFilter);
     public override string FirstGuardian => "Lasha, Mistress of Water";
     public override string SecondGuardian => "Grom, Master of Earth";
     public override int FirstLevel => 15;

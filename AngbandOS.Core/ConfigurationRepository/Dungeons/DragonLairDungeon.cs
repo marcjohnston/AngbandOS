@@ -12,7 +12,7 @@ internal class DragonLairDungeon : Dungeon
     private DragonLairDungeon(SaveGame saveGame) : base(saveGame) { }
     public override int BaseOffset => 15;
     public override int MaxLevel => 35;
-    public override MonsterFilter? Bias => SaveGame.SingletonRepository.MonsterFilters.Get(nameof(DragonMonsterFilter));
+    protected override string? BiasMonsterFilterName => nameof(DragonMonsterFilter);
     public override string FirstGuardian => "Glaurung, Father of the Dragons";
     public override string SecondGuardian => "Ancalagon the Black";
     public override int FirstLevel => 34;

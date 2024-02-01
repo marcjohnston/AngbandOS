@@ -12,7 +12,7 @@ internal class KadathDungeon : Dungeon
     private KadathDungeon(SaveGame saveGame) : base(saveGame) { }
     public override int BaseOffset => 50;
     public override int MaxLevel => 75;
-    public override MonsterFilter? Bias => SaveGame.SingletonRepository.MonsterFilters.Get(nameof(CthuloidMonsterFilter));
+    protected override string? BiasMonsterFilterName => nameof(CthuloidMonsterFilter);
     public override string FirstGuardian => "Nyarlathotep";
     public override string SecondGuardian => "Azathoth, The Daemon Sultan";
     public override int FirstLevel => 49;

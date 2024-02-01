@@ -26,7 +26,13 @@ internal abstract class Dungeon : IGetKey<string>
     public virtual string Key => GetType().Name;
 
     public string GetKey => Key;
-    public virtual void Bind() { }
+    public void Bind() 
+    {
+        if (BiasMonsterFilterName != null)
+        {
+            Bias = SaveGame.SingletonRepository.MonsterFilters.Get(BiasMonsterFilterName);
+        }
+    }
 
     /// <summary>
     /// Returns the deepest level the player has achieved for Word of Recall.
@@ -39,9 +45,15 @@ internal abstract class Dungeon : IGetKey<string>
     public abstract int BaseOffset { get; }
 
     /// <summary>
+    /// Returns the name of the monster filter to be used for a bias for generating monsters; or null, if the dungeon has no
+    /// biasness.  Returns null, by default.
+    /// </summary>
+    protected virtual string? BiasMonsterFilterName { get; } = null;
+
+    /// <summary>
     /// The bias for monster generation in the dungeon
     /// </summary>
-    public virtual MonsterFilter? Bias => null;
+    public MonsterFilter? Bias { get; private set; } = null;
 
     /// <summary>
     /// The race of the first fixed quest monster

@@ -16,7 +16,7 @@ internal class SpireDungeon : Dungeon
     /// </summary>
     public override bool Tower => true;
     public override int MaxLevel => 20;
-    public override MonsterFilter? Bias => SaveGame.SingletonRepository.MonsterFilters.Get(nameof(DemonMonsterFilter));
+    protected override string? BiasMonsterFilterName => nameof(DemonMonsterFilter);
     public override string FirstGuardian => "The Emissary";
     public override string SecondGuardian => "Glaryssa, Succubus Queen";
     public override int FirstLevel => 1;
