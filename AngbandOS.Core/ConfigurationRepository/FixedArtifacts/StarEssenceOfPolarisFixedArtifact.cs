@@ -24,7 +24,6 @@ internal class StarEssenceOfPolarisFixedArtifact : FixedArtifact, IFixedArtifact
 
     public string DescribeActivationEffect() => "illumination every 10+d10 turns";
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(AsteriskSymbol));
     public override ColorEnum Color => ColorEnum.Yellow;
     public override string Name => "The Star Essence of Polaris";
     public override int Ac => 0;

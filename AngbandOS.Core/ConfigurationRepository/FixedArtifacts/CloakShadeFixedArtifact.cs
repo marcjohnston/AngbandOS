@@ -15,7 +15,6 @@ internal class CloakShadeFixedArtifact : FixedArtifact
     protected override string BaseItemFactoryName => nameof(ClothCloakCloakArmorItemFactory);
 
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(OpenParenthesisSymbol));
     public override ColorEnum Color => ColorEnum.Green;
     public override string Name => "The Cloak 'Shade'";
     public override int Ac => 1;

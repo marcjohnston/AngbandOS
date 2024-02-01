@@ -55,7 +55,6 @@ internal class LongSwordOfKarakalFixedArtifact : FixedArtifact, IFixedArtifactAc
     }
     public string DescribeActivationEffect() => "a getaway every 35 turns";
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(VerticalBarSymbol));
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "The Long Sword of Karakal";
     public override int Ac => 0;

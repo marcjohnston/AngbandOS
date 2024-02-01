@@ -15,7 +15,6 @@ internal class BastardSwordSelfSlayerFixedArtifact : FixedArtifact
     protected override string BaseItemFactoryName => nameof(BastardSwordSwordWeaponItemFactory);
 
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(VerticalBarSymbol));
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "The Bastard Sword 'Selfslayer'";
     public override int Ac => 0;

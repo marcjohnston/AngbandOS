@@ -15,7 +15,6 @@ internal class ShortSwordOfMerlinFixedArtifact : FixedArtifact
     protected override string BaseItemFactoryName => nameof(ShortSwordWeaponItemFactory);
 
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(VerticalBarSymbol));
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "The Short Sword of Merlin";
     public override int Ac => 0;

@@ -15,7 +15,6 @@ internal class BroadSwordDemonBladeFixedArtifact : FixedArtifact
     protected override string BaseItemFactoryName => nameof(BroadSwordWeaponItemFactory);
 
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(VerticalBarSymbol));
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "The Broad Sword 'Demon Blade'";
     public override int Ac => 0;

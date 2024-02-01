@@ -15,7 +15,6 @@ internal class SetOfGauntletsOfThanosFixedArtifact : FixedArtifact
     protected override string BaseItemFactoryName => nameof(GauntletGlovesArmorItemFactory);
 
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(CloseBraceSymbol));
     public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "The Set of Gauntlets of Thanos";
     public override int Ac => 2;

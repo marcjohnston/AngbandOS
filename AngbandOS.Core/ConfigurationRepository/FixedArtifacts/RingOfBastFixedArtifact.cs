@@ -30,7 +30,6 @@ internal class RingOfBastFixedArtifact : FixedArtifact, IFixedArtifactActivatibl
     }
     public string DescribeActivationEffect() => "haste self (75+d75 turns) every 150+d150 turns";
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(EqualSignSymbol));
     public override string Name => "The Ring of Bast";
     public override int Ac => 0;
     public override bool Activate => true;

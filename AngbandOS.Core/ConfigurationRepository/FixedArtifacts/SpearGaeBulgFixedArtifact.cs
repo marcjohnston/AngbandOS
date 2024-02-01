@@ -15,7 +15,6 @@ internal class SpearGaeBulgFixedArtifact : FixedArtifact
     protected override string BaseItemFactoryName => nameof(SpearPolearmWeaponItemFactory);
 
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(ForwardSlashSymbol));
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "The Spear 'Gae Bulg'";
     public override int Ac => 0;

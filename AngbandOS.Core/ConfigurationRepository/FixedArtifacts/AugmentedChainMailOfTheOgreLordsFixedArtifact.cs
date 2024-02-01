@@ -12,7 +12,7 @@ internal class AugmentedChainMailOfTheOgreLordsFixedArtifact : FixedArtifact, IF
 {
     private AugmentedChainMailOfTheOgreLordsFixedArtifact(SaveGame saveGame) : base(saveGame) { }
 
-    protected override string BaseItemFactoryName => nameof(BrillianceAmuletJeweleryItemFactory);
+    protected override string BaseItemFactoryName => nameof(AugmentedChainMailHardArmorItemFactory);
 
     // Ogre Lords destroys doors
     public void ActivateItem(Item item)
@@ -28,7 +28,6 @@ internal class AugmentedChainMailOfTheOgreLordsFixedArtifact : FixedArtifact, IF
         item.ApplyRandomResistance(ref artifactBias, SaveGame.Rng.DieRoll(22) + 16);
     }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(OpenBraceSymbol));
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "The Augmented Chain Mail of the Ogre Lords";
     public override int Ac => 16;

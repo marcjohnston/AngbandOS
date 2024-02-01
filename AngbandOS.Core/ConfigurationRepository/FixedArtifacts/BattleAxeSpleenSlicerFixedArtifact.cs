@@ -24,7 +24,6 @@ internal class BattleAxeSpleenSlicerFixedArtifact : FixedArtifact, IFixedArtifac
     }
     public string DescribeActivationEffect() => "cure wounds (4d7) every 3+d3 turns";
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(ForwardSlashSymbol));
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "The Battle Axe 'Spleen Slicer'";
     public override int Ac => 0;

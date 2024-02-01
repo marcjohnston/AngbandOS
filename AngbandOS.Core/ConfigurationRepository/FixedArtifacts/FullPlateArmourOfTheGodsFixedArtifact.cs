@@ -15,7 +15,6 @@ internal class FullPlateArmorOfTheGodsFixedArtifact : FixedArtifact
     protected override string BaseItemFactoryName => nameof(FullPlateHardArmorItemFactory);
 
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(OpenBraceSymbol));
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "The Full Plate Armor of the Gods";
     public override int Ac => 25;

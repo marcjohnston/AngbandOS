@@ -35,7 +35,6 @@ internal class RingOfSetFixedArtifact : FixedArtifact, IFixedArtifactActivatible
         item.ApplyRandomResistance(ref artifactBias, SaveGame.Rng.DieRoll(22) + 16);
     }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(EqualSignSymbol));
     public override ColorEnum Color => ColorEnum.Yellow;
     public override string Name => "The Ring of Set";
     public override int Ac => 0;

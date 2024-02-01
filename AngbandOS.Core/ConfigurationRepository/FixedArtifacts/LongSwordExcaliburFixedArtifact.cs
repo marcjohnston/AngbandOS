@@ -27,7 +27,6 @@ internal class LongSwordExcaliburFixedArtifact : FixedArtifact, IFixedArtifactAc
     }
     public string DescribeActivationEffect() => "frost ball (100) every 300 turns";
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(VerticalBarSymbol));
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "The Long Sword 'Excalibur'";
     public override int Ac => 0;

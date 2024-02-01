@@ -15,7 +15,6 @@ internal class SetOfLeatherGlovesCalfskinFixedArtifact : FixedArtifact
     protected override string BaseItemFactoryName => nameof(LeatherGlovesArmorItemFactory);
 
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(CloseBraceSymbol));
     public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "The Set of Leather Gloves 'Calfskin'";
     public override int Ac => 1;

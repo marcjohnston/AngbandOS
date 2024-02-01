@@ -15,7 +15,6 @@ internal class LongBowSureshotFixedArtifact : FixedArtifact
     protected override string BaseItemFactoryName => nameof(LongBowWeaponItemFactory);
 
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(CloseBracketSymbol));
     public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "The Long Bow 'Sureshot'";
     public override int Ac => 0;

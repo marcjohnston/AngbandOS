@@ -26,7 +26,6 @@ internal class QuarterstaffEririlFixedArtifact : FixedArtifact, IFixedArtifactAc
     }
     public string DescribeActivationEffect() => "identify every 10 turns";
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(BackSlashSymbol));
     public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "The Quarterstaff 'Eriril'";
     public override int Ac => 0;

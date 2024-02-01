@@ -15,7 +15,6 @@ internal class SabreOfXuraFixedArtifact : FixedArtifact
     protected override string BaseItemFactoryName => nameof(SabreWeaponItemFactory);
 
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(VerticalBarSymbol));
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "The Sabre of Xura";
     public override int Ac => 0;

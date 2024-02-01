@@ -15,7 +15,6 @@ internal class BattleAxeOfNKaiFixedArtifact : FixedArtifact
     protected override string BaseItemFactoryName => nameof(BattleAxePolearmWeaponItemFactory);
 
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(ForwardSlashSymbol));
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "The Battle Axe of N'Kai";
     public override int Ac => 0;

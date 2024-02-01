@@ -20,7 +20,6 @@ internal class ChainMailHeartguardFixedArtifact : FixedArtifact
         item.ApplyRandomResistance(ref artifactBias, SaveGame.Rng.DieRoll(22) + 16);
     }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(OpenBraceSymbol));
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "The Chain Mail 'Heartguard'";
     public override int Ac => 14;

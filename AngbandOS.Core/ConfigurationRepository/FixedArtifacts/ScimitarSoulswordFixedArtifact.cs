@@ -28,7 +28,6 @@ internal class ScimitarSoulswordFixedArtifact : FixedArtifact
             item.BonusPowerSubType= SaveGame.SingletonRepository.Activations.ToWeightedRandom().Choose();
         }
     }
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(VerticalBarSymbol));
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "The Scimitar 'Soulsword'";
     public override int Ac => 0;

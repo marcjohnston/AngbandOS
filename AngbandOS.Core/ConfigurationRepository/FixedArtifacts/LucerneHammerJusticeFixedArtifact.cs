@@ -32,7 +32,6 @@ internal class TheLucerneHammerJusticeFixedArtifact : FixedArtifact, IFixedArtif
         item.ApplyRandomResistance(ref artifactBias, SaveGame.Rng.DieRoll(22) + 16);
     }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(BackSlashSymbol));
     public override ColorEnum Color => ColorEnum.BrightBlue;
     public override string Name => "The Lucerne Hammer 'Justice'";
     public override int Ac => 0;

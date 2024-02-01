@@ -15,7 +15,6 @@ internal class MorningStarBloodspikeFixedArtifact : FixedArtifact
     protected override string BaseItemFactoryName => nameof(MorningStarHaftedWeaponItemFactory);
 
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(BackSlashSymbol));
     public override ColorEnum Color => ColorEnum.Black;
     public override string Name => "The Morning Star 'Bloodspike'";
     public override int Ac => 0;

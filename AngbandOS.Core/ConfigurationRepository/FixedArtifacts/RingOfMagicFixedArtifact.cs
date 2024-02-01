@@ -29,7 +29,6 @@ internal class RingOfMagicFixedArtifact : FixedArtifact, IFixedArtifactActivatib
     }
     public string DescribeActivationEffect() => "a strangling attack (100) every 100+d100 turns";
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(EqualSignSymbol));
     public override string Name => "The Ring of Magic";
     public override int Ac => 0;
     public override bool Activate => true;

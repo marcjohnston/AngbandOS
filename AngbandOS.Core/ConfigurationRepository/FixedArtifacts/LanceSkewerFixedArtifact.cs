@@ -15,7 +15,6 @@ internal class LanceSkewerFixedArtifact : FixedArtifact
     protected override string BaseItemFactoryName => nameof(LancePolearmWeaponItemFactory);
 
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(ForwardSlashSymbol));
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "The Lance 'Skewer'";
     public override int Ac => 0;

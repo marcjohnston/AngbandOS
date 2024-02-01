@@ -28,7 +28,6 @@ internal class LongBowOfSerpentsFixedArtifact : FixedArtifact
             item.BonusPowerSubType= SaveGame.SingletonRepository.Activations.ToWeightedRandom().Choose();
         }
     }
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(CloseBracketSymbol));
     public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "The Long Bow of Serpents";
     public override int Ac => 0;

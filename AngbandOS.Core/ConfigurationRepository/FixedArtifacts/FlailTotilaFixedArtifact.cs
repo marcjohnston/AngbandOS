@@ -27,7 +27,6 @@ internal class FlailTotilaFixedArtifact : FixedArtifact, IFixedArtifactActivatib
     }
     public string DescribeActivationEffect() => "confuse monster every 15 turns";
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(BackSlashSymbol));
     public override ColorEnum Color => ColorEnum.Black;
     public override string Name => "The Flail 'Totila'";
     public override int Ac => 0;

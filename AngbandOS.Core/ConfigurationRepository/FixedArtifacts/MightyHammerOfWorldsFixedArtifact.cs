@@ -15,7 +15,6 @@ internal class MightyHammerOfWorldsFixedArtifact : FixedArtifact
     protected override string BaseItemFactoryName => nameof(MightyHammerHaftedWeaponItemFactory);
 
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(BackSlashSymbol));
     public override ColorEnum Color => ColorEnum.Black;
     public override string Name => "The Mighty Hammer of Worlds";
     public override int Ac => 0;

@@ -15,7 +15,6 @@ internal class KatanaOfGrooFixedArtifact : FixedArtifact
     protected override string BaseItemFactoryName => nameof(KatanaWeaponItemFactory);
 
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(VerticalBarSymbol));
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "The Katana of Groo";
     public override int Ac => 0;

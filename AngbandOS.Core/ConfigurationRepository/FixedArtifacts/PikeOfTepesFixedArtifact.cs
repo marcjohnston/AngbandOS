@@ -15,7 +15,6 @@ internal class PikeOfTepesFixedArtifact : FixedArtifact
     protected override string BaseItemFactoryName => nameof(PikePolearmWeaponItemFactory);
 
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(ForwardSlashSymbol));
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "The Pike of Tepes";
     public override int Ac => 0;

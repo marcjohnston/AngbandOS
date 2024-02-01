@@ -20,7 +20,6 @@ internal class SoftLeatherArmorOfTheKoboldChiefFixedArtifact : FixedArtifact
         item.ApplyRandomResistance(ref artifactBias, SaveGame.Rng.DieRoll(22) + 16);
     }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(OpenParenthesisSymbol));
     public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "The Soft Leather Armor of the Kobold Chief";
     public override int Ac => 4;

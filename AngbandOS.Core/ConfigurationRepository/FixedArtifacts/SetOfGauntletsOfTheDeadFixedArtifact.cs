@@ -27,7 +27,6 @@ internal class SetOfGauntletsOfTheDeadFixedArtifact : FixedArtifact, IFixedArtif
     }
     public string DescribeActivationEffect() => "acid bolt (5d8) every 5+d5 turns";
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(CloseBraceSymbol));
     public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "The Set of Gauntlets of the Dead";
     public override int Ac => 2;

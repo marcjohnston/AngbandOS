@@ -15,7 +15,6 @@ internal class ShadowCloakOfTheShoggothFixedArtifact : FixedArtifact
     protected override string BaseItemFactoryName => nameof(ShadowCloakArmorItemFactory);
 
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(OpenParenthesisSymbol));
     public override ColorEnum Color => ColorEnum.Black;
     public override string Name => "The Shadow Cloak of the Shoggoth";
     public override int Ac => 6;

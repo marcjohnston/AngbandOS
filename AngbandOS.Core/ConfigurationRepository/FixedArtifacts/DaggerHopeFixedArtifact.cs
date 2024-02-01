@@ -32,7 +32,6 @@ internal class DaggerHopeFixedArtifact : FixedArtifact, IFixedArtifactActivatibl
         item.ApplyRandomResistance(ref artifactBias, SaveGame.Rng.DieRoll(22) + 16);
     }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(VerticalBarSymbol));
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "The Dagger 'Hope'";
     public override int Ac => 0;

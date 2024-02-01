@@ -23,7 +23,6 @@ internal class CloakDarknessFixedArtifact : FixedArtifact, IFixedArtifactActivat
     }
     public string DescribeActivationEffect() => "Sleep II every 55 turns";
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(OpenParenthesisSymbol));
     public override ColorEnum Color => ColorEnum.Green;
     public override string Name => "The Cloak 'Darkness'";
     public override int Ac => 1;

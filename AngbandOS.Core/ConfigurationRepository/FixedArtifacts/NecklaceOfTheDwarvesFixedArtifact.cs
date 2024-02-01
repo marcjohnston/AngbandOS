@@ -15,7 +15,6 @@ internal class NecklaceOfTheDwarvesFixedArtifact : FixedArtifact
     protected override string BaseItemFactoryName => nameof(NecklaceAmuletJeweleryItemFactory);
 
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(DoubleQuoteSymbol));
     public override string Name => "The Necklace of the Dwarves";
     public override int Ac => 0;
     public override bool Con => true;

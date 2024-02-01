@@ -15,7 +15,6 @@ internal class LochaberAxeOfTheDwarvesFixedArtifact : FixedArtifact
     protected override string BaseItemFactoryName => nameof(LochaberAxePolearmWeaponItemFactory);
 
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(ForwardSlashSymbol));
     public override ColorEnum Color => ColorEnum.Black;
     public override string Name => "The Lochaber Axe of the Dwarves";
     public override int Ac => 0;

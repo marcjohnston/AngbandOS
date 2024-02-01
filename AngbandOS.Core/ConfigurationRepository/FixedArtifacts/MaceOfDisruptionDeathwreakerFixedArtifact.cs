@@ -15,7 +15,6 @@ internal class MaceOfDisruptionDeathwreakerFixedArtifact : FixedArtifact
     protected override string BaseItemFactoryName => nameof(MaceHaftedWeaponItemFactory);
 
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(BackSlashSymbol));
     public override ColorEnum Color => ColorEnum.Purple;
     public override string Name => "The Mace of Disruption 'Deathwreaker'";
     public override int Ac => 0;

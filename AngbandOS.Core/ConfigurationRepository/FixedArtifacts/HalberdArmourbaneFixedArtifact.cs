@@ -15,7 +15,6 @@ internal class HalberdArmorbaneFixedArtifact : FixedArtifact
     protected override string BaseItemFactoryName => nameof(HalberdPolearmWeaponItemFactory);
 
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(ForwardSlashSymbol));
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "The Halberd 'Armorbane'";
     public override int Ac => 0;

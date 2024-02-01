@@ -20,7 +20,6 @@ internal class LargeMetalShieldOfStabilityFixedArtifact : FixedArtifact
         item.ApplyRandomResistance(ref artifactBias, SaveGame.Rng.DieRoll(22) + 16);
     }
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(CloseParenthesisSymbol));
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "The Large Metal Shield of Stability";
     public override int Ac => 5;

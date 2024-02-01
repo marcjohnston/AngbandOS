@@ -15,7 +15,6 @@ internal class QuarterstaffFirestaffFixedArtifact : FixedArtifact
     protected override string BaseItemFactoryName => nameof(QuarterstaffHaftedWeaponItemFactory);
 
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(BackSlashSymbol));
     public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "The Quarterstaff 'Firestaff'";
     public override int Ac => 0;

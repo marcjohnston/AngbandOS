@@ -15,7 +15,6 @@ internal class GlaiveOfPainFixedArtifact : FixedArtifact
     protected override string BaseItemFactoryName => nameof(GlaivePolearmWeaponItemFactory);
 
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(ForwardSlashSymbol));
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "The Glaive of Pain";
     public override int Ac => 0;
