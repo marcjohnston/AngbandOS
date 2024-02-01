@@ -34,6 +34,7 @@ internal class PersistConfigurationScript : Script, IScript
             Persist<MonsterRace>(SaveGame.CorePersistentStorage, SaveGame.SingletonRepository.MonsterRaces, nameof(MonsterRace));
             Persist<Symbol>(SaveGame.CorePersistentStorage, SaveGame.SingletonRepository.Symbols, nameof(Symbol));
             Persist<Vault>(SaveGame.CorePersistentStorage, SaveGame.SingletonRepository.Vaults, nameof(Vault));
+            Persist<DungeonGuardian>(SaveGame.CorePersistentStorage, SaveGame.SingletonRepository.DungeonGuardians, nameof(DungeonGuardian));
         }
         catch (NotImplementedException)
         {

@@ -40,4 +40,5 @@ public class Configuration
     public MonsterRaceDefinition[]? MonsterRaces { get; set; } = null;
     public SymbolDefinition[]? Symbols { get; set; } = null;
     public VaultDefinition[]? Vaults { get; set; } = null;
+    public DungeonGuardianDefinition[]? DungeonGuardians { get; set; } = null;
 }

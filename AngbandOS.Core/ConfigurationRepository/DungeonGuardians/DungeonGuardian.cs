@@ -5,10 +5,12 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using System.Text.Json;
+
 namespace AngbandOS.Core.DungeonGuardians;
 
 [Serializable]
-internal abstract class DungeonGuardian : IGetKey<string>
+internal abstract class DungeonGuardian : IGetKey<string>, IToJson
 {
     protected readonly SaveGame SaveGame;
     protected DungeonGuardian(SaveGame saveGame)
@@ -16,7 +18,7 @@ internal abstract class DungeonGuardian : IGetKey<string>
         SaveGame = saveGame;
     }
 
-    public string Key => GetType().Name;
+    public virtual string Key => GetType().Name;
 
     public MonsterRace MonsterRace { get; private set; }
 
@@ -35,5 +37,16 @@ internal abstract class DungeonGuardian : IGetKey<string>
     public void Bind()
     {
         MonsterRace = SaveGame.SingletonRepository.MonsterRaces.Get(MonsterRaceName);
+    }
+
+    public string ToJson()
+    {
+        DungeonGuardianDefinition dungeonGuardian = new()
+        {
+            Key = Key,
+            MonsterRaceName = MonsterRaceName,
+            LevelFound = LevelFound
+        };
+        return JsonSerializer.Serialize<DungeonGuardianDefinition>(dungeonGuardian);
     }
 }
