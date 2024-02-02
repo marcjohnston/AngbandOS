@@ -7,6 +7,7 @@
 
 namespace AngbandOS.Core;
 
+[Serializable]
 internal class StoreStockManifest
 {
     public ItemFactory ItemFactory { get; }

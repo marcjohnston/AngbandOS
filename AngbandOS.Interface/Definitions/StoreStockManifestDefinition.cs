@@ -7,6 +7,7 @@
 
 namespace AngbandOS.Core.Interface.Definitions;
 
+[Serializable]
 public class StoreStockManifestDefinition
 {
     public virtual string ItemFactoryName { get; set; }
