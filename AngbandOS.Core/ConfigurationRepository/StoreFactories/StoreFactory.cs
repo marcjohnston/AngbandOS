@@ -272,7 +272,7 @@ internal abstract class StoreFactory : IItemFilter, IGetKey<string>
     {
         if (ItemsRenderFlavourAware)
         {
-            return oPtr.StoreDescription();
+            return oPtr.Description(true, 3, true);
         }
         else
         {

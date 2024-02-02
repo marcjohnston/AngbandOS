@@ -761,9 +761,15 @@ internal sealed class Item : IComparable<Item>
     /// false, otherwise (e.g. Brown Dragon Scale Mails).  When false, the item will still be pluralized (e.g. stole one of your Brown Dragon Scale Mails).</param>
     /// <param name="mode"></param>
     /// <returns></returns>
-    public string Description(bool includeCountPrefix, int mode)
+    public string Description(bool includeCountPrefix, int mode, bool? isFlavourAware = null)
     {
-        string basenm = Factory.GetDescription(this, includeCountPrefix);
+        // Provide a default value for the isFlavourAware parameter.
+        if (isFlavourAware == null)
+        {
+            isFlavourAware = IsFlavourAware();
+        }
+
+        string basenm = Factory.GetDescription(this, includeCountPrefix, isFlavourAware.Value);
         if (IsKnown())
         {
             if (!string.IsNullOrEmpty(RandartName))
@@ -1819,15 +1825,6 @@ internal sealed class Item : IComparable<Item>
             }
         }
         return Factory.IsStompable(this);
-    }
-
-    public string StoreDescription()
-    {
-        bool hackAware = Factory.FlavourAware;
-        Factory.FlavourAware = true;
-        string buf = Description(true, 3);
-        Factory.FlavourAware = hackAware;
-        return buf;
     }
 
     /// <summary>

@@ -16,10 +16,6 @@ internal abstract class FoodItemFactory : ItemFactory
     public override bool EasyKnow => true;
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Food;
 
-    public override string GetDescription(Item item, bool includeCountPrefix)
-    {
-        return base.GetDescription(item, includeCountPrefix);
-    }
     public override int GetAdditionalMassProduceCount(Item item)
     {
         int cost = item.Value();

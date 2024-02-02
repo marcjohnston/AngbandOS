@@ -18,10 +18,10 @@ internal abstract class PotionItemFactory : ItemFactory, IFlavour
     /// </summary>
     public IFlavour FlavourFactory => (IFlavour)this;
 
-    public override string GetDescription(Item item, bool includeCountPrefix)
+    public override string GetDescription(Item item, bool includeCountPrefix, bool isFlavourAware)
     {
         string flavour = item.IdentStoreb ? "" : $"{FlavourFactory.Flavor.Name} ";
-        string ofName = item.IsFlavourAware() ? $" of {FriendlyName}" : "";
+        string ofName = isFlavourAware ? $" of {FriendlyName}" : "";
         string name = $"{flavour}{Pluralize("Potion", item.Count)}{ofName}";
         return includeCountPrefix ? GetPrefixCount(true, name, item.Count, item.IsKnownArtifact) : name;
     }

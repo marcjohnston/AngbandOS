@@ -18,10 +18,10 @@ internal abstract class ScrollItemFactory : ItemFactory, IFlavour
     /// </summary>
     public IFlavour FlavourFactory => (IFlavour)this;
 
-    public override string GetDescription(Item item, bool includeCountPrefix)
+    public override string GetDescription(Item item, bool includeCountPrefix, bool isFlavourAware)
     {
         string flavour = item.IdentStoreb ? "" : $" titled \"{FlavourFactory.Flavor.Name}\"";
-        string ofName = item.IsFlavourAware() ? $" of {FriendlyName}" : "";
+        string ofName = isFlavourAware ? $" of {FriendlyName}" : "";
         string name = $"{Pluralize("Scroll", item.Count)}{flavour}{ofName}";
         return includeCountPrefix ? GetPrefixCount(true, name, item.Count, item.IsKnownArtifact) : name;
     }

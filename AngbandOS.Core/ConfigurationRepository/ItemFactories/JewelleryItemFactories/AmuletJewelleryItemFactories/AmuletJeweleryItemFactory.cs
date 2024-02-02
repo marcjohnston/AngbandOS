@@ -22,14 +22,14 @@ internal abstract class AmuletJeweleryItemFactory : JewelleryItemFactory, IFlavo
     /// </summary>
     public IFlavour FlavourFactory => (IFlavour)this;
 
-    public override string GetDescription(Item item, bool includeCountPrefix)
+    public override string GetDescription(Item item, bool includeCountPrefix, bool isFlavourAware)
     {
-        if (item.FixedArtifact != null && item.IsFlavourAware())
+        if (item.FixedArtifact != null && isFlavourAware)
         {
-            return base.GetDescription(item, includeCountPrefix);
+            return base.GetDescription(item, includeCountPrefix, isFlavourAware);
         }
         string flavour = item.IdentStoreb ? "" : $"{FlavourFactory.Flavor.Name} ";
-        string ofName = item.IsFlavourAware() ? $" of {item.Factory.FriendlyName}" : "";
+        string ofName = isFlavourAware ? $" of {item.Factory.FriendlyName}" : "";
         string name = $"{flavour}{Pluralize("Amulet", item.Count)}{ofName}";
         return includeCountPrefix ? GetPrefixCount(true, name, item.Count, item.IsKnownArtifact) : name;
     }
