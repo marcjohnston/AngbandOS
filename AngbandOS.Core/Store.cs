@@ -78,17 +78,18 @@ internal class Store
     {
         StoreTop += count;
 
+        // Ensure the top doesn't go past the last item.
+        if (StoreTop >= StoreInventoryList.Count)
+        {
+            StoreTop = StoreInventoryList.Count - 1;
+        }
+
         // Ensure the top doesn't go below 0.
         if (StoreTop < 0)
         {
             StoreTop = 0;
         }
 
-        // Ensure the top doesn't go past the last item.
-        if (StoreTop >= StoreInventoryList.Count)
-        {
-            StoreTop = StoreInventoryList.Count - 1;
-        }
         DisplayInventory();
     }
     public void PageUp()
@@ -132,38 +133,38 @@ internal class Store
     public void DisplayEntry(int itemIndex, char letter, int row)
     {
         int maxwid = StoreFactory.WidthOfDescriptionColumn;
-        Item oPtr = StoreInventoryList[itemIndex];
-        string outVal = $"{letter}) ";
-        SaveGame.Screen.PrintLine(outVal, row, 0);
-        ColorEnum a = oPtr.Factory.FlavorColor;
-        char c = oPtr.Factory.FlavorSymbol.Character;
-        SaveGame.Screen.Print(a, c.ToString(), row, 3);
+            Item oPtr = StoreInventoryList[itemIndex];
+            string outVal = $"{letter}) ";
+            SaveGame.Screen.PrintLine(outVal, row, 0);
+            ColorEnum a = oPtr.Factory.FlavorColor;
+            char c = oPtr.Factory.FlavorSymbol.Character;
+            SaveGame.Screen.Print(a, c.ToString(), row, 3);
         string oName = StoreFactory.GetItemDescription(oPtr);
-        if (maxwid < oName.Length)
-        {
-            oName = oName.Substring(0, maxwid);
-        }
-        SaveGame.Screen.Print(oPtr.Factory.Color, oName, row, 5);
-        int wgt = oPtr.Weight;
-        outVal = $"{wgt / 10,3}.{wgt % 10}{(StoreFactory.RenderWeightUnitOfMeasurement ? " lb" : "")}";
-        SaveGame.Screen.Print(outVal, row, 61);
+            if (maxwid < oName.Length)
+            {
+                oName = oName.Substring(0, maxwid);
+            }
+            SaveGame.Screen.Print(oPtr.Factory.Color, oName, row, 5);
+            int wgt = oPtr.Weight;
+            outVal = $"{wgt / 10,3}.{wgt % 10}{(StoreFactory.RenderWeightUnitOfMeasurement ? " lb" : "")}";
+            SaveGame.Screen.Print(outVal, row, 61);
 
-        if (StoreFactory.ShowInventoryDisplayType == StoreInventoryDisplayTypeEnum.InventoryWithPrice)
-        {
-            int x;
-            if (oPtr.IdentFixed)
+            if (StoreFactory.ShowInventoryDisplayType == StoreInventoryDisplayTypeEnum.InventoryWithPrice)
             {
-                x = PriceItem(oPtr, Owner.MinInflate, false);
-                outVal = $"{x,9} F";
-                SaveGame.Screen.Print(outVal, row, 68);
-            }
-            else
-            {
-                x = PriceItem(oPtr, Owner.MinInflate, false);
-                x += x / 10;
-                outVal = $"{x,9}  ";
-                SaveGame.Screen.Print(outVal, row, 68);
-            }
+                int x;
+                if (oPtr.IdentFixed)
+                {
+                    x = PriceItem(oPtr, Owner.MinInflate, false);
+                    outVal = $"{x,9} F";
+                    SaveGame.Screen.Print(outVal, row, 68);
+                }
+                else
+                {
+                    x = PriceItem(oPtr, Owner.MinInflate, false);
+                    x += x / 10;
+                    outVal = $"{x,9}  ";
+                    SaveGame.Screen.Print(outVal, row, 68);
+                }
         }
     }
 
