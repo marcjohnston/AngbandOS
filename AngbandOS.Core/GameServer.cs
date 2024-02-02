@@ -208,7 +208,8 @@ public class GameServer
                 //MonsterRaces = RetrieveEntities<MonsterRaceDefinition, JsonMonsterRace>(persistentStorage, nameof(MonsterRace)),
                 //Symbols = RetrieveEntities<SymbolDefinition, JsonSymbol>(persistentStorage, nameof(Symbol))
                 //Vaults = RetrieveEntities<VaultDefinition, JsonVault>(persistentStorage, nameof(Vault))
-                DungeonGuardians = RetrieveEntities<DungeonGuardianDefinition, JsonDungeonGuardian>(persistentStorage, nameof(DungeonGuardian))
+                //DungeonGuardians = RetrieveEntities<DungeonGuardianDefinition, JsonDungeonGuardian>(persistentStorage, nameof(DungeonGuardian))
+                Dungeons = RetrieveEntities<DungeonDefinition, JsonDungeon>(persistentStorage, nameof(Dungeon))
             };
         }
 

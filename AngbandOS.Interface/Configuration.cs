@@ -41,4 +41,5 @@ public class Configuration
     public SymbolDefinition[]? Symbols { get; set; } = null;
     public VaultDefinition[]? Vaults { get; set; } = null;
     public DungeonGuardianDefinition[]? DungeonGuardians { get; set; } = null;
+    public DungeonDefinition[]? Dungeons { get; set; } = null;
 }

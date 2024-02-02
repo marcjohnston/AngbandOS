@@ -11060,7 +11060,7 @@ internal class SaveGame
                     {
                         DungeonDifficulty = 4;
                     }
-                    DunBias = Wilderness[WildernessY][WildernessX].Dungeon.Bias;
+                    DunBias = Wilderness[WildernessY][WildernessX].Dungeon.BiasMonsterFilter;
                 }
                 else
                 {
@@ -11085,7 +11085,7 @@ internal class SaveGame
             else
             {
                 DungeonDifficulty = CurDungeon.Offset;
-                DunBias = CurDungeon.Bias;
+                DunBias = CurDungeon.BiasMonsterFilter;
                 if (CurDungeon.Tower)
                 {
                     CurHgt = Constants.PlayableScreenHeight;

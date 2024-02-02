@@ -35,6 +35,7 @@ internal class PersistConfigurationScript : Script, IScript
             Persist<Symbol>(SaveGame.CorePersistentStorage, SaveGame.SingletonRepository.Symbols, nameof(Symbol));
             Persist<Vault>(SaveGame.CorePersistentStorage, SaveGame.SingletonRepository.Vaults, nameof(Vault));
             Persist<DungeonGuardian>(SaveGame.CorePersistentStorage, SaveGame.SingletonRepository.DungeonGuardians, nameof(DungeonGuardian));
+            Persist<Dungeon>(SaveGame.CorePersistentStorage, SaveGame.SingletonRepository.Dungeons, nameof(Dungeon));
         }
         catch (NotImplementedException)
         {

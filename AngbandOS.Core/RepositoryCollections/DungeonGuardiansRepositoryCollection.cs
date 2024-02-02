@@ -11,4 +11,19 @@ namespace AngbandOS.Core.RepositoryCollections;
 internal class DungeonGuardiansRepositoryCollection : DictionaryRepositoryCollection<string, DungeonGuardian>
 {
     public DungeonGuardiansRepositoryCollection(SaveGame saveGame) : base(saveGame) { }
+
+    public override void Load()
+    {
+        if (SaveGame.Configuration.Towns == null)
+        {
+            base.Load();
+        }
+        else
+        {
+            foreach (DungeonGuardianDefinition dungeonGuardianDefinition in SaveGame.Configuration.DungeonGuardians)
+            {
+                Add(new GenericDungeonGuardian(SaveGame, dungeonGuardianDefinition));
+            }
+        }
+    }
 }

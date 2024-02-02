@@ -4,13 +4,15 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
+using System.Text.Json;
+
 namespace AngbandOS.Core.Dungeons;
 
 /// <summary>
 /// A dungeon that the player can explore
 /// </summary>
 [Serializable]
-internal abstract class Dungeon : IGetKey<string>
+internal abstract class Dungeon : IGetKey<string>, IToJson
 {
     protected readonly SaveGame SaveGame;
 
@@ -30,7 +32,7 @@ internal abstract class Dungeon : IGetKey<string>
     {
         if (BiasMonsterFilterName != null)
         {
-            Bias = SaveGame.SingletonRepository.MonsterFilters.Get(BiasMonsterFilterName);
+            BiasMonsterFilter = SaveGame.SingletonRepository.MonsterFilters.Get(BiasMonsterFilterName);
         }
 
         List<DungeonGuardian> dungeonGuardianList = new List<DungeonGuardian>();
@@ -63,7 +65,7 @@ internal abstract class Dungeon : IGetKey<string>
     /// <summary>
     /// The bias for monster generation in the dungeon
     /// </summary>
-    public MonsterFilter? Bias { get; private set; } = null;
+    public MonsterFilter? BiasMonsterFilter { get; private set; } = null;
 
     /// <summary>
     /// Returns the quests that are associated to this dungeon; or an empty array, if there are none.  This property is bound during
@@ -186,5 +188,22 @@ internal abstract class Dungeon : IGetKey<string>
         {
             Offset = BaseOffset - offsetChange;
         }
+    }
+
+    public string ToJson()
+    {
+        DungeonDefinition dungeon = new()
+        {
+            Key = Key,
+            BaseOffset = BaseOffset,
+            BiasMonsterFilterName = BiasMonsterFilterName,
+            DungeonGuardianNames = DungeonGuardianNames,
+            MapSymbol = MapSymbol,
+            MaxLevel = MaxLevel,
+            Name = Name,
+            Shortname = Shortname,
+            Tower = Tower
+        };
+        return JsonSerializer.Serialize<DungeonDefinition>(dungeon);
     }
 }
