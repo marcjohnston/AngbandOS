@@ -201,20 +201,6 @@ internal static class Extensions
     }
 
     /// <summary>
-    /// Try to parse the string to an integer, returning 0 rather than an error if it can't be parsed
-    /// </summary>
-    /// <param name="s"> The string to parse </param>
-    /// <returns> The int value of the string, or 0 if it couldn't be parsed </returns>
-    public static int ToIntSafely(this string s)
-    {
-        if (!int.TryParse(s.Trim(), out int i))
-        {
-            i = 0;
-        }
-        return i;
-    }
-
-    /// <summary>
     /// Converts an integer to a Roman numeral
     /// </summary>
     /// <param name="number"> The number to convert </param>
@@ -315,29 +301,6 @@ internal static class Extensions
         else
         {
             return singularNoun;
-        }
-    }
-
-    public static string ApplyGetPrefixCountMacro(bool includeCountPrefix, string name, int count, bool isKnownArtifact)
-    {
-        bool includeSingularPrefix = (name[0] == '&');
-        if (includeSingularPrefix)
-        {
-            name = name.Substring(2);
-        }
-        return includeCountPrefix ? GetPrefixCount(includeSingularPrefix, name, count, isKnownArtifact) : name;
-    }
-
-    public static string ApplyPlurizationMacro(string name, int count)
-    {
-        int pos = name.IndexOf("~");
-        if (pos >= 0)
-        {
-            return $"{Pluralize(name.Substring(0, pos), count)}{name.Substring(pos + 1)}";
-        }
-        else
-        {
-            return name;
         }
     }
 

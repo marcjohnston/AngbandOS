@@ -149,6 +149,29 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey<string>
         return s;
     }
 
+    private string ApplyPlurizationMacro(string name, int count)
+    {
+        int pos = name.IndexOf("~");
+        if (pos >= 0)
+        {
+            return $"{Pluralize(name.Substring(0, pos), count)}{name.Substring(pos + 1)}";
+        }
+        else
+        {
+            return name;
+        }
+    }
+
+    private string ApplyGetPrefixCountMacro(bool includeCountPrefix, string name, int count, bool isKnownArtifact)
+    {
+        bool includeSingularPrefix = (name[0] == '&');
+        if (includeSingularPrefix)
+        {
+            name = name.Substring(2);
+        }
+        return includeCountPrefix ? GetPrefixCount(includeSingularPrefix, name, count, isKnownArtifact) : name;
+    }
+
     /// <summary>
     /// Returns a description for the item.  Returns a macro processed description, by default.
     /// </summary>

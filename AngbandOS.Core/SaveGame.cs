@@ -9930,7 +9930,7 @@ internal class SaveGame
                         }
                         else
                         {
-                            CommandArgument = (CommandArgument * 10) + cmd.ToString().ToIntSafely();
+                            CommandArgument = (CommandArgument * 10) + int.Parse(cmd.ToString());
                         }
                         Screen.PrintLine($"Count: {CommandArgument}", 0, 0);
                     }
