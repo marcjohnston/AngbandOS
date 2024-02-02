@@ -65,12 +65,9 @@ internal class HomeStoreFactory : StoreFactory
     public override bool PerformsMaintenanceWhenResting => false;
 
     /// <summary>
-    /// Returns true, if the player doesn't own the home; false, if the player owns the home.
+    /// Returns true, if this store is eligible to be bought as a home.
     /// </summary>
     /// <param name="saveGame"></param>
     /// <returns></returns>
-    public override bool DoorsLocked()
-    {
-        return SaveGame.TownWithHouse != SaveGame.CurTown.Index;
-    }
+    public override bool IsHome => true;
 }

@@ -109,10 +109,32 @@ internal abstract class StoreFactory : IItemFilter, IGetKey<string>
     protected virtual string[] ItemFilterNames => new string[] { };
 
     /// <summary>
+    /// Returns true, if the store is a home that can be bought; false, otherwise.  When true, the doors locked will return true, if the store/home 
+    /// is in the correct town.  Returns false, by default.
+    /// </summary>
+    public virtual bool IsHome => false;
+
+    /// <summary>
     /// Returns true, if the doors to the store are locked; false, if the store is open.  Returns false, by default.
     /// </summary>
     /// <returns></returns>
-    public virtual bool DoorsLocked() => false;
+    public bool DoorsLocked()
+    {
+        // If the store isn't a home, the doors are open.
+        if (!IsHome)
+        {
+            return false;
+        }
+
+        // If the player doesn't own a home, the doors are locked.
+        if (SaveGame.TownWithHouse == null)
+        {
+            return true;
+        }
+
+        // Make sure this town matches the town where the player bought the home.
+        return SaveGame.TownWithHouse.Value != SaveGame.CurTown.Index;
+    }
 
     /// <summary>
     /// Returns whether or not the store should perform maintenance.  When true, which is by default, the store will automatically 

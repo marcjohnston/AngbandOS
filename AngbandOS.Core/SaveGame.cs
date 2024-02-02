@@ -499,7 +499,12 @@ internal class SaveGame
     /// <remarks>borg: player->timed[TMD_SHERO]</remarks>
     public TimedAction TimedSuperheroism;
     public TimedAction TimedTelepathy;
-    public int TownWithHouse;
+
+    /// <summary>
+    /// Returns the index of the town that the player owns a home; or null, if the player doesn't own a home.
+    /// </summary>
+    public int? TownWithHouse;
+
     public int Weight;
 
     /// <summary>
@@ -3785,9 +3790,9 @@ internal class SaveGame
                     DoCmdSaveGame(true);
                     RecallDungeon = CurDungeon;
                     CurrentDepth = 0;
-                    if (TownWithHouse > -1)
+                    if (TownWithHouse != null)
                     {
-                        CurTown = SingletonRepository.Towns[TownWithHouse];
+                        CurTown = SingletonRepository.Towns[TownWithHouse.Value];
                         WildernessX = CurTown.X;
                         WildernessY = CurTown.Y;
                         NewLevelFlag = true;
@@ -14085,7 +14090,10 @@ internal class SaveGame
         Food = Constants.PyFoodFull - 1;
         IsWizard = false;
         IsWinner = false;
-        TownWithHouse = -1;
+
+        // Reset the home ownership for the player.
+        TownWithHouse = null;
+
         Generation = 1;
     }
 
