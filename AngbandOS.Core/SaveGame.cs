@@ -13864,13 +13864,12 @@ internal class SaveGame
         }
 
         // These are the random quests
-        for (int i = 0; i < _maxQuests - index; i++) // TODO: This should be _maxQuests - index to populate the remaining quests
+        for (int i = 0; i < _maxQuests - index; i++)
         {
             int j;
             bool sameLevel;
             do
             {
-
                 // Find a valid random quest monster.
                 do
                 {
@@ -13904,12 +13903,7 @@ internal class SaveGame
             // We need to attach the quest to a dungeon.  To do this, we need to find a qualifying dungeon.  To qualify, a dungeon:
             // 1. cannot start at a level that is at or past the quest level; the dungeon must have at least one level prior to the start of the quest;
             // 2. has to have enough levels that it includes the quest level
-            // 3. the random quest cannot be on the same level as any of the guardians for that dungeon
-            // For this algorithm to work, the MonsterRaces repository collection must be sorted by the LevelFound property.
-            //while (Quests[index].Level <= SingletonRepository.Dungeons[j].Offset ||
-            //       Quests[index].Level > SingletonRepository.Dungeons[j].MaxLevel + SingletonRepository.Dungeons[j].Offset ||
-            //       Quests[index].Level == SingletonRepository.Dungeons[j].FirstLevel + SingletonRepository.Dungeons[j].Offset ||
-            //       Quests[index].Level == SingletonRepository.Dungeons[j].SecondLevel + SingletonRepository.Dungeons[j].Offset)
+            // 3. the random quest cannot be on the same level as any of the dungeon guardians for that dungeon
             j = Rng.RandomBetween(1, DungeonCount) - 1;
             while (Quests[index].Level <= SingletonRepository.Dungeons[j].Offset ||
                    Quests[index].Level > SingletonRepository.Dungeons[j].MaxLevel + SingletonRepository.Dungeons[j].Offset ||
@@ -13982,54 +13976,15 @@ internal class SaveGame
 
     private int GetRandomQuestMonster(int qIdx)
     {
-        int rIdx;
-        int tmp = Rng.RandomBetween(1, 10);
-        switch (tmp)
+        // Pick a minimum monster index and 1/3 of the monsters.
+        int minIndex = SingletonRepository.MonsterRaces.Count / 3;
+
+        // Do not allow monster zero.
+        if (minIndex == 0)
         {
-            case 1:
-                rIdx = Rng.RandomBetween(181, 220);
-                break;
-
-            case 2:
-                rIdx = Rng.RandomBetween(221, 260);
-                break;
-
-            case 3:
-                rIdx = Rng.RandomBetween(261, 300);
-                break;
-
-            case 4:
-                rIdx = Rng.RandomBetween(301, 340);
-                break;
-
-            case 5:
-                rIdx = Rng.RandomBetween(341, 380);
-                break;
-
-            case 6:
-                rIdx = Rng.RandomBetween(381, 420);
-                break;
-
-            case 7:
-                rIdx = Rng.RandomBetween(421, 460);
-                break;
-
-            case 8:
-                rIdx = Rng.RandomBetween(461, 500);
-                break;
-
-            case 9:
-                rIdx = Rng.RandomBetween(501, 530);
-                break;
-
-            case 10:
-                rIdx = Rng.RandomBetween(531, 560);
-                break;
-
-            default:
-                rIdx = Rng.RandomBetween(87, 573);
-                break;
+            minIndex = 1;
         }
+        int rIdx = Rng.RandomBetween(minIndex, SingletonRepository.MonsterRaces.Count);
 
         // Do not allow a monster that can multiply.
         if (SingletonRepository.MonsterRaces[rIdx].Multiply)
