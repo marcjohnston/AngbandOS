@@ -31,12 +31,12 @@ internal class PurchaseStoreItemScript : Script, IStoreScript
             i = storeCommandEvent.Store.StoreFactory.PageSize;
         }
         string outVal = storeCommandEvent.Store.StoreFactory.PurchaseMessage;
-        if (!storeCommandEvent.Store.GetStock(out int itemIndex, outVal, 0, i - 1))
+        if (!storeCommandEvent.Store.GetStock(out int letterIndex, outVal, 0, i - 1))
         {
             return;
         }
-        int item = itemIndex + storeCommandEvent.Store.StoreTop;
-        Item oPtr = storeCommandEvent.Store.StoreInventoryList[item];
+        int inventoryItemIndex = letterIndex + storeCommandEvent.Store.StoreTop;
+        Item oPtr = storeCommandEvent.Store.StoreInventoryList[inventoryItemIndex];
         int amt = 1;
         Item jPtr = oPtr.Clone(amt);
         if (!SaveGame.InvenCarryOkay(jPtr))
@@ -83,7 +83,7 @@ internal class PurchaseStoreItemScript : Script, IStoreScript
             else
             {
                 oName = storeCommandEvent.Store.StoreFactory.GetItemDescription(jPtr);
-                SaveGame.MsgPrint($"Buying {oName} ({item.IndexToLetter()}).");
+                SaveGame.MsgPrint($"Buying {oName} ({letterIndex.IndexToLetter()}).");
                 SaveGame.MsgPrint(null);
                 choice = PurchaseHaggle(storeCommandEvent.Store, jPtr, out price);
             }
@@ -113,8 +113,13 @@ internal class PurchaseStoreItemScript : Script, IStoreScript
                     SaveGame.MsgPrint($"You have {oName} ({itemNew.IndexToLabel()}).");
                     SaveGame.HandleStuff();
                     i = storeCommandEvent.Store.StoreInventoryList.Count;
-                    storeCommandEvent.Store.StoreItemIncrease(item, -amt);
-                    storeCommandEvent.Store.StoreItemOptimize(item);
+                    storeCommandEvent.Store.StoreItemIncrease(inventoryItemIndex, -amt);
+                    storeCommandEvent.Store.StoreItemOptimize(inventoryItemIndex);
+
+                    // Ensure the inventory scrolls as needed.
+                    storeCommandEvent.Store.ScrollInventory(0);
+
+                    // Check to see if the store was bought out.
                     if (storeCommandEvent.Store.StoreInventoryList.Count == 0)
                     {
                         if (storeCommandEvent.Store.StoreFactory.MaintainsStockLevels)
@@ -133,18 +138,10 @@ internal class PurchaseStoreItemScript : Script, IStoreScript
                                 storeCommandEvent.Store.StoreMaint();
                             }
                         }
-                        storeCommandEvent.Store.ScrollToItem(0);
-                        storeCommandEvent.Store.DisplayInventory();
                     }
-                    else if (storeCommandEvent.Store.StoreInventoryList.Count != i)
-                    {
-                        storeCommandEvent.Store.ScrollToItem(storeCommandEvent.Store.StoreInventoryList.Count);
-                        storeCommandEvent.Store.DisplayInventory();
-                    }
-                    else
-                    {
-                        storeCommandEvent.Store.DisplayEntry(item, itemIndex.IndexToLetter(), itemIndex + 6);
-                    }
+
+                    // Rerender the inventory.
+                    storeCommandEvent.Store.DisplayInventory();
                 }
                 else
                 {
@@ -164,11 +161,11 @@ internal class PurchaseStoreItemScript : Script, IStoreScript
             SaveGame.MsgPrint($"You have {oName} ({itemNew.IndexToLabel()}).");
             SaveGame.HandleStuff();
             i = storeCommandEvent.Store.StoreInventoryList.Count;
-            storeCommandEvent.Store.StoreItemIncrease(item, -amt);
-            storeCommandEvent.Store.StoreItemOptimize(item);
+            storeCommandEvent.Store.StoreItemIncrease(inventoryItemIndex, -amt);
+            storeCommandEvent.Store.StoreItemOptimize(inventoryItemIndex);
             if (i == storeCommandEvent.Store.StoreInventoryList.Count)
             {
-                storeCommandEvent.Store.DisplayEntry(item, itemIndex.IndexToLetter(), itemIndex + 6);
+                storeCommandEvent.Store.DisplayEntry(inventoryItemIndex, letterIndex.IndexToLetter(), letterIndex + 6);
             }
             else
             {

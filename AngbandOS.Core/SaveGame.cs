@@ -15507,10 +15507,6 @@ internal class SaveGame
 
     public bool ItemMatchesFilter(Item item, IItemFilter? itemFilter)
     {
-        if (item.Factory == null)
-        {
-            return false;
-        }
         if (item.Category == ItemTypeEnum.Gold)
         {
             return false;
@@ -15611,7 +15607,7 @@ internal class SaveGame
                     }
                     consoleRow["usage"] = new ConsoleString(ColorEnum.White, $"{inventorySlot.MentionUse(index)}:");
 
-                    ColorEnum color = oPtr.Factory == null ? ColorEnum.White : oPtr.Factory.Color;
+                    ColorEnum color = oPtr.Factory.Color;
                     consoleRow["description"] = new ConsoleString(color, oPtr.Description(true, 3));
 
                     int wgt = oPtr.Weight * oPtr.Count;

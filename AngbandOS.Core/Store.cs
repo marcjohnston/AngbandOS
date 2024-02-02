@@ -77,13 +77,17 @@ internal class Store
     public void ScrollInventory(int count)
     {
         StoreTop += count;
+
+        // Ensure the top doesn't go below 0.
         if (StoreTop < 0)
         {
             StoreTop = 0;
         }
-        if (StoreTop + StoreFactory.PageSize > StoreInventoryList.Count)
+
+        // Ensure the top doesn't go past the last item.
+        if (StoreTop >= StoreInventoryList.Count)
         {
-            StoreTop = StoreInventoryList.Count - StoreFactory.PageSize;
+            StoreTop = StoreInventoryList.Count - 1;
         }
         DisplayInventory();
     }
@@ -94,7 +98,11 @@ internal class Store
 
     public void PageDown()
     {
-        ScrollInventory(StoreFactory.PageSize);
+        // Do not scroll down a page, if there are no more pages.
+        if (StoreTop + StoreFactory.PageSize < StoreInventoryList.Count) 
+        {
+            ScrollInventory(StoreFactory.PageSize);
+        }
     }
 
     public void ScrollDown()
@@ -166,8 +174,8 @@ internal class Store
 
     public void DisplayInventory()
     {
-        int pageIndex = 0;
-        int itemIndex = StoreTop;
+        int pageIndex = 0; // This is the index of the item in the page of results.  This pageIndex is converted to a letter (a-z) and is used to determine the render row on the screen.
+        int itemIndex = StoreTop; // This is the index in the inventory of the item to render.
         while (itemIndex < StoreInventoryList.Count && pageIndex < StoreFactory.PageSize)
         {
             DisplayEntry(itemIndex, pageIndex.IndexToLetter(), pageIndex + 6);
@@ -289,10 +297,6 @@ internal class Store
     public void StoreItemOptimize(int item)
     {
         Item oPtr = StoreInventoryList[item];
-        if (oPtr.Factory == null)
-        {
-            return;
-        }
         if (oPtr.Count > 0)
         {
             return;

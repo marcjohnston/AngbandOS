@@ -12,8 +12,8 @@ internal class BlackMarketStoreFactory : StoreFactory
 {
     private BlackMarketStoreFactory(SaveGame saveGame) : base(saveGame) { }
 
-    public override int MaxInventory => 75;
-    public override int MinInventory => 35;
+    public override int MaxInventory => 78; // Should be 18
+    public override int MinInventory => 36; // Should be 6
     public override int StoreTurnover => 5;
     public override string FeatureType => "BlackMarket";
     public override ColorEnum Color => ColorEnum.Black;
@@ -68,7 +68,7 @@ internal class BlackMarketStoreFactory : StoreFactory
     {
         int level;
         level = 35 + SaveGame.Rng.RandomLessThan(35);
-        ItemFactory itemFactory = SaveGame.RandomItemType(level, false, false);
+        ItemFactory? itemFactory = SaveGame.RandomItemType(level, false, false);
         if (itemFactory == null)
         {
             return null; ;

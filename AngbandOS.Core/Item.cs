@@ -453,7 +453,7 @@ internal sealed class Item : IComparable<Item>
     public bool IsKnownArtifact => IsKnown() && (FixedArtifact != null || !string.IsNullOrEmpty(RandartName));
 
     [Obsolete]
-    public ItemTypeEnum Category => Factory == null ? ItemTypeEnum.None : Factory.CategoryEnum; // TODO: Provided for backwards compatibility.  Will be deleted.
+    public ItemTypeEnum Category => Factory.CategoryEnum; // TODO: Provided for backwards compatibility.  Will be deleted.
 
     public void Absorb(Item other)
     {
@@ -1238,10 +1238,6 @@ internal sealed class Item : IComparable<Item>
     {
         // All characteristics are set to false.
         Characteristics = new ItemCharacteristics();
-        if (Factory == null)
-        {
-            return;
-        }
 
         // Merge the characteristics from the base item category.
         Characteristics.Merge(Factory);
@@ -1724,19 +1720,11 @@ internal sealed class Item : IComparable<Item>
 
     public bool IsFlavourAware()
     {
-        if (Factory == null)
-        {
-            return false;
-        }
         return Factory.FlavourAware;
     }
 
     public bool IsKnown()
     {
-        if (Factory == null)
-        {
-            return false;
-        }
         if (IdentKnown)
         {
             return true;
