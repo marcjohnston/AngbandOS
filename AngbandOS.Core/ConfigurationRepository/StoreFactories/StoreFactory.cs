@@ -230,7 +230,7 @@ internal abstract class StoreFactory : IItemFilter, IGetKey<string>
     /// The command that is specified, shouldn't also be in the non-advertised commands list to keep the save file size down; although it 
     /// won't affect game play.
     /// </remarks>
-    public virtual StoreCommand? AdvertisedStoreCommand5 { get; private set; }
+    public StoreCommand? AdvertisedStoreCommand5 { get; private set; }
 
     /// <summary>
     /// Returns the width of the description column for rendering items in the store inventory.  The HomeStore defines a wider column for the description.
