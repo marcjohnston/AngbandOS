@@ -763,10 +763,6 @@ internal sealed class Item : IComparable<Item>
     /// <returns></returns>
     public string Description(bool includeCountPrefix, int mode)
     {
-        if (Factory == null)
-        {
-            return "(nothing)";
-        }
         string basenm = Factory.GetDescription(this, includeCountPrefix);
         if (IsKnown())
         {
@@ -1837,13 +1833,13 @@ internal sealed class Item : IComparable<Item>
         return Factory.IsStompable(this);
     }
 
-    public string StoreDescription(bool pref, int mode)
+    public string StoreDescription()
     {
         bool hackAware = Factory.FlavourAware;
         bool hackKnown = IdentKnown;
         IdentKnown = true;
         Factory.FlavourAware = true;
-        string buf = Description(pref, mode);
+        string buf = Description(true, 3);
         Factory.FlavourAware = hackAware;
         if (!hackKnown)
         {

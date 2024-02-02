@@ -263,7 +263,7 @@ internal abstract class StoreFactory : IItemFilter, IGetKey<string>
     /// <returns></returns>
     public virtual string GetItemDescription(Item oPtr)
     {
-        return oPtr.StoreDescription(true, 3);
+        return oPtr.StoreDescription();
     }
 
     /// <summary>
