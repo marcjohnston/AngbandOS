@@ -1824,15 +1824,9 @@ internal sealed class Item : IComparable<Item>
     public string StoreDescription()
     {
         bool hackAware = Factory.FlavourAware;
-        bool hackKnown = IdentKnown;
-        IdentKnown = true;
         Factory.FlavourAware = true;
         string buf = Description(true, 3);
         Factory.FlavourAware = hackAware;
-        if (!hackKnown)
-        {
-            IdentKnown = false;
-        }
         return buf;
     }
 
