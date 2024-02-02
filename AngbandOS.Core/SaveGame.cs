@@ -187,7 +187,7 @@ internal class SaveGame
     /// GUI
     public const int SafeMaxAttempts = 5000;
 
-    public readonly AbilityScore[] AbilityScores = new AbilityScore[6];
+    public readonly AbilityScore[] AbilityScores = new AbilityScore[6]; // TODO: This needs to be a dictionary where the keys need to be stats
     public Genome Dna;
     public readonly string[] History = new string[4];
     public readonly int[] MaxDlv = new int[DungeonCount];
@@ -1727,14 +1727,6 @@ internal class SaveGame
             {
                 return;
             }
-            foreach (Town town in SingletonRepository.Towns)
-            {
-                foreach (Store store in town.Stores)
-                {
-                    store.StoreInit();
-                    store.StoreMaint();
-                }
-            }
             _seedFlavor = Rng.RandomLessThan(int.MaxValue);
             CreateWorld();
             foreach (var dungeon in SingletonRepository.Dungeons)
@@ -2715,13 +2707,13 @@ internal class SaveGame
                 Wilderness[i][j].RoadMap = 0;
             }
         }
-        for (i = 0; i < SingletonRepository.Towns.Count; i++)
+
+        // The game world automatically gets a single instance of every town.  Initialize each town now.
+        foreach (Town town in SingletonRepository.Towns)
         {
-            SingletonRepository.Towns[i].Seed = Rng.RandomLessThan(int.MaxValue);
-            SingletonRepository.Towns[i].Visited = false;
-            SingletonRepository.Towns[i].X = 0;
-            SingletonRepository.Towns[i].Y = 0;
+            town.Initialize();
         }
+
         for (i = 0; i < DungeonCount; i++)
         {
             SingletonRepository.Dungeons[i].X = 0;
@@ -10247,16 +10239,16 @@ internal class SaveGame
 
     public void GetStats()
     {
-        int i, j;
+        int i;
         while (true)
         {
-            List<int> dice = new List<int>() { 17, 16, 14, 12, 11, 10 };
-            for (i = 0; i < 6; i++)
+            List<int> maxList = new List<int>() { 17, 16, 14, 12, 11, 10 };
+            for (i = 0; i < 6; i++) // There are six abilities
             {
-                int index = Rng.DieRoll(dice.Count) - 1;
-                j = dice[index];
-                dice.RemoveAt(index);
-                AbilityScores[i].InnateMax = j;
+                int maxIndex = Rng.RandomLessThan(maxList.Count); // Choose a random max from the maxList
+                int max = maxList[maxIndex];
+                maxList.RemoveAt(maxIndex);
+                AbilityScores[i].InnateMax = max;
                 int bonus = Race.AbilityBonus[i] + BaseCharacterClass.AbilityBonus[i];
                 AbilityScores[i].Innate = AbilityScores[i].InnateMax;
                 AbilityScores[i].Adjusted = AbilityScores[i].ModifyStatValue(AbilityScores[i].InnateMax, bonus);
@@ -13984,7 +13976,7 @@ internal class SaveGame
         {
             minIndex = 1;
         }
-        int rIdx = Rng.RandomBetween(minIndex, SingletonRepository.MonsterRaces.Count);
+        int rIdx = Rng.RandomBetween(minIndex, SingletonRepository.MonsterRaces.Count - 2); // TODO: We need to -1 the nobody monster
 
         // Do not allow a monster that can multiply.
         if (SingletonRepository.MonsterRaces[rIdx].Multiply)

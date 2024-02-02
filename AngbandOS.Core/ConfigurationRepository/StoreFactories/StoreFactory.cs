@@ -45,6 +45,17 @@ internal abstract class StoreFactory : IItemFilter, IGetKey<string>
             itemFilters.Add(SaveGame.SingletonRepository.ItemFilters.Get(itemFilterName));
         }
         ItemFilters = itemFilters.ToArray();
+
+        // Bind the store stock manifests.
+        List<StoreStockManifest> storeStockManifestList = new();
+        if (StoreStockManifestDefinitions != null) {
+            foreach (StoreStockManifestDefinition storeStockManifestDefinition in StoreStockManifestDefinitions)
+            {
+                ItemFactory itemFactory = SaveGame.SingletonRepository.ItemFactories.Get(storeStockManifestDefinition.ItemFactoryName);
+                storeStockManifestList.Add(new StoreStockManifest(itemFactory, storeStockManifestDefinition.Weight));
+            }
+        }
+        StoreStockManifests = storeStockManifestList.ToArray();
     }
 
     /// <summary>
@@ -128,7 +139,9 @@ internal abstract class StoreFactory : IItemFilter, IGetKey<string>
     /// store to create items from.  If the store doesn't sell items, the Factory.CreateItem should return null and this property should return null.
     /// </summary>
     /// <returns></returns>
-    public virtual StoreStockManifest[]? StoreStockManifests => null;
+    public StoreStockManifest[]? StoreStockManifests { get; private set; } = null;
+
+    protected virtual StoreStockManifestDefinition[]? StoreStockManifestDefinitions => null;
 
     public virtual string FleeMessage => "Your pack is so full that you flee the Stores...";
 

@@ -53,14 +53,14 @@ internal class InnStoreFactory : StoreFactory
     /// </summary>
     protected override string[] ItemFilterNames => new string[] { };
 
-    public override StoreStockManifest[]? StoreStockManifests => new[]
+    protected override StoreStockManifestDefinition[]? StoreStockManifestDefinitions => new[]
     {
-        new StoreStockManifest(SaveGame.SingletonRepository.ItemFactories.Get(nameof(HardBiscuitFoodItemFactory)), 2),
-        new StoreStockManifest(SaveGame.SingletonRepository.ItemFactories.Get(nameof(PintOfFineAleFoodItemFactory)), 10),
-        new StoreStockManifest(SaveGame.SingletonRepository.ItemFactories.Get(nameof(PintOfFineWineFoodItemFactory)), 10),
-        new StoreStockManifest(SaveGame.SingletonRepository.ItemFactories.Get(nameof(RationFoodItemFactory)), 18),
-        new StoreStockManifest(SaveGame.SingletonRepository.ItemFactories.Get(nameof(StripOfVenisonFoodItemFactory)), 4),
-        new StoreStockManifest(SaveGame.SingletonRepository.ItemFactories.Get(nameof(SatisfyHungerScrollItemFactory)), 4),
+        new StoreStockManifestDefinition(nameof(HardBiscuitFoodItemFactory), 2),
+        new StoreStockManifestDefinition(nameof(PintOfFineAleFoodItemFactory), 10),
+        new StoreStockManifestDefinition(nameof(PintOfFineWineFoodItemFactory), 10),
+        new StoreStockManifestDefinition(nameof(RationFoodItemFactory), 18),
+        new StoreStockManifestDefinition(nameof(StripOfVenisonFoodItemFactory), 4),
+        new StoreStockManifestDefinition(nameof(SatisfyHungerScrollItemFactory), 4),
     };
 
     public override int MaxInventory => 4;

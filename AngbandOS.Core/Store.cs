@@ -29,7 +29,7 @@ internal class Store
             {
                 for (int i = 0; i < storeStockManifest.Weight; i++)
                 {
-                    table.Add(storeStockManifest.ItemType);
+                    table.Add(storeStockManifest.ItemFactory);
                 }
             }
         }
@@ -52,6 +52,7 @@ internal class Store
     /// Returns the ItemFactories that are used to generate new items for the store.  If the store doesn't create items, 
     /// </summary>
     private readonly ItemFactory[] InventoryFactories;
+
     private bool _leaveStore;
     public StoreOwner Owner { get; private set; }
 
@@ -224,8 +225,7 @@ internal class Store
 
             // If the factory didn't create the item, then allow the store to create one.
             if (newItem == null) {
-                // Retrieve the item class.
-                // Otherwise, pick an item to create from the inventory.
+                // Pick a random item fctory that will be used to create the item.
                 ItemFactory itemFactory = InventoryFactories[SaveGame.Rng.RandomLessThan(InventoryFactories.Length)];
 
                 // Generate a level for the item.

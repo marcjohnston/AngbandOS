@@ -44,26 +44,26 @@ internal class LibraryStoreFactory : StoreFactory
     public override ColorEnum Color => ColorEnum.Orange;
     protected override string SymbolName => nameof(NumberNineSymbol);
 
-    public override StoreStockManifest[]? StoreStockManifests => new[]
+    protected override StoreStockManifestDefinition[]? StoreStockManifestDefinitions => new[]
     {
-        new StoreStockManifest(SaveGame.SingletonRepository.ItemFactories.Get(nameof(MasteryChaosBookItemFactory)), 2),
-        new StoreStockManifest(SaveGame.SingletonRepository.ItemFactories.Get(nameof(SignOfChaosChaosBookItemFactory)), 2),
-        new StoreStockManifest(SaveGame.SingletonRepository.ItemFactories.Get(nameof(BasicChiFlowCorporealBookItemFactory)), 2),
-        new StoreStockManifest(SaveGame.SingletonRepository.ItemFactories.Get(nameof(YogicMasteryCorporealBookItemFactory)), 2),
-        new StoreStockManifest(SaveGame.SingletonRepository.ItemFactories.Get(nameof(BlackMassDeathBookItemFactory)), 4),
-        new StoreStockManifest(SaveGame.SingletonRepository.ItemFactories.Get(nameof(BlackPrayersDeathBookItemFactory)), 4),
-        new StoreStockManifest(SaveGame.SingletonRepository.ItemFactories.Get(nameof(CantripsforBeginnersFolkBookItemFactory)), 2),
-        new StoreStockManifest(SaveGame.SingletonRepository.ItemFactories.Get(nameof(MagicksOfMasteryFolkBookItemFactory)), 2),
-        new StoreStockManifest(SaveGame.SingletonRepository.ItemFactories.Get(nameof(MajorMagicksFolkBookItemFactory)), 2),
-        new StoreStockManifest(SaveGame.SingletonRepository.ItemFactories.Get(nameof(MinorMagicksFolkBookItemFactory)), 2),
-        new StoreStockManifest(SaveGame.SingletonRepository.ItemFactories.Get(nameof(CommonPrayerLifeBookItemFactory)), 4),
-        new StoreStockManifest(SaveGame.SingletonRepository.ItemFactories.Get(nameof(HighMassLifeBookItemFactory)), 4),
-        new StoreStockManifest(SaveGame.SingletonRepository.ItemFactories.Get(nameof(CallOfTheWildNatureBookItemFactory)), 4),
-        new StoreStockManifest(SaveGame.SingletonRepository.ItemFactories.Get(nameof(NatureMasteryNatureBookItemFactory)), 4),
-        new StoreStockManifest(SaveGame.SingletonRepository.ItemFactories.Get(nameof(BeginnersHandbookSorceryBookItemFactory)), 2),
-        new StoreStockManifest(SaveGame.SingletonRepository.ItemFactories.Get(nameof(MasterSorcerersHandbookSorceryBookItemFactory)), 2),
-        new StoreStockManifest(SaveGame.SingletonRepository.ItemFactories.Get(nameof(CardMasteryTarotBookItemFactory)), 2),
-        new StoreStockManifest(SaveGame.SingletonRepository.ItemFactories.Get(nameof(ConjuringsTricksTarotBookItemFactory)), 2),
+        new StoreStockManifestDefinition(nameof(MasteryChaosBookItemFactory), 2),
+        new StoreStockManifestDefinition(nameof(SignOfChaosChaosBookItemFactory), 2),
+        new StoreStockManifestDefinition(nameof(BasicChiFlowCorporealBookItemFactory), 2),
+        new StoreStockManifestDefinition(nameof(YogicMasteryCorporealBookItemFactory), 2),
+        new StoreStockManifestDefinition(nameof(BlackMassDeathBookItemFactory), 4),
+        new StoreStockManifestDefinition(nameof(BlackPrayersDeathBookItemFactory), 4),
+        new StoreStockManifestDefinition(nameof(CantripsforBeginnersFolkBookItemFactory), 2),
+        new StoreStockManifestDefinition(nameof(MagicksOfMasteryFolkBookItemFactory), 2),
+        new StoreStockManifestDefinition(nameof(MajorMagicksFolkBookItemFactory), 2),
+        new StoreStockManifestDefinition(nameof(MinorMagicksFolkBookItemFactory), 2),
+        new StoreStockManifestDefinition(nameof(CommonPrayerLifeBookItemFactory), 4),
+        new StoreStockManifestDefinition(nameof(HighMassLifeBookItemFactory), 4),
+        new StoreStockManifestDefinition(nameof(CallOfTheWildNatureBookItemFactory), 4),
+        new StoreStockManifestDefinition(nameof(NatureMasteryNatureBookItemFactory), 4),
+        new StoreStockManifestDefinition(nameof(BeginnersHandbookSorceryBookItemFactory), 2),
+        new StoreStockManifestDefinition(nameof(MasterSorcerersHandbookSorceryBookItemFactory), 2),
+        new StoreStockManifestDefinition(nameof(CardMasteryTarotBookItemFactory), 2),
+        new StoreStockManifestDefinition(nameof(ConjuringsTricksTarotBookItemFactory), 2),
     };
 
     /// <summary>

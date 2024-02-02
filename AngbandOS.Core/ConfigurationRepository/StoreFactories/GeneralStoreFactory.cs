@@ -49,24 +49,24 @@ internal class GeneralStoreFactory : StoreFactory
     protected override string SymbolName => nameof(NumberOneSymbol);
     public override string Description => "General Store";
 
-    public override StoreStockManifest[]? StoreStockManifests => new[]
+    protected override StoreStockManifestDefinition[]? StoreStockManifestDefinitions => new[]
     {
-        new StoreStockManifest(SaveGame.SingletonRepository.ItemFactories.Get(nameof(WoodenArrowAmmunitionItemFactory)), 2),
-        new StoreStockManifest(SaveGame.SingletonRepository.ItemFactories.Get(nameof(SteelBoltAmmunitionItemFactory)), 2),
-        new StoreStockManifest(SaveGame.SingletonRepository.ItemFactories.Get(nameof(ClothCloakCloakArmorItemFactory)), 3),
-        new StoreStockManifest(SaveGame.SingletonRepository.ItemFactories.Get(nameof(PickDiggingWeaponItemFactory))),
-        new StoreStockManifest(SaveGame.SingletonRepository.ItemFactories.Get(nameof(ShovelDiggingWeaponItemFactory)), 2),
-        new StoreStockManifest(SaveGame.SingletonRepository.ItemFactories.Get(nameof(OilFlaskItemFactory)), 10),
-        new StoreStockManifest(SaveGame.SingletonRepository.ItemFactories.Get(nameof(HardBiscuitFoodItemFactory))),
-        new StoreStockManifest(SaveGame.SingletonRepository.ItemFactories.Get(nameof(PintOfFineAleFoodItemFactory))),
-        new StoreStockManifest(SaveGame.SingletonRepository.ItemFactories.Get(nameof(PintOfFineWineFoodItemFactory))),
-        new StoreStockManifest(SaveGame.SingletonRepository.ItemFactories.Get(nameof(RationFoodItemFactory)), 9),
-        new StoreStockManifest(SaveGame.SingletonRepository.ItemFactories.Get(nameof(StripOfVenisonFoodItemFactory)), 2),
-        new StoreStockManifest(SaveGame.SingletonRepository.ItemFactories.Get(nameof(BrassLanternLightSourceItemFactory)), 4),
-        new StoreStockManifest(SaveGame.SingletonRepository.ItemFactories.Get(nameof(OrbLightSourceItemFactory))),
-        new StoreStockManifest(SaveGame.SingletonRepository.ItemFactories.Get(nameof(WoodenTorchLightSourceItemFactory)), 5),
-        new StoreStockManifest(SaveGame.SingletonRepository.ItemFactories.Get(nameof(IronShotAmmunitionItemFactory)), 2),
-        new StoreStockManifest(SaveGame.SingletonRepository.ItemFactories.Get(nameof(IronSpikeItemFactory)), 2),
+        new StoreStockManifestDefinition(nameof(WoodenArrowAmmunitionItemFactory), 2),
+        new StoreStockManifestDefinition(nameof(SteelBoltAmmunitionItemFactory), 2),
+        new StoreStockManifestDefinition(nameof(ClothCloakCloakArmorItemFactory), 3),
+        new StoreStockManifestDefinition(nameof(PickDiggingWeaponItemFactory)),
+        new StoreStockManifestDefinition(nameof(ShovelDiggingWeaponItemFactory), 2),
+        new StoreStockManifestDefinition(nameof(OilFlaskItemFactory), 10),
+        new StoreStockManifestDefinition(nameof(HardBiscuitFoodItemFactory)),
+        new StoreStockManifestDefinition(nameof(PintOfFineAleFoodItemFactory)),
+        new StoreStockManifestDefinition(nameof(PintOfFineWineFoodItemFactory)),
+        new StoreStockManifestDefinition(nameof(RationFoodItemFactory), 9),
+        new StoreStockManifestDefinition(nameof(StripOfVenisonFoodItemFactory), 2),
+        new StoreStockManifestDefinition(nameof(BrassLanternLightSourceItemFactory), 4),
+        new StoreStockManifestDefinition(nameof(OrbLightSourceItemFactory)),
+        new StoreStockManifestDefinition(nameof(WoodenTorchLightSourceItemFactory), 5),
+        new StoreStockManifestDefinition(nameof(IronShotAmmunitionItemFactory), 2),
+        new StoreStockManifestDefinition(nameof(IronSpikeItemFactory), 2),
     };
 
     /// <summary>

@@ -5,22 +5,24 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core;
+namespace AngbandOS.Core.Interface.Definitions;
 
-internal class StoreStockManifest
+public class StoreStockManifestDefinition
 {
-    public ItemFactory ItemFactory { get; }
-    public int Weight { get; }
+    public virtual string ItemFactoryName { get; set; }
+    public virtual int Weight { get; set; }
+
+    public StoreStockManifestDefinition() { }
 
     /// <summary>
     /// 
     /// </summary>
-    /// <param name="itemFactory"></param>
+    /// <param name="itemFactoryName"></param>
     /// <param name="weight">Specify the weight for the item.  A value of 0, means the item cannot be selected.  
     /// All item weights are summed to provide a full 1-in-chance of selected.</param>
-    public StoreStockManifest(ItemFactory itemFactory, int weight = 1)
+    public StoreStockManifestDefinition(string itemFactoryName, int weight = 1)
     {
-        ItemFactory = itemFactory;
+        ItemFactoryName = itemFactoryName;
         Weight = weight;
     }
 }

@@ -123,6 +123,12 @@ internal class Rng
     /// <returns> A random number </returns>
     public int RandomLessThan(int max)
     {
+        // There is a special case here, where the
+        if (max == 0)
+        {
+            return 0;
+        }
+
         return Next(max);
     }
 
@@ -173,15 +179,15 @@ internal class Rng
     }
 
     /// <summary>
-    /// Generates the actual random number
+    /// Generates a random number less than the max value.  The max value must be greater than 0.
     /// </summary>
     /// <param name="max"> </param>
     /// <returns> </returns>
     private int Next(int max)
     {
-        if (max <= 1)
+        if (max <= 0)
         {
-            return 0;
+            return 0; // TODO: This defys the stated purpose
         }
         Random use = UseFixed ? _fixed : _mainSequence;
         return use.Next(max);

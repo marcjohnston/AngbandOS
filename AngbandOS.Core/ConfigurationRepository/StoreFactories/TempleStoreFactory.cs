@@ -40,29 +40,29 @@ internal partial class TempleStoreFactory : StoreFactory
         nameof(DardobardTheWeakStoreOwner)
     };
 
-    public override StoreStockManifest[]? StoreStockManifests => new[]
+    protected override StoreStockManifestDefinition[]? StoreStockManifestDefinitions => new[]
     {
-        new StoreStockManifest(SaveGame.SingletonRepository.ItemFactories.Get(nameof(BallAndChainHaftedWeaponItemFactory)), 2),
-        new StoreStockManifest(SaveGame.SingletonRepository.ItemFactories.Get(nameof(FlailHaftedWeaponItemFactory))),
-        new StoreStockManifest(SaveGame.SingletonRepository.ItemFactories.Get(nameof(LeadFilledMaceHaftedWeaponItemFactory))),
-        new StoreStockManifest(SaveGame.SingletonRepository.ItemFactories.Get(nameof(LucerneHammerHaftedWeaponItemFactory))),
-        new StoreStockManifest(SaveGame.SingletonRepository.ItemFactories.Get(nameof(MaceHaftedWeaponItemFactory)), 2),
-        new StoreStockManifest(SaveGame.SingletonRepository.ItemFactories.Get(nameof(MorningStarHaftedWeaponItemFactory))),
-        new StoreStockManifest(SaveGame.SingletonRepository.ItemFactories.Get(nameof(QuarterstaffHaftedWeaponItemFactory))),
-        new StoreStockManifest(SaveGame.SingletonRepository.ItemFactories.Get(nameof(WarHammerHaftedWeaponItemFactory)), 2),
-        new StoreStockManifest(SaveGame.SingletonRepository.ItemFactories.Get(nameof(WhipHaftedWeaponItemFactory)), 2),
-        new StoreStockManifest(SaveGame.SingletonRepository.ItemFactories.Get(nameof(CommonPrayerLifeBookItemFactory)), 4),
-        new StoreStockManifest(SaveGame.SingletonRepository.ItemFactories.Get(nameof(HighMassLifeBookItemFactory)), 4),
-        new StoreStockManifest(SaveGame.SingletonRepository.ItemFactories.Get(nameof(CureCriticalWoundsPotionItemFactory)), 4),
-        new StoreStockManifest(SaveGame.SingletonRepository.ItemFactories.Get(nameof(CureLightWoundsPotionItemFactory))),
-        new StoreStockManifest(SaveGame.SingletonRepository.ItemFactories.Get(nameof(CureSeriousWoundsPotionItemFactory)), 2),
-        new StoreStockManifest(SaveGame.SingletonRepository.ItemFactories.Get(nameof(HeroismPotionItemFactory))),
-        new StoreStockManifest(SaveGame.SingletonRepository.ItemFactories.Get(nameof(RestoreLifeLevelsPotionItemFactory)), 6),
-        new StoreStockManifest(SaveGame.SingletonRepository.ItemFactories.Get(nameof(BlessingScrollItemFactory))),
-        new StoreStockManifest(SaveGame.SingletonRepository.ItemFactories.Get(nameof(HolyChantScrollItemFactory))),
-        new StoreStockManifest(SaveGame.SingletonRepository.ItemFactories.Get(nameof(RemoveCurseScrollItemFactory)), 3),
-        new StoreStockManifest(SaveGame.SingletonRepository.ItemFactories.Get(nameof(SpecialRemoveCurseScrollItemFactory)), 2),
-        new StoreStockManifest(SaveGame.SingletonRepository.ItemFactories.Get(nameof(WordofRecallScrollItemFactory)), 6),
+        new StoreStockManifestDefinition(nameof(BallAndChainHaftedWeaponItemFactory), 2),
+        new StoreStockManifestDefinition(nameof(FlailHaftedWeaponItemFactory)),
+        new StoreStockManifestDefinition(nameof(LeadFilledMaceHaftedWeaponItemFactory)),
+        new StoreStockManifestDefinition(nameof(LucerneHammerHaftedWeaponItemFactory)),
+        new StoreStockManifestDefinition(nameof(MaceHaftedWeaponItemFactory), 2),
+        new StoreStockManifestDefinition(nameof(MorningStarHaftedWeaponItemFactory)),
+        new StoreStockManifestDefinition(nameof(QuarterstaffHaftedWeaponItemFactory)),
+        new StoreStockManifestDefinition(nameof(WarHammerHaftedWeaponItemFactory), 2),
+        new StoreStockManifestDefinition(nameof(WhipHaftedWeaponItemFactory), 2),
+        new StoreStockManifestDefinition(nameof(CommonPrayerLifeBookItemFactory), 4),
+        new StoreStockManifestDefinition(nameof(HighMassLifeBookItemFactory), 4),
+        new StoreStockManifestDefinition(nameof(CureCriticalWoundsPotionItemFactory), 4),
+        new StoreStockManifestDefinition(nameof(CureLightWoundsPotionItemFactory)),
+        new StoreStockManifestDefinition(nameof(CureSeriousWoundsPotionItemFactory), 2),
+        new StoreStockManifestDefinition(nameof(HeroismPotionItemFactory)),
+        new StoreStockManifestDefinition(nameof(RestoreLifeLevelsPotionItemFactory), 6),
+        new StoreStockManifestDefinition(nameof(BlessingScrollItemFactory)),
+        new StoreStockManifestDefinition(nameof(HolyChantScrollItemFactory)),
+        new StoreStockManifestDefinition(nameof(RemoveCurseScrollItemFactory), 3),
+        new StoreStockManifestDefinition(nameof(SpecialRemoveCurseScrollItemFactory), 2),
+        new StoreStockManifestDefinition(nameof(WordofRecallScrollItemFactory), 6),
     };
 
     /// <summary>

@@ -10,10 +10,10 @@ namespace AngbandOS.Core.Interface.Definitions;
 [Serializable]
 public class MonsterAttackDefinition
 {
-    public string MethodName { get; set; }
-    public string? EffectName { get; set; }
-    public int DDice { get; set; }
-    public int DSide { get; set; }
+    public virtual string MethodName { get; set; }
+    public virtual string? EffectName { get; set; }
+    public virtual int DDice { get; set; }
+    public virtual int DSide { get; set; }
 
     /// <summary>
     /// The constructor to use for Json deserialization.

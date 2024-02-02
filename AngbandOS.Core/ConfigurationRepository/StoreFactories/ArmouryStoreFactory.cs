@@ -44,29 +44,29 @@ internal class ArmoryStoreFactory : StoreFactory
     public override ColorEnum Color => ColorEnum.Grey;
     protected override string SymbolName => nameof(NumberTwoSymbol);
 
-    public override StoreStockManifest[]? StoreStockManifests => new[]
+    protected override StoreStockManifestDefinition[]? StoreStockManifestDefinitions => new[]
     {
-        new StoreStockManifest(SaveGame.SingletonRepository.ItemFactories.Get(nameof(HardLeatherBootsArmorItemFactory)), 4),
-        new StoreStockManifest(SaveGame.SingletonRepository.ItemFactories.Get(nameof(SoftLeatherBootsArmorItemFactory)), 2),
-        new StoreStockManifest(SaveGame.SingletonRepository.ItemFactories.Get(nameof(GauntletGlovesArmorItemFactory)), 2),
-        new StoreStockManifest(SaveGame.SingletonRepository.ItemFactories.Get(nameof(LeatherGlovesArmorItemFactory)), 3),
-        new StoreStockManifest(SaveGame.SingletonRepository.ItemFactories.Get(nameof(AugmentedChainMailHardArmorItemFactory))),
-        new StoreStockManifest(SaveGame.SingletonRepository.ItemFactories.Get(nameof(BarChainMailHardArmorItemFactory))),
-        new StoreStockManifest(SaveGame.SingletonRepository.ItemFactories.Get(nameof(ChainMailHardArmorItemFactory)), 4),
-        new StoreStockManifest(SaveGame.SingletonRepository.ItemFactories.Get(nameof(DoubleChainMailHardArmorItemFactory))),
-        new StoreStockManifest(SaveGame.SingletonRepository.ItemFactories.Get(nameof(MetalBrigandineHardArmorItemFactory))),
-        new StoreStockManifest(SaveGame.SingletonRepository.ItemFactories.Get(nameof(MetalScaleMailHardArmorItemFactory)), 2),
-        new StoreStockManifest(SaveGame.SingletonRepository.ItemFactories.Get(nameof(HardLeatherCapHelmArmorItemFactory)), 4),
-        new StoreStockManifest(SaveGame.SingletonRepository.ItemFactories.Get(nameof(IronHelmArmorItemFactory))),
-        new StoreStockManifest(SaveGame.SingletonRepository.ItemFactories.Get(nameof(MetalCapHelmArmorFactory))),
-        new StoreStockManifest(SaveGame.SingletonRepository.ItemFactories.Get(nameof(LargeLeatherShieldArmorItemFactory))),
-        new StoreStockManifest(SaveGame.SingletonRepository.ItemFactories.Get(nameof(SmallLeatherShieldArmorItemFactory)), 4),
-        new StoreStockManifest(SaveGame.SingletonRepository.ItemFactories.Get(nameof(SmallMetalShieldArmorItemFactory))),
-        new StoreStockManifest(SaveGame.SingletonRepository.ItemFactories.Get(nameof(HardLeatherSoftArmorItemFactory)), 3),
-        new StoreStockManifest(SaveGame.SingletonRepository.ItemFactories.Get(nameof(HardStuddedLeatherSoftArmorItemFactory)), 2),
-        new StoreStockManifest(SaveGame.SingletonRepository.ItemFactories.Get(nameof(LeatherScaleMailSoftArmorItemFactory)), 3),
-        new StoreStockManifest(SaveGame.SingletonRepository.ItemFactories.Get(nameof(RobeSoftArmorItemFactory)), 3),
-        new StoreStockManifest(SaveGame.SingletonRepository.ItemFactories.Get(nameof(SoftLeatherSoftArmorItemFactory)), 4),
+        new StoreStockManifestDefinition(nameof(HardLeatherBootsArmorItemFactory), 4),
+        new StoreStockManifestDefinition(nameof(SoftLeatherBootsArmorItemFactory), 2),
+        new StoreStockManifestDefinition(nameof(GauntletGlovesArmorItemFactory), 2),
+        new StoreStockManifestDefinition(nameof(LeatherGlovesArmorItemFactory), 3),
+        new StoreStockManifestDefinition(nameof(AugmentedChainMailHardArmorItemFactory)),
+        new StoreStockManifestDefinition(nameof(BarChainMailHardArmorItemFactory)),
+        new StoreStockManifestDefinition(nameof(ChainMailHardArmorItemFactory), 4),
+        new StoreStockManifestDefinition(nameof(DoubleChainMailHardArmorItemFactory)),
+        new StoreStockManifestDefinition(nameof(MetalBrigandineHardArmorItemFactory)),
+        new StoreStockManifestDefinition(nameof(MetalScaleMailHardArmorItemFactory), 2),
+        new StoreStockManifestDefinition(nameof(HardLeatherCapHelmArmorItemFactory), 4),
+        new StoreStockManifestDefinition(nameof(IronHelmArmorItemFactory)),
+        new StoreStockManifestDefinition(nameof(MetalCapHelmArmorFactory)),
+        new StoreStockManifestDefinition(nameof(LargeLeatherShieldArmorItemFactory)),
+        new StoreStockManifestDefinition(nameof(SmallLeatherShieldArmorItemFactory), 4),
+        new StoreStockManifestDefinition(nameof(SmallMetalShieldArmorItemFactory)),
+        new StoreStockManifestDefinition(nameof(HardLeatherSoftArmorItemFactory), 3),
+        new StoreStockManifestDefinition(nameof(HardStuddedLeatherSoftArmorItemFactory), 2),
+        new StoreStockManifestDefinition(nameof(LeatherScaleMailSoftArmorItemFactory), 3),
+        new StoreStockManifestDefinition(nameof(RobeSoftArmorItemFactory), 3),
+        new StoreStockManifestDefinition(nameof(SoftLeatherSoftArmorItemFactory), 4),
     };
 
     /// <summary>

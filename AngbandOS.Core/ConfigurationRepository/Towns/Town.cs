@@ -28,6 +28,16 @@ internal abstract class Town : IGetKey<string>, IToJson
     public abstract char Char { get; }
     public abstract int HousePrice { get; }
     public abstract string Name { get; }
+
+    /// <summary>
+    /// Returns the store factories that are used to generate the stores for the town.  This property is bound using the StoreFactoryNames property
+    /// during the bind phase.
+    /// </summary>
+    public StoreFactory[] StoreFactories { get; private set; }
+
+    /// <summary>
+    /// Returns the stores that belong to the town.
+    /// </summary>
     public Store[] Stores { get; private set; }
     protected abstract string[] StoreFactoryNames { get; }
 
@@ -52,11 +62,28 @@ internal abstract class Town : IGetKey<string>, IToJson
 
     public void Bind()
     {
-        List<Store> stores = new List<Store>();
+        List<StoreFactory> storeFactoryList = new List<StoreFactory>();
         foreach (string storeName in StoreFactoryNames)
         {
-            StoreFactory storeFactory = SaveGame.SingletonRepository.StoreFactories.Get(storeName);
-            stores.Add(new Store(SaveGame, storeFactory));
+            storeFactoryList.Add(SaveGame.SingletonRepository.StoreFactories.Get(storeName));
+        }
+        StoreFactories = storeFactoryList.ToArray();
+    }
+
+    public void Initialize()
+    {
+        Seed = SaveGame.Rng.RandomLessThan(int.MaxValue);
+        Visited = false;
+        X = 0;
+        Y = 0;
+
+        List<Store> stores = new List<Store>();
+        foreach (StoreFactory storeFactory in StoreFactories)
+        {
+            Store store = new Store(SaveGame, storeFactory);
+            store.StoreInit();
+            store.StoreMaint();
+            stores.Add(store);
         }
         Stores = stores.ToArray();
     }
