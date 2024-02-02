@@ -77,7 +77,11 @@ internal class PawnStoreFactory : StoreFactory
         }
     }
     protected override string? AdvertisedStoreCommand4Name => nameof(IdentifyAllStoreCommand);
-    public override string GetItemDescription(Item oPtr) => oPtr.Description(true, 3);
+
+    /// <summary>
+    /// Returns false, because items in the pawn shop are not identified and render as they would appear in the dungeon.
+    /// </summary>
+    public override bool ItemsRenderFlavourAware => false;
 
     public override bool StoreIdentifiesItems => false;
     public override bool StoreAnalyzesPurchases => false;

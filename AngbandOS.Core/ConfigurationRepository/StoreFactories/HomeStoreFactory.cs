@@ -49,10 +49,11 @@ internal class HomeStoreFactory : StoreFactory
     protected override string? AdvertisedStoreCommand2Name => nameof(DropStoreCommand);
     protected override string? AdvertisedStoreCommand4Name => nameof(RestStoreCommand);
 
-    public override string GetItemDescription(Item oPtr)
-    {
-        return oPtr.Description(true, 3);
-    }
+    /// <summary>
+    /// Returns false, because items in the pawn shop are not identified and render as they would appear in the dungeon.
+    /// </summary>
+    public override bool ItemsRenderFlavourAware => false;
+
     public override int WidthOfDescriptionColumn => 65;
     public override bool RenderWeightUnitOfMeasurement => true;
     public override bool StoreCanMergeItem(Item oPtr, Item jPtr)
