@@ -167,8 +167,6 @@ internal abstract class StoreFactory : IItemFilter, IGetKey<string>
 
     protected virtual StoreStockManifestDefinition[]? StoreStockManifestDefinitions => null;
 
-    public virtual string FleeMessage => "Your pack is so full that you flee the Stores...";
-
     public abstract string FeatureType { get; }
 
     /// <summary>

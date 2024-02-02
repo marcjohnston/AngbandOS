@@ -48,7 +48,6 @@ internal class HomeStoreFactory : StoreFactory
     protected override string? AdvertisedStoreCommand1Name => nameof(GetStoreCommand);
     protected override string? AdvertisedStoreCommand2Name => nameof(DropStoreCommand);
     protected override string? AdvertisedStoreCommand4Name => nameof(RestStoreCommand);
-    public override string FleeMessage => "Your pack is so full that you flee your home...";
 
     public override string GetItemDescription(Item oPtr)
     {
