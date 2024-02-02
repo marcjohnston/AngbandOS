@@ -7,7 +7,7 @@
 
 namespace AngbandOS.Core;
 
-internal class StockStoreInventoryItem
+internal class StoreStockManifest
 {
     public Type ItemType { get; }
     public int Weight { get; }
@@ -18,7 +18,7 @@ internal class StockStoreInventoryItem
     /// <param name="itemType"></param>
     /// <param name="weight">Specify the weight for the item.  A value of 0, means the item cannot be selected.  
     /// All item weights are summed to provide a full 1-in-chance of selected.</param>
-    public StockStoreInventoryItem(Type itemType, int weight = 1)
+    public StoreStockManifest(Type itemType, int weight = 1)
     {
         ItemType = itemType;
         Weight = weight;

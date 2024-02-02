@@ -53,16 +53,16 @@ internal class InnStoreFactory : StoreFactory
     /// </summary>
     protected override string[] ItemFilterNames => new string[] { };
 
-    public override StockStoreInventoryItem[]? GetStoreTable()
+    public override StoreStockManifest[]? GetStoreTable()
     {
         return new[]
         {
-            new StockStoreInventoryItem(typeof(HardBiscuitFoodItemFactory), 2),
-            new StockStoreInventoryItem(typeof(PintOfFineAleFoodItemFactory), 10),
-            new StockStoreInventoryItem(typeof(PintOfFineWineFoodItemFactory), 10),
-            new StockStoreInventoryItem(typeof(RationFoodItemFactory), 18),
-            new StockStoreInventoryItem(typeof(StripOfVenisonFoodItemFactory), 4),
-            new StockStoreInventoryItem(typeof(SatisfyHungerScrollItemFactory), 4),
+            new StoreStockManifest(typeof(HardBiscuitFoodItemFactory), 2),
+            new StoreStockManifest(typeof(PintOfFineAleFoodItemFactory), 10),
+            new StoreStockManifest(typeof(PintOfFineWineFoodItemFactory), 10),
+            new StoreStockManifest(typeof(RationFoodItemFactory), 18),
+            new StoreStockManifest(typeof(StripOfVenisonFoodItemFactory), 4),
+            new StoreStockManifest(typeof(SatisfyHungerScrollItemFactory), 4),
         };
     }
 

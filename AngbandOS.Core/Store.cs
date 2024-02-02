@@ -22,7 +22,7 @@ internal class Store
         StoreFactory = storeFactory;
 
         StoreInventoryList.Clear();
-        StockStoreInventoryItem[] master = StoreFactory.GetStoreTable();
+        StoreStockManifest[] master = StoreFactory.GetStoreTable();
         if (master == null)
         {
             return;

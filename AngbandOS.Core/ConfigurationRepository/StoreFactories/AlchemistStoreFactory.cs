@@ -41,33 +41,33 @@ internal partial class AlchemistStoreFactory : StoreFactory
     protected override string SymbolName => nameof(NumberFiveSymbol);
     public override string Description => "Alchemy Shop";
 
-    public override StockStoreInventoryItem[]? GetStoreTable()
+    public override StoreStockManifest[]? GetStoreTable()
     {
         return new[]
         {
-            new StockStoreInventoryItem(typeof(RestoreCharismaPotionItemFactory), 2),
-            new StockStoreInventoryItem(typeof(RestoreConstitutionPotionItemFactory), 2),
-            new StockStoreInventoryItem(typeof(RestoreDexterityPotionItemFactory), 2),
-            new StockStoreInventoryItem(typeof(RestoreIntelligencePotionItemFactory), 2),
-            new StockStoreInventoryItem(typeof(RestoreStrengthPotionItemFactory), 2),
-            new StockStoreInventoryItem(typeof(RestoreWisdomPotionItemFactory), 2),
-            new StockStoreInventoryItem(typeof(DetectInvisibleScrollItemFactory)),
-            new StockStoreInventoryItem(typeof(EnchantArmorScrollItemFactory), 3),
-            new StockStoreInventoryItem(typeof(EnchantWeaponToDamScrollItemFactory)),
-            new StockStoreInventoryItem(typeof(EnchantWeaponToHitScrollItemFactory)),
-            new StockStoreInventoryItem(typeof(IdentifyScrollItemFactory), 6),
-            new StockStoreInventoryItem(typeof(LightScrollItemFactory), 2),
-            new StockStoreInventoryItem(typeof(MagicMappingScrollItemFactory)),
-            new StockStoreInventoryItem(typeof(MonsterConfusionScrollItemFactory)),
-            new StockStoreInventoryItem(typeof(ObjectDetectionScrollItemFactory)),
-            new StockStoreInventoryItem(typeof(PhaseDoorScrollItemFactory), 2),
-            new StockStoreInventoryItem(typeof(RechargingScrollItemFactory), 2),
-            new StockStoreInventoryItem(typeof(SatisfyHungerScrollItemFactory), 4),
-            new StockStoreInventoryItem(typeof(SpecialIdentifyScrollItemFactory), 2),
-            new StockStoreInventoryItem(typeof(TeleportationScrollItemFactory), 3),
-            new StockStoreInventoryItem(typeof(TrapDetectionScrollItemFactory)),
-            new StockStoreInventoryItem(typeof(TreasureDetectionScrollItemFactory)),
-            new StockStoreInventoryItem(typeof(WordofRecallScrollItemFactory), 4),
+            new StoreStockManifest(typeof(RestoreCharismaPotionItemFactory), 2),
+            new StoreStockManifest(typeof(RestoreConstitutionPotionItemFactory), 2),
+            new StoreStockManifest(typeof(RestoreDexterityPotionItemFactory), 2),
+            new StoreStockManifest(typeof(RestoreIntelligencePotionItemFactory), 2),
+            new StoreStockManifest(typeof(RestoreStrengthPotionItemFactory), 2),
+            new StoreStockManifest(typeof(RestoreWisdomPotionItemFactory), 2),
+            new StoreStockManifest(typeof(DetectInvisibleScrollItemFactory)),
+            new StoreStockManifest(typeof(EnchantArmorScrollItemFactory), 3),
+            new StoreStockManifest(typeof(EnchantWeaponToDamScrollItemFactory)),
+            new StoreStockManifest(typeof(EnchantWeaponToHitScrollItemFactory)),
+            new StoreStockManifest(typeof(IdentifyScrollItemFactory), 6),
+            new StoreStockManifest(typeof(LightScrollItemFactory), 2),
+            new StoreStockManifest(typeof(MagicMappingScrollItemFactory)),
+            new StoreStockManifest(typeof(MonsterConfusionScrollItemFactory)),
+            new StoreStockManifest(typeof(ObjectDetectionScrollItemFactory)),
+            new StoreStockManifest(typeof(PhaseDoorScrollItemFactory), 2),
+            new StoreStockManifest(typeof(RechargingScrollItemFactory), 2),
+            new StoreStockManifest(typeof(SatisfyHungerScrollItemFactory), 4),
+            new StoreStockManifest(typeof(SpecialIdentifyScrollItemFactory), 2),
+            new StoreStockManifest(typeof(TeleportationScrollItemFactory), 3),
+            new StoreStockManifest(typeof(TrapDetectionScrollItemFactory)),
+            new StoreStockManifest(typeof(TreasureDetectionScrollItemFactory)),
+            new StoreStockManifest(typeof(WordofRecallScrollItemFactory), 4),
         };
     }
 

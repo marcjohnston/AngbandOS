@@ -40,31 +40,31 @@ internal partial class TempleStoreFactory : StoreFactory
         nameof(DardobardTheWeakStoreOwner)
     };
 
-    public override StockStoreInventoryItem[]? GetStoreTable()
+    public override StoreStockManifest[]? GetStoreTable()
     {
         return new[]
         {
-            new StockStoreInventoryItem(typeof(BallAndChainHaftedWeaponItemFactory), 2),
-            new StockStoreInventoryItem(typeof(FlailHaftedWeaponItemFactory)),
-            new StockStoreInventoryItem(typeof(LeadFilledMaceHaftedWeaponItemFactory)),
-            new StockStoreInventoryItem(typeof(LucerneHammerHaftedWeaponItemFactory)),
-            new StockStoreInventoryItem(typeof(MaceHaftedWeaponItemFactory), 2),
-            new StockStoreInventoryItem(typeof(MorningStarHaftedWeaponItemFactory)),
-            new StockStoreInventoryItem(typeof(QuarterstaffHaftedWeaponItemFactory)),
-            new StockStoreInventoryItem(typeof(WarHammerHaftedWeaponItemFactory), 2),
-            new StockStoreInventoryItem(typeof(WhipHaftedWeaponItemFactory), 2),
-            new StockStoreInventoryItem(typeof(CommonPrayerLifeBookItemFactory), 4),
-            new StockStoreInventoryItem(typeof(HighMassLifeBookItemFactory), 4),
-            new StockStoreInventoryItem(typeof(CureCriticalWoundsPotionItemFactory), 4),
-            new StockStoreInventoryItem(typeof(CureLightWoundsPotionItemFactory)),
-            new StockStoreInventoryItem(typeof(CureSeriousWoundsPotionItemFactory), 2),
-            new StockStoreInventoryItem(typeof(HeroismPotionItemFactory)),
-            new StockStoreInventoryItem(typeof(RestoreLifeLevelsPotionItemFactory), 6),
-            new StockStoreInventoryItem(typeof(BlessingScrollItemFactory)),
-            new StockStoreInventoryItem(typeof(HolyChantScrollItemFactory)),
-            new StockStoreInventoryItem(typeof(RemoveCurseScrollItemFactory), 3),
-            new StockStoreInventoryItem(typeof(SpecialRemoveCurseScrollItemFactory), 2),
-            new StockStoreInventoryItem(typeof(WordofRecallScrollItemFactory), 6),
+            new StoreStockManifest(typeof(BallAndChainHaftedWeaponItemFactory), 2),
+            new StoreStockManifest(typeof(FlailHaftedWeaponItemFactory)),
+            new StoreStockManifest(typeof(LeadFilledMaceHaftedWeaponItemFactory)),
+            new StoreStockManifest(typeof(LucerneHammerHaftedWeaponItemFactory)),
+            new StoreStockManifest(typeof(MaceHaftedWeaponItemFactory), 2),
+            new StoreStockManifest(typeof(MorningStarHaftedWeaponItemFactory)),
+            new StoreStockManifest(typeof(QuarterstaffHaftedWeaponItemFactory)),
+            new StoreStockManifest(typeof(WarHammerHaftedWeaponItemFactory), 2),
+            new StoreStockManifest(typeof(WhipHaftedWeaponItemFactory), 2),
+            new StoreStockManifest(typeof(CommonPrayerLifeBookItemFactory), 4),
+            new StoreStockManifest(typeof(HighMassLifeBookItemFactory), 4),
+            new StoreStockManifest(typeof(CureCriticalWoundsPotionItemFactory), 4),
+            new StoreStockManifest(typeof(CureLightWoundsPotionItemFactory)),
+            new StoreStockManifest(typeof(CureSeriousWoundsPotionItemFactory), 2),
+            new StoreStockManifest(typeof(HeroismPotionItemFactory)),
+            new StoreStockManifest(typeof(RestoreLifeLevelsPotionItemFactory), 6),
+            new StoreStockManifest(typeof(BlessingScrollItemFactory)),
+            new StoreStockManifest(typeof(HolyChantScrollItemFactory)),
+            new StoreStockManifest(typeof(RemoveCurseScrollItemFactory), 3),
+            new StoreStockManifest(typeof(SpecialRemoveCurseScrollItemFactory), 2),
+            new StoreStockManifest(typeof(WordofRecallScrollItemFactory), 6),
         };
     }
 

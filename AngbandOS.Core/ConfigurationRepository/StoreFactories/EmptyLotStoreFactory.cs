@@ -27,6 +27,6 @@ internal class EmptyLotStoreFactory : StoreFactory
     public override bool IsEmptyLot => true;
     public override bool MaintainsStockLevels => false;
     public override bool ShufflesOwnersAndPricing => false;
-    public override StockStoreInventoryItem[]? GetStoreTable() => null;
+    public override StoreStockManifest[]? GetStoreTable() => null;
     public override bool PerformsMaintenanceWhenResting => false;
 }

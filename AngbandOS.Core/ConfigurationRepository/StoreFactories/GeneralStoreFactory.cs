@@ -49,26 +49,26 @@ internal class GeneralStoreFactory : StoreFactory
     protected override string SymbolName => nameof(NumberOneSymbol);
     public override string Description => "General Store";
 
-    public override StockStoreInventoryItem[]? GetStoreTable()
+    public override StoreStockManifest[]? GetStoreTable()
     {
         return new[]
         {
-            new StockStoreInventoryItem(typeof(WoodenArrowAmmunitionItemFactory), 2),
-            new StockStoreInventoryItem(typeof(SteelBoltAmmunitionItemFactory), 2),
-            new StockStoreInventoryItem(typeof(ClothCloakCloakArmorItemFactory), 3),
-            new StockStoreInventoryItem(typeof(PickDiggingWeaponItemFactory)),
-            new StockStoreInventoryItem(typeof(ShovelDiggingWeaponItemFactory), 2),
-            new StockStoreInventoryItem(typeof(OilFlaskItemFactory), 10),
-            new StockStoreInventoryItem(typeof(HardBiscuitFoodItemFactory)),
-            new StockStoreInventoryItem(typeof(PintOfFineAleFoodItemFactory)),
-            new StockStoreInventoryItem(typeof(PintOfFineWineFoodItemFactory)),
-            new StockStoreInventoryItem(typeof(RationFoodItemFactory), 9),
-            new StockStoreInventoryItem(typeof(StripOfVenisonFoodItemFactory), 2),
-            new StockStoreInventoryItem(typeof(BrassLanternLightSourceItemFactory), 4),
-            new StockStoreInventoryItem(typeof(OrbLightSourceItemFactory)),
-            new StockStoreInventoryItem(typeof(WoodenTorchLightSourceItemFactory), 5),
-            new StockStoreInventoryItem(typeof(IronShotAmmunitionItemFactory), 2),
-            new StockStoreInventoryItem(typeof(IronSpikeItemFactory), 2),
+            new StoreStockManifest(typeof(WoodenArrowAmmunitionItemFactory), 2),
+            new StoreStockManifest(typeof(SteelBoltAmmunitionItemFactory), 2),
+            new StoreStockManifest(typeof(ClothCloakCloakArmorItemFactory), 3),
+            new StoreStockManifest(typeof(PickDiggingWeaponItemFactory)),
+            new StoreStockManifest(typeof(ShovelDiggingWeaponItemFactory), 2),
+            new StoreStockManifest(typeof(OilFlaskItemFactory), 10),
+            new StoreStockManifest(typeof(HardBiscuitFoodItemFactory)),
+            new StoreStockManifest(typeof(PintOfFineAleFoodItemFactory)),
+            new StoreStockManifest(typeof(PintOfFineWineFoodItemFactory)),
+            new StoreStockManifest(typeof(RationFoodItemFactory), 9),
+            new StoreStockManifest(typeof(StripOfVenisonFoodItemFactory), 2),
+            new StoreStockManifest(typeof(BrassLanternLightSourceItemFactory), 4),
+            new StoreStockManifest(typeof(OrbLightSourceItemFactory)),
+            new StoreStockManifest(typeof(WoodenTorchLightSourceItemFactory), 5),
+            new StoreStockManifest(typeof(IronShotAmmunitionItemFactory), 2),
+            new StoreStockManifest(typeof(IronSpikeItemFactory), 2),
         };
     }
 
