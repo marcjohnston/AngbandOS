@@ -19,7 +19,7 @@ internal abstract class BaseCharacterClass : IGetKey<string>
     public virtual string Key => GetType().Name;
 
     public string GetKey => Key;
-    public virtual void Bind()
+    public void Bind()
     {
         List<ItemFactory> outfitItemFactories = new();
         foreach (string outfitItemFactoryName in OutfitItemFactoryNames)

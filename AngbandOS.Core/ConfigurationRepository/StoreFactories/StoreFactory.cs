@@ -5,6 +5,8 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using System.Text.Json;
+
 namespace AngbandOS.Core.StoreFactories;
 
 [Serializable]
@@ -18,7 +20,7 @@ internal abstract class StoreFactory : IItemFilter, IGetKey<string>
         SaveGame = saveGame;
     }
 
-    public virtual void Bind()
+    public void Bind()
     {
         // Bind the advertised commands.
         AdvertisedStoreCommand1 = AdvertisedStoreCommand1Name == null ? null : SaveGame.SingletonRepository.StoreCommands.Get(AdvertisedStoreCommand1Name);

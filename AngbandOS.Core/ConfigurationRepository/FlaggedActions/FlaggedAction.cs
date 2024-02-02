@@ -20,7 +20,7 @@ internal abstract class FlaggedAction : IGetKey<string>
 
     public string GetKey => Key;
 
-    public virtual void Bind() { }
+    public virtual void Bind() { } // TODO: This is a special case virtual for bind because group flagged actions bind.  A flagged action doesn't support grouping.  Flagged actions will never be configurable either.  Not sure if they should be a repository.
 
     private bool _flag;
     public virtual void Set()

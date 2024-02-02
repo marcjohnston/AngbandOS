@@ -30,7 +30,7 @@ internal abstract class StoreCommand : IGetKey<string>, IToJson
     public abstract string Description { get; }
 
     public string GetKey => Key;
-    public virtual void Bind()
+    public void Bind()
     {
         // Get the script from the singleton repository.
         Script? script = SaveGame.SingletonRepository.Scripts.Get(ExecuteScriptName);

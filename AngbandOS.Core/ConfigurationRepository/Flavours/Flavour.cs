@@ -23,7 +23,7 @@ internal abstract class Flavour : IGetKey<string>
 
     public string GetKey => Key;
 
-    public virtual void Bind() { }
+    public void Bind() { }
 
     /// <summary>
     /// Returns the symbol to use for rendering.

@@ -19,7 +19,7 @@ internal abstract class ProjectileGraphic : IGetKey<string>
     public virtual string Key => GetType().Name;
 
     public string GetKey => Key;
-    public virtual void Bind() { }
+    public void Bind() { }
 
     /// <summary>
     /// The column from which to take the graphical tile.
