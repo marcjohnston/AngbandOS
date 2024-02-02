@@ -19,7 +19,7 @@ internal class HlanithTown : Town
         nameof(EmptyLotStoreFactory),
         nameof(AlchemistStoreFactory),
         nameof(MagicStoreFactory),
-        nameof(BlackStoreFactory),
+        nameof(BlackMarketStoreFactory),
         nameof(HomeStoreFactory),
         nameof(LibraryStoreFactory),
         nameof(InnStoreFactory),

@@ -19,7 +19,7 @@ internal class InganokTown : Town
         nameof(AlchemistStoreFactory),
         nameof(EmptyLotStoreFactory),
         nameof(MagicStoreFactory),
-        nameof(BlackStoreFactory),
+        nameof(BlackMarketStoreFactory),
         nameof(EmptyLotStoreFactory),
         nameof(LibraryStoreFactory),
         nameof(InnStoreFactory),

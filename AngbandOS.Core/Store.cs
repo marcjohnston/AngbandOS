@@ -22,28 +22,18 @@ internal class Store
         StoreFactory = storeFactory;
 
         StoreInventoryList.Clear();
-        List<int> table = new List<int>();
+        List<ItemFactory> table = new();
         if (StoreFactory.StoreStockManifests != null)
         {
             foreach (StoreStockManifest storeStockManifest in StoreFactory.StoreStockManifests)
             {
-                int kIdx = -1;
-                for (int i = 0; i < SaveGame.SingletonRepository.ItemFactories.Count; i++)
-                {
-                    ItemFactory itemType = SaveGame.SingletonRepository.ItemFactories[i];
-                    if (itemType.GetType().IsAssignableFrom(storeStockManifest.ItemType))
-                    {
-                        kIdx = i;
-                        break;
-                    }
-                }
                 for (int i = 0; i < storeStockManifest.Weight; i++)
                 {
-                    table.Add(kIdx);
+                    table.Add(storeStockManifest.ItemType);
                 }
             }
         }
-        _table = table.ToArray();
+        InventoryFactories = table.ToArray();
     }
 
     /// <summary>
@@ -59,10 +49,9 @@ internal class Store
     public readonly List<Item> StoreInventoryList = new List<Item>();
 
     /// <summary>
-    /// Returns the index of each ItemType in the ItemTypeArray that the store carries.  Multiple instances of the same item type allows the item to have a higher
-    /// chance that it will be selected.  Each item in the table has a 1-in-count chance of being selected.
+    /// Returns the ItemFactories that are used to generate new items for the store.  If the store doesn't create items, 
     /// </summary>
-    private readonly int[]? _table = null;
+    private readonly ItemFactory[] InventoryFactories;
     private bool _leaveStore;
     public StoreOwner Owner { get; private set; }
 
@@ -230,39 +219,37 @@ internal class Store
         }
         for (int tries = 0; tries < 4; tries++)
         {
-            // Allow the factory to create an item.
-            Item? qPtr = StoreFactory.CreateItem(this);
+            // Allow the factory the option to create an item.  This allows the 
+            Item? newItem = StoreFactory.CreateItem(this);
 
             // If the factory didn't create the item, then allow the store to create one.
-            if (qPtr == null) {
+            if (newItem == null) {
+                // Retrieve the item class.
                 // Otherwise, pick an item to create from the inventory.
-                int i = _table[SaveGame.Rng.RandomLessThan(_table.Length)];
+                ItemFactory itemFactory = InventoryFactories[SaveGame.Rng.RandomLessThan(InventoryFactories.Length)];
 
                 // Generate a level for the item.
                 int level = SaveGame.Rng.RandomBetween(1, Constants.StoreObjLevel);
 
-                // Retrieve the item class.
-                ItemFactory itemType = SaveGame.SingletonRepository.ItemFactories[i];
-
                 // Create the item.
-                qPtr = itemType.CreateItem();
+                newItem = itemFactory.CreateItem();
 
                 // Apply magic to the item.
-                qPtr.ApplyMagic(level, false, false, false, this);
+                newItem.ApplyMagic(level, false, false, false, this);
             }
 
-            qPtr.BecomeKnown();
-            qPtr.IdentStoreb = true;
-            if (qPtr.Category == ItemTypeEnum.Chest)
+            newItem.BecomeKnown();
+            newItem.IdentStoreb = true;
+            if (newItem.Category == ItemTypeEnum.Chest)
             {
                 continue;
             }
-            if (qPtr.Value() < StoreFactory.MinimumItemValue)
+            if (newItem.Value() < StoreFactory.MinimumItemValue)
             {
                 continue;
             }
-            MassProduce(qPtr);
-            StoreCarry(qPtr);
+            MassProduce(newItem);
+            StoreCarry(newItem);
             break;
         }
     }

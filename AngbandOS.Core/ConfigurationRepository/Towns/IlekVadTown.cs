@@ -19,7 +19,7 @@ internal class IlekVadTown : Town
         nameof(TempleStoreFactory),
         nameof(AlchemistStoreFactory),
         nameof(MagicStoreFactory),
-        nameof(BlackStoreFactory),
+        nameof(BlackMarketStoreFactory),
         nameof(HomeStoreFactory),
         nameof(LibraryStoreFactory),
         nameof(EmptyLotStoreFactory),

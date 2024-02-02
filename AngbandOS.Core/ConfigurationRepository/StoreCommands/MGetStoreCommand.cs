@@ -18,7 +18,7 @@ internal class MGetStoreCommand : StoreCommand
     protected override string[]? ValidStoreNames => new string[] {
         nameof(AlchemistStoreFactory),
         nameof(ArmoryStoreFactory),
-        nameof(BlackStoreFactory),
+        nameof(BlackMarketStoreFactory),
         nameof(GeneralStoreFactory),
         nameof(HomeStoreFactory),
         nameof(InnStoreFactory),

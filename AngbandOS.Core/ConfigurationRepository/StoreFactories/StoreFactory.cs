@@ -123,7 +123,9 @@ internal abstract class StoreFactory : IItemFilter, IGetKey<string>
     public virtual int StoreTurnover => 9;
 
     /// <summary>
-    /// Returns an array of item types that the store carries; or null, if the store does not carry items for sale.  Returns null by default.
+    /// Returns an array of item types that the store carries; or null, if the store does not carry items for sale or if the factory overrides the
+    /// CreateItem method.  Returns null by default.  When the Factory.CreateItem method returns null, this property should return a manifest for the
+    /// store to create items from.  If the store doesn't sell items, the Factory.CreateItem should return null and this property should return null.
     /// </summary>
     /// <returns></returns>
     public virtual StoreStockManifest[]? StoreStockManifests => null;
@@ -333,6 +335,12 @@ internal abstract class StoreFactory : IItemFilter, IGetKey<string>
 
     public virtual bool StoreCanMergeItem(Item oPtr, Item jPtr) => StoreObjectSimilar(jPtr, oPtr);
 
+    /// <summary>
+    /// Allows the store factory the option to create an item for the store; or null, if the store should choose from the StoreStockManifests.  The
+    /// black market store will override this method.
+    /// </summary>
+    /// <param name="store"></param>
+    /// <returns></returns>
     public virtual Item? CreateItem(Store store) => null;
     public virtual int MinimumItemValue => 0;
 
