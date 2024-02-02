@@ -44,8 +44,6 @@ internal class BlackStoreFactory : StoreFactory
         nameof(FalarewynStoreOwner)
     };
 
-    public override StoreStockManifest[]? GetStoreTable() => null;
-
     /// <summary>
     /// Returns the name of the item matching criteria for any item of value.
     /// </summary>

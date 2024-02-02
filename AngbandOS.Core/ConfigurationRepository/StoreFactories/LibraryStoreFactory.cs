@@ -44,30 +44,27 @@ internal class LibraryStoreFactory : StoreFactory
     public override ColorEnum Color => ColorEnum.Orange;
     protected override string SymbolName => nameof(NumberNineSymbol);
 
-    public override StoreStockManifest[]? GetStoreTable()
+    public override StoreStockManifest[]? StoreStockManifests => new[]
     {
-        return new[]
-        {
-            new StoreStockManifest(typeof(MasteryChaosBookItemFactory), 2),
-            new StoreStockManifest(typeof(SignOfChaosChaosBookItemFactory), 2),
-            new StoreStockManifest(typeof(BasicChiFlowCorporealBookItemFactory), 2),
-            new StoreStockManifest(typeof(YogicMasteryCorporealBookItemFactory), 2),
-            new StoreStockManifest(typeof(BlackMassDeathBookItemFactory), 4),
-            new StoreStockManifest(typeof(BlackPrayersDeathBookItemFactory), 4),
-            new StoreStockManifest(typeof(CantripsforBeginnersFolkBookItemFactory), 2),
-            new StoreStockManifest(typeof(MagicksOfMasteryFolkBookItemFactory), 2),
-            new StoreStockManifest(typeof(MajorMagicksFolkBookItemFactory), 2),
-            new StoreStockManifest(typeof(MinorMagicksFolkBookItemFactory), 2),
-            new StoreStockManifest(typeof(CommonPrayerLifeBookItemFactory), 4),
-            new StoreStockManifest(typeof(HighMassLifeBookItemFactory), 4),
-            new StoreStockManifest(typeof(CallOfTheWildNatureBookItemFactory), 4),
-            new StoreStockManifest(typeof(NatureMasteryNatureBookItemFactory), 4),
-            new StoreStockManifest(typeof(BeginnersHandbookSorceryBookItemFactory), 2),
-            new StoreStockManifest(typeof(MasterSorcerersHandbookSorceryBookItemFactory), 2),
-            new StoreStockManifest(typeof(CardMasteryTarotBookItemFactory), 2),
-            new StoreStockManifest(typeof(ConjuringsTricksTarotBookItemFactory), 2),
-        };
-    }
+        new StoreStockManifest(typeof(MasteryChaosBookItemFactory), 2),
+        new StoreStockManifest(typeof(SignOfChaosChaosBookItemFactory), 2),
+        new StoreStockManifest(typeof(BasicChiFlowCorporealBookItemFactory), 2),
+        new StoreStockManifest(typeof(YogicMasteryCorporealBookItemFactory), 2),
+        new StoreStockManifest(typeof(BlackMassDeathBookItemFactory), 4),
+        new StoreStockManifest(typeof(BlackPrayersDeathBookItemFactory), 4),
+        new StoreStockManifest(typeof(CantripsforBeginnersFolkBookItemFactory), 2),
+        new StoreStockManifest(typeof(MagicksOfMasteryFolkBookItemFactory), 2),
+        new StoreStockManifest(typeof(MajorMagicksFolkBookItemFactory), 2),
+        new StoreStockManifest(typeof(MinorMagicksFolkBookItemFactory), 2),
+        new StoreStockManifest(typeof(CommonPrayerLifeBookItemFactory), 4),
+        new StoreStockManifest(typeof(HighMassLifeBookItemFactory), 4),
+        new StoreStockManifest(typeof(CallOfTheWildNatureBookItemFactory), 4),
+        new StoreStockManifest(typeof(NatureMasteryNatureBookItemFactory), 4),
+        new StoreStockManifest(typeof(BeginnersHandbookSorceryBookItemFactory), 2),
+        new StoreStockManifest(typeof(MasterSorcerersHandbookSorceryBookItemFactory), 2),
+        new StoreStockManifest(typeof(CardMasteryTarotBookItemFactory), 2),
+        new StoreStockManifest(typeof(ConjuringsTricksTarotBookItemFactory), 2),
+    };
 
     /// <summary>
     /// Returns the name of the item matching criteria for any book of value.

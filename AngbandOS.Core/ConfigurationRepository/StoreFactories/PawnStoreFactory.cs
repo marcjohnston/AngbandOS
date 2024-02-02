@@ -48,11 +48,6 @@ internal class PawnStoreFactory : StoreFactory
         nameof(AnythingOfValueItemFilter)
     };
 
-    public override StoreStockManifest[]? GetStoreTable()
-    {
-        return null;
-    }
-
     public override bool MaintainsStockLevels => false;
     public override bool ShufflesOwnersAndPricing => false;
     public override string BoughtVerb => "pawn";

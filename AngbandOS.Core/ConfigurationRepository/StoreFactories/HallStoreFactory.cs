@@ -29,7 +29,6 @@ internal class HallStoreFactory : StoreFactory
 
 
     public override bool MaintainsStockLevels => false;
-    public override StoreStockManifest[]? GetStoreTable() => null;
 
     public override bool ShufflesOwnersAndPricing => false;
     public override string? OwnerName => "";

@@ -22,27 +22,25 @@ internal class Store
         StoreFactory = storeFactory;
 
         StoreInventoryList.Clear();
-        StoreStockManifest[] master = StoreFactory.GetStoreTable();
-        if (master == null)
-        {
-            return;
-        }
         List<int> table = new List<int>();
-        for (int k = 0; k < master.Length; k++)
+        if (StoreFactory.StoreStockManifests != null)
         {
-            int kIdx = -1;
-            for (int i = 0; i < SaveGame.SingletonRepository.ItemFactories.Count; i++)
+            foreach (StoreStockManifest storeStockManifest in StoreFactory.StoreStockManifests)
             {
-                ItemFactory itemType = SaveGame.SingletonRepository.ItemFactories[i];
-                if (itemType.GetType().IsAssignableFrom(master[k].ItemType))
+                int kIdx = -1;
+                for (int i = 0; i < SaveGame.SingletonRepository.ItemFactories.Count; i++)
                 {
-                    kIdx = i;
-                    break;
+                    ItemFactory itemType = SaveGame.SingletonRepository.ItemFactories[i];
+                    if (itemType.GetType().IsAssignableFrom(storeStockManifest.ItemType))
+                    {
+                        kIdx = i;
+                        break;
+                    }
                 }
-            }
-            for (int i = 0; i < master[k].Weight; i++)
-            {
-                table.Add(kIdx);
+                for (int i = 0; i < storeStockManifest.Weight; i++)
+                {
+                    table.Add(kIdx);
+                }
             }
         }
         _table = table.ToArray();

@@ -41,35 +41,32 @@ internal partial class AlchemistStoreFactory : StoreFactory
     protected override string SymbolName => nameof(NumberFiveSymbol);
     public override string Description => "Alchemy Shop";
 
-    public override StoreStockManifest[]? GetStoreTable()
+    public override StoreStockManifest[]? StoreStockManifests => new[]
     {
-        return new[]
-        {
-            new StoreStockManifest(typeof(RestoreCharismaPotionItemFactory), 2),
-            new StoreStockManifest(typeof(RestoreConstitutionPotionItemFactory), 2),
-            new StoreStockManifest(typeof(RestoreDexterityPotionItemFactory), 2),
-            new StoreStockManifest(typeof(RestoreIntelligencePotionItemFactory), 2),
-            new StoreStockManifest(typeof(RestoreStrengthPotionItemFactory), 2),
-            new StoreStockManifest(typeof(RestoreWisdomPotionItemFactory), 2),
-            new StoreStockManifest(typeof(DetectInvisibleScrollItemFactory)),
-            new StoreStockManifest(typeof(EnchantArmorScrollItemFactory), 3),
-            new StoreStockManifest(typeof(EnchantWeaponToDamScrollItemFactory)),
-            new StoreStockManifest(typeof(EnchantWeaponToHitScrollItemFactory)),
-            new StoreStockManifest(typeof(IdentifyScrollItemFactory), 6),
-            new StoreStockManifest(typeof(LightScrollItemFactory), 2),
-            new StoreStockManifest(typeof(MagicMappingScrollItemFactory)),
-            new StoreStockManifest(typeof(MonsterConfusionScrollItemFactory)),
-            new StoreStockManifest(typeof(ObjectDetectionScrollItemFactory)),
-            new StoreStockManifest(typeof(PhaseDoorScrollItemFactory), 2),
-            new StoreStockManifest(typeof(RechargingScrollItemFactory), 2),
-            new StoreStockManifest(typeof(SatisfyHungerScrollItemFactory), 4),
-            new StoreStockManifest(typeof(SpecialIdentifyScrollItemFactory), 2),
-            new StoreStockManifest(typeof(TeleportationScrollItemFactory), 3),
-            new StoreStockManifest(typeof(TrapDetectionScrollItemFactory)),
-            new StoreStockManifest(typeof(TreasureDetectionScrollItemFactory)),
-            new StoreStockManifest(typeof(WordofRecallScrollItemFactory), 4),
-        };
-    }
+        new StoreStockManifest(typeof(RestoreCharismaPotionItemFactory), 2),
+        new StoreStockManifest(typeof(RestoreConstitutionPotionItemFactory), 2),
+        new StoreStockManifest(typeof(RestoreDexterityPotionItemFactory), 2),
+        new StoreStockManifest(typeof(RestoreIntelligencePotionItemFactory), 2),
+        new StoreStockManifest(typeof(RestoreStrengthPotionItemFactory), 2),
+        new StoreStockManifest(typeof(RestoreWisdomPotionItemFactory), 2),
+        new StoreStockManifest(typeof(DetectInvisibleScrollItemFactory)),
+        new StoreStockManifest(typeof(EnchantArmorScrollItemFactory), 3),
+        new StoreStockManifest(typeof(EnchantWeaponToDamScrollItemFactory)),
+        new StoreStockManifest(typeof(EnchantWeaponToHitScrollItemFactory)),
+        new StoreStockManifest(typeof(IdentifyScrollItemFactory), 6),
+        new StoreStockManifest(typeof(LightScrollItemFactory), 2),
+        new StoreStockManifest(typeof(MagicMappingScrollItemFactory)),
+        new StoreStockManifest(typeof(MonsterConfusionScrollItemFactory)),
+        new StoreStockManifest(typeof(ObjectDetectionScrollItemFactory)),
+        new StoreStockManifest(typeof(PhaseDoorScrollItemFactory), 2),
+        new StoreStockManifest(typeof(RechargingScrollItemFactory), 2),
+        new StoreStockManifest(typeof(SatisfyHungerScrollItemFactory), 4),
+        new StoreStockManifest(typeof(SpecialIdentifyScrollItemFactory), 2),
+        new StoreStockManifest(typeof(TeleportationScrollItemFactory), 3),
+        new StoreStockManifest(typeof(TrapDetectionScrollItemFactory)),
+        new StoreStockManifest(typeof(TreasureDetectionScrollItemFactory)),
+        new StoreStockManifest(typeof(WordofRecallScrollItemFactory), 4),
+    };
 
     /// <summary>
     /// Returns the name of the item matching criteria for scrolls and potions of value.

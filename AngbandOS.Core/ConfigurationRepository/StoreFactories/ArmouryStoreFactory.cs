@@ -44,33 +44,30 @@ internal class ArmoryStoreFactory : StoreFactory
     public override ColorEnum Color => ColorEnum.Grey;
     protected override string SymbolName => nameof(NumberTwoSymbol);
 
-    public override StoreStockManifest[]? GetStoreTable()
+    public override StoreStockManifest[]? StoreStockManifests => new[]
     {
-        return new[]
-        {
-            new StoreStockManifest(typeof(HardLeatherBootsArmorItemFactory), 4),
-            new StoreStockManifest(typeof(SoftLeatherBootsArmorItemFactory), 2),
-            new StoreStockManifest(typeof(GauntletGlovesArmorItemFactory), 2),
-            new StoreStockManifest(typeof(LeatherGlovesArmorItemFactory), 3),
-            new StoreStockManifest(typeof(AugmentedChainMailHardArmorItemFactory)),
-            new StoreStockManifest(typeof(BarChainMailHardArmorItemFactory)),
-            new StoreStockManifest(typeof(ChainMailHardArmorItemFactory), 4),
-            new StoreStockManifest(typeof(DoubleChainMailHardArmorItemFactory)),
-            new StoreStockManifest(typeof(MetalBrigandineHardArmorItemFactory)),
-            new StoreStockManifest(typeof(MetalScaleMailHardArmorItemFactory), 2),
-            new StoreStockManifest(typeof(HardLeatherCapHelmArmorItemFactory), 4),
-            new StoreStockManifest(typeof(IronHelmArmorItemFactory)),
-            new StoreStockManifest(typeof(MetalCapHelmArmorFactory)),
-            new StoreStockManifest(typeof(LargeLeatherShieldArmorItemFactory)),
-            new StoreStockManifest(typeof(SmallLeatherShieldArmorItemFactory), 4),
-            new StoreStockManifest(typeof(SmallMetalShieldArmorItemFactory)),
-            new StoreStockManifest(typeof(HardLeatherSoftArmorItemFactory), 3),
-            new StoreStockManifest(typeof(HardStuddedLeatherSoftArmorItemFactory), 2),
-            new StoreStockManifest(typeof(LeatherScaleMailSoftArmorItemFactory), 3),
-            new StoreStockManifest(typeof(RobeSoftArmorItemFactory), 3),
-            new StoreStockManifest(typeof(SoftLeatherSoftArmorItemFactory), 4),
-        };
-    }
+        new StoreStockManifest(typeof(HardLeatherBootsArmorItemFactory), 4),
+        new StoreStockManifest(typeof(SoftLeatherBootsArmorItemFactory), 2),
+        new StoreStockManifest(typeof(GauntletGlovesArmorItemFactory), 2),
+        new StoreStockManifest(typeof(LeatherGlovesArmorItemFactory), 3),
+        new StoreStockManifest(typeof(AugmentedChainMailHardArmorItemFactory)),
+        new StoreStockManifest(typeof(BarChainMailHardArmorItemFactory)),
+        new StoreStockManifest(typeof(ChainMailHardArmorItemFactory), 4),
+        new StoreStockManifest(typeof(DoubleChainMailHardArmorItemFactory)),
+        new StoreStockManifest(typeof(MetalBrigandineHardArmorItemFactory)),
+        new StoreStockManifest(typeof(MetalScaleMailHardArmorItemFactory), 2),
+        new StoreStockManifest(typeof(HardLeatherCapHelmArmorItemFactory), 4),
+        new StoreStockManifest(typeof(IronHelmArmorItemFactory)),
+        new StoreStockManifest(typeof(MetalCapHelmArmorFactory)),
+        new StoreStockManifest(typeof(LargeLeatherShieldArmorItemFactory)),
+        new StoreStockManifest(typeof(SmallLeatherShieldArmorItemFactory), 4),
+        new StoreStockManifest(typeof(SmallMetalShieldArmorItemFactory)),
+        new StoreStockManifest(typeof(HardLeatherSoftArmorItemFactory), 3),
+        new StoreStockManifest(typeof(HardStuddedLeatherSoftArmorItemFactory), 2),
+        new StoreStockManifest(typeof(LeatherScaleMailSoftArmorItemFactory), 3),
+        new StoreStockManifest(typeof(RobeSoftArmorItemFactory), 3),
+        new StoreStockManifest(typeof(SoftLeatherSoftArmorItemFactory), 4),
+    };
 
     /// <summary>
     /// Returns the name of the item matching criteria for shots, bolts, arrows, bows, digging tools, hafted weapons, pole arms and swords of value.

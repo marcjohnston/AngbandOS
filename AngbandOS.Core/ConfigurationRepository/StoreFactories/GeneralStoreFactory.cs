@@ -49,28 +49,25 @@ internal class GeneralStoreFactory : StoreFactory
     protected override string SymbolName => nameof(NumberOneSymbol);
     public override string Description => "General Store";
 
-    public override StoreStockManifest[]? GetStoreTable()
+    public override StoreStockManifest[]? StoreStockManifests => new[]
     {
-        return new[]
-        {
-            new StoreStockManifest(typeof(WoodenArrowAmmunitionItemFactory), 2),
-            new StoreStockManifest(typeof(SteelBoltAmmunitionItemFactory), 2),
-            new StoreStockManifest(typeof(ClothCloakCloakArmorItemFactory), 3),
-            new StoreStockManifest(typeof(PickDiggingWeaponItemFactory)),
-            new StoreStockManifest(typeof(ShovelDiggingWeaponItemFactory), 2),
-            new StoreStockManifest(typeof(OilFlaskItemFactory), 10),
-            new StoreStockManifest(typeof(HardBiscuitFoodItemFactory)),
-            new StoreStockManifest(typeof(PintOfFineAleFoodItemFactory)),
-            new StoreStockManifest(typeof(PintOfFineWineFoodItemFactory)),
-            new StoreStockManifest(typeof(RationFoodItemFactory), 9),
-            new StoreStockManifest(typeof(StripOfVenisonFoodItemFactory), 2),
-            new StoreStockManifest(typeof(BrassLanternLightSourceItemFactory), 4),
-            new StoreStockManifest(typeof(OrbLightSourceItemFactory)),
-            new StoreStockManifest(typeof(WoodenTorchLightSourceItemFactory), 5),
-            new StoreStockManifest(typeof(IronShotAmmunitionItemFactory), 2),
-            new StoreStockManifest(typeof(IronSpikeItemFactory), 2),
-        };
-    }
+        new StoreStockManifest(typeof(WoodenArrowAmmunitionItemFactory), 2),
+        new StoreStockManifest(typeof(SteelBoltAmmunitionItemFactory), 2),
+        new StoreStockManifest(typeof(ClothCloakCloakArmorItemFactory), 3),
+        new StoreStockManifest(typeof(PickDiggingWeaponItemFactory)),
+        new StoreStockManifest(typeof(ShovelDiggingWeaponItemFactory), 2),
+        new StoreStockManifest(typeof(OilFlaskItemFactory), 10),
+        new StoreStockManifest(typeof(HardBiscuitFoodItemFactory)),
+        new StoreStockManifest(typeof(PintOfFineAleFoodItemFactory)),
+        new StoreStockManifest(typeof(PintOfFineWineFoodItemFactory)),
+        new StoreStockManifest(typeof(RationFoodItemFactory), 9),
+        new StoreStockManifest(typeof(StripOfVenisonFoodItemFactory), 2),
+        new StoreStockManifest(typeof(BrassLanternLightSourceItemFactory), 4),
+        new StoreStockManifest(typeof(OrbLightSourceItemFactory)),
+        new StoreStockManifest(typeof(WoodenTorchLightSourceItemFactory), 5),
+        new StoreStockManifest(typeof(IronShotAmmunitionItemFactory), 2),
+        new StoreStockManifest(typeof(IronSpikeItemFactory), 2),
+    };
 
     /// <summary>
     /// Returns the name of the item matching criteria for shots, bolts, arrows, bows, digging tools, hafted weapons, pole arms and swords of value.

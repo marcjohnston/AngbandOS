@@ -123,10 +123,10 @@ internal abstract class StoreFactory : IItemFilter, IGetKey<string>
     public virtual int StoreTurnover => 9;
 
     /// <summary>
-    /// Returns an array of item types that the store carries.  Returns null, if the store does not carry items for sale.
+    /// Returns an array of item types that the store carries; or null, if the store does not carry items for sale.  Returns null by default.
     /// </summary>
     /// <returns></returns>
-    public abstract StoreStockManifest[]? GetStoreTable();
+    public virtual StoreStockManifest[]? StoreStockManifests => null;
 
     public virtual string FleeMessage => "Your pack is so full that you flee the Stores...";
 
