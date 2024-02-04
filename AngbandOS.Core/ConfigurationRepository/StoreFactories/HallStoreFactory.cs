@@ -29,11 +29,10 @@ internal class HallStoreFactory : StoreFactory
 
 
     public override bool MaintainsStockLevels => false;
-
+    public override bool StoreMaintainsInventory => false;
     public override bool ShufflesOwnersAndPricing => false;
     public override string? OwnerName => "";
     public override string? Title => "Hall Of Records";
-    public override StoreInventoryDisplayTypeEnum ShowInventoryDisplayType => StoreInventoryDisplayTypeEnum.DoNotShowInventory;
     protected override string? AdvertisedStoreCommand1Name => nameof(ViewRacialHeroesStoreCommand);
     protected override string? AdvertisedStoreCommand2Name => nameof(ViewClassHeroesStoreCommand);
     protected override string? AdvertisedStoreCommand3Name => null; // The examine command does not work here because there is no inventory.

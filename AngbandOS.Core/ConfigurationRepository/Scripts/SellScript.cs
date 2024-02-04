@@ -18,6 +18,11 @@ internal class SellScript : Script, IStoreScript
     /// <returns></returns>
     public void ExecuteStoreScript(StoreCommandEvent storeCommandEvent)
     {
+        if (!storeCommandEvent.Store.StoreFactory.StoreMaintainsInventory)
+        {
+            SaveGame.MsgPrint("This store has no interest in your earthly possessions.");
+        }
+
         int itemPos;
         if (!SaveGame.SelectItem(out Item? oPtr, storeCommandEvent.Store.StoreFactory.SellPrompt, true, true, false, storeCommandEvent.Store.StoreFactory)) // We use the store itself as the ItemFilter because the Store implements IItemFilter.
         {
@@ -58,35 +63,36 @@ internal class SellScript : Script, IStoreScript
         {
             SaveGame.MsgPrint($"Selling {oName} ({oPtr.Label}).");
             SaveGame.MsgPrint(null);
-            bool choice = SellHaggle(storeCommandEvent.Store, qPtr, out int price);
-            if (!choice)
+            bool accepted = SellHaggle(storeCommandEvent.Store, qPtr, out int price);
+            if (!accepted)
             {
-                SaveGame.SayComment_1();
-                SaveGame.PlaySound(SoundEffectEnum.StoreTransaction);
-                SaveGame.Gold += price;
-                SaveGame.StorePrtGold();
-                int guess = qPtr.Value() * qPtr.Count;
-                if (storeCommandEvent.Store.StoreFactory.StoreIdentifiesItems)
-                {
-                    oPtr.BecomeFlavourAware();
-                    oPtr.BecomeKnown();
-                }
-                SaveGame.SingletonRepository.FlaggedActions.Get(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
-                qPtr = oPtr.Clone();
-                qPtr.Count = amt;
-                int value;
-                if (!storeCommandEvent.Store.StoreFactory.StoreAnalyzesPurchases)
-                {
-                    value = guess;
-                }
-                else
-                {
-                    value = qPtr.Value() * qPtr.Count;
-                    oName = qPtr.Description(true, 3);
-                }
-                SaveGame.MsgPrint($"You {storeCommandEvent.Store.StoreFactory.BoughtVerb} {oName} for {price} gold.");
-                PurchaseAnalyze(price, value, guess);
+                return;
             }
+            SaveGame.SayComment_1();
+            SaveGame.PlaySound(SoundEffectEnum.StoreTransaction);
+            SaveGame.Gold += price;
+            SaveGame.StorePrtGold();
+            int guess = qPtr.Value() * qPtr.Count;
+            if (storeCommandEvent.Store.StoreFactory.StoreIdentifiesItems)
+            {
+                oPtr.BecomeFlavourAware();
+                oPtr.BecomeKnown();
+            }
+            SaveGame.SingletonRepository.FlaggedActions.Get(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
+            qPtr = oPtr.Clone();
+            qPtr.Count = amt;
+            int value;
+            if (!storeCommandEvent.Store.StoreFactory.StoreAnalyzesPurchases)
+            {
+                value = guess;
+            }
+            else
+            {
+                value = qPtr.Value() * qPtr.Count;
+                oName = qPtr.Description(true, 3);
+            }
+            SaveGame.MsgPrint($"You {storeCommandEvent.Store.StoreFactory.BoughtVerb} {oName} for {price} gold.");
+            PurchaseAnalyze(price, value, guess);
         }
         else
         {
@@ -157,6 +163,6 @@ internal class SellScript : Script, IStoreScript
         price = finalAsk;
         string outVal = $"{pmt} :  {finalAsk}";
         SaveGame.Screen.Print(outVal, 1, 0);
-        return !SaveGame.GetCheck("Accept deal? ");
+        return SaveGame.GetCheck("Accept deal? ");
     }
 }

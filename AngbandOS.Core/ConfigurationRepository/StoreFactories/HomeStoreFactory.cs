@@ -37,7 +37,7 @@ internal class HomeStoreFactory : StoreFactory
     public override string? OwnerName => "";
 
     public override string? Title => "Your Home";
-    public override StoreInventoryDisplayTypeEnum ShowInventoryDisplayType => StoreInventoryDisplayTypeEnum.InventoryWithoutPrice;
+    public override bool ShowItemPricing => false;
     public override string SellPrompt => "Drop which item? ";
     public override bool StoreMaintainsInscription => true;
     public override string StoreFullMessage => "Your home is full.";
@@ -65,5 +65,5 @@ internal class HomeStoreFactory : StoreFactory
     /// </summary>
     /// <param name="saveGame"></param>
     /// <returns></returns>
-    public override bool IsHome => true;
+    public override bool IsHomeThatCanBeBought => true;
 }

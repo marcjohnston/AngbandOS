@@ -23,8 +23,12 @@ internal abstract class StoreCommand : IGetKey<string>, IToJson
     public abstract char KeyChar { get; }
 
     /// <summary>
-    /// Returns the store factories that the command is valid for; or null, if the command is valid for all stores.
+    /// Returns the store factories that the command is valid for; or null, if the command is valid for all stores.  This property is bound to the 
+    /// ValidStoreFactoryNames property during the bind phase.
     /// </summary>
+    /// <remarks>
+    /// If property is nullable to prevent needing to 
+    /// </remarks>
     public StoreFactory[]? ValidStoreFactories { get; private set; }
 
     public abstract string Description { get; }
@@ -56,6 +60,7 @@ internal abstract class StoreCommand : IGetKey<string>, IToJson
             {
                 storeFactoryList.Add(SaveGame.SingletonRepository.StoreFactories.Get(storeName));
             }
+            ValidStoreFactories = storeFactoryList.ToArray();
         }
     }
 

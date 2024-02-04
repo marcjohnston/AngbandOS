@@ -64,6 +64,16 @@ internal class InnStoreFactory : StoreFactory
     };
 
     public override int MaxInventory => 4;
+
+    /// <summary>
+    /// Returns null, because the Inn doesn't buy items.
+    /// </summary>
+    protected override string? AdvertisedStoreCommand2Name => null;
+
+    /// <summary>
+    /// Returns the Hire A Room store command because the Inn allows the player to purchase a room for the night to rest.
+    /// </summary>
     protected override string? AdvertisedStoreCommand4Name => nameof(HireRoomStoreCommand);
+
     public override bool PerformsMaintenanceWhenResting => false;
 }

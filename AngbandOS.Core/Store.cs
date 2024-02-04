@@ -147,10 +147,10 @@ internal class Store
         SaveGame.Screen.Print(oPtr.Factory.Color, oName, row, 5);
         int wgt = oPtr.Weight;
         outVal = $"{wgt / 10,3}.{wgt % 10}{(StoreFactory.RenderWeightUnitOfMeasurement ? " lb" : "")}";
-        SaveGame.Screen.Print(outVal, row, 61);
 
-        if (StoreFactory.ShowInventoryDisplayType == StoreInventoryDisplayTypeEnum.InventoryWithPrice)
+        if (StoreFactory.ShowItemPricing)
         {
+            SaveGame.Screen.Print(outVal, row, 61);
             int x;
             if (oPtr.IdentFixed)
             {
@@ -165,6 +165,10 @@ internal class Store
                 outVal = $"{x,9}  ";
                 SaveGame.Screen.Print(outVal, row, 68);
             }
+        }
+        else
+        {
+            SaveGame.Screen.Print(outVal, row, 68);
         }
     }
 
@@ -383,18 +387,18 @@ internal class Store
             SaveGame.Screen.PrintLine(Title, 3, 50);
         }
 
-        if (StoreFactory.ShowInventoryDisplayType != StoreInventoryDisplayTypeEnum.DoNotShowInventory)
+        if (StoreFactory.StoreMaintainsInventory)
         {
             SaveGame.Screen.Print("Item Description", 5, 3);
-        }
-        if (StoreFactory.ShowInventoryDisplayType == StoreInventoryDisplayTypeEnum.InventoryWithPrice)
-        {
-            SaveGame.Screen.Print("Weight", 5, 60);
-            SaveGame.Screen.Print("Price", 5, 72);
-        }
-        else if (StoreFactory.ShowInventoryDisplayType == StoreInventoryDisplayTypeEnum.InventoryWithoutPrice)
-        {
-            SaveGame.Screen.Print("Weight", 5, 70);
+            if (StoreFactory.ShowItemPricing)
+            {
+                SaveGame.Screen.Print("Weight", 5, 60);
+                SaveGame.Screen.Print("Price", 5, 72);
+            }
+            else
+            {
+                SaveGame.Screen.Print("Weight", 5, 70);
+            }
         }
         SaveGame.StorePrtGold();
         DisplayInventory();

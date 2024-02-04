@@ -21,7 +21,6 @@ internal class SellStoreCommand : StoreCommand
         nameof(BlackMarketStoreFactory),
         nameof(GeneralStoreFactory),
         nameof(HomeStoreFactory),
-        nameof(InnStoreFactory),
         nameof(LibraryStoreFactory),
         nameof(MagicStoreFactory),
         nameof(PawnStoreFactory),

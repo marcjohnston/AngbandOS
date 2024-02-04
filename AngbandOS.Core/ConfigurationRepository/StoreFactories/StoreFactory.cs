@@ -77,6 +77,9 @@ internal abstract class StoreFactory : IItemFilter, IGetKey<string>
 
     public virtual string Key => GetType().Name;
 
+    /// <summary>
+    /// Returns the number of items in a page for the store.
+    /// </summary>
     public virtual int PageSize => 26;
 
     public virtual bool UseHomeCarry => false;
@@ -112,7 +115,7 @@ internal abstract class StoreFactory : IItemFilter, IGetKey<string>
     /// Returns true, if the store is a home that can be bought; false, otherwise.  When true, the doors locked will return true, if the store/home 
     /// is in the correct town.  Returns false, by default.
     /// </summary>
-    public virtual bool IsHome => false;
+    public virtual bool IsHomeThatCanBeBought => false;
 
     /// <summary>
     /// Returns true, if the doors to the store are locked; false, if the store is open.  Returns false, by default.
@@ -121,7 +124,7 @@ internal abstract class StoreFactory : IItemFilter, IGetKey<string>
     public bool DoorsLocked()
     {
         // If the store isn't a home, the doors are open.
-        if (!IsHome)
+        if (!IsHomeThatCanBeBought)
         {
             return false;
         }
@@ -137,8 +140,8 @@ internal abstract class StoreFactory : IItemFilter, IGetKey<string>
     }
 
     /// <summary>
-    /// Returns whether or not the store should perform maintenance.  When true, which is by default, the store will automatically 
-    /// maintain stock levels based on the MinKeep, MaxKeep and Turnover values.
+    /// Returns whether or not the store should perform maintenance.  When true, the store will automatically maintain stock levels based on the 
+    /// MinKeep, MaxKeep and Turnover values.  Returns true, by default.
     /// </summary>
     public virtual bool MaintainsStockLevels => true;
 
@@ -291,9 +294,15 @@ internal abstract class StoreFactory : IItemFilter, IGetKey<string>
     public virtual string? Title => null;
 
     /// <summary>
-    /// Returns whether or not the store should show an item inventory.
+    /// Returns true, if the store maintains an inventory.  When false, the various buying, selling and inventory maintenace properties are ignored.
+    /// Returns true, by default.  The Hall store returns false.
     /// </summary>
-    public virtual StoreInventoryDisplayTypeEnum ShowInventoryDisplayType => StoreInventoryDisplayTypeEnum.InventoryWithPrice;
+    public virtual bool StoreMaintainsInventory => true;
+
+    /// <summary>
+    /// Returns whether or not the store should show prices with items in the inventory.  Return true, by default.  The home does not show prices.
+    /// </summary>
+    public virtual bool ShowItemPricing => true;
 
     /// <summary>
     /// Returns the rate at which the store marks up items.  Returns 1, by default.
@@ -411,7 +420,8 @@ internal abstract class StoreFactory : IItemFilter, IGetKey<string>
     public virtual string PurchaseMessage => "Which item are you interested in? ";
 
     /// <summary>
-    /// Returns true, if the store sells items for gold to the player.  The home does not sell items.
+    /// Returns true, if the store sells items for gold to the player when the player retrieves items from the store.  Returns true, by default.
+    /// The home does not sell items.
     /// </summary>
     public virtual bool StoreSellsItems => true;
 
@@ -425,6 +435,9 @@ internal abstract class StoreFactory : IItemFilter, IGetKey<string>
     /// </summary>
     public virtual bool StoreMaintainsInscription => false;
 
+    /// <summary>
+    /// Returns true, if the store buys items for gold from the player.  Returns true, by default.  The home store doesn't buy items.
+    /// </summary>
     public virtual bool StoreBuysItems => true;
 
     /// <summary>
