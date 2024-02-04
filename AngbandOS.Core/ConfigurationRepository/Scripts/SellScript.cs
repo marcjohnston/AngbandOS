@@ -138,7 +138,7 @@ internal class SellScript : Script, IStoreScript
 
     private bool SellHaggle(Store store, Item oPtr, out int price)
     {
-        int finalAsk = store.PriceItem(oPtr, true);
+        int finalAsk = store.MarkdownItem(oPtr);
         int purse = store.Owner.MaxCost;
         if (finalAsk >= purse)
         {

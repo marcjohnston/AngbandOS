@@ -52,17 +52,8 @@ internal class BlackMarketStoreFactory : StoreFactory
         nameof(AnythingOfValueItemFilter)
     };
 
-    public override int AdjustPrice(int price, bool trueToMarkDownFalseToMarkUp)
-    {
-        if (trueToMarkDownFalseToMarkUp == true)
-        {
-            return price / 2;
-        }
-        else
-        {
-            return price * 2; // Double the price of all goods being sold.
-        }
-    }
+    public override double MarkdownRate => 0.5;
+    public override double MarkupRate => 2;
 
     public override Item? CreateItem(Store store)
     {

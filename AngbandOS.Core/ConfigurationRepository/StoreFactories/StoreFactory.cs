@@ -295,9 +295,24 @@ internal abstract class StoreFactory : IItemFilter, IGetKey<string>
     /// </summary>
     public virtual StoreInventoryDisplayTypeEnum ShowInventoryDisplayType => StoreInventoryDisplayTypeEnum.InventoryWithPrice;
 
-    public virtual int AdjustPrice(int price, bool trueToMarkDownFalseToMarkUp)
+    /// <summary>
+    /// Returns the rate at which the store marks up items.  Returns 1, by default.
+    /// </summary>
+    public virtual double MarkupRate => 1;
+
+    /// <summary>
+    /// Returns the rate at which the store marks down items.  Returns 1, by default.
+    /// </summary>
+    public virtual double MarkdownRate => 1;
+
+    public int MarkupItem(int price)
     {
-        return price;
+        return (int)((double)price * MarkupRate);
+    }
+
+    public int MarkdownItem(int price)
+    {
+        return (int)((double)price * MarkdownRate);
     }
 
     /// <summary>

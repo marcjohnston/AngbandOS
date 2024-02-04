@@ -133,38 +133,38 @@ internal class Store
     public void DisplayEntry(int itemIndex, char letter, int row)
     {
         int maxwid = StoreFactory.WidthOfDescriptionColumn;
-            Item oPtr = StoreInventoryList[itemIndex];
-            string outVal = $"{letter}) ";
-            SaveGame.Screen.PrintLine(outVal, row, 0);
-            ColorEnum a = oPtr.Factory.FlavorColor;
-            char c = oPtr.Factory.FlavorSymbol.Character;
-            SaveGame.Screen.Print(a, c.ToString(), row, 3);
+        Item oPtr = StoreInventoryList[itemIndex];
+        string outVal = $"{letter}) ";
+        SaveGame.Screen.PrintLine(outVal, row, 0);
+        ColorEnum a = oPtr.Factory.FlavorColor;
+        char c = oPtr.Factory.FlavorSymbol.Character;
+        SaveGame.Screen.Print(a, c.ToString(), row, 3);
         string oName = StoreFactory.GetItemDescription(oPtr);
-            if (maxwid < oName.Length)
-            {
-                oName = oName.Substring(0, maxwid);
-            }
-            SaveGame.Screen.Print(oPtr.Factory.Color, oName, row, 5);
-            int wgt = oPtr.Weight;
-            outVal = $"{wgt / 10,3}.{wgt % 10}{(StoreFactory.RenderWeightUnitOfMeasurement ? " lb" : "")}";
-            SaveGame.Screen.Print(outVal, row, 61);
+        if (maxwid < oName.Length)
+        {
+            oName = oName.Substring(0, maxwid);
+        }
+        SaveGame.Screen.Print(oPtr.Factory.Color, oName, row, 5);
+        int wgt = oPtr.Weight;
+        outVal = $"{wgt / 10,3}.{wgt % 10}{(StoreFactory.RenderWeightUnitOfMeasurement ? " lb" : "")}";
+        SaveGame.Screen.Print(outVal, row, 61);
 
-            if (StoreFactory.ShowInventoryDisplayType == StoreInventoryDisplayTypeEnum.InventoryWithPrice)
+        if (StoreFactory.ShowInventoryDisplayType == StoreInventoryDisplayTypeEnum.InventoryWithPrice)
+        {
+            int x;
+            if (oPtr.IdentFixed)
             {
-                int x;
-                if (oPtr.IdentFixed)
-                {
-                    x = PriceItem(oPtr, false);
-                    outVal = $"{x,9} F";
-                    SaveGame.Screen.Print(outVal, row, 68);
-                }
-                else
-                {
-                    x = PriceItem(oPtr, false);
-                    x += x / 10;
-                    outVal = $"{x,9}  ";
-                    SaveGame.Screen.Print(outVal, row, 68);
-                }
+                x = MarkupItem(oPtr);
+                outVal = $"{x,9} F";
+                SaveGame.Screen.Print(outVal, row, 68);
+            }
+            else
+            {
+                x = MarkupItem(oPtr);
+                x += x / 10;
+                outVal = $"{x,9}  ";
+                SaveGame.Screen.Print(outVal, row, 68);
+            }
         }
     }
 
@@ -521,7 +521,12 @@ internal class Store
         oPtr.Count = size - size * discount / 100;
     }
 
-    public int PriceItem(Item oPtr, bool trueToMarkDownFalseToMarkUp) // TODO: Convert this into markup and markdown methods.
+    /// <summary>
+    /// Returns the price of an item that the store is selling/player is buying.
+    /// </summary>
+    /// <param name="oPtr"></param>
+    /// <returns></returns>
+    public int MarkupItem(Item oPtr)
     {
         int price = oPtr.Value();
         if (price <= 0)
@@ -535,25 +540,49 @@ internal class Store
         // Create a charisma factor that affects the store owner.
         int factor = 100;
         factor += SaveGame.AbilityScores[Ability.Charisma].ChaPriceAdjustment;
-        if (trueToMarkDownFalseToMarkUp == true)
+        adjust = 100 + (greed + factor - 300);
+        if (adjust < 100)
         {
-            adjust = 100 + (300 - (greed + factor));
-            if (adjust > 100)
-            {
-                adjust = 100;
-            }
-        }
-        else
-        {
-            adjust = 100 + (greed + factor - 300);
-            if (adjust < 100)
-            {
-                adjust = 100;
-            }
+            adjust = 100;
         }
 
         // Allow the store to adjust pricing.
-        price = StoreFactory.AdjustPrice(price, trueToMarkDownFalseToMarkUp);
+        price = StoreFactory.MarkupItem(price);
+        price = (price * adjust + 50) / 100;
+        if (price <= 0)
+        {
+            return 1;
+        }
+        return price;
+    }
+
+    /// <summary>
+    /// Returns the price of an item that the store is buying/the player is selling.
+    /// </summary>
+    /// <param name="oPtr"></param>
+    /// <returns></returns>
+    public int MarkdownItem(Item oPtr)
+    {
+        int price = oPtr.Value();
+        if (price <= 0)
+        {
+            return 0;
+        }
+
+        int greed = Owner.MinInflate;
+        int adjust;
+
+        // Create a charisma factor that affects the store owner.
+        int factor = 100;
+        factor += SaveGame.AbilityScores[Ability.Charisma].ChaPriceAdjustment;
+        adjust = 100 + (300 - (greed + factor));
+        if (adjust > 100)
+        {
+            adjust = 100;
+        }
+
+        // Allow the store to adjust pricing.
+        price = StoreFactory.MarkdownItem(price);
         price = (price * adjust + 50) / 100;
         if (price <= 0)
         {

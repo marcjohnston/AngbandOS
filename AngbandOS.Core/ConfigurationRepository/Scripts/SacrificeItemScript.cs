@@ -51,7 +51,7 @@ internal class SacrificeItemScript : Script, IStoreScript
         Item qPtr = oPtr.Clone(amt);
         string oName = qPtr.Description(true, 3);
         qPtr.Inscription = "";
-        int finalAsk = storeCommandEvent.Store.PriceItem(qPtr, true) * qPtr.Count;
+        int finalAsk = storeCommandEvent.Store.MarkdownItem(qPtr) * qPtr.Count;
         oPtr.ItemIncrease(-amt);
         oPtr.ItemDescribe();
         oPtr.ItemOptimize();

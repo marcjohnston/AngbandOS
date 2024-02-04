@@ -65,17 +65,9 @@ internal class PawnStoreFactory : StoreFactory
     /// them back later forTheamount you pawned them for. If retrieving your items fromThepawn shop had a
     /// markup then you'd be better off just selling them  normally and buying new ones to replace them.
     /// </remarks>
-    public override int AdjustPrice(int price, bool trueToMarkDownFalseToMarkUp)
-    {
-        if (trueToMarkDownFalseToMarkUp == true)
-        {
-            return price / 3; // Only offer 1/3 of the value of an object.
-        }
-        else
-        {
-            return price / 3; // Sell the item at the same price as it was bought.
-        }
-    }
+    public override double MarkdownRate => 0.3;
+    public override double MarkupRate => 0.3;
+
     protected override string? AdvertisedStoreCommand4Name => nameof(IdentifyAllStoreCommand);
 
     /// <summary>
