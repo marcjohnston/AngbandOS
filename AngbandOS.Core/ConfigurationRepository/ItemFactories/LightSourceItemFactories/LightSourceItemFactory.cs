@@ -182,19 +182,6 @@ internal abstract class LightSourceItemFactory : ItemFactory
     public override bool HatesFire => true;
     public override ColorEnum Color => ColorEnum.BrightYellow;
 
-    public override bool ItemsCanBeMerged(Item a, Item b)
-    {
-        if (!base.ItemsCanBeMerged(a, b))
-        {
-            return false;
-        }
-        if (!StatsAreSame(a, b))
-        {
-            return false;
-        }
-        return true;
-    }
-
     public virtual void Refill(SaveGame saveGame, Item item)
     {
         saveGame.MsgPrint("Your light cannot be refilled.");

@@ -56,10 +56,6 @@ internal class HomeStoreFactory : StoreFactory
 
     public override int WidthOfDescriptionColumn => 65;
     public override bool RenderWeightUnitOfMeasurement => true;
-    public override bool StoreCanMergeItem(Item oPtr, Item jPtr)
-    {
-        return jPtr.CanAbsorb(oPtr);
-    }
     public override bool StoreSellsItems => false;
 
     public override bool PerformsMaintenanceWhenResting => false;

@@ -64,7 +64,7 @@ internal class SaveGame
     public int CommandRepeat;
     public readonly List<Quest> Quests;
 
-    public readonly WildernessRegion[][] Wilderness;
+    public WildernessRegion[][] Wilderness { get; private set; }
     private byte[][] _elevationMap;
 
     public int AllocKindSize;
@@ -75,7 +75,7 @@ internal class SaveGame
     public bool CharacterXtra; // TODO: This global can be removed when actions are updated
     public bool CreateDownStair;
     public bool CreateUpStair;
-    public Dungeon CurDungeon;
+    public Dungeon CurDungeon; // TODO: This may be CurTown.Dungeon?
     public int CurrentDepth;
     public Town CurTown;
     public string DiedFrom;
@@ -503,7 +503,7 @@ internal class SaveGame
     /// <summary>
     /// Returns the index of the town that the player owns a home; or null, if the player doesn't own a home.
     /// </summary>
-    public int? TownWithHouse;
+    public Town? TownWithHouse;
 
     public int Weight;
 
@@ -645,17 +645,6 @@ internal class SaveGame
         IsDead = true;
 
         DungeonGenerator = new StandardDungeonGenerator(this);
-
-        // Create the wilderness regions.
-        Wilderness = new WildernessRegion[12][];
-        for (int i = 0; i < 12; i++)
-        {
-            Wilderness[i] = new WildernessRegion[12];
-            for (int j = 0; j < 12; j++)
-            {
-                Wilderness[i][j] = new WildernessRegion();
-            }
-        }
 
         // Create an instance of the SingletonRepository.  This allows repositories that are loading access to the SingletonRepository object. // TODO: This needs to be fixed once the items no longer reference other objects during construction
         SingletonRepository = new SingletonRepository(this);
@@ -1757,7 +1746,7 @@ internal class SaveGame
                     CurTown = SingletonRepository.Towns[Rng.RandomLessThan(SingletonRepository.Towns.Count)];
                 }
             }
-            CurDungeon = SingletonRepository.Dungeons[CurTown.Index];
+            CurDungeon = CurTown.Dungeon;
             RecallDungeon = CurDungeon;
             RecallDungeon.RecallLevel = 1;
             DungeonDifficulty = 0;
@@ -1820,9 +1809,9 @@ internal class SaveGame
         CloseGame();
     }
 
-    public Store? FindHomeStore(int town) => Array.Find(SingletonRepository.Towns[town].Stores, store => store.GetType() == typeof(HomeStoreFactory));
+    public Store? FindHomeStore(Town town) => Array.Find(town.Stores, store => store.GetType() == typeof(HomeStoreFactory));
 
-    public void MoveHouse(int oldTown, int newTown)
+    public void MoveHouse(Town oldTown, Town newTown)
     {
         Store? newStore = FindHomeStore(newTown);
         Store? oldStore = FindHomeStore(oldTown);
@@ -2697,15 +2686,14 @@ internal class SaveGame
 
     private void CreateWorld() 
     {
-        int i;
-        int j;
-        int x = 0;
-        int y = 0;
-        MakeIslandContours();
-        for (i = 0; i < 12; i++)
+        // Create and initialize the wilderness regions.
+        Wilderness = new WildernessRegion[12][];
+        for (int i = 0; i < 12; i++)
         {
-            for (j = 0; j < 12; j++)
+            Wilderness[i] = new WildernessRegion[12];
+            for (int j = 0; j < 12; j++)
             {
+                Wilderness[i][j] = new WildernessRegion();
                 Wilderness[i][j].Seed = Rng.RandomLessThan(int.MaxValue);
                 Wilderness[i][j].Dungeon = null;
                 Wilderness[i][j].Town = null;
@@ -2713,73 +2701,90 @@ internal class SaveGame
             }
         }
 
+        MakeIslandContours();
+
         // The game world automatically gets a single instance of every town.  Initialize each town now.
+        List<Dungeon> dungeonList = SingletonRepository.Dungeons.ToList();
+
+        // Reset the position for each dungeon.
+        foreach (Dungeon dungeon in dungeonList)
+        {
+            dungeon.X = 0;
+            dungeon.Y = 0;
+        }
+
+        // Initialize the towns first and remove the associated dungeons from the list.
         foreach (Town town in SingletonRepository.Towns)
         {
             town.Initialize();
+
+            // Consider dungeons under the town have already been visited.
+            Dungeon dungeon = town.Dungeon;
+            dungeon.Visited = true;
+            while (true)
+            {
+                // Choose a wilderness region for the dungeon.
+                int x = Rng.RandomBetween(2, 9);
+                int y = Rng.RandomBetween(2, 9);
+
+                // Ensure the wilderness doesn't already have a dungeon, and none of the surrounding wildernesses do either.
+                if (Wilderness[y][x].Dungeon == null && Wilderness[y - 1][x].Dungeon == null &&
+                    Wilderness[y + 1][x].Dungeon == null && Wilderness[y][x - 1].Dungeon == null &&
+                    Wilderness[y][x + 1].Dungeon == null && Wilderness[y - 1][x + 1].Dungeon == null &&
+                    Wilderness[y + 1][x + 1].Dungeon == null && Wilderness[y - 1][x - 1].Dungeon == null &&
+                    Wilderness[y + 1][x - 1].Dungeon == null)
+                {
+                    // Place the town and the dungeon at this wilderness region.
+                    Wilderness[y][x].Dungeon = dungeon;
+                    Wilderness[y][x].Town = town;
+                    dungeon.X = x;
+                    dungeon.Y = y;
+                    town.X = x;
+                    town.Y = y;
+
+                    break;
+                }
+            }
+
+            // This dungeon is already processed, remove it from the list.
+            dungeonList.Remove(dungeon);
         }
 
-        for (i = 0; i < DungeonCount; i++)
+
+        // Initialize the remaining dungeons.
+        foreach (Dungeon dungeon in dungeonList)
         {
-            SingletonRepository.Dungeons[i].X = 0;
-            SingletonRepository.Dungeons[i].Y = 0;
-        }
-        for (i = 0; i < DungeonCount; i++)
-        {
-            SingletonRepository.Dungeons[i].Visited = false;
-            SingletonRepository.Dungeons[i].KnownDepth = false;
-            SingletonRepository.Dungeons[i].KnownOffset = false;
-            if (i < SingletonRepository.Towns.Count)
+            dungeon.Visited = false;
+            dungeon.KnownDepth = false;
+            dungeon.KnownOffset = false;
+
+            while (true)
             {
-                SingletonRepository.Dungeons[i].Visited = true;
-                j = 0;
-                while (j == 0)
+                int x = Rng.RandomBetween(2, 9);
+                int y = Rng.RandomBetween(2, 9);
+
+                // Choose a region that doesn't already have a dungeon.
+                if (Wilderness[y][x].Dungeon == null)
                 {
-                    x = Rng.RandomBetween(2, 9);
-                    y = Rng.RandomBetween(2, 9);
-                    j = 1;
-                    if (Wilderness[y][x].Dungeon != null || Wilderness[y - 1][x].Dungeon != null ||
-                        Wilderness[y + 1][x].Dungeon != null || Wilderness[y][x - 1].Dungeon != null ||
-                        Wilderness[y][x + 1].Dungeon != null || Wilderness[y - 1][x + 1].Dungeon != null ||
-                        Wilderness[y + 1][x + 1].Dungeon != null || Wilderness[y - 1][x - 1].Dungeon != null ||
-                        Wilderness[y + 1][x - 1].Dungeon != null)
-                    {
-                        j = 0;
-                    }
+                    Wilderness[y][x].Dungeon = dungeon;
+                    dungeon.X = x;
+                    dungeon.Y = y;
+
+                    break;
                 }
+
             }
-            else
-            {
-                j = 0;
-                while (j == 0)
-                {
-                    x = Rng.RandomBetween(2, 9);
-                    y = Rng.RandomBetween(2, 9);
-                    j = 1;
-                    if (Wilderness[y][x].Dungeon != null)
-                    {
-                        j = 0;
-                    }
-                }
-            }
-            Wilderness[y][x].Dungeon = SingletonRepository.Dungeons[i];
-            if (i < SingletonRepository.Towns.Count)
-            {
-                Wilderness[y][x].Town = SingletonRepository.Towns[i];
-                SingletonRepository.Towns[i].X = x;
-                SingletonRepository.Towns[i].Y = y;
-            }
-            SingletonRepository.Dungeons[i].X = x;
-            SingletonRepository.Dungeons[i].Y = y;
+
         }
-        for (i = 0; i < SingletonRepository.Towns.Count - 1; i++)
+
+        // Create walkway paths between the towns.
+        for (int i = 0; i < SingletonRepository.Towns.Count - 1; i++)
         {
             int curX = SingletonRepository.Towns[i].X;
             int curY = SingletonRepository.Towns[i].Y;
             int destX = SingletonRepository.Towns[i + 1].X;
             int destY = SingletonRepository.Towns[i + 1].Y;
-            bool fin = false;
-            while (!fin)
+            while (true)
             {
                 int xDisp = destX - curX;
                 int xSgn = 0;
@@ -2805,7 +2810,7 @@ internal class SaveGame
                 }
                 if (xDisp == 0 && yDisp == 0)
                 {
-                    fin = true;
+                    break;
                 }
                 else
                 {
@@ -3792,7 +3797,7 @@ internal class SaveGame
                     CurrentDepth = 0;
                     if (TownWithHouse != null)
                     {
-                        CurTown = SingletonRepository.Towns[TownWithHouse.Value];
+                        CurTown = TownWithHouse;
                         WildernessX = CurTown.X;
                         WildernessY = CurTown.Y;
                         NewLevelFlag = true;

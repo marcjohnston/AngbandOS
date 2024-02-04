@@ -25,6 +25,12 @@ internal class CelephaisTown : Town
         nameof(HallStoreFactory),
         nameof(PawnStoreFactory)
     };
+
+    /// <summary>
+    /// Returns the Celephais dungeon because it is the dungeon under the city of Celephais.
+    /// </summary>
+    public override string DungeonName => nameof(CelephaisDungeon);
+
     public override int HousePrice => 50000;
     public override string Name => "the beautiful city of Celephais";
     public override char Char => 'C';

@@ -133,7 +133,7 @@ internal abstract class StoreFactory : IItemFilter, IGetKey<string>
         }
 
         // Make sure this town matches the town where the player bought the home.
-        return SaveGame.TownWithHouse.Value != SaveGame.CurTown.Index;
+        return SaveGame.TownWithHouse != SaveGame.CurTown;
     }
 
     /// <summary>
@@ -381,8 +381,6 @@ internal abstract class StoreFactory : IItemFilter, IGetKey<string>
     }
 
     public virtual bool PerformsMaintenanceWhenResting => true;
-
-    public virtual bool StoreCanMergeItem(Item oPtr, Item jPtr) => StoreObjectSimilar(jPtr, oPtr);
 
     /// <summary>
     /// Allows the store factory the option to create an item for the store; or null, if the store should choose from the StoreStockManifests.  The

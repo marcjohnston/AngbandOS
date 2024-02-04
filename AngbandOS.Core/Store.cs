@@ -571,7 +571,7 @@ internal class Store
         for (i = 0; i < StoreInventoryList.Count; i++)
         {
             jPtr = StoreInventoryList[i];
-            if (StoreFactory.StoreCanMergeItem(oPtr, jPtr))
+            if (jPtr.CanAbsorb(oPtr))
             {
                 return true;
             }

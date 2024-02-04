@@ -19,5 +19,7 @@ public class TownDefinition
 
     public virtual bool AllowStartupTown { get; set; } = true;
 
+    public virtual string DungeonName { get; set; }
+
     public virtual bool UnusedStoreLotsAreGraveyards { get; set; } = false;
 }

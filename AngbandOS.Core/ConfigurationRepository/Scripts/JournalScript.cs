@@ -873,14 +873,14 @@ internal class JournalScript : Script, IScript, IRepeatableScript, IStoreScript
         SaveGame.Screen.Clear();
         SaveGame.Screen.Print(ColorEnum.Blue, "Word of Recall", 0, 1);
         SaveGame.Screen.Print(ColorEnum.Blue, "==============", 1, 1);
-        string recallTown = SaveGame.TownWithHouse != null ? SaveGame.SingletonRepository.Towns[SaveGame.TownWithHouse.Value].Name : SaveGame.CurTown.Name;
+        string recallTown = SaveGame.TownWithHouse != null ? SaveGame.TownWithHouse.Name : SaveGame.CurTown.Name;
         string recallDungeon = SaveGame.RecallDungeon.Name;
         int recallLev = SaveGame.RecallDungeon.RecallLevel;
         SaveGame.Screen.Print(ColorEnum.Blue, $"Your Word of Recall position is level {recallLev} of {recallDungeon}.", 3, 0);
         SaveGame.Screen.Print(ColorEnum.Blue, $"Your home town is {recallTown}.", 4, 0);
         if (SaveGame.TownWithHouse != null)
         {
-            recallTown = "your house in " + SaveGame.SingletonRepository.Dungeons[SaveGame.TownWithHouse.Value].Shortname;
+            recallTown = "your house in " + SaveGame.TownWithHouse.Dungeon.Shortname;
         }
         SaveGame.Screen.Print(ColorEnum.Brown,
             SaveGame.CurrentDepth == 0

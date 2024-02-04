@@ -26,6 +26,12 @@ internal class UltharTown : Town
         nameof(PawnStoreFactory)
     };
 
+
+    /// <summary>
+    /// Returns the Ulthar dungeon because it is the dungeon under the city of Ulthar.
+    /// </summary>
+    public override string DungeonName => nameof(UltharDungeon);
+
     public override int HousePrice => 45000;
     public override string Name => "the picturesque town of Ulthar";
     public override char Char => 'U';

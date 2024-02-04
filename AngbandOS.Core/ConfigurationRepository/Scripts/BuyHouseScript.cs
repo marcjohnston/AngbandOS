@@ -28,7 +28,7 @@ internal class BuyHouseScript : Script, IScript, IStoreScript
     public void ExecuteScript()
     {
         int price;
-        if (SaveGame.TownWithHouse != null && SaveGame.TownWithHouse.Value == SaveGame.CurTown.Index)
+        if (SaveGame.TownWithHouse != null && SaveGame.TownWithHouse == SaveGame.CurTown)
         {
             SaveGame.MsgPrint("You already have the deeds!");
         }
@@ -46,8 +46,8 @@ internal class BuyHouseScript : Script, IScript, IStoreScript
                     SaveGame.SayComment_1();
                     SaveGame.PlaySound(SoundEffectEnum.StoreTransaction);
                     SaveGame.StorePrtGold();
-                    int? oldHouse = SaveGame.TownWithHouse;
-                    SaveGame.TownWithHouse = SaveGame.CurTown.Index;
+                    Town? oldHouse = SaveGame.TownWithHouse;
+                    SaveGame.TownWithHouse = SaveGame.CurTown;
                     if (oldHouse == null)
                     {
                         SaveGame.MsgPrint("You may move in at once.");
@@ -55,7 +55,7 @@ internal class BuyHouseScript : Script, IScript, IStoreScript
                     else
                     {
                         SaveGame.MsgPrint("I've sold your old house to pay for the removal service.");
-                        SaveGame.MoveHouse(oldHouse.Value, SaveGame.TownWithHouse.Value);
+                        SaveGame.MoveHouse(oldHouse, SaveGame.TownWithHouse);
                     }
                 }
                 SaveGame.HandleStuff();

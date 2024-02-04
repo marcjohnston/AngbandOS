@@ -26,6 +26,12 @@ internal class KadathTown : Town
         nameof(AbandonedStoreFactory)
     };
 
+
+    /// <summary>
+    /// Returns the Kadath dungeon because it is the dungeon under the city of Kadath.
+    /// </summary>
+    public override string DungeonName => nameof(KadathDungeon);
+
     public override int HousePrice => 0;
     public override string Name => "Kadath, home of the Gods";
     public override char Char => 'K';

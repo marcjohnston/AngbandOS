@@ -10,16 +10,16 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class WildernessRegion
 {
-    public Dungeon Dungeon;
-    public int RoadMap;
-    public int Seed;
-    public Town Town;
+    /// <summary>
+    /// Returns the dungeon that is located in this region; or null, if there is none.
+    /// </summary>
+    public Dungeon? Dungeon = null;
 
-    public WildernessRegion()
-    {
-        Dungeon = null;
-        Town = null;
-        Seed = 0;
-        RoadMap = 0;
-    }
+    /// <summary>
+    /// Returns the town that is located in this region; or null, if there is none.
+    /// </summary>
+    public Town? Town = null;
+
+    public int RoadMap = 0;
+    public int Seed = 0;
 }

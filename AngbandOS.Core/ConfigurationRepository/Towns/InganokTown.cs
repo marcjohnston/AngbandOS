@@ -26,6 +26,11 @@ internal class InganokTown : Town
         nameof(PawnStoreFactory)
     };
 
+
+    /// <summary>
+    /// Returns the Inganok dungeon because it is the dungeon under the city of Inganok.
+    /// </summary>
+    public override string DungeonName => nameof(InganokDungeon);
     public override int HousePrice => 0;
     public override string Name => "the industrious town of Inganok";
     public override char Char => 'I';

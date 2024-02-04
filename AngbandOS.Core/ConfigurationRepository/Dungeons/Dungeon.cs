@@ -104,11 +104,6 @@ internal abstract class Dungeon : IGetKey<string>, IToJson
     public virtual bool Tower => false;
 
     /// <summary>
-    /// The index of the dungeon in the dungeon list
-    /// </summary>
-    public int Index;
-
-    /// <summary>
     /// Whether or not the player knows the depth of the dungeon
     /// </summary>
     public bool KnownDepth = false;

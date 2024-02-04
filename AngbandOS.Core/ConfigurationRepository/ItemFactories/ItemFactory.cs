@@ -444,13 +444,22 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey<string>
     public virtual bool CanVorpalSlay => false;
 
     /// <summary>
-    /// Returns false, if any of the stats between two items are different.
+    /// Returns true, if two item can be merged.  By default, returns true, if both items are from the same factory and are both known.
     /// </summary>
-    /// <param name="a"></param>
-    /// <param name="b"></param>
-    /// <returns></returns>
-    protected bool StatsAreSame(Item a, Item b)
+    public virtual bool ItemsCanBeMerged(Item a, Item b)
     {
+        // Ensure both items belong to the same factory.  This works because factories are singletons.  Items from different factories cannot
+        // be merged.
+        if (a.Factory != b.Factory)
+        {
+            return false;
+        }
+
+        // The known status must be the same.
+        if (a.IsKnown() != b.IsKnown())
+        {
+            return false;
+        }
         if (a.BonusToHit != b.BonusToHit)
         {
             return false;
@@ -499,27 +508,33 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey<string>
         {
             return false;
         }
-        return true;
-    }
-
-    /// <summary>
-    /// Returns true, if two item can be merged.  By default, returns true, if both items are from the same factory and are both known.
-    /// </summary>
-    public virtual bool ItemsCanBeMerged(Item a, Item b)
-    {
-        // Ensure both items belong to the same factory.  This works because factories are singletons.  Items from different factories cannot
-        // be merged.
-        if (a.Factory != b.Factory)
+        if (a.TypeSpecificValue != b.TypeSpecificValue)
+        {
+            return false;
+        }
+        if (!a.RandartItemCharacteristics.Equals(b.RandartItemCharacteristics))
+        {
+            return false;
+        }
+        if (a.IdentCursed != b.IdentCursed)
+        {
+            return false;
+        }
+        if (a.IdentBroken != b.IdentBroken)
+        {
+            return false;
+        }
+        if (a.Inscription != b.Inscription)
+        {
+            return false;
+        }
+        if (a.Discount != b.Discount)
         {
             return false;
         }
 
-        // If either item is not known, they cannot be merged.
-        if (!a.IsKnown() || !b.IsKnown())
-        {
-            return false;
-        }
-        return true;
+        int total = a.Count + b.Count;
+        return total < Constants.MaxStackSize;
     }
 
     /// <summary>

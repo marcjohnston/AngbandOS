@@ -46,17 +46,4 @@ internal abstract class JewelleryItemFactory : ItemFactory
         }
         return false;
     }
-
-    public override bool ItemsCanBeMerged(Item a, Item b)
-    {
-        if (!base.ItemsCanBeMerged(a, b))
-        {
-            return false;
-        }
-        if (!StatsAreSame(a, b))
-        {
-            return false;
-        }
-        return true;
-    }
 }

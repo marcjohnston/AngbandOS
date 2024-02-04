@@ -27,6 +27,12 @@ internal class IlekVadTown : Town
         nameof(HallStoreFactory)
     };
 
+
+    /// <summary>
+    /// Returns the IlekVad dungeon because it is the dungeon under the city of IlekVad.
+    /// </summary>
+    public override string DungeonName => nameof(IlekVadDungeon);
+
     public override int HousePrice => 60000;
     public override string Name => "the city of Ilek-Vad";
     public override char Char => 'V';

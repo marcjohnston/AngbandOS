@@ -10,6 +10,7 @@ namespace AngbandOS.Core.JsonModels;
 internal class JsonTown : IJsonModel<TownDefinition>
 {
     public string? Key { get; set; }
+    public string? DungeonName { get; set; }
 
     public int? HousePrice { get; set; }
 
@@ -27,7 +28,7 @@ internal class JsonTown : IJsonModel<TownDefinition>
 
     public TownDefinition? ToDefinition()
     {
-        if (Key == null || HousePrice == null || Name == null || Char == null || StoreFactoryNames == null)
+        if (Key == null || HousePrice == null || Name == null || Char == null || StoreFactoryNames == null || DungeonName == null)
         {
             return null;
         }
@@ -35,6 +36,7 @@ internal class JsonTown : IJsonModel<TownDefinition>
         return new TownDefinition()
         {
             Key = Key,
+            DungeonName = DungeonName,
             HousePrice = HousePrice.Value,
             Name = Name,
             Char = Char.Value,

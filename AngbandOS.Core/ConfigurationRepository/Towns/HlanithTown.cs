@@ -26,6 +26,12 @@ internal class HlanithTown : Town
         nameof(HallStoreFactory)
     };
 
+
+    /// <summary>
+    /// Returns the Hlanith dungeon because it is the dungeon under the city of Hlanith.
+    /// </summary>
+    public override string DungeonName => nameof(HlanithDungeon);
+
     public override int HousePrice => 45000;
     public override string Name => "the market town of Hlanith";
     public override char Char => 'H';

@@ -101,18 +101,6 @@ internal abstract class AmmunitionItemFactory : WeaponItemFactory
         }
     }
 
-    public override bool ItemsCanBeMerged(Item a, Item b)
-    {
-        if (!base.ItemsCanBeMerged(a, b))
-        {
-            return false;
-        }
-        if (!StatsAreSame(a, b))
-        {
-            return false;
-        }
-        return true;
-    }
     public override int MakeObjectCount => SaveGame.Rng.DiceRoll(6, 7);
     public override int PercentageBreakageChance => 25;
 

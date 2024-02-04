@@ -15,12 +15,14 @@ internal class GenericTown : Town
     public GenericTown(SaveGame saveGame, TownDefinition townDefinition) : base(saveGame)
     {
         Key = townDefinition.Key;
+        DungeonName = townDefinition.DungeonName;
         HousePrice = townDefinition.HousePrice;
         Name = townDefinition.Name;
         Char = townDefinition.Char;
         StoreFactoryNames = townDefinition.StoreFactoryNames;
     }
 
+    public override string DungeonName { get; }
     public override string Key { get; }
     public override int HousePrice { get; }
     public override string Name { get; }

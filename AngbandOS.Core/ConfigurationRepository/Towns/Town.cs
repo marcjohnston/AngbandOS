@@ -20,9 +20,26 @@ internal abstract class Town : IGetKey<string>, IToJson
     /// </summary>
     public int Seed = 0;
     public bool Visited = false;
+
+    /// <summary>
+    /// Returns the wilderness X coordinate of the town.
+    /// </summary>
     public int X = 0;
+
+    /// <summary>
+    /// Returns the wilderness Y coordinate of the town.
+    /// </summary>
     public int Y = 0;
-    public int Index;
+
+    /// <summary>
+    /// Returns the dungeon that is under the city.  This property is bound from the DungeonName property during the bind phase.
+    /// </summary>
+    public Dungeon Dungeon { get; private set; }
+
+    /// <summary>
+    /// Returns the name of the dungeon that is under the city.  This property is bound to the Dungeon property during the bind phase.
+    /// </summary>
+    public abstract string DungeonName { get; }
 
     public virtual bool AllowStartupTown => true;
     public abstract char Char { get; }
@@ -68,6 +85,8 @@ internal abstract class Town : IGetKey<string>, IToJson
             storeFactoryList.Add(SaveGame.SingletonRepository.StoreFactories.Get(storeName));
         }
         StoreFactories = storeFactoryList.ToArray();
+
+        Dungeon = SaveGame.SingletonRepository.Dungeons.Get(DungeonName);
     }
 
     public void Initialize()
@@ -93,6 +112,7 @@ internal abstract class Town : IGetKey<string>, IToJson
         TownDefinition townDefinition = new()
         {
             Key = Key,
+            DungeonName = DungeonName,
             HousePrice = HousePrice,
             Name = Name,
             Char = Char,

@@ -26,6 +26,12 @@ internal class DylathLeenTown : Town
         nameof(PawnStoreFactory)
     };
 
+
+    /// <summary>
+    /// Returns the Dylath-Leen dungeon because it is the dungeon under the city of Dylath-Leen.
+    /// </summary>
+    public override string DungeonName => nameof(DylathLeenDungeon);
+
     public override int HousePrice => 25000;
     public override string Name => "the unwholesome city of Dylath-Leen";
     public override char Char => 'D';

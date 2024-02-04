@@ -722,35 +722,8 @@ internal sealed class Item : IComparable<Item>
     /// <returns></returns>
     public bool CanAbsorb(Item other)
     {
-        int total = Count + other.Count;
-
-        // Ask our factory, if these items can be merged.
-        if (!Factory.ItemsCanBeMerged(this, other))
-        {
-            return false;
-        }
-
-        if (!RandartItemCharacteristics.Equals(other.RandartItemCharacteristics))
-        {
-            return false;
-        }
-        if (IdentCursed != other.IdentCursed)
-        {
-            return false;
-        }
-        if (IdentBroken != other.IdentBroken)
-        {
-            return false;
-        }
-        if (!string.IsNullOrEmpty(Inscription) && !string.IsNullOrEmpty(other.Inscription) && Inscription != other.Inscription)
-        {
-            return false;
-        }
-        if (Discount != other.Discount)
-        {
-            return false;
-        }
-        return total < Constants.MaxStackSize;
+        // Ask the factory for this item, if the other item can be merged.
+        return Factory.ItemsCanBeMerged(this, other);
     }
 
 

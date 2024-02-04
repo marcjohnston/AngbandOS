@@ -37,19 +37,6 @@ internal abstract class RodItemFactory : ItemFactory, IFlavour
         return includeCountPrefix ? GetPrefixCount(true, name, item.Count, item.IsKnownArtifact) : name;
     }
 
-    public override bool ItemsCanBeMerged(Item a, Item b)
-    {
-        if (!base.ItemsCanBeMerged(a, b))
-        {
-            return false;
-        }
-        if (a.TypeSpecificValue != b.TypeSpecificValue)
-        {
-            return false;
-        }
-        return true;
-    }
-
     /// <summary>
     /// Returns the rod flavours repository because rods have flavours that need to be identified.
     /// </summary>

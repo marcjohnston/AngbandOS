@@ -42,19 +42,6 @@ internal abstract class StaffItemFactory : ItemFactory, IFlavour
         return value / 20 * item.TypeSpecificValue;
     }
 
-    public override bool ItemsCanBeMerged(Item a, Item b)
-    {
-        if (!base.ItemsCanBeMerged(a, b))
-        {
-            return false;
-        }
-        if (a.TypeSpecificValue != b.TypeSpecificValue)
-        {
-            return false;
-        }
-        return true;
-    }
-
     /// <summary>
     /// Returns the staff flavours repository because staves have flavours that need to be identified.
     /// </summary>

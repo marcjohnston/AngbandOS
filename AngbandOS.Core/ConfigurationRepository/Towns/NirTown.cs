@@ -26,6 +26,12 @@ internal class NirTown : Town
         nameof(PawnStoreFactory)
     };
 
+
+    /// <summary>
+    /// Returns the Nir dungeon because it is the dungeon under the city of Nir.
+    /// </summary>
+    public override string DungeonName => nameof(NirDungeon);
+
     public override int HousePrice => 0;
     public override string Name => "the hamlet of Nir";
     public override char Char => 'N';
