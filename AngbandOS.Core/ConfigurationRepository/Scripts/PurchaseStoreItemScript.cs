@@ -44,7 +44,7 @@ internal class PurchaseStoreItemScript : Script, IStoreScript
             SaveGame.MsgPrint("You cannot carry that many different items.");
             return;
         }
-        int best = storeCommandEvent.Store.PriceItem(jPtr, storeCommandEvent.Store.Owner.MinInflate, false);
+        int best = storeCommandEvent.Store.PriceItem(jPtr, false);
         if (oPtr.Count > 1)
         {
             if (storeCommandEvent.Store.StoreFactory.StoreSellsItems && oPtr.IdentFixed)
@@ -184,7 +184,7 @@ internal class PurchaseStoreItemScript : Script, IStoreScript
 
     private bool PurchaseHaggle(Store store, Item oPtr, out int price)
     {
-        int finalAsk = store.PriceItem(oPtr, store.Owner.MinInflate, false);
+        int finalAsk = store.PriceItem(oPtr, false);
         SaveGame.MsgPrint("You quickly agree upon the price.");
         SaveGame.MsgPrint(null);
         finalAsk += finalAsk / 10;

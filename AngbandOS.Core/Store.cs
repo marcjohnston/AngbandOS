@@ -154,13 +154,13 @@ internal class Store
                 int x;
                 if (oPtr.IdentFixed)
                 {
-                    x = PriceItem(oPtr, Owner.MinInflate, false);
+                    x = PriceItem(oPtr, false);
                     outVal = $"{x,9} F";
                     SaveGame.Screen.Print(outVal, row, 68);
                 }
                 else
                 {
-                    x = PriceItem(oPtr, Owner.MinInflate, false);
+                    x = PriceItem(oPtr, false);
                     x += x / 10;
                     outVal = $"{x,9}  ";
                     SaveGame.Screen.Print(outVal, row, 68);
@@ -521,14 +521,18 @@ internal class Store
         oPtr.Count = size - size * discount / 100;
     }
 
-    public int PriceItem(Item oPtr, int greed, bool trueToMarkDownFalseToMarkUp)
+    public int PriceItem(Item oPtr, bool trueToMarkDownFalseToMarkUp) // TODO: Convert this into markup and markdown methods.
     {
-        int adjust;
         int price = oPtr.Value();
         if (price <= 0)
         {
             return 0;
         }
+
+        int greed = Owner.MinInflate;
+        int adjust;
+
+        // Create a charisma factor that affects the store owner.
         int factor = 100;
         factor += SaveGame.AbilityScores[Ability.Charisma].ChaPriceAdjustment;
         if (trueToMarkDownFalseToMarkUp == true)
@@ -547,6 +551,8 @@ internal class Store
                 adjust = 100;
             }
         }
+
+        // Allow the store to adjust pricing.
         price = StoreFactory.AdjustPrice(price, trueToMarkDownFalseToMarkUp);
         price = (price * adjust + 50) / 100;
         if (price <= 0)

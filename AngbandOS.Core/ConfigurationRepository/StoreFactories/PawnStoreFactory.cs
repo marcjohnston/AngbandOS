@@ -69,11 +69,11 @@ internal class PawnStoreFactory : StoreFactory
     {
         if (trueToMarkDownFalseToMarkUp == true)
         {
-            return price / 3;
+            return price / 3; // Only offer 1/3 of the value of an object.
         }
         else
         {
-            return price / 3;
+            return price / 3; // Sell the item at the same price as it was bought.
         }
     }
     protected override string? AdvertisedStoreCommand4Name => nameof(IdentifyAllStoreCommand);

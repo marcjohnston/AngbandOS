@@ -15,6 +15,10 @@ internal abstract class StoreOwner : IGetKey<string>, IToJson
 {
     protected SaveGame SaveGame { get; }
     public abstract int MaxCost { get; }
+
+    /// <summary>
+    /// Returns the minimum inflation value for this store owner.
+    /// </summary>
     public abstract int MinInflate { get; }
 
     /// <summary>

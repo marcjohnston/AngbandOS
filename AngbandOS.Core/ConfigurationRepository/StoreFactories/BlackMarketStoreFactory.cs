@@ -60,7 +60,7 @@ internal class BlackMarketStoreFactory : StoreFactory
         }
         else
         {
-            return price * 2;
+            return price * 2; // Double the price of all goods being sold.
         }
     }
 
