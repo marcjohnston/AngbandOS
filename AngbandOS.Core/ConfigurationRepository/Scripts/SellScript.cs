@@ -18,12 +18,6 @@ internal class SellScript : Script, IStoreScript
     /// <returns></returns>
     public void ExecuteStoreScript(StoreCommandEvent storeCommandEvent)
     {
-        if (!storeCommandEvent.Store.StoreFactory.StoreBuysItems)
-        {
-            SaveGame.MsgPrint($"I have no interest in acquiring any items.");
-            return;
-        }
-
         int itemPos;
         if (!SaveGame.SelectItem(out Item? oPtr, storeCommandEvent.Store.StoreFactory.SellPrompt, true, true, false, storeCommandEvent.Store.StoreFactory)) // We use the store itself as the ItemFilter because the Store implements IItemFilter.
         {
@@ -60,55 +54,61 @@ internal class SellScript : Script, IStoreScript
             SaveGame.MsgPrint(storeCommandEvent.Store.StoreFactory.StoreFullMessage);
             return;
         }
-
-        SaveGame.MsgPrint($"Selling {oName} ({oPtr.Label}).");
-        SaveGame.MsgPrint(null);
-        bool agreed = SellHaggle(storeCommandEvent.Store, qPtr, out int price);
-        if (agreed)
+        if (storeCommandEvent.Store.StoreFactory.StoreBuysItems)
         {
-            SaveGame.SayComment_1();
-            SaveGame.PlaySound(SoundEffectEnum.StoreTransaction);
-            SaveGame.Gold += price;
-            SaveGame.StorePrtGold();
-            int guess = qPtr.Value() * qPtr.Count;
-            if (storeCommandEvent.Store.StoreFactory.StoreIdentifiesItems)
+            SaveGame.MsgPrint($"Selling {oName} ({oPtr.Label}).");
+            SaveGame.MsgPrint(null);
+            bool choice = SellHaggle(storeCommandEvent.Store, qPtr, out int price);
+            if (!choice)
             {
-                oPtr.BecomeFlavourAware();
-                oPtr.BecomeKnown();
+                SaveGame.SayComment_1();
+                SaveGame.PlaySound(SoundEffectEnum.StoreTransaction);
+                SaveGame.Gold += price;
+                SaveGame.StorePrtGold();
+                int guess = qPtr.Value() * qPtr.Count;
+                if (storeCommandEvent.Store.StoreFactory.StoreIdentifiesItems)
+                {
+                    oPtr.BecomeFlavourAware();
+                    oPtr.BecomeKnown();
+                }
+                SaveGame.SingletonRepository.FlaggedActions.Get(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
+                qPtr = oPtr.Clone();
+                qPtr.Count = amt;
+                int value;
+                if (!storeCommandEvent.Store.StoreFactory.StoreAnalyzesPurchases)
+                {
+                    value = guess;
+                }
+                else
+                {
+                    value = qPtr.Value() * qPtr.Count;
+                    oName = qPtr.Description(true, 3);
+                }
+                SaveGame.MsgPrint($"You {storeCommandEvent.Store.StoreFactory.BoughtVerb} {oName} for {price} gold.");
+                PurchaseAnalyze(price, value, guess);
             }
-            SaveGame.SingletonRepository.FlaggedActions.Get(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
-            qPtr = oPtr.Clone();
-            qPtr.Count = amt;
-            int value;
-            if (!storeCommandEvent.Store.StoreFactory.StoreAnalyzesPurchases)
-            {
-                value = guess;
-            }
-            else
-            {
-                value = qPtr.Value() * qPtr.Count;
-                oName = qPtr.Description(true, 3);
-            }
-            SaveGame.MsgPrint($"You {storeCommandEvent.Store.StoreFactory.BoughtVerb} {oName} for {price} gold.");
-            PurchaseAnalyze(price, value, guess);
+        }
+        else
+        {
+            SaveGame.MsgPrint($"You drop {oName} ({oPtr.Label}).");
+        }
 
-            oPtr.ItemIncrease(-amt);
-            oPtr.ItemDescribe();
-            oPtr.ItemOptimize();
-            SaveGame.HandleStuff();
-            if (storeCommandEvent.Store.StoreFactory.UseHomeCarry)
-            {
-                itemPos = storeCommandEvent.Store.HomeCarry(qPtr);
-            }
-            else
-            {
-                itemPos = storeCommandEvent.Store.StoreCarry(qPtr);
-            }
-            if (itemPos >= 0)
-            {
-                storeCommandEvent.Store.ScrollToItem(itemPos);
-                storeCommandEvent.Store.DisplayInventory();
-            }
+        oPtr.ItemIncrease(-amt);
+        oPtr.ItemDescribe();
+        oPtr.ItemOptimize();
+        SaveGame.HandleStuff();
+        if (storeCommandEvent.Store.StoreFactory.UseHomeCarry)
+        {
+            itemPos = storeCommandEvent.Store.HomeCarry(qPtr);
+        }
+        else
+        {
+            itemPos = storeCommandEvent.Store.StoreCarry(qPtr);
+        }
+        if (itemPos >= 0)
+        {
+            storeCommandEvent.Store.ScrollToItem(itemPos);
+            storeCommandEvent.Store.DisplayInventory();
         }
     }
 
