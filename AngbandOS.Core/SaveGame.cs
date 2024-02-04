@@ -2684,14 +2684,24 @@ internal class SaveGame
         }
     }
 
+    /// <summary>
+    /// Returns the number of regions of width for the island.  Returns 12, by default.
+    /// </summary>
+    public int IslandWidth => 12;
+
+    /// <summary>
+    /// Returns the number of regions of height for the island.  Returns 12, by default.
+    /// </summary>
+    public int IslandHeight => 12;
+
     private void CreateWorld() 
     {
         // Create and initialize the wilderness regions.
-        Wilderness = new WildernessRegion[12][];
-        for (int i = 0; i < 12; i++)
+        Wilderness = new WildernessRegion[IslandHeight][];
+        for (int i = 0; i < IslandHeight; i++)
         {
-            Wilderness[i] = new WildernessRegion[12];
-            for (int j = 0; j < 12; j++)
+            Wilderness[i] = new WildernessRegion[IslandWidth];
+            for (int j = 0; j < IslandWidth; j++)
             {
                 Wilderness[i][j] = new WildernessRegion();
                 Wilderness[i][j].Seed = Rng.RandomLessThan(int.MaxValue);
@@ -2724,8 +2734,8 @@ internal class SaveGame
             while (true)
             {
                 // Choose a wilderness region for the dungeon.
-                int x = Rng.RandomBetween(2, 9);
-                int y = Rng.RandomBetween(2, 9);
+                int x = Rng.RandomBetween(2, IslandWidth - 3);
+                int y = Rng.RandomBetween(2, IslandHeight - 3);
 
                 // Ensure the wilderness doesn't already have a dungeon, and none of the surrounding wildernesses do either.
                 if (Wilderness[y][x].Dungeon == null && Wilderness[y - 1][x].Dungeon == null &&
@@ -2760,8 +2770,8 @@ internal class SaveGame
 
             while (true)
             {
-                int x = Rng.RandomBetween(2, 9);
-                int y = Rng.RandomBetween(2, 9);
+                int x = Rng.RandomBetween(2, IslandWidth - 3);
+                int y = Rng.RandomBetween(2, IslandHeight - 3);
 
                 // Choose a region that doesn't already have a dungeon.
                 if (Wilderness[y][x].Dungeon == null)

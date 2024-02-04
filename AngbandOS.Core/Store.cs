@@ -556,10 +556,6 @@ internal class Store
         return price;
     }
 
-    private void RoomRest()
-    {
-    }
-
     public bool StoreCanAcceptMoreItems(Item oPtr)
     {
         int i;
