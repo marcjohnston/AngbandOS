@@ -15,7 +15,7 @@ internal class ViewRacialHeroesStoreCommand : StoreCommand
 
     public override string Description => "view racial Heroes";
 
-    protected override string[]? ValidStoreNames => new string[] {
+    protected override string[]? ValidStoreFactoryNames => new string[] {
         nameof(HallStoreFactory),
     };
 

@@ -15,7 +15,7 @@ internal class RemoveCurseStoreCommand : StoreCommand
 
     public override string Description => "buy Remove Curse";
 
-    protected override string[]? ValidStoreNames => new string[] {
+    protected override string[]? ValidStoreFactoryNames => new string[] {
         nameof(TempleStoreFactory)
     };
 

@@ -49,14 +49,14 @@ internal abstract class StoreCommand : IGetKey<string>, IToJson
         }
         ExecuteScript = (IStoreScript)script;
 
-        if (ValidStoreNames == null)
+        if (ValidStoreFactoryNames == null)
         {
             ValidStoreFactories = null;
         }
         else
         {
             List<StoreFactory> storeFactoryList = new();
-            foreach (string storeName in ValidStoreNames)
+            foreach (string storeName in ValidStoreFactoryNames)
             {
                 storeFactoryList.Add(SaveGame.SingletonRepository.StoreFactories.Get(storeName));
             }
@@ -76,7 +76,7 @@ internal abstract class StoreCommand : IGetKey<string>, IToJson
     /// <summary>
     /// Returns the names of the store factories that the command is valid in; or null, for all stores.  Returns null, by default.
     /// </summary>
-    protected virtual string[]? ValidStoreNames => null;
+    protected virtual string[]? ValidStoreFactoryNames => null;
 
     protected abstract string ExecuteScriptName { get; }
     private IStoreScript ExecuteScript;
@@ -92,7 +92,7 @@ internal abstract class StoreCommand : IGetKey<string>, IToJson
             Key = Key,
             KeyChar = KeyChar,
             Description = Description,
-            ValidStoreNames = ValidStoreNames,
+            ValidStoreFactoryNames = ValidStoreFactoryNames,
             ExecuteScriptName = ExecuteScriptName
         };
         return JsonSerializer.Serialize(definition);

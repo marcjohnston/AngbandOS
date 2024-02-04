@@ -16,7 +16,7 @@ internal class BuyHouseStoreCommand : StoreCommand
 
     public override string Description => "Buy a house";
 
-    protected override string[]? ValidStoreNames => new string[] {
+    protected override string[]? ValidStoreFactoryNames => new string[] {
         nameof(HallStoreFactory)
     };
 

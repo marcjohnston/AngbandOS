@@ -15,7 +15,7 @@ internal class IdentifyAllStoreCommand : StoreCommand
 
     public override string Description => "Identify all";
 
-    protected override string[]? ValidStoreNames => new string[] {
+    protected override string[]? ValidStoreFactoryNames => new string[] {
         nameof(PawnStoreFactory)
     };
 

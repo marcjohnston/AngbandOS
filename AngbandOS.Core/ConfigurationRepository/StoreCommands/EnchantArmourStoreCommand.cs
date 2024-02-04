@@ -15,7 +15,7 @@ internal class EnchantArmorStoreCommand : StoreCommand
 
     public override string Description => "Enchant your armor";
 
-    protected override string[]? ValidStoreNames => new string[] {
+    protected override string[]? ValidStoreFactoryNames => new string[] {
         nameof(ArmoryStoreFactory)
     };
 

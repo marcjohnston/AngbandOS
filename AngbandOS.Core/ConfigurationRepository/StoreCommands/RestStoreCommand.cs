@@ -16,7 +16,7 @@ internal class RestStoreCommand : StoreCommand
 
     public override string Description => "Rest a while";
 
-    protected override string[]? ValidStoreNames => new string[] {
+    protected override string[]? ValidStoreFactoryNames => new string[] {
         nameof(HomeStoreFactory)
     };
 

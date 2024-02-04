@@ -13,6 +13,6 @@ public class StoreCommandDefinition
     public virtual string Key { get; set; }
     public virtual char KeyChar { get; set; }
     public virtual string Description { get; set; }
-    public virtual string[]? ValidStoreNames { get; set; }
+    public virtual string[]? ValidStoreFactoryNames { get; set; }
     public virtual string ExecuteScriptName { get; set; }
 }

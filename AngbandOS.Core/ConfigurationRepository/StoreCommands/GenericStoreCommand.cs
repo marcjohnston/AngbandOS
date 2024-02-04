@@ -18,13 +18,13 @@ internal class GenericStoreCommand : StoreCommand
         Key = storeCommandDefinition.Key;
         KeyChar = storeCommandDefinition.KeyChar;
         Description = storeCommandDefinition.Description;
-        ValidStoreNames = storeCommandDefinition.ValidStoreNames;
+        ValidStoreFactoryNames = storeCommandDefinition.ValidStoreFactoryNames;
         ExecuteScriptName = storeCommandDefinition.ExecuteScriptName;
     }
 
     public override string Key { get; }
     public override char KeyChar { get; }
     public override string Description { get; }
-    protected override string[]? ValidStoreNames { get; }
+    protected override string[]? ValidStoreFactoryNames { get; }
     protected override string ExecuteScriptName { get; }
 }

@@ -16,7 +16,7 @@ internal class ResearchItemStoreCommand : StoreCommand
 
     public override string Description => "Research an item";
 
-    protected override string[]? ValidStoreNames => new string[] {
+    protected override string[]? ValidStoreFactoryNames => new string[] {
         nameof(MagicStoreFactory)
     };
 

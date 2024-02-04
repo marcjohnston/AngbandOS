@@ -15,7 +15,7 @@ internal class SellStoreCommand : StoreCommand
 
     public override string Description => "Sell an item";
 
-    protected override string[]? ValidStoreNames => new string[] {
+    protected override string[]? ValidStoreFactoryNames => new string[] {
         nameof(AlchemistStoreFactory),
         nameof(ArmoryStoreFactory),
         nameof(BlackMarketStoreFactory),

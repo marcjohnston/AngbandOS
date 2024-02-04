@@ -16,7 +16,7 @@ internal class HireRoomStoreCommand : StoreCommand
 
     public override string Description => "hire a Room";
 
-    protected override string[]? ValidStoreNames => new string[] {
+    protected override string[]? ValidStoreFactoryNames => new string[] {
         nameof(InnStoreFactory)
     };
 

@@ -16,7 +16,7 @@ internal class EnchantWeaponStoreCommand : StoreCommand
 
     public override string Description => "Enchant your weapon";
 
-    protected override string[]? ValidStoreNames => new string[] {
+    protected override string[]? ValidStoreFactoryNames => new string[] {
         nameof(WeaponStoreFactory)
     };
 

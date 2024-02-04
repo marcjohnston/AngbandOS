@@ -15,7 +15,7 @@ internal class SacrificeStoreCommand : StoreCommand
 
     public override string Description => "Sacrifice Item";
 
-    protected override string[]? ValidStoreNames => new string[] {
+    protected override string[]? ValidStoreFactoryNames => new string[] {
         nameof(TempleStoreFactory)
     };
 

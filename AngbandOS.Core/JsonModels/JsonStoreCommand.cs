@@ -14,7 +14,7 @@ internal class JsonStoreCommand : IJsonModel<StoreCommandDefinition>
     public string? Key { get; set; }
     public char? KeyChar { get; set; }
     public string? Description { get; set; }
-    public string[]? ValidStoreNames { get; set; }
+    public string[]? ValidStoreFactoryNames { get; set; }
     public string? ExecuteScriptName { get; set; }
 
     public StoreCommandDefinition? ToDefinition()
@@ -27,7 +27,7 @@ internal class JsonStoreCommand : IJsonModel<StoreCommandDefinition>
             Key = Key,
             KeyChar = KeyChar.Value,
             Description = Description,
-            ValidStoreNames = ValidStoreNames,
+            ValidStoreFactoryNames = ValidStoreFactoryNames,
             ExecuteScriptName = ExecuteScriptName
         };
     }

@@ -18,7 +18,7 @@ internal class ResearchSpellStoreCommand : StoreCommand
 
     public override string Description => "Research a spell";
 
-    protected override string[]? ValidStoreNames => new string[] {
+    protected override string[]? ValidStoreFactoryNames => new string[] {
         nameof(LibraryStoreFactory)
     };
 
