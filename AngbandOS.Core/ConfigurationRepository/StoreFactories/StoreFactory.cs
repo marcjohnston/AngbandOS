@@ -398,12 +398,13 @@ internal abstract class StoreFactory : IItemFilter, IGetKey<string>
     public virtual bool PerformsMaintenanceWhenResting => true;
 
     /// <summary>
-    /// Allows the store factory the option to create an item for the store; or null, if the store should choose from the StoreStockManifests.  The
-    /// black market store will override this method.
+    /// Allows the store factory the option to create a random item using the value as the base level for the item; or null, if the store should 
+    /// choose from the StoreStockManifests.  The black market store will override this method.
     /// </summary>
     /// <param name="store"></param>
     /// <returns></returns>
-    public virtual Item? CreateItem(Store store) => null;
+    public virtual int? LevelForRandomItemCreation => null;
+
     public virtual int MinimumItemValue => 0;
 
     public virtual string NoStockMessage => "I am currently out of stock.";

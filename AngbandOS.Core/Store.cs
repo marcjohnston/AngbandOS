@@ -229,34 +229,50 @@ internal class Store
         }
         for (int tries = 0; tries < 4; tries++)
         {
-            // Allow the factory the option to create an item.  This allows the 
-            Item? newItem = StoreFactory.CreateItem(this);
+            Item? newItem = null;
 
-            // If the factory didn't create the item, then allow the store to create one.
-            if (newItem == null) {
+            // Allow the factory the option to create an item.  This allows the 
+            int? level = StoreFactory.LevelForRandomItemCreation;
+            if (level != null)
+            {
+                level = level.Value + SaveGame.Rng.RandomLessThan(level.Value);
+                ItemFactory? itemFactory = SaveGame.RandomItemType(level.Value, false, false);
+                if (itemFactory == null)
+                {
+                    continue;
+                }
+                newItem = itemFactory.CreateItem();
+            }
+            else
+            {
                 // Pick a random item fctory that will be used to create the item.
                 ItemFactory itemFactory = InventoryFactories[SaveGame.Rng.RandomLessThan(InventoryFactories.Length)];
 
                 // Generate a level for the item.
-                int level = SaveGame.Rng.RandomBetween(1, Constants.StoreObjLevel);
+                level = SaveGame.Rng.RandomBetween(1, Constants.StoreObjLevel);
 
                 // Create the item.
                 newItem = itemFactory.CreateItem();
-
-                // Apply magic to the item.
-                newItem.ApplyMagic(level, false, false, false, this);
             }
 
+                // Apply magic to the item.
+            newItem.ApplyMagic(level.Value, false, false, false, this);
             newItem.BecomeKnown();
             newItem.IdentStoreb = true;
+
+            // Chests cannot be created for stores.
             if (newItem.Category == ItemTypeEnum.Chest)
             {
                 continue;
             }
+
+            // Ensure the item meets the store minimum value.
             if (newItem.Value() < StoreFactory.MinimumItemValue)
             {
                 continue;
             }
+
+            // Success
             MassProduce(newItem);
             StoreCarry(newItem);
             break;

@@ -55,18 +55,10 @@ internal class BlackMarketStoreFactory : StoreFactory
     public override double MarkdownRate => 0.5;
     public override double MarkupRate => 2;
 
-    public override Item? CreateItem(Store store)
-    {
-        int level;
-        level = 35 + SaveGame.Rng.RandomLessThan(35);
-        ItemFactory? itemFactory = SaveGame.RandomItemType(level, false, false);
-        if (itemFactory == null)
-        {
-            return null; ;
-        }
-        Item qPtr = itemFactory.CreateItem();
-        qPtr.ApplyMagic(level, false, false, false, store);
-        return qPtr;
-    }
+    /// <summary>
+    /// Returns 35 as the base level for the black market to create a random item.
+    /// </summary>
+    public override int? LevelForRandomItemCreation => 35;
+
     public override int MinimumItemValue => 110;
 }
