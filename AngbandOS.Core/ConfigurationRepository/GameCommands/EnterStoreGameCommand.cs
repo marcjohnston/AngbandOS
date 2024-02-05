@@ -11,9 +11,9 @@ namespace AngbandOS.Core.Commands;
 /// Enter a store
 /// </summary>
 [Serializable]
-internal class StoreGameCommand : GameCommand
+internal class EnterStoreGameCommand : GameCommand
 {
-    private StoreGameCommand(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private EnterStoreGameCommand(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
     public override char KeyChar => '_';
 
