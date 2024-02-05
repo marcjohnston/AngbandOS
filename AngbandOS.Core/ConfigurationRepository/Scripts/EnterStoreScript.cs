@@ -47,8 +47,6 @@ internal class EnterStoreScript : Script, IScript, IRepeatableScript
         SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RemoveViewFlaggedAction)).Check(true);
         SaveGame.FullScreenOverlay = true;
         SaveGame.CommandArgument = 0;
-        //            CommandRepeat = 0; TODO: Confirm this is not needed
-        SaveGame.QueuedCommand = '\0';
         which.EnterStore();
     }
 }

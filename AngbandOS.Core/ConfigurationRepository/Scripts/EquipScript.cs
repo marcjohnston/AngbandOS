@@ -47,13 +47,13 @@ internal class EquipScript : Script, IScript, IRepeatableScript, IStoreScript
         // Get a command
         string outVal = $"Equipment: carrying {SaveGame.WeightCarried / 10}.{SaveGame.WeightCarried % 10} pounds ({SaveGame.WeightCarried * 100 / (SaveGame.AbilityScores[Ability.Strength].StrCarryingCapacity * 100 / 2)}% of capacity). Command: ";
         SaveGame.Screen.PrintLine(outVal, 0, 0);
-        SaveGame.QueuedCommand = SaveGame.Inkey();
+        char c = SaveGame.Inkey();
         SaveGame.Screen.Restore(savedScreen);
 
         // Display details if the player wants
-        if (SaveGame.QueuedCommand == '\x1b')
+        if (c != '\x1b')
         {
-            SaveGame.QueuedCommand = (char)0;
+            SaveGame._artificialKeyBuffer += c;
         }
         else
         {

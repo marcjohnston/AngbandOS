@@ -154,8 +154,7 @@ internal class SaveGame
     public bool HideCursorOnFullScreenInkey;
 
     public bool InPopupMenu;
-    public char QueuedCommand;
-    /// DISPLAY
+
     public char[] KeyQueue;
 
     [Obsolete("Use KeyQueue.length")]
@@ -168,12 +167,11 @@ internal class SaveGame
 
     public int KeyHead = 0;
     public int KeyTail = 0;
-    /// DISPLAY
 
     /// <summary>
     /// A buffer of artificial keypresses.  Keys in this buffer will be read from by the Inkey method before the keyboard queue is read.
     /// </summary>
-    private string _artificialKeyBuffer = "";
+    public string _artificialKeyBuffer = "";
 
     private string[][] _keymapAct;
 
@@ -2882,7 +2880,6 @@ internal class SaveGame
         NewLevelFlag = false;
         HackMind = false;
         CurrentCommand = (char)0;
-        QueuedCommand = (char)0;
         CommandRepeat = 0;
         CommandArgument = 0;
         CommandDirection = 0;
@@ -3317,10 +3314,6 @@ internal class SaveGame
                 UpdateStuff();
                 RedrawStuff();
             }
-            if (QueuedCommand == 0)
-            {
-                ViewingItemList = false;
-            }
             EnergyUse = 0;
             if (TimedParalysis.TurnsRemaining != 0 || TimedStun.TurnsRemaining >= 100)
             {
@@ -3344,7 +3337,6 @@ internal class SaveGame
                 CommandRepeat--;
                 SingletonRepository.FlaggedActions.Get(nameof(RedrawStateFlaggedAction)).Set();
                 RedrawStuff();
-                //MessageAppendNextMessage = false;
                 Screen.PrintLine("", 0, 0);
                 ProcessCommand(true);
             }
@@ -7613,7 +7605,7 @@ internal class SaveGame
         if (tile.FeatureType.IsShop)
         {
             Disturb(false);
-            QueuedCommand = '_';
+            _artificialKeyBuffer += SingletonRepository.GameCommands.Get(nameof(EnterStoreGameCommand)).KeyChar;
         }
         // If we've just stepped on an unknown trap then activate it
         else if (tile.FeatureType.Name == "Invis")
@@ -9913,18 +9905,8 @@ internal class SaveGame
         while (!Shutdown)
         {
             char cmd;
-            if (QueuedCommand != 0)
-            {
-                MsgPrint(null);
-                cmd = QueuedCommand;
-                QueuedCommand = (char)0;
-            }
-            else
-            {
-                //MessageAppendNextMessage = false;
-                HideCursorOnFullScreenInkey = true;
-                cmd = Inkey();
-            }
+            HideCursorOnFullScreenInkey = true;
+            cmd = Inkey();
             Screen.PrintLine("", 0, 0);
             if (cmd == '0')
             {

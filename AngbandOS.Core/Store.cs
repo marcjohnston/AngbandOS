@@ -691,7 +691,6 @@ internal class Store
         }
         SaveGame.EnergyUse = 0;
         SaveGame.FullScreenOverlay = false;
-        SaveGame.QueuedCommand = '\0';
         SaveGame.ViewingItemList = false;
         SaveGame.MsgPrint(null); // TODO: This is a PrWipeRedrawAction
         SaveGame.Screen.Clear();// TODO: This is a PrWipeRedrawAction

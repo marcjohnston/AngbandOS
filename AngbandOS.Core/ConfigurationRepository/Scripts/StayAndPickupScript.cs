@@ -45,7 +45,7 @@ internal class StayAndPickupScript : Script, IScript, IRepeatableScript
         if (tile.FeatureType.IsShop)
         {
             SaveGame.Disturb(false);
-            SaveGame.QueuedCommand = '_';
+            SaveGame._artificialKeyBuffer += SaveGame.SingletonRepository.GameCommands.Get(nameof(EnterStoreGameCommand)).KeyChar;
         }
     }
 }
