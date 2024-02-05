@@ -2298,6 +2298,10 @@ internal class SaveGame
                         {
                             k = equipment.Count == 1 ? equipment[0] : -1;
                         }
+                        if (k < 0)
+                        {
+                            break;
+                        }
                         Item? oPtr = GetInventoryItem(k);
                         if (!GetItemOkay(oPtr, itemFilter))
                         {
@@ -10352,7 +10356,7 @@ internal class SaveGame
             item.Count = (char)Rng.RandomBetween(2, 5);
             item.BecomeFlavourAware();
             item.BecomeKnown();
-            item.IdentStoreb = true;
+            item.IdentityIsStoreBought = true;
             InvenCarry(item);
         }
         else
@@ -10371,7 +10375,7 @@ internal class SaveGame
             item.Count = Rng.RandomBetween(3, 7);
             item.BecomeFlavourAware();
             item.BecomeKnown();
-            item.IdentStoreb = true;
+            item.IdentityIsStoreBought = true;
             InvenCarry(item);
         }
         else

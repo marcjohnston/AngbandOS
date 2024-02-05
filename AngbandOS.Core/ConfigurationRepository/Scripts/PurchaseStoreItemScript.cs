@@ -95,10 +95,10 @@ internal class PurchaseStoreItemScript : Script, IStoreScript
                     SaveGame.PlaySound(SoundEffectEnum.StoreTransaction);
                     SaveGame.Gold -= price;
                     SaveGame.StorePrtGold();
-                    //if (storeCommandEvent.Store.StoreFactory.StoreIdentifiesItems)
-                    //{
-                    //    jPtr.BecomeFlavourAware();
-                    //}
+                    if (storeCommandEvent.Store.StoreFactory.StoreIdentifiesItems)
+                    {
+                        jPtr.BecomeFlavourAware();
+                    }
                     jPtr.IdentFixed = false;
                     oName = jPtr.Description(true, 3);
                     

@@ -262,7 +262,7 @@ internal class Store
                 // Apply magic to the item.
             newItem.ApplyMagic(level.Value, false, false, false, this);
             newItem.BecomeKnown();
-            newItem.IdentStoreb = true;
+            newItem.IdentityIsStoreBought = true;
 
             // Chests cannot be created for stores.
             if (newItem.Category == ItemTypeEnum.Chest)

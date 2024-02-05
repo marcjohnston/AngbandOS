@@ -36,9 +36,11 @@ internal sealed class Item : IComparable<Item>
     public bool IdentKnown;
 
     /// <summary>
-    /// This property used to be a flag in the IdentifyFlags.
+    /// Returns true, if the identity of the item was provided because the item was bought from the store.  This property is used to hide the
+    /// flavour name when flavoured items are bought from the store.  This prevents the player from learning the flavour by simply buying the item
+    /// from the store.  This property used to be a flag in the IdentifyFlags.
     /// </summary>
-    public bool IdentStoreb;
+    public bool IdentityIsStoreBought;
 
     /// <summary>
     /// This property used to be a flag in the IdentifyFlags.  Do we know anything about the item.
@@ -427,7 +429,7 @@ internal sealed class Item : IComparable<Item>
         clonedItem.IdentFixed = IdentFixed;
         clonedItem.IdentEmpty = IdentEmpty;
         clonedItem.IdentKnown = IdentKnown;
-        clonedItem.IdentStoreb = IdentStoreb;
+        clonedItem.IdentityIsStoreBought = IdentityIsStoreBought;
         clonedItem.IdentMental = IdentMental;
         clonedItem.IdentCursed = IdentCursed;
         clonedItem.IdentBroken = IdentBroken;
@@ -463,17 +465,9 @@ internal sealed class Item : IComparable<Item>
         {
             BecomeKnown();
         }
-        if (IdentStoreb || (other.IdentStoreb &&
-            !(IdentStoreb && other.IdentStoreb)))
+        if (!IdentityIsStoreBought || !other.IdentityIsStoreBought)
         {
-            if (other.IdentStoreb)
-            {
-                other.IdentStoreb = false;
-            }
-            if (IdentStoreb)
-            {
-                IdentStoreb = false;
-            }
+            other.IdentityIsStoreBought = false;
         }
         if (other.IdentMental)
         {
@@ -2419,7 +2413,7 @@ internal sealed class Item : IComparable<Item>
         if (fromScroll)
         {
             IdentifyFully();
-            IdentStoreb = true;
+            IdentityIsStoreBought = true;
             if (!SaveGame.GetString("What do you want to call the artifact? ", out string dummyName, "(a DIY artifact)", 80))
             {
                 newName = "(a DIY artifact)";

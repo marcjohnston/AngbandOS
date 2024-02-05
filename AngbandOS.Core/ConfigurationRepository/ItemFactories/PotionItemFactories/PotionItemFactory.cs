@@ -20,7 +20,7 @@ internal abstract class PotionItemFactory : ItemFactory, IFlavour
 
     public override string GetDescription(Item item, bool includeCountPrefix, bool isFlavourAware)
     {
-        string flavour = item.IdentStoreb ? "" : $"{FlavourFactory.Flavor.Name} ";
+        string flavour = item.IdentityIsStoreBought ? "" : $"{FlavourFactory.Flavor.Name} ";
         string ofName = isFlavourAware ? $" of {FriendlyName}" : "";
         string name = $"{flavour}{Pluralize("Potion", item.Count)}{ofName}";
         return includeCountPrefix ? GetPrefixCount(true, name, item.Count, item.IsKnownArtifact) : name;
