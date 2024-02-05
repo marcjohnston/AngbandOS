@@ -36,9 +36,7 @@ internal class PawnStoreFactory : StoreFactory
         nameof(AdirathTheUnmagicalStoreOwner)
     };
 
-    public override string FeatureType => "Pawnbrokers";
-    public override ColorEnum Color => ColorEnum.Turquoise;
-    protected override string SymbolName => nameof(NumberZeroSymbol);
+    protected override string TileName => nameof(PawnStoreTile);
 
     /// <summary>
     /// Returns the name of the item matching criteria for any items of value.

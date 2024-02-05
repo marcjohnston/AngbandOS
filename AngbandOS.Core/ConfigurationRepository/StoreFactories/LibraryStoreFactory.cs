@@ -40,9 +40,7 @@ internal class LibraryStoreFactory : StoreFactory
         nameof(IsungTheLordStoreOwner)
     };
 
-    public override string FeatureType => "Bookstore";
-    public override ColorEnum Color => ColorEnum.Orange;
-    protected override string SymbolName => nameof(NumberNineSymbol);
+    protected override string TileName => nameof(LibraryStoreTile);
 
     protected override StoreStockManifestDefinition[]? StoreStockManifestDefinitions => new[]
     {

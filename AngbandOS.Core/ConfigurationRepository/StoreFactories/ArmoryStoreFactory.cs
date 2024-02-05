@@ -40,9 +40,7 @@ internal class ArmoryStoreFactory : StoreFactory
         nameof(ZzathathTheImpStoreOwner)
     };
 
-    public override string FeatureType => "Armory";
-    public override ColorEnum Color => ColorEnum.Grey;
-    protected override string SymbolName => nameof(NumberTwoSymbol);
+    protected override string TileName => nameof(ArmoryStoreTile);
 
     protected override StoreStockManifestDefinition[]? StoreStockManifestDefinitions => new[]
     {

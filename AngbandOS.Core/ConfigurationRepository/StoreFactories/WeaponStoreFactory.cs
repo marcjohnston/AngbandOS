@@ -40,9 +40,7 @@ internal partial class WeaponStoreFactory : StoreFactory
         nameof(BalennWarDancerStoreOwner)
     };
 
-    public override string FeatureType => "Weaponsmiths";
-    public override ColorEnum Color => ColorEnum.White;
-    protected override string SymbolName => nameof(NumberThreeSymbol);
+    protected override string TileName => nameof(WeaponsmithStoreTile);
 
     protected override StoreStockManifestDefinition[]? StoreStockManifestDefinitions => new[]
     {

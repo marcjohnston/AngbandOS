@@ -24,7 +24,11 @@ internal abstract class Tile : IGetKey<string>
     /// </summary>
     public abstract Symbol Symbol { get; }
 
+    /// <summary>
+    /// Returns the color to render the tile as.  Returns white, by default.
+    /// </summary>
     public virtual ColorEnum Color => ColorEnum.White;
+
     public abstract string Name { get; }
 
     /// <summary>

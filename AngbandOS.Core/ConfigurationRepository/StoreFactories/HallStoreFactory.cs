@@ -17,10 +17,7 @@ internal class HallStoreFactory : StoreFactory
         nameof(HallOfRecordsStoreOwner)
     };
 
-    public override string FeatureType => "HallOfRecords";
-    public override ColorEnum Color => ColorEnum.Yellow;
-    protected override string SymbolName => nameof(NumberEightSymbol);
-    public override string Description => "Hall of Records";
+    protected override string TileName => nameof(HallStoreTile);
 
     /// <summary>
     /// Returns an empty array of item criteria names because the hall doesn't buy items.

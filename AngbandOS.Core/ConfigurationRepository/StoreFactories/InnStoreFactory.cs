@@ -44,9 +44,7 @@ internal class InnStoreFactory : StoreFactory
         nameof(SevirasTheMindcrafterStoreOwner)
     };
 
-    public override string FeatureType => "Inn";
-    public override ColorEnum Color => ColorEnum.Purple;
-    protected override string SymbolName => nameof(AmpersandSymbol);
+    protected override string TileName => nameof(InnStoreTile);
 
     /// <summary>
     /// Returns an empty array of item criteria names because the inn doesn't buy items.

@@ -36,10 +36,7 @@ internal partial class AlchemistStoreFactory : StoreFactory
         nameof(DridashTheAlchemistStoreOwner)
     };
 
-    public override string FeatureType => "Alchemist";
-    public override ColorEnum Color => ColorEnum.Blue;
-    protected override string SymbolName => nameof(NumberFiveSymbol);
-    public override string Description => "Alchemy Shop";
+    protected override string TileName => nameof(AlchemistStoreTile);
 
     protected override StoreStockManifestDefinition[]? StoreStockManifestDefinitions => new[]
     {

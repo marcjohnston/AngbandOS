@@ -40,10 +40,7 @@ internal class MagicStoreFactory : StoreFactory
         nameof(HetoTheNecromancerStoreOwner)
     };
 
-    public override string FeatureType => "MagicShop";
-    public override ColorEnum Color => ColorEnum.Red;
-    protected override string SymbolName => nameof(NumberSixSymbol);
-    public override string Description => "Magic Shop";
+    protected override string TileName => nameof(MagicStoreTile);
 
     protected override StoreStockManifestDefinition[]? StoreStockManifestDefinitions => new[]
     {

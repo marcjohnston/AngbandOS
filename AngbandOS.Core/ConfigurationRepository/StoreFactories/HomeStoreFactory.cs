@@ -18,9 +18,7 @@ internal class HomeStoreFactory : StoreFactory
         nameof(YourHomeStoreOwner)
     };
 
-    public override string FeatureType => "Home";
-    public override ColorEnum Color => ColorEnum.Pink;
-    protected override string SymbolName => nameof(AtSymbol);
+    protected override string TileName => nameof(HomeStoreTile);
 
     /// <summary>
     /// Returns the name of the item matching criteria for all items of any value.

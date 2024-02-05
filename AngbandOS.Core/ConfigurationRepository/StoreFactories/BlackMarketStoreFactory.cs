@@ -15,10 +15,7 @@ internal class BlackMarketStoreFactory : StoreFactory
     public override int MaxInventory => 78; // Should be 18
     public override int MinInventory => 36; // Should be 6
     public override int StoreTurnover => 5;
-    public override string FeatureType => "BlackMarket";
-    public override ColorEnum Color => ColorEnum.Black;
-    protected override string SymbolName => nameof(NumberSevenSymbol);
-    public override string Description => "Black Market";
+    protected override string TileName => nameof(BlackMarketStoreTile);
 
     protected override string[] StoreOwnerNames => new string[]
     {

@@ -61,8 +61,6 @@ internal class Store
     /// </summary>
     public int StoreTop { get; private set; }
 
-    public StoreFloorTile CreateFloorTileType() => new StoreFloorTile(SaveGame, StoreFactory.Symbol, StoreFactory.Color, StoreFactory.FeatureType, StoreFactory.FeatureType, StoreFactory.Description);
-
     public bool DoorsLocked() => StoreFactory.DoorsLocked();
 
     public void MoveInventoryToAnotherStore(Store newStore)
@@ -71,8 +69,6 @@ internal class Store
         newStore.StoreInventoryList.AddRange(StoreInventoryList);
         StoreInventoryList.Clear();
     }
-
-    public string FeatureType => StoreFactory.FeatureType;
 
     public void ScrollInventory(int count)
     {
@@ -714,7 +710,7 @@ internal class Store
             string? storeName = StoreFactory.Title;
             if (storeName == null)
             {
-                storeName = SaveGame.SingletonRepository.Tiles.Get(StoreFactory.FeatureType).Description;
+                storeName = SaveGame.SingletonRepository.Tiles.Get(StoreFactory.Tile.Name).Description;
                 storeName = $"{storeName} ({Owner.MaxCost})";
             }
             return storeName;

@@ -38,7 +38,7 @@ internal abstract class StoreFactory : IItemFilter, IGetKey<string>
         StoreOwners = storeOwnersList.ToArray();
 
         // Bind the symbol.
-        Symbol = SaveGame.SingletonRepository.Symbols.Get(SymbolName);
+        Tile = SaveGame.SingletonRepository.Tiles.Get(TileName);
 
         // Bind the item filters.
         List<ItemFilter> itemFilters = new();
@@ -170,8 +170,6 @@ internal abstract class StoreFactory : IItemFilter, IGetKey<string>
 
     protected virtual StoreStockManifestDefinition[]? StoreStockManifestDefinitions => null;
 
-    public abstract string FeatureType { get; }
-
     /// <summary>
     /// Returns whether or not the store should occasionally change the owner and put items on sale.  When true, which is by default, the store will
     /// automatically perform this shuffling.
@@ -246,18 +244,11 @@ internal abstract class StoreFactory : IItemFilter, IGetKey<string>
     public virtual bool RenderWeightUnitOfMeasurement => false;
 
     /// <summary>
-    /// The symbol to use for rendering.
+    /// The tile to use for for the door.
     /// </summary>
-    public Symbol Symbol { get; private set; }
+    public Tile Tile { get; private set; }
 
-    protected abstract string SymbolName { get; }
-
-    public abstract ColorEnum Color { get; }
-
-    /// <summary>
-    /// Returns a description of the store.   By default, the feature type is returned.
-    /// </summary>
-    public virtual string Description => FeatureType;
+    protected abstract string TileName { get; }
 
     /// <summary>
     /// Returns true, if the items should render as flavour aware; false, otherwise.  Stores will render their items as flavour aware.  The flavour

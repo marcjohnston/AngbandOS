@@ -12,9 +12,7 @@ internal partial class TempleStoreFactory : StoreFactory
 {
     private TempleStoreFactory(SaveGame saveGame) : base(saveGame) { }
 
-    public override string FeatureType => "Temple";
-    public override ColorEnum Color => ColorEnum.Green;
-    protected override string SymbolName => nameof(NumberFourSymbol);
+    protected override string TileName => nameof(TempleStoreTile);
 
     protected override string[] StoreOwnerNames => new string[]
     {

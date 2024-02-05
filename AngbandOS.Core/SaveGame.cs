@@ -11272,12 +11272,6 @@ internal class SaveGame
         int y, x;
         GridTile cPtr;
 
-        StoreFloorTile storeFloorTileType = store.CreateFloorTileType();
-        if (!SingletonRepository.Tiles.Contains(storeFloorTileType))
-        {
-            SingletonRepository.Tiles.Add(storeFloorTileType);
-        }
-
         if (store.StoreFactory.IsEmptyLot)
         {
             switch (Rng.DieRoll(10))
@@ -11354,7 +11348,7 @@ internal class SaveGame
         }
         else
         {
-            cPtr.SetFeature(store.FeatureType);
+            cPtr.SetFeature(store.StoreFactory.Tile.Name);
         }
         store.SetLocation(x, y);
         for (++y; y < y0 + 7; y++)

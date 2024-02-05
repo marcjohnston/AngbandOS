@@ -17,9 +17,7 @@ internal class AbandonedStoreFactory : StoreFactory
         nameof(EmptyLotStoreOwner)
     };
 
-    public override string FeatureType => "";
-    public override ColorEnum Color => ColorEnum.White;
-    protected override string SymbolName => nameof(SpaceBarSymbol);
+    protected override string TileName => nameof(EmptyLotStoreTile);
     public override bool BuildingsMadeFromPermanentRock => false;
     public override bool StoreEntranceDoorsAreBlownOff => true;
 
