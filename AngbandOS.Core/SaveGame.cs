@@ -922,7 +922,7 @@ internal class SaveGame
         int messageLength = string.IsNullOrEmpty(msg) ? 0 : msg.Length;
         if (MessageXCursorPos != 0 && (string.IsNullOrEmpty(msg) || MessageXCursorPos + messageLength > 72))
         {
-            MsgFlush(MessageXCursorPos);
+            ShowMorePrompt(MessageXCursorPos);
             //MessageAppendNextMessage = false;
             MessageXCursorPos = 0;
         }
@@ -955,7 +955,7 @@ internal class SaveGame
                 }
             }
             Screen.Print(ColorEnum.White, t.Substring(0, split), 0, 0);
-            MsgFlush(split + 1);
+            ShowMorePrompt(split + 1);
             t = t.Substring(split);
             messageLength -= split;
         }
@@ -968,7 +968,7 @@ internal class SaveGame
     /// Renders the -more- prompt and clears the key input buffer.
     /// </summary>
     /// <param name="cursorXPosition"></param>
-    private void MsgFlush(int cursorXPosition)
+    private void ShowMorePrompt(int cursorXPosition)
     {
         Screen.Print(ColorEnum.BrightBlue, "-more-", 0, cursorXPosition);
         while (!Shutdown)
@@ -9748,6 +9748,7 @@ internal class SaveGame
         {
             ch = _artificialKeyBuffer[0];
             _artificialKeyBuffer = _artificialKeyBuffer.Remove(0, 1);
+            HideCursorOnFullScreenInkey = false;
             HideCursorOnFullScreenInkey = false;
             return ch;
         }
