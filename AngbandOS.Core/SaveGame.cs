@@ -7387,8 +7387,7 @@ internal class SaveGame
         {
             Disturb(false);
             // If we can't see it and haven't memories it, tell us what we bumped into
-            if (tile.TileFlags.IsClear(GridTile.PlayerMemorized) &&
-                (TimedBlindness.TurnsRemaining != 0 || tile.TileFlags.IsClear(GridTile.PlayerLit)))
+            if (tile.TileFlags.IsClear(GridTile.PlayerMemorized) && (TimedBlindness.TurnsRemaining != 0 || tile.TileFlags.IsClear(GridTile.PlayerLit)))
             {
                 if (tile.FeatureType.Name == "Rubble")
                 {
@@ -7538,7 +7537,7 @@ internal class SaveGame
                 // If we can see that we're walking into a closed door, try to open it
                 else if (tile.FeatureType.IsClosedDoor)
                 {
-                    if (EasyOpenDoor(newY, newX))
+                    if (OpenDoor(newY, newX))
                     {
                         return;
                     }
@@ -7621,76 +7620,6 @@ internal class SaveGame
             Disturb(false);
             StepOnTrap();
         }
-    }
-
-
-    /// <summary>
-    /// Open a door at a given location
-    /// </summary>
-    /// <param name="y"> The y coordinate of the location </param>
-    /// <param name="x"> The x coordinate of the location </param>
-    /// <returns>True if the command can be repeated; false, if the command succeeds or is futile.</returns>
-    public bool OpenDoor(int y, int x)
-    {
-        bool more = false;
-        // Opening a door takes an action
-        EnergyUse = 100;
-        GridTile tile = Grid[y][x];
-        // Some doors are simply jammed
-        if (tile.FeatureType.Name.Contains("Jammed"))
-        {
-            MsgPrint("The door appears to be stuck.");
-        }
-        // Some doors are locked
-        else if (tile.FeatureType.Name != "LockedDoor0")
-        {
-            // Our disarm traps skill doubles up as a lockpicking skill
-            int i = SkillDisarmTraps;
-            // Hard to pick locks when you can't see
-            if (TimedBlindness.TurnsRemaining != 0 || NoLight())
-            {
-                i /= 10;
-            }
-            // Hard to pick locks when you're confused or hallucinating
-            if (TimedConfusion.TurnsRemaining != 0 || TimedHallucinations.TurnsRemaining != 0)
-            {
-                i /= 10;
-            }
-            // Work out the difficulty from the feature name
-            int j = int.Parse(tile.FeatureType.Name.Substring(10));
-            j = i - (j * 4);
-            if (j < 2)
-            {
-                j = 2;
-            }
-            // Check if we succeeded in opening it
-            if (Rng.RandomLessThan(100) < j)
-            {
-                MsgPrint("You have picked the lock.");
-                CaveSetFeat(y, x, "OpenDoor");
-                SingletonRepository.FlaggedActions.Get(nameof(UpdateMonstersFlaggedAction)).Set();
-                SingletonRepository.FlaggedActions.Get(nameof(UpdateLightFlaggedAction)).Set();
-                SingletonRepository.FlaggedActions.Get(nameof(UpdateViewFlaggedAction)).Set();
-                PlaySound(SoundEffectEnum.LockpickSuccess);
-                // Picking a lock gains you an experience point
-                GainExperience(1);
-            }
-            else
-            {
-                MsgPrint("You failed to pick the lock.");
-                more = true;
-            }
-        }
-        // If the door wasn't locked, simply open it
-        else
-        {
-            CaveSetFeat(y, x, "OpenDoor");
-            SingletonRepository.FlaggedActions.Get(nameof(UpdateMonstersFlaggedAction)).Set();
-            SingletonRepository.FlaggedActions.Get(nameof(UpdateLightFlaggedAction)).Set();
-            SingletonRepository.FlaggedActions.Get(nameof(UpdateViewFlaggedAction)).Set();
-            PlaySound(SoundEffectEnum.OpenDoor);
-        }
-        return more;
     }
 
     /// <summary>
@@ -8851,26 +8780,22 @@ internal class SaveGame
     }
 
     /// <summary>
-    /// React to having walked into a door by trying to open it
+    /// Open a door at a given location
     /// </summary>
     /// <param name="y"> The y coordinate of the door tile </param>
     /// <param name="x"> The x coordinate of the door tile </param>
     /// <returns> True if we opened it, false otherwise </returns>
-    private bool EasyOpenDoor(int y, int x)
+    public bool OpenDoor(int y, int x)
     {
         GridTile tile = Grid[y][x];
-        // If it isn't closed, we can't open it
-        if (!tile.FeatureType.IsClosedDoor)
-        {
-            return false;
-        }
+
         // If it's jammed we'll need to bash it
         if (tile.FeatureType.Name.Contains("Jammed"))
         {
             MsgPrint("The door appears to be stuck.");
         }
         // Most doors are locked, so try to pick the lock
-        else if (!tile.FeatureType.Name.Contains("0"))
+        else if (tile.FeatureType.Name != "LockedDoor0") // LockedDoor0 is really a closed door
         {
             int skill = SkillDisarmTraps;
             // Lockpicking is hard in the dark
@@ -8904,6 +8829,7 @@ internal class SaveGame
             else
             {
                 MsgPrint("You failed to pick the lock.");
+                return true;
             }
         }
         // It wasn't locked, so simply open it
@@ -8915,7 +8841,7 @@ internal class SaveGame
             SingletonRepository.FlaggedActions.Get(nameof(UpdateViewFlaggedAction)).Set();
             PlaySound(SoundEffectEnum.OpenDoor);
         }
-        return true;
+        return false;
     }
 
     /// <summary>
