@@ -425,7 +425,11 @@ internal abstract class StoreFactory : IItemFilter, IGetKey<string>
     /// </summary>
     public virtual bool StoreSellsItems => true;
 
-    public virtual string BoughtMessage(string oName, int price) => $"You bought {oName} for {price} gold.";
+    /// <summary>
+    /// Returns true, if the store indicates that the player bought "back" the item.  False, otherwise.  Returns false, by default.  The pawnbroker
+    /// store returns true.
+    /// </summary>
+    public virtual bool BoughtMessageAsBoughtBack => false;
 
     public virtual string SellPrompt => "Sell which item? ";
     public virtual string StoreFullMessage => "I have not the room in my Stores to keep it.";

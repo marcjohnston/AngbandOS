@@ -101,7 +101,15 @@ internal class PurchaseStoreItemScript : Script, IStoreScript
                     //}
                     jPtr.IdentFixed = false;
                     oName = jPtr.Description(true, 3);
-                    SaveGame.MsgPrint(storeCommandEvent.Store.StoreFactory.BoughtMessage(oName, price));
+                    
+                    if (storeCommandEvent.Store.StoreFactory.BoughtMessageAsBoughtBack)
+                    {
+                        SaveGame.MsgPrint($"You bought back {oName} for {price} gold.");
+                    }
+                    else
+                    {
+                        SaveGame.MsgPrint($"You bought {oName} for {price} gold.");
+                    }
                     jPtr.Inscription = "";
                     itemNew = SaveGame.InvenCarry(jPtr);
                     Item? newItemInInventory = SaveGame.GetInventoryItem(itemNew);

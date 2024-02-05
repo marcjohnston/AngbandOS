@@ -79,6 +79,5 @@ internal class PawnStoreFactory : StoreFactory
     public override bool StoreAnalyzesPurchases => false;
     public override bool PerformsMaintenanceWhenResting => false;
     public override bool UseHomeCarry => true;
-    public override string BoughtMessage(string oName, int price) => $"You bought back {oName} for {price} gold.";
-
+    public override bool BoughtMessageAsBoughtBack => true;
 }
