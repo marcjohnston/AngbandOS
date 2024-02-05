@@ -171,12 +171,11 @@ internal class SaveGame
     /// DISPLAY
 
     /// <summary>
-    /// A buffer of artificial keypresses
+    /// A buffer of artificial keypresses.  Keys in this buffer will be read from by the Inkey method before the keyboard queue is read.
     /// </summary>
-    private string _keyBuffer;
+    private string _artificialKeyBuffer = "";
 
     private string[][] _keymapAct;
-    private string _requestCommandBuffer;
 
     /// <summary>
     /// Returns true, if the parent is requesting the game to shut down immediately.  Returns false, by default.
@@ -9827,14 +9826,13 @@ internal class SaveGame
     public char Inkey(bool doNotWaitOnInkey = false) // TODO: Change the signature to return null when Shutdown == true
     {
         char ch = '\0';
-        if (!string.IsNullOrEmpty(_keyBuffer))
+        if (_artificialKeyBuffer.Length > 0)
         {
-            ch = _keyBuffer[0];
-            _keyBuffer = _keyBuffer.Remove(0, 1);
+            ch = _artificialKeyBuffer[0];
+            _artificialKeyBuffer = _artificialKeyBuffer.Remove(0, 1);
             HideCursorOnFullScreenInkey = false;
             return ch;
         }
-        _keyBuffer = null;
         bool v = Screen.CursorVisible;
         if (!doNotWaitOnInkey && (!HideCursorOnFullScreenInkey || FullScreenOverlay))
         {
@@ -9980,16 +9978,11 @@ internal class SaveGame
             if (cmd == '\\')
             {
                 GetCom("Command: ", out cmd);
-                if (string.IsNullOrEmpty(_keyBuffer))
-                {
-                    _keyBuffer = "";
-                }
             }
             string act = _keymapAct[mode][cmd];
-            if (!string.IsNullOrEmpty(act) && _keyBuffer == null)
+            if (!string.IsNullOrEmpty(act) && _artificialKeyBuffer.Length == 0)
             {
-                _requestCommandBuffer = act;
-                _keyBuffer = _requestCommandBuffer;
+                _artificialKeyBuffer = act;
                 continue;
             }
             if (cmd == 0)
