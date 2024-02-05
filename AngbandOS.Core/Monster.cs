@@ -984,7 +984,7 @@ internal class Monster : IItemContainer
             // If we're trying to move onto the player, then attack them instead
             if (doMove && newY == SaveGame.MapY && newX == SaveGame.MapX)
             {
-                MonsterAttackPlayer(SaveGame);
+                MonsterAttackPlayer();
                 doMove = false;
                 doTurn = true;
             }
@@ -2678,7 +2678,7 @@ internal class Monster : IItemContainer
     /// Have a monster make an attack on the player
     /// </summary>
     /// <param name="monsterIndex"> The index of the monster making the attack </param>
-    public void MonsterAttackPlayer(SaveGame saveGame)
+    public void MonsterAttackPlayer()
     {
         int attackNumber;
         bool touched = false;
@@ -2695,7 +2695,7 @@ internal class Monster : IItemContainer
             return;
         }
 
-        int armorClass = saveGame.BaseArmorClass + saveGame.ArmorClassBonus;
+        int armorClass = SaveGame.BaseArmorClass + SaveGame.ArmorClassBonus;
         int monsterLevel = Race.Level >= 1 ? Race.Level : 1;
         string monsterName = Name;
         string monsterDescription = IndefiniteVisibleName;
@@ -2713,7 +2713,7 @@ internal class Monster : IItemContainer
             int damageSides = Race.Attacks[attackNumber].DSide;
 
             // Stop if player is dead or gone
-            if (!alive || saveGame.IsDead || saveGame.NewLevelFlag)
+            if (!alive || SaveGame.IsDead || SaveGame.NewLevelFlag)
             {
                 break;
             }
@@ -2728,18 +2728,18 @@ internal class Monster : IItemContainer
             }
                 
             // Check if the monster actually hits us
-            if (effect == null || MonsterCheckHitOnPlayer(SaveGame, power, monsterLevel))
+            if (effect == null || MonsterCheckHitOnPlayer(this.SaveGame, power, monsterLevel))
             {
-                saveGame.Disturb(true);
+                SaveGame.Disturb(true);
                 // Protection From Evil might repel the attack
-                if (saveGame.TimedProtectionFromEvil.TurnsRemaining > 0 && Race.Evil && saveGame.ExperienceLevel >= monsterLevel && SaveGame.Rng.RandomLessThan(100) + saveGame.ExperienceLevel > 50)
+                if (SaveGame.TimedProtectionFromEvil.TurnsRemaining > 0 && Race.Evil && SaveGame.ExperienceLevel >= monsterLevel && this.SaveGame.Rng.RandomLessThan(100) + SaveGame.ExperienceLevel > 50)
                 {
                     if (IsVisible)
                     {
                         // If it does, then they player knows the monster is evil
                         Race.Knowledge.Characteristics.Evil = true;
                     }
-                    saveGame.MsgPrint($"{monsterName} is repelled.");
+                    SaveGame.MsgPrint($"{monsterName} is repelled.");
                     continue;
                 }
 
@@ -2747,11 +2747,11 @@ internal class Monster : IItemContainer
                 string action = method.PlayerAction;
                 if (!string.IsNullOrEmpty(action))
                 {
-                    saveGame.MsgPrint($"{monsterName} {action}.");
+                    SaveGame.MsgPrint($"{monsterName} {action}.");
                 }
                 obvious = true;
                 // Work out base damage done by the attack
-                damage = SaveGame.Rng.DiceRoll(damageDice, damageSides);
+                damage = this.SaveGame.Rng.DiceRoll(damageDice, damageSides);
                 // Apply any modifiers to the damage
                 if (effect == null)
                 {
@@ -2768,7 +2768,7 @@ internal class Monster : IItemContainer
                 bool doStun = method.AttackStunsTarget;
                 if (doCut && doStun)
                 {
-                    if (SaveGame.Rng.RandomLessThan(100) < 50)
+                    if (this.SaveGame.Rng.RandomLessThan(100) < 50)
                     {
                         doCut = false;
                     }
@@ -2790,23 +2790,23 @@ internal class Monster : IItemContainer
                             break;
 
                         case 1:
-                            k = SaveGame.Rng.DieRoll(5);
+                            k = this.SaveGame.Rng.DieRoll(5);
                             break;
 
                         case 2:
-                            k = SaveGame.Rng.DieRoll(5) + 5;
+                            k = this.SaveGame.Rng.DieRoll(5) + 5;
                             break;
 
                         case 3:
-                            k = SaveGame.Rng.DieRoll(20) + 20;
+                            k = this.SaveGame.Rng.DieRoll(20) + 20;
                             break;
 
                         case 4:
-                            k = SaveGame.Rng.DieRoll(50) + 50;
+                            k = this.SaveGame.Rng.DieRoll(50) + 50;
                             break;
 
                         case 5:
-                            k = SaveGame.Rng.DieRoll(100) + 100;
+                            k = this.SaveGame.Rng.DieRoll(100) + 100;
                             break;
 
                         case 6:
@@ -2819,7 +2819,7 @@ internal class Monster : IItemContainer
                     }
                     if (k != 0)
                     {
-                        saveGame.TimedBleeding.AddTimer(k);
+                        SaveGame.TimedBleeding.AddTimer(k);
                     }
                 }
                 if (doStun)
@@ -2834,23 +2834,23 @@ internal class Monster : IItemContainer
                             break;
 
                         case 1:
-                            k = SaveGame.Rng.DieRoll(5);
+                            k = this.SaveGame.Rng.DieRoll(5);
                             break;
 
                         case 2:
-                            k = SaveGame.Rng.DieRoll(10) + 10;
+                            k = this.SaveGame.Rng.DieRoll(10) + 10;
                             break;
 
                         case 3:
-                            k = SaveGame.Rng.DieRoll(20) + 20;
+                            k = this.SaveGame.Rng.DieRoll(20) + 20;
                             break;
 
                         case 4:
-                            k = SaveGame.Rng.DieRoll(30) + 30;
+                            k = this.SaveGame.Rng.DieRoll(30) + 30;
                             break;
 
                         case 5:
-                            k = SaveGame.Rng.DieRoll(40) + 40;
+                            k = this.SaveGame.Rng.DieRoll(40) + 40;
                             break;
 
                         case 6:
@@ -2863,18 +2863,18 @@ internal class Monster : IItemContainer
                     }
                     if (k != 0)
                     {
-                        saveGame.TimedStun.AddTimer(k);
+                        SaveGame.TimedStun.AddTimer(k);
                     }
                 }
                 // If the monster touched us then it may take damage from our defensive abilities
                 if (touched)
                 {
-                    if (saveGame.HasFireShield && alive)
+                    if (SaveGame.HasFireShield && alive)
                     {
                         if (!Race.ImmuneFire)
                         {
-                            saveGame.MsgPrint($"{monsterName} is suddenly very hot!");
-                            if (saveGame.DamageMonster(GetMonsterIndex(), SaveGame.Rng.DiceRoll(2, 6), out fear,
+                            SaveGame.MsgPrint($"{monsterName} is suddenly very hot!");
+                            if (SaveGame.DamageMonster(GetMonsterIndex(), this.SaveGame.Rng.DiceRoll(2, 6), out fear,
                                 " turns into a pile of ash."))
                             {
                                 blinked = false;
@@ -2890,12 +2890,12 @@ internal class Monster : IItemContainer
                             }
                         }
                     }
-                    if (saveGame.HasLightningShield && alive)
+                    if (SaveGame.HasLightningShield && alive)
                     {
                         if (!Race.ImmuneLightning)
                         {
-                            saveGame.MsgPrint($"{monsterName} gets zapped!");
-                            if (saveGame.DamageMonster(GetMonsterIndex(), SaveGame.Rng.DiceRoll(2, 6), out fear,
+                            SaveGame.MsgPrint($"{monsterName} gets zapped!");
+                            if (SaveGame.DamageMonster(GetMonsterIndex(), this.SaveGame.Rng.DiceRoll(2, 6), out fear,
                                 " turns into a pile of cinder."))
                             {
                                 blinked = false;
@@ -2918,8 +2918,8 @@ internal class Monster : IItemContainer
                 // It missed us, so give us the appropriate message
                 if (method.RendersMissMessage && IsVisible)
                 {
-                    saveGame.Disturb(true);
-                    saveGame.MsgPrint($"{monsterName} misses you.");
+                    SaveGame.Disturb(true);
+                    SaveGame.MsgPrint($"{monsterName} misses you.");
                 }
             }
             // If the player saw the monster, they now know more about what attacks it can do
@@ -2937,20 +2937,20 @@ internal class Monster : IItemContainer
         // If the monster teleported away after stealing, let the player know and do the actual teleport
         if (blinked)
         {
-            saveGame.MsgPrint("The thief flees laughing!");
-            TeleportAway(saveGame, (Constants.MaxSight * 2) + 5);
+            SaveGame.MsgPrint("The thief flees laughing!");
+            TeleportAway(SaveGame, (Constants.MaxSight * 2) + 5);
         }
         // If the attack just killed the player, let future generations remember what killed
         // their ancestor
-        if (saveGame.IsDead && Race.Knowledge.RDeaths < Constants.MaxShort)
+        if (SaveGame.IsDead && Race.Knowledge.RDeaths < Constants.MaxShort)
         {
             Race.Knowledge.RDeaths++;
         }
         // If the monster just got scared, let the player know
         if (IsVisible && fear)
         {
-            saveGame.PlaySound(SoundEffectEnum.MonsterFlees);
-            saveGame.MsgPrint($"{monsterName} flees in terror!");
+            SaveGame.PlaySound(SoundEffectEnum.MonsterFlees);
+            SaveGame.MsgPrint($"{monsterName} flees in terror!");
         }
     }
 
