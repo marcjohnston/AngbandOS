@@ -40,7 +40,7 @@ internal class ArmoryStoreFactory : StoreFactory
         nameof(ZzathathTheImpStoreOwner)
     };
 
-    protected override string TileName => nameof(ArmoryStoreTile);
+    protected override string TileName => "Armory";
 
     protected override StoreStockManifestDefinition[]? StoreStockManifestDefinitions => new[]
     {

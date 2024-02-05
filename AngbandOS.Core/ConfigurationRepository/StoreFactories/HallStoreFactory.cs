@@ -17,7 +17,7 @@ internal class HallStoreFactory : StoreFactory
         nameof(HallOfRecordsStoreOwner)
     };
 
-    protected override string TileName => nameof(HallStoreTile);
+    protected override string TileName => "HallOfRecords";
 
     /// <summary>
     /// Returns an empty array of item criteria names because the hall doesn't buy items.

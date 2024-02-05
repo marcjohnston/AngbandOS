@@ -36,7 +36,7 @@ internal class PawnStoreFactory : StoreFactory
         nameof(AdirathTheUnmagicalStoreOwner)
     };
 
-    protected override string TileName => nameof(PawnStoreTile);
+    protected override string TileName => "Pawnbrokers";
 
     /// <summary>
     /// Returns the name of the item matching criteria for any items of value.

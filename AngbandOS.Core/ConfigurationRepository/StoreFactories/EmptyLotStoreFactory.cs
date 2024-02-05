@@ -17,7 +17,7 @@ internal class EmptyLotStoreFactory : StoreFactory
         nameof(EmptyLotStoreOwner)
     };
 
-    protected override string TileName => nameof(EmptyLotStoreTile);
+    protected override string TileName => ""; // This is the empty lot tile.
 
     /// <summary>
     /// Returns true, because this store type generates as an empty lot.

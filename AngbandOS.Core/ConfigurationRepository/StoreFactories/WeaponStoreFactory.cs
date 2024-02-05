@@ -40,7 +40,7 @@ internal partial class WeaponStoreFactory : StoreFactory
         nameof(BalennWarDancerStoreOwner)
     };
 
-    protected override string TileName => nameof(WeaponsmithStoreTile);
+    protected override string TileName => "Weaponsmiths";
 
     protected override StoreStockManifestDefinition[]? StoreStockManifestDefinitions => new[]
     {

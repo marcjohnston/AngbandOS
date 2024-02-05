@@ -44,7 +44,7 @@ internal class GeneralStoreFactory : StoreFactory
         nameof(MerullaTheHumbleStoreOwner)
     };
 
-    protected override string TileName => nameof(GeneralStoreTile);
+    protected override string TileName => "GeneralStore";
 
     protected override StoreStockManifestDefinition[]? StoreStockManifestDefinitions => new[]
     {

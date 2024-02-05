@@ -17,7 +17,7 @@ internal class AbandonedStoreFactory : StoreFactory
         nameof(EmptyLotStoreOwner)
     };
 
-    protected override string TileName => nameof(EmptyLotStoreTile);
+    protected override string TileName => ""; // This is the empty lot tile
     public override bool BuildingsMadeFromPermanentRock => false;
     public override bool StoreEntranceDoorsAreBlownOff => true;
 

@@ -18,7 +18,7 @@ internal class HomeStoreFactory : StoreFactory
         nameof(YourHomeStoreOwner)
     };
 
-    protected override string TileName => nameof(HomeStoreTile);
+    protected override string TileName => "Home";
 
     /// <summary>
     /// Returns the name of the item matching criteria for all items of any value.

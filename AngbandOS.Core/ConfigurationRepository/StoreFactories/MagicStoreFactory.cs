@@ -40,7 +40,7 @@ internal class MagicStoreFactory : StoreFactory
         nameof(HetoTheNecromancerStoreOwner)
     };
 
-    protected override string TileName => nameof(MagicStoreTile);
+    protected override string TileName => "MagicShop";
 
     protected override StoreStockManifestDefinition[]? StoreStockManifestDefinitions => new[]
     {

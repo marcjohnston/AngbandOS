@@ -12,7 +12,7 @@ internal partial class TempleStoreFactory : StoreFactory
 {
     private TempleStoreFactory(SaveGame saveGame) : base(saveGame) { }
 
-    protected override string TileName => nameof(TempleStoreTile);
+    protected override string TileName => "Temple";
 
     protected override string[] StoreOwnerNames => new string[]
     {
