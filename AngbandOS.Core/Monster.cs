@@ -1011,7 +1011,7 @@ internal class Monster : IItemContainer
                     // Attack the monster in the target tile
                     if (monsterInTargetTile.Race != null && monsterInTargetTile.Health >= 0)
                     {
-                        if (AttackAnotherMonster(SaveGame, tile.MonsterIndex))
+                        if (AttackAnotherMonster(tile.MonsterIndex))
                         {
                             return;
                         }
@@ -1228,9 +1228,9 @@ internal class Monster : IItemContainer
     /// <param name="monsterIndex"> The index of the monster making the attack </param>
     /// <param name="targetIndex"> The index of the target monster </param>
     /// <returns> True if the attack happened, false if not </returns>
-    private bool AttackAnotherMonster(SaveGame saveGame, int targetIndex)
+    private bool AttackAnotherMonster(int targetIndex)
     {
-        Monster target = saveGame.Monsters[targetIndex];
+        Monster target = SaveGame.Monsters[targetIndex];
         MonsterRace targetRace = target.Race;
         int ySaver = target.MapY;
         int xSaver = target.MapX;
@@ -1247,7 +1247,7 @@ internal class Monster : IItemContainer
         // If the player can't see either monster, they just hear noise
         if (!(IsVisible || target.IsVisible))
         {
-            saveGame.MsgPrint("You hear noise.");
+            SaveGame.MsgPrint("You hear noise.");
         }
         // We have up to four attacks
         for (int attackNumber = 0; attackNumber < Race.Attacks.Length; attackNumber++)
@@ -1282,7 +1282,7 @@ internal class Monster : IItemContainer
             // If we hit the monster, describe the type of hit
             if (effect == null || CheckHitMonsterVersusMonster(effect.Power, monsterLevel, armorClass))
             {
-                saveGame.Disturb(true);
+                SaveGame.Disturb(true);
                 if (method.AttackAwakensTarget)
                 {
                     target.SleepLevel = 0;
@@ -1291,12 +1291,12 @@ internal class Monster : IItemContainer
                 // Display the attack description
                 if (IsVisible || target.IsVisible)
                 {
-                    saveGame.MsgPrint($"{monsterName} {method.MonsterAction(target)}.");
+                    SaveGame.MsgPrint($"{monsterName} {method.MonsterAction(target)}.");
                 }
                 obvious = true;
-                damage = SaveGame.Rng.DiceRoll(dDice, dSide);
+                damage = this.SaveGame.Rng.DiceRoll(dDice, dSide);
                 // Default to a missile attack
-                Projectile pt = saveGame.SingletonRepository.Projectiles.Get(nameof(MissileProjectile));
+                Projectile pt = SaveGame.SingletonRepository.Projectiles.Get(nameof(MissileProjectile));
                 // Choose the correct type of attack to display, as well as any other special
                 // effects for the attack
                 if (effect == null)
@@ -1310,7 +1310,7 @@ internal class Monster : IItemContainer
                 // Implement the attack as a projectile
                 if (pt != null)
                 {
-                    saveGame.Project(GetMonsterIndex(), 0, target.MapY, target.MapX, damage, pt, ProjectionFlag.ProjectKill | ProjectionFlag.ProjectStop);
+                    SaveGame.Project(GetMonsterIndex(), 0, target.MapY, target.MapX, damage, pt, ProjectionFlag.ProjectKill | ProjectionFlag.ProjectStop);
                     // If we touched the target we might get burned or zapped
                     if (method.AttackTouchesTarget)
                     {
@@ -1321,13 +1321,13 @@ internal class Monster : IItemContainer
                                 // Auras prevent us blinking away
                                 blinked = false;
                                 // The player may see and learn that the target has the aura
-                                saveGame.MsgPrint($"{monsterName} is suddenly very hot!");
+                                SaveGame.MsgPrint($"{monsterName} is suddenly very hot!");
                                 if (target.IsVisible)
                                 {
                                     targetRace.Knowledge.Characteristics.FireAura = true;
                                 }
                             }
-                            saveGame.Project(targetIndex, 0, MapY, MapX, SaveGame.Rng.DiceRoll(1 + (targetRace.Level / 26), 1 + (targetRace.Level / 17)), saveGame.SingletonRepository.Projectiles.Get(nameof(FireProjectile)), ProjectionFlag.ProjectKill | ProjectionFlag.ProjectStop);
+                            SaveGame.Project(targetIndex, 0, MapY, MapX, this.SaveGame.Rng.DiceRoll(1 + (targetRace.Level / 26), 1 + (targetRace.Level / 17)), SaveGame.SingletonRepository.Projectiles.Get(nameof(Projection.FireProjectile)), ProjectionFlag.ProjectKill | ProjectionFlag.ProjectStop);
                         }
                         if (targetRace.LightningAura && !Race.ImmuneLightning)
                         {
@@ -1336,14 +1336,14 @@ internal class Monster : IItemContainer
                                 // Auras prevent us blinking away
                                 blinked = false;
                                 // The player may see and learn that the target has the aura
-                                saveGame.MsgPrint($"{monsterName} gets zapped!");
+                                SaveGame.MsgPrint($"{monsterName} gets zapped!");
                                 if (target.IsVisible)
                                 {
                                     targetRace.Knowledge.Characteristics.LightningAura = true;
                                 }
                             }
-                            saveGame.Project(targetIndex, 0, MapY, MapX, SaveGame.Rng.DiceRoll(1 + (targetRace.Level / 26), 1 + (targetRace.Level / 17)),
-                                saveGame.SingletonRepository.Projectiles.Get(nameof(ElecProjectile)), ProjectionFlag.ProjectKill | ProjectionFlag.ProjectStop);
+                            SaveGame.Project(targetIndex, 0, MapY, MapX, this.SaveGame.Rng.DiceRoll(1 + (targetRace.Level / 26), 1 + (targetRace.Level / 17)),
+                                SaveGame.SingletonRepository.Projectiles.Get(nameof(Projection.ElecProjectile)), ProjectionFlag.ProjectKill | ProjectionFlag.ProjectStop);
                         }
                     }
                 }
@@ -1353,8 +1353,8 @@ internal class Monster : IItemContainer
                 // We didn't hit, so just let the player know that if we are visible
                 if (method.AttackTouchesTarget && !method.RendersMissMessage && IsVisible)
                 {
-                    saveGame.Disturb(false);
-                    saveGame.MsgPrint($"{monsterName} misses {target.Name}.");
+                    SaveGame.Disturb(false);
+                    SaveGame.MsgPrint($"{monsterName} misses {target.Name}.");
                 }
             }
             // If the player saw what happened, they know more abouyt what attacks we have
@@ -1372,8 +1372,8 @@ internal class Monster : IItemContainer
         // If we stole and should therefore blink away, then do so.
         if (blinked)
         {
-            saveGame.MsgPrint(IsVisible ? "The thief flees laughing!" : "You hear laughter!");
-            TeleportAway(saveGame, (Constants.MaxSight * 2) + 5);
+            SaveGame.MsgPrint(IsVisible ? "The thief flees laughing!" : "You hear laughter!");
+            TeleportAway(SaveGame, (Constants.MaxSight * 2) + 5);
         }
         // We made the attack
         return true;

@@ -1993,7 +1993,7 @@ internal class SaveGame
     /// <summary>
     /// Interrupts a repeat command.  This is known as disturbing the player.
     /// </summary>
-    /// <param name="stopSearch"></param>
+    /// <param name="stopSearch">Specify true, to turn off search mode, if the player has SearchMode enabled; false, to not change the current SearchMode.</param>
     public void Disturb(bool stopSearch)
     {
         if (CommandRepeat != 0)
