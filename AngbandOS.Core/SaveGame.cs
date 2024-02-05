@@ -877,10 +877,11 @@ internal class SaveGame
     }
 
     /// <summary>
-    /// Indicates the beginning of a new command being issues by the player.  All messages that have been rendered to the player are batched together and stores into a fixed length queue.
-    /// This MessageFlush is called in the RequestCommand method during the dungeon game play and when in a store.
+    /// Indicates the beginning of a new command being issued by the player.  All messages that have been rendered to the player are batched 
+    /// together and stored into a fixed length queue.  This MessageFlush is called in the RequestCommand method during the dungeon game play 
+    /// and when in a store.
     /// </summary>
-    public void MessageFlush()
+    private void CloseBatchOfMessages()
     {
         // Batch all of the message together from the last command and store them as the previous messages.
         PreviousMessages = RecentMessages.ToArray();
@@ -980,7 +981,6 @@ internal class SaveGame
         }
         Screen.Erase(0, 0);
     }
-    // PROFILE MESSAGING END
 
     public byte Elevation(int wildY, int wildX, int y, int x)
     {
@@ -3354,7 +3354,7 @@ internal class SaveGame
                 MoveCursorRelative(MapY, MapX);
                 RequestCommand(false);
                 ProcessCommand(false);
-                MessageFlush();
+                CloseBatchOfMessages();
             }
             if (EnergyUse != 0)
             {
