@@ -56,6 +56,13 @@ internal class RetireScript : Script, IScript, IRepeatableScript
                     return;
                 }
             }
+            else
+            {
+                if (!SaveGame.GetCheck("Do you really want to quit? "))
+                {
+                    return;
+                }
+            }
         }
         // Assuming whe player didn't give up, "kill" the character by quitting
         SaveGame.Playing = false;
