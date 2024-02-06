@@ -73,10 +73,11 @@ internal sealed class Item : IComparable<Item>
     public string Inscription = "";
 
     /// <summary>
-    /// Returns the container that is holding the container.
+    /// Returns the container that is holding the item.
     /// </summary>
-    public IItemContainer? GetContainer()
+    public IItemContainer GetContainer()
     {
+        // Check to see if the item is in the players inventory.
         foreach (BaseInventorySlot inventorySlot in SaveGame.SingletonRepository.InventorySlots)
         {
             foreach (int slot in inventorySlot.InventorySlots)
@@ -88,40 +89,34 @@ internal sealed class Item : IComparable<Item>
             }
         }
 
+        // Check to see if a monster is holding the item.
         if (HoldingMonsterIndex != 0)
         {
             return SaveGame.Monsters[HoldingMonsterIndex];
         }
-        else if (X != 0 && Y != 0)
+
+        // Check to see if the item in on the floor.
+        if (X != 0 && Y != 0)
         {
             return SaveGame.Grid[Y][X];
         }
-        else
-        {
-            return null;
-        }
+
+        // Something is wrong.
+        throw new Exception("Missing item container.");
     }
 
     public string Label
     {
         get
         {
-            IItemContainer? container = GetContainer();
-            if (container == null)
-            {
-                throw new Exception("Missing item container.");
-            }
+            IItemContainer container = GetContainer();
             return container.Label(this);
         }
     }
 
     public string DescribeLocation()
     {
-        IItemContainer? container = GetContainer();
-        if (container == null)
-        {
-            throw new Exception("Missing item container.");
-        }
+        IItemContainer container = GetContainer();
         return container.DescribeItemLocation(this);
     }
 
@@ -132,11 +127,7 @@ internal sealed class Item : IComparable<Item>
     /// <param name="num"></param>
     public void ItemIncrease(int num)
     {
-        IItemContainer? container = GetContainer();
-        if (container == null)
-        {
-            throw new Exception("Missing item container.");
-        }
+        IItemContainer container = GetContainer();
         container.ItemIncrease(this, num);
     }
 
@@ -160,11 +151,7 @@ internal sealed class Item : IComparable<Item>
     /// <param name="oPtr"></param>
     public void ItemOptimize()
     {
-        IItemContainer? container = GetContainer();
-        if (container == null)
-        {
-            throw new Exception("Missing item container.");
-        }
+        IItemContainer container = GetContainer();
         container.ItemOptimize(this);
     }
 
@@ -183,11 +170,7 @@ internal sealed class Item : IComparable<Item>
     {
         get
         {
-            IItemContainer? container = GetContainer();
-            if (container == null)
-            {
-                throw new Exception("Missing item container.");
-            }
+            IItemContainer container = GetContainer();
             return container.IsInInventory;
         }
     }
@@ -199,11 +182,7 @@ internal sealed class Item : IComparable<Item>
     {
         get
         {
-            IItemContainer? container = GetContainer();
-            if (container == null)
-            {
-                throw new Exception("Missing item container.");
-            }
+            IItemContainer container = GetContainer();
             return container.IsInEquipment;
         }
     }
@@ -242,23 +221,6 @@ internal sealed class Item : IComparable<Item>
             return null;
         }
     }
-
-    ///// <summary>
-    ///// Tests an item to determine if it belongs to an Item type and returns a the item casted into that type; or null, if the item doesn't belong to the type.
-    ///// </summary>
-    ///// <typeparam name="T"></typeparam>
-    ///// <returns></returns>
-    //public T? Factory<T>() where T : ItemFactory
-    //{
-    //    if (typeof(T).IsAssignableFrom(GetType()))
-    //    {
-    //        return (T)this;
-    //    }
-    //    else
-    //    {
-    //        return null;
-    //    }
-    //}
 
     public bool Marked;
 

@@ -7,6 +7,9 @@
 
 namespace AngbandOS.Core;
 
+/// <summary>
+/// Represents the interface required for objects to participate as a container for items.
+/// </summary>
 internal interface IItemContainer
 {
     /// <summary>
