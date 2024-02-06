@@ -710,7 +710,7 @@ internal class Store
             string? storeName = StoreFactory.Title;
             if (storeName == null)
             {
-                storeName = SaveGame.SingletonRepository.Tiles.Get(StoreFactory.Tile.Name).Description;
+                storeName = StoreFactory.Tile.Description;
                 storeName = $"{storeName} ({Owner.MaxCost})";
             }
             return storeName;
