@@ -913,7 +913,6 @@ internal class SaveGame
     /// <param name="msg"></param>
     public void MsgPrint(string? msg)
     {
-        Debug.Print($"Start MsgPrint {_artificialKeyBuffer} {msg} {MessageXCursorPos}");
         if (!MessageAppendNextMessage)
         {
             MessageXCursorPos = 0;
@@ -967,7 +966,7 @@ internal class SaveGame
     }
 
     /// <summary>
-    /// Renders the -more- prompt and clears the key input buffer.
+    /// Renders the -more- prompt and waits for a key input.  Keys in the input buffer are preserved.
     /// </summary>
     /// <param name="cursorXPosition"></param>
     private void ShowMorePrompt(int cursorXPosition)
@@ -9645,9 +9644,7 @@ internal class SaveGame
 
     public bool GetCom(string prompt, out char command)
     {
-        Debug.Print($"Start GetCom {_artificialKeyBuffer}");
         MsgPrint(null);
-        Debug.Print($"GetCom {_artificialKeyBuffer}");
         if (prompt.Length > 1)
         {
             prompt = char.ToUpper(prompt[0]) + prompt.Substring(1);
@@ -9751,7 +9748,6 @@ internal class SaveGame
     public char Inkey(bool doNotWaitOnInkey = false) // TODO: Change the signature to return null when Shutdown == true
     {
         char ch = '\0';
-        Debug.Print($"Start inkey {_artificialKeyBuffer}");
         if (_artificialKeyBuffer.Length > 0)
         {
             ch = _artificialKeyBuffer[0];
@@ -9910,7 +9906,6 @@ internal class SaveGame
             break;
         }
         MsgClear();
-        Debug.Print($"End RequestCommand {_artificialKeyBuffer}");
     }
 
     private void MsgClear()

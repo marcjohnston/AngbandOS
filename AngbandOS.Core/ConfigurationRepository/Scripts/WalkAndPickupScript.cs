@@ -30,7 +30,6 @@ internal class WalkAndPickupScript : Script, IScript, IRepeatableScript
     public bool ExecuteRepeatableScript()
     {
         bool more = false;
-        Debug.Print($"Start walkandpickup {SaveGame._artificialKeyBuffer}");
 
         // If we don't already have a direction, get one
         if (SaveGame.GetDirectionNoAim(out int dir))
