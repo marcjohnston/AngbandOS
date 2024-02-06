@@ -5,6 +5,8 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using System.Diagnostics;
+
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
@@ -28,6 +30,8 @@ internal class WalkAndPickupScript : Script, IScript, IRepeatableScript
     public bool ExecuteRepeatableScript()
     {
         bool more = false;
+        Debug.Print($"Start walkandpickup {SaveGame._artificialKeyBuffer}");
+
         // If we don't already have a direction, get one
         if (SaveGame.GetDirectionNoAim(out int dir))
         {

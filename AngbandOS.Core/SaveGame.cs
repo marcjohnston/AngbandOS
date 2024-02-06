@@ -5,6 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using System.Diagnostics;
 using System.Runtime.Serialization.Formatters.Binary;
 
 namespace AngbandOS.Core;
@@ -912,6 +913,7 @@ internal class SaveGame
     /// <param name="msg"></param>
     public void MsgPrint(string? msg)
     {
+        Debug.Print($"Start MsgPrint {_artificialKeyBuffer} {msg} {MessageXCursorPos}");
         if (!MessageAppendNextMessage)
         {
             MessageXCursorPos = 0;
@@ -973,7 +975,10 @@ internal class SaveGame
         Screen.Print(ColorEnum.BrightBlue, "-more-", 0, cursorXPosition);
         while (!Shutdown)
         {
+            string save = _artificialKeyBuffer;
+            _artificialKeyBuffer = "";
             Inkey();
+            _artificialKeyBuffer = save;
             break;
         }
         Screen.Erase(0, 0);
@@ -9640,7 +9645,9 @@ internal class SaveGame
 
     public bool GetCom(string prompt, out char command)
     {
+        Debug.Print($"Start GetCom {_artificialKeyBuffer}");
         MsgPrint(null);
+        Debug.Print($"GetCom {_artificialKeyBuffer}");
         if (prompt.Length > 1)
         {
             prompt = char.ToUpper(prompt[0]) + prompt.Substring(1);
@@ -9744,11 +9751,11 @@ internal class SaveGame
     public char Inkey(bool doNotWaitOnInkey = false) // TODO: Change the signature to return null when Shutdown == true
     {
         char ch = '\0';
+        Debug.Print($"Start inkey {_artificialKeyBuffer}");
         if (_artificialKeyBuffer.Length > 0)
         {
             ch = _artificialKeyBuffer[0];
             _artificialKeyBuffer = _artificialKeyBuffer.Remove(0, 1);
-            HideCursorOnFullScreenInkey = false;
             HideCursorOnFullScreenInkey = false;
             return ch;
         }
@@ -9889,10 +9896,11 @@ internal class SaveGame
                 GetCom("Command: ", out cmd);
             }
             string act = _keymapAct[mode][cmd];
-            if (!string.IsNullOrEmpty(act) && _artificialKeyBuffer.Length == 0)
+            if (!string.IsNullOrEmpty(act))
             {
-                _artificialKeyBuffer = act;
-                continue;
+                cmd = act[0];
+                _artificialKeyBuffer = act.Substring(1);
+                //continue;
             }
             if (cmd == 0)
             {
@@ -9901,7 +9909,14 @@ internal class SaveGame
             CurrentCommand = cmd;
             break;
         }
+        MsgClear();
+        Debug.Print($"End RequestCommand {_artificialKeyBuffer}");
+    }
+
+    private void MsgClear()
+    {
         Screen.PrintLine("", 0, 0);
+        MessageXCursorPos = 0;
     }
 
     public void ShowManual() // TODO: Needs to be deleted
