@@ -202,4 +202,9 @@ internal abstract class LightSourceItemFactory : ItemFactory
     /// Returns the radius that the light source illuminates.  Default radius is 2.
     /// </summary>
     public virtual int Radius => 2;
+
+    /// <summary>
+    /// Returns true, because all light sources can be worn/wielded.
+    /// </summary>
+    public override bool IsWearable => true;
 }
