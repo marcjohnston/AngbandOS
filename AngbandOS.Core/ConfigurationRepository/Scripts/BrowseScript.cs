@@ -74,7 +74,7 @@ internal class BrowseScript : Script, IScript, IRepeatableScript, ISuccessfulScr
         ScreenBuffer savedScreen = SaveGame.Screen.Clone();
         BookItemFactory book = (BookItemFactory)item.Factory;
         SaveGame.PrintSpells(book.Spells.ToArray(), 1, 20);
-        SaveGame.Screen.PrintLine("", 0, 0);
+        SaveGame.MsgClear();
         // Wait for a keypress and re-load the screen
         SaveGame.Screen.Print("[Press any key to continue]", 0, 23);
         SaveGame.Inkey();

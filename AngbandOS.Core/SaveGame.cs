@@ -2351,7 +2351,7 @@ internal class SaveGame
             Screen.Restore(savedScreen);
         }
         ViewingItemList = false;
-        Screen.PrintLine("", 0, 0);
+        MsgClear();
         return item;
     }
 
@@ -3341,7 +3341,7 @@ internal class SaveGame
                 CommandRepeat--;
                 SingletonRepository.FlaggedActions.Get(nameof(RedrawStateFlaggedAction)).Set();
                 RedrawStuff();
-                Screen.PrintLine("", 0, 0);
+                MsgClear();
                 ProcessCommand(true);
             }
             else
@@ -9638,7 +9638,7 @@ internal class SaveGame
             }
             break;
         }
-        Screen.PrintLine("", 0, 0);
+        MsgClear();
         return i == 'Y' || i == 'y' || i == 13;
     }
 
@@ -9651,7 +9651,7 @@ internal class SaveGame
         }
         Screen.PrintLine(prompt, 0, 0);
         command = Inkey();
-        Screen.PrintLine("", 0, 0);
+        MsgClear();
         return command != '\x1b';
     }
 
@@ -9737,7 +9737,7 @@ internal class SaveGame
         MsgPrint(null);
         Screen.PrintLine(prompt, 0, 0);
         bool res = AskforAux(out buf, initial, len);
-        Screen.PrintLine("", 0, 0);
+        MsgClear();
         return res;
     }
 
@@ -9837,7 +9837,7 @@ internal class SaveGame
             char cmd;
             HideCursorOnFullScreenInkey = true;
             cmd = Inkey();
-            Screen.PrintLine("", 0, 0);
+            MsgClear();
             if (cmd == '0')
             {
                 int oldArg = CommandArgument;
@@ -9907,7 +9907,10 @@ internal class SaveGame
         MsgClear();
     }
 
-    private void MsgClear()
+    /// <summary>
+    /// Erases the message line and prepares the next message to be rendered at column 0.
+    /// </summary>
+    public void MsgClear()
     {
         Screen.PrintLine("", 0, 0);
         MessageXCursorPos = 0;
@@ -13001,7 +13004,7 @@ internal class SaveGame
             }
         }
         TempN = 0;
-        Screen.PrintLine("", 0, 0);
+        MsgClear();
         return TargetWho != 0;
     }
 

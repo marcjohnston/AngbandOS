@@ -50,7 +50,7 @@ internal class RetireScript : Script, IScript, IRepeatableScript
                 // long-running character
                 SaveGame.Screen.PrintLine("Type the '@' sign to give up (this character will no longer be playable): ", 0, 0);
                 int i = SaveGame.Inkey();
-                SaveGame.Screen.PrintLine("", 0, 0);
+                SaveGame.MsgClear();
                 if (i != '@')
                 {
                     return;

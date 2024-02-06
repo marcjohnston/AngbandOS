@@ -415,7 +415,7 @@ internal class Store
                 break;
             }
         }
-        SaveGame.Screen.PrintLine("", 0, 0);
+        SaveGame.MsgClear();
         return command != '\x1b';
     }
 
