@@ -9896,7 +9896,6 @@ internal class SaveGame
             {
                 cmd = act[0];
                 _artificialKeyBuffer = act.Substring(1);
-                //continue;
             }
             if (cmd == 0)
             {
