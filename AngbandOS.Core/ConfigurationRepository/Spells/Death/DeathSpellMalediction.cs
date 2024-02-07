@@ -17,7 +17,7 @@ internal class DeathSpellMalediction : Spell
         {
             return;
         }
-        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(HellFireProjectile)), dir,
+        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(HellfireProjectile)), dir,
             SaveGame.Rng.DiceRoll(3 + ((SaveGame.ExperienceLevel - 1) / 5), 3), 0);
         if (SaveGame.Rng.DieRoll(5) != 1)
         {

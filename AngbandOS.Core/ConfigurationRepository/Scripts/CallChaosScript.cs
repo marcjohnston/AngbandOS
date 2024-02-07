@@ -50,7 +50,7 @@ internal class CallChaosScript : Script, IScript
             SaveGame.SingletonRepository.Projectiles.Get(nameof(GravityProjectile)),
             SaveGame.SingletonRepository.Projectiles.Get(nameof(ShardProjectile)),
             SaveGame.SingletonRepository.Projectiles.Get(nameof(NukeProjectile)),
-            SaveGame.SingletonRepository.Projectiles.Get(nameof(HellFireProjectile)),
+            SaveGame.SingletonRepository.Projectiles.Get(nameof(HellfireProjectile)),
             SaveGame.SingletonRepository.Projectiles.Get(nameof(DisintegrateProjectile))
         };
         Projectile chaosType = hurtTypes[SaveGame.Rng.DieRoll(30) - 1];

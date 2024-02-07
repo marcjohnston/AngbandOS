@@ -199,7 +199,7 @@ internal class DraconianRace : Race
                 case CharacterClass.Paladin:
                     if (SaveGame.Rng.DieRoll(3) == 1)
                     {
-                        projectile = SaveGame.SingletonRepository.Projectiles.Get(nameof(HellFireProjectile));
+                        projectile = SaveGame.SingletonRepository.Projectiles.Get(nameof(HellfireProjectile));
                         projectileDescription = "hellfire";
                     }
                     else

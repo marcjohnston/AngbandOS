@@ -13,12 +13,7 @@ internal class DeathSpellHellfire : Spell
     private DeathSpellHellfire(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        if (!SaveGame.GetDirectionWithAim(out int dir))
-        {
-            return;
-        }
-        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(HellFireProjectile)), dir, 666, 3);
-        SaveGame.TakeHit(50 + SaveGame.Rng.DieRoll(50), "the strain of casting Hellfire");
+        SaveGame.RunScript(nameof(HellfireScript));
     }
 
     public override void CastFailed()

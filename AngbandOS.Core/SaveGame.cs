@@ -8929,7 +8929,7 @@ internal class SaveGame
 
                 case MutationAttackType.Hellfire:
                     Project(0, 0, monster.MapY, monster.MapX, damage,
-                        SingletonRepository.Projectiles.Get(nameof(HellFireProjectile)), ProjectionFlag.ProjectKill);
+                        SingletonRepository.Projectiles.Get(nameof(HellfireProjectile)), ProjectionFlag.ProjectKill);
                     break;
             }
             // The monster might hurt when we touch it
