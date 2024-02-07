@@ -13,11 +13,7 @@ internal class DeathSpellEnslaveUndead : Spell
     private DeathSpellEnslaveUndead(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        if (!SaveGame.GetDirectionWithAim(out int dir))
-        {
-            return;
-        }
-        SaveGame.ControlOneUndead(dir, SaveGame.ExperienceLevel);
+        SaveGame.RunScript(nameof(EnslaveUndeadScript));
     }
 
     public override void CastFailed()

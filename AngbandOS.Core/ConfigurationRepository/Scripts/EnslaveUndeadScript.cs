@@ -8,16 +8,20 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class DispelGoodScript : Script, IScript
+internal class EnslaveUndeadScript : Script, IScript
 {
-    private DispelGoodScript(SaveGame saveGame) : base(saveGame) { }
+    private EnslaveUndeadScript(SaveGame saveGame) : base(saveGame) { }
 
     /// <summary>
-    /// Projects a dispeal good to all monsters in the line-of-sight.
+    /// Changes the monster in a chosen direction into being friendly.
     /// </summary>
     /// <returns></returns>
     public void ExecuteScript()
     {
-        SaveGame.ProjectAtAllInLos(SaveGame.SingletonRepository.Projectiles.Get(nameof(DispGoodProjectile)), SaveGame.ExperienceLevel * 4);
+        if (!SaveGame.GetDirectionWithAim(out int dir))
+        {
+            return;
+        }
+        SaveGame.ControlOneUndead(dir, SaveGame.ExperienceLevel);
     }
 }
