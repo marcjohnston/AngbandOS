@@ -4515,12 +4515,6 @@ internal class SaveGame
         TargetedProject(SingletonRepository.Projectiles.Get(nameof(ControlUndeadProjectile)), dir, plev, flg);
     }
 
-    public void DeathRay(int dir, int plev)
-    {
-        ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;
-        TargetedProject(SingletonRepository.Projectiles.Get(nameof(DeathRayProjectile)), dir, plev, flg);
-    }
-
     public void DestroyArea(int y1, int x1, int r)
     {
         int y, x;
@@ -6556,7 +6550,7 @@ internal class SaveGame
     /// <param name="dam"></param>
     /// <param name="flg"></param>
     /// <returns></returns>
-    private bool TargetedProject(Projectile projectile, int dir, int dam, ProjectionFlag flg)
+    public bool TargetedProject(Projectile projectile, int dir, int dam, ProjectionFlag flg)
     {
         flg |= ProjectionFlag.ProjectThru;
         int tx = MapX + KeypadDirectionXOffset[dir];

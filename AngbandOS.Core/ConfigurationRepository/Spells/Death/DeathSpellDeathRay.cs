@@ -13,11 +13,7 @@ internal class DeathSpellDeathRay : Spell
     private DeathSpellDeathRay(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        if (!SaveGame.GetDirectionWithAim(out int dir))
-        {
-            return;
-        }
-        SaveGame.DeathRay(dir, SaveGame.ExperienceLevel);
+        SaveGame.RunScript(nameof(DeathRayScript));
     }
 
     public override void CastFailed()
