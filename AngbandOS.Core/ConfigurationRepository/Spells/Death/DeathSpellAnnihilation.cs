@@ -13,34 +13,7 @@ internal class DeathSpellAnnihilation : Spell
     private DeathSpellAnnihilation(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.Mana -= 100;
-        for (int i = 1; i < SaveGame.MMax; i++)
-        {
-            Monster mPtr = SaveGame.Monsters[i];
-            MonsterRace rPtr = mPtr.Race;
-            if (mPtr.Race == null)
-            {
-                continue;
-            }
-            if (rPtr.Unique)
-            {
-                continue;
-            }
-            if (rPtr.Guardian)
-            {
-                continue;
-            }
-            SaveGame.DeleteMonsterByIndex(i, true);
-            SaveGame.TakeHit(SaveGame.Rng.DieRoll(4), "the strain of casting Annihilation");
-            SaveGame.Mana++;
-            SaveGame.MoveCursorRelative(SaveGame.MapY, SaveGame.MapX);
-            SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawHpFlaggedAction)).Set();
-            SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawManaFlaggedAction)).Set();
-            SaveGame.HandleStuff();
-            SaveGame.UpdateScreen();
-            SaveGame.Pause(Constants.DelayFactorInMilliseconds);
-        }
-        SaveGame.Mana += 100;
+        SaveGame.RunScript(nameof(AnnihilationScript));
     }
 
     public override void CastFailed()
