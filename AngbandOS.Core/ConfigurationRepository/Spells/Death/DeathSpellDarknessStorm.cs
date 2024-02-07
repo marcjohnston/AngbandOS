@@ -13,11 +13,7 @@ internal class DeathSpellDarknessStorm : Spell
     private DeathSpellDarknessStorm(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        if (!SaveGame.GetDirectionWithAim(out int dir))
-        {
-            return;
-        }
-        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(DarkProjectile)), dir, 120, 4);
+        SaveGame.RunScript(nameof(DarknessStormScript));
     }
 
     public override void CastFailed()
