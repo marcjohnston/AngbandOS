@@ -20,7 +20,7 @@ internal class MassGenoActivation : Activation
 
     public override bool Activate()
     {
-        SaveGame.MassCarnage(true);
+        SaveGame.RunScriptBool(nameof(MassCarnageScript), true);
         return true;
     }
 

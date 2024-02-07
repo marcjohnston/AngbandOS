@@ -15,6 +15,6 @@ internal class MassGenReward : Reward
     {
         SaveGame.MsgPrint($"The voice of {patron.ShortName} rings out:");
         SaveGame.MsgPrint("'Let me relieve thee of thine oppressors!'");
-        SaveGame.MassCarnage(false);
+        SaveGame.RunScriptBool(nameof(MassCarnageScript), false);
     }
 }

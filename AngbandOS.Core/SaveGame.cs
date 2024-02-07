@@ -5539,38 +5539,6 @@ internal class SaveGame
 
     public void MassCarnage(bool playerCast)
     {
-        int msec = Constants.DelayFactorInMilliseconds;
-        for (int i = 1; i < MMax; i++)
-        {
-            Monster mPtr = Monsters[i];
-            MonsterRace rPtr = mPtr.Race;
-            if (mPtr.Race == null)
-            {
-                continue;
-            }
-            if (rPtr.Unique)
-            {
-                continue;
-            }
-            if (rPtr.Guardian)
-            {
-                continue;
-            }
-            if (mPtr.DistanceFromPlayer > Constants.MaxSight)
-            {
-                continue;
-            }
-            DeleteMonsterByIndex(i, true);
-            if (playerCast)
-            {
-                TakeHit(Rng.DieRoll(3), "the strain of casting Mass Carnage");
-            }
-            MoveCursorRelative(MapY, MapX);
-            SingletonRepository.FlaggedActions.Get(nameof(RedrawHpFlaggedAction)).Set();
-            HandleStuff();
-            UpdateScreen();
-            Pause(msec);
-        }
     }
 
     public void MindblastMonsters(int dam)
@@ -8481,6 +8449,23 @@ internal class SaveGame
         }
         IScriptInt castedScript = (IScriptInt)script;
         castedScript.ExecuteScriptInt(value);
+    }
+
+    public void RunScriptBool(string scriptName, bool value)
+    {
+        // Get the script from the singleton repository.
+        Script? script = SingletonRepository.Scripts.Get(scriptName);
+
+        if (script == null)
+        {
+            throw new Exception($"The {scriptName} script specified to run does not exist.");
+        }
+        if (!typeof(IScriptBool).IsInstanceOfType(script))
+        {
+            throw new Exception($"The {scriptName} script specified to run does not implement the {nameof(IScriptBool)} interface.");
+        }
+        IScriptBool castedScript = (IScriptBool)script;
+        castedScript.ExecuteScriptBool(value);
     }
 
     public void RunScriptIntInt(string scriptName, int value1, int value2)

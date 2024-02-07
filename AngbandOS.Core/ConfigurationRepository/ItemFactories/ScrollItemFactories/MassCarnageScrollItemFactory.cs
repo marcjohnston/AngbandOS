@@ -24,7 +24,7 @@ internal class MassCarnageScrollItemFactory : ScrollItemFactory
 
     public override void Read(ReadScrollEvent eventArgs)
     {
-        SaveGame.MassCarnage(true);
+        SaveGame.RunScriptBool(nameof(MassCarnageScript), true);
         eventArgs.Identified = true;
     }
     public override Item CreateItem() => new Item(SaveGame, this);

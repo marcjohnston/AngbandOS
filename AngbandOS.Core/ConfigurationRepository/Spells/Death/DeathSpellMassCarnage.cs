@@ -13,7 +13,7 @@ internal class DeathSpellMassCarnage : Spell
     private DeathSpellMassCarnage(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.MassCarnage(true);
+        SaveGame.RunScriptBool(nameof(MassCarnageScript), true);
     }
 
     public override void CastFailed()

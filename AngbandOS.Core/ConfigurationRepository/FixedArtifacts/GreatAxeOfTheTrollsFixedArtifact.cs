@@ -18,7 +18,7 @@ internal class GreatAxeOfTheTrollsFixedArtifact : FixedArtifact, IFixedArtifactA
     public void ActivateItem(Item item)
     {
         SaveGame.MsgPrint("Your axe lets out a long, shrill note...");
-        SaveGame.MassCarnage(true);
+        SaveGame.RunScriptBool(nameof(MassCarnageScript), true);
         item.RechargeTimeLeft = 1000;
     }
     public string DescribeActivationEffect => "mass carnage every 1000 turns";
