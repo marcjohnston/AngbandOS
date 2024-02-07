@@ -7,6 +7,9 @@
 
 namespace AngbandOS.Core;
 
+/// <summary>
+/// Represents the interface a singleton repository entity needs to implement so that it can participate in the load and bind phases.
+/// </summary>
 internal interface ILoadable
 {
     void Load();
