@@ -47,36 +47,3 @@ internal class JsonTown : IJsonModel<TownDefinition>
         };
     }
 }
-
-[Serializable]
-internal class JsonVault : IJsonModel<VaultDefinition>
-{
-    public string? Key { get; set; }
-    public ColorEnum? Color { get; set; } = ColorEnum.White;
-    public string? Name { get; set; }
-    public int? Category { get; set; }
-    public int? Height { get; set; }
-    public int? Rating { get; set; }
-    public string? Text { get; set; }
-    public int? Width { get; set; }
-
-    public VaultDefinition? ToDefinition()
-    {
-        if (Key == null || Color == null || Name == null || Category == null || Height == null || Rating == null || Text == null || Width == null)
-        {
-            return null;
-        }
-
-        return new VaultDefinition()
-        {
-            Key = Key,
-            Color = Color.Value,
-            Name = Name,
-            Category = Category.Value,
-            Height = Height.Value,
-            Rating = Rating.Value,
-            Text = Text,
-            Width = Width.Value
-        };
-    }
-}
