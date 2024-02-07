@@ -20,7 +20,7 @@ internal class DeathSpellBerserk : Spell
 
     public override void CastFailed()
     {
-        DoWildDeathMagic(16, 2);
+        SaveGame.RunScriptIntInt(nameof(WildDeathMagicScript), 16, 2);
     }
 
     public override string Name => "Berserk";

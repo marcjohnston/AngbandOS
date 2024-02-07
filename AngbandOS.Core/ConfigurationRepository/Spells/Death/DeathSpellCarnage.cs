@@ -18,7 +18,7 @@ internal class DeathSpellCarnage : Spell
 
     public override void CastFailed()
     {
-        DoWildDeathMagic(14, 1);
+        SaveGame.RunScriptIntInt(nameof(WildDeathMagicScript), 14, 1);
     }
 
     public override string Name => "Carnage";

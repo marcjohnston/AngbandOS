@@ -18,7 +18,7 @@ internal class DeathSpellWraithform : Spell
 
     public override void CastFailed()
     {
-        DoWildDeathMagic(31, 3);
+        SaveGame.RunScriptIntInt(nameof(WildDeathMagicScript), 31, 3);
     }
 
     public override string Name => "Wraithform";

@@ -38,7 +38,7 @@ internal class DeathSpellNetherBolt : Spell
 
     public override void CastFailed()
     {
-        DoWildDeathMagic(9, 1);
+        SaveGame.RunScriptIntInt(nameof(WildDeathMagicScript), 9, 1);
     }
 
     public override string Name => "Nether Bolt";

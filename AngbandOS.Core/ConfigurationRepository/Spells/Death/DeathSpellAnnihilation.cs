@@ -45,7 +45,7 @@ internal class DeathSpellAnnihilation : Spell
 
     public override void CastFailed()
     {
-        DoWildDeathMagic(30, 3);
+        SaveGame.RunScriptIntInt(nameof(WildDeathMagicScript), 30, 3);
     }
 
     public override string Name => "Annihilation";

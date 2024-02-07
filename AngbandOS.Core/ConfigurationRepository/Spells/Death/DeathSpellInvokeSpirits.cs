@@ -146,7 +146,7 @@ internal class DeathSpellInvokeSpirits : Spell
 
     public override void CastFailed()
     {
-        DoWildDeathMagic(17, 2);
+        SaveGame.RunScriptIntInt(nameof(WildDeathMagicScript), 17, 2);
     }
 
     public override string Name => "Invoke Spirits";

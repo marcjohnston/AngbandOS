@@ -173,21 +173,4 @@ internal abstract class Spell : IGetKey<string>
     /// </summary>
     /// <returns></returns>
     protected virtual string LearnedDetails => "";
-
-    protected void DoWildDeathMagic(int spell, int subCategory)
-    {
-        if (subCategory == 3 && SaveGame.Rng.DieRoll(2) == 1)
-        {
-            SaveGame.Monsters[0].SanityBlast(true);
-        }
-        else
-        {
-            SaveGame.MsgPrint("It hurts!");
-            SaveGame.TakeHit(SaveGame.Rng.DiceRoll(subCategory + 1, 6), "a miscast Death spell");
-            if (spell > 15 && SaveGame.Rng.DieRoll(6) == 1 && !SaveGame.HasHoldLife)
-            {
-                SaveGame.LoseExperience(spell * 250);
-            }
-        }
-    }
 }

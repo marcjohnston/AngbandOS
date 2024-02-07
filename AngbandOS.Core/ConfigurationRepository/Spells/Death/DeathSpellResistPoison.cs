@@ -18,7 +18,7 @@ internal class DeathSpellResistPoison : Spell
 
     public override void CastFailed()
     {
-        DoWildDeathMagic(5, 0);
+        SaveGame.RunScriptIntInt(nameof(WildDeathMagicScript), 5, 0);
     }
 
     public override string Name => "Resist Poison";

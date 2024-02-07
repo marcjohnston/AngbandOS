@@ -18,7 +18,7 @@ internal class DeathSpellRestoreLife : Spell
 
     public override void CastFailed()
     {
-        DoWildDeathMagic(15, 1);
+        SaveGame.RunScriptIntInt(nameof(WildDeathMagicScript), 15, 1);
     }
 
     public override string Name => "Restore Life";

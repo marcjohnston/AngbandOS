@@ -18,7 +18,7 @@ internal class DeathSpellWordOfDeath : Spell
 
     public override void CastFailed()
     {
-        DoWildDeathMagic(27, 3);
+        SaveGame.RunScriptIntInt(nameof(WildDeathMagicScript), 27, 3);
     }
 
     public override string Name => "Word of Death";

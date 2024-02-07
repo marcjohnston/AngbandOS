@@ -23,7 +23,7 @@ internal class DeathSpellHorrify : Spell
 
     public override void CastFailed()
     {
-        DoWildDeathMagic(6, 0);
+        SaveGame.RunScriptIntInt(nameof(WildDeathMagicScript), 6, 0);
     }
 
     public override string Name => "Horrify";

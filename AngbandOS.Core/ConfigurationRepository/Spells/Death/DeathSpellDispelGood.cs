@@ -18,7 +18,7 @@ internal class DeathSpellDispelGood : Spell
 
     public override void CastFailed()
     {
-        DoWildDeathMagic(13, 1);
+        SaveGame.RunScriptIntInt(nameof(WildDeathMagicScript), 13, 1);
     }
 
     public override string Name => "Dispel Good";

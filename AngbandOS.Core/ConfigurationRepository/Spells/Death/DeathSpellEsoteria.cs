@@ -25,7 +25,7 @@ internal class DeathSpellEsoteria : Spell
 
     public override void CastFailed()
     {
-        DoWildDeathMagic(26, 3);
+        SaveGame.RunScriptIntInt(nameof(WildDeathMagicScript), 26, 3);
     }
 
     public override string Name => "Esoteria";

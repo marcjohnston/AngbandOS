@@ -18,7 +18,7 @@ internal class DeathSpellVampiricBranding : Spell
 
     public override void CastFailed()
     {
-        DoWildDeathMagic(21, 2);
+        SaveGame.RunScriptIntInt(nameof(WildDeathMagicScript), 21, 2);
     }
 
     public override string Name => "Vampiric Branding";

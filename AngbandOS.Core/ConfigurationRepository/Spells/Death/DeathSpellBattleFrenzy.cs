@@ -28,7 +28,7 @@ internal class DeathSpellBattleFrenzy : Spell
 
     public override void CastFailed()
     {
-        DoWildDeathMagic(19, 2);
+        SaveGame.RunScriptIntInt(nameof(WildDeathMagicScript), 19, 2);
     }
 
     public override string Name => "Battle Frenzy";

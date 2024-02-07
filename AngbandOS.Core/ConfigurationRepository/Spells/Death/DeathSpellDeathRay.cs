@@ -22,7 +22,7 @@ internal class DeathSpellDeathRay : Spell
 
     public override void CastFailed()
     {
-        DoWildDeathMagic(24, 3);
+        SaveGame.RunScriptIntInt(nameof(WildDeathMagicScript), 24, 3);
     }
 
     public override string Name => "Death Ray";

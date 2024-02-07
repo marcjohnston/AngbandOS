@@ -18,7 +18,7 @@ internal class DeathSpellTerror : Spell
 
     public override void CastFailed()
     {
-        DoWildDeathMagic(10, 1);
+        SaveGame.RunScriptIntInt(nameof(WildDeathMagicScript), 10, 1);
     }
 
     public override string Name => "Terror";

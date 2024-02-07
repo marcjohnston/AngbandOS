@@ -18,7 +18,7 @@ internal class DeathSpellDetectUnlife : Spell
 
     public override void CastFailed()
     {
-        DoWildDeathMagic(0, 0);
+        SaveGame.RunScriptIntInt(nameof(WildDeathMagicScript), 0, 0);
     }
 
     public override string Name => "Detect Unlife";

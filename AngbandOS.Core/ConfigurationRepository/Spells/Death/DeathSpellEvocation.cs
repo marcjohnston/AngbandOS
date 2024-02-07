@@ -20,7 +20,7 @@ internal class DeathSpellEvocation : Spell
 
     public override void CastFailed()
     {
-        DoWildDeathMagic(28, 3);
+        SaveGame.RunScriptIntInt(nameof(WildDeathMagicScript), 28, 3);
     }
 
     public override string Name => "Evocation";

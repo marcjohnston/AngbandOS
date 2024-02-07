@@ -22,7 +22,7 @@ internal class DeathSpellBlackSleep : Spell
 
     public override void CastFailed()
     {
-        DoWildDeathMagic(4, 0);
+        SaveGame.RunScriptIntInt(nameof(WildDeathMagicScript), 4, 0);
     }
 
     public override string Name => "Black Sleep";

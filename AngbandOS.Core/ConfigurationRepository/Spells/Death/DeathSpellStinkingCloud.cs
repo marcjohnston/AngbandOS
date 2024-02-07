@@ -22,7 +22,7 @@ internal class DeathSpellStinkingCloud : Spell
 
     public override void CastFailed()
     {
-        DoWildDeathMagic(3, 0);
+        SaveGame.RunScriptIntInt(nameof(WildDeathMagicScript), 3, 0);
     }
 
     public override string Name => "Stinking Cloud";

@@ -37,7 +37,7 @@ internal class DeathSpellDarkBolt : Spell
 
     public override void CastFailed()
     {
-        DoWildDeathMagic(18, 2);
+        SaveGame.RunScriptIntInt(nameof(WildDeathMagicScript), 18, 2);
     }
 
     public override string Name => "Dark Bolt";
