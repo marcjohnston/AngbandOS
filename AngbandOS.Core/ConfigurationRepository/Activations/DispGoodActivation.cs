@@ -20,7 +20,7 @@ internal class DispGoodActivation : Activation
 
     public override bool Activate()
     {
-        SaveGame.DispelGood(SaveGame.ExperienceLevel * 5);
+        SaveGame.RunScriptInt(nameof(DispelGoodScript), SaveGame.ExperienceLevel * 5);
         return true;
     }
 

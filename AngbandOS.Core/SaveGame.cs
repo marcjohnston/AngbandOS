@@ -4834,11 +4834,6 @@ internal class SaveGame
         return ProjectAtAllInLos(SingletonRepository.Projectiles.Get(nameof(DispEvilProjectile)), dam);
     }
 
-    public void DispelGood(int dam)
-    {
-        ProjectAtAllInLos(SingletonRepository.Projectiles.Get(nameof(DispGoodProjectile)), dam);
-    }
-
     public void DispelLiving(int dam)
     {
         ProjectAtAllInLos(SingletonRepository.Projectiles.Get(nameof(DispLivingProjectile)), dam);
@@ -6415,7 +6410,7 @@ internal class SaveGame
         return true;
     }
 
-    private bool ProjectAtAllInLos(Projectile projectile, int dam)
+    public bool ProjectAtAllInLos(Projectile projectile, int dam)
     {
         ProjectionFlag flg = ProjectionFlag.ProjectJump | ProjectionFlag.ProjectKill | ProjectionFlag.ProjectHide;
         bool obvious = false;

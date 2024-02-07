@@ -13,7 +13,7 @@ internal class DeathSpellDispelGood : Spell
     private DeathSpellDispelGood(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.DispelGood(SaveGame.ExperienceLevel * 4);
+        SaveGame.RunScriptInt(nameof(DispelGoodScript), SaveGame.ExperienceLevel * 4);
     }
 
     public override void CastFailed()
