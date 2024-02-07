@@ -27,8 +27,7 @@ internal class OldConfProjectile : Projectile
             obvious = true;
         }
         int doConf = SaveGame.Rng.DiceRoll(3, dam / 2) + 1;
-        if (rPtr.Unique || rPtr.ImmuneConfusion ||
-            rPtr.Level > SaveGame.Rng.DieRoll(dam - 10 < 1 ? 1 : dam - 10) + 10)
+        if (rPtr.Unique || rPtr.ImmuneConfusion || rPtr.Level > SaveGame.Rng.DieRoll(dam - 10 < 1 ? 1 : dam - 10) + 10)
         {
             if (rPtr.ImmuneConfusion)
             {
@@ -42,8 +41,7 @@ internal class OldConfProjectile : Projectile
             obvious = false;
         }
         dam = 0;
-        if (doConf != 0 && !rPtr.ImmuneConfusion &&
-                 !rPtr.BreatheConfusion && !rPtr.BreatheChaos)
+        if (doConf != 0 && !rPtr.ImmuneConfusion && !rPtr.BreatheConfusion && !rPtr.BreatheChaos)
         {
             if (seen)
             {
