@@ -13,7 +13,7 @@ internal class DeathSpellDetectUnlife : Spell
     private DeathSpellDetectUnlife(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.DetectMonstersNonliving();
+        SaveGame.RunScript(nameof(DetectNonlivingScript));
     }
 
     public override void CastFailed()

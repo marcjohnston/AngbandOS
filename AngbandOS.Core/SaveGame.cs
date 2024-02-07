@@ -4665,39 +4665,6 @@ internal class SaveGame
         return flag;
     }
 
-    public void DetectMonstersNonliving()
-    {
-        bool flag = false;
-        for (int i = 1; i < MMax; i++)
-        {
-            Monster mPtr = Monsters[i];
-            MonsterRace rPtr = mPtr.Race;
-            if (mPtr.Race == null)
-            {
-                continue;
-            }
-            int y = mPtr.MapY;
-            int x = mPtr.MapX;
-            if (!PanelContains(y, x))
-            {
-                continue;
-            }
-            if (rPtr.Nonliving || rPtr.Undead ||
-                rPtr.Cthuloid || rPtr.Demon)
-            {
-                RepairMonsters = true;
-                mPtr.IndividualMonsterFlags |= Constants.MflagMark | Constants.MflagShow;
-                mPtr.IsVisible = true;
-                RedrawSingleLocation(y, x);
-                flag = true;
-            }
-        }
-        if (flag)
-        {
-            MsgPrint("You sense the presence of unnatural beings!");
-        }
-    }
-
     public bool DetectObjectsGold()
     {
         bool detect = false;
