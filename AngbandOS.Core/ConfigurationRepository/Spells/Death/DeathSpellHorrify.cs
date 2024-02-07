@@ -13,12 +13,7 @@ internal class DeathSpellHorrify : Spell
     private DeathSpellHorrify(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        if (!SaveGame.GetDirectionWithAim(out int dir))
-        {
-            return;
-        }
-        SaveGame.FearMonster(dir, SaveGame.ExperienceLevel);
-        SaveGame.StunMonster(dir, SaveGame.ExperienceLevel);
+        SaveGame.RunScript(nameof(HorrifyScript));
     }
 
     public override void CastFailed()
