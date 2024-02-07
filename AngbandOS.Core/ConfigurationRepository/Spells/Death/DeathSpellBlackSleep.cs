@@ -13,11 +13,7 @@ internal class DeathSpellBlackSleep : Spell
     private DeathSpellBlackSleep(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        if (!SaveGame.GetDirectionWithAim(out int dir))
-        {
-            return;
-        }
-        SaveGame.SleepMonster(dir);
+        SaveGame.RunScript(nameof(BlackSleepScript));
     }
 
     public override void CastFailed()

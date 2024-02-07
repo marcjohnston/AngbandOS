@@ -13,7 +13,8 @@ internal class BattleFrenzyScript : Script, IScript
     private BattleFrenzyScript(SaveGame saveGame) : base(saveGame) { }
 
     /// <summary>
-    /// Executes the script.
+    /// Restores 30 points of health, removes fear, adds between 25 and 50 turns of super heroism and adds up to 5 turns of haste if the player already has
+    /// haste or between 1/2 experience and 1/2 experience + 20 turns of haste, if the player has none.
     /// </summary>
     /// <returns></returns>
     public void ExecuteScript()

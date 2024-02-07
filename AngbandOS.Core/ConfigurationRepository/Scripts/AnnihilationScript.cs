@@ -13,7 +13,7 @@ internal class AnnihilationScript : Script, IScript
     private AnnihilationScript(SaveGame saveGame) : base(saveGame) { }
 
     /// <summary>
-    /// Executes the script.
+    /// Destroys every monster, taking a hit for each one but adding mana for each too.
     /// </summary>
     /// <returns></returns>
     public void ExecuteScript()

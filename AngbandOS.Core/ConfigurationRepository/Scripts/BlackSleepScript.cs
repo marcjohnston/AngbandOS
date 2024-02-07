@@ -8,18 +8,20 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class BerserkScript : Script, IScript
+internal class BlackSleepScript : Script, IScript
 {
-    private BerserkScript(SaveGame saveGame) : base(saveGame) { }
+    private BlackSleepScript(SaveGame saveGame) : base(saveGame) { }
 
     /// <summary>
-    /// Restores 30 points of health, removes fear and adds between 25 and 50 turns of super heroism.
+    /// Puts a monster to sleep in a chosen direction.
     /// </summary>
     /// <returns></returns>
     public void ExecuteScript()
     {
-        SaveGame.TimedSuperheroism.AddTimer(SaveGame.Rng.DieRoll(25) + 25);
-        SaveGame.RestoreHealth(30);
-        SaveGame.TimedFear.ResetTimer();
+        if (!SaveGame.GetDirectionWithAim(out int dir))
+        {
+            return;
+        }
+        SaveGame.SleepMonster(dir);
     }
 }
