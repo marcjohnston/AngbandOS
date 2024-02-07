@@ -13,14 +13,7 @@ internal class DeathSpellEsoteria : Spell
     private DeathSpellEsoteria(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        if (SaveGame.Rng.DieRoll(50) > SaveGame.ExperienceLevel)
-        {
-            SaveGame.IdentifyItem();
-        }
-        else
-        {
-            SaveGame.RunScript(nameof(IdentifyFullyScript));
-        }
+        SaveGame.RunScript(nameof(EsoteriaScript));
     }
 
     public override void CastFailed()
