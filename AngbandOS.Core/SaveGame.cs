@@ -2043,7 +2043,7 @@ internal class SaveGame
     /// <returns></returns>
     private string GetLabelRanges(IEnumerable<int> inventorySlots)
     {
-        int[] inventorySlotsArray = inventorySlots.ToArray();
+        int[] inventorySlotsArray = inventorySlots.OrderBy(_slot => _slot).ToArray();
         string ranges = "";
         int? last = null;
         int? current = null;
