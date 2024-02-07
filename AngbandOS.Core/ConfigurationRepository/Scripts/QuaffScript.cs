@@ -28,7 +28,7 @@ internal class QuaffScript : Script, IScript, IRepeatableScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        if (!SaveGame.SelectItem(out Item? item, "Quaff which potion? ", true, true, true, SaveGame.SingletonRepository.ItemFilters.Get(nameof(CanBeQuaffedItemFilter))))
+        if (!SaveGame.SelectItem(out Item? item, "Quaff which potion? ", false, true, true, SaveGame.SingletonRepository.ItemFilters.Get(nameof(CanBeQuaffedItemFilter))))
         {
             SaveGame.MsgPrint("You have no potions to quaff.");
             return;

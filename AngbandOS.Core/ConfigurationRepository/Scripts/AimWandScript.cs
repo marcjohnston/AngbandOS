@@ -38,7 +38,7 @@ internal class AimWandScript : Script, IScript, IRepeatableScript, ISuccessfulSc
     public bool ExecuteSuccessfulScript()
     {
         // Prompt for an item, showing only wands
-        if (!SaveGame.SelectItem(out Item? item, "Aim which wand? ", true, true, true, SaveGame.SingletonRepository.ItemFilters.Get(nameof(CanBeAimedItemFilter))))
+        if (!SaveGame.SelectItem(out Item? item, "Aim which wand? ", false, true, true, SaveGame.SingletonRepository.ItemFilters.Get(nameof(CanBeAimedItemFilter))))
         {
             SaveGame.MsgPrint("You have no wand to aim.");
             return false;

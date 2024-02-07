@@ -44,7 +44,7 @@ internal class ReadScrollScript : Script, IScript, IRepeatableScript
             SaveGame.MsgPrint("You are too confused!");
             return;
         }
-        if (!SaveGame.SelectItem(out Item? item, "Read which scroll? ", true, true, true, SaveGame.SingletonRepository.ItemFilters.Get(nameof(CanBeReadItemFilter))))
+        if (!SaveGame.SelectItem(out Item? item, "Read which scroll? ", false, true, true, SaveGame.SingletonRepository.ItemFilters.Get(nameof(CanBeReadItemFilter))))
         {
             SaveGame.MsgPrint("You have no scrolls to read.");
             return;
