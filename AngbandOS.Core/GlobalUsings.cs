@@ -69,7 +69,7 @@ global using AngbandOS.Core.Spells.Sorcery;
 global using AngbandOS.Core.Spells.Tarot;
 global using AngbandOS.Core.StoreCommands;
 global using AngbandOS.Core.StoreFactories;
-global using AngbandOS.Core.StoreOwners;
+global using AngbandOS.Core.Shopkeepers;
 global using AngbandOS.Core.StoreFactories;
 global using AngbandOS.Core.Syllables;
 global using AngbandOS.Core.Symbols;

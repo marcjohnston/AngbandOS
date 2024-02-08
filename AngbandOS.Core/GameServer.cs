@@ -200,16 +200,16 @@ public class GameServer
         if (persistentStorage != null && configuration == null) {
             configuration = new Configuration()
             {
-                //StoreOwners = RetrieveEntities<StoreOwnerDefinition, JsonStoreOwner>(persistentStorage, nameof(StoreOwner)),
-                //Towns = RetrieveEntities<TownDefinition, JsonTown>(persistentStorage, nameof(Town)),
-                //GameCommands = RetrieveEntities<GameCommandDefinition, JsonGameCommand>(persistentStorage, nameof(GameCommand)),
-                //StoreCommands = RetrieveEntities<StoreCommandDefinition, JsonStoreCommand>(persistentStorage, nameof(StoreCommand)),
-                //HelpGroups = RetrieveEntities<HelpGroupDefinition, JsonHelpGroup>(persistentStorage, nameof(HelpGroup)),
-                //MonsterRaces = RetrieveEntities<MonsterRaceDefinition, JsonMonsterRace>(persistentStorage, nameof(MonsterRace)),
-                //Symbols = RetrieveEntities<SymbolDefinition, JsonSymbol>(persistentStorage, nameof(Symbol))
-                //Vaults = RetrieveEntities<VaultDefinition, JsonVault>(persistentStorage, nameof(Vault))
-                //DungeonGuardians = RetrieveEntities<DungeonGuardianDefinition, JsonDungeonGuardian>(persistentStorage, nameof(DungeonGuardian))
-                //Dungeons = RetrieveEntities<DungeonDefinition, JsonDungeon>(persistentStorage, nameof(Dungeon))
+                Shopkeepers = RetrieveEntities<ShopkeeperDefinition, JsonShopkeeper>(persistentStorage, nameof(Shopkeeper)),
+                Towns = RetrieveEntities<TownDefinition, JsonTown>(persistentStorage, nameof(Town)),
+                GameCommands = RetrieveEntities<GameCommandDefinition, JsonGameCommand>(persistentStorage, nameof(GameCommand)),
+                StoreCommands = RetrieveEntities<StoreCommandDefinition, JsonStoreCommand>(persistentStorage, nameof(StoreCommand)),
+                HelpGroups = RetrieveEntities<HelpGroupDefinition, JsonHelpGroup>(persistentStorage, nameof(HelpGroup)),
+                MonsterRaces = RetrieveEntities<MonsterRaceDefinition, JsonMonsterRace>(persistentStorage, nameof(MonsterRace)),
+                Symbols = RetrieveEntities<SymbolDefinition, JsonSymbol>(persistentStorage, nameof(Symbol)),
+                Vaults = RetrieveEntities<VaultDefinition, JsonVault>(persistentStorage, nameof(Vault)),
+                DungeonGuardians = RetrieveEntities<DungeonGuardianDefinition, JsonDungeonGuardian>(persistentStorage, nameof(DungeonGuardian)),
+                Dungeons = RetrieveEntities<DungeonDefinition, JsonDungeon>(persistentStorage, nameof(Dungeon))
             };
         }
 

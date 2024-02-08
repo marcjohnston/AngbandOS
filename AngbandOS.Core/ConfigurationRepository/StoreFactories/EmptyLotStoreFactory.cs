@@ -12,9 +12,9 @@ internal class EmptyLotStoreFactory : StoreFactory
 {
     private EmptyLotStoreFactory(SaveGame saveGame) : base(saveGame) { }
 
-    protected override string[] StoreOwnerNames => new string[]
+    protected override string[] ShopkeeperNames => new string[]
     {
-        nameof(EmptyLotStoreOwner)
+        nameof(EmptyLotShopkeeper)
     };
 
     protected override string TileName => ""; // This is the empty lot tile.

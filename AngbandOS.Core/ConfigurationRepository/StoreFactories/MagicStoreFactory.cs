@@ -12,32 +12,32 @@ internal class MagicStoreFactory : StoreFactory
 {
     private MagicStoreFactory(SaveGame saveGame) : base(saveGame) { }
 
-    protected override string[] StoreOwnerNames => new string[]
+    protected override string[] ShopkeeperNames => new string[]
     {
-        nameof(SkidneyTheSorcererStoreOwner),
-        nameof(BuggerbyTheGreatStoreOwner),
-        nameof(KyriaTheIllusionistStoreOwner),
-        nameof(NikkiTheNecromancerStoreOwner),
-        nameof(SolostoranStoreOwner),
-        nameof(AchsheTheTentacledStoreOwner),
-        nameof(KazaTheNobleStoreOwner),
-        nameof(FazzilTheDarkStoreOwner),
-        nameof(AngelStoreOwner),
-        nameof(FlotsamTheBloatedStoreOwner),
-        nameof(NievalStoreOwner),
-        nameof(AnastasiaTheLuminousStoreOwner),
-        nameof(KeldornTheGrandStoreOwner),
-        nameof(PhilanthropusStoreOwner),
-        nameof(AgnarTheEnchantressStoreOwner),
-        nameof(BulianceTheNecromancerStoreOwner),
-        nameof(VuirakTheHighMageStoreOwner),
-        nameof(MadishTheSmartStoreOwner),
-        nameof(FalebrimborStoreOwner),
-        nameof(FelilGandTheSubtleStoreOwner),
-        nameof(ThalegordTheShamanStoreOwner),
-        nameof(CthoalothTheMysticStoreOwner),
-        nameof(IbeliTheIllusionistStoreOwner),
-        nameof(HetoTheNecromancerStoreOwner)
+        nameof(SkidneyTheSorcererShopkeeper),
+        nameof(BuggerbyTheGreatShopkeeper),
+        nameof(KyriaTheIllusionistShopkeeper),
+        nameof(NikkiTheNecromancerShopkeeper),
+        nameof(SolostoranShopkeeper),
+        nameof(AchsheTheTentacledShopkeeper),
+        nameof(KazaTheNobleShopkeeper),
+        nameof(FazzilTheDarkShopkeeper),
+        nameof(AngelShopkeeper),
+        nameof(FlotsamTheBloatedShopkeeper),
+        nameof(NievalShopkeeper),
+        nameof(AnastasiaTheLuminousShopkeeper),
+        nameof(KeldornTheGrandShopkeeper),
+        nameof(PhilanthropusShopkeeper),
+        nameof(AgnarTheEnchantressShopkeeper),
+        nameof(BulianceTheNecromancerShopkeeper),
+        nameof(VuirakTheHighMageShopkeeper),
+        nameof(MadishTheSmartShopkeeper),
+        nameof(FalebrimborShopkeeper),
+        nameof(FelilGandTheSubtleShopkeeper),
+        nameof(ThalegordTheShamanShopkeeper),
+        nameof(CthoalothTheMysticShopkeeper),
+        nameof(IbeliTheIllusionistShopkeeper),
+        nameof(HetoTheNecromancerShopkeeper)
     };
 
     protected override string TileName => "MagicShop";

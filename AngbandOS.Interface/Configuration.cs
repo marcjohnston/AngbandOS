@@ -32,7 +32,7 @@ public class Configuration
     /// </summary>
     public TownDefinition[]? Towns { get; set; } = null;
 
-    public StoreOwnerDefinition[]? StoreOwners { get; set; } = null;
+    public ShopkeeperDefinition[]? Shopkeepers { get; set; } = null;
 
     public GameCommandDefinition[]? GameCommands { get; set; } = null;
     public StoreCommandDefinition[]? StoreCommands { get; set; } = null;

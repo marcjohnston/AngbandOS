@@ -663,7 +663,7 @@ internal class SaveGame
 
     public void SayComment_1()
     {
-        MsgPrint(SingletonRepository.StoreOwnerAcceptedComments.ToWeightedRandom().Choose());
+        MsgPrint(SingletonRepository.ShopkeeperAcceptedComments.ToWeightedRandom().Choose());
     }
 
     public bool ServiceHaggle(int serviceCost, out int price)

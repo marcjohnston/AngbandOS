@@ -26,7 +26,7 @@ internal class PersistConfigurationScript : Script, IScript
 
         try
         {
-            Persist<StoreOwner>(SaveGame.CorePersistentStorage, SaveGame.SingletonRepository.StoreOwners, nameof(StoreOwner));
+            Persist<Shopkeeper>(SaveGame.CorePersistentStorage, SaveGame.SingletonRepository.Shopkeepers, nameof(Shopkeeper));
             Persist<Town>(SaveGame.CorePersistentStorage, SaveGame.SingletonRepository.Towns, nameof(Town));
             Persist<GameCommand>(SaveGame.CorePersistentStorage, SaveGame.SingletonRepository.GameCommands, nameof(GameCommand));
             Persist<StoreCommand>(SaveGame.CorePersistentStorage, SaveGame.SingletonRepository.StoreCommands, nameof(StoreCommand));

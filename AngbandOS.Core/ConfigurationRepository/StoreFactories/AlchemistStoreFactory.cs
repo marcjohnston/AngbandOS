@@ -12,28 +12,28 @@ internal partial class AlchemistStoreFactory : StoreFactory
 {
     private AlchemistStoreFactory(SaveGame saveGame) : base(saveGame) { }
 
-    protected override string[] StoreOwnerNames => new string[]
+    protected override string[] ShopkeeperNames => new string[]
     {
-        nameof(MauserTheChemistStoreOwner),
-        nameof(WizzleTheChaoticStoreOwner),
-        nameof(KakalrakakalStoreOwner),
-        nameof(JalEthTheAlchemistStoreOwner),
-        nameof(FanelathTheCautiousStoreOwner),
-        nameof(RuncieTheInsaneStoreOwner),
-        nameof(GrumbleworthStoreOwner),
-        nameof(FlitterStoreOwner),
-        nameof(XarillusStoreOwner),
-        nameof(EgbertTheOldStoreOwner),
-        nameof(ValindraTheProudStoreOwner),
-        nameof(TaenTheAlchemistStoreOwner),
-        nameof(CaydTheSweetStoreOwner),
-        nameof(FulirTheDarkStoreOwner),
-        nameof(DomliTheHumbleStoreOwner),
-        nameof(YaarjukkaDemonspawnStoreOwner),
-        nameof(GelaraldorTheHerbmasterStoreOwner),
-        nameof(OlelaldanTheWiseStoreOwner),
-        nameof(FthogloTheDemonicistStoreOwner),
-        nameof(DridashTheAlchemistStoreOwner)
+        nameof(MauserTheChemistShopkeeper),
+        nameof(WizzleTheChaoticShopkeeper),
+        nameof(KakalrakakalShopkeeper),
+        nameof(JalEthTheAlchemistShopkeeper),
+        nameof(FanelathTheCautiousShopkeeper),
+        nameof(RuncieTheInsaneShopkeeper),
+        nameof(GrumbleworthShopkeeper),
+        nameof(FlitterShopkeeper),
+        nameof(XarillusShopkeeper),
+        nameof(EgbertTheOldShopkeeper),
+        nameof(ValindraTheProudShopkeeper),
+        nameof(TaenTheAlchemistShopkeeper),
+        nameof(CaydTheSweetShopkeeper),
+        nameof(FulirTheDarkShopkeeper),
+        nameof(DomliTheHumbleShopkeeper),
+        nameof(YaarjukkaDemonspawnShopkeeper),
+        nameof(GelaraldorTheHerbmasterShopkeeper),
+        nameof(OlelaldanTheWiseShopkeeper),
+        nameof(FthogloTheDemonicistShopkeeper),
+        nameof(DridashTheAlchemistShopkeeper)
     };
 
     protected override string TileName => "Alchemist";

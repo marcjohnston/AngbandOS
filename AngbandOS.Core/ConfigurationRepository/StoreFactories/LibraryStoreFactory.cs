@@ -12,32 +12,32 @@ internal class LibraryStoreFactory : StoreFactory
 {
     private LibraryStoreFactory(SaveGame saveGame) : base(saveGame) { }
 
-    protected override string[] StoreOwnerNames => new string[]
+    protected override string[] ShopkeeperNames => new string[]
     {
-        nameof(RandolphCarterStoreOwner),
-        nameof(OdnarTheSageStoreOwner),
-        nameof(GandarTheNeutralStoreOwner),
-        nameof(RoshaThePatientStoreOwner),
-        nameof(SaraiTheSwiftStoreOwner),
-        nameof(BodrilTheSeerStoreOwner),
-        nameof(VeloinTheQuietStoreOwner),
-        nameof(VanthylasTheLearnedStoreOwner),
-        nameof(OsseinTheLiterateStoreOwner),
-        nameof(OlvarBookwormStoreOwner),
-        nameof(ShallowgraveStoreOwner),
-        nameof(DeathMaskStoreOwner),
-        nameof(PorcinaTheObeseStoreOwner),
-        nameof(GlarunaBrandybreathStoreOwner),
-        nameof(FurfaceYeekStoreOwner),
-        nameof(BaldOgginStoreOwner),
-        nameof(AsuunuTheLearnedStoreOwner),
-        nameof(PrirandTheDeadStoreOwner),
-        nameof(RonarTheIronStoreOwner),
-        nameof(GalilGamirStoreOwner),
-        nameof(RorbagBookEaterStoreOwner),
-        nameof(KiriarikirkStoreOwner),
-        nameof(RilinTheQuietStoreOwner),
-        nameof(IsungTheLordStoreOwner)
+        nameof(RandolphCarterShopkeeper),
+        nameof(OdnarTheSageShopkeeper),
+        nameof(GandarTheNeutralShopkeeper),
+        nameof(RoshaThePatientShopkeeper),
+        nameof(SaraiTheSwiftShopkeeper),
+        nameof(BodrilTheSeerShopkeeper),
+        nameof(VeloinTheQuietShopkeeper),
+        nameof(VanthylasTheLearnedShopkeeper),
+        nameof(OsseinTheLiterateShopkeeper),
+        nameof(OlvarBookwormShopkeeper),
+        nameof(ShallowgraveShopkeeper),
+        nameof(DeathMaskShopkeeper),
+        nameof(PorcinaTheObeseShopkeeper),
+        nameof(GlarunaBrandybreathShopkeeper),
+        nameof(FurfaceYeekShopkeeper),
+        nameof(BaldOgginShopkeeper),
+        nameof(AsuunuTheLearnedShopkeeper),
+        nameof(PrirandTheDeadShopkeeper),
+        nameof(RonarTheIronShopkeeper),
+        nameof(GalilGamirShopkeeper),
+        nameof(RorbagBookEaterShopkeeper),
+        nameof(KiriarikirkShopkeeper),
+        nameof(RilinTheQuietShopkeeper),
+        nameof(IsungTheLordShopkeeper)
     };
 
     protected override string TileName => "Bookstore";

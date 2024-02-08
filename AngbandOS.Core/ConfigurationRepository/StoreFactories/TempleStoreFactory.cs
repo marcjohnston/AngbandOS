@@ -14,28 +14,28 @@ internal partial class TempleStoreFactory : StoreFactory
 
     protected override string TileName => "Temple";
 
-    protected override string[] StoreOwnerNames => new string[]
+    protected override string[] ShopkeeperNames => new string[]
     {
-        nameof(LudwigTheHumbleStoreOwner),
-        nameof(GunnarThePaladinStoreOwner),
-        nameof(SirParsivalThePureStoreOwner),
-        nameof(AsenathTheHolyStoreOwner),
-        nameof(McKinnonStoreOwner),
-        nameof(MistressChastityStoreOwner),
-        nameof(HashnikTheDruidStoreOwner),
-        nameof(FinakStoreOwner),
-        nameof(KrikkikStoreOwner),
-        nameof(MorivalTheWildStoreOwner),
-        nameof(HoshakTheDarkStoreOwner),
-        nameof(AtalTheWiseStoreOwner),
-        nameof(IbeniddTheChasteStoreOwner),
-        nameof(EridishStoreOwner),
-        nameof(VrudushTheShamanStoreOwner),
-        nameof(HaobTheBerserkerStoreOwner),
-        nameof(ProogdishTheYouthfullStoreOwner),
-        nameof(LumwiseTheMadStoreOwner),
-        nameof(MuirtTheVirtuousStoreOwner),
-        nameof(DardobardTheWeakStoreOwner)
+        nameof(LudwigTheHumbleShopkeeper),
+        nameof(GunnarThePaladinShopkeeper),
+        nameof(SirParsivalThePureShopkeeper),
+        nameof(AsenathTheHolyShopkeeper),
+        nameof(McKinnonShopkeeper),
+        nameof(MistressChastityShopkeeper),
+        nameof(HashnikTheDruidShopkeeper),
+        nameof(FinakShopkeeper),
+        nameof(KrikkikShopkeeper),
+        nameof(MorivalTheWildShopkeeper),
+        nameof(HoshakTheDarkShopkeeper),
+        nameof(AtalTheWiseShopkeeper),
+        nameof(IbeniddTheChasteShopkeeper),
+        nameof(EridishShopkeeper),
+        nameof(VrudushTheShamanShopkeeper),
+        nameof(HaobTheBerserkerShopkeeper),
+        nameof(ProogdishTheYouthfullShopkeeper),
+        nameof(LumwiseTheMadShopkeeper),
+        nameof(MuirtTheVirtuousShopkeeper),
+        nameof(DardobardTheWeakShopkeeper)
     };
 
     protected override StoreStockManifestDefinition[]? StoreStockManifestDefinitions => new[]

@@ -17,28 +17,28 @@ internal class BlackMarketStoreFactory : StoreFactory
     public override int StoreTurnover => 5;
     protected override string TileName => "BlackMarket";
 
-    protected override string[] StoreOwnerNames => new string[]
+    protected override string[] ShopkeeperNames => new string[]
     {
-        nameof(VhassaTheDeadStoreOwner),
-        nameof(KynTheTreacherousStoreOwner),
-        nameof(BatrachianBelleStoreOwner),
-        nameof(CorpselightStoreOwner),
-        nameof(ParrishTheBloodthirstyStoreOwner),
-        nameof(VileStoreOwner),
-        nameof(PrenticeTheTrustedStoreOwner),
-        nameof(GriellaHumanslayerStoreOwner),
-        nameof(CharityTheNecromancerStoreOwner),
-        nameof(PugnaciousThePugilistStoreOwner),
-        nameof(FootsoreTheLuckyStoreOwner),
-        nameof(SidriaLighfingeredStoreOwner),
-        nameof(RiathoTheJugglerStoreOwner),
-        nameof(JanaakaTheShiftyStoreOwner),
-        nameof(CinaTheRogueStoreOwner),
-        nameof(ArunikkiGreatclawStoreOwner),
-        nameof(ChaeandThePoorStoreOwner),
-        nameof(AfardorfTheBrigandStoreOwner),
-        nameof(LathaxlTheGreedyStoreOwner),
-        nameof(FalarewynStoreOwner)
+        nameof(VhassaTheDeadShopkeeper),
+        nameof(KynTheTreacherousShopkeeper),
+        nameof(BatrachianBelleShopkeeper),
+        nameof(CorpselightShopkeeper),
+        nameof(ParrishTheBloodthirstyShopkeeper),
+        nameof(VileShopkeeper),
+        nameof(PrenticeTheTrustedShopkeeper),
+        nameof(GriellaHumanslayerShopkeeper),
+        nameof(CharityTheNecromancerShopkeeper),
+        nameof(PugnaciousThePugilistShopkeeper),
+        nameof(FootsoreTheLuckyShopkeeper),
+        nameof(SidriaLighfingeredShopkeeper),
+        nameof(RiathoTheJugglerShopkeeper),
+        nameof(JanaakaTheShiftyShopkeeper),
+        nameof(CinaTheRogueShopkeeper),
+        nameof(ArunikkiGreatclawShopkeeper),
+        nameof(ChaeandThePoorShopkeeper),
+        nameof(AfardorfTheBrigandShopkeeper),
+        nameof(LathaxlTheGreedyShopkeeper),
+        nameof(FalarewynShopkeeper)
     };
 
     /// <summary>

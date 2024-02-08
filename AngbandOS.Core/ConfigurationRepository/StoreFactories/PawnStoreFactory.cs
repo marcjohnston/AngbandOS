@@ -12,28 +12,28 @@ internal class PawnStoreFactory : StoreFactory
 {
     private PawnStoreFactory(SaveGame saveGame) : base(saveGame) { }
 
-    protected override string[] StoreOwnerNames => new string[]
+    protected override string[] ShopkeeperNames => new string[]
     {
-        nameof(MagdTheRuthlessStoreOwner),
-        nameof(DrakoFairdealStoreOwner),
-        nameof(FeatherwingStoreOwner),
-        nameof(XochinagguaStoreOwner),
-        nameof(OdThePennilessStoreOwner),
-        nameof(XaxStoreOwner),
-        nameof(JakeSmallStoreOwner),
-        nameof(HelgaTheLostStoreOwner),
-        nameof(GloomThePhlegmaticStoreOwner),
-        nameof(QuickArmVollaireStoreOwner),
-        nameof(AsenathStoreOwner),
-        nameof(LordFilbertStoreOwner),
-        nameof(HerranythTheRuthlessStoreOwner),
-        nameof(GagrinMoneylenderStoreOwner),
-        nameof(ThramborTheGrubbyStoreOwner),
-        nameof(DerigrinTheHonestStoreOwner),
-        nameof(MunkTheBartererStoreOwner),
-        nameof(GadrialdurTheFairStoreOwner),
-        nameof(NinarTheStoopedStoreOwner),
-        nameof(AdirathTheUnmagicalStoreOwner)
+        nameof(MagdTheRuthlessShopkeeper),
+        nameof(DrakoFairdealShopkeeper),
+        nameof(FeatherwingShopkeeper),
+        nameof(XochinagguaShopkeeper),
+        nameof(OdThePennilessShopkeeper),
+        nameof(XaxShopkeeper),
+        nameof(JakeSmallShopkeeper),
+        nameof(HelgaTheLostShopkeeper),
+        nameof(GloomThePhlegmaticShopkeeper),
+        nameof(QuickArmVollaireShopkeeper),
+        nameof(AsenathShopkeeper),
+        nameof(LordFilbertShopkeeper),
+        nameof(HerranythTheRuthlessShopkeeper),
+        nameof(GagrinMoneylenderShopkeeper),
+        nameof(ThramborTheGrubbyShopkeeper),
+        nameof(DerigrinTheHonestShopkeeper),
+        nameof(MunkTheBartererShopkeeper),
+        nameof(GadrialdurTheFairShopkeeper),
+        nameof(NinarTheStoopedShopkeeper),
+        nameof(AdirathTheUnmagicalShopkeeper)
     };
 
     protected override string TileName => "Pawnbrokers";

@@ -13,9 +13,9 @@ internal class HomeStoreFactory : StoreFactory
     private HomeStoreFactory(SaveGame saveGame) : base(saveGame) { }
 
     public override int MaxInventory => 100;
-    protected override string[] StoreOwnerNames => new string[]
+    protected override string[] ShopkeeperNames => new string[]
     {
-        nameof(YourHomeStoreOwner)
+        nameof(YourHomeShopkeeper)
     };
 
     protected override string TileName => "Home";

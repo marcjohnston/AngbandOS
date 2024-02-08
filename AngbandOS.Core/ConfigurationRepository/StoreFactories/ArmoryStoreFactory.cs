@@ -12,32 +12,32 @@ internal class ArmoryStoreFactory : StoreFactory
 {
     private ArmoryStoreFactory(SaveGame saveGame) : base(saveGame) { }
 
-    protected override string[] StoreOwnerNames => new string[]
+    protected override string[] ShopkeeperNames => new string[]
     {
-        nameof(KonDarTheUglyStoreOwner),
-        nameof(DargLowTheGrimStoreOwner),
-        nameof(DecadoTheHandsomeStoreOwner),
-        nameof(EloDragonscaleStoreOwner),
-        nameof(DelicatusStoreOwner),
-        nameof(GruceTheHugeStoreOwner),
-        nameof(AnimusStoreOwner),
-        nameof(MalvusStoreOwner),
-        nameof(SelaxisStoreOwner),
-        nameof(DeathchillStoreOwner),
-        nameof(DriosTheFaintStoreOwner),
-        nameof(BathricTheColdStoreOwner),
-        nameof(VengellaTheCruelStoreOwner),
-        nameof(WyranaTheMightyStoreOwner),
-        nameof(YojoIIStoreOwner),
-        nameof(RanalarTheSweetStoreOwner),
-        nameof(HorbagTheUncleanStoreOwner),
-        nameof(ElelenTheTelepathStoreOwner),
-        nameof(IsedreliasStoreOwner),
-        nameof(VegnarOneEyeStoreOwner),
-        nameof(RodishTheChaoticStoreOwner),
-        nameof(HesinSwordmasterStoreOwner),
-        nameof(ElvererithTheCheatStoreOwner),
-        nameof(ZzathathTheImpStoreOwner)
+        nameof(KonDarTheUglyShopkeeper),
+        nameof(DargLowTheGrimShopkeeper),
+        nameof(DecadoTheHandsomeShopkeeper),
+        nameof(EloDragonscaleShopkeeper),
+        nameof(DelicatusShopkeeper),
+        nameof(GruceTheHugeShopkeeper),
+        nameof(AnimusShopkeeper),
+        nameof(MalvusShopkeeper),
+        nameof(SelaxisShopkeeper),
+        nameof(DeathchillShopkeeper),
+        nameof(DriosTheFaintShopkeeper),
+        nameof(BathricTheColdShopkeeper),
+        nameof(VengellaTheCruelShopkeeper),
+        nameof(WyranaTheMightyShopkeeper),
+        nameof(YojoIIShopkeeper),
+        nameof(RanalarTheSweetShopkeeper),
+        nameof(HorbagTheUncleanShopkeeper),
+        nameof(ElelenTheTelepathShopkeeper),
+        nameof(IsedreliasShopkeeper),
+        nameof(VegnarOneEyeShopkeeper),
+        nameof(RodishTheChaoticShopkeeper),
+        nameof(HesinSwordmasterShopkeeper),
+        nameof(ElvererithTheCheatShopkeeper),
+        nameof(ZzathathTheImpShopkeeper)
     };
 
     protected override string TileName => "Armory";

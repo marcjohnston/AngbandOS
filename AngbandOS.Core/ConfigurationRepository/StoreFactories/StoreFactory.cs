@@ -30,12 +30,12 @@ internal abstract class StoreFactory : IItemFilter, IGetKey<string>
         AdvertisedStoreCommand5 = AdvertisedStoreCommand5Name == null ? null : SaveGame.SingletonRepository.StoreCommands.Get(AdvertisedStoreCommand5Name);
 
         // Bind the store owners.
-        List<StoreOwner> storeOwnersList = new();
-        foreach (string storeOwnerName in StoreOwnerNames)
+        List<Shopkeeper> shopkeepersList = new();
+        foreach (string shopkeeperName in ShopkeeperNames)
         {
-            storeOwnersList.Add(SaveGame.SingletonRepository.StoreOwners.Get(storeOwnerName));
+            shopkeepersList.Add(SaveGame.SingletonRepository.Shopkeepers.Get(shopkeeperName));
         }
-        StoreOwners = storeOwnersList.ToArray();
+        Shopkeepers = shopkeepersList.ToArray();
 
         // Bind the symbol.
         Tile = SaveGame.SingletonRepository.Tiles.Get(TileName);
@@ -176,12 +176,12 @@ internal abstract class StoreFactory : IItemFilter, IGetKey<string>
     /// </summary>
     public virtual bool ShufflesOwnersAndPricing => true;
 
-    protected abstract string[] StoreOwnerNames { get; }
+    protected abstract string[] ShopkeeperNames { get; }
 
     /// <summary>
     /// Represents a pool of possible store owners for the store.
     /// </summary>
-    public StoreOwner[] StoreOwners { get; private set; }
+    public Shopkeeper[] Shopkeepers { get; private set; }
 
     protected virtual string? AdvertisedStoreCommand1Name => nameof(PurchaseStoreCommand);
     protected virtual string? AdvertisedStoreCommand2Name => nameof(SellStoreCommand);

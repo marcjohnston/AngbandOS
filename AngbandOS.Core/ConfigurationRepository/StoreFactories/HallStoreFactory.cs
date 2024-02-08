@@ -12,9 +12,9 @@ internal class HallStoreFactory : StoreFactory
 {
     private HallStoreFactory(SaveGame saveGame) : base(saveGame) { }
 
-    protected override string[] StoreOwnerNames => new string[]
+    protected override string[] ShopkeeperNames => new string[]
     {
-        nameof(HallOfRecordsStoreOwner)
+        nameof(HallOfRecordsShopkeeper)
     };
 
     protected override string TileName => "HallOfRecords";

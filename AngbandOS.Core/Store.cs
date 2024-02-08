@@ -54,7 +54,7 @@ internal class Store
     private readonly ItemFactory[] InventoryFactories;
 
     private bool _leaveStore;
-    public StoreOwner Owner { get; private set; }
+    public Shopkeeper Owner { get; private set; }
 
     /// <summary>
     /// Represents the first item being displayed in a page of inventory items.
@@ -216,9 +216,9 @@ internal class Store
         }
     }
 
-    private StoreOwner GetRandomOwner()
+    private Shopkeeper GetRandomOwner()
     {
-        return StoreFactory.StoreOwners[SaveGame.Rng.RandomLessThan(StoreFactory.StoreOwners.Length)];
+        return StoreFactory.Shopkeepers[SaveGame.Rng.RandomLessThan(StoreFactory.Shopkeepers.Length)];
     }
 
     private void StoreCreate()
@@ -724,7 +724,7 @@ internal class Store
     {
         get
         {
-            string ownerName = Owner.OwnerName;
+            string ownerName = Owner.Name;
             if (Owner.OwnerRace == null)
                 return $"{ownerName}";
             else

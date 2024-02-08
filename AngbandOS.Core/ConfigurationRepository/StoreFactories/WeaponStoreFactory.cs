@@ -12,32 +12,32 @@ internal partial class WeaponStoreFactory : StoreFactory
 {
     private WeaponStoreFactory(SaveGame saveGame) : base(saveGame) { }
 
-    protected override string[] StoreOwnerNames => new string[]
+    protected override string[] ShopkeeperNames => new string[]
     {
-        nameof(ArnoldTheBeastlyStoreOwner),
-        nameof(ArndalBeastSlayerStoreOwner),
-        nameof(EdorTheShortStoreOwner),
-        nameof(OglignDragonSlayerStoreOwner),
-        nameof(DrewTheSkilledStoreOwner),
-        nameof(OrraxDragonsonStoreOwner),
-        nameof(BobStoreOwner),
-        nameof(ArkhothTheStoutStoreOwner),
-        nameof(SarlyasTheRottenStoreOwner),
-        nameof(TuethicBareBonesStoreOwner),
-        nameof(BiliousTheToadStoreOwner),
-        nameof(FasgulStoreOwner),
-        nameof(EllefrisThePaladinStoreOwner),
-        nameof(KtrrikkStoreOwner),
-        nameof(DrocusSpiderfriendStoreOwner),
-        nameof(FungusGiantSlayerStoreOwner),
-        nameof(NadocTheStrongStoreOwner),
-        nameof(EramogTheWeakStoreOwner),
-        nameof(EowilithTheFairStoreOwner),
-        nameof(HuimogBalrogSlayerStoreOwner),
-        nameof(PeadusTheCruelStoreOwner),
-        nameof(VamogSlayerStoreOwner),
-        nameof(HooshnakTheViciousStoreOwner),
-        nameof(BalennWarDancerStoreOwner)
+        nameof(ArnoldTheBeastlyShopkeeper),
+        nameof(ArndalBeastSlayerShopkeeper),
+        nameof(EdorTheShortShopkeeper),
+        nameof(OglignDragonSlayerShopkeeper),
+        nameof(DrewTheSkilledShopkeeper),
+        nameof(OrraxDragonsonShopkeeper),
+        nameof(BobShopkeeper),
+        nameof(ArkhothTheStoutShopkeeper),
+        nameof(SarlyasTheRottenShopkeeper),
+        nameof(TuethicBareBonesShopkeeper),
+        nameof(BiliousTheToadShopkeeper),
+        nameof(FasgulShopkeeper),
+        nameof(EllefrisThePaladinShopkeeper),
+        nameof(KtrrikkShopkeeper),
+        nameof(DrocusSpiderfriendShopkeeper),
+        nameof(FungusGiantSlayerShopkeeper),
+        nameof(NadocTheStrongShopkeeper),
+        nameof(EramogTheWeakShopkeeper),
+        nameof(EowilithTheFairShopkeeper),
+        nameof(HuimogBalrogSlayerShopkeeper),
+        nameof(PeadusTheCruelShopkeeper),
+        nameof(VamogSlayerShopkeeper),
+        nameof(HooshnakTheViciousShopkeeper),
+        nameof(BalennWarDancerShopkeeper)
     };
 
     protected override string TileName => "Weaponsmiths";

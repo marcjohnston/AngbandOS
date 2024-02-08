@@ -63,7 +63,7 @@ internal class SingletonRepository
     public WandFlavoursRepositoryCollection WandFlavours;
     public ChestTrapConfigurationsRepositoryCollection ChestTrapConfigurations;
     public HelpGroupsRepositoryCollection HelpGroups;
-    public StoreOwnersRepositoryCollection StoreOwners;
+    public ShopkeepersRepositoryCollection Shopkeepers;
     public SpellsRepositoryCollection Spells;
     public CastingTypesRepositoryCollection CastingTypes;
     public RewardsRepositoryCollection Rewards;
@@ -81,7 +81,7 @@ internal class SingletonRepository
     public ShopKeeperLessThanGuessCommentsRepositoryCollection ShopKeeperLessThanGuessComments;
     public ShopKeeperWorthlessCommentsRepositoryCollection ShopKeeperWorthlessComments;
     public SingingPlayerAttacksRepositoryCollection SingingPlayerAttacks;
-    public StoreOwnerAcceptedCommentsRepositoryCollection StoreOwnerAcceptedComments;
+    public ShopkeeperAcceptedCommentsRepositoryCollection ShopkeeperAcceptedComments;
     public WorshipPlayerAttacksRepositoryCollection WorshipPlayerAttacks;
     public FindQuestsRepositoryCollection FindQuests;
     public ItemFiltersRepositoryCollection ItemFilters;
@@ -170,7 +170,7 @@ internal class SingletonRepository
         WandFlavours = AddRepositoryCollection<WandFlavoursRepositoryCollection>(new WandFlavoursRepositoryCollection(SaveGame));
         ChestTrapConfigurations = AddRepositoryCollection<ChestTrapConfigurationsRepositoryCollection>(new ChestTrapConfigurationsRepositoryCollection(SaveGame));
         HelpGroups = AddRepositoryCollection<HelpGroupsRepositoryCollection>(new HelpGroupsRepositoryCollection(SaveGame));
-        StoreOwners = AddRepositoryCollection<StoreOwnersRepositoryCollection>(new StoreOwnersRepositoryCollection(SaveGame));
+        Shopkeepers = AddRepositoryCollection<ShopkeepersRepositoryCollection>(new ShopkeepersRepositoryCollection(SaveGame));
         Spells = AddRepositoryCollection<SpellsRepositoryCollection>(new SpellsRepositoryCollection(SaveGame));
         CastingTypes = AddRepositoryCollection<CastingTypesRepositoryCollection>(new CastingTypesRepositoryCollection(SaveGame));
         Rewards = AddRepositoryCollection<RewardsRepositoryCollection>(new RewardsRepositoryCollection(SaveGame));
@@ -188,7 +188,7 @@ internal class SingletonRepository
         ShopKeeperLessThanGuessComments = AddRepositoryCollection<ShopKeeperLessThanGuessCommentsRepositoryCollection>(new ShopKeeperLessThanGuessCommentsRepositoryCollection(SaveGame));
         ShopKeeperWorthlessComments = AddRepositoryCollection<ShopKeeperWorthlessCommentsRepositoryCollection>(new ShopKeeperWorthlessCommentsRepositoryCollection(SaveGame));
         SingingPlayerAttacks = AddRepositoryCollection<SingingPlayerAttacksRepositoryCollection>(new SingingPlayerAttacksRepositoryCollection(SaveGame));
-        StoreOwnerAcceptedComments = AddRepositoryCollection<StoreOwnerAcceptedCommentsRepositoryCollection>(new StoreOwnerAcceptedCommentsRepositoryCollection(SaveGame));
+        ShopkeeperAcceptedComments = AddRepositoryCollection<ShopkeeperAcceptedCommentsRepositoryCollection>(new ShopkeeperAcceptedCommentsRepositoryCollection(SaveGame));
         WorshipPlayerAttacks = AddRepositoryCollection<WorshipPlayerAttacksRepositoryCollection>(new WorshipPlayerAttacksRepositoryCollection(SaveGame));
         FindQuests = AddRepositoryCollection<FindQuestsRepositoryCollection>(new FindQuestsRepositoryCollection(SaveGame));
         ItemFilters = AddRepositoryCollection<ItemFiltersRepositoryCollection>(new ItemFiltersRepositoryCollection(SaveGame));
