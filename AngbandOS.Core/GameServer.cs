@@ -6,7 +6,7 @@
 // copies. Other copyrights may also apply.”
 
 using AngbandOS.Core.Interface.Definitions;
-using AngbandOS.Core.JsonModels;
+using AngbandOS.Core.Pocos;
 using System.Text.Json;
 
 namespace AngbandOS.Core;
@@ -160,7 +160,7 @@ public class GameServer
         }
     }
 
-    private TDefinition[] RetrieveEntities<TDefinition, TJsonModel>(ICorePersistentStorage persistentStorage, string repositoryName) where TJsonModel : IJsonModel<TDefinition>
+    private TDefinition[] RetrieveEntities<TDefinition, TJsonModel>(ICorePersistentStorage persistentStorage, string repositoryName) where TJsonModel : IToDefinition<TDefinition>
     {
         string[] serializedEntities = persistentStorage.RetrieveEntities(repositoryName);
         List<TDefinition> entities = new List<TDefinition>();
@@ -200,16 +200,16 @@ public class GameServer
         if (persistentStorage != null && configuration == null) {
             configuration = new Configuration()
             {
-                Shopkeepers = RetrieveEntities<ShopkeeperDefinition, JsonShopkeeper>(persistentStorage, nameof(Shopkeeper)),
-                Towns = RetrieveEntities<TownDefinition, JsonTown>(persistentStorage, nameof(Town)),
-                GameCommands = RetrieveEntities<GameCommandDefinition, JsonGameCommand>(persistentStorage, nameof(GameCommand)),
-                StoreCommands = RetrieveEntities<StoreCommandDefinition, JsonStoreCommand>(persistentStorage, nameof(StoreCommand)),
-                HelpGroups = RetrieveEntities<HelpGroupDefinition, JsonHelpGroup>(persistentStorage, nameof(HelpGroup)),
-                MonsterRaces = RetrieveEntities<MonsterRaceDefinition, JsonMonsterRace>(persistentStorage, nameof(MonsterRace)),
-                Symbols = RetrieveEntities<SymbolDefinition, JsonSymbol>(persistentStorage, nameof(Symbol)),
-                Vaults = RetrieveEntities<VaultDefinition, JsonVault>(persistentStorage, nameof(Vault)),
-                DungeonGuardians = RetrieveEntities<DungeonGuardianDefinition, JsonDungeonGuardian>(persistentStorage, nameof(DungeonGuardian)),
-                Dungeons = RetrieveEntities<DungeonDefinition, JsonDungeon>(persistentStorage, nameof(Dungeon))
+                Shopkeepers = RetrieveEntities<ShopkeeperDefinition, ShopkeeperPoco>(persistentStorage, nameof(Shopkeeper)),
+                Towns = RetrieveEntities<TownDefinition, TownPoco>(persistentStorage, nameof(Town)),
+                GameCommands = RetrieveEntities<GameCommandDefinition, GameCommandPoco>(persistentStorage, nameof(GameCommand)),
+                StoreCommands = RetrieveEntities<StoreCommandDefinition, StoreCommandPoco>(persistentStorage, nameof(StoreCommand)),
+                HelpGroups = RetrieveEntities<HelpGroupDefinition, HelpGroupPoco>(persistentStorage, nameof(HelpGroup)),
+                MonsterRaces = RetrieveEntities<MonsterRaceDefinition, MonsterRacePoco>(persistentStorage, nameof(MonsterRace)),
+                Symbols = RetrieveEntities<SymbolDefinition, SymbolPoco>(persistentStorage, nameof(Symbol)),
+                Vaults = RetrieveEntities<VaultDefinition, VaultPoco>(persistentStorage, nameof(Vault)),
+                DungeonGuardians = RetrieveEntities<DungeonGuardianDefinition, DungeonGuardianPoco>(persistentStorage, nameof(DungeonGuardian)),
+                Dungeons = RetrieveEntities<DungeonDefinition, DungeonPoco>(persistentStorage, nameof(Dungeon))
             };
         }
 

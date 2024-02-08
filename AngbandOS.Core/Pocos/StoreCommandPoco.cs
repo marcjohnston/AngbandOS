@@ -5,11 +5,9 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-using AngbandOS.Core.Interface.Definitions;
+namespace AngbandOS.Core.Pocos;
 
-namespace AngbandOS.Core.JsonModels;
-
-internal class JsonStoreCommand : IJsonModel<StoreCommandDefinition>
+internal class StoreCommandPoco : IToDefinition<StoreCommandDefinition>
 {
     public string? Key { get; set; }
     public char? KeyChar { get; set; }

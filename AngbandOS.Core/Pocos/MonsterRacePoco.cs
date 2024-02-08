@@ -5,7 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.JsonModels;
+namespace AngbandOS.Core.Pocos;
 
 /// <summary>
 /// 
@@ -13,7 +13,7 @@ namespace AngbandOS.Core.JsonModels;
 /// <remarks>
 /// 102 Properties
 /// </remarks>
-internal class JsonMonsterRace : IJsonModel<MonsterRaceDefinition>
+internal class MonsterRacePoco : IToDefinition<MonsterRaceDefinition>
 {
     public virtual string? Key { get; set; }
     public virtual string[]? SpellNames { get; set; } = null;

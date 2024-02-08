@@ -5,12 +5,9 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-using AngbandOS.Core.JsonModels;
+namespace AngbandOS.Core.Pocos;
 
-namespace AngbandOS.Core.Interface.Definitions;
-
-[Serializable]
-public class JsonDungeon : IJsonModel<DungeonDefinition>
+public class DungeonPoco : IToDefinition<DungeonDefinition>
 {
     public virtual string? Key { get; set; }
 

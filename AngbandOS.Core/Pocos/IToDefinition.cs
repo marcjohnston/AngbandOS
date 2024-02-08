@@ -5,9 +5,9 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.JsonModels;
+namespace AngbandOS.Core.Pocos;
 
-internal interface IJsonModel<TDefinition>
+internal interface IToDefinition<TDefinition>
 {
     TDefinition? ToDefinition();
 }

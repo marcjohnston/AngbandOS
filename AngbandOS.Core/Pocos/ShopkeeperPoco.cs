@@ -5,14 +5,12 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-using AngbandOS.Core.Interface.Definitions;
-
-namespace AngbandOS.Core.JsonModels;
+namespace AngbandOS.Core.Pocos;
 
 /// <summary>
 /// Represents the model for a store owner to be used for Json deserialization.  All properties are nullable so that the deserialization can be validated.
 /// </summary>
-internal class JsonShopkeeper : IJsonModel<ShopkeeperDefinition>
+internal class ShopkeeperPoco : IToDefinition<ShopkeeperDefinition>
 {
     public string? Key { get; set; }
 

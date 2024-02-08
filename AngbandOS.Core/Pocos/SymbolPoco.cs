@@ -5,10 +5,9 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.JsonModels;
+namespace AngbandOS.Core.Pocos;
 
-[Serializable]
-internal class JsonSymbol : IJsonModel<SymbolDefinition>
+internal class SymbolPoco : IToDefinition<SymbolDefinition>
 {
     public virtual char? Character { get; set; }
     public virtual char? QueryCharacter { get; set; } = null;
