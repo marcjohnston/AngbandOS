@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
-internal abstract class StaffItemFactory : ItemFactory, IFlavour
+internal abstract class StaffItemFactory : ItemFactory, IFlavor
 {
     public StaffItemFactory(SaveGame saveGame) : base(saveGame) { }
     public override ItemClass ItemClass => SaveGame.SingletonRepository.ItemClasses.Get(nameof(StaffsItemClass));
@@ -16,7 +16,7 @@ internal abstract class StaffItemFactory : ItemFactory, IFlavour
     /// <summary>
     /// Returns the factory that this item was created by; casted as an IFlavour.
     /// </summary>
-    public IFlavour FlavourFactory => (IFlavour)this;
+    public IFlavor FlavourFactory => (IFlavor)this;
 
     public override string GetVerboseDescription(Item item)
     {
@@ -45,12 +45,12 @@ internal abstract class StaffItemFactory : ItemFactory, IFlavour
     /// <summary>
     /// Returns the staff flavours repository because staves have flavours that need to be identified.
     /// </summary>
-    public IEnumerable<Flavour>? GetFlavorRepository() => SaveGame.SingletonRepository.StaffFlavours;
+    public IEnumerable<Flavor>? GetFlavorRepository() => SaveGame.SingletonRepository.StaffFlavours;
 
     public override bool CanBeUsed => true;
 
     /// <inheritdoc/>
-    public Flavour Flavor { get; set; }
+    public Flavor Flavor { get; set; }
     public override bool IsRechargable => true;
 
     /// <summary>

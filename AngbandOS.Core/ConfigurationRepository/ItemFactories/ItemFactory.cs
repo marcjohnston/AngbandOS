@@ -712,7 +712,7 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey<string>
     /// <summary>
     /// Returns true, if the object type has flavors.  Returns false, by default.
     /// </summary>
-    public virtual bool HasFlavor => typeof(IFlavour).IsAssignableFrom(this.GetType());
+    public virtual bool HasFlavor => typeof(IFlavor).IsAssignableFrom(this.GetType());
 
     /// <summary>
     /// Applies random flavour visuals to the items.  This method is called if the HasFlavor property returns true when creating a new game.

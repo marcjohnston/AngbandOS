@@ -8,14 +8,14 @@
 namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
-internal abstract class MushroomFoodItemFactory : FoodItemFactory, IFlavour
+internal abstract class MushroomFoodItemFactory : FoodItemFactory, IFlavor
 {
     public MushroomFoodItemFactory(SaveGame saveGame) : base(saveGame) { }
 
     /// <summary>
     /// Returns the factory that this item was created by; casted as an IFlavour.
     /// </summary>
-    public IFlavour FlavourFactory => (IFlavour)this;
+    public IFlavor FlavourFactory => (IFlavor)this;
 
     public override string GetDescription(Item item, bool includeCountPrefix, bool isFlavourAware)
     {
@@ -28,8 +28,8 @@ internal abstract class MushroomFoodItemFactory : FoodItemFactory, IFlavour
     /// <summary>
     /// Returns the mushroom flavours repository because mushrooms have flavours that need to be identified.
     /// </summary>
-    public IEnumerable<Flavour>? GetFlavorRepository() => SaveGame.SingletonRepository.MushroomFlavours;
+    public IEnumerable<Flavor>? GetFlavorRepository() => SaveGame.SingletonRepository.MushroomFlavours;
 
     /// <inheritdoc/>
-    public Flavour Flavor { get; set; }
+    public Flavor Flavor { get; set; }
 }

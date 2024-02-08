@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
-internal abstract class RodItemFactory : ItemFactory, IFlavour
+internal abstract class RodItemFactory : ItemFactory, IFlavor
 {
     public RodItemFactory(SaveGame saveGame) : base(saveGame) { }
     public override ItemClass ItemClass => SaveGame.SingletonRepository.ItemClasses.Get(nameof(RodsItemClass));
@@ -16,7 +16,7 @@ internal abstract class RodItemFactory : ItemFactory, IFlavour
     /// <summary>
     /// Returns the factory that this item was created by; casted as an IFlavour.
     /// </summary>
-    public IFlavour FlavourFactory => (IFlavour)this;
+    public IFlavor FlavourFactory => (IFlavor)this;
 
     public override string GetVerboseDescription(Item item)
     {
@@ -40,12 +40,12 @@ internal abstract class RodItemFactory : ItemFactory, IFlavour
     /// <summary>
     /// Returns the rod flavours repository because rods have flavours that need to be identified.
     /// </summary>
-    public IEnumerable<Flavour>? GetFlavorRepository() => SaveGame.SingletonRepository.RodFlavours;
+    public IEnumerable<Flavor>? GetFlavorRepository() => SaveGame.SingletonRepository.RodFlavours;
     public override bool IsRechargable => true;
     public override bool CanBeZapped => true;
 
     /// <inheritdoc/>
-    public Flavour Flavor { get; set; }
+    public Flavor Flavor { get; set; }
 
     public abstract bool RequiresAiming { get; }
     public override bool EasyKnow => true;

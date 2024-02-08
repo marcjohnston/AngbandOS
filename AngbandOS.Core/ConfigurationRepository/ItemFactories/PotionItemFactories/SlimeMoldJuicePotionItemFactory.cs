@@ -34,9 +34,9 @@ internal class SlimeMoldJuicePotionItemFactory : PotionItemFactory
     /// <summary>
     /// Returns null because the slime-mold potion is always an icky-green flavour.
     /// </summary>
-    public override IEnumerable<Flavour>? GetFlavorRepository()
+    public override IEnumerable<Flavor>? GetFlavorRepository()
     {
-        Flavor = SaveGame.SingletonRepository.PotionFlavours.Get(nameof(IckyGreenPotionFlavour));
+        Flavor = SaveGame.SingletonRepository.PotionFlavours.Get(nameof(IckyGreenPotionFlavor));
         return null;
     }
 

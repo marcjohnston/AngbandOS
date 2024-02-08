@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
-internal abstract class PotionItemFactory : ItemFactory, IFlavour
+internal abstract class PotionItemFactory : ItemFactory, IFlavor
 {
     public PotionItemFactory(SaveGame saveGame) : base(saveGame) { }
     public override ItemClass ItemClass => SaveGame.SingletonRepository.ItemClasses.Get(nameof(PotionsItemClass));
@@ -16,7 +16,7 @@ internal abstract class PotionItemFactory : ItemFactory, IFlavour
     /// <summary>
     /// Returns the factory that this item was created by; casted as an IFlavour.
     /// </summary>
-    public IFlavour FlavourFactory => (IFlavour)this;
+    public IFlavor FlavourFactory => (IFlavor)this;
 
     public override string GetDescription(Item item, bool includeCountPrefix, bool isFlavourAware)
     {
@@ -44,13 +44,13 @@ internal abstract class PotionItemFactory : ItemFactory, IFlavour
     /// Returns the potions flavours repository because potions have flavours that need to be identified.  The Apple Juice, Water and Slime-Mold
     /// potions override this
     /// </summary>
-    public virtual IEnumerable<Flavour>? GetFlavorRepository() => SaveGame.SingletonRepository.PotionFlavours;
+    public virtual IEnumerable<Flavor>? GetFlavorRepository() => SaveGame.SingletonRepository.PotionFlavours;
 
     public override int PercentageBreakageChance => 100;
     public override bool CanBeQuaffed => true;
 
     /// <inheritdoc/>
-    public Flavour Flavor { get; set; }
+    public Flavor Flavor { get; set; }
 
     public override bool EasyKnow => true;
     public override int PackSort => 11;

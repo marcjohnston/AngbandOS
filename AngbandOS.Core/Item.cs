@@ -2788,7 +2788,7 @@ internal sealed class Item : IComparable<Item>
         {
             while (testcounter-- != 0)
             {
-                outString += BaseScrollFlavour.Syllables[SaveGame.Rng.RandomLessThan(BaseScrollFlavour.Syllables.Length)];
+                outString += BaseScrollFlavor.Syllables[SaveGame.Rng.RandomLessThan(BaseScrollFlavor.Syllables.Length)];
             }
         }
         else

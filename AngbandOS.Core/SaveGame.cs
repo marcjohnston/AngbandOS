@@ -88,7 +88,7 @@ internal class SaveGame
     public Dungeon RecallDungeon;
     public int Resting;
     public int Running;
-    public List<ScrollFlavour> ScrollFlavours; // These are generated from the available base scrolls.
+    public List<ScrollFlavor> ScrollFlavours; // These are generated from the available base scrolls.
     public int TargetCol;
     public int TargetRow;
     public int TargetWho;
@@ -2609,16 +2609,16 @@ internal class SaveGame
 
     private void ApplyFlavourVisuals()
     {
-        Dictionary<Type, IEnumerator<Flavour>> currentFlavourIndex = new Dictionary<Type, IEnumerator<Flavour>>();
+        Dictionary<Type, IEnumerator<Flavor>> currentFlavourIndex = new Dictionary<Type, IEnumerator<Flavor>>();
         foreach (ItemFactory kPtr in SingletonRepository.ItemFactories)
         {
             if (kPtr.HasFlavor)
             {
                 // Convert the factory into the IFlavour type.
-                IFlavour flavourFactory = (IFlavour)kPtr;
+                IFlavor flavourFactory = (IFlavor)kPtr;
 
                 // Get the repository for the flavours.
-                IEnumerable<Flavour>? flavourRepository = flavourFactory.GetFlavorRepository();
+                IEnumerable<Flavor>? flavourRepository = flavourFactory.GetFlavorRepository();
 
                 // Check to see if the repository indicates that the flavours need to be assigned.
                 if (flavourRepository != null)
@@ -2626,7 +2626,7 @@ internal class SaveGame
                     // The dictionary for the enumerator is using the type as the key.
                     Type factoryType = flavourRepository.GetType();
 
-                    if (!currentFlavourIndex.TryGetValue(factoryType, out IEnumerator<Flavour>? flavourEnumerator))
+                    if (!currentFlavourIndex.TryGetValue(factoryType, out IEnumerator<Flavor>? flavourEnumerator))
                     {
                         // Get the enumerator for the repository.
                         flavourEnumerator = flavourRepository.GetEnumerator();
@@ -2644,7 +2644,7 @@ internal class SaveGame
                     while (!flavourEnumerator.Current.CanBeAssigned);
 
                     // Retrieve the flavour to assign to the factory.
-                    Flavour flavour = flavourEnumerator.Current;
+                    Flavor flavour = flavourEnumerator.Current;
 
                     // Assign the flavour details.
                     flavourFactory.Flavor = flavour;
@@ -3053,7 +3053,7 @@ internal class SaveGame
         int i, j;
         Rng.UseFixed = true;
         Rng.FixedSeed = _seedFlavor;
-        ScrollFlavours = new List<ScrollFlavour>();
+        ScrollFlavours = new List<ScrollFlavor>();
         for (i = 0; i < Constants.MaxNumberOfScrollFlavoursGenerated; i++)
         {
             while (true)
@@ -3065,7 +3065,7 @@ internal class SaveGame
                     int s = Rng.RandomLessThan(100) < 30 ? 1 : 2;
                     for (int q = 0; q < s; q++)
                     {
-                        tmp += BaseScrollFlavour.Syllables[Rng.RandomLessThan(BaseScrollFlavour.Syllables.Length)];
+                        tmp += BaseScrollFlavor.Syllables[Rng.RandomLessThan(BaseScrollFlavor.Syllables.Length)];
                     }
                     if (buf.Length + tmp.Length > 14)
                     {
@@ -3088,8 +3088,8 @@ internal class SaveGame
                 if (okay)
                 {
                     int index = Rng.RandomLessThan(SingletonRepository.ScrollFlavours.Count);
-                    BaseScrollFlavour baseFlavour = SingletonRepository.ScrollFlavours[index];
-                    ScrollFlavour flavour = new ScrollFlavour(this, baseFlavour.Symbol, baseFlavour.Color, name);
+                    BaseScrollFlavor baseFlavour = SingletonRepository.ScrollFlavours[index];
+                    ScrollFlavor flavour = new ScrollFlavor(this, baseFlavour.Symbol, baseFlavour.Color, name);
                     ScrollFlavours.Add(flavour);
                     break;
                 }

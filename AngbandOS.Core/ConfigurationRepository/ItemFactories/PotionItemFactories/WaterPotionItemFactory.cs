@@ -32,9 +32,9 @@ internal class WaterPotionItemFactory : PotionItemFactory
     /// <summary>
     /// Returns null because water potions are always clear flavour.
     /// </summary>
-    public override IEnumerable<Flavour>? GetFlavorRepository()
+    public override IEnumerable<Flavor>? GetFlavorRepository()
     {
-        Flavor = SaveGame.SingletonRepository.PotionFlavours.Get(nameof(ClearPotionFlavour));
+        Flavor = SaveGame.SingletonRepository.PotionFlavours.Get(nameof(ClearPotionFlavor));
         return null;
     }
 

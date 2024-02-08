@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
-internal abstract class WandItemFactory : ItemFactory, IFlavour
+internal abstract class WandItemFactory : ItemFactory, IFlavor
 {
     public WandItemFactory(SaveGame saveGame) : base(saveGame) { }
     public override ItemClass ItemClass => SaveGame.SingletonRepository.ItemClasses.Get(nameof(WandsItemClass));
@@ -16,7 +16,7 @@ internal abstract class WandItemFactory : ItemFactory, IFlavour
     /// <summary>
     /// Returns the factory that this item was created by; casted as an IFlavour.
     /// </summary>
-    public IFlavour FlavourFactory => (IFlavour)this;
+    public IFlavor FlavourFactory => (IFlavor)this;
 
     public override string GetVerboseDescription(Item item)
     {
@@ -44,10 +44,10 @@ internal abstract class WandItemFactory : ItemFactory, IFlavour
     /// <summary>
     /// Returns the want flavours repository because wands have flavours that need to be identified.
     /// </summary>
-    public IEnumerable<Flavour>? GetFlavorRepository() => SaveGame.SingletonRepository.WandFlavours;
+    public IEnumerable<Flavor>? GetFlavorRepository() => SaveGame.SingletonRepository.WandFlavours;
 
     /// <inheritdoc/>
-    public Flavour Flavor { get; set; }
+    public Flavor Flavor { get; set; }
     public override int PercentageBreakageChance => 25;
     public override bool IsRechargable => true;
 
