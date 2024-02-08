@@ -23,7 +23,7 @@ internal abstract class StaffItemFactory : ItemFactory, IFlavour
         string s = "";
         if (item.IsKnown())
         {
-            s += $" ({item.TypeSpecificValue} {Pluralize("charge", item.TypeSpecificValue)})";
+            s += $" ({item.TypeSpecificValue} {CountPluralize("charge", item.TypeSpecificValue)})";
         }
         s += base.GetVerboseDescription(item);
         return s;
@@ -33,7 +33,7 @@ internal abstract class StaffItemFactory : ItemFactory, IFlavour
     {
         string flavour = item.IdentityIsStoreBought ? "" : $"{FlavourFactory.Flavor.Name} ";
         string ofName = isFlavourAware ? $" of {FriendlyName}" : "";
-        string name = $"{flavour}{Pluralize("Staff", item.Count)}{ofName}";
+        string name = $"{flavour}{CountPluralize("Staff", item.Count)}{ofName}";
         return includeCountPrefix ? GetPrefixCount(true, name, item.Count, item.IsKnownArtifact) : name;
     }
 

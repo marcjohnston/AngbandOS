@@ -56,7 +56,7 @@ internal class CastingType : IGetKey<string>
     public virtual string GetBookTitle(Item bookItem)
     {
         BookItemFactory bookItemFactory = (BookItemFactory)bookItem.Factory;
-        return $"{bookItemFactory.RealmName} {Pluralize("Spellbook", bookItem.Count)}";
+        return $"{bookItemFactory.RealmName} {CountPluralize("Spellbook", bookItem.Count)}";
     }
     /// <summary>
     /// Cast a spell.  SaveGame.DoCast is called by default.  Mentalism casting type calls SaveGame.DoMentalism.

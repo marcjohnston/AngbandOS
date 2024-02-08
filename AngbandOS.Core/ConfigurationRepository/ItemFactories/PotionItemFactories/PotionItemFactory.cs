@@ -22,7 +22,7 @@ internal abstract class PotionItemFactory : ItemFactory, IFlavour
     {
         string flavour = item.IdentityIsStoreBought ? "" : $"{FlavourFactory.Flavor.Name} ";
         string ofName = isFlavourAware ? $" of {FriendlyName}" : "";
-        string name = $"{flavour}{Pluralize("Potion", item.Count)}{ofName}";
+        string name = $"{flavour}{CountPluralize("Potion", item.Count)}{ofName}";
         return includeCountPrefix ? GetPrefixCount(true, name, item.Count, item.IsKnownArtifact) : name;
     }
 

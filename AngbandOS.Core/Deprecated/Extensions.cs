@@ -254,7 +254,7 @@ internal static class Extensions
         return roman.ToString();
     }
 
-    public static string Pluralize(string singular, int count)
+    public static string CountPluralize(string singular, int count)
     {
         if (count == 1)
         {
@@ -262,14 +262,19 @@ internal static class Extensions
         }
         else
         {
-            if ("sh".IndexOf(singular[singular.Length - 1]) >= 0)
-            {
-                return $"{singular}es";
-            }
-            else
-            {
-                return $"{singular}s";
-            }
+            return Pluralize(singular);
+        }
+    }
+
+    public static string Pluralize(string singular)
+    {
+        if ("sh".IndexOf(singular[singular.Length - 1]) >= 0)
+        {
+            return $"{singular}es";
+        }
+        else
+        {
+            return $"{singular}s";
         }
     }
 

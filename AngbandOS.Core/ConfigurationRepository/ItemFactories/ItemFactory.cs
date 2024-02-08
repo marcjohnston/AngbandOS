@@ -154,7 +154,7 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey<string>
         int pos = name.IndexOf("~");
         if (pos >= 0)
         {
-            return $"{Pluralize(name.Substring(0, pos), count)}{name.Substring(pos + 1)}";
+            return $"{CountPluralize(name.Substring(0, pos), count)}{name.Substring(pos + 1)}";
         }
         else
         {

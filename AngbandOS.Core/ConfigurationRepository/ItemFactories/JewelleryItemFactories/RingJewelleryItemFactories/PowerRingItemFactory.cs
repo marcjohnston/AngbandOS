@@ -28,7 +28,7 @@ internal class PowerRingItemFactory : RingItemFactory
             flavour = "Plain Gold ";
         }
         string ofName = isFlavourAware ? $" of {FriendlyName}" : "";
-        string name = $"{flavour}{Pluralize("Ring", item.Count)}{ofName}";
+        string name = $"{flavour}{CountPluralize("Ring", item.Count)}{ofName}";
         return includeCountPrefix ? GetPrefixCount(true, name, item.Count, item.IsKnownArtifact) : name;
     }
 
