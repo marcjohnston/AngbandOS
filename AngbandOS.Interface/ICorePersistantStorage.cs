@@ -25,6 +25,12 @@ public interface ICorePersistentStorage
     /// <returns></returns>
     bool GameExists();
 
-    void PersistEntities(string repositoryName, string[] jsonEntities);
+    /// <summary>
+    /// Persist one or more entities to the persistent storage.  For ListRepository entities, provide a single jsonEntity with an empty string key value.
+    /// </summary>
+    /// <param name="repositoryName">Specify the name of the repository.</param>
+    /// <param name="jsonEntities">Specify an array of key/value pairs.</param>
+    void PersistEntities(string repositoryName, KeyValuePair<string, string>[] jsonEntities);
+
     string[] RetrieveEntities(string repositoryName);
 }

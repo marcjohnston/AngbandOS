@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.RepositoryCollections;
 
 [Serializable]
-internal class MoanPlayerAttacksRepositoryCollection : ListRepositoryCollection<string>
+internal class MoanPlayerAttacksRepositoryCollection : StringListRepositoryCollection
 {
     public MoanPlayerAttacksRepositoryCollection(SaveGame saveGame) : base(saveGame) { }
+
+    /// <summary>
+    /// Returns MoanPlayerAttacks as the name of this string list repository.
+    /// </summary>
+    public override string Name => "MoanPlayerAttacks";
 
     public override void Load()
     {

@@ -18,6 +18,15 @@ internal abstract class BaseCharacterClass : IGetKey<string>
 
     public virtual string Key => GetType().Name;
 
+    /// <summary>
+    /// Returns the entity serialized into a Json string.
+    /// </summary>
+    /// <returns></returns>
+    public string ToJson()
+    {
+        return "";
+    }
+
     public string GetKey => Key;
     public void Bind()
     {

@@ -15,6 +15,15 @@ internal abstract class StoreFactory : IItemFilter, IGetKey<string>
     protected readonly SaveGame SaveGame;
     public string GetKey => Key;
 
+    /// <summary>
+    /// Returns the entity serialized into a Json string.
+    /// </summary>
+    /// <returns></returns>
+    public string ToJson()
+    {
+        return "";
+    }
+
     protected StoreFactory(SaveGame saveGame)
     {
         SaveGame = saveGame;

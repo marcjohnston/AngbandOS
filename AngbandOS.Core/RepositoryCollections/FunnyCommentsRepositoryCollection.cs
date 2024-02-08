@@ -8,9 +8,15 @@
 namespace AngbandOS.Core.RepositoryCollections;
 
 [Serializable]
-internal class FunnyCommentsRepositoryCollection : ListRepositoryCollection<string>
+internal class FunnyCommentsRepositoryCollection : StringListRepositoryCollection
 {
     public FunnyCommentsRepositoryCollection(SaveGame saveGame) : base(saveGame) { }
+
+    /// <summary>
+    /// Returns FunnyComments as the name of this string list repository.
+    /// </summary>
+    public override string Name => "FunnyComments";
+
     public override void Load()
     {
         Add("Wow, cosmic, man!", 

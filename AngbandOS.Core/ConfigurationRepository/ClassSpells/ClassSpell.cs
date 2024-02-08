@@ -16,6 +16,15 @@ internal abstract class ClassSpell : IGetKey<string>
         SaveGame = saveGame;
     }
 
+    /// <summary>
+    /// Returns the entity serialized into a Json string.
+    /// </summary>
+    /// <returns></returns>
+    public string ToJson()
+    {
+        return "";
+    }
+
     public abstract Type Spell { get; }
     public abstract Type CharacterClass { get; }
     public abstract int Level { get; }

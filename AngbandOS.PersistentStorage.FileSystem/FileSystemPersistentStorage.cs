@@ -6,9 +6,9 @@ namespace AngbandOS.PersistentStorage
     {
         private string SaveFilename;
 
-        public FileSystemPersistentStorage(string filename)
+        public FileSystemPersistentStorage(string saveFilename)
         {
-            SaveFilename = filename;
+            SaveFilename = saveFilename;
         }
 
         public bool GameExists()
@@ -16,9 +16,65 @@ namespace AngbandOS.PersistentStorage
             return File.Exists(SaveFilename);
         }
 
-        public void PersistEntities(string repositoryName, string[] jsonEntities)
+        public void PersistEntities(string repositoryName, KeyValuePair<string, string>[] jsonEntities)
         {
-            throw new NotImplementedException();
+            string path = Path.GetDirectoryName(SaveFilename);
+            string folderName = Path.Combine(path, repositoryName);
+            string filename = $"{folderName}.json";
+
+            try
+            {
+                Directory.Delete(folderName, true);
+            }
+            catch (DirectoryNotFoundException) { }
+            catch (Exception ex)
+            {
+
+            }
+
+            try
+            {
+                File.Delete(filename);
+            }
+            catch (FileNotFoundException) { }
+            catch (Exception ex)
+            {
+
+            }
+
+            bool directoryCreated = false;
+
+            // If we need to write a .json file for empty keys, store the values in an array.
+            List<string> strings = new List<string>();
+            foreach (KeyValuePair<string, string> keyValuePair in jsonEntities)
+            {
+                // Check to see if the key for the entity is empty.  If so, we will store the entity as a {repositoryName}.json file.
+                if (keyValuePair.Key == "")
+                {
+                    strings.Add(keyValuePair.Value);
+                }
+                else
+                {
+                    // Process a folder of entities.
+                    if (keyValuePair.Value.Length > 0)
+                    {
+                        if (!directoryCreated)
+                        {
+                            Directory.CreateDirectory(folderName);
+                        }
+                        string subfolderPath = Path.Combine(folderName, keyValuePair.Key);
+                        string subfolderFilename = $"{subfolderPath}.json";
+                        File.WriteAllText(subfolderFilename, keyValuePair.Value);
+                    }
+                }
+            }
+
+            // Write the .json file for the null key values.
+            if (strings.Count > 0)
+            {
+                string jsonArray = System.Text.Json.JsonSerializer.Serialize(strings);
+                File.WriteAllText(filename, jsonArray);
+            }
         }
 
         public string[] RetrieveEntities(string repositoryName) 

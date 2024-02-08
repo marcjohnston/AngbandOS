@@ -7,7 +7,7 @@
 
 namespace AngbandOS.Core;
 
-internal interface IGetKey<TKey>
+internal interface IGetKey<TKey> : IToJson
 {
     /// <summary>
     /// Returns the key to be used for other items to link to this repository item.

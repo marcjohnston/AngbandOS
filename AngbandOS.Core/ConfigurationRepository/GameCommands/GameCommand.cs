@@ -11,7 +11,7 @@ using System.Text.Json;
 namespace AngbandOS.Core.Commands;
 
 [Serializable]
-internal abstract class GameCommand : IGetKey<string>, IToJson
+internal abstract class GameCommand : IGetKey<string>
 {
     protected SaveGame SaveGame { get; }
     protected GameCommand(SaveGame saveGame)

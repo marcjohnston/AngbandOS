@@ -19,6 +19,15 @@ internal abstract class AlterAction : IGetKey<string>
         SaveGame = saveGame;
     }
 
+    /// <summary>
+    /// Returns the entity serialized into a Json string.
+    /// </summary>
+    /// <returns></returns>
+    public string ToJson()
+    {
+        return "";
+    }
+
     public abstract void Execute(AlterEventArgs alterEventArgs);
 
     public virtual string Key => GetType().Name;

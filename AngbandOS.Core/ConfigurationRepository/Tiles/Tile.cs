@@ -16,6 +16,15 @@ internal abstract class Tile : IGetKey<string>
         SaveGame = saveGame;
     }
 
+    /// <summary>
+    /// Returns the entity serialized into a Json string.
+    /// </summary>
+    /// <returns></returns>
+    public string ToJson()
+    {
+        return "";
+    }
+
     public string GetKey => Name;
     public void Bind() { }
 

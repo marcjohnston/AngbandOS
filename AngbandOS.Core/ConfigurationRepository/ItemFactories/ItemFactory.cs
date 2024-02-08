@@ -18,6 +18,15 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey<string>
     protected readonly SaveGame SaveGame;
 
     /// <summary>
+    /// Returns the entity serialized into a Json string.
+    /// </summary>
+    /// <returns></returns>
+    public string ToJson()
+    {
+        return "";
+    }
+
+    /// <summary>
     /// Returns true, if the item can be stomped.  Returns the stompable status based on the item "Feeling", by default.
     /// </summary>
     /// <param name="item"></param>

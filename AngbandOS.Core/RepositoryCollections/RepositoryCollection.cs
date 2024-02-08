@@ -24,6 +24,8 @@ internal abstract class RepositoryCollection<T> : IEnumerable<T>, ILoadable
         SaveGame = saveGame;
     }
 
+    public abstract string SerializeEntity(T entity);
+
     public abstract IEnumerator<T> GetEnumerator();
 
     IEnumerator IEnumerable.GetEnumerator()
@@ -63,4 +65,8 @@ internal abstract class RepositoryCollection<T> : IEnumerable<T>, ILoadable
     /// default.  ListRepositoryCollections won't handle this phase.  DictionaryRepositoryCollections will pass this event the members of that collection.
     /// </summary>
     public virtual void Bind() { }
+
+    public abstract void PersistEntities();
+
+    public abstract string Name { get; }
 }

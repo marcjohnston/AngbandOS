@@ -9,5 +9,9 @@ namespace AngbandOS.Core;
 
 internal interface IToJson
 {
+    /// <summary>
+    /// Returns the entity serialized into a Json string.
+    /// </summary>
+    /// <returns></returns>
     string ToJson();
 }

@@ -10,7 +10,7 @@ using System.Text.Json;
 namespace AngbandOS.Core.MonsterRaces;
 
 [Serializable]
-internal abstract class MonsterRace : IMonsterCharacteristics, IGetKey<string>, IToJson
+internal abstract class MonsterRace : IMonsterCharacteristics, IGetKey<string>
 {
     #region 102 Serialized Members
 

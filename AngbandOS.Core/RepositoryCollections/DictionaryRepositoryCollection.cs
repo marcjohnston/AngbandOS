@@ -7,13 +7,45 @@
 
 namespace AngbandOS.Core.RepositoryCollections;
 
+/// <summary>
+/// Represents a list repository but adds a dictionary lookup for O(1) fast singleton access.  The entities must implement the IGetKey interface to return a 
+/// primary key (PK) and the IToJson interface to perform serialization.
+/// </summary>
+/// <typeparam name="TKey"></typeparam>
+/// <typeparam name="TValue"></typeparam>
 [Serializable]
 internal abstract class DictionaryRepositoryCollection<TKey, TValue> : ListRepositoryCollection<TValue> where TValue : IGetKey<TKey> where TKey : notnull
 {
     private Dictionary<TKey, TValue> dictionary = new Dictionary<TKey, TValue>();
     protected DictionaryRepositoryCollection(SaveGame saveGame) : base(saveGame) { }
 
+    /// <summary>
+    /// Returns the pluralized type name for the TValue generic as the name of this string list repository.
+    /// </summary>
+    public override string Name => Pluralize(typeof(TValue).Name);
+
     public bool Contains(TValue item) => dictionary.ContainsKey(item.GetKey);
+
+    /// <summary>
+    /// Persist the entities to the core persistent storage medium.  This method is only being used to generate database entities from objects.
+    /// </summary>
+    /// <param name="corePersistentStorage"></param>
+    public override void PersistEntities()
+    {
+        List<KeyValuePair<string, string>> jsonEntityList = new();
+        foreach (TValue entity in this)
+        {
+            string key = entity.GetKey.ToString(); // TODO: The use of .ToString is because TKey needs to be strings
+            string serializedEntity = entity.ToJson();
+            jsonEntityList.Add(new KeyValuePair<string, string>(key, serializedEntity));
+        }
+        SaveGame.CorePersistentStorage.PersistEntities(Name, jsonEntityList.ToArray());
+    }
+
+    public override string SerializeEntity(TValue entity)
+    {
+        return entity.ToJson();
+    }
 
     public TValue Get(TKey key)
     {

@@ -17,6 +17,15 @@ internal abstract class ItemFilter : IGetKey<string>, IItemFilter
     }
 
     /// <summary>
+    /// Returns the entity serialized into a Json string.
+    /// </summary>
+    /// <returns></returns>
+    public string ToJson()
+    {
+        return "";
+    }
+
+    /// <summary>
     /// Returns true, if the item must be blessed; false, if the item cannot be blessed; or null, if indifferent.  Returns null, by default.
     /// </summary>
     public virtual bool? IsBlessed => null;

@@ -12,7 +12,7 @@ namespace AngbandOS.Core.Dungeons;
 /// A dungeon that the player can explore
 /// </summary>
 [Serializable]
-internal abstract class Dungeon : IGetKey<string>, IToJson
+internal abstract class Dungeon : IGetKey<string>
 {
     protected readonly SaveGame SaveGame;
 

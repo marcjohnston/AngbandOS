@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.RepositoryCollections;
 
 [Serializable]
-internal class FindQuestsRepositoryCollection : ListRepositoryCollection<string>
+internal class FindQuestsRepositoryCollection : StringListRepositoryCollection
 {
     public FindQuestsRepositoryCollection(SaveGame saveGame) : base(saveGame) { }
+
+    /// <summary>
+    /// Returns FindQuests as the name of this string list repository.
+    /// </summary>
+    public override string Name => "FindQuests";
 
     public override void Load()
     {

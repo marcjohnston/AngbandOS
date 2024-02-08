@@ -16,6 +16,15 @@ internal abstract class RareItem : IItemCharacteristics, IGetKey<RareItemTypeEnu
         SaveGame = saveGame;
     }
 
+    /// <summary>
+    /// Returns the entity serialized into a Json string.
+    /// </summary>
+    /// <returns></returns>
+    public string ToJson()
+    {
+        return "";
+    }
+
     public RareItemTypeEnum GetKey => RareItemType;
     public void Bind() { }
 

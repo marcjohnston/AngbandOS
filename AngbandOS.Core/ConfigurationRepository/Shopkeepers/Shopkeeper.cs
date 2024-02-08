@@ -10,7 +10,7 @@ using System.Text.Json;
 namespace AngbandOS.Core.Shopkeepers;
 
 [Serializable]
-internal abstract class Shopkeeper : IGetKey<string>, IToJson
+internal abstract class Shopkeeper : IGetKey<string>
 {
     protected SaveGame SaveGame { get; }
     public abstract int MaxCost { get; }

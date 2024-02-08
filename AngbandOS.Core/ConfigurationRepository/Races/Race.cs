@@ -16,6 +16,15 @@ internal abstract class Race : IGetKey<string>
         SaveGame = saveGame;
     }
 
+    /// <summary>
+    /// Returns the entity serialized into a Json string.
+    /// </summary>
+    /// <returns></returns>
+    public string ToJson()
+    {
+        return "";
+    }
+
 
     public virtual string Key => GetType().Name;
 

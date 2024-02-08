@@ -122,22 +122,22 @@ internal class SellScript : Script, IStoreScript
     {
         if (value <= 0 && price > value)
         {
-            SaveGame.MsgPrint(SaveGame.SingletonRepository.ShopKeeperWorthlessComments.ToWeightedRandom().Choose());
+            SaveGame.MsgPrint(SaveGame.SingletonRepository.ShopkeeperWorthlessComments.ToWeightedRandom().Choose());
             SaveGame.PlaySound(SoundEffectEnum.StoreSoldWorthless);
         }
         else if (value < guess && price > value)
         {
-            SaveGame.MsgPrint(SaveGame.SingletonRepository.ShopKeeperLessThanGuessComments.ToWeightedRandom().Choose());
+            SaveGame.MsgPrint(SaveGame.SingletonRepository.ShopkeeperLessThanGuessComments.ToWeightedRandom().Choose());
             SaveGame.PlaySound(SoundEffectEnum.StoreSoldBargain);
         }
         else if (value > guess && value < 4 * guess && price < value)
         {
-            SaveGame.MsgPrint(SaveGame.SingletonRepository.ShopKeeperGoodComments.ToWeightedRandom().Choose());
+            SaveGame.MsgPrint(SaveGame.SingletonRepository.ShopkeeperGoodComments.ToWeightedRandom().Choose());
             SaveGame.PlaySound(SoundEffectEnum.StoreSoldCheaply);
         }
         else if (value > guess && price < value)
         {
-            SaveGame.MsgPrint(SaveGame.SingletonRepository.ShopKeeperBargainComments.ToWeightedRandom().Choose());
+            SaveGame.MsgPrint(SaveGame.SingletonRepository.ShopkeeperBargainComments.ToWeightedRandom().Choose());
             SaveGame.PlaySound(SoundEffectEnum.StoreSoldExtraCheaply);
         }
     }

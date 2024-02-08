@@ -19,6 +19,15 @@ internal abstract class BaseInventorySlot : IEnumerable<int>, IItemContainer, IG
         SaveGame = saveGame;
     }
 
+    /// <summary>
+    /// Returns the entity serialized into a Json string.
+    /// </summary>
+    /// <returns></returns>
+    public string ToJson()
+    {
+        return "";
+    }
+
     //  private List<Item> Items = new List<Item>();
     public abstract int[] InventorySlots { get; }
     public virtual string TakeOffMessage(Item oPtr) => "You were wearing";

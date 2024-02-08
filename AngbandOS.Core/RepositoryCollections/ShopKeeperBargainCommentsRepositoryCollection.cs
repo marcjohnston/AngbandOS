@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.RepositoryCollections;
 
 [Serializable]
-internal class ShopKeeperBargainCommentsRepositoryCollection : ListRepositoryCollection<string>
+internal class ShopkeeperBargainCommentsRepositoryCollection : StringListRepositoryCollection
 {
-    public ShopKeeperBargainCommentsRepositoryCollection(SaveGame saveGame) : base(saveGame) { }
+    public ShopkeeperBargainCommentsRepositoryCollection(SaveGame saveGame) : base(saveGame) { }
+
+    /// <summary>
+    /// Returns ShopkeeperBargainComments as the name of this string list repository.
+    /// </summary>
+    public override string Name => "ShopkeeperBargainComments";
 
     public override void Load()
     {

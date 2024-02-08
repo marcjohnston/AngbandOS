@@ -3,7 +3,7 @@
 namespace AngbandOS.Core.Symbols;
 
 [Serializable]
-internal abstract class Symbol : IGetKey<string>, IToJson
+internal abstract class Symbol : IGetKey<string>
 {
     protected readonly SaveGame SaveGame;
     protected Symbol(SaveGame saveGame)

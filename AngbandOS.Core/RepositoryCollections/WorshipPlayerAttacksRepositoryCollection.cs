@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.RepositoryCollections;
 
 [Serializable]
-internal class WorshipPlayerAttacksRepositoryCollection : ListRepositoryCollection<string>
+internal class WorshipPlayerAttacksRepositoryCollection : StringListRepositoryCollection
 {
     public WorshipPlayerAttacksRepositoryCollection(SaveGame saveGame) : base(saveGame) { }
+
+    /// <summary>
+    /// Returns WorshipPlayerAttacks as the name of this string list repository.
+    /// </summary>
+    public override string Name => "WorshipPlayerAttacks";
 
     public override void Load()
     {

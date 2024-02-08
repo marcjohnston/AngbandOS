@@ -19,6 +19,15 @@ internal abstract class MonsterFilter : IGetKey<string>, IMonsterFilter
     public virtual string Key => GetType().Name;
     public string GetKey => Key;
 
+    /// <summary>
+    /// Returns the entity serialized into a Json string.
+    /// </summary>
+    /// <returns></returns>
+    public string ToJson()
+    {
+        return "";
+    }
+
     public void Bind() { }
 
     /// <summary>

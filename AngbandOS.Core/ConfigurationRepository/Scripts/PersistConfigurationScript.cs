@@ -26,16 +26,78 @@ internal class PersistConfigurationScript : Script, IScript
 
         try
         {
-            Persist<Shopkeeper>(SaveGame.CorePersistentStorage, SaveGame.SingletonRepository.Shopkeepers, nameof(Shopkeeper));
-            Persist<Town>(SaveGame.CorePersistentStorage, SaveGame.SingletonRepository.Towns, nameof(Town));
-            Persist<GameCommand>(SaveGame.CorePersistentStorage, SaveGame.SingletonRepository.GameCommands, nameof(GameCommand));
-            Persist<StoreCommand>(SaveGame.CorePersistentStorage, SaveGame.SingletonRepository.StoreCommands, nameof(StoreCommand));
-            Persist<HelpGroup>(SaveGame.CorePersistentStorage, SaveGame.SingletonRepository.HelpGroups, nameof(HelpGroup));
-            Persist<MonsterRace>(SaveGame.CorePersistentStorage, SaveGame.SingletonRepository.MonsterRaces, nameof(MonsterRace));
-            Persist<Symbol>(SaveGame.CorePersistentStorage, SaveGame.SingletonRepository.Symbols, nameof(Symbol));
-            Persist<Vault>(SaveGame.CorePersistentStorage, SaveGame.SingletonRepository.Vaults, nameof(Vault));
-            Persist<DungeonGuardian>(SaveGame.CorePersistentStorage, SaveGame.SingletonRepository.DungeonGuardians, nameof(DungeonGuardian));
-            Persist<Dungeon>(SaveGame.CorePersistentStorage, SaveGame.SingletonRepository.Dungeons, nameof(Dungeon));
+            // List repositories.
+            SaveGame.SingletonRepository.ElvishText.PersistEntities();
+            SaveGame.SingletonRepository.FindQuests.PersistEntities();
+            SaveGame.SingletonRepository.FunnyComments.PersistEntities();
+            SaveGame.SingletonRepository.FunnyDescriptions.PersistEntities();
+            SaveGame.SingletonRepository.HorrificDescriptions.PersistEntities();
+            SaveGame.SingletonRepository.InsultPlayerAttacks.PersistEntities();
+            SaveGame.SingletonRepository.MoanPlayerAttacks.PersistEntities();
+            SaveGame.SingletonRepository.ShopkeeperAcceptedComments.PersistEntities();
+            SaveGame.SingletonRepository.ShopkeeperBargainComments.PersistEntities();
+            SaveGame.SingletonRepository.ShopkeeperGoodComments.PersistEntities();
+            SaveGame.SingletonRepository.ShopkeeperLessThanGuessComments.PersistEntities();
+            SaveGame.SingletonRepository.ShopkeeperWorthlessComments.PersistEntities();
+            SaveGame.SingletonRepository.SingingPlayerAttacks.PersistEntities();
+            SaveGame.SingletonRepository.WorshipPlayerAttacks.PersistEntities();
+
+            // Dictionary repositories.
+            SaveGame.SingletonRepository.Activations.PersistEntities();
+            SaveGame.SingletonRepository.AlterActions.PersistEntities();
+            SaveGame.SingletonRepository.AmuletFlavours.PersistEntities();
+            SaveGame.SingletonRepository.Animations.PersistEntities();
+            SaveGame.SingletonRepository.ArtifactBiases.PersistEntities();
+            SaveGame.SingletonRepository.AttackEffects.PersistEntities();
+            SaveGame.SingletonRepository.Attacks.PersistEntities();
+            SaveGame.SingletonRepository.BirthStages.PersistEntities();
+            SaveGame.SingletonRepository.CastingTypes.PersistEntities();
+            SaveGame.SingletonRepository.CharacterClasses.PersistEntities();
+            SaveGame.SingletonRepository.ChestTrapConfigurations.PersistEntities();
+            SaveGame.SingletonRepository.ChestTraps.PersistEntities();
+            SaveGame.SingletonRepository.ClassSpells.PersistEntities();
+            SaveGame.SingletonRepository.DungeonGuardians.PersistEntities();
+            SaveGame.SingletonRepository.Dungeons.PersistEntities();
+            SaveGame.SingletonRepository.FixedArtifacts.PersistEntities();
+            SaveGame.SingletonRepository.GameCommands.PersistEntities();
+            SaveGame.SingletonRepository.Genders.PersistEntities();
+            SaveGame.SingletonRepository.HelpGroups.PersistEntities();
+            SaveGame.SingletonRepository.InventorySlots.PersistEntities();
+            SaveGame.SingletonRepository.ItemClasses.PersistEntities();
+            SaveGame.SingletonRepository.ItemFactories.PersistEntities();
+            SaveGame.SingletonRepository.MartialArtsAttacks.PersistEntities();
+            SaveGame.SingletonRepository.MonsterFilters.PersistEntities();
+            SaveGame.SingletonRepository.MonsterRaces.PersistEntities();
+            SaveGame.SingletonRepository.MonsterSpells.PersistEntities();
+            SaveGame.SingletonRepository.MushroomFlavours.PersistEntities();
+            SaveGame.SingletonRepository.Mutations.PersistEntities();
+            SaveGame.SingletonRepository.Patrons.PersistEntities();
+            SaveGame.SingletonRepository.PotionFlavours.PersistEntities();
+            SaveGame.SingletonRepository.ProjectileGraphics.PersistEntities();
+            SaveGame.SingletonRepository.Projectiles.PersistEntities();
+            SaveGame.SingletonRepository.Races.PersistEntities();
+            SaveGame.SingletonRepository.RareItems.PersistEntities();
+            SaveGame.SingletonRepository.Realms.PersistEntities();
+            SaveGame.SingletonRepository.Rewards.PersistEntities();
+            SaveGame.SingletonRepository.RingFlavours.PersistEntities();
+            SaveGame.SingletonRepository.RodFlavours.PersistEntities();
+            SaveGame.SingletonRepository.RoomLayouts.PersistEntities();
+            SaveGame.SingletonRepository.Scripts.PersistEntities();
+            SaveGame.SingletonRepository.ScrollFlavours.PersistEntities();
+            SaveGame.SingletonRepository.Shopkeepers.PersistEntities();
+            SaveGame.SingletonRepository.SpellResistantDetections.PersistEntities();
+            SaveGame.SingletonRepository.Spells.PersistEntities();
+            SaveGame.SingletonRepository.StaffFlavours.PersistEntities();
+            SaveGame.SingletonRepository.StoreCommands.PersistEntities();
+            SaveGame.SingletonRepository.StoreFactories.PersistEntities();
+            SaveGame.SingletonRepository.Symbols.PersistEntities();
+            SaveGame.SingletonRepository.Talents.PersistEntities();
+            SaveGame.SingletonRepository.Tiles.PersistEntities();
+            SaveGame.SingletonRepository.TimedActions.PersistEntities();
+            SaveGame.SingletonRepository.Towns.PersistEntities();
+            SaveGame.SingletonRepository.Vaults.PersistEntities();
+            SaveGame.SingletonRepository.WandFlavours.PersistEntities();
+            SaveGame.SingletonRepository.WizardCommands.PersistEntities();
         }
         catch (NotImplementedException)
         {
@@ -46,29 +108,6 @@ internal class PersistConfigurationScript : Script, IScript
         {
             SaveGame.MsgPrint("The persistance interface failed to save the configuration.");
             return;
-        }
-    }
-
-    /// <summary>
-    /// Persist the entities to the core persistent storage medium.  This method is only being used to generate database entities from objects.
-    /// </summary>
-    /// <param name="corePersistentStorage"></param>
-    private void Persist<T>(ICorePersistentStorage corePersistentStorage, RepositoryCollection<T> repository, string name) where T : IToJson
-    {
-        // Check to see if there is a name.  If not, then the persist isn't enabled for this repository.
-        if (name != null)
-        {
-            List<string> jsonEntityList = new();
-            foreach (T item in repository)
-            {
-                string serializedEntity = item.ToJson();
-                if (serializedEntity == null)
-                {
-                    throw new Exception("Entity did not serialize.");
-                }
-                jsonEntityList.Add(serializedEntity);
-            }
-            corePersistentStorage.PersistEntities(name, jsonEntityList.ToArray());
         }
     }
 }

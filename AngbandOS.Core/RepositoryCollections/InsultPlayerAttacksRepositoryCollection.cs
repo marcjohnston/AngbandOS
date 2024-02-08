@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.RepositoryCollections;
 
 [Serializable]
-internal class InsultPlayerAttacksRepositoryCollection : ListRepositoryCollection<string>
+internal class InsultPlayerAttacksRepositoryCollection : StringListRepositoryCollection
 {
     public InsultPlayerAttacksRepositoryCollection(SaveGame saveGame) : base(saveGame) { }
+
+    /// <summary>
+    /// Returns InsultPlayerAttacks as the name of this string list repository.
+    /// </summary>
+    public override string Name => "InsultPlayerAttacks";
 
     public override void Load()
     {

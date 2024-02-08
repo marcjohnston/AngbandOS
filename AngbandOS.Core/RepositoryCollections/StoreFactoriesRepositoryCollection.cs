@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.RepositoryCollections;
 
 [Serializable]
-internal class StoresRepositoryCollection : DictionaryRepositoryCollection<string, StoreFactory>
+internal class StoreFactoriesRepositoryCollection : DictionaryRepositoryCollection<string, StoreFactory>
 {
-    public StoresRepositoryCollection(SaveGame saveGame) : base(saveGame) { }
+    public StoreFactoriesRepositoryCollection(SaveGame saveGame) : base(saveGame) { }
 }

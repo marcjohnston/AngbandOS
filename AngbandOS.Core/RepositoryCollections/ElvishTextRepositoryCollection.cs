@@ -8,9 +8,14 @@
 namespace AngbandOS.Core.RepositoryCollections;
 
 [Serializable]
-internal class ElvishTextRepositoryCollection : ListRepositoryCollection<string>
+internal class ElvishTextRepositoryCollection : StringListRepositoryCollection
 {
     public ElvishTextRepositoryCollection(SaveGame saveGame) : base(saveGame) { }
+
+    /// <summary>
+    /// Returns ElvishTexts as the name of this string list repository.
+    /// </summary>
+    public override string Name => "ElvishTexts";
 
     public override void Load()
     {
