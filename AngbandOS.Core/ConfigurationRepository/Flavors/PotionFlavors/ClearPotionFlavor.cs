@@ -15,7 +15,7 @@ internal class ClearPotionFlavor : PotionFlavor
     public override string Name => "Clear";
 
     /// <summary>
-    /// Returns false because the clear potion flavour is manually assigned to the water potion.
+    /// Returns false because the clear potion flavor is manually assigned to the water potion.
     /// </summary>
     public override bool CanBeAssigned => false;
 }

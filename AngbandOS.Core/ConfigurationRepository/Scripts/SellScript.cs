@@ -75,7 +75,7 @@ internal class SellScript : Script, IStoreScript
             int guess = qPtr.Value() * qPtr.Count;
             if (storeCommandEvent.Store.StoreFactory.StoreIdentifiesItems)
             {
-                oPtr.BecomeFlavourAware();
+                oPtr.BecomeFlavorAware();
                 oPtr.BecomeKnown();
             }
             SaveGame.SingletonRepository.FlaggedActions.Get(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();

@@ -34,11 +34,11 @@ internal class AppleJuicePotionItemFactory : PotionItemFactory
     }
 
     /// <summary>
-    /// Returns null because the Apple Juice potion is always a light brown flavour.
+    /// Returns null because the Apple Juice potion is always a light brown flavor.
     /// </summary>
     public override IEnumerable<Flavor>? GetFlavorRepository()
     {
-        Flavor = SaveGame.SingletonRepository.PotionFlavours.Get(nameof(LightBrownPotionFlavor));
+        Flavor = SaveGame.SingletonRepository.PotionFlavors.Get(nameof(LightBrownPotionFlavor));
         return null;
     }
 

@@ -14,9 +14,9 @@ internal abstract class StaffItemFactory : ItemFactory, IFlavor
     public override ItemClass ItemClass => SaveGame.SingletonRepository.ItemClasses.Get(nameof(StaffsItemClass));
 
     /// <summary>
-    /// Returns the factory that this item was created by; casted as an IFlavour.
+    /// Returns the factory that this item was created by; casted as an IFlavor.
     /// </summary>
-    public IFlavor FlavourFactory => (IFlavor)this;
+    public IFlavor FlavorFactory => (IFlavor)this;
 
     public override string GetVerboseDescription(Item item)
     {
@@ -29,11 +29,11 @@ internal abstract class StaffItemFactory : ItemFactory, IFlavor
         return s;
     }
 
-    public override string GetDescription(Item item, bool includeCountPrefix, bool isFlavourAware)
+    public override string GetDescription(Item item, bool includeCountPrefix, bool isFlavorAware)
     {
-        string flavour = item.IdentityIsStoreBought ? "" : $"{FlavourFactory.Flavor.Name} ";
-        string ofName = isFlavourAware ? $" of {FriendlyName}" : "";
-        string name = $"{flavour}{CountPluralize("Staff", item.Count)}{ofName}";
+        string flavor = item.IdentityIsStoreBought ? "" : $"{FlavorFactory.Flavor.Name} ";
+        string ofName = isFlavorAware ? $" of {FriendlyName}" : "";
+        string name = $"{flavor}{CountPluralize("Staff", item.Count)}{ofName}";
         return includeCountPrefix ? GetPrefixCount(true, name, item.Count, item.IsKnownArtifact) : name;
     }
 
@@ -43,9 +43,9 @@ internal abstract class StaffItemFactory : ItemFactory, IFlavor
     }
 
     /// <summary>
-    /// Returns the staff flavours repository because staves have flavours that need to be identified.
+    /// Returns the staff flavors repository because staves have flavors that need to be identified.
     /// </summary>
-    public IEnumerable<Flavor>? GetFlavorRepository() => SaveGame.SingletonRepository.StaffFlavours;
+    public IEnumerable<Flavor>? GetFlavorRepository() => SaveGame.SingletonRepository.StaffFlavors;
 
     public override bool CanBeUsed => true;
 

@@ -14,9 +14,9 @@ internal abstract class WandItemFactory : ItemFactory, IFlavor
     public override ItemClass ItemClass => SaveGame.SingletonRepository.ItemClasses.Get(nameof(WandsItemClass));
 
     /// <summary>
-    /// Returns the factory that this item was created by; casted as an IFlavour.
+    /// Returns the factory that this item was created by; casted as an IFlavor.
     /// </summary>
-    public IFlavor FlavourFactory => (IFlavor)this;
+    public IFlavor FlavorFactory => (IFlavor)this;
 
     public override string GetVerboseDescription(Item item)
     {
@@ -28,11 +28,11 @@ internal abstract class WandItemFactory : ItemFactory, IFlavor
         s += base.GetVerboseDescription(item);
         return s;
     }
-    public override string GetDescription(Item item, bool includeCountPrefix, bool isFlavourAware)
+    public override string GetDescription(Item item, bool includeCountPrefix, bool isFlavorAware)
     {
-        string flavour = item.IdentityIsStoreBought ? "" : $"{FlavourFactory.Flavor.Name} ";
-        string ofName = isFlavourAware ? $" of {FriendlyName}" : "";
-        string name = $"{flavour}{CountPluralize("Wand", item.Count)}{ofName}";
+        string flavor = item.IdentityIsStoreBought ? "" : $"{FlavorFactory.Flavor.Name} ";
+        string ofName = isFlavorAware ? $" of {FriendlyName}" : "";
+        string name = $"{flavor}{CountPluralize("Wand", item.Count)}{ofName}";
         return includeCountPrefix ? GetPrefixCount(true, name, item.Count, item.IsKnownArtifact) : name;
     }
 
@@ -42,9 +42,9 @@ internal abstract class WandItemFactory : ItemFactory, IFlavor
     }
 
     /// <summary>
-    /// Returns the want flavours repository because wands have flavours that need to be identified.
+    /// Returns the want flavors repository because wands have flavors that need to be identified.
     /// </summary>
-    public IEnumerable<Flavor>? GetFlavorRepository() => SaveGame.SingletonRepository.WandFlavours;
+    public IEnumerable<Flavor>? GetFlavorRepository() => SaveGame.SingletonRepository.WandFlavors;
 
     /// <inheritdoc/>
     public Flavor Flavor { get; set; }

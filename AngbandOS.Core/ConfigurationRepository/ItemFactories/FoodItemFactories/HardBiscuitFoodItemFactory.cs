@@ -27,11 +27,6 @@ internal class HardBiscuitFoodItemFactory : FoodItemFactory
         return true;
     }
 
-    public override void ApplyFlavourVisuals()
-    {
-        base.ApplyFlavourVisuals();
-    }
-
     /// <summary>
     /// Returns true because biscuits vanish when a skeleton tries to eat it.
     /// </summary>

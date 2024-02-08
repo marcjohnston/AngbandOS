@@ -13,22 +13,22 @@ internal abstract class MushroomFoodItemFactory : FoodItemFactory, IFlavor
     public MushroomFoodItemFactory(SaveGame saveGame) : base(saveGame) { }
 
     /// <summary>
-    /// Returns the factory that this item was created by; casted as an IFlavour.
+    /// Returns the factory that this item was created by; casted as an IFlavor.
     /// </summary>
-    public IFlavor FlavourFactory => (IFlavor)this;
+    public IFlavor FlavorFactory => (IFlavor)this;
 
-    public override string GetDescription(Item item, bool includeCountPrefix, bool isFlavourAware)
+    public override string GetDescription(Item item, bool includeCountPrefix, bool isFlavorAware)
     {
-        string flavour = item.IdentityIsStoreBought ? "" : $"{FlavourFactory.Flavor.Name} ";
-        string ofName = isFlavourAware ? $" of {FriendlyName}" : "";
-        string name = $"{flavour}{CountPluralize("Mushroom", item.Count)}{ofName}";
+        string flavor = item.IdentityIsStoreBought ? "" : $"{FlavorFactory.Flavor.Name} ";
+        string ofName = isFlavorAware ? $" of {FriendlyName}" : "";
+        string name = $"{flavor}{CountPluralize("Mushroom", item.Count)}{ofName}";
         return includeCountPrefix ? GetPrefixCount(true, name, item.Count, item.IsKnownArtifact) : name;
     }
 
     /// <summary>
-    /// Returns the mushroom flavours repository because mushrooms have flavours that need to be identified.
+    /// Returns the mushroom flavors repository because mushrooms have flavors that need to be identified.
     /// </summary>
-    public IEnumerable<Flavor>? GetFlavorRepository() => SaveGame.SingletonRepository.MushroomFlavours;
+    public IEnumerable<Flavor>? GetFlavorRepository() => SaveGame.SingletonRepository.MushroomFlavors;
 
     /// <inheritdoc/>
     public Flavor Flavor { get; set; }

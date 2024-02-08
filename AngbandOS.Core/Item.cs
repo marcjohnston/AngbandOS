@@ -37,7 +37,7 @@ internal sealed class Item : IComparable<Item>
 
     /// <summary>
     /// Returns true, if the identity of the item was provided because the item was bought from the store.  This property is used to hide the
-    /// flavour name when flavoured items are bought from the store.  This prevents the player from learning the flavour by simply buying the item
+    /// flavor name when flavored items are bought from the store.  This prevents the player from learning the flavor by simply buying the item
     /// from the store.  This property used to be a flag in the IdentifyFlags.
     /// </summary>
     public bool IdentityIsStoreBought;
@@ -318,12 +318,12 @@ internal sealed class Item : IComparable<Item>
         }
 
         // Fourth level sort (FlavorAware before those unidentified)
-        // Flavour aware items sort before those not identified.
-        if (IsFlavourAware() && !oPtr.IsFlavourAware())
+        // Flavor aware items sort before those not identified.
+        if (IsFlavorAware() && !oPtr.IsFlavorAware())
         {
             return -1;
         }
-        if (!IsFlavourAware() && oPtr.IsFlavourAware())
+        if (!IsFlavorAware() && oPtr.IsFlavorAware())
         {
             return 1;
         }
@@ -650,9 +650,9 @@ internal sealed class Item : IComparable<Item>
         ApplyRandomResistance(ref artifactBias, specific); // TODO: We has to inject 0 for the ArtifactBias because the constructor would have initialized the _artifactBias to 0.
     }
 
-    public void BecomeFlavourAware()
+    public void BecomeFlavorAware()
     {
-        Factory.FlavourAware = true;
+        Factory.FlavorAware = true;
     }
 
     public void BecomeKnown()
@@ -690,15 +690,15 @@ internal sealed class Item : IComparable<Item>
     /// false, otherwise (e.g. Brown Dragon Scale Mails).  When false, the item will still be pluralized (e.g. stole one of your Brown Dragon Scale Mails).</param>
     /// <param name="mode"></param>
     /// <returns></returns>
-    public string Description(bool includeCountPrefix, int mode, bool? isFlavourAware = null)
+    public string Description(bool includeCountPrefix, int mode, bool? isFlavorAware = null)
     {
-        // Provide a default value for the isFlavourAware parameter.
-        if (isFlavourAware == null)
+        // Provide a default value for the isFlavorAware parameter.
+        if (isFlavorAware == null)
         {
-            isFlavourAware = IsFlavourAware();
+            isFlavorAware = IsFlavorAware();
         }
 
-        string basenm = Factory.GetDescription(this, includeCountPrefix, isFlavourAware.Value);
+        string basenm = Factory.GetDescription(this, includeCountPrefix, isFlavorAware.Value);
         if (IsKnown())
         {
             if (!string.IsNullOrEmpty(RandartName))
@@ -1653,9 +1653,9 @@ internal sealed class Item : IComparable<Item>
         return IdentCursed;
     }
 
-    public bool IsFlavourAware()
+    public bool IsFlavorAware()
     {
-        return Factory.FlavourAware;
+        return Factory.FlavorAware;
     }
 
     public bool IsKnown()
@@ -1664,7 +1664,7 @@ internal sealed class Item : IComparable<Item>
         {
             return true;
         }
-        if (Factory.EasyKnow && Factory.FlavourAware)
+        if (Factory.EasyKnow && Factory.FlavorAware)
         {
             return true;
         }
@@ -1743,7 +1743,7 @@ internal sealed class Item : IComparable<Item>
         {
             if (Factory.HasFlavor)
             {
-                if (IsFlavourAware())
+                if (IsFlavorAware())
                 {
                     return Factory.Stompable[StompableType.Broken];
                 }
@@ -1802,7 +1802,7 @@ internal sealed class Item : IComparable<Item>
 
     private int BaseValue()
     {
-        if (IsFlavourAware())
+        if (IsFlavorAware())
         {
             return Factory.Cost;
         }
@@ -2384,7 +2384,7 @@ internal sealed class Item : IComparable<Item>
             {
                 newName = "called '" + dummyName + "'";
             }
-            BecomeFlavourAware();
+            BecomeFlavorAware();
             BecomeKnown();
             IdentMental = true;
         }
@@ -2958,7 +2958,7 @@ internal sealed class Item : IComparable<Item>
         {
             tmpVal2 = "empty";
         }
-        else if (!IsFlavourAware() && Factory.Tried)
+        else if (!IsFlavorAware() && Factory.Tried)
         {
             tmpVal2 = "tried";
         }

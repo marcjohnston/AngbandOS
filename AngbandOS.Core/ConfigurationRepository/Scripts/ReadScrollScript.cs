@@ -71,9 +71,9 @@ internal class ReadScrollScript : Script, IScript, IRepeatableScript
         SaveGame.SingletonRepository.FlaggedActions.Get(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
         // We might have just identified the scroll
         item.ObjectTried();
-        if (readScrollEventArgs.Identified && !item.IsFlavourAware())
+        if (readScrollEventArgs.Identified && !item.IsFlavorAware())
         {
-            item.BecomeFlavourAware();
+            item.BecomeFlavorAware();
             int itemLevel = item.Factory.Level;
             SaveGame.GainExperience((itemLevel + (SaveGame.ExperienceLevel >> 1)) / SaveGame.ExperienceLevel);
         }

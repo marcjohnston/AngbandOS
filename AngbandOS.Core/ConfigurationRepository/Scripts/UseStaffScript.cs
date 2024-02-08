@@ -90,9 +90,9 @@ internal class UseStaffScript : Script, IScript, IRepeatableScript
         SaveGame.SingletonRepository.FlaggedActions.Get(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
         // We might now know what the staff does
         item.ObjectTried();
-        if (useStaffEventArgs.Identified && !item.IsFlavourAware())
+        if (useStaffEventArgs.Identified && !item.IsFlavorAware())
         {
-            item.BecomeFlavourAware();
+            item.BecomeFlavorAware();
             SaveGame.GainExperience((itemLevel + (SaveGame.ExperienceLevel >> 1)) / SaveGame.ExperienceLevel);
         }
         // We may not have used up a charge

@@ -50,7 +50,7 @@ internal class HomeStoreFactory : StoreFactory
     /// <summary>
     /// Returns false, because items in the pawn shop are not identified and render as they would appear in the dungeon.
     /// </summary>
-    public override bool ItemsRenderFlavourAware => false;
+    public override bool ItemsRenderFlavorAware => false;
 
     public override int WidthOfDescriptionColumn => 65;
     public override bool RenderWeightUnitOfMeasurement => true;

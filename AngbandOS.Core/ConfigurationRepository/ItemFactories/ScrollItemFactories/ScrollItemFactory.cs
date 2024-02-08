@@ -14,22 +14,22 @@ internal abstract class ScrollItemFactory : ItemFactory, IFlavor
     public override ItemClass ItemClass => SaveGame.SingletonRepository.ItemClasses.Get(nameof(ScrollsItemClass));
 
     /// <summary>
-    /// Returns the factory that this item was created by; casted as an IFlavour.
+    /// Returns the factory that this item was created by; casted as an IFlavor.
     /// </summary>
-    public IFlavor FlavourFactory => (IFlavor)this;
+    public IFlavor FlavorFactory => (IFlavor)this;
 
-    public override string GetDescription(Item item, bool includeCountPrefix, bool isFlavourAware)
+    public override string GetDescription(Item item, bool includeCountPrefix, bool isFlavorAware)
     {
-        string flavour = item.IdentityIsStoreBought ? "" : $" titled \"{FlavourFactory.Flavor.Name}\"";
-        string ofName = isFlavourAware ? $" of {FriendlyName}" : "";
-        string name = $"{CountPluralize("Scroll", item.Count)}{flavour}{ofName}";
+        string flavor = item.IdentityIsStoreBought ? "" : $" titled \"{FlavorFactory.Flavor.Name}\"";
+        string ofName = isFlavorAware ? $" of {FriendlyName}" : "";
+        string name = $"{CountPluralize("Scroll", item.Count)}{flavor}{ofName}";
         return includeCountPrefix ? GetPrefixCount(true, name, item.Count, item.IsKnownArtifact) : name;
     }
 
     /// <summary>
-    /// Returns the scroll flavours repository because scrolls have flavours that need to be identified.
+    /// Returns the scroll flavors repository because scrolls have flavors that need to be identified.
     /// </summary>
-    public IEnumerable<Flavor>? GetFlavorRepository() => SaveGame.ScrollFlavours;
+    public IEnumerable<Flavor>? GetFlavorRepository() => SaveGame.ScrollFlavors;
 
     public override int GetAdditionalMassProduceCount(Item item)
     {

@@ -103,10 +103,10 @@ internal class AimWandScript : Script, IScript, IRepeatableScript, ISuccessfulSc
         SaveGame.SingletonRepository.FlaggedActions.Get(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
         // Mark the wand as having been tried
         item.ObjectTried();
-        // If we just discovered the item's flavour, mark it as so
-        if (ident && !item.IsFlavourAware())
+        // If we just discovered the item's flavor, mark it as so
+        if (ident && !item.IsFlavorAware())
         {
-            item.BecomeFlavourAware();
+            item.BecomeFlavorAware();
             SaveGame.GainExperience((itemLevel + (SaveGame.ExperienceLevel >> 1)) / SaveGame.ExperienceLevel);
         }
         // If we're a channeler then we should be using mana instead of charges

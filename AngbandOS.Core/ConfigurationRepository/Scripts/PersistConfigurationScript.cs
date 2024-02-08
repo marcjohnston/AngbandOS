@@ -45,7 +45,7 @@ internal class PersistConfigurationScript : Script, IScript
             // Dictionary repositories.
             SaveGame.SingletonRepository.Activations.PersistEntities();
             SaveGame.SingletonRepository.AlterActions.PersistEntities();
-            SaveGame.SingletonRepository.AmuletFlavours.PersistEntities();
+            SaveGame.SingletonRepository.AmuletFlavors.PersistEntities();
             SaveGame.SingletonRepository.Animations.PersistEntities();
             SaveGame.SingletonRepository.ArtifactBiases.PersistEntities();
             SaveGame.SingletonRepository.AttackEffects.PersistEntities();
@@ -69,25 +69,25 @@ internal class PersistConfigurationScript : Script, IScript
             SaveGame.SingletonRepository.MonsterFilters.PersistEntities();
             SaveGame.SingletonRepository.MonsterRaces.PersistEntities();
             SaveGame.SingletonRepository.MonsterSpells.PersistEntities();
-            SaveGame.SingletonRepository.MushroomFlavours.PersistEntities();
+            SaveGame.SingletonRepository.MushroomFlavors.PersistEntities();
             SaveGame.SingletonRepository.Mutations.PersistEntities();
             SaveGame.SingletonRepository.Patrons.PersistEntities();
-            SaveGame.SingletonRepository.PotionFlavours.PersistEntities();
+            SaveGame.SingletonRepository.PotionFlavors.PersistEntities();
             SaveGame.SingletonRepository.ProjectileGraphics.PersistEntities();
             SaveGame.SingletonRepository.Projectiles.PersistEntities();
             SaveGame.SingletonRepository.Races.PersistEntities();
             SaveGame.SingletonRepository.RareItems.PersistEntities();
             SaveGame.SingletonRepository.Realms.PersistEntities();
             SaveGame.SingletonRepository.Rewards.PersistEntities();
-            SaveGame.SingletonRepository.RingFlavours.PersistEntities();
-            SaveGame.SingletonRepository.RodFlavours.PersistEntities();
+            SaveGame.SingletonRepository.RingFlavors.PersistEntities();
+            SaveGame.SingletonRepository.RodFlavors.PersistEntities();
             SaveGame.SingletonRepository.RoomLayouts.PersistEntities();
             SaveGame.SingletonRepository.Scripts.PersistEntities();
-            SaveGame.SingletonRepository.ScrollFlavours.PersistEntities();
+            SaveGame.SingletonRepository.ScrollFlavors.PersistEntities();
             SaveGame.SingletonRepository.Shopkeepers.PersistEntities();
             SaveGame.SingletonRepository.SpellResistantDetections.PersistEntities();
             SaveGame.SingletonRepository.Spells.PersistEntities();
-            SaveGame.SingletonRepository.StaffFlavours.PersistEntities();
+            SaveGame.SingletonRepository.StaffFlavors.PersistEntities();
             SaveGame.SingletonRepository.StoreCommands.PersistEntities();
             SaveGame.SingletonRepository.StoreFactories.PersistEntities();
             SaveGame.SingletonRepository.Symbols.PersistEntities();
@@ -96,7 +96,7 @@ internal class PersistConfigurationScript : Script, IScript
             SaveGame.SingletonRepository.TimedActions.PersistEntities();
             SaveGame.SingletonRepository.Towns.PersistEntities();
             SaveGame.SingletonRepository.Vaults.PersistEntities();
-            SaveGame.SingletonRepository.WandFlavours.PersistEntities();
+            SaveGame.SingletonRepository.WandFlavors.PersistEntities();
             SaveGame.SingletonRepository.WizardCommands.PersistEntities();
         }
         catch (NotImplementedException)

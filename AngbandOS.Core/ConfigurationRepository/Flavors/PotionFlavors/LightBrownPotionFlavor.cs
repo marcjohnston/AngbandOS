@@ -16,7 +16,7 @@ internal class LightBrownPotionFlavor : PotionFlavor
     public override string Name => "Light Brown";
 
     /// <summary>
-    /// Returns false because the light brown potion flavour is manually assigned to the apple juice potion.
+    /// Returns false because the light brown potion flavor is manually assigned to the apple juice potion.
     /// </summary>
     public override bool CanBeAssigned => false;
 }

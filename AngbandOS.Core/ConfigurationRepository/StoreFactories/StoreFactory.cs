@@ -260,11 +260,11 @@ internal abstract class StoreFactory : IItemFilter, IGetKey<string>
     protected abstract string TileName { get; }
 
     /// <summary>
-    /// Returns true, if the items should render as flavour aware; false, otherwise.  Stores will render their items as flavour aware.  The flavour
+    /// Returns true, if the items should render as flavor aware; false, otherwise.  Stores will render their items as flavor aware.  The flavor
     /// awareness is factory related.  Stores override the factory value.  Pawnshops and the home stores render items as they are seen in the dungeon.
     /// Returns true, by default.  Pawnshops and the home store return false.
     /// </summary>
-    public virtual bool ItemsRenderFlavourAware => true;
+    public virtual bool ItemsRenderFlavorAware => true;
 
     /// <summary>
     /// Returns the description of an item that is rendered in the store inventory.  Pawn shops and the players home render different descriptions.
@@ -273,7 +273,7 @@ internal abstract class StoreFactory : IItemFilter, IGetKey<string>
     /// <returns></returns>
     public string GetItemDescription(Item oPtr)
     {
-        if (ItemsRenderFlavourAware)
+        if (ItemsRenderFlavorAware)
         {
             return oPtr.Description(true, 3, true);
         }

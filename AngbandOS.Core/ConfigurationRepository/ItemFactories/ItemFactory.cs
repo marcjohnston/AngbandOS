@@ -188,7 +188,7 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey<string>
     /// <param name="includeCountPrefix">Specify true, to include the number of items as the prefix; false, to excluse the count.  Pluralization will still
     /// occur when the count is not included.</param>
     /// <returns></returns>
-    public virtual string GetDescription(Item item, bool includeCountPrefix, bool isFlavourAware)
+    public virtual string GetDescription(Item item, bool includeCountPrefix, bool isFlavorAware)
     {
         string pluralizedName = ApplyPlurizationMacro(FriendlyName, item.Count);
         return ApplyGetPrefixCountMacro(includeCountPrefix, pluralizedName, item.Count, item.IsKnownArtifact);
@@ -676,20 +676,20 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey<string>
     /// <summary>
     /// The special flavor of the item has been identified. (e.g. "of seeing")
     /// </summary>
-    public bool FlavourAware;
+    public bool FlavorAware;
 
     /// <summary>
     /// Returns the character to be displayed for items of this type.  This character is initially set from the BaseItemCategory, but item categories
     /// that have flavor may override this character and replace it with a different character from the flavor.
     /// </summary>
-    [Obsolete("This property is available via the IFlavour.Flavour property.")]
+    [Obsolete("This property is available via the IFlavor.Flavor property.")]
     public Symbol FlavorSymbol;
 
     /// <summary>
     /// Returns the color to be used for items of this type.  This color is initially set from the BaseItemCategory, but item categories
     /// that have flavor may override this color and replace it with a different color from the flavor.
     /// </summary>
-    [Obsolete("This property is available via the IFlavour.Flavour property.")]
+    [Obsolete("This property is available via the IFlavor.Flavor property.")]
     public ColorEnum FlavorColor;
 
     /// <summary>
@@ -715,9 +715,9 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey<string>
     public virtual bool HasFlavor => typeof(IFlavor).IsAssignableFrom(this.GetType());
 
     /// <summary>
-    /// Applies random flavour visuals to the items.  This method is called if the HasFlavor property returns true when creating a new game.
+    /// Applies random flavor visuals to the items.  This method is called if the HasFlavor property returns true when creating a new game.
     /// </summary>
-    public virtual void ApplyFlavourVisuals() { }
+    public virtual void ApplyFlavorVisuals() { }
 
     /// <summary>
     /// Returns true, if the player has attempted/tried the item.

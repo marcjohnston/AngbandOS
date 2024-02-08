@@ -16,19 +16,19 @@ internal class PowerRingItemFactory : RingItemFactory
     public override ColorEnum Color => ColorEnum.Yellow;
     public override string Name => "Power";
 
-    public override string GetDescription(Item item, bool includeCountPrefix, bool isFlavourAware)
+    public override string GetDescription(Item item, bool includeCountPrefix, bool isFlavorAware)
     {
-        if (item.FixedArtifact != null && isFlavourAware)
+        if (item.FixedArtifact != null && isFlavorAware)
         {
-            return base.GetDescription(item, includeCountPrefix, isFlavourAware);
+            return base.GetDescription(item, includeCountPrefix, isFlavorAware);
         }
-        string flavour = item.IdentityIsStoreBought ? "" : $"{FlavourFactory.Flavor.Name} ";
-        if (!isFlavourAware)
+        string flavor = item.IdentityIsStoreBought ? "" : $"{FlavorFactory.Flavor.Name} ";
+        if (!isFlavorAware)
         {
-            flavour = "Plain Gold ";
+            flavor = "Plain Gold ";
         }
-        string ofName = isFlavourAware ? $" of {FriendlyName}" : "";
-        string name = $"{flavour}{CountPluralize("Ring", item.Count)}{ofName}";
+        string ofName = isFlavorAware ? $" of {FriendlyName}" : "";
+        string name = $"{flavor}{CountPluralize("Ring", item.Count)}{ofName}";
         return includeCountPrefix ? GetPrefixCount(true, name, item.Count, item.IsKnownArtifact) : name;
     }
 

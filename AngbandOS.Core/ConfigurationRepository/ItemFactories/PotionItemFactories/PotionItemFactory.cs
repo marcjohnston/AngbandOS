@@ -14,15 +14,15 @@ internal abstract class PotionItemFactory : ItemFactory, IFlavor
     public override ItemClass ItemClass => SaveGame.SingletonRepository.ItemClasses.Get(nameof(PotionsItemClass));
 
     /// <summary>
-    /// Returns the factory that this item was created by; casted as an IFlavour.
+    /// Returns the factory that this item was created by; casted as an IFlavor.
     /// </summary>
-    public IFlavor FlavourFactory => (IFlavor)this;
+    public IFlavor FlavorFactory => (IFlavor)this;
 
-    public override string GetDescription(Item item, bool includeCountPrefix, bool isFlavourAware)
+    public override string GetDescription(Item item, bool includeCountPrefix, bool isFlavorAware)
     {
-        string flavour = item.IdentityIsStoreBought ? "" : $"{FlavourFactory.Flavor.Name} ";
-        string ofName = isFlavourAware ? $" of {FriendlyName}" : "";
-        string name = $"{flavour}{CountPluralize("Potion", item.Count)}{ofName}";
+        string flavor = item.IdentityIsStoreBought ? "" : $"{FlavorFactory.Flavor.Name} ";
+        string ofName = isFlavorAware ? $" of {FriendlyName}" : "";
+        string name = $"{flavor}{CountPluralize("Potion", item.Count)}{ofName}";
         return includeCountPrefix ? GetPrefixCount(true, name, item.Count, item.IsKnownArtifact) : name;
     }
 
@@ -41,10 +41,10 @@ internal abstract class PotionItemFactory : ItemFactory, IFlavor
     }
 
     /// <summary>
-    /// Returns the potions flavours repository because potions have flavours that need to be identified.  The Apple Juice, Water and Slime-Mold
+    /// Returns the potions flavors repository because potions have flavors that need to be identified.  The Apple Juice, Water and Slime-Mold
     /// potions override this
     /// </summary>
-    public virtual IEnumerable<Flavor>? GetFlavorRepository() => SaveGame.SingletonRepository.PotionFlavours;
+    public virtual IEnumerable<Flavor>? GetFlavorRepository() => SaveGame.SingletonRepository.PotionFlavors;
 
     public override int PercentageBreakageChance => 100;
     public override bool CanBeQuaffed => true;

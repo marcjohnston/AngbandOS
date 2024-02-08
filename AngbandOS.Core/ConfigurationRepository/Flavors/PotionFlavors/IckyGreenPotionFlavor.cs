@@ -16,7 +16,7 @@ internal class IckyGreenPotionFlavor : PotionFlavor
     public override string Name => "Icky Green";
 
     /// <summary>
-    /// Returns false because the icky green potion flavour is manually assigned to the slime mold juice potion.
+    /// Returns false because the icky green potion flavor is manually assigned to the slime mold juice potion.
     /// </summary>
     public override bool CanBeAssigned => false;
 }

@@ -27,7 +27,7 @@ internal class IdentifyFullyScript : Script, IScript, ISuccessfulScript
         {
             return false;
         }
-        oPtr.BecomeFlavourAware();
+        oPtr.BecomeFlavorAware();
         oPtr.BecomeKnown();
         oPtr.IdentMental = true;
         SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();

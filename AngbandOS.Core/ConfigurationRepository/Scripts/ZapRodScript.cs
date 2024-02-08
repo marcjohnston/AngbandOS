@@ -54,7 +54,7 @@ internal class ZapRodScript : Script, IScript, IRepeatableScript
         // would ask for a direction.
         RodItemFactory rodItemCategory = (RodItemFactory)item.Factory;
         int? dir = 5;
-        if (rodItemCategory.RequiresAiming || !item.IsFlavourAware())
+        if (rodItemCategory.RequiresAiming || !item.IsFlavorAware())
         {
             if (!SaveGame.GetDirectionWithAim(out int direction))
             {
@@ -100,9 +100,9 @@ internal class ZapRodScript : Script, IScript, IRepeatableScript
         SaveGame.SingletonRepository.FlaggedActions.Get(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
         // We may have just discovered what the rod does
         item.ObjectTried();
-        if (identified && !item.IsFlavourAware())
+        if (identified && !item.IsFlavorAware())
         {
-            item.BecomeFlavourAware();
+            item.BecomeFlavorAware();
             SaveGame.GainExperience((itemLevel + (SaveGame.ExperienceLevel >> 1)) / SaveGame.ExperienceLevel);
         }
         // We may not have actually used a charge

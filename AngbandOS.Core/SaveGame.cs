@@ -88,7 +88,7 @@ internal class SaveGame
     public Dungeon RecallDungeon;
     public int Resting;
     public int Running;
-    public List<ScrollFlavor> ScrollFlavours; // These are generated from the available base scrolls.
+    public List<ScrollFlavor> ScrollFlavors; // These are generated from the available base scrolls.
     public int TargetCol;
     public int TargetRow;
     public int TargetWho;
@@ -1761,7 +1761,7 @@ internal class SaveGame
         MsgPrint(null);
         UpdateScreen();
         FlavorInit();
-        ApplyFlavourVisuals();
+        ApplyFlavorVisuals();
         FullScreenOverlay = false;
         SetBackground(BackgroundImageEnum.Overhead);
         Playing = true;
@@ -2607,51 +2607,51 @@ internal class SaveGame
         SingletonRepository.FlaggedActions.Get(nameof(UpdateMonstersFlaggedAction)).Check();
     }
 
-    private void ApplyFlavourVisuals()
+    private void ApplyFlavorVisuals()
     {
-        Dictionary<Type, IEnumerator<Flavor>> currentFlavourIndex = new Dictionary<Type, IEnumerator<Flavor>>();
+        Dictionary<Type, IEnumerator<Flavor>> currentFlavorIndex = new Dictionary<Type, IEnumerator<Flavor>>();
         foreach (ItemFactory kPtr in SingletonRepository.ItemFactories)
         {
             if (kPtr.HasFlavor)
             {
-                // Convert the factory into the IFlavour type.
-                IFlavor flavourFactory = (IFlavor)kPtr;
+                // Convert the factory into the IFlavor type.
+                IFlavor flavorFactory = (IFlavor)kPtr;
 
-                // Get the repository for the flavours.
-                IEnumerable<Flavor>? flavourRepository = flavourFactory.GetFlavorRepository();
+                // Get the repository for the flavors.
+                IEnumerable<Flavor>? flavorRepository = flavorFactory.GetFlavorRepository();
 
-                // Check to see if the repository indicates that the flavours need to be assigned.
-                if (flavourRepository != null)
+                // Check to see if the repository indicates that the flavors need to be assigned.
+                if (flavorRepository != null)
                 {
                     // The dictionary for the enumerator is using the type as the key.
-                    Type factoryType = flavourRepository.GetType();
+                    Type factoryType = flavorRepository.GetType();
 
-                    if (!currentFlavourIndex.TryGetValue(factoryType, out IEnumerator<Flavor>? flavourEnumerator))
+                    if (!currentFlavorIndex.TryGetValue(factoryType, out IEnumerator<Flavor>? flavorEnumerator))
                     {
                         // Get the enumerator for the repository.
-                        flavourEnumerator = flavourRepository.GetEnumerator();
-                        currentFlavourIndex.Add(factoryType, flavourEnumerator);
+                        flavorEnumerator = flavorRepository.GetEnumerator();
+                        currentFlavorIndex.Add(factoryType, flavorEnumerator);
                     }
 
-                    // Ensure there are enough flavours.
+                    // Ensure there are enough flavors.
                     do
                     {
-                        if (!flavourEnumerator.MoveNext())
+                        if (!flavorEnumerator.MoveNext())
                         {
-                            throw new Exception($"{factoryType.Name} does not have enough flavours to assign to the associated factories.");
+                            throw new Exception($"{factoryType.Name} does not have enough flavors to assign to the associated factories.");
                         }
                     }
-                    while (!flavourEnumerator.Current.CanBeAssigned);
+                    while (!flavorEnumerator.Current.CanBeAssigned);
 
-                    // Retrieve the flavour to assign to the factory.
-                    Flavor flavour = flavourEnumerator.Current;
+                    // Retrieve the flavor to assign to the factory.
+                    Flavor flavor = flavorEnumerator.Current;
 
-                    // Assign the flavour details.
-                    flavourFactory.Flavor = flavour;
+                    // Assign the flavor details.
+                    flavorFactory.Flavor = flavor;
                 }
 
-                kPtr.FlavorSymbol = flavourFactory.Flavor.Symbol;
-                kPtr.FlavorColor = flavourFactory.Flavor.Color;
+                kPtr.FlavorSymbol = flavorFactory.Flavor.Symbol;
+                kPtr.FlavorColor = flavorFactory.Flavor.Color;
             }
         }
     }
@@ -3053,8 +3053,8 @@ internal class SaveGame
         int i, j;
         Rng.UseFixed = true;
         Rng.FixedSeed = _seedFlavor;
-        ScrollFlavours = new List<ScrollFlavor>();
-        for (i = 0; i < Constants.MaxNumberOfScrollFlavoursGenerated; i++)
+        ScrollFlavors = new List<ScrollFlavor>();
+        for (i = 0; i < Constants.MaxNumberOfScrollFlavorsGenerated; i++)
         {
             while (true)
             {
@@ -3078,7 +3078,7 @@ internal class SaveGame
                 string name = buf.Substring(1);
                 for (j = 0; j < i; j++)
                 {
-                    string hack1 = ScrollFlavours[j].Name;
+                    string hack1 = ScrollFlavors[j].Name;
                     if (hack1.Substring(0, 4) == name.Substring(0, 4))
                     {
                         okay = false;
@@ -3087,10 +3087,10 @@ internal class SaveGame
                 }
                 if (okay)
                 {
-                    int index = Rng.RandomLessThan(SingletonRepository.ScrollFlavours.Count);
-                    BaseScrollFlavor baseFlavour = SingletonRepository.ScrollFlavours[index];
-                    ScrollFlavor flavour = new ScrollFlavor(this, baseFlavour.Symbol, baseFlavour.Color, name);
-                    ScrollFlavours.Add(flavour);
+                    int index = Rng.RandomLessThan(SingletonRepository.ScrollFlavors.Count);
+                    BaseScrollFlavor baseFlavor = SingletonRepository.ScrollFlavors[index];
+                    ScrollFlavor flavor = new ScrollFlavor(this, baseFlavor.Symbol, baseFlavor.Color, name);
+                    ScrollFlavors.Add(flavor);
                     break;
                 }
             }
@@ -3104,7 +3104,7 @@ internal class SaveGame
             }
             if (!kPtr.HasFlavor)
             {
-                kPtr.FlavourAware = true;
+                kPtr.FlavorAware = true;
             }
         }
     }
@@ -5443,7 +5443,7 @@ internal class SaveGame
         {
             return false;
         }
-        oPtr.BecomeFlavourAware();
+        oPtr.BecomeFlavorAware();
         oPtr.BecomeKnown();
         SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
         SingletonRepository.FlaggedActions.Get(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
@@ -5473,7 +5473,7 @@ internal class SaveGame
             {
                 continue;
             }
-            oPtr.BecomeFlavourAware();
+            oPtr.BecomeFlavorAware();
             oPtr.BecomeKnown();
             if (oPtr.Stompable())
             {
@@ -10209,7 +10209,7 @@ internal class SaveGame
             ItemFactory scrollSatisfyHungerItemClass = SingletonRepository.ItemFactories.Get(nameof(SatisfyHungerScrollItemFactory));
             Item item = scrollSatisfyHungerItemClass.CreateItem();
             item.Count = (char)Rng.RandomBetween(2, 5);
-            item.BecomeFlavourAware();
+            item.BecomeFlavorAware();
             item.BecomeKnown();
             item.IdentityIsStoreBought = true;
             InvenCarry(item);
@@ -10219,7 +10219,7 @@ internal class SaveGame
             ItemFactory rationFoodItemClass = SingletonRepository.ItemFactories.Get(nameof(RationFoodItemFactory));
             Item item = rationFoodItemClass.CreateItem();
             item.Count = Rng.RandomBetween(3, 7);
-            item.BecomeFlavourAware();
+            item.BecomeFlavorAware();
             item.BecomeKnown();
             InvenCarry(item);
         }
@@ -10228,7 +10228,7 @@ internal class SaveGame
             ItemFactory scrollLightItemClass = SingletonRepository.ItemFactories.Get(nameof(LightScrollItemFactory));
             Item item = scrollLightItemClass .CreateItem();
             item.Count = Rng.RandomBetween(3, 7);
-            item.BecomeFlavourAware();
+            item.BecomeFlavorAware();
             item.BecomeKnown();
             item.IdentityIsStoreBought = true;
             InvenCarry(item);
@@ -10239,7 +10239,7 @@ internal class SaveGame
             Item item = woodenTorchItemClass.CreateItem();
             item.Count = Rng.RandomBetween(3, 7);
             item.TypeSpecificValue = Rng.RandomBetween(3, 7) * 500;
-            item.BecomeFlavourAware();
+            item.BecomeFlavorAware();
             item.BecomeKnown();
             InvenCarry(item);
             Item carried = item.Clone(1);
@@ -13862,7 +13862,7 @@ internal class SaveGame
         foreach (ItemFactory kPtr in SingletonRepository.ItemFactories)
         {
             kPtr.Tried = false;
-            kPtr.FlavourAware = false;
+            kPtr.FlavorAware = false;
         }
         for (int i = 1; i < SingletonRepository.MonsterRaces.Count; i++)
         {
@@ -15343,7 +15343,7 @@ internal class SaveGame
         ShowInventoryOptions options = new ShowInventoryOptions()
         {
             ShowEmptySlotsAsNothing = true,
-            ShowFlavourColumn = true,
+            ShowFlavorColumn = true,
             ShowUsageColumn = true
         };
         ShowInven(_inventorySlot => _inventorySlot.IsEquipment, itemFilter, options);
@@ -15369,9 +15369,9 @@ internal class SaveGame
             .ToArray();
 
         const string labels = "abcdefghijklmnopqrstuvwxyz";
-        ConsoleTable consoleTable = new ConsoleTable("label", "flavour", "usage", "description", "weight");
-        consoleTable.Column("flavour").IsVisible = options.ShowFlavourColumn;
-        consoleTable.Column("usage").IsVisible = options.ShowFlavourColumn;
+        ConsoleTable consoleTable = new ConsoleTable("label", "flavor", "usage", "description", "weight");
+        consoleTable.Column("flavor").IsVisible = options.ShowFlavorColumn;
+        consoleTable.Column("usage").IsVisible = options.ShowFlavorColumn;
         consoleTable.Column("weight").Alignment = new ConsoleTopRightAlignment();
         foreach (BaseInventorySlot inventorySlot in inventorySlots)
         {
@@ -15386,13 +15386,13 @@ internal class SaveGame
 
                     if (oPtr.Factory != null)
                     {
-                        // Apply flavour visuals
-                        consoleRow["flavour"] = new ConsoleChar(oPtr.Factory.FlavorColor, oPtr.Factory.FlavorSymbol.Character);
+                        // Apply flavor visuals
+                        consoleRow["flavor"] = new ConsoleChar(oPtr.Factory.FlavorColor, oPtr.Factory.FlavorSymbol.Character);
                     }
                     else
                     {
                         // There is no item.
-                        consoleRow["flavour"] = new ConsoleChar(ColorEnum.Background, ' ');
+                        consoleRow["flavor"] = new ConsoleChar(ColorEnum.Background, ' ');
                     }
                     consoleRow["usage"] = new ConsoleString(ColorEnum.White, $"{inventorySlot.MentionUse(index)}:");
 

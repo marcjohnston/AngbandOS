@@ -22,7 +22,7 @@ internal class WizardLearnScript : Script, IScript
         {
             if (kPtr.Level <= SaveGame.CommandArgument)
             {
-                kPtr.FlavourAware = true;
+                kPtr.FlavorAware = true;
             }
         }
     }

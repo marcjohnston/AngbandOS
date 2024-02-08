@@ -29,7 +29,7 @@ internal abstract class BookItemFactory : ItemFactory
     /// </summary>
     public virtual string DivineTitle => $"{RealmName} Magic";
 
-    public override string GetDescription(Item item, bool includeCountPrefix, bool isFlavourAware)
+    public override string GetDescription(Item item, bool includeCountPrefix, bool isFlavorAware)
     {
         string name = SaveGame.BaseCharacterClass.SpellCastingType.GetBookTitle(item);
         name = $"{name} {FriendlyName}";

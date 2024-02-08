@@ -18,19 +18,19 @@ internal abstract class AmuletJeweleryItemFactory : JewelleryItemFactory, IFlavo
     public override int WieldSlot => InventorySlot.Neck;
 
     /// <summary>
-    /// Returns the factory that this item was created by; casted as an IFlavour.
+    /// Returns the factory that this item was created by; casted as an IFlavor.
     /// </summary>
-    public IFlavor FlavourFactory => (IFlavor)this;
+    public IFlavor FlavorFactory => (IFlavor)this;
 
-    public override string GetDescription(Item item, bool includeCountPrefix, bool isFlavourAware)
+    public override string GetDescription(Item item, bool includeCountPrefix, bool isFlavorAware)
     {
-        if (item.FixedArtifact != null && isFlavourAware)
+        if (item.FixedArtifact != null && isFlavorAware)
         {
-            return base.GetDescription(item, includeCountPrefix, isFlavourAware);
+            return base.GetDescription(item, includeCountPrefix, isFlavorAware);
         }
-        string flavour = item.IdentityIsStoreBought ? "" : $"{FlavourFactory.Flavor.Name} ";
-        string ofName = isFlavourAware ? $" of {item.Factory.FriendlyName}" : "";
-        string name = $"{flavour}{CountPluralize("Amulet", item.Count)}{ofName}";
+        string flavor = item.IdentityIsStoreBought ? "" : $"{FlavorFactory.Flavor.Name} ";
+        string ofName = isFlavorAware ? $" of {item.Factory.FriendlyName}" : "";
+        string name = $"{flavor}{CountPluralize("Amulet", item.Count)}{ofName}";
         return includeCountPrefix ? GetPrefixCount(true, name, item.Count, item.IsKnownArtifact) : name;
     }
 
@@ -42,9 +42,9 @@ internal abstract class AmuletJeweleryItemFactory : JewelleryItemFactory, IFlavo
     public override ColorEnum Color => ColorEnum.Orange;
 
     /// <summary>
-    /// Returns the amulet flavours repository because amulets have flavours that need to be identified.
+    /// Returns the amulet flavors repository because amulets have flavors that need to be identified.
     /// </summary>
-    public IEnumerable<Flavor>? GetFlavorRepository() => SaveGame.SingletonRepository.AmuletFlavours;
+    public IEnumerable<Flavor>? GetFlavorRepository() => SaveGame.SingletonRepository.AmuletFlavors;
 
     /// <inheritdoc/>
     public Flavor Flavor { get; set; }

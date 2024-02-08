@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Flavors;
 
 /// <summary>
-/// Represents a single flavour for a group of items that participate in the IFlavour interface.
+/// Represents a single flavor for a group of items that participate in the IFlavor interface.
 /// </summary>
 [Serializable]
 internal abstract class Flavor : IGetKey<string>
@@ -51,8 +51,8 @@ internal abstract class Flavor : IGetKey<string>
     public abstract string Name { get; }
 
     /// <summary>
-    /// Returns true, if the flavour can be assigned; false, if the flavour shouldn't be assigned during the flavour assignments.  False will be returned for the
-    /// apple juice, slime mold juice and water potions because they specify their flavours.
+    /// Returns true, if the flavor can be assigned; false, if the flavor shouldn't be assigned during the flavor assignments.  False will be returned for the
+    /// apple juice, slime mold juice and water potions because they specify their flavors.
     /// </summary>
     public virtual bool CanBeAssigned => true;
 

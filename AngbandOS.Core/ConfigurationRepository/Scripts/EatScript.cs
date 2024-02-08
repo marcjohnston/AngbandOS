@@ -58,10 +58,10 @@ internal class EatScript : Script, IScript, IRepeatableScript
         // We've tried this type of object
         item.ObjectTried();
 
-        // Learn its flavour if necessary
-        if (ident && !item.IsFlavourAware())
+        // Learn its flavor if necessary
+        if (ident && !item.IsFlavorAware())
         {
-            item.BecomeFlavourAware();
+            item.BecomeFlavorAware();
             SaveGame.GainExperience((itemLevel + (SaveGame.ExperienceLevel >> 1)) / SaveGame.ExperienceLevel);
         }
 

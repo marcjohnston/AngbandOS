@@ -97,7 +97,7 @@ internal class PurchaseStoreItemScript : Script, IStoreScript
                     SaveGame.StorePrtGold();
                     if (storeCommandEvent.Store.StoreFactory.StoreIdentifiesItems)
                     {
-                        jPtr.BecomeFlavourAware();
+                        jPtr.BecomeFlavorAware();
                     }
                     jPtr.IdentFixed = false;
                     oName = jPtr.Description(true, 3);
