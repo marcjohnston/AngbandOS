@@ -25,7 +25,7 @@ internal abstract class DictionaryRepositoryCollection<TKey, TValue> : ListRepos
     }
 
     /// <summary>
-    /// Add a value to the keyed dictionary.
+    /// Add a value to the dictionary.
     /// </summary>
     /// <param name="item"></param>
     public override void Add(TValue item)

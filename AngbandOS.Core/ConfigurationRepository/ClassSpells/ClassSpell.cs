@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.ClassSpells;
 
 [Serializable]
-internal abstract class ClassSpell
+internal abstract class ClassSpell : IGetKey<string>
 {
     protected readonly SaveGame SaveGame;
     protected ClassSpell(SaveGame saveGame)
@@ -22,4 +22,9 @@ internal abstract class ClassSpell
     public abstract int ManaCost { get; }
     public abstract int BaseFailure { get; }
     public abstract int FirstCastExperience { get; }
+
+    public virtual string Key => $"{CharacterClass.Name}.{Spell.Name}";
+    public string GetKey => Key;
+
+    public void Bind() { }
 }

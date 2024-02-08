@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.RepositoryCollections;
 
 [Serializable]
-internal class ClassSpellsRepositoryCollection : ListRepositoryCollection<ClassSpell> // TODO: This needs to use a DualDictionary
+internal class ClassSpellsRepositoryCollection : DictionaryRepositoryCollection<string, ClassSpell>
 {
     public ClassSpellsRepositoryCollection(SaveGame saveGame) : base(saveGame) { }
 
