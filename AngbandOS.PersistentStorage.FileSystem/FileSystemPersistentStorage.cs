@@ -45,6 +45,7 @@ namespace AngbandOS.PersistentStorage
             {
             }
 
+            // Process a folder of entities.
             foreach (KeyValuePair<string, string> keyValuePair in jsonEntities)
             {
                 string key = keyValuePair.Key;
@@ -53,13 +54,16 @@ namespace AngbandOS.PersistentStorage
                     throw new Exception($"The entity key name {key} contains invalid characters.  Only a-z, A-Z, 0-9, . characters are allows.");
                 }
 
-                // Process a folder of entities.
+                // Check to see if there is any content to save.  Empty content will not be written to the disk.
                 if (keyValuePair.Value.Length > 0)
                 {
+                    // Check to see if we need to create the folder.
                     if (!directoryCreated)
                     {
                         Directory.CreateDirectory(folderName);
                     }
+
+                    // Write the file.
                     string subfolderPath = Path.Combine(folderName, key);
                     string subfolderFilename = $"{subfolderPath}.json";
                     File.WriteAllText(subfolderFilename, keyValuePair.Value);
