@@ -29,6 +29,7 @@ internal abstract class Tile : IGetKey<string>
     public void Bind()
     {
         MimicTile = MimicTileName == null ? null : SaveGame.SingletonRepository.Tiles.Get(MimicTileName);
+        HiddenTreasureForTile = HiddenTreasureForTileName == null ? null : SaveGame.SingletonRepository.Tiles.Get(HiddenTreasureForTileName);
     }
 
     /// <summary>
@@ -49,10 +50,12 @@ internal abstract class Tile : IGetKey<string>
     /// </summary>
     public virtual bool BlocksScent => BlocksLos;
 
+    public Tile? HiddenTreasureForTile { get; private set; }
+
     /// <summary>
     /// Returns null, if the tile type is not a hidden treasure; otherwise, when the tile is a hidden treasure, the visible tile type is returned.
     /// </summary>
-    public virtual string? HiddenTreasureFor => null;
+    protected virtual string? HiddenTreasureForTileName => null;
 
     /// <summary>
     /// Returns true, if the tile type is a visible treasure.  Defaults to false.  Magma and quartz are treasure tile types.

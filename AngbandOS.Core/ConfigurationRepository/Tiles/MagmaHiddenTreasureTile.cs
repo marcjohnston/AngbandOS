@@ -17,7 +17,7 @@ internal class MagmaHiddenTreasureTile : Tile
     public override AlterAction? AlterAction => SaveGame.SingletonRepository.AlterActions.Get(nameof(TunnelAlterAction));
     protected override string? MimicTileName => "Magma";
     public override bool BlocksLos => true;
-    public override string? HiddenTreasureFor => "MagmaVisTreas";
+    protected override string? HiddenTreasureForTileName => "MagmaVisTreas";
     public override string Description => "magma vein";
     public override bool DimsOutsideLOS => true;
     public override bool IsWall => true;

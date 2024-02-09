@@ -4799,9 +4799,9 @@ internal class SaveGame
             for (int x = PanelColMin; x <= PanelColMax; x++)
             {
                 GridTile cPtr = Grid[y][x];
-                if (cPtr.FeatureType.HiddenTreasureFor != null)
+                if (cPtr.FeatureType.HiddenTreasureForTile != null)
                 {
-                    cPtr.SetFeature(cPtr.FeatureType.HiddenTreasureFor);
+                    cPtr.SetFeature(cPtr.FeatureType.HiddenTreasureForTile.Name);
                 }
                 if (cPtr.FeatureType.IsVisibleTreasure)
                 {
