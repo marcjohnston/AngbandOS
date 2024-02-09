@@ -13,17 +13,7 @@ internal class DeathSpellVampirismTrue : Spell
     private DeathSpellVampirismTrue(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        if (!SaveGame.GetDirectionWithAim(out int dir))
-        {
-            return;
-        }
-        for (int dummy = 0; dummy < 3; dummy++)
-        {
-            if (SaveGame.DrainLife(dir, 100))
-            {
-                SaveGame.RestoreHealth(100);
-            }
-        }
+        SaveGame.RunScript(nameof(VampirismTrueScript));
     }
 
     public override void CastFailed()
