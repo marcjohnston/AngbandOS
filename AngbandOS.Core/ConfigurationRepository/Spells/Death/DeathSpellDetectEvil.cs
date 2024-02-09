@@ -22,5 +22,4 @@ internal class DeathSpellDetectEvil : Spell
     }
 
     public override string Name => "Detect Evil";
-    
 }

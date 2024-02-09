@@ -22,5 +22,4 @@ internal class DeathSpellDeathRay : Spell
     }
 
     public override string Name => "Death Ray";
-    
 }

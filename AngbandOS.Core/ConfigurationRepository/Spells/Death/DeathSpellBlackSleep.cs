@@ -21,6 +21,5 @@ internal class DeathSpellBlackSleep : Spell
         SaveGame.RunScriptIntInt(nameof(WildDeathMagicScript), 4, 0);
     }
 
-    public override string Name => "Black Sleep";
-    
+    public override string Name => "Black Sleep";  
 }
