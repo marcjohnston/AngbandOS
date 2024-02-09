@@ -5,22 +5,19 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Spells.Death;
+namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class DeathSpellTerror : Spell
+internal class TerrorScript : Script, IScript
 {
-    private DeathSpellTerror(SaveGame saveGame) : base(saveGame) { }
-    public override void Cast()
-    {
-        SaveGame.RunScript(nameof(TerrorScript));
-    }
+    private TerrorScript(SaveGame saveGame) : base(saveGame) { }
 
-    public override void CastFailed()
+    /// <summary>
+    /// Adds fear and health damage to all monsters in a distance of 30 + the player experience.
+    /// </summary>
+    /// <returns></returns>
+    public void ExecuteScript()
     {
-        SaveGame.RunScriptIntInt(nameof(WildDeathMagicScript), 10, 1);
+        SaveGame.TurnMonsters(30 + SaveGame.ExperienceLevel);
     }
-
-    public override string Name => "Terror";
-    
 }
