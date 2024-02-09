@@ -13,33 +13,7 @@ internal class DeathSpellRaiseTheDead : Spell
     private DeathSpellRaiseTheDead(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        if (SaveGame.Rng.DieRoll(3) == 1)
-        {
-            if (SaveGame.SummonSpecific(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel * 3 / 2, SaveGame.ExperienceLevel > 47 ? SaveGame.SingletonRepository.MonsterFilters.Get(nameof(HiUndeadMonsterFilter)) : SaveGame.SingletonRepository.MonsterFilters.Get(nameof(UndeadMonsterFilter))))
-            {
-                SaveGame.MsgPrint(
-                    "Cold winds begin to swirl around you, carrying with them the stench of decay...");
-                SaveGame.MsgPrint("'The dead arise... to punish you for disturbing them!'");
-            }
-            else
-            {
-                SaveGame.MsgPrint("No-one ever turns up.");
-            }
-        }
-        else
-        {
-            if (SaveGame.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel * 3 / 2,
-                SaveGame.ExperienceLevel > 47 ? SaveGame.SingletonRepository.MonsterFilters.Get(nameof(HiUndeadNoUniquesMonsterFilter)) : SaveGame.SingletonRepository.MonsterFilters.Get(nameof(UndeadMonsterFilter)), SaveGame.ExperienceLevel > 24 && SaveGame.Rng.DieRoll(3) == 1))
-            {
-                SaveGame.MsgPrint(
-                    "Cold winds begin to swirl around you, carrying with them the stench of decay...");
-                SaveGame.MsgPrint("Ancient, long-dead forms arise from the ground to serve you!");
-            }
-            else
-            {
-                SaveGame.MsgPrint("No-one ever turns up.");
-            }
-        }
+        SaveGame.RunScript(nameof(RaiseTheDeadScript));
     }
 
     public override void CastFailed()
