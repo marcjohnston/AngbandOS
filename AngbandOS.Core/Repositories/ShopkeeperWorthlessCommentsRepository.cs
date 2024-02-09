@@ -19,10 +19,17 @@ internal class ShopkeeperWorthlessCommentsRepository : StringListRepository
 
     public override void Load()
     {
-        Add("Arrgghh!", 
-            "You bastard!", 
-            "You hear someone sobbing...", 
-            "The shopkeeper howls in agony!"
-            );
+        if (SaveGame.Configuration.ShopkeeperWorthlessComments == null)
+        {
+            Add("Arrgghh!",
+                "You bastard!",
+                "You hear someone sobbing...",
+                "The shopkeeper howls in agony!"
+                );
+        }
+        else
+        {
+            Add(SaveGame.Configuration.ShopkeeperWorthlessComments);
+        }
     }
 }

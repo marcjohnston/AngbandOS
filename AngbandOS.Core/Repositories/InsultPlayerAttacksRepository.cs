@@ -19,7 +19,14 @@ internal class InsultPlayerAttacksRepository : StringListRepository
 
     public override void Load()
     {
-        Add("insults you!", "insults your mother!", "gives you the finger!", "humiliates you!", "defiles you!",
-            "dances around you!", "makes obscene gestures!", "moons you!");
+        if (SaveGame.Configuration.InsultPlayerAttacks == null)
+        {
+            Add("insults you!", "insults your mother!", "gives you the finger!", "humiliates you!", "defiles you!",
+                "dances around you!", "makes obscene gestures!", "moons you!");
+        }
+        else
+        {
+            Add(SaveGame.Configuration.InsultPlayerAttacks);
+        }
     }
 }

@@ -19,8 +19,15 @@ internal class HorrificDescriptionsRepository : StringListRepository
 
     public override void Load()
     {
-        Add("abominable", "abysmal", "appalling", "baleful", "blasphemous", "disgusting", "dreadful", "filthy",
-            "grisly", "hideous", "hellish", "horrible", "infernal", "loathsome", "nightmarish", "repulsive",
-            "sacrilegious", "terrible", "unclean", "unspeakable");
+        if (SaveGame.Configuration.HorrificDescriptions == null)
+        {
+            Add("abominable", "abysmal", "appalling", "baleful", "blasphemous", "disgusting", "dreadful", "filthy",
+                "grisly", "hideous", "hellish", "horrible", "infernal", "loathsome", "nightmarish", "repulsive",
+                "sacrilegious", "terrible", "unclean", "unspeakable");
+        }
+        else
+        {
+            Add(SaveGame.Configuration.HorrificDescriptions);
+        }
     }
 }

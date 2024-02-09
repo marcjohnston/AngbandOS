@@ -19,8 +19,15 @@ internal class SingingPlayerAttacksRepository : StringListRepository
 
     public override void Load()
     {
-        Add("sings 'We are a happy family.'", 
-            "sings 'I love you, you love me.'"
-            );
+        if (SaveGame.Configuration.SingingPlayerAttacks == null)
+        {
+            Add("sings 'We are a happy family.'",
+                "sings 'I love you, you love me.'"
+                );
+        }
+        else
+        {
+            Add(SaveGame.Configuration.SingingPlayerAttacks);
+        }
     }
 }

@@ -19,10 +19,17 @@ internal class ShopkeeperGoodCommentsRepository : StringListRepository
 
     public override void Load()
     {
-        Add("Cool!", 
-            "You've made my day!", 
-            "The shopkeeper giggles.", 
-            "The shopkeeper laughs loudly."
-            );
+        if (SaveGame.Configuration.ShopkeeperGoodComments == null)
+        {
+            Add("Cool!",
+                "You've made my day!",
+                "The shopkeeper giggles.",
+                "The shopkeeper laughs loudly."
+                );
+        }
+        else
+        {
+            Add(SaveGame.Configuration.ShopkeeperGoodComments);
+        }
     }
 }

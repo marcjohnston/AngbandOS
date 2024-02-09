@@ -19,11 +19,18 @@ internal class FindQuestsRepository : StringListRepository
 
     public override void Load()
     {
-        Add("You find the following inscription in the floor",
-            "You see a message inscribed in the wall",
-            "There is a sign saying",
-            "Something is written on the staircase",
-            "You find a scroll with the following message"
-            );
+        if (SaveGame.Configuration.FindQuests == null)
+        {
+            Add("You find the following inscription in the floor",
+                "You see a message inscribed in the wall",
+                "There is a sign saying",
+                "Something is written on the staircase",
+                "You find a scroll with the following message"
+                );
+        }
+        else
+        {
+            Add(SaveGame.Configuration.FindQuests);
+        }
     }
 }

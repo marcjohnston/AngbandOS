@@ -19,11 +19,18 @@ internal class ShopkeeperAcceptedCommentsRepository : StringListRepository
 
     public override void Load()
     {
-        Add("Okay.", 
-            "Fine.", 
-            "Accepted!", 
-            "Agreed!", 
-            "Done!", 
-            "Taken!");
+        if (SaveGame.Configuration.ShopkeeperAcceptedComments == null)
+        {
+            Add("Okay.",
+                "Fine.",
+                "Accepted!",
+                "Agreed!",
+                "Done!",
+                "Taken!");
+        }
+        else
+        {
+            Add(SaveGame.Configuration.ShopkeeperAcceptedComments);
+        }
     }
 }

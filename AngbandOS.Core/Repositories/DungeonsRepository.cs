@@ -14,7 +14,7 @@ internal class DungeonsRepository : DictionaryRepository<string, Dungeon>
 
     public override void Load()
     {
-        if (SaveGame.Configuration.Towns == null)
+        if (SaveGame.Configuration.Dungeons == null)
         {
             base.Load();
         }

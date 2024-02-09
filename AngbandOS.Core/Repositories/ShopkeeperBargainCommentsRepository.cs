@@ -19,10 +19,17 @@ internal class ShopkeeperBargainCommentsRepository : StringListRepository
 
     public override void Load()
     {
-        Add("Yipee!", 
-            "I think I'll retire!", 
-            "The shopkeeper jumps for joy.", 
-            "The shopkeeper smiles gleefully."
-            );
+        if (SaveGame.Configuration.ShopkeeperBargainComments == null)
+        {
+            Add("Yipee!",
+                "I think I'll retire!",
+                "The shopkeeper jumps for joy.",
+                "The shopkeeper smiles gleefully."
+                );
+        }
+        else
+        {
+            Add(SaveGame.Configuration.ShopkeeperBargainComments);
+        }
     }
 }

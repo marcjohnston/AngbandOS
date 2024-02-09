@@ -19,11 +19,18 @@ internal class FunnyCommentsRepository : StringListRepository
 
     public override void Load()
     {
-        Add("Wow, cosmic, man!", 
-            "Rad!", 
-            "Groovy!", 
-            "Cool!", 
-            "Far out!"
-            );
+        if (SaveGame.Configuration.FunnyComments == null)
+        {
+            Add("Wow, cosmic, man!",
+                "Rad!",
+                "Groovy!",
+                "Cool!",
+                "Far out!"
+                );
+        }
+        else
+        {
+            Add(SaveGame.Configuration.FunnyComments);
+        }
     }
 }

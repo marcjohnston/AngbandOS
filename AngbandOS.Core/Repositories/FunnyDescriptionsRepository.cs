@@ -19,8 +19,15 @@ internal class FunnyDescriptionsRepository : StringListRepository
 
     public override void Load()
     {
-        Add("silly", "hilarious", "absurd", "insipid", "ridiculous", "laughable", "ludicrous", "far-out", "groovy",
-            "postmodern", "fantastic", "dadaistic", "cubistic", "cosmic", "awesome", "incomprehensible", "fabulous",
-            "amazing", "incredible", "chaotic", "wild", "preposterous");
+        if (SaveGame.Configuration.FunnyDescriptions == null)
+        {
+            Add("silly", "hilarious", "absurd", "insipid", "ridiculous", "laughable", "ludicrous", "far-out", "groovy",
+                "postmodern", "fantastic", "dadaistic", "cubistic", "cosmic", "awesome", "incomprehensible", "fabulous",
+                "amazing", "incredible", "chaotic", "wild", "preposterous");
+        }
+        else
+        {
+            Add(SaveGame.Configuration.FunnyDescriptions);
+        }
     }
 }

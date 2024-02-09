@@ -19,10 +19,17 @@ internal class ShopkeeperLessThanGuessComments : StringListRepository
 
     public override void Load()
     {
-        Add("Damn!", 
-            "You bastard!", 
-            "The shopkeeper curses at you.", 
-            "The shopkeeper glares at you."
-            );
+        if (SaveGame.Configuration.ShopkeeperLessThanGuessComments == null)
+        {
+            Add("Damn!",
+                "You bastard!",
+                "The shopkeeper curses at you.",
+                "The shopkeeper glares at you."
+                );
+        }
+        else
+        {
+            Add(SaveGame.Configuration.ShopkeeperLessThanGuessComments);
+        }
     }
 }

@@ -42,4 +42,18 @@ public class Configuration
     public VaultDefinition[]? Vaults { get; set; } = null;
     public DungeonGuardianDefinition[]? DungeonGuardians { get; set; } = null;
     public DungeonDefinition[]? Dungeons { get; set; } = null;
+    public string[]? ElvishTexts { get; set; } = null;
+    public string[]? FindQuests { get; set; } = null;
+    public string[]? FunnyComments { get; set; } = null;
+    public string[]? FunnyDescriptions { get; set; } = null;
+    public string[]? HorrificDescriptions { get; set; } = null;
+    public string[]? InsultPlayerAttacks { get; set; } = null;
+    public string[]? MoanPlayerAttacks { get; set; } = null;
+    public string[]? ShopkeeperAcceptedComments { get; set; } = null;
+    public string[]? ShopkeeperBargainComments { get; set; } = null;
+    public string[]? ShopkeeperGoodComments { get; set; } = null;
+    public string[]? ShopkeeperLessThanGuessComments { get; set; } = null;
+    public string[]? ShopkeeperWorthlessComments { get; set; } = null;
+    public string[]? SingingPlayerAttacks { get; set; } = null;
+    public string[]? WorshipPlayerAttacks { get; set; } = null;
 }

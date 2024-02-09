@@ -19,10 +19,17 @@ internal class MoanPlayerAttacksRepository : StringListRepository
 
     public override void Load()
     {
-        Add("seems sad about something.", 
-            "asks if you have seen his dogs.", 
-            "tells you to get off his land.", 
-            "mumbles something about mushrooms."
-            );
+        if (SaveGame.Configuration.MoanPlayerAttacks == null)
+        {
+            Add("seems sad about something.",
+                "asks if you have seen his dogs.",
+                "tells you to get off his land.",
+                "mumbles something about mushrooms."
+                );
+        }
+        else
+        {
+            Add(SaveGame.Configuration.MoanPlayerAttacks);
+        }
     }
 }

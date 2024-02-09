@@ -19,14 +19,21 @@ internal class WorshipPlayerAttacksRepository : StringListRepository
 
     public override void Load()
     {
-        Add("looks up at you!", 
-            "asks how many dragons you've killed!", 
-            "asks for your autograph!", 
-            "tries to shake your hand!", 
-            "pretends to be you!",
-            "dances around you!", 
-            "tugs at your clothing!", 
-            "asks if you will adopt him!"
-            );
+        if (SaveGame.Configuration.WorshipPlayerAttacks == null)
+        {
+            Add("looks up at you!",
+                "asks how many dragons you've killed!",
+                "asks for your autograph!",
+                "tries to shake your hand!",
+                "pretends to be you!",
+                "dances around you!",
+                "tugs at your clothing!",
+                "asks if you will adopt him!"
+                );
+        }
+        else
+        {
+            Add(SaveGame.Configuration.WorshipPlayerAttacks);
+        }
     }
 }

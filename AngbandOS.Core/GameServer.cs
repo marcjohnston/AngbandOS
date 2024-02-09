@@ -174,6 +174,12 @@ public class GameServer
         return entities.ToArray();
     }
 
+    private string[] RetrieveEntity(ICorePersistentStorage persistentStorage, string repositoryName)
+    {
+        string serializedEntity = persistentStorage.RetrieveEntity(repositoryName);
+        string[] values = JsonSerializer.Deserialize<string[]>(serializedEntity);
+        return values;
+    }
     /// <summary>
     /// Plays a game.  If the game cannot be played false is immediately returned; otherwise, the game is played out and true is returned when the game is over.
     /// </summary>
@@ -189,20 +195,34 @@ public class GameServer
             throw new ArgumentNullException("console", "A console object must be provided and cannot be null.");
         }
 
-        // TODO: Remove this hard-coded configuration
         if (persistentStorage != null && configuration == null) {
             configuration = new Configuration()
             {
-                //Shopkeepers = RetrieveEntities<ShopkeeperDefinition>(persistentStorage, Pluralize(nameof(Shopkeeper))),
-                //Towns = RetrieveEntities<TownDefinition>(persistentStorage, Pluralize(nameof(Town))),
-                //GameCommands = RetrieveEntities<GameCommandDefinition>(persistentStorage, Pluralize(nameof(GameCommand))),
-                //StoreCommands = RetrieveEntities<StoreCommandDefinition>(persistentStorage, Pluralize(nameof(StoreCommand))),
-                //HelpGroups = RetrieveEntities<HelpGroupDefinition>(persistentStorage, Pluralize(nameof(HelpGroup))),
-                //MonsterRaces = RetrieveEntities<MonsterRaceDefinition>(persistentStorage, Pluralize(nameof(MonsterRace))),
-                //Symbols = RetrieveEntities<SymbolDefinition>(persistentStorage, Pluralize(nameof(Symbol))),
-                //Vaults = RetrieveEntities<VaultDefinition>(persistentStorage, Pluralize(nameof(Vault))),
-                //DungeonGuardians = RetrieveEntities<DungeonGuardianDefinition>(persistentStorage, Pluralize(nameof(DungeonGuardian))),
-                //Dungeons = RetrieveEntities<DungeonDefinition>(persistentStorage, Pluralize(nameof(Dungeon)))
+                Shopkeepers = RetrieveEntities<ShopkeeperDefinition>(persistentStorage, Pluralize(nameof(Shopkeeper))),
+                Towns = RetrieveEntities<TownDefinition>(persistentStorage, Pluralize(nameof(Town))),
+                GameCommands = RetrieveEntities<GameCommandDefinition>(persistentStorage, Pluralize(nameof(GameCommand))),
+                StoreCommands = RetrieveEntities<StoreCommandDefinition>(persistentStorage, Pluralize(nameof(StoreCommand))),
+                HelpGroups = RetrieveEntities<HelpGroupDefinition>(persistentStorage, Pluralize(nameof(HelpGroup))),
+                MonsterRaces = RetrieveEntities<MonsterRaceDefinition>(persistentStorage, Pluralize(nameof(MonsterRace))),
+                Symbols = RetrieveEntities<SymbolDefinition>(persistentStorage, Pluralize(nameof(Symbol))),
+                Vaults = RetrieveEntities<VaultDefinition>(persistentStorage, Pluralize(nameof(Vault))),
+                DungeonGuardians = RetrieveEntities<DungeonGuardianDefinition>(persistentStorage, Pluralize(nameof(DungeonGuardian))),
+                Dungeons = RetrieveEntities<DungeonDefinition>(persistentStorage, Pluralize(nameof(Dungeon))),
+
+                ElvishTexts = RetrieveEntity(persistentStorage, "ElvishTexts"),
+                FindQuests = RetrieveEntity(persistentStorage, "FindQuests"),
+                FunnyComments = RetrieveEntity(persistentStorage, "FunnyComments"),
+                FunnyDescriptions = RetrieveEntity(persistentStorage, "FunnyDescriptions"),
+                HorrificDescriptions = RetrieveEntity(persistentStorage, "HorrificDescriptions"),
+                InsultPlayerAttacks = RetrieveEntity(persistentStorage, "InsultPlayerAttacks"),
+                MoanPlayerAttacks = RetrieveEntity(persistentStorage, "MoanPlayerAttacks"),
+                ShopkeeperAcceptedComments = RetrieveEntity(persistentStorage, "ShopkeeperAcceptedComments"),
+                ShopkeeperBargainComments = RetrieveEntity(persistentStorage, "ShopkeeperBargainComments"),
+                ShopkeeperGoodComments = RetrieveEntity(persistentStorage, "ShopkeeperGoodComments"),
+                ShopkeeperLessThanGuessComments = RetrieveEntity(persistentStorage, "ShopkeeperLessThanGuessComments"),
+                ShopkeeperWorthlessComments = RetrieveEntity(persistentStorage, "ShopkeeperWorthlessComments"),
+                SingingPlayerAttacks = RetrieveEntity(persistentStorage, "SingingPlayerAttacks"),
+                WorshipPlayerAttacks = RetrieveEntity(persistentStorage, "WorshipPlayerAttacks")
             };
         }
 
