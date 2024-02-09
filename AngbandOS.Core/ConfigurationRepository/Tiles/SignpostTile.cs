@@ -15,7 +15,6 @@ internal class SignpostTile : Tile
     public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "Signpost";
     public override AlterAction? AlterAction => SaveGame.SingletonRepository.AlterActions.Get(nameof(TunnelAlterAction));
-    public override string AppearAs => "Signpost";
     public override string Description => "signpost";
     public override bool DimsOutsideLOS => true;
     public override int MapPriority => 0;

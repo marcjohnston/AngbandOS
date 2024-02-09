@@ -14,7 +14,6 @@ internal class TrapDoorTile : Tile
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(CaretSymbol));
     public override string Name => "TrapDoor";
     public override AlterAction? AlterAction => SaveGame.SingletonRepository.AlterActions.Get(nameof(DisarmAlterAction));
-    public override string AppearAs => "TrapDoor";
     public override string Description => "trap door";
     public override bool IsInteresting => true;
     public override bool IsPassable => true;

@@ -13251,17 +13251,17 @@ internal class SaveGame
             {
                 break;
             }
-            string feat = string.IsNullOrEmpty(cPtr.FeatureType.AppearAs) ? SingletonRepository.Tiles.Get(cPtr.BackgroundFeature.AppearAs).Name : SingletonRepository.Tiles.Get(cPtr.FeatureType.AppearAs).Name;
+            Tile feat = cPtr.FeatureType.MimicTile == null ? cPtr.FeatureType : cPtr.FeatureType.MimicTile;
             if (cPtr.TileFlags.IsClear(GridTile.PlayerMemorized) && !PlayerCanSeeBold(y, x))
             {
-                feat = string.Empty;
+                feat = null;
             }
             if (boring || (!cPtr.FeatureType.IsOpenFloor))
             {
                 string name = "unknown grid";
-                if (feat != string.Empty)
+                if (feat != null)
                 {
-                    name = SingletonRepository.Tiles.Get(feat).Description;
+                    name = feat.Description;
                     if (s2 != "" && cPtr.FeatureType.BlocksLos)
                     {
                         s2 = "in ";
@@ -16583,9 +16583,7 @@ internal class SaveGame
         {
             if (cPtr.TileFlags.IsSet(GridTile.PlayerMemorized))
             {
-                feat = string.IsNullOrEmpty(feat.AppearAs)
-                    ? SingletonRepository.Tiles.Get(cPtr.BackgroundFeature.AppearAs)
-                    : SingletonRepository.Tiles.Get(feat.AppearAs);
+                feat = cPtr.FeatureType.MimicTile == null ? cPtr.FeatureType : cPtr.FeatureType.MimicTile;
                 c = feat.Symbol.Character;
                 a = feat.Color;
                 if (feat.DimsOutsideLOS)

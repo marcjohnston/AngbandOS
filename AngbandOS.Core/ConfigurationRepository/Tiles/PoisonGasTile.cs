@@ -15,7 +15,6 @@ internal class PoisonGasTile : Tile
     public override ColorEnum Color => ColorEnum.Green;
     public override string Name => "PoisonGas";
     public override AlterAction? AlterAction => SaveGame.SingletonRepository.AlterActions.Get(nameof(DisarmAlterAction));
-    public override string AppearAs => "PoisonGas";
     public override string Description => "gas trap";
     public override bool IsInteresting => true;
     public override bool IsPassable => true;

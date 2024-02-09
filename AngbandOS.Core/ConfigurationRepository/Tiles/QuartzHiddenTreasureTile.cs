@@ -14,7 +14,7 @@ internal class QuartzHiddenTreasureTile : Tile
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(PoundSignSymbol));
     public override string Name => "QuartzHidTreas";
     public override AlterAction? AlterAction => SaveGame.SingletonRepository.AlterActions.Get(nameof(TunnelAlterAction));
-    public override string AppearAs => "Quartz";
+    protected override string? MimicTileName => "Quartz";
     public override bool BlocksLos => true;
     public override string? HiddenTreasureFor => "QuartzVisTreas";
     public override string Description => "quartz vein";

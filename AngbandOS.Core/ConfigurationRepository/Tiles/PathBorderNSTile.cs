@@ -14,7 +14,6 @@ internal class PathBorderNSTile : Tile
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(VerticalBarSymbol));
     public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "PathBorderNS";
-    public override string AppearAs => "PathBorderNS";
     public override bool BlocksLos => true;
     public override string Description => "path";
     public override bool DimsOutsideLOS => true;

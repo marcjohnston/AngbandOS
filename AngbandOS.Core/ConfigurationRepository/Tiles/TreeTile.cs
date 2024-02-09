@@ -15,7 +15,6 @@ internal class TreeTile : Tile
     public override ColorEnum Color => ColorEnum.BrightGreen;
     public override string Name => "Tree";
     public override AlterAction? AlterAction => SaveGame.SingletonRepository.AlterActions.Get(nameof(TunnelAlterAction));
-    public override string AppearAs => "Tree";
     public override bool BlocksLos => true;
     public override string Description => "tree";
     public override bool DimsOutsideLOS => true;

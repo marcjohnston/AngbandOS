@@ -15,7 +15,6 @@ internal class BushTile : Tile
     public override ColorEnum Color => ColorEnum.BrightGreen;
     public override string Name => "Bush";
     public override AlterAction? AlterAction => SaveGame.SingletonRepository.AlterActions.Get(nameof(TunnelAlterAction));
-    public override string AppearAs => "Bush";
     public override bool BlocksLos => true;
     public override string Description => "bush";
     public override bool DimsOutsideLOS => true;

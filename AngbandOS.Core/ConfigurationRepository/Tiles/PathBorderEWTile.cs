@@ -14,7 +14,6 @@ internal class PathBorderEWTile : Tile
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(MinusSignSymbol));
     public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "PathBorderEW";
-    public override string AppearAs => "PathBorderEW";
     public override bool BlocksLos => true;
     public override string Description => "path";
     public override bool DimsOutsideLOS => true;

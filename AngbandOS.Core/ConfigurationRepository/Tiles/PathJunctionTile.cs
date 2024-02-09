@@ -14,7 +14,6 @@ internal class PathJunctionTile : Tile
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(PlusSignSymbol));
     public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "PathJunction";
-    public override string AppearAs => "PathJunction";
     public override string Description => "path";
     public override bool DimsOutsideLOS => true;
     public override bool IsPassable => true;

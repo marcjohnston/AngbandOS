@@ -21,7 +21,6 @@ internal class WeaponsmithStoreTile : Tile
     public override int MapPriority => 0;
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(NumberThreeSymbol));
     public override string Name => "Weaponsmiths";
-    public override string AppearAs => "Weaponsmiths";
     public override string Description => "Weaponsmiths";
 }
 

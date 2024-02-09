@@ -20,7 +20,6 @@ internal class PawnStoreTile : Tile
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(NumberZeroSymbol));
     public override ColorEnum Color => ColorEnum.Turquoise;
     public override string Name => "Pawnbrokers";
-    public override string AppearAs => "Pawnbrokers";
     public override string Description => "Pawnbrokers";
 }
 

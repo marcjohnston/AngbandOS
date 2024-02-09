@@ -15,7 +15,6 @@ internal class RoofTile : Tile
     public override ColorEnum Color => ColorEnum.BrightRed;
     public override string Name => "Roof";
     public override AlterAction? AlterAction => SaveGame.SingletonRepository.AlterActions.Get(nameof(TunnelAlterAction));
-    public override string AppearAs => "Roof";
     public override bool BlocksLos => true;
     public override string Description => "building";
     public override bool DimsOutsideLOS => true;

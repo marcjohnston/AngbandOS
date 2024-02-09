@@ -15,7 +15,6 @@ internal class SpikedPitTile : Tile
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "SpikedPit";
     public override AlterAction? AlterAction => SaveGame.SingletonRepository.AlterActions.Get(nameof(DisarmAlterAction));
-    public override string AppearAs => "SpikedPit";
     public override string Description => "pit";
     public override bool IsInteresting => true;
     public override bool IsPassable => true;

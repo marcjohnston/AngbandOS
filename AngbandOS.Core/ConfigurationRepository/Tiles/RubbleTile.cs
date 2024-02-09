@@ -14,7 +14,6 @@ internal class RubbleTile : Tile
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(ColonSymbol));
     public override string Name => "Rubble";
     public override AlterAction? AlterAction => SaveGame.SingletonRepository.AlterActions.Get(nameof(TunnelAlterAction));
-    public override string AppearAs => "Rubble";
     public override bool BlocksLos => true;
     public override string Description => "pile of rubble";
     public override bool DimsOutsideLOS => true;

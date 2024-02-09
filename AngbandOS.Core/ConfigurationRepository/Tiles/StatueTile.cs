@@ -14,7 +14,6 @@ internal class StatueTile : Tile
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(ColonSymbol));
     public override string Name => "Statue";
     public override AlterAction? AlterAction => SaveGame.SingletonRepository.AlterActions.Get(nameof(TunnelAlterAction));
-    public override string AppearAs => "Statue";
     public override bool BlocksLos => true;
     public override string Description => "statue";
     public override bool DimsOutsideLOS => true;

@@ -14,7 +14,6 @@ internal class WaterTile : Tile
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(TildeSymbol));
     public override ColorEnum Color => ColorEnum.Blue;
     public override string Name => "Water";
-    public override string AppearAs => "Water";
     public override string Description => "water";
     public override bool DimsOutsideLOS => true;
     public override int MapPriority => 0;

@@ -15,7 +15,6 @@ internal class SlowDartTile : Tile
     public override ColorEnum Color => ColorEnum.Red;
     public override string Name => "SlowDart";
     public override AlterAction? AlterAction => SaveGame.SingletonRepository.AlterActions.Get(nameof(DisarmAlterAction));
-    public override string AppearAs => "SlowDart";
     public override string Description => "dart trap";
     public override bool IsInteresting => true;
     public override bool IsPassable => true;

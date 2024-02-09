@@ -14,7 +14,6 @@ internal class PathEWTile : Tile
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(MinusSignSymbol));
     public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "PathEW";
-    public override string AppearAs => "PathEW";
     public override string Description => "path";
     public override bool DimsOutsideLOS => true;
     public override bool IsPassable => true;

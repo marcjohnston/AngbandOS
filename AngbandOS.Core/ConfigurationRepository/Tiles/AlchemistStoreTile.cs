@@ -20,7 +20,6 @@ internal class AlchemistStoreTile : Tile
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(NumberFiveSymbol));
     public override ColorEnum Color => ColorEnum.Blue;
     public override string Name => "Alchemist";
-    public override string AppearAs => "Alchemist";
     public override string Description => "Alchemy Shop";
 }
 

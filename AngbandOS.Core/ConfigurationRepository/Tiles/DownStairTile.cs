@@ -14,7 +14,6 @@ internal class DownStairTile : Tile
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(GreaterThanSymbol));
     public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "DownStair";
-    public override string AppearAs => "DownStair";
     public override string Description => "down staircase";
     public override bool DimsOutsideLOS => true;
     public override bool IsInteresting => true;

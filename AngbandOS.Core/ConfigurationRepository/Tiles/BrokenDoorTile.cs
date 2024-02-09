@@ -15,7 +15,6 @@ internal class BrokenDoorTile : Tile
     public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "BrokenDoor";
     public override AlterAction? AlterAction => SaveGame.SingletonRepository.AlterActions.Get(nameof(CloseAlterAction));
-    public override string AppearAs => "BrokenDoor";
     public override string Description => "broken door";
     public override bool DimsOutsideLOS => true;
     public override bool IsPassable => true;

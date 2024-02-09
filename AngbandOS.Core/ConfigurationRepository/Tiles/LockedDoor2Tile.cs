@@ -15,7 +15,7 @@ internal class LockedDoor2Tile : Tile
     public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "LockedDoor2";
     public override AlterAction? AlterAction => SaveGame.SingletonRepository.AlterActions.Get(nameof(OpenAlterAction));
-    public override string AppearAs => "LockedDoor0";
+    protected override string? MimicTileName => "LockedDoor0";
     public override bool BlocksLos => true;
     public override string Description => "locked door";
     public override bool DimsOutsideLOS => true;

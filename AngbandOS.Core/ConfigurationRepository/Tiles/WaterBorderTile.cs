@@ -14,7 +14,7 @@ internal class WaterBorderTile : Tile
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(TildeSymbol));
     public override ColorEnum Color => ColorEnum.BrightBlue;
     public override string Name => "WaterBorder";
-    public override string AppearAs => "Water";
+    protected override string? MimicTileName => "Water";
     public override bool BlocksLos => true;
     public override string Description => "sea";
     public override bool DimsOutsideLOS => true;

@@ -26,7 +26,10 @@ internal abstract class Tile : IGetKey<string>
     }
 
     public string GetKey => Name;
-    public void Bind() { }
+    public void Bind()
+    {
+        MimicTile = MimicTileName == null ? null : SaveGame.SingletonRepository.Tiles.Get(MimicTileName);
+    }
 
     /// <summary>
     /// Returns the symbol to use for rendering.
@@ -62,9 +65,18 @@ internal abstract class Tile : IGetKey<string>
     public virtual AlterAction? AlterAction => null;
 
     /// <summary>
-    /// The the tile this one should appear to be when looked at.
+    /// The tile this tile should appear as when looked at; or null, if this tile is invisible/transparent.  Non-transparent, non-mimicing
+    /// tiles will return themself.  Mimicing tiles will return a different tile.  Transparent tile that are considered invisible
+    /// will return null.  Invisible tiles will render the background feature.
     /// </summary>
-    public abstract string AppearAs { get; }
+    public Tile? MimicTile { get; private set; }
+
+    /// <summary>
+    /// The name of the tile this tile should appear as when looked at; or null, if this tile is invisible/transparent.  Non-transparent,
+    /// non-mimicing tiles will name themself.  Mimicing tiles will return a name for a different tile.  Transparent tile that are
+    /// considered invisible will return null.  Invisible tiles will render the background feature.
+    /// </summary>
+    protected virtual string? MimicTileName => null; // TODO: Right now, there is nothing that is transparent.  The NULL means, no mimic.
 
     /// <summary>
     /// The tile blocks line of sight.

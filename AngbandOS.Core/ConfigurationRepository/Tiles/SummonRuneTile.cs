@@ -15,7 +15,6 @@ internal class SummonRuneTile : Tile
     public override ColorEnum Color => ColorEnum.Yellow;
     public override string Name => "SummonRune";
     public override AlterAction? AlterAction => SaveGame.SingletonRepository.AlterActions.Get(nameof(DisarmAlterAction));
-    public override string AppearAs => "SummonRune";
     public override string Description => "strange rune";
     public override bool IsInteresting => true;
     public override bool IsPassable => true;

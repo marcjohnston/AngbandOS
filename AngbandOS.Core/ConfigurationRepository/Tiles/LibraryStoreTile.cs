@@ -20,7 +20,6 @@ internal class LibraryStoreTile : Tile
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(NumberNineSymbol));
     public override ColorEnum Color => ColorEnum.Orange;
     public override string Name => "Bookstore";
-    public override string AppearAs => "Bookstore";
     public override string Description => "Bookstore";
 }
 

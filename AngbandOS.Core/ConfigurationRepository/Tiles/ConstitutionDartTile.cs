@@ -15,7 +15,6 @@ internal class ConstitutionDartTile : Tile
     public override ColorEnum Color => ColorEnum.Red;
     public override string Name => "ConDart";
     public override AlterAction? AlterAction => SaveGame.SingletonRepository.AlterActions.Get(nameof(DisarmAlterAction));
-    public override string AppearAs => "ConDart";
     public override string Description => "dart trap";
     public override bool IsInteresting => true;
     public override bool IsPassable => true;

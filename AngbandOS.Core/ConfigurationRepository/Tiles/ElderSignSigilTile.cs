@@ -14,7 +14,6 @@ internal class ElderSignSigilTile : Tile
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(AsteriskSymbol));
     public override ColorEnum Color => ColorEnum.Green;
     public override string Name => "ElderSign";
-    public override string AppearAs => "ElderSign";
     public override string Description => "Elder Sign";
     public override bool IsInteresting => true;
     public override bool IsPassable => true;

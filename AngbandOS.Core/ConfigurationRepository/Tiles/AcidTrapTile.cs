@@ -15,7 +15,6 @@ internal class AcidTrapTile : Tile
     public override ColorEnum Color => ColorEnum.Brown;
     public override string Name => "AcidTrap";
     public override AlterAction? AlterAction => SaveGame.SingletonRepository.AlterActions.Get(nameof(DisarmAlterAction));
-    public override string AppearAs => "AcidTrap";
     public override string Description => "discolored spot";
     public override bool IsInteresting => true;
     public override bool IsPassable => true;

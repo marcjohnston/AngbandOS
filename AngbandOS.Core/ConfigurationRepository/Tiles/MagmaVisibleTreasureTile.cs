@@ -15,7 +15,6 @@ internal class MagmaVisibleTreasureTile : Tile
     public override ColorEnum Color => ColorEnum.BrightOrange;
     public override string Name => "MagmaVisTreas";
     public override AlterAction? AlterAction => SaveGame.SingletonRepository.AlterActions.Get(nameof(TunnelAlterAction));
-    public override string AppearAs => "MagmaVisTreas";
     public override bool BlocksLos => true;
     public override bool IsVisibleTreasure => true;
     public override string Description => "magma vein with treasure";

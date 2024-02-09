@@ -15,7 +15,6 @@ internal class MagmaTile : Tile
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "Magma";
     public override AlterAction? AlterAction => SaveGame.SingletonRepository.AlterActions.Get(nameof(TunnelAlterAction));
-    public override string AppearAs => "Magma";
     public override bool BlocksLos => true;
     public override string Description => "magma vein";
     public override bool DimsOutsideLOS => true;

@@ -14,7 +14,6 @@ internal class TownWallTile : Tile
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(PoundSignSymbol));
     public override string Name => "TownWall";
     public override AlterAction? AlterAction => SaveGame.SingletonRepository.AlterActions.Get(nameof(TunnelAlterAction));
-    public override string AppearAs => "TownWall";
     public override bool BlocksLos => true;
     public override string Description => "town wall";
     public override bool DimsOutsideLOS => true;

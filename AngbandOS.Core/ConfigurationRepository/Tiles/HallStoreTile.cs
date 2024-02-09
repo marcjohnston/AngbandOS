@@ -20,7 +20,6 @@ internal class HallStoreTile : Tile
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(NumberEightSymbol));
     public override ColorEnum Color => ColorEnum.Yellow;
     public override string Name => "HallOfRecords";
-    public override string AppearAs => "HallOfRecords";
     public override string Description => "Hall of Records";
 }
 

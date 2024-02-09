@@ -15,7 +15,6 @@ internal class PoisonPitTile : Tile
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "PoisonPit";
     public override AlterAction? AlterAction => SaveGame.SingletonRepository.AlterActions.Get(nameof(DisarmAlterAction));
-    public override string AppearAs => "PoisonPit";
     public override string Description => "pit";
     public override bool IsInteresting => true;
     public override bool IsPassable => true;

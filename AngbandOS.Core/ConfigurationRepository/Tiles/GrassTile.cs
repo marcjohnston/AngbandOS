@@ -14,7 +14,6 @@ internal class GrassTile : Tile
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(PeriodSymbol));
     public override ColorEnum Color => ColorEnum.BrightGreen;
     public override string Name => "Grass";
-    public override string AppearAs => "Grass";
     public override string Description => "open floor";
     public override bool DimsOutsideLOS => true;
     public override bool IsOpenFloor => true;

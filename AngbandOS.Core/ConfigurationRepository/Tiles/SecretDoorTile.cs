@@ -14,7 +14,7 @@ internal class SecretDoorTile : Tile
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(PoundSignSymbol));
     public override string Name => "SecretDoor";
     public override AlterAction? AlterAction => SaveGame.SingletonRepository.AlterActions.Get(nameof(TunnelAlterAction));
-    public override string AppearAs => "WallBasic";
+    protected override string? MimicTileName => "WallBasic";
     public override bool BlocksLos => true;
 
     /// <summary>

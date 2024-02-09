@@ -14,7 +14,6 @@ internal class WallPermanentBuildingTile : Tile
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(PoundSignSymbol));
     public override string Name => "WallPermBuilding";
     public override AlterAction? AlterAction => SaveGame.SingletonRepository.AlterActions.Get(nameof(TunnelAlterAction));
-    public override string AppearAs => "WallPermBuilding";
     public override bool BlocksLos => true;
     public override string Description => "building";
     public override bool DimsOutsideLOS => true;

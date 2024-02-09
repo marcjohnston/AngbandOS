@@ -14,7 +14,6 @@ internal class GraveTile : Tile
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(PlusSignSymbol));
     public override string Name => "Grave";
     public override AlterAction? AlterAction => SaveGame.SingletonRepository.AlterActions.Get(nameof(TunnelAlterAction));
-    public override string AppearAs => "Grave";
     public override bool BlocksLos => true;
     public override string Description => "grave";
     public override bool DimsOutsideLOS => true;

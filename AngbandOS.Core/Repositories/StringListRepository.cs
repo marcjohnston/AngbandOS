@@ -12,6 +12,7 @@ namespace AngbandOS.Core.Repositories;
 /// <summary>
 /// Represents a ListRepository where all of the entities are strings.  This abstract class handles the string serialization for the repository entities.
 /// </summary>
+[Serializable]
 internal abstract class StringListRepository : ListRepository<string>
 {
     protected StringListRepository(SaveGame saveGame) : base(saveGame) { }

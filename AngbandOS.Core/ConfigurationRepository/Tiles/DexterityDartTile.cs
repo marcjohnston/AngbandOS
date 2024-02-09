@@ -15,7 +15,6 @@ internal class DexterityDartTile : Tile
     public override ColorEnum Color => ColorEnum.Red;
     public override string Name => "DexDart";
     public override AlterAction? AlterAction => SaveGame.SingletonRepository.AlterActions.Get(nameof(DisarmAlterAction));
-    public override string AppearAs => "DexDart";
     public override string Description => "dart trap";
     public override bool IsInteresting => true;
     public override bool IsPassable => true;
