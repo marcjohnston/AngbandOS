@@ -5,8 +5,6 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-using AngbandOS.Core.Interface.Definitions;
-using AngbandOS.Core.Pocos;
 using System.Text.Json;
 
 namespace AngbandOS.Core;
@@ -160,23 +158,18 @@ public class GameServer
         }
     }
 
-    private TDefinition[] RetrieveEntities<TDefinition, TJsonModel>(ICorePersistentStorage persistentStorage, string repositoryName) where TJsonModel : IToDefinition<TDefinition>
+    private TDefinition[] RetrieveEntities<TDefinition>(ICorePersistentStorage persistentStorage, string repositoryName) where TDefinition : IPoco
     {
         string[] serializedEntities = persistentStorage.RetrieveEntities(repositoryName);
         List<TDefinition> entities = new List<TDefinition>();
         foreach (string serializedEntity in serializedEntities)
         {
-            TJsonModel? deserializedEntity = JsonSerializer.Deserialize<TJsonModel>(serializedEntity);
-            if (deserializedEntity == null)
+            TDefinition? deserializedEntity = JsonSerializer.Deserialize<TDefinition>(serializedEntity);
+            if (deserializedEntity == null || !deserializedEntity.IsValid())
             {
                 throw new Exception($"Invalid {repositoryName} json.");
             }
-            TDefinition? definition = deserializedEntity.ToDefinition();
-            if (definition == null)
-            {
-                throw new Exception($"Invalid {repositoryName} json.");
-            }
-            entities.Add(definition);
+            entities.Add(deserializedEntity);
         }
         return entities.ToArray();
     }
@@ -200,16 +193,16 @@ public class GameServer
         if (persistentStorage != null && configuration == null) {
             configuration = new Configuration()
             {
-                Shopkeepers = RetrieveEntities<ShopkeeperDefinition, ShopkeeperPoco>(persistentStorage, nameof(Shopkeeper)),
-                Towns = RetrieveEntities<TownDefinition, TownPoco>(persistentStorage, nameof(Town)),
-                GameCommands = RetrieveEntities<GameCommandDefinition, GameCommandPoco>(persistentStorage, nameof(GameCommand)),
-                StoreCommands = RetrieveEntities<StoreCommandDefinition, StoreCommandPoco>(persistentStorage, nameof(StoreCommand)),
-                HelpGroups = RetrieveEntities<HelpGroupDefinition, HelpGroupPoco>(persistentStorage, nameof(HelpGroup)),
-                MonsterRaces = RetrieveEntities<MonsterRaceDefinition, MonsterRacePoco>(persistentStorage, nameof(MonsterRace)),
-                Symbols = RetrieveEntities<SymbolDefinition, SymbolPoco>(persistentStorage, nameof(Symbol)),
-                Vaults = RetrieveEntities<VaultDefinition, VaultPoco>(persistentStorage, nameof(Vault)),
-                DungeonGuardians = RetrieveEntities<DungeonGuardianDefinition, DungeonGuardianPoco>(persistentStorage, nameof(DungeonGuardian)),
-                Dungeons = RetrieveEntities<DungeonDefinition, DungeonPoco>(persistentStorage, nameof(Dungeon))
+                Shopkeepers = RetrieveEntities<ShopkeeperDefinition>(persistentStorage, Pluralize(nameof(Shopkeeper))),
+                Towns = RetrieveEntities<TownDefinition>(persistentStorage, Pluralize(nameof(Town))),
+                GameCommands = RetrieveEntities<GameCommandDefinition>(persistentStorage, Pluralize(nameof(GameCommand))),
+                StoreCommands = RetrieveEntities<StoreCommandDefinition>(persistentStorage, Pluralize(nameof(StoreCommand))),
+                HelpGroups = RetrieveEntities<HelpGroupDefinition>(persistentStorage, Pluralize(nameof(HelpGroup))),
+                MonsterRaces = RetrieveEntities<MonsterRaceDefinition>(persistentStorage, Pluralize(nameof(MonsterRace))),
+                Symbols = RetrieveEntities<SymbolDefinition>(persistentStorage, Pluralize(nameof(Symbol))),
+                Vaults = RetrieveEntities<VaultDefinition>(persistentStorage, Pluralize(nameof(Vault))),
+                DungeonGuardians = RetrieveEntities<DungeonGuardianDefinition>(persistentStorage, Pluralize(nameof(DungeonGuardian))),
+                Dungeons = RetrieveEntities<DungeonDefinition>(persistentStorage, Pluralize(nameof(Dungeon)))
             };
         }
 

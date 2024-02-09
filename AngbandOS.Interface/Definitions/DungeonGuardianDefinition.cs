@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Interface.Definitions;
 
 [Serializable]
-public class DungeonGuardianDefinition
+public class DungeonGuardianDefinition : IPoco
 {
     public virtual string Key { get; set; }
 
@@ -21,4 +21,13 @@ public class DungeonGuardianDefinition
     /// The level for the fixed quest.
     /// </summary>
     public virtual int LevelFound { get; set; }
+
+    public bool IsValid()
+    {
+        if (Key == null || MonsterRaceName == null || LevelFound == null)
+        {
+            return false;
+        }
+        return true;
+    }
 }

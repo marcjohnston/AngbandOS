@@ -14,7 +14,7 @@ namespace AngbandOS.Core.Interface.Definitions;
 /// 102 Properties
 /// </remarks>
 [Serializable]
-public class MonsterRaceDefinition
+public class MonsterRaceDefinition : IPoco
 {
     public virtual string Key { get; set; }
 
@@ -354,4 +354,113 @@ public class MonsterRaceDefinition
     public virtual bool Unique { get; set; } = false;
 
     public virtual bool WeirdMind { get; set; } = false;
+
+    public bool IsValid()
+    {
+        // 100 Properties Required
+        if (Key == null ||
+            SymbolName == null ||
+            Color == null ||
+            Name == null ||
+            Animal == null ||
+            ArmorClass == null ||
+            AttrAny == null ||
+            AttrClear == null ||
+            AttrMulti == null ||
+            BashDoor == null ||
+            CharClear == null ||
+            CharMulti == null ||
+            ColdBlood == null ||
+            Cthuloid == null ||
+            Demon == null ||
+            Description == null ||
+            Dragon == null ||
+            Drop_1D2 == null ||
+            Drop_2D2 == null ||
+            Drop_3D2 == null ||
+            Drop_4D2 == null ||
+            Drop60 == null ||
+            Drop90 == null ||
+            DropGood == null ||
+            DropGreat == null ||
+            EldritchHorror == null ||
+            EmptyMind == null ||
+            Escorted == null ||
+            EscortsGroup == null ||
+            Evil == null ||
+            Female == null ||
+            FireAura == null ||
+            ForceMaxHp == null ||
+            ForceSleep == null ||
+            FreqInate == null ||
+            FreqSpell == null ||
+            FriendlyName == null ||
+            Friends == null ||
+            Giant == null ||
+            Good == null ||
+            GreatOldOne == null ||
+            Hdice == null ||
+            Hside == null ||
+            HurtByCold == null ||
+            HurtByFire == null ||
+            HurtByLight == null ||
+            HurtByRock == null ||
+            ImmuneAcid == null ||
+            ImmuneCold == null ||
+            ImmuneConfusion == null ||
+            ImmuneFear == null ||
+            ImmuneFire == null ||
+            ImmuneLightning == null ||
+            ImmunePoison == null ||
+            ImmuneSleep == null ||
+            ImmuneStun == null ||
+            Invisible == null ||
+            KillBody == null ||
+            KillItem == null ||
+            KillWall == null ||
+            LevelFound == null ||
+            LightningAura == null ||
+            Male == null ||
+            Mexp == null ||
+            MoveBody == null ||
+            Multiply == null ||
+            NeverAttack == null ||
+            NeverMove == null ||
+            Nonliving == null ||
+            NoticeRange == null ||
+            OnlyDropGold == null ||
+            OnlyDropItem == null ||
+            OpenDoor == null ||
+            Orc == null ||
+            PassWall == null ||
+            Powerful == null ||
+            RandomMove25 == null ||
+            RandomMove50 == null ||
+            Rarity == null ||
+            Reflecting == null ||
+            Regenerate == null ||
+            ResistDisenchant == null ||
+            ResistNether == null ||
+            ResistNexus == null ||
+            ResistPlasma == null ||
+            ResistTeleport == null ||
+            ResistWater == null ||
+            Shapechanger == null ||
+            Sleep == null ||
+            Smart == null ||
+            Speed == null ||
+            SplitName1 == null ||
+            SplitName2 == null ||
+            SplitName3 == null ||
+            Stupid == null ||
+            TakeItem == null ||
+            Troll == null ||
+            Undead == null ||
+            Unique == null ||
+            WeirdMind == null)
+        {
+            return false;
+        }
+        return true;
+    }
 }

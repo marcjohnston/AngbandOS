@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Interface.Definitions;
 
 [Serializable]
-public class MonsterAttackDefinition
+public class MonsterAttackDefinition : IPoco
 {
     public virtual string MethodName { get; set; }
     public virtual string? EffectName { get; set; }
@@ -34,4 +34,14 @@ public class MonsterAttackDefinition
         DDice = dice;
         DSide = sides;
     }
+
+    public bool IsValid()
+    {
+        if (MethodName == null || EffectName == null || DDice == null || DSide == null)
+        {
+            return false;
+        }
+        return true;
+    }
 }
+

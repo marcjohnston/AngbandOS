@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Interface.Definitions;
 
 [Serializable]
-public class ShopkeeperDefinition
+public class ShopkeeperDefinition : IPoco
 {
     public virtual string Key { get; set; }
 
@@ -19,4 +19,13 @@ public class ShopkeeperDefinition
     public virtual string Name { get; set; }
 
     public virtual string? RaceName { get; set; }
+
+    public bool IsValid()
+    {
+        if (Key == null || MaxCost == null || MinInflate == null || Name == null)
+        {
+            return false;
+        }
+        return true;
+    }
 }

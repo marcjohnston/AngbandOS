@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Interface.Definitions;
 
 [Serializable]
-public class DungeonDefinition
+public class DungeonDefinition : IPoco
 {
     public virtual string Key { get; set; }
 
@@ -52,4 +52,13 @@ public class DungeonDefinition
     /// Returns true, if the dungeon is a tower; false, otherwise.  Returns false, by default.
     /// </summary>
     public virtual bool Tower { get; set; } = false;
+
+    public bool IsValid()
+    {
+        if (Key == null || BaseOffset == null || MapSymbol == null || MaxLevel == null || Name == null || Shortname == null || Tower == null)
+        {
+            return false;
+        }
+        return true;
+    }
 }

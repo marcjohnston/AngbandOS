@@ -8,11 +8,20 @@
 namespace AngbandOS.Core.Interface.Definitions;
 
 [Serializable]
-public class HelpGroupDefinition
+public class HelpGroupDefinition : IPoco
 {
     public virtual string Key { get; set; }
 
     public virtual int SortIndex { get; set; }
 
     public virtual string Title { get; set; }
+
+    public bool IsValid()
+    {
+        if (Key == null || SortIndex == null || Title == null)
+        {
+            return false;
+        }
+        return true;
+    }
 }

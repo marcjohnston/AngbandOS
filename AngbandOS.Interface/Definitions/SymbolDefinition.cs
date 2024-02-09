@@ -8,11 +8,20 @@
 namespace AngbandOS.Core.Interface.Definitions;
 
 [Serializable]
-public class SymbolDefinition
+public class SymbolDefinition : IPoco
 {
     public virtual char Character { get; set; }
     public virtual char? QueryCharacter { get; set; } = null;
     public virtual string Name { get; set; }
 
     public virtual string Key { get; set; }
+
+    public bool IsValid()
+    {
+        if (Key == null || Character == null || Name == null)
+        {
+            return false;
+        }
+        return true;
+    }
 }

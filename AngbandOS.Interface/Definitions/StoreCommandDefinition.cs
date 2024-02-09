@@ -8,11 +8,20 @@
 namespace AngbandOS.Core.Interface.Definitions;
 
 [Serializable]
-public class StoreCommandDefinition
+public class StoreCommandDefinition : IPoco
 {
     public virtual string Key { get; set; }
     public virtual char KeyChar { get; set; }
     public virtual string Description { get; set; }
     public virtual string[]? ValidStoreFactoryNames { get; set; }
     public virtual string ExecuteScriptName { get; set; }
+
+    public bool IsValid()
+    {
+        if (Key == null || KeyChar == null || Description == null || ExecuteScriptName == null)
+        {
+            return false;
+        }
+        return true;
+    }
 }

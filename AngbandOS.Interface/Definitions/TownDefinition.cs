@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Interface.Definitions;
 
 [Serializable]
-public class TownDefinition
+public class TownDefinition : IPoco
 {
     public virtual string Key { get; set; }
     public virtual char Char { get; set; }
@@ -22,4 +22,13 @@ public class TownDefinition
     public virtual string DungeonName { get; set; }
 
     public virtual bool UnusedStoreLotsAreGraveyards { get; set; } = false;
+
+    public bool IsValid()
+    {
+        if (Key == null || HousePrice == null || Name == null || Char == null || StoreFactoryNames == null || DungeonName == null)
+        {
+            return false;
+        }
+        return true;
+    }
 }

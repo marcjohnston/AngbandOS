@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Interface.Definitions;
 
 [Serializable]
-public class StoreStockManifestDefinition
+public class StoreStockManifestDefinition : IPoco
 {
     public virtual string ItemFactoryName { get; set; }
     public virtual int Weight { get; set; }
@@ -25,5 +25,14 @@ public class StoreStockManifestDefinition
     {
         ItemFactoryName = itemFactoryName;
         Weight = weight;
+    }
+
+    public bool IsValid()
+    {
+        if (ItemFactoryName == null || Weight == null)
+        {
+            return false;
+        }
+        return true;
     }
 }

@@ -227,7 +227,7 @@ public partial class MainWindow : Window, IConsoleViewPort
         }
         else
         {
-            gameServer.PlayNewGame(this, persistentStorage, configuration);
+            gameServer.PlayNewGame(this, persistentStorage, null);
         }
     }
 
