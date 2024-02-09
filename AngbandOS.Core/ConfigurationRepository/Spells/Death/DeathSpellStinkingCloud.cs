@@ -13,11 +13,7 @@ internal class DeathSpellStinkingCloud : Spell
     private DeathSpellStinkingCloud(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        if (!SaveGame.GetDirectionWithAim(out int dir))
-        {
-            return;
-        }
-        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(PoisProjectile)), dir, 10 + (SaveGame.ExperienceLevel / 2), 2);
+        SaveGame.RunScript(nameof(StinkingCloudScript));
     }
 
     public override void CastFailed()
