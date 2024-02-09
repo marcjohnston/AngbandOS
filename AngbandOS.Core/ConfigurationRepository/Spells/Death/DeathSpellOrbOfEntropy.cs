@@ -13,14 +13,7 @@ internal class DeathSpellOrbOfEntropy : Spell
     private DeathSpellOrbOfEntropy(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        if (!SaveGame.GetDirectionWithAim(out int dir))
-        {
-            return;
-        }
-        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(OldDrainProjectile)), dir,
-            SaveGame.Rng.DiceRoll(3, 6) + SaveGame.ExperienceLevel + (SaveGame.ExperienceLevel /
-            (SaveGame.BaseCharacterClass.ID == CharacterClass.Mage || SaveGame.BaseCharacterClass.ID == CharacterClass.HighMage ? 2 : 4)),
-            SaveGame.ExperienceLevel < 30 ? 2 : 3);
+        SaveGame.RunScript(nameof(OrbOfEntropyScript));
     }
 
     public override void CastFailed()
