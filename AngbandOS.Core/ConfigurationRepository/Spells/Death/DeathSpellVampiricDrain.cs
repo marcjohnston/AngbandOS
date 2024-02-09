@@ -13,21 +13,7 @@ internal class DeathSpellVampiricDrain : Spell
     private DeathSpellVampiricDrain(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        if (!SaveGame.GetDirectionWithAim(out int dir))
-        {
-            return;
-        }
-        int dummy = SaveGame.ExperienceLevel + (SaveGame.Rng.DieRoll(SaveGame.ExperienceLevel) * Math.Max(1, SaveGame.ExperienceLevel / 10));
-        if (!SaveGame.DrainLife(dir, dummy))
-        {
-            return;
-        }
-        SaveGame.RestoreHealth(dummy);
-        dummy = SaveGame.Food + Math.Min(5000, 100 * dummy);
-        if (SaveGame.Food < Constants.PyFoodMax)
-        {
-            SaveGame.SetFood(dummy >= Constants.PyFoodMax ? Constants.PyFoodMax - 1 : dummy);
-        }
+        SaveGame.RunScript(nameof(VampiricDrainScript));
     }
 
     public override void CastFailed()
