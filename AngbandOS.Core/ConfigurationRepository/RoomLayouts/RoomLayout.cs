@@ -38,6 +38,9 @@ internal abstract class RoomLayout : IGetKey<string>
         int dx, dy, x, y;
         char t;
         int index = 0;
+        Tile wallOuter = SaveGame.SingletonRepository.Tiles.Get("WallOuter");
+        Tile wallInner = SaveGame.SingletonRepository.Tiles.Get("WallInner");
+        Tile wallPermInner = SaveGame.SingletonRepository.Tiles.Get("WallPermInner");
         for (dy = 0; dy < ymax; dy++)
         {
             for (dx = 0; dx < xmax; dx++)
@@ -56,15 +59,15 @@ internal abstract class RoomLayout : IGetKey<string>
                 switch (t)
                 {
                     case '%':
-                        cPtr.SetFeature("WallOuter");
+                        cPtr.SetFeature(wallOuter);
                         break;
 
                     case '#':
-                        cPtr.SetFeature("WallInner");
+                        cPtr.SetFeature(wallInner);
                         break;
 
                     case 'X':
-                        cPtr.SetFeature("WallPermInner");
+                        cPtr.SetFeature(wallPermInner);
                         break;
 
                     case '*':
@@ -221,6 +224,6 @@ internal abstract class RoomLayout : IGetKey<string>
     protected void PlaceSecretDoor(int y, int x)
     {
         GridTile cPtr = SaveGame.Grid[y][x];
-        cPtr.SetFeature("SecretDoor");
+        cPtr.SetFeature(SaveGame.SingletonRepository.Tiles.Get("SecretDoor"));
     }
 }

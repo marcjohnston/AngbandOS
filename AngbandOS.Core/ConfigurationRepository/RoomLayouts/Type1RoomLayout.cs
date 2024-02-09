@@ -34,20 +34,22 @@ internal class Type1RoomLayout : RoomLayout
                 }
             }
         }
+        Tile wallOuter = SaveGame.SingletonRepository.Tiles.Get("WallOuter");
         for (y = y1 - 1; y <= y2 + 1; y++)
         {
             cPtr = SaveGame.Grid[y][x1 - 1];
-            cPtr.SetFeature("WallOuter");
+            cPtr.SetFeature(wallOuter);
             cPtr = SaveGame.Grid[y][x2 + 1];
-            cPtr.SetFeature("WallOuter");
+            cPtr.SetFeature(wallOuter);
         }
         for (x = x1 - 1; x <= x2 + 1; x++)
         {
             cPtr = SaveGame.Grid[y1 - 1][x];
-            cPtr.SetFeature("WallOuter");
+            cPtr.SetFeature(wallOuter);
             cPtr = SaveGame.Grid[y2 + 1][x];
-            cPtr.SetFeature("WallOuter");
+            cPtr.SetFeature(wallOuter);
         }
+        Tile pillar = SaveGame.SingletonRepository.Tiles.Get("Pillar");
         if (SaveGame.Rng.RandomLessThan(20) == 0)
         {
             for (y = y1; y <= y2; y += 2)
@@ -55,7 +57,7 @@ internal class Type1RoomLayout : RoomLayout
                 for (x = x1; x <= x2; x += 2)
                 {
                     cPtr = SaveGame.Grid[y][x];
-                    cPtr.SetFeature("Pillar");
+                    cPtr.SetFeature(pillar);
                 }
             }
         }
@@ -64,16 +66,16 @@ internal class Type1RoomLayout : RoomLayout
             for (y = y1 + 2; y <= y2 - 2; y += 2)
             {
                 cPtr = SaveGame.Grid[y][x1];
-                cPtr.SetFeature("Pillar");
+                cPtr.SetFeature(pillar);
                 cPtr = SaveGame.Grid[y][x2];
-                cPtr.SetFeature("Pillar");
+                cPtr.SetFeature(pillar);
             }
             for (x = x1 + 2; x <= x2 - 2; x += 2)
             {
                 cPtr = SaveGame.Grid[y1][x];
-                cPtr.SetFeature("Pillar");
+                cPtr.SetFeature(pillar);
                 cPtr = SaveGame.Grid[y2][x];
-                cPtr.SetFeature("Pillar");
+                cPtr.SetFeature(pillar);
             }
         }
     }

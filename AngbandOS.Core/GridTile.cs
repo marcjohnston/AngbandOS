@@ -192,9 +192,15 @@ internal class GridTile : IItemContainer
     /// Sets the FeatureType of the tile to a named FloorTileType
     /// </summary>
     /// <param name="name"> </param>
+    [Obsolete("Use SetFeature(Tile)")]
     public void SetFeature(string name)
     {
         FeatureType = SaveGame.SingletonRepository.Tiles.Get(name);
+    }
+
+    public void SetFeature(Tile tile)
+    {
+        FeatureType = tile;
     }
 
     public override string ToString()

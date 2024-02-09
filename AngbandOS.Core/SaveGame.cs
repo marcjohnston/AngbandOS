@@ -11764,7 +11764,6 @@ internal class SaveGame
         }
     }
 
-
     private void AddPaths()
     {
         GridTile cPtr;
@@ -15452,12 +15451,6 @@ internal class SaveGame
             }
             DropNear(qPtr, -1, y1, x1);
         }
-    }
-
-    public void CaveSetBackground(int y, int x, string feat)
-    {
-        GridTile cPtr = Grid[y][x];
-        cPtr.BackgroundFeature = SingletonRepository.Tiles.Get(feat);
     }
 
     public void CaveSetFeat(int y, int x, string feat)

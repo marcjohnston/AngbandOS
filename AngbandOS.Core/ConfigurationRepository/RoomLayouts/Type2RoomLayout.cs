@@ -51,33 +51,34 @@ internal class Type2RoomLayout : RoomLayout
                 }
             }
         }
+        Tile wallOuter = SaveGame.SingletonRepository.Tiles.Get("WallOuter");
         for (y = y1A - 1; y <= y2A + 1; y++)
         {
             cPtr = SaveGame.Grid[y][x1A - 1];
-            cPtr.SetFeature("WallOuter");
+            cPtr.SetFeature(wallOuter);
             cPtr = SaveGame.Grid[y][x2A + 1];
-            cPtr.SetFeature("WallOuter");
+            cPtr.SetFeature(wallOuter);
         }
         for (x = x1A - 1; x <= x2A + 1; x++)
         {
             cPtr = SaveGame.Grid[y1A - 1][x];
-            cPtr.SetFeature("WallOuter");
+            cPtr.SetFeature(wallOuter);
             cPtr = SaveGame.Grid[y2A + 1][x];
-            cPtr.SetFeature("WallOuter");
+            cPtr.SetFeature(wallOuter);
         }
         for (y = y1B - 1; y <= y2B + 1; y++)
         {
             cPtr = SaveGame.Grid[y][x1B - 1];
-            cPtr.SetFeature("WallOuter");
+            cPtr.SetFeature(wallOuter);
             cPtr = SaveGame.Grid[y][x2B + 1];
-            cPtr.SetFeature("WallOuter");
+            cPtr.SetFeature(wallOuter);
         }
         for (x = x1B - 1; x <= x2B + 1; x++)
         {
             cPtr = SaveGame.Grid[y1B - 1][x];
-            cPtr.SetFeature("WallOuter");
+            cPtr.SetFeature(wallOuter);
             cPtr = SaveGame.Grid[y2B + 1][x];
-            cPtr.SetFeature("WallOuter");
+            cPtr.SetFeature(wallOuter);
         }
         for (y = y1A; y <= y2A; y++)
         {
