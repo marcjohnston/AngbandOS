@@ -116,17 +116,17 @@ namespace AngbandOS.PersistentStorage
                 context.Database.ExecuteSqlRaw("DELETE FROM [RepositoryEntities] WHERE [RepositoryName]=@RepositoryName", new SqlParameter("@RepositoryName", repositoryName));
                 foreach (KeyValuePair<string, string> jsonEntity in jsonEntities)
                 {
-                    string key = jsonEntity.Key;
-                    if (String.IsNullOrEmpty(key) && jsonEntities.Length != 1)
+                    // Check to see if there is any json data to save.
+                    if (jsonEntity.Value.Length > 0)
                     {
-                        throw new Exception($"A null or blank key for the {repositoryName} repository is not supported using PersistEntities.  Use PersistEntity instead.");
+                        string key = jsonEntity.Key;
+                        context.RepositoryEntities.Add(new RepositoryEntity()
+                        {
+                            RepositoryName = repositoryName,
+                            Key = key,
+                            JsonData = jsonEntity.Value
+                        });
                     }
-                    context.RepositoryEntities.Add(new RepositoryEntity()
-                    {                        
-                        RepositoryName = repositoryName,
-                        Key = jsonEntity.Key,
-                        JsonData = jsonEntity.Value
-                    });
                 }
                 context.SaveChanges();
                 transaction.Commit();
@@ -148,7 +148,11 @@ namespace AngbandOS.PersistentStorage
 
         public string RetrieveEntity(string repositoryName)
         {
-            throw new NotImplementedException();
+            using AngbandOSSqlContext context = new AngbandOSSqlContext(ConnectionString);
+            string? value = context.RepositoryEntities
+                .Single(_repositoryEntity => _repositoryEntity.RepositoryName == repositoryName && _repositoryEntity.Key == "")
+                .JsonData;
+            return value;
         }
     }
 }
