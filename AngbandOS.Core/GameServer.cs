@@ -193,16 +193,16 @@ public class GameServer
         if (persistentStorage != null && configuration == null) {
             configuration = new Configuration()
             {
-                Shopkeepers = RetrieveEntities<ShopkeeperDefinition>(persistentStorage, Pluralize(nameof(Shopkeeper))),
-                Towns = RetrieveEntities<TownDefinition>(persistentStorage, Pluralize(nameof(Town))),
-                GameCommands = RetrieveEntities<GameCommandDefinition>(persistentStorage, Pluralize(nameof(GameCommand))),
-                StoreCommands = RetrieveEntities<StoreCommandDefinition>(persistentStorage, Pluralize(nameof(StoreCommand))),
-                HelpGroups = RetrieveEntities<HelpGroupDefinition>(persistentStorage, Pluralize(nameof(HelpGroup))),
-                MonsterRaces = RetrieveEntities<MonsterRaceDefinition>(persistentStorage, Pluralize(nameof(MonsterRace))),
-                Symbols = RetrieveEntities<SymbolDefinition>(persistentStorage, Pluralize(nameof(Symbol))),
-                Vaults = RetrieveEntities<VaultDefinition>(persistentStorage, Pluralize(nameof(Vault))),
-                DungeonGuardians = RetrieveEntities<DungeonGuardianDefinition>(persistentStorage, Pluralize(nameof(DungeonGuardian))),
-                Dungeons = RetrieveEntities<DungeonDefinition>(persistentStorage, Pluralize(nameof(Dungeon)))
+                //Shopkeepers = RetrieveEntities<ShopkeeperDefinition>(persistentStorage, Pluralize(nameof(Shopkeeper))),
+                //Towns = RetrieveEntities<TownDefinition>(persistentStorage, Pluralize(nameof(Town))),
+                //GameCommands = RetrieveEntities<GameCommandDefinition>(persistentStorage, Pluralize(nameof(GameCommand))),
+                //StoreCommands = RetrieveEntities<StoreCommandDefinition>(persistentStorage, Pluralize(nameof(StoreCommand))),
+                //HelpGroups = RetrieveEntities<HelpGroupDefinition>(persistentStorage, Pluralize(nameof(HelpGroup))),
+                //MonsterRaces = RetrieveEntities<MonsterRaceDefinition>(persistentStorage, Pluralize(nameof(MonsterRace))),
+                //Symbols = RetrieveEntities<SymbolDefinition>(persistentStorage, Pluralize(nameof(Symbol))),
+                //Vaults = RetrieveEntities<VaultDefinition>(persistentStorage, Pluralize(nameof(Vault))),
+                //DungeonGuardians = RetrieveEntities<DungeonGuardianDefinition>(persistentStorage, Pluralize(nameof(DungeonGuardian))),
+                //Dungeons = RetrieveEntities<DungeonDefinition>(persistentStorage, Pluralize(nameof(Dungeon)))
             };
         }
 

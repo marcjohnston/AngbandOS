@@ -94,7 +94,19 @@ namespace AngbandOS.PersistentStorage
             using AngbandOSSqlContext context = new AngbandOSSqlContext(ConnectionString);
             return context.SavedGames.Any(_savedGame => _savedGame.Username == Username && _savedGame.Guid.ToString() == GameGuid);
         }
-        public void PersistEntities(string repositoryName, string[] jsonEntities)
+        public string[] RetrieveEntities(string repositoryName)
+        {
+            using AngbandOSSqlContext context = new AngbandOSSqlContext(ConnectionString);
+            return context.RepositoryEntities
+                .Where(_repositoryEntity => _repositoryEntity.RepositoryName == repositoryName)
+                .Select(_repositoryEntity => _repositoryEntity.JsonData)
+                .ToArray();
+        }
+
+        /// <inheritdoc />
+        /// <param name="repositoryName"></param>
+        /// <param name="jsonEntities"></param>
+        public void PersistEntities(string repositoryName, KeyValuePair<string, string>[] jsonEntities)
         {
             using AngbandOSSqlContext context = new AngbandOSSqlContext(ConnectionString);
 
@@ -102,14 +114,19 @@ namespace AngbandOS.PersistentStorage
             try
             {
                 context.Database.ExecuteSqlRaw("DELETE FROM [RepositoryEntities] WHERE [RepositoryName]=@RepositoryName", new SqlParameter("@RepositoryName", repositoryName));
-                foreach (string jsonEntity in jsonEntities)
+                foreach (KeyValuePair<string, string> jsonEntity in jsonEntities)
                 {
-                    context.RepositoryEntities.Add(new RepositoryEntity()
+                    string key = jsonEntity.Key;
+                    if (String.IsNullOrEmpty(key) && jsonEntities.Length != 1)
                     {
-                        Guid = Guid.NewGuid(),
+                        throw new Exception($"A null or blank key for the {repositoryName} repository is not supported using PersistEntities.  Use PersistEntity instead.");
+                    }
+                    context.RepositoryEntities.Add(new RepositoryEntity()
+                    {                        
                         RepositoryName = repositoryName,
-                        JsonData = jsonEntity
-                    }) ;
+                        Key = jsonEntity.Key,
+                        JsonData = jsonEntity.Value
+                    });
                 }
                 context.SaveChanges();
                 transaction.Commit();
@@ -120,13 +137,18 @@ namespace AngbandOS.PersistentStorage
             }
         }
 
-        public string[] RetrieveEntities(string repositoryName)
+        /// <inheritdoc />
+        /// <param name="repositoryName"></param>
+        /// <param name="json"></param>
+        /// <remarks>Non-keyed entities share the same primary key PK as keyed entities but use the empty string as the key value.</remarks>
+        public void PersistEntity(string repositoryName, string json)
         {
-            using AngbandOSSqlContext context = new AngbandOSSqlContext(ConnectionString);
-            return context.RepositoryEntities
-                .Where(_repositoryEntity => _repositoryEntity.RepositoryName == repositoryName)
-                .Select(_repositoryEntity => _repositoryEntity.JsonData)
-                .ToArray();
+            PersistEntities(repositoryName, new KeyValuePair<string, string>[] { new KeyValuePair<string, string>("", json) });
+        }
+
+        public string RetrieveEntity(string repositoryName)
+        {
+            throw new NotImplementedException();
         }
     }
 }

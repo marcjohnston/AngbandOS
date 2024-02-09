@@ -5,6 +5,8 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using System.Text.Json;
+
 namespace AngbandOS.Core.Repositories;
 
 /// <summary>
@@ -15,12 +17,13 @@ internal abstract class StringListRepository : ListRepository<string>
     protected StringListRepository(SaveGame saveGame) : base(saveGame) { }
     public override void PersistEntities()
     {
-        List<KeyValuePair<string, string>> keyValuePairList = new List<KeyValuePair<string, string>>();
+        List<string> values = new List<string>();
         foreach (string entity in this)
         {
-            keyValuePairList.Add(new KeyValuePair<string, string>("", entity));
+            values.Add(entity);
         }
-        SaveGame.CorePersistentStorage.PersistEntities(Name, keyValuePairList.ToArray());
+        string json = JsonSerializer.Serialize(values);
+        SaveGame.CorePersistentStorage.PersistEntity(Name, json);
     }
 
     public override string SerializeEntity(string entity)

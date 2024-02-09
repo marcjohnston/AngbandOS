@@ -233,15 +233,18 @@ namespace AngbandOS.PersistentStorage.Sql.Entities
 
             modelBuilder.Entity<RepositoryEntity>(entity =>
             {
-                entity.HasKey(e => e.Guid);
-
-                entity.Property(e => e.Guid).ValueGeneratedNever();
-
-                entity.Property(e => e.JsonData).IsUnicode(false);
+                entity.HasKey(e => new { e.RepositoryName, e.Key })
+                    .HasName("PK_RepositoryEntities_1");
 
                 entity.Property(e => e.RepositoryName)
                     .HasMaxLength(50)
                     .IsUnicode(false);
+
+                entity.Property(e => e.Key)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.JsonData).IsUnicode(false);
             });
 
             modelBuilder.Entity<SavedGame>(entity =>

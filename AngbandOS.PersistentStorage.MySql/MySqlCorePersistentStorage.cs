@@ -111,5 +111,20 @@ namespace AngbandOS.PersistentStorage
                 return context.SavedGames.Any(_savedGame => _savedGame.Username == Username && _savedGame.Guid.ToString() == GameGuid);
             }
         }
+
+        public void PersistEntities(string repositoryName, KeyValuePair<string, string>[] jsonEntities)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void PersistEntity(string repositoryName, string json)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string RetrieveEntity(string repositoryName)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
