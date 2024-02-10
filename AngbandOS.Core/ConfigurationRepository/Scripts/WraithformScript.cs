@@ -19,5 +19,6 @@ internal class WraithformScript : Script, IScript
     public void ExecuteScript()
     {
         SaveGame.TimedEtherealness.AddTimer(SaveGame.Rng.DieRoll(SaveGame.ExperienceLevel / 2) + (SaveGame.ExperienceLevel / 2));
+
     }
 }
