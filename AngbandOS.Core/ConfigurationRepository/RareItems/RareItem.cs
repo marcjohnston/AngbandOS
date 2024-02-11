@@ -7,6 +7,12 @@
 
 namespace AngbandOS.Core.RareItems;
 
+/// <summary>
+/// Represents additional characteristics that are applied to items.  These characteristics affect:
+/// 1. Description - The item description is enhanced
+/// 2. Item Characteristics - Rare items participate in the IItemCharacteristics interface and the rare item characteristics are merged with the original item.
+/// 3. Application of Magic - Items with rare item characteristics 
+/// </summary>
 [Serializable]
 internal abstract class RareItem : IItemCharacteristics, IGetKey<RareItemTypeEnum>
 {
@@ -61,6 +67,10 @@ internal abstract class RareItem : IItemCharacteristics, IGetKey<RareItemTypeEnu
 
     public virtual bool Con { get; set; } = false;
 
+    /// <summary>
+    /// Returns the value of the rare item.  When this value is 0, the value of the item is 0 regardless of the value of the original item and the
+    /// item is considered broken; otherwise this value is added to the value of the original item.
+    /// </summary>
     public abstract int Cost { get; }
 
     public virtual bool Cursed { get; set; } = false;
@@ -77,6 +87,10 @@ internal abstract class RareItem : IItemCharacteristics, IGetKey<RareItemTypeEnu
 
     public virtual bool FreeAct { get; set; } = false;
 
+    /// <summary>
+    /// Returns the name of the rare item characteristics.  This name is appended to the description of items that have a rare item
+    /// characteristics applied to it.
+    /// </summary>
     public virtual string FriendlyName { get; }
 
     public virtual bool HeavyCurse { get; set; } = false;
@@ -115,12 +129,28 @@ internal abstract class RareItem : IItemCharacteristics, IGetKey<RareItemTypeEnu
 
     public virtual bool Lightsource { get; set; } = false;
 
+    /// <summary>
+    /// Returns a maximum value for a random amount of additional TypeSpecificValue when adding magic.  If the item is cursed or broken,
+    /// this maximum value will be subtracted from the item
+    /// </summary>
     public abstract int MaxPval { get; }
 
+    /// <summary>
+    /// Returns a maximum value for a random amount of additional BonusArmorClass when adding magic.  If the item is cursed or broken,
+    /// this maximum value will be subtracted from the item
+    /// </summary>
     public abstract int MaxToA { get; }
 
+    /// <summary>
+    /// Returns a maximum value for a random amount of additional BonusDamage when adding magic.  If the item is cursed or broken,
+    /// this maximum value will be subtracted from the item
+    /// </summary>
     public abstract int MaxToD { get; }
 
+    /// <summary>
+    /// Returns a maximum value for a random amount of additional BonusToHit when adding magic.  If the item is cursed or broken,
+    /// this maximum value will be subtracted from the item
+    /// </summary>
     public abstract int MaxToH { get; }
 
     public virtual bool NoMagic { get; set; } = false;
