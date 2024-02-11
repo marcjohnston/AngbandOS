@@ -174,12 +174,12 @@ internal class GenericStoreFactory : StoreFactory
     /// <summary>
     /// Returns the rate at which the store marks up items.  Returns 1, by default.
     /// </summary>
-    public override double MarkupRate { get; }
+    public override int MarkupRate { get; }
 
     /// <summary>
     /// Returns the rate at which the store down items.  Returns 1, by default.
     /// </summary>
-    public override double MarkdownRate { get; } = 1;
+    public override int MarkdownRate { get; } = 1;
 
     public override bool PerformsMaintenanceWhenResting { get; }
 

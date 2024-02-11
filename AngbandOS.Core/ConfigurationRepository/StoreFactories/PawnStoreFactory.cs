@@ -63,8 +63,8 @@ internal class PawnStoreFactory : StoreFactory
     /// them back later forTheamount you pawned them for. If retrieving your items fromThepawn shop had a
     /// markup then you'd be better off just selling them  normally and buying new ones to replace them.
     /// </remarks>
-    public override double MarkdownRate => 0.3;
-    public override double MarkupRate => 0.3;
+    public override int MarkdownRate => 30;
+    public override int MarkupRate => 30;
 
     protected override string? AdvertisedStoreCommand4Name => nameof(IdentifyAllStoreCommand);
 

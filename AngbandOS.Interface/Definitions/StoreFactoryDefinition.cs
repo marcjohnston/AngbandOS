@@ -135,12 +135,12 @@ public class StoreFactoryDefinition : IPoco
     /// <summary>
     /// Returns the rate at which the store marks up items.  Returns 1, by default.
     /// </summary>
-    public virtual double MarkupRate { get; set; } = 1;
+    public virtual int MarkupRate { get; set; } = 1;
 
     /// <summary>
     /// Returns the rate at which the store marks down items.  Returns 1, by default.
     /// </summary>
-    public virtual double MarkdownRate { get; set; } = 1;
+    public virtual int MarkdownRate { get; set; } = 1;
 
     public virtual bool PerformsMaintenanceWhenResting { get; set; } = true;
 

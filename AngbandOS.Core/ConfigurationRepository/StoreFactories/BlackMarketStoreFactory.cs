@@ -49,8 +49,8 @@ internal class BlackMarketStoreFactory : StoreFactory
         nameof(AnythingOfValueItemFilter)
     };
 
-    public override double MarkdownRate => 0.5;
-    public override double MarkupRate => 2;
+    public override int MarkdownRate => 50;
+    public override int MarkupRate => 200;
 
     /// <summary>
     /// Returns 35 as the base level for the black market to create a random item.

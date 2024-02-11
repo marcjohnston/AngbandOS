@@ -354,21 +354,21 @@ internal abstract class StoreFactory : IItemFilter, IGetKey<string>
     /// <summary>
     /// Returns the rate at which the store marks up items.  Returns 1, by default.
     /// </summary>
-    public virtual double MarkupRate => 1;
+    public virtual int MarkupRate => 100;
 
     /// <summary>
     /// Returns the rate at which the store marks down items.  Returns 1, by default.
     /// </summary>
-    public virtual double MarkdownRate => 1;
+    public virtual int MarkdownRate => 100;
 
     public int MarkupItem(int price)
     {
-        return (int)((double)price * MarkupRate);
+        return price * MarkupRate / 100;
     }
 
     public int MarkdownItem(int price)
     {
-        return (int)((double)price * MarkdownRate);
+        return price * MarkdownRate / 100;
     }
 
     /// <summary>
