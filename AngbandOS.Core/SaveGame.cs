@@ -13626,7 +13626,7 @@ internal class SaveGame
     private void PlayerBirthQuests()
     {
         ResetUniqueOnlyGuardianStatus();
-        int index = 0;
+        int questIndex = 0;
         Quests.Clear();
         for (int i = 0; i < _maxQuests; i++)
         {
@@ -13638,72 +13638,94 @@ internal class SaveGame
         {
             foreach (DungeonGuardian dungeonGuardian in SingletonRepository.Dungeons[i].DungeonGuardians)
             {
-                Quests[index].Level = dungeonGuardian.LevelFound;
-                Quests[index].RIdx = dungeonGuardian.MonsterRace.Index;
-                SingletonRepository.MonsterRaces[Quests[index].RIdx].OnlyGuardian = true;
-                Quests[index].Dungeon = SingletonRepository.Dungeons[i];
-                Quests[index].ToKill = 1;
-                Quests[index].Killed = 0;
-                index++;
+                Quests[questIndex].Level = dungeonGuardian.LevelFound;
+                Quests[questIndex].RIdx = dungeonGuardian.MonsterRace.Index;
+                SingletonRepository.MonsterRaces[Quests[questIndex].RIdx].OnlyGuardian = true;
+                Quests[questIndex].Dungeon = SingletonRepository.Dungeons[i];
+                Quests[questIndex].ToKill = 1;
+                Quests[questIndex].Killed = 0;
+                questIndex++;
             }
         }
 
         // These are the random quests
-        for (int i = 0; i < _maxQuests - index; i++)
+        for (int i = 0; i < _maxQuests - questIndex; i++)
         {
-            int j;
-            bool sameLevel;
             do
             {
-                // Find a valid random quest monster.
+                bool sameLevel;
                 do
                 {
-                    Quests[index].RIdx = GetRandomQuestMonster(index);
-                } while (Quests[index].RIdx == 0);
-
-                // Assign the quest level as the level of the monster that was chosen.
-                Quests[index].Level = SingletonRepository.MonsterRaces[Quests[index].RIdx].Level;
-
-                // Adjust the quest level between 2 and 1/6 the quest levels.
-                Quests[index].Level -= Rng.RandomBetween(2, 3 + (Quests[index].Level / 6));
-
-                // Scan all of the previous quests to see if a quest is already on the same level.  Do not allow same level quests.
-                sameLevel = false;
-                for (j = 0; j < index; j++)
-                {
-                    if (Quests[index].Level == Quests[j].Level)
+                    // Find a valid random quest monster.
+                    do
                     {
-                        sameLevel = true;
-                        break;
+                        Quests[questIndex].RIdx = GetRandomQuestMonster(questIndex);
+                    } while (Quests[questIndex].RIdx == 0);
+
+                    // Assign the quest level as the level of the monster that was chosen.
+                    Quests[questIndex].Level = SingletonRepository.MonsterRaces[Quests[questIndex].RIdx].Level;
+
+                    // Adjust the quest level between 2 and 1/6 the quest levels.
+                    Quests[questIndex].Level -= Rng.RandomBetween(2, 3 + (Quests[questIndex].Level / 6));
+
+                    // Scan all of the previous quests to see if a quest is already on the same level.  Do not allow same level quests.
+                    sameLevel = false;
+                    for (int j = 0; j < questIndex; j++)
+                    {
+                        if (Quests[questIndex].Level == Quests[j].Level)
+                        {
+                            sameLevel = true;
+                            break;
+                        }
                     }
+                } while (sameLevel);
+
+                // If the monster race select is a unique, turn on the only guardian flag.
+                if (SingletonRepository.MonsterRaces[Quests[questIndex].RIdx].Unique)
+                {
+                    SingletonRepository.MonsterRaces[Quests[questIndex].RIdx].OnlyGuardian = true;
                 }
-            } while (sameLevel);
 
-            // If the monster race select is a unique, turn on the only guardian flag.
-            if (SingletonRepository.MonsterRaces[Quests[index].RIdx].Unique)
-            {
-                SingletonRepository.MonsterRaces[Quests[index].RIdx].OnlyGuardian = true;
-            }
+                // We need to attach the quest to a dungeon.  To do this, we need to find a qualifying dungeon.  To qualify, a dungeon:
+                // 1. cannot start at a level that is at or past the quest level; the dungeon must have at least one level prior to the start of the quest;
+                // 2. has to have enough levels that it includes the quest level
+                // 3. the random quest cannot be on the same level as any of the dungeon guardians for that dungeon
 
-            // We need to attach the quest to a dungeon.  To do this, we need to find a qualifying dungeon.  To qualify, a dungeon:
-            // 1. cannot start at a level that is at or past the quest level; the dungeon must have at least one level prior to the start of the quest;
-            // 2. has to have enough levels that it includes the quest level
-            // 3. the random quest cannot be on the same level as any of the dungeon guardians for that dungeon
-            j = Rng.RandomBetween(1, DungeonCount) - 1;
-            while (Quests[index].Level <= SingletonRepository.Dungeons[j].Offset ||
-                   Quests[index].Level > SingletonRepository.Dungeons[j].MaxLevel + SingletonRepository.Dungeons[j].Offset ||
-                   SingletonRepository.Dungeons[j].DungeonGuardians.Where(_dungeonGuardian => 
-                    _dungeonGuardian.LevelFound + SingletonRepository.Dungeons[j].Offset == Quests[index].Level).Count() > 0)
-            {
-                j = Rng.RandomBetween(1, DungeonCount) - 1;
-            }
+                // Determine which dungeons are still available to choose from.
+                List<Dungeon> dungeonList = new List<Dungeon>();
+                foreach (Dungeon dungeon in SingletonRepository.Dungeons)
+                {
+                    if (Quests[questIndex].Level <= dungeon.Offset)
+                    {
+                        continue;
+                    }
+                    if (Quests[questIndex].Level > dungeon.MaxLevel + dungeon.Offset)
+                    {
+                        continue;
+                    }
+                    if (dungeon.DungeonGuardians.Where(_dungeonGuardian => _dungeonGuardian.LevelFound + dungeon.Offset == Quests[questIndex].Level).Count() > 0)
+                    {
+                        continue;
+                    }
+                    dungeonList.Add(dungeon);
+                }
 
-            // Attach the random quest to the dungeon.
-            Quests[index].Dungeon = SingletonRepository.Dungeons[j];
-            Quests[index].Level -= SingletonRepository.Dungeons[j].Offset;
-            Quests[index].ToKill = GetNumberMonster(index);
-            Quests[index].Killed = 0;
-            index++;
+                // Check to see if there are any dungeons to choose from.
+                if (dungeonList.Count > 0)
+                {
+                    // Choose a dungeon.
+                    int ii = Rng.RandomLessThan(dungeonList.Count);
+                    Dungeon chosenDungeon = dungeonList[ii];
+
+                    // Attach the random quest to the dungeon.
+                    Quests[questIndex].Dungeon = chosenDungeon;
+                    Quests[questIndex].Level -= chosenDungeon.Offset;
+                    Quests[questIndex].ToKill = GetNumberMonster(questIndex);
+                    Quests[questIndex].Killed = 0;
+                    questIndex++;
+                    break;
+                }
+            } while (true);
         }
     }
 
