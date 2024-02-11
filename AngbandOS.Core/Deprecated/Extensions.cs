@@ -272,6 +272,10 @@ internal static class Extensions
         {
             return $"{singular}es";
         }
+        else if (singular.EndsWith("y"))
+        {
+            return $"{singular.Substring(0, singular.Length - 1)}ies";
+        }
         else
         {
             return $"{singular}s";
