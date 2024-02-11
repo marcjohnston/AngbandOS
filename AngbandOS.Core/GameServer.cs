@@ -174,6 +174,12 @@ public class GameServer
         return entities.ToArray();
     }
 
+    /// <summary>
+    /// Returns an array of strings that represents the string list repository entities; or null, if the file doesn't exist.
+    /// </summary>
+    /// <param name="persistentStorage"></param>
+    /// <param name="repositoryName"></param>
+    /// <returns></returns>
     private string[] RetrieveEntity(ICorePersistentStorage persistentStorage, string repositoryName)
     {
         string serializedEntity = persistentStorage.RetrieveEntity(repositoryName);
@@ -208,6 +214,7 @@ public class GameServer
                 Vaults = RetrieveEntities<VaultDefinition>(persistentStorage, Pluralize(nameof(Vault))),
                 DungeonGuardians = RetrieveEntities<DungeonGuardianDefinition>(persistentStorage, Pluralize(nameof(DungeonGuardian))),
                 Dungeons = RetrieveEntities<DungeonDefinition>(persistentStorage, Pluralize(nameof(Dungeon))),
+                StoreFactories = RetrieveEntities<StoreFactoryDefinition>(persistentStorage, Pluralize(nameof(StoreFactory))),
 
                 ElvishTexts = RetrieveEntity(persistentStorage, "ElvishTexts"),
                 FindQuests = RetrieveEntity(persistentStorage, "FindQuests"),

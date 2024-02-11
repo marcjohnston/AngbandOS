@@ -42,6 +42,8 @@ public class Configuration
     public VaultDefinition[]? Vaults { get; set; } = null;
     public DungeonGuardianDefinition[]? DungeonGuardians { get; set; } = null;
     public DungeonDefinition[]? Dungeons { get; set; } = null;
+    public StoreFactoryDefinition[]? StoreFactories { get; set; } = null;
+
     public string[]? ElvishTexts { get; set; } = null;
     public string[]? FindQuests { get; set; } = null;
     public string[]? FunnyComments { get; set; } = null;

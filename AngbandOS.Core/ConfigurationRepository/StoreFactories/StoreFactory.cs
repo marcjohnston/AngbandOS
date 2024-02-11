@@ -21,7 +21,54 @@ internal abstract class StoreFactory : IItemFilter, IGetKey<string>
     /// <returns></returns>
     public string ToJson()
     {
-        return "";
+        StoreFactoryDefinition definition = new()
+        {
+            IsEmptyLot = IsEmptyLot,
+            BuildingsMadeFromPermanentRock = BuildingsMadeFromPermanentRock,
+            StoreEntranceDoorsAreBlownOff = StoreEntranceDoorsAreBlownOff,
+            Key = Key,
+            PageSize = PageSize,
+            UseHomeCarry = UseHomeCarry,
+            ItemFilterNames = ItemFilterNames,
+            IsHomeThatCanBeBought = IsHomeThatCanBeBought,
+            MaintainsStockLevels = MaintainsStockLevels,
+            MaxInventory = MaxInventory,
+            MinInventory = MinInventory,
+            StoreTurnover = StoreTurnover,
+            StoreStockManifestDefinitions = StoreStockManifestDefinitions,
+            ShufflesOwnersAndPricing = ShufflesOwnersAndPricing,
+            ShopkeeperNames = ShopkeeperNames,
+            AdvertisedStoreCommand1Name = AdvertisedStoreCommand1Name,
+            AdvertisedStoreCommand2Name = AdvertisedStoreCommand2Name,
+            AdvertisedStoreCommand3Name = AdvertisedStoreCommand3Name,
+            AdvertisedStoreCommand4Name = AdvertisedStoreCommand4Name,
+            AdvertisedStoreCommand5Name = AdvertisedStoreCommand5Name,
+            WidthOfDescriptionColumn = WidthOfDescriptionColumn,
+            RenderWeightUnitOfMeasurement = RenderWeightUnitOfMeasurement,
+            TileName = TileName,
+            ItemsRenderFlavorAware = ItemsRenderFlavorAware,
+            OwnerName = OwnerName,
+            Title = Title,
+            StoreMaintainsInventory = StoreMaintainsInventory,
+            ShowItemPricing = ShowItemPricing,
+            MarkupRate = MarkupRate,
+            MarkdownRate = MarkdownRate,
+            PerformsMaintenanceWhenResting = PerformsMaintenanceWhenResting,
+            LevelForRandomItemCreation = LevelForRandomItemCreation,
+            MinimumItemValue = MinimumItemValue,
+            NoStockMessage = NoStockMessage,
+            PurchaseMessage = PurchaseMessage,
+            StoreSellsItems = StoreSellsItems,
+            BoughtMessageAsBoughtBack = BoughtMessageAsBoughtBack,
+            SellPrompt = SellPrompt,
+            StoreFullMessage = StoreFullMessage,
+            StoreMaintainsInscription = StoreMaintainsInscription,
+            StoreBuysItems = StoreBuysItems,
+            BoughtVerb = BoughtVerb,
+            StoreIdentifiesItems = StoreIdentifiesItems,
+            StoreAnalyzesPurchases = StoreAnalyzesPurchases
+        };
+        return JsonSerializer.Serialize(definition);
     }
 
     protected StoreFactory(SaveGame saveGame)
