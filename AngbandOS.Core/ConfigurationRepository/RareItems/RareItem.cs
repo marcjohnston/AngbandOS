@@ -22,6 +22,8 @@ internal abstract class RareItem : IItemCharacteristics, IGetKey<RareItemTypeEnu
         SaveGame = saveGame;
     }
 
+    public virtual string? DescribeActivationEffect => null;
+
     /// <summary>
     /// Returns the entity serialized into a Json string.
     /// </summary>

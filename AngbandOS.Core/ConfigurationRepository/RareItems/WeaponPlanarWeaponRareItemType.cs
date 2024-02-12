@@ -12,6 +12,7 @@ internal class WeaponPlanarWeaponRareItem : RareItem
 {
     private WeaponPlanarWeaponRareItem(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(VerticalBarSymbol));
+    public override string? DescribeActivationEffect => "teleport every 50+d50 turns";
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "Weapon (Planar Weapon)";
     public override bool Activate => true;

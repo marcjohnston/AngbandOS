@@ -1828,7 +1828,8 @@ internal sealed class Item : IComparable<Item>
         }
         if (RareItemTypeIndex == RareItemTypeEnum.WeaponPlanarWeapon)
         {
-            return "teleport every 50+d50 turns";
+            RareItem rareItem = SaveGame.SingletonRepository.RareItems.Get(RareItemTypeIndex);
+            return rareItem.DescribeActivationEffect;
         }
         return Factory.DescribeActivationEffect;
     }
