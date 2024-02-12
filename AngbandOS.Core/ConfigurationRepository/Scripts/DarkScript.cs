@@ -8,9 +8,9 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class WizardDarkScript : Script, IScript
+internal class DarkScript : Script, IScript
 {
-    private WizardDarkScript(SaveGame saveGame) : base(saveGame) { }
+    private DarkScript(SaveGame saveGame) : base(saveGame) { }
 
     /// <summary>
     /// Darkens the map.

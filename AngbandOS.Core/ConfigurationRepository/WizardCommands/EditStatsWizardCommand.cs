@@ -20,6 +20,6 @@ internal class EditStatsWizardCommand : WizardCommand
 
     public override void Execute()
     {
-        SaveGame.RunScript(nameof(WizardEditStatsScript));
+        SaveGame.RunScript(nameof(EditStatsScript));
     }
 }

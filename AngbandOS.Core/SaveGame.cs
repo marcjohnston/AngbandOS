@@ -5533,7 +5533,7 @@ internal class SaveGame
         }
         SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
         SingletonRepository.FlaggedActions.Get(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
-        RunScript(nameof(WizardDarkScript));
+        RunScript(nameof(DarkScript));
         return true;
     }
 

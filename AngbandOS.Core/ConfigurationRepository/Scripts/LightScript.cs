@@ -8,9 +8,9 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class WizardLightScript : Script, IScript
+internal class LightScript : Script, IScript
 {
-    private WizardLightScript(SaveGame saveGame) : base(saveGame) { }
+    private LightScript(SaveGame saveGame) : base(saveGame) { }
 
     /// <summary>
     /// Lights the map.

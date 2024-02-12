@@ -27,7 +27,7 @@ internal class EnlightenmentPotionItemFactory : PotionItemFactory
     {
         // Enlightenment shows you the whole level
         SaveGame.MsgPrint("An image of your surroundings forms in your mind...");
-        SaveGame.RunScript(nameof(WizardLightScript));
+        SaveGame.RunScript(nameof(LightScript));
         return true;
     }
     public override Item CreateItem() => new Item(SaveGame, this);

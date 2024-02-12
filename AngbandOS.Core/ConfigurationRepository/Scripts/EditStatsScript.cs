@@ -8,9 +8,9 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class WizardEditStatsScript : Script, IScript
+internal class EditStatsScript : Script, IScript
 {
-    private WizardEditStatsScript(SaveGame saveGame) : base(saveGame) { }
+    private EditStatsScript(SaveGame saveGame) : base(saveGame) { }
 
     /// <summary>
     /// Allows the wizard to edit all of the player stats.

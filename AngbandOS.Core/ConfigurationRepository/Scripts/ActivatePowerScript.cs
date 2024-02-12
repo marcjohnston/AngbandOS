@@ -8,9 +8,9 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class WizardActivatePowerScript : Script, IScript
+internal class ActivatePowerScript : Script, IScript
 {
-    private WizardActivatePowerScript(SaveGame saveGame) : base(saveGame) { }
+    private ActivatePowerScript(SaveGame saveGame) : base(saveGame) { }
 
     /// <summary>
     /// Executes the activate power script.

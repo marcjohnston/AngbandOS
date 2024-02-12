@@ -377,7 +377,7 @@ internal class StandardDungeonGenerator : DungeonGenerator
         }
         if (SaveGame.Rng.DieRoll(_darkEmpty) != 1 || SaveGame.Rng.DieRoll(100) > SaveGame.Difficulty)
         {
-            SaveGame.RunScript(nameof(WizardLightScript));
+            SaveGame.RunScript(nameof(LightScript));
         }
     }
 
@@ -992,7 +992,7 @@ internal class StandardDungeonGenerator : DungeonGenerator
         }
         if (emptyLevel && (SaveGame.Rng.DieRoll(_darkEmpty) != 1 || SaveGame.Rng.DieRoll(100) > SaveGame.Difficulty))
         {
-            SaveGame.RunScript(nameof(WizardLightScript));
+            SaveGame.RunScript(nameof(LightScript));
         }
     }
 }

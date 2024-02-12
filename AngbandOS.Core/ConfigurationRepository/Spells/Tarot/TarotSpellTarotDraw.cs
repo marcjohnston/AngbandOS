@@ -164,7 +164,7 @@ internal class TarotSpellTarotDraw : Spell
         else if (die < 120)
         {
             SaveGame.MsgPrint("It's the Sun.");
-            SaveGame.RunScript(nameof(WizardLightScript));
+            SaveGame.RunScript(nameof(LightScript));
         }
         else
         {

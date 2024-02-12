@@ -12,9 +12,9 @@ namespace AngbandOS.Core.Scripts;
 /// <summary>
 /// Give us a rumour, if possible one that we've not heard before
 /// </summary>
-internal class WizardCreateItemScript : Script, IScript
+internal class CreateItemScript : Script, IScript
 {
-    private WizardCreateItemScript(SaveGame saveGame) : base(saveGame) { }
+    private CreateItemScript(SaveGame saveGame) : base(saveGame) { }
 
     /// <summary>
     /// Executes the create item script.

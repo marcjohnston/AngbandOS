@@ -8,9 +8,9 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class WizardLearnScript : Script, IScript
+internal class LearnScript : Script, IScript
 {
-    private WizardLearnScript(SaveGame saveGame) : base(saveGame) { }
+    private LearnScript(SaveGame saveGame) : base(saveGame) { }
 
     /// <summary>
     /// Executes the learn script.

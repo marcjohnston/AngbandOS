@@ -20,6 +20,6 @@ internal class LearnAboutObjectsWizardCommand : WizardCommand
 
     public override void Execute()
     {
-        SaveGame.RunScript(nameof(WizardLearnScript));
+        SaveGame.RunScript(nameof(LearnScript));
     }
 }

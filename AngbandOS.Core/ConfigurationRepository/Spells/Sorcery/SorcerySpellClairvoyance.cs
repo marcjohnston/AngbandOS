@@ -13,7 +13,7 @@ internal class SorcerySpellClairvoyance : Spell
     private SorcerySpellClairvoyance(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.RunScript(nameof(WizardLightScript));
+        SaveGame.RunScript(nameof(LightScript));
         if (!SaveGame.HasTelepathy)
         {
             SaveGame.TimedTelepathy.AddTimer(SaveGame.Rng.DieRoll(30) + 25);

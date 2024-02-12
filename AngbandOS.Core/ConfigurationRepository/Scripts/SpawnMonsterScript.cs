@@ -8,9 +8,9 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class WizardSpawnMonsterScript : Script, IScript
+internal class SpawnMonsterScript : Script, IScript
 {
-    private WizardSpawnMonsterScript(SaveGame saveGame) : base(saveGame) { }
+    private SpawnMonsterScript(SaveGame saveGame) : base(saveGame) { }
 
     /// <summary>
     /// Executes the spawn monster script.

@@ -8,9 +8,9 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class WizardJumpToLevelScript : Script, IScript
+internal class JumpToLevelScript : Script, IScript
 {
-    private WizardJumpToLevelScript(SaveGame saveGame) : base(saveGame) { }
+    private JumpToLevelScript(SaveGame saveGame) : base(saveGame) { }
 
     /// <summary>
     /// Executes the jump to level script.

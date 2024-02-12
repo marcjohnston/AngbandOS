@@ -8,9 +8,9 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class WizardCureAllScript : Script, IScript
+internal class CureAllScript : Script, IScript
 {
-    private WizardCureAllScript(SaveGame saveGame) : base(saveGame) { }
+    private CureAllScript(SaveGame saveGame) : base(saveGame) { }
 
     /// <summary>
     /// Executes the cure all script.

@@ -19,7 +19,7 @@ internal class GemstoneShiningTrapezodedronFixedArtifact : FixedArtifact, IFixed
     public void ActivateItem(Item item)
     {
         SaveGame.MsgPrint("The gemstone flashes bright red!");
-        SaveGame.RunScript(nameof(WizardLightScript));
+        SaveGame.RunScript(nameof(LightScript));
         SaveGame.MsgPrint("The gemstone drains your vitality...");
         SaveGame.TakeHit(base.SaveGame.Rng.DiceRoll(3, 8), "the Gemstone 'Trapezohedron'");
         SaveGame.DetectTraps();

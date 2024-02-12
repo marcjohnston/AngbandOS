@@ -20,6 +20,6 @@ internal class SpawnMonsterWizardCommand : WizardCommand
 
     public override void Execute()
     {
-        SaveGame.RunScript(nameof(WizardSpawnMonsterScript));
+        SaveGame.RunScript(nameof(SpawnMonsterScript));
     }
 }

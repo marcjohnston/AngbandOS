@@ -20,6 +20,6 @@ internal class CureAllWizardCommand : WizardCommand
 
     public override void Execute()
     {
-        SaveGame.RunScript(nameof(WizardCureAllScript));
+        SaveGame.RunScript(nameof(CureAllScript));
     }
 }
