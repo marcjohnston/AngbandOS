@@ -11,4 +11,17 @@ namespace AngbandOS.Core.Repositories;
 internal class WizardCommandsRepository : DictionaryRepository<string, WizardCommand>
 {
     public WizardCommandsRepository(SaveGame saveGame) : base(saveGame) { }
+
+    public override void Load()
+    {
+        base.Load();
+
+        foreach (WizardCommand command in this)
+        {
+            if (this.Count(_wizardCommand => _wizardCommand.KeyChar == command.KeyChar) > 1)
+            {
+                throw new Exception($"More than one wizard command accepts the key {command.KeyChar}.");
+            }
+        }
+    }
 }
