@@ -35,10 +35,44 @@ internal class WizardCreateItemScript : Script, IScript
         }
         ItemFactory itemFactory = SaveGame.SingletonRepository.ItemFactories[kIdx];
         Item qPtr = itemFactory.CreateItem();
-        qPtr.ApplyMagic(SaveGame.Difficulty, false, false, false, null);
+
+        if (!GetBool($"Ok Item (0=False, 1=True)? ", out bool ok))
+        {
+            return;
+        }
+        if (!GetBool($"Good Item (0=False, 1=True)? ", out bool good))
+        {
+            return;
+        }
+        if (!GetBool($"Great Item (0=False, 1=True)? ", out bool great))
+        {
+            return;
+        }
+
+        qPtr.ApplyMagic(SaveGame.Difficulty, ok, good, great, null);
         SaveGame.DropNear(qPtr, -1, SaveGame.MapY, SaveGame.MapX);
         SaveGame.MsgPrint("Allocated.");
         return;
+    }
+
+    private bool GetBool(string prompt, out bool value)
+    {
+        value = false;
+        if (!SaveGame.GetCom(prompt, out char text))
+        {
+            return false;
+        }
+        if (text == '0')
+        {
+            value = false;
+            return true;
+        }
+        if (text == '1')
+        {
+            value = true;
+            return true;
+        }
+        return false;
     }
 
     private int WizCreateItemtype()
