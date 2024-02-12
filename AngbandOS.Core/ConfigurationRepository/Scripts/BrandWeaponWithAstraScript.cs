@@ -28,7 +28,7 @@ internal class BrandWeaponWithAstraScript : Script, IScript
 
             // Make it a planar weapon
             act = "seems very unstable now.";
-            item.RareItemTypeIndex = RareItemTypeEnum.WeaponPlanarWeapon;
+            item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(WeaponPlanarWeaponRareItem));
             item.TypeSpecificValue = SaveGame.Rng.DieRoll(2);
 
             // Let the player know what happened

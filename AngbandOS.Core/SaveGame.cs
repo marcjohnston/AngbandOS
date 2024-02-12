@@ -6607,7 +6607,7 @@ internal class SaveGame
             }
             // Make the bolts into bolts of flame
             MsgPrint("Your bolts are covered in a fiery aura!");
-            item.RareItemTypeIndex = RareItemTypeEnum.AmmoOfFlame;
+            item.RareItem = SingletonRepository.RareItems.Get(nameof(AmmoOfFlameRareItem));
             Enchant(item, Rng.RandomLessThan(3) + 4,
                 Constants.EnchTohit | Constants.EnchTodam);
             // Quit after the first bolts have been upgraded
@@ -6945,7 +6945,7 @@ internal class SaveGame
             // Completely remake the armor into a set of blasted armor
             MsgPrint($"A terrible black aura blasts your {itemName}!");
             item.FixedArtifact = null;
-            item.RareItemTypeIndex = RareItemTypeEnum.ArmorBlasted;
+            item.RareItem = SingletonRepository.RareItems.Get(nameof(ArmorBlastedRareItem));
             item.BonusArmorClass = 0 - Rng.DieRoll(5) - Rng.DieRoll(5);
             item.BonusToHit = 0;
             item.BonusDamage = 0;
@@ -6986,7 +6986,7 @@ internal class SaveGame
             // Completely remake the item into a shattered weapon
             MsgPrint($"A terrible black aura blasts your {itemName}!");
             item.FixedArtifact = null;
-            item.RareItemTypeIndex = RareItemTypeEnum.WeaponShattered;
+            item.RareItem = SingletonRepository.RareItems.Get(nameof(WeaponShatteredRareItem));
             item.BonusToHit = 0 - Rng.DieRoll(5) - Rng.DieRoll(5);
             item.BonusDamage = 0 - Rng.DieRoll(5) - Rng.DieRoll(5);
             item.BonusArmorClass = 0;

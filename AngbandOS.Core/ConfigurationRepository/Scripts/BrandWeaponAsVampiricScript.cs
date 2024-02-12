@@ -28,7 +28,7 @@ internal class BrandWeaponAsVampiricScript : Script, IScript
 
             // Make it a vampiric weapon
             act = "thirsts for blood!";
-            item.RareItemTypeIndex = RareItemTypeEnum.WeaponVampiric;
+            item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(WeaponVampiricRareItem));
 
             // Let the player know what happened
             SaveGame.MsgPrint($"Your {itemName} {act}");

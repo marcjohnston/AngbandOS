@@ -225,31 +225,8 @@ internal sealed class Item : IComparable<Item>
     public bool Marked;
 
     public string RandartName = "";
-    public RareItemTypeEnum RareItemTypeIndex;
 
-    public RareItem? RareItem
-    {
-        get
-        {
-            if (RareItemTypeIndex == RareItemTypeEnum.None)
-            {
-                return null;
-            }
-            RareItem rareItem = SaveGame.SingletonRepository.RareItems.Get(RareItemTypeIndex);
-            return rareItem;
-        }
-        set
-        {
-            if (value == null)
-            {
-                RareItemTypeIndex = RareItemTypeEnum.None;
-            }
-            else
-            {
-                RareItemTypeIndex = value.RareItemType;
-            }
-        }
-    }
+    public RareItem? RareItem;
 
     public int RechargeTimeLeft;
 

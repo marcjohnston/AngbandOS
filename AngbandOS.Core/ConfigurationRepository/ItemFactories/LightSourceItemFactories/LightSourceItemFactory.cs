@@ -77,14 +77,14 @@ internal abstract class LightSourceItemFactory : ItemFactory
             {
                 case 1:
                     {
-                        item.RareItemTypeIndex = RareItemTypeEnum.OrbOfIrritation;
+                        item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(OrbOfIrritationRareItem));
                         item.IdentBroken = true;
                         item.IdentCursed = true;
                         break;
                     }
                 case 2:
                     {
-                        item.RareItemTypeIndex = RareItemTypeEnum.OrbOfInstability;
+                        item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(OrbOfInstabilityRareItem));
                         item.IdentBroken = true;
                         item.IdentCursed = true;
                         break;
@@ -94,40 +94,40 @@ internal abstract class LightSourceItemFactory : ItemFactory
         else if (power == 1) // Good
         {
             WeightedRandom<RareItem> weightedRandom = new WeightedRandom<RareItem>(SaveGame);
-            weightedRandom.Add(1, SaveGame.SingletonRepository.RareItems.Get(RareItemTypeEnum.OrbOfFlame));
-            weightedRandom.Add(1, SaveGame.SingletonRepository.RareItems.Get(RareItemTypeEnum.OrbOfFrost));
-            weightedRandom.Add(1, SaveGame.SingletonRepository.RareItems.Get(RareItemTypeEnum.OrbOfAcid));
-            weightedRandom.Add(1, SaveGame.SingletonRepository.RareItems.Get(RareItemTypeEnum.OrbOfLightning));
-            weightedRandom.Add(1, SaveGame.SingletonRepository.RareItems.Get(RareItemTypeEnum.OrbOfLight));
-            weightedRandom.Add(1, SaveGame.SingletonRepository.RareItems.Get(RareItemTypeEnum.OrbOfDarkness));
-            weightedRandom.Add(1, SaveGame.SingletonRepository.RareItems.Get(RareItemTypeEnum.OrbOfLife));
-            weightedRandom.Add(1, SaveGame.SingletonRepository.RareItems.Get(RareItemTypeEnum.OrbOfSight));
-            weightedRandom.Add(2, SaveGame.SingletonRepository.RareItems.Get(RareItemTypeEnum.OrbOfCourage));
-            weightedRandom.Add(1, SaveGame.SingletonRepository.RareItems.Get(RareItemTypeEnum.OrbOfVenom));
-            weightedRandom.Add(1, SaveGame.SingletonRepository.RareItems.Get(RareItemTypeEnum.OrbOfClarity));
-            weightedRandom.Add(1, SaveGame.SingletonRepository.RareItems.Get(RareItemTypeEnum.OrbOfSound));
-            weightedRandom.Add(1, SaveGame.SingletonRepository.RareItems.Get(RareItemTypeEnum.OrbOfChaos));
-            weightedRandom.Add(1, SaveGame.SingletonRepository.RareItems.Get(RareItemTypeEnum.OrbOfShards));
-            weightedRandom.Add(1, SaveGame.SingletonRepository.RareItems.Get(RareItemTypeEnum.OrbOfUnlife));
-            weightedRandom.Add(1, SaveGame.SingletonRepository.RareItems.Get(RareItemTypeEnum.OrbOfStability));
-            weightedRandom.Add(1, SaveGame.SingletonRepository.RareItems.Get(RareItemTypeEnum.OrbOfMagic));
-            weightedRandom.Add(1, SaveGame.SingletonRepository.RareItems.Get(RareItemTypeEnum.OrbOfFreedom));
-            weightedRandom.Add(1, SaveGame.SingletonRepository.RareItems.Get(RareItemTypeEnum.OrbOfStrength));
-            weightedRandom.Add(1, SaveGame.SingletonRepository.RareItems.Get(RareItemTypeEnum.OrbOfIntelligence));
-            weightedRandom.Add(1, SaveGame.SingletonRepository.RareItems.Get(RareItemTypeEnum.OrbOfWisdom));
-            weightedRandom.Add(1, SaveGame.SingletonRepository.RareItems.Get(RareItemTypeEnum.OrbOfDexterity));
-            weightedRandom.Add(1, SaveGame.SingletonRepository.RareItems.Get(RareItemTypeEnum.OrbOfConstitution));
-            weightedRandom.Add(1, SaveGame.SingletonRepository.RareItems.Get(RareItemTypeEnum.OrbOfCharisma));
-            weightedRandom.Add(1, SaveGame.SingletonRepository.RareItems.Get(RareItemTypeEnum.OrbOfLightness));
-            weightedRandom.Add(1, SaveGame.SingletonRepository.RareItems.Get(RareItemTypeEnum.OrbOfInsight));
-            weightedRandom.Add(1, SaveGame.SingletonRepository.RareItems.Get(RareItemTypeEnum.OrbOfTheMind));
-            weightedRandom.Add(1, SaveGame.SingletonRepository.RareItems.Get(RareItemTypeEnum.OrbOfSustenance));
-            weightedRandom.Add(1, SaveGame.SingletonRepository.RareItems.Get(RareItemTypeEnum.OrbOfHealth));
+            weightedRandom.Add(1, SaveGame.SingletonRepository.RareItems.Get(nameof(OrbOfAcidRareItem)));
+            weightedRandom.Add(1, SaveGame.SingletonRepository.RareItems.Get(nameof(OrbOfLightningRareItem)));
+            weightedRandom.Add(1, SaveGame.SingletonRepository.RareItems.Get(nameof(OrbOfLightRareItem)));
+            weightedRandom.Add(1, SaveGame.SingletonRepository.RareItems.Get(nameof(OrbOfDarknessRareItem)));
+            weightedRandom.Add(1, SaveGame.SingletonRepository.RareItems.Get(nameof(OrbOfLifeRareItem)));
+            weightedRandom.Add(1, SaveGame.SingletonRepository.RareItems.Get(nameof(OrbOfSightRareItem)));
+            weightedRandom.Add(2, SaveGame.SingletonRepository.RareItems.Get(nameof(OrbOfCourageRareItem)));
+            weightedRandom.Add(1, SaveGame.SingletonRepository.RareItems.Get(nameof(OrbOfVenomRareItem)));
+            weightedRandom.Add(1, SaveGame.SingletonRepository.RareItems.Get(nameof(OrbOfClarityRareItem)));
+            weightedRandom.Add(1, SaveGame.SingletonRepository.RareItems.Get(nameof(OrbOfSoundRareItem)));
+            weightedRandom.Add(1, SaveGame.SingletonRepository.RareItems.Get(nameof(OrbOfChaosRareItem)));
+            weightedRandom.Add(1, SaveGame.SingletonRepository.RareItems.Get(nameof(OrbOfShardsRareItem)));
+            weightedRandom.Add(1, SaveGame.SingletonRepository.RareItems.Get(nameof(OrbOfUnlifeRareItem)));
+            weightedRandom.Add(1, SaveGame.SingletonRepository.RareItems.Get(nameof(OrbOfStabilityRareItem)));
+            weightedRandom.Add(1, SaveGame.SingletonRepository.RareItems.Get(nameof(OrbOfMagicRareItem)));
+            weightedRandom.Add(1, SaveGame.SingletonRepository.RareItems.Get(nameof(OrbOfFreedomRareItem)));
+            weightedRandom.Add(1, SaveGame.SingletonRepository.RareItems.Get(nameof(OrbOfStrengthRareItem)));
+            weightedRandom.Add(1, SaveGame.SingletonRepository.RareItems.Get(nameof(OrbOfWisdomRareItem)));
+            weightedRandom.Add(1, SaveGame.SingletonRepository.RareItems.Get(nameof(OrbOfFlameRareItem)));
+            weightedRandom.Add(1, SaveGame.SingletonRepository.RareItems.Get(nameof(OrbOfDexterityRareItem)));
+            weightedRandom.Add(1, SaveGame.SingletonRepository.RareItems.Get(nameof(OrbOfConstitutionRareItem)));
+            weightedRandom.Add(1, SaveGame.SingletonRepository.RareItems.Get(nameof(OrbOfIntelligenceRareItem)));
+            weightedRandom.Add(1, SaveGame.SingletonRepository.RareItems.Get(nameof(OrbOfCharismaRareItem)));
+            weightedRandom.Add(1, SaveGame.SingletonRepository.RareItems.Get(nameof(OrbOfLightnessRareItem)));
+            weightedRandom.Add(1, SaveGame.SingletonRepository.RareItems.Get(nameof(OrbOfInsightRareItem)));
+            weightedRandom.Add(1, SaveGame.SingletonRepository.RareItems.Get(nameof(OrbOfTheMindRareItem)));
+            weightedRandom.Add(1, SaveGame.SingletonRepository.RareItems.Get(nameof(OrbOfSustenanceRareItem)));
+            weightedRandom.Add(1, SaveGame.SingletonRepository.RareItems.Get(nameof(OrbOfHealthRareItem)));
+            weightedRandom.Add(1, SaveGame.SingletonRepository.RareItems.Get(nameof(OrbOfFrostRareItem)));
             item.RareItem = weightedRandom.Choose();
         }
         else if (power == 2) // Great
         {
-            item.RareItemTypeIndex = RareItemTypeEnum.OrbOfPower;
+            item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(OrbOfPowerRareItem));
             for (int i = 0; i < 3; i++)
             {
                 WeightedRandomAction weightedRandomAction = new WeightedRandomAction(SaveGame);

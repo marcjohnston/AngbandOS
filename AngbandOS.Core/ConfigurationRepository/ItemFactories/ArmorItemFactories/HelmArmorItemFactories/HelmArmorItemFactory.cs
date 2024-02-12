@@ -52,19 +52,19 @@ internal abstract class HelmArmorItemFactory : ArmorItemFactory
         {
             case 1:
             case 2:
-                item.RareItemTypeIndex = RareItemTypeEnum.HatOfIntelligence;
+                item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(HatOfIntelligenceRareItem));
                 break;
             case 3:
             case 4:
-                item.RareItemTypeIndex = RareItemTypeEnum.HatOfWisdom;
+                item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(HatOfWisdomRareItem));
                 break;
             case 5:
             case 6:
-                item.RareItemTypeIndex = RareItemTypeEnum.HatOfBeauty;
+                item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(HatOfBeautyRareItem));
                 break;
             case 7:
             case 8:
-                item.RareItemTypeIndex = RareItemTypeEnum.HatOfSeeing;
+                item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(HatOfSeeingRareItem));
                 if (SaveGame.Rng.DieRoll(7) == 1)
                 {
                     item.RandartItemCharacteristics.Telepathy = true;
@@ -72,13 +72,13 @@ internal abstract class HelmArmorItemFactory : ArmorItemFactory
                 break;
             case 9:
             case 10:
-                item.RareItemTypeIndex = RareItemTypeEnum.HatOfLight;
+                item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(HatOfLightRareItem));
                 break;
             case 11:
             case 12:
             case 13:
             case 14:
-                item.RareItemTypeIndex = RareItemTypeEnum.HatOfInfravision;
+                item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(HatOfInfravisionRareItem));
                 break;
         }
     }
@@ -90,20 +90,20 @@ internal abstract class HelmArmorItemFactory : ArmorItemFactory
         {
             case 1:
             case 2:
-                item.RareItemTypeIndex = RareItemTypeEnum.HatOfStupidity;
+                item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(HatOfStupidityRareItem));
                 break;
             case 3:
             case 4:
-                item.RareItemTypeIndex = RareItemTypeEnum.HatOfNaivety;
+                item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(HatOfNaivetyRareItem));
                 break;
             case 5:
-                item.RareItemTypeIndex = RareItemTypeEnum.HatOfUgliness;
+                item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(HatOfUglinessRareItem));
                 break;
             case 6:
-                item.RareItemTypeIndex = RareItemTypeEnum.HatOfSickliness;
+                item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(HatOfSicklinessRareItem));
                 break;
             case 7:
-                item.RareItemTypeIndex = RareItemTypeEnum.HatOfTeleportation;
+                item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(HatOfTeleportationRareItem));
                 break;
         }
     }

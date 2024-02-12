@@ -62,30 +62,30 @@ internal abstract class AmmunitionItemFactory : WeaponItemFactory
                 case 1:
                 case 2:
                 case 3:
-                    item.RareItemTypeIndex = RareItemTypeEnum.AmmoOfWounding;
+                    item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(AmmoOfWoundingRareItem));
                     break;
                 case 4:
-                    item.RareItemTypeIndex = RareItemTypeEnum.AmmoOfFlame;
+                    item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(AmmoOfFlameRareItem));
                     break;
                 case 5:
-                    item.RareItemTypeIndex = RareItemTypeEnum.AmmoOfFrost;
+                    item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(AmmoOfFrostRareItem));
                     break;
                 case 6:
                 case 7:
-                    item.RareItemTypeIndex = RareItemTypeEnum.AmmoOfHurtAnimal;
+                    item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(AmmoOfHurtAnimalRareItem));
                     break;
                 case 8:
                 case 9:
-                    item.RareItemTypeIndex = RareItemTypeEnum.AmmoOfHurtEvil;
+                    item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(AmmoOfHurtEvilRareItem));
                     break;
                 case 10:
-                    item.RareItemTypeIndex = RareItemTypeEnum.AmmoOfHurtDragon;
+                    item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(AmmoOfHurtDragonRareItem));
                     break;
                 case 11:
-                    item.RareItemTypeIndex = RareItemTypeEnum.AmmoOfShocking;
+                    item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(AmmoOfShockingRareItem));
                     break;
                 case 12:
-                    item.RareItemTypeIndex = RareItemTypeEnum.AmmoOfSlaying;
+                    item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(AmmoOfSlayingRareItem));
                     item.DamageDice++;
                     break;
             }
@@ -102,7 +102,7 @@ internal abstract class AmmunitionItemFactory : WeaponItemFactory
         {
             if (SaveGame.Rng.RandomLessThan(Constants.MaxDepth) < level)
             {
-                item.RareItemTypeIndex = RareItemTypeEnum.AmmoOfBackbiting;
+                item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(AmmoOfBackbitingRareItem));
             }
         }
     }

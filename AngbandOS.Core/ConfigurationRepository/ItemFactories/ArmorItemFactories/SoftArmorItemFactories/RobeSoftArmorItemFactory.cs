@@ -35,7 +35,7 @@ internal class RobeSoftArmorItemFactory : SoftArmorItemFactory
                 // Robes have a chance of having the armor of permanence instead of a random characteristic.
                 if (SaveGame.Rng.RandomLessThan(100) < 10)
                 {
-                    item.RareItemTypeIndex = RareItemTypeEnum.ArmorOfPermanence;
+                    item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(ArmorOfPermanenceRareItem));
                 }
                 else
                 {

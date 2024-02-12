@@ -83,7 +83,7 @@ internal class RogueCharacterClass : BaseCharacterClass
     {
         if (item.Factory.CategoryEnum == ItemTypeEnum.Sword && SaveGame.Studies<DeathRealm>())
         {
-            item.RareItemTypeIndex = RareItemTypeEnum.WeaponOfPoisoning;
+            item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(WeaponOfPoisoningRareItem));
         }
     }
 }

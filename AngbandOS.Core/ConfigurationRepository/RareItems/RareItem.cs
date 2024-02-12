@@ -14,7 +14,7 @@ namespace AngbandOS.Core.RareItems;
 /// 3. Application of Magic - Items with rare item characteristics 
 /// </summary>
 [Serializable]
-internal abstract class RareItem : IItemCharacteristics, IGetKey<RareItemTypeEnum>
+internal abstract class RareItem : IItemCharacteristics, IGetKey<string>
 {
     protected SaveGame SaveGame;
     protected RareItem(SaveGame saveGame)
@@ -50,7 +50,9 @@ internal abstract class RareItem : IItemCharacteristics, IGetKey<RareItemTypeEnu
         return "";
     }
 
-    public RareItemTypeEnum GetKey => RareItemType;
+    public virtual string Key => GetType().Name;
+
+    public string GetKey => Key;
     public void Bind() { }
 
     /// <summary>

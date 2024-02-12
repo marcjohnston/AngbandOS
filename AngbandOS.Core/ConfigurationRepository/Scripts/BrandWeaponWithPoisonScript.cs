@@ -28,7 +28,7 @@ internal class BrandWeaponWithPoisonScript : Script, IScript
 
             // Make it a poison brand
             act = "is coated with poison.";
-            item.RareItemTypeIndex = RareItemTypeEnum.WeaponOfPoisoning;
+            item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(WeaponOfPoisoningRareItem));
 
             // Let the player know what happened
             SaveGame.MsgPrint($"Your {itemName} {act}");

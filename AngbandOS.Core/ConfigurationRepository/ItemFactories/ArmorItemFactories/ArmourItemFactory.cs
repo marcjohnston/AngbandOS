@@ -124,30 +124,30 @@ internal abstract class ArmorItemFactory : ItemFactory
             case 2:
             case 3:
             case 4:
-                item.RareItemTypeIndex = RareItemTypeEnum.ArmorOfResistAcid;
+                item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(ArmorOfResistAcidRareItem));
                 break;
             case 5:
             case 6:
             case 7:
             case 8:
-                item.RareItemTypeIndex = RareItemTypeEnum.ArmorOfResistLightning;
+                item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(ArmorOfResistLightningRareItem));
                 break;
             case 9:
             case 10:
             case 11:
             case 12:
-                item.RareItemTypeIndex = RareItemTypeEnum.ArmorOfResistFire;
+                item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(ArmorOfResistFireRareItem));
                 break;
             case 13:
             case 14:
             case 15:
             case 16:
-                item.RareItemTypeIndex = RareItemTypeEnum.ArmorOfResistCold;
+                item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(ArmorOfResistColdRareItem));
                 break;
             case 17:
             case 18:
                 IArtifactBias artifactBias = null;
-                item.RareItemTypeIndex = RareItemTypeEnum.ArmorOfResistance;
+                item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(ArmorOfResistanceRareItem));
                 if (SaveGame.Rng.DieRoll(4) == 1)
                 {
                     item.RandartItemCharacteristics.ResPois = true;
@@ -159,7 +159,7 @@ internal abstract class ArmorItemFactory : ItemFactory
                 break;
             case 20:
             case 21:
-                item.RareItemTypeIndex = RareItemTypeEnum.ArmorOfYith;
+                item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(ArmorOfYithRareItem));
                 break;
         }
     }

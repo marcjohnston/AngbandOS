@@ -29,20 +29,20 @@ internal abstract class GlovesArmorItemFactory : ArmorItemFactory
             case 2:
             case 3:
             case 4:
-                item.RareItemTypeIndex = RareItemTypeEnum.GlovesOfFreeAction;
+                item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(GlovesOfFreeActionRareItem));
                 break;
             case 5:
             case 6:
             case 7:
-                item.RareItemTypeIndex = RareItemTypeEnum.GlovesOfSlaying;
+                item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(GlovesOfSlayingRareItem));
                 break;
             case 8:
             case 9:
-                item.RareItemTypeIndex = RareItemTypeEnum.GlovesOfAgility;
+                item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(GlovesOfAgilityRareItem));
                 break;
             case 10:
                 IArtifactBias artifactBias = null;
-                item.RareItemTypeIndex = RareItemTypeEnum.GlovesOfPower;
+                item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(GlovesOfPowerRareItem));
                 item.ApplyRandomResistance(ref artifactBias, SaveGame.Rng.DieRoll(22) + 16);
                 break;
         }
@@ -58,12 +58,12 @@ internal abstract class GlovesArmorItemFactory : ArmorItemFactory
         {
             case 1:
                 {
-                    item.RareItemTypeIndex = RareItemTypeEnum.GlovesOfClumsiness;
+                    item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(GlovesOfClumsinessRareItem));
                     break;
                 }
             default:
                 {
-                    item.RareItemTypeIndex = RareItemTypeEnum.GlovesOfWeakness;
+                    item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(GlovesOfWeaknessRareItem));
                     break;
                 }
         }

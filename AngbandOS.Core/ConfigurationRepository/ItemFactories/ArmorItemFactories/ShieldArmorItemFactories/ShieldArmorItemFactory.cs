@@ -24,7 +24,7 @@ internal abstract class ShieldArmorItemFactory : ArmorItemFactory
         {
             case 1:
             case 11:
-                item.RareItemTypeIndex = RareItemTypeEnum.ShieldOfResistAcid;
+                item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(ShieldOfResistAcidRareItem));
                 break;
             case 2:
             case 3:
@@ -32,13 +32,13 @@ internal abstract class ShieldArmorItemFactory : ArmorItemFactory
             case 12:
             case 13:
             case 14:
-                item.RareItemTypeIndex = RareItemTypeEnum.ShieldOfResistLightning;
+                item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(ShieldOfResistLightningRareItem));
                 break;
             case 5:
             case 6:
             case 15:
             case 16:
-                item.RareItemTypeIndex = RareItemTypeEnum.ShieldOfResistFire;
+                item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(ShieldOfResistFireRareItem));
                 break;
             case 7:
             case 8:
@@ -46,7 +46,7 @@ internal abstract class ShieldArmorItemFactory : ArmorItemFactory
             case 17:
             case 18:
             case 19:
-                item.RareItemTypeIndex = RareItemTypeEnum.ShieldOfResistCold;
+                item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(ShieldOfResistColdRareItem));
                 break;
             case 10:
             case 20:
@@ -56,11 +56,11 @@ internal abstract class ShieldArmorItemFactory : ArmorItemFactory
                 {
                     item.RandartItemCharacteristics.ResPois = true;
                 }
-                item.RareItemTypeIndex = RareItemTypeEnum.ShieldOfResistance;
+                item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(ShieldOfResistanceRareItem));
                 break;
             case 21:
             case 22:
-                item.RareItemTypeIndex = RareItemTypeEnum.ShieldOfReflection;
+                item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(ShieldOfReflectionRareItem));
                 break;
             case 23:
                 item.CreateRandart(false);

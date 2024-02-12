@@ -103,7 +103,7 @@ internal class ChaosWpReward : Reward
         qPtr.BonusToHit = 3 + (SaveGame.Rng.DieRoll(SaveGame.Difficulty) % 10);
         qPtr.BonusDamage = 3 + (SaveGame.Rng.DieRoll(SaveGame.Difficulty) % 10);
         qPtr.ApplyRandomResistance(SaveGame.Rng.DieRoll(34) + 4);
-        qPtr.RareItem = SaveGame.SingletonRepository.RareItems.Get(RareItemTypeEnum.WeaponChaotic);
+        qPtr.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(WeaponChaoticRareItem));
         SaveGame.DropNear(qPtr, -1, SaveGame.MapY, SaveGame.MapX);
     }
 }

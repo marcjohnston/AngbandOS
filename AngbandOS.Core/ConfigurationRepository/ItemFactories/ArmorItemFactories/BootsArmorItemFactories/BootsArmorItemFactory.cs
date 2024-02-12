@@ -61,13 +61,13 @@ internal abstract class BootsArmorItemFactory : ArmorItemFactory
         switch (SaveGame.Rng.DieRoll(24))
         {
             case 1:
-                item.RareItemTypeIndex = RareItemTypeEnum.BootsOfSpeed;
+                item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(BootsOfSpeedRareItem));
                 break;
             case 2:
             case 3:
             case 4:
             case 5:
-                item.RareItemTypeIndex = RareItemTypeEnum.BootsOfFreeAction;
+                item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(BootsOfFreeActionRareItem));
                 break;
             case 6:
             case 7:
@@ -77,7 +77,7 @@ internal abstract class BootsArmorItemFactory : ArmorItemFactory
             case 11:
             case 12:
             case 13:
-                item.RareItemTypeIndex = RareItemTypeEnum.BootsOfStealth;
+                item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(BootsOfStealthRareItem));
                 break;
             case 14:
             case 15:
@@ -90,7 +90,7 @@ internal abstract class BootsArmorItemFactory : ArmorItemFactory
             case 22:
             case 23:
             case 24:
-                item.RareItemTypeIndex = RareItemTypeEnum.BootsWinged;
+                item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(BootsWingedRareItem));
                 if (SaveGame.Rng.DieRoll(2) == 1)
                 {
                     IArtifactBias artifactBias = null;
@@ -109,13 +109,13 @@ internal abstract class BootsArmorItemFactory : ArmorItemFactory
         switch (SaveGame.Rng.DieRoll(3))
         {
             case 1:
-                item.RareItemTypeIndex = RareItemTypeEnum.BootsOfNoise;
+                item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(BootsOfNoiseRareItem));
                 break;
             case 2:
-                item.RareItemTypeIndex = RareItemTypeEnum.BootsOfSlowness;
+                item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(BootsOfSlownessRareItem));
                 break;
             case 3:
-                item.RareItemTypeIndex = RareItemTypeEnum.BootsOfAnnoyance;
+                item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(BootsOfAnnoyanceRareItem));
                 break;
         }
     }
