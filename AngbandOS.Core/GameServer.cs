@@ -240,6 +240,7 @@ public class GameServer
         }
         catch (Exception ex)
         {
+            
             console.GameExceptionThrown(ex.Message);
             return false;
         }

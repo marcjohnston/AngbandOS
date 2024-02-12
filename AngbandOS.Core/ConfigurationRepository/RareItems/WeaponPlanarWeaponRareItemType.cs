@@ -11,6 +11,20 @@ namespace AngbandOS.Core.RareItems;
 internal class WeaponPlanarWeaponRareItem : RareItem
 {
     private WeaponPlanarWeaponRareItem(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+
+    public override void ApplyMagic(Item item)
+    {
+        if (SaveGame.Rng.DieRoll(7) == 1)
+        {
+            item.BonusPowerType = RareItemTypeEnum.SpecialAbility;
+        }
+    }
+    public override bool DoActivate(Item item)
+    {
+        SaveGame.RunScriptInt(nameof(TeleportSelfScript), 100);
+        item.RechargeTimeLeft = 50 + SaveGame.Rng.DieRoll(50);
+        return true;
+    }
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(VerticalBarSymbol));
     public override string? DescribeActivationEffect => "teleport every 50+d50 turns";
     public override ColorEnum Color => ColorEnum.BrightWhite;

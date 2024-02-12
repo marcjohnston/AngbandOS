@@ -4288,7 +4288,7 @@ internal class SaveGame
             MsgPrint($"The {oName} {are} already {s}!");
             okay = false;
         }
-        else if (oPtr.RareItemTypeIndex != 0)
+        else if (oPtr.RareItem != null)
         {
             string are = oPtr.Count > 1 ? "are" : "is";
             s = oPtr.Count > 1 ? "rare items" : "a rare item";
@@ -14081,7 +14081,7 @@ internal class SaveGame
             MsgPrint($"Your {oName} resist{s} cursing!");
             return;
         }
-        if (Rng.DieRoll(100) <= heavyChance && (oPtr.FixedArtifact != null || oPtr.RareItemTypeIndex != 0 || !string.IsNullOrEmpty(oPtr.RandartName)))
+        if (Rng.DieRoll(100) <= heavyChance && (oPtr.FixedArtifact != null || oPtr.RareItem != null || !string.IsNullOrEmpty(oPtr.RandartName)))
         {
             if (!oPtr.Characteristics.HeavyCurse)
             {

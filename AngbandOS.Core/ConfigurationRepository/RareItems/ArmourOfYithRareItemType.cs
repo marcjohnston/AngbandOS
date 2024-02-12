@@ -12,6 +12,10 @@ internal class ArmorOfYithRareItem : RareItem
 {
     private ArmorOfYithRareItem(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(OpenBraceSymbol));
+    public override void ApplyMagic(Item item)
+    {
+        item.BonusPowerType = RareItemTypeEnum.SpecialPower;
+    }
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "Armor of Yith";
     public override int Cost => 15000;

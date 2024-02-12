@@ -493,7 +493,7 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey<string>
         {
             return false;
         }
-        if (a.RareItemTypeIndex != b.RareItemTypeIndex)
+        if (a.RareItem != b.RareItem)
         {
             return false;
         }

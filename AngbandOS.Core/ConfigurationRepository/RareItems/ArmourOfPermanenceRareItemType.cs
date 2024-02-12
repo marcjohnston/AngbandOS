@@ -11,6 +11,10 @@ namespace AngbandOS.Core.RareItems;
 internal class ArmorOfPermanenceRareItem : RareItem
 {
     private ArmorOfPermanenceRareItem(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    public override void ApplyMagic(Item item)
+    {
+        item.BonusPowerType = RareItemTypeEnum.SpecialPower;
+    }
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(OpenBraceSymbol));
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "Armor of Permanence";

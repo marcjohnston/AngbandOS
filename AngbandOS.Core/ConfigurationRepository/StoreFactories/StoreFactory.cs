@@ -408,7 +408,7 @@ internal abstract class StoreFactory : IItemFilter, IGetKey<string>
         {
             return false;
         }
-        if (oPtr.RareItemTypeIndex != jPtr.RareItemTypeIndex)
+        if (oPtr.RareItem != jPtr.RareItem)
         {
             return false;
         }

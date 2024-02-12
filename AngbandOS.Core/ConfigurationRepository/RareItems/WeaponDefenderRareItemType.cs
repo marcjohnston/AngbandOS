@@ -11,6 +11,10 @@ namespace AngbandOS.Core.RareItems;
 internal class WeaponDefenderRareItem : RareItem
 {
     private WeaponDefenderRareItem(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    public override void ApplyMagic(Item item)
+    {
+        item.BonusPowerType = RareItemTypeEnum.SpecialSustain;
+    }
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(VerticalBarSymbol));
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "Weapon (Defender)";

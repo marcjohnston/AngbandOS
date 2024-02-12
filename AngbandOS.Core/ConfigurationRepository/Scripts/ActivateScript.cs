@@ -114,11 +114,10 @@ internal class ActivateScript : Script, IScript, IRepeatableScript, ISuccessfulS
 
         // If it wasn't an artifact, then check the other types of activatable item Planar
         // weapon teleports you
-        if (item.RareItemTypeIndex == RareItemTypeEnum.WeaponPlanarWeapon)
+        if (item.RareItem != null && item.RareItem.Activate)
         {
-            SaveGame.RunScriptInt(nameof(TeleportSelfScript), 100);
-            item.RechargeTimeLeft = 50 + SaveGame.Rng.DieRoll(50);
-            return true;
+            // Allow the rare item singleton to perform the activation.
+            item.RareItem.DoActivate(item);
         }
 
         // Check to see if the item can be activated.

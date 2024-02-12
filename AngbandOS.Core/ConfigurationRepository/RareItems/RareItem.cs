@@ -22,6 +22,23 @@ internal abstract class RareItem : IItemCharacteristics, IGetKey<RareItemTypeEnu
         SaveGame = saveGame;
     }
 
+    /// <summary>
+    /// Performs the activation effect on an item and returns true, if the activation was successful; false, otherwise.  Returns false,
+    /// by default.
+    /// </summary>
+    /// <param name="item"></param>
+    /// <returns></returns>
+    public virtual bool DoActivate(Item item) 
+    { 
+        return false;
+    }
+
+    public virtual void ApplyMagic(Item item) { }
+
+    /// <summary>
+    /// Returns additional text that describes the activation ability of the rare item; or null, if the rare item cannot be activated.
+    /// Activate = false;
+    /// </summary>
     public virtual string? DescribeActivationEffect => null;
 
     /// <summary>

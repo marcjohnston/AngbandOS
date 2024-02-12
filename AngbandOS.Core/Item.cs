@@ -226,6 +226,31 @@ internal sealed class Item : IComparable<Item>
 
     public string RandartName = "";
     public RareItemTypeEnum RareItemTypeIndex;
+
+    public RareItem? RareItem
+    {
+        get
+        {
+            if (RareItemTypeIndex == RareItemTypeEnum.None)
+            {
+                return null;
+            }
+            RareItem rareItem = SaveGame.SingletonRepository.RareItems.Get(RareItemTypeIndex);
+            return rareItem;
+        }
+        set
+        {
+            if (value == null)
+            {
+                RareItemTypeIndex = RareItemTypeEnum.None;
+            }
+            else
+            {
+                RareItemTypeIndex = value.RareItemType;
+            }
+        }
+    }
+
     public int RechargeTimeLeft;
 
     /// <summary>
@@ -400,7 +425,7 @@ internal sealed class Item : IComparable<Item>
         clonedItem.Y = Y;
         clonedItem.Marked = Marked;
         clonedItem.FixedArtifact = FixedArtifact;
-        clonedItem.RareItemTypeIndex = RareItemTypeIndex;
+        clonedItem.RareItem = RareItem;
         clonedItem.Inscription = Inscription;
         clonedItem.Count = newCount ?? Count;
         clonedItem.TypeSpecificValue = TypeSpecificValue;
@@ -711,11 +736,10 @@ internal sealed class Item : IComparable<Item>
                 basenm += ' ';
                 basenm += FixedArtifact.FriendlyName;
             }
-            else if (RareItemTypeIndex != RareItemTypeEnum.None)
+            else if (RareItem != null)
             {
-                RareItem ePtr = SaveGame.SingletonRepository.RareItems.Get(RareItemTypeIndex);
                 basenm += ' ';
-                basenm += ePtr.FriendlyName; // This used to be oPtr.Name ... but Long Bow Bow of Velocity is wrong
+                basenm += RareItem.FriendlyName; // This used to be oPtr.Name ... but Long Bow Bow of Velocity is wrong
             }
         }
         if (mode < 1)
@@ -1184,10 +1208,9 @@ internal sealed class Item : IComparable<Item>
         }
 
         // Now merge the characteristics from the rare item type, if there is one.
-        if (RareItemTypeIndex != RareItemTypeEnum.None)
+        if (RareItem != null)
         {
-            RareItem ePtr = SaveGame.SingletonRepository.RareItems.Get(RareItemTypeIndex);
-            Characteristics.Merge(ePtr);
+            Characteristics.Merge(RareItem);
         }
 
         Characteristics.Merge(RandartItemCharacteristics);
@@ -1673,7 +1696,7 @@ internal sealed class Item : IComparable<Item>
 
     public bool IsRare()
     {
-        return RareItemTypeIndex != 0;
+        return RareItem != null;
     }
 
     public ItemCharacteristics ObjectFlagsKnown()
@@ -1709,14 +1732,13 @@ internal sealed class Item : IComparable<Item>
             }
             value = FixedArtifact.Cost;
         }
-        else if (RareItemTypeIndex != RareItemTypeEnum.None)
+        else if (RareItem != null)
         {
-            RareItem ePtr = SaveGame.SingletonRepository.RareItems.Get(RareItemTypeIndex);
-            if (ePtr.Cost == 0)
+            if (RareItem.Cost == 0)
             {
                 return 0;
             }
-            value += ePtr.Cost;
+            value += RareItem.Cost;
         }
         if (Factory.IsWorthless(this))
         {
@@ -1816,7 +1838,7 @@ internal sealed class Item : IComparable<Item>
         {
             return null;
         }
-        if (FixedArtifact == null && RareItemTypeIndex == 0 && BonusPowerType == 0 && BonusPowerSubType != null)
+        if (FixedArtifact == null && RareItem == null && BonusPowerType == 0 && BonusPowerSubType != null)
         {
             return BonusPowerSubType.Description;
         }
@@ -1826,10 +1848,9 @@ internal sealed class Item : IComparable<Item>
             IFixedArtifactActivatible activatibleFixedArtifact = (IFixedArtifactActivatible)FixedArtifact;
             return activatibleFixedArtifact.DescribeActivationEffect;
         }
-        if (RareItemTypeIndex == RareItemTypeEnum.WeaponPlanarWeapon)
+        if (RareItem != null && RareItem.Activate)
         {
-            RareItem rareItem = SaveGame.SingletonRepository.RareItems.Get(RareItemTypeIndex);
-            return rareItem.DescribeActivationEffect;
+            return RareItem.DescribeActivationEffect;
         }
         return Factory.DescribeActivationEffect;
     }
@@ -1919,106 +1940,60 @@ internal sealed class Item : IComparable<Item>
         {
             SaveGame.TreasureRating += 40;
         }
-        else if (RareItemTypeIndex != RareItemTypeEnum.None)
+        else if (RareItem != null)
         {
-            RareItem ePtr = SaveGame.SingletonRepository.RareItems.Get(RareItemTypeIndex);
-            switch (RareItemTypeIndex)
-            {
-                case RareItemTypeEnum.WeaponElderSign:
-                    {
-                        BonusPowerType = RareItemTypeEnum.SpecialSustain;
-                        break;
-                    }
-                case RareItemTypeEnum.WeaponDefender:
-                    {
-                        BonusPowerType = RareItemTypeEnum.SpecialSustain;
-                        break;
-                    }
-                case RareItemTypeEnum.WeaponBlessed:
-                    {
-                        BonusPowerType = RareItemTypeEnum.SpecialAbility;
-                        break;
-                    }
-                case RareItemTypeEnum.WeaponPlanarWeapon:
-                    {
-                        if (SaveGame.Rng.DieRoll(7) == 1)
-                        {
-                            BonusPowerType = RareItemTypeEnum.SpecialAbility;
-                        }
-                        break;
-                    }
-                case RareItemTypeEnum.ArmorOfPermanence:
-                    {
-                        BonusPowerType = RareItemTypeEnum.SpecialPower;
-                        break;
-                    }
-                case RareItemTypeEnum.ArmorOfYith:
-                    {
-                        BonusPowerType = RareItemTypeEnum.SpecialPower;
-                        break;
-                    }
-                case RareItemTypeEnum.HatOfTheMagi:
-                    {
-                        BonusPowerType = RareItemTypeEnum.SpecialAbility;
-                        break;
-                    }
-                case RareItemTypeEnum.CloakOfAman:
-                    {
-                        BonusPowerType = RareItemTypeEnum.SpecialPower;
-                        break;
-                    }
-            }
+            RareItem.ApplyMagic(this);
             if (BonusPowerType != 0 && string.IsNullOrEmpty(RandartName))
             {
                 BonusPowerSubType= SaveGame.SingletonRepository.Activations.ToWeightedRandom().Choose();
             }
-            if (ePtr.Cost == 0)
+            if (RareItem.Cost == 0)
             {
                 IdentBroken = true;
             }
-            if (ePtr.Cursed)
+            if (RareItem.Cursed)
             {
                 IdentCursed = true;
             }
             if (IsCursed() || IsBroken())
             {
-                if (ePtr.MaxToH != 0)
+                if (RareItem.MaxToH != 0)
                 {
-                    BonusToHit -= SaveGame.Rng.DieRoll(ePtr.MaxToH);
+                    BonusToHit -= SaveGame.Rng.DieRoll(RareItem.MaxToH);
                 }
-                if (ePtr.MaxToD != 0)
+                if (RareItem.MaxToD != 0)
                 {
-                    BonusDamage -= SaveGame.Rng.DieRoll(ePtr.MaxToD);
+                    BonusDamage -= SaveGame.Rng.DieRoll(RareItem.MaxToD);
                 }
-                if (ePtr.MaxToA != 0)
+                if (RareItem.MaxToA != 0)
                 {
-                    BonusArmorClass -= SaveGame.Rng.DieRoll(ePtr.MaxToA);
+                    BonusArmorClass -= SaveGame.Rng.DieRoll(RareItem.MaxToA);
                 }
-                if (ePtr.MaxPval != 0)
+                if (RareItem.MaxPval != 0)
                 {
-                    TypeSpecificValue -= SaveGame.Rng.DieRoll(ePtr.MaxPval);
+                    TypeSpecificValue -= SaveGame.Rng.DieRoll(RareItem.MaxPval);
                 }
             }
             else
             {
-                if (ePtr.MaxToH != 0)
+                if (RareItem.MaxToH != 0)
                 {
-                    BonusToHit += SaveGame.Rng.DieRoll(ePtr.MaxToH);
+                    BonusToHit += SaveGame.Rng.DieRoll(RareItem.MaxToH);
                 }
-                if (ePtr.MaxToD != 0)
+                if (RareItem.MaxToD != 0)
                 {
-                    BonusDamage += SaveGame.Rng.DieRoll(ePtr.MaxToD);
+                    BonusDamage += SaveGame.Rng.DieRoll(RareItem.MaxToD);
                 }
-                if (ePtr.MaxToA != 0)
+                if (RareItem.MaxToA != 0)
                 {
-                    BonusArmorClass += SaveGame.Rng.DieRoll(ePtr.MaxToA);
+                    BonusArmorClass += SaveGame.Rng.DieRoll(RareItem.MaxToA);
                 }
-                if (ePtr.MaxPval != 0)
+                if (RareItem.MaxPval != 0)
                 {
-                    TypeSpecificValue += SaveGame.Rng.DieRoll(ePtr.MaxPval);
+                    TypeSpecificValue += SaveGame.Rng.DieRoll(RareItem.MaxPval);
                 }
             }
-            SaveGame.TreasureRating += ePtr.Rating;
+            SaveGame.TreasureRating += RareItem.Rating;
             return;
         }
         if (Factory != null)

@@ -11,6 +11,10 @@ namespace AngbandOS.Core.RareItems;
 internal class HatOfTheMagiRareItem : RareItem
 {
     private HatOfTheMagiRareItem(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    public override void ApplyMagic(Item item)
+    {
+        item.BonusPowerType = RareItemTypeEnum.SpecialAbility;
+    }
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(CloseBraceSymbol));
     public override ColorEnum Color => ColorEnum.Brown;
     public override string Name => "Hat of the Magi";

@@ -17,13 +17,13 @@ internal abstract class CloakArmorItemFactory : ArmorItemFactory
 
     protected override void ApplyRandomGoodRareCharacteristics(Item item)
     {
-        WeightedRandom<RareItemTypeEnum> weightedRandom = new WeightedRandom<RareItemTypeEnum>(SaveGame);
-        weightedRandom.Add(8, RareItemTypeEnum.CloakOfProtection);
-        weightedRandom.Add(8, RareItemTypeEnum.CloakOfStealth);
-        weightedRandom.Add(1, RareItemTypeEnum.CloakOfAman);
-        weightedRandom.Add(1, RareItemTypeEnum.CloakOfElectricity);
-        weightedRandom.Add(1, RareItemTypeEnum.CloakOfImmolation);
-        item.RareItemTypeIndex = weightedRandom.Choose();
+        WeightedRandom<RareItem> weightedRandom = new WeightedRandom<RareItem>(SaveGame);
+        weightedRandom.Add(8, SaveGame.SingletonRepository.RareItems.Get(RareItemTypeEnum.CloakOfProtection));
+        weightedRandom.Add(8, SaveGame.SingletonRepository.RareItems.Get(RareItemTypeEnum.CloakOfStealth));
+        weightedRandom.Add(1, SaveGame.SingletonRepository.RareItems.Get(RareItemTypeEnum.CloakOfAman));
+        weightedRandom.Add(1, SaveGame.SingletonRepository.RareItems.Get(RareItemTypeEnum.CloakOfElectricity));
+        weightedRandom.Add(1, SaveGame.SingletonRepository.RareItems.Get(RareItemTypeEnum.CloakOfImmolation));
+        item.RareItem = weightedRandom.Choose();
     }
 
     protected override void ApplyRandomPoorRareCharacteristics(Item item)
