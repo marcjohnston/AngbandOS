@@ -38,7 +38,6 @@ internal class WeaponPlanarWeaponRareItem : RareItem
     public override int MaxToA => 0;
     public override int MaxToD => 4;
     public override int MaxToH => 4;
-    public override RareItemTypeEnum RareItemType => RareItemTypeEnum.WeaponPlanarWeapon;
     public override int Rarity => 0;
     public override int Rating => 22;
     public override bool Regen => true;

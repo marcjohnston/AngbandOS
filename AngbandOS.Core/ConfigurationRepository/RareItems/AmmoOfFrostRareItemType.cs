@@ -23,7 +23,6 @@ internal class AmmoOfFrostRareItem : RareItem
     public override int MaxToA => 0;
     public override int MaxToD => 0;
     public override int MaxToH => 0;
-    public override RareItemTypeEnum RareItemType => RareItemTypeEnum.AmmoOfFrost;
     public override int Rarity => 0;
     public override int Rating => 10;
     public override int Slot => 23;

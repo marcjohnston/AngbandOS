@@ -21,7 +21,6 @@ internal class AmmoOfBackbitingRareItem : RareItem
     public override int MaxToA => 0;
     public override int MaxToD => 50;
     public override int MaxToH => 50;
-    public override RareItemTypeEnum RareItemType => RareItemTypeEnum.AmmoOfBackbiting;
     public override int Rarity => 0;
     public override int Rating => 0;
     public override int Slot => 23;

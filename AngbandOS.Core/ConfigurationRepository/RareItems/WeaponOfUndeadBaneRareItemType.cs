@@ -21,7 +21,6 @@ internal class WeaponOfUndeadBaneRareItem : RareItem
     public override int MaxToA => 0;
     public override int MaxToD => 0;
     public override int MaxToH => 0;
-    public override RareItemTypeEnum RareItemType => RareItemTypeEnum.WeaponOfUndeadBane;
     public override int Rarity => 0;
     public override int Rating => 24;
     public override bool SeeInvis => true;

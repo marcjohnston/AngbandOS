@@ -21,7 +21,6 @@ internal class AmmoOfWoundingRareItem : RareItem
     public override int MaxToA => 0;
     public override int MaxToD => 6;
     public override int MaxToH => 6;
-    public override RareItemTypeEnum RareItemType => RareItemTypeEnum.AmmoOfWounding;
     public override int Rarity => 0;
     public override int Rating => 5;
     public override int Slot => 23;

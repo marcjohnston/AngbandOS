@@ -31,7 +31,6 @@ internal class WeaponDefenderRareItem : RareItem
     public override int MaxToA => 8;
     public override int MaxToD => 4;
     public override int MaxToH => 4;
-    public override RareItemTypeEnum RareItemType => RareItemTypeEnum.WeaponDefender;
     public override int Rarity => 0;
     public override int Rating => 25;
     public override bool Regen => true;

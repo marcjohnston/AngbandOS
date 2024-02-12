@@ -25,7 +25,6 @@ internal class OrbOfInsightRareItem : RareItem
     public override int MaxToA => 0;
     public override int MaxToD => 0;
     public override int MaxToH => 0;
-    public override RareItemTypeEnum RareItemType => RareItemTypeEnum.OrbOfInsight;
     public override int Rarity => 0;
     public override int Rating => 0;
     public override bool SeeInvis => true;

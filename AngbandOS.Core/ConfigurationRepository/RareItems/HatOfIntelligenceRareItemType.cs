@@ -22,7 +22,6 @@ internal class HatOfIntelligenceRareItem : RareItem
     public override int MaxToA => 0;
     public override int MaxToD => 0;
     public override int MaxToH => 0;
-    public override RareItemTypeEnum RareItemType => RareItemTypeEnum.HatOfIntelligence;
     public override int Rarity => 0;
     public override int Rating => 13;
     public override int Slot => 33;

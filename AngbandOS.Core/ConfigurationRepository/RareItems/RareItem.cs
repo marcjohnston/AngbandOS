@@ -180,8 +180,6 @@ internal abstract class RareItem : IItemCharacteristics, IGetKey<string>
 
     public virtual bool PermaCurse { get; set; } = false;
 
-    public virtual RareItemTypeEnum RareItemType { get; }
-
     public abstract int Rarity { get; }
 
     public abstract int Rating { get; }

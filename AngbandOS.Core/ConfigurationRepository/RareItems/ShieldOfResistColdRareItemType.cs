@@ -22,7 +22,6 @@ internal class ShieldOfResistColdRareItem : RareItem
     public override int MaxToA => 0;
     public override int MaxToD => 0;
     public override int MaxToH => 0;
-    public override RareItemTypeEnum RareItemType => RareItemTypeEnum.ShieldOfResistCold;
     public override int Rarity => 0;
     public override int Rating => 12;
     public override bool ResCold => true;

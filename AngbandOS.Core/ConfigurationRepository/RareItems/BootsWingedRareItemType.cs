@@ -22,7 +22,6 @@ internal class BootsWingedRareItem : RareItem
     public override int MaxToA => 0;
     public override int MaxToD => 0;
     public override int MaxToH => 0;
-    public override RareItemTypeEnum RareItemType => RareItemTypeEnum.BootsWinged;
     public override int Rarity => 0;
     public override int Rating => 7;
     public override int Slot => 35;

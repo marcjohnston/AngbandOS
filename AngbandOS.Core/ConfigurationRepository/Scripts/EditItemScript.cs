@@ -25,12 +25,7 @@ internal class EditItemScript : Script, IScript
         }
         do
         {
-            string initial = "";
-            if (item.RareItem != null)
-            {
-                initial = item.RareItem.RareItemType.ToString();
-            }
-            if (!SaveGame.GetString("Rare Item Index: ", out string tmpVal, initial, 9))
+            if (!SaveGame.GetString("Rare Item Index: ", out string tmpVal, "", 9))
             {
                 return;
             }
