@@ -47,7 +47,7 @@ internal abstract class DictionaryRepository<TKey, TValue> : ListRepository<TVal
         return entity.ToJson();
     }
 
-    public TValue Get(TKey key)
+    public virtual TValue Get(TKey key)
     {
         if (!dictionary.TryGetValue(key, out TValue? value))
         {
