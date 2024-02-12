@@ -28,6 +28,12 @@ internal abstract class PotionItemFactory : ItemFactory, IFlavor
 
     public override int GetAdditionalMassProduceCount(Item item)
     {
+        // Rare items will not mass produce.
+        if (item.RareItem != null)
+        {
+            return 0;
+        }
+
         int cost = item.Value();
         if (cost <= 60)
         {

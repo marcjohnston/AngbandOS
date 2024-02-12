@@ -51,11 +51,13 @@ internal abstract class ArmorItemFactory : ItemFactory
 
     public override int GetAdditionalMassProduceCount(Item item)
     {
-        int cost = item.Value();
-        if (item.RareItemTypeIndex != 0)
+        // Rare items will not mass produce.
+        if (item.RareItem != null)
         {
             return 0;
         }
+
+        int cost = item.Value();
         if (cost <= 10)
         {
             return item.MassRoll(3, 5);

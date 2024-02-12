@@ -15,6 +15,12 @@ internal abstract class FlaskItemFactory : ItemFactory
     public override bool EasyKnow => true;
     public override int GetAdditionalMassProduceCount(Item item)
     {
+        // Rare items will not mass produce.
+        if (item.RareItem != null)
+        {
+            return 0;
+        }
+
         int cost = item.Value();
         if (cost <= 5)
         {
