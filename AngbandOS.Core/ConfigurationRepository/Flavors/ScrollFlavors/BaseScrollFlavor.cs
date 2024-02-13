@@ -13,8 +13,4 @@ internal abstract class BaseScrollFlavor : Flavor
     protected BaseScrollFlavor(SaveGame saveGame) : base(saveGame)
     {
     }
-
-    public static readonly string[] Syllables =
-    {
-    };
 }

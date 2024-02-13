@@ -84,7 +84,7 @@ internal class SaveGame
     public Dungeon RecallDungeon;
     public int Resting;
     public int Running;
-    public List<ScrollFlavor> UnreadableScrollFlavors; // These are generated from the available base scrolls.
+    public List<UnreadableScrollFlavor> UnreadableScrollFlavors; // These are generated from the available base scrolls.
     public int TargetCol;
     public int TargetRow;
     public int TargetWho;
@@ -2620,7 +2620,7 @@ internal class SaveGame
             if (kPtr.HasFlavor)
             {
                 // Convert the factory into the IFlavor type.
-                IFlavor flavorFactory = (IFlavor)kPtr;
+                IFlavorFactory flavorFactory = (IFlavorFactory)kPtr;
 
                 // Get the repository for the flavors.
                 IEnumerable<Flavor>? flavorRepository = flavorFactory.GetFlavorRepository();
@@ -3058,7 +3058,7 @@ internal class SaveGame
         int i, j;
         UseFixed = true;
         FixedSeed = _seedFlavor;
-        UnreadableScrollFlavors = new List<ScrollFlavor>();
+        UnreadableScrollFlavors = new List<UnreadableScrollFlavor>();
         for (i = 0; i < Constants.MaxNumberOfScrollFlavorsGenerated; i++)
         {
             while (true)
@@ -3094,7 +3094,7 @@ internal class SaveGame
                 {
                     int index = RandomLessThan(SingletonRepository.ScrollFlavors.Count);
                     BaseScrollFlavor baseFlavor = SingletonRepository.ScrollFlavors[index];
-                    ScrollFlavor flavor = new ScrollFlavor(this, baseFlavor.Symbol, baseFlavor.Color, name);
+                    UnreadableScrollFlavor flavor = new UnreadableScrollFlavor(this, baseFlavor.Symbol, baseFlavor.Color, name);
                     UnreadableScrollFlavors.Add(flavor);
                     break;
                 }

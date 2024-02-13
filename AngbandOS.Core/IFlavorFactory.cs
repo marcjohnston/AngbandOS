@@ -5,12 +5,12 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Flavors;
+namespace AngbandOS.Core;
 
 /// <summary>
 /// Represents the interface an item factory needs to implement for the item to have a flavor.
 /// </summary>
-internal interface IFlavor
+internal interface IFlavorFactory
 {
     /// <summary>
     /// Returns the repository to use for the issuance of the flavors or null, if the factory shouldn't be issued a flavor.  Null is returned

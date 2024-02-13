@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
-internal abstract class AmuletJeweleryItemFactory : JewelleryItemFactory, IFlavor
+internal abstract class AmuletJeweleryItemFactory : JewelleryItemFactory, IFlavorFactory
 {
     public AmuletJeweleryItemFactory(SaveGame saveGame) : base(saveGame) { }
 
@@ -20,7 +20,7 @@ internal abstract class AmuletJeweleryItemFactory : JewelleryItemFactory, IFlavo
     /// <summary>
     /// Returns the factory that this item was created by; casted as an IFlavor.
     /// </summary>
-    public IFlavor FlavorFactory => (IFlavor)this;
+    public IFlavorFactory FlavorFactory => (IFlavorFactory)this;
 
     public override string GetDescription(Item item, bool includeCountPrefix, bool isFlavorAware)
     {

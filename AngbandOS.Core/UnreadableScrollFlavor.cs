@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Flavors;
 
 [Serializable]
-internal class ScrollFlavor : Flavor
+internal class UnreadableScrollFlavor : Flavor
 {
     private readonly Symbol _symbol;
     private readonly ColorEnum _color;
@@ -17,7 +17,7 @@ internal class ScrollFlavor : Flavor
     public override Symbol Symbol => _symbol;
     public override ColorEnum Color => _color;
     public override string Name => _name;
-    public ScrollFlavor(SaveGame saveGame, Symbol symbol, ColorEnum color, string Name) : base(saveGame)
+    public UnreadableScrollFlavor(SaveGame saveGame, Symbol symbol, ColorEnum color, string Name) : base(saveGame)
     {
         _symbol = symbol;
         _color = color;

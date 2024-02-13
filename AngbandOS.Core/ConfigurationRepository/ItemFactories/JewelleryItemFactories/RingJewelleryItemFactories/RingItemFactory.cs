@@ -8,12 +8,12 @@
 namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
-internal abstract class RingItemFactory : JewelleryItemFactory, IFlavor
+internal abstract class RingItemFactory : JewelleryItemFactory, IFlavorFactory
 {
     /// <summary>
     /// Returns the factory that this item was created by; casted as an IFlavor.
     /// </summary>
-    public IFlavor FlavorFactory => (IFlavor)this;
+    public IFlavorFactory FlavorFactory => (IFlavorFactory)this;
 
     public override string GetDescription(Item item, bool includeCountPrefix, bool isFlavorAware)
     {
