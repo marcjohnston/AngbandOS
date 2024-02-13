@@ -16,7 +16,7 @@ internal class IntelligenceArtifactBias : ArtifactBias
         if (!item.RandartItemCharacteristics.Int)
         {
             item.RandartItemCharacteristics.Int = true;
-            if (SaveGame.Rng.DieRoll(2) == 1)
+            if (SaveGame.DieRoll(2) == 1)
             {
                 return true;
             }
@@ -29,7 +29,7 @@ internal class IntelligenceArtifactBias : ArtifactBias
         if (!item.RandartItemCharacteristics.SustInt)
         {
             item.RandartItemCharacteristics.SustInt = true;
-            if (SaveGame.Rng.DieRoll(2) == 1)
+            if (SaveGame.DieRoll(2) == 1)
             {
                 return true;
             }

@@ -82,7 +82,7 @@ internal class HalfTrollRace : Race
         {
             SaveGame.MsgPrint("RAAAGH!");
             SaveGame.TimedFear.ResetTimer();
-            SaveGame.TimedSuperheroism.AddTimer(10 + SaveGame.Rng.DieRoll(SaveGame.ExperienceLevel));
+            SaveGame.TimedSuperheroism.AddTimer(10 + SaveGame.DieRoll(SaveGame.ExperienceLevel));
             SaveGame.RestoreHealth(30);
         }
     }

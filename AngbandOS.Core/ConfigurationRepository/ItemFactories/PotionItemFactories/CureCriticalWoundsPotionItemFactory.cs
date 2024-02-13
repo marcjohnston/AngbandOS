@@ -30,7 +30,7 @@ internal class CureCriticalWoundsPotionItemFactory : PotionItemFactory
 
         // Cure critical wounds heals you 6d8 health, and cures blindness, confusion, stun,
         // poison, and bleeding
-        if (SaveGame.RestoreHealth(SaveGame.Rng.DiceRoll(6, 8)))
+        if (SaveGame.RestoreHealth(SaveGame.DiceRoll(6, 8)))
         {
             identified = true;
         }
@@ -60,7 +60,7 @@ internal class CureCriticalWoundsPotionItemFactory : PotionItemFactory
 
     public override bool Smash(int who, int y, int x)
     {
-        SaveGame.Project(who, 2, y, x, SaveGame.Rng.DiceRoll(6, 3), SaveGame.SingletonRepository.Projectiles.Get(nameof(OldHealProjectile)), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
+        SaveGame.Project(who, 2, y, x, SaveGame.DiceRoll(6, 3), SaveGame.SingletonRepository.Projectiles.Get(nameof(OldHealProjectile)), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
         return false;
     }
     public override Item CreateItem() => new Item(SaveGame, this);

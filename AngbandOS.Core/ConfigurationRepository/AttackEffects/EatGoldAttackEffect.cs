@@ -18,10 +18,10 @@ internal class EatGoldAttackEffect : AttackEffect
         // Steal some money
         SaveGame.TakeHit(damage, monsterDescription);
         obvious = true;
-        if ((SaveGame.TimedParalysis.TurnsRemaining == 0 && SaveGame.Rng.RandomLessThan(100) < SaveGame.AbilityScores[Ability.Dexterity].DexTheftAvoidance + SaveGame.ExperienceLevel) || SaveGame.HasAntiTheft)
+        if ((SaveGame.TimedParalysis.TurnsRemaining == 0 && SaveGame.RandomLessThan(100) < SaveGame.AbilityScores[Ability.Dexterity].DexTheftAvoidance + SaveGame.ExperienceLevel) || SaveGame.HasAntiTheft)
         {
             SaveGame.MsgPrint("You quickly protect your money pouch!");
-            if (SaveGame.Rng.RandomLessThan(3) != 0)
+            if (SaveGame.RandomLessThan(3) != 0)
             {
                 blinked = true;
             }
@@ -29,14 +29,14 @@ internal class EatGoldAttackEffect : AttackEffect
         else
         {
             // The amount of gold taken depends on how much you're carrying
-            int gold = (SaveGame.Gold / 10) + SaveGame.Rng.DieRoll(25);
+            int gold = (SaveGame.Gold / 10) + SaveGame.DieRoll(25);
             if (gold < 2)
             {
                 gold = 2;
             }
             if (gold > 5000)
             {
-                gold = (SaveGame.Gold / 20) + SaveGame.Rng.DieRoll(3000);
+                gold = (SaveGame.Gold / 20) + SaveGame.DieRoll(3000);
             }
             if (gold > SaveGame.Gold)
             {
@@ -70,7 +70,7 @@ internal class EatGoldAttackEffect : AttackEffect
         // Monsters don't actually steal from other monsters
         pt = null;
         damage = 0;
-        if (SaveGame.Rng.DieRoll(2) == 1)
+        if (SaveGame.DieRoll(2) == 1)
         {
             blinked = true;
         }

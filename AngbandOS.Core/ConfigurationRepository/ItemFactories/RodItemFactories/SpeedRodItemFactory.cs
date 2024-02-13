@@ -28,7 +28,7 @@ internal class SpeedRodItemFactory : RodItemFactory
     {
         if (SaveGame.TimedHaste.TurnsRemaining == 0)
         {
-            if (SaveGame.TimedHaste.SetTimer(SaveGame.Rng.DieRoll(30) + 15))
+            if (SaveGame.TimedHaste.SetTimer(SaveGame.DieRoll(30) + 15))
             {
                 zapRodEvent.Identified = true;
             }

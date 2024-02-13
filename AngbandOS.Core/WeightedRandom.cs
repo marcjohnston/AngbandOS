@@ -54,7 +54,7 @@ internal class WeightedRandom<T>
         {
             return default;
         }
-        int choice = SaveGame.Rng.RandomLessThan(dictionary.Count);
+        int choice = SaveGame.RandomLessThan(dictionary.Count);
         return dictionary[choice];
     }
 }

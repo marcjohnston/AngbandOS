@@ -16,11 +16,11 @@ internal class Type1RoomLayout : RoomLayout
     {
         int y, x;
         GridTile cPtr;
-        bool light = SaveGame.Difficulty <= SaveGame.Rng.DieRoll(25);
-        int y1 = yval - SaveGame.Rng.DieRoll(4);
-        int y2 = yval + SaveGame.Rng.DieRoll(3);
-        int x1 = xval - SaveGame.Rng.DieRoll(11);
-        int x2 = xval + SaveGame.Rng.DieRoll(11);
+        bool light = SaveGame.Difficulty <= SaveGame.DieRoll(25);
+        int y1 = yval - SaveGame.DieRoll(4);
+        int y2 = yval + SaveGame.DieRoll(3);
+        int x1 = xval - SaveGame.DieRoll(11);
+        int x2 = xval + SaveGame.DieRoll(11);
         for (y = y1 - 1; y <= y2 + 1; y++)
         {
             for (x = x1 - 1; x <= x2 + 1; x++)
@@ -50,7 +50,7 @@ internal class Type1RoomLayout : RoomLayout
             cPtr.SetFeature(wallOuter);
         }
         Tile pillar = SaveGame.SingletonRepository.Tiles.Get("Pillar");
-        if (SaveGame.Rng.RandomLessThan(20) == 0)
+        if (SaveGame.RandomLessThan(20) == 0)
         {
             for (y = y1; y <= y2; y += 2)
             {
@@ -61,7 +61,7 @@ internal class Type1RoomLayout : RoomLayout
                 }
             }
         }
-        else if (SaveGame.Rng.RandomLessThan(50) == 0)
+        else if (SaveGame.RandomLessThan(50) == 0)
         {
             for (y = y1 + 2; y <= y2 - 2; y += 2)
             {

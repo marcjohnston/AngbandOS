@@ -26,12 +26,12 @@ internal class ConfusionProjectile : Projectile
         {
             obvious = true;
         }
-        int doConf = (10 + SaveGame.Rng.DieRoll(15) + r) / (r + 1);
+        int doConf = (10 + SaveGame.DieRoll(15) + r) / (r + 1);
         if (rPtr.BreatheConfusion)
         {
             note = " resists.";
             dam *= 2;
-            dam /= SaveGame.Rng.DieRoll(6) + 6;
+            dam /= SaveGame.DieRoll(6) + 6;
         }
         else if (rPtr.ImmuneConfusion)
         {
@@ -74,11 +74,11 @@ internal class ConfusionProjectile : Projectile
         if (SaveGame.HasConfusionResistance)
         {
             dam *= 5;
-            dam /= SaveGame.Rng.DieRoll(6) + 6;
+            dam /= SaveGame.DieRoll(6) + 6;
         }
         if (!SaveGame.HasConfusionResistance)
         {
-            SaveGame.TimedConfusion.AddTimer(SaveGame.Rng.DieRoll(20) + 10);
+            SaveGame.TimedConfusion.AddTimer(SaveGame.DieRoll(20) + 10);
         }
         SaveGame.TakeHit(dam, killer);
         return true;

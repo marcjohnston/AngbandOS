@@ -26,7 +26,7 @@ internal class MoveBodyScript : Script, IScript
         SaveGame.Energy -= 60 - SaveGame.ExperienceLevel;
         if (!SaveGame.GridPassableNoCreature(ij, ii) || SaveGame.Grid[ij][ii].TileFlags.IsSet(GridTile.InVault) ||
             SaveGame.Distance(ij, ii, SaveGame.MapY, SaveGame.MapX) > SaveGame.ExperienceLevel + 2 ||
-            SaveGame.Rng.RandomLessThan(SaveGame.ExperienceLevel * SaveGame.ExperienceLevel / 2) == 0)
+            SaveGame.RandomLessThan(SaveGame.ExperienceLevel * SaveGame.ExperienceLevel / 2) == 0)
         {
             SaveGame.MsgPrint("You fail to concentrate correctly!");
             SaveGame.Energy -= 100;

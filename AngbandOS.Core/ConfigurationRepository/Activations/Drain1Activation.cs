@@ -18,7 +18,7 @@ internal class Drain1Activation : DirectionalActivation
 
     public override string? PreActivationMessage => "It glows black...";
 
-    public override int RechargeTime() => SaveGame.Rng.RandomLessThan(100) + 100;
+    public override int RechargeTime() => SaveGame.RandomLessThan(100) + 100;
 
     protected override bool Activate(int direction)
     {

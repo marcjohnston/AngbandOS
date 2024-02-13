@@ -40,7 +40,7 @@ internal abstract class BootsArmorItemFactory : ArmorItemFactory
 
             if (power > 1)
             {
-                if (SaveGame.Rng.DieRoll(20) == 1)
+                if (SaveGame.DieRoll(20) == 1)
                 {
                     item.CreateRandart(false);
                 }
@@ -58,7 +58,7 @@ internal abstract class BootsArmorItemFactory : ArmorItemFactory
 
     protected override void ApplyRandomGoodRareCharacteristics(Item item)
     {
-        switch (SaveGame.Rng.DieRoll(24))
+        switch (SaveGame.DieRoll(24))
         {
             case 1:
                 item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(BootsOfSpeedRareItem));
@@ -91,10 +91,10 @@ internal abstract class BootsArmorItemFactory : ArmorItemFactory
             case 23:
             case 24:
                 item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(BootsWingedRareItem));
-                if (SaveGame.Rng.DieRoll(2) == 1)
+                if (SaveGame.DieRoll(2) == 1)
                 {
                     IArtifactBias artifactBias = null;
-                    item.ApplyRandomResistance(ref artifactBias, SaveGame.Rng.DieRoll(22) + 16);
+                    item.ApplyRandomResistance(ref artifactBias, SaveGame.DieRoll(22) + 16);
                 }
                 break;
         }
@@ -106,7 +106,7 @@ internal abstract class BootsArmorItemFactory : ArmorItemFactory
     /// <param name="item"></param>
     protected override void ApplyRandomPoorRareCharacteristics(Item item)
     {
-        switch (SaveGame.Rng.DieRoll(3))
+        switch (SaveGame.DieRoll(3))
         {
             case 1:
                 item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(BootsOfNoiseRareItem));

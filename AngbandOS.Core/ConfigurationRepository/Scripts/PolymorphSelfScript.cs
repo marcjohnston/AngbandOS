@@ -28,13 +28,13 @@ internal class PolymorphSelfScript : Script, IScript, IRepeatableScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        int effects = SaveGame.Rng.DieRoll(2);
+        int effects = SaveGame.DieRoll(2);
         int tmp = 0;
         bool moreEffects = true;
         SaveGame.MsgPrint("You feel a change coming over you...");
         while (effects-- != 0 && moreEffects)
         {
-            switch (SaveGame.Rng.DieRoll(12))
+            switch (SaveGame.DieRoll(12))
             {
                 case 1:
                 case 2:
@@ -54,7 +54,7 @@ internal class PolymorphSelfScript : Script, IScript, IRepeatableScript
                         Race newRace;
                         do
                         {
-                            newRaceIndex = SaveGame.Rng.RandomLessThan(SaveGame.SingletonRepository.Races.Count);
+                            newRaceIndex = SaveGame.RandomLessThan(SaveGame.SingletonRepository.Races.Count);
                             newRace = SaveGame.SingletonRepository.Races[newRaceIndex];
                         } while (newRace is Race);
                         SaveGame.MsgPrint($"You turn into {newRace.IndefiniteArticleForTitle} {newRace.Title}!");
@@ -68,13 +68,13 @@ internal class PolymorphSelfScript : Script, IScript, IRepeatableScript
                     SaveGame.MsgPrint("You polymorph into an abomination!");
                     while (tmp < 6)
                     {
-                        SaveGame.DecreaseAbilityScore(tmp, SaveGame.Rng.FixedSeed + 6, SaveGame.Rng.DieRoll(3) == 1);
+                        SaveGame.DecreaseAbilityScore(tmp, SaveGame.FixedSeed + 6, SaveGame.DieRoll(3) == 1);
                         tmp++;
                     }
-                    if (SaveGame.Rng.DieRoll(6) == 1)
+                    if (SaveGame.DieRoll(6) == 1)
                     {
                         SaveGame.MsgPrint("You find living difficult in your present form!");
-                        SaveGame.TakeHit(SaveGame.Rng.DiceRoll(SaveGame.Rng.DieRoll(SaveGame.ExperienceLevel), SaveGame.ExperienceLevel), "a lethal mutation");
+                        SaveGame.TakeHit(SaveGame.DiceRoll(SaveGame.DieRoll(SaveGame.ExperienceLevel), SaveGame.ExperienceLevel), "a lethal mutation");
                     }
                     SaveGame.ShuffleAbilityScores();
                     break;

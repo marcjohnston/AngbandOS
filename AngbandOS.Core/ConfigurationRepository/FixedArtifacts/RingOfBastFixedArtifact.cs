@@ -20,13 +20,13 @@ internal class RingOfBastFixedArtifact : FixedArtifact, IFixedArtifactActivatibl
         SaveGame.MsgPrint("The ring glows brightly...");
         if (SaveGame.TimedHaste.TurnsRemaining == 0)
         {
-            SaveGame.TimedHaste.SetTimer(base.SaveGame.Rng.DieRoll(75) + 75);
+            SaveGame.TimedHaste.SetTimer(base.SaveGame.DieRoll(75) + 75);
         }
         else
         {
             SaveGame.TimedHaste.AddTimer(5);
         }
-        item.RechargeTimeLeft = base.SaveGame.Rng.RandomLessThan(150) + 150;
+        item.RechargeTimeLeft = base.SaveGame.RandomLessThan(150) + 150;
     }
     public string DescribeActivationEffect => "haste self (75+d75 turns) every 150+d150 turns";
 

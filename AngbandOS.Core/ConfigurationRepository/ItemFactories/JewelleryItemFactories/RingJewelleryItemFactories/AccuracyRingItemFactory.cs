@@ -14,11 +14,11 @@ internal class AccuracyRingItemFactory : RingItemFactory
 
     public override void ApplyMagic(Item item, int level, int power, Store? store)
     {
-        if (power == 0 && SaveGame.Rng.RandomLessThan(100) < 50)
+        if (power == 0 && SaveGame.RandomLessThan(100) < 50)
         {
             power = -1;
         }
-        item.BonusToHit = 5 + SaveGame.Rng.DieRoll(8) + item.GetBonusValue(10, level);
+        item.BonusToHit = 5 + SaveGame.DieRoll(8) + item.GetBonusValue(10, level);
         if (power < 0)
         {
             item.IdentBroken = true;

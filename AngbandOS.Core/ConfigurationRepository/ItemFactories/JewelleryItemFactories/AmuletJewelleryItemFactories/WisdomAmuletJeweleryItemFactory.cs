@@ -16,7 +16,7 @@ internal class WisdomAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
     public override void ApplyMagic(Item item, int level, int power, Store? store)
     {
         item.TypeSpecificValue = 1 + item.GetBonusValue(5, level);
-        if (power < 0 || (power == 0 && SaveGame.Rng.RandomLessThan(100) < 50))
+        if (power < 0 || (power == 0 && SaveGame.RandomLessThan(100) < 50))
         {
             item.IdentBroken = true;
             item.IdentCursed = true;

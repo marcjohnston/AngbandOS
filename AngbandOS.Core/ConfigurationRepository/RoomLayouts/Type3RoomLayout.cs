@@ -16,10 +16,10 @@ internal class Type3RoomLayout : RoomLayout
     {
         int y, x, wy;
         GridTile cPtr;
-        bool light = SaveGame.Difficulty <= SaveGame.Rng.DieRoll(25);
+        bool light = SaveGame.Difficulty <= SaveGame.DieRoll(25);
         int wx = wy = 1;
-        int dy = SaveGame.Rng.RandomBetween(3, 4);
-        int dx = SaveGame.Rng.RandomBetween(3, 11);
+        int dy = SaveGame.RandomBetween(3, 4);
+        int dx = SaveGame.RandomBetween(3, 11);
         int y1A = yval - dy;
         int y2A = yval + dy;
         int x1A = xval - wx;
@@ -101,7 +101,7 @@ internal class Type3RoomLayout : RoomLayout
                 cPtr.RevertToBackground();
             }
         }
-        switch (SaveGame.Rng.RandomLessThan(4))
+        switch (SaveGame.RandomLessThan(4))
         {
             case 1:
                 {
@@ -131,7 +131,7 @@ internal class Type3RoomLayout : RoomLayout
                         cPtr = SaveGame.Grid[y2B][x];
                         cPtr.SetFeature(wallInner);
                     }
-                    switch (SaveGame.Rng.RandomLessThan(4))
+                    switch (SaveGame.RandomLessThan(4))
                     {
                         case 0:
                             PlaceSecretDoor(y1B, xval);
@@ -150,13 +150,13 @@ internal class Type3RoomLayout : RoomLayout
                             break;
                     }
                     SaveGame.PlaceObject(yval, xval, false, false);
-                    VaultMonsters(yval, xval, SaveGame.Rng.RandomLessThan(2) + 3);
-                    VaultTraps(yval, xval, 4, 4, SaveGame.Rng.RandomLessThan(3) + 2);
+                    VaultMonsters(yval, xval, SaveGame.RandomLessThan(2) + 3);
+                    VaultTraps(yval, xval, 4, 4, SaveGame.RandomLessThan(3) + 2);
                     break;
                 }
             case 3:
                 {
-                    if (SaveGame.Rng.RandomLessThan(3) == 0)
+                    if (SaveGame.RandomLessThan(3) == 0)
                     {
                         for (y = y1B; y <= y2B; y++)
                         {
@@ -180,7 +180,7 @@ internal class Type3RoomLayout : RoomLayout
                             cPtr = SaveGame.Grid[y2B + 1][x];
                             cPtr.SetFeature(wallInner);
                         }
-                        if (SaveGame.Rng.RandomLessThan(3) == 0)
+                        if (SaveGame.RandomLessThan(3) == 0)
                         {
                             PlaceSecretDoor(yval, x1A - 1);
                             PlaceSecretDoor(yval, x2A + 1);
@@ -188,7 +188,7 @@ internal class Type3RoomLayout : RoomLayout
                             PlaceSecretDoor(y2B + 1, xval);
                         }
                     }
-                    else if (SaveGame.Rng.RandomLessThan(3) == 0)
+                    else if (SaveGame.RandomLessThan(3) == 0)
                     {
                         cPtr = SaveGame.Grid[yval][xval];
                         cPtr.SetFeature(wallInner);
@@ -201,7 +201,7 @@ internal class Type3RoomLayout : RoomLayout
                         cPtr = SaveGame.Grid[yval][x2A];
                         cPtr.SetFeature(wallInner);
                     }
-                    else if (SaveGame.Rng.RandomLessThan(3) == 0)
+                    else if (SaveGame.RandomLessThan(3) == 0)
                     {
                         cPtr = SaveGame.Grid[yval][xval];
                         cPtr.SetFeature(pillar);

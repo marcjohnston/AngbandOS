@@ -17,7 +17,7 @@ internal class HolinessStaffItemFactory : StaffItemFactory
 
     public override void ApplyMagic(Item item, int level, int power, Store? store)
     {
-        item.TypeSpecificValue = SaveGame.Rng.DieRoll(2) + 2;
+        item.TypeSpecificValue = SaveGame.DieRoll(2) + 2;
     }
     public override int[] Chance => new int[] { 2, 0, 0, 0 };
     public override int Cost => 4500;
@@ -34,7 +34,7 @@ internal class HolinessStaffItemFactory : StaffItemFactory
             eventArgs.Identified = true;
         }
         int k = 3 * SaveGame.ExperienceLevel;
-        if (SaveGame.TimedProtectionFromEvil.AddTimer(SaveGame.Rng.DieRoll(25) + k))
+        if (SaveGame.TimedProtectionFromEvil.AddTimer(SaveGame.DieRoll(25) + k))
         {
             eventArgs.Identified = true;
         }

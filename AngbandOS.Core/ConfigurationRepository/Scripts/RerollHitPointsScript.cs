@@ -32,7 +32,7 @@ internal class RerollHitPointsScript : Script, IScript
         }
         for (i = 1; i < Constants.PyMaxLevel; i++)
         {
-            int j = SaveGame.Rng.DieRoll(Constants.PyMaxLevel - 1);
+            int j = SaveGame.DieRoll(Constants.PyMaxLevel - 1);
             lastroll = SaveGame.PlayerHp[i];
             SaveGame.PlayerHp[i] = SaveGame.PlayerHp[j];
             SaveGame.PlayerHp[j] = lastroll;

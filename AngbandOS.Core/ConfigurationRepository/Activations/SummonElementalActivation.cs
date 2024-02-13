@@ -18,7 +18,7 @@ internal class SummonElementalActivation : Activation
 
     public override bool Activate()
     {
-        if (SaveGame.Rng.DieRoll(3) == 1)
+        if (SaveGame.DieRoll(3) == 1)
         {
             if (SaveGame.SummonSpecific(SaveGame.MapY, SaveGame.MapX, (int)(SaveGame.ExperienceLevel * 1.5), SaveGame.SingletonRepository.MonsterFilters.Get(nameof(ElementalMonsterFilter))))
             {

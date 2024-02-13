@@ -22,7 +22,7 @@ internal class WoodenTorchLightSourceItemFactory : LightSourceItemFactory
         }
         else if (item.TypeSpecificValue != 0)
         {
-            item.TypeSpecificValue = SaveGame.Rng.DieRoll(item.TypeSpecificValue);
+            item.TypeSpecificValue = SaveGame.DieRoll(item.TypeSpecificValue);
         }
     }
 

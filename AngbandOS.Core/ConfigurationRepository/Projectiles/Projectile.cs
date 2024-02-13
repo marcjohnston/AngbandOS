@@ -396,14 +396,14 @@ internal abstract class Projectile : IGetKey<string>
                         continue;
                     }
                     MonsterRace refPtr = SaveGame.Monsters[cPtr.MonsterIndex].Race;
-                    if (refPtr.Reflecting && SaveGame.Rng.DieRoll(10) != 1 && distHack > 1 && GetType().Name != "ProjectWizardBolt")
+                    if (refPtr.Reflecting && SaveGame.DieRoll(10) != 1 && distHack > 1 && GetType().Name != "ProjectWizardBolt")
                     {
                         int tY, tX;
                         int maxAttempts = 10;
                         do
                         {
-                            tY = ySaver - 1 + SaveGame.Rng.DieRoll(3);
-                            tX = xSaver - 1 + SaveGame.Rng.DieRoll(3);
+                            tY = ySaver - 1 + SaveGame.DieRoll(3);
+                            tX = xSaver - 1 + SaveGame.DieRoll(3);
                             maxAttempts--;
                         } while (maxAttempts > 0 && SaveGame.InBounds2(tY, tX) && !SaveGame.Los(y, x, tY, tX));
                         if (maxAttempts < 1)
@@ -487,7 +487,7 @@ internal abstract class Projectile : IGetKey<string>
     /// <returns></returns>
     protected virtual bool CheckBounceOffPlayer(int who, int dam, int aRad)
     {
-        if (SaveGame.HasReflection && aRad == 0 && SaveGame.Rng.DieRoll(10) != 1)
+        if (SaveGame.HasReflection && aRad == 0 && SaveGame.DieRoll(10) != 1)
         {
             bool blind = SaveGame.TimedBlindness.TurnsRemaining != 0;
             SaveGame.MsgPrint(blind ? "Something bounces!" : "The attack bounces!");
@@ -497,8 +497,8 @@ internal abstract class Projectile : IGetKey<string>
             int maxAttempts = 10;
             do
             {
-                tY = SaveGame.Monsters[who].MapY - 1 + SaveGame.Rng.DieRoll(3);
-                tX = SaveGame.Monsters[who].MapX - 1 + SaveGame.Rng.DieRoll(3);
+                tY = SaveGame.Monsters[who].MapY - 1 + SaveGame.DieRoll(3);
+                tX = SaveGame.Monsters[who].MapX - 1 + SaveGame.DieRoll(3);
                 maxAttempts--;
             } while (maxAttempts > 0 && SaveGame.InBounds2(tY, tX) && !SaveGame.PlayerHasLosBold(tY, tX));
             if (maxAttempts < 1)

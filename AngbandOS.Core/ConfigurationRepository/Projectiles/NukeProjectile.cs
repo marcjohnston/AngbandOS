@@ -32,13 +32,13 @@ internal class NukeProjectile : Projectile
         {
             note = " resists.";
             dam *= 3;
-            dam /= SaveGame.Rng.DieRoll(6) + 6;
+            dam /= SaveGame.DieRoll(6) + 6;
             if (seen)
             {
                 rPtr.Knowledge.Characteristics.ImmunePoison = true;
             }
         }
-        else if (SaveGame.Rng.DieRoll(3) == 1)
+        else if (SaveGame.DieRoll(3) == 1)
         {
             doPoly = true;
         }
@@ -50,7 +50,7 @@ internal class NukeProjectile : Projectile
         {
             doPoly = false;
         }
-        if (doPoly && SaveGame.Rng.DieRoll(90) > rPtr.Level)
+        if (doPoly && SaveGame.DieRoll(90) > rPtr.Level)
         {
             note = " is unaffected!";
             bool charm = mPtr.SmFriendly;
@@ -94,11 +94,11 @@ internal class NukeProjectile : Projectile
         SaveGame.TakeHit(dam, killer);
         if (!(SaveGame.HasPoisonResistance || SaveGame.TimedPoisonResistance.TurnsRemaining != 0))
         {
-            SaveGame.TimedPoison.AddTimer(SaveGame.Rng.RandomLessThan(dam) + 10);
-            if (SaveGame.Rng.DieRoll(5) == 1)
+            SaveGame.TimedPoison.AddTimer(SaveGame.RandomLessThan(dam) + 10);
+            if (SaveGame.DieRoll(5) == 1)
             {
                 SaveGame.MsgPrint("You undergo a freakish metamorphosis!");
-                if (SaveGame.Rng.DieRoll(4) == 1)
+                if (SaveGame.DieRoll(4) == 1)
                 {
                     SaveGame.RunScript(nameof(PolymorphSelfScript));
                 }
@@ -107,7 +107,7 @@ internal class NukeProjectile : Projectile
                     SaveGame.ShuffleAbilityScores();
                 }
             }
-            if (SaveGame.Rng.DieRoll(6) == 1)
+            if (SaveGame.DieRoll(6) == 1)
             {
                 SaveGame.InvenDamage(SaveGame.SetAcidDestroy, 2);
             }

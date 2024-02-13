@@ -20,7 +20,7 @@ internal class WraithActivation : Activation
 
     public override bool Activate()
     {
-        SaveGame.TimedEtherealness.AddTimer(SaveGame.Rng.DieRoll(SaveGame.ExperienceLevel / 2) + (SaveGame.ExperienceLevel / 2));
+        SaveGame.TimedEtherealness.AddTimer(SaveGame.DieRoll(SaveGame.ExperienceLevel / 2) + (SaveGame.ExperienceLevel / 2));
         return true;
     }
 

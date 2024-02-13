@@ -23,7 +23,7 @@ internal class RingOfElementalPowerIceFixedArtifact : FixedArtifact, IFixedArtif
             return;
         }
         SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(ColdProjectile)), dir, 200, 3);
-        item.RechargeTimeLeft = base.SaveGame.Rng.RandomLessThan(325) + 325;
+        item.RechargeTimeLeft = base.SaveGame.RandomLessThan(325) + 325;
     }
     public string DescribeActivationEffect => "large frost ball (200) every 325+d325 turns";
 

@@ -26,7 +26,7 @@ internal class OldSleepProjectile : Projectile
         }
         string note;
         if (rPtr.Unique || rPtr.ImmuneSleep ||
-            rPtr.Level > SaveGame.Rng.DieRoll(dam - 10 < 1 ? 1 : dam - 10) + 10)
+            rPtr.Level > SaveGame.DieRoll(dam - 10 < 1 ? 1 : dam - 10) + 10)
         {
             if (rPtr.ImmuneSleep)
             {

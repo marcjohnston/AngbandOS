@@ -19,7 +19,7 @@ internal class OldPolyProjectile : Projectile
     protected override bool ProjectileAngersMonster(Monster mPtr)
     {
         // The attack will turn friends 1 in 8 times.
-        return (SaveGame.Rng.DieRoll(8) == 1);
+        return (SaveGame.DieRoll(8) == 1);
     }
 
     protected override bool AffectMonster(int who, Monster mPtr, int dam, int r)
@@ -34,7 +34,7 @@ internal class OldPolyProjectile : Projectile
             obvious = true;
         }
         bool doPoly = true;
-        if (rPtr.Unique || rPtr.Level > SaveGame.Rng.DieRoll(dam - 10 < 1 ? 1 : dam - 10) + 10)
+        if (rPtr.Unique || rPtr.Level > SaveGame.DieRoll(dam - 10 < 1 ? 1 : dam - 10) + 10)
         {
             note = " is unaffected!";
             doPoly = false;
@@ -49,7 +49,7 @@ internal class OldPolyProjectile : Projectile
         {
             doPoly = false;
         }
-        if (doPoly && SaveGame.Rng.DieRoll(90) > rPtr.Level)
+        if (doPoly && SaveGame.DieRoll(90) > rPtr.Level)
         {
             note = " is unaffected!";
             bool charm = mPtr.SmFriendly;

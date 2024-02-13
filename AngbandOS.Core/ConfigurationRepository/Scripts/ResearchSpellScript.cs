@@ -98,7 +98,7 @@ internal class ResearchSpellScript : Script, IScript, IStoreScript
                 if (SaveGame.SpellOkay(sPtr, false))
                 {
                     k++;
-                    if (SaveGame.Rng.RandomLessThan(k) == 0)
+                    if (SaveGame.RandomLessThan(k) == 0)
                     {
                         spell = sPtr;
                     }

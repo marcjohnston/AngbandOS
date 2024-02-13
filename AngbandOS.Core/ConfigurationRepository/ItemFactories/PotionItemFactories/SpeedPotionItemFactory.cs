@@ -28,7 +28,7 @@ internal class SpeedPotionItemFactory : PotionItemFactory
         // Speed temporarily hastes you.  But it is not additive.
         if (SaveGame.TimedHaste.TurnsRemaining == 0)
         {
-            if (SaveGame.TimedHaste.SetTimer(SaveGame.Rng.DieRoll(25) + 15))
+            if (SaveGame.TimedHaste.SetTimer(SaveGame.DieRoll(25) + 15))
             {
                 return true;
             }

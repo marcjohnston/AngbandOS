@@ -85,7 +85,7 @@ internal class IceProjectile : Projectile
         {
             obvious = true;
         }
-        int doStun = (SaveGame.Rng.DieRoll(15) + 1) / (r + 1);
+        int doStun = (SaveGame.DieRoll(15) + 1) / (r + 1);
         if (rPtr.ImmuneCold)
         {
             note = " resists a lot.";
@@ -131,13 +131,13 @@ internal class IceProjectile : Projectile
         SaveGame.ColdDam(dam, killer);
         if (!SaveGame.HasShardResistance)
         {
-            SaveGame.TimedBleeding.AddTimer(SaveGame.Rng.DiceRoll(5, 8));
+            SaveGame.TimedBleeding.AddTimer(SaveGame.DiceRoll(5, 8));
         }
         if (!SaveGame.HasSoundResistance)
         {
-            SaveGame.TimedStun.AddTimer(SaveGame.Rng.DieRoll(15));
+            SaveGame.TimedStun.AddTimer(SaveGame.DieRoll(15));
         }
-        if (!(SaveGame.HasColdResistance || SaveGame.TimedColdResistance.TurnsRemaining != 0) || SaveGame.Rng.DieRoll(12) == 1)
+        if (!(SaveGame.HasColdResistance || SaveGame.TimedColdResistance.TurnsRemaining != 0) || SaveGame.DieRoll(12) == 1)
         {
             if (!SaveGame.HasColdImmunity)
             {

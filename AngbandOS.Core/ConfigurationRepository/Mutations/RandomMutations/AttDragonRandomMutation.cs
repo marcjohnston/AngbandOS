@@ -18,12 +18,12 @@ internal class AttDragonRandomMutation : Mutation
 
     public override void OnProcessWorld()
     {
-        if (SaveGame.HasAntiMagic || base.SaveGame.Rng.DieRoll(3000) != 13)
+        if (SaveGame.HasAntiMagic || base.SaveGame.DieRoll(3000) != 13)
         {
             return;
         }
         bool dSummon;
-        if (base.SaveGame.Rng.DieRoll(5) == 1)
+        if (base.SaveGame.DieRoll(5) == 1)
         {
             dSummon = SaveGame.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, SaveGame.Difficulty, SaveGame.SingletonRepository.MonsterFilters.Get(nameof(DragonMonsterFilter)), true);
         }

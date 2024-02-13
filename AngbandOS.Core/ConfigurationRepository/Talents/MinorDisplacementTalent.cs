@@ -36,7 +36,7 @@ internal class MinorDisplacementTalent : Talent
             if (!SaveGame.GridPassableNoCreature(j, i) || SaveGame.Grid[j][i].TileFlags.IsSet(GridTile.InVault) ||
                 SaveGame.Grid[j][i].FeatureType.Name != "Water" ||
                 SaveGame.Distance(j, i, SaveGame.MapY, SaveGame.MapX) > SaveGame.ExperienceLevel + 2 ||
-                SaveGame.Rng.RandomLessThan(SaveGame.ExperienceLevel * SaveGame.ExperienceLevel / 2) == 0)
+                SaveGame.RandomLessThan(SaveGame.ExperienceLevel * SaveGame.ExperienceLevel / 2) == 0)
             {
                 SaveGame.MsgPrint("Something disrupts your concentration!");
                 SaveGame.Energy -= 100;

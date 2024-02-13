@@ -42,7 +42,7 @@ internal class MassCarnageScript : Script, IScriptBool
             SaveGame.DeleteMonsterByIndex(i, true);
             if (playerCast)
             {
-                SaveGame.TakeHit(SaveGame.Rng.DieRoll(3), "the strain of casting Mass Carnage");
+                SaveGame.TakeHit(SaveGame.DieRoll(3), "the strain of casting Mass Carnage");
             }
             SaveGame.MoveCursorRelative(SaveGame.MapY, SaveGame.MapX);
             SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawHpFlaggedAction)).Set();

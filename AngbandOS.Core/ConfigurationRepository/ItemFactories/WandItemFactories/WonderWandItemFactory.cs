@@ -17,7 +17,7 @@ internal class WonderWandItemFactory : WandItemFactory
 
     public override void ApplyMagic(Item item, int level, int power, Store? store)
     {
-        item.TypeSpecificValue = SaveGame.Rng.DieRoll(15) + 8;
+        item.TypeSpecificValue = SaveGame.DieRoll(15) + 8;
     }
 
     public override int[] Chance => new int[] { 1, 0, 0, 0 };
@@ -34,7 +34,7 @@ internal class WonderWandItemFactory : WandItemFactory
     public override int Weight => 10;
     public override bool ExecuteActivation(SaveGame saveGame, int dir)
     {
-        switch (SaveGame.Rng.RandomLessThan(24))
+        switch (SaveGame.RandomLessThan(24))
         {
             case 0:
                 // Acid ball
@@ -42,7 +42,7 @@ internal class WonderWandItemFactory : WandItemFactory
                 return true;
             case 1:
                 // Acid bolt
-                saveGame.FireBoltOrBeam(20, saveGame.SingletonRepository.Projectiles.Get(nameof(AcidProjectile)), dir, SaveGame.Rng.DiceRoll(3, 8));
+                saveGame.FireBoltOrBeam(20, saveGame.SingletonRepository.Projectiles.Get(nameof(AcidProjectile)), dir, SaveGame.DiceRoll(3, 8));
                 return true;
             case 2:
                 // CharmMonster
@@ -56,7 +56,7 @@ internal class WonderWandItemFactory : WandItemFactory
                 return true;
             case 5:
                 // ColdBolt
-                saveGame.FireBoltOrBeam(20, saveGame.SingletonRepository.Projectiles.Get(nameof(ColdProjectile)), dir, SaveGame.Rng.DiceRoll(3, 8));
+                saveGame.FireBoltOrBeam(20, saveGame.SingletonRepository.Projectiles.Get(nameof(ColdProjectile)), dir, SaveGame.DiceRoll(3, 8));
                 return true;
             case 6:
                 // ConfuseMonster
@@ -80,7 +80,7 @@ internal class WonderWandItemFactory : WandItemFactory
                 return true;
             case 12:
                 // FireBolt
-                saveGame.FireBoltOrBeam(20, saveGame.SingletonRepository.Projectiles.Get(nameof(FireProjectile)), dir, SaveGame.Rng.DiceRoll(6, 8));
+                saveGame.FireBoltOrBeam(20, saveGame.SingletonRepository.Projectiles.Get(nameof(FireProjectile)), dir, SaveGame.DiceRoll(6, 8));
                 return true;
             case 13:
                 // HasteMonster
@@ -95,7 +95,7 @@ internal class WonderWandItemFactory : WandItemFactory
                 return true;
             case 16:
                 // MagicMissile
-                saveGame.FireBoltOrBeam(20, saveGame.SingletonRepository.Projectiles.Get(nameof(MissileProjectile)), dir, SaveGame.Rng.DiceRoll(2, 6));
+                saveGame.FireBoltOrBeam(20, saveGame.SingletonRepository.Projectiles.Get(nameof(MissileProjectile)), dir, SaveGame.DiceRoll(2, 6));
                 return true;
             case 17:
                 // Polymorph

@@ -27,7 +27,7 @@ internal class BlindnessMushroomFoodItemFactory : MushroomFoodItemFactory
         SaveGame.PlaySound(SoundEffectEnum.Eat);
         if (!SaveGame.HasBlindnessResistance)
         {
-            if (SaveGame.TimedBlindness.AddTimer(SaveGame.Rng.RandomLessThan(200) + 200))
+            if (SaveGame.TimedBlindness.AddTimer(SaveGame.RandomLessThan(200) + 200))
             {
                 return true;
             }

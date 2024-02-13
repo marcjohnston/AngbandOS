@@ -18,6 +18,6 @@ internal class MindVisionScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        SaveGame.TimedTelepathy.AddTimer(SaveGame.Rng.DieRoll(30) + 25);
+        SaveGame.TimedTelepathy.AddTimer(SaveGame.DieRoll(30) + 25);
     }
 }

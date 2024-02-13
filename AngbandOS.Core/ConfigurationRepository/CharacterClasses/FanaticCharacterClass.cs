@@ -46,7 +46,7 @@ internal class FanaticCharacterClass : BaseCharacterClass
     public override int AttackSpeedMultiplier => 4;
     public override IArtifactBias? ArtifactBias => SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(ChaosArtifactBias));
     public override int FromScrollWarriorArtifactBiasPercentageChance => 40;
-    public override bool SenseInventoryTest(int level) => (0 != SaveGame.Rng.RandomLessThan(80000 / ((level * level) + 40)));
+    public override bool SenseInventoryTest(int level) => (0 != SaveGame.RandomLessThan(80000 / ((level * level) + 40)));
     public override bool DetailedSenseInventory => true;
     public override Realm[] AvailablePrimaryRealms => new Realm[] {
         SaveGame.SingletonRepository.Realms.Get(nameof(ChaosRealm))

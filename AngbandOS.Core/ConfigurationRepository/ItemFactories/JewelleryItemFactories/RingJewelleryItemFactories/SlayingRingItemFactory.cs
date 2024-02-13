@@ -17,12 +17,12 @@ internal class SlayingRingItemFactory : RingItemFactory
 
     public override void ApplyMagic(Item item, int level, int power, Store? store)
     {
-        if (power == 0 && SaveGame.Rng.RandomLessThan(100) < 50)
+        if (power == 0 && SaveGame.RandomLessThan(100) < 50)
         {
             power = -1;
         }
-        item.BonusDamage = SaveGame.Rng.DieRoll(7) + item.GetBonusValue(10, level);
-        item.BonusToHit = SaveGame.Rng.DieRoll(7) + item.GetBonusValue(10, level);
+        item.BonusDamage = SaveGame.DieRoll(7) + item.GetBonusValue(10, level);
+        item.BonusToHit = SaveGame.DieRoll(7) + item.GetBonusValue(10, level);
         if (power < 0)
         {
             item.IdentBroken = true;

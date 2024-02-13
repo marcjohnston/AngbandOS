@@ -14,7 +14,7 @@ internal class AntiTeleportationAmuletJeweleryItemFactory : AmuletJeweleryItemFa
 
     public override void ApplyMagic(Item item, int level, int power, Store? store)
     {
-        if (power < 0 || (power == 0 && SaveGame.Rng.RandomLessThan(100) < 50))
+        if (power < 0 || (power == 0 && SaveGame.RandomLessThan(100) < 50))
         {
             item.IdentCursed = true;
         }

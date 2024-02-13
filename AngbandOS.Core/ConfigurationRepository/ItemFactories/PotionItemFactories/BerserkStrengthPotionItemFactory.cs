@@ -32,7 +32,7 @@ internal class BerserkStrengthPotionItemFactory : PotionItemFactory
         {
             identified = true;
         }
-        if (SaveGame.TimedSuperheroism.AddTimer(SaveGame.Rng.DieRoll(25) + 25))
+        if (SaveGame.TimedSuperheroism.AddTimer(SaveGame.DieRoll(25) + 25))
         {
             identified = true;
         }

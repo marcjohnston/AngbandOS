@@ -59,13 +59,13 @@ internal abstract class Patron : IGetKey<string>
         {
             nastyChance = 12;
         }
-        if (SaveGame.Rng.DieRoll(nastyChance) == 1)
+        if (SaveGame.DieRoll(nastyChance) == 1)
         {
-            type = SaveGame.Rng.DieRoll(20);
+            type = SaveGame.DieRoll(20);
         }
         else
         {
-            type = SaveGame.Rng.DieRoll(15) + 5;
+            type = SaveGame.DieRoll(15) + 5;
         }
         if (type < 1)
         {
@@ -77,7 +77,7 @@ internal abstract class Patron : IGetKey<string>
         }
         type--;
         Reward effect = Rewards[type];
-        if (SaveGame.Rng.DieRoll(6) == 1)
+        if (SaveGame.DieRoll(6) == 1)
         {
             SaveGame.MsgPrint($"{ShortName} rewards you with a mutation!");
             SaveGame.Dna.GainMutation();

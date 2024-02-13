@@ -13,11 +13,11 @@ internal class NatureSpellResistanceTrue : Spell
     private NatureSpellResistanceTrue(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.TimedAcidResistance.AddTimer(SaveGame.Rng.DieRoll(20) + 20);
-        SaveGame.TimedLightningResistance.AddTimer(SaveGame.Rng.DieRoll(20) + 20);
-        SaveGame.TimedFireResistance.AddTimer(SaveGame.Rng.DieRoll(20) + 20);
-        SaveGame.TimedColdResistance.AddTimer(SaveGame.Rng.DieRoll(20) + 20);
-        SaveGame.TimedPoisonResistance.AddTimer(SaveGame.Rng.DieRoll(20) + 20);
+        SaveGame.TimedAcidResistance.AddTimer(SaveGame.DieRoll(20) + 20);
+        SaveGame.TimedLightningResistance.AddTimer(SaveGame.DieRoll(20) + 20);
+        SaveGame.TimedFireResistance.AddTimer(SaveGame.DieRoll(20) + 20);
+        SaveGame.TimedColdResistance.AddTimer(SaveGame.DieRoll(20) + 20);
+        SaveGame.TimedPoisonResistance.AddTimer(SaveGame.DieRoll(20) + 20);
     }
 
     public override string Name => "Resistance True";

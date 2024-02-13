@@ -43,8 +43,8 @@ internal class TeleportSelfScript : Script, IScriptInt
             {
                 while (true)
                 {
-                    x = SaveGame.Rng.RandomSpread(SaveGame.MapX, distance);
-                    y = SaveGame.Rng.RandomSpread(SaveGame.MapY, distance);
+                    x = SaveGame.RandomSpread(SaveGame.MapX, distance);
+                    y = SaveGame.RandomSpread(SaveGame.MapY, distance);
                     int d = SaveGame.Distance(SaveGame.MapY, SaveGame.MapX, y, x);
                     if (d >= min && d <= distance)
                     {
@@ -122,7 +122,7 @@ internal class TeleportSelfScript : Script, IScriptInt
         {
             return;
         }
-        if (SaveGame.Rng.DieRoll(100) > mPtr.Race.Level)
+        if (SaveGame.DieRoll(100) > mPtr.Race.Level)
         {
             return;
         }
@@ -139,8 +139,8 @@ internal class TeleportSelfScript : Script, IScriptInt
             {
                 while (true)
                 {
-                    ny = SaveGame.Rng.RandomSpread(SaveGame.MapY, dis);
-                    nx = SaveGame.Rng.RandomSpread(SaveGame.MapX, dis);
+                    ny = SaveGame.RandomSpread(SaveGame.MapY, dis);
+                    nx = SaveGame.RandomSpread(SaveGame.MapX, dis);
                     int d = SaveGame.Distance(SaveGame.MapY, SaveGame.MapX, ny, nx);
                     if (d >= min && d <= dis)
                     {

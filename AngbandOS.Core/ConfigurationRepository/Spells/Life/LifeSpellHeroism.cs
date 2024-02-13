@@ -13,7 +13,7 @@ internal class LifeSpellHeroism : Spell
     private LifeSpellHeroism(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.TimedHeroism.AddTimer(SaveGame.Rng.DieRoll(25) + 25);
+        SaveGame.TimedHeroism.AddTimer(SaveGame.DieRoll(25) + 25);
         SaveGame.RestoreHealth(10);
         SaveGame.TimedFear.ResetTimer();
     }

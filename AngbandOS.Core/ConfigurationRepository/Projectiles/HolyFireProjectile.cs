@@ -114,7 +114,7 @@ internal class HolyFireProjectile : Projectile
         {
             note = " resists.";
             dam *= 3;
-            dam /= SaveGame.Rng.DieRoll(6) + 6;
+            dam /= SaveGame.DieRoll(6) + 6;
         }
         ApplyProjectileDamageToMonster(who, mPtr, dam, note);
         return obvious;

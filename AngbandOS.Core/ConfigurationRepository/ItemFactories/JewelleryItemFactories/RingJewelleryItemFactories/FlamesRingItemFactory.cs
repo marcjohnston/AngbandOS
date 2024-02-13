@@ -19,8 +19,8 @@ internal class FlamesRingItemFactory : RingItemFactory, IItemsCanBeActivated
             return;
         }
         SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(FireProjectile)), dir, 50, 2);
-        SaveGame.TimedFireResistance.AddTimer(SaveGame.Rng.DieRoll(20) + 20);
-        item.RechargeTimeLeft = SaveGame.Rng.RandomLessThan(50) + 50;
+        SaveGame.TimedFireResistance.AddTimer(SaveGame.DieRoll(20) + 20);
+        item.RechargeTimeLeft = SaveGame.RandomLessThan(50) + 50;
     }
 
     public override string? DescribeActivationEffect => "ball of fire and resist fire";
@@ -29,7 +29,7 @@ internal class FlamesRingItemFactory : RingItemFactory, IItemsCanBeActivated
 
     public override void ApplyMagic(Item item, int level, int power, Store? store)
     {
-        item.BonusArmorClass = 5 + SaveGame.Rng.DieRoll(5) + item.GetBonusValue(10, level);
+        item.BonusArmorClass = 5 + SaveGame.DieRoll(5) + item.GetBonusValue(10, level);
     }
     public override bool Activate => true;
     public override int[] Chance => new int[] { 1, 0, 0, 0 };

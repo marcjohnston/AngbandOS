@@ -31,10 +31,10 @@ internal class StunTimedAction : TimedAction
                 SaveGame.MsgPrint("You have been knocked out.");
                 break;
         }
-        if (SaveGame.Rng.DieRoll(1000) < newRate || SaveGame.Rng.DieRoll(16) == 1)
+        if (SaveGame.DieRoll(1000) < newRate || SaveGame.DieRoll(16) == 1)
         {
             SaveGame.MsgPrint("A vicious Attack hits your head.");
-            if (SaveGame.Rng.DieRoll(3) == 1)
+            if (SaveGame.DieRoll(3) == 1)
             {
                 if (!SaveGame.HasSustainIntelligence)
                 {
@@ -45,7 +45,7 @@ internal class StunTimedAction : TimedAction
                     SaveGame.TryDecreasingAbilityScore(Ability.Wisdom);
                 }
             }
-            else if (SaveGame.Rng.DieRoll(2) == 1)
+            else if (SaveGame.DieRoll(2) == 1)
             {
                 if (!SaveGame.HasSustainIntelligence)
                 {

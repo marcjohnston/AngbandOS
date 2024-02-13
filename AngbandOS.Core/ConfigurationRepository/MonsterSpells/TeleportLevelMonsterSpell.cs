@@ -25,7 +25,7 @@ internal class TeleportLevelMonsterSpell : MonsterSpell
         {
             saveGame.MsgPrint("You are unaffected!");
         }
-        else if (SaveGame.Rng.RandomLessThan(100) < saveGame.SkillSavingThrow)
+        else if (SaveGame.RandomLessThan(100) < saveGame.SkillSavingThrow)
         {
             saveGame.MsgPrint("You resist the effects!");
         }

@@ -37,7 +37,7 @@ internal abstract class SpikeItemFactory : ItemFactory
         return 0;
     }
 
-    public override int MakeObjectCount => SaveGame.Rng.DiceRoll(6, 7);
+    public override int MakeObjectCount => SaveGame.DiceRoll(6, 7);
     public override bool EasyKnow => true;
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Spike;
     public override int PackSort => 37;

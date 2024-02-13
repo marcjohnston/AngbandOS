@@ -17,7 +17,7 @@ internal class WaterBallMonsterSpell : BallProjectileMonsterSpell
     protected override int Damage(Monster monster)
     {
         int monsterLevel = monster.Race.Level >= 1 ? monster.Race.Level : 1;
-        return SaveGame.Rng.DieRoll(monsterLevel * 5 / 2) + 50;
+        return SaveGame.DieRoll(monsterLevel * 5 / 2) + 50;
     }
     protected override int Radius => 4;
 

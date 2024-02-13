@@ -39,7 +39,7 @@ internal class GravityProjectile : Projectile
                 note = " is unaffected!";
                 resistTele = true;
             }
-            else if (rPtr.Level > SaveGame.Rng.DieRoll(100))
+            else if (rPtr.Level > SaveGame.DieRoll(100))
             {
                 if (seen)
                 {
@@ -54,12 +54,12 @@ internal class GravityProjectile : Projectile
         {
             note = " resists.";
             dam *= 3;
-            dam /= SaveGame.Rng.DieRoll(6) + 6;
+            dam /= SaveGame.DieRoll(6) + 6;
             doDist = 0;
         }
         else
         {
-            if (rPtr.Unique || rPtr.Level > SaveGame.Rng.DieRoll(dam - 10 < 1 ? 1 : dam - 10) + 10)
+            if (rPtr.Unique || rPtr.Level > SaveGame.DieRoll(dam - 10 < 1 ? 1 : dam - 10) + 10)
             {
                 obvious = false;
             }
@@ -71,8 +71,8 @@ internal class GravityProjectile : Projectile
                 }
                 note = " starts moving slower.";
             }
-            doStun = SaveGame.Rng.DiceRoll((SaveGame.ExperienceLevel / 10) + 3, dam) + 1;
-            if (rPtr.Unique || rPtr.Level > SaveGame.Rng.DieRoll(dam - 10 < 1 ? 1 : dam - 10) + 10)
+            doStun = SaveGame.DiceRoll((SaveGame.ExperienceLevel / 10) + 3, dam) + 1;
+            if (rPtr.Unique || rPtr.Level > SaveGame.DieRoll(dam - 10 < 1 ? 1 : dam - 10) + 10)
             {
                 doStun = 0;
                 note = " is unaffected!";
@@ -129,18 +129,18 @@ internal class GravityProjectile : Projectile
         SaveGame.RunScriptInt(nameof(TeleportSelfScript), 5);
         if (!SaveGame.HasFeatherFall)
         {
-            SaveGame.TimedSlow.AddTimer(SaveGame.Rng.RandomLessThan(4) + 4);
+            SaveGame.TimedSlow.AddTimer(SaveGame.RandomLessThan(4) + 4);
         }
         if (!(SaveGame.HasSoundResistance || SaveGame.HasFeatherFall))
         {
-            int kk = SaveGame.Rng.DieRoll(dam > 90 ? 35 : (dam / 3) + 5);
+            int kk = SaveGame.DieRoll(dam > 90 ? 35 : (dam / 3) + 5);
             SaveGame.TimedStun.AddTimer(kk);
         }
         if (SaveGame.HasFeatherFall)
         {
             dam = dam * 2 / 3;
         }
-        if (!SaveGame.HasFeatherFall || SaveGame.Rng.DieRoll(13) == 1)
+        if (!SaveGame.HasFeatherFall || SaveGame.DieRoll(13) == 1)
         {
             SaveGame.InvenDamage(SaveGame.SetColdDestroy, 2);
         }

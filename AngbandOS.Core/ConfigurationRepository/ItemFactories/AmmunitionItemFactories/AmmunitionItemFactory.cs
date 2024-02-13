@@ -57,7 +57,7 @@ internal abstract class AmmunitionItemFactory : WeaponItemFactory
         base.ApplyMagic(item, level, power, null);
         if (power > 1)
         {
-            switch (SaveGame.Rng.DieRoll(12))
+            switch (SaveGame.DieRoll(12))
             {
                 case 1:
                 case 2:
@@ -89,7 +89,7 @@ internal abstract class AmmunitionItemFactory : WeaponItemFactory
                     item.DamageDice++;
                     break;
             }
-            while (SaveGame.Rng.RandomLessThan(10 * item.DamageDice * item.DamageDiceSides) == 0)
+            while (SaveGame.RandomLessThan(10 * item.DamageDice * item.DamageDiceSides) == 0)
             {
                 item.DamageDice++;
             }
@@ -100,14 +100,14 @@ internal abstract class AmmunitionItemFactory : WeaponItemFactory
         }
         else if (power < -1)
         {
-            if (SaveGame.Rng.RandomLessThan(Constants.MaxDepth) < level)
+            if (SaveGame.RandomLessThan(Constants.MaxDepth) < level)
             {
                 item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(AmmoOfBackbitingRareItem));
             }
         }
     }
 
-    public override int MakeObjectCount => SaveGame.Rng.DiceRoll(6, 7);
+    public override int MakeObjectCount => SaveGame.DiceRoll(6, 7);
     public override int PercentageBreakageChance => 25;
 
     public override bool IsWeapon => true;

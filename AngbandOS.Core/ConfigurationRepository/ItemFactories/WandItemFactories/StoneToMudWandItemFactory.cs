@@ -17,7 +17,7 @@ internal class StoneToMudWandItemFactory : WandItemFactory
 
     public override void ApplyMagic(Item item, int level, int power, Store? store)
     {
-        item.TypeSpecificValue = SaveGame.Rng.DieRoll(8) + 3;
+        item.TypeSpecificValue = SaveGame.DieRoll(8) + 3;
     }
 
     public override int[] Chance => new int[] { 1, 1, 1, 0 };

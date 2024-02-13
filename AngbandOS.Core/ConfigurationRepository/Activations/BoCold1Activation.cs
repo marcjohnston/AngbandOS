@@ -18,11 +18,11 @@ internal class BoCold1Activation : DirectionalActivation
 
     public override string? PreActivationMessage => "It is covered in frost...";
 
-    public override int RechargeTime() => SaveGame.Rng.RandomLessThan(7) + 7;
+    public override int RechargeTime() => SaveGame.RandomLessThan(7) + 7;
 
     protected override bool Activate(int direction)
     {
-        SaveGame.FireBolt(SaveGame.SingletonRepository.Projectiles.Get(nameof(ColdProjectile)), direction, SaveGame.Rng.DiceRoll(6, 8));
+        SaveGame.FireBolt(SaveGame.SingletonRepository.Projectiles.Get(nameof(ColdProjectile)), direction, SaveGame.DiceRoll(6, 8));
         return true;
     }
 

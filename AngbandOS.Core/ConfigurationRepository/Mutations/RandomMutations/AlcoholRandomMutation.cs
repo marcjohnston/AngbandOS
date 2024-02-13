@@ -18,7 +18,7 @@ internal class AlcoholRandomMutation : Mutation
 
     public override void OnProcessWorld()
     {
-        if (base.SaveGame.Rng.DieRoll(6400) != 321)
+        if (base.SaveGame.DieRoll(6400) != 321)
         {
             return;
         }
@@ -29,10 +29,10 @@ internal class AlcoholRandomMutation : Mutation
         SaveGame.Disturb(false);
         SaveGame.SingletonRepository.FlaggedActions.Get(nameof(PrExtraRedrawActionGroupSetFlaggedAction)).Set();
         SaveGame.MsgPrint("You feel a SSSCHtupor cOmINg over yOu... *HIC*!");
-        if (base.SaveGame.Rng.DieRoll(20) == 1)
+        if (base.SaveGame.DieRoll(20) == 1)
         {
             SaveGame.MsgPrint(null);
-            if (base.SaveGame.Rng.DieRoll(3) == 1)
+            if (base.SaveGame.DieRoll(3) == 1)
             {
                 SaveGame.LoseAllInfo();
             }
@@ -49,12 +49,12 @@ internal class AlcoholRandomMutation : Mutation
         {
             if (!SaveGame.HasConfusionResistance)
             {
-                SaveGame.TimedConfusion.AddTimer(base.SaveGame.Rng.RandomLessThan(20) + 15);
+                SaveGame.TimedConfusion.AddTimer(base.SaveGame.RandomLessThan(20) + 15);
             }
-            if (base.SaveGame.Rng.DieRoll(3) == 1 && !SaveGame.HasChaosResistance)
+            if (base.SaveGame.DieRoll(3) == 1 && !SaveGame.HasChaosResistance)
             {
                 SaveGame.MsgPrint("Thishcischs GooDSChtuff!");
-                SaveGame.TimedHallucinations.AddTimer(base.SaveGame.Rng.RandomLessThan(150) + 150);
+                SaveGame.TimedHallucinations.AddTimer(base.SaveGame.RandomLessThan(150) + 150);
             }
         }
     }

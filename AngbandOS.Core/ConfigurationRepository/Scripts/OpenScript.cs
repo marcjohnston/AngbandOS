@@ -109,7 +109,7 @@ internal class OpenScript : Script, IScript, IRepeatableScript
                 j = 2;
             }
             // See if we succeeded
-            if (SaveGame.Rng.RandomLessThan(100) < j)
+            if (SaveGame.RandomLessThan(100) < j)
             {
                 SaveGame.MsgPrint("You have picked the lock.");
                 SaveGame.GainExperience(1);

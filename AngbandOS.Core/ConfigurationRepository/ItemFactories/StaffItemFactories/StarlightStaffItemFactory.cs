@@ -17,7 +17,7 @@ internal class StarlightStaffItemFactory : StaffItemFactory
 
     public override void ApplyMagic(Item item, int level, int power, Store? store)
     {
-        item.TypeSpecificValue = SaveGame.Rng.DieRoll(5) + 6;
+        item.TypeSpecificValue = SaveGame.DieRoll(5) + 6;
     }
 
     public override int[] Chance => new int[] { 1, 0, 0, 0 };

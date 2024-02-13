@@ -24,7 +24,7 @@ internal class StupidityMushroomFoodItemFactory : MushroomFoodItemFactory
     public override bool Eat()
     {
         SaveGame.PlaySound(SoundEffectEnum.Eat);
-        SaveGame.TakeHit(SaveGame.Rng.DiceRoll(8, 8), "poisonous food.");
+        SaveGame.TakeHit(SaveGame.DiceRoll(8, 8), "poisonous food.");
         SaveGame.TryDecreasingAbilityScore(Ability.Intelligence);
         return true;
     }

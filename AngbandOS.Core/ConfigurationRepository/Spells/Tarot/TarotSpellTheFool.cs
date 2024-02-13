@@ -15,7 +15,7 @@ internal class TarotSpellTheFool : Spell
     {
         MonsterFilter? summonType = null;
         SaveGame.MsgPrint("You concentrate on the Fool card...");
-        switch (SaveGame.Rng.DieRoll(4))
+        switch (SaveGame.DieRoll(4))
         {
             case 1:
                 summonType = SaveGame.SingletonRepository.MonsterFilters.Get(nameof(Bizarre1MonsterFilter));
@@ -33,7 +33,7 @@ internal class TarotSpellTheFool : Spell
                 summonType = SaveGame.SingletonRepository.MonsterFilters.Get(nameof(Bizarre5MonsterFilter));
                 break;
         }
-        if (SaveGame.Rng.DieRoll(2) == 1)
+        if (SaveGame.DieRoll(2) == 1)
         {
             SaveGame.MsgPrint(SaveGame.SummonSpecific(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel, summonType)
                 ? "The summoned creature gets angry!"

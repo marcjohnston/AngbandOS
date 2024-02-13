@@ -132,7 +132,7 @@ internal class PurchaseStoreItemScript : Script, IStoreScript
                     {
                         if (storeCommandEvent.Store.StoreFactory.MaintainsStockLevels)
                         {
-                            if (SaveGame.Rng.RandomLessThan(Constants.StoreShuffle) == 0)
+                            if (SaveGame.RandomLessThan(Constants.StoreShuffle) == 0)
                             {
                                 SaveGame.MsgPrint("The shopkeeper retires.");
                                 storeCommandEvent.Store.StoreShuffle();

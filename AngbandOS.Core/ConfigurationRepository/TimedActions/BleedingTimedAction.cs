@@ -50,7 +50,7 @@ internal class BleedingTimedAction : TimedAction
 
     protected override void EffectIncreased(int newRate, int oldRate)
     {
-        if (SaveGame.Rng.DieRoll(1000) < newRate || SaveGame.Rng.DieRoll(16) == 1)
+        if (SaveGame.DieRoll(1000) < newRate || SaveGame.DieRoll(16) == 1)
         {
             if (!SaveGame.HasSustainCharisma)
             {

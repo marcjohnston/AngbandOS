@@ -13,7 +13,7 @@ internal class LifeSpellCureLightWounds : Spell
     private LifeSpellCureLightWounds(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.RestoreHealth(SaveGame.Rng.DiceRoll(2, 10));
+        SaveGame.RestoreHealth(SaveGame.DiceRoll(2, 10));
         SaveGame.TimedBleeding.AddTimer(-10);
     }
 

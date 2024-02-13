@@ -24,7 +24,7 @@ internal class SummonPhantomActivation : Activation
         return true;
     }
 
-    public override int RechargeTime() => 200 + SaveGame.Rng.DieRoll(200);
+    public override int RechargeTime() => 200 + SaveGame.DieRoll(200);
 
     public override int Value => 12000;
 

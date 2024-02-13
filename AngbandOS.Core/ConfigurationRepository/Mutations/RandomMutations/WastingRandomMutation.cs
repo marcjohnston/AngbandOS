@@ -18,11 +18,11 @@ internal class WastingRandomMutation : Mutation
 
     public override void OnProcessWorld()
     {
-        if (base.SaveGame.Rng.DieRoll(3000) != 13)
+        if (base.SaveGame.DieRoll(3000) != 13)
         {
             return;
         }
-        int whichStat = base.SaveGame.Rng.RandomLessThan(6);
+        int whichStat = base.SaveGame.RandomLessThan(6);
         bool sustained = false;
         switch (whichStat)
         {
@@ -78,7 +78,7 @@ internal class WastingRandomMutation : Mutation
             return;
         }
         SaveGame.Disturb(false);
-        if (base.SaveGame.Rng.DieRoll(10) <= SaveGame.Religion.GetNamedDeity(Pantheon.GodName.Lobon).AdjustedFavour)
+        if (base.SaveGame.DieRoll(10) <= SaveGame.Religion.GetNamedDeity(Pantheon.GodName.Lobon).AdjustedFavour)
         {
             SaveGame.MsgPrint("Lobon's favour protects you from wasting away!");
             SaveGame.MsgPrint(null);
@@ -86,6 +86,6 @@ internal class WastingRandomMutation : Mutation
         }
         SaveGame.MsgPrint("You can feel yourself wasting away!");
         SaveGame.MsgPrint(null);
-        SaveGame.DecreaseAbilityScore(whichStat, base.SaveGame.Rng.DieRoll(6) + 6, base.SaveGame.Rng.DieRoll(3) == 1);
+        SaveGame.DecreaseAbilityScore(whichStat, base.SaveGame.DieRoll(6) + 6, base.SaveGame.DieRoll(3) == 1);
     }
 }

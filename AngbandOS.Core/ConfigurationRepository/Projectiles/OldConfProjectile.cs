@@ -26,8 +26,8 @@ internal class OldConfProjectile : Projectile
         {
             obvious = true;
         }
-        int doConf = SaveGame.Rng.DiceRoll(3, dam / 2) + 1;
-        if (rPtr.Unique || rPtr.ImmuneConfusion || rPtr.Level > SaveGame.Rng.DieRoll(dam - 10 < 1 ? 1 : dam - 10) + 10)
+        int doConf = SaveGame.DiceRoll(3, dam / 2) + 1;
+        if (rPtr.Unique || rPtr.ImmuneConfusion || rPtr.Level > SaveGame.DieRoll(dam - 10 < 1 ? 1 : dam - 10) + 10)
         {
             if (rPtr.ImmuneConfusion)
             {

@@ -20,7 +20,7 @@ internal class ToggleRecallScript : Script, IScript
     {
         if (SaveGame.WordOfRecallDelay == 0)
         {
-            SaveGame.WordOfRecallDelay = SaveGame.Rng.DieRoll(20) + 15;
+            SaveGame.WordOfRecallDelay = SaveGame.DieRoll(20) + 15;
             SaveGame.MsgPrint("The air about you becomes charged...");
         }
         else

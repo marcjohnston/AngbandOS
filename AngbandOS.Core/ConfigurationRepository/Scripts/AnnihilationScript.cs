@@ -36,7 +36,7 @@ internal class AnnihilationScript : Script, IScript
                 continue;
             }
             SaveGame.DeleteMonsterByIndex(i, true);
-            SaveGame.TakeHit(SaveGame.Rng.DieRoll(4), "the strain of casting Annihilation");
+            SaveGame.TakeHit(SaveGame.DieRoll(4), "the strain of casting Annihilation");
             SaveGame.Mana++;
             SaveGame.MoveCursorRelative(SaveGame.MapY, SaveGame.MapX);
             SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawHpFlaggedAction)).Set();

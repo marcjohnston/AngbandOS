@@ -14,7 +14,7 @@ internal class CureLightWoundsStaffItemFactory : StaffItemFactory
 
     public override void ApplyMagic(Item item, int level, int power, Store? store)
     {
-        item.TypeSpecificValue = SaveGame.Rng.DieRoll(5) + 6;
+        item.TypeSpecificValue = SaveGame.DieRoll(5) + 6;
     }
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UnderscoreSymbol));
     public override string Name => "Cure Light Wounds";
@@ -30,7 +30,7 @@ internal class CureLightWoundsStaffItemFactory : StaffItemFactory
 
     public override void UseStaff(UseStaffEvent eventArgs)
     {
-        if (SaveGame.RestoreHealth(SaveGame.Rng.DieRoll(8)))
+        if (SaveGame.RestoreHealth(SaveGame.DieRoll(8)))
         {
             eventArgs.Identified = true;
         }

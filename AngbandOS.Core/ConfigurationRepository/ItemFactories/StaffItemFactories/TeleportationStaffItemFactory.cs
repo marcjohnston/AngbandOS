@@ -14,7 +14,7 @@ internal class TeleportationStaffItemFactory : StaffItemFactory
 
     public override void ApplyMagic(Item item, int level, int power, Store? store)
     {
-        item.TypeSpecificValue = SaveGame.Rng.DieRoll(4) + 5;
+        item.TypeSpecificValue = SaveGame.DieRoll(4) + 5;
     }
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UnderscoreSymbol));
     public override string Name => "Teleportation";

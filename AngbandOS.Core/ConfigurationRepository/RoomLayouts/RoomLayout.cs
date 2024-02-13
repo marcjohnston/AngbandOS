@@ -71,7 +71,7 @@ internal abstract class RoomLayout : IGetKey<string>
                         break;
 
                     case '*':
-                        if (SaveGame.Rng.RandomLessThan(100) < 75)
+                        if (SaveGame.RandomLessThan(100) < 75)
                         {
                             SaveGame.PlaceObject(y, x, false, false);
                         }
@@ -142,13 +142,13 @@ internal abstract class RoomLayout : IGetKey<string>
                         }
                     case ',':
                         {
-                            if (SaveGame.Rng.RandomLessThan(100) < 50)
+                            if (SaveGame.RandomLessThan(100) < 50)
                             {
                                 SaveGame.MonsterLevel = SaveGame.Difficulty + 3;
                                 SaveGame.PlaceMonster(y, x, true, true);
                                 SaveGame.MonsterLevel = SaveGame.Difficulty;
                             }
-                            if (SaveGame.Rng.RandomLessThan(100) < 50)
+                            if (SaveGame.RandomLessThan(100) < 50)
                             {
                                 SaveGame.ObjectLevel = SaveGame.Difficulty + 7;
                                 SaveGame.PlaceObject(y, x, false, false);
@@ -184,8 +184,8 @@ internal abstract class RoomLayout : IGetKey<string>
         {
             while (dummy < SaveGame.SafeMaxAttempts)
             {
-                y1 = SaveGame.Rng.RandomSpread(y, yd);
-                x1 = SaveGame.Rng.RandomSpread(x, xd);
+                y1 = SaveGame.RandomSpread(y, yd);
+                x1 = SaveGame.RandomSpread(x, xd);
                 dummy++;
                 if (!SaveGame.InBounds(y1, x1))
                 {

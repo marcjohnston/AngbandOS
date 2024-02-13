@@ -19,7 +19,7 @@ internal class OldCloneProjectile : Projectile
     protected override bool ProjectileAngersMonster(Monster mPtr)
     {
         // The attack will turn friends 1 in 8 times.
-        return (SaveGame.Rng.DieRoll(8) == 1);
+        return (SaveGame.DieRoll(8) == 1);
     }
 
     protected override bool AffectMonster(int who, Monster mPtr, int dam, int r)
@@ -34,7 +34,7 @@ internal class OldCloneProjectile : Projectile
         {
             obvious = true;
         }
-        if (mPtr.SmFriendly && SaveGame.Rng.DieRoll(3) != 1)
+        if (mPtr.SmFriendly && SaveGame.DieRoll(3) != 1)
         {
             isFriend = true;
         }

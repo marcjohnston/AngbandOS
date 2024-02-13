@@ -106,7 +106,7 @@ internal class VampireRace : Race
                 else
                 {
                     SaveGame.MsgPrint("You grin and bare your fangs...");
-                    int dummy = SaveGame.ExperienceLevel + (SaveGame.Rng.DieRoll(SaveGame.ExperienceLevel) * Math.Max(1, SaveGame.ExperienceLevel / 10));
+                    int dummy = SaveGame.ExperienceLevel + (SaveGame.DieRoll(SaveGame.ExperienceLevel) * Math.Max(1, SaveGame.ExperienceLevel / 10));
                     if (SaveGame.DrainLife(direction, dummy))
                     {
                         if (SaveGame.Food < Constants.PyFoodFull)

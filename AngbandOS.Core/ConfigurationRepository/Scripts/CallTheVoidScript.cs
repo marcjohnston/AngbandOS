@@ -57,7 +57,7 @@ internal class CallTheVoidScript : Script, IScript
             SaveGame.MsgPrint("There is a loud explosion!");
             SaveGame.DestroyArea(SaveGame.MapY, SaveGame.MapX, 20 + SaveGame.ExperienceLevel);
             SaveGame.MsgPrint("The dungeon collapses...");
-            SaveGame.TakeHit(100 + SaveGame.Rng.DieRoll(150), "a suicidal Call the Void");
+            SaveGame.TakeHit(100 + SaveGame.DieRoll(150), "a suicidal Call the Void");
         }
     }
 }

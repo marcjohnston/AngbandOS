@@ -30,7 +30,7 @@ internal class TimeProjectile : Projectile
         {
             note = " resists.";
             dam *= 3;
-            dam /= SaveGame.Rng.DieRoll(6) + 6;
+            dam /= SaveGame.DieRoll(6) + 6;
         }
         ApplyProjectileDamageToMonster(who, mPtr, dam, note);
         return obvious;
@@ -55,12 +55,12 @@ internal class TimeProjectile : Projectile
         if (SaveGame.HasTimeResistance)
         {
             dam *= 4;
-            dam /= SaveGame.Rng.DieRoll(6) + 6;
+            dam /= SaveGame.DieRoll(6) + 6;
             SaveGame.MsgPrint("You feel as if time is passing you by.");
         }
         else
         {
-            switch (SaveGame.Rng.DieRoll(10))
+            switch (SaveGame.DieRoll(10))
             {
                 case 1:
                 case 2:
@@ -77,7 +77,7 @@ internal class TimeProjectile : Projectile
                 case 8:
                 case 9:
                     {
-                        switch (SaveGame.Rng.DieRoll(6))
+                        switch (SaveGame.DieRoll(6))
                         {
                             case 1:
                                 k = Ability.Strength;

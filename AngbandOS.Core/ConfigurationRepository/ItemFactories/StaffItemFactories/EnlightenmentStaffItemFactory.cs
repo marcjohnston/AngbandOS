@@ -17,7 +17,7 @@ internal class EnlightenmentStaffItemFactory : StaffItemFactory
 
     public override void ApplyMagic(Item item, int level, int power, Store? store)
     {
-        item.TypeSpecificValue = SaveGame.Rng.DieRoll(5) + 5;
+        item.TypeSpecificValue = SaveGame.DieRoll(5) + 5;
     }
     public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int Cost => 750;

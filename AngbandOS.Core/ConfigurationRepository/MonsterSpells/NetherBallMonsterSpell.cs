@@ -18,7 +18,7 @@ internal class NetherBallMonsterSpell : BallProjectileMonsterSpell
     protected override int Damage(Monster monster)
     {
         int monsterLevel = monster.Race.Level >= 1 ? monster.Race.Level : 1;
-        return 50 + SaveGame.Rng.DiceRoll(10, 10) + monsterLevel;
+        return 50 + SaveGame.DiceRoll(10, 10) + monsterLevel;
     }
     public override SpellResistantDetection[] SmartLearn => new SpellResistantDetection[] { SaveGame.SingletonRepository.SpellResistantDetections.Get(nameof(NethSpellResistantDetection)) };
 }

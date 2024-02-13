@@ -18,18 +18,18 @@ internal abstract class ExpAttackEffect : AttackEffect
     {
         obvious = true;
         SaveGame.TakeHit(damage, monsterDescription);
-        if (SaveGame.HasHoldLife && SaveGame.Rng.RandomLessThan(100) < HoldLifePercentChange)
+        if (SaveGame.HasHoldLife && SaveGame.RandomLessThan(100) < HoldLifePercentChange)
         {
             SaveGame.MsgPrint("You keep hold of your life force!");
         }
-        else if (SaveGame.Rng.DieRoll(10) <= SaveGame.Religion.GetNamedDeity(Pantheon.GodName.Hagarg_Ryonis).AdjustedFavour)
+        else if (SaveGame.DieRoll(10) <= SaveGame.Religion.GetNamedDeity(Pantheon.GodName.Hagarg_Ryonis).AdjustedFavour)
         {
             // Hagarg Ryonis can protect us from experience loss
             SaveGame.MsgPrint("Hagarg Ryonis's favour protects you!");
         }
         else
         {
-            int d = SaveGame.Rng.DiceRoll(10, 6) + (SaveGame.ExperiencePoints / 100 * Constants.MonDrainLife);
+            int d = SaveGame.DiceRoll(10, 6) + (SaveGame.ExperiencePoints / 100 * Constants.MonDrainLife);
             if (SaveGame.HasHoldLife)
             {
                 SaveGame.MsgPrint("You feel your life slipping away!");

@@ -16,7 +16,7 @@ internal class RangerArtifactBias : ArtifactBias
         if (!item.RandartItemCharacteristics.Con)
         {
             item.RandartItemCharacteristics.Con = true;
-            if (SaveGame.Rng.DieRoll(2) == 1)
+            if (SaveGame.DieRoll(2) == 1)
             {
                 return true;
             }
@@ -24,7 +24,7 @@ internal class RangerArtifactBias : ArtifactBias
         else if (!item.RandartItemCharacteristics.Dex)
         {
             item.RandartItemCharacteristics.Dex = true;
-            if (SaveGame.Rng.DieRoll(2) == 1)
+            if (SaveGame.DieRoll(2) == 1)
             {
                 return true;
             }
@@ -32,7 +32,7 @@ internal class RangerArtifactBias : ArtifactBias
         else if (!item.RandartItemCharacteristics.Str)
         {
             item.RandartItemCharacteristics.Str = true;
-            if (SaveGame.Rng.DieRoll(2) == 1)
+            if (SaveGame.DieRoll(2) == 1)
             {
                 return true;
             }
@@ -45,7 +45,7 @@ internal class RangerArtifactBias : ArtifactBias
         if (!item.RandartItemCharacteristics.SustCon)
         {
             item.RandartItemCharacteristics.SustCon = true;
-            if (SaveGame.Rng.DieRoll(2) == 1)
+            if (SaveGame.DieRoll(2) == 1)
             {
                 return true;
             }
@@ -59,7 +59,7 @@ internal class RangerArtifactBias : ArtifactBias
             if (!item.RandartItemCharacteristics.SlayAnimal)
             {
                 item.RandartItemCharacteristics.SlayAnimal = true;
-                if (SaveGame.Rng.DieRoll(2) == 1)
+                if (SaveGame.DieRoll(2) == 1)
                 {
                     return true;
                 }
@@ -70,23 +70,23 @@ internal class RangerArtifactBias : ArtifactBias
 
     public override Activation GetActivationPowerType(Item item)
     {
-        if (SaveGame.Rng.DieRoll(20) == 1)
+        if (SaveGame.DieRoll(20) == 1)
         {
             return SaveGame.SingletonRepository.Activations.Get(nameof(CharmAnimalsActivation));
         }
-        else if (SaveGame.Rng.DieRoll(7) == 1)
+        else if (SaveGame.DieRoll(7) == 1)
         {
             return SaveGame.SingletonRepository.Activations.Get(nameof(SummonAnimalActivation));
         }
-        else if (SaveGame.Rng.DieRoll(6) == 1)
+        else if (SaveGame.DieRoll(6) == 1)
         {
             return SaveGame.SingletonRepository.Activations.Get(nameof(CharmAnimalActivation));
         }
-        else if (SaveGame.Rng.DieRoll(4) == 1)
+        else if (SaveGame.DieRoll(4) == 1)
         {
             return SaveGame.SingletonRepository.Activations.Get(nameof(ResistAllActivation));
         }
-        else if (SaveGame.Rng.DieRoll(3) == 1)
+        else if (SaveGame.DieRoll(3) == 1)
         {
             return SaveGame.SingletonRepository.Activations.Get(nameof(SatiateActivation));
         }

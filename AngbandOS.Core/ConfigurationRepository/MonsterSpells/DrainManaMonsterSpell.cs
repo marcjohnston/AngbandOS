@@ -41,7 +41,7 @@ internal class DrainManaMonsterSpell : MonsterSpell
         if (saveGame.Mana != 0)
         {
             saveGame.MsgPrint($"{monsterName} draws psychic energy from you!");
-            int r1 = (SaveGame.Rng.DieRoll(monsterLevel) / 2) + 1;
+            int r1 = (SaveGame.DieRoll(monsterLevel) / 2) + 1;
             if (r1 >= saveGame.Mana)
             {
                 r1 = saveGame.Mana;
@@ -85,7 +85,7 @@ internal class DrainManaMonsterSpell : MonsterSpell
         bool seeBoth = seen && seeTarget;
         MonsterRace targetRace = target.Race;
 
-        int r1 = (SaveGame.Rng.DieRoll(rlev) / 2) + 1;
+        int r1 = (SaveGame.DieRoll(rlev) / 2) + 1;
         if (monster.Health < monster.MaxHealth)
         {
             if (targetRace.Spells.Count == 0)

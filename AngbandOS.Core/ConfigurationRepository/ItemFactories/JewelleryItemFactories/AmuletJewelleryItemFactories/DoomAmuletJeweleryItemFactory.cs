@@ -19,8 +19,8 @@ internal class DoomAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
     {
         item.IdentBroken = true;
         item.IdentCursed = true;
-        item.TypeSpecificValue = 0 - (SaveGame.Rng.DieRoll(5) + item.GetBonusValue(5, level));
-        item.BonusArmorClass = 0 - (SaveGame.Rng.DieRoll(5) + item.GetBonusValue(5, level));
+        item.TypeSpecificValue = 0 - (SaveGame.DieRoll(5) + item.GetBonusValue(5, level));
+        item.BonusArmorClass = 0 - (SaveGame.DieRoll(5) + item.GetBonusValue(5, level));
     }
     public override bool Cha => true;
     public override int[] Chance => new int[] { 1, 0, 0, 0 };

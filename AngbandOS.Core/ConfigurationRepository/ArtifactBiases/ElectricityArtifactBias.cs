@@ -16,7 +16,7 @@ internal class ElectricityArtifactBias : ArtifactBias
         if (!item.RandartItemCharacteristics.ResElec)
         {
             item.RandartItemCharacteristics.ResElec = true;
-            if (SaveGame.Rng.DieRoll(2) == 1)
+            if (SaveGame.DieRoll(2) == 1)
             {
                 return true;
             }
@@ -24,15 +24,15 @@ internal class ElectricityArtifactBias : ArtifactBias
         if (item.Factory.CanApplyArtifactBiasResistance && !item.RandartItemCharacteristics.ShElec)
         {
             item.RandartItemCharacteristics.ShElec = true;
-            if (SaveGame.Rng.DieRoll(2) == 1)
+            if (SaveGame.DieRoll(2) == 1)
             {
                 return true;
             }
         }
-        if (SaveGame.Rng.DieRoll(ImmunityLuckOneInChance) == 1 && !item.RandartItemCharacteristics.ImElec)
+        if (SaveGame.DieRoll(ImmunityLuckOneInChance) == 1 && !item.RandartItemCharacteristics.ImElec)
         {
             item.RandartItemCharacteristics.ImElec = true;
-            if (SaveGame.Rng.DieRoll(2) == 1)
+            if (SaveGame.DieRoll(2) == 1)
             {
                 return true;
             }
@@ -47,7 +47,7 @@ internal class ElectricityArtifactBias : ArtifactBias
             if (!item.RandartItemCharacteristics.BrandElec)
             {
                 item.RandartItemCharacteristics.BrandElec = true;
-                if (SaveGame.Rng.DieRoll(2) == 1)
+                if (SaveGame.DieRoll(2) == 1)
                 {
                     return true;
                 }
@@ -58,11 +58,11 @@ internal class ElectricityArtifactBias : ArtifactBias
 
     public override Activation GetActivationPowerType(Item item)
     {
-        if (SaveGame.Rng.DieRoll(3) != 1)
+        if (SaveGame.DieRoll(3) != 1)
         {
             return SaveGame.SingletonRepository.Activations.Get(nameof(BoElec1Activation));
         }
-        else if (SaveGame.Rng.DieRoll(5) != 1)
+        else if (SaveGame.DieRoll(5) != 1)
         {
             return SaveGame.SingletonRepository.Activations.Get(nameof(BaElec2Activation));
         }

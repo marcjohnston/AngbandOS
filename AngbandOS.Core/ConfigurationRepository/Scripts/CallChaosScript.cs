@@ -53,12 +53,12 @@ internal class CallChaosScript : Script, IScript
             SaveGame.SingletonRepository.Projectiles.Get(nameof(HellfireProjectile)),
             SaveGame.SingletonRepository.Projectiles.Get(nameof(DisintegrateProjectile))
         };
-        Projectile chaosType = hurtTypes[SaveGame.Rng.DieRoll(30) - 1];
-        if (SaveGame.Rng.DieRoll(4) == 1)
+        Projectile chaosType = hurtTypes[SaveGame.DieRoll(30) - 1];
+        if (SaveGame.DieRoll(4) == 1)
         {
             lineChaos = true;
         }
-        if (SaveGame.Rng.DieRoll(6) == 1)
+        if (SaveGame.DieRoll(6) == 1)
         {
             for (int dummy = 1; dummy < 10; dummy++)
             {
@@ -75,7 +75,7 @@ internal class CallChaosScript : Script, IScript
                 }
             }
         }
-        else if (SaveGame.Rng.DieRoll(3) == 1)
+        else if (SaveGame.DieRoll(3) == 1)
         {
             SaveGame.FireBall(chaosType, 0, 300, 8);
         }

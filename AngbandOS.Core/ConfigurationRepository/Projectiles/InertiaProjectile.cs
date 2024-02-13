@@ -30,12 +30,12 @@ internal class InertiaProjectile : Projectile
         {
             note = " resists.";
             dam *= 3;
-            dam /= SaveGame.Rng.DieRoll(6) + 6;
+            dam /= SaveGame.DieRoll(6) + 6;
         }
         else
         {
             if (rPtr.Unique ||
-                rPtr.Level > SaveGame.Rng.DieRoll(dam - 10 < 1 ? 1 : dam - 10) + 10)
+                rPtr.Level > SaveGame.DieRoll(dam - 10 < 1 ? 1 : dam - 10) + 10)
             {
                 obvious = false;
             }
@@ -66,7 +66,7 @@ internal class InertiaProjectile : Projectile
         {
             SaveGame.MsgPrint("You are hit by something slow!");
         }
-        SaveGame.TimedSlow.AddTimer(SaveGame.Rng.RandomLessThan(4) + 4);
+        SaveGame.TimedSlow.AddTimer(SaveGame.RandomLessThan(4) + 4);
         SaveGame.TakeHit(dam, killer);
         return true;
     }

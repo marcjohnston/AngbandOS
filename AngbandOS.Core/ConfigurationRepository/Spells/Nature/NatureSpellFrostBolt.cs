@@ -33,7 +33,7 @@ internal class NatureSpellFrostBolt : Spell
             return;
         }
         SaveGame.FireBoltOrBeam(beam - 10, SaveGame.SingletonRepository.Projectiles.Get(nameof(ColdProjectile)), dir,
-            SaveGame.Rng.DiceRoll(5 + ((SaveGame.ExperienceLevel - 5) / 4), 8));
+            SaveGame.DiceRoll(5 + ((SaveGame.ExperienceLevel - 5) / 4), 8));
     }
 
     public override string Name => "Frost Bolt";

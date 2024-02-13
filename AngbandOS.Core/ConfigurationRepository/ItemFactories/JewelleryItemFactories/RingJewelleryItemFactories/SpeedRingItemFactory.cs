@@ -17,12 +17,12 @@ internal class SpeedRingItemFactory : RingItemFactory
 
     public override void ApplyMagic(Item item, int level, int power, Store? store)
     {
-        if (power == 0 && SaveGame.Rng.RandomLessThan(100) < 50)
+        if (power == 0 && SaveGame.RandomLessThan(100) < 50)
         {
             power = -1;
         }
-        item.TypeSpecificValue = SaveGame.Rng.DieRoll(5) + item.GetBonusValue(5, level);
-        while (SaveGame.Rng.RandomLessThan(100) < 50)
+        item.TypeSpecificValue = SaveGame.DieRoll(5) + item.GetBonusValue(5, level);
+        while (SaveGame.RandomLessThan(100) < 50)
         {
             item.TypeSpecificValue++;
         }

@@ -39,7 +39,7 @@ internal class TeleportLevelScript : Script, IScript
             SaveGame.CurrentDepth--;
             SaveGame.NewLevelFlag = true;
         }
-        else if (SaveGame.Rng.RandomLessThan(100) < 50)
+        else if (SaveGame.RandomLessThan(100) < 50)
         {
             SaveGame.MsgPrint(upDesc);
             SaveGame.DoCmdSaveGame(true);

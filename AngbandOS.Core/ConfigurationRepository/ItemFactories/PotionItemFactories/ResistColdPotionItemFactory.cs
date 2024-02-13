@@ -26,7 +26,7 @@ internal class ResistColdPotionItemFactory : PotionItemFactory
     public override bool Quaff()
     {
         // Resist cold gives you timed frost resistance
-        return SaveGame.TimedColdResistance.AddTimer(SaveGame.Rng.DieRoll(10) + 10);
+        return SaveGame.TimedColdResistance.AddTimer(SaveGame.DieRoll(10) + 10);
     }
     public override Item CreateItem() => new Item(SaveGame, this);
 }

@@ -52,7 +52,7 @@ internal class SearchScript : Script, IScript, IRepeatableScript
             for (int x = SaveGame.MapX - 1; x <= SaveGame.MapX + 1; x++)
             {
                 // Check if we succeed
-                if (SaveGame.Rng.RandomLessThan(100) < chance)
+                if (SaveGame.RandomLessThan(100) < chance)
                 {
                     // If there's a trap, then find it
                     GridTile tile = SaveGame.Grid[y][x];

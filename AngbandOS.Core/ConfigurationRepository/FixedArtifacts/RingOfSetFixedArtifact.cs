@@ -23,7 +23,7 @@ internal class RingOfSetFixedArtifact : FixedArtifact, IFixedArtifactActivatible
             return;
         }
         RingOfSetPower(dir);
-        item.RechargeTimeLeft = base.SaveGame.Rng.RandomLessThan(450) + 450;
+        item.RechargeTimeLeft = base.SaveGame.RandomLessThan(450) + 450;
     }
     public string DescribeActivationEffect => "bizarre things every 450+d450 turns";
     public override void ApplyResistances(Item item)
@@ -32,7 +32,7 @@ internal class RingOfSetFixedArtifact : FixedArtifact, IFixedArtifactActivatible
         item.BonusPowerSubType= SaveGame.SingletonRepository.Activations.ToWeightedRandom().Choose();
 
         IArtifactBias artifactBias = null;
-        item.ApplyRandomResistance(ref artifactBias, SaveGame.Rng.DieRoll(22) + 16);
+        item.ApplyRandomResistance(ref artifactBias, SaveGame.DieRoll(22) + 16);
     }
 
     public override ColorEnum Color => ColorEnum.Yellow;
@@ -89,7 +89,7 @@ internal class RingOfSetFixedArtifact : FixedArtifact, IFixedArtifactActivatible
     /// <param name="direction"> The direction the player is aiming </param>
     private void RingOfSetPower(int direction)
     {
-        switch (SaveGame.Rng.DieRoll(10))
+        switch (SaveGame.DieRoll(10))
         {
             case 1:
             case 2:

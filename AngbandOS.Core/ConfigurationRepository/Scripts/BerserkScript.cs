@@ -18,7 +18,7 @@ internal class BerserkScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        SaveGame.TimedSuperheroism.AddTimer(SaveGame.Rng.DieRoll(25) + 25);
+        SaveGame.TimedSuperheroism.AddTimer(SaveGame.DieRoll(25) + 25);
         SaveGame.RestoreHealth(30);
         SaveGame.TimedFear.ResetTimer();
     }

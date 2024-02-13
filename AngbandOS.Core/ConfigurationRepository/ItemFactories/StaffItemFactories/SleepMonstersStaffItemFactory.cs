@@ -26,7 +26,7 @@ internal class SleepMonstersStaffItemFactory : StaffItemFactory
 
     public override void ApplyMagic(Item item, int level, int power, Store? store)
     {
-        item.TypeSpecificValue = SaveGame.Rng.DieRoll(5) + 6;
+        item.TypeSpecificValue = SaveGame.DieRoll(5) + 6;
     }
 
     public override void UseStaff(UseStaffEvent eventArgs)

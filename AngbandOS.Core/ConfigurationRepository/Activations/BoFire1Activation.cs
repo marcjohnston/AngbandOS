@@ -18,11 +18,11 @@ internal class BoFire1Activation : DirectionalActivation
 
     public override string? PreActivationMessage => "It is covered in fire...";
 
-    public override int RechargeTime() => SaveGame.Rng.RandomLessThan(8) + 8;
+    public override int RechargeTime() => SaveGame.RandomLessThan(8) + 8;
 
     protected override bool Activate(int direction)
     {
-        SaveGame.FireBolt(SaveGame.SingletonRepository.Projectiles.Get(nameof(FireProjectile)), direction, SaveGame.Rng.DiceRoll(9, 8));
+        SaveGame.FireBolt(SaveGame.SingletonRepository.Projectiles.Get(nameof(FireProjectile)), direction, SaveGame.DiceRoll(9, 8));
         return true;
     }
 

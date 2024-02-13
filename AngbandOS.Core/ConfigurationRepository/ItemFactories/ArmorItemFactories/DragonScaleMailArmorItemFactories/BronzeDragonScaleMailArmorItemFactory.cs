@@ -20,7 +20,7 @@ internal class BronzeDragonScaleMailArmorItemFactory : DragonScaleMailArmorItemF
         }
         SaveGame.MsgPrint("You breathe confusion.");
         SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(ConfusionProjectile)), dir, 120, -2);
-        item.RechargeTimeLeft = SaveGame.Rng.RandomLessThan(450) + 450;
+        item.RechargeTimeLeft = SaveGame.RandomLessThan(450) + 450;
     }
     public override string? DescribeActivationEffect => "breathe confusion (120) every 450+d450 turns";
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(OpenBraceSymbol));

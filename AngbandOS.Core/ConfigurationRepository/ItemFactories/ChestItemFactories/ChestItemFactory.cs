@@ -89,12 +89,12 @@ internal abstract class ChestItemFactory : ItemFactory
     {
         if (item.Factory.Level > 0)
         {
-            item.TypeSpecificValue = SaveGame.Rng.DieRoll(item.Factory.Level);
+            item.TypeSpecificValue = SaveGame.DieRoll(item.Factory.Level);
             if (item.TypeSpecificValue > 55)
             {
                 int chestTrapConfigurationCount = SaveGame.SingletonRepository.ChestTrapConfigurations.Count;
                 int randomRemaining = chestTrapConfigurationCount - 55;
-                item.TypeSpecificValue = (55 + SaveGame.Rng.RandomLessThan(randomRemaining));
+                item.TypeSpecificValue = (55 + SaveGame.RandomLessThan(randomRemaining));
             }
         }
     }

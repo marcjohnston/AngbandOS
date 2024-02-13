@@ -22,6 +22,6 @@ internal class DoomBoltScript : Script, IScript
         {
             return;
         }
-        SaveGame.FireBeam(SaveGame.SingletonRepository.Projectiles.Get(nameof(ManaProjectile)), dir, SaveGame.Rng.DiceRoll(11 + ((SaveGame.ExperienceLevel - 5) / 4), 8));
+        SaveGame.FireBeam(SaveGame.SingletonRepository.Projectiles.Get(nameof(ManaProjectile)), dir, SaveGame.DiceRoll(11 + ((SaveGame.ExperienceLevel - 5) / 4), 8));
     }
 }

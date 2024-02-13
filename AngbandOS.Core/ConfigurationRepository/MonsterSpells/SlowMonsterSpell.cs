@@ -33,13 +33,13 @@ internal class SlowMonsterSpell : MonsterSpell
         {
             saveGame.MsgPrint("You are unaffected!");
         }
-        else if (SaveGame.Rng.RandomLessThan(100) < saveGame.SkillSavingThrow)
+        else if (SaveGame.RandomLessThan(100) < saveGame.SkillSavingThrow)
         {
             saveGame.MsgPrint("You resist the effects!");
         }
         else
         {
-            saveGame.TimedSlow.AddTimer(SaveGame.Rng.RandomLessThan(4) + 4);
+            saveGame.TimedSlow.AddTimer(SaveGame.RandomLessThan(4) + 4);
         }
         saveGame.UpdateSmartLearn(monster, SaveGame.SingletonRepository.SpellResistantDetections.Get(nameof(FreeSpellResistantDetection)));
     }
@@ -59,7 +59,7 @@ internal class SlowMonsterSpell : MonsterSpell
                 saveGame.MsgPrint($"{targetName} is unaffected.");
             }
         }
-        else if (targetRace.Level > SaveGame.Rng.DieRoll(rlev - 10 < 1 ? 1 : rlev - 10) + 10)
+        else if (targetRace.Level > SaveGame.DieRoll(rlev - 10 < 1 ? 1 : rlev - 10) + 10)
         {
             if (seeTarget)
             {

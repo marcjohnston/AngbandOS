@@ -18,7 +18,7 @@ internal class BaPois1Activation : DirectionalActivation
 
     public override string? PreActivationMessage => "It throbs deep green...";
 
-    public override int RechargeTime() => SaveGame.Rng.RandomLessThan(4) + 4;
+    public override int RechargeTime() => SaveGame.RandomLessThan(4) + 4;
 
     protected override bool Activate(int direction)
     {

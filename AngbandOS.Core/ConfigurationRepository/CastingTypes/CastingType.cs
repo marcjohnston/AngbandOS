@@ -122,12 +122,12 @@ internal class CastingType : IGetKey<string>
             }
         }
         int failureChance = spell.FailureChance();
-        if (SaveGame.Rng.DieRoll(100) <= failureChance)
+        if (SaveGame.DieRoll(100) <= failureChance)
         {
             SaveGame.MsgPrint($"You failed to get the {prayer} off!");
 
             // Reroll again with the save failure chance to run the failed script.
-            if (SaveGame.Rng.DieRoll(100) <= failureChance)
+            if (SaveGame.DieRoll(100) <= failureChance)
             {
                 spell.CastFailed();
             }
@@ -153,12 +153,12 @@ internal class CastingType : IGetKey<string>
             SaveGame.Mana = 0;
             SaveGame.FractionalMana = 0;
             SaveGame.MsgPrint("You faint from the effort!");
-            SaveGame.TimedParalysis.AddTimer(SaveGame.Rng.DieRoll((5 * oops) + 1));
-            if (SaveGame.Rng.RandomLessThan(100) < 50)
+            SaveGame.TimedParalysis.AddTimer(SaveGame.DieRoll((5 * oops) + 1));
+            if (SaveGame.RandomLessThan(100) < 50)
             {
-                bool perm = SaveGame.Rng.RandomLessThan(100) < 25;
+                bool perm = SaveGame.RandomLessThan(100) < 25;
                 SaveGame.MsgPrint("You have damaged your health!");
-                SaveGame.DecreaseAbilityScore(Ability.Constitution, 15 + SaveGame.Rng.DieRoll(10), perm);
+                SaveGame.DecreaseAbilityScore(Ability.Constitution, 15 + SaveGame.DieRoll(10), perm);
             }
         }
         SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawManaFlaggedAction)).Set();

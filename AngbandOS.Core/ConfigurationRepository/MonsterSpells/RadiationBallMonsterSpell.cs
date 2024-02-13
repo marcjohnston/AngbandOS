@@ -19,7 +19,7 @@ internal class RadiationBallMonsterSpell : BallProjectileMonsterSpell
     protected override int Damage(Monster monster)
     {
         int monsterLevel = monster.Race.Level >= 1 ? monster.Race.Level : 1;
-        return monsterLevel + SaveGame.Rng.DiceRoll(10, 6);
+        return monsterLevel + SaveGame.DiceRoll(10, 6);
     }
     public override SpellResistantDetection[] SmartLearn => new SpellResistantDetection[] { SaveGame.SingletonRepository.SpellResistantDetections.Get(nameof(PoisSpellResistantDetection)) };
 }

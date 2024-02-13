@@ -27,7 +27,7 @@ internal class SleepPotionItemFactory : PotionItemFactory
         // Sleep paralyses you
         if (!SaveGame.HasFreeAction)
         {
-            if (SaveGame.TimedParalysis.AddTimer(SaveGame.Rng.RandomLessThan(4) + 4))
+            if (SaveGame.TimedParalysis.AddTimer(SaveGame.RandomLessThan(4) + 4))
             {
                 return true;
             }

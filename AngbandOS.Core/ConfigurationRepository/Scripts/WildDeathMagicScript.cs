@@ -18,15 +18,15 @@ internal class WildDeathMagicScript : Script, IScriptIntInt
     /// <returns></returns>
     public void ExecuteScriptIntInt(int spell, int subCategory)
     {
-        if (subCategory == 3 && SaveGame.Rng.DieRoll(2) == 1)
+        if (subCategory == 3 && SaveGame.DieRoll(2) == 1)
         {
             SaveGame.Monsters[0].SanityBlast(true);
         }
         else
         {
             SaveGame.MsgPrint("It hurts!");
-            SaveGame.TakeHit(SaveGame.Rng.DiceRoll(subCategory + 1, 6), "a miscast Death spell");
-            if (spell > 15 && SaveGame.Rng.DieRoll(6) == 1 && !SaveGame.HasHoldLife)
+            SaveGame.TakeHit(SaveGame.DiceRoll(subCategory + 1, 6), "a miscast Death spell");
+            if (spell > 15 && SaveGame.DieRoll(6) == 1 && !SaveGame.HasHoldLife)
             {
                 SaveGame.LoseExperience(spell * 250);
             }

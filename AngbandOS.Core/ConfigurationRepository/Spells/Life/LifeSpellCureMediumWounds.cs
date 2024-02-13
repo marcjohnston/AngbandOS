@@ -13,7 +13,7 @@ internal class LifeSpellCureMediumWounds : Spell
     private LifeSpellCureMediumWounds(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.RestoreHealth(SaveGame.Rng.DiceRoll(4, 10));
+        SaveGame.RestoreHealth(SaveGame.DiceRoll(4, 10));
         SaveGame.TimedBleeding.SetTimer((SaveGame.TimedBleeding.TurnsRemaining / 2) - 20);
     }
 

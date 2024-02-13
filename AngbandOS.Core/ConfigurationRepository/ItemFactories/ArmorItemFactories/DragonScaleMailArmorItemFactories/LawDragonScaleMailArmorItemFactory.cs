@@ -18,11 +18,11 @@ internal class LawDragonScaleMailArmorItemFactory : DragonScaleMailArmorItemFact
         {
             return;
         }
-        int chance = SaveGame.Rng.RandomLessThan(2);
+        int chance = SaveGame.RandomLessThan(2);
         string element = chance == 1 ? "sound" : "shards";
         SaveGame.MsgPrint($"You breathe {element}.");
         SaveGame.FireBall(chance == 1 ? (Projectile)SaveGame.SingletonRepository.Projectiles.Get(nameof(SoundProjectile)) : SaveGame.SingletonRepository.Projectiles.Get(nameof(ExplodeProjectile)), dir, 230, -2);
-        item.RechargeTimeLeft = SaveGame.Rng.RandomLessThan(300) + 300;
+        item.RechargeTimeLeft = SaveGame.RandomLessThan(300) + 300;
     }
     public override string? DescribeActivationEffect => "breathe sound/shards (230) every 300+d300 turns";
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(OpenBraceSymbol));

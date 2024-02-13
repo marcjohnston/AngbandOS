@@ -23,7 +23,7 @@ internal class ManaBurstScript : Script, IScript
             return;
         }
         int experienceDivisor = (SaveGame.BaseCharacterClass.ID == CharacterClass.Mage || SaveGame.BaseCharacterClass.ID == CharacterClass.HighMage ? 2 : 4);
-        int damage = SaveGame.Rng.DiceRoll(3, 5) + SaveGame.ExperienceLevel + (SaveGame.ExperienceLevel / experienceDivisor);
+        int damage = SaveGame.DiceRoll(3, 5) + SaveGame.ExperienceLevel + (SaveGame.ExperienceLevel / experienceDivisor);
         int radius = SaveGame.ExperienceLevel < 30 ? 2 : 3;
         SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(MissileProjectile)), dir, damage, radius);
     }

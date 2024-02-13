@@ -21,15 +21,15 @@ internal class WrathReward : Reward
         SaveGame.TakeHit(SaveGame.ExperienceLevel * 4, wrathReason);
         for (int dummy = 0; dummy < 6; dummy++)
         {
-            SaveGame.DecreaseAbilityScore(dummy, 10 + SaveGame.Rng.DieRoll(15), false);
+            SaveGame.DecreaseAbilityScore(dummy, 10 + SaveGame.DieRoll(15), false);
         }
         SaveGame.ActivateHiSummon();
         SaveGame.ActivateDreadCurse();
-        if (SaveGame.Rng.DieRoll(2) == 1)
+        if (SaveGame.DieRoll(2) == 1)
         {
             SaveGame.CurseWeapon();
         }
-        if (SaveGame.Rng.DieRoll(2) == 1)
+        if (SaveGame.DieRoll(2) == 1)
         {
             SaveGame.CurseArmor();
         }

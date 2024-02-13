@@ -23,7 +23,7 @@ internal class SummonMonsterScrollItemFactory : ScrollItemFactory
 
     public override void Read(ReadScrollEvent eventArgs)
     {
-        for (int i = 0; i < SaveGame.Rng.DieRoll(3); i++)
+        for (int i = 0; i < SaveGame.DieRoll(3); i++)
         {
             if (SaveGame.SummonSpecific(SaveGame.MapY, SaveGame.MapX, SaveGame.Difficulty, null))
             {

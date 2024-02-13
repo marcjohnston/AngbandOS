@@ -26,7 +26,7 @@ internal class BrandWeaponWithFireOrIceScript : Script, IScript
             string itemName = item.Description(false, 0);
 
             // Make it a fire or ice weapon
-            if (SaveGame.Rng.RandomLessThan(100) < 25)
+            if (SaveGame.RandomLessThan(100) < 25)
             {
                 act = "is covered in a fiery shield!";
                 item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(WeaponOfBurningRareItem));
@@ -39,7 +39,7 @@ internal class BrandWeaponWithFireOrIceScript : Script, IScript
 
             // Let the player know what happened
             SaveGame.MsgPrint($"Your {itemName} {act}");
-            SaveGame.Enchant(item, SaveGame.Rng.RandomLessThan(3) + 4, Constants.EnchTohit | Constants.EnchTodam);
+            SaveGame.Enchant(item, SaveGame.RandomLessThan(3) + 4, Constants.EnchTohit | Constants.EnchTodam);
         }
         else
         {

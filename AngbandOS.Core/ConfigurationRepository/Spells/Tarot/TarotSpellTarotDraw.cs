@@ -14,16 +14,16 @@ internal class TarotSpellTarotDraw : Spell
     public override void Cast()
     {
         bool noneCame = false;
-        int die = SaveGame.Rng.DieRoll(120);
+        int die = SaveGame.DieRoll(120);
         if (SaveGame.BaseCharacterClass.ID == CharacterClass.Rogue || SaveGame.BaseCharacterClass.ID == CharacterClass.HighMage)
         {
-            die = SaveGame.Rng.DieRoll(110) + (SaveGame.ExperienceLevel / 5);
+            die = SaveGame.DieRoll(110) + (SaveGame.ExperienceLevel / 5);
         }
         SaveGame.MsgPrint("You shuffle your Tarot deck and draw a card...");
         if (die < 7)
         {
             SaveGame.MsgPrint("Oh no! It's the Blasted Tower!");
-            for (int dummy = 0; dummy < SaveGame.Rng.DieRoll(3); dummy++)
+            for (int dummy = 0; dummy < SaveGame.DieRoll(3); dummy++)
             {
                 SaveGame.ActivateHiSummon();
             }
@@ -66,7 +66,7 @@ internal class TarotSpellTarotDraw : Spell
         else if (die < 38)
         {
             SaveGame.MsgPrint("It's the Wheel of Fortune.");
-            WildMagic(SaveGame, SaveGame.Rng.DieRoll(32) - 1);
+            WildMagic(SaveGame, SaveGame.DieRoll(32) - 1);
         }
         else if (die < 40)
         {
@@ -192,7 +192,7 @@ internal class TarotSpellTarotDraw : Spell
 
     private void WildMagic(SaveGame saveGame, int spell)
     {
-        switch (SaveGame.Rng.DieRoll(spell) + SaveGame.Rng.DieRoll(8) + 1)
+        switch (SaveGame.DieRoll(spell) + SaveGame.DieRoll(8) + 1)
         {
             case 1:
             case 2:
@@ -220,7 +220,7 @@ internal class TarotSpellTarotDraw : Spell
             case 12:
             case 13:
             case 14:
-                SaveGame.LightArea(SaveGame.Rng.DiceRoll(2, 3), 2);
+                SaveGame.LightArea(SaveGame.DiceRoll(2, 3), 2);
                 break;
 
             case 15:

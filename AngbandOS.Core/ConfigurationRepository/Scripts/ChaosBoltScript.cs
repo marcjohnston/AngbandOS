@@ -37,6 +37,6 @@ internal class ChaosBoltScript : Script, IScript
         {
             return;
         }
-        SaveGame.FireBoltOrBeam(beam, SaveGame.SingletonRepository.Projectiles.Get(nameof(ChaosProjectile)), dir, SaveGame.Rng.DiceRoll(10 + ((SaveGame.ExperienceLevel - 5) / 4), 8));
+        SaveGame.FireBoltOrBeam(beam, SaveGame.SingletonRepository.Projectiles.Get(nameof(ChaosProjectile)), dir, SaveGame.DiceRoll(10 + ((SaveGame.ExperienceLevel - 5) / 4), 8));
     }
 }

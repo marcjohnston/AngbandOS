@@ -37,7 +37,7 @@ internal class Type8RoomLayout : RoomLayout
             return;
         }
         SaveGame.DangerRating += vault.Rating;
-        if (SaveGame.Difficulty <= 50 || SaveGame.Rng.DieRoll(((SaveGame.Difficulty - 40) * (SaveGame.Difficulty - 40)) + 50) < 400)
+        if (SaveGame.Difficulty <= 50 || SaveGame.DieRoll(((SaveGame.Difficulty - 40) * (SaveGame.Difficulty - 40)) + 50) < 400)
         {
             SaveGame.SpecialDanger = true;
         }

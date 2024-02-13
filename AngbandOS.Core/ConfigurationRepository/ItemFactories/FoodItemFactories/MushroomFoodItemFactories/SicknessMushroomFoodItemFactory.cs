@@ -27,7 +27,7 @@ internal class SicknessMushroomFoodItemFactory : MushroomFoodItemFactory
     public override bool Eat()
     {
         SaveGame.PlaySound(SoundEffectEnum.Eat);
-        SaveGame.TakeHit(SaveGame.Rng.DiceRoll(6, 6), "poisonous food.");
+        SaveGame.TakeHit(SaveGame.DiceRoll(6, 6), "poisonous food.");
         SaveGame.TryDecreasingAbilityScore(Ability.Constitution);
         return true;
     }

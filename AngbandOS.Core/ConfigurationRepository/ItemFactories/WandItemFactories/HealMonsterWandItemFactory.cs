@@ -17,7 +17,7 @@ internal class HealMonsterWandItemFactory : WandItemFactory
 
     public override void ApplyMagic(Item item, int level, int power, Store? store)
     {
-        item.TypeSpecificValue = SaveGame.Rng.DieRoll(20) + 8;
+        item.TypeSpecificValue = SaveGame.DieRoll(20) + 8;
     }
     public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int Dd => 1;

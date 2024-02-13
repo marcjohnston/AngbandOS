@@ -55,7 +55,7 @@ internal class DarkProjectile : Projectile
         {
             note = " resists.";
             dam *= 2;
-            dam /= SaveGame.Rng.DieRoll(6) + 6;
+            dam /= SaveGame.DieRoll(6) + 6;
         }
         ApplyProjectileDamageToMonster(who, mPtr, dam, note);
         return obvious;
@@ -78,7 +78,7 @@ internal class DarkProjectile : Projectile
         if (SaveGame.HasDarkResistance)
         {
             dam *= 4;
-            dam /= SaveGame.Rng.DieRoll(6) + 6;
+            dam /= SaveGame.DieRoll(6) + 6;
             if (!SaveGame.Race.IsDamagedByDarkness)
             {
                 dam = 0;
@@ -86,7 +86,7 @@ internal class DarkProjectile : Projectile
         }
         else if (!blind && !SaveGame.HasBlindnessResistance)
         {
-            SaveGame.TimedBlindness.AddTimer(SaveGame.Rng.DieRoll(5) + 2);
+            SaveGame.TimedBlindness.AddTimer(SaveGame.DieRoll(5) + 2);
         }
         if (SaveGame.TimedEtherealness.TurnsRemaining != 0)
         {

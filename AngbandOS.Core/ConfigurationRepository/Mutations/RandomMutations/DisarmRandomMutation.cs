@@ -18,13 +18,13 @@ internal class DisarmRandomMutation : Mutation
 
     public override void OnProcessWorld()
     {
-        if (base.SaveGame.Rng.DieRoll(10000) != 1)
+        if (base.SaveGame.DieRoll(10000) != 1)
         {
             return;
         }
         SaveGame.Disturb(false);
         SaveGame.MsgPrint("You trip over your own feet!");
-        SaveGame.TakeHit(base.SaveGame.Rng.DieRoll(SaveGame.Weight / 6), "tripping");
+        SaveGame.TakeHit(base.SaveGame.DieRoll(SaveGame.Weight / 6), "tripping");
         SaveGame.MsgPrint(null);
         Item? oPtr = SaveGame.GetInventoryItem(InventorySlot.MeleeWeapon);
         if (oPtr == null)

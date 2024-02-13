@@ -65,7 +65,7 @@ internal class MonkCharacterClass : BaseCharacterClass
     public override int MaximumWeight => 40;
     public override int AttackSpeedMultiplier => 4;
     public override IArtifactBias? ArtifactBias => SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(PriestlyArtifactBias));
-    public override bool SenseInventoryTest(int level) => (0 != SaveGame.Rng.RandomLessThan(20000 / ((level * level) + 40)));
+    public override bool SenseInventoryTest(int level) => (0 != SaveGame.RandomLessThan(20000 / ((level * level) + 40)));
     public override Realm[] AvailablePrimaryRealms => new Realm[] {
         SaveGame.SingletonRepository.Realms.Get(nameof(ChaosRealm)),
         SaveGame.SingletonRepository.Realms.Get(nameof(TarotRealm)),

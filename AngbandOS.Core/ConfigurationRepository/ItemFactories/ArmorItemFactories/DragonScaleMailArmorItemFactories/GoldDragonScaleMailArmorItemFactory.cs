@@ -20,7 +20,7 @@ internal class GoldDragonScaleMailArmorItemFactory : DragonScaleMailArmorItemFac
         }
         SaveGame.MsgPrint("You breathe sound.");
         SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(SoundProjectile)), dir, 130, -2);
-        item.RechargeTimeLeft = SaveGame.Rng.RandomLessThan(450) + 450;
+        item.RechargeTimeLeft = SaveGame.RandomLessThan(450) + 450;
     }
     public override string? DescribeActivationEffect => "breathe sound (130) every 450+d450 turns";
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(OpenBraceSymbol));

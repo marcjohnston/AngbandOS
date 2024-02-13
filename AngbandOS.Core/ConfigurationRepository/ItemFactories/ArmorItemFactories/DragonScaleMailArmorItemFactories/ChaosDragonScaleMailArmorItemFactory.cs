@@ -18,11 +18,11 @@ internal class ChaosDragonScaleMailArmorItemFactory : DragonScaleMailArmorItemFa
         {
             return;
         }
-        int chance = SaveGame.Rng.RandomLessThan(2);
+        int chance = SaveGame.RandomLessThan(2);
         string element = chance == 1 ? "chaos" : "disenchantment";
         SaveGame.MsgPrint($"You breathe {element}.");
         SaveGame.FireBall(projectile: chance == 1 ? (Projectile)SaveGame.SingletonRepository.Projectiles.Get(nameof(ChaosProjectile)) : SaveGame.SingletonRepository.Projectiles.Get(nameof(DisenchantProjectile)), dir: dir, dam: 220, rad: -2);
-        item.RechargeTimeLeft = SaveGame.Rng.RandomLessThan(300) + 300;
+        item.RechargeTimeLeft = SaveGame.RandomLessThan(300) + 300;
     }
     public override string? DescribeActivationEffect => "breathe chaos/disenchant (220) every 300+d300 turns";
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(OpenBraceSymbol));

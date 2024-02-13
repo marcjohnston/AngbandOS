@@ -39,7 +39,7 @@ internal class ChosenOneCharacterClass : BaseCharacterClass
         "to list here) as they increase in level."
     };
     public override IArtifactBias? ArtifactBias => SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(WarriorArtifactBias));
-    public override bool SenseInventoryTest(int level) => (0 != SaveGame.Rng.RandomLessThan(9000 / ((level * level) + 40)));
+    public override bool SenseInventoryTest(int level) => (0 != SaveGame.RandomLessThan(9000 / ((level * level) + 40)));
     public override bool DetailedSenseInventory => true;
     public override bool OutfitsWithScrollsOfLight => true;
 

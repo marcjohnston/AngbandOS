@@ -24,10 +24,10 @@ internal class ElvenCloakArmorItemFactory : CloakArmorItemFactory
             // Apply the standard armor characteristics.
             base.ApplyMagic(item, level, power, null);
 
-            item.TypeSpecificValue = SaveGame.Rng.DieRoll(4);
+            item.TypeSpecificValue = SaveGame.DieRoll(4);
             if (power > 1)
             {
-                if (SaveGame.Rng.DieRoll(20) == 1)
+                if (SaveGame.DieRoll(20) == 1)
                 {
                     item.CreateRandart(false);
                 }

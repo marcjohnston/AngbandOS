@@ -20,7 +20,7 @@ internal class WhiteDragonScaleMailArmorItemFactory : DragonScaleMailArmorItemFa
         }
         SaveGame.MsgPrint("You breathe frost.");
         SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(ColdProjectile)), dir, 110, -2);
-        item.RechargeTimeLeft = SaveGame.Rng.RandomLessThan(450) + 450;
+        item.RechargeTimeLeft = SaveGame.RandomLessThan(450) + 450;
     }
     public override string? DescribeActivationEffect => "breathe frost (110) every 450+d450 turns";
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(OpenBraceSymbol));

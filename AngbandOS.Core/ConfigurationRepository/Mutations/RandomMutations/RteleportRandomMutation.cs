@@ -18,7 +18,7 @@ internal class RteleportRandomMutation : Mutation
 
     public override void OnProcessWorld()
     {
-        if (base.SaveGame.Rng.DieRoll(5000) != 88)
+        if (base.SaveGame.DieRoll(5000) != 88)
         {
             return;
         }

@@ -18,7 +18,7 @@ internal class CureLightWoundsScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        SaveGame.RestoreHealth(SaveGame.Rng.DiceRoll(2, 10));
+        SaveGame.RestoreHealth(SaveGame.DiceRoll(2, 10));
         SaveGame.TimedBleeding.AddTimer(-10);
     }
 }

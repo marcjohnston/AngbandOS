@@ -30,7 +30,7 @@ internal class DisenchantProjectile : Projectile
         {
             note = " resists.";
             dam *= 3;
-            dam /= SaveGame.Rng.DieRoll(6) + 6;
+            dam /= SaveGame.DieRoll(6) + 6;
             if (seen)
             {
                 rPtr.Knowledge.Characteristics.ResistDisenchant = true;
@@ -57,7 +57,7 @@ internal class DisenchantProjectile : Projectile
         if (SaveGame.HasDisenchantResistance)
         {
             dam *= 6;
-            dam /= SaveGame.Rng.DieRoll(6) + 6;
+            dam /= SaveGame.DieRoll(6) + 6;
         }
         else
         {

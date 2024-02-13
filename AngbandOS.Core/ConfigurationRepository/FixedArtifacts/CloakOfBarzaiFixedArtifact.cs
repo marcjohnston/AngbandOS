@@ -18,11 +18,11 @@ internal class CloakOfBarzaiFixedArtifact : FixedArtifact, IFixedArtifactActivat
     public void ActivateItem(Item item)
     {
         SaveGame.MsgPrint("Your cloak glows many colors...");
-        SaveGame.TimedAcidResistance.AddTimer(base.SaveGame.Rng.DieRoll(20) + 20);
-        SaveGame.TimedLightningResistance.AddTimer(base.SaveGame.Rng.DieRoll(20) + 20);
-        SaveGame.TimedFireResistance.AddTimer(base.SaveGame.Rng.DieRoll(20) + 20);
-        SaveGame.TimedColdResistance.AddTimer(base.SaveGame.Rng.DieRoll(20) + 20);
-        SaveGame.TimedPoisonResistance.AddTimer(base.SaveGame.Rng.DieRoll(20) + 20);
+        SaveGame.TimedAcidResistance.AddTimer(base.SaveGame.DieRoll(20) + 20);
+        SaveGame.TimedLightningResistance.AddTimer(base.SaveGame.DieRoll(20) + 20);
+        SaveGame.TimedFireResistance.AddTimer(base.SaveGame.DieRoll(20) + 20);
+        SaveGame.TimedColdResistance.AddTimer(base.SaveGame.DieRoll(20) + 20);
+        SaveGame.TimedPoisonResistance.AddTimer(base.SaveGame.DieRoll(20) + 20);
         item.RechargeTimeLeft = 111;
     }
     public string DescribeActivationEffect => "resistance (20+d20 turns) every 111 turns";

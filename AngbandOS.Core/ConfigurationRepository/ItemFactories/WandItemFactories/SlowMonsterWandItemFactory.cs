@@ -17,7 +17,7 @@ internal class SlowMonsterWandItemFactory : WandItemFactory
 
     public override void ApplyMagic(Item item, int level, int power, Store? store)
     {
-        item.TypeSpecificValue = SaveGame.Rng.DieRoll(10) + 6;
+        item.TypeSpecificValue = SaveGame.DieRoll(10) + 6;
     }
 
     public override int[] Chance => new int[] { 1, 0, 0, 0 };

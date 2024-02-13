@@ -17,7 +17,7 @@ internal class PerceptionStaffItemFactory : StaffItemFactory
 
     public override void ApplyMagic(Item item, int level, int power, Store? store)
     {
-        item.TypeSpecificValue = SaveGame.Rng.DieRoll(15) + 5;
+        item.TypeSpecificValue = SaveGame.DieRoll(15) + 5;
     }
     public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int Cost => 400;

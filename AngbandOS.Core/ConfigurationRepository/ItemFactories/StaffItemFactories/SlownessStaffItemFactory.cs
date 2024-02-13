@@ -17,7 +17,7 @@ internal class SlownessStaffItemFactory : StaffItemFactory
 
     public override void ApplyMagic(Item item, int level, int power, Store? store)
     {
-        item.TypeSpecificValue = SaveGame.Rng.DieRoll(8) + 8;
+        item.TypeSpecificValue = SaveGame.DieRoll(8) + 8;
     }
 
     public override int[] Chance => new int[] { 1, 0, 0, 0 };
@@ -30,7 +30,7 @@ internal class SlownessStaffItemFactory : StaffItemFactory
 
     public override void UseStaff(UseStaffEvent eventArgs)
     {
-        if (SaveGame.TimedSlow.AddTimer(SaveGame.Rng.DieRoll(30) + 15))
+        if (SaveGame.TimedSlow.AddTimer(SaveGame.DieRoll(30) + 15))
         {
             eventArgs.Identified = true;
         }

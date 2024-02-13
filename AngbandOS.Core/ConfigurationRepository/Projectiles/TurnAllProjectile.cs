@@ -24,8 +24,8 @@ internal class TurnAllProjectile : Projectile
         {
             obvious = true;
         }
-        int doFear = SaveGame.Rng.DiceRoll(3, dam / 2) + 1;
-        if (rPtr.Unique || rPtr.ImmuneFear || rPtr.Level > SaveGame.Rng.DieRoll(dam - 10 < 1 ? 1 : dam - 10) + 10)
+        int doFear = SaveGame.DiceRoll(3, dam / 2) + 1;
+        if (rPtr.Unique || rPtr.ImmuneFear || rPtr.Level > SaveGame.DieRoll(dam - 10 < 1 ? 1 : dam - 10) + 10)
         {
             note = " is unaffected!";
             obvious = false;

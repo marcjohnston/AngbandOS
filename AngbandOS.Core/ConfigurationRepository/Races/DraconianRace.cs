@@ -106,7 +106,7 @@ internal class DraconianRace : Race
         string projectileDescription;
 
         // Default to being randomly fire (66% chance) or cold (33% chance)
-        if (SaveGame.Rng.DieRoll(3) == 1)
+        if (SaveGame.DieRoll(3) == 1)
         {
             projectile = SaveGame.SingletonRepository.Projectiles.Get(nameof(ColdProjectile));
             projectileDescription = "cold";
@@ -118,7 +118,7 @@ internal class DraconianRace : Race
         }
 
         // Chance of replacing the default fire/cold element with a special one
-        if (SaveGame.Rng.DieRoll(100) < SaveGame.ExperienceLevel)
+        if (SaveGame.DieRoll(100) < SaveGame.ExperienceLevel)
         {
             switch (SaveGame.BaseCharacterClass.ID)
             {
@@ -126,7 +126,7 @@ internal class DraconianRace : Race
                 case CharacterClass.Ranger:
                 case CharacterClass.Druid:
                 case CharacterClass.ChosenOne:
-                    if (SaveGame.Rng.DieRoll(3) == 1)
+                    if (SaveGame.DieRoll(3) == 1)
                     {
                         projectile = SaveGame.SingletonRepository.Projectiles.Get(nameof(MissileProjectile));
                         projectileDescription = "the elements";
@@ -142,7 +142,7 @@ internal class DraconianRace : Race
                 case CharacterClass.WarriorMage:
                 case CharacterClass.HighMage:
                 case CharacterClass.Channeler:
-                    if (SaveGame.Rng.DieRoll(3) == 1)
+                    if (SaveGame.DieRoll(3) == 1)
                     {
                         projectile = SaveGame.SingletonRepository.Projectiles.Get(nameof(ManaProjectile));
                         projectileDescription = "mana";
@@ -156,7 +156,7 @@ internal class DraconianRace : Race
 
                 case CharacterClass.Fanatic:
                 case CharacterClass.Cultist:
-                    if (SaveGame.Rng.DieRoll(3) != 1)
+                    if (SaveGame.DieRoll(3) != 1)
                     {
                         projectile = SaveGame.SingletonRepository.Projectiles.Get(nameof(ConfusionProjectile));
                         projectileDescription = "confusion";
@@ -169,7 +169,7 @@ internal class DraconianRace : Race
                     break;
 
                 case CharacterClass.Monk:
-                    if (SaveGame.Rng.DieRoll(3) != 1)
+                    if (SaveGame.DieRoll(3) != 1)
                     {
                         projectile = SaveGame.SingletonRepository.Projectiles.Get(nameof(ConfusionProjectile));
                         projectileDescription = "confusion";
@@ -183,7 +183,7 @@ internal class DraconianRace : Race
 
                 case CharacterClass.Mindcrafter:
                 case CharacterClass.Mystic:
-                    if (SaveGame.Rng.DieRoll(3) != 1)
+                    if (SaveGame.DieRoll(3) != 1)
                     {
                         projectile = SaveGame.SingletonRepository.Projectiles.Get(nameof(ConfusionProjectile));
                         projectileDescription = "confusion";
@@ -197,7 +197,7 @@ internal class DraconianRace : Race
 
                 case CharacterClass.Priest:
                 case CharacterClass.Paladin:
-                    if (SaveGame.Rng.DieRoll(3) == 1)
+                    if (SaveGame.DieRoll(3) == 1)
                     {
                         projectile = SaveGame.SingletonRepository.Projectiles.Get(nameof(HellfireProjectile));
                         projectileDescription = "hellfire";
@@ -210,7 +210,7 @@ internal class DraconianRace : Race
                     break;
 
                 case CharacterClass.Rogue:
-                    if (SaveGame.Rng.DieRoll(3) == 1)
+                    if (SaveGame.DieRoll(3) == 1)
                     {
                         projectile = SaveGame.SingletonRepository.Projectiles.Get(nameof(DarkProjectile));
                         projectileDescription = "darkness";

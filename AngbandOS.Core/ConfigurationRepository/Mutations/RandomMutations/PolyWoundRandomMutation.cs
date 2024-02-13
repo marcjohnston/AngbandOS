@@ -18,7 +18,7 @@ internal class PolyWoundRandomMutation : Mutation
 
     public override void OnProcessWorld()
     {
-        if (base.SaveGame.Rng.DieRoll(3000) == 1)
+        if (base.SaveGame.DieRoll(3000) == 1)
         {
             SaveGame.RunScript(nameof(PolymorphWoundsScript));
         }

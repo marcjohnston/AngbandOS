@@ -63,7 +63,7 @@ internal class RogueCharacterClass : BaseCharacterClass
     public override int MaximumWeight => 30;
     public override IArtifactBias? ArtifactBias => SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(RogueArtifactBias));
     public override int FromScrollWarriorArtifactBiasPercentageChance => 25;
-    public override bool SenseInventoryTest(int level) => (0 != SaveGame.Rng.RandomLessThan(20000 / ((level * level) + 40)));
+    public override bool SenseInventoryTest(int level) => (0 != SaveGame.RandomLessThan(20000 / ((level * level) + 40)));
     public override bool DetailedSenseInventory => true;
     public override Realm[] AvailablePrimaryRealms => new Realm[] {
         SaveGame.SingletonRepository.Realms.Get(nameof(SorceryRealm)),

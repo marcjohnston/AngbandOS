@@ -73,7 +73,7 @@ internal class GetRumourScript : Script, IScript, IRepeatableScript
             }
         }
         // Pick a random rumour from the list
-        int choice = SaveGame.Rng.RandomLessThan(maxRumor);
+        int choice = SaveGame.RandomLessThan(maxRumor);
         char type = rumorType[choice];
         int index = rumorIndex[choice];
         // Give us the appropriate information based on the rumour's type

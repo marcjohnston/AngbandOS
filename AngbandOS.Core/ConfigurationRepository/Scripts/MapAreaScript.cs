@@ -18,10 +18,10 @@ internal class MapAreaScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        int y1 = SaveGame.PanelRowMin - SaveGame.Rng.DieRoll(10);
-        int y2 = SaveGame.PanelRowMax + SaveGame.Rng.DieRoll(10);
-        int x1 = SaveGame.PanelColMin - SaveGame.Rng.DieRoll(20);
-        int x2 = SaveGame.PanelColMax + SaveGame.Rng.DieRoll(20);
+        int y1 = SaveGame.PanelRowMin - SaveGame.DieRoll(10);
+        int y2 = SaveGame.PanelRowMax + SaveGame.DieRoll(10);
+        int x1 = SaveGame.PanelColMin - SaveGame.DieRoll(20);
+        int x2 = SaveGame.PanelColMax + SaveGame.DieRoll(20);
         if (y1 < 1)
         {
             y1 = 1;

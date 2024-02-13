@@ -18,8 +18,8 @@ internal class SearchingAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
 
     public override void ApplyMagic(Item item, int level, int power, Store? store)
     {
-        item.TypeSpecificValue = SaveGame.Rng.DieRoll(5) + item.GetBonusValue(5, level);
-        if (power < 0 || (power == 0 && SaveGame.Rng.RandomLessThan(100) < 50))
+        item.TypeSpecificValue = SaveGame.DieRoll(5) + item.GetBonusValue(5, level);
+        if (power < 0 || (power == 0 && SaveGame.RandomLessThan(100) < 50))
         {
             item.IdentBroken = true;
             item.IdentCursed = true;

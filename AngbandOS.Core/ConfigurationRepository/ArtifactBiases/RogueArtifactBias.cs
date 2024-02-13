@@ -16,7 +16,7 @@ internal class RogueArtifactBias : ArtifactBias
         if (!item.RandartItemCharacteristics.Stealth)
         {
             item.RandartItemCharacteristics.Stealth = true;
-            if (SaveGame.Rng.DieRoll(2) == 1)
+            if (SaveGame.DieRoll(2) == 1)
             {
                 return true;
             }
@@ -31,7 +31,7 @@ internal class RogueArtifactBias : ArtifactBias
             if (!item.RandartItemCharacteristics.BrandPois)
             {
                 item.RandartItemCharacteristics.BrandPois = true;
-                if (SaveGame.Rng.DieRoll(2) == 1)
+                if (SaveGame.DieRoll(2) == 1)
                 {
                     return true;
                 }
@@ -42,19 +42,19 @@ internal class RogueArtifactBias : ArtifactBias
 
     public override Activation GetActivationPowerType(Item item)
     {
-        if (SaveGame.Rng.DieRoll(50) == 1)
+        if (SaveGame.DieRoll(50) == 1)
         {
             return SaveGame.SingletonRepository.Activations.Get(nameof(SpeedActivation));
         }
-        else if (SaveGame.Rng.DieRoll(4) == 1)
+        else if (SaveGame.DieRoll(4) == 1)
         {
             return SaveGame.SingletonRepository.Activations.Get(nameof(SleepActivation));
         }
-        else if (SaveGame.Rng.DieRoll(3) == 1)
+        else if (SaveGame.DieRoll(3) == 1)
         {
             return SaveGame.SingletonRepository.Activations.Get(nameof(DetectAllActivation));
         }
-        else if (SaveGame.Rng.DieRoll(8) == 1)
+        else if (SaveGame.DieRoll(8) == 1)
         {
             return SaveGame.SingletonRepository.Activations.Get(nameof(IdFullActivation));
         }

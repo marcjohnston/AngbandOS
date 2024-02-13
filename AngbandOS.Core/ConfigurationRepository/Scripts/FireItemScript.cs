@@ -67,7 +67,7 @@ internal class FireItemScript : Script, IScript, IRepeatableScript
         ColorEnum missileColor = individualAmmunition.Factory.FlavorColor;
         char missileCharacter = individualAmmunition.Factory.FlavorSymbol.Character;
         int shotSpeed = SaveGame.MissileAttacksPerRound;
-        int shotDamage = SaveGame.Rng.DiceRoll(individualAmmunition.DamageDice, individualAmmunition.DamageDiceSides) + individualAmmunition.BonusDamage + missileWeapon.BonusDamage;
+        int shotDamage = SaveGame.DiceRoll(individualAmmunition.DamageDice, individualAmmunition.DamageDiceSides) + individualAmmunition.BonusDamage + missileWeapon.BonusDamage;
         int attackBonus = SaveGame.AttackBonus + individualAmmunition.BonusToHit + missileWeapon.BonusToHit;
         int chanceToHit = SaveGame.SkillRanged + (attackBonus * Constants.BthPlusAdj);
         // Damage multiplier depends on weapon

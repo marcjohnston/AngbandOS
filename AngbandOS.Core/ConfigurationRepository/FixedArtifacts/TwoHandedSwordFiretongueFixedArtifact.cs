@@ -17,10 +17,10 @@ internal class TwoHandedSwordFiretongueFixedArtifact : FixedArtifact
 
     public override void ApplyResistances(Item item)
     {
-        if (SaveGame.Rng.DieRoll(2) == 1)
+        if (SaveGame.DieRoll(2) == 1)
         {
             IArtifactBias artifactBias = null;
-            item.ApplyRandomResistance(ref artifactBias, SaveGame.Rng.DieRoll(22) + 16);
+            item.ApplyRandomResistance(ref artifactBias, SaveGame.DieRoll(22) + 16);
         }
         else
         {

@@ -85,12 +85,12 @@ internal class ForceProjectile : Projectile
         {
             obvious = true;
         }
-        int doStun = (SaveGame.Rng.DieRoll(15) + r) / (r + 1);
+        int doStun = (SaveGame.DieRoll(15) + r) / (r + 1);
         if (rPtr.BreatheForce)
         {
             note = " resists.";
             dam *= 3;
-            dam /= SaveGame.Rng.DieRoll(6) + 6;
+            dam /= SaveGame.DieRoll(6) + 6;
         }
         if (doStun != 0 && !rPtr.BreatheSound && !rPtr.BreatheForce)
         {
@@ -127,7 +127,7 @@ internal class ForceProjectile : Projectile
         }
         if (!SaveGame.HasSoundResistance)
         {
-            SaveGame.TimedStun.AddTimer(SaveGame.Rng.DieRoll(20));
+            SaveGame.TimedStun.AddTimer(SaveGame.DieRoll(20));
         }
         SaveGame.TakeHit(dam, killer);
         return true;

@@ -46,7 +46,7 @@ internal class TeleportAwayEvilProjectile : Projectile
                     note = " is unaffected!";
                     resistsTele = true;
                 }
-                else if (rPtr.Level > SaveGame.Rng.DieRoll(100))
+                else if (rPtr.Level > SaveGame.DieRoll(100))
                 {
                     if (seen)
                     {

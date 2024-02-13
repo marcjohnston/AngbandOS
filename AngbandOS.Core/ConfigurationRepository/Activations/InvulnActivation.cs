@@ -20,7 +20,7 @@ internal class InvulnActivation : Activation
 
     public override bool Activate()
     {
-        SaveGame.TimedInvulnerability.AddTimer(SaveGame.Rng.DieRoll(8) + 8);
+        SaveGame.TimedInvulnerability.AddTimer(SaveGame.DieRoll(8) + 8);
         return true;
     }
 

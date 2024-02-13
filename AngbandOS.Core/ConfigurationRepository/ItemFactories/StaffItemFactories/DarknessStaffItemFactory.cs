@@ -17,7 +17,7 @@ internal class DarknessStaffItemFactory : StaffItemFactory
 
     public override void ApplyMagic(Item item, int level, int power, Store? store)
     {
-        item.TypeSpecificValue = SaveGame.Rng.DieRoll(8) + 8;
+        item.TypeSpecificValue = SaveGame.DieRoll(8) + 8;
     }
 
     public override int[] Chance => new int[] { 1, 1, 0, 0 };
@@ -32,7 +32,7 @@ internal class DarknessStaffItemFactory : StaffItemFactory
     {
         if (!SaveGame.HasBlindnessResistance && !SaveGame.HasDarkResistance)
         {
-            if (SaveGame.TimedBlindness.AddTimer(3 + SaveGame.Rng.DieRoll(5)))
+            if (SaveGame.TimedBlindness.AddTimer(3 + SaveGame.DieRoll(5)))
             {
                 eventArgs.Identified = true;
             }

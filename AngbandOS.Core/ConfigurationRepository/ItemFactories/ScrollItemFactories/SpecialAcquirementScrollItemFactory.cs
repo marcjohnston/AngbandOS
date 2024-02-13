@@ -24,7 +24,7 @@ internal class SpecialAcquirementScrollItemFactory : ScrollItemFactory
 
     public override void Read(ReadScrollEvent eventArgs)
     {
-        SaveGame.Acquirement(SaveGame.MapY, SaveGame.MapX, SaveGame.Rng.DieRoll(2) + 1, true);
+        SaveGame.Acquirement(SaveGame.MapY, SaveGame.MapX, SaveGame.DieRoll(2) + 1, true);
         eventArgs.Identified = true;
     }
     public override Item CreateItem() => new Item(SaveGame, this);

@@ -16,11 +16,11 @@ internal class BalanceDragonScaleMailArmorItemFactory : DragonScaleMailArmorItem
         {
             return;
         }
-        int chance = SaveGame.Rng.RandomLessThan(4);
+        int chance = SaveGame.RandomLessThan(4);
         string element = chance == 1 ? "chaos" : (chance == 2 ? "disenchantment" : (chance == 3 ? "sound" : "shards"));
         SaveGame.MsgPrint($"You breathe {element}.");
         SaveGame.FireBall(chance == 1 ? SaveGame.SingletonRepository.Projectiles.Get(nameof(ChaosProjectile)) : (chance == 2 ? SaveGame.SingletonRepository.Projectiles.Get(nameof(DisenchantProjectile)) : (chance == 3 ? (Projectile)SaveGame.SingletonRepository.Projectiles.Get(nameof(SoundProjectile)) : SaveGame.SingletonRepository.Projectiles.Get(nameof(ExplodeProjectile)))), dir, 250, -2);
-        item.RechargeTimeLeft = SaveGame.Rng.RandomLessThan(300) + 300;
+        item.RechargeTimeLeft = SaveGame.RandomLessThan(300) + 300;
     }
     private BalanceDragonScaleMailArmorItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 

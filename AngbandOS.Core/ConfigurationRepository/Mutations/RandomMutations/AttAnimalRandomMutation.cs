@@ -18,12 +18,12 @@ internal class AttAnimalRandomMutation : Mutation
 
     public override void OnProcessWorld()
     {
-        if (SaveGame.HasAntiMagic || base.SaveGame.Rng.DieRoll(7000) != 1)
+        if (SaveGame.HasAntiMagic || base.SaveGame.DieRoll(7000) != 1)
         {
             return;
         }
         bool aSummon;
-        if (base.SaveGame.Rng.DieRoll(3) == 1)
+        if (base.SaveGame.DieRoll(3) == 1)
         {
             aSummon = SaveGame.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, SaveGame.Difficulty, SaveGame.SingletonRepository.MonsterFilters.Get(nameof(AnimalMonsterFilter)), true);
         }

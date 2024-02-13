@@ -218,7 +218,7 @@ internal class Store
 
     private Shopkeeper GetRandomOwner()
     {
-        return StoreFactory.Shopkeepers[SaveGame.Rng.RandomLessThan(StoreFactory.Shopkeepers.Length)];
+        return StoreFactory.Shopkeepers[SaveGame.RandomLessThan(StoreFactory.Shopkeepers.Length)];
     }
 
     private void StoreCreate()
@@ -235,7 +235,7 @@ internal class Store
             int? level = StoreFactory.LevelForRandomItemCreation;
             if (level != null)
             {
-                level = level.Value + SaveGame.Rng.RandomLessThan(level.Value);
+                level = level.Value + SaveGame.RandomLessThan(level.Value);
                 ItemFactory? itemFactory = SaveGame.RandomItemType(level.Value, false, false);
                 if (itemFactory == null)
                 {
@@ -246,10 +246,10 @@ internal class Store
             else
             {
                 // Pick a random item fctory that will be used to create the item.
-                ItemFactory itemFactory = InventoryFactories[SaveGame.Rng.RandomLessThan(InventoryFactories.Length)];
+                ItemFactory itemFactory = InventoryFactories[SaveGame.RandomLessThan(InventoryFactories.Length)];
 
                 // Generate a level for the item.
-                level = SaveGame.Rng.RandomBetween(1, Constants.StoreObjLevel);
+                level = SaveGame.RandomBetween(1, Constants.StoreObjLevel);
 
                 // Create the item.
                 newItem = itemFactory.CreateItem();
@@ -281,13 +281,13 @@ internal class Store
 
     private void StoreDelete()
     {
-        int what = SaveGame.Rng.RandomLessThan(StoreInventoryList.Count);
+        int what = SaveGame.RandomLessThan(StoreInventoryList.Count);
         int num = StoreInventoryList[what].Count;
-        if (SaveGame.Rng.RandomLessThan(100) < 50)
+        if (SaveGame.RandomLessThan(100) < 50)
         {
             num = (num + 1) / 2;
         }
-        if (SaveGame.Rng.RandomLessThan(100) < 50)
+        if (SaveGame.RandomLessThan(100) < 50)
         {
             num = 1;
         }
@@ -513,19 +513,19 @@ internal class Store
         {
             discount = 0;
         }
-        else if (SaveGame.Rng.RandomLessThan(25) == 0)
+        else if (SaveGame.RandomLessThan(25) == 0)
         {
             discount = 25;
         }
-        else if (SaveGame.Rng.RandomLessThan(150) == 0)
+        else if (SaveGame.RandomLessThan(150) == 0)
         {
             discount = 50;
         }
-        else if (SaveGame.Rng.RandomLessThan(300) == 0)
+        else if (SaveGame.RandomLessThan(300) == 0)
         {
             discount = 75;
         }
-        else if (SaveGame.Rng.RandomLessThan(500) == 0)
+        else if (SaveGame.RandomLessThan(500) == 0)
         {
             discount = 90;
         }
@@ -751,7 +751,7 @@ internal class Store
 
         // First phase, is to delete some items from the store.  Get the number of inventory items and alter this count by the turnover rate.
         int desiredTurnOverInventoryCount = StoreInventoryList.Count;
-        desiredTurnOverInventoryCount -= SaveGame.Rng.DieRoll(StoreFactory.StoreTurnover);
+        desiredTurnOverInventoryCount -= SaveGame.DieRoll(StoreFactory.StoreTurnover);
 
         // Ensure the count didn't go below zero.
         if (desiredTurnOverInventoryCount < 0)
@@ -769,7 +769,7 @@ internal class Store
         int desiredFinalInventoryCount = StoreInventoryList.Count;
 
         // Add a turnover rating to the count.
-        desiredFinalInventoryCount += SaveGame.Rng.DieRoll(StoreFactory.StoreTurnover);
+        desiredFinalInventoryCount += SaveGame.DieRoll(StoreFactory.StoreTurnover);
 
         // Ensure the new inventory level meets the store standards.
         if (desiredFinalInventoryCount > StoreFactory.MaxInventory)

@@ -31,26 +31,26 @@ internal abstract class MeleeWeaponItemFactory : WeaponItemFactory
         if (power > 1)
         {
             IArtifactBias artifactBias = null;
-            switch (SaveGame.Rng.DieRoll(CanBeWeaponOfLaw || CanBeWeaponOfSharpness ? 42 : 40))
+            switch (SaveGame.DieRoll(CanBeWeaponOfLaw || CanBeWeaponOfSharpness ? 42 : 40))
             {
                 case 1:
                     item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(WeaponElderSignInscribedRareItem));
-                    if (SaveGame.Rng.DieRoll(4) == 1)
+                    if (SaveGame.DieRoll(4) == 1)
                     {
                         item.RandartItemCharacteristics.Blows = true;
                         if (item.TypeSpecificValue > 2)
                         {
-                            item.TypeSpecificValue -= SaveGame.Rng.DieRoll(2);
+                            item.TypeSpecificValue -= SaveGame.DieRoll(2);
                         }
                     }
                     break;
                 case 2:
                     item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(WeaponDefenderRareItem));
-                    if (SaveGame.Rng.DieRoll(3) == 1)
+                    if (SaveGame.DieRoll(3) == 1)
                     {
                         item.RandartItemCharacteristics.ResPois = true;
                     }
-                    item.ApplyRandomResistance(ref artifactBias, SaveGame.Rng.DieRoll(22) + 16);
+                    item.ApplyRandomResistance(ref artifactBias, SaveGame.DieRoll(22) + 16);
                     break;
                 case 3:
                     item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(WeaponOfVitriolRareItem));
@@ -67,7 +67,7 @@ internal abstract class MeleeWeaponItemFactory : WeaponItemFactory
                 case 7:
                 case 8:
                     item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(WeaponOfSlayAnimalRareItem));
-                    if (SaveGame.Rng.RandomLessThan(100) < 20)
+                    if (SaveGame.RandomLessThan(100) < 20)
                     {
                         item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(WeaponOfAnimalBaneRareItem));
                     }
@@ -75,21 +75,21 @@ internal abstract class MeleeWeaponItemFactory : WeaponItemFactory
                 case 9:
                 case 10:
                     item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(WeaponOfSlayDragonRareItem));
-                    item.ApplyRandomResistance(ref artifactBias, SaveGame.Rng.DieRoll(12) + 4);
-                    if (SaveGame.Rng.RandomLessThan(100) < 20)
+                    item.ApplyRandomResistance(ref artifactBias, SaveGame.DieRoll(12) + 4);
+                    if (SaveGame.RandomLessThan(100) < 20)
                     {
-                        if (SaveGame.Rng.DieRoll(3) == 1)
+                        if (SaveGame.DieRoll(3) == 1)
                         {
                             item.RandartItemCharacteristics.ResPois = true;
                         }
-                        item.ApplyRandomResistance(ref artifactBias, SaveGame.Rng.DieRoll(14) + 4);
+                        item.ApplyRandomResistance(ref artifactBias, SaveGame.DieRoll(14) + 4);
                         item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(WeaponOfDragonBaneRareItem));
                     }
                     break;
                 case 11:
                 case 12:
                     item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(WeaponOfSlayEvilRareItem));
-                    if (SaveGame.Rng.RandomLessThan(100) < 20)
+                    if (SaveGame.RandomLessThan(100) < 20)
                     {
                         item.RandartItemCharacteristics.ResFear = true;
                         item.RandartItemCharacteristics.Blessed = true;
@@ -100,7 +100,7 @@ internal abstract class MeleeWeaponItemFactory : WeaponItemFactory
                 case 14:
                     item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(WeaponOfSlayUndeadRareItem));
                     item.RandartItemCharacteristics.HoldLife = true;
-                    if (SaveGame.Rng.RandomLessThan(100) < 20)
+                    if (SaveGame.RandomLessThan(100) < 20)
                     {
                         item.RandartItemCharacteristics.ResNether = true;
                         item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(WeaponOfUndeadBaneRareItem));
@@ -128,7 +128,7 @@ internal abstract class MeleeWeaponItemFactory : WeaponItemFactory
                     break;
                 case 27:
                     item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(WeaponOfKadathRareItem));
-                    if (SaveGame.Rng.DieRoll(3) == 1)
+                    if (SaveGame.DieRoll(3) == 1)
                     {
                         item.RandartItemCharacteristics.ResFear = true;
                     }
@@ -149,7 +149,7 @@ internal abstract class MeleeWeaponItemFactory : WeaponItemFactory
                     break;
                 case 34:
                     item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(WeaponChaoticRareItem));
-                    item.ApplyRandomResistance(ref artifactBias, SaveGame.Rng.DieRoll(34) + 4);
+                    item.ApplyRandomResistance(ref artifactBias, SaveGame.DieRoll(34) + 4);
                     break;
                 case 35:
                     item.CreateRandart(false);
@@ -157,7 +157,7 @@ internal abstract class MeleeWeaponItemFactory : WeaponItemFactory
                 case 36:
                 case 37:
                     item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(WeaponOfSlayingRareItem));
-                    if (SaveGame.Rng.DieRoll(3) == 1)
+                    if (SaveGame.DieRoll(3) == 1)
                     {
                         item.DamageDice *= 2;
                     }
@@ -166,17 +166,17 @@ internal abstract class MeleeWeaponItemFactory : WeaponItemFactory
                         do
                         {
                             item.DamageDice++;
-                        } while (SaveGame.Rng.DieRoll(item.DamageDice) == 1);
+                        } while (SaveGame.DieRoll(item.DamageDice) == 1);
                         do
                         {
                             item.DamageDiceSides++;
-                        } while (SaveGame.Rng.DieRoll(item.DamageDiceSides) == 1);
+                        } while (SaveGame.DieRoll(item.DamageDiceSides) == 1);
                     }
-                    if (SaveGame.Rng.DieRoll(5) == 1)
+                    if (SaveGame.DieRoll(5) == 1)
                     {
                         item.RandartItemCharacteristics.BrandPois = true;
                     }
-                    if (CapableOfVorpalSlaying && SaveGame.Rng.DieRoll(3) == 1)
+                    if (CapableOfVorpalSlaying && SaveGame.DieRoll(3) == 1)
                     {
                         item.RandartItemCharacteristics.Vorpal = true;
                     }
@@ -184,27 +184,27 @@ internal abstract class MeleeWeaponItemFactory : WeaponItemFactory
                 case 38:
                 case 39:
                     item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(WeaponPlanarWeaponRareItem));
-                    item.ApplyRandomResistance(ref artifactBias, SaveGame.Rng.DieRoll(22) + 16);
-                    if (SaveGame.Rng.DieRoll(5) == 1)
+                    item.ApplyRandomResistance(ref artifactBias, SaveGame.DieRoll(22) + 16);
+                    if (SaveGame.DieRoll(5) == 1)
                     {
                         item.RandartItemCharacteristics.SlayDemon = true;
                     }
                     break;
                 case 40:
                     item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(WeaponOfLawRareItem));
-                    if (SaveGame.Rng.DieRoll(3) == 1)
+                    if (SaveGame.DieRoll(3) == 1)
                     {
                         item.RandartItemCharacteristics.HoldLife = true;
                     }
-                    if (SaveGame.Rng.DieRoll(3) == 1)
+                    if (SaveGame.DieRoll(3) == 1)
                     {
                         item.RandartItemCharacteristics.Dex = true;
                     }
-                    if (SaveGame.Rng.DieRoll(5) == 1)
+                    if (SaveGame.DieRoll(5) == 1)
                     {
                         item.RandartItemCharacteristics.ResFear = true;
                     }
-                    item.ApplyRandomResistance(ref artifactBias, SaveGame.Rng.DieRoll(22) + 16);
+                    item.ApplyRandomResistance(ref artifactBias, SaveGame.DieRoll(22) + 16);
                     break;
                 case 41:
                 case 42:
@@ -216,7 +216,7 @@ internal abstract class MeleeWeaponItemFactory : WeaponItemFactory
                     else
                     {
                         item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(WeaponOfEarthquakesRareItem));
-                        if (SaveGame.Rng.DieRoll(3) == 1)
+                        if (SaveGame.DieRoll(3) == 1)
                         {
                             item.RandartItemCharacteristics.Blows = true;
                         }
@@ -224,7 +224,7 @@ internal abstract class MeleeWeaponItemFactory : WeaponItemFactory
                     }
                     break;
             }
-            while (SaveGame.Rng.RandomLessThan(10 * item.DamageDice * item.DamageDiceSides) == 0)
+            while (SaveGame.RandomLessThan(10 * item.DamageDice * item.DamageDiceSides) == 0)
             {
                 item.DamageDice++;
             }
@@ -235,10 +235,10 @@ internal abstract class MeleeWeaponItemFactory : WeaponItemFactory
         }
         else if (power < -1)
         {
-            if (SaveGame.Rng.RandomLessThan(Constants.MaxDepth) < level)
+            if (SaveGame.RandomLessThan(Constants.MaxDepth) < level)
             {
                 item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(WeaponOfLengRareItem));
-                if (SaveGame.Rng.DieRoll(6) == 1)
+                if (SaveGame.DieRoll(6) == 1)
                 {
                     item.RandartItemCharacteristics.DreadCurse = true;
                 }

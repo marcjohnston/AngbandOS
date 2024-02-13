@@ -77,11 +77,11 @@ internal class AimWandScript : Script, IScript, IRepeatableScript, ISuccessfulSc
         }
         chance -= itemLevel > 50 ? 50 : itemLevel;
         // Always a small chance of success
-        if (chance < Constants.UseDevice && SaveGame.Rng.RandomLessThan(Constants.UseDevice - chance + 1) == 0)
+        if (chance < Constants.UseDevice && SaveGame.RandomLessThan(Constants.UseDevice - chance + 1) == 0)
         {
             chance = Constants.UseDevice;
         }
-        if (chance < Constants.UseDevice || SaveGame.Rng.DieRoll(chance) < Constants.UseDevice)
+        if (chance < Constants.UseDevice || SaveGame.DieRoll(chance) < Constants.UseDevice)
         {
             SaveGame.MsgPrint("You failed to use the wand properly.");
             return false;

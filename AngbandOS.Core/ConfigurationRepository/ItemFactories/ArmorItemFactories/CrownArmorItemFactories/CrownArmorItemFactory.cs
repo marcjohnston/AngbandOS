@@ -18,15 +18,15 @@ internal abstract class CrownArmorItemFactory : ArmorItemFactory
     protected override void ApplyRandomGoodRareCharacteristics(Item item)
     {
         IArtifactBias artifactBias = null;
-        switch (SaveGame.Rng.DieRoll(8))
+        switch (SaveGame.DieRoll(8))
         {
             case 1:
                 item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(HatOfTheMagiRareItem));
-                item.ApplyRandomResistance(ref artifactBias, SaveGame.Rng.DieRoll(22) + 16);
+                item.ApplyRandomResistance(ref artifactBias, SaveGame.DieRoll(22) + 16);
                 break;
             case 2:
                 item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(HatOfMightRareItem));
-                item.ApplyRandomResistance(ref artifactBias, SaveGame.Rng.DieRoll(22) + 16);
+                item.ApplyRandomResistance(ref artifactBias, SaveGame.DieRoll(22) + 16);
                 break;
             case 3:
                 item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(HatOfTelepathyRareItem));
@@ -37,12 +37,12 @@ internal abstract class CrownArmorItemFactory : ArmorItemFactory
             case 5:
             case 6:
                 item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(HatOfLordlinessRareItem));
-                item.ApplyRandomResistance(ref artifactBias, SaveGame.Rng.DieRoll(22) + 16);
+                item.ApplyRandomResistance(ref artifactBias, SaveGame.DieRoll(22) + 16);
                 break;
             case 7:
             case 8:
                 item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(HatOfSeeingRareItem));
-                if (SaveGame.Rng.DieRoll(3) == 1)
+                if (SaveGame.DieRoll(3) == 1)
                 {
                     item.RandartItemCharacteristics.Telepathy = true;
                 }
@@ -52,7 +52,7 @@ internal abstract class CrownArmorItemFactory : ArmorItemFactory
 
     protected override void ApplyRandomPoorRareCharacteristics(Item item)
     {
-        switch (SaveGame.Rng.DieRoll(7))
+        switch (SaveGame.DieRoll(7))
         {
             case 1:
             case 2:
@@ -92,7 +92,7 @@ internal abstract class CrownArmorItemFactory : ArmorItemFactory
 
             if (power > 1)
             {
-                if (SaveGame.Rng.DieRoll(20) == 1)
+                if (SaveGame.DieRoll(20) == 1)
                 {
                     item.CreateRandart(false);
                 }

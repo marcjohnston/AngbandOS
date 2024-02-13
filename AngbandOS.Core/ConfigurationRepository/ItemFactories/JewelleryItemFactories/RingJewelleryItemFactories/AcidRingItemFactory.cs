@@ -19,12 +19,12 @@ internal class AcidRingItemFactory : RingItemFactory, IItemsCanBeActivated
             return;
         }
         SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(AcidProjectile)), dir, 50, 2);
-        SaveGame.TimedAcidResistance.AddTimer(SaveGame.Rng.DieRoll(20) + 20);
-        item.RechargeTimeLeft = SaveGame.Rng.RandomLessThan(50) + 50;
+        SaveGame.TimedAcidResistance.AddTimer(SaveGame.DieRoll(20) + 20);
+        item.RechargeTimeLeft = SaveGame.RandomLessThan(50) + 50;
     }
     public override void ApplyMagic(Item item, int level, int power, Store? store)
     {
-        item.BonusArmorClass = 5 + SaveGame.Rng.DieRoll(5) + item.GetBonusValue(10, level);
+        item.BonusArmorClass = 5 + SaveGame.DieRoll(5) + item.GetBonusValue(10, level);
     }
     public override string? DescribeActivationEffect => "ball of acid and resist acid";
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(EqualSignSymbol));

@@ -32,7 +32,7 @@ internal class ControlUndeadProjectile : Projectile
             obvious = true;
         }
         if (rPtr.Unique || !rPtr.Undead ||
-            rPtr.Level > SaveGame.Rng.DieRoll(dam - 10 < 1 ? 1 : dam - 10) + 10)
+            rPtr.Level > SaveGame.DieRoll(dam - 10 < 1 ? 1 : dam - 10) + 10)
         {
             note = " is unaffected!";
             obvious = false;

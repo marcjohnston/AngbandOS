@@ -22,7 +22,7 @@ internal class VampiricDrainScript : Script, IScript
         {
             return;
         }
-        int dummy = SaveGame.ExperienceLevel + (SaveGame.Rng.DieRoll(SaveGame.ExperienceLevel) * Math.Max(1, SaveGame.ExperienceLevel / 10));
+        int dummy = SaveGame.ExperienceLevel + (SaveGame.DieRoll(SaveGame.ExperienceLevel) * Math.Max(1, SaveGame.ExperienceLevel / 10));
         if (!SaveGame.DrainLife(dir, dummy))
         {
             return;

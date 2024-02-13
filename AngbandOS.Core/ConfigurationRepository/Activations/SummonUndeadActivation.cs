@@ -18,7 +18,7 @@ internal class SummonUndeadActivation : Activation
 
     public override bool Activate()
     {
-        if (SaveGame.Rng.DieRoll(3) == 1)
+        if (SaveGame.DieRoll(3) == 1)
         {
             if (SaveGame.SummonSpecific(SaveGame.MapY, SaveGame.MapX, (int)(SaveGame.ExperienceLevel * 1.5), SaveGame.ExperienceLevel > 47 ? SaveGame.SingletonRepository.MonsterFilters.Get(nameof(HiUndeadMonsterFilter)) : SaveGame.SingletonRepository.MonsterFilters.Get(nameof(UndeadMonsterFilter))))
             {
@@ -28,7 +28,7 @@ internal class SummonUndeadActivation : Activation
         }
         else
         {
-            if (SaveGame.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, (int)(SaveGame.ExperienceLevel * 1.5), SaveGame.ExperienceLevel > 47 ? SaveGame.SingletonRepository.MonsterFilters.Get(nameof(HiUndeadNoUniquesMonsterFilter)) : SaveGame.SingletonRepository.MonsterFilters.Get(nameof(UndeadMonsterFilter)), SaveGame.ExperienceLevel > 24 && SaveGame.Rng.DieRoll(3) == 1))
+            if (SaveGame.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, (int)(SaveGame.ExperienceLevel * 1.5), SaveGame.ExperienceLevel > 47 ? SaveGame.SingletonRepository.MonsterFilters.Get(nameof(HiUndeadNoUniquesMonsterFilter)) : SaveGame.SingletonRepository.MonsterFilters.Get(nameof(UndeadMonsterFilter)), SaveGame.ExperienceLevel > 24 && SaveGame.DieRoll(3) == 1))
             {
                 SaveGame.MsgPrint("Cold winds begin to Attack around you, carrying with them the stench of decay...");
                 SaveGame.MsgPrint("Ancient, long-dead forms arise from the ground to serve you!");
@@ -37,7 +37,7 @@ internal class SummonUndeadActivation : Activation
         return true;
     }
 
-    public override int RechargeTime() => 666 + SaveGame.Rng.DieRoll(333);
+    public override int RechargeTime() => 666 + SaveGame.DieRoll(333);
 
     public override int Value => 20000;
 

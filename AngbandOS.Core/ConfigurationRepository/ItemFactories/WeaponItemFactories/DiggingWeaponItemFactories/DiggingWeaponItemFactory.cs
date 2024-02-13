@@ -25,7 +25,7 @@ internal abstract class DiggingWeaponItemFactory : WeaponItemFactory
         }
         else if (power < -1)
         {
-            item.TypeSpecificValue = 0 - (5 + SaveGame.Rng.DieRoll(5));
+            item.TypeSpecificValue = 0 - (5 + SaveGame.DieRoll(5));
         }
         else if (power < 0)
         {

@@ -18,7 +18,7 @@ internal class ProdManaRandomMutation : Mutation
 
     public override void OnProcessWorld()
     {
-        if (SaveGame.HasAntiMagic || base.SaveGame.Rng.DieRoll(9000) != 1)
+        if (SaveGame.HasAntiMagic || base.SaveGame.DieRoll(9000) != 1)
         {
             return;
         }

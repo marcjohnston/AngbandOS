@@ -29,11 +29,11 @@ internal class BrandWeaponWithAstraScript : Script, IScript
             // Make it a planar weapon
             act = "seems very unstable now.";
             item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(WeaponPlanarWeaponRareItem));
-            item.TypeSpecificValue = SaveGame.Rng.DieRoll(2);
+            item.TypeSpecificValue = SaveGame.DieRoll(2);
 
             // Let the player know what happened
             SaveGame.MsgPrint($"Your {itemName} {act}");
-            SaveGame.Enchant(item, SaveGame.Rng.RandomLessThan(3) + 4, Constants.EnchTohit | Constants.EnchTodam);
+            SaveGame.Enchant(item, SaveGame.RandomLessThan(3) + 4, Constants.EnchTohit | Constants.EnchTodam);
         }
         else
         {

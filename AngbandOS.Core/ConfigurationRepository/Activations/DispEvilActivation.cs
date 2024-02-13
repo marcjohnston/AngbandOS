@@ -18,7 +18,7 @@ internal class DispEvilActivation : Activation
 
     public override string? PreActivationMessage => "It floods the area with goodness...";
 
-    public override int RechargeTime() => SaveGame.Rng.RandomLessThan(300) + 300;
+    public override int RechargeTime() => SaveGame.RandomLessThan(300) + 300;
 
     public override bool Activate()
     {

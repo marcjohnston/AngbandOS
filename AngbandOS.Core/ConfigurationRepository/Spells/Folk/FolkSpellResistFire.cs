@@ -13,7 +13,7 @@ internal class FolkSpellResistFire : Spell
     private FolkSpellResistFire(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.TimedFireResistance.AddTimer(SaveGame.Rng.DieRoll(20) + 20);
+        SaveGame.TimedFireResistance.AddTimer(SaveGame.DieRoll(20) + 20);
     }
 
     public override string Name => "Resist Fire";

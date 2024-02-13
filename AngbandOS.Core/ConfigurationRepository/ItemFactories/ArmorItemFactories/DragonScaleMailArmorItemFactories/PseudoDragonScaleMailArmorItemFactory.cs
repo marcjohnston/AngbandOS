@@ -18,11 +18,11 @@ internal class PseudoDragonScaleMailArmorItemFactory : DragonScaleMailArmorItemF
         {
             return;
         }
-        int chance = SaveGame.Rng.RandomLessThan(2);
+        int chance = SaveGame.RandomLessThan(2);
         string element = chance == 0 ? "light" : "darkness";
         SaveGame.MsgPrint($"You breathe {element}.");
         SaveGame.FireBall(chance == 0 ? (Projectile)SaveGame.SingletonRepository.Projectiles.Get(nameof(LightProjectile)) : SaveGame.SingletonRepository.Projectiles.Get(nameof(DarkProjectile)), dir, 200, -2);
-        item.RechargeTimeLeft = SaveGame.Rng.RandomLessThan(300) + 300;
+        item.RechargeTimeLeft = SaveGame.RandomLessThan(300) + 300;
     }
     public override string? DescribeActivationEffect => "breathe light/darkness (200) every 300+d300 turns";
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(OpenBraceSymbol));

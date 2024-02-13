@@ -23,6 +23,6 @@ internal class HellfireScript : Script, IScript
             return;
         }
         SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(HellfireProjectile)), dir, 666, 3);
-        SaveGame.TakeHit(50 + SaveGame.Rng.DieRoll(50), "the strain of casting Hellfire");
+        SaveGame.TakeHit(50 + SaveGame.DieRoll(50), "the strain of casting Hellfire");
     }
 }

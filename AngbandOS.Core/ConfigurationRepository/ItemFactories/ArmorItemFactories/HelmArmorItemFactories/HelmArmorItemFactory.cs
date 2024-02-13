@@ -26,7 +26,7 @@ internal abstract class HelmArmorItemFactory : ArmorItemFactory
 
             if (power > 1)
             {
-                if (SaveGame.Rng.DieRoll(20) == 1)
+                if (SaveGame.DieRoll(20) == 1)
                 {
                     item.CreateRandart(false);
                 }
@@ -48,7 +48,7 @@ internal abstract class HelmArmorItemFactory : ArmorItemFactory
     public override int WieldSlot => InventorySlot.Head;
     protected override void ApplyRandomGoodRareCharacteristics(Item item)
     {
-        switch (SaveGame.Rng.DieRoll(14))
+        switch (SaveGame.DieRoll(14))
         {
             case 1:
             case 2:
@@ -65,7 +65,7 @@ internal abstract class HelmArmorItemFactory : ArmorItemFactory
             case 7:
             case 8:
                 item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(HatOfSeeingRareItem));
-                if (SaveGame.Rng.DieRoll(7) == 1)
+                if (SaveGame.DieRoll(7) == 1)
                 {
                     item.RandartItemCharacteristics.Telepathy = true;
                 }
@@ -86,7 +86,7 @@ internal abstract class HelmArmorItemFactory : ArmorItemFactory
 
     protected override void ApplyRandomPoorRareCharacteristics(Item item)
     {
-        switch (SaveGame.Rng.DieRoll(7))
+        switch (SaveGame.DieRoll(7))
         {
             case 1:
             case 2:

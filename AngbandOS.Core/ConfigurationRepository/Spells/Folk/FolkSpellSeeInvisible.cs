@@ -13,7 +13,7 @@ internal class FolkSpellSeeInvisible : Spell
     private FolkSpellSeeInvisible(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.TimedSeeInvisibility.AddTimer(SaveGame.Rng.DieRoll(24) + 24);
+        SaveGame.TimedSeeInvisibility.AddTimer(SaveGame.DieRoll(24) + 24);
     }
 
     public override string Name => "See Invisible";

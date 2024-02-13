@@ -13,7 +13,7 @@ internal class FolkSpellResistAcid : Spell
     private FolkSpellResistAcid(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.TimedAcidResistance.AddTimer(SaveGame.Rng.DieRoll(20) + 20);
+        SaveGame.TimedAcidResistance.AddTimer(SaveGame.DieRoll(20) + 20);
     }
 
     public override string Name => "Resist Acid";

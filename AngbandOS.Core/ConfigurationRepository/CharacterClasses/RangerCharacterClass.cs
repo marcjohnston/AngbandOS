@@ -45,7 +45,7 @@ internal class RangerCharacterClass : BaseCharacterClass
     public override int AttackSpeedMultiplier => 4;
     public override IArtifactBias? ArtifactBias => SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(RangerArtifactBias));
     public override int FromScrollWarriorArtifactBiasPercentageChance => 30;
-    public override bool SenseInventoryTest(int level) => (0 != SaveGame.Rng.RandomLessThan(95000 / ((level * level) + 40)));
+    public override bool SenseInventoryTest(int level) => (0 != SaveGame.RandomLessThan(95000 / ((level * level) + 40)));
     public override bool DetailedSenseInventory => true;
     public override Realm[] AvailablePrimaryRealms => new Realm[] {
         SaveGame.SingletonRepository.Realms.Get(nameof(NatureRealm))

@@ -18,7 +18,7 @@ internal class WalkShadRandomMutation : Mutation
 
     public override void OnProcessWorld()
     {
-        if (!SaveGame.HasAntiMagic && base.SaveGame.Rng.DieRoll(12000) == 1)
+        if (!SaveGame.HasAntiMagic && base.SaveGame.DieRoll(12000) == 1)
         {
             SaveGame.AlterReality();
         }

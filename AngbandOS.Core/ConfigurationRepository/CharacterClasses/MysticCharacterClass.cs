@@ -47,7 +47,7 @@ internal class MysticCharacterClass : BaseCharacterClass
     public override int MaximumWeight => 40;
     public override int AttackSpeedMultiplier => 4;
     public override IArtifactBias? ArtifactBias => SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(PriestlyArtifactBias));
-    public override bool SenseInventoryTest(int level) => (0 != SaveGame.Rng.RandomLessThan(55000 / ((level * level) + 40)));
+    public override bool SenseInventoryTest(int level) => (0 != SaveGame.RandomLessThan(55000 / ((level * level) + 40)));
 
     protected override string[] OutfitItemFactoryNames => new string[]
     {

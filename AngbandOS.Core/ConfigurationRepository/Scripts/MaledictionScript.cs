@@ -23,12 +23,12 @@ internal class MaledictionScript : Script, IScript
         {
             return;
         }
-        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(HellfireProjectile)), dir, SaveGame.Rng.DiceRoll(3 + ((SaveGame.ExperienceLevel - 1) / 5), 3), 0);
-        if (SaveGame.Rng.DieRoll(5) != 1)
+        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(HellfireProjectile)), dir, SaveGame.DiceRoll(3 + ((SaveGame.ExperienceLevel - 1) / 5), 3), 0);
+        if (SaveGame.DieRoll(5) != 1)
         {
             return;
         }
-        int dummy = SaveGame.Rng.DieRoll(1000);
+        int dummy = SaveGame.DieRoll(1000);
         if (dummy == 666)
         {
             SaveGame.FireBolt(SaveGame.SingletonRepository.Projectiles.Get(nameof(DeathRayProjectile)), dir, SaveGame.ExperienceLevel);

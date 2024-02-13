@@ -15,13 +15,13 @@ internal class LoseAblReward : Reward
     {
         SaveGame.MsgPrint($"The voice of {patron.ShortName} booms out:");
         SaveGame.MsgPrint("'I grow tired of thee, mortal.'");
-        if (SaveGame.Rng.DieRoll(3) == 1 && !(patron.PreferredAbility < 0))
+        if (SaveGame.DieRoll(3) == 1 && !(patron.PreferredAbility < 0))
         {
             SaveGame.TryDecreasingAbilityScore(patron.PreferredAbility);
         }
         else
         {
-            SaveGame.TryDecreasingAbilityScore(SaveGame.Rng.DieRoll(6) - 1);
+            SaveGame.TryDecreasingAbilityScore(SaveGame.DieRoll(6) - 1);
         }
     }
 }

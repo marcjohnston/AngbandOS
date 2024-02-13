@@ -17,7 +17,7 @@ internal class LightStaffItemFactory : StaffItemFactory
 
     public override void ApplyMagic(Item item, int level, int power, Store? store)
     {
-        item.TypeSpecificValue = SaveGame.Rng.DieRoll(20) + 8;
+        item.TypeSpecificValue = SaveGame.DieRoll(20) + 8;
     }
     public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int Cost => 250;
@@ -30,7 +30,7 @@ internal class LightStaffItemFactory : StaffItemFactory
 
     public override void UseStaff(UseStaffEvent eventArgs)
     {
-        if (SaveGame.LightArea(SaveGame.Rng.DiceRoll(2, 8), 2))
+        if (SaveGame.LightArea(SaveGame.DiceRoll(2, 8), 2))
         {
             eventArgs.Identified = true;
         }

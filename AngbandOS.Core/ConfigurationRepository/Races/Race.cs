@@ -100,9 +100,9 @@ internal abstract class Race : IGetKey<string>
         string name = "";
         do
         {
-            name = syllables.BeginningSyllables[SaveGame.Rng.RandomLessThan(syllables.BeginningSyllables.Length)];
-            name += syllables.MiddleSyllables[SaveGame.Rng.RandomLessThan(syllables.MiddleSyllables.Length)];
-            name += syllables.EndingSyllables[SaveGame.Rng.RandomLessThan(syllables.EndingSyllables.Length)];
+            name = syllables.BeginningSyllables[SaveGame.RandomLessThan(syllables.BeginningSyllables.Length)];
+            name += syllables.MiddleSyllables[SaveGame.RandomLessThan(syllables.MiddleSyllables.Length)];
+            name += syllables.EndingSyllables[SaveGame.RandomLessThan(syllables.EndingSyllables.Length)];
         } while (name.Length > 12);
 
         return name;

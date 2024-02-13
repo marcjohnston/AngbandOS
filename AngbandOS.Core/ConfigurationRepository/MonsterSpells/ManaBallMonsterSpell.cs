@@ -30,7 +30,7 @@ internal class ManaBallMonsterSpell : BallProjectileMonsterSpell
     protected override int Damage(Monster monster)
     {
         int monsterLevel = monster.Race.Level >= 1 ? monster.Race.Level : 1;
-        return (monsterLevel * 5) + SaveGame.Rng.DiceRoll(10, 10);
+        return (monsterLevel * 5) + SaveGame.DiceRoll(10, 10);
     }
     protected override int Radius => 4;
 }

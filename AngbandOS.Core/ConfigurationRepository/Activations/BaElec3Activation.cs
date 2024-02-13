@@ -18,7 +18,7 @@ internal class BaElec3Activation : DirectionalActivation
 
     public override string? PreActivationMessage => "It glows deep blue...";
 
-    public override int RechargeTime() => SaveGame.Rng.RandomLessThan(425) + 425;
+    public override int RechargeTime() => SaveGame.RandomLessThan(425) + 425;
 
     protected override bool Activate(int direction)
     {

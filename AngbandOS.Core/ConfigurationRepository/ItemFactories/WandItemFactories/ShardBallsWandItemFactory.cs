@@ -17,7 +17,7 @@ internal class ShardBallsWandItemFactory : WandItemFactory
 
     public override void ApplyMagic(Item item, int level, int power, Store? store)
     {
-        item.TypeSpecificValue = SaveGame.Rng.DieRoll(2) + 1;
+        item.TypeSpecificValue = SaveGame.DieRoll(2) + 1;
     }
 
     public override int[] Chance => new int[] { 4, 0, 0, 0 };
@@ -35,7 +35,7 @@ internal class ShardBallsWandItemFactory : WandItemFactory
 
     public override bool ExecuteActivation(SaveGame saveGame, int dir)
     {
-        saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get(nameof(ShardProjectile)), dir, 75 + SaveGame.Rng.DieRoll(50), 2);
+        saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get(nameof(ShardProjectile)), dir, 75 + SaveGame.DieRoll(50), 2);
         return true;
     }
     public override Item CreateItem() => new Item(SaveGame, this);

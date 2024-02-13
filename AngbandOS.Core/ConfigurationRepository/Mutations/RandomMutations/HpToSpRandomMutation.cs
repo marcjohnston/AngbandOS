@@ -18,7 +18,7 @@ internal class HpToSpRandomMutation : Mutation
 
     public override void OnProcessWorld()
     {
-        if (SaveGame.HasAntiMagic || base.SaveGame.Rng.DieRoll(4000) != 1)
+        if (SaveGame.HasAntiMagic || base.SaveGame.DieRoll(4000) != 1)
         {
             return;
         }

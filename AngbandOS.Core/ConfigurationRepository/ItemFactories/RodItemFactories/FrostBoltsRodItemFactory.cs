@@ -26,7 +26,7 @@ internal class FrostBoltsRodItemFactory : RodItemFactory
     public override int Weight => 15;
     public override void Execute(ZapRodEvent zapRodEvent)
     {
-        SaveGame.FireBoltOrBeam(10, SaveGame.SingletonRepository.Projectiles.Get(nameof(ColdProjectile)), zapRodEvent.Dir.Value, SaveGame.Rng.DiceRoll(5, 8));
+        SaveGame.FireBoltOrBeam(10, SaveGame.SingletonRepository.Projectiles.Get(nameof(ColdProjectile)), zapRodEvent.Dir.Value, SaveGame.DiceRoll(5, 8));
         zapRodEvent.Identified = true;
         zapRodEvent.Item.TypeSpecificValue = 13;
     }

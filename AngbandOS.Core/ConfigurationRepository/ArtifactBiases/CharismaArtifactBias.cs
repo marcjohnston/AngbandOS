@@ -16,7 +16,7 @@ internal class CharismaArtifactBias : ArtifactBias
         if (!item.RandartItemCharacteristics.Cha)
         {
             item.RandartItemCharacteristics.Cha = true;
-            if (SaveGame.Rng.DieRoll(2) == 1)
+            if (SaveGame.DieRoll(2) == 1)
             {
                 return true;
             }
@@ -28,7 +28,7 @@ internal class CharismaArtifactBias : ArtifactBias
         if (!item.RandartItemCharacteristics.SustCha)
         {
             item.RandartItemCharacteristics.SustCha = true;
-            if (SaveGame.Rng.DieRoll(2) == 1)
+            if (SaveGame.DieRoll(2) == 1)
             {
                 return true;
             }

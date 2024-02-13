@@ -20,7 +20,7 @@ internal class WildChaoticMagicScript : Script, IScriptInt
     public void ExecuteScriptInt(int spellLevel)
     {
         SaveGame.MsgPrint("You produce a chaotic effect!");
-        switch (SaveGame.Rng.DieRoll(spellLevel) + SaveGame.Rng.DieRoll(8)) // TODO: Convert this to WeightedRandom
+        switch (SaveGame.DieRoll(spellLevel) + SaveGame.DieRoll(8)) // TODO: Convert this to WeightedRandom
         {
             case 1:
             case 2:
@@ -48,7 +48,7 @@ internal class WildChaoticMagicScript : Script, IScriptInt
             case 12:
             case 13:
             case 14:
-                SaveGame.LightArea(SaveGame.Rng.DiceRoll(2, 3), 2);
+                SaveGame.LightArea(SaveGame.DiceRoll(2, 3), 2);
                 break;
 
             case 15:

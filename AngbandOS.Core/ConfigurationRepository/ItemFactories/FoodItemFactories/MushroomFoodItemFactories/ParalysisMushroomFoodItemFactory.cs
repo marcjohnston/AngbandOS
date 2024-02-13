@@ -27,7 +27,7 @@ internal class ParalysisMushroomFoodItemFactory : MushroomFoodItemFactory
         SaveGame.PlaySound(SoundEffectEnum.Eat);
         if (!SaveGame.HasFreeAction)
         {
-            if (SaveGame.TimedParalysis.AddTimer(SaveGame.Rng.RandomLessThan(10) + 10))
+            if (SaveGame.TimedParalysis.AddTimer(SaveGame.RandomLessThan(10) + 10))
             {
                 return true;
             }

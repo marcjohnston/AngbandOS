@@ -18,7 +18,7 @@ internal class MultiHuedDragonScaleMailArmorItemFactory : DragonScaleMailArmorIt
         {
             return;
         }
-        int chance = SaveGame.Rng.RandomLessThan(5);
+        int chance = SaveGame.RandomLessThan(5);
         string element = chance == 1 ? "lightning" : (chance == 2 ? "frost" : (chance == 3 ? "acid" : (chance == 4 ? "poison gas" : "fire")));
         SaveGame.MsgPrint($"You breathe {element}.");
         switch (chance)
@@ -42,7 +42,7 @@ internal class MultiHuedDragonScaleMailArmorItemFactory : DragonScaleMailArmorIt
                 SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(PoisProjectile)), dir, 250, -2);
                 return;
         }
-        item.RechargeTimeLeft = SaveGame.Rng.RandomLessThan(225) + 225;
+        item.RechargeTimeLeft = SaveGame.RandomLessThan(225) + 225;
     }
     public override string? DescribeActivationEffect => "breathe multi-hued (250) every 225+d225 turns";
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(OpenBraceSymbol));

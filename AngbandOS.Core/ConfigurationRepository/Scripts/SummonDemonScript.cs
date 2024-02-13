@@ -18,7 +18,7 @@ internal class SummonDemonScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        if (SaveGame.Rng.DieRoll(3) == 1)
+        if (SaveGame.DieRoll(3) == 1)
         {
             if (SaveGame.SummonSpecific(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel * 3 / 2, SaveGame.SingletonRepository.MonsterFilters.Get(nameof(DemonMonsterFilter))))
             {

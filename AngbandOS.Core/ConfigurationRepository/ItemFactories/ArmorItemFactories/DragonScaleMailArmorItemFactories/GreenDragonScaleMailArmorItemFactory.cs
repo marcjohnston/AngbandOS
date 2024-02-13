@@ -20,7 +20,7 @@ internal class GreenDragonScaleMailArmorItemFactory : DragonScaleMailArmorItemFa
         }
         SaveGame.MsgPrint("You breathe poison gas.");
         SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(PoisProjectile)), dir, 150, -2);
-        item.RechargeTimeLeft = SaveGame.Rng.RandomLessThan(450) + 450;
+        item.RechargeTimeLeft = SaveGame.RandomLessThan(450) + 450;
     }
     public override string? DescribeActivationEffect => "breathe poison gas (150) every 450+d450 turns";
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(OpenBraceSymbol));

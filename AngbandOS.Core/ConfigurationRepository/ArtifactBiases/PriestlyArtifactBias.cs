@@ -16,7 +16,7 @@ internal class PriestlyArtifactBias : ArtifactBias
         if (!item.RandartItemCharacteristics.Wis)
         {
             item.RandartItemCharacteristics.Wis = true;
-            if (SaveGame.Rng.DieRoll(2) == 1)
+            if (SaveGame.DieRoll(2) == 1)
             {
                 return true;
             }
@@ -35,35 +35,35 @@ internal class PriestlyArtifactBias : ArtifactBias
 
     public override Activation GetActivationPowerType(Item item)
     {
-        if (SaveGame.Rng.DieRoll(13) == 1)
+        if (SaveGame.DieRoll(13) == 1)
         {
             return SaveGame.SingletonRepository.Activations.Get(nameof(CharmUndeadActivation));
         }
-        else if (SaveGame.Rng.DieRoll(12) == 1)
+        else if (SaveGame.DieRoll(12) == 1)
         {
             return SaveGame.SingletonRepository.Activations.Get(nameof(BanishEvilActivation));
         }
-        else if (SaveGame.Rng.DieRoll(11) == 1)
+        else if (SaveGame.DieRoll(11) == 1)
         {
             return SaveGame.SingletonRepository.Activations.Get(nameof(DispEvilActivation));
         }
-        else if (SaveGame.Rng.DieRoll(10) == 1)
+        else if (SaveGame.DieRoll(10) == 1)
         {
             return SaveGame.SingletonRepository.Activations.Get(nameof(ProtEvilActivation));
         }
-        else if (SaveGame.Rng.DieRoll(9) == 1)
+        else if (SaveGame.DieRoll(9) == 1)
         {
             return SaveGame.SingletonRepository.Activations.Get(nameof(Cure1000Activation));
         }
-        else if (SaveGame.Rng.DieRoll(8) == 1)
+        else if (SaveGame.DieRoll(8) == 1)
         {
             return SaveGame.SingletonRepository.Activations.Get(nameof(Cure700Activation));
         }
-        else if (SaveGame.Rng.DieRoll(7) == 1)
+        else if (SaveGame.DieRoll(7) == 1)
         {
             return SaveGame.SingletonRepository.Activations.Get(nameof(RestAllActivation));
         }
-        else if (SaveGame.Rng.DieRoll(6) == 1)
+        else if (SaveGame.DieRoll(6) == 1)
         {
             return SaveGame.SingletonRepository.Activations.Get(nameof(RestLifeActivation));
         }

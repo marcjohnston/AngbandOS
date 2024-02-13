@@ -64,7 +64,7 @@ internal class Type6RoomLayout : RoomLayout
             cPtr = SaveGame.Grid[y2 + 1][x];
             cPtr.SetFeature("WallInner");
         }
-        switch (SaveGame.Rng.DieRoll(4))
+        switch (SaveGame.DieRoll(4))
         {
             case 1:
                 PlaceSecretDoor(y1 - 1, xval);
@@ -82,7 +82,7 @@ internal class Type6RoomLayout : RoomLayout
                 PlaceSecretDoor(yval, x2 + 1);
                 break;
         }
-        int tmp = SaveGame.Rng.DieRoll(SaveGame.Difficulty);
+        int tmp = SaveGame.DieRoll(SaveGame.Difficulty);
         if (tmp < 20)
         {
             getMonNumHook = SaveGame.SingletonRepository.MonsterFilters.Get(nameof(OrcMonsterFilter));
@@ -97,20 +97,20 @@ internal class Type6RoomLayout : RoomLayout
         }
         else if (tmp < 70)
         {
-            if (SaveGame.Rng.DieRoll(4) != 1)
+            if (SaveGame.DieRoll(4) != 1)
             {
                 int _templateRace;
                 do
                 {
-                    _templateRace = SaveGame.Rng.DieRoll(SaveGame.SingletonRepository.MonsterRaces.Count - 2);
+                    _templateRace = SaveGame.DieRoll(SaveGame.SingletonRepository.MonsterRaces.Count - 2);
                 } while (SaveGame.SingletonRepository.MonsterRaces[_templateRace].Unique ||
-                         SaveGame.SingletonRepository.MonsterRaces[_templateRace].Level + SaveGame.Rng.DieRoll(5) >
-                         SaveGame.Difficulty + SaveGame.Rng.DieRoll(5));
+                         SaveGame.SingletonRepository.MonsterRaces[_templateRace].Level + SaveGame.DieRoll(5) >
+                         SaveGame.Difficulty + SaveGame.DieRoll(5));
                 getMonNumHook = new SymbolDynamicMonsterFilter(SaveGame, SaveGame.SingletonRepository.MonsterRaces[_templateRace].Symbol.Character);
             }
             else
             {
-                if (SaveGame.Rng.DieRoll(2) == 1)
+                if (SaveGame.DieRoll(2) == 1)
                 {
                     getMonNumHook = SaveGame.SingletonRepository.MonsterFilters.Get(nameof(CultMonsterFilter));
                 }
@@ -122,7 +122,7 @@ internal class Type6RoomLayout : RoomLayout
         }
         else if (tmp < 80)
         {
-            switch (SaveGame.Rng.RandomLessThan(6))
+            switch (SaveGame.RandomLessThan(6))
             {
                 case 0:
                     {
@@ -194,7 +194,7 @@ internal class Type6RoomLayout : RoomLayout
         }
         SaveGame.DangerRating += 10;
         if (SaveGame.Difficulty <= 40 &&
-            SaveGame.Rng.DieRoll((SaveGame.Difficulty * SaveGame.Difficulty) + 50) < 300)
+            SaveGame.DieRoll((SaveGame.Difficulty * SaveGame.Difficulty) + 50) < 300)
         {
             SaveGame.SpecialDanger = true;
         }

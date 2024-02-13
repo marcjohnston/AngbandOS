@@ -106,7 +106,7 @@ internal class PlasmaProjectile : Projectile
         {
             note = " resists.";
             dam *= 3;
-            dam /= SaveGame.Rng.DieRoll(6) + 6;
+            dam /= SaveGame.DieRoll(6) + 6;
             if (seen)
             {
                 rPtr.Knowledge.Characteristics.ResistPlasma = true;
@@ -133,7 +133,7 @@ internal class PlasmaProjectile : Projectile
         SaveGame.TakeHit(dam, killer);
         if (!SaveGame.HasSoundResistance)
         {
-            int kk = SaveGame.Rng.DieRoll(dam > 40 ? 35 : (dam * 3 / 4) + 5);
+            int kk = SaveGame.DieRoll(dam > 40 ? 35 : (dam * 3 / 4) + 5);
             SaveGame.TimedStun.AddTimer(kk);
         }
         if (!(SaveGame.HasFireResistance || SaveGame.TimedFireResistance.TurnsRemaining != 0 || SaveGame.HasFireImmunity))

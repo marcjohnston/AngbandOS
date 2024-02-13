@@ -33,12 +33,12 @@ internal class MentalismCastingType : CastingType
             }
         }
         int chance = talent.FailureChance();
-        if (SaveGame.Rng.RandomLessThan(100) < chance)
+        if (SaveGame.RandomLessThan(100) < chance)
         {
             SaveGame.MsgPrint("You failed to concentrate hard enough!");
-            if (SaveGame.Rng.DieRoll(100) < chance / 2)
+            if (SaveGame.DieRoll(100) < chance / 2)
             {
-                int i = SaveGame.Rng.DieRoll(100);
+                int i = SaveGame.DieRoll(100);
                 if (i < 5)
                 {
                     SaveGame.MsgPrint("Oh, no! Your mind has gone blank!");
@@ -47,16 +47,16 @@ internal class MentalismCastingType : CastingType
                 else if (i < 15)
                 {
                     SaveGame.MsgPrint("Weird visions seem to dance before your eyes...");
-                    SaveGame.TimedHallucinations.AddTimer(5 + SaveGame.Rng.DieRoll(10));
+                    SaveGame.TimedHallucinations.AddTimer(5 + SaveGame.DieRoll(10));
                 }
                 else if (i < 45)
                 {
                     SaveGame.MsgPrint("Your brain is addled!");
-                    SaveGame.TimedConfusion.AddTimer(SaveGame.Rng.DieRoll(8));
+                    SaveGame.TimedConfusion.AddTimer(SaveGame.DieRoll(8));
                 }
                 else if (i < 90)
                 {
-                    SaveGame.TimedStun.AddTimer(SaveGame.Rng.DieRoll(8));
+                    SaveGame.TimedStun.AddTimer(SaveGame.DieRoll(8));
                 }
                 else
                 {
@@ -81,12 +81,12 @@ internal class MentalismCastingType : CastingType
             SaveGame.Mana = 0;
             SaveGame.FractionalMana = 0;
             SaveGame.MsgPrint("You faint from the effort!");
-            SaveGame.TimedParalysis.AddTimer(SaveGame.Rng.DieRoll((5 * oops) + 1));
-            if (SaveGame.Rng.RandomLessThan(100) < 50)
+            SaveGame.TimedParalysis.AddTimer(SaveGame.DieRoll((5 * oops) + 1));
+            if (SaveGame.RandomLessThan(100) < 50)
             {
-                bool perm = SaveGame.Rng.RandomLessThan(100) < 25;
+                bool perm = SaveGame.RandomLessThan(100) < 25;
                 SaveGame.MsgPrint("You have damaged your mind!");
-                SaveGame.DecreaseAbilityScore(Ability.Wisdom, 15 + SaveGame.Rng.DieRoll(10), perm);
+                SaveGame.DecreaseAbilityScore(Ability.Wisdom, 15 + SaveGame.DieRoll(10), perm);
             }
         }
         SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawManaFlaggedAction)).Set();

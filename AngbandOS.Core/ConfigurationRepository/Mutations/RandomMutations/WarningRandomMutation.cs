@@ -18,7 +18,7 @@ internal class WarningRandomMutation : Mutation
 
     public override void OnProcessWorld()
     {
-        if (base.SaveGame.Rng.DieRoll(1000) != 1)
+        if (base.SaveGame.DieRoll(1000) != 1)
         {
             return;
         }

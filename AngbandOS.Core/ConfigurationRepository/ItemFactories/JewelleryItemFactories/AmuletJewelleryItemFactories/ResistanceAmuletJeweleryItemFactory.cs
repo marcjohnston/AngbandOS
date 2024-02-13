@@ -17,12 +17,12 @@ internal class ResistanceAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
 
     public override void ApplyMagic(Item item, int level, int power, Store? store)
     {
-        if (SaveGame.Rng.DieRoll(3) == 1)
+        if (SaveGame.DieRoll(3) == 1)
         {
             IArtifactBias? artifactBias = null;
-            item.ApplyRandomResistance(ref artifactBias, SaveGame.Rng.DieRoll(34) + 4);
+            item.ApplyRandomResistance(ref artifactBias, SaveGame.DieRoll(34) + 4);
         }
-        if (SaveGame.Rng.DieRoll(5) == 1)
+        if (SaveGame.DieRoll(5) == 1)
         {
             item.RandartItemCharacteristics.ResPois = true;
         }

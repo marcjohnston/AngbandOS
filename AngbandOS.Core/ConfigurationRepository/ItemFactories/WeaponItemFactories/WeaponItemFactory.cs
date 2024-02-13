@@ -70,8 +70,8 @@ internal abstract class WeaponItemFactory : ItemFactory
 
     public override void ApplyRandartBonus(Item item)
     {
-        item.BonusToHit += SaveGame.Rng.DieRoll(item.BonusToHit > 19 ? 1 : 20 - item.BonusToHit);
-        item.BonusDamage += SaveGame.Rng.DieRoll(item.BonusDamage > 19 ? 1 : 20 - item.BonusDamage);
+        item.BonusToHit += SaveGame.DieRoll(item.BonusToHit > 19 ? 1 : 20 - item.BonusToHit);
+        item.BonusDamage += SaveGame.DieRoll(item.BonusDamage > 19 ? 1 : 20 - item.BonusDamage);
     }
 
     public override int? GetBonusRealValue(Item item, int value)
@@ -108,8 +108,8 @@ internal abstract class WeaponItemFactory : ItemFactory
             return;
         }
 
-        int tohit1 = SaveGame.Rng.DieRoll(5) + item.GetBonusValue(5, level);
-        int todam1 = SaveGame.Rng.DieRoll(5) + item.GetBonusValue(5, level);
+        int tohit1 = SaveGame.DieRoll(5) + item.GetBonusValue(5, level);
+        int todam1 = SaveGame.DieRoll(5) + item.GetBonusValue(5, level);
         int tohit2 = item.GetBonusValue(10, level);
         int todam2 = item.GetBonusValue(10, level);
         if (power > 0)

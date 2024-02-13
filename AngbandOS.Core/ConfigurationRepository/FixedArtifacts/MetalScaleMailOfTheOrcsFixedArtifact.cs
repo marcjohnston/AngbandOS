@@ -17,7 +17,7 @@ internal class MetalScaleMailOfTheOrcsFixedArtifact : FixedArtifact, IFixedArtif
     public override void ApplyResistances(Item item)
     {
         IArtifactBias artifactBias = null;
-        item.ApplyRandomResistance(ref artifactBias, SaveGame.Rng.DieRoll(22) + 16);
+        item.ApplyRandomResistance(ref artifactBias, SaveGame.DieRoll(22) + 16);
     }
 
     // Orc does Carnage

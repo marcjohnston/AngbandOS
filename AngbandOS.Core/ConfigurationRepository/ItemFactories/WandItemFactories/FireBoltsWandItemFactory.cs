@@ -17,7 +17,7 @@ internal class FireBoltsWandItemFactory : WandItemFactory
 
     public override void ApplyMagic(Item item, int level, int power, Store? store)
     {
-        item.TypeSpecificValue = SaveGame.Rng.DieRoll(8) + 6;
+        item.TypeSpecificValue = SaveGame.DieRoll(8) + 6;
     }
     public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int Cost => 1000;
@@ -29,7 +29,7 @@ internal class FireBoltsWandItemFactory : WandItemFactory
     public override int Weight => 10;
     public override bool ExecuteActivation(SaveGame saveGame, int dir)
     {
-        saveGame.FireBoltOrBeam(20, saveGame.SingletonRepository.Projectiles.Get(nameof(FireProjectile)), dir, SaveGame.Rng.DiceRoll(6, 8));
+        saveGame.FireBoltOrBeam(20, saveGame.SingletonRepository.Projectiles.Get(nameof(FireProjectile)), dir, SaveGame.DiceRoll(6, 8));
         return true;
     }
     public override Item CreateItem() => new Item(SaveGame, this);

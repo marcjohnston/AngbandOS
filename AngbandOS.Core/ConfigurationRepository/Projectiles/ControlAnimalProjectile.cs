@@ -33,7 +33,7 @@ internal class ControlAnimalProjectile : Projectile
         }
         if (rPtr.Unique || !rPtr.Animal ||
             rPtr.ImmuneConfusion ||
-            rPtr.Level > SaveGame.Rng.DieRoll(dam - 10 < 1 ? 1 : dam - 10) + 10)
+            rPtr.Level > SaveGame.DieRoll(dam - 10 < 1 ? 1 : dam - 10) + 10)
         {
             if (rPtr.ImmuneConfusion)
             {

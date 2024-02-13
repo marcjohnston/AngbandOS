@@ -16,7 +16,7 @@ internal class StrengthArtifactBias : ArtifactBias
         if (!item.RandartItemCharacteristics.Str)
         {
             item.RandartItemCharacteristics.Str = true;
-            if (SaveGame.Rng.DieRoll(2) == 1) // 50% chance of being a "free" power
+            if (SaveGame.DieRoll(2) == 1) // 50% chance of being a "free" power
             {
                 return true;
             }
@@ -28,7 +28,7 @@ internal class StrengthArtifactBias : ArtifactBias
         if (!item.RandartItemCharacteristics.SustStr)
         {
             item.RandartItemCharacteristics.SustStr = true;
-            if (SaveGame.Rng.DieRoll(2) == 1)
+            if (SaveGame.DieRoll(2) == 1)
             {
                 return true;
             }

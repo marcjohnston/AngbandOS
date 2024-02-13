@@ -17,7 +17,7 @@ internal class SummoningStaffItemFactory : StaffItemFactory
 
     public override void ApplyMagic(Item item, int level, int power, Store? store)
     {
-        item.TypeSpecificValue = SaveGame.Rng.DieRoll(3) + 1;
+        item.TypeSpecificValue = SaveGame.DieRoll(3) + 1;
     }
 
     public override int Dd => 1;
@@ -28,7 +28,7 @@ internal class SummoningStaffItemFactory : StaffItemFactory
     public override int Weight => 50;
     public override void UseStaff(UseStaffEvent eventArgs)
     {
-        for (int k = 0; k < SaveGame.Rng.DieRoll(4); k++)
+        for (int k = 0; k < SaveGame.DieRoll(4); k++)
         {
             if (SaveGame.SummonSpecific(SaveGame.MapY, SaveGame.MapX, SaveGame.Difficulty, null))
             {

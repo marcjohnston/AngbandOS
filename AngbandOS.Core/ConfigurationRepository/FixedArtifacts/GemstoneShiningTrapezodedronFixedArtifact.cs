@@ -21,7 +21,7 @@ internal class GemstoneShiningTrapezodedronFixedArtifact : FixedArtifact, IFixed
         SaveGame.MsgPrint("The gemstone flashes bright red!");
         SaveGame.RunScript(nameof(LightScript));
         SaveGame.MsgPrint("The gemstone drains your vitality...");
-        SaveGame.TakeHit(base.SaveGame.Rng.DiceRoll(3, 8), "the Gemstone 'Trapezohedron'");
+        SaveGame.TakeHit(base.SaveGame.DiceRoll(3, 8), "the Gemstone 'Trapezohedron'");
         SaveGame.DetectTraps();
         SaveGame.DetectDoors();
         SaveGame.DetectStairs();
@@ -29,7 +29,7 @@ internal class GemstoneShiningTrapezodedronFixedArtifact : FixedArtifact, IFixed
         {
             SaveGame.RunScript(nameof(ToggleRecallScript));
         }
-        item.RechargeTimeLeft = base.SaveGame.Rng.RandomLessThan(20) + 20;
+        item.RechargeTimeLeft = base.SaveGame.RandomLessThan(20) + 20;
     }
     public string DescribeActivationEffect => "clairvoyance and recall, draining you";
 

@@ -18,7 +18,7 @@ internal class BanishAllRandomMutation : Mutation
 
     public override void OnProcessWorld()
     {
-        if (base.SaveGame.Rng.DieRoll(9000) != 1)
+        if (base.SaveGame.DieRoll(9000) != 1)
         {
             return;
         }

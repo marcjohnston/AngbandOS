@@ -11,5 +11,5 @@ namespace AngbandOS.Core.MonsterSpells;
 internal class Arrow3D6MonsterSpell : ArrowProjectileMonsterSpell
 {
     private Arrow3D6MonsterSpell(SaveGame saveGame) : base(saveGame) { }
-    protected override int Damage(Monster monster) => SaveGame.Rng.DiceRoll(3, 6);
+    protected override int Damage(Monster monster) => SaveGame.DiceRoll(3, 6);
 }

@@ -67,7 +67,7 @@ internal class KillWallProjectile : Projectile
             }
             cPtr.TileFlags.Clear(GridTile.PlayerMemorized);
             SaveGame.RevertTileToBackground(y, x);
-            if (SaveGame.Rng.RandomLessThan(100) < 10)
+            if (SaveGame.RandomLessThan(100) < 10)
             {
                 if (SaveGame.PlayerCanSeeBold(y, x))
                 {

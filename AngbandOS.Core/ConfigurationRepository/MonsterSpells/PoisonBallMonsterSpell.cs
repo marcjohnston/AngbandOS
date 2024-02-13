@@ -18,7 +18,7 @@ internal class PoisonBallMonsterSpell : BallProjectileMonsterSpell
     protected override int Damage(Monster monster)
     {
         int monsterLevel = monster.Race.Level >= 1 ? monster.Race.Level : 1;
-        return SaveGame.Rng.DiceRoll(12, 2);
+        return SaveGame.DiceRoll(12, 2);
     }
     public override SpellResistantDetection[] SmartLearn => new SpellResistantDetection[] { SaveGame.SingletonRepository.SpellResistantDetections.Get(nameof(PoisSpellResistantDetection)) };
 }

@@ -14,7 +14,7 @@ internal class WeaponPlanarWeaponRareItem : RareItem
 
     public override void ApplyMagic(Item item)
     {
-        if (SaveGame.Rng.DieRoll(7) == 1)
+        if (SaveGame.DieRoll(7) == 1)
         {
             item.BonusPowerType = RareItemTypeEnum.SpecialAbility;
         }
@@ -22,7 +22,7 @@ internal class WeaponPlanarWeaponRareItem : RareItem
     public override bool DoActivate(Item item)
     {
         SaveGame.RunScriptInt(nameof(TeleportSelfScript), 100);
-        item.RechargeTimeLeft = 50 + SaveGame.Rng.DieRoll(50);
+        item.RechargeTimeLeft = 50 + SaveGame.DieRoll(50);
         return true;
     }
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(VerticalBarSymbol));

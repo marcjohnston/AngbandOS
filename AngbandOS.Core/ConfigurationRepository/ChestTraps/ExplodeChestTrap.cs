@@ -14,7 +14,7 @@ internal class ExplodeChestTrap : ChestTrap
     public override void Activate(ActivateChestTrapEventArgs eventArgs)
     {
         SaveGame.MsgPrint("There is a sudden explosion!");
-        SaveGame.TakeHit(SaveGame.Rng.DiceRoll(5, 8), "an exploding chest");
+        SaveGame.TakeHit(SaveGame.DiceRoll(5, 8), "an exploding chest");
         eventArgs.DestroysContents = true;
     }
 

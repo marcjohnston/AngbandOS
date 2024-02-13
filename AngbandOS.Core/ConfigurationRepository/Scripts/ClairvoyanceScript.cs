@@ -21,7 +21,7 @@ internal class ClairvoyanceScript : Script, IScript
         SaveGame.RunScript(nameof(LightScript));
         if (!SaveGame.HasTelepathy)
         {
-            SaveGame.TimedTelepathy.AddTimer(SaveGame.Rng.DieRoll(30) + 25);
+            SaveGame.TimedTelepathy.AddTimer(SaveGame.DieRoll(30) + 25);
         }
     }
 }

@@ -86,11 +86,11 @@ internal class LightProjectile : Projectile
         if (SaveGame.HasLightResistance)
         {
             dam *= 4;
-            dam /= SaveGame.Rng.DieRoll(6) + 6;
+            dam /= SaveGame.DieRoll(6) + 6;
         }
         else if (!blind && !SaveGame.HasBlindnessResistance)
         {
-            SaveGame.TimedBlindness.AddTimer(SaveGame.Rng.DieRoll(5) + 2);
+            SaveGame.TimedBlindness.AddTimer(SaveGame.DieRoll(5) + 2);
         }
         if (SaveGame.Race.IsBurnedBySunlight)
         {

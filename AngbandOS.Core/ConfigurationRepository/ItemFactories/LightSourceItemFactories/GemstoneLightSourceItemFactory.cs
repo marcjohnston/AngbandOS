@@ -14,7 +14,7 @@ internal class GemstoneLightSourceItemFactory : LightSourceItemFactory
 
     public override void EquipmentProcessWorldHook()
     {
-        if (SaveGame.Rng.DieRoll(999) == 1 && !SaveGame.HasAntiMagic)
+        if (SaveGame.DieRoll(999) == 1 && !SaveGame.HasAntiMagic)
         {
             if (SaveGame.TimedInvulnerability.TurnsRemaining == 0)
             {

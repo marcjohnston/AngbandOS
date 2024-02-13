@@ -93,7 +93,7 @@ internal class StandardDungeonGenerator : DungeonGenerator
         {
             SaveGame.SingletonRepository.MonsterRaces[GetQuestMonster()].Guardian = true;
         }
-        if (SaveGame.Rng.PercentileRoll(4) && !SaveGame.CurDungeon.Tower)
+        if (SaveGame.PercentileRoll(4) && !SaveGame.CurDungeon.Tower)
         {
             MakeCavernLevel();
         }
@@ -103,10 +103,10 @@ internal class StandardDungeonGenerator : DungeonGenerator
         }
 
         // Generate downstairs.
-        AllocStairs("DownStair", SaveGame.Rng.RandomBetween(3, 4), 3);
+        AllocStairs("DownStair", SaveGame.RandomBetween(3, 4), 3);
 
         // Generate upstairs.
-        AllocStairs("UpStair", SaveGame.Rng.RandomBetween(1, 2), 3);
+        AllocStairs("UpStair", SaveGame.RandomBetween(1, 2), 3);
 
         // Choose a spot for the player.
         if (!SaveGame.NewPlayerSpot())
@@ -144,16 +144,16 @@ internal class StandardDungeonGenerator : DungeonGenerator
                 i = smallTester;
             }
         }
-        i += SaveGame.Rng.DieRoll(8);
+        i += SaveGame.DieRoll(8);
         for (i += k; i > 0; i--)
         {
             SaveGame.AllocMonster(0, true);
         }
-        AllocObject(_allocSetBoth, _allocTypTrap, SaveGame.Rng.DieRoll(k));
-        AllocObject(_allocSetCorr, _allocTypRubble, SaveGame.Rng.DieRoll(k));
-        AllocObject(_allocSetRoom, _allocTypObject, SaveGame.Rng.RandomNormal(_dunAmtRoom, 3));
-        AllocObject(_allocSetBoth, _allocTypObject, SaveGame.Rng.RandomNormal(_dunAmtItem, 3));
-        AllocObject(_allocSetBoth, _allocTypGold, SaveGame.Rng.RandomNormal(_dunAmtGold, 3));
+        AllocObject(_allocSetBoth, _allocTypTrap, SaveGame.DieRoll(k));
+        AllocObject(_allocSetCorr, _allocTypRubble, SaveGame.DieRoll(k));
+        AllocObject(_allocSetRoom, _allocTypObject, SaveGame.RandomNormal(_dunAmtRoom, 3));
+        AllocObject(_allocSetBoth, _allocTypObject, SaveGame.RandomNormal(_dunAmtItem, 3));
+        AllocObject(_allocSetBoth, _allocTypGold, SaveGame.RandomNormal(_dunAmtGold, 3));
         return true;
     }
 
@@ -215,10 +215,10 @@ internal class StandardDungeonGenerator : DungeonGenerator
 
     private void DestroyLevel()
     {
-        for (int n = 0; n < SaveGame.Rng.DieRoll(5); n++)
+        for (int n = 0; n < SaveGame.DieRoll(5); n++)
         {
-            int x1 = SaveGame.Rng.RandomBetween(5, SaveGame.CurWid - 1 - 5);
-            int y1 = SaveGame.Rng.RandomBetween(5, SaveGame.CurHgt - 1 - 5);
+            int x1 = SaveGame.RandomBetween(5, SaveGame.CurWid - 1 - 5);
+            int y1 = SaveGame.RandomBetween(5, SaveGame.CurHgt - 1 - 5);
             int y;
             for (y = y1 - 15; y <= y1 + 15; y++)
             {
@@ -239,7 +239,7 @@ internal class StandardDungeonGenerator : DungeonGenerator
                     {
                         SaveGame.DeleteObject(y, x);
                         GridTile cPtr = SaveGame.Grid[y][x];
-                        int t = SaveGame.Rng.RandomLessThan(200);
+                        int t = SaveGame.RandomLessThan(200);
                         if (t < 20)
                         {
                             cPtr.SetFeature("WallBasic");
@@ -267,9 +267,9 @@ internal class StandardDungeonGenerator : DungeonGenerator
     private void BuildStreamer(string feat, int chance)
     {
         int dummy = 0;
-        int y = SaveGame.Rng.RandomSpread(SaveGame.CurHgt / 2, 10);
-        int x = SaveGame.Rng.RandomSpread(SaveGame.CurWid / 2, 15);
-        int dir = SaveGame.OrderedDirection[SaveGame.Rng.RandomLessThan(8)];
+        int y = SaveGame.RandomSpread(SaveGame.CurHgt / 2, 10);
+        int x = SaveGame.RandomSpread(SaveGame.CurWid / 2, 15);
+        int dir = SaveGame.OrderedDirection[SaveGame.RandomLessThan(8)];
         while (dummy < SaveGame.SafeMaxAttempts)
         {
             dummy++;
@@ -280,8 +280,8 @@ internal class StandardDungeonGenerator : DungeonGenerator
                 int ty;
                 while (true)
                 {
-                    ty = SaveGame.Rng.RandomSpread(y, d);
-                    tx = SaveGame.Rng.RandomSpread(x, d);
+                    ty = SaveGame.RandomSpread(y, d);
+                    tx = SaveGame.RandomSpread(x, d);
                     if (!SaveGame.InBounds2(ty, tx))
                     {
                         continue;
@@ -295,7 +295,7 @@ internal class StandardDungeonGenerator : DungeonGenerator
                     continue;
                 }
                 cPtr.SetFeature(feat);
-                if (SaveGame.Rng.RandomLessThan(chance) == 0)
+                if (SaveGame.RandomLessThan(chance) == 0)
                 {
                     cPtr.SetFeature(cPtr.FeatureType.Name + "VisTreas");
                 }
@@ -318,7 +318,7 @@ internal class StandardDungeonGenerator : DungeonGenerator
     /// </summary>
     private void MakeCavernLevel()
     {
-        PerlinNoise perlinNoise = new PerlinNoise(SaveGame.Rng.RandomBetween(0, int.MaxValue - 1));
+        PerlinNoise perlinNoise = new PerlinNoise(SaveGame.RandomBetween(0, int.MaxValue - 1));
         double widthDivisor = 1 / (double)SaveGame.CurWid;
         double heightDivisor = 1 / (double)SaveGame.CurHgt;
         for (int y = 0; y < SaveGame.CurHgt; y++)
@@ -375,7 +375,7 @@ internal class StandardDungeonGenerator : DungeonGenerator
             GridTile cPtr = SaveGame.Grid[y][SaveGame.CurWid - 1];
             cPtr.SetFeature("WallPermSolid");
         }
-        if (SaveGame.Rng.DieRoll(_darkEmpty) != 1 || SaveGame.Rng.DieRoll(100) > SaveGame.Difficulty)
+        if (SaveGame.DieRoll(_darkEmpty) != 1 || SaveGame.DieRoll(100) > SaveGame.Difficulty)
         {
             SaveGame.RunScript(nameof(LightScript));
         }
@@ -419,8 +419,8 @@ internal class StandardDungeonGenerator : DungeonGenerator
             {
                 for (int j = 0; !flag && j <= 3000; j++)
                 {
-                    int y = SaveGame.Rng.RandomLessThan(SaveGame.CurHgt);
-                    int x = SaveGame.Rng.RandomLessThan(SaveGame.CurWid);
+                    int y = SaveGame.RandomLessThan(SaveGame.CurHgt);
+                    int x = SaveGame.RandomLessThan(SaveGame.CurWid);
                     if (!SaveGame.GridOpenNoItemOrCreature(y, x))
                     {
                         continue;
@@ -476,8 +476,8 @@ internal class StandardDungeonGenerator : DungeonGenerator
         {
             while (true)
             {
-                y = SaveGame.Rng.RandomLessThan(SaveGame.MaxHgt);
-                x = SaveGame.Rng.RandomLessThan(SaveGame.MaxWid);
+                y = SaveGame.RandomLessThan(SaveGame.MaxHgt);
+                x = SaveGame.RandomLessThan(SaveGame.MaxWid);
                 if (!SaveGame.GridOpenNoItemOrCreature(y, x))
                 {
                     continue;
@@ -508,8 +508,8 @@ internal class StandardDungeonGenerator : DungeonGenerator
             while (dummy < SaveGame.SafeMaxAttempts)
             {
                 dummy++;
-                y = SaveGame.Rng.RandomLessThan(SaveGame.CurHgt);
-                x = SaveGame.Rng.RandomLessThan(SaveGame.CurWid);
+                y = SaveGame.RandomLessThan(SaveGame.CurHgt);
+                x = SaveGame.RandomLessThan(SaveGame.CurWid);
                 if (!SaveGame.GridOpenNoItemOrCreature(y, x))
                 {
                     continue;
@@ -610,7 +610,7 @@ internal class StandardDungeonGenerator : DungeonGenerator
         {
             return;
         }
-        if (SaveGame.Rng.RandomLessThan(100) < _dunTunJct && PossibleDoorway(y, x))
+        if (SaveGame.RandomLessThan(100) < _dunTunJct && PossibleDoorway(y, x))
         {
             SaveGame.PlaceRandomDoor(y, x);
         }
@@ -622,7 +622,7 @@ internal class StandardDungeonGenerator : DungeonGenerator
         cdir = x1 == x2 ? 0 : x1 < x2 ? 1 : -1;
         if (rdir != 0 && cdir != 0)
         {
-            if (SaveGame.Rng.RandomLessThan(100) < 50)
+            if (SaveGame.RandomLessThan(100) < 50)
             {
                 rdir = 0;
             }
@@ -635,7 +635,7 @@ internal class StandardDungeonGenerator : DungeonGenerator
 
     private void RandDir(out int rdir, out int cdir)
     {
-        int i = SaveGame.Rng.RandomLessThan(4);
+        int i = SaveGame.RandomLessThan(4);
         rdir = SaveGame.OrderedDirectionYOffset[i];
         cdir = SaveGame.OrderedDirectionXOffset[i];
     }
@@ -657,10 +657,10 @@ internal class StandardDungeonGenerator : DungeonGenerator
             {
                 break;
             }
-            if (SaveGame.Rng.RandomLessThan(100) < _dunTunChg)
+            if (SaveGame.RandomLessThan(100) < _dunTunChg)
             {
                 CorrectDir(out rowDir, out colDir, row1, col1, row2, col2);
-                if (SaveGame.Rng.RandomLessThan(100) < _dunTunRnd)
+                if (SaveGame.RandomLessThan(100) < _dunTunRnd)
                 {
                     RandDir(out rowDir, out colDir);
                 }
@@ -670,7 +670,7 @@ internal class StandardDungeonGenerator : DungeonGenerator
             while (!SaveGame.InBounds(tmpRow, tmpCol))
             {
                 CorrectDir(out rowDir, out colDir, row1, col1, row2, col2);
-                if (SaveGame.Rng.RandomLessThan(100) < _dunTunRnd)
+                if (SaveGame.RandomLessThan(100) < _dunTunRnd)
                 {
                     RandDir(out rowDir, out colDir);
                 }
@@ -757,7 +757,7 @@ internal class StandardDungeonGenerator : DungeonGenerator
                     }
                     doorFlag = true;
                 }
-                if (SaveGame.Rng.RandomLessThan(100) >= _dunTunCon)
+                if (SaveGame.RandomLessThan(100) >= _dunTunCon)
                 {
                     tmpRow = row1 - startRow;
                     if (tmpRow < 0)
@@ -789,7 +789,7 @@ internal class StandardDungeonGenerator : DungeonGenerator
             x = Wall[i].X;
             cPtr = SaveGame.Grid[y][x];
             cPtr.RevertToBackground();
-            if (SaveGame.Rng.RandomLessThan(100) < _dunTunPen)
+            if (SaveGame.RandomLessThan(100) < _dunTunPen)
             {
                 SaveGame.PlaceRandomDoor(y, x);
             }
@@ -823,7 +823,7 @@ internal class StandardDungeonGenerator : DungeonGenerator
         {
             maxVaultOk--;
         }
-        if (SaveGame.Rng.DieRoll(_emptyLevel) == 1)
+        if (SaveGame.DieRoll(_emptyLevel) == 1)
         {
             emptyLevel = true;
         }
@@ -842,7 +842,7 @@ internal class StandardDungeonGenerator : DungeonGenerator
                 }
             }
         }
-        if (SaveGame.Difficulty > 10 && SaveGame.Rng.RandomLessThan(_dunDest) == 0)
+        if (SaveGame.Difficulty > 10 && SaveGame.RandomLessThan(_dunDest) == 0)
         {
             destroyed = true;
         }
@@ -863,8 +863,8 @@ internal class StandardDungeonGenerator : DungeonGenerator
         CentN = 0;
         for (int i = 0; i < _dunRooms; i++)
         {
-            y = SaveGame.Rng.RandomLessThan(RowRooms);
-            x = SaveGame.Rng.RandomLessThan(ColRooms);
+            y = SaveGame.RandomLessThan(RowRooms);
+            x = SaveGame.RandomLessThan(ColRooms);
             if (x % 3 == 0)
             {
                 x++;
@@ -880,10 +880,10 @@ internal class StandardDungeonGenerator : DungeonGenerator
                 }
                 continue;
             }
-            if (SaveGame.Rng.RandomLessThan(_dunUnusual) < SaveGame.Difficulty)
+            if (SaveGame.RandomLessThan(_dunUnusual) < SaveGame.Difficulty)
             {
-                k = SaveGame.Rng.RandomLessThan(100);
-                if (SaveGame.Rng.RandomLessThan(_dunUnusual) < SaveGame.Difficulty)
+                k = SaveGame.RandomLessThan(100);
+                if (SaveGame.RandomLessThan(_dunUnusual) < SaveGame.Difficulty)
                 {
                     if (k < 10)
                     {
@@ -953,8 +953,8 @@ internal class StandardDungeonGenerator : DungeonGenerator
         }
         for (int i = 0; i < CentN; i++)
         {
-            int pick1 = SaveGame.Rng.RandomLessThan(CentN);
-            int pick2 = SaveGame.Rng.RandomLessThan(CentN);
+            int pick1 = SaveGame.RandomLessThan(CentN);
+            int pick2 = SaveGame.RandomLessThan(CentN);
             int y1 = Cent[pick1].Y;
             int x1 = Cent[pick1].X;
             Cent[pick1] = Cent[pick2].Clone();
@@ -990,7 +990,7 @@ internal class StandardDungeonGenerator : DungeonGenerator
         {
             DestroyLevel();
         }
-        if (emptyLevel && (SaveGame.Rng.DieRoll(_darkEmpty) != 1 || SaveGame.Rng.DieRoll(100) > SaveGame.Difficulty))
+        if (emptyLevel && (SaveGame.DieRoll(_darkEmpty) != 1 || SaveGame.DieRoll(100) > SaveGame.Difficulty))
         {
             SaveGame.RunScript(nameof(LightScript));
         }

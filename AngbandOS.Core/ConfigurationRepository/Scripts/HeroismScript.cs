@@ -18,7 +18,7 @@ internal class HeroismScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        SaveGame.TimedHeroism.AddTimer(SaveGame.Rng.DieRoll(25) + 25);
+        SaveGame.TimedHeroism.AddTimer(SaveGame.DieRoll(25) + 25);
         SaveGame.RestoreHealth(10);
         SaveGame.TimedFear.ResetTimer();
     }

@@ -74,13 +74,13 @@ internal class ActivateScript : Script, IScript, IRepeatableScript, ISuccessfulS
         chance -= itemLevel > 50 ? 50 : itemLevel;
 
         // Always give a slight chance of success
-        if (chance < Constants.UseDevice && SaveGame.Rng.RandomLessThan(Constants.UseDevice - chance + 1) == 0)
+        if (chance < Constants.UseDevice && SaveGame.RandomLessThan(Constants.UseDevice - chance + 1) == 0)
         {
             chance = Constants.UseDevice;
         }
 
         // If we fail our use item roll just tell us and quit
-        if (chance < Constants.UseDevice || SaveGame.Rng.DieRoll(chance) < Constants.UseDevice)
+        if (chance < Constants.UseDevice || SaveGame.DieRoll(chance) < Constants.UseDevice)
         {
             SaveGame.MsgPrint("You failed to activate it properly.");
             return false;

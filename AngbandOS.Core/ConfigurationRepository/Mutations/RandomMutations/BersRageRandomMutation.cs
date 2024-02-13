@@ -18,13 +18,13 @@ internal class BersRageRandomMutation : Mutation
 
     public override void OnProcessWorld()
     {
-        if (base.SaveGame.Rng.DieRoll(3000) != 1)
+        if (base.SaveGame.DieRoll(3000) != 1)
         {
             return;
         }
         SaveGame.Disturb(false);
         SaveGame.MsgPrint("RAAAAGHH!");
         SaveGame.MsgPrint("You feel a fit of rage coming over you!");
-        SaveGame.TimedSuperheroism.AddTimer(10 + base.SaveGame.Rng.DieRoll(SaveGame.ExperienceLevel));
+        SaveGame.TimedSuperheroism.AddTimer(10 + base.SaveGame.DieRoll(SaveGame.ExperienceLevel));
     }
 }

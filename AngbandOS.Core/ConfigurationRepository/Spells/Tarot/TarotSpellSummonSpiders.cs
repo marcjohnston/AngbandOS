@@ -14,7 +14,7 @@ internal class TarotSpellSummonSpiders : Spell
     public override void Cast()
     {
         SaveGame.MsgPrint("You concentrate on the image of a spider...");
-        if (SaveGame.Rng.DieRoll(5) > 2)
+        if (SaveGame.DieRoll(5) > 2)
         {
             if (!SaveGame.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel, SaveGame.SingletonRepository.MonsterFilters.Get(nameof(SpiderMonsterFilter)), true))
             {

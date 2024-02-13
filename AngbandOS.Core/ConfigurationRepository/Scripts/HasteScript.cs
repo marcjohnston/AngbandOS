@@ -21,11 +21,11 @@ internal class HasteScript : Script, IScript
     {
         if (SaveGame.TimedHaste.TurnsRemaining == 0)
         {
-            SaveGame.TimedHaste.SetTimer(SaveGame.Rng.DieRoll(20 + SaveGame.ExperienceLevel) + SaveGame.ExperienceLevel);
+            SaveGame.TimedHaste.SetTimer(SaveGame.DieRoll(20 + SaveGame.ExperienceLevel) + SaveGame.ExperienceLevel);
         }
         else
         {
-            SaveGame.TimedHaste.AddTimer(SaveGame.Rng.DieRoll(5));
+            SaveGame.TimedHaste.AddTimer(SaveGame.DieRoll(5));
         }
     }
 }

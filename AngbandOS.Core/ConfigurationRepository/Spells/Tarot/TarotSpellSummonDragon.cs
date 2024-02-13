@@ -14,7 +14,7 @@ internal class TarotSpellSummonDragon : Spell
     public override void Cast()
     {
         SaveGame.MsgPrint("You concentrate on the image of a dragon...");
-        if (SaveGame.Rng.DieRoll(10) > 3)
+        if (SaveGame.DieRoll(10) > 3)
         {
             if (!SaveGame.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel, SaveGame.SingletonRepository.MonsterFilters.Get(nameof(DragonMonsterFilter)), true))
             {

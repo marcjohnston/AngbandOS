@@ -16,7 +16,7 @@ internal class DexterityArtifactBias : ArtifactBias
         if (!item.RandartItemCharacteristics.Dex)
         {
             item.RandartItemCharacteristics.Dex = true;
-            if (SaveGame.Rng.DieRoll(2) == 1)
+            if (SaveGame.DieRoll(2) == 1)
             {
                 return true;
             }
@@ -29,7 +29,7 @@ internal class DexterityArtifactBias : ArtifactBias
         if (!item.RandartItemCharacteristics.SustDex)
         {
             item.RandartItemCharacteristics.SustDex = true;
-            if (SaveGame.Rng.DieRoll(2) == 1)
+            if (SaveGame.DieRoll(2) == 1)
             {
                 return true;
             }

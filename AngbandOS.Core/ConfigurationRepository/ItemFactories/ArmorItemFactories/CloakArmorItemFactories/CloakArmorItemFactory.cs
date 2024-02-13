@@ -28,7 +28,7 @@ internal abstract class CloakArmorItemFactory : ArmorItemFactory
 
     protected override void ApplyRandomPoorRareCharacteristics(Item item)
     {
-        switch (SaveGame.Rng.DieRoll(3))
+        switch (SaveGame.DieRoll(3))
         {
             case 1:
                 item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(CloakOfIrritationRareItem));
@@ -51,7 +51,7 @@ internal abstract class CloakArmorItemFactory : ArmorItemFactory
 
             if (power > 1)
             {
-                if (SaveGame.Rng.DieRoll(20) == 1)
+                if (SaveGame.DieRoll(20) == 1)
                 {
                     item.CreateRandart(false);
                 }

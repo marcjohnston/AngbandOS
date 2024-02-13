@@ -17,7 +17,7 @@ internal class DragonsBreathWandItemFactory : WandItemFactory
 
     public override void ApplyMagic(Item item, int level, int power, Store? store)
     {
-        item.TypeSpecificValue = SaveGame.Rng.DieRoll(3) + 1;
+        item.TypeSpecificValue = SaveGame.DieRoll(3) + 1;
     }
     public override int[] Chance => new int[] { 4, 0, 0, 0 };
     public override int Cost => 2400;
@@ -33,7 +33,7 @@ internal class DragonsBreathWandItemFactory : WandItemFactory
     public override int Weight => 10;
     public override bool ExecuteActivation(SaveGame saveGame, int dir)
     {
-        switch (SaveGame.Rng.RandomLessThan(5))
+        switch (SaveGame.RandomLessThan(5))
         {
             case 0:
                 saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get(nameof(AcidProjectile)), dir, 100, -3);

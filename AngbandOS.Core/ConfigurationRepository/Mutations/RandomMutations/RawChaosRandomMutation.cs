@@ -18,7 +18,7 @@ internal class RawChaosRandomMutation : Mutation
 
     public override void OnProcessWorld()
     {
-        if (SaveGame.HasAntiMagic || base.SaveGame.Rng.DieRoll(8000) != 1)
+        if (SaveGame.HasAntiMagic || base.SaveGame.DieRoll(8000) != 1)
         {
             return;
         }

@@ -93,7 +93,7 @@ internal class IntroductionBirthStage : BirthStage
             SaveGame.BaseCharacterClass = SaveGame.SingletonRepository.CharacterClasses.ToWeightedRandom().Choose();
             do
             {
-                int raceIndex = SaveGame.Rng.RandomLessThan(SaveGame.SingletonRepository.Races.Count);
+                int raceIndex = SaveGame.RandomLessThan(SaveGame.SingletonRepository.Races.Count);
                 SaveGame.Race = SaveGame.SingletonRepository.Races[raceIndex];
                 SaveGame.GetFirstLevelMutation = SaveGame.Race.AutomaticallyGainsFirstLevelMutationAtBirth;
             }
@@ -110,7 +110,7 @@ internal class IntroductionBirthStage : BirthStage
             }
 
             Gender[] availableRandomGenders = SaveGame.SingletonRepository.Genders.Where(_gender => _gender.CanBeRandomlySelected).ToArray();
-            int genderIndex = SaveGame.Rng.RandomBetween(0, availableRandomGenders.Length - 1);
+            int genderIndex = SaveGame.RandomBetween(0, availableRandomGenders.Length - 1);
             SaveGame.Gender = availableRandomGenders[genderIndex];
             SaveGame.Name = SaveGame.Race.CreateRandomName();
             SaveGame.Generation = 1;

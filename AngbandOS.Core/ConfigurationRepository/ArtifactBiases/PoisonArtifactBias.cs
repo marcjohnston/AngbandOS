@@ -16,7 +16,7 @@ internal class PoisonArtifactBias : ArtifactBias
         if (!item.RandartItemCharacteristics.ResPois)
         {
             item.RandartItemCharacteristics.ResPois = true;
-            if (SaveGame.Rng.DieRoll(2) == 1)
+            if (SaveGame.DieRoll(2) == 1)
             {
                 return true;
             }
@@ -31,7 +31,7 @@ internal class PoisonArtifactBias : ArtifactBias
             if (!item.RandartItemCharacteristics.BrandPois)
             {
                 item.RandartItemCharacteristics.BrandPois = true;
-                if (SaveGame.Rng.DieRoll(2) == 1)
+                if (SaveGame.DieRoll(2) == 1)
                 {
                     return true;
                 }

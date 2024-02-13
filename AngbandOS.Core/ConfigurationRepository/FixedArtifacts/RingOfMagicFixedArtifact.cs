@@ -24,7 +24,7 @@ internal class RingOfMagicFixedArtifact : FixedArtifact, IFixedArtifactActivatib
         }
         if (SaveGame.DrainLife(dir, 100))
         {
-            item.RechargeTimeLeft = base.SaveGame.Rng.RandomLessThan(100) + 100;
+            item.RechargeTimeLeft = base.SaveGame.RandomLessThan(100) + 100;
         }
     }
     public string DescribeActivationEffect => "a strangling attack (100) every 100+d100 turns";

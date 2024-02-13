@@ -20,7 +20,7 @@ internal class RemoveCurseStaffItemFactory : StaffItemFactory
     public override int Dd => 1;
     public override void ApplyMagic(Item item, int level, int power, Store? store)
     {
-        item.TypeSpecificValue = SaveGame.Rng.DieRoll(3) + 4;
+        item.TypeSpecificValue = SaveGame.DieRoll(3) + 4;
     }
     public override int Ds => 2;
     public override string FriendlyName => "Remove Curse";

@@ -24,7 +24,7 @@ internal class BlessingScrollItemFactory : ScrollItemFactory
 
     public override void Read(ReadScrollEvent eventArgs)
     {
-        if (SaveGame.TimedBlessing.AddTimer(SaveGame.Rng.DieRoll(12) + 6))
+        if (SaveGame.TimedBlessing.AddTimer(SaveGame.DieRoll(12) + 6))
         {
             eventArgs.Identified = true;
         }

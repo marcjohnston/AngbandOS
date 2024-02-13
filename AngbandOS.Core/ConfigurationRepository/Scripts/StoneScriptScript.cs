@@ -18,6 +18,6 @@ internal class StoneScriptScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        SaveGame.TimedStoneskin.AddTimer(SaveGame.Rng.DieRoll(20) + 30);
+        SaveGame.TimedStoneskin.AddTimer(SaveGame.DieRoll(20) + 30);
     }
 }

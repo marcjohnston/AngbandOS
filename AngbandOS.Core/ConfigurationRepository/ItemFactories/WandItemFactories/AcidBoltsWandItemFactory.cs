@@ -14,7 +14,7 @@ internal class AcidBoltsWandItemFactory : WandItemFactory
 
     public override void ApplyMagic(Item item, int level, int power, Store? store)
     {
-        item.TypeSpecificValue = SaveGame.Rng.DieRoll(8) + 6;
+        item.TypeSpecificValue = SaveGame.DieRoll(8) + 6;
     }
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(MinusSignSymbol));
     public override string Name => "Acid Bolts";
@@ -29,7 +29,7 @@ internal class AcidBoltsWandItemFactory : WandItemFactory
     public override int Weight => 10;
     public override bool ExecuteActivation(SaveGame saveGame, int dir)
     {
-        saveGame.FireBoltOrBeam(20, saveGame.SingletonRepository.Projectiles.Get(nameof(AcidProjectile)), dir, SaveGame.Rng.DiceRoll(3, 8));
+        saveGame.FireBoltOrBeam(20, saveGame.SingletonRepository.Projectiles.Get(nameof(AcidProjectile)), dir, SaveGame.DiceRoll(3, 8));
         return true;
     }
     public override Item CreateItem() => new Item(SaveGame, this);

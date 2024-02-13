@@ -61,7 +61,7 @@ internal class PackInventorySlot : BaseInventorySlot
     /// <summary>
     /// Returns true, to sense the identity of items in the pack only 20% of the time.
     /// </summary>
-    public override bool IdentitySenseChanceTest => SaveGame.Rng.RandomLessThan(5) == 0;
+    public override bool IdentitySenseChanceTest => SaveGame.RandomLessThan(5) == 0;
 
     /// <summary>
     /// Allows items being carried in a pack to hook into the ProcessWorld event.  By default, this method initiates the hook for all items in the inventory slot to perform processing 

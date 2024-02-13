@@ -18,7 +18,7 @@ internal class DragonsFlameWandItemFactory : WandItemFactory
     public override int[] Chance => new int[] { 4, 0, 0, 0 };
     public override void ApplyMagic(Item item, int level, int power, Store? store)
     {
-        item.TypeSpecificValue = SaveGame.Rng.DieRoll(3) + 1;
+        item.TypeSpecificValue = SaveGame.DieRoll(3) + 1;
     }
     public override int Cost => 2400;
     public override int Dd => 1;

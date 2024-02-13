@@ -216,7 +216,7 @@ internal class Monster : IItemContainer
             MonsterRace halluRace;
             do
             {
-                halluRace = SaveGame.SingletonRepository.MonsterRaces[SaveGame.Rng.DieRoll(SaveGame.SingletonRepository.MonsterRaces.Count - 2)];
+                halluRace = SaveGame.SingletonRepository.MonsterRaces[SaveGame.DieRoll(SaveGame.SingletonRepository.MonsterRaces.Count - 2)];
             } while (halluRace.Unique);
             string sillyName = halluRace.Name;
             name = sillyName;
@@ -413,21 +413,21 @@ internal class Monster : IItemContainer
             {
                 return;
             }
-            if (SmFriendly && SaveGame.Rng.DieRoll(8) != 1)
+            if (SmFriendly && SaveGame.DieRoll(8) != 1)
             {
                 return;
             }
-            if (SaveGame.Rng.DieRoll(power) < SaveGame.SkillSavingThrow)
+            if (SaveGame.DieRoll(power) < SaveGame.SkillSavingThrow)
             {
                 return;
             }
             if (SaveGame.TimedHallucinations.TurnsRemaining != 0)
             {
                 this.SaveGame.MsgPrint($"You behold the {this.SaveGame.SingletonRepository.FunnyDescriptions.ToWeightedRandom().Choose()} visage of {mName}!");
-                if (SaveGame.Rng.DieRoll(3) == 1)
+                if (SaveGame.DieRoll(3) == 1)
                 {
                     this.SaveGame.MsgPrint(this.SaveGame.SingletonRepository.FunnyComments.ToWeightedRandom().Choose());
-                    SaveGame.TimedHallucinations.AddTimer(SaveGame.Rng.DieRoll(Race.Level));
+                    SaveGame.TimedHallucinations.AddTimer(SaveGame.DieRoll(Race.Level));
                 }
                 return;
             }
@@ -435,54 +435,54 @@ internal class Monster : IItemContainer
             Race.Knowledge.Characteristics.EldritchHorror = true;
 
             // Allow the race to resist.
-            if (SaveGame.Rng.DieRoll(100) < SaveGame.Race.ChanceOfSanityBlastImmunity(SaveGame.ExperienceLevel))
+            if (SaveGame.DieRoll(100) < SaveGame.Race.ChanceOfSanityBlastImmunity(SaveGame.ExperienceLevel))
             {
                 return;
             }
         }
-        if (SaveGame.Rng.DieRoll(power) < SaveGame.SkillSavingThrow)
+        if (SaveGame.DieRoll(power) < SaveGame.SkillSavingThrow)
         {
             if (!SaveGame.HasConfusionResistance)
             {
-                SaveGame.TimedConfusion.AddTimer(SaveGame.Rng.RandomLessThan(4) + 4);
+                SaveGame.TimedConfusion.AddTimer(SaveGame.RandomLessThan(4) + 4);
             }
-            if (!SaveGame.HasChaosResistance && SaveGame.Rng.DieRoll(3) == 1)
+            if (!SaveGame.HasChaosResistance && SaveGame.DieRoll(3) == 1)
             {
-                SaveGame.TimedHallucinations.AddTimer(SaveGame.Rng.RandomLessThan(250) + 150);
+                SaveGame.TimedHallucinations.AddTimer(SaveGame.RandomLessThan(250) + 150);
             }
             return;
         }
-        if (SaveGame.Rng.DieRoll(power) < SaveGame.SkillSavingThrow)
+        if (SaveGame.DieRoll(power) < SaveGame.SkillSavingThrow)
         {
             SaveGame.TryDecreasingAbilityScore(Ability.Intelligence);
             SaveGame.TryDecreasingAbilityScore(Ability.Wisdom);
             return;
         }
-        if (SaveGame.Rng.DieRoll(power) < SaveGame.SkillSavingThrow)
+        if (SaveGame.DieRoll(power) < SaveGame.SkillSavingThrow)
         {
             if (!SaveGame.HasConfusionResistance)
             {
-                SaveGame.TimedConfusion.AddTimer(SaveGame.Rng.RandomLessThan(4) + 4);
+                SaveGame.TimedConfusion.AddTimer(SaveGame.RandomLessThan(4) + 4);
             }
             if (!SaveGame.HasFreeAction)
             {
-                SaveGame.TimedParalysis.AddTimer(SaveGame.Rng.RandomLessThan(4) + 4);
+                SaveGame.TimedParalysis.AddTimer(SaveGame.RandomLessThan(4) + 4);
             }
-            while (SaveGame.Rng.RandomLessThan(100) > SaveGame.SkillSavingThrow)
+            while (SaveGame.RandomLessThan(100) > SaveGame.SkillSavingThrow)
             {
                 SaveGame.TryDecreasingAbilityScore(Ability.Intelligence);
             }
-            while (SaveGame.Rng.RandomLessThan(100) > SaveGame.SkillSavingThrow)
+            while (SaveGame.RandomLessThan(100) > SaveGame.SkillSavingThrow)
             {
                 SaveGame.TryDecreasingAbilityScore(Ability.Wisdom);
             }
             if (!SaveGame.HasChaosResistance)
             {
-                SaveGame.TimedHallucinations.AddTimer(SaveGame.Rng.RandomLessThan(250) + 150);
+                SaveGame.TimedHallucinations.AddTimer(SaveGame.RandomLessThan(250) + 150);
             }
             return;
         }
-        if (SaveGame.Rng.DieRoll(power) < SaveGame.SkillSavingThrow)
+        if (SaveGame.DieRoll(power) < SaveGame.SkillSavingThrow)
         {
             if (SaveGame.DecreaseAbilityScore(Ability.Intelligence, 10, true))
             {
@@ -498,7 +498,7 @@ internal class Monster : IItemContainer
             }
             return;
         }
-        if (SaveGame.Rng.DieRoll(power) < SaveGame.SkillSavingThrow)
+        if (SaveGame.DieRoll(power) < SaveGame.SkillSavingThrow)
         {
             if (this.SaveGame.LoseAllInfo())
             {
@@ -528,7 +528,7 @@ internal class Monster : IItemContainer
             uint notice = 0;
             if (!SaveGame.HasAggravation)
             {
-                notice = (uint)SaveGame.Rng.RandomLessThan(1024);
+                notice = (uint)SaveGame.RandomLessThan(1024);
             }
             // If the player makes too much noise (or aggravates)
             if (notice * notice * notice <= noise)
@@ -581,7 +581,7 @@ internal class Monster : IItemContainer
         {
             int stunRelief = 1;
             // We have a saveGame.Level-based chance of shaking off the stun completely
-            if (SaveGame.Rng.RandomLessThan(5000) <= Race.Level * Race.Level)
+            if (SaveGame.RandomLessThan(5000) <= Race.Level * Race.Level)
             {
                 stunRelief = StunLevel;
             }
@@ -611,7 +611,7 @@ internal class Monster : IItemContainer
         if (ConfusionLevel != 0)
         {
             // Reduce our confusion by an amount based on our saveGame.Level
-            int confusionRelief = SaveGame.Rng.DieRoll((Race.Level / 10) + 1);
+            int confusionRelief = SaveGame.DieRoll((Race.Level / 10) + 1);
             if (ConfusionLevel > confusionRelief)
             {
                 ConfusionLevel -= confusionRelief;
@@ -649,7 +649,7 @@ internal class Monster : IItemContainer
         if (FearLevel != 0)
         {
             // Reduce our fear by an amount based on our saveGame.Level
-            int fearRelief = SaveGame.Rng.DieRoll((Race.Level / 10) + 1);
+            int fearRelief = SaveGame.DieRoll((Race.Level / 10) + 1);
             if (FearLevel > fearRelief)
             {
                 FearLevel -= fearRelief;
@@ -687,7 +687,7 @@ internal class Monster : IItemContainer
             // If we're friendly, then our babies are friendly too
             bool isFriend = SmFriendly;
             // If there's lots of space, then pop out a baby
-            if (k < 4 && (k == 0 || SaveGame.Rng.RandomLessThan(k * Constants.MonMultAdj) == 0))
+            if (k < 4 && (k == 0 || SaveGame.RandomLessThan(k * Constants.MonMultAdj) == 0))
             {
                 if (SaveGame.MultiplyMonster(this, isFriend, false))
                 {
@@ -731,7 +731,7 @@ internal class Monster : IItemContainer
         }
         // If we move randomly most of the time, have a high chance of putting four random moves
         // in the matrix
-        else if (Race.RandomMove50 && Race.RandomMove25 && SaveGame.Rng.RandomLessThan(100) < 75)
+        else if (Race.RandomMove50 && Race.RandomMove25 && SaveGame.RandomLessThan(100) < 75)
         {
             // If the player sees us, then they learn about our random movement
             if (IsVisible)
@@ -745,7 +745,7 @@ internal class Monster : IItemContainer
             potentialMoves[3] = 5;
         }
         // If we have a moderate chance of moving randomly, maybe put four random moves in our matrix
-        else if (Race.RandomMove50 && SaveGame.Rng.RandomLessThan(100) < 50)
+        else if (Race.RandomMove50 && SaveGame.RandomLessThan(100) < 50)
         {
             // If the player sees us, then they learn about our random movement
             if (IsVisible)
@@ -758,7 +758,7 @@ internal class Monster : IItemContainer
             potentialMoves[3] = 5;
         }
         // If we have a low chance of moving randomly, maybe put four random moves in our matrix
-        else if (Race.RandomMove25 && SaveGame.Rng.RandomLessThan(100) < 25)
+        else if (Race.RandomMove25 && SaveGame.RandomLessThan(100) < 25)
         {
             // If the player sees us, then they learn about our random movement
             if (IsVisible)
@@ -815,7 +815,7 @@ internal class Monster : IItemContainer
             // Moves of '5' (i.e. 'stay still') are placeholders for random moves
             if (d == 5)
             {
-                d = SaveGame.OrderedDirection[SaveGame.Rng.RandomLessThan(8)];
+                d = SaveGame.OrderedDirection[SaveGame.RandomLessThan(8)];
             }
             // Work out where the move will take us
             int newY = oldY + SaveGame.KeypadDirectionYOffset[d];
@@ -859,7 +859,7 @@ internal class Monster : IItemContainer
                 doMove = true;
                 didKillWall = true;
                 // Occasionally make a noise if we're going to tunnel
-                if (SaveGame.Rng.DieRoll(20) == 1)
+                if (SaveGame.DieRoll(20) == 1)
                 {
                     SaveGame.MsgPrint("There is a grinding sound.");
                 }
@@ -890,7 +890,7 @@ internal class Monster : IItemContainer
                     else if (tile.FeatureType.Name.Contains("Locked"))
                     {
                         int k = int.Parse(tile.FeatureType.Name.Substring(10));
-                        if (SaveGame.Rng.RandomLessThan(Health / 10) > k)
+                        if (SaveGame.RandomLessThan(Health / 10) > k)
                         {
                             SaveGame.CaveSetFeat(newY, newX, "LockedDoor0");
                             mayBash = false;
@@ -902,7 +902,7 @@ internal class Monster : IItemContainer
                 {
                     int k = int.Parse(tile.FeatureType.Name.Substring(10));
                     // If we succeeded, let the player hear it
-                    if (SaveGame.Rng.RandomLessThan(Health / 10) > k)
+                    if (SaveGame.RandomLessThan(Health / 10) > k)
                     {
                         SaveGame.MsgPrint("You hear a door burst open!");
                         didBashDoor = true;
@@ -913,7 +913,7 @@ internal class Monster : IItemContainer
                 // or broken one
                 if (didOpenDoor || didBashDoor)
                 {
-                    if (didBashDoor && SaveGame.Rng.RandomLessThan(100) < 50)
+                    if (didBashDoor && SaveGame.RandomLessThan(100) < 50)
                     {
                         SaveGame.CaveSetFeat(newY, newX, "BrokenDoor");
                     }
@@ -934,7 +934,7 @@ internal class Monster : IItemContainer
                 // Assume we're not moving
                 doMove = false;
                 // We have a chance of breaking the sign based on our saveGame.Level
-                if (SaveGame.Rng.DieRoll(BreakElderSign) < Race.Level)
+                if (SaveGame.DieRoll(BreakElderSign) < Race.Level)
                 {
                     // If the player knows the sign is there, let them know it was broken
                     if (tile.TileFlags.IsSet(GridTile.PlayerMemorized))
@@ -954,7 +954,7 @@ internal class Monster : IItemContainer
                 // Assume we're not moving
                 doMove = false;
                 // We have a chance to break the sign
-                if (SaveGame.Rng.DieRoll(Constants.BreakYellowSign) < Race.Level)
+                if (SaveGame.DieRoll(Constants.BreakYellowSign) < Race.Level)
                 {
                     // If the player knows about the sign, let them know it was broken
                     if (tile.TileFlags.IsSet(GridTile.PlayerMemorized))
@@ -963,7 +963,7 @@ internal class Monster : IItemContainer
                         if (newY == SaveGame.MapY && newX == SaveGame.MapX)
                         {
                             SaveGame.MsgPrint("The rune explodes!");
-                            SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(ManaProjectile)), 0, 2 * ((SaveGame.ExperienceLevel / 2) + SaveGame.Rng.DiceRoll(7, 7)), 2);
+                            SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(ManaProjectile)), 0, 2 * ((SaveGame.ExperienceLevel / 2) + SaveGame.DiceRoll(7, 7)), 2);
                         }
                         else
                         {
@@ -1294,7 +1294,7 @@ internal class Monster : IItemContainer
                     SaveGame.MsgPrint($"{monsterName} {method.MonsterAction(target)}.");
                 }
                 obvious = true;
-                damage = this.SaveGame.Rng.DiceRoll(dDice, dSide);
+                damage = this.SaveGame.DiceRoll(dDice, dSide);
                 // Default to a missile attack
                 Projectile pt = SaveGame.SingletonRepository.Projectiles.Get(nameof(MissileProjectile));
                 // Choose the correct type of attack to display, as well as any other special
@@ -1327,7 +1327,7 @@ internal class Monster : IItemContainer
                                     targetRace.Knowledge.Characteristics.FireAura = true;
                                 }
                             }
-                            SaveGame.Project(targetIndex, 0, MapY, MapX, this.SaveGame.Rng.DiceRoll(1 + (targetRace.Level / 26), 1 + (targetRace.Level / 17)), SaveGame.SingletonRepository.Projectiles.Get(nameof(Projection.FireProjectile)), ProjectionFlag.ProjectKill | ProjectionFlag.ProjectStop);
+                            SaveGame.Project(targetIndex, 0, MapY, MapX, this.SaveGame.DiceRoll(1 + (targetRace.Level / 26), 1 + (targetRace.Level / 17)), SaveGame.SingletonRepository.Projectiles.Get(nameof(Projection.FireProjectile)), ProjectionFlag.ProjectKill | ProjectionFlag.ProjectStop);
                         }
                         if (targetRace.LightningAura && !Race.ImmuneLightning)
                         {
@@ -1342,7 +1342,7 @@ internal class Monster : IItemContainer
                                     targetRace.Knowledge.Characteristics.LightningAura = true;
                                 }
                             }
-                            SaveGame.Project(targetIndex, 0, MapY, MapX, this.SaveGame.Rng.DiceRoll(1 + (targetRace.Level / 26), 1 + (targetRace.Level / 17)),
+                            SaveGame.Project(targetIndex, 0, MapY, MapX, this.SaveGame.DiceRoll(1 + (targetRace.Level / 26), 1 + (targetRace.Level / 17)),
                                 SaveGame.SingletonRepository.Projectiles.Get(nameof(Projection.ElecProjectile)), ProjectionFlag.ProjectKill | ProjectionFlag.ProjectStop);
                         }
                     }
@@ -1409,13 +1409,13 @@ internal class Monster : IItemContainer
         {
             return false;
         }
-        if (SaveGame.Rng.RandomLessThan(100) >= chance)
+        if (SaveGame.RandomLessThan(100) >= chance)
         {
             return false;
         }
 
         // Innate abilities are inherently less likely than actual spells
-        if (SaveGame.Rng.RandomLessThan(100) >= chance * 2)
+        if (SaveGame.RandomLessThan(100) >= chance * 2)
         {
             noInnate = true;
         }
@@ -1444,7 +1444,7 @@ internal class Monster : IItemContainer
 
         // If we're smart and badly injured, we may want to prioritise spells that disable the
         // player, summon help, or let us escape over spells that do direct damage
-        if (Race.Smart && Health < MaxHealth / 10 && SaveGame.Rng.RandomLessThan(100) < 50)
+        if (Race.Smart && Health < MaxHealth / 10 && SaveGame.RandomLessThan(100) < 50)
         {
 
             spells = spells.Where((_spell) => _spell.IsIntelligent);
@@ -1510,7 +1510,7 @@ internal class Monster : IItemContainer
         }
 
         // Only check for actual spells - nothing is so stupid it fails to breathe
-        if (!thrownSpell.UsesBreathe && SaveGame.Rng.RandomLessThan(100) < failrate)
+        if (!thrownSpell.UsesBreathe && SaveGame.RandomLessThan(100) < failrate)
         {
             SaveGame.MsgPrint($"{monsterName} tries to cast a spell, but fails.");
             return true;
@@ -1580,7 +1580,7 @@ internal class Monster : IItemContainer
         {
             return false;
         }
-        if (this.SaveGame.Rng.RandomLessThan(100) >= chance)
+        if (this.SaveGame.RandomLessThan(100) >= chance)
         {
             return false;
         }
@@ -1626,7 +1626,7 @@ internal class Monster : IItemContainer
 
             // If we're smart and badly injured, we may want to prioritise spells that disable
             // the target, summon help, or let us escape over spells that do direct damage
-            if (Race.Smart && Health < MaxHealth / 10 && this.SaveGame.Rng.RandomLessThan(100) < 50)
+            if (Race.Smart && Health < MaxHealth / 10 && this.SaveGame.RandomLessThan(100) < 50)
             {
                 monsterSpells = monsterSpells.Where((MonsterSpell _monsterSpell) => _monsterSpell.IsIntelligent);
 
@@ -1855,7 +1855,7 @@ internal class Monster : IItemContainer
         if (FearLevel != 0 && damage > 0)
         {
             // If we're already afraid, we might get desperate and overcome our fear
-            int tmp = SaveGame.Rng.DieRoll(damage);
+            int tmp = SaveGame.DieRoll(damage);
             if (tmp < FearLevel)
             {
                 FearLevel -= tmp;
@@ -1870,10 +1870,10 @@ internal class Monster : IItemContainer
         if (FearLevel == 0 && !Race.ImmuneFear)
         {
             int percentage = 100 * Health / MaxHealth;
-            if ((percentage <= 10 && SaveGame.Rng.RandomLessThan(10) < percentage) || (damage >= Health && SaveGame.Rng.RandomLessThan(100) < 80))
+            if ((percentage <= 10 && SaveGame.RandomLessThan(10) < percentage) || (damage >= Health && SaveGame.RandomLessThan(100) < 80))
             {
                 fear = true;
-                FearLevel = SaveGame.Rng.DieRoll(10) + (damage >= Health && percentage > 7 ? 20 : (11 - percentage) * 5);
+                FearLevel = SaveGame.DieRoll(10) + (damage >= Health && percentage > 7 ? 20 : (11 - percentage) * 5);
             }
         }
     }
@@ -1939,7 +1939,7 @@ internal class Monster : IItemContainer
         }
 
         // Tiny chance of forgetting what we've seen, clearing all smart flags except for ally and clone
-        if (SaveGame.Rng.RandomLessThan(100) < 1)
+        if (SaveGame.RandomLessThan(100) < 1)
         {
             ForgetSmartness();
         }
@@ -2133,7 +2133,7 @@ internal class Monster : IItemContainer
         {
             percentage /= 2;
         }
-        return SaveGame.Rng.RandomLessThan(100) < percentage;
+        return SaveGame.RandomLessThan(100) < percentage;
     }
 
     /// <summary>
@@ -2732,7 +2732,7 @@ internal class Monster : IItemContainer
             {
                 SaveGame.Disturb(true);
                 // Protection From Evil might repel the attack
-                if (SaveGame.TimedProtectionFromEvil.TurnsRemaining > 0 && Race.Evil && SaveGame.ExperienceLevel >= monsterLevel && this.SaveGame.Rng.RandomLessThan(100) + SaveGame.ExperienceLevel > 50)
+                if (SaveGame.TimedProtectionFromEvil.TurnsRemaining > 0 && Race.Evil && SaveGame.ExperienceLevel >= monsterLevel && this.SaveGame.RandomLessThan(100) + SaveGame.ExperienceLevel > 50)
                 {
                     if (IsVisible)
                     {
@@ -2751,7 +2751,7 @@ internal class Monster : IItemContainer
                 }
                 obvious = true;
                 // Work out base damage done by the attack
-                damage = this.SaveGame.Rng.DiceRoll(damageDice, damageSides);
+                damage = this.SaveGame.DiceRoll(damageDice, damageSides);
                 // Apply any modifiers to the damage
                 if (effect == null)
                 {
@@ -2768,7 +2768,7 @@ internal class Monster : IItemContainer
                 bool doStun = method.AttackStunsTarget;
                 if (doCut && doStun)
                 {
-                    if (this.SaveGame.Rng.RandomLessThan(100) < 50)
+                    if (this.SaveGame.RandomLessThan(100) < 50)
                     {
                         doCut = false;
                     }
@@ -2790,23 +2790,23 @@ internal class Monster : IItemContainer
                             break;
 
                         case 1:
-                            k = this.SaveGame.Rng.DieRoll(5);
+                            k = this.SaveGame.DieRoll(5);
                             break;
 
                         case 2:
-                            k = this.SaveGame.Rng.DieRoll(5) + 5;
+                            k = this.SaveGame.DieRoll(5) + 5;
                             break;
 
                         case 3:
-                            k = this.SaveGame.Rng.DieRoll(20) + 20;
+                            k = this.SaveGame.DieRoll(20) + 20;
                             break;
 
                         case 4:
-                            k = this.SaveGame.Rng.DieRoll(50) + 50;
+                            k = this.SaveGame.DieRoll(50) + 50;
                             break;
 
                         case 5:
-                            k = this.SaveGame.Rng.DieRoll(100) + 100;
+                            k = this.SaveGame.DieRoll(100) + 100;
                             break;
 
                         case 6:
@@ -2834,23 +2834,23 @@ internal class Monster : IItemContainer
                             break;
 
                         case 1:
-                            k = this.SaveGame.Rng.DieRoll(5);
+                            k = this.SaveGame.DieRoll(5);
                             break;
 
                         case 2:
-                            k = this.SaveGame.Rng.DieRoll(10) + 10;
+                            k = this.SaveGame.DieRoll(10) + 10;
                             break;
 
                         case 3:
-                            k = this.SaveGame.Rng.DieRoll(20) + 20;
+                            k = this.SaveGame.DieRoll(20) + 20;
                             break;
 
                         case 4:
-                            k = this.SaveGame.Rng.DieRoll(30) + 30;
+                            k = this.SaveGame.DieRoll(30) + 30;
                             break;
 
                         case 5:
-                            k = this.SaveGame.Rng.DieRoll(40) + 40;
+                            k = this.SaveGame.DieRoll(40) + 40;
                             break;
 
                         case 6:
@@ -2874,7 +2874,7 @@ internal class Monster : IItemContainer
                         if (!Race.ImmuneFire)
                         {
                             SaveGame.MsgPrint($"{monsterName} is suddenly very hot!");
-                            if (SaveGame.DamageMonster(GetMonsterIndex(), this.SaveGame.Rng.DiceRoll(2, 6), out fear,
+                            if (SaveGame.DamageMonster(GetMonsterIndex(), this.SaveGame.DiceRoll(2, 6), out fear,
                                 " turns into a pile of ash."))
                             {
                                 blinked = false;
@@ -2895,7 +2895,7 @@ internal class Monster : IItemContainer
                         if (!Race.ImmuneLightning)
                         {
                             SaveGame.MsgPrint($"{monsterName} gets zapped!");
-                            if (SaveGame.DamageMonster(GetMonsterIndex(), this.SaveGame.Rng.DiceRoll(2, 6), out fear,
+                            if (SaveGame.DamageMonster(GetMonsterIndex(), this.SaveGame.DiceRoll(2, 6), out fear,
                                 " turns into a pile of cinder."))
                             {
                                 blinked = false;
@@ -2976,8 +2976,8 @@ internal class Monster : IItemContainer
             {
                 while (true)
                 {
-                    ny = SaveGame.Rng.RandomSpread(oy, dis);
-                    nx = SaveGame.Rng.RandomSpread(ox, dis);
+                    ny = SaveGame.RandomSpread(oy, dis);
+                    nx = SaveGame.RandomSpread(ox, dis);
                     int d = saveGame.Distance(oy, ox, ny, nx);
                     if (d >= min && d <= dis)
                     {
@@ -3122,14 +3122,14 @@ internal class Monster : IItemContainer
     private bool CheckHitMonsterVersusMonster(int power, int level, int armorClass)
     {
         // Base 5% chance to hit and 5% chance to miss
-        int k = SaveGame.Rng.RandomLessThan(100);
+        int k = SaveGame.RandomLessThan(100);
         if (k < 10)
         {
             return k < 5;
         }
         // If we didn't auto hit or miss, use the standard formula for attacking
         int i = power + (level * 3);
-        return i > 0 && SaveGame.Rng.DieRoll(i) > armorClass * 3 / 4;
+        return i > 0 && SaveGame.DieRoll(i) > armorClass * 3 / 4;
     }
 
     /// <summary>
@@ -3169,7 +3169,7 @@ internal class Monster : IItemContainer
         // tactical spell
         MonsterSpellList attackSpells = spells.Where((_spell) => _spell.IsAttack);
         MonsterSpellList tacticalSpells = spells.Where((_spell) => _spell.IsTactical);
-        if (SaveGame.Distance(SaveGame.MapY, SaveGame.MapX, MapY, MapX) < 4 && attackSpells.Count > 0 && this.SaveGame.Rng.RandomLessThan(100) < 75)
+        if (SaveGame.Distance(SaveGame.MapY, SaveGame.MapX, MapY, MapX) < 4 && attackSpells.Count > 0 && this.SaveGame.RandomLessThan(100) < 75)
         {
             if (tacticalSpells.Count > 0)
             {
@@ -3178,7 +3178,7 @@ internal class Monster : IItemContainer
         }
 
         // Priority Four: If we're at less than full health, probably use a healing spell
-        if (Health < MaxHealth * 3 / 4 && this.SaveGame.Rng.RandomLessThan(100) < 75)
+        if (Health < MaxHealth * 3 / 4 && this.SaveGame.RandomLessThan(100) < 75)
         {
             MonsterSpellList healingSpells = spells.Where((_spell) => _spell.Heals);
             if (healingSpells.Count > 0)
@@ -3188,33 +3188,33 @@ internal class Monster : IItemContainer
         }
         // Priority Five: If we have a summoning spell, maybe use it
         MonsterSpellList summonSpells = spells.Where((_spell) => _spell.SummonsHelp);
-        if (summonSpells.Count > 0 && this.SaveGame.Rng.RandomLessThan(100) < 50)
+        if (summonSpells.Count > 0 && this.SaveGame.RandomLessThan(100) < 50)
         {
             return summonSpells.ToWeightedRandom(SaveGame).Choose();
         }
 
         // Priority Six: If we have a direct attack spell, probably use it
-        if (attackSpells.Count > 0 && this.SaveGame.Rng.RandomLessThan(100) < 85)
+        if (attackSpells.Count > 0 && this.SaveGame.RandomLessThan(100) < 85)
         {
             return attackSpells.ToWeightedRandom(SaveGame).Choose();
         }
 
         // Priority Seven: If we have a tactical spell, maybe use it
-        if (tacticalSpells.Count > 0 && this.SaveGame.Rng.RandomLessThan(100) < 50)
+        if (tacticalSpells.Count > 0 && this.SaveGame.RandomLessThan(100) < 50)
         {
             return tacticalSpells.ToWeightedRandom(SaveGame).Choose();
         }
 
         // Priority Eight: If we have a haste spell, maybe use it
         MonsterSpellList hasteSpells = spells.Where((_spell) => _spell.Hastens);
-        if (hasteSpells.Count > 0 && this.SaveGame.Rng.RandomLessThan(100) < 20 + Race.Speed - Speed)
+        if (hasteSpells.Count > 0 && this.SaveGame.RandomLessThan(100) < 20 + Race.Speed - Speed)
         {
             return hasteSpells.ToWeightedRandom(SaveGame).Choose();
         }
 
         // Priority Nine: If we have an annoying spell, probably use it
         MonsterSpellList annoyanceSpells = spells.Where((_spell) => _spell.Annoys);
-        if (annoyanceSpells.Count > 0 && this.SaveGame.Rng.RandomLessThan(100) < 85)
+        if (annoyanceSpells.Count > 0 && this.SaveGame.RandomLessThan(100) < 85)
         {
             return annoyanceSpells.ToWeightedRandom(SaveGame).Choose();
         }
@@ -3303,7 +3303,7 @@ internal class Monster : IItemContainer
     private bool MonsterCheckHitOnPlayer(SaveGame saveGame, int attackPower, int monsterLevel)
     {
         // Straight five percent chance of hit or miss
-        int k = SaveGame.Rng.RandomLessThan(100);
+        int k = SaveGame.RandomLessThan(100);
         if (k < 10)
         {
             return k < 5;
@@ -3311,7 +3311,7 @@ internal class Monster : IItemContainer
         // Otherwise, compare the power and level to the player's armor class
         int i = attackPower + (monsterLevel * 3);
         int ac = saveGame.BaseArmorClass + saveGame.ArmorClassBonus;
-        return i > 0 && SaveGame.Rng.DieRoll(i) > ac * 3 / 4;
+        return i > 0 && SaveGame.DieRoll(i) > ac * 3 / 4;
     }
 
     /// <summary>
@@ -3331,7 +3331,7 @@ internal class Monster : IItemContainer
             return 0;
         }
         // If we did less than 20 damage, then usually no cuts or stun
-        if (damage < 20 && SaveGame.Rng.RandomLessThan(100) >= damage)
+        if (damage < 20 && SaveGame.RandomLessThan(100) >= damage)
         {
             return 0;
         }
@@ -3343,7 +3343,7 @@ internal class Monster : IItemContainer
         // More than 20 damage increases the severity a random number of times
         if (damage >= 20)
         {
-            while (SaveGame.Rng.RandomLessThan(100) < 2)
+            while (SaveGame.RandomLessThan(100) < 2)
             {
                 additionalSeverity++;
             }

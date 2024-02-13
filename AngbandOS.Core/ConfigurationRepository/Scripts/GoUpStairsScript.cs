@@ -53,7 +53,7 @@ internal class GoUpStairsScript : Script, IScript, IRepeatableScript
         // In a tower, going up increases our level number
         if (SaveGame.CurDungeon.Tower)
         {
-            int stairLength = SaveGame.Rng.DieRoll(5);
+            int stairLength = SaveGame.DieRoll(5);
             if (stairLength > SaveGame.CurrentDepth)
             {
                 stairLength = 1;
@@ -76,7 +76,7 @@ internal class GoUpStairsScript : Script, IScript, IRepeatableScript
         else
         {
             // We're not in a tower, so going up decreases our level number
-            int j = SaveGame.Rng.DieRoll(SaveGame.OneInChanceUpStairsReturnsToTownLevel);
+            int j = SaveGame.DieRoll(SaveGame.OneInChanceUpStairsReturnsToTownLevel);
             if (j > SaveGame.CurrentDepth)
             {
                 j = 1;

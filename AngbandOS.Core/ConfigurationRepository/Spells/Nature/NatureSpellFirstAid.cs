@@ -13,7 +13,7 @@ internal class NatureSpellFirstAid : Spell
     private NatureSpellFirstAid(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.RestoreHealth(SaveGame.Rng.DiceRoll(2, 8));
+        SaveGame.RestoreHealth(SaveGame.DiceRoll(2, 8));
         SaveGame.TimedBleeding.AddTimer(-15);
     }
 

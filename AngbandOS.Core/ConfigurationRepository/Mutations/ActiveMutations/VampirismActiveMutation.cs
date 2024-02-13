@@ -23,7 +23,7 @@ internal class VampirismActiveMutation : Mutation
         }
         if (SaveGame.DrainLife(dir, SaveGame.ExperienceLevel * 2))
         {
-            SaveGame.RestoreHealth(SaveGame.ExperienceLevel + base.SaveGame.Rng.DieRoll(SaveGame.ExperienceLevel));
+            SaveGame.RestoreHealth(SaveGame.ExperienceLevel + base.SaveGame.DieRoll(SaveGame.ExperienceLevel));
         }
     }
 

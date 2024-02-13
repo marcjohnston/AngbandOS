@@ -18,6 +18,6 @@ internal class FlashOfLightScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        SaveGame.LightArea(SaveGame.Rng.DiceRoll(2, SaveGame.ExperienceLevel / 2), (SaveGame.ExperienceLevel / 10) + 1);
+        SaveGame.LightArea(SaveGame.DiceRoll(2, SaveGame.ExperienceLevel / 2), (SaveGame.ExperienceLevel / 10) + 1);
     }
 }

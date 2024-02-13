@@ -20,9 +20,9 @@ internal class LordlyProtectionRingItemFactory : RingItemFactory
         IArtifactBias artifactBias = null;
         do
         {
-            item.ApplyRandomResistance(ref artifactBias, SaveGame.Rng.DieRoll(20) + 18);
-        } while (SaveGame.Rng.DieRoll(4) == 1);
-        item.BonusArmorClass = 10 + SaveGame.Rng.DieRoll(5) + item.GetBonusValue(10, level);
+            item.ApplyRandomResistance(ref artifactBias, SaveGame.DieRoll(20) + 18);
+        } while (SaveGame.DieRoll(4) == 1);
+        item.BonusArmorClass = 10 + SaveGame.DieRoll(5) + item.GetBonusValue(10, level);
         SaveGame.TreasureRating += 5;
     }
     public override int[] Chance => new int[] { 5, 0, 0, 0 };

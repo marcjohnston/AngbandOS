@@ -15,7 +15,7 @@ internal class PissOffReward : Reward
     {
         SaveGame.MsgPrint($"The voice of {patron.ShortName} whispers:");
         SaveGame.MsgPrint("'Now thou shalt pay for annoying me.'");
-        switch (SaveGame.Rng.DieRoll(4))
+        switch (SaveGame.DieRoll(4))
         {
             case 1:
                 SaveGame.ActivateDreadCurse();
@@ -26,7 +26,7 @@ internal class PissOffReward : Reward
                 break;
 
             case 3:
-                if (SaveGame.Rng.DieRoll(2) == 1)
+                if (SaveGame.DieRoll(2) == 1)
                 {
                     SaveGame.CurseWeapon();
                 }
@@ -39,7 +39,7 @@ internal class PissOffReward : Reward
             default:
                 for (int dummy = 0; dummy < 6; dummy++)
                 {
-                    SaveGame.DecreaseAbilityScore(dummy, 10 + SaveGame.Rng.DieRoll(15), true);
+                    SaveGame.DecreaseAbilityScore(dummy, 10 + SaveGame.DieRoll(15), true);
                 }
                 break;
         }

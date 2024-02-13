@@ -18,6 +18,6 @@ internal class SeeInvisibilityScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        SaveGame.TimedSeeInvisibility.AddTimer(SaveGame.Rng.DieRoll(24) + 24);
+        SaveGame.TimedSeeInvisibility.AddTimer(SaveGame.DieRoll(24) + 24);
     }
 }

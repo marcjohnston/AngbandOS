@@ -17,9 +17,9 @@ internal class MagiAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
 
     public override void ApplyMagic(Item item, int level, int power, Store? store)
     {
-        item.TypeSpecificValue = SaveGame.Rng.DieRoll(5) + item.GetBonusValue(5, level);
-        item.BonusArmorClass = SaveGame.Rng.DieRoll(5) + item.GetBonusValue(5, level);
-        if (SaveGame.Rng.DieRoll(3) == 1)
+        item.TypeSpecificValue = SaveGame.DieRoll(5) + item.GetBonusValue(5, level);
+        item.BonusArmorClass = SaveGame.DieRoll(5) + item.GetBonusValue(5, level);
+        if (SaveGame.DieRoll(3) == 1)
         {
             item.RandartItemCharacteristics.SlowDigest = true;
         }

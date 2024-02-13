@@ -16,23 +16,23 @@ internal class ResistActiveMutation : Mutation
         if (SaveGame.CheckIfRacialPowerWorks(10, 12, Ability.Constitution, 12))
         {
             int num = SaveGame.ExperienceLevel / 10;
-            int dur = base.SaveGame.Rng.DieRoll(20) + 20;
-            if (base.SaveGame.Rng.RandomLessThan(5) < num)
+            int dur = base.SaveGame.DieRoll(20) + 20;
+            if (base.SaveGame.RandomLessThan(5) < num)
             {
                 SaveGame.TimedAcidResistance.AddTimer(dur);
                 num--;
             }
-            if (base.SaveGame.Rng.RandomLessThan(4) < num)
+            if (base.SaveGame.RandomLessThan(4) < num)
             {
                 SaveGame.TimedLightningResistance.AddTimer(dur);
                 num--;
             }
-            if (base.SaveGame.Rng.RandomLessThan(3) < num)
+            if (base.SaveGame.RandomLessThan(3) < num)
             {
                 SaveGame.TimedFireResistance.AddTimer(dur);
                 num--;
             }
-            if (base.SaveGame.Rng.RandomLessThan(2) < num)
+            if (base.SaveGame.RandomLessThan(2) < num)
             {
                 SaveGame.TimedColdResistance.AddTimer(dur);
                 num--;

@@ -13,7 +13,7 @@ internal class SorcerySpellEnchantArmor : Spell
     private SorcerySpellEnchantArmor(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.EnchantItem(0, 0, SaveGame.Rng.RandomLessThan(3) + 2);
+        SaveGame.EnchantItem(0, 0, SaveGame.RandomLessThan(3) + 2);
     }
 
     public override string Name => "Enchant Armor";

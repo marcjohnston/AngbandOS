@@ -16,15 +16,15 @@ internal class Type2RoomLayout : RoomLayout
     {
         int y, x;
         GridTile cPtr;
-        bool light = SaveGame.Difficulty <= SaveGame.Rng.DieRoll(25);
-        int y1A = yval - SaveGame.Rng.DieRoll(4);
-        int y2A = yval + SaveGame.Rng.DieRoll(3);
-        int x1A = xval - SaveGame.Rng.DieRoll(11);
-        int x2A = xval + SaveGame.Rng.DieRoll(10);
-        int y1B = yval - SaveGame.Rng.DieRoll(3);
-        int y2B = yval + SaveGame.Rng.DieRoll(4);
-        int x1B = xval - SaveGame.Rng.DieRoll(10);
-        int x2B = xval + SaveGame.Rng.DieRoll(11);
+        bool light = SaveGame.Difficulty <= SaveGame.DieRoll(25);
+        int y1A = yval - SaveGame.DieRoll(4);
+        int y2A = yval + SaveGame.DieRoll(3);
+        int x1A = xval - SaveGame.DieRoll(11);
+        int x2A = xval + SaveGame.DieRoll(10);
+        int y1B = yval - SaveGame.DieRoll(3);
+        int y2B = yval + SaveGame.DieRoll(4);
+        int x1B = xval - SaveGame.DieRoll(10);
+        int x2B = xval + SaveGame.DieRoll(11);
         for (y = y1A - 1; y <= y2A + 1; y++)
         {
             for (x = x1A - 1; x <= x2A + 1; x++)

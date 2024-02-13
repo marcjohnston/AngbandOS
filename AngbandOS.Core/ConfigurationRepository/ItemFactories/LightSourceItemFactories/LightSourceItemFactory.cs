@@ -73,7 +73,7 @@ internal abstract class LightSourceItemFactory : ItemFactory
     {
         if (power < 0) // Cursed
         {
-            switch (SaveGame.Rng.DieRoll(2)) // Cursed
+            switch (SaveGame.DieRoll(2)) // Cursed
             {
                 case 1:
                     {

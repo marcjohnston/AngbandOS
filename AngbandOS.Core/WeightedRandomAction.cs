@@ -26,7 +26,7 @@ internal class WeightedRandomAction
     }
     public void Choose()
     {
-        int choice = SaveGame.Rng.RandomLessThan(values.Count);
+        int choice = SaveGame.RandomLessThan(values.Count);
         values[choice]();
     }
 }

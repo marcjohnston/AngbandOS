@@ -25,10 +25,10 @@ internal class PsychicDrainTalent : Talent
         {
             return;
         }
-        int i = SaveGame.Rng.DiceRoll(SaveGame.ExperienceLevel / 2, 6);
+        int i = SaveGame.DiceRoll(SaveGame.ExperienceLevel / 2, 6);
         if (SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(PsiDrainProjectile)), dir, i, 0 + ((SaveGame.ExperienceLevel - 25) / 10)))
         {
-            SaveGame.Energy -= SaveGame.Rng.DieRoll(150);
+            SaveGame.Energy -= SaveGame.DieRoll(150);
         }
     }
 

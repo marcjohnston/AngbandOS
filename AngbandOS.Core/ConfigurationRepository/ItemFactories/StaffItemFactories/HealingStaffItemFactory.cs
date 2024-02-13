@@ -17,7 +17,7 @@ internal class HealingStaffItemFactory : StaffItemFactory
 
     public override void ApplyMagic(Item item, int level, int power, Store? store)
     {
-        item.TypeSpecificValue = SaveGame.Rng.DieRoll(2) + 1;
+        item.TypeSpecificValue = SaveGame.DieRoll(2) + 1;
     }
     public override int[] Chance => new int[] { 2, 0, 0, 0 };
     public override int Cost => 5000;

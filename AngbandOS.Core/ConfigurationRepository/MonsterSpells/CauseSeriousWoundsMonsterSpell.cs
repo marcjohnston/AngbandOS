@@ -15,6 +15,6 @@ internal class CauseSeriousWoundsMonsterSpell : CauseWoundsMonsterSpell
     public override bool Annoys => true;
     protected override int CurseEquipmentChance => 50;
     protected override int HeavyCurseEquipmentChance => 5;
-    protected override int Damage => SaveGame.Rng.DiceRoll(8, 8);
+    protected override int Damage => SaveGame.DiceRoll(8, 8);
     public override string? VsMonsterSeenMessage(Monster monster, Monster target) => $"{monster.Name} points at {target.Name} and curses horribly.";
 }

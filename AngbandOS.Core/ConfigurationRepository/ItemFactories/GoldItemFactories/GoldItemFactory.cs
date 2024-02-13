@@ -19,6 +19,6 @@ internal abstract class GoldItemFactory : ItemFactory
     /// <summary>
     /// Returns the value of the gold, which is assigned to the type specific value.  The value of the gold defaults to 8dCost+1d8;
     /// </summary>
-    public override int InitialTypeSpecificValue => Cost + (8 * SaveGame.Rng.DieRoll(Cost)) + SaveGame.Rng.DieRoll(8);
+    public override int InitialTypeSpecificValue => Cost + (8 * SaveGame.DieRoll(Cost)) + SaveGame.DieRoll(8);
     public override bool IsIgnoredByMonsters => true;
 }

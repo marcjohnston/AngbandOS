@@ -71,7 +71,7 @@ internal abstract class ArmorItemFactory : ItemFactory
 
     public override void ApplyRandartBonus(Item item)
     {
-        item.BonusArmorClass += SaveGame.Rng.DieRoll(item.BonusArmorClass > 19 ? 1 : 20 - item.BonusArmorClass);
+        item.BonusArmorClass += SaveGame.DieRoll(item.BonusArmorClass > 19 ? 1 : 20 - item.BonusArmorClass);
     }
 
     public override int? GetBonusRealValue(Item item, int value)
@@ -99,17 +99,17 @@ internal abstract class ArmorItemFactory : ItemFactory
     {
         do
         {
-            if (SaveGame.Rng.DieRoll(4) == 1)
+            if (SaveGame.DieRoll(4) == 1)
             {
                 IArtifactBias artifactBias = null;
-                item.ApplyRandomResistance(ref artifactBias, SaveGame.Rng.DieRoll(14) + 4);
+                item.ApplyRandomResistance(ref artifactBias, SaveGame.DieRoll(14) + 4);
             }
             else
             {
                 IArtifactBias artifactBias = null;
-                item.ApplyRandomResistance(ref artifactBias, SaveGame.Rng.DieRoll(22) + 16);
+                item.ApplyRandomResistance(ref artifactBias, SaveGame.DieRoll(22) + 16);
             }
-        } while (SaveGame.Rng.DieRoll(2) == 1);
+        } while (SaveGame.DieRoll(2) == 1);
     }
 
     /// <summary>
@@ -118,7 +118,7 @@ internal abstract class ArmorItemFactory : ItemFactory
     /// <param name="item"></param>
     protected virtual void ApplyRandomGoodRareCharacteristics(Item item)
     {
-        switch (SaveGame.Rng.DieRoll(21))
+        switch (SaveGame.DieRoll(21))
         {
             case 1:
             case 2:
@@ -148,11 +148,11 @@ internal abstract class ArmorItemFactory : ItemFactory
             case 18:
                 IArtifactBias artifactBias = null;
                 item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(ArmorOfResistanceRareItem));
-                if (SaveGame.Rng.DieRoll(4) == 1)
+                if (SaveGame.DieRoll(4) == 1)
                 {
                     item.RandartItemCharacteristics.ResPois = true;
                 }
-                item.ApplyRandomResistance(ref artifactBias, SaveGame.Rng.DieRoll(22) + 16);
+                item.ApplyRandomResistance(ref artifactBias, SaveGame.DieRoll(22) + 16);
                 break;
             case 19:
                 item.CreateRandart(false);
@@ -180,7 +180,7 @@ internal abstract class ArmorItemFactory : ItemFactory
     /// <param name="power"></param>
     public override void ApplyMagic(Item item, int level, int power, Store? store)
     {
-        int toac1 = SaveGame.Rng.DieRoll(5) + item.GetBonusValue(5, level);
+        int toac1 = SaveGame.DieRoll(5) + item.GetBonusValue(5, level);
         int toac2 = item.GetBonusValue(10, level);
         if (power > 0)
         {

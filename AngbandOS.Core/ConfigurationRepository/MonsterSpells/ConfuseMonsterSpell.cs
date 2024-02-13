@@ -25,13 +25,13 @@ internal class ConfuseMonsterSpell : MonsterSpell
         {
             saveGame.MsgPrint("You disbelieve the feeble spell.");
         }
-        else if (SaveGame.Rng.RandomLessThan(100) < saveGame.SkillSavingThrow)
+        else if (SaveGame.RandomLessThan(100) < saveGame.SkillSavingThrow)
         {
             saveGame.MsgPrint("You disbelieve the feeble spell.");
         }
         else
         {
-            saveGame.TimedConfusion.AddTimer(SaveGame.Rng.RandomLessThan(4) + 4);
+            saveGame.TimedConfusion.AddTimer(SaveGame.RandomLessThan(4) + 4);
         }
         saveGame.UpdateSmartLearn(monster, SaveGame.SingletonRepository.SpellResistantDetections.Get(nameof(ConfSpellResistantDetection)));
     }
@@ -51,7 +51,7 @@ internal class ConfuseMonsterSpell : MonsterSpell
                 saveGame.MsgPrint($"{targetName} disbelieves the feeble spell.");
             }
         }
-        else if (targetRace.Level > SaveGame.Rng.DieRoll(rlev - 10 < 1 ? 1 : rlev - 10) + 10)
+        else if (targetRace.Level > SaveGame.DieRoll(rlev - 10 < 1 ? 1 : rlev - 10) + 10)
         {
             if (seeTarget)
             {
@@ -64,7 +64,7 @@ internal class ConfuseMonsterSpell : MonsterSpell
             {
                 saveGame.MsgPrint($"{targetName} seems confused.");
             }
-            target.ConfusionLevel += 12 + SaveGame.Rng.RandomLessThan(4);
+            target.ConfusionLevel += 12 + SaveGame.RandomLessThan(4);
         }
     }
 }

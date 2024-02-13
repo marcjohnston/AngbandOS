@@ -32,7 +32,7 @@ internal class StayAndPickupScript : Script, IScript, IRepeatableScript
         SaveGame.EnergyUse = 100;
 
         // Periodically search if we're not actively in search mode
-        if (SaveGame.IsSearching || SaveGame.SkillSearchFrequency >= 50 || SaveGame.Rng.RandomLessThan(50 - SaveGame.SkillSearchFrequency) == 0)
+        if (SaveGame.IsSearching || SaveGame.SkillSearchFrequency >= 50 || SaveGame.RandomLessThan(50 - SaveGame.SkillSearchFrequency) == 0)
         {
             SaveGame.RunScript(nameof(SearchScript));
         }

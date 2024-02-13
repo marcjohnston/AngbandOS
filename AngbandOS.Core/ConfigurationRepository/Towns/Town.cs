@@ -91,7 +91,7 @@ internal abstract class Town : IGetKey<string>
 
     public void Initialize()
     {
-        Seed = SaveGame.Rng.RandomLessThan(int.MaxValue);
+        Seed = SaveGame.RandomLessThan(int.MaxValue);
         Visited = false;
         X = 0;
         Y = 0;

@@ -20,7 +20,7 @@ internal class PairOfHardLeatherBootsOfIthaquaFixedArtifact : FixedArtifact, IFi
         SaveGame.MsgPrint("A wind swirls around your boots...");
         if (SaveGame.TimedHaste.TurnsRemaining == 0)
         {
-            SaveGame.TimedHaste.SetTimer(base.SaveGame.Rng.DieRoll(20) + 20);
+            SaveGame.TimedHaste.SetTimer(base.SaveGame.DieRoll(20) + 20);
         }
         else
         {

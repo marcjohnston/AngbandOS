@@ -18,7 +18,7 @@ internal class ConfuseAttackEffect : AttackEffect
         SaveGame.TakeHit(damage, monsterDescription);
         if (!SaveGame.HasConfusionResistance)
         {
-            if (SaveGame.TimedConfusion.AddTimer(3 + SaveGame.Rng.DieRoll(monsterLevel)))
+            if (SaveGame.TimedConfusion.AddTimer(3 + SaveGame.DieRoll(monsterLevel)))
             {
                 obvious = true;
             }
