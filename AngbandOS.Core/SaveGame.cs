@@ -1691,6 +1691,49 @@ internal class SaveGame
         }
     }
 
+    private void GenerateNewGame()
+    {
+        FlavorInit();
+        ApplyFlavorVisuals();
+        if (!CharacterGeneration())
+        {
+            return;
+        }
+        _seedFlavor = Rng.RandomLessThan(int.MaxValue);
+        CreateWorld();
+        foreach (var dungeon in SingletonRepository.Dungeons)
+        {
+            dungeon.RandomiseOffset();
+        }
+        ResetStompability();
+        CurrentDepth = 0;
+        if (Configuration.StartupTownName != null)
+        {
+            Town? startupTown = SingletonRepository.Towns.Get(Configuration.StartupTownName);
+            if (startupTown == null)
+            {
+                throw new Exception("The configured startup town does not exist.");
+            }
+            CurTown = startupTown;
+        }
+        else
+        {
+            CurTown = SingletonRepository.Towns.ToWeightedRandom().Choose();
+            while (!CurTown.AllowStartupTown)
+            {
+                CurTown = SingletonRepository.Towns[Rng.RandomLessThan(SingletonRepository.Towns.Count)];
+            }
+        }
+        CurDungeon = CurTown.Dungeon;
+        RecallDungeon = CurDungeon;
+        RecallDungeon.RecallLevel = 1;
+        DungeonDifficulty = 0;
+        WildernessX = CurTown.X;
+        WildernessY = CurTown.Y;
+        CameFrom = LevelStart.StartRandom;
+        GenerateNewLevel();
+    }
+
     /// <summary>
     /// Plays the current game.
     /// </summary>
@@ -1718,50 +1761,12 @@ internal class SaveGame
         }
         if (IsDead)
         {
-            if (!CharacterGeneration())
-            {
-                return;
-            }
-            _seedFlavor = Rng.RandomLessThan(int.MaxValue);
-            CreateWorld();
-            foreach (var dungeon in SingletonRepository.Dungeons)
-            {
-                dungeon.RandomiseOffset();
-            }
-            ResetStompability();
-            CurrentDepth = 0;
-            if (Configuration.StartupTownName != null)
-            {
-                Town? startupTown = SingletonRepository.Towns.Get(Configuration.StartupTownName);
-                if (startupTown == null)
-                {
-                    throw new Exception("The configured startup town does not exist.");
-                }
-                CurTown = startupTown;
-            }
-            else
-            {
-                CurTown = SingletonRepository.Towns.ToWeightedRandom().Choose();
-                while (!CurTown.AllowStartupTown)
-                {
-                    CurTown = SingletonRepository.Towns[Rng.RandomLessThan(SingletonRepository.Towns.Count)];
-                }
-            }
-            CurDungeon = CurTown.Dungeon;
-            RecallDungeon = CurDungeon;
-            RecallDungeon.RecallLevel = 1;
-            DungeonDifficulty = 0;
-            WildernessX = CurTown.X;
-            WildernessY = CurTown.Y;
-            CameFrom = LevelStart.StartRandom;
-            GenerateNewLevel();
+            GenerateNewGame();
         }
         ConsoleViewPort.GameStarted();
         //MessageAppendNextMessage = false;
         MsgPrint(null);
         UpdateScreen();
-        FlavorInit();
-        ApplyFlavorVisuals();
         FullScreenOverlay = false;
         SetBackground(BackgroundImageEnum.Overhead);
         Playing = true;
