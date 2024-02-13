@@ -29,7 +29,7 @@ internal abstract class ScrollItemFactory : ItemFactory, IFlavor
     /// <summary>
     /// Returns the scroll flavors repository because scrolls have flavors that need to be identified.
     /// </summary>
-    public IEnumerable<Flavor>? GetFlavorRepository() => SaveGame.ScrollFlavors;
+    public IEnumerable<Flavor>? GetFlavorRepository() => SaveGame.UnreadableScrollFlavors;
 
     public override int GetAdditionalMassProduceCount(Item item)
     {
