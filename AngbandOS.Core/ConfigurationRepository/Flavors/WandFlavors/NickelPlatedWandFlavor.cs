@@ -11,6 +11,6 @@ namespace AngbandOS.Core.Flavors;
 internal class NickelPlatedWandFlavor : WandFlavor
 {
     private NickelPlatedWandFlavor(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(MinusSignSymbol));
+    protected override string SymbolName => nameof(MinusSignSymbol);
     public override string Name => "Nickel-Plated";
 }

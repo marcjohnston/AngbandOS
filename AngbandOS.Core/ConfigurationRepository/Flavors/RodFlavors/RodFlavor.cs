@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Flavors;
 
 [Serializable]
-internal abstract class RodFlavor : Flavor
+internal abstract class RodFlavor : ReadableFlavor
 {
     protected RodFlavor(SaveGame saveGame) : base(saveGame)
     {

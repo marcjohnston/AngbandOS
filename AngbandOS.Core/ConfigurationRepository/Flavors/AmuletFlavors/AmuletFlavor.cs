@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Flavors;
 
 [Serializable]
-internal abstract class AmuletFlavor : Flavor
+internal abstract class AmuletFlavor : ReadableFlavor
 {
     protected AmuletFlavor(SaveGame saveGame) : base(saveGame)
     {

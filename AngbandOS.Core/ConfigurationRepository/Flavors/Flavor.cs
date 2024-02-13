@@ -8,10 +8,9 @@
 namespace AngbandOS.Core.Flavors;
 
 /// <summary>
-/// Represents a single flavor for a group of items that participate in the IFlavor interface.
+/// Represents a flavor for the items that are created by an item factory that participate in the IFlavorFactory interface.
 /// </summary>
-[Serializable]
-internal abstract class Flavor : IGetKey<string>
+internal abstract class Flavor
 {
     protected SaveGame SaveGame;
     protected Flavor(SaveGame saveGame)
@@ -20,25 +19,9 @@ internal abstract class Flavor : IGetKey<string>
     }
 
     /// <summary>
-    /// Returns the entity serialized into a Json string.
-    /// </summary>
-    /// <returns></returns>
-    public string ToJson()
-    {
-        return "";
-    }
-
-    public virtual string Key => GetType().Name;
-
-    public string GetKey => Key;
-
-    public void Bind() { }
-
-    /// <summary>
     /// Returns the symbol to use for rendering.
     /// </summary>
     public abstract Symbol Symbol { get; }
-
 
     /// <summary>
     /// The color to use for the visual.

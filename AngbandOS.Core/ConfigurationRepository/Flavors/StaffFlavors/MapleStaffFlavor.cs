@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Flavors;
 internal class MapleStaffFlavor : StaffFlavor
 {
     private MapleStaffFlavor(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UnderscoreSymbol));
+    protected override string SymbolName => nameof(UnderscoreSymbol);
     public override ColorEnum Color => ColorEnum.Brown;
     public override string Name => "Maple";
 }

@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Flavors;
 
 [Serializable]
-internal abstract class BaseScrollFlavor : Flavor
+internal abstract class BaseScrollFlavor : ReadableFlavor
 {
     protected BaseScrollFlavor(SaveGame saveGame) : base(saveGame)
     {

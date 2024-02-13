@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Flavors;
 
 [Serializable]
-internal abstract class WandFlavor : Flavor
+internal abstract class WandFlavor : ReadableFlavor
 {
     protected WandFlavor(SaveGame saveGame) : base(saveGame)
     {

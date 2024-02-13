@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Flavors;
 internal class RunedStaffFlavor : StaffFlavor
 {
     private RunedStaffFlavor(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UnderscoreSymbol));
+    protected override string SymbolName => nameof(UnderscoreSymbol);
     public override ColorEnum Color => ColorEnum.Purple;
     public override string Name => "Runed";
 }

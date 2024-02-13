@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Flavors;
 internal class ShortRodFlavor : RodFlavor
 {
     private ShortRodFlavor(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(MinusSignSymbol));
+    protected override string SymbolName => nameof(MinusSignSymbol);
     public override ColorEnum Color => ColorEnum.Green;
     public override string Name => "Short";
 }

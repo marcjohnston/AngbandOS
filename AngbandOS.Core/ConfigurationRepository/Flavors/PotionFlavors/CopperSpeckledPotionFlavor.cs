@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Flavors;
 internal class CopperSpeckledPotionFlavor : PotionFlavor
 {
     private CopperSpeckledPotionFlavor(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(ExclamationPointSymbol));
+    protected override string SymbolName => nameof(ExclamationPointSymbol);
     public override ColorEnum Color => ColorEnum.Copper;
     public override string Name => "Copper Speckled";
 }

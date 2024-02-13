@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Flavors;
 internal class BronzeRingFlavor : RingFlavor
 {
     private BronzeRingFlavor(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(EqualSignSymbol));
+    protected override string SymbolName => nameof(EqualSignSymbol);
     public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "Bronze";
 }
