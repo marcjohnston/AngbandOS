@@ -3070,7 +3070,7 @@ internal class SaveGame
                     int s = Rng.RandomLessThan(100) < 30 ? 1 : 2;
                     for (int q = 0; q < s; q++)
                     {
-                        tmp += BaseScrollFlavor.Syllables[Rng.RandomLessThan(BaseScrollFlavor.Syllables.Length)];
+                        tmp += SingletonRepository.ScrollSyllables.ToWeightedRandom().Choose();
                     }
                     if (buf.Length + tmp.Length > 14)
                     {

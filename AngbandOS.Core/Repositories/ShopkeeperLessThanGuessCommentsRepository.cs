@@ -8,9 +8,9 @@
 namespace AngbandOS.Core.Repositories;
 
 [Serializable]
-internal class ShopkeeperLessThanGuessComments : StringListRepository
+internal class ShopkeeperLessThanGuessCommentsRepository : StringListRepository
 {
-    public ShopkeeperLessThanGuessComments(SaveGame saveGame) : base(saveGame) { }
+    public ShopkeeperLessThanGuessCommentsRepository(SaveGame saveGame) : base(saveGame) { }
 
     /// <summary>
     /// Returns ShopkeeperLessThanGuessComments as the name of this string list repository.

@@ -34,6 +34,7 @@ internal class PersistConfigurationScript : Script, IScript
             SaveGame.SingletonRepository.HorrificDescriptions.PersistEntities();
             SaveGame.SingletonRepository.InsultPlayerAttacks.PersistEntities();
             SaveGame.SingletonRepository.MoanPlayerAttacks.PersistEntities();
+            SaveGame.SingletonRepository.ScrollSyllables.PersistEntities();
             SaveGame.SingletonRepository.ShopkeeperAcceptedComments.PersistEntities();
             SaveGame.SingletonRepository.ShopkeeperBargainComments.PersistEntities();
             SaveGame.SingletonRepository.ShopkeeperGoodComments.PersistEntities();

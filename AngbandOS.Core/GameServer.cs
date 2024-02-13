@@ -223,6 +223,7 @@ public class GameServer
                 HorrificDescriptions = RetrieveEntity(persistentStorage, "HorrificDescriptions"),
                 InsultPlayerAttacks = RetrieveEntity(persistentStorage, "InsultPlayerAttacks"),
                 MoanPlayerAttacks = RetrieveEntity(persistentStorage, "MoanPlayerAttacks"),
+                ScrollSyllables = RetrieveEntity(persistentStorage, "ScrollSyllables"),
                 ShopkeeperAcceptedComments = RetrieveEntity(persistentStorage, "ShopkeeperAcceptedComments"),
                 ShopkeeperBargainComments = RetrieveEntity(persistentStorage, "ShopkeeperBargainComments"),
                 ShopkeeperGoodComments = RetrieveEntity(persistentStorage, "ShopkeeperGoodComments"),

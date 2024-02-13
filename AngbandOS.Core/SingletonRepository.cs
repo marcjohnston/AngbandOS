@@ -66,10 +66,11 @@ internal class SingletonRepository
     public RoomLayoutsRepository RoomLayouts;
     public ScriptsRepository Scripts;
     public ScrollFlavorsRepository ScrollFlavors;
+    public ScrollSyllablesRepository ScrollSyllables;
     public ShopkeeperAcceptedCommentsRepository ShopkeeperAcceptedComments;
     public ShopkeeperBargainCommentsRepository ShopkeeperBargainComments;
     public ShopkeeperGoodCommentsRepository ShopkeeperGoodComments;
-    public ShopkeeperLessThanGuessComments ShopkeeperLessThanGuessComments;
+    public ShopkeeperLessThanGuessCommentsRepository ShopkeeperLessThanGuessComments;
     public ShopkeepersRepository Shopkeepers;
     public ShopkeeperWorthlessCommentsRepository ShopkeeperWorthlessComments;
     public SingingPlayerAttacksRepository SingingPlayerAttacks;
@@ -173,10 +174,11 @@ internal class SingletonRepository
         RoomLayouts = AddRepository<RoomLayoutsRepository>(new RoomLayoutsRepository(SaveGame));
         Scripts = AddRepository<ScriptsRepository>(new ScriptsRepository(SaveGame));
         ScrollFlavors = AddRepository<ScrollFlavorsRepository>(new ScrollFlavorsRepository(SaveGame));
+        ScrollSyllables = AddRepository<ScrollSyllablesRepository>(new ScrollSyllablesRepository(SaveGame));
         ShopkeeperAcceptedComments = AddRepository<ShopkeeperAcceptedCommentsRepository>(new ShopkeeperAcceptedCommentsRepository(SaveGame));
         ShopkeeperBargainComments = AddRepository<ShopkeeperBargainCommentsRepository>(new ShopkeeperBargainCommentsRepository(SaveGame));
         ShopkeeperGoodComments = AddRepository<ShopkeeperGoodCommentsRepository>(new ShopkeeperGoodCommentsRepository(SaveGame));
-        ShopkeeperLessThanGuessComments = AddRepository<ShopkeeperLessThanGuessComments>(new ShopkeeperLessThanGuessComments(SaveGame));
+        ShopkeeperLessThanGuessComments = AddRepository<ShopkeeperLessThanGuessCommentsRepository>(new ShopkeeperLessThanGuessCommentsRepository(SaveGame));
         Shopkeepers = AddRepository<ShopkeepersRepository>(new ShopkeepersRepository(SaveGame));
         ShopkeeperWorthlessComments = AddRepository<ShopkeeperWorthlessCommentsRepository>(new ShopkeeperWorthlessCommentsRepository(SaveGame));
         SingingPlayerAttacks = AddRepository<SingingPlayerAttacksRepository>(new SingingPlayerAttacksRepository(SaveGame));

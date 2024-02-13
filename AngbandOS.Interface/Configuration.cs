@@ -51,6 +51,7 @@ public class Configuration
     public string[]? HorrificDescriptions { get; set; } = null;
     public string[]? InsultPlayerAttacks { get; set; } = null;
     public string[]? MoanPlayerAttacks { get; set; } = null;
+    public string[]? ScrollSyllables { get; set; } = null;
     public string[]? ShopkeeperAcceptedComments { get; set; } = null;
     public string[]? ShopkeeperBargainComments { get; set; } = null;
     public string[]? ShopkeeperGoodComments { get; set; } = null;
