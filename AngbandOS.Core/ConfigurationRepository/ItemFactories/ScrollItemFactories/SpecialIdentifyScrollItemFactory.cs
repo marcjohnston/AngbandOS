@@ -25,7 +25,7 @@ internal class SpecialIdentifyScrollItemFactory : ScrollItemFactory
     public override void Read(ReadScrollEvent eventArgs)
     {
         eventArgs.Identified = true;
-        if (!SaveGame.RunSuccessfulScript(nameof(IdentifyFullyScript)))
+        if (!SaveGame.RunSuccessfulScript(nameof(IdentifyItemFullyScript)))
         {
             eventArgs.UsedUp = false;
         }

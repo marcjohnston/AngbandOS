@@ -13,7 +13,7 @@ internal class NatureSpellStoneTell : Spell
     private NatureSpellStoneTell(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.RunScript(nameof(IdentifyFullyScript));
+        SaveGame.RunScript(nameof(IdentifyItemFullyScript));
     }
 
     public override string Name => "Stone Tell";

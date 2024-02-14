@@ -19,5 +19,5 @@ internal class IdentifyAllStoreCommand : StoreCommand
         nameof(PawnStoreFactory)
     };
 
-    protected override string ExecuteScriptName => nameof(IdentifyAllScript);
+    protected override string ExecuteScriptName => nameof(IdentifyAllItemsScript);
 }

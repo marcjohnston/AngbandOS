@@ -20,7 +20,7 @@ internal class QuarterstaffOfAtalFixedArtifact : FixedArtifact, IFixedArtifactAc
         SaveGame.MsgPrint("Your quarterstaff glows brightly...");
         SaveGame.DetectAll();
         SaveGame.Probing();
-        SaveGame.RunScript(nameof(IdentifyFullyScript));
+        SaveGame.RunScript(nameof(IdentifyItemFullyScript));
         item.RechargeTimeLeft = 1000;
     }
     public override void ApplyResistances(Item item)

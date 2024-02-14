@@ -24,7 +24,7 @@ internal class EsoteriaScript : Script, IScript
         }
         else
         {
-            SaveGame.RunScript(nameof(IdentifyFullyScript));
+            SaveGame.RunScript(nameof(IdentifyItemFullyScript));
         }
     }
 }

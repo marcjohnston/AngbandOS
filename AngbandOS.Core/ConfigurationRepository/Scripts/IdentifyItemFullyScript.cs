@@ -8,9 +8,9 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class IdentifyFullyScript : Script, IScript, ISuccessfulScript
+internal class IdentifyItemFullyScript : Script, IScript, ISuccessfulScript
 {
-    private IdentifyFullyScript(SaveGame saveGame) : base(saveGame) { }
+    private IdentifyItemFullyScript(SaveGame saveGame) : base(saveGame) { }
 
     /// <summary>
     /// Identifies an item completely and returns true, if an item was chosen to be identified; false, of the item selection was cancelled.
