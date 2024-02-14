@@ -13,7 +13,7 @@ internal class FolkSpellPhlogiston : Spell
     private FolkSpellPhlogiston(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.CreatePhlogiston();
+        SaveGame.RunScript(nameof(CreatePhlogistonScript));
     }
 
     public override string Name => "Phlogiston";
