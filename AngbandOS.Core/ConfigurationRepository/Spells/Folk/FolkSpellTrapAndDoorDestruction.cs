@@ -13,11 +13,7 @@ internal class FolkSpellTrapAndDoorDestruction : Spell
     private FolkSpellTrapAndDoorDestruction(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        if (!SaveGame.GetDirectionWithAim(out int dir))
-        {
-            return;
-        }
-        SaveGame.DestroyDoor(dir);
+        SaveGame.RunScript(nameof(TrapAndDoorDestructionScript));
     }
 
     public override string Name => "Trap & Door Destruction";
