@@ -43,6 +43,14 @@ public class Configuration
     public DungeonGuardianDefinition[]? DungeonGuardians { get; set; } = null;
     public DungeonDefinition[]? Dungeons { get; set; } = null;
     public StoreFactoryDefinition[]? StoreFactories { get; set; } = null;
+    public ReadableFlavorDefinition[]? AmuletReadableFlavors{ get; set; } = null;
+    public ReadableFlavorDefinition[]? MushroomReadableFlavors { get; set; } = null;
+    public ReadableFlavorDefinition[]? PotionReadableFlavors { get; set; } = null;
+    public ReadableFlavorDefinition[]? RingReadableFlavors { get; set; } = null;
+    public ReadableFlavorDefinition[]? RodReadableFlavors { get; set; } = null;
+    public ReadableFlavorDefinition[]? ScrollReadableFlavors { get; set; } = null;
+    public ReadableFlavorDefinition[]? StaffReadableFlavors { get; set; } = null;
+    public ReadableFlavorDefinition[]? WandReadableFlavors { get; set; } = null;
 
     public string[]? ElvishTexts { get; set; } = null;
     public string[]? FindQuests { get; set; } = null;
@@ -51,7 +59,7 @@ public class Configuration
     public string[]? HorrificDescriptions { get; set; } = null;
     public string[]? InsultPlayerAttacks { get; set; } = null;
     public string[]? MoanPlayerAttacks { get; set; } = null;
-    public string[]? ScrollSyllables { get; set; } = null;
+    public string[]? UnreadableFlavorSyllables { get; set; } = null;
     public string[]? ShopkeeperAcceptedComments { get; set; } = null;
     public string[]? ShopkeeperBargainComments { get; set; } = null;
     public string[]? ShopkeeperGoodComments { get; set; } = null;

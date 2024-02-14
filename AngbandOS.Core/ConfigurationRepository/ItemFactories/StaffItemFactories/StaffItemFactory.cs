@@ -45,7 +45,7 @@ internal abstract class StaffItemFactory : ItemFactory, IFlavorFactory
     /// <summary>
     /// Returns the staff flavors repository because staves have flavors that need to be identified.
     /// </summary>
-    public IEnumerable<Flavor>? GetFlavorRepository() => SaveGame.SingletonRepository.StaffFlavors;
+    public IEnumerable<Flavor>? GetFlavorRepository() => SaveGame.SingletonRepository.StaffReadableFlavors;
 
     public override bool CanBeUsed => true;
 

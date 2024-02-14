@@ -3070,7 +3070,7 @@ internal class SaveGame
                     int s = RandomLessThan(100) < 30 ? 1 : 2;
                     for (int q = 0; q < s; q++)
                     {
-                        tmp += SingletonRepository.ScrollSyllables.ToWeightedRandom().Choose();
+                        tmp += SingletonRepository.UnreadableFlavorSyllables.ToWeightedRandom().Choose();
                     }
                     if (buf.Length + tmp.Length > 14)
                     {
@@ -3092,8 +3092,8 @@ internal class SaveGame
                 }
                 if (okay)
                 {
-                    int index = RandomLessThan(SingletonRepository.ScrollFlavors.Count);
-                    BaseScrollFlavor baseFlavor = SingletonRepository.ScrollFlavors[index];
+                    int index = RandomLessThan(SingletonRepository.ScrollReadableFlavors.Count);
+                    ScrollReadableFlavor baseFlavor = SingletonRepository.ScrollReadableFlavors[index];
                     UnreadableScrollFlavor flavor = new UnreadableScrollFlavor(this, baseFlavor.Symbol, baseFlavor.Color, name);
                     UnreadableScrollFlavors.Add(flavor);
                     break;

@@ -2741,7 +2741,7 @@ internal sealed class Item : IComparable<Item>
         {
             while (testcounter-- != 0)
             {
-                outString += SaveGame.SingletonRepository.ScrollSyllables.ToWeightedRandom().Choose();
+                outString += SaveGame.SingletonRepository.UnreadableFlavorSyllables.ToWeightedRandom().Choose();
             }
         }
         else

@@ -34,7 +34,7 @@ internal class WaterPotionItemFactory : PotionItemFactory
     /// </summary>
     public override IEnumerable<ReadableFlavor>? GetFlavorRepository()
     {
-        Flavor = SaveGame.SingletonRepository.PotionFlavors.Get(nameof(ClearPotionFlavor));
+        Flavor = SaveGame.SingletonRepository.PotionReadableFlavors.Get(nameof(ClearPotionReadableFlavor));
         return null;
     }
 

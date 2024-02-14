@@ -44,7 +44,7 @@ internal abstract class WandItemFactory : ItemFactory, IFlavorFactory
     /// <summary>
     /// Returns the want flavors repository because wands have flavors that need to be identified.
     /// </summary>
-    public IEnumerable<Flavor>? GetFlavorRepository() => SaveGame.SingletonRepository.WandFlavors;
+    public IEnumerable<Flavor>? GetFlavorRepository() => SaveGame.SingletonRepository.WandReadableFlavors;
 
     /// <inheritdoc/>
     public Flavor Flavor { get; set; }

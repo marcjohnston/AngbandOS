@@ -18,7 +18,7 @@ internal class SingletonRepository
 
     public ActivationsRepository Activations;
     public AlterActionsRepository AlterActions;
-    public AmuletFlavorsRepository AmuletFlavors;
+    public AmuletReadableFlavorsRepository AmuletReadableFlavors;
     public AnimationsRepository Animations;
     public ArtifactBiasesRepository ArtifactBiases;
     public AttackEffectsRepository AttackEffects;
@@ -51,22 +51,22 @@ internal class SingletonRepository
     public MonsterFiltersRepository MonsterFilters;
     public MonsterRacesRepository MonsterRaces;
     public MonsterSpellsRepository MonsterSpells;
-    public MushroomFlavorsRepository MushroomFlavors;
+    public MushroomReadableFlavorsRepository MushroomReadableFlavors;
     public MutationsRepository Mutations;
     public PatronsRepository Patrons;
-    public PotionFlavorsRepository PotionFlavors;
+    public PotionReadableFlavorsRepository PotionReadableFlavors;
     public ProjectileGraphicsRepository ProjectileGraphics;
     public ProjectilesRepository Projectiles;
     public RacesRepository Races;
     public RareItemsRepository RareItems;
     public RealmsRepository Realms;
     public RewardsRepository Rewards;
-    public RingFlavorsRepository RingFlavors;
-    public RodFlavorsRepository RodFlavors;
+    public RingReadableFlavorsRepository RingReadableFlavors;
+    public RodReadableFlavorsRepository RodReadableFlavors;
     public RoomLayoutsRepository RoomLayouts;
     public ScriptsRepository Scripts;
-    public ScrollFlavorsRepository ScrollFlavors;
-    public ScrollSyllablesRepository ScrollSyllables;
+    public ScrollReadableFlavorsRepository ScrollReadableFlavors;
+    public UnreadableFlavorSyllablesRepository UnreadableFlavorSyllables;
     public ShopkeeperAcceptedCommentsRepository ShopkeeperAcceptedComments;
     public ShopkeeperBargainCommentsRepository ShopkeeperBargainComments;
     public ShopkeeperGoodCommentsRepository ShopkeeperGoodComments;
@@ -76,7 +76,7 @@ internal class SingletonRepository
     public SingingPlayerAttacksRepository SingingPlayerAttacks;
     public SpellResistantDetectionsRepository SpellResistantDetections;
     public SpellsRepository Spells;
-    public StaffFlavorsRepository StaffFlavors;
+    public StaffReadableFlavorsRepository StaffReadableFlavors;
     public StoreCommandsRepository StoreCommands;
     public StoreFactoriesRepository StoreFactories;
     public SymbolsRepository Symbols;
@@ -85,7 +85,7 @@ internal class SingletonRepository
     public TimedActionsRepository TimedActions;
     public TownsRepository Towns;
     public VaultsRepository Vaults;
-    public WandFlavorsRepository WandFlavors;
+    public WandReadableFlavorsRepository WandReadableFlavors;
     public WizardCommandsRepository WizardCommands;
     public WorshipPlayerAttacksRepository WorshipPlayerAttacks;
 
@@ -126,7 +126,7 @@ internal class SingletonRepository
         // Create all of the repositories.  All of the repositories will be empty and have an instance to the save game.
         Activations = AddRepository<ActivationsRepository>(new ActivationsRepository(SaveGame));
         AlterActions = AddRepository<AlterActionsRepository>(new AlterActionsRepository(SaveGame));
-        AmuletFlavors = AddRepository<AmuletFlavorsRepository>(new AmuletFlavorsRepository(SaveGame));
+        AmuletReadableFlavors = AddRepository<AmuletReadableFlavorsRepository>(new AmuletReadableFlavorsRepository(SaveGame));
         Animations = AddRepository<AnimationsRepository>(new AnimationsRepository(SaveGame));
         ArtifactBiases = AddRepository<ArtifactBiasesRepository>(new ArtifactBiasesRepository(SaveGame));
         AttackEffects = AddRepository<AttackEffectsRepository>(new AttackEffectsRepository(SaveGame));
@@ -159,22 +159,22 @@ internal class SingletonRepository
         MonsterFilters = AddRepository<MonsterFiltersRepository>(new MonsterFiltersRepository(SaveGame));
         MonsterRaces = AddRepository<MonsterRacesRepository>(new MonsterRacesRepository(SaveGame));
         MonsterSpells = AddRepository<MonsterSpellsRepository>(new MonsterSpellsRepository(SaveGame));
-        MushroomFlavors = AddRepository<MushroomFlavorsRepository>(new MushroomFlavorsRepository(SaveGame));
+        MushroomReadableFlavors = AddRepository<MushroomReadableFlavorsRepository>(new MushroomReadableFlavorsRepository(SaveGame));
         Mutations = AddRepository<MutationsRepository>(new MutationsRepository(SaveGame));
         Patrons = AddRepository<PatronsRepository>(new PatronsRepository(SaveGame));
-        PotionFlavors = AddRepository<PotionFlavorsRepository>(new PotionFlavorsRepository(SaveGame));
+        PotionReadableFlavors = AddRepository<PotionReadableFlavorsRepository>(new PotionReadableFlavorsRepository(SaveGame));
         ProjectileGraphics = AddRepository<ProjectileGraphicsRepository>(new ProjectileGraphicsRepository(SaveGame));
         Projectiles = AddRepository<ProjectilesRepository>(new ProjectilesRepository(SaveGame));
         Races = AddRepository<RacesRepository>(new RacesRepository(SaveGame));
         RareItems = AddRepository<RareItemsRepository>(new RareItemsRepository(SaveGame));
         Realms = AddRepository<RealmsRepository>(new RealmsRepository(SaveGame));
         Rewards = AddRepository<RewardsRepository>(new RewardsRepository(SaveGame));
-        RingFlavors = AddRepository<RingFlavorsRepository>(new RingFlavorsRepository(SaveGame));
-        RodFlavors = AddRepository<RodFlavorsRepository>(new RodFlavorsRepository(SaveGame));
+        RingReadableFlavors = AddRepository<RingReadableFlavorsRepository>(new RingReadableFlavorsRepository(SaveGame));
+        RodReadableFlavors = AddRepository<RodReadableFlavorsRepository>(new RodReadableFlavorsRepository(SaveGame));
         RoomLayouts = AddRepository<RoomLayoutsRepository>(new RoomLayoutsRepository(SaveGame));
         Scripts = AddRepository<ScriptsRepository>(new ScriptsRepository(SaveGame));
-        ScrollFlavors = AddRepository<ScrollFlavorsRepository>(new ScrollFlavorsRepository(SaveGame));
-        ScrollSyllables = AddRepository<ScrollSyllablesRepository>(new ScrollSyllablesRepository(SaveGame));
+        ScrollReadableFlavors = AddRepository<ScrollReadableFlavorsRepository>(new ScrollReadableFlavorsRepository(SaveGame));
+        UnreadableFlavorSyllables = AddRepository<UnreadableFlavorSyllablesRepository>(new UnreadableFlavorSyllablesRepository(SaveGame));
         ShopkeeperAcceptedComments = AddRepository<ShopkeeperAcceptedCommentsRepository>(new ShopkeeperAcceptedCommentsRepository(SaveGame));
         ShopkeeperBargainComments = AddRepository<ShopkeeperBargainCommentsRepository>(new ShopkeeperBargainCommentsRepository(SaveGame));
         ShopkeeperGoodComments = AddRepository<ShopkeeperGoodCommentsRepository>(new ShopkeeperGoodCommentsRepository(SaveGame));
@@ -184,7 +184,7 @@ internal class SingletonRepository
         SingingPlayerAttacks = AddRepository<SingingPlayerAttacksRepository>(new SingingPlayerAttacksRepository(SaveGame));
         SpellResistantDetections = AddRepository<SpellResistantDetectionsRepository>(new SpellResistantDetectionsRepository(SaveGame));
         Spells = AddRepository<SpellsRepository>(new SpellsRepository(SaveGame));
-        StaffFlavors = AddRepository<StaffFlavorsRepository>(new StaffFlavorsRepository(SaveGame));
+        StaffReadableFlavors = AddRepository<StaffReadableFlavorsRepository>(new StaffReadableFlavorsRepository(SaveGame));
         StoreCommands = AddRepository<StoreCommandsRepository>(new StoreCommandsRepository(SaveGame));
         StoreFactories = AddRepository<StoreFactoriesRepository>(new StoreFactoriesRepository(SaveGame));
         Symbols = AddRepository<SymbolsRepository>(new SymbolsRepository(SaveGame));
@@ -193,7 +193,7 @@ internal class SingletonRepository
         TimedActions = AddRepository<TimedActionsRepository>(new TimedActionsRepository(SaveGame));
         Towns = AddRepository<TownsRepository>(new TownsRepository(SaveGame));
         Vaults = AddRepository<VaultsRepository>(new VaultsRepository(SaveGame));
-        WandFlavors = AddRepository<WandFlavorsRepository>(new WandFlavorsRepository(SaveGame));
+        WandReadableFlavors = AddRepository<WandReadableFlavorsRepository>(new WandReadableFlavorsRepository(SaveGame));
         WizardCommands = AddRepository<WizardCommandsRepository>(new WizardCommandsRepository(SaveGame));
         WorshipPlayerAttacks = AddRepository<WorshipPlayerAttacksRepository>(new WorshipPlayerAttacksRepository(SaveGame));
 
