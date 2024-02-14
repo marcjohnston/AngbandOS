@@ -8,9 +8,9 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class CureLightWoundsScript : Script, IScript
+internal class CureLightWounds2d10Script : Script, IScript
 {
-    private CureLightWoundsScript(SaveGame saveGame) : base(saveGame) { }
+    private CureLightWounds2d10Script(SaveGame saveGame) : base(saveGame) { }
 
     /// <summary>
     /// Restores health between 2 and 10 points and reduces the bleeding timer by 10 turns.

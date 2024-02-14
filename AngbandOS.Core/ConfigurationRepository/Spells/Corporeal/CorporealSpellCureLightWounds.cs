@@ -13,7 +13,7 @@ internal class CorporealSpellCureLightWounds : Spell
     private CorporealSpellCureLightWounds(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.RunScript(nameof(CureLightWoundsScript));
+        SaveGame.RunScript(nameof(CureLightWounds2d10Script));
     }
 
     public override string Name => "Cure Light Wounds";
