@@ -139,6 +139,5 @@ internal abstract class BowWeaponItemFactory : WeaponItemFactory // TODO: Should
     public override bool HatesFire => true;
     public override bool HatesAcid => true;
     public override ColorEnum Color => ColorEnum.Brown;
-
     public override bool CanApplyArtifactBiasSlaying => false;
 }

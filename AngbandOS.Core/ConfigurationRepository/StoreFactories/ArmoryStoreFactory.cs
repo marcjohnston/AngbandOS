@@ -72,14 +72,14 @@ internal class ArmoryStoreFactory : StoreFactory
     /// </summary>
     protected override string[] ItemFilterNames => new string[]
 {
-        nameof(BootsArmorItemFilter),
-        nameof(GlovesArmorItemFilter),
-        nameof(CrownArmorItemFilter),
-        nameof(HelmItemFilter),
-        nameof(ShieldItemFilter),
-        nameof(CloakArmorItemFilter),
-        nameof(SoftArmorItemFilter),
-        nameof(HardArmorItemFilter),
+        nameof(BootsOfValueItemFilter),
+        nameof(GlovesOfValueItemFilter),
+        nameof(CrownArmorOfValueItemFilter),
+        nameof(HelmsOfValueFilter),
+        nameof(ShieldsOfValueItemFilter),
+        nameof(CloaksOfValueItemFilter),
+        nameof(SoftArmorOfValueItemFilter),
+        nameof(HardArmorOfValueItemFilter),
         nameof(DragonScaleMailItemFilter)
     };
 

@@ -80,14 +80,14 @@ internal partial class WeaponStoreFactory : StoreFactory
     /// </summary>
     protected override string[] ItemFilterNames => new string[]
     {
-        nameof(ShotAmmunitionItemFilter),
-        nameof(BoltAmmunitionItemFilter),
-        nameof(ArrowAmmunitionItemFilter),
-        nameof(BowWeaponItemFilter),
-        nameof(DiggingItemFilter),
-        nameof(HaftedItemFilter),
-        nameof(PolearmItemFilter),
-        nameof(SwordItemFilter)
+        nameof(ShotsOfValueItemFilter),
+        nameof(BoltsOfValueItemFilter),
+        nameof(ArrowsOfValueItemFilter),
+        nameof(BowsOfValueItemFilter),
+        nameof(DiggingItemsOfValueItemFilter),
+        nameof(HaftedItemsOfValueFilter),
+        nameof(PolearmsOfValueItemFilter),
+        nameof(SwordsOfValueItemFilter)
     };
 
     protected override string? AdvertisedStoreCommand4Name => nameof(EnchantWeaponStoreCommand);

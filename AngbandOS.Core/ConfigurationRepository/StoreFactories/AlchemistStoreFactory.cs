@@ -70,8 +70,8 @@ internal partial class AlchemistStoreFactory : StoreFactory
     /// </summary>
     protected override string[] ItemFilterNames => new string[]
     {
-        nameof(ScrollItemFilter),
-        nameof(PotionItemFilter)
+        nameof(ScrollsOfValueItemFilter),
+        nameof(PotionsOfValueItemFilter)
     };
 
     protected override string? AdvertisedStoreCommand4Name => nameof(RestorationStoreCommand);

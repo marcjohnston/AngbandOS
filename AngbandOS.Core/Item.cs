@@ -1779,22 +1779,17 @@ internal sealed class Item : IComparable<Item>
             {
                 return 0;
             }
-            value = BaseValue();
+            if (IsFlavorAware())
+            {
+                return Factory.Cost;
+            }
+            return Factory.BaseValue;
         }
         if (Discount != 0)
         {
             value -= value * Discount / 100;
         }
         return value;
-    }
-
-    private int BaseValue()
-    {
-        if (IsFlavorAware())
-        {
-            return Factory.Cost;
-        }
-        return Factory.BaseValue;
     }
 
     private string? DescribeActivationEffect()

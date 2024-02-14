@@ -1709,12 +1709,122 @@ internal class SaveGame
 
     private void GenerateNewGame()
     {
-        FlavorInit();
-        ApplyFlavorVisuals();
-        if (!CharacterGeneration())
+        SetBackground(BackgroundImageEnum.Paper);
+        PlayMusic(MusicTrackEnum.Chargen);
+        Inventory = new Item[InventorySlot.Total];
+        for (int i = 0; i < InventorySlot.Total; i++)
+        {
+            Inventory[i] = null;
+        }
+        _invenCnt = 0;
+
+        TimedAcidResistance = new AcidResistanceTimedAction(this);
+        TimedBleeding = new BleedingTimedAction(this);
+        TimedBlessing = new BlessingTimedAction(this);
+        TimedBlindness = new BlindnessTimedAction(this);
+        TimedColdResistance = new ColdResistanceTimedAction(this);
+        TimedConfusion = new ConfusionTimedAction(this);
+        TimedEtherealness = new EtherealnessTimedAction(this);
+        TimedFear = new FearTimedAction(this);
+        TimedFireResistance = new FireResistanceTimedAction(this);
+        TimedHallucinations = new HallucinationsTimedAction(this);
+        TimedHaste = new HasteTimedAction(this);
+        TimedHeroism = new HeroismTimedAction(this);
+        TimedInfravision = new InfravisionTimedAction(this);
+        TimedInvulnerability = new InvulnerabilityTimedAction(this);
+        TimedLightningResistance = new LightningResistanceTimedAction(this);
+        TimedParalysis = new ParalysisTimedAction(this);
+        TimedPoison = new PoisonTimedAction(this);
+        TimedPoisonResistance = new PoisonResistanceTimedAction(this);
+        TimedProtectionFromEvil = new ProtectionFromEvilTimedAction(this);
+        TimedSeeInvisibility = new SeeInvisibilityTimedAction(this);
+        TimedSlow = new SlowTimedAction(this);
+        TimedStoneskin = new StoneskinTimedAction(this);
+        TimedStun = new StunTimedAction(this);
+        TimedSuperheroism = new SuperHeroismTimedAction(this);
+        TimedTelepathy = new TelepathyTimedAction(this);
+        Dna = new Genome(this);
+        for (int i = 0; i < 4; i++)
+        {
+            History[i] = "";
+        }
+        for (int i = 0; i < 6; i++)
+        {
+            AbilityScores[i] = new AbilityScore();
+        }
+        WeightCarried = 0;
+
+        foreach (FixedArtifact aPtr in SingletonRepository.FixedArtifacts)
+        {
+            aPtr.CurNum = 0;
+        }
+        foreach (ItemFactory kPtr in SingletonRepository.ItemFactories)
+        {
+            kPtr.Tried = false;
+        }
+        for (int i = 1; i < SingletonRepository.MonsterRaces.Count; i++)
+        {
+            MonsterRace rPtr = SingletonRepository.MonsterRaces[i];
+            rPtr.CurNum = 0;
+            rPtr.MaxNum = 100;
+            if (rPtr.Unique)
+            {
+                rPtr.MaxNum = 1;
+            }
+            rPtr.Knowledge.RPkills = 0;
+        }
+        SingletonRepository.MonsterRaces[SingletonRepository.MonsterRaces.Count - 1].MaxNum = 0;
+        Food = Constants.PyFoodFull - 1;
+        IsWizard = false;
+        IsWinner = false;
+
+        // Reset the home ownership for the player.
+        TownWithHouse = null;
+
+        Generation = 1;
+
+
+
+        if (ExPlayer == null)
+        {
+            _prevSex = SingletonRepository.Genders.Get(nameof(FemaleGender));
+            _prevRace = SingletonRepository.Races.Get(nameof(HumanRace));
+            _prevCharacterClass = SingletonRepository.CharacterClasses.Get(nameof(WarriorCharacterClass));
+            _prevPrimaryRealm = null;
+            _prevSecondaryRealm = null;
+            _prevName = "Xena";
+            _prevGeneration = 0;
+        }
+        else
+        {
+            _prevSex = ExPlayer.Gender;
+            _prevRace = ExPlayer.RaceAtBirth;
+            _prevCharacterClass = SingletonRepository.CharacterClasses.Get(ExPlayer.CharacterClassName);
+            _prevPrimaryRealm = ExPlayer.PrimaryRealm;
+            _prevSecondaryRealm = ExPlayer.SecondaryRealm;
+            _prevName = ExPlayer.Name;
+            _prevGeneration = ExPlayer.Generation;
+        }
+
+        Screen.Clear();
+        BirthStage? birthStage = SingletonRepository.BirthStages.Get(nameof(IntroductionBirthStage));
+        while (birthStage != null && !Shutdown)
+        {
+            birthStage = birthStage.Render();
+        }
+
+        if (Shutdown)
         {
             return;
         }
+
+        RaceAtBirth = Race;
+        PlayerBirthQuests();
+        IsDead = false;
+        PlayerOutfit();
+        FlavorInit();
+        ApplyFlavorVisuals();
+
         _seedFlavor = RandomLessThan(int.MaxValue);
         CreateWorld();
         foreach (var dungeon in SingletonRepository.Dungeons)
@@ -3120,17 +3230,12 @@ internal class SaveGame
                 }
             }
         }
+
+        // Enumerate all of the item factories and turn on the FlavorAware flag for all item factories that do not have flavors.
         UseFixed = false;
         foreach (ItemFactory kPtr in SingletonRepository.ItemFactories)
         {
-            if (string.IsNullOrEmpty(kPtr.FriendlyName))
-            {
-                continue;
-            }
-            if (!kPtr.HasFlavor)
-            {
-                kPtr.FlavorAware = true;
-            }
+            kPtr.FlavorAware = !kPtr.HasFlavor;
         }
     }
 
@@ -4293,7 +4398,7 @@ internal class SaveGame
     public void ArtifactScroll()
     {
         bool okay;
-        if (!SelectItem(out Item? oPtr, "Enchant which item? ", true, true, true, SingletonRepository.ItemFilters.Get(nameof(WeaponItemFilter))))
+        if (!SelectItem(out Item? oPtr, "Enchant which item? ", true, true, true, SingletonRepository.ItemFilters.Get(nameof(WeaponsItemFilter))))
         {
             MsgPrint("You have nothing to enchant.");
             return;
@@ -4349,7 +4454,7 @@ internal class SaveGame
 
     public bool BlessWeapon()
     {
-        if (!SelectItem(out Item? oPtr, "Bless which weapon? ", true, true, true, SingletonRepository.ItemFilters.Get(nameof(WeaponItemFilter))))
+        if (!SelectItem(out Item? oPtr, "Bless which weapon? ", true, true, true, SingletonRepository.ItemFilters.Get(nameof(WeaponsItemFilter))))
         {
             MsgPrint("You have no weapon to bless.");
             return false;
@@ -5339,7 +5444,7 @@ internal class SaveGame
     public bool EnchantItem(int numHit, int numDam, int numAc)
     {
         bool okay = false;
-        IItemFilter itemFilter = numAc != 0 ? SingletonRepository.ItemFilters.Get(nameof(ArmorItemsItemFilter)) : SingletonRepository.ItemFilters.Get(nameof(WeaponItemFilter));
+        IItemFilter itemFilter = numAc != 0 ? SingletonRepository.ItemFilters.Get(nameof(ArmorItemFilter)) : SingletonRepository.ItemFilters.Get(nameof(WeaponsItemFilter));
         if (!SelectItem(out Item? oPtr, "Enchant which item? ", true, true, true, itemFilter))
         {
             MsgPrint("You have nothing to enchant.");
@@ -8146,7 +8251,7 @@ internal class SaveGame
     public void Rustproof()
     {
         // Get a piece of armor
-        if (!SelectItem(out Item? item, "Rustproof which piece of armor? ", true, true, true, SingletonRepository.ItemFilters.Get(nameof(ArmorItemsItemFilter))))
+        if (!SelectItem(out Item? item, "Rustproof which piece of armor? ", true, true, true, SingletonRepository.ItemFilters.Get(nameof(ArmorItemFilter))))
         {
             MsgPrint("You have nothing to rustproof.");
             return;
@@ -9995,25 +10100,6 @@ internal class SaveGame
     public Item?[] Inventory;
     public int _invenCnt;
 
-    public bool CharacterGeneration()
-    {
-        SetBackground(BackgroundImageEnum.Paper);
-        PlayMusic(MusicTrackEnum.Chargen);
-        Inventory = new Item[InventorySlot.Total];
-        for (int i = 0; i < InventorySlot.Total; i++)
-        {
-            Inventory[i] = null;
-        }
-        _invenCnt = 0;
-
-        InitializePlayer();
-        if (PlayerBirth())
-        {
-            return true;
-        }
-        return false;
-    }
-
     public void DisplayAPlusB(int x, int y, int initial, int bonus)
     {
         string buf = $"{initial:00}% + {bonus / 10}.{bonus % 10}%/lv";
@@ -10181,50 +10267,6 @@ internal class SaveGame
                 Screen.Print(a, menuItems[i], row, 2);
             }
         }
-    }
-
-    private bool PlayerBirth()
-    {
-        if (ExPlayer == null)
-        {
-            _prevSex = SingletonRepository.Genders.Get(nameof(FemaleGender));
-            _prevRace = SingletonRepository.Races.Get(nameof(HumanRace));
-            _prevCharacterClass = SingletonRepository.CharacterClasses.Get(nameof(WarriorCharacterClass));
-            _prevPrimaryRealm = null;
-            _prevSecondaryRealm = null;
-            _prevName = "Xena";
-            _prevGeneration = 0;
-        }
-        else
-        {
-            _prevSex = ExPlayer.Gender;
-            _prevRace = ExPlayer.RaceAtBirth;
-            _prevCharacterClass = SingletonRepository.CharacterClasses.Get(ExPlayer.CharacterClassName);
-            _prevPrimaryRealm = ExPlayer.PrimaryRealm;
-            _prevSecondaryRealm = ExPlayer.SecondaryRealm;
-            _prevName = ExPlayer.Name;
-            _prevGeneration = ExPlayer.Generation;
-        }
-        if (!PlayerBirthAux())
-        {
-            return false;
-        }
-        RaceAtBirth = Race;
-        PlayerBirthQuests();
-        IsDead = false;
-        PlayerOutfit();
-        return true;
-    }
-
-    private bool PlayerBirthAux()
-    {
-        Screen.Clear();
-        BirthStage? birthStage = SingletonRepository.BirthStages.Get(nameof(IntroductionBirthStage));
-        while (birthStage != null && !Shutdown)
-        {
-            birthStage = birthStage.Render();
-        }
-        return !Shutdown;
     }
 
     private void PlayerOutfit()
@@ -13861,75 +13903,6 @@ internal class SaveGame
                 column++;
             }
         }
-    }
-
-    private void InitializePlayer()
-    {
-        TimedAcidResistance = new AcidResistanceTimedAction(this);
-        TimedBleeding = new BleedingTimedAction(this);
-        TimedBlessing = new BlessingTimedAction(this);
-        TimedBlindness = new BlindnessTimedAction(this);
-        TimedColdResistance = new ColdResistanceTimedAction(this);
-        TimedConfusion = new ConfusionTimedAction(this);
-        TimedEtherealness = new EtherealnessTimedAction(this);
-        TimedFear = new FearTimedAction(this);
-        TimedFireResistance = new FireResistanceTimedAction(this);
-        TimedHallucinations = new HallucinationsTimedAction(this);
-        TimedHaste = new HasteTimedAction(this);
-        TimedHeroism = new HeroismTimedAction(this);
-        TimedInfravision = new InfravisionTimedAction(this);
-        TimedInvulnerability = new InvulnerabilityTimedAction(this);
-        TimedLightningResistance = new LightningResistanceTimedAction(this);
-        TimedParalysis = new ParalysisTimedAction(this);
-        TimedPoison = new PoisonTimedAction(this);
-        TimedPoisonResistance = new PoisonResistanceTimedAction(this);
-        TimedProtectionFromEvil = new ProtectionFromEvilTimedAction(this);
-        TimedSeeInvisibility = new SeeInvisibilityTimedAction(this);
-        TimedSlow = new SlowTimedAction(this);
-        TimedStoneskin = new StoneskinTimedAction(this);
-        TimedStun = new StunTimedAction(this);
-        TimedSuperheroism = new SuperHeroismTimedAction(this);
-        TimedTelepathy = new TelepathyTimedAction(this);
-        Dna = new Genome(this);
-        for (int i = 0; i < 4; i++)
-        {
-            History[i] = "";
-        }
-        for (int i = 0; i < 6; i++)
-        {
-            AbilityScores[i] = new AbilityScore();
-        }
-        WeightCarried = 0;
-
-        foreach (FixedArtifact aPtr in SingletonRepository.FixedArtifacts)
-        {
-            aPtr.CurNum = 0;
-        }
-        foreach (ItemFactory kPtr in SingletonRepository.ItemFactories)
-        {
-            kPtr.Tried = false;
-            kPtr.FlavorAware = false;
-        }
-        for (int i = 1; i < SingletonRepository.MonsterRaces.Count; i++)
-        {
-            MonsterRace rPtr = SingletonRepository.MonsterRaces[i];
-            rPtr.CurNum = 0;
-            rPtr.MaxNum = 100;
-            if (rPtr.Unique)
-            {
-                rPtr.MaxNum = 1;
-            }
-            rPtr.Knowledge.RPkills = 0;
-        }
-        SingletonRepository.MonsterRaces[SingletonRepository.MonsterRaces.Count - 1].MaxNum = 0;
-        Food = Constants.PyFoodFull - 1;
-        IsWizard = false;
-        IsWinner = false;
-
-        // Reset the home ownership for the player.
-        TownWithHouse = null;
-
-        Generation = 1;
     }
 
     public void RecenterScreenAroundPlayer()

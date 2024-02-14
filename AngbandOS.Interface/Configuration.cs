@@ -43,6 +43,7 @@ public class Configuration
     public DungeonGuardianDefinition[]? DungeonGuardians { get; set; } = null;
     public DungeonDefinition[]? Dungeons { get; set; } = null;
     public StoreFactoryDefinition[]? StoreFactories { get; set; } = null;
+    public ProjectileGraphicDefinition[]? ProjectileGraphics { get; set; } = null;
     public ReadableFlavorDefinition[]? AmuletReadableFlavors{ get; set; } = null;
     public ReadableFlavorDefinition[]? MushroomReadableFlavors { get; set; } = null;
     public ReadableFlavorDefinition[]? PotionReadableFlavors { get; set; } = null;

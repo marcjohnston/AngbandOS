@@ -88,7 +88,7 @@ internal class CastingType : IGetKey<string>
             SaveGame.MsgPrint("You are too confused!");
             return;
         }
-        if (!SaveGame.SelectItem(out Item? oPtr, "Use which book? ", false, true, true, SaveGame.SingletonRepository.ItemFilters.Get(nameof(UsableSpellBookItemFilter))))
+        if (!SaveGame.SelectItem(out Item? oPtr, "Use which book? ", false, true, true, SaveGame.SingletonRepository.ItemFilters.Get(nameof(IsUsableSpellBookItemFilter))))
         {
             SaveGame.MsgPrint($"You have no {prayer} books!");
             return;

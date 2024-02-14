@@ -161,7 +161,7 @@ internal abstract class Projectile : IGetKey<string>
                         SaveGame.MoveCursorRelative(y9, x9);
                         SaveGame.UpdateScreen();
                         visual = true;
-                        SaveGame.Pause(msec);
+                        SaveGame.Pause(msec); // This actually allows the screen to update.
                         SaveGame.RedrawSingleLocation(y9, x9);
                         SaveGame.UpdateScreen();
                     }

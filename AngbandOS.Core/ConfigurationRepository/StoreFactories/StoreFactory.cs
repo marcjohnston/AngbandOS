@@ -97,7 +97,7 @@ internal abstract class StoreFactory : IItemFilter, IGetKey<string>
         Tile = SaveGame.SingletonRepository.Tiles.Get(TileName);
 
         // Bind the item filters.
-        List<ItemFilter> itemFilters = new();
+        List<AllItemsItemFilter> itemFilters = new();
         foreach (string itemFilterName in ItemFilterNames)
         {
             itemFilters.Add(SaveGame.SingletonRepository.ItemFilters.Get(itemFilterName));
@@ -141,15 +141,14 @@ internal abstract class StoreFactory : IItemFilter, IGetKey<string>
     public virtual bool UseHomeCarry => false;
 
     /// <summary>
-    /// Returns true, if the store will accept items from the player (e.g. sell or drop).  An item matches, if any ItemFilter
-    /// matches the item.
+    /// Returns true, if the store will accept items from the player (e.g. sell or drop).  An item matches, if any ItemFilter matches the item.
     /// </summary>
     /// <param name="item"></param>
     /// <returns></returns>
     public bool ItemMatches(Item item)
     {
         // Loop through all of the item filters.  If the filter matches, then the item matches.
-        foreach (ItemFilter itemFilter in ItemFilters)
+        foreach (AllItemsItemFilter itemFilter in ItemFilters)
         {
             if (itemFilter.ItemMatches(item))
             {
@@ -159,7 +158,7 @@ internal abstract class StoreFactory : IItemFilter, IGetKey<string>
         return false;
     }
 
-    public ItemFilter[] ItemFilters { get; private set; }
+    public AllItemsItemFilter[] ItemFilters { get; private set; }
 
     /// <summary>
     /// Returns the names of the item matching criterion used to determine which items the store buys.  Returns an empty arrary, by default, to

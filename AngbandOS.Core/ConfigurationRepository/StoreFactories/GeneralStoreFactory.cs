@@ -72,15 +72,15 @@ internal class GeneralStoreFactory : StoreFactory
     protected override string[] ItemFilterNames => new string[]
 {
         nameof(FoodItemFilter),
-        nameof(LightSourceItemFilter),
+        nameof(LightSourcesOfValueFilter),
         nameof(FlaskItemFilter),
-        nameof(SpikeItemFilter),
-        nameof(ShotAmmunitionItemFilter),
-        nameof(ArrowAmmunitionItemFilter),
-        nameof(BoltAmmunitionItemFilter),
-        nameof(DiggingItemFilter),
-        nameof(CloakArmorItemFilter),
-        nameof(BottleItemFilter)
+        nameof(SpikeOfValueItemFilter),
+        nameof(ShotsOfValueItemFilter),
+        nameof(ArrowsOfValueItemFilter),
+        nameof(BoltsOfValueItemFilter),
+        nameof(DiggingItemsOfValueItemFilter),
+        nameof(CloaksOfValueItemFilter),
+        nameof(BottlesOfValueItemFilter)
     };
 
     protected override string? AdvertisedStoreCommand4Name => nameof(HireEscortStoreCommand);
