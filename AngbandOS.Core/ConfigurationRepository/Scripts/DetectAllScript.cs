@@ -5,17 +5,19 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Spells.Folk;
+namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class FolkSpellDetection : Spell
+internal class DetectAlLScript : Script, IScript
 {
-    private FolkSpellDetection(SaveGame saveGame) : base(saveGame) { }
-    public override void Cast()
-    {
-        SaveGame.RunScript(nameof(DetectAlLScript));
-    }
+    private DetectAlLScript(SaveGame saveGame) : base(saveGame) { }
 
-    public override string Name => "Detection";
-    
+    /// <summary>
+    /// Executes the script.
+    /// </summary>
+    /// <returns></returns>
+    public void ExecuteScript()
+    {
+        SaveGame.DetectAll();
+    }
 }
