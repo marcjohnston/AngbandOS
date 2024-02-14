@@ -650,6 +650,26 @@ internal class SaveGame
         InitializeAllocationTables();
     }
 
+    public bool GetBool(string prompt, out bool value)
+    {
+        value = false;
+        if (!GetCom(prompt, out char text))
+        {
+            return false;
+        }
+        if (text == '0')
+        {
+            value = false;
+            return true;
+        }
+        if (text == '1')
+        {
+            value = true;
+            return true;
+        }
+        return false;
+    }
+
     public void StorePrtGold()
     {
         Screen.PrintLine("Gold Remaining: ", 39, 53);

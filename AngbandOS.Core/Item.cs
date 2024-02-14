@@ -1192,7 +1192,7 @@ internal sealed class Item : IComparable<Item>
 
         Characteristics.Merge(RandartItemCharacteristics);
 
-        if (!string.IsNullOrEmpty(RandartName))
+        if (BonusPowerType != null)
         {
             BonusPowerType.Activate(BonusPowerSubType, this);
         }

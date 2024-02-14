@@ -31,7 +31,20 @@ internal class EditItemScript : Script, IScript
             }
             if (int.TryParse(tmpVal, out int val))
             {
+                if (!SaveGame.GetBool($"Ok Item (0=False, 1=True)? ", out bool ok))
+                {
+                    return;
+                }
+                if (!SaveGame.GetBool($"Good Item (0=False, 1=True)? ", out bool good))
+                {
+                    return;
+                }
+                if (!SaveGame.GetBool($"Great Item (0=False, 1=True)? ", out bool great))
+                {
+                    return;
+                }
                 item.RareItem = SaveGame.SingletonRepository.RareItems[val];
+                item.ApplyMagic(SaveGame.Difficulty, ok, good, great, null);
                 break;
             }
         } while (true);
