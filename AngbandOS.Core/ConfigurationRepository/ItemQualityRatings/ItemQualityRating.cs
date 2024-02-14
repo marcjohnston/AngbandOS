@@ -6,6 +6,8 @@
 // copies. Other copyrights may also apply.”
 
 namespace AngbandOS.Core.ItemQualityRatings;
+
+[Serializable]
 internal abstract class ItemQualityRating : IGetKey<string>
 {
     protected readonly SaveGame SaveGame;

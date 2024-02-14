@@ -7,6 +7,7 @@
 
 namespace AngbandOS.Core.ItemQualityRatings;
 
+[Serializable]
 internal class CursedItemQualityRating : ItemQualityRating
 {
     private CursedItemQualityRating(SaveGame saveGame) : base(saveGame) { } // This object is a singleton
