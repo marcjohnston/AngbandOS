@@ -38,6 +38,7 @@ global using AngbandOS.Core.ItemActivations;
 global using AngbandOS.Core.ItemClasses;
 global using AngbandOS.Core.ItemFactories;
 global using AngbandOS.Core.ItemFilters;
+global using AngbandOS.Core.ItemQualityRatings;
 global using AngbandOS.Core.MartialArtsAttacks;
 global using AngbandOS.Core.MonsterRaces;
 global using AngbandOS.Core.MonsterFilters;

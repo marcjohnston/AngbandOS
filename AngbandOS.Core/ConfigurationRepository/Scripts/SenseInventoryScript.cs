@@ -57,18 +57,18 @@ internal class SenseInventoryScript : Script, IScript
                 {
                     continue;
                 }
-                string feel = detailed ? item.GetDetailedFeeling() : item.GetVagueFeeling();
-                if (string.IsNullOrEmpty(feel))
+                ItemQualityRating? qualityRating = detailed ? item.GetQualityRating() : item.GetVagueQualityRating();
+                if (qualityRating == null)
                 {
                     continue;
                 }
                 string oName = item.Description(false, 0);
                 string isare = item.Count == 1 ? "is" : "are";
-                SaveGame.MsgPrint($"You feel the {oName} ({i.IndexToLabel()}) {inventorySlot.SenseLocation(i)} {isare} {feel}...");
+                SaveGame.MsgPrint($"You feel the {oName} ({i.IndexToLabel()}) {inventorySlot.SenseLocation(i)} {isare} {qualityRating.Description}...");
                 item.IdentSense = true;
                 if (string.IsNullOrEmpty(item.Inscription))
                 {
-                    item.Inscription = feel;
+                    item.Inscription = qualityRating.Description;
                 }
                 SaveGame.SingletonRepository.FlaggedActions.Get(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
             }

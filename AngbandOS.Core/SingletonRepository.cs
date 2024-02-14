@@ -46,6 +46,7 @@ internal class SingletonRepository
     public ItemClassesRepository ItemClasses;
     public ItemFactoriesRepository ItemFactories;
     public ItemFiltersRepository ItemFilters;
+    public ItemQualityRatingsRepository ItemQualityRatings;
     public MartialArtsAttacksRepository MartialArtsAttacks;
     public MoanPlayerAttacksRepository MoanPlayerAttacks;
     public MonsterFiltersRepository MonsterFilters;
@@ -155,6 +156,7 @@ internal class SingletonRepository
         ItemClasses = AddRepository<ItemClassesRepository>(new ItemClassesRepository(SaveGame));
         ItemFactories = AddRepository<ItemFactoriesRepository>(new ItemFactoriesRepository(SaveGame));
         ItemFilters = AddRepository<ItemFiltersRepository>(new ItemFiltersRepository(SaveGame));
+        ItemQualityRatings = AddRepository<ItemQualityRatingsRepository>(new ItemQualityRatingsRepository(SaveGame));
         MartialArtsAttacks = AddRepository<MartialArtsAttacksRepository>(new MartialArtsAttacksRepository(SaveGame));
         MoanPlayerAttacks = AddRepository<MoanPlayerAttacksRepository>(new MoanPlayerAttacksRepository(SaveGame));
         MonsterFilters = AddRepository<MonsterFiltersRepository>(new MonsterFiltersRepository(SaveGame));

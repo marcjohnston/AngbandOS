@@ -5,13 +5,10 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core;
+namespace AngbandOS.Core.ItemQualityRatings;
 
-internal class StompableType
+internal class AverageItemQualityRating : ItemQualityRating
 {
-    public const int Broken = 0;
-    public const int Average = 1;
-    public const int Good = 2;
-    public const int Excellent = 3;
+    private AverageItemQualityRating(SaveGame saveGame) : base(saveGame) { } // This object is a singleton
+    public override string Description => "average";
 }
-
