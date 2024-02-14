@@ -13,7 +13,7 @@ internal class FolkSpellDetection : Spell
     private FolkSpellDetection(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.RunScript(nameof(DetectAlLScript));
+        SaveGame.RunScript(nameof(DetectionScript));
     }
 
     public override string Name => "Detection";

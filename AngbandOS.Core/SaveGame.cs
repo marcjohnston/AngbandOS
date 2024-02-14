@@ -4830,10 +4830,6 @@ internal class SaveGame
         return detect;
     }
 
-    public void DetectObjectsMagic()
-    {
-    }
-
     public bool DetectObjectsNormal()
     {
         bool detect = false;

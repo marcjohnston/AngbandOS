@@ -8,9 +8,9 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class DetectAlLScript : Script, IScript
+internal class DetectNormalObjectsScript : Script, IScript
 {
-    private DetectAlLScript(SaveGame saveGame) : base(saveGame) { }
+    private DetectNormalObjectsScript(SaveGame saveGame) : base(saveGame) { }
 
     /// <summary>
     /// Executes the script.
@@ -18,6 +18,6 @@ internal class DetectAlLScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        SaveGame.DetectAll();
+        SaveGame.DetectObjectsNormal();
     }
 }
