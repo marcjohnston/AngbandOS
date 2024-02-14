@@ -6308,15 +6308,13 @@ internal class SaveGame
 
     public bool WallToMud(int dir)
     {
-        ProjectionFlag flg = ProjectionFlag.ProjectBeam | ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem |
-                  ProjectionFlag.ProjectKill;
+        ProjectionFlag flg = ProjectionFlag.ProjectBeam | ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill;
         return TargetedProject(SingletonRepository.Projectiles.Get(nameof(KillWallProjectile)), dir, 20 + DieRoll(30), flg);
     }
 
     public void WizardLock(int dir)
     {
-        ProjectionFlag flg = ProjectionFlag.ProjectBeam | ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem |
-                  ProjectionFlag.ProjectKill;
+        ProjectionFlag flg = ProjectionFlag.ProjectBeam | ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill;
         TargetedProject(SingletonRepository.Projectiles.Get(nameof(JamDoorProjectile)), dir, 20 + DieRoll(30), flg);
     }
 

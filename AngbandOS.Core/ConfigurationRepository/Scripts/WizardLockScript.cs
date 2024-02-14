@@ -5,17 +5,23 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Spells.Folk;
+namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class FolkSpellWizardLock : Spell
+internal class WizardLockScript : Script, IScript
 {
-    private FolkSpellWizardLock(SaveGame saveGame) : base(saveGame) { }
-    public override void Cast()
-    {
-        SaveGame.RunScript(nameof(WizardLockScript));
-    }
+    private WizardLockScript(SaveGame saveGame) : base(saveGame) { }
 
-    public override string Name => "Wizard Lock";
-    
+    /// <summary>
+    /// Executes the script.
+    /// </summary>
+    /// <returns></returns>
+    public void ExecuteScript()
+    {
+        if (!SaveGame.GetDirectionWithAim(out int dir))
+        {
+            return;
+        }
+        SaveGame.WizardLock(dir);
+    }
 }
