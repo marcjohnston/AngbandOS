@@ -5,6 +5,8 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using System.Text.Json;
+
 namespace AngbandOS.Core.ProjectileGraphics;
 
 [Serializable]
@@ -22,7 +24,13 @@ internal abstract class ProjectileGraphic : IGetKey<string>
     /// <returns></returns>
     public string ToJson()
     {
-        return "";
+        ProjectileGraphicDefinition projectileGraphicDefinition = new()
+        {
+            Key = Key,
+            Character = Character,
+            Color = Color
+        };
+        return JsonSerializer.Serialize<ProjectileGraphicDefinition>(projectileGraphicDefinition);
     }
 
     public virtual string Key => GetType().Name;
@@ -31,17 +39,12 @@ internal abstract class ProjectileGraphic : IGetKey<string>
     public void Bind() { }
 
     /// <summary>
-    /// The column from which to take the graphical tile.
+    /// Returns the character to be used for the projectile.
     /// </summary>
     public abstract char Character { get; }
 
     /// <summary>
-    /// The row from which to take the graphical tile
+    /// Returns the color to be used for the projectile.
     /// </summary>
-    public virtual ColorEnum Color => ColorEnum.White; // TODO: Inject the color ... we have 3 variations of every object because of this.
-
-    /// <summary>
-    /// A unique identifier for the entity.  
-    /// </summary>
-    public abstract string Name { get; } // TODO: Are we actually using this?
+    public virtual ColorEnum Color => ColorEnum.White;
 }

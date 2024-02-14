@@ -13,5 +13,4 @@ internal class CopperBoltProjectileGraphic : ProjectileGraphic
     private CopperBoltProjectileGraphic(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override char Character => '|';
     public override ColorEnum Color => ColorEnum.Copper;
-    public override string Name => "CopperBolt";
 }
