@@ -10,7 +10,7 @@ namespace AngbandOS.Core;
 /// <summary>
 /// The category of an item
 /// </summary>
-internal enum ItemTypeEnum
+internal enum ItemTypeEnum // THESE ARE ITEMCLASSES
 {
     None = 0,
     Skeleton = 1,

@@ -177,10 +177,12 @@ internal abstract class BaseCharacterClass : IGetKey<string>
     public virtual void OutfitPlayer()
     {
         // An an item for each item that the character classes designates the player to be outfitted with.
-        foreach (ItemFactory itemClass in OutfitItemFactories)
+        foreach (ItemFactory itemFactory in OutfitItemFactories)
         {
             // Allow the race to modify the item as the race sees fit.
-            ItemFactory outfitItem = SaveGame.Race.OutfitItemClass(itemClass);
+            ItemFactory outfitItem = SaveGame.Race.OutfitItemClass(itemFactory);
+
+            // Create an item from the factory.
             Item item = outfitItem.CreateItem();
             if (outfitItem.CategoryEnum == ItemTypeEnum.Wand)
             {
