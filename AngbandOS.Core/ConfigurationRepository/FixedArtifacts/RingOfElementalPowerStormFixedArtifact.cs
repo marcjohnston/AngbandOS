@@ -28,7 +28,7 @@ internal class RingOfElementalPowerStormFixedArtifact : FixedArtifact, IFixedArt
     public string DescribeActivationEffect => "large lightning ball (250) every 425+d425 turns";
     public override void ApplyResistances(Item item)
     {
-        item.BonusPowerType = RareItemTypeEnum.SpecialAbility;
+        item.BonusPowerType = SaveGame.SingletonRepository.Powers.Get(nameof(SpecialAbilityPower));
         item.BonusPowerSubType= SaveGame.SingletonRepository.Activations.ToWeightedRandom().Choose();
     }
 

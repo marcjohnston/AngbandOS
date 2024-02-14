@@ -420,7 +420,7 @@ internal abstract class StoreFactory : IItemFilter, IGetKey<string>
         {
             return false;
         }
-        if (oPtr.BonusPowerType != 0 || jPtr.BonusPowerType != 0)
+        if (oPtr.BonusPowerType != null || jPtr.BonusPowerType != null)
         {
             return false;
         }

@@ -14,7 +14,7 @@ internal class CloakOfAmanRareItem : RareItem
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(OpenParenthesisSymbol));
     public override void ApplyMagic(Item item)
     {
-        item.BonusPowerType = RareItemTypeEnum.SpecialPower;
+        item.BonusPowerType = SaveGame.SingletonRepository.Powers.Get(nameof(SpecialPowerPower));
     }
     public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "Cloak of Aman";

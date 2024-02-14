@@ -62,7 +62,7 @@ internal sealed class Item : IComparable<Item>
     public int BonusArmorClass;
     public int BonusDamage;
     public Activation BonusPowerSubType;
-    public RareItemTypeEnum BonusPowerType;
+    public Power? BonusPowerType;
     public int BonusToHit;
     public int Count;
     public int DamageDice;
@@ -1194,18 +1194,7 @@ internal sealed class Item : IComparable<Item>
 
         if (!string.IsNullOrEmpty(RandartName))
         {
-            switch (BonusPowerType)
-            {
-                case RareItemTypeEnum.SpecialSustain:
-                    BonusPowerSubType.ActivateSpecialSustain(Characteristics);
-                    break;
-                case RareItemTypeEnum.SpecialPower:
-                    BonusPowerSubType.ActivateSpecialPower(Characteristics);
-                    break;
-                case RareItemTypeEnum.SpecialAbility:
-                    BonusPowerSubType.ActivateSpecialAbility(Characteristics);
-                    break;
-            }
+            BonusPowerType.Activate(BonusPowerSubType, this);
         }
 
     }
@@ -1815,7 +1804,7 @@ internal sealed class Item : IComparable<Item>
         {
             return null;
         }
-        if (FixedArtifact == null && RareItem == null && BonusPowerType == 0 && BonusPowerSubType != null)
+        if (FixedArtifact == null && RareItem == null && BonusPowerType == null && BonusPowerSubType != null)
         {
             return BonusPowerSubType.Description;
         }
@@ -1920,9 +1909,9 @@ internal sealed class Item : IComparable<Item>
         else if (RareItem != null)
         {
             RareItem.ApplyMagic(this);
-            if (BonusPowerType != 0 && string.IsNullOrEmpty(RandartName))
+            if (BonusPowerType != null && string.IsNullOrEmpty(RandartName))
             {
-                BonusPowerSubType= SaveGame.SingletonRepository.Activations.ToWeightedRandom().Choose();
+                BonusPowerSubType = SaveGame.SingletonRepository.Activations.ToWeightedRandom().Choose();
             }
             if (RareItem.Cost == 0)
             {

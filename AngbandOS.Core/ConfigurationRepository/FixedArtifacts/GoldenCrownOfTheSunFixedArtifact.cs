@@ -26,7 +26,7 @@ internal class GoldenCrownOfTheSunFixedArtifact : FixedArtifact, IFixedArtifactA
     public string DescribeActivationEffect => "heal (700) every 250 turns";
     public override void ApplyResistances(Item item)
     {
-        item.BonusPowerType = RareItemTypeEnum.SpecialAbility;
+        item.BonusPowerType = SaveGame.SingletonRepository.Powers.Get(nameof(SpecialAbilityPower));
         item.BonusPowerSubType= SaveGame.SingletonRepository.Activations.ToWeightedRandom().Choose();
 
         IArtifactBias artifactBias = null;

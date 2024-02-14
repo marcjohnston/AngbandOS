@@ -497,7 +497,7 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey<string>
         {
             return false;
         }
-        if (a.BonusPowerType != 0 || b.BonusPowerType != 0)
+        if (a.BonusPowerType != null || b.BonusPowerType != null)
         {
             return false;
         }

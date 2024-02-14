@@ -5,18 +5,14 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Interface.Definitions;
+namespace AngbandOS.Core.Powers;
 
-public class ReadableFlavorDefinition : IPoco
+[Serializable]
+internal class SpecialSustainPower : Power
 {
-    public virtual string Key { get; set; }
-    public virtual string SymbolName { get; set; }
-    public virtual ColorEnum Color { get; set; }
-    public virtual string Name { get; set; }
-    public virtual bool CanBeAssigned { get; set; }
-
-    public bool IsValid()
+    private SpecialSustainPower(SaveGame saveGame) : base(saveGame) { } // This object is a singleton
+    public override void Activate(Activation bonusPowerSubType, Item item)
     {
-        return true;
+        bonusPowerSubType.ActivateSpecialSustain(item.Characteristics);
     }
 }

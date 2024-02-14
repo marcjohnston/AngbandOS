@@ -13,7 +13,7 @@ internal class ArmorOfPermanenceRareItem : RareItem
     private ArmorOfPermanenceRareItem(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override void ApplyMagic(Item item)
     {
-        item.BonusPowerType = RareItemTypeEnum.SpecialPower;
+        item.BonusPowerType = SaveGame.SingletonRepository.Powers.Get(nameof(SpecialPowerPower));
     }
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(OpenBraceSymbol));
     public override ColorEnum Color => ColorEnum.Grey;

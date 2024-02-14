@@ -10,6 +10,7 @@ namespace AngbandOS.Core;
 /// <summary>
 /// Represents a flavor for the items that are created by an item factory that participate in the IFlavorFactory interface.
 /// </summary>
+[Serializable]
 internal abstract class Flavor
 {
     protected SaveGame SaveGame;

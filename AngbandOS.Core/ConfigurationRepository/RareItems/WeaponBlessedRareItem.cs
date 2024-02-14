@@ -13,7 +13,7 @@ internal class WeaponBlessedRareItem : RareItem
     private WeaponBlessedRareItem(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override void ApplyMagic(Item item)
     {
-        item.BonusPowerType = RareItemTypeEnum.SpecialAbility;
+        item.BonusPowerType = SaveGame.SingletonRepository.Powers.Get(nameof(SpecialAbilityPower));
     }
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(VerticalBarSymbol));
     public override ColorEnum Color => ColorEnum.BrightWhite;

@@ -24,7 +24,7 @@ internal class TwoHandedSwordDragonslayerFixedArtifact : FixedArtifact
         }
         else
         {
-            item.BonusPowerType = RareItemTypeEnum.SpecialAbility;
+            item.BonusPowerType = SaveGame.SingletonRepository.Powers.Get(nameof(SpecialAbilityPower));
             item.BonusPowerSubType= SaveGame.SingletonRepository.Activations.ToWeightedRandom().Choose();
         }
     }

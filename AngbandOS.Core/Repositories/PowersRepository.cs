@@ -5,12 +5,10 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core;
+namespace AngbandOS.Core.Repositories;
 
-internal enum RareItemTypeEnum
+[Serializable]
+internal class PowersRepository : DictionaryRepository<string, Power>
 {
-    None = 0,
-    SpecialSustain,
-    SpecialPower,
-    SpecialAbility,
+    public PowersRepository(SaveGame saveGame) : base(saveGame) { }
 }

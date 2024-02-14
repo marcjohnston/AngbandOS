@@ -55,6 +55,7 @@ internal class SingletonRepository
     public MutationsRepository Mutations;
     public PatronsRepository Patrons;
     public PotionReadableFlavorsRepository PotionReadableFlavors;
+    public PowersRepository Powers;
     public ProjectileGraphicsRepository ProjectileGraphics;
     public ProjectilesRepository Projectiles;
     public RacesRepository Races;
@@ -163,6 +164,7 @@ internal class SingletonRepository
         Mutations = AddRepository<MutationsRepository>(new MutationsRepository(SaveGame));
         Patrons = AddRepository<PatronsRepository>(new PatronsRepository(SaveGame));
         PotionReadableFlavors = AddRepository<PotionReadableFlavorsRepository>(new PotionReadableFlavorsRepository(SaveGame));
+        Powers = AddRepository<PowersRepository>(new PowersRepository(SaveGame));
         ProjectileGraphics = AddRepository<ProjectileGraphicsRepository>(new ProjectileGraphicsRepository(SaveGame));
         Projectiles = AddRepository<ProjectilesRepository>(new ProjectilesRepository(SaveGame));
         Races = AddRepository<RacesRepository>(new RacesRepository(SaveGame));

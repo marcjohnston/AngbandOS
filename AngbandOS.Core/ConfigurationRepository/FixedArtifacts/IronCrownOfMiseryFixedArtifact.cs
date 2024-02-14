@@ -17,7 +17,7 @@ internal class IronCrownOfMiseryFixedArtifact : FixedArtifact
 
     public override void ApplyResistances(Item item)
     {
-        item.BonusPowerType = RareItemTypeEnum.SpecialAbility;
+        item.BonusPowerType = SaveGame.SingletonRepository.Powers.Get(nameof(SpecialAbilityPower));
         item.BonusPowerSubType= SaveGame.SingletonRepository.Activations.ToWeightedRandom().Choose();
     }
     public override ColorEnum Color => ColorEnum.Grey;
