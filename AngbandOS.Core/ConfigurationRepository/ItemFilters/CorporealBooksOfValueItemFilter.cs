@@ -8,11 +8,11 @@
 namespace AngbandOS.Core.ItemFilters;
 
 /// <summary>
-/// Represents an item filter for all items of value.
+/// Represents an item filter for all corporeal books that have value.
 /// </summary>
 [Serializable]
-internal class AnythingOfValueItemFilter : AllItemsItemFilter
+internal class CorporealBooksOfValueItemFilter : ItemFilter<CorporealBookItemFactory>
 {
-    private AnythingOfValueItemFilter(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private CorporealBooksOfValueItemFilter(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override bool? HasValue => true;
 }

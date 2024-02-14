@@ -7,8 +7,12 @@
 
 namespace AngbandOS.Core.ItemFilters;
 
+/// <summary>
+/// Represents an item filter for death books that have value.
+/// </summary>
 [Serializable]
 internal class DeathBookItemFilter : ItemFilter<DeathBookItemFactory>
 {
     private DeathBookItemFilter(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    public override bool? HasValue => true;
 }

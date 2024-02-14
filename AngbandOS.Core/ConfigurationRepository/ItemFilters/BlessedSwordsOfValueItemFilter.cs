@@ -8,11 +8,12 @@
 namespace AngbandOS.Core.ItemFilters;
 
 /// <summary>
-/// Represents an item filter for all items of value.
+/// Represents an item filter for all swords that are blessed and have value.
 /// </summary>
 [Serializable]
-internal class AnythingOfValueItemFilter : AllItemsItemFilter
+internal class BlessedSwordsOfValueItemFilter : ItemFilter<SwordWeaponItemFactory>
 {
-    private AnythingOfValueItemFilter(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private BlessedSwordsOfValueItemFilter(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    public override bool? IsBlessed => true;
     public override bool? HasValue => true;
 }

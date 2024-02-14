@@ -8,19 +8,19 @@
 namespace AngbandOS.Core.ItemFilters;
 
 [Serializable]
-internal abstract class ItemFilter<TItemFactory> : ItemFilter where TItemFactory : ItemFactory
+internal abstract class ItemFilter<TItemFactory> : AllItemsItemFilter where TItemFactory : ItemFactory
 {
     protected ItemFilter(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public virtual string? ItemFactoryName => null;
     public override bool ItemMatches(Item item)
     {
         // Check that the item came from the same item factory.
-        if (item.Factory != null && item.Factory is not TItemFactory)
+        if (item.Factory is not TItemFactory)
         {
             return false;
         }
 
-        // Check the base matching criteria.
+        // Use the base filter to check for any additional criteria.
         return base.ItemMatches(item);
     }
 }

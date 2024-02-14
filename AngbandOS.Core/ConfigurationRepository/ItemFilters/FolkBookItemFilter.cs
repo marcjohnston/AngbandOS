@@ -7,8 +7,12 @@
 
 namespace AngbandOS.Core.ItemFilters;
 
+/// <summary>
+/// Represents an item filter for folk books that have value.
+/// </summary>
 [Serializable]
 internal class FolkBookItemFilter : ItemFilter<FolkBookItemFactory>
 {
     private FolkBookItemFilter(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    public override bool? HasValue => true;
 }

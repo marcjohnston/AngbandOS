@@ -7,9 +7,12 @@
 
 namespace AngbandOS.Core.ItemFilters;
 
+/// <summary>
+/// Represents an item filter for food items that have value.
+/// </summary>
 [Serializable]
 internal class FoodItemFilter : ItemFilter<FoodItemFactory>
 {
     private FoodItemFilter(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    public override bool? HasValue => true;
 }
-

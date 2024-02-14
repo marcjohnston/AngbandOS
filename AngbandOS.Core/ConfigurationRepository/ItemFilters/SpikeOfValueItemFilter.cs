@@ -8,11 +8,11 @@
 namespace AngbandOS.Core.ItemFilters;
 
 /// <summary>
-/// Represents an item filter for all items of value.
+/// Represents an item filter for spikes that have value.
 /// </summary>
 [Serializable]
-internal class AnythingOfValueItemFilter : AllItemsItemFilter
+internal class SpikeOfValueItemFilter : ItemFilter<SpikeItemFactory>
 {
-    private AnythingOfValueItemFilter(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private SpikeOfValueItemFilter(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override bool? HasValue => true;
 }

@@ -7,9 +7,12 @@
 
 namespace AngbandOS.Core.ItemFilters;
 
+/// <summary>
+/// Represents an item filter for flasks that have value.
+/// </summary>
 [Serializable]
 internal class FlaskItemFilter : ItemFilter<FlaskItemFactory>
 {
     private FlaskItemFilter(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    public override bool? HasValue => true;
 }
-

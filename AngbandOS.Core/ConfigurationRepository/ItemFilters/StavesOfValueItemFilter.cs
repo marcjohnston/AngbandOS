@@ -8,11 +8,11 @@
 namespace AngbandOS.Core.ItemFilters;
 
 /// <summary>
-/// Represents an item filter for all items of value.
+/// Represents an item filter for staves that have value.
 /// </summary>
 [Serializable]
-internal class AnythingOfValueItemFilter : AllItemsItemFilter
+internal class StavesOfValueItemFilter : ItemFilter<StaffItemFactory>
 {
-    private AnythingOfValueItemFilter(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private StavesOfValueItemFilter(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override bool? HasValue => true;
 }

@@ -7,8 +7,11 @@
 
 namespace AngbandOS.Core.ItemFilters;
 
+/// <summary>
+/// Represents an item filter for items that can be used, regardless of their value.
+/// </summary>
 [Serializable]
-internal class CanBeUsedItemFilter : ItemFilter
+internal class CanBeUsedItemFilter : AllItemsItemFilter
 {
     private CanBeUsedItemFilter(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 

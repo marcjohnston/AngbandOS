@@ -7,9 +7,12 @@
 
 namespace AngbandOS.Core.ItemFilters;
 
+/// <summary>
+/// Represents an item filter for spell books that are in the primary or secondary realms.
+/// </summary>
 [Serializable]
-internal class IsUsableSpellBookItemFilter : ItemFilter
+internal class IsUsableSpellBookItemFilter : AllItemsItemFilter
 {
     private IsUsableSpellBookItemFilter(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-    public override bool? IsUsableSpellBook => null;
+    public override bool? IsUsableSpellBook => true;
 }

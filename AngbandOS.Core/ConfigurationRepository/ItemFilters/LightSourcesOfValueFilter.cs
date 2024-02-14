@@ -8,11 +8,11 @@
 namespace AngbandOS.Core.ItemFilters;
 
 /// <summary>
-/// Represents an item filter for all items of value.
+/// Represents an item filter for items that can act as a source of light, regardless of their value.
 /// </summary>
 [Serializable]
-internal class AnythingOfValueItemFilter : AllItemsItemFilter
+internal class LightSourcesOfValueFilter : ItemFilter<LightSourceItemFactory>
 {
-    private AnythingOfValueItemFilter(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private LightSourcesOfValueFilter(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override bool? HasValue => true;
 }

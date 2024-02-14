@@ -7,8 +7,11 @@
 
 namespace AngbandOS.Core.ConfigurationRepository.ItemMatchingCriterion;
 
+/// <summary>
+/// Represents an item filter for items that are considered fuel for lanterns regardless of their value.
+/// </summary>
 [Serializable]
-internal class LanternFuelItemFilter : ItemFilter
+internal class LanternFuelItemFilter : AllItemsItemFilter
 {
     private LanternFuelItemFilter(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override bool? IsLanternFuel => true;

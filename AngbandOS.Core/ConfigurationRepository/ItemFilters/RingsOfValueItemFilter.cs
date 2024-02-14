@@ -8,11 +8,11 @@
 namespace AngbandOS.Core.ItemFilters;
 
 /// <summary>
-/// Represents an item filter for all items of value.
+/// Represents an item filter for rings that have value.
 /// </summary>
 [Serializable]
-internal class AnythingOfValueItemFilter : AllItemsItemFilter
+internal class RingsOfValueItemFilter : ItemFilter<RingItemFactory>
 {
-    private AnythingOfValueItemFilter(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private RingsOfValueItemFilter(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override bool? HasValue => true;
 }

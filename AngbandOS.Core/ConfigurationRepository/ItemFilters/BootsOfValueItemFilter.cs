@@ -8,11 +8,11 @@
 namespace AngbandOS.Core.ItemFilters;
 
 /// <summary>
-/// Represents an item filter for all items of value.
+/// Represents an item filter for boots that have value.
 /// </summary>
 [Serializable]
-internal class AnythingOfValueItemFilter : AllItemsItemFilter
+internal class BootsOfValueItemFilter : ItemFilter<BootsArmorItemFactory>
 {
-    private AnythingOfValueItemFilter(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-    public override bool? HasValue => true;
+    private BootsOfValueItemFilter(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 }
+

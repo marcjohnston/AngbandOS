@@ -7,8 +7,11 @@
 
 namespace AngbandOS.Core.ConfigurationRepository.ItemMatchingCriterion;
 
+/// <summary>
+/// Represents an item filter for items that are both known and can be activated, regardless of their value.
+/// </summary>
 [Serializable]
-internal class KnownAndActivableItemFilter : ItemFilter
+internal class KnownAndActivableItemFilter : AllItemsItemFilter
 {
     private KnownAndActivableItemFilter(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override bool? IsKnown => true;

@@ -8,11 +8,11 @@
 namespace AngbandOS.Core.ItemFilters;
 
 /// <summary>
-/// Represents an item filter for all items of value.
+/// Represents an item filter for items that can be worn, regardless of their value.
 /// </summary>
 [Serializable]
-internal class AnythingOfValueItemFilter : AllItemsItemFilter
+internal class CanBeWornItemFilter : AllItemsItemFilter
 {
-    private AnythingOfValueItemFilter(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-    public override bool? HasValue => true;
+    private CanBeWornItemFilter(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    public override bool? IsWearable => true;
 }

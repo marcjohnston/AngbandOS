@@ -7,11 +7,13 @@
 
 namespace AngbandOS.Core.ItemFilters;
 
+/// <summary>
+/// Represents an item filter for items that can be quaffed, regardless of their value.
+/// </summary>
 [Serializable]
-internal class CanBeQuaffedItemFilter : ItemFilter
+internal class CanBeQuaffedItemFilter : AllItemsItemFilter
 {
     private CanBeQuaffedItemFilter(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
     public override bool? CanBeQuaffed => true;
 }
-

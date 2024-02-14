@@ -7,11 +7,13 @@
 
 namespace AngbandOS.Core.ItemFilters;
 
+/// <summary>
+/// Represents an item filter for items that can be zapped, regardless of their value.
+/// </summary>
 [Serializable]
-internal class CanBeZappedItemFilter : ItemFilter
+internal class CanBeZappedItemFilter : AllItemsItemFilter
 {
     private CanBeZappedItemFilter(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
     public override bool? CanBeZapped => true;
 }
-
