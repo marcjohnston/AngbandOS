@@ -13,12 +13,7 @@ internal class FolkSpellRayOfLight : Spell
     private FolkSpellRayOfLight(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        if (!SaveGame.GetDirectionWithAim(out int dir))
-        {
-            return;
-        }
-        SaveGame.MsgPrint("A line of light appears.");
-        SaveGame.LightLine(dir);
+        SaveGame.RunScript(nameof(RayOfLightScript));
     }
 
     public override string Name => "Ray of Light";
