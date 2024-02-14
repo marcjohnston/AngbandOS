@@ -5,17 +5,19 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Spells.Folk;
+namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class FolkSpellRecharging : Spell
+internal class RechargeItemScript : Script, IScript
 {
-    private FolkSpellRecharging(SaveGame saveGame) : base(saveGame) { }
-    public override void Cast()
-    {
-        SaveGame.RunScript(nameof(RechargeItemScript));
-    }
+    private RechargeItemScript(SaveGame saveGame) : base(saveGame) { }
 
-    public override string Name => "Recharging";
-    
+    /// <summary>
+    /// Executes the script.
+    /// </summary>
+    /// <returns></returns>
+    public void ExecuteScript()
+    {
+        SaveGame.Recharge(SaveGame.ExperienceLevel * 2);
+    }
 }
