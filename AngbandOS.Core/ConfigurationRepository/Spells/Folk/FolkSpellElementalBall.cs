@@ -13,30 +13,7 @@ internal class FolkSpellElementalBall : Spell
     private FolkSpellElementalBall(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        if (!SaveGame.GetDirectionWithAim(out int dir))
-        {
-            return;
-        }
-        Projectile dummy;
-        switch (SaveGame.DieRoll(4))
-        {
-            case 1:
-                dummy = SaveGame.SingletonRepository.Projectiles.Get(nameof(FireProjectile));
-                break;
-
-            case 2:
-                dummy = SaveGame.SingletonRepository.Projectiles.Get(nameof(ElecProjectile));
-                break;
-
-            case 3:
-                dummy = SaveGame.SingletonRepository.Projectiles.Get(nameof(ColdProjectile));
-                break;
-
-            default:
-                dummy = SaveGame.SingletonRepository.Projectiles.Get(nameof(AcidProjectile));
-                break;
-        }
-        SaveGame.FireBall(dummy, dir, 75 + SaveGame.ExperienceLevel, 2);
+        SaveGame.RunScript(nameof(ElementalBallScript));
     }
 
     public override string Name => "Teleport Away";
