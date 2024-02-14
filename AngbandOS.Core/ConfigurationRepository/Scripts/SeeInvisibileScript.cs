@@ -5,17 +5,19 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Spells.Folk;
+namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class FolkSpellStoneToMud : Spell
+internal class SeeInvisibileScript : Script, IScript
 {
-    private FolkSpellStoneToMud(SaveGame saveGame) : base(saveGame) { }
-    public override void Cast()
-    {
-        SaveGame.RunScript(nameof(StoneToMudScript));
-    }
+    private SeeInvisibileScript(SaveGame saveGame) : base(saveGame) { }
 
-    public override string Name => "Stone to Mud";
-    
+    /// <summary>
+    /// Adds between 24 and 48 turns of see invisibility.
+    /// </summary>
+    /// <returns></returns>
+    public void ExecuteScript()
+    {
+        SaveGame.TimedSeeInvisibility.AddTimer(SaveGame.DieRoll(24) + 24);
+    }
 }

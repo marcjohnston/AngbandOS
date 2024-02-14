@@ -8,16 +8,20 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class SeeInvisibilityScript : Script, IScript
+internal class StoneToMudScript : Script, IScript
 {
-    private SeeInvisibilityScript(SaveGame saveGame) : base(saveGame) { }
+    private StoneToMudScript(SaveGame saveGame) : base(saveGame) { }
 
     /// <summary>
-    /// Adds between 24 and 48 turns of see invisibility.
+    /// Executes the script.
     /// </summary>
     /// <returns></returns>
     public void ExecuteScript()
     {
-        SaveGame.TimedSeeInvisibility.AddTimer(SaveGame.DieRoll(24) + 24);
+        if (!SaveGame.GetDirectionWithAim(out int dir))
+        {
+            return;
+        }
+        SaveGame.WallToMud(dir);
     }
 }
