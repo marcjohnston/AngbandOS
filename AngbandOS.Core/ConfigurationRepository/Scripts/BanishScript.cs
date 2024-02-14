@@ -5,17 +5,22 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Spells.Life;
+namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class LifeSpellBanish : Spell
+internal class BanishScript : Script, IScript
 {
-    private LifeSpellBanish(SaveGame saveGame) : base(saveGame) { }
-    public override void Cast()
-    {
-        SaveGame.RunScript(nameof(BanishScript));
-    }
+    private BanishScript(SaveGame saveGame) : base(saveGame) { }
 
-    public override string Name => "Banish";
-    
+    /// <summary>
+    /// Executes the script.
+    /// </summary>
+    /// <returns></returns>
+    public void ExecuteScript()
+    {
+        if (SaveGame.BanishEvil(100))
+        {
+            SaveGame.MsgPrint("The power of your god banishes evil!");
+        }
+    }
 }
