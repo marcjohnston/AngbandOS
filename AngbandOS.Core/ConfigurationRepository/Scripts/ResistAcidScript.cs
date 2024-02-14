@@ -5,18 +5,19 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Spells.Folk;
+namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class FolkSpellResistAcid : Spell
+internal class ResistAcidScript : Script, IScript
 {
-    private FolkSpellResistAcid(SaveGame saveGame) : base(saveGame) { }
-    public override void Cast()
+    private ResistAcidScript(SaveGame saveGame) : base(saveGame) { }
+
+    /// <summary>
+    /// Executes the script.
+    /// </summary>
+    /// <returns></returns>
+    public void ExecuteScript()
     {
-        SaveGame.RunScript(nameof(ResistAcidScript));
+        SaveGame.TimedAcidResistance.AddTimer(SaveGame.DieRoll(20) + 20);
     }
-
-    public override string Name => "Resist Acid";
-
-    protected override string LearnedDetails => "dur 20+d20";
 }
