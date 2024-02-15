@@ -102,9 +102,9 @@ internal abstract class Tile : IGetKey<string>
     public virtual bool IsBasicWall => false;
 
     /// <summary>
-    /// The tile is a closed door (not including a secret door.
+    /// Returns true for all visible doors (locked and jammed); false, otherwise.  Secret doors return false; all other doors return true.
     /// </summary>
-    public virtual bool IsClosedDoor => false;
+    public virtual bool IsVisibleDoor => false;
 
     /// <summary>
     /// The tile is 'interesting' and should be noticed when the player looks around.

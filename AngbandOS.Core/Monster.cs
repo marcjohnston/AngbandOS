@@ -873,7 +873,7 @@ internal class Monster : IItemContainer
                 }
             }
             // If we're trying to get through a door
-            else if (tile.FeatureType.IsClosedDoor)
+            else if (tile.FeatureType.IsVisibleDoor)
             {
                 bool mayBash = true;
                 doTurn = true;

@@ -44,7 +44,7 @@ internal class EatRockActiveMutation : Mutation
             SaveGame.MsgPrint("You don't like the woody taste!");
             return;
         }
-        if (cPtr.FeatureType.IsClosedDoor || cPtr.FeatureType.IsSecretDoor || cPtr.FeatureType.IsRubble)
+        if (cPtr.FeatureType.IsVisibleDoor || cPtr.FeatureType.IsSecretDoor || cPtr.FeatureType.IsRubble)
         {
             SaveGame.SetFood(SaveGame.Food + 3000);
         }

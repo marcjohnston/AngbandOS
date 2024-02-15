@@ -19,7 +19,7 @@ internal class JammedDoor7Tile : Tile
     public override bool BlocksLos => true;
     public override string Description => "jammed door";
     public override bool DimsOutsideLOS => true;
-    public override bool IsClosedDoor => true;
+    public override bool IsVisibleDoor => true;
     public override int MapPriority => 17;
 
     /// <summary>

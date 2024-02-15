@@ -18,7 +18,7 @@ internal class JamDoorProjectile : Projectile
     {
         GridTile cPtr = SaveGame.Grid[y][x];
         bool obvious = false;
-        if (cPtr.FeatureType.IsClosedDoor)
+        if (cPtr.FeatureType.IsVisibleDoor)
         {
             if (cPtr.FeatureType.Name.Contains("Locked"))
             {

@@ -49,7 +49,7 @@ internal class OpenScript : Script, IScript, IRepeatableScript
             GridTile tile = SaveGame.Grid[y][x];
             Item? chestItem = SaveGame.ChestCheck(y, x);
             // Make sure there is something to open in the direction we chose
-            if (!tile.FeatureType.IsClosedDoor && chestItem == null)
+            if (!tile.FeatureType.IsVisibleDoor && chestItem == null)
             {
                 SaveGame.MsgPrint("You see nothing there to open.");
             }

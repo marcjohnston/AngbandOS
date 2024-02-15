@@ -40,7 +40,7 @@ internal class TunnelScript : Script, IScript, IRepeatableScript
             {
                 SaveGame.MsgPrint("You cannot tunnel through air.");
             }
-            else if (tile.FeatureType.IsClosedDoor)
+            else if (tile.FeatureType.IsVisibleDoor)
             {
                 SaveGame.MsgPrint("You cannot tunnel through doors.");
             }

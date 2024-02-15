@@ -18,13 +18,13 @@ internal class KillDoorProjectile : Projectile
     {
         GridTile cPtr = SaveGame.Grid[y][x];
         bool obvious = false;
-        if (cPtr.FeatureType.IsClosedDoor || cPtr.FeatureType.IsOpenDoor || cPtr.FeatureType.IsUnidentifiedTrap || cPtr.FeatureType.IsTrap)
+        if (cPtr.FeatureType.IsVisibleDoor || cPtr.FeatureType.IsOpenDoor || cPtr.FeatureType.IsUnidentifiedTrap || cPtr.FeatureType.IsTrap)
         {
             if (SaveGame.PlayerHasLosBold(y, x))
             {
                 SaveGame.MsgPrint("There is a bright flash of light!");
                 obvious = true;
-                if (cPtr.FeatureType.IsClosedDoor)
+                if (cPtr.FeatureType.IsVisibleDoor)
                 {
                     SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateMonstersFlaggedAction)).Set();
                     SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateLightFlaggedAction)).Set();

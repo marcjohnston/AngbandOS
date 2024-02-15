@@ -40,7 +40,7 @@ internal class BashScript : Script, IScript, IRepeatableScript
             int x = SaveGame.MapX + SaveGame.KeypadDirectionXOffset[dir];
             GridTile tile = SaveGame.Grid[y][x];
             // Can only bash closed doors
-            if (!tile.FeatureType.IsClosedDoor)
+            if (!tile.FeatureType.IsVisibleDoor)
             {
                 SaveGame.MsgPrint("You see nothing there to bash.");
             }

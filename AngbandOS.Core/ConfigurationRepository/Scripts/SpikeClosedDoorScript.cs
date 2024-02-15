@@ -35,7 +35,7 @@ internal class SpikeClosedDoorScript : Script, IScript, IRepeatableScript
             int x = SaveGame.MapX + SaveGame.KeypadDirectionXOffset[dir];
             GridTile tile = SaveGame.Grid[y][x];
             // Make sure it can be spiked and we have spikes to do it with
-            if (!tile.FeatureType.IsClosedDoor)
+            if (!tile.FeatureType.IsVisibleDoor)
             {
                 SaveGame.MsgPrint("You see nothing there to spike.");
             }

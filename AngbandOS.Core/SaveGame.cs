@@ -4746,7 +4746,7 @@ internal class SaveGame
                 {
                     ReplaceSecretDoor(y, x);
                 }
-                if (cPtr.FeatureType.IsClosedDoor || cPtr.FeatureType.IsOpenDoor)
+                if (cPtr.FeatureType.IsVisibleDoor || cPtr.FeatureType.IsOpenDoor)
                 {
                     cPtr.TileFlags.Set(GridTile.PlayerMemorized);
                     RedrawSingleLocation(y, x);
@@ -6905,7 +6905,7 @@ internal class SaveGame
                 continue;
             }
             // It needs to be an actual door
-            if (!Grid[yy][xx].FeatureType.IsClosedDoor)
+            if (!Grid[yy][xx].FeatureType.IsVisibleDoor)
             {
                 continue;
             }
@@ -7455,7 +7455,7 @@ internal class SaveGame
                     CameFrom = LevelStart.StartWalk;
                     DoCmdSaveGame(true);
                 }
-                else if (tile.FeatureType.IsClosedDoor)
+                else if (tile.FeatureType.IsVisibleDoor)
                 {
                     MsgPrint("You feel a closed door blocking your way.");
                     tile.TileFlags.Set(GridTile.PlayerMemorized);
@@ -7538,7 +7538,7 @@ internal class SaveGame
                     DoCmdSaveGame(true);
                 }
                 // If we can see that we're walking into a closed door, try to open it
-                else if (tile.FeatureType.IsClosedDoor)
+                else if (tile.FeatureType.IsVisibleDoor)
                 {
                     if (OpenDoor(newY, newX))
                     {
