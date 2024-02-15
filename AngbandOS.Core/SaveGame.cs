@@ -12460,31 +12460,32 @@ internal class SaveGame
     public void PlaceRandomDoor(int y, int x)
     {
         GridTile cPtr = Grid[y][x];
-        int tmp = RandomLessThan(1000);
-        if (tmp < 300)
+        WeightedRandom<Tile> doorTiles = new WeightedRandom<Tile>(this);
+        doorTiles.Add(2400, SingletonRepository.Tiles.Get("OpenDoor"));
+        doorTiles.Add(800, SingletonRepository.Tiles.Get("BrokenDoor"));
+        doorTiles.Add(1600, SingletonRepository.Tiles.Get("SecretDoor"));
+        doorTiles.Add(2400, SingletonRepository.Tiles.Get("LockedDoor0"));
+        doorTiles.Add(136, SingletonRepository.Tiles.Get("LockedDoor1"));
+        doorTiles.Add(136, SingletonRepository.Tiles.Get("LockedDoor2"));
+        doorTiles.Add(136, SingletonRepository.Tiles.Get("LockedDoor3"));
+        doorTiles.Add(136, SingletonRepository.Tiles.Get("LockedDoor4"));
+        doorTiles.Add(136, SingletonRepository.Tiles.Get("LockedDoor5"));
+        doorTiles.Add(136, SingletonRepository.Tiles.Get("LockedDoor6"));
+        doorTiles.Add(136, SingletonRepository.Tiles.Get("LockedDoor7"));
+        doorTiles.Add(1, SingletonRepository.Tiles.Get("JammedDoor0"));
+        doorTiles.Add(1, SingletonRepository.Tiles.Get("JammedDoor1"));
+        doorTiles.Add(1, SingletonRepository.Tiles.Get("JammedDoor2"));
+        doorTiles.Add(1, SingletonRepository.Tiles.Get("JammedDoor3"));
+        doorTiles.Add(1, SingletonRepository.Tiles.Get("JammedDoor4"));
+        doorTiles.Add(1, SingletonRepository.Tiles.Get("JammedDoor5"));
+        doorTiles.Add(1, SingletonRepository.Tiles.Get("JammedDoor6"));
+        doorTiles.Add(1, SingletonRepository.Tiles.Get("JammedDoor7"));
+        Tile? door = doorTiles.Choose();
+        if (door == null)
         {
-            cPtr.SetFeature("OpenDoor");
+            throw new Exception("No doors to choose from for random placement.");
         }
-        else if (tmp < 400)
-        {
-            cPtr.SetFeature("BrokenDoor");
-        }
-        else if (tmp < 600)
-        {
-            cPtr.SetFeature("SecretDoor");
-        }
-        else if (tmp < 900)
-        {
-            cPtr.SetFeature("LockedDoor0");
-        }
-        else if (tmp < 999)
-        {
-            cPtr.SetFeature($"LockedDoor{DieRoll(7)}");
-        }
-        else
-        {
-            cPtr.SetFeature($"JammedDoor{RandomLessThan(8)}");
-        }
+        cPtr.SetFeature(door);
     }
 
     private void ResolvePaths()
