@@ -28,7 +28,7 @@ internal class KillTrapProjectile : Projectile
             cPtr.TileFlags.Clear(GridTile.PlayerMemorized);
             SaveGame.RevertTileToBackground(y, x);
         }
-        else if (cPtr.FeatureType.IsSecretDoor || cPtr.FeatureType.IsLockedDoor)
+        else if (cPtr.FeatureType.IsSecretDoor || cPtr.FeatureType.IsClosedDoor)
         {
             SaveGame.CaveSetFeat(y, x, "LockedDoor0");
             if (SaveGame.PlayerHasLosBold(y, x))

@@ -172,14 +172,14 @@ internal abstract class Tile : IGetKey<string>
     public virtual bool IsSecretDoor => false;
 
     /// <summary>
-    /// Returns true, if the tile is a locked door.  Returns false, by default.  Locked doors all return true.
+    /// Returns true, if the tile is a closed door.  Returns false, by default.  Locked doors all return true.
     /// </summary>
-    public virtual bool IsLockedDoor => false;
+    public virtual bool IsClosedDoor => false;
 
     /// <summary>
-    /// Returns true, if the tile is a jammed door.  Returns false, by default.  Jammed doors all return true.
+    /// Returns true, if the tile is a door that is jammed closed.  Returns false, by default.  Jammed doors all return true.
     /// </summary>
-    public virtual bool IsJammedDoor => false;
+    public virtual bool IsJammedClosedDoor => false;
 
     /// <summary>
     /// Returns true, if the tile is a trap door.  Returns false, by default.  Trap doors all return true.

@@ -6910,7 +6910,7 @@ internal class SaveGame
                 continue;
             }
             // It can't be a secret door
-            if (Grid[yy][xx].FeatureType.Name == "SecretDoor")
+            if (Grid[yy][xx].FeatureType.IsSecretDoor)
             {
                 continue;
             }

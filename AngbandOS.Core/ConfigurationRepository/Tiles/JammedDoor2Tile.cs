@@ -25,5 +25,5 @@ internal class JammedDoor2Tile : Tile
     /// <summary>
     /// Returns true, because this tile is a jammed door.
     /// </summary>
-    public override bool IsJammedDoor => true;
+    public override bool IsJammedClosedDoor => true;
 }

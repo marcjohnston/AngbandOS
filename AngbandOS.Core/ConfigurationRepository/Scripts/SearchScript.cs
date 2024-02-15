@@ -63,7 +63,7 @@ internal class SearchScript : Script, IScript, IRepeatableScript
                         SaveGame.MsgPrint("You have found a trap.");
                         SaveGame.Disturb(false);
                     }
-                    if (tile.FeatureType.Name == "SecretDoor")
+                    if (tile.FeatureType.IsSecretDoor)
                     {
                         // Replace the secret door with a visible door
                         SaveGame.MsgPrint("You have found a secret door.");

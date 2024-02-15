@@ -59,12 +59,12 @@ internal class SpikeClosedDoorScript : Script, IScript, IRepeatableScript
                     SaveGame.EnergyUse = 100;
                     SaveGame.MsgPrint("You jam the door with a spike.");
                     // Replace the door feature with a jammed door
-                    if (tile.FeatureType.IsLockedDoor)
+                    if (tile.FeatureType.IsClosedDoor)
                     {
                         tile.SetFeature(tile.FeatureType.Name.Replace("Locked", "Jammed"));
                     }
                     // If it's already jammed, strengthen it
-                    if (tile.FeatureType.IsJammedDoor)
+                    if (tile.FeatureType.IsJammedClosedDoor)
                     {
                         int strength = int.Parse(tile.FeatureType.Name.Substring(10));
                         if (strength < 7)
