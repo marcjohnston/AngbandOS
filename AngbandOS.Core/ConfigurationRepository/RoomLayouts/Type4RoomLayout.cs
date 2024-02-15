@@ -34,37 +34,39 @@ internal class Type4RoomLayout : RoomLayout
                 }
             }
         }
+        Tile wallOuterTile = SaveGame.SingletonRepository.Tiles.Get("WallOuter");
         for (y = y1 - 1; y <= y2 + 1; y++)
         {
             cPtr = SaveGame.Grid[y][x1 - 1];
-            cPtr.SetFeature("WallOuter");
+            cPtr.SetFeature(wallOuterTile);
             cPtr = SaveGame.Grid[y][x2 + 1];
-            cPtr.SetFeature("WallOuter");
+            cPtr.SetFeature(wallOuterTile);
         }
         for (x = x1 - 1; x <= x2 + 1; x++)
         {
             cPtr = SaveGame.Grid[y1 - 1][x];
-            cPtr.SetFeature("WallOuter");
+            cPtr.SetFeature(wallOuterTile);
             cPtr = SaveGame.Grid[y2 + 1][x];
-            cPtr.SetFeature("WallOuter");
+            cPtr.SetFeature(wallOuterTile);
         }
         y1 += 2;
         y2 -= 2;
         x1 += 2;
         x2 -= 2;
+        Tile wallInnerTile = SaveGame.SingletonRepository.Tiles.Get("WallInner");
         for (y = y1 - 1; y <= y2 + 1; y++)
         {
             cPtr = SaveGame.Grid[y][x1 - 1];
-            cPtr.SetFeature("WallInner");
+            cPtr.SetFeature(wallInnerTile);
             cPtr = SaveGame.Grid[y][x2 + 1];
-            cPtr.SetFeature("WallInner");
+            cPtr.SetFeature(wallInnerTile);
         }
         for (x = x1 - 1; x <= x2 + 1; x++)
         {
             cPtr = SaveGame.Grid[y1 - 1][x];
-            cPtr.SetFeature("WallInner");
+            cPtr.SetFeature(wallInnerTile);
             cPtr = SaveGame.Grid[y2 + 1][x];
-            cPtr.SetFeature("WallInner");
+            cPtr.SetFeature(wallInnerTile);
         }
         switch (SaveGame.DieRoll(5))
         {
@@ -118,7 +120,7 @@ internal class Type4RoomLayout : RoomLayout
                             continue;
                         }
                         cPtr = SaveGame.Grid[y][x];
-                        cPtr.SetFeature("WallInner");
+                        cPtr.SetFeature(wallInnerTile);
                     }
                 }
                 switch (SaveGame.DieRoll(4))
@@ -175,7 +177,7 @@ internal class Type4RoomLayout : RoomLayout
                     for (x = xval - 1; x <= xval + 1; x++)
                     {
                         cPtr = SaveGame.Grid[y][x];
-                        cPtr.SetFeature("WallInner");
+                        cPtr.SetFeature(wallInnerTile);
                     }
                 }
                 if (SaveGame.RandomLessThan(2) == 0)
@@ -186,12 +188,12 @@ internal class Type4RoomLayout : RoomLayout
                         for (x = xval - 5 - tmp; x <= xval - 3 - tmp; x++)
                         {
                             cPtr = SaveGame.Grid[y][x];
-                            cPtr.SetFeature("WallInner");
+                            cPtr.SetFeature(wallInnerTile);
                         }
                         for (x = xval + 3 + tmp; x <= xval + 5 + tmp; x++)
                         {
                             cPtr = SaveGame.Grid[y][x];
-                            cPtr.SetFeature("WallInner");
+                            cPtr.SetFeature(wallInnerTile);
                         }
                     }
                 }
@@ -200,14 +202,14 @@ internal class Type4RoomLayout : RoomLayout
                     for (x = xval - 5; x <= xval + 5; x++)
                     {
                         cPtr = SaveGame.Grid[yval - 1][x];
-                        cPtr.SetFeature("WallInner");
+                        cPtr.SetFeature(wallInnerTile);
                         cPtr = SaveGame.Grid[yval + 1][x];
-                        cPtr.SetFeature("WallInner");
+                        cPtr.SetFeature(wallInnerTile);
                     }
                     cPtr = SaveGame.Grid[yval][xval - 5];
-                    cPtr.SetFeature("WallInner");
+                    cPtr.SetFeature(wallInnerTile);
                     cPtr = SaveGame.Grid[yval][xval + 5];
-                    cPtr.SetFeature("WallInner");
+                    cPtr.SetFeature(wallInnerTile);
                     PlaceSecretDoor(yval - 3 + (SaveGame.DieRoll(2) * 2), xval - 3);
                     PlaceSecretDoor(yval - 3 + (SaveGame.DieRoll(2) * 2), xval + 3);
                     VaultMonsters(yval, xval - 2, SaveGame.DieRoll(2));
@@ -249,7 +251,7 @@ internal class Type4RoomLayout : RoomLayout
                         if ((1 & (x + y)) != 0)
                         {
                             cPtr = SaveGame.Grid[y][x];
-                            cPtr.SetFeature("WallInner");
+                            cPtr.SetFeature(wallInnerTile);
                         }
                     }
                 }
@@ -264,12 +266,12 @@ internal class Type4RoomLayout : RoomLayout
                 for (y = y1; y <= y2; y++)
                 {
                     cPtr = SaveGame.Grid[y][xval];
-                    cPtr.SetFeature("WallInner");
+                    cPtr.SetFeature(wallInnerTile);
                 }
                 for (x = x1; x <= x2; x++)
                 {
                     cPtr = SaveGame.Grid[yval][x];
-                    cPtr.SetFeature("WallInner");
+                    cPtr.SetFeature(wallInnerTile);
                 }
                 if (SaveGame.RandomLessThan(100) < 50)
                 {
@@ -329,13 +331,13 @@ internal class Type4RoomLayout : RoomLayout
     private void PlaceDownStairs(int y, int x)
     {
         GridTile cPtr = SaveGame.Grid[y][x];
-        cPtr.SetFeature("DownStair");
+        cPtr.SetFeature(SaveGame.SingletonRepository.Tiles.Get("DownStair"));
     }
 
     private void PlaceUpStairs(int y, int x)
     {
         GridTile cPtr = SaveGame.Grid[y][x];
-        cPtr.SetFeature("UpStair");
+        cPtr.SetFeature(SaveGame.SingletonRepository.Tiles.Get("UpStair"));
     }
 
     private void VaultObjects(int y, int x, int num)

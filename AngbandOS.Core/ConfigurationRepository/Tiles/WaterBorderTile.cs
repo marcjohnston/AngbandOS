@@ -20,4 +20,5 @@ internal class WaterBorderTile : Tile
     public override bool DimsOutsideLOS => true;
     public override bool IsPermanent => true;
     public override int MapPriority => 0;
+    public override bool IsWater => true;
 }

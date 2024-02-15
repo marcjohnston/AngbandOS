@@ -144,6 +144,10 @@ internal abstract class Tile : IGetKey<string>
     public virtual bool IsWall => false;
 
     /// <summary>
+    /// Returns true, if the tile is water; false, otherwise.  Returns false, by default.  The WaterBorder and the Water tiles both return true.
+    /// </summary>
+    public virtual bool IsWater => false;
+    /// <summary>
     /// The priority on the map.
     /// </summary>
     public abstract int MapPriority { get; }

@@ -215,6 +215,9 @@ internal class StandardDungeonGenerator : DungeonGenerator
 
     private void DestroyLevel()
     {
+        Tile wallBasicTile = SaveGame.SingletonRepository.Tiles.Get("WallBasic");
+        Tile quartzTile = SaveGame.SingletonRepository.Tiles.Get("Quartz");
+        Tile magmaTile = SaveGame.SingletonRepository.Tiles.Get("Magma");
         for (int n = 0; n < SaveGame.DieRoll(5); n++)
         {
             int x1 = SaveGame.RandomBetween(5, SaveGame.CurWid - 1 - 5);
@@ -242,15 +245,15 @@ internal class StandardDungeonGenerator : DungeonGenerator
                         int t = SaveGame.RandomLessThan(200);
                         if (t < 20)
                         {
-                            cPtr.SetFeature("WallBasic");
+                            cPtr.SetFeature(wallBasicTile);
                         }
                         else if (t < 70)
                         {
-                            cPtr.SetFeature("Quartz");
+                            cPtr.SetFeature(quartzTile);
                         }
                         else if (t < 100)
                         {
-                            cPtr.SetFeature("Magma");
+                            cPtr.SetFeature(magmaTile);
                         }
                         else
                         {
@@ -339,11 +342,11 @@ internal class StandardDungeonGenerator : DungeonGenerator
                 int rounded = (int)(v * 10);
                 if (rounded < 2 || rounded > 5)
                 {
-                    cPtr.SetFeature("WallBasic");
+                    cPtr.SetFeature(SaveGame.SingletonRepository.Tiles.Get("WallBasic"));
                 }
                 else
                 {
-                    cPtr.SetFeature("DungeonFloor");
+                    cPtr.SetFeature(SaveGame.SingletonRepository.Tiles.Get("DungeonFloor"));
                 }
             }
         }
@@ -358,22 +361,22 @@ internal class StandardDungeonGenerator : DungeonGenerator
         for (int x = 0; x < SaveGame.CurWid; x++)
         {
             GridTile cPtr = SaveGame.Grid[0][x];
-            cPtr.SetFeature("WallPermSolid");
+            cPtr.SetFeature(SaveGame.SingletonRepository.Tiles.Get("WallPermSolid"));
         }
         for (int x = 0; x < SaveGame.CurWid; x++)
         {
             GridTile cPtr = SaveGame.Grid[SaveGame.CurHgt - 1][x];
-            cPtr.SetFeature("WallPermSolid");
+            cPtr.SetFeature(SaveGame.SingletonRepository.Tiles.Get("WallPermSolid"));
         }
         for (int y = 0; y < SaveGame.CurHgt; y++)
         {
             GridTile cPtr = SaveGame.Grid[y][0];
-            cPtr.SetFeature("WallPermSolid");
+            cPtr.SetFeature(SaveGame.SingletonRepository.Tiles.Get("WallPermSolid"));
         }
         for (int y = 0; y < SaveGame.CurHgt; y++)
         {
             GridTile cPtr = SaveGame.Grid[y][SaveGame.CurWid - 1];
-            cPtr.SetFeature("WallPermSolid");
+            cPtr.SetFeature(SaveGame.SingletonRepository.Tiles.Get("WallPermSolid"));
         }
         if (SaveGame.DieRoll(_darkEmpty) != 1 || SaveGame.DieRoll(100) > SaveGame.Difficulty)
         {
@@ -432,7 +435,7 @@ internal class StandardDungeonGenerator : DungeonGenerator
                     GridTile cPtr = SaveGame.Grid[y][x];
                     if (SaveGame.CurrentDepth <= 0)
                     {
-                        cPtr.SetFeature("DownStair");
+                        cPtr.SetFeature(SaveGame.SingletonRepository.Tiles.Get("DownStair"));
                     }
                     else if (SaveGame.IsQuest(SaveGame.CurrentDepth) || SaveGame.CurrentDepth == SaveGame.CurDungeon.MaxLevel)
                     {
@@ -495,7 +498,7 @@ internal class StandardDungeonGenerator : DungeonGenerator
     private void PlaceRubble(int y, int x)
     {
         GridTile cPtr = SaveGame.Grid[y][x];
-        cPtr.SetFeature("Rubble");
+        cPtr.SetFeature(SaveGame.SingletonRepository.Tiles.Get("Rubble"));
     }
 
     private void AllocObject(int set, int typ, int num)
@@ -723,7 +726,7 @@ internal class StandardDungeonGenerator : DungeonGenerator
                     {
                         if (SaveGame.Grid[y][x].FeatureType.Name == "WallOuter")
                         {
-                            SaveGame.Grid[y][x].SetFeature("WallSolid");
+                            SaveGame.Grid[y][x].SetFeature(SaveGame.SingletonRepository.Tiles.Get("WallSolid"));
                         }
                     }
                 }
@@ -838,7 +841,7 @@ internal class StandardDungeonGenerator : DungeonGenerator
                 }
                 else
                 {
-                    cPtr.SetFeature("WallBasic");
+                    cPtr.SetFeature(SaveGame.SingletonRepository.Tiles.Get("WallBasic"));
                 }
             }
         }
@@ -934,22 +937,22 @@ internal class StandardDungeonGenerator : DungeonGenerator
         for (x = 0; x < SaveGame.CurWid; x++)
         {
             GridTile cPtr = SaveGame.Grid[0][x];
-            cPtr.SetFeature("WallPermSolid");
+            cPtr.SetFeature(SaveGame.SingletonRepository.Tiles.Get("WallPermSolid"));
         }
         for (x = 0; x < SaveGame.CurWid; x++)
         {
             GridTile cPtr = SaveGame.Grid[SaveGame.CurHgt - 1][x];
-            cPtr.SetFeature("WallPermSolid");
+            cPtr.SetFeature(SaveGame.SingletonRepository.Tiles.Get("WallPermSolid"));
         }
         for (y = 0; y < SaveGame.CurHgt; y++)
         {
             GridTile cPtr = SaveGame.Grid[y][0];
-            cPtr.SetFeature("WallPermSolid");
+            cPtr.SetFeature(SaveGame.SingletonRepository.Tiles.Get("WallPermSolid"));
         }
         for (y = 0; y < SaveGame.CurHgt; y++)
         {
             GridTile cPtr = SaveGame.Grid[y][SaveGame.CurWid - 1];
-            cPtr.SetFeature("WallPermSolid");
+            cPtr.SetFeature(SaveGame.SingletonRepository.Tiles.Get("WallPermSolid"));
         }
         for (int i = 0; i < CentN; i++)
         {
