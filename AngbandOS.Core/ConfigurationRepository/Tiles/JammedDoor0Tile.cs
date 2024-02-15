@@ -21,7 +21,7 @@ internal class JammedDoor0Tile : Tile
     public override bool DimsOutsideLOS => true;
     public override bool IsVisibleDoor => true;
     public override int MapPriority => 17;
-
+    public override int LockLevel => 0;
     /// <summary>
     /// Returns true, because this tile is a jammed door.
     /// </summary>

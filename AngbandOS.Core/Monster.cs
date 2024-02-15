@@ -881,7 +881,7 @@ internal class Monster : IItemContainer
                 if (Race.OpenDoor)
                 {
                     // We can always open unlocked doors
-                    if (tile.FeatureType.Name == "LockedDoor0" || tile.FeatureType.IsSecretDoor)
+                    if ((tile.FeatureType.IsClosedDoor && tile.FeatureType.LockLevel == 0) || tile.FeatureType.IsSecretDoor)
                     {
                         didOpenDoor = true;
                         mayBash = false;

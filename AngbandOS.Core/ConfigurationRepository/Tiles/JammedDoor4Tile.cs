@@ -22,6 +22,8 @@ internal class JammedDoor4Tile : Tile
     public override bool IsVisibleDoor => true;
     public override int MapPriority => 17;
 
+    public override int LockLevel => 4;
+
     /// <summary>
     /// Returns true, because this tile is a jammed door.
     /// </summary>

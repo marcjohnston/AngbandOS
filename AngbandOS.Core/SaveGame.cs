@@ -8815,7 +8815,7 @@ internal class SaveGame
             MsgPrint("The door appears to be stuck.");
         }
         // Most doors are locked, so try to pick the lock
-        else if (tile.FeatureType.Name != "LockedDoor0") // LockedDoor0 is really a closed door
+        else if (tile.FeatureType.IsClosedDoor && tile.FeatureType.LockLevel == 0)
         {
             int skill = SkillDisarmTraps;
             // Lockpicking is hard in the dark
@@ -8828,7 +8828,7 @@ internal class SaveGame
             {
                 skill /= 10;
             }
-            int chance = int.Parse(tile.FeatureType.Name.Substring(10));
+            int chance = tile.FeatureType.LockLevel;
             chance = skill - (chance * 4);
             if (chance < 2)
             {

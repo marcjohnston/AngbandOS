@@ -106,6 +106,8 @@ internal abstract class Tile : IGetKey<string>
     /// </summary>
     public virtual bool IsVisibleDoor => false;
 
+    public virtual int LockLevel => 0;
+
     /// <summary>
     /// The tile is 'interesting' and should be noticed when the player looks around.
     /// </summary>
@@ -172,7 +174,7 @@ internal abstract class Tile : IGetKey<string>
     public virtual bool IsSecretDoor => false;
 
     /// <summary>
-    /// Returns true, if the tile is a closed door.  Returns false, by default.  Locked doors all return true.
+    /// Returns true, if the tile is a closed door.  Returns false, by default.  Locked doors all return true.  Jammed doors return false.  Returns false, by default.
     /// </summary>
     public virtual bool IsClosedDoor => false;
 

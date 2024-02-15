@@ -22,6 +22,8 @@ internal class LockedDoor5Tile : Tile
     public override bool IsVisibleDoor => true;
     public override int MapPriority => 17;
 
+    public override int LockLevel => 5;
+
     /// <summary>
     /// Returns true, because this tile is a locked door.
     /// </summary>
