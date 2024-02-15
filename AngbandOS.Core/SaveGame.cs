@@ -16109,73 +16109,29 @@ internal class SaveGame
         {
             trapType = DieRoll(15);
         }
-        switch (trapType)
+        WeightedRandom<Tile> traps = new WeightedRandom<Tile>(this);
+        traps.Add(1, SingletonRepository.Tiles.Get("AcidTrap"));
+        traps.Add(1, SingletonRepository.Tiles.Get("FireTrap"));
+        traps.Add(1, SingletonRepository.Tiles.Get("StrDart"));
+        traps.Add(1, SingletonRepository.Tiles.Get("ConDart"));
+        traps.Add(1, SingletonRepository.Tiles.Get("DexDart"));
+        traps.Add(1, SingletonRepository.Tiles.Get("SlowDart"));
+        traps.Add(1, SingletonRepository.Tiles.Get("PoisonGas"));
+        traps.Add(1, SingletonRepository.Tiles.Get("ConfuseGas"));
+        traps.Add(1, SingletonRepository.Tiles.Get("SleepGas"));
+        traps.Add(1, SingletonRepository.Tiles.Get("BlindGas"));
+        traps.Add(1, SingletonRepository.Tiles.Get("SummonRune"));
+        traps.Add(1, SingletonRepository.Tiles.Get("TeleportRune"));
+        traps.Add(1, SingletonRepository.Tiles.Get("Pit"));
+        traps.Add(1, SingletonRepository.Tiles.Get("SpikedPit"));
+        traps.Add(1, SingletonRepository.Tiles.Get("PoisonPit"));
+        traps.Add(1, SingletonRepository.Tiles.Get("TrapDoor"));
+        Tile? trapTile = traps.Choose();
+        if (trapTile == null)
         {
-            case 1:
-                feat = "AcidTrap";
-                break;
-
-            case 2:
-                feat = "FireTrap";
-                break;
-
-            case 3:
-                feat = "StrDart";
-                break;
-
-            case 4:
-                feat = "ConDart";
-                break;
-
-            case 5:
-                feat = "DexDart";
-                break;
-
-            case 6:
-                feat = "SlowDart";
-                break;
-
-            case 7:
-                feat = "PoisonGas";
-                break;
-
-            case 8:
-                feat = "ConfuseGas";
-                break;
-
-            case 9:
-                feat = "SleepGas";
-                break;
-
-            case 10:
-                feat = "BlindGas";
-                break;
-
-            case 11:
-                feat = "SummonRune";
-                break;
-
-            case 12:
-                feat = "TeleportRune";
-                break;
-
-            case 13:
-                feat = "Pit";
-                break;
-
-            case 14:
-                feat = "SpikedPit";
-                break;
-
-            case 15:
-                feat = "PoisonPit";
-                break;
-
-            default:
-                feat = "TrapDoor";
-                break;
+            throw new Exception("No trap selected for PickTrap.");
         }
-        CaveSetFeat(y, x, feat);
+        CaveSetFeat(y, x, trapTile.Name);
     }
 
     public void PlaceGold(int y, int x)
@@ -16334,19 +16290,21 @@ internal class SaveGame
 
     public void ReplaceSecretDoor(int y, int x)
     {
-        int tmp = RandomLessThan(400);
-        if (tmp < 300)
+        WeightedRandom<Tile> doorTiles = new WeightedRandom<Tile>(this);
+        doorTiles.Add(300, SingletonRepository.Tiles.Get("LockedDoor0"));
+        doorTiles.Add(16, SingletonRepository.Tiles.Get("LockedDoor1"));
+        doorTiles.Add(16, SingletonRepository.Tiles.Get("LockedDoor2"));
+        doorTiles.Add(16, SingletonRepository.Tiles.Get("LockedDoor3"));
+        doorTiles.Add(16, SingletonRepository.Tiles.Get("LockedDoor4"));
+        doorTiles.Add(16, SingletonRepository.Tiles.Get("LockedDoor5"));
+        doorTiles.Add(16, SingletonRepository.Tiles.Get("LockedDoor6"));
+        doorTiles.Add(16, SingletonRepository.Tiles.Get("LockedDoor7"));
+        Tile? doorTile = doorTiles.Choose();
+        if (doorTile == null)
         {
-            CaveSetFeat(y, x, "LockedDoor0");
+            throw new Exception("No door selected to replace secret door");
         }
-        else if (tmp < 999)
-        {
-            CaveSetFeat(y, x, $"LockedDoor{DieRoll(7)}");
-        }
-        else
-        {
-            CaveSetFeat(y, x, $"JammedDoor{RandomLessThan(8)}");
-        }
+        CaveSetFeat(y, x, doorTile.Name);
     }
 
     public void RevertTileToBackground(int y, int x)
