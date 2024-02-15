@@ -7,10 +7,41 @@
 
 namespace AngbandOS.Core;
 
+/// <summary>
+/// Represents an object capable of picking items from a weighted list.  The items in the list can be added specify varying and specific weights.  This object stores the weights
+/// of the objects as opposed to enumerating copies into large arrays.  This results in an add of item with O(1) and a choice selection process of O(n).
+/// </summary>
+/// <remarks>
+/// Example:
+/// We add three letters with weights of 3, 2 and 1.
+/// Add(3, "A")
+/// Add(2, "B")
+/// Add(1, "C")
+/// 
+/// An enumeration would look like:
+/// 0 - A
+/// 1 - A
+/// 2 - A
+/// 3 - B
+/// 4 - B
+/// 5 - C
+/// 
+/// Our internal structure will look like:
+/// _list[index]<sum, T> 
+/// _list[0]<3, "A"> // 0 + 3 "A"s
+/// _list[1]<5, "B"> // previous 3 + 2 "B"s
+/// _list[2]<6, "C"> // previos 5 + 1 "C"
+/// 
+/// Our choice selections are from 0 .. 5
+/// During the choice phase, we enumerate the _list indexes.  If the choice is greater than or equal to the key, we go to the index index.
+/// The last item in the list is guaranteed to have a value greater than the max choice.
+/// </remarks>
+/// <typeparam name="T"></typeparam>
 internal class WeightedRandom<T>
 {
     private readonly SaveGame SaveGame;
-    private Dictionary<int, T> dictionary = new Dictionary<int, T>();
+    private readonly List<KeyValuePair<int, T>> _list = new List<KeyValuePair<int, T>>();
+    private int _sum = 0;
 
     public WeightedRandom(SaveGame saveGame)
     {
@@ -40,21 +71,25 @@ internal class WeightedRandom<T>
 
     public void Add(int weight, params T[] values)
     {
-        for (int i = 0; i < weight; i++)
+        foreach (T value in values)
         {
-            foreach (T value in values)
-            {
-                dictionary.Add(dictionary.Count, value);
-            }
+            _sum += weight;
+            _list.Add(new KeyValuePair<int, T>(_sum, value));
         }
     }
+
     public T? Choose()
     {
-        if (dictionary.Count == 0)
+        if (_list.Count == 0)
         {
             return default;
         }
-        int choice = SaveGame.RandomLessThan(dictionary.Count);
-        return dictionary[choice];
+        int choice = SaveGame.RandomLessThan(_sum);
+        int index = 0;
+        while (choice >= _list[index].Key)
+        {
+            index++;
+        }
+        return _list[index].Value;
     }
 }
