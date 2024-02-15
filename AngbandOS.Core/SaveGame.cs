@@ -2665,7 +2665,7 @@ internal class SaveGame
                 }
                 DeleteObject(y, x);
                 MsgPrint("A magical stairway appears...");
-                CaveSetFeat(y, x, CurDungeon.Tower ? "UpStair" : "DownStair");
+                CaveSetFeat(y, x, CurDungeon.Tower ? SingletonRepository.Tiles.Get("UpStair") : SingletonRepository.Tiles.Get("DownStair"));
                 SingletonRepository.FlaggedActions.Get(nameof(UpdateScentFlaggedAction)).Set();
                 SingletonRepository.FlaggedActions.Get(nameof(UpdateMonstersFlaggedAction)).Set();
                 SingletonRepository.FlaggedActions.Get(nameof(UpdateLightFlaggedAction)).Set();
@@ -3056,7 +3056,7 @@ internal class SaveGame
             if (CaveValidBold(MapY, MapX))
             {
                 DeleteObject(MapY, MapX);
-                CaveSetFeat(MapY, MapX, CreateDownStair ? "DownStair" : "UpStair");
+                CaveSetFeat(MapY, MapX, CreateDownStair ? SingletonRepository.Tiles.Get("DownStair") : SingletonRepository.Tiles.Get("UpStair"));
             }
             CreateDownStair = false;
             CreateUpStair = false;
@@ -5263,7 +5263,7 @@ internal class SaveGame
             MsgPrint("The object resists the spell.");
             return;
         }
-        CaveSetFeat(MapY, MapX, "ElderSign");
+        CaveSetFeat(MapY, MapX, SingletonRepository.Tiles.Get("ElderSign"));
     }
 
     public void ElderSignCreation()
@@ -6068,21 +6068,19 @@ internal class SaveGame
         DeleteObject(MapY, MapX);
         if (CurrentDepth <= 0)
         {
-            CaveSetFeat(MapY, MapX, "DownStair");
+            CaveSetFeat(MapY, MapX, SingletonRepository.Tiles.Get("DownStair"));
         }
-        else if (IsQuest(CurrentDepth) ||
-                 CurrentDepth >= CurDungeon.MaxLevel)
+        else if (IsQuest(CurrentDepth) || CurrentDepth >= CurDungeon.MaxLevel)
         {
-            CaveSetFeat(MapY, MapX,
-                CurDungeon.Tower ? "DownStair" : "UpStair");
+            CaveSetFeat(MapY, MapX, CurDungeon.Tower ? SingletonRepository.Tiles.Get("DownStair") : SingletonRepository.Tiles.Get("UpStair"));
         }
         else if (RandomLessThan(100) < 50)
         {
-            CaveSetFeat(MapY, MapX, "DownStair");
+            CaveSetFeat(MapY, MapX, SingletonRepository.Tiles.Get("DownStair"));
         }
         else
         {
-            CaveSetFeat(MapY, MapX, "UpStair");
+            CaveSetFeat(MapY, MapX, SingletonRepository.Tiles.Get("UpStair"));
         }
     }
 
@@ -6325,7 +6323,7 @@ internal class SaveGame
             MsgPrint("The object resists the spell.");
             return;
         }
-        CaveSetFeat(MapY, MapX, "YellowSign");
+        CaveSetFeat(MapY, MapX, SingletonRepository.Tiles.Get("YellowSign"));
     }
 
     private void CaveTempRoomAux(int y, int x)
@@ -6682,7 +6680,7 @@ internal class SaveGame
         if (RandomLessThan(100) < temp)
         {
             MsgPrint("The door crashes open!");
-            CaveSetFeat(y, x, RandomLessThan(100) < 50 ? "BrokenDoor" : "OpenDoor");
+            CaveSetFeat(y, x, RandomLessThan(100) < 50 ? SingletonRepository.Tiles.Get("BrokenDoor") : SingletonRepository.Tiles.Get("OpenDoor"));
             PlaySound(SoundEffectEnum.OpenDoor);
             MovePlayer(y, x, false);
             SingletonRepository.FlaggedActions.Get(nameof(UpdateLightFlaggedAction)).Set();
@@ -6837,7 +6835,7 @@ internal class SaveGame
         }
         else
         {
-            CaveSetFeat(y, x, "LockedDoor0");
+            CaveSetFeat(y, x, SingletonRepository.Tiles.Get("LockedDoor0"));
             SingletonRepository.FlaggedActions.Get(nameof(UpdateMonstersFlaggedAction)).Set();
             SingletonRepository.FlaggedActions.Get(nameof(UpdateLightFlaggedAction)).Set();
             SingletonRepository.FlaggedActions.Get(nameof(UpdateViewFlaggedAction)).Set();
@@ -8838,7 +8836,7 @@ internal class SaveGame
             if (RandomLessThan(100) < chance)
             {
                 MsgPrint("You have picked the lock.");
-                CaveSetFeat(y, x, "OpenDoor");
+                CaveSetFeat(y, x, SingletonRepository.Tiles.Get("OpenDoor"));
                 SingletonRepository.FlaggedActions.Get(nameof(UpdateMonstersFlaggedAction)).Set();
                 SingletonRepository.FlaggedActions.Get(nameof(UpdateLightFlaggedAction)).Set();
                 SingletonRepository.FlaggedActions.Get(nameof(UpdateViewFlaggedAction)).Set();
@@ -8855,7 +8853,7 @@ internal class SaveGame
         // It wasn't locked, so simply open it
         else
         {
-            CaveSetFeat(y, x, "OpenDoor");
+            CaveSetFeat(y, x, SingletonRepository.Tiles.Get("OpenDoor"));
             SingletonRepository.FlaggedActions.Get(nameof(UpdateMonstersFlaggedAction)).Set();
             SingletonRepository.FlaggedActions.Get(nameof(UpdateLightFlaggedAction)).Set();
             SingletonRepository.FlaggedActions.Get(nameof(UpdateViewFlaggedAction)).Set();
@@ -15419,10 +15417,10 @@ internal class SaveGame
         }
     }
 
-    public void CaveSetFeat(int y, int x, string feat)
+    public void CaveSetFeat(int y, int x, Tile tile)
     {
         GridTile cPtr = Grid[y][x];
-        cPtr.FeatureType = SingletonRepository.Tiles.Get(feat);
+        cPtr.FeatureType = tile;
         NoteSpot(y, x);
         RedrawSingleLocation(y, x);
     }
@@ -16131,7 +16129,7 @@ internal class SaveGame
         {
             throw new Exception("No trap selected for PickTrap.");
         }
-        CaveSetFeat(y, x, trapTile.Name);
+        CaveSetFeat(y, x, trapTile);
     }
 
     public void PlaceGold(int y, int x)
@@ -16192,7 +16190,7 @@ internal class SaveGame
         {
             return;
         }
-        CaveSetFeat(y, x, "Invis");
+        CaveSetFeat(y, x, SingletonRepository.Tiles.Get("Invis"));
     }
 
     public bool PlayerCanSeeBold(int y, int x)
@@ -16304,7 +16302,7 @@ internal class SaveGame
         {
             throw new Exception("No door selected to replace secret door");
         }
-        CaveSetFeat(y, x, doorTile.Name);
+        CaveSetFeat(y, x, doorTile);
     }
 
     public void RevertTileToBackground(int y, int x)

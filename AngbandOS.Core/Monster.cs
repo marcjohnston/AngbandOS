@@ -892,7 +892,7 @@ internal class Monster : IItemContainer
                         int k = int.Parse(tile.FeatureType.Name.Substring(10));
                         if (SaveGame.RandomLessThan(Health / 10) > k)
                         {
-                            SaveGame.CaveSetFeat(newY, newX, "LockedDoor0");
+                            SaveGame.CaveSetFeat(newY, newX, SaveGame.SingletonRepository.Tiles.Get("LockedDoor0"));
                             mayBash = false;
                         }
                     }
@@ -915,11 +915,11 @@ internal class Monster : IItemContainer
                 {
                     if (didBashDoor && SaveGame.RandomLessThan(100) < 50)
                     {
-                        SaveGame.CaveSetFeat(newY, newX, "BrokenDoor");
+                        SaveGame.CaveSetFeat(newY, newX, SaveGame.SingletonRepository.Tiles.Get("BrokenDoor"));
                     }
                     else
                     {
-                        SaveGame.CaveSetFeat(newY, newX, "OpenDoor");
+                        SaveGame.CaveSetFeat(newY, newX, SaveGame.SingletonRepository.Tiles.Get("OpenDoor"));
                     }
                     // If the player can see, remind ourselves to update the view later
                     if (SaveGame.PlayerHasLosBold(newY, newX))
