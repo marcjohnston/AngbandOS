@@ -19,7 +19,7 @@ internal class Type7RoomLayout : RoomLayout
         while (dummy < SaveGame.SafeMaxAttempts)
         {
             dummy++;
-            vPtr = SaveGame.SingletonRepository.Vaults.ToWeightedRandom().Choose();
+            vPtr = SaveGame.SingletonRepository.Vaults.ToWeightedRandom().ChooseOrDefault();
             if (vPtr.Category == 7)
             {
                 var minX = xval - (vPtr.Width / 2);

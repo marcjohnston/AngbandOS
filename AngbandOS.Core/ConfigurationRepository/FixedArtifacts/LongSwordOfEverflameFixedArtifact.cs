@@ -36,7 +36,7 @@ internal class LongSwordOfEverflameFixedArtifact : FixedArtifact, IFixedArtifact
         else
         {
             item.BonusPowerType = SaveGame.SingletonRepository.Powers.Get(nameof(SpecialAbilityPower));
-            item.BonusPowerSubType= SaveGame.SingletonRepository.Activations.ToWeightedRandom().Choose();
+            item.BonusPowerSubType= SaveGame.SingletonRepository.Activations.ToWeightedRandom().ChooseOrDefault();
         }
     }
 

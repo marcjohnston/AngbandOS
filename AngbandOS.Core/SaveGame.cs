@@ -679,7 +679,7 @@ internal class SaveGame
 
     public void SayComment_1()
     {
-        MsgPrint(SingletonRepository.ShopkeeperAcceptedComments.ToWeightedRandom().Choose());
+        MsgPrint(SingletonRepository.ShopkeeperAcceptedComments.ToWeightedRandom().ChooseOrDefault());
     }
 
     public bool ServiceHaggle(int serviceCost, out int price)
@@ -1844,7 +1844,7 @@ internal class SaveGame
         }
         else
         {
-            CurTown = SingletonRepository.Towns.ToWeightedRandom().Choose();
+            CurTown = SingletonRepository.Towns.ToWeightedRandom().ChooseOrDefault();
             while (!CurTown.AllowStartupTown)
             {
                 CurTown = SingletonRepository.Towns[RandomLessThan(SingletonRepository.Towns.Count)];
@@ -3200,7 +3200,7 @@ internal class SaveGame
                     int s = RandomLessThan(100) < 30 ? 1 : 2;
                     for (int q = 0; q < s; q++)
                     {
-                        tmp += SingletonRepository.UnreadableFlavorSyllables.ToWeightedRandom().Choose();
+                        tmp += SingletonRepository.UnreadableFlavorSyllables.ToWeightedRandom().ChooseOrDefault();
                     }
                     if (buf.Length + tmp.Length > 14)
                     {
@@ -4296,7 +4296,7 @@ internal class SaveGame
     public bool ApplyDisenchant()
     {
         // Select an inventory slot where items can be disenchanted.
-        BaseInventorySlot? inventorySlot = SingletonRepository.InventorySlots.ToWeightedRandom(_inventorySlot => _inventorySlot.CanBeDisenchanted).Choose();
+        BaseInventorySlot? inventorySlot = SingletonRepository.InventorySlots.ToWeightedRandom(_inventorySlot => _inventorySlot.CanBeDisenchanted).ChooseOrDefault();
         if (inventorySlot == null)
         {
             // There are no inventory slots capable of being disenchanted.
@@ -4304,7 +4304,7 @@ internal class SaveGame
         }
 
         // Select an item in the inventory slot to be disenchanted.
-        int i = inventorySlot.WeightedRandom.Choose();
+        int i = inventorySlot.WeightedRandom.ChooseOrDefault();
         Item? oPtr = GetInventoryItem(i);
 
         // The chosen slot does not have an item to disenchant.
@@ -6471,14 +6471,14 @@ internal class SaveGame
         WeightedRandom<BaseInventorySlot> inventorySlotsWeightedRandom = new WeightedRandom<BaseInventorySlot>(this, SingletonRepository.InventorySlots, _inventorySlot => _inventorySlot.IsArmor);
 
         // Choose one of those inventory slots.
-        BaseInventorySlot? inventorySlot = inventorySlotsWeightedRandom.Choose();
+        BaseInventorySlot? inventorySlot = inventorySlotsWeightedRandom.ChooseOrDefault();
 
         if (inventorySlot == null)
         {
             // No inventory slots are affected by acid or the slot is empty.
             return false;
         }
-        Item? oPtr = GetInventoryItem(inventorySlot.WeightedRandom.Choose());
+        Item? oPtr = GetInventoryItem(inventorySlot.WeightedRandom.ChooseOrDefault());
         if (oPtr == null)
         {
             return false;
@@ -6991,7 +6991,7 @@ internal class SaveGame
     /// <returns> true if there was armor to curse, false otherwise </returns>
     public bool CurseArmor()
     {
-        BaseInventorySlot? inventorySlot = SingletonRepository.InventorySlots.ToWeightedRandom(_inventorySlot => _inventorySlot.CanBeCursed).Choose();
+        BaseInventorySlot? inventorySlot = SingletonRepository.InventorySlots.ToWeightedRandom(_inventorySlot => _inventorySlot.CanBeCursed).ChooseOrDefault();
 
         // Check to see if there are any slots capable of cursing.
         if (inventorySlot == null)
@@ -7000,7 +7000,7 @@ internal class SaveGame
         }
 
         // Choose an item from the slot.
-        Item? item = GetInventoryItem(inventorySlot.WeightedRandom.Choose());
+        Item? item = GetInventoryItem(inventorySlot.WeightedRandom.ChooseOrDefault());
 
         // If we're not wearing armor then nothing can happen
         if (item == null)
@@ -7822,7 +7822,7 @@ internal class SaveGame
                         // high level or we fail a chance roll
                         do
                         {
-                            martialArtsAttack = SingletonRepository.MartialArtsAttacks.ToWeightedRandom().Choose();
+                            martialArtsAttack = SingletonRepository.MartialArtsAttacks.ToWeightedRandom().ChooseOrDefault();
                         } while (martialArtsAttack.MinLevel > ExperienceLevel || DieRoll(ExperienceLevel) < martialArtsAttack.Chance);
                         // We've chosen an attack, use it if it's better than the previous
                         // choice (unless we're stunned or confused in which case we're stuck
@@ -10254,7 +10254,7 @@ internal class SaveGame
             InvenCarry(item);
             Item carried = item.Clone(1);
             LightsourceInventorySlot lightsourceInventorySlot = (LightsourceInventorySlot)SingletonRepository.InventorySlots.Get(nameof(LightsourceInventorySlot));
-            SetInventoryItem(lightsourceInventorySlot.WeightedRandom.Choose(), carried);
+            SetInventoryItem(lightsourceInventorySlot.WeightedRandom.ChooseOrDefault(), carried);
             WeightCarried += carried.Weight;
         }
         BaseCharacterClass.OutfitPlayer();
@@ -11202,13 +11202,13 @@ internal class SaveGame
                     switch (DieRoll(6))
                     {
                         case 1:
-                            cPtr.SetFeature(SingletonRepository.Tiles.Get("WallInner"));
+                            cPtr.SetFeature(SingletonRepository.Tiles.Get(nameof(WallInnerTile)));
                             break;
 
                         case 2:
                         case 3:
                         case 4:
-                            cPtr.SetFeature(SingletonRepository.Tiles.Get("Rubble"));
+                            cPtr.SetFeature(SingletonRepository.Tiles.Get(nameof(RubbleTile)));
                             break;
                     }
                 }
@@ -12478,7 +12478,7 @@ internal class SaveGame
         doorTiles.Add(1, SingletonRepository.Tiles.Get("JammedDoor5"));
         doorTiles.Add(1, SingletonRepository.Tiles.Get("JammedDoor6"));
         doorTiles.Add(1, SingletonRepository.Tiles.Get("JammedDoor7"));
-        Tile? door = doorTiles.Choose();
+        Tile? door = doorTiles.ChooseOrDefault();
         if (door == null)
         {
             throw new Exception("No doors to choose from for random placement.");
@@ -12585,29 +12585,29 @@ internal class SaveGame
             for (x = 0; x < CurWid; x++)
             {
                 byte elevation = Elevation(WildernessY, WildernessX, y, x);
-                string floorName = "Water";
-                string featureName = "Water";
+                Tile floorTile = SingletonRepository.Tiles.Get("Water");
+                Tile featureTile = SingletonRepository.Tiles.Get("Water");
                 if (elevation > 0)
                 {
-                    floorName = "Grass";
+                    floorTile = SingletonRepository.Tiles.Get("Grass");
                     if (DieRoll(10) < elevation)
                     {
                         if (DieRoll(10) < elevation)
                         {
-                            featureName = "Tree";
+                            featureTile = SingletonRepository.Tiles.Get("Tree");
                         }
                         else
                         {
-                            featureName = "Bush";
+                            featureTile = SingletonRepository.Tiles.Get("Bush");
                         }
                     }
                     else
                     {
-                        featureName = "Grass";
+                        featureTile = SingletonRepository.Tiles.Get("Grass");
                     }
                 }
-                Grid[y][x].SetFeature(featureName);
-                Grid[y][x].SetBackgroundFeature(floorName);
+                Grid[y][x].SetFeature(featureTile);
+                Grid[y][x].SetBackgroundFeature(floorTile);
             }
         }
         for (x = 0; x < CurWid; x++)
@@ -13767,7 +13767,7 @@ internal class SaveGame
         MonsterRace rPtr = SingletonRepository.MonsterRaces[Quests[qIdx].RIdx];
         string name = rPtr.Name;
         int qNum = Quests[qIdx].ToKill;
-        MsgPrint(SingletonRepository.FindQuests.ToWeightedRandom().Choose());
+        MsgPrint(SingletonRepository.FindQuests.ToWeightedRandom().ChooseOrDefault());
         MsgPrint(null);
         if (qNum == 1)
         {
@@ -16124,7 +16124,7 @@ internal class SaveGame
         traps.Add(1, SingletonRepository.Tiles.Get("SpikedPit"));
         traps.Add(1, SingletonRepository.Tiles.Get("PoisonPit"));
         traps.Add(1, SingletonRepository.Tiles.Get("TrapDoor"));
-        Tile? trapTile = traps.Choose();
+        Tile? trapTile = traps.ChooseOrDefault();
         if (trapTile == null)
         {
             throw new Exception("No trap selected for PickTrap.");
@@ -16297,7 +16297,7 @@ internal class SaveGame
         doorTiles.Add(16, SingletonRepository.Tiles.Get("LockedDoor5"));
         doorTiles.Add(16, SingletonRepository.Tiles.Get("LockedDoor6"));
         doorTiles.Add(16, SingletonRepository.Tiles.Get("LockedDoor7"));
-        Tile? doorTile = doorTiles.Choose();
+        Tile? doorTile = doorTiles.ChooseOrDefault();
         if (doorTile == null)
         {
             throw new Exception("No door selected to replace secret door");

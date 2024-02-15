@@ -24,7 +24,7 @@ internal class InvocationScrollItemFactory : ScrollItemFactory
 
     public override void Read(ReadScrollEvent eventArgs)
     {
-        var patron = SaveGame.SingletonRepository.Patrons.ToWeightedRandom().Choose();
+        var patron = SaveGame.SingletonRepository.Patrons.ToWeightedRandom().ChooseOrDefault();
         SaveGame.MsgPrint($"You invoke the secret name of {patron.LongName}.");
         patron.GetReward();
         eventArgs.Identified = true;

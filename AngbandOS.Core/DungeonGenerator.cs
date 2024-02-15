@@ -439,7 +439,7 @@ internal class StandardDungeonGenerator : DungeonGenerator
                     }
                     else if (SaveGame.IsQuest(SaveGame.CurrentDepth) || SaveGame.CurrentDepth == SaveGame.CurDungeon.MaxLevel)
                     {
-                        cPtr.SetFeature(SaveGame.CurDungeon.Tower ? "DownStair" : "UpStair");
+                        cPtr.SetFeature(SaveGame.CurDungeon.Tower ? SaveGame.SingletonRepository.Tiles.Get("DownStair") : SaveGame.SingletonRepository.Tiles.Get("UpStair"));
                     }
                     else
                     {
@@ -498,7 +498,7 @@ internal class StandardDungeonGenerator : DungeonGenerator
     private void PlaceRubble(int y, int x)
     {
         GridTile cPtr = SaveGame.Grid[y][x];
-        cPtr.SetFeature(SaveGame.SingletonRepository.Tiles.Get("Rubble"));
+        cPtr.SetFeature(SaveGame.SingletonRepository.Tiles.Get(nameof(RubbleTile)));
     }
 
     private void AllocObject(int set, int typ, int num)

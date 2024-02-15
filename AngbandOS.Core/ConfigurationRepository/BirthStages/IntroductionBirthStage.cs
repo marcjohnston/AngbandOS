@@ -90,7 +90,7 @@ internal class IntroductionBirthStage : BirthStage
         SaveGame.Religion.Deity = GodName.None;
         if (index == 1) // Random
         {
-            SaveGame.BaseCharacterClass = SaveGame.SingletonRepository.CharacterClasses.ToWeightedRandom().Choose();
+            SaveGame.BaseCharacterClass = SaveGame.SingletonRepository.CharacterClasses.ToWeightedRandom().ChooseOrDefault();
             do
             {
                 int raceIndex = SaveGame.RandomLessThan(SaveGame.SingletonRepository.Races.Count);
@@ -100,10 +100,10 @@ internal class IntroductionBirthStage : BirthStage
             while ((SaveGame.Race.Choice & (1L << SaveGame.BaseCharacterClass.ID)) == 0);
 
             // Use a weighted random to choose a the realms.
-            SaveGame.PrimaryRealm = new WeightedRandom<Realm>(SaveGame, SaveGame.BaseCharacterClass.AvailablePrimaryRealms).Choose();
+            SaveGame.PrimaryRealm = new WeightedRandom<Realm>(SaveGame, SaveGame.BaseCharacterClass.AvailablePrimaryRealms).ChooseOrDefault();
 
             // We need to get the available secondary realms.  Note that we need to exclude the primary realm.
-            SaveGame.SecondaryRealm = new WeightedRandom<Realm>(SaveGame, SaveGame.BaseCharacterClass.RemainingAvailableSecondaryRealms()).Choose();
+            SaveGame.SecondaryRealm = new WeightedRandom<Realm>(SaveGame, SaveGame.BaseCharacterClass.RemainingAvailableSecondaryRealms()).ChooseOrDefault();
             if (SaveGame.BaseCharacterClass.WorshipsADeity)
             {
                 SaveGame.Religion.Deity = SaveGame.BaseCharacterClass.DefaultDeity(SaveGame.SecondaryRealm);

@@ -25,7 +25,7 @@ internal class MainGaucheOfDefenceFixedArtifact : FixedArtifact
         else
         {
             item.BonusPowerType = SaveGame.SingletonRepository.Powers.Get(nameof(SpecialAbilityPower));
-            item.BonusPowerSubType= SaveGame.SingletonRepository.Activations.ToWeightedRandom().Choose();
+            item.BonusPowerSubType= SaveGame.SingletonRepository.Activations.ToWeightedRandom().ChooseOrDefault();
         }
     }
     public override ColorEnum Color => ColorEnum.BrightWhite;

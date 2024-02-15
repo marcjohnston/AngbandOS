@@ -19,7 +19,7 @@ internal class Type8RoomLayout : RoomLayout
         while (dummy < SaveGame.SafeMaxAttempts)
         {
             dummy++;
-            vault = SaveGame.SingletonRepository.Vaults.ToWeightedRandom().Choose();
+            vault = SaveGame.SingletonRepository.Vaults.ToWeightedRandom().ChooseOrDefault();
             if (vault.Category == 8)
             {
                 var minX = xval - (vault.Width / 2);

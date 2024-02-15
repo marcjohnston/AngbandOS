@@ -32,7 +32,7 @@ internal class Type6RoomLayout : RoomLayout
                 cPtr.TileFlags.Set(GridTile.InRoom);
             }
         }
-        Tile wallOuterTile = SaveGame.SingletonRepository.Tiles.Get("WallOuter");
+        Tile wallOuterTile = SaveGame.SingletonRepository.Tiles.Get(nameof(WallOuterTile));
         for (y = y1 - 1; y <= y2 + 1; y++)
         {
             cPtr = SaveGame.Grid[y][x1 - 1];
@@ -51,7 +51,7 @@ internal class Type6RoomLayout : RoomLayout
         y2 -= 2;
         x1 += 2;
         x2 -= 2;
-        Tile wallInnerTile = SaveGame.SingletonRepository.Tiles.Get("WallInner");
+        Tile wallInnerTile = SaveGame.SingletonRepository.Tiles.Get(nameof(WallInnerTile));
         for (y = y1 - 1; y <= y2 + 1; y++)
         {
             cPtr = SaveGame.Grid[y][x1 - 1];

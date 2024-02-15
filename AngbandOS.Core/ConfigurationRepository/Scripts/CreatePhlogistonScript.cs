@@ -19,7 +19,7 @@ internal class CreatePhlogistonScript : Script, IScript
     public void ExecuteScript()
     {
         LightsourceInventorySlot lightsourceInventorySlot = (LightsourceInventorySlot)SaveGame.SingletonRepository.InventorySlots.Get(nameof(LightsourceInventorySlot));
-        Item? item = SaveGame.GetInventoryItem(lightsourceInventorySlot.WeightedRandom.Choose());
+        Item? item = SaveGame.GetInventoryItem(lightsourceInventorySlot.WeightedRandom.ChooseOrDefault());
         if (item == null)
         {
             SaveGame.MsgPrint("You are not wielding a light source.");

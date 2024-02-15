@@ -29,7 +29,7 @@ internal class RingOfSetFixedArtifact : FixedArtifact, IFixedArtifactActivatible
     public override void ApplyResistances(Item item)
     {
         item.BonusPowerType = SaveGame.SingletonRepository.Powers.Get(nameof(SpecialAbilityPower));
-        item.BonusPowerSubType= SaveGame.SingletonRepository.Activations.ToWeightedRandom().Choose();
+        item.BonusPowerSubType= SaveGame.SingletonRepository.Activations.ToWeightedRandom().ChooseOrDefault();
 
         IArtifactBias artifactBias = null;
         item.ApplyRandomResistance(ref artifactBias, SaveGame.DieRoll(22) + 16);

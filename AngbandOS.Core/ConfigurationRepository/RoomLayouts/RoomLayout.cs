@@ -38,8 +38,8 @@ internal abstract class RoomLayout : IGetKey<string>
         int dx, dy, x, y;
         char t;
         int index = 0;
-        Tile wallOuter = SaveGame.SingletonRepository.Tiles.Get("WallOuter");
-        Tile wallInner = SaveGame.SingletonRepository.Tiles.Get("WallInner");
+        Tile wallOuter = SaveGame.SingletonRepository.Tiles.Get(nameof(WallOuterTile));
+        Tile wallInner = SaveGame.SingletonRepository.Tiles.Get(nameof(WallInnerTile));
         Tile wallPermInner = SaveGame.SingletonRepository.Tiles.Get("WallPermInner");
         for (dy = 0; dy < ymax; dy++)
         {

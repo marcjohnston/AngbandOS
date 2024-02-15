@@ -51,7 +51,7 @@ internal class Type2RoomLayout : RoomLayout
                 }
             }
         }
-        Tile wallOuter = SaveGame.SingletonRepository.Tiles.Get("WallOuter");
+        Tile wallOuter = SaveGame.SingletonRepository.Tiles.Get(nameof(WallOuterTile));
         for (y = y1A - 1; y <= y2A + 1; y++)
         {
             cPtr = SaveGame.Grid[y][x1A - 1];

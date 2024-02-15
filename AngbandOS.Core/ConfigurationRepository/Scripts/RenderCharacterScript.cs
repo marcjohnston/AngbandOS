@@ -347,7 +347,7 @@ internal class RenderCharacterScript : Script, IScript, IRepeatableScript
         int showTohit = SaveGame.DisplayedAttackBonus;
         int showTodam = SaveGame.DisplayedDamageBonus;
         MeleeWeaponInventorySlot meeleeWeaponInventorySlot = (MeleeWeaponInventorySlot)SaveGame.SingletonRepository.InventorySlots.Get(nameof(MeleeWeaponInventorySlot));
-        Item? item = SaveGame.GetInventoryItem(meeleeWeaponInventorySlot.WeightedRandom.Choose());
+        Item? item = SaveGame.GetInventoryItem(meeleeWeaponInventorySlot.WeightedRandom.ChooseOrDefault());
         // Only show bonuses if we know them
         if (item != null && item.IsKnown())
         {
@@ -421,7 +421,7 @@ internal class RenderCharacterScript : Script, IScript, IRepeatableScript
     private void DisplayPlayerSkills()
     {
         MeleeWeaponInventorySlot meeleeWeaponInventorySlot = (MeleeWeaponInventorySlot)SaveGame.SingletonRepository.InventorySlots.Get(nameof(MeleeWeaponInventorySlot));
-        int index = meeleeWeaponInventorySlot.WeightedRandom.Choose();
+        int index = meeleeWeaponInventorySlot.WeightedRandom.ChooseOrDefault();
         Item? meeleeItem = SaveGame.GetInventoryItem(index);
 
         int dambonus = SaveGame.DisplayedDamageBonus;
@@ -442,7 +442,7 @@ internal class RenderCharacterScript : Script, IScript, IRepeatableScript
         }
 
         RangedWeaponInventorySlot rangedWeaponInventorySlot = (RangedWeaponInventorySlot)SaveGame.SingletonRepository.InventorySlots.Get(nameof(RangedWeaponInventorySlot));
-        Item? rangedItem = SaveGame.GetInventoryItem(rangedWeaponInventorySlot.WeightedRandom.Choose());
+        Item? rangedItem = SaveGame.GetInventoryItem(rangedWeaponInventorySlot.WeightedRandom.ChooseOrDefault());
         int shooting = SaveGame.SkillRanged + (SaveGame.AttackBonus * Constants.BthPlusAdj);
         if (rangedItem != null)
         {

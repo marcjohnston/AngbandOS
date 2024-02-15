@@ -23,7 +23,7 @@ internal abstract class CloakArmorItemFactory : ArmorItemFactory
         weightedRandom.Add(1, SaveGame.SingletonRepository.RareItems.Get(nameof(CloakOfAmanRareItem)));
         weightedRandom.Add(1, SaveGame.SingletonRepository.RareItems.Get(nameof(CloakOfElectricityRareItem)));
         weightedRandom.Add(1, SaveGame.SingletonRepository.RareItems.Get(nameof(CloakOfImmolationRareItem)));
-        item.RareItem = weightedRandom.Choose();
+        item.RareItem = weightedRandom.ChooseOrDefault();
     }
 
     protected override void ApplyRandomPoorRareCharacteristics(Item item)

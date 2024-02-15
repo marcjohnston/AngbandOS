@@ -78,7 +78,17 @@ internal class WeightedRandom<T>
         }
     }
 
-    public T? Choose()
+    public T Choose()
+    {
+        T? t = ChooseOrDefault();
+        if (t == null)
+        {
+            throw new Exception("No options exist for choice.");
+        }
+        return t;
+    }
+
+    public T? ChooseOrDefault()
     {
         if (_list.Count == 0)
         {

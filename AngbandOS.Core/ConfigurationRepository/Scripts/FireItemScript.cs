@@ -31,7 +31,7 @@ internal class FireItemScript : Script, IScript, IRepeatableScript
         // Check that we're actually wielding a ranged weapon
         RangedWeaponInventorySlot rangedWeaponInventorySlot = (RangedWeaponInventorySlot)SaveGame.SingletonRepository.InventorySlots.Get(nameof(RangedWeaponInventorySlot));
         WeightedRandom<int> weightedRandom = rangedWeaponInventorySlot.WeightedRandom;
-        Item? missileWeapon = SaveGame.GetInventoryItem(weightedRandom.Choose());
+        Item? missileWeapon = SaveGame.GetInventoryItem(weightedRandom.ChooseOrDefault());
         if (missileWeapon == null || missileWeapon.Category == 0)
         {
             SaveGame.MsgPrint("You have nothing to fire with.");

@@ -183,9 +183,15 @@ internal class GridTile : IItemContainer
         FeatureType = BackgroundFeature;
     }
 
+    [Obsolete("Use SetBackgroundFeature(Tile)")]
     public void SetBackgroundFeature(string name)
     {
         BackgroundFeature = SaveGame.SingletonRepository.Tiles.Get(name);
+    }
+
+    public void SetBackgroundFeature(Tile tile)
+    {
+        BackgroundFeature = tile;
     }
 
     /// <summary>

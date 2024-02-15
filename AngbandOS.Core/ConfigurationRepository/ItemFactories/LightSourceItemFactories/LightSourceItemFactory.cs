@@ -123,7 +123,7 @@ internal abstract class LightSourceItemFactory : ItemFactory
             weightedRandom.Add(1, SaveGame.SingletonRepository.RareItems.Get(nameof(OrbOfSustenanceRareItem)));
             weightedRandom.Add(1, SaveGame.SingletonRepository.RareItems.Get(nameof(OrbOfHealthRareItem)));
             weightedRandom.Add(1, SaveGame.SingletonRepository.RareItems.Get(nameof(OrbOfFrostRareItem)));
-            item.RareItem = weightedRandom.Choose();
+            item.RareItem = weightedRandom.ChooseOrDefault();
         }
         else if (power == 2) // Great
         {

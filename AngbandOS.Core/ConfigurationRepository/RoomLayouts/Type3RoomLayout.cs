@@ -54,8 +54,8 @@ internal class Type3RoomLayout : RoomLayout
                 }
             }
         }
-        Tile wallOuter = SaveGame.SingletonRepository.Tiles.Get("WallOuter");
-        Tile wallInner = SaveGame.SingletonRepository.Tiles.Get("WallInner");
+        Tile wallOuter = SaveGame.SingletonRepository.Tiles.Get(nameof(WallOuterTile));
+        Tile wallInner = SaveGame.SingletonRepository.Tiles.Get(nameof(WallInnerTile));
         Tile pillar = SaveGame.SingletonRepository.Tiles.Get("Pillar");
         for (y = y1A - 1; y <= y2A + 1; y++)
         {

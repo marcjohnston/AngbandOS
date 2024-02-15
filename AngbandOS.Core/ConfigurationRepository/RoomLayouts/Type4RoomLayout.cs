@@ -34,7 +34,7 @@ internal class Type4RoomLayout : RoomLayout
                 }
             }
         }
-        Tile wallOuterTile = SaveGame.SingletonRepository.Tiles.Get("WallOuter");
+        Tile wallOuterTile = SaveGame.SingletonRepository.Tiles.Get(nameof(WallOuterTile));
         for (y = y1 - 1; y <= y2 + 1; y++)
         {
             cPtr = SaveGame.Grid[y][x1 - 1];
@@ -53,7 +53,7 @@ internal class Type4RoomLayout : RoomLayout
         y2 -= 2;
         x1 += 2;
         x2 -= 2;
-        Tile wallInnerTile = SaveGame.SingletonRepository.Tiles.Get("WallInner");
+        Tile wallInnerTile = SaveGame.SingletonRepository.Tiles.Get(nameof(WallInnerTile));
         for (y = y1 - 1; y <= y2 + 1; y++)
         {
             cPtr = SaveGame.Grid[y][x1 - 1];
@@ -379,6 +379,8 @@ internal class Type4RoomLayout : RoomLayout
     private void PlaceLockedDoor(int y, int x)
     {
         GridTile cPtr = SaveGame.Grid[y][x];
-        cPtr.SetFeature($"LockedDoor{SaveGame.DieRoll(7)}");
+        WeightedRandom<Tile> tiles = new WeightedRandom<Tile>(SaveGame, SaveGame.SingletonRepository.Tiles.Where(_tile => _tile.IsClosedDoor == true));
+        Tile tile = tiles.Choose();
+        cPtr.SetFeature(tile);
     }
 }

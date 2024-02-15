@@ -28,12 +28,12 @@ internal class EatLightRandomMutation : Mutation
         {
             SaveGame.RestoreHealth(10);
         }
-        BaseInventorySlot? inventorySlot = SaveGame.SingletonRepository.InventorySlots.ToWeightedRandom(_inventorySlot => _inventorySlot.ProvidesLight).Choose();
+        BaseInventorySlot? inventorySlot = SaveGame.SingletonRepository.InventorySlots.ToWeightedRandom(_inventorySlot => _inventorySlot.ProvidesLight).ChooseOrDefault();
         if (inventorySlot == null)
         {
             return;
         }
-        int index = inventorySlot.WeightedRandom.Choose();
+        int index = inventorySlot.WeightedRandom.ChooseOrDefault();
         Item? oPtr = SaveGame.GetInventoryItem(index);
         if (oPtr != null)
         {

@@ -40,7 +40,7 @@ internal class ConfirmationBirthStage : BirthStage
         }
         SaveGame.SpellOrder.Clear();
 
-        SaveGame.GooPatron = SaveGame.SingletonRepository.Patrons.ToWeightedRandom().Choose();
+        SaveGame.GooPatron = SaveGame.SingletonRepository.Patrons.ToWeightedRandom().ChooseOrDefault();
         SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateHealthFlaggedAction)).Set();
         SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
         SaveGame.UpdateStuff();

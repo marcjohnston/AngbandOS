@@ -12,7 +12,7 @@ internal class InsultAttack : Attack
 {
     private InsultAttack(SaveGame saveGame) : base(saveGame) { }
     public override string MonsterAction(Monster monster) => $"insults {monster.Name}";
-    public override string PlayerAction => SaveGame.SingletonRepository.InsultPlayerAttacks.ToWeightedRandom().Choose();
+    public override string PlayerAction => SaveGame.SingletonRepository.InsultPlayerAttacks.ToWeightedRandom().ChooseOrDefault();
     public override string KnowledgeAction => "insult";
     public override bool AttackTouchesTarget => false;
     public override bool AttackAwakensTarget => true;

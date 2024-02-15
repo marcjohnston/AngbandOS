@@ -1911,7 +1911,7 @@ internal sealed class Item : IComparable<Item>
             RareItem.ApplyMagic(this);
             if (BonusPowerType != null && string.IsNullOrEmpty(RandartName))
             {
-                BonusPowerSubType = SaveGame.SingletonRepository.Activations.ToWeightedRandom().Choose();
+                BonusPowerSubType = SaveGame.SingletonRepository.Activations.ToWeightedRandom().ChooseOrDefault();
             }
             if (RareItem.Cost == 0)
             {
@@ -2730,7 +2730,7 @@ internal sealed class Item : IComparable<Item>
         {
             while (testcounter-- != 0)
             {
-                outString += SaveGame.SingletonRepository.UnreadableFlavorSyllables.ToWeightedRandom().Choose();
+                outString += SaveGame.SingletonRepository.UnreadableFlavorSyllables.ToWeightedRandom().ChooseOrDefault();
             }
         }
         else
@@ -2738,7 +2738,7 @@ internal sealed class Item : IComparable<Item>
             testcounter = SaveGame.DieRoll(2) + 1;
             while (testcounter-- != 0)
             {
-                outString += SaveGame.SingletonRepository.ElvishText.ToWeightedRandom().Choose();
+                outString += SaveGame.SingletonRepository.ElvishText.ToWeightedRandom().ChooseOrDefault();
             }
         }
         return "'" + outString.Substring(0, 1).ToUpper() + outString.Substring(1) + "'";
@@ -2759,7 +2759,7 @@ internal sealed class Item : IComparable<Item>
             int chance = 0;
             while (type == null || SaveGame.DieRoll(100) >= chance)
             {
-                type = SaveGame.SingletonRepository.Activations.ToWeightedRandom().Choose();
+                type = SaveGame.SingletonRepository.Activations.ToWeightedRandom().ChooseOrDefault();
                 chance = type.RandomChance;
             }
         }
