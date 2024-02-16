@@ -26,7 +26,7 @@ internal class KillWallProjectile : Projectile
         {
             return false;
         }
-        if (cPtr.FeatureType.Name.Contains("Treas"))
+        if (cPtr.FeatureType.IsTreasure)
         {
             if (cPtr.TileFlags.IsSet(GridTile.PlayerMemorized))
             {
@@ -38,7 +38,7 @@ internal class KillWallProjectile : Projectile
             SaveGame.RevertTileToBackground(y, x);
             SaveGame.PlaceGold(y, x);
         }
-        else if (cPtr.FeatureType.Name.Contains("Magma") || cPtr.FeatureType.Name.Contains("Quartz"))
+        else if (cPtr.FeatureType.IsVein)
         {
             if (cPtr.TileFlags.IsSet(GridTile.PlayerMemorized))
             {
@@ -58,7 +58,7 @@ internal class KillWallProjectile : Projectile
             cPtr.TileFlags.Clear(GridTile.PlayerMemorized);
             SaveGame.RevertTileToBackground(y, x);
         }
-        else if (cPtr.FeatureType.Name == "Rubble")
+        else if (cPtr.FeatureType is RubbleTile)
         {
             if (cPtr.TileFlags.IsSet(GridTile.PlayerMemorized))
             {

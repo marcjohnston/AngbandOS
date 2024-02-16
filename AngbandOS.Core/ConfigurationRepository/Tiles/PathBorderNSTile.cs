@@ -13,10 +13,12 @@ internal class PathBorderNSTile : Tile
     private PathBorderNSTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(VerticalBarSymbol));
     public override ColorEnum Color => ColorEnum.BrightBrown;
-    public override string Name => "PathBorderNS";
+    public override bool IsPath => true;
     public override bool BlocksLos => true;
     public override string Description => "path";
     public override bool DimsOutsideLOS => true;
     public override bool IsPermanent => true;
     public override int MapPriority => 0;
+    public override bool IsBorder => true;
+
 }

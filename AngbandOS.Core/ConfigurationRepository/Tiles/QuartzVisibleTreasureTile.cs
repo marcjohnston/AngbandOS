@@ -13,10 +13,11 @@ internal class QuartzVisibleTreasureTile : Tile
     private QuartzVisibleTreasureTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(AsteriskSymbol));
     public override ColorEnum Color => ColorEnum.BrightRed;
-    public override string Name => "QuartzVisTreas";
     public override AlterAction? AlterAction => SaveGame.SingletonRepository.AlterActions.Get(nameof(TunnelAlterAction));
     protected override string? MimicTileName => nameof(QuartzVisibleTreasureTile);
     public override bool BlocksLos => true;
+    public override bool IsTreasure => true;
+
     public override bool IsVisibleTreasure => true;
     public override string Description => "quartz vein with treasure";
     public override bool DimsOutsideLOS => true;

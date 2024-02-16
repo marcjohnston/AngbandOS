@@ -19,7 +19,6 @@ internal class ArmoryStoreTile : Tile
     public override int MapPriority => 0;
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(NumberTwoSymbol));
     public override ColorEnum Color => ColorEnum.Grey;
-    public override string Name => "Armory";
     public override string Description => "Armory";
 }
 

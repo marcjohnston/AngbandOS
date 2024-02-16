@@ -19,7 +19,6 @@ internal class MagicStoreTile : Tile
     public override int MapPriority => 0;
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(NumberSixSymbol));
     public override ColorEnum Color => ColorEnum.Red;
-    public override string Name => "MagicShop";
     public override string Description => "Magic Shop";
 }
 

@@ -13,11 +13,19 @@ internal class ConfuseGasTile : Tile
     private ConfuseGasTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(CaretSymbol));
     public override ColorEnum Color => ColorEnum.Green;
-    public override string Name => "ConfuseGas";
     public override AlterAction? AlterAction => SaveGame.SingletonRepository.AlterActions.Get(nameof(DisarmAlterAction));
     public override string Description => "gas trap";
     public override bool IsInteresting => true;
     public override bool IsPassable => true;
     public override bool IsTrap => true;
     public override int MapPriority => 20;
+    public override void StepOn(GridTile tile)
+    {
+        // Confuse the player
+        SaveGame.MsgPrint("A gas of scintillating colors surrounds you!");
+        if (!SaveGame.HasConfusionResistance)
+        {
+            SaveGame.TimedConfusion.AddTimer(SaveGame.RandomLessThan(20) + 10);
+        }
+    }
 }

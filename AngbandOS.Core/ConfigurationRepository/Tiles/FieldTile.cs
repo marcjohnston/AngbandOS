@@ -13,7 +13,6 @@ internal class FieldTile : Tile
     private FieldTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(PeriodSymbol));
     public override ColorEnum Color => ColorEnum.BrightBrown;
-    public override string Name => "Field";
     public override string Description => "field";
     public override bool DimsOutsideLOS => true;
     public override bool IsOpenFloor => true;

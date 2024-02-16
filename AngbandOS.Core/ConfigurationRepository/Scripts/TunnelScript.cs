@@ -36,7 +36,7 @@ internal class TunnelScript : Script, IScript, IRepeatableScript
             int tileX = SaveGame.MapX + SaveGame.KeypadDirectionXOffset[dir];
             GridTile tile = SaveGame.Grid[tileY][tileX];
             // Check if it can be tunneled through
-            if (tile.FeatureType.IsPassable || tile.FeatureType.Name == "YellowSign")
+            if (tile.FeatureType.IsPassable || tile.FeatureType is YellowSignSigilTile)
             {
                 SaveGame.MsgPrint("You cannot tunnel through air.");
             }

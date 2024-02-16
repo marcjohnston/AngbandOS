@@ -13,11 +13,27 @@ internal class PoisonGasTile : Tile
     private PoisonGasTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(CaretSymbol));
     public override ColorEnum Color => ColorEnum.Green;
-    public override string Name => "PoisonGas";
     public override AlterAction? AlterAction => SaveGame.SingletonRepository.AlterActions.Get(nameof(DisarmAlterAction));
     public override string Description => "gas trap";
     public override bool IsInteresting => true;
     public override bool IsPassable => true;
     public override bool IsTrap => true;
     public override int MapPriority => 20;
+    public override void StepOn(GridTile tile)
+    {
+        // Poison the player
+        SaveGame.MsgPrint("A pungent green gas surrounds you!");
+        if (!SaveGame.HasPoisonResistance && SaveGame.TimedPoisonResistance.TurnsRemaining == 0)
+        {
+            // Hagarg Ryonis may save you from the poison
+            if (SaveGame.DieRoll(10) <= SaveGame.Religion.GetNamedDeity(GodName.Hagarg_Ryonis).AdjustedFavour)
+            {
+                SaveGame.MsgPrint("Hagarg Ryonis's favour protects you!");
+            }
+            else
+            {
+                SaveGame.TimedPoison.AddTimer(SaveGame.RandomLessThan(20) + 10);
+            }
+        }
+    }
 }

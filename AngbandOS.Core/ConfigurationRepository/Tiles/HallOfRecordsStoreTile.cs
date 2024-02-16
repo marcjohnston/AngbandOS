@@ -19,7 +19,6 @@ internal class HallOfRecordsStoreTile : Tile
     public override int MapPriority => 0;
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(NumberEightSymbol));
     public override ColorEnum Color => ColorEnum.Yellow;
-    public override string Name => "HallOfRecords";
     public override string Description => "Hall of Records";
 }
 

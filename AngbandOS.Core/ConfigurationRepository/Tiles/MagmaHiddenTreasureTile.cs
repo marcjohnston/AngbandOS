@@ -13,7 +13,6 @@ internal class MagmaHiddenTreasureTile : Tile
     private MagmaHiddenTreasureTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(PoundSignSymbol));
     public override ColorEnum Color => ColorEnum.Grey;
-    public override string Name => "MagmaHidTreas";
     public override AlterAction? AlterAction => SaveGame.SingletonRepository.AlterActions.Get(nameof(TunnelAlterAction));
     protected override string? MimicTileName => nameof(MagmaTile);
     public override bool BlocksLos => true;
@@ -24,9 +23,12 @@ internal class MagmaHiddenTreasureTile : Tile
     public override int MapPriority => 11;
     public override bool RunPast => true;
     public override bool YellowInTorchlight => true;
+    public override bool IsTreasure => true;
 
     /// <summary>
     /// Returns true because this tile is a vein.
     /// </summary>
     public override bool IsVein => true;
+    public override bool IsMagma => true;
+
 }

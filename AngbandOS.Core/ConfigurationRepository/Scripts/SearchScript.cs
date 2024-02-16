@@ -56,7 +56,7 @@ internal class SearchScript : Script, IScript, IRepeatableScript
                 {
                     // If there's a trap, then find it
                     GridTile tile = SaveGame.Grid[y][x];
-                    if (tile.FeatureType.Name == "Invis")
+                    if (tile.FeatureType is InvisibleTile)
                     {
                         // Pick a random trap to replace the undetected one with
                         SaveGame.PickTrap(y, x);

@@ -155,11 +155,11 @@ internal class TeleportSelfScript : Script, IScriptInt
                 {
                     continue;
                 }
-                if (SaveGame.Grid[ny][nx].FeatureType.Name == "ElderSign")
+                if (SaveGame.Grid[ny][nx].FeatureType is ElderSignSigilTile)
                 {
                     continue;
                 }
-                if (SaveGame.Grid[ny][nx].FeatureType.Name == "YellowSign")
+                if (SaveGame.Grid[ny][nx].FeatureType is YellowSignSigilTile)
                 {
                     continue;
                 }

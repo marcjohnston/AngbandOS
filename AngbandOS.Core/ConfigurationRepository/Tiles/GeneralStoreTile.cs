@@ -19,7 +19,6 @@ internal class GeneralStoreTile : Tile
     public override int MapPriority => 0;
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(NumberOneSymbol));
     public override ColorEnum Color => ColorEnum.BrightBrown;
-    public override string Name => "GeneralStore";
     public override string Description => "General Store";
 }
 

@@ -30,7 +30,7 @@ internal class GoUpStairsScript : Script, IScript, IRepeatableScript
     {
         // We need to actually be on an up staircase
         GridTile tile = SaveGame.Grid[SaveGame.MapY][SaveGame.MapX];
-        if (tile.FeatureType.Name != "UpStair")
+        if (tile.FeatureType is not UpStaircaseTile)
         {
             SaveGame.MsgPrint("I see no up staircase here.");
             SaveGame.EnergyUse = 0;

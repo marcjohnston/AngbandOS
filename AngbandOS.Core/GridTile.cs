@@ -207,7 +207,7 @@ internal class GridTile : IItemContainer
         }
         else
         {
-            return FeatureType.Name;
+            return FeatureType.Description;
         }
     }
 }

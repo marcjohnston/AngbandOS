@@ -13,7 +13,6 @@ internal class UpStaircaseTile : Tile
     private UpStaircaseTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LessThanSymbol));
     public override ColorEnum Color => ColorEnum.BrightBrown;
-    public override string Name => "UpStair";
     public override string Description => "up staircase";
     public override bool DimsOutsideLOS => true;
     public override bool IsInteresting => true;

@@ -686,35 +686,35 @@ internal class StandardDungeonGenerator : DungeonGenerator
                 tmpCol = col1 + colDir;
             }
             cPtr = SaveGame.Grid[tmpRow][tmpCol];
-            if (cPtr.FeatureType.Name == "WallPermSolid")
+            if (cPtr.FeatureType is WallPermentSolidTile)
             {
                 continue;
             }
-            if (cPtr.FeatureType.Name == "WallPermOuter")
+            if (cPtr.FeatureType is WallPermanentOuterTile)
             {
                 continue;
             }
-            if (cPtr.FeatureType.Name == "WallSolid")
+            if (cPtr.FeatureType is WallSolidTile)
             {
                 continue;
             }
-            if (cPtr.FeatureType.Name == "WallOuter")
+            if (cPtr.FeatureType is WallOuterTile)
             {
                 y = tmpRow + rowDir;
                 x = tmpCol + colDir;
-                if (SaveGame.Grid[y][x].FeatureType.Name == "WallPermSolid")
+                if (SaveGame.Grid[y][x].FeatureType is WallPermentSolidTile)
                 {
                     continue;
                 }
-                if (SaveGame.Grid[y][x].FeatureType.Name == "WallPermOuter")
+                if (SaveGame.Grid[y][x].FeatureType is WallPermanentOuterTile)
                 {
                     continue;
                 }
-                if (SaveGame.Grid[y][x].FeatureType.Name == "WallOuter")
+                if (SaveGame.Grid[y][x].FeatureType is WallOuterTile)
                 {
                     continue;
                 }
-                if (SaveGame.Grid[y][x].FeatureType.Name == "WallSolid")
+                if (SaveGame.Grid[y][x].FeatureType is WallSolidTile)
                 {
                     continue;
                 }
@@ -729,7 +729,7 @@ internal class StandardDungeonGenerator : DungeonGenerator
                 {
                     for (x = col1 - 1; x <= col1 + 1; x++)
                     {
-                        if (SaveGame.Grid[y][x].FeatureType.Name == "WallOuter")
+                        if (SaveGame.Grid[y][x].FeatureType is WallOuterTile)
                         {
                             SaveGame.Grid[y][x].SetFeature(SaveGame.SingletonRepository.Tiles.Get(nameof(WallSolidTile)));
                         }

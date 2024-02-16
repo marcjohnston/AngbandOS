@@ -828,7 +828,7 @@ internal class Monster : IItemContainer
                 doMove = true;
             }
             // Bushes don't actually block us, so we can move there too
-            else if (SaveGame.Grid[newY][newX].FeatureType.Name == "Bush")
+            else if (SaveGame.Grid[newY][newX].FeatureType is BushTile)
             {
                 doMove = true;
             }
@@ -887,9 +887,9 @@ internal class Monster : IItemContainer
                         mayBash = false;
                     }
                     // We have a chance to unlock locked doors
-                    else if (tile.FeatureType.Name.Contains("Locked"))
+                    else if (tile.FeatureType.IsClosedDoor)
                     {
-                        int k = int.Parse(tile.FeatureType.Name.Substring(10));
+                        int k = tile.FeatureType.LockLevel;
                         if (SaveGame.RandomLessThan(Health / 10) > k)
                         {
                             SaveGame.CaveSetFeat(newY, newX, SaveGame.SingletonRepository.Tiles.Get("LockedDoor0"));
@@ -900,7 +900,7 @@ internal class Monster : IItemContainer
                 // If we can't open doors (or failed to unlock the door), then we can bash it down
                 if (mayBash && Race.BashDoor)
                 {
-                    int k = int.Parse(tile.FeatureType.Name.Substring(10));
+                    int k = tile.FeatureType.LockLevel;
                     // If we succeeded, let the player hear it
                     if (SaveGame.RandomLessThan(Health / 10) > k)
                     {
@@ -929,7 +929,7 @@ internal class Monster : IItemContainer
                 }
             }
             // If we're going to move onto an Elder Sign and we're capable of doing attacks
-            if (doMove && tile.FeatureType.Name == "ElderSign" && !Race.NeverAttack)
+            if (doMove && tile.FeatureType is ElderSignSigilTile && !Race.NeverAttack)
             {
                 // Assume we're not moving
                 doMove = false;
@@ -948,8 +948,7 @@ internal class Monster : IItemContainer
                 }
             }
             // If we're going to move onto a Yellow Sign and we can attack
-            else if (doMove && tile.FeatureType.Name == "YellowSign" &&
-                     !Race.NeverAttack)
+            else if (doMove && tile.FeatureType is YellowSignSigilTile && !Race.NeverAttack)
             {
                 // Assume we're not moving
                 doMove = false;
@@ -2992,11 +2991,11 @@ internal class Monster : IItemContainer
                 {
                     continue;
                 }
-                if (saveGame.Grid[ny][nx].FeatureType.Name == "ElderSign")
+                if (saveGame.Grid[ny][nx].FeatureType is ElderSignSigilTile)
                 {
                     continue;
                 }
-                if (saveGame.Grid[ny][nx].FeatureType.Name == "YellowSign")
+                if (saveGame.Grid[ny][nx].FeatureType is YellowSignSigilTile)
                 {
                     continue;
                 }

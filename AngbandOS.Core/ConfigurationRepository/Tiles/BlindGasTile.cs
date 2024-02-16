@@ -13,11 +13,19 @@ internal class BlindGasTile : Tile
     private BlindGasTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(CaretSymbol));
     public override ColorEnum Color => ColorEnum.Green;
-    public override string Name => "BlindGas";
     public override AlterAction? AlterAction => SaveGame.SingletonRepository.AlterActions.Get(nameof(DisarmAlterAction));
     public override string Description => "gas trap";
     public override bool IsInteresting => true;
     public override bool IsPassable => true;
     public override bool IsTrap => true;
     public override int MapPriority => 20;
+    public override void StepOn(GridTile tile)
+    {
+        // Blind the player
+        SaveGame.MsgPrint("A black gas surrounds you!");
+        if (!SaveGame.HasBlindnessResistance)
+        {
+            SaveGame.TimedBlindness.AddTimer(SaveGame.RandomLessThan(50) + 25);
+        }
+    }
 }

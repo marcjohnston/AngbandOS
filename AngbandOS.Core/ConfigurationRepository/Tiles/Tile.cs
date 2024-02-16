@@ -38,6 +38,7 @@ internal abstract class Tile : IGetKey<string>
         OnJammedTile = OnJammedTileName == null ? null : SaveGame.SingletonRepository.Tiles.Get(OnJammedTileName);
         VisibleTreasureForTile = VisibleTreasureForTileName == null ? null : SaveGame.SingletonRepository.Tiles.Get(VisibleTreasureForTileName);
     }
+    public virtual void StepOn(GridTile tile) { }
 
     /// <summary>
     /// Returns the symbol to use for rendering.
@@ -49,7 +50,14 @@ internal abstract class Tile : IGetKey<string>
     /// </summary>
     public virtual ColorEnum Color => ColorEnum.White;
 
-    public abstract string Name { get; }
+    public virtual bool IsWildPath => false;
+    
+    /// <summary>
+    /// Returns true for all path tiles; false, otherwise.  Returns false, by default.  PathBase, PathBorderEW, PathBorderNS, PathEW, PathJunction and PathNS return true.
+    /// </summary>
+    public virtual bool IsPath => false;
+
+    public virtual bool IsTreasure => false;
 
     /// <summary>
     /// Returns true, if the tile type blocks the scent trail.  Defaults to return true, if the tile type blocks line of sight; false, otherwise.  Secret doors typically block line of sight but will allow
@@ -69,6 +77,9 @@ internal abstract class Tile : IGetKey<string>
     /// </summary>
     public virtual bool IsVisibleTreasure => false;
 
+    public virtual bool IsBorder => false;
+
+    public virtual bool IsMagma => false;
     /// <summary>
     /// Returns a single action to perform on the tile.
     /// </summary>

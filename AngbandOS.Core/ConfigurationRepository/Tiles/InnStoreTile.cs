@@ -19,7 +19,6 @@ internal class InnStoreTile : Tile
     public override int MapPriority => 0;
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(AmpersandSymbol));
     public override ColorEnum Color => ColorEnum.Purple;
-    public override string Name => "Inn";
     public override string Description => "Inn";
 }
 

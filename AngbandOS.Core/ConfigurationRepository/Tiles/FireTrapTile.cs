@@ -13,11 +13,17 @@ internal class FireTrapTile : Tile
     private FireTrapTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(CaretSymbol));
     public override ColorEnum Color => ColorEnum.Brown;
-    public override string Name => "FireTrap";
     public override AlterAction? AlterAction => SaveGame.SingletonRepository.AlterActions.Get(nameof(DisarmAlterAction));
     public override string Description => "discolored spot";
     public override bool IsInteresting => true;
     public override bool IsPassable => true;
     public override bool IsTrap => true;
     public override int MapPriority => 20;
+    public override void StepOn(GridTile tile)
+    {
+        // Do 4d6 fire damage
+        SaveGame.MsgPrint("You are enveloped in flames!");
+        int damage = SaveGame.DiceRoll(4, 6);
+        SaveGame.FireDam(damage, "a fire trap");
+    }
 }

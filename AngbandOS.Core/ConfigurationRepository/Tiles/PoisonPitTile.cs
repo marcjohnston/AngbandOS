@@ -13,11 +13,48 @@ internal class PoisonPitTile : Tile
     private PoisonPitTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(CaretSymbol));
     public override ColorEnum Color => ColorEnum.Grey;
-    public override string Name => "PoisonPit";
     public override AlterAction? AlterAction => SaveGame.SingletonRepository.AlterActions.Get(nameof(DisarmAlterAction));
     public override string Description => "pit";
     public override bool IsInteresting => true;
     public override bool IsPassable => true;
     public override bool IsTrap => true;
     public override int MapPriority => 20;
+    public override void StepOn(GridTile tile)
+    {
+        // A pit can be flown over with feather fall
+        if (SaveGame.HasFeatherFall)
+        {
+            SaveGame.MsgPrint("You fly over a spiked pit.");
+        }
+        else
+        {
+            SaveGame.MsgPrint("You fall into a spiked pit!");
+            // A pit does 2d6 fall damage
+            int damage = SaveGame.DiceRoll(2, 6);
+            string name = "a pit trap";
+            // 50% chance of doing double damage plus bleeding plus poison
+            if (SaveGame.RandomLessThan(100) < 50)
+            {
+                SaveGame.MsgPrint("You are impaled on poisonous spikes!");
+                name = "a spiked pit";
+                damage *= 2;
+                SaveGame.TimedBleeding.AddTimer(SaveGame.DieRoll(damage));
+                // Hagarg Ryonis can save us from the poison
+                if (SaveGame.HasPoisonResistance || SaveGame.TimedPoisonResistance.TurnsRemaining != 0)
+                {
+                    SaveGame.MsgPrint("The poison does not affect you!");
+                }
+                else if (SaveGame.DieRoll(10) <= SaveGame.Religion.GetNamedDeity(GodName.Hagarg_Ryonis).AdjustedFavour)
+                {
+                    SaveGame.MsgPrint("Hagarg Ryonis's favour protects you!");
+                }
+                else
+                {
+                    damage *= 2;
+                    SaveGame.TimedPoison.AddTimer(SaveGame.DieRoll(damage));
+                }
+            }
+            SaveGame.TakeHit(damage, name);
+        }
+    }
 }

@@ -19,7 +19,6 @@ internal class BlackMarketStoreTile : Tile
     public override int MapPriority => 0;
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(NumberSevenSymbol));
     public override ColorEnum Color => ColorEnum.Black;
-    public override string Name => "BlackMarket";
     public override string Description => "Black Market";
 }
 

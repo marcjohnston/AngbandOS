@@ -13,11 +13,16 @@ internal class TeleportRuneTile : Tile
     private TeleportRuneTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(CaretSymbol));
     public override ColorEnum Color => ColorEnum.Purple;
-    public override string Name => "TeleportRune";
     public override AlterAction? AlterAction => SaveGame.SingletonRepository.AlterActions.Get(nameof(DisarmAlterAction));
     public override string Description => "strange rune";
     public override bool IsInteresting => true;
     public override bool IsPassable => true;
     public override bool IsTrap => true;
     public override int MapPriority => 20;
+    public override void StepOn(GridTile tile)
+    {
+        // Teleport the player up to 100 squares
+        SaveGame.MsgPrint("You hit a teleport trap!");
+        SaveGame.RunScriptInt(nameof(TeleportSelfScript), 100);
+    }
 }

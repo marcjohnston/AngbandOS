@@ -13,11 +13,19 @@ internal class SleepGasTile : Tile
     private SleepGasTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(CaretSymbol));
     public override ColorEnum Color => ColorEnum.Green;
-    public override string Name => "SleepGas";
     public override AlterAction? AlterAction => SaveGame.SingletonRepository.AlterActions.Get(nameof(DisarmAlterAction));
     public override string Description => "gas trap";
     public override bool IsInteresting => true;
     public override bool IsPassable => true;
     public override bool IsTrap => true;
     public override int MapPriority => 20;
+    public override void StepOn(GridTile tile)
+    {
+        // Paralyse the player
+        SaveGame.MsgPrint("A strange white mist surrounds you!");
+        if (!SaveGame.HasFreeAction)
+        {
+            SaveGame.TimedParalysis.AddTimer(SaveGame.RandomLessThan(10) + 5);
+        }
+    }
 }

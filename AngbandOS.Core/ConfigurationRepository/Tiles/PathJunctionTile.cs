@@ -13,7 +13,7 @@ internal class PathJunctionTile : Tile
     private PathJunctionTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(PlusSignSymbol));
     public override ColorEnum Color => ColorEnum.BrightBrown;
-    public override string Name => "PathJunction";
+    public override bool IsPath => true;
     public override string Description => "path";
     public override bool DimsOutsideLOS => true;
     public override bool IsPassable => true;

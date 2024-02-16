@@ -13,7 +13,6 @@ internal class FountainTile : Tile
     private FountainTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(TildeSymbol));
     public override ColorEnum Color => ColorEnum.BrightBlue;
-    public override string Name => "Fountain";
     public override AlterAction? AlterAction => SaveGame.SingletonRepository.AlterActions.Get(nameof(TunnelAlterAction));
     public override bool BlocksLos => true;
     public override string Description => "fountain";

@@ -12,7 +12,6 @@ internal class WallBasicTile : Tile
 {
     private WallBasicTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(PoundSignSymbol));
-    public override string Name => "WallBasic";
     public override AlterAction? AlterAction => SaveGame.SingletonRepository.AlterActions.Get(nameof(TunnelAlterAction));
     public override bool BlocksLos => true;
     public override string Description => "granite wall";

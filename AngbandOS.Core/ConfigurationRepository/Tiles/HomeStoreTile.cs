@@ -19,7 +19,6 @@ internal class HomeStoreTile : Tile
     public override int MapPriority => 0;
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(AtSymbol));
     public override ColorEnum Color => ColorEnum.Pink;
-    public override string Name => "Home";
     public override string Description => "Home";
 }
 

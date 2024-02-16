@@ -5160,11 +5160,11 @@ internal class SaveGame
                                 {
                                     continue;
                                 }
-                                if (Grid[y][x].FeatureType.Name == "ElderSign")
+                                if (Grid[y][x].FeatureType is ElderSignSigilTile)
                                 {
                                     continue;
                                 }
-                                if (Grid[y][x].FeatureType.Name == "YellowSign")
+                                if (Grid[y][x].FeatureType is YellowSignSigilTile)
                                 {
                                     continue;
                                 }
@@ -6671,7 +6671,7 @@ internal class SaveGame
         GridTile cPtr = Grid[y][x];
         MsgPrint("You smash into the door!");
         int bash = AbilityScores[Ability.Strength].StrAttackSpeedComponent;
-        int temp = int.Parse(cPtr.FeatureType.Name.Substring(10));
+        int temp = cPtr.FeatureType.LockLevel;
         temp = bash - (temp * 10);
         if (temp < 1)
         {
@@ -6829,7 +6829,7 @@ internal class SaveGame
     {
         EnergyUse = 100;
         GridTile cPtr = Grid[y][x];
-        if (cPtr.FeatureType.Name == "BrokenDoor")
+        if (cPtr.FeatureType is BrokenDoorTile)
         {
             MsgPrint("The door appears to be broken.");
         }
@@ -6974,7 +6974,7 @@ internal class SaveGame
                 continue;
             }
             // It must actually be an open door
-            if (Grid[yy][xx].FeatureType.Name != "OpenDoor")
+            if (Grid[yy][xx].FeatureType is not OpenDoorTile)
             {
                 continue;
             }
@@ -7390,7 +7390,7 @@ internal class SaveGame
             // If we can't see it and haven't memories it, tell us what we bumped into
             if (tile.TileFlags.IsClear(GridTile.PlayerMemorized) && (TimedBlindness.TurnsRemaining != 0 || tile.TileFlags.IsClear(GridTile.PlayerLit)))
             {
-                if (tile.FeatureType.Name == "Rubble")
+                if (tile.FeatureType is RubbleTile)
                 {
                     MsgPrint("You feel some rubble blocking your way.");
                     tile.TileFlags.Set(GridTile.PlayerMemorized);
@@ -7402,20 +7402,20 @@ internal class SaveGame
                     tile.TileFlags.Set(GridTile.PlayerMemorized);
                     RedrawSingleLocation(newY, newX);
                 }
-                else if (tile.FeatureType.Name == "Pillar")
+                else if (tile.FeatureType is PillarTile)
                 {
                     MsgPrint("You feel a pillar blocking your way.");
                     tile.TileFlags.Set(GridTile.PlayerMemorized);
                     RedrawSingleLocation(newY, newX);
                 }
-                else if (tile.FeatureType.Name.Contains("Water"))
+                else if (tile.FeatureType.IsWater)
                 {
                     MsgPrint("Your way seems to be blocked by water.");
                     tile.TileFlags.Set(GridTile.PlayerMemorized);
                     RedrawSingleLocation(newY, newX);
                 }
                 // If we're moving onto a border, change wilderness location
-                else if (tile.FeatureType.Name.Contains("Border"))
+                else if (tile.FeatureType.IsBorder)
                 {
                     if (Wilderness[WildernessY][WildernessX].Town != null)
                     {
@@ -7469,7 +7469,7 @@ internal class SaveGame
             // We can see it, so give a different message
             else
             {
-                if (tile.FeatureType.Name == "Rubble")
+                if (tile.FeatureType is RubbleTile)
                 {
                     MsgPrint("There is rubble blocking your way.");
                     if (!(TimedConfusion.TurnsRemaining != 0 || TimedStun.TurnsRemaining != 0 || TimedHallucinations.TurnsRemaining != 0))
@@ -7483,20 +7483,20 @@ internal class SaveGame
                     tile.TileFlags.Set(GridTile.PlayerMemorized);
                     RedrawSingleLocation(newY, newX);
                 }
-                else if (tile.FeatureType.Name == "Pillar")
+                else if (tile.FeatureType is PillarTile)
                 {
                     MsgPrint("There is a pillar blocking your way.");
                     tile.TileFlags.Set(GridTile.PlayerMemorized);
                     RedrawSingleLocation(newY, newX);
                 }
-                else if (tile.FeatureType.Name.Contains("Water"))
+                else if (tile.FeatureType.IsWater)
                 {
                     MsgPrint("You cannot swim.");
                     tile.TileFlags.Set(GridTile.PlayerMemorized);
                     RedrawSingleLocation(newY, newX);
                 }
                 // Again, walking onto a border means a change of wilderness grid
-                else if (tile.FeatureType.Name.Contains("Border"))
+                else if (tile.FeatureType.IsBorder)
                 {
                     if (Wilderness[WildernessY][WildernessX].Town != null)
                     {
@@ -7608,7 +7608,7 @@ internal class SaveGame
             _artificialKeyBuffer += SingletonRepository.GameCommands.Get(nameof(EnterStoreGameCommand)).KeyChar;
         }
         // If we've just stepped on an unknown trap then activate it
-        else if (tile.FeatureType.Name == "Invis")
+        else if (tile.FeatureType is InvisibleTile)
         {
             Disturb(false);
             MsgPrint("You found a trap!");
@@ -8670,7 +8670,7 @@ internal class SaveGame
             }
         }
         // Pillars are a bit easier than walls
-        else if (tile.FeatureType.Name == "Pillar")
+        else if (tile.FeatureType is PillarTile)
         {
             if (SkillDigging > 40 + RandomLessThan(300) && RemoveTileViaTunnelling(y, x))
             {
@@ -8683,7 +8683,7 @@ internal class SaveGame
             }
         }
         // We can't tunnel through water
-        else if (tile.FeatureType.Name == "Water")
+        else if (tile.FeatureType is WaterTile)
         {
             MsgPrint("The water fills up your tunnel as quickly as you dig!");
         }
@@ -8693,7 +8693,7 @@ internal class SaveGame
             MsgPrint($"The {tile.FeatureType.Description} resists your attempts to tunnel through it.");
         }
         // It's a wall, so we tunnel normally
-        else if (tile.FeatureType.Name.Contains("Wall"))
+        else if (tile.FeatureType.IsWall)
         {
             if (SkillDigging > 40 + RandomLessThan(1600) && RemoveTileViaTunnelling(y, x))
             {
@@ -8706,16 +8706,16 @@ internal class SaveGame
             }
         }
         // It's a rock seam, so it might have treasure
-        else if (tile.FeatureType.Name.Contains("Magma") || tile.FeatureType.Name.Contains("Quartz"))
+        else if (tile.FeatureType.IsVein)
         {
             bool okay;
             bool hasValue = false;
             bool isMagma = false;
-            if (tile.FeatureType.Name.Contains("Treas"))
+            if (tile.FeatureType.IsTreasure)
             {
                 hasValue = true;
             }
-            if (tile.FeatureType.Name.Contains("Magma"))
+            if (tile.FeatureType.IsMagma)
             {
                 isMagma = true;
             }
@@ -8754,7 +8754,7 @@ internal class SaveGame
             }
         }
         // Rubble is easy to tunnel through
-        else if (tile.FeatureType.Name == "Rubble")
+        else if (tile.FeatureType is RubbleTile)
         {
             if (SkillDigging > RandomLessThan(200) && RemoveTileViaTunnelling(y, x))
             {
@@ -9030,289 +9030,10 @@ internal class SaveGame
     /// </summary>
     private void StepOnTrap()
     {
-        int damage;
-        string name = "a trap";
         Disturb(false);
         GridTile tile = Grid[MapY][MapX];
         // Check the type of trap
-        switch (tile.FeatureType.Name)
-        {
-            case "TrapDoor":
-                {
-                    // Trap doors can be flown over with feather fall
-                    if (HasFeatherFall)
-                    {
-                        MsgPrint("You fly over a trap door.");
-                    }
-                    else
-                    {
-                        MsgPrint("You fell through a trap door!");
-                        // Trap doors do 2d8 fall damage
-                        damage = DiceRoll(2, 8);
-                        name = "a trap door";
-                        TakeHit(damage, name);
-                        // Even if we survived, we need a new level
-                        if (Health >= 0)
-                        {
-                            DoCmdSaveGame(true);
-                        }
-                        NewLevelFlag = true;
-                        // In dungeons we fall to a deeper level, but in towers we fall to a
-                        // shallower level because they go up instead of down
-                        if (CurDungeon.Tower)
-                        {
-                            CurrentDepth--;
-                        }
-                        else
-                        {
-                            CurrentDepth++;
-                        }
-                    }
-                    break;
-                }
-            case "Pit":
-                {
-                    // A pit can be flown over with feather fall
-                    if (HasFeatherFall)
-                    {
-                        MsgPrint("You fly over a pit trap.");
-                    }
-                    else
-                    {
-                        MsgPrint("You fell into a pit!");
-                        // Pits do 2d6 fall damage
-                        damage = DiceRoll(2, 6);
-                        name = "a pit trap";
-                        TakeHit(damage, name);
-                    }
-                    break;
-                }
-            case "SpikedPit":
-                {
-                    // A pit can be flown over with feather fall
-                    if (HasFeatherFall)
-                    {
-                        MsgPrint("You fly over a spiked pit.");
-                    }
-                    else
-                    {
-                        MsgPrint("You fall into a spiked pit!");
-                        name = "a pit trap";
-                        // A pit does 2d6 fall damage
-                        damage = DiceRoll(2, 6);
-                        // 50% chance of doing double damage plus bleeding
-                        if (RandomLessThan(100) < 50)
-                        {
-                            MsgPrint("You are impaled!");
-                            name = "a spiked pit";
-                            damage *= 2;
-                            TimedBleeding.AddTimer(DieRoll(damage));
-                        }
-                        TakeHit(damage, name);
-                    }
-                    break;
-                }
-            case "PoisonPit":
-                {
-                    // A pit can be flown over with feather fall
-                    if (HasFeatherFall)
-                    {
-                        MsgPrint("You fly over a spiked pit.");
-                    }
-                    else
-                    {
-                        MsgPrint("You fall into a spiked pit!");
-                        // A pit does 2d6 fall damage
-                        damage = DiceRoll(2, 6);
-                        name = "a pit trap";
-                        // 50% chance of doing double damage plus bleeding plus poison
-                        if (RandomLessThan(100) < 50)
-                        {
-                            MsgPrint("You are impaled on poisonous spikes!");
-                            name = "a spiked pit";
-                            damage *= 2;
-                            TimedBleeding.AddTimer(DieRoll(damage));
-                            // Hagarg Ryonis can save us from the poison
-                            if (HasPoisonResistance || TimedPoisonResistance.TurnsRemaining != 0)
-                            {
-                                MsgPrint("The poison does not affect you!");
-                            }
-                            else if (DieRoll(10) <= Religion.GetNamedDeity(GodName.Hagarg_Ryonis).AdjustedFavour)
-                            {
-                                MsgPrint("Hagarg Ryonis's favour protects you!");
-                            }
-                            else
-                            {
-                                damage *= 2;
-                                TimedPoison.AddTimer(DieRoll(damage));
-                            }
-                        }
-                        TakeHit(damage, name);
-                    }
-                    break;
-                }
-            case "SummonRune":
-                {
-                    MsgPrint("There is a flash of shimmering light!");
-                    // Trap disappears when triggered
-                    tile.TileFlags.Clear(GridTile.PlayerMemorized);
-                    RevertTileToBackground(MapY, MapX);
-                    // Summon 1d3+2 monsters
-                    int num = 2 + DieRoll(3);
-                    for (int i = 0; i < num; i++)
-                    {
-                        SummonSpecific(MapY, MapX, Difficulty, null);
-                    }
-                    // Have a chance of also cursing the player
-                    if (Difficulty > DieRoll(100))
-                    {
-                        do
-                        {
-                            ActivateDreadCurse();
-                        } while (DieRoll(6) == 1);
-                    }
-                    break;
-                }
-            case "TeleportRune":
-                {
-                    // Teleport the player up to 100 squares
-                    MsgPrint("You hit a teleport trap!");
-                    RunScriptInt(nameof(TeleportSelfScript), 100);
-                    break;
-                }
-            case "FireTrap":
-                {
-                    // Do 4d6 fire damage
-                    MsgPrint("You are enveloped in flames!");
-                    damage = DiceRoll(4, 6);
-                    FireDam(damage, "a fire trap");
-                    break;
-                }
-            case "AcidTrap":
-                {
-                    // Do 4d6 acid damage
-                    MsgPrint("You are splashed with acid!");
-                    damage = DiceRoll(4, 6);
-                    AcidDam(damage, "an acid trap");
-                    break;
-                }
-            case "SlowDart":
-                {
-                    // Dart traps need a to-hit roll
-                    if (TrapCheckHitOnPlayer(125))
-                    {
-                        MsgPrint("A small dart hits you!");
-                        // Do 1d4 damage plus slow
-                        damage = DiceRoll(1, 4);
-                        TakeHit(damage, name);
-                        TimedSlow.AddTimer(RandomLessThan(20) + 20);
-                    }
-                    else
-                    {
-                        MsgPrint("A small dart barely misses you.");
-                    }
-                    break;
-                }
-            case "StrDart":
-                {
-                    // Dart traps need a to-hit roll
-                    if (TrapCheckHitOnPlayer(125))
-                    {
-                        MsgPrint("A small dart hits you!");
-                        // Do 1d4 damage plus strength drain
-                        damage = DiceRoll(1, 4);
-                        TakeHit(damage, "a dart trap");
-                        TryDecreasingAbilityScore(Ability.Strength);
-                    }
-                    else
-                    {
-                        MsgPrint("A small dart barely misses you.");
-                    }
-                    break;
-                }
-            case "DexDart":
-                {
-                    // Dart traps need a to-hit roll
-                    if (TrapCheckHitOnPlayer(125))
-                    {
-                        MsgPrint("A small dart hits you!");
-                        // Do 1d4 damage plus dexterity drain
-                        damage = DiceRoll(1, 4);
-                        TakeHit(damage, "a dart trap");
-                        TryDecreasingAbilityScore(Ability.Dexterity);
-                    }
-                    else
-                    {
-                        MsgPrint("A small dart barely misses you.");
-                    }
-                    break;
-                }
-            case "ConDart":
-                {
-                    // Dart traps need a to-hit roll
-                    if (TrapCheckHitOnPlayer(125))
-                    {
-                        MsgPrint("A small dart hits you!");
-                        // Do 1d4 damage plus constitution drain
-                        damage = DiceRoll(1, 4);
-                        TakeHit(damage, "a dart trap");
-                        TryDecreasingAbilityScore(Ability.Constitution);
-                    }
-                    else
-                    {
-                        MsgPrint("A small dart barely misses you.");
-                    }
-                    break;
-                }
-            case "BlindGas":
-                {
-                    // Blind the player
-                    MsgPrint("A black gas surrounds you!");
-                    if (!HasBlindnessResistance)
-                    {
-                        TimedBlindness.AddTimer(RandomLessThan(50) + 25);
-                    }
-                    break;
-                }
-            case "ConfuseGas":
-                {
-                    // Confuse the player
-                    MsgPrint("A gas of scintillating colors surrounds you!");
-                    if (!HasConfusionResistance)
-                    {
-                        TimedConfusion.AddTimer(RandomLessThan(20) + 10);
-                    }
-                    break;
-                }
-            case "PoisonGas":
-                {
-                    // Poison the player
-                    MsgPrint("A pungent green gas surrounds you!");
-                    if (!HasPoisonResistance && TimedPoisonResistance.TurnsRemaining == 0)
-                    {
-                        // Hagarg Ryonis may save you from the poison
-                        if (DieRoll(10) <= Religion.GetNamedDeity(GodName.Hagarg_Ryonis).AdjustedFavour)
-                        {
-                            MsgPrint("Hagarg Ryonis's favour protects you!");
-                        }
-                        else
-                        {
-                            TimedPoison.AddTimer(RandomLessThan(20) + 10);
-                        }
-                    }
-                    break;
-                }
-            case "SleepGas":
-                {
-                    // Paralyse the player
-                    MsgPrint("A strange white mist surrounds you!");
-                    if (!HasFreeAction)
-                    {
-                        TimedParalysis.AddTimer(RandomLessThan(10) + 5);
-                    }
-                    break;
-                }
-        }
+        tile.FeatureType.StepOn(tile);
     }
 
     /// <summary>
@@ -9369,7 +9090,7 @@ internal class SaveGame
     /// </summary>
     /// <param name="attackStrength"> The power of the trap's attack </param>
     /// <returns> True if the player was hit, false otherwise </returns>
-    private bool TrapCheckHitOnPlayer(int attackStrength)
+    public bool TrapCheckHitOnPlayer(int attackStrength)
     {
         // Always a 5% chance to hit and 5% chance to miss
         int k = RandomLessThan(100);
@@ -9534,12 +9255,12 @@ internal class SaveGame
                     continue;
                 }
                 // Can't summon onto an Elder Sign
-                if (Grid[y][x].FeatureType.Name == "ElderSign")
+                if (Grid[y][x].FeatureType is ElderSignSigilTile)
                 {
                     continue;
                 }
                 // Can't summon onto a Yellow Sign
-                if (Grid[y][x].FeatureType.Name == "YellowSign")
+                if (Grid[y][x].FeatureType is YellowSignSigilTile)
                 {
                     continue;
                 }
@@ -11734,7 +11455,7 @@ internal class SaveGame
             int x = RandomBetween(1, CurWid - 2);
             int y = RandomBetween(1, CurHgt - 2);
             cPtr = Grid[y][x];
-            if (cPtr.FeatureType.Name == cPtr.BackgroundFeature.Name)
+            if (cPtr.FeatureType == cPtr.BackgroundFeature)
             {
                 cPtr.SetFeature(SingletonRepository.Tiles.Get(nameof(RockTile)));
                 cPtr.TileFlags.Set(GridTile.PlayerMemorized);
@@ -11750,7 +11471,7 @@ internal class SaveGame
             int x = RandomBetween(1, CurWid - 2);
             int y = RandomBetween(1, CurHgt - 2);
             cPtr = Grid[y][x];
-            if (cPtr.FeatureType.Name == cPtr.BackgroundFeature.Name)
+            if (cPtr.FeatureType == cPtr.BackgroundFeature)
             {
                 cPtr.SetFeature(SingletonRepository.Tiles.Get(nameof(TreeTile)));
                 cPtr.TileFlags.Set(GridTile.PlayerMemorized);
@@ -11766,7 +11487,7 @@ internal class SaveGame
             int x = RandomBetween(1, CurWid - 2);
             int y = RandomBetween(1, CurHgt - 2);
             cPtr = Grid[y][x];
-            if (cPtr.FeatureType.Name == cPtr.BackgroundFeature.Name)
+            if (cPtr.FeatureType == cPtr.BackgroundFeature)
             {
                 cPtr.SetFeature(SingletonRepository.Tiles.Get(nameof(BushTile)));
                 cPtr.TileFlags.Set(GridTile.PlayerMemorized);
@@ -12148,12 +11869,12 @@ internal class SaveGame
                 {
                     x = -(midY - 1 - y);
                 }
-                if (!Grid[y][midX - 1 + x].FeatureType.Name.StartsWith("WildPath"))
+                if (!Grid[y][midX - 1 + x].FeatureType.IsWildPath)
                 {
                     Grid[y][midX - 1 + x].SetFeature(SingletonRepository.Tiles.Get(nameof(GrassTile)));
                 }
                 Grid[y][midX + x].SetFeature(SingletonRepository.Tiles.Get(nameof(WildPathNSTile)));
-                if (!Grid[y][midX + 1 + x].FeatureType.Name.StartsWith("WildPath"))
+                if (!Grid[y][midX + 1 + x].FeatureType.IsWildPath)
                 {
                     Grid[y][midX + 1 + x].SetFeature(SingletonRepository.Tiles.Get(nameof(GrassTile)));
                 }
@@ -12176,12 +11897,12 @@ internal class SaveGame
                 {
                     x = -(y - (midY + 1));
                 }
-                if (!Grid[y][midX - 1 + x].FeatureType.Name.StartsWith("WildPath"))
+                if (!Grid[y][midX - 1 + x].FeatureType.IsWildPath)
                 {
                     Grid[y][midX - 1 + x].SetFeature(SingletonRepository.Tiles.Get(nameof(GrassTile)));
                 }
                 Grid[y][midX + x].SetFeature(SingletonRepository.Tiles.Get(nameof(WildPathNSTile)));
-                if (!Grid[y][midX + 1 + x].FeatureType.Name.StartsWith("WildPath"))
+                if (!Grid[y][midX + 1 + x].FeatureType.IsWildPath)
                 {
                     Grid[y][midX + 1 + x].SetFeature(SingletonRepository.Tiles.Get(nameof(GrassTile)));
                 }
@@ -12204,12 +11925,12 @@ internal class SaveGame
                 {
                     y = -(midX - 1 - x);
                 }
-                if (!Grid[midY - 1 + y][x].FeatureType.Name.StartsWith("WildPath"))
+                if (!Grid[midY - 1 + y][x].FeatureType.IsWildPath)
                 {
                     Grid[midY - 1 + y][x].SetFeature(SingletonRepository.Tiles.Get(nameof(GrassTile)));
                 }
                 Grid[midY + y][x].SetFeature(SingletonRepository.Tiles.Get(nameof(WildPathEWTile)));
-                if (!Grid[midY + 1 + y][x].FeatureType.Name.StartsWith("WildPath"))
+                if (!Grid[midY + 1 + y][x].FeatureType.IsWildPath)
                 {
                     Grid[midY + 1 + y][x].SetFeature(SingletonRepository.Tiles.Get(nameof(GrassTile)));
                 }
@@ -12232,12 +11953,12 @@ internal class SaveGame
                 {
                     y = -(x - (midX + 1));
                 }
-                if (!Grid[midY - 1 + y][x].FeatureType.Name.StartsWith("WildPath"))
+                if (!Grid[midY - 1 + y][x].FeatureType.IsWildPath)
                 {
                     Grid[midY - 1 + y][x].SetFeature(SingletonRepository.Tiles.Get(nameof(GrassTile)));
                 }
                 Grid[midY + y][x].SetFeature(SingletonRepository.Tiles.Get(nameof(WildPathEWTile)));
-                if (!Grid[midY + 1 + y][x].FeatureType.Name.StartsWith("WildPath"))
+                if (!Grid[midY + 1 + y][x].FeatureType.IsWildPath)
                 {
                     Grid[midY + 1 + y][x].SetFeature(SingletonRepository.Tiles.Get(nameof(GrassTile)));
                 }
@@ -12488,24 +12209,24 @@ internal class SaveGame
         {
             for (int y = 1; y < CurHgt - 1; y++)
             {
-                if (Grid[y][x].FeatureType.Name != "PathBase")
+                if (Grid[y][x].FeatureType is not PathBaseTile)
                 {
                     continue;
                 }
                 int map = 0;
-                if (Grid[y - 1][x].FeatureType.Name.StartsWith("Path"))
+                if (Grid[y - 1][x].FeatureType.IsPath)
                 {
                     map++;
                 }
-                if (Grid[y][x + 1].FeatureType.Name.StartsWith("Path"))
+                if (Grid[y][x + 1].FeatureType.IsPath)
                 {
                     map += 2;
                 }
-                if (Grid[y + 1][x].FeatureType.Name.StartsWith("Path"))
+                if (Grid[y + 1][x].FeatureType.IsPath)
                 {
                     map += 4;
                 }
-                if (Grid[y][x - 1].FeatureType.Name.StartsWith("Path"))
+                if (Grid[y][x - 1].FeatureType.IsPath)
                 {
                     map += 8;
                 }
@@ -12629,7 +12350,7 @@ internal class SaveGame
         {
             x = DieRoll(CurWid - 2);
             y = DieRoll(CurHgt - 2);
-            if (Grid[y][x].FeatureType.Name != "Grass")
+            if (Grid[y][x].FeatureType is not GrassTile)
             {
                 continue;
             }
@@ -12647,7 +12368,7 @@ internal class SaveGame
         }
         else if (CameFrom == LevelStart.StartWalk)
         {
-            if (Grid[this.MapY][this.MapX].FeatureType.IsTree || Grid[this.MapY][this.MapX].FeatureType.Name == "Water")
+            if (Grid[this.MapY][this.MapX].FeatureType.IsTree || Grid[this.MapY][this.MapX].FeatureType is WaterTile)
             {
                 Grid[this.MapY][this.MapX].RevertToBackground();
             }
@@ -16090,7 +15811,7 @@ internal class SaveGame
     {
         string feat;
         GridTile cPtr = Grid[y][x];
-        if (cPtr.FeatureType.Name != "Invis")
+        if (cPtr.FeatureType is not InvisibleTile)
         {
             return;
         }
@@ -16248,7 +15969,7 @@ internal class SaveGame
             {
                 return true;
             }
-            if (dist != 0 && !GridPassable(y, x) && Grid[y][x].FeatureType.Name != "YellowSign")
+            if (dist != 0 && !GridPassable(y, x) && Grid[y][x].FeatureType is not YellowSignSigilTile)
             {
                 break;
             }
@@ -17449,11 +17170,11 @@ internal class SaveGame
             {
                 continue;
             }
-            if (Grid[y][x].FeatureType.Name == "ElderSign")
+            if (Grid[y][x].FeatureType is ElderSignSigilTile)
             {
                 continue;
             }
-            if (Grid[y][x].FeatureType.Name == "YellowSign")
+            if (Grid[y][x].FeatureType is YellowSignSigilTile)
             {
                 continue;
             }

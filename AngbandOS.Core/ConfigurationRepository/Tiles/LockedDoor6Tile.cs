@@ -13,7 +13,6 @@ internal class LockedDoor6Tile : Tile
     private LockedDoor6Tile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(PlusSignSymbol));
     public override ColorEnum Color => ColorEnum.BrightBrown;
-    public override string Name => "LockedDoor6";
     public override AlterAction? AlterAction => SaveGame.SingletonRepository.AlterActions.Get(nameof(OpenAlterAction));
     protected override string? MimicTileName => nameof(LockedDoor0Tile);
     public override bool BlocksLos => true;

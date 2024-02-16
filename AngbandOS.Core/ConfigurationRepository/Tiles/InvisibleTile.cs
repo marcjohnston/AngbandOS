@@ -12,7 +12,6 @@ internal class InvisibleTile : Tile
 {
     private InvisibleTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(PeriodSymbol));
-    public override string Name => "Invis";
     public override string Description => "invisible trap";
     public override bool DimsOutsideLOS => true;
     public override bool IsPassable => true;

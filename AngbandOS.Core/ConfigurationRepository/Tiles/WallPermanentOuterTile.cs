@@ -12,7 +12,6 @@ internal class WallPermanentOuterTile : Tile
 {
     private WallPermanentOuterTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(PoundSignSymbol));
-    public override string Name => "WallPermOuter";
     public override AlterAction? AlterAction => SaveGame.SingletonRepository.AlterActions.Get(nameof(TunnelAlterAction));
     protected override string? MimicTileName => nameof(WallPermanentInnerTile);
     public override bool BlocksLos => true;

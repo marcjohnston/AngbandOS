@@ -13,10 +13,12 @@ internal class MagmaVisibleTreasureTile : Tile
     private MagmaVisibleTreasureTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(AsteriskSymbol));
     public override ColorEnum Color => ColorEnum.BrightOrange;
-    public override string Name => "MagmaVisTreas";
     public override AlterAction? AlterAction => SaveGame.SingletonRepository.AlterActions.Get(nameof(TunnelAlterAction));
     public override bool BlocksLos => true;
     public override bool IsVisibleTreasure => true;
+    public override bool IsTreasure => true;
+    public override bool IsMagma => true;
+
     public override string Description => "magma vein with treasure";
     public override bool DimsOutsideLOS => true;
     public override bool IsWall => true;

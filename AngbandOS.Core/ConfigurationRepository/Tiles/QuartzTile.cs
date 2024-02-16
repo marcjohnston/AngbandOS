@@ -12,19 +12,18 @@ internal class QuartzTile : Tile
 {
     private QuartzTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(PoundSignSymbol));
-    public override string Name => "Quartz";
     public override AlterAction? AlterAction => SaveGame.SingletonRepository.AlterActions.Get(nameof(TunnelAlterAction));
     public override bool BlocksLos => true;
     protected override string? VisibleTreasureForTileName => nameof(QuartzVisibleTreasureTile);
     public override string Description => "quartz vein";
     public override bool DimsOutsideLOS => true;
+    /// <summary>
+    /// Returns true because this tile is a vein.
+    /// </summary>
+    public override bool IsVein => true;
     public override bool IsWall => true;
     public override int MapPriority => 11;
     public override bool RunPast => true;
     public override bool YellowInTorchlight => true;
 
-    /// <summary>
-    /// Returns true because this tile is a vein.
-    /// </summary>
-    public override bool IsVein => true;
 }
