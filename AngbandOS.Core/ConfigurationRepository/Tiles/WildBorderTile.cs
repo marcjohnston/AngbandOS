@@ -14,7 +14,7 @@ internal class WildBorderTile : Tile
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(PeriodSymbol));
     public override ColorEnum Color => ColorEnum.BrightGreen;
     public override string Name => "WildBorder";
-    protected override string? MimicTileName => "Grass";
+    protected override string? MimicTileName => nameof(GrassTile);
     public override bool BlocksLos => true;
     public override string Description => "border";
     public override bool DimsOutsideLOS => true;

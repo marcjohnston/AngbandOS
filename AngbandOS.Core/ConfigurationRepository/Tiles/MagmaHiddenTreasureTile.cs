@@ -15,9 +15,9 @@ internal class MagmaHiddenTreasureTile : Tile
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "MagmaHidTreas";
     public override AlterAction? AlterAction => SaveGame.SingletonRepository.AlterActions.Get(nameof(TunnelAlterAction));
-    protected override string? MimicTileName => "Magma";
+    protected override string? MimicTileName => nameof(MagmaTile);
     public override bool BlocksLos => true;
-    protected override string? HiddenTreasureForTileName => "MagmaVisTreas";
+    protected override string? HiddenTreasureForTileName => nameof(MagmaVisibleTreasureTile);
     public override string Description => "magma vein";
     public override bool DimsOutsideLOS => true;
     public override bool IsWall => true;

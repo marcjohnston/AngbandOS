@@ -8,18 +8,18 @@
 namespace AngbandOS.Core.Tiles;
 
 [Serializable]
-internal class PawnStoreTile : Tile
+internal class HallOfRecordsStoreTile : Tile
 {
-    private PawnStoreTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private HallOfRecordsStoreTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override bool BlocksLos => true;
     public override bool IsInteresting => true;
     public override bool IsPassable => true;
     public override bool IsPermanent => true;
     public override bool IsShop => true;
     public override int MapPriority => 0;
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(NumberZeroSymbol));
-    public override ColorEnum Color => ColorEnum.Turquoise;
-    public override string Name => "Pawnbrokers";
-    public override string Description => "Pawnbrokers";
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(NumberEightSymbol));
+    public override ColorEnum Color => ColorEnum.Yellow;
+    public override string Name => "HallOfRecords";
+    public override string Description => "Hall of Records";
 }
 

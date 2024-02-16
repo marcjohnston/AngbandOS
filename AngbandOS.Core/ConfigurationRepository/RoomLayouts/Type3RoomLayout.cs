@@ -56,7 +56,7 @@ internal class Type3RoomLayout : RoomLayout
         }
         Tile wallOuter = SaveGame.SingletonRepository.Tiles.Get(nameof(WallOuterTile));
         Tile wallInner = SaveGame.SingletonRepository.Tiles.Get(nameof(WallInnerTile));
-        Tile pillar = SaveGame.SingletonRepository.Tiles.Get("Pillar");
+        Tile pillar = SaveGame.SingletonRepository.Tiles.Get(nameof(PillarTile));
         for (y = y1A - 1; y <= y2A + 1; y++)
         {
             cPtr = SaveGame.Grid[y][x1A - 1];

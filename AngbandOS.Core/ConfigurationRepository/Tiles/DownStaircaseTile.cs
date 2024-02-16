@@ -8,13 +8,13 @@
 namespace AngbandOS.Core.Tiles;
 
 [Serializable]
-internal class UpStairTile : Tile
+internal class DownStaircaseTile : Tile
 {
-    private UpStairTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LessThanSymbol));
+    private DownStaircaseTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(GreaterThanSymbol));
     public override ColorEnum Color => ColorEnum.BrightBrown;
-    public override string Name => "UpStair";
-    public override string Description => "up staircase";
+    public override string Name => "DownStair";
+    public override string Description => "down staircase";
     public override bool DimsOutsideLOS => true;
     public override bool IsInteresting => true;
     public override bool IsPassable => true;
@@ -22,7 +22,7 @@ internal class UpStairTile : Tile
     public override int MapPriority => 25;
 
     /// <summary>
-    /// Returns true, because up stairs should be reveals with the DetectStairsScript.
+    /// Returns true, because down stairs should be reveals with the DetectStairsScript.
     /// </summary>
     public override bool IsRevealedWithDetectStairsScript => true;
 }

@@ -40,7 +40,7 @@ internal class LibraryStoreFactory : StoreFactory
         nameof(IsungTheLordShopkeeper)
     };
 
-    protected override string TileName => "Bookstore";
+    protected override string TileName => nameof(LibraryStoreTile);
 
     protected override StoreStockManifestDefinition[]? StoreStockManifestDefinitions => new[]
     {

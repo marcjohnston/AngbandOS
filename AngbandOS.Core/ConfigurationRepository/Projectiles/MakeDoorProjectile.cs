@@ -22,7 +22,7 @@ internal class MakeDoorProjectile : Projectile
         {
             return false;
         }
-        SaveGame.CaveSetFeat(y, x, SaveGame.SingletonRepository.Tiles.Get("LockedDoor0"));
+        SaveGame.CaveSetFeat(y, x, SaveGame.SingletonRepository.Tiles.Get(nameof(LockedDoor0Tile)));
         if (cPtr.TileFlags.IsSet(GridTile.PlayerMemorized))
         {
             obvious = true;

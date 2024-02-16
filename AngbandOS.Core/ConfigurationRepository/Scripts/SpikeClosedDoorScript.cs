@@ -59,26 +59,16 @@ internal class SpikeClosedDoorScript : Script, IScript, IRepeatableScript
                     SaveGame.EnergyUse = 100;
                     SaveGame.MsgPrint("You jam the door with a spike.");
                     // Replace the door feature with a jammed door
-                    if (tile.FeatureType.IsClosedDoor)
+                    if (tile.FeatureType.IsVisibleDoor)
                     {
-                        Tile? jammedTile = SaveGame.SingletonRepository.Tiles.SingleOrDefault(_tile => _tile.LockLevel == 0 && _tile.IsJammedClosedDoor == true);
+                        Tile? jammedTile = SaveGame.SingletonRepository.Tiles.Get(nameof(JammedDoor0Tile));
                         if (jammedTile == null)
                         {
-                            throw new Exception("No jammed door tiles with lock level 0 exist.");
+                            throw new Exception("No jammed door specified.");
                         }
                         tile.SetFeature(jammedTile);
                     }
-                    // If it's already jammed, strengthen it
-                    else if (tile.FeatureType.IsJammedClosedDoor)
-                    {
-                        int strength = tile.FeatureType.LockLevel;
-                        strength++;
-                        Tile? jammedTile = SaveGame.SingletonRepository.Tiles.SingleOrDefault(_tile => _tile.LockLevel == strength && _tile.IsJammedClosedDoor == true);
-                        if (jammedTile != null)
-                        {
-                            tile.SetFeature(jammedTile);
-                        }
-                    }
+
                     // Use up the spike from the player's inventory
                     SaveGame.InvenItemIncrease(itemIndex, -1);
                     SaveGame.InvenItemDescribe(itemIndex);

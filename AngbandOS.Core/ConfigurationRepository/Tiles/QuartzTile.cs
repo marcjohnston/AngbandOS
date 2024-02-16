@@ -15,6 +15,7 @@ internal class QuartzTile : Tile
     public override string Name => "Quartz";
     public override AlterAction? AlterAction => SaveGame.SingletonRepository.AlterActions.Get(nameof(TunnelAlterAction));
     public override bool BlocksLos => true;
+    protected override string? VisibleTreasureForTileName => nameof(QuartzVisibleTreasureTile);
     public override string Description => "quartz vein";
     public override bool DimsOutsideLOS => true;
     public override bool IsWall => true;

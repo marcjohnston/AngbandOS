@@ -44,7 +44,7 @@ internal class InnStoreFactory : StoreFactory
         nameof(SevirasTheMindcrafterShopkeeper)
     };
 
-    protected override string TileName => "Inn";
+    protected override string TileName => nameof(InnStoreTile);
 
     /// <summary>
     /// Returns an empty array of item criteria names because the inn doesn't buy items.

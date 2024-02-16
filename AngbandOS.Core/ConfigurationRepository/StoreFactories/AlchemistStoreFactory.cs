@@ -36,7 +36,7 @@ internal partial class AlchemistStoreFactory : StoreFactory
         nameof(DridashTheAlchemistShopkeeper)
     };
 
-    protected override string TileName => "Alchemist";
+    protected override string TileName => nameof(AlchemistStoreTile);
 
     protected override StoreStockManifestDefinition[]? StoreStockManifestDefinitions => new[]
     {

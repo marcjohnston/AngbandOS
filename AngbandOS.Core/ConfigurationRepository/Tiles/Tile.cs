@@ -16,6 +16,11 @@ internal abstract class Tile : IGetKey<string>
         SaveGame = saveGame;
     }
 
+    public Tile? OnJammedTile { get; protected set; }
+    protected virtual string? OnJammedTileName => null;
+    public Tile? VisibleTreasureForTile { get; protected set; }
+    protected virtual string? VisibleTreasureForTileName => null;
+
     /// <summary>
     /// Returns the entity serialized into a Json string.
     /// </summary>
@@ -24,12 +29,14 @@ internal abstract class Tile : IGetKey<string>
     {
         return "";
     }
-
-    public string GetKey => Name;
+    public virtual string Key => GetType().Name;
+    public string GetKey => Key;
     public void Bind()
     {
         MimicTile = MimicTileName == null ? null : SaveGame.SingletonRepository.Tiles.Get(MimicTileName);
         HiddenTreasureForTile = HiddenTreasureForTileName == null ? null : SaveGame.SingletonRepository.Tiles.Get(HiddenTreasureForTileName);
+        OnJammedTile = OnJammedTileName == null ? null : SaveGame.SingletonRepository.Tiles.Get(OnJammedTileName);
+        VisibleTreasureForTile = VisibleTreasureForTileName == null ? null : SaveGame.SingletonRepository.Tiles.Get(VisibleTreasureForTileName);
     }
 
     /// <summary>

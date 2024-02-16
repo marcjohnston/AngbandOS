@@ -20,15 +20,12 @@ internal class JamDoorProjectile : Projectile
         bool obvious = false;
         if (cPtr.FeatureType.IsVisibleDoor)
         {
-            if (cPtr.FeatureType.Name.Contains("Locked"))
+            Tile? jammedTile = cPtr.FeatureType.OnJammedTile;
+            if (jammedTile == null)
             {
-                cPtr.SetFeature(cPtr.FeatureType.Name.Replace("Locked", "Jammed"));
+                throw new Exception("No jammed door specified.");
             }
-            int strength = int.Parse(cPtr.FeatureType.Name.Substring(10));
-            if (strength < 7)
-            {
-                cPtr.SetFeature($"JammedDoor{strength + 1}");
-            }
+            cPtr.SetFeature(jammedTile);
             if (SaveGame.PlayerHasLosBold(y, x))
             {
                 SaveGame.MsgPrint("The door seems stuck.");

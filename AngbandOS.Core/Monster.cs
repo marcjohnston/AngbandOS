@@ -915,11 +915,11 @@ internal class Monster : IItemContainer
                 {
                     if (didBashDoor && SaveGame.RandomLessThan(100) < 50)
                     {
-                        SaveGame.CaveSetFeat(newY, newX, SaveGame.SingletonRepository.Tiles.Get("BrokenDoor"));
+                        SaveGame.CaveSetFeat(newY, newX, SaveGame.SingletonRepository.Tiles.Get(nameof(BrokenDoorTile)));
                     }
                     else
                     {
-                        SaveGame.CaveSetFeat(newY, newX, SaveGame.SingletonRepository.Tiles.Get("OpenDoor"));
+                        SaveGame.CaveSetFeat(newY, newX, SaveGame.SingletonRepository.Tiles.Get(nameof(OpenDoorTile)));
                     }
                     // If the player can see, remind ourselves to update the view later
                     if (SaveGame.PlayerHasLosBold(newY, newX))

@@ -15,7 +15,7 @@ internal class QuartzVisibleTreasureTile : Tile
     public override ColorEnum Color => ColorEnum.BrightRed;
     public override string Name => "QuartzVisTreas";
     public override AlterAction? AlterAction => SaveGame.SingletonRepository.AlterActions.Get(nameof(TunnelAlterAction));
-    protected override string? MimicTileName => "QuartzVisTreas";
+    protected override string? MimicTileName => nameof(QuartzVisibleTreasureTile);
     public override bool BlocksLos => true;
     public override bool IsVisibleTreasure => true;
     public override string Description => "quartz vein with treasure";

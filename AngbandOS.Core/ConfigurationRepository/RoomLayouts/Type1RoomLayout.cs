@@ -49,7 +49,7 @@ internal class Type1RoomLayout : RoomLayout
             cPtr = SaveGame.Grid[y2 + 1][x];
             cPtr.SetFeature(wallOuter);
         }
-        Tile pillar = SaveGame.SingletonRepository.Tiles.Get("Pillar");
+        Tile pillar = SaveGame.SingletonRepository.Tiles.Get(nameof(PillarTile));
         if (SaveGame.RandomLessThan(20) == 0)
         {
             for (y = y1; y <= y2; y += 2)

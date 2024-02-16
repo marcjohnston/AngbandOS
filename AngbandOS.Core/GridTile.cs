@@ -21,8 +21,8 @@ internal class GridTile : IItemContainer
         SaveGame = saveGame;
         X = x;
         Y = y;
-        BackgroundFeature = SaveGame.SingletonRepository.Tiles.Get("Nothing");
-        FeatureType = SaveGame.SingletonRepository.Tiles.Get("Nothing");
+        BackgroundFeature = SaveGame.SingletonRepository.Tiles.Get(nameof(NothingTile));
+        FeatureType = SaveGame.SingletonRepository.Tiles.Get(nameof(NothingTile));
     }
 
     /// <summary>
@@ -192,16 +192,6 @@ internal class GridTile : IItemContainer
     public void SetBackgroundFeature(Tile tile)
     {
         BackgroundFeature = tile;
-    }
-
-    /// <summary>
-    /// Sets the FeatureType of the tile to a named FloorTileType
-    /// </summary>
-    /// <param name="name"> </param>
-    [Obsolete("Use SetFeature(Tile)")]
-    public void SetFeature(string name)
-    {
-        FeatureType = SaveGame.SingletonRepository.Tiles.Get(name);
     }
 
     public void SetFeature(Tile tile)

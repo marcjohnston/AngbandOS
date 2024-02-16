@@ -14,7 +14,7 @@ internal class WallPermentSolidTile : Tile
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(PoundSignSymbol));
     public override string Name => "WallPermSolid";
     public override AlterAction? AlterAction => SaveGame.SingletonRepository.AlterActions.Get(nameof(TunnelAlterAction));
-    protected override string? MimicTileName => "WallPermInner";
+    protected override string? MimicTileName => nameof(WallPermanentInnerTile);
     public override bool BlocksLos => true;
     public override string Description => "magically reinforced wall";
     public override bool DimsOutsideLOS => true;

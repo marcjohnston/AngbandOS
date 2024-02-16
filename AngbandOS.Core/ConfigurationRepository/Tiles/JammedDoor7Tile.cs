@@ -15,7 +15,13 @@ internal class JammedDoor7Tile : Tile
     public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "JammedDoor7";
     public override AlterAction? AlterAction => SaveGame.SingletonRepository.AlterActions.Get(nameof(BashAlterAction));
-    protected override string? MimicTileName => "LockedDoor0";
+    protected override string? MimicTileName => nameof(LockedDoor0Tile);
+
+    /// <summary>
+    /// Returns itself (JammedDoor7) as the next jammed door level because this door is already jammed to the max.
+    /// </summary>
+    protected override string? OnJammedTileName => nameof(JammedDoor7Tile);
+
     public override bool BlocksLos => true;
     public override string Description => "jammed door";
     public override bool DimsOutsideLOS => true;

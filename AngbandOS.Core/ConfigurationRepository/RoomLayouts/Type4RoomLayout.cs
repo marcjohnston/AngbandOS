@@ -331,13 +331,13 @@ internal class Type4RoomLayout : RoomLayout
     private void PlaceDownStairs(int y, int x)
     {
         GridTile cPtr = SaveGame.Grid[y][x];
-        cPtr.SetFeature(SaveGame.SingletonRepository.Tiles.Get("DownStair"));
+        cPtr.SetFeature(SaveGame.SingletonRepository.Tiles.Get(nameof(DownStaircaseTile)));
     }
 
     private void PlaceUpStairs(int y, int x)
     {
         GridTile cPtr = SaveGame.Grid[y][x];
-        cPtr.SetFeature(SaveGame.SingletonRepository.Tiles.Get("UpStair"));
+        cPtr.SetFeature(SaveGame.SingletonRepository.Tiles.Get(nameof(UpStaircaseTile)));
     }
 
     private void VaultObjects(int y, int x, int num)
@@ -379,7 +379,15 @@ internal class Type4RoomLayout : RoomLayout
     private void PlaceLockedDoor(int y, int x)
     {
         GridTile cPtr = SaveGame.Grid[y][x];
-        WeightedRandom<Tile> tiles = new WeightedRandom<Tile>(SaveGame, SaveGame.SingletonRepository.Tiles.Where(_tile => _tile.IsClosedDoor == true));
+        WeightedRandom<Tile> tiles = new WeightedRandom<Tile>(SaveGame);
+        tiles.Add(1, SaveGame.SingletonRepository.Tiles.Get(nameof(LockedDoor0Tile)));
+        tiles.Add(1, SaveGame.SingletonRepository.Tiles.Get(nameof(LockedDoor1Tile)));
+        tiles.Add(1, SaveGame.SingletonRepository.Tiles.Get(nameof(LockedDoor2Tile)));
+        tiles.Add(1, SaveGame.SingletonRepository.Tiles.Get(nameof(LockedDoor3Tile)));
+        tiles.Add(1, SaveGame.SingletonRepository.Tiles.Get(nameof(LockedDoor4Tile)));
+        tiles.Add(1, SaveGame.SingletonRepository.Tiles.Get(nameof(LockedDoor5Tile)));
+        tiles.Add(1, SaveGame.SingletonRepository.Tiles.Get(nameof(LockedDoor6Tile)));
+        tiles.Add(1, SaveGame.SingletonRepository.Tiles.Get(nameof(LockedDoor7Tile)));
         Tile tile = tiles.Choose();
         cPtr.SetFeature(tile);
     }
