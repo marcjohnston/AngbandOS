@@ -14,10 +14,10 @@ namespace AngbandOS.Core.Repositories;
 /// <typeparam name="TKey"></typeparam>
 /// <typeparam name="TValue"></typeparam>
 [Serializable]
-internal abstract class DictionaryRepository<TKey, TValue> : ListRepository<TValue> where TValue : IGetKey<TKey> where TKey : notnull
+internal class DictionaryRepository<TKey, TValue> : ListRepository<TValue> where TValue : IGetKey<TKey> where TKey : notnull
 {
     private Dictionary<TKey, TValue> dictionary = new Dictionary<TKey, TValue>();
-    protected DictionaryRepository(SaveGame saveGame) : base(saveGame) { }
+    public DictionaryRepository(SaveGame saveGame) : base(saveGame) { }
 
     /// <summary>
     /// Returns the pluralized type name for the TValue generic as the name of this string list repository.
