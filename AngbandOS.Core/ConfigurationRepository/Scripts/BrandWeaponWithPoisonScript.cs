@@ -23,20 +23,18 @@ internal class BrandWeaponWithPoisonScript : Script, IScript
         // We must have a non-rare, non-artifact weapon that isn't cursed
         if (item != null && item.FixedArtifact == null && !item.IsRare() && string.IsNullOrEmpty(item.RandartName) && !item.IsCursed())
         {
-            string act;
             string itemName = item.Description(false, 0);
 
             // Make it a poison brand
-            act = "is coated with poison.";
             item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(WeaponOfPoisoningRareItem));
 
             // Let the player know what happened
-            SaveGame.MsgPrint($"Your {itemName} {act}");
+            SaveGame.MsgPrint($"Your {itemName} is coated with poison.");
             SaveGame.Enchant(item, SaveGame.RandomLessThan(3) + 4, Constants.EnchTohit | Constants.EnchTodam);
         }
         else
         {
-            SaveGame.MsgPrint("The Branding failed.");
+            SaveGame.MsgPrint($"The branding failed.");
         }
     }
 }
