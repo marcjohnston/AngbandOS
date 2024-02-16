@@ -11,8 +11,8 @@ namespace AngbandOS.Core.ClassSpells;
 internal class MonkPolymorphOtherChaosSpell : ClassSpell
 {
     private MonkPolymorphOtherChaosSpell(SaveGame saveGame) : base(saveGame) { }
-    public override Type Spell => typeof(ChaosSpellPolymorphOther);
-    public override Type CharacterClass => typeof(MonkCharacterClass);
+    public override string SpellName => nameof(ChaosSpellPolymorphOther);
+    public override string CharacterClassName => nameof(MonkCharacterClass);
     public override int Level => 12;
     public override int ManaCost => 12;
     public override int BaseFailure => 45;

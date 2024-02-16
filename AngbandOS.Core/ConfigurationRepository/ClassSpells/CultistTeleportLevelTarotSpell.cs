@@ -11,8 +11,8 @@ namespace AngbandOS.Core.ClassSpells;
 internal class CultistTeleportLevelTarotSpell : ClassSpell
 {
     private CultistTeleportLevelTarotSpell(SaveGame saveGame) : base(saveGame) { }
-    public override Type Spell => typeof(TarotSpellTeleportLevel);
-    public override Type CharacterClass => typeof(CultistCharacterClass);
+    public override string SpellName => nameof(TarotSpellTeleportLevel);
+    public override string CharacterClassName => nameof(CultistCharacterClass);
     public override int Level => 40;
     public override int ManaCost => 38;
     public override int BaseFailure => 70;

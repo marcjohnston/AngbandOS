@@ -11,8 +11,8 @@ namespace AngbandOS.Core.ClassSpells;
 internal class CultistDetectEvilDeathSpell : ClassSpell
 {
     private CultistDetectEvilDeathSpell(SaveGame saveGame) : base(saveGame) { }
-    public override Type Spell => typeof(DeathSpellDetectEvil);
-    public override Type CharacterClass => typeof(CultistCharacterClass);
+    public override string SpellName => nameof(DeathSpellDetectEvil);
+    public override string CharacterClassName => nameof(CultistCharacterClass);
     public override int Level => 3;
     public override int ManaCost => 3;
     public override int BaseFailure => 25;

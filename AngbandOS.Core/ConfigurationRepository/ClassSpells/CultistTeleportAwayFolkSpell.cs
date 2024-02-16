@@ -11,8 +11,8 @@ namespace AngbandOS.Core.ClassSpells;
 internal class CultistTeleportAwayFolkSpell : ClassSpell
 {
     private CultistTeleportAwayFolkSpell(SaveGame saveGame) : base(saveGame) { }
-    public override Type Spell => typeof(FolkSpellTeleportAway);
-    public override Type CharacterClass => typeof(CultistCharacterClass);
+    public override string SpellName => nameof(FolkSpellTeleportAway);
+    public override string CharacterClassName => nameof(CultistCharacterClass);
     public override int Level => 43;
     public override int ManaCost => 42;
     public override int BaseFailure => 70;

@@ -11,8 +11,8 @@ namespace AngbandOS.Core.ClassSpells;
 internal class HighMageWhirlpoolNatureSpell : ClassSpell
 {
     private HighMageWhirlpoolNatureSpell(SaveGame saveGame) : base(saveGame) { }
-    public override Type Spell => typeof(NatureSpellWhirlpool);
-    public override Type CharacterClass => typeof(HighMageCharacterClass);
+    public override string SpellName => nameof(NatureSpellWhirlpool);
+    public override string CharacterClassName => nameof(HighMageCharacterClass);
     public override int Level => 32;
     public override int ManaCost => 28;
     public override int BaseFailure => 75;

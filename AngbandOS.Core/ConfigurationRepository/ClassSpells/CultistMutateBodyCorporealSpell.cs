@@ -11,8 +11,8 @@ namespace AngbandOS.Core.ClassSpells;
 internal class CultistMutateBodyCorporealSpell : ClassSpell
 {
     private CultistMutateBodyCorporealSpell(SaveGame saveGame) : base(saveGame) { }
-    public override Type Spell => typeof(CorporealSpellMutateBody);
-    public override Type CharacterClass => typeof(CultistCharacterClass);
+    public override string SpellName => nameof(CorporealSpellMutateBody);
+    public override string CharacterClassName => nameof(CultistCharacterClass);
     public override int Level => 16;
     public override int ManaCost => 14;
     public override int BaseFailure => 60;

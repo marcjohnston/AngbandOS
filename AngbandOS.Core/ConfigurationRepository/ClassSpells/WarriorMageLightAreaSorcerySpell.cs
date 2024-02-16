@@ -11,8 +11,8 @@ namespace AngbandOS.Core.ClassSpells;
 internal class WarriorMageLightAreaSorcerySpell : ClassSpell
 {
     private WarriorMageLightAreaSorcerySpell(SaveGame saveGame) : base(saveGame) { }
-    public override Type Spell => typeof(SorcerySpellLightArea);
-    public override Type CharacterClass => typeof(WarriorMageCharacterClass);
+    public override string SpellName => nameof(SorcerySpellLightArea);
+    public override string CharacterClassName => nameof(WarriorMageCharacterClass);
     public override int Level => 4;
     public override int ManaCost => 4;
     public override int BaseFailure => 30;

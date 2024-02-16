@@ -11,8 +11,8 @@ namespace AngbandOS.Core.ClassSpells;
 internal class WarriorMageDimensionDoorSorcerySpell : ClassSpell
 {
     private WarriorMageDimensionDoorSorcerySpell(SaveGame saveGame) : base(saveGame) { }
-    public override Type Spell => typeof(SorcerySpellDimensionDoor);
-    public override Type CharacterClass => typeof(WarriorMageCharacterClass);
+    public override string SpellName => nameof(SorcerySpellDimensionDoor);
+    public override string CharacterClassName => nameof(WarriorMageCharacterClass);
     public override int Level => 15;
     public override int ManaCost => 12;
     public override int BaseFailure => 70;

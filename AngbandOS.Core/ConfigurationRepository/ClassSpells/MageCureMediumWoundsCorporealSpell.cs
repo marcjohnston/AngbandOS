@@ -11,8 +11,8 @@ namespace AngbandOS.Core.ClassSpells;
 internal class MageCureMediumWoundsCorporealSpell : ClassSpell
 {
     private MageCureMediumWoundsCorporealSpell(SaveGame saveGame) : base(saveGame) { }
-    public override Type Spell => typeof(CorporealSpellCureMediumWounds);
-    public override Type CharacterClass => typeof(MageCharacterClass);
+    public override string SpellName => nameof(CorporealSpellCureMediumWounds);
+    public override string CharacterClassName => nameof(MageCharacterClass);
     public override int Level => 6;
     public override int ManaCost => 5;
     public override int BaseFailure => 30;

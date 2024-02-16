@@ -11,8 +11,8 @@ namespace AngbandOS.Core.ClassSpells;
 internal class CultistSummonAnimalNatureSpell : ClassSpell
 {
     private CultistSummonAnimalNatureSpell(SaveGame saveGame) : base(saveGame) { }
-    public override Type Spell => typeof(NatureSpellSummonAnimal);
-    public override Type CharacterClass => typeof(CultistCharacterClass);
+    public override string SpellName => nameof(NatureSpellSummonAnimal);
+    public override string CharacterClassName => nameof(CultistCharacterClass);
     public override int Level => 31;
     public override int ManaCost => 31;
     public override int BaseFailure => 65;

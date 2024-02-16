@@ -11,8 +11,8 @@ namespace AngbandOS.Core.ClassSpells;
 internal class MonkCureLightWoundsCorporealSpell : ClassSpell
 {
     private MonkCureLightWoundsCorporealSpell(SaveGame saveGame) : base(saveGame) { }
-    public override Type Spell => typeof(CorporealSpellCureLightWounds);
-    public override Type CharacterClass => typeof(MonkCharacterClass);
+    public override string SpellName => nameof(CorporealSpellCureLightWounds);
+    public override string CharacterClassName => nameof(MonkCharacterClass);
     public override int Level => 1;
     public override int ManaCost => 1;
     public override int BaseFailure => 23;

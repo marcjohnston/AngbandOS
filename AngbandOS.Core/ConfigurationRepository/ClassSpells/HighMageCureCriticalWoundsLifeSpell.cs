@@ -11,8 +11,8 @@ namespace AngbandOS.Core.ClassSpells;
 internal class HighMageCureCriticalWoundsLifeSpell : ClassSpell
 {
     private HighMageCureCriticalWoundsLifeSpell(SaveGame saveGame) : base(saveGame) { }
-    public override Type Spell => typeof(LifeSpellCureCriticalWounds);
-    public override Type CharacterClass => typeof(HighMageCharacterClass);
+    public override string SpellName => nameof(LifeSpellCureCriticalWounds);
+    public override string CharacterClassName => nameof(HighMageCharacterClass);
     public override int Level => 15;
     public override int ManaCost => 15;
     public override int BaseFailure => 40;

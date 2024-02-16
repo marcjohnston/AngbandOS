@@ -11,8 +11,8 @@ namespace AngbandOS.Core.ClassSpells;
 internal class PriestTeleportOtherChaosSpell : ClassSpell
 {
     private PriestTeleportOtherChaosSpell(SaveGame saveGame) : base(saveGame) { }
-    public override Type Spell => typeof(ChaosSpellTeleportOther);
-    public override Type CharacterClass => typeof(PriestCharacterClass);
+    public override string SpellName => nameof(ChaosSpellTeleportOther);
+    public override string CharacterClassName => nameof(PriestCharacterClass);
     public override int Level => 29;
     public override int ManaCost => 22;
     public override int BaseFailure => 60;

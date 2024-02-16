@@ -11,8 +11,8 @@ namespace AngbandOS.Core.ClassSpells;
 internal class RogueSummonSpidersTarotSpell : ClassSpell
 {
     private RogueSummonSpidersTarotSpell(SaveGame saveGame) : base(saveGame) { }
-    public override Type Spell => typeof(TarotSpellSummonSpiders);
-    public override Type CharacterClass => typeof(RogueCharacterClass);
+    public override string SpellName => nameof(TarotSpellSummonSpiders);
+    public override string CharacterClassName => nameof(RogueCharacterClass);
     public override int Level => 30;
     public override int ManaCost => 30;
     public override int BaseFailure => 70;

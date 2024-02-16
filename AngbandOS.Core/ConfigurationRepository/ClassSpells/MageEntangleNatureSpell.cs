@@ -11,8 +11,8 @@ namespace AngbandOS.Core.ClassSpells;
 internal class MageEntangleNatureSpell : ClassSpell
 {
     private MageEntangleNatureSpell(SaveGame saveGame) : base(saveGame) { }
-    public override Type Spell => typeof(NatureSpellEntangle);
-    public override Type CharacterClass => typeof(MageCharacterClass);
+    public override string SpellName => nameof(NatureSpellEntangle);
+    public override string CharacterClassName => nameof(MageCharacterClass);
     public override int Level => 19;
     public override int ManaCost => 12;
     public override int BaseFailure => 55;

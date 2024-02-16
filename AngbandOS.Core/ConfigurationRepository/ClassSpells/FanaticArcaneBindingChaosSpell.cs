@@ -11,8 +11,8 @@ namespace AngbandOS.Core.ClassSpells;
 internal class FanaticArcaneBindingChaosSpell : ClassSpell
 {
     private FanaticArcaneBindingChaosSpell(SaveGame saveGame) : base(saveGame) { }
-    public override Type Spell => typeof(ChaosSpellArcaneBinding);
-    public override Type CharacterClass => typeof(FanaticCharacterClass);
+    public override string SpellName => nameof(ChaosSpellArcaneBinding);
+    public override string CharacterClassName => nameof(FanaticCharacterClass);
     public override int Level => 16;
     public override int ManaCost => 15;
     public override int BaseFailure => 80;

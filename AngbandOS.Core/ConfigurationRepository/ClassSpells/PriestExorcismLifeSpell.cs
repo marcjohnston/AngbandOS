@@ -11,8 +11,8 @@ namespace AngbandOS.Core.ClassSpells;
 internal class PriestExorcismLifeSpell : ClassSpell
 {
     private PriestExorcismLifeSpell(SaveGame saveGame) : base(saveGame) { }
-    public override Type Spell => typeof(LifeSpellExorcism);
-    public override Type CharacterClass => typeof(PriestCharacterClass);
+    public override string SpellName => nameof(LifeSpellExorcism);
+    public override string CharacterClassName => nameof(PriestCharacterClass);
     public override int Level => 15;
     public override int ManaCost => 14;
     public override int BaseFailure => 50;

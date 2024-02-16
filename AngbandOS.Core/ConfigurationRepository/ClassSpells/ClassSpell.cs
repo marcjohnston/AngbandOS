@@ -25,14 +25,14 @@ internal abstract class ClassSpell : IGetKey<string>
         return "";
     }
 
-    public abstract Type Spell { get; }
-    public abstract Type CharacterClass { get; }
+    public abstract string SpellName { get; }
+    public abstract string CharacterClassName { get; }
     public abstract int Level { get; }
     public abstract int ManaCost { get; }
     public abstract int BaseFailure { get; }
     public abstract int FirstCastExperience { get; }
 
-    public virtual string Key => $"{CharacterClass.Name}.{Spell.Name}";
+    public virtual string Key => $"{CharacterClassName}.{SpellName}";
     public string GetKey => Key;
 
     public void Bind() { }

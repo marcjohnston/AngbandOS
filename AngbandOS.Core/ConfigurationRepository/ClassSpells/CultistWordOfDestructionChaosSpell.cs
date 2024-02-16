@@ -11,8 +11,8 @@ namespace AngbandOS.Core.ClassSpells;
 internal class CultistWordOfDestructionChaosSpell : ClassSpell
 {
     private CultistWordOfDestructionChaosSpell(SaveGame saveGame) : base(saveGame) { }
-    public override Type Spell => typeof(ChaosSpellWordOfDestruction);
-    public override Type CharacterClass => typeof(CultistCharacterClass);
+    public override string SpellName => nameof(ChaosSpellWordOfDestruction);
+    public override string CharacterClassName => nameof(CultistCharacterClass);
     public override int Level => 27;
     public override int ManaCost => 17;
     public override int BaseFailure => 70;

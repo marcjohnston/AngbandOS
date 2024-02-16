@@ -11,8 +11,8 @@ namespace AngbandOS.Core.ClassSpells;
 internal class DruidWhirlpoolNatureSpell : ClassSpell
 {
     private DruidWhirlpoolNatureSpell(SaveGame saveGame) : base(saveGame) { }
-    public override Type Spell => typeof(NatureSpellWhirlpool);
-    public override Type CharacterClass => typeof(DruidCharacterClass);
+    public override string SpellName => nameof(NatureSpellWhirlpool);
+    public override string CharacterClassName => nameof(DruidCharacterClass);
     public override int Level => 32;
     public override int ManaCost => 28;
     public override int BaseFailure => 75;

@@ -11,8 +11,8 @@ namespace AngbandOS.Core.ClassSpells;
 internal class HighMageDetectDoorsAndTrapsNatureSpell : ClassSpell
 {
     private HighMageDetectDoorsAndTrapsNatureSpell(SaveGame saveGame) : base(saveGame) { }
-    public override Type Spell => typeof(NatureSpellDetectDoorsAndTraps);
-    public override Type CharacterClass => typeof(HighMageCharacterClass);
+    public override string SpellName => nameof(NatureSpellDetectDoorsAndTraps);
+    public override string CharacterClassName => nameof(HighMageCharacterClass);
     public override int Level => 2;
     public override int ManaCost => 2;
     public override int BaseFailure => 15;

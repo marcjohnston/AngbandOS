@@ -11,8 +11,8 @@ namespace AngbandOS.Core.ClassSpells;
 internal class WarriorMageSatisfyHungerLifeSpell : ClassSpell
 {
     private WarriorMageSatisfyHungerLifeSpell(SaveGame saveGame) : base(saveGame) { }
-    public override Type Spell => typeof(LifeSpellSatisfyHunger);
-    public override Type CharacterClass => typeof(WarriorMageCharacterClass);
+    public override string SpellName => nameof(LifeSpellSatisfyHunger);
+    public override string CharacterClassName => nameof(WarriorMageCharacterClass);
     public override int Level => 16;
     public override int ManaCost => 16;
     public override int BaseFailure => 45;

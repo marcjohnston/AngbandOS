@@ -11,8 +11,8 @@ namespace AngbandOS.Core.ClassSpells;
 internal class MonkGravityBeamChaosSpell : ClassSpell
 {
     private MonkGravityBeamChaosSpell(SaveGame saveGame) : base(saveGame) { }
-    public override Type Spell => typeof(ChaosSpellGravityBeam);
-    public override Type CharacterClass => typeof(MonkCharacterClass);
+    public override string SpellName => nameof(ChaosSpellGravityBeam);
+    public override string CharacterClassName => nameof(MonkCharacterClass);
     public override int Level => 24;
     public override int ManaCost => 20;
     public override int BaseFailure => 66;

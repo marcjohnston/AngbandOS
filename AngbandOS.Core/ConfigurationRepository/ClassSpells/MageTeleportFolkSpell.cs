@@ -11,8 +11,8 @@ namespace AngbandOS.Core.ClassSpells;
 internal class MageTeleportFolkSpell : ClassSpell
 {
     private MageTeleportFolkSpell(SaveGame saveGame) : base(saveGame) { }
-    public override Type Spell => typeof(FolkSpellTeleport);
-    public override Type CharacterClass => typeof(MageCharacterClass);
+    public override string SpellName => nameof(FolkSpellTeleport);
+    public override string CharacterClassName => nameof(MageCharacterClass);
     public override int Level => 18;
     public override int ManaCost => 15;
     public override int BaseFailure => 50;

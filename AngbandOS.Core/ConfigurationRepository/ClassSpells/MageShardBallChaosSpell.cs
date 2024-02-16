@@ -11,8 +11,8 @@ namespace AngbandOS.Core.ClassSpells;
 internal class MageShardBallChaosSpell : ClassSpell
 {
     private MageShardBallChaosSpell(SaveGame saveGame) : base(saveGame) { }
-    public override Type Spell => typeof(ChaosSpellShardBall);
-    public override Type CharacterClass => typeof(MageCharacterClass);
+    public override string SpellName => nameof(ChaosSpellShardBall);
+    public override string CharacterClassName => nameof(MageCharacterClass);
     public override int Level => 43;
     public override int ManaCost => 44;
     public override int BaseFailure => 80;

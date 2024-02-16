@@ -11,8 +11,8 @@ namespace AngbandOS.Core.ClassSpells;
 internal class RangerAttunementCorporealSpell : ClassSpell
 {
     private RangerAttunementCorporealSpell(SaveGame saveGame) : base(saveGame) { }
-    public override Type Spell => typeof(CorporealSpellAttunement);
-    public override Type CharacterClass => typeof(RangerCharacterClass);
+    public override string SpellName => nameof(CorporealSpellAttunement);
+    public override string CharacterClassName => nameof(RangerCharacterClass);
     public override int Level => 37;
     public override int ManaCost => 60;
     public override int BaseFailure => 95;
