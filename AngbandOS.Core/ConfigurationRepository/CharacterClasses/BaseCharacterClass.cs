@@ -188,19 +188,7 @@ internal abstract class BaseCharacterClass : IGetKey<string>
             {
                 item.TypeSpecificValue = 1;
             }
-            item.IdentityIsStoreBought = true;
-            item.BecomeFlavorAware();
-            item.BecomeKnown();
-            int slot = item.Factory.WieldSlot;
-            if (slot == -1)
-            {
-                SaveGame.InvenCarry(item);
-            }
-            else
-            {
-                SaveGame.SetInventoryItem(slot, item);
-                SaveGame.WeightCarried += item.Weight;
-            }
+            SaveGame.OutfitPlayerWithItem(item);
 
             // Allow the character class a chance to modify the item.
             OutfitItem(item);

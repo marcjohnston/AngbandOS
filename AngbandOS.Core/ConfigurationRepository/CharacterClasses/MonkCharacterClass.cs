@@ -74,7 +74,6 @@ internal class MonkCharacterClass : BaseCharacterClass
 
     protected override string[] OutfitItemFactoryNames => new string[]
     {
-        nameof(BeginnersHandbookSorceryBookItemFactory),
         nameof(HealingPotionItemFactory),
         nameof(SoftLeatherSoftArmorItemFactory)
     };

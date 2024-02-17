@@ -9979,6 +9979,30 @@ internal class SaveGame
             WeightCarried += carried.Weight;
         }
         BaseCharacterClass.OutfitPlayer();
+        PrimaryRealm.OutfitPlayer();
+        SecondaryRealm.OutfitPlayer();
+    }
+
+    /// <summary>
+    /// Adds an item to the players inventory.
+    /// </summary>
+    /// <param name="item"></param>
+
+    public void OutfitPlayerWithItem(Item item)
+    {
+        item.IdentityIsStoreBought = true;
+        item.BecomeFlavorAware();
+        item.BecomeKnown();
+        int slot = item.Factory.WieldSlot;
+        if (slot == -1)
+        {
+            InvenCarry(item);
+        }
+        else
+        {
+            SetInventoryItem(slot, item);
+            WeightCarried += item.Weight;
+        }
     }
 
     /// <summary>

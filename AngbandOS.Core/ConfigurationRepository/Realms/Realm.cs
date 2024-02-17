@@ -5,6 +5,8 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using AngbandOS.Core.ItemFactories;
+
 namespace AngbandOS.Core.Realms;
 
 [Serializable]
@@ -29,6 +31,20 @@ internal abstract class Realm : IGetKey<string>
 
     public string GetKey => Key;
     public void Bind() { }
+
+    /// <summary>
+    /// Adds the first book to the players inventory to outfit players that choose this realm with a starting book.
+    /// </summary>
+    public void OutfitPlayer()
+    {
+        // Get the first level book.
+        ItemFactory outfitItem = SpellBooks[0];
+
+        // Create an item from the factory.
+        Item item = outfitItem.CreateItem();
+
+        SaveGame.OutfitPlayerWithItem(item);
+    }
 
     /// <summary>
     /// Returns the spells books that belong to the realm.

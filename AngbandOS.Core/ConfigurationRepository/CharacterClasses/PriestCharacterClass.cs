@@ -93,8 +93,6 @@ internal class PriestCharacterClass : BaseCharacterClass
 
     protected override string[] OutfitItemFactoryNames => new string[]
     {
-        nameof(BeginnersHandbookSorceryBookItemFactory),
         nameof(MaceHaftedWeaponItemFactory),
-        nameof(BlackPrayersDeathBookItemFactory)
     };
 }

@@ -94,7 +94,6 @@ internal class HighMageCharacterClass : BaseCharacterClass
 
     protected override string[] OutfitItemFactoryNames => new string[]
     {
-        nameof(BeginnersHandbookSorceryBookItemFactory),
         nameof(DaggerWeaponItemFactory),
         nameof(SustainIntelligenceRingItemFactory)
     };

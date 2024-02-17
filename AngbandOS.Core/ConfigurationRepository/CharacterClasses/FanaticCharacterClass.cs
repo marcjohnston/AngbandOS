@@ -54,7 +54,6 @@ internal class FanaticCharacterClass : BaseCharacterClass
 
     protected override string[] OutfitItemFactoryNames => new string[]
     {
-        nameof(BeginnersHandbookSorceryBookItemFactory),
         nameof(BroadSwordWeaponItemFactory),
         nameof(MetalScaleMailHardArmorItemFactory)
     };

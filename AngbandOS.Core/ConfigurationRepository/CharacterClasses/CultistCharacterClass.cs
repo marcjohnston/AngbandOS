@@ -64,9 +64,7 @@ internal class CultistCharacterClass : BaseCharacterClass
 
     protected override string[] OutfitItemFactoryNames => new string[]
     {
-        nameof(BeginnersHandbookSorceryBookItemFactory),
         nameof(SustainIntelligenceRingItemFactory),
-        nameof(BlackPrayersDeathBookItemFactory)
     };
 
     public override void UpdateBonusesForMeleeWeapon(Item? oPtr)
