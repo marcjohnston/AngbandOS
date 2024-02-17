@@ -13,10 +13,10 @@ internal class LifeSpellWardingTrue : Spell
     private LifeSpellWardingTrue(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.ElderSign();
-        SaveGame.ElderSignCreation();
+        SaveGame.RunScript(nameof(ElderSignScript));
+        ProjectionFlag flg = ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem;
+        SaveGame.Project(0, 1, SaveGame.MapY, SaveGame.MapX, 0, SaveGame.SingletonRepository.Projectiles.Get(nameof(MakeElderSignProjectile)), flg);
     }
 
     public override string Name => "Warding True";
-    
 }

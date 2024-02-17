@@ -5105,22 +5105,6 @@ internal class SaveGame
         SingletonRepository.FlaggedActions.Get(nameof(RedrawMapFlaggedAction)).Set();
     }
 
-    public void ElderSign()
-    {
-        if (!GridOpenNoItem(MapY, MapX))
-        {
-            MsgPrint("The object resists the spell.");
-            return;
-        }
-        CaveSetFeat(MapY, MapX, SingletonRepository.Tiles.Get(nameof(ElderSignSigilTile)));
-    }
-
-    public void ElderSignCreation()
-    {
-        ProjectionFlag flg = ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem;
-        Project(0, 1, MapY, MapX, 0, SingletonRepository.Projectiles.Get(nameof(MakeElderSignProjectile)), flg);
-    }
-
     public void ElecDam(int dam, string kbStr)
     {
         int inv = dam < 30 ? 1 : dam < 60 ? 2 : 3;

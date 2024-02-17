@@ -13,7 +13,7 @@ internal class LifeSpellElderSign : Spell
     private LifeSpellElderSign(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.ElderSign();
+        SaveGame.RunScript(nameof(ElderSignScript));
     }
 
     public override string Name => "Elder Sign";

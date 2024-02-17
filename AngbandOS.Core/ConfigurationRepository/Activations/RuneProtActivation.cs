@@ -20,7 +20,7 @@ internal class RuneProtActivation : Activation
 
     public override bool Activate()
     {
-        SaveGame.ElderSign();
+        SaveGame.RunScript(nameof(ElderSignScript));
         return true;
     }
 
