@@ -5,17 +5,19 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Spells.Life;
+namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class LifeSpellCurePoison : Spell
+internal class CharmOthersScript : Script, IScript
 {
-    private LifeSpellCurePoison(SaveGame saveGame) : base(saveGame) { }
-    public override void Cast()
-    {
-        SaveGame.RunScript(nameof(CurePoisonScript));
-    }
+    private CharmOthersScript(SaveGame saveGame) : base(saveGame) { }
 
-    public override string Name => "Cure Poison";
-    
+    /// <summary>
+    /// Executes the script.
+    /// </summary>
+    /// <returns></returns>
+    public void ExecuteScript()
+    {
+        SaveGame.CharmMonsters(SaveGame.ExperienceLevel * 2);
+    }
 }

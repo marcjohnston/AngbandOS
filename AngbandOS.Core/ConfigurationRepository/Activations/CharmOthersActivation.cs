@@ -20,7 +20,7 @@ internal class CharmOthersActivation : Activation
 
     public override bool Activate()
     {
-        SaveGame.CharmMonsters(SaveGame.ExperienceLevel * 2);
+        SaveGame.RunScript(nameof(CharmOthersScript));
         return true;
     }
 

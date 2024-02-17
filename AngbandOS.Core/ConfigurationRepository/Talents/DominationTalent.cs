@@ -31,7 +31,7 @@ internal class DominationTalent : Talent
         }
         else
         {
-            SaveGame.CharmMonsters(SaveGame.ExperienceLevel * 2);
+            SaveGame.RunScript(nameof(CharmOthersScript));
         }
     }
 
