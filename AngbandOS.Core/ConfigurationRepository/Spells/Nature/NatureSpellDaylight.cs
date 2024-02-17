@@ -13,7 +13,7 @@ internal class NatureSpellDaylight : Spell
     private NatureSpellDaylight(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.LightArea(SaveGame.DiceRoll(2, SaveGame.ExperienceLevel / 2), (SaveGame.ExperienceLevel / 10) + 1);
+        SaveGame.RunScript(nameof(LightAreaScript));
         if (!SaveGame.Race.IsBurnedBySunlight || SaveGame.HasLightResistance)
         {
             return;

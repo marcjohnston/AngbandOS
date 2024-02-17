@@ -13,7 +13,7 @@ internal class SorcerySpellLightArea : Spell
     private SorcerySpellLightArea(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.LightArea(SaveGame.DiceRoll(2, SaveGame.ExperienceLevel / 2), (SaveGame.ExperienceLevel / 10) + 1);
+        SaveGame.RunScript(nameof(LightAreaScript));
     }
 
     public override string Name => "Light Area";

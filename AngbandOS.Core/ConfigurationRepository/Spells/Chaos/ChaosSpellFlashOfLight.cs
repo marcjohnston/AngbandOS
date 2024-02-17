@@ -13,7 +13,7 @@ internal class ChaosSpellFlashOfLight : Spell
     private ChaosSpellFlashOfLight(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.RunScript(nameof(FlashOfLightScript));
+        SaveGame.RunScript(nameof(LightAreaScript));
     }
 
     public override void CastFailed()
