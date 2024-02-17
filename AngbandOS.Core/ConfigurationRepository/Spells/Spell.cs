@@ -47,7 +47,11 @@ internal abstract class Spell : IGetKey<string>
     /// </summary>
     public abstract string Name { get; }
 
-    public bool Worked;
+    /// <summary>
+    /// Returns true, if the spell has been attempted to be cast; false, otherwise.  Set to false, by default.  Set to true, the first time the player attempts to cast the
+    /// spell; regardless of success or failure.
+    /// </summary>
+    public bool Tried { get; private set; } = false;
 
     public int FirstCastExperience
     {
@@ -69,7 +73,24 @@ internal abstract class Spell : IGetKey<string>
         get; set;
     }
 
+    /// <summary>
+    /// Performs the spell.
+    /// </summary>
     public abstract void Cast();
+
+    public void CastSpell()
+    {
+        // Cast the specific spell.
+        Cast();
+
+        // Check to see if this is the first time the spell 
+        if (!Tried)
+        {
+            int e = FirstCastExperience;
+            Tried = true;
+            SaveGame.GainExperience(e * Level);
+        }
+    }
 
     /// <summary>
     /// This event is thrown when a spell cast fails by chance. When a spell cast fails, a second roll is made with the same failure
@@ -144,15 +165,19 @@ internal abstract class Spell : IGetKey<string>
 
     public string Title()
     {
+        string info;
         if (Forgotten)
         {
-            return "forgotten";
+            info = "forgotten";
         }
-        if (!Learned)
+        else if (!Learned)
         {
-            return "unknown";
+            info = "unknown";
         }
-        string info = !Worked ? "untried" : LearnedDetails;
+        else
+        {
+            info = !Tried ? "untried" : LearnedDetails;
+        }
 
         return Level >= 99 ? "(illegible)" : $"{Name,-30} {Level,3} {ManaCost,4} {FailureChance(),3}% {info}";
     }

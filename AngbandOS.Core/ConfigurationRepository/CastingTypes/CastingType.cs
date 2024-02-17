@@ -134,13 +134,7 @@ internal class CastingType : IGetKey<string>
         }
         else
         {
-            spell.Cast();
-            if (!spell.Worked)
-            {
-                int e = spell.FirstCastExperience;
-                spell.Worked = true;
-                SaveGame.GainExperience(e * spell.Level);
-            }
+            spell.CastSpell();
         }
         SaveGame.EnergyUse = 100;
         if (spell.ManaCost <= SaveGame.Mana)

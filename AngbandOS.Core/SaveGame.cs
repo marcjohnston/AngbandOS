@@ -9979,8 +9979,16 @@ internal class SaveGame
             WeightCarried += carried.Weight;
         }
         BaseCharacterClass.OutfitPlayer();
-        PrimaryRealm.OutfitPlayer();
-        SecondaryRealm.OutfitPlayer();
+
+        // If the character chosen has religion, outfit the player with books.
+        if (PrimaryRealm != null)
+        {
+            PrimaryRealm.OutfitPlayer();
+            if (SecondaryRealm != null)
+            {
+                SecondaryRealm.OutfitPlayer();
+            }
+        }
     }
 
     /// <summary>
