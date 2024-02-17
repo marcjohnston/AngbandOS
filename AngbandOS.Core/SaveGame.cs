@@ -4395,53 +4395,6 @@ internal class SaveGame
         }
     }
 
-    public void ArtifactScroll()
-    {
-        bool okay;
-        if (!SelectItem(out Item? oPtr, "Enchant which item? ", true, true, true, SingletonRepository.ItemFilters.Get(nameof(WeaponsItemFilter))))
-        {
-            MsgPrint("You have nothing to enchant.");
-            return;
-        }
-        if (oPtr == null)
-        {
-            return;
-        }
-        string oName = oPtr.Description(false, 0);
-        string your = oPtr.IsInInventory ? "Your" : "The";
-        string s = oPtr.Count > 1 ? "" : "s";
-        MsgPrint($"{your} {oName} radiate{s} a blinding light!");
-        if (oPtr.FixedArtifact != null || string.IsNullOrEmpty(oPtr.RandartName) == false)
-        {
-            string are = oPtr.Count > 1 ? "are" : "is";
-            s = oPtr.Count > 1 ? "artifacts" : "an artifact";
-            MsgPrint($"The {oName} {are} already {s}!");
-            okay = false;
-        }
-        else if (oPtr.RareItem != null)
-        {
-            string are = oPtr.Count > 1 ? "are" : "is";
-            s = oPtr.Count > 1 ? "rare items" : "a rare item";
-            MsgPrint($"The {oName} {are} already {s}!");
-            okay = false;
-        }
-        else
-        {
-            if (oPtr.Count > 1)
-            {
-                MsgPrint("Not enough enough energy to enchant more than one object!");
-                s = oPtr.Count > 2 ? "were" : "was";
-                MsgPrint($"{oPtr.Count - 1} of your oName {s} destroyed!");
-                oPtr.Count = 1;
-            }
-            okay = oPtr.CreateRandart(true);
-        }
-        if (!okay)
-        {
-            MsgPrint("The enchantment failed.");
-        }
-    }
-
     public bool BanishEvil(int dist)
     {
         return ProjectAtAllInLos(SingletonRepository.Projectiles.Get(nameof(TeleportAwayEvilProjectile)), dist);

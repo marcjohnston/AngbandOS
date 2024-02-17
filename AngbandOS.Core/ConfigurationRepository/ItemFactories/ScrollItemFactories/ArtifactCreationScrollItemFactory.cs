@@ -24,7 +24,7 @@ internal class ArtifactCreationScrollItemFactory : ScrollItemFactory
 
     public override void Read(ReadScrollEvent eventArgs)
     {
-        SaveGame.ArtifactScroll();
+        SaveGame.RunScript(nameof(CreateArtifactScript));
         eventArgs.Identified = true;
     }
     public override Item CreateItem() => new Item(SaveGame, this);
