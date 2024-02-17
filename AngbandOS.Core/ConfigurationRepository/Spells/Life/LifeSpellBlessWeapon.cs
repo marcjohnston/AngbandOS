@@ -13,7 +13,7 @@ internal class LifeSpellBlessWeapon : Spell
     private LifeSpellBlessWeapon(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.BlessWeapon();
+        SaveGame.RunScript(nameof(BlessWeaponScript));
     }
 
     public override string Name => "Bless Weapon";
