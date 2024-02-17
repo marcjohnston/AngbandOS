@@ -24,7 +24,7 @@ internal class SpecialRemoveCurseScrollItemFactory : ScrollItemFactory
 
     public override void Read(ReadScrollEvent eventArgs)
     {
-        SaveGame.RunScript(nameof(RemoveAllCursorScript));
+        SaveGame.RunScript(nameof(RemoveAllCurseScript));
         eventArgs.Identified = true;
     }
     public override Item CreateItem() => new Item(SaveGame, this);

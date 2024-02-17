@@ -8,24 +8,15 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class RemoveCurseScript : Script, IScript, IStoreScript
+internal class RemoveCurseScript : Script, IScript, IStoreScript, ISuccessfulScript
 {
     private RemoveCurseScript(SaveGame saveGame) : base(saveGame) { }
 
     /// <summary>
-    /// Executes the remove curse script.  Does not modify any of the store flags.
+    /// Allows the player to purchase the remove curse for 500 gold.  Does not modify any of the store flags.
     /// </summary>
     /// <returns></returns>
     public void ExecuteStoreScript(StoreCommandEvent storeCommandEvent)
-    {
-        ExecuteScript();
-    }
-
-    /// <summary>
-    /// Executes the remove curse script.
-    /// </summary>
-    /// <returns></returns>
-    public void ExecuteScript()
     {
         if (!SaveGame.ServiceHaggle(500, out int price))
         {
@@ -39,9 +30,27 @@ internal class RemoveCurseScript : Script, IScript, IStoreScript
                 SaveGame.SayComment_1();
                 SaveGame.PlaySound(SoundEffectEnum.StoreTransaction);
                 SaveGame.StorePrtGold();
-                SaveGame.RemoveCurse();
+                ExecuteScript();
             }
             SaveGame.HandleStuff();
         }
+    }
+
+    /// <summary>
+    /// Removes a curse from all items, excluding a heavy curse and returns true if a curse was removed from any items; false, otherwise.
+    /// </summary>
+    /// <returns></returns>
+    public bool ExecuteSuccessfulScript()
+    {
+        return SaveGame.RemoveCurseAux(false);
+    }
+
+    /// <summary>
+    /// Executes the successful script and disposes of the result.
+    /// </summary>
+    /// <returns></returns>
+    public void ExecuteScript()
+    {
+        ExecuteSuccessfulScript();
     }
 }

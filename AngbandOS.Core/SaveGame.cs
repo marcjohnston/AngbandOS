@@ -5681,11 +5681,6 @@ internal class SaveGame
         return true;
     }
 
-    public bool RemoveCurse()
-    {
-        return RemoveCurseAux(false);
-    }
-
     public void ReportMagics()
     {
         string[] ReportMagicDurations =

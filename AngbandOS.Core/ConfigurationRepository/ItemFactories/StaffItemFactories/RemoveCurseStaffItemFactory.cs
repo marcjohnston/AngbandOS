@@ -30,7 +30,7 @@ internal class RemoveCurseStaffItemFactory : StaffItemFactory
 
     public override void UseStaff(UseStaffEvent eventArgs)
     {
-        if (SaveGame.RemoveCurse())
+        if (SaveGame.RunSuccessfulScript(nameof(RemoveCurseScript)))
         {
             if (SaveGame.TimedBlindness.TurnsRemaining == 0)
             {

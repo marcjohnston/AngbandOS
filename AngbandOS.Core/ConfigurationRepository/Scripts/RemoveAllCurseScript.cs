@@ -8,12 +8,12 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class RemoveAllCursorScript : Script, IScript
+internal class RemoveAllCurseScript : Script, IScript
 {
-    private RemoveAllCursorScript(SaveGame saveGame) : base(saveGame) { }
+    private RemoveAllCurseScript(SaveGame saveGame) : base(saveGame) { }
 
     /// <summary>
-    /// Executes the script.
+    /// Removes a curse from all items including heavy curses.
     /// </summary>
     /// <returns></returns>
     public void ExecuteScript()

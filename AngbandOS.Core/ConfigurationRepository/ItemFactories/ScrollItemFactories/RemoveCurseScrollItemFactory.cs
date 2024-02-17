@@ -24,7 +24,7 @@ internal class RemoveCurseScrollItemFactory : ScrollItemFactory
 
     public override void Read(ReadScrollEvent eventArgs)
     {
-        if (SaveGame.RemoveCurse())
+        if (SaveGame.RunSuccessfulScript(nameof(RemoveCurseScript)))
         {
             SaveGame.MsgPrint("You feel as if someone is watching over you.");
             eventArgs.Identified = true;
