@@ -29,7 +29,7 @@ internal class HolinessStaffItemFactory : StaffItemFactory
     public override int Weight => 50;
     public override void UseStaff(UseStaffEvent eventArgs)
     {
-        if (SaveGame.DispelEvil(120))
+        if (SaveGame.RunSuccessfulScriptInt(nameof(DispelEvilScript), 120))
         {
             eventArgs.Identified = true;
         }

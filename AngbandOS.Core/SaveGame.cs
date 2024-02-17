@@ -4809,11 +4809,6 @@ internal class SaveGame
         ProjectAtAllInLos(SingletonRepository.Projectiles.Get(nameof(DispDemonProjectile)), dam);
     }
 
-    public bool DispelEvil(int dam)
-    {
-        return ProjectAtAllInLos(SingletonRepository.Projectiles.Get(nameof(DispEvilProjectile)), dam);
-    }
-
     public void DispelLiving(int dam)
     {
         ProjectAtAllInLos(SingletonRepository.Projectiles.Get(nameof(DispLivingProjectile)), dam);
@@ -8257,6 +8252,23 @@ internal class SaveGame
         }
         ISuccessfulScript castedScript = (ISuccessfulScript)script;
         return castedScript.ExecuteSuccessfulScript();
+    }
+
+    public bool RunSuccessfulScriptInt(string scriptName, int value)
+    {
+        // Get the script from the singleton repository.
+        Script? script = SingletonRepository.Scripts.Get(scriptName);
+
+        if (script == null)
+        {
+            throw new Exception($"The {scriptName} script specified to run does not exist.");
+        }
+        if (!typeof(ISuccessfulScriptInt).IsInstanceOfType(script))
+        {
+            throw new Exception($"The {scriptName} script specified to run does not implement the {nameof(ISuccessfulScriptInt)} interface.");
+        }
+        ISuccessfulScriptInt castedScript = (ISuccessfulScriptInt)script;
+        return castedScript.ExecuteSuccessfulScriptInt(value);
     }
 
     /// <summary>

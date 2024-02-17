@@ -22,7 +22,7 @@ internal class DispEvilActivation : Activation
 
     public override bool Activate()
     {
-        SaveGame.DispelEvil(SaveGame.ExperienceLevel * 5);
+        SaveGame.RunScriptInt(nameof(DispelEvilScript), SaveGame.ExperienceLevel * 5);
         return true;
     }
 
