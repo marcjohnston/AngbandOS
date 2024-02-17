@@ -13,7 +13,7 @@ internal class LifeSpellDispelCurse : Spell
     private LifeSpellDispelCurse(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.RemoveAllCurse();
+        SaveGame.RunScript(nameof(RemoveAllCursorScript));
     }
 
     public override string Name => "Dispel Curse";

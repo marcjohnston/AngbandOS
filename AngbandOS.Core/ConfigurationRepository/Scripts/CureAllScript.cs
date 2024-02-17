@@ -18,7 +18,7 @@ internal class CureAllScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        SaveGame.RemoveAllCurse();
+        SaveGame.RunScript(nameof(RemoveAllCursorScript));
         SaveGame.RestoreAbilityScore(Ability.Strength);
         SaveGame.RestoreAbilityScore(Ability.Intelligence);
         SaveGame.RestoreAbilityScore(Ability.Wisdom);

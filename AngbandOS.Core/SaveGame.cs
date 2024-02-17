@@ -5681,11 +5681,6 @@ internal class SaveGame
         return true;
     }
 
-    public void RemoveAllCurse()
-    {
-        RemoveCurseAux(true);
-    }
-
     public bool RemoveCurse()
     {
         return RemoveCurseAux(false);
@@ -6379,7 +6374,7 @@ internal class SaveGame
         return obvious;
     }
 
-    private bool RemoveCurseAux(bool all)
+    public bool RemoveCurseAux(bool alsoRemoveHeavyCurse)
     {
         int cnt = 0;
         for (int i = InventorySlot.MeleeWeapon; i < InventorySlot.Total; i++)
@@ -6394,7 +6389,7 @@ internal class SaveGame
                 continue;
             }
             oPtr.RefreshFlagBasedProperties();
-            if (!all && oPtr.Characteristics.HeavyCurse)
+            if (!alsoRemoveHeavyCurse && oPtr.Characteristics.HeavyCurse)
             {
                 continue;
             }
