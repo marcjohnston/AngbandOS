@@ -15,7 +15,7 @@ internal class WeighMagActiveMutation : Mutation
     {
         if (SaveGame.CheckIfRacialPowerWorks(6, 6, Ability.Intelligence, 10))
         {
-            SaveGame.ReportMagics();
+            SaveGame.RunScript(nameof(ReportMagicsScript));
         }
     }
 
