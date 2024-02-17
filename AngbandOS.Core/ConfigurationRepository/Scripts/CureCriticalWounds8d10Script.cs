@@ -8,9 +8,9 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class CureCriticalWoundsScript : Script, IScript
+internal class CureCriticalWounds8d10Script : Script, IScript
 {
-    private CureCriticalWoundsScript(SaveGame saveGame) : base(saveGame) { }
+    private CureCriticalWounds8d10Script(SaveGame saveGame) : base(saveGame) { }
 
     /// <summary>
     /// Restores health, heals stun and bleeding.

@@ -13,9 +13,7 @@ internal class LifeSpellCureCriticalWounds : Spell
     private LifeSpellCureCriticalWounds(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.RestoreHealth(SaveGame.DiceRoll(8, 10));
-        SaveGame.TimedStun.ResetTimer();
-        SaveGame.TimedBleeding.ResetTimer();
+        SaveGame.RunScript(nameof(CureCriticalWounds8d10Script));
     }
 
     public override string Name => "Cure Critical Wounds";
