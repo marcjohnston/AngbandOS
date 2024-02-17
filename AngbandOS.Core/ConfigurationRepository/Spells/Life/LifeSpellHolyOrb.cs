@@ -13,14 +13,7 @@ internal class LifeSpellHolyOrb : Spell
     private LifeSpellHolyOrb(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        if (!SaveGame.GetDirectionWithAim(out int dir))
-        {
-            return;
-        }
-        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(HolyFireProjectile)), dir,
-            SaveGame.DiceRoll(3, 6) + SaveGame.ExperienceLevel + (SaveGame.ExperienceLevel /
-            (SaveGame.BaseCharacterClass.ID == CharacterClass.Priest || SaveGame.BaseCharacterClass.ID == CharacterClass.HighMage ? 2 : 4)),
-            SaveGame.ExperienceLevel < 30 ? 2 : 3);
+        SaveGame.RunScript(nameof(HolyOrbScript));
     }
 
     public override string Name => "Holy Orb";
