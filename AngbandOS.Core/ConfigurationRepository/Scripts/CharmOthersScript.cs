@@ -18,6 +18,6 @@ internal class CharmOthersScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        SaveGame.CharmMonsters(SaveGame.ExperienceLevel * 2);
+        SaveGame.ProjectAtAllInLos(SaveGame.SingletonRepository.Projectiles.Get(nameof(CharmProjectile)), SaveGame.ExperienceLevel * 2);
     }
 }

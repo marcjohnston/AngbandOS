@@ -4506,11 +4506,6 @@ internal class SaveGame
         return TargetedProject(SingletonRepository.Projectiles.Get(nameof(CharmProjectile)), dir, plev, flg);
     }
 
-    public void CharmMonsters(int dam)
-    {
-        ProjectAtAllInLos(SingletonRepository.Projectiles.Get(nameof(CharmProjectile)), dam);
-    }
-
     public bool CloneMonster(int dir)
     {
         ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;
