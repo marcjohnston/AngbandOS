@@ -13,7 +13,7 @@ internal class SorcerySpellDetectionTrue : Spell
     private SorcerySpellDetectionTrue(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.DetectAll();
+        SaveGame.RunScript(nameof(DetectionScript));
     }
 
     public override string Name => "Detection True";

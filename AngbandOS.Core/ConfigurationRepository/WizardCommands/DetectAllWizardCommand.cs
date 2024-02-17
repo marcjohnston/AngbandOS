@@ -20,6 +20,6 @@ internal class DetectAllWizardCommand : WizardCommand
 
     public override void Execute()
     {
-        SaveGame.DetectAll();
+        SaveGame.RunScript(nameof(DetectionScript));
     }
 }

@@ -4640,19 +4640,6 @@ internal class SaveGame
         return TargetedProject(SingletonRepository.Projectiles.Get(nameof(KillDoorProjectile)), dir, 0, flg);
     }
 
-    public bool DetectAll()
-    {
-        bool detect = DetectTraps();
-        detect |= DetectDoors();
-        detect |= DetectStairs();
-        detect |= DetectTreasure();
-        detect |= DetectObjectsGold();
-        detect |= DetectObjectsNormal();
-        detect |= DetectMonstersInvis();
-        detect |= RunSuccessfulScript(nameof(DetectNormalMonstersScript));
-        return detect;
-    }
-
     public bool DetectDoors()
     {
         bool detect = false;

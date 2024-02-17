@@ -21,7 +21,7 @@ internal class DetectAllActivation : Activation
     public override bool Activate()
     {
         SaveGame.MsgPrint("An image forms in your mind...");
-        SaveGame.DetectAll();
+        SaveGame.RunScript(nameof(DetectionScript));
         return true;
     }
 

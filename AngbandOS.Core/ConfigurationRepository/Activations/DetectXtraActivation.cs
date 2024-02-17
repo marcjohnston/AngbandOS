@@ -20,7 +20,7 @@ internal class DetectXtraActivation : Activation
 
     public override bool Activate()
     {
-        SaveGame.DetectAll();
+        SaveGame.RunScript(nameof(DetectionScript));
         SaveGame.Probing();
         SaveGame.RunScript(nameof(IdentifyItemFullyScript));
         return true;

@@ -26,7 +26,7 @@ internal class DetectionRodItemFactory : RodItemFactory
     public override int Weight => 15;
     public override void Execute(ZapRodEvent zapRodEvent)
     {
-        SaveGame.DetectAll();
+        SaveGame.RunScript(nameof(DetectionScript));
         zapRodEvent.Identified = true;
         zapRodEvent.Item.TypeSpecificValue = 99;
     }

@@ -8,16 +8,33 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class DetectionScript : Script, IScript
+internal class DetectionScript : Script, IScript, ISuccessfulScript
 {
     private DetectionScript(SaveGame saveGame) : base(saveGame) { }
 
     /// <summary>
-    /// Executes the script.
+    /// Detects traps, doors, stairs, treasures, gold, normal objects, normal monsters and invisible monsters and returns true, if anything was detected; false, otherwise.
+    /// </summary>
+    /// <returns></returns>
+    public bool ExecuteSuccessfulScript()
+    {
+        bool detect = SaveGame.DetectTraps();
+        detect |= SaveGame.DetectDoors();
+        detect |= SaveGame.DetectStairs();
+        detect |= SaveGame.DetectTreasure();
+        detect |= SaveGame.DetectObjectsGold();
+        detect |= SaveGame.DetectObjectsNormal();
+        detect |= SaveGame.DetectMonstersInvis();
+        detect |= SaveGame.RunSuccessfulScript(nameof(DetectNormalMonstersScript));
+        return detect;
+    }
+
+    /// <summary>
+    /// Executes the successful script and disposes of the result.
     /// </summary>
     /// <returns></returns>
     public void ExecuteScript()
     {
-        SaveGame.DetectAll();
+        ExecuteSuccessfulScript();
     }
 }

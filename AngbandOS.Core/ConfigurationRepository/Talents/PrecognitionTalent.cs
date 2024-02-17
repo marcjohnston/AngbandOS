@@ -44,7 +44,7 @@ internal class PrecognitionTalent : Talent
         }
         else
         {
-            b = SaveGame.DetectAll();
+            b = SaveGame.RunSuccessfulScript(nameof(DetectionScript));
         }
         if (SaveGame.ExperienceLevel > 24 && SaveGame.ExperienceLevel < 40)
         {
