@@ -20,10 +20,6 @@ internal class GenerateVeryGoodObjectWizardCommand : WizardCommand
 
     public override void Execute()
     {
-        if (SaveGame.CommandArgument <= 0)
-        {
-            SaveGame.CommandArgument = 1;
-        }
-        SaveGame.Acquirement(SaveGame.MapY, SaveGame.MapX, SaveGame.CommandArgument, true);
+        SaveGame.RunScript(nameof(CreateVeryGoodObjectScript));
     }
 }
