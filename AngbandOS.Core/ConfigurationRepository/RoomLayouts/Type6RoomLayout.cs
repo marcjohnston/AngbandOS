@@ -12,6 +12,11 @@ internal class Type6RoomLayout : RoomLayout
 {
     private Type6RoomLayout(SaveGame saveGame) : base(saveGame) { }
     public override int Type => 6;
+    public override int Dx1 => 0;
+    public override int Dx2 => 1;
+    public override int Dy1 => -1;
+    public override int Dy2 => 1;
+    public override int Level => 5;
     public override void Build(int yval, int xval)
     {
         int[] what = new int[16];

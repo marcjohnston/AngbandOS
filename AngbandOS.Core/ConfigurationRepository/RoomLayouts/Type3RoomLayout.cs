@@ -12,6 +12,11 @@ internal class Type3RoomLayout : RoomLayout
 {
     private Type3RoomLayout(SaveGame saveGame) : base(saveGame) { }
     public override int Type => 3;
+    public override int Dx1 => 0;
+    public override int Dx2 => 0;
+    public override int Dy1 => -1;
+    public override int Dy2 => 1;
+    public override int Level => 3;
     public override void Build(int yval, int xval)
     {
         int y, x, wy;

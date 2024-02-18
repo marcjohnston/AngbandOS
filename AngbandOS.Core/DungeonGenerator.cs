@@ -72,13 +72,6 @@ internal class StandardDungeonGenerator : DungeonGenerator
     private int TunnN;
     private int WallN;
 
-    private readonly Room[] _room =
-    {
-        new Room(0, 0, 0, 0, 0), new Room(0, 0, -1, 1, 1), new Room(0, 0, -1, 1, 1), new Room(0, 0, -1, 1, 3),
-        new Room(0, 0, -1, 1, 3), new Room(0, 0, -1, 1, 5), new Room(0, 0, -1, 1, 5), new Room(0, 1, -1, 1, 5),
-        new Room(-1, 2, -2, 3, 10), new Room(0, 1, -1, 1, 1)
-    };
-
     public StandardDungeonGenerator(SaveGame saveGame) : base(saveGame) { }
 
 
@@ -159,7 +152,7 @@ internal class StandardDungeonGenerator : DungeonGenerator
 
     private bool RoomBuild(int y0, int x0, RoomLayout roomType, int difficulty)
     {
-        if (difficulty < _room[roomType.Type].Level)
+        if (difficulty < roomType.Level)
         {
             return false;
         }
@@ -167,10 +160,10 @@ internal class StandardDungeonGenerator : DungeonGenerator
         {
             return false;
         }
-        int y1 = y0 + _room[roomType.Type].Dy1;
-        int y2 = y0 + _room[roomType.Type].Dy2;
-        int x1 = x0 + _room[roomType.Type].Dx1;
-        int x2 = x0 + _room[roomType.Type].Dx2;
+        int y1 = y0 + roomType.Dy1;
+        int y2 = y0 + roomType.Dy2;
+        int x1 = x0 + roomType.Dx1;
+        int x2 = x0 + roomType.Dx2;
         if (y1 < 0 || y2 >= RowRooms)
         {
             return false;

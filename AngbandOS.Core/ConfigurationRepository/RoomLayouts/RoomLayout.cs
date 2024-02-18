@@ -30,6 +30,12 @@ internal abstract class RoomLayout : IGetKey<string>
     public string GetKey => Key;
     public void Bind() { }
 
+    public abstract int Dx1 { get; }
+    public abstract int Dx2 { get; }
+    public abstract int Dy1 { get; }
+    public abstract int Dy2 { get; }
+    public abstract int Level { get; }
+
     public abstract int Type { get; }
     public abstract void Build(int yval, int xval);
 
