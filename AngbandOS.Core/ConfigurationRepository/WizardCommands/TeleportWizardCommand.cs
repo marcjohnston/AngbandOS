@@ -18,8 +18,5 @@ internal class TeleportWizardCommand : WizardCommand
 
     public override HelpGroup? HelpGroup => SaveGame.SingletonRepository.HelpGroups.Get(nameof(WizardMovementHelpGroup));
 
-    public override void Execute()
-    {
-        SaveGame.RunScriptInt(nameof(TeleportSelfScript), 100);
-    }
+    protected override string? ExecuteScriptName => nameof(TeleportSelfScript);
 }

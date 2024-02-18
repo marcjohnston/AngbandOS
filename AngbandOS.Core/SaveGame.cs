@@ -3860,14 +3860,14 @@ internal class SaveGame
                     if (oPtr.IdentCursed && !HasAntiTeleport)
                     {
                         Disturb(true);
-                        RunScriptInt(nameof(TeleportSelfScript), 40);
+                        RunScriptInt(nameof(PhaseDoorScript), 40);
                     }
                     else
                     {
                         if (GetCheck("Teleport? "))
                         {
                             Disturb(false);
-                            RunScriptInt(nameof(TeleportSelfScript), 50);
+                            RunScriptInt(nameof(PhaseDoorScript), 50);
                         }
                     }
                 }
@@ -4295,7 +4295,7 @@ internal class SaveGame
             case 2:
             case 3:
                 {
-                    RunScriptInt(nameof(TeleportSelfScript), 200);
+                    RunScriptInt(nameof(PhaseDoorScript), 200);
                     break;
                 }
             case 4:
@@ -12719,7 +12719,7 @@ internal class SaveGame
         }
     }
 
-    public void DoCmdWizNamed(bool slp)
+    public void SummonNamedMonster(bool slp)
     {
         int rIdx = CommandArgument;
         if (rIdx >= SingletonRepository.MonsterRaces.Count - 1)

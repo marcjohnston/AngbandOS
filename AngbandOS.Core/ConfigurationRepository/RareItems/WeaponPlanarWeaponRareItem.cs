@@ -21,7 +21,7 @@ internal class WeaponPlanarWeaponRareItem : RareItem
     }
     public override bool DoActivate(Item item)
     {
-        SaveGame.RunScriptInt(nameof(TeleportSelfScript), 100);
+        SaveGame.RunScriptInt(nameof(PhaseDoorScript), 100);
         item.RechargeTimeLeft = 50 + SaveGame.DieRoll(50);
         return true;
     }

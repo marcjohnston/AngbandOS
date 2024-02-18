@@ -18,7 +18,7 @@ internal class CloakShifterFixedArtifact : FixedArtifact, IFixedArtifactActivati
     public void ActivateItem(Item item)
     {
         SaveGame.MsgPrint("Your cloak twists space around you...");
-        SaveGame.RunScriptInt(nameof(TeleportSelfScript), 100);
+        SaveGame.RunScriptInt(nameof(PhaseDoorScript), 100);
         item.RechargeTimeLeft = 45;
     }
     public string DescribeActivationEffect => "teleport every 45 turns";

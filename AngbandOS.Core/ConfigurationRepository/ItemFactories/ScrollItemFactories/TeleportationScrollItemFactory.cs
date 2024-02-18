@@ -23,7 +23,7 @@ internal class TeleportationScrollItemFactory : ScrollItemFactory
     public override int Weight => 5;
     public override void Read(ReadScrollEvent eventArgs)
     {
-        SaveGame.RunScriptInt(nameof(TeleportSelfScript), 100);
+        SaveGame.RunScriptInt(nameof(PhaseDoorScript), 100);
         eventArgs.Identified = true;
     }
     public override Item CreateItem() => new Item(SaveGame, this);

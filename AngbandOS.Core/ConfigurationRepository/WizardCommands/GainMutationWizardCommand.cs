@@ -18,8 +18,5 @@ internal class GainMutationWizardCommand : WizardCommand
 
     public override HelpGroup? HelpGroup => SaveGame.SingletonRepository.HelpGroups.Get(nameof(WizardCharacterEditingHelpGroup));
 
-    public override void Execute()
-    {
-        SaveGame.RunScript(nameof(GainMutationScript));
-    }
+    protected override string? ExecuteScriptName => nameof(GainMutationScript);
 }

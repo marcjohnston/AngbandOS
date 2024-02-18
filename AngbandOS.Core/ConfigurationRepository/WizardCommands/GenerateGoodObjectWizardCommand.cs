@@ -18,8 +18,5 @@ internal class GenerateGoodObjectWizardCommand : WizardCommand
 
     public override HelpGroup? HelpGroup => SaveGame.SingletonRepository.HelpGroups.Get(nameof(WizardObjectCommandsHelpGroup));
 
-    public override void Execute()
-    {
-        SaveGame.RunScript(nameof(CreateGoodObjectScript));
-    }
+    protected override string? ExecuteScriptName => nameof(CreateGoodObjectScript);
 }

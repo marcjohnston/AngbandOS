@@ -18,8 +18,5 @@ internal class CreateItemWizardCommand : WizardCommand
 
     public override HelpGroup? HelpGroup => SaveGame.SingletonRepository.HelpGroups.Get(nameof(WizardObjectCommandsHelpGroup));
 
-    public override void Execute()
-    {
-        SaveGame.RunScript(nameof(CreateItemScript));
-    }
+    protected override string? ExecuteScriptName => nameof(CreateItemScript);
 }

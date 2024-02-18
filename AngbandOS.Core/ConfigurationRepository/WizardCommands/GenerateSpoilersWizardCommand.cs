@@ -19,8 +19,4 @@ internal class GenerateSpoilersWizardCommand : WizardCommand
     public override HelpGroup? HelpGroup => SaveGame.SingletonRepository.HelpGroups.Get(nameof(WizardGeneralCommandsHelpGroup));
 
     public override bool IsEnabled => false;
-
-    public override void Execute()
-    {
-    }
 }

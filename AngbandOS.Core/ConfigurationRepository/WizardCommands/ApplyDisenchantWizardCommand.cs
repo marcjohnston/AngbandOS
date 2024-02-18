@@ -18,8 +18,5 @@ internal class ApplyDisenchantWizardCommand : WizardCommand
 
     public override HelpGroup? HelpGroup => SaveGame.SingletonRepository.HelpGroups.Get(nameof(WizardObjectCommandsHelpGroup));
 
-    public override void Execute()
-    {
-        SaveGame.RunScript(nameof(ApplyDisenchantScript));
-    }
+    protected override string? ExecuteScriptName => nameof(ApplyDisenchantScript);
 }

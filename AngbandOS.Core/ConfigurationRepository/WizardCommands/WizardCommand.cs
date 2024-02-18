@@ -28,7 +28,10 @@ internal abstract class WizardCommand : IHelpCommand, IGetKey<string>
     public virtual string Key => GetType().Name;
 
     public string GetKey => Key;
-    public void Bind() { }
+    public void Bind() 
+    {
+        ExecuteScript = ExecuteScriptName == null ? null : SaveGame.SingletonRepository.Scripts.Get(ExecuteScriptName);
+    }
 
     public abstract char KeyChar { get; }
 
@@ -45,11 +48,10 @@ internal abstract class WizardCommand : IHelpCommand, IGetKey<string>
     public virtual string HelpDescription => "";
 
     /// <summary>
-    /// 
+    /// Returns the name of the script to run; or null, if the command is ignored.  Returns null, by default.  This property is bound to the ExecuteScript property during
+    /// the bind phase.
     /// </summary>
-    /// <param name="saveGame"></param>
-    /// <returns>
-    /// Returns true, if the command can/should be repeated; false, if the command succeeded or is futile.
-    /// </returns>
-    public abstract void Execute();
+    protected virtual string? ExecuteScriptName => null;
+
+    public Script? ExecuteScript { get; private set; }
 }

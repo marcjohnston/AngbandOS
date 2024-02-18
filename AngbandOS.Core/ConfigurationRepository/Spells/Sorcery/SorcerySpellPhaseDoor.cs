@@ -13,7 +13,7 @@ internal class SorcerySpellPhaseDoor : Spell
     private SorcerySpellPhaseDoor(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.RunScriptInt(nameof(TeleportSelfScript), 10);
+        SaveGame.RunScriptInt(nameof(PhaseDoorScript), 10);
     }
 
     public override string Name => "Phase Door";

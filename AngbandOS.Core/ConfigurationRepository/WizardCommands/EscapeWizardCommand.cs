@@ -13,8 +13,4 @@ internal class EscapeWizardCommand : WizardCommand
     private EscapeWizardCommand(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
     public override char KeyChar => '\x1b';
-
-    public override void Execute()
-    {
-    }
 }

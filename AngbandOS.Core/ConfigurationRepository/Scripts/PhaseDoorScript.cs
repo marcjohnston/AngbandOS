@@ -5,18 +5,16 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Spells.Corporeal;
+namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class CorporealSpellBlink : Spell
+internal class PhaseDoorScript : Script, IScript
 {
-    private CorporealSpellBlink(SaveGame saveGame) : base(saveGame) { }
-    public override void Cast()
+    private PhaseDoorScript(SaveGame saveGame) : base(saveGame) { }
+
+
+    public void ExecuteScript()
     {
-        SaveGame.RunScriptInt(nameof(PhaseDoorScript), 10);
+        SaveGame.RunScriptInt(nameof(TeleportSelfScript), 10);
     }
-
-    public override string Name => "Blink";
-
-    protected override string LearnedDetails => "range 10";
 }

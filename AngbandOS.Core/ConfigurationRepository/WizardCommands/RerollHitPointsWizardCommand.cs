@@ -20,8 +20,5 @@ internal class RerollHitPointsWizardCommand : WizardCommand
 
     public override HelpGroup? HelpGroup => SaveGame.SingletonRepository.HelpGroups.Get(nameof(WizardCharacterEditingHelpGroup));
 
-    public override void Execute()
-    {
-        SaveGame.RunScript(nameof(RerollHitPointsScript));
-    }
+    protected override string? ExecuteScriptName => nameof(RerollHitPointsScript);
 }

@@ -18,8 +18,5 @@ internal class ZapBoltWizardCommand : WizardCommand
 
     public override HelpGroup? HelpGroup => SaveGame.SingletonRepository.HelpGroups.Get(nameof(WizardMonstersHelpGroup));
 
-    public override void Execute()
-    {
-        SaveGame.RunScript(nameof(WizardBoltScript));
-    }
+    protected override string? ExecuteScriptName => nameof(WizardBoltScript);
 }

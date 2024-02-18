@@ -18,8 +18,5 @@ internal class SummonMonsterWizardCommand : WizardCommand
 
     public override HelpGroup? HelpGroup => SaveGame.SingletonRepository.HelpGroups.Get(nameof(WizardMonstersHelpGroup));
 
-    public override void Execute()
-    {
-        SaveGame.RunScript(nameof(SummonMonsterScript));
-    }
+    protected override string? ExecuteScriptName => nameof(SummonMonsterScript);
 }

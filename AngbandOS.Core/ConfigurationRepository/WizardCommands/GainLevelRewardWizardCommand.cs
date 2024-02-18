@@ -18,8 +18,5 @@ internal class GainLevelRewardWizardCommand : WizardCommand
 
     public override HelpGroup? HelpGroup => SaveGame.SingletonRepository.HelpGroups.Get(nameof(WizardCharacterEditingHelpGroup));
 
-    public override void Execute()
-    {
-        SaveGame.RunScript(nameof(GainLevelRewardScript));
-    }
+    protected override string? ExecuteScriptName => nameof(GainLevelRewardScript);
 }

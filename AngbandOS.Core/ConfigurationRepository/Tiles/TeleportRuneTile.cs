@@ -23,6 +23,6 @@ internal class TeleportRuneTile : Tile
     {
         // Teleport the player up to 100 squares
         SaveGame.MsgPrint("You hit a teleport trap!");
-        SaveGame.RunScriptInt(nameof(TeleportSelfScript), 100);
+        SaveGame.RunScriptInt(nameof(PhaseDoorScript), 100);
     }
 }

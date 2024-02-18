@@ -18,8 +18,5 @@ internal class IdentifyPackWizardCommand : WizardCommand
 
     public override HelpGroup? HelpGroup => SaveGame.SingletonRepository.HelpGroups.Get(nameof(WizardObjectCommandsHelpGroup));
 
-    public override void Execute()
-    {
-        SaveGame.RunScript(nameof(IdentifyAllItemsScript));
-    }
+    protected override string? ExecuteScriptName => nameof(IdentifyAllItemsScript);
 }

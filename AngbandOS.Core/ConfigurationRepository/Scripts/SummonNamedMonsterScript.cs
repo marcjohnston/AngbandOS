@@ -5,18 +5,19 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Spells.Tarot;
+namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class TarotSpellTeleport : Spell
+internal class SummonNamedMonsterScript : Script, IScript
 {
-    private TarotSpellTeleport(SaveGame saveGame) : base(saveGame) { }
-    public override void Cast()
+    private SummonNamedMonsterScript(SaveGame saveGame) : base(saveGame) { }
+
+    /// <summary>
+    /// Executes the script.
+    /// </summary>
+    /// <returns></returns>
+    public void ExecuteScript()
     {
-        SaveGame.RunScriptInt(nameof(PhaseDoorScript), SaveGame.ExperienceLevel * 4);
+        SaveGame.SummonNamedMonster(true);
     }
-
-    public override string Name => "Teleport";
-
-    protected override string LearnedDetails => $"range {SaveGame.ExperienceLevel * 4}";
 }

@@ -18,8 +18,5 @@ internal class MapAreaWizardCommand : WizardCommand
 
     public override HelpGroup? HelpGroup => SaveGame.SingletonRepository.HelpGroups.Get(nameof(WizardGeneralCommandsHelpGroup));
 
-    public override void Execute()
-    {
-        SaveGame.RunScript(nameof(MapAreaScript));
-    }
+    protected override string? ExecuteScriptName => nameof(MapAreaScript);
 }

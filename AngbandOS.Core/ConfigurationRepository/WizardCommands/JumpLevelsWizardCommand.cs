@@ -18,8 +18,5 @@ internal class JumpLevelsWizardCommand : WizardCommand
 
     public override HelpGroup? HelpGroup => SaveGame.SingletonRepository.HelpGroups.Get(nameof(WizardMovementHelpGroup));
 
-    public override void Execute()
-    {
-        SaveGame.RunScript(nameof(JumpToLevelScript));
-    }
+    protected override string? ExecuteScriptName => nameof(JumpToLevelScript);
 }

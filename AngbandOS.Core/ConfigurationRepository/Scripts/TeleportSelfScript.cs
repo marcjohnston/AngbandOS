@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class TeleportSelfScript : Script, IScriptInt
+internal class TeleportSelfScript : Script, IScript, IScriptInt
 {
     private TeleportSelfScript(SaveGame saveGame) : base(saveGame) { }
 
@@ -108,6 +108,11 @@ internal class TeleportSelfScript : Script, IScriptInt
         SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateViewFlaggedAction)).Set();
         SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateDistancesFlaggedAction)).Set();
         SaveGame.HandleStuff();
+    }
+
+    public void ExecuteScript()
+    {
+        ExecuteScriptInt(100);
     }
 
     private void TeleportToPlayer(int mIdx)

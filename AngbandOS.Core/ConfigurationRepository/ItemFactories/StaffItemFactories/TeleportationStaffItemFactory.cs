@@ -29,7 +29,7 @@ internal class TeleportationStaffItemFactory : StaffItemFactory
     public override int Weight => 50;
     public override void UseStaff(UseStaffEvent eventArgs)
     {
-        SaveGame.RunScriptInt(nameof(TeleportSelfScript), 100);
+        SaveGame.RunScriptInt(nameof(PhaseDoorScript), 100);
         eventArgs.Identified = true;
     }
     public override Item CreateItem() => new Item(SaveGame, this);

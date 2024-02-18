@@ -18,8 +18,5 @@ internal class PhaseDoorWizardCommand : WizardCommand
 
     public override HelpGroup? HelpGroup => SaveGame.SingletonRepository.HelpGroups.Get(nameof(WizardMovementHelpGroup));
 
-    public override void Execute()
-    {
-        SaveGame.RunScriptInt(nameof(TeleportSelfScript), 10);
-    }
+    protected override string? ExecuteScriptName => nameof(PhaseDoorScript);
 }

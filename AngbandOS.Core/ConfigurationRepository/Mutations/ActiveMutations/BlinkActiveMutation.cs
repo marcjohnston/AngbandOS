@@ -15,7 +15,7 @@ internal class BlinkActiveMutation : Mutation
     {
         if (SaveGame.CheckIfRacialPowerWorks(3, 3, Ability.Wisdom, 12))
         {
-            SaveGame.RunScriptInt(nameof(TeleportSelfScript), 10);
+            SaveGame.RunScriptInt(nameof(PhaseDoorScript), 10);
         }
     }
 

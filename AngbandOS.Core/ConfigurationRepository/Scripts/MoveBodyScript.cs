@@ -30,7 +30,7 @@ internal class MoveBodyScript : Script, IScript
         {
             SaveGame.MsgPrint("You fail to concentrate correctly!");
             SaveGame.Energy -= 100;
-            SaveGame.RunScriptInt(nameof(TeleportSelfScript), 10);
+            SaveGame.RunScriptInt(nameof(PhaseDoorScript), 10);
         }
         else
         {
