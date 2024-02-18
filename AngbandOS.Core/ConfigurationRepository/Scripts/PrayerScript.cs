@@ -5,18 +5,19 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Spells.Life;
+namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class LifeSpellPrayer : Spell
+internal class PrayerScript : Script, IScript
 {
-    private LifeSpellPrayer(SaveGame saveGame) : base(saveGame) { }
-    public override void Cast()
+    private PrayerScript(SaveGame saveGame) : base(saveGame) { }
+
+    /// <summary>
+    /// Executes the script.
+    /// </summary>
+    /// <returns></returns>
+    public void ExecuteScript()
     {
-        SaveGame.RunScript(nameof(PrayerScript));
+        SaveGame.TimedBlessing.AddTimer(SaveGame.DieRoll(48) + 48);
     }
-
-    public override string Name => "Prayer";
-
-    protected override string LearnedDetails => "dur 48+d48";
 }
