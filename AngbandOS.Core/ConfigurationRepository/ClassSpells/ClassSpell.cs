@@ -5,6 +5,8 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using System.Text.Json;
+
 namespace AngbandOS.Core.ClassSpells;
 
 [Serializable]
@@ -22,7 +24,16 @@ internal abstract class ClassSpell : IGetKey<string>
     /// <returns></returns>
     public string ToJson()
     {
-        return "";
+        ClassSpellDefinition classSpellDefinition = new()
+        {
+            SpellName = SpellName,
+            CharacterClassName = CharacterClassName,
+            Level = Level,
+            ManaCost = ManaCost,
+            BaseFailure = BaseFailure,
+            FirstCastExperience = FirstCastExperience
+        };
+        return JsonSerializer.Serialize<ClassSpellDefinition>(classSpellDefinition);
     }
 
     public abstract string SpellName { get; }
@@ -32,8 +43,10 @@ internal abstract class ClassSpell : IGetKey<string>
     public abstract int BaseFailure { get; }
     public abstract int FirstCastExperience { get; }
 
-    public virtual string Key => $"{CharacterClassName}.{SpellName}";
-    public string GetKey => Key;
+    /// <summary>
+    /// Returns the a composite key created from the character class name and spell name with a period between them.
+    /// </summary>
+    public string GetKey => $"{CharacterClassName}.{SpellName}";
 
     public void Bind() { }
 }

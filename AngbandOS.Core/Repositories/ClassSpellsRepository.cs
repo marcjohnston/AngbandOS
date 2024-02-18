@@ -14,6 +14,16 @@ internal class ClassSpellsRepository : DictionaryRepository<string, ClassSpell>
 
     public override void Load()
     {
-        Add(LoadTypesFromAssembly<ClassSpell>());
+        if (SaveGame.Configuration.Towns == null)
+        {
+            Add(LoadTypesFromAssembly<ClassSpell>());
+        }
+        else
+        {
+            foreach (ClassSpellDefinition classSpellDefinition in SaveGame.Configuration.ClassSpells)
+            {
+                Add(new GenericClassSpell(SaveGame, classSpellDefinition));
+            }
+        }
     }
 }

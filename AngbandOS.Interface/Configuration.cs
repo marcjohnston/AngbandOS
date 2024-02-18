@@ -52,6 +52,7 @@ public class Configuration
     public ReadableFlavorDefinition[]? ScrollReadableFlavors { get; set; } = null;
     public ReadableFlavorDefinition[]? StaffReadableFlavors { get; set; } = null;
     public ReadableFlavorDefinition[]? WandReadableFlavors { get; set; } = null;
+    public ClassSpellDefinition[]? ClassSpells { get; set; } = null;
 
     public string[]? ElvishTexts { get; set; } = null;
     public string[]? FindQuests { get; set; } = null;
