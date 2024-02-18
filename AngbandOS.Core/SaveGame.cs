@@ -12765,24 +12765,9 @@ internal class SaveGame
         UpdateScreen();
     }
 
-    public void DoCmdSummonHorde()
-    {
-        int wy = MapY, wx = MapX;
-        int attempts = 1000;
-        while (--attempts != 0)
-        {
-            Scatter(out wy, out wx, MapY, MapX, 3);
-            if (GridOpenNoItemOrCreature(wy, wx))
-            {
-                break;
-            }
-        }
-        AllocHorde(wy, wx);
-    }
-
     public void DoCmdWizNamed(bool slp)
     {
-        int rIdx = SaveGame.CommandArgument;
+        int rIdx = CommandArgument;
         if (rIdx >= SingletonRepository.MonsterRaces.Count - 1)
         {
             return;
@@ -17683,5 +17668,4 @@ internal class SaveGame
             mutation.OnProcessWorld();
         }
     }
-
 }

@@ -20,6 +20,6 @@ internal class SummonHordeWizardCommand : WizardCommand
 
     public override void Execute()
     {
-        SaveGame.DoCmdSummonHorde();
+        SaveGame.RunScript(nameof(SummonHordeScript));
     }
 }
