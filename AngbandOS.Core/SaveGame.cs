@@ -5666,11 +5666,6 @@ internal class SaveGame
         return TargetedProject(SingletonRepository.Projectiles.Get(nameof(OldSlowProjectile)), dir, ExperienceLevel, flg);
     }
 
-    public bool SlowMonsters()
-    {
-        return ProjectAtAllInLos(SingletonRepository.Projectiles.Get(nameof(OldSlowProjectile)), ExperienceLevel);
-    }
-
     public bool SpeedMonster(int dir)
     {
         ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;
@@ -6119,6 +6114,12 @@ internal class SaveGame
         return true;
     }
 
+    /// <summary>
+    /// Fires a projectile at everything in the players line-of-sight and returns true, if the projectile actually hits a monster; false, otherwise.
+    /// </summary>
+    /// <param name="projectile"></param>
+    /// <param name="dam"></param>
+    /// <returns></returns>
     public bool ProjectAtAllInLos(Projectile projectile, int dam)
     {
         ProjectionFlag flg = ProjectionFlag.ProjectJump | ProjectionFlag.ProjectKill | ProjectionFlag.ProjectHide;

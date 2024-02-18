@@ -140,7 +140,7 @@ internal class InvokeSpiritsScript : Script, IScript
             SaveGame.DispelMonsters(120);
         }
         SaveGame.DispelMonsters(150);
-        SaveGame.SlowMonsters();
+        SaveGame.RunScript(nameof(SlowMonstersScript));
         SaveGame.SleepMonsters();
         SaveGame.RestoreHealth(300);
         if (die < 31)

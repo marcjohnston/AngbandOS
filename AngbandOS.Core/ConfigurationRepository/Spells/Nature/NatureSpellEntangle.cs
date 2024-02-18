@@ -13,7 +13,7 @@ internal class NatureSpellEntangle : Spell
     private NatureSpellEntangle(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.SlowMonsters();
+        SaveGame.RunScript(nameof(SlowMonstersScript));
     }
 
     public override string Name => "Entangle";

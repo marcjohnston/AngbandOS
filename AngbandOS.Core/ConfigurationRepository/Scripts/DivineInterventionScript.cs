@@ -20,7 +20,7 @@ internal class DivineInterventionScript : Script, IScript
     {
         SaveGame.Project(0, 1, SaveGame.MapY, SaveGame.MapX, 777, SaveGame.SingletonRepository.Projectiles.Get(nameof(HolyFireProjectile)), ProjectionFlag.ProjectKill);
         SaveGame.DispelMonsters(SaveGame.ExperienceLevel * 4);
-        SaveGame.SlowMonsters();
+        SaveGame.RunScript(nameof(SlowMonstersScript));
         SaveGame.StunMonsters(SaveGame.ExperienceLevel * 4);
         SaveGame.ConfuseMonsters(SaveGame.ExperienceLevel * 4);
         SaveGame.TurnMonsters(SaveGame.ExperienceLevel * 4);

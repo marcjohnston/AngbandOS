@@ -30,7 +30,7 @@ internal class SlowMonstersStaffItemFactory : StaffItemFactory
     public override int Weight => 50;
     public override void UseStaff(UseStaffEvent eventArgs)
     {
-        if (SaveGame.SlowMonsters())
+        if (SaveGame.RunSuccessfulScript(nameof(SlowMonstersScript)))
         {
             eventArgs.Identified = true;
         }

@@ -5,18 +5,19 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Spells.Nature;
+namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class NatureSpellEarthquake : Spell
+internal class EarthquakeScript : Script, IScript
 {
-    private NatureSpellEarthquake(SaveGame saveGame) : base(saveGame) { }
-    public override void Cast()
+    private EarthquakeScript(SaveGame saveGame) : base(saveGame) { }
+
+    /// <summary>
+    /// Executes the script.
+    /// </summary>
+    /// <returns></returns>
+    public void ExecuteScript()
     {
-        SaveGame.RunScript(nameof(EarthquakeScript));
+        SaveGame.Earthquake(SaveGame.MapY, SaveGame.MapX, 10);
     }
-
-    public override string Name => "Earthquake";
-
-    protected override string LearnedDetails => "rad 10";
 }
