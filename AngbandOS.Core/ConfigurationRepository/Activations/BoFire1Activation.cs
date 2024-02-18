@@ -29,10 +29,4 @@ internal class BoFire1Activation : DirectionalActivation
     public override int Value => 250;
 
     public override string Description => "fire bolt (9d8) every 8+d8 turns";
-
-    public override Action<IItemCharacteristics> ActivateSpecialSustain => (IItemCharacteristics itemCharacteristics) => itemCharacteristics.SustInt = true;
-
-    public override Action<IItemCharacteristics> ActivateSpecialPower => (IItemCharacteristics itemCharacteristics) => itemCharacteristics.ResDisen = true;
-
-    public override Action<IItemCharacteristics> ActivateSpecialAbility => (IItemCharacteristics itemCharacteristics) => itemCharacteristics.HoldLife = true;
 }

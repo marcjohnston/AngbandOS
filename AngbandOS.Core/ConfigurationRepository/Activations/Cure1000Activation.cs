@@ -31,10 +31,4 @@ internal class Cure1000Activation : Activation
     public override int Value => 15000;
 
     public override string Description => "heal 1000 hit points every 888 turns";
-
-    public override Action<IItemCharacteristics> ActivateSpecialSustain => (IItemCharacteristics itemCharacteristics) => itemCharacteristics.SustDex = true;
-
-    public override Action<IItemCharacteristics> ActivateSpecialPower => (IItemCharacteristics itemCharacteristics) => itemCharacteristics.ResLight = true;
-
-    public override Action<IItemCharacteristics> ActivateSpecialAbility => (IItemCharacteristics itemCharacteristics) => itemCharacteristics.HoldLife = true;
 }

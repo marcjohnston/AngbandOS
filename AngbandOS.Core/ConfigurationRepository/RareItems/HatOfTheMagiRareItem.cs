@@ -13,7 +13,7 @@ internal class HatOfTheMagiRareItem : RareItem
     private HatOfTheMagiRareItem(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override void ApplyMagic(Item item)
     {
-        item.BonusPowerType = SaveGame.SingletonRepository.Powers.Get(nameof(SpecialAbilityPower));
+        item.RandomPower = SaveGame.SingletonRepository.Powers.ToWeightedRandom(_power => _power.IsAbility == true).Choose();
     }
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(CloseBraceSymbol));
     public override ColorEnum Color => ColorEnum.Brown;

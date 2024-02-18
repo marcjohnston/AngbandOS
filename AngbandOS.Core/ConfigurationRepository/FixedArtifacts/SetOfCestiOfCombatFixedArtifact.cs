@@ -27,8 +27,7 @@ internal class SetOfCestiOfCombatFixedArtifact : FixedArtifact, IFixedArtifactAc
     }
     public override void ApplyResistances(Item item)
     {
-        item.BonusPowerType = SaveGame.SingletonRepository.Powers.Get(nameof(SpecialAbilityPower));
-        item.BonusPowerSubType= SaveGame.SingletonRepository.Activations.ToWeightedRandom().ChooseOrDefault();
+        item.RandomPower = SaveGame.SingletonRepository.Powers.ToWeightedRandom(_power => _power.IsAbility == true).Choose();
     }
     public string DescribeActivationEffect => "a magical arrow (150) every 90+d90 turns";
 

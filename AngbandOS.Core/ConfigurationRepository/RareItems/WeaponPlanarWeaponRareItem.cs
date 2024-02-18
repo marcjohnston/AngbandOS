@@ -16,7 +16,7 @@ internal class WeaponPlanarWeaponRareItem : RareItem
     {
         if (SaveGame.DieRoll(7) == 1)
         {
-            item.BonusPowerType = SaveGame.SingletonRepository.Powers.Get(nameof(SpecialAbilityPower));
+            item.RandomPower = SaveGame.SingletonRepository.Powers.ToWeightedRandom(_power => _power.IsAbility == true).Choose();
         }
     }
     public override bool DoActivate(Item item)

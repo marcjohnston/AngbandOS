@@ -419,7 +419,7 @@ internal abstract class StoreFactory : IItemFilter, IGetKey<string>
         {
             return false;
         }
-        if (oPtr.BonusPowerType != null || jPtr.BonusPowerType != null)
+        if (oPtr.RandomPower != null || jPtr.RandomPower != null)
         {
             return false;
         }

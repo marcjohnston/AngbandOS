@@ -76,19 +76,4 @@ internal abstract class Activation : IGetKey<string>
     /// Returns the description of the artifact power.
     /// </summary>
     public abstract string Description { get; }
-
-    /// <summary>
-    /// Applies a special sustain to ItemCharacteristics.
-    /// </summary>
-    public abstract Action<IItemCharacteristics> ActivateSpecialSustain { get; }
-
-    /// <summary>
-    /// Applies a special power to ItemCharacteristics.
-    /// </summary>
-    public abstract Action<IItemCharacteristics> ActivateSpecialPower { get; }
-
-    /// <summary>
-    /// Applies a special ability to ItemCharacteristics.
-    /// </summary>
-    public abstract Action<IItemCharacteristics> ActivateSpecialAbility { get; }
 }

@@ -19,11 +19,12 @@ internal abstract class Power : IGetKey<string>
     public virtual string Key => GetType().Name;
     public string GetKey => Key;
 
-    public abstract void Activate(Activation bonusPowerSubType, Item item);
+    public abstract void Activate(Item item);
+    public virtual bool IsResistance => false;
+    public virtual bool IsSustain => false;
+    public virtual bool IsAbility => false;
 
-    public void Bind()
-    {
-    }
+    public void Bind() { }
 
     public string ToJson()
     {

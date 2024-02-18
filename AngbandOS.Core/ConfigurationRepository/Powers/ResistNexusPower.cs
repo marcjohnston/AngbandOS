@@ -8,11 +8,12 @@
 namespace AngbandOS.Core.Powers;
 
 [Serializable]
-internal class SpecialAbilityPower : Power
+internal class ResistNexusPower : Power
 {
-    private SpecialAbilityPower(SaveGame saveGame) : base(saveGame) { } // This object is a singleton
-    public override void Activate(Activation bonusPowerSubType, Item item)
+    private ResistNexusPower(SaveGame saveGame) : base(saveGame) { } // This object is a singleton
+    public override bool IsResistance => true;
+    public override void Activate(Item item)
     {
-        bonusPowerSubType.ActivateSpecialAbility(item.Characteristics);
+        item.Characteristics.ResNexus = true;
     }
 }

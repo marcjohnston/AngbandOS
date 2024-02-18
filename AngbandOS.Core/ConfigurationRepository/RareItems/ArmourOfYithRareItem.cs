@@ -14,7 +14,7 @@ internal class ArmorOfYithRareItem : RareItem
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(OpenBraceSymbol));
     public override void ApplyMagic(Item item)
     {
-        item.BonusPowerType = SaveGame.SingletonRepository.Powers.Get(nameof(SpecialPowerPower));
+        item.RandomPower = SaveGame.SingletonRepository.Powers.ToWeightedRandom(_power => _power.IsResistance == true).Choose();
     }
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "Armor of Yith";

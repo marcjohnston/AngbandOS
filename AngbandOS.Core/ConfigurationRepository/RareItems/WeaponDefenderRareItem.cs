@@ -13,7 +13,7 @@ internal class WeaponDefenderRareItem : RareItem
     private WeaponDefenderRareItem(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override void ApplyMagic(Item item)
     {
-        item.BonusPowerType = SaveGame.SingletonRepository.Powers.Get(nameof(SpecialSustainPower));
+        item.RandomPower = SaveGame.SingletonRepository.Powers.ToWeightedRandom(_power => _power.IsSustain == true).Choose();
     }
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(VerticalBarSymbol));
     public override ColorEnum Color => ColorEnum.BrightWhite;

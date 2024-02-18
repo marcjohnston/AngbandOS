@@ -25,8 +25,7 @@ internal class QuarterstaffOfAtalFixedArtifact : FixedArtifact, IFixedArtifactAc
     }
     public override void ApplyResistances(Item item)
     {
-        item.BonusPowerType = SaveGame.SingletonRepository.Powers.Get(nameof(SpecialAbilityPower));
-        item.BonusPowerSubType= SaveGame.SingletonRepository.Activations.ToWeightedRandom().ChooseOrDefault();
+        item.RandomPower = SaveGame.SingletonRepository.Powers.ToWeightedRandom(_power => _power.IsAbility == true).Choose();
     }
     public string DescribeActivationEffect => "probing, detection and full id  every 1000 turns";
 

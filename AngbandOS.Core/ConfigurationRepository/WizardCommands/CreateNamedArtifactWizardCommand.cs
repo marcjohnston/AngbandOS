@@ -20,6 +20,6 @@ internal class CreateNamedArtifactWizardCommand : WizardCommand
 
     public override void Execute()
     {
-        SaveGame.WizCreateNamedArt(SaveGame.CommandArgument);
+        SaveGame.RunScript(nameof(CreateNamedArtifactScript));
     }
 }

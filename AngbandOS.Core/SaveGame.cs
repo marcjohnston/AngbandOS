@@ -12962,37 +12962,6 @@ internal class SaveGame
         }
     }
     
-    public void WizCreateNamedArt(int aIdx)
-    {
-        if (aIdx < 0 || aIdx >= SingletonRepository.FixedArtifacts.Count)
-        {
-            return;
-        }
-        FixedArtifact aPtr = SingletonRepository.FixedArtifacts[aIdx];
-        if (aPtr.CurNum > 0)
-        {
-            return;
-        }
-        aPtr.CurNum = 1;
-        Item qPtr = aPtr.BaseItemFactory.CreateItem();
-        qPtr.FixedArtifact = SingletonRepository.FixedArtifacts[aIdx];
-        qPtr.TypeSpecificValue = aPtr.Pval;
-        qPtr.BaseArmorClass = aPtr.Ac;
-        qPtr.DamageDice = aPtr.Dd;
-        qPtr.DamageDiceSides = aPtr.Ds;
-        qPtr.BonusArmorClass = aPtr.ToA;
-        qPtr.BonusToHit = aPtr.ToH;
-        qPtr.BonusDamage = aPtr.ToD;
-        qPtr.Weight = aPtr.Weight;
-        if (aPtr.Cursed)
-        {
-            qPtr.IdentCursed = true;
-        }
-        qPtr.GetFixedArtifactResistances();
-        DropNear(qPtr, -1, MapY, MapX);
-        MsgPrint("Allocated.");
-    }
-
     public void RandomizeInventory()
     {
         List<int> index = new List<int>();

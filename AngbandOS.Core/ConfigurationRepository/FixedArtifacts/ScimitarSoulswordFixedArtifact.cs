@@ -24,8 +24,7 @@ internal class ScimitarSoulswordFixedArtifact : FixedArtifact
         }
         else
         {
-            item.BonusPowerType = SaveGame.SingletonRepository.Powers.Get(nameof(SpecialAbilityPower));
-            item.BonusPowerSubType= SaveGame.SingletonRepository.Activations.ToWeightedRandom().ChooseOrDefault();
+            item.RandomPower = SaveGame.SingletonRepository.Powers.ToWeightedRandom(_power => _power.IsAbility == true).Choose();
         }
     }
     public override ColorEnum Color => ColorEnum.BrightWhite;

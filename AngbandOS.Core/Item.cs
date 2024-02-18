@@ -62,7 +62,12 @@ internal sealed class Item : IComparable<Item>
     public int BonusArmorClass;
     public int BonusDamage;
     public Activation BonusPowerSubType;
-    public Power? BonusPowerType;
+
+    /// <summary>
+    /// Returns an additional special power that is added for fixed artifacts and rare items.
+    /// </summary>
+    public Power? RandomPower = null;
+
     public int BonusToHit;
     public int Count;
     public int DamageDice;
@@ -411,8 +416,7 @@ internal sealed class Item : IComparable<Item>
         clonedItem.BonusDamage = BonusDamage;
         clonedItem.BonusToHit = BonusToHit;
         clonedItem.Weight = Weight;
-        clonedItem.BonusPowerType = BonusPowerType;
-        clonedItem.BonusPowerSubType = BonusPowerSubType;
+        clonedItem.RandomPower = RandomPower;
         return clonedItem;
     }
 
@@ -1197,11 +1201,10 @@ internal sealed class Item : IComparable<Item>
 
         Characteristics.Merge(RandartItemCharacteristics);
 
-        if (BonusPowerType != null)
+        if (RandomPower != null)
         {
-            BonusPowerType.Activate(BonusPowerSubType, this);
+            RandomPower.Activate(this);
         }
-
     }
 
     public ItemQualityRating? GetVagueQualityRating()
@@ -1804,11 +1807,6 @@ internal sealed class Item : IComparable<Item>
         {
             return null;
         }
-        if (FixedArtifact == null && RareItem == null && BonusPowerType == null && BonusPowerSubType != null)
-        {
-            return BonusPowerSubType.Description;
-        }
-
         if (FixedArtifact != null && typeof(IFixedArtifactActivatible).IsAssignableFrom(FixedArtifact.GetType()))
         {
             IFixedArtifactActivatible activatibleFixedArtifact = (IFixedArtifactActivatible)FixedArtifact;
@@ -1909,10 +1907,6 @@ internal sealed class Item : IComparable<Item>
         else if (RareItem != null)
         {
             RareItem.ApplyMagic(this);
-            if (BonusPowerType != null && string.IsNullOrEmpty(RandartName))
-            {
-                BonusPowerSubType = SaveGame.SingletonRepository.Activations.ToWeightedRandom().ChooseOrDefault();
-            }
             if (RareItem.Cost == 0)
             {
                 IdentBroken = true;

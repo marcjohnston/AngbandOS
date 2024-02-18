@@ -29,10 +29,8 @@ internal class RingOfElementalPowerIceFixedArtifact : FixedArtifact, IFixedArtif
 
     public override void ApplyResistances(Item item)
     {
-        item.BonusPowerType = SaveGame.SingletonRepository.Powers.Get(nameof(SpecialAbilityPower));
-        item.BonusPowerSubType= SaveGame.SingletonRepository.Activations.ToWeightedRandom().ChooseOrDefault();
+        item.RandomPower = SaveGame.SingletonRepository.Powers.ToWeightedRandom(_power => _power.IsAbility == true).Choose();
     }
-
 
     public override string Name => "The Ring of Elemental Power (Ice)";
     public override int Ac => 0;
