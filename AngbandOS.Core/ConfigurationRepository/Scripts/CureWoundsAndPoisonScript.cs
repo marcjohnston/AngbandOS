@@ -5,17 +5,20 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Spells.Nature;
+namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class NatureSpellCureWoundsAndPoison : Spell
+internal class CureWoundsAndPoisonScript : Script, IScript
 {
-    private NatureSpellCureWoundsAndPoison(SaveGame saveGame) : base(saveGame) { }
-    public override void Cast()
-    {
-        SaveGame.RunScript(nameof(CureWoundsAndPoisonScript));
-    }
+    private CureWoundsAndPoisonScript(SaveGame saveGame) : base(saveGame) { }
 
-    public override string Name => "Cure Wounds and Poison";
-    
+    /// <summary>
+    /// Executes the script.
+    /// </summary>
+    /// <returns></returns>
+    public void ExecuteScript()
+    {
+        SaveGame.TimedBleeding.ResetTimer();
+        SaveGame.TimedPoison.ResetTimer();
+    }
 }
