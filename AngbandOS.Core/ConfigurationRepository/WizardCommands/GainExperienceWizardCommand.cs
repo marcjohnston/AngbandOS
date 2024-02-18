@@ -20,13 +20,6 @@ internal class GainExperienceWizardCommand : WizardCommand
 
     public override void Execute()
     {
-        if (SaveGame.CommandArgument != 0)
-        {
-            SaveGame.GainExperience(SaveGame.CommandArgument);
-        }
-        else
-        {
-            SaveGame.GainExperience(SaveGame.ExperiencePoints + 1);
-        }
+        SaveGame.RunScript(nameof(GainExperienceScript));
     }
 }
