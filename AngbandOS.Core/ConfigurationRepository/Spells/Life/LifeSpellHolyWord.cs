@@ -13,12 +13,7 @@ internal class LifeSpellHolyWord : Spell
     private LifeSpellHolyWord(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.RunScriptInt(nameof(DispelEvilScript), SaveGame.ExperienceLevel * 4);
-        SaveGame.RestoreHealth(1000);
-        SaveGame.TimedFear.ResetTimer();
-        SaveGame.TimedPoison.ResetTimer();
-        SaveGame.TimedStun.ResetTimer();
-        SaveGame.TimedBleeding.ResetTimer();
+        SaveGame.RunScript(nameof(HolyWordScript));
     }
 
     public override string Name => "Holy Word";
