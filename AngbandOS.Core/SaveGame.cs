@@ -12742,10 +12742,6 @@ internal class SaveGame
         }
     }
 
-    public void DoCmdRedraw()
-    {
-    }
-
     public void DoCmdWizNamed(bool slp)
     {
         int rIdx = CommandArgument;
@@ -12790,37 +12786,6 @@ internal class SaveGame
         }
     }
  
-    public void RandomizeInventory()
-    {
-        List<int> index = new List<int>();
-        List<Item> items = new List<Item>();
-
-        for (int i = 0; i < InventorySlot.PackCount; i++)
-        {
-            int pos;
-            do
-            {
-                pos = RandomLessThan(InventorySlot.PackCount);
-            }
-            while (index.Contains(pos));
-            index.Add(pos);
-            Item? item = GetInventoryItem(pos);
-            if (item != null)
-            {
-                items.Add(item);
-            }
-        }
-        for (int i = 0; i < items.Count; i++)
-        {
-            SetInventoryItem(i, items[i]);
-        }
-        for (int i = items.Count; i < InventorySlot.Pack; i++)
-        {
-            SetInventoryItem(i, null);
-        }
-        SingletonRepository.FlaggedActions.Get(nameof(NoticeReorderFlaggedAction)).Set();
-    }
-
     /// <summary>
     /// Returns the quest number for the current dungeon and the current 
     /// </summary>
