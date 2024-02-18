@@ -13312,7 +13312,7 @@ internal class SaveGame
             HandleStuff();
             if (levelReward)
             {
-                GainLevelReward();
+                RunScript(nameof(GainLevelRewardScript));
                 levelReward = false;
             }
             if (levelMutation)
@@ -13496,7 +13496,6 @@ internal class SaveGame
 
     public void GainLevelReward()
     {
-        GooPatron.GetReward();
     }
 
     public ItemCharacteristics GetAbilitiesAsItemFlags()
