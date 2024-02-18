@@ -20,6 +20,6 @@ internal class SummonMonsterWizardCommand : WizardCommand
 
     public override void Execute()
     {
-        SaveGame.DoCmdWizSummon();
+        SaveGame.RunScript(nameof(SummonMonsterScript));
     }
 }
