@@ -12801,8 +12801,9 @@ internal class SaveGame
         }
     }
 
-    public void DoCmdWizNamedFriendly(int rIdx, bool slp)
+    public void DoCmdWizNamedFriendly(bool slp)
     {
+        int rIdx = CommandArgument;
         if (rIdx >= SingletonRepository.MonsterRaces.Count - 1)
         {
             return;

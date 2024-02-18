@@ -20,6 +20,6 @@ internal class SummonNamedPetWizardCommand : WizardCommand
 
     public override void Execute()
     {
-        SaveGame.DoCmdWizNamedFriendly(SaveGame.CommandArgument, true);
+        SaveGame.RunScript(nameof(SummonNamedPetScript));
     }
 }
