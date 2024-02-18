@@ -13,11 +13,7 @@ internal class NatureSpellLightningStorm : Spell
     private NatureSpellLightningStorm(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        if (!SaveGame.GetDirectionWithAim(out int dir))
-        {
-            return;
-        }
-        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(ElecProjectile)), dir, 90 + SaveGame.ExperienceLevel, (SaveGame.ExperienceLevel / 12) + 1);
+        SaveGame.RunScript(nameof(LightningStormScript));
     }
 
     public override string Name => "Lightning Storm";
