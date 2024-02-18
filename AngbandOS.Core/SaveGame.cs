@@ -2649,7 +2649,7 @@ internal class SaveGame
         rPtr.Guardian = !rPtr.Guardian;
         if (ActiveQuests == 0)
         {
-            Winner();
+            RunScript(nameof(WinnerScript));
         }
         else
         {
@@ -2675,11 +2675,6 @@ internal class SaveGame
 
     public void Winner()
     {
-        IsWinner = true;
-        SingletonRepository.FlaggedActions.Get(nameof(RedrawTitleFlaggedAction)).Set();
-        MsgPrint("*** CONGRATULATIONS ***");
-        MsgPrint("You have won the game!");
-        MsgPrint("You may retire ('Q') when you are ready.");
     }
 
     public void NoticeStuff()

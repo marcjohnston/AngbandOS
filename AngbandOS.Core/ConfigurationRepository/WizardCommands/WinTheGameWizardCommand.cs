@@ -20,6 +20,6 @@ internal class WinTheGameWizardCommand : WizardCommand
 
     public override void Execute()
     {
-        SaveGame.Winner();
+        SaveGame.RunScript(nameof(WinnerScript));
     }
 }
