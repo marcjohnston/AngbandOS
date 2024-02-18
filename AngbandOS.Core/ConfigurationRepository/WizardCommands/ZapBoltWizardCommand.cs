@@ -20,6 +20,6 @@ internal class ZapBoltWizardCommand : WizardCommand
 
     public override void Execute()
     {
-        SaveGame.DoCmdWizardBolt();
+        SaveGame.RunScript(nameof(WizardBoltScript));
     }
 }

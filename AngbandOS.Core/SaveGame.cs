@@ -12785,24 +12785,6 @@ internal class SaveGame
         AllocHorde(wy, wx);
     }
 
-    public void DoCmdWizardBolt()
-    {
-        ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill;
-        if (!GetDirectionWithAim(out int dir))
-        {
-            return;
-        }
-        int tx = MapX + (99 * KeypadDirectionXOffset[dir]);
-        int ty = MapY + (99 * KeypadDirectionYOffset[dir]);
-        if (dir == 5 && TargetOkay())
-        {
-            flg &= ~ProjectionFlag.ProjectStop;
-            tx = TargetCol;
-            ty = TargetRow;
-        }
-        Project(0, 0, ty, tx, 1000000, SingletonRepository.Projectiles.Get(nameof(WizardBoltProjectile)), flg);
-    }
-
     public void DoCmdWizBamf()
     {
         if (TargetWho == 0)
