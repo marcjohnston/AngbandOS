@@ -12823,33 +12823,7 @@ internal class SaveGame
             }
         }
     }
-
-    public void DoCmdWizSummon()
-    {
-        int num = CommandArgument;
-        if (num <= 0)
-        {
-            num = 1;
-        }
-
-        for (int i = 0; i < num; i++)
-        {
-            SummonSpecific(MapY, MapX, Difficulty, null);
-        }
-    }
-
-    private void PrtBinary(bool isSet, int row, int col)
-    {
-        if (isSet)
-        {
-            Screen.Print(ColorEnum.Blue, '*', row, col);
-        }
-        else
-        {
-            Screen.Print(ColorEnum.White, '-', row, col);
-        }
-    }
-    
+ 
     public void RandomizeInventory()
     {
         List<int> index = new List<int>();

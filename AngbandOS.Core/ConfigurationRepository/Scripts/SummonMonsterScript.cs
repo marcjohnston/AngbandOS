@@ -18,7 +18,7 @@ internal class SummonMonsterScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        int num = CommandArgument;
+        int num = SaveGame.CommandArgument;
         if (num <= 0)
         {
             num = 1;
@@ -26,7 +26,7 @@ internal class SummonMonsterScript : Script, IScript
 
         for (int i = 0; i < num; i++)
         {
-            SummonSpecific(MapY, MapX, Difficulty, null);
+            SaveGame.SummonSpecific(SaveGame.MapY, SaveGame.MapX, SaveGame.Difficulty, null);
         }
     }
 }
