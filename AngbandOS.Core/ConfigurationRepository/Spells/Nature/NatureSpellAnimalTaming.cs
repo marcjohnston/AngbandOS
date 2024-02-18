@@ -13,11 +13,7 @@ internal class NatureSpellAnimalTaming : Spell
     private NatureSpellAnimalTaming(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        if (!SaveGame.GetDirectionWithAim(out int dir))
-        {
-            return;
-        }
-        SaveGame.CharmAnimal(dir, SaveGame.ExperienceLevel);
+        SaveGame.RunScript(nameof(AnimalTrainingScript));
     }
 
     public override string Name => "Animal Taming";
