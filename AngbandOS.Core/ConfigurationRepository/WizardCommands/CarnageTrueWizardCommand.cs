@@ -20,6 +20,6 @@ internal class CarnageTrueWizardCommand : WizardCommand
 
     public override void Execute()
     {
-        SaveGame.DoCmdWizZap();
+        SaveGame.RunScript(nameof(CarnageScript));
     }
 }

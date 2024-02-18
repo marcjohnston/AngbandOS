@@ -12873,22 +12873,6 @@ internal class SaveGame
         }
     }
 
-    public void DoCmdWizZap()
-    {
-        for (int i = 1; i < MMax; i++)
-        {
-            Monster mPtr = Monsters[i];
-            if (mPtr.Race == null)
-            {
-                continue;
-            }
-            if (mPtr.DistanceFromPlayer <= Constants.MaxSight)
-            {
-                DeleteMonsterByIndex(i, true);
-            }
-        }
-    }
-
     private void PrtBinary(bool isSet, int row, int col)
     {
         if (isSet)
