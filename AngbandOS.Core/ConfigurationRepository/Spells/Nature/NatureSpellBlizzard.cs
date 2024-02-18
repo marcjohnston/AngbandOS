@@ -13,11 +13,7 @@ internal class NatureSpellBlizzard : Spell
     private NatureSpellBlizzard(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        if (!SaveGame.GetDirectionWithAim(out int dir))
-        {
-            return;
-        }
-        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(ColdProjectile)), dir, 70 + SaveGame.ExperienceLevel, (SaveGame.ExperienceLevel / 12) + 1);
+        SaveGame.RunScript(nameof(BlizzardScript));
     }
 
     public override string Name => "Blizzard";
