@@ -16,13 +16,13 @@ internal class IllNormPassiveMutation : Mutation
     public override string HaveMessage => "Your appearance is masked with illusion.";
     public override string LoseMessage => "You stop projecting a reassuring image.";
 
-    public override void OnGain(Genome genome)
+    public override void OnGain()
     {
-        genome.CharismaOverride = true;
+        SaveGame.CharismaOverride = true;
     }
 
-    public override void OnLose(Genome genome)
+    public override void OnLose()
     {
-        genome.CharismaOverride = false;
+        SaveGame.CharismaOverride = false;
     }
 }

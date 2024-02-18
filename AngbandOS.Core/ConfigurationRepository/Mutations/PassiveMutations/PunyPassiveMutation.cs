@@ -17,13 +17,13 @@ internal class PunyPassiveMutation : Mutation
     public override string LoseMessage => "Your muscles revert to normal.";
     public override MutationGroup Group => MutationGroup.Strength;
 
-    public override void OnGain(Genome genome)
+    public override void OnGain()
     {
-        genome.StrengthBonus -= 4;
+        SaveGame.StrengthBonus -= 4;
     }
 
-    public override void OnLose(Genome genome)
+    public override void OnLose()
     {
-        genome.StrengthBonus += 4;
+        SaveGame.StrengthBonus += 4;
     }
 }

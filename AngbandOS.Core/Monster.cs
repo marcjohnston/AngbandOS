@@ -507,7 +507,7 @@ internal class Monster : IItemContainer
             return;
         }
         this.SaveGame.MsgPrint("The exposure to eldritch forces warps you.");
-        SaveGame.Dna.GainMutation();
+        SaveGame.GainMutation();
         this.SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
         this.SaveGame.HandleStuff();
     }

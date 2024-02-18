@@ -47,9 +47,9 @@ internal abstract class Mutation : IGetKey<string>
         return string.Empty;
     }
 
-    public virtual void OnGain(Genome genome) { }
+    public virtual void OnGain() { }
 
-    public virtual void OnLose(Genome genome) { }
+    public virtual void OnLose() { }
 
     public virtual void OnProcessWorld() { }
 }

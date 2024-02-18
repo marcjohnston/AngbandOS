@@ -17,13 +17,13 @@ internal class FearlessPassiveMutation : Mutation
     public override string LoseMessage => "You begin to feel fear again.";
     public override MutationGroup Group => MutationGroup.Bravery;
 
-    public override void OnGain(Genome genome)
+    public override void OnGain()
     {
-        genome.ResFear = true;
+        SaveGame.ResFear = true;
     }
 
-    public override void OnLose(Genome genome)
+    public override void OnLose()
     {
-        genome.ResFear = false;
+        SaveGame.ResFear = false;
     }
 }

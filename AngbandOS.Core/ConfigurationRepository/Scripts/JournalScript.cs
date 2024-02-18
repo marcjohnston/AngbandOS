@@ -730,7 +730,7 @@ internal class JournalScript : Script, IScript, IRepeatableScript, IStoreScript
 
     private void JournalMutations()
     {
-        string[] features = SaveGame.Dna.GetMutationList();
+        string[] features = SaveGame.GetMutationList();
         int maxFeature = features.Length;
         int first = 0;
         while (!SaveGame.Shutdown)

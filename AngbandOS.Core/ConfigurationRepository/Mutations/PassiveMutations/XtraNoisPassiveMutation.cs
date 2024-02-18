@@ -16,13 +16,13 @@ internal class XtraNoisPassiveMutation : Mutation
     public override string HaveMessage => "You make a lot of strange noise (-3 stealth).";
     public override string LoseMessage => "You stop making strange noise!";
 
-    public override void OnGain(Genome genome)
+    public override void OnGain()
     {
-        genome.StealthBonus -= 3;
+        SaveGame.StealthBonus -= 3;
     }
 
-    public override void OnLose(Genome genome)
+    public override void OnLose()
     {
-        genome.StealthBonus += 3;
+        SaveGame.StealthBonus += 3;
     }
 }

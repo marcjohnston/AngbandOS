@@ -16,13 +16,13 @@ internal class MagicResPassiveMutation : Mutation
     public override string HaveMessage => "You are resistant to magic.";
     public override string LoseMessage => "You become susceptible to magic again.";
 
-    public override void OnGain(Genome genome)
+    public override void OnGain()
     {
-        genome.MagicResistance = true;
+        SaveGame.MagicResistance = true;
     }
 
-    public override void OnLose(Genome genome)
+    public override void OnLose()
     {
-        genome.MagicResistance = false;
+        SaveGame.MagicResistance = false;
     }
 }

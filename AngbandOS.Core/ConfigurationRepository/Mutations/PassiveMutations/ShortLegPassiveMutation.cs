@@ -16,13 +16,13 @@ internal class ShortLegPassiveMutation : Mutation
     public override string HaveMessage => "Your legs are short stubs (-3 speed).";
     public override string LoseMessage => "Your legs lengthen to normal.";
 
-    public override void OnGain(Genome genome)
+    public override void OnGain()
     {
-        genome.SpeedBonus -= 3;
+        SaveGame.SpeedBonus -= 3;
     }
 
-    public override void OnLose(Genome genome)
+    public override void OnLose()
     {
-        genome.SpeedBonus += 3;
+        SaveGame.SpeedBonus += 3;
     }
 }

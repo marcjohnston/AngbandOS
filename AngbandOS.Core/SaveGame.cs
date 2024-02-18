@@ -182,7 +182,6 @@ internal class SaveGame
     public const int SafeMaxAttempts = 5000;
 
     public readonly AbilityScore[] AbilityScores = new AbilityScore[6]; // TODO: This needs to be a dictionary where the keys need to be stats
-    public Genome Dna;
     public readonly string[] History = new string[4];
     public readonly int[] MaxDlv = new int[DungeonCount];
     public readonly int[] PlayerHp = new int[Constants.PyMaxLevel];
@@ -1743,7 +1742,7 @@ internal class SaveGame
         TimedStun = new StunTimedAction(this);
         TimedSuperheroism = new SuperHeroismTimedAction(this);
         TimedTelepathy = new TelepathyTimedAction(this);
-        Dna = new Genome(this);
+        InitializeMutations();
         for (int i = 0; i < 4; i++)
         {
             History[i] = "";
@@ -3388,7 +3387,7 @@ internal class SaveGame
         if (GetFirstLevelMutation)
         {
             MsgPrint("You feel different!");
-            Dna.GainMutation();
+            GainMutation();
             GetFirstLevelMutation = false;
         }
         Energy += Constants.ExtractEnergy[Speed];
@@ -3878,7 +3877,7 @@ internal class SaveGame
                     }
                 }
             }
-            Dna.OnProcessWorld();
+            OnProcessWorld();
             if (oPtr == null)
             {
                 continue;
@@ -7669,7 +7668,7 @@ internal class SaveGame
             }
         }
         // Only make extra attacks if the monster is still there
-        foreach (Mutation naturalAttack in Dna.NaturalAttacks)
+        foreach (Mutation naturalAttack in NaturalAttacks)
         {
             if (!noExtra && tile.MonsterIndex != 0)
             {
@@ -13288,7 +13287,7 @@ internal class SaveGame
                 {
                     levelReward = true;
                 }
-                if (Dna.ChaosGift)
+                if (ChaosGift)
                 {
                     levelReward = true;
                 }
@@ -13318,7 +13317,7 @@ internal class SaveGame
             if (levelMutation)
             {
                 MsgPrint("You feel different...");
-                Dna.GainMutation();
+                GainMutation();
                 levelMutation = false;
             }
         }
@@ -13669,44 +13668,44 @@ internal class SaveGame
         }
 
         Race.UpdateRacialAbilities(ExperienceLevel, itemCharacteristics);
-        if (Dna.Regen)
+        if (Regen)
         {
             itemCharacteristics.Regen = true;
         }
-        if (Dna.SuppressRegen)
+        if (SuppressRegen)
         {
             itemCharacteristics.Regen = false;
         }
-        if (Dna.SpeedBonus != 0)
+        if (SpeedBonus != 0)
         {
             itemCharacteristics.Speed = true;
         }
-        if (Dna.ElecHit)
+        if (ElecHit)
         {
             itemCharacteristics.ShElec = true;
         }
-        if (Dna.FireHit)
+        if (FireHit)
         {
             itemCharacteristics.ShFire = true;
             itemCharacteristics.Lightsource = true;
         }
-        if (Dna.FeatherFall)
+        if (FeatherFall)
         {
             itemCharacteristics.Feather = true;
         }
-        if (Dna.ResFear)
+        if (ResFear)
         {
             itemCharacteristics.ResFear = true;
         }
-        if (Dna.Esp)
+        if (Esp)
         {
             itemCharacteristics.Telepathy = true;
         }
-        if (Dna.FreeAction)
+        if (FreeAction)
         {
             itemCharacteristics.FreeAct = true;
         }
-        if (Dna.SustainAll)
+        if (SustainAll)
         {
             itemCharacteristics.SustCon = true;
             if (ExperienceLevel > 9)
@@ -17449,4 +17448,300 @@ internal class SaveGame
         Random use = UseFixed ? _fixed : _mainSequence;
         return use.Next(max);
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public readonly List<Mutation> NaturalAttacks = new List<Mutation>();
+    public int GenomeArmorClassBonus;
+    public bool ChaosGift;
+    public int CharismaBonus;
+    public bool CharismaOverride;
+    public int ConstitutionBonus;
+    public int DexterityBonus;
+    public bool ElecHit;
+    public bool Esp;
+    public bool FeatherFall;
+    public bool FireHit;
+    public bool FreeAction;
+    public int InfravisionBonus;
+    public int IntelligenceBonus;
+    public bool MagicResistance;
+    public bool Regen;
+    public bool ResFear;
+    public bool ResTime;
+    public int SearchBonus;
+    public int SpeedBonus;
+    public int StealthBonus;
+    public int StrengthBonus;
+    public bool SuppressRegen;
+    public bool SustainAll;
+    public bool Vulnerable;
+    public int WisdomBonus;
+    private readonly List<Mutation> _notPossessed = new List<Mutation>();
+    private readonly List<Mutation> _possessed = new List<Mutation>();
+
+    public void InitializeMutations()
+    {
+        _possessed.Clear();
+        // Active Mutations
+        _notPossessed.Add(SingletonRepository.Mutations.Get(nameof(BanishActiveMutation)));
+        _notPossessed.Add(SingletonRepository.Mutations.Get(nameof(BerserkActiveMutation)));
+        _notPossessed.Add(SingletonRepository.Mutations.Get(nameof(BlinkActiveMutation)));
+        _notPossessed.Add(SingletonRepository.Mutations.Get(nameof(BrFireActiveMutation)));
+        _notPossessed.Add(SingletonRepository.Mutations.Get(nameof(ColdTouchActiveMutation)));
+        _notPossessed.Add(SingletonRepository.Mutations.Get(nameof(DazzleActiveMutation)));
+        _notPossessed.Add(SingletonRepository.Mutations.Get(nameof(DetCurseActiveMutation)));
+        _notPossessed.Add(SingletonRepository.Mutations.Get(nameof(EarthquakeActiveMutation)));
+        _notPossessed.Add(SingletonRepository.Mutations.Get(nameof(EatMagicActiveMutation)));
+        _notPossessed.Add(SingletonRepository.Mutations.Get(nameof(EatRockActiveMutation)));
+        _notPossessed.Add(SingletonRepository.Mutations.Get(nameof(GrowMoldActiveMutation)));
+        _notPossessed.Add(SingletonRepository.Mutations.Get(nameof(HypnGazeActiveMutation)));
+        _notPossessed.Add(SingletonRepository.Mutations.Get(nameof(IllumineActiveMutation)));
+        _notPossessed.Add(SingletonRepository.Mutations.Get(nameof(LaserEyeActiveMutation)));
+        _notPossessed.Add(SingletonRepository.Mutations.Get(nameof(LauncherActiveMutation)));
+        _notPossessed.Add(SingletonRepository.Mutations.Get(nameof(MidasTchActiveMutation)));
+        _notPossessed.Add(SingletonRepository.Mutations.Get(nameof(MindBlstActiveMutation)));
+        _notPossessed.Add(SingletonRepository.Mutations.Get(nameof(PanicHitActiveMutation)));
+        _notPossessed.Add(SingletonRepository.Mutations.Get(nameof(PolymorphActiveMutation)));
+        _notPossessed.Add(SingletonRepository.Mutations.Get(nameof(RadiationActiveMutation)));
+        _notPossessed.Add(SingletonRepository.Mutations.Get(nameof(RecallActiveMutation)));
+        _notPossessed.Add(SingletonRepository.Mutations.Get(nameof(ResistActiveMutation)));
+        _notPossessed.Add(SingletonRepository.Mutations.Get(nameof(ShriekActiveMutation)));
+        _notPossessed.Add(SingletonRepository.Mutations.Get(nameof(SmellMetActiveMutation)));
+        _notPossessed.Add(SingletonRepository.Mutations.Get(nameof(SmellMonActiveMutation)));
+        _notPossessed.Add(SingletonRepository.Mutations.Get(nameof(SpitAcidActiveMutation)));
+        _notPossessed.Add(SingletonRepository.Mutations.Get(nameof(SterilityActiveMutation)));
+        _notPossessed.Add(SingletonRepository.Mutations.Get(nameof(SwapPosActiveMutation)));
+        _notPossessed.Add(SingletonRepository.Mutations.Get(nameof(TelekinesActiveMutation)));
+        _notPossessed.Add(SingletonRepository.Mutations.Get(nameof(VampirismActiveMutation)));
+        _notPossessed.Add(SingletonRepository.Mutations.Get(nameof(VteleportActiveMutation)));
+        _notPossessed.Add(SingletonRepository.Mutations.Get(nameof(WeighMagActiveMutation)));
+        // Passive Mutations
+        _notPossessed.Add(SingletonRepository.Mutations.Get(nameof(AlbinoPassiveMutation)));
+        _notPossessed.Add(SingletonRepository.Mutations.Get(nameof(ArthritisPassiveMutation)));
+        _notPossessed.Add(SingletonRepository.Mutations.Get(nameof(BlankFacPassiveMutation)));
+        _notPossessed.Add(SingletonRepository.Mutations.Get(nameof(ElecToucPassiveMutation)));
+        _notPossessed.Add(SingletonRepository.Mutations.Get(nameof(EspPassiveMutation)));
+        _notPossessed.Add(SingletonRepository.Mutations.Get(nameof(FearlessPassiveMutation)));
+        _notPossessed.Add(SingletonRepository.Mutations.Get(nameof(FireBodyPassiveMutation)));
+        _notPossessed.Add(SingletonRepository.Mutations.Get(nameof(FleshRotPassiveMutation)));
+        _notPossessed.Add(SingletonRepository.Mutations.Get(nameof(HyperIntPassiveMutation)));
+        _notPossessed.Add(SingletonRepository.Mutations.Get(nameof(HyperStrPassiveMutation)));
+        _notPossessed.Add(SingletonRepository.Mutations.Get(nameof(IllNormPassiveMutation)));
+        _notPossessed.Add(SingletonRepository.Mutations.Get(nameof(InfravisPassiveMutation)));
+        _notPossessed.Add(SingletonRepository.Mutations.Get(nameof(IronSkinPassiveMutation)));
+        _notPossessed.Add(SingletonRepository.Mutations.Get(nameof(LimberPassiveMutation)));
+        _notPossessed.Add(SingletonRepository.Mutations.Get(nameof(MagicResPassiveMutation)));
+        _notPossessed.Add(SingletonRepository.Mutations.Get(nameof(MoronicPassiveMutation)));
+        _notPossessed.Add(SingletonRepository.Mutations.Get(nameof(MotionPassiveMutation)));
+        _notPossessed.Add(SingletonRepository.Mutations.Get(nameof(PunyPassiveMutation)));
+        _notPossessed.Add(SingletonRepository.Mutations.Get(nameof(RegenPassiveMutation)));
+        _notPossessed.Add(SingletonRepository.Mutations.Get(nameof(ResilientPassiveMutation)));
+        _notPossessed.Add(SingletonRepository.Mutations.Get(nameof(ResTimePassiveMutation)));
+        _notPossessed.Add(SingletonRepository.Mutations.Get(nameof(ScalesPassiveMutation)));
+        _notPossessed.Add(SingletonRepository.Mutations.Get(nameof(ShortLegPassiveMutation)));
+        _notPossessed.Add(SingletonRepository.Mutations.Get(nameof(SillyVoiPassiveMutation)));
+        _notPossessed.Add(SingletonRepository.Mutations.Get(nameof(SusStatsPassiveMutation)));
+        _notPossessed.Add(SingletonRepository.Mutations.Get(nameof(VulnElemPassiveMutation)));
+        _notPossessed.Add(SingletonRepository.Mutations.Get(nameof(WartSkinPassiveMutation)));
+        _notPossessed.Add(SingletonRepository.Mutations.Get(nameof(WingsPassiveMutation)));
+        _notPossessed.Add(SingletonRepository.Mutations.Get(nameof(XtraEyesPassiveMutation)));
+        _notPossessed.Add(SingletonRepository.Mutations.Get(nameof(XtraFatPassiveMutation)));
+        _notPossessed.Add(SingletonRepository.Mutations.Get(nameof(XtraLegsPassiveMutation)));
+        _notPossessed.Add(SingletonRepository.Mutations.Get(nameof(XtraNoisPassiveMutation)));
+        // Random Mutations
+        _notPossessed.Add(SingletonRepository.Mutations.Get(nameof(AlcoholRandomMutation)));
+        _notPossessed.Add(SingletonRepository.Mutations.Get(nameof(AttAnimalRandomMutation)));
+        _notPossessed.Add(SingletonRepository.Mutations.Get(nameof(AttDemonRandomMutation)));
+        _notPossessed.Add(SingletonRepository.Mutations.Get(nameof(AttDragonRandomMutation)));
+        _notPossessed.Add(SingletonRepository.Mutations.Get(nameof(BanishAllRandomMutation)));
+        _notPossessed.Add(SingletonRepository.Mutations.Get(nameof(BeakRandomMutation)));
+        _notPossessed.Add(SingletonRepository.Mutations.Get(nameof(BersRageRandomMutation)));
+        _notPossessed.Add(SingletonRepository.Mutations.Get(nameof(ChaosGiftRandomMutation)));
+        _notPossessed.Add(SingletonRepository.Mutations.Get(nameof(CowardiceRandomMutation)));
+        _notPossessed.Add(SingletonRepository.Mutations.Get(nameof(DisarmRandomMutation)));
+        _notPossessed.Add(SingletonRepository.Mutations.Get(nameof(EatLightRandomMutation)));
+        _notPossessed.Add(SingletonRepository.Mutations.Get(nameof(FlatulentRandomMutation)));
+        _notPossessed.Add(SingletonRepository.Mutations.Get(nameof(HalluRandomMutation)));
+        _notPossessed.Add(SingletonRepository.Mutations.Get(nameof(HornsRandomMutation)));
+        _notPossessed.Add(SingletonRepository.Mutations.Get(nameof(HpToSpRandomMutation)));
+        _notPossessed.Add(SingletonRepository.Mutations.Get(nameof(InvulnRandomMutation)));
+        _notPossessed.Add(SingletonRepository.Mutations.Get(nameof(NauseaRandomMutation)));
+        _notPossessed.Add(SingletonRepository.Mutations.Get(nameof(NormalityRandomMutation)));
+        _notPossessed.Add(SingletonRepository.Mutations.Get(nameof(PolyWoundRandomMutation)));
+        _notPossessed.Add(SingletonRepository.Mutations.Get(nameof(ProdManaRandomMutation)));
+        _notPossessed.Add(SingletonRepository.Mutations.Get(nameof(RawChaosRandomMutation)));
+        _notPossessed.Add(SingletonRepository.Mutations.Get(nameof(RteleportRandomMutation)));
+        _notPossessed.Add(SingletonRepository.Mutations.Get(nameof(ScorTailRandomMutation)));
+        _notPossessed.Add(SingletonRepository.Mutations.Get(nameof(SpeedFluxRandomMutation)));
+        _notPossessed.Add(SingletonRepository.Mutations.Get(nameof(SpToHpRandomMutation)));
+        _notPossessed.Add(SingletonRepository.Mutations.Get(nameof(TentaclesRandomMutation)));
+        _notPossessed.Add(SingletonRepository.Mutations.Get(nameof(TrunkRandomMutation)));
+        _notPossessed.Add(SingletonRepository.Mutations.Get(nameof(WalkShadRandomMutation)));
+        _notPossessed.Add(SingletonRepository.Mutations.Get(nameof(WarningRandomMutation)));
+        _notPossessed.Add(SingletonRepository.Mutations.Get(nameof(WastingRandomMutation)));
+        _notPossessed.Add(SingletonRepository.Mutations.Get(nameof(WeirdMindRandomMutation)));
+        _notPossessed.Add(SingletonRepository.Mutations.Get(nameof(WraithRandomMutation)));
+    }
+
+    public bool HasMutations => _possessed.Count > 0;
+
+    public List<Mutation> ActivatableMutations()
+    {
+        List<Mutation> list = new List<Mutation>();
+        foreach (Mutation mutation in _possessed)
+        {
+            if (string.IsNullOrEmpty(mutation.ActivationSummary(ExperienceLevel)))
+            {
+                continue;
+            }
+            list.Add(mutation);
+        }
+        return list;
+    }
+
+    public void GainMutation()
+    {
+        if (_notPossessed.Count == 0)
+        {
+            return;
+        }
+        MsgPrint("You change...");
+        int total = 0;
+        foreach (Mutation mutation in _notPossessed)
+        {
+            total += mutation.Frequency;
+        }
+        int roll = DieRoll(total);
+        for (int i = 0; i < _notPossessed.Count; i++)
+        {
+            roll -= _notPossessed[i].Frequency;
+            if (roll > 0)
+            {
+                continue;
+            }
+            Mutation mutation = _notPossessed[i];
+            _notPossessed.RemoveAt(i);
+            if (_possessed.Count > 0 && mutation.Group != MutationGroup.None)
+            {
+                int j = 0;
+                do
+                {
+                    if (_possessed[j].Group == mutation.Group)
+                    {
+                        Mutation other = _possessed[j];
+                        _possessed.RemoveAt(j);
+                        other.OnLose();
+                        MsgPrint(other.LoseMessage);
+                        _notPossessed.Add(other);
+                    }
+                    else
+                    {
+                        j++;
+                    }
+                } while (j < _possessed.Count);
+            }
+            _possessed.Add(mutation);
+            mutation.OnGain();
+            MsgPrint(mutation.GainMessage);
+            SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
+            HandleStuff();
+            return;
+        }
+        MsgPrint("Oops! Fell out of mutation list!");
+    }
+
+    public string[] GetMutationList()
+    {
+        if (_possessed.Count == 0)
+        {
+            return new string[0];
+        }
+        string[] list = new string[_possessed.Count];
+        for (int i = 0; i < _possessed.Count; i++)
+        {
+            list[i] = _possessed[i].HaveMessage;
+        }
+        return list;
+    }
+
+    public void LoseAllMutations()
+    {
+        if (_possessed.Count == 0)
+        {
+            return;
+        }
+        MsgPrint("You change...");
+        do
+        {
+            Mutation mutation = _possessed[0];
+            _possessed.RemoveAt(0);
+            mutation.OnLose();
+            _notPossessed.Add(mutation);
+            MsgPrint(mutation.LoseMessage);
+        } while (_possessed.Count > 0);
+        SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
+        HandleStuff();
+    }
+
+    public void LoseMutation()
+    {
+        if (_possessed.Count == 0)
+        {
+            return;
+        }
+        MsgPrint("You change...");
+        int total = 0;
+        foreach (Mutation mutation in _possessed)
+        {
+            total += mutation.Frequency;
+        }
+        int roll = DieRoll(total);
+        for (int i = 0; i < _possessed.Count; i++)
+        {
+            roll -= _possessed[i].Frequency;
+            if (roll > 0)
+            {
+                continue;
+            }
+            Mutation mutation = _possessed[i];
+            _possessed.RemoveAt(i);
+            mutation.OnLose();
+            _notPossessed.Add(mutation);
+            MsgPrint(mutation.LoseMessage);
+            return;
+        }
+        MsgPrint("Oops! Fell out of mutation list!");
+        SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
+        HandleStuff();
+    }
+
+    public void OnProcessWorld()
+    {
+        foreach (Mutation mutation in _possessed.ToArray()) // The list may be modified.  Use the ToArray to prevent an issue.
+        {
+            mutation.OnProcessWorld();
+        }
+    }
+
 }

@@ -16,13 +16,13 @@ internal class ChaosGiftRandomMutation : Mutation
     public override string HaveMessage => "Chaos deities give you gifts.";
     public override string LoseMessage => "You lose the attention of the chaos deities.";
 
-    public override void OnGain(Genome genome)
+    public override void OnGain()
     {
-        genome.ChaosGift = true;
+        SaveGame.ChaosGift = true;
     }
 
-    public override void OnLose(Genome genome)
+    public override void OnLose()
     {
-        genome.ChaosGift = false;
+        SaveGame.ChaosGift = false;
     }
 }

@@ -17,15 +17,15 @@ internal class IronSkinPassiveMutation : Mutation
     public override string LoseMessage => "Your skin reverts to flesh!";
     public override MutationGroup Group => MutationGroup.Skin;
 
-    public override void OnGain(Genome genome)
+    public override void OnGain()
     {
-        genome.DexterityBonus -= 1;
-        genome.ArmorClassBonus += 25;
+        SaveGame.DexterityBonus -= 1;
+        SaveGame.GenomeArmorClassBonus += 25;
     }
 
-    public override void OnLose(Genome genome)
+    public override void OnLose()
     {
-        genome.DexterityBonus += 1;
-        genome.ArmorClassBonus -= 25;
+        SaveGame.DexterityBonus += 1;
+        SaveGame.GenomeArmorClassBonus -= 25;
     }
 }

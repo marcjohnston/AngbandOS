@@ -282,42 +282,42 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         {
             SaveGame.AbilityScores[i].Bonus += SaveGame.Race.AbilityBonus[i] + SaveGame.BaseCharacterClass.AbilityBonus[i];
         }
-        SaveGame.AbilityScores[Ability.Strength].Bonus += SaveGame.Dna.StrengthBonus;
-        SaveGame.AbilityScores[Ability.Intelligence].Bonus += SaveGame.Dna.IntelligenceBonus;
-        SaveGame.AbilityScores[Ability.Wisdom].Bonus += SaveGame.Dna.WisdomBonus;
-        SaveGame.AbilityScores[Ability.Dexterity].Bonus += SaveGame.Dna.DexterityBonus;
-        SaveGame.AbilityScores[Ability.Constitution].Bonus += SaveGame.Dna.ConstitutionBonus;
-        SaveGame.AbilityScores[Ability.Charisma].Bonus += SaveGame.Dna.CharismaBonus;
-        SaveGame.Speed += SaveGame.Dna.SpeedBonus;
-        SaveGame.HasRegeneration |= SaveGame.Dna.Regen;
-        SaveGame.SkillSearchFrequency += SaveGame.Dna.SearchBonus;
-        SaveGame.SkillSearching += SaveGame.Dna.SearchBonus;
-        SaveGame.InfravisionRange += SaveGame.Dna.InfravisionBonus;
-        SaveGame.HasLightningShield |= SaveGame.Dna.ElecHit;
-        SaveGame.HasFireShield |= SaveGame.Dna.FireHit;
-        SaveGame.HasGlow |= SaveGame.Dna.FireHit;
-        SaveGame.ArmorClassBonus += SaveGame.Dna.ArmorClassBonus;
-        SaveGame.DisplayedArmorClassBonus += SaveGame.Dna.ArmorClassBonus;
-        SaveGame.HasFeatherFall |= SaveGame.Dna.FeatherFall;
-        SaveGame.HasFearResistance |= SaveGame.Dna.ResFear;
-        SaveGame.HasTimeResistance |= SaveGame.Dna.ResTime;
-        SaveGame.HasTelepathy |= SaveGame.Dna.Esp;
-        SaveGame.SkillStealth += SaveGame.Dna.StealthBonus;
-        SaveGame.HasFreeAction |= SaveGame.Dna.FreeAction;
-        SaveGame.HasElementalVulnerability |= SaveGame.Dna.Vulnerable;
-        if (SaveGame.Dna.MagicResistance)
+        SaveGame.AbilityScores[Ability.Strength].Bonus += SaveGame.StrengthBonus;
+        SaveGame.AbilityScores[Ability.Intelligence].Bonus += SaveGame.IntelligenceBonus;
+        SaveGame.AbilityScores[Ability.Wisdom].Bonus += SaveGame.WisdomBonus;
+        SaveGame.AbilityScores[Ability.Dexterity].Bonus += SaveGame.DexterityBonus;
+        SaveGame.AbilityScores[Ability.Constitution].Bonus += SaveGame.ConstitutionBonus;
+        SaveGame.AbilityScores[Ability.Charisma].Bonus += SaveGame.CharismaBonus;
+        SaveGame.Speed += SaveGame.SpeedBonus;
+        SaveGame.HasRegeneration |= SaveGame.Regen;
+        SaveGame.SkillSearchFrequency += SaveGame.SearchBonus;
+        SaveGame.SkillSearching += SaveGame.SearchBonus;
+        SaveGame.InfravisionRange += SaveGame.InfravisionBonus;
+        SaveGame.HasLightningShield |= SaveGame.ElecHit;
+        SaveGame.HasFireShield |= SaveGame.FireHit;
+        SaveGame.HasGlow |= SaveGame.FireHit;
+        SaveGame.ArmorClassBonus += SaveGame.GenomeArmorClassBonus;
+        SaveGame.DisplayedArmorClassBonus += SaveGame.GenomeArmorClassBonus;
+        SaveGame.HasFeatherFall |= SaveGame.FeatherFall;
+        SaveGame.HasFearResistance |= SaveGame.ResFear;
+        SaveGame.HasTimeResistance |= SaveGame.ResTime;
+        SaveGame.HasTelepathy |= SaveGame.Esp;
+        SaveGame.SkillStealth += SaveGame.StealthBonus;
+        SaveGame.HasFreeAction |= SaveGame.FreeAction;
+        SaveGame.HasElementalVulnerability |= SaveGame.Vulnerable;
+        if (SaveGame.MagicResistance)
         {
             SaveGame.SkillSavingThrow += 15 + (SaveGame.ExperienceLevel / 5);
         }
-        if (SaveGame.Dna.SuppressRegen)
+        if (SaveGame.SuppressRegen)
         {
             SaveGame.HasRegeneration = false;
         }
-        if (SaveGame.Dna.CharismaOverride)
+        if (SaveGame.CharismaOverride)
         {
             SaveGame.AbilityScores[Ability.Charisma].Bonus = 0;
         }
-        if (SaveGame.Dna.SustainAll)
+        if (SaveGame.SustainAll)
         {
             SaveGame.HasSustainConstitution = true;
             if (SaveGame.ExperienceLevel > 9)
@@ -645,7 +645,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
             }
             int use = SaveGame.AbilityScores[i]
                 .ModifyStatValue(SaveGame.AbilityScores[i].Innate, SaveGame.AbilityScores[i].Bonus);
-            if (i == Ability.Charisma && SaveGame.Dna.CharismaOverride)
+            if (i == Ability.Charisma && SaveGame.CharismaOverride)
             {
                 if (use < 8 + (2 * SaveGame.ExperienceLevel))
                 {

@@ -20,6 +20,6 @@ internal class GainMutationWizardCommand : WizardCommand
 
     public override void Execute()
     {
-        SaveGame.Dna.GainMutation();
+        SaveGame.GainMutation();
     }
 }

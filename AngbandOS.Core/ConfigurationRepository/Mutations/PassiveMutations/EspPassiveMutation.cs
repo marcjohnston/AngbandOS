@@ -16,13 +16,13 @@ internal class EspPassiveMutation : Mutation
     public override string HaveMessage => "You are telepathic.";
     public override string LoseMessage => "You lose your telepathic ability!";
 
-    public override void OnGain(Genome genome)
+    public override void OnGain()
     {
-        genome.Esp = true;
+        SaveGame.Esp = true;
     }
 
-    public override void OnLose(Genome genome)
+    public override void OnLose()
     {
-        genome.Esp = false;
+        SaveGame.Esp = false;
     }
 }

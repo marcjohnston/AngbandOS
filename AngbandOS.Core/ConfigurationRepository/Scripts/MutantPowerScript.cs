@@ -58,7 +58,7 @@ internal class MutantPowerScript : Script, IScript, IRepeatableScript
                 pets++;
             }
         }
-        List<Mutation> activeMutations = SaveGame.Dna.ActivatableMutations();
+        List<Mutation> activeMutations = SaveGame.ActivatableMutations();
         if (!hasRacial && activeMutations.Count == 0 && pets == 0)
         {
             SaveGame.MsgPrint("You have no powers to activate.");

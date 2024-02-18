@@ -16,13 +16,13 @@ internal class VulnElemPassiveMutation : Mutation
     public override string HaveMessage => "You are susceptible to damage from the elements.";
     public override string LoseMessage => "You feel less exposed.";
 
-    public override void OnGain(Genome genome)
+    public override void OnGain()
     {
-        genome.Vulnerable = true;
+        SaveGame.Vulnerable = true;
     }
 
-    public override void OnLose(Genome genome)
+    public override void OnLose()
     {
-        genome.Vulnerable = false;
+        SaveGame.Vulnerable = false;
     }
 }

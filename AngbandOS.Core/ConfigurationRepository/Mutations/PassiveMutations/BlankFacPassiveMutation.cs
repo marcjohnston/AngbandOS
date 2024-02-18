@@ -16,13 +16,13 @@ internal class BlankFacPassiveMutation : Mutation
     public override string HaveMessage => "Your face is featureless (-1 CHR).";
     public override string LoseMessage => "Your facial features return.";
 
-    public override void OnGain(Genome genome)
+    public override void OnGain()
     {
-        genome.CharismaBonus -= 1;
+        SaveGame.CharismaBonus -= 1;
     }
 
-    public override void OnLose(Genome genome)
+    public override void OnLose()
     {
-        genome.CharismaBonus += 1;
+        SaveGame.CharismaBonus += 1;
     }
 }

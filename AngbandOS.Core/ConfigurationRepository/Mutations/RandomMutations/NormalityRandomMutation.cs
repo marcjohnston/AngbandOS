@@ -20,7 +20,7 @@ internal class NormalityRandomMutation : Mutation
     {
         if (base.SaveGame.DieRoll(5000) == 1)
         {
-            SaveGame.Dna.LoseMutation();
+            SaveGame.LoseMutation();
         }
     }
 }

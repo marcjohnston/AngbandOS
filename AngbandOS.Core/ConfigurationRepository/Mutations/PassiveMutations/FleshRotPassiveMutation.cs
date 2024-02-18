@@ -17,17 +17,17 @@ internal class FleshRotPassiveMutation : Mutation
     public override string LoseMessage => "Your flesh is no longer afflicted by a rotting disease!";
     public override MutationGroup Group => MutationGroup.Skin;
 
-    public override void OnGain(Genome genome)
+    public override void OnGain()
     {
-        genome.ConstitutionBonus -= 2;
-        genome.CharismaBonus -= 1;
-        genome.SuppressRegen = true;
+        SaveGame.ConstitutionBonus -= 2;
+        SaveGame.CharismaBonus -= 1;
+        SaveGame.SuppressRegen = true;
     }
 
-    public override void OnLose(Genome genome)
+    public override void OnLose()
     {
-        genome.ConstitutionBonus += 2;
-        genome.CharismaBonus += 1;
-        genome.SuppressRegen = false;
+        SaveGame.ConstitutionBonus += 2;
+        SaveGame.CharismaBonus += 1;
+        SaveGame.SuppressRegen = false;
     }
 }

@@ -17,15 +17,15 @@ internal class ScalesPassiveMutation : Mutation
     public override string LoseMessage => "Your scales vanish!";
     public override MutationGroup Group => MutationGroup.Skin;
 
-    public override void OnGain(Genome genome)
+    public override void OnGain()
     {
-        genome.CharismaBonus -= 1;
-        genome.ArmorClassBonus += 10;
+        SaveGame.CharismaBonus -= 1;
+        SaveGame.GenomeArmorClassBonus += 10;
     }
 
-    public override void OnLose(Genome genome)
+    public override void OnLose()
     {
-        genome.CharismaBonus += 1;
-        genome.ArmorClassBonus -= 10;
+        SaveGame.CharismaBonus += 1;
+        SaveGame.GenomeArmorClassBonus -= 10;
     }
 }

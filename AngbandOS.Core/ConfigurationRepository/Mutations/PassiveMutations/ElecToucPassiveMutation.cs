@@ -16,13 +16,13 @@ internal class ElecToucPassiveMutation : Mutation
     public override string HaveMessage => "Electricity is running through your veins.";
     public override string LoseMessage => "Electricity stops running through you.";
 
-    public override void OnGain(Genome genome)
+    public override void OnGain()
     {
-        genome.ElecHit = true;
+        SaveGame.ElecHit = true;
     }
 
-    public override void OnLose(Genome genome)
+    public override void OnLose()
     {
-        genome.ElecHit = false;
+        SaveGame.ElecHit = false;
     }
 }

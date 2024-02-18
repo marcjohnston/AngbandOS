@@ -16,13 +16,13 @@ internal class XtraLegsPassiveMutation : Mutation
     public override string HaveMessage => "You have an extra pair of legs (+3 speed).";
     public override string LoseMessage => "Your extra legs disappear!";
 
-    public override void OnGain(Genome genome)
+    public override void OnGain()
     {
-        genome.SpeedBonus += 3;
+        SaveGame.SpeedBonus += 3;
     }
 
-    public override void OnLose(Genome genome)
+    public override void OnLose()
     {
-        genome.SpeedBonus -= 3;
+        SaveGame.SpeedBonus -= 3;
     }
 }

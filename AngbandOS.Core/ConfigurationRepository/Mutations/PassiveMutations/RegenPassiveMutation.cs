@@ -16,13 +16,13 @@ internal class RegenPassiveMutation : Mutation
     public override string HaveMessage => "You are regenerating.";
     public override string LoseMessage => "You stop regenerating.";
 
-    public override void OnGain(Genome genome)
+    public override void OnGain()
     {
-        genome.Regen = true;
+        SaveGame.Regen = true;
     }
 
-    public override void OnLose(Genome genome)
+    public override void OnLose()
     {
-        genome.Regen = false;
+        SaveGame.Regen = false;
     }
 }

@@ -28,10 +28,10 @@ internal class NewLifePotionItemFactory : PotionItemFactory
     {
         // New life rerolls your health, cures all mutations, and restores you to your birth race
         SaveGame.RunScript(nameof(RerollHitPointsScript));
-        if (SaveGame.Dna.HasMutations)
+        if (SaveGame.HasMutations)
         {
             SaveGame.MsgPrint("You are cured of all mutations.");
-            SaveGame.Dna.LoseAllMutations();
+            SaveGame.LoseAllMutations();
             SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
             SaveGame.HandleStuff();
         }

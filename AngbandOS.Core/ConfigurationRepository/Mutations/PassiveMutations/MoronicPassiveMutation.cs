@@ -17,15 +17,15 @@ internal class MoronicPassiveMutation : Mutation
     public override string LoseMessage => "Your brain reverts to normal";
     public override MutationGroup Group => MutationGroup.Smarts;
 
-    public override void OnGain(Genome genome)
+    public override void OnGain()
     {
-        genome.IntelligenceBonus -= 4;
-        genome.WisdomBonus -= 4;
+        SaveGame.IntelligenceBonus -= 4;
+        SaveGame.WisdomBonus -= 4;
     }
 
-    public override void OnLose(Genome genome)
+    public override void OnLose()
     {
-        genome.IntelligenceBonus += 4;
-        genome.WisdomBonus += 4;
+        SaveGame.IntelligenceBonus += 4;
+        SaveGame.WisdomBonus += 4;
     }
 }

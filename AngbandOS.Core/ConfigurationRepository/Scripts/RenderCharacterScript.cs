@@ -299,12 +299,12 @@ internal class RenderCharacterScript : Script, IScript, IRepeatableScript
         }
 
         ItemCharacteristics playerCharacteristics = SaveGame.GetAbilitiesAsItemFlags();
-        DisplayPlayerStatWithModification(SaveGame.Dna.StrengthBonus, playerCharacteristics.Str, row + 0, col);
-        DisplayPlayerStatWithModification(SaveGame.Dna.IntelligenceBonus, playerCharacteristics.Int, row + 1, col);
-        DisplayPlayerStatWithModification(SaveGame.Dna.WisdomBonus, playerCharacteristics.Wis, row + 2, col);
-        DisplayPlayerStatWithModification(SaveGame.Dna.DexterityBonus, playerCharacteristics.Dex, row + 3, col);
-        DisplayPlayerStatWithModification(SaveGame.Dna.ConstitutionBonus, playerCharacteristics.Con, row + 4, col);
-        DisplayPlayerStatWithModification(SaveGame.Dna.CharismaBonus, playerCharacteristics.Cha, row + 5, col);
+        DisplayPlayerStatWithModification(SaveGame.StrengthBonus, playerCharacteristics.Str, row + 0, col);
+        DisplayPlayerStatWithModification(SaveGame.IntelligenceBonus, playerCharacteristics.Int, row + 1, col);
+        DisplayPlayerStatWithModification(SaveGame.WisdomBonus, playerCharacteristics.Wis, row + 2, col);
+        DisplayPlayerStatWithModification(SaveGame.DexterityBonus, playerCharacteristics.Dex, row + 3, col);
+        DisplayPlayerStatWithModification(SaveGame.ConstitutionBonus, playerCharacteristics.Con, row + 4, col);
+        DisplayPlayerStatWithModification(SaveGame.CharismaBonus, playerCharacteristics.Cha, row + 5, col);
     }
 
     private void DisplayPlayerStatWithModification(int extraModifier, bool isSet, int row, int col)

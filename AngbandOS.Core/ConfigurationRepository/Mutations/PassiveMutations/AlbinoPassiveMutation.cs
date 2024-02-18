@@ -16,13 +16,13 @@ internal class AlbinoPassiveMutation : Mutation
     public override string HaveMessage => "You are albino (-4 CON).";
     public override string LoseMessage => "You are no longer an albino!";
 
-    public override void OnGain(Genome genome)
+    public override void OnGain()
     {
-        genome.ConstitutionBonus -= 4;
+        SaveGame.ConstitutionBonus -= 4;
     }
 
-    public override void OnLose(Genome genome)
+    public override void OnLose()
     {
-        genome.ConstitutionBonus += 4;
+        SaveGame.ConstitutionBonus += 4;
     }
 }

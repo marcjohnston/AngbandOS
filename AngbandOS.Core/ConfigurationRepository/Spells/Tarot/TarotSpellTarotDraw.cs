@@ -153,10 +153,10 @@ internal class TarotSpellTarotDraw : Spell
         {
             SaveGame.MsgPrint("It's the Judgement.");
             SaveGame.RunScript(nameof(RerollHitPointsScript));
-            if (SaveGame.Dna.HasMutations)
+            if (SaveGame.HasMutations)
             {
                 SaveGame.MsgPrint("You are cured of all mutations.");
-                SaveGame.Dna.LoseAllMutations();
+                SaveGame.LoseAllMutations();
                 SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
                 SaveGame.HandleStuff();
             }
@@ -258,7 +258,7 @@ internal class TarotSpellTarotDraw : Spell
 
             case 27:
             case 28:
-                SaveGame.Dna.GainMutation();
+                SaveGame.GainMutation();
                 break;
 
             case 29:

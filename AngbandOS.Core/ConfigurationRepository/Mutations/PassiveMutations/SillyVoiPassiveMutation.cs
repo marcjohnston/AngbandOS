@@ -16,13 +16,13 @@ internal class SillyVoiPassiveMutation : Mutation
     public override string HaveMessage => "Your voice is a silly squeak (-4 CHR).";
     public override string LoseMessage => "Your voice returns to normal.";
 
-    public override void OnGain(Genome genome)
+    public override void OnGain()
     {
-        genome.CharismaBonus -= 4;
+        SaveGame.CharismaBonus -= 4;
     }
 
-    public override void OnLose(Genome genome)
+    public override void OnLose()
     {
-        genome.CharismaBonus += 4;
+        SaveGame.CharismaBonus += 4;
     }
 }

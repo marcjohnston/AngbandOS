@@ -45,7 +45,7 @@ internal class PolymorphSelfScript : Script, IScript, IRepeatableScript
                 case 4:
                 case 5:
                 case 6:
-                    SaveGame.Dna.GainMutation();
+                    SaveGame.GainMutation();
                     break;
 
                 case 7:

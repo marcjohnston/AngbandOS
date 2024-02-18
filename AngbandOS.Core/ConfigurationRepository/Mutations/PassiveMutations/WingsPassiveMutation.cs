@@ -16,13 +16,13 @@ internal class WingsPassiveMutation : Mutation
     public override string HaveMessage => "You have wings.";
     public override string LoseMessage => "Your wings fall off.";
 
-    public override void OnGain(Genome genome)
+    public override void OnGain()
     {
-        genome.FeatherFall = true;
+        SaveGame.FeatherFall = true;
     }
 
-    public override void OnLose(Genome genome)
+    public override void OnLose()
     {
-        genome.FeatherFall = false;
+        SaveGame.FeatherFall = false;
     }
 }

@@ -21,13 +21,13 @@ internal class ScorTailRandomMutation : Mutation
     public override string AttackDescription => "tail";
     public override MutationAttackType MutationAttackType => MutationAttackType.Poison;
 
-    public override void OnGain(Genome genome)
+    public override void OnGain()
     {
-        genome.NaturalAttacks.Add(this);
+        SaveGame.NaturalAttacks.Add(this);
     }
 
-    public override void OnLose(Genome genome)
+    public override void OnLose()
     {
-        genome.NaturalAttacks.Remove(this);
+        SaveGame.NaturalAttacks.Remove(this);
     }
 }

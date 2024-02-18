@@ -16,13 +16,13 @@ internal class InfravisPassiveMutation : Mutation
     public override string HaveMessage => "You have remarkable infravision (+3).";
     public override string LoseMessage => "Your infravision is degraded.";
 
-    public override void OnGain(Genome genome)
+    public override void OnGain()
     {
-        genome.InfravisionBonus += 3;
+        SaveGame.InfravisionBonus += 3;
     }
 
-    public override void OnLose(Genome genome)
+    public override void OnLose()
     {
-        genome.InfravisionBonus -= 3;
+        SaveGame.InfravisionBonus -= 3;
     }
 }

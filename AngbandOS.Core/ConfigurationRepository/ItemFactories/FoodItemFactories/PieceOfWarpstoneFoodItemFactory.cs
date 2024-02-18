@@ -28,14 +28,14 @@ internal class PieceOfWarpstoneFoodItemFactory : FoodItemFactory
     {
         SaveGame.PlaySound(SoundEffectEnum.Eat);
         SaveGame.MsgPrint("That tastes... funky.");
-        SaveGame.Dna.GainMutation();
+        SaveGame.GainMutation();
         if (SaveGame.DieRoll(3) == 1)
         {
-            SaveGame.Dna.GainMutation();
+            SaveGame.GainMutation();
         }
         if (SaveGame.DieRoll(3) == 1)
         {
-            SaveGame.Dna.GainMutation();
+            SaveGame.GainMutation();
         }
         return true;
     }

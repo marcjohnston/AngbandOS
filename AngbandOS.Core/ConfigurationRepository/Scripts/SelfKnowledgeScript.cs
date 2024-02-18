@@ -38,7 +38,7 @@ internal class SelfKnowledgeScript : Script, IScript
                 info[infoCount++] = infoLine;
             }
         }
-        string[] mutations = SaveGame.Dna.GetMutationList();
+        string[] mutations = SaveGame.GetMutationList();
         if (mutations.Length > 0)
         {
             foreach (string m in mutations)

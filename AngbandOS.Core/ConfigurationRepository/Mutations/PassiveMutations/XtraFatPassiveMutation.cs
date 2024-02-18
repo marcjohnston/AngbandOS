@@ -16,15 +16,15 @@ internal class XtraFatPassiveMutation : Mutation
     public override string HaveMessage => "You are extremely fat (+2 CON, -2 speed).";
     public override string LoseMessage => "You benefit from a miracle diet!";
 
-    public override void OnGain(Genome genome)
+    public override void OnGain()
     {
-        genome.ConstitutionBonus += 2;
-        genome.SpeedBonus -= 2;
+        SaveGame.ConstitutionBonus += 2;
+        SaveGame.SpeedBonus -= 2;
     }
 
-    public override void OnLose(Genome genome)
+    public override void OnLose()
     {
-        genome.ConstitutionBonus -= 2;
-        genome.SpeedBonus += 2;
+        SaveGame.ConstitutionBonus -= 2;
+        SaveGame.SpeedBonus += 2;
     }
 }

@@ -16,13 +16,13 @@ internal class ResTimePassiveMutation : Mutation
     public override string HaveMessage => "You are protected from the ravages of time.";
     public override string LoseMessage => "You feel all too mortal.";
 
-    public override void OnGain(Genome genome)
+    public override void OnGain()
     {
-        genome.ResTime = true;
+        SaveGame.ResTime = true;
     }
 
-    public override void OnLose(Genome genome)
+    public override void OnLose()
     {
-        genome.ResTime = false;
+        SaveGame.ResTime = false;
     }
 }

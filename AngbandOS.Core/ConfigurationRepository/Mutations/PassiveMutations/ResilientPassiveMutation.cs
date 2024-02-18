@@ -16,13 +16,13 @@ internal class ResilientPassiveMutation : Mutation
     public override string HaveMessage => "You are very resilient (+4 CON).";
     public override string LoseMessage => "You become ordinarily resilient again.";
 
-    public override void OnGain(Genome genome)
+    public override void OnGain()
     {
-        genome.ConstitutionBonus += 4;
+        SaveGame.ConstitutionBonus += 4;
     }
 
-    public override void OnLose(Genome genome)
+    public override void OnLose()
     {
-        genome.ConstitutionBonus -= 4;
+        SaveGame.ConstitutionBonus -= 4;
     }
 }

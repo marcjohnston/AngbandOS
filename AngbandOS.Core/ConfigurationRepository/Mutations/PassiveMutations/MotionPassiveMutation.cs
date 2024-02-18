@@ -16,15 +16,15 @@ internal class MotionPassiveMutation : Mutation
     public override string HaveMessage => "Your movements are precise and forceful (+1 STL).";
     public override string LoseMessage => "You move with less assurance.";
 
-    public override void OnGain(Genome genome)
+    public override void OnGain()
     {
-        genome.StealthBonus += 1;
-        genome.FreeAction = true;
+        SaveGame.StealthBonus += 1;
+        SaveGame.FreeAction = true;
     }
 
-    public override void OnLose(Genome genome)
+    public override void OnLose()
     {
-        genome.StealthBonus -= 1;
-        genome.FreeAction = false;
+        SaveGame.StealthBonus -= 1;
+        SaveGame.FreeAction = false;
     }
 }

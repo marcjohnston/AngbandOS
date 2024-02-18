@@ -17,13 +17,13 @@ internal class LimberPassiveMutation : Mutation
     public override string LoseMessage => "Your muscles stiffen.";
     public override MutationGroup Group => MutationGroup.Joints;
 
-    public override void OnGain(Genome genome)
+    public override void OnGain()
     {
-        genome.DexterityBonus += 3;
+        SaveGame.DexterityBonus += 3;
     }
 
-    public override void OnLose(Genome genome)
+    public override void OnLose()
     {
-        genome.DexterityBonus -= 3;
+        SaveGame.DexterityBonus -= 3;
     }
 }

@@ -16,13 +16,13 @@ internal class XtraEyesPassiveMutation : Mutation
     public override string HaveMessage => "You have an extra pair of eyes (+15 search).";
     public override string LoseMessage => "Your extra eyes vanish!";
 
-    public override void OnGain(Genome genome)
+    public override void OnGain()
     {
-        genome.SearchBonus += 15;
+        SaveGame.SearchBonus += 15;
     }
 
-    public override void OnLose(Genome genome)
+    public override void OnLose()
     {
-        genome.SearchBonus -= 15;
+        SaveGame.SearchBonus -= 15;
     }
 }

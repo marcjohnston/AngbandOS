@@ -16,13 +16,13 @@ internal class FireBodyPassiveMutation : Mutation
     public override string HaveMessage => "Your body is enveloped in flames.";
     public override string LoseMessage => "Your body is no longer enveloped in flames.";
 
-    public override void OnGain(Genome genome)
+    public override void OnGain()
     {
-        genome.FireHit = true;
+        SaveGame.FireHit = true;
     }
 
-    public override void OnLose(Genome genome)
+    public override void OnLose()
     {
-        genome.FireHit = false;
+        SaveGame.FireHit = false;
     }
 }

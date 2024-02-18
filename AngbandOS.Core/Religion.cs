@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Pantheon;
 
 [Serializable]
-internal class Religion
+internal class Religion // TODO: This is a container
 {
     private const int DecayRate = 10;
     private const int PatronRestingFavour = 30;

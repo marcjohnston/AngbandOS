@@ -17,15 +17,15 @@ internal class WartSkinPassiveMutation : Mutation
     public override string LoseMessage => "Your warts disappear!";
     public override MutationGroup Group => MutationGroup.Skin;
 
-    public override void OnGain(Genome genome)
+    public override void OnGain()
     {
-        genome.CharismaBonus -= 2;
-        genome.ArmorClassBonus += 5;
+        SaveGame.CharismaBonus -= 2;
+        SaveGame.GenomeArmorClassBonus += 5;
     }
 
-    public override void OnLose(Genome genome)
+    public override void OnLose()
     {
-        genome.CharismaBonus += 2;
-        genome.ArmorClassBonus -= 5;
+        SaveGame.CharismaBonus += 2;
+        SaveGame.GenomeArmorClassBonus -= 5;
     }
 }

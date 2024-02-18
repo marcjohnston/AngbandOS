@@ -16,13 +16,13 @@ internal class SusStatsPassiveMutation : Mutation
     public override string HaveMessage => "Your body resists serious damage.";
     public override string LoseMessage => "You no longer feel like you can recover from anything.";
 
-    public override void OnGain(Genome genome)
+    public override void OnGain()
     {
-        genome.SustainAll = true;
+        SaveGame.SustainAll = true;
     }
 
-    public override void OnLose(Genome genome)
+    public override void OnLose()
     {
-        genome.SustainAll = false;
+        SaveGame.SustainAll = false;
     }
 }
