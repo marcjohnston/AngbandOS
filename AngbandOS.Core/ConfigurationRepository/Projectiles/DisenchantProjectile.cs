@@ -61,7 +61,7 @@ internal class DisenchantProjectile : Projectile
         }
         else
         {
-            SaveGame.ApplyDisenchant();
+            SaveGame.RunScript(nameof(ApplyDisenchantScript));
         }
         SaveGame.TakeHit(dam, killer);
         return true;

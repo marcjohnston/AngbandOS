@@ -4293,67 +4293,6 @@ internal class SaveGame
         CameFrom = LevelStart.StartRandom;
     }
 
-    public bool ApplyDisenchant()
-    {
-        // Select an inventory slot where items can be disenchanted.
-        BaseInventorySlot? inventorySlot = SingletonRepository.InventorySlots.ToWeightedRandom(_inventorySlot => _inventorySlot.CanBeDisenchanted).ChooseOrDefault();
-        if (inventorySlot == null)
-        {
-            // There are no inventory slots capable of being disenchanted.
-            return false;
-        }
-
-        // Select an item in the inventory slot to be disenchanted.
-        int i = inventorySlot.WeightedRandom.ChooseOrDefault();
-        Item? oPtr = GetInventoryItem(i);
-
-        // The chosen slot does not have an item to disenchant.
-        if (oPtr == null)
-        {
-            return false;
-        }
-        if (oPtr.BonusToHit <= 0 && oPtr.BonusDamage <= 0 && oPtr.BonusArmorClass <= 0)
-        {
-            return false;
-        }
-        string oName = oPtr.Description(false, 0);
-        string s;
-        if ((oPtr.FixedArtifact != null || string.IsNullOrEmpty(oPtr.RandartName) == false) && RandomLessThan(100) < 71)
-        {
-            s = oPtr.Count != 1 ? "" : "s";
-            MsgPrint($"Your {oName} ({i.IndexToLabel()}) resist{s} disenchantment!");
-            return true;
-        }
-        if (oPtr.BonusToHit > 0)
-        {
-            oPtr.BonusToHit--;
-        }
-        if (oPtr.BonusToHit > 5 && RandomLessThan(100) < 20)
-        {
-            oPtr.BonusToHit--;
-        }
-        if (oPtr.BonusDamage > 0)
-        {
-            oPtr.BonusDamage--;
-        }
-        if (oPtr.BonusDamage > 5 && RandomLessThan(100) < 20)
-        {
-            oPtr.BonusDamage--;
-        }
-        if (oPtr.BonusArmorClass > 0)
-        {
-            oPtr.BonusArmorClass--;
-        }
-        if (oPtr.BonusArmorClass > 5 && RandomLessThan(100) < 20)
-        {
-            oPtr.BonusArmorClass--;
-        }
-        s = oPtr.Count != 1 ? "were" : "was";
-        MsgPrint($"Your {oName} ({i.IndexToLabel()}) {s} disenchanted!");
-        SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
-        return true;
-    }
-
     public void ApplyNexus(Monster mPtr)
     {
         switch (DieRoll(7))

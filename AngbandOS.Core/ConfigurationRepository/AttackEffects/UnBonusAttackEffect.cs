@@ -19,7 +19,7 @@ internal class UnBonusAttackEffect : AttackEffect
         SaveGame.TakeHit(damage, monsterDescription);
         if (!SaveGame.HasDisenchantResistance)
         {
-            if (SaveGame.ApplyDisenchant())
+            if (SaveGame.RunSuccessfulScript(nameof(ApplyDisenchantScript)))
             {
                 obvious = true;
             }

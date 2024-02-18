@@ -20,6 +20,6 @@ internal class ApplyDisenchantWizardCommand : WizardCommand
 
     public override void Execute()
     {
-        SaveGame.ApplyDisenchant();
+        SaveGame.RunScript(nameof(ApplyDisenchantScript));
     }
 }

@@ -263,7 +263,7 @@ internal class TarotSpellTarotDraw : Spell
 
             case 29:
             case 30:
-                SaveGame.ApplyDisenchant();
+                SaveGame.RunScript(nameof(ApplyDisenchantScript));
                 break;
 
             case 31:
