@@ -13,27 +13,7 @@ internal class NatureSpellFrostBolt : Spell
     private NatureSpellFrostBolt(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        int beam;
-        switch (SaveGame.BaseCharacterClass.ID)
-        {
-            case CharacterClass.Mage:
-                beam = SaveGame.ExperienceLevel;
-                break;
-
-            case CharacterClass.HighMage:
-                beam = SaveGame.ExperienceLevel + 10;
-                break;
-
-            default:
-                beam = SaveGame.ExperienceLevel / 2;
-                break;
-        }
-        if (!SaveGame.GetDirectionWithAim(out int dir))
-        {
-            return;
-        }
-        SaveGame.FireBoltOrBeam(beam - 10, SaveGame.SingletonRepository.Projectiles.Get(nameof(ColdProjectile)), dir,
-            SaveGame.DiceRoll(5 + ((SaveGame.ExperienceLevel - 5) / 4), 8));
+        SaveGame.RunScript(nameof(FrostBoltScript));
     }
 
     public override string Name => "Frost Bolt";
