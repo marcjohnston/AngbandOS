@@ -5,18 +5,19 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Spells.Life;
+namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class LifeSpellProtectionFromEvil : Spell
+internal class ProtectionFromEvilScript : Script, IScript
 {
-    private LifeSpellProtectionFromEvil(SaveGame saveGame) : base(saveGame) { }
-    public override void Cast()
+    private ProtectionFromEvilScript(SaveGame saveGame) : base(saveGame) { }
+
+    /// <summary>
+    /// Executes the script.
+    /// </summary>
+    /// <returns></returns>
+    public void ExecuteScript()
     {
-        SaveGame.RunScript(nameof(ProtectionFromEvilScript));
+        SaveGame.TimedProtectionFromEvil.AddTimer(SaveGame.DieRoll(25) + (3 * SaveGame.ExperienceLevel));
     }
-
-    public override string Name => "Protection from Evil";
-
-    protected override string LearnedDetails => $"dur d25+{3 * SaveGame.ExperienceLevel}";
 }
