@@ -7,6 +7,7 @@
 
 namespace AngbandOS.Core.Flavors;
 
+[Serializable]
 internal class GenericWandReadableFlavor : WandReadableFlavor
 {
     public GenericWandReadableFlavor(SaveGame saveGame, ReadableFlavorDefinition readableFlavorDefninition) : base(saveGame)

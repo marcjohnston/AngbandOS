@@ -7,6 +7,7 @@
 
 namespace AngbandOS.Core.Flavors;
 
+[Serializable]
 internal class GenericRodReadableFlavor : RodReadableFlavor
 {
     public GenericRodReadableFlavor(SaveGame saveGame, ReadableFlavorDefinition readableFlavorDefninition) : base(saveGame)

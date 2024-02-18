@@ -7,6 +7,7 @@
 
 namespace AngbandOS.Core.Flavors;
 
+[Serializable]
 internal class GenericAmuletReadableFlavor : AmuletReadableFlavor
 {
     public GenericAmuletReadableFlavor(SaveGame saveGame, ReadableFlavorDefinition readableFlavorDefninition) : base(saveGame)
