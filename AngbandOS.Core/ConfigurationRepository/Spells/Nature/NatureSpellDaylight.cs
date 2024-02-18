@@ -13,13 +13,7 @@ internal class NatureSpellDaylight : Spell
     private NatureSpellDaylight(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.RunScript(nameof(LightAreaScript));
-        if (!SaveGame.Race.IsBurnedBySunlight || SaveGame.HasLightResistance)
-        {
-            return;
-        }
-        SaveGame.MsgPrint("The daylight scorches your flesh!");
-        SaveGame.TakeHit(SaveGame.DiceRoll(2, 2), "daylight");
+        SaveGame.RunScript(nameof(CallDaylightScript));
     }
 
     public override string Name => "Daylight";
