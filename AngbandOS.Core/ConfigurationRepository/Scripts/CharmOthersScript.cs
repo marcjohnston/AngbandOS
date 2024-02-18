@@ -8,16 +8,21 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class CharmOthersScript : Script, IScript
+internal class CharmOthersScript : Script, IScript, IScriptInt
 {
     private CharmOthersScript(SaveGame saveGame) : base(saveGame) { }
 
+    public void ExecuteScriptInt(int damage)
+    {
+        SaveGame.ProjectAtAllInLos(SaveGame.SingletonRepository.Projectiles.Get(nameof(ControlAnimalProjectile)), damage);
+    }
+
     /// <summary>
-    /// Executes the script.
+    /// Executes the Int script with a damage rating of the player experience level * 2.
     /// </summary>
     /// <returns></returns>
     public void ExecuteScript()
     {
-        SaveGame.ProjectAtAllInLos(SaveGame.SingletonRepository.Projectiles.Get(nameof(CharmProjectile)), SaveGame.ExperienceLevel * 2);
+        ExecuteScriptInt(SaveGame.ExperienceLevel * 2);
     }
 }

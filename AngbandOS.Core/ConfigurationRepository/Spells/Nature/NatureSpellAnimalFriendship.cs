@@ -13,7 +13,7 @@ internal class NatureSpellAnimalFriendship : Spell
     private NatureSpellAnimalFriendship(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.CharmAnimals(SaveGame.ExperienceLevel * 2);
+        SaveGame.RunScript(nameof(CharmOthersScript));
     }
 
     public override string Name => "Animal Friendship";
