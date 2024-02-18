@@ -13,7 +13,7 @@ internal class LifeSpellRemoveFear : Spell
     private LifeSpellRemoveFear(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.TimedFear.ResetTimer();
+        SaveGame.RunScript(nameof(ResetFearTimerScript));
     }
 
     public override string Name => "Remove Fear";

@@ -8,9 +8,9 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class BraveryScript : Script, IScript
+internal class ResetFearTimerScript : Script, IScript
 {
-    private BraveryScript(SaveGame saveGame) : base(saveGame) { }
+    private ResetFearTimerScript(SaveGame saveGame) : base(saveGame) { }
 
     /// <summary>
     /// Resets the timed fear.

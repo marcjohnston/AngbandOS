@@ -13,19 +13,10 @@ internal class RestorationScript : Script, IScript, IStoreScript
     private RestorationScript(SaveGame saveGame) : base(saveGame) { }
 
     /// <summary>
-    /// Executes the restoration script.  Does not modify any of the store flags.
+    /// Allows the player to purchase the restoration for 750 gold.  Does not modify any of the store flags.
     /// </summary>
     /// <returns></returns>
     public void ExecuteStoreScript(StoreCommandEvent storeCommandEvent)
-    {
-        ExecuteScript();
-    }
-
-    /// <summary>
-    /// Executes the restoration script.
-    /// </summary>
-    /// <returns></returns>
-    public void ExecuteScript()
     {
         if (!SaveGame.ServiceHaggle(750, out int price))
         {
@@ -39,15 +30,19 @@ internal class RestorationScript : Script, IScript, IStoreScript
                 SaveGame.SayComment_1();
                 SaveGame.PlaySound(SoundEffectEnum.StoreTransaction);
                 SaveGame.StorePrtGold();
-                SaveGame.TryRestoringAbilityScore(Ability.Strength);
-                SaveGame.TryRestoringAbilityScore(Ability.Intelligence);
-                SaveGame.TryRestoringAbilityScore(Ability.Wisdom);
-                SaveGame.TryRestoringAbilityScore(Ability.Dexterity);
-                SaveGame.TryRestoringAbilityScore(Ability.Constitution);
-                SaveGame.TryRestoringAbilityScore(Ability.Charisma);
-                SaveGame.RunScript(nameof(RestoreLevelScript));
+                ExecuteScript();
             }
             SaveGame.HandleStuff();
         }
+    }
+
+    /// <summary>
+    /// Restores all statistics and experience.
+    /// </summary>
+    /// <returns></returns>
+    public void ExecuteScript()
+    {
+        SaveGame.RunScript(nameof(RestoreBodyScript));
+        SaveGame.RunScript(nameof(RestoreLevelScript));
     }
 }
