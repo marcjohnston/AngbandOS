@@ -12780,8 +12780,9 @@ internal class SaveGame
         AllocHorde(wy, wx);
     }
 
-    public void DoCmdWizNamed(int rIdx, bool slp)
+    public void DoCmdWizNamed(bool slp)
     {
+        int rIdx = SaveGame.CommandArgument;
         if (rIdx >= SingletonRepository.MonsterRaces.Count - 1)
         {
             return;
@@ -12823,8 +12824,14 @@ internal class SaveGame
         }
     }
 
-    public void DoCmdWizSummon(int num)
+    public void DoCmdWizSummon()
     {
+        int num = CommandArgument;
+        if (num <= 0)
+        {
+            num = 1;
+        }
+
         for (int i = 0; i < num; i++)
         {
             SummonSpecific(MapY, MapX, Difficulty, null);

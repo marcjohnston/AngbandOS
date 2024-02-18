@@ -20,10 +20,6 @@ internal class SummonMonsterWizardCommand : WizardCommand
 
     public override void Execute()
     {
-        if (SaveGame.CommandArgument <= 0)
-        {
-            SaveGame.CommandArgument = 1;
-        }
-        SaveGame.DoCmdWizSummon(SaveGame.CommandArgument);
+        SaveGame.DoCmdWizSummon();
     }
 }

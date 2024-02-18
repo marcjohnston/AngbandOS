@@ -20,6 +20,6 @@ internal class SummonNamedMonsterWizardCommand : WizardCommand
 
     public override void Execute()
     {
-        SaveGame.DoCmdWizNamed(SaveGame.CommandArgument, true);
+        SaveGame.DoCmdWizNamed(true);
     }
 }
