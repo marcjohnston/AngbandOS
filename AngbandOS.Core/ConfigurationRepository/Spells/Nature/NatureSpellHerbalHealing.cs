@@ -13,10 +13,7 @@ internal class NatureSpellHerbalHealing : Spell
     private NatureSpellHerbalHealing(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.RestoreHealth(1000);
-        SaveGame.TimedStun.ResetTimer();
-        SaveGame.TimedBleeding.ResetTimer();
-        SaveGame.TimedPoison.ResetTimer();
+        SaveGame.RunScript(nameof(HerbalHealingScript));
     }
 
     public override string Name => "Herbal Healing";
