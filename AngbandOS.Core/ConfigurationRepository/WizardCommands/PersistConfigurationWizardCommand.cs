@@ -16,7 +16,7 @@ internal class PersistConfigurationWizardCommand : WizardCommand
 
     public override string HelpDescription => "Persist Configuration";
 
-    public override HelpGroup? HelpGroup => SaveGame.SingletonRepository.HelpGroups.Get(nameof(WizardGeneralCommandsHelpGroup));
+    protected override string? HelpGroupName => nameof(WizardGeneralCommandsHelpGroup);
 
     protected override string? ExecuteScriptName => nameof(PersistConfigurationScript);
 }

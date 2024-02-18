@@ -16,7 +16,7 @@ internal class SelfKnowledgeWizardCommand : WizardCommand
 
     public override string HelpDescription => "Self Knowledge";
 
-    public override HelpGroup? HelpGroup => SaveGame.SingletonRepository.HelpGroups.Get(nameof(WizardCharacterEditingHelpGroup));
+    protected override string? HelpGroupName => nameof(WizardCharacterEditingHelpGroup);
 
     protected override string? ExecuteScriptName => nameof(SelfKnowledgeScript);
 }

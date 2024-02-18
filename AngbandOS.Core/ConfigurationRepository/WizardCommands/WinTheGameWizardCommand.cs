@@ -16,7 +16,7 @@ internal class WinTheGameWizardCommand : WizardCommand
 
     public override string HelpDescription => "Win the Game";
 
-    public override HelpGroup? HelpGroup => SaveGame.SingletonRepository.HelpGroups.Get(nameof(WizardGeneralCommandsHelpGroup));
+    protected override string? HelpGroupName => nameof(WizardGeneralCommandsHelpGroup);
 
     protected override string? ExecuteScriptName => nameof(WinnerScript);
 }

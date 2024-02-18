@@ -13,6 +13,4 @@ internal class CarriageReturnGameCommand : GameCommand
     private CarriageReturnGameCommand(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
     public override char KeyChar => '\r';
-
-    protected override string ExecuteScriptName => nameof(NoopScript);
 }

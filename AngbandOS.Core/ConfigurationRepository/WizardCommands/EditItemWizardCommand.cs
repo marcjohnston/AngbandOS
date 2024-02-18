@@ -16,7 +16,7 @@ internal class EditItemWizardCommand : WizardCommand
 
     public override string HelpDescription => "Edit Item";
 
-    public override HelpGroup? HelpGroup => SaveGame.SingletonRepository.HelpGroups.Get(nameof(WizardObjectCommandsHelpGroup));
+    protected override string? HelpGroupName => nameof(WizardObjectCommandsHelpGroup);
 
     protected override string? ExecuteScriptName => nameof(EditItemScript);
 }

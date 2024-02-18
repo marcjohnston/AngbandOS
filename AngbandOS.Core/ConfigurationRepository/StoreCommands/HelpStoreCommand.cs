@@ -17,6 +17,4 @@ internal class HelpStoreCommand : StoreCommand
     public override char KeyChar => 'h';
 
     public override string Description => "Get help for this store.";
-
-    protected override string ExecuteScriptName => nameof(NoopScript);
 }

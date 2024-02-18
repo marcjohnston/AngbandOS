@@ -5,6 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using AngbandOS.Core.WizardCommands;
 using System.Runtime.Serialization.Formatters.Binary;
 
 namespace AngbandOS.Core;
@@ -6194,7 +6195,11 @@ internal class SaveGame
             // attached for improved performance.
             if (command.IsEnabled && command.KeyChar == c)
             {
-                bool more = command.Execute();
+                bool more = false;
+                if (command.ExecuteScript != null)
+                {
+                    more = command.ExecuteScript.ExecuteRepeatableScript();
+                }
 
                 if (!more)
                 {

@@ -35,7 +35,10 @@ internal class EnterWizardModeScript : Script, IScript, IRepeatableScript
             {
                 if (wizardCommand.IsEnabled && wizardCommand.KeyChar == cmd)
                 {
-                    wizardCommand.Execute();
+                    if (wizardCommand.ExecuteScript != null)
+                    {
+                        wizardCommand.ExecuteScript.ExecuteScript();
+                    }
                     return;
                 }
             }

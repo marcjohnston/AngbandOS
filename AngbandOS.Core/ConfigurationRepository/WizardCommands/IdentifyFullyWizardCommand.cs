@@ -16,7 +16,7 @@ internal class IdentifyFullyWizardCommand : WizardCommand
 
     public override string HelpDescription => "Identify Fully";
 
-    public override HelpGroup? HelpGroup => SaveGame.SingletonRepository.HelpGroups.Get(nameof(WizardObjectCommandsHelpGroup));
+    protected override string? HelpGroupName => nameof(WizardObjectCommandsHelpGroup);
 
     protected override string? ExecuteScriptName => nameof(IdentifyItemFullyScript);
 }

@@ -16,7 +16,7 @@ internal class DetectAllWizardCommand : WizardCommand
 
     public override string HelpDescription => "Detect All";
 
-    public override HelpGroup? HelpGroup => SaveGame.SingletonRepository.HelpGroups.Get(nameof(WizardGeneralCommandsHelpGroup));
+    protected override string? HelpGroupName => nameof(WizardGeneralCommandsHelpGroup);
 
     protected override string? ExecuteScriptName => nameof(DetectionScript);
 }

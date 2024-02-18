@@ -342,10 +342,10 @@ internal class Store
                 matchingCommandFound = true;
 
                 // Ensure this command works in this store.
-                if (command.IsEnabled(StoreFactory))
+                if (command.IsEnabled(StoreFactory) && command.ExecuteScript != null)
                 {
                     StoreCommandEvent storeCommandEvent = new(this);
-                    command.Execute(storeCommandEvent);
+                    command.ExecuteScript.ExecuteStoreScript(storeCommandEvent);
 
                     if (storeCommandEvent.RequiresRerendering)
                     {

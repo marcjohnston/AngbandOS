@@ -16,7 +16,7 @@ internal class SpawnMonsterWizardCommand : WizardCommand
 
     public override string HelpDescription => "Spawn Monster";
 
-    public override HelpGroup? HelpGroup => SaveGame.SingletonRepository.HelpGroups.Get(nameof(WizardMonstersHelpGroup));
+    protected override string? HelpGroupName => nameof(WizardMonstersHelpGroup);
 
     protected override string? ExecuteScriptName => nameof(SpawnMonsterScript);
 }

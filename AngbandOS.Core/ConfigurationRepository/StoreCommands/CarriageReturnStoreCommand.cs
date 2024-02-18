@@ -14,6 +14,4 @@ internal class CarriageReturnStoreCommand : StoreCommand
     public override char KeyChar => '\r';
 
     public override string Description => "";
-
-    protected override string ExecuteScriptName => nameof(NoopScript);
 }

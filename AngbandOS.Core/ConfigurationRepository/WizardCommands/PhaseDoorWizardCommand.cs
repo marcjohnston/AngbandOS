@@ -16,7 +16,7 @@ internal class PhaseDoorWizardCommand : WizardCommand
 
     public override string HelpDescription => "Phase Door";
 
-    public override HelpGroup? HelpGroup => SaveGame.SingletonRepository.HelpGroups.Get(nameof(WizardMovementHelpGroup));
+    protected override string? HelpGroupName => nameof(WizardMovementHelpGroup);
 
     protected override string? ExecuteScriptName => nameof(PhaseDoorScript);
 }

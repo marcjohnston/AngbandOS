@@ -13,6 +13,4 @@ internal class SpaceGameCommand : GameCommand
     private SpaceGameCommand(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
     public override char KeyChar => ' ';
-
-    protected override string ExecuteScriptName => nameof(NoopScript);
 }

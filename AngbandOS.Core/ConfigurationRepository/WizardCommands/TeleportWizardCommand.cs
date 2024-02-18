@@ -16,7 +16,7 @@ internal class TeleportWizardCommand : WizardCommand
 
     public override string HelpDescription => "Teleport";
 
-    public override HelpGroup? HelpGroup => SaveGame.SingletonRepository.HelpGroups.Get(nameof(WizardMovementHelpGroup));
+    protected override string? HelpGroupName => nameof(WizardMovementHelpGroup);
 
     protected override string? ExecuteScriptName => nameof(TeleportSelfScript);
 }

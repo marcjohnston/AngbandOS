@@ -18,6 +18,4 @@ internal class ViewRacialHeroesStoreCommand : StoreCommand
     protected override string[]? ValidStoreFactoryNames => new string[] {
         nameof(HallStoreFactory),
     };
-
-    protected override string ExecuteScriptName => nameof(NoopScript);
 }

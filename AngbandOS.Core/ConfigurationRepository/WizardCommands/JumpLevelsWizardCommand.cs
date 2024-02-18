@@ -16,7 +16,7 @@ internal class JumpLevelsWizardCommand : WizardCommand
 
     public override string HelpDescription => "Teleport to Target";
 
-    public override HelpGroup? HelpGroup => SaveGame.SingletonRepository.HelpGroups.Get(nameof(WizardMovementHelpGroup));
+    protected override string? HelpGroupName => nameof(WizardMovementHelpGroup);
 
     protected override string? ExecuteScriptName => nameof(JumpToLevelScript);
 }

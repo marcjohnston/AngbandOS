@@ -16,7 +16,7 @@ internal class RedrawWizardCommand : WizardCommand
 
     public override string HelpDescription => "Force Redraw";
 
-    public override HelpGroup? HelpGroup => SaveGame.SingletonRepository.HelpGroups.Get(nameof(WizardGeneralCommandsHelpGroup));
+    protected override string? HelpGroupName => nameof(WizardGeneralCommandsHelpGroup);
 
     protected override string? ExecuteScriptName => nameof(RedrawScript);
 }

@@ -5,7 +5,6 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-using AngbandOS.Core.Interface.Definitions;
 using System.Text.Json;
 
 namespace AngbandOS.Core.Commands;
@@ -24,18 +23,7 @@ internal abstract class GameCommand : IGetKey<string>
     public string GetKey => Key;
     public void Bind()
     {
-        // Get the script from the singleton repository.
-        Script? script = SaveGame.SingletonRepository.Scripts.Get(ExecuteScriptName);
-
-        if (script == null)
-        {
-            throw new Exception($"The {ExecuteScriptName} script specified by the {GetType().Name} script does not exist.");
-        }
-        if (!typeof(IRepeatableScript).IsInstanceOfType(script))
-        {
-            throw new Exception($"The {ExecuteScriptName} script specified by the {GetType().Name} script does not implement the {nameof(IRepeatableScript)} interface.");
-        }
-        ExecuteScript = (IRepeatableScript)script;
+        ExecuteScript = ExecuteScriptName == null ? null : (IRepeatableScript)SaveGame.SingletonRepository.Scripts.Get(ExecuteScriptName);
     }
 
     public abstract char KeyChar { get; }
@@ -50,17 +38,7 @@ internal abstract class GameCommand : IGetKey<string>
     public virtual bool IsEnabled => true;
     protected virtual string ExecuteScriptName { get; }
 
-    private IRepeatableScript ExecuteScript;
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="saveGame"></param>
-    /// <returns>Returns true, if the command can/should be repeated; false, if the command succeeded or is futile.</returns>
-    public bool Execute()
-    {
-        return ExecuteScript.ExecuteRepeatableScript();
-    }
+    public IRepeatableScript? ExecuteScript { get; private set; }
 
     public string ToJson()
     {

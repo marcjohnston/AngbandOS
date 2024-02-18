@@ -16,7 +16,7 @@ internal class SummonNamedPetWizardCommand : WizardCommand
 
     public override string HelpDescription => "Summon Named Pet";
 
-    public override HelpGroup? HelpGroup => SaveGame.SingletonRepository.HelpGroups.Get(nameof(WizardMonstersHelpGroup));
+    protected override string? HelpGroupName => nameof(WizardMonstersHelpGroup);
 
     protected override string? ExecuteScriptName => nameof(SummonNamedPetScript);
 }

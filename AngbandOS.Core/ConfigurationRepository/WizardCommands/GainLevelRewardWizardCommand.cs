@@ -16,7 +16,7 @@ internal class GainLevelRewardWizardCommand : WizardCommand
 
     public override string HelpDescription => "Gain Level Reward";
 
-    public override HelpGroup? HelpGroup => SaveGame.SingletonRepository.HelpGroups.Get(nameof(WizardCharacterEditingHelpGroup));
+    protected override string? HelpGroupName => nameof(WizardCharacterEditingHelpGroup);
 
     protected override string? ExecuteScriptName => nameof(GainLevelRewardScript);
 }

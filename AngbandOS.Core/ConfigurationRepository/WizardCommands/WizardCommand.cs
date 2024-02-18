@@ -5,6 +5,8 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using System.Text.Json;
+
 namespace AngbandOS.Core.WizardCommands;
 
 [Serializable]
@@ -22,7 +24,16 @@ internal abstract class WizardCommand : IHelpCommand, IGetKey<string>
     /// <returns></returns>
     public string ToJson()
     {
-        return "";
+        WizardCommandDefinition definition = new WizardCommandDefinition()
+        {
+            Key = Key,
+            ExecuteScriptName = ExecuteScriptName,
+            HelpDescription = HelpDescription,
+            HelpGroupName = HelpGroupName,
+            IsEnabled = IsEnabled,
+            KeyChar = KeyChar
+        };
+        return JsonSerializer.Serialize(definition);
     }
 
     public virtual string Key => GetType().Name;
@@ -30,7 +41,8 @@ internal abstract class WizardCommand : IHelpCommand, IGetKey<string>
     public string GetKey => Key;
     public void Bind() 
     {
-        ExecuteScript = ExecuteScriptName == null ? null : SaveGame.SingletonRepository.Scripts.Get(ExecuteScriptName);
+        ExecuteScript = ExecuteScriptName == null ? null : (IScript)SaveGame.SingletonRepository.Scripts.Get(ExecuteScriptName);
+        HelpGroup = HelpGroupName == null ? null : SaveGame.SingletonRepository.HelpGroups.Get(HelpGroupName);
     }
 
     public abstract char KeyChar { get; }
@@ -40,7 +52,9 @@ internal abstract class WizardCommand : IHelpCommand, IGetKey<string>
     /// <summary>
     /// Returns the name of a group when rendering the wizard help screen; or null, if the command should not be rendered on the help screen.  Returns null, by default.
     /// </summary>
-    public virtual HelpGroup? HelpGroup => null;
+    public HelpGroup? HelpGroup { get; private set; }
+
+    protected virtual string? HelpGroupName => null;
 
     /// <summary>
     /// Returns a description of the command to be rendered on the Wizard Help screen.  Returns empty by default.
@@ -53,5 +67,5 @@ internal abstract class WizardCommand : IHelpCommand, IGetKey<string>
     /// </summary>
     protected virtual string? ExecuteScriptName => null;
 
-    public Script? ExecuteScript { get; private set; }
+    public IScript? ExecuteScript { get; private set; }
 }

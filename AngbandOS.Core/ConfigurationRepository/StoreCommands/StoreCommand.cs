@@ -37,17 +37,7 @@ internal abstract class StoreCommand : IGetKey<string>, IToJson
     public void Bind()
     {
         // Get the script from the singleton repository.
-        Script? script = SaveGame.SingletonRepository.Scripts.Get(ExecuteScriptName);
-
-        if (script == null)
-        {
-            throw new Exception($"The {ExecuteScriptName} script specified by the {GetType().Name} store script does not exist.");
-        }
-        if (!typeof(IStoreScript).IsInstanceOfType(script))
-        {
-            throw new Exception($"The {ExecuteScriptName} script specified by the {GetType().Name} store script does not implement the {nameof(IStoreScript)} interface.");
-        }
-        ExecuteScript = (IStoreScript)script;
+        ExecuteScript = ExecuteScriptName == null ? null : (IStoreScript)SaveGame.SingletonRepository.Scripts.Get(ExecuteScriptName);
 
         if (ValidStoreFactoryNames == null)
         {
@@ -78,12 +68,8 @@ internal abstract class StoreCommand : IGetKey<string>, IToJson
     /// </summary>
     protected virtual string[]? ValidStoreFactoryNames => null;
 
-    protected abstract string ExecuteScriptName { get; }
-    private IStoreScript ExecuteScript;
-    public void Execute(StoreCommandEvent storeCommandEvent)
-    {
-        ExecuteScript.ExecuteStoreScript(storeCommandEvent);
-    }
+    protected virtual string? ExecuteScriptName => null;
+    public IStoreScript ExecuteScript { get; private set; }
 
     public string ToJson()
     {
