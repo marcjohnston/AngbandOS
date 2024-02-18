@@ -20,6 +20,6 @@ internal class TeleportToTargetWizardCommand : WizardCommand
 
     public override void Execute()
     {
-        SaveGame.DoCmdWizBamf();
+        SaveGame.RunScript(nameof(TeleportToTargetScript));
     }
 }

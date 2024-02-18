@@ -12780,15 +12780,6 @@ internal class SaveGame
         AllocHorde(wy, wx);
     }
 
-    public void DoCmdWizBamf()
-    {
-        if (TargetWho == 0)
-        {
-            return;
-        }
-        TeleportPlayerTo(TargetRow, TargetCol);
-    }
-
     public void DoCmdWizNamed(int rIdx, bool slp)
     {
         if (rIdx >= SingletonRepository.MonsterRaces.Count - 1)
