@@ -86,7 +86,7 @@ internal class WildChaoticMagicScript : Script, IScriptInt
 
             case 27:
             case 28:
-                SaveGame.GainMutation();
+                SaveGame.RunScript(nameof(GainMutationScript));
                 break;
 
             case 29:

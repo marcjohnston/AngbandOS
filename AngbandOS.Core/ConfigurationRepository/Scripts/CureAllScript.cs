@@ -40,6 +40,6 @@ internal class CureAllScript : Script, IScript
         SaveGame.TimedBleeding.ResetTimer();
         SaveGame.TimedSlow.ResetTimer();
         SaveGame.SetFood(Constants.PyFoodMax - 1);
-        SaveGame.DoCmdRedraw();
+        SaveGame.RunScript(nameof(RedrawScript));
     }
 }

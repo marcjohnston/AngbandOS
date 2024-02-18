@@ -80,7 +80,7 @@ internal abstract class Patron : IGetKey<string>
         if (SaveGame.DieRoll(6) == 1)
         {
             SaveGame.MsgPrint($"{ShortName} rewards you with a mutation!");
-            SaveGame.GainMutation();
+            SaveGame.RunScript(nameof(GainMutationScript));
             return;
         }
         effect.GetReward(this);

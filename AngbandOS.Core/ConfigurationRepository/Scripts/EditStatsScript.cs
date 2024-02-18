@@ -85,6 +85,6 @@ internal class EditStatsScript : Script, IScript
         SaveGame.MaxExperienceGained = tmpInt;
 
         SaveGame.CheckExperience();
-        SaveGame.DoCmdRedraw();
+        SaveGame.RunScript(nameof(RedrawScript));
     }
 }

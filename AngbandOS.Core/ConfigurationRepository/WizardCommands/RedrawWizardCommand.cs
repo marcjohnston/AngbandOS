@@ -20,6 +20,6 @@ internal class RedrawWizardCommand : WizardCommand
 
     public override void Execute()
     {
-        SaveGame.DoCmdRedraw();
+        SaveGame.RunScript(nameof(RedrawScript));
     }
 }

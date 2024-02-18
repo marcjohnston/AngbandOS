@@ -168,7 +168,7 @@ internal class ChaosProjectile : Projectile
             if (SaveGame.DieRoll(3) == 1)
             {
                 SaveGame.MsgPrint("Your body is twisted by chaos!");
-                SaveGame.GainMutation();
+                SaveGame.RunScript(nameof(GainMutationScript));
             }
         }
         if (!SaveGame.HasNetherResistance && !SaveGame.HasChaosResistance)

@@ -18,6 +18,6 @@ internal class MutateBodyScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        SaveGame.GainMutation();
+        SaveGame.RunScript(nameof(GainMutationScript));
     }
 }
