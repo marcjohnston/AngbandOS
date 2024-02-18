@@ -243,7 +243,7 @@ internal class TarotSpellTarotDraw : Spell
 
             case 21:
             case 22:
-                SaveGame.DoorCreation();
+                SaveGame.RunScript(nameof(CreateDoorScript));
                 break;
 
             case 23:

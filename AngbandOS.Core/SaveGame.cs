@@ -4757,12 +4757,6 @@ internal class SaveGame
         return ProjectAtAllInLos(SingletonRepository.Projectiles.Get(nameof(DispUndeadProjectile)), dam);
     }
 
-    public void DoorCreation()
-    {
-        ProjectionFlag flg = ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectHide;
-        Project(0, 1, MapY, MapX, 0, SingletonRepository.Projectiles.Get(nameof(MakeDoorProjectile)), flg);
-    }
-
     /// <summary>
     /// Returns true, if the drain life actally hits and affects a monster.
     /// </summary>

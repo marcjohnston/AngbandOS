@@ -13,7 +13,7 @@ internal class NatureSpellDoorCreation : Spell
     private NatureSpellDoorCreation(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.DoorCreation();
+        SaveGame.RunScript(nameof(CreateDoorScript));
     }
 
     public override string Name => "Door Creation";
