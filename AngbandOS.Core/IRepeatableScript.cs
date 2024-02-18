@@ -5,7 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Scripts;
+namespace AngbandOS.Core;
 
 /// <summary>
 /// Represents the interface a script needs to implement to particpate in repeatable scripts.  In-game player commands must implement this interface.  Store commands and

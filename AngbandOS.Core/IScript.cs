@@ -5,12 +5,13 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Scripts;
+namespace AngbandOS.Core;
 
-/// <summary>
-/// Represents the interface a script needs to implement for it available when the player is in a store.
-/// </summary>
-internal interface IStoreScript
+internal interface IScript
 {
-    void ExecuteStoreScript(StoreCommandEvent storeCommandEvent);
+    /// <summary>
+    /// Execute the script.
+    /// </summary>
+    /// <returns></returns>
+    void ExecuteScript();
 }
