@@ -18,15 +18,6 @@ internal class IdentifyAllItemsScript : Script, IScript, IStoreScript
     /// <returns></returns>
     public void ExecuteStoreScript(StoreCommandEvent storeCommandEvent)
     {
-        ExecuteScript();
-    }
-
-    /// <summary>
-    /// Executes the identify all script.
-    /// </summary>
-    /// <returns></returns>
-    public void ExecuteScript()
-    {
         if (!SaveGame.ServiceHaggle(500, out int price))
         {
             if (price >= SaveGame.Gold)
@@ -39,10 +30,37 @@ internal class IdentifyAllItemsScript : Script, IScript, IStoreScript
                 SaveGame.SayComment_1();
                 SaveGame.PlaySound(SoundEffectEnum.StoreTransaction);
                 SaveGame.StorePrtGold();
-                SaveGame.IdentifyPack();
+                ExecuteScript();
                 SaveGame.MsgPrint("All your goods have been identified.");
             }
             SaveGame.HandleStuff();
+        }
+    }
+
+    /// <summary>
+    /// Executes the identify all script.
+    /// </summary>
+    /// <returns></returns>
+    public void ExecuteScript()
+    {
+        for (int i = 0; i < InventorySlot.Total; i++)
+        {
+            Item? oPtr = SaveGame.GetInventoryItem(i);
+            if (oPtr == null)
+            {
+                continue;
+            }
+            oPtr.BecomeFlavorAware();
+            oPtr.BecomeKnown();
+            if (oPtr.Stompable())
+            {
+                string itemName = oPtr.Description(true, 3);
+                SaveGame.MsgPrint($"You destroy {itemName}.");
+                int amount = oPtr.Count;
+                SaveGame.InvenItemIncrease(i, -amount);
+                SaveGame.InvenItemOptimize(i);
+                i--;
+            }
         }
     }
 }

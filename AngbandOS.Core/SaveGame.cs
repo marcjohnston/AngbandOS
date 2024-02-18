@@ -5345,29 +5345,6 @@ internal class SaveGame
         return true;
     }
 
-    public void IdentifyPack()
-    {
-        for (int i = 0; i < InventorySlot.Total; i++)
-        {
-            Item? oPtr = GetInventoryItem(i);
-            if (oPtr == null)
-            {
-                continue;
-            }
-            oPtr.BecomeFlavorAware();
-            oPtr.BecomeKnown();
-            if (oPtr.Stompable())
-            {
-                string itemName = oPtr.Description(true, 3);
-                MsgPrint($"You destroy {itemName}.");
-                int amount = oPtr.Count;
-                InvenItemIncrease(i, -amount);
-                InvenItemOptimize(i);
-                i--;
-            }
-        }
-    }
-
     public bool LightArea(int dam, int rad)
     {
         ProjectionFlag flg = ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectKill;

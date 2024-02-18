@@ -20,6 +20,6 @@ internal class IdentifyPackWizardCommand : WizardCommand
 
     public override void Execute()
     {
-        SaveGame.IdentifyPack();
+        SaveGame.RunScript(nameof(IdentifyAllItemsScript));
     }
 }
