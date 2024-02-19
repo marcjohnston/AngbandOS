@@ -13,12 +13,7 @@ internal class NatureSpellRayOfSunlight : Spell
     private NatureSpellRayOfSunlight(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        if (!SaveGame.GetDirectionWithAim(out int dir))
-        {
-            return;
-        }
-        SaveGame.MsgPrint("A line of sunlight appears.");
-        SaveGame.LightLine(dir);
+        SaveGame.RunScript(nameof(RayOfSunlightScript));
     }
 
     public override string Name => "Ray of Sunlight";
