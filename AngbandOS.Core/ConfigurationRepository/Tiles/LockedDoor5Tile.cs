@@ -11,9 +11,9 @@ namespace AngbandOS.Core.Tiles;
 internal class LockedDoor5Tile : Tile
 {
     private LockedDoor5Tile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(PlusSignSymbol));
+    protected override string SymbolName => nameof(PlusSignSymbol);
     public override ColorEnum Color => ColorEnum.BrightBrown;
-    public override AlterAction? AlterAction => SaveGame.SingletonRepository.AlterActions.Get(nameof(OpenAlterAction));
+    protected override string? AlterActionName => nameof(OpenAlterAction);
     protected override string? MimicTileName => nameof(LockedDoor0Tile);
     public override bool BlocksLos => true;
     public override string Description => "locked door";

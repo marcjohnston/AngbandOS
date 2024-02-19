@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Tiles;
 internal class WildPathNSTile : Tile
 {
     private WildPathNSTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(VerticalBarSymbol));
+    protected override string SymbolName => nameof(VerticalBarSymbol);
     public override ColorEnum Color => ColorEnum.BrightBrown;
     public override bool IsWildPath => true;
     public override string Description => "path";

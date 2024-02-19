@@ -11,9 +11,9 @@ namespace AngbandOS.Core.Tiles;
 internal class MagmaVisibleTreasureTile : Tile
 {
     private MagmaVisibleTreasureTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(AsteriskSymbol));
+    protected override string SymbolName => nameof(AsteriskSymbol);
     public override ColorEnum Color => ColorEnum.BrightOrange;
-    public override AlterAction? AlterAction => SaveGame.SingletonRepository.AlterActions.Get(nameof(TunnelAlterAction));
+    protected override string? AlterActionName => nameof(TunnelAlterAction);
     public override bool BlocksLos => true;
     public override bool IsVisibleTreasure => true;
     public override bool IsTreasure => true;

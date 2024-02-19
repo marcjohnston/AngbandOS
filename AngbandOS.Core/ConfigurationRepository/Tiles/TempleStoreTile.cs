@@ -19,7 +19,7 @@ internal class TempleStoreTile : Tile
     public override bool IsPermanent => true;
     public override bool IsShop => true;
     public override int MapPriority => 0;
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(NumberFourSymbol));
+    protected override string SymbolName => nameof(NumberFourSymbol);
     public override ColorEnum Color => ColorEnum.Green;
     public override string Description => "Temple";
 }

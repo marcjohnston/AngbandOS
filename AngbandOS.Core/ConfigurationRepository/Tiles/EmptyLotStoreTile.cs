@@ -12,7 +12,7 @@ namespace AngbandOS.Core.Tiles;
 internal class EmptyLotStoreTile : Tile
 {
     private EmptyLotStoreTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(SpaceBarSymbol));
+    protected override string SymbolName => nameof(SpaceBarSymbol);
     public override string Description => "";
     public override int MapPriority => 0;
 }

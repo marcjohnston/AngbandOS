@@ -11,9 +11,9 @@ namespace AngbandOS.Core.Tiles;
 internal class OpenDoorTile : Tile
 {
     private OpenDoorTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(SingleQuoteSymbol));
+    protected override string SymbolName => nameof(SingleQuoteSymbol);
     public override ColorEnum Color => ColorEnum.BrightBrown;
-    public override AlterAction? AlterAction => SaveGame.SingletonRepository.AlterActions.Get(nameof(CloseAlterAction));
+    protected override string? AlterActionName => nameof(CloseAlterAction);
     public override string Description => "open door";
     public override bool DimsOutsideLOS => true;
     public override bool IsPassable => true;

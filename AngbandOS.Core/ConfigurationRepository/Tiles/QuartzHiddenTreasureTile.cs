@@ -11,8 +11,8 @@ namespace AngbandOS.Core.Tiles;
 internal class QuartzHiddenTreasureTile : Tile
 {
     private QuartzHiddenTreasureTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(PoundSignSymbol));
-    public override AlterAction? AlterAction => SaveGame.SingletonRepository.AlterActions.Get(nameof(TunnelAlterAction));
+    protected override string SymbolName => nameof(PoundSignSymbol);
+    protected override string? AlterActionName => nameof(TunnelAlterAction);
     protected override string? MimicTileName => nameof(QuartzTile);
     public override bool BlocksLos => true;
     public override bool IsTreasure => true;

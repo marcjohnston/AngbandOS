@@ -37,13 +37,21 @@ internal abstract class Tile : IGetKey<string>
         HiddenTreasureForTile = HiddenTreasureForTileName == null ? null : SaveGame.SingletonRepository.Tiles.Get(HiddenTreasureForTileName);
         OnJammedTile = OnJammedTileName == null ? null : SaveGame.SingletonRepository.Tiles.Get(OnJammedTileName);
         VisibleTreasureForTile = VisibleTreasureForTileName == null ? null : SaveGame.SingletonRepository.Tiles.Get(VisibleTreasureForTileName);
+        AlterAction = AlterActionName == null ? null : SaveGame.SingletonRepository.AlterActions.Get(AlterActionName);
+        Symbol = SaveGame.SingletonRepository.Symbols.Get(SymbolName);
     }
+
     public virtual void StepOn(GridTile tile) { }
 
     /// <summary>
-    /// Returns the symbol to use for rendering.
+    /// Returns the symbol to use for rendering.  This property is bound from the SymbolName property during binding.
     /// </summary>
-    public abstract Symbol Symbol { get; }
+    public Symbol Symbol { get; private set; }
+
+    /// <summary>
+    /// Returns the name of the symbol to be used for rendering.  This property is bound to the Symbol property during binding.
+    /// </summary>
+    protected abstract string SymbolName { get; }
 
     /// <summary>
     /// Returns the color to render the tile as.  Returns white, by default.
@@ -83,7 +91,9 @@ internal abstract class Tile : IGetKey<string>
     /// <summary>
     /// Returns a single action to perform on the tile.
     /// </summary>
-    public virtual AlterAction? AlterAction => null;
+    public AlterAction? AlterAction { get; private set; }
+
+    protected virtual string? AlterActionName => null;
 
     /// <summary>
     /// The tile this tile should appear as when looked at; or null, if this tile is invisible/transparent.  Non-transparent, non-mimicing

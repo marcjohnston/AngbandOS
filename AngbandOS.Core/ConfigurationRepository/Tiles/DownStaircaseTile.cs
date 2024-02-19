@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Tiles;
 internal class DownStaircaseTile : Tile
 {
     private DownStaircaseTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(GreaterThanSymbol));
+    protected override string SymbolName => nameof(GreaterThanSymbol);
     public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Description => "down staircase";
     public override bool DimsOutsideLOS => true;

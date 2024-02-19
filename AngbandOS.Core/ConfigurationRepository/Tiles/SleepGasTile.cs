@@ -11,9 +11,9 @@ namespace AngbandOS.Core.Tiles;
 internal class SleepGasTile : Tile
 {
     private SleepGasTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(CaretSymbol));
+    protected override string SymbolName => nameof(CaretSymbol);
     public override ColorEnum Color => ColorEnum.Green;
-    public override AlterAction? AlterAction => SaveGame.SingletonRepository.AlterActions.Get(nameof(DisarmAlterAction));
+    protected override string? AlterActionName => nameof(DisarmAlterAction);
     public override string Description => "gas trap";
     public override bool IsInteresting => true;
     public override bool IsPassable => true;

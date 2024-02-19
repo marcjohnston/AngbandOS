@@ -17,7 +17,7 @@ internal class MagicStoreTile : Tile
     public override bool IsPermanent => true;
     public override bool IsShop => true;
     public override int MapPriority => 0;
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(NumberSixSymbol));
+    protected override string SymbolName => nameof(NumberSixSymbol);
     public override ColorEnum Color => ColorEnum.Red;
     public override string Description => "Magic Shop";
 }

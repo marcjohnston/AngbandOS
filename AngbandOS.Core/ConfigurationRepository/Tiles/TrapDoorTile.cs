@@ -11,8 +11,8 @@ namespace AngbandOS.Core.Tiles;
 internal class TrapDoorTile : Tile
 {
     private TrapDoorTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(CaretSymbol));
-    public override AlterAction? AlterAction => SaveGame.SingletonRepository.AlterActions.Get(nameof(DisarmAlterAction));
+    protected override string SymbolName => nameof(CaretSymbol);
+    protected override string? AlterActionName => nameof(DisarmAlterAction);
     public override string Description => "trap door";
     public override bool IsInteresting => true;
     public override bool IsPassable => true;
