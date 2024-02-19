@@ -21,19 +21,6 @@ internal class SlowDartTile : Tile
     public override int MapPriority => 20;
     public override void StepOn()
     {
-        // Dart traps need a to-hit roll
-        if (SaveGame.TrapCheckHitOnPlayer(125))
-        {
-            SaveGame.MsgPrint("A small dart hits you!");
-            // Do 1d4 damage plus slow
-            int damage = SaveGame.DiceRoll(1, 4);
-            string name = "a trap";
-            SaveGame.TakeHit(damage, name);
-            SaveGame.TimedSlow.AddTimer(SaveGame.RandomLessThan(20) + 20);
-        }
-        else
-        {
-            SaveGame.MsgPrint("A small dart barely misses you.");
-        }
+        SaveGame.RunScript(nameof(SlowDartScript));
     }
 }
