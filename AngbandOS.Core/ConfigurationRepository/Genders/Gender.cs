@@ -31,7 +31,7 @@ internal abstract class Gender : IGetKey<string>
     public void Bind() { }
 
     public abstract string Title { get; }
-    public abstract string Winner { get; }
+    public abstract string Winner { get; } // TODO ... this winner title to describe the type of winner is not rendered
 
     public virtual bool CanBeRandomlySelected => true;
     [Obsolete]
