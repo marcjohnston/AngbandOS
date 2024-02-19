@@ -7756,37 +7756,6 @@ internal class SaveGame
         MovePlayer(CurrentRunDirection, false);
     }
 
-    /// <summary>
-    /// Make a piece of armor immune to acid damage, removing any penalty at the same time
-    /// </summary>
-    public void Rustproof()
-    {
-        // Get a piece of armor
-        if (!SelectItem(out Item? item, "Rustproof which piece of armor? ", true, true, true, SingletonRepository.ItemFilters.Get(nameof(ArmorItemFilter))))
-        {
-            MsgPrint("You have nothing to rustproof.");
-            return;
-        }
-        if (item == null)
-        {
-            return;
-        }
-        string itenName = item.Description(false, 0);
-        // Set the ignore acid flag
-        item.RandartItemCharacteristics.IgnoreAcid = true;
-        // Make sure the grammar of the message is correct
-        string your = item.IsInInventory ? "Your" : "The";
-        string s;
-        if (item.BonusArmorClass < 0 && !item.IdentCursed)
-        {
-            s = item.Count > 1 ? "" : "s";
-            MsgPrint($"{your} {itenName} look{s} as good as new!");
-            item.BonusArmorClass = 0;
-        }
-        s = item.Count > 1 ? "are" : "is";
-        MsgPrint($"{your} {itenName} {s} now protected against corrosion.");
-    }
-
     public Spell[] OkaySpells(Item spellBook, bool known)
     {
         List<Spell> okaySpells = new List<Spell>();

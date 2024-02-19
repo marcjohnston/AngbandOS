@@ -13,7 +13,7 @@ internal class NatureSpellProtectFromCorrosion : Spell
     private NatureSpellProtectFromCorrosion(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.Rustproof();
+        SaveGame.RunScript(nameof(RustProofScript));
     }
 
     public override string Name => "Protection from Corrosion";
