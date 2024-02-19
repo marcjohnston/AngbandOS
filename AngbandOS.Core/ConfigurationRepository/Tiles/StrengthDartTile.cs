@@ -21,18 +21,6 @@ internal class StrengthDartTile : Tile
     public override int MapPriority => 20;
     public override void StepOn()
     {
-        // Dart traps need a to-hit roll
-        if (SaveGame.TrapCheckHitOnPlayer(125))
-        {
-            SaveGame.MsgPrint("A small dart hits you!");
-            // Do 1d4 damage plus strength drain
-            int damage = SaveGame.DiceRoll(1, 4);
-            SaveGame.TakeHit(damage, "a dart trap");
-            SaveGame.TryDecreasingAbilityScore(Ability.Strength);
-        }
-        else
-        {
-            SaveGame.MsgPrint("A small dart barely misses you.");
-        }
+        SaveGame.RunScript(nameof(StrengthDartScript));
     }
 }
