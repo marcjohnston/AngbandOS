@@ -21,9 +21,6 @@ internal class FireTrapTile : Tile
     public override int MapPriority => 20;
     public override void StepOn()
     {
-        // Do 4d6 fire damage
-        SaveGame.MsgPrint("You are enveloped in flames!");
-        int damage = SaveGame.DiceRoll(4, 6);
-        SaveGame.FireDam(damage, "a fire trap");
+        SaveGame.RunScript(nameof(FireTrapScript));
     }
 }
