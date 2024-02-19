@@ -21,11 +21,6 @@ internal class SleepGasTile : Tile
     public override int MapPriority => 20;
     public override void StepOn()
     {
-        // Paralyse the player
-        SaveGame.MsgPrint("A strange white mist surrounds you!");
-        if (!SaveGame.HasFreeAction)
-        {
-            SaveGame.TimedParalysis.AddTimer(SaveGame.RandomLessThan(10) + 5);
-        }
+        SaveGame.RunScript(nameof(SleepGasScript));
     }
 }
