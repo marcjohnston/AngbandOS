@@ -14,13 +14,23 @@ internal class WizardCommandsRepository : DictionaryRepository<string, WizardCom
 
     public override void Load()
     {
-        base.Load();
-
-        foreach (WizardCommand command in this)
+        if (SaveGame.Configuration.WizardCommands == null)
         {
-            if (this.Count(_wizardCommand => _wizardCommand.KeyChar == command.KeyChar) > 1)
+            base.Load();
+
+            foreach (WizardCommand command in this)
             {
-                throw new Exception($"More than one wizard command accepts the key {command.KeyChar}.");
+                if (this.Count(_wizardCommand => _wizardCommand.KeyChar == command.KeyChar) > 1)
+                {
+                    throw new Exception($"More than one wizard command accepts the key {command.KeyChar}.");
+                }
+            }
+        }
+        else
+        {
+            foreach (WizardCommandDefinition wizardCommandDefinition in SaveGame.Configuration.WizardCommands)
+            {
+                Add(new GenericWizardCommand(SaveGame, wizardCommandDefinition));
             }
         }
     }

@@ -19,7 +19,11 @@ public class WizardCommandDefinition : IPoco
 
     public bool IsValid()
     {
-        throw new NotImplementedException();
+        if (Key == null || KeyChar == null || IsEnabled == null || HelpDescription == null)
+        {
+            return false;
+        }
+        return true;
     }
 }
 

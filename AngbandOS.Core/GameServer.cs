@@ -226,6 +226,7 @@ public class GameServer
                 Towns = RetrieveEntities<TownDefinition>(persistentStorage, Pluralize(nameof(Town))),
                 Vaults = RetrieveEntities<VaultDefinition>(persistentStorage, Pluralize(nameof(Vault))),
                 WandReadableFlavors = RetrieveEntities<ReadableFlavorDefinition>(persistentStorage, Pluralize(nameof(WandReadableFlavor))),
+                WizardCommands = RetrieveEntities<WizardCommandDefinition>(persistentStorage, Pluralize(nameof(WizardCommand))),
 
                 ElvishTexts = RetrieveEntity(persistentStorage, "ElvishTexts"),
                 FindQuests = RetrieveEntity(persistentStorage, "FindQuests"),

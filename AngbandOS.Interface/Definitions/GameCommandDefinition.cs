@@ -7,11 +7,11 @@ public class GameCommandDefinition : IPoco
     public virtual char KeyChar { get; set; }
     public virtual int? Repeat { get; set; } = 0;
     public virtual bool IsEnabled { get; set; } = true;
-    public virtual string ExecuteScriptName { get; set; }
+    public virtual string? ExecuteScriptName { get; set; }
 
     public bool IsValid()
     {
-        if (Key == null || KeyChar == null || IsEnabled == null || ExecuteScriptName == null)
+        if (Key == null || KeyChar == null || IsEnabled == null)
         {
             return false;
         }
