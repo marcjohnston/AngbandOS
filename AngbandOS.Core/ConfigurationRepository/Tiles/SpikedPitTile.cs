@@ -21,26 +21,6 @@ internal class SpikedPitTile : Tile
     public override int MapPriority => 20;
     public override void StepOn()
     {
-        // A pit can be flown over with feather fall
-        if (SaveGame.HasFeatherFall)
-        {
-            SaveGame.MsgPrint("You fly over a spiked pit.");
-        }
-        else
-        {
-            SaveGame.MsgPrint("You fall into a spiked pit!");
-            string name = "a pit trap";
-            // A pit does 2d6 fall damage
-            int damage = SaveGame.DiceRoll(2, 6);
-            // 50% chance of doing double damage plus bleeding
-            if (SaveGame.RandomLessThan(100) < 50)
-            {
-                SaveGame.MsgPrint("You are impaled!");
-                name = "a spiked pit";
-                damage *= 2;
-                SaveGame.TimedBleeding.AddTimer(SaveGame.DieRoll(damage));
-            }
-            SaveGame.TakeHit(damage, name);
-        }
+        SaveGame.RunScript(nameof(SpikedPitScript));
     }
 }
