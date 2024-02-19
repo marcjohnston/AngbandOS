@@ -8625,7 +8625,7 @@ internal class SaveGame
         Disturb(false);
         GridTile tile = Grid[MapY][MapX];
         // Check the type of trap
-        tile.FeatureType.StepOn();
+        tile.FeatureType.StepOnScript.ExecuteScript();
     }
 
     /// <summary>

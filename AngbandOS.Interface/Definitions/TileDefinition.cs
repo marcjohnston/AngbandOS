@@ -8,7 +8,7 @@ public class TileDefinition : IPoco
 
     public virtual string Key { get; set; }
 
-    public virtual void StepOn() { }
+    public virtual string? StepOnScriptName { get; set; }
 
     public bool IsValid()
     {
@@ -23,7 +23,7 @@ public class TileDefinition : IPoco
     /// <summary>
     /// Returns the color to render the tile as.  Returns white, by default.
     /// </summary>
-    public virtual ColorEnum Color => ColorEnum.White;
+    public virtual ColorEnum Color { get; set; } = ColorEnum.White;
 
     public virtual bool IsWildPath { get; set; } = false;
 

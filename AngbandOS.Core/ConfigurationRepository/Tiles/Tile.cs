@@ -5,6 +5,9 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using AngbandOS.Core.Interface.Definitions;
+using System.Text.Json;
+
 namespace AngbandOS.Core.Tiles;
 
 [Serializable]
@@ -27,7 +30,51 @@ internal abstract class Tile : IGetKey<string>
     /// <returns></returns>
     public string ToJson()
     {
-        return "";
+        TileDefinition tileDefinition = new TileDefinition()
+        {
+            AllowMonsterToOccupy = AllowMonsterToOccupy,
+            AlterActionName = AlterActionName,
+            BlocksScent = BlocksScent,
+            Color = Color,
+            Description = Description,
+            DimsOutsideLOS = DimsOutsideLOS,
+            HiddenTreasureForTileName = HiddenTreasureForTileName,
+            IsBasicWall = IsBasicWall,
+            IsBorder = IsBorder,
+            IsClosedDoor = IsClosedDoor,
+            IsInteresting = IsInteresting,
+            IsJammedClosedDoor = IsJammedClosedDoor,
+            IsMagma = IsMagma,
+            IsOpenDoor = IsOpenDoor,
+            IsOpenFloor = IsOpenFloor,
+            IsPassable = IsPassable,
+            IsPath = IsPath,
+            IsPermanent = IsPermanent,
+            IsRevealedWithDetectStairsScript = IsRevealedWithDetectStairsScript,
+            IsRubble = IsRubble,
+            IsSecretDoor = IsSecretDoor,
+            IsShop = IsShop,
+            IsTrap = IsTrap,
+            IsTrapDoor = IsTrapDoor,
+            IsTreasure = IsTreasure,
+            IsTree = IsTree,
+            IsUnidentifiedTrap = IsUnidentifiedTrap,
+            IsVein = IsVein,
+            IsVisibleDoor = IsVisibleDoor,
+            IsVisibleTreasure = IsVisibleTreasure,
+            IsWall = IsWall,
+            IsWater = IsWater,
+            IsWildPath = IsWildPath,
+            Key = Key,
+            LockLevel = LockLevel,
+            MapPriority = MapPriority,
+            MimicTileName = MimicTileName,
+            RunPast = RunPast,
+            StepOnScriptName = StepOnScriptName,
+            SymbolName = SymbolName,
+            YellowInTorchlight = YellowInTorchlight
+        };
+        return JsonSerializer.Serialize<TileDefinition>(tileDefinition);
     }
     public virtual string Key => GetType().Name;
     public string GetKey => Key;
@@ -41,7 +88,17 @@ internal abstract class Tile : IGetKey<string>
         Symbol = SaveGame.SingletonRepository.Symbols.Get(SymbolName);
     }
 
-    public virtual void StepOn() { }
+    /// <summary>
+    /// Returns the script to run when the player steps on the tile; or null, if no script should run.  This property is bound from the StepOnScriptName property during
+    /// the binding phase.
+    /// </summary>
+    public IScript? StepOnScript { get; private set; }
+
+    /// <summary>
+    /// Returns the name of the script to run when the player steps on the tile; or null, if no script should run.  This property is bound to the StepOnScript property during
+    /// the binding phase.
+    /// </summary>
+    protected virtual string? StepOnScriptName => null;
 
     /// <summary>
     /// Returns the symbol to use for rendering.  This property is bound from the SymbolName property during binding.

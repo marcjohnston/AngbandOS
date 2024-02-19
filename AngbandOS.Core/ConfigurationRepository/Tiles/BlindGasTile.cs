@@ -19,8 +19,5 @@ internal class BlindGasTile : Tile
     public override bool IsPassable => true;
     public override bool IsTrap => true;
     public override int MapPriority => 20;
-    public override void StepOn()
-    {
-        SaveGame.RunScript(nameof(BlindingGasScript));
-    }
+    protected override string? StepOnScriptName => nameof(BlindingGasScript);
 }

@@ -24,8 +24,5 @@ internal class TrapDoorTile : Tile
     /// </summary>
     public override bool IsTrapDoor => true;
 
-    public override void StepOn()
-    {
-        SaveGame.RunScript(nameof(TrapDoorScript));
-    }
+    protected override string? StepOnScriptName => nameof(TrapDoorScript);
 }

@@ -19,8 +19,5 @@ internal class AcidTrapTile : Tile
     public override bool IsPassable => true;
     public override bool IsTrap => true;
     public override int MapPriority => 20;
-    public override void StepOn()
-    {
-        SaveGame.RunScript(nameof(AcidTrapScript));
-    }
+    protected override string? StepOnScriptName => nameof(AcidTrapScript);
 }

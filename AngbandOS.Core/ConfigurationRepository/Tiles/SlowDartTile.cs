@@ -19,8 +19,5 @@ internal class SlowDartTile : Tile
     public override bool IsPassable => true;
     public override bool IsTrap => true;
     public override int MapPriority => 20;
-    public override void StepOn()
-    {
-        SaveGame.RunScript(nameof(SlowDartScript));
-    }
+    protected override string? StepOnScriptName => nameof(SlowDartScript);
 }

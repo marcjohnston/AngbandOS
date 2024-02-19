@@ -19,8 +19,5 @@ internal class PoisonGasTile : Tile
     public override bool IsPassable => true;
     public override bool IsTrap => true;
     public override int MapPriority => 20;
-    public override void StepOn()
-    {
-        SaveGame.RunScript(nameof(PoisonGasScript));
-    }
+    protected override string? StepOnScriptName => nameof(PoisonGasScript);
 }

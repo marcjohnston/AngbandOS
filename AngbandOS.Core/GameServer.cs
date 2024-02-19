@@ -223,6 +223,7 @@ public class GameServer
                 StoreCommands = RetrieveEntities<StoreCommandDefinition>(persistentStorage, Pluralize(nameof(StoreCommand))),
                 StoreFactories = RetrieveEntities<StoreFactoryDefinition>(persistentStorage, Pluralize(nameof(StoreFactory))),
                 Symbols = RetrieveEntities<SymbolDefinition>(persistentStorage, Pluralize(nameof(Symbol))),
+                Tiles = RetrieveEntities<TileDefinition>(persistentStorage, Pluralize(nameof(Tile))),
                 Towns = RetrieveEntities<TownDefinition>(persistentStorage, Pluralize(nameof(Town))),
                 Vaults = RetrieveEntities<VaultDefinition>(persistentStorage, Pluralize(nameof(Vault))),
                 WandReadableFlavors = RetrieveEntities<ReadableFlavorDefinition>(persistentStorage, Pluralize(nameof(WandReadableFlavor))),

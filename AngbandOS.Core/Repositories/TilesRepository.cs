@@ -11,4 +11,18 @@ namespace AngbandOS.Core.Repositories;
 internal class TilesRepository : DictionaryRepository<string, Tile>
 {
     public TilesRepository(SaveGame saveGame) : base(saveGame) { }
+    public override void Load()
+    {
+        if (SaveGame.Configuration.Tiles == null)
+        {
+            base.Load();
+        }
+        else
+        {
+            foreach (TileDefinition tileDefinition in SaveGame.Configuration.Tiles)
+            {
+                Add(new GenericTile(SaveGame, tileDefinition));
+            }
+        }
+    }
 }

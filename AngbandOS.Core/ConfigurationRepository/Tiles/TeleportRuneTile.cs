@@ -19,8 +19,5 @@ internal class TeleportRuneTile : Tile
     public override bool IsPassable => true;
     public override bool IsTrap => true;
     public override int MapPriority => 20;
-    public override void StepOn()
-    {
-        SaveGame.RunScript(nameof(TeleportRuneScript));
-    }
+    protected override string? StepOnScriptName => nameof(TeleportRuneScript);
 }
