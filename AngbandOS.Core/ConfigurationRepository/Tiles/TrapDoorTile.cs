@@ -26,34 +26,6 @@ internal class TrapDoorTile : Tile
 
     public override void StepOn()
     {
-        // Trap doors can be flown over with feather fall
-        if (SaveGame.HasFeatherFall)
-        {
-            SaveGame.MsgPrint("You fly over a trap door.");
-        }
-        else
-        {
-            SaveGame.MsgPrint("You fell through a trap door!");
-            // Trap doors do 2d8 fall damage
-            int damage = SaveGame.DiceRoll(2, 8);
-            string name = "a trap door";
-            SaveGame.TakeHit(damage, name);
-            // Even if we survived, we need a new level
-            if (SaveGame.Health >= 0)
-            {
-                SaveGame.DoCmdSaveGame(true);
-            }
-            SaveGame.NewLevelFlag = true;
-            // In dungeons we fall to a deeper level, but in towers we fall to a
-            // shallower level because they go up instead of down
-            if (SaveGame.CurDungeon.Tower)
-            {
-                SaveGame.CurrentDepth--;
-            }
-            else
-            {
-                SaveGame.CurrentDepth++;
-            }
-        }
+        SaveGame.RunScript(nameof(TrapDoorScript));
     }
 }
