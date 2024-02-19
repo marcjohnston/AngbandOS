@@ -81,23 +81,19 @@ internal class InvokeSpiritsScript : Script, IScript
         }
         if (die < 56)
         {
-            SaveGame.FireBoltOrBeam(beam - 10, SaveGame.SingletonRepository.Projectiles.Get(nameof(ElecProjectile)), dir,
-                SaveGame.DiceRoll(3 + ((SaveGame.ExperienceLevel - 5) / 4), 8));
+            SaveGame.FireBoltOrBeam(beam - 10, SaveGame.SingletonRepository.Projectiles.Get(nameof(ElecProjectile)), dir, SaveGame.DiceRoll(3 + ((SaveGame.ExperienceLevel - 5) / 4), 8));
         }
         if (die < 61)
         {
-            SaveGame.FireBoltOrBeam(beam - 10, SaveGame.SingletonRepository.Projectiles.Get(nameof(ColdProjectile)), dir,
-                SaveGame.DiceRoll(5 + ((SaveGame.ExperienceLevel - 5) / 4), 8));
+            SaveGame.FireBoltOrBeam(beam - 10, SaveGame.SingletonRepository.Projectiles.Get(nameof(ColdProjectile)), dir, SaveGame.DiceRoll(5 + ((SaveGame.ExperienceLevel - 5) / 4), 8));
         }
         if (die < 66)
         {
-            SaveGame.FireBoltOrBeam(beam, SaveGame.SingletonRepository.Projectiles.Get(nameof(AcidProjectile)), dir,
-                SaveGame.DiceRoll(6 + ((SaveGame.ExperienceLevel - 5) / 4), 8));
+            SaveGame.FireBoltOrBeam(beam, SaveGame.SingletonRepository.Projectiles.Get(nameof(AcidProjectile)), dir, SaveGame.DiceRoll(6 + ((SaveGame.ExperienceLevel - 5) / 4), 8));
         }
         if (die < 71)
         {
-            SaveGame.FireBoltOrBeam(beam, SaveGame.SingletonRepository.Projectiles.Get(nameof(FireProjectile)), dir,
-                SaveGame.DiceRoll(8 + ((SaveGame.ExperienceLevel - 5) / 4), 8));
+            SaveGame.FireBoltOrBeam(beam, SaveGame.SingletonRepository.Projectiles.Get(nameof(FireProjectile)), dir, SaveGame.DiceRoll(8 + ((SaveGame.ExperienceLevel - 5) / 4), 8));
         }
         if (die < 76)
         {
