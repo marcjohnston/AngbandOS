@@ -21,8 +21,6 @@ internal class TeleportRuneTile : Tile
     public override int MapPriority => 20;
     public override void StepOn()
     {
-        // Teleport the player up to 100 squares
-        SaveGame.MsgPrint("You hit a teleport trap!");
-        SaveGame.RunScriptInt(nameof(PhaseDoorScript), 100);
+        SaveGame.RunScript(nameof(TeleportRuneScript));
     }
 }
