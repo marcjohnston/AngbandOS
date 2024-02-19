@@ -24,18 +24,6 @@ internal class PitTile : Tile
     public override int MapPriority => 20;
     public override void StepOn()
     {
-        // A pit can be flown over with feather fall
-        if (SaveGame.HasFeatherFall)
-        {
-            SaveGame.MsgPrint("You fly over a pit trap.");
-        }
-        else
-        {
-            SaveGame.MsgPrint("You fell into a pit!");
-            // Pits do 2d6 fall damage
-            int damage = SaveGame.DiceRoll(2, 6);
-            string name = "a pit trap";
-            SaveGame.TakeHit(damage, name);
-        }
+        SaveGame.RunScript(nameof(PitTrapScript));
     }
 }
