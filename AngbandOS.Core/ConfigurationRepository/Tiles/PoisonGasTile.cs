@@ -19,7 +19,7 @@ internal class PoisonGasTile : Tile
     public override bool IsPassable => true;
     public override bool IsTrap => true;
     public override int MapPriority => 20;
-    public override void StepOn(GridTile tile)
+    public override void StepOn()
     {
         // Poison the player
         SaveGame.MsgPrint("A pungent green gas surrounds you!");

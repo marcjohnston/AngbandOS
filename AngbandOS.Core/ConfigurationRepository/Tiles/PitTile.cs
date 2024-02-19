@@ -22,7 +22,7 @@ internal class PitTile : Tile
     public override bool IsPassable => true;
     public override bool IsTrap => true;
     public override int MapPriority => 20;
-    public override void StepOn(GridTile tile)
+    public override void StepOn()
     {
         // A pit can be flown over with feather fall
         if (SaveGame.HasFeatherFall)

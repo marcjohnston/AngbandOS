@@ -19,13 +19,8 @@ internal class BlindGasTile : Tile
     public override bool IsPassable => true;
     public override bool IsTrap => true;
     public override int MapPriority => 20;
-    public override void StepOn(GridTile tile)
+    public override void StepOn()
     {
-        // Blind the player
-        SaveGame.MsgPrint("A black gas surrounds you!");
-        if (!SaveGame.HasBlindnessResistance)
-        {
-            SaveGame.TimedBlindness.AddTimer(SaveGame.RandomLessThan(50) + 25);
-        }
+        SaveGame.RunScript(nameof(BlindingGasScript));
     }
 }

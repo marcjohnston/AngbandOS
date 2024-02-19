@@ -19,7 +19,7 @@ internal class SlowDartTile : Tile
     public override bool IsPassable => true;
     public override bool IsTrap => true;
     public override int MapPriority => 20;
-    public override void StepOn(GridTile tile)
+    public override void StepOn()
     {
         // Dart traps need a to-hit roll
         if (SaveGame.TrapCheckHitOnPlayer(125))

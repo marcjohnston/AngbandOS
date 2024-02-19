@@ -19,8 +19,9 @@ internal class SummonRuneTile : Tile
     public override bool IsPassable => true;
     public override bool IsTrap => true;
     public override int MapPriority => 20;
-    public override void StepOn(GridTile tile)
+    public override void StepOn()
     {
+        GridTile tile = SaveGame.Grid[SaveGame.MapY][SaveGame.MapX];
         SaveGame.MsgPrint("There is a flash of shimmering light!");
         // Trap disappears when triggered
         tile.TileFlags.Clear(GridTile.PlayerMemorized);

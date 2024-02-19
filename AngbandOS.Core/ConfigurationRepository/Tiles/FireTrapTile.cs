@@ -19,7 +19,7 @@ internal class FireTrapTile : Tile
     public override bool IsPassable => true;
     public override bool IsTrap => true;
     public override int MapPriority => 20;
-    public override void StepOn(GridTile tile)
+    public override void StepOn()
     {
         // Do 4d6 fire damage
         SaveGame.MsgPrint("You are enveloped in flames!");

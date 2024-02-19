@@ -24,7 +24,7 @@ internal class TrapDoorTile : Tile
     /// </summary>
     public override bool IsTrapDoor => true;
 
-    public override void StepOn(GridTile tile)
+    public override void StepOn()
     {
         // Trap doors can be flown over with feather fall
         if (SaveGame.HasFeatherFall)

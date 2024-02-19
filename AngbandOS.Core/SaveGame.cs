@@ -8058,6 +8058,13 @@ internal class SaveGame
         }
     }
 
+    public void RunTileScript(string scriptName, GridTile tile)
+    {
+        // Get the script from the singleton repository.
+        ITileScript? script = (ITileScript)SingletonRepository.Scripts.Get(scriptName);
+        script.ExecuteTileScript(tile);
+    }
+
     public void RunScript(string scriptName)
     {
         // Get the script from the singleton repository.
@@ -8618,7 +8625,7 @@ internal class SaveGame
         Disturb(false);
         GridTile tile = Grid[MapY][MapX];
         // Check the type of trap
-        tile.FeatureType.StepOn(tile);
+        tile.FeatureType.StepOn();
     }
 
     /// <summary>

@@ -19,7 +19,7 @@ internal class TeleportRuneTile : Tile
     public override bool IsPassable => true;
     public override bool IsTrap => true;
     public override int MapPriority => 20;
-    public override void StepOn(GridTile tile)
+    public override void StepOn()
     {
         // Teleport the player up to 100 squares
         SaveGame.MsgPrint("You hit a teleport trap!");

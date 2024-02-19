@@ -19,11 +19,8 @@ internal class AcidTrapTile : Tile
     public override bool IsPassable => true;
     public override bool IsTrap => true;
     public override int MapPriority => 20;
-    public override void StepOn(GridTile tile)
+    public override void StepOn()
     {
-        // Do 4d6 acid damage
-        SaveGame.MsgPrint("You are splashed with acid!");
-        int damage = SaveGame.DiceRoll(4, 6);
-        SaveGame.AcidDam(damage, "an acid trap");
+        SaveGame.RunScript(nameof(AcidTrapScript));
     }
 }

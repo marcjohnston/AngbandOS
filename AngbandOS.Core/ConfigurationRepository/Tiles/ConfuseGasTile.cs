@@ -19,13 +19,8 @@ internal class ConfuseGasTile : Tile
     public override bool IsPassable => true;
     public override bool IsTrap => true;
     public override int MapPriority => 20;
-    public override void StepOn(GridTile tile)
+    public override void StepOn()
     {
-        // Confuse the player
-        SaveGame.MsgPrint("A gas of scintillating colors surrounds you!");
-        if (!SaveGame.HasConfusionResistance)
-        {
-            SaveGame.TimedConfusion.AddTimer(SaveGame.RandomLessThan(20) + 10);
-        }
+        SaveGame.RunScript(nameof(ConfuseGasScript));
     }
 }
