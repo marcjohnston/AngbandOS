@@ -21,40 +21,6 @@ internal class PoisonPitTile : Tile
     public override int MapPriority => 20;
     public override void StepOn()
     {
-        // A pit can be flown over with feather fall
-        if (SaveGame.HasFeatherFall)
-        {
-            SaveGame.MsgPrint("You fly over a spiked pit.");
-        }
-        else
-        {
-            SaveGame.MsgPrint("You fall into a spiked pit!");
-            // A pit does 2d6 fall damage
-            int damage = SaveGame.DiceRoll(2, 6);
-            string name = "a pit trap";
-            // 50% chance of doing double damage plus bleeding plus poison
-            if (SaveGame.RandomLessThan(100) < 50)
-            {
-                SaveGame.MsgPrint("You are impaled on poisonous spikes!");
-                name = "a spiked pit";
-                damage *= 2;
-                SaveGame.TimedBleeding.AddTimer(SaveGame.DieRoll(damage));
-                // Hagarg Ryonis can save us from the poison
-                if (SaveGame.HasPoisonResistance || SaveGame.TimedPoisonResistance.TurnsRemaining != 0)
-                {
-                    SaveGame.MsgPrint("The poison does not affect you!");
-                }
-                else if (SaveGame.DieRoll(10) <= SaveGame.Religion.GetNamedDeity(GodName.Hagarg_Ryonis).AdjustedFavour)
-                {
-                    SaveGame.MsgPrint("Hagarg Ryonis's favour protects you!");
-                }
-                else
-                {
-                    damage *= 2;
-                    SaveGame.TimedPoison.AddTimer(SaveGame.DieRoll(damage));
-                }
-            }
-            SaveGame.TakeHit(damage, name);
-        }
+        SaveGame.RunScript(nameof(PoisonPitScript));
     }
 }
