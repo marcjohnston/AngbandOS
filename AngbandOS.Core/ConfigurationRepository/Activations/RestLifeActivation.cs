@@ -28,5 +28,7 @@ internal class RestLifeActivation : Activation
 
     public override int Value => 7500;
 
-    public override string Description => "restore life levels every 450 turns";
+    public override string Name => "restore life levels";
+
+    public override string Description => $"{Name} every 450 turns";
 }

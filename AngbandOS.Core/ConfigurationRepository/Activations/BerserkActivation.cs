@@ -29,5 +29,7 @@ internal class BerserkActivation : Activation
 
     public override int Value => 800;
 
-    public override string Description => "heroism and berserk (dur 50+d50) every 100+d100 turns";
+    public override string Name => "heroism and berserk (dur 50+d50)";
+
+    public override string Description => $"{Name} every 100+d100 turns";
 }

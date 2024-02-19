@@ -32,5 +32,7 @@ internal class ResistAllActivation : Activation
 
     public override int Value => 5000;
 
-    public override string Description => "resist elements (dur 40+d40) every 200 turns";
+    public override string Name => "resist elements (dur 40+d40)";
+
+    public override string Description => $"{Name} every 200 turns";
 }

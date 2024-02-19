@@ -26,5 +26,7 @@ internal class SatiateActivation : Activation
 
     public override int Value => 2000;
 
-    public override string Description => "satisfy hunger every 200 turns";
+    public override string Name => "satisfy hunger";
+
+    public override string Description => $"{Name} every 200 turns";
 }

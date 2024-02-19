@@ -28,5 +28,7 @@ internal class RechargeActivation : Activation
 
     public override int Value => 1000;
 
-    public override string Description => "recharging every 70 turns";
+    public override string Name => "recharging";
+
+    public override string Description => $"{Name} every 70 turns";
 }

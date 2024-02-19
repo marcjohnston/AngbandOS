@@ -28,5 +28,7 @@ internal class BoMiss1Activation : DirectionalActivation
 
     public override int Value => 250;
 
-    public override string Description => "magic missile (2d6) every 2 turns";
+    public override string Name => "magic missile (2d6)";
+
+    public override string Description => $"{Name} every 2 turns";
 }

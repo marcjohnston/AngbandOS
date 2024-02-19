@@ -28,5 +28,7 @@ internal class SunlightActivation : DirectionalActivation
 
     public override int Value => 250;
 
-    public override string Description => "beam of sunlight every 10 turns";
+    public override string Name => "beam of sunlight";
+
+    public override string Description => $"{Name} every 10 turns";
 }

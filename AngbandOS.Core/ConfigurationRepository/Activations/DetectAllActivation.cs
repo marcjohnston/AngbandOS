@@ -29,5 +29,7 @@ internal class DetectAllActivation : Activation
 
     public override int Value => 1000;
 
-    public override string Description => "detection every 55+d55 turns";
+    public override string Name => "detection";
+
+    public override string Description => $"{Name} every 55+d55 turns";
 }

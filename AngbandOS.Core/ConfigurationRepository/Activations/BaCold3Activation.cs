@@ -27,6 +27,7 @@ internal class BaCold3Activation : DirectionalActivation
     }
 
     public override int Value => 2500;
+    public override string Name => "ball of cold (200)";
 
-    public override string Description => "ball of cold (200) every 325+d325 turns";
+    public override string Description => $"{Name} every 325+d325 turns";
 }

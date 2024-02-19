@@ -28,5 +28,7 @@ internal class CarnageActivation : Activation
 
     public override int Value => 10000;
 
-    public override string Description => "carnage every 500 turns";
+    public override string Name => "carnage";
+
+    public override string Description => $"{Name} every 500 turns";
 }

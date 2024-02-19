@@ -34,5 +34,7 @@ internal class Vampire2Activation : DirectionalActivation
 
     public override int Value => 2500;
 
-    public override string Description => "vampiric drain (3*100) every 400 turns";
+    public override string Name => "vampiric drain (3*100)";
+
+    public override string Description => $"{Name} every 400 turns";
 }

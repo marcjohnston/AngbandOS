@@ -41,5 +41,7 @@ internal class SummonUndeadActivation : Activation
 
     public override int Value => 20000;
 
-    public override string Description => "summon undead every 666+d333 turns";
+    public override string Name => "summon undead";
+
+    public override string Description => $"{Name} every 666+d333 turns";
 }

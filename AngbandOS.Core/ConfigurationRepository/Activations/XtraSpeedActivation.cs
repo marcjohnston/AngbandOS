@@ -35,5 +35,7 @@ internal class XtraSpeedActivation : Activation
 
     public override int Value => 25000;
 
-    public override string Description => "speed (dur 75+d75) every 200+d200 turns";
+    public override string Name => "speed (dur 75+d75)";
+
+    public override string Description => $"{Name} every 200+d200 turns";
 }

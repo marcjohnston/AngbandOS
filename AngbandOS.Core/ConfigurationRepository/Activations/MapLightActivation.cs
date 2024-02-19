@@ -29,5 +29,7 @@ internal class MapLightActivation : Activation
 
     public override int Value => 500;
 
-    public override string Description => "light (dam 2d15) & map area every 50+d50 turns";
+    public override string Name => "light (dam 2d15) & map area";
+
+    public override string Description => $"{Name} every 50+d50 turns";
 }

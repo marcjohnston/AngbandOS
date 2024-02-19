@@ -28,5 +28,7 @@ internal class BoAcid1Activation : DirectionalActivation
 
     public override int Value => 250;
 
-    public override string Description => "acid bolt (5d8) every 5+d5 turns";
+    public override string Name => "acid bolt (5d8)";
+
+    public override string Description => $"{Name} every 5+d5 turns";
 }

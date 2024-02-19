@@ -28,5 +28,7 @@ internal class RuneProtActivation : Activation
 
     public override int Value => 10000;
 
-    public override string Description => "rune of protection every 400 turns";
+    public override string Name => "rune of protection";
+
+    public override string Description => $"{Name} every 400 turns";
 }

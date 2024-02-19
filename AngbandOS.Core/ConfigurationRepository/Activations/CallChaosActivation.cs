@@ -28,5 +28,7 @@ internal class CallChaosActivation : Activation
 
     public override int Value => 5000;
 
-    public override string Description => "call chaos every 350 turns";
+    public override string Name => "call chaos";
+
+    public override string Description => $"{Name} every 350 turns";
 }

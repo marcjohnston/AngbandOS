@@ -28,5 +28,7 @@ internal class BoCold1Activation : DirectionalActivation
 
     public override int Value => 250;
 
-    public override string Description => "frost bolt (6d8) every 7+d7 turns";
+    public override string Name => "frost bolt (6d8)";
+
+    public override string Description => $"{Name} every 7+d7 turns";
 }

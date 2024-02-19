@@ -30,5 +30,7 @@ internal class BaMiss3Activation : DirectionalActivation
 
     public override int Value => 5000;
 
-    public override string Description => "elemental breath (300) every 500 turns";
+    public override string Name => "elemental breath (300)";
+
+    public override string Description => $"{Name} every 500 turns";
 }

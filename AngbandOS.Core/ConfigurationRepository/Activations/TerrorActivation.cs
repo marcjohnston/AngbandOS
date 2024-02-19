@@ -26,5 +26,7 @@ internal class TerrorActivation : Activation
 
     public override int Value => 2500;
 
-    public override string Description => "terror every 3 * (level+10) turns";
+    public override string Name => "terror";
+
+    public override string Description => $"{Name} every 3 * (level+10) turns";
 }

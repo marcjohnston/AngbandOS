@@ -27,5 +27,7 @@ internal class IdPlainActivation : Activation
 
     public override int Value => 1250;
 
-    public override string Description => "identify spell every 10 turns";
+    public override string Name => "identify spell";
+
+    public override string Description => $"{Name} every 10 turns";
 }

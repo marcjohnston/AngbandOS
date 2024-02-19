@@ -38,5 +38,7 @@ internal class WhirlwindActivation : Activation
 
     public override int Value => 7500;
 
-    public override string Description => "whirlwind attack every 250 turns";
+    public override string Name => "whirlwind attack";
+
+    public override string Description => $"{Name} every 250 turns";
 }

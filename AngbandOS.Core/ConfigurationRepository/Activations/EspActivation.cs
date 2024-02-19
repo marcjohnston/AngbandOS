@@ -28,5 +28,7 @@ internal class EspActivation : Activation
 
     public override int Value => 1500;
 
-    public override string Description => "temporary ESP (dur 25+d30) every 200 turns";
+    public override string Name => "temporary ESP (dur 25+d30)";
+
+    public override string Description => $"{Name} every 200 turns";
 }

@@ -28,5 +28,7 @@ internal class Drain2Activation : DirectionalActivation
 
     public override int Value => 750;
 
-    public override string Description => "drain life (120) every 400 turns";
+    public override string Name => "drain life (120)";
+
+    public override string Description => $"{Name} every 400 turns";
 }

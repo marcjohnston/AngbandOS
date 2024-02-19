@@ -28,5 +28,7 @@ internal class QuakeActivation : Activation
 
     public override int Value => 600;
 
-    public override string Description => "earthquake (rad 10) every 50 turns";
+    public override string Name => "earthquake (rad 10)";
+
+    public override string Description => $"{Name} every 50 turns";
 }

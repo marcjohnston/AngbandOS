@@ -29,5 +29,6 @@ internal class AlchemyActivation : Activation
 
     public override int Value => 10000;
 
-    public override string Description => "alchemy every 500 turns";
+    public override string Name => "alchemy";
+    public override string Description => $"{Name} every 500 turns";
 }

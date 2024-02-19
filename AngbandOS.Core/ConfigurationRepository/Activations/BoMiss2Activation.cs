@@ -28,5 +28,7 @@ internal class BoMiss2Activation : DirectionalActivation
 
     public override int Value => 1000;
 
-    public override string Description => "arrows (150) every 90+d90 turns";
+    public override string Name => "arrows (150)";
+
+    public override string Description => $"{Name} every 90+d90 turns";
 }

@@ -26,5 +26,7 @@ internal class SummonAnimalActivation : Activation
 
     public override int Value => 10000;
 
-    public override string Description => "summon animal every 200+d300 turns";
+    public override string Name => "summon animal";
+
+    public override string Description => $"{Name} every 200+d300 turns";
 }

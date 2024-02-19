@@ -28,5 +28,7 @@ internal class CharmAnimalsActivation : Activation
 
     public override int Value => 12500;
 
-    public override string Description => "animal friendship every 500 turns";
+    public override string Name => "animal friendship";
+
+    public override string Description => $"{Name} every 500 turns";
 }

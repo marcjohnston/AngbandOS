@@ -28,5 +28,7 @@ internal class IdFullActivation : Activation
 
     public override int Value => 10000;
 
-    public override string Description => "identify true every 750 turns";
+    public override string Name => "identify true";
+
+    public override string Description => $"{Name} every 750 turns";
 }

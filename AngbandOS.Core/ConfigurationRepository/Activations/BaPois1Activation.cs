@@ -28,5 +28,7 @@ internal class BaPois1Activation : DirectionalActivation
 
     public override int Value => 300;
 
-    public override string Description => "stinking cloud (12), rad. 3, every 4+d4 turns";
+    public override string Name => "stinking cloud (12), rad. 3";
+
+    public override string Description => $"{Name}, every 4+d4 turns";
 }

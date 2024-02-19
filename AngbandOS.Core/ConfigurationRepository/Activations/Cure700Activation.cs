@@ -30,5 +30,7 @@ internal class Cure700Activation : Activation
 
     public override int Value => 10000;
 
-    public override string Description => "heal 700 hit points every 250 turns";
+    public override string Name => "heal 700 hit points";
+
+    public override string Description => $"{Name} every 250 turns";
 }

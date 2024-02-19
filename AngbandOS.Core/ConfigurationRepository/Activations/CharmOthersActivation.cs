@@ -28,5 +28,7 @@ internal class CharmOthersActivation : Activation
 
     public override int Value => 17500;
 
-    public override string Description => "mass charm every 750 turns";
+    public override string Name => "mass charm";
+
+    public override string Description => $"{Name} every 750 turns";
 }

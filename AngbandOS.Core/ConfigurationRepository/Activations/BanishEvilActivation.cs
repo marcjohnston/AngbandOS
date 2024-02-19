@@ -31,5 +31,7 @@ internal class BanishEvilActivation : Activation
 
     public override int Value => 3000;
 
-    public override string Description => "banish evil every 250+d250 turns";
+    public override string Name => "banish evil";
+
+    public override string Description => $"{Name} every 250+d250 turns";
 }

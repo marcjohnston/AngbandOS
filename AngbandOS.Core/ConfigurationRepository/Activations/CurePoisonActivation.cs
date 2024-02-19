@@ -29,5 +29,7 @@ internal class CurePoisonActivation : Activation
 
     public override int Value => 1000;
 
-    public override string Description => "remove fear and cure poison every 5 turns";
+    public override string Name => "remove fear and cure poison";
+
+    public override string Description => $"{Name} every 5 turns";
 }

@@ -28,5 +28,7 @@ internal class MassGenoActivation : Activation
 
     public override int Value => 10000;
 
-    public override string Description => "mass carnage every 1000 turns";
+    public override string Name => "mass carnage";
+
+    public override string Description => $"{Name} every 1000 turns";
 }
