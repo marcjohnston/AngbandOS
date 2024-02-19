@@ -21,19 +21,6 @@ internal class PoisonGasTile : Tile
     public override int MapPriority => 20;
     public override void StepOn()
     {
-        // Poison the player
-        SaveGame.MsgPrint("A pungent green gas surrounds you!");
-        if (!SaveGame.HasPoisonResistance && SaveGame.TimedPoisonResistance.TurnsRemaining == 0)
-        {
-            // Hagarg Ryonis may save you from the poison
-            if (SaveGame.DieRoll(10) <= SaveGame.Religion.GetNamedDeity(GodName.Hagarg_Ryonis).AdjustedFavour)
-            {
-                SaveGame.MsgPrint("Hagarg Ryonis's favour protects you!");
-            }
-            else
-            {
-                SaveGame.TimedPoison.AddTimer(SaveGame.RandomLessThan(20) + 10);
-            }
-        }
+        SaveGame.RunScript(nameof(PoisonGasScript));
     }
 }
