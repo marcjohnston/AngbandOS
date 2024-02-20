@@ -13,11 +13,7 @@ internal class TarotSpellSummonObject : Spell
     private TarotSpellSummonObject(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        if (!SaveGame.GetDirectionWithAim(out int dir))
-        {
-            return;
-        }
-        SaveGame.SummonItem(dir, SaveGame.ExperienceLevel * 15, true);
+        SaveGame.RunScript(nameof(SummonItemScript));
     }
 
     public override string Name => "Summon Object";
