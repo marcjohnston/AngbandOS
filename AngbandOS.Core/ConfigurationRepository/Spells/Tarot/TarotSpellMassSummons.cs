@@ -13,27 +13,7 @@ internal class TarotSpellMassSummons : Spell
     private TarotSpellMassSummons(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        bool noneCame = true;
-        SaveGame.MsgPrint("You concentrate on several images at once...");
-        for (int dummy = 0; dummy < 3 + (SaveGame.ExperienceLevel / 10); dummy++)
-        {
-            if (SaveGame.DieRoll(10) > 3)
-            {
-                if (SaveGame.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel, SaveGame.SingletonRepository.MonsterFilters.Get(nameof(NoUniquesMonsterFilter)), false))
-                {
-                    noneCame = false;
-                }
-            }
-            else if (SaveGame.SummonSpecific(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel, null))
-            {
-                SaveGame.MsgPrint("A summoned creature gets angry!");
-                noneCame = false;
-            }
-        }
-        if (noneCame)
-        {
-            SaveGame.MsgPrint("No-one ever turns up.");
-        }
+        SaveGame.RunScript(nameof(MassSummonsScript));
     }
 
     public override string Name => "Mass Summons";
