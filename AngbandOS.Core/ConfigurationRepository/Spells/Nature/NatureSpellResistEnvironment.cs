@@ -13,9 +13,7 @@ internal class NatureSpellResistEnvironment : Spell
     private NatureSpellResistEnvironment(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.TimedColdResistance.AddTimer(SaveGame.DieRoll(20) + 20);
-        SaveGame.TimedFireResistance.AddTimer(SaveGame.DieRoll(20) + 20);
-        SaveGame.TimedLightningResistance.AddTimer(SaveGame.DieRoll(20) + 20);
+        SaveGame.RunScript(nameof(ResistEnvironmentScript));
     }
 
     public override string Name => "Resist Environment";
