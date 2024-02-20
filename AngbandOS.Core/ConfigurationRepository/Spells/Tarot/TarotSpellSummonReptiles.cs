@@ -13,22 +13,7 @@ internal class TarotSpellSummonReptiles : Spell
     private TarotSpellSummonReptiles(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.MsgPrint("You concentrate on the image of a reptile...");
-        if (SaveGame.DieRoll(5) > 2)
-        {
-            if (!SaveGame.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel, SaveGame.SingletonRepository.MonsterFilters.Get(nameof(HydraMonsterFilter)), true))
-            {
-                SaveGame.MsgPrint("No-one ever turns up.");
-            }
-        }
-        else if (SaveGame.SummonSpecific(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel, SaveGame.SingletonRepository.MonsterFilters.Get(nameof(HydraMonsterFilter))))
-        {
-            SaveGame.MsgPrint("The summoned reptile gets angry!");
-        }
-        else
-        {
-            SaveGame.MsgPrint("No-one ever turns up.");
-        }
+        SaveGame.RunScript(nameof(SummonReptileScript));
     }
 
     public override string Name => "Summon Reptiles";
