@@ -4543,40 +4543,6 @@ internal class SaveGame
         return detect;
     }
 
-    public bool DetectObjectsNormal()
-    {
-        bool detect = false;
-        for (int y = 1; y < CurHgt - 1; y++)
-        {
-            for (int x = 1; x < CurWid - 1; x++)
-            {
-                GridTile cPtr = Grid[y][x];
-                foreach (Item oPtr in cPtr.Items)
-                {
-                    if (!PanelContains(y, x))
-                    {
-                        continue;
-                    }
-                    if (oPtr.Category != ItemTypeEnum.Gold)
-                    {
-                        oPtr.Marked = true;
-                        RedrawSingleLocation(y, x);
-                        detect = true;
-                    }
-                }
-            }
-        }
-        if (detect)
-        {
-            MsgPrint("You sense the presence of objects!");
-        }
-        if (DetectMonstersString("!=?|"))
-        {
-            detect = true;
-        }
-        return detect;
-    }
-
     public bool DetectStairs()
     {
         bool detect = false;
@@ -5893,7 +5859,7 @@ internal class SaveGame
         TempN = 0;
     }
 
-    private bool DetectMonstersString(string match)
+    public bool DetectMonstersString(string match)
     {
         bool flag = false;
         for (int i = 1; i < MMax; i++)

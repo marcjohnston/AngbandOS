@@ -22,7 +22,7 @@ internal class ObjectDetectionScrollItemFactory : ScrollItemFactory
 
     public override void Read(ReadScrollEvent eventArgs)
     {
-        if (SaveGame.DetectObjectsNormal())
+        if (SaveGame.RunSuccessfulScript(nameof(DetectNormalObjectsScript)))
         {
             eventArgs.Identified = true;
         }

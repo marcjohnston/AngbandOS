@@ -8,16 +8,50 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class DetectNormalObjectsScript : Script, IScript
+internal class DetectNormalObjectsScript : Script, IScript, ISuccessfulScript
 {
     private DetectNormalObjectsScript(SaveGame saveGame) : base(saveGame) { }
 
+    public bool ExecuteSuccessfulScript()
+    {
+        bool detect = false;
+        for (int y = 1; y < SaveGame.CurHgt - 1; y++)
+        {
+            for (int x = 1; x < SaveGame.CurWid - 1; x++)
+            {
+                GridTile cPtr = SaveGame.Grid[y][x];
+                foreach (Item oPtr in cPtr.Items)
+                {
+                    if (!SaveGame.PanelContains(y, x))
+                    {
+                        continue;
+                    }
+                    if (oPtr.Category != ItemTypeEnum.Gold)
+                    {
+                        oPtr.Marked = true;
+                        SaveGame.RedrawSingleLocation(y, x);
+                        detect = true;
+                    }
+                }
+            }
+        }
+        if (detect)
+        {
+            SaveGame.MsgPrint("You sense the presence of objects!");
+        }
+        if (SaveGame.DetectMonstersString("!=?|"))
+        {
+            detect = true;
+        }
+        return detect;
+    }
+
     /// <summary>
-    /// Executes the script.
+    /// Executes the successful script and disposes of the result.
     /// </summary>
     /// <returns></returns>
     public void ExecuteScript()
     {
-        SaveGame.DetectObjectsNormal();
+        ExecuteSuccessfulScript();
     }
 }

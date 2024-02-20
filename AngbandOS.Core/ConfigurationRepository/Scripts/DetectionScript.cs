@@ -23,7 +23,7 @@ internal class DetectionScript : Script, IScript, ISuccessfulScript
         detect |= SaveGame.DetectStairs();
         detect |= SaveGame.DetectTreasure();
         detect |= SaveGame.DetectObjectsGold();
-        detect |= SaveGame.DetectObjectsNormal();
+        detect |= SaveGame.RunSuccessfulScript(nameof(DetectNormalObjectsScript));
         detect |= SaveGame.DetectMonstersInvis();
         detect |= SaveGame.RunSuccessfulScript(nameof(DetectNormalMonstersScript));
         return detect;

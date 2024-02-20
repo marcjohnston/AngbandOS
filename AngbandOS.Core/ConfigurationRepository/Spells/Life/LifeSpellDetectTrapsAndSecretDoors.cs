@@ -13,7 +13,7 @@ internal class LifeSpellDetectTrapsAndSecretDoors : Spell
     private LifeSpellDetectTrapsAndSecretDoors(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.RunScript(nameof(DetectDoorsAndTrapsScript));
+        SaveGame.RunScript(nameof(DetectDoorsTrapsAndStairsScript));
     }
 
     public override string Name => "Detect Traps and Secret Doors";

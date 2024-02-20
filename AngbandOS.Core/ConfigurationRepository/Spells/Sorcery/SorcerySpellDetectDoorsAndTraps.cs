@@ -13,9 +13,7 @@ internal class SorcerySpellDetectDoorsAndTraps : Spell
     private SorcerySpellDetectDoorsAndTraps(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.DetectTraps();
-        SaveGame.DetectDoors();
-        SaveGame.DetectStairs();
+        SaveGame.RunScript(nameof(DetectDoorsTrapsAndStairsScript));
     }
 
     public override string Name => "Detect Doors and Traps";

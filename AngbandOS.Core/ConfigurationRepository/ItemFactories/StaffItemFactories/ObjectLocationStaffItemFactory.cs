@@ -30,7 +30,7 @@ internal class ObjectLocationStaffItemFactory : StaffItemFactory
 
     public override void UseStaff(UseStaffEvent eventArgs)
     {
-        if (SaveGame.DetectObjectsNormal())
+        if (SaveGame.RunSuccessfulScript(nameof(DetectNormalObjectsScript)))
         {
             eventArgs.Identified = true;
         }

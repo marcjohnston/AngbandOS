@@ -8,9 +8,9 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class DetectDoorsAndTrapsScript : Script, IScript
+internal class DetectTreasureAndGoldScript : Script, IScript
 {
-    private DetectDoorsAndTrapsScript(SaveGame saveGame) : base(saveGame) { }
+    private DetectTreasureAndGoldScript(SaveGame saveGame) : base(saveGame) { }
 
     /// <summary>
     /// Executes the script.
@@ -18,8 +18,7 @@ internal class DetectDoorsAndTrapsScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        SaveGame.DetectTraps();
-        SaveGame.DetectDoors();
-        SaveGame.DetectStairs();
+        SaveGame.DetectTreasure();
+        SaveGame.DetectObjectsGold();
     }
 }

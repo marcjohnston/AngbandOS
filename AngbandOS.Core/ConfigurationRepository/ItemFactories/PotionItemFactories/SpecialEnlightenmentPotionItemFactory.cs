@@ -37,7 +37,7 @@ internal class SpecialEnlightenmentPotionItemFactory : PotionItemFactory
         SaveGame.DetectStairs();
         SaveGame.DetectTreasure();
         SaveGame.DetectObjectsGold();
-        SaveGame.DetectObjectsNormal();
+        SaveGame.RunScript(nameof(DetectNormalObjectsScript));
         SaveGame.RunScript(nameof(IdentifyAllItemsScript));
         SaveGame.RunScript(nameof(SelfKnowledgeScript));
         return true;
