@@ -13,22 +13,7 @@ internal class TarotSpellSummonAnimal : Spell
     private TarotSpellSummonAnimal(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.MsgPrint("You concentrate on the image of an animal...");
-        if (SaveGame.DieRoll(5) > 2)
-        {
-            if (!SaveGame.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel, SaveGame.SingletonRepository.MonsterFilters.Get(nameof(AnimalRangerMonsterFilter)), false))
-            {
-                SaveGame.MsgPrint("No-one ever turns up.");
-            }
-        }
-        else if (SaveGame.SummonSpecific(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel, SaveGame.SingletonRepository.MonsterFilters.Get(nameof(AnimalMonsterFilter))))
-        {
-            SaveGame.MsgPrint("The summoned animal gets angry!");
-        }
-        else
-        {
-            SaveGame.MsgPrint("No-one ever turns up.");
-        }
+        SaveGame.RunScript(nameof(SummonAnimalScript));
     }
 
     public override string Name => "Summon Animal";

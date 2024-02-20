@@ -18,7 +18,19 @@ internal class SummonAnimalScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        if (!SaveGame.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel, SaveGame.SingletonRepository.MonsterFilters.Get(nameof(AnimalRangerMonsterFilter)), true))
+        SaveGame.MsgPrint("You concentrate on the image of an animal...");
+        if (SaveGame.DieRoll(5) > 2)
+        {
+            if (!SaveGame.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel, SaveGame.SingletonRepository.MonsterFilters.Get(nameof(AnimalRangerMonsterFilter)), false))
+            {
+                SaveGame.MsgPrint("No-one ever turns up.");
+            }
+        }
+        else if (SaveGame.SummonSpecific(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel, SaveGame.SingletonRepository.MonsterFilters.Get(nameof(AnimalMonsterFilter))))
+        {
+            SaveGame.MsgPrint("The summoned animal gets angry!");
+        }
+        else
         {
             SaveGame.MsgPrint("No-one ever turns up.");
         }

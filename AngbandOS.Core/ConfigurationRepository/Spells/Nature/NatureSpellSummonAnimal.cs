@@ -13,7 +13,7 @@ internal class NatureSpellSummonAnimal : Spell
     private NatureSpellSummonAnimal(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.RunScript(nameof(SummonAnimalScript));
+        SaveGame.RunScript(nameof(SummonFriendlyAnimalScript));
     }
 
     public override string Name => "Summon Animal";
