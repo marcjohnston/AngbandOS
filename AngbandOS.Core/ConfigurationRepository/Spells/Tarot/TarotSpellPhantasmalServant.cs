@@ -13,10 +13,7 @@ internal class TarotSpellPhantasmalServant : Spell
     private TarotSpellPhantasmalServant(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.MsgPrint(
-            SaveGame.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel * 3 / 2, SaveGame.SingletonRepository.MonsterFilters.Get(nameof(PhantomMonsterFilter)), false)
-                ? "'Your wish, master?'"
-                : "No-one ever turns up.");
+        SaveGame.RunScript(nameof(PhantasmalServantScript));
     }
 
     public override string Name => "Phantasmal Servant";
