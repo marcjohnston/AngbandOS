@@ -20,5 +20,5 @@ internal class EnchantWeaponStoreCommand : StoreCommand
         nameof(WeaponStoreFactory)
     };
 
-    protected override string ExecuteScriptName => nameof(EnchantWeaponScript);
+    protected override string ExecuteScriptName => nameof(EnchantWeapon4h4d0acScript);
 }
