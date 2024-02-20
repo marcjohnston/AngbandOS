@@ -13,8 +13,7 @@ internal class SorcerySpellDetectObjectsAndTreasure : Spell
     private SorcerySpellDetectObjectsAndTreasure(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.RunScript(nameof(DetectNormalObjectsScript));
-        SaveGame.RunScript(nameof(DetectTreasureAndGoldScript));
+        SaveGame.RunScript(nameof(DetectObjectsAndTreasureScript));
     }
 
     public override string Name => "Detect Objects and Treasure";
