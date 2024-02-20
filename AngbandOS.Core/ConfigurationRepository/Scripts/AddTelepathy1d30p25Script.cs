@@ -8,9 +8,9 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class MindVisionScript : Script, IScript
+internal class AddTelepathy1d30p25Script : Script, IScript
 {
-    private MindVisionScript(SaveGame saveGame) : base(saveGame) { }
+    private AddTelepathy1d30p25Script(SaveGame saveGame) : base(saveGame) { }
 
     /// <summary>
     /// Add between 25 and 55 turns of telepathy.

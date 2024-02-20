@@ -13,7 +13,7 @@ internal class CorporealSpellMindVision : Spell
     private CorporealSpellMindVision(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.RunScript(nameof(MindVisionScript));
+        SaveGame.RunScript(nameof(AddTelepathy1d30p25Script));
     }
 
     public override string Name => "Mind Vision";

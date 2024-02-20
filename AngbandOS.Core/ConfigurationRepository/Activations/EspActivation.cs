@@ -20,7 +20,7 @@ internal class EspActivation : Activation
 
     public override bool Activate()
     {
-        SaveGame.TimedTelepathy.AddTimer(SaveGame.DieRoll(30) + 25);
+        SaveGame.RunScript(nameof(AddTelepathy1d30p25Script));
         return true;
     }
 

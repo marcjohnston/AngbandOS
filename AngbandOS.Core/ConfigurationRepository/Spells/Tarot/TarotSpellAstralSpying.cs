@@ -13,7 +13,7 @@ internal class TarotSpellAstralSpying : Spell
     private TarotSpellAstralSpying(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.TimedTelepathy.AddTimer(SaveGame.DieRoll(30) + 25);
+        SaveGame.RunScript(nameof(AddTelepathy1d30p25Script));
     }
 
     public override string Name => "Astral Spying";
