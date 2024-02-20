@@ -13,7 +13,7 @@ internal class SorcerySpellAlchemy : Spell
     private SorcerySpellAlchemy(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.Alchemy();
+        SaveGame.RunScript(nameof(AlchemyScript));
     }
 
     public override string Name => "Alchemy";

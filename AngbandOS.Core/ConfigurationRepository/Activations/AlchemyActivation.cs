@@ -21,7 +21,7 @@ internal class AlchemyActivation : Activation
 
     public override bool Activate()
     {
-        SaveGame.Alchemy();
+        SaveGame.RunScript(nameof(AlchemyScript));
         return true;
     }
 

@@ -15,7 +15,7 @@ internal class MidasTchActiveMutation : Mutation
     {
         if (SaveGame.CheckIfRacialPowerWorks(10, 5, Ability.Intelligence, 12))
         {
-            SaveGame.Alchemy();
+            SaveGame.RunScript(nameof(AlchemyScript));
         }
     }
 
