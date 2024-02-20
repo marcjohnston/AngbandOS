@@ -7,21 +7,21 @@
 
 namespace AngbandOS.Core.Spells;
 
-[Serializable]
-public class SpellDefinition : IPoco
-{
-    public virtual string Key { get; set; }
+//[Serializable]
+//public class SpellDefinition : IPoco
+//{
+//    public virtual string Key { get; set; }
 
-    /// <summary>
-    /// Returns the name of the spell, as rendered to the SaveGame.
-    /// </summary>
-    public virtual string Name { get; set; }
+//    /// <summary>
+//    /// Returns the name of the spell, as rendered to the SaveGame.
+//    /// </summary>
+//    public virtual string Name { get; set; }
 
-    public bool IsValid()
-    {
-        throw new NotImplementedException();
-    }
-}
+//    public bool IsValid()
+//    {
+//        throw new NotImplementedException();
+//    }
+//}
 
 [Serializable]
 internal abstract class Spell : IGetKey<string>

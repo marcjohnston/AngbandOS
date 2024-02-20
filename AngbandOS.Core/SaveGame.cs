@@ -6609,7 +6609,7 @@ internal class SaveGame
     public bool ItemFilterHighLevelBook(Item item)
     {
         BookItemFactory? bookItemFactory = item.TryGetFactory<BookItemFactory>();
-        return bookItemFactory.IsHighLevelBook;
+        return bookItemFactory != null && bookItemFactory.IsHighLevelBook;
     }
 
     /// <summary>
