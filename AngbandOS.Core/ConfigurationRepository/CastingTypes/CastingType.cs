@@ -112,7 +112,7 @@ internal class CastingType : IGetKey<string>
             return;
         }
 
-        if (spell.ManaCost > SaveGame.Mana)
+        if (spell.ClassSpell.ManaCost > SaveGame.Mana)
         {
             string cast = SaveGame.BaseCharacterClass.SpellCastingType.CastVerb;
             SaveGame.MsgPrint($"You do not have enough mana to {cast} this {prayer}.");
@@ -137,13 +137,13 @@ internal class CastingType : IGetKey<string>
             spell.CastSpell();
         }
         SaveGame.EnergyUse = 100;
-        if (spell.ManaCost <= SaveGame.Mana)
+        if (spell.ClassSpell.ManaCost <= SaveGame.Mana)
         {
-            SaveGame.Mana -= spell.ManaCost;
+            SaveGame.Mana -= spell.ClassSpell.ManaCost;
         }
         else
         {
-            int oops = spell.ManaCost - SaveGame.Mana;
+            int oops = spell.ClassSpell.ManaCost - SaveGame.Mana;
             SaveGame.Mana = 0;
             SaveGame.FractionalMana = 0;
             SaveGame.MsgPrint("You faint from the effort!");

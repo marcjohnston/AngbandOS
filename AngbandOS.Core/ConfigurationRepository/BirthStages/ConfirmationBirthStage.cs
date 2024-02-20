@@ -31,9 +31,9 @@ internal class ConfirmationBirthStage : BirthStage
         {
             foreach (Spell spell in bookset)
             {
-                if (spell.Level < SaveGame.SpellFirst)
+                if (spell.ClassSpell.Level < SaveGame.SpellFirst)
                 {
-                    SaveGame.SpellFirst = spell.Level;
+                    SaveGame.SpellFirst = spell.ClassSpell.Level;
                 }
             }
         }

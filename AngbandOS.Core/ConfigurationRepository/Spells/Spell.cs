@@ -8,6 +8,22 @@
 namespace AngbandOS.Core.Spells;
 
 [Serializable]
+public class SpellDefinition : IPoco
+{
+    public virtual string Key { get; set; }
+
+    /// <summary>
+    /// Returns the name of the spell, as rendered to the SaveGame.
+    /// </summary>
+    public virtual string Name { get; set; }
+
+    public bool IsValid()
+    {
+        throw new NotImplementedException();
+    }
+}
+
+[Serializable]
 internal abstract class Spell : IGetKey<string>
 {
     protected readonly SaveGame SaveGame;
@@ -53,25 +69,7 @@ internal abstract class Spell : IGetKey<string>
     /// </summary>
     public bool Tried { get; private set; } = false;
 
-    public int FirstCastExperience
-    {
-        get; protected set;
-    }
-
-    public int Level
-    {
-        get; protected set;
-    }
-
-    public int ManaCost
-    {
-        get; protected set;
-    }
-
-    protected int BaseFailure
-    {
-        get; set;
-    }
+    public ClassSpell ClassSpell { get; private set; }
 
     /// <summary>
     /// Performs the spell.
@@ -86,9 +84,8 @@ internal abstract class Spell : IGetKey<string>
         // Check to see if this is the first time the spell 
         if (!Tried)
         {
-            int e = FirstCastExperience;
             Tried = true;
-            SaveGame.GainExperience(e * Level);
+            SaveGame.GainExperience(ClassSpell.FirstCastExperience * ClassSpell.Level);
         }
     }
 
@@ -110,12 +107,12 @@ internal abstract class Spell : IGetKey<string>
         {
             return 100;
         }
-        int chance = BaseFailure;
-        chance -= 3 * (SaveGame.ExperienceLevel - Level);
+        int chance = ClassSpell.BaseFailure;
+        chance -= 3 * (SaveGame.ExperienceLevel - ClassSpell.Level);
         chance -= 3 * (SaveGame.AbilityScores[baseCharacterClass.SpellStat].SpellFailureReduction - 1);
-        if (ManaCost > SaveGame.Mana)
+        if (ClassSpell.ManaCost > SaveGame.Mana)
         {
-            chance += 5 * (ManaCost - SaveGame.Mana);
+            chance += 5 * (ClassSpell.ManaCost - SaveGame.Mana);
         }
         int minfail = SaveGame.AbilityScores[baseCharacterClass.SpellStat].SpellMinFailChance;
         if (baseCharacterClass.ID != CharacterClass.Priest && baseCharacterClass.ID != CharacterClass.Druid &&
@@ -157,10 +154,10 @@ internal abstract class Spell : IGetKey<string>
     public void Initialize(BaseCharacterClass characterClass)
     {
         ClassSpell classSpell = SaveGame.SingletonRepository.ClassSpells.Get($"{characterClass.GetType().Name}.{this.GetType().Name}");
-        Level = classSpell.Level;
-        ManaCost = classSpell.ManaCost;
-        BaseFailure = classSpell.BaseFailure;
-        FirstCastExperience = classSpell.FirstCastExperience;
+        //Level = classSpell.Level;
+        //ManaCost = classSpell.ManaCost;
+        //BaseFailure = classSpell.BaseFailure;
+        //FirstCastExperience = classSpell.FirstCastExperience;
     }
 
     public string Title()
@@ -179,12 +176,16 @@ internal abstract class Spell : IGetKey<string>
             info = !Tried ? "untried" : LearnedDetails;
         }
 
-        return Level >= 99 ? "(illegible)" : $"{Name,-30} {Level,3} {ManaCost,4} {FailureChance(),3}% {info}";
+        return ClassSpell.Level >= 99 ? "(illegible)" : $"{Name,-30} {ClassSpell.Level,3} {ClassSpell.ManaCost,4} {FailureChance(),3}% {info}";
     }
 
+    /// <summary>
+    /// Renders debugging details about the spell.  Should not be used in-game.
+    /// </summary>
+    /// <returns></returns>
     public override string ToString()
     {
-        return $"{Name} ({Level}, {ManaCost}, {BaseFailure}, {FirstCastExperience})";
+        return $"{Name} ({ClassSpell.Level}, {ClassSpell.ManaCost}, {ClassSpell.BaseFailure}, {ClassSpell.FirstCastExperience})";
     }
 
     /// <summary>

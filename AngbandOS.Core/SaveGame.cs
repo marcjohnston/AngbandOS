@@ -7555,7 +7555,7 @@ internal class SaveGame
             }
             if (ask)
             {
-                string tmpVal = $"{prompt} {spell.Name} ({spell.ManaCost} mana, {spell.FailureChance()}% fail)? ";
+                string tmpVal = $"{prompt} {spell.Name} ({spell.ClassSpell.ManaCost} mana, {spell.FailureChance()}% fail)? ";
                 if (!GetCheck(tmpVal))
                 {
                     continue;
@@ -13624,7 +13624,7 @@ internal class SaveGame
 
     public bool SpellOkay(Spell sPtr, bool known)
     {
-        if (sPtr.Level > ExperienceLevel)
+        if (sPtr.ClassSpell.Level > ExperienceLevel)
         {
             return false;
         }
@@ -13644,7 +13644,7 @@ internal class SaveGame
     {
         int set = realm2 ? 1 : 0;
         Spell sPtr = Spells[set][spell % 32];
-        if (sPtr.Level > ExperienceLevel)
+        if (sPtr.ClassSpell.Level > ExperienceLevel)
         {
             return false;
         }
