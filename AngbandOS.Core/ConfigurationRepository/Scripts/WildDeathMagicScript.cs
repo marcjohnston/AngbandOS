@@ -33,30 +33,3 @@ internal class WildDeathMagicScript : Script, IScriptIntInt
         }
     }
 }
-
-[Serializable]
-internal class AnnihilationFailedScript : Script, IScript
-{
-    private AnnihilationFailedScript(SaveGame saveGame) : base(saveGame) { }
-
-    /// <summary>
-    /// Executes the script.
-    /// </summary>
-    /// <returns></returns>
-    public void ExecuteScript()
-    {
-        if (SaveGame.DieRoll(2) == 1)
-        {
-            SaveGame.Monsters[0].SanityBlast(true);
-        }
-        else
-        {
-            SaveGame.MsgPrint("It hurts!");
-            SaveGame.TakeHit(SaveGame.DiceRoll(4, 6), "a miscast Death spell");
-            if (SaveGame.DieRoll(6) == 1 && !SaveGame.HasHoldLife)
-            {
-                SaveGame.LoseExperience(30 * 250);
-            }
-        }
-    }
-}
