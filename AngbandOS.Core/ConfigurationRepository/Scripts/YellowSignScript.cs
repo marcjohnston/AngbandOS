@@ -18,11 +18,11 @@ internal class YellowSignScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        if (!GridOpenNoItem(MapY, MapX))
+        if (!SaveGame.GridOpenNoItem(SaveGame.MapY, SaveGame.MapX))
         {
-            MsgPrint("The object resists the spell.");
+            SaveGame.MsgPrint("The object resists the spell.");
             return;
         }
-        CaveSetFeat(MapY, MapX, SingletonRepository.Tiles.Get(nameof(YellowSignSigilTile)));
+        SaveGame.CaveSetFeat(SaveGame.MapY, SaveGame.MapX, SaveGame.SingletonRepository.Tiles.Get(nameof(YellowSignSigilTile)));
     }
 }

@@ -18,7 +18,7 @@ internal class QuarterstaffEririlFixedArtifact : FixedArtifact, IFixedArtifactAc
     public void ActivateItem(Item item)
     {
         SaveGame.MsgPrint("Your quarterstaff glows yellow...");
-        if (!SaveGame.IdentifyItem())
+        if (!SaveGame.RunSuccessfulScript(nameof(IdentifyItemScript)))
         {
             return;
         }

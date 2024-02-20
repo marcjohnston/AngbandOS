@@ -24,7 +24,7 @@ internal class PsychometryTalent : Talent
         }
         else
         {
-            SaveGame.IdentifyItem();
+            SaveGame.RunScript(nameof(IdentifyItemScript));
         }
     }
 

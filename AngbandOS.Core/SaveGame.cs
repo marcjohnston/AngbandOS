@@ -5210,38 +5210,6 @@ internal class SaveGame
         return TargetedProject(SingletonRepository.Projectiles.Get(nameof(OldHealProjectile)), dir, DiceRoll(4, 6), flg);
     }
 
-    public bool IdentifyItem()
-    {
-        if (!SelectItem(out Item oPtr, "Identify which item? ", true, true, true, null))
-        {
-            MsgPrint("You have nothing to identify.");
-            return false;
-        }
-        if (oPtr == null)
-        {
-            return false;
-        }
-        oPtr.BecomeFlavorAware();
-        oPtr.BecomeKnown();
-        SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
-        SingletonRepository.FlaggedActions.Get(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
-        string oName = oPtr.Description(true, 3);
-
-        MsgPrint($"{oPtr.DescribeLocation()}: {oName} ({oPtr.Label}).");
-
-        // Check to see if the player is carrying the item and it is stompable.
-        if (oPtr.IsInInventory && oPtr.Stompable())
-        {
-            string itemName = oPtr.Description(true, 3);
-            MsgPrint($"You destroy {oName}.");
-            int amount = oPtr.Count;
-            oPtr.ItemIncrease(-amount);
-            oPtr.ItemOptimize();
-        }
-
-        return true;
-    }
-
     public bool LightArea(int dam, int rad)
     {
         ProjectionFlag flg = ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectKill;

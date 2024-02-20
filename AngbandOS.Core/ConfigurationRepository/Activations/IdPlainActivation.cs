@@ -20,7 +20,7 @@ internal class IdPlainActivation : Activation
 
     public override bool Activate()
     {
-        return SaveGame.IdentifyItem();
+        return SaveGame.RunSuccessfulScript(nameof(IdentifyItemScript));
     }
 
     public override int RechargeTime() => 10;

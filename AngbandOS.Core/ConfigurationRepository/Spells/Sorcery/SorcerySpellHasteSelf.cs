@@ -13,14 +13,7 @@ internal class SorcerySpellHasteSelf : Spell
     private SorcerySpellHasteSelf(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        if (SaveGame.TimedHaste.TurnsRemaining == 0)
-        {
-            SaveGame.TimedHaste.SetTimer(SaveGame.DieRoll(20 + SaveGame.ExperienceLevel) + SaveGame.ExperienceLevel);
-        }
-        else
-        {
-            SaveGame.TimedHaste.AddTimer(SaveGame.DieRoll(5));
-        }
+        SaveGame.RunScript(nameof(HasteScript));
     }
 
     public override string Name => "Haste Self";

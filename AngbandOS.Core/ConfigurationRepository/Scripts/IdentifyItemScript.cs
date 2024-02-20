@@ -8,16 +8,48 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class IdentifyItemScript : Script, IScript
+internal class IdentifyItemScript : Script, IScript, ISuccessfulScript
 {
     private IdentifyItemScript(SaveGame saveGame) : base(saveGame) { }
 
+    public bool ExecuteSuccessfulScript()
+    {
+        if (!SaveGame.SelectItem(out Item oPtr, "Identify which item? ", true, true, true, null))
+        {
+            SaveGame.MsgPrint("You have nothing to identify.");
+            return false;
+        }
+        if (oPtr == null)
+        {
+            return false;
+        }
+        oPtr.BecomeFlavorAware();
+        oPtr.BecomeKnown();
+        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
+        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
+        string oName = oPtr.Description(true, 3);
+
+        SaveGame.MsgPrint($"{oPtr.DescribeLocation()}: {oName} ({oPtr.Label}).");
+
+        // Check to see if the player is carrying the item and it is stompable.
+        if (oPtr.IsInInventory && oPtr.Stompable())
+        {
+            string itemName = oPtr.Description(true, 3);
+            SaveGame.MsgPrint($"You destroy {oName}.");
+            int amount = oPtr.Count;
+            oPtr.ItemIncrease(-amount);
+            oPtr.ItemOptimize();
+        }
+
+        return true;
+    }
+
     /// <summary>
-    /// Executes the script.
+    /// Executes the successful script and disposes of the result.
     /// </summary>
     /// <returns></returns>
     public void ExecuteScript()
     {
-        SaveGame.IdentifyItem();
+        ExecuteSuccessfulScript();
     }
 }
