@@ -13,22 +13,7 @@ internal class TarotSpellSummonReaver : Spell
     private TarotSpellSummonReaver(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.MsgPrint("You concentrate on the image of a Black Reaver...");
-        if (SaveGame.DieRoll(10) > 3)
-        {
-            if (!SaveGame.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel, SaveGame.SingletonRepository.MonsterFilters.Get(nameof(ReaverMonsterFilter)), true))
-            {
-                SaveGame.MsgPrint("No-one ever turns up.");
-            }
-        }
-        else if (SaveGame.SummonSpecific(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel, SaveGame.SingletonRepository.MonsterFilters.Get(nameof(ReaverMonsterFilter))))
-        {
-            SaveGame.MsgPrint("The summoned Black Reaver gets angry!");
-        }
-        else
-        {
-            SaveGame.MsgPrint("No-one ever turns up.");
-        }
+        SaveGame.RunScript(nameof(SummonReaverScript));
     }
 
     public override string Name => "Summon Reaver";
