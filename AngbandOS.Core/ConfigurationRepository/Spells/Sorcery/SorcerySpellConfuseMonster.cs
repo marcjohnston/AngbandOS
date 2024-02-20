@@ -13,11 +13,7 @@ internal class SorcerySpellConfuseMonster : Spell
     private SorcerySpellConfuseMonster(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        if (!SaveGame.GetDirectionWithAim(out int dir))
-        {
-            return;
-        }
-        SaveGame.ConfuseMonster(dir, SaveGame.ExperienceLevel * 3 / 2);
+        SaveGame.RunScript(nameof(ConfuseMonsterScript));
     }
 
     public override string Name => "Confuse Monster";
