@@ -5,17 +5,23 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Spells.Sorcery;
+namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class SorcerySpellSlowMonster : Spell
+internal class SlowMonsterScript : Script, IScript
 {
-    private SorcerySpellSlowMonster(SaveGame saveGame) : base(saveGame) { }
-    public override void Cast()
-    {
-        SaveGame.RunScript(nameof(SlowMonsterScript));
-    }
+    private SlowMonsterScript(SaveGame saveGame) : base(saveGame) { }
 
-    public override string Name => "Slow Monster";
-    
+    /// <summary>
+    /// Executes the script.
+    /// </summary>
+    /// <returns></returns>
+    public void ExecuteScript()
+    {
+        if (!SaveGame.GetDirectionWithAim(out int dir))
+        {
+            return;
+        }
+        SaveGame.SlowMonster(dir);
+    }
 }
