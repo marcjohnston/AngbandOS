@@ -13,7 +13,7 @@ internal class CorporealSpellBlink : Spell
     private CorporealSpellBlink(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.RunScriptInt(nameof(PhaseDoorScript), 10);
+        SaveGame.RunScriptInt(nameof(TeleportSelfScript), 10);
     }
 
     public override string Name => "Blink";

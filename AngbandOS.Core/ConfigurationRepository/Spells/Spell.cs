@@ -154,10 +154,6 @@ internal abstract class Spell : IGetKey<string>
     public void Initialize(BaseCharacterClass characterClass)
     {
         ClassSpell classSpell = SaveGame.SingletonRepository.ClassSpells.Get($"{characterClass.GetType().Name}.{this.GetType().Name}");
-        //Level = classSpell.Level;
-        //ManaCost = classSpell.ManaCost;
-        //BaseFailure = classSpell.BaseFailure;
-        //FirstCastExperience = classSpell.FirstCastExperience;
     }
 
     public string Title()

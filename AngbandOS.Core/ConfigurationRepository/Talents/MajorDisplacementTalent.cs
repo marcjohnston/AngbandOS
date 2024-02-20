@@ -18,7 +18,7 @@ internal class MajorDisplacementTalent : Talent
 
     public override void Use()
     {
-        SaveGame.RunScriptInt(nameof(PhaseDoorScript), SaveGame.ExperienceLevel * 5);
+        SaveGame.RunScriptInt(nameof(TeleportSelfScript), SaveGame.ExperienceLevel * 5);
         if (SaveGame.ExperienceLevel > 29)
         {
             SaveGame.RunScriptInt(nameof(BanishMonstersScript), SaveGame.ExperienceLevel);

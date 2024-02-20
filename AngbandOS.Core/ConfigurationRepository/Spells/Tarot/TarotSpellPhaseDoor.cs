@@ -13,7 +13,7 @@ internal class TarotSpellPhaseDoor : Spell
     private TarotSpellPhaseDoor(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.RunScriptInt(nameof(PhaseDoorScript), 10);
+        SaveGame.RunScript(nameof(PhaseDoorScript));
     }
 
     public override string Name => "Phase Door";

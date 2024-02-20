@@ -30,7 +30,7 @@ internal class CreateDimensionDoorScript : Script, IScript
         {
             SaveGame.MsgPrint("You fail to exit the astral plane correctly!");
             SaveGame.Energy -= 100;
-            SaveGame.RunScriptInt(nameof(PhaseDoorScript), 10);
+            SaveGame.RunScriptInt(nameof(TeleportSelfScript), 10);
         }
         else
         {

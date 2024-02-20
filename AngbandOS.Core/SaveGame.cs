@@ -3861,14 +3861,14 @@ internal class SaveGame
                     if (oPtr.IdentCursed && !HasAntiTeleport)
                     {
                         Disturb(true);
-                        RunScriptInt(nameof(PhaseDoorScript), 40);
+                        RunScriptInt(nameof(TeleportSelfScript), 40);
                     }
                     else
                     {
                         if (GetCheck("Teleport? "))
                         {
                             Disturb(false);
-                            RunScriptInt(nameof(PhaseDoorScript), 50);
+                            RunScriptInt(nameof(TeleportSelfScript), 50);
                         }
                     }
                 }
@@ -4226,7 +4226,7 @@ internal class SaveGame
             case 2:
             case 3:
                 {
-                    RunScriptInt(nameof(PhaseDoorScript), 200);
+                    RunScriptInt(nameof(TeleportSelfScript), 200);
                     break;
                 }
             case 4:

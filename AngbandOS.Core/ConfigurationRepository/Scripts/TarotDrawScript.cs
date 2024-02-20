@@ -76,7 +76,7 @@ internal class TarotDrawScript : Script, IScript
         else if (die < 40)
         {
             SaveGame.MsgPrint("It's a teleport card.");
-            SaveGame.RunScriptInt(nameof(PhaseDoorScript), 10);
+            SaveGame.RunScriptInt(nameof(TeleportSelfScript), 10);
         }
         else if (die < 42)
         {
@@ -86,12 +86,12 @@ internal class TarotDrawScript : Script, IScript
         else if (die < 47)
         {
             SaveGame.MsgPrint("It's a teleport card.");
-            SaveGame.RunScriptInt(nameof(PhaseDoorScript), 100);
+            SaveGame.RunScriptInt(nameof(TeleportSelfScript), 100);
         }
         else if (die < 52)
         {
             SaveGame.MsgPrint("It's a teleport card.");
-            SaveGame.RunScriptInt(nameof(PhaseDoorScript), 200);
+            SaveGame.RunScriptInt(nameof(TeleportSelfScript), 200);
         }
         else if (die < 60)
         {
@@ -198,18 +198,18 @@ internal class TarotDrawScript : Script, IScript
             case 1:
             case 2:
             case 3:
-                SaveGame.RunScriptInt(nameof(PhaseDoorScript), 10);
+                SaveGame.RunScriptInt(nameof(TeleportSelfScript), 10);
                 break;
 
             case 4:
             case 5:
             case 6:
-                SaveGame.RunScriptInt(nameof(PhaseDoorScript), 100);
+                SaveGame.RunScriptInt(nameof(TeleportSelfScript), 100);
                 break;
 
             case 7:
             case 8:
-                SaveGame.RunScriptInt(nameof(PhaseDoorScript), 200);
+                SaveGame.RunScriptInt(nameof(TeleportSelfScript), 200);
                 break;
 
             case 9:

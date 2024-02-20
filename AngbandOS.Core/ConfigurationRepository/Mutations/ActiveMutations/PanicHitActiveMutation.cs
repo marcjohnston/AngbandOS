@@ -26,7 +26,7 @@ internal class PanicHitActiveMutation : Mutation
         if (SaveGame.Grid[y][x].MonsterIndex != 0)
         {
             SaveGame.PlayerAttackMonster(y, x);
-            SaveGame.RunScriptInt(nameof(PhaseDoorScript), 30);
+            SaveGame.RunScriptInt(nameof(TeleportSelfScript), 30);
         }
         else
         {

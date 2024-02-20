@@ -12,7 +12,9 @@ internal class PhaseDoorScript : Script, IScript
 {
     private PhaseDoorScript(SaveGame saveGame) : base(saveGame) { }
 
-
+    /// <summary>
+    /// Randomly teleports the player within a range of 10 tiles.
+    /// </summary>
     public void ExecuteScript()
     {
         SaveGame.RunScriptInt(nameof(TeleportSelfScript), 10);

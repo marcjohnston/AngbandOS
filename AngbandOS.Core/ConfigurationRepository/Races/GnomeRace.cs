@@ -71,7 +71,7 @@ internal class GnomeRace : Race
         if (SaveGame.CheckIfRacialPowerWorks(5, 5 + (SaveGame.ExperienceLevel / 5), Ability.Intelligence, 12))
         {
             SaveGame.MsgPrint("Blink!");
-            SaveGame.RunScriptInt(nameof(PhaseDoorScript), 10 + SaveGame.ExperienceLevel);
+            SaveGame.RunScriptInt(nameof(TeleportSelfScript), 10 + SaveGame.ExperienceLevel);
         }
     }
 }

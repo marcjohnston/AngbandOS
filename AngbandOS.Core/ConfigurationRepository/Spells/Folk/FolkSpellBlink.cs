@@ -13,7 +13,7 @@ internal class FolkSpellBlink : Spell
     private FolkSpellBlink(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.RunScriptInt(nameof(PhaseDoorScript), 10);
+        SaveGame.RunScriptInt(nameof(TeleportSelfScript), 10);
     }
 
     public override string Name => "Blink";

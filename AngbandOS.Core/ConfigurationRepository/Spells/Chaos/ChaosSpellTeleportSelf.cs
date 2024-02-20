@@ -13,7 +13,7 @@ internal class ChaosSpellTeleportSelf : Spell
     private ChaosSpellTeleportSelf(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.RunScriptInt(nameof(PhaseDoorScript), SaveGame.ExperienceLevel * 5);
+        SaveGame.RunScriptInt(nameof(TeleportSelfScript), SaveGame.ExperienceLevel * 5);
     }
 
     public override void CastFailed()

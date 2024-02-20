@@ -20,6 +20,6 @@ internal class TeleportRuneScript : Script, IScript
     {
         // Teleport the player up to 100 squares
         SaveGame.MsgPrint("You hit a teleport trap!");
-        SaveGame.RunScriptInt(nameof(PhaseDoorScript), 100);
+        SaveGame.RunScriptInt(nameof(TeleportSelfScript), 100);
     }
 }

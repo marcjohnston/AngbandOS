@@ -25,18 +25,18 @@ internal class WildChaoticMagicScript : Script, IScriptInt
             case 1:
             case 2:
             case 3:
-                SaveGame.RunScriptInt(nameof(PhaseDoorScript), 10);
+                SaveGame.RunScriptInt(nameof(TeleportSelfScript), 10);
                 break;
 
             case 4:
             case 5:
             case 6:
-                SaveGame.RunScriptInt(nameof(PhaseDoorScript), 100);
+                SaveGame.RunScriptInt(nameof(TeleportSelfScript), 100);
                 break;
 
             case 7:
             case 8:
-                SaveGame.RunScriptInt(nameof(PhaseDoorScript), 200);
+                SaveGame.RunScriptInt(nameof(TeleportSelfScript), 200);
                 break;
 
             case 9:

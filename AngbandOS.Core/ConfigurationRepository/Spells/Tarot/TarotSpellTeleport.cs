@@ -13,7 +13,7 @@ internal class TarotSpellTeleport : Spell
     private TarotSpellTeleport(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.RunScriptInt(nameof(PhaseDoorScript), SaveGame.ExperienceLevel * 4);
+        SaveGame.RunScriptInt(nameof(TeleportSelfScript), SaveGame.ExperienceLevel * 4);
     }
 
     public override string Name => "Teleport";

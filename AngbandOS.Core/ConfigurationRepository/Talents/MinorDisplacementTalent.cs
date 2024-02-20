@@ -20,7 +20,7 @@ internal class MinorDisplacementTalent : Talent
     {
         if (SaveGame.ExperienceLevel < 25)
         {
-            SaveGame.RunScriptInt(nameof(PhaseDoorScript), 10);
+            SaveGame.RunScriptInt(nameof(TeleportSelfScript), 10);
         }
         else
         {
@@ -34,7 +34,7 @@ internal class MinorDisplacementTalent : Talent
             {
                 SaveGame.MsgPrint("Something disrupts your concentration!");
                 SaveGame.Energy -= 100;
-                SaveGame.RunScriptInt(nameof(PhaseDoorScript), 20);
+                SaveGame.RunScriptInt(nameof(TeleportSelfScript), 20);
             }
             else
             {
