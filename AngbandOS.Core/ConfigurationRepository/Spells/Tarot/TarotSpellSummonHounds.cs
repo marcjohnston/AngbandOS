@@ -13,22 +13,7 @@ internal class TarotSpellSummonHounds : Spell
     private TarotSpellSummonHounds(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.MsgPrint("You concentrate on the image of a hound...");
-        if (SaveGame.DieRoll(5) > 2)
-        {
-            if (!SaveGame.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel, SaveGame.SingletonRepository.MonsterFilters.Get(nameof(HoundMonsterFilter)), true))
-            {
-                SaveGame.MsgPrint("No-one ever turns up.");
-            }
-        }
-        else if (SaveGame.SummonSpecific(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel, SaveGame.SingletonRepository.MonsterFilters.Get(nameof(HoundMonsterFilter))))
-        {
-            SaveGame.MsgPrint("The summoned hounds get angry!");
-        }
-        else
-        {
-            SaveGame.MsgPrint("No-one ever turns up.");
-        }
+        SaveGame.RunScript(nameof(SummonHoundsScript));
     }
 
     public override string Name => "Summon Hounds";
