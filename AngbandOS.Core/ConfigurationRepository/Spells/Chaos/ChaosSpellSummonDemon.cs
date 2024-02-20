@@ -13,7 +13,7 @@ internal class ChaosSpellSummonDemon : Spell
     private ChaosSpellSummonDemon(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.RunScript(nameof(SummonDemonScript));
+        SaveGame.RunScript(nameof(SummonDemonServantScript));
     }
 
     public override void CastFailed()

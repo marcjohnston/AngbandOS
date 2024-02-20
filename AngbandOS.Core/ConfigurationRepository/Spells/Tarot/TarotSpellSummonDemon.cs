@@ -13,22 +13,7 @@ internal class TarotSpellSummonDemon : Spell
     private TarotSpellSummonDemon(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.MsgPrint("You concentrate on the image of a demon...");
-        if (SaveGame.DieRoll(10) > 3)
-        {
-            if (!SaveGame.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel, SaveGame.SingletonRepository.MonsterFilters.Get(nameof(DemonMonsterFilter)), true))
-            {
-                SaveGame.MsgPrint("No-one ever turns up.");
-            }
-        }
-        else if (SaveGame.SummonSpecific(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel, SaveGame.SingletonRepository.MonsterFilters.Get(nameof(DemonMonsterFilter))))
-        {
-            SaveGame.MsgPrint("The summoned demon gets angry!");
-        }
-        else
-        {
-            SaveGame.MsgPrint("No-one ever turns up.");
-        }
+        SaveGame.RunScript(nameof(SummonDemonScript));
     }
 
     public override string Name => "Summon Demon";

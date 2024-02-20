@@ -13,34 +13,26 @@ internal class SummonDemonScript : Script, IScript
     private SummonDemonScript(SaveGame saveGame) : base(saveGame) { }
 
     /// <summary>
-    /// Summons a demon monster.
+    /// Executes the script.
     /// </summary>
     /// <returns></returns>
     public void ExecuteScript()
     {
-        if (SaveGame.DieRoll(3) == 1)
+        SaveGame.MsgPrint("You concentrate on the image of a demon...");
+        if (SaveGame.DieRoll(10) > 3)
         {
-            if (SaveGame.SummonSpecific(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel * 3 / 2, SaveGame.SingletonRepository.MonsterFilters.Get(nameof(DemonMonsterFilter))))
-            {
-                SaveGame.MsgPrint("The area fills with a stench of sulphur and brimstone.");
-                SaveGame.MsgPrint("'NON SERVIAM! Wretch! I shall feast on thy mortal soul!'");
-            }
-            else
+            if (!SaveGame.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel, SaveGame.SingletonRepository.MonsterFilters.Get(nameof(DemonMonsterFilter)), true))
             {
                 SaveGame.MsgPrint("No-one ever turns up.");
             }
         }
+        else if (SaveGame.SummonSpecific(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel, SaveGame.SingletonRepository.MonsterFilters.Get(nameof(DemonMonsterFilter))))
+        {
+            SaveGame.MsgPrint("The summoned demon gets angry!");
+        }
         else
         {
-            if (SaveGame.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel * 3 / 2, SaveGame.SingletonRepository.MonsterFilters.Get(nameof(DemonMonsterFilter)), SaveGame.ExperienceLevel == 50))
-            {
-                SaveGame.MsgPrint("The area fills with a stench of sulphur and brimstone.");
-                SaveGame.MsgPrint("'What is thy bidding... Master?'");
-            }
-            else
-            {
-                SaveGame.MsgPrint("No-one ever turns up.");
-            }
+            SaveGame.MsgPrint("No-one ever turns up.");
         }
     }
 }
