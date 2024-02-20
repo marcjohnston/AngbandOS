@@ -13,11 +13,7 @@ internal class SorcerySpellStasis : Spell
     private SorcerySpellStasis(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        if (!SaveGame.GetDirectionWithAim(out int dir))
-        {
-            return;
-        }
-        SaveGame.StasisMonster(dir);
+        SaveGame.RunScript(nameof(StasisMonsterScript));
     }
 
     public override string Name => "Stasis";
