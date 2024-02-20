@@ -13,7 +13,7 @@ internal class DeathSpellBlackSleep : Spell
     private DeathSpellBlackSleep(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.RunScript(nameof(BlackSleepScript));
+        SaveGame.RunScript(nameof(SleepMonsterScript));
     }
 
     public override void CastFailed()

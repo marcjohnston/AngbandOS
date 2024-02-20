@@ -13,11 +13,7 @@ internal class SorcerySpellSleepMonster : Spell
     private SorcerySpellSleepMonster(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        if (!SaveGame.GetDirectionWithAim(out int dir))
-        {
-            return;
-        }
-        SaveGame.SleepMonster(dir);
+        SaveGame.RunScript(nameof(SleepMonsterScript));
     }
 
     public override string Name => "Sleep Monster";

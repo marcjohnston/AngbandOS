@@ -8,9 +8,9 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class BlackSleepScript : Script, IScript
+internal class SleepMonsterScript : Script, IScript
 {
-    private BlackSleepScript(SaveGame saveGame) : base(saveGame) { }
+    private SleepMonsterScript(SaveGame saveGame) : base(saveGame) { }
 
     /// <summary>
     /// Puts a monster to sleep in a chosen direction.
