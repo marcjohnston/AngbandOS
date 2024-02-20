@@ -13,11 +13,7 @@ internal class NatureSpellWhirlpool : Spell
     private NatureSpellWhirlpool(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        if (!SaveGame.GetDirectionWithAim(out int dir))
-        {
-            return;
-        }
-        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(WaterProjectile)), dir, 100 + SaveGame.ExperienceLevel, (SaveGame.ExperienceLevel / 12) + 1);
+        SaveGame.RunScript(nameof(WhirlpoolScript));
     }
 
     public override string Name => "Whirlpool";
