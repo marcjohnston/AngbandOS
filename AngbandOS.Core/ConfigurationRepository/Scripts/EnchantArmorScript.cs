@@ -8,40 +8,16 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class EnhanceArmorScript : Script, IScript, IStoreScript
+internal class EnchantArmorScript : Script, IScript
 {
-    private EnhanceArmorScript(SaveGame saveGame) : base(saveGame) { }
+    private EnchantArmorScript(SaveGame saveGame) : base(saveGame) { }
 
     /// <summary>
-    /// Executes the enchange armor script.  Does not modify any of the store flags.
-    /// </summary>
-    /// <returns></returns>
-    public void ExecuteStoreScript(StoreCommandEvent storeCommandEvent)
-    {
-        ExecuteScript();
-    }
-
-    /// <summary>
-    /// Executes the enchant armor script.
+    /// Executes the script.
     /// </summary>
     /// <returns></returns>
     public void ExecuteScript()
     {
-        if (!SaveGame.ServiceHaggle(400, out int price))
-        {
-            if (price > SaveGame.Gold)
-            {
-                SaveGame.MsgPrint("You do not have the gold!");
-            }
-            else
-            {
-                SaveGame.Gold -= price;
-                SaveGame.SayComment_1();
-                SaveGame.PlaySound(SoundEffectEnum.StoreTransaction);
-                SaveGame.StorePrtGold();
-                SaveGame.EnchantItem(0, 0, 4);
-            }
-            SaveGame.HandleStuff();
-        }
+        SaveGame.EnchantItem(0, 0, SaveGame.RandomLessThan(3) + 2);
     }
 }
