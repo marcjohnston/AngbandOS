@@ -37,7 +37,7 @@ internal class LongSwordOfKarakalFixedArtifact : FixedArtifact, IFixedArtifactAc
 
             case 11:
             case 12:
-                SaveGame.StairCreation();
+                SaveGame.RunScript(nameof(CreateStairsScript));
                 break;
 
             default:
