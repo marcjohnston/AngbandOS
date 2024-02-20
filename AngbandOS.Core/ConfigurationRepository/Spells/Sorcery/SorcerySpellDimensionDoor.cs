@@ -13,24 +13,7 @@ internal class SorcerySpellDimensionDoor : Spell
     private SorcerySpellDimensionDoor(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.MsgPrint("You open a dimensional gate. Choose a destination.");
-        if (!SaveGame.TgtPt(out int ii, out int ij))
-        {
-            return;
-        }
-        SaveGame.Energy -= 60 - SaveGame.ExperienceLevel;
-        if (!SaveGame.GridPassableNoCreature(ij, ii) || SaveGame.Grid[ij][ii].TileFlags.IsSet(GridTile.InVault) ||
-            SaveGame.Distance(ij, ii, SaveGame.MapY, SaveGame.MapX) > SaveGame.ExperienceLevel + 2 ||
-            SaveGame.RandomLessThan(SaveGame.ExperienceLevel * SaveGame.ExperienceLevel / 2) == 0)
-        {
-            SaveGame.MsgPrint("You fail to exit the astral plane correctly!");
-            SaveGame.Energy -= 100;
-            SaveGame.RunScriptInt(nameof(PhaseDoorScript), 10);
-        }
-        else
-        {
-            SaveGame.TeleportPlayerTo(ij, ii);
-        }
+        SaveGame.RunScript(nameof(CreateDimensionDoorScript));
     }
 
     public override string Name => "Dimension Door";
