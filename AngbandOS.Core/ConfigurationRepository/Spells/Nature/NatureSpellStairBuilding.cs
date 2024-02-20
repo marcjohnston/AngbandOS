@@ -13,7 +13,7 @@ internal class NatureSpellStairBuilding : Spell
     private NatureSpellStairBuilding(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.StairCreation();
+        SaveGame.RunScript(nameof(CreateStairsScript));
     }
 
     public override string Name => "Stair Building";

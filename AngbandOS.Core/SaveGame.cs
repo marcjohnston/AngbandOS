@@ -5645,32 +5645,6 @@ internal class SaveGame
         return TargetedProject(SingletonRepository.Projectiles.Get(nameof(OldSpeedProjectile)), dir, ExperienceLevel, flg);
     }
 
-    public void StairCreation()
-    {
-        if (!CaveValidBold(MapY, MapX))
-        {
-            MsgPrint("The object resists the spell.");
-            return;
-        }
-        DeleteObject(MapY, MapX);
-        if (CurrentDepth <= 0)
-        {
-            CaveSetFeat(MapY, MapX, SingletonRepository.Tiles.Get(nameof(DownStaircaseTile)));
-        }
-        else if (IsQuest(CurrentDepth) || CurrentDepth >= CurDungeon.MaxLevel)
-        {
-            CaveSetFeat(MapY, MapX, CurDungeon.Tower ? SingletonRepository.Tiles.Get(nameof(DownStaircaseTile)) : SingletonRepository.Tiles.Get(nameof(UpStaircaseTile)));
-        }
-        else if (RandomLessThan(100) < 50)
-        {
-            CaveSetFeat(MapY, MapX, SingletonRepository.Tiles.Get(nameof(DownStaircaseTile)));
-        }
-        else
-        {
-            CaveSetFeat(MapY, MapX, SingletonRepository.Tiles.Get(nameof(UpStaircaseTile)));
-        }
-    }
-
     public void StasisMonster(int dir)
     {
         ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;
