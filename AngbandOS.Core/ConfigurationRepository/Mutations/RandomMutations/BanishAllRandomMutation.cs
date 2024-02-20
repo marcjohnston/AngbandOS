@@ -24,7 +24,7 @@ internal class BanishAllRandomMutation : Mutation
         }
         SaveGame.Disturb(false);
         SaveGame.MsgPrint("You suddenly feel almost lonely.");
-        SaveGame.BanishMonsters(100);
+        SaveGame.RunScriptInt(nameof(BanishMonstersScript), 100);
         SaveGame.MsgPrint(null);
     }
 }

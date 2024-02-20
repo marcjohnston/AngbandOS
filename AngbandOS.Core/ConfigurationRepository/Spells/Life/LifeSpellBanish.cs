@@ -13,7 +13,7 @@ internal class LifeSpellBanish : Spell
     private LifeSpellBanish(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.RunScript(nameof(BanishScript));
+        SaveGame.RunScript(nameof(BanishEvil100Script));
     }
 
     public override string Name => "Banish";

@@ -13,11 +13,7 @@ internal class SorcerySpellTeleportAway : Spell
     private SorcerySpellTeleportAway(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        if (!SaveGame.GetDirectionWithAim(out int dir))
-        {
-            return;
-        }
-        SaveGame.FireBeam(SaveGame.SingletonRepository.Projectiles.Get(nameof(TeleportAwayAllProjectile)), dir, SaveGame.ExperienceLevel);
+        SaveGame.RunScript(nameof(TeleportOtherScript));
     }
 
     public override string Name => "Teleport Away";

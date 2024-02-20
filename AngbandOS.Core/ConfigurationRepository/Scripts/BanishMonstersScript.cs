@@ -8,18 +8,16 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class EvocationScript : Script, IScript
+internal class BanishMonstersScript : Script, IScriptInt
 {
-    private EvocationScript(SaveGame saveGame) : base(saveGame) { }
+    private BanishMonstersScript(SaveGame saveGame) : base(saveGame) { }
 
     /// <summary>
-    /// Displels, turns and banishs monsters with damage of the player experience * 4.
+    /// Executes the script and returns a success result.
     /// </summary>
     /// <returns></returns>
-    public void ExecuteScript()
+    public void ExecuteScriptInt(int dist)
     {
-        SaveGame.DispelMonsters(SaveGame.ExperienceLevel * 4);
-        SaveGame.TurnMonsters(SaveGame.ExperienceLevel * 4);
-        SaveGame.RunScriptInt(nameof(BanishMonstersScript), SaveGame.ExperienceLevel * 4);
+        SaveGame.ProjectAtAllInLos(SaveGame.SingletonRepository.Projectiles.Get(nameof(TeleportAwayAllProjectile)), dist);
     }
 }

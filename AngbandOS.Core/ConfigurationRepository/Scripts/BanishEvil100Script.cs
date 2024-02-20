@@ -8,9 +8,9 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class BanishScript : Script, IScript
+internal class BanishEvil100Script : Script, IScript
 {
-    private BanishScript(SaveGame saveGame) : base(saveGame) { }
+    private BanishEvil100Script(SaveGame saveGame) : base(saveGame) { }
 
     /// <summary>
     /// Executes the script.

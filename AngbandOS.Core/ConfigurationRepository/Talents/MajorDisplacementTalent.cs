@@ -21,7 +21,7 @@ internal class MajorDisplacementTalent : Talent
         SaveGame.RunScriptInt(nameof(PhaseDoorScript), SaveGame.ExperienceLevel * 5);
         if (SaveGame.ExperienceLevel > 29)
         {
-            SaveGame.BanishMonsters(SaveGame.ExperienceLevel);
+            SaveGame.RunScriptInt(nameof(BanishMonstersScript), SaveGame.ExperienceLevel);
         }
     }
 

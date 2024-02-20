@@ -13,7 +13,7 @@ internal class TarotSpellBanish : Spell
     private TarotSpellBanish(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.BanishMonsters(SaveGame.ExperienceLevel * 4);
+        SaveGame.RunScriptInt(nameof(BanishMonstersScript), SaveGame.ExperienceLevel * 4);
     }
 
     public override string Name => "Banish";

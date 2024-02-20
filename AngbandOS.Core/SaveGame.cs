@@ -4264,11 +4264,6 @@ internal class SaveGame
         return ProjectAtAllInLos(SingletonRepository.Projectiles.Get(nameof(TeleportAwayEvilProjectile)), dist);
     }
 
-    public void BanishMonsters(int dist)
-    {
-        ProjectAtAllInLos(SingletonRepository.Projectiles.Get(nameof(TeleportAwayAllProjectile)), dist);
-    }
-
     public void Carnage(bool playerCast)
     {
         int msec = Constants.DelayFactorInMilliseconds;
