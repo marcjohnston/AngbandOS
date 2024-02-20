@@ -13,7 +13,7 @@ internal class DeathSpellWordOfDeath : Spell
     private DeathSpellWordOfDeath(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.RunScript(nameof(WordOfDeathScript));
+        SaveGame.RunScript(nameof(DispelLivingScript));
     }
 
     public override void CastFailed()

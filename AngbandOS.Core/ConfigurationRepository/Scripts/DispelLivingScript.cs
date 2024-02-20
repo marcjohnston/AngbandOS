@@ -8,16 +8,24 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class WordOfDeathScript : Script, IScript
+internal class DispelLivingScript : Script, IScript, IScriptInt
 {
-    private WordOfDeathScript(SaveGame saveGame) : base(saveGame) { }
+    private DispelLivingScript(SaveGame saveGame) : base(saveGame) { }
 
     /// <summary>
     /// Dispels living.
     /// </summary>
     /// <returns></returns>
+    public void ExecuteScriptInt(int dam)
+    {
+        SaveGame.ProjectAtAllInLos(SaveGame.SingletonRepository.Projectiles.Get(nameof(DispLivingProjectile)), dam);
+    }
+
+    /// <summary>
+    /// Executes the Int script with a predefined damage of 3x the players experience.
+    /// </summary>
     public void ExecuteScript()
     {
-        SaveGame.DispelLiving(SaveGame.ExperienceLevel * 3);
+        ExecuteScriptInt(SaveGame.ExperienceLevel * 3);
     }
 }

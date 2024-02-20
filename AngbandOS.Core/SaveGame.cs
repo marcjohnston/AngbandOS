@@ -4629,11 +4629,6 @@ internal class SaveGame
         ProjectAtAllInLos(SingletonRepository.Projectiles.Get(nameof(DispDemonProjectile)), dam);
     }
 
-    public void DispelLiving(int dam)
-    {
-        ProjectAtAllInLos(SingletonRepository.Projectiles.Get(nameof(DispLivingProjectile)), dam);
-    }
-
     public bool DispelMonsters(int dam)
     {
         return ProjectAtAllInLos(SingletonRepository.Projectiles.Get(nameof(DispAllProjectile)), dam);
