@@ -18,5 +18,5 @@ internal class SummonMonsterWizardCommand : WizardCommand
 
     protected override string? HelpGroupName => nameof(WizardMonstersHelpGroup);
 
-    protected override string? ExecuteScriptName => nameof(SummonMonsterScript);
+    protected override string? ExecuteScriptName => nameof(SummonSpecificMonsterScript);
 }

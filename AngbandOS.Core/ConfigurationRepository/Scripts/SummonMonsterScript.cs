@@ -18,15 +18,21 @@ internal class SummonMonsterScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        int num = SaveGame.CommandArgument;
-        if (num <= 0)
+        SaveGame.MsgPrint("You concentrate on the image of a monster...");
+        if (SaveGame.DieRoll(5) > 2)
         {
-            num = 1;
+            if (!SaveGame.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel, SaveGame.SingletonRepository.MonsterFilters.Get(nameof(NoUniquesMonsterFilter)), false))
+            {
+                SaveGame.MsgPrint("No-one ever turns up.");
+            }
         }
-
-        for (int i = 0; i < num; i++)
+        else if (SaveGame.SummonSpecific(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel, null))
         {
-            SaveGame.SummonSpecific(SaveGame.MapY, SaveGame.MapX, SaveGame.Difficulty, null);
+            SaveGame.MsgPrint("The summoned creature gets angry!");
+        }
+        else
+        {
+            SaveGame.MsgPrint("No-one ever turns up.");
         }
     }
 }
