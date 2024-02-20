@@ -32,20 +32,9 @@ internal abstract class Talent : IGetKey<string>
 
     public abstract string Name { get; }
 
-    public int Level
-    {
-        get; protected set;
-    }
-
-    public int ManaCost
-    {
-        get; protected set;
-    }
-
-    protected int BaseFailure
-    {
-        private get; set;
-    }
+    public abstract int Level { get; }
+    public abstract int ManaCost { get; }
+    public abstract int BaseFailure { get; }
 
     public int FailureChance()
     {
@@ -75,8 +64,6 @@ internal abstract class Talent : IGetKey<string>
         }
         return chance;
     }
-
-    public abstract void Initialize(int characterClass);
 
     public string SummaryLine()
     {

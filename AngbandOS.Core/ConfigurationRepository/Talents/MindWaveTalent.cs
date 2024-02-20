@@ -12,12 +12,9 @@ internal class MindWaveTalent : Talent
 {
     private MindWaveTalent(SaveGame saveGame) : base(saveGame) { }
     public override string Name => "Mind Wave";
-    public override void Initialize(int characterClass)
-    {
-        Level = 18;
-        ManaCost = 10;
-        BaseFailure = 45;
-    }
+    public override int Level => 18;
+    public override int ManaCost => 10;
+    public override int BaseFailure => 45;
 
     public override void Use()
     {

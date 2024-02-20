@@ -12,12 +12,9 @@ internal class DominationTalent : Talent
 {
     private DominationTalent(SaveGame saveGame) : base(saveGame) { }
     public override string Name => "Domination";
-    public override void Initialize(int characterClass)
-    {
-        Level = 9;
-        ManaCost = 7;
-        BaseFailure = 50;
-    }
+    public override int Level => 9;
+    public override int ManaCost => 7;
+    public override int BaseFailure => 50;
 
     public override void Use()
     {

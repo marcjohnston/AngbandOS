@@ -12,12 +12,9 @@ internal class TelekineticWaveTalent : Talent
 {
     private TelekineticWaveTalent(SaveGame saveGame) : base(saveGame) { }
     public override string Name => "Telekinetic Wave";
-    public override void Initialize(int characterClass)
-    {
-        Level = 28;
-        ManaCost = 20;
-        BaseFailure = 45;
-    }
+    public override int Level => 28;
+    public override int ManaCost => 20;
+    public override int BaseFailure => 45;
 
     public override void Use()
     {

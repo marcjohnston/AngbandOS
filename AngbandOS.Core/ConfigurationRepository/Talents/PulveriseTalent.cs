@@ -12,12 +12,9 @@ internal class PulveriseTalent : Talent
 {
     private PulveriseTalent(SaveGame saveGame) : base(saveGame) { }
     public override string Name => "Pulverise";
-    public override void Initialize(int characterClass)
-    {
-        Level = 11;
-        ManaCost = 7;
-        BaseFailure = 30;
-    }
+    public override int Level => 11;
+    public override int ManaCost => 7;
+    public override int BaseFailure => 30;
 
     public override void Use()
     {

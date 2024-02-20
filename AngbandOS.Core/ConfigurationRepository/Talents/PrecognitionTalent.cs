@@ -12,12 +12,9 @@ internal class PrecognitionTalent : Talent
 {
     private PrecognitionTalent(SaveGame saveGame) : base(saveGame) { }
     public override string Name => "Precognition";
-    public override void Initialize(int characterClass)
-    {
-        Level = 1;
-        ManaCost = 1;
-        BaseFailure = 15;
-    }
+    public override int Level => 1;
+    public override int ManaCost => 1;
+    public override int BaseFailure => 15;
 
     public override void Use()
     {

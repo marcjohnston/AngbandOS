@@ -26,7 +26,6 @@ internal class ConfirmationBirthStage : BirthStage
         foreach (Talent talent in SaveGame.SingletonRepository.Talents)
         {
             SaveGame.Talents.Add(talent);
-            talent.Initialize(SaveGame.BaseCharacterClass.ID);
         }
         foreach (Spell[] bookset in SaveGame.Spells)
         {

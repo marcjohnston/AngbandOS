@@ -13,12 +13,9 @@ internal class AdrenalineChannelingTalent : Talent
     private AdrenalineChannelingTalent(SaveGame saveGame) : base(saveGame) { }
 
     public override string Name => "Adrenaline Channeling";
-    public override void Initialize(int characterClass)
-    {
-        Level = 23;
-        ManaCost = 15;
-        BaseFailure = 50;
-    }
+    public override int Level => 23;
+    public override int ManaCost => 15;
+    public override int BaseFailure => 50;
 
     public override void Use()
     {

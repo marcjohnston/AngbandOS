@@ -12,12 +12,9 @@ internal class CharacterArmorTalent : Talent
 {
     private CharacterArmorTalent(SaveGame saveGame) : base(saveGame) { }
     public override string Name => "Character Armor";
-    public override void Initialize(int characterClass)
-    {
-        Level = 13;
-        ManaCost = 12;
-        BaseFailure = 50;
-    }
+    public override int Level => 13;
+    public override int ManaCost => 12;
+    public override int BaseFailure => 50;
 
     public override void Use()
     {

@@ -12,12 +12,9 @@ internal class PsychicDrainTalent : Talent
 {
     private PsychicDrainTalent(SaveGame saveGame) : base(saveGame) { }
     public override string Name => "Psychic Drain";
-    public override void Initialize(int characterClass)
-    {
-        Level = 25;
-        ManaCost = 10;
-        BaseFailure = 40;
-    }
+    public override int Level => 25;
+    public override int ManaCost => 10;
+    public override int BaseFailure => 40;
 
     public override void Use()
     {

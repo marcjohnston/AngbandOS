@@ -12,12 +12,9 @@ internal class MinorDisplacementTalent : Talent
 {
     private MinorDisplacementTalent(SaveGame saveGame) : base(saveGame) { }
     public override string Name => "Minor Displacement";
-    public override void Initialize(int characterClass)
-    {
-        Level = 3;
-        ManaCost = 2;
-        BaseFailure = 25;
-    }
+    public override int Level => 3;
+    public override int ManaCost => 2;
+    public override int BaseFailure => 25;
 
     public override void Use()
     {
