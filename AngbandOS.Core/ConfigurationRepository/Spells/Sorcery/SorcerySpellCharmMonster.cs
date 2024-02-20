@@ -13,11 +13,7 @@ internal class SorcerySpellCharmMonster : Spell
     private SorcerySpellCharmMonster(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        if (!SaveGame.GetDirectionWithAim(out int dir))
-        {
-            return;
-        }
-        SaveGame.CharmMonster(dir, SaveGame.ExperienceLevel);
+        SaveGame.RunScript(nameof(CharmMonsterScript));
     }
 
     public override string Name => "Charm Monster";
