@@ -13,7 +13,7 @@ internal class TarotSpellDeathDealing : Spell
     private TarotSpellDeathDealing(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.DispelLiving(SaveGame.ExperienceLevel * 3);
+        SaveGame.RunScript(nameof(DispelLivingScript));
     }
 
     public override string Name => "Death Dealing";
