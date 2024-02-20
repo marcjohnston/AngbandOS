@@ -13,11 +13,7 @@ internal class SorcerySpellTelekinesis : Spell
     private SorcerySpellTelekinesis(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        if (!SaveGame.GetDirectionWithAim(out int dir))
-        {
-            return;
-        }
-        SaveGame.SummonItem(dir, SaveGame.ExperienceLevel * 15, false);
+        SaveGame.RunScript(nameof(TelekinesisScript));
     }
 
     public override string Name => "Telekinesis";
