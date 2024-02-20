@@ -13,21 +13,7 @@ internal class TarotSpellConjureElemental : Spell
     private TarotSpellConjureElemental(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        if (SaveGame.DieRoll(6) > 3)
-        {
-            if (!SaveGame.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel, SaveGame.SingletonRepository.MonsterFilters.Get(nameof(ElementalMonsterFilter)), false))
-            {
-                SaveGame.MsgPrint("No-one ever turns up.");
-            }
-        }
-        else if (SaveGame.SummonSpecific(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel, SaveGame.SingletonRepository.MonsterFilters.Get(nameof(ElementalMonsterFilter))))
-        {
-            SaveGame.MsgPrint("You fail to control the elemental creature!");
-        }
-        else
-        {
-            SaveGame.MsgPrint("No-one ever turns up.");
-        }
+        SaveGame.RunScript(nameof(SummonElementalScript));
     }
 
     public override string Name => "Conjure Elemental";
