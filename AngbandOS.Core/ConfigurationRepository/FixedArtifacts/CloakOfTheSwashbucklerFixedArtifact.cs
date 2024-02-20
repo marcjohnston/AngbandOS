@@ -18,7 +18,7 @@ internal class CloakOfTheSwashbucklerFixedArtifact : FixedArtifact, IFixedArtifa
     public void ActivateItem(Item item)
     {
         SaveGame.MsgPrint("Your cloak glows bright yellow...");
-        SaveGame.Recharge(60);
+        SaveGame.RunSuccessfulScriptInt(nameof(RechargeItemScript), 60);
         item.RechargeTimeLeft = 70;
     }
     public string DescribeActivationEffect => "recharge item I every 70 turns";

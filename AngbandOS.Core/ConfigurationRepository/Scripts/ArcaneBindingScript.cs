@@ -18,6 +18,6 @@ internal class ArcaneBindingScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        SaveGame.Recharge(40);
+        SaveGame.RunSuccessfulScriptInt(nameof(RechargeItemScript), 40);
     }
 }

@@ -20,7 +20,7 @@ internal class RechargeActivation : Activation
 
     public override bool Activate()
     {
-        SaveGame.Recharge(60);
+        SaveGame.RunSuccessfulScriptInt(nameof(RechargeItemScript), 60);
         return true;
     }
 

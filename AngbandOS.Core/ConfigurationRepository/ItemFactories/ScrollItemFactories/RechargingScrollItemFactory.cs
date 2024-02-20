@@ -24,7 +24,7 @@ internal class RechargingScrollItemFactory : ScrollItemFactory
 
     public override void Read(ReadScrollEvent eventArgs)
     {
-        if (!SaveGame.Recharge(60))
+        if (!SaveGame.RunSuccessfulScriptInt(nameof(RechargeItemScript), 60))
         {
             eventArgs.UsedUp = false;
         }
