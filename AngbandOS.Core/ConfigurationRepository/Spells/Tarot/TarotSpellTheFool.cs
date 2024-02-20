@@ -13,39 +13,7 @@ internal class TarotSpellTheFool : Spell
     private TarotSpellTheFool(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        MonsterFilter? summonType = null;
-        SaveGame.MsgPrint("You concentrate on the Fool card...");
-        switch (SaveGame.DieRoll(4))
-        {
-            case 1:
-                summonType = SaveGame.SingletonRepository.MonsterFilters.Get(nameof(Bizarre1MonsterFilter));
-                break;
-
-            case 2:
-                summonType = SaveGame.SingletonRepository.MonsterFilters.Get(nameof(Bizarre2MonsterFilter));
-                break;
-
-            case 3:
-                summonType = SaveGame.SingletonRepository.MonsterFilters.Get(nameof(Bizarre4MonsterFilter));
-                break;
-
-            case 4:
-                summonType = SaveGame.SingletonRepository.MonsterFilters.Get(nameof(Bizarre5MonsterFilter));
-                break;
-        }
-        if (SaveGame.DieRoll(2) == 1)
-        {
-            SaveGame.MsgPrint(SaveGame.SummonSpecific(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel, summonType)
-                ? "The summoned creature gets angry!"
-                : "No-one ever turns up.");
-        }
-        else
-        {
-            if (!SaveGame.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel, summonType, false))
-            {
-                SaveGame.MsgPrint("No-one ever turns up.");
-            }
-        }
+        SaveGame.RunScript(nameof(SummonBizarreMonsterScript));
     }
 
     public override string Name => "The Fool";
