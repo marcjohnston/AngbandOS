@@ -13,7 +13,7 @@ internal class SorcerySpellMassSleep : Spell
     private SorcerySpellMassSleep(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.SleepMonsters();
+        SaveGame.RunScript(nameof(SleepMonstersScript));
     }
 
     public override string Name => "Mass Sleep";

@@ -31,7 +31,7 @@ internal class SleepMonstersStaffItemFactory : StaffItemFactory
 
     public override void UseStaff(UseStaffEvent eventArgs)
     {
-        if (SaveGame.SleepMonsters())
+        if (SaveGame.RunSuccessfulScript(nameof(SleepMonstersScript)))
         {
             eventArgs.Identified = true;
         }

@@ -5486,11 +5486,6 @@ internal class SaveGame
         return TargetedProject(SingletonRepository.Projectiles.Get(nameof(OldSleepProjectile)), dir, ExperienceLevel, flg);
     }
 
-    public bool SleepMonsters()
-    {
-        return ProjectAtAllInLos(SingletonRepository.Projectiles.Get(nameof(OldSleepProjectile)), ExperienceLevel);
-    }
-
     public void SleepMonstersTouch()
     {
         ProjectionFlag flg = ProjectionFlag.ProjectKill | ProjectionFlag.ProjectHide;

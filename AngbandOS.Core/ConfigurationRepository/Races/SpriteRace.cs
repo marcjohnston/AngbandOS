@@ -83,7 +83,7 @@ internal class SpriteRace : Race
             }
             else
             {
-                SaveGame.SleepMonsters();
+                SaveGame.RunScript(nameof(SleepMonstersScript));
             }
         }
     }

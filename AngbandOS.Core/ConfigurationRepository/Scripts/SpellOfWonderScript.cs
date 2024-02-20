@@ -139,7 +139,7 @@ internal class SpellOfWonderScript : Script, IScript
         {
             SaveGame.DispelMonsters(150);
             SaveGame.RunScript(nameof(SlowMonstersScript));
-            SaveGame.SleepMonsters();
+            SaveGame.RunScript(nameof(SleepMonstersScript));
             SaveGame.RestoreHealth(300);
         }
     }
