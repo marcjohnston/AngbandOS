@@ -13,22 +13,7 @@ internal class TarotSpellSummonUndead : Spell
     private TarotSpellSummonUndead(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.MsgPrint("You concentrate on the image of an undead creature...");
-        if (SaveGame.DieRoll(10) > 3)
-        {
-            if (!SaveGame.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel, SaveGame.SingletonRepository.MonsterFilters.Get(nameof(UndeadMonsterFilter)), true))
-            {
-                SaveGame.MsgPrint("No-one ever turns up.");
-            }
-        }
-        else if (SaveGame.SummonSpecific(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel, SaveGame.SingletonRepository.MonsterFilters.Get(nameof(UndeadMonsterFilter))))
-        {
-            SaveGame.MsgPrint("The summoned undead creature gets angry!");
-        }
-        else
-        {
-            SaveGame.MsgPrint("No-one ever turns up.");
-        }
+        SaveGame.RunScript(nameof(SummonUndeadScript));
     }
 
     public override string Name => "Summon Undead";
