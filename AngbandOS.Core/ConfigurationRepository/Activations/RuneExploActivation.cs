@@ -20,7 +20,7 @@ internal class RuneExploActivation : Activation
 
     public override bool Activate()
     {
-        SaveGame.YellowSign();
+        SaveGame.RunScript(nameof(YellowSignScript));
         return true;
     }
 

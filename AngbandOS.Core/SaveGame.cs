@@ -5766,16 +5766,6 @@ internal class SaveGame
         TargetedProject(SingletonRepository.Projectiles.Get(nameof(JamDoorProjectile)), dir, 20 + DieRoll(30), flg);
     }
 
-    public void YellowSign()
-    {
-        if (!GridOpenNoItem(MapY, MapX))
-        {
-            MsgPrint("The object resists the spell.");
-            return;
-        }
-        CaveSetFeat(MapY, MapX, SingletonRepository.Tiles.Get(nameof(YellowSignSigilTile)));
-    }
-
     private void CaveTempRoomAux(int y, int x)
     {
         GridTile cPtr = Grid[y][x];

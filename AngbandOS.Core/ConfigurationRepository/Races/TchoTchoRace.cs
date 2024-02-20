@@ -69,7 +69,7 @@ internal class TchoTchoRace : Race
         if (SaveGame.CheckIfRacialPowerWorks(25, 35, Ability.Intelligence, 15))
         {
             SaveGame.MsgPrint("You carefully draw The Yellow Sign...");
-            SaveGame.YellowSign();
+            SaveGame.RunScript(nameof(YellowSignScript));
         }
     }
 

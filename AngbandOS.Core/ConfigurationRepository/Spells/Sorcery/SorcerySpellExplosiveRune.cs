@@ -13,7 +13,7 @@ internal class SorcerySpellYellowSign : Spell
     private SorcerySpellYellowSign(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.YellowSign();
+        SaveGame.RunScript(nameof(YellowSignScript));
     }
 
     public override string Name => "Yellow Sign";
