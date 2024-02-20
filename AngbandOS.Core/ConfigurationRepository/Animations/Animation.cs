@@ -5,6 +5,8 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using System.Text.Json;
+
 namespace AngbandOS.Core.Animations;
 
 /// <summary>
@@ -25,7 +27,16 @@ internal abstract class Animation : IGetKey<string>
     /// <returns></returns>
     public string ToJson()
     {
-        return "";
+        AnimationDefinition animationDefinition = new()
+        {
+            AlternateColor = AlternateColor,
+            Character = Character,
+            Color = Color,
+            Key = Key,
+            Name = Name,
+            Sequence = Sequence
+        };
+        return JsonSerializer.Serialize<AnimationDefinition>(animationDefinition);
     }
 
     public virtual string Key => GetType().Name;

@@ -11,4 +11,18 @@ namespace AngbandOS.Core.Repositories;
 internal class AnimationsRepository : DictionaryRepository<string, Animation>
 {
     public AnimationsRepository(SaveGame saveGame) : base(saveGame) { }
+    public override void Load()
+    {
+        if (SaveGame.Configuration.Animations == null)
+        {
+            base.Load();
+        }
+        else
+        {
+            foreach (AnimationDefinition animationDefinition in SaveGame.Configuration.Animations)
+            {
+                Add(new GenericAnimation(SaveGame, animationDefinition));
+            }
+        }
+    }
 }
