@@ -13,11 +13,7 @@ internal class NatureSpellStoneToMud : Spell
     private NatureSpellStoneToMud(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        if (!SaveGame.GetDirectionWithAim(out int dir))
-        {
-            return;
-        }
-        SaveGame.WallToMud(dir);
+        SaveGame.RunScript(nameof(StoneToMudScript));
     }
 
     public override string Name => "Stone to Mud";

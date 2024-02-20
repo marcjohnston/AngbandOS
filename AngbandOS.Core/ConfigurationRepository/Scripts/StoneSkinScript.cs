@@ -8,9 +8,9 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class StoneScriptScript : Script, IScript
+internal class StoneSkinScript : Script, IScript
 {
-    private StoneScriptScript(SaveGame saveGame) : base(saveGame) { }
+    private StoneSkinScript(SaveGame saveGame) : base(saveGame) { }
 
     /// <summary>
     /// Adds between 30 and 50 turns of stoneskin.

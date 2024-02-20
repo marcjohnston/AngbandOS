@@ -13,7 +13,7 @@ internal class NatureSpellStoneSkin : Spell
     private NatureSpellStoneSkin(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.TimedStoneskin.AddTimer(SaveGame.DieRoll(20) + 30);
+        SaveGame.RunScript(nameof(StoneSkinScript));
     }
 
     public override string Name => "Stone Skin";
