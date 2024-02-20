@@ -13,17 +13,7 @@ internal class NatureSpellWhirlwindAttack : Spell
     private NatureSpellWhirlwindAttack(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        for (int dir = 0; dir <= 9; dir++)
-        {
-            int y = SaveGame.MapY + SaveGame.KeypadDirectionYOffset[dir];
-            int x = SaveGame.MapX + SaveGame.KeypadDirectionXOffset[dir];
-            GridTile cPtr = SaveGame.Grid[y][x];
-            Monster mPtr = SaveGame.Monsters[cPtr.MonsterIndex];
-            if (cPtr.MonsterIndex != 0 && (mPtr.IsVisible || SaveGame.GridPassable(y, x)))
-            {
-                SaveGame.PlayerAttackMonster(y, x);
-            }
-        }
+        SaveGame.RunScript(nameof(WhirlwindAttackScript));
     }
 
     public override string Name => "Whirlwind Attack";
