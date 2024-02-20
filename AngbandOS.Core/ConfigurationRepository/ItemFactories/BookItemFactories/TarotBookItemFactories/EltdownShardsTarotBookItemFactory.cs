@@ -43,7 +43,7 @@ internal class EltdownShardsTarotBookItemFactory : TarotBookItemFactory
         SaveGame.SingletonRepository.Spells.Get(nameof(TarotSpellSummonReptiles)),
         SaveGame.SingletonRepository.Spells.Get(nameof(TarotSpellSummonHounds)),
         SaveGame.SingletonRepository.Spells.Get(nameof(TarotSpellAstralBranding)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(TarotSpellExtradimensionalBeing)),
+        SaveGame.SingletonRepository.Spells.Get(nameof(TarotSpellExtraDimensionalBeing)),
         SaveGame.SingletonRepository.Spells.Get(nameof(TarotSpellDeathDealing)),
         SaveGame.SingletonRepository.Spells.Get(nameof(TarotSpellSummonReaver))
     };

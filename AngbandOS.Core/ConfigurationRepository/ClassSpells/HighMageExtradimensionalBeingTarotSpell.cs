@@ -8,10 +8,10 @@
 namespace AngbandOS.Core.ClassSpells;
 
 [Serializable]
-internal class HighMageExtradimensionalBeingTarotSpell : ClassSpell
+internal class HighMageExtraDimensionalBeingTarotSpell : ClassSpell
 {
-    private HighMageExtradimensionalBeingTarotSpell(SaveGame saveGame) : base(saveGame) { }
-    public override string SpellName => nameof(TarotSpellExtradimensionalBeing);
+    private HighMageExtraDimensionalBeingTarotSpell(SaveGame saveGame) : base(saveGame) { }
+    public override string SpellName => nameof(TarotSpellExtraDimensionalBeing);
     public override string CharacterClassName => nameof(HighMageCharacterClass);
     public override int Level => 36;
     public override int ManaCost => 90;
