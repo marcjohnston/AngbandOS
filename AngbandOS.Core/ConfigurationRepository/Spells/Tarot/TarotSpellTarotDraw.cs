@@ -147,7 +147,7 @@ internal class TarotSpellTarotDraw : Spell
         else if (die < 101)
         {
             SaveGame.MsgPrint("It's the Hermit.");
-            SaveGame.WallStone();
+            SaveGame.RunScript(nameof(WallOfStoneScript));
         }
         else if (die < 111)
         {
@@ -275,7 +275,7 @@ internal class TarotSpellTarotDraw : Spell
                 break;
 
             case 33:
-                SaveGame.WallStone();
+                SaveGame.RunScript(nameof(WallOfStoneScript));
                 break;
 
             case 34:

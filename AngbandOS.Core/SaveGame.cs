@@ -5856,13 +5856,6 @@ internal class SaveGame
 
     public void WallStone()
     {
-        ProjectionFlag flg = ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem;
-        _ = Project(0, 1, MapY, MapX, 0, SingletonRepository.Projectiles.Get(nameof(StoneWallProjectile)), flg);
-        SingletonRepository.FlaggedActions.Get(nameof(UpdateScentFlaggedAction)).Set();
-        SingletonRepository.FlaggedActions.Get(nameof(UpdateLightFlaggedAction)).Set();
-        SingletonRepository.FlaggedActions.Get(nameof(UpdateViewFlaggedAction)).Set();
-        SingletonRepository.FlaggedActions.Get(nameof(UpdateMonstersFlaggedAction)).Set();
-        SingletonRepository.FlaggedActions.Get(nameof(RedrawMapFlaggedAction)).Set();
     }
 
     public bool WallToMud(int dir)

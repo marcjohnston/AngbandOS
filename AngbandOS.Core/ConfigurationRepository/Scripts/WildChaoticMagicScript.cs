@@ -103,7 +103,7 @@ internal class WildChaoticMagicScript : Script, IScriptInt
                 break;
 
             case 33:
-                SaveGame.WallStone();
+                SaveGame.RunScript(nameof(WallOfStoneScript));
                 break;
 
             case 34:

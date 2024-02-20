@@ -13,7 +13,7 @@ internal class NatureSpellWallOfStone : Spell
     private NatureSpellWallOfStone(SaveGame saveGame) : base(saveGame) { }
     public override void Cast()
     {
-        SaveGame.WallStone();
+        SaveGame.RunScript(nameof(WallOfStoneScript));
     }
 
     public override string Name => "Wall of Stone";
