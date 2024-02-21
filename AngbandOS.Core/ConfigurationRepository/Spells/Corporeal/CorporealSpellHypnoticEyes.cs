@@ -11,10 +11,7 @@ namespace AngbandOS.Core.Spells.Corporeal;
 internal class CorporealSpellHypnoticEyes : Spell
 {
     private CorporealSpellHypnoticEyes(SaveGame saveGame) : base(saveGame) { }
-    public override void Cast()
-    {
-        SaveGame.RunScript(nameof(HypnoticEyesScript));
-    }
+    protected override string? CastScriptName => nameof(HypnoticEyesScript);
 
     public override string Name => "Hypnotic Eyes";
     

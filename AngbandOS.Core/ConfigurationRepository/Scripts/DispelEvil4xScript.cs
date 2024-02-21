@@ -8,9 +8,9 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class DispelEvilScript : Script, ISuccessfulScriptInt, IScriptInt
+internal class DispelEvil4xScript : Script, ISuccessfulScriptInt, IScriptInt, IScript
 {
-    private DispelEvilScript(SaveGame saveGame) : base(saveGame) { }
+    private DispelEvil4xScript(SaveGame saveGame) : base(saveGame) { }
 
     /// <summary>
     /// Projects dispel evil at all monsters in the players line-of-sight and return true, if the project actually hits and affects a monster; false, otherwise.
@@ -28,5 +28,13 @@ internal class DispelEvilScript : Script, ISuccessfulScriptInt, IScriptInt
     public void ExecuteScriptInt(int dam)
     {
         ExecuteSuccessfulScriptInt(dam);
+    }
+
+    /// <summary>
+    /// Executes the Int script with a damage value of 4x the players experience.
+    /// </summary>
+    public void ExecuteScript()
+    {
+        ExecuteScriptInt(SaveGame.ExperienceLevel * 4);
     }
 }

@@ -15,6 +15,6 @@ internal class CarnageReward : Reward
     {
         SaveGame.MsgPrint($"The voice of {patron.ShortName} booms out:");
         SaveGame.MsgPrint("'Let me relieve thee of thine oppressors!'");
-        SaveGame.Carnage(false);
+        SaveGame.RunScriptBool(nameof(GenocideScript), false);
     }
 }

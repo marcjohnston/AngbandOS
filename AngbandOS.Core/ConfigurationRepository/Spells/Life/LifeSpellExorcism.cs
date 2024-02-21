@@ -11,10 +11,7 @@ namespace AngbandOS.Core.Spells.Life;
 internal class LifeSpellExorcism : Spell
 {
     private LifeSpellExorcism(SaveGame saveGame) : base(saveGame) { }
-    public override void Cast()
-    {
-        SaveGame.RunScript(nameof(ExorcismScript));
-    }
+    protected override string? CastScriptName => nameof(ExorcismScript);
 
     public override string Name => "Exorcism";
 

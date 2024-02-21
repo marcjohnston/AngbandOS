@@ -11,10 +11,7 @@ namespace AngbandOS.Core.Spells.Nature;
 internal class NatureSpellDoorCreation : Spell
 {
     private NatureSpellDoorCreation(SaveGame saveGame) : base(saveGame) { }
-    public override void Cast()
-    {
-        SaveGame.RunScript(nameof(CreateDoorScript));
-    }
+    protected override string? CastScriptName => nameof(CreateDoorScript);
 
     public override string Name => "Door Creation";
     

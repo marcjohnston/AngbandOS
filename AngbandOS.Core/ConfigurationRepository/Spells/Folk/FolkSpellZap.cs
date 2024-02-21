@@ -11,10 +11,7 @@ namespace AngbandOS.Core.Spells.Folk;
 internal class FolkSpellZap : Spell
 {
     private FolkSpellZap(SaveGame saveGame) : base(saveGame) { }
-    public override void Cast()
-    {
-        SaveGame.RunScript(nameof(ZapScript));
-    }
+    protected override string? CastScriptName => nameof(ZapScript);
 
     public override string Name => "Zap";
 

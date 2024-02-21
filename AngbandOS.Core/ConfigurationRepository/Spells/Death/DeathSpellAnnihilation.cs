@@ -11,15 +11,9 @@ namespace AngbandOS.Core.Spells.Death;
 internal class DeathSpellAnnihilation : Spell
 {
     private DeathSpellAnnihilation(SaveGame saveGame) : base(saveGame) { }
-    public override void Cast()
-    {
-        SaveGame.RunScript(nameof(AnnihilationScript));
-    }
+    protected override string? CastScriptName => nameof(AnnihilationScript);
 
-    public override void CastFailed()
-    {
-        SaveGame.RunSpellScript(nameof(WildDeathMagicScript), this);
-    }
+    protected override string? CastFailedScriptName => nameof(WildDeathMagicScript);
 
     public override string Name => "Annihilation";  
 }

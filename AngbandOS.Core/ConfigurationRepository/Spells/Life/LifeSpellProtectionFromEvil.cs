@@ -11,10 +11,7 @@ namespace AngbandOS.Core.Spells.Life;
 internal class LifeSpellProtectionFromEvil : Spell
 {
     private LifeSpellProtectionFromEvil(SaveGame saveGame) : base(saveGame) { }
-    public override void Cast()
-    {
-        SaveGame.RunScript(nameof(ProtectionFromEvilScript));
-    }
+    protected override string? CastScriptName => nameof(ProtectionFromEvilScript);
 
     public override string Name => "Protection from Evil";
 

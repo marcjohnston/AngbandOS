@@ -8,16 +8,12 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class DispelGoodScript : Script, IScript
+internal class TeleportSelf5xScript : Script, IScript
 {
-    private DispelGoodScript(SaveGame saveGame) : base(saveGame) { }
+    private TeleportSelf5xScript(SaveGame saveGame) : base(saveGame) { }
 
-    /// <summary>
-    /// Projects a dispeal good to all monsters in the line-of-sight.
-    /// </summary>
-    /// <returns></returns>
     public void ExecuteScript()
     {
-        SaveGame.ProjectAtAllInLos(SaveGame.SingletonRepository.Projectiles.Get(nameof(DispGoodProjectile)), SaveGame.ExperienceLevel * 4);
+        SaveGame.RunScriptInt(nameof(TeleportSelfScript), SaveGame.ExperienceLevel * 5);
     }
 }

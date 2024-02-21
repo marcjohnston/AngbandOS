@@ -20,7 +20,7 @@ internal class CarnageActivation : Activation
 
     public override bool Activate()
     {
-        SaveGame.Carnage(true);
+        SaveGame.RunScript(nameof(GenocideScript));
         return true;
     }
 

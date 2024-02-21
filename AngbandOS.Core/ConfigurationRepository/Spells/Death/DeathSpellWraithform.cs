@@ -11,15 +11,9 @@ namespace AngbandOS.Core.Spells.Death;
 internal class DeathSpellWraithform : Spell
 {
     private DeathSpellWraithform(SaveGame saveGame) : base(saveGame) { }
-    public override void Cast()
-    {
-        SaveGame.RunScript(nameof(WraithformScript));
-    }
+    protected override string? CastScriptName => nameof(WraithformScript);
 
-    public override void CastFailed()
-    {
-        SaveGame.RunSpellScript(nameof(WildDeathMagicScript), this);
-    }
+    protected override string? CastFailedScriptName => nameof(WildDeathMagicScript);
 
     public override string Name => "Wraithform";
 

@@ -11,10 +11,7 @@ namespace AngbandOS.Core.Spells.Nature;
 internal class NatureSpellStoneSkin : Spell
 {
     private NatureSpellStoneSkin(SaveGame saveGame) : base(saveGame) { }
-    public override void Cast()
-    {
-        SaveGame.RunScript(nameof(StoneSkinScript));
-    }
+    protected override string? CastScriptName => nameof(StoneSkinScript);
 
     public override string Name => "Stone Skin";
 

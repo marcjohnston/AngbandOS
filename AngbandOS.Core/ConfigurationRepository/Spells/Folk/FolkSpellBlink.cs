@@ -11,10 +11,7 @@ namespace AngbandOS.Core.Spells.Folk;
 internal class FolkSpellBlink : Spell
 {
     private FolkSpellBlink(SaveGame saveGame) : base(saveGame) { }
-    public override void Cast()
-    {
-        SaveGame.RunScriptInt(nameof(TeleportSelfScript), 10);
-    }
+    protected override string? CastScriptName => nameof(PhaseDoorScript);
 
     public override string Name => "Blink";
 

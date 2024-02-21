@@ -11,10 +11,7 @@ namespace AngbandOS.Core.Spells.Sorcery;
 internal class SorcerySpellLightArea : Spell
 {
     private SorcerySpellLightArea(SaveGame saveGame) : base(saveGame) { }
-    public override void Cast()
-    {
-        SaveGame.RunScript(nameof(LightAreaScript));
-    }
+    protected override string? CastScriptName => nameof(LightAreaScript);
 
     public override string Name => "Light Area";
 

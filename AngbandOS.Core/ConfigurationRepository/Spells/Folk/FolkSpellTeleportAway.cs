@@ -11,10 +11,7 @@ namespace AngbandOS.Core.Spells.Folk;
 internal class FolkSpellTeleportAway : Spell
 {
     private FolkSpellTeleportAway(SaveGame saveGame) : base(saveGame) { }
-    public override void Cast()
-    {
-        SaveGame.RunScript(nameof(TeleportOtherScript));
-    }
+    protected override string? CastScriptName => nameof(TeleportOtherScript);
 
     public override string Name => "Teleport Away";
     

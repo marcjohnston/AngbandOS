@@ -20,6 +20,6 @@ internal class EvocationScript : Script, IScript
     {
         SaveGame.DispelMonsters(SaveGame.ExperienceLevel * 4);
         SaveGame.TurnMonsters(SaveGame.ExperienceLevel * 4);
-        SaveGame.RunScriptInt(nameof(BanishMonstersScript), SaveGame.ExperienceLevel * 4);
+        SaveGame.RunScriptInt(nameof(BanishMonsters4xScript), SaveGame.ExperienceLevel * 4);
     }
 }

@@ -24,7 +24,7 @@ internal class MetalScaleMailOfTheOrcsFixedArtifact : FixedArtifact, IFixedArtif
     public void ActivateItem(Item item)
     {
         SaveGame.MsgPrint("Your armor glows deep blue...");
-        SaveGame.Carnage(true);
+        SaveGame.RunScript(nameof(GenocideScript));
         item.RechargeTimeLeft = 500;
     }
     public string DescribeActivationEffect => "carnage every 500 turns";

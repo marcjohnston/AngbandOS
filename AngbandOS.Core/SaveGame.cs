@@ -4259,43 +4259,6 @@ internal class SaveGame
         return ProjectAtAllInLos(SingletonRepository.Projectiles.Get(nameof(TeleportAwayEvilProjectile)), dist);
     }
 
-    public void Carnage(bool playerCast)
-    {
-        int msec = Constants.DelayFactorInMilliseconds;
-        GetCom("Choose a monster race (by symbol) to carnage: ", out char typ);
-        for (int i = 1; i < MMax; i++)
-        {
-            Monster mPtr = Monsters[i];
-            MonsterRace rPtr = mPtr.Race;
-            if (mPtr.Race == null)
-            {
-                continue;
-            }
-            if (rPtr.Unique)
-            {
-                continue;
-            }
-            if (rPtr.Symbol.Character != typ)
-            {
-                continue;
-            }
-            if (rPtr.Guardian)
-            {
-                continue;
-            }
-            DeleteMonsterByIndex(i, true);
-            if (playerCast)
-            {
-                TakeHit(DieRoll(4), "the strain of casting Carnage");
-            }
-            MoveCursorRelative(MapY, MapX);
-            SingletonRepository.FlaggedActions.Get(nameof(RedrawHpFlaggedAction)).Set();
-            HandleStuff();
-            UpdateScreen();
-            Pause(msec);
-        }
-    }
-
     public void CharmAnimal(int dir, int plev)
     {
         ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;

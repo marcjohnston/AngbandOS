@@ -129,7 +129,7 @@ internal class SpellOfWonderScript : Script, IScript
         }
         else if (die < 108)
         {
-            SaveGame.Carnage(true);
+            SaveGame.RunScript(nameof(GenocideScript));
         }
         else if (die < 110)
         {

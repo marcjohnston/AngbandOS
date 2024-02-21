@@ -11,10 +11,7 @@ namespace AngbandOS.Core.Spells.Life;
 internal class LifeSpellCallLight : Spell
 {
     private LifeSpellCallLight(SaveGame saveGame) : base(saveGame) { }
-    public override void Cast()
-    {
-        SaveGame.RunScript(nameof(LightAreaScript));
-    }
+    protected override string? CastScriptName => nameof(LightAreaScript);
 
     public override string Name => "Call Light";
 

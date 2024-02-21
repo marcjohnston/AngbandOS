@@ -11,10 +11,7 @@ namespace AngbandOS.Core.Spells.Tarot;
 internal class TarotSpellPhantasmalServant : Spell
 {
     private TarotSpellPhantasmalServant(SaveGame saveGame) : base(saveGame) { }
-    public override void Cast()
-    {
-        SaveGame.RunScript(nameof(PhantasmalServantScript));
-    }
+    protected override string? CastScriptName => nameof(PhantasmalServantScript);
 
     public override string Name => "Phantasmal Servant";
 

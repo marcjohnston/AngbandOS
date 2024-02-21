@@ -11,10 +11,7 @@ namespace AngbandOS.Core.Spells.Folk;
 internal class FolkSpellWizardLock : Spell
 {
     private FolkSpellWizardLock(SaveGame saveGame) : base(saveGame) { }
-    public override void Cast()
-    {
-        SaveGame.RunScript(nameof(WizardLockScript));
-    }
+    protected override string? CastScriptName => nameof(WizardLockScript);
 
     public override string Name => "Wizard Lock";
     

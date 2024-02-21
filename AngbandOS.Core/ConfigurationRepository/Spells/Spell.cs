@@ -52,7 +52,13 @@ internal abstract class Spell : IGetKey<string>
     public virtual string Key => GetType().Name;
 
     public string GetKey => Key;
-    public void Bind() { }
+
+
+    public void Bind()
+    {
+        CastScript = SaveGame.SingletonRepository.Scripts.BindNullable<ISpellScript, IScript>(CastScriptName);
+        CastFailedScript = SaveGame.SingletonRepository.Scripts.BindNullable<ISpellScript, IScript>(CastFailedScriptName);
+    }
 
     /// <summary>
     /// Returns true, if the spell has been forgotten because the players level dropped to low.  When true, Learned is set to false.
@@ -78,29 +84,45 @@ internal abstract class Spell : IGetKey<string>
 
     public ClassSpell ClassSpell { get; private set; }
 
+    protected virtual string? CastScriptName => null;
+    protected virtual string? CastFailedScriptName => null;
+
+    private Script? CastScript { get; set; }
+    private Script? CastFailedScript { get; set; }
+
+    private void ExecuteScript(Script? script)
+    {
+        switch (script)
+        {
+            case null:
+                break;
+            case ISpellScript asSpellScript:
+                asSpellScript.ExecuteSpellScript(this);
+                break;
+            case IScript asScript:
+                asScript.ExecuteScript();
+                break;
+            default:
+                throw new Exception("Invalid script for spell.  Only ISpellScript and IScript scripts are supported for spells.");
+        }
+    }
+
     /// <summary>
     /// Performs the spell.
     /// </summary>
-    public abstract void Cast();
-
     public void CastSpell()
     {
-        // Cast the specific spell.
-        Cast();
-
-        // Check to see if this is the first time the spell 
-        if (!Tried)
-        {
-            Tried = true;
-            SaveGame.GainExperience(ClassSpell.FirstCastExperience * ClassSpell.Level);
-        }
+        ExecuteScript(CastScript);
     }
 
     /// <summary>
     /// This event is thrown when a spell cast fails by chance. When a spell cast fails, a second roll is made with the same failure
     /// chance to determine if a failure cast should happen.
     /// </summary>
-    public virtual void CastFailed() { }
+    public void CastFailed()
+    {
+        ExecuteScript(CastFailedScript);
+    }
 
     /// <summary>
     /// Returns a percentage of failure chance for a character if the specified class when casting the specific spell.  This value

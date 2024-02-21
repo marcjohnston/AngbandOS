@@ -11,10 +11,7 @@ namespace AngbandOS.Core.Spells.Sorcery;
 internal class SorcerySpellIdentifyTrue : Spell
 {
     private SorcerySpellIdentifyTrue(SaveGame saveGame) : base(saveGame) { }
-    public override void Cast()
-    {
-        SaveGame.RunScript(nameof(IdentifyItemFullyScript));
-    }
+    protected override string? CastScriptName => nameof(IdentifyItemFullyScript);
 
     public override string Name => "Identify True";
     

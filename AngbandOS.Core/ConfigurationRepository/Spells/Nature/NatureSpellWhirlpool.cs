@@ -11,10 +11,7 @@ namespace AngbandOS.Core.Spells.Nature;
 internal class NatureSpellWhirlpool : Spell
 {
     private NatureSpellWhirlpool(SaveGame saveGame) : base(saveGame) { }
-    public override void Cast()
-    {
-        SaveGame.RunScript(nameof(WhirlpoolScript));
-    }
+    protected override string? CastScriptName => nameof(WhirlpoolScript);
 
     public override string Name => "Whirlpool";
 

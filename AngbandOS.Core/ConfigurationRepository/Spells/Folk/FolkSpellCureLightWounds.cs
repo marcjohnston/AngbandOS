@@ -11,10 +11,7 @@ namespace AngbandOS.Core.Spells.Folk;
 internal class FolkSpellCureLightWounds : Spell
 {
     private FolkSpellCureLightWounds(SaveGame saveGame) : base(saveGame) { }
-    public override void Cast()
-    {
-        SaveGame.RunScript(nameof(CureLightWounds2d8Script));
-    }
+    protected override string? CastScriptName => nameof(CureLightWounds2d8Script);
 
     public override string Name => "Cure Light Wounds";
 

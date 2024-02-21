@@ -24,7 +24,55 @@ internal class DictionaryRepository<TKey, TValue> : ListRepository<TValue> where
     /// </summary>
     public override string Name => Pluralize(typeof(TValue).Name);
 
-    public bool Contains(TValue item) => dictionary.ContainsKey(item.GetKey);
+    public TValue Bind(TKey scriptName)
+    {
+        return Get(scriptName);
+    }
+
+    public TValue? BindNullable(TKey? scriptName)
+    {
+        if (scriptName == null)
+        {
+            return default;
+        }
+        return Get(scriptName);
+    }
+
+    public TValue? BindNullable<T>(TKey? scriptName)
+    {
+        if (scriptName == null)
+        {
+            return default;
+        }
+        TValue item = Get(scriptName);
+        switch (item)
+        {
+            case T:
+                return item;
+            default:
+                throw new Exception($"The {scriptName.ToString()} script cannot bind to the {typeof(T).Name} interface.");
+        }
+    }
+
+    public TValue? BindNullable<T, T2>(TKey? scriptName)
+    {
+        if (scriptName == null)
+        {
+            return default;
+        }
+        TValue item = Get(scriptName);
+        switch (item)
+        {
+            case T:
+                return item;
+            case T2:
+                return item;
+            default:
+                throw new Exception($"The {scriptName.ToString()} script cannot bind to the {typeof(T).Name} or {typeof(T2).Name} interface.");
+        }
+    }
+
+    //public bool Contains(TValue item) => dictionary.ContainsKey(item.GetKey);
 
     /// <summary>
     /// Persist the entities to the core persistent storage medium.  This method is only being used to generate database entities from objects.

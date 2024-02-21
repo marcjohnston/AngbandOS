@@ -11,10 +11,7 @@ namespace AngbandOS.Core.Spells.Folk;
 internal class FolkSpellStoneToMud : Spell
 {
     private FolkSpellStoneToMud(SaveGame saveGame) : base(saveGame) { }
-    public override void Cast()
-    {
-        SaveGame.RunScript(nameof(StoneToMudScript));
-    }
+    protected override string? CastScriptName => nameof(StoneToMudScript);
 
     public override string Name => "Stone to Mud";
     

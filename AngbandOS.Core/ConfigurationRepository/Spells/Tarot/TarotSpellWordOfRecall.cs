@@ -11,10 +11,7 @@ namespace AngbandOS.Core.Spells.Tarot;
 internal class TarotSpellWordOfRecall : Spell
 {
     private TarotSpellWordOfRecall(SaveGame saveGame) : base(saveGame) { }
-    public override void Cast()
-    {
-        SaveGame.RunScript(nameof(ToggleRecallScript));
-    }
+    protected override string? CastScriptName => nameof(ToggleRecallScript);
 
     public override string Name => "Word of Recall";
 

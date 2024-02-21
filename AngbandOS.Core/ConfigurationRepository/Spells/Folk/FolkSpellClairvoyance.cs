@@ -11,10 +11,7 @@ namespace AngbandOS.Core.Spells.Folk;
 internal class FolkSpellClairvoyance : Spell
 {
     private FolkSpellClairvoyance(SaveGame saveGame) : base(saveGame) { }
-    public override void Cast()
-    {
-        SaveGame.RunScript(nameof(ClairvoyanceScript));
-    }
+    protected override string? CastScriptName => nameof(ClairvoyanceScript);
 
     public override string Name => "Clairvoyance";
 

@@ -11,10 +11,7 @@ namespace AngbandOS.Core.Spells.Life;
 internal class LifeSpellDayOfTheDove : Spell
 {
     private LifeSpellDayOfTheDove(SaveGame saveGame) : base(saveGame) { }
-    public override void Cast()
-    {
-        SaveGame.RunScript(nameof(CharmOthersScript));
-    }
+    protected override string? CastScriptName => nameof(CharmOthersScript);
 
     public override string Name => "Day of the Dove";
     

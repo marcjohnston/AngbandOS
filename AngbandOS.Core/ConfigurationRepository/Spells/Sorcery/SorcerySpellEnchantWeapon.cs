@@ -11,10 +11,7 @@ namespace AngbandOS.Core.Spells.Sorcery;
 internal class SorcerySpellEnchantWeapon : Spell
 {
     private SorcerySpellEnchantWeapon(SaveGame saveGame) : base(saveGame) { }
-    public override void Cast()
-    {
-        SaveGame.RunScript(nameof(EnchantWeaponScript));
-    }
+    protected override string? CastScriptName => nameof(EnchantWeaponScript);
 
     public override string Name => "Enchant Weapon";
     

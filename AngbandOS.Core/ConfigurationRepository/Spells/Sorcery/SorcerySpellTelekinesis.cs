@@ -11,10 +11,7 @@ namespace AngbandOS.Core.Spells.Sorcery;
 internal class SorcerySpellTelekinesis : Spell
 {
     private SorcerySpellTelekinesis(SaveGame saveGame) : base(saveGame) { }
-    public override void Cast()
-    {
-        SaveGame.RunScript(nameof(TelekinesisScript));
-    }
+    protected override string? CastScriptName => nameof(TelekinesisScript);
 
     public override string Name => "Telekinesis";
 

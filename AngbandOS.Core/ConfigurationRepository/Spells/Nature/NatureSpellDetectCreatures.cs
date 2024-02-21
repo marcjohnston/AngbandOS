@@ -11,10 +11,7 @@ namespace AngbandOS.Core.Spells.Nature;
 internal class NatureSpellDetectCreatures : Spell
 {
     private NatureSpellDetectCreatures(SaveGame saveGame) : base(saveGame) { }
-    public override void Cast()
-    {
-        SaveGame.RunScript(nameof(DetectNormalMonstersScript));
-    }
+    protected override string? CastScriptName => nameof(DetectNormalMonstersScript);
 
     public override string Name => "Detect Creatures";
     

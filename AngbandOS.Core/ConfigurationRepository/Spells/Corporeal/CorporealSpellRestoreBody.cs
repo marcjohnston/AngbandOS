@@ -11,10 +11,7 @@ namespace AngbandOS.Core.Spells.Corporeal;
 internal class CorporealSpellRestoreBody : Spell
 {
     private CorporealSpellRestoreBody(SaveGame saveGame) : base(saveGame) { }
-    public override void Cast()
-    {
-        SaveGame.RunScript(nameof(RestoreBodyScript));
-    }
+    protected override string? CastScriptName => nameof(RestoreBodyScript);
 
     public override string Name => "Restore Body";
     

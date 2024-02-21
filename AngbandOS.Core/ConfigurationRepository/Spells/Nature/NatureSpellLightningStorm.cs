@@ -11,10 +11,7 @@ namespace AngbandOS.Core.Spells.Nature;
 internal class NatureSpellLightningStorm : Spell
 {
     private NatureSpellLightningStorm(SaveGame saveGame) : base(saveGame) { }
-    public override void Cast()
-    {
-        SaveGame.RunScript(nameof(LightningStormScript));
-    }
+    protected override string? CastScriptName => nameof(LightningStormScript);
 
     public override string Name => "Lightning Storm";
 

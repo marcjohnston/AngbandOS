@@ -11,10 +11,7 @@ namespace AngbandOS.Core.Spells.Sorcery;
 internal class SorcerySpellTeleport : Spell
 {
     private SorcerySpellTeleport(SaveGame saveGame) : base(saveGame) { }
-    public override void Cast()
-    {
-        SaveGame.RunScriptInt(nameof(TeleportSelfScript), SaveGame.ExperienceLevel * 5);
-    }
+    protected override string? CastScriptName => nameof(TeleportSelf5xScript);
 
     public override string Name => "Teleport";
 

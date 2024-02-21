@@ -11,10 +11,7 @@ namespace AngbandOS.Core.Spells.Sorcery;
 internal class SorcerySpellDetectionTrue : Spell
 {
     private SorcerySpellDetectionTrue(SaveGame saveGame) : base(saveGame) { }
-    public override void Cast()
-    {
-        SaveGame.RunScript(nameof(DetectionScript));
-    }
+    protected override string? CastScriptName => nameof(DetectionScript);
 
     public override string Name => "Detection True";
     

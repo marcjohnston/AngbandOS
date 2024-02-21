@@ -25,6 +25,22 @@ internal abstract class Script : IGetKey<string>
         return "";
     }
 
+    /// <summary>
+    /// Tests an item to determine if it belongs to an IScript and returns a the item casted into that type; or null, if the item doesn't belong to the type.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <returns></returns>
+    public T? TryCast<T>()
+    {
+        switch (this)
+        {
+            case T t:
+                return t;
+            default:
+                return default;
+        }
+    }
+
     public virtual string Key => GetType().Name;
 
     public string GetKey => Key;

@@ -11,10 +11,7 @@ namespace AngbandOS.Core.Spells.Corporeal;
 internal class CorporealSpellWraithform : Spell
 {
     private CorporealSpellWraithform(SaveGame saveGame) : base(saveGame) { }
-    public override void Cast()
-    {
-        SaveGame.RunScript(nameof(WraithformScript));
-    }
+    protected override string? CastScriptName => nameof(WraithformScript);
 
     public override string Name => "Wraithform";
 

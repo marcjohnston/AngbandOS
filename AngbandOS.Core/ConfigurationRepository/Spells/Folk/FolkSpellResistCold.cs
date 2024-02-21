@@ -11,10 +11,7 @@ namespace AngbandOS.Core.Spells.Folk;
 internal class FolkSpellResistCold : Spell
 {
     private FolkSpellResistCold(SaveGame saveGame) : base(saveGame) { }
-    public override void Cast()
-    {
-        SaveGame.RunScript(nameof(ResistColdScript));
-    }
+    protected override string? CastScriptName => nameof(ResistColdScript);
 
     public override string Name => "Resist Cold";
 

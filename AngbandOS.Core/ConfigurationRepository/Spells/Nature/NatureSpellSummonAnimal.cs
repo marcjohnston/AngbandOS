@@ -11,10 +11,7 @@ namespace AngbandOS.Core.Spells.Nature;
 internal class NatureSpellSummonAnimal : Spell
 {
     private NatureSpellSummonAnimal(SaveGame saveGame) : base(saveGame) { }
-    public override void Cast()
-    {
-        SaveGame.RunScript(nameof(SummonFriendlyAnimalScript));
-    }
+    protected override string? CastScriptName => nameof(SummonFriendlyAnimalScript);
 
     public override string Name => "Summon Animal";
 

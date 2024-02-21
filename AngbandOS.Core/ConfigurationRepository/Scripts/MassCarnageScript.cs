@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class MassCarnageScript : Script, IScriptBool
+internal class MassCarnageScript : Script, IScriptBool, IScript
 {
     private MassCarnageScript(SaveGame saveGame) : base(saveGame) { }
 
@@ -50,5 +50,13 @@ internal class MassCarnageScript : Script, IScriptBool
             SaveGame.UpdateScreen();
             SaveGame.Pause(msec);
         }
+    }
+
+    /// <summary>
+    /// Executes the Bool script with a PlayerCast parameter value of true.
+    /// </summary>
+    public void ExecuteScript()
+    {
+        ExecuteScriptBool(true);
     }
 }

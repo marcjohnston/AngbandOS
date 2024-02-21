@@ -11,10 +11,7 @@ namespace AngbandOS.Core.Spells.Sorcery;
 internal class SorcerySpellMagicMapping : Spell
 {
     private SorcerySpellMagicMapping(SaveGame saveGame) : base(saveGame) { }
-    public override void Cast()
-    {
-        SaveGame.RunScript(nameof(MapAreaScript));
-    }
+    protected override string? CastScriptName => nameof(MapAreaScript);
 
     public override string Name => "Magic Mapping";
     

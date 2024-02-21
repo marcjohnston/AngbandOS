@@ -8,16 +8,12 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class BanishMonstersScript : Script, IScriptInt
+internal class TeleportSelf3xScript : Script, IScript
 {
-    private BanishMonstersScript(SaveGame saveGame) : base(saveGame) { }
+    private TeleportSelf3xScript(SaveGame saveGame) : base(saveGame) { }
 
-    /// <summary>
-    /// Executes the script and returns a success result.
-    /// </summary>
-    /// <returns></returns>
-    public void ExecuteScriptInt(int dist)
+    public void ExecuteScript()
     {
-        SaveGame.ProjectAtAllInLos(SaveGame.SingletonRepository.Projectiles.Get(nameof(TeleportAwayAllProjectile)), dist);
+        SaveGame.RunScriptInt(nameof(TeleportSelfScript), SaveGame.ExperienceLevel * 3);
     }
 }

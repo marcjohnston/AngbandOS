@@ -29,7 +29,7 @@ internal class CarnageStaffItemFactory : StaffItemFactory
     public override int Weight => 50;
     public override void UseStaff(UseStaffEvent eventArgs)
     {
-        SaveGame.Carnage(true);
+        SaveGame.RunScript(nameof(GenocideScript));
         eventArgs.Identified = true;
     }
     public override Item CreateItem() => new Item(SaveGame, this);

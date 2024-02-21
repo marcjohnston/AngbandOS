@@ -11,10 +11,7 @@ namespace AngbandOS.Core.Spells.Corporeal;
 internal class CorporealSpellBlink : Spell
 {
     private CorporealSpellBlink(SaveGame saveGame) : base(saveGame) { }
-    public override void Cast()
-    {
-        SaveGame.RunScriptInt(nameof(TeleportSelfScript), 10);
-    }
+    protected override string? CastScriptName => nameof(PhaseDoorScript);
 
     public override string Name => "Blink";
 

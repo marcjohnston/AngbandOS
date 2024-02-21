@@ -11,10 +11,7 @@ namespace AngbandOS.Core.Spells.Corporeal;
 internal class CorporealSpellSatisfyHunger : Spell
 {
     private CorporealSpellSatisfyHunger(SaveGame saveGame) : base(saveGame) { }
-    public override void Cast()
-    {
-        SaveGame.RunScript(nameof(SatisfyHungerScript));
-    }
+    protected override string? CastScriptName => nameof(SatisfyHungerScript);
 
     public override string Name => "Satisfy Hunger";
     

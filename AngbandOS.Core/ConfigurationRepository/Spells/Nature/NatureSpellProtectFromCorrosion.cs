@@ -11,10 +11,7 @@ namespace AngbandOS.Core.Spells.Nature;
 internal class NatureSpellProtectFromCorrosion : Spell
 {
     private NatureSpellProtectFromCorrosion(SaveGame saveGame) : base(saveGame) { }
-    public override void Cast()
-    {
-        SaveGame.RunScript(nameof(RustProofScript));
-    }
+    protected override string? CastScriptName => nameof(RustProofScript);
 
     public override string Name => "Protection from Corrosion";
     

@@ -11,10 +11,7 @@ namespace AngbandOS.Core.Spells.Tarot;
 internal class TarotSpellDeathDealing : Spell
 {
     private TarotSpellDeathDealing(SaveGame saveGame) : base(saveGame) { }
-    public override void Cast()
-    {
-        SaveGame.RunScript(nameof(DispelLivingScript));
-    }
+    protected override string? CastScriptName => nameof(DispelLivingScript);
 
     public override string Name => "Death Dealing";
 

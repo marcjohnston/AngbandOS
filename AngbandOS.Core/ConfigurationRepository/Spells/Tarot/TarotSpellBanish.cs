@@ -11,10 +11,7 @@ namespace AngbandOS.Core.Spells.Tarot;
 internal class TarotSpellBanish : Spell
 {
     private TarotSpellBanish(SaveGame saveGame) : base(saveGame) { }
-    public override void Cast()
-    {
-        SaveGame.RunScriptInt(nameof(BanishMonstersScript), SaveGame.ExperienceLevel * 4);
-    }
+    protected override string? CastScriptName => nameof(BanishMonsters4xScript);
 
     public override string Name => "Banish";
     

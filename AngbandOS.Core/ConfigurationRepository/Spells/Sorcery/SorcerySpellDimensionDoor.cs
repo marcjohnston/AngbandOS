@@ -11,10 +11,7 @@ namespace AngbandOS.Core.Spells.Sorcery;
 internal class SorcerySpellDimensionDoor : Spell
 {
     private SorcerySpellDimensionDoor(SaveGame saveGame) : base(saveGame) { }
-    public override void Cast()
-    {
-        SaveGame.RunScript(nameof(CreateDimensionDoorScript));
-    }
+    protected override string? CastScriptName => nameof(CreateDimensionDoorScript);
 
     public override string Name => "Dimension Door";
 

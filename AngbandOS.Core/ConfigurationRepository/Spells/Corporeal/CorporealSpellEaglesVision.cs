@@ -11,10 +11,7 @@ namespace AngbandOS.Core.Spells.Corporeal;
 internal class CorporealSpellEaglesVision : Spell
 {
     private CorporealSpellEaglesVision(SaveGame saveGame) : base(saveGame) { }
-    public override void Cast()
-    {
-        SaveGame.RunScript(nameof(EaglesVisionScript));
-    }
+    protected override string? CastScriptName => nameof(EaglesVisionScript);
 
     public override string Name => "Eagle's Vision";
     

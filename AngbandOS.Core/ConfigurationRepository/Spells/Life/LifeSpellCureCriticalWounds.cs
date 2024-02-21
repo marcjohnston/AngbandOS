@@ -11,10 +11,7 @@ namespace AngbandOS.Core.Spells.Life;
 internal class LifeSpellCureCriticalWounds : Spell
 {
     private LifeSpellCureCriticalWounds(SaveGame saveGame) : base(saveGame) { }
-    public override void Cast()
-    {
-        SaveGame.RunScript(nameof(CureCriticalWounds8d10Script));
-    }
+    protected override string? CastScriptName => nameof(CureCriticalWounds8d10Script);
 
     public override string Name => "Cure Critical Wounds";
 

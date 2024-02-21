@@ -11,10 +11,7 @@ namespace AngbandOS.Core.Spells.Tarot;
 internal class TarotSpellTeleport : Spell
 {
     private TarotSpellTeleport(SaveGame saveGame) : base(saveGame) { }
-    public override void Cast()
-    {
-        SaveGame.RunScriptInt(nameof(TeleportSelfScript), SaveGame.ExperienceLevel * 4);
-    }
+    protected override string? CastScriptName => nameof(TeleportSelf4xScript);
 
     public override string Name => "Teleport";
 

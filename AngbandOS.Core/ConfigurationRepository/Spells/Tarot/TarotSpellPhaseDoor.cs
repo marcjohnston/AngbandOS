@@ -11,10 +11,7 @@ namespace AngbandOS.Core.Spells.Tarot;
 internal class TarotSpellPhaseDoor : Spell
 {
     private TarotSpellPhaseDoor(SaveGame saveGame) : base(saveGame) { }
-    public override void Cast()
-    {
-        SaveGame.RunScript(nameof(PhaseDoorScript));
-    }
+    protected override string? CastScriptName => nameof(PhaseDoorScript);
 
     public override string Name => "Phase Door";
 

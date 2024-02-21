@@ -11,10 +11,7 @@ namespace AngbandOS.Core.Spells.Sorcery;
 internal class SorcerySpellYellowSign : Spell
 {
     private SorcerySpellYellowSign(SaveGame saveGame) : base(saveGame) { }
-    public override void Cast()
-    {
-        SaveGame.RunScript(nameof(YellowSignScript));
-    }
+    protected override string? CastScriptName => nameof(YellowSignScript);
 
     public override string Name => "Yellow Sign";
 

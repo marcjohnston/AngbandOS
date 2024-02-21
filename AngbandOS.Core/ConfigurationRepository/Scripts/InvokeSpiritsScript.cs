@@ -129,7 +129,7 @@ internal class InvokeSpiritsScript : Script, IScript
         }
         if (die < 108)
         {
-            SaveGame.Carnage(true);
+            SaveGame.RunScript(nameof(GenocideScript));
         }
         if (die < 110)
         {

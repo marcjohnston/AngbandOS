@@ -11,10 +11,7 @@ namespace AngbandOS.Core.Spells.Tarot;
 internal class TarotSpellSummonGreaterUndead : Spell
 {
     private TarotSpellSummonGreaterUndead(SaveGame saveGame) : base(saveGame) { }
-    public override void Cast()
-    {
-        SaveGame.RunScript(nameof(SummonGreaterUndeadScript));
-    }
+    protected override string? CastScriptName => nameof(SummonGreaterUndeadScript);
 
     public override string Name => "Summon Greater Undead";
 

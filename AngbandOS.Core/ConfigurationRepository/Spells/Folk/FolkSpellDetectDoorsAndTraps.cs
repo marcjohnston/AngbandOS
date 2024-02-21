@@ -11,10 +11,7 @@ namespace AngbandOS.Core.Spells.Folk;
 internal class FolkSpellDetectDoorsAndTraps : Spell
 {
     private FolkSpellDetectDoorsAndTraps(SaveGame saveGame) : base(saveGame) { }
-    public override void Cast()
-    {
-        SaveGame.RunScript(nameof(DetectDoorsTrapsAndStairsScript));
-    }
+    protected override string? CastScriptName => nameof(DetectDoorsTrapsAndStairsScript);
 
     public override string Name => "Detect Doors and Traps";
     

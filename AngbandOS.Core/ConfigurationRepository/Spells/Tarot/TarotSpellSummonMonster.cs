@@ -11,10 +11,7 @@ namespace AngbandOS.Core.Spells.Tarot;
 internal class TarotSpellSummonMonster : Spell
 {
     private TarotSpellSummonMonster(SaveGame saveGame) : base(saveGame) { }
-    public override void Cast()
-    {
-        SaveGame.RunScript(nameof(SummonMonsterScript));
-    }
+    protected override string? CastScriptName => nameof(SummonMonsterScript);
 
     public override string Name => "Summon Monster";
 

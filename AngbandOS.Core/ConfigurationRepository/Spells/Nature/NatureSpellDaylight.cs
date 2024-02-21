@@ -11,10 +11,7 @@ namespace AngbandOS.Core.Spells.Nature;
 internal class NatureSpellDaylight : Spell
 {
     private NatureSpellDaylight(SaveGame saveGame) : base(saveGame) { }
-    public override void Cast()
-    {
-        SaveGame.RunScript(nameof(CallDaylightScript));
-    }
+    protected override string? CastScriptName => nameof(CallDaylightScript);
 
     public override string Name => "Daylight";
 

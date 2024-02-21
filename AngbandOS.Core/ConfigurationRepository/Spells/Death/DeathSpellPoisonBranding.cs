@@ -11,15 +11,9 @@ namespace AngbandOS.Core.Spells.Death;
 internal class DeathSpellPoisonBranding : Spell
 {
     private DeathSpellPoisonBranding(SaveGame saveGame) : base(saveGame) { }
-    public override void Cast()
-    {
-        SaveGame.RunScript(nameof(BrandWeaponWithPoisonScript));
-    }
+    protected override string? CastScriptName => nameof(BrandWeaponWithPoisonScript);
 
-    public override void CastFailed()
-    {
-        SaveGame.RunSpellScript(nameof(WildDeathMagicScript), this);
-    }
+    protected override string? CastFailedScriptName => nameof(WildDeathMagicScript);
 
     public override string Name => "Poison Branding";
     

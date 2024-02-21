@@ -11,10 +11,7 @@ namespace AngbandOS.Core.Spells.Nature;
 internal class NatureSpellCureWoundsAndPoison : Spell
 {
     private NatureSpellCureWoundsAndPoison(SaveGame saveGame) : base(saveGame) { }
-    public override void Cast()
-    {
-        SaveGame.RunScript(nameof(CureWoundsAndPoisonScript));
-    }
+    protected override string? CastScriptName => nameof(CureWoundsAndPoisonScript);
 
     public override string Name => "Cure Wounds and Poison";
     

@@ -11,10 +11,7 @@ namespace AngbandOS.Core.Spells.Corporeal;
 internal class CorporealSpellStoneSkin : Spell
 {
     private CorporealSpellStoneSkin(SaveGame saveGame) : base(saveGame) { }
-    public override void Cast()
-    {
-        SaveGame.RunScript(nameof(StoneskinTimedAction));
-    }
+    protected override string? CastScriptName => nameof(StoneSkinScript);
 
     public override string Name => "Stone Skin";
 
