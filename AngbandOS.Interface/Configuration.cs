@@ -56,6 +56,7 @@ public class Configuration
     public WizardCommandDefinition[]? WizardCommands { get; set; } = null;
     public TileDefinition[]? Tiles { get; set; } = null;
     public AnimationDefinition[]? Animations { get; set; } = null;
+    public SpellDefinition[]? Spells { get; set; } = null;
 
     public string[]? ElvishTexts { get; set; } = null;
     public string[]? FindQuests { get; set; } = null;

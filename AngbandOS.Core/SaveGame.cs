@@ -6,6 +6,7 @@
 // copies. Other copyrights may also apply.”
 
 using AngbandOS.Core.WizardCommands;
+using System.Diagnostics;
 using System.Runtime.Serialization.Formatters.Binary;
 
 namespace AngbandOS.Core;
@@ -528,7 +529,7 @@ internal class SaveGame
     public readonly int[] OrderedDirectionXOffset = { 0, 0, 1, -1, 1, -1, 1, -1, 0 };
     public readonly int[] OrderedDirectionYOffset = { 1, -1, 0, 0, 1, 1, -1, -1, 0 };
     public readonly int[] TempX = new int[Constants.TempMax]; // TODO: Use CursorPositon and combine TempX and TempY into a list to absolve TempN
-    public readonly int[] TempY = new int[Constants.TempMax];
+    public readonly int[] TempY = new int[Constants.TempMax]; // TODO: These are shared privates??? what a hack
 
     /// <summary>
     /// Appears to be the height of the level.
@@ -639,7 +640,10 @@ internal class SaveGame
         SingletonRepository = new SingletonRepository(this);
 
         // Load all of the predefined objects.  The singleton repository must already be created.
+        DateTime startTime = DateTime.Now;
         SingletonRepository.Load();
+        TimeSpan elapsedTime = DateTime.Now - startTime;
+        Debug.Print($"Singleton repository load took {elapsedTime.TotalSeconds.ToString()} seconds.");
 
         Quests = new List<Quest>();
         InitializeAllocationTables();

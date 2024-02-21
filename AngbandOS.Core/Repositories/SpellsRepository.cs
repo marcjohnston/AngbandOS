@@ -11,4 +11,18 @@ namespace AngbandOS.Core.Repositories;
 internal class SpellsRepository : DictionaryRepository<string, Spell>
 {
     public SpellsRepository(SaveGame saveGame) : base(saveGame) { }
+    public override void Load()
+    {
+        if (SaveGame.Configuration.Spells == null)
+        {
+            base.Load();
+        }
+        else
+        {
+            foreach (SpellDefinition definition in SaveGame.Configuration.Spells)
+            {
+                Add(new GenericSpell(SaveGame, definition));
+            }
+        }
+    }
 }

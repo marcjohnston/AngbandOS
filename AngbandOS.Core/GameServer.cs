@@ -6,6 +6,7 @@
 // copies. Other copyrights may also apply.”
 
 using AngbandOS.Core.Flavors;
+using System.Diagnostics;
 using System.Text.Json;
 
 namespace AngbandOS.Core;
@@ -204,49 +205,53 @@ public class GameServer
 
         if (persistentStorage != null && configuration == null)
         {
+            DateTime startTime = DateTime.Now;
             configuration = new Configuration()
             {
-                //AmuletReadableFlavors = RetrieveEntities<ReadableFlavorDefinition>(persistentStorage, Pluralize(nameof(AmuletReadableFlavor))),
-                //Animations = RetrieveEntities<AnimationDefinition>(persistentStorage, Pluralize(nameof(Animation))),
-                //ClassSpells = RetrieveEntities<ClassSpellDefinition>(persistentStorage, Pluralize(nameof(ClassSpell))),
-                //DungeonGuardians = RetrieveEntities<DungeonGuardianDefinition>(persistentStorage, Pluralize(nameof(DungeonGuardian))),
-                //Dungeons = RetrieveEntities<DungeonDefinition>(persistentStorage, Pluralize(nameof(Dungeon))),
-                //GameCommands = RetrieveEntities<GameCommandDefinition>(persistentStorage, Pluralize(nameof(GameCommand))),
-                //HelpGroups = RetrieveEntities<HelpGroupDefinition>(persistentStorage, Pluralize(nameof(HelpGroup))),
-                //MonsterRaces = RetrieveEntities<MonsterRaceDefinition>(persistentStorage, Pluralize(nameof(MonsterRace))),
-                //MushroomReadableFlavors = RetrieveEntities<ReadableFlavorDefinition>(persistentStorage, Pluralize(nameof(MushroomReadableFlavor))),
-                //PotionReadableFlavors = RetrieveEntities<ReadableFlavorDefinition>(persistentStorage, Pluralize(nameof(PotionReadableFlavor))),
-                //ProjectileGraphics = RetrieveEntities<ProjectileGraphicDefinition>(persistentStorage, Pluralize(nameof(ProjectileGraphic))),
-                //RingReadableFlavors = RetrieveEntities<ReadableFlavorDefinition>(persistentStorage, Pluralize(nameof(RingReadableFlavor))),
-                //RodReadableFlavors = RetrieveEntities<ReadableFlavorDefinition>(persistentStorage, Pluralize(nameof(RodReadableFlavor))),
-                //ScrollReadableFlavors = RetrieveEntities<ReadableFlavorDefinition>(persistentStorage, Pluralize(nameof(ScrollReadableFlavor))),
-                //Shopkeepers = RetrieveEntities<ShopkeeperDefinition>(persistentStorage, Pluralize(nameof(Shopkeeper))),
-                //StaffReadableFlavors = RetrieveEntities<ReadableFlavorDefinition>(persistentStorage, Pluralize(nameof(StaffReadableFlavor))),
-                //StoreCommands = RetrieveEntities<StoreCommandDefinition>(persistentStorage, Pluralize(nameof(StoreCommand))),
-                //StoreFactories = RetrieveEntities<StoreFactoryDefinition>(persistentStorage, Pluralize(nameof(StoreFactory))),
-                //Symbols = RetrieveEntities<SymbolDefinition>(persistentStorage, Pluralize(nameof(Symbol))),
-                //Tiles = RetrieveEntities<TileDefinition>(persistentStorage, Pluralize(nameof(Tile))),
-                //Towns = RetrieveEntities<TownDefinition>(persistentStorage, Pluralize(nameof(Town))),
-                //Vaults = RetrieveEntities<VaultDefinition>(persistentStorage, Pluralize(nameof(Vault))),
-                //WandReadableFlavors = RetrieveEntities<ReadableFlavorDefinition>(persistentStorage, Pluralize(nameof(WandReadableFlavor))),
-                //WizardCommands = RetrieveEntities<WizardCommandDefinition>(persistentStorage, Pluralize(nameof(WizardCommand))),
+                AmuletReadableFlavors = RetrieveEntities<ReadableFlavorDefinition>(persistentStorage, Pluralize(nameof(AmuletReadableFlavor))),
+                Animations = RetrieveEntities<AnimationDefinition>(persistentStorage, Pluralize(nameof(Animation))),
+                ClassSpells = RetrieveEntities<ClassSpellDefinition>(persistentStorage, Pluralize(nameof(ClassSpell))),
+                DungeonGuardians = RetrieveEntities<DungeonGuardianDefinition>(persistentStorage, Pluralize(nameof(DungeonGuardian))),
+                Dungeons = RetrieveEntities<DungeonDefinition>(persistentStorage, Pluralize(nameof(Dungeon))),
+                GameCommands = RetrieveEntities<GameCommandDefinition>(persistentStorage, Pluralize(nameof(GameCommand))),
+                HelpGroups = RetrieveEntities<HelpGroupDefinition>(persistentStorage, Pluralize(nameof(HelpGroup))),
+                MonsterRaces = RetrieveEntities<MonsterRaceDefinition>(persistentStorage, Pluralize(nameof(MonsterRace))),
+                MushroomReadableFlavors = RetrieveEntities<ReadableFlavorDefinition>(persistentStorage, Pluralize(nameof(MushroomReadableFlavor))),
+                PotionReadableFlavors = RetrieveEntities<ReadableFlavorDefinition>(persistentStorage, Pluralize(nameof(PotionReadableFlavor))),
+                ProjectileGraphics = RetrieveEntities<ProjectileGraphicDefinition>(persistentStorage, Pluralize(nameof(ProjectileGraphic))),
+                RingReadableFlavors = RetrieveEntities<ReadableFlavorDefinition>(persistentStorage, Pluralize(nameof(RingReadableFlavor))),
+                RodReadableFlavors = RetrieveEntities<ReadableFlavorDefinition>(persistentStorage, Pluralize(nameof(RodReadableFlavor))),
+                ScrollReadableFlavors = RetrieveEntities<ReadableFlavorDefinition>(persistentStorage, Pluralize(nameof(ScrollReadableFlavor))),
+                Shopkeepers = RetrieveEntities<ShopkeeperDefinition>(persistentStorage, Pluralize(nameof(Shopkeeper))),
+                Spells = RetrieveEntities<SpellDefinition>(persistentStorage, Pluralize(nameof(Spell))),
+                StaffReadableFlavors = RetrieveEntities<ReadableFlavorDefinition>(persistentStorage, Pluralize(nameof(StaffReadableFlavor))),
+                StoreCommands = RetrieveEntities<StoreCommandDefinition>(persistentStorage, Pluralize(nameof(StoreCommand))),
+                StoreFactories = RetrieveEntities<StoreFactoryDefinition>(persistentStorage, Pluralize(nameof(StoreFactory))),
+                Symbols = RetrieveEntities<SymbolDefinition>(persistentStorage, Pluralize(nameof(Symbol))),
+                Tiles = RetrieveEntities<TileDefinition>(persistentStorage, Pluralize(nameof(Tile))),
+                Towns = RetrieveEntities<TownDefinition>(persistentStorage, Pluralize(nameof(Town))),
+                Vaults = RetrieveEntities<VaultDefinition>(persistentStorage, Pluralize(nameof(Vault))),
+                WandReadableFlavors = RetrieveEntities<ReadableFlavorDefinition>(persistentStorage, Pluralize(nameof(WandReadableFlavor))),
+                WizardCommands = RetrieveEntities<WizardCommandDefinition>(persistentStorage, Pluralize(nameof(WizardCommand))),
 
-                //ElvishTexts = RetrieveEntity(persistentStorage, "ElvishTexts"),
-                //FindQuests = RetrieveEntity(persistentStorage, "FindQuests"),
-                //FunnyComments = RetrieveEntity(persistentStorage, "FunnyComments"),
-                //FunnyDescriptions = RetrieveEntity(persistentStorage, "FunnyDescriptions"),
-                //HorrificDescriptions = RetrieveEntity(persistentStorage, "HorrificDescriptions"),
-                //InsultPlayerAttacks = RetrieveEntity(persistentStorage, "InsultPlayerAttacks"),
-                //MoanPlayerAttacks = RetrieveEntity(persistentStorage, "MoanPlayerAttacks"),
-                //UnreadableFlavorSyllables = RetrieveEntity(persistentStorage, "UnreadableFlavorSyllables"),
-                //ShopkeeperAcceptedComments = RetrieveEntity(persistentStorage, "ShopkeeperAcceptedComments"),
-                //ShopkeeperBargainComments = RetrieveEntity(persistentStorage, "ShopkeeperBargainComments"),
-                //ShopkeeperGoodComments = RetrieveEntity(persistentStorage, "ShopkeeperGoodComments"),
-                //ShopkeeperLessThanGuessComments = RetrieveEntity(persistentStorage, "ShopkeeperLessThanGuessComments"),
-                //ShopkeeperWorthlessComments = RetrieveEntity(persistentStorage, "ShopkeeperWorthlessComments"),
-                //SingingPlayerAttacks = RetrieveEntity(persistentStorage, "SingingPlayerAttacks"),
-                //WorshipPlayerAttacks = RetrieveEntity(persistentStorage, "WorshipPlayerAttacks")
+                ElvishTexts = RetrieveEntity(persistentStorage, "ElvishTexts"),
+                FindQuests = RetrieveEntity(persistentStorage, "FindQuests"),
+                FunnyComments = RetrieveEntity(persistentStorage, "FunnyComments"),
+                FunnyDescriptions = RetrieveEntity(persistentStorage, "FunnyDescriptions"),
+                HorrificDescriptions = RetrieveEntity(persistentStorage, "HorrificDescriptions"),
+                InsultPlayerAttacks = RetrieveEntity(persistentStorage, "InsultPlayerAttacks"),
+                MoanPlayerAttacks = RetrieveEntity(persistentStorage, "MoanPlayerAttacks"),
+                UnreadableFlavorSyllables = RetrieveEntity(persistentStorage, "UnreadableFlavorSyllables"),
+                ShopkeeperAcceptedComments = RetrieveEntity(persistentStorage, "ShopkeeperAcceptedComments"),
+                ShopkeeperBargainComments = RetrieveEntity(persistentStorage, "ShopkeeperBargainComments"),
+                ShopkeeperGoodComments = RetrieveEntity(persistentStorage, "ShopkeeperGoodComments"),
+                ShopkeeperLessThanGuessComments = RetrieveEntity(persistentStorage, "ShopkeeperLessThanGuessComments"),
+                ShopkeeperWorthlessComments = RetrieveEntity(persistentStorage, "ShopkeeperWorthlessComments"),
+                SingingPlayerAttacks = RetrieveEntity(persistentStorage, "SingingPlayerAttacks"),
+                WorshipPlayerAttacks = RetrieveEntity(persistentStorage, "WorshipPlayerAttacks")
             };
+            TimeSpan elapsedTime = DateTime.Now - startTime;
+            Debug.Print($"Configuration deserialization took {elapsedTime.TotalSeconds.ToString()} seconds.");
         }
 
         try

@@ -5,23 +5,9 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using System.Text.Json;
+
 namespace AngbandOS.Core.Spells;
-
-//[Serializable]
-//public class SpellDefinition : IPoco
-//{
-//    public virtual string Key { get; set; }
-
-//    /// <summary>
-//    /// Returns the name of the spell, as rendered to the SaveGame.
-//    /// </summary>
-//    public virtual string Name { get; set; }
-
-//    public bool IsValid()
-//    {
-//        throw new NotImplementedException();
-//    }
-//}
 
 [Serializable]
 internal abstract class Spell : IGetKey<string>
@@ -46,7 +32,15 @@ internal abstract class Spell : IGetKey<string>
     /// <returns></returns>
     public string ToJson()
     {
-        return "";
+        SpellDefinition definition = new()
+        {
+            Key = Key,
+            CastScriptName = CastScriptName,
+            CastFailedScriptName = CastFailedScriptName,
+            Name = Name,
+            LearnedDetails = LearnedDetails
+        };
+        return JsonSerializer.Serialize<SpellDefinition>(definition);
     }
 
     public virtual string Key => GetType().Name;
@@ -183,7 +177,7 @@ internal abstract class Spell : IGetKey<string>
     public void Initialize(BookItemFactory bookItemFactory, int spellIndex)
     {
         BaseCharacterClass characterClass = SaveGame.BaseCharacterClass;
-        ClassSpell = SaveGame.SingletonRepository.ClassSpells.Get($"{characterClass.GetType().Name}.{this.GetType().Name}");
+        ClassSpell = SaveGame.SingletonRepository.ClassSpells.Get($"{characterClass.Key}.{this.Key}");
         SpellIndex = spellIndex;
         BookItemFactory = bookItemFactory;
 

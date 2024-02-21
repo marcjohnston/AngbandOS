@@ -69,7 +69,7 @@ public class TileDefinition : IPoco
     /// <summary>
     /// The tile blocks line of sight.
     /// </summary>
-    public virtual bool BlocksLos => false;
+    public virtual bool BlocksLos { get; set; } = false;
 
     /// <summary>
     /// A text description of the tile.

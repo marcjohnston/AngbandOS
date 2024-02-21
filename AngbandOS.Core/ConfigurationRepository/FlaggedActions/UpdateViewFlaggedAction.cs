@@ -5,13 +5,25 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using System.Diagnostics;
+
 namespace AngbandOS.Core.FlaggedActions;
 
+/// <summary>
+/// Updates the view.  The view of the player extends to a distance as Constants.MaxVision.  Tiles that block line-of-sight are required to ensure
+/// the grid coordinates are not invalid.
+/// </summary>
 [Serializable]
 internal class UpdateViewFlaggedAction : FlaggedAction
 {
     private UpdateViewFlaggedAction(SaveGame saveGame) : base(saveGame) { }
 
+    /// <summary>
+    /// Set the c.TileFlags as IsVisible and add the coordinate to the SaveGame.View.
+    /// </summary>
+    /// <param name="c"></param>
+    /// <param name="y"></param>
+    /// <param name="x"></param>
     private void CaveViewHack(GridTile c, int y, int x)
     {
         c.TileFlags.Set(GridTile.IsVisible);
@@ -70,12 +82,13 @@ internal class UpdateViewFlaggedAction : FlaggedAction
     {
         int n;
         int d;
-        int y, x;
         int yMax = SaveGame.CurHgt - 1;
         int xMax = SaveGame.CurWid - 1;
         GridTile cPtr;
         const int full = Constants.MaxSight;
         const int over = Constants.MaxSight * 3 / 2;
+
+        // Enumerate all of the view coordinates, clear the tile and set it as temp.  Then add the coordinate to the SaveGame.Temp array.
         foreach (GridCoordinate gridCoordinate in SaveGame.View)
         {
             cPtr = SaveGame.Grid[gridCoordinate.Y][gridCoordinate.X];
@@ -85,9 +98,11 @@ internal class UpdateViewFlaggedAction : FlaggedAction
             SaveGame.TempX[SaveGame.TempN] = gridCoordinate.X;
             SaveGame.TempN++;
         }
+
+        // Now clear the view coordinates.
         SaveGame.View.Clear();
-        y = SaveGame.MapY;
-        x = SaveGame.MapX;
+        int y = SaveGame.MapY;
+        int x = SaveGame.MapX;
         cPtr = SaveGame.Grid[y][x];
         cPtr.TileFlags.Set(GridTile.EasyVisibility);
         CaveViewHack(cPtr, y, x);

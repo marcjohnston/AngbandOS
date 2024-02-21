@@ -34,6 +34,7 @@ internal abstract class Tile : IGetKey<string>
         {
             AllowMonsterToOccupy = AllowMonsterToOccupy,
             AlterActionName = AlterActionName,
+            BlocksLos = BlocksLos,
             BlocksScent = BlocksScent,
             Color = Color,
             Description = Description,

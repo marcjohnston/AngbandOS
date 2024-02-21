@@ -14,6 +14,7 @@ internal class GenericTile : Tile
     {
         AllowMonsterToOccupy = tileDefinition.AllowMonsterToOccupy;
         AlterActionName = tileDefinition.AlterActionName;
+        BlocksLos = tileDefinition.BlocksLos;
         BlocksScent = tileDefinition.BlocksScent;
         Color = tileDefinition.Color;
         Description = tileDefinition.Description;
