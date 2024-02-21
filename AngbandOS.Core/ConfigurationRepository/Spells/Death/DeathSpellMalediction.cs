@@ -18,7 +18,7 @@ internal class DeathSpellMalediction : Spell
 
     public override void CastFailed()
     {
-        SaveGame.RunScriptIntInt(nameof(WildDeathMagicScript), 1, 0);
+        SaveGame.RunSpellScript(nameof(WildDeathMagicScript), this);
     }
 
     public override string Name => "Malediction";

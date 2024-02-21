@@ -18,7 +18,7 @@ internal class DeathSpellOrbOfEntropy : Spell
 
     public override void CastFailed()
     {
-        SaveGame.RunScriptIntInt(nameof(WildDeathMagicScript), 8, 1);
+        SaveGame.RunSpellScript(nameof(WildDeathMagicScript), this);
     }
 
     public override string Name => "Orb of Entropy";

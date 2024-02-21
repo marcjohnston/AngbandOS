@@ -18,7 +18,7 @@ internal class DeathSpellDarknessStorm : Spell
 
     public override void CastFailed()
     {
-        SaveGame.RunScriptIntInt(nameof(WildDeathMagicScript), 22, 2);
+        SaveGame.RunSpellScript(nameof(WildDeathMagicScript), this);
     }
 
     public override string Name => "Darkness Storm";

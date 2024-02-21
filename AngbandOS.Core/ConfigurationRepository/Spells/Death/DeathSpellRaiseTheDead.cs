@@ -18,7 +18,7 @@ internal class DeathSpellRaiseTheDead : Spell
 
     public override void CastFailed()
     {
-        SaveGame.RunScriptIntInt(nameof(WildDeathMagicScript), 25, 3);
+        SaveGame.RunSpellScript(nameof(WildDeathMagicScript), this);
     }
 
     public override string Name => "Raise the Dead";

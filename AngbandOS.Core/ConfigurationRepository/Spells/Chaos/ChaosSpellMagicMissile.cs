@@ -18,7 +18,7 @@ internal class ChaosSpellMagicMissile : Spell
 
     public override void CastFailed()
     {
-        SaveGame.RunScriptInt(nameof(WildChaoticMagicScript), 0);
+        SaveGame.RunSpellScript(nameof(WildChaoticMagicScript), this);
     }
 
     public override string Name => "Magic Missile";

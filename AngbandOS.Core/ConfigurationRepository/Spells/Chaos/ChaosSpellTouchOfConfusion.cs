@@ -18,7 +18,7 @@ internal class ChaosSpellTouchOfConfusion : Spell
 
     public override void CastFailed()
     {
-        SaveGame.RunScriptInt(nameof(WildChaoticMagicScript), 3);
+        SaveGame.RunSpellScript(nameof(WildChaoticMagicScript), this);
     }
 
     public override string Name => "Touch of Confusion";

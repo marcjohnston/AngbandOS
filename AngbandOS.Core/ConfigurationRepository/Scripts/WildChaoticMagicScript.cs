@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class WildChaoticMagicScript : Script, IScriptInt
+internal class WildChaoticMagicScript : Script, ISpellScript
 {
     private WildChaoticMagicScript(SaveGame saveGame) : base(saveGame) { }
 
@@ -17,10 +17,11 @@ internal class WildChaoticMagicScript : Script, IScriptInt
     /// </summary>
     /// <param name="spellLevel">A spell level from 0 to 38.  The actual spell cast will be in the range of spell ... spell + 1d8.</param>
     /// <returns></returns>
-    public void ExecuteScriptInt(int spellLevel)
+    public void ExecuteSpellScript(Spell spell)
     {
+        int spellIndex = spell.SpellIndex;
         SaveGame.MsgPrint("You produce a chaotic effect!");
-        switch (SaveGame.DieRoll(spellLevel) + SaveGame.DieRoll(8)) // TODO: Convert this to WeightedRandom
+        switch (SaveGame.DieRoll(spellIndex) + SaveGame.DieRoll(8)) // TODO: Convert this to WeightedRandom
         {
             case 1:
             case 2:
@@ -99,7 +100,7 @@ internal class WildChaoticMagicScript : Script, IScriptInt
                 break;
 
             case 32:
-                SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(ChaosProjectile)), 0, spellLevel + 5, 1 + (spellLevel / 10));
+                SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(ChaosProjectile)), 0, spellIndex + 5, 1 + (spellIndex / 10));
                 break;
 
             case 33:

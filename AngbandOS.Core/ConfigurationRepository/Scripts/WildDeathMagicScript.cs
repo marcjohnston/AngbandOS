@@ -8,27 +8,25 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class WildDeathMagicScript : Script, IScriptIntInt
+internal class WildDeathMagicScript : Script, ISpellScript
 {
     private WildDeathMagicScript(SaveGame saveGame) : base(saveGame) { }
 
-    /// <summary>
-    /// Executes the script.
-    /// </summary>
-    /// <returns></returns>
-    public void ExecuteScriptIntInt(int spell, int subCategory)
+    public void ExecuteSpellScript(Spell spell)
     {
-        if (subCategory == 3 && SaveGame.DieRoll(2) == 1)
+        int bookIndex = spell.BookItemFactory.BookIndex;
+        int spellIndex= spell.SpellIndex;
+        if (bookIndex == 3 && SaveGame.DieRoll(2) == 1)
         {
             SaveGame.Monsters[0].SanityBlast(true);
         }
         else
         {
             SaveGame.MsgPrint("It hurts!");
-            SaveGame.TakeHit(SaveGame.DiceRoll(subCategory + 1, 6), "a miscast Death spell");
-            if (spell > 15 && SaveGame.DieRoll(6) == 1 && !SaveGame.HasHoldLife)
+            SaveGame.TakeHit(SaveGame.DiceRoll(bookIndex + 1, 6), "a miscast Death spell");
+            if (spellIndex > 15 && SaveGame.DieRoll(6) == 1 && !SaveGame.HasHoldLife)
             {
-                SaveGame.LoseExperience(spell * 250);
+                SaveGame.LoseExperience(spellIndex * 250);
             }
         }
     }

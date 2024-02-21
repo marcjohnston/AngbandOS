@@ -18,7 +18,7 @@ internal class DeathSpellEnslaveUndead : Spell
 
     public override void CastFailed()
     {
-        SaveGame.RunScriptIntInt(nameof(WildDeathMagicScript), 7, 0);
+        SaveGame.RunSpellScript(nameof(WildDeathMagicScript), this);
     }
 
     public override string Name => "Enslave Undead";

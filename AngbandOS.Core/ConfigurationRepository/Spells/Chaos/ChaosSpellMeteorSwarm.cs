@@ -18,7 +18,7 @@ internal class ChaosSpellMeteorSwarm : Spell
 
     public override void CastFailed()
     {
-        SaveGame.RunScriptInt(nameof(WildChaoticMagicScript), 25);
+        SaveGame.RunSpellScript(nameof(WildChaoticMagicScript), this);
     }
 
     public override string Name => "Meteor Swarm";

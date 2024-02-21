@@ -7782,6 +7782,13 @@ internal class SaveGame
         castedScript.ExecuteScript();
     }
 
+    public void RunSpellScript(string scriptName, Spell spell)
+    {
+        // Get the script from the singleton repository.
+        ISpellScript? script = (ISpellScript)SingletonRepository.Scripts.Get(scriptName);
+        script.ExecuteSpellScript(spell);
+    }
+
     public void RunScriptInt(string scriptName, int value)
     {
         // Get the script from the singleton repository.
