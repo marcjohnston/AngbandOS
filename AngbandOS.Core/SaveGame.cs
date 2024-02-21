@@ -5083,6 +5083,14 @@ internal class SaveGame
         return TargetedProject(SingletonRepository.Projectiles.Get(nameof(TurnAllProjectile)), dir, plev, flg);
     }
 
+    /// <summary>
+    /// Returns true, if the projectile actally hits and affects a monster.
+    /// </summary>
+    /// <param name="projectile"></param>
+    /// <param name="dir"></param>
+    /// <param name="dam"></param>
+    /// <param name="rad"></param>
+    /// <returns></returns>
     public bool FireBall(Projectile projectile, int dir, int dam, int rad)
     {
         ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill;
