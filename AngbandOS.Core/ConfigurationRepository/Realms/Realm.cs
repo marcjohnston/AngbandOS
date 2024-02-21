@@ -84,6 +84,10 @@ internal abstract class Realm : IGetKey<string>
     /// <value><c>true</c> if [resistant to hell fire]; otherwise, <c>false</c>.</value>
     public virtual bool SusceptibleToHolyAndHellProjectiles => false;
 
+    /// <summary>
+    /// Initialize the spells for the character that the player has chosen.  This process occurs during the confirmation birth stage.  Only the
+    /// spells that belong to the primary and secondary realms are initialized.
+    /// </summary>
     public void InitializeSpells()
     {
         int bookIndex = 0;
@@ -94,10 +98,6 @@ internal abstract class Realm : IGetKey<string>
             foreach (Spell spell in bookItemFactory.Spells)
             {
                 spell.Initialize(bookItemFactory, spellIndex);
-                if (spell.ClassSpell.Level < SaveGame.SpellFirst)
-                {
-                    SaveGame.SpellFirst = spell.ClassSpell.Level;
-                }
                 spellIndex++;
             }
         }
