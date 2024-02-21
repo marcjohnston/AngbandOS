@@ -22,7 +22,7 @@ internal class JewelEncrustedCrownArmorItemFactory : CrownArmorItemFactory
     public override int Ds => 1;
     public override string FriendlyName => "& Jewel Encrusted Crown~";
     public override bool IgnoreAcid => true;
-    public override int Level => 50;
+    public override int LevelNormallyFound => 50;
     public override int[] Locale => new int[] { 50, 0, 0, 0 };
     public override int Weight => 40;
     public override Item CreateItem() => new Item(SaveGame, this);

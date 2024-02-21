@@ -22,7 +22,7 @@ internal class GauntletGlovesArmorItemFactory : GlovesArmorItemFactory
     public override int Dd => 1;
     public override int Ds => 1;
     public override string FriendlyName => "& Set~ of Gauntlets";
-    public override int Level => 10;
+    public override int LevelNormallyFound => 10;
     public override int[] Locale => new int[] { 10, 0, 0, 0 };
     public override int Weight => 25;
     public override Item CreateItem() => new Item(SaveGame, this);

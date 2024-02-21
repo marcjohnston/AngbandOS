@@ -19,7 +19,7 @@ internal class FireScrollItemFactory : ScrollItemFactory
     public override int Cost => 1000;
     public override string FriendlyName => "Fire";
     public override bool IgnoreFire => true;
-    public override int Level => 50;
+    public override int LevelNormallyFound => 50;
     public override int[] Locale => new int[] { 50, 0, 0, 0 };
     public override int Weight => 5;
 

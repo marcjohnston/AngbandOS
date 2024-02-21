@@ -66,7 +66,7 @@ internal class ZapRodScript : Script, IScript, IRepeatableScript
         // Using a rod takes a whole turn
         SaveGame.EnergyUse = 100;
         bool identified = false;
-        int itemLevel = item.Factory.Level;
+        int itemLevel = item.Factory.LevelNormallyFound;
         // Chance to successfully use it is skill (halved if confused) - rod level (capped at 50)
         int chance = SaveGame.SkillUseDevice;
         if (SaveGame.TimedConfusion.TurnsRemaining != 0)

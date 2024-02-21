@@ -19,7 +19,7 @@ internal class SustainConstitutionRingItemFactory : RingItemFactory
     public override int Cost => 750;
     public override bool EasyKnow => true;
     public override string FriendlyName => "Sustain Constitution";
-    public override int Level => 30;
+    public override int LevelNormallyFound => 30;
     public override int[] Locale => new int[] { 30, 0, 0, 0 };
     public override bool SustCon => true;
     public override int Weight => 2;

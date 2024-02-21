@@ -18,6 +18,6 @@ internal class Copper2GoldItemFactory : GoldItemFactory
 
     public override int Cost => 5;
     public override string FriendlyName => "copper";
-    public override int Level => 1;
+    public override int LevelNormallyFound => 1;
     public override Item CreateItem() => new Item(SaveGame, this);
 }

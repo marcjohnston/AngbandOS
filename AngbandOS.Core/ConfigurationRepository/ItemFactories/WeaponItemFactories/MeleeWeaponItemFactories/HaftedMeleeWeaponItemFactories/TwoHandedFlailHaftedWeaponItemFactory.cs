@@ -21,7 +21,7 @@ internal class TwoHandedFlailHaftedWeaponItemFactory : HaftedWeaponItemFactory
     public override int Dd => 3;
     public override int Ds => 6;
     public override string FriendlyName => "& Two-Handed Flail~";
-    public override int Level => 45;
+    public override int LevelNormallyFound => 45;
     public override int[] Locale => new int[] { 45, 0, 0, 0 };
     public override bool ShowMods => true;
     public override int Weight => 280;

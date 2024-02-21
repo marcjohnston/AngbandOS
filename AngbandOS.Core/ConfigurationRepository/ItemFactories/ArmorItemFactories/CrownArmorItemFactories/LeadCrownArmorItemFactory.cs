@@ -21,7 +21,7 @@ internal class LeadCrownArmorItemFactory : CrownArmorItemFactory
     public override int Ds => 1;
     public override string FriendlyName => "& Lead Crown~"; // TODO: This appears to cause a defect in identification
     public override bool InstaArt => true;
-    public override int Level => 44;
+    public override int LevelNormallyFound => 44;
     public override int Weight => 20;
     public override Item CreateItem() => new Item(SaveGame, this);
 }

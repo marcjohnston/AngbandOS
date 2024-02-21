@@ -19,7 +19,7 @@ internal class UglinessPotionItemFactory : PotionItemFactory
     public override int Dd => 1;
     public override int Ds => 1;
     public override string FriendlyName => "Ugliness";
-    public override int Level => 20;
+    public override int LevelNormallyFound => 20;
     public override int[] Locale => new int[] { 20, 0, 0, 0 };
     public override int Weight => 4;
     public override bool Quaff()

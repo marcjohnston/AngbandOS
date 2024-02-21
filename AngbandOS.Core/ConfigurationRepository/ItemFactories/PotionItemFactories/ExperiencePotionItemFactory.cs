@@ -20,7 +20,7 @@ internal class ExperiencePotionItemFactory : PotionItemFactory
     public override int Dd => 1;
     public override int Ds => 1;
     public override string FriendlyName => "Experience";
-    public override int Level => 65;
+    public override int LevelNormallyFound => 65;
     public override int[] Locale => new int[] { 65, 0, 0, 0 };
     public override int Weight => 4;
     public override bool Quaff()

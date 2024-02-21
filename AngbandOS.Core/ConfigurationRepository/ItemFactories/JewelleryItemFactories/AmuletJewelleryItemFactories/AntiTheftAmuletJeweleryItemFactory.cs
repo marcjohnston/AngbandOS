@@ -23,7 +23,7 @@ internal class AntiTheftAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
     public override bool IgnoreCold => true;
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
-    public override int Level => 20;
+    public override int LevelNormallyFound => 20;
     public override int[] Locale => new int[] { 20, 0, 0, 0 };
     public override int Weight => 3;
     public override Item CreateItem() => new Item(SaveGame, this);

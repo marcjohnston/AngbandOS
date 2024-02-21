@@ -21,7 +21,7 @@ internal class SeekerBoltAmmunitionItemFactory : BoltAmmunitionItemFactory
     public override int Dd => 4;
     public override int Ds => 5;
     public override string FriendlyName => "& Seeker Bolt~";
-    public override int Level => 65;
+    public override int LevelNormallyFound => 65;
     public override int[] Locale => new int[] { 65, 0, 0, 0 };
     public override bool ShowMods => true;
     public override int Weight => 3;

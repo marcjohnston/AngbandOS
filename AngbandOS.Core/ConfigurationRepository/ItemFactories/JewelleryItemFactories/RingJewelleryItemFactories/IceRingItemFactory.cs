@@ -35,7 +35,7 @@ internal class IceRingItemFactory : RingItemFactory, IItemsCanBeActivated
     public override int Cost => 3000;
     public override string FriendlyName => "Ice";
     public override bool IgnoreCold => true;
-    public override int Level => 50;
+    public override int LevelNormallyFound => 50;
     public override int[] Locale => new int[] { 50, 0, 0, 0 };
     public override bool ResCold => true;
     public override int ToA => 15;

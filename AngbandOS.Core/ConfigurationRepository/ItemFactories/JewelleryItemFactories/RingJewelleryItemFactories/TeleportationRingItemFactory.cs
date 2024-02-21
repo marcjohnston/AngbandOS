@@ -20,7 +20,7 @@ internal class TeleportationRingItemFactory : RingItemFactory
     public override bool Cursed => true;
     public override bool EasyKnow => true;
     public override string FriendlyName => "Teleportation";
-    public override int Level => 5;
+    public override int LevelNormallyFound => 5;
     public override int[] Locale => new int[] { 5, 0, 0, 0 };
     public override bool Teleport => true;
     public override int Weight => 2;

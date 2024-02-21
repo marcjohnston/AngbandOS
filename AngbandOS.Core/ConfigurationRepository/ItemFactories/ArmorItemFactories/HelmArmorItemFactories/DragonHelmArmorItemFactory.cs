@@ -40,7 +40,7 @@ internal class DragonHelmArmorItemFactory : HelmArmorItemFactory
     public override bool IgnoreCold => true;
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
-    public override int Level => 45;
+    public override int LevelNormallyFound => 45;
     public override int[] Locale => new int[] { 80, 0, 0, 0 };
     public override int ToA => 10;
     public override int Weight => 50;

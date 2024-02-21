@@ -25,7 +25,7 @@ internal class StarlightStaffItemFactory : StaffItemFactory
     public override int Dd => 1;
     public override int Ds => 2;
     public override string FriendlyName => "Starlight";
-    public override int Level => 20;
+    public override int LevelNormallyFound => 20;
     public override int[] Locale => new int[] { 20, 0, 0, 0 };
     public override int Weight => 50;
 

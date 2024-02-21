@@ -19,7 +19,7 @@ internal class ShardResistanceRingItemFactory : RingItemFactory
     public override int Cost => 3000;
     public override bool EasyKnow => true;
     public override string FriendlyName => "Shard Resistance";
-    public override int Level => 25;
+    public override int LevelNormallyFound => 25;
     public override int[] Locale => new int[] { 25, 0, 0, 0 };
     public override bool ResShards => true;
     public override int Weight => 2;

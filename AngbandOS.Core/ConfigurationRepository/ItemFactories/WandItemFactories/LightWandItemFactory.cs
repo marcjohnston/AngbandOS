@@ -24,7 +24,7 @@ internal class LightWandItemFactory : WandItemFactory
     public override int Dd => 1;
     public override int Ds => 1;
     public override string FriendlyName => "Light";
-    public override int Level => 3;
+    public override int LevelNormallyFound => 3;
     public override int[] Locale => new int[] { 3, 0, 0, 0 };
     public override int Weight => 10;
     public override bool ExecuteActivation(SaveGame saveGame, int dir)

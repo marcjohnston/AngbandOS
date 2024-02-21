@@ -20,7 +20,7 @@ internal class HumanSkeletonSkeletonItemFactory : SkeletonItemFactory
     public override int Dd => 1;
     public override int Ds => 2;
     public override string FriendlyName => "& Human Skeleton~";
-    public override int Level => 5;
+    public override int LevelNormallyFound => 5;
     public override int[] Locale => new int[] { 5, 0, 0, 0 };
     public override int Weight => 60;
     public override Item CreateItem() => new Item(SaveGame, this);

@@ -35,7 +35,7 @@ internal class PowerRingItemFactory : RingItemFactory
     public override int Cost => 5000000;
     public override string FriendlyName => "Power";
     public override bool InstaArt => true;
-    public override int Level => 110;
+    public override int LevelNormallyFound => 110;
     public override int Weight => 2;
     public override Item CreateItem() => new Item(SaveGame, this);
 }

@@ -24,7 +24,7 @@ internal class ResistancePotionItemFactory : PotionItemFactory
     public override bool IgnoreCold => true;
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
-    public override int Level => 20;
+    public override int LevelNormallyFound => 20;
     public override int[] Locale => new int[] { 20, 45, 80, 100 };
     public override int InitialTypeSpecificValue => 100;
     public override int Weight => 4;

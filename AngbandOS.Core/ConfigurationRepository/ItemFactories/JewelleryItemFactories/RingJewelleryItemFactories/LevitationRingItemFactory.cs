@@ -20,7 +20,7 @@ internal class LevitationRingItemFactory : RingItemFactory
     public override bool EasyKnow => true;
     public override bool Feather => true;
     public override string FriendlyName => "Levitation";
-    public override int Level => 5;
+    public override int LevelNormallyFound => 5;
     public override int[] Locale => new int[] { 5, 0, 0, 0 };
     public override int Weight => 2;
     public override Item CreateItem() => new Item(SaveGame, this);

@@ -20,7 +20,7 @@ internal class NetherResistanceRingItemFactory : RingItemFactory
     public override bool EasyKnow => true;
     public override string FriendlyName => "Nether Resistance";
     public override bool HoldLife => true;
-    public override int Level => 34;
+    public override int LevelNormallyFound => 34;
     public override int[] Locale => new int[] { 34, 0, 0, 0 };
     public override bool ResNether => true;
     public override int Weight => 2;

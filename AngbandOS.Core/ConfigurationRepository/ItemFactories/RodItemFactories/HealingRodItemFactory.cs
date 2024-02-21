@@ -21,7 +21,7 @@ internal class HealingRodItemFactory : RodItemFactory
     public override int Dd => 1;
     public override int Ds => 1;
     public override string FriendlyName => "Healing";
-    public override int Level => 80;
+    public override int LevelNormallyFound => 80;
     public override int[] Locale => new int[] { 80, 0, 0, 0 };
     public override int Weight => 15;
     public override void Execute(ZapRodEvent zapRodEvent)

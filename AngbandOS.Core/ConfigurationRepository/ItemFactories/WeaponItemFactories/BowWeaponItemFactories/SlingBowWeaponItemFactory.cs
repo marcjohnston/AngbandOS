@@ -19,7 +19,7 @@ internal class SlingBowWeaponItemFactory : BowWeaponItemFactory
     public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int Cost => 5;
     public override string FriendlyName => "& Sling~";
-    public override int Level => 1;
+    public override int LevelNormallyFound => 1;
     public override int[] Locale => new int[] { 1, 0, 0, 0 };
     public override bool ShowMods => true;
     public override int Weight => 5;

@@ -25,7 +25,7 @@ internal class GharneFragmentsChaosBookItemFactory : ChaosBookItemFactory
     public override bool IgnoreCold => true;
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
-    public override int Level => 50;
+    public override int LevelNormallyFound => 50;
     public override int[] Locale => new int[] { 50, 0, 0, 0 };
 
     /// <summary>

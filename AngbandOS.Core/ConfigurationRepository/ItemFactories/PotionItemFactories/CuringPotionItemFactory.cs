@@ -20,7 +20,7 @@ internal class CuringPotionItemFactory : PotionItemFactory
     public override int Dd => 1;
     public override int Ds => 1;
     public override string FriendlyName => "Curing";
-    public override int Level => 18;
+    public override int LevelNormallyFound => 18;
     public override int[] Locale => new int[] { 18, 40, 0, 0 };
     public override int InitialTypeSpecificValue => 100;
     public override int Weight => 4;

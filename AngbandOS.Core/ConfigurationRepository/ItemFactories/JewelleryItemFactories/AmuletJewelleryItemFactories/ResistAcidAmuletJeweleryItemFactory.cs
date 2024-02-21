@@ -20,7 +20,7 @@ internal class ResistAcidAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
     public override bool EasyKnow => true;
     public override string FriendlyName => "Resist Acid";
     public override bool IgnoreAcid => true;
-    public override int Level => 20;
+    public override int LevelNormallyFound => 20;
     public override int[] Locale => new int[] { 20, 0, 0, 0 };
     public override bool ResAcid => true;
     public override int Weight => 3;

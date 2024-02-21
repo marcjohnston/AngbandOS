@@ -854,7 +854,7 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey<string>
     public virtual bool KillDragon { get; set; } = false;
 
     public virtual bool KindIsGood => false;
-    public virtual int Level => 0;
+    public virtual int LevelNormallyFound => 0;
     public virtual bool Lightsource { get; set; } = false;
     public virtual int[] Locale => new int[] { 0, 0, 0, 0 };
     public virtual bool NoMagic { get; set; } = false;

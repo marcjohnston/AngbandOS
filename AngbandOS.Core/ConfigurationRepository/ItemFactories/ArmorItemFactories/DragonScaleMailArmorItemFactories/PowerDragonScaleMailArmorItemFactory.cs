@@ -38,7 +38,7 @@ internal class PowerDragonScaleMailArmorItemFactory : DragonScaleMailArmorItemFa
     public override bool IgnoreCold => true;
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
-    public override int Level => 110;
+    public override int LevelNormallyFound => 110;
     public override int[] Locale => new int[] { 110, 0, 0, 0 };
     public override bool ResAcid => true;
     public override bool ResChaos => true;

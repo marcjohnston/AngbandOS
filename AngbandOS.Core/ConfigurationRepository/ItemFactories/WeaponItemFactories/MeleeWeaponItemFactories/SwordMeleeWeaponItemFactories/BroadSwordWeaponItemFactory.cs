@@ -21,7 +21,7 @@ internal class BroadSwordWeaponItemFactory : SwordWeaponItemFactory
     public override int Dd => 2;
     public override int Ds => 5;
     public override string FriendlyName => "& Broad Sword~";
-    public override int Level => 10;
+    public override int LevelNormallyFound => 10;
     public override int[] Locale => new int[] { 10, 15, 0, 0 };
     public override bool ShowMods => true;
     public override int Weight => 150;

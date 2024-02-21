@@ -24,7 +24,7 @@ internal class ProbingStaffItemFactory : StaffItemFactory
     public override int Dd => 1;
     public override int Ds => 2;
     public override string FriendlyName => "Probing";
-    public override int Level => 30;
+    public override int LevelNormallyFound => 30;
     public override int[] Locale => new int[] { 30, 0, 0, 0 };
     public override int Weight => 50;
     public override void UseStaff(UseStaffEvent eventArgs)

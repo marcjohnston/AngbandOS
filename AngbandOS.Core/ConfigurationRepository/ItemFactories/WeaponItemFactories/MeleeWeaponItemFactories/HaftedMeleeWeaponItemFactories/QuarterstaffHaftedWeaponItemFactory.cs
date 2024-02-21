@@ -21,7 +21,7 @@ internal class QuarterstaffHaftedWeaponItemFactory : HaftedWeaponItemFactory
     public override int Dd => 1;
     public override int Ds => 9;
     public override string FriendlyName => "& Quarterstaff~";
-    public override int Level => 10;
+    public override int LevelNormallyFound => 10;
     public override int[] Locale => new int[] { 10, 0, 0, 0 };
     public override bool ShowMods => true;
     public override int Weight => 150;

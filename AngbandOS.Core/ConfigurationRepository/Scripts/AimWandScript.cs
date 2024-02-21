@@ -67,7 +67,7 @@ internal class AimWandScript : Script, IScript, IRepeatableScript, ISuccessfulSc
         // Using a wand takes 100 energy
         SaveGame.EnergyUse = 100;
         bool ident = false;
-        int itemLevel = item.Factory.Level;
+        int itemLevel = item.Factory.LevelNormallyFound;
         // Chance of success is your skill - item level, with item level capped at 50 and your
         // skill halved if you're confused
         int chance = SaveGame.SkillUseDevice;

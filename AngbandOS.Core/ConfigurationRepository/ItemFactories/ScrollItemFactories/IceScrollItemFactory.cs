@@ -19,7 +19,7 @@ internal class IceScrollItemFactory : ScrollItemFactory
     public override int Cost => 5000;
     public override string FriendlyName => "Ice";
     public override bool IgnoreCold => true;
-    public override int Level => 75;
+    public override int LevelNormallyFound => 75;
     public override int[] Locale => new int[] { 75, 0, 0, 0 };
     public override int Weight => 5;
 

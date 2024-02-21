@@ -20,7 +20,7 @@ internal class ResistColdRingItemFactory : RingItemFactory
     public override bool EasyKnow => true;
     public override string FriendlyName => "Resist Cold";
     public override bool IgnoreCold => true;
-    public override int Level => 10;
+    public override int LevelNormallyFound => 10;
     public override int[] Locale => new int[] { 10, 0, 0, 0 };
     public override bool ResCold => true;
     public override int Weight => 2;

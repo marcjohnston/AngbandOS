@@ -62,7 +62,7 @@ internal class WoodenTorchLightSourceItemFactory : LightSourceItemFactory
     public override int Ds => 1;
     public override bool EasyKnow => true;
     public override string FriendlyName => "& Wooden Torch~";
-    public override int Level => 1;
+    public override int LevelNormallyFound => 1;
     public override int[] Locale => new int[] { 1, 0, 0, 0 };
     public override int InitialTypeSpecificValue => 4000;
     public override int Weight => 30;

@@ -21,7 +21,7 @@ internal class DrainLifeRodItemFactory : RodItemFactory
     public override int Dd => 1;
     public override int Ds => 1;
     public override string FriendlyName => "Drain Life";
-    public override int Level => 75;
+    public override int LevelNormallyFound => 75;
     public override int[] Locale => new int[] { 75, 0, 0, 0 };
     public override int Weight => 15;
     public override void Execute(ZapRodEvent zapRodEvent)

@@ -21,7 +21,7 @@ internal class SpearPolearmWeaponItemFactory : PolearmWeaponItemFactory
     public override int Dd => 1;
     public override int Ds => 6;
     public override string FriendlyName => "& Spear~";
-    public override int Level => 5;
+    public override int LevelNormallyFound => 5;
     public override int[] Locale => new int[] { 5, 0, 0, 0 };
     public override bool ShowMods => true;
     public override int Weight => 50;

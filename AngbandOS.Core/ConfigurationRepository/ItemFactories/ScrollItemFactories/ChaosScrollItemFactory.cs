@@ -22,7 +22,7 @@ internal class ChaosScrollItemFactory : ScrollItemFactory
     public override bool IgnoreCold => true;
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
-    public override int Level => 100;
+    public override int LevelNormallyFound => 100;
     public override int[] Locale => new int[] { 100, 0, 0, 0 };
     public override int Weight => 5;
 

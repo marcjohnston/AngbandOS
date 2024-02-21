@@ -19,7 +19,7 @@ internal class PoisonResistanceRingItemFactory : RingItemFactory
     public override int Cost => 16000;
     public override bool EasyKnow => true;
     public override string FriendlyName => "Poison Resistance";
-    public override int Level => 60;
+    public override int LevelNormallyFound => 60;
     public override int[] Locale => new int[] { 60, 0, 0, 0 };
     public override bool ResPois => true;
     public override int Weight => 2;

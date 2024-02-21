@@ -21,7 +21,7 @@ internal class SmallWoodenChestItemFactory : ChestItemFactory
     public override int Dd => 2;
     public override int Ds => 3;
     public override string FriendlyName => "& Small wooden chest~";
-    public override int Level => 5;
+    public override int LevelNormallyFound => 5;
     public override int[] Locale => new int[] { 5, 0, 0, 0 };
     public override int Weight => 250;
     public override bool IsSmall => true;

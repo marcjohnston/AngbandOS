@@ -24,7 +24,7 @@ internal class RechargeItemScript : Script, IScript, ISuccessfulScriptInt
         {
             return false;
         }
-        int lev = oPtr.Factory.Level;
+        int lev = oPtr.Factory.LevelNormallyFound;
         if (oPtr.Category == ItemTypeEnum.Rod)
         {
             i = (100 - lev + num) / 5;

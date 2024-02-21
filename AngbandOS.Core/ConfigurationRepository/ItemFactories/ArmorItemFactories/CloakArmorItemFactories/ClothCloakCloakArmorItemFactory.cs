@@ -20,7 +20,7 @@ internal class ClothCloakCloakArmorItemFactory : CloakArmorItemFactory
     public override int[] Chance => new int[] { 1, 1, 0, 0 };
     public override int Cost => 3;
     public override string FriendlyName => "& Cloak~";
-    public override int Level => 1;
+    public override int LevelNormallyFound => 1;
     public override int[] Locale => new int[] { 1, 20, 0, 0 };
     public override int Weight => 10;
     public override Item CreateItem() => new Item(SaveGame, this);

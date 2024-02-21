@@ -29,7 +29,7 @@ internal class AntiMagicAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
     public override bool IgnoreCold => true;
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
-    public override int Level => 40;
+    public override int LevelNormallyFound => 40;
     public override int[] Locale => new int[] { 40, 0, 0, 0 };
     public override bool NoMagic => true;
     public override int Weight => 3;

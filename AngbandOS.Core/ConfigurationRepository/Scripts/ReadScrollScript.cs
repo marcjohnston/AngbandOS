@@ -74,7 +74,7 @@ internal class ReadScrollScript : Script, IScript, IRepeatableScript
         if (readScrollEventArgs.Identified && !item.IsFlavorAware())
         {
             item.BecomeFlavorAware();
-            int itemLevel = item.Factory.Level;
+            int itemLevel = item.Factory.LevelNormallyFound;
             SaveGame.GainExperience((itemLevel + (SaveGame.ExperienceLevel >> 1)) / SaveGame.ExperienceLevel);
         }
         bool channeled = false;

@@ -21,7 +21,7 @@ internal class SeekerArrowAmmunitionItemFactory : ArrowAmmunitionItemFactory
     public override int Dd => 4;
     public override int Ds => 4;
     public override string FriendlyName => "& Seeker Arrow~";
-    public override int Level => 55;
+    public override int LevelNormallyFound => 55;
     public override int[] Locale => new int[] { 55, 0, 0, 0 };
     public override bool ShowMods => true;
     public override int Weight => 2;

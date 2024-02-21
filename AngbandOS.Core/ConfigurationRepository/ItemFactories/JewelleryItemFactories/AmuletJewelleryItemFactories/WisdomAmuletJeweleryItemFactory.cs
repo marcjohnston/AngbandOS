@@ -30,7 +30,7 @@ internal class WisdomAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
     public override int Cost => 500;
     public override string FriendlyName => "Wisdom";
     public override bool HideType => true;
-    public override int Level => 20;
+    public override int LevelNormallyFound => 20;
     public override int[] Locale => new int[] { 20, 0, 0, 0 };
     public override int Weight => 3;
     public override Item CreateItem() => new Item(SaveGame, this);

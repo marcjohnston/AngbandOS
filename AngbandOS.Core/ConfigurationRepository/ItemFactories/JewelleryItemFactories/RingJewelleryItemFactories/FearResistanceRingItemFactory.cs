@@ -19,7 +19,7 @@ internal class FearResistanceRingItemFactory : RingItemFactory
     public override int Cost => 300;
     public override bool EasyKnow => true;
     public override string FriendlyName => "Fear Resistance";
-    public override int Level => 10;
+    public override int LevelNormallyFound => 10;
     public override int[] Locale => new int[] { 10, 0, 0, 0 };
     public override bool ResFear => true;
     public override int Weight => 2;

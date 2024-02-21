@@ -54,7 +54,7 @@ internal class UseStaffScript : Script, IScript, IRepeatableScript
         }
         // Using a staff costs a full turn
         SaveGame.EnergyUse = 100;
-        int itemLevel = item.Factory.Level;
+        int itemLevel = item.Factory.LevelNormallyFound;
         // We have a chance of the device working equal to skill (halved if confused) - item
         // level (capped at 50)
         int chance = SaveGame.SkillUseDevice;

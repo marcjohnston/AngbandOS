@@ -21,7 +21,7 @@ internal class ProbingRodItemFactory : RodItemFactory
     public override int Dd => 1;
     public override int Ds => 1;
     public override string FriendlyName => "Probing";
-    public override int Level => 40;
+    public override int LevelNormallyFound => 40;
     public override int[] Locale => new int[] { 40, 0, 0, 0 };
     public override int Weight => 15;
     public override void Execute(ZapRodEvent zapRodEvent)

@@ -21,7 +21,7 @@ internal class PickDiggingWeaponItemFactory : DiggingWeaponItemFactory
     public override int Dd => 1;
     public override int Ds => 3;
     public override string FriendlyName => "& Pick~";
-    public override int Level => 5;
+    public override int LevelNormallyFound => 5;
     public override int[] Locale => new int[] { 10, 0, 0, 0 };
     public override int InitialTypeSpecificValue => 1;
     public override bool ShowMods => true;

@@ -18,6 +18,6 @@ internal class SapphiresGoldItemFactory : GoldItemFactory
 
     public override int Cost => 20;
     public override string FriendlyName => "sapphires";
-    public override int Level => 1;
+    public override int LevelNormallyFound => 1;
     public override Item CreateItem() => new Item(SaveGame, this);
 }

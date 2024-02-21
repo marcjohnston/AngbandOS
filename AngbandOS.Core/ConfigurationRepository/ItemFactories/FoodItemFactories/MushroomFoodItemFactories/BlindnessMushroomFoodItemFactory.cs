@@ -17,7 +17,7 @@ internal class BlindnessMushroomFoodItemFactory : MushroomFoodItemFactory
 
     public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override string FriendlyName => "Blindness";
-    public override int Level => 5;
+    public override int LevelNormallyFound => 5;
     public override int[] Locale => new int[] { 5, 0, 0, 0 };
     public override int InitialTypeSpecificValue => 500;
     public override int Weight => 1;

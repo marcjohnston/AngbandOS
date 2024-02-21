@@ -17,7 +17,7 @@ internal class ParalysisMushroomFoodItemFactory : MushroomFoodItemFactory
 
     public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override string FriendlyName => "Paralysis";
-    public override int Level => 20;
+    public override int LevelNormallyFound => 20;
     public override int[] Locale => new int[] { 20, 0, 0, 0 };
     public override int InitialTypeSpecificValue => 500;
     public override int Weight => 1;

@@ -21,7 +21,7 @@ internal class GreatAxePolearmWeaponItemFactory : PolearmWeaponItemFactory
     public override int Dd => 4;
     public override int Ds => 4;
     public override string FriendlyName => "& Great Axe~";
-    public override int Level => 40;
+    public override int LevelNormallyFound => 40;
     public override int[] Locale => new int[] { 40, 0, 0, 0 };
     public override bool ShowMods => true;
     public override int Weight => 230;

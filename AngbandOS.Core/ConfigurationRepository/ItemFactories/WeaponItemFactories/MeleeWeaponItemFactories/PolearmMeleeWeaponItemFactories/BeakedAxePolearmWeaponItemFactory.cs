@@ -21,7 +21,7 @@ internal class BeakedAxePolearmWeaponItemFactory : PolearmWeaponItemFactory
     public override int Dd => 2;
     public override int Ds => 6;
     public override string FriendlyName => "& Beaked Axe~";
-    public override int Level => 15;
+    public override int LevelNormallyFound => 15;
     public override int[] Locale => new int[] { 15, 0, 0, 0 };
     public override bool ShowMods => true;
     public override int Weight => 180;

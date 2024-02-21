@@ -21,7 +21,7 @@ internal class ExecutionersSwordWeaponItemFactory : SwordWeaponItemFactory
     public override int Dd => 4;
     public override int Ds => 5;
     public override string FriendlyName => "& Executioner's Sword~";
-    public override int Level => 40;
+    public override int LevelNormallyFound => 40;
     public override int[] Locale => new int[] { 40, 0, 0, 0 };
     public override bool ShowMods => true;
     public override int Weight => 260;

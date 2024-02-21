@@ -22,7 +22,7 @@ internal class MetalScaleMailHardArmorItemFactory : HardArmorItemFactory
     public override int Dd => 1;
     public override int Ds => 4;
     public override string FriendlyName => "Metal Scale Mail~";
-    public override int Level => 25;
+    public override int LevelNormallyFound => 25;
     public override int[] Locale => new int[] { 25, 0, 0, 0 };
     public override int ToH => -2;
     public override int Weight => 250;

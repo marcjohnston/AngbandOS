@@ -18,7 +18,7 @@ internal class RemoveCurseScrollItemFactory : ScrollItemFactory
     public override int[] Chance => new int[] { 1, 2, 2, 0 };
     public override int Cost => 100;
     public override string FriendlyName => "Remove Curse";
-    public override int Level => 10;
+    public override int LevelNormallyFound => 10;
     public override int[] Locale => new int[] { 10, 20, 40, 0 };
     public override int Weight => 5;
 

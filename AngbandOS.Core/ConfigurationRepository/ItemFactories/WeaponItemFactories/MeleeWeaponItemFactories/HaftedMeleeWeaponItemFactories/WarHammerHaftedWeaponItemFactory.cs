@@ -21,7 +21,7 @@ internal class WarHammerHaftedWeaponItemFactory : HaftedWeaponItemFactory
     public override int Dd => 3;
     public override int Ds => 3;
     public override string FriendlyName => "& War Hammer~";
-    public override int Level => 5;
+    public override int LevelNormallyFound => 5;
     public override int[] Locale => new int[] { 5, 0, 0, 0 };
     public override bool ShowMods => true;
     public override int Weight => 120;

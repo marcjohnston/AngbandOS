@@ -28,7 +28,7 @@ internal class DragonsFrostWandItemFactory : WandItemFactory
     public override bool IgnoreCold => true;
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
-    public override int Level => 50;
+    public override int LevelNormallyFound => 50;
     public override int[] Locale => new int[] { 50, 0, 0, 0 };
     public override int Weight => 10;
     public override bool ExecuteActivation(SaveGame saveGame, int dir)

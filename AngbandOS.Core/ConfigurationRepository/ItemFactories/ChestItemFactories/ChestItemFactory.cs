@@ -87,9 +87,9 @@ internal abstract class ChestItemFactory : ItemFactory
     /// <param name="store"></param>
     public override void ApplyMagic(Item item, int level, int power, Store? store)
     {
-        if (item.Factory.Level > 0)
+        if (item.Factory.LevelNormallyFound > 0)
         {
-            item.TypeSpecificValue = SaveGame.DieRoll(item.Factory.Level);
+            item.TypeSpecificValue = SaveGame.DieRoll(item.Factory.LevelNormallyFound);
             if (item.TypeSpecificValue > 55)
             {
                 int chestTrapConfigurationCount = SaveGame.SingletonRepository.ChestTrapConfigurations.Count;

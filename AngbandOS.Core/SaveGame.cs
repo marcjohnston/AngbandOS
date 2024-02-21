@@ -1474,9 +1474,9 @@ internal class SaveGame
                 return null;
             }
             ItemFactory kIdx = aPtr.BaseItemFactory;
-            if (kIdx.Level > ObjectLevel)
+            if (kIdx.LevelNormallyFound > ObjectLevel)
             {
-                int d = (kIdx.Level - ObjectLevel) * 5;
+                int d = (kIdx.LevelNormallyFound - ObjectLevel) * 5;
                 if (RandomLessThan(d) != 0)
                 {
                     continue;
@@ -1514,9 +1514,9 @@ internal class SaveGame
         }
         item.ApplyMagic(ObjectLevel, true, good, great, null);
         item.Count = item.Factory.MakeObjectCount;
-        if (!item.IsCursed() && !item.IsBroken() && item.Factory.Level > Difficulty)
+        if (!item.IsCursed() && !item.IsBroken() && item.Factory.LevelNormallyFound > Difficulty)
         {
-            TreasureRating += item.Factory.Level - Difficulty;
+            TreasureRating += item.Factory.LevelNormallyFound - Difficulty;
         }
         return item;
     }

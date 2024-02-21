@@ -18,6 +18,6 @@ internal class LotOfGarnetsGoldItemFactory : GoldItemFactory
 
     public override int Cost => 10;
     public override string FriendlyName => "lot of garnets";
-    public override int Level => 1;
+    public override int LevelNormallyFound => 1;
     public override Item CreateItem() => new Item(SaveGame, this);
 }

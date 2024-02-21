@@ -22,7 +22,7 @@ internal class HardStuddedLeatherSoftArmorItemFactory : SoftArmorItemFactory
     public override int Dd => 1;
     public override int Ds => 2;
     public override string FriendlyName => "Hard Studded Leather~";
-    public override int Level => 10;
+    public override int LevelNormallyFound => 10;
     public override int[] Locale => new int[] { 10, 0, 0, 0 };
     public override int ToH => -1;
     public override int Weight => 110;

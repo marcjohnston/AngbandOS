@@ -18,6 +18,6 @@ internal class PieceOfSilverGoldItemFactory : GoldItemFactory
 
     public override int Cost => 6;
     public override string FriendlyName => "piece of silver";
-    public override int Level => 1;
+    public override int LevelNormallyFound => 1;
     public override Item CreateItem() => new Item(SaveGame, this);
 }

@@ -22,7 +22,7 @@ internal class FullPlateHardArmorItemFactory : HardArmorItemFactory
     public override int Dd => 2;
     public override int Ds => 4;
     public override string FriendlyName => "Full Plate Armor~";
-    public override int Level => 45;
+    public override int LevelNormallyFound => 45;
     public override int[] Locale => new int[] { 45, 0, 0, 0 };
     public override int ToH => -3;
     public override int Weight => 380;

@@ -21,7 +21,7 @@ internal class ShovelDiggingWeaponItemFactory : DiggingWeaponItemFactory
     public override int Dd => 1;
     public override int Ds => 2;
     public override string FriendlyName => "& Shovel~";
-    public override int Level => 1;
+    public override int LevelNormallyFound => 1;
     public override int[] Locale => new int[] { 5, 0, 0, 0 };
     public override int InitialTypeSpecificValue => 1;
     public override bool ShowMods => true;

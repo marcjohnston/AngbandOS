@@ -21,7 +21,7 @@ internal class TeleportOtherRodItemFactory : RodItemFactory
     public override int Dd => 1;
     public override int Ds => 1;
     public override string FriendlyName => "Teleport Other";
-    public override int Level => 45;
+    public override int LevelNormallyFound => 45;
     public override int[] Locale => new int[] { 45, 0, 0, 0 };
     public override int Weight => 15;
     public override void Execute(ZapRodEvent zapRodEvent)

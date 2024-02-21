@@ -19,7 +19,7 @@ internal class SlowDigestionAmuletJeweleryItemFactory : AmuletJeweleryItemFactor
     public override int Cost => 200;
     public override bool EasyKnow => true;
     public override string FriendlyName => "Slow Digestion";
-    public override int Level => 15;
+    public override int LevelNormallyFound => 15;
     public override int[] Locale => new int[] { 15, 0, 0, 0 };
     public override bool SlowDigest => true;
     public override int Weight => 3;

@@ -17,7 +17,7 @@ internal class StupidityMushroomFoodItemFactory : MushroomFoodItemFactory
 
     public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override string FriendlyName => "Stupidity";
-    public override int Level => 15;
+    public override int LevelNormallyFound => 15;
     public override int[] Locale => new int[] { 15, 0, 0, 0 };
     public override int InitialTypeSpecificValue => 500;
     public override int Weight => 1;

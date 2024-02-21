@@ -23,7 +23,7 @@ internal class AdamantitePlateMailHardArmorItemFactory : HardArmorItemFactory
     public override int Ds => 4;
     public override string FriendlyName => "Adamantite Plate Mail~";
     public override bool IgnoreAcid => true;
-    public override int Level => 75;
+    public override int LevelNormallyFound => 75;
     public override int[] Locale => new int[] { 75, 0, 0, 0 };
     public override int ToH => -4;
     public override int Weight => 420;

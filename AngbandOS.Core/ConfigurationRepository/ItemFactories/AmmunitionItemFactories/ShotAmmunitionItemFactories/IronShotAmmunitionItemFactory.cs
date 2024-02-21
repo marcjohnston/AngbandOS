@@ -21,7 +21,7 @@ internal class IronShotAmmunitionItemFactory : ShotAmmunitionItemFactory
     public override int Dd => 1;
     public override int Ds => 3;
     public override string FriendlyName => "& Iron Shot~";
-    public override int Level => 3;
+    public override int LevelNormallyFound => 3;
     public override int[] Locale => new int[] { 3, 0, 0, 0 };
     public override bool ShowMods => true;
     public override int Weight => 5;

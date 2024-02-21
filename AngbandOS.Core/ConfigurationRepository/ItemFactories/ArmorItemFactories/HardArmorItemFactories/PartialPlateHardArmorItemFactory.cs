@@ -22,7 +22,7 @@ internal class PartialPlateHardArmorItemFactory : HardArmorItemFactory
     public override int Dd => 1;
     public override int Ds => 6;
     public override string FriendlyName => "Partial Plate Armor~";
-    public override int Level => 45;
+    public override int LevelNormallyFound => 45;
     public override int[] Locale => new int[] { 45, 0, 0, 0 };
     public override int ToH => -3;
     public override int Weight => 260;

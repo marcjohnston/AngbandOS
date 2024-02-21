@@ -21,7 +21,7 @@ internal class AwlPikePolearmWeaponItemFactory : PolearmWeaponItemFactory
     public override int Dd => 1;
     public override int Ds => 8;
     public override string FriendlyName => "& Awl-Pike~";
-    public override int Level => 10;
+    public override int LevelNormallyFound => 10;
     public override int[] Locale => new int[] { 10, 0, 0, 0 };
     public override bool ShowMods => true;
     public override int Weight => 160;

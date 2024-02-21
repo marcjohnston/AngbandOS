@@ -21,7 +21,7 @@ internal class BastardSwordSwordWeaponItemFactory : SwordWeaponItemFactory
     public override int Dd => 3;
     public override int Ds => 4;
     public override string FriendlyName => "& Bastard Sword~";
-    public override int Level => 15;
+    public override int LevelNormallyFound => 15;
     public override int[] Locale => new int[] { 15, 0, 0, 0 };
     public override bool ShowMods => true;
     public override int Weight => 140;

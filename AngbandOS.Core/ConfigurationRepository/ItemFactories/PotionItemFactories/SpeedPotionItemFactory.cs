@@ -20,7 +20,7 @@ internal class SpeedPotionItemFactory : PotionItemFactory
     public override int Dd => 1;
     public override int Ds => 1;
     public override string FriendlyName => "Speed";
-    public override int Level => 1;
+    public override int LevelNormallyFound => 1;
     public override int[] Locale => new int[] { 1, 40, 60, 0 };
     public override int Weight => 4;
     public override bool Quaff()

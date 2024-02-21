@@ -17,7 +17,7 @@ internal class SummonUndeadScrollItemFactory : ScrollItemFactory
 
     public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override string FriendlyName => "Summon Undead";
-    public override int Level => 15;
+    public override int LevelNormallyFound => 15;
     public override int[] Locale => new int[] { 15, 0, 0, 0 };
     public override int Weight => 5;
 

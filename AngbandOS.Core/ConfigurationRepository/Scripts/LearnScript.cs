@@ -20,7 +20,7 @@ internal class LearnScript : Script, IScript
     {
         foreach (ItemFactory kPtr in SaveGame.SingletonRepository.ItemFactories)
         {
-            if (kPtr.Level <= SaveGame.CommandArgument)
+            if (kPtr.LevelNormallyFound <= SaveGame.CommandArgument)
             {
                 kPtr.FlavorAware = true;
             }

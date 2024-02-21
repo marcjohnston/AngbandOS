@@ -20,7 +20,7 @@ internal class UnhealthMushroomFoodItemFactory : MushroomFoodItemFactory
     public override int Dd => 10;
     public override int Ds => 10;
     public override string FriendlyName => "Unhealth";
-    public override int Level => 15;
+    public override int LevelNormallyFound => 15;
     public override int[] Locale => new int[] { 15, 0, 0, 0 };
     public override int InitialTypeSpecificValue => 500;
     public override int Weight => 1;

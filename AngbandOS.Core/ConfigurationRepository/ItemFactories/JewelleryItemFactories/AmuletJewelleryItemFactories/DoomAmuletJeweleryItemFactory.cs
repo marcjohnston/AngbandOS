@@ -30,7 +30,7 @@ internal class DoomAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
     public override string FriendlyName => "DOOM";
     public override bool HideType => true;
     public override bool Int => true;
-    public override int Level => 50;
+    public override int LevelNormallyFound => 50;
     public override int[] Locale => new int[] { 50, 0, 0, 0 };
     public override int InitialTypeSpecificValue => -5;
     public override bool Str => true;

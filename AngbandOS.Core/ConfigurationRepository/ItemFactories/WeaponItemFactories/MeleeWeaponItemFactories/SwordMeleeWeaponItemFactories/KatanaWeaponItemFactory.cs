@@ -21,7 +21,7 @@ internal class KatanaWeaponItemFactory : SwordWeaponItemFactory
     public override int Dd => 3;
     public override int Ds => 4;
     public override string FriendlyName => "& Katana~";
-    public override int Level => 20;
+    public override int LevelNormallyFound => 20;
     public override int[] Locale => new int[] { 20, 0, 0, 0 };
     public override bool ShowMods => true;
     public override int Weight => 120;

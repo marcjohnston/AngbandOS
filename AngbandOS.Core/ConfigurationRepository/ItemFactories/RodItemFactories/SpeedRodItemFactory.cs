@@ -21,7 +21,7 @@ internal class SpeedRodItemFactory : RodItemFactory
     public override int Dd => 1;
     public override int Ds => 1;
     public override string FriendlyName => "Speed";
-    public override int Level => 95;
+    public override int LevelNormallyFound => 95;
     public override int[] Locale => new int[] { 95, 0, 0, 0 };
     public override int Weight => 15;
     public override void Execute(ZapRodEvent zapRodEvent)

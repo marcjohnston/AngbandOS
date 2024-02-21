@@ -40,7 +40,7 @@ internal class PseudoDragonScaleMailArmorItemFactory : DragonScaleMailArmorItemF
     public override bool IgnoreCold => true;
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
-    public override int Level => 65;
+    public override int LevelNormallyFound => 65;
     public override int[] Locale => new int[] { 65, 0, 0, 0 };
     public override bool ResDark => true;
     public override bool ResLight => true;

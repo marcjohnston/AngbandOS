@@ -20,7 +20,7 @@ internal class LifePotionItemFactory : PotionItemFactory
     public override int Dd => 1;
     public override int Ds => 1;
     public override string FriendlyName => "Life";
-    public override int Level => 60;
+    public override int LevelNormallyFound => 60;
     public override int[] Locale => new int[] { 60, 100, 0, 0 };
     public override int Weight => 4;
     public override bool Quaff()

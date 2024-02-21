@@ -23,7 +23,7 @@ internal class MithrilPlateMailHardArmorItemFactory : HardArmorItemFactory
     public override int Ds => 4;
     public override string FriendlyName => "Mithril Plate Mail~";
     public override bool IgnoreAcid => true;
-    public override int Level => 60;
+    public override int LevelNormallyFound => 60;
     public override int[] Locale => new int[] { 60, 0, 0, 0 };
     public override int ToH => -3;
     public override int Weight => 300;

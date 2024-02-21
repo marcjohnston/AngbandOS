@@ -22,7 +22,7 @@ internal class CestiGlovesArmorItemFactory : GlovesArmorItemFactory
     public override int Dd => 1;
     public override int Ds => 1;
     public override string FriendlyName => "& Set~ of Cesti";
-    public override int Level => 50;
+    public override int LevelNormallyFound => 50;
     public override int[] Locale => new int[] { 50, 0, 0, 0 };
     public override int Weight => 40;
     public override Item CreateItem() => new Item(SaveGame, this);

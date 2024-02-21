@@ -23,7 +23,7 @@ internal class MithrilChainMailHardArmorItemFactory : HardArmorItemFactory
     public override int Ds => 4;
     public override string FriendlyName => "Mithril Chain Mail~";
     public override bool IgnoreAcid => true;
-    public override int Level => 55;
+    public override int LevelNormallyFound => 55;
     public override int[] Locale => new int[] { 55, 0, 0, 0 };
     public override int ToH => -1;
     public override int Weight => 150;

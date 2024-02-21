@@ -19,7 +19,7 @@ internal class PieceOfElvishWaybreadFoodItemFactory : FoodItemFactory
     public override int[] Chance => new int[] { 1, 1, 1, 0 };
     public override int Cost => 10;
     public override string FriendlyName => "& Piece~ of Elvish Waybread";
-    public override int Level => 5;
+    public override int LevelNormallyFound => 5;
     public override int[] Locale => new int[] { 5, 10, 20, 0 };
     public override int InitialTypeSpecificValue => 7500;
     public override int Weight => 3;

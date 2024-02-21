@@ -38,7 +38,7 @@ internal class RedDragonScaleMailArmorItemFactory : DragonScaleMailArmorItemFact
     public override bool IgnoreCold => true;
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
-    public override int Level => 80;
+    public override int LevelNormallyFound => 80;
     public override int[] Locale => new int[] { 80, 0, 0, 0 };
     public override bool ResFire => true;
     public override int ToA => 10;

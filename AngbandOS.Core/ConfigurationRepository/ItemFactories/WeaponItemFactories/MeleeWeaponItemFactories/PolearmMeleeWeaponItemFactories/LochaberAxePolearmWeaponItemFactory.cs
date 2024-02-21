@@ -21,7 +21,7 @@ internal class LochaberAxePolearmWeaponItemFactory : PolearmWeaponItemFactory
     public override int Dd => 3;
     public override int Ds => 8;
     public override string FriendlyName => "& Lochaber Axe~";
-    public override int Level => 45;
+    public override int LevelNormallyFound => 45;
     public override int[] Locale => new int[] { 45, 0, 0, 0 };
     public override bool ShowMods => true;
     public override int Weight => 250;

@@ -27,7 +27,7 @@ internal class EatMagicActiveMutation : Mutation
             return;
         }
 
-        int lev = oPtr.Factory.Level;
+        int lev = oPtr.Factory.LevelNormallyFound;
         if (oPtr.Category == ItemTypeEnum.Rod)
         {
             if (oPtr.TypeSpecificValue > 0)

@@ -22,7 +22,7 @@ internal class SteelHelmArmorItemFactory : HelmArmorItemFactory
     public override int Dd => 1;
     public override int Ds => 3;
     public override string FriendlyName => "& Steel Helm~";
-    public override int Level => 40;
+    public override int LevelNormallyFound => 40;
     public override int[] Locale => new int[] { 40, 0, 0, 0 };
     public override int Weight => 60;
     public override Item CreateItem() => new Item(SaveGame, this);

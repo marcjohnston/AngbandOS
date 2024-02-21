@@ -21,7 +21,7 @@ internal class BasicChiFlowCorporealBookItemFactory : CorporealBookItemFactory
     public override int Dd => 1;
     public override int Ds => 1;
     public override string FriendlyName => "[Basic Chi Flow]";
-    public override int Level => 10;
+    public override int LevelNormallyFound => 10;
     public override int[] Locale => new int[] { 10, 0, 0, 0 };
     public override int Weight => 30;
     public override bool KindIsGood => false;

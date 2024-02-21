@@ -18,7 +18,7 @@ internal class MagicMappingScrollItemFactory : ScrollItemFactory
     public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int Cost => 40;
     public override string FriendlyName => "Magic Mapping";
-    public override int Level => 5;
+    public override int LevelNormallyFound => 5;
     public override int[] Locale => new int[] { 5, 0, 0, 0 };
     public override int Weight => 5;
 

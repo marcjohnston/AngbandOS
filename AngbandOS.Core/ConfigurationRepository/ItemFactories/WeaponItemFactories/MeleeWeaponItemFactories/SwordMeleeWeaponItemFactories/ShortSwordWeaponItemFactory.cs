@@ -21,7 +21,7 @@ internal class ShortSwordWeaponItemFactory : SwordWeaponItemFactory
     public override int Dd => 1;
     public override int Ds => 7;
     public override string FriendlyName => "& Short Sword~";
-    public override int Level => 5;
+    public override int LevelNormallyFound => 5;
     public override int[] Locale => new int[] { 5, 0, 0, 0 };
     public override bool ShowMods => true;
     public override int Weight => 80;

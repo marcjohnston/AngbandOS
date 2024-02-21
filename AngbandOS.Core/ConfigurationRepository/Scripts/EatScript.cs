@@ -48,7 +48,7 @@ internal class EatScript : Script, IScript, IRepeatableScript
 
         // Eating costs 100 energy
         SaveGame.EnergyUse = 100;
-        int itemLevel = item.Factory.Level;
+        int itemLevel = item.Factory.LevelNormallyFound;
 
         // Allow the food item to process the consumption.
         bool ident = foodItemFactory.Eat();

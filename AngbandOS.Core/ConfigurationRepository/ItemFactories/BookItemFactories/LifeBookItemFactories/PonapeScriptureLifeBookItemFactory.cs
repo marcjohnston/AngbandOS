@@ -31,7 +31,7 @@ internal class PonapeScriptureLifeBookItemFactory : LifeBookItemFactory
     public override bool IgnoreCold => true;
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
-    public override int Level => 90;
+    public override int LevelNormallyFound => 90;
     public override int[] Locale => new int[] { 90, 0, 0, 0 };
 
     /// <summary>

@@ -21,7 +21,7 @@ internal class ScytheOfSlicingPolearmWeaponItemFactory : PolearmWeaponItemFactor
     public override int Dd => 8;
     public override int Ds => 4;
     public override string FriendlyName => "& Scythe~ of Slicing";
-    public override int Level => 60;
+    public override int LevelNormallyFound => 60;
     public override int[] Locale => new int[] { 60, 0, 0, 0 };
     public override bool ShowMods => true;
     public override int Weight => 250;

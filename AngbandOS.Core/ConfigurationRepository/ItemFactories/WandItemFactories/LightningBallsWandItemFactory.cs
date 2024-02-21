@@ -25,7 +25,7 @@ internal class LightningBallsWandItemFactory : WandItemFactory
     public override int Ds => 1;
     public override string FriendlyName => "Lightning Balls";
     public override bool IgnoreElec => true;
-    public override int Level => 35;
+    public override int LevelNormallyFound => 35;
     public override int[] Locale => new int[] { 35, 0, 0, 0 };
     public override int Weight => 10;
     public override bool ExecuteActivation(SaveGame saveGame, int dir)

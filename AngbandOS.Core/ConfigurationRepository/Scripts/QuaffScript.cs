@@ -46,7 +46,7 @@ internal class QuaffScript : Script, IScript, IRepeatableScript
         SaveGame.PlaySound(SoundEffectEnum.Quaff);
         // Drinking a potion costs a whole turn
         SaveGame.EnergyUse = 100;
-        int itemLevel = item.Factory.Level;
+        int itemLevel = item.Factory.LevelNormallyFound;
         // Do the actual potion effect
         PotionItemFactory potion = (PotionItemFactory)item.Factory; // The item will be a potion.
         bool identified = potion.Quaff();

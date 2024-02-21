@@ -19,7 +19,7 @@ internal class SlowDigestionRingItemFactory : RingItemFactory
     public override int Cost => 250;
     public override bool EasyKnow => true;
     public override string FriendlyName => "Slow Digestion";
-    public override int Level => 5;
+    public override int LevelNormallyFound => 5;
     public override int[] Locale => new int[] { 5, 0, 0, 0 };
     public override bool SlowDigest => true;
     public override int Weight => 2;

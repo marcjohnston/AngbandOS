@@ -24,7 +24,7 @@ internal class RemoveCurseStaffItemFactory : StaffItemFactory
     }
     public override int Ds => 2;
     public override string FriendlyName => "Remove Curse";
-    public override int Level => 40;
+    public override int LevelNormallyFound => 40;
     public override int[] Locale => new int[] { 40, 0, 0, 0 };
     public override int Weight => 50;
 
