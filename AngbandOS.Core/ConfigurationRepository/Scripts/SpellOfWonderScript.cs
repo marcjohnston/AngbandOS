@@ -60,8 +60,7 @@ internal class SpellOfWonderScript : Script, IScript
         }
         else if (die < 36)
         {
-            SaveGame.FireBoltOrBeam(beam - 10, SaveGame.SingletonRepository.Projectiles.Get(nameof(MissileProjectile)), dir,
-                SaveGame.DiceRoll(3 + ((SaveGame.ExperienceLevel - 1) / 5), 4));
+            SaveGame.FireBoltOrBeam(beam - 10, SaveGame.SingletonRepository.Projectiles.Get(nameof(MissileProjectile)), dir, SaveGame.DiceRoll(3 + ((SaveGame.ExperienceLevel - 1) / 5), 4));
         }
         else if (die < 41)
         {
@@ -77,23 +76,19 @@ internal class SpellOfWonderScript : Script, IScript
         }
         else if (die < 56)
         {
-            SaveGame.FireBoltOrBeam(beam - 10, SaveGame.SingletonRepository.Projectiles.Get(nameof(ElecProjectile)), dir,
-                SaveGame.DiceRoll(3 + ((SaveGame.ExperienceLevel - 5) / 4), 8));
+            SaveGame.FireBoltOrBeam(beam - 10, SaveGame.SingletonRepository.Projectiles.Get(nameof(ElecProjectile)), dir, SaveGame.DiceRoll(3 + ((SaveGame.ExperienceLevel - 5) / 4), 8));
         }
         else if (die < 61)
         {
-            SaveGame.FireBoltOrBeam(beam - 10, SaveGame.SingletonRepository.Projectiles.Get(nameof(ColdProjectile)), dir,
-                SaveGame.DiceRoll(5 + ((SaveGame.ExperienceLevel - 5) / 4), 8));
+            SaveGame.FireBoltOrBeam(beam - 10, SaveGame.SingletonRepository.Projectiles.Get(nameof(ColdProjectile)), dir, SaveGame.DiceRoll(5 + ((SaveGame.ExperienceLevel - 5) / 4), 8));
         }
         else if (die < 66)
         {
-            SaveGame.FireBoltOrBeam(beam, SaveGame.SingletonRepository.Projectiles.Get(nameof(AcidProjectile)), dir,
-                SaveGame.DiceRoll(6 + ((SaveGame.ExperienceLevel - 5) / 4), 8));
+            SaveGame.FireBoltOrBeam(beam, SaveGame.SingletonRepository.Projectiles.Get(nameof(AcidProjectile)), dir, SaveGame.DiceRoll(6 + ((SaveGame.ExperienceLevel - 5) / 4), 8));
         }
         else if (die < 71)
         {
-            SaveGame.FireBoltOrBeam(beam, SaveGame.SingletonRepository.Projectiles.Get(nameof(FireProjectile)), dir,
-                SaveGame.DiceRoll(8 + ((SaveGame.ExperienceLevel - 5) / 4), 8));
+            SaveGame.FireBoltOrBeam(beam, SaveGame.SingletonRepository.Projectiles.Get(nameof(FireProjectile)), dir, SaveGame.DiceRoll(8 + ((SaveGame.ExperienceLevel - 5) / 4), 8));
         }
         else if (die < 76)
         {
