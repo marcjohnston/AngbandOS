@@ -13639,26 +13639,6 @@ internal class SaveGame
         return !known;
     }
 
-    [Obsolete("Use SpellOkay(Spell)")]
-    public bool SpellOkay(int spell, bool known, bool realm2)
-    {
-        int set = realm2 ? 1 : 0;
-        Spell sPtr = Spells[set][spell % 32];
-        if (sPtr.ClassSpell.Level > ExperienceLevel)
-        {
-            return false;
-        }
-        if (sPtr.Forgotten)
-        {
-            return false;
-        }
-        if (sPtr.Learned)
-        {
-            return known;
-        }
-        return !known;
-    }
-
     public void TakeHit(int damage, string hitFrom)
     {
         bool penInvuln = false;

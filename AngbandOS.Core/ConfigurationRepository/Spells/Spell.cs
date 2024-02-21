@@ -153,7 +153,7 @@ internal abstract class Spell : IGetKey<string>
 
     public void Initialize(BaseCharacterClass characterClass)
     {
-        ClassSpell classSpell = SaveGame.SingletonRepository.ClassSpells.Get($"{characterClass.GetType().Name}.{this.GetType().Name}");
+        ClassSpell = SaveGame.SingletonRepository.ClassSpells.Get($"{characterClass.GetType().Name}.{this.GetType().Name}");
     }
 
     public string Title()
