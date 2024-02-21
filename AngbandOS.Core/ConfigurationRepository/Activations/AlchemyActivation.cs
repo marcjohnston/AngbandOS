@@ -21,8 +21,7 @@ internal class AlchemyActivation : Activation
 
     public override bool Activate()
     {
-        SaveGame.RunScript(nameof(AlchemyScript));
-        return true;
+        return SaveGame.RunSuccessfulScript(nameof(AlchemyScript));
     }
 
     public override int RechargeTime() => 500;

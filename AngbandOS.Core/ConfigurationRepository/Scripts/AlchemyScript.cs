@@ -10,33 +10,34 @@ using AngbandOS.Core.Pantheon;
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class AlchemyScript : Script, IScript
+internal class AlchemyScript : Script, IScript, ISuccessfulScript
 {
     private AlchemyScript(SaveGame saveGame) : base(saveGame) { }
 
     /// <summary>
-    /// Executes the script.
+    /// Allows the player to choose a quantity of items to convert into gold; returning false, if the player cancels any selection or confirmation;
+    /// true, if the process is successful or fails due to chance.
     /// </summary>
     /// <returns></returns>
-    public void ExecuteScript()
+    public bool ExecuteSuccessfulScript()
     {
         int amt = 1;
         bool force = SaveGame.CommandArgument > 0;
         if (!SaveGame.SelectItem(out Item? oPtr, "Turn which item to gold? ", false, true, true, null))
         {
             SaveGame.MsgPrint("You have nothing to turn to gold.");
-            return;
+            return false;
         }
         if (oPtr == null)
         {
-            return;
+            return false;
         }
         if (oPtr.Count > 1)
         {
             amt = SaveGame.GetQuantity(null, oPtr.Count, true);
             if (amt <= 0)
             {
-                return;
+                return false;
             }
         }
         int oldNumber = oPtr.Count;
@@ -50,7 +51,7 @@ internal class AlchemyScript : Script, IScript
                 string outVal = $"Really turn {oName} to gold? ";
                 if (!SaveGame.GetCheck(outVal))
                 {
-                    return;
+                    return false;
                 }
             }
         }
@@ -65,7 +66,7 @@ internal class AlchemyScript : Script, IScript
             oPtr.Inscription = feel;
             oPtr.IdentSense = true;
             SaveGame.SingletonRepository.FlaggedActions.Get(nameof(NoticeCombineFlaggedAction)).Set();
-            return;
+            return true;
         }
         int price = oPtr.RealValue();
         if (price <= 0)
@@ -90,5 +91,15 @@ internal class AlchemyScript : Script, IScript
         oPtr.ItemIncrease(-amt);
         oPtr.ItemDescribe();
         oPtr.ItemOptimize();
+        return true;
     }
+
+    /// <summary>
+    /// Executes the successful script and disposes of the result.
+    /// </summary>
+    public void ExecuteScript()
+    {
+        ExecuteSuccessfulScript();
+    }
+
 }
