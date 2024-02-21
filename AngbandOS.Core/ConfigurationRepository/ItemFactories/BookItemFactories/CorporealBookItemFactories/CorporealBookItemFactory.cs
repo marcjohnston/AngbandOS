@@ -17,5 +17,4 @@ internal abstract class CorporealBookItemFactory : BookItemFactory
     public override int PackSort => 1;
     public override bool HatesFire => true;
     public override ColorEnum Color => ColorEnum.BrightYellow;
-    public override Realm? ToRealm => SaveGame.SingletonRepository.Realms.Get(nameof(CorporealRealm));
 }

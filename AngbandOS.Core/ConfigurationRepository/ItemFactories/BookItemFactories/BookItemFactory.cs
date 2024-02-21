@@ -27,9 +27,10 @@ internal abstract class BookItemFactory : ItemFactory
         Spells = spellList.ToArray();
     }
 
-    public void SetBookIndex(int bookIndex)
+    public void SetBookIndex(Realm realm, int bookIndex)
     {
         BookIndex = bookIndex;
+        Realm = realm;
     }
 
     public int BookIndex { get; private set; }
@@ -78,7 +79,10 @@ internal abstract class BookItemFactory : ItemFactory
         return 0;
     }
 
-    public abstract Realm? ToRealm { get; }
+    /// <summary>
+    /// Returns the singleton realm that this book factory belongs to.
+    /// </summary>
+    public Realm Realm { get; private set; }
 
     /// <summary>
     /// Returns the spells that belong to this book.  This property is bound from the SpellNames property during the binding phase.

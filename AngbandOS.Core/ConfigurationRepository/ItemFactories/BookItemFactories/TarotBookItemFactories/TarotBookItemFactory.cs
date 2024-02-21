@@ -17,5 +17,4 @@ internal abstract class TarotBookItemFactory : BookItemFactory
     public override int PackSort => 3;
     public override bool HatesFire => true;
     public override ColorEnum Color => ColorEnum.Pink;
-    public override Realm? ToRealm => SaveGame.SingletonRepository.Realms.Get(nameof(TarotRealm));
 }

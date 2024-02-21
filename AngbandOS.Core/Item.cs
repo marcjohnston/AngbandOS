@@ -292,22 +292,22 @@ internal sealed class Item : IComparable<Item>
         BookItemFactory? oPtrBookFactory = oPtr.Factory.TryCast<BookItemFactory>();
         if (thisBookFactory != null && oPtrBookFactory != null)
         {
-            if (thisBookFactory.ToRealm == SaveGame.PrimaryRealm && oPtrBookFactory.ToRealm != SaveGame.PrimaryRealm)
+            if (thisBookFactory.Realm == SaveGame.PrimaryRealm && oPtrBookFactory.Realm != SaveGame.PrimaryRealm)
             {
                 return -1;
             }
-            if (thisBookFactory.ToRealm != SaveGame.PrimaryRealm && oPtrBookFactory.ToRealm == SaveGame.PrimaryRealm)
+            if (thisBookFactory.Realm != SaveGame.PrimaryRealm && oPtrBookFactory.Realm == SaveGame.PrimaryRealm)
             {
                 return 1;
             }
 
             // Second level sort (secondary realm spell books).
             // A book that matches the second realm, will always come before a book that doesn't match the second realm.
-            if (thisBookFactory.ToRealm == SaveGame.SecondaryRealm && oPtrBookFactory.ToRealm != SaveGame.SecondaryRealm)
+            if (thisBookFactory.Realm == SaveGame.SecondaryRealm && oPtrBookFactory.Realm != SaveGame.SecondaryRealm)
             {
                 return 1;
             }
-            if (thisBookFactory.ToRealm != SaveGame.SecondaryRealm && oPtrBookFactory.ToRealm == SaveGame.SecondaryRealm)
+            if (thisBookFactory.Realm != SaveGame.SecondaryRealm && oPtrBookFactory.Realm == SaveGame.SecondaryRealm)
             {
                 return -1;
             }
