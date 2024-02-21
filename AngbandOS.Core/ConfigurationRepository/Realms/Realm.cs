@@ -30,7 +30,16 @@ internal abstract class Realm : IGetKey<string>
     public virtual string Key => GetType().Name;
 
     public string GetKey => Key;
-    public void Bind() { }
+    public void Bind()
+    {
+        List<BookItemFactory> bookItemFactoryList = new List<BookItemFactory>();
+        foreach (string bookItemFactoryName in SpellBookNames)
+        {
+            BookItemFactory bookItemFactory = (BookItemFactory)SaveGame.SingletonRepository.ItemFactories.Get(bookItemFactoryName);
+            bookItemFactoryList.Add(bookItemFactory);
+        }
+        SpellBooks = bookItemFactoryList.ToArray();
+    }
 
     /// <summary>
     /// Adds the first book to the players inventory to outfit players that choose this realm with a starting book.
@@ -49,7 +58,8 @@ internal abstract class Realm : IGetKey<string>
     /// <summary>
     /// Returns the spells books that belong to the realm.
     /// </summary>
-    public abstract BookItemFactory[] SpellBooks { get; }
+    public BookItemFactory[] SpellBooks { get; private set; }
+    protected abstract string[] SpellBookNames { get; }
 
     public abstract string[] Info { get; }
 
@@ -62,28 +72,6 @@ internal abstract class Realm : IGetKey<string>
     /// <returns> The spell book item category </returns>
     public abstract ItemTypeEnum SpellBookItemCategory { get; }
 
-    protected Spell[] GetGenerateSpellList()
-    {
-        List<Spell> spellList = new List<Spell>();
-        foreach (BookItemFactory bookItemFactory in SpellBooks)
-        {
-            spellList.AddRange(bookItemFactory.Spells);
-        }
-
-        return spellList.ToArray();
-    }
-
-    public Spell[] SpellList(BaseCharacterClass characterClass)
-    {
-        Spell[] spells = GetGenerateSpellList();
-        foreach (Spell spell in spells)
-        {
-            spell.Initialize(characterClass);
-         //   spell.SetBookFactory(this);
-        }
-        return spells;
-    }
-
     /// <summary>
     /// Returns true, if a player subscribing to the realm gains resistance to hellfire projectiles.  The resistance offers a 50% reduction in damage.  Returns false, by default.  The Death realm, returns true.
     /// </summary>
@@ -95,4 +83,23 @@ internal abstract class Realm : IGetKey<string>
     /// </summary>
     /// <value><c>true</c> if [resistant to hell fire]; otherwise, <c>false</c>.</value>
     public virtual bool SusceptibleToHolyAndHellProjectiles => false;
+
+    public void InitializeSpells()
+    {
+        int bookIndex = 0;
+        int spellIndex = 0;
+        foreach (BookItemFactory bookItemFactory in SpellBooks)
+        {
+            bookItemFactory.SetBookIndex(bookIndex);
+            foreach (Spell spell in bookItemFactory.Spells)
+            {
+                spell.Initialize(bookItemFactory, spellIndex);
+                if (spell.ClassSpell.Level < SaveGame.SpellFirst)
+                {
+                    SaveGame.SpellFirst = spell.ClassSpell.Level;
+                }
+                spellIndex++;
+            }
+        }
+    }
 }

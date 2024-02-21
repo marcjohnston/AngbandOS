@@ -20,23 +20,21 @@ internal class ConfirmationBirthStage : BirthStage
         SaveGame.GetHistory();
         SaveGame.GetMoney();
 
-        SaveGame.Spells[0] = SaveGame.PrimaryRealm == null ? new Spell[] { } : SaveGame.PrimaryRealm.SpellList(SaveGame.BaseCharacterClass);
-        SaveGame.Spells[1] = SaveGame.SecondaryRealm == null ? new Spell[] { } : SaveGame.SecondaryRealm.SpellList(SaveGame.BaseCharacterClass);
         SaveGame.Talents = new List<Talent>();
         foreach (Talent talent in SaveGame.SingletonRepository.Talents)
         {
             SaveGame.Talents.Add(talent);
         }
-        foreach (Spell[] bookset in SaveGame.Spells)
+        if (SaveGame.PrimaryRealm != null)
         {
-            foreach (Spell spell in bookset)
+            SaveGame.PrimaryRealm.InitializeSpells();
+
+            if (SaveGame.SecondaryRealm != null)
             {
-                if (spell.ClassSpell.Level < SaveGame.SpellFirst)
-                {
-                    SaveGame.SpellFirst = spell.ClassSpell.Level;
-                }
+                SaveGame.SecondaryRealm.InitializeSpells();
             }
         }
+
         SaveGame.SpellOrder.Clear();
 
         SaveGame.GooPatron = SaveGame.SingletonRepository.Patrons.ToWeightedRandom().ChooseOrDefault();

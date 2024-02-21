@@ -22,12 +22,12 @@ internal class NatureRealm : Realm
     /// <summary>
     /// Returns the Call of the Wild, Nature Mastery, Revelations of Glaaki and Cthaat Aquadingen books because they belong to the Nature realm.
     /// </summary>
-    public override BookItemFactory[] SpellBooks => new BookItemFactory[]
+    protected override string[] SpellBookNames => new string[]
     {
-        (BookItemFactory)SaveGame.SingletonRepository.ItemFactories.Get(nameof(CallOfTheWildNatureBookItemFactory)),
-        (BookItemFactory)SaveGame.SingletonRepository.ItemFactories.Get(nameof(NatureMasteryNatureBookItemFactory)),
-        (BookItemFactory)SaveGame.SingletonRepository.ItemFactories.Get(nameof(RevelationsOfGlaakiNatureBookItemFactory)),
-        (BookItemFactory)SaveGame.SingletonRepository.ItemFactories.Get(nameof(CthaatAquadingenNatureBookItemFactory))
+        nameof(CallOfTheWildNatureBookItemFactory),
+        nameof(NatureMasteryNatureBookItemFactory),
+        nameof(RevelationsOfGlaakiNatureBookItemFactory),
+        nameof(CthaatAquadingenNatureBookItemFactory)
     };
     public override string Name => "Nature";
     public override ItemTypeEnum SpellBookItemCategory => ItemTypeEnum.NatureBook;

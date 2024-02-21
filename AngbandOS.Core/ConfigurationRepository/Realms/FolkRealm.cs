@@ -24,12 +24,12 @@ internal class FolkRealm : Realm
     /// <summary>
     /// Returns the Cantrips for Beginners, Minor Magicks, Major Magicks and Magicks of Mastery books because they belong to the Folk realm.
     /// </summary>
-    public override BookItemFactory[] SpellBooks => new BookItemFactory[]
+    protected override string[] SpellBookNames => new string[]
     {
-        (BookItemFactory)SaveGame.SingletonRepository.ItemFactories.Get(nameof(CantripsforBeginnersFolkBookItemFactory)),
-        (BookItemFactory)SaveGame.SingletonRepository.ItemFactories.Get(nameof(MinorMagicksFolkBookItemFactory)),
-        (BookItemFactory)SaveGame.SingletonRepository.ItemFactories.Get(nameof(MajorMagicksFolkBookItemFactory)),
-        (BookItemFactory)SaveGame.SingletonRepository.ItemFactories.Get(nameof(MagicksOfMasteryFolkBookItemFactory))
+        nameof(CantripsforBeginnersFolkBookItemFactory),
+        nameof(MinorMagicksFolkBookItemFactory),
+        nameof(MajorMagicksFolkBookItemFactory),
+        nameof(MagicksOfMasteryFolkBookItemFactory)
     };
 
     public override string Name => "Folk";

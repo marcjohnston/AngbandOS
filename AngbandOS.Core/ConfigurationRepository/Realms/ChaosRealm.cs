@@ -25,11 +25,11 @@ internal class ChaosRealm : Realm
     /// <summary>
     /// Returns the Sign Of Chaos, Mastery Chaos, Gharne Fragments and Azathoth Chaos books because they belong to the Chaos realm.
     /// </summary>
-    public override BookItemFactory[] SpellBooks => new BookItemFactory[]
+    protected override string[] SpellBookNames => new string[]
     {
-        (BookItemFactory)SaveGame.SingletonRepository.ItemFactories.Get(nameof(SignOfChaosChaosBookItemFactory)),
-        (BookItemFactory)SaveGame.SingletonRepository.ItemFactories.Get(nameof(MasteryChaosBookItemFactory)),
-        (BookItemFactory)SaveGame.SingletonRepository.ItemFactories.Get(nameof(GharneFragmentsChaosBookItemFactory)),
-        (BookItemFactory)SaveGame.SingletonRepository.ItemFactories.Get(nameof(AzathothChaosBookItemFactory))
+        nameof(SignOfChaosChaosBookItemFactory),
+        nameof(MasteryChaosBookItemFactory),
+        nameof(GharneFragmentsChaosBookItemFactory),
+        nameof(AzathothChaosBookItemFactory)
     };
 }

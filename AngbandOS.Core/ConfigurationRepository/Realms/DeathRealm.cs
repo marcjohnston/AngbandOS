@@ -23,12 +23,12 @@ internal class DeathRealm : Realm
     /// <summary>
     /// Returns the Black Prayers, Black Mass, Cultesdes Goules and Necronomicon books because they belong to the Death realm.
     /// </summary>
-    public override BookItemFactory[] SpellBooks => new BookItemFactory[]
+    protected override string[] SpellBookNames => new string[]
     {
-        (BookItemFactory)SaveGame.SingletonRepository.ItemFactories.Get(nameof(BlackPrayersDeathBookItemFactory)),
-        (BookItemFactory)SaveGame.SingletonRepository.ItemFactories.Get(nameof(BlackMassDeathBookItemFactory)),
-        (BookItemFactory)SaveGame.SingletonRepository.ItemFactories.Get(nameof(CultesdesGoulesDeathBookItemFactory)),
-        (BookItemFactory)SaveGame.SingletonRepository.ItemFactories.Get(nameof(NecronomiconDeathBookItemFactory))
+        nameof(BlackPrayersDeathBookItemFactory),
+        nameof(BlackMassDeathBookItemFactory),
+        nameof(CultesdesGoulesDeathBookItemFactory),
+        nameof(NecronomiconDeathBookItemFactory)
     };
     public override bool ResistantToHolyAndHellProjectiles => true;
 }

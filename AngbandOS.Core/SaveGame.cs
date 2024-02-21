@@ -116,12 +116,7 @@ internal class SaveGame
     /// so that when the player regains the necessary experience, the same spell is relearned.
     /// </summary>
     public readonly List<Spell> SpellOrder = new List<Spell>();
-
-    /// <summary>
-    /// Represents the spells that belong to both books that the player has access to.
-    /// </summary>
-    public readonly Spell[][] Spells = new Spell[2][];
-                                                          
+                                                         
     public List<Talent> Talents;
 
     /// <summary>

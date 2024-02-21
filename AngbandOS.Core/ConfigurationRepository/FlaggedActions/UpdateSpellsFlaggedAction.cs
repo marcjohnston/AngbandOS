@@ -49,15 +49,27 @@ internal class UpdateSpellsFlaggedAction : FlaggedAction
 
         // Count the number of spells that were learned.
         int numKnown = 0;
-        
-        foreach (Spell[] bookset in SaveGame.Spells)
+
+        List<Spell> spellList = new List<Spell>();
+        if (SaveGame.PrimaryRealm != null)
         {
-            foreach (Spell spell in bookset)
+            foreach (BookItemFactory bookItemFactory in SaveGame.PrimaryRealm.SpellBooks)
             {
-                if (spell.Learned)
-                {
-                    numKnown++;
-                }
+                spellList.AddRange(bookItemFactory.Spells);
+            }
+        }
+        if (SaveGame.SecondaryRealm != null)
+        {
+            foreach (BookItemFactory bookItemFactory in SaveGame.SecondaryRealm.SpellBooks)
+            {
+                spellList.AddRange(bookItemFactory.Spells);
+            }
+        }
+        foreach (Spell spell in spellList)
+        {
+            if (spell.Learned)
+            {
+                numKnown++;
             }
         }
         SaveGame.SpareSpellSlots = numAllowed - numKnown;
@@ -95,14 +107,11 @@ internal class UpdateSpellsFlaggedAction : FlaggedAction
 
         // Count the number of spells that have been forgotten.
         int forgottenTotal = 0;
-        foreach (Spell[] bookset in SaveGame.Spells)
+        foreach (Spell spell in spellList)
         {
-            foreach (Spell spell in bookset)
+            if (spell.Forgotten)
             {
-                if (spell.Forgotten)
-                {
-                    forgottenTotal++;
-                }
+                forgottenTotal++;
             }
         }
 
@@ -125,40 +134,33 @@ internal class UpdateSpellsFlaggedAction : FlaggedAction
             spellOrderIndex--;
         }
 
-        // TODO: The number of spells remaining needs to be refactored to support the List<> and not 32/64
-        int k = 0;
-        int limit = SaveGame.SecondaryRealm == null ? 32 : 64;
-        for (j = 0; j < limit; j++)
+        // Count of number of spare slots.
+        int newSpareSpellSlots = 0;
+        foreach (Spell spell in spellList)
         {
-            sPtr = SaveGame.Spells[j / 32][j % 32];
-            if (sPtr.ClassSpell.Level > SaveGame.ExperienceLevel)
+            // Check to see if the level of the spell is greater than where we are at.
+            if (spell.ClassSpell.Level > SaveGame.ExperienceLevel)
             {
+                // Don't count this spell.
                 continue;
             }
-            if (sPtr.Learned)
+
+            // Check to see if we already learned it.
+            if (spell.Learned)
             {
+                // Don't count this spell.
                 continue;
             }
-            k++;
+            newSpareSpellSlots++;
         }
-        if (SaveGame.SecondaryRealm == null)
+
+        // Check to see if we need to reduce the number of spare slots.
+        if (SaveGame.SpareSpellSlots > newSpareSpellSlots)
         {
-            if (k > 32)
-            {
-                k = 32;
-            }
+            // Reduce the number of spare slots.
+            SaveGame.SpareSpellSlots = newSpareSpellSlots;
         }
-        else
-        {
-            if (k > 64)
-            {
-                k = 64;
-            }
-        }
-        if (SaveGame.SpareSpellSlots > k)
-        {
-            SaveGame.SpareSpellSlots = k;
-        }
+
         if (SaveGame.OldSpareSpellSlots != SaveGame.SpareSpellSlots)
         {
             if (SaveGame.SpareSpellSlots != 0)

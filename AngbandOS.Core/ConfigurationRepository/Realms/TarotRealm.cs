@@ -23,11 +23,11 @@ internal class TarotRealm : Realm
     /// <summary>
     /// Returns the Conjurings Tricks, Card Mastery, Eltdown Shards and Celeano Fragments books because they belong to the Tarot realm.
     /// </summary>
-    public override BookItemFactory[] SpellBooks => new BookItemFactory[]
+    protected override string[] SpellBookNames => new string[]
     {
-        (BookItemFactory)SaveGame.SingletonRepository.ItemFactories.Get(nameof(ConjuringsTricksTarotBookItemFactory)),
-        (BookItemFactory)SaveGame.SingletonRepository.ItemFactories.Get(nameof(CardMasteryTarotBookItemFactory)),
-        (BookItemFactory)SaveGame.SingletonRepository.ItemFactories.Get(nameof(EltdownShardsTarotBookItemFactory)),
-        (BookItemFactory)SaveGame.SingletonRepository.ItemFactories.Get(nameof(CeleanoFragmentsTarotBookItemFactory))
+        nameof(ConjuringsTricksTarotBookItemFactory),
+        nameof(CardMasteryTarotBookItemFactory),
+        nameof(EltdownShardsTarotBookItemFactory),
+        nameof(CeleanoFragmentsTarotBookItemFactory)
     };
 }

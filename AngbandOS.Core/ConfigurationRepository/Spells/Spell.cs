@@ -33,12 +33,12 @@ internal abstract class Spell : IGetKey<string>
         SaveGame = saveGame;
     }
 
-    public BookItemFactory BookFactory { get; private set; }
+    public BookItemFactory BookItemFactory { get; private set; }
 
-    public void SetBookFactory(BookItemFactory bookFactory)
-    {
-        BookFactory = BookFactory;
-    }
+    /// <summary>
+    /// Returns the index of the spell in the realm.  This index starts at 0 and increments by one for each spell.
+    /// </summary>
+    public int SpellIndex { get; private set; }
 
     /// <summary>
     /// Returns the entity serialized into a Json string.
@@ -158,9 +158,12 @@ internal abstract class Spell : IGetKey<string>
         return chance;
     }
 
-    public void Initialize(BaseCharacterClass characterClass)
+    public void Initialize(BookItemFactory bookItemFactory, int spellIndex)
     {
+        BaseCharacterClass characterClass = SaveGame.BaseCharacterClass;
         ClassSpell = SaveGame.SingletonRepository.ClassSpells.Get($"{characterClass.GetType().Name}.{this.GetType().Name}");
+        SpellIndex = spellIndex;
+        BookItemFactory = bookItemFactory;
     }
 
     public string Title()

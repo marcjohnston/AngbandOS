@@ -24,11 +24,11 @@ internal class SorceryRealm : Realm
     /// <summary>
     /// Returns the Beginners Handbook, Master Sorcerers, Unaussprechlich Kulten and Liber Ivonis books because they belong to the Sorcery realm.
     /// </summary>
-    public override BookItemFactory[] SpellBooks => new BookItemFactory[]
+    protected override string[] SpellBookNames => new string[]
     {
-        (BookItemFactory)SaveGame.SingletonRepository.ItemFactories.Get(nameof(BeginnersHandbookSorceryBookItemFactory)),
-        (BookItemFactory)SaveGame.SingletonRepository.ItemFactories.Get(nameof(MasterSorcerersHandbookSorceryBookItemFactory)),
-        (BookItemFactory)SaveGame.SingletonRepository.ItemFactories.Get(nameof(UnaussprechlichenKultenSorceryBookItemFactory)),
-        (BookItemFactory)SaveGame.SingletonRepository.ItemFactories.Get(nameof(LiberIvonisSorceryBookItemFactory))
+        nameof(BeginnersHandbookSorceryBookItemFactory),
+        nameof(MasterSorcerersHandbookSorceryBookItemFactory),
+        nameof(UnaussprechlichenKultenSorceryBookItemFactory),
+        nameof(LiberIvonisSorceryBookItemFactory)
     };
 }

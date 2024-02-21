@@ -22,12 +22,12 @@ internal class LifeRealm : Realm
     /// <summary>
     /// Returns the Common Prayers, High Mass, Dhol Chants and Ponape Scripture books because they belong to the Life realm.
     /// </summary>
-    public override BookItemFactory[] SpellBooks => new BookItemFactory[]
+    protected override string[] SpellBookNames => new string[]
     {
-        (BookItemFactory)SaveGame.SingletonRepository.ItemFactories.Get(nameof(CommonPrayerLifeBookItemFactory)),
-        (BookItemFactory)SaveGame.SingletonRepository.ItemFactories.Get(nameof(HighMassLifeBookItemFactory)),
-        (BookItemFactory)SaveGame.SingletonRepository.ItemFactories.Get(nameof(DholChantsLifeBookItemFactory)),
-        (BookItemFactory)SaveGame.SingletonRepository.ItemFactories.Get(nameof(PonapeScriptureLifeBookItemFactory))
+        nameof(CommonPrayerLifeBookItemFactory),
+        nameof(HighMassLifeBookItemFactory),
+        nameof(DholChantsLifeBookItemFactory),
+        nameof(PonapeScriptureLifeBookItemFactory)
     };
     public override string Name => "Life";
 

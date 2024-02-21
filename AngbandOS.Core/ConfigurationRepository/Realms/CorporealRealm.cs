@@ -22,12 +22,12 @@ internal class CorporealRealm : Realm
     /// <summary>
     /// Returns the Basic Chi, Yogic Mastery, DeVermis Mysteriis and Pnakotic Manuscript books because they belong to the Corporeal realm.
     /// </summary>
-    public override BookItemFactory[] SpellBooks => new BookItemFactory[]
+    protected override string[] SpellBookNames => new string[]
     {
-        (BookItemFactory)SaveGame.SingletonRepository.ItemFactories.Get(nameof(BasicChiFlowCorporealBookItemFactory)),
-        (BookItemFactory)SaveGame.SingletonRepository.ItemFactories.Get(nameof(YogicMasteryCorporealBookItemFactory)),
-        (BookItemFactory)SaveGame.SingletonRepository.ItemFactories.Get(nameof(DeVermisMysteriisCorporealBookItemFactory)),
-        (BookItemFactory)SaveGame.SingletonRepository.ItemFactories.Get(nameof(PnakoticManuscriptsCorporealBookItemFactory))
+        nameof(BasicChiFlowCorporealBookItemFactory),
+        nameof(YogicMasteryCorporealBookItemFactory),
+        nameof(DeVermisMysteriisCorporealBookItemFactory),
+        nameof(PnakoticManuscriptsCorporealBookItemFactory)
     };
 
     public override string Name => "Corporeal";
