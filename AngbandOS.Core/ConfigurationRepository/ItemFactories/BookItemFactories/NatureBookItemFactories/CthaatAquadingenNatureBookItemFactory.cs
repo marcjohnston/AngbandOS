@@ -42,15 +42,15 @@ internal class CthaatAquadingenNatureBookItemFactory : NatureBookItemFactory
     public override bool KindIsGood => true;
     public override Item CreateItem() => new Item(SaveGame, this);
 
-    public override Spell[] Spells => new Spell[]
+    protected override string[] SpellNames => new string[]
     {
-        SaveGame.SingletonRepository.Spells.Get(nameof(NatureSpellEarthquake)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(NatureSpellWhirlwindAttack)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(NatureSpellBlizzard)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(NatureSpellLightningStorm)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(NatureSpellWhirlpool)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(NatureSpellCallSunlight)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(NatureSpellElementalBranding)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(NatureSpellNaturesWrath))
+        nameof(NatureSpellEarthquake),
+        nameof(NatureSpellWhirlwindAttack),
+        nameof(NatureSpellBlizzard),
+        nameof(NatureSpellLightningStorm),
+        nameof(NatureSpellWhirlpool),
+        nameof(NatureSpellCallSunlight),
+        nameof(NatureSpellElementalBranding),
+        nameof(NatureSpellNaturesWrath)
     };
 }

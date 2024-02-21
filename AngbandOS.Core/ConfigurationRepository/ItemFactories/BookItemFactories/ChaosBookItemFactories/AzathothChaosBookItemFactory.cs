@@ -42,15 +42,15 @@ internal class AzathothChaosBookItemFactory : ChaosBookItemFactory
     public override bool KindIsGood => true;
     public override Item CreateItem() => new Item(SaveGame, this);
 
-    public override Spell[] Spells => new Spell[]
+    protected override string[] SpellNames => new string[]
     {
-        SaveGame.SingletonRepository.Spells.Get(nameof(ChaosSpellGravityBeam)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(ChaosSpellMeteorSwarm)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(ChaosSpellFlameStrike)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(ChaosSpellCallChaos)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(ChaosSpellShardBall)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(ChaosSpellManaStorm)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(ChaosSpellBreatheChaos)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(ChaosSpellCallTheVoid))
+        nameof(ChaosSpellGravityBeam),
+        nameof(ChaosSpellMeteorSwarm),
+        nameof(ChaosSpellFlameStrike),
+        nameof(ChaosSpellCallChaos),
+        nameof(ChaosSpellShardBall),
+        nameof(ChaosSpellManaStorm),
+        nameof(ChaosSpellBreatheChaos),
+        nameof(ChaosSpellCallTheVoid)
     };
 }

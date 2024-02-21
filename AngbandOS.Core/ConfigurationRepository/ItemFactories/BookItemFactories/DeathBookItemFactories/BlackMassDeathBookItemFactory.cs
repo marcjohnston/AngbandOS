@@ -27,15 +27,15 @@ internal class BlackMassDeathBookItemFactory : DeathBookItemFactory
     public override bool KindIsGood => false;
     public override Item CreateItem() => new Item(SaveGame, this);
 
-    public override Spell[] Spells => new Spell[]
+    protected override string[] SpellNames => new string[]
     {
-        SaveGame.SingletonRepository.Spells.Get(nameof(DeathSpellOrbOfEntropy)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(DeathSpellNetherBolt)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(DeathSpellTerror)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(DeathSpellVampiricDrain)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(DeathSpellPoisonBranding)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(DeathSpellDispelGood)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(DeathSpellCarnage)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(DeathSpellRestoreLife))
+        nameof(DeathSpellOrbOfEntropy),
+        nameof(DeathSpellNetherBolt),
+        nameof(DeathSpellTerror),
+        nameof(DeathSpellVampiricDrain),
+        nameof(DeathSpellPoisonBranding),
+        nameof(DeathSpellDispelGood),
+        nameof(DeathSpellCarnage),
+        nameof(DeathSpellRestoreLife)
     };
 }

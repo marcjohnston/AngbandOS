@@ -27,15 +27,15 @@ internal class MasterSorcerersHandbookSorceryBookItemFactory : SorceryBookItemFa
     public override bool KindIsGood => false;
     public override Item CreateItem() => new Item(SaveGame, this);
 
-    public override Spell[] Spells => new Spell[]
+    protected override string[] SpellNames => new string[]
     {
-        SaveGame.SingletonRepository.Spells.Get(nameof(SorcerySpellMagicMapping)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(SorcerySpellIdentify)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(SorcerySpellSlowMonster)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(SorcerySpellMassSleep)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(SorcerySpellTeleportAway)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(SorcerySpellHasteSelf)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(SorcerySpellDetectionTrue)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(SorcerySpellIdentifyTrue))
+        nameof(SorcerySpellMagicMapping),
+        nameof(SorcerySpellIdentify),
+        nameof(SorcerySpellSlowMonster),
+        nameof(SorcerySpellMassSleep),
+        nameof(SorcerySpellTeleportAway),
+        nameof(SorcerySpellHasteSelf),
+        nameof(SorcerySpellDetectionTrue),
+        nameof(SorcerySpellIdentifyTrue)
     };
 }

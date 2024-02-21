@@ -31,15 +31,15 @@ internal class MajorMagicksFolkBookItemFactory : FolkBookItemFactory
     public override int Weight => 30;
     public override bool KindIsGood => true;
     public override Item CreateItem() => new Item(SaveGame, this);
-    public override Spell[] Spells => new Spell[]
+    protected override string[] SpellNames => new string[]
     {
-        SaveGame.SingletonRepository.Spells.Get(nameof(FolkSpellResistLightning)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(FolkSpellResistAcid)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(FolkSpellCureMediumWounds)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(FolkSpellTeleport)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(FolkSpellStoneToMud)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(FolkSpellRayOfLight)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(FolkSpellSatisfyHunger)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(FolkSpellSeeInvisible))
+        nameof(FolkSpellResistLightning),
+        nameof(FolkSpellResistAcid),
+        nameof(FolkSpellCureMediumWounds),
+        nameof(FolkSpellTeleport),
+        nameof(FolkSpellStoneToMud),
+        nameof(FolkSpellRayOfLight),
+        nameof(FolkSpellSatisfyHunger),
+        nameof(FolkSpellSeeInvisible)
     };
 }

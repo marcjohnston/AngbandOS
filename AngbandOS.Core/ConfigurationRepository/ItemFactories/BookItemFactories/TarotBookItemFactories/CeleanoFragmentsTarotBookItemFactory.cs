@@ -42,15 +42,15 @@ internal class CeleanoFragmentsTarotBookItemFactory : TarotBookItemFactory
     public override bool KindIsGood => true;
     public override Item CreateItem() => new Item(SaveGame, this);
 
-    public override Spell[] Spells => new Spell[]
+    protected override string[] SpellNames => new string[]
     {
-        SaveGame.SingletonRepository.Spells.Get(nameof(TarotSpellEtherealDivination)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(TarotSpellAstralLore)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(TarotSpellSummonUndead)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(TarotSpellSummonDragon)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(TarotSpellMassSummons)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(TarotSpellSummonDemon)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(TarotSpellSummonAncientDragon)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(TarotSpellSummonGreaterUndead))
+        nameof(TarotSpellEtherealDivination),
+        nameof(TarotSpellAstralLore),
+        nameof(TarotSpellSummonUndead),
+        nameof(TarotSpellSummonDragon),
+        nameof(TarotSpellMassSummons),
+        nameof(TarotSpellSummonDemon),
+        nameof(TarotSpellSummonAncientDragon),
+        nameof(TarotSpellSummonGreaterUndead)
     };
 }

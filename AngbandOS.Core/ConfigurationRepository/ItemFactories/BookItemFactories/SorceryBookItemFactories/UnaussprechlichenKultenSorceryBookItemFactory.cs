@@ -36,15 +36,15 @@ internal class UnaussprechlichenKultenSorceryBookItemFactory : SorceryBookItemFa
     public override bool KindIsGood => true;
     public override Item CreateItem() => new Item(SaveGame, this);
 
-    public override Spell[] Spells => new Spell[]
+    protected override string[] SpellNames => new string[]
     {
-        SaveGame.SingletonRepository.Spells.Get(nameof(SorcerySpellDetectObjectsAndTreasure)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(SorcerySpellDetectEnchantment)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(SorcerySpellCharmMonster)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(SorcerySpellDimensionDoor)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(SorcerySpellSenseMinds)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(SorcerySpellSelfKnowledge)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(SorcerySpellTeleportLevel)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(SorcerySpellWordOfRecall))
+        nameof(SorcerySpellDetectObjectsAndTreasure),
+        nameof(SorcerySpellDetectEnchantment),
+        nameof(SorcerySpellCharmMonster),
+        nameof(SorcerySpellDimensionDoor),
+        nameof(SorcerySpellSenseMinds),
+        nameof(SorcerySpellSelfKnowledge),
+        nameof(SorcerySpellTeleportLevel),
+        nameof(SorcerySpellWordOfRecall)
     };
 }

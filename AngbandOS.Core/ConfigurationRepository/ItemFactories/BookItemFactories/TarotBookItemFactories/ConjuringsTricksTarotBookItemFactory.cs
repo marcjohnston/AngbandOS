@@ -27,15 +27,15 @@ internal class ConjuringsTricksTarotBookItemFactory : TarotBookItemFactory
     public override bool KindIsGood => false;
     public override Item CreateItem() => new Item(SaveGame, this);
 
-    public override Spell[] Spells => new Spell[]
+    protected override string[] SpellNames => new string[]
     {
-        SaveGame.SingletonRepository.Spells.Get(nameof(TarotSpellPhaseDoor)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(TarotSpellMindBlast)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(TarotSpellTarotDraw)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(TarotSpellResetRecall)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(TarotSpellTeleport)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(TarotSpellDimensionDoor)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(TarotSpellAstralSpying)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(TarotSpellTeleportAway))
+        nameof(TarotSpellPhaseDoor),
+        nameof(TarotSpellMindBlast),
+        nameof(TarotSpellTarotDraw),
+        nameof(TarotSpellResetRecall),
+        nameof(TarotSpellTeleport),
+        nameof(TarotSpellDimensionDoor),
+        nameof(TarotSpellAstralSpying),
+        nameof(TarotSpellTeleportAway)
     };
 }

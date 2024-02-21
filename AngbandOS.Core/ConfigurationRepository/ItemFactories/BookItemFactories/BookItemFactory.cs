@@ -12,6 +12,22 @@ internal abstract class BookItemFactory : ItemFactory
 {
     public BookItemFactory(SaveGame saveGame) : base(saveGame) { }
 
+    public override void Bind()
+    {
+        // We need the base classes to bind.
+        base.Bind();
+
+        // Now bind the spells.
+        List<Spell> spellList = new List<Spell>();
+        foreach (string spellName in SpellNames)
+        {
+            Spell spell = SaveGame.SingletonRepository.Spells.Get(spellName);
+            spell.SetBookFactory(this);
+            spellList.Add(spell);
+        }
+        Spells = spellList.ToArray();
+    }
+
     /// <summary>
     /// Returns a divisor to be used to compute the amount of experience gained when an applicable character class destroys the book.  Defaults to 4.
     /// </summary>
@@ -58,7 +74,15 @@ internal abstract class BookItemFactory : ItemFactory
 
     public abstract Realm? ToRealm { get; }
 
-    public abstract Spell[] Spells { get; }
+    /// <summary>
+    /// Returns the spells that belong to this book.  This property is bound from the SpellNames property during the binding phase.
+    /// </summary>
+    public Spell[] Spells { get; private set; }
+
+    /// <summary>
+    /// Returns the names of the spells that belong to this book.  This property is used to bind the Spells property during the binding phase.
+    /// </summary>
+    protected abstract string[] SpellNames { get; }
 
     /// <summary>
     /// Returns true, if a book is a high level book; false, otherwise.  False is returned, by default.

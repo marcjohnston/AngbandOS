@@ -26,15 +26,15 @@ internal class HighMassLifeBookItemFactory : LifeBookItemFactory
     public override bool KindIsGood => false;
     public override Item CreateItem() => new Item(SaveGame, this);
 
-    public override Spell[] Spells => new Spell[]
+    protected override string[] SpellNames => new string[]
     {
-        SaveGame.SingletonRepository.Spells.Get(nameof(LifeSpellRemoveCurse)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(LifeSpellCurePoison)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(LifeSpellCureCriticalWounds)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(LifeSpellSenseUnseen)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(LifeSpellHolyOrb)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(LifeSpellProtectionFromEvil)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(LifeSpellHealing)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(LifeSpellElderSign))
+        nameof(LifeSpellRemoveCurse),
+        nameof(LifeSpellCurePoison),
+        nameof(LifeSpellCureCriticalWounds),
+        nameof(LifeSpellSenseUnseen),
+        nameof(LifeSpellHolyOrb),
+        nameof(LifeSpellProtectionFromEvil),
+        nameof(LifeSpellHealing),
+        nameof(LifeSpellElderSign)
     };
 }

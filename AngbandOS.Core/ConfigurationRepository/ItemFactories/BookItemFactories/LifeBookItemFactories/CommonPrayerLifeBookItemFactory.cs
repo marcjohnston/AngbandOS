@@ -26,16 +26,16 @@ internal class CommonPrayerLifeBookItemFactory : LifeBookItemFactory
     public override bool KindIsGood => false;
     public override Item CreateItem() => new Item(SaveGame, this);
 
-    public override Spell[] Spells => new Spell[]
+    protected override string[] SpellNames => new string[]
     {
-        SaveGame.SingletonRepository.Spells.Get(nameof(LifeSpellDetectEvil)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(LifeSpellCureLightWounds)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(LifeSpellBless)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(LifeSpellRemoveFear)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(LifeSpellCallLight)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(LifeSpellDetectTrapsAndSecretDoors)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(LifeSpellCureMediumWounds)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(LifeSpellSatisfyHunger))
+        nameof(LifeSpellDetectEvil),
+        nameof(LifeSpellCureLightWounds),
+        nameof(LifeSpellBless),
+        nameof(LifeSpellRemoveFear),
+        nameof(LifeSpellCallLight),
+        nameof(LifeSpellDetectTrapsAndSecretDoors),
+        nameof(LifeSpellCureMediumWounds),
+        nameof(LifeSpellSatisfyHunger)
    };
 
 }

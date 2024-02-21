@@ -27,15 +27,15 @@ internal class BlackPrayersDeathBookItemFactory : DeathBookItemFactory
     public override bool KindIsGood => false;
     public override Item CreateItem() => new Item(SaveGame, this);
 
-    public override Spell[] Spells => new Spell[]
+    protected override string[] SpellNames => new string[]
     {
-        SaveGame.SingletonRepository.Spells.Get(nameof(DeathSpellDetectUnlife)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(DeathSpellMalediction)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(DeathSpellDetectEvil)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(DeathSpellStinkingCloud)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(DeathSpellBlackSleep)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(DeathSpellResistPoison)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(DeathSpellHorrify)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(DeathSpellEnslaveUndead))
+        nameof(DeathSpellDetectUnlife),
+        nameof(DeathSpellMalediction),
+        nameof(DeathSpellDetectEvil),
+        nameof(DeathSpellStinkingCloud),
+        nameof(DeathSpellBlackSleep),
+        nameof(DeathSpellResistPoison),
+        nameof(DeathSpellHorrify),
+        nameof(DeathSpellEnslaveUndead)
     };
 }

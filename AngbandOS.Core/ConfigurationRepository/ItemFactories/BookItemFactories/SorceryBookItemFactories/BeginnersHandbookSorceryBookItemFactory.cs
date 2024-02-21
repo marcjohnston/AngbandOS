@@ -27,15 +27,15 @@ internal class BeginnersHandbookSorceryBookItemFactory : SorceryBookItemFactory
     public override bool KindIsGood => false;
     public override Item CreateItem() => new Item(SaveGame, this);
 
-    public override Spell[] Spells => new Spell[]
+    protected override string[] SpellNames => new string[]
     {
-        SaveGame.SingletonRepository.Spells.Get(nameof(SorcerySpellDetectMonsters)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(SorcerySpellPhaseDoor)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(SorcerySpellDetectDoorsAndTraps)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(SorcerySpellLightArea)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(SorcerySpellConfuseMonster)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(SorcerySpellTeleport)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(SorcerySpellSleepMonster)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(SorcerySpellRecharging))
+        nameof(SorcerySpellDetectMonsters),
+        nameof(SorcerySpellPhaseDoor),
+        nameof(SorcerySpellDetectDoorsAndTraps),
+        nameof(SorcerySpellLightArea),
+        nameof(SorcerySpellConfuseMonster),
+        nameof(SorcerySpellTeleport),
+        nameof(SorcerySpellSleepMonster),
+        nameof(SorcerySpellRecharging)
     };
 }

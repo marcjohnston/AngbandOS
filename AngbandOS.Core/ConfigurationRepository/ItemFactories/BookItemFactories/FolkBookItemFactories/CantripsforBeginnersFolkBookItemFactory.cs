@@ -26,15 +26,15 @@ internal class CantripsforBeginnersFolkBookItemFactory : FolkBookItemFactory
     public override int Weight => 30;
     public override bool KindIsGood => false;
     public override Item CreateItem() => new Item(SaveGame, this);
-    public override Spell[] Spells => new Spell[]
+    protected override string[] SpellNames => new string[]
     {
-        SaveGame.SingletonRepository.Spells.Get(nameof(FolkSpellZap)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(FolkSpellWizardLock)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(FolkSpellDetectInvisibility)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(FolkSpellDetectMonsters)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(FolkSpellBlink)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(FolkSpellLightArea)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(FolkSpellTrapAndDoorDestruction)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(FolkSpellCureLightWounds)),
+        nameof(FolkSpellZap),
+        nameof(FolkSpellWizardLock),
+        nameof(FolkSpellDetectInvisibility),
+        nameof(FolkSpellDetectMonsters),
+        nameof(FolkSpellBlink),
+        nameof(FolkSpellLightArea),
+        nameof(FolkSpellTrapAndDoorDestruction),
+        nameof(FolkSpellCureLightWounds),
     };
 }

@@ -634,7 +634,7 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey<string>
 
     public string GetKey => Key;
 
-    public void Bind()
+    public virtual void Bind()
     {
         FlavorSymbol = Symbol;
         FlavorColor = Color;

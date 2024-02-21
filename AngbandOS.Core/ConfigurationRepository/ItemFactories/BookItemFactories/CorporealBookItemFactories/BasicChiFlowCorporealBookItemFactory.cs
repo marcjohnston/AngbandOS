@@ -27,15 +27,15 @@ internal class BasicChiFlowCorporealBookItemFactory : CorporealBookItemFactory
     public override bool KindIsGood => false;
     public override Item CreateItem() => new Item(SaveGame, this);
 
-    public override Spell[] Spells => new Spell[]
+    protected override string[] SpellNames => new string[]
     {
-        SaveGame.SingletonRepository.Spells.Get(nameof(CorporealSpellBlink)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(CorporealSpellBravery)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(CorporealSpellBatsSense)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(CorporealSpellEaglesVision)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(CorporealSpellMindVision)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(CorporealSpellCureMediumWounds)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(CorporealSpellCureLightWounds)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(CorporealSpellSatisfyHunger))
+        nameof(CorporealSpellBlink),
+        nameof(CorporealSpellBravery),
+        nameof(CorporealSpellBatsSense),
+        nameof(CorporealSpellEaglesVision),
+        nameof(CorporealSpellMindVision),
+        nameof(CorporealSpellCureMediumWounds),
+        nameof(CorporealSpellCureLightWounds),
+        nameof(CorporealSpellSatisfyHunger)
     };
 }

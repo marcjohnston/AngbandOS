@@ -41,16 +41,16 @@ internal class NecronomiconDeathBookItemFactory : DeathBookItemFactory
     public override int Weight => 30;
     public override bool KindIsGood => true;
 
-    public override Spell[] Spells => new Spell[]
+    protected override string[] SpellNames => new string[]
     {
-        SaveGame.SingletonRepository.Spells.Get(nameof(DeathSpellDeathRay)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(DeathSpellRaiseTheDead)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(DeathSpellEsoteria)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(DeathSpellWordOfDeath)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(DeathSpellEvocation)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(DeathSpellHellfire)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(DeathSpellAnnihilation)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(DeathSpellWraithform))
+        nameof(DeathSpellDeathRay),
+        nameof(DeathSpellRaiseTheDead),
+        nameof(DeathSpellEsoteria),
+        nameof(DeathSpellWordOfDeath),
+        nameof(DeathSpellEvocation),
+        nameof(DeathSpellHellfire),
+        nameof(DeathSpellAnnihilation),
+        nameof(DeathSpellWraithform)
     };
 
     public override Item CreateItem() => new Item(SaveGame, this);

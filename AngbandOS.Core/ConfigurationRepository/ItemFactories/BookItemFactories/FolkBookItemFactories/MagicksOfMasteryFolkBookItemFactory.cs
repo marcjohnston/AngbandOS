@@ -37,15 +37,15 @@ internal class MagicksOfMasteryFolkBookItemFactory : FolkBookItemFactory
     public override int Weight => 30;
     public override bool KindIsGood => true;
     public override Item CreateItem() => new Item(SaveGame, this);
-    public override Spell[] Spells => new Spell[]
+    protected override string[] SpellNames => new string[]
     {
-        SaveGame.SingletonRepository.Spells.Get(nameof(FolkSpellRecharging)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(FolkSpellTeleportLevel)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(FolkSpellIdentify)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(FolkSpellTeleportAway)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(FolkSpellElementalBall)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(FolkSpellDetection)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(FolkSpellWordOfRecall)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(FolkSpellClairvoyance))
+        nameof(FolkSpellRecharging),
+        nameof(FolkSpellTeleportLevel),
+        nameof(FolkSpellIdentify),
+        nameof(FolkSpellTeleportAway),
+        nameof(FolkSpellElementalBall),
+        nameof(FolkSpellDetection),
+        nameof(FolkSpellWordOfRecall),
+        nameof(FolkSpellClairvoyance)
     };
 }

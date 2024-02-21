@@ -26,16 +26,16 @@ internal class MinorMagicksFolkBookItemFactory : FolkBookItemFactory
     public override int Weight => 30;
     public override bool KindIsGood => false;
 
-    public override Spell[] Spells => new Spell[]
+    protected override string[] SpellNames => new string[]
     {
-        SaveGame.SingletonRepository.Spells.Get(nameof(FolkSpellDetectDoorsAndTraps)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(FolkSpellPhlogiston)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(FolkSpellDetectTreasure)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(FolkSpellDetectEnchantment)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(FolkSpellDetectObjects)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(FolkSpellCurePoison)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(FolkSpellResistCold)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(FolkSpellResistFire))
+        nameof(FolkSpellDetectDoorsAndTraps),
+        nameof(FolkSpellPhlogiston),
+        nameof(FolkSpellDetectTreasure),
+        nameof(FolkSpellDetectEnchantment),
+        nameof(FolkSpellDetectObjects),
+        nameof(FolkSpellCurePoison),
+        nameof(FolkSpellResistCold),
+        nameof(FolkSpellResistFire)
     };
 
     public override Item CreateItem() => new Item(SaveGame, this);

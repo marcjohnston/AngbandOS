@@ -27,15 +27,15 @@ internal class MasteryChaosBookItemFactory : ChaosBookItemFactory
     public override bool KindIsGood => false;
     public override Item CreateItem() => new Item(SaveGame, this);
 
-    public override Spell[] Spells => new Spell[]
+    protected override string[] SpellNames => new string[]
     {
-        SaveGame.SingletonRepository.Spells.Get(nameof(ChaosSpellWonder)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(ChaosSpellChaosBolt)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(ChaosSpellSonicBoom)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(ChaosSpellDoomBolt)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(ChaosSpellFireBall)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(ChaosSpellTeleportOther)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(ChaosSpellWordOfDestruction)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(ChaosSpellInvokeChaos))
+        nameof(ChaosSpellWonder),
+        nameof(ChaosSpellChaosBolt),
+        nameof(ChaosSpellSonicBoom),
+        nameof(ChaosSpellDoomBolt),
+        nameof(ChaosSpellFireBall),
+        nameof(ChaosSpellTeleportOther),
+        nameof(ChaosSpellWordOfDestruction),
+        nameof(ChaosSpellInvokeChaos)
     };
 }

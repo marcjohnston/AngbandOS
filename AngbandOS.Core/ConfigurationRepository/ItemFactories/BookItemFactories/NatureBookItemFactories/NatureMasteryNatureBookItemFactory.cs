@@ -27,15 +27,15 @@ internal class NatureMasteryNatureBookItemFactory : NatureBookItemFactory
     public override bool KindIsGood => false;
     public override Item CreateItem() => new Item(SaveGame, this);
 
-    public override Spell[] Spells => new Spell[]
+    protected override string[] SpellNames => new string[]
     {
-        SaveGame.SingletonRepository.Spells.Get(nameof(NatureSpellStoneToMud)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(NatureSpellLightningBolt)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(NatureSpellNatureAwareness)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(NatureSpellFrostBolt)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(NatureSpellRayOfSunlight)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(NatureSpellEntangle)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(NatureSpellSummonAnimal)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(NatureSpellHerbalHealing))
+        nameof(NatureSpellStoneToMud),
+        nameof(NatureSpellLightningBolt),
+        nameof(NatureSpellNatureAwareness),
+        nameof(NatureSpellFrostBolt),
+        nameof(NatureSpellRayOfSunlight),
+        nameof(NatureSpellEntangle),
+        nameof(NatureSpellSummonAnimal),
+        nameof(NatureSpellHerbalHealing)
     };
 }

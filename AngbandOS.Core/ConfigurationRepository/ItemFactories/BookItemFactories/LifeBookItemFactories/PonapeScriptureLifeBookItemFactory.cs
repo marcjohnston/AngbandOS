@@ -42,15 +42,15 @@ internal class PonapeScriptureLifeBookItemFactory : LifeBookItemFactory
     public override bool KindIsGood => true;
     public override Item CreateItem() => new Item(SaveGame, this);
 
-    public override Spell[] Spells => new Spell[]
+    protected override string[] SpellNames => new string[]
     {
-        SaveGame.SingletonRepository.Spells.Get(nameof(LifeSpellHeroism)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(LifeSpellPrayer)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(LifeSpellBlessWeapon)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(LifeSpellRestoration)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(LifeSpellHealingTrue)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(LifeSpellHolyVision)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(LifeSpellDivineIntervention)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(LifeSpellHolyInvulnerability))
+        nameof(LifeSpellHeroism),
+        nameof(LifeSpellPrayer),
+        nameof(LifeSpellBlessWeapon),
+        nameof(LifeSpellRestoration),
+        nameof(LifeSpellHealingTrue),
+        nameof(LifeSpellHolyVision),
+        nameof(LifeSpellDivineIntervention),
+        nameof(LifeSpellHolyInvulnerability)
     };
 }

@@ -27,15 +27,15 @@ internal class CallOfTheWildNatureBookItemFactory : NatureBookItemFactory
     public override bool KindIsGood => false;
     public override Item CreateItem() => new Item(SaveGame, this);
 
-    public override Spell[] Spells => new Spell[]
+    protected override string[] SpellNames => new string[]
     {
-        SaveGame.SingletonRepository.Spells.Get(nameof(NatureSpellDetectCreatures)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(NatureSpellFirstAid)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(NatureSpellDetectDoorsAndTraps)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(NatureSpellForaging)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(NatureSpellDaylight)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(NatureSpellAnimalTaming)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(NatureSpellResistEnvironment)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(NatureSpellCureWoundsAndPoison))
+        nameof(NatureSpellDetectCreatures),
+        nameof(NatureSpellFirstAid),
+        nameof(NatureSpellDetectDoorsAndTraps),
+        nameof(NatureSpellForaging),
+        nameof(NatureSpellDaylight),
+        nameof(NatureSpellAnimalTaming),
+        nameof(NatureSpellResistEnvironment),
+        nameof(NatureSpellCureWoundsAndPoison)
     };
 }

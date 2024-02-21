@@ -79,6 +79,7 @@ internal abstract class Realm : IGetKey<string>
         foreach (Spell spell in spells)
         {
             spell.Initialize(characterClass);
+         //   spell.SetBookFactory(this);
         }
         return spells;
     }

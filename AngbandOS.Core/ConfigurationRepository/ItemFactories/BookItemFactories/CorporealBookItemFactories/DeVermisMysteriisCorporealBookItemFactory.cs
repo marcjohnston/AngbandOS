@@ -36,15 +36,15 @@ internal class DeVermisMysteriisCorporealBookItemFactory : CorporealBookItemFact
     public override bool KindIsGood => true;
     public override Item CreateItem() => new Item(SaveGame, this);
 
-    public override Spell[] Spells => new Spell[]
+    protected override string[] SpellNames => new string[]
     {
-        SaveGame.SingletonRepository.Spells.Get(nameof(CorporealSpellHorrificVisage)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(CorporealSpellSeeMagic)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(CorporealSpellStoneSkin)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(CorporealSpellMoveBody)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(CorporealSpellMutateBody)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(CorporealSpellKnowSelf)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(CorporealSpellTeleportLevel)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(CorporealSpellWordOfRecall))
+        nameof(CorporealSpellHorrificVisage),
+        nameof(CorporealSpellSeeMagic),
+        nameof(CorporealSpellStoneSkin),
+        nameof(CorporealSpellMoveBody),
+        nameof(CorporealSpellMutateBody),
+        nameof(CorporealSpellKnowSelf),
+        nameof(CorporealSpellTeleportLevel),
+        nameof(CorporealSpellWordOfRecall)
 };
 }

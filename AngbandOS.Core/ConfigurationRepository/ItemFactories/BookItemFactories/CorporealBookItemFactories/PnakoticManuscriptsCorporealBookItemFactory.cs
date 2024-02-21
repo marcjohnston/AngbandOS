@@ -42,15 +42,15 @@ internal class PnakoticManuscriptsCorporealBookItemFactory : CorporealBookItemFa
     public override bool KindIsGood => true;
     public override Item CreateItem() => new Item(SaveGame, this);
 
-    public override Spell[] Spells => new Spell[]
+    protected override string[] SpellNames => new string[]
     {
-        SaveGame.SingletonRepository.Spells.Get(nameof(CorporealSpellHeroism)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(CorporealSpellWraithform)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(CorporealSpellAttunement)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(CorporealSpellRestoreBody)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(CorporealSpellHealingTrue)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(CorporealSpellHypnoticEyes)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(CorporealSpellRestoreSoul)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(CorporealSpellInvulnerability))
+        nameof(CorporealSpellHeroism),
+        nameof(CorporealSpellWraithform),
+        nameof(CorporealSpellAttunement),
+        nameof(CorporealSpellRestoreBody),
+        nameof(CorporealSpellHealingTrue),
+        nameof(CorporealSpellHypnoticEyes),
+        nameof(CorporealSpellRestoreSoul),
+        nameof(CorporealSpellInvulnerability)
    };
 }

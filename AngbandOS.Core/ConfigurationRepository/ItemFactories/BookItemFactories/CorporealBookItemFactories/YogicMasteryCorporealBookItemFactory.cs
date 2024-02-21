@@ -27,15 +27,15 @@ internal class YogicMasteryCorporealBookItemFactory : CorporealBookItemFactory
     public override bool KindIsGood => false;
     public override Item CreateItem() => new Item(SaveGame, this);
 
-    public override Spell[] Spells => new Spell[]
+    protected override string[] SpellNames => new string[]
     {
-        SaveGame.SingletonRepository.Spells.Get(nameof(CorporealSpellBurnResistance)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(CorporealSpellDetoxify)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(CorporealSpellCureCriticalWounds)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(CorporealSpellSeeInvisible)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(CorporealSpellTeleport)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(CorporealSpellHaste)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(CorporealSpellHealing)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(CorporealSpellResistTrue))
+        nameof(CorporealSpellBurnResistance),
+        nameof(CorporealSpellDetoxify),
+        nameof(CorporealSpellCureCriticalWounds),
+        nameof(CorporealSpellSeeInvisible),
+        nameof(CorporealSpellTeleport),
+        nameof(CorporealSpellHaste),
+        nameof(CorporealSpellHealing),
+        nameof(CorporealSpellResistTrue)
     };
 }

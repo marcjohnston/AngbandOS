@@ -33,6 +33,13 @@ internal abstract class Spell : IGetKey<string>
         SaveGame = saveGame;
     }
 
+    public BookItemFactory BookFactory { get; private set; }
+
+    public void SetBookFactory(BookItemFactory bookFactory)
+    {
+        BookFactory = BookFactory;
+    }
+
     /// <summary>
     /// Returns the entity serialized into a Json string.
     /// </summary>

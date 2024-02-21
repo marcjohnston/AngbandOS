@@ -36,15 +36,15 @@ internal class RevelationsOfGlaakiNatureBookItemFactory : NatureBookItemFactory
     public override bool KindIsGood => true;
     public override Item CreateItem() => new Item(SaveGame, this);
 
-    public override Spell[] Spells => new Spell[]
+    protected override string[] SpellNames => new string[]
     {
-        SaveGame.SingletonRepository.Spells.Get(nameof(NatureSpellDoorCreation)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(NatureSpellStairBuilding)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(NatureSpellStoneSkin)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(NatureSpellResistanceTrue)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(NatureSpellAnimalFriendship)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(NatureSpellStoneTell)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(NatureSpellWallOfStone)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(NatureSpellProtectFromCorrosion))
+        nameof(NatureSpellDoorCreation),
+        nameof(NatureSpellStairBuilding),
+        nameof(NatureSpellStoneSkin),
+        nameof(NatureSpellResistanceTrue),
+        nameof(NatureSpellAnimalFriendship),
+        nameof(NatureSpellStoneTell),
+        nameof(NatureSpellWallOfStone),
+        nameof(NatureSpellProtectFromCorrosion)
     };
 }

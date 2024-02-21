@@ -36,15 +36,15 @@ internal class DholChantsLifeBookItemFactory : LifeBookItemFactory
     public override bool KindIsGood => true;
     public override Item CreateItem() => new Item(SaveGame, this);
 
-    public override Spell[] Spells => new Spell[]
+    protected override string[] SpellNames => new string[]
     {
-        SaveGame.SingletonRepository.Spells.Get(nameof(LifeSpellExorcism)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(LifeSpellDispelCurse)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(LifeSpellDispelUndeadAndDemons)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(LifeSpellDayOfTheDove)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(LifeSpellDispelEvil)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(LifeSpellBanish)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(LifeSpellHolyWord)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(LifeSpellWardingTrue))
+        nameof(LifeSpellExorcism),
+        nameof(LifeSpellDispelCurse),
+        nameof(LifeSpellDispelUndeadAndDemons),
+        nameof(LifeSpellDayOfTheDove),
+        nameof(LifeSpellDispelEvil),
+        nameof(LifeSpellBanish),
+        nameof(LifeSpellHolyWord),
+        nameof(LifeSpellWardingTrue)
     };
 }

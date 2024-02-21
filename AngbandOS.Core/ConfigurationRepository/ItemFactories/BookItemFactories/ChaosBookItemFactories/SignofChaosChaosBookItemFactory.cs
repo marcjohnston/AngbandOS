@@ -26,16 +26,16 @@ internal class SignOfChaosChaosBookItemFactory : ChaosBookItemFactory
     public override int Weight => 30;
     public override bool KindIsGood => false;
 
-    public override Spell[] Spells => new Spell[]
+    protected override string[] SpellNames => new string[]
     {
-        SaveGame.SingletonRepository.Spells.Get(nameof(ChaosSpellMagicMissile)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(ChaosSpellTrapAndDoorDestruction)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(ChaosSpellFlashOfLight)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(ChaosSpellTouchOfConfusion)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(ChaosSpellManaBurst)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(ChaosSpellFireBolt)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(ChaosSpellFistOfForce)),
-        SaveGame.SingletonRepository.Spells.Get(nameof(ChaosSpellTeleportSelf))
+        nameof(ChaosSpellMagicMissile),
+        nameof(ChaosSpellTrapAndDoorDestruction),
+        nameof(ChaosSpellFlashOfLight),
+        nameof(ChaosSpellTouchOfConfusion),
+        nameof(ChaosSpellManaBurst),
+        nameof(ChaosSpellFireBolt),
+        nameof(ChaosSpellFistOfForce),
+        nameof(ChaosSpellTeleportSelf)
     };
 
     public override Item CreateItem() => new Item(SaveGame, this);
