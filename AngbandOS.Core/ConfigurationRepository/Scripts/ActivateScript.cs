@@ -100,7 +100,15 @@ internal class ActivateScript : Script, IScript, IRepeatableScript, ISuccessfulS
         // If it is a random artifact then use its ability and quit
         if (item.IsRandomArtifact)
         {
-            ActivateRandomArtifact(item);
+            Activation artifactPower = item.RandomArtifactActivation;
+            if (!String.IsNullOrEmpty(artifactPower.PreActivationMessage))
+            {
+                SaveGame.MsgPrint(artifactPower.PreActivationMessage);
+            }
+            if (artifactPower.Activate())
+            {
+                item.RechargeTimeLeft = artifactPower.RechargeTime();
+            }
             return true;
         }
 
@@ -118,6 +126,7 @@ internal class ActivateScript : Script, IScript, IRepeatableScript, ISuccessfulS
         {
             // Allow the rare item singleton to perform the activation.
             item.RareItem.DoActivate(item);
+            return true;
         }
 
         // Check to see if the item can be activated.
@@ -129,28 +138,5 @@ internal class ActivateScript : Script, IScript, IRepeatableScript, ISuccessfulS
         }
 
         return false;
-    }
-
-    /// <summary>
-    /// Activate a randomly generated artifact.
-    /// </summary>
-    /// <param name="item"> The artifact being activated.</param>
-    private void ActivateRandomArtifact(Item item)
-    {
-        // If we don't have a random artifact, abort
-        if (item.IsRandomArtifact)
-        {
-            return;
-        }
-        Activation artifactPower = item.RandomArtifactActivation;
-
-        if (!String.IsNullOrEmpty(artifactPower.PreActivationMessage))
-        {
-            SaveGame.MsgPrint(artifactPower.PreActivationMessage);
-        }
-        if (artifactPower.Activate())
-        {
-            item.RechargeTimeLeft = artifactPower.RechargeTime();
-        }
     }
 }

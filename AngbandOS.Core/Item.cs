@@ -379,6 +379,7 @@ internal sealed class Item : IComparable<Item>
         return 0;
     }
 
+    // TODO: There is no way to ensure a cloned gets all of the properties
     public Item Clone(int? newCount = null)
     {
         Item clonedItem = Factory.CreateItem();
@@ -413,6 +414,7 @@ internal sealed class Item : IComparable<Item>
         clonedItem.BonusToHit = BonusToHit;
         clonedItem.Weight = Weight;
         clonedItem.RandomPower = RandomPower;
+        clonedItem.RandomArtifactActivation = RandomArtifactActivation;
         return clonedItem;
     }
 
@@ -436,7 +438,7 @@ internal sealed class Item : IComparable<Item>
     /// <summary>
     /// Returns true, if the item is a random artifact; false, otherwise.
     /// </summary>
-    public bool IsRandomArtifact => !String.IsNullOrEmpty(RandomArtifactName);
+    public bool IsRandomArtifact => !String.IsNullOrEmpty(RandomArtifactName); // TODO: the name is all we have until we can use the random item characteristics as null
 
     [Obsolete]
     public ItemTypeEnum Category => Factory.CategoryEnum; // TODO: Provided for backwards compatibility.  Will be deleted.
