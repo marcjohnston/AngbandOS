@@ -1287,15 +1287,15 @@ internal sealed class Item : IComparable<Item>
                 IFixedArtifactActivatible activatibleFixedArtifact = (IFixedArtifactActivatible)FixedArtifact;
                 info[i++] = activatibleFixedArtifact.DescribeActivationEffect;
             }
-            if (RareItem != null && RareItem.Activate)
+            else if (RareItem != null && RareItem.Activate)
             {
                 info[i++] = RareItem.DescribeActivationEffect;
             }
-            if (RandomArtifactActivation != null)
+            else if (RandomArtifactActivation != null)
             {
                 info[i++] = RandomArtifactActivation.Description;
             }
-            if (Factory.DescribeActivationEffect != null)
+            else if (Factory.DescribeActivationEffect != null)
             {
                 info[i++] = Factory.DescribeActivationEffect;
             }
