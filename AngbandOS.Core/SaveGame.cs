@@ -4948,13 +4948,13 @@ internal class SaveGame
                         MsgPrint("The curse is broken!");
                         oPtr.IdentCursed = false;
                         oPtr.IdentSense = true;
-                        if (oPtr.RandartItemCharacteristics.Cursed)
+                        if (oPtr.RandomArtifactItemCharacteristics.Cursed)
                         {
-                            oPtr.RandartItemCharacteristics.Cursed = false;
+                            oPtr.RandomArtifactItemCharacteristics.Cursed = false;
                         }
-                        if (oPtr.RandartItemCharacteristics.HeavyCurse)
+                        if (oPtr.RandomArtifactItemCharacteristics.HeavyCurse)
                         {
-                            oPtr.RandartItemCharacteristics.HeavyCurse = false;
+                            oPtr.RandomArtifactItemCharacteristics.HeavyCurse = false;
                         }
                         oPtr.Inscription = "uncursed";
                     }
@@ -4983,13 +4983,13 @@ internal class SaveGame
                         MsgPrint("The curse is broken!");
                         oPtr.IdentCursed = false;
                         oPtr.IdentSense = true;
-                        if (oPtr.RandartItemCharacteristics.Cursed)
+                        if (oPtr.RandomArtifactItemCharacteristics.Cursed)
                         {
-                            oPtr.RandartItemCharacteristics.Cursed = false;
+                            oPtr.RandomArtifactItemCharacteristics.Cursed = false;
                         }
-                        if (oPtr.RandartItemCharacteristics.HeavyCurse)
+                        if (oPtr.RandomArtifactItemCharacteristics.HeavyCurse)
                         {
-                            oPtr.RandartItemCharacteristics.HeavyCurse = false;
+                            oPtr.RandomArtifactItemCharacteristics.HeavyCurse = false;
                         }
                         oPtr.Inscription = "uncursed";
                     }
@@ -5019,13 +5019,13 @@ internal class SaveGame
                         MsgPrint("The curse is broken!");
                         oPtr.IdentCursed = false;
                         oPtr.IdentSense = true;
-                        if (oPtr.RandartItemCharacteristics.Cursed)
+                        if (oPtr.RandomArtifactItemCharacteristics.Cursed)
                         {
-                            oPtr.RandartItemCharacteristics.Cursed = false;
+                            oPtr.RandomArtifactItemCharacteristics.Cursed = false;
                         }
-                        if (oPtr.RandartItemCharacteristics.HeavyCurse)
+                        if (oPtr.RandomArtifactItemCharacteristics.HeavyCurse)
                         {
-                            oPtr.RandartItemCharacteristics.HeavyCurse = false;
+                            oPtr.RandomArtifactItemCharacteristics.HeavyCurse = false;
                         }
                         oPtr.Inscription = "uncursed";
                     }
@@ -5849,13 +5849,13 @@ internal class SaveGame
             }
             oPtr.IdentCursed = false;
             oPtr.IdentSense = true;
-            if (oPtr.RandartItemCharacteristics.Cursed)
+            if (oPtr.RandomArtifactItemCharacteristics.Cursed)
             {
-                oPtr.RandartItemCharacteristics.Cursed = false;
+                oPtr.RandomArtifactItemCharacteristics.Cursed = false;
             }
-            if (oPtr.RandartItemCharacteristics.HeavyCurse)
+            if (oPtr.RandomArtifactItemCharacteristics.HeavyCurse)
             {
-                oPtr.RandartItemCharacteristics.HeavyCurse = false;
+                oPtr.RandomArtifactItemCharacteristics.HeavyCurse = false;
             }
             oPtr.Inscription = "uncursed";
             SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
@@ -6299,7 +6299,7 @@ internal class SaveGame
             item.BaseArmorClass = 0;
             item.DamageDice = 0;
             item.DamageDiceSides = 0;
-            item.RandartItemCharacteristics.Clear();
+            item.RandomArtifactItemCharacteristics.Clear();
             item.IdentCursed = true;
             item.IdentBroken = true;
             SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
@@ -6338,7 +6338,7 @@ internal class SaveGame
             item.BaseArmorClass = 0;
             item.DamageDice = 0;
             item.DamageDiceSides = 0;
-            item.RandartItemCharacteristics.Clear();
+            item.RandomArtifactItemCharacteristics.Clear();
             item.IdentCursed = true;
             item.IdentBroken = true;
             SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
@@ -12889,8 +12889,8 @@ internal class SaveGame
             {
                 changed = true;
             }
-            oPtr.RandartItemCharacteristics.HeavyCurse = true;
-            oPtr.RandartItemCharacteristics.Cursed = true;
+            oPtr.RandomArtifactItemCharacteristics.HeavyCurse = true;
+            oPtr.RandomArtifactItemCharacteristics.Cursed = true;
             oPtr.IdentCursed = true;
         }
         else
@@ -12899,7 +12899,7 @@ internal class SaveGame
             {
                 changed = true;
             }
-            oPtr.RandartItemCharacteristics.Cursed = true;
+            oPtr.RandomArtifactItemCharacteristics.Cursed = true;
             oPtr.IdentCursed = true;
         }
         if (changed)

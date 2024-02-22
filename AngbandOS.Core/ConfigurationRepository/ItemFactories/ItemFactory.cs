@@ -245,12 +245,12 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey<string>
         {
             case 1:
             case 2:
-                item.RandartItemCharacteristics.SlayAnimal = true;
+                item.RandomArtifactItemCharacteristics.SlayAnimal = true;
                 break;
 
             case 3:
             case 4:
-                item.RandartItemCharacteristics.SlayEvil = true;
+                item.RandomArtifactItemCharacteristics.SlayEvil = true;
                 if (artifactBias == null && SaveGame.DieRoll(2) == 1)
                 {
                     artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(LawArtifactBias));
@@ -263,7 +263,7 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey<string>
 
             case 5:
             case 6:
-                item.RandartItemCharacteristics.SlayUndead = true;
+                item.RandomArtifactItemCharacteristics.SlayUndead = true;
                 if (artifactBias == null && SaveGame.DieRoll(9) == 1)
                 {
                     artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(PriestlyArtifactBias));
@@ -272,7 +272,7 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey<string>
 
             case 7:
             case 8:
-                item.RandartItemCharacteristics.SlayDemon = true;
+                item.RandomArtifactItemCharacteristics.SlayDemon = true;
                 if (artifactBias == null && SaveGame.DieRoll(9) == 1)
                 {
                     artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(PriestlyArtifactBias));
@@ -281,33 +281,33 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey<string>
 
             case 9:
             case 10:
-                item.RandartItemCharacteristics.SlayOrc = true;
+                item.RandomArtifactItemCharacteristics.SlayOrc = true;
                 break;
 
             case 11:
             case 12:
-                item.RandartItemCharacteristics.SlayTroll = true;
+                item.RandomArtifactItemCharacteristics.SlayTroll = true;
                 break;
 
             case 13:
             case 14:
-                item.RandartItemCharacteristics.SlayGiant = true;
+                item.RandomArtifactItemCharacteristics.SlayGiant = true;
                 break;
 
             case 15:
             case 16:
-                item.RandartItemCharacteristics.SlayDragon = true;
+                item.RandomArtifactItemCharacteristics.SlayDragon = true;
                 break;
 
             case 17:
-                item.RandartItemCharacteristics.KillDragon = true;
+                item.RandomArtifactItemCharacteristics.KillDragon = true;
                 break;
 
             case 18:
             case 19:
                 if (CanVorpalSlay)
                 {
-                    item.RandartItemCharacteristics.Vorpal = true;
+                    item.RandomArtifactItemCharacteristics.Vorpal = true;
                     if (artifactBias == null && SaveGame.DieRoll(9) == 1)
                     {
                         artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(WarriorArtifactBias));
@@ -320,12 +320,12 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey<string>
                 break;
 
             case 20:
-                item.RandartItemCharacteristics.Impact = true;
+                item.RandomArtifactItemCharacteristics.Impact = true;
                 break;
 
             case 21:
             case 22:
-                item.RandartItemCharacteristics.BrandFire = true;
+                item.RandomArtifactItemCharacteristics.BrandFire = true;
                 if (artifactBias == null)
                 {
                     artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(FireArtifactBias));
@@ -334,7 +334,7 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey<string>
 
             case 23:
             case 24:
-                item.RandartItemCharacteristics.BrandCold = true;
+                item.RandomArtifactItemCharacteristics.BrandCold = true;
                 if (artifactBias == null)
                 {
                     artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(ColdArtifactBias));
@@ -343,7 +343,7 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey<string>
 
             case 25:
             case 26:
-                item.RandartItemCharacteristics.BrandElec = true;
+                item.RandomArtifactItemCharacteristics.BrandElec = true;
                 if (artifactBias == null)
                 {
                     artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(ElectricityArtifactBias));
@@ -352,7 +352,7 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey<string>
 
             case 27:
             case 28:
-                item.RandartItemCharacteristics.BrandAcid = true;
+                item.RandomArtifactItemCharacteristics.BrandAcid = true;
                 if (artifactBias == null)
                 {
                     artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(AcidArtifactBias));
@@ -361,7 +361,7 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey<string>
 
             case 29:
             case 30:
-                item.RandartItemCharacteristics.BrandPois = true;
+                item.RandomArtifactItemCharacteristics.BrandPois = true;
                 if (artifactBias == null && SaveGame.DieRoll(3) != 1)
                 {
                     artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(PoisonArtifactBias));
@@ -378,7 +378,7 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey<string>
 
             case 31:
             case 32:
-                item.RandartItemCharacteristics.Vampiric = true;
+                item.RandomArtifactItemCharacteristics.Vampiric = true;
                 if (artifactBias == null)
                 {
                     artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(NecromanticArtifactBias));
@@ -386,7 +386,7 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey<string>
                 break;
 
             default:
-                item.RandartItemCharacteristics.Chaotic = true;
+                item.RandomArtifactItemCharacteristics.Chaotic = true;
                 if (artifactBias == null)
                 {
                     artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(ChaosArtifactBias));
@@ -519,7 +519,7 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey<string>
         {
             return false;
         }
-        if (!a.RandartItemCharacteristics.Equals(b.RandartItemCharacteristics))
+        if (!a.RandomArtifactItemCharacteristics.Equals(b.RandomArtifactItemCharacteristics))
         {
             return false;
         }

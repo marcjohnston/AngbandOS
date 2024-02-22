@@ -53,7 +53,7 @@ internal class BlessWeaponScript : Script, IScript, ISuccessfulScript
         {
             string s = oPtr.Count > 1 ? "" : "s";
             SaveGame.MsgPrint($"{your} {oName} shine{s}!");
-            oPtr.RandartItemCharacteristics.Blessed = true;
+            oPtr.RandomArtifactItemCharacteristics.Blessed = true;
         }
         else
         {

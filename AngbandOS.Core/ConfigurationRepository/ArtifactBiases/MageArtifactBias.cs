@@ -13,9 +13,9 @@ internal class MageArtifactBias : ArtifactBias
     private MageArtifactBias(SaveGame saveGame) : base(saveGame) { }
     public override bool ApplyBonuses(Item item)
     {
-        if (!item.RandartItemCharacteristics.Int)
+        if (!item.RandomArtifactItemCharacteristics.Int)
         {
-            item.RandartItemCharacteristics.Int = true;
+            item.RandomArtifactItemCharacteristics.Int = true;
             if (SaveGame.DieRoll(2) == 1)
             {
                 return true;

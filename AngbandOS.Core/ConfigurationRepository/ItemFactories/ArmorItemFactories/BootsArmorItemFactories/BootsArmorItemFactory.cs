@@ -42,7 +42,7 @@ internal abstract class BootsArmorItemFactory : ArmorItemFactory
             {
                 if (SaveGame.DieRoll(20) == 1)
                 {
-                    item.CreateRandart(false);
+                    item.CreateRandomArtifact(false);
                 }
                 else
                 {

@@ -13,25 +13,25 @@ internal class WarriorArtifactBias : ArtifactBias
     private WarriorArtifactBias(SaveGame saveGame) : base(saveGame) { }
     public override bool ApplyBonuses(Item item)
     {
-        if (!item.RandartItemCharacteristics.Str)
+        if (!item.RandomArtifactItemCharacteristics.Str)
         {
-            item.RandartItemCharacteristics.Str = true;
+            item.RandomArtifactItemCharacteristics.Str = true;
             if (SaveGame.DieRoll(2) == 1)
             {
                 return true;
             }
         }
-        else if (!item.RandartItemCharacteristics.Con)
+        else if (!item.RandomArtifactItemCharacteristics.Con)
         {
-            item.RandartItemCharacteristics.Con = true;
+            item.RandomArtifactItemCharacteristics.Con = true;
             if (SaveGame.DieRoll(2) == 1)
             {
                 return true;
             }
         }
-        else if (!item.RandartItemCharacteristics.Dex)
+        else if (!item.RandomArtifactItemCharacteristics.Dex)
         {
-            item.RandartItemCharacteristics.Dex = true;
+            item.RandomArtifactItemCharacteristics.Dex = true;
             if (SaveGame.DieRoll(2) == 1)
             {
                 return true;
@@ -42,17 +42,17 @@ internal class WarriorArtifactBias : ArtifactBias
 
     public override bool ApplyRandomResistances(Item item)
     {
-        if (SaveGame.DieRoll(3) != 1 && !item.RandartItemCharacteristics.ResFear)
+        if (SaveGame.DieRoll(3) != 1 && !item.RandomArtifactItemCharacteristics.ResFear)
         {
-            item.RandartItemCharacteristics.ResFear = true;
+            item.RandomArtifactItemCharacteristics.ResFear = true;
             if (SaveGame.DieRoll(2) == 1)
             {
                 return true;
             }
         }
-        if (SaveGame.DieRoll(3) == 1 && !item.RandartItemCharacteristics.NoMagic)
+        if (SaveGame.DieRoll(3) == 1 && !item.RandomArtifactItemCharacteristics.NoMagic)
         {
-            item.RandartItemCharacteristics.NoMagic = true;
+            item.RandomArtifactItemCharacteristics.NoMagic = true;
             if (SaveGame.DieRoll(2) == 1)
             {
                 return true;

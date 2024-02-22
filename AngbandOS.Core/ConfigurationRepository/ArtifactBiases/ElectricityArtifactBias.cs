@@ -13,25 +13,25 @@ internal class ElectricityArtifactBias : ArtifactBias
     private ElectricityArtifactBias(SaveGame saveGame) : base(saveGame) { }
     public override bool ApplyRandomResistances(Item item)
     {
-        if (!item.RandartItemCharacteristics.ResElec)
+        if (!item.RandomArtifactItemCharacteristics.ResElec)
         {
-            item.RandartItemCharacteristics.ResElec = true;
+            item.RandomArtifactItemCharacteristics.ResElec = true;
             if (SaveGame.DieRoll(2) == 1)
             {
                 return true;
             }
         }
-        if (item.Factory.CanApplyArtifactBiasResistance && !item.RandartItemCharacteristics.ShElec)
+        if (item.Factory.CanApplyArtifactBiasResistance && !item.RandomArtifactItemCharacteristics.ShElec)
         {
-            item.RandartItemCharacteristics.ShElec = true;
+            item.RandomArtifactItemCharacteristics.ShElec = true;
             if (SaveGame.DieRoll(2) == 1)
             {
                 return true;
             }
         }
-        if (SaveGame.DieRoll(ImmunityLuckOneInChance) == 1 && !item.RandartItemCharacteristics.ImElec)
+        if (SaveGame.DieRoll(ImmunityLuckOneInChance) == 1 && !item.RandomArtifactItemCharacteristics.ImElec)
         {
-            item.RandartItemCharacteristics.ImElec = true;
+            item.RandomArtifactItemCharacteristics.ImElec = true;
             if (SaveGame.DieRoll(2) == 1)
             {
                 return true;
@@ -44,9 +44,9 @@ internal class ElectricityArtifactBias : ArtifactBias
     {
         if (item.Factory.CanApplyArtifactBiasSlaying)
         {
-            if (!item.RandartItemCharacteristics.BrandElec)
+            if (!item.RandomArtifactItemCharacteristics.BrandElec)
             {
-                item.RandartItemCharacteristics.BrandElec = true;
+                item.RandomArtifactItemCharacteristics.BrandElec = true;
                 if (SaveGame.DieRoll(2) == 1)
                 {
                     return true;

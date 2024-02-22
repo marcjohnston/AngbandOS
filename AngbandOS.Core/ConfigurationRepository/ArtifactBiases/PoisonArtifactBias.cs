@@ -13,9 +13,9 @@ internal class PoisonArtifactBias : ArtifactBias
     private PoisonArtifactBias(SaveGame saveGame) : base(saveGame) { }
     public override bool ApplyRandomResistances(Item item)
     {
-        if (!item.RandartItemCharacteristics.ResPois)
+        if (!item.RandomArtifactItemCharacteristics.ResPois)
         {
-            item.RandartItemCharacteristics.ResPois = true;
+            item.RandomArtifactItemCharacteristics.ResPois = true;
             if (SaveGame.DieRoll(2) == 1)
             {
                 return true;
@@ -28,9 +28,9 @@ internal class PoisonArtifactBias : ArtifactBias
     {
         if (item.Factory.CanApplyArtifactBiasSlaying)
         {
-            if (!item.RandartItemCharacteristics.BrandPois)
+            if (!item.RandomArtifactItemCharacteristics.BrandPois)
             {
-                item.RandartItemCharacteristics.BrandPois = true;
+                item.RandomArtifactItemCharacteristics.BrandPois = true;
                 if (SaveGame.DieRoll(2) == 1)
                 {
                     return true;

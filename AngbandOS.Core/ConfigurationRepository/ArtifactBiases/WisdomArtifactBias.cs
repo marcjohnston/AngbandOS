@@ -13,9 +13,9 @@ internal class WisdomArtifactBias : ArtifactBias
     private WisdomArtifactBias(SaveGame saveGame) : base(saveGame) { }
     public override bool ApplyBonuses(Item item)
     {
-        if (!item.RandartItemCharacteristics.Wis)
+        if (!item.RandomArtifactItemCharacteristics.Wis)
         {
-            item.RandartItemCharacteristics.Wis = true;
+            item.RandomArtifactItemCharacteristics.Wis = true;
             if (SaveGame.DieRoll(2) == 1)
             {
                 return true;
@@ -26,9 +26,9 @@ internal class WisdomArtifactBias : ArtifactBias
 
     public override bool ApplyMiscPowers(Item item)
     {
-        if (!item.RandartItemCharacteristics.SustWis)
+        if (!item.RandomArtifactItemCharacteristics.SustWis)
         {
-            item.RandartItemCharacteristics.SustWis = true;
+            item.RandomArtifactItemCharacteristics.SustWis = true;
             if (SaveGame.DieRoll(2) == 1)
             {
                 return true;

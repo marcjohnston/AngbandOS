@@ -142,7 +142,7 @@ internal class ActivateScript : Script, IScript, IRepeatableScript, ISuccessfulS
         {
             return;
         }
-        Activation artifactPower = item.BonusPowerSubType;
+        Activation artifactPower = item.RandomArtifactActivation;
 
         if (!String.IsNullOrEmpty(artifactPower.PreActivationMessage))
         {

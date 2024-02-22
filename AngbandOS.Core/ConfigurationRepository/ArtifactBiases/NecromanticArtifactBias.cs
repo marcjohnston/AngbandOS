@@ -13,25 +13,25 @@ internal class NecromanticArtifactBias : ArtifactBias
     private NecromanticArtifactBias(SaveGame saveGame) : base(saveGame) { }
     public override bool ApplyRandomResistances(Item item)
     {
-        if (!item.RandartItemCharacteristics.ResNether)
+        if (!item.RandomArtifactItemCharacteristics.ResNether)
         {
-            item.RandartItemCharacteristics.ResNether = true;
+            item.RandomArtifactItemCharacteristics.ResNether = true;
             if (SaveGame.DieRoll(2) == 1)
             {
                 return true;
             }
         }
-        if (!item.RandartItemCharacteristics.ResPois)
+        if (!item.RandomArtifactItemCharacteristics.ResPois)
         {
-            item.RandartItemCharacteristics.ResPois = true;
+            item.RandomArtifactItemCharacteristics.ResPois = true;
             if (SaveGame.DieRoll(2) == 1)
             {
                 return true;
             }
         }
-        if (!item.RandartItemCharacteristics.ResDark)
+        if (!item.RandomArtifactItemCharacteristics.ResDark)
         {
-            item.RandartItemCharacteristics.ResDark = true;
+            item.RandomArtifactItemCharacteristics.ResDark = true;
             if (SaveGame.DieRoll(2) == 1)
             {
                 return true;
@@ -44,17 +44,17 @@ internal class NecromanticArtifactBias : ArtifactBias
     {
         if (item.Factory.CanApplyArtifactBiasSlaying)
         {
-            if (!item.RandartItemCharacteristics.Vampiric)
+            if (!item.RandomArtifactItemCharacteristics.Vampiric)
             {
-                item.RandartItemCharacteristics.Vampiric = true;
+                item.RandomArtifactItemCharacteristics.Vampiric = true;
                 if (SaveGame.DieRoll(2) == 1)
                 {
                     return true;
                 }
             }
-            if (!item.RandartItemCharacteristics.BrandPois && SaveGame.DieRoll(2) == 1)
+            if (!item.RandomArtifactItemCharacteristics.BrandPois && SaveGame.DieRoll(2) == 1)
             {
-                item.RandartItemCharacteristics.BrandPois = true;
+                item.RandomArtifactItemCharacteristics.BrandPois = true;
                 if (SaveGame.DieRoll(2) == 1)
                 {
                     return true;

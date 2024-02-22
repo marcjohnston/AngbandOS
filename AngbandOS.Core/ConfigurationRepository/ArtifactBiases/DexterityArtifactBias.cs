@@ -13,9 +13,9 @@ internal class DexterityArtifactBias : ArtifactBias
     private DexterityArtifactBias(SaveGame saveGame) : base(saveGame) { }
     public override bool ApplyBonuses(Item item)
     {
-        if (!item.RandartItemCharacteristics.Dex)
+        if (!item.RandomArtifactItemCharacteristics.Dex)
         {
-            item.RandartItemCharacteristics.Dex = true;
+            item.RandomArtifactItemCharacteristics.Dex = true;
             if (SaveGame.DieRoll(2) == 1)
             {
                 return true;
@@ -26,9 +26,9 @@ internal class DexterityArtifactBias : ArtifactBias
 
     public override bool ApplyMiscPowers(Item item)
     {
-        if (!item.RandartItemCharacteristics.SustDex)
+        if (!item.RandomArtifactItemCharacteristics.SustDex)
         {
-            item.RandartItemCharacteristics.SustDex = true;
+            item.RandomArtifactItemCharacteristics.SustDex = true;
             if (SaveGame.DieRoll(2) == 1)
             {
                 return true;

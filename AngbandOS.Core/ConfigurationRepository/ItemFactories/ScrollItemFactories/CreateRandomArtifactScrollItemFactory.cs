@@ -24,7 +24,7 @@ internal class CreateRandomArtifactScrollItemFactory : ScrollItemFactory
 
     public override void Read(ReadScrollEvent eventArgs)
     {
-        SaveGame.RunScript(nameof(CreateArtifactScript));
+        SaveGame.RunScript(nameof(CreateRandomArtifactScript));
         eventArgs.Identified = true;
     }
     public override Item CreateItem() => new Item(SaveGame, this);

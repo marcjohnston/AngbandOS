@@ -13,25 +13,25 @@ internal class FireArtifactBias : ArtifactBias
     private FireArtifactBias(SaveGame saveGame) : base(saveGame) { }
     public override bool ApplyRandomResistances(Item item)
     {
-        if (!item.RandartItemCharacteristics.ResFire)
+        if (!item.RandomArtifactItemCharacteristics.ResFire)
         {
-            item.RandartItemCharacteristics.ResFire = true;
+            item.RandomArtifactItemCharacteristics.ResFire = true;
             if (SaveGame.DieRoll(2) == 1)
             {
                 return true;
             }
         }
-        if (item.Factory.CanApplyArtifactBiasResistance && !item.RandartItemCharacteristics.ShFire)
+        if (item.Factory.CanApplyArtifactBiasResistance && !item.RandomArtifactItemCharacteristics.ShFire)
         {
-            item.RandartItemCharacteristics.ShFire = true;
+            item.RandomArtifactItemCharacteristics.ShFire = true;
             if (SaveGame.DieRoll(2) == 1)
             {
                 return true;
             }
         }
-        if (SaveGame.DieRoll(ImmunityLuckOneInChance) == 1 && !item.RandartItemCharacteristics.ImFire)
+        if (SaveGame.DieRoll(ImmunityLuckOneInChance) == 1 && !item.RandomArtifactItemCharacteristics.ImFire)
         {
-            item.RandartItemCharacteristics.ImFire = true;
+            item.RandomArtifactItemCharacteristics.ImFire = true;
             if (SaveGame.DieRoll(2) == 1)
             {
                 return true;
@@ -42,9 +42,9 @@ internal class FireArtifactBias : ArtifactBias
 
     public override bool ApplyMiscPowers(Item item)
     {
-        if (!item.RandartItemCharacteristics.Lightsource)
+        if (!item.RandomArtifactItemCharacteristics.Lightsource)
         {
-            item.RandartItemCharacteristics.Lightsource = true;
+            item.RandomArtifactItemCharacteristics.Lightsource = true;
         }
         return false;
     }
@@ -53,9 +53,9 @@ internal class FireArtifactBias : ArtifactBias
     {
         if (item.Factory.CanApplyArtifactBiasSlaying)
         {
-            if (!item.RandartItemCharacteristics.BrandFire)
+            if (!item.RandomArtifactItemCharacteristics.BrandFire)
             {
-                item.RandartItemCharacteristics.BrandFire = true;
+                item.RandomArtifactItemCharacteristics.BrandFire = true;
                 if (SaveGame.DieRoll(2) == 1)
                 {
                     return true;

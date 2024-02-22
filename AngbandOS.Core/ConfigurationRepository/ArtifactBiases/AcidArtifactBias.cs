@@ -14,17 +14,17 @@ internal class AcidArtifactBias : ArtifactBias
 
     public override bool ApplyRandomResistances(Item item)
     {
-        if (!item.RandartItemCharacteristics.ResAcid)
+        if (!item.RandomArtifactItemCharacteristics.ResAcid)
         {
-            item.RandartItemCharacteristics.ResAcid = true;
+            item.RandomArtifactItemCharacteristics.ResAcid = true;
             if (SaveGame.DieRoll(2) == 1)
             {
                 return true;
             }
         }
-        if (SaveGame.DieRoll(ImmunityLuckOneInChance) == 1 && !item.RandartItemCharacteristics.ImAcid)
+        if (SaveGame.DieRoll(ImmunityLuckOneInChance) == 1 && !item.RandomArtifactItemCharacteristics.ImAcid)
         {
-            item.RandartItemCharacteristics.ImAcid = true;
+            item.RandomArtifactItemCharacteristics.ImAcid = true;
             if (SaveGame.DieRoll(2) == 1)
             {
                 return true;
@@ -37,9 +37,9 @@ internal class AcidArtifactBias : ArtifactBias
     {
         if (item.Factory.CanApplyArtifactBiasSlaying)
         {
-            if (!item.RandartItemCharacteristics.BrandAcid)
+            if (!item.RandomArtifactItemCharacteristics.BrandAcid)
             {
-                item.RandartItemCharacteristics.BrandAcid = true;
+                item.RandomArtifactItemCharacteristics.BrandAcid = true;
                 if (SaveGame.DieRoll(2) == 1)
                 {
                     return true;

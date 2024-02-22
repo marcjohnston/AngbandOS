@@ -150,12 +150,12 @@ internal abstract class ArmorItemFactory : ItemFactory
                 item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(ArmorOfResistanceRareItem));
                 if (SaveGame.DieRoll(4) == 1)
                 {
-                    item.RandartItemCharacteristics.ResPois = true;
+                    item.RandomArtifactItemCharacteristics.ResPois = true;
                 }
                 item.ApplyRandomResistance(ref artifactBias, SaveGame.DieRoll(22) + 16);
                 break;
             case 19:
-                item.CreateRandart(false);
+                item.CreateRandomArtifact(false);
                 break;
             case 20:
             case 21:

@@ -13,9 +13,9 @@ internal class StrengthArtifactBias : ArtifactBias
     private StrengthArtifactBias(SaveGame saveGame) : base(saveGame) { }
     public override bool ApplyBonuses(Item item)
     {
-        if (!item.RandartItemCharacteristics.Str)
+        if (!item.RandomArtifactItemCharacteristics.Str)
         {
-            item.RandartItemCharacteristics.Str = true;
+            item.RandomArtifactItemCharacteristics.Str = true;
             if (SaveGame.DieRoll(2) == 1) // 50% chance of being a "free" power
             {
                 return true;
@@ -25,9 +25,9 @@ internal class StrengthArtifactBias : ArtifactBias
     }
     public override bool ApplyMiscPowers(Item item)
     {
-        if (!item.RandartItemCharacteristics.SustStr)
+        if (!item.RandomArtifactItemCharacteristics.SustStr)
         {
-            item.RandartItemCharacteristics.SustStr = true;
+            item.RandomArtifactItemCharacteristics.SustStr = true;
             if (SaveGame.DieRoll(2) == 1)
             {
                 return true;

@@ -13,9 +13,9 @@ internal class ConstitutionArtifactBias : ArtifactBias
     private ConstitutionArtifactBias(SaveGame saveGame) : base(saveGame) { }
     public override bool ApplyBonuses(Item item)
     {
-        if (!item.RandartItemCharacteristics.Con)
+        if (!item.RandomArtifactItemCharacteristics.Con)
         {
-            item.RandartItemCharacteristics.Con = true;
+            item.RandomArtifactItemCharacteristics.Con = true;
             if (SaveGame.DieRoll(2) == 1)
             {
                 return true;
@@ -26,9 +26,9 @@ internal class ConstitutionArtifactBias : ArtifactBias
 
     public override bool ApplyMiscPowers(Item item)
     {
-        if (!item.RandartItemCharacteristics.SustCon)
+        if (!item.RandomArtifactItemCharacteristics.SustCon)
         {
-            item.RandartItemCharacteristics.SustCon = true;
+            item.RandomArtifactItemCharacteristics.SustCon = true;
             if (SaveGame.DieRoll(2) == 1)
             {
                 return true;

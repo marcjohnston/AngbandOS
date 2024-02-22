@@ -411,7 +411,7 @@ internal abstract class StoreFactory : IItemFilter, IGetKey<string>
         {
             return false;
         }
-        if (oPtr.RandartItemCharacteristics != jPtr.RandartItemCharacteristics)
+        if (oPtr.RandomArtifactItemCharacteristics != jPtr.RandomArtifactItemCharacteristics)
         {
             return false;
         }

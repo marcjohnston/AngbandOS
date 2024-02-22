@@ -54,7 +54,7 @@ internal abstract class ShieldArmorItemFactory : ArmorItemFactory
                 item.ApplyRandomResistance(ref artifactBias, SaveGame.DieRoll(34) + 4);
                 if (SaveGame.DieRoll(4) == 1)
                 {
-                    item.RandartItemCharacteristics.ResPois = true;
+                    item.RandomArtifactItemCharacteristics.ResPois = true;
                 }
                 item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(ShieldOfResistanceRareItem));
                 break;
@@ -63,7 +63,7 @@ internal abstract class ShieldArmorItemFactory : ArmorItemFactory
                 item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(ShieldOfReflectionRareItem));
                 break;
             case 23:
-                item.CreateRandart(false);
+                item.CreateRandomArtifact(false);
                 break;
         }
     }

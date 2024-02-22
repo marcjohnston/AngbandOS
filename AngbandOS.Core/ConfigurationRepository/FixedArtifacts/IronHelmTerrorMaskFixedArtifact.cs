@@ -25,10 +25,10 @@ internal class IronHelmTerrorMaskFixedArtifact : FixedArtifact, IFixedArtifactAc
         }
         else
         {
-            item.RandartItemCharacteristics.Cursed = true;
-            item.RandartItemCharacteristics.HeavyCurse = true;
-            item.RandartItemCharacteristics.Aggravate = true;
-            item.RandartItemCharacteristics.DreadCurse = true;
+            item.RandomArtifactItemCharacteristics.Cursed = true;
+            item.RandomArtifactItemCharacteristics.HeavyCurse = true;
+            item.RandomArtifactItemCharacteristics.Aggravate = true;
+            item.RandomArtifactItemCharacteristics.DreadCurse = true;
             item.IdentCursed = true;
             return;
         }

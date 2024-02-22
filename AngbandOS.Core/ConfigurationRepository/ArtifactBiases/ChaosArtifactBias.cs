@@ -14,25 +14,25 @@ internal class ChaosArtifactBias : ArtifactBias
 
     public override bool ApplyRandomResistances(Item item)
     {
-        if (!item.RandartItemCharacteristics.ResChaos)
+        if (!item.RandomArtifactItemCharacteristics.ResChaos)
         {
-            item.RandartItemCharacteristics.ResChaos = true;
+            item.RandomArtifactItemCharacteristics.ResChaos = true;
             if (SaveGame.DieRoll(2) == 1)
             {
                 return true;
             }
         }
-        if (!item.RandartItemCharacteristics.ResConf)
+        if (!item.RandomArtifactItemCharacteristics.ResConf)
         {
-            item.RandartItemCharacteristics.ResConf = true;
+            item.RandomArtifactItemCharacteristics.ResConf = true;
             if (SaveGame.DieRoll(2) == 1)
             {
                 return true;
             }
         }
-        if (!item.RandartItemCharacteristics.ResDisen)
+        if (!item.RandomArtifactItemCharacteristics.ResDisen)
         {
-            item.RandartItemCharacteristics.ResDisen = false;
+            item.RandomArtifactItemCharacteristics.ResDisen = false;
             if (SaveGame.DieRoll(2) == 1)
             {
                 return true;
@@ -43,9 +43,9 @@ internal class ChaosArtifactBias : ArtifactBias
 
     public override bool ApplyMiscPowers(Item item)
     {
-        if (!item.RandartItemCharacteristics.Teleport)
+        if (!item.RandomArtifactItemCharacteristics.Teleport)
         {
-            item.RandartItemCharacteristics.Teleport = true;
+            item.RandomArtifactItemCharacteristics.Teleport = true;
             if (SaveGame.DieRoll(2) == 1)
             {
                 return true;
@@ -57,9 +57,9 @@ internal class ChaosArtifactBias : ArtifactBias
     {
         if (item.Factory.CanApplyArtifactBiasSlaying)
         {
-            if (!item.RandartItemCharacteristics.Chaotic)
+            if (!item.RandomArtifactItemCharacteristics.Chaotic)
             {
-                item.RandartItemCharacteristics.Chaotic = true;
+                item.RandomArtifactItemCharacteristics.Chaotic = true;
                 if (SaveGame.DieRoll(2) == 1)
                 {
                     return true;

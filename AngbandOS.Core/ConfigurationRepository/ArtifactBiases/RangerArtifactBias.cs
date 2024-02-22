@@ -13,25 +13,25 @@ internal class RangerArtifactBias : ArtifactBias
     private RangerArtifactBias(SaveGame saveGame) : base(saveGame) { }
     public override bool ApplyBonuses(Item item)
     {
-        if (!item.RandartItemCharacteristics.Con)
+        if (!item.RandomArtifactItemCharacteristics.Con)
         {
-            item.RandartItemCharacteristics.Con = true;
+            item.RandomArtifactItemCharacteristics.Con = true;
             if (SaveGame.DieRoll(2) == 1)
             {
                 return true;
             }
         }
-        else if (!item.RandartItemCharacteristics.Dex)
+        else if (!item.RandomArtifactItemCharacteristics.Dex)
         {
-            item.RandartItemCharacteristics.Dex = true;
+            item.RandomArtifactItemCharacteristics.Dex = true;
             if (SaveGame.DieRoll(2) == 1)
             {
                 return true;
             }
         }
-        else if (!item.RandartItemCharacteristics.Str)
+        else if (!item.RandomArtifactItemCharacteristics.Str)
         {
-            item.RandartItemCharacteristics.Str = true;
+            item.RandomArtifactItemCharacteristics.Str = true;
             if (SaveGame.DieRoll(2) == 1)
             {
                 return true;
@@ -42,9 +42,9 @@ internal class RangerArtifactBias : ArtifactBias
     }
     public override bool ApplyMiscPowers(Item item)
     {
-        if (!item.RandartItemCharacteristics.SustCon)
+        if (!item.RandomArtifactItemCharacteristics.SustCon)
         {
-            item.RandartItemCharacteristics.SustCon = true;
+            item.RandomArtifactItemCharacteristics.SustCon = true;
             if (SaveGame.DieRoll(2) == 1)
             {
                 return true;
@@ -56,9 +56,9 @@ internal class RangerArtifactBias : ArtifactBias
     {
         if (item.Factory.CanApplyArtifactBiasSlaying)
         {
-            if (!item.RandartItemCharacteristics.SlayAnimal)
+            if (!item.RandomArtifactItemCharacteristics.SlayAnimal)
             {
-                item.RandartItemCharacteristics.SlayAnimal = true;
+                item.RandomArtifactItemCharacteristics.SlayAnimal = true;
                 if (SaveGame.DieRoll(2) == 1)
                 {
                     return true;

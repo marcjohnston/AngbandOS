@@ -29,7 +29,7 @@ internal class ElvenCloakArmorItemFactory : CloakArmorItemFactory
             {
                 if (SaveGame.DieRoll(20) == 1)
                 {
-                    item.CreateRandart(false);
+                    item.CreateRandomArtifact(false);
                 }
                 else
                 {

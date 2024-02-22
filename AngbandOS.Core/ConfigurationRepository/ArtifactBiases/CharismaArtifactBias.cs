@@ -13,9 +13,9 @@ internal class CharismaArtifactBias : ArtifactBias
     private CharismaArtifactBias(SaveGame saveGame) : base(saveGame) { }
     public override bool ApplyBonuses(Item item)
     {
-        if (!item.RandartItemCharacteristics.Cha)
+        if (!item.RandomArtifactItemCharacteristics.Cha)
         {
-            item.RandartItemCharacteristics.Cha = true;
+            item.RandomArtifactItemCharacteristics.Cha = true;
             if (SaveGame.DieRoll(2) == 1)
             {
                 return true;
@@ -25,9 +25,9 @@ internal class CharismaArtifactBias : ArtifactBias
     }
     public override bool ApplyMiscPowers(Item item)
     {
-        if (!item.RandartItemCharacteristics.SustCha)
+        if (!item.RandomArtifactItemCharacteristics.SustCha)
         {
-            item.RandartItemCharacteristics.SustCha = true;
+            item.RandomArtifactItemCharacteristics.SustCha = true;
             if (SaveGame.DieRoll(2) == 1)
             {
                 return true;

@@ -62,7 +62,7 @@ internal abstract class BowWeaponItemFactory : WeaponItemFactory // TODO: Should
             case 1:
             case 2:
             case 3:
-                item.RandartItemCharacteristics.XtraMight = true;
+                item.RandomArtifactItemCharacteristics.XtraMight = true;
                 if (artifactBias == null && SaveGame.DieRoll(9) == 1)
                 {
                     artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(RangerArtifactBias));
@@ -70,7 +70,7 @@ internal abstract class BowWeaponItemFactory : WeaponItemFactory // TODO: Should
                 break;
 
             default:
-                item.RandartItemCharacteristics.XtraShots = true;
+                item.RandomArtifactItemCharacteristics.XtraShots = true;
                 if (artifactBias == null && SaveGame.DieRoll(9) == 1)
                 {
                     artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(RangerArtifactBias));
@@ -117,7 +117,7 @@ internal abstract class BowWeaponItemFactory : WeaponItemFactory // TODO: Should
                     item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(BowOfAccuracyRareItem));
                     break;
                 case 21:
-                    item.CreateRandart(false);
+                    item.CreateRandomArtifact(false);
                     break;
             }
         }

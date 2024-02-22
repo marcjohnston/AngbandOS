@@ -21,7 +21,7 @@ internal class MagiAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
         item.BonusArmorClass = SaveGame.DieRoll(5) + item.GetBonusValue(5, level);
         if (SaveGame.DieRoll(3) == 1)
         {
-            item.RandartItemCharacteristics.SlowDigest = true;
+            item.RandomArtifactItemCharacteristics.SlowDigest = true;
         }
         SaveGame.TreasureRating += 25;
     }

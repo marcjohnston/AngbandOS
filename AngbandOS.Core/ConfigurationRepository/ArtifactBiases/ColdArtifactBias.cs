@@ -13,17 +13,17 @@ internal class ColdArtifactBias : ArtifactBias
     private ColdArtifactBias(SaveGame saveGame) : base(saveGame) { }
     public override bool ApplyRandomResistances(Item item)
     {
-        if (!item.RandartItemCharacteristics.ResCold)
+        if (!item.RandomArtifactItemCharacteristics.ResCold)
         {
-            item.RandartItemCharacteristics.ResCold = true;
+            item.RandomArtifactItemCharacteristics.ResCold = true;
             if (SaveGame.DieRoll(2) == 1)
             {
                 return true;
             }
         }
-        if (SaveGame.DieRoll(ImmunityLuckOneInChance) == 1 && !item.RandartItemCharacteristics.ImCold)
+        if (SaveGame.DieRoll(ImmunityLuckOneInChance) == 1 && !item.RandomArtifactItemCharacteristics.ImCold)
         {
-            item.RandartItemCharacteristics.ImCold = true;
+            item.RandomArtifactItemCharacteristics.ImCold = true;
             if (SaveGame.DieRoll(2) == 1)
             {
                 return true;
@@ -36,9 +36,9 @@ internal class ColdArtifactBias : ArtifactBias
     {
         if (item.Factory.CanApplyArtifactBiasSlaying)
         {
-            if (!item.RandartItemCharacteristics.BrandCold)
+            if (!item.RandomArtifactItemCharacteristics.BrandCold)
             {
-                item.RandartItemCharacteristics.BrandCold = true;
+                item.RandomArtifactItemCharacteristics.BrandCold = true;
                 if (SaveGame.DieRoll(2) == 1)
                 {
                     return true;

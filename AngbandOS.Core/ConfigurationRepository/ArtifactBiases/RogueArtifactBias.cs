@@ -13,9 +13,9 @@ internal class RogueArtifactBias : ArtifactBias
     private RogueArtifactBias(SaveGame saveGame) : base(saveGame) { }
     public override bool ApplyBonuses(Item item)
     {
-        if (!item.RandartItemCharacteristics.Stealth)
+        if (!item.RandomArtifactItemCharacteristics.Stealth)
         {
-            item.RandartItemCharacteristics.Stealth = true;
+            item.RandomArtifactItemCharacteristics.Stealth = true;
             if (SaveGame.DieRoll(2) == 1)
             {
                 return true;
@@ -28,9 +28,9 @@ internal class RogueArtifactBias : ArtifactBias
     {
         if (item.Factory.CanApplyArtifactBiasSlaying)
         {
-            if (!item.RandartItemCharacteristics.BrandPois)
+            if (!item.RandomArtifactItemCharacteristics.BrandPois)
             {
-                item.RandartItemCharacteristics.BrandPois = true;
+                item.RandomArtifactItemCharacteristics.BrandPois = true;
                 if (SaveGame.DieRoll(2) == 1)
                 {
                     return true;

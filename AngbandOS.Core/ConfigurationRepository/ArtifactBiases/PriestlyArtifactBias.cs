@@ -13,9 +13,9 @@ internal class PriestlyArtifactBias : ArtifactBias
     private PriestlyArtifactBias(SaveGame saveGame) : base(saveGame) { }
     public override bool ApplyBonuses(Item item)
     {
-        if (!item.RandartItemCharacteristics.Wis)
+        if (!item.RandomArtifactItemCharacteristics.Wis)
         {
-            item.RandartItemCharacteristics.Wis = true;
+            item.RandomArtifactItemCharacteristics.Wis = true;
             if (SaveGame.DieRoll(2) == 1)
             {
                 return true;
@@ -26,9 +26,9 @@ internal class PriestlyArtifactBias : ArtifactBias
 
     public override bool ApplySlaying(Item item)
     {
-        if (item.Factory.CanApplyBlessedArtifactBias && !item.RandartItemCharacteristics.Blessed)
+        if (item.Factory.CanApplyBlessedArtifactBias && !item.RandomArtifactItemCharacteristics.Blessed)
         {
-            item.RandartItemCharacteristics.Blessed = true;
+            item.RandomArtifactItemCharacteristics.Blessed = true;
         }
         return false;
     }

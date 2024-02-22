@@ -8,9 +8,9 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class CreateArtifactScript : Script, IScript
+internal class CreateRandomArtifactScript : Script, IScript
 {
-    private CreateArtifactScript(SaveGame saveGame) : base(saveGame) { }
+    private CreateRandomArtifactScript(SaveGame saveGame) : base(saveGame) { }
 
     /// <summary>
     /// Creates an artifact from a chosen item.
@@ -55,7 +55,7 @@ internal class CreateArtifactScript : Script, IScript
                 SaveGame.MsgPrint($"{oPtr.Count - 1} of your oName {s} destroyed!");
                 oPtr.Count = 1;
             }
-            okay = oPtr.CreateRandart(true);
+            okay = oPtr.CreateRandomArtifact(true);
         }
         if (!okay)
         {

@@ -28,7 +28,7 @@ internal abstract class HelmArmorItemFactory : ArmorItemFactory
             {
                 if (SaveGame.DieRoll(20) == 1)
                 {
-                    item.CreateRandart(false);
+                    item.CreateRandomArtifact(false);
                 }
                 else
                 {
@@ -67,7 +67,7 @@ internal abstract class HelmArmorItemFactory : ArmorItemFactory
                 item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(HatOfSeeingRareItem));
                 if (SaveGame.DieRoll(7) == 1)
                 {
-                    item.RandartItemCharacteristics.Telepathy = true;
+                    item.RandomArtifactItemCharacteristics.Telepathy = true;
                 }
                 break;
             case 9:
