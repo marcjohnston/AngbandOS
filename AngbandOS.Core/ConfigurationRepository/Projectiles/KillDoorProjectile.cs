@@ -43,12 +43,6 @@ internal class KillDoorProjectile : Projectile
         bool obvious = false;
         foreach (Item oPtr in cPtr.Items)
         {
-            if (oPtr.Count > 1)
-            {
-            }
-            if (oPtr.FixedArtifact != null || string.IsNullOrEmpty(oPtr.RandartName) == false)
-            {
-            }
             if (oPtr.Category == ItemTypeEnum.Chest)
             {
                 if (oPtr.TypeSpecificValue > 0)

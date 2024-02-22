@@ -487,11 +487,7 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey<string>
         {
             return false;
         }
-        if (a.FixedArtifact != b.FixedArtifact)
-        {
-            return false;
-        }
-        if (!string.IsNullOrEmpty(a.RandartName) || !string.IsNullOrEmpty(b.RandartName))
+        if (a.IsArtifact != b.IsArtifact)
         {
             return false;
         }

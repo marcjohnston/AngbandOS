@@ -32,7 +32,7 @@ internal class CreateArtifactScript : Script, IScript
         string your = oPtr.IsInInventory ? "Your" : "The";
         string s = oPtr.Count > 1 ? "" : "s";
         SaveGame.MsgPrint($"{your} {oName} radiate{s} a blinding light!");
-        if (oPtr.FixedArtifact != null || string.IsNullOrEmpty(oPtr.RandartName) == false)
+        if (oPtr.IsArtifact)
         {
             string are = oPtr.Count > 1 ? "are" : "is";
             s = oPtr.Count > 1 ? "artifacts" : "an artifact";

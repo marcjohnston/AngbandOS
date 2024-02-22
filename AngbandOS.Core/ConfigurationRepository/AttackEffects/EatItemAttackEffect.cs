@@ -30,7 +30,7 @@ internal class EatItemAttackEffect : AttackEffect
             BaseInventorySlot packInventorySlot = SaveGame.SingletonRepository.InventorySlots.Get(nameof(PackInventorySlot));
             int i = packInventorySlot.WeightedRandom.Choose();
             Item? item = SaveGame.GetInventoryItem(i);
-            if (item != null && item.FixedArtifact == null && string.IsNullOrEmpty(item.RandartName))
+            if (item != null && !item.IsArtifact)
             {
                 string itemName = item.Description(false, 3);
                 string y = item.Count > 1 ? "One of y" : "Y";

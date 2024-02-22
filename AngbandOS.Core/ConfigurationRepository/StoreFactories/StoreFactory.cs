@@ -403,15 +403,11 @@ internal abstract class StoreFactory : IItemFilter, IGetKey<string>
         {
             return false;
         }
-        if (oPtr.FixedArtifact != jPtr.FixedArtifact)
+        if (oPtr.IsArtifact != jPtr.IsArtifact)
         {
             return false;
         }
         if (oPtr.RareItem != jPtr.RareItem)
-        {
-            return false;
-        }
-        if (!string.IsNullOrEmpty(oPtr.RandartName) || !string.IsNullOrEmpty(jPtr.RandartName))
         {
             return false;
         }

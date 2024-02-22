@@ -23,7 +23,6 @@ internal class AcidProjectile : Projectile
         string oName = "";
         foreach (Item oPtr in cPtr.Items.ToArray()) // Prevent collection modified error
         {
-            bool isArt = false;
             bool ignore = false;
             bool plural = false;
             bool doKill = false;
@@ -32,10 +31,6 @@ internal class AcidProjectile : Projectile
             if (oPtr.Count > 1)
             {
                 plural = true;
-            }
-            if (oPtr.FixedArtifact != null || string.IsNullOrEmpty(oPtr.RandartName) == false)
-            {
-                isArt = true;
             }
             if (oPtr.HatesAcid())
             {
@@ -53,7 +48,7 @@ internal class AcidProjectile : Projectile
                     obvious = true;
                     oName = oPtr.Description(false, 0);
                 }
-                if (isArt || ignore)
+                if (oPtr.IsArtifact || ignore)
                 {
                     if (oPtr.Marked)
                     {

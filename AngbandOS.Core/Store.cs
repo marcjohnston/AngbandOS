@@ -529,7 +529,7 @@ internal class Store
         {
             discount = 90;
         }
-        if (!string.IsNullOrEmpty(oPtr.RandartName))
+        if (oPtr.IsRandomArtifact)
         {
             discount = 0;
         }
@@ -803,7 +803,7 @@ internal class Store
         for (int i = 0; i < StoreInventoryList.Count; i++)
         {
             Item oPtr = StoreInventoryList[i];
-            if (string.IsNullOrEmpty(oPtr.RandartName))
+            if (!oPtr.IsRandomArtifact)
             {
                 oPtr.Discount = 50;
             }

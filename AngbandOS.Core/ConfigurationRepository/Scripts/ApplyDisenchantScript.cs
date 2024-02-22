@@ -41,7 +41,7 @@ internal class ApplyDisenchantScript : Script, IScript, ISuccessfulScript
         }
         string oName = oPtr.Description(false, 0);
         string s;
-        if ((oPtr.FixedArtifact != null || string.IsNullOrEmpty(oPtr.RandartName) == false) && SaveGame.RandomLessThan(100) < 71)
+        if (oPtr.IsArtifact && SaveGame.RandomLessThan(100) < 71)
         {
             s = oPtr.Count != 1 ? "" : "s";
             SaveGame.MsgPrint($"Your {oName} ({i.IndexToLabel()}) resist{s} disenchantment!");

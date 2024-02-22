@@ -89,7 +89,7 @@ internal class DestroyScript : Script, IScript, IRepeatableScript, IStoreScript
         SaveGame.EnergyUse = 100;
 
         // Can't destroy an artifact artifact
-        if (item.FixedArtifact != null || !string.IsNullOrEmpty(item.RandartName))
+        if (item.IsArtifact)
         {
             string feel = "special";
             SaveGame.EnergyUse = 0;

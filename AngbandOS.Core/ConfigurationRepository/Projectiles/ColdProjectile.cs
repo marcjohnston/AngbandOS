@@ -23,7 +23,6 @@ internal class ColdProjectile : Projectile
         string oName = "";
         foreach (Item oPtr in cPtr.Items)
         {
-            bool isArt = false;
             bool ignore = false;
             bool plural = false;
             bool doKill = false;
@@ -32,10 +31,6 @@ internal class ColdProjectile : Projectile
             if (oPtr.Count > 1)
             {
                 plural = true;
-            }
-            if (oPtr.FixedArtifact != null || string.IsNullOrEmpty(oPtr.RandartName) == false)
-            {
-                isArt = true;
             }
             if (oPtr.HatesCold())
             {
@@ -53,7 +48,7 @@ internal class ColdProjectile : Projectile
                     obvious = true;
                     oName = oPtr.Description(false, 0);
                 }
-                if (isArt || ignore)
+                if (oPtr.IsArtifact || ignore)
                 {
                     if (oPtr.Marked)
                     {

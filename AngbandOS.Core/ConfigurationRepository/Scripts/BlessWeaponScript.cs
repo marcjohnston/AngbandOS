@@ -49,7 +49,7 @@ internal class BlessWeaponScript : Script, IScript, ISuccessfulScript
             SaveGame.MsgPrint($"{your} {oName} {s} blessed already.");
             return true;
         }
-        if (!(string.IsNullOrEmpty(oPtr.RandartName) == false || oPtr.FixedArtifact != null) || SaveGame.DieRoll(3) == 1)
+        if (!oPtr.IsArtifact || SaveGame.DieRoll(3) == 1)
         {
             string s = oPtr.Count > 1 ? "" : "s";
             SaveGame.MsgPrint($"{your} {oName} shine{s}!");

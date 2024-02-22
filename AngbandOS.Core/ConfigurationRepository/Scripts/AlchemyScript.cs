@@ -55,7 +55,7 @@ internal class AlchemyScript : Script, IScript, ISuccessfulScript
                 }
             }
         }
-        if (oPtr.FixedArtifact != null || string.IsNullOrEmpty(oPtr.RandartName) == false)
+        if (oPtr.IsArtifact)
         {
             string feel = "special";
             SaveGame.MsgPrint($"You fail to turn {oName} to gold!");

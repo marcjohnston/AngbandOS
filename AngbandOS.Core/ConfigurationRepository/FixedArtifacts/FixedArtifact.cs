@@ -18,6 +18,18 @@ internal abstract class FixedArtifact : IItemCharacteristics, IGetKey<string>
     }
 
     /// <summary>
+    ///  Returns an activation object, if the fixed artifact can be activated; otherwise, null is returned.  This property is bound from ActivationName property
+    ///  during the bind phase.
+    /// </summary>
+    public Activation? Activation { get; private set; }
+
+    /// <summary>
+    /// Returns the name of the activation, if the fixed artifact can be activated; otherwise, null is returned.  This property is bound to the Activation property
+    /// during the bind phase.
+    /// </summary>
+    protected virtual string? ActivationName => null;
+
+    /// <summary>
     /// Returns the entity serialized into a Json string.
     /// </summary>
     /// <returns></returns>
@@ -33,6 +45,7 @@ internal abstract class FixedArtifact : IItemCharacteristics, IGetKey<string>
     public void Bind()
     {
         BaseItemFactory = SaveGame.SingletonRepository.ItemFactories.Get(BaseItemFactoryName);
+        Activation = SaveGame.SingletonRepository.Activations.BindNullable(ActivationName);
     }
 
     /// <summary>
@@ -43,7 +56,7 @@ internal abstract class FixedArtifact : IItemCharacteristics, IGetKey<string>
     /// <summary>
     /// Returns the multipler to use when being used to kill a dragon.  The SwordOfLightning returns a 3.  All other weapons return 1.
     /// </summary>
-    public virtual int KilLDragonMultiplier => 1;
+    public virtual int KillDragonMultiplier => 1;
 
     /// <summary>
     /// Allows the fixed artifact to apply resistances and power as needed.  Does nothing, by default.

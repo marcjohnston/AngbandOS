@@ -98,13 +98,13 @@ internal class ActivateScript : Script, IScript, IRepeatableScript, ISuccessfulS
         SaveGame.PlaySound(SoundEffectEnum.ActivateArtifact);
 
         // If it is a random artifact then use its ability and quit
-        if (string.IsNullOrEmpty(item.RandartName) == false)
+        if (item.IsRandomArtifact)
         {
             ActivateRandomArtifact(item);
             return true;
         }
 
-        // If it's a fixed artifact then use its ability
+        // If it is a fixed artifact and that artifact has activation then use its ability
         if (item.FixedArtifact != null && typeof(IFixedArtifactActivatible).IsAssignableFrom(item.FixedArtifact.GetType()))
         {
             IFixedArtifactActivatible activatibleFixedArtifact = (IFixedArtifactActivatible)item.FixedArtifact;
@@ -138,7 +138,7 @@ internal class ActivateScript : Script, IScript, IRepeatableScript, ISuccessfulS
     private void ActivateRandomArtifact(Item item)
     {
         // If we don't have a random artifact, abort
-        if (string.IsNullOrEmpty(item.RandartName))
+        if (item.IsRandomArtifact)
         {
             return;
         }

@@ -26,7 +26,7 @@ internal class BroadSwordLightningFixedArtifact : FixedArtifact
     /// <summary>
     /// Returns 3, because this sword of lighting has a 3x multipler when killing dragons.
     /// </summary>
-    public override int KilLDragonMultiplier => 3;
+    public override int KillDragonMultiplier => 3;
 
     public override string FriendlyName => "'Lightning'";
     public override bool IgnoreAcid => true;

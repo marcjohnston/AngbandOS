@@ -1111,7 +1111,7 @@ internal class Monster : IItemContainer
                             willHurt = true;
                         }
                         // Monsters won't pick up artifacts or items that hurt them
-                        if (item.FixedArtifact != null || willHurt || !string.IsNullOrEmpty(item.RandartName))
+                        if (item.IsArtifact || willHurt)
                         {
                             if (Race.TakeItem)
                             {

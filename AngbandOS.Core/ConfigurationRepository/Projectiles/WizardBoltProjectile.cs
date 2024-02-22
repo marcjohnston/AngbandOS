@@ -23,15 +23,10 @@ internal class WizardBoltProjectile : Projectile
         string oName = "";
         foreach (Item oPtr in cPtr.Items)
         {
-            bool isArt = false;
             bool plural = false;
             if (oPtr.Count > 1)
             {
                 plural = true;
-            }
-            if (oPtr.FixedArtifact != null || string.IsNullOrEmpty(oPtr.RandartName) == false)
-            {
-                isArt = true;
             }
             string noteKill = plural ? " are destroyed!" : " is destroyed!";
             if (oPtr.Marked)
@@ -39,7 +34,7 @@ internal class WizardBoltProjectile : Projectile
                 obvious = true;
                 oName = oPtr.Description(false, 0);
             }
-            if (isArt)
+            if (oPtr.IsArtifact)
             {
                 if (oPtr.Marked)
                 {

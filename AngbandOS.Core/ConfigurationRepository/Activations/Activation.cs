@@ -41,6 +41,7 @@ internal abstract class Activation : IGetKey<string>
 
     /// <summary>
     /// Returns the message to be displayed to the player, before the activation power occurs.  No message is display, if empty or null.  Returns null, by default.
+    /// This message is also displayed before a direction is requested from the player.
     /// </summary>
     public virtual string? PreActivationMessage => null;
 

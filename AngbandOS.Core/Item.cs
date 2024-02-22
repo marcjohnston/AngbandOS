@@ -229,13 +229,6 @@ internal sealed class Item : IComparable<Item>
 
     public bool Marked;
 
-    public string RandartName = "";
-
-    /// <summary>
-    /// Returns the rare item, if the item is a rare item; or null, if the item is not rare.
-    /// </summary>
-    public RareItem? RareItem = null;
-
     public int RechargeTimeLeft;
 
     /// <summary>
@@ -391,7 +384,7 @@ internal sealed class Item : IComparable<Item>
         Item clonedItem = Factory.CreateItem();
         clonedItem.BaseArmorClass = BaseArmorClass;
         clonedItem.RandartItemCharacteristics.Copy(RandartItemCharacteristics);
-        clonedItem.RandartName = RandartName;
+        clonedItem.RandomArtifactName = RandomArtifactName;
         clonedItem.DamageDice = DamageDice;
         clonedItem.Discount = Discount;
         clonedItem.DamageDiceSides = DamageDiceSides;
@@ -423,7 +416,27 @@ internal sealed class Item : IComparable<Item>
         return clonedItem;
     }
 
-    public bool IsKnownArtifact => IsKnown() && (FixedArtifact != null || !string.IsNullOrEmpty(RandartName));
+    /// <summary>
+    /// Returns true, if the item is both known and an artifact (fixed or random); false, otherwise.
+    /// </summary>
+    public bool IsKnownArtifact => IsKnown() && IsArtifact;
+
+    /// <summary>
+    /// Returns true, if the item is an artifact (fixed or random); false, otherwise.
+    /// </summary>
+    public bool IsArtifact => FixedArtifact != null || IsRandomArtifact;
+
+    public string RandomArtifactName = "";
+
+    /// <summary>
+    /// Returns the rare item, if the item is a rare item; or null, if the item is not rare.
+    /// </summary>
+    public RareItem? RareItem = null;
+
+    /// <summary>
+    /// Returns true, if the item is a random artifact; false, otherwise.
+    /// </summary>
+    public bool IsRandomArtifact => !String.IsNullOrEmpty(RandomArtifactName);
 
     [Obsolete]
     public ItemTypeEnum Category => Factory.CategoryEnum; // TODO: Provided for backwards compatibility.  Will be deleted.
@@ -561,7 +574,7 @@ internal sealed class Item : IComparable<Item>
                 }
                 if (FixedArtifact != null)
                 {
-                    mult *= FixedArtifact.KilLDragonMultiplier;
+                    mult *= FixedArtifact.KillDragonMultiplier;
                 }
             }
             if (Characteristics.BrandAcid)
@@ -710,10 +723,10 @@ internal sealed class Item : IComparable<Item>
         string basenm = Factory.GetDescription(this, includeCountPrefix, isFlavorAware.Value);
         if (IsKnown())
         {
-            if (!string.IsNullOrEmpty(RandartName))
+            if (IsRandomArtifact)
             {
                 basenm += ' ';
-                basenm += RandartName;
+                basenm += RandomArtifactName;
             }
             else if (FixedArtifact != null)
             {
@@ -1128,7 +1141,7 @@ internal sealed class Item : IComparable<Item>
         {
             total -= 15000;
         }
-        if (!string.IsNullOrEmpty(RandartName) && RandartItemCharacteristics.Activate)
+        if (IsRandomArtifact && RandartItemCharacteristics.Activate)
         {
             total += BonusPowerSubType.Value;
         }
@@ -1137,7 +1150,7 @@ internal sealed class Item : IComparable<Item>
 
     public ItemQualityRating GetQualityRating()
     {
-        if (FixedArtifact != null || !string.IsNullOrEmpty(RandartName))
+        if (IsArtifact)
         {
             if (IsCursed() || IsBroken())
             {
@@ -1222,7 +1235,7 @@ internal sealed class Item : IComparable<Item>
         {
             return SaveGame.SingletonRepository.ItemQualityRatings.Get(nameof(BrokenItemQualityRating));
         }
-        if (FixedArtifact != null || !string.IsNullOrEmpty(RandartName))
+        if (IsArtifact)
         {
             return SaveGame.SingletonRepository.ItemQualityRatings.Get(nameof(SpecialItemQualityRating));
         }
@@ -1905,7 +1918,7 @@ internal sealed class Item : IComparable<Item>
             return;
         }
         Factory.ApplyMagic(this, lev, power, store);
-        if (!string.IsNullOrEmpty(RandartName))
+        if (IsRandomArtifact)
         {
             SaveGame.TreasureRating += 40;
         }
@@ -2331,9 +2344,9 @@ internal sealed class Item : IComparable<Item>
         }
         else
         {
-            newName = GetTableName();
+            newName = GenerateRandomArtifactName();
         }
-        RandartName = newName;
+        RandomArtifactName = newName;
         return true;
     }
 
@@ -2721,7 +2734,7 @@ internal sealed class Item : IComparable<Item>
         IdentCursed = true;
     }
 
-    private string GetTableName()
+    private string GenerateRandomArtifactName()
     {
         int testcounter = SaveGame.DieRoll(3) + 1;
         string outString = "";

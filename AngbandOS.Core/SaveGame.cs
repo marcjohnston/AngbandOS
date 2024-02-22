@@ -4911,7 +4911,7 @@ internal class SaveGame
         int[] EnchantTable = {0, 10, 50, 100, 200, 300, 400, 500, 650, 800, 950, 987, 993, 995, 998, 1000};
 
         bool res = false;
-        bool a = oPtr.FixedArtifact != null || string.IsNullOrEmpty(oPtr.RandartName) == false;
+        bool isArtifact = oPtr.IsArtifact;
         oPtr.RefreshFlagBasedProperties();
         int prob = oPtr.Count * 100;
         if (oPtr.Category == ItemTypeEnum.Bolt || oPtr.Category == ItemTypeEnum.Arrow || oPtr.Category == ItemTypeEnum.Shot)
@@ -4939,7 +4939,7 @@ internal class SaveGame
                 {
                     chance = EnchantTable[oPtr.BonusToHit];
                 }
-                if (DieRoll(1000) > chance && (!a || RandomLessThan(100) < 50))
+                if (DieRoll(1000) > chance && (!isArtifact || RandomLessThan(100) < 50))
                 {
                     oPtr.BonusToHit++;
                     res = true;
@@ -4974,7 +4974,7 @@ internal class SaveGame
                 {
                     chance = EnchantTable[oPtr.BonusDamage];
                 }
-                if (DieRoll(1000) > chance && (!a || RandomLessThan(100) < 50))
+                if (DieRoll(1000) > chance && (!isArtifact || RandomLessThan(100) < 50))
                 {
                     oPtr.BonusDamage++;
                     res = true;
@@ -5009,7 +5009,7 @@ internal class SaveGame
                 {
                     chance = EnchantTable[oPtr.BonusArmorClass];
                 }
-                if (DieRoll(1000) > chance && (!a || RandomLessThan(100) < 50))
+                if (DieRoll(1000) > chance && (!isArtifact || RandomLessThan(100) < 50))
                 {
                     oPtr.BonusArmorClass++;
                     res = true;
@@ -5987,7 +5987,7 @@ internal class SaveGame
             {
                 continue;
             }
-            if (!string.IsNullOrEmpty(item.RandartName) || item.FixedArtifact != null || item.IsRare())
+            if (item.IsArtifact || item.IsRare())
             {
                 continue;
             }
@@ -6283,7 +6283,7 @@ internal class SaveGame
         }
         // Artifacts can't be cursed, and normal armor has a chance to save
         string itemName = item.Description(false, 3);
-        if ((!string.IsNullOrEmpty(item.RandartName) || item.FixedArtifact != null) && RandomLessThan(100) < 50)
+        if (item.IsArtifact && RandomLessThan(100) < 50)
         {
             MsgPrint($"A terrible black aura tries to surround your armor, but your {itemName} resists the effects!");
         }
@@ -6322,11 +6322,9 @@ internal class SaveGame
         }
         string itemName = item.Description(false, 3);
         // Artifacts can't be cursed, and other items have a chance to resist
-        if ((item.FixedArtifact != null || !string.IsNullOrEmpty(item.RandartName)) &&
-            RandomLessThan(100) < 50)
+        if (item.IsArtifact && RandomLessThan(100) < 50)
         {
-            MsgPrint(
-                $"A terrible black aura tries to surround your weapon, but your {itemName} resists the effects!");
+            MsgPrint($"A terrible black aura tries to surround your weapon, but your {itemName} resists the effects!");
         }
         else
         {
@@ -12885,7 +12883,7 @@ internal class SaveGame
             MsgPrint($"Your {oName} resist{s} cursing!");
             return;
         }
-        if (DieRoll(100) <= heavyChance && (oPtr.FixedArtifact != null || oPtr.RareItem != null || !string.IsNullOrEmpty(oPtr.RandartName)))
+        if (DieRoll(100) <= heavyChance && (oPtr.IsArtifact || oPtr.RareItem != null))
         {
             if (!oPtr.Characteristics.HeavyCurse)
             {
@@ -13921,7 +13919,7 @@ internal class SaveGame
         for (int i = 0; i < InventorySlot.PackCount; i++)
         {
             Item oPtr = GetInventoryItem(i);
-            if (oPtr != null && oPtr.FixedArtifact == null && string.IsNullOrEmpty(oPtr.RandartName) && testerFunc(oPtr))
+            if (oPtr != null && !oPtr.IsArtifact && testerFunc(oPtr))
             {
                 int j;
                 int amt;
@@ -14275,7 +14273,7 @@ internal class SaveGame
         }
         foreach (Item oPtr in cPtr.Items)
         {
-            if (!string.IsNullOrEmpty(oPtr.RandartName) || oPtr.FixedArtifact != null)
+            if (oPtr.IsArtifact)
             {
                 return false;
             }
@@ -14460,7 +14458,7 @@ internal class SaveGame
         bool done = false;
         bool plural = jPtr.Count != 1;
         string oName = jPtr.Description(false, 0);
-        if (!(!string.IsNullOrEmpty(jPtr.RandartName) || jPtr.FixedArtifact != null) && RandomLessThan(100) < chance)
+        if (!jPtr.IsArtifact && RandomLessThan(100) < chance)
         {
             string p = plural ? "" : "s";
             MsgPrint($"The {oName} disappear{p}.");
@@ -14531,7 +14529,7 @@ internal class SaveGame
                 flag = true;
             }
         }
-        if (!flag && !(jPtr.FixedArtifact != null || !string.IsNullOrEmpty(jPtr.RandartName)))
+        if (!flag && !jPtr.IsArtifact)
         {
             string p = plural ? "" : "s";
             MsgPrint($"The {oName} disappear{p}.");
