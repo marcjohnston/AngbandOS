@@ -5,6 +5,8 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using AngbandOS.Core.ItemFactories;
+
 namespace AngbandOS.Core;
 
 /// <summary>
@@ -201,27 +203,51 @@ internal class AllItemsItemFilter : IGetKey<string>, IItemFilter
             return false;
         }
 
-        if (IsUsableSpellBook != null)
+        // Check to see if the item must be a usable spell book.
+        if (IsUsableSpellBook != null && IsUsableSpellBook.Value)
         {
-            List<ItemTypeEnum> validItemTypes = new();
-            if (SaveGame.PrimaryRealm != null)
-            {
-                validItemTypes.Add(SaveGame.PrimaryRealm.SpellBookItemCategory);
-            }
-            if (SaveGame.SecondaryRealm != null)
-            {
-                validItemTypes.Add(SaveGame.SecondaryRealm.SpellBookItemCategory);
-            }
-            if (IsUsableSpellBook == true && !validItemTypes.Contains(item.Category))
+            // A usable spell book is required.  Ensure it is a book.
+            BookItemFactory? bookItemFactory = item.TryGetFactory<BookItemFactory>();
+            if (bookItemFactory == null)
             {
                 return false;
             }
-            else if (IsUsableSpellBook == false && validItemTypes.Contains(item.Category))
+
+            // Ensure the player has magic.
+            if (SaveGame.PrimaryRealm == null)
             {
                 return false;
+            }
+
+            // Check to see if the book doesn't belong to the primary realm.
+            if (SaveGame.PrimaryRealm != bookItemFactory.Realm)
+            {
+                // It doesn't.  Check to see if there is a secondary realm.
+                if (SaveGame.SecondaryRealm == null)
+                {
+                    // There isn't.  No match.
+                    return false;
+                }
+
+                // There is a secondary realm, check to see if the book doesn't belong to it.
+                if (SaveGame.SecondaryRealm != bookItemFactory.Realm)
+                {
+                    return false;
+                }
+            }
+        }
+
+        if (IsUsableSpellBook != null && !IsUsableSpellBook.Value)
+        {
+            BookItemFactory? bookItemFactory = item.TryGetFactory<BookItemFactory>();
+            if (bookItemFactory != null)
+            {
+                if (SaveGame.PrimaryRealm != null && SaveGame.PrimaryRealm == bookItemFactory.Realm || SaveGame.SecondaryRealm != null && SaveGame.SecondaryRealm == bookItemFactory.Realm)
+                {
+                    return false;
+                }
             }
         }
         return true;
     }
-
 }

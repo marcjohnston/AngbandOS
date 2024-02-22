@@ -38,7 +38,7 @@ internal class ExamineStoreItemScript : Script, IStoreScript
         BookItemFactory? bookItemFactory = oPtr.TryGetFactory<BookItemFactory>();
         if (bookItemFactory != null)
         {
-            if (SaveGame.PrimaryRealm != null && SaveGame.PrimaryRealm == bookItemFactory.Realm || SaveGame.SecondaryRealm != null && SaveGame.SecondaryRealm == bookItemFactory.Realm)
+            if (SaveGame.SingletonRepository.ItemFilters.Get(nameof(IsUsableSpellBookItemFilter)).ItemMatches(oPtr))
             {
                 DoStoreBrowse(oPtr);
             }

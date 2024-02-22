@@ -28,7 +28,7 @@ internal class EatMagicActiveMutation : Mutation
         }
 
         int lev = oPtr.Factory.LevelNormallyFound;
-        if (oPtr.Category == ItemTypeEnum.Rod)
+        if (oPtr.Factory.ItemClass == SaveGame.SingletonRepository.ItemClasses.Get(nameof(RodsItemClass)))
         {
             if (oPtr.TypeSpecificValue > 0)
             {
@@ -41,7 +41,7 @@ internal class EatMagicActiveMutation : Mutation
             }
         }
         else
-        {
+        { // Light? Wands? Staves, Food??
             if (oPtr.TypeSpecificValue > 0)
             {
                 SaveGame.Mana += oPtr.TypeSpecificValue * lev;
