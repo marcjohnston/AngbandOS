@@ -204,7 +204,7 @@ internal class ItemCharacteristics : IItemCharacteristics
     }
 
     /// <summary>
-    /// Merge the characteristics of another item using the an OR operation.
+    /// Merge two sets of item characteristics.  Characteristics are typically merged by using an OR operation.
     /// </summary>
     /// <param name="itemCharacteristics"></param>
     public void Merge(IItemCharacteristics itemCharacteristics)

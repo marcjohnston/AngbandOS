@@ -1202,8 +1202,10 @@ internal sealed class Item : IComparable<Item>
             Characteristics.Merge(RareItem);
         }
 
+        // Finally, merge any additional random artifact characteristics, if there are any.
         Characteristics.Merge(RandartItemCharacteristics);
 
+        // If there are any random characteristics, apply those also.
         if (RandomPower != null)
         {
             RandomPower.Activate(this);
