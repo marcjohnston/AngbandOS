@@ -231,7 +231,10 @@ internal sealed class Item : IComparable<Item>
 
     public string RandartName = "";
 
-    public RareItem? RareItem;
+    /// <summary>
+    /// Returns the rare item, if the item is a rare item; or null, if the item is not rare.
+    /// </summary>
+    public RareItem? RareItem = null;
 
     public int RechargeTimeLeft;
 
