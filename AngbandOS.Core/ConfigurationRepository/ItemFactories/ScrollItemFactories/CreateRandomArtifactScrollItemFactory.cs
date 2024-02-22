@@ -8,9 +8,9 @@
 namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
-internal class ArtifactCreationScrollItemFactory : ScrollItemFactory
+internal class CreateRandomArtifactScrollItemFactory : ScrollItemFactory
 {
-    private ArtifactCreationScrollItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private CreateRandomArtifactScrollItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(QuestionMarkSymbol));
     public override string Name => "Artifact Creation";
