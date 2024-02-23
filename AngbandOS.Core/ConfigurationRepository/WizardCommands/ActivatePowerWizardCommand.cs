@@ -18,5 +18,5 @@ internal class ActivatePowerWizardCommand : WizardCommand
 
     protected override string? HelpGroupName => nameof(WizardGeneralCommandsHelpGroup);
 
-    protected override string? ExecuteScriptName => nameof(ActivatePowerScript);
+    protected override string? ExecuteScriptName => nameof(RunRandomActivationScript);
 }

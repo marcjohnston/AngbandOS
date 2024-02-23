@@ -28,7 +28,7 @@ internal class BoElec1Activation : DirectionalActivation
 
     public override int Value => 250;
 
-    public override string Name => "lightning bolt (4d8)";
+    public override string Name => "Lightning bolt (4d8)";
 
-    public override string Description => $"{Name} every 6+d6 turns";
+    public override string Description => $"{Name.ToLower()} every 6+d6 turns";
 }

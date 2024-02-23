@@ -28,7 +28,7 @@ internal class ConfuseActivation : DirectionalActivation
 
     public override int Value => 500;
 
-    public override string Name => "confuse monster";
+    public override string Name => "Confuse monster";
 
-    public override string Description => $"{Name} every 15 turns";
+    public override string Description => $"{Name.ToLower()} every 15 turns";
 }

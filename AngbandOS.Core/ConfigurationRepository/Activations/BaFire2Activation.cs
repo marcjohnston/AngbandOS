@@ -28,7 +28,7 @@ internal class BaFire2Activation : DirectionalActivation
 
     public override int Value => 1750;
 
-    public override string Name => "fire ball (120)";
+    public override string Name => "Fire ball (120)";
 
-    public override string Description => $"{Name} every 225+d225 turns";
+    public override string Description => $"{Name.ToLower()} every 225+d225 turns";
 }

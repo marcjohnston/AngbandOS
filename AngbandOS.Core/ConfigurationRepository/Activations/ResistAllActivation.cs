@@ -32,7 +32,7 @@ internal class ResistAllActivation : Activation
 
     public override int Value => 5000;
 
-    public override string Name => "resist elements (dur 40+d40)";
+    public override string Name => "Resist elements (dur 40+d40)";
 
-    public override string Description => $"{Name} every 200 turns";
+    public override string Description => $"{Name.ToLower()} every 200 turns";
 }

@@ -41,7 +41,7 @@ internal class SummonDemonActivation : Activation
 
     public override int Value => 20000;
 
-    public override string Name => "summon demon";
+    public override string Name => "Summon demon";
 
-    public override string Description => $"{Name} every 666+d333 turns";
+    public override string Description => $"{Name.ToLower()} every 666+d333 turns";
 }

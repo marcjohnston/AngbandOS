@@ -29,7 +29,7 @@ internal class CureLwActivation : Activation
 
     public override int Value => 500;
 
-    public override string Name => "remove fear & heal 30 hp";
+    public override string Name => "Remove fear & heal 30 hp";
 
-    public override string Description => $"{Name} every 10 turns";
+    public override string Description => $"{Name.ToLower()} every 10 turns";
 }

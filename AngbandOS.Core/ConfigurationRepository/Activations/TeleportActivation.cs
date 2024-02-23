@@ -28,7 +28,7 @@ internal class TeleportActivation : Activation
 
     public override int Value => 2000;
 
-    public override string Name => "teleport (range 100)";
+    public override string Name => "Teleport (range 100)";
 
-    public override string Description => $"{Name} every 45 turns";
+    public override string Description => $"{Name.ToLower()} every 45 turns";
 }

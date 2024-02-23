@@ -29,7 +29,7 @@ internal class BerserkActivation : Activation
 
     public override int Value => 800;
 
-    public override string Name => "heroism and berserk (dur 50+d50)";
+    public override string Name => "Heroism and berserk (dur 50+d50)";
 
-    public override string Description => $"{Name} every 100+d100 turns";
+    public override string Description => $"{Name.ToLower()} every 100+d100 turns";
 }

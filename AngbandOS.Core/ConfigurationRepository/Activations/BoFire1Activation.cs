@@ -28,7 +28,7 @@ internal class BoFire1Activation : DirectionalActivation
 
     public override int Value => 250;
 
-    public override string Name => "fire bolt (9d8)";
+    public override string Name => "Fire bolt (9d8)";
 
-    public override string Description => $"{Name} every 8+d8 turns";
+    public override string Description => $"{Name.ToLower()} every 8+d8 turns";
 }

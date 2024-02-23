@@ -38,7 +38,7 @@ internal class WhirlwindActivation : Activation
 
     public override int Value => 7500;
 
-    public override string Name => "whirlwind attack";
+    public override string Name => "Whirlwind attack";
 
-    public override string Description => $"{Name} every 250 turns";
+    public override string Description => $"{Name.ToLower()} every 250 turns";
 }

@@ -8,9 +8,9 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class ActivatePowerScript : Script, IScript
+internal class RunRandomActivationScript : Script, IScript
 {
-    private ActivatePowerScript(SaveGame saveGame) : base(saveGame) { }
+    private RunRandomActivationScript(SaveGame saveGame) : base(saveGame) { }
 
     /// <summary>
     /// Executes the activate power script.
@@ -18,6 +18,7 @@ internal class ActivatePowerScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
+        string selection;
         SaveGame.FullScreenOverlay = true;
         ScreenBuffer savedScreen = SaveGame.Screen.Clone();
         try
@@ -33,23 +34,10 @@ internal class ActivatePowerScript : Script, IScript
                 SaveGame.Screen.PrintLine($"{index + 1}. {activationPower.Name}", row, col);
                 index++;
             }
-            if (!SaveGame.GetString("Activation power?", out string selection, "", 3))
+            if (!SaveGame.GetString("Activation power?", out selection, "", 3))
             {
                 return;
             }
-
-            if (!Int32.TryParse(selection, out int selectedIndex))
-            {
-                return;
-            }
-            selectedIndex--;
-            if (selectedIndex < 0 || selectedIndex > SaveGame.SingletonRepository.Activations.Count)
-            {
-                return;
-            }
-
-            Activation activation = SaveGame.SingletonRepository.Activations[selectedIndex];
-            activation.Activate();
         }
         finally
         {
@@ -57,5 +45,18 @@ internal class ActivatePowerScript : Script, IScript
             SaveGame.FullScreenOverlay = false;
             SaveGame.SetBackground(BackgroundImageEnum.Overhead);
         }
+
+        if (!Int32.TryParse(selection, out int selectedIndex))
+        {
+            return;
+        }
+        selectedIndex--;
+        if (selectedIndex < 0 || selectedIndex > SaveGame.SingletonRepository.Activations.Count)
+        {
+            return;
+        }
+
+        Activation activation = SaveGame.SingletonRepository.Activations[selectedIndex];
+        activation.Activate();
     }
 }

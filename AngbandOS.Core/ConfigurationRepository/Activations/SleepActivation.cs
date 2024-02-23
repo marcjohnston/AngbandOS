@@ -28,7 +28,7 @@ internal class SleepActivation : Activation
 
     public override int Value => 750;
 
-    public override string Name => "sleep nearby monsters";
+    public override string Name => "Sleep nearby monsters";
 
-    public override string Description => $"{Name} every 55 turns";
+    public override string Description => $"{Name.ToLower()} every 55 turns";
 }

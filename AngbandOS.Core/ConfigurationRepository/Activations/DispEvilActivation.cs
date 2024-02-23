@@ -28,7 +28,7 @@ internal class DispEvilActivation : Activation
 
     public override int Value => 4000;
 
-    public override string Name => "dispel evil (level*5)";
+    public override string Name => "Dispel evil (level*5)";
 
-    public override string Description => $"{Name} every 300+d300 turns";
+    public override string Description => $"{Name.ToLower()} every 300+d300 turns";
 }

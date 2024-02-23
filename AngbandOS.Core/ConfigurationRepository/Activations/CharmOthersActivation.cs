@@ -28,7 +28,7 @@ internal class CharmOthersActivation : Activation
 
     public override int Value => 17500;
 
-    public override string Name => "mass charm";
+    public override string Name => "Mass charm";
 
-    public override string Description => $"{Name} every 750 turns";
+    public override string Description => $"{Name.ToLower()} every 750 turns";
 }

@@ -30,7 +30,7 @@ internal class Cure1000Activation : Activation
 
     public override int Value => 15000;
 
-    public override string Name => "heal 1000 hit points";
+    public override string Name => "Heal 1000 hit points";
 
-    public override string Description => $"{Name} every 888 turns";
+    public override string Description => $"{Name.ToLower()} every 888 turns";
 }

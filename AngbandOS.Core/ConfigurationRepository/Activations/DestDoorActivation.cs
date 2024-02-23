@@ -28,7 +28,7 @@ internal class DestDoorActivation : Activation
 
     public override int Value => 100;
 
-    public override string Name => "destroy doors";
+    public override string Name => "Destroy doors";
 
-    public override string Description => $"{Name} every 10 turns";
+    public override string Description => $"{Name.ToLower()} every 10 turns";
 }

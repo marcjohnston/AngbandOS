@@ -29,7 +29,7 @@ internal class CureMwActivation : Activation
 
     public override int Value => 750;
 
-    public override string Name => "heal 4d8 & wounds";
+    public override string Name => "Heal 4d8 & wounds";
 
-    public override string Description => $"{Name} every 3+d3 turns";
+    public override string Description => $"{Name.ToLower()} every 3+d3 turns";
 }

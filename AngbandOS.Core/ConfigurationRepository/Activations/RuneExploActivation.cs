@@ -30,5 +30,5 @@ internal class RuneExploActivation : Activation
 
     public override string Name => "Yellow Sign";
 
-    public override string Description => $"{Name} every 200 turns";
+    public override string Description => $"{Name.ToLower()} every 200 turns";
 }

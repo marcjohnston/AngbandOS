@@ -30,7 +30,7 @@ internal class DetectXtraActivation : Activation
 
     public override int Value => 12500;
 
-    public override string Name => "detection, probing and identify true";
+    public override string Name => "Detection, probing and identify true";
 
-    public override string Description => $"{Name} every 1000 turns";
+    public override string Description => $"{Name.ToLower()} every 1000 turns";
 }

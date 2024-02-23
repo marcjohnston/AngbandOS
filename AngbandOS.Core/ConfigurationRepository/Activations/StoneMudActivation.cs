@@ -28,7 +28,7 @@ internal class StoneMudActivation : DirectionalActivation
 
     public override int Value => 1000;
 
-    public override string Name => "stone to mud";
+    public override string Name => "Stone to mud";
 
-    public override string Description => $"{Name} every 5 turns";
+    public override string Description => $"{Name.ToLower()} every 5 turns";
 }

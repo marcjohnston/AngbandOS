@@ -27,7 +27,7 @@ internal class Drain1Activation : DirectionalActivation
 
     public override int Value => 500;
 
-    public override string Name => "drain life (100)";
+    public override string Name => "Drain life (100)";
 
-    public override string Description => $"{Name} every 100+d100 turns";
+    public override string Description => $"{Name.ToLower()} every 100+d100 turns";
 }

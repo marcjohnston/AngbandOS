@@ -26,7 +26,7 @@ internal class ShardActivation : DirectionalActivation
 
     public override int Value => 5000;
 
-    public override string Name => "shard ball (120+level)";
+    public override string Name => "Shard ball (120+level)";
 
-    public override string Description => $"{Name} every 400 turns";
+    public override string Description => $"{Name.ToLower()} every 400 turns";
 }

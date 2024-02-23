@@ -101,6 +101,7 @@ internal class ActivateScript : Script, IScript, IRepeatableScript, ISuccessfulS
         if (item.IsRandomArtifact)
         {
             Activation artifactPower = item.RandomArtifactActivation;
+            string itemName = item.Description(false, 0);
             if (!String.IsNullOrEmpty(artifactPower.PreActivationMessage))
             {
                 SaveGame.MsgPrint(artifactPower.PreActivationMessage);

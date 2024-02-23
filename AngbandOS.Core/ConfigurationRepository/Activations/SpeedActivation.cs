@@ -35,7 +35,7 @@ internal class SpeedActivation : Activation
 
     public override int Value => 15000;
 
-    public override string Name => "speed (dur 20+d20)";
+    public override string Name => "Speed (dur 20+d20)";
 
-    public override string Description => $"{Name} every 250 turns";
+    public override string Description => $"{Name.ToLower()} every 250 turns";
 }

@@ -29,7 +29,7 @@ internal class ProtEvilActivation : Activation
 
     public override int Value => 5000;
 
-    public override string Name => "protect evil (dur level*3 + d25)";
+    public override string Name => "Protect evil (dur level*3 + d25)";
 
-    public override string Description => $"{Name} every 225+d225 turns";
+    public override string Description => $"{Name.ToLower()} every 225+d225 turns";
 }

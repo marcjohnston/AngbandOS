@@ -45,7 +45,7 @@ internal class DimDoorActivation : Activation
 
     public override int Value => 10000;
 
-    public override string Name => "dimension door";
+    public override string Name => "Dimension door";
 
-    public override string Description => $"{Name} every 100 turns";
+    public override string Description => $"{Name.ToLower()} every 100 turns";
 }

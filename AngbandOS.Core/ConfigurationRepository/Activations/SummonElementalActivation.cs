@@ -41,7 +41,7 @@ internal class SummonElementalActivation : Activation
 
     public override int Value => 15000;
 
-    public override string Name => "summon elemental";
+    public override string Name => "Summon elemental";
 
-    public override string Description => $"{Name} every 750 turns";
+    public override string Description => $"{Name.ToLower()} every 750 turns";
 }

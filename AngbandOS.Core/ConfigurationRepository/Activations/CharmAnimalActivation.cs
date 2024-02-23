@@ -28,7 +28,7 @@ internal class CharmAnimalActivation : DirectionalActivation
 
     public override int Value => 7500;
 
-    public override string Name => "charm animal";
+    public override string Name => "Charm animal";
 
-    public override string Description => $"{Name} every 300 turns";
+    public override string Description => $"{Name.ToLower()} every 300 turns";
 }

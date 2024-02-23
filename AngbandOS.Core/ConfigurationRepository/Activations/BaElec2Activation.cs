@@ -27,7 +27,7 @@ internal class BaElec2Activation : DirectionalActivation
     }
 
     public override int Value => 1500;
-    public override string Name => "ball of lightning (100)";
+    public override string Name => "Ball of lightning (100)";
 
-    public override string Description => $"{Name} every 500 turns";
+    public override string Description => $"{Name.ToLower()} every 500 turns";
 }

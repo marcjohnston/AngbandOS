@@ -25,7 +25,7 @@ internal class BaFire1Activation : DirectionalActivation
 
     public override int Value => 1000;
 
-    public override string Name => "ball of fire (72)";
+    public override string Name => "Ball of fire (72)";
 
-    public override string Description => $"{Name} every 400 turns";
+    public override string Description => $"{Name.ToLower()} every 400 turns";
 }

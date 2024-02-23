@@ -26,7 +26,7 @@ internal class TeleAwayActivation : DirectionalActivation
 
     public override int Value => 2000;
 
-    public override string Name => "teleport away";
+    public override string Name => "Teleport away";
 
-    public override string Description => $"{Name} every 200 turns";
+    public override string Description => $"{Name.ToLower()} every 200 turns";
 }

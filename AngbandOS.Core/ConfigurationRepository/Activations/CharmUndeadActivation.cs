@@ -28,7 +28,7 @@ internal class CharmUndeadActivation : DirectionalActivation
 
     public override int Value => 10000;
 
-    public override string Name => "enslave undead";
+    public override string Name => "Enslave undead";
 
-    public override string Description => $"{Name} every 333 turns";
+    public override string Description => $"{Name.ToLower()} every 333 turns";
 }

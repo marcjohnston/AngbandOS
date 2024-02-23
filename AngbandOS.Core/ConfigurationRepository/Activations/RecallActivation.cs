@@ -28,7 +28,7 @@ internal class RecallActivation : Activation
 
     public override int Value => 7500;
 
-    public override string Name => "word of recall";
+    public override string Name => "Word of recall";
 
-    public override string Description => $"{Name} every 200 turns";
+    public override string Description => $"{Name.ToLower()} every 200 turns";
 }

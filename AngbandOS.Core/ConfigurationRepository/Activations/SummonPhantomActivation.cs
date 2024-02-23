@@ -28,7 +28,7 @@ internal class SummonPhantomActivation : Activation
 
     public override int Value => 12000;
 
-    public override string Name => "summon phantasmal";
+    public override string Name => "Summon phantasmal";
 
-    public override string Description => $"{Name} servant every 200+d200 turns";
+    public override string Description => $"{Name.ToLower()} servant every 200+d200 turns";
 }
