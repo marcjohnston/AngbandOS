@@ -18,7 +18,7 @@ internal class TerrorActivation : Activation
 
     public override int RechargeTime() => 3 * (SaveGame.ExperienceLevel + 10);
 
-    public override bool Activate()
+    protected override bool OnActivate(Item item)
     {
         SaveGame.TurnMonsters(40 + SaveGame.ExperienceLevel);
         return true;

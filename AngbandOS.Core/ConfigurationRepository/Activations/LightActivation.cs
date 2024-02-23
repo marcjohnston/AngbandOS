@@ -18,7 +18,7 @@ internal class LightActivation : Activation
 
     public override string? PreActivationMessage => "It wells with clear light...";
 
-    public override bool Activate()
+    protected override bool OnActivate(Item item)
     {
         SaveGame.LightArea(SaveGame.DiceRoll(2, 15), 3);
         return true;

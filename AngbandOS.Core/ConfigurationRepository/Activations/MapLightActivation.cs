@@ -18,7 +18,7 @@ internal class MapLightActivation : Activation
 
     public override string? PreActivationMessage => "It shines brightly...";
 
-    public override bool Activate()
+    protected override bool OnActivate(Item item)
     {
         SaveGame.RunScript(nameof(MapAreaScript));
         SaveGame.LightArea(SaveGame.DiceRoll(2, 15), 3);

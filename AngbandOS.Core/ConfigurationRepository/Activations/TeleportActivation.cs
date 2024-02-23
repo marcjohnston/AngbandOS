@@ -18,7 +18,7 @@ internal class TeleportActivation : Activation
 
     public override string? PreActivationMessage => "It twists space around you...";
 
-    public override bool Activate()
+    protected override bool OnActivate(Item item)
     {
         SaveGame.RunScriptInt(nameof(TeleportSelfScript), 100);
         return true;

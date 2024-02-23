@@ -18,7 +18,7 @@ internal class IdFullActivation : Activation
 
     public override string? PreActivationMessage => "It glows yellow...";
 
-    public override bool Activate()
+    protected override bool OnActivate(Item item)
     {
         SaveGame.RunScript(nameof(IdentifyItemFullyScript));
         return true;

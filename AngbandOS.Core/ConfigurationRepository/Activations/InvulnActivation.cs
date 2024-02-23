@@ -18,7 +18,7 @@ internal class InvulnActivation : Activation
 
     public override string? PreActivationMessage => "";
 
-    public override bool Activate()
+    protected override bool OnActivate(Item item)
     {
         SaveGame.TimedInvulnerability.AddTimer(SaveGame.DieRoll(8) + 8);
         return true;

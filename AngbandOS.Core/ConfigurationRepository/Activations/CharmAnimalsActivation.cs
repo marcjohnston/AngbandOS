@@ -20,7 +20,7 @@ internal class CharmAnimalsActivation : Activation
 
     public override int RechargeTime() => 500;
 
-    public override bool Activate()
+    protected override bool OnActivate(Item item)
     {
         SaveGame.RunScript(nameof(CharmOthersScript));
         return true;

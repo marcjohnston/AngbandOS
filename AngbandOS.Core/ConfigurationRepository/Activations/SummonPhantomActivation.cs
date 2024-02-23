@@ -18,7 +18,7 @@ internal class SummonPhantomActivation : Activation
 
     public override string? PreActivationMessage => "You summon a phantasmal servant.";
 
-    public override bool Activate()
+    protected override bool OnActivate(Item item)
     {
         SaveGame.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, SaveGame.Difficulty, SaveGame.SingletonRepository.MonsterFilters.Get(nameof(PhantomMonsterFilter)), true);
         return true;

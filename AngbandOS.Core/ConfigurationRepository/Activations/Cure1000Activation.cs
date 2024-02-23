@@ -18,7 +18,7 @@ internal class Cure1000Activation : Activation
 
     public override string? PreActivationMessage => "It glows a bright white...";
 
-    public override bool Activate()
+    protected override bool OnActivate(Item item)
     {
         SaveGame.MsgPrint("You feel much better...");
         SaveGame.RestoreHealth(1000);

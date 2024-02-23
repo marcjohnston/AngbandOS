@@ -18,7 +18,7 @@ internal class RestAllActivation : Activation
 
     public override string? PreActivationMessage => "It glows a deep green...";
 
-    public override bool Activate()
+    protected override bool OnActivate(Item item)
     {
         SaveGame.TryRestoringAbilityScore(Ability.Strength);
         SaveGame.TryRestoringAbilityScore(Ability.Intelligence);

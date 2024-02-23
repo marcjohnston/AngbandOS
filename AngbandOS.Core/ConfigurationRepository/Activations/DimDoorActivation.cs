@@ -18,7 +18,7 @@ internal class DimDoorActivation : Activation
 
     public override string? PreActivationMessage => "You open a dimensional gate. Choose a destination.";
 
-    public override bool Activate()
+    protected override bool OnActivate(Item item)
     {
         if (!SaveGame.TgtPt(out int ii, out int ij))
         {

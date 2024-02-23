@@ -20,7 +20,7 @@ internal class SleepActivation : Activation
 
     public override int RechargeTime() => 55;
 
-    public override bool Activate()
+    protected override bool OnActivate(Item item)
     {
         SaveGame.SleepMonstersTouch();
         return true;

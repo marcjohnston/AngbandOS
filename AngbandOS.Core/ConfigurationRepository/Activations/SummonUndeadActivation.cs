@@ -16,7 +16,7 @@ internal class SummonUndeadActivation : Activation
     private SummonUndeadActivation(SaveGame saveGame) : base(saveGame) { }
     public override int RandomChance => 5;
 
-    public override bool Activate()
+    protected override bool OnActivate(Item item)
     {
         if (SaveGame.DieRoll(3) == 1)
         {

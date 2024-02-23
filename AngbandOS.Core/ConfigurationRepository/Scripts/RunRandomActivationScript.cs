@@ -57,6 +57,6 @@ internal class RunRandomActivationScript : Script, IScript
         }
 
         Activation activation = SaveGame.SingletonRepository.Activations[selectedIndex];
-        activation.Activate();
+        //activation.Activate();
     }
 }

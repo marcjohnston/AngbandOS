@@ -20,7 +20,7 @@ internal class QuakeActivation : Activation
 
     public override int RechargeTime() => 50;
 
-    public override bool Activate()
+    protected override bool OnActivate(Item item)
     {
         SaveGame.Earthquake(SaveGame.MapY, SaveGame.MapX, 10);
         return true;

@@ -52,7 +52,7 @@ internal class CreateRandomArtifactScript : Script, IScript
             {
                 SaveGame.MsgPrint("Not enough energy to enchant more than one object!");
                 s = oPtr.Count > 2 ? "were" : "was";
-                SaveGame.MsgPrint($"{oPtr.Count - 1} of your oName {s} destroyed!");
+                SaveGame.MsgPrint($"{oPtr.Count - 1} of your {oName} {s} destroyed!");
                 oPtr.Count = 1;
             }
             okay = oPtr.CreateRandomArtifact(true);

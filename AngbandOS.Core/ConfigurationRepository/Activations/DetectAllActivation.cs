@@ -18,7 +18,7 @@ internal class DetectAllActivation : Activation
 
     public override string? PreActivationMessage => "It glows bright white...";
 
-    public override bool Activate()
+    protected override bool OnActivate(Item item)
     {
         SaveGame.MsgPrint("An image forms in your mind...");
         SaveGame.RunScript(nameof(DetectionScript));

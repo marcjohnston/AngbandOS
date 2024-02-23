@@ -19,7 +19,7 @@ internal class AlchemyActivation : Activation
 
     public override string? PreActivationMessage => "It glows bright yellow...";
 
-    public override bool Activate()
+    protected override bool OnActivate(Item item)
     {
         return SaveGame.RunSuccessfulScript(nameof(AlchemyScript));
     }

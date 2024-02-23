@@ -18,7 +18,7 @@ internal class RestLifeActivation : Activation
 
     public override string? PreActivationMessage => "It glows a deep red...";
 
-    public override bool Activate()
+    protected override bool OnActivate(Item item)
     {
         SaveGame.RunScript(nameof(RestoreLevelScript));
         return true;

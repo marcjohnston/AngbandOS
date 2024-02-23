@@ -18,7 +18,7 @@ internal class DestDoorActivation : Activation
 
     public override string? PreActivationMessage => "It glows bright red...";
 
-    public override bool Activate()
+    protected override bool OnActivate(Item item)
     {
         SaveGame.RunScript(nameof(DestroyAdjacentDoorsScript));
         return true;

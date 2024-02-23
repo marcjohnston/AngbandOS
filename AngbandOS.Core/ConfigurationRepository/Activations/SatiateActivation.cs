@@ -16,7 +16,7 @@ internal class SatiateActivation : Activation
     private SatiateActivation(SaveGame saveGame) : base(saveGame) { }
     public override int RandomChance => 85;
 
-    public override bool Activate()
+    protected override bool OnActivate(Item item)
     {
         SaveGame.SetFood(Constants.PyFoodMax - 1);
         return true;

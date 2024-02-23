@@ -18,7 +18,7 @@ internal class CurePoisonActivation : Activation
 
     public override string? PreActivationMessage => "It glows deep blue...";
 
-    public override bool Activate()
+    protected override bool OnActivate(Item item)
     {
         SaveGame.TimedFear.ResetTimer();
         SaveGame.TimedPoison.ResetTimer();

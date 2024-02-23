@@ -18,7 +18,7 @@ internal class BerserkActivation : Activation
 
     public override string? PreActivationMessage => "";
 
-    public override bool Activate()
+    protected override bool OnActivate(Item item)
     {
         SaveGame.TimedSuperheroism.AddTimer(SaveGame.DieRoll(50) + 50);
         SaveGame.TimedBlessing.AddTimer(SaveGame.DieRoll(50) + 50);

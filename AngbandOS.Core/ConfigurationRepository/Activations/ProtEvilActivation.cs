@@ -18,7 +18,7 @@ internal class ProtEvilActivation : Activation
 
     public override string? PreActivationMessage => "It lets out a shrill wail...";
 
-    public override bool Activate()
+    protected override bool OnActivate(Item item)
     {
         int k = 3 * SaveGame.ExperienceLevel;
         SaveGame.TimedProtectionFromEvil.AddTimer(SaveGame.DieRoll(25) + k);

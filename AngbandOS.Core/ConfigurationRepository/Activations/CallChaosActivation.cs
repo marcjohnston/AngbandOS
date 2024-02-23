@@ -20,7 +20,7 @@ internal class CallChaosActivation : Activation
 
     public override int RechargeTime() => 350;
 
-    public override bool Activate()
+    protected override bool OnActivate(Item item)
     {
         SaveGame.RunScript(nameof(CallChaosScript));
         return true;

@@ -18,7 +18,7 @@ internal class DetectXtraActivation : Activation
 
     public override string? PreActivationMessage => "It glows brightly...";
 
-    public override bool Activate()
+    protected override bool OnActivate(Item item)
     {
         SaveGame.RunScript(nameof(DetectionScript));
         SaveGame.Probing();

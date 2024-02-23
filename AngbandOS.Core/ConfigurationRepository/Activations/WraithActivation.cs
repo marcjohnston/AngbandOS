@@ -18,7 +18,7 @@ internal class WraithActivation : Activation
 
     public override string? PreActivationMessage => "";
 
-    public override bool Activate()
+    protected override bool OnActivate(Item item)
     {
         SaveGame.TimedEtherealness.AddTimer(SaveGame.DieRoll(SaveGame.ExperienceLevel / 2) + (SaveGame.ExperienceLevel / 2));
         return true;

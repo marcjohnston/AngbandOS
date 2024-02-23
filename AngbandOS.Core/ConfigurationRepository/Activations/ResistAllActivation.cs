@@ -18,7 +18,7 @@ internal class ResistAllActivation : Activation
 
     public override string? PreActivationMessage => "It glows many colors...";
 
-    public override bool Activate()
+    protected override bool OnActivate(Item item)
     {
         SaveGame.TimedAcidResistance.AddTimer(SaveGame.DieRoll(40) + 40);
         SaveGame.TimedLightningResistance.AddTimer(SaveGame.DieRoll(40) + 40);

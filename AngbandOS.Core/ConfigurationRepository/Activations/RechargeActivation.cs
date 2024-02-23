@@ -18,7 +18,7 @@ internal class RechargeActivation : Activation
 
     public override string? PreActivationMessage => "";
 
-    public override bool Activate()
+    protected override bool OnActivate(Item item)
     {
         SaveGame.RunSuccessfulScriptInt(nameof(RechargeItemScript), 60);
         return true;

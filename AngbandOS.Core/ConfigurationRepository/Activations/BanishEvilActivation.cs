@@ -18,7 +18,7 @@ internal class BanishEvilActivation : Activation
 
     public override string? PreActivationMessage => "";
 
-    public override bool Activate()
+    protected override bool OnActivate(Item item)
     {
         if (SaveGame.BanishEvil(100))
         {

@@ -20,7 +20,7 @@ internal class DispEvilActivation : Activation
 
     public override int RechargeTime() => SaveGame.RandomLessThan(300) + 300;
 
-    public override bool Activate()
+    protected override bool OnActivate(Item item)
     {
         SaveGame.RunScriptInt(nameof(DispelEvil4xScript), SaveGame.ExperienceLevel * 5);
         return true;

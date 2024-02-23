@@ -18,7 +18,7 @@ internal class Cure700Activation : Activation
 
     public override string? PreActivationMessage => "It glows deep blue...";
 
-    public override bool Activate()
+    protected override bool OnActivate(Item item)
     {
         SaveGame.MsgPrint("You feel a warm tingling inside...");
         SaveGame.RestoreHealth(700);

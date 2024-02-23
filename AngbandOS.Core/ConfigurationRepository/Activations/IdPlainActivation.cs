@@ -18,7 +18,7 @@ internal class IdPlainActivation : Activation
 
     public override string? PreActivationMessage => "";
 
-    public override bool Activate()
+    protected override bool OnActivate(Item item)
     {
         return SaveGame.RunSuccessfulScript(nameof(IdentifyItemScript));
     }

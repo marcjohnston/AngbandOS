@@ -18,7 +18,7 @@ internal class DispGoodActivation : Activation
 
     public override string? PreActivationMessage => "It floods the area with evil...";
 
-    public override bool Activate()
+    protected override bool OnActivate(Item item)
     {
         SaveGame.RunScriptInt(nameof(DispelGood4xScript), SaveGame.ExperienceLevel * 5);
         return true;

@@ -16,7 +16,7 @@ internal class SummonAnimalActivation : Activation
     private SummonAnimalActivation(SaveGame saveGame) : base(saveGame) { }
     public override int RandomChance => 40;
 
-    public override bool Activate()
+    protected override bool OnActivate(Item item)
     {
         SaveGame.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel, SaveGame.SingletonRepository.MonsterFilters.Get(nameof(AnimalRangerMonsterFilter)), true);
         return true;

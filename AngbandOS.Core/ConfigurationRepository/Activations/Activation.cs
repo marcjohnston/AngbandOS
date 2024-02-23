@@ -60,7 +60,22 @@ internal abstract class Activation : IGetKey<string>
     /// </summary>
     /// <param name="saveGame"></param>
     /// <returns></returns>
-    public abstract bool Activate();
+    protected abstract bool OnActivate(Item item);
+
+    public bool Activate(Item item)
+    {
+        string itemName = item.Description(false, 0);
+        if (!String.IsNullOrEmpty(PreActivationMessage))
+        {
+            SaveGame.MsgPrint(PreActivationMessage);
+        }
+        if (OnActivate(item))
+        {
+            item.RechargeTimeLeft = RechargeTime();
+            return true;
+        }
+        return false;
+    }
 
     /// <summary>
     /// Returns the gold value of the artifact power.

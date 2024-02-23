@@ -18,7 +18,7 @@ internal class MassGenoActivation : Activation
 
     public override string? PreActivationMessage => "It lets out a long, shrill note...";
 
-    public override bool Activate()
+    protected override bool OnActivate(Item item)
     {
         SaveGame.RunScriptBool(nameof(MassCarnageScript), true);
         return true;

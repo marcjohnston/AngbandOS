@@ -18,7 +18,7 @@ internal class RuneProtActivation : Activation
 
     public override string? PreActivationMessage => "It glows light blue...";
 
-    public override bool Activate()
+    protected override bool OnActivate(Item item)
     {
         SaveGame.RunScript(nameof(ElderSignScript));
         return true;

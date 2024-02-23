@@ -18,7 +18,7 @@ internal class CureLwActivation : Activation
 
     public override string? PreActivationMessage => "";
 
-    public override bool Activate()
+    protected override bool OnActivate(Item item)
     {
         SaveGame.TimedFear.ResetTimer();
         SaveGame.RestoreHealth(30);

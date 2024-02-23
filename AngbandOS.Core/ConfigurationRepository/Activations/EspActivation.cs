@@ -18,7 +18,7 @@ internal class EspActivation : Activation
 
     public override string? PreActivationMessage => "";
 
-    public override bool Activate()
+    protected override bool OnActivate(Item item)
     {
         SaveGame.RunScript(nameof(AddTelepathy1d30p25Script));
         return true;

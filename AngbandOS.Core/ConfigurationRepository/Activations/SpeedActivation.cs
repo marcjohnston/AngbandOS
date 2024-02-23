@@ -18,7 +18,7 @@ internal class SpeedActivation : Activation
 
     public override string? PreActivationMessage => "It glows bright green...";
 
-    public override bool Activate()
+    protected override bool OnActivate(Item item)
     {
         if (SaveGame.TimedHaste.TurnsRemaining == 0)
         {

@@ -20,7 +20,7 @@ internal class WhirlwindActivation : Activation
 
     public override int RechargeTime() => 250;
 
-    public override bool Activate()
+    protected override bool OnActivate(Item item)
     {
         for (int direction = 0; direction <= 9; direction++)
         {

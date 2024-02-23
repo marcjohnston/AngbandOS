@@ -18,7 +18,7 @@ internal class CarnageActivation : Activation
 
     public override string? PreActivationMessage => "It glows deep blue...";
 
-    public override bool Activate()
+    protected override bool OnActivate(Item item)
     {
         SaveGame.RunScript(nameof(GenocideScript));
         return true;

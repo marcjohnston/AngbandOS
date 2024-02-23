@@ -101,16 +101,7 @@ internal class ActivateScript : Script, IScript, IRepeatableScript, ISuccessfulS
         if (item.IsRandomArtifact)
         {
             Activation artifactPower = item.RandomArtifactActivation;
-            string itemName = item.Description(false, 0);
-            if (!String.IsNullOrEmpty(artifactPower.PreActivationMessage))
-            {
-                SaveGame.MsgPrint(artifactPower.PreActivationMessage);
-            }
-            if (artifactPower.Activate())
-            {
-                item.RechargeTimeLeft = artifactPower.RechargeTime();
-            }
-            return true;
+            return artifactPower.Activate(item);
         }
 
         // If it is a fixed artifact and that artifact has activation then use its ability

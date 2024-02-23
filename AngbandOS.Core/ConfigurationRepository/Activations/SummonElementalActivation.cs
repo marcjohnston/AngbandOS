@@ -16,7 +16,7 @@ internal class SummonElementalActivation : Activation
     private SummonElementalActivation(SaveGame saveGame) : base(saveGame) { }
     public override int RandomChance => 25;
 
-    public override bool Activate()
+    protected override bool OnActivate(Item item)
     {
         if (SaveGame.DieRoll(3) == 1)
         {

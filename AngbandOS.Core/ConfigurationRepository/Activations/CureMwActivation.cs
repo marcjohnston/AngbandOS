@@ -18,7 +18,7 @@ internal class CureMwActivation : Activation
 
     public override string? PreActivationMessage => "It radiates deep purple...";
 
-    public override bool Activate()
+    protected override bool OnActivate(Item item)
     {
         SaveGame.RestoreHealth(SaveGame.DiceRoll(4, 8));
         SaveGame.TimedBleeding.SetTimer((SaveGame.TimedBleeding.TurnsRemaining / 2) - 50);

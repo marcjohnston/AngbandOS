@@ -18,7 +18,7 @@ internal class RuneExploActivation : Activation
 
     public override string? PreActivationMessage => "It glows a sickly yellow...";
 
-    public override bool Activate()
+    protected override bool OnActivate(Item item)
     {
         SaveGame.RunScript(nameof(YellowSignScript));
         return true;

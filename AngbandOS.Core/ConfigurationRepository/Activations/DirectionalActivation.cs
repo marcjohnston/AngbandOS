@@ -21,7 +21,7 @@ internal abstract class DirectionalActivation : Activation
     /// </summary>
     protected virtual string? PostAimingMessage => null;
 
-    public override bool Activate()
+    protected override bool OnActivate(Item item)
     {
         if (!SaveGame.GetDirectionWithAim(out int direction))
         {
