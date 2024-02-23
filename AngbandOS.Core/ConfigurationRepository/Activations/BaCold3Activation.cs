@@ -16,7 +16,7 @@ internal class BaCold3Activation : DirectionalActivation
     private BaCold3Activation(SaveGame saveGame) : base(saveGame) { }
     public override int RandomChance => 50;
 
-    public override string? PreActivationMessage => "It glows bright white...";
+    public override string? PreActivationMessage => "Your {0} glows bright white...";
 
     public override int RechargeTime() => SaveGame.RandomLessThan(325) + 325;
 

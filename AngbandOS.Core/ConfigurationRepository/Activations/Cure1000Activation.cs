@@ -16,7 +16,7 @@ internal class Cure1000Activation : Activation
     private Cure1000Activation(SaveGame saveGame) : base(saveGame) { }
     public override int RandomChance => 10;
 
-    public override string? PreActivationMessage => "It glows a bright white...";
+    public override string? PreActivationMessage => "Your {0} glows a bright white...";
 
     protected override bool OnActivate(Item item)
     {

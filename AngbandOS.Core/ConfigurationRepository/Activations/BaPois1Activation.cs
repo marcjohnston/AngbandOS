@@ -16,7 +16,7 @@ internal class BaPois1Activation : DirectionalActivation
     private BaPois1Activation(SaveGame saveGame) : base(saveGame) { }
     public override int RandomChance => 101;
 
-    public override string? PreActivationMessage => "It throbs deep green...";
+    public override string? PreActivationMessage => "Your {0} throbs deep green...";
 
     public override int RechargeTime() => SaveGame.RandomLessThan(4) + 4;
 

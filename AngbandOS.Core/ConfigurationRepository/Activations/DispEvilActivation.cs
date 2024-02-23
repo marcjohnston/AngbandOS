@@ -16,7 +16,7 @@ internal class DispEvilActivation : Activation
     private DispEvilActivation(SaveGame saveGame) : base(saveGame) { }
     public override int RandomChance => 33;
 
-    public override string? PreActivationMessage => "It floods the area with goodness...";
+    public override string? PreActivationMessage => "Your {0} floods the area with goodness...";
 
     public override int RechargeTime() => SaveGame.RandomLessThan(300) + 300;
 

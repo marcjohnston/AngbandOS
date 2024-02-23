@@ -16,7 +16,7 @@ internal class SpeedActivation : Activation
     private SpeedActivation(SaveGame saveGame) : base(saveGame) { }
     public override int RandomChance => 25;
 
-    public override string? PreActivationMessage => "It glows bright green...";
+    public override string? PreActivationMessage => "Your {0} glows bright green...";
 
     protected override bool OnActivate(Item item)
     {

@@ -16,7 +16,7 @@ internal class MapLightActivation : Activation
     private MapLightActivation(SaveGame saveGame) : base(saveGame) { }
     public override int RandomChance => 101;
 
-    public override string? PreActivationMessage => "It shines brightly...";
+    public override string? PreActivationMessage => "Your {0} shines brightly...";
 
     protected override bool OnActivate(Item item)
     {

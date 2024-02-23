@@ -16,7 +16,7 @@ internal class StoneMudActivation : DirectionalActivation
     private StoneMudActivation(SaveGame saveGame) : base(saveGame) { }
     public override int RandomChance => 101;
 
-    public override string? PreActivationMessage => "It pulsates...";
+    public override string? PreActivationMessage => "Your {0} pulsates...";
 
     public override int RechargeTime() => 5;
 

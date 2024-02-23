@@ -16,7 +16,7 @@ internal class BaCold2Activation : DirectionalActivation
     private BaCold2Activation(SaveGame saveGame) : base(saveGame) { }
     public override int RandomChance => 0; // TODO: Confirm this artifact does not have a corresponding random chance.  It is only used with biased artifacts.
 
-    public override string? PreActivationMessage => "It glows an intense blue...";
+    public override string? PreActivationMessage => "Your {0} glows an intense blue...";
 
     public override int RechargeTime() => 300;
 

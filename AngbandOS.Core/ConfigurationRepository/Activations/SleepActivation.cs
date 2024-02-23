@@ -16,7 +16,7 @@ internal class SleepActivation : Activation
     private SleepActivation(SaveGame saveGame) : base(saveGame) { }
     public override int RandomChance => 101;
 
-    public override string? PreActivationMessage => "It glows deep blue...";
+    public override string? PreActivationMessage => "Your {0} glows deep blue...";
 
     public override int RechargeTime() => 55;
 

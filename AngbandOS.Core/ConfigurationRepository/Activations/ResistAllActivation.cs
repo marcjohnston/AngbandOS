@@ -16,7 +16,7 @@ internal class ResistAllActivation : Activation
     private ResistAllActivation(SaveGame saveGame) : base(saveGame) { }
     public override int RandomChance => 85;
 
-    public override string? PreActivationMessage => "It glows many colors...";
+    public override string? PreActivationMessage => "Your {0} glows many colors...";
 
     protected override bool OnActivate(Item item)
     {

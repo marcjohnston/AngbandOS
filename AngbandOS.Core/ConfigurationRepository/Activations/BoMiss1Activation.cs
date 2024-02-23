@@ -16,7 +16,7 @@ internal class BoMiss1Activation : DirectionalActivation
     private BoMiss1Activation(SaveGame saveGame) : base(saveGame) { }
     public override int RandomChance => 101;
 
-    public override string? PreActivationMessage => "It glows extremely brightly...";
+    public override string? PreActivationMessage => "Your {0} glows extremely brightly...";
 
     public override int RechargeTime() => 2;
 

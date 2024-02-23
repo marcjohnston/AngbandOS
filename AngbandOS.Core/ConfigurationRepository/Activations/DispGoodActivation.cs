@@ -16,7 +16,7 @@ internal class DispGoodActivation : Activation
     private DispGoodActivation(SaveGame saveGame) : base(saveGame) { }
     public override int RandomChance => 33;
 
-    public override string? PreActivationMessage => "It floods the area with evil...";
+    public override string? PreActivationMessage => "Your {0} floods the area with evil...";
 
     protected override bool OnActivate(Item item)
     {

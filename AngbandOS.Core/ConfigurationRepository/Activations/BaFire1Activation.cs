@@ -13,7 +13,7 @@ internal class BaFire1Activation : DirectionalActivation
     private BaFire1Activation(SaveGame saveGame) : base(saveGame) { }
     public override int RandomChance => 85;
 
-    public override string? PreActivationMessage => "It glows an intense red...";
+    public override string? PreActivationMessage => "Your {0} glows an intense red...";
 
     public override int RechargeTime() => 400;
 

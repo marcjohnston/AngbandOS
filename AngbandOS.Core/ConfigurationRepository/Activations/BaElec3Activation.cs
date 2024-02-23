@@ -16,7 +16,7 @@ internal class BaElec3Activation : DirectionalActivation
     private BaElec3Activation(SaveGame saveGame) : base(saveGame) { }
     public override int RandomChance => 50;
 
-    public override string? PreActivationMessage => "It glows deep blue...";
+    public override string? PreActivationMessage => "Your {0} glows deep blue...";
 
     public override int RechargeTime() => SaveGame.RandomLessThan(425) + 425;
 

@@ -16,7 +16,7 @@ internal class RecallActivation : Activation
     private RecallActivation(SaveGame saveGame) : base(saveGame) { }
     public override int RandomChance => 85;
 
-    public override string? PreActivationMessage => "It glows soft white...";
+    public override string? PreActivationMessage => "Your {0} glows soft white...";
 
     protected override bool OnActivate(Item item)
     {

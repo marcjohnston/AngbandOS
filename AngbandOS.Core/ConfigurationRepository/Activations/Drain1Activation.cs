@@ -16,7 +16,7 @@ internal class Drain1Activation : DirectionalActivation
     private Drain1Activation(SaveGame saveGame) : base(saveGame) { }
     public override int RandomChance => 85;
 
-    public override string? PreActivationMessage => "It glows black...";
+    public override string? PreActivationMessage => "Your {0} glows black...";
 
     public override int RechargeTime() => SaveGame.RandomLessThan(100) + 100;
 

@@ -16,7 +16,7 @@ internal class TeleportActivation : Activation
     private TeleportActivation(SaveGame saveGame) : base(saveGame) { }
     public override int RandomChance => 101;
 
-    public override string? PreActivationMessage => "It twists space around you...";
+    public override string? PreActivationMessage => "Your {0} twists space around you...";
 
     protected override bool OnActivate(Item item)
     {

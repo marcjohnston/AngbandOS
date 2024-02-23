@@ -11,12 +11,12 @@ namespace AngbandOS.Core.Activations;
 /// Destroy nearby doors.
 /// </summary>
 [Serializable]
-internal class DestDoorActivation : Activation
+internal class DestroyAdjacentDoorsActivation : Activation
 {
-    private DestDoorActivation(SaveGame saveGame) : base(saveGame) { }
+    private DestroyAdjacentDoorsActivation(SaveGame saveGame) : base(saveGame) { }
     public override int RandomChance => 101;
 
-    public override string? PreActivationMessage => "It glows bright red...";
+    public override string? PreActivationMessage => "Your {0} glows bright red...";
 
     protected override bool OnActivate(Item item)
     {

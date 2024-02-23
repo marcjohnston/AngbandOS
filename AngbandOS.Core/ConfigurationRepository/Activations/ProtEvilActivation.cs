@@ -16,7 +16,7 @@ internal class ProtEvilActivation : Activation
     private ProtEvilActivation(SaveGame saveGame) : base(saveGame) { }
     public override int RandomChance => 75;
 
-    public override string? PreActivationMessage => "It lets out a shrill wail...";
+    public override string? PreActivationMessage => "Your {0} lets out a shrill wail...";
 
     protected override bool OnActivate(Item item)
     {

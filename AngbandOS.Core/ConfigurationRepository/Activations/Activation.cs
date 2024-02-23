@@ -64,10 +64,11 @@ internal abstract class Activation : IGetKey<string>
 
     public bool Activate(Item item)
     {
-        string itemName = item.Description(false, 0);
         if (!String.IsNullOrEmpty(PreActivationMessage))
         {
-            SaveGame.MsgPrint(PreActivationMessage);
+            string itemName = item.Description(false, 0);
+            string preActivationMessage = String.Format(PreActivationMessage, itemName);
+            SaveGame.MsgPrint(preActivationMessage);
         }
         if (OnActivate(item))
         {

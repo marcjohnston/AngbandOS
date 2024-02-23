@@ -16,7 +16,7 @@ internal class ConfuseActivation : DirectionalActivation
     private ConfuseActivation(SaveGame saveGame) : base(saveGame) { }
     public override int RandomChance => 101;
 
-    public override string? PreActivationMessage => "It glows in scintillating colors...";
+    public override string? PreActivationMessage => "Your {0} glows in scintillating colors...";
 
     public override int RechargeTime() => 15;
 

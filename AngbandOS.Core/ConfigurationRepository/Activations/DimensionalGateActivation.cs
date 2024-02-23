@@ -11,9 +11,9 @@ namespace AngbandOS.Core.Activations;
 /// Short range teleport to a specific destination.
 /// </summary>
 [Serializable]
-internal class DimDoorActivation : Activation
+internal class DimensionalGateActivation : Activation
 {
-    private DimDoorActivation(SaveGame saveGame) : base(saveGame) { }
+    private DimensionalGateActivation(SaveGame saveGame) : base(saveGame) { }
     public override int RandomChance => 10;
 
     public override string? PreActivationMessage => "You open a dimensional gate. Choose a destination.";

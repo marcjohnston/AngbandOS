@@ -16,7 +16,7 @@ internal class BoCold1Activation : DirectionalActivation
     private BoCold1Activation(SaveGame saveGame) : base(saveGame) { }
     public override int RandomChance => 101;
 
-    public override string? PreActivationMessage => "It is covered in frost...";
+    public override string? PreActivationMessage => "Your {0} is covered in frost...";
 
     public override int RechargeTime() => SaveGame.RandomLessThan(7) + 7;
 

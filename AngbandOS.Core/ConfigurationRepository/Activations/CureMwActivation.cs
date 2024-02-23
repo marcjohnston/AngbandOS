@@ -16,7 +16,7 @@ internal class CureMwActivation : Activation
     private CureMwActivation(SaveGame saveGame) : base(saveGame) { }
     public override int RandomChance => 101;
 
-    public override string? PreActivationMessage => "It radiates deep purple...";
+    public override string? PreActivationMessage => "Your {0} radiates deep purple...";
 
     protected override bool OnActivate(Item item)
     {

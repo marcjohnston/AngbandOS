@@ -16,7 +16,7 @@ internal class BaElec2Activation : DirectionalActivation
     private BaElec2Activation(SaveGame saveGame) : base(saveGame) { }
     public override int RandomChance => 0; // TODO: Confirm this artifact does not have a corresponding random chance.  It is only used with biased artifacts.
 
-    public override string? PreActivationMessage => "It crackles with electricity...";
+    public override string? PreActivationMessage => "Your {0} crackles with electricity...";
 
     public override int RechargeTime() => 500;
 

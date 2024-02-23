@@ -16,7 +16,7 @@ internal class BoMiss2Activation : DirectionalActivation
     private BoMiss2Activation(SaveGame saveGame) : base(saveGame) { }
     public override int RandomChance => 66;
 
-    public override string? PreActivationMessage => "It grows magical spikes...";
+    public override string? PreActivationMessage => "Your {0} grows magical spikes...";
 
     public override int RechargeTime() => SaveGame.RandomLessThan(90) + 90;
 

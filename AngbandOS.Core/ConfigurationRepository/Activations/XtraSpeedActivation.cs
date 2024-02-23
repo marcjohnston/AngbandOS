@@ -16,7 +16,7 @@ internal class XtraSpeedActivation : Activation
     private XtraSpeedActivation(SaveGame saveGame) : base(saveGame) { }
     public override int RandomChance => 10;
 
-    public override string? PreActivationMessage => "It glows brightly...";
+    public override string? PreActivationMessage => "Your {0} glows brightly...";
 
     protected override bool OnActivate(Item item)
     {

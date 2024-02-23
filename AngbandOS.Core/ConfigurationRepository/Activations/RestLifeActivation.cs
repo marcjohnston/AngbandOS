@@ -16,7 +16,7 @@ internal class RestLifeActivation : Activation
     private RestLifeActivation(SaveGame saveGame) : base(saveGame) { }
     public override int RandomChance => 66;
 
-    public override string? PreActivationMessage => "It glows a deep red...";
+    public override string? PreActivationMessage => "Your {0} glows a deep red...";
 
     protected override bool OnActivate(Item item)
     {

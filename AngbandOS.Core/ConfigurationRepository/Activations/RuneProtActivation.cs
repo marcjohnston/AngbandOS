@@ -16,7 +16,7 @@ internal class RuneProtActivation : Activation
     private RuneProtActivation(SaveGame saveGame) : base(saveGame) { }
     public override int RandomChance => 25;
 
-    public override string? PreActivationMessage => "It glows light blue...";
+    public override string? PreActivationMessage => "Your {0} glows light blue...";
 
     protected override bool OnActivate(Item item)
     {

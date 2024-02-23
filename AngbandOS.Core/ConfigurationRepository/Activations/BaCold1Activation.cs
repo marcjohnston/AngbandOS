@@ -16,7 +16,7 @@ internal class BaCold1Activation : DirectionalActivation
     private BaCold1Activation(SaveGame saveGame) : base(saveGame) { }
     public override int RandomChance => 85;
 
-    public override string? PreActivationMessage => "It is covered in frost...";
+    public override string? PreActivationMessage => "Your {0} is covered in frost...";
 
     public override int RechargeTime() => 400;
 

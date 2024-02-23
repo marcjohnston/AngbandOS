@@ -16,7 +16,7 @@ internal class IdFullActivation : Activation
     private IdFullActivation(SaveGame saveGame) : base(saveGame) { }
     public override int RandomChance => 25;
 
-    public override string? PreActivationMessage => "It glows yellow...";
+    public override string? PreActivationMessage => "Your {0} glows yellow...";
 
     protected override bool OnActivate(Item item)
     {

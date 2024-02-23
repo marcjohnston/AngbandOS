@@ -16,7 +16,7 @@ internal class BaFire2Activation : DirectionalActivation
     private BaFire2Activation(SaveGame saveGame) : base(saveGame) { }
     public override int RandomChance => 66;
 
-    public override string? PreActivationMessage => "It glows deep red...";
+    public override string? PreActivationMessage => "Your {0} glows deep red...";
 
     public override int RechargeTime() => SaveGame.RandomLessThan(225) + 225;
 

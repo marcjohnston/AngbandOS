@@ -16,7 +16,7 @@ internal class MassGenoActivation : Activation
     private MassGenoActivation(SaveGame saveGame) : base(saveGame) { }
     public override int RandomChance => 33;
 
-    public override string? PreActivationMessage => "It lets out a long, shrill note...";
+    public override string? PreActivationMessage => "Your {0} lets out a long, shrill note...";
 
     protected override bool OnActivate(Item item)
     {

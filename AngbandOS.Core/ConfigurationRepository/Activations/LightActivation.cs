@@ -16,7 +16,7 @@ internal class LightActivation : Activation
     private LightActivation(SaveGame saveGame) : base(saveGame) { }
     public override int RandomChance => 101;
 
-    public override string? PreActivationMessage => "It wells with clear light...";
+    public override string? PreActivationMessage => "Your {0} swells with clear light...";
 
     protected override bool OnActivate(Item item)
     {
