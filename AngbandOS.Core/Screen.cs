@@ -350,7 +350,7 @@ internal class Screen
     /// </summary>
     /// <param name="row"> The row position of the first character </param>
     /// <param name="col"> The column position of the first character </param>
-    /// <param name="length"> The number of characters to erase </param>
+    /// <param name="length"> The number of characters to erase or null, to erase the full width.</param>
     public void Erase(int row, int col, int? length = null)
     {
         if (length == null)

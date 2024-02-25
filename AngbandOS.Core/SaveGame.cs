@@ -925,77 +925,87 @@ internal class SaveGame
     /// is cleared prior to rendering the message on a new line.  If the message is null, any previous message is forced to render and the key input buffer is
     /// cleared.
     /// </summary>
-    /// <param name="msg"></param>
+    /// <param name="msg">Set to NULL to force a --more-- prompt (if there is text the player hasn't seen), then reset the line for new message starting at 0, 0.</param>
     public void MsgPrint(string? msg)
     {
-        if (!MessageAppendNextMessage)
+        if (msg == null)
         {
-            MessageXCursorPos = 0;
-        }
-
-        // Determine if we need to render the More prompt.  A More prompt will not be rendered if the cursor is still at position 0,
-        // or the message to be rendered is empty or the message rendered message will not exceed the screen width.
-        int messageLength = string.IsNullOrEmpty(msg) ? 0 : msg.Length;
-        if (MessageXCursorPos != 0 && (string.IsNullOrEmpty(msg) || MessageXCursorPos + messageLength > 72))
-        {
-            ShowMorePrompt(MessageXCursorPos);
-            //MessageAppendNextMessage = false;
-            MessageXCursorPos = 0;
-        }
-        if (string.IsNullOrEmpty(msg))
-        {
+            ShowMorePrompt();
             return;
         }
+
+        // Capitalize the first letter.
         if (msg.Length > 2)
         {
             msg = msg.Substring(0, 1).ToUpper() + msg.Substring(1);
-        }
-        if (messageLength > 1000)
-        {
-            return;
         }
         if (!IsDead)
         {
             MessageAdd(msg);
         }
-        string buf = msg;
-        string t = buf;
-        while (messageLength > 72)
+
+        // Check to see if the message being rendered is longer than one screen width.  If so, it will need to be split.  Compute the amount of space available.
+        int lengthOfMore = MorePrompt.Length;
+        int maxWidth = Screen.Width - lengthOfMore;
+
+        // Check to see if we need to -more- the current line.  Any form of the current message exceeding the current line will force a -more-.
+        if (MessageXCursorPos + msg.Length > maxWidth)
         {
-            int split = 72;
-            for (int check = 40; check < 72; check++)
-            {
-                if (t[check] == ' ')
-                {
-                    split = check;
-                }
-            }
-            Screen.Print(ColorEnum.White, t.Substring(0, split), 0, 0);
-            ShowMorePrompt(split + 1);
-            t = t.Substring(split);
-            messageLength -= split;
+            // Close the current line to prepare for the current message.
+            ShowMorePrompt();
         }
-        Screen.Print(ColorEnum.White, t.Substring(0, messageLength), 0, MessageXCursorPos);
+
+        // Determine if the message is too long for a line by itself.
+        while (msg.Length > maxWidth)
+        {
+            // Find a place to break 
+            int check = maxWidth;
+            while (check > 0 && msg[check] != ' ')
+            {
+                check--;
+            }
+
+            // Check to see if there were any spaces to break on.
+            if (check == 0)
+            {
+                // There were none.  Force break on non-breaking character.
+                check = maxWidth;
+            }
+            else
+            {
+                string splitMessage = msg.Substring(0, check);
+                msg = msg.Substring(check + 1);
+                Screen.Print(ColorEnum.White, splitMessage, 0, 0);
+                ShowMorePrompt();
+            }
+        }
+        Screen.Print(ColorEnum.White, msg, 0, MessageXCursorPos);
         MessageAppendNextMessage = true;
-        MessageXCursorPos += messageLength + 1;
+        MessageXCursorPos += msg.Length + 1;
     }
+
+    public const string MorePrompt = "-more-";
 
     /// <summary>
     /// Renders the -more- prompt and waits for a key input.  Keys in the input buffer are preserved.
     /// </summary>
     /// <param name="cursorXPosition"></param>
-    private void ShowMorePrompt(int cursorXPosition)
+    private void ShowMorePrompt()
     {
-        Screen.Print(ColorEnum.BrightBlue, "-more-", 0, cursorXPosition);
-        while (!Shutdown)
+        if (MessageXCursorPos > 0)
         {
-            string save = _artificialKeyBuffer;
-            _artificialKeyBuffer = "";
-            Inkey();
-            _artificialKeyBuffer = save;
-            break;
+            Screen.Print(ColorEnum.BrightBlue, MorePrompt, 0, MessageXCursorPos);
+            while (!Shutdown)
+            {
+                string save = _artificialKeyBuffer;
+                _artificialKeyBuffer = "";
+                Inkey();
+                _artificialKeyBuffer = save;
+                break;
+            }
         }
         Screen.Erase(0, 0);
+        MessageXCursorPos = 0;
     }
 
     public byte Elevation(int wildY, int wildX, int y, int x)
