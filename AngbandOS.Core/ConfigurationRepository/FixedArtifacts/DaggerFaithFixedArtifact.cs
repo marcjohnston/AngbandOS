@@ -17,7 +17,7 @@ internal class DaggerFaithFixedArtifact : FixedArtifact, IFixedArtifactActivatib
     // Faith shoots a fire bolt
     public void ActivateItem(Item item)
     {
-        base.SaveGame.MsgPrint("Your dagger is covered in fire...");
+        SaveGame.MsgPrint("Your dagger is covered in fire...");
         if (!SaveGame.GetDirectionWithAim(out int dir))
         {
             return;
