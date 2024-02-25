@@ -4,5 +4,6 @@ namespace AngbandOS.Core.ItemClasses;
 internal class HardArmorsItemClass : ItemClass
 {
     private HardArmorsItemClass(SaveGame saveGame) : base(saveGame) { }
-    public override string Description => "Hard Armors";
+    public override string Name => "Hard Armor";
+    public override string Description => Pluralize(Name);
 }

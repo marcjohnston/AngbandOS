@@ -4,5 +4,6 @@ namespace AngbandOS.Core.ItemClasses;
 internal class FoodItemClass : ItemClass
 {
     private FoodItemClass(SaveGame saveGame) : base(saveGame) { }
+    public override string Name => "Food";
     public override string Description => "Food";
 }

@@ -4,5 +4,6 @@ namespace AngbandOS.Core.ItemClasses;
 internal class LightSourcesItemClass : ItemClass
 {
     private LightSourcesItemClass(SaveGame saveGame) : base(saveGame) { }
-    public override string Description => "Light Sources";
+    public override string Name => "Light Source";
+    public override string Description => Pluralize(Name);
 }

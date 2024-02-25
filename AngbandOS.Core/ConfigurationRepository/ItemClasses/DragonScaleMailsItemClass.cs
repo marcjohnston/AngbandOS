@@ -4,5 +4,6 @@ namespace AngbandOS.Core.ItemClasses;
 internal class DragonScaleMailsItemClass : ItemClass
 {
     private DragonScaleMailsItemClass(SaveGame saveGame) : base(saveGame) { }
-    public override string Description => "Dragon Scale Mails";
+    public override string Name => "Dragon Scale Mail";
+    public override string Description => Pluralize(Name);
 }

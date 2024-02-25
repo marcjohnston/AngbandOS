@@ -4,5 +4,6 @@ namespace AngbandOS.Core.ItemClasses;
 internal class ScrollsItemClass : ItemClass
 {
     private ScrollsItemClass(SaveGame saveGame) : base(saveGame) { }
-    public override string Description => "Scrolls";
+    public override string Name => "Scroll";
+    public override string Description => Pluralize(Name);
 }

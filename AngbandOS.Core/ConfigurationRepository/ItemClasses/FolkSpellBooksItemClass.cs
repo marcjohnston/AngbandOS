@@ -4,5 +4,6 @@ namespace AngbandOS.Core.ItemClasses;
 internal class FolkSpellBooksItemClass : ItemClass
 {
     private FolkSpellBooksItemClass(SaveGame saveGame) : base(saveGame) { }
-    public override string Description => "Folk Spellbooks";
+    public override string Name => "Folk Spellbook";
+    public override string Description => Pluralize(Name);
 }

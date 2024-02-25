@@ -4,5 +4,6 @@ namespace AngbandOS.Core.ItemClasses;
 internal class PotionsItemClass : ItemClass
 {
     private PotionsItemClass(SaveGame saveGame) : base(saveGame) { }
-    public override string Description => "Potions";
+    public override string Name => "Potion";
+    public override string Description => Pluralize(Name);
 }

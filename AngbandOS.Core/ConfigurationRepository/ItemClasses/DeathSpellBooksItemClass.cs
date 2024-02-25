@@ -4,5 +4,6 @@ namespace AngbandOS.Core.ItemClasses;
 internal class DeathSpellBooksItemClass : ItemClass
 {
     private DeathSpellBooksItemClass(SaveGame saveGame) : base(saveGame) { }
-    public override string Description => "Death Spellbooks";
+    public override string Name => "Death Spellbook";
+    public override string Description => Pluralize(Name);
 }

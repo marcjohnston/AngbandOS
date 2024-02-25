@@ -4,5 +4,6 @@ namespace AngbandOS.Core.ItemClasses;
 internal class StaffsItemClass : ItemClass
 {
     private StaffsItemClass(SaveGame saveGame) : base(saveGame) { }
-    public override string Description => "Staffs";
+    public override string Name => "Staff";
+    public override string Description => Pluralize(Name);
 }

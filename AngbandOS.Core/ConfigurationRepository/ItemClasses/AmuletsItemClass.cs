@@ -4,5 +4,6 @@ namespace AngbandOS.Core.ItemClasses;
 internal class AmuletsItemClass : ItemClass
 {
     private AmuletsItemClass(SaveGame saveGame) : base(saveGame) { }
-    public override string Description => "Amulets";
+    public override string Name => "Amulet";
+    public override string Description => Pluralize(Name);
 }
