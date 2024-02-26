@@ -5,5 +5,4 @@ internal class BoltsItemClass : ItemClass
 {
     private BoltsItemClass(SaveGame saveGame) : base(saveGame) { }
     public override string Name => "Bolt";
-    public override string Description => Pluralize(Name);
 }

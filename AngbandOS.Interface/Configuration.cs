@@ -57,6 +57,7 @@ public class Configuration
     public TileDefinition[]? Tiles { get; set; } = null;
     public AnimationDefinition[]? Animations { get; set; } = null;
     public SpellDefinition[]? Spells { get; set; } = null;
+    public PluralDefinition[]? Plurals { get; set; } = null;
 
     public string[]? ElvishTexts { get; set; } = null;
     public string[]? FindQuests { get; set; } = null;

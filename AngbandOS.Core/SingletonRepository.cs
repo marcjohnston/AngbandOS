@@ -55,6 +55,7 @@ internal class SingletonRepository
     public MushroomReadableFlavorsRepository MushroomReadableFlavors;
     public MutationsRepository Mutations;
     public PatronsRepository Patrons;
+    public PluralsRepository Plurals;
     public PotionReadableFlavorsRepository PotionReadableFlavors;
     public PowersRepository Powers;
     public ProjectileGraphicsRepository ProjectileGraphics;
@@ -165,6 +166,7 @@ internal class SingletonRepository
         MushroomReadableFlavors = AddRepository<MushroomReadableFlavorsRepository>(new MushroomReadableFlavorsRepository(SaveGame));
         Mutations = AddRepository<MutationsRepository>(new MutationsRepository(SaveGame));
         Patrons = AddRepository<PatronsRepository>(new PatronsRepository(SaveGame));
+        Plurals = AddRepository<PluralsRepository>(new PluralsRepository(SaveGame));
         PotionReadableFlavors = AddRepository<PotionReadableFlavorsRepository>(new PotionReadableFlavorsRepository(SaveGame));
         Powers = AddRepository<PowersRepository>(new PowersRepository(SaveGame));
         ProjectileGraphics = AddRepository<ProjectileGraphicsRepository>(new ProjectileGraphicsRepository(SaveGame));

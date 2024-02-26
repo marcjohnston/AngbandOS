@@ -23,7 +23,7 @@ internal abstract class WandItemFactory : ItemFactory, IFlavorFactory
         string s = "";
         if (item.IsKnown())
         {
-            s += $" ({item.TypeSpecificValue} {CountPluralize("charge", item.TypeSpecificValue)})";
+            s += $" ({item.TypeSpecificValue} {SaveGame.CountPluralize("charge", item.TypeSpecificValue)})";
         }
         s += base.GetVerboseDescription(item);
         return s;
@@ -32,7 +32,7 @@ internal abstract class WandItemFactory : ItemFactory, IFlavorFactory
     {
         string flavor = item.IdentityIsStoreBought ? "" : $"{FlavorFactory.Flavor.Name} ";
         string ofName = isFlavorAware ? $" of {FriendlyName}" : "";
-        string name = $"{flavor}{CountPluralize("Wand", item.Count)}{ofName}";
+        string name = $"{flavor}{SaveGame.CountPluralize("Wand", item.Count)}{ofName}";
         return includeCountPrefix ? GetPrefixCount(true, name, item.Count, item.IsKnownArtifact) : name;
     }
 

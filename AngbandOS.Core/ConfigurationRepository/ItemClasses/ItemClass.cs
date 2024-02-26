@@ -32,6 +32,5 @@ internal abstract class ItemClass : IGetKey<string>
     /// Returns a description of the item class.  This is typically a plural version of the Name property.  This description is typically used to allow the player to select an item from
     /// the class.
     /// </summary>
-    public abstract string Description { get; }
     public virtual bool AllowStomp => true;
 }

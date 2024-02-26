@@ -22,7 +22,7 @@ internal abstract class ScrollItemFactory : ItemFactory, IFlavorFactory
     {
         string flavor = item.IdentityIsStoreBought ? "" : $" titled \"{FlavorFactory.Flavor.Name}\"";
         string ofName = isFlavorAware ? $" of {FriendlyName}" : "";
-        string name = $"{CountPluralize("Scroll", item.Count)}{flavor}{ofName}";
+        string name = $"{SaveGame.CountPluralize("Scroll", item.Count)}{flavor}{ofName}";
         return includeCountPrefix ? GetPrefixCount(true, name, item.Count, item.IsKnownArtifact) : name;
     }
 

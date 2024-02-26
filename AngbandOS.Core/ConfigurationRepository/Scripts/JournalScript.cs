@@ -5,6 +5,8 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using System.Xml.Linq;
+
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
@@ -982,7 +984,7 @@ internal class JournalScript : Script, IScript, IRepeatableScript, IStoreScript
             ItemClass itemClass = SaveGame.SingletonRepository.ItemClasses[i];
             if (itemClass.AllowStomp)
             {
-                _menuItem[_menuLength] = SaveGame.SingletonRepository.ItemClasses[i].Description;
+                _menuItem[_menuLength] = SaveGame.Pluralize(SaveGame.SingletonRepository.ItemClasses[i].Name);
                 _menuColors[_menuLength] = ColorEnum.Blue;
                 _menuLength++;
             }
@@ -1010,7 +1012,7 @@ internal class JournalScript : Script, IScript, IRepeatableScript, IStoreScript
                     WorthlessItemTypeSelection(SaveGame.SingletonRepository.ItemClasses[menu]);
                     for (int i = 0; i < SaveGame.SingletonRepository.ItemClasses.Count - 1; i++)
                     {
-                        _menuItem[i] = SaveGame.SingletonRepository.ItemClasses[i].Description;
+                        _menuItem[i] = SaveGame.Pluralize(SaveGame.SingletonRepository.ItemClasses[i].Name);
                         _menuColors[i] = ColorEnum.Blue;
                     }
                     _menuLength = SaveGame.SingletonRepository.ItemClasses.Count - 1;

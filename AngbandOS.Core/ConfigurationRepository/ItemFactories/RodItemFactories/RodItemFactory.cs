@@ -33,7 +33,7 @@ internal abstract class RodItemFactory : ItemFactory, IFlavorFactory
     {
         string flavor = item.IdentityIsStoreBought ? "" : $"{FlavorFactory.Flavor.Name} ";
         string ofName = isFlavorAware ? $" of {FriendlyName}" : "";
-        string name = $"{flavor}{CountPluralize("Rod", item.Count)}{ofName}";
+        string name = $"{flavor}{SaveGame.CountPluralize("Rod", item.Count)}{ofName}";
         return includeCountPrefix ? GetPrefixCount(true, name, item.Count, item.IsKnownArtifact) : name;
     }
 

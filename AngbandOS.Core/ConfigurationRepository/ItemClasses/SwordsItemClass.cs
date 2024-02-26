@@ -5,5 +5,4 @@ internal class SwordsItemClass : ItemClass
 {
     private SwordsItemClass(SaveGame saveGame) : base(saveGame) { }
     public override string Name => "Sword";
-    public override string Description => Pluralize(Name);
 }

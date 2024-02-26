@@ -5,5 +5,4 @@ internal class CrownsItemClass : ItemClass
 {
     private CrownsItemClass(SaveGame saveGame) : base(saveGame) { }
     public override string Name => "Crown";
-    public override string Description => Pluralize(Name);
 }

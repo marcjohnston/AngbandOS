@@ -5,5 +5,4 @@ internal class PolearmsItemClass : ItemClass
 {
     private PolearmsItemClass(SaveGame saveGame) : base(saveGame) { }
     public override string Name => "Polearm";
-    public override string Description => Pluralize(Name);
 }

@@ -36,6 +36,6 @@ internal class DivineCastingType : CastingType
     public override string GetBookTitle(Item bookItem)
     {
         BookItemFactory bookItemFactory = (BookItemFactory)bookItem.Factory;
-        return $"{CountPluralize("Book", bookItem.Count)} of {bookItemFactory.DivineTitle}";
+        return $"{SaveGame.CountPluralize("Book", bookItem.Count)} of {bookItemFactory.DivineTitle}";
     }
 }

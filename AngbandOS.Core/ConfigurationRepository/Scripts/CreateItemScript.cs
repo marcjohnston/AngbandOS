@@ -5,6 +5,8 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using System.Xml.Linq;
+
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
@@ -69,7 +71,7 @@ internal class CreateItemScript : Script, IScript
             row = 2 + (num % 20);
             col = 30 * (num / 20);
             ch = (char)(_head[num / 20] + (char)(num % 20));
-            SaveGame.Screen.PrintLine($"[{ch}] {itemClass.Description}", row, col);
+            SaveGame.Screen.PrintLine($"[{ch}] {SaveGame.Pluralize(itemClass.Name)}", row, col);
         }
         int maxNum = num;
         if (!SaveGame.GetCom("Get what type of object? ", out ch))
@@ -94,7 +96,7 @@ internal class CreateItemScript : Script, IScript
             return 0;
         }
         ItemClass selectedItemClass = SaveGame.SingletonRepository.ItemClasses[num];
-        string tvalDesc = selectedItemClass.Description;
+        string tvalDesc = SaveGame.Pluralize(selectedItemClass.Name);
         SaveGame.Screen.Clear();
         const int maxLetters = 26;
         const int maxNumbers = 10;

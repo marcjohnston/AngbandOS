@@ -254,34 +254,6 @@ internal static class Extensions
         return roman.ToString();
     }
 
-    public static string CountPluralize(string singular, int count)
-    {
-        if (count == 1)
-        {
-            return singular;
-        }
-        else
-        {
-            return Pluralize(singular);
-        }
-    }
-
-    public static string Pluralize(string singular)
-    {
-        if ("sh".IndexOf(singular[singular.Length - 1]) >= 0)
-        {
-            return $"{singular}es";
-        }
-        else if (singular.EndsWith("y"))
-        {
-            return $"{singular.Substring(0, singular.Length - 1)}ies";
-        }
-        else
-        {
-            return $"{singular}s";
-        }
-    }
-
     public static string GetPrefixCount(bool includeSingularPrefix, string singularNoun, int count, bool isKnownArtifact)
     {
         if (count <= 0)

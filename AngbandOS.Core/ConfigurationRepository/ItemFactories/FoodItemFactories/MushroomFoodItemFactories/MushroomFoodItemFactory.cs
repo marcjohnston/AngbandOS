@@ -21,7 +21,7 @@ internal abstract class MushroomFoodItemFactory : FoodItemFactory, IFlavorFactor
     {
         string flavor = item.IdentityIsStoreBought ? "" : $"{FlavorFactory.Flavor.Name} ";
         string ofName = isFlavorAware ? $" of {FriendlyName}" : "";
-        string name = $"{flavor}{CountPluralize("Mushroom", item.Count)}{ofName}";
+        string name = $"{flavor}{SaveGame.CountPluralize("Mushroom", item.Count)}{ofName}";
         return includeCountPrefix ? GetPrefixCount(true, name, item.Count, item.IsKnownArtifact) : name;
     }
 

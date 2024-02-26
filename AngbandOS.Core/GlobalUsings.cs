@@ -49,6 +49,7 @@ global using AngbandOS.Core.Mutations.PassiveMutations;
 global using AngbandOS.Core.Mutations.RandomMutations;
 global using AngbandOS.Core.Pantheon;
 global using AngbandOS.Core.Patrons;
+global using AngbandOS.Core.Plurals;
 global using AngbandOS.Core.Powers;
 global using AngbandOS.Core.ProjectileGraphics;
 global using AngbandOS.Core.Projection;

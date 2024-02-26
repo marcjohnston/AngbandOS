@@ -22,7 +22,7 @@ internal class DictionaryRepository<TKey, TValue> : ListRepository<TValue> where
     /// <summary>
     /// Returns the pluralized type name for the TValue generic as the name of this string list repository.
     /// </summary>
-    public override string Name => Pluralize(typeof(TValue).Name);
+    public override string Name => SaveGame.Pluralize(typeof(TValue).Name);
 
     public TValue Bind(TKey scriptName)
     {
@@ -100,6 +100,15 @@ internal class DictionaryRepository<TKey, TValue> : ListRepository<TValue> where
         if (!dictionary.TryGetValue(key, out TValue? value))
         {
             throw new Exception($"The {key.ToString()} item is not found.");
+        }
+        return value;
+    }
+
+    public virtual TValue? TryGet(TKey key)
+    {
+        if (!dictionary.TryGetValue(key, out TValue? value))
+        {
+            return default;
         }
         return value;
     }

@@ -5,5 +5,4 @@ internal class FolkSpellBooksItemClass : ItemClass
 {
     private FolkSpellBooksItemClass(SaveGame saveGame) : base(saveGame) { }
     public override string Name => "Folk Spellbook";
-    public override string Description => Pluralize(Name);
 }

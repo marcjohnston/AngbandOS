@@ -17222,4 +17222,39 @@ internal class SaveGame
             mutation.OnProcessWorld();
         }
     }
+
+    public string Pluralize(string singular)
+    {
+        Plural? plural = SingletonRepository.Plurals.TryGet(singular);
+        if (plural != null)
+        {
+            return plural.PluralForm;
+        }
+
+        if ("sh".IndexOf(singular[singular.Length - 1]) >= 0)
+        {
+            return $"{singular}es";
+        }
+        else if (singular.EndsWith("y"))
+        {
+            return $"{singular.Substring(0, singular.Length - 1)}ies";
+        }
+        else
+        {
+            return $"{singular}s";
+        }
+    }
+
+    public string CountPluralize(string singular, int count)
+    {
+        if (count == 1)
+        {
+            return singular;
+        }
+        else
+        {
+            return Pluralize(singular);
+        }
+    }
+
 }
