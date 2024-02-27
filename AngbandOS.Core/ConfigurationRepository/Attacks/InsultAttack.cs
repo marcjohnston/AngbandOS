@@ -11,7 +11,7 @@ namespace AngbandOS.Core.AttackTypes;
 internal class InsultAttack : Attack
 {
     private InsultAttack(SaveGame saveGame) : base(saveGame) { }
-    public override string MonsterAction(Monster monster) => $"insults {monster.Name}";
+    public override string MonsterAction => "insults {0}";
     public override string PlayerAction => SaveGame.SingletonRepository.InsultPlayerAttacks.ToWeightedRandom().ChooseOrDefault();
     public override string KnowledgeAction => "insult";
     public override bool AttackTouchesTarget => false;

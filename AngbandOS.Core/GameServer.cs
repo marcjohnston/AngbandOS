@@ -210,6 +210,7 @@ public class GameServer
             {
                 AmuletReadableFlavors = RetrieveEntities<ReadableFlavorDefinition>(persistentStorage, "AmuletReadableFlavors"),
                 Animations = RetrieveEntities<AnimationDefinition>(persistentStorage, "Animations"),
+                Attacks = RetrieveEntities<AttackDefinition>(persistentStorage, "Attacks"),
                 ClassSpells = RetrieveEntities<ClassSpellDefinition>(persistentStorage, "ClassSpells"),
                 DungeonGuardians = RetrieveEntities<DungeonGuardianDefinition>(persistentStorage, "DungeonGuardians"),
                 Dungeons = RetrieveEntities<DungeonDefinition>(persistentStorage, "Dungeons"),

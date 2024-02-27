@@ -1290,7 +1290,8 @@ internal class Monster : IItemContainer
                 // Display the attack description
                 if (IsVisible || target.IsVisible)
                 {
-                    SaveGame.MsgPrint($"{monsterName} {method.MonsterAction(target)}.");
+                    string monsterAction = String.Format(method.MonsterAction, monsterName);
+                    SaveGame.MsgPrint($"{monsterName} {monsterName}.");
                 }
                 obvious = true;
                 damage = this.SaveGame.DiceRoll(dDice, dSide);

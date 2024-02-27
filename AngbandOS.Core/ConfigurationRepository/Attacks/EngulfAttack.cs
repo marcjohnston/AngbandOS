@@ -11,7 +11,7 @@ namespace AngbandOS.Core.AttackTypes;
 internal class EngulfAttack : Attack
 {
     private EngulfAttack(SaveGame saveGame) : base(saveGame) { }
-    public override string MonsterAction(Monster monster) => $"engulfs {monster.Name}";
+    public override string MonsterAction => "engulfs {0}";
     public override string PlayerAction => $"engulfs you";
     public override string KnowledgeAction => "engulf";
 }

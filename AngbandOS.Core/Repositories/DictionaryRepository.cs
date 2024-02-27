@@ -122,7 +122,7 @@ internal class DictionaryRepository<TKey, TValue> : ListRepository<TValue> where
         TKey key = item.GetKey;
         if (dictionary.TryGetValue(key, out TValue? existingSingletonRepositoryItem))
         {
-            throw new Exception($"The {item.GetType().Name} singleton has a duplicate key value of {item.GetKey} with {existingSingletonRepositoryItem.GetType().Name}.");
+            throw new Exception($"The {GetType().Name} singleton has a duplicate key value of {item.GetKey} with {existingSingletonRepositoryItem.GetType().Name}.");
         }
         dictionary.Add(key, item);
         base.Add(item);

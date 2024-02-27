@@ -5,90 +5,69 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-using System.Drawing;
-using System.Text.Json;
-using System.Xml.Linq;
-
 namespace AngbandOS.Core.AttackTypes;
 
 [Serializable]
-internal abstract class Attack : IGetKey<string>
+internal class GenericAttack : Attack
 {
-    protected readonly SaveGame SaveGame;
-    protected Attack(SaveGame saveGame)
+    public GenericAttack(SaveGame saveGame, AttackDefinition definition) : base(saveGame)
     {
-        SaveGame = saveGame;
+        MonsterAction = definition.MonsterAction;
+        Key = definition.Key;
+        PlayerAction = definition.PlayerAction;
+        KnowledgeAction = definition.KnowledgeAction;
+        AttackTouchesTarget = definition.AttackTouchesTarget;
+        AttackAwakensTarget = definition.AttackAwakensTarget;
+        AttackStunsTarget  = definition.AttackStunsTarget;
+        AttackCutsTarget = definition.AttackCutsTarget;
+        RendersMissMessage = definition.RendersMissMessage;
     }
 
-    public virtual string Key => GetType().Name;
-
-    /// <summary>
-    /// Returns the entity serialized into a Json string.
-    /// </summary>
-    /// <returns></returns>
-    public string ToJson()
-    {
-        AttackDefinition definition = new()
-        {
-            MonsterAction = MonsterAction,
-            PlayerAction = PlayerAction,
-            KnowledgeAction = KnowledgeAction,
-            Key = Key,
-            AttackTouchesTarget = AttackTouchesTarget,
-            AttackAwakensTarget = AttackAwakensTarget,
-            AttackStunsTarget = AttackStunsTarget,
-            AttackCutsTarget = AttackCutsTarget,
-            RendersMissMessage = RendersMissMessage
-        };
-        return JsonSerializer.Serialize<AttackDefinition>(definition);
-    }
-
-    public string GetKey => Key;
-    public void Bind() { }
+    public override string Key { get; }
 
     /// <summary>
     /// Returns the action message to be displayed, when the attack targets another monster.
     /// </summary>
-    public abstract string MonsterAction { get; }
+    public override string MonsterAction { get; }
 
     /// <summary>
     /// Returns the action message to be displayed, when the attack targets the player.
     /// </summary>
     /// <param name="saveGame"></param>
     /// <returns></returns>
-    public abstract string PlayerAction { get; }
+    public override string PlayerAction { get; }
 
     /// <summary>
     /// Returns the action message to be displayed, when a description of the attack is being rendered to the player viewing
     /// their knowledge.
     /// </summary>
-    public abstract string KnowledgeAction { get; }
+    public override string KnowledgeAction { get; }
 
     /// <summary>
     /// Returns true, if the attack requires touching the target; false otherwise.  Returns true, by default.  The beg, drool, gaze, insult, moan, show, spit, 
     /// spore, wail and worship attacks do not require touching the target.
     /// </summary>
-    public virtual bool AttackTouchesTarget => true;
+    public override bool AttackTouchesTarget { get; } = true;
 
     /// <summary>
     /// Returns true, if the attack awakes the target; false otherwise.  Returns false, by default,  The beg, insult, moan and show attacks
     /// return true.
     /// </summary>
-    public virtual bool AttackAwakensTarget => false;
+    public override bool AttackAwakensTarget { get; } = false;
 
     /// <summary>
     /// Returns true, if the attack stuns the target; false otherwise.  Returns false, by default.  The hit, punch, kick, butt and crush attacks return true.
     /// </summary>
-    public virtual bool AttackStunsTarget => false;
+    public override bool AttackStunsTarget { get; } = false;
 
     /// <summary>
     /// Returns true, if the attack cuts the target; false otherwise.  Returns false, by default.  The hit, claw and bite attacks all return true.
     /// </summary>
-    public virtual bool AttackCutsTarget => false;
+    public override bool AttackCutsTarget { get; } = false;
 
     /// <summary>
     /// Returns true, if the attack should render a message, if the attack touches the target and missed; false no message should be rendered.  Returns true, by default.  
     /// Only the crawl attack, requires touching the target and does not render a miss message.
     /// </summary>
-    public virtual bool RendersMissMessage => true;
+    public override bool RendersMissMessage { get; } = true;
 }

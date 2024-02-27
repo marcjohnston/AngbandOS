@@ -11,7 +11,7 @@ namespace AngbandOS.Core.AttackTypes;
 internal class TouchAttack : Attack
 {
     private TouchAttack(SaveGame saveGame) : base(saveGame) { }
-    public override string MonsterAction(Monster monster) => $"touches {monster.Name}";
+    public override string MonsterAction => "touches {0}";
     public override string PlayerAction => $"touches you";
     public override string KnowledgeAction => "touch";
 }

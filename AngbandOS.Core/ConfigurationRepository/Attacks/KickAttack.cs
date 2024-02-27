@@ -11,7 +11,7 @@ namespace AngbandOS.Core.AttackTypes;
 internal class KickAttack : Attack
 {
     private KickAttack(SaveGame saveGame) : base(saveGame) { }
-    public override string MonsterAction(Monster monster) => $"kicks {monster.Name}";
+    public override string MonsterAction => "kicks {0}";
     public override string PlayerAction => $"kicks you";
     public override string KnowledgeAction => "kick";
     public override bool AttackStunsTarget => true;

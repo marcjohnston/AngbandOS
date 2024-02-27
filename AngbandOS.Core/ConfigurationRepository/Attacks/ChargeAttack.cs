@@ -11,7 +11,7 @@ namespace AngbandOS.Core.AttackTypes;
 internal class ChargeAttack : Attack
 {
     private ChargeAttack(SaveGame saveGame) : base(saveGame) { }
-    public override string MonsterAction(Monster monster) => $"charges {monster.Name}";
+    public override string MonsterAction => "charges {0}";
     public override string PlayerAction => $"charges you";
     public override string KnowledgeAction => "charge";
 }

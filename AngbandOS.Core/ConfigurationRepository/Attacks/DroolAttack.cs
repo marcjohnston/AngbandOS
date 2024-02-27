@@ -11,7 +11,7 @@ namespace AngbandOS.Core.AttackTypes;
 internal class DroolAttack : Attack
 {
     private DroolAttack(SaveGame saveGame) : base(saveGame) { }
-    public override string MonsterAction(Monster monster) => $"drools on {monster.Name}";
+    public override string MonsterAction => "drools on {0}";
     public override string PlayerAction => $"drools on you";
     public override string KnowledgeAction => "drool on you";
     public override bool AttackTouchesTarget => false;

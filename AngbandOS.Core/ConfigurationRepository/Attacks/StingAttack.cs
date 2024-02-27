@@ -11,7 +11,7 @@ namespace AngbandOS.Core.AttackTypes;
 internal class StingAttack : Attack
 {
     private StingAttack(SaveGame saveGame) : base(saveGame) { }
-    public override string MonsterAction(Monster monster) => $"stings {monster.Name}";
+    public override string MonsterAction => "stings {0}";
     public override string PlayerAction => $"stings you";
     public override string KnowledgeAction => "string";
 }
