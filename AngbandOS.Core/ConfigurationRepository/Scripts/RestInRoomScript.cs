@@ -31,7 +31,7 @@ internal class RestInRoomScript : Script, IScript
             SaveGame.MsgPrint("You awake refreshed for the new day.");
             SaveGame.MsgPrint("You eat a hearty breakfast.");
         }
-        SaveGame.Religion.DecayFavour();
+        SaveGame.DecayFavour();
         SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateHealthFlaggedAction)).Set();
         SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateManaFlaggedAction)).Set();
         SaveGame.SetFood(Constants.PyFoodMax - 1);

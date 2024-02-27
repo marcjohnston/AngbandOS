@@ -354,7 +354,7 @@ internal class JournalScript : Script, IScript, IRepeatableScript, IStoreScript
         SaveGame.Screen.Print(ColorEnum.Blue, "======================", 1, 1);
         int row = 3;
         God patron = null;
-        foreach (var deity in SaveGame.Religion.GetAllDeities())
+        foreach (var deity in SaveGame.GetAllDeities())
         {
             var text = deity.ShortName;
             if (deity.IsPatron)

@@ -89,7 +89,7 @@ internal class UpdateManaFlaggedAction : FlaggedAction
             msp = 0;
         }
 
-        var mult = SaveGame.Religion.GetNamedDeity(Pantheon.GodName.Tamash).AdjustedFavour + 10;
+        var mult = SaveGame.GetNamedDeity(Pantheon.GodName.Tamash).AdjustedFavour + 10;
         msp *= mult;
         msp /= 10;
         if (SaveGame.MaxMana != msp)

@@ -69,7 +69,7 @@ internal class Realm2SelectionBirthStage : BirthStage
     {
         Realm[] remainingRealms = SaveGame.BaseCharacterClass.AvailableSecondaryRealms.Where(_realm => _realm != SaveGame.PrimaryRealm).ToArray();
         SaveGame.SecondaryRealm = remainingRealms[index];
-        SaveGame.Religion.Deity = SaveGame.BaseCharacterClass.DefaultDeity(SaveGame.SecondaryRealm);
+        SaveGame.Deity = SaveGame.BaseCharacterClass.DefaultDeity(SaveGame.SecondaryRealm);
         return SaveGame.SingletonRepository.BirthStages.Get(nameof(GenderSelectionBirthStage));
     }
 

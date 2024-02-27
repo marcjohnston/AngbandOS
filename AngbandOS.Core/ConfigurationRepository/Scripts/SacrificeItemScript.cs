@@ -23,7 +23,7 @@ internal class SacrificeItemScript : Script, IStoreScript
         {
             return;
         }
-        var deity = SaveGame.Religion.GetNamedDeity(godName);
+        var deity = SaveGame.GetNamedDeity(godName);
         string pmt = "Sacrifice which item? ";
         if (!SaveGame.SelectItem(out Item? oPtr, pmt, true, true, false, null))
         {
@@ -63,7 +63,7 @@ internal class SacrificeItemScript : Script, IStoreScript
         }
         var favour = finalAsk / 10;
         var oldFavour = deity.AdjustedFavour;
-        SaveGame.Religion.AddFavour(godName, favour);
+        SaveGame.AddFavour(godName, favour);
         var newFavour = deity.AdjustedFavour;
         var change = newFavour - oldFavour;
         if (change < 0)
@@ -99,7 +99,7 @@ internal class SacrificeItemScript : Script, IStoreScript
         ScreenBuffer savedScreen = SaveGame.Screen.Clone();
         try
         {
-            var deities = SaveGame.Religion.GetAllDeities();
+            var deities = SaveGame.GetAllDeities();
             var names = new List<string>();
             var keys = new List<char>();
             foreach (var deity in deities)

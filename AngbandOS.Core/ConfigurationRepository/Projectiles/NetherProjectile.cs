@@ -86,7 +86,7 @@ internal class NetherProjectile : Projectile
             {
                 SaveGame.MsgPrint("You keep hold of your life force!");
             }
-            else if (SaveGame.DieRoll(10) <= SaveGame.Religion.GetNamedDeity(Pantheon.GodName.Hagarg_Ryonis).AdjustedFavour)
+            else if (SaveGame.DieRoll(10) <= SaveGame.GetNamedDeity(Pantheon.GodName.Hagarg_Ryonis).AdjustedFavour)
             {
                 SaveGame.MsgPrint("Hagarg Ryonis's favour protects you!");
             }

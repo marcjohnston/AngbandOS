@@ -78,7 +78,7 @@ internal class WastingRandomMutation : Mutation
             return;
         }
         SaveGame.Disturb(false);
-        if (base.SaveGame.DieRoll(10) <= SaveGame.Religion.GetNamedDeity(Pantheon.GodName.Lobon).AdjustedFavour)
+        if (base.SaveGame.DieRoll(10) <= SaveGame.GetNamedDeity(Pantheon.GodName.Lobon).AdjustedFavour)
         {
             SaveGame.MsgPrint("Lobon's favour protects you from wasting away!");
             SaveGame.MsgPrint(null);

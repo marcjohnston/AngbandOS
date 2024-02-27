@@ -395,7 +395,6 @@ internal class SaveGame
     /// <returns></returns>
     public bool Studies<T>() where T : Realm => (PrimaryRealm != null && typeof(T).IsAssignableFrom(PrimaryRealm.GetType())) || (SecondaryRealm != null && typeof(T).IsAssignableFrom(SecondaryRealm.GetType()));
 
-    public Religion Religion = new Religion();
     public int SkillDigging;
     public int SkillDisarmTraps;
     public int SkillMelee;
@@ -647,6 +646,15 @@ internal class SaveGame
 
         Quests = new List<Quest>();
         InitializeAllocationTables();
+
+        _gods = new Dictionary<GodName, God>
+        {
+            { GodName.Lobon, new God(GodName.Lobon) },
+            { GodName.Nath_Horthah, new God(GodName.Nath_Horthah) },
+            { GodName.Hagarg_Ryonis, new God(GodName.Hagarg_Ryonis) },
+            { GodName.Tamash, new God(GodName.Tamash) },
+            { GodName.Zo_Kalar, new God(GodName.Zo_Kalar) }
+        };
     }
 
     public bool GetBool(string prompt, out bool value)
@@ -3602,7 +3610,7 @@ internal class SaveGame
         }
         if (GameTime.IsMidnight)
         {
-            Religion.DecayFavour();
+            DecayFavour();
             SingletonRepository.FlaggedActions.Get(nameof(UpdateHealthFlaggedAction)).Set();
             SingletonRepository.FlaggedActions.Get(nameof(UpdateManaFlaggedAction)).Set();
             foreach (Town town in SingletonRepository.Towns)
@@ -13660,7 +13668,7 @@ internal class SaveGame
         }
         if (Health < 0)
         {
-            if (DieRoll(10) <= Religion.GetNamedDeity(GodName.Zo_Kalar).AdjustedFavour)
+            if (DieRoll(10) <= GetNamedDeity(GodName.Zo_Kalar).AdjustedFavour)
             {
                 MsgPrint("Zo-Kalar's favour saves you from death!");
                 Health += damage;
@@ -13747,7 +13755,7 @@ internal class SaveGame
             MsgPrint($"You feel {Constants.DescStatNeg[stat]} for a moment, but the feeling passes.");
             return true;
         }
-        if (DieRoll(10) <= Religion.GetNamedDeity(GodName.Lobon).AdjustedFavour)
+        if (DieRoll(10) <= GetNamedDeity(GodName.Lobon).AdjustedFavour)
         {
             MsgPrint($"You feel {Constants.DescStatNeg[stat]} for a moment, but Lobon's favour protects you.");
             return true;
@@ -17257,4 +17265,100 @@ internal class SaveGame
         }
     }
 
+    private const int DecayRate = 10;
+    private const int PatronRestingFavour = 30;
+    private readonly Dictionary<GodName, God> _gods;
+    private GodName _patron;
+
+    public GodName Deity
+    {
+        get
+        {
+            return _patron;
+        }
+        set
+        {
+            _patron = value;
+            if (_patron == GodName.None)
+            {
+                foreach (KeyValuePair<GodName, God> pair in _gods)
+                {
+                    pair.Value.IsPatron = false;
+                    pair.Value.RestingFavour = 0;
+                    pair.Value.Favour = 0;
+                }
+            }
+            else
+            {
+                foreach (KeyValuePair<GodName, God> pair in _gods)
+                {
+                    if (pair.Key == _patron)
+                    {
+                        pair.Value.IsPatron = true;
+                        pair.Value.RestingFavour = PatronRestingFavour * 4;
+                        pair.Value.Favour = PatronRestingFavour * 4;
+                    }
+                    else
+                    {
+                        pair.Value.IsPatron = false;
+                        pair.Value.RestingFavour = -PatronRestingFavour;
+                        pair.Value.Favour = -PatronRestingFavour;
+                    }
+                }
+            }
+        }
+    }
+
+    public void AddFavour(GodName godName, int amount)
+    {
+        foreach (KeyValuePair<GodName, God> pair in _gods)
+        {
+            if (pair.Key == godName)
+            {
+                pair.Value.Favour += (4 * amount);
+            }
+            else
+            {
+                pair.Value.Favour -= amount;
+            }
+        }
+    }
+
+    public void DecayFavour()
+    {
+        var max = 0;
+        var isMax = GodName.None;
+        foreach (KeyValuePair<GodName, God> pair in _gods)
+        {
+            if (pair.Value.Favour - pair.Value.RestingFavour > max)
+            {
+                max = pair.Value.Favour - pair.Value.RestingFavour;
+                isMax = pair.Key;
+            }
+        }
+        if (isMax != GodName.None)
+        {
+            var decrement = Math.Max((max / DecayRate), 1);
+            AddFavour(isMax, -decrement);
+        }
+    }
+
+    public List<God> GetAllDeities()
+    {
+        return _gods.Values.ToList();
+    }
+
+    public God GetNamedDeity(GodName godName)
+    {
+        return _gods[godName];
+    }
+
+    public God GetPatronDeity()
+    {
+        if (_patron == GodName.None)
+        {
+            return null;
+        }
+        return _gods[_patron];
+    }
 }
