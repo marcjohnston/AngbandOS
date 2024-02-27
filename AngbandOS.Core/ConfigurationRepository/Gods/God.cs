@@ -5,7 +5,9 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Pantheon;
+using System.Text.Json;
+
+namespace AngbandOS.Core.Gods;
 
 [Serializable]
 internal abstract class God : IGetKey<string>
@@ -20,10 +22,6 @@ internal abstract class God : IGetKey<string>
     public abstract string ShortName { get; }
     private const int PatronMultiplier = 2;
 
-    private int _favor = 0;
-    private bool _isPatron;
-    private int _restingFavor = 0;
-
     public int AdjustedFavour
     {
         get
@@ -37,9 +35,9 @@ internal abstract class God : IGetKey<string>
         }
     }
 
-    public int Favor { get => _favor; set => _favor = value; }
-    public bool IsPatron { get => _isPatron; internal set => _isPatron = value; }
-    public int RestingFavor { get => _restingFavor; set => _restingFavor = value; }
+    public int Favor { get; set; }
+    public bool IsPatron { get; set; }
+    public int RestingFavor { get; set; }
 
     public abstract string FavorDescription { get; }
 
@@ -53,6 +51,13 @@ internal abstract class God : IGetKey<string>
 
     public string ToJson()
     {
-        return "";
+        GodDefinition definition = new GodDefinition()
+        {
+            LongName = LongName,
+            ShortName = ShortName,
+            Key = Key,
+            FavorDescription = FavorDescription
+        };
+        return JsonSerializer.Serialize<GodDefinition>(definition);
     }
 }

@@ -12,18 +12,18 @@ internal class GodsRepository : DictionaryRepository<string, God>
 {
     public GodsRepository(SaveGame saveGame) : base(saveGame) { }
 
-    //public override void Load()
-    //{
-    //    if (SaveGame.Configuration.Attacks == null)
-    //    {
-    //        base.Load();
-    //    }
-    //    else
-    //    {
-    //        foreach (AttackDefinition definition in SaveGame.Configuration.Attacks)
-    //        {
-    //            Add(new GenericAttack(SaveGame, definition));
-    //        }
-    //    }
-    //}
+    public override void Load()
+    {
+        if (SaveGame.Configuration.Gods == null)
+        {
+            base.Load();
+        }
+        else
+        {
+            foreach (GodDefinition definition in SaveGame.Configuration.Gods)
+            {
+                Add(new GenericGod(SaveGame, definition));
+            }
+        }
+    }
 }
