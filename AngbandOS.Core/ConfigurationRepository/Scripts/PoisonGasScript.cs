@@ -23,7 +23,7 @@ internal class PoisonGasScript : Script, IScript
         if (!SaveGame.HasPoisonResistance && SaveGame.TimedPoisonResistance.TurnsRemaining == 0)
         {
             // Hagarg Ryonis may save you from the poison
-            if (SaveGame.DieRoll(10) <= SaveGame.GetNamedDeity(GodName.Hagarg_Ryonis).AdjustedFavour)
+            if (SaveGame.DieRoll(10) <= SaveGame.SingletonRepository.Gods.Get(nameof(HagargRyonisGod)).AdjustedFavour)
             {
                 SaveGame.MsgPrint("Hagarg Ryonis's favour protects you!");
             }

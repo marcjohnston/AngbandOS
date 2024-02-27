@@ -27,7 +27,7 @@ internal class UpdateHealthFlaggedAction : FlaggedAction
         {
             mhp += 30;
         }
-        var mult = SaveGame.GetNamedDeity(Pantheon.GodName.Nath_Horthah).AdjustedFavour + 10;
+        var mult = SaveGame.SingletonRepository.Gods.Get(nameof(NathHorthahGod)).AdjustedFavour + 10;
         mhp *= mult;
         mhp /= 10;
         if (SaveGame.MaxHealth != mhp)

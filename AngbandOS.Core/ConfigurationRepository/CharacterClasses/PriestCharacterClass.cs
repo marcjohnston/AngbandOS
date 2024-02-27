@@ -67,27 +67,27 @@ internal class PriestCharacterClass : BaseCharacterClass
     };
     public override bool WorshipsADeity => true;
 
-    public override GodName DefaultDeity(Realm? realm)
+    public override God? DefaultDeity(Realm? realm)
     {
         switch (realm)
         {
             case NatureRealm:
-                return GodName.Hagarg_Ryonis;
+                return SaveGame.SingletonRepository.Gods.Get(nameof(HagargRyonisGod));
 
             case FolkRealm:
-                return GodName.Zo_Kalar;
+                return SaveGame.SingletonRepository.Gods.Get(nameof(ZoKalarGod));
 
             case ChaosRealm:
-                return GodName.Nath_Horthah;
+                return SaveGame.SingletonRepository.Gods.Get(nameof(NathHorthahGod));
 
             case CorporealRealm:
-                return GodName.Lobon;
+                return SaveGame.SingletonRepository.Gods.Get(nameof(LobonGod));
 
             case TarotRealm:
-                return GodName.Tamash;
+                return SaveGame.SingletonRepository.Gods.Get(nameof(TamashGod));
 
             default:
-                return GodName.None;
+                return null;
         }
     }
 

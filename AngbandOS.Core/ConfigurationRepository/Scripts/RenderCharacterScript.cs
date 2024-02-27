@@ -524,10 +524,10 @@ internal class RenderCharacterScript : Script, IScript, IRepeatableScript
             SaveGame.Screen.Print(ColorEnum.Brown, SaveGame.GooPatron.LongName, 7, 15);
         }
         // Priests get a deity
-        if (SaveGame.Deity != GodName.None)
+        if (SaveGame.God != null)
         {
             SaveGame.Screen.Print(ColorEnum.Blue, "Deity       :", 7, 1);
-            SaveGame.Screen.Print(ColorEnum.Brown, SaveGame.GetPatronDeity().LongName, 7, 15);
+            SaveGame.Screen.Print(ColorEnum.Brown, SaveGame.God.LongName, 7, 15);
         }
         SaveGame.Screen.Print(ColorEnum.Blue, "Birthday", 2, 32);
         string dateBuff = SaveGame.GameTime.BirthdayText.PadLeft(8);

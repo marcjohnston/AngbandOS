@@ -134,7 +134,7 @@ internal abstract class BaseCharacterClass : IGetKey<string>
     /// <summary>
     /// Returns the default deity that the character class worships.  This is used when randomly choosing a CharacterClass.  Defaults to None.
     /// </summary>
-    public virtual GodName DefaultDeity(Realm? realm) => GodName.None;
+    public virtual God? DefaultDeity(Realm? realm) => null;
 
     /// <summary>
     /// Gains the experience when the character class destroys a spell book.  Derived classes must determine if the character class gains experience when they destroy a

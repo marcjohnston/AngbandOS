@@ -354,7 +354,7 @@ internal class JournalScript : Script, IScript, IRepeatableScript, IStoreScript
         SaveGame.Screen.Print(ColorEnum.Blue, "======================", 1, 1);
         int row = 3;
         God patron = null;
-        foreach (var deity in SaveGame.GetAllDeities())
+        foreach (var deity in SaveGame.SingletonRepository.Gods)
         {
             var text = deity.ShortName;
             if (deity.IsPatron)
@@ -365,15 +365,15 @@ internal class JournalScript : Script, IScript, IRepeatableScript, IStoreScript
             switch (adjusted)
             {
                 case 0:
-                    if (deity.Favour < -1000)
+                    if (deity.Favor < -1000)
                     {
                         text += " hates you";
                     }
-                    else if (deity.Favour < -100)
+                    else if (deity.Favor < -100)
                     {
                         text += " dislikes you";
                     }
-                    else if (deity.Favour < -20)
+                    else if (deity.Favor < -20)
                     {
                         text += " is annoyed by you";
                     }
@@ -425,28 +425,7 @@ internal class JournalScript : Script, IScript, IRepeatableScript, IStoreScript
             }
             if (adjusted > 0)
             {
-                switch (deity.Name)
-                {
-                    case GodName.Lobon:
-                        text += $" ({adjusted * 10}% chance to avoid ability drain)";
-                        break;
-
-                    case GodName.Nath_Horthah:
-                        text += $" (+{adjusted * 10}% max health)";
-                        break;
-
-                    case GodName.Hagarg_Ryonis:
-                        text += $" ({adjusted * 10}% chance to avoid poison/life drain)";
-                        break;
-
-                    case GodName.Tamash:
-                        text += $" (+{adjusted * 10}% max mana)";
-                        break;
-
-                    case GodName.Zo_Kalar:
-                        text += $" ({adjusted * 10}% chance to avoid death)";
-                        break;
-                }
+                text += String.Format(deity.FavorDescription, adjusted * 10);
             }
             text += ".";
             SaveGame.Screen.Print(ColorEnum.Blue, text, row, 1);

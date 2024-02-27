@@ -7,12 +7,11 @@
 
 namespace AngbandOS.Core.Pantheon;
 
-internal enum GodName
+[Serializable]
+internal class LobonGod : God
 {
-    None,
-    Lobon,
-    Nath_Horthah,
-    Hagarg_Ryonis,
-    Tamash,
-    Zo_Kalar
+    private LobonGod(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    public override string LongName => "Lobon, god of youth";
+    public override string ShortName => "Lobon";
+    public override string FavorDescription => " ({0}% chance to avoid ability drain)";
 }

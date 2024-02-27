@@ -18,12 +18,12 @@ internal class SacrificeItemScript : Script, IStoreScript
     /// <returns></returns>
     public void ExecuteStoreScript(StoreCommandEvent storeCommandEvent)
     {
-        var godName = GetDestinationTown();
-        if (godName == GodName.None)
+        God? god = GetDestinationTown();
+        if (god == null)
         {
             return;
         }
-        var deity = SaveGame.GetNamedDeity(godName);
+        God? deity = god;
         string pmt = "Sacrifice which item? ";
         if (!SaveGame.SelectItem(out Item? oPtr, pmt, true, true, false, null))
         {
@@ -63,7 +63,7 @@ internal class SacrificeItemScript : Script, IStoreScript
         }
         var favour = finalAsk / 10;
         var oldFavour = deity.AdjustedFavour;
-        SaveGame.AddFavour(godName, favour);
+        SaveGame.AddFavor(god, favour);
         var newFavour = deity.AdjustedFavour;
         var change = newFavour - oldFavour;
         if (change < 0)
@@ -94,18 +94,18 @@ internal class SacrificeItemScript : Script, IStoreScript
         SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateManaFlaggedAction)).Set();
     }
 
-    private GodName GetDestinationTown()
+    private God? GetDestinationTown()
     {
         ScreenBuffer savedScreen = SaveGame.Screen.Clone();
         try
         {
-            var deities = SaveGame.GetAllDeities();
+            //var deities = SaveGame.GetAllDeities();
             var names = new List<string>();
             var keys = new List<char>();
-            foreach (var deity in deities)
+            foreach (God god in SaveGame.SingletonRepository.Gods)
             {
-                names.Add(deity.LongName);
-                keys.Add(deity.LongName[0]);
+                names.Add(god.LongName);
+                keys.Add(god.LongName[0]);
             }
             names.Sort();
             keys.Sort();
@@ -122,18 +122,18 @@ internal class SacrificeItemScript : Script, IStoreScript
                 {
                     if (choice == c)
                     {
-                        foreach (var deity in deities)
+                        foreach (God god in SaveGame.SingletonRepository.Gods)
                         {
-                            if (deity.ShortName.StartsWith(choice.ToString()))
+                            if (god.ShortName.StartsWith(choice.ToString()))
                             {
-                                return deity.Name;
+                                return god;
                             }
                         }
-                        return GodName.None;
+                        return null;
                     }
                 }
             }
-            return GodName.None;
+            return null;
 
         }
         finally

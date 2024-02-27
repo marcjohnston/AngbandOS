@@ -87,7 +87,7 @@ internal class IntroductionBirthStage : BirthStage
 
     private BirthStage GoForward(int index)
     {
-        SaveGame.Deity = GodName.None;
+        SaveGame.God = null;
         if (index == 1) // Random
         {
             SaveGame.BaseCharacterClass = SaveGame.SingletonRepository.CharacterClasses.ToWeightedRandom().ChooseOrDefault();
@@ -106,7 +106,7 @@ internal class IntroductionBirthStage : BirthStage
             SaveGame.SecondaryRealm = new WeightedRandom<Realm>(SaveGame, SaveGame.BaseCharacterClass.RemainingAvailableSecondaryRealms()).ChooseOrDefault();
             if (SaveGame.BaseCharacterClass.WorshipsADeity)
             {
-                SaveGame.Deity = SaveGame.BaseCharacterClass.DefaultDeity(SaveGame.SecondaryRealm);
+                SaveGame.God = SaveGame.BaseCharacterClass.DefaultDeity(SaveGame.SecondaryRealm);
             }
 
             Gender[] availableRandomGenders = SaveGame.SingletonRepository.Genders.Where(_gender => _gender.CanBeRandomlySelected).ToArray();
@@ -123,7 +123,7 @@ internal class IntroductionBirthStage : BirthStage
             SaveGame.GetFirstLevelMutation = SaveGame.Race.AutomaticallyGainsFirstLevelMutationAtBirth;
             SaveGame.PrimaryRealm = SaveGame._prevPrimaryRealm;
             SaveGame.SecondaryRealm = SaveGame._prevSecondaryRealm;
-            SaveGame.Deity = SaveGame.BaseCharacterClass.DefaultDeity(SaveGame.SecondaryRealm);
+            SaveGame.God = SaveGame.BaseCharacterClass.DefaultDeity(SaveGame.SecondaryRealm);
             SaveGame.Gender = SaveGame._prevSex;
             SaveGame.Name = SaveGame._prevName;
             SaveGame.Generation = SaveGame._prevGeneration + 1;

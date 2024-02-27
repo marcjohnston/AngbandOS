@@ -19,6 +19,7 @@ internal class ConfirmationBirthStage : BirthStage
         SaveGame.GetAhw();
         SaveGame.GetHistory();
         SaveGame.GetMoney();
+        SaveGame.RefreshGods();
 
         SaveGame.Talents = new List<Talent>();
         foreach (Talent talent in SaveGame.SingletonRepository.Talents)

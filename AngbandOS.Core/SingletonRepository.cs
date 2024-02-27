@@ -39,6 +39,7 @@ internal class SingletonRepository
     public FunnyDescriptionsRepository FunnyDescriptions;
     public GameCommandsRepository GameCommands;
     public GendersRepository Genders;
+    public GodsRepository Gods;
     public HelpGroupsRepository HelpGroups;
     public HorrificDescriptionsRepository HorrificDescriptions;
     public InsultPlayerAttacksRepository InsultPlayerAttacks;
@@ -150,6 +151,7 @@ internal class SingletonRepository
         FunnyDescriptions = AddRepository<FunnyDescriptionsRepository>(new FunnyDescriptionsRepository(SaveGame));
         GameCommands = AddRepository<GameCommandsRepository>(new GameCommandsRepository(SaveGame));
         Genders = AddRepository<GendersRepository>(new GendersRepository(SaveGame));
+        Gods = AddRepository<GodsRepository>(new GodsRepository(SaveGame));
         HelpGroups = AddRepository<HelpGroupsRepository>(new HelpGroupsRepository(SaveGame));
         HorrificDescriptions = AddRepository<HorrificDescriptionsRepository>(new HorrificDescriptionsRepository(SaveGame));
         InsultPlayerAttacks = AddRepository<InsultPlayerAttacksRepository>(new InsultPlayerAttacksRepository(SaveGame));
