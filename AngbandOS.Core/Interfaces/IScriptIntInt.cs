@@ -5,9 +5,9 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core;
+namespace AngbandOS.Core.Interfaces;
 
-internal interface ISuccessfulScript
+internal interface IScriptIntInt
 {
-    bool ExecuteSuccessfulScript();
+    void ExecuteScriptIntInt(int value1, int value2);
 }

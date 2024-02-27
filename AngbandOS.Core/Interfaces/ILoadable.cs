@@ -5,12 +5,13 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core;
+namespace AngbandOS.Core.Interfaces;
 
 /// <summary>
-/// Represents the interface a script needs to implement for it available when the player is in a store.
+/// Represents the interface a singleton repository entity needs to implement so that it can participate in the load and bind phases.
 /// </summary>
-internal interface IStoreScript
+internal interface ILoadable
 {
-    void ExecuteStoreScript(StoreCommandEvent storeCommandEvent);
+    void Load();
+    void Bind();
 }

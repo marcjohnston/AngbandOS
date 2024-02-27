@@ -5,13 +5,9 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core;
+namespace AngbandOS.Core.Interfaces;
 
-internal interface IScript
+internal interface IItemsCanBeActivated
 {
-    /// <summary>
-    /// Execute the script.
-    /// </summary>
-    /// <returns></returns>
-    void ExecuteScript();
+    void ActivateItem(Item item);
 }
