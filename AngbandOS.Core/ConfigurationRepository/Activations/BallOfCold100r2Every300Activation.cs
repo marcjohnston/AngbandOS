@@ -11,9 +11,9 @@ namespace AngbandOS.Core.Activations;
 /// Shoot a frost ball that does 100 damage.
 /// </summary>
 [Serializable]
-internal class BaCold2Activation : DirectionalActivation
+internal class BallOfCold100r2Every300Activation : DirectionalActivation
 {
-    private BaCold2Activation(SaveGame saveGame) : base(saveGame) { }
+    private BallOfCold100r2Every300Activation(SaveGame saveGame) : base(saveGame) { }
     public override int RandomChance => 0; // TODO: Confirm this artifact does not have a corresponding random chance.  It is only used with biased artifacts.
 
     public override string? PreActivationMessage => "Your {0} glows an intense blue...";
@@ -29,5 +29,5 @@ internal class BaCold2Activation : DirectionalActivation
     public override int Value => 1250;
     public override string Name => "Ball of cold (100)";
 
-    public override string Description => $"{Name.ToLower()} every 300 turns";
+    public override string Frequency => "300";
 }
