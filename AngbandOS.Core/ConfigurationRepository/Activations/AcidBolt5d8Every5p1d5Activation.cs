@@ -11,9 +11,9 @@ namespace AngbandOS.Core.Activations;
 /// Shoot an acid bolt that does 5d8 damage.
 /// </summary>
 [Serializable]
-internal class BoAcid1Activation : DirectionalActivation
+internal class AcidBolt5d8Every5p1d5Activation : DirectionalActivation
 {
-    private BoAcid1Activation(SaveGame saveGame) : base(saveGame) { }
+    private AcidBolt5d8Every5p1d5Activation(SaveGame saveGame) : base(saveGame) { }
     public override int RandomChance => 101;
 
     public override string? PreActivationMessage => "Your {0} is covered in acid...";
@@ -30,5 +30,5 @@ internal class BoAcid1Activation : DirectionalActivation
 
     public override string Name => "Acid bolt (5d8)";
 
-    public override string Description => $"{Name.ToLower()} every 5+d5 turns";
+    public override string Frequency => "5+d5";
 }
