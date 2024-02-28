@@ -11,9 +11,9 @@ namespace AngbandOS.Core.Activations;
 /// Shoot a frost ball that does 48 damage.
 /// </summary>
 [Serializable]
-internal class BaCold1Activation : DirectionalActivation
+internal class BallOfCold48r2Every400Activation : DirectionalActivation
 {
-    private BaCold1Activation(SaveGame saveGame) : base(saveGame) { }
+    private BallOfCold48r2Every400Activation(SaveGame saveGame) : base(saveGame) { }
     public override int RandomChance => 85;
 
     public override string? PreActivationMessage => "Your {0} is covered in frost...";
@@ -29,5 +29,5 @@ internal class BaCold1Activation : DirectionalActivation
     public override int Value => 750;
     public override string Name => "Ball of cold (48)";
 
-    public override string Description => $"{Name.ToLower()} every 400 turns";
+    public override string Frequency => "400";
 }
