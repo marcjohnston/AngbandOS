@@ -11,13 +11,13 @@ namespace AngbandOS.Core.Activations;
 /// Turn an item to gold.
 /// </summary>
 [Serializable]
-internal class AlchemyActivation : Activation
+internal class AlchemyEvery500Activation : Activation
 {
-    private AlchemyActivation(SaveGame saveGame) : base(saveGame) { }
+    private AlchemyEvery500Activation(SaveGame saveGame) : base(saveGame) { }
 
     public override int RandomChance => 5;
 
-    public override string? PreActivationMessage => "It glows bright yellow...";
+    public override string? PreActivationMessage => "Your {0} glows bright yellow...";
 
     protected override bool OnActivate(Item item)
     {
@@ -28,6 +28,6 @@ internal class AlchemyActivation : Activation
 
     public override int Value => 10000;
 
-    public override string Name => "alchemy";
-    public override string Description => $"{Name} every 500 turns";
+    public override string Name => "Alchemy";
+    public override string Frequency => "500";
 }
