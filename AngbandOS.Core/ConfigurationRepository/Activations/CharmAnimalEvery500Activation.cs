@@ -8,27 +8,27 @@
 namespace AngbandOS.Core.Activations;
 
 /// <summary>
-/// Charm an animal.
+/// Charm multiple animals.
 /// </summary>
 [Serializable]
-internal class CharmAnimalActivation : DirectionalActivation
+internal class CharmAnimalEvery500Activation : Activation
 {
-    private CharmAnimalActivation(SaveGame saveGame) : base(saveGame) { }
-    public override int RandomChance => 50;
+    private CharmAnimalEvery500Activation(SaveGame saveGame) : base(saveGame) { }
+    public override int RandomChance => 25;
 
     public override string? PreActivationMessage => "";
 
-    public override int RechargeTime() => 300;
+    public override int RechargeTime() => 500;
 
-    protected override bool Activate(int direction)
+    protected override bool OnActivate(Item item)
     {
-        SaveGame.CharmAnimal(direction, SaveGame.ExperienceLevel);
+        SaveGame.RunScript(nameof(CharmOthersScript));
         return true;
     }
 
-    public override int Value => 7500;
+    public override int Value => 12500;
 
     public override string Name => "Charm animal";
 
-    public override string Description => $"{Name.ToLower()} every 300 turns";
+    public override string Frequency => "500";
 }
