@@ -28,8 +28,7 @@ internal class AppleJuicePotionItemFactory : PotionItemFactory
     public override int Weight => 4;
     public override bool Quaff()
     {
-        // Apple juice has no effect
-        SaveGame.MsgPrint("You feel less thirsty.");
+        SaveGame.RunScript(nameof(AppleJuiceScript));
         return true;
     }
 

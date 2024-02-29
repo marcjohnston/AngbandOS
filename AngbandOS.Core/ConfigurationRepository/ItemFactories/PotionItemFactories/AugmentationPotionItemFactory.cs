@@ -25,35 +25,7 @@ internal class AugmentationPotionItemFactory : PotionItemFactory
     public override int Weight => 4;
     public override bool Quaff()
     {
-        bool identified = false;
-
-        // Augmentation increases all ability scores
-        if (SaveGame.TryIncreasingAbilityScore(Ability.Strength))
-        {
-            identified = true;
-        }
-        if (SaveGame.TryIncreasingAbilityScore(Ability.Intelligence))
-        {
-            identified = true;
-        }
-        if (SaveGame.TryIncreasingAbilityScore(Ability.Wisdom))
-        {
-            identified = true;
-        }
-        if (SaveGame.TryIncreasingAbilityScore(Ability.Dexterity))
-        {
-            identified = true;
-        }
-        if (SaveGame.TryIncreasingAbilityScore(Ability.Constitution))
-        {
-            identified = true;
-        }
-        if (SaveGame.TryIncreasingAbilityScore(Ability.Charisma))
-        {
-            identified = true;
-        }
-
-        return identified;
+        return SaveGame.RunSuccessfulScript(nameof(AugmentScript));
     }
     public override Item CreateItem() => new Item(SaveGame, this);
 }
