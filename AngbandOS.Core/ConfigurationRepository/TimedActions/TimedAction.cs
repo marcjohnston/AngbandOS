@@ -38,7 +38,8 @@ internal abstract class TimedAction : IGetKey<string>
     public int TurnsRemaining => _turnsRemaining;
 
     /// <summary>
-    /// Adds (or subtracts) time from the timer.
+    /// Adds (or subtracts) time from the timer and returns true, if the action was noticed.  The action is noticed, if the timer was stopped.  The action is not
+    /// noticed, if the timer was already running.
     /// </summary>
     /// <param name="deltaValue"></param>
     /// <returns></returns>
@@ -91,7 +92,8 @@ internal abstract class TimedAction : IGetKey<string>
     }
 
     /// <summary>
-    /// Updates the timer associated with the action and returns true, if the action was noticed; false, otherwise.
+    /// Updates the timer associated with the action and returns true, if the action was noticed; false, otherwise.  The action is noticed when the timer is started
+    /// or stopped.  The action is not noticed when time is added to or subtracted from a running timer.
     /// </summary>
     /// <param name="turns"></param>
     /// <returns></returns>
@@ -125,6 +127,12 @@ internal abstract class TimedAction : IGetKey<string>
         return true;
     }
 
+    /// <summary>
+    /// Stops the timer associated with the action and returns true, if the action was noticed.  The action will be noticed, if the timer was running.  The action 
+    /// will not be noticed if the timer was already stopped.
+    /// </summary>
+    /// <param name="turns"></param>
+    /// <returns></returns>
     public virtual bool ResetTimer()
     {
         return SetTimer(0);

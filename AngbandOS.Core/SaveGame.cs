@@ -7799,6 +7799,13 @@ internal class SaveGame
         return castedScript.ExecuteSuccessfulScript();
     }
 
+    public bool RunNoticeableScript(string scriptName)
+    {
+        // Get the script from the singleton repository.
+        INoticeableScript? castedScript = (INoticeableScript)SingletonRepository.Scripts.Get(scriptName);
+        return castedScript.ExecuteNoticeableScript();
+    }
+
     public bool RunSuccessfulScriptInt(string scriptName, int value)
     {
         // Get the script from the singleton repository.
@@ -13399,6 +13406,11 @@ internal class SaveGame
         return false;
     }
 
+    /// <summary>
+    /// Adds a specific amount of health to the player up to the maximum health allows and returns true, if health was added; false, otherwise.
+    /// </summary>
+    /// <param name="num"></param>
+    /// <returns></returns>
     public bool RestoreHealth(int num)
     {
         if (Health < MaxHealth)

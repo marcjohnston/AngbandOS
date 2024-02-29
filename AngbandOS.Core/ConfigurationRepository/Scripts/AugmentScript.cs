@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class AugmentScript : Script, ISuccessfulScript
+internal class AugmentScript : Script, INoticeableScript
 {
     private AugmentScript(SaveGame saveGame) : base(saveGame) { }
 
@@ -16,7 +16,7 @@ internal class AugmentScript : Script, ISuccessfulScript
     /// Augments all ability scores and returns true, if any ability score was increased; false, otherwise.
     /// </summary>
     /// <returns></returns>
-    public bool ExecuteSuccessfulScript()
+    public bool ExecuteNoticeableScript()
     {
         bool identified = false;
 
@@ -46,13 +46,5 @@ internal class AugmentScript : Script, ISuccessfulScript
             identified = true;
         }
         return identified;
-    }
-
-    /// <summary>
-    /// Executes the script.
-    /// </summary>
-    /// <returns></returns>
-    public void ExecuteScript()
-    {
     }
 }

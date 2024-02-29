@@ -60,10 +60,11 @@ internal abstract class PotionItemFactory : ItemFactory, IFlavorFactory
 
     public override bool EasyKnow => true;
     public override int PackSort => 11;
+
     /// <summary>
-    /// Have a potion affect the player.  Activates the potion effect.
+    /// Activates the potion effect and returns true, if the effect is noticed; false, otherwise.
     /// </summary>
-    /// <returns> True, if drinking the potion identified it; false, to keep the potion as unidentified.</returns>
+    /// <returns></returns>
     public abstract bool Quaff();
 
     /// <summary>
