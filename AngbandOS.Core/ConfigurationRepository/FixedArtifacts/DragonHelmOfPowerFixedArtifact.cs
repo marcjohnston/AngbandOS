@@ -8,19 +8,14 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class DragonHelmOfPowerFixedArtifact : FixedArtifact, IFixedArtifactActivatible
+internal class DragonHelmOfPowerFixedArtifact : FixedArtifact
 {
     private DragonHelmOfPowerFixedArtifact(SaveGame saveGame) : base(saveGame) { }
 
     protected override string BaseItemFactoryName => nameof(DragonHelmArmorItemFactory);
 
     // Dragon Helm and Terror Mask cause fear
-    public void ActivateItem(Item item)
-    {
-        SaveGame.TurnMonsters(40 + SaveGame.ExperienceLevel);
-        item.RechargeTimeLeft = 3 * (SaveGame.ExperienceLevel + 10);
-    }
-    public string DescribeActivationEffect => "rays of fear in every direction";
+    protected override string? ActivationName => nameof(Terror40xEvery3xp10Activation);
 
     public override ColorEnum Color => ColorEnum.BrightGreen;
     public override string Name => "The Dragon Helm of Power";

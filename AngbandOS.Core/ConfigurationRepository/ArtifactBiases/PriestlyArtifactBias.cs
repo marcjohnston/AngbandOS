@@ -37,27 +37,27 @@ internal class PriestlyArtifactBias : ArtifactBias
     {
         if (SaveGame.DieRoll(13) == 1)
         {
-            return SaveGame.SingletonRepository.Activations.Get(nameof(CharmUndeadActivation));
+            return SaveGame.SingletonRepository.Activations.Get(nameof(EnslaveUndead1xEvery333Activation));
         }
         else if (SaveGame.DieRoll(12) == 1)
         {
-            return SaveGame.SingletonRepository.Activations.Get(nameof(BanishEvilActivation));
+            return SaveGame.SingletonRepository.Activations.Get(nameof(BanishEvilEvery250p1d250Activation));
         }
         else if (SaveGame.DieRoll(11) == 1)
         {
-            return SaveGame.SingletonRepository.Activations.Get(nameof(DispEvilActivation));
+            return SaveGame.SingletonRepository.Activations.Get(nameof(DispelEvil5xEvery300p1d300Activation));
         }
         else if (SaveGame.DieRoll(10) == 1)
         {
-            return SaveGame.SingletonRepository.Activations.Get(nameof(ProtEvilActivation));
+            return SaveGame.SingletonRepository.Activations.Get(nameof(ProtectionFromEvilActivation));
         }
         else if (SaveGame.DieRoll(9) == 1)
         {
-            return SaveGame.SingletonRepository.Activations.Get(nameof(Cure1000Activation));
+            return SaveGame.SingletonRepository.Activations.Get(nameof(Heal1000Every888Activation));
         }
         else if (SaveGame.DieRoll(8) == 1)
         {
-            return SaveGame.SingletonRepository.Activations.Get(nameof(Cure700Activation));
+            return SaveGame.SingletonRepository.Activations.Get(nameof(Heal700Every25Activation));
         }
         else if (SaveGame.DieRoll(7) == 1)
         {
@@ -69,7 +69,7 @@ internal class PriestlyArtifactBias : ArtifactBias
         }
         else
         {
-            return SaveGame.SingletonRepository.Activations.Get(nameof(CureMwActivation));
+            return SaveGame.SingletonRepository.Activations.Get(nameof(Heal4d8AndWoundsEvery3p1d3Activation));
         }
     }
 }

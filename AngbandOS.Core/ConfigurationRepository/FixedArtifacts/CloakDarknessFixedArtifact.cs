@@ -8,20 +8,14 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class CloakDarknessFixedArtifact : FixedArtifact, IFixedArtifactActivatible
+internal class CloakDarknessFixedArtifact : FixedArtifact
 {
     private CloakDarknessFixedArtifact(SaveGame saveGame) : base(saveGame) { }
 
     protected override string BaseItemFactoryName => nameof(ClothCloakCloakArmorItemFactory);
 
     // Darkness sends monsters to sleep
-    public void ActivateItem(Item item)
-    {
-        SaveGame.MsgPrint("Your cloak glows deep blue...");
-        SaveGame.SleepMonstersTouch();
-        item.RechargeTimeLeft = 55;
-    }
-    public string DescribeActivationEffect => "Sleep II every 55 turns";
+    protected override string? ActivationName => nameof(SleepActivation);
 
     public override ColorEnum Color => ColorEnum.Green;
     public override string Name => "The Cloak 'Darkness'";

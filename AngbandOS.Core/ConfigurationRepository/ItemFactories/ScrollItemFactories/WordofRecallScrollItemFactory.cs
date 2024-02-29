@@ -8,9 +8,9 @@
 namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
-internal class WordofRecallScrollItemFactory : ScrollItemFactory
+internal class WordOfRecallScrollItemFactory : ScrollItemFactory
 {
-    private WordofRecallScrollItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private WordOfRecallScrollItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
     public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(QuestionMarkSymbol));
     public override string Name => "Word of Recall";

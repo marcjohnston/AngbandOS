@@ -72,7 +72,7 @@ internal class RangerArtifactBias : ArtifactBias
     {
         if (SaveGame.DieRoll(20) == 1)
         {
-            return SaveGame.SingletonRepository.Activations.Get(nameof(CharmAnimalsActivation));
+            return SaveGame.SingletonRepository.Activations.Get(nameof(CharmAnimalEvery500Activation));
         }
         else if (SaveGame.DieRoll(7) == 1)
         {
@@ -80,11 +80,11 @@ internal class RangerArtifactBias : ArtifactBias
         }
         else if (SaveGame.DieRoll(6) == 1)
         {
-            return SaveGame.SingletonRepository.Activations.Get(nameof(CharmAnimalActivation));
+            return SaveGame.SingletonRepository.Activations.Get(nameof(CharmAnimal1xEvery300Activation));
         }
         else if (SaveGame.DieRoll(4) == 1)
         {
-            return SaveGame.SingletonRepository.Activations.Get(nameof(ResistAllActivation));
+            return SaveGame.SingletonRepository.Activations.Get(nameof(ResistAll40p1d40Activation));
         }
         else if (SaveGame.DieRoll(3) == 1)
         {
@@ -92,7 +92,7 @@ internal class RangerArtifactBias : ArtifactBias
         }
         else
         {
-            return SaveGame.SingletonRepository.Activations.Get(nameof(CurePoisonActivation));
+            return SaveGame.SingletonRepository.Activations.Get(nameof(RemoveFearAndPoisonEvery5Activation));
         }
     }
 }

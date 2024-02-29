@@ -30,5 +30,5 @@ internal class QuakeActivation : Activation
 
     public override string Name => "Earthquake (rad 10)";
 
-    public override string Description => $"{Name.ToLower()} every 50 turns";
+    public override string Frequency => "50";
 }

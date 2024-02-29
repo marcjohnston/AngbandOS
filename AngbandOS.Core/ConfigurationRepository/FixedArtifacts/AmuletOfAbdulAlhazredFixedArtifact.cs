@@ -8,20 +8,14 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class AmuletOfAbdulAlhazredFixedArtifact : FixedArtifact, IFixedArtifactActivatible
+internal class AmuletOfAbdulAlhazredFixedArtifact : FixedArtifact
 {
     private AmuletOfAbdulAlhazredFixedArtifact(SaveGame saveGame) : base(saveGame) { }
 
     protected override string BaseItemFactoryName => nameof(IngweAmuletJeweleryItemFactory);
 
     // Amulet of Abdul Alhazred dispels evil
-    public void ActivateItem(Item item)
-    {
-        SaveGame.MsgPrint("The amulet floods the area with goodness...");
-        SaveGame.RunScriptInt(nameof(DispelEvil4xScript), SaveGame.ExperienceLevel * 5);
-        item.RechargeTimeLeft = base.SaveGame.RandomLessThan(300) + 300;
-    }
-    public string DescribeActivationEffect => "dispel evil (x5) every 300+d300 turns";
+    protected override string? ActivationName => nameof(DispelEvil5xEvery300p1d300Activation);
 
     public override string Name => "The Amulet of Abdul Alhazred";
     public override int Ac => 0;

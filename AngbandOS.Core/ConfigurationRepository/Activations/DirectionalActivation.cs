@@ -35,7 +35,7 @@ internal abstract class DirectionalActivation : Activation
     }
 
     /// <summary>
-    /// Activates the Artifact with directional/aiming functionality.
+    /// Activates the artifact with directional/aiming functionality and returns false, if the activation was cancelled; true, otherwise.
     /// </summary>
     /// <param name="player"></param>
     /// <param name="level"></param>

@@ -51,12 +51,12 @@ internal abstract class Activation : IGetKey<string>
     public abstract int RechargeTime();
 
     /// <summary>
-    /// Returns the chance this ArtifactPower will be selected when being chosen randomly.  
+    /// Returns the chance the activation will be selected when being chosen randomly.  
     /// </summary>
     public abstract int RandomChance { get; }
 
     /// <summary>
-    /// Activates the artifact power; returning true, if the activation was successful.
+    /// Activates the artifact power; returning false, if the activation was cancelled by the user; true, otherwise.
     /// </summary>
     /// <param name="saveGame"></param>
     /// <returns></returns>
@@ -64,11 +64,11 @@ internal abstract class Activation : IGetKey<string>
 
     public bool Activate(Item item)
     {
-        if (!String.IsNullOrEmpty(PreActivationMessage))
+        if (PreActivationMessage != null)
         {
-            string itemClassName = item.Factory.ItemClass.Name;
-            string preActivationMessage = String.Format(PreActivationMessage, itemClassName);
-            SaveGame.MsgPrint(preActivationMessage);
+            string itemClassName = item.Factory.ItemClass.Name.ToLower();
+            string formattedPreActivationMessage = String.Format(PreActivationMessage, itemClassName);
+            SaveGame.MsgPrint(formattedPreActivationMessage);
         }
         if (OnActivate(item))
         {
@@ -79,12 +79,14 @@ internal abstract class Activation : IGetKey<string>
     }
 
     /// <summary>
-    /// Returns the gold value of the artifact power.
+    /// Returns the gold value of the activation.
     /// </summary>
     public abstract int Value { get; }
 
     /// <summary>
-    /// Returns the description of the artifact power.
+    /// Returns the description of the activation.
     /// </summary>
-    public abstract string Description { get; }
+    public string Description => $"{Name.ToLower()} every {Frequency} turns";
+
+    public abstract string Frequency { get; }
 }

@@ -43,5 +43,5 @@ internal class SummonUndeadActivation : Activation
 
     public override string Name => "Summon undead";
 
-    public override string Description => $"{Name.ToLower()} every 666+d333 turns";
+    public override string Frequency => "666+d333";
 }

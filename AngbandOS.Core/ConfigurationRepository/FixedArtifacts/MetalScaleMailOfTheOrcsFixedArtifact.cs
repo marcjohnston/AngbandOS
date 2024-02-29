@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class MetalScaleMailOfTheOrcsFixedArtifact : FixedArtifact, IFixedArtifactActivatible
+internal class MetalScaleMailOfTheOrcsFixedArtifact : FixedArtifact
 {
     private MetalScaleMailOfTheOrcsFixedArtifact(SaveGame saveGame) : base(saveGame) { }
 
@@ -21,14 +21,7 @@ internal class MetalScaleMailOfTheOrcsFixedArtifact : FixedArtifact, IFixedArtif
     }
 
     // Orc does Carnage
-    public void ActivateItem(Item item)
-    {
-        SaveGame.MsgPrint("Your armor glows deep blue...");
-        SaveGame.RunScript(nameof(GenocideScript));
-        item.RechargeTimeLeft = 500;
-    }
-    public string DescribeActivationEffect => "carnage every 500 turns";
-
+    protected override string? ActivationName => nameof(GenocideEvery500Activation);
 
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "The Metal Scale Mail of the Orcs";

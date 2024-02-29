@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Spells.Tarot;
 internal class TarotSpellAstralSpying : Spell
 {
     private TarotSpellAstralSpying(SaveGame saveGame) : base(saveGame) { }
-    protected override string? CastScriptName => nameof(AddTelepathy1d30p25Script);
+    protected override string? CastScriptName => nameof(AddTelepathy25p1d30Script);
 
     public override string Name => "Astral Spying";
 

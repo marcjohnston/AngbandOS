@@ -42,7 +42,7 @@ internal class MageArtifactBias : ArtifactBias
         }
         else
         {
-            return SaveGame.SingletonRepository.Activations.Get(nameof(EspActivation));
+            return SaveGame.SingletonRepository.Activations.Get(nameof(TemporaryEsp20p1d30Every200Activation));
         }
     }
 }

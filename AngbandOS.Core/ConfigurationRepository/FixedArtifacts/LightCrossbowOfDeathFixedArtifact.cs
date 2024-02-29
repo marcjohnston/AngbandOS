@@ -8,19 +8,15 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class LightCrossbowOfDeathFixedArtifact : FixedArtifact, IFixedArtifactActivatible
+internal class LightCrossbowOfDeathFixedArtifact : FixedArtifact
 {
     private LightCrossbowOfDeathFixedArtifact(SaveGame saveGame) : base(saveGame) { }
 
     protected override string BaseItemFactoryName => nameof(LightCrossbowBowWeaponItemFactory);
 
     // Death brands your bolts
-    public void ActivateItem(Item item)
-    {
-        SaveGame.MsgPrint("Your crossbow glows deep red...");
-        SaveGame.BrandBolts();
-        item.RechargeTimeLeft = 999;
-    }
+    protected override string? ActivationName => nameof(BrandBoltsEvery999Activation);
+
     public override void ApplyResistances(Item item)
     {
         if (SaveGame.DieRoll(2) == 1)

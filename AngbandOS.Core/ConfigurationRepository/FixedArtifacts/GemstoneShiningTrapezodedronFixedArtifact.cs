@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class GemstoneShiningTrapezodedronFixedArtifact : FixedArtifact, IFixedArtifactActivatible
+internal class GemstoneShiningTrapezodedronFixedArtifact : FixedArtifact
 {
     private GemstoneShiningTrapezodedronFixedArtifact(SaveGame saveGame) : base(saveGame) { }
 
@@ -16,22 +16,7 @@ internal class GemstoneShiningTrapezodedronFixedArtifact : FixedArtifact, IFixed
 
     // Shining Trapezohedron lights the entire level and recalls us, but drains
     // health to do so
-    public void ActivateItem(Item item)
-    {
-        SaveGame.MsgPrint("The gemstone flashes bright red!");
-        SaveGame.RunScript(nameof(LightScript));
-        SaveGame.MsgPrint("The gemstone drains your vitality...");
-        SaveGame.TakeHit(base.SaveGame.DiceRoll(3, 8), "the Gemstone 'Trapezohedron'");
-        SaveGame.DetectTraps();
-        SaveGame.DetectDoors();
-        SaveGame.DetectStairs();
-        if (SaveGame.GetCheck("Activate recall? "))
-        {
-            SaveGame.RunScript(nameof(ToggleRecallScript));
-        }
-        item.RechargeTimeLeft = base.SaveGame.RandomLessThan(20) + 20;
-    }
-    public string DescribeActivationEffect => "clairvoyance and recall, draining you";
+    protected override string? ActivationName => nameof(TrapezohedronGemstoneActivation);
 
     public override ColorEnum Color => ColorEnum.Red;
     public override string Name => "The Gemstone 'Shining Trapezodedron'";

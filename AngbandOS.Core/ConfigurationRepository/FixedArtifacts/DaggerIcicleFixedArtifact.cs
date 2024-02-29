@@ -8,24 +8,14 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class DaggerIcicleFixedArtifact : FixedArtifact, IFixedArtifactActivatible
+internal class DaggerIcicleFixedArtifact : FixedArtifact
 {
     private DaggerIcicleFixedArtifact(SaveGame saveGame) : base(saveGame) { }
 
     protected override string BaseItemFactoryName => nameof(DaggerWeaponItemFactory);
 
     // Icicle shoots a cold ball
-    public void ActivateItem(Item item)
-    {
-        SaveGame.MsgPrint("Your dagger is covered in frost...");
-        if (!SaveGame.GetDirectionWithAim(out int dir))
-        {
-            return;
-        }
-        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(ColdProjectile)), dir, 48, 2);
-        item.RechargeTimeLeft = base.SaveGame.RandomLessThan(5) + 5;
-    }
-    public string DescribeActivationEffect => "frost ball (48) every 5+d5 turns";
+    protected override string? ActivationName => nameof(BallOfCold48r2Every5p1d5Activation);
 
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "The Dagger 'Icicle'";

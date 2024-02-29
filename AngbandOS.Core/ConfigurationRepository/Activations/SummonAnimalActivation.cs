@@ -28,5 +28,5 @@ internal class SummonAnimalActivation : Activation
 
     public override string Name => "Summon animal";
 
-    public override string Description => $"{Name.ToLower()} every 200+d300 turns";
+    public override string Frequency => "200+d300";
 }

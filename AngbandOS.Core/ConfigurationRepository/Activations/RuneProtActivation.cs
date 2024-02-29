@@ -30,5 +30,5 @@ internal class RuneProtActivation : Activation
 
     public override string Name => "Rune of protection";
 
-    public override string Description => $"{Name.ToLower()} every 400 turns";
+    public override string Frequency => "400";
 }

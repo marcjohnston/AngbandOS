@@ -9,14 +9,16 @@ using AngbandOS.Core.Gods;
 
 namespace AngbandOS.Core.Scripts;
 
+/// <summary>
+/// Allows the player to choose a quantity of items to convert into gold.
+/// </summary>
 [Serializable]
 internal class AlchemyScript : Script, IScript, ISuccessfulScript
 {
     private AlchemyScript(SaveGame saveGame) : base(saveGame) { }
 
     /// <summary>
-    /// Allows the player to choose a quantity of items to convert into gold; returning false, if the player cancels any selection or confirmation;
-    /// true, if the process is successful or fails due to chance.
+    /// Executes the script returning false, if the player cancels the selection or confirmation; true, otherwise.
     /// </summary>
     /// <returns></returns>
     public bool ExecuteSuccessfulScript()

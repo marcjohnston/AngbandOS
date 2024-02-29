@@ -21,7 +21,7 @@ internal class ClairvoyanceScript : Script, IScript
         SaveGame.RunScript(nameof(LightScript));
         if (!SaveGame.HasTelepathy)
         {
-            SaveGame.RunScript(nameof(AddTelepathy1d30p25Script));
+            SaveGame.RunScript(nameof(AddTelepathy25p1d30Script));
         }
     }
 }

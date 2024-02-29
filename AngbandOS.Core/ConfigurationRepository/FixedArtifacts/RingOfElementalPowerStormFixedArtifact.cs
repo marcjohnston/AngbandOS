@@ -8,24 +8,15 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class RingOfElementalPowerStormFixedArtifact : FixedArtifact, IFixedArtifactActivatible
+internal class RingOfElementalPowerStormFixedArtifact : FixedArtifact
 {
     private RingOfElementalPowerStormFixedArtifact(SaveGame saveGame) : base(saveGame) { }
 
     protected override string BaseItemFactoryName => nameof(VilyaRingItemFactory);
 
     // Ring of Elemental Lightning casts a lightning ball
-    public void ActivateItem(Item item)
-    {
-        SaveGame.MsgPrint("The ring glows deep blue...");
-        if (!SaveGame.GetDirectionWithAim(out int dir))
-        {
-            return;
-        }
-        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(ElecProjectile)), dir, 250, 3);
-        item.RechargeTimeLeft = base.SaveGame.RandomLessThan(425) + 425;
-    }
-    public string DescribeActivationEffect => "large lightning ball (250) every 425+d425 turns";
+    protected override string? ActivationName => nameof(LargeLightningBall250Every425p1d425Activation);
+
     public override void ApplyResistances(Item item)
     {
         item.RandomPower = SaveGame.SingletonRepository.Powers.ToWeightedRandom(_power => _power.IsAbility == true).Choose();

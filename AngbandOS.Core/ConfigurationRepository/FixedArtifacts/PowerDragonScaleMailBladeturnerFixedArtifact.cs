@@ -8,34 +8,14 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class PowerDragonScaleMailBladeturnerFixedArtifact : FixedArtifact, IFixedArtifactActivatible
+internal class PowerDragonScaleMailBladeturnerFixedArtifact : FixedArtifact
 {
     private PowerDragonScaleMailBladeturnerFixedArtifact(SaveGame saveGame) : base(saveGame) { }
 
     protected override string BaseItemFactoryName => nameof(PowerDragonScaleMailArmorItemFactory);
 
     // Bladeturner heals you and gives you timed resistances
-    public void ActivateItem(Item item)
-    {
-        if (!SaveGame.GetDirectionWithAim(out int dir))
-        {
-            return;
-        }
-        SaveGame.MsgPrint("You breathe the elements.");
-        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(MissileProjectile)), dir, 300, 4);
-        SaveGame.MsgPrint("Your armor glows many colors...");
-        SaveGame.TimedFear.ResetTimer();
-        SaveGame.TimedSuperheroism.AddTimer(base.SaveGame.DieRoll(50) + 50);
-        SaveGame.RestoreHealth(30);
-        SaveGame.TimedBlessing.AddTimer(base.SaveGame.DieRoll(50) + 50);
-        SaveGame.TimedAcidResistance.AddTimer(base.SaveGame.DieRoll(50) + 50);
-        SaveGame.TimedLightningResistance.AddTimer(base.SaveGame.DieRoll(50) + 50);
-        SaveGame.TimedFireResistance.AddTimer(base.SaveGame.DieRoll(50) + 50);
-        SaveGame.TimedColdResistance.AddTimer(base.SaveGame.DieRoll(50) + 50);
-        SaveGame.TimedPoisonResistance.AddTimer(base.SaveGame.DieRoll(50) + 50);
-        item.RechargeTimeLeft = 400;
-    }
-    public string DescribeActivationEffect => "breathe elements (300), berserk rage, bless, and resistance";
+    protected override string? ActivationName => nameof(PowerDragonEvery400Activation);
 
     public override ColorEnum Color => ColorEnum.Purple;
     public override string Name => "The Power Dragon Scale Mail 'Bladeturner'";

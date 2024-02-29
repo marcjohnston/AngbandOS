@@ -62,7 +62,7 @@ internal partial class AlchemistStoreFactory : StoreFactory
         new StoreStockManifestDefinition(nameof(TeleportationScrollItemFactory), 3),
         new StoreStockManifestDefinition(nameof(TrapDetectionScrollItemFactory)),
         new StoreStockManifestDefinition(nameof(TreasureDetectionScrollItemFactory)),
-        new StoreStockManifestDefinition(nameof(WordofRecallScrollItemFactory), 4),
+        new StoreStockManifestDefinition(nameof(WordOfRecallScrollItemFactory), 4),
     };
 
     /// <summary>

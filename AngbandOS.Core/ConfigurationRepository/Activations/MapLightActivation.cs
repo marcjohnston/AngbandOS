@@ -31,5 +31,5 @@ internal class MapLightActivation : Activation
 
     public override string Name => "Light (dam 2d15) & map area";
 
-    public override string Description => $"{Name.ToLower()} every 50+d50 turns";
+    public override string Frequency => "50+d50";
 }

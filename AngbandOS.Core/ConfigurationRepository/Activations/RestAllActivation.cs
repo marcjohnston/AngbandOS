@@ -36,5 +36,5 @@ internal class RestAllActivation : Activation
 
     public override string Name => "Restore stats and life levels";
 
-    public override string Description => $"{Name.ToLower()} every 750 turns";
+    public override string Frequency => "750";
 }

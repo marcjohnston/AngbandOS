@@ -8,51 +8,15 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class LongSwordOfKarakalFixedArtifact : FixedArtifact, IFixedArtifactActivatible
+internal class LongSwordOfKarakalFixedArtifact : FixedArtifact
 {
     private LongSwordOfKarakalFixedArtifact(SaveGame saveGame) : base(saveGame) { }
 
     protected override string BaseItemFactoryName => nameof(LongSwordWeaponItemFactory);
 
     // Karakal teleports you randomly
-    public void ActivateItem(Item item)
-    {
-        switch (base.SaveGame.DieRoll(13))
-        {
-            case 1:
-            case 2:
-            case 3:
-            case 4:
-            case 5:
-                SaveGame.RunScriptInt(nameof(TeleportSelfScript), 10);
-                break;
+    protected override string? ActivationName => nameof(GetawayEvery35Activation);
 
-            case 6:
-            case 7:
-            case 8:
-            case 9:
-            case 10:
-                SaveGame.RunScriptInt(nameof(TeleportSelfScript), 222);
-                break;
-
-            case 11:
-            case 12:
-                SaveGame.RunScript(nameof(CreateStairsScript));
-                break;
-
-            default:
-                if (SaveGame.GetCheck("Leave this level? "))
-                {
-                    {
-                        SaveGame.DoCmdSaveGame(true);
-                    }
-                    SaveGame.NewLevelFlag = true;
-                    SaveGame.CameFrom = LevelStart.StartRandom;
-                }
-                break;
-        }
-        item.RechargeTimeLeft = 35;
-    }
     public string DescribeActivationEffect => "a getaway every 35 turns";
 
     public override ColorEnum Color => ColorEnum.BrightWhite;

@@ -71,7 +71,7 @@ internal class WarriorArtifactBias : ArtifactBias
         }
         else
         {
-            return SaveGame.SingletonRepository.Activations.Get(nameof(BerserkActivation));
+            return SaveGame.SingletonRepository.Activations.Get(nameof(Berserk50p1d50Every100p1d100Activation));
         }
     }
 }

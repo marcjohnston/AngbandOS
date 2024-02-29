@@ -8,20 +8,14 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class GreatAxeOfTheTrollsFixedArtifact : FixedArtifact, IFixedArtifactActivatible
+internal class GreatAxeOfTheTrollsFixedArtifact : FixedArtifact
 {
     private GreatAxeOfTheTrollsFixedArtifact(SaveGame saveGame) : base(saveGame) { }
 
     protected override string BaseItemFactoryName => nameof(GreatAxePolearmWeaponItemFactory);
 
     // Trolls does mass carnage
-    public void ActivateItem(Item item)
-    {
-        SaveGame.MsgPrint("Your axe lets out a long, shrill note...");
-        SaveGame.RunScriptBool(nameof(MassCarnageScript), true);
-        item.RechargeTimeLeft = 1000;
-    }
-    public string DescribeActivationEffect => "mass carnage every 1000 turns";
+    protected override string? ActivationName => nameof(MassCarnageActivation);
 
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "The Great Axe of the Trolls";

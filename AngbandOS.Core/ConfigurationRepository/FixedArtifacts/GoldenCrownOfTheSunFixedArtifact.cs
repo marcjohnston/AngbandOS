@@ -8,22 +8,15 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class GoldenCrownOfTheSunFixedArtifact : FixedArtifact, IFixedArtifactActivatible
+internal class GoldenCrownOfTheSunFixedArtifact : FixedArtifact
 {
     private GoldenCrownOfTheSunFixedArtifact(SaveGame saveGame) : base(saveGame) { }
 
     protected override string BaseItemFactoryName => nameof(GoldenCrownArmorItemFactory);
 
     // Sun Crown heals
-    public void ActivateItem(Item item)
-    {
-        SaveGame.MsgPrint("Your crown glows deep yellow...");
-        SaveGame.MsgPrint("You feel a warm tingling inside...");
-        SaveGame.RestoreHealth(700);
-        SaveGame.TimedBleeding.ResetTimer();
-        item.RechargeTimeLeft = 250;
-    }
-    public string DescribeActivationEffect => "heal (700) every 250 turns";
+    protected override string? ActivationName => nameof(Heal700Every25Activation);
+
     public override void ApplyResistances(Item item)
     {
         item.RandomPower = SaveGame.SingletonRepository.Powers.ToWeightedRandom(_power => _power.IsAbility == true).Choose();

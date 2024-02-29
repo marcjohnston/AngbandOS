@@ -8,21 +8,14 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class IronHelmSkullkeeperFixedArtifact : FixedArtifact, IFixedArtifactActivatible
+internal class IronHelmSkullkeeperFixedArtifact : FixedArtifact
 {
     private IronHelmSkullkeeperFixedArtifact(SaveGame saveGame) : base(saveGame) { }
 
     protected override string BaseItemFactoryName => nameof(IronHelmArmorItemFactory);
 
     // Skull Keeper detects everything
-    public void ActivateItem(Item item)
-    {
-        SaveGame.MsgPrint("Your helm glows bright white...");
-        SaveGame.MsgPrint("An image forms in your mind...");
-        SaveGame.RunScript(nameof(DetectionScript));
-        item.RechargeTimeLeft = base.SaveGame.RandomLessThan(55) + 55;
-    }
-    public string DescribeActivationEffect => "detection every 55+d55 turns";
+    protected override string? ActivationName => nameof(DetectionEvery55p1d55Activation);
 
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "The Iron Helm 'Skullkeeper'";

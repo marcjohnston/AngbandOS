@@ -8,24 +8,15 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class LongSwordOfEverflameFixedArtifact : FixedArtifact, IFixedArtifactActivatible
+internal class LongSwordOfEverflameFixedArtifact : FixedArtifact
 {
     private LongSwordOfEverflameFixedArtifact(SaveGame saveGame) : base(saveGame) { }
 
     protected override string BaseItemFactoryName => nameof(LongSwordWeaponItemFactory);
 
     // Everflame shoots a fire ball
-    public void ActivateItem(Item item)
-    {
-        SaveGame.MsgPrint("Your sword glows an intense red...");
-        if (!SaveGame.GetDirectionWithAim(out int dir))
-        {
-            return;
-        }
-        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(FireProjectile)), dir, 72, 2);
-        item.RechargeTimeLeft = 400;
-    }
-    public string DescribeActivationEffect => "fire ball (72) every 400 turns";
+    protected override string? ActivationName => nameof(BallOfFire72r2Every400Activation);
+
     public override void ApplyResistances(Item item)
     {
         if (SaveGame.DieRoll(2) == 1)

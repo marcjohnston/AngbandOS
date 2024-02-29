@@ -72,15 +72,15 @@ internal class NecromanticArtifactBias : ArtifactBias
         }
         else if (SaveGame.DieRoll(13) == 1)
         {
-            return SaveGame.SingletonRepository.Activations.Get(nameof(DispGoodActivation));
+            return SaveGame.SingletonRepository.Activations.Get(nameof(DispelGood5xEvery300p1d300Activation));
         }
         else if (SaveGame.DieRoll(9) == 1)
         {
-            return SaveGame.SingletonRepository.Activations.Get(nameof(MassGenoActivation));
+            return SaveGame.SingletonRepository.Activations.Get(nameof(MassCarnageActivation));
         }
         else if (SaveGame.DieRoll(8) == 1)
         {
-            return SaveGame.SingletonRepository.Activations.Get(nameof(CarnageActivation));
+            return SaveGame.SingletonRepository.Activations.Get(nameof(GenocideEvery500Activation));
         }
         else if (SaveGame.DieRoll(13) == 1)
         {
@@ -92,7 +92,7 @@ internal class NecromanticArtifactBias : ArtifactBias
         }
         else if (SaveGame.DieRoll(6) == 1)
         {
-            return SaveGame.SingletonRepository.Activations.Get(nameof(CharmUndeadActivation));
+            return SaveGame.SingletonRepository.Activations.Get(nameof(EnslaveUndead1xEvery333Activation));
         }
         else
         {

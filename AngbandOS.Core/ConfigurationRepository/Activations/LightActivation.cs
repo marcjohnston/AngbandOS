@@ -28,7 +28,7 @@ internal class LightActivation : Activation
 
     public override int Value => 150;
 
-    public override string Name => "Light area (dam 2d15)";
+    public override string Name => "Light area (2d15)";
 
-    public override string Description => $"{Name.ToLower()} every 10+d10 turns";
+    public override string Frequency => "10+d10";
 }

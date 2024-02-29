@@ -8,23 +8,14 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class QuarterstaffEririlFixedArtifact : FixedArtifact, IFixedArtifactActivatible
+internal class QuarterstaffEririlFixedArtifact : FixedArtifact
 {
     private QuarterstaffEririlFixedArtifact(SaveGame saveGame) : base(saveGame) { }
 
     protected override string BaseItemFactoryName => nameof(QuarterstaffHaftedWeaponItemFactory);
 
     // Ereril does identify
-    public void ActivateItem(Item item)
-    {
-        SaveGame.MsgPrint("Your quarterstaff glows yellow...");
-        if (!SaveGame.RunSuccessfulScript(nameof(IdentifyItemScript)))
-        {
-            return;
-        }
-        item.RechargeTimeLeft = 10;
-    }
-    public string DescribeActivationEffect => "identify every 10 turns";
+    protected override string? ActivationName => nameof(IdentifyEvery10Activation);
 
     public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "The Quarterstaff 'Eriril'";

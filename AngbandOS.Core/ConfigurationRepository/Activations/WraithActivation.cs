@@ -20,7 +20,7 @@ internal class WraithActivation : Activation
 
     protected override bool OnActivate(Item item)
     {
-        SaveGame.TimedEtherealness.AddTimer(SaveGame.DieRoll(SaveGame.ExperienceLevel / 2) + (SaveGame.ExperienceLevel / 2));
+        SaveGame.TimedEtherealness.AddTimer(SaveGame.DieRoll(SaveGame.ExperienceLevel));
         return true;
     }
 
@@ -28,7 +28,7 @@ internal class WraithActivation : Activation
 
     public override int Value => 25000;
 
-    public override string Name => "Wraith form (level/2 + d(level/2))";
+    public override string Name => "Wraith form (1d1x)";
 
-    public override string Description => $"{Name.ToLower()} every 1000 turns";
+    public override string Frequency => "1000";
 }

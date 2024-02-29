@@ -8,24 +8,14 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class CloakOfBarzaiFixedArtifact : FixedArtifact, IFixedArtifactActivatible
+internal class CloakOfBarzaiFixedArtifact : FixedArtifact
 {
     private CloakOfBarzaiFixedArtifact(SaveGame saveGame) : base(saveGame) { }
 
     protected override string BaseItemFactoryName => nameof(ClothCloakCloakArmorItemFactory);
 
     // Cloak of Barzai gives resistances
-    public void ActivateItem(Item item)
-    {
-        SaveGame.MsgPrint("Your cloak glows many colors...");
-        SaveGame.TimedAcidResistance.AddTimer(base.SaveGame.DieRoll(20) + 20);
-        SaveGame.TimedLightningResistance.AddTimer(base.SaveGame.DieRoll(20) + 20);
-        SaveGame.TimedFireResistance.AddTimer(base.SaveGame.DieRoll(20) + 20);
-        SaveGame.TimedColdResistance.AddTimer(base.SaveGame.DieRoll(20) + 20);
-        SaveGame.TimedPoisonResistance.AddTimer(base.SaveGame.DieRoll(20) + 20);
-        item.RechargeTimeLeft = 111;
-    }
-    public string DescribeActivationEffect => "resistance (20+d20 turns) every 111 turns";
+    protected override string? ActivationName => nameof(ResistAll20p1d20Activation);
 
     public override ColorEnum Color => ColorEnum.Green;
     public override string Name => "The Cloak of Barzai";

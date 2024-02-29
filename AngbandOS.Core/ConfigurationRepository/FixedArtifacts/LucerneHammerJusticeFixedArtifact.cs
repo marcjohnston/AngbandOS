@@ -8,24 +8,15 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class TheLucerneHammerJusticeFixedArtifact : FixedArtifact, IFixedArtifactActivatible
+internal class TheLucerneHammerJusticeFixedArtifact : FixedArtifact
 {
     private TheLucerneHammerJusticeFixedArtifact(SaveGame saveGame) : base(saveGame) { }
 
     protected override string BaseItemFactoryName => nameof(LucerneHammerHaftedWeaponItemFactory);
 
     // Justice drains life
-    public void ActivateItem(Item item)
-    {
-        SaveGame.MsgPrint("Your hammer glows white...");
-        if (!SaveGame.GetDirectionWithAim(out int dir))
-        {
-            return;
-        }
-        SaveGame.DrainLife(dir, 90);
-        item.RechargeTimeLeft = 70;
-    }
-    public string DescribeActivationEffect => "drain life (90) every 70 turns";
+    protected override string? ActivationName => nameof(DrainLife90Every70Activation);
+
     public override void ApplyResistances(Item item)
     {
         IArtifactBias artifactBias = null;

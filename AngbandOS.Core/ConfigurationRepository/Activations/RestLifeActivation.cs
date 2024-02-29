@@ -30,5 +30,5 @@ internal class RestLifeActivation : Activation
 
     public override string Name => "Restore life levels";
 
-    public override string Description => $"{Name.ToLower()} every 450 turns";
+    public override string Frequency => "450";
 }

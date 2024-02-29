@@ -8,20 +8,15 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class CloakOfTheSwashbucklerFixedArtifact : FixedArtifact, IFixedArtifactActivatible
+internal class CloakOfTheSwashbucklerFixedArtifact : FixedArtifact
 {
     private CloakOfTheSwashbucklerFixedArtifact(SaveGame saveGame) : base(saveGame) { }
 
     protected override string BaseItemFactoryName => nameof(ClothCloakCloakArmorItemFactory);
 
     // Swashbuckler recharges items
-    public void ActivateItem(Item item)
-    {
-        SaveGame.MsgPrint("Your cloak glows bright yellow...");
-        SaveGame.RunSuccessfulScriptInt(nameof(RechargeItemScript), 60);
-        item.RechargeTimeLeft = 70;
-    }
-    public string DescribeActivationEffect => "recharge item I every 70 turns";
+    protected override string? ActivationName => nameof(RechargeActivation);
+
     public override void ApplyResistances(Item item)
     {
         item.RandomPower = SaveGame.SingletonRepository.Powers.ToWeightedRandom(_power => _power.IsAbility == true).Choose();

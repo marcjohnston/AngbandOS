@@ -7,14 +7,21 @@
 
 namespace AngbandOS.Core.Scripts;
 
+/// <summary>
+/// Identifies a chosen item and returns false, if the item selection is cancelled; true, otherwise.
+/// </summary>
 [Serializable]
 internal class IdentifyItemScript : Script, IScript, ISuccessfulScript
 {
     private IdentifyItemScript(SaveGame saveGame) : base(saveGame) { }
 
+    /// <summary>
+    /// Identifies a chosen item and returns false, if the item selection is cancelled; true, otherwise.
+    /// </summary>
+    /// <returns></returns>
     public bool ExecuteSuccessfulScript()
     {
-        if (!SaveGame.SelectItem(out Item oPtr, "Identify which item? ", true, true, true, null))
+        if (!SaveGame.SelectItem(out Item? oPtr, "Identify which item? ", true, true, true, null))
         {
             SaveGame.MsgPrint("You have nothing to identify.");
             return false;

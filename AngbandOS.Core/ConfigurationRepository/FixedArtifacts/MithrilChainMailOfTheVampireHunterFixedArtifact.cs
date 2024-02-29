@@ -8,26 +8,14 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class MithrilChainMailOfTheVampireHunterFixedArtifact : FixedArtifact, IFixedArtifactActivatible
+internal class MithrilChainMailOfTheVampireHunterFixedArtifact : FixedArtifact
 {
     private MithrilChainMailOfTheVampireHunterFixedArtifact(SaveGame saveGame) : base(saveGame) { }
 
     protected override string BaseItemFactoryName => nameof(MithrilChainMailHardArmorItemFactory);
 
     // Vampire Hunter cures most ailments
-    public void ActivateItem(Item item)
-    {
-        SaveGame.MsgPrint("A heavenly choir sings...");
-        SaveGame.TimedPoison.ResetTimer();
-        SaveGame.TimedBleeding.ResetTimer();
-        SaveGame.TimedStun.ResetTimer();
-        SaveGame.TimedConfusion.ResetTimer();
-        SaveGame.TimedBlindness.ResetTimer();
-        SaveGame.TimedHeroism.AddTimer(base.SaveGame.DieRoll(25) + 25);
-        SaveGame.RestoreHealth(777);
-        item.RechargeTimeLeft = 300;
-    }
-    public string DescribeActivationEffect => "heal (777), curing and heroism every 300 turns";
+    protected override string? ActivationName => nameof(Heal777CuringAndHeroism25pd25Every300Activation);
 
     public override ColorEnum Color => ColorEnum.BrightBlue;
     public override string Name => "The Mithril Chain Mail of the Vampire Hunter";

@@ -8,26 +8,18 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class QuarterstaffOfAtalFixedArtifact : FixedArtifact, IFixedArtifactActivatible
+internal class QuarterstaffOfAtalFixedArtifact : FixedArtifact
 {
     private QuarterstaffOfAtalFixedArtifact(SaveGame saveGame) : base(saveGame) { }
 
     protected override string BaseItemFactoryName => nameof(QuarterstaffHaftedWeaponItemFactory);
 
     // Atal does full identify
-    public void ActivateItem(Item item)
-    {
-        SaveGame.MsgPrint("Your quarterstaff glows brightly...");
-        SaveGame.RunScript(nameof(DetectionScript));
-        SaveGame.Probing();
-        SaveGame.RunScript(nameof(IdentifyItemFullyScript));
-        item.RechargeTimeLeft = 1000;
-    }
+    protected override string? ActivationName => nameof(ProbingDetectionAndFullIdEvery1000Activation);
     public override void ApplyResistances(Item item)
     {
         item.RandomPower = SaveGame.SingletonRepository.Powers.ToWeightedRandom(_power => _power.IsAbility == true).Choose();
     }
-    public string DescribeActivationEffect => "probing, detection and full id  every 1000 turns";
 
     public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "The Quarterstaff of Atal";

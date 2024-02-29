@@ -8,24 +8,14 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class RingOfElementalPowerIceFixedArtifact : FixedArtifact, IFixedArtifactActivatible
+internal class RingOfElementalPowerIceFixedArtifact : FixedArtifact
 {
     private RingOfElementalPowerIceFixedArtifact(SaveGame saveGame) : base(saveGame) { }
 
     protected override string BaseItemFactoryName => nameof(NenyaRingItemFactory);
 
     // Ring of Elemental Ice casts a coldball
-    public void ActivateItem(Item item)
-    {
-        SaveGame.MsgPrint("The ring glows bright white...");
-        if (!SaveGame.GetDirectionWithAim(out int dir))
-        {
-            return;
-        }
-        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(ColdProjectile)), dir, 200, 3);
-        item.RechargeTimeLeft = base.SaveGame.RandomLessThan(325) + 325;
-    }
-    public string DescribeActivationEffect => "large frost ball (200) every 325+d325 turns";
+    protected override string? ActivationName => nameof(LargeFrostBall200Every325p1d325Activation);
 
     public override void ApplyResistances(Item item)
     {

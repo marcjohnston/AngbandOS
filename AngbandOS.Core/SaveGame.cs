@@ -5,6 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using System.Diagnostics;
 using System.Runtime.Serialization.Formatters.Binary;
 
 namespace AngbandOS.Core;
@@ -5979,45 +5980,6 @@ internal class SaveGame
             TimedParalysis.AddTimer(2 + RandomLessThan(2));
         }
         return more;
-    }
-
-    /// <summary>
-    /// Give a fire brand to a set of bolts we're carrying
-    /// </summary>
-    public void BrandBolts()
-    {
-        for (int i = 0; i < InventorySlot.PackCount; i++)
-        {
-            // Find a set of non-artifact bolts in our inventory
-            Item? item = GetInventoryItem(i);
-            if (item == null || item.Category != ItemTypeEnum.Bolt)
-            {
-                continue;
-            }
-            if (item.IsArtifact || item.IsRare())
-            {
-                continue;
-            }
-            // Skip cursed or broken bolts
-            if (item.IsCursed() || item.IsBroken())
-            {
-                continue;
-            }
-            // Only a 25% chance of success per set of bolts
-            if (RandomLessThan(100) < 75)
-            {
-                continue;
-            }
-            // Make the bolts into bolts of flame
-            MsgPrint("Your bolts are covered in a fiery aura!");
-            item.RareItem = SingletonRepository.RareItems.Get(nameof(AmmoOfFlameRareItem));
-            Enchant(item, RandomLessThan(3) + 4,
-                Constants.EnchTohit | Constants.EnchTodam);
-            // Quit after the first bolts have been upgraded
-            return;
-        }
-        // We fell off the end of the inventory without enchanting anything
-        MsgPrint("The fiery enchantment failed.");
     }
 
     /// <summary>

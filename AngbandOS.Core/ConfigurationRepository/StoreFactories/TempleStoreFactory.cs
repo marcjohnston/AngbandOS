@@ -60,7 +60,7 @@ internal partial class TempleStoreFactory : StoreFactory
         new StoreStockManifestDefinition(nameof(HolyChantScrollItemFactory)),
         new StoreStockManifestDefinition(nameof(RemoveCurseScrollItemFactory), 3),
         new StoreStockManifestDefinition(nameof(SpecialRemoveCurseScrollItemFactory), 2),
-        new StoreStockManifestDefinition(nameof(WordofRecallScrollItemFactory), 6),
+        new StoreStockManifestDefinition(nameof(WordOfRecallScrollItemFactory), 6),
     };
 
     /// <summary>

@@ -79,7 +79,7 @@ internal class ChaosArtifactBias : ArtifactBias
         }
         else
         {
-            return SaveGame.SingletonRepository.Activations.Get(nameof(CallChaosActivation));
+            return SaveGame.SingletonRepository.Activations.Get(nameof(CallChaosEvery350Activation));
         }
     }
 }

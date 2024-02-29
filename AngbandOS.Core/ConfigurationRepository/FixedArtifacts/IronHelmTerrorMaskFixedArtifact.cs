@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class IronHelmTerrorMaskFixedArtifact : FixedArtifact, IFixedArtifactActivatible
+internal class IronHelmTerrorMaskFixedArtifact : FixedArtifact
 {
     private IronHelmTerrorMaskFixedArtifact(SaveGame saveGame) : base(saveGame) { }
 
@@ -35,12 +35,8 @@ internal class IronHelmTerrorMaskFixedArtifact : FixedArtifact, IFixedArtifactAc
     }
 
     // Dragon Helm and Terror Mask cause fear
-    public void ActivateItem(Item item)
-    {
-        SaveGame.TurnMonsters(40 + SaveGame.ExperienceLevel);
-        item.RechargeTimeLeft = 3 * (SaveGame.ExperienceLevel + 10);
-    }
-    public string DescribeActivationEffect => "rays of fear in every direction";
+    protected override string? ActivationName => nameof(Terror40xEvery3xp10Activation);
+
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "The Iron Helm 'Terror Mask'";
     public override int Ac => 5;

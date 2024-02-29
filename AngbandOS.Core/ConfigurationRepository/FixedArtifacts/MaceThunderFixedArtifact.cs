@@ -8,27 +8,14 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class MaceThunderFixedArtifact : FixedArtifact, IFixedArtifactActivatible
+internal class MaceThunderFixedArtifact : FixedArtifact
 {
     private MaceThunderFixedArtifact(SaveGame saveGame) : base(saveGame) { }
 
     protected override string BaseItemFactoryName => nameof(MaceHaftedWeaponItemFactory);
 
     // Thunder does haste
-    public void ActivateItem(Item item)
-    {
-        SaveGame.MsgPrint("Your mace glows bright green...");
-        if (SaveGame.TimedHaste.TurnsRemaining == 0)
-        {
-            SaveGame.TimedHaste.SetTimer(base.SaveGame.DieRoll(20) + 20);
-        }
-        else
-        {
-            SaveGame.TimedHaste.AddTimer(5);
-        }
-        item.RechargeTimeLeft = base.SaveGame.RandomLessThan(100) + 100;
-    }
-    public string DescribeActivationEffect => "haste self (20+d20 turns) every 100+d100 turns";
+    protected override string? ActivationName => nameof(Speed20p1d20Every250Activation);
 
     public override ColorEnum Color => ColorEnum.Black;
     public override string Name => "The Mace 'Thunder'";

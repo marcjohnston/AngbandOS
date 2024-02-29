@@ -8,31 +8,20 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class DaggerFaithFixedArtifact : FixedArtifact, IFixedArtifactActivatible
+internal class DaggerFaithFixedArtifact : FixedArtifact
 {
     private DaggerFaithFixedArtifact(SaveGame saveGame) : base(saveGame) { }
 
     protected override string BaseItemFactoryName => nameof(DaggerWeaponItemFactory);
 
     // Faith shoots a fire bolt
-    public void ActivateItem(Item item)
-    {
-        SaveGame.MsgPrint("Your dagger is covered in fire...");
-        if (!SaveGame.GetDirectionWithAim(out int dir))
-        {
-            return;
-        }
-        SaveGame.FireBolt(SaveGame.SingletonRepository.Projectiles.Get(nameof(Projection.FireProjectile)), dir, base.SaveGame.DiceRoll(9, 8));
-        item.RechargeTimeLeft = base.SaveGame.RandomLessThan(8) + 8;
-    }
+    protected override string? ActivationName => nameof(FireBolt9d8Every8p1d8Activation);
 
     public override void ApplyResistances(Item item)
     {
         IArtifactBias artifactBias = null;
         item.ApplyRandomResistance(ref artifactBias, SaveGame.DieRoll(22) + 16);
     }
-    public string DescribeActivationEffect => "fire bolt (9d8) every 8+d8 turns";
-
 
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "The Dagger 'Faith'";

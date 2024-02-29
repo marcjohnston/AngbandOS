@@ -44,7 +44,7 @@ internal class RogueArtifactBias : ArtifactBias
     {
         if (SaveGame.DieRoll(50) == 1)
         {
-            return SaveGame.SingletonRepository.Activations.Get(nameof(SpeedActivation));
+            return SaveGame.SingletonRepository.Activations.Get(nameof(Speed20p1d20Every250Activation));
         }
         else if (SaveGame.DieRoll(4) == 1)
         {
@@ -52,15 +52,15 @@ internal class RogueArtifactBias : ArtifactBias
         }
         else if (SaveGame.DieRoll(3) == 1)
         {
-            return SaveGame.SingletonRepository.Activations.Get(nameof(DetectAllActivation));
+            return SaveGame.SingletonRepository.Activations.Get(nameof(DetectionEvery55p1d55Activation));
         }
         else if (SaveGame.DieRoll(8) == 1)
         {
-            return SaveGame.SingletonRepository.Activations.Get(nameof(IdFullActivation));
+            return SaveGame.SingletonRepository.Activations.Get(nameof(IdentifyFullyEvery750Activation));
         }
         else
         {
-            return SaveGame.SingletonRepository.Activations.Get(nameof(IdPlainActivation));
+            return SaveGame.SingletonRepository.Activations.Get(nameof(IdentifyItemScript));
         }
     }
 }

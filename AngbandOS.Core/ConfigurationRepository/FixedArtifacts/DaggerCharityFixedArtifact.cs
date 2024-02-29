@@ -8,23 +8,15 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class DaggerCharityFixedArtifact : FixedArtifact, IFixedArtifactActivatible
+internal class DaggerCharityFixedArtifact : FixedArtifact
 {
     private DaggerCharityFixedArtifact(SaveGame saveGame) : base(saveGame) { }
 
     protected override string BaseItemFactoryName => nameof(DaggerWeaponItemFactory);
 
     // Charity shoots a lightning bolt
-    public void ActivateItem(Item item)
-    {
-        SaveGame.MsgPrint("Your dagger is covered in sparks...");
-        if (!SaveGame.GetDirectionWithAim(out int dir))
-        {
-            return;
-        }
-        SaveGame.FireBolt(SaveGame.SingletonRepository.Projectiles.Get(nameof(ElecProjectile)), dir, SaveGame.DiceRoll(4, 8));
-        item.RechargeTimeLeft = SaveGame.RandomLessThan(6) + 6;
-    }
+    protected override string? ActivationName => nameof(LightningBolt4d8Every6p1d6Activation);
+
     public override void ApplyResistances(Item item)
     {
         IArtifactBias artifactBias = null;

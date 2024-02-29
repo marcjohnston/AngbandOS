@@ -28,7 +28,7 @@ internal class InvulnActivation : Activation
 
     public override int Value => 25000;
 
-    public override string Name => "Invulnerability (dur 8+d8)";
+    public override string Name => "Invulnerability (8+d8)";
 
-    public override string Description => $"{Name.ToLower()} every 1000 turns";
+    public override string Frequency => "1000";
 }

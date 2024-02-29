@@ -8,27 +8,14 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class PairOfHardLeatherBootsOfIthaquaFixedArtifact : FixedArtifact, IFixedArtifactActivatible
+internal class PairOfHardLeatherBootsOfIthaquaFixedArtifact : FixedArtifact
 {
     private PairOfHardLeatherBootsOfIthaquaFixedArtifact(SaveGame saveGame) : base(saveGame) { }
 
     protected override string BaseItemFactoryName => nameof(HardLeatherBootsArmorItemFactory);
 
     // Boots haste you
-    public void ActivateItem(Item item)
-    {
-        SaveGame.MsgPrint("A wind swirls around your boots...");
-        if (SaveGame.TimedHaste.TurnsRemaining == 0)
-        {
-            SaveGame.TimedHaste.SetTimer(base.SaveGame.DieRoll(20) + 20);
-        }
-        else
-        {
-            SaveGame.TimedHaste.AddTimer(5);
-        }
-        item.RechargeTimeLeft = 200;
-    }
-    public string DescribeActivationEffect => "haste self (20+d20 turns) every 200 turns";
+    protected override string? ActivationName => nameof(Speed20p1d20Every200Activation);
 
     public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "The Pair of Hard Leather Boots of Ithaqua";

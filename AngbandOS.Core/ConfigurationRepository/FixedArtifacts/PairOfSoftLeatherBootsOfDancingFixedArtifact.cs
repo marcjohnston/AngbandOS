@@ -8,21 +8,14 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class PairOfSoftLeatherBootsOfDancingFixedArtifact : FixedArtifact, IFixedArtifactActivatible
+internal class PairOfSoftLeatherBootsOfDancingFixedArtifact : FixedArtifact
 {
     private PairOfSoftLeatherBootsOfDancingFixedArtifact(SaveGame saveGame) : base(saveGame) { }
 
     protected override string BaseItemFactoryName => nameof(SoftLeatherBootsArmorItemFactory);
 
     // Dancing heal poison and fear
-    public void ActivateItem(Item item)
-    {
-        SaveGame.MsgPrint("Your boots glow deep blue...");
-        SaveGame.TimedFear.ResetTimer();
-        SaveGame.TimedPoison.ResetTimer();
-        item.RechargeTimeLeft = 5;
-    }
-    public string DescribeActivationEffect => "remove fear and cure poison every 5 turns";
+    protected override string? ActivationName => nameof(RemoveFearAndPoisonEvery5Activation);
 
     public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "The Pair of Soft Leather Boots of Dancing";

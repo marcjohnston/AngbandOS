@@ -8,20 +8,15 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class AugmentedChainMailOfTheOgreLordsFixedArtifact : FixedArtifact, IFixedArtifactActivatible
+internal class AugmentedChainMailOfTheOgreLordsFixedArtifact : FixedArtifact
 {
     private AugmentedChainMailOfTheOgreLordsFixedArtifact(SaveGame saveGame) : base(saveGame) { }
 
     protected override string BaseItemFactoryName => nameof(AugmentedChainMailHardArmorItemFactory);
 
     // Ogre Lords destroys doors
-    public void ActivateItem(Item item)
-    {
-        SaveGame.MsgPrint("Your armor glows bright red...");
-        SaveGame.RunScript(nameof(DestroyAdjacentDoorsScript));
-        item.RechargeTimeLeft = 10;
-    }
-    public string DescribeActivationEffect => "door and trap destruction every 10 turns";
+    protected override string? ActivationName => nameof(DestroyDoorsEvery10Activation);
+
     public override void ApplyResistances(Item item)
     {
         IArtifactBias artifactBias = null;

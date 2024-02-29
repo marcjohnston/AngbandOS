@@ -16,7 +16,7 @@ internal class RechargeActivation : Activation
     private RechargeActivation(SaveGame saveGame) : base(saveGame) { }
     public override int RandomChance => 85;
 
-    public override string? PreActivationMessage => "";
+    public override string? PreActivationMessage => "Your {0}  glows bright yellow...";
 
     protected override bool OnActivate(Item item)
     {
@@ -30,5 +30,5 @@ internal class RechargeActivation : Activation
 
     public override string Name => "Recharging";
 
-    public override string Description => $"{Name.ToLower()} every 70 turns";
+    public override string Frequency => "70";
 }

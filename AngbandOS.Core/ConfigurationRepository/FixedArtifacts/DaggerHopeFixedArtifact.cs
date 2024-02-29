@@ -8,24 +8,15 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class DaggerHopeFixedArtifact : FixedArtifact, IFixedArtifactActivatible
+internal class DaggerHopeFixedArtifact : FixedArtifact
 {
     private DaggerHopeFixedArtifact(SaveGame saveGame) : base(saveGame) { }
 
     protected override string BaseItemFactoryName => nameof(DaggerWeaponItemFactory);
 
     // Hope shoots a frost bolt
-    public void ActivateItem(Item item)
-    {
-        SaveGame.MsgPrint("Your dagger is covered in frost...");
-        if (!SaveGame.GetDirectionWithAim(out int dir))
-        {
-            return;
-        }
-        SaveGame.FireBolt(SaveGame.SingletonRepository.Projectiles.Get(nameof(Projection.ColdProjectile)), dir, base.SaveGame.DiceRoll(6, 8));
-        item.RechargeTimeLeft = base.SaveGame.RandomLessThan(7) + 7;
-    }
-    public string DescribeActivationEffect => "frost bolt (6d8) every 7+d7 turns";
+    protected override string? ActivationName => nameof(FrostBolt6d8Every7p1d7Activation);
+
     public override void ApplyResistances(Item item)
     {
         IArtifactBias artifactBias = null;

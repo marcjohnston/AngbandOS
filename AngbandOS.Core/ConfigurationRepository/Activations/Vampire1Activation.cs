@@ -32,7 +32,7 @@ internal class Vampire1Activation : DirectionalActivation
 
     public override int Value => 1000;
 
-    public override string Name => "Vampiric drain (3*50)";
+    public override string Name => "Vampiric drain 3x (50)";
 
-    public override string Description => $"{Name.ToLower()} every 400 turns";
+    public override string Frequency => "400";
 }

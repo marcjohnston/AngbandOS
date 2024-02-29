@@ -8,24 +8,14 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal class MultiHuedDragonScaleMailRazorbackFixedArtifact : FixedArtifact, IFixedArtifactActivatible
+internal class MultiHuedDragonScaleMailRazorbackFixedArtifact : FixedArtifact
 {
     private MultiHuedDragonScaleMailRazorbackFixedArtifact(SaveGame saveGame) : base(saveGame) { }
 
     protected override string BaseItemFactoryName => nameof(MultiHuedDragonScaleMailArmorItemFactory);
 
     // Razorback gives you a point-blank lightning ball
-    public void ActivateItem(Item item)
-    {
-        SaveGame.MsgPrint("Your armor is surrounded by lightning...");
-        for (int i = 0; i < 8; i++)
-        {
-            SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(ElecProjectile)), SaveGame.OrderedDirection[i], 150, 3);
-        }
-        item.RechargeTimeLeft = 1000;
-    }
-
-    public string DescribeActivationEffect => "star ball (150) every 1000 turns";
+    protected override string? ActivationName => nameof(StarBall150Every1000p1d325Activation);
 
     public override ColorEnum Color => ColorEnum.Purple;
     public override string Name => "The Multi-Hued Dragon Scale Mail 'Razorback'";
