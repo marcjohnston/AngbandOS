@@ -470,7 +470,7 @@ internal class Screen
     }
 
     /// <summary>
-    /// Prints a string at a given location
+    /// Prints a string in white at a specified location.
     /// </summary>
     /// <param name="str"> The string to print </param>
     /// <param name="row"> The row at which to print </param>

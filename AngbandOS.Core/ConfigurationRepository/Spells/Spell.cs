@@ -78,6 +78,9 @@ internal abstract class Spell : IGetKey<string>
 
     public ClassSpell ClassSpell { get; private set; }
 
+    /// <summary>
+    /// Returns the name of an ICancellableScript script to be run, when the spell is cast.
+    /// </summary>
     protected virtual string? CastScriptName => null;
     protected virtual string? CastFailedScriptName => null;
 

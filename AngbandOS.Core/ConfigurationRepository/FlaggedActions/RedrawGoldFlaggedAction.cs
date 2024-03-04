@@ -10,13 +10,39 @@ namespace AngbandOS.Core.FlaggedActions;
 [Serializable]
 internal class RedrawGoldFlaggedAction : FlaggedAction
 {
-    private const int ColGold = 0;
-    private const int RowGold = 11;
+    /// <summary>
+    /// Returns the column position for the widget.
+    /// </summary>
+    public virtual int Column => 0;
+
+    /// <summary>
+    /// Returns the row position for the widget.
+    /// </summary>
+    public virtual int Row => 11;
+
+    public virtual string PrefixName => "GP ";
+
+    /// <summary>
+    /// Returns the color to render the value.
+    /// </summary>
+    public virtual ColorEnum Color => ColorEnum.BrightGreen;
+
+    /// <summary>
+    /// Returns the color to render the value.
+    /// </summary>
+    public virtual ColorEnum PrefixColor => ColorEnum.White;
+
+    /// <summary>
+    /// Returns the width of the widget.
+    /// </summary>
+    public virtual int Width => 9;
+
     private RedrawGoldFlaggedAction(SaveGame saveGame) : base(saveGame) { }
+
     protected override void Execute()
     {
-        SaveGame.Screen.Print("GP ", RowGold, ColGold);
-        string tmp = SaveGame.Gold.ToString().PadLeft(9);
-        SaveGame.Screen.Print(ColorEnum.BrightGreen, tmp, RowGold, ColGold + 3);
+        SaveGame.Screen.Print(PrefixColor, PrefixName, Row, Column);
+        string tmp = SaveGame.Gold.ToString().PadLeft(Width);
+        SaveGame.Screen.Print(Color, tmp, Row, PrefixName.Length);
     }
 }
