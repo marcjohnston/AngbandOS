@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class SuperHeroism25p1d25ResetFearAndHeal30Script : Script, INoticeableScript
+internal class SuperHeroism25p1d25ResetFearAndHeal30Script : Script, INoticeableScript, IScript
 {
     private SuperHeroism25p1d25ResetFearAndHeal30Script(SaveGame saveGame) : base(saveGame) { }
 
@@ -34,5 +34,13 @@ internal class SuperHeroism25p1d25ResetFearAndHeal30Script : Script, INoticeable
             identified = true;
         }
         return identified;
+    }
+
+    /// <summary>
+    /// Runs the INoticeableScript and disposes of the result.
+    /// </summary>
+    public void ExecuteScript()
+    {
+        ExecuteNoticeableScript();
     }
 }
