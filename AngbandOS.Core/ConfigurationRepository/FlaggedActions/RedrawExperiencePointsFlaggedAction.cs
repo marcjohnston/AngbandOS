@@ -8,11 +8,11 @@
 namespace AngbandOS.Core.FlaggedActions;
 
 [Serializable]
-internal class RedrawExpFlaggedAction : FlaggedAction
+internal class RedrawExperiencePointsFlaggedAction : FlaggedAction
 {
     private const int RowExp = 6;
     private const int ColExp = 0;
-    private RedrawExpFlaggedAction(SaveGame saveGame) : base(saveGame) { }
+    private RedrawExperiencePointsFlaggedAction(SaveGame saveGame) : base(saveGame) { }
     protected override void Execute()
     {
         ColorEnum color = ColorEnum.BrightGreen;

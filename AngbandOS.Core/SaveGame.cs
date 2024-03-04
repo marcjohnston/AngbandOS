@@ -223,6 +223,8 @@ internal class SaveGame
         set
         {
             _gold = value;
+
+            // Send a message to the attached view port so that the consuming application knows that the gold value has been updated.
             ConsoleViewPort.GoldUpdated(_gold);
         }
     }
@@ -3985,8 +3987,8 @@ internal class SaveGame
         SingletonRepository.FlaggedActions.Get(nameof(RedrawPlayerFlaggedAction)).Check();
         SingletonRepository.FlaggedActions.Get(nameof(RedrawEquippyFlaggedAction)).Check();
         SingletonRepository.FlaggedActions.Get(nameof(RedrawTitleFlaggedAction)).Check();
-        SingletonRepository.FlaggedActions.Get(nameof(RedrawLevelFlaggedAction)).Check();
-        SingletonRepository.FlaggedActions.Get(nameof(RedrawExpFlaggedAction)).Check();
+        SingletonRepository.FlaggedActions.Get(nameof(RedrawExperienceLevelFlaggedAction)).Check();
+        SingletonRepository.FlaggedActions.Get(nameof(RedrawExperiencePointsFlaggedAction)).Check();
         SingletonRepository.FlaggedActions.Get(nameof(RedrawStatsFlaggedAction)).Check();
         SingletonRepository.FlaggedActions.Get(nameof(RedrawArmorFlaggedAction)).Check();
         SingletonRepository.FlaggedActions.Get(nameof(RedrawHpFlaggedAction)).Check();
@@ -12778,7 +12780,7 @@ internal class SaveGame
         {
             MaxExperienceGained = ExperiencePoints;
         }
-        SingletonRepository.FlaggedActions.Get(nameof(RedrawExpFlaggedAction)).Set();
+        SingletonRepository.FlaggedActions.Get(nameof(RedrawExperiencePointsFlaggedAction)).Set();
         HandleStuff();
         while (ExperienceLevel > 1 && ExperiencePoints < Constants.PlayerExp[ExperienceLevel - 2] * ExperienceMultiplier / 100L)
         {
@@ -12789,7 +12791,7 @@ internal class SaveGame
             SingletonRepository.FlaggedActions.Get(nameof(UpdateSpellsFlaggedAction)).Set();
             SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
             SingletonRepository.FlaggedActions.Get(nameof(RedrawTitleFlaggedAction)).Set();
-            SingletonRepository.FlaggedActions.Get(nameof(RedrawLevelFlaggedAction)).Set();
+            SingletonRepository.FlaggedActions.Get(nameof(RedrawExperienceLevelFlaggedAction)).Set();
             HandleStuff();
         }
         while (ExperienceLevel < Constants.PyMaxLevel && ExperiencePoints >= Constants.PlayerExp[ExperienceLevel - 1] * ExperienceMultiplier / 100L)
@@ -12822,8 +12824,8 @@ internal class SaveGame
             SingletonRepository.FlaggedActions.Get(nameof(UpdateSpellsFlaggedAction)).Set();
             SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
             SingletonRepository.FlaggedActions.Get(nameof(RedrawTitleFlaggedAction)).Set();
-            SingletonRepository.FlaggedActions.Get(nameof(RedrawLevelFlaggedAction)).Set();
-            SingletonRepository.FlaggedActions.Get(nameof(RedrawExpFlaggedAction)).Set();
+            SingletonRepository.FlaggedActions.Get(nameof(RedrawExperienceLevelFlaggedAction)).Set();
+            SingletonRepository.FlaggedActions.Get(nameof(RedrawExperiencePointsFlaggedAction)).Set();
             HandleStuff();
             if (levelReward)
             {

@@ -8,11 +8,11 @@
 namespace AngbandOS.Core.FlaggedActions;
 
 [Serializable]
-internal class RedrawLevelFlaggedAction : FlaggedAction
+internal class RedrawExperienceLevelFlaggedAction : FlaggedAction
 {
     private const int RowLevel = 5;
     private const int ColLevel = 0;
-    private RedrawLevelFlaggedAction(SaveGame saveGame) : base (saveGame) { }
+    private RedrawExperienceLevelFlaggedAction(SaveGame saveGame) : base (saveGame) { }
     protected override void Execute()
     {
         string tmp = SaveGame.ExperienceLevel.ToString().PadLeft(6);

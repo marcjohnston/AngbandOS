@@ -10,6 +10,8 @@ namespace AngbandOS.Core.FlaggedActions;
 [Serializable]
 internal class RedrawGoldFlaggedAction : FlaggedAction
 {
+    private RedrawGoldFlaggedAction(SaveGame saveGame) : base(saveGame) { }
+
     /// <summary>
     /// Returns the column position for the widget.
     /// </summary>
@@ -36,8 +38,6 @@ internal class RedrawGoldFlaggedAction : FlaggedAction
     /// Returns the width of the widget.
     /// </summary>
     public virtual int Width => 9;
-
-    private RedrawGoldFlaggedAction(SaveGame saveGame) : base(saveGame) { }
 
     protected override void Execute()
     {
