@@ -19,5 +19,5 @@ internal class BashGameCommand : GameCommand
 
     public override int? Repeat => 99;
 
-    protected override string ExecuteScriptName => nameof(BashScript);
+    protected override string? ExecuteScriptName => nameof(BashScript);
 }

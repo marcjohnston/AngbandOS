@@ -19,5 +19,5 @@ internal class StayGameCommand : GameCommand
 
     public override int? Repeat => null;
 
-    protected override string ExecuteScriptName => nameof(StayScript);
+    protected override string? ExecuteScriptName => nameof(StayScript);
 }

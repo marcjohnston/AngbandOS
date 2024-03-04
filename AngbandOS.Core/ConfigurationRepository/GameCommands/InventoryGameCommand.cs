@@ -17,5 +17,5 @@ internal class InventoryGameCommand : GameCommand
 
     public override char KeyChar => 'i';
 
-    protected override string ExecuteScriptName => nameof(InventoryScript);
+    protected override string? ExecuteScriptName => nameof(InventoryScript);
 }

@@ -36,8 +36,17 @@ internal abstract class GameCommand : IGetKey<string>
     public virtual int? Repeat => 0;
 
     public virtual bool IsEnabled => true;
-    protected virtual string ExecuteScriptName { get; }
 
+    /// <summary>
+    /// Returns the name of an IRepeatableScript for the game command to execute, or null; if the game command does not do anything.  This property is used to bind the ExecuteScript 
+    /// property to a script during the bind phase.  Returns null, by default.
+    /// </summary>
+    protected virtual string? ExecuteScriptName => null;
+
+    /// <summary>
+    /// Returns an IRepeatableScript script for the game command to execute, or null, if the game command does not do anything.  This property is bound from the ExecuteScriptName
+    /// property during the bind phase.
+    /// </summary>
     public IRepeatableScript? ExecuteScript { get; private set; }
 
     public string ToJson()

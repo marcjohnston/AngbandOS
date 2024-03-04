@@ -19,5 +19,5 @@ internal class TunnelGameCommand : GameCommand
 
     public override int? Repeat => 99;
 
-    protected override string ExecuteScriptName => nameof(TunnelScript);
+    protected override string? ExecuteScriptName => nameof(TunnelScript);
 }

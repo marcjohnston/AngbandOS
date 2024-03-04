@@ -17,5 +17,5 @@ internal class EnterStoreGameCommand : GameCommand
 
     public override char KeyChar => '_';
 
-    protected override string ExecuteScriptName => nameof(EnterStoreScript);
+    protected override string? ExecuteScriptName => nameof(EnterStoreScript);
 }

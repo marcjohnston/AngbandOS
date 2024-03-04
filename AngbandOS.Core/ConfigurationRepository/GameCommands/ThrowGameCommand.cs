@@ -17,5 +17,5 @@ internal class ThrowGameCommand : GameCommand
 
     public override char KeyChar => 'v';
 
-    protected override string ExecuteScriptName => nameof(ThrowScript);
+    protected override string? ExecuteScriptName => nameof(ThrowScript);
 }

@@ -26,7 +26,7 @@ internal class ActivateScript : Script, IScript, IRepeatableScript, ISuccessfulS
     }
 
     /// <summary>
-    /// Executes the activate script, disposes of the successful result and returns false.
+    /// Executes the activate script, disposes of the successful result and returns false because activation is never repeatable.
     /// </summary>
     /// <returns></returns>
     public bool ExecuteRepeatableScript()

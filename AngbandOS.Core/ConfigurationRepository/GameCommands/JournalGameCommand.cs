@@ -17,5 +17,5 @@ internal class JournalGameCommand : GameCommand
 
     public override char KeyChar => 'J';
 
-    protected override string ExecuteScriptName => nameof(JournalScript);
+    protected override string? ExecuteScriptName => nameof(JournalScript);
 }

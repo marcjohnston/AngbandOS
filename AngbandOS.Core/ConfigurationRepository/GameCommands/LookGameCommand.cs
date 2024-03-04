@@ -18,5 +18,5 @@ internal class LookGameCommand : GameCommand
 
     public override char KeyChar => 'l';
 
-    protected override string ExecuteScriptName => nameof(LookScript);
+    protected override string? ExecuteScriptName => nameof(LookScript);
 }

@@ -18,5 +18,5 @@ internal class QuaffPotionGameCommand : GameCommand
 
     public override char KeyChar => 'q';
 
-    protected override string ExecuteScriptName => nameof(QuaffScript);
+    protected override string? ExecuteScriptName => nameof(QuaffScript);
 }

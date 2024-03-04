@@ -17,5 +17,5 @@ internal class ManualGameCommand : GameCommand
 
     public override char KeyChar => 'h';
 
-    protected override string ExecuteScriptName => nameof(ShowManualScript);
+    protected override string? ExecuteScriptName => nameof(ShowManualScript);
 }

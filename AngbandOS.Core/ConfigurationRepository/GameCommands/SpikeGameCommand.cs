@@ -17,5 +17,5 @@ internal class SpikeGameCommand : GameCommand
 
     public override char KeyChar => 'j';
 
-    protected override string ExecuteScriptName => nameof(SpikeClosedDoorScript);
+    protected override string? ExecuteScriptName => nameof(SpikeClosedDoorScript);
 }

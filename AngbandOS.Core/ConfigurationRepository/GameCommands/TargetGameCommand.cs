@@ -17,5 +17,5 @@ internal class TargetGameCommand : GameCommand
 
     public override char KeyChar => '*';
 
-    protected override string ExecuteScriptName => nameof(TargetScript);
+    protected override string? ExecuteScriptName => nameof(TargetScript);
 }

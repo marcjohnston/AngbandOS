@@ -17,5 +17,5 @@ internal class MessageOneGameCommand : GameCommand
 
     public override char KeyChar => 'O';
 
-    protected override string ExecuteScriptName => nameof(MessageOneScript);
+    protected override string? ExecuteScriptName => nameof(MessageOneScript);
 }

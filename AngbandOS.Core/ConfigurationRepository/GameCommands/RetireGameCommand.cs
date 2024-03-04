@@ -17,5 +17,5 @@ internal class RetireGameCommand : GameCommand
 
     public override char KeyChar => 'Q';
 
-    protected override string ExecuteScriptName => nameof(RetireScript);
+    protected override string? ExecuteScriptName => nameof(RetireScript);
 }

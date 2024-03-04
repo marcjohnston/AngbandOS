@@ -17,5 +17,5 @@ internal class MessagesGameCommand : GameCommand
 
     public override char KeyChar => 'P';
 
-    protected override string ExecuteScriptName => nameof(MessagesScript);
+    protected override string? ExecuteScriptName => nameof(MessagesScript);
 }

@@ -14,5 +14,5 @@ internal class WizardModeGameCommand : GameCommand
 
     public override char KeyChar => 'W';
 
-    protected override string ExecuteScriptName => nameof(EnterWizardModeScript);
+    protected override string? ExecuteScriptName => nameof(EnterWizardModeScript);
 }

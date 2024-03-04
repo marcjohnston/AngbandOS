@@ -18,5 +18,5 @@ internal class EatFoodGameCommand : GameCommand
 
     public override char KeyChar => 'E';
 
-    protected override string ExecuteScriptName => nameof(EatScript);
+    protected override string? ExecuteScriptName => nameof(EatScript);
 }

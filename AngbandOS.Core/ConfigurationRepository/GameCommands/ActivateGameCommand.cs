@@ -24,6 +24,6 @@ internal class ActivateGameCommand : GameCommand
 
     public override int? Repeat => 0;
 
-    protected override string ExecuteScriptName => nameof(ActivateScript);
+    protected override string? ExecuteScriptName => nameof(ActivateScript);
 }
 

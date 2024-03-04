@@ -18,5 +18,5 @@ internal class UseStaffGameCommand : GameCommand
 
     public override char KeyChar => 'u';
 
-    protected override string ExecuteScriptName => nameof(UseStaffScript);
+    protected override string? ExecuteScriptName => nameof(UseStaffScript);
 }

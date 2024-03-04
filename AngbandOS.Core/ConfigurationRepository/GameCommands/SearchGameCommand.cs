@@ -19,5 +19,5 @@ internal class SearchGameCommand : GameCommand
 
     public override int? Repeat => null;
 
-    protected override string ExecuteScriptName => nameof(SearchScript);
+    protected override string? ExecuteScriptName => nameof(SearchScript);
 }

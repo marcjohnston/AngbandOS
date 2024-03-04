@@ -19,5 +19,5 @@ internal class OpenGameCommand : GameCommand
 
     public override int? Repeat => 99;
 
-    protected override string ExecuteScriptName => nameof(OpenScript);
+    protected override string? ExecuteScriptName => nameof(OpenScript);
 }

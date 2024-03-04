@@ -18,5 +18,5 @@ internal class AimWandGameCommand : GameCommand
 
     public override char KeyChar => 'a';
 
-    protected override string ExecuteScriptName => nameof(AimWandScript);
+    protected override string? ExecuteScriptName => nameof(AimWandScript);
 }

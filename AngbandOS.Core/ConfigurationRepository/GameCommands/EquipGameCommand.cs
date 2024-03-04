@@ -17,5 +17,5 @@ internal class EquipGameCommand : GameCommand
 
     public override char KeyChar => 'e';
 
-    protected override string ExecuteScriptName => nameof(EquipScript);
+    protected override string? ExecuteScriptName => nameof(EquipScript);
 }

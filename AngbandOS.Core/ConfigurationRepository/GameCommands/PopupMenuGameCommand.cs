@@ -17,5 +17,5 @@ internal class PopupMenuGameCommand : GameCommand
 
     public override char KeyChar => '\x1b';
 
-    protected override string ExecuteScriptName => nameof(PopupMenuScript);
+    protected override string? ExecuteScriptName => nameof(PopupMenuScript);
 }

@@ -17,5 +17,5 @@ internal class WieldGameCommand : GameCommand
 
     public override char KeyChar => 'w';
 
-    protected override string ExecuteScriptName => nameof(WieldScript);
+    protected override string? ExecuteScriptName => nameof(WieldScript);
 }

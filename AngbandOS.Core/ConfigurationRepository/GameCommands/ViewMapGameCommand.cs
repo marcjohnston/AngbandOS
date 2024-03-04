@@ -17,5 +17,5 @@ internal class ViewMapGameCommand : GameCommand
 
     public override char KeyChar => 'M';
 
-    protected override string ExecuteScriptName => nameof(ViewMapScript);
+    protected override string? ExecuteScriptName => nameof(ViewMapScript);
 }

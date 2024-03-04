@@ -17,5 +17,5 @@ internal class RestGameCommand : GameCommand
 
     public override char KeyChar => 'R';
 
-    protected override string ExecuteScriptName => nameof(RestInPlaceScript);
+    protected override string? ExecuteScriptName => nameof(RestInPlaceScript);
 }

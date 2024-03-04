@@ -19,5 +19,5 @@ internal class StayAndPickupGameCommand : GameCommand
 
     public override int? Repeat => null;
 
-    protected override string ExecuteScriptName => nameof(StayAndPickupScript);
+    protected override string? ExecuteScriptName => nameof(StayAndPickupScript);
 }

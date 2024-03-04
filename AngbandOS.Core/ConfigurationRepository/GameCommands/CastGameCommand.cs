@@ -14,5 +14,5 @@ internal class CastGameCommand : GameCommand
 
     public override char KeyChar => 'm';
 
-    protected override string ExecuteScriptName => nameof(CastScript);
+    protected override string? ExecuteScriptName => nameof(CastScript);
 }

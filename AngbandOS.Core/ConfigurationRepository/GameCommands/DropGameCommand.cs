@@ -17,5 +17,5 @@ internal class DropGameCommand : GameCommand
 
     public override char KeyChar => 'd';
 
-    protected override string ExecuteScriptName => nameof(DropScript);
+    protected override string? ExecuteScriptName => nameof(DropScript);
 }

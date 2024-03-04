@@ -18,5 +18,5 @@ internal class ReadScrollGameCommand : GameCommand
 
     public override char KeyChar => 'r';
 
-    protected override string ExecuteScriptName => nameof(ReadScrollScript);
+    protected override string? ExecuteScriptName => nameof(ReadScrollScript);
 }

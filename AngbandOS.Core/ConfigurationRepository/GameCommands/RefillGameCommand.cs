@@ -17,5 +17,5 @@ internal class RefillGameCommand : GameCommand
 
     public override char KeyChar => 'F';
 
-    protected override string ExecuteScriptName => nameof(RefillScript);
+    protected override string? ExecuteScriptName => nameof(RefillScript);
 }

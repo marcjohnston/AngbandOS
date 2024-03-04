@@ -18,5 +18,5 @@ internal class ZapRodGameCommand : GameCommand
 
     public override char KeyChar => 'z';
 
-    protected override string ExecuteScriptName => nameof(ZapRodScript);
+    protected override string? ExecuteScriptName => nameof(ZapRodScript);
 }

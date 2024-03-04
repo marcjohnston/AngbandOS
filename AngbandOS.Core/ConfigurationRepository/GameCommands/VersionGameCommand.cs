@@ -17,5 +17,5 @@ internal class VersionGameCommand : GameCommand
 
     public override char KeyChar => 'V';
 
-    protected override string ExecuteScriptName => nameof(VersionScript);
+    protected override string? ExecuteScriptName => nameof(VersionScript);
 }

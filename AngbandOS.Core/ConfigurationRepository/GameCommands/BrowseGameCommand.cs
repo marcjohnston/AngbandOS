@@ -17,5 +17,5 @@ internal class BrowseGameCommand : GameCommand
 
     public override char KeyChar => 'b';
 
-    protected override string ExecuteScriptName => nameof(BrowseScript);
+    protected override string? ExecuteScriptName => nameof(BrowseScript);
 }

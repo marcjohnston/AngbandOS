@@ -17,5 +17,5 @@ internal class TakeOffGameCommand : GameCommand
 
     public override char KeyChar => 't';
 
-    protected override string ExecuteScriptName => nameof(TakeOffScript);
+    protected override string? ExecuteScriptName => nameof(TakeOffScript);
 }

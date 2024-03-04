@@ -17,5 +17,5 @@ internal class RunGameCommand : GameCommand
 
     public override char KeyChar => '.';
 
-    protected override string ExecuteScriptName => nameof(RunScript);
+    protected override string? ExecuteScriptName => nameof(RunScript);
 }

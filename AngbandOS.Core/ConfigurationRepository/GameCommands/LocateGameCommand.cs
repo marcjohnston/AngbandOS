@@ -17,5 +17,5 @@ internal class LocateGameCommand : GameCommand
 
     public override char KeyChar => 'L';
 
-    protected override string ExecuteScriptName => nameof(LocateScript);
+    protected override string? ExecuteScriptName => nameof(LocateScript);
 }

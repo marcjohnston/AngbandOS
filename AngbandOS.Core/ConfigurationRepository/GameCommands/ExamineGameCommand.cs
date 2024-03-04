@@ -17,5 +17,5 @@ internal class ExamineGameCommand : GameCommand
 
     public override char KeyChar => 'x';
 
-    protected override string ExecuteScriptName => nameof(ExamineScript);
+    protected override string? ExecuteScriptName => nameof(ExamineScript);
 }

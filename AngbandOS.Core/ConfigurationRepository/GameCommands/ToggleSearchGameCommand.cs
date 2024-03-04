@@ -17,5 +17,5 @@ internal class ToggleSearchGameCommand : GameCommand
 
     public override char KeyChar => 'S';
 
-    protected override string ExecuteScriptName => nameof(ToggleSearchScript);
+    protected override string? ExecuteScriptName => nameof(ToggleSearchScript);
 }

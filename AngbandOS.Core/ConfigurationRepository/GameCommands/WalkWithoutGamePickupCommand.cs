@@ -16,5 +16,5 @@ internal class WalkWithoutGamePickupCommand : GameCommand
 
     public override int? Repeat => null;
 
-    protected override string ExecuteScriptName => nameof(WalkWithoutPickupScript);
+    protected override string? ExecuteScriptName => nameof(WalkWithoutPickupScript);
 }

@@ -17,5 +17,5 @@ internal class MutantPowerGameCommand : GameCommand
 
     public override char KeyChar => 'p';
 
-    protected override string ExecuteScriptName => nameof(MutantPowerScript);
+    protected override string? ExecuteScriptName => nameof(MutantPowerScript);
 }

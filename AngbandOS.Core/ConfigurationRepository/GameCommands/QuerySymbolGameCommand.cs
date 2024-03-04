@@ -17,5 +17,5 @@ internal class QuerySymbolGameCommand : GameCommand
 
     public override char KeyChar => '/';
 
-    protected override string ExecuteScriptName => nameof(QuerySymbolScript);
+    protected override string? ExecuteScriptName => nameof(QuerySymbolScript);
 }

@@ -15,7 +15,7 @@ internal class BrandBoltsScript : Script, IScript, ISuccessfulScript
     private BrandBoltsScript(SaveGame saveGame) : base(saveGame) { }
 
     /// <summary>
-    /// Attempts to five a fire brand the first set of bolts found in the players inventory.  Returns true, if bolts were enchanted; false, otherwise.
+    /// Attempts to aaply a fire brand to the first set of bolts found in the players inventory.  Returns true, if bolts were enchanted; false, otherwise.
     /// </summary>
     /// <returns></returns>
     public bool ExecuteSuccessfulScript()

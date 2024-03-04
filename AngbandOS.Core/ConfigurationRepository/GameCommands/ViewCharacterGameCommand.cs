@@ -17,5 +17,5 @@ internal class ViewCharacterGameCommand : GameCommand
 
     public override char KeyChar => 'C';
 
-    protected override string ExecuteScriptName => nameof(ViewCharacterScript);
+    protected override string? ExecuteScriptName => nameof(ViewCharacterScript);
 }

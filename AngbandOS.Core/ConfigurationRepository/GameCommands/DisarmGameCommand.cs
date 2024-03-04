@@ -19,5 +19,5 @@ internal class DisarmGameCommand : GameCommand
 
     public override int? Repeat => 99;
 
-    protected override string ExecuteScriptName => nameof(DisarmScript);
+    protected override string? ExecuteScriptName => nameof(DisarmScript);
 }

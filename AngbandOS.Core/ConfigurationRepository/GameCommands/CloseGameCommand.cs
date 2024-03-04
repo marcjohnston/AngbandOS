@@ -22,5 +22,5 @@ internal class CloseGameCommand : GameCommand
     /// </summary>
     public override int? Repeat => 99;
 
-    protected override string ExecuteScriptName => nameof(CloseScript);
+    protected override string? ExecuteScriptName => nameof(CloseScript);
 }

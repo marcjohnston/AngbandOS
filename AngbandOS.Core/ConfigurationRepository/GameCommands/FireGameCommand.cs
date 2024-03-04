@@ -17,5 +17,5 @@ internal class FireGameCommand : GameCommand
 
     public override char KeyChar => 'f';
 
-    protected override string ExecuteScriptName => nameof(FireItemScript);
+    protected override string? ExecuteScriptName => nameof(FireItemScript);
 }

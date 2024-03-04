@@ -17,5 +17,5 @@ internal class FeelingAndLocationCommand : GameCommand
 
     public override char KeyChar => 'H';
 
-    protected override string ExecuteScriptName => nameof(SayLocationAndFeelingScript);
+    protected override string? ExecuteScriptName => nameof(SayLocationAndFeelingScript);
 }

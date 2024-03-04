@@ -17,5 +17,5 @@ internal class CommandListGameCommand : GameCommand
 
     public override char KeyChar => '?';
 
-    protected override string ExecuteScriptName => nameof(ListCommandsScript);
+    protected override string? ExecuteScriptName => nameof(ListCommandsScript);
 }
