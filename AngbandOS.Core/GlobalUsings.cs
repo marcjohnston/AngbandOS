@@ -53,6 +53,7 @@ global using AngbandOS.Core.Powers;
 global using AngbandOS.Core.ProjectileGraphics;
 global using AngbandOS.Core.Projection;
 global using AngbandOS.Core.Properties;
+global using AngbandOS.Core.PropertyFormatters;
 global using AngbandOS.Core.Races;
 global using AngbandOS.Core.RareItems;
 global using AngbandOS.Core.Realms;
@@ -80,6 +81,7 @@ global using AngbandOS.Core.Tiles;
 global using AngbandOS.Core.TimedActions;
 global using AngbandOS.Core.Towns;
 global using AngbandOS.Core.Vaults;
+global using AngbandOS.Core.Widgets;
 global using AngbandOS.Core.WizardCommands;
 
 global using AngbandOS.Core.Interface;

@@ -8,29 +8,12 @@
 namespace AngbandOS.Core.Properties;
 
 [Serializable]
-internal abstract class Property<T>
+internal abstract class IntProperty : Property
 {
-    protected readonly SaveGame SaveGame;
-    protected Property(SaveGame saveGame)
-    {
-        SaveGame = saveGame;
-    }
-
-    public abstract T Value { get; set; }
-
-    public override string ToString()
-    {
-        throw new Exception("Missing ToString override.");
-    }
-}
-
-[Serializable]
-internal class GoldIntProperty : Property<int>
-{
-    public GoldIntProperty(SaveGame saveGame) : base(saveGame) { }
+    protected IntProperty(SaveGame saveGame) : base(saveGame) { }
 
     private int _value;
-    public override int Value
+    public int Value
     {
         get
         {
@@ -39,9 +22,12 @@ internal class GoldIntProperty : Property<int>
         set
         {
             _value = value;
+            Set();
             SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawGoldFlaggedAction)).Set();
         }
     }
+
+    protected virtual void OnSet() { }
 
     public override string ToString()
     {

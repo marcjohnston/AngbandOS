@@ -209,7 +209,7 @@ internal class SaveGame
     public int Generation; // This is how many times the character name has changed.
     public bool GetFirstLevelMutation;
 
-    public readonly GoldIntProperty Gold;
+    public readonly IntProperty Gold;
 
     public Patron GooPatron;
     public bool HasAcidImmunity;
@@ -629,7 +629,7 @@ internal class SaveGame
         Debug.Print($"Singleton repository load took {elapsedTime.TotalSeconds.ToString()} seconds.");
 
         Quests = new List<Quest>();
-        Gold = new GoldIntProperty(this);
+        Gold = (IntProperty)SingletonRepository.Properties.Get(nameof(GoldIntProperty));
 
 
         TimedAcidResistance = new AcidResistanceTimedAction(this);
@@ -3977,6 +3977,11 @@ internal class SaveGame
         // The Wipe refresh is a special RedrawAction that occurs before all other RedrawActions.
         SingletonRepository.FlaggedActions.Get(nameof(RedrawAllFlaggedAction)).Check();
 
+        foreach (Widget widget in SingletonRepository.Widgets)
+        {
+            widget.Draw();
+        }
+
         SingletonRepository.FlaggedActions.Get(nameof(RedrawMapFlaggedAction)).Check();
         SingletonRepository.FlaggedActions.Get(nameof(RedrawPlayerFlaggedAction)).Check();
         SingletonRepository.FlaggedActions.Get(nameof(RedrawEquippyFlaggedAction)).Check();
@@ -4002,6 +4007,11 @@ internal class SaveGame
         SingletonRepository.FlaggedActions.Get(nameof(RedrawSpeedFlaggedAction)).Check();
         SingletonRepository.FlaggedActions.Get(nameof(RedrawStudyFlaggedAction)).Check();
         SingletonRepository.FlaggedActions.Get(nameof(RedrawTimeFlaggedAction)).Check(true); // TODO: Trigger this from GameTime
+
+        foreach (Property property in SingletonRepository.Properties)
+        {
+            property.Clear();
+        }
     }
 
     private void RegenMonsters()

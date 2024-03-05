@@ -29,4 +29,10 @@ internal class PrBasicRedrawActionGroupSetFlaggedAction : GroupSetFlaggedAction
             SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawSpeedFlaggedAction))
         };
     }
+
+    public override void Set()
+    {
+        base.Set();
+        SaveGame.Gold.Set();
+    }
 }

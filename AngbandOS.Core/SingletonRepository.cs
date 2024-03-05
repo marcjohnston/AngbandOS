@@ -61,6 +61,8 @@ internal class SingletonRepository
     public PowersRepository Powers;
     public ProjectileGraphicsRepository ProjectileGraphics;
     public ProjectilesRepository Projectiles;
+    public PropertiesRepository Properties;
+    public PropertyFormattersRepository PropertyFormatters;
     public RacesRepository Races;
     public RareItemsRepository RareItems;
     public RealmsRepository Realms;
@@ -70,7 +72,6 @@ internal class SingletonRepository
     public RoomLayoutsRepository RoomLayouts;
     public ScriptsRepository Scripts;
     public ScrollReadableFlavorsRepository ScrollReadableFlavors;
-    public UnreadableFlavorSyllablesRepository UnreadableFlavorSyllables;
     public ShopkeeperAcceptedCommentsRepository ShopkeeperAcceptedComments;
     public ShopkeeperBargainCommentsRepository ShopkeeperBargainComments;
     public ShopkeeperGoodCommentsRepository ShopkeeperGoodComments;
@@ -88,9 +89,11 @@ internal class SingletonRepository
     public TilesRepository Tiles;
     public TimedActionsRepository TimedActions;
     public TownsRepository Towns;
+    public UnreadableFlavorSyllablesRepository UnreadableFlavorSyllables;
     public VaultsRepository Vaults;
     public WandReadableFlavorsRepository WandReadableFlavors;
     public WizardCommandsRepository WizardCommands;
+    public WidgetsRepository Widgets;
     public WorshipPlayerAttacksRepository WorshipPlayerAttacks;
 
     public SingletonRepository(SaveGame saveGame)
@@ -173,6 +176,8 @@ internal class SingletonRepository
         Powers = AddRepository<PowersRepository>(new PowersRepository(SaveGame));
         ProjectileGraphics = AddRepository<ProjectileGraphicsRepository>(new ProjectileGraphicsRepository(SaveGame));
         Projectiles = AddRepository<ProjectilesRepository>(new ProjectilesRepository(SaveGame));
+        Properties = AddRepository<PropertiesRepository>(new PropertiesRepository(SaveGame));
+        PropertyFormatters = AddRepository<PropertyFormattersRepository>(new PropertyFormattersRepository(SaveGame));
         Races = AddRepository<RacesRepository>(new RacesRepository(SaveGame));
         RareItems = AddRepository<RareItemsRepository>(new RareItemsRepository(SaveGame));
         Realms = AddRepository<RealmsRepository>(new RealmsRepository(SaveGame));
@@ -182,7 +187,6 @@ internal class SingletonRepository
         RoomLayouts = AddRepository<RoomLayoutsRepository>(new RoomLayoutsRepository(SaveGame));
         Scripts = AddRepository<ScriptsRepository>(new ScriptsRepository(SaveGame));
         ScrollReadableFlavors = AddRepository<ScrollReadableFlavorsRepository>(new ScrollReadableFlavorsRepository(SaveGame));
-        UnreadableFlavorSyllables = AddRepository<UnreadableFlavorSyllablesRepository>(new UnreadableFlavorSyllablesRepository(SaveGame));
         ShopkeeperAcceptedComments = AddRepository<ShopkeeperAcceptedCommentsRepository>(new ShopkeeperAcceptedCommentsRepository(SaveGame));
         ShopkeeperBargainComments = AddRepository<ShopkeeperBargainCommentsRepository>(new ShopkeeperBargainCommentsRepository(SaveGame));
         ShopkeeperGoodComments = AddRepository<ShopkeeperGoodCommentsRepository>(new ShopkeeperGoodCommentsRepository(SaveGame));
@@ -200,9 +204,11 @@ internal class SingletonRepository
         Tiles = AddRepository<TilesRepository>(new TilesRepository(SaveGame));
         TimedActions = AddRepository<TimedActionsRepository>(new TimedActionsRepository(SaveGame));
         Towns = AddRepository<TownsRepository>(new TownsRepository(SaveGame));
+        UnreadableFlavorSyllables = AddRepository<UnreadableFlavorSyllablesRepository>(new UnreadableFlavorSyllablesRepository(SaveGame));
         Vaults = AddRepository<VaultsRepository>(new VaultsRepository(SaveGame));
         WandReadableFlavors = AddRepository<WandReadableFlavorsRepository>(new WandReadableFlavorsRepository(SaveGame));
         WizardCommands = AddRepository<WizardCommandsRepository>(new WizardCommandsRepository(SaveGame));
+        Widgets = AddRepository<WidgetsRepository>(new WidgetsRepository(SaveGame));
         WorshipPlayerAttacks = AddRepository<WorshipPlayerAttacksRepository>(new WorshipPlayerAttacksRepository(SaveGame));
 
         // Load all of the objects into each repository.  This is where the assembly will be scanned or the database will be read.
