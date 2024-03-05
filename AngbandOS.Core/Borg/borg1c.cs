@@ -1961,7 +1961,7 @@ internal static class borg1c
 
 
         /* Extract "AU xxxxxxxxx" */
-        borg_gold = saveGame.Gold;
+        borg_gold = saveGame.Gold.Value;
 
         borg_skill.BI_WEIGHT = saveGame.WeightCarried;
 

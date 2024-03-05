@@ -20,13 +20,13 @@ internal class EnchantWeapon4h4d0acScript : Script, IScript, IStoreScript, ISucc
     {
         if (!SaveGame.ServiceHaggle(800, out int price))
         {
-            if (price > SaveGame.Gold)
+            if (price > SaveGame.Gold.Value)
             {
                 SaveGame.MsgPrint("You do not have the gold!");
             }
             else
             {
-                SaveGame.Gold -= price;
+                SaveGame.Gold.Value -= price;
                 SaveGame.SayComment_1();
                 SaveGame.PlaySound(SoundEffectEnum.StoreTransaction);
                 SaveGame.StorePrtGold();

@@ -29,20 +29,20 @@ internal class EatGoldAttackEffect : AttackEffect
         else
         {
             // The amount of gold taken depends on how much you're carrying
-            int gold = (SaveGame.Gold / 10) + SaveGame.DieRoll(25);
+            int gold = (SaveGame.Gold.Value / 10) + SaveGame.DieRoll(25);
             if (gold < 2)
             {
                 gold = 2;
             }
             if (gold > 5000)
             {
-                gold = (SaveGame.Gold / 20) + SaveGame.DieRoll(3000);
+                gold = (SaveGame.Gold.Value / 20) + SaveGame.DieRoll(3000);
             }
-            if (gold > SaveGame.Gold)
+            if (gold > SaveGame.Gold.Value)
             {
-                gold = SaveGame.Gold;
+                gold = SaveGame.Gold.Value;
             }
-            SaveGame.Gold -= gold;
+            SaveGame.Gold.Value -= gold;
             // The monster gets the gold it stole, in case you kill it
             // before leaving the level
             monster.StolenGold += gold;
@@ -51,7 +51,7 @@ internal class EatGoldAttackEffect : AttackEffect
             {
                 SaveGame.MsgPrint("Nothing was stolen.");
             }
-            else if (SaveGame.Gold != 0)
+            else if (SaveGame.Gold.Value != 0)
             {
                 SaveGame.MsgPrint("Your purse feels lighter.");
                 SaveGame.MsgPrint($"{gold} coins were stolen!");

@@ -5,6 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using AngbandOS.Core.Properties;
 using System.Diagnostics;
 using System.Runtime.Serialization.Formatters.Binary;
 
@@ -208,24 +209,9 @@ internal class SaveGame
     public Gender? Gender = null; // The gender will be null until the player has selected the gender.
     public int Generation; // This is how many times the character name has changed.
     public bool GetFirstLevelMutation;
-    private int _gold;
 
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <remarks>borg: player->au</remarks>
-    public int Gold
-    {
-        get
-        {
-            return _gold;
-        }
-        set
-        {
-            _gold = value;
-            SingletonRepository.FlaggedActions.Get(nameof(RedrawGoldFlaggedAction)).Set();
-        }
-    }
+    public GoldIntProperty Gold;
+
     public Patron GooPatron;
     public bool HasAcidImmunity;
     public bool HasAcidResistance;
@@ -643,6 +629,7 @@ internal class SaveGame
         TimeSpan elapsedTime = DateTime.Now - startTime;
         Debug.Print($"Singleton repository load took {elapsedTime.TotalSeconds.ToString()} seconds.");
 
+        Gold = new GoldIntProperty(this);
         Quests = new List<Quest>();
         InitializeAllocationTables();
     }
@@ -670,7 +657,7 @@ internal class SaveGame
     public void StorePrtGold()
     {
         Screen.PrintLine("Gold Remaining: ", 39, 53);
-        string outVal = $"{Gold,9}";
+        string outVal = $"{Gold.Value, 9}";
         Screen.PrintLine(outVal, 39, 68);
     }
 
@@ -1686,7 +1673,7 @@ internal class SaveGame
         {
             CharacterName = Name, // The player parameter
             Level = ExperienceLevel, // The player parameter
-            Gold = Gold, // The parameter
+            Gold = Gold.Value, // The parameter
             IsAlive = !IsDead, // If the player is dead, then the savegame Player will be null.
             Comments = ""
         };
@@ -3016,6 +3003,9 @@ internal class SaveGame
         }
     }
 
+    /// <summary>
+    /// This is all of the logic for each turn in the game.
+    /// </summary>
     private void DungeonLoop()
     {
         NewLevelFlag = false;
@@ -3346,7 +3336,7 @@ internal class SaveGame
         DiedFrom = "Ripe Old Age";
         ExperiencePoints = MaxExperienceGained;
         ExperienceLevel = MaxLevelGained;
-        Gold += 10000000;
+        Gold.Value += 10000000;
         SetBackground(BackgroundImageEnum.Crown);
         Screen.Clear();
         AnyKey(44);
@@ -6881,7 +6871,7 @@ internal class SaveGame
             if (item.Category == ItemTypeEnum.Gold)
             {
                 MsgPrint($"You collect {item.TypeSpecificValue} gold pieces worth of {itemName}.");
-                Gold += item.TypeSpecificValue;
+                Gold.Value += item.TypeSpecificValue;
                 DeleteObject(item);
             }
             else
@@ -9142,7 +9132,7 @@ internal class SaveGame
         {
             gold = 100;
         }
-        Gold = gold;
+        Gold.Value = gold;
     }
 
     public void GetStats()

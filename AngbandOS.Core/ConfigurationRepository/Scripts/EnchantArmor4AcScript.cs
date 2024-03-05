@@ -20,13 +20,13 @@ internal class EnhanceArmorScript : Script, IScript, IStoreScript, ISuccessfulSc
     {
         if (!SaveGame.ServiceHaggle(400, out int price))
         {
-            if (price > SaveGame.Gold)
+            if (price > SaveGame.Gold.Value)
             {
                 SaveGame.MsgPrint("You do not have the gold!");
             }
             else
             {
-                SaveGame.Gold -= price;
+                SaveGame.Gold.Value -= price;
                 SaveGame.SayComment_1();
                 SaveGame.PlaySound(SoundEffectEnum.StoreTransaction);
                 SaveGame.StorePrtGold();

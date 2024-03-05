@@ -52,6 +52,7 @@ global using AngbandOS.Core.Plurals;
 global using AngbandOS.Core.Powers;
 global using AngbandOS.Core.ProjectileGraphics;
 global using AngbandOS.Core.Projection;
+global using AngbandOS.Core.Properties;
 global using AngbandOS.Core.Races;
 global using AngbandOS.Core.RareItems;
 global using AngbandOS.Core.Realms;

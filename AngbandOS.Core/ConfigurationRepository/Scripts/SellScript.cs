@@ -70,7 +70,7 @@ internal class SellScript : Script, IStoreScript
             }
             SaveGame.SayComment_1();
             SaveGame.PlaySound(SoundEffectEnum.StoreTransaction);
-            SaveGame.Gold += price;
+            SaveGame.Gold.Value += price;
             SaveGame.StorePrtGold();
             int guess = qPtr.Value() * qPtr.Count;
             if (storeCommandEvent.Store.StoreFactory.StoreIdentifiesItems)

@@ -401,7 +401,7 @@ internal class RenderCharacterScript : Script, IScript, IRepeatableScript
         {
             PrintShortScore("Cur SP (Mana)  ", SaveGame.Mana, 33, 52, ColorEnum.BrightRed);
         }
-        PrintLongScore("Gold           ", SaveGame.Gold, 34, 52, ColorEnum.Green);
+        PrintLongScore("Gold           ", SaveGame.Gold.Value, 34, 52, ColorEnum.Green);
     }
 
     /// <summary>

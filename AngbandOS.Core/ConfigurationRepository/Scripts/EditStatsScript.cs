@@ -42,7 +42,7 @@ internal class EditStatsScript : Script, IScript
             SaveGame.AbilityScores[i].Innate = tmpInt;
             SaveGame.AbilityScores[i].InnateMax = tmpInt;
         }
-        if (!SaveGame.GetString("Gold: ", out tmpVal, $"{SaveGame.Gold}", 9))
+        if (!SaveGame.GetString("Gold: ", out tmpVal, $"{SaveGame.Gold.Value}", 9))
         {
             return;
         }
@@ -54,7 +54,7 @@ internal class EditStatsScript : Script, IScript
         {
             tmpInt = 0;
         }
-        SaveGame.Gold = tmpInt;
+        SaveGame.Gold.Value = tmpInt;
 
         if (!SaveGame.GetString("Mana: ", out tmpVal, $"{SaveGame.Mana}", 9))
         {

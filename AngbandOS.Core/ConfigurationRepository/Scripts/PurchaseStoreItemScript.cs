@@ -51,7 +51,7 @@ internal class PurchaseStoreItemScript : Script, IStoreScript
             {
                 SaveGame.MsgPrint($"That costs {best} gold per item.");
             }
-            int maxBuy = Math.Min(SaveGame.Gold / best, oPtr.Count);
+            int maxBuy = Math.Min(SaveGame.Gold.Value / best, oPtr.Count);
             if (maxBuy < 2)
             {
                 amt = 1;
@@ -89,11 +89,11 @@ internal class PurchaseStoreItemScript : Script, IStoreScript
             }
             if (!choice)
             {
-                if (SaveGame.Gold >= price)
+                if (SaveGame.Gold.Value >= price)
                 {
                     SaveGame.SayComment_1();
                     SaveGame.PlaySound(SoundEffectEnum.StoreTransaction);
-                    SaveGame.Gold -= price;
+                    SaveGame.Gold.Value -= price;
                     SaveGame.StorePrtGold();
                     if (storeCommandEvent.Store.StoreFactory.StoreIdentifiesItems)
                     {

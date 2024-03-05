@@ -55,7 +55,7 @@ public class GameServer
             }
             else
             {
-                return SaveGame.Gold;
+                return SaveGame.Gold.Value;
             }
         }
     }
