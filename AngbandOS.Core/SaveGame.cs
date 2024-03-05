@@ -5,7 +5,6 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-using AngbandOS.Core.Properties;
 using System.Diagnostics;
 using System.Runtime.Serialization.Formatters.Binary;
 
@@ -210,7 +209,7 @@ internal class SaveGame
     public int Generation; // This is how many times the character name has changed.
     public bool GetFirstLevelMutation;
 
-    public GoldIntProperty Gold;
+    public readonly GoldIntProperty Gold;
 
     public Patron GooPatron;
     public bool HasAcidImmunity;
@@ -403,76 +402,76 @@ internal class SaveGame
     /// 
     /// </summary>
     /// <remarks>borg: player->timed[TMD_OPP_ACID]</remarks>
-    public TimedAction TimedAcidResistance;
-    public TimedAction TimedBleeding;
-    public TimedAction TimedBlessing;
-    public TimedAction TimedBlindness;
+    public readonly TimedAction TimedAcidResistance;
+    public readonly TimedAction TimedBleeding;
+    public readonly TimedAction TimedBlessing;
+    public readonly TimedAction TimedBlindness;
 
     /// <summary>
     /// 
     /// </summary>
     /// <remarks>borg: player->timed[TMD_OPP_COLD]</remarks>
-    public TimedAction TimedColdResistance;
-    public TimedAction TimedConfusion;
-    public TimedAction TimedEtherealness;
-    public TimedAction TimedFear;
+    public readonly TimedAction TimedColdResistance;
+    public readonly TimedAction TimedConfusion;
+    public readonly TimedAction TimedEtherealness;
+    public readonly TimedAction TimedFear;
 
     /// <summary>
     /// 
     /// </summary>
     /// <remarks>borg: player->timed[TMD_OPP_FIRE]</remakrs>
-    public TimedAction TimedFireResistance;
-    public TimedAction TimedHallucinations;
+    public readonly TimedAction TimedFireResistance;
+    public readonly TimedAction TimedHallucinations;
 
     /// <summary>
     /// 
     /// </summary>
-    /// <remarks>borg: player->timed[TMD_FAST]</remarks>
-    public TimedAction TimedHaste;
+    /// <remarks>readonly borg: player->timed[TMD_FAST]</remarks>
+    public readonly TimedAction TimedHaste;
 
     /// <summary>
     /// 
     /// </summary>
     /// <remarks>borg: player->timed[TMD_HERO]</remarks>
-    public TimedAction TimedHeroism;
-    public TimedAction TimedInfravision;
-    public TimedAction TimedInvulnerability;
+    public readonly TimedAction TimedHeroism;
+    public readonly TimedAction TimedInfravision;
+    public readonly TimedAction TimedInvulnerability;
 
     /// <summary>
     /// 
     /// </summary>
     /// <remarks>borg: player->timed[TMD_OPP_ELEC]</remarks>
-    public TimedAction TimedLightningResistance;
-    public TimedAction TimedParalysis;
-    public TimedAction TimedPoison;
+    public readonly TimedAction TimedLightningResistance;
+    public readonly TimedAction TimedParalysis;
+    public readonly TimedAction TimedPoison;
 
     /// <summary>
     /// 
-    /// </summary>
-    /// <remarks>borg: player->timed[TMD_OPP_POIS]</remarks>
-    public TimedAction TimedPoisonResistance;
+    /// </summaryreadonly >
+    /// <remarks>readonly borg: player->timed[TMD_OPP_POIS]</remarks>
+    public readonly TimedAction TimedPoisonResistance;
 
     /// <summary>
     /// 
     /// </summary>
     /// <remarks>borg:player->timed[TMD_PROTEVIL]</remarks>
-    public TimedAction TimedProtectionFromEvil;
-    public TimedAction TimedSeeInvisibility;
-    public TimedAction TimedSlow;
+    public readonly TimedAction TimedProtectionFromEvil;
+    public readonly TimedAction TimedSeeInvisibility;
+    public readonly TimedAction TimedSlow;
 
     /// <summary>
     /// 
     /// </summary>
     /// <remarks>borg: player->timed[TMD_STONESKIN]</remarks>
-    public TimedAction TimedStoneskin;
-    public TimedAction TimedStun;
+    public readonly TimedAction TimedStoneskin;
+    public readonly TimedAction TimedStun;
 
     /// <summary>
     /// 
     /// </summary>
     /// <remarks>borg: player->timed[TMD_SHERO]</remarks>
-    public TimedAction TimedSuperheroism;
-    public TimedAction TimedTelepathy;
+    public readonly TimedAction TimedSuperheroism;
+    public readonly TimedAction TimedTelepathy;
 
     /// <summary>
     /// Returns the index of the town that the player owns a home; or null, if the player doesn't own a home.
@@ -602,7 +601,7 @@ internal class SaveGame
     public int ActiveQuests => Quests.Where(q => q.IsActive).Count();
 
     /// <summary>
-    /// Creates a new game.
+    /// Allocates all storage and creates a new game.  
     /// </summary>
     /// <param name="configuration">Represents configuration data to use when generating a new game.</param>
     public SaveGame(Configuration? configuration)
@@ -629,8 +628,36 @@ internal class SaveGame
         TimeSpan elapsedTime = DateTime.Now - startTime;
         Debug.Print($"Singleton repository load took {elapsedTime.TotalSeconds.ToString()} seconds.");
 
-        Gold = new GoldIntProperty(this);
         Quests = new List<Quest>();
+        Gold = new GoldIntProperty(this);
+
+
+        TimedAcidResistance = new AcidResistanceTimedAction(this);
+        TimedBleeding = new BleedingTimedAction(this);
+        TimedBlessing = new BlessingTimedAction(this);
+        TimedBlindness = new BlindnessTimedAction(this);
+        TimedColdResistance = new ColdResistanceTimedAction(this);
+        TimedConfusion = new ConfusionTimedAction(this);
+        TimedEtherealness = new EtherealnessTimedAction(this);
+        TimedFear = new FearTimedAction(this);
+        TimedFireResistance = new FireResistanceTimedAction(this);
+        TimedHallucinations = new HallucinationsTimedAction(this);
+        TimedHaste = new HasteTimedAction(this);
+        TimedHeroism = new HeroismTimedAction(this);
+        TimedInfravision = new InfravisionTimedAction(this);
+        TimedInvulnerability = new InvulnerabilityTimedAction(this);
+        TimedLightningResistance = new LightningResistanceTimedAction(this);
+        TimedParalysis = new ParalysisTimedAction(this);
+        TimedPoison = new PoisonTimedAction(this);
+        TimedPoisonResistance = new PoisonResistanceTimedAction(this);
+        TimedProtectionFromEvil = new ProtectionFromEvilTimedAction(this);
+        TimedSeeInvisibility = new SeeInvisibilityTimedAction(this);
+        TimedSlow = new SlowTimedAction(this);
+        TimedStoneskin = new StoneskinTimedAction(this);
+        TimedStun = new StunTimedAction(this);
+        TimedSuperheroism = new SuperHeroismTimedAction(this);
+        TimedTelepathy = new TelepathyTimedAction(this);
+
         InitializeAllocationTables();
     }
 
@@ -1701,6 +1728,11 @@ internal class SaveGame
         }
     }
 
+    /// <summary>
+    /// Initializes everything for a new game.  This method is called when starting a new game and when the player dies and a new game is started.  This method does not allocate
+    /// memory for a game, that is done in the SaveGame constructor.  This method resets all of the value.
+    /// </summary>
+    /// <exception cref="Exception"></exception>
     private void GenerateNewGame()
     {
         SetBackground(BackgroundImageEnum.Paper);
@@ -1711,32 +1743,6 @@ internal class SaveGame
             Inventory[i] = null;
         }
         _invenCnt = 0;
-
-        TimedAcidResistance = new AcidResistanceTimedAction(this);
-        TimedBleeding = new BleedingTimedAction(this);
-        TimedBlessing = new BlessingTimedAction(this);
-        TimedBlindness = new BlindnessTimedAction(this);
-        TimedColdResistance = new ColdResistanceTimedAction(this);
-        TimedConfusion = new ConfusionTimedAction(this);
-        TimedEtherealness = new EtherealnessTimedAction(this);
-        TimedFear = new FearTimedAction(this);
-        TimedFireResistance = new FireResistanceTimedAction(this);
-        TimedHallucinations = new HallucinationsTimedAction(this);
-        TimedHaste = new HasteTimedAction(this);
-        TimedHeroism = new HeroismTimedAction(this);
-        TimedInfravision = new InfravisionTimedAction(this);
-        TimedInvulnerability = new InvulnerabilityTimedAction(this);
-        TimedLightningResistance = new LightningResistanceTimedAction(this);
-        TimedParalysis = new ParalysisTimedAction(this);
-        TimedPoison = new PoisonTimedAction(this);
-        TimedPoisonResistance = new PoisonResistanceTimedAction(this);
-        TimedProtectionFromEvil = new ProtectionFromEvilTimedAction(this);
-        TimedSeeInvisibility = new SeeInvisibilityTimedAction(this);
-        TimedSlow = new SlowTimedAction(this);
-        TimedStoneskin = new StoneskinTimedAction(this);
-        TimedStun = new StunTimedAction(this);
-        TimedSuperheroism = new SuperHeroismTimedAction(this);
-        TimedTelepathy = new TelepathyTimedAction(this);
         InitializeMutations();
         for (int i = 0; i < 4; i++)
         {
@@ -1813,7 +1819,7 @@ internal class SaveGame
         }
 
         RaceAtBirth = Race;
-        PlayerBirthQuests();
+        InitializeQuests();
         IsDead = false;
         PlayerOutfit();
         FlavorInit();
@@ -12466,7 +12472,7 @@ internal class SaveGame
     /// 2. Clears the quests and creates _maxQuests (50) quests.
     /// 3. Creates a quest for all of the quests (24) for all of the dungeons (20).
     /// </summary>
-    private void PlayerBirthQuests()
+    private void InitializeQuests()
     {
         ResetUniqueOnlyGuardianStatus();
         int questIndex = 0;
