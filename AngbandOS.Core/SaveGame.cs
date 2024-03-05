@@ -223,9 +223,7 @@ internal class SaveGame
         set
         {
             _gold = value;
-
-            // Send a message to the attached view port so that the consuming application knows that the gold value has been updated.
-            ConsoleViewPort.GoldUpdated(_gold);
+            SingletonRepository.FlaggedActions.Get(nameof(RedrawGoldFlaggedAction)).Set();
         }
     }
     public Patron GooPatron;
@@ -6884,7 +6882,6 @@ internal class SaveGame
             {
                 MsgPrint($"You collect {item.TypeSpecificValue} gold pieces worth of {itemName}.");
                 Gold += item.TypeSpecificValue;
-                SingletonRepository.FlaggedActions.Get(nameof(RedrawGoldFlaggedAction)).Set();
                 DeleteObject(item);
             }
             else

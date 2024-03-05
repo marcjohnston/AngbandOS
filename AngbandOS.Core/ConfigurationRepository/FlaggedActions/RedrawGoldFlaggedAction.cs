@@ -5,6 +5,9 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using AngbandOS.Core.Gods;
+using AngbandOS.Core.Interface;
+
 namespace AngbandOS.Core.FlaggedActions;
 
 [Serializable]
@@ -44,5 +47,8 @@ internal class RedrawGoldFlaggedAction : FlaggedAction
         SaveGame.Screen.Print(PrefixColor, PrefixName, Row, Column);
         string tmp = SaveGame.Gold.ToString().PadLeft(Width);
         SaveGame.Screen.Print(Color, tmp, Row, PrefixName.Length);
+
+        // Send a message to the attached view port so that the consuming application knows that the gold value has been updated.
+        SaveGame.ConsoleViewPort.GoldUpdated(SaveGame.Gold);
     }
 }

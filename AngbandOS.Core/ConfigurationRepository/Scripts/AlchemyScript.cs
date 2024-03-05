@@ -88,7 +88,6 @@ internal class AlchemyScript : Script, IScript, ICancellableScript
             }
             SaveGame.MsgPrint($"You turn {oName} to {price} coins worth of gold.");
             SaveGame.Gold += price;
-            SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawGoldFlaggedAction)).Set();
         }
         oPtr.ItemIncrease(-amt);
         oPtr.ItemDescribe();
