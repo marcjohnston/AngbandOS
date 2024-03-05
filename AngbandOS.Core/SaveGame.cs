@@ -7801,6 +7801,13 @@ internal class SaveGame
         return castedScript.ExecuteSuccessfulScript();
     }
 
+    public bool RunCancellableScript(string scriptName)
+    {
+        // Get the script from the singleton repository.
+        ICancellableScript? castedScript = (ICancellableScript)SingletonRepository.Scripts.Get(scriptName);
+        return castedScript.ExecuteCancellableScript();
+    }
+
     public bool RunNoticeableScript(string scriptName)
     {
         // Get the script from the singleton repository.

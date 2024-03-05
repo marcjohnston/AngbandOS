@@ -10,9 +10,21 @@ using static System.Reflection.Metadata.BlobBuilder;
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class BrandBoltsScript : Script, IScript, ISuccessfulScript
+internal class BrandBoltsScript : Script, IScript, ISuccessfulScript, ICancellableScript
 {
     private BrandBoltsScript(SaveGame saveGame) : base(saveGame) { }
+
+    /// <summary>
+    /// Runs the successful script and returns true, because the player cannot cancel the script.
+    /// </summary>
+    /// <returns></returns>
+    public bool ExecuteCancellableScript()
+    {
+        ExecuteSuccessfulScript();
+
+        // Return true because the player cannot cancel the script.
+        return true;
+    }
 
     /// <summary>
     /// Attempts to aaply a fire brand to the first set of bolts found in the players inventory.  Returns true, if bolts were enchanted; false, otherwise.

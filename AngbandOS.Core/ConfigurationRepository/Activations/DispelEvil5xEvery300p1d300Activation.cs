@@ -22,8 +22,7 @@ internal class DispelEvil5xEvery300p1d300Activation : Activation
 
     protected override bool OnActivate(Item item)
     {
-        SaveGame.RunScriptInt(nameof(DispelEvil4xScript), SaveGame.ExperienceLevel * 5);
-        return true;
+        return SaveGame.RunCancellableScript(nameof(DispelEvil5xScript));
     }
 
     public override int Value => 4000;

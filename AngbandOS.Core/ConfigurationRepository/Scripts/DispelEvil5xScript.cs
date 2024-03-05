@@ -8,12 +8,12 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class DestroyAdjacentDoorsScript : Script, IScript, ISuccessfulScript, ICancellableScript
+internal class DispelEvil5xScript : Script, ISuccessfulScript, IScript, ICancellableScript
 {
-    private DestroyAdjacentDoorsScript(SaveGame saveGame) : base(saveGame) { }
+    private DispelEvil5xScript(SaveGame saveGame) : base(saveGame) { }
 
     /// <summary>
-    /// Runs the successful script and returns true because the player cannot cancel the script.
+    /// Executes the successful script and returns true because the player cannot cancel the script.
     /// </summary>
     /// <returns></returns>
     public bool ExecuteCancellableScript()
@@ -23,19 +23,17 @@ internal class DestroyAdjacentDoorsScript : Script, IScript, ISuccessfulScript, 
     }
 
     /// <summary>
-    /// Projects the kill door to the current location with a radius of 1 to destory all doors that are adjacent to the player.
+    /// Projects dispel evil at all monsters in the players line-of-sight and return true, if the project actually hits and affects a monster; false, otherwise.
     /// </summary>
     /// <returns></returns>
     public bool ExecuteSuccessfulScript()
     {
-        ProjectionFlag flg = ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectHide;
-        return SaveGame.Project(0, 1, SaveGame.MapY, SaveGame.MapX, 0, SaveGame.SingletonRepository.Projectiles.Get(nameof(KillDoorProjectile)), flg);
+        return SaveGame.ProjectAtAllInLos(SaveGame.SingletonRepository.Projectiles.Get(nameof(DispEvilProjectile)), SaveGame.ExperienceLevel * 5);
     }
 
     /// <summary>
-    /// Executes the successful script and disposes of the result.
+    /// Executes the Int script with a damage value of 4x the players experience.
     /// </summary>
-    /// <returns></returns>
     public void ExecuteScript()
     {
         ExecuteSuccessfulScript();

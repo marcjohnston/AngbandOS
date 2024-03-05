@@ -21,8 +21,7 @@ internal class BrandBoltsEvery999Activation : Activation
 
     protected override bool OnActivate(Item item)
     {
-        SaveGame.RunScript(nameof(BrandBoltsScript));
-        return true;
+        return SaveGame.RunCancellableScript(nameof(BrandBoltsScript));
     }
 
     public override int RechargeTime() => 999;

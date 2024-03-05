@@ -8,9 +8,19 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class CallChaosScript : Script, IScript
+internal class CallChaosScript : Script, IScript, ICancellableScript
 {
     private CallChaosScript(SaveGame saveGame) : base(saveGame) { }
+
+    /// <summary>
+    /// Runs the script and returns true because the player cannot cancel the script.
+    /// </summary>
+    /// <returns></returns>
+    public bool ExecuteCancellableScript()
+    {
+        ExecuteScript();
+        return true;
+    }
 
     /// <summary>
     /// Randomly chooses a projectile and randomly fires a beam or a ball with random damage, sometimes allowing the choice of direction.

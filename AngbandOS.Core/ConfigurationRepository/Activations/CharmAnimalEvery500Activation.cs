@@ -22,8 +22,7 @@ internal class CharmAnimalEvery500Activation : Activation
 
     protected override bool OnActivate(Item item)
     {
-        SaveGame.RunScript(nameof(CharmOthersScript));
-        return true;
+        return SaveGame.RunCancellableScript(nameof(CharmOthersScript));
     }
 
     public override int Value => 12500;

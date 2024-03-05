@@ -20,8 +20,7 @@ internal class DestroyDoorsEvery10Activation : Activation
 
     protected override bool OnActivate(Item item)
     {
-        SaveGame.RunScript(nameof(DestroyAdjacentDoorsScript));
-        return true;
+        return SaveGame.RunCancellableScript(nameof(DestroyAdjacentDoorsScript));
     }
 
     public override int RechargeTime() => 10;

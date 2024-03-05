@@ -8,9 +8,19 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class CharmOthersScript : Script, IScript, IScriptInt
+internal class CharmOthersScript : Script, IScript, IScriptInt, ICancellableScript
 {
     private CharmOthersScript(SaveGame saveGame) : base(saveGame) { }
+
+    /// <summary>
+    /// Runs the script and returns true because the player cannot cancel the script.
+    /// </summary>
+    /// <returns></returns>
+    public bool ExecuteCancellableScript()
+    {
+        ExecuteScript();
+        return true;
+    }
 
     public void ExecuteScriptInt(int damage)
     {

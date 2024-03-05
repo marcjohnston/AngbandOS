@@ -21,7 +21,7 @@ internal class _templateActivation : Activation
 
     protected override bool OnActivate(Item item)
     {
-        return SaveGame.RunSuccessfulScript(nameof(AlchemyScript));
+        return SaveGame.RunCancellableScript(nameof(AlchemyScript));
     }
 
     public override int RechargeTime() => 500;

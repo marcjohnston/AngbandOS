@@ -9,5 +9,9 @@ namespace AngbandOS.Core.Interfaces;
 
 internal interface ICancellableScript
 {
+    /// <summary>
+    /// Run the associated script and return false, if the player cancels the script; true, otherwise.
+    /// </summary>
+    /// <returns></returns>
     bool ExecuteCancellableScript();
 }

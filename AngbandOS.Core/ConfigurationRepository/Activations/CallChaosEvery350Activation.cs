@@ -22,7 +22,7 @@ internal class CallChaosEvery350Activation : Activation
 
     protected override bool OnActivate(Item item)
     {
-        SaveGame.RunScript(nameof(CallChaosScript));
+        SaveGame.RunCancellableScript(nameof(CallChaosScript));
         return true;
     }
 
