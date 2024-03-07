@@ -3992,7 +3992,6 @@ internal class SaveGame
         SingletonRepository.FlaggedActions.Get(nameof(RedrawArmorFlaggedAction)).Check();
         SingletonRepository.FlaggedActions.Get(nameof(RedrawHpFlaggedAction)).Check();
         SingletonRepository.FlaggedActions.Get(nameof(RedrawManaFlaggedAction)).Check();
-        SingletonRepository.FlaggedActions.Get(nameof(RedrawGoldFlaggedAction)).Check();
         SingletonRepository.FlaggedActions.Get(nameof(RedrawDepthFlaggedAction)).Check();
         SingletonRepository.FlaggedActions.Get(nameof(RedrawHealthFlaggedAction)).Check();
         SingletonRepository.FlaggedActions.Get(nameof(RedrawCutFlaggedAction)).Check();

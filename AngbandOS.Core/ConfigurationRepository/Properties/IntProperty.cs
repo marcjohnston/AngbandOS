@@ -23,7 +23,6 @@ internal abstract class IntProperty : Property
         {
             _value = value;
             Set();
-            SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawGoldFlaggedAction)).Set();
         }
     }
 

@@ -20,7 +20,6 @@ internal class PrBasicRedrawActionGroupSetFlaggedAction : GroupSetFlaggedAction
             SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawStatsFlaggedAction)),
             SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawExperienceLevelFlaggedAction)),
             SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawExperiencePointsFlaggedAction)),
-            SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawGoldFlaggedAction)),
             SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawArmorFlaggedAction)),
             SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawHpFlaggedAction)),
             SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawManaFlaggedAction)),
