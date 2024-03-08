@@ -12,13 +12,13 @@ internal abstract class IntPropertyWidget : Widget
 {
     protected IntPropertyWidget(SaveGame saveGame) : base(saveGame) { }
     public abstract string IntPropertyName { get; }
-    public IntProperty IntProperty { get; private set; }
+    public IntFlaggedProperty IntProperty { get; private set; }
     public abstract string IntPropertyFormatterName { get; }
     public IntPropertyFormatter IntPropertyFormatter { get; private set; }
     public abstract ColorEnum Color { get; }
     public override void Bind()
     {
-        IntProperty = (IntProperty)SaveGame.SingletonRepository.Properties.Get(IntPropertyName);
+        IntProperty = (IntFlaggedProperty)SaveGame.SingletonRepository.Properties.Get(IntPropertyName);
         IntPropertyFormatter = (IntPropertyFormatter)SaveGame.SingletonRepository.PropertyFormatters.Get(IntPropertyFormatterName);
     }
     public override void Draw()

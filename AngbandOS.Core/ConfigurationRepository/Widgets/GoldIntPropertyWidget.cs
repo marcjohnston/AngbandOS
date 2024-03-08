@@ -16,6 +16,6 @@ internal class GoldIntPropertyWidget : IntPropertyWidget
     public override int Width => 9;
     public override int Height => 1;
     public override ColorEnum Color => ColorEnum.BrightGreen;
-    public override string IntPropertyName => nameof(GoldIntProperty);
+    public override string IntPropertyName => nameof(GoldIntFlaggedProperty);
     public override string IntPropertyFormatterName => nameof(RightAlignIntPropertyFormatter);
 }

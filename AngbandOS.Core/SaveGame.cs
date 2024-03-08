@@ -209,7 +209,7 @@ internal class SaveGame
     public int Generation; // This is how many times the character name has changed.
     public bool GetFirstLevelMutation;
 
-    public readonly IntProperty Gold;
+    public readonly GoldIntFlaggedProperty Gold;
 
     public Patron GooPatron;
     public bool HasAcidImmunity;
@@ -629,7 +629,7 @@ internal class SaveGame
         Debug.Print($"Singleton repository load took {elapsedTime.TotalSeconds.ToString()} seconds.");
 
         Quests = new List<Quest>();
-        Gold = (IntProperty)SingletonRepository.Properties.Get(nameof(GoldIntProperty));
+        Gold = (GoldIntFlaggedProperty)SingletonRepository.Properties.Get(nameof(GoldIntFlaggedProperty));
 
 
         TimedAcidResistance = new AcidResistanceTimedAction(this);
@@ -4007,7 +4007,7 @@ internal class SaveGame
         SingletonRepository.FlaggedActions.Get(nameof(RedrawStudyFlaggedAction)).Check();
         SingletonRepository.FlaggedActions.Get(nameof(RedrawTimeFlaggedAction)).Check(true); // TODO: Trigger this from GameTime
 
-        foreach (Property property in SingletonRepository.Properties)
+        foreach (FlaggedProperty property in SingletonRepository.Properties)
         {
             property.Clear();
         }

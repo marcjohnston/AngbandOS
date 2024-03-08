@@ -8,9 +8,9 @@
 namespace AngbandOS.Core.Properties;
 
 [Serializable]
-internal abstract class IntProperty : Property
+internal abstract class IntFlaggedProperty : FlaggedProperty
 {
-    protected IntProperty(SaveGame saveGame) : base(saveGame) { }
+    protected IntFlaggedProperty(SaveGame saveGame) : base(saveGame) { }
 
     private int _value;
     public int Value
@@ -21,12 +21,22 @@ internal abstract class IntProperty : Property
         }
         set
         {
+            // Allow derived classes to perform additional after set functionality.
+            OnBeforeSet();
+
             _value = value;
+
+            // Call the set method for the base Property class.
             Set();
+
+            // Allow derived classes to perform additional after set functionality.
+            OnAfterSet();
         }
     }
 
-    protected virtual void OnSet() { }
+
+    protected virtual void OnBeforeSet() { }
+    protected virtual void OnAfterSet() { }
 
     public override string ToString()
     {

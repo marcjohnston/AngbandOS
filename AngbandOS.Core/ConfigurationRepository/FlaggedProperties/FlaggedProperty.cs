@@ -8,11 +8,11 @@
 namespace AngbandOS.Core.Properties;
 
 [Serializable]
-internal abstract class Property : IGetKey<string>
+internal abstract class FlaggedProperty : IGetKey<string>
 {
     protected readonly SaveGame SaveGame;
     private bool _flag;
-    protected Property(SaveGame saveGame)
+    protected FlaggedProperty(SaveGame saveGame)
     {
         SaveGame = saveGame;
     }
