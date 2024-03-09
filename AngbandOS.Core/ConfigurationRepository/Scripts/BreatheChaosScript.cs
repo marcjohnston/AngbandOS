@@ -22,6 +22,6 @@ internal class BreatheChaosScript : Script, IScript
         {
             return;
         }
-        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(ChaosProjectile)), dir, SaveGame.Health, -2);
+        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(ChaosProjectile)), dir, SaveGame.Health.Value, -2);
     }
 }

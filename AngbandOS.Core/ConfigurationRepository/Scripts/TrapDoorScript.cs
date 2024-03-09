@@ -31,7 +31,7 @@ internal class TrapDoorScript : Script, IScript
             string name = "a trap door";
             SaveGame.TakeHit(damage, name);
             // Even if we survived, we need a new level
-            if (SaveGame.Health >= 0)
+            if (SaveGame.Health.Value >= 0)
             {
                 SaveGame.DoCmdSaveGame(true);
             }

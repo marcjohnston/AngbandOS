@@ -684,7 +684,7 @@ internal abstract class Projectile : IGetKey<string>
         {
             if (SaveGame.TrackedMonsterIndex == cPtr.MonsterIndex)
             {
-                SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawHealthFlaggedAction)).Set();
+                SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawMonsterHealthFlaggedAction)).Set();
             }
             mPtr.SleepLevel = 0;
             mPtr.Health -= dam;

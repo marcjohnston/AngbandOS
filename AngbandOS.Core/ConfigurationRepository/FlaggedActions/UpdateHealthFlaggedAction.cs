@@ -32,13 +32,13 @@ internal class UpdateHealthFlaggedAction : FlaggedAction
         mhp /= 10;
         if (SaveGame.MaxHealth != mhp)
         {
-            if (SaveGame.Health >= mhp)
+            if (SaveGame.Health.Value >= mhp)
             {
-                SaveGame.Health = mhp;
+                SaveGame.Health.Value = mhp;
                 SaveGame.FractionalHealth = 0;
             }
             SaveGame.MaxHealth = mhp;
-            SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawHpFlaggedAction)).Set();
+            SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawHealthPointsFlaggedAction)).Set();
         }
     }
 }

@@ -800,7 +800,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         {
             SaveGame.Speed -= (j - (ii / 2)) / (ii / 10);
         }
-        if (SaveGame.Food >= Constants.PyFoodMax)
+        if (SaveGame.Food.Value >= Constants.PyFoodMax)
         {
             SaveGame.Speed -= 10;
         }

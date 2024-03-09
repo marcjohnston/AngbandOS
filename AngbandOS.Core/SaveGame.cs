@@ -193,11 +193,6 @@ internal class SaveGame
     public int ExperienceMultiplier;
     private const int _smallLevel = 3;
 
-    /// <summary>
-    ///
-    /// </summary>
-    /// <remarks>borg: This was player->exp</remarks>
-    public int Food;
     public int FractionalExperiencePoints;
     public int FractionalHealth;
     public int FractionalMana;
@@ -207,11 +202,18 @@ internal class SaveGame
     public bool GetFirstLevelMutation;
     
     public readonly GoldIntFlaggedProperty Gold;
-    public ManaIntFlaggedProperty Mana;
-    public MaxManaIntFlaggedProperty MaxMana;
-    public ExperiencePointsIntFlaggedProperty ExperiencePoints;
-    public DisplayedArmorClassBonusIntFlaggedProperty DisplayedArmorClassBonus;
-    public DisplayedBaseArmorClassIntFlaggedProperty DisplayedBaseArmorClass;
+    public readonly ManaIntFlaggedProperty Mana;
+    public readonly MaxManaIntFlaggedProperty MaxMana;
+    public readonly ExperiencePointsIntFlaggedProperty ExperiencePoints;
+    public readonly DisplayedArmorClassBonusIntFlaggedProperty DisplayedArmorClassBonus;
+    public readonly DisplayedBaseArmorClassIntFlaggedProperty DisplayedBaseArmorClass;
+    public readonly HealthIntFlaggedProperty Health;
+
+    /// <summary>
+    ///
+    /// </summary>
+    /// <remarks>borg: This was player->exp</remarks>
+    public readonly FoodIntFlaggedProperty Food;
 
     /// <summary>
     /// 
@@ -285,7 +287,6 @@ internal class SaveGame
     public bool HasTelepathy;
     public bool HasTimeResistance;
     public bool HasUnpriestlyWeapon;
-    public int Health;
     public int Height;
     public int HitDie;
     public int InfravisionRange;
@@ -635,6 +636,8 @@ internal class SaveGame
         ExperiencePoints = (ExperiencePointsIntFlaggedProperty)SingletonRepository.Properties.Get(nameof(ExperiencePointsIntFlaggedProperty));
         DisplayedArmorClassBonus = (DisplayedArmorClassBonusIntFlaggedProperty)SingletonRepository.Properties.Get(nameof(DisplayedArmorClassBonusIntFlaggedProperty));
         DisplayedBaseArmorClass = (DisplayedBaseArmorClassIntFlaggedProperty)SingletonRepository.Properties.Get(nameof(DisplayedBaseArmorClassIntFlaggedProperty));
+        Food = (FoodIntFlaggedProperty)SingletonRepository.Properties.Get(nameof(FoodIntFlaggedProperty));
+        Health = (HealthIntFlaggedProperty)SingletonRepository.Properties.Get(nameof(HealthIntFlaggedProperty));
 
         TimedAcidResistance = new AcidResistanceTimedAction(this);
         TimedBleeding = new BleedingTimedAction(this);
@@ -1778,7 +1781,7 @@ internal class SaveGame
             rPtr.Knowledge.RPkills = 0;
         }
         SingletonRepository.MonsterRaces[SingletonRepository.MonsterRaces.Count - 1].MaxNum = 0;
-        Food = Constants.PyFoodFull - 1;
+        Food.Value = Constants.PyFoodFull - 1;
         IsWizard = false;
         IsWinner = false;
 
@@ -1904,7 +1907,7 @@ internal class SaveGame
         FullScreenOverlay = false;
         SetBackground(BackgroundImageEnum.Overhead);
         Playing = true;
-        if (Health < 0)
+        if (Health.Value < 0)
         {
             IsDead = true;
         }
@@ -2524,7 +2527,7 @@ internal class SaveGame
     public void HealthTrack(int mIdx)
     {
         TrackedMonsterIndex = mIdx;
-        SingletonRepository.FlaggedActions.Get(nameof(RedrawHealthFlaggedAction)).Set();
+        SingletonRepository.FlaggedActions.Get(nameof(RedrawMonsterHealthFlaggedAction)).Set();
     }
 
     public void MonsterDeath(int mIdx)
@@ -3402,14 +3405,14 @@ internal class SaveGame
         {
             if (Resting == -1)
             {
-                if (Health == MaxHealth && Mana.Value >= MaxMana.Value)
+                if (Health.Value == MaxHealth && Mana.Value >= MaxMana.Value)
                 {
                     Disturb(false);
                 }
             }
             else if (Resting == -2)
             {
-                if (Health == MaxHealth && Mana.Value == MaxMana.Value && TimedBlindness.TurnsRemaining == 0 &&
+                if (Health.Value == MaxHealth && Mana.Value == MaxMana.Value && TimedBlindness.TurnsRemaining == 0 &&
                     TimedConfusion.TurnsRemaining == 0 && TimedPoison.TurnsRemaining == 0 && TimedFear.TurnsRemaining == 0 && TimedStun.TurnsRemaining == 0 &&
                     TimedBleeding.TurnsRemaining == 0 && TimedSlow.TurnsRemaining == 0 && TimedParalysis.TurnsRemaining == 0 && TimedHallucinations.TurnsRemaining == 0 &&
                     WordOfRecallDelay == 0)
@@ -3657,7 +3660,7 @@ internal class SaveGame
         if (!GridPassable(MapY, MapX))
         {
             caveNoRegen = true;
-            if (TimedInvulnerability.TurnsRemaining == 0 && TimedEtherealness.TurnsRemaining == 0 && (Health > ExperienceLevel / 5 || Race.IsEthereal))
+            if (TimedInvulnerability.TurnsRemaining == 0 && TimedEtherealness.TurnsRemaining == 0 && (Health.Value > ExperienceLevel / 5 || Race.IsEthereal))
             {
                 string damDesc;
                 if (Race.IsEthereal)
@@ -3690,7 +3693,7 @@ internal class SaveGame
             }
             TakeHit(damage, "a fatal wound");
         }
-        if (Food < Constants.PyFoodMax)
+        if (Food.Value < Constants.PyFoodMax)
         {
             if (GameTime.IsTurnHundred)
             {
@@ -3707,29 +3710,29 @@ internal class SaveGame
                 {
                     additionalEnergy = 1;
                 }
-                SetFood(Food - additionalEnergy);
+                SetFood(Food.Value - additionalEnergy);
             }
         }
         else
         {
-            SetFood(Food - 100);
+            SetFood(Food.Value - 100);
         }
-        if (Food < Constants.PyFoodStarve)
+        if (Food.Value < Constants.PyFoodStarve)
         {
-            int i = (Constants.PyFoodStarve - Food) / 10;
+            int i = (Constants.PyFoodStarve - Food.Value) / 10;
             if (TimedInvulnerability.TurnsRemaining == 0)
             {
                 TakeHit(i, "starvation");
             }
         }
         int regenAmount = Constants.PyRegenNormal;
-        if (Food < Constants.PyFoodWeak)
+        if (Food.Value < Constants.PyFoodWeak)
         {
-            if (Food < Constants.PyFoodStarve)
+            if (Food.Value < Constants.PyFoodStarve)
             {
                 regenAmount = 0;
             }
-            else if (Food < Constants.PyFoodFaint)
+            else if (Food.Value < Constants.PyFoodFaint)
             {
                 regenAmount = Constants.PyRegenFaint;
             }
@@ -3737,7 +3740,7 @@ internal class SaveGame
             {
                 regenAmount = Constants.PyRegenWeak;
             }
-            if (Food < Constants.PyFoodFaint)
+            if (Food.Value < Constants.PyFoodFaint)
             {
                 if (TimedParalysis.TurnsRemaining == 0 && RandomLessThan(100) < 10)
                 {
@@ -3804,7 +3807,7 @@ internal class SaveGame
         {
             regenAmount = 0;
         }
-        if (Health < MaxHealth && !caveNoRegen)
+        if (Health.Value < MaxHealth && !caveNoRegen)
         {
             RegenerateHealth(regenAmount);
         }
@@ -3994,10 +3997,10 @@ internal class SaveGame
         SingletonRepository.FlaggedActions.Get(nameof(RedrawExperiencePointsFlaggedAction)).Check();
         SingletonRepository.FlaggedActions.Get(nameof(RedrawStatsFlaggedAction)).Check();
         SingletonRepository.FlaggedActions.Get(nameof(RedrawArmorFlaggedAction)).Check();
-        SingletonRepository.FlaggedActions.Get(nameof(RedrawHpFlaggedAction)).Check();
+        SingletonRepository.FlaggedActions.Get(nameof(RedrawHealthPointsFlaggedAction)).Check();
         SingletonRepository.FlaggedActions.Get(nameof(RedrawManaFlaggedAction)).Check();
         SingletonRepository.FlaggedActions.Get(nameof(RedrawDepthFlaggedAction)).Check();
-        SingletonRepository.FlaggedActions.Get(nameof(RedrawHealthFlaggedAction)).Check();
+        SingletonRepository.FlaggedActions.Get(nameof(RedrawMonsterHealthFlaggedAction)).Check();
         SingletonRepository.FlaggedActions.Get(nameof(RedrawCutFlaggedAction)).Check();
         SingletonRepository.FlaggedActions.Get(nameof(RedrawStunFlaggedAction)).Check();
         SingletonRepository.FlaggedActions.Get(nameof(RedrawHungerFlaggedAction)).Check();
@@ -4045,7 +4048,7 @@ internal class SaveGame
                 }
                 if (TrackedMonsterIndex == i)
                 {
-                    SingletonRepository.FlaggedActions.Get(nameof(RedrawHealthFlaggedAction)).Set();
+                    SingletonRepository.FlaggedActions.Get(nameof(RedrawMonsterHealthFlaggedAction)).Set();
                 }
             }
         }
@@ -4889,7 +4892,7 @@ internal class SaveGame
         SingletonRepository.FlaggedActions.Get(nameof(UpdateLightFlaggedAction)).Set();
         SingletonRepository.FlaggedActions.Get(nameof(UpdateViewFlaggedAction)).Set();
         SingletonRepository.FlaggedActions.Get(nameof(UpdateDistancesFlaggedAction)).Set();
-        SingletonRepository.FlaggedActions.Get(nameof(RedrawHealthFlaggedAction)).Set();
+        SingletonRepository.FlaggedActions.Get(nameof(RedrawMonsterHealthFlaggedAction)).Set();
         SingletonRepository.FlaggedActions.Get(nameof(RedrawMapFlaggedAction)).Set();
     }
 
@@ -6018,7 +6021,7 @@ internal class SaveGame
             return false;
         }
         // If we're about to kill ourselves, give us chance to back out
-        if (useHealth && Health < cost)
+        if (useHealth && Health.Value < cost)
         {
             if (!GetCheck("Really use the power in your weakened state? "))
             {
@@ -6058,7 +6061,7 @@ internal class SaveGame
             Mana.Value -= (cost / 2) + DieRoll(cost / 2);
         }
         // We'll need to redraw
-        SingletonRepository.FlaggedActions.Get(nameof(RedrawHpFlaggedAction)).Set();
+        SingletonRepository.FlaggedActions.Get(nameof(RedrawHealthPointsFlaggedAction)).Set();
         SingletonRepository.FlaggedActions.Get(nameof(RedrawManaFlaggedAction)).Set();
         // Check to see if we were successful
         if (DieRoll(AbilityScores[useStat].Innate) >=
@@ -13352,31 +13355,31 @@ internal class SaveGame
 
     public void RegenerateHealth(int percent)
     {
-        int oldHealth = Health;
+        int oldHealth = Health.Value;
         int newHealth = (MaxHealth * percent) + Constants.PyRegenHpbase;
-        Health += newHealth >> 16;
-        if (Health < 0 && oldHealth > 0)
+        Health.Value += newHealth >> 16;
+        if (Health.Value < 0 && oldHealth > 0)
         {
-            Health = Constants.MaxShort;
+            Health.Value = Constants.MaxShort;
         }
         int newFractionalHealth = (newHealth & 0xFFFF) + FractionalHealth;
         if (newFractionalHealth >= 0x10000)
         {
             FractionalHealth = newFractionalHealth - 0x10000;
-            Health++;
+            Health.Value++;
         }
         else
         {
             FractionalHealth = newFractionalHealth;
         }
-        if (Health >= MaxHealth)
+        if (Health.Value >= MaxHealth)
         {
-            Health = MaxHealth;
+            Health.Value = MaxHealth;
             FractionalHealth = 0;
         }
-        if (oldHealth != Health)
+        if (oldHealth != Health.Value)
         {
-            SingletonRepository.FlaggedActions.Get(nameof(RedrawHpFlaggedAction)).Set();
+            SingletonRepository.FlaggedActions.Get(nameof(RedrawHealthPointsFlaggedAction)).Set();
         }
     }
 
@@ -13428,15 +13431,15 @@ internal class SaveGame
     /// <returns></returns>
     public bool RestoreHealth(int num)
     {
-        if (Health < MaxHealth)
+        if (Health.Value < MaxHealth)
         {
-            Health += num;
-            if (Health >= MaxHealth)
+            Health.Value += num;
+            if (Health.Value >= MaxHealth)
             {
-                Health = MaxHealth;
+                Health.Value = MaxHealth;
                 FractionalHealth = 0;
             }
-            SingletonRepository.FlaggedActions.Get(nameof(RedrawHpFlaggedAction)).Set();
+            SingletonRepository.FlaggedActions.Get(nameof(RedrawHealthPointsFlaggedAction)).Set();
             if (num < 5)
             {
                 MsgPrint("You feel a little better.");
@@ -13463,23 +13466,23 @@ internal class SaveGame
         int oldAux, newAux;
         bool notice = false;
         v = v > 20000 ? 20000 : v < 0 ? 0 : v;
-        if (Food < Constants.PyFoodFaint)
+        if (Food.Value < Constants.PyFoodFaint)
         {
             oldAux = 0;
         }
-        else if (Food < Constants.PyFoodWeak)
+        else if (Food.Value < Constants.PyFoodWeak)
         {
             oldAux = 1;
         }
-        else if (Food < Constants.PyFoodAlert)
+        else if (Food.Value < Constants.PyFoodAlert)
         {
             oldAux = 2;
         }
-        else if (Food < Constants.PyFoodFull)
+        else if (Food.Value < Constants.PyFoodFull)
         {
             oldAux = 3;
         }
-        else if (Food < Constants.PyFoodMax)
+        else if (Food.Value < Constants.PyFoodMax)
         {
             oldAux = 4;
         }
@@ -13563,7 +13566,7 @@ internal class SaveGame
             }
             notice = true;
         }
-        Food = v;
+        Food.Value = v;
         if (!notice)
         {
             return false;
@@ -13638,24 +13641,24 @@ internal class SaveGame
                 damage = 1;
             }
         }
-        Health -= damage;
-        SingletonRepository.FlaggedActions.Get(nameof(RedrawHpFlaggedAction)).Set();
+        Health.Value -= damage;
+        SingletonRepository.FlaggedActions.Get(nameof(RedrawHealthPointsFlaggedAction)).Set();
         if (penInvuln)
         {
             MsgPrint("The attack penetrates your shield of invulnerability!");
         }
-        if (Health < 0)
+        if (Health.Value < 0)
         {
             if (DieRoll(10) <= SingletonRepository.Gods.Get(nameof(ZoKalarGod)).AdjustedFavour)
             {
                 MsgPrint("Zo-Kalar's favour saves you from death!");
-                Health += damage;
+                Health.Value += damage;
             }
             else
             {
                 if (IsWizard && !GetCheck("Die? "))
                 {
-                    Health += damage;
+                    Health.Value += damage;
                 }
                 else
                 {
@@ -13673,7 +13676,7 @@ internal class SaveGame
                 }
             }
         }
-        if (Health < warning)
+        if (Health.Value < warning)
         {
             PlaySound(SoundEffectEnum.HealthWarning);
             MsgPrint("*** LOW HITPOINT WARNING! ***");
@@ -15643,7 +15646,7 @@ internal class SaveGame
         MonsterRace rPtr = mPtr.Race;
         if (TrackedMonsterIndex == mIdx)
         {
-            SingletonRepository.FlaggedActions.Get(nameof(RedrawHealthFlaggedAction)).Set();
+            SingletonRepository.FlaggedActions.Get(nameof(RedrawMonsterHealthFlaggedAction)).Set();
         }
         mPtr.SleepLevel = 0;
         mPtr.Health -= dam;
@@ -16423,7 +16426,7 @@ internal class SaveGame
                 RedrawSingleLocation(fy, fx);
                 if (TrackedMonsterIndex == mIdx)
                 {
-                    SingletonRepository.FlaggedActions.Get(nameof(RedrawHealthFlaggedAction)).Set();
+                    SingletonRepository.FlaggedActions.Get(nameof(RedrawMonsterHealthFlaggedAction)).Set();
                 }
                 if (rPtr.Knowledge.RSights < Constants.MaxShort)
                 {
@@ -16466,7 +16469,7 @@ internal class SaveGame
                 RedrawSingleLocation(fy, fx);
                 if (TrackedMonsterIndex == mIdx)
                 {
-                    SingletonRepository.FlaggedActions.Get(nameof(RedrawHealthFlaggedAction)).Set();
+                    SingletonRepository.FlaggedActions.Get(nameof(RedrawMonsterHealthFlaggedAction)).Set();
                 }
             }
         }

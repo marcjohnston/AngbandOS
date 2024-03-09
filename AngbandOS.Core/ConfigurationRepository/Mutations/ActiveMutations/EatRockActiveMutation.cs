@@ -46,16 +46,16 @@ internal class EatRockActiveMutation : Mutation
         }
         if (cPtr.FeatureType.IsVisibleDoor || cPtr.FeatureType.IsSecretDoor || cPtr.FeatureType.IsRubble)
         {
-            SaveGame.SetFood(SaveGame.Food + 3000);
+            SaveGame.SetFood(SaveGame.Food.Value + 3000);
         }
         else if (cPtr.FeatureType.IsVein)
         {
-            SaveGame.SetFood(SaveGame.Food + 5000);
+            SaveGame.SetFood(SaveGame.Food.Value + 5000);
         }
         else
         {
             SaveGame.MsgPrint("This granite is very filling!");
-            SaveGame.SetFood(SaveGame.Food + 10000);
+            SaveGame.SetFood(SaveGame.Food.Value + 10000);
         }
         SaveGame.WallToMud(dir);
         int oy = SaveGame.MapY;

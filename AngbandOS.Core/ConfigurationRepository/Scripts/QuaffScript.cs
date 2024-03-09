@@ -62,7 +62,7 @@ internal class QuaffScript : Script, IScript, IRepeatableScript
             SaveGame.GainExperience((itemLevel + (SaveGame.ExperienceLevel >> 1)) / SaveGame.ExperienceLevel);
         }
         // Most potions give us a bit of food too
-        SaveGame.SetFood(SaveGame.Food + item.TypeSpecificValue);
+        SaveGame.SetFood(SaveGame.Food.Value + item.TypeSpecificValue);
         bool channeled = false;
         // If we're a channeler, we might be able to spend mana instead of using it up
         if (SaveGame.BaseCharacterClass.SpellCastingType.CanUseManaInsteadOfConsumingItem)

@@ -28,8 +28,8 @@ internal class VampiricDrainScript : Script, IScript
             return;
         }
         SaveGame.RestoreHealth(dummy);
-        dummy = SaveGame.Food + Math.Min(5000, 100 * dummy);
-        if (SaveGame.Food < Constants.PyFoodMax)
+        dummy = SaveGame.Food.Value + Math.Min(5000, 100 * dummy);
+        if (SaveGame.Food.Value < Constants.PyFoodMax)
         {
             SaveGame.SetFood(dummy >= Constants.PyFoodMax ? Constants.PyFoodMax - 1 : dummy);
         }

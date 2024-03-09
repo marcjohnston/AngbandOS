@@ -27,7 +27,7 @@ internal class HpToSpRandomMutation : Mutation
         {
             return;
         }
-        int healing = SaveGame.Health;
+        int healing = SaveGame.Health.Value;
         if (healing > wounds)
         {
             healing = wounds;

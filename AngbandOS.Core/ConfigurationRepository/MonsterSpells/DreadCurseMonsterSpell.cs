@@ -24,13 +24,13 @@ internal class DreadCurseMonsterSpell : MonsterSpell
         }
         else
         {
-            int dummy = (65 + SaveGame.DieRoll(25)) * saveGame.Health / 100;
+            int dummy = (65 + SaveGame.DieRoll(25)) * saveGame.Health.Value / 100;
             saveGame.MsgPrint("Your feel your life fade away!");
             saveGame.TakeHit(dummy, monster.Name);
             saveGame.CurseEquipment(100, 20);
-            if (saveGame.Health < 1)
+            if (saveGame.Health.Value < 1)
             {
-                saveGame.Health = 1;
+                saveGame.Health.Value = 1;
             }
         }
     }

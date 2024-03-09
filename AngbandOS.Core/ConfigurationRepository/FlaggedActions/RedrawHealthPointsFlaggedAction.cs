@@ -8,13 +8,13 @@
 namespace AngbandOS.Core.FlaggedActions;
 
 [Serializable]
-internal class RedrawHpFlaggedAction : FlaggedAction
+internal class RedrawHealthPointsFlaggedAction : FlaggedAction
 {
     private const int RowMaxhp = 23;
     private const int RowCurhp = 24;
     private const int ColMaxhp = 0;
     private const int ColCurhp = 0;
-    private RedrawHpFlaggedAction(SaveGame saveGame) : base(saveGame) { }
+    private RedrawHealthPointsFlaggedAction(SaveGame saveGame) : base(saveGame) { }
     protected override void Execute()
     {
         SaveGame.Screen.Print("Max HP ", RowMaxhp, ColMaxhp);
@@ -22,16 +22,16 @@ internal class RedrawHpFlaggedAction : FlaggedAction
         ColorEnum color = ColorEnum.BrightGreen;
         SaveGame.Screen.Print(color, tmp, RowMaxhp, ColMaxhp + 7);
         SaveGame.Screen.Print("Cur HP ", RowCurhp, ColCurhp);
-        tmp = SaveGame.Health.ToString().PadLeft(5);
-        if (SaveGame.Health >= SaveGame.MaxHealth)
+        tmp = SaveGame.Health.Value.ToString().PadLeft(5);
+        if (SaveGame.Health.Value >= SaveGame.MaxHealth)
         {
             color = ColorEnum.BrightGreen;
         }
-        else if (SaveGame.Health > SaveGame.MaxHealth * Constants.HitpointWarn / 5)
+        else if (SaveGame.Health.Value > SaveGame.MaxHealth * Constants.HitpointWarn / 5)
         {
             color = ColorEnum.BrightYellow;
         }
-        else if (SaveGame.Health > SaveGame.MaxHealth * Constants.HitpointWarn / 10)
+        else if (SaveGame.Health.Value > SaveGame.MaxHealth * Constants.HitpointWarn / 10)
         {
             color = ColorEnum.Orange;
         }

@@ -81,9 +81,9 @@ internal class VampireRace : Race
     public override void Eat(Item item)
     {
         // Vampires only get 1/10th of the food value
-        SaveGame.SetFood(SaveGame.Food + (item.TypeSpecificValue / 10));
+        SaveGame.SetFood(SaveGame.Food.Value + (item.TypeSpecificValue / 10));
         SaveGame.MsgPrint("Mere victuals hold scant sustenance for a being such as yourself.");
-        if (SaveGame.Food < Constants.PyFoodAlert)
+        if (SaveGame.Food.Value < Constants.PyFoodAlert)
         {
             SaveGame.MsgPrint("Your hunger can only be satisfied with fresh blood!");
         }
@@ -109,7 +109,7 @@ internal class VampireRace : Race
                     int dummy = SaveGame.ExperienceLevel + (SaveGame.DieRoll(SaveGame.ExperienceLevel) * Math.Max(1, SaveGame.ExperienceLevel / 10));
                     if (SaveGame.DrainLife(direction, dummy))
                     {
-                        if (SaveGame.Food < Constants.PyFoodFull)
+                        if (SaveGame.Food.Value < Constants.PyFoodFull)
                         {
                             SaveGame.RestoreHealth(dummy);
                         }
@@ -117,8 +117,8 @@ internal class VampireRace : Race
                         {
                             SaveGame.MsgPrint("You were not hungry.");
                         }
-                        dummy = SaveGame.Food + Math.Min(5000, 100 * dummy);
-                        if (SaveGame.Food < Constants.PyFoodMax)
+                        dummy = SaveGame.Food.Value + Math.Min(5000, 100 * dummy);
+                        if (SaveGame.Food.Value < Constants.PyFoodMax)
                         {
                             SaveGame.SetFood(dummy >= Constants.PyFoodMax ? Constants.PyFoodMax - 1 : dummy);
                         }
