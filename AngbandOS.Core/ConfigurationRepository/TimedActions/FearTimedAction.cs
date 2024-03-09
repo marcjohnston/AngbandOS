@@ -10,7 +10,7 @@ namespace AngbandOS.Core.TimedActions;
 [Serializable]
 internal class FearTimedAction : TimedAction
 {
-    public FearTimedAction(SaveGame saveGame) : base(saveGame) { }
+    private FearTimedAction(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     protected override void EffectStopped()
     {
         SaveGame.MsgPrint("You feel bolder now.");

@@ -10,7 +10,7 @@ namespace AngbandOS.Core.TimedActions;
 [Serializable]
 internal class BlindnessTimedAction : TimedAction
 {
-    public BlindnessTimedAction(SaveGame saveGame) : base(saveGame) { }
+    private BlindnessTimedAction(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     protected override void EffectStopped()
     {
         SaveGame.MsgPrint("You can see again.");

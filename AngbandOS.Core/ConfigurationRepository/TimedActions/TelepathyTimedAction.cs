@@ -10,7 +10,7 @@ namespace AngbandOS.Core.TimedActions;
 [Serializable]
 internal class TelepathyTimedAction : TimedAction
 {
-    public TelepathyTimedAction(SaveGame saveGame) : base(saveGame) { }
+    private TelepathyTimedAction(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     protected override void EffectStopped()
     {
         SaveGame.MsgPrint("Your consciousness contracts again.");

@@ -10,7 +10,7 @@ namespace AngbandOS.Core.TimedActions;
 [Serializable]
 internal class HasteTimedAction : TimedAction
 {
-    public HasteTimedAction(SaveGame saveGame) : base(saveGame) { }
+    private HasteTimedAction(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     protected override void EffectStopped()
     {
         SaveGame.MsgPrint("You feel yourself slow down.");

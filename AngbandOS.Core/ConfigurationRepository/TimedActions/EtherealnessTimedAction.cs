@@ -10,7 +10,7 @@ namespace AngbandOS.Core.TimedActions;
 [Serializable]
 internal class EtherealnessTimedAction : TimedAction
 {
-    public EtherealnessTimedAction(SaveGame saveGame) : base(saveGame) { }
+    private EtherealnessTimedAction(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     protected override void EffectStopped()
     {
         SaveGame.MsgPrint("You feel opaque.");

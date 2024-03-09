@@ -10,7 +10,7 @@ namespace AngbandOS.Core.TimedActions;
 [Serializable]
 internal class SuperHeroismTimedAction : TimedAction
 {
-    public SuperHeroismTimedAction(SaveGame saveGame) : base(saveGame) { }
+    private SuperHeroismTimedAction(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     protected override void EffectStopped()
     {
         SaveGame.MsgPrint("You feel less Berserk.");

@@ -10,7 +10,7 @@ namespace AngbandOS.Core.TimedActions;
 [Serializable]
 internal class ProtectionFromEvilTimedAction : TimedAction
 {
-    public ProtectionFromEvilTimedAction(SaveGame saveGame) : base(saveGame) { }
+    private ProtectionFromEvilTimedAction(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     protected override void EffectStopped()
     {
         SaveGame.MsgPrint("You no longer feel safe from evil.");

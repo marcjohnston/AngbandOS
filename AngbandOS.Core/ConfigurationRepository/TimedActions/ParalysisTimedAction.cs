@@ -10,7 +10,7 @@ namespace AngbandOS.Core.TimedActions;
 [Serializable]
 internal class ParalysisTimedAction : TimedAction
 {
-    public ParalysisTimedAction(SaveGame saveGame) : base(saveGame) { }
+    private ParalysisTimedAction(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     protected override void EffectStopped()
     {
         SaveGame.MsgPrint("You can move again.");

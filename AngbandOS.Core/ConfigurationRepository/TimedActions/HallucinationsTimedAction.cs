@@ -10,7 +10,7 @@ namespace AngbandOS.Core.TimedActions;
 [Serializable]
 internal class HallucinationsTimedAction : TimedAction
 {
-    public HallucinationsTimedAction(SaveGame saveGame) : base(saveGame) { }
+    private HallucinationsTimedAction(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
     protected override void EffectStopped()
     {

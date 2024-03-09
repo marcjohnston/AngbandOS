@@ -10,7 +10,7 @@ namespace AngbandOS.Core.TimedActions;
 [Serializable]
 internal class AcidResistanceTimedAction : TimedAction
 {
-    public AcidResistanceTimedAction(SaveGame saveGame) : base(saveGame) { }
+    private AcidResistanceTimedAction(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
     protected override void EffectIncreased(int newRate, int currentRate)
     {

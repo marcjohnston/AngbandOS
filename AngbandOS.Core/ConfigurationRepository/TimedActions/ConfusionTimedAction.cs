@@ -10,7 +10,7 @@ namespace AngbandOS.Core.TimedActions;
 [Serializable]
 internal class ConfusionTimedAction : TimedAction
 {
-    public ConfusionTimedAction(SaveGame saveGame) : base(saveGame) { }
+    private ConfusionTimedAction(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     protected override void EffectStopped()
     {
         SaveGame.MsgPrint("You feel less confused now.");

@@ -10,7 +10,7 @@ namespace AngbandOS.Core.TimedActions;
 [Serializable]
 internal class PoisonTimedAction : TimedAction
 {
-    public PoisonTimedAction(SaveGame saveGame) : base(saveGame) { }
+    private PoisonTimedAction(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     protected override void EffectStopped()
     {
         SaveGame.MsgPrint("You are no longer poisoned.");

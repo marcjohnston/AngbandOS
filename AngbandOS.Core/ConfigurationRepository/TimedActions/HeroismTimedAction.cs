@@ -10,7 +10,7 @@ namespace AngbandOS.Core.TimedActions;
 [Serializable]
 internal class HeroismTimedAction : TimedAction
 {
-    public HeroismTimedAction(SaveGame saveGame) : base(saveGame) { }
+    private HeroismTimedAction(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     protected override void EffectStopped()
     {
         SaveGame.MsgPrint("The heroism wears off.");

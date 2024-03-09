@@ -10,7 +10,7 @@ namespace AngbandOS.Core.TimedActions;
 [Serializable]
 internal class BlessingTimedAction : TimedAction
 {
-    public BlessingTimedAction(SaveGame saveGame) : base(saveGame) { }
+    private BlessingTimedAction(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     protected override void EffectStopped()
     {
         SaveGame.MsgPrint("The prayer has expired.");

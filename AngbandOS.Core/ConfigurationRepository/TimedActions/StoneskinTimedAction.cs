@@ -10,7 +10,7 @@ namespace AngbandOS.Core.TimedActions;
 [Serializable]
 internal class StoneskinTimedAction : TimedAction
 {
-    public StoneskinTimedAction(SaveGame saveGame) : base(saveGame) { }
+    private StoneskinTimedAction(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     protected override void EffectStopped()
     {
         SaveGame.MsgPrint("Your skin returns to normal.");

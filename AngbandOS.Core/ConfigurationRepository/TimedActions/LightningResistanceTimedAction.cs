@@ -10,7 +10,7 @@ namespace AngbandOS.Core.TimedActions;
 [Serializable]
 internal class LightningResistanceTimedAction : TimedAction
 {
-    public LightningResistanceTimedAction(SaveGame saveGame) : base(saveGame) { }
+    private LightningResistanceTimedAction(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     protected override void EffectStopped()
     {
         SaveGame.MsgPrint("You feel less resistant to electricity.");

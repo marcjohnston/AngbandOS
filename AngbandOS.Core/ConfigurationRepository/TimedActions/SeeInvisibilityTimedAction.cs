@@ -10,7 +10,7 @@ namespace AngbandOS.Core.TimedActions;
 [Serializable]
 internal class SeeInvisibilityTimedAction : TimedAction
 {
-    public SeeInvisibilityTimedAction(SaveGame saveGame) : base(saveGame) { }
+    private SeeInvisibilityTimedAction(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     protected override void EffectStopped()
     {
         SaveGame.MsgPrint("Your eyes feel less sensitive.");

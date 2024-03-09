@@ -10,7 +10,7 @@ namespace AngbandOS.Core.TimedActions;
 [Serializable]
 internal class SlowTimedAction : TimedAction
 {
-    public SlowTimedAction(SaveGame saveGame) : base(saveGame) { }
+    private SlowTimedAction(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     protected override void EffectStopped()
     {
         SaveGame.MsgPrint("You feel yourself speed up.");

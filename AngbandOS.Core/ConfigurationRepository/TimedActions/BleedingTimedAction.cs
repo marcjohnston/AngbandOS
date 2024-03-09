@@ -10,7 +10,7 @@ namespace AngbandOS.Core.TimedActions;
 [Serializable]
 internal class BleedingTimedAction : TimedAction
 {
-    public BleedingTimedAction(SaveGame saveGame) : base(saveGame) { }
+    private BleedingTimedAction(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
     protected override int GetRate(int value)
     {

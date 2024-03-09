@@ -10,7 +10,7 @@ namespace AngbandOS.Core.TimedActions;
 [Serializable]
 internal class StunTimedAction : TimedAction
 {
-    public StunTimedAction(SaveGame saveGame) : base(saveGame) { }
+    private StunTimedAction(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     protected override void EffectStopped()
     {
         SaveGame.MsgPrint("You are no longer stunned.");

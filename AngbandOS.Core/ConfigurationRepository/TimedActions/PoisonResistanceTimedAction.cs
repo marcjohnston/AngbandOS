@@ -10,7 +10,7 @@ namespace AngbandOS.Core.TimedActions;
 [Serializable]
 internal class PoisonResistanceTimedAction :TimedAction
 {
-    public PoisonResistanceTimedAction(SaveGame saveGame) : base(saveGame) { }
+    private PoisonResistanceTimedAction(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     protected override void EffectStopped()
     {
         SaveGame.MsgPrint("You feel less resistant to poison.");
