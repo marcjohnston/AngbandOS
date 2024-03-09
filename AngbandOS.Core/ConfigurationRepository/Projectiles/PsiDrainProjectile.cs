@@ -68,7 +68,7 @@ internal class PsiDrainProjectile : Projectile
             int b = SaveGame.DiceRoll(5, dam) / 4;
             string s = seen ? "'s" : "s";
             SaveGame.MsgPrint($"You convert {mName}{s} pain into psychic energy!");
-            b = Math.Min(SaveGame.MaxMana, SaveGame.Mana.Value + b);
+            b = Math.Min(SaveGame.MaxMana.Value, SaveGame.Mana.Value + b);
             SaveGame.Mana.Value = b;
             SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawManaFlaggedAction)).Set();
         }

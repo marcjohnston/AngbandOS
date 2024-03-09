@@ -92,14 +92,14 @@ internal class UpdateManaFlaggedAction : FlaggedAction
         var mult = SaveGame.SingletonRepository.Gods.Get(nameof(TamashGod)).AdjustedFavour + 10;
         msp *= mult;
         msp /= 10;
-        if (SaveGame.MaxMana != msp)
+        if (SaveGame.MaxMana.Value != msp)
         {
             if (SaveGame.Mana.Value >= msp)
             {
                 SaveGame.Mana.Value = msp;
                 SaveGame.FractionalMana = 0;
             }
-            SaveGame.MaxMana = msp;
+            SaveGame.MaxMana.Value = msp;
             SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawManaFlaggedAction)).Set();
         }
     }

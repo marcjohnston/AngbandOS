@@ -357,11 +357,11 @@ internal class RenderCharacterScript : Script, IScript, IRepeatableScript
         // Print some basics
         PrintBonus("+ To Hit    ", showTohit, 30, 1, ColorEnum.Brown);
         PrintBonus("+ To Damage ", showTodam, 31, 1, ColorEnum.Brown);
-        PrintBonus("+ To AC     ", SaveGame.DisplayedArmorClassBonus, 32, 1, ColorEnum.Brown);
-        PrintShortScore("  Base AC   ", SaveGame.DisplayedBaseArmorClass, 33, 1, ColorEnum.Brown);
+        PrintBonus("+ To AC     ", SaveGame.DisplayedArmorClassBonus.Value, 32, 1, ColorEnum.Brown);
+        PrintShortScore("  Base AC   ", SaveGame.DisplayedBaseArmorClass.Value, 33, 1, ColorEnum.Brown);
         PrintShortScore("Level      ", SaveGame.ExperienceLevel, 30, 28, ColorEnum.Green);
-        PrintLongScore("Experience ", SaveGame.ExperiencePoints, 31, 28,
-            SaveGame.ExperiencePoints >= SaveGame.MaxExperienceGained ? ColorEnum.Green : ColorEnum.Red);
+        PrintLongScore("Experience ", SaveGame.ExperiencePoints.Value, 31, 28,
+            SaveGame.ExperiencePoints.Value >= SaveGame.MaxExperienceGained ? ColorEnum.Green : ColorEnum.Red);
         PrintLongScore("Max Exp    ", SaveGame.MaxExperienceGained, 32, 28, ColorEnum.Green);
         // If we're max level we don't have any experience to advance
         if (SaveGame.ExperienceLevel >= Constants.PyMaxLevel)
@@ -388,12 +388,12 @@ internal class RenderCharacterScript : Script, IScript, IRepeatableScript
         {
             PrintShortScore("Cur Hit Points ", SaveGame.Health, 31, 52, ColorEnum.BrightRed);
         }
-        PrintShortScore("Max SP (Mana)  ", SaveGame.MaxMana, 32, 52, ColorEnum.Green);
-        if (SaveGame.Mana.Value >= SaveGame.MaxMana)
+        PrintShortScore("Max SP (Mana)  ", SaveGame.MaxMana.Value, 32, 52, ColorEnum.Green);
+        if (SaveGame.Mana.Value >= SaveGame.MaxMana.Value)
         {
             PrintShortScore("Cur SP (Mana)  ", SaveGame.Mana.Value, 33, 52, ColorEnum.Green);
         }
-        else if (SaveGame.Mana.Value > SaveGame.MaxMana * Constants.HitpointWarn / 10)
+        else if (SaveGame.Mana.Value > SaveGame.MaxMana.Value * Constants.HitpointWarn / 10)
         {
             PrintShortScore("Cur SP (Mana)  ", SaveGame.Mana.Value, 33, 52, ColorEnum.BrightYellow);
         }

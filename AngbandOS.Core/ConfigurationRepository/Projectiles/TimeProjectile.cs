@@ -69,7 +69,7 @@ internal class TimeProjectile : Projectile
                 case 5:
                     {
                         SaveGame.MsgPrint("You feel life has clocked back.");
-                        SaveGame.LoseExperience(100 + (SaveGame.ExperiencePoints / 100 * Constants.MonDrainLife));
+                        SaveGame.LoseExperience(100 + (SaveGame.ExperiencePoints.Value / 100 * Constants.MonDrainLife));
                         break;
                     }
                 case 6:

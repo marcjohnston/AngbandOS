@@ -27,9 +27,9 @@ internal class ExperiencePotionItemFactory : PotionItemFactory
     {
         // Experience increases your experience points by 50%, with a minimum of +10 and
         // maximuum of +10,000
-        if (SaveGame.ExperiencePoints < Constants.PyMaxExp)
+        if (SaveGame.ExperiencePoints.Value < Constants.PyMaxExp)
         {
-            int ee = (SaveGame.ExperiencePoints / 2) + 10;
+            int ee = (SaveGame.ExperiencePoints.Value / 2) + 10;
             if (ee > 100000)
             {
                 ee = 100000;

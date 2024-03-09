@@ -179,12 +179,12 @@ internal class ChaosProjectile : Projectile
             else if (SaveGame.HasHoldLife)
             {
                 SaveGame.MsgPrint("You feel your life slipping away!");
-                SaveGame.LoseExperience(500 + (SaveGame.ExperiencePoints / 1000 * Constants.MonDrainLife));
+                SaveGame.LoseExperience(500 + (SaveGame.ExperiencePoints.Value / 1000 * Constants.MonDrainLife));
             }
             else
             {
                 SaveGame.MsgPrint("You feel your life draining away!");
-                SaveGame.LoseExperience(5000 + (SaveGame.ExperiencePoints / 100 * Constants.MonDrainLife));
+                SaveGame.LoseExperience(5000 + (SaveGame.ExperiencePoints.Value / 100 * Constants.MonDrainLife));
             }
         }
         if (!SaveGame.HasChaosResistance || SaveGame.DieRoll(9) == 1)

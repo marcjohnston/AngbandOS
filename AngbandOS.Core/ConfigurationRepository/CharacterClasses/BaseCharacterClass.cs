@@ -144,7 +144,7 @@ internal abstract class BaseCharacterClass : IGetKey<string>
     /// <param name="amount">The amount.</param>
     protected void GainExperienceFromSpellBookDestroy(Item item, int amount)
     {
-        if (SaveGame.ExperiencePoints < Constants.PyMaxExp)
+        if (SaveGame.ExperiencePoints.Value < Constants.PyMaxExp)
         {
             int testerExp = SaveGame.MaxExperienceGained / 20;
             if (testerExp > 10000)

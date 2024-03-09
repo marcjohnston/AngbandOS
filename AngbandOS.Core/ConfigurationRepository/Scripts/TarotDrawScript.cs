@@ -174,9 +174,9 @@ internal class TarotDrawScript : Script, IScript
         else
         {
             SaveGame.MsgPrint("It's the World.");
-            if (SaveGame.ExperiencePoints < Constants.PyMaxExp)
+            if (SaveGame.ExperiencePoints.Value < Constants.PyMaxExp)
             {
-                int ee = (SaveGame.ExperiencePoints / 25) + 1;
+                int ee = (SaveGame.ExperiencePoints.Value / 25) + 1;
                 if (ee > 5000)
                 {
                     ee = 5000;

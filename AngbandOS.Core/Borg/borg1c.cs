@@ -1935,7 +1935,7 @@ internal static class borg1c
         borg_skill.BI_ISFIXEXP = false;
 
         /* Note "Exp" vs "EXP" and am I lower than level 50*/
-        if (saveGame.ExperiencePoints < saveGame.MaxExperienceGained)
+        if (saveGame.ExperiencePoints.Value < saveGame.MaxExperienceGained)
         {
             /* fix it if in town */
             if (borg_skill.BI_CLEVEL == 50 && borg_skill.BI_CDEPTH == 0)
@@ -1957,7 +1957,7 @@ internal static class borg1c
         }
 
         /* Extract "EXP xxxxxxxx" */
-        borg_exp = saveGame.ExperiencePoints;
+        borg_exp = saveGame.ExperiencePoints.Value;
 
 
         /* Extract "AU xxxxxxxxx" */

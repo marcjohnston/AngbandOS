@@ -102,8 +102,8 @@ internal class RingOfSetFixedArtifact : FixedArtifact, IFixedArtifactActivatible
                     SaveGame.DecreaseAbilityScore(Ability.Constitution, 50, true);
                     SaveGame.DecreaseAbilityScore(Ability.Charisma, 50, true);
                     // Reduce both experience and maximum experience
-                    SaveGame.ExperiencePoints -= SaveGame.ExperiencePoints / 4;
-                    SaveGame.MaxExperienceGained -= SaveGame.ExperiencePoints / 4;
+                    SaveGame.ExperiencePoints.Value -= SaveGame.ExperiencePoints.Value / 4;
+                    SaveGame.MaxExperienceGained -= SaveGame.ExperiencePoints.Value / 4;
                     SaveGame.CheckExperience();
                     break;
                 }

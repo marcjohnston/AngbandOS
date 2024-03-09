@@ -29,7 +29,7 @@ internal abstract class ExpAttackEffect : AttackEffect
         }
         else
         {
-            int d = SaveGame.DiceRoll(10, 6) + (SaveGame.ExperiencePoints / 100 * Constants.MonDrainLife);
+            int d = SaveGame.DiceRoll(10, 6) + (SaveGame.ExperiencePoints.Value / 100 * Constants.MonDrainLife);
             if (SaveGame.HasHoldLife)
             {
                 SaveGame.MsgPrint("You feel your life slipping away!");

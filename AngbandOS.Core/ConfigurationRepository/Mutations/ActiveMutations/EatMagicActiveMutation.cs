@@ -53,9 +53,9 @@ internal class EatMagicActiveMutation : Mutation
             }
             oPtr.IdentEmpty = true;
         }
-        if (SaveGame.Mana.Value > SaveGame.MaxMana)
+        if (SaveGame.Mana.Value > SaveGame.MaxMana.Value)
         {
-            SaveGame.Mana.Value = SaveGame.MaxMana;
+            SaveGame.Mana.Value = SaveGame.MaxMana.Value;
         }
         base.SaveGame.SingletonRepository.FlaggedActions.Get(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
     }

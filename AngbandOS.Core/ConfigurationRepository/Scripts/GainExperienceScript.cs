@@ -24,7 +24,7 @@ internal class GainExperienceScript : Script, IScript
         }
         else
         {
-            SaveGame.GainExperience(SaveGame.ExperiencePoints + 1);
+            SaveGame.GainExperience(SaveGame.ExperiencePoints.Value + 1);
         }
     }
 }

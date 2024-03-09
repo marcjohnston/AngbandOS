@@ -77,7 +77,7 @@ internal class GolemRace : Race
         SaveGame.HasSeeInvisibility = true;
         SaveGame.HasPoisonResistance = true;
         SaveGame.ArmorClassBonus += 20 + (SaveGame.ExperienceLevel / 5);
-        SaveGame.DisplayedArmorClassBonus += 20 + (SaveGame.ExperienceLevel / 5);
+        SaveGame.DisplayedArmorClassBonus.Value += 20 + (SaveGame.ExperienceLevel / 5);
     }
 
     public override void Eat(Item item)

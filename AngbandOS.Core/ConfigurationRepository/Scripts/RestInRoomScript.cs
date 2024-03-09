@@ -70,7 +70,7 @@ internal class RestInRoomScript : Script, IScript
         SaveGame.TimedColdResistance.SetValue();
         SaveGame.TimedPoisonResistance.SetValue();
         SaveGame.Health = SaveGame.MaxHealth;
-        SaveGame.Mana.Value = SaveGame.MaxMana;
+        SaveGame.Mana.Value = SaveGame.MaxMana.Value;
         SaveGame.TimedBlindness.SetValue();
         SaveGame.TimedConfusion.SetValue();
         SaveGame.TimedStun.SetValue();

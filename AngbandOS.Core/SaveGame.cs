@@ -208,10 +208,10 @@ internal class SaveGame
     
     public readonly GoldIntFlaggedProperty Gold;
     public ManaIntFlaggedProperty Mana;
-    public int MaxMana;
-    public int ExperiencePoints;
-    public int DisplayedArmorClassBonus;
-    public int DisplayedBaseArmorClass;
+    public MaxManaIntFlaggedProperty MaxMana;
+    public ExperiencePointsIntFlaggedProperty ExperiencePoints;
+    public DisplayedArmorClassBonusIntFlaggedProperty DisplayedArmorClassBonus;
+    public DisplayedBaseArmorClassIntFlaggedProperty DisplayedBaseArmorClass;
 
     /// <summary>
     /// 
@@ -631,6 +631,10 @@ internal class SaveGame
         Quests = new List<Quest>();
         Gold = (GoldIntFlaggedProperty)SingletonRepository.Properties.Get(nameof(GoldIntFlaggedProperty));
         Mana = (ManaIntFlaggedProperty)SingletonRepository.Properties.Get(nameof(ManaIntFlaggedProperty));
+        MaxMana = (MaxManaIntFlaggedProperty)SingletonRepository.Properties.Get(nameof(MaxManaIntFlaggedProperty));
+        ExperiencePoints = (ExperiencePointsIntFlaggedProperty)SingletonRepository.Properties.Get(nameof(ExperiencePointsIntFlaggedProperty));
+        DisplayedArmorClassBonus = (DisplayedArmorClassBonusIntFlaggedProperty)SingletonRepository.Properties.Get(nameof(DisplayedArmorClassBonusIntFlaggedProperty));
+        DisplayedBaseArmorClass = (DisplayedBaseArmorClassIntFlaggedProperty)SingletonRepository.Properties.Get(nameof(DisplayedBaseArmorClassIntFlaggedProperty));
 
         TimedAcidResistance = new AcidResistanceTimedAction(this);
         TimedBleeding = new BleedingTimedAction(this);
@@ -1996,7 +2000,7 @@ internal class SaveGame
                 case 11:
                 case 12:
                     MsgPrint("You feel your life draining away...");
-                    LoseExperience(ExperiencePoints / 16);
+                    LoseExperience(ExperiencePoints.Value / 16);
                     break;
 
                 case 13:
@@ -3340,7 +3344,7 @@ internal class SaveGame
     {
         CurrentDepth = 0;
         DiedFrom = "Ripe Old Age";
-        ExperiencePoints = MaxExperienceGained;
+        ExperiencePoints.Value = MaxExperienceGained;
         ExperienceLevel = MaxLevelGained;
         Gold.Value += 10000000;
         SetBackground(BackgroundImageEnum.Crown);
@@ -3398,14 +3402,14 @@ internal class SaveGame
         {
             if (Resting == -1)
             {
-                if (Health == MaxHealth && Mana.Value >= MaxMana)
+                if (Health == MaxHealth && Mana.Value >= MaxMana.Value)
                 {
                     Disturb(false);
                 }
             }
             else if (Resting == -2)
             {
-                if (Health == MaxHealth && Mana.Value == MaxMana && TimedBlindness.TurnsRemaining == 0 &&
+                if (Health == MaxHealth && Mana.Value == MaxMana.Value && TimedBlindness.TurnsRemaining == 0 &&
                     TimedConfusion.TurnsRemaining == 0 && TimedPoison.TurnsRemaining == 0 && TimedFear.TurnsRemaining == 0 && TimedStun.TurnsRemaining == 0 &&
                     TimedBleeding.TurnsRemaining == 0 && TimedSlow.TurnsRemaining == 0 && TimedParalysis.TurnsRemaining == 0 && TimedHallucinations.TurnsRemaining == 0 &&
                     WordOfRecallDelay == 0)
@@ -3776,7 +3780,7 @@ internal class SaveGame
                 }
             }
         }
-        if (Mana.Value < MaxMana)
+        if (Mana.Value < MaxMana.Value)
         {
             if (upkeepFactor != 0)
             {
@@ -3841,9 +3845,9 @@ internal class SaveGame
         SingletonRepository.FlaggedActions.Get(nameof(UpdateTorchRadiusFlaggedAction)).Set();
         if (HasExperienceDrain)
         {
-            if (RandomLessThan(100) < 10 && ExperiencePoints > 0)
+            if (RandomLessThan(100) < 10 && ExperiencePoints.Value > 0)
             {
-                ExperiencePoints--;
+                ExperiencePoints.Value--;
                 MaxExperienceGained--;
                 CheckExperience();
             }
@@ -12769,29 +12773,29 @@ internal class SaveGame
     {
         bool levelReward = false;
         bool levelMutation = false;
-        if (ExperiencePoints < 0)
+        if (ExperiencePoints.Value < 0)
         {
-            ExperiencePoints = 0;
+            ExperiencePoints.Value = 0;
         }
         if (MaxExperienceGained < 0)
         {
             MaxExperienceGained = 0;
         }
-        if (ExperiencePoints > Constants.PyMaxExp)
+        if (ExperiencePoints.Value > Constants.PyMaxExp)
         {
-            ExperiencePoints = Constants.PyMaxExp;
+            ExperiencePoints.Value = Constants.PyMaxExp;
         }
         if (MaxExperienceGained > Constants.PyMaxExp)
         {
             MaxExperienceGained = Constants.PyMaxExp;
         }
-        if (ExperiencePoints > MaxExperienceGained)
+        if (ExperiencePoints.Value > MaxExperienceGained)
         {
-            MaxExperienceGained = ExperiencePoints;
+            MaxExperienceGained = ExperiencePoints.Value;
         }
         SingletonRepository.FlaggedActions.Get(nameof(RedrawExperiencePointsFlaggedAction)).Set();
         HandleStuff();
-        while (ExperienceLevel > 1 && ExperiencePoints < Constants.PlayerExp[ExperienceLevel - 2] * ExperienceMultiplier / 100L)
+        while (ExperienceLevel > 1 && ExperiencePoints.Value < Constants.PlayerExp[ExperienceLevel - 2] * ExperienceMultiplier / 100L)
         {
             ExperienceLevel--;
             RedrawSingleLocation(MapY, MapX);
@@ -12803,7 +12807,7 @@ internal class SaveGame
             SingletonRepository.FlaggedActions.Get(nameof(RedrawExperienceLevelFlaggedAction)).Set();
             HandleStuff();
         }
-        while (ExperienceLevel < Constants.PyMaxLevel && ExperiencePoints >= Constants.PlayerExp[ExperienceLevel - 1] * ExperienceMultiplier / 100L)
+        while (ExperienceLevel < Constants.PyMaxLevel && ExperiencePoints.Value >= Constants.PlayerExp[ExperienceLevel - 1] * ExperienceMultiplier / 100L)
         {
             ExperienceLevel++;
             RedrawSingleLocation(MapY, MapX);
@@ -13012,8 +13016,8 @@ internal class SaveGame
 
     public void GainExperience(int amount)
     {
-        ExperiencePoints += amount;
-        if (ExperiencePoints < MaxExperienceGained)
+        ExperiencePoints.Value += amount;
+        if (ExperiencePoints.Value < MaxExperienceGained)
         {
             MaxExperienceGained += amount / 5;
         }
@@ -13324,11 +13328,11 @@ internal class SaveGame
 
     public void LoseExperience(int amount)
     {
-        if (amount > ExperiencePoints)
+        if (amount > ExperiencePoints.Value)
         {
-            amount = ExperiencePoints;
+            amount = ExperiencePoints.Value;
         }
-        ExperiencePoints -= amount;
+        ExperiencePoints.Value -= amount;
         CheckExperience();
     }
 
@@ -13379,7 +13383,7 @@ internal class SaveGame
     public void RegenerateMana(int percent)
     {
         int oldMana = Mana.Value;
-        int newMana = (MaxMana * percent) + Constants.PyRegenMnbase;
+        int newMana = (MaxMana.Value * percent) + Constants.PyRegenMnbase;
         Mana.Value += newMana >> 16;
         if (Mana.Value < 0 && oldMana > 0)
         {
@@ -13395,9 +13399,9 @@ internal class SaveGame
         {
             FractionalMana = newFractionalMana;
         }
-        if (Mana.Value >= MaxMana)
+        if (Mana.Value >= MaxMana.Value)
         {
-            Mana.Value = MaxMana;
+            Mana.Value = MaxMana.Value;
             FractionalMana = 0;
         }
         if (oldMana != Mana.Value)

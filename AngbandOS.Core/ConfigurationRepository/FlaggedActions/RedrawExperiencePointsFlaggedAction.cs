@@ -16,7 +16,7 @@ internal class RedrawExperiencePointsFlaggedAction : FlaggedAction
     protected override void Execute()
     {
         ColorEnum color = ColorEnum.BrightGreen;
-        if (SaveGame.ExperiencePoints < SaveGame.MaxExperienceGained)
+        if (SaveGame.ExperiencePoints.Value < SaveGame.MaxExperienceGained)
         {
             color = ColorEnum.Yellow;
         }
@@ -27,7 +27,7 @@ internal class RedrawExperiencePointsFlaggedAction : FlaggedAction
         }
         else
         {
-            string outVal = ((Constants.PlayerExp[SaveGame.ExperienceLevel - 1] * SaveGame.ExperienceMultiplier / 100) - SaveGame.ExperiencePoints).ToString()
+            string outVal = ((Constants.PlayerExp[SaveGame.ExperienceLevel - 1] * SaveGame.ExperienceMultiplier / 100) - SaveGame.ExperiencePoints.Value).ToString()
                 .PadLeft(8);
             SaveGame.Screen.Print(color, outVal, RowExp, ColExp + 4);
         }

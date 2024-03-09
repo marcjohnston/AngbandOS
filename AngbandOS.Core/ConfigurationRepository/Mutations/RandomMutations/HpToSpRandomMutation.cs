@@ -22,7 +22,7 @@ internal class HpToSpRandomMutation : Mutation
         {
             return;
         }
-        int wounds = SaveGame.MaxMana - SaveGame.Mana.Value;
+        int wounds = SaveGame.MaxMana.Value - SaveGame.Mana.Value;
         if (wounds <= 0)
         {
             return;

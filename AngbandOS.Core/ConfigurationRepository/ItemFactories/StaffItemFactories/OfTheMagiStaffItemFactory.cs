@@ -34,9 +34,9 @@ internal class OfTheMagiStaffItemFactory : StaffItemFactory
         {
             eventArgs.Identified = true;
         }
-        if (SaveGame.Mana.Value < SaveGame.MaxMana)
+        if (SaveGame.Mana.Value < SaveGame.MaxMana.Value)
         {
-            SaveGame.Mana.Value = SaveGame.MaxMana;
+            SaveGame.Mana.Value = SaveGame.MaxMana.Value;
             SaveGame.FractionalMana = 0;
             eventArgs.Identified = true;
             SaveGame.MsgPrint("Your feel your head clear.");

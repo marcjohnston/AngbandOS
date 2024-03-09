@@ -39,20 +39,20 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         int oldSpeed = SaveGame.Speed;
         bool oldTelepathy = SaveGame.HasTelepathy;
         bool oldSeeInv = SaveGame.HasSeeInvisibility;
-        int oldDisAc = SaveGame.DisplayedBaseArmorClass;
-        int oldDisToA = SaveGame.DisplayedArmorClassBonus;
+        int oldDisAc = SaveGame.DisplayedBaseArmorClass.Value;
+        int oldDisToA = SaveGame.DisplayedArmorClassBonus.Value;
         int extraBlows = extraShots = 0;
         for (int i = 0; i < 6; i++)
         {
             SaveGame.AbilityScores[i].Bonus = 0;
         }
-        SaveGame.DisplayedBaseArmorClass = 0;
+        SaveGame.DisplayedBaseArmorClass.Value = 0;
         SaveGame.BaseArmorClass = 0;
         SaveGame.DisplayedAttackBonus = 0;
         SaveGame.AttackBonus = 0;
         SaveGame.DisplayedDamageBonus = 0;
         SaveGame.DamageBonus = 0;
-        SaveGame.DisplayedArmorClassBonus = 0;
+        SaveGame.DisplayedArmorClassBonus.Value = 0;
         SaveGame.ArmorClassBonus = 0;
         SaveGame.HasAggravation = false;
         SaveGame.HasRandomTeleport = false;
@@ -297,7 +297,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         SaveGame.HasFireShield |= SaveGame.FireHit;
         SaveGame.HasGlow |= SaveGame.FireHit;
         SaveGame.ArmorClassBonus += SaveGame.GenomeArmorClassBonus;
-        SaveGame.DisplayedArmorClassBonus += SaveGame.GenomeArmorClassBonus;
+        SaveGame.DisplayedArmorClassBonus.Value += SaveGame.GenomeArmorClassBonus;
         SaveGame.HasFeatherFall |= SaveGame.FeatherFall;
         SaveGame.HasFearResistance |= SaveGame.ResFear;
         SaveGame.HasTimeResistance |= SaveGame.ResTime;
@@ -594,11 +594,11 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                         SaveGame.HasSustainCharisma = true;
                     }
                     SaveGame.BaseArmorClass += oPtr.BaseArmorClass;
-                    SaveGame.DisplayedBaseArmorClass += oPtr.BaseArmorClass;
+                    SaveGame.DisplayedBaseArmorClass.Value += oPtr.BaseArmorClass;
                     SaveGame.ArmorClassBonus += oPtr.BonusArmorClass;
                     if (oPtr.IsKnown())
                     {
-                        SaveGame.DisplayedArmorClassBonus += oPtr.BonusArmorClass;
+                        SaveGame.DisplayedArmorClassBonus.Value += oPtr.BonusArmorClass;
                     }
                     if (inventorySlot.IsWeapon)
                     {
@@ -625,7 +625,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                 {
                     int bareArmorBonus = inventorySlot.BareArmorClassBonus;
                     SaveGame.ArmorClassBonus += bareArmorBonus;
-                    SaveGame.DisplayedArmorClassBonus += bareArmorBonus;
+                    SaveGame.DisplayedArmorClassBonus.Value += bareArmorBonus;
                 }
             }
         }
@@ -719,25 +719,25 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         if (SaveGame.TimedInvulnerability.TurnsRemaining != 0)
         {
             SaveGame.ArmorClassBonus += 100;
-            SaveGame.DisplayedArmorClassBonus += 100;
+            SaveGame.DisplayedArmorClassBonus.Value += 100;
         }
         if (SaveGame.TimedEtherealness.TurnsRemaining != 0)
         {
             SaveGame.ArmorClassBonus += 100;
-            SaveGame.DisplayedArmorClassBonus += 100;
+            SaveGame.DisplayedArmorClassBonus.Value += 100;
             SaveGame.HasReflection = true;
         }
         if (SaveGame.TimedBlessing.TurnsRemaining != 0)
         {
             SaveGame.ArmorClassBonus += 5;
-            SaveGame.DisplayedArmorClassBonus += 5;
+            SaveGame.DisplayedArmorClassBonus.Value += 5;
             SaveGame.AttackBonus += 10;
             SaveGame.DisplayedAttackBonus += 10;
         }
         if (SaveGame.TimedStoneskin.TurnsRemaining != 0)
         {
             SaveGame.ArmorClassBonus += 50;
-            SaveGame.DisplayedArmorClassBonus += 50;
+            SaveGame.DisplayedArmorClassBonus.Value += 50;
         }
         if (SaveGame.TimedHeroism.TurnsRemaining != 0)
         {
@@ -749,7 +749,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
             SaveGame.AttackBonus += 24;
             SaveGame.DisplayedAttackBonus += 24;
             SaveGame.ArmorClassBonus -= 10;
-            SaveGame.DisplayedArmorClassBonus -= 10;
+            SaveGame.DisplayedArmorClassBonus.Value -= 10;
         }
         if (SaveGame.TimedHaste.TurnsRemaining != 0)
         {
@@ -816,11 +816,11 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         SaveGame.DamageBonus += SaveGame.AbilityScores[Ability.Strength].StrDamageBonus;
         SaveGame.AttackBonus += SaveGame.AbilityScores[Ability.Dexterity].DexAttackBonus;
         SaveGame.AttackBonus += SaveGame.AbilityScores[Ability.Strength].StrAttackBonus;
-        SaveGame.DisplayedArmorClassBonus += SaveGame.AbilityScores[Ability.Dexterity].DexArmorClassBonus;
+        SaveGame.DisplayedArmorClassBonus.Value += SaveGame.AbilityScores[Ability.Dexterity].DexArmorClassBonus;
         SaveGame.DisplayedDamageBonus += SaveGame.AbilityScores[Ability.Strength].StrDamageBonus;
         SaveGame.DisplayedAttackBonus += SaveGame.AbilityScores[Ability.Dexterity].DexAttackBonus;
         SaveGame.DisplayedAttackBonus += SaveGame.AbilityScores[Ability.Strength].StrAttackBonus;
-        if (SaveGame.DisplayedBaseArmorClass != oldDisAc || SaveGame.DisplayedArmorClassBonus != oldDisToA)
+        if (SaveGame.DisplayedBaseArmorClass.Value != oldDisAc || SaveGame.DisplayedArmorClassBonus.Value != oldDisToA)
         {
             SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawArmorFlaggedAction)).Set();
         }

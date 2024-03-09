@@ -5,17 +5,10 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.SpellResistantDetections;
+namespace AngbandOS.Core.Properties;
 
 [Serializable]
-internal class ManaSpellResistantDetection : SpellResistantDetection
+internal class ExperiencePointsIntFlaggedProperty : IntFlaggedProperty
 {
-    private ManaSpellResistantDetection(SaveGame saveGame) : base(saveGame) { }
-    public override void Learn(Monster monster)
-    {
-        if (SaveGame.MaxMana.Value == 0)
-        {
-            monster.SmImmMana = true;
-        }
-    }
+    protected ExperiencePointsIntFlaggedProperty(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 }
