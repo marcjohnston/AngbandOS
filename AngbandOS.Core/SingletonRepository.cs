@@ -35,6 +35,7 @@ internal class SingletonRepository
     public FindQuestsRepository FindQuests;
     public FixedArtifactsRepository FixedArtifacts;
     public FlaggedActionsRepository FlaggedActions;
+    public FormsRepository Forms;
     public FunnyCommentsRepository FunnyComments;
     public FunnyDescriptionsRepository FunnyDescriptions;
     public GameCommandsRepository GameCommands;
@@ -150,6 +151,7 @@ internal class SingletonRepository
         FindQuests = AddRepository<FindQuestsRepository>(new FindQuestsRepository(SaveGame));
         FixedArtifacts = AddRepository<FixedArtifactsRepository>(new FixedArtifactsRepository(SaveGame));
         FlaggedActions = AddRepository<FlaggedActionsRepository>(new FlaggedActionsRepository(SaveGame));
+        Forms = AddRepository<FormsRepository>(new FormsRepository(SaveGame));
         FunnyComments = AddRepository<FunnyCommentsRepository>(new FunnyCommentsRepository(SaveGame));
         FunnyDescriptions = AddRepository<FunnyDescriptionsRepository>(new FunnyDescriptionsRepository(SaveGame));
         GameCommands = AddRepository<GameCommandsRepository>(new GameCommandsRepository(SaveGame));

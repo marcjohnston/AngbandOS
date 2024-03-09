@@ -209,6 +209,8 @@ internal class SaveGame
     public readonly DisplayedBaseArmorClassIntFlaggedProperty DisplayedBaseArmorClass;
     public readonly HealthIntFlaggedProperty Health;
 
+    public readonly MainForm MainForm;
+
     /// <summary>
     ///
     /// </summary>
@@ -664,6 +666,8 @@ internal class SaveGame
         TimedStun = new StunTimedAction(this);
         TimedSuperheroism = new SuperHeroismTimedAction(this);
         TimedTelepathy = new TelepathyTimedAction(this);
+
+        MainForm = (MainForm)SingletonRepository.Forms.Get(nameof(MainForm));
 
         InitializeAllocationTables();
     }
@@ -3984,7 +3988,7 @@ internal class SaveGame
         // The Wipe refresh is a special RedrawAction that occurs before all other RedrawActions.
         SingletonRepository.FlaggedActions.Get(nameof(RedrawAllFlaggedAction)).Check();
 
-        foreach (Widget widget in SingletonRepository.Widgets)
+        foreach (Widget widget in MainForm.Widgets)
         {
             widget.Draw();
         }

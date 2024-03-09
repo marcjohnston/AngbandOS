@@ -30,6 +30,7 @@ global using AngbandOS.Core.EventsArgs;
 global using AngbandOS.Core.FixedArtifacts;
 global using AngbandOS.Core.FlaggedActions;
 global using AngbandOS.Core.Flavors;
+global using AngbandOS.Core.Forms;
 global using AngbandOS.Core.Genders;
 global using AngbandOS.Core.Gods;
 global using AngbandOS.Core.HelpGroups;
