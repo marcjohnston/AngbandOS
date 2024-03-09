@@ -36,7 +36,7 @@ internal class EatMagicActiveMutation : Mutation
             }
             else
             {
-                SaveGame.Mana += 2 * lev;
+                SaveGame.Mana.Value += 2 * lev;
                 oPtr.TypeSpecificValue = 500;
             }
         }
@@ -44,7 +44,7 @@ internal class EatMagicActiveMutation : Mutation
         { // Light? Wands? Staves, Food??
             if (oPtr.TypeSpecificValue > 0)
             {
-                SaveGame.Mana += oPtr.TypeSpecificValue * lev;
+                SaveGame.Mana.Value += oPtr.TypeSpecificValue * lev;
                 oPtr.TypeSpecificValue = 0;
             }
             else
@@ -53,9 +53,9 @@ internal class EatMagicActiveMutation : Mutation
             }
             oPtr.IdentEmpty = true;
         }
-        if (SaveGame.Mana > SaveGame.MaxMana)
+        if (SaveGame.Mana.Value > SaveGame.MaxMana)
         {
-            SaveGame.Mana = SaveGame.MaxMana;
+            SaveGame.Mana.Value = SaveGame.MaxMana;
         }
         base.SaveGame.SingletonRepository.FlaggedActions.Get(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
     }

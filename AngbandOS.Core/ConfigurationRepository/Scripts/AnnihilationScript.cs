@@ -18,7 +18,7 @@ internal class AnnihilationScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        SaveGame.Mana -= 100;
+        SaveGame.Mana.Value -= 100;
         for (int i = 1; i < SaveGame.MMax; i++)
         {
             Monster mPtr = SaveGame.Monsters[i];
@@ -37,7 +37,7 @@ internal class AnnihilationScript : Script, IScript
             }
             SaveGame.DeleteMonsterByIndex(i, true);
             SaveGame.TakeHit(SaveGame.DieRoll(4), "the strain of casting Annihilation");
-            SaveGame.Mana++;
+            SaveGame.Mana.Value++;
             SaveGame.MoveCursorRelative(SaveGame.MapY, SaveGame.MapX);
             SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawHpFlaggedAction)).Set();
             SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawManaFlaggedAction)).Set();
@@ -45,6 +45,6 @@ internal class AnnihilationScript : Script, IScript
             SaveGame.UpdateScreen();
             SaveGame.Pause(Constants.DelayFactorInMilliseconds);
         }
-        SaveGame.Mana += 100;
+        SaveGame.Mana.Value += 100;
     }
 }

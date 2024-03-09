@@ -187,9 +187,7 @@ internal class SaveGame
     public int AttackBonus;
     public int BaseArmorClass;
     public int DamageBonus;
-    public int DisplayedArmorClassBonus;
     public int DisplayedAttackBonus;
-    public int DisplayedBaseArmorClass;
     public int DisplayedDamageBonus;
     public int Energy;
     public int ExperienceMultiplier;
@@ -199,7 +197,6 @@ internal class SaveGame
     ///
     /// </summary>
     /// <remarks>borg: This was player->exp</remarks>
-    public int ExperiencePoints;
     public int Food;
     public int FractionalExperiencePoints;
     public int FractionalHealth;
@@ -208,8 +205,30 @@ internal class SaveGame
     public Gender? Gender = null; // The gender will be null until the player has selected the gender.
     public int Generation; // This is how many times the character name has changed.
     public bool GetFirstLevelMutation;
-
+    
     public readonly GoldIntFlaggedProperty Gold;
+    public ManaIntFlaggedProperty Mana;
+    public int MaxMana;
+    public int ExperiencePoints;
+    public int DisplayedArmorClassBonus;
+    public int DisplayedBaseArmorClass;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <remarks>borg: player->lev</remarks>
+    public int ExperienceLevel
+    {
+        get
+        {
+            return _experienceLevel;
+        }
+        set
+        {
+            _experienceLevel = value;
+            ConsoleViewPort.ExperienceLevelChanged(_experienceLevel);
+        }
+    }
 
     public Patron GooPatron;
     public bool HasAcidImmunity;
@@ -280,25 +299,7 @@ internal class SaveGame
     public bool IsWizard;
     private int _experienceLevel;
 
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <remarks>borg: player->lev</remarks>
-    public int ExperienceLevel
-    {
-        get
-        {
-            return _experienceLevel;
-        }
-        set
-        {
-            _experienceLevel = value;
-            ConsoleViewPort.ExperienceLevelChanged(_experienceLevel);
-        }
-    }
-
     public int LightLevel;
-    public int Mana;
 
     /// <summary>
     /// The current player X position.
@@ -322,7 +323,6 @@ internal class SaveGame
     /// </summary>
     /// <remarks>borg: player->max_lev</remarks>
     public int MaxLevelGained;
-    public int MaxMana;
     public int MeleeAttacksPerRound;
     public int MissileAttacksPerRound;
     private string _name;
@@ -630,7 +630,7 @@ internal class SaveGame
 
         Quests = new List<Quest>();
         Gold = (GoldIntFlaggedProperty)SingletonRepository.Properties.Get(nameof(GoldIntFlaggedProperty));
-
+        Mana = (ManaIntFlaggedProperty)SingletonRepository.Properties.Get(nameof(ManaIntFlaggedProperty));
 
         TimedAcidResistance = new AcidResistanceTimedAction(this);
         TimedBleeding = new BleedingTimedAction(this);
@@ -3398,14 +3398,14 @@ internal class SaveGame
         {
             if (Resting == -1)
             {
-                if (Health == MaxHealth && Mana >= MaxMana)
+                if (Health == MaxHealth && Mana.Value >= MaxMana)
                 {
                     Disturb(false);
                 }
             }
             else if (Resting == -2)
             {
-                if (Health == MaxHealth && Mana == MaxMana && TimedBlindness.TurnsRemaining == 0 &&
+                if (Health == MaxHealth && Mana.Value == MaxMana && TimedBlindness.TurnsRemaining == 0 &&
                     TimedConfusion.TurnsRemaining == 0 && TimedPoison.TurnsRemaining == 0 && TimedFear.TurnsRemaining == 0 && TimedStun.TurnsRemaining == 0 &&
                     TimedBleeding.TurnsRemaining == 0 && TimedSlow.TurnsRemaining == 0 && TimedParalysis.TurnsRemaining == 0 && TimedHallucinations.TurnsRemaining == 0 &&
                     WordOfRecallDelay == 0)
@@ -3776,7 +3776,7 @@ internal class SaveGame
                 }
             }
         }
-        if (Mana < MaxMana)
+        if (Mana.Value < MaxMana)
         {
             if (upkeepFactor != 0)
             {
@@ -5998,7 +5998,7 @@ internal class SaveGame
     public bool CheckIfRacialPowerWorks(int minLevel, int cost, int useStat, int difficulty)
     {
         // If we don't have enough mana we'll use health instead
-        bool useHealth = Mana < cost;
+        bool useHealth = Mana.Value < cost;
         // Can't use it if we're too low level
         if (ExperienceLevel < minLevel)
         {
@@ -6051,7 +6051,7 @@ internal class SaveGame
         }
         else
         {
-            Mana -= (cost / 2) + DieRoll(cost / 2);
+            Mana.Value -= (cost / 2) + DieRoll(cost / 2);
         }
         // We'll need to redraw
         SingletonRepository.FlaggedActions.Get(nameof(RedrawHpFlaggedAction)).Set();
@@ -6487,16 +6487,16 @@ internal class SaveGame
             cost = 1;
         }
         // Spend the mana if we can
-        if (cost <= Mana)
+        if (cost <= Mana.Value)
         {
             MsgPrint("You channel mana to power the effect.");
-            Mana -= cost;
+            Mana.Value -= cost;
             SingletonRepository.FlaggedActions.Get(nameof(RedrawManaFlaggedAction)).Set();
             return true;
         }
         // Use some mana in the attempt, even if we failed
         MsgPrint("You mana is insufficient to power the effect.");
-        Mana -= RandomLessThan(Mana / 2);
+        Mana.Value -= RandomLessThan(Mana.Value / 2);
         SingletonRepository.FlaggedActions.Get(nameof(RedrawManaFlaggedAction)).Set();
         return false;
     }
@@ -13378,29 +13378,29 @@ internal class SaveGame
 
     public void RegenerateMana(int percent)
     {
-        int oldMana = Mana;
+        int oldMana = Mana.Value;
         int newMana = (MaxMana * percent) + Constants.PyRegenMnbase;
-        Mana += newMana >> 16;
-        if (Mana < 0 && oldMana > 0)
+        Mana.Value += newMana >> 16;
+        if (Mana.Value < 0 && oldMana > 0)
         {
-            Mana = Constants.MaxShort;
+            Mana.Value = Constants.MaxShort;
         }
         int newFractionalMana = (newMana & 0xFFFF) + FractionalMana;
         if (newFractionalMana >= 0x10000L)
         {
             FractionalMana = newFractionalMana - 0x10000;
-            Mana++;
+            Mana.Value++;
         }
         else
         {
             FractionalMana = newFractionalMana;
         }
-        if (Mana >= MaxMana)
+        if (Mana.Value >= MaxMana)
         {
-            Mana = MaxMana;
+            Mana.Value = MaxMana;
             FractionalMana = 0;
         }
-        if (oldMana != Mana)
+        if (oldMana != Mana.Value)
         {
             SingletonRepository.FlaggedActions.Get(nameof(RedrawManaFlaggedAction)).Set();
         }

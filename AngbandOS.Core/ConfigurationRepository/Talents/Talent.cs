@@ -41,9 +41,9 @@ internal abstract class Talent : IGetKey<string>
         int chance = BaseFailure;
         chance -= 3 * (SaveGame.ExperienceLevel - Level);
         chance -= 3 * (SaveGame.AbilityScores[SaveGame.BaseCharacterClass.SpellStat].SpellFailureReduction - 1);
-        if (ManaCost > SaveGame.Mana)
+        if (ManaCost > SaveGame.Mana.Value)
         {
-            chance += 5 * (ManaCost - SaveGame.Mana);
+            chance += 5 * (ManaCost - SaveGame.Mana.Value);
         }
         int minfail = SaveGame.AbilityScores[SaveGame.BaseCharacterClass.SpellStat].SpellMinFailChance;
         if (chance < minfail)

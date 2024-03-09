@@ -389,17 +389,17 @@ internal class RenderCharacterScript : Script, IScript, IRepeatableScript
             PrintShortScore("Cur Hit Points ", SaveGame.Health, 31, 52, ColorEnum.BrightRed);
         }
         PrintShortScore("Max SP (Mana)  ", SaveGame.MaxMana, 32, 52, ColorEnum.Green);
-        if (SaveGame.Mana >= SaveGame.MaxMana)
+        if (SaveGame.Mana.Value >= SaveGame.MaxMana)
         {
-            PrintShortScore("Cur SP (Mana)  ", SaveGame.Mana, 33, 52, ColorEnum.Green);
+            PrintShortScore("Cur SP (Mana)  ", SaveGame.Mana.Value, 33, 52, ColorEnum.Green);
         }
-        else if (SaveGame.Mana > SaveGame.MaxMana * Constants.HitpointWarn / 10)
+        else if (SaveGame.Mana.Value > SaveGame.MaxMana * Constants.HitpointWarn / 10)
         {
-            PrintShortScore("Cur SP (Mana)  ", SaveGame.Mana, 33, 52, ColorEnum.BrightYellow);
+            PrintShortScore("Cur SP (Mana)  ", SaveGame.Mana.Value, 33, 52, ColorEnum.BrightYellow);
         }
         else
         {
-            PrintShortScore("Cur SP (Mana)  ", SaveGame.Mana, 33, 52, ColorEnum.BrightRed);
+            PrintShortScore("Cur SP (Mana)  ", SaveGame.Mana.Value, 33, 52, ColorEnum.BrightRed);
         }
         PrintLongScore("Gold           ", SaveGame.Gold.Value, 34, 52, ColorEnum.Green);
     }

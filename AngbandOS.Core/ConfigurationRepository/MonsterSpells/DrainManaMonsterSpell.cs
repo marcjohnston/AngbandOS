@@ -38,19 +38,19 @@ internal class DrainManaMonsterSpell : MonsterSpell
         int monsterLevel = monster.Race.Level >= 1 ? monster.Race.Level : 1;
         bool seenByPlayer = !playerIsBlind && monster.IsVisible;
 
-        if (saveGame.Mana != 0)
+        if (saveGame.Mana.Value != 0)
         {
             saveGame.MsgPrint($"{monsterName} draws psychic energy from you!");
             int r1 = (SaveGame.DieRoll(monsterLevel) / 2) + 1;
-            if (r1 >= saveGame.Mana)
+            if (r1 >= saveGame.Mana.Value)
             {
-                r1 = saveGame.Mana;
-                saveGame.Mana = 0;
+                r1 = saveGame.Mana.Value;
+                saveGame.Mana.Value = 0;
                 saveGame.FractionalMana = 0;
             }
             else
             {
-                saveGame.Mana -= r1;
+                saveGame.Mana.Value -= r1;
             }
             SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawManaFlaggedAction)).Set();
             if (monster.Health < monster.MaxHealth)

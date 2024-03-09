@@ -56,7 +56,7 @@ internal class EditStatsScript : Script, IScript
         }
         SaveGame.Gold.Value = tmpInt;
 
-        if (!SaveGame.GetString("Mana: ", out tmpVal, $"{SaveGame.Mana}", 9))
+        if (!SaveGame.GetString("Mana: ", out tmpVal, $"{SaveGame.Mana.Value}", 9))
         {
             return;
         }
@@ -68,7 +68,7 @@ internal class EditStatsScript : Script, IScript
         {
             tmpInt = 0;
         }
-        SaveGame.Mana = tmpInt;
+        SaveGame.Mana.Value = tmpInt;
 
         if (!SaveGame.GetString("Experience: ", out tmpVal, $"{SaveGame.MaxExperienceGained}", 9))
         {

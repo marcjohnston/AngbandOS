@@ -28,7 +28,7 @@ internal class CureAllScript : Script, IScript
         SaveGame.RunScript(nameof(RestoreLevelScript));
         SaveGame.Health = SaveGame.MaxHealth;
         SaveGame.FractionalHealth = 0;
-        SaveGame.Mana = SaveGame.MaxMana;
+        SaveGame.Mana.Value = SaveGame.MaxMana;
         SaveGame.FractionalMana = 0;
         SaveGame.TimedBlindness.ResetTimer();
         SaveGame.TimedConfusion.ResetTimer();

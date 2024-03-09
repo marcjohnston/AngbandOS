@@ -94,9 +94,9 @@ internal class UpdateManaFlaggedAction : FlaggedAction
         msp /= 10;
         if (SaveGame.MaxMana != msp)
         {
-            if (SaveGame.Mana >= msp)
+            if (SaveGame.Mana.Value >= msp)
             {
-                SaveGame.Mana = msp;
+                SaveGame.Mana.Value = msp;
                 SaveGame.FractionalMana = 0;
             }
             SaveGame.MaxMana = msp;

@@ -22,7 +22,7 @@ internal class HpToSpRandomMutation : Mutation
         {
             return;
         }
-        int wounds = SaveGame.MaxMana - SaveGame.Mana;
+        int wounds = SaveGame.MaxMana - SaveGame.Mana.Value;
         if (wounds <= 0)
         {
             return;
@@ -32,7 +32,7 @@ internal class HpToSpRandomMutation : Mutation
         {
             healing = wounds;
         }
-        SaveGame.Mana += healing;
+        SaveGame.Mana.Value += healing;
         SaveGame.TakeHit(healing, "blood rushing to the head");
     }
 }

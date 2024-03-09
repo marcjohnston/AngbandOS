@@ -43,7 +43,7 @@ internal class ConfirmationBirthStage : BirthStage
         SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
         SaveGame.UpdateStuff();
         SaveGame.Health = SaveGame.MaxHealth;
-        SaveGame.Mana = SaveGame.MaxMana;
+        SaveGame.Mana.Value = SaveGame.MaxMana;
         SaveGame.Energy = 150;
         while (!SaveGame.Shutdown)
         {

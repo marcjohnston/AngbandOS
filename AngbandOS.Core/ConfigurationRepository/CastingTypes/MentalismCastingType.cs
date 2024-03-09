@@ -24,7 +24,7 @@ internal class MentalismCastingType : CastingType
             return;
         }
         Talents.Talent talent = SaveGame.Talents[n];
-        if (talent.ManaCost > SaveGame.Mana)
+        if (talent.ManaCost > SaveGame.Mana.Value)
         {
             SaveGame.MsgPrint("You do not have enough mana to use this talent.");
             if (!SaveGame.GetCheck("Attempt it anyway? "))
@@ -62,7 +62,7 @@ internal class MentalismCastingType : CastingType
                 {
                     SaveGame.MsgPrint("Your mind unleashes its power in an uncontrollable storm!");
                     SaveGame.Project(1, 2 + (plev / 10), SaveGame.MapY, SaveGame.MapX, plev * 2, SaveGame.SingletonRepository.Projectiles.Get(nameof(ManaProjectile)), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectKill | ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem);
-                    SaveGame.Mana = Math.Max(0, SaveGame.Mana - (plev * Math.Max(1, plev / 10)));
+                    SaveGame.Mana.Value = Math.Max(0, SaveGame.Mana.Value - (plev * Math.Max(1, plev / 10)));
                 }
             }
         }
@@ -71,14 +71,14 @@ internal class MentalismCastingType : CastingType
             talent.Use();
         }
         SaveGame.EnergyUse = 100;
-        if (talent.ManaCost <= SaveGame.Mana)
+        if (talent.ManaCost <= SaveGame.Mana.Value)
         {
-            SaveGame.Mana -= talent.ManaCost;
+            SaveGame.Mana.Value -= talent.ManaCost;
         }
         else
         {
-            int oops = talent.ManaCost - SaveGame.Mana;
-            SaveGame.Mana = 0;
+            int oops = talent.ManaCost - SaveGame.Mana.Value;
+            SaveGame.Mana.Value = 0;
             SaveGame.FractionalMana = 0;
             SaveGame.MsgPrint("You faint from the effort!");
             SaveGame.TimedParalysis.AddTimer(SaveGame.DieRoll((5 * oops) + 1));

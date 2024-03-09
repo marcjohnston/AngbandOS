@@ -27,12 +27,12 @@ internal class SpToHpRandomMutation : Mutation
         {
             return;
         }
-        int healing = SaveGame.Mana;
+        int healing = SaveGame.Mana.Value;
         if (healing > wounds)
         {
             healing = wounds;
         }
         SaveGame.RestoreHealth(healing);
-        SaveGame.Mana -= healing;
+        SaveGame.Mana.Value -= healing;
     }
 }

@@ -136,9 +136,9 @@ internal abstract class Spell : IGetKey<string>
         int chance = ClassSpell.BaseFailure;
         chance -= 3 * (SaveGame.ExperienceLevel - ClassSpell.Level);
         chance -= 3 * (SaveGame.AbilityScores[baseCharacterClass.SpellStat].SpellFailureReduction - 1);
-        if (ClassSpell.ManaCost > SaveGame.Mana)
+        if (ClassSpell.ManaCost > SaveGame.Mana.Value)
         {
-            chance += 5 * (ClassSpell.ManaCost - SaveGame.Mana);
+            chance += 5 * (ClassSpell.ManaCost - SaveGame.Mana.Value);
         }
         int minfail = SaveGame.AbilityScores[baseCharacterClass.SpellStat].SpellMinFailChance;
         if (baseCharacterClass.ID != CharacterClass.Priest && baseCharacterClass.ID != CharacterClass.Druid &&
