@@ -5,16 +5,10 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.FlaggedActions;
+namespace AngbandOS.Core.Properties;
 
 [Serializable]
-internal class RedrawStudyFlaggedAction : FlaggedAction
+internal class SpareSpellSlotsIntFlaggedProperty : IntFlaggedProperty
 {
-    private const int RowStudy = 44;
-    private const int ColStudy = 60;
-    private RedrawStudyFlaggedAction(SaveGame saveGame) : base(saveGame) { }
-    protected override void Execute()
-    {
-        SaveGame.Screen.Print(SaveGame.SpareSpellSlots.Value != 0 ? "Study" : "     ", RowStudy, ColStudy);
-    }
+    protected SpareSpellSlotsIntFlaggedProperty(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 }

@@ -208,6 +208,13 @@ internal class SaveGame
     public readonly DisplayedArmorClassBonusIntFlaggedProperty DisplayedArmorClassBonus;
     public readonly DisplayedBaseArmorClassIntFlaggedProperty DisplayedBaseArmorClass;
     public readonly HealthIntFlaggedProperty Health;
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <remarks>state->speed</remarks>
+    public readonly SpeedIntFlaggedProperty Speed;
+
+    public readonly SpareSpellSlotsIntFlaggedProperty SpareSpellSlots;
 
     public readonly MainForm MainForm;
 
@@ -393,13 +400,6 @@ internal class SaveGame
     public int SkillThrowing;
     public int SkillUseDevice;
     public int SocialClass;
-    public int SpareSpellSlots;
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <remarks>state->speed</remarks>
-    public readonly SpeedIntFlaggedProperty Speed;
 
     /// <summary>
     /// 
@@ -641,7 +641,8 @@ internal class SaveGame
         Food = (FoodIntFlaggedProperty)SingletonRepository.Properties.Get(nameof(FoodIntFlaggedProperty));
         Health = (HealthIntFlaggedProperty)SingletonRepository.Properties.Get(nameof(HealthIntFlaggedProperty));
         Speed = (SpeedIntFlaggedProperty)SingletonRepository.Properties.Get(nameof(SpeedIntFlaggedProperty));
-
+        SpareSpellSlots = (SpareSpellSlotsIntFlaggedProperty)SingletonRepository.Properties.Get(nameof(SpareSpellSlotsIntFlaggedProperty));
+        
         TimedAcidResistance = (AcidResistanceTimedAction)SingletonRepository.TimedActions.Get(nameof(AcidResistanceTimedAction));
         TimedBleeding = (BleedingTimedAction)SingletonRepository.TimedActions.Get(nameof(BleedingTimedAction));
         TimedBlessing = (BlessingTimedAction)SingletonRepository.TimedActions.Get(nameof(BlessingTimedAction));

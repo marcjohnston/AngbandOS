@@ -118,7 +118,7 @@ internal class SelfKnowledgeScript : Script, IScript
         {
             info[infoCount++] = "You are looking around very carefully.";
         }
-        if (SaveGame.SpareSpellSlots != 0)
+        if (SaveGame.SpareSpellSlots.Value != 0)
         {
             info[infoCount++] = "You can learn some spells/prayers.";
         }

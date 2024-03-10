@@ -46,13 +46,13 @@ internal class ResearchSpellScript : Script, IScript, IStoreScript
             return;
         }
         // We can only learn new spells if we have spare slots
-        if (SaveGame.SpareSpellSlots == 0)
+        if (SaveGame.SpareSpellSlots.Value == 0)
         {
             SaveGame.MsgPrint($"You cannot learn any new {spellType}s!");
             return;
         }
-        string plural = SaveGame.SpareSpellSlots == 1 ? "" : "s";
-        SaveGame.MsgPrint($"You can learn {SaveGame.SpareSpellSlots} new {spellType}{plural}.");
+        string plural = SaveGame.SpareSpellSlots.Value == 1 ? "" : "s";
+        SaveGame.MsgPrint($"You can learn {SaveGame.SpareSpellSlots.Value} new {spellType}{plural}.");
         SaveGame.MsgPrint(null);
         // Get the spell books we have
         if (!SaveGame.SelectItem(out Item? item, "Study which book? ", false, true, true, SaveGame.SingletonRepository.ItemFilters.Get(nameof(IsUsableSpellBookItemFilter))))
@@ -122,13 +122,13 @@ internal class ResearchSpellScript : Script, IScript, IStoreScript
         // Let the player know they've learned a spell
         SaveGame.MsgPrint($"You have learned the {spellType} of {spell.Name}.");
         SaveGame.PlaySound(SoundEffectEnum.Study);
-        SaveGame.SpareSpellSlots--;
-        if (SaveGame.SpareSpellSlots != 0)
+        SaveGame.SpareSpellSlots.Value--;
+        if (SaveGame.SpareSpellSlots.Value != 0)
         {
-            plural = SaveGame.SpareSpellSlots != 1 ? "s" : "";
-            SaveGame.MsgPrint($"You can learn {SaveGame.SpareSpellSlots} more {spellType}{plural}.");
+            plural = SaveGame.SpareSpellSlots.Value != 1 ? "s" : "";
+            SaveGame.MsgPrint($"You can learn {SaveGame.SpareSpellSlots.Value} more {spellType}{plural}.");
         }
-        SaveGame.OldSpareSpellSlots = SaveGame.SpareSpellSlots;
+        SaveGame.OldSpareSpellSlots = SaveGame.SpareSpellSlots.Value;
         SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawStudyFlaggedAction)).Set();
     }
 }
