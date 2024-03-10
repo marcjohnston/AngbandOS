@@ -68,7 +68,7 @@ internal class SpriteRace : Race
         SaveGame.HasFeatherFall = true;
         SaveGame.HasGlow = true;
         SaveGame.HasLightResistance = true;
-        SaveGame.Speed += SaveGame.ExperienceLevel / 10;
+        SaveGame.Speed.Value += SaveGame.ExperienceLevel / 10;
     }
 
     public override void UseRacialPower()

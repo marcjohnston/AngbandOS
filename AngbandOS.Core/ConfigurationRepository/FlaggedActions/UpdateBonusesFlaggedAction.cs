@@ -36,7 +36,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
     protected override void Execute()
     {
         int extraShots;
-        int oldSpeed = SaveGame.Speed;
+        int oldSpeed = SaveGame.Speed.Value;
         bool oldTelepathy = SaveGame.HasTelepathy;
         bool oldSeeInv = SaveGame.HasSeeInvisibility;
         int oldDisAc = SaveGame.DisplayedBaseArmorClass.Value;
@@ -274,7 +274,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
             }
         }
         SaveGame.Race.CalcBonuses();
-        SaveGame.Speed = 110;
+        SaveGame.Speed.Value = 110;
         SaveGame.MeleeAttacksPerRound = 1;
         SaveGame.MissileAttacksPerRound = 1;
         SaveGame.AmmunitionItemCategory = 0;
@@ -288,7 +288,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         SaveGame.AbilityScores[Ability.Dexterity].Bonus += SaveGame.DexterityBonus;
         SaveGame.AbilityScores[Ability.Constitution].Bonus += SaveGame.ConstitutionBonus;
         SaveGame.AbilityScores[Ability.Charisma].Bonus += SaveGame.CharismaBonus;
-        SaveGame.Speed += SaveGame.SpeedBonus;
+        SaveGame.Speed.Value += SaveGame.SpeedBonus;
         SaveGame.HasRegeneration |= SaveGame.Regen;
         SaveGame.SkillSearchFrequency += SaveGame.SearchBonus;
         SaveGame.SkillSearching += SaveGame.SearchBonus;
@@ -395,7 +395,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                     }
                     if (oPtr.Characteristics.Speed)
                     {
-                        SaveGame.Speed += oPtr.TypeSpecificValue;
+                        SaveGame.Speed.Value += oPtr.TypeSpecificValue;
                     }
                     if (oPtr.Characteristics.Blows)
                     {
@@ -753,15 +753,15 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         }
         if (SaveGame.TimedHaste.TurnsRemaining != 0)
         {
-            SaveGame.Speed += 10;
+            SaveGame.Speed.Value += 10;
         }
         if (SaveGame.TimedSlow.TurnsRemaining != 0)
         {
-            SaveGame.Speed -= 10;
+            SaveGame.Speed.Value -= 10;
         }
         if ((SaveGame.BaseCharacterClass.ID == CharacterClass.Monk || SaveGame.BaseCharacterClass.ID == CharacterClass.Mystic) && !SaveGame.MartialArtistHeavyArmor())
         {
-            SaveGame.Speed += SaveGame.ExperienceLevel / 10;
+            SaveGame.Speed.Value += SaveGame.ExperienceLevel / 10;
         }
         if (SaveGame.TimedTelepathy.TurnsRemaining != 0)
         {
@@ -798,17 +798,17 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
 
         if (j > ii / 2)
         {
-            SaveGame.Speed -= (j - (ii / 2)) / (ii / 10);
+            SaveGame.Speed.Value -= (j - (ii / 2)) / (ii / 10);
         }
         if (SaveGame.Food.Value >= Constants.PyFoodMax)
         {
-            SaveGame.Speed -= 10;
+            SaveGame.Speed.Value -= 10;
         }
         if (SaveGame.IsSearching)
         {
-            SaveGame.Speed -= 10;
+            SaveGame.Speed.Value -= 10;
         }
-        if (SaveGame.Speed != oldSpeed)
+        if (SaveGame.Speed.Value != oldSpeed)
         {
             SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawSpeedFlaggedAction)).Set();
         }

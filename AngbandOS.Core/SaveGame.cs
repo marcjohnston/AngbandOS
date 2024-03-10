@@ -399,7 +399,7 @@ internal class SaveGame
     /// 
     /// </summary>
     /// <remarks>state->speed</remarks>
-    public int Speed;
+    public readonly SpeedIntFlaggedProperty Speed;
 
     /// <summary>
     /// 
@@ -640,6 +640,7 @@ internal class SaveGame
         DisplayedBaseArmorClass = (DisplayedBaseArmorClassIntFlaggedProperty)SingletonRepository.Properties.Get(nameof(DisplayedBaseArmorClassIntFlaggedProperty));
         Food = (FoodIntFlaggedProperty)SingletonRepository.Properties.Get(nameof(FoodIntFlaggedProperty));
         Health = (HealthIntFlaggedProperty)SingletonRepository.Properties.Get(nameof(HealthIntFlaggedProperty));
+        Speed = (SpeedIntFlaggedProperty)SingletonRepository.Properties.Get(nameof(SpeedIntFlaggedProperty));
 
         TimedAcidResistance = (AcidResistanceTimedAction)SingletonRepository.TimedActions.Get(nameof(AcidResistanceTimedAction));
         TimedBleeding = (BleedingTimedAction)SingletonRepository.TimedActions.Get(nameof(BleedingTimedAction));
@@ -3400,7 +3401,7 @@ internal class SaveGame
             RunScript(nameof(GainMutationScript));
             GetFirstLevelMutation = false;
         }
-        Energy += Constants.ExtractEnergy[Speed];
+        Energy += Constants.ExtractEnergy[Speed.Value];
         if (Energy < 100)
         {
             return;
@@ -3701,7 +3702,7 @@ internal class SaveGame
         {
             if (GameTime.IsTurnHundred)
             {
-                int additionalEnergy = Constants.ExtractEnergy[Speed] * 2;
+                int additionalEnergy = Constants.ExtractEnergy[Speed.Value] * 2;
                 if (HasRegeneration)
                 {
                     additionalEnergy += 30;

@@ -66,7 +66,7 @@ internal class KlackonRace : Race
     {
         SaveGame.HasConfusionResistance = true;
         SaveGame.HasAcidResistance = true;
-        SaveGame.Speed += SaveGame.ExperienceLevel / 10;
+        SaveGame.Speed.Value += SaveGame.ExperienceLevel / 10;
     }
     public override void UseRacialPower()
     {

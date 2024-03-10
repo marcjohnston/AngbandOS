@@ -1966,7 +1966,7 @@ internal static class borg1c
         borg_skill.BI_WEIGHT = saveGame.WeightCarried;
 
         /* Extract "Fast (+x)" or "Slow (-x)" */
-        borg_skill.BI_SPEED = saveGame.Speed;
+        borg_skill.BI_SPEED = saveGame.Speed.Value;
 
         /* Check my float for decrementing variables */
         if (borg_skill.BI_SPEED > 110)
