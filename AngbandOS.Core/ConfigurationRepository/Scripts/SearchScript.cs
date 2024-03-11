@@ -37,12 +37,12 @@ internal class SearchScript : Script, IScript, IRepeatableScript
         // The basic chance is equal to our searching skill
         int chance = SaveGame.SkillSearching;
         // If we can't see it's hard to search
-        if (SaveGame.TimedBlindness.TurnsRemaining != 0 || SaveGame.NoLight())
+        if (SaveGame.TimedBlindness.Value != 0 || SaveGame.NoLight())
         {
             chance /= 10;
         }
         // If we're confused it's hard to search
-        if (SaveGame.TimedConfusion.TurnsRemaining != 0 || SaveGame.TimedHallucinations.TurnsRemaining != 0)
+        if (SaveGame.TimedConfusion.Value != 0 || SaveGame.TimedHallucinations.Value != 0)
         {
             chance /= 10;
         }

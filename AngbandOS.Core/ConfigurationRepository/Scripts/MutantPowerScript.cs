@@ -44,7 +44,7 @@ internal class MutantPowerScript : Script, IScript, IRepeatableScript
             powerDesc[num] = "";
         }
         num = 0;
-        if (SaveGame.TimedConfusion.TurnsRemaining != 0)
+        if (SaveGame.TimedConfusion.Value != 0)
         {
             SaveGame.MsgPrint("You are too confused to use any powers!");
             SaveGame.EnergyUse = 0;

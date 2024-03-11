@@ -26,7 +26,7 @@ internal class SaltWaterPotionItemFactory : PotionItemFactory
         // Salt water makes you vomit, but gets rid of poison
         SaveGame.MsgPrint("The saltiness makes you vomit!");
         SaveGame.SetFood(Constants.PyFoodStarve - 1);
-        SaveGame.TimedPoison.ResetTimer();
+        SaveGame.PoisonTimer.ResetTimer();
         SaveGame.TimedParalysis.AddTimer(4);
         return true;
     }

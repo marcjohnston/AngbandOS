@@ -14,7 +14,7 @@ internal class MentalismCastingType : CastingType
     public override void Cast()
     {
         int plev = SaveGame.ExperienceLevel;
-        if (SaveGame.TimedConfusion.TurnsRemaining != 0)
+        if (SaveGame.TimedConfusion.Value != 0)
         {
             SaveGame.MsgPrint("You are too confused!");
             return;

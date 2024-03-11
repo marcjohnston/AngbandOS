@@ -35,12 +35,12 @@ internal class ResearchSpellScript : Script, IScript, IStoreScript
             return;
         }
         // We can't learn spells if we're blind or confused
-        if (SaveGame.TimedBlindness.TurnsRemaining != 0)
+        if (SaveGame.TimedBlindness.Value != 0)
         {
             SaveGame.MsgPrint("You cannot see!");
             return;
         }
-        if (SaveGame.TimedConfusion.TurnsRemaining != 0)
+        if (SaveGame.TimedConfusion.Value != 0)
         {
             SaveGame.MsgPrint("You are too confused!");
             return;

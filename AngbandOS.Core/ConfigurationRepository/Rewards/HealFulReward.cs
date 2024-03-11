@@ -16,7 +16,7 @@ internal class HealFulReward : Reward
         SaveGame.MsgPrint($"The voice of {patron.ShortName} booms out:");
         SaveGame.MsgPrint("'Rise, my servant!'");
         SaveGame.RunScript(nameof(RestoreLevelScript));
-        SaveGame.TimedPoison.ResetTimer();
+        SaveGame.PoisonTimer.ResetTimer();
         SaveGame.TimedBlindness.ResetTimer();
         SaveGame.TimedConfusion.ResetTimer();
         SaveGame.TimedHallucinations.ResetTimer();

@@ -38,7 +38,7 @@ internal class HolinessStaffItemFactory : StaffItemFactory
         {
             eventArgs.Identified = true;
         }
-        if (SaveGame.TimedPoison.ResetTimer())
+        if (SaveGame.PoisonTimer.ResetTimer())
         {
             eventArgs.Identified = true;
         }

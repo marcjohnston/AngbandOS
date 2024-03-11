@@ -66,7 +66,7 @@ internal class ActivateScript : Script, IScript, IRepeatableScript, ISuccessfulS
         // Work out the chance of using the item successfully based on its level and the
         // player's skill
         int chance = SaveGame.SkillUseDevice;
-        if (SaveGame.TimedConfusion.TurnsRemaining != 0)
+        if (SaveGame.TimedConfusion.Value != 0)
         {
             chance /= 2;
         }

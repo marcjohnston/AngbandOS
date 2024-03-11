@@ -18,6 +18,6 @@ internal class DetoxifyScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        SaveGame.TimedPoison.ResetTimer();
+        SaveGame.PoisonTimer.ResetTimer();
     }
 }

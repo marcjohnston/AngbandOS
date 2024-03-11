@@ -28,7 +28,7 @@ internal class PolymorphWoundsScript : Script, IScript, IRepeatableScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        int wounds = SaveGame.TimedBleeding.TurnsRemaining;
+        int wounds = SaveGame.TimedBleeding.Value;
         int hitP = SaveGame.MaxHealth - SaveGame.Health.Value;
         int change = SaveGame.DiceRoll(SaveGame.ExperienceLevel, 5);
         bool nastyEffect = SaveGame.DieRoll(5) == 1;
@@ -46,7 +46,7 @@ internal class PolymorphWoundsScript : Script, IScript, IRepeatableScript
         {
             SaveGame.MsgPrint("Your wounds are polymorphed into less serious ones.");
             SaveGame.RestoreHealth(change);
-            SaveGame.TimedBleeding.SetTimer(SaveGame.TimedBleeding.TurnsRemaining - (change / 2));
+            SaveGame.TimedBleeding.SetTimer(SaveGame.TimedBleeding.Value - (change / 2));
         }
         return;
     }

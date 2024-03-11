@@ -26,7 +26,7 @@ internal class SpeedPotionItemFactory : PotionItemFactory
     public override bool Quaff()
     {
         // Speed temporarily hastes you.  But it is not additive.
-        if (SaveGame.TimedHaste.TurnsRemaining == 0)
+        if (SaveGame.TimedHaste.Value == 0)
         {
             if (SaveGame.TimedHaste.SetTimer(SaveGame.DieRoll(25) + 15))
             {

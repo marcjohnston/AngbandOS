@@ -71,7 +71,7 @@ internal class LightProjectile : Projectile
 
     protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
     {
-        bool blind = SaveGame.TimedBlindness.TurnsRemaining != 0;
+        bool blind = SaveGame.TimedBlindness.Value != 0;
         if (dam > 1600)
         {
             dam = 1600;
@@ -98,7 +98,7 @@ internal class LightProjectile : Projectile
             dam *= 2;
         }
         SaveGame.TakeHit(dam, killer);
-        if (SaveGame.TimedEtherealness.TurnsRemaining != 0)
+        if (SaveGame.TimedEtherealness.Value != 0)
         {
             SaveGame.TimedEtherealness.SetValue();
             SaveGame.MsgPrint("The light forces you out of your incorporeal shadow form.");

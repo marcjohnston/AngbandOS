@@ -19,6 +19,6 @@ internal class CureWoundsAndPoisonScript : Script, IScript
     public void ExecuteScript()
     {
         SaveGame.TimedBleeding.ResetTimer();
-        SaveGame.TimedPoison.ResetTimer();
+        SaveGame.PoisonTimer.ResetTimer();
     }
 }

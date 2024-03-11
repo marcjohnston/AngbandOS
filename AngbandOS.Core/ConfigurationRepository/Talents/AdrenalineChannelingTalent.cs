@@ -31,7 +31,7 @@ internal class AdrenalineChannelingTalent : Talent
         {
             SaveGame.TimedSuperheroism.AddTimer(i);
         }
-        if (SaveGame.TimedHaste.TurnsRemaining == 0)
+        if (SaveGame.TimedHaste.Value == 0)
         {
             SaveGame.TimedHaste.SetTimer(i);
         }

@@ -22,7 +22,7 @@ internal class WeirdMindRandomMutation : Mutation
         {
             return;
         }
-        if (SaveGame.TimedTelepathy.TurnsRemaining > 0)
+        if (SaveGame.TimedTelepathy.Value > 0)
         {
             SaveGame.MsgPrint("Your mind feels cloudy!");
             SaveGame.TimedTelepathy.ResetTimer();

@@ -17,7 +17,7 @@ internal class RedrawStateFlaggedAction : FlaggedAction
     {
         ColorEnum attr = ColorEnum.White;
         string text;
-        if (SaveGame.TimedParalysis.TurnsRemaining > 0)
+        if (SaveGame.TimedParalysis.Value > 0)
         {
             attr = ColorEnum.Red;
             text = "Paralyzed!";

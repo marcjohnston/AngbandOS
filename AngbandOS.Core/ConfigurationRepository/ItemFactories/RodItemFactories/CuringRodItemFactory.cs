@@ -30,7 +30,7 @@ internal class CuringRodItemFactory : RodItemFactory
         {
             zapRodEvent.Identified = true;
         }
-        if (SaveGame.TimedPoison.ResetTimer())
+        if (SaveGame.PoisonTimer.ResetTimer())
         {
             zapRodEvent.Identified = true;
         }

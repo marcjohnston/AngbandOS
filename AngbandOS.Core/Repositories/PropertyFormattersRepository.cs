@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Repositories;
 
 [Serializable]
-internal class PropertyFormattersRepository : DictionaryRepository<string, PropertyFormatter>
+internal class PropertyFormattersRepository : DictionaryRepository<string, Formatter>
 {
     public PropertyFormattersRepository(SaveGame saveGame) : base(saveGame) { }
 }

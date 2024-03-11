@@ -43,7 +43,7 @@ internal class PoisProjectile : Projectile
 
     protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
     {
-        bool blind = SaveGame.TimedBlindness.TurnsRemaining != 0;
+        bool blind = SaveGame.TimedBlindness.Value != 0;
         if (dam > 1600)
         {
             dam = 1600;
@@ -59,17 +59,17 @@ internal class PoisProjectile : Projectile
         {
             dam = (dam + 2) / 3;
         }
-        if (SaveGame.TimedPoisonResistance.TurnsRemaining != 0)
+        if (SaveGame.TimedPoisonResistance.Value != 0)
         {
             dam = (dam + 2) / 3;
         }
-        if (!(SaveGame.TimedPoisonResistance.TurnsRemaining != 0 || SaveGame.HasPoisonResistance) &&
+        if (!(SaveGame.TimedPoisonResistance.Value != 0 || SaveGame.HasPoisonResistance) &&
             SaveGame.DieRoll(SaveGame.HurtChance) == 1)
         {
             SaveGame.TryDecreasingAbilityScore(Ability.Constitution);
         }
         SaveGame.TakeHit(dam, killer);
-        if (!(SaveGame.HasPoisonResistance || SaveGame.TimedPoisonResistance.TurnsRemaining != 0))
+        if (!(SaveGame.HasPoisonResistance || SaveGame.TimedPoisonResistance.Value != 0))
         {
             if (SaveGame.DieRoll(10) <= SaveGame.SingletonRepository.Gods.Get(nameof(HagargRyonisGod)).AdjustedFavour)
             {
@@ -77,7 +77,7 @@ internal class PoisProjectile : Projectile
             }
             else
             {
-                SaveGame.TimedPoison.AddTimer(SaveGame.RandomLessThan(dam) + 10);
+                SaveGame.PoisonTimer.AddTimer(SaveGame.RandomLessThan(dam) + 10);
             }
         }
         return true;

@@ -27,4 +27,10 @@ internal class PrExtraRedrawActionGroupSetFlaggedAction : GroupSetFlaggedAction
             SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawStudyFlaggedAction))
         };
     }
+
+    public override void Set()
+    {
+        base.Set();
+        SaveGame.PoisonTimer.AddTimer(0); // TODO: We need to set the flagged property and the Set was made protetced.
+    }
 }

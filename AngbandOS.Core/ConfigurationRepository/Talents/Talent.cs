@@ -50,11 +50,11 @@ internal abstract class Talent : IGetKey<string>
         {
             chance = minfail;
         }
-        if (SaveGame.TimedStun.TurnsRemaining > 50)
+        if (SaveGame.TimedStun.Value > 50)
         {
             chance += 25;
         }
-        else if (SaveGame.TimedStun.TurnsRemaining != 0)
+        else if (SaveGame.TimedStun.Value != 0)
         {
             chance += 15;
         }

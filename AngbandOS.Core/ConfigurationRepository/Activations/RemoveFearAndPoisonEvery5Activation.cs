@@ -21,7 +21,7 @@ internal class RemoveFearAndPoisonEvery5Activation : Activation
     protected override bool OnActivate(Item item)
     {
         SaveGame.TimedFear.ResetTimer();
-        SaveGame.TimedPoison.ResetTimer();
+        SaveGame.PoisonTimer.ResetTimer();
         return true;
     }
 

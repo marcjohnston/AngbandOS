@@ -19,6 +19,6 @@ internal class CureMediumWounds4d8Script : Script, IScript
     public void ExecuteScript()
     {
         SaveGame.RestoreHealth(SaveGame.DiceRoll(4, 8));
-        SaveGame.TimedBleeding.SetTimer((SaveGame.TimedBleeding.TurnsRemaining / 2) - 50);
+        SaveGame.TimedBleeding.SetTimer((SaveGame.TimedBleeding.Value / 2) - 50);
     }
 }

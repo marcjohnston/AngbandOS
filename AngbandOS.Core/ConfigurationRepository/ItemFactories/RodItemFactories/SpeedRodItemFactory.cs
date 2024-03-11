@@ -26,7 +26,7 @@ internal class SpeedRodItemFactory : RodItemFactory
     public override int Weight => 15;
     public override void Execute(ZapRodEvent zapRodEvent)
     {
-        if (SaveGame.TimedHaste.TurnsRemaining == 0)
+        if (SaveGame.TimedHaste.Value == 0)
         {
             if (SaveGame.TimedHaste.SetTimer(SaveGame.DieRoll(30) + 15))
             {

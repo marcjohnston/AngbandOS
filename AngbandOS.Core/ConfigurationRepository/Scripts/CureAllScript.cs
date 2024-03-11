@@ -32,7 +32,7 @@ internal class CureAllScript : Script, IScript
         SaveGame.FractionalMana = 0;
         SaveGame.TimedBlindness.ResetTimer();
         SaveGame.TimedConfusion.ResetTimer();
-        SaveGame.TimedPoison.ResetTimer();
+        SaveGame.PoisonTimer.ResetTimer();
         SaveGame.TimedFear.ResetTimer();
         SaveGame.TimedParalysis.ResetTimer();
         SaveGame.TimedHallucinations.ResetTimer();

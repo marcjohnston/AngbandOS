@@ -71,7 +71,7 @@ internal class NukeProjectile : Projectile
 
     protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
     {
-        bool blind = SaveGame.TimedBlindness.TurnsRemaining != 0;
+        bool blind = SaveGame.TimedBlindness.Value != 0;
         if (dam > 1600)
         {
             dam = 1600;
@@ -87,14 +87,14 @@ internal class NukeProjectile : Projectile
         {
             dam = ((2 * dam) + 2) / 5;
         }
-        if (SaveGame.TimedPoisonResistance.TurnsRemaining != 0)
+        if (SaveGame.TimedPoisonResistance.Value != 0)
         {
             dam = ((2 * dam) + 2) / 5;
         }
         SaveGame.TakeHit(dam, killer);
-        if (!(SaveGame.HasPoisonResistance || SaveGame.TimedPoisonResistance.TurnsRemaining != 0))
+        if (!(SaveGame.HasPoisonResistance || SaveGame.TimedPoisonResistance.Value != 0))
         {
-            SaveGame.TimedPoison.AddTimer(SaveGame.RandomLessThan(dam) + 10);
+            SaveGame.PoisonTimer.AddTimer(SaveGame.RandomLessThan(dam) + 10);
             if (SaveGame.DieRoll(5) == 1)
             {
                 SaveGame.MsgPrint("You undergo a freakish metamorphosis!");

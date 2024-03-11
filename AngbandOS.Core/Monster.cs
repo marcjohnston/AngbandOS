@@ -211,7 +211,7 @@ internal class Monster : IItemContainer
         }
         string desc;
         string name = Race.Name;
-        if (SaveGame.TimedHallucinations.TurnsRemaining != 0)
+        if (SaveGame.TimedHallucinations.Value != 0)
         {
             MonsterRace halluRace;
             do
@@ -356,7 +356,7 @@ internal class Monster : IItemContainer
         }
         else
         {
-            if (Race.Unique && SaveGame.TimedHallucinations.TurnsRemaining == 0)
+            if (Race.Unique && SaveGame.TimedHallucinations.Value == 0)
             {
                 desc = name;
             }
@@ -421,7 +421,7 @@ internal class Monster : IItemContainer
             {
                 return;
             }
-            if (SaveGame.TimedHallucinations.TurnsRemaining != 0)
+            if (SaveGame.TimedHallucinations.Value != 0)
             {
                 this.SaveGame.MsgPrint($"You behold the {this.SaveGame.SingletonRepository.FunnyDescriptions.ToWeightedRandom().ChooseOrDefault()} visage of {mName}!");
                 if (SaveGame.DieRoll(3) == 1)
@@ -1520,7 +1520,7 @@ internal class Monster : IItemContainer
         SaveGame.Disturb(true);
 
         // Render a message to the player.
-        bool playerIsBlind = SaveGame.TimedBlindness.TurnsRemaining != 0;
+        bool playerIsBlind = SaveGame.TimedBlindness.Value != 0;
         string? message = playerIsBlind ? thrownSpell.VsPlayerBlindMessage : thrownSpell.VsPlayerActionMessage(this);
         if (message != null)
         {
@@ -1657,7 +1657,7 @@ internal class Monster : IItemContainer
 
             // Against other monsters we pick spells randomly
             MonsterSpell thrownSpell = Race.Spells.ToWeightedRandom(SaveGame).ChooseOrDefault();
-            bool blind = SaveGame.TimedBlindness.TurnsRemaining != 0;
+            bool blind = SaveGame.TimedBlindness.Value != 0;
             bool seeTarget = !blind && target.IsVisible;
             bool seen = !blind && IsVisible;
             bool seeEither = seen || seeTarget;
@@ -2732,7 +2732,7 @@ internal class Monster : IItemContainer
             {
                 SaveGame.Disturb(true);
                 // Protection From Evil might repel the attack
-                if (SaveGame.TimedProtectionFromEvil.TurnsRemaining > 0 && Race.Evil && SaveGame.ExperienceLevel >= monsterLevel && this.SaveGame.RandomLessThan(100) + SaveGame.ExperienceLevel > 50)
+                if (SaveGame.TimedProtectionFromEvil.Value > 0 && Race.Evil && SaveGame.ExperienceLevel >= monsterLevel && this.SaveGame.RandomLessThan(100) + SaveGame.ExperienceLevel > 50)
                 {
                     if (IsVisible)
                     {

@@ -17,7 +17,7 @@ internal class ColdSpellResistantDetection : SpellResistantDetection
         {
             monster.SmResCold = true;
         }
-        if (SaveGame.TimedColdResistance.TurnsRemaining != 0)
+        if (SaveGame.TimedColdResistance.Value != 0)
         {
             monster.SmOppCold = true;
         }

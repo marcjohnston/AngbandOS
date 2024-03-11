@@ -20,7 +20,7 @@ internal class Heal777CuringAndHeroism25pd25Every300Activation : Activation
 
     protected override bool OnActivate(Item item)
     {
-        SaveGame.TimedPoison.ResetTimer();
+        SaveGame.PoisonTimer.ResetTimer();
         SaveGame.TimedBleeding.ResetTimer();
         SaveGame.TimedStun.ResetTimer();
         SaveGame.TimedConfusion.ResetTimer();

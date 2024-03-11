@@ -22,7 +22,7 @@ internal class BattleFrenzyScript : Script, IScript
         SaveGame.TimedSuperheroism.AddTimer(SaveGame.DieRoll(25) + 25);
         SaveGame.RestoreHealth(30);
         SaveGame.TimedFear.ResetTimer();
-        if (SaveGame.TimedHaste.TurnsRemaining == 0)
+        if (SaveGame.TimedHaste.Value == 0)
         {
             SaveGame.TimedHaste.SetTimer(SaveGame.DieRoll(20 + (SaveGame.ExperienceLevel / 2)) + (SaveGame.ExperienceLevel / 2));
         }

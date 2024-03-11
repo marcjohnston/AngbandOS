@@ -32,6 +32,6 @@ internal class PrBasicRedrawActionGroupSetFlaggedAction : GroupSetFlaggedAction
     public override void Set()
     {
         base.Set();
-        SaveGame.Gold.Set();
+        SaveGame.Gold.Value = SaveGame.Gold.Value; // TODO: We need to set the flagged property and the Set was made protetced.
     }
 }

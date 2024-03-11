@@ -35,7 +35,7 @@ internal class CuringStaffItemFactory : StaffItemFactory
         {
             eventArgs.Identified = true;
         }
-        if (SaveGame.TimedPoison.ResetTimer())
+        if (SaveGame.PoisonTimer.ResetTimer())
         {
             eventArgs.Identified = true;
         }

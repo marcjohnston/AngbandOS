@@ -31,7 +31,7 @@ internal class SpeedStaffItemFactory : StaffItemFactory
 
     public override void UseStaff(UseStaffEvent eventArgs)
     {
-        if (SaveGame.TimedHaste.TurnsRemaining == 0)
+        if (SaveGame.TimedHaste.Value == 0)
         {
             if (SaveGame.TimedHaste.SetTimer(SaveGame.DieRoll(30) + 15))
             {

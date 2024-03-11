@@ -50,11 +50,11 @@ internal class MindBlastMonsterSpell : MonsterSpell
     public override void ExecuteOnMonster(SaveGame saveGame, Monster monster, Monster target)
     {
         int rlev = monster.Race.Level >= 1 ? monster.Race.Level : 1;
-        bool playerIsBlind = saveGame.TimedBlindness.TurnsRemaining != 0;
+        bool playerIsBlind = saveGame.TimedBlindness.Value != 0;
         bool seen = !playerIsBlind && monster.IsVisible;
         string monsterName = monster.Name;
         string targetName = target.Name;
-        bool blind = saveGame.TimedBlindness.TurnsRemaining != 0;
+        bool blind = saveGame.TimedBlindness.Value != 0;
         MonsterRace targetRace = target.Race;
 
         if (targetRace.Unique || targetRace.ImmuneConfusion || targetRace.Level > SaveGame.DieRoll(rlev - 10 < 1 ? 1 : rlev - 10) + 10)

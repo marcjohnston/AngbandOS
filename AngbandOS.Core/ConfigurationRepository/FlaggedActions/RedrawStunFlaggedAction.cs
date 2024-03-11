@@ -15,7 +15,7 @@ internal class RedrawStunFlaggedAction : FlaggedAction
     private RedrawStunFlaggedAction(SaveGame saveGame) : base(saveGame) { }
     protected override void Execute()
     {
-        int s = SaveGame.TimedStun.TurnsRemaining;
+        int s = SaveGame.TimedStun.Value;
         if (s > 100)
         {
             SaveGame.Screen.Print(ColorEnum.Red, "Knocked out ", RowStun, ColStun);

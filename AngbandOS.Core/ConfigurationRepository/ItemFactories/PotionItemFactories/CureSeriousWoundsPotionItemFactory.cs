@@ -42,7 +42,7 @@ internal class CureSeriousWoundsPotionItemFactory : PotionItemFactory
         {
             identified = true;
         }
-        if (SaveGame.TimedBleeding.SetTimer((SaveGame.TimedBleeding.TurnsRemaining / 2) - 50))
+        if (SaveGame.TimedBleeding.SetTimer((SaveGame.TimedBleeding.Value / 2) - 50))
         {
             identified = true;
         }

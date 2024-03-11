@@ -17,14 +17,14 @@ internal class PoisonAttackEffect : AttackEffect
     {
         // Poison does additional damage
         SaveGame.TakeHit(damage, monsterDescription);
-        if (!(SaveGame.HasPoisonResistance || SaveGame.TimedPoisonResistance.TurnsRemaining != 0))
+        if (!(SaveGame.HasPoisonResistance || SaveGame.TimedPoisonResistance.Value != 0))
         {
             // Hagarg Ryonis might save us from the additional damage
             if (SaveGame.DieRoll(10) <= SaveGame.SingletonRepository.Gods.Get(nameof(HagargRyonisGod)).AdjustedFavour)
             {
                 SaveGame.MsgPrint("Hagarg Ryonis's favour protects you!");
             }
-            else if (SaveGame.TimedPoison.AddTimer(SaveGame.DieRoll(monsterLevel) + 5))
+            else if (SaveGame.PoisonTimer.AddTimer(SaveGame.DieRoll(monsterLevel) + 5))
             {
                 obvious = true;
             }

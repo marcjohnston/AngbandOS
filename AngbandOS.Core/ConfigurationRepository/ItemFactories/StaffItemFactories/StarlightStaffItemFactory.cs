@@ -31,7 +31,7 @@ internal class StarlightStaffItemFactory : StaffItemFactory
 
     public override void UseStaff(UseStaffEvent eventArgs)
     {
-        if (SaveGame.TimedBlindness.TurnsRemaining == 0)
+        if (SaveGame.TimedBlindness.Value == 0)
         {
             SaveGame.MsgPrint("The end of the staff glows brightly...");
         }

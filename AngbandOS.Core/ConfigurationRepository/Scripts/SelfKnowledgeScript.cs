@@ -46,31 +46,31 @@ internal class SelfKnowledgeScript : Script, IScript
                 info[infoCount++] = m;
             }
         }
-        if (SaveGame.TimedBlindness.TurnsRemaining != 0)
+        if (SaveGame.TimedBlindness.Value != 0)
         {
             info[infoCount++] = "You cannot see.";
         }
-        if (SaveGame.TimedConfusion.TurnsRemaining != 0)
+        if (SaveGame.TimedConfusion.Value != 0)
         {
             info[infoCount++] = "You are confused.";
         }
-        if (SaveGame.TimedFear.TurnsRemaining != 0)
+        if (SaveGame.TimedFear.Value != 0)
         {
             info[infoCount++] = "You are terrified.";
         }
-        if (SaveGame.TimedBleeding.TurnsRemaining != 0)
+        if (SaveGame.TimedBleeding.Value != 0)
         {
             info[infoCount++] = "You are bleeding.";
         }
-        if (SaveGame.TimedStun.TurnsRemaining != 0)
+        if (SaveGame.TimedStun.Value != 0)
         {
             info[infoCount++] = "You are stunned.";
         }
-        if (SaveGame.TimedPoison.TurnsRemaining != 0)
+        if (SaveGame.PoisonTimer.Value != 0)
         {
             info[infoCount++] = "You are poisoned.";
         }
-        if (SaveGame.TimedHallucinations.TurnsRemaining != 0)
+        if (SaveGame.TimedHallucinations.Value != 0)
         {
             info[infoCount++] = "You are hallucinating.";
         }
@@ -82,31 +82,31 @@ internal class SelfKnowledgeScript : Script, IScript
         {
             info[infoCount++] = "Your position is very uncertain.";
         }
-        if (SaveGame.TimedBlessing.TurnsRemaining != 0)
+        if (SaveGame.TimedBlessing.Value != 0)
         {
             info[infoCount++] = "You feel rightous.";
         }
-        if (SaveGame.TimedHeroism.TurnsRemaining != 0)
+        if (SaveGame.TimedHeroism.Value != 0)
         {
             info[infoCount++] = "You feel heroic.";
         }
-        if (SaveGame.TimedSuperheroism.TurnsRemaining != 0)
+        if (SaveGame.TimedSuperheroism.Value != 0)
         {
             info[infoCount++] = "You are in a battle rage.";
         }
-        if (SaveGame.TimedProtectionFromEvil.TurnsRemaining != 0)
+        if (SaveGame.TimedProtectionFromEvil.Value != 0)
         {
             info[infoCount++] = "You are protected from evil.";
         }
-        if (SaveGame.TimedStoneskin.TurnsRemaining != 0)
+        if (SaveGame.TimedStoneskin.Value != 0)
         {
             info[infoCount++] = "You are protected by a mystic shield.";
         }
-        if (SaveGame.TimedInvulnerability.TurnsRemaining != 0)
+        if (SaveGame.TimedInvulnerability.Value != 0)
         {
             info[infoCount++] = "You are temporarily invulnerable.";
         }
-        if (SaveGame.TimedEtherealness.TurnsRemaining != 0)
+        if (SaveGame.TimedEtherealness.Value != 0)
         {
             info[infoCount++] = "You are temporarily incorporeal.";
         }
@@ -186,11 +186,11 @@ internal class SelfKnowledgeScript : Script, IScript
         {
             info[infoCount++] = "You are completely immune to acid.";
         }
-        else if (SaveGame.HasAcidResistance && SaveGame.TimedAcidResistance.TurnsRemaining != 0)
+        else if (SaveGame.HasAcidResistance && SaveGame.TimedAcidResistance.Value != 0)
         {
             info[infoCount++] = "You resist acid exceptionally well.";
         }
-        else if (SaveGame.HasAcidResistance || SaveGame.TimedAcidResistance.TurnsRemaining != 0)
+        else if (SaveGame.HasAcidResistance || SaveGame.TimedAcidResistance.Value != 0)
         {
             info[infoCount++] = "You are resistant to acid.";
         }
@@ -198,11 +198,11 @@ internal class SelfKnowledgeScript : Script, IScript
         {
             info[infoCount++] = "You are completely immune to lightning.";
         }
-        else if (SaveGame.HasLightningResistance && SaveGame.TimedLightningResistance.TurnsRemaining != 0)
+        else if (SaveGame.HasLightningResistance && SaveGame.TimedLightningResistance.Value != 0)
         {
             info[infoCount++] = "You resist lightning exceptionally well.";
         }
-        else if (SaveGame.HasLightningResistance || SaveGame.TimedLightningResistance.TurnsRemaining != 0)
+        else if (SaveGame.HasLightningResistance || SaveGame.TimedLightningResistance.Value != 0)
         {
             info[infoCount++] = "You are resistant to lightning.";
         }
@@ -210,11 +210,11 @@ internal class SelfKnowledgeScript : Script, IScript
         {
             info[infoCount++] = "You are completely immune to fire.";
         }
-        else if (SaveGame.HasFireResistance && SaveGame.TimedFireResistance.TurnsRemaining != 0)
+        else if (SaveGame.HasFireResistance && SaveGame.TimedFireResistance.Value != 0)
         {
             info[infoCount++] = "You resist fire exceptionally well.";
         }
-        else if (SaveGame.HasFireResistance || SaveGame.TimedFireResistance.TurnsRemaining != 0)
+        else if (SaveGame.HasFireResistance || SaveGame.TimedFireResistance.Value != 0)
         {
             info[infoCount++] = "You are resistant to fire.";
         }
@@ -222,19 +222,19 @@ internal class SelfKnowledgeScript : Script, IScript
         {
             info[infoCount++] = "You are completely immune to cold.";
         }
-        else if (SaveGame.HasColdResistance && SaveGame.TimedColdResistance.TurnsRemaining != 0)
+        else if (SaveGame.HasColdResistance && SaveGame.TimedColdResistance.Value != 0)
         {
             info[infoCount++] = "You resist cold exceptionally well.";
         }
-        else if (SaveGame.HasColdResistance || SaveGame.TimedColdResistance.TurnsRemaining != 0)
+        else if (SaveGame.HasColdResistance || SaveGame.TimedColdResistance.Value != 0)
         {
             info[infoCount++] = "You are resistant to cold.";
         }
-        if (SaveGame.HasPoisonResistance && SaveGame.TimedPoisonResistance.TurnsRemaining != 0)
+        if (SaveGame.HasPoisonResistance && SaveGame.TimedPoisonResistance.Value != 0)
         {
             info[infoCount++] = "You resist poison exceptionally well.";
         }
-        else if (SaveGame.HasPoisonResistance || SaveGame.TimedPoisonResistance.TurnsRemaining != 0)
+        else if (SaveGame.HasPoisonResistance || SaveGame.TimedPoisonResistance.Value != 0)
         {
             info[infoCount++] = "You are resistant to poison.";
         }

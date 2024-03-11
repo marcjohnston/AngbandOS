@@ -15,7 +15,7 @@ internal class RedrawConfusedFlaggedAction : FlaggedAction
     private RedrawConfusedFlaggedAction(SaveGame saveGame) : base(saveGame) { }
     protected override void Execute()
     {
-        if (SaveGame.TimedConfusion.TurnsRemaining > 0)
+        if (SaveGame.TimedConfusion.Value > 0)
         {
             SaveGame.Screen.Print(ColorEnum.Orange, "Confused", RowConfused, ColConfused);
         }

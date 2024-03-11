@@ -21,7 +21,7 @@ internal class Heal4d8AndWoundsEvery3p1d3Activation : Activation
     protected override bool OnActivate(Item item)
     {
         SaveGame.RestoreHealth(SaveGame.DiceRoll(4, 8));
-        SaveGame.TimedBleeding.SetTimer((SaveGame.TimedBleeding.TurnsRemaining / 2) - 50);
+        SaveGame.TimedBleeding.SetTimer((SaveGame.TimedBleeding.Value / 2) - 50);
         return true;
     }
 

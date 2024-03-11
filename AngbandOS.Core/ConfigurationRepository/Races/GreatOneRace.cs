@@ -101,7 +101,7 @@ internal class GreatOneRace : Race
             if (SaveGame.CheckIfRacialPowerWorks(40, 75, Ability.Wisdom, 50))
             {
                 SaveGame.MsgPrint("You dream of a time of health and peace...");
-                SaveGame.TimedPoison.ResetTimer();
+                SaveGame.PoisonTimer.ResetTimer();
                 SaveGame.TimedHallucinations.ResetTimer();
                 SaveGame.TimedStun.ResetTimer();
                 SaveGame.TimedBleeding.ResetTimer();

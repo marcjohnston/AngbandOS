@@ -23,7 +23,7 @@ internal class CowardiceRandomMutation : Mutation
         {
             return;
         }
-        if (SaveGame.HasFearResistance || SaveGame.TimedHeroism.TurnsRemaining != 0 || SaveGame.TimedSuperheroism.TurnsRemaining != 0)
+        if (SaveGame.HasFearResistance || SaveGame.TimedHeroism.Value != 0 || SaveGame.TimedSuperheroism.Value != 0)
         {
             return;
         }

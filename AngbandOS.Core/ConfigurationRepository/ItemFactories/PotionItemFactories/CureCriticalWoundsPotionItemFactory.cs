@@ -42,7 +42,7 @@ internal class CureCriticalWoundsPotionItemFactory : PotionItemFactory
         {
             identified = true;
         }
-        if (SaveGame.TimedPoison.ResetTimer())
+        if (SaveGame.PoisonTimer.ResetTimer())
         {
             identified = true;
         }

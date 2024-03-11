@@ -60,7 +60,7 @@ internal abstract class Projectile : IGetKey<string>
         bool visual = false;
         bool drawn = false;
         bool breath = false;
-        bool blind = SaveGame.TimedBlindness.TurnsRemaining != 0;
+        bool blind = SaveGame.TimedBlindness.Value != 0;
         int grids = 0;
         int[] gx = new int[256];
         int[] gy = new int[256];
@@ -489,7 +489,7 @@ internal abstract class Projectile : IGetKey<string>
     {
         if (SaveGame.HasReflection && aRad == 0 && SaveGame.DieRoll(10) != 1)
         {
-            bool blind = SaveGame.TimedBlindness.TurnsRemaining != 0;
+            bool blind = SaveGame.TimedBlindness.Value != 0;
             SaveGame.MsgPrint(blind ? "Something bounces!" : "The attack bounces!");
 
             int tY;

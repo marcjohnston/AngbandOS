@@ -43,7 +43,7 @@ internal class EatLightRandomMutation : Mutation
                 SaveGame.RestoreHealth(oPtr.TypeSpecificValue / 20);
                 oPtr.TypeSpecificValue /= 2;
                 SaveGame.MsgPrint("You absorb energy from your light!");
-                if (SaveGame.TimedBlindness.TurnsRemaining != 0)
+                if (SaveGame.TimedBlindness.Value != 0)
                 {
                     if (oPtr.TypeSpecificValue == 0)
                     {

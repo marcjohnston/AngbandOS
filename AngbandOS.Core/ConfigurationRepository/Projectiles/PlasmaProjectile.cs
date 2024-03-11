@@ -113,7 +113,7 @@ internal class PlasmaProjectile : Projectile
 
     protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
     {
-        bool blind = SaveGame.TimedBlindness.TurnsRemaining != 0;
+        bool blind = SaveGame.TimedBlindness.Value != 0;
         if (dam > 1600)
         {
             dam = 1600;
@@ -131,7 +131,7 @@ internal class PlasmaProjectile : Projectile
             int kk = SaveGame.DieRoll(dam > 40 ? 35 : (dam * 3 / 4) + 5);
             SaveGame.TimedStun.AddTimer(kk);
         }
-        if (!(SaveGame.HasFireResistance || SaveGame.TimedFireResistance.TurnsRemaining != 0 || SaveGame.HasFireImmunity))
+        if (!(SaveGame.HasFireResistance || SaveGame.TimedFireResistance.Value != 0 || SaveGame.HasFireImmunity))
         {
             SaveGame.InvenDamage(SaveGame.SetAcidDestroy, 3);
         }

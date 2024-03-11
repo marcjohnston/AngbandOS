@@ -21,6 +21,6 @@ internal class HerbalHealingScript : Script, IScript
         SaveGame.RestoreHealth(1000);
         SaveGame.TimedStun.ResetTimer();
         SaveGame.TimedBleeding.ResetTimer();
-        SaveGame.TimedPoison.ResetTimer();
+        SaveGame.PoisonTimer.ResetTimer();
     }
 }

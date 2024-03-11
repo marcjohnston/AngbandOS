@@ -78,12 +78,12 @@ internal class CastingType : IGetKey<string>
             SaveGame.MsgPrint("You cannot cast spells!");
             return;
         }
-        if (SaveGame.TimedBlindness.TurnsRemaining != 0 || SaveGame.NoLight())
+        if (SaveGame.TimedBlindness.Value != 0 || SaveGame.NoLight())
         {
             SaveGame.MsgPrint("You cannot see!");
             return;
         }
-        if (SaveGame.TimedConfusion.TurnsRemaining != 0)
+        if (SaveGame.TimedConfusion.Value != 0)
         {
             SaveGame.MsgPrint("You are too confused!");
             return;

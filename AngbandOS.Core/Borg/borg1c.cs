@@ -1985,24 +1985,24 @@ internal static class borg1c
         }
         if (!borg_prot_from_evil)
         {
-            borg_prot_from_evil = (saveGame.TimedProtectionFromEvil.TurnsRemaining != 0);
+            borg_prot_from_evil = (saveGame.TimedProtectionFromEvil.Value != 0);
         }
         if (!borg_speed)
         {
             // Borg code set borg_speed true when haste, sprint or terror.  We don't have sprint and terror doesn't give us speed.
-            borg_speed = saveGame.TimedHaste.TurnsRemaining != 0;
+            borg_speed = saveGame.TimedHaste.Value != 0;
         }
-        borg_skill.BI_TRACID = saveGame.TimedAcidResistance.TurnsRemaining != 0;
-        borg_skill.BI_TRELEC = saveGame.TimedLightningResistance.TurnsRemaining != 0;
-        borg_skill.BI_TRFIRE = saveGame.TimedFireResistance.TurnsRemaining != 0;
-        borg_skill.BI_TRCOLD = saveGame.TimedColdResistance.TurnsRemaining != 0;
-        borg_skill.BI_TRPOIS = saveGame.TimedPoisonResistance.TurnsRemaining != 0;
-        borg_bless = saveGame.TimedBlessing.TurnsRemaining != 0;;
+        borg_skill.BI_TRACID = saveGame.TimedAcidResistance.Value != 0;
+        borg_skill.BI_TRELEC = saveGame.TimedLightningResistance.Value != 0;
+        borg_skill.BI_TRFIRE = saveGame.TimedFireResistance.Value != 0;
+        borg_skill.BI_TRCOLD = saveGame.TimedColdResistance.Value != 0;
+        borg_skill.BI_TRPOIS = saveGame.TimedPoisonResistance.Value != 0;
+        borg_bless = saveGame.TimedBlessing.Value != 0;;
         //borg_shield = (player->timed[TMD_SHIELD] ? true : false); // No equivalent in AngbandOS
-        borg_shield = saveGame.TimedStoneskin.TurnsRemaining != 0;
+        borg_shield = saveGame.TimedStoneskin.Value != 0;
         //borg_fastcast = (player->timed[TMD_FASTCAST] ? true : false); // No equivalent in AngbandOS
-        borg_hero = saveGame.TimedHeroism.TurnsRemaining != 0;
-        borg_berserk = saveGame.TimedSuperheroism.TurnsRemaining != 0;
+        borg_hero = saveGame.TimedHeroism.Value != 0;
+        borg_berserk = saveGame.TimedSuperheroism.Value != 0;
         //borg_regen =  (player->.timed (player->timed[TMD_HEAL] ? true : false); // No equivalent in AngbandOS
         //borg_venom = (player->timed[TMD_ATT_POIS] ? true : false); // No equivalent in AngbandOS
         //borg_smite_evil = (player->timed[TMD_ATT_EVIL] ? true : false); // No equivalent in AngbandOS
@@ -2012,7 +2012,7 @@ internal static class borg1c
         /* gained from hasting is counted seperately. */
         if (borg_speed)
         {
-            if (saveGame.TimedHaste.TurnsRemaining != 0)
+            if (saveGame.TimedHaste.Value != 0)
             {
                 borg_skill.BI_SPEED -= 10;
             }

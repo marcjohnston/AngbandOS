@@ -24,7 +24,7 @@ internal class SpeedFluxRandomMutation : Mutation
             if (base.SaveGame.DieRoll(2) == 1)
             {
                 SaveGame.MsgPrint("Everything around you speeds up.");
-                if (SaveGame.TimedHaste.TurnsRemaining > 0)
+                if (SaveGame.TimedHaste.Value > 0)
                 {
                     SaveGame.TimedHaste.ResetTimer();
                 }
@@ -36,7 +36,7 @@ internal class SpeedFluxRandomMutation : Mutation
             else
             {
                 SaveGame.MsgPrint("Everything around you slows down.");
-                if (SaveGame.TimedSlow.TurnsRemaining > 0)
+                if (SaveGame.TimedSlow.Value > 0)
                 {
                     SaveGame.TimedSlow.ResetTimer();
                 }

@@ -53,7 +53,7 @@ internal abstract class Widget : IGetKey<string>
     }
 
     /// <summary>
-    /// Redraws the widget.  The widget has been deemed invalid via the Widget.Invalidated == true or the dervied object returned true on the QueryRedraw method.
+    /// Redraws the widget.  The widget has been deemed invalid via the <see cref="Invalidated"/> == true or the dervied object returned true on the <see cref="QueryRedraw"/> method.
     /// </summary>
     protected abstract void Paint();
 

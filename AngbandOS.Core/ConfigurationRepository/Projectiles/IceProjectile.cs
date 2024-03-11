@@ -111,7 +111,7 @@ internal class IceProjectile : Projectile
 
     protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
     {
-        bool blind = SaveGame.TimedBlindness.TurnsRemaining != 0;
+        bool blind = SaveGame.TimedBlindness.Value != 0;
         if (dam > 1600)
         {
             dam = 1600;
@@ -132,7 +132,7 @@ internal class IceProjectile : Projectile
         {
             SaveGame.TimedStun.AddTimer(SaveGame.DieRoll(15));
         }
-        if (!(SaveGame.HasColdResistance || SaveGame.TimedColdResistance.TurnsRemaining != 0) || SaveGame.DieRoll(12) == 1)
+        if (!(SaveGame.HasColdResistance || SaveGame.TimedColdResistance.Value != 0) || SaveGame.DieRoll(12) == 1)
         {
             if (!SaveGame.HasColdImmunity)
             {

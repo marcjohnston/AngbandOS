@@ -14,7 +14,8 @@ internal class MainForm : Form
 
     protected override string[] WidgetNames => new string[]
     {
-        nameof(GoldIntPropertyWidget),
-        nameof(GPTextWidget)
+        nameof(GoldIntWidget),
+        nameof(GPTextWidget),
+        nameof(PoisonedIntWidget)
     };
 }

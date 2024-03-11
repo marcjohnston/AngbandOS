@@ -37,7 +37,7 @@ internal class PoisonPitScript : Script, IScript
                 damage *= 2;
                 SaveGame.TimedBleeding.AddTimer(SaveGame.DieRoll(damage));
                 // Hagarg Ryonis can save us from the poison
-                if (SaveGame.HasPoisonResistance || SaveGame.TimedPoisonResistance.TurnsRemaining != 0)
+                if (SaveGame.HasPoisonResistance || SaveGame.TimedPoisonResistance.Value != 0)
                 {
                     SaveGame.MsgPrint("The poison does not affect you!");
                 }
@@ -48,7 +48,7 @@ internal class PoisonPitScript : Script, IScript
                 else
                 {
                     damage *= 2;
-                    SaveGame.TimedPoison.AddTimer(SaveGame.DieRoll(damage));
+                    SaveGame.PoisonTimer.AddTimer(SaveGame.DieRoll(damage));
                 }
             }
             SaveGame.TakeHit(damage, name);

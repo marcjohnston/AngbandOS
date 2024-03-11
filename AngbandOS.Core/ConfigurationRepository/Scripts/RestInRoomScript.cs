@@ -52,7 +52,7 @@ internal class RestInRoomScript : Script, IScript
         SaveGame.TimedConfusion.SetValue();
         SaveGame.TimedFear.SetValue();
         SaveGame.TimedHallucinations.SetValue();
-        SaveGame.TimedPoison.SetValue();
+        SaveGame.PoisonTimer.SetValue();
         SaveGame.TimedBleeding.SetValue();
         SaveGame.TimedStun.SetValue();
         SaveGame.TimedProtectionFromEvil.SetValue();

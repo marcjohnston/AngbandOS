@@ -39,7 +39,7 @@ internal class ConfuseMonsterSpell : MonsterSpell
     public override void ExecuteOnMonster(SaveGame saveGame, Monster monster, Monster target)
     {
         int rlev = monster.Race.Level >= 1 ? monster.Race.Level : 1;
-        bool blind = saveGame.TimedBlindness.TurnsRemaining != 0;
+        bool blind = saveGame.TimedBlindness.Value != 0;
         bool seeTarget = !blind && target.IsVisible;
         string targetName = target.Name;
         MonsterRace targetRace = target.Race;

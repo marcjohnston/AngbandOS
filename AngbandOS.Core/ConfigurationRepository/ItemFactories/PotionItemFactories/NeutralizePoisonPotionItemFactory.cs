@@ -26,7 +26,7 @@ internal class NeutralizePoisonPotionItemFactory : PotionItemFactory
     public override bool Quaff()
     {
         // Cure poison removes any poison you have
-        return SaveGame.TimedPoison.ResetTimer();
+        return SaveGame.PoisonTimer.ResetTimer();
     }
     public override Item CreateItem() => new Item(SaveGame, this);
 }

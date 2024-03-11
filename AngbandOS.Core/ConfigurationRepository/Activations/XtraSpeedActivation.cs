@@ -20,7 +20,7 @@ internal class XtraSpeedActivation : Activation
 
     protected override bool OnActivate(Item item)
     {
-        if (SaveGame.TimedHaste.TurnsRemaining == 0)
+        if (SaveGame.TimedHaste.Value == 0)
         {
             SaveGame.TimedHaste.SetTimer(SaveGame.DieRoll(75) + 75);
         }

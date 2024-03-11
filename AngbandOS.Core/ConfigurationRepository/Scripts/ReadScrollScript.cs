@@ -29,7 +29,7 @@ internal class ReadScrollScript : Script, IScript, IRepeatableScript
     public void ExecuteScript()
     {
         // Make sure we're in a situation where we can read
-        if (SaveGame.TimedBlindness.TurnsRemaining != 0)
+        if (SaveGame.TimedBlindness.Value != 0)
         {
             SaveGame.MsgPrint("You can't see anything.");
             return;
@@ -39,7 +39,7 @@ internal class ReadScrollScript : Script, IScript, IRepeatableScript
             SaveGame.MsgPrint("You have no light to read by.");
             return;
         }
-        if (SaveGame.TimedConfusion.TurnsRemaining != 0)
+        if (SaveGame.TimedConfusion.Value != 0)
         {
             SaveGame.MsgPrint("You are too confused!");
             return;

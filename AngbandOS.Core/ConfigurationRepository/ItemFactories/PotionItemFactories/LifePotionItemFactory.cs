@@ -30,7 +30,7 @@ internal class LifePotionItemFactory : PotionItemFactory
         SaveGame.MsgPrint("You feel life flow through your body!");
         SaveGame.RunScript(nameof(RestoreLevelScript));
         SaveGame.RestoreHealth(5000);
-        SaveGame.TimedPoison.ResetTimer();
+        SaveGame.PoisonTimer.ResetTimer();
         SaveGame.TimedBlindness.ResetTimer();
         SaveGame.TimedConfusion.ResetTimer();
         SaveGame.TimedHallucinations.ResetTimer();

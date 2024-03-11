@@ -27,7 +27,7 @@ internal class RestInStoreScript : Script, IScript, IStoreScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        if (SaveGame.TimedPoison.TurnsRemaining > 0 || SaveGame.TimedBleeding.TurnsRemaining > 0)
+        if (SaveGame.PoisonTimer.Value > 0 || SaveGame.TimedBleeding.Value > 0)
         {
             SaveGame.MsgPrint("Your wounds prevent you from sleeping.");
         }

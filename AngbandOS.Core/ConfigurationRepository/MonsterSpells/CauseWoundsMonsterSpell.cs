@@ -63,7 +63,7 @@ internal abstract class CauseWoundsMonsterSpell : MonsterSpell
     {
         int rlev = monster.Race.Level >= 1 ? monster.Race.Level : 1;
         string targetName = target.Name;
-        bool blind = saveGame.TimedBlindness.TurnsRemaining != 0;
+        bool blind = saveGame.TimedBlindness.Value != 0;
         bool seeTarget = !blind && target.IsVisible;
         MonsterRace targetRace = target.Race;
 

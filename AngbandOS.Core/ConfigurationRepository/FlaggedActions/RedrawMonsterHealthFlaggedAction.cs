@@ -26,7 +26,7 @@ internal class RedrawMonsterHealthFlaggedAction : FlaggedAction
         {
             SaveGame.Screen.Print(ColorEnum.White, "[----------]", RowInfo, ColInfo);
         }
-        else if (SaveGame.TimedHallucinations.TurnsRemaining != 0)
+        else if (SaveGame.TimedHallucinations.Value != 0)
         {
             SaveGame.Screen.Print(ColorEnum.White, "[----------]", RowInfo, ColInfo);
         }

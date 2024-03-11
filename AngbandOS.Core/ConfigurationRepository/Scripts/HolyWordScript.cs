@@ -21,7 +21,7 @@ internal class HolyWordScript : Script, IScript
         SaveGame.RunScriptInt(nameof(DispelEvil4xScript), SaveGame.ExperienceLevel * 4);
         SaveGame.RestoreHealth(1000);
         SaveGame.TimedFear.ResetTimer();
-        SaveGame.TimedPoison.ResetTimer();
+        SaveGame.PoisonTimer.ResetTimer();
         SaveGame.TimedStun.ResetTimer();
         SaveGame.TimedBleeding.ResetTimer();
     }

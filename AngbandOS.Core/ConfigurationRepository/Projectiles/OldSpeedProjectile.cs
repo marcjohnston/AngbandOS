@@ -42,7 +42,7 @@ internal class OldSpeedProjectile : Projectile
 
     protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
     {
-        bool blind = SaveGame.TimedBlindness.TurnsRemaining != 0;
+        bool blind = SaveGame.TimedBlindness.Value != 0;
         if (blind)
         {
             SaveGame.MsgPrint("You are hit by something!");
