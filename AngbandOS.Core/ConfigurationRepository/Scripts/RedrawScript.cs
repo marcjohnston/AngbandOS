@@ -34,7 +34,10 @@ internal class RedrawScript : Script, IScript
         SaveGame.SingletonRepository.FlaggedActions.Get(nameof(PrExtraRedrawActionGroupSetFlaggedAction)).Set();
         SaveGame.SingletonRepository.FlaggedActions.Get(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
         SaveGame.SingletonRepository.FlaggedActions.Get(nameof(PrBasicRedrawActionGroupSetFlaggedAction)).Set();
-        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawAllFlaggedAction)).Set(); // TODO: Special case ... should be some form of invalidateclient
+
+        // Invalidate the main form.  This will force all of the widgets to redraw.
+        SaveGame.MainForm.Invalidate();
+
         SaveGame.HandleStuff();
         SaveGame.UpdateScreen();
     }

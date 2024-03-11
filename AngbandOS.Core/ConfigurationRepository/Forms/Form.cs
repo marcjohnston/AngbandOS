@@ -36,4 +36,17 @@ internal abstract class Form : IGetKey<string>
     {
         return "";
     }
+
+    public void Invalidate()
+    {
+        // Clear the screen.
+        SaveGame.MsgPrint(null);
+        SaveGame.Screen.Clear();
+
+        // Force all of the widgets to redraw.
+        foreach (Widget widget in Widgets)
+        {
+            widget.Invalidate();
+        }
+    }
 }

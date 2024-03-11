@@ -15,8 +15,11 @@ internal abstract class TextWidget : Widget
     public abstract ColorEnum Color { get; }
     public override int Width => Text.Length;
     public override int Height => 1;
-    public override void Draw()
+    protected override void OnDraw()
     {
-        SaveGame.Screen.Print(Color, Text, Y, X);
+        if (Invalid)
+        {
+            SaveGame.Screen.Print(Color, Text, Y, X);
+        }
     }
 }

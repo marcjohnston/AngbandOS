@@ -21,10 +21,10 @@ internal abstract class IntPropertyWidget : Widget
         IntProperty = (IntFlaggedProperty)SaveGame.SingletonRepository.Properties.Get(IntPropertyName);
         IntPropertyFormatter = (IntPropertyFormatter)SaveGame.SingletonRepository.PropertyFormatters.Get(IntPropertyFormatterName);
     }
-    public override void Draw()
+    protected override void OnDraw()
     {
         // We only draw the value, if the value was updated.
-        if (IntProperty.IsSet)
+        if (Invalid || IntProperty.IsSet)
         {
             string value = IntPropertyFormatter.Format(IntProperty.Value, Width);
             SaveGame.Screen.Print(Color, value, Y, X);

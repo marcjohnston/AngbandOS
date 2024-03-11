@@ -16,6 +16,12 @@ internal abstract class Widget : IGetKey<string>
         SaveGame = saveGame;
     }
 
+    public bool Invalid { get; private set; }
+    public void Invalidate()
+    {
+        Invalid = true;
+    }
+
     public abstract int X { get; }
     public abstract int Y { get; }
     public abstract int Width { get; }
@@ -34,5 +40,10 @@ internal abstract class Widget : IGetKey<string>
         return "";
     }
 
-    public abstract void Draw();
+    protected abstract void OnDraw();
+    public void Draw()
+    {
+        OnDraw();
+        Invalid = false;
+    }
 }

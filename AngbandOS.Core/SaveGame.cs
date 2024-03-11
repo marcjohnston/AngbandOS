@@ -3075,10 +3075,13 @@ internal class SaveGame
         PanelBoundsCenter();
         MsgPrint(null);
         CharacterXtra = true;
+
+        // Invalidate the main screen.
+        MainForm.Invalidate();
+
         SingletonRepository.FlaggedActions.Get(nameof(RedrawEquippyFlaggedAction)).Set();
         SingletonRepository.FlaggedActions.Get(nameof(PrExtraRedrawActionGroupSetFlaggedAction)).Set();
         SingletonRepository.FlaggedActions.Get(nameof(PrBasicRedrawActionGroupSetFlaggedAction)).Set();
-        SingletonRepository.FlaggedActions.Get(nameof(RedrawAllFlaggedAction)).Set(); // TODO: special case ... should be some form of invalidateclient
         SingletonRepository.FlaggedActions.Get(nameof(RedrawMapFlaggedAction)).Set();
         SingletonRepository.FlaggedActions.Get(nameof(UpdateHealthFlaggedAction)).Set();
         SingletonRepository.FlaggedActions.Get(nameof(UpdateManaFlaggedAction)).Set();
@@ -3985,9 +3988,6 @@ internal class SaveGame
         {
             return;
         }
-
-        // The Wipe refresh is a special RedrawAction that occurs before all other RedrawActions.
-        SingletonRepository.FlaggedActions.Get(nameof(RedrawAllFlaggedAction)).Check();
 
         foreach (Widget widget in MainForm.Widgets)
         {
@@ -9986,9 +9986,9 @@ internal class SaveGame
                 {
                     WildernessGen();
                 }
-                    }
-                    else
-                    {
+            }
+            else
+            {
                 if (!DungeonGenerator.GenerateDungeon())
                 {
                     okay = false;

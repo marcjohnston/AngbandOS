@@ -69,7 +69,10 @@ internal class ViewCharacterScript : Script, IScript, IRepeatableScript, IStoreS
         SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawEquippyFlaggedAction)).Set();
         SaveGame.SingletonRepository.FlaggedActions.Get(nameof(PrExtraRedrawActionGroupSetFlaggedAction)).Set();
         SaveGame.SingletonRepository.FlaggedActions.Get(nameof(PrBasicRedrawActionGroupSetFlaggedAction)).Set();
-        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawAllFlaggedAction)).Set(); // TODO: special case ... should be some form of invalidate
+
+        // Invalidate the main screen.
+        SaveGame.MainForm.Invalidate();
+
         SaveGame.HandleStuff();
     }
 }
