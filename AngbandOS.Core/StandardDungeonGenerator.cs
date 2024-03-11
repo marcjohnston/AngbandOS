@@ -5,22 +5,25 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using System.Diagnostics;
+
 namespace AngbandOS.Core;
 
 [Serializable]
 internal class StandardDungeonGenerator : DungeonGenerator
 {
-    private GridCoordinate[] Cent;
+    private const int _smallLevel = 3;
+    private GridCoordinate[] Cent; // This is the center of each room that was generated.
     private GridCoordinate[] Door;
-    private bool[][] RoomMap;
+    private bool[][] RoomMap; // This is a quadrant of _blockWid wide blocks by _blockHgt blocks high map tracking if a room has been built in that quadrant.
     private GridCoordinate[] Tunn;
     private GridCoordinate[] Wall;
-    private const int CentMax = 100;
+    private const int CentMax = 100; // This is the maximum number of rooms that can be tracked when a dungeon is generated.  Any rooms generated beyond this count are not tracked as a room.
     private const int DoorMax = 200;
-    private const int _blockHgt = 21;
-    private const int _blockWid = 11;
-    private const int MaxRoomsCol = SaveGame.MaxWid / _blockWid;
-    private const int MaxRoomsRow = SaveGame.MaxHgt / _blockHgt;
+    private const int _blockHgt = 21; // This is the vertical height of a block that is used to divide the dungeon into grid blocks for room placement.
+    private const int _blockWid = 11; // This is the horizontal width of a block that is used to divide the dungeon into grid blocks for room placement.
+    private const int MaxRoomsCol = SaveGame.MaxWid / _blockWid; // This is the number of horizontal grid blocks for the current dungeon.
+    private const int MaxRoomsRow = SaveGame.MaxHgt / _blockHgt; // This is the number of vertical grid blocks for the current dungeon.
     private const int _allocSetBoth = 3;
     private const int _allocSetCorr = 1;
     private const int _allocSetRoom = 2;
@@ -33,7 +36,7 @@ internal class StandardDungeonGenerator : DungeonGenerator
     private const int _dunAmtItem = 3;
     private const int _dunAmtRoom = 9;
     private const int _dunDest = 18;
-    private const int _dunRooms = 50;
+    private const int MinimumNumberOfRoomsToAttemptToCreate = 50;
     private const int _dunStrDen = 5;
     private const int _dunStrMag = 3;
     private const int _dunStrMc = 90;
@@ -50,7 +53,11 @@ internal class StandardDungeonGenerator : DungeonGenerator
     private const int TunnMax = 900;
     private const int WallMax = 500;
 
+    /// <summary>
+    /// Returns the number of rooms that were generated.
+    /// </summary>
     private int CentN;
+
     private int ColRooms;
     private bool Crowded;
     private int DoorN;
@@ -67,6 +74,42 @@ internal class StandardDungeonGenerator : DungeonGenerator
     /// <returns></returns>
     public override bool GenerateDungeon()
     {
+        SaveGame.DungeonDifficulty = SaveGame.CurDungeon.Offset;
+        SaveGame.DunBias = SaveGame.CurDungeon.BiasMonsterFilter;
+        if (SaveGame.CurDungeon.Tower)
+        {
+            SaveGame.CurHgt = Constants.PlayableScreenHeight;
+            SaveGame.CurWid = Constants.PlayableScreenWidth;
+            SaveGame.MaxPanelRows = 0;
+            SaveGame.MaxPanelCols = 0;
+            SaveGame.PanelRow = 0;
+            SaveGame.PanelCol = 0;
+        }
+        else
+        {
+            // Test if this should be a small dungeon.  Small levels are less than the full size of the screen, but need to be at least large enough for type 1 rooms.
+            if (SaveGame.DieRoll(_smallLevel) == 1)
+            {
+                int tester1 = SaveGame.DieRoll(SaveGame.MaxHgt / Constants.PlayableScreenHeight);
+                int tester2 = SaveGame.DieRoll(SaveGame.MaxWid / Constants.PlayableScreenWidth);
+                SaveGame.CurHgt = tester1 * Constants.PlayableScreenHeight;
+                SaveGame.CurWid = tester2 * Constants.PlayableScreenWidth;
+                SaveGame.MaxPanelRows = (SaveGame.CurHgt / Constants.PlayableScreenHeight * 2) - 2;
+                SaveGame.MaxPanelCols = (SaveGame.CurWid / Constants.PlayableScreenWidth * 2) - 2;
+                SaveGame.PanelRow = SaveGame.MaxPanelRows;
+                SaveGame.PanelCol = SaveGame.MaxPanelCols;
+            }
+            else
+            {
+                SaveGame.CurHgt = SaveGame.MaxHgt;
+                SaveGame.CurWid = SaveGame.MaxWid;
+                SaveGame.MaxPanelRows = (SaveGame.CurHgt / Constants.PlayableScreenHeight * 2) - 2;
+                SaveGame.MaxPanelCols = (SaveGame.CurWid / Constants.PlayableScreenWidth * 2) - 2;
+                SaveGame.PanelRow = SaveGame.MaxPanelRows;
+                SaveGame.PanelCol = SaveGame.MaxPanelCols;
+            }
+        }
+
         ResetGuardians();
         if (SaveGame.IsQuest(SaveGame.CurrentDepth))
         {
@@ -136,7 +179,7 @@ internal class StandardDungeonGenerator : DungeonGenerator
         return true;
     }
 
-    private bool RoomBuild(int y0, int x0, RoomLayout roomType, int difficulty)
+    private bool RoomBuild(int y0, int x0, RoomLayout roomType, int difficulty) // TODO: This belongs to each room type
     {
         if (difficulty < roomType.Level)
         {
@@ -176,7 +219,7 @@ internal class StandardDungeonGenerator : DungeonGenerator
         if (CentN < CentMax)
         {
             Cent[CentN] = new GridCoordinate(x, y);
-            CentN++;
+            CentN++; // TODO: This is a module level variable
         }
         for (y = y1; y <= y2; y++)
         {
@@ -783,6 +826,11 @@ internal class StandardDungeonGenerator : DungeonGenerator
         }
     }
 
+    /// <summary>
+    /// Returns the minimum number of rooms to be generated.  This number must be at least 1.
+    /// </summary>
+    private const int MinimumRoomCount = 1;
+
     private void MakeDungeonLevel()
     {
         int k;
@@ -796,6 +844,25 @@ internal class StandardDungeonGenerator : DungeonGenerator
         Door = new GridCoordinate[DoorMax];
         Wall = new GridCoordinate[WallMax];
         Tunn = new GridCoordinate[TunnMax];
+
+        // Compute the number of grid blocks for this size of dungeon.
+        RowRooms = SaveGame.CurHgt / _blockHgt;
+        ColRooms = SaveGame.CurWid / _blockWid;
+
+        // The dungeon must be large enough to support at least one type-1 room.
+        Type1RoomLayout type1RoomLayout = (Type1RoomLayout)SaveGame.SingletonRepository.RoomLayouts.Get(nameof(Type1RoomLayout));
+        if (RowRooms < type1RoomLayout.Height)
+        {
+            SaveGame.CurHgt = type1RoomLayout.Height * _blockHgt;
+            RowRooms = SaveGame.CurHgt / _blockHgt;
+        }
+        if (ColRooms < type1RoomLayout.Width)
+        {
+            SaveGame.CurWid = type1RoomLayout.Width * _blockWid;
+            ColRooms = SaveGame.CurWid / _blockWid;
+        }
+
+        // Initialize the grid of rooms to prevent overlapping.
         RoomMap = new bool[MaxRoomsRow][];
         for (int i = 0; i < MaxRoomsRow; i++)
         {
@@ -837,8 +904,6 @@ internal class StandardDungeonGenerator : DungeonGenerator
         {
             destroyed = false;
         }
-        RowRooms = SaveGame.CurHgt / _blockHgt;
-        ColRooms = SaveGame.CurWid / _blockWid;
         for (y = 0; y < RowRooms; y++)
         {
             for (x = 0; x < ColRooms; x++)
@@ -848,8 +913,13 @@ internal class StandardDungeonGenerator : DungeonGenerator
         }
         Crowded = false;
         CentN = 0;
-        for (int i = 0; i < _dunRooms; i++)
+        int roomAttemptCount = 0;
+
+        // Attempt to generate rooms until we have attempted a minimum number of generations and we have reached a minimum number of rooms generated.
+        while (roomAttemptCount < MinimumNumberOfRoomsToAttemptToCreate || CentN < MinimumRoomCount)
         {
+            roomAttemptCount++;
+
             y = SaveGame.RandomLessThan(RowRooms);
             x = SaveGame.RandomLessThan(ColRooms);
             if (x % 3 == 0)
@@ -917,6 +987,10 @@ internal class StandardDungeonGenerator : DungeonGenerator
             if (RoomBuild(y, x, SaveGame.SingletonRepository.RoomLayouts.Get(nameof(Type1RoomLayout)), SaveGame.Difficulty))
             {
             }
+        }
+        if (CentN == 0)
+        {
+            CentN = CentN;
         }
         for (x = 0; x < SaveGame.CurWid; x++)
         {

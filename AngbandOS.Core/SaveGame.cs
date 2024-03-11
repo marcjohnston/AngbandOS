@@ -191,7 +191,6 @@ internal class SaveGame
     public int DisplayedDamageBonus;
     public int Energy;
     public int ExperienceMultiplier;
-    private const int _smallLevel = 3;
 
     public int FractionalExperiencePoints;
     public int FractionalHealth;
@@ -9987,43 +9986,9 @@ internal class SaveGame
                 {
                     WildernessGen();
                 }
-            }
-            else
-            {
-                DungeonDifficulty = CurDungeon.Offset;
-                DunBias = CurDungeon.BiasMonsterFilter;
-                if (CurDungeon.Tower)
-                {
-                    CurHgt = Constants.PlayableScreenHeight;
-                    CurWid = Constants.PlayableScreenWidth;
-                    MaxPanelRows = 0;
-                    MaxPanelCols = 0;
-                    PanelRow = 0;
-                    PanelCol = 0;
-                }
-                else
-                {
-                    if (DieRoll(_smallLevel) == 1)
-                    {
-                        int tester1 = DieRoll(MaxHgt / Constants.PlayableScreenHeight);
-                        int tester2 = DieRoll(MaxWid / Constants.PlayableScreenWidth);
-                        CurHgt = tester1 * Constants.PlayableScreenHeight;
-                        CurWid = tester2 * Constants.PlayableScreenWidth;
-                        MaxPanelRows = (CurHgt / Constants.PlayableScreenHeight * 2) - 2;
-                        MaxPanelCols = (CurWid / Constants.PlayableScreenWidth * 2) - 2;
-                        PanelRow = MaxPanelRows;
-                        PanelCol = MaxPanelCols;
                     }
                     else
                     {
-                        CurHgt = MaxHgt;
-                        CurWid = MaxWid;
-                        MaxPanelRows = (CurHgt / Constants.PlayableScreenHeight * 2) - 2;
-                        MaxPanelCols = (CurWid / Constants.PlayableScreenWidth * 2) - 2;
-                        PanelRow = MaxPanelRows;
-                        PanelCol = MaxPanelCols;
-                    }
-                }
                 if (!DungeonGenerator.GenerateDungeon())
                 {
                     okay = false;
