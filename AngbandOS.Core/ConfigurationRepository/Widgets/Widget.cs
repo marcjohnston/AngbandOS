@@ -16,11 +16,23 @@ internal abstract class Widget : IGetKey<string>
         SaveGame = saveGame;
     }
 
-    public bool Invalid { get; private set; }
+    /// <summary>
+    /// Returns true, when the widget has been invalidated.
+    /// </summary>
+    public bool Invalidated { get; private set; }
+
+    /// <summary>
+    /// Invalidates the widget.
+    /// </summary>
     public void Invalidate()
     {
-        Invalid = true;
+        Invalidated = true;
     }
+
+    /// <summary>
+    /// Returns true, if the widget needs to be redrawn.
+    /// </summary>
+    protected virtual bool QueryRedraw { get; }
 
     public abstract int X { get; }
     public abstract int Y { get; }
@@ -40,10 +52,21 @@ internal abstract class Widget : IGetKey<string>
         return "";
     }
 
-    protected abstract void OnDraw();
-    public void Draw()
+    /// <summary>
+    /// Redraws the widget.  The widget has been deemed invalid via the Widget.Invalidated == true or the dervied object returned true on the QueryRedraw method.
+    /// </summary>
+    protected abstract void Paint();
+
+    /// <summary>
+    /// Update the widget on the screen, if the widget needs to be redrawn.  The widget will be redrawn, if the widget was invalidated or the derived widget returns true
+    /// on the QueryRedraw method.
+    /// </summary>
+    public void Update()
     {
-        OnDraw();
-        Invalid = false;
+        if (Invalidated || QueryRedraw)
+        {
+            Paint();
+            Invalidated = false;
+        }
     }
 }

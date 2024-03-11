@@ -3991,7 +3991,7 @@ internal class SaveGame
 
         foreach (Widget widget in MainForm.Widgets)
         {
-            widget.Draw();
+            widget.Update();
         }
 
         SingletonRepository.FlaggedActions.Get(nameof(RedrawMapFlaggedAction)).Check();
