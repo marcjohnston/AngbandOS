@@ -4013,8 +4013,7 @@ internal class SaveGame
         SingletonRepository.FlaggedActions.Get(nameof(RedrawDTrapFlaggedAction)).Check();
         SingletonRepository.FlaggedActions.Get(nameof(RedrawBlindFlaggedAction)).Check();
         SingletonRepository.FlaggedActions.Get(nameof(RedrawConfusedFlaggedAction)).Check();
-        //SingletonRepository.FlaggedActions.Get(nameof(RedrawAfraidFlaggedAction)).Check();
-        SingletonRepository.FlaggedActions.Get(nameof(RedrawPoisonedFlaggedAction)).Check();
+        SingletonRepository.FlaggedActions.Get(nameof(RedrawAfraidFlaggedAction)).Check();
         SingletonRepository.FlaggedActions.Get(nameof(RedrawStateFlaggedAction)).Check();
         SingletonRepository.FlaggedActions.Get(nameof(RedrawSpeedFlaggedAction)).Check();
         SingletonRepository.FlaggedActions.Get(nameof(RedrawStudyFlaggedAction)).Check();

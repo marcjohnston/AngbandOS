@@ -21,7 +21,6 @@ internal class PrExtraRedrawActionGroupSetFlaggedAction : GroupSetFlaggedAction
             SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawBlindFlaggedAction)),
             SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawConfusedFlaggedAction)),
             SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawAfraidFlaggedAction)),
-            SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawPoisonedFlaggedAction)),
             SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawStateFlaggedAction)),
             SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawSpeedFlaggedAction)),
             SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawStudyFlaggedAction))
