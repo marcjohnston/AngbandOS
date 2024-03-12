@@ -31,7 +31,7 @@ internal class LifePotionItemFactory : PotionItemFactory
         SaveGame.RunScript(nameof(RestoreLevelScript));
         SaveGame.RestoreHealth(5000);
         SaveGame.PoisonTimer.ResetTimer();
-        SaveGame.TimedBlindness.ResetTimer();
+        SaveGame.BlindnessTimer.ResetTimer();
         SaveGame.TimedConfusion.ResetTimer();
         SaveGame.TimedHallucinations.ResetTimer();
         SaveGame.TimedStun.ResetTimer();

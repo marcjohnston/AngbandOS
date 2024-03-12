@@ -47,7 +47,7 @@ internal class RestInRoomScript : Script, IScript
         }
         SaveGame.TimedHaste.SetValue();
         SaveGame.TimedSlow.SetValue();
-        SaveGame.TimedBlindness.SetValue();
+        SaveGame.BlindnessTimer.SetValue();
         SaveGame.TimedParalysis.SetValue();
         SaveGame.TimedConfusion.SetValue();
         SaveGame.TimedFear.SetValue();
@@ -71,7 +71,7 @@ internal class RestInRoomScript : Script, IScript
         SaveGame.TimedPoisonResistance.SetValue();
         SaveGame.Health.Value = SaveGame.MaxHealth;
         SaveGame.Mana.Value = SaveGame.MaxMana.Value;
-        SaveGame.TimedBlindness.SetValue();
+        SaveGame.BlindnessTimer.SetValue();
         SaveGame.TimedConfusion.SetValue();
         SaveGame.TimedStun.SetValue();
         SaveGame.NewLevelFlag = true;

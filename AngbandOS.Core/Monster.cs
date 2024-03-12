@@ -1520,7 +1520,7 @@ internal class Monster : IItemContainer
         SaveGame.Disturb(true);
 
         // Render a message to the player.
-        bool playerIsBlind = SaveGame.TimedBlindness.Value != 0;
+        bool playerIsBlind = SaveGame.BlindnessTimer.Value != 0;
         string? message = playerIsBlind ? thrownSpell.VsPlayerBlindMessage : thrownSpell.VsPlayerActionMessage(this);
         if (message != null)
         {
@@ -1657,7 +1657,7 @@ internal class Monster : IItemContainer
 
             // Against other monsters we pick spells randomly
             MonsterSpell thrownSpell = Race.Spells.ToWeightedRandom(SaveGame).ChooseOrDefault();
-            bool blind = SaveGame.TimedBlindness.Value != 0;
+            bool blind = SaveGame.BlindnessTimer.Value != 0;
             bool seeTarget = !blind && target.IsVisible;
             bool seen = !blind && IsVisible;
             bool seeEither = seen || seeTarget;

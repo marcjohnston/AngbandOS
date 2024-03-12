@@ -48,7 +48,7 @@ internal class WaterProjectile : Projectile
 
     protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
     {
-        bool blind = SaveGame.TimedBlindness.Value != 0;
+        bool blind = SaveGame.BlindnessTimer.Value != 0;
         if (dam > 1600)
         {
             dam = 1600;

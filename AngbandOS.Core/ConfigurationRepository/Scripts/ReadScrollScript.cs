@@ -29,7 +29,7 @@ internal class ReadScrollScript : Script, IScript, IRepeatableScript
     public void ExecuteScript()
     {
         // Make sure we're in a situation where we can read
-        if (SaveGame.TimedBlindness.Value != 0)
+        if (SaveGame.BlindnessTimer.Value != 0)
         {
             SaveGame.MsgPrint("You can't see anything.");
             return;

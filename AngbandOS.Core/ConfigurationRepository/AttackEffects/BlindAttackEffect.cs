@@ -18,7 +18,7 @@ internal class BlindAttackEffect : AttackEffect
         SaveGame.TakeHit(damage, monsterDescription);
         if (!SaveGame.HasBlindnessResistance)
         {
-            if (SaveGame.TimedBlindness.AddTimer(10 + SaveGame.DieRoll(monsterLevel)))
+            if (SaveGame.BlindnessTimer.AddTimer(10 + SaveGame.DieRoll(monsterLevel)))
             {
                 obvious = true;
             }

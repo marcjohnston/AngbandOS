@@ -18,7 +18,6 @@ internal class PrExtraRedrawActionGroupSetFlaggedAction : GroupSetFlaggedAction
             SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawCutFlaggedAction)),
             SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawHungerFlaggedAction)),
             SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawDTrapFlaggedAction)),
-            SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawBlindFlaggedAction)),
             SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawConfusedFlaggedAction)),
             SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawAfraidFlaggedAction)),
             SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawStateFlaggedAction)),
@@ -31,5 +30,6 @@ internal class PrExtraRedrawActionGroupSetFlaggedAction : GroupSetFlaggedAction
     {
         base.Set();
         SaveGame.PoisonTimer.AddTimer(0); // TODO: We need to set the flagged property and the Set was made protetced.
+        SaveGame.BlindnessTimer.AddTimer(0); // TODO: We need to set the flagged property and the Set was made protetced.
     }
 }

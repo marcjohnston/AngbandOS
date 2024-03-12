@@ -17,12 +17,12 @@ internal abstract class Widget : IGetKey<string>
     }
 
     /// <summary>
-    /// Returns true, when the widget has been invalidated.
+    /// Returns true, if the widget is invalid and needs to be redrawn.
     /// </summary>
     public bool Invalidated { get; private set; }
 
     /// <summary>
-    /// Invalidates the widget.
+    /// Invalidates the widget.  An invalidated widget will call the <see cref="Paint"/> method, when the <see cref="Update"/> method is called.
     /// </summary>
     public void Invalidate()
     {
@@ -30,18 +30,45 @@ internal abstract class Widget : IGetKey<string>
     }
 
     /// <summary>
-    /// Returns true, if the widget needs to be redrawn.
+    /// Returns the text to be rendered for the widget.
     /// </summary>
-    protected virtual bool QueryRedraw { get; }
-
     public abstract string Text { get; }
+
+    /// <summary>
+    /// Returns the color that the widget <see cref="Text"/> will be drawn.
+    /// </summary>
     public abstract ColorEnum Color { get; }
+
+    /// <summary>
+    /// Returns the x-coordinate on the <see cref="Form"/> where the widget will be drawn.
+    /// </summary>
     public abstract int X { get; }
+
+    /// <summary>
+    /// Returns the y-coordinate on the <see cref="Form"/> where the widget will be drawn.
+    /// </summary>
     public abstract int Y { get; }
+
+    /// <summary>
+    /// Returns the width of the widget.  A width that is equal to the length of the <see cref="Text"/> property is returned by default.
+    /// </summary>
     public virtual int Width => Text.Length;
+
+    /// <summary>
+    /// Returns the height of the widget.  A height of 1 is returned by default.
+    /// </summary>
     public virtual int Height => 1;
 
+    /// <summary>
+    /// Returns the <see cref="Justification"/> object to be used to justify the text within the <see cref="Width"/> of the <see cref="Widget"/>.  This property is bound using
+    /// the <see cref="JustificationName"/> property during the bind phase.
+    /// </summary>
     protected Justification? Justification { get; private set; }
+
+    /// <summary>
+    /// Returns the name of the <see cref="Justification"/> object to be used to justify the text within the <see cref="Width"/> of the <see cref="Widget" />.  This property
+    /// is used to bind the <see cref="Justification"/> property.
+    /// </summary>
     public virtual string? JustificationName => nameof(LeftJustification);
     public virtual string Key => GetType().Name;
 

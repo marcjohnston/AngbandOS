@@ -93,7 +93,7 @@ internal class OpenScript : Script, IScript, IRepeatableScript
             // Our disable traps skill also doubles up as a lockpicking skill
             int i = SaveGame.SkillDisarmTraps;
             // Hard to pick locks in the dark
-            if (SaveGame.TimedBlindness.Value != 0 || SaveGame.NoLight())
+            if (SaveGame.BlindnessTimer.Value != 0 || SaveGame.NoLight())
             {
                 i /= 10;
             }

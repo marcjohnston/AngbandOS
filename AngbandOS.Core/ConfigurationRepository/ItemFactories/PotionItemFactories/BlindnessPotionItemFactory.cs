@@ -25,7 +25,7 @@ internal class BlindnessPotionItemFactory : PotionItemFactory
     {
         // Blindness makes you blind
         if (!SaveGame.HasBlindnessResistance)
-            return SaveGame.TimedBlindness.AddTimer(SaveGame.RandomLessThan(100) + 100);
+            return SaveGame.BlindnessTimer.AddTimer(SaveGame.RandomLessThan(100) + 100);
         return false;
     }
 

@@ -26,7 +26,7 @@ internal class CuringRodItemFactory : RodItemFactory
     public override int Weight => 15;
     public override void Execute(ZapRodEvent zapRodEvent)
     {
-        if (SaveGame.TimedBlindness.ResetTimer())
+        if (SaveGame.BlindnessTimer.ResetTimer())
         {
             zapRodEvent.Identified = true;
         }

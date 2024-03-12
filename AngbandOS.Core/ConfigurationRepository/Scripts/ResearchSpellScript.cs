@@ -35,7 +35,7 @@ internal class ResearchSpellScript : Script, IScript, IStoreScript
             return;
         }
         // We can't learn spells if we're blind or confused
-        if (SaveGame.TimedBlindness.Value != 0)
+        if (SaveGame.BlindnessTimer.Value != 0)
         {
             SaveGame.MsgPrint("You cannot see!");
             return;

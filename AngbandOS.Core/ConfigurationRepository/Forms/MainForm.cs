@@ -16,6 +16,7 @@ internal class MainForm : Form
     {
         nameof(GoldIntWidget),
         nameof(GPWidget),
-        nameof(PoisonedIntWidget)
+        nameof(PoisonedIntWidget),
+        nameof(BlindnessIntWidget)
     };
 }

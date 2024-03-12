@@ -32,7 +32,7 @@ internal class RemoveCurseStaffItemFactory : StaffItemFactory
     {
         if (SaveGame.RunSuccessfulScript(nameof(RemoveCurseScript)))
         {
-            if (SaveGame.TimedBlindness.Value == 0)
+            if (SaveGame.BlindnessTimer.Value == 0)
             {
                 SaveGame.MsgPrint("The staff glows blue for a moment...");
             }

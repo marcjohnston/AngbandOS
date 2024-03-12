@@ -38,7 +38,7 @@ internal class DreadCurseMonsterSpell : MonsterSpell
     public override void ExecuteOnMonster(SaveGame saveGame, Monster monster, Monster target)
     {
         string targetName = target.Name;
-        bool blind = saveGame.TimedBlindness.Value != 0;
+        bool blind = saveGame.BlindnessTimer.Value != 0;
         bool seeTarget = !blind && target.IsVisible;
         MonsterRace targetRace = target.Race;
 

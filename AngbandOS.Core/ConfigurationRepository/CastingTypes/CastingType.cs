@@ -78,7 +78,7 @@ internal class CastingType : IGetKey<string>
             SaveGame.MsgPrint("You cannot cast spells!");
             return;
         }
-        if (SaveGame.TimedBlindness.Value != 0 || SaveGame.NoLight())
+        if (SaveGame.BlindnessTimer.Value != 0 || SaveGame.NoLight())
         {
             SaveGame.MsgPrint("You cannot see!");
             return;

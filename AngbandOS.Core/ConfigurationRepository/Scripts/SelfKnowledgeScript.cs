@@ -46,7 +46,7 @@ internal class SelfKnowledgeScript : Script, IScript
                 info[infoCount++] = m;
             }
         }
-        if (SaveGame.TimedBlindness.Value != 0)
+        if (SaveGame.BlindnessTimer.Value != 0)
         {
             info[infoCount++] = "You cannot see.";
         }

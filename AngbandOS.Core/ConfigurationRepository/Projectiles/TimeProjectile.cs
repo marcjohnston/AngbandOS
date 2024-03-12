@@ -39,7 +39,7 @@ internal class TimeProjectile : Projectile
     protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
     {
         int k = 0;
-        bool blind = SaveGame.TimedBlindness.Value != 0;
+        bool blind = SaveGame.BlindnessTimer.Value != 0;
         string act = null;
         if (dam > 1600)
         {

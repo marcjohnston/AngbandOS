@@ -42,7 +42,7 @@ internal class ScareMonsterSpell : MonsterSpell
     public override void ExecuteOnMonster(SaveGame saveGame, Monster monster, Monster target)
     {
         MonsterRace targetRace = target.Race;
-        bool playerIsBlind = saveGame.TimedBlindness.Value != 0;
+        bool playerIsBlind = saveGame.BlindnessTimer.Value != 0;
         bool seeTarget = !playerIsBlind && target.IsVisible;
         string targetName = target.Name;
         int rlev = monster.Race.Level >= 1 ? monster.Race.Level : 1;

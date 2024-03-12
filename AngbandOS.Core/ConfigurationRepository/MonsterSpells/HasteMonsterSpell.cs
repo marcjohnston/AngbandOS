@@ -34,7 +34,7 @@ internal class HasteMonsterSpell : MonsterSpell
 
     public override void ExecuteOnMonster(SaveGame saveGame, Monster monster, Monster target)
     {
-        bool blind = saveGame.TimedBlindness.Value != 0;
+        bool blind = saveGame.BlindnessTimer.Value != 0;
         bool seen = !blind && monster.IsVisible;
         MonsterRace targetRace = target.Race;
 

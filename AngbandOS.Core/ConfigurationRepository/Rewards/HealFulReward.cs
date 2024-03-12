@@ -17,7 +17,7 @@ internal class HealFulReward : Reward
         SaveGame.MsgPrint("'Rise, my servant!'");
         SaveGame.RunScript(nameof(RestoreLevelScript));
         SaveGame.PoisonTimer.ResetTimer();
-        SaveGame.TimedBlindness.ResetTimer();
+        SaveGame.BlindnessTimer.ResetTimer();
         SaveGame.TimedConfusion.ResetTimer();
         SaveGame.TimedHallucinations.ResetTimer();
         SaveGame.TimedStun.ResetTimer();

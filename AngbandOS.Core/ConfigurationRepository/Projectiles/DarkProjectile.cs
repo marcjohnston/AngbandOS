@@ -63,7 +63,7 @@ internal class DarkProjectile : Projectile
 
     protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
     {
-        bool blind = SaveGame.TimedBlindness.Value != 0;
+        bool blind = SaveGame.BlindnessTimer.Value != 0;
         if (dam > 1600)
         {
             dam = 1600;
@@ -86,7 +86,7 @@ internal class DarkProjectile : Projectile
         }
         else if (!blind && !SaveGame.HasBlindnessResistance)
         {
-            SaveGame.TimedBlindness.AddTimer(SaveGame.DieRoll(5) + 2);
+            SaveGame.BlindnessTimer.AddTimer(SaveGame.DieRoll(5) + 2);
         }
         if (SaveGame.TimedEtherealness.Value != 0)
         {

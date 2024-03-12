@@ -105,7 +105,7 @@ internal class GreatOneRace : Race
                 SaveGame.TimedHallucinations.ResetTimer();
                 SaveGame.TimedStun.ResetTimer();
                 SaveGame.TimedBleeding.ResetTimer();
-                SaveGame.TimedBlindness.ResetTimer();
+                SaveGame.BlindnessTimer.ResetTimer();
                 SaveGame.TimedFear.ResetTimer();
                 SaveGame.TryRestoringAbilityScore(Ability.Strength);
                 SaveGame.TryRestoringAbilityScore(Ability.Intelligence);

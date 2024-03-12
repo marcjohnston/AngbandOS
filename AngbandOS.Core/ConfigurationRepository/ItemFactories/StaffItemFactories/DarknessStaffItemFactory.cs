@@ -32,7 +32,7 @@ internal class DarknessStaffItemFactory : StaffItemFactory
     {
         if (!SaveGame.HasBlindnessResistance && !SaveGame.HasDarkResistance)
         {
-            if (SaveGame.TimedBlindness.AddTimer(3 + SaveGame.DieRoll(5)))
+            if (SaveGame.BlindnessTimer.AddTimer(3 + SaveGame.DieRoll(5)))
             {
                 eventArgs.Identified = true;
             }

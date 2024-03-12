@@ -22,7 +22,7 @@ internal class BlindingGasScript : Script, IScript
         SaveGame.MsgPrint("A black gas surrounds you!");
         if (!SaveGame.HasBlindnessResistance)
         {
-            SaveGame.TimedBlindness.AddTimer(SaveGame.RandomLessThan(50) + 25);
+            SaveGame.BlindnessTimer.AddTimer(SaveGame.RandomLessThan(50) + 25);
         }
     }
 }

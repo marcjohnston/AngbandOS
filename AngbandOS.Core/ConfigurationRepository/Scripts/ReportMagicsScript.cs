@@ -27,9 +27,9 @@ internal class ReportMagicsScript : Script, IScript
         int i = 0, j, k;
         string[] info = new string[128];
         int[] info2 = new int[128];
-        if (SaveGame.TimedBlindness.Value != 0)
+        if (SaveGame.BlindnessTimer.Value != 0)
         {
-            info2[i] = ReportMagicsAux(SaveGame.TimedBlindness.Value);
+            info2[i] = ReportMagicsAux(SaveGame.BlindnessTimer.Value);
             info[i++] = "You cannot see";
         }
         if (SaveGame.TimedConfusion.Value != 0)

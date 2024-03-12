@@ -31,7 +31,7 @@ internal class CuringStaffItemFactory : StaffItemFactory
 
     public override void UseStaff(UseStaffEvent eventArgs)
     {
-        if (SaveGame.TimedBlindness.ResetTimer())
+        if (SaveGame.BlindnessTimer.ResetTimer())
         {
             eventArgs.Identified = true;
         }

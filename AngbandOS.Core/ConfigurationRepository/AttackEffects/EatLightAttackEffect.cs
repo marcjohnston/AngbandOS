@@ -48,7 +48,7 @@ internal class EatLightAttackEffect : AttackEffect
             {
                 item.TypeSpecificValue = 1;
             }
-            if (SaveGame.TimedBlindness.Value == 0)
+            if (SaveGame.BlindnessTimer.Value == 0)
             {
                 SaveGame.MsgPrint("Your light dims.");
                 obvious = true;

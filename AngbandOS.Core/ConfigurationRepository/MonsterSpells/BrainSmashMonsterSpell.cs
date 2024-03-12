@@ -23,7 +23,7 @@ internal class BrainSmashMonsterSpell : MonsterSpell
 
     public override void ExecuteOnPlayer(SaveGame saveGame, Monster monster)
     {
-        bool playerIsBlind = saveGame.TimedBlindness.Value != 0;
+        bool playerIsBlind = saveGame.BlindnessTimer.Value != 0;
         string monsterDescription = monster.IndefiniteVisibleName;
 
         if (SaveGame.RandomLessThan(100) < saveGame.SkillSavingThrow)
@@ -36,7 +36,7 @@ internal class BrainSmashMonsterSpell : MonsterSpell
             saveGame.TakeHit(SaveGame.DiceRoll(12, 15), monsterDescription);
             if (!saveGame.HasBlindnessResistance)
             {
-                saveGame.TimedBlindness.AddTimer(8 + SaveGame.RandomLessThan(8));
+                saveGame.BlindnessTimer.AddTimer(8 + SaveGame.RandomLessThan(8));
             }
             if (!saveGame.HasConfusionResistance)
             {
@@ -64,10 +64,10 @@ internal class BrainSmashMonsterSpell : MonsterSpell
     public override void ExecuteOnMonster(SaveGame saveGame, Monster monster, Monster target)
     {
         int rlev = monster.Race.Level >= 1 ? monster.Race.Level : 1;
-        bool playerIsBlind = saveGame.TimedBlindness.Value != 0;
+        bool playerIsBlind = saveGame.BlindnessTimer.Value != 0;
         bool seen = !playerIsBlind && monster.IsVisible;
         string targetName = target.Name;
-        bool blind = saveGame.TimedBlindness.Value != 0;
+        bool blind = saveGame.BlindnessTimer.Value != 0;
         bool seeTarget = !blind && target.IsVisible;
         MonsterRace targetRace = target.Race;
 

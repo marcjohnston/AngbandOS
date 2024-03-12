@@ -33,7 +33,7 @@ internal class HealingPotionItemFactory : PotionItemFactory
         {
             identified = true;
         }
-        if (SaveGame.TimedBlindness.ResetTimer())
+        if (SaveGame.BlindnessTimer.ResetTimer())
         {
             identified = true;
         }

@@ -24,7 +24,7 @@ internal class Heal777CuringAndHeroism25pd25Every300Activation : Activation
         SaveGame.TimedBleeding.ResetTimer();
         SaveGame.TimedStun.ResetTimer();
         SaveGame.TimedConfusion.ResetTimer();
-        SaveGame.TimedBlindness.ResetTimer();
+        SaveGame.BlindnessTimer.ResetTimer();
         SaveGame.TimedHeroism.AddTimer(base.SaveGame.DieRoll(25) + 25);
         SaveGame.RestoreHealth(777);
         return true;

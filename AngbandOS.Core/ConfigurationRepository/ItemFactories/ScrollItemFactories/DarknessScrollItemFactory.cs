@@ -25,7 +25,7 @@ internal class DarknessScrollItemFactory : ScrollItemFactory
     {
         if (!SaveGame.HasBlindnessResistance && !SaveGame.HasDarkResistance)
         {
-            SaveGame.TimedBlindness.AddTimer(3 + SaveGame.DieRoll(5));
+            SaveGame.BlindnessTimer.AddTimer(3 + SaveGame.DieRoll(5));
         }
         if (SaveGame.UnlightArea(10, 3))
         {

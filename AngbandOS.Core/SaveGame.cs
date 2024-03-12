@@ -408,7 +408,7 @@ internal class SaveGame
     public readonly Timer TimedAcidResistance;
     public readonly Timer TimedBleeding;
     public readonly Timer TimedBlessing;
-    public readonly Timer TimedBlindness;
+    public readonly Timer BlindnessTimer;
 
     /// <summary>
     /// 
@@ -646,7 +646,7 @@ internal class SaveGame
         TimedAcidResistance = (AcidResistanceTimer)SingletonRepository.TimedActions.Get(nameof(AcidResistanceTimer));
         TimedBleeding = (BleedingTimer)SingletonRepository.TimedActions.Get(nameof(BleedingTimer));
         TimedBlessing = (BlessingTimer)SingletonRepository.TimedActions.Get(nameof(BlessingTimer));
-        TimedBlindness = (BlindnessTimer)SingletonRepository.TimedActions.Get(nameof(BlindnessTimer));
+        BlindnessTimer = (BlindnessTimer)SingletonRepository.TimedActions.Get(nameof(Timers.BlindnessTimer));
         TimedColdResistance = (ColdResistanceTimer)SingletonRepository.TimedActions.Get(nameof(ColdResistanceTimer));
         TimedConfusion = (ConfusionTimer)SingletonRepository.TimedActions.Get(nameof(ConfusionTimer));
         TimedEtherealness = (EtherealnessTimer)SingletonRepository.TimedActions.Get(nameof(EtherealnessTimer));
@@ -3421,7 +3421,7 @@ internal class SaveGame
             }
             else if (Resting == -2)
             {
-                if (Health.Value == MaxHealth && Mana.Value == MaxMana.Value && TimedBlindness.Value == 0 &&
+                if (Health.Value == MaxHealth && Mana.Value == MaxMana.Value && BlindnessTimer.Value == 0 &&
                     TimedConfusion.Value == 0 && PoisonTimer.Value == 0 && TimedFear.Value == 0 && TimedStun.Value == 0 &&
                     TimedBleeding.Value == 0 && TimedSlow.Value == 0 && TimedParalysis.Value == 0 && TimedHallucinations.Value == 0 &&
                     WordOfRecallDelay == 0)
@@ -3828,7 +3828,7 @@ internal class SaveGame
         //{
         //    timedAction.ProcessWorld();
         //}
-        TimedBlindness.ProcessWorld();
+        BlindnessTimer.ProcessWorld();
         TimedSeeInvisibility.ProcessWorld();
         TimedTelepathy.ProcessWorld();
         TimedInfravision.ProcessWorld();
@@ -4011,7 +4011,6 @@ internal class SaveGame
         SingletonRepository.FlaggedActions.Get(nameof(RedrawStunFlaggedAction)).Check();
         SingletonRepository.FlaggedActions.Get(nameof(RedrawHungerFlaggedAction)).Check();
         SingletonRepository.FlaggedActions.Get(nameof(RedrawDTrapFlaggedAction)).Check();
-        SingletonRepository.FlaggedActions.Get(nameof(RedrawBlindFlaggedAction)).Check();
         SingletonRepository.FlaggedActions.Get(nameof(RedrawConfusedFlaggedAction)).Check();
         SingletonRepository.FlaggedActions.Get(nameof(RedrawAfraidFlaggedAction)).Check();
         SingletonRepository.FlaggedActions.Get(nameof(RedrawStateFlaggedAction)).Check();
@@ -4411,7 +4410,7 @@ internal class SaveGame
             MsgPrint("There is a searing blast of light!");
             if (!HasBlindnessResistance && !HasLightResistance)
             {
-                TimedBlindness.AddTimer(10 + DieRoll(10));
+                BlindnessTimer.AddTimer(10 + DieRoll(10));
             }
         }
         SingletonRepository.FlaggedActions.Get(nameof(RemoveLightFlaggedAction)).Set();
@@ -5198,7 +5197,7 @@ internal class SaveGame
     public bool LightArea(int dam, int rad)
     {
         ProjectionFlag flg = ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectKill;
-        if (TimedBlindness.Value == 0)
+        if (BlindnessTimer.Value == 0)
         {
             MsgPrint("You are surrounded by a white light.");
         }
@@ -5569,7 +5568,7 @@ internal class SaveGame
     public bool UnlightArea(int dam, int rad)
     {
         ProjectionFlag flg = ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectKill;
-        if (TimedBlindness.Value == 0)
+        if (BlindnessTimer.Value == 0)
         {
             MsgPrint("Darkness surrounds you.");
         }
@@ -6347,7 +6346,7 @@ internal class SaveGame
         EnergyUse = 100;
         int i = SkillDisarmTraps;
         // Disarming is tricky when you can't see
-        if (TimedBlindness.Value != 0 || NoLight())
+        if (BlindnessTimer.Value != 0 || NoLight())
         {
             i /= 10;
         }
@@ -6414,7 +6413,7 @@ internal class SaveGame
         string trapName = tile.FeatureType.Description;
         int i = SkillDisarmTraps;
         // Difficult, but possible, to disarm by feel
-        if (TimedBlindness.Value != 0 || NoLight())
+        if (BlindnessTimer.Value != 0 || NoLight())
         {
             i /= 10;
         }
@@ -6646,7 +6645,7 @@ internal class SaveGame
         {
             Disturb(false);
             // If we can't see it and haven't memories it, tell us what we bumped into
-            if (tile.TileFlags.IsClear(GridTile.PlayerMemorized) && (TimedBlindness.Value != 0 || tile.TileFlags.IsClear(GridTile.PlayerLit)))
+            if (tile.TileFlags.IsClear(GridTile.PlayerMemorized) && (BlindnessTimer.Value != 0 || tile.TileFlags.IsClear(GridTile.PlayerLit)))
             {
                 if (tile.FeatureType is RubbleTile)
                 {
@@ -8088,7 +8087,7 @@ internal class SaveGame
         {
             int skill = SkillDisarmTraps;
             // Lockpicking is hard in the dark
-            if (TimedBlindness.Value != 0 || NoLight())
+            if (BlindnessTimer.Value != 0 || NoLight())
             {
                 skill /= 10;
             }
@@ -14849,7 +14848,7 @@ internal class SaveGame
     public void NoteSpot(int y, int x)
     {
         GridTile cPtr = Grid[y][x];
-        if (TimedBlindness.Value != 0)
+        if (BlindnessTimer.Value != 0)
         {
             return;
         }
@@ -15004,7 +15003,7 @@ internal class SaveGame
 
     public bool PlayerCanSeeBold(int y, int x)
     {
-        if (TimedBlindness.Value != 0)
+        if (BlindnessTimer.Value != 0)
         {
             return false;
         }
@@ -15242,13 +15241,13 @@ internal class SaveGame
         {
             if (cPtr.TileFlags.IsSet(GridTile.PlayerMemorized) ||
                 ((cPtr.TileFlags.IsSet(GridTile.PlayerLit) || (cPtr.TileFlags.IsSet(GridTile.SelfLit) &&
-                 cPtr.TileFlags.IsSet(GridTile.IsVisible))) && TimedBlindness.Value == 0))
+                 cPtr.TileFlags.IsSet(GridTile.IsVisible))) && BlindnessTimer.Value == 0))
             {
                 c = feat.Symbol.Character;
                 a = feat.Color;
                 if (feat.DimsOutsideLOS)
                 {
-                    if (TimedBlindness.Value != 0)
+                    if (BlindnessTimer.Value != 0)
                     {
                         a = ColorEnum.Black;
                     }
@@ -15308,7 +15307,7 @@ internal class SaveGame
                 a = feat.Color;
                 if (feat.DimsOutsideLOS)
                 {
-                    if (TimedBlindness.Value != 0)
+                    if (BlindnessTimer.Value != 0)
                     {
                         a = ColorEnum.Black;
                     }
@@ -16332,7 +16331,7 @@ internal class SaveGame
         else if (PanelContains(fy, fx))
         {
             GridTile cPtr = Grid[fy][fx];
-            if (cPtr.TileFlags.IsSet(GridTile.IsVisible) && TimedBlindness.Value == 0)
+            if (cPtr.TileFlags.IsSet(GridTile.IsVisible) && BlindnessTimer.Value == 0)
             {
                 if (mPtr.DistanceFromPlayer <= InfravisionRange)
                 {

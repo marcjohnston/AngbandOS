@@ -37,7 +37,7 @@ internal class BlindnessMonsterSpell : MonsterSpell
         }
         else
         {
-            saveGame.TimedBlindness.SetTimer(12 + SaveGame.RandomLessThan(4));
+            saveGame.BlindnessTimer.SetTimer(12 + SaveGame.RandomLessThan(4));
         }
         saveGame.UpdateSmartLearn(monster, SaveGame.SingletonRepository.SpellResistantDetections.Get(nameof(BlindSpellResistantDetection)));
     }
@@ -46,7 +46,7 @@ internal class BlindnessMonsterSpell : MonsterSpell
     {
         int rlev = monster.Race.Level >= 1 ? monster.Race.Level : 1;
         string targetName = target.Name;
-        bool blind = saveGame.TimedBlindness.Value != 0;
+        bool blind = saveGame.BlindnessTimer.Value != 0;
         bool seeTarget = !blind && target.IsVisible;
         MonsterRace targetRace = target.Race;
 

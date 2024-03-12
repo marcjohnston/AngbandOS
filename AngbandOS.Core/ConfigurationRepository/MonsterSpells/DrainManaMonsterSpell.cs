@@ -34,7 +34,7 @@ internal class DrainManaMonsterSpell : MonsterSpell
     public override void ExecuteOnPlayer(SaveGame saveGame, Monster monster)
     {
         string monsterName = monster.Name;
-        bool playerIsBlind = saveGame.TimedBlindness.Value != 0;
+        bool playerIsBlind = saveGame.BlindnessTimer.Value != 0;
         int monsterLevel = monster.Race.Level >= 1 ? monster.Race.Level : 1;
         bool seenByPlayer = !playerIsBlind && monster.IsVisible;
 
@@ -76,11 +76,11 @@ internal class DrainManaMonsterSpell : MonsterSpell
     public override void ExecuteOnMonster(SaveGame saveGame, Monster monster, Monster target)
     {
         int rlev = monster.Race.Level >= 1 ? monster.Race.Level : 1;
-        bool playerIsBlind = saveGame.TimedBlindness.Value != 0;
+        bool playerIsBlind = saveGame.BlindnessTimer.Value != 0;
         bool seen = !playerIsBlind && monster.IsVisible;
         string monsterName = monster.Name;
         string targetName = target.Name;
-        bool blind = saveGame.TimedBlindness.Value != 0;
+        bool blind = saveGame.BlindnessTimer.Value != 0;
         bool seeTarget = !blind && target.IsVisible;
         bool seeBoth = seen && seeTarget;
         MonsterRace targetRace = target.Race;

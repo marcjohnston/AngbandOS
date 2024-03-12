@@ -62,7 +62,7 @@ internal abstract class SummonMonsterSpell : MonsterSpell
 
     public override void ExecuteOnPlayer(SaveGame saveGame, Monster monster)
     {
-        bool playerIsBlind = saveGame.TimedBlindness.Value != 0;
+        bool playerIsBlind = saveGame.BlindnessTimer.Value != 0;
         int count = 0;
 
         for (int k = 0; k < MaximumSummonCount(saveGame); k++)
@@ -86,7 +86,7 @@ internal abstract class SummonMonsterSpell : MonsterSpell
 
     public override void ExecuteOnMonster(SaveGame saveGame, Monster monster, Monster target)
     {
-        bool playerIsBlind = saveGame.TimedBlindness.Value != 0;
+        bool playerIsBlind = saveGame.BlindnessTimer.Value != 0;
         bool friendly = monster.SmFriendly;
         int count = 0;
 
