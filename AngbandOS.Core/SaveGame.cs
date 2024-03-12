@@ -659,7 +659,7 @@ internal class SaveGame
         TimedInvulnerability = (InvulnerabilityTimer)SingletonRepository.TimedActions.Get(nameof(InvulnerabilityTimer));
         TimedLightningResistance = (LightningResistanceTimer)SingletonRepository.TimedActions.Get(nameof(LightningResistanceTimer));
         TimedParalysis = (ParalysisTimer)SingletonRepository.TimedActions.Get(nameof(ParalysisTimer));
-        PoisonTimer = (PoisonTimer)SingletonRepository.TimedActions.Get(nameof(Timers.PoisonTimer));
+        PoisonTimer = (PoisonedTimer)SingletonRepository.TimedActions.Get(nameof(Timers.PoisonedTimer));
         TimedPoisonResistance = (PoisonResistanceTimer)SingletonRepository.TimedActions.Get(nameof(PoisonResistanceTimer));
         TimedProtectionFromEvil = (ProtectionFromEvilTimer)SingletonRepository.TimedActions.Get(nameof(ProtectionFromEvilTimer));
         TimedSeeInvisibility = (SeeInvisibilityTimer)SingletonRepository.TimedActions.Get(nameof(SeeInvisibilityTimer));

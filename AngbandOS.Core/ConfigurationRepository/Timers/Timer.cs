@@ -44,7 +44,7 @@ internal abstract class Timer : IGetKey<string>, IIntChangeTrackable
     private int _value;
 
     /// <summary>
-    /// Returns the number of turns remaining on the timer.
+    /// Gets or sets the number of turns remaining on the timer.
     /// </summary>
     public int Value
     {
@@ -105,6 +105,7 @@ internal abstract class Timer : IGetKey<string>, IIntChangeTrackable
     /// <param name="oldRate"></param>
     /// <returns></returns>
     protected abstract void EffectIncreased(int newRate, int oldRate);
+
     /// <summary>
     /// Performs additional actions, when the effect is noticed.  The effect is only noticed when the rate transitions above or below zero.
     /// </summary>

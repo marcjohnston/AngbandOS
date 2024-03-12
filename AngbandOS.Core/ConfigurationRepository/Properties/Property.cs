@@ -7,6 +7,9 @@
 
 namespace AngbandOS.Core.Properties;
 
+/// <summary>
+/// Represents a base class for any value that participates in change tracking.  Various types of value data types are built using derived classes; <see cref="IntProperty"/>.
+/// </summary>
 [Serializable]
 internal abstract class Property : IGetKey<string>, IChangeTrackable
 {

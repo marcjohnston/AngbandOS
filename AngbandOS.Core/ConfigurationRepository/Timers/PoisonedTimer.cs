@@ -8,9 +8,9 @@
 namespace AngbandOS.Core.Timers;
 
 [Serializable]
-internal class PoisonTimer : Timer
+internal class PoisonedTimer : Timer
 {
-    private PoisonTimer(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private PoisonedTimer(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     protected override void EffectStopped()
     {
         SaveGame.MsgPrint("You are no longer poisoned.");
@@ -27,9 +27,4 @@ internal class PoisonTimer : Timer
             AddTimer(-adjust);
         }
     }   
-    //protected override void Noticed()
-    //{
-    //    SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawPoisonedFlaggedAction)).Set();
-    //    base.Noticed();
-    //}
 }
