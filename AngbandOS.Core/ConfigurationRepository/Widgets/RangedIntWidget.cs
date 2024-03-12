@@ -11,28 +11,52 @@ namespace AngbandOS.Core.Widgets;
 internal abstract class RangedIntWidget : IntWidget
 {
     private bool _sortValidated = false;
+    private string _text;
+    private ColorEnum _color;
 
-    protected RangedIntWidget(SaveGame saveGame) : base(saveGame) { }
+    protected RangedIntWidget(SaveGame saveGame) : base(saveGame)
+    {
+        _text = DefaultText;
+        _color = DefaultColor;
+    }
 
     /// <summary>
-    /// Returns a tuple with the text to be associated with all values less than or equal to the maxValue specified.  If a value is larger than all values, then the <see cref="DefaultText"/> 
-    /// value is returned.  The tuples must be sorted by the maxValue in ascending order.
+    /// Returns a tuple with the text and color to be associated with all values less than or equal to the maxValue specified.  If the value is smaller than all values, then the <see cref="DefaultText"/> 
+    /// value and <see cref="DefaultColor"/> is used.  The tuples must be sorted by the startValue in descending order.  The sorting is validated once upon first usage.  Duplicate startValues
+    /// cannot be used and will fail the sort validation.
     /// </summary>
-    public abstract (int maxValue, string text, ColorEnum color)[] Ranges { get; }
+    public abstract (int startValue, string textToRender, ColorEnum color)[] Ranges { get; }
 
     /// <summary>
-    /// Returns the text to be returned, when none of the ranges apply.
+    /// Returns the text to be rendered, when none of the ranges apply.
     /// </summary>
     protected abstract string DefaultText { get; }
 
+    /// <summary>
+    /// Returns the color for the <see cref="Text"/> to be rendered in when none of the ranges apply.
+    /// </summary>
     protected abstract ColorEnum DefaultColor { get; }
-
-    private string _text;
-    private ColorEnum _color;
 
     public sealed override string Text => _text;
 
     public sealed override ColorEnum Color => _color;
+
+    private void ValidateRangeSorting()
+    {
+        if (!_sortValidated)
+        {
+            int? previousMaxValue = null;
+            foreach ((int startValue, string text, ColorEnum color) in Ranges)
+            {
+                if (previousMaxValue != null && startValue >= previousMaxValue.Value)
+                {
+                    throw new Exception($"The ranges specified for the {GetType().Name} are not sorted property.");
+                }
+                previousMaxValue = startValue;
+            }
+            _sortValidated = true;
+        }
+    }
 
     protected override bool ValueChanged
     {
@@ -45,44 +69,32 @@ internal abstract class RangedIntWidget : IntWidget
                 return false;
             }
 
-            // Now that we need to check the ranges, validate that the ranges are properly sorted.  We only do this once.
-            if (!_sortValidated)
-            {
-                int? previousMaxValue = null;
-                foreach ((int maxValue, string text, ColorEnum color) in Ranges)
-                {
-                    if (previousMaxValue != null && previousMaxValue.Value > maxValue)
-                    {
-                        throw new Exception($"The ranges specified for the {GetType().Name} are not sorted property.");
-                    }
-                }
-                _sortValidated = true;
-            }
+            // Now that we need to check the ranges, validate that the ranges are properly sorted in descending order.  We only do this once.
+            ValidateRangeSorting();
 
             // Grab a copy of the value so that we do not retrieve it for every range.
             int intValue = IntChangeTrackable.Value;
-            (string text, ColorEnum color)? found = null;
 
-            foreach ((int maxValue, string text, ColorEnum color) in Ranges)
+            // Apply the default text and color.
+            (string text, ColorEnum color) found = (DefaultText, DefaultColor);
+
+            // Scan the ranges for the first valid range.
+            foreach ((int startValue, string textToRender, ColorEnum color) in Ranges)
             {
-                if (intValue <= maxValue)
+                if (intValue >= startValue)
                 {
-                    found = (text, color);
+                    found = (textToRender, color);
                     break;
                 }
             }
 
-            // Check to see if we need to apply the default value.
-            if (found == null)
-            {
-                found = (DefaultText, DefaultColor);
-            }
-
             // Check to see if the value has changed.
-            if (found.Value.text != _text || found.Value.color != _color)
+            if (found.text != _text || found.color != _color)
             {
-                _text = found.Value.text;
-                _color = found.Value.color;
+                // Update the exposed value and color.
+                _text = found.text;
+                _color = found.color;
+
                 return true;
             }
             return false;

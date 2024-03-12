@@ -648,7 +648,7 @@ internal class SaveGame
         BlessingTimer = (BlessingTimer)SingletonRepository.TimedActions.Get(nameof(Timers.BlessingTimer));
         BlindnessTimer = (BlindnessTimer)SingletonRepository.TimedActions.Get(nameof(Timers.BlindnessTimer));
         ColdResistanceTimer = (ColdResistanceTimer)SingletonRepository.TimedActions.Get(nameof(Timers.ColdResistanceTimer));
-        ConfusedTimer = (ConfusionTimer)SingletonRepository.TimedActions.Get(nameof(Timers.ConfusionTimer));
+        ConfusedTimer = (ConfusedTimer)SingletonRepository.TimedActions.Get(nameof(Timers.ConfusedTimer));
         EtherealnessTimer = (EtherealnessTimer)SingletonRepository.TimedActions.Get(nameof(Timers.EtherealnessTimer));
         FearTimer = (FearTimer)SingletonRepository.TimedActions.Get(nameof(Timers.FearTimer));
         FireResistanceTimer = (FireResistanceTimer)SingletonRepository.TimedActions.Get(nameof(Timers.FireResistanceTimer));
@@ -665,7 +665,7 @@ internal class SaveGame
         SeeInvisibilityTimer = (SeeInvisibilityTimer)SingletonRepository.TimedActions.Get(nameof(Timers.SeeInvisibilityTimer));
         SlowTimer = (SlowTimer)SingletonRepository.TimedActions.Get(nameof(Timers.SlowTimer));
         StoneskinTimer = (StoneskinTimer)SingletonRepository.TimedActions.Get(nameof(Timers.StoneskinTimer));
-        StunTimer = (StunTimer)SingletonRepository.TimedActions.Get(nameof(Timers.StunTimer));
+        StunTimer = (StunnedTimer)SingletonRepository.TimedActions.Get(nameof(Timers.StunnedTimer));
         SuperheroismTimer = (SuperHeroismTimer)SingletonRepository.TimedActions.Get(nameof(SuperHeroismTimer));
         TelepathyTimer = (TelepathyTimer)SingletonRepository.TimedActions.Get(nameof(Timers.TelepathyTimer));
 
@@ -4008,7 +4008,6 @@ internal class SaveGame
         SingletonRepository.FlaggedActions.Get(nameof(RedrawDepthFlaggedAction)).Check();
         SingletonRepository.FlaggedActions.Get(nameof(RedrawMonsterHealthFlaggedAction)).Check();
         SingletonRepository.FlaggedActions.Get(nameof(RedrawCutFlaggedAction)).Check();
-        SingletonRepository.FlaggedActions.Get(nameof(RedrawStunFlaggedAction)).Check();
         SingletonRepository.FlaggedActions.Get(nameof(RedrawHungerFlaggedAction)).Check();
         SingletonRepository.FlaggedActions.Get(nameof(RedrawDTrapFlaggedAction)).Check();
         SingletonRepository.FlaggedActions.Get(nameof(RedrawAfraidFlaggedAction)).Check();

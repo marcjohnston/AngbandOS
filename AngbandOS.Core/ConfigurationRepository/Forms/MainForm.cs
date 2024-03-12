@@ -18,6 +18,7 @@ internal class MainForm : Form
         nameof(GPWidget),
         nameof(PoisonedIntWidget),
         nameof(BlindnessIntWidget),
-        nameof(ConfusedIntWidget)
+        nameof(ConfusedIntWidget),
+        nameof(StunnedIntWidget)
     };
 }

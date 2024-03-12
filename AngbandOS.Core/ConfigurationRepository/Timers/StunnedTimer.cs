@@ -8,9 +8,9 @@
 namespace AngbandOS.Core.Timers;
 
 [Serializable]
-internal class StunTimer : Timer
+internal class StunnedTimer : Timer
 {
-    private StunTimer(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private StunnedTimer(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     protected override void EffectStopped()
     {
         SaveGame.MsgPrint("You are no longer stunned.");
@@ -91,7 +91,6 @@ internal class StunTimer : Timer
     protected override void Noticed()
     {
         SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
-        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawStunFlaggedAction)).Set();
         base.Noticed();
     }
 }

@@ -15,11 +15,11 @@ internal class BlindnessIntWidget : RangedIntWidget
     public override int Y => 44;
     public override int Width => 5;
     public override string IntChangeTrackableName => nameof(BlindnessTimer);
-    protected override string DefaultText => "Blind";
-    protected override ColorEnum DefaultColor => ColorEnum.Orange;
+    protected override string DefaultText => "";
+    protected override ColorEnum DefaultColor => ColorEnum.White;
 
     public override (int, string, ColorEnum)[] Ranges => new (int, string, ColorEnum)[]
     {
-        (0, "", ColorEnum.White),
+        (1, "Blind", ColorEnum.Orange),
     };
 }

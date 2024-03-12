@@ -14,12 +14,12 @@ internal class ConfusedIntWidget : RangedIntWidget
     public override int X => 15;
     public override int Y => 44;
     public override int Width => 8;
-    public override string IntChangeTrackableName => nameof(ConfusionTimer);
-    protected override string DefaultText => "Confused";
-    protected override ColorEnum DefaultColor => ColorEnum.Orange;
+    public override string IntChangeTrackableName => nameof(ConfusedTimer);
+    protected override string DefaultText => "";
+    protected override ColorEnum DefaultColor => ColorEnum.White;
 
     public override (int, string, ColorEnum)[] Ranges => new (int, string, ColorEnum)[]
     {
-        (0, "", ColorEnum.White),
+        (1, "Confused", ColorEnum.Orange),
     };
 }
