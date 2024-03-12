@@ -15,11 +15,10 @@ internal abstract class IntWidget : Widget
     protected IntWidget(SaveGame saveGame) : base(saveGame) { }
     public abstract string IntChangeTrackableName { get; }
     public IIntChangeTrackable IntChangeTrackable { get; private set; }
-    public abstract string IntPropertyFormatterName { get; }
-    public IntFormatter IntPropertyFormatter { get; private set; }
-    public abstract ColorEnum Color { get; }
+
     public override void Bind()
     {
+        base.Bind();
         Property? property = SaveGame.SingletonRepository.Properties.TryGet(IntChangeTrackableName);
         if (property != null)
         {
@@ -37,21 +36,31 @@ internal abstract class IntWidget : Widget
                 throw new Exception($"The {nameof(IntChangeTrackableName)} property does not specify a valid {nameof(Property)} or {nameof(Timer)}.");
             }
         } 
-
-        IntPropertyFormatter = (IntFormatter)SaveGame.SingletonRepository.PropertyFormatters.Get(IntPropertyFormatterName);
     }
 
-    /// <summary>
-    /// Returns true, if the base <see cref="IntChangeTrackable"/> is flagged as changed.
-    /// </summary>
-    protected override bool QueryRedraw => IntChangeTrackable.IsChanged;
+    protected virtual bool ValueChanged => IntChangeTrackable.IsChanged;
 
-    /// <summary>
-    /// Formats the integer value into a string using the IntPropertyFormatter and prints the value at the designated screen position.
-    /// </summary>
+    public override void Update()
+    {
+        // Check to see if the value has changed.
+        if (ValueChanged)
+        {
+            // It has, invalidate the widget.
+            base.Invalidate();
+        }
+
+        // Update the widget.
+        base.Update();
+    }
+
     protected override void Paint()
     {
-        string value = IntPropertyFormatter.Format(IntChangeTrackable.Value, Width);
-        SaveGame.Screen.Print(Color, value, Y, X);
+        // Paint the widget.
+        base.Paint();
+
+        // The widget has been painted.  Clear the change tracking flag.
+        IntChangeTrackable.Clear();
     }
+
+    public override string Text => IntChangeTrackable.Value.ToString();
 }

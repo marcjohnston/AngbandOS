@@ -17,5 +17,5 @@ internal class GoldIntWidget : IntWidget
     public override int Height => 1;
     public override ColorEnum Color => ColorEnum.BrightGreen;
     public override string IntChangeTrackableName => nameof(GoldIntProperty);
-    public override string IntPropertyFormatterName => nameof(RightAlignIntFormatter);
+    public override string? JustificationName => nameof(RightJustification);
 }

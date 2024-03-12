@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Widgets;
 
 [Serializable]
-internal class PoisonedIntWidget : IntWidget
+internal class PoisonedIntWidget : RangedIntWidget
 {
     private PoisonedIntWidget(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override int X => 33;
@@ -17,5 +17,11 @@ internal class PoisonedIntWidget : IntWidget
     public override int Height => 1;
     public override ColorEnum Color => ColorEnum.Orange;
     public override string IntChangeTrackableName => nameof(PoisonedTimer);
-    public override string IntPropertyFormatterName => nameof(PoisonedRangedIntFormatter);
+    protected override string DefaultText => "Poisoned";
+    protected override ColorEnum DefaultColor => ColorEnum.Orange;
+
+    public override (int, string, ColorEnum)[] Ranges => new (int, string, ColorEnum)[]
+    {
+        (0, "", ColorEnum.White),
+    };
 }

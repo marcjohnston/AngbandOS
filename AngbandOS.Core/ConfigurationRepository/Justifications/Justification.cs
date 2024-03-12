@@ -8,14 +8,22 @@
 namespace AngbandOS.Core.PropertyFormatters;
 
 [Serializable]
-internal class PoisonedRangedIntFormatter : RangedIntFormatter
+internal abstract class Justification : IGetKey<string>
 {
-    private PoisonedRangedIntFormatter(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-
-    protected override string DefaultText => "Poisoned";
-
-    public override (int, string)[] Ranges => new (int, string)[]
+    protected readonly SaveGame SaveGame;
+    protected Justification(SaveGame saveGame)
     {
-        (0, ""),
-    };
+        SaveGame = saveGame;
+    }
+
+    public abstract string Format(string value, int width);
+
+    public string GetKey => GetType().Name;
+
+    public void Bind() { }
+
+    public string ToJson()
+    {
+        return "";
+    }
 }

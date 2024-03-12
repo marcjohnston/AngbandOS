@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Interfaces;
 /// Represents the interface that a class needs to implement to participate in change tracking.  Properties and TimedActions participate in this change tracking.  Widgets need
 /// change tracking to determine when the widget is invalid and needs to be repainted.
 /// </summary>
-internal interface IChangeTrackable
+internal interface IChangeTracking
 {
     /// <summary>
     /// Clear the change tracking flag to indicate that the value has not changed.

@@ -34,17 +34,22 @@ internal abstract class Widget : IGetKey<string>
     /// </summary>
     protected virtual bool QueryRedraw { get; }
 
+    public abstract string Text { get; }
+    public abstract ColorEnum Color { get; }
     public abstract int X { get; }
     public abstract int Y { get; }
-    public abstract int Width { get; }
-    public abstract int Height { get; }
+    public virtual int Width => Text.Length;
+    public virtual int Height => 1;
 
+    protected Justification? Justification { get; private set; }
+    public virtual string? JustificationName => nameof(LeftJustification);
     public virtual string Key => GetType().Name;
 
     public string GetKey => Key;
 
     public virtual void Bind()
     {
+        Justification = JustificationName == null ? null : SaveGame.SingletonRepository.Justifications.Get(JustificationName);
     }
 
     public string ToJson()
@@ -55,15 +60,23 @@ internal abstract class Widget : IGetKey<string>
     /// <summary>
     /// Redraws the widget.  The widget has been deemed invalid via the <see cref="Invalidated"/> == true or the dervied object returned true on the <see cref="QueryRedraw"/> method.
     /// </summary>
-    protected abstract void Paint();
+    protected virtual void Paint()
+    {
+        string justifiedText = Text;
+        if (Justification != null)
+        {
+            justifiedText = Justification.Format(justifiedText, Width);
+        }
+        SaveGame.Screen.Print(Color, justifiedText, Y, X);
+    }
 
     /// <summary>
     /// Update the widget on the screen, if the widget needs to be redrawn.  The widget will be redrawn, if the widget was invalidated or the derived widget returns true
     /// on the QueryRedraw method.
     /// </summary>
-    public void Update()
+    public virtual void Update()
     {
-        if (Invalidated || QueryRedraw)
+        if (Invalidated)
         {
             Paint();
             Invalidated = false;

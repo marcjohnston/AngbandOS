@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Interfaces;
 /// Represents the interface that a class needs to implement to participate in change tracking for an integer value.  This interface adds an Int value signature to the 
 /// change trackable interface.
 /// </summary>
-internal interface IIntChangeTrackable : IChangeTrackable
+internal interface IIntChangeTrackable : IChangeTracking
 {
     int Value { get; }
 }

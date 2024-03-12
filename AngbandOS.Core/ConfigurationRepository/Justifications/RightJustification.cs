@@ -8,9 +8,9 @@
 namespace AngbandOS.Core.PropertyFormatters;
 
 [Serializable]
-internal abstract class IntFormatter : Formatter
+internal class RightJustification : Justification
 {
-    protected IntFormatter(SaveGame saveGame) : base(saveGame) { }
+    private RightJustification(SaveGame saveGame) : base(saveGame) { }
 
-    public abstract string Format(int value, int width);
+    public override string Format(string value, int width) => value.PadLeft(width);
 }

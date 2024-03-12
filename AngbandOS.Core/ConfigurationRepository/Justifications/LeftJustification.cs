@@ -8,20 +8,15 @@
 namespace AngbandOS.Core.PropertyFormatters;
 
 [Serializable]
-internal abstract class Formatter : IGetKey<string>
+internal class LeftJustification : Justification
 {
-    protected readonly SaveGame SaveGame;
-    protected Formatter(SaveGame saveGame)
+    private LeftJustification(SaveGame saveGame) : base(saveGame) { }
+    public override string Format(string value, int width)
     {
-        SaveGame = saveGame;
-    }
-
-    public string GetKey => GetType().Name;
-
-    public void Bind() { }
-
-    public string ToJson()
-    {
-        return "";
+        if (value.Length > width)
+        {
+            value = value.Substring(0, width);
+        }
+        return value.PadRight(width);
     }
 }

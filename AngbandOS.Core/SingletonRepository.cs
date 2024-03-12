@@ -49,6 +49,7 @@ internal class SingletonRepository
     public ItemFactoriesRepository ItemFactories;
     public ItemFiltersRepository ItemFilters;
     public ItemQualityRatingsRepository ItemQualityRatings;
+    public JustificationsRepository Justifications;
     public MartialArtsAttacksRepository MartialArtsAttacks;
     public MoanPlayerAttacksRepository MoanPlayerAttacks;
     public MonsterFiltersRepository MonsterFilters;
@@ -63,7 +64,6 @@ internal class SingletonRepository
     public ProjectileGraphicsRepository ProjectileGraphics;
     public ProjectilesRepository Projectiles;
     public PropertiesRepository Properties;
-    public PropertyFormattersRepository PropertyFormatters;
     public RacesRepository Races;
     public RareItemsRepository RareItems;
     public RealmsRepository Realms;
@@ -165,6 +165,7 @@ internal class SingletonRepository
         ItemFactories = AddRepository<ItemFactoriesRepository>(new ItemFactoriesRepository(SaveGame));
         ItemFilters = AddRepository<ItemFiltersRepository>(new ItemFiltersRepository(SaveGame));
         ItemQualityRatings = AddRepository<ItemQualityRatingsRepository>(new ItemQualityRatingsRepository(SaveGame));
+        Justifications = AddRepository<JustificationsRepository>(new JustificationsRepository(SaveGame));
         MartialArtsAttacks = AddRepository<MartialArtsAttacksRepository>(new MartialArtsAttacksRepository(SaveGame));
         MoanPlayerAttacks = AddRepository<MoanPlayerAttacksRepository>(new MoanPlayerAttacksRepository(SaveGame));
         MonsterFilters = AddRepository<MonsterFiltersRepository>(new MonsterFiltersRepository(SaveGame));
@@ -179,7 +180,6 @@ internal class SingletonRepository
         ProjectileGraphics = AddRepository<ProjectileGraphicsRepository>(new ProjectileGraphicsRepository(SaveGame));
         Projectiles = AddRepository<ProjectilesRepository>(new ProjectilesRepository(SaveGame));
         Properties = AddRepository<PropertiesRepository>(new PropertiesRepository(SaveGame));
-        PropertyFormatters = AddRepository<PropertyFormattersRepository>(new PropertyFormattersRepository(SaveGame));
         Races = AddRepository<RacesRepository>(new RacesRepository(SaveGame));
         RareItems = AddRepository<RareItemsRepository>(new RareItemsRepository(SaveGame));
         Realms = AddRepository<RealmsRepository>(new RealmsRepository(SaveGame));
