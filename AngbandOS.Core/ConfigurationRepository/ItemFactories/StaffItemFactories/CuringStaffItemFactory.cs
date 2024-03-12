@@ -39,19 +39,19 @@ internal class CuringStaffItemFactory : StaffItemFactory
         {
             eventArgs.Identified = true;
         }
-        if (SaveGame.TimedConfusion.ResetTimer())
+        if (SaveGame.ConfusedTimer.ResetTimer())
         {
             eventArgs.Identified = true;
         }
-        if (SaveGame.TimedStun.ResetTimer())
+        if (SaveGame.StunTimer.ResetTimer())
         {
             eventArgs.Identified = true;
         }
-        if (SaveGame.TimedBleeding.ResetTimer())
+        if (SaveGame.BleedingTimer.ResetTimer())
         {
             eventArgs.Identified = true;
         }
-        if (SaveGame.TimedHallucinations.ResetTimer())
+        if (SaveGame.HallucinationsTimer.ResetTimer())
         {
             eventArgs.Identified = true;
         }

@@ -35,7 +35,7 @@ internal class SpikedPitScript : Script, IScript
                 SaveGame.MsgPrint("You are impaled!");
                 name = "a spiked pit";
                 damage *= 2;
-                SaveGame.TimedBleeding.AddTimer(SaveGame.DieRoll(damage));
+                SaveGame.BleedingTimer.AddTimer(SaveGame.DieRoll(damage));
             }
             SaveGame.TakeHit(damage, name);
         }

@@ -129,12 +129,12 @@ internal class GravityProjectile : Projectile
         SaveGame.RunScriptInt(nameof(TeleportSelfScript), 5);
         if (!SaveGame.HasFeatherFall)
         {
-            SaveGame.TimedSlow.AddTimer(SaveGame.RandomLessThan(4) + 4);
+            SaveGame.SlowTimer.AddTimer(SaveGame.RandomLessThan(4) + 4);
         }
         if (!(SaveGame.HasSoundResistance || SaveGame.HasFeatherFall))
         {
             int kk = SaveGame.DieRoll(dam > 90 ? 35 : (dam / 3) + 5);
-            SaveGame.TimedStun.AddTimer(kk);
+            SaveGame.StunTimer.AddTimer(kk);
         }
         if (SaveGame.HasFeatherFall)
         {

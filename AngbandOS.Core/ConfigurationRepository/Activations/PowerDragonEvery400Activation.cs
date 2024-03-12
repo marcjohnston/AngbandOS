@@ -21,15 +21,15 @@ internal class PowerDragonEvery400Activation : DirectionalActivation
     {
         SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(MissileProjectile)), direction, 300, 4);
         SaveGame.MsgPrint("Your armor glows many colors...");
-        SaveGame.TimedFear.ResetTimer();
-        SaveGame.TimedSuperheroism.AddTimer(base.SaveGame.DieRoll(50) + 50);
+        SaveGame.FearTimer.ResetTimer();
+        SaveGame.SuperheroismTimer.AddTimer(base.SaveGame.DieRoll(50) + 50);
         SaveGame.RestoreHealth(30);
-        SaveGame.TimedBlessing.AddTimer(base.SaveGame.DieRoll(50) + 50);
-        SaveGame.TimedAcidResistance.AddTimer(base.SaveGame.DieRoll(50) + 50);
-        SaveGame.TimedLightningResistance.AddTimer(base.SaveGame.DieRoll(50) + 50);
-        SaveGame.TimedFireResistance.AddTimer(base.SaveGame.DieRoll(50) + 50);
-        SaveGame.TimedColdResistance.AddTimer(base.SaveGame.DieRoll(50) + 50);
-        SaveGame.TimedPoisonResistance.AddTimer(base.SaveGame.DieRoll(50) + 50);
+        SaveGame.BlessingTimer.AddTimer(base.SaveGame.DieRoll(50) + 50);
+        SaveGame.AcidResistanceTimer.AddTimer(base.SaveGame.DieRoll(50) + 50);
+        SaveGame.LightningResistanceTimer.AddTimer(base.SaveGame.DieRoll(50) + 50);
+        SaveGame.FireResistanceTimer.AddTimer(base.SaveGame.DieRoll(50) + 50);
+        SaveGame.ColdResistanceTimer.AddTimer(base.SaveGame.DieRoll(50) + 50);
+        SaveGame.PoisonResistanceTimer.AddTimer(base.SaveGame.DieRoll(50) + 50);
         return true;
     }
 

@@ -19,7 +19,7 @@ internal class AcidRingItemFactory : RingItemFactory, IItemsCanBeActivated
             return;
         }
         SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(AcidProjectile)), dir, 50, 2);
-        SaveGame.TimedAcidResistance.AddTimer(SaveGame.DieRoll(20) + 20);
+        SaveGame.AcidResistanceTimer.AddTimer(SaveGame.DieRoll(20) + 20);
         item.RechargeTimeLeft = SaveGame.RandomLessThan(50) + 50;
     }
     public override void ApplyMagic(Item item, int level, int power, Store? store)

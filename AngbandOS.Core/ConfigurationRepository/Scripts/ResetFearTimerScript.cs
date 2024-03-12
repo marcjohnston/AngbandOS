@@ -18,6 +18,6 @@ internal class ResetFearTimerScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        SaveGame.TimedFear.ResetTimer();
+        SaveGame.FearTimer.ResetTimer();
     }
 }

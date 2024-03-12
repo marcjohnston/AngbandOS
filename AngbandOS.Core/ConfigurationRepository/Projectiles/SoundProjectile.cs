@@ -129,7 +129,7 @@ internal class SoundProjectile : Projectile
         else
         {
             int kk = SaveGame.DieRoll(dam > 90 ? 35 : (dam / 3) + 5);
-            SaveGame.TimedStun.AddTimer(kk);
+            SaveGame.StunTimer.AddTimer(kk);
         }
         if (!SaveGame.HasSoundResistance || SaveGame.DieRoll(13) == 1)
         {

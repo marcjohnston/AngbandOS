@@ -49,12 +49,12 @@ internal class AlcoholRandomMutation : Mutation
         {
             if (!SaveGame.HasConfusionResistance)
             {
-                SaveGame.TimedConfusion.AddTimer(base.SaveGame.RandomLessThan(20) + 15);
+                SaveGame.ConfusedTimer.AddTimer(base.SaveGame.RandomLessThan(20) + 15);
             }
             if (base.SaveGame.DieRoll(3) == 1 && !SaveGame.HasChaosResistance)
             {
                 SaveGame.MsgPrint("Thishcischs GooDSChtuff!");
-                SaveGame.TimedHallucinations.AddTimer(base.SaveGame.RandomLessThan(150) + 150);
+                SaveGame.HallucinationsTimer.AddTimer(base.SaveGame.RandomLessThan(150) + 150);
             }
         }
     }

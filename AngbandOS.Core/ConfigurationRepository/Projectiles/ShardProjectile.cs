@@ -52,7 +52,7 @@ internal class ShardProjectile : Projectile
         }
         if (!SaveGame.HasSoundResistance)
         {
-            SaveGame.TimedStun.AddTimer(SaveGame.DieRoll(20));
+            SaveGame.StunTimer.AddTimer(SaveGame.DieRoll(20));
         }
         if (SaveGame.HasShardResistance)
         {
@@ -60,7 +60,7 @@ internal class ShardProjectile : Projectile
         }
         else
         {
-            SaveGame.TimedBleeding.AddTimer((dam / 2));
+            SaveGame.BleedingTimer.AddTimer((dam / 2));
         }
         if (!SaveGame.HasShardResistance || SaveGame.DieRoll(12) == 1)
         {

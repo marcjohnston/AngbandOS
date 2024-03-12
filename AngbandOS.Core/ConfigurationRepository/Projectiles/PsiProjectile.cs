@@ -64,11 +64,11 @@ internal class PsiProjectile : Projectile
                         switch (SaveGame.DieRoll(4))
                         {
                             case 1:
-                                SaveGame.TimedConfusion.AddTimer(3 + SaveGame.DieRoll(dam));
+                                SaveGame.ConfusedTimer.AddTimer(3 + SaveGame.DieRoll(dam));
                                 break;
 
                             case 2:
-                                SaveGame.TimedStun.AddTimer(SaveGame.DieRoll(dam));
+                                SaveGame.StunTimer.AddTimer(SaveGame.DieRoll(dam));
                                 break;
 
                             case 3:
@@ -79,7 +79,7 @@ internal class PsiProjectile : Projectile
                                     }
                                     else
                                     {
-                                        SaveGame.TimedFear.AddTimer(3 + SaveGame.DieRoll(dam));
+                                        SaveGame.FearTimer.AddTimer(3 + SaveGame.DieRoll(dam));
                                     }
                                 }
                                 break;
@@ -87,7 +87,7 @@ internal class PsiProjectile : Projectile
                             default:
                                 if (!SaveGame.HasFreeAction)
                                 {
-                                    SaveGame.TimedParalysis.AddTimer(SaveGame.DieRoll(dam));
+                                    SaveGame.ParalysisTimer.AddTimer(SaveGame.DieRoll(dam));
                                 }
                                 break;
                         }

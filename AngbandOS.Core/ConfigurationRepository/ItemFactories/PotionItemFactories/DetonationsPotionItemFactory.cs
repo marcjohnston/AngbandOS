@@ -28,8 +28,8 @@ internal class DetonationsPotionItemFactory : PotionItemFactory
         // Detonations does 50d20 damage, stuns you, and gives you a stupid amount of bleeding
         SaveGame.MsgPrint("Massive explosions rupture your body!");
         SaveGame.TakeHit(SaveGame.DiceRoll(50, 20), "a potion of Detonation");
-        SaveGame.TimedStun.AddTimer(75);
-        SaveGame.TimedBleeding.AddTimer(5000);
+        SaveGame.StunTimer.AddTimer(75);
+        SaveGame.BleedingTimer.AddTimer(5000);
         return true;
     }
 

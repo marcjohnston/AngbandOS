@@ -16,7 +16,7 @@ internal class GemstoneLightSourceItemFactory : LightSourceItemFactory
     {
         if (SaveGame.DieRoll(999) == 1 && !SaveGame.HasAntiMagic)
         {
-            if (SaveGame.TimedInvulnerability.Value == 0)
+            if (SaveGame.InvulnerabilityTimer.Value == 0)
             {
                 SaveGame.MsgPrint("The Jewel of Judgement drains life from you!");
                 SaveGame.TakeHit(Math.Min(SaveGame.ExperienceLevel, 50), "the Jewel of Judgement");

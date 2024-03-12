@@ -66,7 +66,7 @@ internal class InertiaProjectile : Projectile
         {
             SaveGame.MsgPrint("You are hit by something slow!");
         }
-        SaveGame.TimedSlow.AddTimer(SaveGame.RandomLessThan(4) + 4);
+        SaveGame.SlowTimer.AddTimer(SaveGame.RandomLessThan(4) + 4);
         SaveGame.TakeHit(dam, killer);
         return true;
     }

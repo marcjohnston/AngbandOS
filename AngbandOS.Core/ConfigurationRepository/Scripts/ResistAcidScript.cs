@@ -18,6 +18,6 @@ internal class ResistAcidScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        SaveGame.TimedAcidResistance.AddTimer(SaveGame.DieRoll(20) + 20);
+        SaveGame.AcidResistanceTimer.AddTimer(SaveGame.DieRoll(20) + 20);
     }
 }

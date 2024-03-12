@@ -33,11 +33,11 @@ internal class HealingStaffItemFactory : StaffItemFactory
         {
             eventArgs.Identified = true;
         }
-        if (SaveGame.TimedStun.ResetTimer())
+        if (SaveGame.StunTimer.ResetTimer())
         {
             eventArgs.Identified = true;
         }
-        if (SaveGame.TimedBleeding.ResetTimer())
+        if (SaveGame.BleedingTimer.ResetTimer())
         {
             eventArgs.Identified = true;
         }

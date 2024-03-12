@@ -155,11 +155,11 @@ internal class ChaosProjectile : Projectile
         }
         if (!SaveGame.HasConfusionResistance)
         {
-            SaveGame.TimedConfusion.AddTimer(SaveGame.RandomLessThan(20) + 10);
+            SaveGame.ConfusedTimer.AddTimer(SaveGame.RandomLessThan(20) + 10);
         }
         if (!SaveGame.HasChaosResistance)
         {
-            SaveGame.TimedHallucinations.AddTimer(SaveGame.DieRoll(10));
+            SaveGame.HallucinationsTimer.AddTimer(SaveGame.DieRoll(10));
             if (SaveGame.DieRoll(3) == 1)
             {
                 SaveGame.MsgPrint("Your body is twisted by chaos!");

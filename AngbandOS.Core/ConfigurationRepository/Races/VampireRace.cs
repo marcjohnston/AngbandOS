@@ -139,7 +139,7 @@ internal class VampireRace : Race
     {
         if (SaveGame.CurrentDepth <= 0 && 
             !SaveGame.HasLightResistance &&
-            SaveGame.TimedInvulnerability.Value == 0 &&
+            SaveGame.InvulnerabilityTimer.Value == 0 &&
             SaveGame.GameTime.IsLight)
         {
             if (SaveGame.Grid[SaveGame.MapY][SaveGame.MapX].TileFlags.IsSet(GridTile.SelfLit))

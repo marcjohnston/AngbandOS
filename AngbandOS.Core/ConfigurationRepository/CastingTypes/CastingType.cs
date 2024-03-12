@@ -83,7 +83,7 @@ internal class CastingType : IGetKey<string>
             SaveGame.MsgPrint("You cannot see!");
             return;
         }
-        if (SaveGame.TimedConfusion.Value != 0)
+        if (SaveGame.ConfusedTimer.Value != 0)
         {
             SaveGame.MsgPrint("You are too confused!");
             return;
@@ -147,7 +147,7 @@ internal class CastingType : IGetKey<string>
             SaveGame.Mana.Value = 0;
             SaveGame.FractionalMana = 0;
             SaveGame.MsgPrint("You faint from the effort!");
-            SaveGame.TimedParalysis.AddTimer(SaveGame.DieRoll((5 * oops) + 1));
+            SaveGame.ParalysisTimer.AddTimer(SaveGame.DieRoll((5 * oops) + 1));
             if (SaveGame.RandomLessThan(100) < 50)
             {
                 bool perm = SaveGame.RandomLessThan(100) < 25;

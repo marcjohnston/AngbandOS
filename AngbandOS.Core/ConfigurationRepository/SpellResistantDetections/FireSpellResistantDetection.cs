@@ -17,7 +17,7 @@ internal class FireSpellResistantDetection : SpellResistantDetection
         {
             monster.SmResFire = true;
         }
-        if (SaveGame.TimedFireResistance.Value != 0)
+        if (SaveGame.FireResistanceTimer.Value != 0)
         {
             monster.SmOppFire = true;
         }

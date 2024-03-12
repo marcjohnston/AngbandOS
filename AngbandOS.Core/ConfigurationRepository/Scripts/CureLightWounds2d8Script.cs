@@ -19,7 +19,7 @@ internal class CureLightWounds2d8Script : Script, IScript
     public void ExecuteStoreScript(StoreCommandEvent storeCommandEvent)
     {
         SaveGame.RestoreHealth(SaveGame.DiceRoll(2, 8));
-        SaveGame.TimedBleeding.AddTimer(-10);
+        SaveGame.BleedingTimer.AddTimer(-10);
     }
 
     /// <summary>

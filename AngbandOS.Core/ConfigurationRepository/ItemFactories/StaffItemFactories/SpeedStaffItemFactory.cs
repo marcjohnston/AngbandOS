@@ -31,16 +31,16 @@ internal class SpeedStaffItemFactory : StaffItemFactory
 
     public override void UseStaff(UseStaffEvent eventArgs)
     {
-        if (SaveGame.TimedHaste.Value == 0)
+        if (SaveGame.HasteTimer.Value == 0)
         {
-            if (SaveGame.TimedHaste.SetTimer(SaveGame.DieRoll(30) + 15))
+            if (SaveGame.HasteTimer.SetTimer(SaveGame.DieRoll(30) + 15))
             {
                 eventArgs.Identified = true;
             }
         }
         else
         {
-            SaveGame.TimedHaste.AddTimer(5);
+            SaveGame.HasteTimer.AddTimer(5);
         }
     }
     public override Item CreateItem() => new Item(SaveGame, this);

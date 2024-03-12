@@ -28,14 +28,14 @@ internal class BoozePotionItemFactory : PotionItemFactory
         // Confusion makes you confused and possibly other effects
         if (!(SaveGame.HasConfusionResistance || SaveGame.HasChaosResistance))
         {
-            if (SaveGame.TimedConfusion.AddTimer(SaveGame.RandomLessThan(20) + 15))
+            if (SaveGame.ConfusedTimer.AddTimer(SaveGame.RandomLessThan(20) + 15))
             {
                 identified = true;
             }
             // 50% chance of having hallucinations
             if (SaveGame.DieRoll(2) == 1)
             {
-                if (SaveGame.TimedHallucinations.AddTimer(SaveGame.RandomLessThan(150) + 150))
+                if (SaveGame.HallucinationsTimer.AddTimer(SaveGame.RandomLessThan(150) + 150))
                 {
                     identified = true;
                 }

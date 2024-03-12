@@ -22,15 +22,15 @@ internal class WeirdMindRandomMutation : Mutation
         {
             return;
         }
-        if (SaveGame.TimedTelepathy.Value > 0)
+        if (SaveGame.TelepathyTimer.Value > 0)
         {
             SaveGame.MsgPrint("Your mind feels cloudy!");
-            SaveGame.TimedTelepathy.ResetTimer();
+            SaveGame.TelepathyTimer.ResetTimer();
         }
         else
         {
             SaveGame.MsgPrint("Your mind expands!");
-            SaveGame.TimedTelepathy.SetTimer(SaveGame.ExperienceLevel);
+            SaveGame.TelepathyTimer.SetTimer(SaveGame.ExperienceLevel);
         }
     }
 }

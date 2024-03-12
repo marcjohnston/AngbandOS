@@ -19,27 +19,27 @@ internal class ResistActiveMutation : Mutation
             int dur = base.SaveGame.DieRoll(20) + 20;
             if (base.SaveGame.RandomLessThan(5) < num)
             {
-                SaveGame.TimedAcidResistance.AddTimer(dur);
+                SaveGame.AcidResistanceTimer.AddTimer(dur);
                 num--;
             }
             if (base.SaveGame.RandomLessThan(4) < num)
             {
-                SaveGame.TimedLightningResistance.AddTimer(dur);
+                SaveGame.LightningResistanceTimer.AddTimer(dur);
                 num--;
             }
             if (base.SaveGame.RandomLessThan(3) < num)
             {
-                SaveGame.TimedFireResistance.AddTimer(dur);
+                SaveGame.FireResistanceTimer.AddTimer(dur);
                 num--;
             }
             if (base.SaveGame.RandomLessThan(2) < num)
             {
-                SaveGame.TimedColdResistance.AddTimer(dur);
+                SaveGame.ColdResistanceTimer.AddTimer(dur);
                 num--;
             }
             if (num != 0)
             {
-                SaveGame.TimedPoisonResistance.AddTimer(dur);
+                SaveGame.PoisonResistanceTimer.AddTimer(dur);
             }
         }
     }

@@ -58,11 +58,11 @@ internal class DominationProjectile : Projectile
                     switch (SaveGame.DieRoll(4))
                     {
                         case 1:
-                            SaveGame.TimedStun.AddTimer((dam / 2));
+                            SaveGame.StunTimer.AddTimer((dam / 2));
                             break;
 
                         case 2:
-                            SaveGame.TimedConfusion.AddTimer((dam / 2));
+                            SaveGame.ConfusedTimer.AddTimer((dam / 2));
                             break;
 
                         default:
@@ -73,7 +73,7 @@ internal class DominationProjectile : Projectile
                                 }
                                 else
                                 {
-                                    SaveGame.TimedFear.AddTimer(dam);
+                                    SaveGame.FearTimer.AddTimer(dam);
                                 }
                                 break;
                             }

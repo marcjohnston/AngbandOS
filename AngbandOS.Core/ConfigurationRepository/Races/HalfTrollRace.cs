@@ -81,8 +81,8 @@ internal class HalfTrollRace : Race
         if (SaveGame.CheckIfRacialPowerWorks(10, 12, Ability.Wisdom, SaveGame.BaseCharacterClass.ID == CharacterClass.Warrior ? 6 : 12))
         {
             SaveGame.MsgPrint("RAAAGH!");
-            SaveGame.TimedFear.ResetTimer();
-            SaveGame.TimedSuperheroism.AddTimer(10 + SaveGame.DieRoll(SaveGame.ExperienceLevel));
+            SaveGame.FearTimer.ResetTimer();
+            SaveGame.SuperheroismTimer.AddTimer(10 + SaveGame.DieRoll(SaveGame.ExperienceLevel));
             SaveGame.RestoreHealth(30);
         }
     }

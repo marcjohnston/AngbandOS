@@ -20,7 +20,7 @@ internal class PoisonGasScript : Script, IScript
     {
         // Poison the player
         SaveGame.MsgPrint("A pungent green gas surrounds you!");
-        if (!SaveGame.HasPoisonResistance && SaveGame.TimedPoisonResistance.Value == 0)
+        if (!SaveGame.HasPoisonResistance && SaveGame.PoisonResistanceTimer.Value == 0)
         {
             // Hagarg Ryonis may save you from the poison
             if (SaveGame.DieRoll(10) <= SaveGame.SingletonRepository.Gods.Get(nameof(HagargRyonisGod)).AdjustedFavour)

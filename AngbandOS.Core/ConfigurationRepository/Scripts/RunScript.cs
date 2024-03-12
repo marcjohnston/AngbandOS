@@ -28,7 +28,7 @@ internal class RunScript : Script, IScript, IRepeatableScript
     public bool ExecuteRepeatableScript()
     {
         // Can't run if we're confused
-        if (SaveGame.TimedConfusion.Value != 0)
+        if (SaveGame.ConfusedTimer.Value != 0)
         {
             SaveGame.MsgPrint("You are too confused!");
             return false; // Don't repeat this.

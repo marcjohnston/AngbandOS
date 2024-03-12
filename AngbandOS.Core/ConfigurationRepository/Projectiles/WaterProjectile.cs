@@ -62,11 +62,11 @@ internal class WaterProjectile : Projectile
         }
         if (!SaveGame.HasSoundResistance)
         {
-            SaveGame.TimedStun.AddTimer(SaveGame.DieRoll(40));
+            SaveGame.StunTimer.AddTimer(SaveGame.DieRoll(40));
         }
         if (!SaveGame.HasConfusionResistance)
         {
-            SaveGame.TimedConfusion.AddTimer(SaveGame.DieRoll(5) + 5);
+            SaveGame.ConfusedTimer.AddTimer(SaveGame.DieRoll(5) + 5);
         }
         if (SaveGame.DieRoll(5) == 1)
         {

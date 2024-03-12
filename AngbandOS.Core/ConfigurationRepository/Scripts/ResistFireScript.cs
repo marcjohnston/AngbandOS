@@ -18,6 +18,6 @@ internal class ResistFireScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        SaveGame.TimedFireResistance.AddTimer(SaveGame.DieRoll(20) + 20);
+        SaveGame.FireResistanceTimer.AddTimer(SaveGame.DieRoll(20) + 20);
     }
 }

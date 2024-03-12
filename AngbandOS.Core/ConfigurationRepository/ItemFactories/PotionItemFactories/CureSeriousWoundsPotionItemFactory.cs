@@ -38,11 +38,11 @@ internal class CureSeriousWoundsPotionItemFactory : PotionItemFactory
         {
             identified = true;
         }
-        if (SaveGame.TimedConfusion.ResetTimer())
+        if (SaveGame.ConfusedTimer.ResetTimer())
         {
             identified = true;
         }
-        if (SaveGame.TimedBleeding.SetTimer((SaveGame.TimedBleeding.Value / 2) - 50))
+        if (SaveGame.BleedingTimer.SetTimer((SaveGame.BleedingTimer.Value / 2) - 50))
         {
             identified = true;
         }

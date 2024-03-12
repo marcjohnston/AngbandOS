@@ -19,11 +19,11 @@ internal class UpdateHealthFlaggedAction : FlaggedAction
         {
             mhp = SaveGame.ExperienceLevel + 1;
         }
-        if (SaveGame.TimedHeroism.Value != 0)
+        if (SaveGame.HeroismTimer.Value != 0)
         {
             mhp += 10;
         }
-        if (SaveGame.TimedSuperheroism.Value != 0)
+        if (SaveGame.SuperheroismTimer.Value != 0)
         {
             mhp += 30;
         }

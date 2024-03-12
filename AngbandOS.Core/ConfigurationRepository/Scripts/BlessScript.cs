@@ -18,6 +18,6 @@ internal class BlessScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        SaveGame.TimedBlessing.AddTimer(SaveGame.DieRoll(12) + 12);
+        SaveGame.BlessingTimer.AddTimer(SaveGame.DieRoll(12) + 12);
     }
 }

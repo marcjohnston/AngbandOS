@@ -26,7 +26,7 @@ internal class IceScrollItemFactory : ScrollItemFactory
     public override void Read(ReadScrollEvent eventArgs)
     {
         SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(IceProjectile)), 0, 175, 4);
-        if (!(SaveGame.TimedColdResistance.Value != 0 || SaveGame.HasColdResistance || SaveGame.HasColdImmunity))
+        if (!(SaveGame.ColdResistanceTimer.Value != 0 || SaveGame.HasColdResistance || SaveGame.HasColdImmunity))
         {
             SaveGame.TakeHit(100 + SaveGame.DieRoll(100), "a Scroll of Ice");
         }

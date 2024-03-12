@@ -51,12 +51,12 @@ internal class InvokeSpiritsScript : Script, IScript
         if (die < 14)
         {
             SaveGame.MsgPrint("An unnamable evil brushes against your mind...");
-            SaveGame.TimedFear.AddTimer(SaveGame.DieRoll(4) + 4);
+            SaveGame.FearTimer.AddTimer(SaveGame.DieRoll(4) + 4);
         }
         if (die < 26)
         {
             SaveGame.MsgPrint("Your head is invaded by a horde of gibbering spectral voices...");
-            SaveGame.TimedConfusion.AddTimer(SaveGame.DieRoll(4) + 4);
+            SaveGame.ConfusedTimer.AddTimer(SaveGame.DieRoll(4) + 4);
         }
         if (die < 31)
         {

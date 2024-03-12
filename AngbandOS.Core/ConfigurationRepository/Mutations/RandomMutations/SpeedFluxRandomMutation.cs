@@ -24,25 +24,25 @@ internal class SpeedFluxRandomMutation : Mutation
             if (base.SaveGame.DieRoll(2) == 1)
             {
                 SaveGame.MsgPrint("Everything around you speeds up.");
-                if (SaveGame.TimedHaste.Value > 0)
+                if (SaveGame.HasteTimer.Value > 0)
                 {
-                    SaveGame.TimedHaste.ResetTimer();
+                    SaveGame.HasteTimer.ResetTimer();
                 }
                 else
                 {
-                    SaveGame.TimedSlow.AddTimer(base.SaveGame.DieRoll(30) + 10);
+                    SaveGame.SlowTimer.AddTimer(base.SaveGame.DieRoll(30) + 10);
                 }
             }
             else
             {
                 SaveGame.MsgPrint("Everything around you slows down.");
-                if (SaveGame.TimedSlow.Value > 0)
+                if (SaveGame.SlowTimer.Value > 0)
                 {
-                    SaveGame.TimedSlow.ResetTimer();
+                    SaveGame.SlowTimer.ResetTimer();
                 }
                 else
                 {
-                    SaveGame.TimedHaste.AddTimer(base.SaveGame.DieRoll(30) + 10);
+                    SaveGame.HasteTimer.AddTimer(base.SaveGame.DieRoll(30) + 10);
                 }
             }
             SaveGame.MsgPrint(null);

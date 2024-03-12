@@ -22,7 +22,7 @@ internal class Heal700Every25Activation : Activation
     {
         SaveGame.MsgPrint("You feel a warm tingling inside...");
         SaveGame.RestoreHealth(700);
-        SaveGame.TimedBleeding.ResetTimer();
+        SaveGame.BleedingTimer.ResetTimer();
         return true;
     }
 

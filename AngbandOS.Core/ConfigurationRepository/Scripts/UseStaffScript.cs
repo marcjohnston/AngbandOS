@@ -58,7 +58,7 @@ internal class UseStaffScript : Script, IScript, IRepeatableScript
         // We have a chance of the device working equal to skill (halved if confused) - item
         // level (capped at 50)
         int chance = SaveGame.SkillUseDevice;
-        if (SaveGame.TimedConfusion.Value != 0)
+        if (SaveGame.ConfusedTimer.Value != 0)
         {
             chance /= 2;
         }

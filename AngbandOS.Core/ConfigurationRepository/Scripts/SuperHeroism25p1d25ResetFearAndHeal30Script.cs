@@ -21,11 +21,11 @@ internal class SuperHeroism25p1d25ResetFearAndHeal30Script : Script, INoticeable
         bool identified = false;
 
         // Berserk strength removes fear, heals 30 health, and gives you timed super heroism
-        if (SaveGame.TimedFear.ResetTimer())
+        if (SaveGame.FearTimer.ResetTimer())
         {
             identified = true;
         }
-        if (SaveGame.TimedSuperheroism.AddTimer(SaveGame.DieRoll(25) + 25))
+        if (SaveGame.SuperheroismTimer.AddTimer(SaveGame.DieRoll(25) + 25))
         {
             identified = true;
         }

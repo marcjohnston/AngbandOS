@@ -35,9 +35,9 @@ internal class PoisonPitScript : Script, IScript
                 SaveGame.MsgPrint("You are impaled on poisonous spikes!");
                 name = "a spiked pit";
                 damage *= 2;
-                SaveGame.TimedBleeding.AddTimer(SaveGame.DieRoll(damage));
+                SaveGame.BleedingTimer.AddTimer(SaveGame.DieRoll(damage));
                 // Hagarg Ryonis can save us from the poison
-                if (SaveGame.HasPoisonResistance || SaveGame.TimedPoisonResistance.Value != 0)
+                if (SaveGame.HasPoisonResistance || SaveGame.PoisonResistanceTimer.Value != 0)
                 {
                     SaveGame.MsgPrint("The poison does not affect you!");
                 }

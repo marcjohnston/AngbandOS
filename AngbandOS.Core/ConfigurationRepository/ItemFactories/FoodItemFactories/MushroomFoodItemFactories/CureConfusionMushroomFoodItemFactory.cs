@@ -25,7 +25,7 @@ internal class CureConfusionMushroomFoodItemFactory : MushroomFoodItemFactory
     public override bool Eat()
     {
         SaveGame.PlaySound(SoundEffectEnum.Eat);
-        if (SaveGame.TimedConfusion.ResetTimer())
+        if (SaveGame.ConfusedTimer.ResetTimer())
         {
             return true;
         }

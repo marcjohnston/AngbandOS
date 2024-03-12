@@ -22,7 +22,7 @@ internal class SleepGasScript : Script, IScript
         SaveGame.MsgPrint("A strange white mist surrounds you!");
         if (!SaveGame.HasFreeAction)
         {
-            SaveGame.TimedParalysis.AddTimer(SaveGame.RandomLessThan(10) + 5);
+            SaveGame.ParalysisTimer.AddTimer(SaveGame.RandomLessThan(10) + 5);
         }
     }
 }

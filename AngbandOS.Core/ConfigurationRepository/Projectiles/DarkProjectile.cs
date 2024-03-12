@@ -88,7 +88,7 @@ internal class DarkProjectile : Projectile
         {
             SaveGame.BlindnessTimer.AddTimer(SaveGame.DieRoll(5) + 2);
         }
-        if (SaveGame.TimedEtherealness.Value != 0)
+        if (SaveGame.EtherealnessTimer.Value != 0)
         {
             SaveGame.RestoreHealth(dam);
         }

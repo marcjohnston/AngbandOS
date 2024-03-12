@@ -98,7 +98,7 @@ internal class OpenScript : Script, IScript, IRepeatableScript
                 i /= 10;
             }
             // Hard to pick locks when you're confused or hallucinating
-            if (SaveGame.TimedConfusion.Value != 0 || SaveGame.TimedHallucinations.Value != 0)
+            if (SaveGame.ConfusedTimer.Value != 0 || SaveGame.HallucinationsTimer.Value != 0)
             {
                 i /= 10;
             }

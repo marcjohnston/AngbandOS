@@ -129,9 +129,9 @@ internal class PlasmaProjectile : Projectile
         if (!SaveGame.HasSoundResistance)
         {
             int kk = SaveGame.DieRoll(dam > 40 ? 35 : (dam * 3 / 4) + 5);
-            SaveGame.TimedStun.AddTimer(kk);
+            SaveGame.StunTimer.AddTimer(kk);
         }
-        if (!(SaveGame.HasFireResistance || SaveGame.TimedFireResistance.Value != 0 || SaveGame.HasFireImmunity))
+        if (!(SaveGame.HasFireResistance || SaveGame.FireResistanceTimer.Value != 0 || SaveGame.HasFireImmunity))
         {
             SaveGame.InvenDamage(SaveGame.SetAcidDestroy, 3);
         }

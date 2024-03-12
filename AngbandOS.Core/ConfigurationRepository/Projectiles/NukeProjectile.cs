@@ -87,12 +87,12 @@ internal class NukeProjectile : Projectile
         {
             dam = ((2 * dam) + 2) / 5;
         }
-        if (SaveGame.TimedPoisonResistance.Value != 0)
+        if (SaveGame.PoisonResistanceTimer.Value != 0)
         {
             dam = ((2 * dam) + 2) / 5;
         }
         SaveGame.TakeHit(dam, killer);
-        if (!(SaveGame.HasPoisonResistance || SaveGame.TimedPoisonResistance.Value != 0))
+        if (!(SaveGame.HasPoisonResistance || SaveGame.PoisonResistanceTimer.Value != 0))
         {
             SaveGame.PoisonTimer.AddTimer(SaveGame.RandomLessThan(dam) + 10);
             if (SaveGame.DieRoll(5) == 1)

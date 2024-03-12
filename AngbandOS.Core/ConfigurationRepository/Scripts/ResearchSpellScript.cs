@@ -40,7 +40,7 @@ internal class ResearchSpellScript : Script, IScript, IStoreScript
             SaveGame.MsgPrint("You cannot see!");
             return;
         }
-        if (SaveGame.TimedConfusion.Value != 0)
+        if (SaveGame.ConfusedTimer.Value != 0)
         {
             SaveGame.MsgPrint("You are too confused!");
             return;

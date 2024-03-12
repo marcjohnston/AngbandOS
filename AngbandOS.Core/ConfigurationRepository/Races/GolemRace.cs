@@ -94,7 +94,7 @@ internal class GolemRace : Race
         // Golems can harden their skin
         if (SaveGame.CheckIfRacialPowerWorks(20, 15, Ability.Constitution, 8))
         {
-            SaveGame.TimedStoneskin.AddTimer(SaveGame.DieRoll(20) + 30);
+            SaveGame.StoneskinTimer.AddTimer(SaveGame.DieRoll(20) + 30);
         }
     }
     public override bool OutfitsWithScrollsOfSatisfyHunger => true;

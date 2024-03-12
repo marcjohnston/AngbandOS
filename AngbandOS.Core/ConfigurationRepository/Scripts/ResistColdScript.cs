@@ -18,6 +18,6 @@ internal class ResistColdScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        SaveGame.TimedColdResistance.AddTimer(SaveGame.DieRoll(20) + 20);
+        SaveGame.ColdResistanceTimer.AddTimer(SaveGame.DieRoll(20) + 20);
     }
 }

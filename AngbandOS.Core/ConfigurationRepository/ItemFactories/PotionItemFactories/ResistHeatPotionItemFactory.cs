@@ -26,7 +26,7 @@ internal class ResistHeatPotionItemFactory : PotionItemFactory
     public override bool Quaff()
     {
         // Resist heat gives you timed fire resistance
-        return SaveGame.TimedFireResistance.AddTimer(SaveGame.DieRoll(10) + 10);
+        return SaveGame.FireResistanceTimer.AddTimer(SaveGame.DieRoll(10) + 10);
     }
     public override Item CreateItem() => new Item(SaveGame, this);
 }

@@ -19,7 +19,7 @@ internal class FlamesRingItemFactory : RingItemFactory, IItemsCanBeActivated
             return;
         }
         SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(FireProjectile)), dir, 50, 2);
-        SaveGame.TimedFireResistance.AddTimer(SaveGame.DieRoll(20) + 20);
+        SaveGame.FireResistanceTimer.AddTimer(SaveGame.DieRoll(20) + 20);
         item.RechargeTimeLeft = SaveGame.RandomLessThan(50) + 50;
     }
 

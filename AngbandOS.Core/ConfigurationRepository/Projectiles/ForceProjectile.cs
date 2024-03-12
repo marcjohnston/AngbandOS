@@ -122,7 +122,7 @@ internal class ForceProjectile : Projectile
         }
         if (!SaveGame.HasSoundResistance)
         {
-            SaveGame.TimedStun.AddTimer(SaveGame.DieRoll(20));
+            SaveGame.StunTimer.AddTimer(SaveGame.DieRoll(20));
         }
         SaveGame.TakeHit(dam, killer);
         return true;

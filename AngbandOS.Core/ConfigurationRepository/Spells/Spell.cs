@@ -162,11 +162,11 @@ internal abstract class Spell : IGetKey<string>
         {
             chance = minfail;
         }
-        if (SaveGame.TimedStun.Value > 50)
+        if (SaveGame.StunTimer.Value > 50)
         {
             chance += 25;
         }
-        else if (SaveGame.TimedStun.Value != 0)
+        else if (SaveGame.StunTimer.Value != 0)
         {
             chance += 15;
         }

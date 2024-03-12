@@ -126,13 +126,13 @@ internal class IceProjectile : Projectile
         SaveGame.ColdDam(dam, killer);
         if (!SaveGame.HasShardResistance)
         {
-            SaveGame.TimedBleeding.AddTimer(SaveGame.DiceRoll(5, 8));
+            SaveGame.BleedingTimer.AddTimer(SaveGame.DiceRoll(5, 8));
         }
         if (!SaveGame.HasSoundResistance)
         {
-            SaveGame.TimedStun.AddTimer(SaveGame.DieRoll(15));
+            SaveGame.StunTimer.AddTimer(SaveGame.DieRoll(15));
         }
-        if (!(SaveGame.HasColdResistance || SaveGame.TimedColdResistance.Value != 0) || SaveGame.DieRoll(12) == 1)
+        if (!(SaveGame.HasColdResistance || SaveGame.ColdResistanceTimer.Value != 0) || SaveGame.DieRoll(12) == 1)
         {
             if (!SaveGame.HasColdImmunity)
             {

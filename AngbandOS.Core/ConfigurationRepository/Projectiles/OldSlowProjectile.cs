@@ -52,7 +52,7 @@ internal class OldSlowProjectile : Projectile
         {
             SaveGame.MsgPrint("You are hit by something slow!");
         }
-        SaveGame.TimedSlow.AddTimer(SaveGame.RandomLessThan(4) + 4);
+        SaveGame.SlowTimer.AddTimer(SaveGame.RandomLessThan(4) + 4);
         return true;
     }
 }

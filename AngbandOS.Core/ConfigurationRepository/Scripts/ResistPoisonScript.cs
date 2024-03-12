@@ -18,6 +18,6 @@ internal class ResistPoisonScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        SaveGame.TimedPoisonResistance.AddTimer(SaveGame.DieRoll(20) + 20);
+        SaveGame.PoisonResistanceTimer.AddTimer(SaveGame.DieRoll(20) + 20);
     }
 }

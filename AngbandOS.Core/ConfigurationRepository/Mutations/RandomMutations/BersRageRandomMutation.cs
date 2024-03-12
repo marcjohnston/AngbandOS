@@ -25,6 +25,6 @@ internal class BersRageRandomMutation : Mutation
         SaveGame.Disturb(false);
         SaveGame.MsgPrint("RAAAAGHH!");
         SaveGame.MsgPrint("You feel a fit of rage coming over you!");
-        SaveGame.TimedSuperheroism.AddTimer(10 + base.SaveGame.DieRoll(SaveGame.ExperienceLevel));
+        SaveGame.SuperheroismTimer.AddTimer(10 + base.SaveGame.DieRoll(SaveGame.ExperienceLevel));
     }
 }

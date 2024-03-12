@@ -41,19 +41,19 @@ internal class CuringPotionItemFactory : PotionItemFactory
         {
             identified = true;
         }
-        if (SaveGame.TimedConfusion.ResetTimer())
+        if (SaveGame.ConfusedTimer.ResetTimer())
         {
             identified = true;
         }
-        if (SaveGame.TimedStun.ResetTimer())
+        if (SaveGame.StunTimer.ResetTimer())
         {
             identified = true;
         }
-        if (SaveGame.TimedBleeding.ResetTimer())
+        if (SaveGame.BleedingTimer.ResetTimer())
         {
             identified = true;
         }
-        if (SaveGame.TimedHallucinations.ResetTimer())
+        if (SaveGame.HallucinationsTimer.ResetTimer())
         {
             identified = true;
         }

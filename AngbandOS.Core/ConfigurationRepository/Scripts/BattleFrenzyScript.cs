@@ -19,16 +19,16 @@ internal class BattleFrenzyScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        SaveGame.TimedSuperheroism.AddTimer(SaveGame.DieRoll(25) + 25);
+        SaveGame.SuperheroismTimer.AddTimer(SaveGame.DieRoll(25) + 25);
         SaveGame.RestoreHealth(30);
-        SaveGame.TimedFear.ResetTimer();
-        if (SaveGame.TimedHaste.Value == 0)
+        SaveGame.FearTimer.ResetTimer();
+        if (SaveGame.HasteTimer.Value == 0)
         {
-            SaveGame.TimedHaste.SetTimer(SaveGame.DieRoll(20 + (SaveGame.ExperienceLevel / 2)) + (SaveGame.ExperienceLevel / 2));
+            SaveGame.HasteTimer.SetTimer(SaveGame.DieRoll(20 + (SaveGame.ExperienceLevel / 2)) + (SaveGame.ExperienceLevel / 2));
         }
         else
         {
-            SaveGame.TimedHaste.AddTimer(SaveGame.DieRoll(5));
+            SaveGame.HasteTimer.AddTimer(SaveGame.DieRoll(5));
         }
     }
 }

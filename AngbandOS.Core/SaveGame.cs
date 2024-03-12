@@ -405,76 +405,76 @@ internal class SaveGame
     /// 
     /// </summary>
     /// <remarks>borg: player->timed[TMD_OPP_ACID]</remarks>
-    public readonly Timer TimedAcidResistance;
-    public readonly Timer TimedBleeding;
-    public readonly Timer TimedBlessing;
+    public readonly Timer AcidResistanceTimer;
+    public readonly Timer BleedingTimer;
+    public readonly Timer BlessingTimer;
     public readonly Timer BlindnessTimer;
 
     /// <summary>
     /// 
     /// </summary>
     /// <remarks>borg: player->timed[TMD_OPP_COLD]</remarks>
-    public readonly Timer TimedColdResistance;
-    public readonly Timer TimedConfusion;
-    public readonly Timer TimedEtherealness;
-    public readonly Timer TimedFear;
+    public readonly Timer ColdResistanceTimer;
+    public readonly Timer ConfusedTimer;
+    public readonly Timer EtherealnessTimer;
+    public readonly Timer FearTimer;
 
     /// <summary>
     /// 
     /// </summary>
     /// <remarks>borg: player->timed[TMD_OPP_FIRE]</remakrs>
-    public readonly Timer TimedFireResistance;
-    public readonly Timer TimedHallucinations;
+    public readonly Timer FireResistanceTimer;
+    public readonly Timer HallucinationsTimer;
 
     /// <summary>
     /// 
     /// </summary>
     /// <remarks>readonly borg: player->timed[TMD_FAST]</remarks>
-    public readonly Timer TimedHaste;
+    public readonly Timer HasteTimer;
 
     /// <summary>
     /// 
     /// </summary>
     /// <remarks>borg: player->timed[TMD_HERO]</remarks>
-    public readonly Timer TimedHeroism;
-    public readonly Timer TimedInfravision;
-    public readonly Timer TimedInvulnerability;
+    public readonly Timer HeroismTimer;
+    public readonly Timer InfravisionTimer;
+    public readonly Timer InvulnerabilityTimer;
 
     /// <summary>
     /// 
     /// </summary>
     /// <remarks>borg: player->timed[TMD_OPP_ELEC]</remarks>
-    public readonly Timer TimedLightningResistance;
-    public readonly Timer TimedParalysis;
+    public readonly Timer LightningResistanceTimer;
+    public readonly Timer ParalysisTimer;
     public readonly Timer PoisonTimer;
 
     /// <summary>
     /// 
     /// </summaryreadonly >
     /// <remarks>readonly borg: player->timed[TMD_OPP_POIS]</remarks>
-    public readonly Timer TimedPoisonResistance;
+    public readonly Timer PoisonResistanceTimer;
 
     /// <summary>
     /// 
     /// </summary>
     /// <remarks>borg:player->timed[TMD_PROTEVIL]</remarks>
-    public readonly Timer TimedProtectionFromEvil;
-    public readonly Timer TimedSeeInvisibility;
-    public readonly Timer TimedSlow;
+    public readonly Timer ProtectionFromEvilTimer;
+    public readonly Timer SeeInvisibilityTimer;
+    public readonly Timer SlowTimer;
 
     /// <summary>
     /// 
     /// </summary>
     /// <remarks>borg: player->timed[TMD_STONESKIN]</remarks>
-    public readonly Timer TimedStoneskin;
-    public readonly Timer TimedStun;
+    public readonly Timer StoneskinTimer;
+    public readonly Timer StunTimer;
 
     /// <summary>
     /// 
     /// </summary>
     /// <remarks>borg: player->timed[TMD_SHERO]</remarks>
-    public readonly Timer TimedSuperheroism;
-    public readonly Timer TimedTelepathy;
+    public readonly Timer SuperheroismTimer;
+    public readonly Timer TelepathyTimer;
 
     /// <summary>
     /// Returns the index of the town that the player owns a home; or null, if the player doesn't own a home.
@@ -642,32 +642,32 @@ internal class SaveGame
         Health = (HealthIntProperty)SingletonRepository.Properties.Get(nameof(HealthIntProperty));
         Speed = (SpeedIntProperty)SingletonRepository.Properties.Get(nameof(SpeedIntProperty));
         SpareSpellSlots = (SpareSpellSlotsIntProperty)SingletonRepository.Properties.Get(nameof(SpareSpellSlotsIntProperty));
-        
-        TimedAcidResistance = (AcidResistanceTimer)SingletonRepository.TimedActions.Get(nameof(AcidResistanceTimer));
-        TimedBleeding = (BleedingTimer)SingletonRepository.TimedActions.Get(nameof(BleedingTimer));
-        TimedBlessing = (BlessingTimer)SingletonRepository.TimedActions.Get(nameof(BlessingTimer));
+
+        AcidResistanceTimer = (AcidResistanceTimer)SingletonRepository.TimedActions.Get(nameof(Timers.AcidResistanceTimer));
+        BleedingTimer = (BleedingTimer)SingletonRepository.TimedActions.Get(nameof(Timers.BleedingTimer));
+        BlessingTimer = (BlessingTimer)SingletonRepository.TimedActions.Get(nameof(Timers.BlessingTimer));
         BlindnessTimer = (BlindnessTimer)SingletonRepository.TimedActions.Get(nameof(Timers.BlindnessTimer));
-        TimedColdResistance = (ColdResistanceTimer)SingletonRepository.TimedActions.Get(nameof(ColdResistanceTimer));
-        TimedConfusion = (ConfusionTimer)SingletonRepository.TimedActions.Get(nameof(ConfusionTimer));
-        TimedEtherealness = (EtherealnessTimer)SingletonRepository.TimedActions.Get(nameof(EtherealnessTimer));
-        TimedFear = (FearTimer)SingletonRepository.TimedActions.Get(nameof(FearTimer));
-        TimedFireResistance = (FireResistanceTimer)SingletonRepository.TimedActions.Get(nameof(FireResistanceTimer));
-        TimedHallucinations = (HallucinationsTimer)SingletonRepository.TimedActions.Get(nameof(HallucinationsTimer));
-        TimedHaste = (HasteTimer)SingletonRepository.TimedActions.Get(nameof(HasteTimer));
-        TimedHeroism = (HeroismTimer)SingletonRepository.TimedActions.Get(nameof(HeroismTimer));
-        TimedInfravision = (InfravisionTimer)SingletonRepository.TimedActions.Get(nameof(InfravisionTimer));
-        TimedInvulnerability = (InvulnerabilityTimer)SingletonRepository.TimedActions.Get(nameof(InvulnerabilityTimer));
-        TimedLightningResistance = (LightningResistanceTimer)SingletonRepository.TimedActions.Get(nameof(LightningResistanceTimer));
-        TimedParalysis = (ParalysisTimer)SingletonRepository.TimedActions.Get(nameof(ParalysisTimer));
+        ColdResistanceTimer = (ColdResistanceTimer)SingletonRepository.TimedActions.Get(nameof(Timers.ColdResistanceTimer));
+        ConfusedTimer = (ConfusionTimer)SingletonRepository.TimedActions.Get(nameof(Timers.ConfusionTimer));
+        EtherealnessTimer = (EtherealnessTimer)SingletonRepository.TimedActions.Get(nameof(Timers.EtherealnessTimer));
+        FearTimer = (FearTimer)SingletonRepository.TimedActions.Get(nameof(Timers.FearTimer));
+        FireResistanceTimer = (FireResistanceTimer)SingletonRepository.TimedActions.Get(nameof(Timers.FireResistanceTimer));
+        HallucinationsTimer = (HallucinationsTimer)SingletonRepository.TimedActions.Get(nameof(Timers.HallucinationsTimer));
+        HasteTimer = (HasteTimer)SingletonRepository.TimedActions.Get(nameof(Timers.HasteTimer));
+        HeroismTimer = (HeroismTimer)SingletonRepository.TimedActions.Get(nameof(Timers.HeroismTimer));
+        InfravisionTimer = (InfravisionTimer)SingletonRepository.TimedActions.Get(nameof(Timers.InfravisionTimer));
+        InvulnerabilityTimer = (InvulnerabilityTimer)SingletonRepository.TimedActions.Get(nameof(Timers.InvulnerabilityTimer));
+        LightningResistanceTimer = (LightningResistanceTimer)SingletonRepository.TimedActions.Get(nameof(Timers.LightningResistanceTimer));
+        ParalysisTimer = (ParalysisTimer)SingletonRepository.TimedActions.Get(nameof(Timers.ParalysisTimer));
         PoisonTimer = (PoisonedTimer)SingletonRepository.TimedActions.Get(nameof(Timers.PoisonedTimer));
-        TimedPoisonResistance = (PoisonResistanceTimer)SingletonRepository.TimedActions.Get(nameof(PoisonResistanceTimer));
-        TimedProtectionFromEvil = (ProtectionFromEvilTimer)SingletonRepository.TimedActions.Get(nameof(ProtectionFromEvilTimer));
-        TimedSeeInvisibility = (SeeInvisibilityTimer)SingletonRepository.TimedActions.Get(nameof(SeeInvisibilityTimer));
-        TimedSlow = (SlowTimer)SingletonRepository.TimedActions.Get(nameof(SlowTimer));
-        TimedStoneskin = (StoneskinTimer)SingletonRepository.TimedActions.Get(nameof(StoneskinTimer));
-        TimedStun = (StunTimer)SingletonRepository.TimedActions.Get(nameof(StunTimer));
-        TimedSuperheroism = (SuperHeroismTimer)SingletonRepository.TimedActions.Get(nameof(SuperHeroismTimer));
-        TimedTelepathy = (TelepathyTimer)SingletonRepository.TimedActions.Get(nameof(TelepathyTimer));
+        PoisonResistanceTimer = (PoisonResistanceTimer)SingletonRepository.TimedActions.Get(nameof(Timers.PoisonResistanceTimer));
+        ProtectionFromEvilTimer = (ProtectionFromEvilTimer)SingletonRepository.TimedActions.Get(nameof(Timers.ProtectionFromEvilTimer));
+        SeeInvisibilityTimer = (SeeInvisibilityTimer)SingletonRepository.TimedActions.Get(nameof(Timers.SeeInvisibilityTimer));
+        SlowTimer = (SlowTimer)SingletonRepository.TimedActions.Get(nameof(Timers.SlowTimer));
+        StoneskinTimer = (StoneskinTimer)SingletonRepository.TimedActions.Get(nameof(Timers.StoneskinTimer));
+        StunTimer = (StunTimer)SingletonRepository.TimedActions.Get(nameof(Timers.StunTimer));
+        SuperheroismTimer = (SuperHeroismTimer)SingletonRepository.TimedActions.Get(nameof(SuperHeroismTimer));
+        TelepathyTimer = (TelepathyTimer)SingletonRepository.TimedActions.Get(nameof(Timers.TelepathyTimer));
 
         MainForm = (MainForm)SingletonRepository.Forms.Get(nameof(MainForm));
 
@@ -2022,11 +2022,11 @@ internal class SaveGame
                         MsgPrint("You feel like a statue!");
                         if (HasFreeAction)
                         {
-                            TimedParalysis.AddTimer(DieRoll(3));
+                            ParalysisTimer.AddTimer(DieRoll(3));
                         }
                         else
                         {
-                            TimedParalysis.AddTimer(DieRoll(13));
+                            ParalysisTimer.AddTimer(DieRoll(13));
                         }
                     }
                     break;
@@ -3422,8 +3422,8 @@ internal class SaveGame
             else if (Resting == -2)
             {
                 if (Health.Value == MaxHealth && Mana.Value == MaxMana.Value && BlindnessTimer.Value == 0 &&
-                    TimedConfusion.Value == 0 && PoisonTimer.Value == 0 && TimedFear.Value == 0 && TimedStun.Value == 0 &&
-                    TimedBleeding.Value == 0 && TimedSlow.Value == 0 && TimedParalysis.Value == 0 && TimedHallucinations.Value == 0 &&
+                    ConfusedTimer.Value == 0 && PoisonTimer.Value == 0 && FearTimer.Value == 0 && StunTimer.Value == 0 &&
+                    BleedingTimer.Value == 0 && SlowTimer.Value == 0 && ParalysisTimer.Value == 0 && HallucinationsTimer.Value == 0 &&
                     WordOfRecallDelay == 0)
                 {
                     Disturb(false);
@@ -3463,7 +3463,7 @@ internal class SaveGame
                 RedrawStuff();
             }
             EnergyUse = 0;
-            if (TimedParalysis.Value != 0 || TimedStun.Value >= 100)
+            if (ParalysisTimer.Value != 0 || StunTimer.Value >= 100)
             {
                 EnergyUse = 100;
             }
@@ -3641,7 +3641,7 @@ internal class SaveGame
         {
             RegenMonsters();
         }
-        if (PoisonTimer.Value != 0 && TimedInvulnerability.Value == 0)
+        if (PoisonTimer.Value != 0 && InvulnerabilityTimer.Value == 0)
         {
             TakeHit(1, "poison");
         }
@@ -3669,7 +3669,7 @@ internal class SaveGame
         if (!GridPassable(MapY, MapX))
         {
             caveNoRegen = true;
-            if (TimedInvulnerability.Value == 0 && TimedEtherealness.Value == 0 && (Health.Value > ExperienceLevel / 5 || Race.IsEthereal))
+            if (InvulnerabilityTimer.Value == 0 && EtherealnessTimer.Value == 0 && (Health.Value > ExperienceLevel / 5 || Race.IsEthereal))
             {
                 string damDesc;
                 if (Race.IsEthereal)
@@ -3685,14 +3685,14 @@ internal class SaveGame
                 TakeHit(1 + (ExperienceLevel / 5), damDesc);
             }
         }
-        if (TimedBleeding.Value != 0 && TimedInvulnerability.Value == 0)
+        if (BleedingTimer.Value != 0 && InvulnerabilityTimer.Value == 0)
         {
             int damage;
-            if (TimedBleeding.Value > 200)
+            if (BleedingTimer.Value > 200)
             {
                 damage = 3;
             }
-            else if (TimedBleeding.Value > 100)
+            else if (BleedingTimer.Value > 100)
             {
                 damage = 2;
             }
@@ -3729,7 +3729,7 @@ internal class SaveGame
         if (Food.Value < Constants.PyFoodStarve)
         {
             int i = (Constants.PyFoodStarve - Food.Value) / 10;
-            if (TimedInvulnerability.Value == 0)
+            if (InvulnerabilityTimer.Value == 0)
             {
                 TakeHit(i, "starvation");
             }
@@ -3751,11 +3751,11 @@ internal class SaveGame
             }
             if (Food.Value < Constants.PyFoodFaint)
             {
-                if (TimedParalysis.Value == 0 && RandomLessThan(100) < 10)
+                if (ParalysisTimer.Value == 0 && RandomLessThan(100) < 10)
                 {
                     MsgPrint("You faint from the lack of food.");
                     Disturb(true);
-                    TimedParalysis.AddTimer(1 + RandomLessThan(5));
+                    ParalysisTimer.AddTimer(1 + RandomLessThan(5));
                 }
             }
         }
@@ -3808,7 +3808,7 @@ internal class SaveGame
         {
             regenAmount = 0;
         }
-        if (TimedBleeding.Value != 0)
+        if (BleedingTimer.Value != 0)
         {
             regenAmount = 0;
         }
@@ -3829,30 +3829,30 @@ internal class SaveGame
         //    timedAction.ProcessWorld();
         //}
         BlindnessTimer.ProcessWorld();
-        TimedSeeInvisibility.ProcessWorld();
-        TimedTelepathy.ProcessWorld();
-        TimedInfravision.ProcessWorld();
-        TimedParalysis.ProcessWorld();
-        TimedConfusion.ProcessWorld();
-        TimedFear.ProcessWorld();
-        TimedHaste.ProcessWorld();
-        TimedSlow.ProcessWorld();
-        TimedProtectionFromEvil.ProcessWorld();
-        TimedInvulnerability.ProcessWorld();
-        TimedEtherealness.ProcessWorld();
-        TimedHeroism.ProcessWorld();
-        TimedSuperheroism.ProcessWorld();
-        TimedBlessing.ProcessWorld();
-        TimedStoneskin.ProcessWorld();
-        TimedAcidResistance.ProcessWorld();
-        TimedLightningResistance.ProcessWorld();
-        TimedFireResistance.ProcessWorld();
-        TimedColdResistance.ProcessWorld();
-        TimedPoisonResistance.ProcessWorld();
+        SeeInvisibilityTimer.ProcessWorld();
+        TelepathyTimer.ProcessWorld();
+        InfravisionTimer.ProcessWorld();
+        ParalysisTimer.ProcessWorld();
+        ConfusedTimer.ProcessWorld();
+        FearTimer.ProcessWorld();
+        HasteTimer.ProcessWorld();
+        SlowTimer.ProcessWorld();
+        ProtectionFromEvilTimer.ProcessWorld();
+        InvulnerabilityTimer.ProcessWorld();
+        EtherealnessTimer.ProcessWorld();
+        HeroismTimer.ProcessWorld();
+        SuperheroismTimer.ProcessWorld();
+        BlessingTimer.ProcessWorld();
+        StoneskinTimer.ProcessWorld();
+        AcidResistanceTimer.ProcessWorld();
+        LightningResistanceTimer.ProcessWorld();
+        FireResistanceTimer.ProcessWorld();
+        ColdResistanceTimer.ProcessWorld();
+        PoisonResistanceTimer.ProcessWorld();
         PoisonTimer.ProcessWorld();
-        TimedStun.ProcessWorld();
-        TimedBleeding.ProcessWorld();
-        TimedHallucinations.ProcessWorld();
+        StunTimer.ProcessWorld();
+        BleedingTimer.ProcessWorld();
+        HallucinationsTimer.ProcessWorld();
 
         SingletonRepository.FlaggedActions.Get(nameof(UpdateTorchRadiusFlaggedAction)).Set();
         if (HasExperienceDrain)
@@ -4011,7 +4011,6 @@ internal class SaveGame
         SingletonRepository.FlaggedActions.Get(nameof(RedrawStunFlaggedAction)).Check();
         SingletonRepository.FlaggedActions.Get(nameof(RedrawHungerFlaggedAction)).Check();
         SingletonRepository.FlaggedActions.Get(nameof(RedrawDTrapFlaggedAction)).Check();
-        SingletonRepository.FlaggedActions.Get(nameof(RedrawConfusedFlaggedAction)).Check();
         SingletonRepository.FlaggedActions.Get(nameof(RedrawAfraidFlaggedAction)).Check();
         SingletonRepository.FlaggedActions.Get(nameof(RedrawStateFlaggedAction)).Check();
         SingletonRepository.FlaggedActions.Get(nameof(RedrawSpeedFlaggedAction)).Check();
@@ -4082,11 +4081,11 @@ internal class SaveGame
         {
             dam = (dam + 2) / 3;
         }
-        if (TimedAcidResistance.Value != 0)
+        if (AcidResistanceTimer.Value != 0)
         {
             dam = (dam + 2) / 3;
         }
-        if (!(TimedAcidResistance.Value != 0 || HasAcidResistance) && DieRoll(HurtChance) == 1)
+        if (!(AcidResistanceTimer.Value != 0 || HasAcidResistance) && DieRoll(HurtChance) == 1)
         {
             TryDecreasingAbilityScore(Ability.Charisma);
         }
@@ -4095,7 +4094,7 @@ internal class SaveGame
             dam = (dam + 1) / 2;
         }
         TakeHit(dam, kbStr);
-        if (!(TimedAcidResistance.Value != 0 && HasAcidResistance))
+        if (!(AcidResistanceTimer.Value != 0 && HasAcidResistance))
         {
             InvenDamage(SetAcidDestroy, inv);
         }
@@ -4320,16 +4319,16 @@ internal class SaveGame
         {
             dam = (dam + 2) / 3;
         }
-        if (TimedColdResistance.Value != 0)
+        if (ColdResistanceTimer.Value != 0)
         {
             dam = (dam + 2) / 3;
         }
-        if (!(TimedColdResistance.Value != 0 || HasColdResistance) && DieRoll(HurtChance) == 1)
+        if (!(ColdResistanceTimer.Value != 0 || HasColdResistance) && DieRoll(HurtChance) == 1)
         {
             TryDecreasingAbilityScore(Ability.Strength);
         }
         TakeHit(dam, kbStr);
-        if (!(HasColdResistance && TimedColdResistance.Value != 0))
+        if (!(HasColdResistance && ColdResistanceTimer.Value != 0))
         {
             InvenDamage(SetColdDestroy, inv);
         }
@@ -4751,14 +4750,14 @@ internal class SaveGame
                         {
                             MsgPrint("You are bashed by rubble!");
                             damage = DiceRoll(10, 4);
-                            TimedStun.AddTimer(DieRoll(50));
+                            StunTimer.AddTimer(DieRoll(50));
                             break;
                         }
                     case 3:
                         {
                             MsgPrint("You are crushed between the floor and ceiling!");
                             damage = DiceRoll(10, 4);
-                            TimedStun.AddTimer(DieRoll(50));
+                            StunTimer.AddTimer(DieRoll(50));
                             break;
                         }
                 }
@@ -4911,7 +4910,7 @@ internal class SaveGame
         {
             dam *= 2;
         }
-        if (TimedLightningResistance.Value != 0)
+        if (LightningResistanceTimer.Value != 0)
         {
             dam = (dam + 2) / 3;
         }
@@ -4919,12 +4918,12 @@ internal class SaveGame
         {
             dam = (dam + 2) / 3;
         }
-        if (!(TimedLightningResistance.Value != 0 || HasLightningResistance) && DieRoll(HurtChance) == 1)
+        if (!(LightningResistanceTimer.Value != 0 || HasLightningResistance) && DieRoll(HurtChance) == 1)
         {
             TryDecreasingAbilityScore(Ability.Dexterity);
         }
         TakeHit(dam, kbStr);
-        if (!(TimedLightningResistance.Value != 0 && HasLightningResistance))
+        if (!(LightningResistanceTimer.Value != 0 && HasLightningResistance))
         {
             InvenDamage(SetElecDestroy, inv);
         }
@@ -5168,16 +5167,16 @@ internal class SaveGame
         {
             dam = (dam + 2) / 3;
         }
-        if (TimedFireResistance.Value != 0)
+        if (FireResistanceTimer.Value != 0)
         {
             dam = (dam + 2) / 3;
         }
-        if (!(TimedFireResistance.Value != 0 || HasFireResistance) && DieRoll(HurtChance) == 1)
+        if (!(FireResistanceTimer.Value != 0 || HasFireResistance) && DieRoll(HurtChance) == 1)
         {
             TryDecreasingAbilityScore(Ability.Strength);
         }
         TakeHit(dam, kbStr);
-        if (!(HasFireResistance && TimedFireResistance.Value != 0))
+        if (!(HasFireResistance && FireResistanceTimer.Value != 0))
         {
             InvenDamage(SetFireDestroy, inv);
         }
@@ -5993,7 +5992,7 @@ internal class SaveGame
         else
         {
             MsgPrint("You are off-balance.");
-            TimedParalysis.AddTimer(2 + RandomLessThan(2));
+            ParalysisTimer.AddTimer(2 + RandomLessThan(2));
         }
         return more;
     }
@@ -6018,7 +6017,7 @@ internal class SaveGame
             return false;
         }
         // Can't use it if we're confused
-        if (TimedConfusion.Value != 0)
+        if (ConfusedTimer.Value != 0)
         {
             MsgPrint("You are too confused to use this power.");
             EnergyUse = 0;
@@ -6034,9 +6033,9 @@ internal class SaveGame
             }
         }
         // Harder to use powers when you're stunned
-        if (TimedStun.Value != 0)
+        if (StunTimer.Value != 0)
         {
-            difficulty += TimedStun.Value;
+            difficulty += StunTimer.Value;
         }
         // Easier to use powers if you're higher level than you need to be
         else if (ExperienceLevel > minLevel)
@@ -6351,7 +6350,7 @@ internal class SaveGame
             i /= 10;
         }
         // Disarming is tricky when confused
-        if (TimedConfusion.Value != 0 || TimedHallucinations.Value != 0)
+        if (ConfusedTimer.Value != 0 || HallucinationsTimer.Value != 0)
         {
             i /= 10;
         }
@@ -6418,7 +6417,7 @@ internal class SaveGame
             i /= 10;
         }
         // Difficult to disarm when we're confused
-        if (TimedConfusion.Value != 0 || TimedHallucinations.Value != 0)
+        if (ConfusedTimer.Value != 0 || HallucinationsTimer.Value != 0)
         {
             i /= 10;
         }
@@ -6583,7 +6582,7 @@ internal class SaveGame
         GridTile tile = Grid[newY][newX];
         Monster monster = Monsters[tile.MonsterIndex];
         // Check if we can pass through walls
-        if (TimedEtherealness.Value != 0 || Race.IsEthereal)
+        if (EtherealnessTimer.Value != 0 || Race.IsEthereal)
         {
             canPassWalls = true;
             // Permanent features can't be passed through even if we could otherwise
@@ -6597,7 +6596,7 @@ internal class SaveGame
         if (tile.MonsterIndex != 0 && (monster.IsVisible || GridPassable(newY, newX) || canPassWalls))
         {
             // Check if it's a friend, and if we are in a fit state to distinguish friend from foe
-            if (monster.SmFriendly && !(TimedConfusion.Value != 0 || TimedHallucinations.Value != 0 || !monster.IsVisible || TimedStun.Value != 0) &&
+            if (monster.SmFriendly && !(ConfusedTimer.Value != 0 || HallucinationsTimer.Value != 0 || !monster.IsVisible || StunTimer.Value != 0) &&
                 (GridPassable(newY, newX) || canPassWalls))
             {
                 // Wake up the monster, and track it
@@ -6729,7 +6728,7 @@ internal class SaveGame
                 if (tile.FeatureType is RubbleTile)
                 {
                     MsgPrint("There is rubble blocking your way.");
-                    if (!(TimedConfusion.Value != 0 || TimedStun.Value != 0 || TimedHallucinations.Value != 0))
+                    if (!(ConfusedTimer.Value != 0 || StunTimer.Value != 0 || HallucinationsTimer.Value != 0))
                     {
                         EnergyUse = 0;
                     }
@@ -6803,7 +6802,7 @@ internal class SaveGame
                 else
                 {
                     MsgPrint($"There is a {tile.FeatureType.Description} blocking your way.");
-                    if (!(TimedConfusion.Value != 0 || TimedStun.Value != 0 || TimedHallucinations.Value != 0))
+                    if (!(ConfusedTimer.Value != 0 || StunTimer.Value != 0 || HallucinationsTimer.Value != 0))
                     {
                         EnergyUse = 0;
                     }
@@ -6824,7 +6823,7 @@ internal class SaveGame
         // If we're leaving an area where we've detected traps at a run, then stop running
         if (Running != 0 && oldTrapsDetected && !newTrapsDetected)
         {
-            if (!(TimedConfusion.Value != 0 || TimedStun.Value != 0 || TimedHallucinations.Value != 0))
+            if (!(ConfusedTimer.Value != 0 || StunTimer.Value != 0 || HallucinationsTimer.Value != 0))
             {
                 EnergyUse = 0;
             }
@@ -6976,13 +6975,13 @@ internal class SaveGame
             HealthTrack(tile.MonsterIndex);
         }
         // if the monster is our friend and we're not confused, we can avoid hitting it
-        if (monster.SmFriendly && !(TimedStun.Value != 0 || TimedConfusion.Value != 0 || TimedHallucinations.Value != 0 || !monster.IsVisible))
+        if (monster.SmFriendly && !(StunTimer.Value != 0 || ConfusedTimer.Value != 0 || HallucinationsTimer.Value != 0 || !monster.IsVisible))
         {
             MsgPrint($"You stop to avoid hitting {monsterName}.");
             return;
         }
         // Can't attack if we're afraid
-        if (TimedFear.Value != 0)
+        if (FearTimer.Value != 0)
         {
             MsgPrint(monster.IsVisible ? $"You are too afraid to attack {monsterName}!" : "There is something scary in your way!");
             return;
@@ -7083,7 +7082,7 @@ internal class SaveGame
                         // We've chosen an attack, use it if it's better than the previous
                         // choice (unless we're stunned or confused in which case we're stuck
                         // with the weakest attack type
-                        if (martialArtsAttack.MinLevel > oldMartialArtsAttack.MinLevel && !(TimedStun.Value != 0 || TimedConfusion.Value != 0))
+                        if (martialArtsAttack.MinLevel > oldMartialArtsAttack.MinLevel && !(StunTimer.Value != 0 || ConfusedTimer.Value != 0))
                         {
                             oldMartialArtsAttack = martialArtsAttack;
                         }
@@ -8092,7 +8091,7 @@ internal class SaveGame
                 skill /= 10;
             }
             // Lockpicking is hard when you're confused
-            if (TimedConfusion.Value != 0 || TimedHallucinations.Value != 0)
+            if (ConfusedTimer.Value != 0 || HallucinationsTimer.Value != 0)
             {
                 skill /= 10;
             }
@@ -8322,7 +8321,7 @@ internal class SaveGame
                 auraDamage = DiceRoll(1 + (race.Level / 26), 1 + (race.Level / 17));
                 string auraDam = monster.IndefiniteVisibleName;
                 MsgPrint("You are suddenly very hot!");
-                if (TimedFireResistance.Value != 0)
+                if (FireResistanceTimer.Value != 0)
                 {
                     auraDamage = (auraDamage + 2) / 3;
                 }
@@ -8340,7 +8339,7 @@ internal class SaveGame
         {
             auraDamage = DiceRoll(1 + (race.Level / 26), 1 + (race.Level / 17));
             string auraDam = monster.IndefiniteVisibleName;
-            if (TimedLightningResistance.Value != 0)
+            if (LightningResistanceTimer.Value != 0)
             {
                 auraDamage = (auraDamage + 2) / 3;
             }
@@ -11691,7 +11690,7 @@ internal class SaveGame
             return false;
         }
         CommandDirection = dir;
-        if (TimedConfusion.Value != 0)
+        if (ConfusedTimer.Value != 0)
         {
             if (RandomLessThan(100) < 75)
             {
@@ -11754,7 +11753,7 @@ internal class SaveGame
             return;
         }
         CommandDirection = dir;
-        if (TimedConfusion.Value != 0)
+        if (ConfusedTimer.Value != 0)
         {
             dir = OrderedDirection[RandomLessThan(8)];
         }
@@ -11817,7 +11816,7 @@ internal class SaveGame
             return false;
         }
         CommandDirection = dir;
-        if (TimedConfusion.Value != 0)
+        if (ConfusedTimer.Value != 0)
         {
             dir = OrderedDirection[RandomLessThan(8)];
         }
@@ -12056,7 +12055,7 @@ internal class SaveGame
         {
             return false;
         }
-        if (TimedHallucinations.Value != 0)
+        if (HallucinationsTimer.Value != 0)
         {
             return false;
         }
@@ -12069,7 +12068,7 @@ internal class SaveGame
         {
             return true;
         }
-        if (TimedHallucinations.Value != 0)
+        if (HallucinationsTimer.Value != 0)
         {
             return false;
         }
@@ -12113,7 +12112,7 @@ internal class SaveGame
                 s2 = "on ";
             }
             string outVal;
-            if (TimedHallucinations.Value != 0)
+            if (HallucinationsTimer.Value != 0)
             {
                 const string name = "something strange";
                 outVal = $"{s1}{s2}{s3}{name} [{info}]";
@@ -13592,7 +13591,7 @@ internal class SaveGame
             return;
         }
         Disturb(true);
-        if (TimedInvulnerability.Value != 0 && damage < 9000)
+        if (InvulnerabilityTimer.Value != 0 && damage < 9000)
         {
             if (DieRoll(Constants.PenetrateInvulnerability) == 1)
             {
@@ -13603,7 +13602,7 @@ internal class SaveGame
                 return;
             }
         }
-        if (TimedEtherealness.Value != 0)
+        if (EtherealnessTimer.Value != 0)
         {
             damage /= 10;
             if (damage == 0 && DieRoll(10) == 1)
@@ -13636,7 +13635,7 @@ internal class SaveGame
                     MsgPrint("You die.");
                     MsgPrint(null);
                     DiedFrom = hitFrom;
-                    if (TimedHallucinations.Value != 0)
+                    if (HallucinationsTimer.Value != 0)
                     {
                         DiedFrom += "(?)";
                     }
@@ -14396,11 +14395,11 @@ internal class SaveGame
             {
                 ta = ma[y][x];
                 tc = mc[y][x];
-                if (TimedInvulnerability.Value != 0)
+                if (InvulnerabilityTimer.Value != 0)
                 {
                     ta = ColorEnum.White;
                 }
-                else if (TimedEtherealness.Value != 0)
+                else if (EtherealnessTimer.Value != 0)
                 {
                     ta = ColorEnum.Black;
                 }
@@ -15038,11 +15037,11 @@ internal class SaveGame
     {
         if (PanelContains(y, x))
         {
-            if (TimedInvulnerability.Value != 0)
+            if (InvulnerabilityTimer.Value != 0)
             {
                 a = ColorEnum.White;
             }
-            else if (TimedEtherealness.Value != 0)
+            else if (EtherealnessTimer.Value != 0)
             {
                 a = ColorEnum.Black;
             }
@@ -15074,11 +15073,11 @@ internal class SaveGame
         if (PanelContains(y, x))
         {
             MapInfo(y, x, out ColorEnum a, out char c);
-            if (TimedInvulnerability.Value != 0)
+            if (InvulnerabilityTimer.Value != 0)
             {
                 a = ColorEnum.White;
             }
-            else if (TimedEtherealness.Value != 0)
+            else if (EtherealnessTimer.Value != 0)
             {
                 a = ColorEnum.Black;
             }
@@ -15346,7 +15345,7 @@ internal class SaveGame
                 c = SingletonRepository.Tiles.Get(nameof(NothingTile)).Symbol.Character;
             }
         }
-        if (TimedHallucinations.Value != 0 && RandomLessThan(256) == 0 && (!cPtr.FeatureType.IsWall))
+        if (HallucinationsTimer.Value != 0 && RandomLessThan(256) == 0 && (!cPtr.FeatureType.IsWall))
         {
             ImageRandom(out ap, out cp);
         }
@@ -15361,7 +15360,7 @@ internal class SaveGame
             {
                 cp = oPtr.Factory.FlavorSymbol.Character;
                 ap = oPtr.Factory.FlavorColor;
-                if (TimedHallucinations.Value != 0)
+                if (HallucinationsTimer.Value != 0)
                 {
                     ImageObject(out ap, out cp);
                 }
@@ -15442,7 +15441,7 @@ internal class SaveGame
                         ap = a;
                     }
                 }
-                if (TimedHallucinations.Value != 0)
+                if (HallucinationsTimer.Value != 0)
                 {
                     ImageMonster(out ap, out cp);
                 }

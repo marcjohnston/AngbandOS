@@ -65,7 +65,7 @@ internal abstract class EquipmentInventorySlot : BaseInventorySlot
                     processWorldEventArgs.DisableRegeneration = true;
                     oName = oPtr.Description(true, 0);
                     string ouch = $"wielding {oName}";
-                    if (SaveGame.TimedInvulnerability.Value == 0)
+                    if (SaveGame.InvulnerabilityTimer.Value == 0)
                     {
                         SaveGame.TakeHit(1, ouch);
                     }

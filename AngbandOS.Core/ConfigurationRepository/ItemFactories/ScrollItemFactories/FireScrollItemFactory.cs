@@ -26,7 +26,7 @@ internal class FireScrollItemFactory : ScrollItemFactory
     public override void Read(ReadScrollEvent eventArgs)
     {
         SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(FireProjectile)), 0, 150, 4);
-        if (!(SaveGame.TimedFireResistance.Value != 0 || SaveGame.HasFireResistance || SaveGame.HasFireImmunity))
+        if (!(SaveGame.FireResistanceTimer.Value != 0 || SaveGame.HasFireResistance || SaveGame.HasFireImmunity))
         {
             SaveGame.TakeHit(50 + SaveGame.DieRoll(50), "a Scroll of Fire");
         }

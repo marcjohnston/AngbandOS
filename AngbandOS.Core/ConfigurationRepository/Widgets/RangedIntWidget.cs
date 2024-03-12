@@ -30,9 +30,9 @@ internal abstract class RangedIntWidget : IntWidget
     private string _text;
     private ColorEnum _color;
 
-    public override string Text => _text;
+    public sealed override string Text => _text;
 
-    public override ColorEnum Color => _color;
+    public sealed override ColorEnum Color => _color;
 
     protected override bool ValueChanged
     {

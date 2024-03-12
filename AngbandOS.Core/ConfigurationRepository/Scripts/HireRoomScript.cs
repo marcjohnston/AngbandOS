@@ -19,7 +19,7 @@ internal class HireRoomScript : Script, IStoreScript
     public void ExecuteStoreScript(StoreCommandEvent storeCommandEvent)
     {
         int price;
-        if (SaveGame.PoisonTimer.Value > 0 || SaveGame.TimedBleeding.Value > 0)
+        if (SaveGame.PoisonTimer.Value > 0 || SaveGame.BleedingTimer.Value > 0)
         {
             SaveGame.MsgPrint("You need a healer, not a room!");
             SaveGame.MsgPrint("I'm sorry, but  I don't want anyone dying in here.");

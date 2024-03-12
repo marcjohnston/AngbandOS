@@ -14,7 +14,6 @@ internal class PoisonedIntWidget : RangedIntWidget
     public override int X => 33;
     public override int Y => 44;
     public override int Width => 8;
-    public override ColorEnum Color => ColorEnum.Orange;
     public override string IntChangeTrackableName => nameof(PoisonedTimer);
     protected override string DefaultText => "Poisoned";
     protected override ColorEnum DefaultColor => ColorEnum.Orange;

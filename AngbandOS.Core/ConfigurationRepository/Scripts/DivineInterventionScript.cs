@@ -26,16 +26,16 @@ internal class DivineInterventionScript : Script, IScript
         SaveGame.TurnMonsters(SaveGame.ExperienceLevel * 4);
         SaveGame.StasisMonsters(SaveGame.ExperienceLevel * 4);
         SaveGame.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel, SaveGame.SingletonRepository.MonsterFilters.Get(nameof(CthuloidMonsterFilter)), true);
-        SaveGame.TimedSuperheroism.AddTimer(SaveGame.DieRoll(25) + 25);
+        SaveGame.SuperheroismTimer.AddTimer(SaveGame.DieRoll(25) + 25);
         SaveGame.RestoreHealth(300);
-        if (SaveGame.TimedHaste.Value == 0)
+        if (SaveGame.HasteTimer.Value == 0)
         {
-            SaveGame.TimedHaste.SetTimer(SaveGame.DieRoll(20 + SaveGame.ExperienceLevel) + SaveGame.ExperienceLevel);
+            SaveGame.HasteTimer.SetTimer(SaveGame.DieRoll(20 + SaveGame.ExperienceLevel) + SaveGame.ExperienceLevel);
         }
         else
         {
-            SaveGame.TimedHaste.AddTimer(SaveGame.DieRoll(5));
+            SaveGame.HasteTimer.AddTimer(SaveGame.DieRoll(5));
         }
-        SaveGame.TimedFear.ResetTimer();
+        SaveGame.FearTimer.ResetTimer();
     }
 }

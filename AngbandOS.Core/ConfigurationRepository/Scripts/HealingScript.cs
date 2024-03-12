@@ -19,7 +19,7 @@ internal class HealingScript : Script, IScript
     public void ExecuteScript()
     {
         SaveGame.RestoreHealth(300);
-        SaveGame.TimedStun.ResetTimer();
-        SaveGame.TimedBleeding.ResetTimer();
+        SaveGame.StunTimer.ResetTimer();
+        SaveGame.BleedingTimer.ResetTimer();
     }
 }

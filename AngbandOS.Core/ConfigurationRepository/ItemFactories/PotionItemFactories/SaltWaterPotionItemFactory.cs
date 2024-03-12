@@ -27,7 +27,7 @@ internal class SaltWaterPotionItemFactory : PotionItemFactory
         SaveGame.MsgPrint("The saltiness makes you vomit!");
         SaveGame.SetFood(Constants.PyFoodStarve - 1);
         SaveGame.PoisonTimer.ResetTimer();
-        SaveGame.TimedParalysis.AddTimer(4);
+        SaveGame.ParalysisTimer.AddTimer(4);
         return true;
     }
 

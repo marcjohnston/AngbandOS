@@ -20,8 +20,8 @@ internal class Berserk50p1d50Every100p1d100Activation : Activation
 
     protected override bool OnActivate(Item item)
     {
-        SaveGame.TimedSuperheroism.AddTimer(SaveGame.DieRoll(50) + 50);
-        SaveGame.TimedBlessing.AddTimer(SaveGame.DieRoll(50) + 50);
+        SaveGame.SuperheroismTimer.AddTimer(SaveGame.DieRoll(50) + 50);
+        SaveGame.BlessingTimer.AddTimer(SaveGame.DieRoll(50) + 50);
         return true;
     }
 

@@ -211,7 +211,7 @@ internal class Monster : IItemContainer
         }
         string desc;
         string name = Race.Name;
-        if (SaveGame.TimedHallucinations.Value != 0)
+        if (SaveGame.HallucinationsTimer.Value != 0)
         {
             MonsterRace halluRace;
             do
@@ -356,7 +356,7 @@ internal class Monster : IItemContainer
         }
         else
         {
-            if (Race.Unique && SaveGame.TimedHallucinations.Value == 0)
+            if (Race.Unique && SaveGame.HallucinationsTimer.Value == 0)
             {
                 desc = name;
             }
@@ -421,13 +421,13 @@ internal class Monster : IItemContainer
             {
                 return;
             }
-            if (SaveGame.TimedHallucinations.Value != 0)
+            if (SaveGame.HallucinationsTimer.Value != 0)
             {
                 this.SaveGame.MsgPrint($"You behold the {this.SaveGame.SingletonRepository.FunnyDescriptions.ToWeightedRandom().ChooseOrDefault()} visage of {mName}!");
                 if (SaveGame.DieRoll(3) == 1)
                 {
                     this.SaveGame.MsgPrint(this.SaveGame.SingletonRepository.FunnyComments.ToWeightedRandom().ChooseOrDefault());
-                    SaveGame.TimedHallucinations.AddTimer(SaveGame.DieRoll(Race.Level));
+                    SaveGame.HallucinationsTimer.AddTimer(SaveGame.DieRoll(Race.Level));
                 }
                 return;
             }
@@ -444,11 +444,11 @@ internal class Monster : IItemContainer
         {
             if (!SaveGame.HasConfusionResistance)
             {
-                SaveGame.TimedConfusion.AddTimer(SaveGame.RandomLessThan(4) + 4);
+                SaveGame.ConfusedTimer.AddTimer(SaveGame.RandomLessThan(4) + 4);
             }
             if (!SaveGame.HasChaosResistance && SaveGame.DieRoll(3) == 1)
             {
-                SaveGame.TimedHallucinations.AddTimer(SaveGame.RandomLessThan(250) + 150);
+                SaveGame.HallucinationsTimer.AddTimer(SaveGame.RandomLessThan(250) + 150);
             }
             return;
         }
@@ -462,11 +462,11 @@ internal class Monster : IItemContainer
         {
             if (!SaveGame.HasConfusionResistance)
             {
-                SaveGame.TimedConfusion.AddTimer(SaveGame.RandomLessThan(4) + 4);
+                SaveGame.ConfusedTimer.AddTimer(SaveGame.RandomLessThan(4) + 4);
             }
             if (!SaveGame.HasFreeAction)
             {
-                SaveGame.TimedParalysis.AddTimer(SaveGame.RandomLessThan(4) + 4);
+                SaveGame.ParalysisTimer.AddTimer(SaveGame.RandomLessThan(4) + 4);
             }
             while (SaveGame.RandomLessThan(100) > SaveGame.SkillSavingThrow)
             {
@@ -478,7 +478,7 @@ internal class Monster : IItemContainer
             }
             if (!SaveGame.HasChaosResistance)
             {
-                SaveGame.TimedHallucinations.AddTimer(SaveGame.RandomLessThan(250) + 150);
+                SaveGame.HallucinationsTimer.AddTimer(SaveGame.RandomLessThan(250) + 150);
             }
             return;
         }
@@ -2732,7 +2732,7 @@ internal class Monster : IItemContainer
             {
                 SaveGame.Disturb(true);
                 // Protection From Evil might repel the attack
-                if (SaveGame.TimedProtectionFromEvil.Value > 0 && Race.Evil && SaveGame.ExperienceLevel >= monsterLevel && this.SaveGame.RandomLessThan(100) + SaveGame.ExperienceLevel > 50)
+                if (SaveGame.ProtectionFromEvilTimer.Value > 0 && Race.Evil && SaveGame.ExperienceLevel >= monsterLevel && this.SaveGame.RandomLessThan(100) + SaveGame.ExperienceLevel > 50)
                 {
                     if (IsVisible)
                     {
@@ -2819,7 +2819,7 @@ internal class Monster : IItemContainer
                     }
                     if (k != 0)
                     {
-                        SaveGame.TimedBleeding.AddTimer(k);
+                        SaveGame.BleedingTimer.AddTimer(k);
                     }
                 }
                 if (doStun)
@@ -2863,7 +2863,7 @@ internal class Monster : IItemContainer
                     }
                     if (k != 0)
                     {
-                        SaveGame.TimedStun.AddTimer(k);
+                        SaveGame.StunTimer.AddTimer(k);
                     }
                 }
                 // If the monster touched us then it may take damage from our defensive abilities

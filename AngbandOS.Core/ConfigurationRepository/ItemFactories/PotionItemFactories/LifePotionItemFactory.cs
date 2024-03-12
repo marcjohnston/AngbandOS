@@ -32,10 +32,10 @@ internal class LifePotionItemFactory : PotionItemFactory
         SaveGame.RestoreHealth(5000);
         SaveGame.PoisonTimer.ResetTimer();
         SaveGame.BlindnessTimer.ResetTimer();
-        SaveGame.TimedConfusion.ResetTimer();
-        SaveGame.TimedHallucinations.ResetTimer();
-        SaveGame.TimedStun.ResetTimer();
-        SaveGame.TimedBleeding.ResetTimer();
+        SaveGame.ConfusedTimer.ResetTimer();
+        SaveGame.HallucinationsTimer.ResetTimer();
+        SaveGame.StunTimer.ResetTimer();
+        SaveGame.BleedingTimer.ResetTimer();
         SaveGame.TryRestoringAbilityScore(Ability.Strength);
         SaveGame.TryRestoringAbilityScore(Ability.Constitution);
         SaveGame.TryRestoringAbilityScore(Ability.Dexterity);

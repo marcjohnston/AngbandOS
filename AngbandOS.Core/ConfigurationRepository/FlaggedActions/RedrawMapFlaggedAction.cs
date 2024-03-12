@@ -23,11 +23,11 @@ internal class RedrawMapFlaggedAction : FlaggedAction
             for (int x = SaveGame.PanelColMin; x <= SaveGame.PanelColMax; x++)
             {
                 SaveGame.MapInfo(y, x, out ColorEnum a, out char c);
-                if (SaveGame.TimedInvulnerability.Value != 0)
+                if (SaveGame.InvulnerabilityTimer.Value != 0)
                 {
                     a = ColorEnum.White;
                 }
-                else if (SaveGame.TimedEtherealness.Value != 0)
+                else if (SaveGame.EtherealnessTimer.Value != 0)
                 {
                     a = ColorEnum.Black;
                 }

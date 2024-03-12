@@ -19,6 +19,6 @@ internal class CureLightWounds2d10Script : Script, IScript
     public void ExecuteScript()
     {
         SaveGame.RestoreHealth(SaveGame.DiceRoll(2, 10));
-        SaveGame.TimedBleeding.AddTimer(-10);
+        SaveGame.BleedingTimer.AddTimer(-10);
     }
 }

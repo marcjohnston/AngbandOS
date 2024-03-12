@@ -30,11 +30,11 @@ internal class HealingRodItemFactory : RodItemFactory
         {
             zapRodEvent.Identified = true;
         }
-        if (SaveGame.TimedStun.ResetTimer())
+        if (SaveGame.StunTimer.ResetTimer())
         {
             zapRodEvent.Identified = true;
         }
-        if (SaveGame.TimedBleeding.ResetTimer())
+        if (SaveGame.BleedingTimer.ResetTimer())
         {
             zapRodEvent.Identified = true;
         }

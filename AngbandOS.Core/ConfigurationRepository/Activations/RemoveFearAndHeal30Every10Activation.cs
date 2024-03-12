@@ -20,7 +20,7 @@ internal class RemoveFearAndHeal30Every10Activation : Activation
 
     protected override bool OnActivate(Item item)
     {
-        SaveGame.TimedFear.ResetTimer();
+        SaveGame.FearTimer.ResetTimer();
         SaveGame.RestoreHealth(30);
         return true;
     }

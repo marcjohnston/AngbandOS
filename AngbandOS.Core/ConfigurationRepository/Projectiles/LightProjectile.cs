@@ -98,9 +98,9 @@ internal class LightProjectile : Projectile
             dam *= 2;
         }
         SaveGame.TakeHit(dam, killer);
-        if (SaveGame.TimedEtherealness.Value != 0)
+        if (SaveGame.EtherealnessTimer.Value != 0)
         {
-            SaveGame.TimedEtherealness.SetValue();
+            SaveGame.EtherealnessTimer.SetValue();
             SaveGame.MsgPrint("The light forces you out of your incorporeal shadow form.");
             SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawMapFlaggedAction)).Set();
             SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateMonstersFlaggedAction)).Set();

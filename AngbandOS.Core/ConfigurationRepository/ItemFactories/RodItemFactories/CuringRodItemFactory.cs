@@ -34,19 +34,19 @@ internal class CuringRodItemFactory : RodItemFactory
         {
             zapRodEvent.Identified = true;
         }
-        if (SaveGame.TimedConfusion.ResetTimer())
+        if (SaveGame.ConfusedTimer.ResetTimer())
         {
             zapRodEvent.Identified = true;
         }
-        if (SaveGame.TimedStun.ResetTimer())
+        if (SaveGame.StunTimer.ResetTimer())
         {
             zapRodEvent.Identified = true;
         }
-        if (SaveGame.TimedBleeding.ResetTimer())
+        if (SaveGame.BleedingTimer.ResetTimer())
         {
             zapRodEvent.Identified = true;
         }
-        if (SaveGame.TimedHallucinations.ResetTimer())
+        if (SaveGame.HallucinationsTimer.ResetTimer())
         {
             zapRodEvent.Identified = true;
         }

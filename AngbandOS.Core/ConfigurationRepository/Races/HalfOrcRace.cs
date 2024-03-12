@@ -71,7 +71,7 @@ internal class HalfOrcRace : Race
         if (SaveGame.CheckIfRacialPowerWorks(3, 5, Ability.Wisdom, SaveGame.BaseCharacterClass.ID == CharacterClass.Warrior ? 5 : 10))
         {
             SaveGame.MsgPrint("You play tough.");
-            SaveGame.TimedFear.ResetTimer();
+            SaveGame.FearTimer.ResetTimer();
         }
     }
 }

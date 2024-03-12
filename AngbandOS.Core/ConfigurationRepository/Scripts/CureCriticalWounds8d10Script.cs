@@ -19,7 +19,7 @@ internal class CureCriticalWounds8d10Script : Script, IScript
     public void ExecuteScript()
     {
         SaveGame.RestoreHealth(SaveGame.DiceRoll(8, 10));
-        SaveGame.TimedStun.ResetTimer();
-        SaveGame.TimedBleeding.ResetTimer();
+        SaveGame.StunTimer.ResetTimer();
+        SaveGame.BleedingTimer.ResetTimer();
     }
 }

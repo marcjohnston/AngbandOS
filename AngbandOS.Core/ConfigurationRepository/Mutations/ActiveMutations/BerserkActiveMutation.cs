@@ -17,9 +17,9 @@ internal class BerserkActiveMutation : Mutation
         {
             return;
         }
-        SaveGame.TimedSuperheroism.AddTimer(base.SaveGame.DieRoll(25) + 25);
+        SaveGame.SuperheroismTimer.AddTimer(base.SaveGame.DieRoll(25) + 25);
         SaveGame.RestoreHealth(30);
-        SaveGame.TimedFear.ResetTimer();
+        SaveGame.FearTimer.ResetTimer();
     }
 
     public override string ActivationSummary(int lvl)

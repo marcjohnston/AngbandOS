@@ -39,7 +39,7 @@ internal class SlowMonsterSpell : MonsterSpell
         }
         else
         {
-            saveGame.TimedSlow.AddTimer(SaveGame.RandomLessThan(4) + 4);
+            saveGame.SlowTimer.AddTimer(SaveGame.RandomLessThan(4) + 4);
         }
         saveGame.UpdateSmartLearn(monster, SaveGame.SingletonRepository.SpellResistantDetections.Get(nameof(FreeSpellResistantDetection)));
     }

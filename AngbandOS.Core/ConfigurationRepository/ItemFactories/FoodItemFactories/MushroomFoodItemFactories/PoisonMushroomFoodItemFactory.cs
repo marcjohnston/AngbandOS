@@ -27,7 +27,7 @@ internal class PoisonMushroomFoodItemFactory : MushroomFoodItemFactory
     public override bool Eat()
     {
         SaveGame.PlaySound(SoundEffectEnum.Eat);
-        if (!(SaveGame.HasPoisonResistance || SaveGame.TimedPoisonResistance.Value != 0))
+        if (!(SaveGame.HasPoisonResistance || SaveGame.PoisonResistanceTimer.Value != 0))
         {
             // Hagarg Ryonis may protect us from poison
             if (SaveGame.DieRoll(10) <= SaveGame.SingletonRepository.Gods.Get(nameof(HagargRyonisGod)).AdjustedFavour)

@@ -54,7 +54,7 @@ internal abstract class CauseWoundsMonsterSpell : MonsterSpell
 
             if (TimedBleeding > 0)
             {
-                saveGame.TimedBleeding.AddTimer(TimedBleeding);
+                saveGame.BleedingTimer.AddTimer(TimedBleeding);
             }
         }
     }

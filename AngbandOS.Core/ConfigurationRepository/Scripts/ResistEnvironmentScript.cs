@@ -18,8 +18,8 @@ internal class ResistEnvironmentScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        SaveGame.TimedColdResistance.AddTimer(SaveGame.DieRoll(20) + 20);
-        SaveGame.TimedFireResistance.AddTimer(SaveGame.DieRoll(20) + 20);
-        SaveGame.TimedLightningResistance.AddTimer(SaveGame.DieRoll(20) + 20);
+        SaveGame.ColdResistanceTimer.AddTimer(SaveGame.DieRoll(20) + 20);
+        SaveGame.FireResistanceTimer.AddTimer(SaveGame.DieRoll(20) + 20);
+        SaveGame.LightningResistanceTimer.AddTimer(SaveGame.DieRoll(20) + 20);
     }
 }

@@ -28,7 +28,7 @@ internal class TerrifyAttackEffect : AttackEffect
         }
         else
         {
-            if (SaveGame.TimedFear.AddTimer(3 + SaveGame.DieRoll(monsterLevel)))
+            if (SaveGame.FearTimer.AddTimer(3 + SaveGame.DieRoll(monsterLevel)))
             {
                 obvious = true;
             }

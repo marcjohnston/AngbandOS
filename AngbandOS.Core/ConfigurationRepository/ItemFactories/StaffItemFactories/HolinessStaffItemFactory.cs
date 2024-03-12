@@ -34,7 +34,7 @@ internal class HolinessStaffItemFactory : StaffItemFactory
             eventArgs.Identified = true;
         }
         int k = 3 * SaveGame.ExperienceLevel;
-        if (SaveGame.TimedProtectionFromEvil.AddTimer(SaveGame.DieRoll(25) + k))
+        if (SaveGame.ProtectionFromEvilTimer.AddTimer(SaveGame.DieRoll(25) + k))
         {
             eventArgs.Identified = true;
         }
@@ -42,7 +42,7 @@ internal class HolinessStaffItemFactory : StaffItemFactory
         {
             eventArgs.Identified = true;
         }
-        if (SaveGame.TimedFear.ResetTimer())
+        if (SaveGame.FearTimer.ResetTimer())
         {
             eventArgs.Identified = true;
         }
@@ -50,11 +50,11 @@ internal class HolinessStaffItemFactory : StaffItemFactory
         {
             eventArgs.Identified = true;
         }
-        if (SaveGame.TimedStun.ResetTimer())
+        if (SaveGame.StunTimer.ResetTimer())
         {
             eventArgs.Identified = true;
         }
-        if (SaveGame.TimedBleeding.ResetTimer())
+        if (SaveGame.BleedingTimer.ResetTimer())
         {
             eventArgs.Identified = true;
         }

@@ -40,13 +40,13 @@ internal class BrainSmashMonsterSpell : MonsterSpell
             }
             if (!saveGame.HasConfusionResistance)
             {
-                saveGame.TimedConfusion.AddTimer(SaveGame.RandomLessThan(4) + 4);
+                saveGame.ConfusedTimer.AddTimer(SaveGame.RandomLessThan(4) + 4);
             }
             if (!saveGame.HasFreeAction)
             {
-                saveGame.TimedParalysis.AddTimer(SaveGame.RandomLessThan(4) + 4);
+                saveGame.ParalysisTimer.AddTimer(SaveGame.RandomLessThan(4) + 4);
             }
-            saveGame.TimedSlow.AddTimer(SaveGame.RandomLessThan(4) + 4);
+            saveGame.SlowTimer.AddTimer(SaveGame.RandomLessThan(4) + 4);
             while (SaveGame.RandomLessThan(100) > saveGame.SkillSavingThrow)
             {
                 saveGame.TryDecreasingAbilityScore(Ability.Intelligence);
@@ -57,7 +57,7 @@ internal class BrainSmashMonsterSpell : MonsterSpell
             }
             if (!saveGame.HasChaosResistance)
             {
-                saveGame.TimedHallucinations.AddTimer(SaveGame.RandomLessThan(250) + 150);
+                saveGame.HallucinationsTimer.AddTimer(SaveGame.RandomLessThan(250) + 150);
             }
         }
     }

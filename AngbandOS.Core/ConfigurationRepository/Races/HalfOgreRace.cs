@@ -73,8 +73,8 @@ internal class HalfOgreRace : Race
         if (SaveGame.CheckIfRacialPowerWorks(8, 10, Ability.Wisdom, SaveGame.BaseCharacterClass.ID == CharacterClass.Warrior ? 6 : 12))
         {
             SaveGame.MsgPrint("Raaagh!");
-            SaveGame.TimedFear.ResetTimer();
-            SaveGame.TimedSuperheroism.AddTimer(10 + SaveGame.DieRoll(SaveGame.ExperienceLevel));
+            SaveGame.FearTimer.ResetTimer();
+            SaveGame.SuperheroismTimer.AddTimer(10 + SaveGame.DieRoll(SaveGame.ExperienceLevel));
             SaveGame.RestoreHealth(30);
         }
     }

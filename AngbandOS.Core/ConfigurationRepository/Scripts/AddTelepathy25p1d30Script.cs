@@ -18,6 +18,6 @@ internal class AddTelepathy25p1d30Script : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        SaveGame.TimedTelepathy.AddTimer(SaveGame.DieRoll(30) + 25);
+        SaveGame.TelepathyTimer.AddTimer(SaveGame.DieRoll(30) + 25);
     }
 }

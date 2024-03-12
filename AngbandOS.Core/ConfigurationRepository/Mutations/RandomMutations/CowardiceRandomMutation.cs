@@ -23,13 +23,13 @@ internal class CowardiceRandomMutation : Mutation
         {
             return;
         }
-        if (SaveGame.HasFearResistance || SaveGame.TimedHeroism.Value != 0 || SaveGame.TimedSuperheroism.Value != 0)
+        if (SaveGame.HasFearResistance || SaveGame.HeroismTimer.Value != 0 || SaveGame.SuperheroismTimer.Value != 0)
         {
             return;
         }
         SaveGame.Disturb(false);
         SaveGame.MsgPrint("It's so dark... so scary!");
         base.SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawAfraidFlaggedAction)).Set();
-        SaveGame.TimedFear.AddTimer(13 + base.SaveGame.DieRoll(26));
+        SaveGame.FearTimer.AddTimer(13 + base.SaveGame.DieRoll(26));
     }
 }

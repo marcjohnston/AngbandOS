@@ -18,26 +18,26 @@ internal class CharacterArmorTalent : Talent
 
     public override void Use()
     {
-        SaveGame.TimedStoneskin.AddTimer(SaveGame.ExperienceLevel);
+        SaveGame.StoneskinTimer.AddTimer(SaveGame.ExperienceLevel);
         if (SaveGame.ExperienceLevel > 14)
         {
-            SaveGame.TimedAcidResistance.AddTimer(SaveGame.ExperienceLevel);
+            SaveGame.AcidResistanceTimer.AddTimer(SaveGame.ExperienceLevel);
         }
         if (SaveGame.ExperienceLevel > 19)
         {
-            SaveGame.TimedFireResistance.AddTimer(SaveGame.ExperienceLevel);
+            SaveGame.FireResistanceTimer.AddTimer(SaveGame.ExperienceLevel);
         }
         if (SaveGame.ExperienceLevel > 24)
         {
-            SaveGame.TimedColdResistance.AddTimer(SaveGame.ExperienceLevel);
+            SaveGame.ColdResistanceTimer.AddTimer(SaveGame.ExperienceLevel);
         }
         if (SaveGame.ExperienceLevel > 29)
         {
-            SaveGame.TimedLightningResistance.AddTimer(SaveGame.ExperienceLevel);
+            SaveGame.LightningResistanceTimer.AddTimer(SaveGame.ExperienceLevel);
         }
         if (SaveGame.ExperienceLevel > 34)
         {
-            SaveGame.TimedPoisonResistance.AddTimer(SaveGame.ExperienceLevel);
+            SaveGame.PoisonResistanceTimer.AddTimer(SaveGame.ExperienceLevel);
         }
     }
 

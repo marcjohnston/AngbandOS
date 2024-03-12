@@ -23,7 +23,7 @@ internal class InvulnRandomMutation : Mutation
             SaveGame.Disturb(false);
             SaveGame.MsgPrint("You feel invincible!");
             SaveGame.MsgPrint(null);
-            SaveGame.TimedInvulnerability.AddTimer(base.SaveGame.DieRoll(8) + 8);
+            SaveGame.InvulnerabilityTimer.AddTimer(base.SaveGame.DieRoll(8) + 8);
         }
     }
 }

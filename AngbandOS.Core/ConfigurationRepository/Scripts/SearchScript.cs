@@ -42,7 +42,7 @@ internal class SearchScript : Script, IScript, IRepeatableScript
             chance /= 10;
         }
         // If we're confused it's hard to search
-        if (SaveGame.TimedConfusion.Value != 0 || SaveGame.TimedHallucinations.Value != 0)
+        if (SaveGame.ConfusedTimer.Value != 0 || SaveGame.HallucinationsTimer.Value != 0)
         {
             chance /= 10;
         }

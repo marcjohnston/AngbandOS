@@ -32,14 +32,14 @@ internal class ReportMagicsScript : Script, IScript
             info2[i] = ReportMagicsAux(SaveGame.BlindnessTimer.Value);
             info[i++] = "You cannot see";
         }
-        if (SaveGame.TimedConfusion.Value != 0)
+        if (SaveGame.ConfusedTimer.Value != 0)
         {
-            info2[i] = ReportMagicsAux(SaveGame.TimedConfusion.Value);
+            info2[i] = ReportMagicsAux(SaveGame.ConfusedTimer.Value);
             info[i++] = "You are confused";
         }
-        if (SaveGame.TimedFear.Value != 0)
+        if (SaveGame.FearTimer.Value != 0)
         {
-            info2[i] = ReportMagicsAux(SaveGame.TimedFear.Value);
+            info2[i] = ReportMagicsAux(SaveGame.FearTimer.Value);
             info[i++] = "You are terrified";
         }
         if (SaveGame.PoisonTimer.Value != 0)
@@ -47,44 +47,44 @@ internal class ReportMagicsScript : Script, IScript
             info2[i] = ReportMagicsAux(SaveGame.PoisonTimer.Value);
             info[i++] = "You are poisoned";
         }
-        if (SaveGame.TimedHallucinations.Value != 0)
+        if (SaveGame.HallucinationsTimer.Value != 0)
         {
-            info2[i] = ReportMagicsAux(SaveGame.TimedHallucinations.Value);
+            info2[i] = ReportMagicsAux(SaveGame.HallucinationsTimer.Value);
             info[i++] = "You are hallucinating";
         }
-        if (SaveGame.TimedBlessing.Value != 0)
+        if (SaveGame.BlessingTimer.Value != 0)
         {
-            info2[i] = ReportMagicsAux(SaveGame.TimedBlessing.Value);
+            info2[i] = ReportMagicsAux(SaveGame.BlessingTimer.Value);
             info[i++] = "You feel rightous";
         }
-        if (SaveGame.TimedHeroism.Value != 0)
+        if (SaveGame.HeroismTimer.Value != 0)
         {
-            info2[i] = ReportMagicsAux(SaveGame.TimedHeroism.Value);
+            info2[i] = ReportMagicsAux(SaveGame.HeroismTimer.Value);
             info[i++] = "You feel heroic";
         }
-        if (SaveGame.TimedSuperheroism.Value != 0)
+        if (SaveGame.SuperheroismTimer.Value != 0)
         {
-            info2[i] = ReportMagicsAux(SaveGame.TimedSuperheroism.Value);
+            info2[i] = ReportMagicsAux(SaveGame.SuperheroismTimer.Value);
             info[i++] = "You are in a battle rage";
         }
-        if (SaveGame.TimedProtectionFromEvil.Value != 0)
+        if (SaveGame.ProtectionFromEvilTimer.Value != 0)
         {
-            info2[i] = ReportMagicsAux(SaveGame.TimedProtectionFromEvil.Value);
+            info2[i] = ReportMagicsAux(SaveGame.ProtectionFromEvilTimer.Value);
             info[i++] = "You are protected from evil";
         }
-        if (SaveGame.TimedStoneskin.Value != 0)
+        if (SaveGame.StoneskinTimer.Value != 0)
         {
-            info2[i] = ReportMagicsAux(SaveGame.TimedStoneskin.Value);
+            info2[i] = ReportMagicsAux(SaveGame.StoneskinTimer.Value);
             info[i++] = "You are protected by a mystic shield";
         }
-        if (SaveGame.TimedInvulnerability.Value != 0)
+        if (SaveGame.InvulnerabilityTimer.Value != 0)
         {
-            info2[i] = ReportMagicsAux(SaveGame.TimedInvulnerability.Value);
+            info2[i] = ReportMagicsAux(SaveGame.InvulnerabilityTimer.Value);
             info[i++] = "You are invulnerable";
         }
-        if (SaveGame.TimedEtherealness.Value != 0)
+        if (SaveGame.EtherealnessTimer.Value != 0)
         {
-            info2[i] = ReportMagicsAux(SaveGame.TimedEtherealness.Value);
+            info2[i] = ReportMagicsAux(SaveGame.EtherealnessTimer.Value);
             info[i++] = "You are incorporeal";
         }
         if (SaveGame.HasConfusingTouch)
@@ -97,29 +97,29 @@ internal class ReportMagicsScript : Script, IScript
             info2[i] = ReportMagicsAux(SaveGame.WordOfRecallDelay);
             info[i++] = "You waiting to be recalled";
         }
-        if (SaveGame.TimedAcidResistance.Value != 0)
+        if (SaveGame.AcidResistanceTimer.Value != 0)
         {
-            info2[i] = ReportMagicsAux(SaveGame.TimedAcidResistance.Value);
+            info2[i] = ReportMagicsAux(SaveGame.AcidResistanceTimer.Value);
             info[i++] = "You are resistant to acid";
         }
-        if (SaveGame.TimedLightningResistance.Value != 0)
+        if (SaveGame.LightningResistanceTimer.Value != 0)
         {
-            info2[i] = ReportMagicsAux(SaveGame.TimedLightningResistance.Value);
+            info2[i] = ReportMagicsAux(SaveGame.LightningResistanceTimer.Value);
             info[i++] = "You are resistant to lightning";
         }
-        if (SaveGame.TimedFireResistance.Value != 0)
+        if (SaveGame.FireResistanceTimer.Value != 0)
         {
-            info2[i] = ReportMagicsAux(SaveGame.TimedFireResistance.Value);
+            info2[i] = ReportMagicsAux(SaveGame.FireResistanceTimer.Value);
             info[i++] = "You are resistant to fire";
         }
-        if (SaveGame.TimedColdResistance.Value != 0)
+        if (SaveGame.ColdResistanceTimer.Value != 0)
         {
-            info2[i] = ReportMagicsAux(SaveGame.TimedColdResistance.Value);
+            info2[i] = ReportMagicsAux(SaveGame.ColdResistanceTimer.Value);
             info[i++] = "You are resistant to cold";
         }
-        if (SaveGame.TimedPoisonResistance.Value != 0)
+        if (SaveGame.PoisonResistanceTimer.Value != 0)
         {
-            info2[i] = ReportMagicsAux(SaveGame.TimedPoisonResistance.Value);
+            info2[i] = ReportMagicsAux(SaveGame.PoisonResistanceTimer.Value);
             info[i++] = "You are resistant to poison";
         }
         ScreenBuffer savedScreen = SaveGame.Screen.Clone();

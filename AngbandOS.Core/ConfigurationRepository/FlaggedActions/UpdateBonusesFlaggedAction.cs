@@ -467,7 +467,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                     }
                     if (oPtr.Characteristics.Wraith)
                     {
-                        SaveGame.TimedEtherealness.SetValue(Math.Max(SaveGame.TimedEtherealness.Value, 20));
+                        SaveGame.EtherealnessTimer.SetValue(Math.Max(SaveGame.EtherealnessTimer.Value, 20));
                     }
                     if (oPtr.Characteristics.ImFire)
                     {
@@ -702,60 +702,60 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                 }
             }
         }
-        if (SaveGame.TimedStun.Value > 50)
+        if (SaveGame.StunTimer.Value > 50)
         {
             SaveGame.AttackBonus -= 20;
             SaveGame.DisplayedAttackBonus -= 20;
             SaveGame.DamageBonus -= 20;
             SaveGame.DisplayedDamageBonus -= 20;
         }
-        else if (SaveGame.TimedStun.Value != 0)
+        else if (SaveGame.StunTimer.Value != 0)
         {
             SaveGame.AttackBonus -= 5;
             SaveGame.DisplayedAttackBonus -= 5;
             SaveGame.DamageBonus -= 5;
             SaveGame.DisplayedDamageBonus -= 5;
         }
-        if (SaveGame.TimedInvulnerability.Value != 0)
+        if (SaveGame.InvulnerabilityTimer.Value != 0)
         {
             SaveGame.ArmorClassBonus += 100;
             SaveGame.DisplayedArmorClassBonus.Value += 100;
         }
-        if (SaveGame.TimedEtherealness.Value != 0)
+        if (SaveGame.EtherealnessTimer.Value != 0)
         {
             SaveGame.ArmorClassBonus += 100;
             SaveGame.DisplayedArmorClassBonus.Value += 100;
             SaveGame.HasReflection = true;
         }
-        if (SaveGame.TimedBlessing.Value != 0)
+        if (SaveGame.BlessingTimer.Value != 0)
         {
             SaveGame.ArmorClassBonus += 5;
             SaveGame.DisplayedArmorClassBonus.Value += 5;
             SaveGame.AttackBonus += 10;
             SaveGame.DisplayedAttackBonus += 10;
         }
-        if (SaveGame.TimedStoneskin.Value != 0)
+        if (SaveGame.StoneskinTimer.Value != 0)
         {
             SaveGame.ArmorClassBonus += 50;
             SaveGame.DisplayedArmorClassBonus.Value += 50;
         }
-        if (SaveGame.TimedHeroism.Value != 0)
+        if (SaveGame.HeroismTimer.Value != 0)
         {
             SaveGame.AttackBonus += 12;
             SaveGame.DisplayedAttackBonus += 12;
         }
-        if (SaveGame.TimedSuperheroism.Value != 0)
+        if (SaveGame.SuperheroismTimer.Value != 0)
         {
             SaveGame.AttackBonus += 24;
             SaveGame.DisplayedAttackBonus += 24;
             SaveGame.ArmorClassBonus -= 10;
             SaveGame.DisplayedArmorClassBonus.Value -= 10;
         }
-        if (SaveGame.TimedHaste.Value != 0)
+        if (SaveGame.HasteTimer.Value != 0)
         {
             SaveGame.Speed.Value += 10;
         }
-        if (SaveGame.TimedSlow.Value != 0)
+        if (SaveGame.SlowTimer.Value != 0)
         {
             SaveGame.Speed.Value -= 10;
         }
@@ -763,15 +763,15 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         {
             SaveGame.Speed.Value += SaveGame.ExperienceLevel / 10;
         }
-        if (SaveGame.TimedTelepathy.Value != 0)
+        if (SaveGame.TelepathyTimer.Value != 0)
         {
             SaveGame.HasTelepathy = true;
         }
-        if (SaveGame.TimedSeeInvisibility.Value != 0)
+        if (SaveGame.SeeInvisibilityTimer.Value != 0)
         {
             SaveGame.HasSeeInvisibility = true;
         }
-        if (SaveGame.TimedInfravision.Value != 0)
+        if (SaveGame.InfravisionTimer.Value != 0)
         {
             SaveGame.InfravisionRange++;
         }
@@ -779,7 +779,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         {
             SaveGame.HasConfusionResistance = true;
         }
-        if (SaveGame.TimedHeroism.Value != 0 || SaveGame.TimedSuperheroism.Value != 0)
+        if (SaveGame.HeroismTimer.Value != 0 || SaveGame.SuperheroismTimer.Value != 0)
         {
             SaveGame.HasFearResistance = true;
         }

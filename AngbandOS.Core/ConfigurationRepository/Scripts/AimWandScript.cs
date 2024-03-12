@@ -71,7 +71,7 @@ internal class AimWandScript : Script, IScript, IRepeatableScript, ISuccessfulSc
         // Chance of success is your skill - item level, with item level capped at 50 and your
         // skill halved if you're confused
         int chance = SaveGame.SkillUseDevice;
-        if (SaveGame.TimedConfusion.Value != 0)
+        if (SaveGame.ConfusedTimer.Value != 0)
         {
             chance /= 2;
         }

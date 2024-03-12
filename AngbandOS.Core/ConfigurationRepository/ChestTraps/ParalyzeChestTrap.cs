@@ -16,7 +16,7 @@ internal class ParalyzeChestTrap : ChestTrap
         SaveGame.MsgPrint("A puff of yellow gas surrounds you!");
         if (!SaveGame.HasFreeAction)
         {
-            SaveGame.TimedParalysis.AddTimer(10 + SaveGame.DieRoll(20));
+            SaveGame.ParalysisTimer.AddTimer(10 + SaveGame.DieRoll(20));
         }
     }
 

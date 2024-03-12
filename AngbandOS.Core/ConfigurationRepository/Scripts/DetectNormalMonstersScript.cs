@@ -33,7 +33,7 @@ internal class DetectNormalMonstersScript : Script, IScript, ISuccessfulScript
             {
                 continue;
             }
-            if (!rPtr.Invisible || SaveGame.HasSeeInvisibility || SaveGame.TimedSeeInvisibility.Value != 0)
+            if (!rPtr.Invisible || SaveGame.HasSeeInvisibility || SaveGame.SeeInvisibilityTimer.Value != 0)
             {
                 SaveGame.RepairMonsters = true;
                 mPtr.IndividualMonsterFlags |= Constants.MflagMark | Constants.MflagShow;

@@ -14,7 +14,7 @@ internal class MentalismCastingType : CastingType
     public override void Cast()
     {
         int plev = SaveGame.ExperienceLevel;
-        if (SaveGame.TimedConfusion.Value != 0)
+        if (SaveGame.ConfusedTimer.Value != 0)
         {
             SaveGame.MsgPrint("You are too confused!");
             return;
@@ -47,16 +47,16 @@ internal class MentalismCastingType : CastingType
                 else if (i < 15)
                 {
                     SaveGame.MsgPrint("Weird visions seem to dance before your eyes...");
-                    SaveGame.TimedHallucinations.AddTimer(5 + SaveGame.DieRoll(10));
+                    SaveGame.HallucinationsTimer.AddTimer(5 + SaveGame.DieRoll(10));
                 }
                 else if (i < 45)
                 {
                     SaveGame.MsgPrint("Your brain is addled!");
-                    SaveGame.TimedConfusion.AddTimer(SaveGame.DieRoll(8));
+                    SaveGame.ConfusedTimer.AddTimer(SaveGame.DieRoll(8));
                 }
                 else if (i < 90)
                 {
-                    SaveGame.TimedStun.AddTimer(SaveGame.DieRoll(8));
+                    SaveGame.StunTimer.AddTimer(SaveGame.DieRoll(8));
                 }
                 else
                 {
@@ -81,7 +81,7 @@ internal class MentalismCastingType : CastingType
             SaveGame.Mana.Value = 0;
             SaveGame.FractionalMana = 0;
             SaveGame.MsgPrint("You faint from the effort!");
-            SaveGame.TimedParalysis.AddTimer(SaveGame.DieRoll((5 * oops) + 1));
+            SaveGame.ParalysisTimer.AddTimer(SaveGame.DieRoll((5 * oops) + 1));
             if (SaveGame.RandomLessThan(100) < 50)
             {
                 bool perm = SaveGame.RandomLessThan(100) < 25;

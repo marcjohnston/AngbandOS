@@ -35,11 +35,11 @@ internal class MindBlastMonsterSpell : MonsterSpell
             saveGame.MsgPrint("Your mind is blasted by psionic energy.");
             if (!saveGame.HasConfusionResistance)
             {
-                saveGame.TimedConfusion.AddTimer(SaveGame.RandomLessThan(4) + 4);
+                saveGame.ConfusedTimer.AddTimer(SaveGame.RandomLessThan(4) + 4);
             }
             if (!saveGame.HasChaosResistance && SaveGame.DieRoll(3) == 1)
             {
-                saveGame.TimedHallucinations.AddTimer(SaveGame.RandomLessThan(250) + 150);
+                saveGame.HallucinationsTimer.AddTimer(SaveGame.RandomLessThan(250) + 150);
             }
 
             string monsterDescription = monster.IndefiniteVisibleName;

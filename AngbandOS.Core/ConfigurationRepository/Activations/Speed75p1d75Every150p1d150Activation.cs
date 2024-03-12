@@ -20,13 +20,13 @@ internal class Speed75p1d75Every150p1d150Activation : Activation
 
     protected override bool OnActivate(Item item)
     {
-        if (SaveGame.TimedHaste.Value == 0)
+        if (SaveGame.HasteTimer.Value == 0)
         {
-            SaveGame.TimedHaste.SetTimer(SaveGame.DieRoll(75) + 75);
+            SaveGame.HasteTimer.SetTimer(SaveGame.DieRoll(75) + 75);
         }
         else
         {
-            SaveGame.TimedHaste.AddTimer(5);
+            SaveGame.HasteTimer.AddTimer(5);
         }
         return true;
     }

@@ -39,7 +39,7 @@ internal class ReadScrollScript : Script, IScript, IRepeatableScript
             SaveGame.MsgPrint("You have no light to read by.");
             return;
         }
-        if (SaveGame.TimedConfusion.Value != 0)
+        if (SaveGame.ConfusedTimer.Value != 0)
         {
             SaveGame.MsgPrint("You are too confused!");
             return;

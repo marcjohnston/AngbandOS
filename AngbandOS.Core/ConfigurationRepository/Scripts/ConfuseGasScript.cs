@@ -22,7 +22,7 @@ internal class ConfuseGasScript : Script, IScript
         SaveGame.MsgPrint("A gas of scintillating colors surrounds you!");
         if (!SaveGame.HasConfusionResistance)
         {
-            SaveGame.TimedConfusion.AddTimer(SaveGame.RandomLessThan(20) + 10);
+            SaveGame.ConfusedTimer.AddTimer(SaveGame.RandomLessThan(20) + 10);
         }
     }
 }

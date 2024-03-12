@@ -112,7 +112,7 @@ internal class ExplodeProjectile : Projectile
         }
         else
         {
-            SaveGame.TimedBleeding.AddTimer(dam);
+            SaveGame.BleedingTimer.AddTimer(dam);
         }
         if (!SaveGame.HasShardResistance || SaveGame.DieRoll(13) == 1)
         {

@@ -31,14 +31,14 @@ internal class CureAllScript : Script, IScript
         SaveGame.Mana.Value = SaveGame.MaxMana.Value;
         SaveGame.FractionalMana = 0;
         SaveGame.BlindnessTimer.ResetTimer();
-        SaveGame.TimedConfusion.ResetTimer();
+        SaveGame.ConfusedTimer.ResetTimer();
         SaveGame.PoisonTimer.ResetTimer();
-        SaveGame.TimedFear.ResetTimer();
-        SaveGame.TimedParalysis.ResetTimer();
-        SaveGame.TimedHallucinations.ResetTimer();
-        SaveGame.TimedStun.ResetTimer();
-        SaveGame.TimedBleeding.ResetTimer();
-        SaveGame.TimedSlow.ResetTimer();
+        SaveGame.FearTimer.ResetTimer();
+        SaveGame.ParalysisTimer.ResetTimer();
+        SaveGame.HallucinationsTimer.ResetTimer();
+        SaveGame.StunTimer.ResetTimer();
+        SaveGame.BleedingTimer.ResetTimer();
+        SaveGame.SlowTimer.ResetTimer();
         SaveGame.SetFood(Constants.PyFoodMax - 1);
         SaveGame.RunScript(nameof(RedrawScript));
     }

@@ -19,6 +19,6 @@ internal class FirstAidScript : Script, IScript
     public void ExecuteScript()
     {
         SaveGame.RestoreHealth(SaveGame.DiceRoll(2, 8));
-        SaveGame.TimedBleeding.AddTimer(-15);
+        SaveGame.BleedingTimer.AddTimer(-15);
     }
 }

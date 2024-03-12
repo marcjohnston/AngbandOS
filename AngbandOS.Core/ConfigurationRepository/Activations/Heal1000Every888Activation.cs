@@ -22,7 +22,7 @@ internal class Heal1000Every888Activation : Activation
     {
         SaveGame.MsgPrint("You feel much better...");
         SaveGame.RestoreHealth(1000);
-        SaveGame.TimedBleeding.ResetTimer();
+        SaveGame.BleedingTimer.ResetTimer();
         return true;
     }
 

@@ -47,7 +47,7 @@ internal class OldSpeedProjectile : Projectile
         {
             SaveGame.MsgPrint("You are hit by something!");
         }
-        SaveGame.TimedHaste.AddTimer(SaveGame.DieRoll(5));
+        SaveGame.HasteTimer.AddTimer(SaveGame.DieRoll(5));
         return true;
     }
 }

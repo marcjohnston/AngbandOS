@@ -17,7 +17,7 @@ internal class ElecSpellResistantDetection : SpellResistantDetection
         {
             monster.SmResElec = true;
         }
-        if (SaveGame.TimedLightningResistance.Value != 0)
+        if (SaveGame.LightningResistanceTimer.Value != 0)
         {
             monster.SmOppElec = true;
         }

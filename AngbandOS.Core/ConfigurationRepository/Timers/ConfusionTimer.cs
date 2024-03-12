@@ -19,9 +19,4 @@ internal class ConfusionTimer : Timer
     {
         SaveGame.MsgPrint("You are confused!");
     }
-    protected override void Noticed()
-    {
-        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawConfusedFlaggedAction)).Set();
-        base.Noticed();
-    }
 }

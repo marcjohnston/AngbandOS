@@ -20,13 +20,13 @@ internal class Speed20p1d20Every250Activation : Activation
 
     protected override bool OnActivate(Item item)
     {
-        if (SaveGame.TimedHaste.Value == 0)
+        if (SaveGame.HasteTimer.Value == 0)
         {
-            SaveGame.TimedHaste.SetTimer(SaveGame.DieRoll(20) + 20);
+            SaveGame.HasteTimer.SetTimer(SaveGame.DieRoll(20) + 20);
         }
         else
         {
-            SaveGame.TimedHaste.AddTimer(5);
+            SaveGame.HasteTimer.AddTimer(5);
         }
         return true;
     }

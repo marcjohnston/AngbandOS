@@ -20,11 +20,11 @@ internal class ResistAll40p1d40Activation : Activation
 
     protected override bool OnActivate(Item item)
     {
-        SaveGame.TimedAcidResistance.AddTimer(SaveGame.DieRoll(40) + 40);
-        SaveGame.TimedLightningResistance.AddTimer(SaveGame.DieRoll(40) + 40);
-        SaveGame.TimedFireResistance.AddTimer(SaveGame.DieRoll(40) + 40);
-        SaveGame.TimedColdResistance.AddTimer(SaveGame.DieRoll(40) + 40);
-        SaveGame.TimedPoisonResistance.AddTimer(SaveGame.DieRoll(40) + 40);
+        SaveGame.AcidResistanceTimer.AddTimer(SaveGame.DieRoll(40) + 40);
+        SaveGame.LightningResistanceTimer.AddTimer(SaveGame.DieRoll(40) + 40);
+        SaveGame.FireResistanceTimer.AddTimer(SaveGame.DieRoll(40) + 40);
+        SaveGame.ColdResistanceTimer.AddTimer(SaveGame.DieRoll(40) + 40);
+        SaveGame.PoisonResistanceTimer.AddTimer(SaveGame.DieRoll(40) + 40);
         return true;
     }
 

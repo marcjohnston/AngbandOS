@@ -18,6 +18,6 @@ internal class ResistLightningScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        SaveGame.TimedLightningResistance.AddTimer(SaveGame.DieRoll(20) + 20);
+        SaveGame.LightningResistanceTimer.AddTimer(SaveGame.DieRoll(20) + 20);
     }
 }

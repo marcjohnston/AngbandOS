@@ -32,7 +32,7 @@ internal class ParalyzeAttackEffect : AttackEffect
         }
         else
         {
-            if (SaveGame.TimedParalysis.AddTimer(3 + SaveGame.DieRoll(monsterLevel)))
+            if (SaveGame.ParalysisTimer.AddTimer(3 + SaveGame.DieRoll(monsterLevel)))
             {
                 obvious = true;
             }

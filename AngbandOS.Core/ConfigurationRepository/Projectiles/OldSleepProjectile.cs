@@ -72,7 +72,7 @@ internal class OldSleepProjectile : Projectile
         {
             SaveGame.MsgPrint("You fall asleep!");
         }
-        SaveGame.TimedParalysis.AddTimer(dam);
+        SaveGame.ParalysisTimer.AddTimer(dam);
         return true;
     }
 }

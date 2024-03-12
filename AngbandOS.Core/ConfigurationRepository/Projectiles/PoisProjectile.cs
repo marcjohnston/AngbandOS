@@ -59,17 +59,17 @@ internal class PoisProjectile : Projectile
         {
             dam = (dam + 2) / 3;
         }
-        if (SaveGame.TimedPoisonResistance.Value != 0)
+        if (SaveGame.PoisonResistanceTimer.Value != 0)
         {
             dam = (dam + 2) / 3;
         }
-        if (!(SaveGame.TimedPoisonResistance.Value != 0 || SaveGame.HasPoisonResistance) &&
+        if (!(SaveGame.PoisonResistanceTimer.Value != 0 || SaveGame.HasPoisonResistance) &&
             SaveGame.DieRoll(SaveGame.HurtChance) == 1)
         {
             SaveGame.TryDecreasingAbilityScore(Ability.Constitution);
         }
         SaveGame.TakeHit(dam, killer);
-        if (!(SaveGame.HasPoisonResistance || SaveGame.TimedPoisonResistance.Value != 0))
+        if (!(SaveGame.HasPoisonResistance || SaveGame.PoisonResistanceTimer.Value != 0))
         {
             if (SaveGame.DieRoll(10) <= SaveGame.SingletonRepository.Gods.Get(nameof(HagargRyonisGod)).AdjustedFavour)
             {

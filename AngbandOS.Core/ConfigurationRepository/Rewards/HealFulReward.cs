@@ -18,10 +18,10 @@ internal class HealFulReward : Reward
         SaveGame.RunScript(nameof(RestoreLevelScript));
         SaveGame.PoisonTimer.ResetTimer();
         SaveGame.BlindnessTimer.ResetTimer();
-        SaveGame.TimedConfusion.ResetTimer();
-        SaveGame.TimedHallucinations.ResetTimer();
-        SaveGame.TimedStun.ResetTimer();
-        SaveGame.TimedBleeding.ResetTimer();
+        SaveGame.ConfusedTimer.ResetTimer();
+        SaveGame.HallucinationsTimer.ResetTimer();
+        SaveGame.StunTimer.ResetTimer();
+        SaveGame.BleedingTimer.ResetTimer();
         SaveGame.RestoreHealth(5000);
         for (int dummy = 0; dummy < 6; dummy++)
         {

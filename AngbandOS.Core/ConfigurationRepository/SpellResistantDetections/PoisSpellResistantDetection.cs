@@ -17,7 +17,7 @@ internal class PoisSpellResistantDetection : SpellResistantDetection
         {
             monster.SmResPois = true;
         }
-        if (SaveGame.TimedPoisonResistance.Value != 0)
+        if (SaveGame.PoisonResistanceTimer.Value != 0)
         {
             monster.SmOppPois = true;
         }

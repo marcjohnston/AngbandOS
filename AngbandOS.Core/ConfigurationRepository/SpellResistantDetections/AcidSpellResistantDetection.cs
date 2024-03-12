@@ -17,7 +17,7 @@ internal class AcidSpellResistantDetection : SpellResistantDetection
         {
             monster.SmResAcid = true;
         }
-        if (SaveGame.TimedAcidResistance.Value != 0)
+        if (SaveGame.AcidResistanceTimer.Value != 0)
         {
             monster.SmOppAcid = true;
         }

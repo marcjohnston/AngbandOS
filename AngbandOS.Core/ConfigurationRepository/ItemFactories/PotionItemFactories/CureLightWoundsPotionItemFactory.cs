@@ -31,7 +31,7 @@ internal class CureLightWoundsPotionItemFactory : PotionItemFactory
         {
             identified = true;
         }
-        if (SaveGame.TimedBleeding.AddTimer(-10))
+        if (SaveGame.BleedingTimer.AddTimer(-10))
         {
             identified = true;
         }

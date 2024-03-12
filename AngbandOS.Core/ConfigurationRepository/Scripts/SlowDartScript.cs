@@ -26,7 +26,7 @@ internal class SlowDartScript : Script, IScript
             int damage = SaveGame.DiceRoll(1, 4);
             string name = "a trap";
             SaveGame.TakeHit(damage, name);
-            SaveGame.TimedSlow.AddTimer(SaveGame.RandomLessThan(20) + 20);
+            SaveGame.SlowTimer.AddTimer(SaveGame.RandomLessThan(20) + 20);
         }
         else
         {

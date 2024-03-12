@@ -14,7 +14,7 @@ internal class PoisonChestTrap : ChestTrap
     public override void Activate(ActivateChestTrapEventArgs eventArgs)
     {
         SaveGame.MsgPrint("A puff of green gas surrounds you!");
-        if (!(SaveGame.HasPoisonResistance || SaveGame.TimedPoisonResistance.Value != 0))
+        if (!(SaveGame.HasPoisonResistance || SaveGame.PoisonResistanceTimer.Value != 0))
         {
             if (SaveGame.DieRoll(10) <= SaveGame.SingletonRepository.Gods.Get(nameof(HagargRyonisGod)).AdjustedFavour)
             {

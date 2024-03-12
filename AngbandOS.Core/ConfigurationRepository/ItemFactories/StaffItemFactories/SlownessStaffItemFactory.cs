@@ -30,7 +30,7 @@ internal class SlownessStaffItemFactory : StaffItemFactory
 
     public override void UseStaff(UseStaffEvent eventArgs)
     {
-        if (SaveGame.TimedSlow.AddTimer(SaveGame.DieRoll(30) + 15))
+        if (SaveGame.SlowTimer.AddTimer(SaveGame.DieRoll(30) + 15))
         {
             eventArgs.Identified = true;
         }

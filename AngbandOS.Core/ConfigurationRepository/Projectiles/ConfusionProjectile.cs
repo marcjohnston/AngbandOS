@@ -78,7 +78,7 @@ internal class ConfusionProjectile : Projectile
         }
         if (!SaveGame.HasConfusionResistance)
         {
-            SaveGame.TimedConfusion.AddTimer(SaveGame.DieRoll(20) + 10);
+            SaveGame.ConfusedTimer.AddTimer(SaveGame.DieRoll(20) + 10);
         }
         SaveGame.TakeHit(dam, killer);
         return true;

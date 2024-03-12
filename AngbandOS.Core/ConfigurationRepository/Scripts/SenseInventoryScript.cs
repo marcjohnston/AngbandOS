@@ -19,7 +19,7 @@ internal class SenseInventoryScript : Script, IScript
     public void ExecuteScript()
     {
         int playerLevel = SaveGame.ExperienceLevel;
-        if (SaveGame.TimedConfusion.Value != 0)
+        if (SaveGame.ConfusedTimer.Value != 0)
         {
             return;
         }

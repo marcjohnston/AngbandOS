@@ -26,16 +26,16 @@ internal class SpeedRodItemFactory : RodItemFactory
     public override int Weight => 15;
     public override void Execute(ZapRodEvent zapRodEvent)
     {
-        if (SaveGame.TimedHaste.Value == 0)
+        if (SaveGame.HasteTimer.Value == 0)
         {
-            if (SaveGame.TimedHaste.SetTimer(SaveGame.DieRoll(30) + 15))
+            if (SaveGame.HasteTimer.SetTimer(SaveGame.DieRoll(30) + 15))
             {
                 zapRodEvent.Identified = true;
             }
         }
         else
         {
-            SaveGame.TimedHaste.AddTimer(5);
+            SaveGame.HasteTimer.AddTimer(5);
         }
         zapRodEvent.Item.TypeSpecificValue = 99;
     }

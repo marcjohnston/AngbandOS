@@ -19,13 +19,13 @@ internal class HasteScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        if (SaveGame.TimedHaste.Value == 0)
+        if (SaveGame.HasteTimer.Value == 0)
         {
-            SaveGame.TimedHaste.SetTimer(SaveGame.DieRoll(20 + SaveGame.ExperienceLevel) + SaveGame.ExperienceLevel);
+            SaveGame.HasteTimer.SetTimer(SaveGame.DieRoll(20 + SaveGame.ExperienceLevel) + SaveGame.ExperienceLevel);
         }
         else
         {
-            SaveGame.TimedHaste.AddTimer(SaveGame.DieRoll(5));
+            SaveGame.HasteTimer.AddTimer(SaveGame.DieRoll(5));
         }
     }
 }

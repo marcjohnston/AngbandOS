@@ -45,7 +45,7 @@ internal class PrecognitionTalent : Talent
         }
         if (SaveGame.ExperienceLevel > 24 && SaveGame.ExperienceLevel < 40)
         {
-            SaveGame.TimedTelepathy.AddTimer(SaveGame.ExperienceLevel);
+            SaveGame.TelepathyTimer.AddTimer(SaveGame.ExperienceLevel);
         }
         if (!b)
         {

@@ -18,8 +18,8 @@ internal class BurnResistanceScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        SaveGame.TimedFireResistance.AddTimer(SaveGame.DieRoll(20) + 20);
-        SaveGame.TimedLightningResistance.AddTimer(SaveGame.DieRoll(20) + 20);
-        SaveGame.TimedAcidResistance.AddTimer(SaveGame.DieRoll(20) + 20);
+        SaveGame.FireResistanceTimer.AddTimer(SaveGame.DieRoll(20) + 20);
+        SaveGame.LightningResistanceTimer.AddTimer(SaveGame.DieRoll(20) + 20);
+        SaveGame.AcidResistanceTimer.AddTimer(SaveGame.DieRoll(20) + 20);
     }
 }

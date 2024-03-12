@@ -21,11 +21,11 @@ internal class Heal777CuringAndHeroism25pd25Every300Activation : Activation
     protected override bool OnActivate(Item item)
     {
         SaveGame.PoisonTimer.ResetTimer();
-        SaveGame.TimedBleeding.ResetTimer();
-        SaveGame.TimedStun.ResetTimer();
-        SaveGame.TimedConfusion.ResetTimer();
+        SaveGame.BleedingTimer.ResetTimer();
+        SaveGame.StunTimer.ResetTimer();
+        SaveGame.ConfusedTimer.ResetTimer();
         SaveGame.BlindnessTimer.ResetTimer();
-        SaveGame.TimedHeroism.AddTimer(base.SaveGame.DieRoll(25) + 25);
+        SaveGame.HeroismTimer.AddTimer(base.SaveGame.DieRoll(25) + 25);
         SaveGame.RestoreHealth(777);
         return true;
     }
