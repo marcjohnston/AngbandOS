@@ -8,9 +8,9 @@
 namespace AngbandOS.Core.Widgets;
 
 [Serializable]
-internal class BlindnessIntWidget : RangedIntWidget
+internal class BlindnessWidget : RangedWidget
 {
-    private BlindnessIntWidget(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private BlindnessWidget(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override int X => 8;
     public override int Y => 44;
     public override int Width => 5;

@@ -8,13 +8,13 @@
 namespace AngbandOS.Core.Widgets;
 
 [Serializable]
-internal abstract class RangedIntWidget : IntWidget
+internal abstract class RangedWidget : IntWidget
 {
     private bool _sortValidated = false;
     private string _text;
     private ColorEnum _color;
 
-    protected RangedIntWidget(SaveGame saveGame) : base(saveGame)
+    protected RangedWidget(SaveGame saveGame) : base(saveGame)
     {
         _text = DefaultText;
         _color = DefaultColor;

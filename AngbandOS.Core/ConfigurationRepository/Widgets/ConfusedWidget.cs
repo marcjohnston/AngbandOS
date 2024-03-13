@@ -8,18 +8,16 @@
 namespace AngbandOS.Core.Widgets;
 
 [Serializable]
-internal class StunnedIntWidget : RangedIntWidget
+internal class ConfusedWidget : RangedWidget
 {
-    private StunnedIntWidget(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-    public override int X => 0;
+    private ConfusedWidget(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    public override int X => 15;
     public override int Y => 44;
-    public override int Width => 11;
-    public override string IntChangeTrackableName => nameof(StunnedTimer);
+    public override int Width => 8;
+    public override string IntChangeTrackableName => nameof(ConfusedTimer);
 
     public override (int, string, ColorEnum)[] Ranges => new (int, string, ColorEnum)[]
     {
-        (101, "Knocked out", ColorEnum.Red),
-        (51, "Heavy stun", ColorEnum.Orange),
-        (1, "Stun", ColorEnum.Orange)
+        (1, "Confused", ColorEnum.Orange),
     };
 }
