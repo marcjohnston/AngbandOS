@@ -15,8 +15,6 @@ internal class StunnedIntWidget : RangedIntWidget
     public override int Y => 44;
     public override int Width => 11;
     public override string IntChangeTrackableName => nameof(StunnedTimer);
-    protected override string DefaultText => "";
-    protected override ColorEnum DefaultColor => ColorEnum.White;
 
     public override (int, string, ColorEnum)[] Ranges => new (int, string, ColorEnum)[]
     {

@@ -15,11 +15,28 @@ internal class BlindnessIntWidget : RangedIntWidget
     public override int Y => 44;
     public override int Width => 5;
     public override string IntChangeTrackableName => nameof(BlindnessTimer);
-    protected override string DefaultText => "";
-    protected override ColorEnum DefaultColor => ColorEnum.White;
 
     public override (int, string, ColorEnum)[] Ranges => new (int, string, ColorEnum)[]
     {
         (1, "Blind", ColorEnum.Orange),
     };
 }
+
+//[Serializable]
+//internal class CurrentManaIntWidget : RangedIntWidget
+//{
+//    private CurrentManaIntWidget(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+//    public override int X => 7;
+//    public override int Y => 26;
+//    public override int Width => 5;
+//    protected override string DefaultText => null;
+//    protected override ColorEnum DefaultColor => ColorEnum.BrightRed;
+//    public override string IntChangeTrackableName => nameof(CurrentManaIntProperty);
+
+//    public override (int, string, ColorEnum)[] Ranges => new (int, string, ColorEnum)[]
+//    {
+//        (SaveGame.MaxMana.Value, SaveGame.Mana.Value.ToString(), ColorEnum.Green),
+//        (SaveGame.MaxMana.Value * Constants.HitpointWarn / 5, null, ColorEnum.BrightYellow),
+//        (SaveGame.MaxMana.Value * Constants.HitpointWarn / 10, null, ColorEnum.Orange)
+//    };
+//}

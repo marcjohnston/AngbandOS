@@ -202,7 +202,7 @@ internal class SaveGame
     public bool GetFirstLevelMutation;
     
     public readonly GoldIntProperty Gold;
-    public readonly ManaIntProperty Mana;
+    public readonly CurrentManaIntProperty Mana;
     public readonly MaxManaIntProperty MaxMana;
     public readonly ExperiencePointsIntProperty ExperiencePoints;
     public readonly DisplayedArmorClassBonusIntProperty DisplayedArmorClassBonus;
@@ -633,7 +633,7 @@ internal class SaveGame
 
         Quests = new List<Quest>();
         Gold = (GoldIntProperty)SingletonRepository.Properties.Get(nameof(GoldIntProperty));
-        Mana = (ManaIntProperty)SingletonRepository.Properties.Get(nameof(ManaIntProperty));
+        Mana = (CurrentManaIntProperty)SingletonRepository.Properties.Get(nameof(CurrentManaIntProperty));
         MaxMana = (MaxManaIntProperty)SingletonRepository.Properties.Get(nameof(MaxManaIntProperty));
         ExperiencePoints = (ExperiencePointsIntProperty)SingletonRepository.Properties.Get(nameof(ExperiencePointsIntProperty));
         DisplayedArmorClassBonus = (DisplayedArmorClassBonusIntProperty)SingletonRepository.Properties.Get(nameof(DisplayedArmorClassBonusIntProperty));

@@ -28,14 +28,14 @@ internal abstract class RangedIntWidget : IntWidget
     public abstract (int startValue, string textToRender, ColorEnum color)[] Ranges { get; }
 
     /// <summary>
-    /// Returns the text to be rendered, when none of the ranges apply.
+    /// Returns the text to be rendered, when none of the ranges apply.  Returns an empty string, by default.
     /// </summary>
-    protected abstract string DefaultText { get; }
+    protected virtual string DefaultText => "";
 
     /// <summary>
-    /// Returns the color for the <see cref="Text"/> to be rendered in when none of the ranges apply.
+    /// Returns the color for the <see cref="Text"/> to be rendered in when none of the ranges apply.  Returns the color white, by default.
     /// </summary>
-    protected abstract ColorEnum DefaultColor { get; }
+    protected virtual ColorEnum DefaultColor => ColorEnum.White;
 
     public sealed override string Text => _text;
 
