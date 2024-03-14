@@ -25,12 +25,7 @@ internal class UpdateManaFlaggedAction : FlaggedAction
         {
             return;
         }
-        int levels = SaveGame.BaseCharacterClass.SpellCastingType.Levels;
-        if (levels < 0)
-        {
-            levels = 0;
-        }
-        int msp = SaveGame.AbilityScores[SaveGame.BaseCharacterClass.SpellStat].ManaBonus * levels / 2;
+        int msp = SaveGame.AbilityScores[SaveGame.BaseCharacterClass.SpellStat].ManaBonus * SaveGame.HalfLevelsOfSpellcraft() / 2;
         if (msp != 0)
         {
             msp++;

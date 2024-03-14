@@ -110,7 +110,24 @@ internal class SaveGame
 
     public ExPlayer ExPlayer;
 
-    public int SpellFirst;
+    /// <summary>
+    /// Returns the level of the first spell that the player can cast or null, if there are no books or spells in either realm.
+    /// </summary>
+    public int? LevelOfFirstSpell;
+
+    public int HalfLevelsOfSpellcraft()
+    {
+        int levels = ExperienceLevel;
+        if (BaseCharacterClass.SpellCastingType.DoesNotGainSpellLevelsUntilFirstSpellLevel && LevelOfFirstSpell != null)
+        {
+            levels = levels - LevelOfFirstSpell.Value + 1;
+            if (levels < 0)
+            {
+                levels = 0;
+            }
+        }
+        return levels;
+    }
 
     /// <summary>
     /// Represents the order in which spells that have been learned.  When a spell is learned, it is added to this list.  It is not removed, if the spell is forgotten,

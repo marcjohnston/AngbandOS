@@ -85,6 +85,11 @@ internal abstract class Realm : IGetKey<string>
     public virtual bool SusceptibleToHolyAndHellProjectiles => false;
 
     /// <summary>
+    /// Returns the level of the first spell for this realm.  If there are no books or spells, null is returned.
+    /// </summary>
+    public int? FirstSpellLevel { get; private set; }
+
+    /// <summary>
     /// Initialize the spells for the character that the player has chosen.  This process occurs during the confirmation birth stage.  Only the
     /// spells that belong to the primary and secondary realms are initialized.
     /// </summary>
@@ -92,6 +97,7 @@ internal abstract class Realm : IGetKey<string>
     {
         int bookIndex = 0;
         int spellIndex = 0;
+        int? spellFirst = null;
         foreach (BookItemFactory bookItemFactory in SpellBooks)
         {
             bookItemFactory.SetBookIndex(this, bookIndex);
@@ -99,7 +105,15 @@ internal abstract class Realm : IGetKey<string>
             {
                 spell.Initialize(bookItemFactory, spellIndex);
                 spellIndex++;
+
+
+                // Check to see if the first spell for the character needs to be lowered.
+                if (spellFirst == null || spell.ClassSpell.Level < spellFirst)
+                {
+                    spellFirst = spell.ClassSpell.Level;
+                }
             }
         }
+        FirstSpellLevel = spellFirst;
     }
 }

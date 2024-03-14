@@ -12,5 +12,5 @@ internal class ArcaneCastingType : CastingType
 {
     private ArcaneCastingType(SaveGame saveGame) : base(saveGame) { }
 
-    public override int Levels => SaveGame.ExperienceLevel - SaveGame.SpellFirst + 1;
+    public override bool DoesNotGainSpellLevelsUntilFirstSpellLevel => true;
 }

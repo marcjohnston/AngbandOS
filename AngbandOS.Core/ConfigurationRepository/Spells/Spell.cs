@@ -183,12 +183,6 @@ internal abstract class Spell : IGetKey<string>
         ClassSpell = SaveGame.SingletonRepository.ClassSpells.Get($"{characterClass.Key}.{this.Key}");
         SpellIndex = spellIndex;
         BookItemFactory = bookItemFactory;
-
-        // Check to see if the first spell for the character needs to be lowered.
-        if (ClassSpell.Level < SaveGame.SpellFirst)
-        {
-            SaveGame.SpellFirst = ClassSpell.Level;
-        }
     }
 
     public string Title()

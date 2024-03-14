@@ -33,7 +33,11 @@ internal class CastingType : IGetKey<string>
 
     public void Bind() { }
 
-    public virtual int Levels => SaveGame.ExperienceLevel;
+    /// <summary>
+    /// Returns true, if the character class cannot gain spell levels until they reach their first spell level.  Returns false, by default.  Arcane and divine spell casting types
+    /// return true.
+    /// </summary>
+    public virtual bool DoesNotGainSpellLevelsUntilFirstSpellLevel => false;
 
     /// <summary>
     /// Returns the verb to use for casting.  Returns "cast" by default.  Divine casting type returns "recite".

@@ -40,12 +40,7 @@ internal class UpdateSpellsFlaggedAction : FlaggedAction
         {
             return;
         }
-        int levels = SaveGame.ExperienceLevel - SaveGame.SpellFirst + 1; // TODO: This should be moved to an action so that CharacterXtra isn't needed
-        if (levels < 0)
-        {
-            levels = 0;
-        }
-        int numAllowed = SaveGame.AbilityScores[SaveGame.BaseCharacterClass.SpellStat].HalfSpellsPerLevel * levels / 2;
+        int numAllowed = SaveGame.AbilityScores[SaveGame.BaseCharacterClass.SpellStat].HalfSpellsPerLevel * SaveGame.HalfLevelsOfSpellcraft() / 2;
 
         // Count the number of spells that were learned.
         int numKnown = 0;

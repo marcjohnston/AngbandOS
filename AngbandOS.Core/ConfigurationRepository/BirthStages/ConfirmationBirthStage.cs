@@ -29,10 +29,19 @@ internal class ConfirmationBirthStage : BirthStage
         if (SaveGame.PrimaryRealm != null)
         {
             SaveGame.PrimaryRealm.InitializeSpells();
+            SaveGame.LevelOfFirstSpell = SaveGame.PrimaryRealm.FirstSpellLevel;
 
             if (SaveGame.SecondaryRealm != null)
             {
                 SaveGame.SecondaryRealm.InitializeSpells();
+                if (SaveGame.LevelOfFirstSpell == null)
+                {
+                    SaveGame.LevelOfFirstSpell = SaveGame.SecondaryRealm.FirstSpellLevel;
+                }
+                else if (SaveGame.SecondaryRealm.FirstSpellLevel != null)
+                {
+                    SaveGame.LevelOfFirstSpell = Math.Min(SaveGame.LevelOfFirstSpell.Value, SaveGame.SecondaryRealm.FirstSpellLevel.Value);
+                }
             }
         }
 
