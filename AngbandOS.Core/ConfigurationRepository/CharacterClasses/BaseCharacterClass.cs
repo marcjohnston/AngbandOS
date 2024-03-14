@@ -21,6 +21,13 @@ internal abstract class BaseCharacterClass : IGetKey<string>
     /// </summary>
     public virtual bool WeightEncumbersMovement => false;
 
+
+    /// <summary>
+    /// Returns true, if covered hands with gloves that are not of free-action, dexterity or typespecificvalue == 0 will restrict casting.  Returns false, by default.
+    /// Arcane spell casting returns true.
+    /// </summary>
+    public virtual bool CoveredHandsRestrictCasting => false;
+
     public virtual string Key => GetType().Name;
 
     /// <summary>

@@ -25,7 +25,7 @@ internal class HandsInventorySlot : EquipmentInventorySlot
 
     public override int CalcMana(SaveGame saveGame, int msp)
     {
-        if (SaveGame.BaseCharacterClass.SpellCastingType.CoveredHandsRestrictCasting)
+        if (SaveGame.BaseCharacterClass.CoveredHandsRestrictCasting)
         {
             bool previousRestrictingGloves = RestrictingGloves;
             RestrictingGloves = false;

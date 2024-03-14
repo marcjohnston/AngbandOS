@@ -80,6 +80,12 @@ internal class HighMageCharacterClass : BaseCharacterClass
     /// </summary>
     public override bool WeightEncumbersMovement => true;
 
+
+    /// <summary>
+    /// Returns true, because arcane spell casting requires the players hands to be uncovered or be of free-action, dexterity or typespecificvalue == 0.
+    /// </summary>
+    public override bool CoveredHandsRestrictCasting => true;
+
     public override CastingType SpellCastingType => SaveGame.SingletonRepository.CastingTypes.Get(nameof(ArcaneCastingType));
     public override int SpellStat => Ability.Intelligence;
     public override int MaximumMeleeAttacksPerRound(int level) => 4;
