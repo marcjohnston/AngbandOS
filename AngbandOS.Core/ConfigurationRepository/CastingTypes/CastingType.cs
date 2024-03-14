@@ -158,11 +158,6 @@ internal class CastingType : IGetKey<string>
     }
 
     /// <summary>
-    /// Returns true, if the spell weight of the armor can encumber movement.  Returns false, by default.  Arcane returns true.
-    /// </summary>
-    public virtual bool WeightEncumbersMovement => false;
-
-    /// <summary>
     /// Returns true, if covered hands with gloves that are not of free-action, dexterity or typespecificvalue == 0 will restrict casting.  Returns false, by default.
     /// Arcane spell casting returns true.
     /// </summary>

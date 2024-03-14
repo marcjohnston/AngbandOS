@@ -41,6 +41,12 @@ internal class CultistCharacterClass : BaseCharacterClass
         "punishments as they increase in level."
     };
     public override int SpellWeight => 300;
+
+    /// <summary>
+    /// Returns true, because arcane spell casting movement can be encumbered by the spell weight of the players armor.
+    /// </summary>
+    public override bool WeightEncumbersMovement => true;
+
     public override CastingType SpellCastingType => SaveGame.SingletonRepository.CastingTypes.Get(nameof(ArcaneCastingType));
     public override int SpellStat => Ability.Intelligence;
     public override int MaximumMeleeAttacksPerRound(int level) => 4;

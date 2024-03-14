@@ -41,6 +41,13 @@ internal class WarriorMageCharacterClass : BaseCharacterClass
         "flexibility by increasing in level only slowly."
     };
     public override int SpellWeight => 350;
+
+
+    /// <summary>
+    /// Returns true, because arcane spell casting movement can be encumbered by the spell weight of the players armor.
+    /// </summary>
+    public override bool WeightEncumbersMovement => true;
+
     public override CastingType SpellCastingType => SaveGame.SingletonRepository.CastingTypes.Get(nameof(ArcaneCastingType));
     public override int SpellStat => Ability.Intelligence;
     public override IArtifactBias? ArtifactBias => SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(MageArtifactBias));

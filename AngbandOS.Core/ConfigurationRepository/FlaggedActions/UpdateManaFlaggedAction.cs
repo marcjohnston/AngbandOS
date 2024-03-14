@@ -47,7 +47,7 @@ internal class UpdateManaFlaggedAction : FlaggedAction
             msp = inventorySlot.CalcMana(SaveGame, msp);
         }
 
-        if (SaveGame.BaseCharacterClass.SpellCastingType.WeightEncumbersMovement)
+        if (SaveGame.BaseCharacterClass.WeightEncumbersMovement)
         {
             int curWgt = 0;
             foreach (BaseInventorySlot inventorySlot in SaveGame.SingletonRepository.InventorySlots)

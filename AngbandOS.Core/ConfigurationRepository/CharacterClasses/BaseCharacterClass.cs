@@ -16,6 +16,11 @@ internal abstract class BaseCharacterClass : IGetKey<string>
         SaveGame = saveGame;
     }
 
+    /// <summary>
+    /// Returns true, if the spell weight of the armor can encumber movement.  Returns false, by default.  Arcane returns true.
+    /// </summary>
+    public virtual bool WeightEncumbersMovement => false;
+
     public virtual string Key => GetType().Name;
 
     /// <summary>
@@ -100,6 +105,9 @@ internal abstract class BaseCharacterClass : IGetKey<string>
     /// <value>The spell weight.</value>
     public virtual int SpellWeight => 0;
 
+    /// <summary>
+    /// Returns a casting type for the character class.  Chosen ones and warriors 
+    /// </summary>
     public virtual CastingType SpellCastingType => SaveGame.SingletonRepository.CastingTypes.Get(nameof(CastingType));
 
     public virtual int SpellStat => Ability.Strength;
