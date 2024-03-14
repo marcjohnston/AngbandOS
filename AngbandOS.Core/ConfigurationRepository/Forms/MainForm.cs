@@ -14,11 +14,15 @@ internal class MainForm : Form
 
     protected override string[] WidgetNames => new string[]
     {
-        nameof(GoldIntWidget),
-        nameof(GPWidget),
+        nameof(GoldWidget),
+        nameof(GoldLabelWidget),
         nameof(PoisonedWidget),
         nameof(BlindnessWidget),
         nameof(ConfusedWidget),
-        nameof(StunnedWidget)
+        nameof(StunnedWidget),
+        nameof(CurrentManaWidget),
+        nameof(CurrentManaLabelWidget),
+        nameof(MaxManaWidget),
+        nameof(MaxManaLabelWidget)
     };
 }

@@ -52,7 +52,6 @@ internal class DrainManaMonsterSpell : MonsterSpell
             {
                 saveGame.Mana.Value -= r1;
             }
-            SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawManaFlaggedAction)).Set();
             if (monster.Health < monster.MaxHealth)
             {
                 monster.Health += 6 * r1;

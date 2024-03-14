@@ -40,7 +40,6 @@ internal class AnnihilationScript : Script, IScript
             SaveGame.Mana.Value++;
             SaveGame.MoveCursorRelative(SaveGame.MapY, SaveGame.MapX);
             SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawHealthPointsFlaggedAction)).Set();
-            SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawManaFlaggedAction)).Set();
             SaveGame.HandleStuff();
             SaveGame.UpdateScreen();
             SaveGame.Pause(Constants.DelayFactorInMilliseconds);

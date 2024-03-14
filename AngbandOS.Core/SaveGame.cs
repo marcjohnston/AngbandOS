@@ -4004,7 +4004,6 @@ internal class SaveGame
         SingletonRepository.FlaggedActions.Get(nameof(RedrawStatsFlaggedAction)).Check();
         SingletonRepository.FlaggedActions.Get(nameof(RedrawArmorFlaggedAction)).Check();
         SingletonRepository.FlaggedActions.Get(nameof(RedrawHealthPointsFlaggedAction)).Check();
-        SingletonRepository.FlaggedActions.Get(nameof(RedrawManaFlaggedAction)).Check();
         SingletonRepository.FlaggedActions.Get(nameof(RedrawDepthFlaggedAction)).Check();
         SingletonRepository.FlaggedActions.Get(nameof(RedrawMonsterHealthFlaggedAction)).Check();
         SingletonRepository.FlaggedActions.Get(nameof(RedrawCutFlaggedAction)).Check();
@@ -4018,7 +4017,7 @@ internal class SaveGame
 
         foreach (Property property in SingletonRepository.Properties)
         {
-            property.Clear();
+            property.ClearChangedFlag();
         }
     }
 
@@ -6064,7 +6063,6 @@ internal class SaveGame
         }
         // We'll need to redraw
         SingletonRepository.FlaggedActions.Get(nameof(RedrawHealthPointsFlaggedAction)).Set();
-        SingletonRepository.FlaggedActions.Get(nameof(RedrawManaFlaggedAction)).Set();
         // Check to see if we were successful
         if (DieRoll(AbilityScores[useStat].Innate) >=
             (difficulty / 2) + DieRoll(difficulty / 2))
@@ -6500,13 +6498,11 @@ internal class SaveGame
         {
             MsgPrint("You channel mana to power the effect.");
             Mana.Value -= cost;
-            SingletonRepository.FlaggedActions.Get(nameof(RedrawManaFlaggedAction)).Set();
             return true;
         }
         // Use some mana in the attempt, even if we failed
         MsgPrint("You mana is insufficient to power the effect.");
         Mana.Value -= RandomLessThan(Mana.Value / 2);
-        SingletonRepository.FlaggedActions.Get(nameof(RedrawManaFlaggedAction)).Set();
         return false;
     }
 
@@ -13374,10 +13370,6 @@ internal class SaveGame
         {
             Mana.Value = MaxMana.Value;
             FractionalMana = 0;
-        }
-        if (oldMana != Mana.Value)
-        {
-            SingletonRepository.FlaggedActions.Get(nameof(RedrawManaFlaggedAction)).Set();
         }
     }
 

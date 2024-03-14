@@ -14,7 +14,6 @@ namespace AngbandOS.Core.Properties;
 internal abstract class Property : IGetKey<string>, IChangeTracking
 {
     protected readonly SaveGame SaveGame;
-    private bool _changed;
     protected Property(SaveGame saveGame)
     {
         SaveGame = saveGame;
@@ -23,20 +22,20 @@ internal abstract class Property : IGetKey<string>, IChangeTracking
     /// <summary>
     /// Sets the change flag to true to indicate that the value has changed.  This should only be performed by derived classes when the internal value changes.
     /// </summary>
-    protected void Set()
+    protected void SetChangedFlag()
     {
-        _changed = true;
+        IsChanged = true;
     }
 
     /// <summary>
     /// Removes the change flag to indicate that the change has been processed.  This method is public because the consuming application needs to process the change.
     /// </summary>
-    public void Clear()
+    public void ClearChangedFlag()
     {
-        _changed = false;
+        IsChanged = false;
     }
 
-    public bool IsChanged => _changed;
+    public bool IsChanged { get; private set; }
 
     public virtual string Key => GetType().Name;
 

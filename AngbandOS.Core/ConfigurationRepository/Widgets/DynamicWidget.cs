@@ -10,9 +10,9 @@ using Timer = AngbandOS.Core.Timers.Timer;
 namespace AngbandOS.Core.Widgets;
 
 [Serializable]
-internal abstract class IntWidget : Widget
+internal abstract class DynamicWidget : Widget
 {
-    protected IntWidget(SaveGame saveGame) : base(saveGame) { }
+    protected DynamicWidget(SaveGame saveGame) : base(saveGame) { }
     public abstract string IntChangeTrackableName { get; }
     public IIntChangeTrackable IntChangeTrackable { get; private set; }
 
@@ -47,19 +47,13 @@ internal abstract class IntWidget : Widget
         {
             // It has, invalidate the widget.
             base.Invalidate();
+
+            // The widget will be painted.  Clear the change tracking flag.
+            IntChangeTrackable.ClearChangedFlag();
         }
 
         // Update the widget.
         base.Update();
-    }
-
-    protected override void Paint()
-    {
-        // Paint the widget.
-        base.Paint();
-
-        // The widget has been painted.  Clear the change tracking flag.
-        IntChangeTrackable.Clear();
     }
 
     public override string Text => IntChangeTrackable.Value.ToString();

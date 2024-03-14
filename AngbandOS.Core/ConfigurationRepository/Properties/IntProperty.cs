@@ -28,7 +28,7 @@ internal abstract class IntProperty : Property, IIntChangeTrackable
             _value = value;
 
             // Call the set method for the base Property class.
-            Set();
+            SetChangedFlag();
 
             // Allow derived classes to perform additional after set functionality.
             OnAfterSet();

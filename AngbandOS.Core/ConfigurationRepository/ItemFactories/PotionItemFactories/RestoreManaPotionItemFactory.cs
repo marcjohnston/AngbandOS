@@ -31,7 +31,6 @@ internal class RestoreManaPotionItemFactory : PotionItemFactory
             SaveGame.Mana.Value = SaveGame.MaxMana.Value;
             SaveGame.FractionalMana = 0;
             SaveGame.MsgPrint("Your feel your head clear.");
-            SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawManaFlaggedAction)).Set();
             return true;
         }
         return false;

@@ -40,7 +40,6 @@ internal class OfTheMagiStaffItemFactory : StaffItemFactory
             SaveGame.FractionalMana = 0;
             eventArgs.Identified = true;
             SaveGame.MsgPrint("Your feel your head clear.");
-            SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawManaFlaggedAction)).Set();
         }
     }
     public override Item CreateItem() => new Item(SaveGame, this);

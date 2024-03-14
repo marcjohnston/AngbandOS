@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Widgets;
 
 [Serializable]
-internal abstract class RangedWidget : IntWidget
+internal abstract class RangedWidget : DynamicWidget
 {
     private bool _sortValidated = false;
     private string _text;
@@ -21,9 +21,9 @@ internal abstract class RangedWidget : IntWidget
     }
 
     /// <summary>
-    /// Returns a tuple with the text and color to be associated with all values less than or equal to the maxValue specified.  If the value is smaller than all values, then the <see cref="DefaultText"/> 
-    /// value and <see cref="DefaultColor"/> is used.  The tuples must be sorted by the startValue in descending order.  The sorting is validated once upon first usage.  Duplicate startValues
-    /// cannot be used and will fail the sort validation.
+    /// Returns an array of tuples that specify the text and color to render for a range of values.  The <param name="startValue"></param> specifies the smallest (or start) value of the range.  Ranges must be sorted in
+    /// descending order.  This sorting is validated once upon first usage.  If the value is larger than the first range, the first range will match.  If the value is smaller than the last range specified, the
+    /// <see cref="DefaultText"/> and <see cref="DefaultColor"/> will be used.  Duplicate startValues cannot be used and will fail the sort validation.
     /// </summary>
     public abstract (int startValue, string textToRender, ColorEnum color)[] Ranges { get; }
 

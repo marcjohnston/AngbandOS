@@ -155,7 +155,6 @@ internal class CastingType : IGetKey<string>
                 SaveGame.DecreaseAbilityScore(Ability.Constitution, 15 + SaveGame.DieRoll(10), perm);
             }
         }
-        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawManaFlaggedAction)).Set();
     }
 
     /// <summary>

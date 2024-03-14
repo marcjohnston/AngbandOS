@@ -14,13 +14,13 @@ namespace AngbandOS.Core.Timers;
 internal abstract class Timer : IGetKey<string>, IIntChangeTrackable
 {
     protected SaveGame SaveGame { get; }
-    private bool _changed;
 
-    public virtual void Clear()
+    public virtual void ClearChangedFlag()
     {
-        _changed = false;
+        IsChanged = false;
     }
-    public virtual bool IsChanged => _changed;
+
+    public virtual bool IsChanged { get; private set; }
 
     public Timer(SaveGame saveGame)
     {
@@ -56,7 +56,7 @@ internal abstract class Timer : IGetKey<string>, IIntChangeTrackable
         {
             // TODO: There is no detection that the value actually changed to detect the change and _changed = true.
             _value = value;
-            _changed = true;
+            IsChanged = true;
         }
     }
 

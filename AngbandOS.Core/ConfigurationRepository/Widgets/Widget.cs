@@ -30,14 +30,22 @@ internal abstract class Widget : IGetKey<string>
     }
 
     /// <summary>
+    /// Returns an array of conditionals that need to be met for the widget to rendered; or null, if there are no conditions.  All conditions must return true for the widget
+    /// to be enabled.
+    /// </summary>
+    public Conditional[]? Enabled { get; private set; }
+
+    public virtual string[]? EnabledConditionalNames => null;
+
+    /// <summary>
     /// Returns the text to be rendered for the widget.
     /// </summary>
     public abstract string Text { get; }
 
     /// <summary>
-    /// Returns the color that the widget <see cref="Text"/> will be drawn.
+    /// Returns the color that the widget <see cref="Text"/> will be drawn.  Returns the color white by default.
     /// </summary>
-    public abstract ColorEnum Color { get; }
+    public virtual ColorEnum Color => ColorEnum.White;
 
     /// <summary>
     /// Returns the x-coordinate on the <see cref="Form"/> where the widget will be drawn.
@@ -77,6 +85,20 @@ internal abstract class Widget : IGetKey<string>
     public virtual void Bind()
     {
         Justification = JustificationName == null ? null : SaveGame.SingletonRepository.Justifications.Get(JustificationName);
+
+        if (EnabledConditionalNames == null)
+        {
+            Enabled = null;
+        }
+        else
+        {
+            List<Conditional> conditionalList = new List<Conditional>();
+            foreach (string conditional in EnabledConditionalNames)
+            {
+                conditionalList.Add(SaveGame.SingletonRepository.Conditionals.Get(conditional));
+            }
+            Enabled = conditionalList.ToArray();
+        }
     }
 
     public string ToJson()
@@ -85,7 +107,7 @@ internal abstract class Widget : IGetKey<string>
     }
 
     /// <summary>
-    /// Redraws the widget.  The widget has been deemed invalid via the <see cref="Invalidated"/> == true or the dervied object returned true on the <see cref="QueryRedraw"/> method.
+    /// Paint the widget on the screen.  No checks or resets of the validation status are or should be performed during this method.
     /// </summary>
     protected virtual void Paint()
     {
@@ -103,9 +125,17 @@ internal abstract class Widget : IGetKey<string>
     /// </summary>
     public virtual void Update()
     {
+        // Check to see if the widget is enabled.  All conditionals must be true.
+        if (Enabled != null && Enabled.Any(_conditional => !_conditional.IsTrue))
+        {
+            return;
+        }
+
         if (Invalidated)
         {
             Paint();
+
+            // Now that the widget has been draw, validate it.
             Invalidated = false;
         }
     }

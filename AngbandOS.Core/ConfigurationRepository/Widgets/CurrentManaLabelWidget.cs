@@ -9,11 +9,14 @@
 namespace AngbandOS.Core.Widgets;
 
 [Serializable]
-internal class GPWidget : Widget
+internal class CurrentManaLabelWidget : Widget
 {
-    private GPWidget(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private CurrentManaLabelWidget(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override int X => 0;
-    public override int Y => 11;
-    public override ColorEnum Color => ColorEnum.White;
-    public override string Text => "GP";
+    public override int Y => 26;
+    public override string Text => "Cur SP";
+    public override string[]? EnabledConditionalNames => new string[]
+    {
+        nameof(CanCastSpellsConditional)
+    };
 }

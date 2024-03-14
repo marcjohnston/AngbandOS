@@ -16,7 +16,7 @@ internal interface IChangeTracking
     /// <summary>
     /// Clear the change tracking flag to indicate that the value has not changed.
     /// </summary>
-    void Clear();
+    void ClearChangedFlag();
 
     /// <summary>
     /// Returns true, if the value has changed, since the last Clear().

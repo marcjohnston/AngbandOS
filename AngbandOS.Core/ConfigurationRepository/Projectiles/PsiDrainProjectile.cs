@@ -57,7 +57,6 @@ internal class PsiDrainProjectile : Projectile
                     string killer = mPtr.IndefiniteVisibleName;
                     SaveGame.MsgPrint("Your psychic energy is drained!");
                     SaveGame.Mana.Value = Math.Max(0, SaveGame.Mana.Value - (SaveGame.DiceRoll(5, dam) / 2));
-                    SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawManaFlaggedAction)).Set();
                     SaveGame.TakeHit(dam, killer);
                 }
                 dam = 0;
@@ -70,7 +69,6 @@ internal class PsiDrainProjectile : Projectile
             SaveGame.MsgPrint($"You convert {mName}{s} pain into psychic energy!");
             b = Math.Min(SaveGame.MaxMana.Value, SaveGame.Mana.Value + b);
             SaveGame.Mana.Value = b;
-            SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawManaFlaggedAction)).Set();
         }
         string noteDies = " collapses, a mindless husk.";
         ApplyProjectileDamageToMonster(who, mPtr, dam, note, noteDies);
