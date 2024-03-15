@@ -234,9 +234,9 @@ internal class SaveGame
 
     public readonly MainForm MainForm;
 
-    public readonly HealthIntProperty Health;
+    public readonly HealthPointsIntProperty Health;
 
-    public readonly MaxHealthIntProperty MaxHealth;
+    public readonly MaxHealthPointsIntProperty MaxHealth;
 
     /// <summary>
     ///
@@ -660,9 +660,9 @@ internal class SaveGame
         DisplayedArmorClassBonus = (DisplayedArmorClassBonusIntProperty)SingletonRepository.Properties.Get(nameof(DisplayedArmorClassBonusIntProperty));
         DisplayedBaseArmorClass = (DisplayedBaseArmorClassIntProperty)SingletonRepository.Properties.Get(nameof(DisplayedBaseArmorClassIntProperty));
         Food = (FoodIntProperty)SingletonRepository.Properties.Get(nameof(FoodIntProperty));
-        Health = (HealthIntProperty)SingletonRepository.Properties.Get(nameof(HealthIntProperty));
+        Health = (HealthPointsIntProperty)SingletonRepository.Properties.Get(nameof(HealthPointsIntProperty));
         Speed = (SpeedIntProperty)SingletonRepository.Properties.Get(nameof(SpeedIntProperty));
-        MaxHealth = (MaxHealthIntProperty)SingletonRepository.Properties.Get(nameof(MaxHealthIntProperty));
+        MaxHealth = (MaxHealthPointsIntProperty)SingletonRepository.Properties.Get(nameof(MaxHealthPointsIntProperty));
         SpareSpellSlots = (SpareSpellSlotsIntProperty)SingletonRepository.Properties.Get(nameof(SpareSpellSlotsIntProperty));
 
         AcidResistanceTimer = (AcidResistanceTimer)SingletonRepository.TimedActions.Get(nameof(Timers.AcidResistanceTimer));

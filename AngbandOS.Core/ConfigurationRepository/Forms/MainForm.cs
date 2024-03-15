@@ -24,7 +24,9 @@ internal class MainForm : Form
         nameof(ManaLabelWidget),
         nameof(MaxManaWidget),
         nameof(MaxManaLabelWidget),
+        nameof(HealthPointsWidget),
         nameof(HealthPointsLabelWidget),
+        nameof(MaxHealthPointsWidget),
         nameof(MaxHealthPointsLabelWidget)
     };
 }
