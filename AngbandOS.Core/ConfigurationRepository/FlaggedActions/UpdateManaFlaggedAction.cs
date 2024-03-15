@@ -19,9 +19,8 @@ internal class UpdateManaFlaggedAction : FlaggedAction
 
     private UpdateManaFlaggedAction(SaveGame saveGame) : base(saveGame) { }
     protected override void Execute()
-    {
-        
-        if (SaveGame.BaseCharacterClass.SpellCastingType == null)
+    {       
+        if (SaveGame.UsesMana)
         {
             return;
         }

@@ -27,8 +27,8 @@ internal class UpdateSpellsFlaggedAction : FlaggedAction
         {
             return;
         }
-        string p = SaveGame.BaseCharacterClass.SpellCastingType.SpellNoun;
-        if (SaveGame.BaseCharacterClass.SpellCastingType == null)
+        string p = SaveGame.BaseCharacterClass.SpellNoun;
+        if (!SaveGame.CanCastSpells)
         {
             return;
         }

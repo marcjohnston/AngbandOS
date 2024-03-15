@@ -41,7 +41,7 @@ internal class MysticCharacterClass : BaseCharacterClass
         "and while not wielding a weapon they do increased damage."
     };
     public override int SpellWeight => 300;
-    public override CastingType SpellCastingType => SaveGame.SingletonRepository.CastingTypes.Get(nameof(MentalismCastingType));
+    public override void Cast() => CastMentalism();
     public override int SpellStat => Ability.Wisdom;
     public override int MaximumMeleeAttacksPerRound(int level) => level < 40 ? 3 : 4;
     public override int MaximumWeight => 40;

@@ -24,7 +24,6 @@ internal class SingletonRepository
     public AttackEffectsRepository AttackEffects;
     public AttacksRepository Attacks;
     public BirthStagesRepository BirthStages;
-    public CastingTypesRepository CastingTypes;
     public CharacterClassesRepository CharacterClasses;
     public ChestTrapConfigurationsRepository ChestTrapConfigurations;
     public ChestTrapsRepository ChestTraps;
@@ -141,7 +140,6 @@ internal class SingletonRepository
         AttackEffects = AddRepository<AttackEffectsRepository>(new AttackEffectsRepository(SaveGame));
         Attacks = AddRepository<AttacksRepository>(new AttacksRepository(SaveGame));
         BirthStages = AddRepository<BirthStagesRepository>(new BirthStagesRepository(SaveGame));
-        CastingTypes = AddRepository<CastingTypesRepository>(new CastingTypesRepository(SaveGame));
         CharacterClasses = AddRepository<CharacterClassesRepository>(new CharacterClassesRepository(SaveGame));
         ChestTrapConfigurations = AddRepository<ChestTrapConfigurationsRepository>(new ChestTrapConfigurationsRepository(SaveGame));
         ChestTraps = AddRepository<ChestTrapsRepository>(new ChestTrapsRepository(SaveGame));

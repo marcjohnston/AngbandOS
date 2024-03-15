@@ -17,6 +17,6 @@ internal class MaxManaLabelWidget : Widget
     public override string Text => "Max SP";
     public override string[]? EnabledConditionalNames => new string[]
     {
-        nameof(CanCastSpellsConditional)
+        nameof(UsesManaConditional)
     };
 }

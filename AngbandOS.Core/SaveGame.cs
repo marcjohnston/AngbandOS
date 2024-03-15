@@ -118,7 +118,7 @@ internal class SaveGame
     public int HalfLevelsOfSpellcraft()
     {
         int levels = ExperienceLevel;
-        if (BaseCharacterClass.SpellCastingType.DoesNotGainSpellLevelsUntilFirstSpellLevel && LevelOfFirstSpell != null)
+        if (BaseCharacterClass.DoesNotGainSpellLevelsUntilFirstSpellLevel && LevelOfFirstSpell != null)
         {
             levels = levels - LevelOfFirstSpell.Value + 1;
             if (levels < 0)
@@ -398,6 +398,8 @@ internal class SaveGame
     /// Returns true, if the player can cast spells and/or read books.  True, for character classes that can choose either a primary and/or secondary realm.
     /// </summary>
     public bool CanCastSpells => PrimaryRealm != null || SecondaryRealm != null;
+
+    public bool UsesMana => CanCastSpells || BaseCharacterClass.CanUseManaInsteadOfConsumingItem;
 
     /// <summary>
     /// Returns true, if the player has chosen the realm <T> for either the primary or secondary realms to study.
@@ -7481,7 +7483,7 @@ internal class SaveGame
         {
             return false;
         }
-        string spellNoun = BaseCharacterClass.SpellCastingType.SpellNoun;
+        string spellNoun = BaseCharacterClass.SpellNoun;
         ScreenBuffer? savedScreen = null;
         string outVal = $"({spellNoun}s {0.IndexToLetter()}-{(okaySpells.Length - 1).IndexToLetter()}, *=List, ESC=exit) {prompt} which {spellNoun}? ";
         while (selectedSpell == null && GetCom(outVal, out char choice) && !Shutdown)

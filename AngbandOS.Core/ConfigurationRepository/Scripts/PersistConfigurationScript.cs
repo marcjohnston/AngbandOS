@@ -52,7 +52,6 @@ internal class PersistConfigurationScript : Script, IScript
             SaveGame.SingletonRepository.AttackEffects.PersistEntities();
             SaveGame.SingletonRepository.Attacks.PersistEntities();
             SaveGame.SingletonRepository.BirthStages.PersistEntities();
-            SaveGame.SingletonRepository.CastingTypes.PersistEntities();
             SaveGame.SingletonRepository.CharacterClasses.PersistEntities();
             SaveGame.SingletonRepository.ChestTrapConfigurations.PersistEntities();
             SaveGame.SingletonRepository.ChestTraps.PersistEntities();

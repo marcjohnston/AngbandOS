@@ -54,7 +54,7 @@ internal abstract class BookItemFactory : ItemFactory
 
     public override string GetDescription(Item item, bool includeCountPrefix, bool isFlavorAware)
     {
-        string name = SaveGame.BaseCharacterClass.SpellCastingType.GetBookTitle(item);
+        string name = SaveGame.BaseCharacterClass.GetBookTitle(item);
         name = $"{name} {FriendlyName}";
         return includeCountPrefix ? GetPrefixCount(true, name, item.Count, item.IsKnownArtifact) : name;
     }

@@ -65,7 +65,7 @@ internal class QuaffScript : Script, IScript, IRepeatableScript
         SaveGame.SetFood(SaveGame.Food.Value + item.TypeSpecificValue);
         bool channeled = false;
         // If we're a channeler, we might be able to spend mana instead of using it up
-        if (SaveGame.BaseCharacterClass.SpellCastingType.CanUseManaInsteadOfConsumingItem)
+        if (SaveGame.BaseCharacterClass.CanUseManaInsteadOfConsumingItem)
         {
             channeled = SaveGame.DoCmdChannel(item);
         }

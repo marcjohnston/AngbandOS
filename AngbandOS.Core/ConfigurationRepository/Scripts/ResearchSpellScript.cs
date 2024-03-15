@@ -27,7 +27,7 @@ internal class ResearchSpellScript : Script, IScript, IStoreScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        string spellType = SaveGame.BaseCharacterClass.SpellCastingType.SpellNoun;
+        string spellType = SaveGame.BaseCharacterClass.SpellNoun;
         // If we don't have a realm then we can't do anything
         if (!SaveGame.CanCastSpells)
         {
@@ -69,7 +69,7 @@ internal class ResearchSpellScript : Script, IScript, IStoreScript
 
         // Arcane casters can choose their spell
         Spell? spell = null;
-        if (SaveGame.BaseCharacterClass.SpellCastingType.CanChooseSpellToStudy)
+        if (SaveGame.BaseCharacterClass.CanChooseSpellToStudy)
         {
             // Allow the user to select a spell.
             if (!SaveGame.GetSpell(out spell, "study", item, false))

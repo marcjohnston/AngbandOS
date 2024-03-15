@@ -111,7 +111,7 @@ internal class AimWandScript : Script, IScript, IRepeatableScript, ISuccessfulSc
         }
         // If we're a channeler then we should be using mana instead of charges
         bool channeled = false;
-        if (SaveGame.BaseCharacterClass.SpellCastingType.CanUseManaInsteadOfConsumingItem)
+        if (SaveGame.BaseCharacterClass.CanUseManaInsteadOfConsumingItem)
         {
             channeled = SaveGame.DoCmdChannel(item);
         }

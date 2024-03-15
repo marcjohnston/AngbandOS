@@ -40,7 +40,12 @@ internal class ChannelerCharacterClass : BaseCharacterClass
         "without depleting them."
     };
     public override int SpellWeight => 400;
-    public override CastingType SpellCastingType => SaveGame.SingletonRepository.CastingTypes.Get(nameof(ChannelingCastingType));
+
+    /// <summary>
+    /// Returns true, because channeling casting allows the player to use mana instead of consuming the item.
+    /// </summary>
+    public override bool CanUseManaInsteadOfConsumingItem => true;
+
     public override int SpellStat => Ability.Charisma;
     public override int MaximumMeleeAttacksPerRound(int level) => 4;
     public override int MaximumWeight => 40;

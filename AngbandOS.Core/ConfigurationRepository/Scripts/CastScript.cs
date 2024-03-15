@@ -30,7 +30,7 @@ internal class CastScript : Script, IScript, IRepeatableScript
     {
         if (SaveGame.HasAntiMagic)
         {
-            string whichMagicType = SaveGame.BaseCharacterClass.SpellCastingType.MagicType;
+            string whichMagicType = SaveGame.BaseCharacterClass.MagicType;
             if (SaveGame.BaseCharacterClass.ID == CharacterClass.Mindcrafter || SaveGame.BaseCharacterClass.ID == CharacterClass.Mystic)
             {
                 whichMagicType = "psychic talents";
@@ -40,7 +40,7 @@ internal class CastScript : Script, IScript, IRepeatableScript
         }
         else
         {
-            SaveGame.BaseCharacterClass.SpellCastingType.Cast();
+            SaveGame.BaseCharacterClass.Cast();
         }
     }
 }

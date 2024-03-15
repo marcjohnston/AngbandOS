@@ -17,6 +17,6 @@ internal class CurrentManaLabelWidget : Widget
     public override string Text => "Cur SP";
     public override string[]? EnabledConditionalNames => new string[]
     {
-        nameof(CanCastSpellsConditional)
+        nameof(UsesManaConditional)
     };
 }

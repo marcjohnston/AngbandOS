@@ -53,7 +53,8 @@ internal class CultistCharacterClass : BaseCharacterClass
     /// </summary>
     public override bool CoveredHandsRestrictCasting => true;
 
-    public override CastingType SpellCastingType => SaveGame.SingletonRepository.CastingTypes.Get(nameof(ArcaneCastingType));
+
+    public override bool DoesNotGainSpellLevelsUntilFirstSpellLevel => true;
     public override int SpellStat => Ability.Intelligence;
     public override int MaximumMeleeAttacksPerRound(int level) => 4;
     public override int MaximumWeight => 40;

@@ -71,7 +71,8 @@ internal class RogueCharacterClass : BaseCharacterClass
     /// </summary>
     public override bool CoveredHandsRestrictCasting => true;
 
-    public override CastingType SpellCastingType => SaveGame.SingletonRepository.CastingTypes.Get(nameof(ArcaneCastingType));
+
+    public override bool DoesNotGainSpellLevelsUntilFirstSpellLevel => true;
     public override int SpellStat => Ability.Intelligence;
     public override int MaximumWeight => 30;
     public override IArtifactBias? ArtifactBias => SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(RogueArtifactBias));

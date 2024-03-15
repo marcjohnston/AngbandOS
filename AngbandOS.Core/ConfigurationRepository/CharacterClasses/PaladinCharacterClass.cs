@@ -52,7 +52,7 @@ internal class PaladinCharacterClass : BaseCharacterClass
         "(at lvl 40)."
     };
     public override int SpellWeight => 400;
-    public override CastingType SpellCastingType => SaveGame.SingletonRepository.CastingTypes.Get(nameof(MentalismCastingType));
+    public override void Cast() => CastMentalism();
     public override int SpellStat => Ability.Wisdom;
     public override int MaximumWeight => 30;
     public override int AttackSpeedMultiplier => 4;

@@ -42,7 +42,9 @@ internal class MindcrafterCharacterClass : BaseCharacterClass
         "(at lvl 30), and gain telepathy (at lvl 40)."
     };
     public override int SpellWeight => 300;
-    public override CastingType SpellCastingType => SaveGame.SingletonRepository.CastingTypes.Get(nameof(MentalismCastingType));
+
+    public override void Cast() => CastMentalism();
+
     public override int SpellStat => Ability.Wisdom;
     public override IArtifactBias? ArtifactBias => (SaveGame.DieRoll(5) > 2 ? SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(PriestlyArtifactBias)) : null);
     public override bool SenseInventoryTest(int level) => (0 != SaveGame.RandomLessThan(55000 / ((level * level) + 40)));

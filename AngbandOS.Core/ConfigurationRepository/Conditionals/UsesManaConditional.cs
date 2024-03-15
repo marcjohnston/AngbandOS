@@ -8,8 +8,8 @@
 namespace AngbandOS.Core.Conditionals;
 
 [Serializable]
-internal class CanCastSpellsConditional : Conditional
+internal class UsesManaConditional : Conditional
 {
-    private CanCastSpellsConditional(SaveGame saveGame) : base(saveGame) { }
-    public override bool IsTrue => SaveGame.BaseCharacterClass.SpellCastingType != null;
+    private UsesManaConditional(SaveGame saveGame) : base(saveGame) { }
+    public override bool IsTrue => SaveGame.UsesMana;
 }

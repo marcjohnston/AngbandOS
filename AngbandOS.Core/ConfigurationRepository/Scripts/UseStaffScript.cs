@@ -102,7 +102,7 @@ internal class UseStaffScript : Script, IScript, IRepeatableScript
         }
         // Channelers can use mana instead of a charge
         bool channeled = false;
-        if (SaveGame.BaseCharacterClass.SpellCastingType.CanUseManaInsteadOfConsumingItem)
+        if (SaveGame.BaseCharacterClass.CanUseManaInsteadOfConsumingItem)
         {
             channeled = SaveGame.DoCmdChannel(item);
         }

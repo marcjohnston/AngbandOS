@@ -79,7 +79,7 @@ internal class ReadScrollScript : Script, IScript, IRepeatableScript
         }
         bool channeled = false;
         // Channelers can use mana instead of the scroll being used up
-        if (SaveGame.BaseCharacterClass.SpellCastingType.CanUseManaInsteadOfConsumingItem)
+        if (SaveGame.BaseCharacterClass.CanUseManaInsteadOfConsumingItem)
         {
             channeled = SaveGame.DoCmdChannel(item);
         }

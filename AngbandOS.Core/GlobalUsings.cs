@@ -15,7 +15,6 @@ global using AngbandOS.Core.ArtifactBiases;
 global using AngbandOS.Core.AttackEffects;
 global using AngbandOS.Core.AttackTypes;
 global using AngbandOS.Core.BirthStages;
-global using AngbandOS.Core.CastingTypes;
 global using AngbandOS.Core.CharacterClasses;
 global using AngbandOS.Core.ChestTrapConfigurations;
 global using AngbandOS.Core.ChestTraps;

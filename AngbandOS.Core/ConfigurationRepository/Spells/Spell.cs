@@ -128,33 +128,32 @@ internal abstract class Spell : IGetKey<string>
     /// <returns></returns>
     public int FailureChance() 
     {
-        BaseCharacterClass baseCharacterClass = SaveGame.BaseCharacterClass;
-        if (baseCharacterClass.SpellCastingType == null)
+        if (!SaveGame.CanCastSpells)
         {
             return 100;
         }
         int chance = ClassSpell.BaseFailure;
         chance -= 3 * (SaveGame.ExperienceLevel - ClassSpell.Level);
-        chance -= 3 * (SaveGame.AbilityScores[baseCharacterClass.SpellStat].SpellFailureReduction - 1);
+        chance -= 3 * (SaveGame.AbilityScores[SaveGame.BaseCharacterClass.SpellStat].SpellFailureReduction - 1);
         if (ClassSpell.ManaCost > SaveGame.Mana.Value)
         {
             chance += 5 * (ClassSpell.ManaCost - SaveGame.Mana.Value);
         }
-        int minfail = SaveGame.AbilityScores[baseCharacterClass.SpellStat].SpellMinFailChance;
-        if (baseCharacterClass.ID != CharacterClass.Priest && baseCharacterClass.ID != CharacterClass.Druid &&
-            baseCharacterClass.ID != CharacterClass.Mage && baseCharacterClass.ID != CharacterClass.HighMage &&
-            baseCharacterClass.ID != CharacterClass.Cultist)
+        int minfail = SaveGame.AbilityScores[SaveGame.BaseCharacterClass.SpellStat].SpellMinFailChance;
+        if (SaveGame.BaseCharacterClass.ID != CharacterClass.Priest && SaveGame.BaseCharacterClass.ID != CharacterClass.Druid &&
+            SaveGame.BaseCharacterClass.ID != CharacterClass.Mage && SaveGame.BaseCharacterClass.ID != CharacterClass.HighMage &&
+            SaveGame.BaseCharacterClass.ID != CharacterClass.Cultist)
         {
             if (minfail < 5)
             {
                 minfail = 5;
             }
         }
-        if ((baseCharacterClass.ID == CharacterClass.Priest || baseCharacterClass.ID == CharacterClass.Druid) && SaveGame.HasUnpriestlyWeapon)
+        if ((SaveGame.BaseCharacterClass.ID == CharacterClass.Priest || SaveGame.BaseCharacterClass.ID == CharacterClass.Druid) && SaveGame.HasUnpriestlyWeapon)
         {
             chance += 25;
         }
-        if (baseCharacterClass.ID == CharacterClass.Cultist && SaveGame.HasUnpriestlyWeapon)
+        if (SaveGame.BaseCharacterClass.ID == CharacterClass.Cultist && SaveGame.HasUnpriestlyWeapon)
         {
             chance += 25;
         }

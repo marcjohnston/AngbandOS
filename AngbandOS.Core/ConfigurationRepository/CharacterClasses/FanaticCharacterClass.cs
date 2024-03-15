@@ -40,7 +40,35 @@ internal class FanaticCharacterClass : BaseCharacterClass
         "(at lvl 30) and fear (at lvl 40)."
     };
     public override int SpellWeight => 400;
-    public override CastingType SpellCastingType => SaveGame.SingletonRepository.CastingTypes.Get(nameof(DivineCastingType));
+
+    public override bool DoesNotGainSpellLevelsUntilFirstSpellLevel => true;
+
+    /// <summary>
+    /// Returns "prayer" because the diving casting type uses prayers for magic.
+    /// </summary>
+    public override string SpellNoun => "prayer";
+
+    /// <summary>
+    /// Returns "prayer" because the diving casting type uses prayers.
+    /// </summary>
+    public override string MagicType => "prayer";
+
+    /// <summary>
+    /// Returns false, because the diving casting type does not allow the player to choose which prayer to learn.
+    /// </summary>
+    public override bool CanChooseSpellToStudy => false;
+
+    /// <summary>
+    /// Returns "recite" because the divine casting type recites prayers; as opposed to casting spells.
+    /// </summary>
+    public override string CastVerb => "recite";
+
+    public override string GetBookTitle(Item bookItem)
+    {
+        BookItemFactory bookItemFactory = (BookItemFactory)bookItem.Factory;
+        return $"{SaveGame.CountPluralize("Book", bookItem.Count)} of {bookItemFactory.DivineTitle}";
+    }
+
     public override int SpellStat => Ability.Intelligence;
     public override int MaximumWeight => 30;
     public override int AttackSpeedMultiplier => 4;

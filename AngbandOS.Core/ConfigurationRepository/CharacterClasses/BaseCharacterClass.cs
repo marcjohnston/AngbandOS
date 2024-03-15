@@ -16,11 +16,302 @@ internal abstract class BaseCharacterClass : IGetKey<string>
         SaveGame = saveGame;
     }
 
+    public virtual string GetBookTitle(Item bookItem)
+    {
+        BookItemFactory bookItemFactory = (BookItemFactory)bookItem.Factory;
+        return $"{bookItemFactory.RealmName} {SaveGame.CountPluralize("Spellbook", bookItem.Count)}";
+    }
+
+    public virtual void Cast() => CastSpell();
+
+    /// <summary>
+    /// Cast a spell.  SaveGame.DoCast is called by default.  Mentalism casting type calls SaveGame.DoMentalism.
+    /// </summary>
+    protected void CastSpell()
+    {
+        string prayer = SaveGame.BaseCharacterClass.SpellNoun;
+        if (!SaveGame.CanCastSpells)
+        {
+            SaveGame.MsgPrint("You cannot cast spells!");
+            return;
+        }
+        if (SaveGame.BlindnessTimer.Value != 0 || SaveGame.NoLight())
+        {
+            SaveGame.MsgPrint("You cannot see!");
+            return;
+        }
+        if (SaveGame.ConfusedTimer.Value != 0)
+        {
+            SaveGame.MsgPrint("You are too confused!");
+            return;
+        }
+        if (!SaveGame.SelectItem(out Item? oPtr, "Use which book? ", false, true, true, SaveGame.SingletonRepository.ItemFilters.Get(nameof(IsUsableSpellBookItemFilter))))
+        {
+            SaveGame.MsgPrint($"You have no {prayer} books!");
+            return;
+        }
+        if (oPtr == null)
+        {
+            return;
+        }
+        SaveGame.HandleStuff();
+
+        // Allow the player to select the spell.
+        if (!SaveGame.GetSpell(out Spell? spell, SaveGame.BaseCharacterClass.CastVerb, oPtr, true))
+        {
+            SaveGame.MsgPrint($"You don't know any {prayer}s in that book.");
+            return;
+        }
+
+        // Check to see if the user cancelled the selection.
+        if (spell == null)
+        {
+            return;
+        }
+
+        if (spell.ClassSpell.ManaCost > SaveGame.Mana.Value)
+        {
+            string cast = SaveGame.BaseCharacterClass.CastVerb;
+            SaveGame.MsgPrint($"You do not have enough mana to {cast} this {prayer}.");
+            if (!SaveGame.GetCheck("Attempt it anyway? "))
+            {
+                return;
+            }
+        }
+        int failureChance = spell.FailureChance();
+        if (SaveGame.DieRoll(100) <= failureChance)
+        {
+            SaveGame.MsgPrint($"You failed to get the {prayer} off!");
+
+            // Reroll again with the save failure chance to run the failed script.
+            if (SaveGame.DieRoll(100) <= failureChance)
+            {
+                spell.CastFailed();
+            }
+        }
+        else
+        {
+            spell.CastSpell();
+        }
+        SaveGame.EnergyUse = 100;
+        if (spell.ClassSpell.ManaCost <= SaveGame.Mana.Value)
+        {
+            SaveGame.Mana.Value -= spell.ClassSpell.ManaCost;
+        }
+        else
+        {
+            int oops = spell.ClassSpell.ManaCost - SaveGame.Mana.Value;
+            SaveGame.Mana.Value = 0;
+            SaveGame.FractionalMana = 0;
+            SaveGame.MsgPrint("You faint from the effort!");
+            SaveGame.ParalysisTimer.AddTimer(SaveGame.DieRoll((5 * oops) + 1));
+            if (SaveGame.RandomLessThan(100) < 50)
+            {
+                bool perm = SaveGame.RandomLessThan(100) < 25;
+                SaveGame.MsgPrint("You have damaged your health!");
+                SaveGame.DecreaseAbilityScore(Ability.Constitution, 15 + SaveGame.DieRoll(10), perm);
+            }
+        }
+    }
+
+    public void CastMentalism()
+    {
+        int plev = SaveGame.ExperienceLevel;
+        if (SaveGame.ConfusedTimer.Value != 0)
+        {
+            SaveGame.MsgPrint("You are too confused!");
+            return;
+        }
+        if (!GetMentalismTalent(out int n))
+        {
+            return;
+        }
+        Talents.Talent talent = SaveGame.Talents[n];
+        if (talent.ManaCost > SaveGame.Mana.Value)
+        {
+            SaveGame.MsgPrint("You do not have enough mana to use this talent.");
+            if (!SaveGame.GetCheck("Attempt it anyway? "))
+            {
+                return;
+            }
+        }
+        int chance = talent.FailureChance();
+        if (SaveGame.RandomLessThan(100) < chance)
+        {
+            SaveGame.MsgPrint("You failed to concentrate hard enough!");
+            if (SaveGame.DieRoll(100) < chance / 2)
+            {
+                int i = SaveGame.DieRoll(100);
+                if (i < 5)
+                {
+                    SaveGame.MsgPrint("Oh, no! Your mind has gone blank!");
+                    SaveGame.LoseAllInfo();
+                }
+                else if (i < 15)
+                {
+                    SaveGame.MsgPrint("Weird visions seem to dance before your eyes...");
+                    SaveGame.HallucinationsTimer.AddTimer(5 + SaveGame.DieRoll(10));
+                }
+                else if (i < 45)
+                {
+                    SaveGame.MsgPrint("Your brain is addled!");
+                    SaveGame.ConfusedTimer.AddTimer(SaveGame.DieRoll(8));
+                }
+                else if (i < 90)
+                {
+                    SaveGame.StunTimer.AddTimer(SaveGame.DieRoll(8));
+                }
+                else
+                {
+                    SaveGame.MsgPrint("Your mind unleashes its power in an uncontrollable storm!");
+                    SaveGame.Project(1, 2 + (plev / 10), SaveGame.MapY, SaveGame.MapX, plev * 2, SaveGame.SingletonRepository.Projectiles.Get(nameof(ManaProjectile)), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectKill | ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem);
+                    SaveGame.Mana.Value = Math.Max(0, SaveGame.Mana.Value - (plev * Math.Max(1, plev / 10)));
+                }
+            }
+        }
+        else
+        {
+            talent.Use();
+        }
+        SaveGame.EnergyUse = 100;
+        if (talent.ManaCost <= SaveGame.Mana.Value)
+        {
+            SaveGame.Mana.Value -= talent.ManaCost;
+        }
+        else
+        {
+            int oops = talent.ManaCost - SaveGame.Mana.Value;
+            SaveGame.Mana.Value = 0;
+            SaveGame.FractionalMana = 0;
+            SaveGame.MsgPrint("You faint from the effort!");
+            SaveGame.ParalysisTimer.AddTimer(SaveGame.DieRoll((5 * oops) + 1));
+            if (SaveGame.RandomLessThan(100) < 50)
+            {
+                bool perm = SaveGame.RandomLessThan(100) < 25;
+                SaveGame.MsgPrint("You have damaged your mind!");
+                SaveGame.DecreaseAbilityScore(Ability.Wisdom, 15 + SaveGame.DieRoll(10), perm);
+            }
+        }
+    }
+
+    private bool GetMentalismTalent(out int sn)
+    {
+        int i;
+        int num = 0;
+        int y = 1;
+        int x = 20;
+        int plev = SaveGame.ExperienceLevel;
+        string p = "talent";
+        sn = -1;
+        bool flag = false;
+        ScreenBuffer? savedScreen = null;
+        List<Talent> talents = SaveGame.Talents;
+        for (i = 0; i < talents.Count; i++)
+        {
+            if (talents[i].Level <= plev)
+            {
+                num++;
+            }
+        }
+        string outVal = $"({p}s {0.IndexToLetter()}-{(num - 1).IndexToLetter()}, *=List, ESC=exit) Use which {p}? ";
+        while (!flag && SaveGame.GetCom(outVal, out char choice))
+        {
+            if (choice == ' ' || choice == '*' || choice == '?')
+            {
+                if (savedScreen == null)
+                {
+                    savedScreen = SaveGame.Screen.Clone();
+                    SaveGame.Screen.PrintLine("", y, x);
+                    SaveGame.Screen.Print("Name", y, x + 5);
+                    SaveGame.Screen.Print("Lv Mana Fail Info", y, x + 35);
+                    for (i = 0; i < talents.Count; i++)
+                    {
+                        Talents.Talent talent = talents[i];
+                        if (talent.Level > plev)
+                        {
+                            break;
+                        }
+                        string psiDesc = $"  {i.IndexToLetter()}) {talent.SummaryLine()}";
+                        SaveGame.Screen.PrintLine(psiDesc, y + i + 1, x);
+                    }
+                    SaveGame.Screen.PrintLine("", y + i + 1, x);
+                }
+                else
+                {
+                    SaveGame.Screen.Restore(savedScreen);
+                    savedScreen = null;
+                }
+                continue;
+            }
+            bool ask = char.IsUpper(choice);
+            if (ask)
+            {
+                choice = char.ToLower(choice);
+            }
+            i = char.IsLower(choice) ? choice.LetterToNumber() : -1;
+            if (i < 0 || i >= num)
+            {
+                continue;
+            }
+            if (ask)
+            {
+                string tmpVal = $"Use {talents[i].Name}? ";
+                if (!SaveGame.GetCheck(tmpVal))
+                {
+                    continue;
+                }
+            }
+            flag = true;
+        }
+        if (savedScreen != null)
+        {
+            SaveGame.Screen.Restore(savedScreen);
+        }
+        if (!flag)
+        {
+            return false;
+        }
+        sn = i;
+        return true;
+    }
+
+    /// <summary>
+    /// Returns the name for the magic type.  Returns "magic" by default.  Divine casting returns "prayer".
+    /// </summary>
+    public virtual string MagicType => "magic";
+
+    /// <summary>
+    /// Returns true, if the casting type allows the player to choose which spell they want to learn.  Returns true, by default.  Divine
+    /// spell casting returns false.
+    /// </summary>
+    public virtual bool CanChooseSpellToStudy => true;
+
+    /// <summary>
+    /// Returns true, if the casting type allows the player to use mana instead of consuming the item.  Returns false, by default.  Channeling
+    /// casting type returns true.
+    /// </summary>
+    public virtual bool CanUseManaInsteadOfConsumingItem => false;
+
+    /// <summary>
+    /// Returns the noun to use for spells.  Returns "spell" by default.  Divine casting returns "prayer".
+    /// </summary>
+    public virtual string SpellNoun => "spell";
+
+    /// <summary>
+    /// Returns the verb to use for casting.  Returns "cast" by default.  Divine casting type returns "recite".
+    /// </summary>
+    public virtual string CastVerb => "cast";
+
+    /// <summary>
+    /// Returns true, if the character class cannot gain spell levels until they reach their first spell level.  Returns false, by default.  Arcane and divine spell casting types
+    /// return true.
+    /// </summary>
+    public virtual bool DoesNotGainSpellLevelsUntilFirstSpellLevel => false;
+
     /// <summary>
     /// Returns true, if the spell weight of the armor can encumber movement.  Returns false, by default.  Arcane returns true.
     /// </summary>
     public virtual bool WeightEncumbersMovement => false;
-
 
     /// <summary>
     /// Returns true, if covered hands with gloves that are not of free-action, dexterity or typespecificvalue == 0 will restrict casting.  Returns false, by default.
@@ -112,13 +403,7 @@ internal abstract class BaseCharacterClass : IGetKey<string>
     /// <value>The spell weight.</value>
     public virtual int SpellWeight => 0;
 
-    /// <summary>
-    /// Returns a casting type for the character class.  Chosen ones and warriors 
-    /// </summary>
-    public virtual CastingType SpellCastingType => SaveGame.SingletonRepository.CastingTypes.Get(nameof(CastingType));
-
     public virtual int SpellStat => Ability.Strength;
-
     public virtual int MaximumMeleeAttacksPerRound(int level) => 5;
     public virtual int MaximumWeight => 35;
     public virtual int AttackSpeedMultiplier => 3;

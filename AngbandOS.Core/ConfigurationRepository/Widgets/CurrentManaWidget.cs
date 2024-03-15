@@ -20,7 +20,7 @@ internal class CurrentManaWidget : RangedMaxValueWidget
     public override string? JustificationName => nameof(RightJustification);
     public override string[]? EnabledConditionalNames => new string[]
     {
-        nameof(CanCastSpellsConditional)
+        nameof(UsesManaConditional)
     };
 
     public override (int, ColorEnum)[] Ranges => new (int, ColorEnum)[]
