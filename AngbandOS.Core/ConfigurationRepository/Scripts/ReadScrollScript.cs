@@ -75,7 +75,7 @@ internal class ReadScrollScript : Script, IScript, IRepeatableScript
         {
             item.BecomeFlavorAware();
             int itemLevel = item.Factory.LevelNormallyFound;
-            SaveGame.GainExperience((itemLevel + (SaveGame.ExperienceLevel >> 1)) / SaveGame.ExperienceLevel);
+            SaveGame.GainExperience((itemLevel + (SaveGame.ExperienceLevel.Value >> 1)) / SaveGame.ExperienceLevel.Value);
         }
         bool channeled = false;
         // Channelers can use mana instead of the scroll being used up

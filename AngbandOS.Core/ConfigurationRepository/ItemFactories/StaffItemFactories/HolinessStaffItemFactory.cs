@@ -33,7 +33,7 @@ internal class HolinessStaffItemFactory : StaffItemFactory
         {
             eventArgs.Identified = true;
         }
-        int k = 3 * SaveGame.ExperienceLevel;
+        int k = 3 * SaveGame.ExperienceLevel.Value;
         if (SaveGame.ProtectionFromEvilTimer.AddTimer(SaveGame.DieRoll(25) + k))
         {
             eventArgs.Identified = true;

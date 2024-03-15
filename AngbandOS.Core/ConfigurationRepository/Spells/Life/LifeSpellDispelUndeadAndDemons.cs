@@ -15,5 +15,5 @@ internal class LifeSpellDispelUndeadAndDemons : Spell
 
     public override string Name => "Dispel Undead & Demons";
 
-    protected override string LearnedDetails => $"dam {3 * SaveGame.ExperienceLevel}+{3 * SaveGame.ExperienceLevel}";
+    protected override string LearnedDetails => $"dam {3 * SaveGame.ExperienceLevel.Value}+{3 * SaveGame.ExperienceLevel.Value}";
 }

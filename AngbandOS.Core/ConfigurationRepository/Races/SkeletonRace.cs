@@ -69,7 +69,7 @@ internal class SkeletonRace : Race
         SaveGame.HasHoldLife = true;
         SaveGame.HasSeeInvisibility = true;
         SaveGame.HasPoisonResistance = true;
-        if (SaveGame.ExperienceLevel > 9)
+        if (SaveGame.ExperienceLevel.Value > 9)
         {
             SaveGame.HasColdResistance = true;
         }

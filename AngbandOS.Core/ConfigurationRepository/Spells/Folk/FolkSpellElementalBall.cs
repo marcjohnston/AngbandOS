@@ -15,5 +15,5 @@ internal class FolkSpellElementalBall : Spell
 
     public override string Name => "Teleport Away";
 
-    protected override string LearnedDetails => $"dam {75 + SaveGame.ExperienceLevel}";
+    protected override string LearnedDetails => $"dam {75 + SaveGame.ExperienceLevel.Value}";
 }

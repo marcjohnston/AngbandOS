@@ -17,5 +17,5 @@ internal class ChaosSpellManaStorm : Spell
 
     public override string Name => "Mana Storm";
 
-    protected override string LearnedDetails => $"dam {300 + (SaveGame.ExperienceLevel * 2)}";
+    protected override string LearnedDetails => $"dam {300 + (SaveGame.ExperienceLevel.Value * 2)}";
 }

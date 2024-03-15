@@ -15,5 +15,5 @@ internal class TarotSpellDeathDealing : Spell
 
     public override string Name => "Death Dealing";
 
-    protected override string LearnedDetails => $"dam {SaveGame.ExperienceLevel * 3}";
+    protected override string LearnedDetails => $"dam {SaveGame.ExperienceLevel.Value * 3}";
 }

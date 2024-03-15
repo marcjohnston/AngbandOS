@@ -117,7 +117,7 @@ internal class SaveGame
 
     public int HalfLevelsOfSpellcraft()
     {
-        int levels = ExperienceLevel;
+        int levels = ExperienceLevel.Value;
         if (BaseCharacterClass.DoesNotGainSpellLevelsUntilFirstSpellLevel && LevelOfFirstSpell != null)
         {
             levels = levels - LevelOfFirstSpell.Value + 1;
@@ -248,18 +248,7 @@ internal class SaveGame
     /// 
     /// </summary>
     /// <remarks>borg: player->lev</remarks>
-    public int ExperienceLevel
-    {
-        get
-        {
-            return _experienceLevel;
-        }
-        set
-        {
-            _experienceLevel = value;
-            ConsoleViewPort.ExperienceLevelChanged(_experienceLevel);
-        }
-    }
+    public readonly ExperienceLevelIntProperty ExperienceLevel;
 
     public Patron GooPatron;
     public bool HasAcidImmunity;
@@ -664,6 +653,7 @@ internal class SaveGame
         Speed = (SpeedIntProperty)SingletonRepository.Properties.Get(nameof(SpeedIntProperty));
         MaxHealth = (MaxHealthPointsIntProperty)SingletonRepository.Properties.Get(nameof(MaxHealthPointsIntProperty));
         SpareSpellSlots = (SpareSpellSlotsIntProperty)SingletonRepository.Properties.Get(nameof(SpareSpellSlotsIntProperty));
+        ExperienceLevel = (ExperienceLevelIntProperty)SingletonRepository.Properties.Get(nameof(ExperienceLevelIntProperty));
 
         AcidResistanceTimer = (AcidResistanceTimer)SingletonRepository.TimedActions.Get(nameof(Timers.AcidResistanceTimer));
         BleedingTimer = (BleedingTimer)SingletonRepository.TimedActions.Get(nameof(Timers.BleedingTimer));
@@ -1734,7 +1724,7 @@ internal class SaveGame
         GameDetails gameDetails = new GameDetails()
         {
             CharacterName = Name, // The player parameter
-            Level = ExperienceLevel, // The player parameter
+            Level = ExperienceLevel.Value, // The player parameter
             Gold = Gold.Value, // The parameter
             IsAlive = !IsDead, // If the player is dead, then the savegame Player will be null.
             Comments = ""
@@ -1966,10 +1956,10 @@ internal class SaveGame
                 MsgPrint(null);
                 if (IsDead)
                 {
-                    ConsoleViewPort.PlayerDied(Name, DiedFrom, ExperienceLevel);
+                    ConsoleViewPort.PlayerDied(Name, DiedFrom, ExperienceLevel.Value);
 
                     // Store the player info
-                    ExPlayer = new ExPlayer(Gender, Race, RaceAtBirth, BaseCharacterClass?.GetType().Name, PrimaryRealm, SecondaryRealm, Name, ExperienceLevel, Generation);
+                    ExPlayer = new ExPlayer(Gender, Race, RaceAtBirth, BaseCharacterClass?.GetType().Name, PrimaryRealm, SecondaryRealm, Name, ExperienceLevel.Value, Generation);
                     break;
                 }
                 GenerateNewLevel();
@@ -3060,9 +3050,9 @@ internal class SaveGame
         ShimmerMonsters = true;
         RepairMonsters = true;
         Disturb(true);
-        if (MaxLevelGained < ExperienceLevel)
+        if (MaxLevelGained < ExperienceLevel.Value)
         {
-            MaxLevelGained = ExperienceLevel;
+            MaxLevelGained = ExperienceLevel.Value;
         }
         if (CurDungeon.RecallLevel < CurrentDepth)
         {
@@ -3379,7 +3369,7 @@ internal class SaveGame
         CurrentDepth = 0;
         DiedFrom = "Ripe Old Age";
         ExperiencePoints.Value = MaxExperienceGained;
-        ExperienceLevel = MaxLevelGained;
+        ExperienceLevel.Value = MaxLevelGained;
         Gold.Value += 10000000;
         SetBackground(BackgroundImageEnum.Crown);
         Screen.Clear();
@@ -3402,12 +3392,12 @@ internal class SaveGame
             }
             Screen.Clear();
             string buf = Name.Trim() + Generation.ToRoman(true);
-            if (IsWinner || ExperienceLevel > Constants.PyMaxLevel)
+            if (IsWinner || ExperienceLevel.Value > Constants.PyMaxLevel)
             {
                 buf += " the Magnificent";
             }
             Screen.Print(buf, 39, 1);
-            buf = $"Level {ExperienceLevel} {BaseCharacterClass.ClassSubName(PrimaryRealm)}";
+            buf = $"Level {ExperienceLevel.Value} {BaseCharacterClass.ClassSubName(PrimaryRealm)}";
             Screen.Print(buf, 40, 1);
             string tmp = $"Killed on Level {CurrentDepth}".PadLeft(45);
             Screen.Print(tmp, 39, 34);
@@ -3691,7 +3681,7 @@ internal class SaveGame
         if (!GridPassable(MapY, MapX))
         {
             caveNoRegen = true;
-            if (InvulnerabilityTimer.Value == 0 && EtherealnessTimer.Value == 0 && (Health.Value > ExperienceLevel / 5 || Race.IsEthereal))
+            if (InvulnerabilityTimer.Value == 0 && EtherealnessTimer.Value == 0 && (Health.Value > ExperienceLevel.Value / 5 || Race.IsEthereal))
             {
                 string damDesc;
                 if (Race.IsEthereal)
@@ -3704,7 +3694,7 @@ internal class SaveGame
                     MsgPrint("You are being crushed!");
                     damDesc = "solid rock";
                 }
-                TakeHit(1 + (ExperienceLevel / 5), damDesc);
+                TakeHit(1 + (ExperienceLevel.Value / 5), damDesc);
             }
         }
         if (BleedingTimer.Value != 0 && InvulnerabilityTimer.Value == 0)
@@ -3801,7 +3791,7 @@ internal class SaveGame
             {
                 upkeepDivider = 12;
             }
-            if (TotalFriends > 1 + (ExperienceLevel / upkeepDivider))
+            if (TotalFriends > 1 + (ExperienceLevel.Value / upkeepDivider))
             {
                 upkeepFactor = TotalFriendLevels;
                 if (upkeepFactor > 100)
@@ -4021,7 +4011,6 @@ internal class SaveGame
         SingletonRepository.FlaggedActions.Get(nameof(RedrawPlayerFlaggedAction)).Check();
         SingletonRepository.FlaggedActions.Get(nameof(RedrawEquippyFlaggedAction)).Check();
         SingletonRepository.FlaggedActions.Get(nameof(RedrawTitleFlaggedAction)).Check();
-        SingletonRepository.FlaggedActions.Get(nameof(RedrawExperienceLevelFlaggedAction)).Check();
         SingletonRepository.FlaggedActions.Get(nameof(RedrawExperiencePointsFlaggedAction)).Check();
         SingletonRepository.FlaggedActions.Get(nameof(RedrawStatsFlaggedAction)).Check();
         SingletonRepository.FlaggedActions.Get(nameof(RedrawArmorFlaggedAction)).Check();
@@ -5201,7 +5190,7 @@ internal class SaveGame
 
     public bool HasteMonsters()
     {
-        return ProjectAtAllInLos(SingletonRepository.Projectiles.Get(nameof(OldSpeedProjectile)), ExperienceLevel);
+        return ProjectAtAllInLos(SingletonRepository.Projectiles.Get(nameof(OldSpeedProjectile)), ExperienceLevel.Value);
     }
 
     public bool HealMonster(int dir)
@@ -5272,7 +5261,7 @@ internal class SaveGame
     public bool PolyMonster(int dir)
     {
         ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;
-        return TargetedProject(SingletonRepository.Projectiles.Get(nameof(OldPolyProjectile)), dir, ExperienceLevel, flg);
+        return TargetedProject(SingletonRepository.Projectiles.Get(nameof(OldPolyProjectile)), dir, ExperienceLevel.Value, flg);
     }
 
     public int PolymorphMonster(MonsterRace rPtr)
@@ -5413,31 +5402,31 @@ internal class SaveGame
     public bool SleepMonster(int dir)
     {
         ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;
-        return TargetedProject(SingletonRepository.Projectiles.Get(nameof(OldSleepProjectile)), dir, ExperienceLevel, flg);
+        return TargetedProject(SingletonRepository.Projectiles.Get(nameof(OldSleepProjectile)), dir, ExperienceLevel.Value, flg);
     }
 
     public void SleepMonstersTouch()
     {
         ProjectionFlag flg = ProjectionFlag.ProjectKill | ProjectionFlag.ProjectHide;
-        Project(0, 1, MapY, MapX, ExperienceLevel, SingletonRepository.Projectiles.Get(nameof(OldSleepProjectile)), flg);
+        Project(0, 1, MapY, MapX, ExperienceLevel.Value, SingletonRepository.Projectiles.Get(nameof(OldSleepProjectile)), flg);
     }
 
     public bool SlowMonster(int dir)
     {
         ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;
-        return TargetedProject(SingletonRepository.Projectiles.Get(nameof(OldSlowProjectile)), dir, ExperienceLevel, flg);
+        return TargetedProject(SingletonRepository.Projectiles.Get(nameof(OldSlowProjectile)), dir, ExperienceLevel.Value, flg);
     }
 
     public bool SpeedMonster(int dir)
     {
         ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;
-        return TargetedProject(SingletonRepository.Projectiles.Get(nameof(OldSpeedProjectile)), dir, ExperienceLevel, flg);
+        return TargetedProject(SingletonRepository.Projectiles.Get(nameof(OldSpeedProjectile)), dir, ExperienceLevel.Value, flg);
     }
 
     public void StasisMonster(int dir)
     {
         ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;
-        TargetedProject(SingletonRepository.Projectiles.Get(nameof(StasisProjectile)), dir, ExperienceLevel, flg);
+        TargetedProject(SingletonRepository.Projectiles.Get(nameof(StasisProjectile)), dir, ExperienceLevel.Value, flg);
     }
 
     public void StasisMonsters(int dam)
@@ -5619,7 +5608,7 @@ internal class SaveGame
     public void WallBreaker()
     {
         int dummy;
-        if (DieRoll(80 + ExperienceLevel) < 70)
+        if (DieRoll(80 + ExperienceLevel.Value) < 70)
         {
             do
             {
@@ -6001,7 +5990,7 @@ internal class SaveGame
             SingletonRepository.FlaggedActions.Get(nameof(UpdateViewFlaggedAction)).Set();
             SingletonRepository.FlaggedActions.Get(nameof(UpdateDistancesFlaggedAction)).Set();
         }
-        else if (RandomLessThan(100) < AbilityScores[Ability.Dexterity].DexTheftAvoidance + ExperienceLevel)
+        else if (RandomLessThan(100) < AbilityScores[Ability.Dexterity].DexTheftAvoidance + ExperienceLevel.Value)
         {
             MsgPrint("The door holds firm.");
             more = true;
@@ -6027,7 +6016,7 @@ internal class SaveGame
         // If we don't have enough mana we'll use health instead
         bool useHealth = Mana.Value < cost;
         // Can't use it if we're too low level
-        if (ExperienceLevel < minLevel)
+        if (ExperienceLevel.Value < minLevel)
         {
             MsgPrint($"You need to attain level {minLevel} to use this power.");
             EnergyUse = 0;
@@ -6055,9 +6044,9 @@ internal class SaveGame
             difficulty += StunTimer.Value;
         }
         // Easier to use powers if you're higher level than you need to be
-        else if (ExperienceLevel > minLevel)
+        else if (ExperienceLevel.Value > minLevel)
         {
-            int levAdj = (ExperienceLevel - minLevel) / 3;
+            int levAdj = (ExperienceLevel.Value - minLevel) / 3;
             if (levAdj > 10)
             {
                 levAdj = 10;
@@ -7084,14 +7073,14 @@ internal class SaveGame
                         resistStun += 88;
                     }
                     // Have a number of attempts to choose a martial arts attack
-                    for (times = 0; times < (ExperienceLevel < 7 ? 1 : ExperienceLevel / 7); times++)
+                    for (times = 0; times < (ExperienceLevel.Value < 7 ? 1 : ExperienceLevel.Value / 7); times++)
                     {
                         // Choose an attack randomly, but reject it and re-choose if it's too
                         // high level or we fail a chance roll
                         do
                         {
                             martialArtsAttack = SingletonRepository.MartialArtsAttacks.ToWeightedRandom().ChooseOrDefault();
-                        } while (martialArtsAttack.MinLevel > ExperienceLevel || DieRoll(ExperienceLevel) < martialArtsAttack.Chance);
+                        } while (martialArtsAttack.MinLevel > ExperienceLevel.Value || DieRoll(ExperienceLevel.Value) < martialArtsAttack.Chance);
                         // We've chosen an attack, use it if it's better than the previous
                         // choice (unless we're stunned or confused in which case we're stuck
                         // with the weakest attack type
@@ -7143,7 +7132,7 @@ internal class SaveGame
                         MsgPrint(string.Format(martialArtsAttack.Desc, monsterName));
                     }
                     // It might be a critical hit
-                    totalDamage = PlayerCriticalMelee(ExperienceLevel * DieRoll(10), martialArtsAttack.MinLevel, totalDamage);
+                    totalDamage = PlayerCriticalMelee(ExperienceLevel.Value * DieRoll(10), martialArtsAttack.MinLevel, totalDamage);
                     // Make a groin attack into a stunning attack
                     if (specialEffect == Constants.MaKnee && totalDamage + DamageBonus < monster.Health)
                     {
@@ -7154,7 +7143,7 @@ internal class SaveGame
                     // Slow if we had a knee attack
                     else if (specialEffect == Constants.MaSlow && totalDamage + DamageBonus < monster.Health)
                     {
-                        if (!race.Unique && DieRoll(ExperienceLevel) > race.Level &&
+                        if (!race.Unique && DieRoll(ExperienceLevel.Value) > race.Level &&
                             monster.Speed > 60)
                         {
                             MsgPrint($"{monsterName} starts limping slower.");
@@ -7164,7 +7153,7 @@ internal class SaveGame
                     // Stun if we had a stunning attack
                     if (stunEffect != 0 && totalDamage + DamageBonus < monster.Health)
                     {
-                        if (ExperienceLevel > DieRoll(race.Level + resistStun + 10))
+                        if (ExperienceLevel.Value > DieRoll(race.Level + resistStun + 10))
                         {
                             MsgPrint(monster.StunLevel != 0 ? $"{monsterName} is more stunned." : $"{monsterName} is stunned.");
                             monster.StunLevel += stunEffect;
@@ -7180,7 +7169,7 @@ internal class SaveGame
                     // Extra damage for backstabbing
                     if (backstab)
                     {
-                        totalDamage *= 3 + (ExperienceLevel / 40);
+                        totalDamage *= 3 + (ExperienceLevel.Value / 40);
                     }
                     else if (stabFleeing)
                     {
@@ -7289,7 +7278,7 @@ internal class SaveGame
                     else
                     {
                         MsgPrint($"{monsterName} appears confused.");
-                        monster.ConfusionLevel += 10 + (RandomLessThan(ExperienceLevel) / 5);
+                        monster.ConfusionLevel += 10 + (RandomLessThan(ExperienceLevel.Value) / 5);
                     }
                 }
                 // A chaos blade might teleport the monster away
@@ -7392,7 +7381,7 @@ internal class SaveGame
     public int PlayerCriticalRanged(int weight, int plus, int damage)
     {
         // Chance of a critical is based on weight, level, and plusses
-        int i = weight + ((AttackBonus + plus) * 4) + (ExperienceLevel * 2);
+        int i = weight + ((AttackBonus + plus) * 4) + (ExperienceLevel.Value * 2);
         if (DieRoll(5000) <= i)
         {
             int k = weight + DieRoll(500);
@@ -8181,7 +8170,7 @@ internal class SaveGame
     /// <returns> The damage total modified for a critical hit </returns>
     private int PlayerCriticalMelee(int weight, int plus, int damage)
     {
-        int i = weight + ((AttackBonus + plus) * 5) + (ExperienceLevel * 3);
+        int i = weight + ((AttackBonus + plus) * 5) + (ExperienceLevel.Value * 3);
         if (DieRoll(5000) <= i)
         {
             int k = weight + DieRoll(650);
@@ -9116,7 +9105,7 @@ internal class SaveGame
     {
         int i;
         MaxLevelGained = 1;
-        ExperienceLevel = 1;
+        ExperienceLevel.Value = 1;
         ExperienceMultiplier = Race.ExperienceFactor + BaseCharacterClass.ExperienceFactor;
         HitDie = Race.HitDieBonus + BaseCharacterClass.HitDieBonus;
         MaxHealth.Value = HitDie;
@@ -12368,7 +12357,7 @@ internal class SaveGame
                 }
             }
         }
-        return martialArtistArmWgt > 100 + (ExperienceLevel * 4);
+        return martialArtistArmWgt > 100 + (ExperienceLevel.Value * 4);
     }
 
     public string RealmNames(Realm? primaryRealm, Realm? secondaryRealm, string defaultTitle = "None")
@@ -12748,7 +12737,7 @@ internal class SaveGame
             }
         }
         CheckExperience();
-        MaxLevelGained = ExperienceLevel;
+        MaxLevelGained = ExperienceLevel.Value;
         SingletonRepository.FlaggedActions.Get(nameof(PrBasicRedrawActionGroupSetFlaggedAction)).Set();
         SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
         HandleStuff();
@@ -12780,25 +12769,24 @@ internal class SaveGame
         }
         SingletonRepository.FlaggedActions.Get(nameof(RedrawExperiencePointsFlaggedAction)).Set();
         HandleStuff();
-        while (ExperienceLevel > 1 && ExperiencePoints.Value < Constants.PlayerExp[ExperienceLevel - 2] * ExperienceMultiplier / 100L)
+        while (ExperienceLevel.Value > 1 && ExperiencePoints.Value < Constants.PlayerExp[ExperienceLevel.Value - 2] * ExperienceMultiplier / 100L)
         {
-            ExperienceLevel--;
+            ExperienceLevel.Value--;
             RedrawSingleLocation(MapY, MapX);
             SingletonRepository.FlaggedActions.Get(nameof(UpdateHealthFlaggedAction)).Set();
             SingletonRepository.FlaggedActions.Get(nameof(UpdateManaFlaggedAction)).Set();
             SingletonRepository.FlaggedActions.Get(nameof(UpdateSpellsFlaggedAction)).Set();
             SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
             SingletonRepository.FlaggedActions.Get(nameof(RedrawTitleFlaggedAction)).Set();
-            SingletonRepository.FlaggedActions.Get(nameof(RedrawExperienceLevelFlaggedAction)).Set();
             HandleStuff();
         }
-        while (ExperienceLevel < Constants.PyMaxLevel && ExperiencePoints.Value >= Constants.PlayerExp[ExperienceLevel - 1] * ExperienceMultiplier / 100L)
+        while (ExperienceLevel.Value < Constants.PyMaxLevel && ExperiencePoints.Value >= Constants.PlayerExp[ExperienceLevel.Value - 1] * ExperienceMultiplier / 100L)
         {
-            ExperienceLevel++;
+            ExperienceLevel.Value++;
             RedrawSingleLocation(MapY, MapX);
-            if (ExperienceLevel > MaxLevelGained)
+            if (ExperienceLevel.Value > MaxLevelGained)
             {
-                MaxLevelGained = ExperienceLevel;
+                MaxLevelGained = ExperienceLevel.Value;
                 if (BaseCharacterClass.ID == CharacterClass.Fanatic || BaseCharacterClass.ID == CharacterClass.Cultist)
                 {
                     levelReward = true;
@@ -12816,13 +12804,12 @@ internal class SaveGame
                 }
             }
             PlaySound(SoundEffectEnum.LevelGain);
-            MsgPrint($"Welcome to level {ExperienceLevel}.");
+            MsgPrint($"Welcome to level {ExperienceLevel.Value}.");
             SingletonRepository.FlaggedActions.Get(nameof(UpdateHealthFlaggedAction)).Set();
             SingletonRepository.FlaggedActions.Get(nameof(UpdateManaFlaggedAction)).Set();
             SingletonRepository.FlaggedActions.Get(nameof(UpdateSpellsFlaggedAction)).Set();
             SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
             SingletonRepository.FlaggedActions.Get(nameof(RedrawTitleFlaggedAction)).Set();
-            SingletonRepository.FlaggedActions.Get(nameof(RedrawExperienceLevelFlaggedAction)).Set();
             SingletonRepository.FlaggedActions.Get(nameof(RedrawExperiencePointsFlaggedAction)).Set();
             HandleStuff();
             if (levelReward)
@@ -13016,64 +13003,64 @@ internal class SaveGame
     public ItemCharacteristics GetAbilitiesAsItemFlags()
     {
         ItemCharacteristics itemCharacteristics = new ItemCharacteristics();
-        if ((BaseCharacterClass.ID == CharacterClass.Warrior && ExperienceLevel > 29) || (BaseCharacterClass.ID == CharacterClass.Paladin && ExperienceLevel > 39) || (BaseCharacterClass.ID == CharacterClass.Fanatic && ExperienceLevel > 39))
+        if ((BaseCharacterClass.ID == CharacterClass.Warrior && ExperienceLevel.Value > 29) || (BaseCharacterClass.ID == CharacterClass.Paladin && ExperienceLevel.Value > 39) || (BaseCharacterClass.ID == CharacterClass.Fanatic && ExperienceLevel.Value > 39))
         {
             itemCharacteristics.ResFear = true;
         }
-        if (BaseCharacterClass.ID == CharacterClass.Fanatic && ExperienceLevel > 29)
+        if (BaseCharacterClass.ID == CharacterClass.Fanatic && ExperienceLevel.Value > 29)
         {
             itemCharacteristics.ResChaos = true;
         }
-        if (BaseCharacterClass.ID == CharacterClass.Cultist && ExperienceLevel > 19)
+        if (BaseCharacterClass.ID == CharacterClass.Cultist && ExperienceLevel.Value > 19)
         {
             itemCharacteristics.ResChaos = true;
         }
-        if (BaseCharacterClass.ID == CharacterClass.Monk && ExperienceLevel > 9 && !MartialArtistHeavyArmor())
+        if (BaseCharacterClass.ID == CharacterClass.Monk && ExperienceLevel.Value > 9 && !MartialArtistHeavyArmor())
         {
             itemCharacteristics.Speed = true;
         }
-        if (BaseCharacterClass.ID == CharacterClass.Monk && ExperienceLevel > 24 && !MartialArtistHeavyArmor())
+        if (BaseCharacterClass.ID == CharacterClass.Monk && ExperienceLevel.Value > 24 && !MartialArtistHeavyArmor())
         {
             itemCharacteristics.FreeAct = true;
         }
         if (BaseCharacterClass.ID == CharacterClass.Mindcrafter)
         {
-            if (ExperienceLevel > 9)
+            if (ExperienceLevel.Value > 9)
             {
                 itemCharacteristics.ResFear = true;
             }
-            if (ExperienceLevel > 19)
+            if (ExperienceLevel.Value > 19)
             {
                 itemCharacteristics.SustWis = true;
             }
-            if (ExperienceLevel > 29)
+            if (ExperienceLevel.Value > 29)
             {
                 itemCharacteristics.ResConf = true;
             }
-            if (ExperienceLevel > 39)
+            if (ExperienceLevel.Value > 39)
             {
                 itemCharacteristics.Telepathy = true;
             }
         }
         if (BaseCharacterClass.ID == CharacterClass.Mystic)
         {
-            if (ExperienceLevel > 9)
+            if (ExperienceLevel.Value > 9)
             {
                 itemCharacteristics.ResConf = true;
             }
-            if (ExperienceLevel > 9 && !MartialArtistHeavyArmor())
+            if (ExperienceLevel.Value > 9 && !MartialArtistHeavyArmor())
             {
                 itemCharacteristics.Speed = true;
             }
-            if (ExperienceLevel > 24)
+            if (ExperienceLevel.Value > 24)
             {
                 itemCharacteristics.ResFear = true;
             }
-            if (ExperienceLevel > 29 && !MartialArtistHeavyArmor())
+            if (ExperienceLevel.Value > 29 && !MartialArtistHeavyArmor())
             {
                 itemCharacteristics.FreeAct = true;
             }
-            if (ExperienceLevel > 39)
+            if (ExperienceLevel.Value > 39)
             {
                 itemCharacteristics.Telepathy = true;
             }
@@ -13081,109 +13068,109 @@ internal class SaveGame
         if (BaseCharacterClass.ID == CharacterClass.ChosenOne)
         {
             itemCharacteristics.Lightsource = true;
-            if (ExperienceLevel >= 2)
+            if (ExperienceLevel.Value >= 2)
             {
                 itemCharacteristics.ResConf = true;
             }
-            if (ExperienceLevel >= 4)
+            if (ExperienceLevel.Value >= 4)
             {
                 itemCharacteristics.ResFear = true;
             }
-            if (ExperienceLevel >= 6)
+            if (ExperienceLevel.Value >= 6)
             {
                 itemCharacteristics.ResBlind = true;
             }
-            if (ExperienceLevel >= 8)
+            if (ExperienceLevel.Value >= 8)
             {
                 itemCharacteristics.Feather = true;
             }
-            if (ExperienceLevel >= 10)
+            if (ExperienceLevel.Value >= 10)
             {
                 itemCharacteristics.SeeInvis = true;
             }
-            if (ExperienceLevel >= 12)
+            if (ExperienceLevel.Value >= 12)
             {
                 itemCharacteristics.SlowDigest = true;
             }
-            if (ExperienceLevel >= 14)
+            if (ExperienceLevel.Value >= 14)
             {
                 itemCharacteristics.SustCon = true;
             }
-            if (ExperienceLevel >= 16)
+            if (ExperienceLevel.Value >= 16)
             {
                 itemCharacteristics.ResPois = true;
             }
-            if (ExperienceLevel >= 18)
+            if (ExperienceLevel.Value >= 18)
             {
                 itemCharacteristics.SustDex = true;
             }
-            if (ExperienceLevel >= 20)
+            if (ExperienceLevel.Value >= 20)
             {
                 itemCharacteristics.SustStr = true;
             }
-            if (ExperienceLevel >= 22)
+            if (ExperienceLevel.Value >= 22)
             {
                 itemCharacteristics.HoldLife = true;
             }
-            if (ExperienceLevel >= 24)
+            if (ExperienceLevel.Value >= 24)
             {
                 itemCharacteristics.FreeAct = true;
             }
-            if (ExperienceLevel >= 26)
+            if (ExperienceLevel.Value >= 26)
             {
                 itemCharacteristics.Telepathy = true;
             }
-            if (ExperienceLevel >= 28)
+            if (ExperienceLevel.Value >= 28)
             {
                 itemCharacteristics.ResDark = true;
             }
-            if (ExperienceLevel >= 30)
+            if (ExperienceLevel.Value >= 30)
             {
                 itemCharacteristics.ResLight = true;
             }
-            if (ExperienceLevel >= 32)
+            if (ExperienceLevel.Value >= 32)
             {
                 itemCharacteristics.SustCha = true;
             }
-            if (ExperienceLevel >= 34)
+            if (ExperienceLevel.Value >= 34)
             {
                 itemCharacteristics.ResSound = true;
             }
-            if (ExperienceLevel >= 36)
+            if (ExperienceLevel.Value >= 36)
             {
                 itemCharacteristics.ResDisen = true;
             }
-            if (ExperienceLevel >= 38)
+            if (ExperienceLevel.Value >= 38)
             {
                 itemCharacteristics.Regen = true;
             }
-            if (ExperienceLevel >= 40)
+            if (ExperienceLevel.Value >= 40)
             {
                 itemCharacteristics.SustInt = true;
             }
-            if (ExperienceLevel >= 42)
+            if (ExperienceLevel.Value >= 42)
             {
                 itemCharacteristics.ResChaos = true;
             }
-            if (ExperienceLevel >= 44)
+            if (ExperienceLevel.Value >= 44)
             {
                 itemCharacteristics.SustWis = true;
             }
-            if (ExperienceLevel >= 46)
+            if (ExperienceLevel.Value >= 46)
             {
                 itemCharacteristics.ResNexus = true;
             }
-            if (ExperienceLevel >= 48)
+            if (ExperienceLevel.Value >= 48)
             {
                 itemCharacteristics.ResShards = true;
             }
-            if (ExperienceLevel >= 50)
+            if (ExperienceLevel.Value >= 50)
             {
                 itemCharacteristics.ResNether = true;
             }
         }
 
-        Race.UpdateRacialAbilities(ExperienceLevel, itemCharacteristics);
+        Race.UpdateRacialAbilities(ExperienceLevel.Value, itemCharacteristics);
         if (Regen)
         {
             itemCharacteristics.Regen = true;
@@ -13224,23 +13211,23 @@ internal class SaveGame
         if (SustainAll)
         {
             itemCharacteristics.SustCon = true;
-            if (ExperienceLevel > 9)
+            if (ExperienceLevel.Value > 9)
             {
                 itemCharacteristics.SustStr = true;
             }
-            if (ExperienceLevel > 19)
+            if (ExperienceLevel.Value > 19)
             {
                 itemCharacteristics.SustDex = true;
             }
-            if (ExperienceLevel > 29)
+            if (ExperienceLevel.Value > 29)
             {
                 itemCharacteristics.SustWis = true;
             }
-            if (ExperienceLevel > 39)
+            if (ExperienceLevel.Value > 39)
             {
                 itemCharacteristics.SustInt = true;
             }
-            if (ExperienceLevel > 49)
+            if (ExperienceLevel.Value > 49)
             {
                 itemCharacteristics.SustCha = true;
             }
@@ -13571,7 +13558,7 @@ internal class SaveGame
 
     public bool SpellOkay(Spell sPtr, bool known)
     {
-        if (sPtr.ClassSpell.Level > ExperienceLevel)
+        if (sPtr.ClassSpell.Level > ExperienceLevel.Value)
         {
             return false;
         }
@@ -17102,7 +17089,7 @@ internal class SaveGame
         List<Mutation> list = new List<Mutation>();
         foreach (Mutation mutation in MutationsPossessed)
         {
-            if (string.IsNullOrEmpty(mutation.ActivationSummary(ExperienceLevel)))
+            if (string.IsNullOrEmpty(mutation.ActivationSummary(ExperienceLevel.Value)))
             {
                 continue;
             }

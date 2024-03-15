@@ -17,5 +17,5 @@ internal class ChaosSpellSonicBoom : Spell
 
     public override string Name => "Sonic Boom";
 
-    protected override string LearnedDetails => $"dam {45 + SaveGame.ExperienceLevel}";
+    protected override string LearnedDetails => $"dam {45 + SaveGame.ExperienceLevel.Value}";
 }

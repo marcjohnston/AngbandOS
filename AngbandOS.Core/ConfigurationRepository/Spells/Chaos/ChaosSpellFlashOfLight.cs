@@ -17,5 +17,5 @@ internal class ChaosSpellFlashOfLight : Spell
 
     public override string Name => "Flash of Light";
 
-    protected override string LearnedDetails => $"dam 2d{SaveGame.ExperienceLevel / 2}";
+    protected override string LearnedDetails => $"dam 2d{SaveGame.ExperienceLevel.Value / 2}";
 }

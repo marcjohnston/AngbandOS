@@ -15,5 +15,5 @@ internal class NatureSpellDaylight : Spell
 
     public override string Name => "Daylight";
 
-    protected override string LearnedDetails => $"dam 2d{SaveGame.ExperienceLevel / 2}";
+    protected override string LearnedDetails => $"dam 2d{SaveGame.ExperienceLevel.Value / 2}";
 }

@@ -22,6 +22,6 @@ internal class ManaStormScript : Script, IScript
         {
             return;
         }
-        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(ManaProjectile)), dir, 300 + (SaveGame.ExperienceLevel * 2), 4);
+        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(ManaProjectile)), dir, 300 + (SaveGame.ExperienceLevel.Value * 2), 4);
     }
 }

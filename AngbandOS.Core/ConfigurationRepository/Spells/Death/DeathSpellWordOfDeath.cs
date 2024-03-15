@@ -17,5 +17,5 @@ internal class DeathSpellWordOfDeath : Spell
 
     public override string Name => "Word of Death";
 
-    protected override string LearnedDetails => $"dam {SaveGame.ExperienceLevel * 3}";
+    protected override string LearnedDetails => $"dam {SaveGame.ExperienceLevel.Value * 3}";
 }

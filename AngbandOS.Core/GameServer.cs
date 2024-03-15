@@ -36,7 +36,7 @@ public class GameServer
             }
             else
             {
-                return SaveGame.ExperienceLevel;
+                return SaveGame.ExperienceLevel.Value;
             }
         }
     }

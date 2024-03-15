@@ -107,7 +107,7 @@ internal class AimWandScript : Script, IScript, IRepeatableScript, ISuccessfulSc
         if (ident && !item.IsFlavorAware())
         {
             item.BecomeFlavorAware();
-            SaveGame.GainExperience((itemLevel + (SaveGame.ExperienceLevel >> 1)) / SaveGame.ExperienceLevel);
+            SaveGame.GainExperience((itemLevel + (SaveGame.ExperienceLevel.Value >> 1)) / SaveGame.ExperienceLevel.Value);
         }
         // If we're a channeler then we should be using mana instead of charges
         bool channeled = false;

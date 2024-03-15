@@ -18,7 +18,7 @@ internal class RadiationActiveMutation : Mutation
             return;
         }
         SaveGame.MsgPrint("Radiation flows from your body!");
-        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(NukeProjectile)), 0, SaveGame.ExperienceLevel * 2, 3 + (SaveGame.ExperienceLevel / 20));
+        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(NukeProjectile)), 0, SaveGame.ExperienceLevel.Value * 2, 3 + (SaveGame.ExperienceLevel.Value / 20));
     }
 
     public override string ActivationSummary(int lvl)

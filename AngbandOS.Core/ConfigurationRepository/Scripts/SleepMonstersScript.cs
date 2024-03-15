@@ -14,7 +14,7 @@ internal class SleepMonstersScript : Script, IScript, ISuccessfulScript
 
     public bool ExecuteSuccessfulScript()
     {
-        return SaveGame.ProjectAtAllInLos(SaveGame.SingletonRepository.Projectiles.Get(nameof(OldSleepProjectile)), SaveGame.ExperienceLevel);
+        return SaveGame.ProjectAtAllInLos(SaveGame.SingletonRepository.Projectiles.Get(nameof(OldSleepProjectile)), SaveGame.ExperienceLevel.Value);
     }
 
     /// <summary>

@@ -19,18 +19,18 @@ internal class DivineInterventionScript : Script, IScript
     public void ExecuteScript()
     {
         SaveGame.Project(0, 1, SaveGame.MapY, SaveGame.MapX, 777, SaveGame.SingletonRepository.Projectiles.Get(nameof(HolyFireProjectile)), ProjectionFlag.ProjectKill);
-        SaveGame.DispelMonsters(SaveGame.ExperienceLevel * 4);
+        SaveGame.DispelMonsters(SaveGame.ExperienceLevel.Value * 4);
         SaveGame.RunScript(nameof(SlowMonstersScript));
-        SaveGame.StunMonsters(SaveGame.ExperienceLevel * 4);
-        SaveGame.ConfuseMonsters(SaveGame.ExperienceLevel * 4);
-        SaveGame.TurnMonsters(SaveGame.ExperienceLevel * 4);
-        SaveGame.StasisMonsters(SaveGame.ExperienceLevel * 4);
-        SaveGame.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel, SaveGame.SingletonRepository.MonsterFilters.Get(nameof(CthuloidMonsterFilter)), true);
+        SaveGame.StunMonsters(SaveGame.ExperienceLevel.Value * 4);
+        SaveGame.ConfuseMonsters(SaveGame.ExperienceLevel.Value * 4);
+        SaveGame.TurnMonsters(SaveGame.ExperienceLevel.Value * 4);
+        SaveGame.StasisMonsters(SaveGame.ExperienceLevel.Value * 4);
+        SaveGame.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel.Value, SaveGame.SingletonRepository.MonsterFilters.Get(nameof(CthuloidMonsterFilter)), true);
         SaveGame.SuperheroismTimer.AddTimer(SaveGame.DieRoll(25) + 25);
         SaveGame.RestoreHealth(300);
         if (SaveGame.HasteTimer.Value == 0)
         {
-            SaveGame.HasteTimer.SetTimer(SaveGame.DieRoll(20 + SaveGame.ExperienceLevel) + SaveGame.ExperienceLevel);
+            SaveGame.HasteTimer.SetTimer(SaveGame.DieRoll(20 + SaveGame.ExperienceLevel.Value) + SaveGame.ExperienceLevel.Value);
         }
         else
         {

@@ -99,7 +99,7 @@ internal class BleedingTimer : Timer
 
     public override bool SetTimer(int value)
     {
-        if (!SaveGame.Race.CanBleed(SaveGame.ExperienceLevel))
+        if (!SaveGame.Race.CanBleed(SaveGame.ExperienceLevel.Value))
         {
             value = 0;
         }

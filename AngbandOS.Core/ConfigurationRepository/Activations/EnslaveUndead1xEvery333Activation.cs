@@ -22,7 +22,7 @@ internal class EnslaveUndead1xEvery333Activation : DirectionalActivation
 
     protected override bool Activate(int direction)
     {
-        SaveGame.ControlOneUndead(direction, SaveGame.ExperienceLevel);
+        SaveGame.ControlOneUndead(direction, SaveGame.ExperienceLevel.Value);
         return true;
     }
 

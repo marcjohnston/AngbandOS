@@ -24,7 +24,7 @@ internal class BattleFrenzyScript : Script, IScript
         SaveGame.FearTimer.ResetTimer();
         if (SaveGame.HasteTimer.Value == 0)
         {
-            SaveGame.HasteTimer.SetTimer(SaveGame.DieRoll(20 + (SaveGame.ExperienceLevel / 2)) + (SaveGame.ExperienceLevel / 2));
+            SaveGame.HasteTimer.SetTimer(SaveGame.DieRoll(20 + (SaveGame.ExperienceLevel.Value / 2)) + (SaveGame.ExperienceLevel.Value / 2));
         }
         else
         {

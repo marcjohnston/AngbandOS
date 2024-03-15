@@ -17,7 +17,7 @@ internal class EatItemAttackEffect : AttackEffect
     {
         // Steal an item
         SaveGame.TakeHit(damage, monsterDescription);
-        if ((SaveGame.ParalysisTimer.Value == 0 && SaveGame.RandomLessThan(100) < SaveGame.AbilityScores[Ability.Dexterity].DexTheftAvoidance + SaveGame.ExperienceLevel) || SaveGame.HasAntiTheft)
+        if ((SaveGame.ParalysisTimer.Value == 0 && SaveGame.RandomLessThan(100) < SaveGame.AbilityScores[Ability.Dexterity].DexTheftAvoidance + SaveGame.ExperienceLevel.Value) || SaveGame.HasAntiTheft)
         {
             SaveGame.MsgPrint("You grab hold of your backpack!");
             blinked = true;

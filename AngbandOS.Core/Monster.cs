@@ -435,7 +435,7 @@ internal class Monster : IItemContainer
             Race.Knowledge.Characteristics.EldritchHorror = true;
 
             // Allow the race to resist.
-            if (SaveGame.DieRoll(100) < SaveGame.Race.ChanceOfSanityBlastImmunity(SaveGame.ExperienceLevel))
+            if (SaveGame.DieRoll(100) < SaveGame.Race.ChanceOfSanityBlastImmunity(SaveGame.ExperienceLevel.Value))
             {
                 return;
             }
@@ -962,7 +962,7 @@ internal class Monster : IItemContainer
                         if (newY == SaveGame.MapY && newX == SaveGame.MapX)
                         {
                             SaveGame.MsgPrint("The rune explodes!");
-                            SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(ManaProjectile)), 0, 2 * ((SaveGame.ExperienceLevel / 2) + SaveGame.DiceRoll(7, 7)), 2);
+                            SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(ManaProjectile)), 0, 2 * ((SaveGame.ExperienceLevel.Value / 2) + SaveGame.DiceRoll(7, 7)), 2);
                         }
                         else
                         {
@@ -2639,7 +2639,7 @@ internal class Monster : IItemContainer
         {
             return false;
         }
-        int playerLevel = saveGame.ExperienceLevel;
+        int playerLevel = saveGame.ExperienceLevel.Value;
         int monsterLevel = Race.Level + (GetMonsterIndex() & 0x08) + 25;
         // If we're tougher than the player, don't move away
         if (monsterLevel > playerLevel + 4)
@@ -2732,7 +2732,7 @@ internal class Monster : IItemContainer
             {
                 SaveGame.Disturb(true);
                 // Protection From Evil might repel the attack
-                if (SaveGame.ProtectionFromEvilTimer.Value > 0 && Race.Evil && SaveGame.ExperienceLevel >= monsterLevel && this.SaveGame.RandomLessThan(100) + SaveGame.ExperienceLevel > 50)
+                if (SaveGame.ProtectionFromEvilTimer.Value > 0 && Race.Evil && SaveGame.ExperienceLevel.Value >= monsterLevel && this.SaveGame.RandomLessThan(100) + SaveGame.ExperienceLevel.Value > 50)
                 {
                     if (IsVisible)
                     {

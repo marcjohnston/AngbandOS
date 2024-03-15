@@ -22,7 +22,7 @@ internal class CharmMonster1xEvery400Activation : DirectionalActivation
 
     protected override bool Activate(int direction)
     {
-        SaveGame.CharmMonster(direction, SaveGame.ExperienceLevel);
+        SaveGame.CharmMonster(direction, SaveGame.ExperienceLevel.Value);
         return true;
     }
 

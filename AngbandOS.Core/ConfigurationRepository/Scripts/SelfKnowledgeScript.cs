@@ -30,7 +30,7 @@ internal class SelfKnowledgeScript : Script, IScript
                 inventoryCharacteristics.Merge(oPtr.Characteristics);
             }
         }
-        string[]? selfKnowledgeInfo = SaveGame.Race.SelfKnowledge(SaveGame.ExperienceLevel);
+        string[]? selfKnowledgeInfo = SaveGame.Race.SelfKnowledge(SaveGame.ExperienceLevel.Value);
         if (selfKnowledgeInfo != null)
         {
             foreach (string infoLine in selfKnowledgeInfo)

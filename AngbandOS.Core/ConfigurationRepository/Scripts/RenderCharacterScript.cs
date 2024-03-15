@@ -359,19 +359,19 @@ internal class RenderCharacterScript : Script, IScript, IRepeatableScript
         PrintBonus("+ To Damage ", showTodam, 31, 1, ColorEnum.Brown);
         PrintBonus("+ To AC     ", SaveGame.DisplayedArmorClassBonus.Value, 32, 1, ColorEnum.Brown);
         PrintShortScore("  Base AC   ", SaveGame.DisplayedBaseArmorClass.Value, 33, 1, ColorEnum.Brown);
-        PrintShortScore("Level      ", SaveGame.ExperienceLevel, 30, 28, ColorEnum.Green);
+        PrintShortScore("Level      ", SaveGame.ExperienceLevel.Value, 30, 28, ColorEnum.Green);
         PrintLongScore("Experience ", SaveGame.ExperiencePoints.Value, 31, 28,
             SaveGame.ExperiencePoints.Value >= SaveGame.MaxExperienceGained ? ColorEnum.Green : ColorEnum.Red);
         PrintLongScore("Max Exp    ", SaveGame.MaxExperienceGained, 32, 28, ColorEnum.Green);
         // If we're max level we don't have any experience to advance
-        if (SaveGame.ExperienceLevel >= Constants.PyMaxLevel)
+        if (SaveGame.ExperienceLevel.Value >= Constants.PyMaxLevel)
         {
             SaveGame.Screen.Print(ColorEnum.Blue, "Exp to Adv.", 33, 28);
             SaveGame.Screen.Print(ColorEnum.Green, "    *****", 33, 28 + 11);
         }
         else
         {
-            PrintLongScore("Exp to Adv.", (int)(Constants.PlayerExp[SaveGame.ExperienceLevel - 1] * SaveGame.ExperienceMultiplier / 100L), 33, 28,
+            PrintLongScore("Exp to Adv.", (int)(Constants.PlayerExp[SaveGame.ExperienceLevel.Value - 1] * SaveGame.ExperienceMultiplier / 100L), 33, 28,
                 ColorEnum.Green);
         }
         PrintLongScore("Exp Factor ", SaveGame.ExperienceMultiplier, 34, 28, ColorEnum.Green);

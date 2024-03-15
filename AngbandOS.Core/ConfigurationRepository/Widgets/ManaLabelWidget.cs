@@ -15,8 +15,8 @@ internal class ManaLabelWidget : Widget
     public override int X => 0;
     public override int Y => 26;
     public override string Text => "Cur SP";
-    public override string[]? EnabledConditionalNames => new string[]
+    public override (string, bool)[]? EnabledConditionalNames => new (string, bool)[]
     {
-        nameof(UsesManaConditional)
+        (nameof(UsesManaConditional), true)
     };
 }

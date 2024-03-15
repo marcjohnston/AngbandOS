@@ -22,6 +22,6 @@ internal class CharmMonsterScript : Script, IScript
         {
             return;
         }
-        SaveGame.CharmMonster(dir, SaveGame.ExperienceLevel);
+        SaveGame.CharmMonster(dir, SaveGame.ExperienceLevel.Value);
     }
 }

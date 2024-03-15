@@ -73,7 +73,7 @@ internal class UpdateSpellsFlaggedAction : FlaggedAction
             // Enumerate the spells that were learned, to determine if the level of the player fell below the level of the spell.
             foreach (Spell spell in SaveGame.SpellOrder)
             {
-                if (spell.ClassSpell.Level > SaveGame.ExperienceLevel && spell.Learned)
+                if (spell.ClassSpell.Level > SaveGame.ExperienceLevel.Value && spell.Learned)
                 {
                     spell.Forgotten = true;
                     spell.Learned = false;
@@ -115,7 +115,7 @@ internal class UpdateSpellsFlaggedAction : FlaggedAction
         while (SaveGame.SpareSpellSlots.Value > 0 && forgottenTotal > 0 && spellOrderIndex >= 0)
         {
             Spell spell = SaveGame.SpellOrder[spellOrderIndex];
-            if (SaveGame.ExperienceLevel >= spell.ClassSpell.Level && spell.Forgotten)
+            if (SaveGame.ExperienceLevel.Value >= spell.ClassSpell.Level && spell.Forgotten)
             {
                 spell.Forgotten = false;
                 spell.Learned = true;
@@ -134,7 +134,7 @@ internal class UpdateSpellsFlaggedAction : FlaggedAction
         foreach (Spell spell in spellList)
         {
             // Check to see if the level of the spell is greater than where we are at.
-            if (spell.ClassSpell.Level > SaveGame.ExperienceLevel)
+            if (spell.ClassSpell.Level > SaveGame.ExperienceLevel.Value)
             {
                 // Don't count this spell.
                 continue;

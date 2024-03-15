@@ -1917,13 +1917,13 @@ internal static class borg1c
         borg_skill.BI_ISFIXLEV = false;
 
         /* Note "Lev" vs "LEV" */
-        if (saveGame.ExperienceLevel < saveGame.MaxLevelGained)
+        if (saveGame.ExperienceLevel.Value < saveGame.MaxLevelGained)
         {
             borg_skill.BI_ISFIXLEV = true;
         }
 
         /* Extract "LEVEL xxxxxx" */
-        borg_skill.BI_CLEVEL = saveGame.ExperienceLevel;
+        borg_skill.BI_CLEVEL = saveGame.ExperienceLevel.Value;
 
         /* cheat the max clevel */
         borg_skill.BI_MAXCLEVEL = saveGame.MaxLevelGained;

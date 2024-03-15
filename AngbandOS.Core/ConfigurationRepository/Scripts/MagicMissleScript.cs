@@ -22,21 +22,21 @@ internal class MagicMissleScript : Script, IScript
         switch (SaveGame.BaseCharacterClass.ID)
         {
             case CharacterClass.Mage:
-                beam = SaveGame.ExperienceLevel;
+                beam = SaveGame.ExperienceLevel.Value;
                 break;
 
             case CharacterClass.HighMage:
-                beam = SaveGame.ExperienceLevel + 10;
+                beam = SaveGame.ExperienceLevel.Value + 10;
                 break;
 
             default:
-                beam = SaveGame.ExperienceLevel / 2;
+                beam = SaveGame.ExperienceLevel.Value / 2;
                 break;
         }
         if (!SaveGame.GetDirectionWithAim(out int dir))
         {
             return;
         }
-        SaveGame.FireBoltOrBeam(beam - 10, SaveGame.SingletonRepository.Projectiles.Get(nameof(MissileProjectile)), dir, SaveGame.DiceRoll(3 + ((SaveGame.ExperienceLevel - 1) / 5), 4));
+        SaveGame.FireBoltOrBeam(beam - 10, SaveGame.SingletonRepository.Projectiles.Get(nameof(MissileProjectile)), dir, SaveGame.DiceRoll(3 + ((SaveGame.ExperienceLevel.Value - 1) / 5), 4));
     }
 }

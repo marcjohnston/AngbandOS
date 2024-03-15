@@ -46,7 +46,7 @@ internal class PsiProjectile : Projectile
         {
             dam /= 3;
             note = " resists.";
-            if ((rPtr.Undead || rPtr.Demon) && rPtr.Level > SaveGame.ExperienceLevel / 2 && SaveGame.DieRoll(2) == 1)
+            if ((rPtr.Undead || rPtr.Demon) && rPtr.Level > SaveGame.ExperienceLevel.Value / 2 && SaveGame.DieRoll(2) == 1)
             {
                 note = null;
                 string s = seen ? "'s" : "s";

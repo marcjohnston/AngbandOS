@@ -17,5 +17,5 @@ internal class ChaosSpellMagicMissile : Spell
 
     public override string Name => "Magic Missile";
 
-    protected override string LearnedDetails => $"dam {3 + ((SaveGame.ExperienceLevel - 1) / 5)}d4";
+    protected override string LearnedDetails => $"dam {3 + ((SaveGame.ExperienceLevel.Value - 1) / 5)}d4";
 }

@@ -41,6 +41,6 @@ internal class ElementalBallScript : Script, IScript
                 dummy = SaveGame.SingletonRepository.Projectiles.Get(nameof(AcidProjectile));
                 break;
         }
-        SaveGame.FireBall(dummy, dir, 75 + SaveGame.ExperienceLevel, 2);
+        SaveGame.FireBall(dummy, dir, 75 + SaveGame.ExperienceLevel.Value, 2);
     }
 }

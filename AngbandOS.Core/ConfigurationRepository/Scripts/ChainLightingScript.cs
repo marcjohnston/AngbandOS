@@ -20,7 +20,7 @@ internal class ChainLightingScript : Script, IScript
     {
         for (int dir = 0; dir <= 9; dir++)
         {
-            SaveGame.FireBeam(SaveGame.SingletonRepository.Projectiles.Get(nameof(ElecProjectile)), dir, SaveGame.DiceRoll(5 + (SaveGame.ExperienceLevel / 10), 8));
+            SaveGame.FireBeam(SaveGame.SingletonRepository.Projectiles.Get(nameof(ElecProjectile)), dir, SaveGame.DiceRoll(5 + (SaveGame.ExperienceLevel.Value / 10), 8));
         }
     }
 }

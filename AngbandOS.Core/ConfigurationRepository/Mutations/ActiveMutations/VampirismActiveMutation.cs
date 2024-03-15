@@ -13,7 +13,7 @@ internal class VampirismActiveMutation : Mutation
     private VampirismActiveMutation(SaveGame saveGame) : base(saveGame) { }
     public override void Activate()
     {
-        if (!SaveGame.CheckIfRacialPowerWorks(13, SaveGame.ExperienceLevel, Ability.Constitution, 14))
+        if (!SaveGame.CheckIfRacialPowerWorks(13, SaveGame.ExperienceLevel.Value, Ability.Constitution, 14))
         {
             return;
         }
@@ -21,9 +21,9 @@ internal class VampirismActiveMutation : Mutation
         {
             return;
         }
-        if (SaveGame.DrainLife(dir, SaveGame.ExperienceLevel * 2))
+        if (SaveGame.DrainLife(dir, SaveGame.ExperienceLevel.Value * 2))
         {
-            SaveGame.RestoreHealth(SaveGame.ExperienceLevel + base.SaveGame.DieRoll(SaveGame.ExperienceLevel));
+            SaveGame.RestoreHealth(SaveGame.ExperienceLevel.Value + base.SaveGame.DieRoll(SaveGame.ExperienceLevel.Value));
         }
     }
 

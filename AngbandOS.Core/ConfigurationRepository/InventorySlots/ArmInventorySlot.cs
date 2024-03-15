@@ -17,7 +17,7 @@ internal class ArmInventorySlot : EquipmentInventorySlot
     public override string MentionUse(int? index) => "On arm";
     public override string DescribeWieldLocation(int index) => "wearing on your arm";
     public override string DescribeItemLocation(Item oPtr) => "wearing on your arm";
-    public override int BareArmorClassBonus => SaveGame.ExperienceLevel > 10 ? (SaveGame.ExperienceLevel - 8) / 3 : 0;
+    public override int BareArmorClassBonus => SaveGame.ExperienceLevel.Value > 10 ? (SaveGame.ExperienceLevel.Value - 8) / 3 : 0;
     public override bool IsWeightRestricting => true;
     public override bool IsArmor => true;
     public override int SortOrder => 10;

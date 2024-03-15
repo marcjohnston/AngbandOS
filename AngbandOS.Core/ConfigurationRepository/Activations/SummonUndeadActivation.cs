@@ -20,7 +20,7 @@ internal class SummonUndeadActivation : Activation
     {
         if (SaveGame.DieRoll(3) == 1)
         {
-            if (SaveGame.SummonSpecific(SaveGame.MapY, SaveGame.MapX, (int)(SaveGame.ExperienceLevel * 1.5), SaveGame.ExperienceLevel > 47 ? SaveGame.SingletonRepository.MonsterFilters.Get(nameof(HiUndeadMonsterFilter)) : SaveGame.SingletonRepository.MonsterFilters.Get(nameof(UndeadMonsterFilter))))
+            if (SaveGame.SummonSpecific(SaveGame.MapY, SaveGame.MapX, (int)(SaveGame.ExperienceLevel.Value * 1.5), SaveGame.ExperienceLevel.Value > 47 ? SaveGame.SingletonRepository.MonsterFilters.Get(nameof(HiUndeadMonsterFilter)) : SaveGame.SingletonRepository.MonsterFilters.Get(nameof(UndeadMonsterFilter))))
             {
                 SaveGame.MsgPrint("Cold winds begin to Attack around you, carrying with them the stench of decay...");
                 SaveGame.MsgPrint("'The dead arise... to punish you for disturbing them!'");
@@ -28,7 +28,7 @@ internal class SummonUndeadActivation : Activation
         }
         else
         {
-            if (SaveGame.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, (int)(SaveGame.ExperienceLevel * 1.5), SaveGame.ExperienceLevel > 47 ? SaveGame.SingletonRepository.MonsterFilters.Get(nameof(HiUndeadNoUniquesMonsterFilter)) : SaveGame.SingletonRepository.MonsterFilters.Get(nameof(UndeadMonsterFilter)), SaveGame.ExperienceLevel > 24 && SaveGame.DieRoll(3) == 1))
+            if (SaveGame.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, (int)(SaveGame.ExperienceLevel.Value * 1.5), SaveGame.ExperienceLevel.Value > 47 ? SaveGame.SingletonRepository.MonsterFilters.Get(nameof(HiUndeadNoUniquesMonsterFilter)) : SaveGame.SingletonRepository.MonsterFilters.Get(nameof(UndeadMonsterFilter)), SaveGame.ExperienceLevel.Value > 24 && SaveGame.DieRoll(3) == 1))
             {
                 SaveGame.MsgPrint("Cold winds begin to Attack around you, carrying with them the stench of decay...");
                 SaveGame.MsgPrint("Ancient, long-dead forms arise from the ground to serve you!");

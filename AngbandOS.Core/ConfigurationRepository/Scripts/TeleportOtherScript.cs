@@ -22,6 +22,6 @@ internal class TeleportOtherScript : Script, IScript
         {
             return;
         }
-        SaveGame.FireBeam(SaveGame.SingletonRepository.Projectiles.Get(nameof(TeleportAwayAllProjectile)), dir, SaveGame.ExperienceLevel);
+        SaveGame.FireBeam(SaveGame.SingletonRepository.Projectiles.Get(nameof(TeleportAwayAllProjectile)), dir, SaveGame.ExperienceLevel.Value);
     }
 }

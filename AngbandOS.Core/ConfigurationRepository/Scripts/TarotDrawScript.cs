@@ -22,7 +22,7 @@ internal class TarotDrawScript : Script, IScript
         int die = SaveGame.DieRoll(120);
         if (SaveGame.BaseCharacterClass.ID == CharacterClass.Rogue || SaveGame.BaseCharacterClass.ID == CharacterClass.HighMage)
         {
-            die = SaveGame.DieRoll(110) + (SaveGame.ExperienceLevel / 5);
+            die = SaveGame.DieRoll(110) + (SaveGame.ExperienceLevel.Value / 5);
         }
         SaveGame.MsgPrint("You shuffle your Tarot deck and draw a card...");
         if (die < 7)
@@ -81,7 +81,7 @@ internal class TarotDrawScript : Script, IScript
         else if (die < 42)
         {
             SaveGame.MsgPrint("It's the Star.");
-            SaveGame.BlessingTimer.AddTimer(SaveGame.ExperienceLevel);
+            SaveGame.BlessingTimer.AddTimer(SaveGame.ExperienceLevel.Value);
         }
         else if (die < 47)
         {
@@ -147,7 +147,7 @@ internal class TarotDrawScript : Script, IScript
             {
                 return;
             }
-            SaveGame.CharmMonster(dir, Math.Min(SaveGame.ExperienceLevel, 20));
+            SaveGame.CharmMonster(dir, Math.Min(SaveGame.ExperienceLevel.Value, 20));
         }
         else if (die < 101)
         {

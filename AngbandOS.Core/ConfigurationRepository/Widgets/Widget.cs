@@ -33,9 +33,9 @@ internal abstract class Widget : IGetKey<string>
     /// Returns an array of conditionals that need to be met for the widget to rendered; or null, if there are no conditions.  All conditions must return true for the widget
     /// to be enabled.
     /// </summary>
-    public Conditional[]? Enabled { get; private set; }
+    public (Conditional conditional, bool isTrue)[]? Enabled { get; private set; }
 
-    public virtual string[]? EnabledConditionalNames => null;
+    public virtual (string conditionalName, bool isTrue)[]? EnabledConditionalNames => null;
 
     /// <summary>
     /// Returns the text to be rendered for the widget.
@@ -92,10 +92,10 @@ internal abstract class Widget : IGetKey<string>
         }
         else
         {
-            List<Conditional> conditionalList = new List<Conditional>();
-            foreach (string conditional in EnabledConditionalNames)
+            List<(Conditional, bool)> conditionalList = new();
+            foreach ((string conditionalName, bool isTrue) in EnabledConditionalNames)
             {
-                conditionalList.Add(SaveGame.SingletonRepository.Conditionals.Get(conditional));
+                conditionalList.Add((SaveGame.SingletonRepository.Conditionals.Get(conditionalName), isTrue));
             }
             Enabled = conditionalList.ToArray();
         }
@@ -126,7 +126,7 @@ internal abstract class Widget : IGetKey<string>
     public virtual void Update()
     {
         // Check to see if the widget is enabled.  All conditionals must be true.
-        if (Enabled != null && Enabled.Any(_conditional => !_conditional.IsTrue))
+        if (Enabled != null && Enabled.Any(_conditions => _conditions.conditional.IsTrue != _conditions.isTrue))
         {
             return;
         }

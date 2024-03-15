@@ -18,6 +18,6 @@ internal class FlameStrikeScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(FireProjectile)), 0, 150 + (2 * SaveGame.ExperienceLevel), 8);
+        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(FireProjectile)), 0, 150 + (2 * SaveGame.ExperienceLevel.Value), 8);
     }
 }

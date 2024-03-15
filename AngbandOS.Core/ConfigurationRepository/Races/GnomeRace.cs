@@ -68,10 +68,10 @@ internal class GnomeRace : Race
     public override void UseRacialPower()
     {
         // Gnomes can do a short-range teleport
-        if (SaveGame.CheckIfRacialPowerWorks(5, 5 + (SaveGame.ExperienceLevel / 5), Ability.Intelligence, 12))
+        if (SaveGame.CheckIfRacialPowerWorks(5, 5 + (SaveGame.ExperienceLevel.Value / 5), Ability.Intelligence, 12))
         {
             SaveGame.MsgPrint("Blink!");
-            SaveGame.RunScriptInt(nameof(TeleportSelfScript), 10 + SaveGame.ExperienceLevel);
+            SaveGame.RunScriptInt(nameof(TeleportSelfScript), 10 + SaveGame.ExperienceLevel.Value);
         }
     }
 }

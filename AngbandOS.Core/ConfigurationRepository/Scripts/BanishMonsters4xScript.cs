@@ -26,6 +26,6 @@ internal class BanishMonsters4xScript : Script, IScriptInt, IScript
     /// </summary>
     public void ExecuteScript()
     {
-        ExecuteScriptInt(SaveGame.ExperienceLevel * 4);
+        ExecuteScriptInt(SaveGame.ExperienceLevel.Value * 4);
     }
 }

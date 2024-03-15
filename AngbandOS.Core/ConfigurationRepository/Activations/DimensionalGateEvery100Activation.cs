@@ -24,11 +24,11 @@ internal class DimensionalGateEvery100Activation : Activation
         {
             return false;
         }
-        SaveGame.Energy -= 60 - SaveGame.ExperienceLevel;
+        SaveGame.Energy -= 60 - SaveGame.ExperienceLevel.Value;
         if (!SaveGame.GridPassableNoCreature(ij, ii) ||
             SaveGame.Grid[ij][ii].TileFlags.IsSet(GridTile.InVault) ||
-            SaveGame.Distance(ij, ii, SaveGame.MapY, SaveGame.MapX) > SaveGame.ExperienceLevel + 2 ||
-            SaveGame.RandomLessThan(SaveGame.ExperienceLevel * SaveGame.ExperienceLevel / 2) == 0)
+            SaveGame.Distance(ij, ii, SaveGame.MapY, SaveGame.MapX) > SaveGame.ExperienceLevel.Value + 2 ||
+            SaveGame.RandomLessThan(SaveGame.ExperienceLevel.Value * SaveGame.ExperienceLevel.Value / 2) == 0)
         {
             SaveGame.MsgPrint("You fail to exit the astral plane correctly!");
             SaveGame.Energy -= 100;

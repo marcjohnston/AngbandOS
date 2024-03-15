@@ -21,13 +21,13 @@ internal class RedrawExperiencePointsFlaggedAction : FlaggedAction
             color = ColorEnum.Yellow;
         }
         SaveGame.Screen.Print("NEXT", RowExp, 0);
-        if (SaveGame.ExperienceLevel >= Constants.PyMaxLevel)
+        if (SaveGame.ExperienceLevel.Value >= Constants.PyMaxLevel)
         {
             SaveGame.Screen.Print(ColorEnum.BrightGreen, "   *****", RowExp, ColExp + 4);
         }
         else
         {
-            string outVal = ((Constants.PlayerExp[SaveGame.ExperienceLevel - 1] * SaveGame.ExperienceMultiplier / 100) - SaveGame.ExperiencePoints.Value).ToString()
+            string outVal = ((Constants.PlayerExp[SaveGame.ExperienceLevel.Value - 1] * SaveGame.ExperienceMultiplier / 100) - SaveGame.ExperiencePoints.Value).ToString()
                 .PadLeft(8);
             SaveGame.Screen.Print(color, outVal, RowExp, ColExp + 4);
         }

@@ -84,7 +84,7 @@ internal class DisintegrateProjectile : Projectile
         }
         if (rPtr.Unique)
         {
-            if (SaveGame.RandomLessThan(rPtr.Level + 10) > SaveGame.RandomLessThan(SaveGame.ExperienceLevel))
+            if (SaveGame.RandomLessThan(rPtr.Level + 10) > SaveGame.RandomLessThan(SaveGame.ExperienceLevel.Value))
             {
                 note = " resists.";
                 dam >>= 3;

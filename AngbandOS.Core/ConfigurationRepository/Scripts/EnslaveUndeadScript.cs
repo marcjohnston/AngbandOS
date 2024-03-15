@@ -22,6 +22,6 @@ internal class EnslaveUndeadScript : Script, IScript
         {
             return;
         }
-        SaveGame.ControlOneUndead(dir, SaveGame.ExperienceLevel);
+        SaveGame.ControlOneUndead(dir, SaveGame.ExperienceLevel.Value);
     }
 }

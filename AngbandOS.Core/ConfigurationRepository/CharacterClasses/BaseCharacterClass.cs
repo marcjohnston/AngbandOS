@@ -116,7 +116,7 @@ internal abstract class BaseCharacterClass : IGetKey<string>
 
     public void CastMentalism()
     {
-        int plev = SaveGame.ExperienceLevel;
+        int plev = SaveGame.ExperienceLevel.Value;
         if (SaveGame.ConfusedTimer.Value != 0)
         {
             SaveGame.MsgPrint("You are too confused!");
@@ -200,7 +200,7 @@ internal abstract class BaseCharacterClass : IGetKey<string>
         int num = 0;
         int y = 1;
         int x = 20;
-        int plev = SaveGame.ExperienceLevel;
+        int plev = SaveGame.ExperienceLevel.Value;
         string p = "talent";
         sn = -1;
         bool flag = false;

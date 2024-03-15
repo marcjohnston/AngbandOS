@@ -15,5 +15,5 @@ internal class NatureSpellWhirlpool : Spell
 
     public override string Name => "Whirlpool";
 
-    protected override string LearnedDetails => $"dam {100 + SaveGame.ExperienceLevel}";
+    protected override string LearnedDetails => $"dam {100 + SaveGame.ExperienceLevel.Value}";
 }

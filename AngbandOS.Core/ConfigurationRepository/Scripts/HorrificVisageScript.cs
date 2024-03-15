@@ -22,7 +22,7 @@ internal class HorrificVisageScript : Script, IScript
         {
             return;
         }
-        SaveGame.FearMonster(dir, SaveGame.ExperienceLevel);
-        SaveGame.StunMonster(dir, SaveGame.ExperienceLevel);
+        SaveGame.FearMonster(dir, SaveGame.ExperienceLevel.Value);
+        SaveGame.StunMonster(dir, SaveGame.ExperienceLevel.Value);
     }
 }

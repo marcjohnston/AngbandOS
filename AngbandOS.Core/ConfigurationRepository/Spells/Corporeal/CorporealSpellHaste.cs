@@ -15,5 +15,5 @@ internal class CorporealSpellHaste : Spell
 
     public override string Name => "Haste";
 
-    protected override string LearnedDetails => $"dur {SaveGame.ExperienceLevel}+d{20 + SaveGame.ExperienceLevel}";
+    protected override string LearnedDetails => $"dur {SaveGame.ExperienceLevel.Value}+d{20 + SaveGame.ExperienceLevel.Value}";
 }

@@ -73,7 +73,7 @@ internal class CyclopsRace : Race
             if (SaveGame.GetDirectionWithAim(out int direction))
             {
                 SaveGame.MsgPrint("You throw a huge boulder.");
-                SaveGame.FireBolt(SaveGame.SingletonRepository.Projectiles.Get(nameof(MissileProjectile)), direction, 3 * SaveGame.ExperienceLevel / 2);
+                SaveGame.FireBolt(SaveGame.SingletonRepository.Projectiles.Get(nameof(MissileProjectile)), direction, 3 * SaveGame.ExperienceLevel.Value / 2);
             }
         }
     }

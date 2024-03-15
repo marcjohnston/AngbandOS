@@ -14,10 +14,10 @@ internal class UpdateHealthFlaggedAction : FlaggedAction
     protected override void Execute()
     {
         int bonus = SaveGame.AbilityScores[Ability.Constitution].ConHealthBonus;
-        int mhp = SaveGame.PlayerHp[SaveGame.ExperienceLevel - 1] + (bonus * SaveGame.ExperienceLevel / 2);
-        if (mhp < SaveGame.ExperienceLevel + 1)
+        int mhp = SaveGame.PlayerHp[SaveGame.ExperienceLevel.Value - 1] + (bonus * SaveGame.ExperienceLevel.Value / 2);
+        if (mhp < SaveGame.ExperienceLevel.Value + 1)
         {
-            mhp = SaveGame.ExperienceLevel + 1;
+            mhp = SaveGame.ExperienceLevel.Value + 1;
         }
         if (SaveGame.HeroismTimer.Value != 0)
         {

@@ -29,6 +29,8 @@ internal class MainForm : Form
         nameof(HealthPointsWidget),
         nameof(HealthPointsLabelWidget),
         nameof(MaxHealthPointsWidget),
-        nameof(MaxHealthPointsLabelWidget)
+        nameof(ExperienceLevelLessThanMaxLabelWidget),
+        nameof(ExperienceLevelMaxLabelWidget),
+        nameof(ExperienceLevelWidget)
     };
 }

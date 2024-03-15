@@ -22,6 +22,6 @@ internal class HypnoticEyesScript : Script, IScript
         {
             return;
         }
-        SaveGame.CharmMonster(dir, SaveGame.ExperienceLevel);
+        SaveGame.CharmMonster(dir, SaveGame.ExperienceLevel.Value);
     }
 }

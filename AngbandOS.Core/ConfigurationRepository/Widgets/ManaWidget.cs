@@ -18,9 +18,9 @@ internal class ManaWidget : RangedMaxValueWidget
     public override string IntChangeTrackableName => nameof(ManaIntProperty);
     public override string MaxIntChangeTrackableName => nameof(MaxManaIntProperty);
     public override string? JustificationName => nameof(RightJustification);
-    public override string[]? EnabledConditionalNames => new string[]
+    public override (string, bool)[]? EnabledConditionalNames => new (string, bool)[]
     {
-        nameof(UsesManaConditional)
+        (nameof(UsesManaConditional), true)
     };
 
     public override (int, ColorEnum)[] Ranges => new (int, ColorEnum)[]

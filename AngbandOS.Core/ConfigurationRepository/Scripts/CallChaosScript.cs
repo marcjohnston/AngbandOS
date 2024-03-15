@@ -28,7 +28,7 @@ internal class CallChaosScript : Script, IScript, ICancellableScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        int plev = SaveGame.ExperienceLevel;
+        int plev = SaveGame.ExperienceLevel.Value;
         bool lineChaos = false;
         Projectile[] hurtTypes =
         {

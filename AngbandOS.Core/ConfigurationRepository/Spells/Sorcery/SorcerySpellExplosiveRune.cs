@@ -15,5 +15,5 @@ internal class SorcerySpellYellowSign : Spell
 
     public override string Name => "Yellow Sign";
 
-    protected override string LearnedDetails => $"dam 7d7+{SaveGame.ExperienceLevel / 2}";
+    protected override string LearnedDetails => $"dam 7d7+{SaveGame.ExperienceLevel.Value / 2}";
 }

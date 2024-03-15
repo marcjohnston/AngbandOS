@@ -23,7 +23,7 @@ internal class MaledictionScript : Script, IScript
         {
             return;
         }
-        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(HellfireProjectile)), dir, SaveGame.DiceRoll(3 + ((SaveGame.ExperienceLevel - 1) / 5), 3), 0);
+        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(HellfireProjectile)), dir, SaveGame.DiceRoll(3 + ((SaveGame.ExperienceLevel.Value - 1) / 5), 3), 0);
         if (SaveGame.DieRoll(5) != 1)
         {
             return;
@@ -31,16 +31,16 @@ internal class MaledictionScript : Script, IScript
         int dummy = SaveGame.DieRoll(1000);
         if (dummy == 666)
         {
-            SaveGame.FireBolt(SaveGame.SingletonRepository.Projectiles.Get(nameof(DeathRayProjectile)), dir, SaveGame.ExperienceLevel);
+            SaveGame.FireBolt(SaveGame.SingletonRepository.Projectiles.Get(nameof(DeathRayProjectile)), dir, SaveGame.ExperienceLevel.Value);
         }
         if (dummy < 500)
         {
-            SaveGame.FireBolt(SaveGame.SingletonRepository.Projectiles.Get(nameof(TurnAllProjectile)), dir, SaveGame.ExperienceLevel);
+            SaveGame.FireBolt(SaveGame.SingletonRepository.Projectiles.Get(nameof(TurnAllProjectile)), dir, SaveGame.ExperienceLevel.Value);
         }
         if (dummy < 800)
         {
-            SaveGame.FireBolt(SaveGame.SingletonRepository.Projectiles.Get(nameof(OldConfProjectile)), dir, SaveGame.ExperienceLevel);
+            SaveGame.FireBolt(SaveGame.SingletonRepository.Projectiles.Get(nameof(OldConfProjectile)), dir, SaveGame.ExperienceLevel.Value);
         }
-        SaveGame.FireBolt(SaveGame.SingletonRepository.Projectiles.Get(nameof(StunProjectile)), dir, SaveGame.ExperienceLevel);
+        SaveGame.FireBolt(SaveGame.SingletonRepository.Projectiles.Get(nameof(StunProjectile)), dir, SaveGame.ExperienceLevel.Value);
     }
 }

@@ -20,7 +20,7 @@ internal class ChaosSpellManaBurst : Spell
     {
         get
         {
-            int i = SaveGame.ExperienceLevel + (SaveGame.ExperienceLevel / (SaveGame.BaseCharacterClass.ID == CharacterClass.Mage || SaveGame.BaseCharacterClass.ID == CharacterClass.HighMage ? 2 : 4));
+            int i = SaveGame.ExperienceLevel.Value + (SaveGame.ExperienceLevel.Value / (SaveGame.BaseCharacterClass.ID == CharacterClass.Mage || SaveGame.BaseCharacterClass.ID == CharacterClass.HighMage ? 2 : 4));
             return $"dam 3d5+{i}";
         }
     }

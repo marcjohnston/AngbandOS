@@ -17,5 +17,5 @@ internal class ChaosSpellGravityBeam : Spell
 
     public override string Name => "Gravity Beam";
 
-    protected override string LearnedDetails => $"dam {9 + ((SaveGame.ExperienceLevel - 5) / 4)}d8";
+    protected override string LearnedDetails => $"dam {9 + ((SaveGame.ExperienceLevel.Value - 5) / 4)}d8";
 }

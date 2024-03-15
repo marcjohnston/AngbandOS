@@ -18,31 +18,31 @@ internal class CharacterArmorTalent : Talent
 
     public override void Use()
     {
-        SaveGame.StoneskinTimer.AddTimer(SaveGame.ExperienceLevel);
-        if (SaveGame.ExperienceLevel > 14)
+        SaveGame.StoneskinTimer.AddTimer(SaveGame.ExperienceLevel.Value);
+        if (SaveGame.ExperienceLevel.Value > 14)
         {
-            SaveGame.AcidResistanceTimer.AddTimer(SaveGame.ExperienceLevel);
+            SaveGame.AcidResistanceTimer.AddTimer(SaveGame.ExperienceLevel.Value);
         }
-        if (SaveGame.ExperienceLevel > 19)
+        if (SaveGame.ExperienceLevel.Value > 19)
         {
-            SaveGame.FireResistanceTimer.AddTimer(SaveGame.ExperienceLevel);
+            SaveGame.FireResistanceTimer.AddTimer(SaveGame.ExperienceLevel.Value);
         }
-        if (SaveGame.ExperienceLevel > 24)
+        if (SaveGame.ExperienceLevel.Value > 24)
         {
-            SaveGame.ColdResistanceTimer.AddTimer(SaveGame.ExperienceLevel);
+            SaveGame.ColdResistanceTimer.AddTimer(SaveGame.ExperienceLevel.Value);
         }
-        if (SaveGame.ExperienceLevel > 29)
+        if (SaveGame.ExperienceLevel.Value > 29)
         {
-            SaveGame.LightningResistanceTimer.AddTimer(SaveGame.ExperienceLevel);
+            SaveGame.LightningResistanceTimer.AddTimer(SaveGame.ExperienceLevel.Value);
         }
-        if (SaveGame.ExperienceLevel > 34)
+        if (SaveGame.ExperienceLevel.Value > 34)
         {
-            SaveGame.PoisonResistanceTimer.AddTimer(SaveGame.ExperienceLevel);
+            SaveGame.PoisonResistanceTimer.AddTimer(SaveGame.ExperienceLevel.Value);
         }
     }
 
     protected override string Comment()
     {
-        return $"dur {SaveGame.ExperienceLevel}";
+        return $"dur {SaveGame.ExperienceLevel.Value}";
     }
 }

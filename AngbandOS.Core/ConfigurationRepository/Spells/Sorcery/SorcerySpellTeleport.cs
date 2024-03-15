@@ -15,5 +15,5 @@ internal class SorcerySpellTeleport : Spell
 
     public override string Name => "Teleport";
 
-    protected override string LearnedDetails => $"range {SaveGame.ExperienceLevel * 5}";
+    protected override string LearnedDetails => $"range {SaveGame.ExperienceLevel.Value * 5}";
 }

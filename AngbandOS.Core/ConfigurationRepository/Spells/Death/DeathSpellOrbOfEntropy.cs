@@ -21,7 +21,7 @@ internal class DeathSpellOrbOfEntropy : Spell
     {
         get
         {
-            int s = SaveGame.ExperienceLevel + (SaveGame.ExperienceLevel / (SaveGame.BaseCharacterClass.ID == CharacterClass.Mage || SaveGame.BaseCharacterClass.ID == CharacterClass.HighMage ? 2 : 4));
+            int s = SaveGame.ExperienceLevel.Value + (SaveGame.ExperienceLevel.Value / (SaveGame.BaseCharacterClass.ID == CharacterClass.Mage || SaveGame.BaseCharacterClass.ID == CharacterClass.HighMage ? 2 : 4));
             return $"dam 3d6+{s}";
         }
     }

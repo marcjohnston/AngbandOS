@@ -18,8 +18,8 @@ internal class ExorcismScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        SaveGame.DispelUndead(SaveGame.ExperienceLevel);
-        SaveGame.DispelDemons(SaveGame.ExperienceLevel);
-        SaveGame.TurnEvil(SaveGame.ExperienceLevel);
+        SaveGame.DispelUndead(SaveGame.ExperienceLevel.Value);
+        SaveGame.DispelDemons(SaveGame.ExperienceLevel.Value);
+        SaveGame.TurnEvil(SaveGame.ExperienceLevel.Value);
     }
 }

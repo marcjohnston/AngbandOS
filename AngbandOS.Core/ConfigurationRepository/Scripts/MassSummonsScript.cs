@@ -20,16 +20,16 @@ internal class MassSummonsScript : Script, IScript
     {
         bool noneCame = true;
         SaveGame.MsgPrint("You concentrate on several images at once...");
-        for (int dummy = 0; dummy < 3 + (SaveGame.ExperienceLevel / 10); dummy++)
+        for (int dummy = 0; dummy < 3 + (SaveGame.ExperienceLevel.Value / 10); dummy++)
         {
             if (SaveGame.DieRoll(10) > 3)
             {
-                if (SaveGame.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel, SaveGame.SingletonRepository.MonsterFilters.Get(nameof(NoUniquesMonsterFilter)), false))
+                if (SaveGame.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel.Value, SaveGame.SingletonRepository.MonsterFilters.Get(nameof(NoUniquesMonsterFilter)), false))
                 {
                     noneCame = false;
                 }
             }
-            else if (SaveGame.SummonSpecific(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel, null))
+            else if (SaveGame.SummonSpecific(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel.Value, null))
             {
                 SaveGame.MsgPrint("A summoned creature gets angry!");
                 noneCame = false;

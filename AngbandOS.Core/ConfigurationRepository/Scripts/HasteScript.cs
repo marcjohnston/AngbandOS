@@ -21,7 +21,7 @@ internal class HasteScript : Script, IScript
     {
         if (SaveGame.HasteTimer.Value == 0)
         {
-            SaveGame.HasteTimer.SetTimer(SaveGame.DieRoll(20 + SaveGame.ExperienceLevel) + SaveGame.ExperienceLevel);
+            SaveGame.HasteTimer.SetTimer(SaveGame.DieRoll(20 + SaveGame.ExperienceLevel.Value) + SaveGame.ExperienceLevel.Value);
         }
         else
         {

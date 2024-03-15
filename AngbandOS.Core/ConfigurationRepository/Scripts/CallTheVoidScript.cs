@@ -55,7 +55,7 @@ internal class CallTheVoidScript : Script, IScript
             string spell = SaveGame.BaseCharacterClass.SpellNoun;
             SaveGame.MsgPrint($"You {cast} the {spell} too close to a wall!");
             SaveGame.MsgPrint("There is a loud explosion!");
-            SaveGame.DestroyArea(SaveGame.MapY, SaveGame.MapX, 20 + SaveGame.ExperienceLevel);
+            SaveGame.DestroyArea(SaveGame.MapY, SaveGame.MapX, 20 + SaveGame.ExperienceLevel.Value);
             SaveGame.MsgPrint("The dungeon collapses...");
             SaveGame.TakeHit(100 + SaveGame.DieRoll(150), "a suicidal Call the Void");
         }

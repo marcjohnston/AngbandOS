@@ -22,18 +22,18 @@ internal class SpellOfWonderScript : Script, IScript
         switch (SaveGame.BaseCharacterClass.ID)
         {
             case CharacterClass.Mage:
-                beam = SaveGame.ExperienceLevel;
+                beam = SaveGame.ExperienceLevel.Value;
                 break;
 
             case CharacterClass.HighMage:
-                beam = SaveGame.ExperienceLevel + 10;
+                beam = SaveGame.ExperienceLevel.Value + 10;
                 break;
 
             default:
-                beam = SaveGame.ExperienceLevel / 2;
+                beam = SaveGame.ExperienceLevel.Value / 2;
                 break;
         }
-        int die = SaveGame.DieRoll(100) + (SaveGame.ExperienceLevel / 5);
+        int die = SaveGame.DieRoll(100) + (SaveGame.ExperienceLevel.Value / 5);
         if (!SaveGame.GetDirectionWithAim(out int dir))
         {
             return;
@@ -60,15 +60,15 @@ internal class SpellOfWonderScript : Script, IScript
         }
         else if (die < 36)
         {
-            SaveGame.FireBoltOrBeam(beam - 10, SaveGame.SingletonRepository.Projectiles.Get(nameof(MissileProjectile)), dir, SaveGame.DiceRoll(3 + ((SaveGame.ExperienceLevel - 1) / 5), 4));
+            SaveGame.FireBoltOrBeam(beam - 10, SaveGame.SingletonRepository.Projectiles.Get(nameof(MissileProjectile)), dir, SaveGame.DiceRoll(3 + ((SaveGame.ExperienceLevel.Value - 1) / 5), 4));
         }
         else if (die < 41)
         {
-            SaveGame.ConfuseMonster(dir, SaveGame.ExperienceLevel);
+            SaveGame.ConfuseMonster(dir, SaveGame.ExperienceLevel.Value);
         }
         else if (die < 46)
         {
-            SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(PoisProjectile)), dir, 20 + (SaveGame.ExperienceLevel / 2), 3);
+            SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(PoisProjectile)), dir, 20 + (SaveGame.ExperienceLevel.Value / 2), 3);
         }
         else if (die < 51)
         {
@@ -76,19 +76,19 @@ internal class SpellOfWonderScript : Script, IScript
         }
         else if (die < 56)
         {
-            SaveGame.FireBoltOrBeam(beam - 10, SaveGame.SingletonRepository.Projectiles.Get(nameof(ElecProjectile)), dir, SaveGame.DiceRoll(3 + ((SaveGame.ExperienceLevel - 5) / 4), 8));
+            SaveGame.FireBoltOrBeam(beam - 10, SaveGame.SingletonRepository.Projectiles.Get(nameof(ElecProjectile)), dir, SaveGame.DiceRoll(3 + ((SaveGame.ExperienceLevel.Value - 5) / 4), 8));
         }
         else if (die < 61)
         {
-            SaveGame.FireBoltOrBeam(beam - 10, SaveGame.SingletonRepository.Projectiles.Get(nameof(ColdProjectile)), dir, SaveGame.DiceRoll(5 + ((SaveGame.ExperienceLevel - 5) / 4), 8));
+            SaveGame.FireBoltOrBeam(beam - 10, SaveGame.SingletonRepository.Projectiles.Get(nameof(ColdProjectile)), dir, SaveGame.DiceRoll(5 + ((SaveGame.ExperienceLevel.Value - 5) / 4), 8));
         }
         else if (die < 66)
         {
-            SaveGame.FireBoltOrBeam(beam, SaveGame.SingletonRepository.Projectiles.Get(nameof(AcidProjectile)), dir, SaveGame.DiceRoll(6 + ((SaveGame.ExperienceLevel - 5) / 4), 8));
+            SaveGame.FireBoltOrBeam(beam, SaveGame.SingletonRepository.Projectiles.Get(nameof(AcidProjectile)), dir, SaveGame.DiceRoll(6 + ((SaveGame.ExperienceLevel.Value - 5) / 4), 8));
         }
         else if (die < 71)
         {
-            SaveGame.FireBoltOrBeam(beam, SaveGame.SingletonRepository.Projectiles.Get(nameof(FireProjectile)), dir, SaveGame.DiceRoll(8 + ((SaveGame.ExperienceLevel - 5) / 4), 8));
+            SaveGame.FireBoltOrBeam(beam, SaveGame.SingletonRepository.Projectiles.Get(nameof(FireProjectile)), dir, SaveGame.DiceRoll(8 + ((SaveGame.ExperienceLevel.Value - 5) / 4), 8));
         }
         else if (die < 76)
         {
@@ -96,23 +96,23 @@ internal class SpellOfWonderScript : Script, IScript
         }
         else if (die < 81)
         {
-            SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(ElecProjectile)), dir, 30 + (SaveGame.ExperienceLevel / 2), 2);
+            SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(ElecProjectile)), dir, 30 + (SaveGame.ExperienceLevel.Value / 2), 2);
         }
         else if (die < 86)
         {
-            SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(AcidProjectile)), dir, 40 + SaveGame.ExperienceLevel, 2);
+            SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(AcidProjectile)), dir, 40 + SaveGame.ExperienceLevel.Value, 2);
         }
         else if (die < 91)
         {
-            SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(IceProjectile)), dir, 70 + SaveGame.ExperienceLevel, 3);
+            SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(IceProjectile)), dir, 70 + SaveGame.ExperienceLevel.Value, 3);
         }
         else if (die < 96)
         {
-            SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(FireProjectile)), dir, 80 + SaveGame.ExperienceLevel, 3);
+            SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(FireProjectile)), dir, 80 + SaveGame.ExperienceLevel.Value, 3);
         }
         else if (die < 101)
         {
-            SaveGame.DrainLife(dir, 100 + SaveGame.ExperienceLevel);
+            SaveGame.DrainLife(dir, 100 + SaveGame.ExperienceLevel.Value);
         }
         else if (die < 104)
         {

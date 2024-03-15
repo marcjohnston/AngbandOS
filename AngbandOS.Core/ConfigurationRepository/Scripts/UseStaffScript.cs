@@ -93,7 +93,7 @@ internal class UseStaffScript : Script, IScript, IRepeatableScript
         if (useStaffEventArgs.Identified && !item.IsFlavorAware())
         {
             item.BecomeFlavorAware();
-            SaveGame.GainExperience((itemLevel + (SaveGame.ExperienceLevel >> 1)) / SaveGame.ExperienceLevel);
+            SaveGame.GainExperience((itemLevel + (SaveGame.ExperienceLevel.Value >> 1)) / SaveGame.ExperienceLevel.Value);
         }
         // We may not have used up a charge
         if (!useStaffEventArgs.ChargeUsed)

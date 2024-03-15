@@ -77,23 +77,23 @@ internal class DraconianRace : Race
     public override void CalcBonuses()
     {
         SaveGame.HasFeatherFall = true;
-        if (SaveGame.ExperienceLevel > 4)
+        if (SaveGame.ExperienceLevel.Value > 4)
         {
             SaveGame.HasFireResistance = true;
         }
-        if (SaveGame.ExperienceLevel > 9)
+        if (SaveGame.ExperienceLevel.Value > 9)
         {
             SaveGame.HasColdResistance = true;
         }
-        if (SaveGame.ExperienceLevel > 14)
+        if (SaveGame.ExperienceLevel.Value > 14)
         {
             SaveGame.HasAcidResistance = true;
         }
-        if (SaveGame.ExperienceLevel > 19)
+        if (SaveGame.ExperienceLevel.Value > 19)
         {
             SaveGame.HasLightningResistance = true;
         }
-        if (SaveGame.ExperienceLevel > 34)
+        if (SaveGame.ExperienceLevel.Value > 34)
         {
             SaveGame.HasPoisonResistance = true;
         }
@@ -118,7 +118,7 @@ internal class DraconianRace : Race
         }
 
         // Chance of replacing the default fire/cold element with a special one
-        if (SaveGame.DieRoll(100) < SaveGame.ExperienceLevel)
+        if (SaveGame.DieRoll(100) < SaveGame.ExperienceLevel.Value)
         {
             switch (SaveGame.BaseCharacterClass.ID)
             {
@@ -223,12 +223,12 @@ internal class DraconianRace : Race
                     break;
             }
         }
-        if (SaveGame.CheckIfRacialPowerWorks(1, SaveGame.ExperienceLevel, Ability.Constitution, 12))
+        if (SaveGame.CheckIfRacialPowerWorks(1, SaveGame.ExperienceLevel.Value, Ability.Constitution, 12))
         {
             if (SaveGame.GetDirectionWithAim(out int direction))
             {
                 SaveGame.MsgPrint($"You breathe {projectileDescription}.");
-                SaveGame.FireBall(projectile, direction, SaveGame.ExperienceLevel * 2, -(SaveGame.ExperienceLevel / 15) + 1);
+                SaveGame.FireBall(projectile, direction, SaveGame.ExperienceLevel.Value * 2, -(SaveGame.ExperienceLevel.Value / 15) + 1);
             }
         }
     }

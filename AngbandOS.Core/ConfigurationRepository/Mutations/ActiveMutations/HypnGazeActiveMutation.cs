@@ -20,7 +20,7 @@ internal class HypnGazeActiveMutation : Mutation
         SaveGame.MsgPrint("Your eyes look mesmerizing...");
         if (SaveGame.GetDirectionWithAim(out int dir))
         {
-            SaveGame.CharmMonster(dir, SaveGame.ExperienceLevel);
+            SaveGame.CharmMonster(dir, SaveGame.ExperienceLevel.Value);
         }
     }
 

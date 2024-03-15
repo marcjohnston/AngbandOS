@@ -18,7 +18,7 @@ internal class PhantasmalServantScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        bool success = SaveGame.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel * 3 / 2, SaveGame.SingletonRepository.MonsterFilters.Get(nameof(PhantomMonsterFilter)), false);
+        bool success = SaveGame.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel.Value * 3 / 2, SaveGame.SingletonRepository.MonsterFilters.Get(nameof(PhantomMonsterFilter)), false);
         string msg = success ? "'Your wish, master?'" : "No-one ever turns up.";
         SaveGame.MsgPrint(msg);
     }

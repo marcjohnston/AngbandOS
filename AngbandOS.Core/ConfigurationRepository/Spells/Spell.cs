@@ -133,7 +133,7 @@ internal abstract class Spell : IGetKey<string>
             return 100;
         }
         int chance = ClassSpell.BaseFailure;
-        chance -= 3 * (SaveGame.ExperienceLevel - ClassSpell.Level);
+        chance -= 3 * (SaveGame.ExperienceLevel.Value - ClassSpell.Level);
         chance -= 3 * (SaveGame.AbilityScores[SaveGame.BaseCharacterClass.SpellStat].SpellFailureReduction - 1);
         if (ClassSpell.ManaCost > SaveGame.Mana.Value)
         {

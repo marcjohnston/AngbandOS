@@ -35,6 +35,6 @@ internal class DispelEvil4xScript : Script, ISuccessfulScriptInt, IScriptInt, IS
     /// </summary>
     public void ExecuteScript()
     {
-        ExecuteScriptInt(SaveGame.ExperienceLevel * 4);
+        ExecuteScriptInt(SaveGame.ExperienceLevel.Value * 4);
     }
 }

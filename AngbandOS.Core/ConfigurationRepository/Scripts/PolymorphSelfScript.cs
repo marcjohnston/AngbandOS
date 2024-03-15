@@ -74,7 +74,7 @@ internal class PolymorphSelfScript : Script, IScript, IRepeatableScript
                     if (SaveGame.DieRoll(6) == 1)
                     {
                         SaveGame.MsgPrint("You find living difficult in your present form!");
-                        SaveGame.TakeHit(SaveGame.DiceRoll(SaveGame.DieRoll(SaveGame.ExperienceLevel), SaveGame.ExperienceLevel), "a lethal mutation");
+                        SaveGame.TakeHit(SaveGame.DiceRoll(SaveGame.DieRoll(SaveGame.ExperienceLevel.Value), SaveGame.ExperienceLevel.Value), "a lethal mutation");
                     }
                     SaveGame.ShuffleAbilityScores();
                     break;

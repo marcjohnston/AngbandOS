@@ -17,5 +17,5 @@ internal class ChaosSpellShardBall : Spell
 
     public override string Name => "Shard Ball";
 
-    protected override string LearnedDetails => $"dam {120 + SaveGame.ExperienceLevel}";
+    protected override string LearnedDetails => $"dam {120 + SaveGame.ExperienceLevel.Value}";
 }

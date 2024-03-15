@@ -15,5 +15,5 @@ internal class NatureSpellBlizzard : Spell
 
     public override string Name => "Blizzard";
 
-    protected override string LearnedDetails => $"dam {70 + SaveGame.ExperienceLevel}";
+    protected override string LearnedDetails => $"dam {70 + SaveGame.ExperienceLevel.Value}";
 }

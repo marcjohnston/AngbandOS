@@ -37,7 +37,7 @@ internal class MutantPowerScript : Script, IScript, IRepeatableScript
         bool allPets = false;
         Monster monster;
         bool hasRacial = SaveGame.Race.HasRacialPowers;
-        string racialPowersDescription = SaveGame.Race.RacialPowersDescription(SaveGame.ExperienceLevel);
+        string racialPowersDescription = SaveGame.Race.RacialPowersDescription(SaveGame.ExperienceLevel.Value);
         for (num = 0; num < 36; num++)
         {
             powers[num] = 0;
@@ -74,7 +74,7 @@ internal class MutantPowerScript : Script, IScript, IRepeatableScript
         for (int j = 0; j < activeMutations.Count; j++)
         {
             powers[num] = j + 100;
-            powerDesc[num] = activeMutations[j].ActivationSummary(SaveGame.ExperienceLevel);
+            powerDesc[num] = activeMutations[j].ActivationSummary(SaveGame.ExperienceLevel.Value);
             num++;
         }
         if (pets > 0)

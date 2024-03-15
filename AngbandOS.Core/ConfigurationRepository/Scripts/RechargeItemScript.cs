@@ -88,6 +88,6 @@ internal class RechargeItemScript : Script, IScript, ISuccessfulScriptInt
     /// <returns></returns>
     public void ExecuteScript()
     {
-        ExecuteSuccessfulScriptInt(SaveGame.ExperienceLevel * 2);
+        ExecuteSuccessfulScriptInt(SaveGame.ExperienceLevel.Value * 2);
     }
 }

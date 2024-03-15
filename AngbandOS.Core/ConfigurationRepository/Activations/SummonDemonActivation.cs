@@ -20,7 +20,7 @@ internal class SummonDemonActivation : Activation
     {
         if (SaveGame.DieRoll(3) == 1)
         {
-            if (SaveGame.SummonSpecific(SaveGame.MapY, SaveGame.MapX, (int)(SaveGame.ExperienceLevel * 1.5), SaveGame.SingletonRepository.MonsterFilters.Get(nameof(DemonMonsterFilter))))
+            if (SaveGame.SummonSpecific(SaveGame.MapY, SaveGame.MapX, (int)(SaveGame.ExperienceLevel.Value * 1.5), SaveGame.SingletonRepository.MonsterFilters.Get(nameof(DemonMonsterFilter))))
             {
                 SaveGame.MsgPrint("The area fills with a stench of sulphur and brimstone.");
                 SaveGame.MsgPrint("'NON SERVIAM! Wretch! I shall feast on thy mortal soul!'");
@@ -28,7 +28,7 @@ internal class SummonDemonActivation : Activation
         }
         else
         {
-            if (SaveGame.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, (int)(SaveGame.ExperienceLevel * 1.5), SaveGame.SingletonRepository.MonsterFilters.Get(nameof(DemonMonsterFilter)), SaveGame.ExperienceLevel == 50))
+            if (SaveGame.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, (int)(SaveGame.ExperienceLevel.Value * 1.5), SaveGame.SingletonRepository.MonsterFilters.Get(nameof(DemonMonsterFilter)), SaveGame.ExperienceLevel.Value == 50))
             {
                 SaveGame.MsgPrint("The area fills with a stench of sulphur and brimstone.");
                 SaveGame.MsgPrint("'What is thy bidding... Master?'");

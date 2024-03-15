@@ -17,5 +17,5 @@ internal class ChaosSpellChainLightning : Spell
 
     public override string Name => "Chain Lightning";
 
-    protected override string LearnedDetails => $"dam {5 + (SaveGame.ExperienceLevel / 10)}d8";
+    protected override string LearnedDetails => $"dam {5 + (SaveGame.ExperienceLevel.Value / 10)}d8";
 }

@@ -26,7 +26,7 @@ internal class StunProjectile : Projectile
         {
             obvious = true;
         }
-        int doStun = SaveGame.DiceRoll((SaveGame.ExperienceLevel / 10) + 3, dam) + 1;
+        int doStun = SaveGame.DiceRoll((SaveGame.ExperienceLevel.Value / 10) + 3, dam) + 1;
         if (rPtr.Unique ||
             rPtr.Level > SaveGame.DieRoll(dam - 10 < 1 ? 1 : dam - 10) + 10)
         {

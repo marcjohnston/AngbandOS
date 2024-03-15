@@ -16,11 +16,11 @@ internal class Terror40xEvery3xp10Activation : Activation
     private Terror40xEvery3xp10Activation(SaveGame saveGame) : base(saveGame) { }
     public override int RandomChance => 75;
 
-    public override int RechargeTime() => 3 * (SaveGame.ExperienceLevel + 10);
+    public override int RechargeTime() => 3 * (SaveGame.ExperienceLevel.Value + 10);
     public override string? PreActivationMessage => "rays of fear in every direction";
     protected override bool OnActivate(Item item)
     {
-        SaveGame.TurnMonsters(40 + SaveGame.ExperienceLevel);
+        SaveGame.TurnMonsters(40 + SaveGame.ExperienceLevel.Value);
         return true;
     }
 

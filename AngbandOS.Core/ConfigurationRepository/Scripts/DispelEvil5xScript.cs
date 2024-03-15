@@ -28,7 +28,7 @@ internal class DispelEvil5xScript : Script, ISuccessfulScript, IScript, ICancell
     /// <returns></returns>
     public bool ExecuteSuccessfulScript()
     {
-        return SaveGame.ProjectAtAllInLos(SaveGame.SingletonRepository.Projectiles.Get(nameof(DispEvilProjectile)), SaveGame.ExperienceLevel * 5);
+        return SaveGame.ProjectAtAllInLos(SaveGame.SingletonRepository.Projectiles.Get(nameof(DispEvilProjectile)), SaveGame.ExperienceLevel.Value * 5);
     }
 
     /// <summary>

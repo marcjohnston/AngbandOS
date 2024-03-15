@@ -13,14 +13,14 @@ internal class BrFireActiveMutation : Mutation
     private BrFireActiveMutation(SaveGame saveGame) : base(saveGame) { }
     public override void Activate()
     {
-        if (!SaveGame.CheckIfRacialPowerWorks(20, SaveGame.ExperienceLevel, Ability.Constitution, 18))
+        if (!SaveGame.CheckIfRacialPowerWorks(20, SaveGame.ExperienceLevel.Value, Ability.Constitution, 18))
         {
             return;
         }
         SaveGame.MsgPrint("You breathe fire...");
         if (SaveGame.GetDirectionWithAim(out int dir))
         {
-            SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(FireProjectile)), dir, SaveGame.ExperienceLevel * 2, -(1 + (SaveGame.ExperienceLevel / 20)));
+            SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(FireProjectile)), dir, SaveGame.ExperienceLevel.Value * 2, -(1 + (SaveGame.ExperienceLevel.Value / 20)));
         }
     }
 

@@ -20,7 +20,7 @@ internal class ProtectionFromEvilActivation : Activation
 
     protected override bool OnActivate(Item item)
     {
-        int k = 3 * SaveGame.ExperienceLevel;
+        int k = 3 * SaveGame.ExperienceLevel.Value;
         SaveGame.ProtectionFromEvilTimer.AddTimer(SaveGame.DieRoll(25) + k);
         return true;
     }

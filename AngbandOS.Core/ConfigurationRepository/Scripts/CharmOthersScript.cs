@@ -33,6 +33,6 @@ internal class CharmOthersScript : Script, IScript, IScriptInt, ICancellableScri
     /// <returns></returns>
     public void ExecuteScript()
     {
-        ExecuteScriptInt(SaveGame.ExperienceLevel * 2);
+        ExecuteScriptInt(SaveGame.ExperienceLevel.Value * 2);
     }
 }

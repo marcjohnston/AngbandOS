@@ -18,6 +18,6 @@ internal class SonicBoomScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        SaveGame.Project(0, 2 + (SaveGame.ExperienceLevel / 10), SaveGame.MapY, SaveGame.MapX, 45 + SaveGame.ExperienceLevel, SaveGame.SingletonRepository.Projectiles.Get(nameof(SoundProjectile)), ProjectionFlag.ProjectKill | ProjectionFlag.ProjectItem);
+        SaveGame.Project(0, 2 + (SaveGame.ExperienceLevel.Value / 10), SaveGame.MapY, SaveGame.MapX, 45 + SaveGame.ExperienceLevel.Value, SaveGame.SingletonRepository.Projectiles.Get(nameof(SoundProjectile)), ProjectionFlag.ProjectKill | ProjectionFlag.ProjectItem);
     }
 }

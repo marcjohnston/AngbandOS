@@ -25,6 +25,6 @@ internal class RawChaosRandomMutation : Mutation
         SaveGame.Disturb(false);
         SaveGame.MsgPrint("You feel the world warping around you!");
         SaveGame.MsgPrint(null);
-        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(ChaosProjectile)), 0, SaveGame.ExperienceLevel, 8);
+        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(ChaosProjectile)), 0, SaveGame.ExperienceLevel.Value, 8);
     }
 }

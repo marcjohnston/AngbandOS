@@ -22,6 +22,6 @@ internal class ShardBallScript : Script, IScript
         {
             return;
         }
-        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(ShardProjectile)), dir, 120 + SaveGame.ExperienceLevel, 2);
+        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(ShardProjectile)), dir, 120 + SaveGame.ExperienceLevel.Value, 2);
     }
 }

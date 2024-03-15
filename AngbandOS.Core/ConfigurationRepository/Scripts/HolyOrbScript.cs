@@ -22,6 +22,6 @@ internal class HolyOrbScript : Script, IScript
         {
             return;
         }
-        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(HolyFireProjectile)), dir, SaveGame.DiceRoll(3, 6) + SaveGame.ExperienceLevel + (SaveGame.ExperienceLevel / (SaveGame.BaseCharacterClass.ID == CharacterClass.Priest || SaveGame.BaseCharacterClass.ID == CharacterClass.HighMage ? 2 : 4)), SaveGame.ExperienceLevel < 30 ? 2 : 3);
+        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(HolyFireProjectile)), dir, SaveGame.DiceRoll(3, 6) + SaveGame.ExperienceLevel.Value + (SaveGame.ExperienceLevel.Value / (SaveGame.BaseCharacterClass.ID == CharacterClass.Priest || SaveGame.BaseCharacterClass.ID == CharacterClass.HighMage ? 2 : 4)), SaveGame.ExperienceLevel.Value < 30 ? 2 : 3);
     }
 }

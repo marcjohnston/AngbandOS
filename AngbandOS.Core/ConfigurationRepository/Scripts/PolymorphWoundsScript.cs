@@ -30,7 +30,7 @@ internal class PolymorphWoundsScript : Script, IScript, IRepeatableScript
     {
         int wounds = SaveGame.BleedingTimer.Value;
         int hitP = SaveGame.MaxHealth.Value - SaveGame.Health.Value;
-        int change = SaveGame.DiceRoll(SaveGame.ExperienceLevel, 5);
+        int change = SaveGame.DiceRoll(SaveGame.ExperienceLevel.Value, 5);
         bool nastyEffect = SaveGame.DieRoll(5) == 1;
         if (!(wounds != 0 || hitP != 0 || nastyEffect))
         {

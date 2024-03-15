@@ -15,5 +15,5 @@ internal class TarotSpellTeleport : Spell
 
     public override string Name => "Teleport";
 
-    protected override string LearnedDetails => $"range {SaveGame.ExperienceLevel * 4}";
+    protected override string LearnedDetails => $"range {SaveGame.ExperienceLevel.Value * 4}";
 }

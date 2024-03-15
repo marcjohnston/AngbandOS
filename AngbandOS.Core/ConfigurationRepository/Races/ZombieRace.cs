@@ -73,7 +73,7 @@ internal class ZombieRace : Race
         SaveGame.HasSeeInvisibility = true;
         SaveGame.HasPoisonResistance = true;
         SaveGame.HasSlowDigestion = true;
-        if (SaveGame.ExperienceLevel > 4)
+        if (SaveGame.ExperienceLevel.Value > 4)
         {
             SaveGame.HasColdResistance = true;
         }

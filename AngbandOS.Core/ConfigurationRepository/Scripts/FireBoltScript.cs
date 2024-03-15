@@ -22,21 +22,21 @@ internal class FireBoltScript : Script, IScript
         switch (SaveGame.BaseCharacterClass.ID)
         {
             case CharacterClass.Mage:
-                beam = SaveGame.ExperienceLevel;
+                beam = SaveGame.ExperienceLevel.Value;
                 break;
 
             case CharacterClass.HighMage:
-                beam = SaveGame.ExperienceLevel + 10;
+                beam = SaveGame.ExperienceLevel.Value + 10;
                 break;
 
             default:
-                beam = SaveGame.ExperienceLevel / 2;
+                beam = SaveGame.ExperienceLevel.Value / 2;
                 break;
         }
         if (!SaveGame.GetDirectionWithAim(out int dir))
         {
             return;
         }
-        SaveGame.FireBoltOrBeam(beam, SaveGame.SingletonRepository.Projectiles.Get(nameof(FireProjectile)), dir, SaveGame.DiceRoll(8 + ((SaveGame.ExperienceLevel - 5) / 4), 8));
+        SaveGame.FireBoltOrBeam(beam, SaveGame.SingletonRepository.Projectiles.Get(nameof(FireProjectile)), dir, SaveGame.DiceRoll(8 + ((SaveGame.ExperienceLevel.Value - 5) / 4), 8));
     }
 }

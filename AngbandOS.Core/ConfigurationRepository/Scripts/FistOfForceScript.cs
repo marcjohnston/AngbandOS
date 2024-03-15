@@ -22,6 +22,6 @@ internal class FistOfForceScript : Script, IScript
         {
             return;
         }
-        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(DisintegrateProjectile)), dir, SaveGame.DiceRoll(8 + ((SaveGame.ExperienceLevel - 5) / 4), 8), 0);
+        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(DisintegrateProjectile)), dir, SaveGame.DiceRoll(8 + ((SaveGame.ExperienceLevel.Value - 5) / 4), 8), 0);
     }
 }

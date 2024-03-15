@@ -40,13 +40,13 @@ internal class SummonBizarreMonsterScript : Script, IScript
         }
         if (SaveGame.DieRoll(2) == 1)
         {
-            SaveGame.MsgPrint(SaveGame.SummonSpecific(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel, summonType)
+            SaveGame.MsgPrint(SaveGame.SummonSpecific(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel.Value, summonType)
                 ? "The summoned creature gets angry!"
                 : "No-one ever turns up.");
         }
         else
         {
-            if (!SaveGame.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel, summonType, false))
+            if (!SaveGame.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel.Value, summonType, false))
             {
                 SaveGame.MsgPrint("No-one ever turns up.");
             }
