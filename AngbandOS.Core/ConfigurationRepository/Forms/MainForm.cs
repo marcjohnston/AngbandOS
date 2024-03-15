@@ -19,6 +19,8 @@ internal class MainForm : Form
         nameof(PoisonedWidget),
         nameof(BlindnessWidget),
         nameof(ConfusedWidget),
+        nameof(AfraidWidget),
+        nameof(CutWidget),
         nameof(StunnedWidget),
         nameof(ManaWidget),
         nameof(ManaLabelWidget),

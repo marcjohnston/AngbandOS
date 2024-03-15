@@ -94,7 +94,6 @@ internal class BleedingTimer : Timer
     protected override void Noticed()
     {
         SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
-        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawCutFlaggedAction)).Set();
         base.Noticed();
     }
 

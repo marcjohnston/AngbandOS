@@ -29,7 +29,6 @@ internal class CowardiceRandomMutation : Mutation
         }
         SaveGame.Disturb(false);
         SaveGame.MsgPrint("It's so dark... so scary!");
-        base.SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawAfraidFlaggedAction)).Set();
         SaveGame.FearTimer.AddTimer(13 + base.SaveGame.DieRoll(26));
     }
 }

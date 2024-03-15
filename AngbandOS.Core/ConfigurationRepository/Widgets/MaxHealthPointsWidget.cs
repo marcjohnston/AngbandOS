@@ -17,8 +17,4 @@ internal class MaxHealthPointsWidget : DynamicWidget
     public override ColorEnum Color => ColorEnum.BrightGreen;
     public override string IntChangeTrackableName => nameof(MaxHealthPointsIntProperty);
     public override string? JustificationName => nameof(RightJustification);
-    public override string[]? EnabledConditionalNames => new string[]
-    {
-        nameof(UsesManaConditional)
-    };
 }

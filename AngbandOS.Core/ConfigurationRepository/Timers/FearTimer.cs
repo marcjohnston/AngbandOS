@@ -19,9 +19,4 @@ internal class FearTimer : Timer
     {
         SaveGame.MsgPrint("You are terrified!");
     }
-    protected override void Noticed()
-    {
-        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawAfraidFlaggedAction)).Set();
-        base.Noticed();
-    }
 }

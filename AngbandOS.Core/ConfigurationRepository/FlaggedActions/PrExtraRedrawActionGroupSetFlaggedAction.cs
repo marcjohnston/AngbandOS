@@ -15,10 +15,8 @@ internal class PrExtraRedrawActionGroupSetFlaggedAction : GroupSetFlaggedAction
     public override void Bind()
     {
         RedrawActions = new FlaggedAction[] {
-            SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawCutFlaggedAction)),
             SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawHungerFlaggedAction)),
             SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawDTrapFlaggedAction)),
-            SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawAfraidFlaggedAction)),
             SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawStateFlaggedAction)),
             SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawSpeedFlaggedAction)),
             SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawStudyFlaggedAction))
