@@ -45,7 +45,6 @@ internal class MassCarnageScript : Script, IScriptBool, IScript
                 SaveGame.TakeHit(SaveGame.DieRoll(3), "the strain of casting Mass Carnage");
             }
             SaveGame.MoveCursorRelative(SaveGame.MapY, SaveGame.MapX);
-            SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawHealthPointsFlaggedAction)).Set();
             SaveGame.HandleStuff();
             SaveGame.UpdateScreen();
             SaveGame.Pause(msec);

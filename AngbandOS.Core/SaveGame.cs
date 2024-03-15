@@ -219,12 +219,11 @@ internal class SaveGame
     public bool GetFirstLevelMutation;
     
     public readonly GoldIntProperty Gold;
-    public readonly CurrentManaIntProperty Mana;
+    public readonly ManaIntProperty Mana;
     public readonly MaxManaIntProperty MaxMana;
     public readonly ExperiencePointsIntProperty ExperiencePoints;
     public readonly DisplayedArmorClassBonusIntProperty DisplayedArmorClassBonus;
     public readonly DisplayedBaseArmorClassIntProperty DisplayedBaseArmorClass;
-    public readonly HealthIntProperty Health;
     /// <summary>
     /// 
     /// </summary>
@@ -234,6 +233,10 @@ internal class SaveGame
     public readonly SpareSpellSlotsIntProperty SpareSpellSlots;
 
     public readonly MainForm MainForm;
+
+    public readonly HealthIntProperty Health;
+
+    public readonly MaxHealthIntProperty MaxHealth;
 
     /// <summary>
     ///
@@ -343,7 +346,6 @@ internal class SaveGame
     /// </summary>
     /// <remarks>borg: player->max_exp</remarks>
     public int MaxExperienceGained;
-    public int MaxHealth;
 
     /// <summary>
     ///
@@ -652,7 +654,7 @@ internal class SaveGame
 
         Quests = new List<Quest>();
         Gold = (GoldIntProperty)SingletonRepository.Properties.Get(nameof(GoldIntProperty));
-        Mana = (CurrentManaIntProperty)SingletonRepository.Properties.Get(nameof(CurrentManaIntProperty));
+        Mana = (ManaIntProperty)SingletonRepository.Properties.Get(nameof(ManaIntProperty));
         MaxMana = (MaxManaIntProperty)SingletonRepository.Properties.Get(nameof(MaxManaIntProperty));
         ExperiencePoints = (ExperiencePointsIntProperty)SingletonRepository.Properties.Get(nameof(ExperiencePointsIntProperty));
         DisplayedArmorClassBonus = (DisplayedArmorClassBonusIntProperty)SingletonRepository.Properties.Get(nameof(DisplayedArmorClassBonusIntProperty));
@@ -660,6 +662,7 @@ internal class SaveGame
         Food = (FoodIntProperty)SingletonRepository.Properties.Get(nameof(FoodIntProperty));
         Health = (HealthIntProperty)SingletonRepository.Properties.Get(nameof(HealthIntProperty));
         Speed = (SpeedIntProperty)SingletonRepository.Properties.Get(nameof(SpeedIntProperty));
+        MaxHealth = (MaxHealthIntProperty)SingletonRepository.Properties.Get(nameof(MaxHealthIntProperty));
         SpareSpellSlots = (SpareSpellSlotsIntProperty)SingletonRepository.Properties.Get(nameof(SpareSpellSlotsIntProperty));
 
         AcidResistanceTimer = (AcidResistanceTimer)SingletonRepository.TimedActions.Get(nameof(Timers.AcidResistanceTimer));
@@ -3433,14 +3436,14 @@ internal class SaveGame
         {
             if (Resting == -1)
             {
-                if (Health.Value == MaxHealth && Mana.Value >= MaxMana.Value)
+                if (Health.Value == MaxHealth.Value && Mana.Value >= MaxMana.Value)
                 {
                     Disturb(false);
                 }
             }
             else if (Resting == -2)
             {
-                if (Health.Value == MaxHealth && Mana.Value == MaxMana.Value && BlindnessTimer.Value == 0 &&
+                if (Health.Value == MaxHealth.Value && Mana.Value == MaxMana.Value && BlindnessTimer.Value == 0 &&
                     ConfusedTimer.Value == 0 && PoisonTimer.Value == 0 && FearTimer.Value == 0 && StunTimer.Value == 0 &&
                     BleedingTimer.Value == 0 && SlowTimer.Value == 0 && ParalysisTimer.Value == 0 && HallucinationsTimer.Value == 0 &&
                     WordOfRecallDelay == 0)
@@ -3835,7 +3838,7 @@ internal class SaveGame
         {
             regenAmount = 0;
         }
-        if (Health.Value < MaxHealth && !caveNoRegen)
+        if (Health.Value < MaxHealth.Value && !caveNoRegen)
         {
             RegenerateHealth(regenAmount);
         }
@@ -4022,7 +4025,6 @@ internal class SaveGame
         SingletonRepository.FlaggedActions.Get(nameof(RedrawExperiencePointsFlaggedAction)).Check();
         SingletonRepository.FlaggedActions.Get(nameof(RedrawStatsFlaggedAction)).Check();
         SingletonRepository.FlaggedActions.Get(nameof(RedrawArmorFlaggedAction)).Check();
-        SingletonRepository.FlaggedActions.Get(nameof(RedrawHealthPointsFlaggedAction)).Check();
         SingletonRepository.FlaggedActions.Get(nameof(RedrawDepthFlaggedAction)).Check();
         SingletonRepository.FlaggedActions.Get(nameof(RedrawMonsterHealthFlaggedAction)).Check();
         SingletonRepository.FlaggedActions.Get(nameof(RedrawCutFlaggedAction)).Check();
@@ -6080,8 +6082,7 @@ internal class SaveGame
         {
             Mana.Value -= (cost / 2) + DieRoll(cost / 2);
         }
-        // We'll need to redraw
-        SingletonRepository.FlaggedActions.Get(nameof(RedrawHealthPointsFlaggedAction)).Set();
+
         // Check to see if we were successful
         if (DieRoll(AbilityScores[useStat].Innate) >=
             (difficulty / 2) + DieRoll(difficulty / 2))
@@ -9120,7 +9121,7 @@ internal class SaveGame
         ExperienceLevel = 1;
         ExperienceMultiplier = Race.ExperienceFactor + BaseCharacterClass.ExperienceFactor;
         HitDie = Race.HitDieBonus + BaseCharacterClass.HitDieBonus;
-        MaxHealth = HitDie;
+        MaxHealth.Value = HitDie;
         PlayerHp[0] = HitDie;
         int lastroll = HitDie;
         for (i = 1; i < Constants.PyMaxLevel; i++)
@@ -13339,7 +13340,7 @@ internal class SaveGame
     public void RegenerateHealth(int percent)
     {
         int oldHealth = Health.Value;
-        int newHealth = (MaxHealth * percent) + Constants.PyRegenHpbase;
+        int newHealth = (MaxHealth.Value * percent) + Constants.PyRegenHpbase;
         Health.Value += newHealth >> 16;
         if (Health.Value < 0 && oldHealth > 0)
         {
@@ -13355,14 +13356,10 @@ internal class SaveGame
         {
             FractionalHealth = newFractionalHealth;
         }
-        if (Health.Value >= MaxHealth)
+        if (Health.Value >= MaxHealth.Value)
         {
-            Health.Value = MaxHealth;
+            Health.Value = MaxHealth.Value;
             FractionalHealth = 0;
-        }
-        if (oldHealth != Health.Value)
-        {
-            SingletonRepository.FlaggedActions.Get(nameof(RedrawHealthPointsFlaggedAction)).Set();
         }
     }
 
@@ -13410,15 +13407,14 @@ internal class SaveGame
     /// <returns></returns>
     public bool RestoreHealth(int num)
     {
-        if (Health.Value < MaxHealth)
+        if (Health.Value < MaxHealth.Value)
         {
             Health.Value += num;
-            if (Health.Value >= MaxHealth)
+            if (Health.Value >= MaxHealth.Value)
             {
-                Health.Value = MaxHealth;
+                Health.Value = MaxHealth.Value;
                 FractionalHealth = 0;
             }
-            SingletonRepository.FlaggedActions.Get(nameof(RedrawHealthPointsFlaggedAction)).Set();
             if (num < 5)
             {
                 MsgPrint("You feel a little better.");
@@ -13595,7 +13591,7 @@ internal class SaveGame
     public void TakeHit(int damage, string hitFrom)
     {
         bool penInvuln = false;
-        int warning = MaxHealth * Constants.HitpointWarn / 10;
+        int warning = MaxHealth.Value * Constants.HitpointWarn / 10;
         if (IsDead)
         {
             return;
@@ -13621,7 +13617,6 @@ internal class SaveGame
             }
         }
         Health.Value -= damage;
-        SingletonRepository.FlaggedActions.Get(nameof(RedrawHealthPointsFlaggedAction)).Set();
         if (penInvuln)
         {
             MsgPrint("The attack penetrates your shield of invulnerability!");

@@ -2171,7 +2171,7 @@ internal class Monster : IItemContainer
                 }
                 // If the player isn't in a room and they're healthy, wait to ambush them rather
                 // than running headlong into the corridor after them and queueing up to get hit
-                if (room < 8 && saveGame.Health.Value > saveGame.MaxHealth * 3 / 4)
+                if (room < 8 && saveGame.Health.Value > saveGame.MaxHealth.Value * 3 / 4)
                 {
                     if (FindAmbushSpot(saveGame, desiredRelativeMovement))
                     {
@@ -2653,7 +2653,7 @@ internal class Monster : IItemContainer
         }
         // If we're significantly less healthy than the player, move away
         int playerHealth = saveGame.Health.Value;
-        int playerMaxHealth = saveGame.MaxHealth;
+        int playerMaxHealth = saveGame.MaxHealth.Value;
         int monsterHealth = Health;
         int monsterMaxHealth = MaxHealth;
         int playerHealthFactor = (playerLevel * playerMaxHealth) + (playerHealth << 2);

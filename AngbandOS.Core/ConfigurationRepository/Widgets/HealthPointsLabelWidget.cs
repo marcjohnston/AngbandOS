@@ -9,14 +9,10 @@
 namespace AngbandOS.Core.Widgets;
 
 [Serializable]
-internal class CurrentManaLabelWidget : Widget
+internal class HealthPointsLabelWidget : Widget
 {
-    private CurrentManaLabelWidget(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private HealthPointsLabelWidget(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override int X => 0;
-    public override int Y => 26;
-    public override string Text => "Cur SP";
-    public override string[]? EnabledConditionalNames => new string[]
-    {
-        nameof(UsesManaConditional)
-    };
+    public override int Y => 24;
+    public override string Text => "Cur HP";
 }

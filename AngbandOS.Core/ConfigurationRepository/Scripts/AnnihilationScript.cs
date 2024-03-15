@@ -39,7 +39,6 @@ internal class AnnihilationScript : Script, IScript
             SaveGame.TakeHit(SaveGame.DieRoll(4), "the strain of casting Annihilation");
             SaveGame.Mana.Value++;
             SaveGame.MoveCursorRelative(SaveGame.MapY, SaveGame.MapX);
-            SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawHealthPointsFlaggedAction)).Set();
             SaveGame.HandleStuff();
             SaveGame.UpdateScreen();
             SaveGame.Pause(Constants.DelayFactorInMilliseconds);

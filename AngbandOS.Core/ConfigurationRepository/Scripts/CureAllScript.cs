@@ -26,7 +26,7 @@ internal class CureAllScript : Script, IScript
         SaveGame.RestoreAbilityScore(Ability.Dexterity);
         SaveGame.RestoreAbilityScore(Ability.Charisma);
         SaveGame.RunScript(nameof(RestoreLevelScript));
-        SaveGame.Health.Value = SaveGame.MaxHealth;
+        SaveGame.Health.Value = SaveGame.MaxHealth.Value;
         SaveGame.FractionalHealth = 0;
         SaveGame.Mana.Value = SaveGame.MaxMana.Value;
         SaveGame.FractionalMana = 0;

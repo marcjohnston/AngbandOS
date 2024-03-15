@@ -69,7 +69,7 @@ internal class RestInRoomScript : Script, IScript
         SaveGame.FireResistanceTimer.SetValue();
         SaveGame.ColdResistanceTimer.SetValue();
         SaveGame.PoisonResistanceTimer.SetValue();
-        SaveGame.Health.Value = SaveGame.MaxHealth;
+        SaveGame.Health.Value = SaveGame.MaxHealth.Value;
         SaveGame.Mana.Value = SaveGame.MaxMana.Value;
         SaveGame.BlindnessTimer.SetValue();
         SaveGame.ConfusedTimer.SetValue();

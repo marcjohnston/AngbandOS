@@ -20,9 +20,11 @@ internal class MainForm : Form
         nameof(BlindnessWidget),
         nameof(ConfusedWidget),
         nameof(StunnedWidget),
-        nameof(CurrentManaWidget),
-        nameof(CurrentManaLabelWidget),
+        nameof(ManaWidget),
+        nameof(ManaLabelWidget),
         nameof(MaxManaWidget),
-        nameof(MaxManaLabelWidget)
+        nameof(MaxManaLabelWidget),
+        nameof(HealthPointsLabelWidget),
+        nameof(MaxHealthPointsLabelWidget)
     };
 }

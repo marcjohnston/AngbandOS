@@ -42,7 +42,6 @@ internal class RerollHitPointsScript : Script, IScript
             SaveGame.PlayerHp[i] = SaveGame.PlayerHp[i - 1] + SaveGame.PlayerHp[i];
         }
         SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateHealthFlaggedAction)).Set();
-        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawHealthPointsFlaggedAction)).Set();
         SaveGame.HandleStuff();
     }
 }

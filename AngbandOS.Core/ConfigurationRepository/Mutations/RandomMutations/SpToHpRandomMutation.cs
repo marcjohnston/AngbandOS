@@ -22,7 +22,7 @@ internal class SpToHpRandomMutation : Mutation
         {
             return;
         }
-        int wounds = SaveGame.MaxHealth - SaveGame.Health.Value;
+        int wounds = SaveGame.MaxHealth.Value - SaveGame.Health.Value;
         if (wounds <= 0)
         {
             return;

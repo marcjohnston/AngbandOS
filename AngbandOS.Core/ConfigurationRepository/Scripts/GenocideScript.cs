@@ -42,7 +42,6 @@ internal class GenocideScript : Script, IScript, IScriptBool
                 SaveGame.TakeHit(SaveGame.DieRoll(4), "the strain of casting Carnage");
             }
             SaveGame.MoveCursorRelative(SaveGame.MapY, SaveGame.MapX);
-            SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawHealthPointsFlaggedAction)).Set();
             SaveGame.HandleStuff();
             SaveGame.UpdateScreen();
             SaveGame.Pause(msec);

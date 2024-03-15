@@ -30,15 +30,14 @@ internal class UpdateHealthFlaggedAction : FlaggedAction
         var mult = SaveGame.SingletonRepository.Gods.Get(nameof(NathHorthahGod)).AdjustedFavour + 10;
         mhp *= mult;
         mhp /= 10;
-        if (SaveGame.MaxHealth != mhp)
+        if (SaveGame.MaxHealth.Value != mhp)
         {
             if (SaveGame.Health.Value >= mhp)
             {
                 SaveGame.Health.Value = mhp;
                 SaveGame.FractionalHealth = 0;
             }
-            SaveGame.MaxHealth = mhp;
-            SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawHealthPointsFlaggedAction)).Set();
+            SaveGame.MaxHealth.Value = mhp;
         }
     }
 }
