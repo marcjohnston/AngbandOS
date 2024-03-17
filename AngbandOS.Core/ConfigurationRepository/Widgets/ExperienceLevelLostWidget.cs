@@ -5,8 +5,6 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-using System.Diagnostics;
-
 namespace AngbandOS.Core.Widgets;
 
 [Serializable]
@@ -23,9 +21,4 @@ internal class ExperienceLevelLostWidget : DynamicWidget
     {
         (nameof(MaxLevelAttainedConditional), false)
     };
-    public override void Update()
-    {
-        Debug.Print($"{Key} {IntChangeTrackable.Value} widget change = {ValueChanged}");
-        base.Update();
-    }
 }
