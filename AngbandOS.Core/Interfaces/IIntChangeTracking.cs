@@ -5,11 +5,13 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Conditionals;
+namespace AngbandOS.Core.Interfaces;
 
-[Serializable]
-internal class UsesManaConditional : Conditional
+/// <summary>
+/// Represents the interface that a class needs to implement to participate in change tracking for an integer value.  This interface adds an Int value signature to the 
+/// change trackable interface.
+/// </summary>
+internal interface IIntChangeTracking : IChangeTracking
 {
-    private UsesManaConditional(SaveGame saveGame) : base(saveGame) { }
-    public override bool IsTrue => SaveGame.UsesMana;
+    int Value { get; }
 }

@@ -9,15 +9,16 @@
 namespace AngbandOS.Core.Widgets;
 
 [Serializable]
-internal class ManaLabelWidget : Widget
+internal class PlayerTitleIsWizardWidget : Widget
 {
-    private ManaLabelWidget(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private PlayerTitleIsWizardWidget(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override int X => 0;
-    public override int Y => 26;
-    public override string Text => "Cur SP";
+    public override int Y => 4;
+    public override string Text => "-=<WIZARD>=-";
+    public override ColorEnum Color => ColorEnum.BrightBlue;
     public override (string, bool)[]? EnabledConditionalNames => new (string, bool)[]
     {
-        (nameof(UsesManaConditional), true)
+        (nameof(IsWizardBoolProperty), true)
     };
 }
 

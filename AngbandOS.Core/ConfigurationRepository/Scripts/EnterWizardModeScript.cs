@@ -28,7 +28,7 @@ internal class EnterWizardModeScript : Script, IScript, IRepeatableScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        if (SaveGame.IsWizard)
+        if (SaveGame.IsWizard.Value)
         {
             SaveGame.GetCom("Wizard Command: ", out char cmd);
             foreach (WizardCommand wizardCommand in SaveGame.SingletonRepository.WizardCommands)
@@ -55,9 +55,8 @@ internal class EnterWizardModeScript : Script, IScript, IRepeatableScript
             SaveGame.Screen.Erase(0, 0);
             if (tmp == "Dumbledore")
             {
-                SaveGame.IsWizard = true;
+                SaveGame.IsWizard.Value = true;
                 SaveGame.MsgPrint("Wizard mode activated.");
-                SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawTitleFlaggedAction)).Set();
             }
         }
     }

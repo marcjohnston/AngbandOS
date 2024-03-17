@@ -1929,7 +1929,7 @@ internal static class borg1c
         borg_skill.BI_MAXCLEVEL = saveGame.MaxLevelGained;
 
         /* Note "Winner" */
-        borg_skill.BI_KING = saveGame.IsWinner;
+        borg_skill.BI_KING = saveGame.IsWinner.Value;
 
         /* Assume experience is fine */
         borg_skill.BI_ISFIXEXP = false;

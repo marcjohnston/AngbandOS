@@ -634,7 +634,7 @@ internal class Monster : IItemContainer
             getsAngry = true;
         }
         // If we're unique, don't stay friendly
-        if (SmFriendly && !SaveGame.IsWizard && Race.Unique)
+        if (SmFriendly && !SaveGame.IsWizard.Value && Race.Unique)
         {
             getsAngry = true;
         }

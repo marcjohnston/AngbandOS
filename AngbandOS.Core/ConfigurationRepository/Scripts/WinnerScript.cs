@@ -20,8 +20,7 @@ internal class WinnerScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        SaveGame.IsWinner = true;
-        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawTitleFlaggedAction)).Set();
+        SaveGame.IsWinner.Value = true;
         SaveGame.MsgPrint("*** CONGRATULATIONS ***");
         SaveGame.MsgPrint("You have won the game!");
         SaveGame.MsgPrint("You may retire ('Q') when you are ready.");

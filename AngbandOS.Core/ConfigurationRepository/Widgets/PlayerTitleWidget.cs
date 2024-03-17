@@ -6,18 +6,20 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+
 namespace AngbandOS.Core.Widgets;
 
 [Serializable]
-internal class ManaLabelWidget : Widget
+internal class PlayerTitleWidget : Widget
 {
-    private ManaLabelWidget(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private PlayerTitleWidget(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override int X => 0;
-    public override int Y => 26;
-    public override string Text => "Cur SP";
+    public override int Y => 4;
+    public override string Text => "";
+    public override ColorEnum Color => ColorEnum.BrightBlue;
     public override (string, bool)[]? EnabledConditionalNames => new (string, bool)[]
     {
-        (nameof(UsesManaConditional), true)
+        (nameof(IsWizardBoolProperty), false),
+        (nameof(IsWinnerBoolProperty), false)
     };
 }
-

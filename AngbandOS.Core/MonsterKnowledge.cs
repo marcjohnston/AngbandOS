@@ -56,7 +56,7 @@ internal class MonsterKnowledge
         string[] vp = new string[64];
         MonsterKnowledge knowledge = this;
         _description = new StringBuilder();
-        if (SaveGame.IsWizard)
+        if (SaveGame.IsWizard.Value)
         {
             knowledge = new MonsterKnowledge(SaveGame, _monsterType);
             for (m = 0; m < _monsterType.Attacks.Length; m++)

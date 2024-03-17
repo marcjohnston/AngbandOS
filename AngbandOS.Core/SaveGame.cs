@@ -314,8 +314,8 @@ internal class SaveGame
     /// 
     /// </summary>
     /// <remarks>borg: player->total_winner</remarks>
-    public bool IsWinner;
-    public bool IsWizard;
+    public readonly IsWinnerBoolProperty IsWinner;
+    public readonly IsWizardBoolProperty IsWizard;
     private int _experienceLevel;
 
     public int LightLevel;
@@ -655,6 +655,8 @@ internal class SaveGame
         SpareSpellSlots = (SpareSpellSlotsIntProperty)SingletonRepository.Properties.Get(nameof(SpareSpellSlotsIntProperty));
         ExperienceLevel = (ExperienceLevelIntProperty)SingletonRepository.Properties.Get(nameof(ExperienceLevelIntProperty));
         ExperienceMultiplier = (ExperienceMultiplierIntProperty)SingletonRepository.Properties.Get(nameof(ExperienceMultiplierIntProperty));
+        IsWinner = (IsWinnerBoolProperty)SingletonRepository.Properties.Get(nameof(IsWinnerBoolProperty));
+        IsWizard = (IsWizardBoolProperty)SingletonRepository.Properties.Get(nameof(IsWizardBoolProperty));
 
         AcidResistanceTimer = (AcidResistanceTimer)SingletonRepository.TimedActions.Get(nameof(Timers.AcidResistanceTimer));
         BleedingTimer = (BleedingTimer)SingletonRepository.TimedActions.Get(nameof(Timers.BleedingTimer));
@@ -1801,8 +1803,8 @@ internal class SaveGame
         }
         SingletonRepository.MonsterRaces[SingletonRepository.MonsterRaces.Count - 1].MaxNum = 0;
         Food.Value = Constants.PyFoodFull - 1;
-        IsWizard = false;
-        IsWinner = false;
+        IsWizard.Value = false;
+        IsWinner.Value = false;
 
         // Reset the home ownership for the player.
         TownWithHouse = null;
@@ -2819,7 +2821,7 @@ internal class SaveGame
         FullScreenOverlay = true;
         if (IsDead)
         {
-            if (IsWinner)
+            if (IsWinner.Value)
             {
                 Kingly();
             }
@@ -2827,7 +2829,7 @@ internal class SaveGame
             //HighScore score = new HighScore(this);
             SavePlayer();
             PrintTomb();
-            if (IsWizard)
+            if (IsWizard.Value)
             {
                 return;
             }
@@ -3381,7 +3383,7 @@ internal class SaveGame
     {
         {
             DateTime ct = DateTime.Now;
-            if (IsWinner)
+            if (IsWinner.Value)
             {
                 SetBackground(BackgroundImageEnum.Sunset);
                 PlayMusic(MusicTrackEnum.Victory);
@@ -3393,7 +3395,7 @@ internal class SaveGame
             }
             Screen.Clear();
             string buf = Name.Trim() + Generation.ToRoman(true);
-            if (IsWinner || ExperienceLevel.Value > Constants.PyMaxLevel)
+            if (IsWinner.Value || ExperienceLevel.Value > Constants.PyMaxLevel)
             {
                 buf += " the Magnificent";
             }
@@ -4011,7 +4013,6 @@ internal class SaveGame
         SingletonRepository.FlaggedActions.Get(nameof(RedrawMapFlaggedAction)).Check();
         SingletonRepository.FlaggedActions.Get(nameof(RedrawPlayerFlaggedAction)).Check();
         SingletonRepository.FlaggedActions.Get(nameof(RedrawEquippyFlaggedAction)).Check();
-        SingletonRepository.FlaggedActions.Get(nameof(RedrawTitleFlaggedAction)).Check();
         SingletonRepository.FlaggedActions.Get(nameof(RedrawExperiencePointsFlaggedAction)).Check();
         SingletonRepository.FlaggedActions.Get(nameof(RedrawStatsFlaggedAction)).Check();
         SingletonRepository.FlaggedActions.Get(nameof(RedrawArmorFlaggedAction)).Check();
@@ -12778,7 +12779,6 @@ internal class SaveGame
             SingletonRepository.FlaggedActions.Get(nameof(UpdateManaFlaggedAction)).Set();
             SingletonRepository.FlaggedActions.Get(nameof(UpdateSpellsFlaggedAction)).Set();
             SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
-            SingletonRepository.FlaggedActions.Get(nameof(RedrawTitleFlaggedAction)).Set();
             HandleStuff();
         }
         while (ExperienceLevel.Value < Constants.PyMaxLevel && ExperiencePoints.Value >= Constants.PlayerExp[ExperienceLevel.Value - 1] * ExperienceMultiplier.Value / 100L)
@@ -12810,7 +12810,6 @@ internal class SaveGame
             SingletonRepository.FlaggedActions.Get(nameof(UpdateManaFlaggedAction)).Set();
             SingletonRepository.FlaggedActions.Get(nameof(UpdateSpellsFlaggedAction)).Set();
             SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
-            SingletonRepository.FlaggedActions.Get(nameof(RedrawTitleFlaggedAction)).Set();
             SingletonRepository.FlaggedActions.Get(nameof(RedrawExperiencePointsFlaggedAction)).Set();
             HandleStuff();
             if (levelReward)
@@ -13253,7 +13252,7 @@ internal class SaveGame
                 score += 100;
             }
         }
-        if (IsWinner)
+        if (IsWinner.Value)
         {
             score += 1000;
         }
@@ -13616,7 +13615,7 @@ internal class SaveGame
             }
             else
             {
-                if (IsWizard && !GetCheck("Die? "))
+                if (IsWizard.Value && !GetCheck("Die? "))
                 {
                     Health.Value += damage;
                 }
@@ -13630,7 +13629,7 @@ internal class SaveGame
                     {
                         DiedFrom += "(?)";
                     }
-                    IsWinner = false;
+                    IsWinner.Value = false;
                     IsDead = true;
                     return;
                 }
@@ -16373,7 +16372,7 @@ internal class SaveGame
             {
                 flag = true;
             }
-            if (IsWizard)
+            if (IsWizard.Value)
             {
                 flag = true;
             }

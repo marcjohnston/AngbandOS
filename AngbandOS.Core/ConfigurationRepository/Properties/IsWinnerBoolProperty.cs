@@ -5,11 +5,10 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Conditionals;
+namespace AngbandOS.Core.Properties;
 
 [Serializable]
-internal class UsesManaConditional : Conditional
+internal class IsWinnerBoolProperty : BoolProperty
 {
-    private UsesManaConditional(SaveGame saveGame) : base(saveGame) { }
-    public override bool IsTrue => SaveGame.UsesMana;
+    protected IsWinnerBoolProperty(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 }

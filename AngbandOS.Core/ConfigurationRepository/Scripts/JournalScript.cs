@@ -578,7 +578,7 @@ internal class JournalScript : Script, IScript, IRepeatableScript, IStoreScript
         }
         for (int i = 1; i < SaveGame.SingletonRepository.MonsterRaces.Count; i++)
         {
-            if (SaveGame.SingletonRepository.MonsterRaces[i].Knowledge.RSights != 0 || SaveGame.IsWizard)
+            if (SaveGame.SingletonRepository.MonsterRaces[i].Knowledge.RSights != 0 || SaveGame.IsWizard.Value)
             {
                 seen[maxSeen] = i;
                 maxSeen++;
@@ -889,7 +889,7 @@ internal class JournalScript : Script, IScript, IRepeatableScript, IStoreScript
         {
             MonsterRace monster = SaveGame.SingletonRepository.MonsterRaces[i];
             if (monster.Unique &&
-                (monster.Knowledge.RSights > 0 || SaveGame.IsWizard))
+                (monster.Knowledge.RSights > 0 || SaveGame.IsWizard.Value))
             {
                 names[maxCount] = monster.Name;
                 bool dead = monster.MaxNum == 0;

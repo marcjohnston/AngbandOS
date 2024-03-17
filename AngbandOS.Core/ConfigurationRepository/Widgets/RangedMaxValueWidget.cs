@@ -36,7 +36,7 @@ internal abstract class RangedMaxValueWidget : DynamicWidget
     protected virtual ColorEnum DefaultColor => ColorEnum.White;
 
     public abstract string MaxIntChangeTrackableName { get; }
-    public IIntChangeTrackable MaxIntChangeTrackable { get; private set; }
+    public IIntChangeTracking MaxIntChangeTrackable { get; private set; }
 
     public override void Bind()
     {
@@ -44,14 +44,14 @@ internal abstract class RangedMaxValueWidget : DynamicWidget
         Property? property = SaveGame.SingletonRepository.Properties.TryGet(MaxIntChangeTrackableName);
         if (property != null)
         {
-            MaxIntChangeTrackable = (IIntChangeTrackable)property;
+            MaxIntChangeTrackable = (IIntChangeTracking)property;
         }
         else
         {
             Timer? timer = SaveGame.SingletonRepository.TimedActions.TryGet(MaxIntChangeTrackableName);
             if (timer != null)
             {
-                MaxIntChangeTrackable = (IIntChangeTrackable)timer;
+                MaxIntChangeTrackable = (IIntChangeTracking)timer;
             }
             else
             {

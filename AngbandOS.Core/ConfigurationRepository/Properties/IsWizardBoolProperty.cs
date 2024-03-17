@@ -5,13 +5,10 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Interfaces;
+namespace AngbandOS.Core.Properties;
 
-/// <summary>
-/// Represents the interface that a class needs to implement to participate in change tracking for an integer value.  This interface adds an Int value signature to the 
-/// change trackable interface.
-/// </summary>
-internal interface IIntChangeTrackable : IChangeTracking
+[Serializable]
+internal class IsWizardBoolProperty : BoolProperty
 {
-    int Value { get; }
+    protected IsWizardBoolProperty(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 }

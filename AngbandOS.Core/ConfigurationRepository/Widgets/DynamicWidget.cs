@@ -15,7 +15,7 @@ internal abstract class DynamicWidget : Widget
 {
     protected DynamicWidget(SaveGame saveGame) : base(saveGame) { }
     public abstract string IntChangeTrackableName { get; }
-    public IIntChangeTrackable IntChangeTrackable { get; private set; }
+    public IIntChangeTracking IntChangeTrackable { get; private set; }
 
     public override void Bind()
     {
@@ -23,21 +23,21 @@ internal abstract class DynamicWidget : Widget
         Property? property = SaveGame.SingletonRepository.Properties.TryGet(IntChangeTrackableName);
         if (property != null)
         {
-            IntChangeTrackable = (IIntChangeTrackable)property;
+            IntChangeTrackable = (IIntChangeTracking)property;
         }
         else
         {
             Timer? timer= SaveGame.SingletonRepository.TimedActions.TryGet(IntChangeTrackableName);
             if (timer != null)
             {
-                IntChangeTrackable = (IIntChangeTrackable)timer;
+                IntChangeTrackable = (IIntChangeTracking)timer;
             }
             else
             {
                 Function? function = SaveGame.SingletonRepository.Functions.TryGet(IntChangeTrackableName);
                 if (function != null)
                 {
-                    IntChangeTrackable = (IIntChangeTrackable)function;
+                    IntChangeTrackable = (IIntChangeTracking)function;
                 }
                 else
                 {

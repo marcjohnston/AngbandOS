@@ -5,11 +5,9 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Conditionals;
+namespace AngbandOS.Core.Interfaces;
 
-[Serializable]
-internal class UsesManaConditional : Conditional
+internal interface IBool
 {
-    private UsesManaConditional(SaveGame saveGame) : base(saveGame) { }
-    public override bool IsTrue => SaveGame.UsesMana;
+    bool IsTrue { get; }
 }

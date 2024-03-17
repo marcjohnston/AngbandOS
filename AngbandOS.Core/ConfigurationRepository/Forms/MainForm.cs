@@ -36,6 +36,9 @@ internal class MainForm : Form
         nameof(ExperiencePointsForNextLevelAtMaxWidget),
         nameof(ExperiencePointsLabelWidget),
         nameof(ExperiencePointsForNextLevelWidget),
-        nameof(ExperienceLevelLostWidget)
+        nameof(ExperienceLevelLostWidget),
+        nameof(PlayerTitleIsWizardWidget),
+        nameof(PlayerTitleIsWinnerWidget),
+        nameof(PlayerTitleWidget)
     };
 }

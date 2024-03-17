@@ -9,7 +9,7 @@
 using System.Diagnostics;
 
 [Serializable]
-internal abstract class Function : IGetKey<string>, IIntChangeTrackable
+internal abstract class Function : IGetKey<string>, IIntChangeTracking
 {
     protected readonly SaveGame SaveGame;
     protected Function(SaveGame saveGame)
