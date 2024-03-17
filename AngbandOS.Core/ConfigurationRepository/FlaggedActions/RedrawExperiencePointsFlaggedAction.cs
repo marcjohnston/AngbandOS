@@ -27,7 +27,7 @@ internal class RedrawExperiencePointsFlaggedAction : FlaggedAction
         }
         else
         {
-            string outVal = ((Constants.PlayerExp[SaveGame.ExperienceLevel.Value - 1] * SaveGame.ExperienceMultiplier / 100) - SaveGame.ExperiencePoints.Value).ToString()
+            string outVal = ((Constants.PlayerExp[SaveGame.ExperienceLevel.Value - 1] * SaveGame.ExperienceMultiplier.Value / 100) - SaveGame.ExperiencePoints.Value).ToString()
                 .PadLeft(8);
             SaveGame.Screen.Print(color, outVal, RowExp, ColExp + 4);
         }

@@ -5,10 +5,11 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Repositories;
+namespace AngbandOS.Core.Conditionals;
 
 [Serializable]
-internal class GendersRepository : DictionaryRepository<string, Gender>
+internal class ExperienceLevelsLostConditional : Conditional
 {
-    public GendersRepository(SaveGame saveGame) : base(saveGame) { }
+    private ExperienceLevelsLostConditional(SaveGame saveGame) : base(saveGame) { }
+    public override bool IsTrue => SaveGame.ExperienceLevel.Value < SaveGame.MaxLevelGained;
 }

@@ -25,7 +25,7 @@ internal class AugmentationPotionItemFactory : PotionItemFactory
     public override int Weight => 4;
     public override bool Quaff()
     {
-        return SaveGame.RunSuccessfulScript(nameof(AugmentScript));
+        return SaveGame.RunNoticeableScript(nameof(AugmentScript));
     }
     public override Item CreateItem() => new Item(SaveGame, this);
 }

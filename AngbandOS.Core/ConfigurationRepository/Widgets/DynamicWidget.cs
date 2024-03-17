@@ -5,6 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using System.Diagnostics;
 using Timer = AngbandOS.Core.Timers.Timer;
 
 namespace AngbandOS.Core.Widgets;
@@ -33,7 +34,15 @@ internal abstract class DynamicWidget : Widget
             }
             else
             {
-                throw new Exception($"The {nameof(IntChangeTrackableName)} property does not specify a valid {nameof(Property)} or {nameof(Timer)}.");
+                Function? function = SaveGame.SingletonRepository.Functions.TryGet(IntChangeTrackableName);
+                if (function != null)
+                {
+                    IntChangeTrackable = (IIntChangeTrackable)function;
+                }
+                else
+                {
+                    throw new Exception($"The {nameof(IntChangeTrackableName)} property does not specify a valid {nameof(Property)}, {nameof(Timer)} or {nameof(Function)}.");
+                }
             }
         } 
     }

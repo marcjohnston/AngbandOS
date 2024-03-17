@@ -5,27 +5,24 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-using System.Diagnostics;
-
 namespace AngbandOS.Core.Widgets;
 
 [Serializable]
-internal class ExperienceLevelWidget : DynamicWidget
+internal class ExperiencePointsForNextLevelWidget : DynamicWidget
 {
-    private ExperienceLevelWidget(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-    public override int X => 6;
-    public override int Y => 5;
-    public override int Width => 6;
+    private ExperiencePointsForNextLevelWidget(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    public override int X => 4;
+    public override int Y => 6;
+    public override int Width => 8;
     public override ColorEnum Color => ColorEnum.BrightGreen;
-    public override string IntChangeTrackableName => nameof(ExperienceLevelIntProperty);
+    public override string IntChangeTrackableName => nameof(ExperiencePointsForNextLevelFunction);
     public override string? JustificationName => nameof(RightJustification);
-    public override (string, bool)[]? EnabledConditionalNames => new (string, bool)[]
-    {
-        (nameof(MaxLevelAttainedConditional), true)
+    public override (string conditionalName, bool isTrue)[]? EnabledConditionalNames => new[] {
+        (nameof(ExperienceLevelsAtMaxConditional), false),
+        (nameof(ExperiencePointsLostConditional), false)
     };
     public override void Update()
     {
-        Debug.Print($"{Key} {IntChangeTrackable.Value} widget change = {ValueChanged}");
         base.Update();
     }
 }

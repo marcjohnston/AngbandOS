@@ -371,10 +371,10 @@ internal class RenderCharacterScript : Script, IScript, IRepeatableScript
         }
         else
         {
-            PrintLongScore("Exp to Adv.", (int)(Constants.PlayerExp[SaveGame.ExperienceLevel.Value - 1] * SaveGame.ExperienceMultiplier / 100L), 33, 28,
+            PrintLongScore("Exp to Adv.", (int)(Constants.PlayerExp[SaveGame.ExperienceLevel.Value - 1] * SaveGame.ExperienceMultiplier.Value / 100L), 33, 28,
                 ColorEnum.Green);
         }
-        PrintLongScore("Exp Factor ", SaveGame.ExperienceMultiplier, 34, 28, ColorEnum.Green);
+        PrintLongScore("Exp Factor ", SaveGame.ExperienceMultiplier.Value, 34, 28, ColorEnum.Green);
         PrintShortScore("Max Hit Points ", SaveGame.MaxHealth.Value, 30, 52, ColorEnum.Green);
         if (SaveGame.Health.Value >= SaveGame.MaxHealth.Value)
         {

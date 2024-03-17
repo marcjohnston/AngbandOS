@@ -208,7 +208,7 @@ internal class SaveGame
     public int DisplayedAttackBonus;
     public int DisplayedDamageBonus;
     public int Energy;
-    public int ExperienceMultiplier;
+    public readonly ExperienceMultiplierIntProperty ExperienceMultiplier;
 
     public int FractionalExperiencePoints;
     public int FractionalHealth;
@@ -654,6 +654,7 @@ internal class SaveGame
         MaxHealth = (MaxHealthPointsIntProperty)SingletonRepository.Properties.Get(nameof(MaxHealthPointsIntProperty));
         SpareSpellSlots = (SpareSpellSlotsIntProperty)SingletonRepository.Properties.Get(nameof(SpareSpellSlotsIntProperty));
         ExperienceLevel = (ExperienceLevelIntProperty)SingletonRepository.Properties.Get(nameof(ExperienceLevelIntProperty));
+        ExperienceMultiplier = (ExperienceMultiplierIntProperty)SingletonRepository.Properties.Get(nameof(ExperienceMultiplierIntProperty));
 
         AcidResistanceTimer = (AcidResistanceTimer)SingletonRepository.TimedActions.Get(nameof(Timers.AcidResistanceTimer));
         BleedingTimer = (BleedingTimer)SingletonRepository.TimedActions.Get(nameof(Timers.BleedingTimer));
@@ -9106,7 +9107,7 @@ internal class SaveGame
         int i;
         MaxLevelGained = 1;
         ExperienceLevel.Value = 1;
-        ExperienceMultiplier = Race.ExperienceFactor + BaseCharacterClass.ExperienceFactor;
+        ExperienceMultiplier.Value = Race.ExperienceFactor + BaseCharacterClass.ExperienceFactor;
         HitDie = Race.HitDieBonus + BaseCharacterClass.HitDieBonus;
         MaxHealth.Value = HitDie;
         PlayerHp[0] = HitDie;
@@ -12712,7 +12713,7 @@ internal class SaveGame
     public void ChangeRace(Race newRace)
     {
         Race = newRace;
-        ExperienceMultiplier = Race.ExperienceFactor + BaseCharacterClass.ExperienceFactor;
+        ExperienceMultiplier.Value = Race.ExperienceFactor + BaseCharacterClass.ExperienceFactor;
         if (Gender.Index == Constants.SexMale)
         {
             Height = RandomNormal(Race.MaleBaseHeight, Race.MaleHeightRange);
@@ -12769,7 +12770,7 @@ internal class SaveGame
         }
         SingletonRepository.FlaggedActions.Get(nameof(RedrawExperiencePointsFlaggedAction)).Set();
         HandleStuff();
-        while (ExperienceLevel.Value > 1 && ExperiencePoints.Value < Constants.PlayerExp[ExperienceLevel.Value - 2] * ExperienceMultiplier / 100L)
+        while (ExperienceLevel.Value > 1 && ExperiencePoints.Value < Constants.PlayerExp[ExperienceLevel.Value - 2] * ExperienceMultiplier.Value / 100L)
         {
             ExperienceLevel.Value--;
             RedrawSingleLocation(MapY, MapX);
@@ -12780,7 +12781,7 @@ internal class SaveGame
             SingletonRepository.FlaggedActions.Get(nameof(RedrawTitleFlaggedAction)).Set();
             HandleStuff();
         }
-        while (ExperienceLevel.Value < Constants.PyMaxLevel && ExperiencePoints.Value >= Constants.PlayerExp[ExperienceLevel.Value - 1] * ExperienceMultiplier / 100L)
+        while (ExperienceLevel.Value < Constants.PyMaxLevel && ExperiencePoints.Value >= Constants.PlayerExp[ExperienceLevel.Value - 1] * ExperienceMultiplier.Value / 100L)
         {
             ExperienceLevel.Value++;
             RedrawSingleLocation(MapY, MapX);
@@ -13261,9 +13262,9 @@ internal class SaveGame
             int prev = 0;
             if (MaxLevelGained > 1)
             {
-                prev = Constants.PlayerExp[MaxLevelGained - 2] * ExperienceMultiplier / 100;
+                prev = Constants.PlayerExp[MaxLevelGained - 2] * ExperienceMultiplier.Value / 100;
             }
-            int next = Constants.PlayerExp[MaxLevelGained - 1] * ExperienceMultiplier / 100;
+            int next = Constants.PlayerExp[MaxLevelGained - 1] * ExperienceMultiplier.Value / 100;
             int numerator = MaxExperienceGained - prev;
             int denominator = next - prev;
             int fraction = 100 * numerator / denominator;

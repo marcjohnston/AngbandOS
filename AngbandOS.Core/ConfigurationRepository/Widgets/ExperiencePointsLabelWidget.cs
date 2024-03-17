@@ -1,5 +1,4 @@
-﻿
-// AngbandOS: 2022 Marc Johnston
+﻿// AngbandOS: 2022 Marc Johnston
 //
 // This game is released under the “Angband License”, defined as: “© 1997 Ben Harrison, James E.
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
@@ -9,14 +8,10 @@
 namespace AngbandOS.Core.Widgets;
 
 [Serializable]
-internal class ExperienceLevelMaxLabelWidget : Widget
+internal class ExperiencePointsLabelWidget : Widget
 {
-    private ExperienceLevelMaxLabelWidget(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private ExperiencePointsLabelWidget(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override int X => 0;
-    public override int Y => 5;
-    public override string Text => "LEVEL";
-    public override (string, bool)[]? EnabledConditionalNames => new (string, bool)[]
-    {
-        (nameof(MaxLevelAttainedConditional), true)
-    };
+    public override int Y => 6;
+    public override string Text => "NEXT";
 }

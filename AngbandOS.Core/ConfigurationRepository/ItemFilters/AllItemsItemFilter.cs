@@ -44,7 +44,7 @@ internal class AllItemsItemFilter : IGetKey<string>, IItemFilter
     /// Returns true, if the item must have a value greater than zero (>0); false, if the item must have a value of zero or less (<=0); or null, 
     /// if indifferent.  Returns null, by default.  Stores require their items to have value to be an item in the store.
     /// </summary>
-    public virtual bool? HasValue => true;
+    public virtual bool? HasValue => null;
 
     /// <summary>
     /// Returns true, if the item must be known; false, if the item cannot be known; or null, if indifferent.  Returns null, by default.
