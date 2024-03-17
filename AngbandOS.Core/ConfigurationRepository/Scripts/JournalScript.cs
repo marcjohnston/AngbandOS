@@ -944,6 +944,21 @@ internal class JournalScript : Script, IScript, IRepeatableScript, IStoreScript
         }
     }
 
+    private void BuildMenuForForWorthlessItems()
+    {
+        _menuLength = 0;
+        for (int i = 0; i < SaveGame.SingletonRepository.ItemClasses.Count - 1; i++)
+        {
+            ItemClass itemClass = SaveGame.SingletonRepository.ItemClasses[i];
+            if (itemClass.AllowStomp)
+            {
+                _menuItem[_menuLength] = SaveGame.Pluralize(SaveGame.SingletonRepository.ItemClasses[i].Name);
+                _menuColors[_menuLength] = ColorEnum.Blue;
+                _menuLength++;
+            }
+        }
+    }
+
     private void JournalWorthlessItems()
     {
         SaveGame.Screen.Clear();
@@ -957,17 +972,7 @@ internal class JournalScript : Script, IScript, IRepeatableScript, IStoreScript
         text += "inventory. Items you are wielding will never be destroyed (giving you chance to improve their ";
         text += "quality to a non-worthless level).";
         SaveGame.Screen.PrintWrap(ColorEnum.Blue, text);
-        _menuLength = 0;
-        for (int i = 0; i < SaveGame.SingletonRepository.ItemClasses.Count - 1; i++)
-        {
-            ItemClass itemClass = SaveGame.SingletonRepository.ItemClasses[i];
-            if (itemClass.AllowStomp)
-            {
-                _menuItem[_menuLength] = SaveGame.Pluralize(SaveGame.SingletonRepository.ItemClasses[i].Name);
-                _menuColors[_menuLength] = ColorEnum.Blue;
-                _menuLength++;
-            }
-        }
+        BuildMenuForForWorthlessItems();
         int menu = _menuLength / 2;
         while (!SaveGame.Shutdown)
         {
@@ -988,12 +993,8 @@ internal class JournalScript : Script, IScript, IRepeatableScript, IStoreScript
                 }
                 if (c == '6')
                 {
-                    WorthlessItemTypeSelection(SaveGame.SingletonRepository.ItemClasses[menu]);
-                    for (int i = 0; i < SaveGame.SingletonRepository.ItemClasses.Count - 1; i++)
-                    {
-                        _menuItem[i] = SaveGame.Pluralize(SaveGame.SingletonRepository.ItemClasses[i].Name);
-                        _menuColors[i] = ColorEnum.Blue;
-                    }
+                    WorthlessItemTypeSelection(SaveGame.SingletonRepository.ItemClasses.First(_itemClass => SaveGame.Pluralize(_itemClass.Name) == _menuItem[menu]));
+                    BuildMenuForForWorthlessItems();
                     _menuLength = SaveGame.SingletonRepository.ItemClasses.Count - 1;
                     break;
                 }
