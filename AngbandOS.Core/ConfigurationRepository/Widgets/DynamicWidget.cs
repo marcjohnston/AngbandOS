@@ -56,9 +56,6 @@ internal abstract class DynamicWidget : Widget
         {
             // It has, invalidate the widget.
             base.Invalidate();
-
-            // The widget will be painted.  Clear the change tracking flag.
-            IntChangeTrackable.ClearChangedFlag();
         }
 
         // Update the widget.

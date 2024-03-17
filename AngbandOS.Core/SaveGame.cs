@@ -4005,6 +4005,7 @@ internal class SaveGame
             return;
         }
 
+        // Call the update method for each widget.  This allows the widget to render.
         foreach (Widget widget in MainForm.Widgets)
         {
             widget.Update();
@@ -4013,7 +4014,6 @@ internal class SaveGame
         SingletonRepository.FlaggedActions.Get(nameof(RedrawMapFlaggedAction)).Check();
         SingletonRepository.FlaggedActions.Get(nameof(RedrawPlayerFlaggedAction)).Check();
         SingletonRepository.FlaggedActions.Get(nameof(RedrawEquippyFlaggedAction)).Check();
-        SingletonRepository.FlaggedActions.Get(nameof(RedrawExperiencePointsFlaggedAction)).Check();
         SingletonRepository.FlaggedActions.Get(nameof(RedrawStatsFlaggedAction)).Check();
         SingletonRepository.FlaggedActions.Get(nameof(RedrawArmorFlaggedAction)).Check();
         SingletonRepository.FlaggedActions.Get(nameof(RedrawDepthFlaggedAction)).Check();
@@ -4025,6 +4025,8 @@ internal class SaveGame
         SingletonRepository.FlaggedActions.Get(nameof(RedrawStudyFlaggedAction)).Check();
         SingletonRepository.FlaggedActions.Get(nameof(RedrawTimeFlaggedAction)).Check(true); // TODO: Trigger this from GameTime
 
+        // Clear the change tracking flags.
+        // TODO: Other types will need to do this like functions
         foreach (Property property in SingletonRepository.Properties)
         {
             property.ClearChangedFlag();
@@ -12769,7 +12771,6 @@ internal class SaveGame
         {
             MaxExperienceGained = ExperiencePoints.Value;
         }
-        SingletonRepository.FlaggedActions.Get(nameof(RedrawExperiencePointsFlaggedAction)).Set();
         HandleStuff();
         while (ExperienceLevel.Value > 1 && ExperiencePoints.Value < Constants.PlayerExp[ExperienceLevel.Value - 2] * ExperienceMultiplier.Value / 100L)
         {
@@ -12810,7 +12811,6 @@ internal class SaveGame
             SingletonRepository.FlaggedActions.Get(nameof(UpdateManaFlaggedAction)).Set();
             SingletonRepository.FlaggedActions.Get(nameof(UpdateSpellsFlaggedAction)).Set();
             SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
-            SingletonRepository.FlaggedActions.Get(nameof(RedrawExperiencePointsFlaggedAction)).Set();
             HandleStuff();
             if (levelReward)
             {
