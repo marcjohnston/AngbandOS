@@ -21,7 +21,7 @@ internal abstract class Widget : IGetKey<string>
     /// <summary>
     /// Returns true, if the widget is invalid and needs to be redrawn.
     /// </summary>
-    public bool Invalidated { get; private set; }
+    public bool Invalidated { get; private set; } = true;
 
     /// <summary>
     /// Invalidates the widget.  An invalidated widget will call the <see cref="Paint"/> method, when the <see cref="Update"/> method is called.
