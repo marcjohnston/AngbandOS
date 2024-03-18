@@ -16,18 +16,7 @@ internal abstract class Function : IGetKey<string>, IIntChangeTracking
 
     public abstract int Value { get; }
 
-    public bool IsChanged// => Dependencies == null ? false : Dependencies.Any(_dependency => _dependency.IsChanged);
-    {
-        get
-        {
-            if (Dependencies == null)
-            {
-                return false;
-            }
-            bool changed = Dependencies.Any(_dependency => _dependency.IsChanged);
-            return changed;
-        }
-    }
+    public bool IsChanged => Dependencies == null ? false : Dependencies.Any(_dependency => _dependency.IsChanged);
 
     /// <summary>
     /// Does nothing, because functions are not sinks for tracking.
