@@ -594,9 +594,6 @@ internal class SaveGame
 
     private const string _imageMonsterHack = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
     private const string _imageObjectHack = "?/|\\\"!$()_-=[]{},~";
-    private const int _mapHgt = MaxHgt / _ratio;
-    private const int _mapWid = MaxWid / _ratio;
-    private const int _ratio = 3;
 
     public readonly List<GridCoordinate> Light = new List<GridCoordinate>(); // TODO: This belongs to UpdateLightFlaggedActions and should be private.
     public readonly List<GridCoordinate> View = new List<GridCoordinate>(); // TODO: This belongs to UpdateViewFlaggedActions and should be private.
@@ -14294,112 +14291,6 @@ internal class SaveGame
         }
     }
 
-    public void DisplayMap(out int cy, out int cx)
-    {
-        int x, y, maxy;
-        ColorEnum ta;
-        char tc;
-        ColorEnum[][] ma = new ColorEnum[_mapHgt + 2][];
-        for (int i = 0; i < _mapHgt + 2; i++)
-        {
-            ma[i] = new ColorEnum[_mapWid + 2];
-        }
-        char[][] mc = new char[_mapHgt + 2][];
-        for (int i = 0; i < _mapHgt + 2; i++)
-        {
-            mc[i] = new char[_mapWid + 2];
-        }
-        int[][] mp = new int[_mapHgt + 2][];
-        for (int i = 0; i < _mapHgt + 2; i++)
-        {
-            mp[i] = new int[_mapWid + 2];
-        }
-        for (y = 0; y < _mapHgt + 2; ++y)
-        {
-            for (x = 0; x < _mapWid + 2; ++x)
-            {
-                ma[y][x] = ColorEnum.White;
-                mc[y][x] = ' ';
-                mp[y][x] = 0;
-            }
-        }
-        int maxx = maxy = 0;
-        for (int i = 0; i < CurWid; ++i)
-        {
-            for (int j = 0; j < CurHgt; ++j)
-            {
-                x = (i / _ratio) + 1;
-                y = (j / _ratio) + 1;
-                if (x > maxx)
-                {
-                    maxx = x;
-                }
-                if (y > maxy)
-                {
-                    maxy = y;
-                }
-                MapInfo(j, i, out ta, out tc);
-                int tp = Grid[j][i].FeatureType.MapPriority;
-                if (ta == ColorEnum.Background)
-                {
-                    tp = 0;
-                }
-                if (mp[y][x] < tp)
-                {
-                    mc[y][x] = tc;
-                    ma[y][x] = ta;
-                    mp[y][x] = tp;
-                }
-            }
-        }
-        x = maxx + 1;
-        y = maxy + 1;
-        int xOffset = (Screen.Width - x) / 2;
-        int yOffset = (Screen.Height - 1 - y) / 2;
-        mc[0][0] = '+';
-        ma[0][0] = ColorEnum.Purple;
-        mc[0][x] = '+';
-        ma[0][x] = ColorEnum.Purple;
-        mc[y][0] = '+';
-        ma[y][0] = ColorEnum.Purple;
-        mc[y][x] = '+';
-        ma[y][x] = ColorEnum.Purple;
-        for (x = 1; x <= maxx; x++)
-        {
-            mc[0][x] = '-';
-            ma[0][x] = ColorEnum.Purple;
-            mc[maxy + 1][x] = '-';
-            ma[maxy + 1][x] = ColorEnum.Purple;
-        }
-        for (y = 1; y <= maxy; y++)
-        {
-            mc[y][0] = '|';
-            ma[y][0] = ColorEnum.Purple;
-            mc[y][maxx + 1] = '|';
-            ma[y][maxx + 1] = ColorEnum.Purple;
-        }
-        for (y = 0; y < maxy + 2; ++y)
-        {
-            Screen.Goto(yOffset + y, xOffset);
-            for (x = 0; x < maxx + 2; ++x)
-            {
-                ta = ma[y][x];
-                tc = mc[y][x];
-                if (InvulnerabilityTimer.Value != 0)
-                {
-                    ta = ColorEnum.White;
-                }
-                else if (EtherealnessTimer.Value != 0)
-                {
-                    ta = ColorEnum.Black;
-                }
-                Screen.Print(ta, tc.ToString());
-            }
-        }
-        cy = yOffset + (MapY / _ratio) + 1;
-        cx = xOffset + (MapX / _ratio) + 1;
-    }
-
     public int Distance(int y1, int x1, int y2, int x2)
     {
         int dy = y1 > y2 ? y1 - y2 : y2 - y1;
@@ -15023,6 +14914,13 @@ internal class SaveGame
         return Grid[y][x].TileFlags.IsSet(GridTile.IsVisible);
     }
 
+    /// <summary>
+    /// Draws a character in a specified color at a specific map location.  The map is not updated and the cursor is not moved.  This method is used by projectiles and animations.
+    /// </summary>
+    /// <param name="c"></param>
+    /// <param name="a"></param>
+    /// <param name="y"></param>
+    /// <param name="x"></param>
     public void PrintCharacterAtMapLocation(char c, ColorEnum a, int y, int x)
     {
         if (PanelContains(y, x))
@@ -15058,6 +14956,11 @@ internal class SaveGame
         return false;
     }
 
+    /// <summary>
+    /// Moves the cursor to a specific map location and redraws the map location.
+    /// </summary>
+    /// <param name="y"></param>
+    /// <param name="x"></param>
     public void RedrawSingleLocation(int y, int x)
     {
         if (PanelContains(y, x))
@@ -15220,7 +15123,14 @@ internal class SaveGame
         }
     }
 
-    public void MapInfo(int y, int x, out ColorEnum ap, out char cp)
+    /// <summary>
+    /// Returns the color and character of the symbol to be rendered at a specific map location.  No validation for the map coordinates is performed.
+    /// </summary>
+    /// <param name="y"></param>
+    /// <param name="x"></param>
+    /// <param name="color"></param>
+    /// <param name="character"></param>
+    public void MapInfo(int y, int x, out ColorEnum color, out char character)
     {
         ColorEnum a;
         char c;
@@ -15337,22 +15247,22 @@ internal class SaveGame
         }
         if (HallucinationsTimer.Value != 0 && RandomLessThan(256) == 0 && (!cPtr.FeatureType.IsWall))
         {
-            ImageRandom(out ap, out cp);
+            ImageRandom(out color, out character);
         }
         else
         {
-            ap = a;
-            cp = c;
+            color = a;
+            character = c;
         }
         foreach (Item oPtr in cPtr.Items)
         {
             if (oPtr.Marked)
             {
-                cp = oPtr.Factory.FlavorSymbol.Character;
-                ap = oPtr.Factory.FlavorColor;
+                character = oPtr.Factory.FlavorSymbol.Character;
+                color = oPtr.Factory.FlavorColor;
                 if (HallucinationsTimer.Value != 0)
                 {
-                    ImageObject(out ap, out cp);
+                    ImageObject(out color, out character);
                 }
                 break;
             }
@@ -15369,71 +15279,71 @@ internal class SaveGame
                 {
                     if (rPtr.Shapechanger)
                     {
-                        cp = DieRoll(25) == 1
+                        character = DieRoll(25) == 1
                             ? _imageObjectHack[RandomLessThan(_imageObjectHack.Length)]
                             : _imageMonsterHack[RandomLessThan(_imageMonsterHack.Length)];
                     }
                     else
                     {
-                        cp = c;
+                        character = c;
                     }
                     if (rPtr.AttrAny)
                     {
-                        ap = (ColorEnum)DieRoll(15);
+                        color = (ColorEnum)DieRoll(15);
                     }
                     else
                     {
                         switch (DieRoll(7))
                         {
                             case 1:
-                                ap = ColorEnum.Red;
+                                color = ColorEnum.Red;
                                 break;
 
                             case 2:
-                                ap = ColorEnum.BrightRed;
+                                color = ColorEnum.BrightRed;
                                 break;
 
                             case 3:
-                                ap = ColorEnum.White;
+                                color = ColorEnum.White;
                                 break;
 
                             case 4:
-                                ap = ColorEnum.BrightGreen;
+                                color = ColorEnum.BrightGreen;
                                 break;
 
                             case 5:
-                                ap = ColorEnum.Blue;
+                                color = ColorEnum.Blue;
                                 break;
 
                             case 6:
-                                ap = ColorEnum.Black;
+                                color = ColorEnum.Black;
                                 break;
 
                             case 7:
-                                ap = ColorEnum.Green;
+                                color = ColorEnum.Green;
                                 break;
                         }
                     }
                 }
                 else if (!rPtr.AttrClear && !rPtr.CharClear)
                 {
-                    cp = c;
-                    ap = a;
+                    character = c;
+                    color = a;
                 }
                 else
                 {
                     if (!rPtr.CharClear)
                     {
-                        cp = c;
+                        character = c;
                     }
                     else if (!rPtr.AttrClear)
                     {
-                        ap = a;
+                        color = a;
                     }
                 }
                 if (HallucinationsTimer.Value != 0)
                 {
-                    ImageMonster(out ap, out cp);
+                    ImageMonster(out color, out character);
                 }
             }
         }
@@ -15442,8 +15352,8 @@ internal class SaveGame
             MonsterRace rPtr = SingletonRepository.MonsterRaces[0];
             a = rPtr.Color;
             c = rPtr.Symbol.Character;
-            ap = a;
-            cp = c;
+            color = a;
+            character = c;
         }
     }
 

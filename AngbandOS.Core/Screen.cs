@@ -392,7 +392,7 @@ internal class Screen
     }
 
     /// <summary>
-    /// Prints a character at a given location
+    /// Moves the cursor to the specific location and prints a character at that location in the specified color.
     /// </summary>
     /// <param name="attr"> The color in which to print </param>
     /// <param name="ch"> The character to print </param>
