@@ -5,9 +5,6 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-
-using System.Diagnostics;
-
 [Serializable]
 internal abstract class Function : IGetKey<string>, IIntChangeTracking
 {
@@ -28,7 +25,6 @@ internal abstract class Function : IGetKey<string>, IIntChangeTracking
                 return false;
             }
             bool changed = Dependencies.Any(_dependency => _dependency.IsChanged);
-            Debug.Print($"{Key} changed {changed}");
             return changed;
         }
     }

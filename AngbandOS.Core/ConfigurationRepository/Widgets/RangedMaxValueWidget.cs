@@ -81,17 +81,11 @@ internal abstract class RangedMaxValueWidget : DynamicWidget
 
     public sealed override ColorEnum Color => _color;
 
-    protected override bool ValueChanged
+    public override void Update()
     {
-        get
+        // Check to see if the see if the underlying value changed or the max value changed.
+        if (IntChangeTrackable.IsChanged || MaxIntChangeTrackable.IsChanged)
         {
-            // Check to see if the see if the underlying value changed and the max value didn't change.
-            if (!base.ValueChanged && !MaxIntChangeTrackable.IsChanged)
-            {
-                // It they did not, then no reason to check the ranges.
-                return false;
-            }
-
             // Now that we need to check the ranges, validate that the ranges are properly sorted in descending order.  We only do this once.
             ValidateRangeSorting();
 
@@ -126,9 +120,10 @@ internal abstract class RangedMaxValueWidget : DynamicWidget
                 _value = intValue;
                 _color = foundColor;
 
-                return true;
+                Invalidate();
             }
-            return false;
         }
+
+        base.Update();
     }
 }

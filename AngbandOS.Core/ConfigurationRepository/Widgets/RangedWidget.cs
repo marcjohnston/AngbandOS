@@ -58,17 +58,11 @@ internal abstract class RangedWidget : DynamicWidget
         }
     }
 
-    protected override bool ValueChanged
+    public override void Update()
     {
-        get
+        // Check to see if the see if the underlying value changed.
+        if (IntChangeTrackable.IsChanged)
         {
-            // Check to see if the see if the underlying value changed.
-            if (!base.ValueChanged)
-            {
-                // It did not, then no reason to check the ranges.
-                return false;
-            }
-
             // Now that we need to check the ranges, validate that the ranges are properly sorted in descending order.  We only do this once.
             ValidateRangeSorting();
 
@@ -95,9 +89,10 @@ internal abstract class RangedWidget : DynamicWidget
                 _text = found.text;
                 _color = found.color;
 
-                return true;
+                Invalidate();
             }
-            return false;
         }
+
+        base.Update();
     }
 }

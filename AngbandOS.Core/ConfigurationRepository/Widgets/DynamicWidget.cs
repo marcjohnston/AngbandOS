@@ -5,7 +5,6 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-using System.Diagnostics;
 using Timer = AngbandOS.Core.Timers.Timer;
 
 namespace AngbandOS.Core.Widgets;
@@ -47,12 +46,10 @@ internal abstract class DynamicWidget : Widget
         } 
     }
 
-    protected virtual bool ValueChanged => IntChangeTrackable.IsChanged;
-
     public override void Update()
     {
         // Check to see if the value has changed.
-        if (ValueChanged)
+        if (IntChangeTrackable.IsChanged)
         {
             // It has, invalidate the widget.
             base.Invalidate();
