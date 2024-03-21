@@ -5,14 +5,14 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.ConfigurationRepository.ItemMatchingCriterion;
+namespace AngbandOS.Core.ItemFilters;
 
 /// <summary>
-/// Represents an item filter for items that are considered fuel for lanterns regardless of their value.
+/// Represents an item filter for items that can be used as fuel for torches, regardless of their value.
 /// </summary>
 [Serializable]
-internal class LanternFuelItemFilter : AllItemsItemFilter
+internal class TorchFuelItemFilter : AllItemsItemFilter
 {
-    private LanternFuelItemFilter(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-    public override bool? IsLanternFuel => true;
+    private TorchFuelItemFilter(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    public override bool? IsFuelForTorch => true;
 }

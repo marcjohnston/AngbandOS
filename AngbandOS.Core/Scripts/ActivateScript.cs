@@ -5,8 +5,6 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-using AngbandOS.Core.ConfigurationRepository.ItemMatchingCriterion;
-
 namespace AngbandOS.Core.Scripts;
 
 /// <summary>

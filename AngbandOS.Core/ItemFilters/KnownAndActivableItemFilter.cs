@@ -5,7 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.ConfigurationRepository.ItemMatchingCriterion;
+namespace AngbandOS.Core.ItemFilters;
 
 /// <summary>
 /// Represents an item filter for items that are both known and can be activated, regardless of their value.
