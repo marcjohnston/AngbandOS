@@ -80,7 +80,7 @@ internal abstract class Widget : IGetKey
 
     /// <summary>
     /// Returns the name of the <see cref="Justification"/> object to be used to justify the text within the <see cref="Width"/> of the <see cref="Widget" />.  This property
-    /// is used to bind the <see cref="Justification"/> property.
+    /// is used to bind the <see cref="Justification"/> property.  Defaults to <see cref="LeftJustification"/>.
     /// </summary>
     public virtual string? JustificationName => nameof(LeftJustification);
     public virtual string Key => GetType().Name;

@@ -39,8 +39,6 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         int oldSpeed = Game.Speed.Value;
         bool oldTelepathy = Game.HasTelepathy;
         bool oldSeeInv = Game.HasSeeInvisibility;
-        int oldDisAc = Game.DisplayedBaseArmorClass.Value;
-        int oldDisToA = Game.DisplayedArmorClassBonus.Value;
         int extraBlows = extraShots = 0;
         for (int i = 0; i < 6; i++)
         {
@@ -820,10 +818,6 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         Game.DisplayedDamageBonus += Game.AbilityScores[Ability.Strength].StrDamageBonus;
         Game.DisplayedAttackBonus += Game.AbilityScores[Ability.Dexterity].DexAttackBonus;
         Game.DisplayedAttackBonus += Game.AbilityScores[Ability.Strength].StrAttackBonus;
-        if (Game.DisplayedBaseArmorClass.Value != oldDisAc || Game.DisplayedArmorClassBonus.Value != oldDisToA)
-        {
-            Game.SingletonRepository.FlaggedActions.Get(nameof(RedrawArmorFlaggedAction)).Set();
-        }
         int hold = Game.AbilityScores[Ability.Strength].StrMaxWeaponWeight;
         foreach (BaseInventorySlot rangedWeaponInventorySlot in Game.SingletonRepository.InventorySlots.Where(_inventorySlot => _inventorySlot.IsRangedWeapon))
         {

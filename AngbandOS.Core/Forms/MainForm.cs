@@ -15,6 +15,8 @@ internal class MainForm : Form
     protected override string[] WidgetNames => new string[]
     {
         nameof(AfraidWidget),
+        nameof(ArmorClassLabelWidget),
+        nameof(ArmorClassWidget),
         nameof(BlindnessWidget),
         nameof(CharacterSubclassNameWidget),
         nameof(ConfusedWidget),
