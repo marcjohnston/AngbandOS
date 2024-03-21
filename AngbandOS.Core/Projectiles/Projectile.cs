@@ -114,9 +114,7 @@ internal abstract class Projectile : IGetKey
                 gx[grids] = x;
                 grids++;
             }
-            if (!blind && (flg & ProjectionFlag.ProjectHide) == 0 && dist != 0 &&
-                (flg & ProjectionFlag.ProjectBeam) != 0 && Game.PanelContains(y, x) &&
-                Game.PlayerHasLosBold(y, x))
+            if (!blind && (flg & ProjectionFlag.ProjectHide) == 0 && dist != 0 && (flg & ProjectionFlag.ProjectBeam) != 0 && Game.PanelContains(y, x) && Game.PlayerHasLosBold(y, x))
             {
                 if (ImpactProjectileGraphic != null)
                 {
@@ -142,7 +140,7 @@ internal abstract class Projectile : IGetKey
                 break;
             }
             dist++;
-            if (dist > Constants.MaxRange)
+            if (dist > Constants.MaxRange) // TODO: This should be per projectile
             {
                 break;
             }
