@@ -1,4 +1,5 @@
-﻿// AngbandOS: 2022 Marc Johnston
+﻿
+// AngbandOS: 2022 Marc Johnston
 //
 // This game is released under the “Angband License”, defined as: “© 1997 Ben Harrison, James E.
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
@@ -6,22 +7,31 @@
 // copies. Other copyrights may also apply.”
 
 [Serializable]
-internal abstract class Function : IGetKey, IIntChangeTracking
+internal abstract class Function : IGetKey, IChangeTracking
 {
     protected readonly SaveGame SaveGame;
     protected Function(SaveGame saveGame)
     {
         SaveGame = saveGame;
     }
-
-    public abstract int Value { get; }
-
     public bool IsChanged => Dependencies == null ? false : Dependencies.Any(_dependency => _dependency.IsChanged);
 
     /// <summary>
     /// Does nothing, because functions are not sinks for tracking.
     /// </summary>
     public void ClearChangedFlag() { }
+
+    public string ToJson()
+    {
+        return "";
+    }
+
+    protected IChangeTracking[]? Dependencies { get; private set; }
+    public virtual string[]? DependencyNames => null;
+
+    public string Key => GetType().Name;
+
+    public string GetKey => Key;
 
     public void Bind()
     {
@@ -41,16 +51,4 @@ internal abstract class Function : IGetKey, IIntChangeTracking
         }
 
     }
-
-    public string ToJson()
-    {
-        return "";
-    }
-
-    protected IChangeTracking[]? Dependencies { get; private set; }
-    public virtual string[]? DependencyNames => null;
-
-    public string Key => GetType().Name;
-
-    public string GetKey => Key;
 }

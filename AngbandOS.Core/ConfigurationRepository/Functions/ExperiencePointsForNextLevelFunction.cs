@@ -6,7 +6,7 @@
 // copies. Other copyrights may also apply.”
 
 [Serializable]
-internal class ExperiencePointsForNextLevelFunction : Function
+internal class ExperiencePointsForNextLevelFunction : IntFunction
 {
     private ExperiencePointsForNextLevelFunction(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override int Value => ((Constants.PlayerExp[SaveGame.ExperienceLevel.Value - 1] * SaveGame.ExperienceMultiplier.Value / 100) - SaveGame.ExperiencePoints.Value);

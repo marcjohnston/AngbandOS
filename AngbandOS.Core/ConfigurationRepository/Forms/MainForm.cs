@@ -41,6 +41,7 @@ internal class MainForm : Form
         nameof(PlayerTitleIsWizardWidget),
         nameof(PlayerTitleWidget),
         nameof(PoisonedWidget),
+        nameof(RaceTitleWidget),
         nameof(StunnedWidget),
     };
 }
