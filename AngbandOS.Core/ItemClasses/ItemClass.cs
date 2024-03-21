@@ -3,10 +3,10 @@ namespace AngbandOS.Core.ItemClasses;
 [Serializable]
 internal abstract class ItemClass : IGetKey
 {
-    protected readonly SaveGame SaveGame;
-    protected ItemClass(SaveGame saveGame)
+    protected readonly Game Game;
+    protected ItemClass(Game game)
     {
-        SaveGame = saveGame;
+        Game = game;
     }
 
     /// <summary>

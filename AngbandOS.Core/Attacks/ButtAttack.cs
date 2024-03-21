@@ -10,7 +10,7 @@ namespace AngbandOS.Core.AttackTypes;
 [Serializable]
 internal class ButtAttack : Attack
 {
-    private ButtAttack(SaveGame saveGame) : base(saveGame) { }
+    private ButtAttack(Game game) : base(game) { }
     public override string MonsterAction => "butts {0}";
     public override string PlayerAction => $"butts you";
     public override bool AttackStunsTarget => true;

@@ -10,9 +10,9 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class SteelHelmArmorItemFactory : HelmArmorItemFactory
 {
-    private SteelHelmArmorItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private SteelHelmArmorItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(CloseBraceSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(CloseBraceSymbol));
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "Steel Helm";
 
@@ -25,5 +25,5 @@ internal class SteelHelmArmorItemFactory : HelmArmorItemFactory
     public override int LevelNormallyFound => 40;
     public override int[] Locale => new int[] { 40, 0, 0, 0 };
     public override int Weight => 60;
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

@@ -13,7 +13,7 @@ namespace AngbandOS.Core.ItemFilters;
 [Serializable]
 internal class CanBeZappedItemFilter : AllItemsItemFilter
 {
-    private CanBeZappedItemFilter(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private CanBeZappedItemFilter(Game game) : base(game) { } // This object is a singleton.
 
     public override bool? CanBeZapped => true;
 }

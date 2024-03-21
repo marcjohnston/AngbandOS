@@ -10,7 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class TwoHandedSwordTwilightFixedArtifact : FixedArtifact
 {
-    private TwoHandedSwordTwilightFixedArtifact(SaveGame saveGame) : base(saveGame) { }
+    private TwoHandedSwordTwilightFixedArtifact(Game game) : base(game) { }
 
     protected override string BaseItemFactoryName => nameof(TwoHandedSwordWeaponItemFactory);
 

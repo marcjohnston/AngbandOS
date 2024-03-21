@@ -10,18 +10,18 @@ namespace AngbandOS.Core.Repositories;
 [Serializable]
 internal class ProjectileGraphicsRepository : DictionaryRepository<ProjectileGraphic>
 {
-    public ProjectileGraphicsRepository(SaveGame saveGame) : base(saveGame) { }
+    public ProjectileGraphicsRepository(Game game) : base(game) { }
     public override void Load()
     {
-        if (SaveGame.Configuration.ProjectileGraphics == null)
+        if (Game.Configuration.ProjectileGraphics == null)
         {
             base.Load();
         }
         else
         {
-            foreach (ProjectileGraphicDefinition projectileGraphicDefinition in SaveGame.Configuration.ProjectileGraphics)
+            foreach (ProjectileGraphicDefinition projectileGraphicDefinition in Game.Configuration.ProjectileGraphics)
             {
-                Add(new GenericProjectileGraphic(SaveGame, projectileGraphicDefinition));
+                Add(new GenericProjectileGraphic(Game, projectileGraphicDefinition));
             }
         }
     }

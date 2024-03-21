@@ -16,7 +16,7 @@ internal abstract class RangedMaxValueWidget : IntWidget
     private int _value;
     private ColorEnum _color;
 
-    protected RangedMaxValueWidget(SaveGame saveGame) : base(saveGame)
+    protected RangedMaxValueWidget(Game game) : base(game)
     {
         _color = DefaultColor;
     }
@@ -41,14 +41,14 @@ internal abstract class RangedMaxValueWidget : IntWidget
     public override void Bind()
     {
         base.Bind();
-        Property? property = SaveGame.SingletonRepository.Properties.TryGet(MaxIntChangeTrackableName);
+        Property? property = Game.SingletonRepository.Properties.TryGet(MaxIntChangeTrackableName);
         if (property != null)
         {
             MaxIntChangeTrackable = (IIntChangeTracking)property;
         }
         else
         {
-            Timer? timer = SaveGame.SingletonRepository.TimedActions.TryGet(MaxIntChangeTrackableName);
+            Timer? timer = Game.SingletonRepository.TimedActions.TryGet(MaxIntChangeTrackableName);
             if (timer != null)
             {
                 MaxIntChangeTrackable = (IIntChangeTracking)timer;

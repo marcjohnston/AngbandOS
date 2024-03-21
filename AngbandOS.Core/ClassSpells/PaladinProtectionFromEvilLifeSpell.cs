@@ -10,7 +10,7 @@ namespace AngbandOS.Core.ClassSpells;
 [Serializable]
 internal class PaladinProtectionFromEvilLifeSpell : ClassSpell
 {
-    private PaladinProtectionFromEvilLifeSpell(SaveGame saveGame) : base(saveGame) { }
+    private PaladinProtectionFromEvilLifeSpell(Game game) : base(game) { }
     public override string SpellName => nameof(LifeSpellProtectionFromEvil);
     public override string CharacterClassName => nameof(PaladinCharacterClass);
     public override int Level => 19;

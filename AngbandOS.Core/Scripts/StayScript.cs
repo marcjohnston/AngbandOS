@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class StayScript : Script, IScript, IRepeatableScript
 {
-    private StayScript(SaveGame saveGame) : base(saveGame) { }
+    private StayScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the stay script and returns false.
@@ -29,23 +29,23 @@ internal class StayScript : Script, IScript, IRepeatableScript
     public void ExecuteScript()
     {
         // Standing still takes a turn
-        SaveGame.EnergyUse = 100;
+        Game.EnergyUse = 100;
 
         // Periodically search if we're not actively in search mode
-        if (SaveGame.IsSearching || SaveGame.SkillSearchFrequency >= 50 || SaveGame.RandomLessThan(50 - SaveGame.SkillSearchFrequency) == 0)
+        if (Game.IsSearching || Game.SkillSearchFrequency >= 50 || Game.RandomLessThan(50 - Game.SkillSearchFrequency) == 0)
         {
-            SaveGame.RunScript(nameof(SearchScript));
+            Game.RunScript(nameof(SearchScript));
         }
 
         // Pick up items if we should
-        SaveGame.StepOnGrid(false);
+        Game.StepOnGrid(false);
 
         // If we're in a shop doorway, enter the shop
-        GridTile tile = SaveGame.Grid[SaveGame.MapY][SaveGame.MapX];
+        GridTile tile = Game.Grid[Game.MapY][Game.MapX];
         if (tile.FeatureType.IsShop)
         {
-            SaveGame.Disturb(false);
-            SaveGame._artificialKeyBuffer += SaveGame.SingletonRepository.GameCommands.Get(nameof(EnterStoreGameCommand)).KeyChar;
+            Game.Disturb(false);
+            Game._artificialKeyBuffer += Game.SingletonRepository.GameCommands.Get(nameof(EnterStoreGameCommand)).KeyChar;
         }
     }
 }

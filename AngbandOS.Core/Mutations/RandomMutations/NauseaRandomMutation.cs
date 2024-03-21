@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Mutations.RandomMutations;
 [Serializable]
 internal class NauseaRandomMutation : Mutation
 {
-    private NauseaRandomMutation(SaveGame saveGame) : base(saveGame) { }
+    private NauseaRandomMutation(Game game) : base(game) { }
     public override int Frequency => 1;
     public override string GainMessage => "Your stomach starts to roil nauseously.";
     public override string HaveMessage => "You have a seriously upset stomach.";
@@ -18,13 +18,13 @@ internal class NauseaRandomMutation : Mutation
 
     public override void OnProcessWorld()
     {
-        if (SaveGame.HasSlowDigestion || base.SaveGame.DieRoll(9000) != 1)
+        if (Game.HasSlowDigestion || base.Game.DieRoll(9000) != 1)
         {
             return;
         }
-        SaveGame.Disturb(false);
-        SaveGame.MsgPrint("Your stomach roils, and you lose your lunch!");
-        SaveGame.MsgPrint(null);
-        SaveGame.SetFood(Constants.PyFoodWeak);
+        Game.Disturb(false);
+        Game.MsgPrint("Your stomach roils, and you lose your lunch!");
+        Game.MsgPrint(null);
+        Game.SetFood(Constants.PyFoodWeak);
     }
 }

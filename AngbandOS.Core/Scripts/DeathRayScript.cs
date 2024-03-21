@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class DeathRayScript : Script, IScript
 {
-    private DeathRayScript(SaveGame saveGame) : base(saveGame) { }
+    private DeathRayScript(Game game) : base(game) { }
 
     /// <summary>
     /// Projects a death ray in a chosen direction with damage equal to the player experience.
@@ -18,11 +18,11 @@ internal class DeathRayScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        if (!SaveGame.GetDirectionWithAim(out int dir))
+        if (!Game.GetDirectionWithAim(out int dir))
         {
             return;
         }
         ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;
-        SaveGame.TargetedProject(SaveGame.SingletonRepository.Projectiles.Get(nameof(DeathRayProjectile)), dir, SaveGame.ExperienceLevel.Value, flg);
+        Game.TargetedProject(Game.SingletonRepository.Projectiles.Get(nameof(DeathRayProjectile)), dir, Game.ExperienceLevel.Value, flg);
     }
 }

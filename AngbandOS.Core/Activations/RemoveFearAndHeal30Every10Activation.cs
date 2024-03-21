@@ -13,15 +13,15 @@ namespace AngbandOS.Core.Activations;
 [Serializable]
 internal class RemoveFearAndHeal30Every10Activation : Activation
 {
-    private RemoveFearAndHeal30Every10Activation(SaveGame saveGame) : base(saveGame) { }
+    private RemoveFearAndHeal30Every10Activation(Game game) : base(game) { }
     public override int RandomChance => 101;
 
     public override string? PreActivationMessage => "";
 
     protected override bool OnActivate(Item item)
     {
-        SaveGame.FearTimer.ResetTimer();
-        SaveGame.RestoreHealth(30);
+        Game.FearTimer.ResetTimer();
+        Game.RestoreHealth(30);
         return true;
     }
 

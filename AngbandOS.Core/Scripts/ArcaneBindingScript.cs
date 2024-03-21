@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class ArcaneBindingScript : Script, IScript
 {
-    private ArcaneBindingScript(SaveGame saveGame) : base(saveGame) { }
+    private ArcaneBindingScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script.
@@ -18,6 +18,6 @@ internal class ArcaneBindingScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        SaveGame.RunSuccessfulScriptInt(nameof(RechargeItemScript), 40);
+        Game.RunSuccessfulScriptInt(nameof(RechargeItemScript), 40);
     }
 }

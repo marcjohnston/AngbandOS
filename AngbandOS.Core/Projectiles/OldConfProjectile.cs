@@ -10,11 +10,11 @@ namespace AngbandOS.Core.Projection;
 [Serializable]
 internal class OldConfProjectile : Projectile
 {
-    private OldConfProjectile(SaveGame saveGame) : base(saveGame) { }
+    private OldConfProjectile(Game game) : base(game) { }
 
-    protected override ProjectileGraphic? BoltProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get(nameof(GreySplatProjectileGraphic));
+    protected override ProjectileGraphic? BoltProjectileGraphic => Game.SingletonRepository.ProjectileGraphics.Get(nameof(GreySplatProjectileGraphic));
 
-    protected override Animation EffectAnimation => SaveGame.SingletonRepository.Animations.Get(nameof(GreyQuestionAnimation));
+    protected override Animation EffectAnimation => Game.SingletonRepository.Animations.Get(nameof(GreyQuestionAnimation));
 
     protected override bool AffectMonster(int who, Monster mPtr, int dam, int r)
     {
@@ -26,8 +26,8 @@ internal class OldConfProjectile : Projectile
         {
             obvious = true;
         }
-        int doConf = SaveGame.DiceRoll(3, dam / 2) + 1;
-        if (rPtr.Unique || rPtr.ImmuneConfusion || rPtr.Level > SaveGame.DieRoll(dam - 10 < 1 ? 1 : dam - 10) + 10)
+        int doConf = Game.DiceRoll(3, dam / 2) + 1;
+        if (rPtr.Unique || rPtr.ImmuneConfusion || rPtr.Level > Game.DieRoll(dam - 10 < 1 ? 1 : dam - 10) + 10)
         {
             if (rPtr.ImmuneConfusion)
             {

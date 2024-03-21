@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Flavors;
 [Serializable]
 internal class HickoryStaffReadableFlavor : StaffReadableFlavor
 {
-    private HickoryStaffReadableFlavor(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private HickoryStaffReadableFlavor(Game game) : base(game) { } // This object is a singleton.
     protected override string SymbolName => nameof(UnderscoreSymbol);
     public override ColorEnum Color => ColorEnum.Brown;
     public override string Name => "Hickory";

@@ -13,7 +13,7 @@ namespace AngbandOS.Core.Commands;
 [Serializable]
 internal class PopupMenuGameCommand : GameCommand
 {
-    private PopupMenuGameCommand(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private PopupMenuGameCommand(Game game) : base(game) { } // This object is a singleton.
 
     public override char KeyChar => '\x1b';
 

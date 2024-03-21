@@ -10,13 +10,13 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class OilFlaskItemFactory : FlaskItemFactory
 {
-    private OilFlaskItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private OilFlaskItemFactory(Game game) : base(game) { } // This object is a singleton.
 
     /// <summary>
     /// Returns true because a flask of oil is valid as fuel for lanterns.
     /// </summary>
     public override bool IsFuelForLantern => true;
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(ExclamationPointSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(ExclamationPointSymbol));
     public override ColorEnum Color => ColorEnum.Yellow;
     public override string Name => "Flask of oil";
 
@@ -29,5 +29,5 @@ internal class OilFlaskItemFactory : FlaskItemFactory
     public override int[] Locale => new int[] { 1, 0, 0, 0 };
     public override int InitialTypeSpecificValue => 7500;
     public override int Weight => 10;
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

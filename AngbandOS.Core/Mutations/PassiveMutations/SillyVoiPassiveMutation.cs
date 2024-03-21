@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Mutations.PassiveMutations;
 [Serializable]
 internal class SillyVoiPassiveMutation : Mutation
 {
-    private SillyVoiPassiveMutation(SaveGame saveGame) : base(saveGame) { }
+    private SillyVoiPassiveMutation(Game game) : base(game) { }
     public override int Frequency => 2;
     public override string GainMessage => "Your voice turns into a ridiculous squeak!";
     public override string HaveMessage => "Your voice is a silly squeak (-4 CHR).";
@@ -18,11 +18,11 @@ internal class SillyVoiPassiveMutation : Mutation
 
     public override void OnGain()
     {
-        SaveGame.CharismaBonus -= 4;
+        Game.CharismaBonus -= 4;
     }
 
     public override void OnLose()
     {
-        SaveGame.CharismaBonus += 4;
+        Game.CharismaBonus += 4;
     }
 }

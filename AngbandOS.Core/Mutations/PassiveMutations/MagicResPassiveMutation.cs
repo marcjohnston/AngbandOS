@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Mutations.PassiveMutations;
 [Serializable]
 internal class MagicResPassiveMutation : Mutation
 {
-    private MagicResPassiveMutation(SaveGame saveGame) : base(saveGame) { }
+    private MagicResPassiveMutation(Game game) : base(game) { }
     public override int Frequency => 2;
     public override string GainMessage => "You become resistant to magic.";
     public override string HaveMessage => "You are resistant to magic.";
@@ -18,11 +18,11 @@ internal class MagicResPassiveMutation : Mutation
 
     public override void OnGain()
     {
-        SaveGame.MagicResistance = true;
+        Game.MagicResistance = true;
     }
 
     public override void OnLose()
     {
-        SaveGame.MagicResistance = false;
+        Game.MagicResistance = false;
     }
 }

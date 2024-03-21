@@ -10,10 +10,10 @@ namespace AngbandOS.Core.SpellResistantDetections;
 [Serializable]
 internal class ConfSpellResistantDetection : SpellResistantDetection
 {
-    private ConfSpellResistantDetection(SaveGame saveGame) : base(saveGame) { }
+    private ConfSpellResistantDetection(Game game) : base(game) { }
     public override void Learn(Monster monster)
     {
-        if (SaveGame.HasConfusionResistance)
+        if (Game.HasConfusionResistance)
         {
             monster.SmResConf = true;
         }

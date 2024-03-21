@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class LeaveStoreScript : Script, IStoreScript
 {
-    private LeaveStoreScript(SaveGame saveGame) : base(saveGame) { }
+    private LeaveStoreScript(Game game) : base(game) { }
 
     /// <summary>
     /// Sets the leave store flag.

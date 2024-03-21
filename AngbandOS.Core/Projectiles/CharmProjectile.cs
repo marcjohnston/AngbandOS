@@ -10,9 +10,9 @@ namespace AngbandOS.Core.Projection;
 [Serializable]
 internal class CharmProjectile : Projectile
 {
-    private CharmProjectile(SaveGame saveGame) : base(saveGame) { }
+    private CharmProjectile(Game game) : base(game) { }
 
-    protected override Animation EffectAnimation => SaveGame.SingletonRepository.Animations.Get(nameof(GreyControlAnimation));
+    protected override Animation EffectAnimation => Game.SingletonRepository.Animations.Get(nameof(GreyControlAnimation));
 
     protected override bool ProjectileAngersMonster(Monster mPtr)
     {
@@ -25,12 +25,12 @@ internal class CharmProjectile : Projectile
         bool seen = mPtr.IsVisible;
         bool obvious = false;
         string? note = null;
-        dam += SaveGame.AbilityScores[Ability.Charisma].ConRecoverySpeed - 1;
+        dam += Game.AbilityScores[Ability.Charisma].ConRecoverySpeed - 1;
         if (seen)
         {
             obvious = true;
         }
-        if (rPtr.Unique || rPtr.ImmuneConfusion || rPtr.Level > SaveGame.DieRoll(dam - 10 < 1 ? 1 : dam - 10) + 5)
+        if (rPtr.Unique || rPtr.ImmuneConfusion || rPtr.Level > Game.DieRoll(dam - 10 < 1 ? 1 : dam - 10) + 5)
         {
             if (rPtr.ImmuneConfusion)
             {
@@ -42,7 +42,7 @@ internal class CharmProjectile : Projectile
             note = " is unaffected!";
             obvious = false;
         }
-        else if (SaveGame.HasAggravation || rPtr.Guardian)
+        else if (Game.HasAggravation || rPtr.Guardian)
         {
             note = " hates you too much!";
         }

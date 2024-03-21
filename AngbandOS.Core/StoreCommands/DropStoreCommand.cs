@@ -10,7 +10,7 @@ namespace AngbandOS.Core.StoreCommands;
 [Serializable]
 internal class DropStoreCommand : StoreCommand
 {
-    private DropStoreCommand(SaveGame saveGame) : base(saveGame) { }
+    private DropStoreCommand(Game game) : base(game) { }
     public override char KeyChar => 'd';
 
     public override string Description => "Drop an item";

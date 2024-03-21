@@ -8,7 +8,7 @@
 [Serializable]
 internal class WutoPoisonbreathShopkeeper : Shopkeeper
 {
-    private WutoPoisonbreathShopkeeper(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private WutoPoisonbreathShopkeeper(Game game) : base(game) { } // This object is a singleton.
     public override string Name => "Wuto Poisonbreath";
     public override int MaxCost =>  750;
     public override int MinInflate =>  107;

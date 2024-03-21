@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class TeleportLevelScript : Script, IScript
 {
-    private TeleportLevelScript(SaveGame saveGame) : base(saveGame) { }
+    private TeleportLevelScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script.
@@ -18,45 +18,45 @@ internal class TeleportLevelScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        if (SaveGame.HasAntiTeleport)
+        if (Game.HasAntiTeleport)
         {
-            SaveGame.MsgPrint("A mysterious force prevents you from teleporting!");
+            Game.MsgPrint("A mysterious force prevents you from teleporting!");
             return;
         }
-        var downDesc = SaveGame.CurDungeon.Tower ? "You rise up through the ceiling." : "You sink through the floor.";
-        var upDesc = SaveGame.CurDungeon.Tower ? "You sink through the floor." : "You rise up through the ceiling.";
-        if (SaveGame.CurrentDepth <= 0)
+        var downDesc = Game.CurDungeon.Tower ? "You rise up through the ceiling." : "You sink through the floor.";
+        var upDesc = Game.CurDungeon.Tower ? "You sink through the floor." : "You rise up through the ceiling.";
+        if (Game.CurrentDepth <= 0)
         {
-            SaveGame.MsgPrint(downDesc);
-            SaveGame.DoCmdSaveGame(true);
-            SaveGame.CurrentDepth++;
-            SaveGame.NewLevelFlag = true;
+            Game.MsgPrint(downDesc);
+            Game.DoCmdSaveGame(true);
+            Game.CurrentDepth++;
+            Game.NewLevelFlag = true;
         }
-        else if (SaveGame.IsQuest(SaveGame.CurrentDepth) || SaveGame.CurrentDepth >= SaveGame.CurDungeon.MaxLevel)
+        else if (Game.IsQuest(Game.CurrentDepth) || Game.CurrentDepth >= Game.CurDungeon.MaxLevel)
         {
-            SaveGame.MsgPrint(upDesc);
-            SaveGame.DoCmdSaveGame(true);
-            SaveGame.CurrentDepth--;
-            SaveGame.NewLevelFlag = true;
+            Game.MsgPrint(upDesc);
+            Game.DoCmdSaveGame(true);
+            Game.CurrentDepth--;
+            Game.NewLevelFlag = true;
         }
-        else if (SaveGame.RandomLessThan(100) < 50)
+        else if (Game.RandomLessThan(100) < 50)
         {
-            SaveGame.MsgPrint(upDesc);
-            SaveGame.DoCmdSaveGame(true);
-            SaveGame.CurrentDepth--;
-            SaveGame.NewLevelFlag = true;
-            SaveGame.CameFrom = LevelStart.StartRandom;
+            Game.MsgPrint(upDesc);
+            Game.DoCmdSaveGame(true);
+            Game.CurrentDepth--;
+            Game.NewLevelFlag = true;
+            Game.CameFrom = LevelStart.StartRandom;
         }
         else
         {
-            SaveGame.MsgPrint(downDesc);
-            SaveGame.DoCmdSaveGame(true);
-            SaveGame.CurrentDepth++;
-            SaveGame.NewLevelFlag = true;
+            Game.MsgPrint(downDesc);
+            Game.DoCmdSaveGame(true);
+            Game.CurrentDepth++;
+            Game.NewLevelFlag = true;
         }
-        SaveGame.DoCmdSaveGame(true);
-        SaveGame.CurrentDepth++;
-        SaveGame.NewLevelFlag = true;
-        SaveGame.PlaySound(SoundEffectEnum.TeleportLevel);
+        Game.DoCmdSaveGame(true);
+        Game.CurrentDepth++;
+        Game.NewLevelFlag = true;
+        Game.PlaySound(SoundEffectEnum.TeleportLevel);
     }
 }

@@ -18,44 +18,44 @@ namespace AngbandOS.Core.FlaggedActions;
 [Serializable]
 internal class UpdateSpellsFlaggedAction : FlaggedAction
 {
-    private UpdateSpellsFlaggedAction(SaveGame saveGame) : base(saveGame) { }
+    private UpdateSpellsFlaggedAction(Game game) : base(game) { }
     protected override void Execute()
     {
         int j;
         Spell sPtr;
-        if (SaveGame.IsDead)
+        if (Game.IsDead)
         {
             return;
         }
-        string p = SaveGame.BaseCharacterClass.SpellNoun;
-        if (!SaveGame.CanCastSpells)
+        string p = Game.BaseCharacterClass.SpellNoun;
+        if (!Game.CanCastSpells)
         {
             return;
         }
-        if (!SaveGame.CanCastSpells)
+        if (!Game.CanCastSpells)
         {
             return;
         }
-        if (SaveGame.CharacterXtra)
+        if (Game.CharacterXtra)
         {
             return;
         }
-        int numAllowed = SaveGame.AbilityScores[SaveGame.BaseCharacterClass.SpellStat].HalfSpellsPerLevel * SaveGame.HalfLevelsOfSpellcraft() / 2;
+        int numAllowed = Game.AbilityScores[Game.BaseCharacterClass.SpellStat].HalfSpellsPerLevel * Game.HalfLevelsOfSpellcraft() / 2;
 
         // Count the number of spells that were learned.
         int numKnown = 0;
 
         List<Spell> spellList = new List<Spell>();
-        if (SaveGame.PrimaryRealm != null)
+        if (Game.PrimaryRealm != null)
         {
-            foreach (BookItemFactory bookItemFactory in SaveGame.PrimaryRealm.SpellBooks)
+            foreach (BookItemFactory bookItemFactory in Game.PrimaryRealm.SpellBooks)
             {
                 spellList.AddRange(bookItemFactory.Spells);
             }
         }
-        if (SaveGame.SecondaryRealm != null)
+        if (Game.SecondaryRealm != null)
         {
-            foreach (BookItemFactory bookItemFactory in SaveGame.SecondaryRealm.SpellBooks)
+            foreach (BookItemFactory bookItemFactory in Game.SecondaryRealm.SpellBooks)
             {
                 spellList.AddRange(bookItemFactory.Spells);
             }
@@ -67,27 +67,27 @@ internal class UpdateSpellsFlaggedAction : FlaggedAction
                 numKnown++;
             }
         }
-        SaveGame.SpareSpellSlots.Value = numAllowed - numKnown;
+        Game.SpareSpellSlots.Value = numAllowed - numKnown;
         if (numKnown != 0)
         {
             // Enumerate the spells that were learned, to determine if the level of the player fell below the level of the spell.
-            foreach (Spell spell in SaveGame.SpellOrder)
+            foreach (Spell spell in Game.SpellOrder)
             {
-                if (spell.ClassSpell.Level > SaveGame.ExperienceLevel.Value && spell.Learned)
+                if (spell.ClassSpell.Level > Game.ExperienceLevel.Value && spell.Learned)
                 {
                     spell.Forgotten = true;
                     spell.Learned = false;
                     numKnown--;
-                    SaveGame.MsgPrint($"You have forgotten the {p} of {spell.Name}.");
-                    SaveGame.SpareSpellSlots.Value++;
+                    Game.MsgPrint($"You have forgotten the {p} of {spell.Name}.");
+                    Game.SpareSpellSlots.Value++;
                 }
             }
 
             // Now check to see if there are too many spells learned and attempt to forget as many as needed.
-            int forgetIndex = SaveGame.SpellOrder.Count - 1;
-            while (SaveGame.SpareSpellSlots.Value < 0 && forgetIndex >= 0)
+            int forgetIndex = Game.SpellOrder.Count - 1;
+            while (Game.SpareSpellSlots.Value < 0 && forgetIndex >= 0)
             {
-                Spell spell = SaveGame.SpellOrder[forgetIndex];
+                Spell spell = Game.SpellOrder[forgetIndex];
                 if (!spell.Learned)
                 {
                     continue;
@@ -95,8 +95,8 @@ internal class UpdateSpellsFlaggedAction : FlaggedAction
                 spell.Forgotten = true;
                 spell.Learned = false;
                 numKnown--;
-                SaveGame.MsgPrint($"You have forgotten the {p} of {spell.Name}.");
-                SaveGame.SpareSpellSlots.Value++;
+                Game.MsgPrint($"You have forgotten the {p} of {spell.Name}.");
+                Game.SpareSpellSlots.Value++;
             }
         }
 
@@ -111,20 +111,20 @@ internal class UpdateSpellsFlaggedAction : FlaggedAction
         }
 
         // Check to see if we regain some forgotten spells.
-        int spellOrderIndex = SaveGame.SpellOrder.Count - 1;
-        while (SaveGame.SpareSpellSlots.Value > 0 && forgottenTotal > 0 && spellOrderIndex >= 0)
+        int spellOrderIndex = Game.SpellOrder.Count - 1;
+        while (Game.SpareSpellSlots.Value > 0 && forgottenTotal > 0 && spellOrderIndex >= 0)
         {
-            Spell spell = SaveGame.SpellOrder[spellOrderIndex];
-            if (SaveGame.ExperienceLevel.Value >= spell.ClassSpell.Level && spell.Forgotten)
+            Spell spell = Game.SpellOrder[spellOrderIndex];
+            if (Game.ExperienceLevel.Value >= spell.ClassSpell.Level && spell.Forgotten)
             {
                 spell.Forgotten = false;
                 spell.Learned = true;
                 forgottenTotal--;
-                if (!SaveGame.FullScreenOverlay)
+                if (!Game.FullScreenOverlay)
                 {
-                    SaveGame.MsgPrint($"You have remembered the {p} of {spell.Name}.");
+                    Game.MsgPrint($"You have remembered the {p} of {spell.Name}.");
                 }
-                SaveGame.SpareSpellSlots.Value--;
+                Game.SpareSpellSlots.Value--;
             }
             spellOrderIndex--;
         }
@@ -134,7 +134,7 @@ internal class UpdateSpellsFlaggedAction : FlaggedAction
         foreach (Spell spell in spellList)
         {
             // Check to see if the level of the spell is greater than where we are at.
-            if (spell.ClassSpell.Level > SaveGame.ExperienceLevel.Value)
+            if (spell.ClassSpell.Level > Game.ExperienceLevel.Value)
             {
                 // Don't count this spell.
                 continue;
@@ -150,24 +150,24 @@ internal class UpdateSpellsFlaggedAction : FlaggedAction
         }
 
         // Check to see if we need to reduce the number of spare slots.
-        if (SaveGame.SpareSpellSlots.Value > newSpareSpellSlots)
+        if (Game.SpareSpellSlots.Value > newSpareSpellSlots)
         {
             // Reduce the number of spare slots.
-            SaveGame.SpareSpellSlots.Value = newSpareSpellSlots;
+            Game.SpareSpellSlots.Value = newSpareSpellSlots;
         }
 
-        if (SaveGame.OldSpareSpellSlots != SaveGame.SpareSpellSlots.Value)
+        if (Game.OldSpareSpellSlots != Game.SpareSpellSlots.Value)
         {
-            if (SaveGame.SpareSpellSlots.Value != 0)
+            if (Game.SpareSpellSlots.Value != 0)
             {
-                if (!SaveGame.FullScreenOverlay)
+                if (!Game.FullScreenOverlay)
                 {
-                    string suffix = SaveGame.SpareSpellSlots.Value != 1 ? "s" : "";
-                    SaveGame.MsgPrint($"You can learn {SaveGame.SpareSpellSlots.Value} more {p}{suffix}.");
+                    string suffix = Game.SpareSpellSlots.Value != 1 ? "s" : "";
+                    Game.MsgPrint($"You can learn {Game.SpareSpellSlots.Value} more {p}{suffix}.");
                 }
             }
-            SaveGame.OldSpareSpellSlots = SaveGame.SpareSpellSlots.Value;
-            SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawStudyFlaggedAction)).Set();
+            Game.OldSpareSpellSlots = Game.SpareSpellSlots.Value;
+            Game.SingletonRepository.FlaggedActions.Get(nameof(RedrawStudyFlaggedAction)).Set();
         }
     }
 }

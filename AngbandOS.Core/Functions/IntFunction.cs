@@ -9,7 +9,7 @@
 [Serializable]
 internal abstract class IntFunction : Function, IIntChangeTracking
 {
-    protected IntFunction(SaveGame saveGame) : base(saveGame) { }
+    protected IntFunction(Game game) : base(game) { }
 
     public abstract int Value { get; }
 }

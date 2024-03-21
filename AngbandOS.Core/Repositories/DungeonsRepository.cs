@@ -10,19 +10,19 @@ namespace AngbandOS.Core.Repositories;
 [Serializable]
 internal class DungeonsRepository : DictionaryRepository<Dungeon>
 {
-    public DungeonsRepository(SaveGame saveGame) : base(saveGame) { }
+    public DungeonsRepository(Game game) : base(game) { }
 
     public override void Load()
     {
-        if (SaveGame.Configuration.Dungeons == null)
+        if (Game.Configuration.Dungeons == null)
         {
             base.Load();
         }
         else
         {
-            foreach (DungeonDefinition dungeonDefinition in SaveGame.Configuration.Dungeons)
+            foreach (DungeonDefinition dungeonDefinition in Game.Configuration.Dungeons)
             {
-                Add(new GenericDungeon(SaveGame, dungeonDefinition));
+                Add(new GenericDungeon(Game, dungeonDefinition));
             }
         }
     }

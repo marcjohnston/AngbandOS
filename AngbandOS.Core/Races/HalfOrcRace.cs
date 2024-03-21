@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Races;
 [Serializable]
 internal class HalfOrcRace : Race
 {
-    private HalfOrcRace(SaveGame saveGame) : base(saveGame) { }
+    private HalfOrcRace(Game game) : base(game) { }
     public override string Title => "Half Orc";
     public override int[] AbilityBonus => new int[] { 2, -1, 0, 0, 1, -4 };
     public override int BaseDisarmBonus => -3;
@@ -62,16 +62,16 @@ internal class HalfOrcRace : Race
 
     public override void CalcBonuses()
     {
-        SaveGame.HasDarkResistance = true;
+        Game.HasDarkResistance = true;
     }
 
     public override void UseRacialPower()
     {
         // Half-orcs can remove fear
-        if (SaveGame.CheckIfRacialPowerWorks(3, 5, Ability.Wisdom, SaveGame.BaseCharacterClass.ID == CharacterClass.Warrior ? 5 : 10))
+        if (Game.CheckIfRacialPowerWorks(3, 5, Ability.Wisdom, Game.BaseCharacterClass.ID == CharacterClass.Warrior ? 5 : 10))
         {
-            SaveGame.MsgPrint("You play tough.");
-            SaveGame.FearTimer.ResetTimer();
+            Game.MsgPrint("You play tough.");
+            Game.FearTimer.ResetTimer();
         }
     }
 }

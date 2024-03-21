@@ -21,7 +21,7 @@ internal class ConsoleGrid : ConsoleElement
     public int VerticalMargin = 1;
     public int HorizontalMargin = 1;
 
-    public override void Render(SaveGame saveGame, ConsoleWindow containerWindow, ConsoleAlignment parentAlignment)
+    public override void Render(Game game, ConsoleWindow containerWindow, ConsoleAlignment parentAlignment)
     {
         ConsoleLocation topLeft = containerWindow.TopLeft;
         int maxGroupHeight = 0;
@@ -35,7 +35,7 @@ internal class ConsoleGrid : ConsoleElement
             }
 
             // Render the card.
-            card.Render(saveGame, new ConsoleWindow(topLeft, containerWindow.BottomRight), parentAlignment);
+            card.Render(game, new ConsoleWindow(topLeft, containerWindow.BottomRight), parentAlignment);
 
             // Track the bottom margin of the cards for wrapping.
             if (card.Height > maxGroupHeight)

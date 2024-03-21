@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class ConstitutionDartScript : Script, IScript
 {
-    private ConstitutionDartScript(SaveGame saveGame) : base(saveGame) { }
+    private ConstitutionDartScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script.
@@ -19,17 +19,17 @@ internal class ConstitutionDartScript : Script, IScript
     public void ExecuteScript()
     {
         // Dart traps need a to-hit roll
-        if (SaveGame.TrapCheckHitOnPlayer(125))
+        if (Game.TrapCheckHitOnPlayer(125))
         {
-            SaveGame.MsgPrint("A small dart hits you!");
+            Game.MsgPrint("A small dart hits you!");
             // Do 1d4 damage plus constitution drain
-            int damage = SaveGame.DiceRoll(1, 4);
-            SaveGame.TakeHit(damage, "a dart trap");
-            SaveGame.TryDecreasingAbilityScore(Ability.Constitution);
+            int damage = Game.DiceRoll(1, 4);
+            Game.TakeHit(damage, "a dart trap");
+            Game.TryDecreasingAbilityScore(Ability.Constitution);
         }
         else
         {
-            SaveGame.MsgPrint("A small dart barely misses you.");
+            Game.MsgPrint("A small dart barely misses you.");
         }
     }
 }

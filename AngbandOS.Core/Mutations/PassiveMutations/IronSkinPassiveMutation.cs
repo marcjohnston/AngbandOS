@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Mutations.PassiveMutations;
 [Serializable]
 internal class IronSkinPassiveMutation : Mutation
 {
-    private IronSkinPassiveMutation(SaveGame saveGame) : base(saveGame) { }
+    private IronSkinPassiveMutation(Game game) : base(game) { }
     public override int Frequency => 2;
     public override string GainMessage => "Your skin turns to steel!";
     public override string HaveMessage => "Your skin is made of steel (-1 DEX, +25 AC).";
@@ -19,13 +19,13 @@ internal class IronSkinPassiveMutation : Mutation
 
     public override void OnGain()
     {
-        SaveGame.DexterityBonus -= 1;
-        SaveGame.GenomeArmorClassBonus += 25;
+        Game.DexterityBonus -= 1;
+        Game.GenomeArmorClassBonus += 25;
     }
 
     public override void OnLose()
     {
-        SaveGame.DexterityBonus += 1;
-        SaveGame.GenomeArmorClassBonus -= 25;
+        Game.DexterityBonus += 1;
+        Game.GenomeArmorClassBonus -= 25;
     }
 }

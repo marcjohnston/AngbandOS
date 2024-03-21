@@ -10,20 +10,20 @@ namespace AngbandOS.Core.Repositories;
 [Serializable]
 internal class MonsterRacesRepository : DictionaryRepository<MonsterRace>
 {
-    public MonsterRacesRepository(SaveGame saveGame) : base(saveGame) { }
+    public MonsterRacesRepository(Game game) : base(game) { }
 
     public override void Load()
     {
-        if (SaveGame.Configuration.StoreCommands == null)
+        if (Game.Configuration.StoreCommands == null)
         {
             // Monster races must be loaded in a sorted order for the player birth quests to not hang.
             Add(LoadTypesFromAssembly<MonsterRace>().OrderBy(_monsterRace => _monsterRace.LevelFound));
         }
         else
         {
-            foreach (MonsterRaceDefinition mosterRaceDefinition in SaveGame.Configuration.MonsterRaces.OrderBy(_monsterRace => _monsterRace.LevelFound))
+            foreach (MonsterRaceDefinition mosterRaceDefinition in Game.Configuration.MonsterRaces.OrderBy(_monsterRace => _monsterRace.LevelFound))
             {
-                Add(new GenericMonsterRace(SaveGame, mosterRaceDefinition));
+                Add(new GenericMonsterRace(Game, mosterRaceDefinition));
             }
         }
     }

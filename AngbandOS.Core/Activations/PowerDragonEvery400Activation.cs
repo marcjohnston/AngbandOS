@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Activations;
 [Serializable]
 internal class PowerDragonEvery400Activation : DirectionalActivation
 {
-    private PowerDragonEvery400Activation(SaveGame saveGame) : base(saveGame) { }
+    private PowerDragonEvery400Activation(Game game) : base(game) { }
     public override int RandomChance => 5;
 
     public override string? PreActivationMessage => "You breathe the elements...";
@@ -19,17 +19,17 @@ internal class PowerDragonEvery400Activation : DirectionalActivation
 
     protected override bool Activate(int direction)
     {
-        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(MissileProjectile)), direction, 300, 4);
-        SaveGame.MsgPrint("Your armor glows many colors...");
-        SaveGame.FearTimer.ResetTimer();
-        SaveGame.SuperheroismTimer.AddTimer(base.SaveGame.DieRoll(50) + 50);
-        SaveGame.RestoreHealth(30);
-        SaveGame.BlessingTimer.AddTimer(base.SaveGame.DieRoll(50) + 50);
-        SaveGame.AcidResistanceTimer.AddTimer(base.SaveGame.DieRoll(50) + 50);
-        SaveGame.LightningResistanceTimer.AddTimer(base.SaveGame.DieRoll(50) + 50);
-        SaveGame.FireResistanceTimer.AddTimer(base.SaveGame.DieRoll(50) + 50);
-        SaveGame.ColdResistanceTimer.AddTimer(base.SaveGame.DieRoll(50) + 50);
-        SaveGame.PoisonResistanceTimer.AddTimer(base.SaveGame.DieRoll(50) + 50);
+        Game.FireBall(Game.SingletonRepository.Projectiles.Get(nameof(MissileProjectile)), direction, 300, 4);
+        Game.MsgPrint("Your armor glows many colors...");
+        Game.FearTimer.ResetTimer();
+        Game.SuperheroismTimer.AddTimer(base.Game.DieRoll(50) + 50);
+        Game.RestoreHealth(30);
+        Game.BlessingTimer.AddTimer(base.Game.DieRoll(50) + 50);
+        Game.AcidResistanceTimer.AddTimer(base.Game.DieRoll(50) + 50);
+        Game.LightningResistanceTimer.AddTimer(base.Game.DieRoll(50) + 50);
+        Game.FireResistanceTimer.AddTimer(base.Game.DieRoll(50) + 50);
+        Game.ColdResistanceTimer.AddTimer(base.Game.DieRoll(50) + 50);
+        Game.PoisonResistanceTimer.AddTimer(base.Game.DieRoll(50) + 50);
         return true;
     }
 

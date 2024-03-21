@@ -10,13 +10,13 @@ namespace AngbandOS.Core.ArtifactBiases;
 [Serializable]
 internal class WisdomArtifactBias : ArtifactBias
 {
-    private WisdomArtifactBias(SaveGame saveGame) : base(saveGame) { }
+    private WisdomArtifactBias(Game game) : base(game) { }
     public override bool ApplyBonuses(Item item)
     {
         if (!item.RandomArtifactItemCharacteristics.Wis)
         {
             item.RandomArtifactItemCharacteristics.Wis = true;
-            if (SaveGame.DieRoll(2) == 1)
+            if (Game.DieRoll(2) == 1)
             {
                 return true;
             }
@@ -29,7 +29,7 @@ internal class WisdomArtifactBias : ArtifactBias
         if (!item.RandomArtifactItemCharacteristics.SustWis)
         {
             item.RandomArtifactItemCharacteristics.SustWis = true;
-            if (SaveGame.DieRoll(2) == 1)
+            if (Game.DieRoll(2) == 1)
             {
                 return true;
             }

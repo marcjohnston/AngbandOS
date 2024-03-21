@@ -10,12 +10,12 @@ namespace AngbandOS.Core.RareItems;
 [Serializable]
 internal class WeaponElderSignInscribedRareItem : RareItem
 {
-    private WeaponElderSignInscribedRareItem(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private WeaponElderSignInscribedRareItem(Game game) : base(game) { } // This object is a singleton.
     public override void ApplyMagic(Item item)
     {
-        item.RandomPower = SaveGame.SingletonRepository.Powers.ToWeightedRandom(_power => _power.IsSustain == true).Choose();
+        item.RandomPower = Game.SingletonRepository.Powers.ToWeightedRandom(_power => _power.IsSustain == true).Choose();
     }
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(VerticalBarSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(VerticalBarSymbol));
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "Weapon (Elder Sign Inscribed)";
     public override bool Blessed => true;

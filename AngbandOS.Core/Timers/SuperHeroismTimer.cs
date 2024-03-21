@@ -10,19 +10,19 @@ namespace AngbandOS.Core.Timers;
 [Serializable]
 internal class SuperHeroismTimer : Timer
 {
-    private SuperHeroismTimer(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private SuperHeroismTimer(Game game) : base(game) { } // This object is a singleton.
     protected override void EffectStopped()
     {
-        SaveGame.MsgPrint("You feel less Berserk.");
+        Game.MsgPrint("You feel less Berserk.");
     }
     protected override void EffectIncreased(int newRate, int currentRate)
     {
-        SaveGame.MsgPrint("You feel like a killing machine!");
+        Game.MsgPrint("You feel like a killing machine!");
     }
     protected override void Noticed()
     {
-        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
-        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateHealthFlaggedAction)).Set();
+        Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
+        Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateHealthFlaggedAction)).Set();
         base.Noticed();
     }
 }

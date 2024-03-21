@@ -355,16 +355,16 @@ internal abstract class MonsterRace : IMonsterCharacteristics, IGetKey
     #endregion
 
     #region
-    protected readonly SaveGame SaveGame;
-    protected MonsterRace(SaveGame saveGame)
+    protected readonly Game Game;
+    protected MonsterRace(Game game)
     {
-        SaveGame = saveGame;
+        Game = game;
     }
 
     public string GetKey => Key;
     public void Bind()
     {
-        Knowledge = new MonsterKnowledge(SaveGame, this);
+        Knowledge = new MonsterKnowledge(Game, this);
         int freqInate = (FreqInate == 0 ? 0 : 100 / FreqInate);
         int freqSpell = (FreqSpell == 0 ? 0 : 100 / FreqSpell);
         FrequencyChance = (freqInate + freqSpell) / 2;
@@ -375,12 +375,12 @@ internal abstract class MonsterRace : IMonsterCharacteristics, IGetKey
         {
             foreach (string spellName in SpellNames)
             {
-                Spells.Add(SaveGame.SingletonRepository.MonsterSpells.Get(spellName));
+                Spells.Add(Game.SingletonRepository.MonsterSpells.Get(spellName));
             }
         }
 
         // Bind the symbol.
-        Symbol = SaveGame.SingletonRepository.Symbols.Get(SymbolName);
+        Symbol = Game.SingletonRepository.Symbols.Get(SymbolName);
 
         // Bind the monster attacks.
         List<MonsterAttack> attackList = new();
@@ -388,11 +388,11 @@ internal abstract class MonsterRace : IMonsterCharacteristics, IGetKey
         {
             foreach (MonsterAttackDefinition monsterAttackDefinition in AttackDefinitions)
             {
-                Attack attack = SaveGame.SingletonRepository.Attacks.Get(monsterAttackDefinition.MethodName);
+                Attack attack = Game.SingletonRepository.Attacks.Get(monsterAttackDefinition.MethodName);
                 AttackEffect? attackEffect = null;
                 if (monsterAttackDefinition.EffectName != null)
                 {
-                    attackEffect = SaveGame.SingletonRepository.AttackEffects.Get(monsterAttackDefinition.EffectName);
+                    attackEffect = Game.SingletonRepository.AttackEffects.Get(monsterAttackDefinition.EffectName);
                 }
                 attackList.Add(new MonsterAttack(attack, attackEffect, monsterAttackDefinition.DDice, monsterAttackDefinition.DSide));
             }

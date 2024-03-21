@@ -13,7 +13,7 @@ namespace AngbandOS.Core.Activations;
 [Serializable]
 internal class AlchemyEvery500Activation : Activation
 {
-    private AlchemyEvery500Activation(SaveGame saveGame) : base(saveGame) { }
+    private AlchemyEvery500Activation(Game game) : base(game) { }
 
     public override int RandomChance => 5;
 
@@ -21,7 +21,7 @@ internal class AlchemyEvery500Activation : Activation
 
     protected override bool OnActivate(Item item)
     {
-        return SaveGame.RunCancellableScript(nameof(AlchemyScript));
+        return Game.RunCancellableScript(nameof(AlchemyScript));
     }
 
     public override int RechargeTime() => 500;

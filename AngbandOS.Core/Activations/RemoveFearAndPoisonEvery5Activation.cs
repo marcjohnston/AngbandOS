@@ -13,15 +13,15 @@ namespace AngbandOS.Core.Activations;
 [Serializable]
 internal class RemoveFearAndPoisonEvery5Activation : Activation
 {
-    private RemoveFearAndPoisonEvery5Activation(SaveGame saveGame) : base(saveGame) { }
+    private RemoveFearAndPoisonEvery5Activation(Game game) : base(game) { }
     public override int RandomChance => 101;
 
     public override string? PreActivationMessage => "Your {0} glows deep blue...";
 
     protected override bool OnActivate(Item item)
     {
-        SaveGame.FearTimer.ResetTimer();
-        SaveGame.PoisonTimer.ResetTimer();
+        Game.FearTimer.ResetTimer();
+        Game.PoisonTimer.ResetTimer();
         return true;
     }
 

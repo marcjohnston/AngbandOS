@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Spells.Life;
 [Serializable]
 internal class LifeSpellDetectTrapsAndSecretDoors : Spell
 {
-    private LifeSpellDetectTrapsAndSecretDoors(SaveGame saveGame) : base(saveGame) { }
+    private LifeSpellDetectTrapsAndSecretDoors(Game game) : base(game) { }
     protected override string? CastScriptName => nameof(DetectDoorsTrapsAndStairsScript);
 
     public override string Name => "Detect Traps and Secret Doors";

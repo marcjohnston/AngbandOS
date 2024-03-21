@@ -10,14 +10,14 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class SlownessStaffItemFactory : StaffItemFactory
 {
-    private SlownessStaffItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private SlownessStaffItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UnderscoreSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(UnderscoreSymbol));
     public override string Name => "Slowness";
 
     public override void ApplyMagic(Item item, int level, int power, Store? store)
     {
-        item.TypeSpecificValue = SaveGame.DieRoll(8) + 8;
+        item.TypeSpecificValue = Game.DieRoll(8) + 8;
     }
 
     public override int[] Chance => new int[] { 1, 0, 0, 0 };
@@ -30,10 +30,10 @@ internal class SlownessStaffItemFactory : StaffItemFactory
 
     public override void UseStaff(UseStaffEvent eventArgs)
     {
-        if (SaveGame.SlowTimer.AddTimer(SaveGame.DieRoll(30) + 15))
+        if (Game.SlowTimer.AddTimer(Game.DieRoll(30) + 15))
         {
             eventArgs.Identified = true;
         }
     }
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

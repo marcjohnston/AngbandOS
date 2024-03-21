@@ -10,9 +10,9 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class LoseMemoriesPotionItemFactory : PotionItemFactory
 {
-    private LoseMemoriesPotionItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private LoseMemoriesPotionItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(ExclamationPointSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(ExclamationPointSymbol));
     public override string Name => "Lose Memories";
 
     public override int[] Chance => new int[] { 1, 0, 0, 0 };
@@ -25,10 +25,10 @@ internal class LoseMemoriesPotionItemFactory : PotionItemFactory
     public override bool Quaff()
     {
         // Lose Memories reduces your experience
-        if (!SaveGame.HasHoldLife && SaveGame.ExperiencePoints.Value > 0)
+        if (!Game.HasHoldLife && Game.ExperiencePoints.Value > 0)
         {
-            SaveGame.MsgPrint("You feel your memories fade.");
-            SaveGame.LoseExperience(SaveGame.ExperiencePoints.Value / 4);
+            Game.MsgPrint("You feel your memories fade.");
+            Game.LoseExperience(Game.ExperiencePoints.Value / 4);
             return true;
         }
         return false;
@@ -37,5 +37,5 @@ internal class LoseMemoriesPotionItemFactory : PotionItemFactory
     {
         return true;
     }
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

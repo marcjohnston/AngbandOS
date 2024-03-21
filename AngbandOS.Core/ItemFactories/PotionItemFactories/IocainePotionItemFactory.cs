@@ -10,9 +10,9 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class IocainePotionItemFactory : PotionItemFactory
 {
-    private IocainePotionItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private IocainePotionItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(ExclamationPointSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(ExclamationPointSymbol));
     public override string Name => "Iocaine";
 
     public override int[] Chance => new int[] { 4, 0, 0, 0 };
@@ -25,15 +25,15 @@ internal class IocainePotionItemFactory : PotionItemFactory
     public override bool Quaff()
     {
         // Iocaine simply does 5000 damage
-        SaveGame.MsgPrint("A feeling of Death flows through your body.");
-        SaveGame.TakeHit(5000, "a potion of Death");
+        Game.MsgPrint("A feeling of Death flows through your body.");
+        Game.TakeHit(5000, "a potion of Death");
         return true;
     }
 
     public override bool Smash(int who, int y, int x)
     {
-        SaveGame.Project(who, 1, y, x, 0, SaveGame.SingletonRepository.Projectiles.Get(nameof(DeathRayProjectile)), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
+        Game.Project(who, 1, y, x, 0, Game.SingletonRepository.Projectiles.Get(nameof(DeathRayProjectile)), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
         return true;
     }
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

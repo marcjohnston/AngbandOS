@@ -14,25 +14,25 @@ internal abstract class DiggingWeaponItemFactory : WeaponItemFactory
     /// Returns the digger inventory slot for shovels.
     /// </summary>
     public override int WieldSlot => InventorySlot.Digger;
-    public DiggingWeaponItemFactory(SaveGame saveGame) : base(saveGame) { }
-    public override ItemClass ItemClass => SaveGame.SingletonRepository.ItemClasses.Get(nameof(DiggersItemClass));
+    public DiggingWeaponItemFactory(Game game) : base(game) { }
+    public override ItemClass ItemClass => Game.SingletonRepository.ItemClasses.Get(nameof(DiggersItemClass));
     public override void ApplyMagic(Item item, int level, int power, Store? store)
     {
         base.ApplyMagic(item, level, power, null);
         if (power > 1)
         {
-            item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(WeaponOfDiggingRareItem));
+            item.RareItem = Game.SingletonRepository.RareItems.Get(nameof(WeaponOfDiggingRareItem));
         }
         else if (power < -1)
         {
-            item.TypeSpecificValue = 0 - (5 + SaveGame.DieRoll(5));
+            item.TypeSpecificValue = 0 - (5 + Game.DieRoll(5));
         }
         else if (power < 0)
         {
             item.TypeSpecificValue = 0 - item.TypeSpecificValue;
         }
     }
-    public override BaseInventorySlot BaseWieldSlot => SaveGame.SingletonRepository.InventorySlots.Get(nameof(DiggerInventorySlot));
+    public override BaseInventorySlot BaseWieldSlot => Game.SingletonRepository.InventorySlots.Get(nameof(DiggerInventorySlot));
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Digging;
     public override int PackSort => 31;
     public override ColorEnum Color => ColorEnum.Grey;

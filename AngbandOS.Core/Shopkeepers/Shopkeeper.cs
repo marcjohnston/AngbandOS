@@ -12,7 +12,7 @@ namespace AngbandOS.Core.Shopkeepers;
 [Serializable]
 internal abstract class Shopkeeper : IGetKey
 {
-    protected SaveGame SaveGame { get; }
+    protected Game Game { get; }
     public abstract int MaxCost { get; }
 
     /// <summary>
@@ -36,9 +36,9 @@ internal abstract class Shopkeeper : IGetKey
 
     public string GetKey => Key;
 
-    protected Shopkeeper(SaveGame saveGame)
+    protected Shopkeeper(Game game)
     {
-        SaveGame = saveGame;
+        Game = game;
     }
 
     public void Bind()
@@ -49,7 +49,7 @@ internal abstract class Shopkeeper : IGetKey
         }
         else
         {
-            OwnerRace = SaveGame.SingletonRepository.Races.Get(RaceName);
+            OwnerRace = Game.SingletonRepository.Races.Get(RaceName);
         }
     }
 

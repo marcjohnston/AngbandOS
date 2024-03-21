@@ -10,9 +10,9 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class SummonUndeadScrollItemFactory : ScrollItemFactory
 {
-    private SummonUndeadScrollItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private SummonUndeadScrollItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(QuestionMarkSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(QuestionMarkSymbol));
     public override string Name => "Summon Undead";
 
     public override int[] Chance => new int[] { 1, 0, 0, 0 };
@@ -23,13 +23,13 @@ internal class SummonUndeadScrollItemFactory : ScrollItemFactory
 
     public override void Read(ReadScrollEvent eventArgs)
     {
-        for (int i = 0; i < SaveGame.DieRoll(3); i++)
+        for (int i = 0; i < Game.DieRoll(3); i++)
         {
-            if (SaveGame.SummonSpecific(SaveGame.MapY, SaveGame.MapX, SaveGame.Difficulty, SaveGame.SingletonRepository.MonsterFilters.Get(nameof(UndeadMonsterFilter))))
+            if (Game.SummonSpecific(Game.MapY, Game.MapX, Game.Difficulty, Game.SingletonRepository.MonsterFilters.Get(nameof(UndeadMonsterFilter))))
             {
                 eventArgs.Identified = true;
             }
         }
     }
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

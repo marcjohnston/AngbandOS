@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class SpikeClosedDoorScript : Script, IScript, IRepeatableScript
 {
-    private SpikeClosedDoorScript(SaveGame saveGame) : base(saveGame) { }
+    private SpikeClosedDoorScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the spike closed door script and returns false.
@@ -29,39 +29,39 @@ internal class SpikeClosedDoorScript : Script, IScript, IRepeatableScript
     public void ExecuteScript()
     {
         // Get the location to be spiked
-        if (SaveGame.GetDirectionNoAim(out int dir))
+        if (Game.GetDirectionNoAim(out int dir))
         {
-            int y = SaveGame.MapY + SaveGame.KeypadDirectionYOffset[dir];
-            int x = SaveGame.MapX + SaveGame.KeypadDirectionXOffset[dir];
-            GridTile tile = SaveGame.Grid[y][x];
+            int y = Game.MapY + Game.KeypadDirectionYOffset[dir];
+            int x = Game.MapX + Game.KeypadDirectionXOffset[dir];
+            GridTile tile = Game.Grid[y][x];
             // Make sure it can be spiked and we have spikes to do it with
             if (!tile.FeatureType.IsVisibleDoor)
             {
-                SaveGame.MsgPrint("You see nothing there to spike.");
+                Game.MsgPrint("You see nothing there to spike.");
             }
             else
             {
-                if (!SaveGame.GetSpike(out int itemIndex))
+                if (!Game.GetSpike(out int itemIndex))
                 {
-                    SaveGame.MsgPrint("You have no spikes!");
+                    Game.MsgPrint("You have no spikes!");
                 }
                 // Can't close a door if there's someone in the way
                 else if (tile.MonsterIndex != 0)
                 {
                     // Attempting costs a turn anyway
-                    SaveGame.EnergyUse = 100;
-                    SaveGame.MsgPrint("There is a monster in the way!");
-                    SaveGame.PlayerAttackMonster(y, x);
+                    Game.EnergyUse = 100;
+                    Game.MsgPrint("There is a monster in the way!");
+                    Game.PlayerAttackMonster(y, x);
                 }
                 else
                 {
                     // Spiking a door costs a turn
-                    SaveGame.EnergyUse = 100;
-                    SaveGame.MsgPrint("You jam the door with a spike.");
+                    Game.EnergyUse = 100;
+                    Game.MsgPrint("You jam the door with a spike.");
                     // Replace the door feature with a jammed door
                     if (tile.FeatureType.IsVisibleDoor)
                     {
-                        Tile? jammedTile = SaveGame.SingletonRepository.Tiles.Get(nameof(JammedDoor0Tile));
+                        Tile? jammedTile = Game.SingletonRepository.Tiles.Get(nameof(JammedDoor0Tile));
                         if (jammedTile == null)
                         {
                             throw new Exception("No jammed door specified.");
@@ -70,9 +70,9 @@ internal class SpikeClosedDoorScript : Script, IScript, IRepeatableScript
                     }
 
                     // Use up the spike from the player's inventory
-                    SaveGame.InvenItemIncrease(itemIndex, -1);
-                    SaveGame.InvenItemDescribe(itemIndex);
-                    SaveGame.InvenItemOptimize(itemIndex);
+                    Game.InvenItemIncrease(itemIndex, -1);
+                    Game.InvenItemDescribe(itemIndex);
+                    Game.InvenItemOptimize(itemIndex);
                 }
             }
         }

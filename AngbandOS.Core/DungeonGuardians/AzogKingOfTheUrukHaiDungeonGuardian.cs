@@ -10,7 +10,7 @@ namespace AngbandOS.Core.DungeonGuardians;
 [Serializable]
 internal class AzogKingOfTheUrukHaiDungeonGuardian : DungeonGuardian
 {
-    private AzogKingOfTheUrukHaiDungeonGuardian(SaveGame saveGame) : base(saveGame) { } // This object is a singleton
+    private AzogKingOfTheUrukHaiDungeonGuardian(Game game) : base(game) { } // This object is a singleton
     protected override string MonsterRaceName => nameof(AzogKingOfTheUrukHaiMonsterRace);
     public override int LevelFound => 17;
 }

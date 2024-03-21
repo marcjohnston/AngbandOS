@@ -10,6 +10,6 @@ namespace AngbandOS.Core.Conditionals;
 [Serializable]
 internal class MaxLevelAttainedConditional : Conditional
 {
-    private MaxLevelAttainedConditional(SaveGame saveGame) : base(saveGame) { }
-    public override bool IsTrue => SaveGame.ExperienceLevel.Value >= SaveGame.MaxLevelGained;
+    private MaxLevelAttainedConditional(Game game) : base(game) { }
+    public override bool IsTrue => Game.ExperienceLevel.Value >= Game.MaxLevelGained;
 }

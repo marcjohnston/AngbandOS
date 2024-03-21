@@ -10,20 +10,20 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class MagiAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
 {
-    private MagiAmuletJeweleryItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private MagiAmuletJeweleryItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(DoubleQuoteSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(DoubleQuoteSymbol));
     public override string Name => "the Magi";
 
     public override void ApplyMagic(Item item, int level, int power, Store? store)
     {
-        item.TypeSpecificValue = SaveGame.DieRoll(5) + item.GetBonusValue(5, level);
-        item.BonusArmorClass = SaveGame.DieRoll(5) + item.GetBonusValue(5, level);
-        if (SaveGame.DieRoll(3) == 1)
+        item.TypeSpecificValue = Game.DieRoll(5) + item.GetBonusValue(5, level);
+        item.BonusArmorClass = Game.DieRoll(5) + item.GetBonusValue(5, level);
+        if (Game.DieRoll(3) == 1)
         {
             item.RandomArtifactItemCharacteristics.SlowDigest = true;
         }
-        SaveGame.TreasureRating += 25;
+        Game.TreasureRating += 25;
     }
 
     public override int[] Chance => new int[] { 4, 3, 0, 0 };
@@ -42,5 +42,5 @@ internal class MagiAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
     public override int Weight => 3;
 
     public override bool KindIsGood => true;
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

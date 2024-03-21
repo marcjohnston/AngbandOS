@@ -10,9 +10,9 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class PieceOfWarpstoneFoodItemFactory : FoodItemFactory
 {
-    private PieceOfWarpstoneFoodItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private PieceOfWarpstoneFoodItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(AsteriskSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(AsteriskSymbol));
     public override ColorEnum Color => ColorEnum.Purple;
     public override string Name => "Piece of Warpstone";
 
@@ -26,16 +26,16 @@ internal class PieceOfWarpstoneFoodItemFactory : FoodItemFactory
     public override int Weight => 1;
     public override bool Eat()
     {
-        SaveGame.PlaySound(SoundEffectEnum.Eat);
-        SaveGame.MsgPrint("That tastes... funky.");
-        SaveGame.RunScript(nameof(GainMutationScript));
-        if (SaveGame.DieRoll(3) == 1)
+        Game.PlaySound(SoundEffectEnum.Eat);
+        Game.MsgPrint("That tastes... funky.");
+        Game.RunScript(nameof(GainMutationScript));
+        if (Game.DieRoll(3) == 1)
         {
-            SaveGame.RunScript(nameof(GainMutationScript));
+            Game.RunScript(nameof(GainMutationScript));
         }
-        if (SaveGame.DieRoll(3) == 1)
+        if (Game.DieRoll(3) == 1)
         {
-            SaveGame.RunScript(nameof(GainMutationScript));
+            Game.RunScript(nameof(GainMutationScript));
         }
         return true;
     }
@@ -44,5 +44,5 @@ internal class PieceOfWarpstoneFoodItemFactory : FoodItemFactory
     /// Returns true because warpstones vanish when a skeleton tries to eat it.
     /// </summary>
     public override bool VanishesWhenEatenBySkeletons => true;
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

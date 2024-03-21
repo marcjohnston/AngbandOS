@@ -10,100 +10,100 @@ namespace AngbandOS.Core.Rewards;
 [Serializable]
 internal class ChaosWpReward : Reward
 {
-    private ChaosWpReward(SaveGame saveGame) : base(saveGame) { }
+    private ChaosWpReward(Game game) : base(game) { }
     public override void GetReward(Patron patron)
     {
-        SaveGame.MsgPrint($"The voice of {patron.ShortName} booms out:");
-        SaveGame.MsgPrint("'Thy deed hath earned thee a worthy blade.'");
+        Game.MsgPrint($"The voice of {patron.ShortName} booms out:");
+        Game.MsgPrint("'Thy deed hath earned thee a worthy blade.'");
         ItemFactory reward;
-        switch (SaveGame.DieRoll(SaveGame.ExperienceLevel.Value))
+        switch (Game.DieRoll(Game.ExperienceLevel.Value))
         {
             case 1:
             case 2:
-                reward = SaveGame.SingletonRepository.ItemFactories.Get(nameof(DaggerWeaponItemFactory));
+                reward = Game.SingletonRepository.ItemFactories.Get(nameof(DaggerWeaponItemFactory));
                 break;
 
             case 3:
             case 4:
-                reward = SaveGame.SingletonRepository.ItemFactories.Get(nameof(MainGaucheWeaponItemFactory));
+                reward = Game.SingletonRepository.ItemFactories.Get(nameof(MainGaucheWeaponItemFactory));
                 break;
 
             case 5:
             case 6:
-                reward = SaveGame.SingletonRepository.ItemFactories.Get(nameof(RapierWeaponItemFactory));
+                reward = Game.SingletonRepository.ItemFactories.Get(nameof(RapierWeaponItemFactory));
                 break;
 
             case 7:
             case 8:
-                reward = SaveGame.SingletonRepository.ItemFactories.Get(nameof(SmallSwordWeaponItemFactory));
+                reward = Game.SingletonRepository.ItemFactories.Get(nameof(SmallSwordWeaponItemFactory));
                 break;
 
             case 9:
             case 10:
-                reward = SaveGame.SingletonRepository.ItemFactories.Get(nameof(ShortSwordWeaponItemFactory));
+                reward = Game.SingletonRepository.ItemFactories.Get(nameof(ShortSwordWeaponItemFactory));
                 break;
 
             case 11:
             case 12:
             case 13:
-                reward = SaveGame.SingletonRepository.ItemFactories.Get(nameof(SabreWeaponItemFactory));
+                reward = Game.SingletonRepository.ItemFactories.Get(nameof(SabreWeaponItemFactory));
                 break;
 
             case 14:
             case 15:
             case 16:
-                reward = SaveGame.SingletonRepository.ItemFactories.Get(nameof(CutlassWeaponItemFactory));
+                reward = Game.SingletonRepository.ItemFactories.Get(nameof(CutlassWeaponItemFactory));
                 break;
 
             case 17:
-                reward = SaveGame.SingletonRepository.ItemFactories.Get(nameof(TulwarWeaponItemFactory));
+                reward = Game.SingletonRepository.ItemFactories.Get(nameof(TulwarWeaponItemFactory));
                 break;
 
             case 18:
             case 19:
             case 20:
-                reward = SaveGame.SingletonRepository.ItemFactories.Get(nameof(BroadSwordWeaponItemFactory));
+                reward = Game.SingletonRepository.ItemFactories.Get(nameof(BroadSwordWeaponItemFactory));
                 break;
 
             case 21:
             case 22:
             case 23:
-                reward = SaveGame.SingletonRepository.ItemFactories.Get(nameof(LongSwordWeaponItemFactory));
+                reward = Game.SingletonRepository.ItemFactories.Get(nameof(LongSwordWeaponItemFactory));
                 break;
 
             case 24:
             case 25:
             case 26:
-                reward = SaveGame.SingletonRepository.ItemFactories.Get(nameof(ScimitarWeaponItemFactory));
+                reward = Game.SingletonRepository.ItemFactories.Get(nameof(ScimitarWeaponItemFactory));
                 break;
 
             case 27:
-                reward = SaveGame.SingletonRepository.ItemFactories.Get(nameof(KatanaWeaponItemFactory));
+                reward = Game.SingletonRepository.ItemFactories.Get(nameof(KatanaWeaponItemFactory));
                 break;
 
             case 28:
             case 29:
-                reward = SaveGame.SingletonRepository.ItemFactories.Get(nameof(BastardSwordSwordWeaponItemFactory));
+                reward = Game.SingletonRepository.ItemFactories.Get(nameof(BastardSwordSwordWeaponItemFactory));
                 break;
 
             case 30:
             case 31:
-                reward = SaveGame.SingletonRepository.ItemFactories.Get(nameof(TwoHandedSwordWeaponItemFactory));
+                reward = Game.SingletonRepository.ItemFactories.Get(nameof(TwoHandedSwordWeaponItemFactory));
                 break;
 
             case 32:
-                reward = SaveGame.SingletonRepository.ItemFactories.Get(nameof(ExecutionersSwordWeaponItemFactory));
+                reward = Game.SingletonRepository.ItemFactories.Get(nameof(ExecutionersSwordWeaponItemFactory));
                 break;
 
             default:
-                reward = SaveGame.SingletonRepository.ItemFactories.Get(nameof(BladeOfChaosWeaponItemFactory));
+                reward = Game.SingletonRepository.ItemFactories.Get(nameof(BladeOfChaosWeaponItemFactory));
                 break;
         }
         Item qPtr = reward.CreateItem();
-        qPtr.BonusToHit = 3 + (SaveGame.DieRoll(SaveGame.Difficulty) % 10);
-        qPtr.BonusDamage = 3 + (SaveGame.DieRoll(SaveGame.Difficulty) % 10);
-        qPtr.ApplyRandomResistance(SaveGame.DieRoll(34) + 4);
-        qPtr.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(WeaponChaoticRareItem));
-        SaveGame.DropNear(qPtr, -1, SaveGame.MapY, SaveGame.MapX);
+        qPtr.BonusToHit = 3 + (Game.DieRoll(Game.Difficulty) % 10);
+        qPtr.BonusDamage = 3 + (Game.DieRoll(Game.Difficulty) % 10);
+        qPtr.ApplyRandomResistance(Game.DieRoll(34) + 4);
+        qPtr.RareItem = Game.SingletonRepository.RareItems.Get(nameof(WeaponChaoticRareItem));
+        Game.DropNear(qPtr, -1, Game.MapY, Game.MapX);
     }
 }

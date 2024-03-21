@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class CharmMonsterScript : Script, IScript
 {
-    private CharmMonsterScript(SaveGame saveGame) : base(saveGame) { }
+    private CharmMonsterScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script.
@@ -18,10 +18,10 @@ internal class CharmMonsterScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        if (!SaveGame.GetDirectionWithAim(out int dir))
+        if (!Game.GetDirectionWithAim(out int dir))
         {
             return;
         }
-        SaveGame.CharmMonster(dir, SaveGame.ExperienceLevel.Value);
+        Game.CharmMonster(dir, Game.ExperienceLevel.Value);
     }
 }

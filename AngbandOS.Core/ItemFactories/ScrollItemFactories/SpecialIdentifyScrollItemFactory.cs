@@ -10,9 +10,9 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class SpecialIdentifyScrollItemFactory : ScrollItemFactory
 {
-    private SpecialIdentifyScrollItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private SpecialIdentifyScrollItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(QuestionMarkSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(QuestionMarkSymbol));
     public override string Name => "*Identify*";
 
     public override int[] Chance => new int[] { 1, 2, 1, 1 };
@@ -25,10 +25,10 @@ internal class SpecialIdentifyScrollItemFactory : ScrollItemFactory
     public override void Read(ReadScrollEvent eventArgs)
     {
         eventArgs.Identified = true;
-        if (!SaveGame.RunSuccessfulScript(nameof(IdentifyItemFullyScript)))
+        if (!Game.RunSuccessfulScript(nameof(IdentifyItemFullyScript)))
         {
             eventArgs.UsedUp = false;
         }
     }
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

@@ -10,7 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class TridentOfWrathFixedArtifact : FixedArtifact
 {
-    private TridentOfWrathFixedArtifact(SaveGame saveGame) : base(saveGame) { }
+    private TridentOfWrathFixedArtifact(Game game) : base(game) { }
 
     protected override string BaseItemFactoryName => nameof(TridentPolearmWeaponItemFactory);
 

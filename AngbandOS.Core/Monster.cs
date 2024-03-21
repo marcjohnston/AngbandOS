@@ -73,11 +73,11 @@ internal class Monster : IItemContainer
     public int Speed;
     public int StolenGold;
     public int StunLevel;
-    private readonly SaveGame SaveGame;
+    private readonly Game Game;
 
-    public Monster(SaveGame saveGame)
+    public Monster(Game game)
     {
-        SaveGame = saveGame;
+        Game = game;
     }
 
     public string DescribeItemLocation(Item oPtr) => $"being held by {Race.Name}";
@@ -121,7 +121,7 @@ internal class Monster : IItemContainer
     public void ItemDescribe(Item oPtr)
     {
         string oName = oPtr.Description(true, 3);
-        SaveGame.MsgPrint($"You see {oName}.");
+        Game.MsgPrint($"You see {oName}.");
     }
 
     /// <summary>
@@ -211,12 +211,12 @@ internal class Monster : IItemContainer
         }
         string desc;
         string name = Race.Name;
-        if (SaveGame.HallucinationsTimer.Value != 0)
+        if (Game.HallucinationsTimer.Value != 0)
         {
             MonsterRace halluRace;
             do
             {
-                halluRace = SaveGame.SingletonRepository.MonsterRaces[SaveGame.DieRoll(SaveGame.SingletonRepository.MonsterRaces.Count - 2)];
+                halluRace = Game.SingletonRepository.MonsterRaces[Game.DieRoll(Game.SingletonRepository.MonsterRaces.Count - 2)];
             } while (halluRace.Unique);
             string sillyName = halluRace.Name;
             name = sillyName;
@@ -356,7 +356,7 @@ internal class Monster : IItemContainer
         }
         else
         {
-            if (Race.Unique && SaveGame.HallucinationsTimer.Value == 0)
+            if (Race.Unique && Game.HallucinationsTimer.Value == 0)
             {
                 desc = name;
             }
@@ -384,7 +384,7 @@ internal class Monster : IItemContainer
         int power = 100;
         if (necro)
         {
-            this.SaveGame.MsgPrint("Your sanity is shaken by reading the Necronomicon!");
+            this.Game.MsgPrint("Your sanity is shaken by reading the Necronomicon!");
         }
         else
         {
@@ -401,7 +401,7 @@ internal class Monster : IItemContainer
                     power /= 2;
                 }
             }
-            if (!this.SaveGame.HackMind)
+            if (!this.Game.HackMind)
             {
                 return;
             }
@@ -413,103 +413,103 @@ internal class Monster : IItemContainer
             {
                 return;
             }
-            if (SmFriendly && SaveGame.DieRoll(8) != 1)
+            if (SmFriendly && Game.DieRoll(8) != 1)
             {
                 return;
             }
-            if (SaveGame.DieRoll(power) < SaveGame.SkillSavingThrow)
+            if (Game.DieRoll(power) < Game.SkillSavingThrow)
             {
                 return;
             }
-            if (SaveGame.HallucinationsTimer.Value != 0)
+            if (Game.HallucinationsTimer.Value != 0)
             {
-                this.SaveGame.MsgPrint($"You behold the {this.SaveGame.SingletonRepository.FunnyDescriptions.ToWeightedRandom().ChooseOrDefault()} visage of {mName}!");
-                if (SaveGame.DieRoll(3) == 1)
+                this.Game.MsgPrint($"You behold the {this.Game.SingletonRepository.FunnyDescriptions.ToWeightedRandom().ChooseOrDefault()} visage of {mName}!");
+                if (Game.DieRoll(3) == 1)
                 {
-                    this.SaveGame.MsgPrint(this.SaveGame.SingletonRepository.FunnyComments.ToWeightedRandom().ChooseOrDefault());
-                    SaveGame.HallucinationsTimer.AddTimer(SaveGame.DieRoll(Race.Level));
+                    this.Game.MsgPrint(this.Game.SingletonRepository.FunnyComments.ToWeightedRandom().ChooseOrDefault());
+                    Game.HallucinationsTimer.AddTimer(Game.DieRoll(Race.Level));
                 }
                 return;
             }
-            this.SaveGame.MsgPrint($"You behold the {this.SaveGame.SingletonRepository.HorrificDescriptions.ToWeightedRandom().ChooseOrDefault()} visage of {mName}!");
+            this.Game.MsgPrint($"You behold the {this.Game.SingletonRepository.HorrificDescriptions.ToWeightedRandom().ChooseOrDefault()} visage of {mName}!");
             Race.Knowledge.Characteristics.EldritchHorror = true;
 
             // Allow the race to resist.
-            if (SaveGame.DieRoll(100) < SaveGame.Race.ChanceOfSanityBlastImmunity(SaveGame.ExperienceLevel.Value))
+            if (Game.DieRoll(100) < Game.Race.ChanceOfSanityBlastImmunity(Game.ExperienceLevel.Value))
             {
                 return;
             }
         }
-        if (SaveGame.DieRoll(power) < SaveGame.SkillSavingThrow)
+        if (Game.DieRoll(power) < Game.SkillSavingThrow)
         {
-            if (!SaveGame.HasConfusionResistance)
+            if (!Game.HasConfusionResistance)
             {
-                SaveGame.ConfusedTimer.AddTimer(SaveGame.RandomLessThan(4) + 4);
+                Game.ConfusedTimer.AddTimer(Game.RandomLessThan(4) + 4);
             }
-            if (!SaveGame.HasChaosResistance && SaveGame.DieRoll(3) == 1)
+            if (!Game.HasChaosResistance && Game.DieRoll(3) == 1)
             {
-                SaveGame.HallucinationsTimer.AddTimer(SaveGame.RandomLessThan(250) + 150);
+                Game.HallucinationsTimer.AddTimer(Game.RandomLessThan(250) + 150);
             }
             return;
         }
-        if (SaveGame.DieRoll(power) < SaveGame.SkillSavingThrow)
+        if (Game.DieRoll(power) < Game.SkillSavingThrow)
         {
-            SaveGame.TryDecreasingAbilityScore(Ability.Intelligence);
-            SaveGame.TryDecreasingAbilityScore(Ability.Wisdom);
+            Game.TryDecreasingAbilityScore(Ability.Intelligence);
+            Game.TryDecreasingAbilityScore(Ability.Wisdom);
             return;
         }
-        if (SaveGame.DieRoll(power) < SaveGame.SkillSavingThrow)
+        if (Game.DieRoll(power) < Game.SkillSavingThrow)
         {
-            if (!SaveGame.HasConfusionResistance)
+            if (!Game.HasConfusionResistance)
             {
-                SaveGame.ConfusedTimer.AddTimer(SaveGame.RandomLessThan(4) + 4);
+                Game.ConfusedTimer.AddTimer(Game.RandomLessThan(4) + 4);
             }
-            if (!SaveGame.HasFreeAction)
+            if (!Game.HasFreeAction)
             {
-                SaveGame.ParalysisTimer.AddTimer(SaveGame.RandomLessThan(4) + 4);
+                Game.ParalysisTimer.AddTimer(Game.RandomLessThan(4) + 4);
             }
-            while (SaveGame.RandomLessThan(100) > SaveGame.SkillSavingThrow)
+            while (Game.RandomLessThan(100) > Game.SkillSavingThrow)
             {
-                SaveGame.TryDecreasingAbilityScore(Ability.Intelligence);
+                Game.TryDecreasingAbilityScore(Ability.Intelligence);
             }
-            while (SaveGame.RandomLessThan(100) > SaveGame.SkillSavingThrow)
+            while (Game.RandomLessThan(100) > Game.SkillSavingThrow)
             {
-                SaveGame.TryDecreasingAbilityScore(Ability.Wisdom);
+                Game.TryDecreasingAbilityScore(Ability.Wisdom);
             }
-            if (!SaveGame.HasChaosResistance)
+            if (!Game.HasChaosResistance)
             {
-                SaveGame.HallucinationsTimer.AddTimer(SaveGame.RandomLessThan(250) + 150);
+                Game.HallucinationsTimer.AddTimer(Game.RandomLessThan(250) + 150);
             }
             return;
         }
-        if (SaveGame.DieRoll(power) < SaveGame.SkillSavingThrow)
+        if (Game.DieRoll(power) < Game.SkillSavingThrow)
         {
-            if (SaveGame.DecreaseAbilityScore(Ability.Intelligence, 10, true))
+            if (Game.DecreaseAbilityScore(Ability.Intelligence, 10, true))
             {
                 happened = true;
             }
-            if (SaveGame.DecreaseAbilityScore(Ability.Wisdom, 10, true))
+            if (Game.DecreaseAbilityScore(Ability.Wisdom, 10, true))
             {
                 happened = true;
             }
             if (happened)
             {
-                this.SaveGame.MsgPrint("You feel much less sane than before.");
+                this.Game.MsgPrint("You feel much less sane than before.");
             }
             return;
         }
-        if (SaveGame.DieRoll(power) < SaveGame.SkillSavingThrow)
+        if (Game.DieRoll(power) < Game.SkillSavingThrow)
         {
-            if (this.SaveGame.LoseAllInfo())
+            if (this.Game.LoseAllInfo())
             {
-                this.SaveGame.MsgPrint("You forget everything in your utmost terror!");
+                this.Game.MsgPrint("You forget everything in your utmost terror!");
             }
             return;
         }
-        this.SaveGame.MsgPrint("The exposure to eldritch forces warps you.");
-        SaveGame.RunScript(nameof(GainMutationScript));
-        this.SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
-        this.SaveGame.HandleStuff();
+        this.Game.MsgPrint("The exposure to eldritch forces warps you.");
+        Game.RunScript(nameof(GainMutationScript));
+        this.Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
+        this.Game.HandleStuff();
     }
 
     /// <summary>
@@ -526,9 +526,9 @@ internal class Monster : IItemContainer
         {
             // if the player aggravates, notice them more
             uint notice = 0;
-            if (!SaveGame.HasAggravation)
+            if (!Game.HasAggravation)
             {
-                notice = (uint)SaveGame.RandomLessThan(1024);
+                notice = (uint)Game.RandomLessThan(1024);
             }
             // If the player makes too much noise (or aggravates)
             if (notice * notice * notice <= noise)
@@ -539,7 +539,7 @@ internal class Monster : IItemContainer
                     wakeAmount = 100 / DistanceFromPlayer;
                 }
                 // Aggravate wakes the monster fully, if it notices at all
-                if (SaveGame.HasAggravation)
+                if (Game.HasAggravation)
                 {
                     wakeAmount = SleepLevel;
                 }
@@ -561,7 +561,7 @@ internal class Monster : IItemContainer
                     if (IsVisible)
                     {
                         string monsterName = Name;
-                        SaveGame.MsgPrint($"{monsterName} wakes up.");
+                        Game.MsgPrint($"{monsterName} wakes up.");
                         // And let the player notice how easily we wake
                         if (Race.Knowledge.RWake < Constants.MaxUchar)
                         {
@@ -576,12 +576,12 @@ internal class Monster : IItemContainer
                 return;
             }
         }
-        // If we're stunned, then reduce our stun saveGame.Level
+        // If we're stunned, then reduce our stun game.Level
         if (StunLevel != 0)
         {
             int stunRelief = 1;
-            // We have a saveGame.Level-based chance of shaking off the stun completely
-            if (SaveGame.RandomLessThan(5000) <= Race.Level * Race.Level)
+            // We have a game.Level-based chance of shaking off the stun completely
+            if (Game.RandomLessThan(5000) <= Race.Level * Race.Level)
             {
                 stunRelief = StunLevel;
             }
@@ -598,7 +598,7 @@ internal class Monster : IItemContainer
                 if (IsVisible)
                 {
                     string monsterName = Name;
-                    SaveGame.MsgPrint($"{monsterName} is no longer stunned.");
+                    Game.MsgPrint($"{monsterName} is no longer stunned.");
                 }
             }
             // If we are still stunned, don't take a turn
@@ -610,8 +610,8 @@ internal class Monster : IItemContainer
         // If we're confused
         if (ConfusionLevel != 0)
         {
-            // Reduce our confusion by an amount based on our saveGame.Level
-            int confusionRelief = SaveGame.DieRoll((Race.Level / 10) + 1);
+            // Reduce our confusion by an amount based on our game.Level
+            int confusionRelief = Game.DieRoll((Race.Level / 10) + 1);
             if (ConfusionLevel > confusionRelief)
             {
                 ConfusionLevel -= confusionRelief;
@@ -623,18 +623,18 @@ internal class Monster : IItemContainer
                 if (IsVisible)
                 {
                     string monsterName = Name;
-                    SaveGame.MsgPrint($"{monsterName} is no longer confused.");
+                    Game.MsgPrint($"{monsterName} is no longer confused.");
                 }
             }
         }
         // If we're curently friendly and the player aggravates, then stop being friendly
         bool getsAngry = false;
-        if (SmFriendly && SaveGame.HasAggravation)
+        if (SmFriendly && Game.HasAggravation)
         {
             getsAngry = true;
         }
         // If we're unique, don't stay friendly
-        if (SmFriendly && !SaveGame.IsWizard.Value && Race.Unique)
+        if (SmFriendly && !Game.IsWizard.Value && Race.Unique)
         {
             getsAngry = true;
         }
@@ -642,14 +642,14 @@ internal class Monster : IItemContainer
         if (getsAngry)
         {
             string monsterName = Name;
-            SaveGame.MsgPrint($"{monsterName} suddenly becomes hostile!");
+            Game.MsgPrint($"{monsterName} suddenly becomes hostile!");
             SmFriendly = false;
         }
         // Are we afraid?
         if (FearLevel != 0)
         {
-            // Reduce our fear by an amount based on our saveGame.Level
-            int fearRelief = SaveGame.DieRoll((Race.Level / 10) + 1);
+            // Reduce our fear by an amount based on our game.Level
+            int fearRelief = Game.DieRoll((Race.Level / 10) + 1);
             if (FearLevel > fearRelief)
             {
                 FearLevel -= fearRelief;
@@ -662,14 +662,14 @@ internal class Monster : IItemContainer
                 {
                     string monsterName = Name;
                     string monsterPossessive = PossessiveName;
-                    SaveGame.MsgPrint($"{monsterName} recovers {monsterPossessive} courage.");
+                    Game.MsgPrint($"{monsterName} recovers {monsterPossessive} courage.");
                 }
             }
         }
         int oldY = MapY;
         int oldX = MapX;
         // If it's suitable for us to reproduce
-        if (Race.Multiply && SaveGame.NumRepro < Constants.MaxRepro && Generation < 10)
+        if (Race.Multiply && Game.NumRepro < Constants.MaxRepro && Generation < 10)
         {
             // Find how many spaces we've got near us
             int k;
@@ -678,7 +678,7 @@ internal class Monster : IItemContainer
             {
                 for (int x = oldX - 1; x <= oldX + 1; x++)
                 {
-                    if (SaveGame.Grid[y][x].MonsterIndex != 0)
+                    if (Game.Grid[y][x].MonsterIndex != 0)
                     {
                         k++;
                     }
@@ -687,9 +687,9 @@ internal class Monster : IItemContainer
             // If we're friendly, then our babies are friendly too
             bool isFriend = SmFriendly;
             // If there's lots of space, then pop out a baby
-            if (k < 4 && (k == 0 || SaveGame.RandomLessThan(k * Constants.MonMultAdj) == 0))
+            if (k < 4 && (k == 0 || Game.RandomLessThan(k * Constants.MonMultAdj) == 0))
             {
-                if (SaveGame.MultiplyMonster(this, isFriend, false))
+                if (Game.MultiplyMonster(this, isFriend, false))
                 {
                     // If the player saw this, they now know we can multiply
                     if (IsVisible)
@@ -731,7 +731,7 @@ internal class Monster : IItemContainer
         }
         // If we move randomly most of the time, have a high chance of putting four random moves
         // in the matrix
-        else if (Race.RandomMove50 && Race.RandomMove25 && SaveGame.RandomLessThan(100) < 75)
+        else if (Race.RandomMove50 && Race.RandomMove25 && Game.RandomLessThan(100) < 75)
         {
             // If the player sees us, then they learn about our random movement
             if (IsVisible)
@@ -745,7 +745,7 @@ internal class Monster : IItemContainer
             potentialMoves[3] = 5;
         }
         // If we have a moderate chance of moving randomly, maybe put four random moves in our matrix
-        else if (Race.RandomMove50 && SaveGame.RandomLessThan(100) < 50)
+        else if (Race.RandomMove50 && Game.RandomLessThan(100) < 50)
         {
             // If the player sees us, then they learn about our random movement
             if (IsVisible)
@@ -758,7 +758,7 @@ internal class Monster : IItemContainer
             potentialMoves[3] = 5;
         }
         // If we have a low chance of moving randomly, maybe put four random moves in our matrix
-        else if (Race.RandomMove25 && SaveGame.RandomLessThan(100) < 25)
+        else if (Race.RandomMove25 && Game.RandomLessThan(100) < 25)
         {
             // If the player sees us, then they learn about our random movement
             if (IsVisible)
@@ -775,7 +775,7 @@ internal class Monster : IItemContainer
         {
             if (DistanceFromPlayer > Constants.FollowDistance)
             {
-                GetMovesTowardsPlayer(SaveGame, potentialMoves);
+                GetMovesTowardsPlayer(Game, potentialMoves);
             }
             else
             {
@@ -785,14 +785,14 @@ internal class Monster : IItemContainer
                 potentialMoves[2] = 5;
                 potentialMoves[3] = 5;
                 // Possibly override these random moves with attacks on enemies
-                GetMovesTowardsEnemyMonsters(SaveGame, potentialMoves);
+                GetMovesTowardsEnemyMonsters(Game, potentialMoves);
             }
         }
         // If all the above fail, we must be a hostile monster who wants to move towards the player
         else
         {
             // If we fail to get sensible moves, give up on our turn
-            if (!GetMovesTowardsPlayer(SaveGame, potentialMoves))
+            if (!GetMovesTowardsPlayer(Game, potentialMoves))
             {
                 return;
             }
@@ -815,25 +815,25 @@ internal class Monster : IItemContainer
             // Moves of '5' (i.e. 'stay still') are placeholders for random moves
             if (d == 5)
             {
-                d = SaveGame.OrderedDirection[SaveGame.RandomLessThan(8)];
+                d = Game.OrderedDirection[Game.RandomLessThan(8)];
             }
             // Work out where the move will take us
-            int newY = oldY + SaveGame.KeypadDirectionYOffset[d];
-            int newX = oldX + SaveGame.KeypadDirectionXOffset[d];
-            GridTile tile = SaveGame.Grid[newY][newX];
-            Monster monsterInTargetTile = SaveGame.Monsters[tile.MonsterIndex];
+            int newY = oldY + Game.KeypadDirectionYOffset[d];
+            int newX = oldX + Game.KeypadDirectionXOffset[d];
+            GridTile tile = Game.Grid[newY][newX];
+            Monster monsterInTargetTile = Game.Monsters[tile.MonsterIndex];
             // If we can simply move there, then we will do so
-            if (SaveGame.GridPassable(newY, newX))
+            if (Game.GridPassable(newY, newX))
             {
                 doMove = true;
             }
             // Bushes don't actually block us, so we can move there too
-            else if (SaveGame.Grid[newY][newX].FeatureType is BushTile)
+            else if (Game.Grid[newY][newX].FeatureType is BushTile)
             {
                 doMove = true;
             }
             // We can always attack the player, even if the move would otherwse not be allowed
-            else if (newY == SaveGame.MapY && newX == SaveGame.MapX)
+            else if (newY == Game.MapY && newX == Game.MapX)
             {
                 doMove = true;
             }
@@ -859,15 +859,15 @@ internal class Monster : IItemContainer
                 doMove = true;
                 didKillWall = true;
                 // Occasionally make a noise if we're going to tunnel
-                if (SaveGame.DieRoll(20) == 1)
+                if (Game.DieRoll(20) == 1)
                 {
-                    SaveGame.MsgPrint("There is a grinding sound.");
+                    Game.MsgPrint("There is a grinding sound.");
                 }
                 // Remove the wall (and the player's memory of it) and remind ourselves to
                 // update the view if the player can see it
                 tile.TileFlags.Clear(GridTile.PlayerMemorized);
-                SaveGame.RevertTileToBackground(newY, newX);
-                if (SaveGame.PlayerHasLosBold(newY, newX))
+                Game.RevertTileToBackground(newY, newX);
+                if (Game.PlayerHasLosBold(newY, newX))
                 {
                     doView = true;
                 }
@@ -890,9 +890,9 @@ internal class Monster : IItemContainer
                     else if (tile.FeatureType.IsClosedDoor)
                     {
                         int k = tile.FeatureType.LockLevel;
-                        if (SaveGame.RandomLessThan(Health / 10) > k)
+                        if (Game.RandomLessThan(Health / 10) > k)
                         {
-                            SaveGame.CaveSetFeat(newY, newX, SaveGame.SingletonRepository.Tiles.Get("LockedDoor0"));
+                            Game.CaveSetFeat(newY, newX, Game.SingletonRepository.Tiles.Get("LockedDoor0"));
                             mayBash = false;
                         }
                     }
@@ -902,9 +902,9 @@ internal class Monster : IItemContainer
                 {
                     int k = tile.FeatureType.LockLevel;
                     // If we succeeded, let the player hear it
-                    if (SaveGame.RandomLessThan(Health / 10) > k)
+                    if (Game.RandomLessThan(Health / 10) > k)
                     {
-                        SaveGame.MsgPrint("You hear a door burst open!");
+                        Game.MsgPrint("You hear a door burst open!");
                         didBashDoor = true;
                         doMove = true;
                     }
@@ -913,16 +913,16 @@ internal class Monster : IItemContainer
                 // or broken one
                 if (didOpenDoor || didBashDoor)
                 {
-                    if (didBashDoor && SaveGame.RandomLessThan(100) < 50)
+                    if (didBashDoor && Game.RandomLessThan(100) < 50)
                     {
-                        SaveGame.CaveSetFeat(newY, newX, SaveGame.SingletonRepository.Tiles.Get(nameof(BrokenDoorTile)));
+                        Game.CaveSetFeat(newY, newX, Game.SingletonRepository.Tiles.Get(nameof(BrokenDoorTile)));
                     }
                     else
                     {
-                        SaveGame.CaveSetFeat(newY, newX, SaveGame.SingletonRepository.Tiles.Get(nameof(OpenDoorTile)));
+                        Game.CaveSetFeat(newY, newX, Game.SingletonRepository.Tiles.Get(nameof(OpenDoorTile)));
                     }
                     // If the player can see, remind ourselves to update the view later
-                    if (SaveGame.PlayerHasLosBold(newY, newX))
+                    if (Game.PlayerHasLosBold(newY, newX))
                     {
                         doView = true;
                     }
@@ -933,16 +933,16 @@ internal class Monster : IItemContainer
             {
                 // Assume we're not moving
                 doMove = false;
-                // We have a chance of breaking the sign based on our saveGame.Level
-                if (SaveGame.DieRoll(BreakElderSign) < Race.Level)
+                // We have a chance of breaking the sign based on our game.Level
+                if (Game.DieRoll(BreakElderSign) < Race.Level)
                 {
                     // If the player knows the sign is there, let them know it was broken
                     if (tile.TileFlags.IsSet(GridTile.PlayerMemorized))
                     {
-                        SaveGame.MsgPrint("The Elder Sign is broken!");
+                        Game.MsgPrint("The Elder Sign is broken!");
                     }
                     tile.TileFlags.Clear(GridTile.PlayerMemorized);
-                    SaveGame.RevertTileToBackground(newY, newX);
+                    Game.RevertTileToBackground(newY, newX);
                     // Breaking the sign means we can move after all
                     doMove = true;
                 }
@@ -953,35 +953,35 @@ internal class Monster : IItemContainer
                 // Assume we're not moving
                 doMove = false;
                 // We have a chance to break the sign
-                if (SaveGame.DieRoll(Constants.BreakYellowSign) < Race.Level)
+                if (Game.DieRoll(Constants.BreakYellowSign) < Race.Level)
                 {
                     // If the player knows about the sign, let them know it was broken
                     if (tile.TileFlags.IsSet(GridTile.PlayerMemorized))
                     {
                         // If the player was on the sign, hurt them
-                        if (newY == SaveGame.MapY && newX == SaveGame.MapX)
+                        if (newY == Game.MapY && newX == Game.MapX)
                         {
-                            SaveGame.MsgPrint("The rune explodes!");
-                            SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(ManaProjectile)), 0, 2 * ((SaveGame.ExperienceLevel.Value / 2) + SaveGame.DiceRoll(7, 7)), 2);
+                            Game.MsgPrint("The rune explodes!");
+                            Game.FireBall(Game.SingletonRepository.Projectiles.Get(nameof(ManaProjectile)), 0, 2 * ((Game.ExperienceLevel.Value / 2) + Game.DiceRoll(7, 7)), 2);
                         }
                         else
                         {
-                            SaveGame.MsgPrint("An Yellow Sign was disarmed.");
+                            Game.MsgPrint("An Yellow Sign was disarmed.");
                         }
                     }
                     tile.TileFlags.Clear(GridTile.PlayerMemorized);
-                    SaveGame.RevertTileToBackground(newY, newX);
+                    Game.RevertTileToBackground(newY, newX);
                     // We can do the move after all
                     doMove = true;
                 }
             }
             // If we're going to attack the player, but our race never attacks, then cancel the move
-            if (doMove && newY == SaveGame.MapY && newX == SaveGame.MapX && Race.NeverAttack)
+            if (doMove && newY == Game.MapY && newX == Game.MapX && Race.NeverAttack)
             {
                 doMove = false;
             }
             // If we're trying to move onto the player, then attack them instead
-            if (doMove && newY == SaveGame.MapY && newX == SaveGame.MapX)
+            if (doMove && newY == Game.MapY && newX == Game.MapX)
             {
                 MonsterAttackPlayer();
                 doMove = false;
@@ -995,13 +995,13 @@ internal class Monster : IItemContainer
                 doMove = false;
                 // If we can trample other monsters on our team and we're tougher than the one
                 // that's in our way...
-                if (Race.KillBody && Race.Mexp > targetMonsterRace.Mexp && SaveGame.GridPassable(newY, newX) && !(SmFriendly && monsterInTargetTile.SmFriendly))
+                if (Race.KillBody && Race.Mexp > targetMonsterRace.Mexp && Game.GridPassable(newY, newX) && !(SmFriendly && monsterInTargetTile.SmFriendly))
                 {
                     // Remove the other monster and replace it
                     doMove = true;
                     didKillBody = true;
-                    SaveGame.DeleteMonster(newY, newX);
-                    monsterInTargetTile = SaveGame.Monsters[tile.MonsterIndex];
+                    Game.DeleteMonster(newY, newX);
+                    monsterInTargetTile = Game.Monsters[tile.MonsterIndex];
                 }
                 // If we're not on the same team as the other monster or we're confused
                 else if (SmFriendly != monsterInTargetTile.SmFriendly || ConfusionLevel != 0)
@@ -1018,7 +1018,7 @@ internal class Monster : IItemContainer
                 }
                 // If the other monster is on our team and we can't trample it, maybe we can
                 // push past
-                else if (Race.MoveBody && Race.Mexp > targetMonsterRace.Mexp && SaveGame.GridPassable(newY, newX) && SaveGame.GridPassable(MapY, MapX))
+                else if (Race.MoveBody && Race.Mexp > targetMonsterRace.Mexp && Game.GridPassable(newY, newX) && Game.GridPassable(MapY, MapX))
                 {
                     doMove = true;
                     didMoveBody = true;
@@ -1034,29 +1034,29 @@ internal class Monster : IItemContainer
             {
                 doTurn = true;
                 // Swap positions with the monster that is in the tile we're aiming for
-                SaveGame.Grid[oldY][oldX].MonsterIndex = tile.MonsterIndex;
+                Game.Grid[oldY][oldX].MonsterIndex = tile.MonsterIndex;
                 // If it was actually a monster then update it accordingly
                 if (tile.MonsterIndex != 0)
                 {
                     monsterInTargetTile.MapY = oldY;
                     monsterInTargetTile.MapX = oldX;
-                    SaveGame.UpdateMonsterVisibility(tile.MonsterIndex, true);
+                    Game.UpdateMonsterVisibility(tile.MonsterIndex, true);
                     // Pushing past something wakes it up
-                    SaveGame.Monsters[tile.MonsterIndex].SleepLevel = 0;
+                    Game.Monsters[tile.MonsterIndex].SleepLevel = 0;
                 }
                 // Update our position
                 tile.MonsterIndex = GetMonsterIndex();
                 MapY = newY;
                 MapX = newX;
-                SaveGame.UpdateMonsterVisibility(GetMonsterIndex(), true);
-                SaveGame.RedrawSingleLocation(oldY, oldX);
-                SaveGame.RedrawSingleLocation(newY, newX);
-                // If we are hostile and the player saw us move, then saveGame.Disturb them
+                Game.UpdateMonsterVisibility(GetMonsterIndex(), true);
+                Game.RedrawSingleLocation(oldY, oldX);
+                Game.RedrawSingleLocation(newY, newX);
+                // If we are hostile and the player saw us move, then game.Disturb them
                 if (IsVisible && (IndividualMonsterFlags & Constants.MflagView) != 0)
                 {
                     if (!SmFriendly)
                     {
-                        SaveGame.Disturb(false);
+                        Game.Disturb(false);
                     }
                 }
                 // Check through the items in the tile we just entered
@@ -1116,9 +1116,9 @@ internal class Monster : IItemContainer
                             if (Race.TakeItem)
                             {
                                 didTakeItem = true;
-                                if (IsVisible && SaveGame.PlayerHasLosBold(newY, newX))
+                                if (IsVisible && Game.PlayerHasLosBold(newY, newX))
                                 {
-                                    SaveGame.MsgPrint($"{monsterName} tries to pick up {itemName}, but fails.");
+                                    Game.MsgPrint($"{monsterName} tries to pick up {itemName}, but fails.");
                                 }
                             }
                         }
@@ -1126,12 +1126,12 @@ internal class Monster : IItemContainer
                         else if (Race.TakeItem)
                         {
                             didTakeItem = true;
-                            if (SaveGame.PlayerHasLosBold(newY, newX))
+                            if (Game.PlayerHasLosBold(newY, newX))
                             {
-                                SaveGame.MsgPrint($"{monsterName} picks up {itemName}.");
+                                Game.MsgPrint($"{monsterName} picks up {itemName}.");
                             }
                             // And pick up the actual item
-                            SaveGame.ExciseObject(item);
+                            Game.ExciseObject(item);
                             item.Marked = false;
                             item.Y = 0;
                             item.X = 0;
@@ -1143,11 +1143,11 @@ internal class Monster : IItemContainer
                             // We can't pick up the item, so just stomp on it
                             didKillItem = true;
                             // If the player saw us, let them know
-                            if (SaveGame.PlayerHasLosBold(newY, newX))
+                            if (Game.PlayerHasLosBold(newY, newX))
                             {
-                                SaveGame.MsgPrint($"{monsterName} crushes {itemName}.");
+                                Game.MsgPrint($"{monsterName} crushes {itemName}.");
                             }
-                            SaveGame.DeleteObject(item);
+                            Game.DeleteObject(item);
                         }
                     }
                 }
@@ -1169,10 +1169,10 @@ internal class Monster : IItemContainer
         // Update the view if necessary
         if (doView)
         {
-            SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateScentFlaggedAction)).Set();
-            SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateMonstersFlaggedAction)).Set();
-            SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateLightFlaggedAction)).Set();
-            SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateViewFlaggedAction)).Set();
+            Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateScentFlaggedAction)).Set();
+            Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateMonstersFlaggedAction)).Set();
+            Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateLightFlaggedAction)).Set();
+            Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateViewFlaggedAction)).Set();
         }
         // If we did something unusual and the player saw, let them remember we can do that
         if (IsVisible)
@@ -1217,7 +1217,7 @@ internal class Monster : IItemContainer
             if (IsVisible)
             {
                 string monsterName = Name;
-                SaveGame.MsgPrint($"{monsterName} turns to fight!");
+                Game.MsgPrint($"{monsterName} turns to fight!");
             }
         }
     }
@@ -1229,7 +1229,7 @@ internal class Monster : IItemContainer
     /// <returns> True if the attack happened, false if not </returns>
     private bool AttackAnotherMonster(int targetIndex)
     {
-        Monster target = SaveGame.Monsters[targetIndex];
+        Monster target = Game.Monsters[targetIndex];
         MonsterRace targetRace = target.Race;
         int ySaver = target.MapY;
         int xSaver = target.MapX;
@@ -1246,7 +1246,7 @@ internal class Monster : IItemContainer
         // If the player can't see either monster, they just hear noise
         if (!(IsVisible || target.IsVisible))
         {
-            SaveGame.MsgPrint("You hear noise.");
+            Game.MsgPrint("You hear noise.");
         }
         // We have up to four attacks
         for (int attackNumber = 0; attackNumber < Race.Attacks.Length; attackNumber++)
@@ -1281,7 +1281,7 @@ internal class Monster : IItemContainer
             // If we hit the monster, describe the type of hit
             if (effect == null || CheckHitMonsterVersusMonster(effect.Power, monsterLevel, armorClass))
             {
-                SaveGame.Disturb(true);
+                Game.Disturb(true);
                 if (method.AttackAwakensTarget)
                 {
                     target.SleepLevel = 0;
@@ -1291,12 +1291,12 @@ internal class Monster : IItemContainer
                 if (IsVisible || target.IsVisible)
                 {
                     string monsterAction = String.Format(method.MonsterAction, monsterName);
-                    SaveGame.MsgPrint($"{monsterName} {monsterName}.");
+                    Game.MsgPrint($"{monsterName} {monsterName}.");
                 }
                 obvious = true;
-                damage = this.SaveGame.DiceRoll(dDice, dSide);
+                damage = this.Game.DiceRoll(dDice, dSide);
                 // Default to a missile attack
-                Projectile pt = SaveGame.SingletonRepository.Projectiles.Get(nameof(MissileProjectile));
+                Projectile pt = Game.SingletonRepository.Projectiles.Get(nameof(MissileProjectile));
                 // Choose the correct type of attack to display, as well as any other special
                 // effects for the attack
                 if (effect == null)
@@ -1310,7 +1310,7 @@ internal class Monster : IItemContainer
                 // Implement the attack as a projectile
                 if (pt != null)
                 {
-                    SaveGame.Project(GetMonsterIndex(), 0, target.MapY, target.MapX, damage, pt, ProjectionFlag.ProjectKill | ProjectionFlag.ProjectStop);
+                    Game.Project(GetMonsterIndex(), 0, target.MapY, target.MapX, damage, pt, ProjectionFlag.ProjectKill | ProjectionFlag.ProjectStop);
                     // If we touched the target we might get burned or zapped
                     if (method.AttackTouchesTarget)
                     {
@@ -1321,13 +1321,13 @@ internal class Monster : IItemContainer
                                 // Auras prevent us blinking away
                                 blinked = false;
                                 // The player may see and learn that the target has the aura
-                                SaveGame.MsgPrint($"{monsterName} is suddenly very hot!");
+                                Game.MsgPrint($"{monsterName} is suddenly very hot!");
                                 if (target.IsVisible)
                                 {
                                     targetRace.Knowledge.Characteristics.FireAura = true;
                                 }
                             }
-                            SaveGame.Project(targetIndex, 0, MapY, MapX, this.SaveGame.DiceRoll(1 + (targetRace.Level / 26), 1 + (targetRace.Level / 17)), SaveGame.SingletonRepository.Projectiles.Get(nameof(Projection.FireProjectile)), ProjectionFlag.ProjectKill | ProjectionFlag.ProjectStop);
+                            Game.Project(targetIndex, 0, MapY, MapX, this.Game.DiceRoll(1 + (targetRace.Level / 26), 1 + (targetRace.Level / 17)), Game.SingletonRepository.Projectiles.Get(nameof(Projection.FireProjectile)), ProjectionFlag.ProjectKill | ProjectionFlag.ProjectStop);
                         }
                         if (targetRace.LightningAura && !Race.ImmuneLightning)
                         {
@@ -1336,14 +1336,14 @@ internal class Monster : IItemContainer
                                 // Auras prevent us blinking away
                                 blinked = false;
                                 // The player may see and learn that the target has the aura
-                                SaveGame.MsgPrint($"{monsterName} gets zapped!");
+                                Game.MsgPrint($"{monsterName} gets zapped!");
                                 if (target.IsVisible)
                                 {
                                     targetRace.Knowledge.Characteristics.LightningAura = true;
                                 }
                             }
-                            SaveGame.Project(targetIndex, 0, MapY, MapX, this.SaveGame.DiceRoll(1 + (targetRace.Level / 26), 1 + (targetRace.Level / 17)),
-                                SaveGame.SingletonRepository.Projectiles.Get(nameof(Projection.ElecProjectile)), ProjectionFlag.ProjectKill | ProjectionFlag.ProjectStop);
+                            Game.Project(targetIndex, 0, MapY, MapX, this.Game.DiceRoll(1 + (targetRace.Level / 26), 1 + (targetRace.Level / 17)),
+                                Game.SingletonRepository.Projectiles.Get(nameof(Projection.ElecProjectile)), ProjectionFlag.ProjectKill | ProjectionFlag.ProjectStop);
                         }
                     }
                 }
@@ -1353,8 +1353,8 @@ internal class Monster : IItemContainer
                 // We didn't hit, so just let the player know that if we are visible
                 if (method.AttackTouchesTarget && !method.RendersMissMessage && IsVisible)
                 {
-                    SaveGame.Disturb(false);
-                    SaveGame.MsgPrint($"{monsterName} misses {target.Name}.");
+                    Game.Disturb(false);
+                    Game.MsgPrint($"{monsterName} misses {target.Name}.");
                 }
             }
             // If the player saw what happened, they know more abouyt what attacks we have
@@ -1372,8 +1372,8 @@ internal class Monster : IItemContainer
         // If we stole and should therefore blink away, then do so.
         if (blinked)
         {
-            SaveGame.MsgPrint(IsVisible ? "The thief flees laughing!" : "You hear laughter!");
-            TeleportAway(SaveGame, (Constants.MaxSight * 2) + 5);
+            Game.MsgPrint(IsVisible ? "The thief flees laughing!" : "You hear laughter!");
+            TeleportAway(Game, (Constants.MaxSight * 2) + 5);
         }
         // We made the attack
         return true;
@@ -1409,13 +1409,13 @@ internal class Monster : IItemContainer
         {
             return false;
         }
-        if (SaveGame.RandomLessThan(100) >= chance)
+        if (Game.RandomLessThan(100) >= chance)
         {
             return false;
         }
 
         // Innate abilities are inherently less likely than actual spells
-        if (SaveGame.RandomLessThan(100) >= chance * 2)
+        if (Game.RandomLessThan(100) >= chance * 2)
         {
             noInnate = true;
         }
@@ -1427,7 +1427,7 @@ internal class Monster : IItemContainer
         }
 
         // If we have no line of sight to the player, don't cast a spell
-        if (!SaveGame.Projectable(MapY, MapX, SaveGame.MapY, SaveGame.MapX))
+        if (!Game.Projectable(MapY, MapX, Game.MapY, Game.MapX))
         {
             return false;
         }
@@ -1444,7 +1444,7 @@ internal class Monster : IItemContainer
 
         // If we're smart and badly injured, we may want to prioritise spells that disable the
         // player, summon help, or let us escape over spells that do direct damage
-        if (Race.Smart && Health < MaxHealth / 10 && SaveGame.RandomLessThan(100) < 50)
+        if (Race.Smart && Health < MaxHealth / 10 && Game.RandomLessThan(100) < 50)
         {
 
             spells = spells.Where((_spell) => _spell.IsIntelligent);
@@ -1457,7 +1457,7 @@ internal class Monster : IItemContainer
         }
 
         // Ditch any spells that we've seen the player resist before so we know they'll be ineffective
-        spells = RemoveIneffectiveSpells(SaveGame, spells);
+        spells = RemoveIneffectiveSpells(Game, spells);
 
         // If we just got rid of all our spells then don't cast
         if (spells.Count == 0)
@@ -1466,14 +1466,14 @@ internal class Monster : IItemContainer
         }
 
         // If we don't have a clean shot, and we're stupid, remove bolt spells
-        if (spells.Contains((_spell) => _spell.CanBeReflected) && !Race.Stupid && !SaveGame.CleanShot(MapY, MapX, SaveGame.MapY, SaveGame.MapX))
+        if (spells.Contains((_spell) => _spell.CanBeReflected) && !Race.Stupid && !Game.CleanShot(MapY, MapX, Game.MapY, Game.MapX))
         {
             spells = spells.Remove((_spell) => _spell.CanBeReflected);
         }
 
         // If there's nowhere around the player to put a summoned creature, then remove
         // summoning spells
-        if (spells.Contains((_spell) => _spell.SummonsHelp) && !Race.Stupid && !SaveGame.SummonPossible(SaveGame.MapY, SaveGame.MapX))
+        if (spells.Contains((_spell) => _spell.SummonsHelp) && !Race.Stupid && !Game.SummonPossible(Game.MapY, Game.MapX))
         {
             spells = spells.Remove((_spell) => _spell.SummonsHelp);
         }
@@ -1484,8 +1484,8 @@ internal class Monster : IItemContainer
             return false;
         }
 
-        // If the player's already dead or off the saveGame.Level, don't cast
-        if (!SaveGame.Playing || SaveGame.IsDead || SaveGame.NewLevelFlag)
+        // If the player's already dead or off the game.Level, don't cast
+        if (!Game.Playing || Game.IsDead || Game.NewLevelFlag)
         {
             return false;
         }
@@ -1510,30 +1510,30 @@ internal class Monster : IItemContainer
         }
 
         // Only check for actual spells - nothing is so stupid it fails to breathe
-        if (!thrownSpell.UsesBreathe && SaveGame.RandomLessThan(100) < failrate)
+        if (!thrownSpell.UsesBreathe && Game.RandomLessThan(100) < failrate)
         {
-            SaveGame.MsgPrint($"{monsterName} tries to cast a spell, but fails.");
+            Game.MsgPrint($"{monsterName} tries to cast a spell, but fails.");
             return true;
         }
 
         // Any action on the player automatically disturbs the player.
-        SaveGame.Disturb(true);
+        Game.Disturb(true);
 
         // Render a message to the player.
-        bool playerIsBlind = SaveGame.BlindnessTimer.Value != 0;
+        bool playerIsBlind = Game.BlindnessTimer.Value != 0;
         string? message = playerIsBlind ? thrownSpell.VsPlayerBlindMessage : thrownSpell.VsPlayerActionMessage(this);
         if (message != null)
         {
-            SaveGame.MsgPrint(message);
+            Game.MsgPrint(message);
         }
 
         // Execute the spell.
-        thrownSpell.ExecuteOnPlayer(SaveGame, this);
+        thrownSpell.ExecuteOnPlayer(Game, this);
 
         // Learn from the spell.
         foreach (SpellResistantDetection smartLearn in thrownSpell.SmartLearn)
         {
-            SaveGame.UpdateSmartLearn(this, smartLearn);
+            Game.UpdateSmartLearn(this, smartLearn);
         }
 
         // If the player saw us cast the spell, let them learn we can do that
@@ -1551,7 +1551,7 @@ internal class Monster : IItemContainer
             }
         }
         // If we killed the player, let their descendants remember that
-        if (SaveGame.IsDead && Race.Knowledge.RDeaths < Constants.MaxShort)
+        if (Game.IsDead && Race.Knowledge.RDeaths < Constants.MaxShort)
         {
             Race.Knowledge.RDeaths++;
         }
@@ -1580,7 +1580,7 @@ internal class Monster : IItemContainer
         {
             return false;
         }
-        if (this.SaveGame.RandomLessThan(100) >= chance)
+        if (this.Game.RandomLessThan(100) >= chance)
         {
             return false;
         }
@@ -1588,10 +1588,10 @@ internal class Monster : IItemContainer
         MonsterSpellList monsterSpells = Race.Spells;
 
         // Look through the monster list to find a potential target
-        for (int i = 1; i < SaveGame.MMax; i++)
+        for (int i = 1; i < Game.MMax; i++)
         {
             int targetIndex = i;
-            Monster target = SaveGame.Monsters[targetIndex];
+            Monster target = Game.Monsters[targetIndex];
             MonsterRace targetRace = target.Race;
 
             // Can't cast spells on ourself
@@ -1619,14 +1619,14 @@ internal class Monster : IItemContainer
             }
 
             // If we don't have line of sight to the target, don't cast a spell
-            if (!SaveGame.Projectable(MapY, MapX, target.MapY, target.MapX))
+            if (!Game.Projectable(MapY, MapX, target.MapY, target.MapX))
             {
                 continue;
             }
 
             // If we're smart and badly injured, we may want to prioritise spells that disable
             // the target, summon help, or let us escape over spells that do direct damage
-            if (Race.Smart && Health < MaxHealth / 10 && this.SaveGame.RandomLessThan(100) < 50)
+            if (Race.Smart && Health < MaxHealth / 10 && this.Game.RandomLessThan(100) < 50)
             {
                 monsterSpells = monsterSpells.Where((MonsterSpell _monsterSpell) => _monsterSpell.IsIntelligent);
 
@@ -1638,7 +1638,7 @@ internal class Monster : IItemContainer
             }
             // If there's nowhere around the target to put a summoned creature, then remove
             // summoning spells
-            if (monsterSpells.Contains((MonsterSpell _monsterSpell) => _monsterSpell.SummonsHelp) && !Race.Stupid && !SaveGame.SummonPossible(target.MapY, target.MapX))
+            if (monsterSpells.Contains((MonsterSpell _monsterSpell) => _monsterSpell.SummonsHelp) && !Race.Stupid && !Game.SummonPossible(target.MapY, target.MapX))
             {
                 monsterSpells = monsterSpells.Remove((MonsterSpell _monsterSpell) => _monsterSpell.SummonsHelp);
             }
@@ -1650,14 +1650,14 @@ internal class Monster : IItemContainer
             }
 
             // If the player's already dead or off the level, don't cast
-            if (!SaveGame.Playing || SaveGame.IsDead || SaveGame.NewLevelFlag)
+            if (!Game.Playing || Game.IsDead || Game.NewLevelFlag)
             {
                 return false;
             }
 
             // Against other monsters we pick spells randomly
-            MonsterSpell thrownSpell = Race.Spells.ToWeightedRandom(SaveGame).ChooseOrDefault();
-            bool blind = SaveGame.BlindnessTimer.Value != 0;
+            MonsterSpell thrownSpell = Race.Spells.ToWeightedRandom(Game).ChooseOrDefault();
+            bool blind = Game.BlindnessTimer.Value != 0;
             bool seeTarget = !blind && target.IsVisible;
             bool seen = !blind && IsVisible;
             bool seeEither = seen || seeTarget;
@@ -1665,18 +1665,18 @@ internal class Monster : IItemContainer
             // If the player can see either monster, disturb the player.
             if (seeEither)
             {
-                SaveGame.Disturb(true);
+                Game.Disturb(true);
             }
 
             // Render a message to the player.
             string? message = !seeEither ? thrownSpell.VsMonsterUnseenMessage : thrownSpell.VsMonsterSeenMessage(this, target);
             if (message != null)
             {
-                SaveGame.MsgPrint(message);
+                Game.MsgPrint(message);
             }
 
             // Execute the action on the monster.
-            thrownSpell.ExecuteOnMonster(SaveGame, this, target);
+            thrownSpell.ExecuteOnMonster(Game, this, target);
 
             // Spells will wake up the target if it's asleep
             if (thrownSpell.WakesSleepingMonsters)
@@ -1707,7 +1707,7 @@ internal class Monster : IItemContainer
                 }
             }
             // If we killed the player, let their descendants remember that
-            if (SaveGame.IsDead && Race.Knowledge.RDeaths < Constants.MaxShort)
+            if (Game.IsDead && Race.Knowledge.RDeaths < Constants.MaxShort)
             {
                 Race.Knowledge.RDeaths++;
             }
@@ -1726,7 +1726,7 @@ internal class Monster : IItemContainer
     /// <param name="projectile"> The type of breath being used </param>
     /// <param name="damage"> The damage the breath will do </param>
     /// <param name="radius"> The radius of the attack, or zero for the default radius </param>
-    public void BreatheAtMonster(SaveGame saveGame, int targetY, int targetX, Projectile projectile, int damage, int radius)
+    public void BreatheAtMonster(Game game, int targetY, int targetX, Projectile projectile, int damage, int radius)
     {
         const ProjectionFlag projectionFlags = ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill;
         // Radius 0 means use the default radius
@@ -1736,7 +1736,7 @@ internal class Monster : IItemContainer
         }
         // Make the radius negative to indicate we need a cone instead of a ball
         radius = 0 - radius;
-        saveGame.Project(GetMonsterIndex(), radius, targetY, targetX, damage, projectile, projectionFlags);
+        game.Project(GetMonsterIndex(), radius, targetY, targetX, damage, projectile, projectionFlags);
     }
 
     /// <summary>
@@ -1746,14 +1746,14 @@ internal class Monster : IItemContainer
     /// <param name="projectile"> The type of effect the ball has </param>
     /// <param name="damage"> The damage done by the ball </param>
     /// <param name="radius"> The radius of the ball, or zero to use the default radius </param>
-    public void FireBallAtPlayer(SaveGame saveGame, Projectile projectile, int damage, int radius)
+    public void FireBallAtPlayer(Game game, Projectile projectile, int damage, int radius)
     {
         const ProjectionFlag projectionFlag = ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill;
         if (radius < 1)
         {
             radius = Race.Powerful ? 3 : 2;
         }
-        saveGame.Project(GetMonsterIndex(), radius, saveGame.MapY, saveGame.MapX, damage, projectile, projectionFlag);
+        game.Project(GetMonsterIndex(), radius, game.MapY, game.MapX, damage, projectile, projectionFlag);
     }
 
     /// <summary>
@@ -1765,7 +1765,7 @@ internal class Monster : IItemContainer
     /// <param name="radius">
     /// The (positive) radius of the breath weapon, or zero for the default radius
     /// </param>
-    public void BreatheAtPlayer(SaveGame saveGame, Projectile projectile, int damage, int radius)
+    public void BreatheAtPlayer(Game game, Projectile projectile, int damage, int radius)
     {
         const ProjectionFlag projectionFlags = ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill;
         // Radius 0 means use the default radius
@@ -1775,7 +1775,7 @@ internal class Monster : IItemContainer
         }
         // Make the radius negative to indicate we need a cone instead of a ball
         radius = 0 - radius;
-        saveGame.Project(GetMonsterIndex(), radius, saveGame.MapY, saveGame.MapX, damage, projectile, projectionFlags);
+        game.Project(GetMonsterIndex(), radius, game.MapY, game.MapX, damage, projectile, projectionFlags);
     }
 
     /// <summary>
@@ -1786,10 +1786,10 @@ internal class Monster : IItemContainer
     /// <param name="targetX"> The x coordinate of the target </param>
     /// <param name="projectile"> The projectile to be fired </param>
     /// <param name="damage"> The damage the projectile should do </param>
-    public void FireBoltAtMonster(SaveGame saveGame, int targetY, int targetX, Projectile projectile, int damage)
+    public void FireBoltAtMonster(Game game, int targetY, int targetX, Projectile projectile, int damage)
     {
         const ProjectionFlag projectionFlags = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;
-        saveGame.Project(GetMonsterIndex(), 0, targetY, targetX, damage, projectile, projectionFlags);
+        game.Project(GetMonsterIndex(), 0, targetY, targetX, damage, projectile, projectionFlags);
     }
 
     /// <summary>
@@ -1799,13 +1799,13 @@ internal class Monster : IItemContainer
     /// <param name="damage"> The damage taken </param>
     /// <param name="fear"> Whether the damage makes us afraid </param>
     /// <param name="note"> A special descriptive note that replaces the normal death message </param>
-    public void TakeDamageFromAnotherMonster(SaveGame saveGame, int damage, out bool fear, string note)
+    public void TakeDamageFromAnotherMonster(Game game, int damage, out bool fear, string note)
     {
         fear = false;
         // Track the monster that has just taken damage
-        if (saveGame.TrackedMonsterIndex == GetMonsterIndex())
+        if (game.TrackedMonsterIndex == GetMonsterIndex())
         {
-            SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawMonsterHealthFlaggedAction)).Set();
+            Game.SingletonRepository.FlaggedActions.Get(nameof(RedrawMonsterHealthFlaggedAction)).Set();
         }
         SleepLevel = 0;
         // Take the damage
@@ -1822,11 +1822,11 @@ internal class Monster : IItemContainer
             {
                 // Construct a message telling the player what happened
                 string monsterName = Name;
-                saveGame.PlaySound(SoundEffectEnum.MonsterDies);
+                game.PlaySound(SoundEffectEnum.MonsterDies);
                 // Append the note if there is one
                 if (!string.IsNullOrEmpty(note))
                 {
-                    saveGame.MsgPrint(monsterName + note);
+                    game.MsgPrint(monsterName + note);
                 }
                 // Don't tell the player if the monster is not visible
                 else if (!IsVisible)
@@ -1837,16 +1837,16 @@ internal class Monster : IItemContainer
                          Race.Cthuloid || Race.Stupid ||
                          Race.Nonliving || "Evg".Contains(Race.Symbol.Character.ToString()))
                 {
-                    saveGame.MsgPrint($"{monsterName} is destroyed.");
+                    game.MsgPrint($"{monsterName} is destroyed.");
                 }
                 else
                 {
-                    saveGame.MsgPrint($"{monsterName} is killed.");
+                    game.MsgPrint($"{monsterName} is killed.");
                 }
                 // Let the save game know we've died
-                saveGame.MonsterDeath(GetMonsterIndex());
+                game.MonsterDeath(GetMonsterIndex());
                 // Delete us from the monster list
-                saveGame.DeleteMonsterByIndex(GetMonsterIndex(), true);
+                game.DeleteMonsterByIndex(GetMonsterIndex(), true);
                 fear = false;
                 return;
             }
@@ -1855,7 +1855,7 @@ internal class Monster : IItemContainer
         if (FearLevel != 0 && damage > 0)
         {
             // If we're already afraid, we might get desperate and overcome our fear
-            int tmp = SaveGame.DieRoll(damage);
+            int tmp = Game.DieRoll(damage);
             if (tmp < FearLevel)
             {
                 FearLevel -= tmp;
@@ -1870,10 +1870,10 @@ internal class Monster : IItemContainer
         if (FearLevel == 0 && !Race.ImmuneFear)
         {
             int percentage = 100 * Health / MaxHealth;
-            if ((percentage <= 10 && SaveGame.RandomLessThan(10) < percentage) || (damage >= Health && SaveGame.RandomLessThan(100) < 80))
+            if ((percentage <= 10 && Game.RandomLessThan(10) < percentage) || (damage >= Health && Game.RandomLessThan(100) < 80))
             {
                 fear = true;
-                FearLevel = SaveGame.DieRoll(10) + (damage >= Health && percentage > 7 ? 20 : (11 - percentage) * 5);
+                FearLevel = Game.DieRoll(10) + (damage >= Health && percentage > 7 ? 20 : (11 - percentage) * 5);
             }
         }
     }
@@ -1887,7 +1887,7 @@ internal class Monster : IItemContainer
     public void FireBoltAtPlayer(Projectile projectile, int damage)
     {
         const ProjectionFlag projectionFlags = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;
-        SaveGame.Project(GetMonsterIndex(), 0, SaveGame.MapY, SaveGame.MapX, damage, projectile, projectionFlags);
+        Game.Project(GetMonsterIndex(), 0, Game.MapY, Game.MapX, damage, projectile, projectionFlags);
     }
 
     /// <summary>
@@ -1930,7 +1930,7 @@ internal class Monster : IItemContainer
     /// <summary>
     /// Remove flags for ineffective spells from the monster's flags and return them.
     /// </summary>
-    private MonsterSpellList RemoveIneffectiveSpells(SaveGame saveGame, MonsterSpellList spells)
+    private MonsterSpellList RemoveIneffectiveSpells(Game game, MonsterSpellList spells)
     {
         // If we're stupid, we won't realise how ineffective things are
         if (Race.Stupid)
@@ -1939,7 +1939,7 @@ internal class Monster : IItemContainer
         }
 
         // Tiny chance of forgetting what we've seen, clearing all smart flags except for ally and clone
-        if (SaveGame.RandomLessThan(100) < 1)
+        if (Game.RandomLessThan(100) < 1)
         {
             ForgetSmartness();
         }
@@ -2133,7 +2133,7 @@ internal class Monster : IItemContainer
         {
             percentage /= 2;
         }
-        return SaveGame.RandomLessThan(100) < percentage;
+        return Game.RandomLessThan(100) < percentage;
     }
 
     /// <summary>
@@ -2144,14 +2144,14 @@ internal class Monster : IItemContainer
     /// <param name="monsterIndex"> the index of the monster who is moving </param>
     /// <param name="movesList"> The list to be populated with moves </param>
     /// <returns> True if we have potential moves or false if we don't </returns>
-    private bool GetMovesTowardsPlayer(SaveGame saveGame, PotentialMovesList movesList)
+    private bool GetMovesTowardsPlayer(Game game, PotentialMovesList movesList)
     {
         int moveVal = 0;
         bool done = false;
         // Default to moving towards the player's exact location
-        GridCoordinate targetLocation = new GridCoordinate(saveGame.MapX, saveGame.MapY);
+        GridCoordinate targetLocation = new GridCoordinate(game.MapX, game.MapY);
         // Adjust our target based on the player's scent if we can't move in a straight line to them
-        TrackPlayerByScent(saveGame, targetLocation);
+        TrackPlayerByScent(game, targetLocation);
         // Get the relative move needed to reach our target location
         GridCoordinate desiredRelativeMovement = new GridCoordinate(MapX - targetLocation.X, MapY - targetLocation.Y);
         if (!SmFriendly)
@@ -2164,16 +2164,16 @@ internal class Monster : IItemContainer
                 // Check if the player is in a room by counting the room tiles around them
                 for (int i = 0; i < 8; i++)
                 {
-                    if (saveGame.Grid[saveGame.MapY + saveGame.OrderedDirectionYOffset[i]][saveGame.MapX + saveGame.OrderedDirectionXOffset[i]].TileFlags.IsSet(GridTile.InRoom))
+                    if (game.Grid[game.MapY + game.OrderedDirectionYOffset[i]][game.MapX + game.OrderedDirectionXOffset[i]].TileFlags.IsSet(GridTile.InRoom))
                     {
                         room++;
                     }
                 }
                 // If the player isn't in a room and they're healthy, wait to ambush them rather
                 // than running headlong into the corridor after them and queueing up to get hit
-                if (room < 8 && saveGame.Health.Value > saveGame.MaxHealth.Value * 3 / 4)
+                if (room < 8 && game.Health.Value > game.MaxHealth.Value * 3 / 4)
                 {
-                    if (FindAmbushSpot(saveGame, desiredRelativeMovement))
+                    if (FindAmbushSpot(game, desiredRelativeMovement))
                     {
                         done = true;
                     }
@@ -2186,16 +2186,16 @@ internal class Monster : IItemContainer
                 for (int i = 0; i < 8; i++)
                 {
                     int monsterIndex = GetMonsterIndex();
-                    targetLocation = new GridCoordinate(saveGame.MapX + saveGame.OrderedDirectionXOffset[(monsterIndex + i) & 7], saveGame.MapY + saveGame.OrderedDirectionYOffset[(monsterIndex + i) & 7]);
+                    targetLocation = new GridCoordinate(game.MapX + game.OrderedDirectionXOffset[(monsterIndex + i) & 7], game.MapY + game.OrderedDirectionYOffset[(monsterIndex + i) & 7]);
                     // We might have got a '5' meaning stay where we are, so replace that with
                     // moving towards the player
                     if (MapY == targetLocation.Y && MapX == targetLocation.X)
                     {
-                        targetLocation = new GridCoordinate(saveGame.MapX, saveGame.MapY);
+                        targetLocation = new GridCoordinate(game.MapX, game.MapY);
                         break;
                     }
                     // Repeat till we get a direction we can move in
-                    if (!saveGame.GridPassableNoCreature(targetLocation.Y, targetLocation.X))
+                    if (!game.GridPassableNoCreature(targetLocation.Y, targetLocation.X))
                     {
                         continue;
                     }
@@ -2208,7 +2208,7 @@ internal class Monster : IItemContainer
         // If we're an ally then check if we should retreat
         if (SmFriendly)
         {
-            if (MonsterShouldRetreat(saveGame))
+            if (MonsterShouldRetreat(game))
             {
                 // If we should be scared, simply move the opposite way to the player
                 desiredRelativeMovement = new GridCoordinate(-desiredRelativeMovement.X, - desiredRelativeMovement.Y);
@@ -2217,11 +2217,11 @@ internal class Monster : IItemContainer
         else
         {
             // If we're not an ally then check if we should retreat
-            if (!done && MonsterShouldRetreat(saveGame))
+            if (!done && MonsterShouldRetreat(game))
             {
                 // If we should retreat, then try to find a safe spot where the player can't
                 // shoot or see us
-                if (!FindSafeSpot(saveGame, desiredRelativeMovement))
+                if (!FindSafeSpot(game, desiredRelativeMovement))
                 {
                     // If we failed to find one, just back off
                     desiredRelativeMovement = new GridCoordinate(-desiredRelativeMovement.X, -desiredRelativeMovement.Y);
@@ -2229,7 +2229,7 @@ internal class Monster : IItemContainer
                 else
                 {
                     // We found a safe spot, so head there, but prioritise avoiding the player's scent
-                    AvoidPlayersScent(saveGame, desiredRelativeMovement);
+                    AvoidPlayersScent(game, desiredRelativeMovement);
                 }
             }
         }
@@ -2417,22 +2417,22 @@ internal class Monster : IItemContainer
     /// </summary>
     /// <param name="monsterIndex"> The index of the monster </param>
     /// <param name="coord"> The location we're moving to </param>
-    private void AvoidPlayersScent(SaveGame saveGame, GridCoordinate coord)
+    private void AvoidPlayersScent(Game game, GridCoordinate coord)
     {
         int monsterY = MapY;
         int monsterX = MapX;
         int dY = monsterY - coord.Y;
         int dX = monsterX - coord.X;
         // If the scent too strong, keep going where we were going
-        if (saveGame.Grid[monsterY][monsterX].ScentAge < saveGame.Grid[saveGame.MapY][saveGame.MapX].ScentAge)
+        if (game.Grid[monsterY][monsterX].ScentAge < game.Grid[game.MapY][game.MapX].ScentAge)
         {
             return;
         }
-        if (saveGame.Grid[monsterY][monsterX].ScentStrength > Constants.MonsterFlowDepth)
+        if (game.Grid[monsterY][monsterX].ScentStrength > Constants.MonsterFlowDepth)
         {
             return;
         }
-        if (saveGame.Grid[monsterY][monsterX].ScentStrength > Race.NoticeRange)
+        if (game.Grid[monsterY][monsterX].ScentStrength > Race.NoticeRange)
         {
             return;
         }
@@ -2443,20 +2443,20 @@ internal class Monster : IItemContainer
         // Check each of the eight directions
         for (int i = 7; i >= 0; i--)
         {
-            int y = monsterY + saveGame.OrderedDirectionYOffset[i];
-            int x = monsterX + saveGame.OrderedDirectionXOffset[i];
+            int y = monsterY + game.OrderedDirectionYOffset[i];
+            int x = monsterX + game.OrderedDirectionXOffset[i];
             // If we have no scent there, or the scent is too recent, ignore it
-            if (saveGame.Grid[y][x].ScentAge == 0)
+            if (game.Grid[y][x].ScentAge == 0)
             {
                 continue;
             }
-            if (saveGame.Grid[y][x].ScentAge < when)
+            if (game.Grid[y][x].ScentAge < when)
             {
                 continue;
             }
             // If the scent is weaker than in the other directions, go that way
-            int dis = saveGame.Distance(y, x, dY, dX);
-            int s = (5000 / (dis + 3)) - (500 / (saveGame.Grid[y][x].ScentStrength + 1));
+            int dis = game.Distance(y, x, dY, dX);
+            int s = (5000 / (dis + 3)) - (500 / (game.Grid[y][x].ScentStrength + 1));
             if (s < 0)
             {
                 s = 0;
@@ -2465,7 +2465,7 @@ internal class Monster : IItemContainer
             {
                 continue;
             }
-            when = saveGame.Grid[y][x].ScentAge;
+            when = game.Grid[y][x].ScentAge;
             score = s;
             gy = y;
             gx = x;
@@ -2484,7 +2484,7 @@ internal class Monster : IItemContainer
     /// </summary>
     /// <param name="monsterIndex"> The index of the monster trying to move </param>
     /// <param name="target"> The target location we're moving to </param>
-    private void TrackPlayerByScent(SaveGame saveGame, GridCoordinate target)
+    private void TrackPlayerByScent(Game game, GridCoordinate target)
     {
         // If we can move through walls then we don't need to adjust anything
         if (Race.PassWall)
@@ -2497,9 +2497,9 @@ internal class Monster : IItemContainer
         }
         int y1 = MapY;
         int x1 = MapX;
-        GridTile cPtr = saveGame.Grid[y1][x1];
+        GridTile cPtr = game.Grid[y1][x1];
         // If we have no scent of the player then don't change where we were going
-        if (cPtr.ScentAge < saveGame.Grid[saveGame.MapY][saveGame.MapX].ScentAge)
+        if (cPtr.ScentAge < game.Grid[game.MapY][game.MapX].ScentAge)
         {
             if (cPtr.ScentAge == 0)
             {
@@ -2515,7 +2515,7 @@ internal class Monster : IItemContainer
             return;
         }
         // If we can actually see the player then don't change where we are going
-        if (saveGame.PlayerHasLosBold(y1, x1))
+        if (game.PlayerHasLosBold(y1, x1))
         {
             return;
         }
@@ -2524,24 +2524,24 @@ internal class Monster : IItemContainer
         // Check the eight directions we can move to see which has the most recent or strongest scent
         for (int i = 7; i >= 0; i--)
         {
-            int y = y1 + saveGame.OrderedDirectionYOffset[i];
-            int x = x1 + saveGame.OrderedDirectionXOffset[i];
-            if (saveGame.Grid[y][x].ScentAge == 0)
+            int y = y1 + game.OrderedDirectionYOffset[i];
+            int x = x1 + game.OrderedDirectionXOffset[i];
+            if (game.Grid[y][x].ScentAge == 0)
             {
                 continue;
             }
-            if (saveGame.Grid[y][x].ScentAge < when)
+            if (game.Grid[y][x].ScentAge < when)
             {
                 continue;
             }
-            if (saveGame.Grid[y][x].ScentStrength > cost)
+            if (game.Grid[y][x].ScentStrength > cost)
             {
                 continue;
             }
-            when = saveGame.Grid[y][x].ScentAge;
-            cost = saveGame.Grid[y][x].ScentStrength;
+            when = game.Grid[y][x].ScentAge;
+            cost = game.Grid[y][x].ScentStrength;
             // Give us a target in the general direction of the strongest scent
-            target = new GridCoordinate(saveGame.MapX + (16 * saveGame.OrderedDirectionXOffset[i]), saveGame.MapY + (16 * saveGame.OrderedDirectionYOffset[i]));
+            target = new GridCoordinate(game.MapX + (16 * game.OrderedDirectionXOffset[i]), game.MapY + (16 * game.OrderedDirectionYOffset[i]));
         }
     }
 
@@ -2553,14 +2553,14 @@ internal class Monster : IItemContainer
     /// A map location, which will be amended to contain the hiding spot
     /// </param>
     /// <returns> True if a hiding spot was found, or false if it wasn't </returns>
-    private bool FindAmbushSpot(SaveGame saveGame, GridCoordinate relativeTarget)
+    private bool FindAmbushSpot(Game game, GridCoordinate relativeTarget)
     {
         int fy = MapY;
         int fx = MapX;
         int hidingSpotY = 0;
         int hidingSpotX = 0;
         int shortestDistance = 999;
-        int tooCloseToPlayer = (saveGame.Distance(saveGame.MapY, saveGame.MapX, fy, fx) * 3 / 4) + 2;
+        int tooCloseToPlayer = (game.Distance(game.MapY, game.MapX, fy, fx) * 3 / 4) + 2;
         // Start with a short search radius and slowly increase
         for (int d = 1; d < 10; d++)
         {
@@ -2571,25 +2571,25 @@ internal class Monster : IItemContainer
                 for (x = fx - d; x <= fx + d; x++)
                 {
                     // Make sure the spot is valid
-                    if (!saveGame.InBounds(y, x))
+                    if (!game.InBounds(y, x))
                     {
                         continue;
                     }
-                    if (!saveGame.GridPassable(y, x))
+                    if (!game.GridPassable(y, x))
                     {
                         continue;
                     }
                     // Make sure the spot is the right distance
-                    if (saveGame.Distance(y, x, fy, fx) != d)
+                    if (game.Distance(y, x, fy, fx) != d)
                     {
                         continue;
                     }
                     // Make sure the spot is actually hidden
-                    if (!saveGame.PlayerCanSeeBold(y, x) && saveGame.CleanShot(fy, fx, y, x))
+                    if (!game.PlayerCanSeeBold(y, x) && game.CleanShot(fy, fx, y, x))
                     {
                         // If the spot is closer to the player than any previously found spot
                         // (but not too close), remember it
-                        int dis = saveGame.Distance(y, x, saveGame.MapY, saveGame.MapX);
+                        int dis = game.Distance(y, x, game.MapY, game.MapX);
                         if (dis < shortestDistance && dis >= tooCloseToPlayer)
                         {
                             hidingSpotY = y;
@@ -2617,7 +2617,7 @@ internal class Monster : IItemContainer
     /// </summary>
     /// <param name="monsterIndex"> The index of the monster </param>
     /// <returns> True if the monster should run away, false if not </returns>
-    private bool MonsterShouldRetreat(SaveGame saveGame)
+    private bool MonsterShouldRetreat(Game game)
     {
         // Don't move away if we're already too far away to see the player
         if (DistanceFromPlayer > Constants.MaxSight + 5)
@@ -2639,7 +2639,7 @@ internal class Monster : IItemContainer
         {
             return false;
         }
-        int playerLevel = saveGame.ExperienceLevel.Value;
+        int playerLevel = game.ExperienceLevel.Value;
         int monsterLevel = Race.Level + (GetMonsterIndex() & 0x08) + 25;
         // If we're tougher than the player, don't move away
         if (monsterLevel > playerLevel + 4)
@@ -2652,8 +2652,8 @@ internal class Monster : IItemContainer
             return true;
         }
         // If we're significantly less healthy than the player, move away
-        int playerHealth = saveGame.Health.Value;
-        int playerMaxHealth = saveGame.MaxHealth.Value;
+        int playerHealth = game.Health.Value;
+        int playerMaxHealth = game.MaxHealth.Value;
         int monsterHealth = Health;
         int monsterMaxHealth = MaxHealth;
         int playerHealthFactor = (playerLevel * playerMaxHealth) + (playerHealth << 2);
@@ -2666,9 +2666,9 @@ internal class Monster : IItemContainer
     /// </summary>
     public int GetMonsterIndex() // TODO: Needs to be removed.
     {
-        for (int i = 0; i < SaveGame.Monsters.Length; i++)
+        for (int i = 0; i < Game.Monsters.Length; i++)
         {
-            if (SaveGame.Monsters[i] == this)
+            if (Game.Monsters[i] == this)
                 return i;
         }
         throw new Exception("Internal error monster not found for get monster index.");
@@ -2695,7 +2695,7 @@ internal class Monster : IItemContainer
             return;
         }
 
-        int armorClass = SaveGame.BaseArmorClass + SaveGame.ArmorClassBonus;
+        int armorClass = Game.BaseArmorClass + Game.ArmorClassBonus;
         int monsterLevel = Race.Level >= 1 ? Race.Level : 1;
         string monsterName = Name;
         string monsterDescription = IndefiniteVisibleName;
@@ -2713,7 +2713,7 @@ internal class Monster : IItemContainer
             int damageSides = Race.Attacks[attackNumber].DSide;
 
             // Stop if player is dead or gone
-            if (!alive || SaveGame.IsDead || SaveGame.NewLevelFlag)
+            if (!alive || Game.IsDead || Game.NewLevelFlag)
             {
                 break;
             }
@@ -2728,18 +2728,18 @@ internal class Monster : IItemContainer
             }
                 
             // Check if the monster actually hits us
-            if (effect == null || MonsterCheckHitOnPlayer(this.SaveGame, power, monsterLevel))
+            if (effect == null || MonsterCheckHitOnPlayer(this.Game, power, monsterLevel))
             {
-                SaveGame.Disturb(true);
+                Game.Disturb(true);
                 // Protection From Evil might repel the attack
-                if (SaveGame.ProtectionFromEvilTimer.Value > 0 && Race.Evil && SaveGame.ExperienceLevel.Value >= monsterLevel && this.SaveGame.RandomLessThan(100) + SaveGame.ExperienceLevel.Value > 50)
+                if (Game.ProtectionFromEvilTimer.Value > 0 && Race.Evil && Game.ExperienceLevel.Value >= monsterLevel && this.Game.RandomLessThan(100) + Game.ExperienceLevel.Value > 50)
                 {
                     if (IsVisible)
                     {
                         // If it does, then they player knows the monster is evil
                         Race.Knowledge.Characteristics.Evil = true;
                     }
-                    SaveGame.MsgPrint($"{monsterName} is repelled.");
+                    Game.MsgPrint($"{monsterName} is repelled.");
                     continue;
                 }
 
@@ -2747,11 +2747,11 @@ internal class Monster : IItemContainer
                 string action = method.PlayerAction;
                 if (!string.IsNullOrEmpty(action))
                 {
-                    SaveGame.MsgPrint($"{monsterName} {action}.");
+                    Game.MsgPrint($"{monsterName} {action}.");
                 }
                 obvious = true;
                 // Work out base damage done by the attack
-                damage = this.SaveGame.DiceRoll(damageDice, damageSides);
+                damage = this.Game.DiceRoll(damageDice, damageSides);
                 // Apply any modifiers to the damage
                 if (effect == null)
                 {
@@ -2768,7 +2768,7 @@ internal class Monster : IItemContainer
                 bool doStun = method.AttackStunsTarget;
                 if (doCut && doStun)
                 {
-                    if (this.SaveGame.RandomLessThan(100) < 50)
+                    if (this.Game.RandomLessThan(100) < 50)
                     {
                         doCut = false;
                     }
@@ -2790,23 +2790,23 @@ internal class Monster : IItemContainer
                             break;
 
                         case 1:
-                            k = this.SaveGame.DieRoll(5);
+                            k = this.Game.DieRoll(5);
                             break;
 
                         case 2:
-                            k = this.SaveGame.DieRoll(5) + 5;
+                            k = this.Game.DieRoll(5) + 5;
                             break;
 
                         case 3:
-                            k = this.SaveGame.DieRoll(20) + 20;
+                            k = this.Game.DieRoll(20) + 20;
                             break;
 
                         case 4:
-                            k = this.SaveGame.DieRoll(50) + 50;
+                            k = this.Game.DieRoll(50) + 50;
                             break;
 
                         case 5:
-                            k = this.SaveGame.DieRoll(100) + 100;
+                            k = this.Game.DieRoll(100) + 100;
                             break;
 
                         case 6:
@@ -2819,7 +2819,7 @@ internal class Monster : IItemContainer
                     }
                     if (k != 0)
                     {
-                        SaveGame.BleedingTimer.AddTimer(k);
+                        Game.BleedingTimer.AddTimer(k);
                     }
                 }
                 if (doStun)
@@ -2834,23 +2834,23 @@ internal class Monster : IItemContainer
                             break;
 
                         case 1:
-                            k = this.SaveGame.DieRoll(5);
+                            k = this.Game.DieRoll(5);
                             break;
 
                         case 2:
-                            k = this.SaveGame.DieRoll(10) + 10;
+                            k = this.Game.DieRoll(10) + 10;
                             break;
 
                         case 3:
-                            k = this.SaveGame.DieRoll(20) + 20;
+                            k = this.Game.DieRoll(20) + 20;
                             break;
 
                         case 4:
-                            k = this.SaveGame.DieRoll(30) + 30;
+                            k = this.Game.DieRoll(30) + 30;
                             break;
 
                         case 5:
-                            k = this.SaveGame.DieRoll(40) + 40;
+                            k = this.Game.DieRoll(40) + 40;
                             break;
 
                         case 6:
@@ -2863,18 +2863,18 @@ internal class Monster : IItemContainer
                     }
                     if (k != 0)
                     {
-                        SaveGame.StunTimer.AddTimer(k);
+                        Game.StunTimer.AddTimer(k);
                     }
                 }
                 // If the monster touched us then it may take damage from our defensive abilities
                 if (touched)
                 {
-                    if (SaveGame.HasFireShield && alive)
+                    if (Game.HasFireShield && alive)
                     {
                         if (!Race.ImmuneFire)
                         {
-                            SaveGame.MsgPrint($"{monsterName} is suddenly very hot!");
-                            if (SaveGame.DamageMonster(GetMonsterIndex(), this.SaveGame.DiceRoll(2, 6), out fear,
+                            Game.MsgPrint($"{monsterName} is suddenly very hot!");
+                            if (Game.DamageMonster(GetMonsterIndex(), this.Game.DiceRoll(2, 6), out fear,
                                 " turns into a pile of ash."))
                             {
                                 blinked = false;
@@ -2890,12 +2890,12 @@ internal class Monster : IItemContainer
                             }
                         }
                     }
-                    if (SaveGame.HasLightningShield && alive)
+                    if (Game.HasLightningShield && alive)
                     {
                         if (!Race.ImmuneLightning)
                         {
-                            SaveGame.MsgPrint($"{monsterName} gets zapped!");
-                            if (SaveGame.DamageMonster(GetMonsterIndex(), this.SaveGame.DiceRoll(2, 6), out fear,
+                            Game.MsgPrint($"{monsterName} gets zapped!");
+                            if (Game.DamageMonster(GetMonsterIndex(), this.Game.DiceRoll(2, 6), out fear,
                                 " turns into a pile of cinder."))
                             {
                                 blinked = false;
@@ -2918,8 +2918,8 @@ internal class Monster : IItemContainer
                 // It missed us, so give us the appropriate message
                 if (method.RendersMissMessage && IsVisible)
                 {
-                    SaveGame.Disturb(true);
-                    SaveGame.MsgPrint($"{monsterName} misses you.");
+                    Game.Disturb(true);
+                    Game.MsgPrint($"{monsterName} misses you.");
                 }
             }
             // If the player saw the monster, they now know more about what attacks it can do
@@ -2937,24 +2937,24 @@ internal class Monster : IItemContainer
         // If the monster teleported away after stealing, let the player know and do the actual teleport
         if (blinked)
         {
-            SaveGame.MsgPrint("The thief flees laughing!");
-            TeleportAway(SaveGame, (Constants.MaxSight * 2) + 5);
+            Game.MsgPrint("The thief flees laughing!");
+            TeleportAway(Game, (Constants.MaxSight * 2) + 5);
         }
         // If the attack just killed the player, let future generations remember what killed
         // their ancestor
-        if (SaveGame.IsDead && Race.Knowledge.RDeaths < Constants.MaxShort)
+        if (Game.IsDead && Race.Knowledge.RDeaths < Constants.MaxShort)
         {
             Race.Knowledge.RDeaths++;
         }
         // If the monster just got scared, let the player know
         if (IsVisible && fear)
         {
-            SaveGame.PlaySound(SoundEffectEnum.MonsterFlees);
-            SaveGame.MsgPrint($"{monsterName} flees in terror!");
+            Game.PlaySound(SoundEffectEnum.MonsterFlees);
+            Game.MsgPrint($"{monsterName} flees in terror!");
         }
     }
 
-    public void TeleportAway(SaveGame saveGame, int dis)
+    public void TeleportAway(Game game, int dis)
     {
         int ny = 0;
         int nx = 0;
@@ -2976,27 +2976,27 @@ internal class Monster : IItemContainer
             {
                 while (true)
                 {
-                    ny = SaveGame.RandomSpread(oy, dis);
-                    nx = SaveGame.RandomSpread(ox, dis);
-                    int d = saveGame.Distance(oy, ox, ny, nx);
+                    ny = Game.RandomSpread(oy, dis);
+                    nx = Game.RandomSpread(ox, dis);
+                    int d = game.Distance(oy, ox, ny, nx);
                     if (d >= min && d <= dis)
                     {
                         break;
                     }
                 }
-                if (!saveGame.InBounds(ny, nx))
+                if (!game.InBounds(ny, nx))
                 {
                     continue;
                 }
-                if (!saveGame.GridPassableNoCreature(ny, nx))
+                if (!game.GridPassableNoCreature(ny, nx))
                 {
                     continue;
                 }
-                if (saveGame.Grid[ny][nx].FeatureType is ElderSignSigilTile)
+                if (game.Grid[ny][nx].FeatureType is ElderSignSigilTile)
                 {
                     continue;
                 }
-                if (saveGame.Grid[ny][nx].FeatureType is YellowSignSigilTile)
+                if (game.Grid[ny][nx].FeatureType is YellowSignSigilTile)
                 {
                     continue;
                 }
@@ -3006,14 +3006,14 @@ internal class Monster : IItemContainer
             dis *= 2;
             min /= 2;
         }
-        saveGame.PlaySound(SoundEffectEnum.Teleport);
-        saveGame.Grid[ny][nx].MonsterIndex = GetMonsterIndex();
-        saveGame.Grid[oy][ox].MonsterIndex = 0;
+        game.PlaySound(SoundEffectEnum.Teleport);
+        game.Grid[ny][nx].MonsterIndex = GetMonsterIndex();
+        game.Grid[oy][ox].MonsterIndex = 0;
         MapY = ny;
         MapX = nx;
-        saveGame.UpdateMonsterVisibility(GetMonsterIndex(), true);
-        saveGame.RedrawSingleLocation(oy, ox);
-        saveGame.RedrawSingleLocation(ny, nx);
+        game.UpdateMonsterVisibility(GetMonsterIndex(), true);
+        game.RedrawSingleLocation(oy, ox);
+        game.RedrawSingleLocation(ny, nx);
     }
 
     /// <summary>
@@ -3021,7 +3021,7 @@ internal class Monster : IItemContainer
     /// </summary>
     /// <param name="monster"> The monster making the moves </param>
     /// <param name="movesList"> The list in which to insert the moves </param>
-    private void GetMovesTowardsEnemyMonsters(SaveGame saveGame, PotentialMovesList movesList)
+    private void GetMovesTowardsEnemyMonsters(Game game, PotentialMovesList movesList)
     {
         int[][] spiralGridOffsets =
         {
@@ -3045,11 +3045,11 @@ internal class Monster : IItemContainer
             int y = MapY + spiralGridOffsets[i][0];
             int x = MapX + spiralGridOffsets[i][1];
             // Check if we're in bounds and have a monster
-            if (saveGame.InBounds(y, x))
+            if (game.InBounds(y, x))
             {
-                if (saveGame.Grid[y][x].MonsterIndex != 0)
+                if (game.Grid[y][x].MonsterIndex != 0)
                 {
-                    Monster enemy = saveGame.Monsters[saveGame.Grid[y][x].MonsterIndex];
+                    Monster enemy = game.Monsters[game.Grid[y][x].MonsterIndex];
                     // Only go for monsters who are awake and on the opposing side
                     if (enemy.SmFriendly != SmFriendly && enemy.SleepLevel == 0)
                     {
@@ -3122,14 +3122,14 @@ internal class Monster : IItemContainer
     private bool CheckHitMonsterVersusMonster(int power, int level, int armorClass)
     {
         // Base 5% chance to hit and 5% chance to miss
-        int k = SaveGame.RandomLessThan(100);
+        int k = Game.RandomLessThan(100);
         if (k < 10)
         {
             return k < 5;
         }
         // If we didn't auto hit or miss, use the standard formula for attacking
         int i = power + (level * 3);
-        return i > 0 && SaveGame.DieRoll(i) > armorClass * 3 / 4;
+        return i > 0 && Game.DieRoll(i) > armorClass * 3 / 4;
     }
 
     /// <summary>
@@ -3144,7 +3144,7 @@ internal class Monster : IItemContainer
         // If the monster is stupid, cast a random spell
         if (Race.Stupid)
         {
-            return spells.ToWeightedRandom(SaveGame).ChooseOrDefault();
+            return spells.ToWeightedRandom(Game).ChooseOrDefault();
         }
 
         // Priority One: If we're afraid or hurt, always use a random escape spell if we have one
@@ -3153,7 +3153,7 @@ internal class Monster : IItemContainer
             MonsterSpellList escapeSpells = spells.Where((_spell) => _spell.ProvidesEscape);
             if (escapeSpells.Count > 0)
             {
-                return escapeSpells.ToWeightedRandom(SaveGame).ChooseOrDefault();
+                return escapeSpells.ToWeightedRandom(Game).ChooseOrDefault();
             }
         }
         // Priority Two: If we're hurt, always use a random healing spell if we have one
@@ -3162,61 +3162,61 @@ internal class Monster : IItemContainer
             MonsterSpellList healingSpells = spells.Where((_spell) => _spell.Heals);
             if (healingSpells.Count > 0)
             {
-                return healingSpells.ToWeightedRandom(SaveGame).ChooseOrDefault();
+                return healingSpells.ToWeightedRandom(Game).ChooseOrDefault();
             }
         }
         // Priority Three: If we're near the player and have no attack spells, probably use a
         // tactical spell
         MonsterSpellList attackSpells = spells.Where((_spell) => _spell.IsAttack);
         MonsterSpellList tacticalSpells = spells.Where((_spell) => _spell.IsTactical);
-        if (SaveGame.Distance(SaveGame.MapY, SaveGame.MapX, MapY, MapX) < 4 && attackSpells.Count > 0 && this.SaveGame.RandomLessThan(100) < 75)
+        if (Game.Distance(Game.MapY, Game.MapX, MapY, MapX) < 4 && attackSpells.Count > 0 && this.Game.RandomLessThan(100) < 75)
         {
             if (tacticalSpells.Count > 0)
             {
-                return tacticalSpells.ToWeightedRandom(SaveGame).ChooseOrDefault();
+                return tacticalSpells.ToWeightedRandom(Game).ChooseOrDefault();
             }
         }
 
         // Priority Four: If we're at less than full health, probably use a healing spell
-        if (Health < MaxHealth * 3 / 4 && this.SaveGame.RandomLessThan(100) < 75)
+        if (Health < MaxHealth * 3 / 4 && this.Game.RandomLessThan(100) < 75)
         {
             MonsterSpellList healingSpells = spells.Where((_spell) => _spell.Heals);
             if (healingSpells.Count > 0)
             {
-                return healingSpells.ToWeightedRandom(SaveGame).ChooseOrDefault();
+                return healingSpells.ToWeightedRandom(Game).ChooseOrDefault();
             }
         }
         // Priority Five: If we have a summoning spell, maybe use it
         MonsterSpellList summonSpells = spells.Where((_spell) => _spell.SummonsHelp);
-        if (summonSpells.Count > 0 && this.SaveGame.RandomLessThan(100) < 50)
+        if (summonSpells.Count > 0 && this.Game.RandomLessThan(100) < 50)
         {
-            return summonSpells.ToWeightedRandom(SaveGame).ChooseOrDefault();
+            return summonSpells.ToWeightedRandom(Game).ChooseOrDefault();
         }
 
         // Priority Six: If we have a direct attack spell, probably use it
-        if (attackSpells.Count > 0 && this.SaveGame.RandomLessThan(100) < 85)
+        if (attackSpells.Count > 0 && this.Game.RandomLessThan(100) < 85)
         {
-            return attackSpells.ToWeightedRandom(SaveGame).ChooseOrDefault();
+            return attackSpells.ToWeightedRandom(Game).ChooseOrDefault();
         }
 
         // Priority Seven: If we have a tactical spell, maybe use it
-        if (tacticalSpells.Count > 0 && this.SaveGame.RandomLessThan(100) < 50)
+        if (tacticalSpells.Count > 0 && this.Game.RandomLessThan(100) < 50)
         {
-            return tacticalSpells.ToWeightedRandom(SaveGame).ChooseOrDefault();
+            return tacticalSpells.ToWeightedRandom(Game).ChooseOrDefault();
         }
 
         // Priority Eight: If we have a haste spell, maybe use it
         MonsterSpellList hasteSpells = spells.Where((_spell) => _spell.Hastens);
-        if (hasteSpells.Count > 0 && this.SaveGame.RandomLessThan(100) < 20 + Race.Speed - Speed)
+        if (hasteSpells.Count > 0 && this.Game.RandomLessThan(100) < 20 + Race.Speed - Speed)
         {
-            return hasteSpells.ToWeightedRandom(SaveGame).ChooseOrDefault();
+            return hasteSpells.ToWeightedRandom(Game).ChooseOrDefault();
         }
 
         // Priority Nine: If we have an annoying spell, probably use it
         MonsterSpellList annoyanceSpells = spells.Where((_spell) => _spell.Annoys);
-        if (annoyanceSpells.Count > 0 && this.SaveGame.RandomLessThan(100) < 85)
+        if (annoyanceSpells.Count > 0 && this.Game.RandomLessThan(100) < 85)
         {
-            return annoyanceSpells.ToWeightedRandom(SaveGame).ChooseOrDefault();
+            return annoyanceSpells.ToWeightedRandom(Game).ChooseOrDefault();
         }
 
         // Priority Ten: Give up on using a spell
@@ -3231,7 +3231,7 @@ internal class Monster : IItemContainer
     /// A map location, which will be amended to contain the safe spot
     /// </param>
     /// <returns> True if a safe spot was found, or false if it wasn't </returns>
-    private bool FindSafeSpot(SaveGame saveGame, GridCoordinate relativeTarget)
+    private bool FindSafeSpot(Game game, GridCoordinate relativeTarget)
     {
         int safeSpotY = 0;
         int safeSpotX = 0;
@@ -3246,34 +3246,34 @@ internal class Monster : IItemContainer
                 for (x = MapY - d; x <= MapY + d; x++)
                 {
                     // Make sure the spot is valid
-                    if (!saveGame.InBounds(y, x))
+                    if (!game.InBounds(y, x))
                     {
                         continue;
                     }
-                    if (!saveGame.GridPassable(y, x))
+                    if (!game.GridPassable(y, x))
                     {
                         continue;
                     }
                     // Make sure the spot is the right distance
-                    if (saveGame.Distance(y, x, MapY, MapY) != d)
+                    if (game.Distance(y, x, MapY, MapY) != d)
                     {
                         continue;
                     }
                     // Reject spots that smell too strongly of the player
-                    if (saveGame.Grid[y][x].ScentAge < saveGame.Grid[saveGame.MapY][saveGame.MapX].ScentAge)
+                    if (game.Grid[y][x].ScentAge < game.Grid[game.MapY][game.MapX].ScentAge)
                     {
                         continue;
                     }
-                    if (saveGame.Grid[y][x].ScentStrength > saveGame.Grid[MapY][MapY].ScentStrength + (2 * d))
+                    if (game.Grid[y][x].ScentStrength > game.Grid[MapY][MapY].ScentStrength + (2 * d))
                     {
                         continue;
                     }
                     // Make sure the spot is actually hidden
-                    if (!saveGame.Projectable(y, x, saveGame.MapY, saveGame.MapX))
+                    if (!game.Projectable(y, x, game.MapY, game.MapX))
                     {
                         // If the spot is further from the player than any previously found
                         // spot, remember it
-                        int dis = saveGame.Distance(y, x, saveGame.MapY, saveGame.MapX);
+                        int dis = game.Distance(y, x, game.MapY, game.MapX);
                         if (dis > longestDistance)
                         {
                             safeSpotY = y;
@@ -3300,18 +3300,18 @@ internal class Monster : IItemContainer
     /// <param name="attackPower"> The power of the attack </param>
     /// <param name="monsterLevel"> The level of the monster making the attack </param>
     /// <returns> True if the attack hit, false if not </returns>
-    private bool MonsterCheckHitOnPlayer(SaveGame saveGame, int attackPower, int monsterLevel)
+    private bool MonsterCheckHitOnPlayer(Game game, int attackPower, int monsterLevel)
     {
         // Straight five percent chance of hit or miss
-        int k = SaveGame.RandomLessThan(100);
+        int k = Game.RandomLessThan(100);
         if (k < 10)
         {
             return k < 5;
         }
         // Otherwise, compare the power and level to the player's armor class
         int i = attackPower + (monsterLevel * 3);
-        int ac = saveGame.BaseArmorClass + saveGame.ArmorClassBonus;
-        return i > 0 && SaveGame.DieRoll(i) > ac * 3 / 4;
+        int ac = game.BaseArmorClass + game.ArmorClassBonus;
+        return i > 0 && Game.DieRoll(i) > ac * 3 / 4;
     }
 
     /// <summary>
@@ -3331,7 +3331,7 @@ internal class Monster : IItemContainer
             return 0;
         }
         // If we did less than 20 damage, then usually no cuts or stun
-        if (damage < 20 && SaveGame.RandomLessThan(100) >= damage)
+        if (damage < 20 && Game.RandomLessThan(100) >= damage)
         {
             return 0;
         }
@@ -3343,7 +3343,7 @@ internal class Monster : IItemContainer
         // More than 20 damage increases the severity a random number of times
         if (damage >= 20)
         {
-            while (SaveGame.RandomLessThan(100) < 2)
+            while (Game.RandomLessThan(100) < 2)
             {
                 additionalSeverity++;
             }

@@ -13,7 +13,7 @@ namespace AngbandOS.Core.Activations;
 [Serializable]
 internal class TrapezohedronGemstoneActivation : Activation
 {
-    private TrapezohedronGemstoneActivation(SaveGame saveGame) : base(saveGame) { }
+    private TrapezohedronGemstoneActivation(Game game) : base(game) { }
 
     /// <summary>
     /// Returns a random chance of 0, because this activation only applies to a fixed artifact.
@@ -24,21 +24,21 @@ internal class TrapezohedronGemstoneActivation : Activation
 
     protected override bool OnActivate(Item item)
     {
-        SaveGame.MsgPrint("The gemstone flashes bright red!");
-        SaveGame.RunScript(nameof(LightScript));
-        SaveGame.MsgPrint("The gemstone drains your vitality...");
-        SaveGame.TakeHit(base.SaveGame.DiceRoll(3, 8), "the Gemstone 'Trapezohedron'");
-        SaveGame.DetectTraps();
-        SaveGame.DetectDoors();
-        SaveGame.DetectStairs();
-        if (SaveGame.GetCheck("Activate recall? "))
+        Game.MsgPrint("The gemstone flashes bright red!");
+        Game.RunScript(nameof(LightScript));
+        Game.MsgPrint("The gemstone drains your vitality...");
+        Game.TakeHit(base.Game.DiceRoll(3, 8), "the Gemstone 'Trapezohedron'");
+        Game.DetectTraps();
+        Game.DetectDoors();
+        Game.DetectStairs();
+        if (Game.GetCheck("Activate recall? "))
         {
-            SaveGame.RunScript(nameof(ToggleRecallScript));
+            Game.RunScript(nameof(ToggleRecallScript));
         }
         return true;
     }
 
-    public override int RechargeTime() => SaveGame.RandomLessThan(20) + 20;
+    public override int RechargeTime() => Game.RandomLessThan(20) + 20;
 
     public override int Value => 300;
 

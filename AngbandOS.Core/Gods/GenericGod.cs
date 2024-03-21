@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Gods;
 [Serializable]
 internal class GenericGod : God
 {
-    public GenericGod(SaveGame saveGame, GodDefinition definition) : base(saveGame)
+    public GenericGod(Game game, GodDefinition definition) : base(game)
     {
         LongName = definition.LongName;
         ShortName = definition.ShortName;

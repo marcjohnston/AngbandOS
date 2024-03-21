@@ -11,9 +11,9 @@ namespace AngbandOS.Core.ItemFactories;
 internal class HardLeatherCapHelmArmorItemFactory
     : HelmArmorItemFactory
 {
-    private HardLeatherCapHelmArmorItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private HardLeatherCapHelmArmorItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(CloseBraceSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(CloseBraceSymbol));
     public override ColorEnum Color => ColorEnum.Brown;
     public override string Name => "Hard Leather Cap";
 
@@ -24,5 +24,5 @@ internal class HardLeatherCapHelmArmorItemFactory
     public override int LevelNormallyFound => 3;
     public override int[] Locale => new int[] { 3, 0, 0, 0 };
     public override int Weight => 15;
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

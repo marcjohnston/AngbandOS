@@ -10,7 +10,7 @@ namespace AngbandOS.Core.MonsterSpells;
 [Serializable]
 internal abstract class SummonMonsterSpell : MonsterSpell
 {
-    protected SummonMonsterSpell(SaveGame saveGame) : base(saveGame) { }
+    protected SummonMonsterSpell(Game game) : base(game) { }
     /// <summary>
     /// Returns true because all summoning magic spells require intelligence.
     /// </summary>
@@ -31,7 +31,7 @@ internal abstract class SummonMonsterSpell : MonsterSpell
     /// <summary>
     /// Returns the maximum number of monsters that will be summoned.  Returns 6, by default.
     /// </summary>
-    protected virtual int MaximumSummonCount(SaveGame saveGame) => 6;
+    protected virtual int MaximumSummonCount(Game game) => 6;
 
     /// <summary>
     /// Returns a monster filter that is used to specify which type of monster to be summoned or null, for any monster.
@@ -52,29 +52,29 @@ internal abstract class SummonMonsterSpell : MonsterSpell
     /// Summons non-friendly monsters.  Can be overrideen for special summoning needs.  Only the SummonReaver needs to call a special method.
     /// </summary>
     /// <returns></returns>
-    protected virtual bool Summon(SaveGame saveGame, Monster monster)
+    protected virtual bool Summon(Game game, Monster monster)
     {
-        int playerX = saveGame.MapX;
-        int playerY = saveGame.MapY;
+        int playerX = game.MapX;
+        int playerY = game.MapY;
 
-        return saveGame.SummonSpecific(playerY, playerX, SummonLevel(monster), MonsterSelector(monster));
+        return game.SummonSpecific(playerY, playerX, SummonLevel(monster), MonsterSelector(monster));
     }
 
-    public override void ExecuteOnPlayer(SaveGame saveGame, Monster monster)
+    public override void ExecuteOnPlayer(Game game, Monster monster)
     {
-        bool playerIsBlind = saveGame.BlindnessTimer.Value != 0;
+        bool playerIsBlind = game.BlindnessTimer.Value != 0;
         int count = 0;
 
-        for (int k = 0; k < MaximumSummonCount(saveGame); k++)
+        for (int k = 0; k < MaximumSummonCount(game); k++)
         {
-            if (Summon(saveGame, monster))
+            if (Summon(game, monster))
             {
                 count++;
             }
         }
         if (playerIsBlind && count != 0)
         {
-            saveGame.MsgPrint("You hear many things appear nearby.");
+            game.MsgPrint("You hear many things appear nearby.");
         }
     }
 
@@ -84,9 +84,9 @@ internal abstract class SummonMonsterSpell : MonsterSpell
     /// </summary>
     protected virtual string BlindNonZeroSummonedMessage => "You hear many things appear nearby.";
 
-    public override void ExecuteOnMonster(SaveGame saveGame, Monster monster, Monster target)
+    public override void ExecuteOnMonster(Game game, Monster monster, Monster target)
     {
-        bool playerIsBlind = saveGame.BlindnessTimer.Value != 0;
+        bool playerIsBlind = game.BlindnessTimer.Value != 0;
         bool friendly = monster.SmFriendly;
         int count = 0;
 
@@ -94,14 +94,14 @@ internal abstract class SummonMonsterSpell : MonsterSpell
         {
             if (friendly)
             {
-                if (saveGame.SummonSpecificFriendly(target.MapY, target.MapX, SummonLevel(monster), FriendlyMonsterSelector(monster), true))
+                if (game.SummonSpecificFriendly(target.MapY, target.MapX, SummonLevel(monster), FriendlyMonsterSelector(monster), true))
                 {
                     count++;
                 }
             }
             else
             {
-                if (Summon(saveGame, monster))
+                if (Summon(game, monster))
                 {
                     count++;
                 }
@@ -109,7 +109,7 @@ internal abstract class SummonMonsterSpell : MonsterSpell
         }
         if (playerIsBlind && count != 0)
         {
-            saveGame.MsgPrint(BlindNonZeroSummonedMessage);
+            game.MsgPrint(BlindNonZeroSummonedMessage);
         }
     }
 }

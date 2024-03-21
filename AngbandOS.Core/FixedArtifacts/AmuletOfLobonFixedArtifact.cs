@@ -10,7 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class AmuletOfLobonFixedArtifact : FixedArtifact
 {
-    private AmuletOfLobonFixedArtifact(SaveGame saveGame) : base(saveGame) { }
+    private AmuletOfLobonFixedArtifact(Game game) : base(game) { }
 
     protected override string BaseItemFactoryName => nameof(CarlammasAmuletJeweleryItemFactory);
 

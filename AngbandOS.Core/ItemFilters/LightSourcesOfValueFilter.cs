@@ -13,6 +13,6 @@ namespace AngbandOS.Core.ItemFilters;
 [Serializable]
 internal class LightSourcesOfValueFilter : ItemFilter<LightSourceItemFactory>
 {
-    private LightSourcesOfValueFilter(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private LightSourcesOfValueFilter(Game game) : base(game) { } // This object is a singleton.
     public override bool? HasValue => true;
 }

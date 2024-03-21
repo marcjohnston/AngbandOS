@@ -10,13 +10,13 @@ namespace AngbandOS.Core.ArtifactBiases;
 [Serializable]
 internal class ConstitutionArtifactBias : ArtifactBias
 {
-    private ConstitutionArtifactBias(SaveGame saveGame) : base(saveGame) { }
+    private ConstitutionArtifactBias(Game game) : base(game) { }
     public override bool ApplyBonuses(Item item)
     {
         if (!item.RandomArtifactItemCharacteristics.Con)
         {
             item.RandomArtifactItemCharacteristics.Con = true;
-            if (SaveGame.DieRoll(2) == 1)
+            if (Game.DieRoll(2) == 1)
             {
                 return true;
             }
@@ -29,7 +29,7 @@ internal class ConstitutionArtifactBias : ArtifactBias
         if (!item.RandomArtifactItemCharacteristics.SustCon)
         {
             item.RandomArtifactItemCharacteristics.SustCon = true;
-            if (SaveGame.DieRoll(2) == 1)
+            if (Game.DieRoll(2) == 1)
             {
                 return true;
             }

@@ -16,5 +16,5 @@ internal class StrikeMartialArtsAttack : MartialArtsAttack
     public override int Ds => 7;
     public override int Effect => 0;
     public override int MinLevel => 3;
-    private StrikeMartialArtsAttack(SaveGame saveGame) : base(saveGame) { }
+    private StrikeMartialArtsAttack(Game game) : base(game) { }
 }

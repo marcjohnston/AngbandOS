@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class PoisonGasScript : Script, IScript
 {
-    private PoisonGasScript(SaveGame saveGame) : base(saveGame) { }
+    private PoisonGasScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script.
@@ -19,17 +19,17 @@ internal class PoisonGasScript : Script, IScript
     public void ExecuteScript()
     {
         // Poison the player
-        SaveGame.MsgPrint("A pungent green gas surrounds you!");
-        if (!SaveGame.HasPoisonResistance && SaveGame.PoisonResistanceTimer.Value == 0)
+        Game.MsgPrint("A pungent green gas surrounds you!");
+        if (!Game.HasPoisonResistance && Game.PoisonResistanceTimer.Value == 0)
         {
             // Hagarg Ryonis may save you from the poison
-            if (SaveGame.DieRoll(10) <= SaveGame.SingletonRepository.Gods.Get(nameof(HagargRyonisGod)).AdjustedFavour)
+            if (Game.DieRoll(10) <= Game.SingletonRepository.Gods.Get(nameof(HagargRyonisGod)).AdjustedFavour)
             {
-                SaveGame.MsgPrint("Hagarg Ryonis's favour protects you!");
+                Game.MsgPrint("Hagarg Ryonis's favour protects you!");
             }
             else
             {
-                SaveGame.PoisonTimer.AddTimer(SaveGame.RandomLessThan(20) + 10);
+                Game.PoisonTimer.AddTimer(Game.RandomLessThan(20) + 10);
             }
         }
     }

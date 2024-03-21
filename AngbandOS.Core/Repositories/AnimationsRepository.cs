@@ -10,18 +10,18 @@ namespace AngbandOS.Core.Repositories;
 [Serializable]
 internal class AnimationsRepository : DictionaryRepository<Animation>
 {
-    public AnimationsRepository(SaveGame saveGame) : base(saveGame) { }
+    public AnimationsRepository(Game game) : base(game) { }
     public override void Load()
     {
-        if (SaveGame.Configuration.Animations == null)
+        if (Game.Configuration.Animations == null)
         {
             base.Load();
         }
         else
         {
-            foreach (AnimationDefinition animationDefinition in SaveGame.Configuration.Animations)
+            foreach (AnimationDefinition animationDefinition in Game.Configuration.Animations)
             {
-                Add(new GenericAnimation(SaveGame, animationDefinition));
+                Add(new GenericAnimation(Game, animationDefinition));
             }
         }
     }

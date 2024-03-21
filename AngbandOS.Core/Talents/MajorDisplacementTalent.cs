@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Talents;
 [Serializable]
 internal class MajorDisplacementTalent : Talent
 {
-    private MajorDisplacementTalent(SaveGame saveGame) : base(saveGame) { }
+    private MajorDisplacementTalent(Game game) : base(game) { }
     public override string Name => "Major Displacement";
     public override int Level => 7;
     public override int ManaCost => 6;
@@ -18,15 +18,15 @@ internal class MajorDisplacementTalent : Talent
 
     public override void Use()
     {
-        SaveGame.RunScriptInt(nameof(TeleportSelfScript), SaveGame.ExperienceLevel.Value * 5);
-        if (SaveGame.ExperienceLevel.Value > 29)
+        Game.RunScriptInt(nameof(TeleportSelfScript), Game.ExperienceLevel.Value * 5);
+        if (Game.ExperienceLevel.Value > 29)
         {
-            SaveGame.RunScriptInt(nameof(BanishMonsters4xScript), SaveGame.ExperienceLevel.Value);
+            Game.RunScriptInt(nameof(BanishMonsters4xScript), Game.ExperienceLevel.Value);
         }
     }
 
     protected override string Comment()
     {
-        return $"range {SaveGame.ExperienceLevel.Value * 5}";
+        return $"range {Game.ExperienceLevel.Value * 5}";
     }
 }

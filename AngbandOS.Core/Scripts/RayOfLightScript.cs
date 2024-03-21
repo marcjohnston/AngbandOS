@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class RayOfLightScript : Script, IScript
 {
-    private RayOfLightScript(SaveGame saveGame) : base(saveGame) { }
+    private RayOfLightScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script.
@@ -18,11 +18,11 @@ internal class RayOfLightScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        if (!SaveGame.GetDirectionWithAim(out int dir))
+        if (!Game.GetDirectionWithAim(out int dir))
         {
             return;
         }
-        SaveGame.MsgPrint("A line of light appears.");
-        SaveGame.LightLine(dir);
+        Game.MsgPrint("A line of light appears.");
+        Game.LightLine(dir);
     }
 }

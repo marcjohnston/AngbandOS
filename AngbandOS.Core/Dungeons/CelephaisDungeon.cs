@@ -9,7 +9,7 @@ namespace AngbandOS.Core.Dungeons;
 [Serializable]
 internal class CelephaisDungeon : Dungeon
 {
-    private CelephaisDungeon(SaveGame saveGame) : base(saveGame) { }
+    private CelephaisDungeon(Game game) : base(game) { }
     public override int BaseOffset => 0;
     public override int MaxLevel => 3;
     public override string Name => "the Sewers under Celephais";

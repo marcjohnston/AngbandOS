@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Spells.Life;
 [Serializable]
 internal class LifeSpellHolyOrb : Spell
 {
-    private LifeSpellHolyOrb(SaveGame saveGame) : base(saveGame) { }
+    private LifeSpellHolyOrb(Game game) : base(game) { }
     protected override string? CastScriptName => nameof(HolyOrbScript);
 
     public override string Name => "Holy Orb";
@@ -19,8 +19,8 @@ internal class LifeSpellHolyOrb : Spell
     {
         get
         {
-            int orb = SaveGame.ExperienceLevel.Value / (SaveGame.BaseCharacterClass.ID == CharacterClass.Priest || SaveGame.BaseCharacterClass.ID == CharacterClass.HighMage ? 2 : 4);
-            return $" dam 3d6+{SaveGame.ExperienceLevel.Value + orb}";
+            int orb = Game.ExperienceLevel.Value / (Game.BaseCharacterClass.ID == CharacterClass.Priest || Game.BaseCharacterClass.ID == CharacterClass.HighMage ? 2 : 4);
+            return $" dam 3d6+{Game.ExperienceLevel.Value + orb}";
         }
     }
 }

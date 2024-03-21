@@ -10,15 +10,15 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class AccuracyRingItemFactory : RingItemFactory
 {
-    private AccuracyRingItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private AccuracyRingItemFactory(Game game) : base(game) { } // This object is a singleton.
 
     public override void ApplyMagic(Item item, int level, int power, Store? store)
     {
-        if (power == 0 && SaveGame.RandomLessThan(100) < 50)
+        if (power == 0 && Game.RandomLessThan(100) < 50)
         {
             power = -1;
         }
-        item.BonusToHit = 5 + SaveGame.DieRoll(8) + item.GetBonusValue(10, level);
+        item.BonusToHit = 5 + Game.DieRoll(8) + item.GetBonusValue(10, level);
         if (power < 0)
         {
             item.IdentBroken = true;
@@ -26,7 +26,7 @@ internal class AccuracyRingItemFactory : RingItemFactory
             item.BonusToHit = 0 - item.BonusToHit;
         }
     }
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(EqualSignSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(EqualSignSymbol));
     public override string Name => "Accuracy";
 
     public override int[] Chance => new int[] { 1, 0, 0, 0 };
@@ -35,5 +35,5 @@ internal class AccuracyRingItemFactory : RingItemFactory
     public override int LevelNormallyFound => 20;
     public override int[] Locale => new int[] { 20, 0, 0, 0 };
     public override int Weight => 2;
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

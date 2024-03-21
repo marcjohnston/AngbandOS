@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Spells.Nature;
 [Serializable]
 internal class NatureSpellDetectDoorsAndTraps : Spell
 {
-    private NatureSpellDetectDoorsAndTraps(SaveGame saveGame) : base(saveGame) { }
+    private NatureSpellDetectDoorsAndTraps(Game game) : base(game) { }
     protected override string? CastScriptName => nameof(DetectDoorsTrapsAndStairsScript);
 
     public override string Name => "Detect Doors and Traps";

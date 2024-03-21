@@ -8,7 +8,7 @@
 [Serializable]
 internal class HanekaTheSmallShopkeeper : Shopkeeper
 {
-    private HanekaTheSmallShopkeeper(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private HanekaTheSmallShopkeeper(Game game) : base(game) { } // This object is a singleton.
     public override string Name => "Haneka the Small";
     public override int MaxCost =>  250;
     public override int MinInflate =>  108;

@@ -10,10 +10,10 @@ namespace AngbandOS.Core.Spells.Tarot;
 [Serializable]
 internal class TarotSpellDimensionDoor : Spell
 {
-    private TarotSpellDimensionDoor(SaveGame saveGame) : base(saveGame) { }
+    private TarotSpellDimensionDoor(Game game) : base(game) { }
     protected override string? CastScriptName => nameof(CreateDimensionDoorScript);
 
     public override string Name => "Dimension Door";
 
-    protected override string LearnedDetails => $"range {SaveGame.ExperienceLevel.Value + 2}";
+    protected override string LearnedDetails => $"range {Game.ExperienceLevel.Value + 2}";
 }

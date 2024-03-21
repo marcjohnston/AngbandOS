@@ -10,10 +10,10 @@ namespace AngbandOS.Core.Talents;
 [Serializable]
 internal abstract class Talent : IGetKey
 {
-    protected readonly SaveGame SaveGame;
-    protected Talent(SaveGame saveGame)
+    protected readonly Game Game;
+    protected Talent(Game game)
     {
-        SaveGame = saveGame;
+        Game = game;
     }
 
     /// <summary>
@@ -39,22 +39,22 @@ internal abstract class Talent : IGetKey
     public int FailureChance()
     {
         int chance = BaseFailure;
-        chance -= 3 * (SaveGame.ExperienceLevel.Value - Level);
-        chance -= 3 * (SaveGame.AbilityScores[SaveGame.BaseCharacterClass.SpellStat].SpellFailureReduction - 1);
-        if (ManaCost > SaveGame.Mana.Value)
+        chance -= 3 * (Game.ExperienceLevel.Value - Level);
+        chance -= 3 * (Game.AbilityScores[Game.BaseCharacterClass.SpellStat].SpellFailureReduction - 1);
+        if (ManaCost > Game.Mana.Value)
         {
-            chance += 5 * (ManaCost - SaveGame.Mana.Value);
+            chance += 5 * (ManaCost - Game.Mana.Value);
         }
-        int minfail = SaveGame.AbilityScores[SaveGame.BaseCharacterClass.SpellStat].SpellMinFailChance;
+        int minfail = Game.AbilityScores[Game.BaseCharacterClass.SpellStat].SpellMinFailChance;
         if (chance < minfail)
         {
             chance = minfail;
         }
-        if (SaveGame.StunTimer.Value > 50)
+        if (Game.StunTimer.Value > 50)
         {
             chance += 25;
         }
-        else if (SaveGame.StunTimer.Value != 0)
+        else if (Game.StunTimer.Value != 0)
         {
             chance += 15;
         }

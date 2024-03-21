@@ -17,27 +17,27 @@ internal abstract class CloakArmorItemFactory : ArmorItemFactory
 
     protected override void ApplyRandomGoodRareCharacteristics(Item item)
     {
-        WeightedRandom<RareItem> weightedRandom = new WeightedRandom<RareItem>(SaveGame);
-        weightedRandom.Add(8, SaveGame.SingletonRepository.RareItems.Get(nameof(CloakOfProtectionRareItem)));
-        weightedRandom.Add(8, SaveGame.SingletonRepository.RareItems.Get(nameof(CloakOfStealthRareItem)));
-        weightedRandom.Add(1, SaveGame.SingletonRepository.RareItems.Get(nameof(CloakOfAmanRareItem)));
-        weightedRandom.Add(1, SaveGame.SingletonRepository.RareItems.Get(nameof(CloakOfElectricityRareItem)));
-        weightedRandom.Add(1, SaveGame.SingletonRepository.RareItems.Get(nameof(CloakOfImmolationRareItem)));
+        WeightedRandom<RareItem> weightedRandom = new WeightedRandom<RareItem>(Game);
+        weightedRandom.Add(8, Game.SingletonRepository.RareItems.Get(nameof(CloakOfProtectionRareItem)));
+        weightedRandom.Add(8, Game.SingletonRepository.RareItems.Get(nameof(CloakOfStealthRareItem)));
+        weightedRandom.Add(1, Game.SingletonRepository.RareItems.Get(nameof(CloakOfAmanRareItem)));
+        weightedRandom.Add(1, Game.SingletonRepository.RareItems.Get(nameof(CloakOfElectricityRareItem)));
+        weightedRandom.Add(1, Game.SingletonRepository.RareItems.Get(nameof(CloakOfImmolationRareItem)));
         item.RareItem = weightedRandom.ChooseOrDefault();
     }
 
     protected override void ApplyRandomPoorRareCharacteristics(Item item)
     {
-        switch (SaveGame.DieRoll(3))
+        switch (Game.DieRoll(3))
         {
             case 1:
-                item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(CloakOfIrritationRareItem));
+                item.RareItem = Game.SingletonRepository.RareItems.Get(nameof(CloakOfIrritationRareItem));
                 break;
             case 2:
-                item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(CloakOfVulnerabilityRareItem));
+                item.RareItem = Game.SingletonRepository.RareItems.Get(nameof(CloakOfVulnerabilityRareItem));
                 break;
             case 3:
-                item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(CloakOfEnvelopingRareItem));
+                item.RareItem = Game.SingletonRepository.RareItems.Get(nameof(CloakOfEnvelopingRareItem));
                 break;
         }
     }
@@ -51,7 +51,7 @@ internal abstract class CloakArmorItemFactory : ArmorItemFactory
 
             if (power > 1)
             {
-                if (SaveGame.DieRoll(20) == 1)
+                if (Game.DieRoll(20) == 1)
                 {
                     item.CreateRandomArtifact(false);
                 }
@@ -67,9 +67,9 @@ internal abstract class CloakArmorItemFactory : ArmorItemFactory
         }
     }
 
-    public CloakArmorItemFactory(SaveGame saveGame) : base(saveGame) { }
-    public override ItemClass ItemClass => SaveGame.SingletonRepository.ItemClasses.Get(nameof(CloaksItemClass));
-    public override BaseInventorySlot BaseWieldSlot => SaveGame.SingletonRepository.InventorySlots.Get(nameof(AboutBodyInventorySlot));
+    public CloakArmorItemFactory(Game game) : base(game) { }
+    public override ItemClass ItemClass => Game.SingletonRepository.ItemClasses.Get(nameof(CloaksItemClass));
+    public override BaseInventorySlot BaseWieldSlot => Game.SingletonRepository.InventorySlots.Get(nameof(AboutBodyInventorySlot));
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Cloak;
     public override bool HatesFire => true;
     public override bool HatesAcid => true;

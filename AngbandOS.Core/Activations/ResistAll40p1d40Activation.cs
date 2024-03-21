@@ -13,18 +13,18 @@ namespace AngbandOS.Core.Activations;
 [Serializable]
 internal class ResistAll40p1d40Activation : Activation
 {
-    private ResistAll40p1d40Activation(SaveGame saveGame) : base(saveGame) { }
+    private ResistAll40p1d40Activation(Game game) : base(game) { }
     public override int RandomChance => 85;
 
     public override string? PreActivationMessage => "Your {0} glows many colors...";
 
     protected override bool OnActivate(Item item)
     {
-        SaveGame.AcidResistanceTimer.AddTimer(SaveGame.DieRoll(40) + 40);
-        SaveGame.LightningResistanceTimer.AddTimer(SaveGame.DieRoll(40) + 40);
-        SaveGame.FireResistanceTimer.AddTimer(SaveGame.DieRoll(40) + 40);
-        SaveGame.ColdResistanceTimer.AddTimer(SaveGame.DieRoll(40) + 40);
-        SaveGame.PoisonResistanceTimer.AddTimer(SaveGame.DieRoll(40) + 40);
+        Game.AcidResistanceTimer.AddTimer(Game.DieRoll(40) + 40);
+        Game.LightningResistanceTimer.AddTimer(Game.DieRoll(40) + 40);
+        Game.FireResistanceTimer.AddTimer(Game.DieRoll(40) + 40);
+        Game.ColdResistanceTimer.AddTimer(Game.DieRoll(40) + 40);
+        Game.PoisonResistanceTimer.AddTimer(Game.DieRoll(40) + 40);
         return true;
     }
 

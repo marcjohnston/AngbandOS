@@ -10,5 +10,5 @@ namespace AngbandOS.Core.Properties;
 [Serializable]
 internal class DisplayedArmorClassBonusIntProperty : IntProperty
 {
-    protected DisplayedArmorClassBonusIntProperty(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    protected DisplayedArmorClassBonusIntProperty(Game game) : base(game) { } // This object is a singleton.
 }

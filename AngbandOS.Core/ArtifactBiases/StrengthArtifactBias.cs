@@ -10,13 +10,13 @@ namespace AngbandOS.Core.ArtifactBiases;
 [Serializable]
 internal class StrengthArtifactBias : ArtifactBias
 {
-    private StrengthArtifactBias(SaveGame saveGame) : base(saveGame) { }
+    private StrengthArtifactBias(Game game) : base(game) { }
     public override bool ApplyBonuses(Item item)
     {
         if (!item.RandomArtifactItemCharacteristics.Str)
         {
             item.RandomArtifactItemCharacteristics.Str = true;
-            if (SaveGame.DieRoll(2) == 1) // 50% chance of being a "free" power
+            if (Game.DieRoll(2) == 1) // 50% chance of being a "free" power
             {
                 return true;
             }
@@ -28,7 +28,7 @@ internal class StrengthArtifactBias : ArtifactBias
         if (!item.RandomArtifactItemCharacteristics.SustStr)
         {
             item.RandomArtifactItemCharacteristics.SustStr = true;
-            if (SaveGame.DieRoll(2) == 1)
+            if (Game.DieRoll(2) == 1)
             {
                 return true;
             }

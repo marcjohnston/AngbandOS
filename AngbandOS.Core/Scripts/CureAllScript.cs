@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class CureAllScript : Script, IScript
 {
-    private CureAllScript(SaveGame saveGame) : base(saveGame) { }
+    private CureAllScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the cure all script.
@@ -18,28 +18,28 @@ internal class CureAllScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        SaveGame.RunScript(nameof(RemoveAllCurseScript));
-        SaveGame.RestoreAbilityScore(Ability.Strength);
-        SaveGame.RestoreAbilityScore(Ability.Intelligence);
-        SaveGame.RestoreAbilityScore(Ability.Wisdom);
-        SaveGame.RestoreAbilityScore(Ability.Constitution);
-        SaveGame.RestoreAbilityScore(Ability.Dexterity);
-        SaveGame.RestoreAbilityScore(Ability.Charisma);
-        SaveGame.RunScript(nameof(RestoreLevelScript));
-        SaveGame.Health.Value = SaveGame.MaxHealth.Value;
-        SaveGame.FractionalHealth = 0;
-        SaveGame.Mana.Value = SaveGame.MaxMana.Value;
-        SaveGame.FractionalMana = 0;
-        SaveGame.BlindnessTimer.ResetTimer();
-        SaveGame.ConfusedTimer.ResetTimer();
-        SaveGame.PoisonTimer.ResetTimer();
-        SaveGame.FearTimer.ResetTimer();
-        SaveGame.ParalysisTimer.ResetTimer();
-        SaveGame.HallucinationsTimer.ResetTimer();
-        SaveGame.StunTimer.ResetTimer();
-        SaveGame.BleedingTimer.ResetTimer();
-        SaveGame.SlowTimer.ResetTimer();
-        SaveGame.SetFood(Constants.PyFoodMax - 1);
-        SaveGame.RunScript(nameof(RedrawScript));
+        Game.RunScript(nameof(RemoveAllCurseScript));
+        Game.RestoreAbilityScore(Ability.Strength);
+        Game.RestoreAbilityScore(Ability.Intelligence);
+        Game.RestoreAbilityScore(Ability.Wisdom);
+        Game.RestoreAbilityScore(Ability.Constitution);
+        Game.RestoreAbilityScore(Ability.Dexterity);
+        Game.RestoreAbilityScore(Ability.Charisma);
+        Game.RunScript(nameof(RestoreLevelScript));
+        Game.Health.Value = Game.MaxHealth.Value;
+        Game.FractionalHealth = 0;
+        Game.Mana.Value = Game.MaxMana.Value;
+        Game.FractionalMana = 0;
+        Game.BlindnessTimer.ResetTimer();
+        Game.ConfusedTimer.ResetTimer();
+        Game.PoisonTimer.ResetTimer();
+        Game.FearTimer.ResetTimer();
+        Game.ParalysisTimer.ResetTimer();
+        Game.HallucinationsTimer.ResetTimer();
+        Game.StunTimer.ResetTimer();
+        Game.BleedingTimer.ResetTimer();
+        Game.SlowTimer.ResetTimer();
+        Game.SetFood(Constants.PyFoodMax - 1);
+        Game.RunScript(nameof(RedrawScript));
     }
 }

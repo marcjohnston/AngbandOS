@@ -10,5 +10,5 @@ namespace AngbandOS.Core.Repositories;
 [Serializable]
 internal class CharacterClassesRepository : DictionaryRepository<BaseCharacterClass>
 {
-    public CharacterClassesRepository(SaveGame saveGame) : base(saveGame) { }
+    public CharacterClassesRepository(Game game) : base(game) { }
 }

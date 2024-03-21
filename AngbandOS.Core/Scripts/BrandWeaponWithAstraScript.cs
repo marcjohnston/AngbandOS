@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class BrandWeaponWithAstraScript : Script, IScript
 {
-    private BrandWeaponWithAstraScript(SaveGame saveGame) : base(saveGame) { }
+    private BrandWeaponWithAstraScript(Game game) : base(game) { }
 
     /// <summary>
     /// Enchants the melee weapon as planar.
@@ -18,7 +18,7 @@ internal class BrandWeaponWithAstraScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        Item? item = SaveGame.GetInventoryItem(InventorySlot.MeleeWeapon);
+        Item? item = Game.GetInventoryItem(InventorySlot.MeleeWeapon);
 
         // We must have a non-rare, non-artifact weapon that isn't cursed
         if (item != null && !item.IsArtifact && !item.IsRare() && !item.IsCursed())
@@ -28,16 +28,16 @@ internal class BrandWeaponWithAstraScript : Script, IScript
 
             // Make it a planar weapon
             act = "seems very unstable now.";
-            item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(WeaponPlanarWeaponRareItem));
-            item.TypeSpecificValue = SaveGame.DieRoll(2);
+            item.RareItem = Game.SingletonRepository.RareItems.Get(nameof(WeaponPlanarWeaponRareItem));
+            item.TypeSpecificValue = Game.DieRoll(2);
 
             // Let the player know what happened
-            SaveGame.MsgPrint($"Your {itemName} {act}");
-            SaveGame.Enchant(item, SaveGame.RandomLessThan(3) + 4, Constants.EnchTohit | Constants.EnchTodam);
+            Game.MsgPrint($"Your {itemName} {act}");
+            Game.Enchant(item, Game.RandomLessThan(3) + 4, Constants.EnchTohit | Constants.EnchTodam);
         }
         else
         {
-            SaveGame.MsgPrint("The Branding failed.");
+            Game.MsgPrint("The Branding failed.");
         }
     }
 }

@@ -10,22 +10,22 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class ChaosDragonScaleMailArmorItemFactory : DragonScaleMailArmorItemFactory, IItemsCanBeActivated
 {
-    private ChaosDragonScaleMailArmorItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private ChaosDragonScaleMailArmorItemFactory(Game game) : base(game) { } // This object is a singleton.
 
     public void ActivateItem(Item item)
     {
-        if (!SaveGame.GetDirectionWithAim(out int dir))
+        if (!Game.GetDirectionWithAim(out int dir))
         {
             return;
         }
-        int chance = SaveGame.RandomLessThan(2);
+        int chance = Game.RandomLessThan(2);
         string element = chance == 1 ? "chaos" : "disenchantment";
-        SaveGame.MsgPrint($"You breathe {element}.");
-        SaveGame.FireBall(projectile: chance == 1 ? (Projectile)SaveGame.SingletonRepository.Projectiles.Get(nameof(ChaosProjectile)) : SaveGame.SingletonRepository.Projectiles.Get(nameof(DisenchantProjectile)), dir: dir, dam: 220, rad: -2);
-        item.RechargeTimeLeft = SaveGame.RandomLessThan(300) + 300;
+        Game.MsgPrint($"You breathe {element}.");
+        Game.FireBall(projectile: chance == 1 ? (Projectile)Game.SingletonRepository.Projectiles.Get(nameof(ChaosProjectile)) : Game.SingletonRepository.Projectiles.Get(nameof(DisenchantProjectile)), dir: dir, dam: 220, rad: -2);
+        item.RechargeTimeLeft = Game.RandomLessThan(300) + 300;
     }
     public override string? DescribeActivationEffect => "breathe chaos/disenchant (220) every 300+d300 turns";
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(OpenBraceSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(OpenBraceSymbol));
     public override ColorEnum Color => ColorEnum.Purple;
     public override string Name => "Chaos Dragon Scale Mail";
 
@@ -47,5 +47,5 @@ internal class ChaosDragonScaleMailArmorItemFactory : DragonScaleMailArmorItemFa
     public override int ToA => 10;
     public override int ToH => -2;
     public override int Weight => 200;
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

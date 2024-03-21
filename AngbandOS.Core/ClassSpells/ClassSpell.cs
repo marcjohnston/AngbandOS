@@ -12,10 +12,10 @@ namespace AngbandOS.Core.ClassSpells;
 [Serializable]
 internal abstract class ClassSpell : IGetKey
 {
-    protected readonly SaveGame SaveGame;
-    protected ClassSpell(SaveGame saveGame)
+    protected readonly Game Game;
+    protected ClassSpell(Game game)
     {
-        SaveGame = saveGame;
+        Game = game;
     }
 
     /// <summary>

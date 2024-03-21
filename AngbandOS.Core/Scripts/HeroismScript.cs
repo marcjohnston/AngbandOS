@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class HeroismScript : Script, IScript
 {
-    private HeroismScript(SaveGame saveGame) : base(saveGame) { }
+    private HeroismScript(Game game) : base(game) { }
 
     /// <summary>
     /// Adds between 25 and 50 turns of heroism, restores 10 points of health and heals fear.
@@ -18,8 +18,8 @@ internal class HeroismScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        SaveGame.HeroismTimer.AddTimer(SaveGame.DieRoll(25) + 25);
-        SaveGame.RestoreHealth(10);
-        SaveGame.FearTimer.ResetTimer();
+        Game.HeroismTimer.AddTimer(Game.DieRoll(25) + 25);
+        Game.RestoreHealth(10);
+        Game.FearTimer.ResetTimer();
     }
 }

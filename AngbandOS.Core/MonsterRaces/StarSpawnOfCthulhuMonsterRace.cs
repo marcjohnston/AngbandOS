@@ -10,7 +10,7 @@ namespace AngbandOS.Core.MonsterRaces;
 [Serializable]
 internal class StarSpawnOfCthulhuMonsterRace : MonsterRace
 {
-    protected StarSpawnOfCthulhuMonsterRace(SaveGame saveGame) : base(saveGame) { }
+    protected StarSpawnOfCthulhuMonsterRace(Game game) : base(game) { }
 
     protected override string[]? SpellNames =>new string[] {
         nameof(BreatheAcidMonsterSpell),

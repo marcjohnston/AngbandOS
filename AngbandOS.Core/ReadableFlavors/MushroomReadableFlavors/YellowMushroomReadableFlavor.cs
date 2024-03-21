@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Flavors;
 [Serializable]
 internal class YellowMushroomReadableFlavor : MushroomReadableFlavor
 {
-    private YellowMushroomReadableFlavor(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private YellowMushroomReadableFlavor(Game game) : base(game) { } // This object is a singleton.
     protected override string SymbolName => nameof(CommaSymbol);
     public override ColorEnum Color => ColorEnum.Yellow;
     public override string Name => "Yellow";

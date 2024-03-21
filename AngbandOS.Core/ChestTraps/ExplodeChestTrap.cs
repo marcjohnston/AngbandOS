@@ -10,11 +10,11 @@ namespace AngbandOS.Core.ChestTraps;
 [Serializable]
 internal class ExplodeChestTrap : ChestTrap
 {
-    private ExplodeChestTrap(SaveGame saveGame) : base(saveGame) { }
+    private ExplodeChestTrap(Game game) : base(game) { }
     public override void Activate(ActivateChestTrapEventArgs eventArgs)
     {
-        SaveGame.MsgPrint("There is a sudden explosion!");
-        SaveGame.TakeHit(SaveGame.DiceRoll(5, 8), "an exploding chest");
+        Game.MsgPrint("There is a sudden explosion!");
+        Game.TakeHit(Game.DiceRoll(5, 8), "an exploding chest");
         eventArgs.DestroysContents = true;
     }
 

@@ -10,5 +10,5 @@ namespace AngbandOS.Core.Repositories;
 [Serializable]
 internal class ArtifactBiasesRepository : DictionaryRepository<ArtifactBias>
 {
-    public ArtifactBiasesRepository(SaveGame saveGame) : base(saveGame) { }
+    public ArtifactBiasesRepository(Game game) : base(game) { }
 }

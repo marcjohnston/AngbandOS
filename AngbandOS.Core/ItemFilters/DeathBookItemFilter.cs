@@ -13,6 +13,6 @@ namespace AngbandOS.Core.ItemFilters;
 [Serializable]
 internal class DeathBookItemFilter : ItemFilter<DeathBookItemFactory>
 {
-    private DeathBookItemFilter(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private DeathBookItemFilter(Game game) : base(game) { } // This object is a singleton.
     public override bool? HasValue => true;
 }

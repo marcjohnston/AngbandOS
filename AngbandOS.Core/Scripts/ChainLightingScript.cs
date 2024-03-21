@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class ChainLightingScript : Script, IScript
 {
-    private ChainLightingScript(SaveGame saveGame) : base(saveGame) { }
+    private ChainLightingScript(Game game) : base(game) { }
 
     /// <summary>
     /// Fires a beam of electricity in all directions.
@@ -20,7 +20,7 @@ internal class ChainLightingScript : Script, IScript
     {
         for (int dir = 0; dir <= 9; dir++)
         {
-            SaveGame.FireBeam(SaveGame.SingletonRepository.Projectiles.Get(nameof(ElecProjectile)), dir, SaveGame.DiceRoll(5 + (SaveGame.ExperienceLevel.Value / 10), 8));
+            Game.FireBeam(Game.SingletonRepository.Projectiles.Get(nameof(ElecProjectile)), dir, Game.DiceRoll(5 + (Game.ExperienceLevel.Value / 10), 8));
         }
     }
 }

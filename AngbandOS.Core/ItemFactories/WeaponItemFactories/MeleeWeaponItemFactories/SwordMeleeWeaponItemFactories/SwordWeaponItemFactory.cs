@@ -10,11 +10,11 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal abstract class SwordWeaponItemFactory : MeleeWeaponItemFactory
 {
-    public SwordWeaponItemFactory(SaveGame saveGame) : base(saveGame) { }
+    public SwordWeaponItemFactory(Game game) : base(game) { }
     protected override bool CanBeWeaponOfLaw => true;
     protected override bool CanBeWeaponOfSharpness => true;
     protected override bool CapableOfVorpalSlaying => true;
-    public override ItemClass ItemClass => SaveGame.SingletonRepository.ItemClasses.Get(nameof(SwordsItemClass));
+    public override ItemClass ItemClass => Game.SingletonRepository.ItemClasses.Get(nameof(SwordsItemClass));
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Sword;
     public override bool HatesAcid => true;
     public override int PackSort => 28;

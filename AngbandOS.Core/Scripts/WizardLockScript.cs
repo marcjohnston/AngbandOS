@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class WizardLockScript : Script, IScript
 {
-    private WizardLockScript(SaveGame saveGame) : base(saveGame) { }
+    private WizardLockScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script.
@@ -18,10 +18,10 @@ internal class WizardLockScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        if (!SaveGame.GetDirectionWithAim(out int dir))
+        if (!Game.GetDirectionWithAim(out int dir))
         {
             return;
         }
-        SaveGame.WizardLock(dir);
+        Game.WizardLock(dir);
     }
 }

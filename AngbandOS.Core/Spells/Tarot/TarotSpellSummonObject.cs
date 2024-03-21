@@ -10,10 +10,10 @@ namespace AngbandOS.Core.Spells.Tarot;
 [Serializable]
 internal class TarotSpellSummonObject : Spell
 {
-    private TarotSpellSummonObject(SaveGame saveGame) : base(saveGame) { }
+    private TarotSpellSummonObject(Game game) : base(game) { }
     protected override string? CastScriptName => nameof(SummonItemScript);
 
     public override string Name => "Summon Object";
 
-    protected override string LearnedDetails => $"max wgt {SaveGame.ExperienceLevel.Value * 15 / 10}";
+    protected override string LearnedDetails => $"max wgt {Game.ExperienceLevel.Value * 15 / 10}";
 }

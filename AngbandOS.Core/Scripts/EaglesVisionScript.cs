@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class EaglesVisionScript : Script, IScript
 {
-    private EaglesVisionScript(SaveGame saveGame) : base(saveGame) { }
+    private EaglesVisionScript(Game game) : base(game) { }
 
 
     /// <summary>
@@ -19,8 +19,8 @@ internal class EaglesVisionScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        SaveGame.DetectTraps();
-        SaveGame.DetectDoors();
-        SaveGame.DetectStairs();
+        Game.DetectTraps();
+        Game.DetectDoors();
+        Game.DetectStairs();
     }
 }

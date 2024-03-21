@@ -10,7 +10,7 @@ namespace AngbandOS.Core.PropertyFormatters;
 [Serializable]
 internal class RightJustification : Justification
 {
-    private RightJustification(SaveGame saveGame) : base(saveGame) { }
+    private RightJustification(Game game) : base(game) { }
 
     public override string Format(string value, int width) => value.PadLeft(width);
 }

@@ -10,7 +10,7 @@ namespace AngbandOS.Core.MonsterRaces;
 [Serializable]
 internal class MimeTheNibelungMonsterRace : MonsterRace
 {
-    protected MimeTheNibelungMonsterRace(SaveGame saveGame) : base(saveGame) { }
+    protected MimeTheNibelungMonsterRace(Game game) : base(game) { }
 
     protected override string[]? SpellNames =>new string[] {
         nameof(FireBoltMonsterSpell),

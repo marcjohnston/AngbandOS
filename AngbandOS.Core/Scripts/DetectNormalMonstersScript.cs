@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class DetectNormalMonstersScript : Script, IScript, ISuccessfulScript
 {
-    private DetectNormalMonstersScript(SaveGame saveGame) : base(saveGame) { }
+    private DetectNormalMonstersScript(Game game) : base(game) { }
 
     /// <summary>
     /// Detects monsters and returns true, if monsters were reveals; false, otherwise.
@@ -19,9 +19,9 @@ internal class DetectNormalMonstersScript : Script, IScript, ISuccessfulScript
     public bool ExecuteSuccessfulScript()
     {
         bool flag = false;
-        for (int i = 1; i < SaveGame.MMax; i++)
+        for (int i = 1; i < Game.MMax; i++)
         {
-            Monster mPtr = SaveGame.Monsters[i];
+            Monster mPtr = Game.Monsters[i];
             MonsterRace rPtr = mPtr.Race;
             if (mPtr.Race == null)
             {
@@ -29,22 +29,22 @@ internal class DetectNormalMonstersScript : Script, IScript, ISuccessfulScript
             }
             int y = mPtr.MapY;
             int x = mPtr.MapX;
-            if (!SaveGame.PanelContains(y, x))
+            if (!Game.PanelContains(y, x))
             {
                 continue;
             }
-            if (!rPtr.Invisible || SaveGame.HasSeeInvisibility || SaveGame.SeeInvisibilityTimer.Value != 0)
+            if (!rPtr.Invisible || Game.HasSeeInvisibility || Game.SeeInvisibilityTimer.Value != 0)
             {
-                SaveGame.RepairMonsters = true;
+                Game.RepairMonsters = true;
                 mPtr.IndividualMonsterFlags |= Constants.MflagMark | Constants.MflagShow;
                 mPtr.IsVisible = true;
-                SaveGame.RedrawSingleLocation(y, x);
+                Game.RedrawSingleLocation(y, x);
                 flag = true;
             }
         }
         if (flag)
         {
-            SaveGame.MsgPrint("You sense the presence of monsters!");
+            Game.MsgPrint("You sense the presence of monsters!");
         }
         return flag;
     }

@@ -10,20 +10,20 @@ namespace AngbandOS.Core.Rewards;
 [Serializable]
 internal class GainExpReward : Reward
 {
-    private GainExpReward(SaveGame saveGame) : base(saveGame) { }
+    private GainExpReward(Game game) : base(game) { }
     public override void GetReward(Patron patron)
     {
-        SaveGame.MsgPrint($"The voice of {patron.ShortName} booms out:");
-        SaveGame.MsgPrint("'Well done, mortal! Lead on!'");
-        if (SaveGame.ExperiencePoints.Value < Constants.PyMaxExp)
+        Game.MsgPrint($"The voice of {patron.ShortName} booms out:");
+        Game.MsgPrint("'Well done, mortal! Lead on!'");
+        if (Game.ExperiencePoints.Value < Constants.PyMaxExp)
         {
-            int ee = (SaveGame.ExperiencePoints.Value / 2) + 10;
+            int ee = (Game.ExperiencePoints.Value / 2) + 10;
             if (ee > 100000)
             {
                 ee = 100000;
             }
-            SaveGame.MsgPrint("You feel more experienced.");
-            SaveGame.GainExperience(ee);
+            Game.MsgPrint("You feel more experienced.");
+            Game.GainExperience(ee);
         }
     }
 }

@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Tiles;
 [Serializable]
 internal class EmptyLotStoreTile : Tile
 {
-    private EmptyLotStoreTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private EmptyLotStoreTile(Game game) : base(game) { } // This object is a singleton.
     protected override string SymbolName => nameof(SpaceBarSymbol);
     public override string Description => "";
     public override int MapPriority => 0;

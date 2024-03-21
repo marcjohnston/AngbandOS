@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Flavors;
 [Serializable]
 internal class PewterAmuletReadableFlavor : AmuletReadableFlavor
 {
-    private PewterAmuletReadableFlavor(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private PewterAmuletReadableFlavor(Game game) : base(game) { } // This object is a singleton.
     protected override string SymbolName => nameof(DoubleQuoteSymbol);
     public override ColorEnum Color => ColorEnum.BrightGrey;
     public override string Name => "Pewter";

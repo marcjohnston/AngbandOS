@@ -10,20 +10,20 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class SetOfGauntletsWhiteSparkFixedArtifact : FixedArtifact, IFixedArtifactActivatible
 {
-    private SetOfGauntletsWhiteSparkFixedArtifact(SaveGame saveGame) : base(saveGame) { }
+    private SetOfGauntletsWhiteSparkFixedArtifact(Game game) : base(game) { }
 
     protected override string BaseItemFactoryName => nameof(GauntletGlovesArmorItemFactory);
 
     // White Spark shoot lightning bolts
     public void ActivateItem(Item item)
     {
-        SaveGame.MsgPrint("Your gauntlets are covered in sparks...");
-        if (!SaveGame.GetDirectionWithAim(out int dir))
+        Game.MsgPrint("Your gauntlets are covered in sparks...");
+        if (!Game.GetDirectionWithAim(out int dir))
         {
             return;
         }
-        SaveGame.FireBolt(SaveGame.SingletonRepository.Projectiles.Get(nameof(Projection.ElecProjectile)), dir, base.SaveGame.DiceRoll(4, 8));
-        item.RechargeTimeLeft = base.SaveGame.RandomLessThan(6) + 6;
+        Game.FireBolt(Game.SingletonRepository.Projectiles.Get(nameof(Projection.ElecProjectile)), dir, base.Game.DiceRoll(4, 8));
+        item.RechargeTimeLeft = base.Game.RandomLessThan(6) + 6;
     }
     public string DescribeActivationEffect => "lightning bolt (4d8) every 6+d6 turns";
 

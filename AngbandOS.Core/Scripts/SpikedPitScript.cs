@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class SpikedPitScript : Script, IScript
 {
-    private SpikedPitScript(SaveGame saveGame) : base(saveGame) { }
+    private SpikedPitScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script.
@@ -19,25 +19,25 @@ internal class SpikedPitScript : Script, IScript
     public void ExecuteScript()
     {
         // A pit can be flown over with feather fall
-        if (SaveGame.HasFeatherFall)
+        if (Game.HasFeatherFall)
         {
-            SaveGame.MsgPrint("You fly over a spiked pit.");
+            Game.MsgPrint("You fly over a spiked pit.");
         }
         else
         {
-            SaveGame.MsgPrint("You fall into a spiked pit!");
+            Game.MsgPrint("You fall into a spiked pit!");
             string name = "a pit trap";
             // A pit does 2d6 fall damage
-            int damage = SaveGame.DiceRoll(2, 6);
+            int damage = Game.DiceRoll(2, 6);
             // 50% chance of doing double damage plus bleeding
-            if (SaveGame.RandomLessThan(100) < 50)
+            if (Game.RandomLessThan(100) < 50)
             {
-                SaveGame.MsgPrint("You are impaled!");
+                Game.MsgPrint("You are impaled!");
                 name = "a spiked pit";
                 damage *= 2;
-                SaveGame.BleedingTimer.AddTimer(SaveGame.DieRoll(damage));
+                Game.BleedingTimer.AddTimer(Game.DieRoll(damage));
             }
-            SaveGame.TakeHit(damage, name);
+            Game.TakeHit(damage, name);
         }
     }
 }

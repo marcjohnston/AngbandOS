@@ -10,5 +10,5 @@ namespace AngbandOS.Core.Properties;
 [Serializable]
 internal class ExperiencePointsIntProperty : IntProperty
 {
-    protected ExperiencePointsIntProperty(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    protected ExperiencePointsIntProperty(Game game) : base(game) { } // This object is a singleton.
 }

@@ -10,13 +10,13 @@ namespace AngbandOS.Core.ArtifactBiases;
 [Serializable]
 internal class DexterityArtifactBias : ArtifactBias
 {
-    private DexterityArtifactBias(SaveGame saveGame) : base(saveGame) { }
+    private DexterityArtifactBias(Game game) : base(game) { }
     public override bool ApplyBonuses(Item item)
     {
         if (!item.RandomArtifactItemCharacteristics.Dex)
         {
             item.RandomArtifactItemCharacteristics.Dex = true;
-            if (SaveGame.DieRoll(2) == 1)
+            if (Game.DieRoll(2) == 1)
             {
                 return true;
             }
@@ -29,7 +29,7 @@ internal class DexterityArtifactBias : ArtifactBias
         if (!item.RandomArtifactItemCharacteristics.SustDex)
         {
             item.RandomArtifactItemCharacteristics.SustDex = true;
-            if (SaveGame.DieRoll(2) == 1)
+            if (Game.DieRoll(2) == 1)
             {
                 return true;
             }

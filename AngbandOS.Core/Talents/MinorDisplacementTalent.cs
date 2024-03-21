@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Talents;
 [Serializable]
 internal class MinorDisplacementTalent : Talent
 {
-    private MinorDisplacementTalent(SaveGame saveGame) : base(saveGame) { }
+    private MinorDisplacementTalent(Game game) : base(game) { }
     public override string Name => "Minor Displacement";
     public override int Level => 3;
     public override int ManaCost => 2;
@@ -18,33 +18,33 @@ internal class MinorDisplacementTalent : Talent
 
     public override void Use()
     {
-        if (SaveGame.ExperienceLevel.Value < 25)
+        if (Game.ExperienceLevel.Value < 25)
         {
-            SaveGame.RunScriptInt(nameof(TeleportSelfScript), 10);
+            Game.RunScriptInt(nameof(TeleportSelfScript), 10);
         }
         else
         {
-            SaveGame.MsgPrint("Choose a destination.");
-            if (!SaveGame.TgtPt(out int i, out int j))
+            Game.MsgPrint("Choose a destination.");
+            if (!Game.TgtPt(out int i, out int j))
             {
                 return;
             }
-            SaveGame.Energy -= 60 - SaveGame.ExperienceLevel.Value;
-            if (!SaveGame.GridPassableNoCreature(j, i) || SaveGame.Grid[j][i].TileFlags.IsSet(GridTile.InVault) || SaveGame.Grid[j][i].FeatureType is not WaterTile || SaveGame.Distance(j, i, SaveGame.MapY, SaveGame.MapX) > SaveGame.ExperienceLevel.Value + 2 || SaveGame.RandomLessThan(SaveGame.ExperienceLevel.Value * SaveGame.ExperienceLevel.Value / 2) == 0)
+            Game.Energy -= 60 - Game.ExperienceLevel.Value;
+            if (!Game.GridPassableNoCreature(j, i) || Game.Grid[j][i].TileFlags.IsSet(GridTile.InVault) || Game.Grid[j][i].FeatureType is not WaterTile || Game.Distance(j, i, Game.MapY, Game.MapX) > Game.ExperienceLevel.Value + 2 || Game.RandomLessThan(Game.ExperienceLevel.Value * Game.ExperienceLevel.Value / 2) == 0)
             {
-                SaveGame.MsgPrint("Something disrupts your concentration!");
-                SaveGame.Energy -= 100;
-                SaveGame.RunScriptInt(nameof(TeleportSelfScript), 20);
+                Game.MsgPrint("Something disrupts your concentration!");
+                Game.Energy -= 100;
+                Game.RunScriptInt(nameof(TeleportSelfScript), 20);
             }
             else
             {
-                SaveGame.TeleportPlayerTo(j, i);
+                Game.TeleportPlayerTo(j, i);
             }
         }
     }
 
     protected override string Comment()
     {
-        return $"range {(SaveGame.ExperienceLevel.Value < 25 ? 10 : SaveGame.ExperienceLevel.Value + 2)}";
+        return $"range {(Game.ExperienceLevel.Value < 25 ? 10 : Game.ExperienceLevel.Value + 2)}";
     }
 }

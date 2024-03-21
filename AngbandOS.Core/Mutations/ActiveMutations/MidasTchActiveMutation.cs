@@ -10,12 +10,12 @@ namespace AngbandOS.Core.Mutations.ActiveMutations;
 [Serializable]
 internal class MidasTchActiveMutation : Mutation
 {
-    private MidasTchActiveMutation(SaveGame saveGame) : base(saveGame) { }
+    private MidasTchActiveMutation(Game game) : base(game) { }
     public override void Activate()
     {
-        if (SaveGame.CheckIfRacialPowerWorks(10, 5, Ability.Intelligence, 12))
+        if (Game.CheckIfRacialPowerWorks(10, 5, Ability.Intelligence, 12))
         {
-            SaveGame.RunScript(nameof(AlchemyScript));
+            Game.RunScript(nameof(AlchemyScript));
         }
     }
 

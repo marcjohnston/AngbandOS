@@ -10,9 +10,9 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class GharneFragmentsChaosBookItemFactory : ChaosBookItemFactory
 {
-    private GharneFragmentsChaosBookItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private GharneFragmentsChaosBookItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(QuestionMarkSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(QuestionMarkSymbol));
     public override ColorEnum Color => ColorEnum.Red;
     public override string Name => "[G'harne Fragments]";
 
@@ -35,7 +35,7 @@ internal class GharneFragmentsChaosBookItemFactory : ChaosBookItemFactory
 
     public override int Weight => 30;
     public override bool KindIsGood => true;
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 
     protected override string[] SpellNames => new string[]
     {

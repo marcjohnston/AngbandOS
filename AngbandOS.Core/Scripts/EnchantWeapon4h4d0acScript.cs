@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class EnchantWeapon4h4d0acScript : Script, IScript, IStoreScript, ISuccessfulScript
 {
-    private EnchantWeapon4h4d0acScript(SaveGame saveGame) : base(saveGame) { }
+    private EnchantWeapon4h4d0acScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the enchant weapon script.  Does not modify any of the store flags.
@@ -18,27 +18,27 @@ internal class EnchantWeapon4h4d0acScript : Script, IScript, IStoreScript, ISucc
     /// <returns></returns>
     public void ExecuteStoreScript(StoreCommandEvent storeCommandEvent)
     {
-        if (!SaveGame.ServiceHaggle(800, out int price))
+        if (!Game.ServiceHaggle(800, out int price))
         {
-            if (price > SaveGame.Gold.Value)
+            if (price > Game.Gold.Value)
             {
-                SaveGame.MsgPrint("You do not have the gold!");
+                Game.MsgPrint("You do not have the gold!");
             }
             else
             {
-                SaveGame.Gold.Value -= price;
-                SaveGame.SayComment_1();
-                SaveGame.PlaySound(SoundEffectEnum.StoreTransaction);
-                SaveGame.StorePrtGold();
+                Game.Gold.Value -= price;
+                Game.SayComment_1();
+                Game.PlaySound(SoundEffectEnum.StoreTransaction);
+                Game.StorePrtGold();
                 ExecuteScript();
             }
-            SaveGame.HandleStuff();
+            Game.HandleStuff();
         }
     }
 
     public bool ExecuteSuccessfulScript()
     {
-        return SaveGame.EnchantItem(4, 4, 0);
+        return Game.EnchantItem(4, 4, 0);
     }
 
     /// <summary>

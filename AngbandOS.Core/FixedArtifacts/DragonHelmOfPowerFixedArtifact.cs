@@ -10,7 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class DragonHelmOfPowerFixedArtifact : FixedArtifact
 {
-    private DragonHelmOfPowerFixedArtifact(SaveGame saveGame) : base(saveGame) { }
+    private DragonHelmOfPowerFixedArtifact(Game game) : base(game) { }
 
     protected override string BaseItemFactoryName => nameof(DragonHelmArmorItemFactory);
 

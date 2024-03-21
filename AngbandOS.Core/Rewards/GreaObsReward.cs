@@ -10,11 +10,11 @@ namespace AngbandOS.Core.Rewards;
 [Serializable]
 internal class GreaObsReward : Reward
 {
-    private GreaObsReward(SaveGame saveGame) : base(saveGame) { }
+    private GreaObsReward(Game game) : base(game) { }
     public override void GetReward(Patron patron)
     {
-        SaveGame.MsgPrint($"The voice of {patron.ShortName} booms out:");
-        SaveGame.MsgPrint("'Behold, mortal, how generously I reward thy loyalty.'");
-        SaveGame.Acquirement(SaveGame.MapY, SaveGame.MapX, SaveGame.DieRoll(2) + 1, true);
+        Game.MsgPrint($"The voice of {patron.ShortName} booms out:");
+        Game.MsgPrint("'Behold, mortal, how generously I reward thy loyalty.'");
+        Game.Acquirement(Game.MapY, Game.MapX, Game.DieRoll(2) + 1, true);
     }
 }

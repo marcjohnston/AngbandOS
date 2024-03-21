@@ -13,7 +13,7 @@ namespace AngbandOS.Core.Activations;
 [Serializable]
 internal class _templateActivation : Activation
 {
-    private _templateActivation(SaveGame saveGame) : base(saveGame) { }
+    private _templateActivation(Game game) : base(game) { }
 
     public override int RandomChance => 5;
 
@@ -21,7 +21,7 @@ internal class _templateActivation : Activation
 
     protected override bool OnActivate(Item item)
     {
-        return SaveGame.RunCancellableScript(nameof(AlchemyScript));
+        return Game.RunCancellableScript(nameof(AlchemyScript));
     }
 
     public override int RechargeTime() => 500;

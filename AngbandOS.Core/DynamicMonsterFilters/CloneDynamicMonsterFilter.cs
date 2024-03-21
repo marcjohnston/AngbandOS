@@ -10,13 +10,13 @@ namespace AngbandOS.Core.DynamicMonsterFilters;
 [Serializable]
 internal class CloneDynamicMonsterFilter : IMonsterFilter
 {
-    private readonly SaveGame SaveGame;
+    private readonly Game Game;
     private MonsterRace _race;
 
-    public CloneDynamicMonsterFilter(SaveGame saveGame, MonsterRace race)
+    public CloneDynamicMonsterFilter(Game game, MonsterRace race)
     {
         _race = race;
-        SaveGame = saveGame;
+        Game = game;
     }
 
     public bool Matches(MonsterRace rPtr)

@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Genders;
 [Serializable]
 internal class OtherGender : Gender
 {
-    private OtherGender(SaveGame saveGame) : base(saveGame) { }
+    private OtherGender(Game game) : base(game) { }
     public override string Title => "Other";
     public override string Winner => "Monarch";
     public override int Index => 2;

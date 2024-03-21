@@ -10,7 +10,7 @@ namespace AngbandOS.Core.MonsterFilters;
 [Serializable]
 internal class HiDragonMonsterFilter : MonsterFilter
 {
-    private HiDragonMonsterFilter(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private HiDragonMonsterFilter(Game game) : base(game) { } // This object is a singleton.
     public override bool Matches(MonsterRace rPtr)
     {
         return rPtr.Symbol.Character == 'D';

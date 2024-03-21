@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class DisintegrateScript : Script, IScript
 {
-    private DisintegrateScript(SaveGame saveGame) : base(saveGame) { }
+    private DisintegrateScript(Game game) : base(game) { }
 
     /// <summary>
     /// Fires a ball of disintegration in a chosen direction.
@@ -18,10 +18,10 @@ internal class DisintegrateScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        if (!SaveGame.GetDirectionWithAim(out int dir))
+        if (!Game.GetDirectionWithAim(out int dir))
         {
             return;
         }
-        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(DisintegrateProjectile)), dir, 80 + SaveGame.ExperienceLevel.Value, 3 + (SaveGame.ExperienceLevel.Value / 40));
+        Game.FireBall(Game.SingletonRepository.Projectiles.Get(nameof(DisintegrateProjectile)), dir, 80 + Game.ExperienceLevel.Value, 3 + (Game.ExperienceLevel.Value / 40));
     }
 }

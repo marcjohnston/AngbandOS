@@ -13,7 +13,7 @@ namespace AngbandOS.Core.Commands;
 [Serializable]
 internal class ManualGameCommand : GameCommand
 {
-    private ManualGameCommand(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private ManualGameCommand(Game game) : base(game) { } // This object is a singleton.
 
     public override char KeyChar => 'h';
 

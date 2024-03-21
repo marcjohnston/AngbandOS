@@ -10,15 +10,15 @@ namespace AngbandOS.Core.Mutations.ActiveMutations;
 [Serializable]
 internal class RadiationActiveMutation : Mutation
 {
-    private RadiationActiveMutation(SaveGame saveGame) : base(saveGame) { }
+    private RadiationActiveMutation(Game game) : base(game) { }
     public override void Activate()
     {
-        if (!SaveGame.CheckIfRacialPowerWorks(15, 15, Ability.Constitution, 14))
+        if (!Game.CheckIfRacialPowerWorks(15, 15, Ability.Constitution, 14))
         {
             return;
         }
-        SaveGame.MsgPrint("Radiation flows from your body!");
-        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(NukeProjectile)), 0, SaveGame.ExperienceLevel.Value * 2, 3 + (SaveGame.ExperienceLevel.Value / 20));
+        Game.MsgPrint("Radiation flows from your body!");
+        Game.FireBall(Game.SingletonRepository.Projectiles.Get(nameof(NukeProjectile)), 0, Game.ExperienceLevel.Value * 2, 3 + (Game.ExperienceLevel.Value / 20));
     }
 
     public override string ActivationSummary(int lvl)

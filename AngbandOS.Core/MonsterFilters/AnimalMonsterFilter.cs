@@ -10,7 +10,7 @@ namespace AngbandOS.Core.MonsterFilters;
 [Serializable]
 internal class AnimalMonsterFilter : MonsterFilter
 {
-    private AnimalMonsterFilter(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private AnimalMonsterFilter(Game game) : base(game) { } // This object is a singleton.
     /// <summary>
     /// Returns true, if a monster is not unique and is an animal.
     /// </summary>

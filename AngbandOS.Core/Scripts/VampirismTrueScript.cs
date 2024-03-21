@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class VampirismTrueScript : Script, IScript
 {
-    private VampirismTrueScript(SaveGame saveGame) : base(saveGame) { }
+    private VampirismTrueScript(Game game) : base(game) { }
 
     /// <summary>
     /// Drains 100 points of life from a monster in a chosen direction and adds 100 points to the player.
@@ -18,15 +18,15 @@ internal class VampirismTrueScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        if (!SaveGame.GetDirectionWithAim(out int dir))
+        if (!Game.GetDirectionWithAim(out int dir))
         {
             return;
         }
         for (int dummy = 0; dummy < 3; dummy++)
         {
-            if (SaveGame.DrainLife(dir, 100))
+            if (Game.DrainLife(dir, 100))
             {
-                SaveGame.RestoreHealth(100);
+                Game.RestoreHealth(100);
             }
         }
     }

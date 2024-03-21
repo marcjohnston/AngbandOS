@@ -10,23 +10,23 @@ namespace AngbandOS.Core.Timers;
 [Serializable]
 internal class BlindnessTimer : Timer
 {
-    private BlindnessTimer(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private BlindnessTimer(Game game) : base(game) { } // This object is a singleton.
     protected override void EffectStopped()
     {
-        SaveGame.MsgPrint("You can see again.");
+        Game.MsgPrint("You can see again.");
     }
     protected override void EffectIncreased(int newRate, int currentRate)
     {
-        SaveGame.MsgPrint("You are blind!");
+        Game.MsgPrint("You are blind!");
     }
     protected override void Noticed()
     {
-        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RemoveLightFlaggedAction)).Set();
-        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RemoveViewFlaggedAction)).Set();
-        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateLightFlaggedAction)).Set();
-        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateViewFlaggedAction)).Set();
-        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateMonstersFlaggedAction)).Set();
-        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawMapFlaggedAction)).Set();
+        Game.SingletonRepository.FlaggedActions.Get(nameof(RemoveLightFlaggedAction)).Set();
+        Game.SingletonRepository.FlaggedActions.Get(nameof(RemoveViewFlaggedAction)).Set();
+        Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateLightFlaggedAction)).Set();
+        Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateViewFlaggedAction)).Set();
+        Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateMonstersFlaggedAction)).Set();
+        Game.SingletonRepository.FlaggedActions.Get(nameof(RedrawMapFlaggedAction)).Set();
         base.Noticed();
     }
 }

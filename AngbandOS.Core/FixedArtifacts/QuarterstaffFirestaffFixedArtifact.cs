@@ -10,7 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class QuarterstaffFirestaffFixedArtifact : FixedArtifact
 {
-    private QuarterstaffFirestaffFixedArtifact(SaveGame saveGame) : base(saveGame) { }
+    private QuarterstaffFirestaffFixedArtifact(Game game) : base(game) { }
 
     protected override string BaseItemFactoryName => nameof(QuarterstaffHaftedWeaponItemFactory);
 

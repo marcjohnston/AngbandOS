@@ -12,7 +12,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class BrandBoltsScript : Script, IScript, ISuccessfulScript, ICancellableScript
 {
-    private BrandBoltsScript(SaveGame saveGame) : base(saveGame) { }
+    private BrandBoltsScript(Game game) : base(game) { }
 
     /// <summary>
     /// Runs the successful script and returns true, because the player cannot cancel the script.
@@ -35,7 +35,7 @@ internal class BrandBoltsScript : Script, IScript, ISuccessfulScript, ICancellab
         for (int i = 0; i < InventorySlot.PackCount; i++)
         {
             // Find a set of non-artifact bolts in our inventory
-            Item? item = SaveGame.GetInventoryItem(i);
+            Item? item = Game.GetInventoryItem(i);
             if (item == null || item.Category != ItemTypeEnum.Bolt)
             {
                 continue;
@@ -52,22 +52,22 @@ internal class BrandBoltsScript : Script, IScript, ISuccessfulScript, ICancellab
             }
 
             // Only a 25% chance of success per set of bolts
-            if (SaveGame.RandomLessThan(100) < 75)
+            if (Game.RandomLessThan(100) < 75)
             {
                 continue;
             }
 
             // Make the bolts into bolts of flame
-            SaveGame.MsgPrint("Your bolts are covered in a fiery aura!");
-            item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(AmmoOfFlameRareItem));
-            SaveGame.Enchant(item, SaveGame.RandomLessThan(3) + 4, Constants.EnchTohit | Constants.EnchTodam);
+            Game.MsgPrint("Your bolts are covered in a fiery aura!");
+            item.RareItem = Game.SingletonRepository.RareItems.Get(nameof(AmmoOfFlameRareItem));
+            Game.Enchant(item, Game.RandomLessThan(3) + 4, Constants.EnchTohit | Constants.EnchTodam);
 
             // Quit after the first bolts have been upgraded
             return true;
         }
 
         // We fell off the end of the inventory without enchanting anything
-        SaveGame.MsgPrint("The fiery enchantment failed.");
+        Game.MsgPrint("The fiery enchantment failed.");
         return false;
     }
 

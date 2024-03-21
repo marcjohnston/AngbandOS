@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Vaults;
 [Serializable]
 internal class PlanetXVault : Vault
 {
-    private PlanetXVault(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private PlanetXVault(Game game) : base(game) { } // This object is a singleton.
     public override string Name => "Planet X";
     public override int Category => 7;
     public override int Height => 13;

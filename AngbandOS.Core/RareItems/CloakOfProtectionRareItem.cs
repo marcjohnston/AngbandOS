@@ -10,8 +10,8 @@ namespace AngbandOS.Core.RareItems;
 [Serializable]
 internal class CloakOfProtectionRareItem : RareItem
 {
-    private CloakOfProtectionRareItem(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(OpenParenthesisSymbol));
+    private CloakOfProtectionRareItem(Game game) : base(game) { } // This object is a singleton.
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(OpenParenthesisSymbol));
     public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "Cloak of Protection";
     public override int Cost => 500;

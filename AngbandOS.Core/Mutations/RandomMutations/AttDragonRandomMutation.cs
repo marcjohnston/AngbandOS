@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Mutations.RandomMutations;
 [Serializable]
 internal class AttDragonRandomMutation : Mutation
 {
-    private AttDragonRandomMutation(SaveGame saveGame) : base(saveGame) { }
+    private AttDragonRandomMutation(Game game) : base(game) { }
     public override int Frequency => 1;
     public override string GainMessage => "You start attracting dragons.";
     public override string HaveMessage => "You attract dragons.";
@@ -18,24 +18,24 @@ internal class AttDragonRandomMutation : Mutation
 
     public override void OnProcessWorld()
     {
-        if (SaveGame.HasAntiMagic || base.SaveGame.DieRoll(3000) != 13)
+        if (Game.HasAntiMagic || base.Game.DieRoll(3000) != 13)
         {
             return;
         }
         bool dSummon;
-        if (base.SaveGame.DieRoll(5) == 1)
+        if (base.Game.DieRoll(5) == 1)
         {
-            dSummon = SaveGame.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, SaveGame.Difficulty, SaveGame.SingletonRepository.MonsterFilters.Get(nameof(DragonMonsterFilter)), true);
+            dSummon = Game.SummonSpecificFriendly(Game.MapY, Game.MapX, Game.Difficulty, Game.SingletonRepository.MonsterFilters.Get(nameof(DragonMonsterFilter)), true);
         }
         else
         {
-            dSummon = SaveGame.SummonSpecific(SaveGame.MapY, SaveGame.MapX, SaveGame.Difficulty, SaveGame.SingletonRepository.MonsterFilters.Get(nameof(DragonMonsterFilter)));
+            dSummon = Game.SummonSpecific(Game.MapY, Game.MapX, Game.Difficulty, Game.SingletonRepository.MonsterFilters.Get(nameof(DragonMonsterFilter)));
         }
         if (!dSummon)
         {
             return;
         }
-        SaveGame.MsgPrint("You have attracted a dragon!");
-        SaveGame.Disturb(false);
+        Game.MsgPrint("You have attracted a dragon!");
+        Game.Disturb(false);
     }
 }

@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Races;
 [Serializable]
 internal class HobbitRace : Race
 {
-    private HobbitRace(SaveGame saveGame) : base(saveGame) { }
+    private HobbitRace(Game game) : base(game) { }
     public override string Title => "Hobbit";
     public override int[] AbilityBonus => new int[] { -2, 2, 1, 3, 2, 1 };
     public override int BaseDisarmBonus => 15;
@@ -62,18 +62,18 @@ internal class HobbitRace : Race
 
     public override void CalcBonuses()
     {
-        SaveGame.HasSustainDexterity = true;
+        Game.HasSustainDexterity = true;
     }
 
     public override void UseRacialPower()
     {
         // Hobbits can cook food
-        if (SaveGame.CheckIfRacialPowerWorks(15, 10, Ability.Intelligence, 10))
+        if (Game.CheckIfRacialPowerWorks(15, 10, Ability.Intelligence, 10))
         {
-            ItemFactory foodItemClass = SaveGame.SingletonRepository.ItemFactories.Get(nameof(RationFoodItemFactory));
+            ItemFactory foodItemClass = Game.SingletonRepository.ItemFactories.Get(nameof(RationFoodItemFactory));
             Item item = foodItemClass.CreateItem();
-            SaveGame.DropNear(item, -1, SaveGame.MapY, SaveGame.MapX);
-            SaveGame.MsgPrint("You cook some food.");
+            Game.DropNear(item, -1, Game.MapY, Game.MapX);
+            Game.MsgPrint("You cook some food.");
         }
     }
 }

@@ -10,16 +10,16 @@ namespace AngbandOS.Core.MonsterSpells;
 [Serializable]
 internal class ColdBallMonsterSpell : BallProjectileMonsterSpell
 {
-    private ColdBallMonsterSpell(SaveGame saveGame) : base(saveGame) { }
+    private ColdBallMonsterSpell(Game game) : base(game) { }
     public override bool UsesCold => true;
     public override bool IsAttack => true;
 
     protected override string ActionName => "casts a frost ball";
-    protected override Projectile Projectile(SaveGame saveGame) => saveGame.SingletonRepository.Projectiles.Get(nameof(ColdProjectile));
+    protected override Projectile Projectile(Game game) => game.SingletonRepository.Projectiles.Get(nameof(ColdProjectile));
     protected override int Damage(Monster monster)
     {
         int monsterLevel = monster.Race.Level >= 1 ? monster.Race.Level : 1;
-        return SaveGame.DieRoll(monsterLevel * 3 / 2) + 10;
+        return Game.DieRoll(monsterLevel * 3 / 2) + 10;
     }
-    public override SpellResistantDetection[] SmartLearn => new SpellResistantDetection[] { SaveGame.SingletonRepository.SpellResistantDetections.Get(nameof(ColdSpellResistantDetection)) };
+    public override SpellResistantDetection[] SmartLearn => new SpellResistantDetection[] { Game.SingletonRepository.SpellResistantDetections.Get(nameof(ColdSpellResistantDetection)) };
 }

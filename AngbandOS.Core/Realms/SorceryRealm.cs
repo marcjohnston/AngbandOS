@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Realms;
 [Serializable]
 internal class SorceryRealm : Realm
 {
-    private SorceryRealm(SaveGame savedGame) : base(savedGame) { }
+    private SorceryRealm(Game savedGame) : base(savedGame) { }
 
     public override string[] Info => new string[] {
         "The Sorcery realm contains spells dealing with raw magic",

@@ -1,7 +1,7 @@
 [Serializable]
 internal class LowerSSymbol : Symbol
 {
-    private LowerSSymbol(SaveGame saveGame) : base(saveGame) { }
+    private LowerSSymbol(Game game) : base(game) { }
     public override char Character => 's';
     public override string Name => "Skeleton";
 }

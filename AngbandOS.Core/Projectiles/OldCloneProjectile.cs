@@ -10,21 +10,21 @@ namespace AngbandOS.Core.Projection;
 [Serializable]
 internal class OldCloneProjectile : Projectile
 {
-    private OldCloneProjectile(SaveGame saveGame) : base(saveGame) { }
+    private OldCloneProjectile(Game game) : base(game) { }
 
-    protected override ProjectileGraphic? BoltProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get(nameof(CopperBoltProjectileGraphic));
+    protected override ProjectileGraphic? BoltProjectileGraphic => Game.SingletonRepository.ProjectileGraphics.Get(nameof(CopperBoltProjectileGraphic));
 
-    protected override Animation EffectAnimation => SaveGame.SingletonRepository.Animations.Get(nameof(CopperExpandAnimation));
+    protected override Animation EffectAnimation => Game.SingletonRepository.Animations.Get(nameof(CopperExpandAnimation));
 
     protected override bool ProjectileAngersMonster(Monster mPtr)
     {
         // The attack will turn friends 1 in 8 times.
-        return (SaveGame.DieRoll(8) == 1);
+        return (Game.DieRoll(8) == 1);
     }
 
     protected override bool AffectMonster(int who, Monster mPtr, int dam, int r)
     {
-        GridTile cPtr = SaveGame.Grid[mPtr.MapY][mPtr.MapX];
+        GridTile cPtr = Game.Grid[mPtr.MapY][mPtr.MapX];
         MonsterRace rPtr = mPtr.Race;
         bool seen = mPtr.IsVisible;
         bool obvious = false;
@@ -34,7 +34,7 @@ internal class OldCloneProjectile : Projectile
         {
             obvious = true;
         }
-        if (mPtr.SmFriendly && SaveGame.DieRoll(3) != 1)
+        if (mPtr.SmFriendly && Game.DieRoll(3) != 1)
         {
             isFriend = true;
         }
@@ -43,8 +43,8 @@ internal class OldCloneProjectile : Projectile
         {
             mPtr.Speed += 10;
         }
-        Monster targetMonster = SaveGame.Monsters[cPtr.MonsterIndex];
-        if (SaveGame.MultiplyMonster(targetMonster, isFriend, true))
+        Monster targetMonster = Game.Monsters[cPtr.MonsterIndex];
+        if (Game.MultiplyMonster(targetMonster, isFriend, true))
         {
             note = " spawns!";
         }

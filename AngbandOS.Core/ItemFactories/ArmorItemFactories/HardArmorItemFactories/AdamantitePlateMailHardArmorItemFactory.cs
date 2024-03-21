@@ -10,9 +10,9 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class AdamantitePlateMailHardArmorItemFactory : HardArmorItemFactory
 {
-    private AdamantitePlateMailHardArmorItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private AdamantitePlateMailHardArmorItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(OpenBraceSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(OpenBraceSymbol));
     public override ColorEnum Color => ColorEnum.BrightGreen;
     public override string Name => "Adamantite Plate Mail";
 
@@ -27,5 +27,5 @@ internal class AdamantitePlateMailHardArmorItemFactory : HardArmorItemFactory
     public override int[] Locale => new int[] { 75, 0, 0, 0 };
     public override int ToH => -4;
     public override int Weight => 420;
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

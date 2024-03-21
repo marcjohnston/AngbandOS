@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Races;
 [Serializable]
 internal class HalfTitanRace : Race
 {
-    private HalfTitanRace(SaveGame saveGame) : base(saveGame) { }
+    private HalfTitanRace(Game game) : base(game) { }
     public override string Title => "Half Titan";
     public override int[] AbilityBonus => new int[] { 5, 1, 1, -2, 3, 1 };
     public override int BaseDisarmBonus => -5;
@@ -61,16 +61,16 @@ internal class HalfTitanRace : Race
     }
     public override void CalcBonuses()
     {
-        SaveGame.HasChaosResistance = true;
+        Game.HasChaosResistance = true;
     }
 
     public override void UseRacialPower()
     {
         // Half-Titans can probe enemies
-        if (SaveGame.CheckIfRacialPowerWorks(35, 20, Ability.Intelligence, 12))
+        if (Game.CheckIfRacialPowerWorks(35, 20, Ability.Intelligence, 12))
         {
-            SaveGame.MsgPrint("You examine your foes...");
-            SaveGame.Probing();
+            Game.MsgPrint("You examine your foes...");
+            Game.Probing();
         }
     }
 }

@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class WalkWithoutPickupScript : Script, IScript, IRepeatableScript
 {
-    private WalkWithoutPickupScript(SaveGame saveGame) : base(saveGame) { }
+    private WalkWithoutPickupScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the stay script and disposes of the repeatable result.
@@ -29,11 +29,11 @@ internal class WalkWithoutPickupScript : Script, IScript, IRepeatableScript
     {
         bool more = false;
         // If we don't already have a direction, get one
-        if (SaveGame.GetDirectionNoAim(out int dir))
+        if (Game.GetDirectionNoAim(out int dir))
         {
             // Walking takes a full turn
-            SaveGame.EnergyUse = 100;
-            SaveGame.MovePlayer(dir, true);
+            Game.EnergyUse = 100;
+            Game.MovePlayer(dir, true);
             more = true;
         }
         return more;

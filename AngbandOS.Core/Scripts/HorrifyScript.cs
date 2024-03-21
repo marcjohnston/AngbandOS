@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class HorrifyScript : Script, IScript
 {
-    private HorrifyScript(SaveGame saveGame) : base(saveGame) { }
+    private HorrifyScript(Game game) : base(game) { }
 
     /// <summary>
     /// Sets fear and stun on a monster in a chosen direction with damage equivalent to the player experience.
@@ -18,11 +18,11 @@ internal class HorrifyScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        if (!SaveGame.GetDirectionWithAim(out int dir))
+        if (!Game.GetDirectionWithAim(out int dir))
         {
             return;
         }
-        SaveGame.FearMonster(dir, SaveGame.ExperienceLevel.Value);
-        SaveGame.StunMonster(dir, SaveGame.ExperienceLevel.Value);
+        Game.FearMonster(dir, Game.ExperienceLevel.Value);
+        Game.StunMonster(dir, Game.ExperienceLevel.Value);
     }
 }

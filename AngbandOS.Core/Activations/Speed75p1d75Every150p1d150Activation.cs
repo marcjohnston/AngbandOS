@@ -13,25 +13,25 @@ namespace AngbandOS.Core.Activations;
 [Serializable]
 internal class Speed75p1d75Every150p1d150Activation : Activation
 {
-    private Speed75p1d75Every150p1d150Activation(SaveGame saveGame) : base(saveGame) { }
+    private Speed75p1d75Every150p1d150Activation(Game game) : base(game) { }
     public override int RandomChance => 25;
 
     public override string? PreActivationMessage => "The {0} glows brightly...";
 
     protected override bool OnActivate(Item item)
     {
-        if (SaveGame.HasteTimer.Value == 0)
+        if (Game.HasteTimer.Value == 0)
         {
-            SaveGame.HasteTimer.SetTimer(SaveGame.DieRoll(75) + 75);
+            Game.HasteTimer.SetTimer(Game.DieRoll(75) + 75);
         }
         else
         {
-            SaveGame.HasteTimer.AddTimer(5);
+            Game.HasteTimer.AddTimer(5);
         }
         return true;
     }
 
-    public override int RechargeTime() => SaveGame.RandomLessThan(150) + 150;
+    public override int RechargeTime() => Game.RandomLessThan(150) + 150;
 
     public override int Value => 20000;
 

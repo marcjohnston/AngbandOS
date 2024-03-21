@@ -10,11 +10,11 @@ namespace AngbandOS.Core.Properties;
 [Serializable]
 internal class ExperienceLevelIntProperty : IntProperty
 {
-    protected ExperienceLevelIntProperty(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    protected ExperienceLevelIntProperty(Game game) : base(game) { } // This object is a singleton.
 
     protected override void OnAfterSet()
     {
         base.OnAfterSet();
-        SaveGame.ConsoleViewPort.ExperienceLevelChanged(Value);
+        Game.ConsoleViewPort.ExperienceLevelChanged(Value);
     }
 }

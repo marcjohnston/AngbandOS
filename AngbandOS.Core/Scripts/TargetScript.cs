@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class TargetScript : Script, IScript, IRepeatableScript
 {
-    private TargetScript(SaveGame saveGame) : base(saveGame) { }
+    private TargetScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the target script and returns false.
@@ -28,13 +28,13 @@ internal class TargetScript : Script, IScript, IRepeatableScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        if (SaveGame.TargetSet(Constants.TargetKill))
+        if (Game.TargetSet(Constants.TargetKill))
         {
-            SaveGame.MsgPrint(SaveGame.TargetWho > 0 ? "Target Selected." : "Location Targeted.");
+            Game.MsgPrint(Game.TargetWho > 0 ? "Target Selected." : "Location Targeted.");
         }
         else
         {
-            SaveGame.MsgPrint("Target Aborted.");
+            Game.MsgPrint("Target Aborted.");
         }
     }
 }

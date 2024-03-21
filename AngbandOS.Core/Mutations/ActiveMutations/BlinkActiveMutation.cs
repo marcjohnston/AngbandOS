@@ -10,12 +10,12 @@ namespace AngbandOS.Core.Mutations.ActiveMutations;
 [Serializable]
 internal class BlinkActiveMutation : Mutation
 {
-    private BlinkActiveMutation(SaveGame saveGame) : base(saveGame) { }
+    private BlinkActiveMutation(Game game) : base(game) { }
     public override void Activate()
     {
-        if (SaveGame.CheckIfRacialPowerWorks(3, 3, Ability.Wisdom, 12))
+        if (Game.CheckIfRacialPowerWorks(3, 3, Ability.Wisdom, 12))
         {
-            SaveGame.RunScriptInt(nameof(TeleportSelfScript), 10);
+            Game.RunScriptInt(nameof(TeleportSelfScript), 10);
         }
     }
 

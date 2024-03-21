@@ -11,7 +11,7 @@ namespace AngbandOS.Core.StoreCommands;
 internal class HireRoomStoreCommand : StoreCommand
 
 {
-    private HireRoomStoreCommand(SaveGame saveGame) : base(saveGame) { }
+    private HireRoomStoreCommand(Game game) : base(game) { }
     public override char KeyChar => 'r';
 
     public override string Description => "hire a Room";

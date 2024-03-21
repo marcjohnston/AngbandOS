@@ -13,7 +13,7 @@ namespace AngbandOS.Core.StoreCommands;
 
 internal class GenericStoreCommand : StoreCommand
 {
-    public GenericStoreCommand(SaveGame saveGame, StoreCommandDefinition storeCommandDefinition) : base(saveGame)
+    public GenericStoreCommand(Game game, StoreCommandDefinition storeCommandDefinition) : base(game)
     {
         Key = storeCommandDefinition.Key;
         KeyChar = storeCommandDefinition.KeyChar;

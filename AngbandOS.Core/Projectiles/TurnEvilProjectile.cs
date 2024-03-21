@@ -10,9 +10,9 @@ namespace AngbandOS.Core.Projection;
 [Serializable]
 internal class TurnEvilProjectile : Projectile
 {
-    private TurnEvilProjectile(SaveGame saveGame) : base(saveGame) { }
+    private TurnEvilProjectile(Game game) : base(game) { }
 
-    protected override Animation EffectAnimation => SaveGame.SingletonRepository.Animations.Get(nameof(WhiteControlAnimation));
+    protected override Animation EffectAnimation => Game.SingletonRepository.Animations.Get(nameof(WhiteControlAnimation));
 
     protected override bool ProjectileAngersMonster(Monster mPtr)
     {
@@ -39,8 +39,8 @@ internal class TurnEvilProjectile : Projectile
             {
                 obvious = true;
             }
-            doFear = SaveGame.DiceRoll(3, dam / 2) + 1;
-            if (rPtr.Level > SaveGame.DieRoll(dam - 10 < 1 ? 1 : dam - 10) + 10)
+            doFear = Game.DiceRoll(3, dam / 2) + 1;
+            if (rPtr.Level > Game.DieRoll(dam - 10 < 1 ? 1 : dam - 10) + 10)
             {
                 note = " is unaffected!";
                 obvious = false;

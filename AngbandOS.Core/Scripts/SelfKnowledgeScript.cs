@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class SelfKnowledgeScript : Script, IScript
 {
-    private SelfKnowledgeScript(SaveGame saveGame) : base(saveGame) { }
+    private SelfKnowledgeScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script.
@@ -23,14 +23,14 @@ internal class SelfKnowledgeScript : Script, IScript
         ItemCharacteristics inventoryCharacteristics = new ItemCharacteristics();
         for (int k = InventorySlot.MeleeWeapon; k < InventorySlot.Total; k++)
         {
-            Item? oPtr = SaveGame.GetInventoryItem(k);
+            Item? oPtr = Game.GetInventoryItem(k);
             if (oPtr != null)
             {
                 oPtr.RefreshFlagBasedProperties();
                 inventoryCharacteristics.Merge(oPtr.Characteristics);
             }
         }
-        string[]? selfKnowledgeInfo = SaveGame.Race.SelfKnowledge(SaveGame.ExperienceLevel.Value);
+        string[]? selfKnowledgeInfo = Game.Race.SelfKnowledge(Game.ExperienceLevel.Value);
         if (selfKnowledgeInfo != null)
         {
             foreach (string infoLine in selfKnowledgeInfo)
@@ -38,7 +38,7 @@ internal class SelfKnowledgeScript : Script, IScript
                 info[infoCount++] = infoLine;
             }
         }
-        string[] mutations = SaveGame.GetMutationList();
+        string[] mutations = Game.GetMutationList();
         if (mutations.Length > 0)
         {
             foreach (string m in mutations)
@@ -46,263 +46,263 @@ internal class SelfKnowledgeScript : Script, IScript
                 info[infoCount++] = m;
             }
         }
-        if (SaveGame.BlindnessTimer.Value != 0)
+        if (Game.BlindnessTimer.Value != 0)
         {
             info[infoCount++] = "You cannot see.";
         }
-        if (SaveGame.ConfusedTimer.Value != 0)
+        if (Game.ConfusedTimer.Value != 0)
         {
             info[infoCount++] = "You are confused.";
         }
-        if (SaveGame.FearTimer.Value != 0)
+        if (Game.FearTimer.Value != 0)
         {
             info[infoCount++] = "You are terrified.";
         }
-        if (SaveGame.BleedingTimer.Value != 0)
+        if (Game.BleedingTimer.Value != 0)
         {
             info[infoCount++] = "You are bleeding.";
         }
-        if (SaveGame.StunTimer.Value != 0)
+        if (Game.StunTimer.Value != 0)
         {
             info[infoCount++] = "You are stunned.";
         }
-        if (SaveGame.PoisonTimer.Value != 0)
+        if (Game.PoisonTimer.Value != 0)
         {
             info[infoCount++] = "You are poisoned.";
         }
-        if (SaveGame.HallucinationsTimer.Value != 0)
+        if (Game.HallucinationsTimer.Value != 0)
         {
             info[infoCount++] = "You are hallucinating.";
         }
-        if (SaveGame.HasAggravation)
+        if (Game.HasAggravation)
         {
             info[infoCount++] = "You aggravate monsters.";
         }
-        if (SaveGame.HasRandomTeleport)
+        if (Game.HasRandomTeleport)
         {
             info[infoCount++] = "Your position is very uncertain.";
         }
-        if (SaveGame.BlessingTimer.Value != 0)
+        if (Game.BlessingTimer.Value != 0)
         {
             info[infoCount++] = "You feel rightous.";
         }
-        if (SaveGame.HeroismTimer.Value != 0)
+        if (Game.HeroismTimer.Value != 0)
         {
             info[infoCount++] = "You feel heroic.";
         }
-        if (SaveGame.SuperheroismTimer.Value != 0)
+        if (Game.SuperheroismTimer.Value != 0)
         {
             info[infoCount++] = "You are in a battle rage.";
         }
-        if (SaveGame.ProtectionFromEvilTimer.Value != 0)
+        if (Game.ProtectionFromEvilTimer.Value != 0)
         {
             info[infoCount++] = "You are protected from evil.";
         }
-        if (SaveGame.StoneskinTimer.Value != 0)
+        if (Game.StoneskinTimer.Value != 0)
         {
             info[infoCount++] = "You are protected by a mystic shield.";
         }
-        if (SaveGame.InvulnerabilityTimer.Value != 0)
+        if (Game.InvulnerabilityTimer.Value != 0)
         {
             info[infoCount++] = "You are temporarily invulnerable.";
         }
-        if (SaveGame.EtherealnessTimer.Value != 0)
+        if (Game.EtherealnessTimer.Value != 0)
         {
             info[infoCount++] = "You are temporarily incorporeal.";
         }
-        if (SaveGame.HasConfusingTouch)
+        if (Game.HasConfusingTouch)
         {
             info[infoCount++] = "Your hands are glowing dull red.";
         }
-        if (SaveGame.IsSearching)
+        if (Game.IsSearching)
         {
             info[infoCount++] = "You are looking around very carefully.";
         }
-        if (SaveGame.SpareSpellSlots.Value != 0)
+        if (Game.SpareSpellSlots.Value != 0)
         {
             info[infoCount++] = "You can learn some spells/prayers.";
         }
-        if (SaveGame.WordOfRecallDelay != 0)
+        if (Game.WordOfRecallDelay != 0)
         {
             info[infoCount++] = "You will soon be recalled.";
         }
-        if (SaveGame.InfravisionRange != 0)
+        if (Game.InfravisionRange != 0)
         {
             info[infoCount++] = "Your eyes are sensitive to infrared light.";
         }
-        if (SaveGame.HasSeeInvisibility)
+        if (Game.HasSeeInvisibility)
         {
             info[infoCount++] = "You can see invisible creatures.";
         }
-        if (SaveGame.HasFeatherFall)
+        if (Game.HasFeatherFall)
         {
             info[infoCount++] = "You can fly.";
         }
-        if (SaveGame.HasFreeAction)
+        if (Game.HasFreeAction)
         {
             info[infoCount++] = "You have free action.";
         }
-        if (SaveGame.HasRegeneration)
+        if (Game.HasRegeneration)
         {
             info[infoCount++] = "You regenerate quickly.";
         }
-        if (SaveGame.HasSlowDigestion)
+        if (Game.HasSlowDigestion)
         {
             info[infoCount++] = "Your appetite is small.";
         }
-        if (SaveGame.HasTelepathy)
+        if (Game.HasTelepathy)
         {
             info[infoCount++] = "You have ESP.";
         }
-        if (SaveGame.HasHoldLife)
+        if (Game.HasHoldLife)
         {
             info[infoCount++] = "You have a firm hold on your life force.";
         }
-        if (SaveGame.HasReflection)
+        if (Game.HasReflection)
         {
             info[infoCount++] = "You reflect arrows and bolts.";
         }
-        if (SaveGame.HasFireShield)
+        if (Game.HasFireShield)
         {
             info[infoCount++] = "You are surrounded with a fiery aura.";
         }
-        if (SaveGame.HasLightningShield)
+        if (Game.HasLightningShield)
         {
             info[infoCount++] = "You are surrounded with electricity.";
         }
-        if (SaveGame.HasAntiMagic)
+        if (Game.HasAntiMagic)
         {
             info[infoCount++] = "You are surrounded by an anti-magic shell.";
         }
-        if (SaveGame.HasAntiTeleport)
+        if (Game.HasAntiTeleport)
         {
             info[infoCount++] = "You cannot teleport.";
         }
-        if (SaveGame.HasGlow)
+        if (Game.HasGlow)
         {
             info[infoCount++] = "You are carrying a permanent light.";
         }
-        if (SaveGame.HasAcidImmunity)
+        if (Game.HasAcidImmunity)
         {
             info[infoCount++] = "You are completely immune to acid.";
         }
-        else if (SaveGame.HasAcidResistance && SaveGame.AcidResistanceTimer.Value != 0)
+        else if (Game.HasAcidResistance && Game.AcidResistanceTimer.Value != 0)
         {
             info[infoCount++] = "You resist acid exceptionally well.";
         }
-        else if (SaveGame.HasAcidResistance || SaveGame.AcidResistanceTimer.Value != 0)
+        else if (Game.HasAcidResistance || Game.AcidResistanceTimer.Value != 0)
         {
             info[infoCount++] = "You are resistant to acid.";
         }
-        if (SaveGame.HasLightningImmunity)
+        if (Game.HasLightningImmunity)
         {
             info[infoCount++] = "You are completely immune to lightning.";
         }
-        else if (SaveGame.HasLightningResistance && SaveGame.LightningResistanceTimer.Value != 0)
+        else if (Game.HasLightningResistance && Game.LightningResistanceTimer.Value != 0)
         {
             info[infoCount++] = "You resist lightning exceptionally well.";
         }
-        else if (SaveGame.HasLightningResistance || SaveGame.LightningResistanceTimer.Value != 0)
+        else if (Game.HasLightningResistance || Game.LightningResistanceTimer.Value != 0)
         {
             info[infoCount++] = "You are resistant to lightning.";
         }
-        if (SaveGame.HasFireImmunity)
+        if (Game.HasFireImmunity)
         {
             info[infoCount++] = "You are completely immune to fire.";
         }
-        else if (SaveGame.HasFireResistance && SaveGame.FireResistanceTimer.Value != 0)
+        else if (Game.HasFireResistance && Game.FireResistanceTimer.Value != 0)
         {
             info[infoCount++] = "You resist fire exceptionally well.";
         }
-        else if (SaveGame.HasFireResistance || SaveGame.FireResistanceTimer.Value != 0)
+        else if (Game.HasFireResistance || Game.FireResistanceTimer.Value != 0)
         {
             info[infoCount++] = "You are resistant to fire.";
         }
-        if (SaveGame.HasColdImmunity)
+        if (Game.HasColdImmunity)
         {
             info[infoCount++] = "You are completely immune to cold.";
         }
-        else if (SaveGame.HasColdResistance && SaveGame.ColdResistanceTimer.Value != 0)
+        else if (Game.HasColdResistance && Game.ColdResistanceTimer.Value != 0)
         {
             info[infoCount++] = "You resist cold exceptionally well.";
         }
-        else if (SaveGame.HasColdResistance || SaveGame.ColdResistanceTimer.Value != 0)
+        else if (Game.HasColdResistance || Game.ColdResistanceTimer.Value != 0)
         {
             info[infoCount++] = "You are resistant to cold.";
         }
-        if (SaveGame.HasPoisonResistance && SaveGame.PoisonResistanceTimer.Value != 0)
+        if (Game.HasPoisonResistance && Game.PoisonResistanceTimer.Value != 0)
         {
             info[infoCount++] = "You resist poison exceptionally well.";
         }
-        else if (SaveGame.HasPoisonResistance || SaveGame.PoisonResistanceTimer.Value != 0)
+        else if (Game.HasPoisonResistance || Game.PoisonResistanceTimer.Value != 0)
         {
             info[infoCount++] = "You are resistant to poison.";
         }
-        if (SaveGame.HasLightResistance)
+        if (Game.HasLightResistance)
         {
             info[infoCount++] = "You are resistant to bright light.";
         }
-        if (SaveGame.HasDarkResistance)
+        if (Game.HasDarkResistance)
         {
             info[infoCount++] = "You are resistant to darkness.";
         }
-        if (SaveGame.HasConfusionResistance)
+        if (Game.HasConfusionResistance)
         {
             info[infoCount++] = "You are resistant to confusion.";
         }
-        if (SaveGame.HasSoundResistance)
+        if (Game.HasSoundResistance)
         {
             info[infoCount++] = "You are resistant to sonic attacks.";
         }
-        if (SaveGame.HasDisenchantResistance)
+        if (Game.HasDisenchantResistance)
         {
             info[infoCount++] = "You are resistant to disenchantment.";
         }
-        if (SaveGame.HasChaosResistance)
+        if (Game.HasChaosResistance)
         {
             info[infoCount++] = "You are resistant to chaos.";
         }
-        if (SaveGame.HasShardResistance)
+        if (Game.HasShardResistance)
         {
             info[infoCount++] = "You are resistant to blasts of shards.";
         }
-        if (SaveGame.HasNexusResistance)
+        if (Game.HasNexusResistance)
         {
             info[infoCount++] = "You are resistant to nexus attacks.";
         }
-        if (SaveGame.HasNetherResistance)
+        if (Game.HasNetherResistance)
         {
             info[infoCount++] = "You are resistant to nether forces.";
         }
-        if (SaveGame.HasFearResistance)
+        if (Game.HasFearResistance)
         {
             info[infoCount++] = "You are completely fearless.";
         }
-        if (SaveGame.HasBlindnessResistance)
+        if (Game.HasBlindnessResistance)
         {
             info[infoCount++] = "Your eyes are resistant to blindness.";
         }
-        if (SaveGame.HasSustainStrength)
+        if (Game.HasSustainStrength)
         {
             info[infoCount++] = "Your strength is sustained.";
         }
-        if (SaveGame.HasSustainIntelligence)
+        if (Game.HasSustainIntelligence)
         {
             info[infoCount++] = "Your intelligence is sustained.";
         }
-        if (SaveGame.HasSustainWisdom)
+        if (Game.HasSustainWisdom)
         {
             info[infoCount++] = "Your wisdom is sustained.";
         }
-        if (SaveGame.HasSustainConstitution)
+        if (Game.HasSustainConstitution)
         {
             info[infoCount++] = "Your constitution is sustained.";
         }
-        if (SaveGame.HasSustainDexterity)
+        if (Game.HasSustainDexterity)
         {
             info[infoCount++] = "Your dexterity is sustained.";
         }
-        if (SaveGame.HasSustainCharisma)
+        if (Game.HasSustainCharisma)
         {
             info[infoCount++] = "Your charisma is sustained.";
         }
@@ -354,7 +354,7 @@ internal class SelfKnowledgeScript : Script, IScript
         {
             info[infoCount++] = "Your attack speed is affected by your equipment.";
         }
-        Item? meleeItem = SaveGame.GetInventoryItem(InventorySlot.MeleeWeapon);
+        Item? meleeItem = Game.GetInventoryItem(InventorySlot.MeleeWeapon);
         if (meleeItem != null)
         {
             meleeItem.RefreshFlagBasedProperties();
@@ -435,28 +435,28 @@ internal class SelfKnowledgeScript : Script, IScript
                 info[infoCount++] = "Your weapon is a great bane of dragons.";
             }
         }
-        ScreenBuffer savedScreen = SaveGame.Screen.Clone();
+        ScreenBuffer savedScreen = Game.Screen.Clone();
         for (int k = 1; k < 24; k++)
         {
-            SaveGame.Screen.PrintLine("", k, 13);
+            Game.Screen.PrintLine("", k, 13);
         }
-        SaveGame.Screen.PrintLine("     Your Attributes:", 1, 15);
+        Game.Screen.PrintLine("     Your Attributes:", 1, 15);
         int row, infoIndex;
         for (row = 2, infoIndex = 0; infoIndex < infoCount; infoIndex++)
         {
-            SaveGame.Screen.PrintLine(info[infoIndex], row++, 15);
+            Game.Screen.PrintLine(info[infoIndex], row++, 15);
             if (row == 22 && infoIndex + 1 < infoCount)
             {
-                SaveGame.Screen.PrintLine("-- more --", row, 15);
-                SaveGame.Inkey();
+                Game.Screen.PrintLine("-- more --", row, 15);
+                Game.Inkey();
                 for (; row > 2; row--)
                 {
-                    SaveGame.Screen.PrintLine("", row, 15);
+                    Game.Screen.PrintLine("", row, 15);
                 }
             }
         }
-        SaveGame.Screen.PrintLine("[Press any key to continue]", row, 13);
-        SaveGame.Inkey();
-        SaveGame.Screen.Restore(savedScreen);
+        Game.Screen.PrintLine("[Press any key to continue]", row, 13);
+        Game.Inkey();
+        Game.Screen.Restore(savedScreen);
     }
 }

@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class HorrificVisageScript : Script, IScript
 {
-    private HorrificVisageScript(SaveGame saveGame) : base(saveGame) { }
+    private HorrificVisageScript(Game game) : base(game) { }
 
     /// <summary>
     /// Adds fear and stuns a monster in a chosen direction.
@@ -18,11 +18,11 @@ internal class HorrificVisageScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        if (!SaveGame.GetDirectionWithAim(out int dir))
+        if (!Game.GetDirectionWithAim(out int dir))
         {
             return;
         }
-        SaveGame.FearMonster(dir, SaveGame.ExperienceLevel.Value);
-        SaveGame.StunMonster(dir, SaveGame.ExperienceLevel.Value);
+        Game.FearMonster(dir, Game.ExperienceLevel.Value);
+        Game.StunMonster(dir, Game.ExperienceLevel.Value);
     }
 }

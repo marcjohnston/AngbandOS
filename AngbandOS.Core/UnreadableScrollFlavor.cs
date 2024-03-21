@@ -13,7 +13,7 @@ internal class UnreadableScrollFlavor : Flavor
     public override Symbol Symbol { get; }
     public override ColorEnum Color { get; }
     public override string Name { get; }
-    public UnreadableScrollFlavor(SaveGame saveGame, Symbol symbol, ColorEnum color, string name) : base(saveGame)
+    public UnreadableScrollFlavor(Game game, Symbol symbol, ColorEnum color, string name) : base(game)
     {
         Symbol = symbol;
         Color = color;

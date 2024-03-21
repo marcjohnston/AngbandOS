@@ -10,18 +10,18 @@ namespace AngbandOS.Core.Repositories;
 [Serializable]
 internal class StoreCommandsRepository : DictionaryRepository<StoreCommand>
 {
-    public StoreCommandsRepository(SaveGame saveGame) : base(saveGame) { }
+    public StoreCommandsRepository(Game game) : base(game) { }
     public override void Load()
     {
-        if (SaveGame.Configuration.StoreCommands == null)
+        if (Game.Configuration.StoreCommands == null)
         {
             base.Load();
         }
         else
         {
-            foreach (StoreCommandDefinition storeCommandDefinition in SaveGame.Configuration.StoreCommands)
+            foreach (StoreCommandDefinition storeCommandDefinition in Game.Configuration.StoreCommands)
             {
-                Add(new GenericStoreCommand(SaveGame, storeCommandDefinition));
+                Add(new GenericStoreCommand(Game, storeCommandDefinition));
             }
         }
     }

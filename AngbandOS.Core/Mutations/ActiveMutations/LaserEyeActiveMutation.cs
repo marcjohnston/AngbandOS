@@ -10,18 +10,18 @@ namespace AngbandOS.Core.Mutations.ActiveMutations;
 [Serializable]
 internal class LaserEyeActiveMutation : Mutation
 {
-    private LaserEyeActiveMutation(SaveGame saveGame) : base(saveGame) { }
+    private LaserEyeActiveMutation(Game game) : base(game) { }
     public override void Activate()
     {
-        if (!SaveGame.CheckIfRacialPowerWorks(7, 10, Ability.Wisdom, 9))
+        if (!Game.CheckIfRacialPowerWorks(7, 10, Ability.Wisdom, 9))
         {
             return;
         }
-        if (!SaveGame.GetDirectionWithAim(out int dir))
+        if (!Game.GetDirectionWithAim(out int dir))
         {
             return;
         }
-        SaveGame.FireBeam(SaveGame.SingletonRepository.Projectiles.Get(nameof(LightProjectile)), dir, 2 * SaveGame.ExperienceLevel.Value);
+        Game.FireBeam(Game.SingletonRepository.Projectiles.Get(nameof(LightProjectile)), dir, 2 * Game.ExperienceLevel.Value);
     }
 
     public override string ActivationSummary(int lvl)

@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Mutations.RandomMutations;
 [Serializable]
 internal class WeirdMindRandomMutation : Mutation
 {
-    private WeirdMindRandomMutation(SaveGame saveGame) : base(saveGame) { }
+    private WeirdMindRandomMutation(Game game) : base(game) { }
     public override int Frequency => 2;
     public override string GainMessage => "Your thoughts suddenly take off in strange directions.";
     public override string HaveMessage => "Your mind randomly expands and contracts.";
@@ -18,19 +18,19 @@ internal class WeirdMindRandomMutation : Mutation
 
     public override void OnProcessWorld()
     {
-        if (SaveGame.HasAntiMagic || base.SaveGame.DieRoll(3000) != 1)
+        if (Game.HasAntiMagic || base.Game.DieRoll(3000) != 1)
         {
             return;
         }
-        if (SaveGame.TelepathyTimer.Value > 0)
+        if (Game.TelepathyTimer.Value > 0)
         {
-            SaveGame.MsgPrint("Your mind feels cloudy!");
-            SaveGame.TelepathyTimer.ResetTimer();
+            Game.MsgPrint("Your mind feels cloudy!");
+            Game.TelepathyTimer.ResetTimer();
         }
         else
         {
-            SaveGame.MsgPrint("Your mind expands!");
-            SaveGame.TelepathyTimer.SetTimer(SaveGame.ExperienceLevel.Value);
+            Game.MsgPrint("Your mind expands!");
+            Game.TelepathyTimer.SetTimer(Game.ExperienceLevel.Value);
         }
     }
 }

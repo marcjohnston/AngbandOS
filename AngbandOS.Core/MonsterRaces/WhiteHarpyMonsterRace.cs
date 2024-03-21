@@ -10,7 +10,7 @@ namespace AngbandOS.Core.MonsterRaces;
 [Serializable]
 internal class WhiteHarpyMonsterRace : MonsterRace
 {
-    protected WhiteHarpyMonsterRace(SaveGame saveGame) : base(saveGame) { }
+    protected WhiteHarpyMonsterRace(Game game) : base(game) { }
 
     protected override string SymbolName => nameof(UpperHSymbol);
     public override string Name => "White harpy";

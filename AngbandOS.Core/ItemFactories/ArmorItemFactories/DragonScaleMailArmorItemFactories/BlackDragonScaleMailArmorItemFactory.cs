@@ -10,21 +10,21 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class BlackDragonScaleMailArmorItemFactory : DragonScaleMailArmorItemFactory, IItemsCanBeActivated
 {
-    private BlackDragonScaleMailArmorItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private BlackDragonScaleMailArmorItemFactory(Game game) : base(game) { } // This object is a singleton.
 
     public void ActivateItem(Item item)
     {
-        if (!SaveGame.GetDirectionWithAim(out int dir))
+        if (!Game.GetDirectionWithAim(out int dir))
         {
             return;
         }
-        SaveGame.MsgPrint("You breathe acid.");
-        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(AcidProjectile)), dir, 130, -2);
-        item.RechargeTimeLeft = SaveGame.RandomLessThan(450) + 450;
+        Game.MsgPrint("You breathe acid.");
+        Game.FireBall(Game.SingletonRepository.Projectiles.Get(nameof(AcidProjectile)), dir, 130, -2);
+        item.RechargeTimeLeft = Game.RandomLessThan(450) + 450;
         return;
     }
     public override string? DescribeActivationEffect => "breathe acid (130) every 450+d450 turns";
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(OpenBraceSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(OpenBraceSymbol));
     public override ColorEnum Color => ColorEnum.Black;
     public override string Name => "Black Dragon Scale Mail";
 
@@ -45,5 +45,5 @@ internal class BlackDragonScaleMailArmorItemFactory : DragonScaleMailArmorItemFa
     public override int ToA => 10;
     public override int ToH => -2;
     public override int Weight => 200;
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

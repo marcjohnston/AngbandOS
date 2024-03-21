@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class MagicMissleScript : Script, IScript
 {
-    private MagicMissleScript(SaveGame saveGame) : base(saveGame) { }
+    private MagicMissleScript(Game game) : base(game) { }
 
     /// <summary>
     /// Fires a bolt or beam of missle in a chosen direction.
@@ -19,24 +19,24 @@ internal class MagicMissleScript : Script, IScript
     public void ExecuteScript()
     {
         int beam;
-        switch (SaveGame.BaseCharacterClass.ID)
+        switch (Game.BaseCharacterClass.ID)
         {
             case CharacterClass.Mage:
-                beam = SaveGame.ExperienceLevel.Value;
+                beam = Game.ExperienceLevel.Value;
                 break;
 
             case CharacterClass.HighMage:
-                beam = SaveGame.ExperienceLevel.Value + 10;
+                beam = Game.ExperienceLevel.Value + 10;
                 break;
 
             default:
-                beam = SaveGame.ExperienceLevel.Value / 2;
+                beam = Game.ExperienceLevel.Value / 2;
                 break;
         }
-        if (!SaveGame.GetDirectionWithAim(out int dir))
+        if (!Game.GetDirectionWithAim(out int dir))
         {
             return;
         }
-        SaveGame.FireBoltOrBeam(beam - 10, SaveGame.SingletonRepository.Projectiles.Get(nameof(MissileProjectile)), dir, SaveGame.DiceRoll(3 + ((SaveGame.ExperienceLevel.Value - 1) / 5), 4));
+        Game.FireBoltOrBeam(beam - 10, Game.SingletonRepository.Projectiles.Get(nameof(MissileProjectile)), dir, Game.DiceRoll(3 + ((Game.ExperienceLevel.Value - 1) / 5), 4));
     }
 }

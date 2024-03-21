@@ -10,7 +10,7 @@ namespace AngbandOS.Core.MonsterRaces;
 [Serializable]
 internal class EarthSpiritMonsterRace : MonsterRace
 {
-    protected EarthSpiritMonsterRace(SaveGame saveGame) : base(saveGame) { }
+    protected EarthSpiritMonsterRace(Game game) : base(game) { }
 
     protected override string SymbolName => nameof(UpperESymbol);
     public override ColorEnum Color => ColorEnum.BrightBrown;

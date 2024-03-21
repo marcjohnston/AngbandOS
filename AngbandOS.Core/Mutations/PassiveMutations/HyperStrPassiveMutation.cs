@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Mutations.PassiveMutations;
 [Serializable]
 internal class HyperStrPassiveMutation : Mutation
 {
-    private HyperStrPassiveMutation(SaveGame saveGame) : base(saveGame) { }
+    private HyperStrPassiveMutation(Game game) : base(game) { }
     public override int Frequency => 3;
     public override string GainMessage => "You turn into a superhuman he-man!";
     public override string HaveMessage => "You are superhumanly strong (+4 STR).";
@@ -19,11 +19,11 @@ internal class HyperStrPassiveMutation : Mutation
 
     public override void OnGain()
     {
-        SaveGame.StrengthBonus += 4;
+        Game.StrengthBonus += 4;
     }
 
     public override void OnLose()
     {
-        SaveGame.StrengthBonus -= 4;
+        Game.StrengthBonus -= 4;
     }
 }

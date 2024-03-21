@@ -10,9 +10,9 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class TeleportationAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
 {
-    private TeleportationAmuletJeweleryItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private TeleportationAmuletJeweleryItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(DoubleQuoteSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(DoubleQuoteSymbol));
     public override string Name => "Teleportation";
 
     public override int[] Chance => new int[] { 1, 0, 0, 0 };
@@ -24,5 +24,5 @@ internal class TeleportationAmuletJeweleryItemFactory : AmuletJeweleryItemFactor
     public override int[] Locale => new int[] { 15, 0, 0, 0 };
     public override bool Teleport => true;
     public override int Weight => 3;
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

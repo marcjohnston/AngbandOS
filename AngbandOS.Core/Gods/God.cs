@@ -12,10 +12,10 @@ namespace AngbandOS.Core.Gods;
 [Serializable]
 internal abstract class God : IGetKey
 {
-    protected readonly SaveGame SaveGame;
-    protected God(SaveGame saveGame)
+    protected readonly Game Game;
+    protected God(Game game)
     {
-        SaveGame = saveGame;
+        Game = game;
     }
 
     public abstract string LongName { get; }

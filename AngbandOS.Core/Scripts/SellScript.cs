@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class SellScript : Script, IStoreScript
 {
-    private SellScript(SaveGame saveGame) : base(saveGame) { }
+    private SellScript(Game game) : base(game) { }
 
     /// <summary>
     /// Allows an item to be sold to the store.  Does not modify any of the store flags.
@@ -20,13 +20,13 @@ internal class SellScript : Script, IStoreScript
     {
         if (!storeCommandEvent.Store.StoreFactory.StoreMaintainsInventory)
         {
-            SaveGame.MsgPrint("This store has no interest in your earthly possessions.");
+            Game.MsgPrint("This store has no interest in your earthly possessions.");
         }
 
         int itemPos;
-        if (!SaveGame.SelectItem(out Item? oPtr, storeCommandEvent.Store.StoreFactory.SellPrompt, true, true, false, storeCommandEvent.Store.StoreFactory)) // We use the store itself as the ItemFilter because the Store implements IItemFilter.
+        if (!Game.SelectItem(out Item? oPtr, storeCommandEvent.Store.StoreFactory.SellPrompt, true, true, false, storeCommandEvent.Store.StoreFactory)) // We use the store itself as the ItemFilter because the Store implements IItemFilter.
         {
-            SaveGame.MsgPrint("You have nothing that I want.");
+            Game.MsgPrint("You have nothing that I want.");
             return;
         }
         if (oPtr == null)
@@ -35,13 +35,13 @@ internal class SellScript : Script, IStoreScript
         }
         if (oPtr.IsInEquipment && oPtr.IsCursed())
         {
-            SaveGame.MsgPrint("Hmmm, it seems to be cursed.");
+            Game.MsgPrint("Hmmm, it seems to be cursed.");
             return;
         }
         int amt = 1;
         if (oPtr.Count > 1)
         {
-            amt = SaveGame.GetQuantity(null, oPtr.Count, true);
+            amt = Game.GetQuantity(null, oPtr.Count, true);
             if (amt <= 0)
             {
                 return;
@@ -56,29 +56,29 @@ internal class SellScript : Script, IStoreScript
         }
         if (!storeCommandEvent.Store.StoreCanAcceptMoreItems(qPtr))
         {
-            SaveGame.MsgPrint(storeCommandEvent.Store.StoreFactory.StoreFullMessage);
+            Game.MsgPrint(storeCommandEvent.Store.StoreFactory.StoreFullMessage);
             return;
         }
         if (storeCommandEvent.Store.StoreFactory.StoreBuysItems)
         {
-            SaveGame.MsgPrint($"Selling {oName} ({oPtr.Label}).");
-            SaveGame.MsgPrint(null);
+            Game.MsgPrint($"Selling {oName} ({oPtr.Label}).");
+            Game.MsgPrint(null);
             bool accepted = SellHaggle(storeCommandEvent.Store, qPtr, out int price);
             if (!accepted)
             {
                 return;
             }
-            SaveGame.SayComment_1();
-            SaveGame.PlaySound(SoundEffectEnum.StoreTransaction);
-            SaveGame.Gold.Value += price;
-            SaveGame.StorePrtGold();
+            Game.SayComment_1();
+            Game.PlaySound(SoundEffectEnum.StoreTransaction);
+            Game.Gold.Value += price;
+            Game.StorePrtGold();
             int guess = qPtr.Value() * qPtr.Count;
             if (storeCommandEvent.Store.StoreFactory.StoreIdentifiesItems)
             {
                 oPtr.BecomeFlavorAware();
                 oPtr.BecomeKnown();
             }
-            SaveGame.SingletonRepository.FlaggedActions.Get(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
+            Game.SingletonRepository.FlaggedActions.Get(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
             qPtr = oPtr.Clone();
             qPtr.Count = amt;
             int value;
@@ -91,18 +91,18 @@ internal class SellScript : Script, IStoreScript
                 value = qPtr.Value() * qPtr.Count;
                 oName = qPtr.Description(true, 3);
             }
-            SaveGame.MsgPrint($"You {storeCommandEvent.Store.StoreFactory.BoughtVerb} {oName} for {price} gold.");
+            Game.MsgPrint($"You {storeCommandEvent.Store.StoreFactory.BoughtVerb} {oName} for {price} gold.");
             PurchaseAnalyze(price, value, guess);
         }
         else
         {
-            SaveGame.MsgPrint($"You drop {oName} ({oPtr.Label}).");
+            Game.MsgPrint($"You drop {oName} ({oPtr.Label}).");
         }
 
         oPtr.ItemIncrease(-amt);
         oPtr.ItemDescribe();
         oPtr.ItemOptimize();
-        SaveGame.HandleStuff();
+        Game.HandleStuff();
         if (storeCommandEvent.Store.StoreFactory.UseHomeCarry)
         {
             itemPos = storeCommandEvent.Store.HomeCarry(qPtr);
@@ -122,23 +122,23 @@ internal class SellScript : Script, IStoreScript
     {
         if (value <= 0 && price > value)
         {
-            SaveGame.MsgPrint(SaveGame.SingletonRepository.ShopkeeperWorthlessComments.ToWeightedRandom().ChooseOrDefault());
-            SaveGame.PlaySound(SoundEffectEnum.StoreSoldWorthless);
+            Game.MsgPrint(Game.SingletonRepository.ShopkeeperWorthlessComments.ToWeightedRandom().ChooseOrDefault());
+            Game.PlaySound(SoundEffectEnum.StoreSoldWorthless);
         }
         else if (value < guess && price > value)
         {
-            SaveGame.MsgPrint(SaveGame.SingletonRepository.ShopkeeperLessThanGuessComments.ToWeightedRandom().ChooseOrDefault());
-            SaveGame.PlaySound(SoundEffectEnum.StoreSoldBargain);
+            Game.MsgPrint(Game.SingletonRepository.ShopkeeperLessThanGuessComments.ToWeightedRandom().ChooseOrDefault());
+            Game.PlaySound(SoundEffectEnum.StoreSoldBargain);
         }
         else if (value > guess && value < 4 * guess && price < value)
         {
-            SaveGame.MsgPrint(SaveGame.SingletonRepository.ShopkeeperGoodComments.ToWeightedRandom().ChooseOrDefault());
-            SaveGame.PlaySound(SoundEffectEnum.StoreSoldCheaply);
+            Game.MsgPrint(Game.SingletonRepository.ShopkeeperGoodComments.ToWeightedRandom().ChooseOrDefault());
+            Game.PlaySound(SoundEffectEnum.StoreSoldCheaply);
         }
         else if (value > guess && price < value)
         {
-            SaveGame.MsgPrint(SaveGame.SingletonRepository.ShopkeeperBargainComments.ToWeightedRandom().ChooseOrDefault());
-            SaveGame.PlaySound(SoundEffectEnum.StoreSoldExtraCheaply);
+            Game.MsgPrint(Game.SingletonRepository.ShopkeeperBargainComments.ToWeightedRandom().ChooseOrDefault());
+            Game.PlaySound(SoundEffectEnum.StoreSoldExtraCheaply);
         }
     }
 
@@ -148,21 +148,21 @@ internal class SellScript : Script, IStoreScript
         int purse = store.Owner.MaxCost;
         if (finalAsk >= purse)
         {
-            SaveGame.MsgPrint("You instantly agree upon the price.");
-            SaveGame.MsgPrint(null);
+            Game.MsgPrint("You instantly agree upon the price.");
+            Game.MsgPrint(null);
             finalAsk = purse;
         }
         else
         {
-            SaveGame.MsgPrint("You quickly agree upon the price.");
-            SaveGame.MsgPrint(null);
+            Game.MsgPrint("You quickly agree upon the price.");
+            Game.MsgPrint(null);
             finalAsk -= finalAsk / 10;
         }
         const string pmt = "Final Offer";
         finalAsk *= oPtr.Count;
         price = finalAsk;
         string outVal = $"{pmt} :  {finalAsk}";
-        SaveGame.Screen.Print(outVal, 1, 0);
-        return SaveGame.GetCheck("Accept deal? ");
+        Game.Screen.Print(outVal, 1, 0);
+        return Game.GetCheck("Accept deal? ");
     }
 }

@@ -10,8 +10,8 @@ namespace AngbandOS.Core.RareItems;
 [Serializable]
 internal class HatOfLightRareItem : RareItem
 {
-    private HatOfLightRareItem(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(CloseBraceSymbol));
+    private HatOfLightRareItem(Game game) : base(game) { } // This object is a singleton.
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(CloseBraceSymbol));
     public override ColorEnum Color => ColorEnum.Brown;
     public override string Name => "Hat of Light";
     public override int Cost => 500;

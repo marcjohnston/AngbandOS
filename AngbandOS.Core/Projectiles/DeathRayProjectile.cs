@@ -10,11 +10,11 @@ namespace AngbandOS.Core.Projection;
 [Serializable]
 internal class DeathRayProjectile : Projectile
 {
-    private DeathRayProjectile(SaveGame saveGame) : base(saveGame) { }
+    private DeathRayProjectile(Game game) : base(game) { }
 
-    protected override ProjectileGraphic? BoltProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get(nameof(CopperBoltProjectileGraphic));
+    protected override ProjectileGraphic? BoltProjectileGraphic => Game.SingletonRepository.ProjectileGraphics.Get(nameof(CopperBoltProjectileGraphic));
 
-    protected override Animation EffectAnimation => SaveGame.SingletonRepository.Animations.Get(nameof(CopperContractAnimation));
+    protected override Animation EffectAnimation => Game.SingletonRepository.Animations.Get(nameof(CopperContractAnimation));
 
     protected override bool AffectMonster(int who, Monster mPtr, int dam, int r)
     {
@@ -39,9 +39,9 @@ internal class DeathRayProjectile : Projectile
             obvious = false;
             dam = 0;
         }
-        else if ((rPtr.Unique && SaveGame.DieRoll(888) != 666) ||
-                 (rPtr.Level + SaveGame.DieRoll(20) >
-                 SaveGame.DieRoll(dam + SaveGame.DieRoll(10)) && SaveGame.DieRoll(100) != 66))
+        else if ((rPtr.Unique && Game.DieRoll(888) != 666) ||
+                 (rPtr.Level + Game.DieRoll(20) >
+                 Game.DieRoll(dam + Game.DieRoll(10)) && Game.DieRoll(100) != 66))
         {
             note = " resists!";
             obvious = false;
@@ -49,7 +49,7 @@ internal class DeathRayProjectile : Projectile
         }
         else
         {
-            dam = SaveGame.ExperienceLevel.Value * 200;
+            dam = Game.ExperienceLevel.Value * 200;
         }
         ApplyProjectileDamageToMonster(who, mPtr, dam, note);
         return obvious;

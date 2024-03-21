@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class SummonFriendlyAnimalScript : Script, IScript
 {
-    private SummonFriendlyAnimalScript(SaveGame saveGame) : base(saveGame) { }
+    private SummonFriendlyAnimalScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script.
@@ -18,9 +18,9 @@ internal class SummonFriendlyAnimalScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        if (!SaveGame.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel.Value, SaveGame.SingletonRepository.MonsterFilters.Get(nameof(AnimalRangerMonsterFilter)), true))
+        if (!Game.SummonSpecificFriendly(Game.MapY, Game.MapX, Game.ExperienceLevel.Value, Game.SingletonRepository.MonsterFilters.Get(nameof(AnimalRangerMonsterFilter)), true))
         {
-            SaveGame.MsgPrint("No-one ever turns up.");
+            Game.MsgPrint("No-one ever turns up.");
         }
     }
 }

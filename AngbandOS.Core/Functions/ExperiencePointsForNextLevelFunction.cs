@@ -8,8 +8,8 @@
 [Serializable]
 internal class ExperiencePointsForNextLevelFunction : IntFunction
 {
-    private ExperiencePointsForNextLevelFunction(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-    public override int Value => ((Constants.PlayerExp[SaveGame.ExperienceLevel.Value - 1] * SaveGame.ExperienceMultiplier.Value / 100) - SaveGame.ExperiencePoints.Value);
+    private ExperiencePointsForNextLevelFunction(Game game) : base(game) { } // This object is a singleton.
+    public override int Value => ((Constants.PlayerExp[Game.ExperienceLevel.Value - 1] * Game.ExperienceMultiplier.Value / 100) - Game.ExperiencePoints.Value);
     public override string[]? DependencyNames => new string[]
     {
         nameof(ExperienceLevelIntProperty),

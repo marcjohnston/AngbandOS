@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class IdentifyAllItemsScript : Script, IScript, IStoreScript
 {
-    private IdentifyAllItemsScript(SaveGame saveGame) : base(saveGame) { }
+    private IdentifyAllItemsScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the identify all script.  Does not modify any of the store flags.
@@ -18,22 +18,22 @@ internal class IdentifyAllItemsScript : Script, IScript, IStoreScript
     /// <returns></returns>
     public void ExecuteStoreScript(StoreCommandEvent storeCommandEvent)
     {
-        if (!SaveGame.ServiceHaggle(500, out int price))
+        if (!Game.ServiceHaggle(500, out int price))
         {
-            if (price >= SaveGame.Gold.Value)
+            if (price >= Game.Gold.Value)
             {
-                SaveGame.MsgPrint("You do not have the gold!");
+                Game.MsgPrint("You do not have the gold!");
             }
             else
             {
-                SaveGame.Gold.Value -= price;
-                SaveGame.SayComment_1();
-                SaveGame.PlaySound(SoundEffectEnum.StoreTransaction);
-                SaveGame.StorePrtGold();
+                Game.Gold.Value -= price;
+                Game.SayComment_1();
+                Game.PlaySound(SoundEffectEnum.StoreTransaction);
+                Game.StorePrtGold();
                 ExecuteScript();
-                SaveGame.MsgPrint("All your goods have been identified.");
+                Game.MsgPrint("All your goods have been identified.");
             }
-            SaveGame.HandleStuff();
+            Game.HandleStuff();
         }
     }
 
@@ -45,7 +45,7 @@ internal class IdentifyAllItemsScript : Script, IScript, IStoreScript
     {
         for (int i = 0; i < InventorySlot.Total; i++)
         {
-            Item? oPtr = SaveGame.GetInventoryItem(i);
+            Item? oPtr = Game.GetInventoryItem(i);
             if (oPtr == null)
             {
                 continue;
@@ -55,10 +55,10 @@ internal class IdentifyAllItemsScript : Script, IScript, IStoreScript
             if (oPtr.Stompable())
             {
                 string itemName = oPtr.Description(true, 3);
-                SaveGame.MsgPrint($"You destroy {itemName}.");
+                Game.MsgPrint($"You destroy {itemName}.");
                 int amount = oPtr.Count;
-                SaveGame.InvenItemIncrease(i, -amount);
-                SaveGame.InvenItemOptimize(i);
+                Game.InvenItemIncrease(i, -amount);
+                Game.InvenItemOptimize(i);
                 i--;
             }
         }

@@ -10,7 +10,7 @@ namespace AngbandOS.Core.MonsterRaces;
 [Serializable]
 internal class YetiMonsterRace : MonsterRace
 {
-    protected YetiMonsterRace(SaveGame saveGame) : base(saveGame) { }
+    protected YetiMonsterRace(Game game) : base(game) { }
 
     protected override string SymbolName => nameof(UpperYSymbol);
     public override string Name => "Yeti";

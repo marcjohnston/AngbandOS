@@ -10,7 +10,7 @@ namespace AngbandOS.Core.MonsterSpells;
 [Serializable]
 internal class DrainManaMonsterSpell : MonsterSpell
 {
-    private DrainManaMonsterSpell(SaveGame saveGame) : base(saveGame) { }
+    private DrainManaMonsterSpell(Game game) : base(game) { }
     /// <summary>
     /// Returns null, because the drain mana process cannot be seen.  If the player cannot see either monster, the player will not have
     /// any message indicating such.
@@ -31,26 +31,26 @@ internal class DrainManaMonsterSpell : MonsterSpell
     public override bool DrainsMana => true;
     public override bool Annoys => true;
 
-    public override void ExecuteOnPlayer(SaveGame saveGame, Monster monster)
+    public override void ExecuteOnPlayer(Game game, Monster monster)
     {
         string monsterName = monster.Name;
-        bool playerIsBlind = saveGame.BlindnessTimer.Value != 0;
+        bool playerIsBlind = game.BlindnessTimer.Value != 0;
         int monsterLevel = monster.Race.Level >= 1 ? monster.Race.Level : 1;
         bool seenByPlayer = !playerIsBlind && monster.IsVisible;
 
-        if (saveGame.Mana.Value != 0)
+        if (game.Mana.Value != 0)
         {
-            saveGame.MsgPrint($"{monsterName} draws psychic energy from you!");
-            int r1 = (SaveGame.DieRoll(monsterLevel) / 2) + 1;
-            if (r1 >= saveGame.Mana.Value)
+            game.MsgPrint($"{monsterName} draws psychic energy from you!");
+            int r1 = (Game.DieRoll(monsterLevel) / 2) + 1;
+            if (r1 >= game.Mana.Value)
             {
-                r1 = saveGame.Mana.Value;
-                saveGame.Mana.Value = 0;
-                saveGame.FractionalMana = 0;
+                r1 = game.Mana.Value;
+                game.Mana.Value = 0;
+                game.FractionalMana = 0;
             }
             else
             {
-                saveGame.Mana.Value -= r1;
+                game.Mana.Value -= r1;
             }
             if (monster.Health < monster.MaxHealth)
             {
@@ -59,39 +59,39 @@ internal class DrainManaMonsterSpell : MonsterSpell
                 {
                     monster.Health = monster.MaxHealth;
                 }
-                if (saveGame.TrackedMonsterIndex == monster.GetMonsterIndex())
+                if (game.TrackedMonsterIndex == monster.GetMonsterIndex())
                 {
-                    SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawMonsterHealthFlaggedAction)).Set();
+                    Game.SingletonRepository.FlaggedActions.Get(nameof(RedrawMonsterHealthFlaggedAction)).Set();
                 }
                 if (seenByPlayer)
                 {
-                    saveGame.MsgPrint($"{monsterName} appears healthier.");
+                    game.MsgPrint($"{monsterName} appears healthier.");
                 }
             }
         }
-        saveGame.UpdateSmartLearn(monster, SaveGame.SingletonRepository.SpellResistantDetections.Get(nameof(ManaSpellResistantDetection)));
+        game.UpdateSmartLearn(monster, Game.SingletonRepository.SpellResistantDetections.Get(nameof(ManaSpellResistantDetection)));
     }
 
-    public override void ExecuteOnMonster(SaveGame saveGame, Monster monster, Monster target)
+    public override void ExecuteOnMonster(Game game, Monster monster, Monster target)
     {
         int rlev = monster.Race.Level >= 1 ? monster.Race.Level : 1;
-        bool playerIsBlind = saveGame.BlindnessTimer.Value != 0;
+        bool playerIsBlind = game.BlindnessTimer.Value != 0;
         bool seen = !playerIsBlind && monster.IsVisible;
         string monsterName = monster.Name;
         string targetName = target.Name;
-        bool blind = saveGame.BlindnessTimer.Value != 0;
+        bool blind = game.BlindnessTimer.Value != 0;
         bool seeTarget = !blind && target.IsVisible;
         bool seeBoth = seen && seeTarget;
         MonsterRace targetRace = target.Race;
 
-        int r1 = (SaveGame.DieRoll(rlev) / 2) + 1;
+        int r1 = (Game.DieRoll(rlev) / 2) + 1;
         if (monster.Health < monster.MaxHealth)
         {
             if (targetRace.Spells.Count == 0)
             {
                 if (seeBoth)
                 {
-                    saveGame.MsgPrint($"{targetName} is unaffected!");
+                    game.MsgPrint($"{targetName} is unaffected!");
                 }
             }
             else
@@ -101,13 +101,13 @@ internal class DrainManaMonsterSpell : MonsterSpell
                 {
                     monster.Health = monster.MaxHealth;
                 }
-                if (saveGame.TrackedMonsterIndex == monster.GetMonsterIndex())
+                if (game.TrackedMonsterIndex == monster.GetMonsterIndex())
                 {
-                    SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawMonsterHealthFlaggedAction)).Set();
+                    Game.SingletonRepository.FlaggedActions.Get(nameof(RedrawMonsterHealthFlaggedAction)).Set();
                 }
                 if (seen)
                 {
-                    saveGame.MsgPrint($"{monsterName} appears healthier.");
+                    game.MsgPrint($"{monsterName} appears healthier.");
                 }
             }
         }

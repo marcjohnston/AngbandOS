@@ -10,18 +10,18 @@ namespace AngbandOS.Core.Timers;
 [Serializable]
 internal class BlessingTimer : Timer
 {
-    private BlessingTimer(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private BlessingTimer(Game game) : base(game) { } // This object is a singleton.
     protected override void EffectStopped()
     {
-        SaveGame.MsgPrint("The prayer has expired.");
+        Game.MsgPrint("The prayer has expired.");
     }
     protected override void EffectIncreased(int newRate, int currentRate)
     {
-        SaveGame.MsgPrint("You feel righteous!");
+        Game.MsgPrint("You feel righteous!");
     }
     protected override void Noticed()
     {
-        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
+        Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
         base.Noticed();
     }
 }

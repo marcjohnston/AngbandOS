@@ -9,7 +9,7 @@ namespace AngbandOS.Core.Dungeons;
 [Serializable]
 internal class HlanithDungeon : Dungeon
 {
-    private HlanithDungeon(SaveGame saveGame) : base(saveGame) { }
+    private HlanithDungeon(Game game) : base(game) { }
     public override int BaseOffset => 0;
     public override int MaxLevel => 5;
     public override string Name => "the Sewers under Hlanith";

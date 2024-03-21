@@ -10,6 +10,6 @@ namespace AngbandOS.Core.Conditionals;
 [Serializable]
 internal class UsesManaConditional : Conditional
 {
-    private UsesManaConditional(SaveGame saveGame) : base(saveGame) { }
-    public override bool IsTrue => SaveGame.UsesMana;
+    private UsesManaConditional(Game game) : base(game) { }
+    public override bool IsTrue => Game.UsesMana;
 }

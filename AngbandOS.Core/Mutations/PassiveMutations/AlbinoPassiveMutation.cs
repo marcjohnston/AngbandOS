@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Mutations.PassiveMutations;
 [Serializable]
 internal class AlbinoPassiveMutation : Mutation
 {
-    private AlbinoPassiveMutation(SaveGame saveGame) : base(saveGame) { }
+    private AlbinoPassiveMutation(Game game) : base(game) { }
     public override int Frequency => 2;
     public override string GainMessage => "You turn into an albino! You feel frail...";
     public override string HaveMessage => "You are albino (-4 CON).";
@@ -18,11 +18,11 @@ internal class AlbinoPassiveMutation : Mutation
 
     public override void OnGain()
     {
-        SaveGame.ConstitutionBonus -= 4;
+        Game.ConstitutionBonus -= 4;
     }
 
     public override void OnLose()
     {
-        SaveGame.ConstitutionBonus += 4;
+        Game.ConstitutionBonus += 4;
     }
 }

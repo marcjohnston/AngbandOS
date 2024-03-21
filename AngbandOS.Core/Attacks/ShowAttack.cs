@@ -10,9 +10,9 @@ namespace AngbandOS.Core.AttackTypes;
 [Serializable]
 internal class ShowAttack : Attack
 {
-    private ShowAttack(SaveGame saveGame) : base(saveGame) { }
+    private ShowAttack(Game game) : base(game) { }
     public override string MonsterAction => "sings to {0}";
-    public override string PlayerAction => SaveGame.SingletonRepository.SingingPlayerAttacks.ToWeightedRandom().ChooseOrDefault();
+    public override string PlayerAction => Game.SingletonRepository.SingingPlayerAttacks.ToWeightedRandom().ChooseOrDefault();
     public override string KnowledgeAction => "sing";
     public override bool AttackTouchesTarget => false;
     public override bool AttackAwakensTarget => true;

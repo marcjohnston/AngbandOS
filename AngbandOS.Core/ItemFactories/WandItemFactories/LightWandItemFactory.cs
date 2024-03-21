@@ -10,12 +10,12 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class LightWandItemFactory : WandItemFactory
 {
-    private LightWandItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private LightWandItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(MinusSignSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(MinusSignSymbol));
     public override void ApplyMagic(Item item, int level, int power, Store? store)
     {
-        item.TypeSpecificValue = SaveGame.DieRoll(10) + 6;
+        item.TypeSpecificValue = Game.DieRoll(10) + 6;
     }
     public override string Name => "Light";
 
@@ -27,11 +27,11 @@ internal class LightWandItemFactory : WandItemFactory
     public override int LevelNormallyFound => 3;
     public override int[] Locale => new int[] { 3, 0, 0, 0 };
     public override int Weight => 10;
-    public override bool ExecuteActivation(SaveGame saveGame, int dir)
+    public override bool ExecuteActivation(Game game, int dir)
     {
-        saveGame.MsgPrint("A line of blue shimmering light appears.");
-        saveGame.LightLine(dir);
+        game.MsgPrint("A line of blue shimmering light appears.");
+        game.LightLine(dir);
         return true;
     }
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

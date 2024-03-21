@@ -8,7 +8,7 @@
 [Serializable]
 internal class YaarjukkaDemonspawnShopkeeper : Shopkeeper
 {
-    private YaarjukkaDemonspawnShopkeeper(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private YaarjukkaDemonspawnShopkeeper(Game game) : base(game) { } // This object is a singleton.
     public override string Name => "Yaarjukka Demonspawn";
     public override int MaxCost =>  15000;
     public override int MinInflate =>  111;

@@ -57,23 +57,23 @@ internal abstract class BowWeaponItemFactory : WeaponItemFactory // TODO: Should
             }
         }
 
-        switch (SaveGame.DieRoll(6))
+        switch (Game.DieRoll(6))
         {
             case 1:
             case 2:
             case 3:
                 item.RandomArtifactItemCharacteristics.XtraMight = true;
-                if (artifactBias == null && SaveGame.DieRoll(9) == 1)
+                if (artifactBias == null && Game.DieRoll(9) == 1)
                 {
-                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(RangerArtifactBias));
+                    artifactBias = Game.SingletonRepository.ArtifactBiases.Get(nameof(RangerArtifactBias));
                 }
                 break;
 
             default:
                 item.RandomArtifactItemCharacteristics.XtraShots = true;
-                if (artifactBias == null && SaveGame.DieRoll(9) == 1)
+                if (artifactBias == null && Game.DieRoll(9) == 1)
                 {
-                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(RangerArtifactBias));
+                    artifactBias = Game.SingletonRepository.ArtifactBiases.Get(nameof(RangerArtifactBias));
                 }
                 break;
         }
@@ -84,17 +84,17 @@ internal abstract class BowWeaponItemFactory : WeaponItemFactory // TODO: Should
         base.ApplyMagic(item, level, power, null);
         if (power > 1)
         {
-            switch (SaveGame.DieRoll(21))
+            switch (Game.DieRoll(21))
             {
                 case 1:
                 case 11:
-                    item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(BowOfExtraMightRareItem));
+                    item.RareItem = Game.SingletonRepository.RareItems.Get(nameof(BowOfExtraMightRareItem));
                     IArtifactBias artifactBias = null;
-                    item.ApplyRandomResistance(ref artifactBias, SaveGame.DieRoll(34) + 4);
+                    item.ApplyRandomResistance(ref artifactBias, Game.DieRoll(34) + 4);
                     break;
                 case 2:
                 case 12:
-                    item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(BowOfExtraShotsRareItem));
+                    item.RareItem = Game.SingletonRepository.RareItems.Get(nameof(BowOfExtraShotsRareItem));
                     break;
                 case 3:
                 case 4:
@@ -104,7 +104,7 @@ internal abstract class BowWeaponItemFactory : WeaponItemFactory // TODO: Should
                 case 14:
                 case 15:
                 case 16:
-                    item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(BowOfVelocityRareItem));
+                    item.RareItem = Game.SingletonRepository.RareItems.Get(nameof(BowOfVelocityRareItem));
                     break;
                 case 7:
                 case 8:
@@ -114,7 +114,7 @@ internal abstract class BowWeaponItemFactory : WeaponItemFactory // TODO: Should
                 case 18:
                 case 19:
                 case 20:
-                    item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(BowOfAccuracyRareItem));
+                    item.RareItem = Game.SingletonRepository.RareItems.Get(nameof(BowOfAccuracyRareItem));
                     break;
                 case 21:
                     item.CreateRandomArtifact(false);
@@ -123,9 +123,9 @@ internal abstract class BowWeaponItemFactory : WeaponItemFactory // TODO: Should
         }
     }
 
-    public BowWeaponItemFactory(SaveGame saveGame) : base(saveGame) { }
-    public override ItemClass ItemClass => SaveGame.SingletonRepository.ItemClasses.Get(nameof(BowsItemClass));
-    public override BaseInventorySlot BaseWieldSlot => SaveGame.SingletonRepository.InventorySlots.Get(nameof(RangedWeaponInventorySlot));
+    public BowWeaponItemFactory(Game game) : base(game) { }
+    public override ItemClass ItemClass => Game.SingletonRepository.ItemClasses.Get(nameof(BowsItemClass));
+    public override BaseInventorySlot BaseWieldSlot => Game.SingletonRepository.InventorySlots.Get(nameof(RangedWeaponInventorySlot));
     public override bool CanApplyBlowsBonus => true;
     /// <summary>
     /// Returns a damage multiplier when the missile weapon is used.

@@ -10,11 +10,11 @@ namespace AngbandOS.Core.Rewards;
 [Serializable]
 internal class GreaObjReward : Reward
 {
-    private GreaObjReward(SaveGame saveGame) : base(saveGame) { }
+    private GreaObjReward(Game game) : base(game) { }
     public override void GetReward(Patron patron)
     {
-        SaveGame.MsgPrint($"The voice of {patron.ShortName} booms out:");
-        SaveGame.MsgPrint("'Use my gift wisely.'");
-        SaveGame.Acquirement(SaveGame.MapY, SaveGame.MapX, 1, true);
+        Game.MsgPrint($"The voice of {patron.ShortName} booms out:");
+        Game.MsgPrint("'Use my gift wisely.'");
+        Game.Acquirement(Game.MapY, Game.MapX, 1, true);
     }
 }

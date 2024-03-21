@@ -10,7 +10,7 @@ namespace AngbandOS.Core.MonsterSpells;
 [Serializable]
 internal class ScareMonsterSpell : MonsterSpell
 {
-    private ScareMonsterSpell(SaveGame saveGame) : base(saveGame) { }
+    private ScareMonsterSpell(Game game) : base(game) { }
     public override bool IsIntelligent => true;
     public override bool UsesFear => true;
     public override bool IsAttack => true;
@@ -22,27 +22,27 @@ internal class ScareMonsterSpell : MonsterSpell
 
     public override string? VsMonsterSeenMessage(Monster monster, Monster target) => $"{monster.Name} casts a fearful illusion at {target.Name}";
 
-    public override void ExecuteOnPlayer(SaveGame saveGame, Monster monster)
+    public override void ExecuteOnPlayer(Game game, Monster monster)
     {
-        if (saveGame.HasFearResistance)
+        if (game.HasFearResistance)
         {
-            saveGame.MsgPrint("You refuse to be frightened.");
+            game.MsgPrint("You refuse to be frightened.");
         }
-        else if (SaveGame.RandomLessThan(100) < saveGame.SkillSavingThrow)
+        else if (Game.RandomLessThan(100) < game.SkillSavingThrow)
         {
-            saveGame.MsgPrint("You refuse to be frightened.");
+            game.MsgPrint("You refuse to be frightened.");
         }
         else
         {
-            saveGame.FearTimer.AddTimer(SaveGame.RandomLessThan(4) + 4);
+            game.FearTimer.AddTimer(Game.RandomLessThan(4) + 4);
         }
-        saveGame.UpdateSmartLearn(monster, SaveGame.SingletonRepository.SpellResistantDetections.Get(nameof(FearSpellResistantDetection)));
+        game.UpdateSmartLearn(monster, Game.SingletonRepository.SpellResistantDetections.Get(nameof(FearSpellResistantDetection)));
     }
 
-    public override void ExecuteOnMonster(SaveGame saveGame, Monster monster, Monster target)
+    public override void ExecuteOnMonster(Game game, Monster monster, Monster target)
     {
         MonsterRace targetRace = target.Race;
-        bool playerIsBlind = saveGame.BlindnessTimer.Value != 0;
+        bool playerIsBlind = game.BlindnessTimer.Value != 0;
         bool seeTarget = !playerIsBlind && target.IsVisible;
         string targetName = target.Name;
         int rlev = monster.Race.Level >= 1 ? monster.Race.Level : 1;
@@ -51,23 +51,23 @@ internal class ScareMonsterSpell : MonsterSpell
         {
             if (seeTarget)
             {
-                saveGame.MsgPrint($"{targetName} refuses to be frightened.");
+                game.MsgPrint($"{targetName} refuses to be frightened.");
             }
         }
-        else if (targetRace.Level > SaveGame.DieRoll(rlev - 10 < 1 ? 1 : rlev - 10) + 10)
+        else if (targetRace.Level > Game.DieRoll(rlev - 10 < 1 ? 1 : rlev - 10) + 10)
         {
             if (seeTarget)
             {
-                saveGame.MsgPrint($"{targetName} refuses to be frightened.");
+                game.MsgPrint($"{targetName} refuses to be frightened.");
             }
         }
         else
         {
             if (target.FearLevel == 0 && seeTarget)
             {
-                saveGame.MsgPrint($"{targetName} flees in terror!");
+                game.MsgPrint($"{targetName} flees in terror!");
             }
-            target.FearLevel += SaveGame.RandomLessThan(4) + 4;
+            target.FearLevel += Game.RandomLessThan(4) + 4;
         }
 
         // Most spells will wake up the target if it's asleep

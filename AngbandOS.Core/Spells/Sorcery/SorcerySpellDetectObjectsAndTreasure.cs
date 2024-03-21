@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Spells.Sorcery;
 [Serializable]
 internal class SorcerySpellDetectObjectsAndTreasure : Spell
 {
-    private SorcerySpellDetectObjectsAndTreasure(SaveGame saveGame) : base(saveGame) { }
+    private SorcerySpellDetectObjectsAndTreasure(Game game) : base(game) { }
     protected override string? CastScriptName => nameof(DetectObjectsAndTreasureScript);
 
     public override string Name => "Detect Objects and Treasure";

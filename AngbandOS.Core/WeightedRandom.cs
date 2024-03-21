@@ -39,18 +39,18 @@ namespace AngbandOS.Core;
 /// <typeparam name="T"></typeparam>
 internal class WeightedRandom<T>
 {
-    private readonly SaveGame SaveGame;
+    private readonly Game Game;
     private readonly List<KeyValuePair<int, T>> _list = new List<KeyValuePair<int, T>>();
     private int _sum = 0;
 
-    public WeightedRandom(SaveGame saveGame)
+    public WeightedRandom(Game game)
     {
-        SaveGame = saveGame;
+        Game = game;
     }
 
-    public WeightedRandom(SaveGame saveGame, IEnumerable<T> values, Func<T, bool>? predicate)
+    public WeightedRandom(Game game, IEnumerable<T> values, Func<T, bool>? predicate)
     {
-        SaveGame = saveGame;
+        Game = game;
         foreach (T value in values)
         {
             if (predicate == null || predicate(value))
@@ -60,9 +60,9 @@ internal class WeightedRandom<T>
         }
     }
 
-    public WeightedRandom(SaveGame saveGame, IEnumerable<T> values)
+    public WeightedRandom(Game game, IEnumerable<T> values)
     {
-        SaveGame = saveGame;
+        Game = game;
         foreach (T value in values)
         {
             Add(1, value);
@@ -94,7 +94,7 @@ internal class WeightedRandom<T>
         {
             return default;
         }
-        int choice = SaveGame.RandomLessThan(_sum);
+        int choice = Game.RandomLessThan(_sum);
         int index = 0;
         while (choice >= _list[index].Key)
         {

@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class TrapAndDoorDestructionScript : Script, IScript
 {
-    private TrapAndDoorDestructionScript(SaveGame saveGame) : base(saveGame) { }
+    private TrapAndDoorDestructionScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script.
@@ -18,10 +18,10 @@ internal class TrapAndDoorDestructionScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        if (!SaveGame.GetDirectionWithAim(out int dir))
+        if (!Game.GetDirectionWithAim(out int dir))
         {
             return;
         }
-        SaveGame.DestroyDoor(dir);
+        Game.DestroyDoor(dir);
     }
 }

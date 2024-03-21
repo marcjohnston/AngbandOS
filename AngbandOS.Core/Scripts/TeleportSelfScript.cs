@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class TeleportSelfScript : Script, IScript, IScriptInt
 {
-    private TeleportSelfScript(SaveGame saveGame) : base(saveGame) { }
+    private TeleportSelfScript(Game game) : base(game) { }
 
     /// <summary>
     /// Teleports the player between a specified distance from 1/2 of the distance up to a maximum of 200.
@@ -19,13 +19,13 @@ internal class TeleportSelfScript : Script, IScript, IScriptInt
     /// <returns></returns>
     public void ExecuteScriptInt(int distance)
     {
-        int x = SaveGame.MapX;
-        int y = SaveGame.MapY;
+        int x = Game.MapX;
+        int y = Game.MapY;
         int xx = -1;
         bool look = true;
-        if (SaveGame.HasAntiTeleport)
+        if (Game.HasAntiTeleport)
         {
-            SaveGame.MsgPrint("A mysterious force prevents you from teleporting!");
+            Game.MsgPrint("A mysterious force prevents you from teleporting!");
             return;
         }
         if (distance > 200)
@@ -43,23 +43,23 @@ internal class TeleportSelfScript : Script, IScript, IScriptInt
             {
                 while (true)
                 {
-                    x = SaveGame.RandomSpread(SaveGame.MapX, distance);
-                    y = SaveGame.RandomSpread(SaveGame.MapY, distance);
-                    int d = SaveGame.Distance(SaveGame.MapY, SaveGame.MapX, y, x);
+                    x = Game.RandomSpread(Game.MapX, distance);
+                    y = Game.RandomSpread(Game.MapY, distance);
+                    int d = Game.Distance(Game.MapY, Game.MapX, y, x);
                     if (d >= min && d <= distance)
                     {
                         break;
                     }
                 }
-                if (!SaveGame.InBounds(y, x))
+                if (!Game.InBounds(y, x))
                 {
                     continue;
                 }
-                if (!SaveGame.GridOpenNoItemOrCreature(y, x))
+                if (!Game.GridOpenNoItemOrCreature(y, x))
                 {
                     continue;
                 }
-                if (SaveGame.Grid[y][x].TileFlags.IsSet(GridTile.InVault))
+                if (Game.Grid[y][x].TileFlags.IsSet(GridTile.InVault))
                 {
                     continue;
                 }
@@ -69,12 +69,12 @@ internal class TeleportSelfScript : Script, IScript, IScriptInt
             distance *= 2;
             min /= 2;
         }
-        SaveGame.PlaySound(SoundEffectEnum.Teleport);
-        int oy = SaveGame.MapY;
-        int ox = SaveGame.MapX;
-        SaveGame.MapY = y;
-        SaveGame.MapX = x;
-        SaveGame.RedrawSingleLocation(oy, ox);
+        Game.PlaySound(SoundEffectEnum.Teleport);
+        int oy = Game.MapY;
+        int ox = Game.MapX;
+        Game.MapY = y;
+        Game.MapX = x;
+        Game.RedrawSingleLocation(oy, ox);
         while (xx < 2)
         {
             int yy = -1;
@@ -85,14 +85,14 @@ internal class TeleportSelfScript : Script, IScript, IScriptInt
                 }
                 else
                 {
-                    if (SaveGame.Grid[oy + yy][ox + xx].MonsterIndex != 0)
+                    if (Game.Grid[oy + yy][ox + xx].MonsterIndex != 0)
                     {
-                        if (SaveGame.Monsters[SaveGame.Grid[oy + yy][ox + xx].MonsterIndex].Race.TeleportSelf &&
-                            !SaveGame.Monsters[SaveGame.Grid[oy + yy][ox + xx].MonsterIndex].Race.ResistTeleport)
+                        if (Game.Monsters[Game.Grid[oy + yy][ox + xx].MonsterIndex].Race.TeleportSelf &&
+                            !Game.Monsters[Game.Grid[oy + yy][ox + xx].MonsterIndex].Race.ResistTeleport)
                         {
-                            if (SaveGame.Monsters[SaveGame.Grid[oy + yy][ox + xx].MonsterIndex].SleepLevel == 0)
+                            if (Game.Monsters[Game.Grid[oy + yy][ox + xx].MonsterIndex].SleepLevel == 0)
                             {
-                                TeleportToPlayer(SaveGame.Grid[oy + yy][ox + xx].MonsterIndex);
+                                TeleportToPlayer(Game.Grid[oy + yy][ox + xx].MonsterIndex);
                             }
                         }
                     }
@@ -101,13 +101,13 @@ internal class TeleportSelfScript : Script, IScript, IScriptInt
             }
             xx++;
         }
-        SaveGame.RedrawSingleLocation(SaveGame.MapY, SaveGame.MapX);
-        SaveGame.RecenterScreenAroundPlayer();
-        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateScentFlaggedAction)).Set();
-        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateLightFlaggedAction)).Set();
-        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateViewFlaggedAction)).Set();
-        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateDistancesFlaggedAction)).Set();
-        SaveGame.HandleStuff();
+        Game.RedrawSingleLocation(Game.MapY, Game.MapX);
+        Game.RecenterScreenAroundPlayer();
+        Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateScentFlaggedAction)).Set();
+        Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateLightFlaggedAction)).Set();
+        Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateViewFlaggedAction)).Set();
+        Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateDistancesFlaggedAction)).Set();
+        Game.HandleStuff();
     }
 
     public void ExecuteScript()
@@ -117,17 +117,17 @@ internal class TeleportSelfScript : Script, IScript, IScriptInt
 
     private void TeleportToPlayer(int mIdx)
     {
-        int ny = SaveGame.MapY;
-        int nx = SaveGame.MapX;
+        int ny = Game.MapY;
+        int nx = Game.MapX;
         int dis = 2;
         bool look = true;
-        Monster mPtr = SaveGame.Monsters[mIdx];
+        Monster mPtr = Game.Monsters[mIdx];
         int attempts = 500;
         if (mPtr.Race == null)
         {
             return;
         }
-        if (SaveGame.DieRoll(100) > mPtr.Race.Level)
+        if (Game.DieRoll(100) > mPtr.Race.Level)
         {
             return;
         }
@@ -144,27 +144,27 @@ internal class TeleportSelfScript : Script, IScript, IScriptInt
             {
                 while (true)
                 {
-                    ny = SaveGame.RandomSpread(SaveGame.MapY, dis);
-                    nx = SaveGame.RandomSpread(SaveGame.MapX, dis);
-                    int d = SaveGame.Distance(SaveGame.MapY, SaveGame.MapX, ny, nx);
+                    ny = Game.RandomSpread(Game.MapY, dis);
+                    nx = Game.RandomSpread(Game.MapX, dis);
+                    int d = Game.Distance(Game.MapY, Game.MapX, ny, nx);
                     if (d >= min && d <= dis)
                     {
                         break;
                     }
                 }
-                if (!SaveGame.InBounds(ny, nx))
+                if (!Game.InBounds(ny, nx))
                 {
                     continue;
                 }
-                if (!SaveGame.GridPassableNoCreature(ny, nx))
+                if (!Game.GridPassableNoCreature(ny, nx))
                 {
                     continue;
                 }
-                if (SaveGame.Grid[ny][nx].FeatureType is ElderSignSigilTile)
+                if (Game.Grid[ny][nx].FeatureType is ElderSignSigilTile)
                 {
                     continue;
                 }
-                if (SaveGame.Grid[ny][nx].FeatureType is YellowSignSigilTile)
+                if (Game.Grid[ny][nx].FeatureType is YellowSignSigilTile)
                 {
                     continue;
                 }
@@ -178,13 +178,13 @@ internal class TeleportSelfScript : Script, IScript, IScriptInt
         {
             return;
         }
-        SaveGame.PlaySound(SoundEffectEnum.Teleport);
-        SaveGame.Grid[ny][nx].MonsterIndex = mIdx;
-        SaveGame.Grid[oy][ox].MonsterIndex = 0;
+        Game.PlaySound(SoundEffectEnum.Teleport);
+        Game.Grid[ny][nx].MonsterIndex = mIdx;
+        Game.Grid[oy][ox].MonsterIndex = 0;
         mPtr.MapY = ny;
         mPtr.MapX = nx;
-        SaveGame.UpdateMonsterVisibility(mIdx, true);
-        SaveGame.RedrawSingleLocation(oy, ox);
-        SaveGame.RedrawSingleLocation(ny, nx);
+        Game.UpdateMonsterVisibility(mIdx, true);
+        Game.RedrawSingleLocation(oy, ox);
+        Game.RedrawSingleLocation(ny, nx);
     }
 }

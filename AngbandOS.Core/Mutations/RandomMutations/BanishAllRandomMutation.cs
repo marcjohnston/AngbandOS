@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Mutations.RandomMutations;
 [Serializable]
 internal class BanishAllRandomMutation : Mutation
 {
-    private BanishAllRandomMutation(SaveGame saveGame) : base(saveGame) { }
+    private BanishAllRandomMutation(Game game) : base(game) { }
     public override int Frequency => 2;
     public override string GainMessage => "You feel a terrifying power lurking behind you.";
     public override string HaveMessage => "You sometimes cause nearby creatures to vanish.";
@@ -18,13 +18,13 @@ internal class BanishAllRandomMutation : Mutation
 
     public override void OnProcessWorld()
     {
-        if (base.SaveGame.DieRoll(9000) != 1)
+        if (base.Game.DieRoll(9000) != 1)
         {
             return;
         }
-        SaveGame.Disturb(false);
-        SaveGame.MsgPrint("You suddenly feel almost lonely.");
-        SaveGame.RunScriptInt(nameof(BanishMonsters4xScript), 100);
-        SaveGame.MsgPrint(null);
+        Game.Disturb(false);
+        Game.MsgPrint("You suddenly feel almost lonely.");
+        Game.RunScriptInt(nameof(BanishMonsters4xScript), 100);
+        Game.MsgPrint(null);
     }
 }

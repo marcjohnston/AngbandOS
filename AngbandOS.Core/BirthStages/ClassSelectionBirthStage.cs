@@ -11,20 +11,20 @@ namespace AngbandOS.Core.BirthStages;
 internal class ClassSelectionBirthStage : BirthStage
 {
     private int currentSelection = 14;
-    private ClassSelectionBirthStage(SaveGame saveGame) : base(saveGame) { }
+    private ClassSelectionBirthStage(Game game) : base(game) { }
     public override BirthStage? Render()
     {
         DisplayPartialCharacter();
-        string[]? menuItems = SaveGame.SingletonRepository.CharacterClasses
+        string[]? menuItems = Game.SingletonRepository.CharacterClasses
             .OrderBy(_characterClass => _characterClass.Title)
             .Select(_characterClass => _characterClass.Title)
             .ToArray(); ;
-        SaveGame.Screen.Print(ColorEnum.Orange, "[Use up and down to select an option, right to confirm, or left to go back.]", 43, 1);
-        while (!SaveGame.Shutdown)
+        Game.Screen.Print(ColorEnum.Orange, "[Use up and down to select an option, right to confirm, or left to go back.]", 43, 1);
+        while (!Game.Shutdown)
         {
-            SaveGame.MenuDisplay(currentSelection, menuItems);
+            Game.MenuDisplay(currentSelection, menuItems);
             RenderSelection(currentSelection);
-            char c = SaveGame.Inkey();
+            char c = Game.Inkey();
             switch (c)
             {
                 case '8':
@@ -44,7 +44,7 @@ internal class ClassSelectionBirthStage : BirthStage
                 case '4':
                     return GoBack();
                 case 'h':
-                    SaveGame.ShowManual();
+                    Game.ShowManual();
                     break;
             }
         }
@@ -58,69 +58,69 @@ internal class ClassSelectionBirthStage : BirthStage
 
     private bool RenderSelection(int index)
     {
-        BaseCharacterClass[] classes = SaveGame.SingletonRepository.CharacterClasses
+        BaseCharacterClass[] classes = Game.SingletonRepository.CharacterClasses
             .OrderBy(_characterClass => _characterClass.Title)
             .ToArray();
 
         BaseCharacterClass characterClass = classes[index];
-        SaveGame.Screen.Print(ColorEnum.Purple, "STR:", 36, 21);
-        SaveGame.Screen.Print(ColorEnum.Purple, "INT:", 37, 21);
-        SaveGame.Screen.Print(ColorEnum.Purple, "WIS:", 38, 21);
-        SaveGame.Screen.Print(ColorEnum.Purple, "DEX:", 39, 21);
-        SaveGame.Screen.Print(ColorEnum.Purple, "CON:", 40, 21);
-        SaveGame.Screen.Print(ColorEnum.Purple, "CHA:", 41, 21);
+        Game.Screen.Print(ColorEnum.Purple, "STR:", 36, 21);
+        Game.Screen.Print(ColorEnum.Purple, "INT:", 37, 21);
+        Game.Screen.Print(ColorEnum.Purple, "WIS:", 38, 21);
+        Game.Screen.Print(ColorEnum.Purple, "DEX:", 39, 21);
+        Game.Screen.Print(ColorEnum.Purple, "CON:", 40, 21);
+        Game.Screen.Print(ColorEnum.Purple, "CHA:", 41, 21);
         for (int i = 0; i < 6; i++)
         {
             int bonus = characterClass.AbilityBonus[i];
-            SaveGame.DisplayStatBonus(26, 36 + i, bonus);
+            Game.DisplayStatBonus(26, 36 + i, bonus);
         }
-        SaveGame.Screen.Print(ColorEnum.Purple, "Disarming   :", 36, 53);
-        SaveGame.Screen.Print(ColorEnum.Purple, "Magic Device:", 37, 53);
-        SaveGame.Screen.Print(ColorEnum.Purple, "Saving Throw:", 38, 53);
-        SaveGame.Screen.Print(ColorEnum.Purple, "Stealth     :", 39, 53);
-        SaveGame.Screen.Print(ColorEnum.Purple, "Fighting    :", 40, 53);
-        SaveGame.Screen.Print(ColorEnum.Purple, "Shooting    :", 41, 53);
-        SaveGame.Screen.Print(ColorEnum.Purple, "Experience  :", 36, 31);
-        SaveGame.Screen.Print(ColorEnum.Purple, "Hit Dice    :", 37, 31);
-        SaveGame.Screen.Print(ColorEnum.Purple, "Infravision :", 38, 31);
-        SaveGame.Screen.Print(ColorEnum.Purple, "Searching   :", 39, 31);
-        SaveGame.Screen.Print(ColorEnum.Purple, "Perception  :", 40, 31);
-        SaveGame.DisplayAPlusB(67, 36, characterClass.BaseDisarmBonus, characterClass.DisarmBonusPerLevel);
-        SaveGame.DisplayAPlusB(67, 37, characterClass.BaseDeviceBonus, characterClass.DeviceBonusPerLevel);
-        SaveGame.DisplayAPlusB(67, 38, characterClass.BaseSaveBonus, characterClass.SaveBonusPerLevel);
-        SaveGame.DisplayAPlusB(67, 39, characterClass.BaseStealthBonus * 4, characterClass.StealthBonusPerLevel * 4);
-        SaveGame.DisplayAPlusB(67, 40, characterClass.BaseMeleeAttackBonus, characterClass.MeleeAttackBonusPerLevel);
-        SaveGame.DisplayAPlusB(67, 41, characterClass.BaseRangedAttackBonus, characterClass.RangedAttackBonusPerLevel);
+        Game.Screen.Print(ColorEnum.Purple, "Disarming   :", 36, 53);
+        Game.Screen.Print(ColorEnum.Purple, "Magic Device:", 37, 53);
+        Game.Screen.Print(ColorEnum.Purple, "Saving Throw:", 38, 53);
+        Game.Screen.Print(ColorEnum.Purple, "Stealth     :", 39, 53);
+        Game.Screen.Print(ColorEnum.Purple, "Fighting    :", 40, 53);
+        Game.Screen.Print(ColorEnum.Purple, "Shooting    :", 41, 53);
+        Game.Screen.Print(ColorEnum.Purple, "Experience  :", 36, 31);
+        Game.Screen.Print(ColorEnum.Purple, "Hit Dice    :", 37, 31);
+        Game.Screen.Print(ColorEnum.Purple, "Infravision :", 38, 31);
+        Game.Screen.Print(ColorEnum.Purple, "Searching   :", 39, 31);
+        Game.Screen.Print(ColorEnum.Purple, "Perception  :", 40, 31);
+        Game.DisplayAPlusB(67, 36, characterClass.BaseDisarmBonus, characterClass.DisarmBonusPerLevel);
+        Game.DisplayAPlusB(67, 37, characterClass.BaseDeviceBonus, characterClass.DeviceBonusPerLevel);
+        Game.DisplayAPlusB(67, 38, characterClass.BaseSaveBonus, characterClass.SaveBonusPerLevel);
+        Game.DisplayAPlusB(67, 39, characterClass.BaseStealthBonus * 4, characterClass.StealthBonusPerLevel * 4);
+        Game.DisplayAPlusB(67, 40, characterClass.BaseMeleeAttackBonus, characterClass.MeleeAttackBonusPerLevel);
+        Game.DisplayAPlusB(67, 41, characterClass.BaseRangedAttackBonus, characterClass.RangedAttackBonusPerLevel);
         string buf = "+" + characterClass.ExperienceFactor + "%";
-        SaveGame.Screen.Print(ColorEnum.Black, buf, 36, 45);
+        Game.Screen.Print(ColorEnum.Black, buf, 36, 45);
         buf = "1d" + characterClass.HitDieBonus;
-        SaveGame.Screen.Print(ColorEnum.Black, buf, 37, 45);
-        SaveGame.Screen.Print(ColorEnum.Black, "-", 38, 45);
+        Game.Screen.Print(ColorEnum.Black, buf, 37, 45);
+        Game.Screen.Print(ColorEnum.Black, "-", 38, 45);
         buf = $"{characterClass.BaseSearchBonus:00}%";
-        SaveGame.Screen.Print(ColorEnum.Black, buf, 39, 45);
+        Game.Screen.Print(ColorEnum.Black, buf, 39, 45);
         buf = $"{characterClass.BaseSearchFrequency:00}%";
-        SaveGame.Screen.Print(ColorEnum.Black, buf, 40, 45);
+        Game.Screen.Print(ColorEnum.Black, buf, 40, 45);
 
         int y = 30;
         foreach (string classInfo in characterClass.Info)
         {
-            SaveGame.Screen.Print(ColorEnum.Purple, classInfo, y, 20);
+            Game.Screen.Print(ColorEnum.Purple, classInfo, y, 20);
             y++;
         }
         return true;
     }
     private BirthStage? GoForward(int index)
     {
-        BaseCharacterClass[] classes = SaveGame.SingletonRepository.CharacterClasses
+        BaseCharacterClass[] classes = Game.SingletonRepository.CharacterClasses
             .OrderBy(_characterClass => _characterClass.Title)
             .ToArray();
 
-        SaveGame.BaseCharacterClass = classes[index];
-        return SaveGame.SingletonRepository.BirthStages.Get(nameof(RaceSelectionBirthStage));
+        Game.BaseCharacterClass = classes[index];
+        return Game.SingletonRepository.BirthStages.Get(nameof(RaceSelectionBirthStage));
     }
 
     private BirthStage? GoBack()
     {
-        return SaveGame.SingletonRepository.BirthStages.Get(nameof(IntroductionBirthStage));
+        return Game.SingletonRepository.BirthStages.Get(nameof(IntroductionBirthStage));
     }
 }

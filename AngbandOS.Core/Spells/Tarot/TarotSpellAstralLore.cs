@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Spells.Tarot;
 [Serializable]
 internal class TarotSpellAstralLore : Spell
 {
-    private TarotSpellAstralLore(SaveGame saveGame) : base(saveGame) { }
+    private TarotSpellAstralLore(Game game) : base(game) { }
     protected override string? CastScriptName => nameof(IdentifyItemFullyScript);
 
     public override string Name => "Astral Lore";

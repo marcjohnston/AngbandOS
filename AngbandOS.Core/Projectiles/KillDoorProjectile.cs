@@ -10,36 +10,36 @@ namespace AngbandOS.Core.Projection;
 [Serializable]
 internal class KillDoorProjectile : Projectile
 {
-    private KillDoorProjectile(SaveGame saveGame) : base(saveGame) { }
+    private KillDoorProjectile(Game game) : base(game) { }
 
-    protected override Animation EffectAnimation => SaveGame.SingletonRepository.Animations.Get(nameof(BrightYellowSwirlAnimation));
+    protected override Animation EffectAnimation => Game.SingletonRepository.Animations.Get(nameof(BrightYellowSwirlAnimation));
 
     protected override bool AffectFloor(int y, int x)
     {
-        GridTile cPtr = SaveGame.Grid[y][x];
+        GridTile cPtr = Game.Grid[y][x];
         bool obvious = false;
         if (cPtr.FeatureType.IsVisibleDoor || cPtr.FeatureType.IsOpenDoor || cPtr.FeatureType.IsUnidentifiedTrap || cPtr.FeatureType.IsTrap)
         {
-            if (SaveGame.PlayerHasLosBold(y, x))
+            if (Game.PlayerHasLosBold(y, x))
             {
-                SaveGame.MsgPrint("There is a bright flash of light!");
+                Game.MsgPrint("There is a bright flash of light!");
                 obvious = true;
                 if (cPtr.FeatureType.IsVisibleDoor)
                 {
-                    SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateMonstersFlaggedAction)).Set();
-                    SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateLightFlaggedAction)).Set();
-                    SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateViewFlaggedAction)).Set();
+                    Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateMonstersFlaggedAction)).Set();
+                    Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateLightFlaggedAction)).Set();
+                    Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateViewFlaggedAction)).Set();
                 }
             }
             cPtr.TileFlags.Clear(GridTile.PlayerMemorized);
-            SaveGame.RevertTileToBackground(y, x);
+            Game.RevertTileToBackground(y, x);
         }
         return obvious;
     }
 
     protected override bool AffectItem(int who, int y, int x)
     {
-        GridTile cPtr = SaveGame.Grid[y][x];
+        GridTile cPtr = Game.Grid[y][x];
         bool obvious = false;
         foreach (Item oPtr in cPtr.Items)
         {
@@ -51,7 +51,7 @@ internal class KillDoorProjectile : Projectile
                     oPtr.BecomeKnown();
                     if (oPtr.Marked)
                     {
-                        SaveGame.MsgPrint("Click!");
+                        Game.MsgPrint("Click!");
                         obvious = true;
                     }
                 }

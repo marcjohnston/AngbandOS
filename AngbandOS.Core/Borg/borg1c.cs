@@ -1907,7 +1907,7 @@ internal static class borg1c
      *
      * Assumes the Borg is actually in the dungeon.
      */
-    static public void borg_update_frame(SaveGame saveGame)
+    static public void borg_update_frame(Game game)
     {
         int i;
 
@@ -1917,25 +1917,25 @@ internal static class borg1c
         borg_skill.BI_ISFIXLEV = false;
 
         /* Note "Lev" vs "LEV" */
-        if (saveGame.ExperienceLevel.Value < saveGame.MaxLevelGained)
+        if (game.ExperienceLevel.Value < game.MaxLevelGained)
         {
             borg_skill.BI_ISFIXLEV = true;
         }
 
         /* Extract "LEVEL xxxxxx" */
-        borg_skill.BI_CLEVEL = saveGame.ExperienceLevel.Value;
+        borg_skill.BI_CLEVEL = game.ExperienceLevel.Value;
 
         /* cheat the max clevel */
-        borg_skill.BI_MAXCLEVEL = saveGame.MaxLevelGained;
+        borg_skill.BI_MAXCLEVEL = game.MaxLevelGained;
 
         /* Note "Winner" */
-        borg_skill.BI_KING = saveGame.IsWinner.Value;
+        borg_skill.BI_KING = game.IsWinner.Value;
 
         /* Assume experience is fine */
         borg_skill.BI_ISFIXEXP = false;
 
         /* Note "Exp" vs "EXP" and am I lower than level 50*/
-        if (saveGame.ExperiencePoints.Value < saveGame.MaxExperienceGained)
+        if (game.ExperiencePoints.Value < game.MaxExperienceGained)
         {
             /* fix it if in town */
             if (borg_skill.BI_CLEVEL == 50 && borg_skill.BI_CDEPTH == 0)
@@ -1957,16 +1957,16 @@ internal static class borg1c
         }
 
         /* Extract "EXP xxxxxxxx" */
-        borg_exp = saveGame.ExperiencePoints.Value;
+        borg_exp = game.ExperiencePoints.Value;
 
 
         /* Extract "AU xxxxxxxxx" */
-        borg_gold = saveGame.Gold.Value;
+        borg_gold = game.Gold.Value;
 
-        borg_skill.BI_WEIGHT = saveGame.WeightCarried;
+        borg_skill.BI_WEIGHT = game.WeightCarried;
 
         /* Extract "Fast (+x)" or "Slow (-x)" */
-        borg_skill.BI_SPEED = saveGame.Speed.Value;
+        borg_skill.BI_SPEED = game.Speed.Value;
 
         /* Check my float for decrementing variables */
         if (borg_skill.BI_SPEED > 110)
@@ -1979,30 +1979,30 @@ internal static class borg1c
         }
 
         /* A quick cheat to see if I missed a message about my status on some timed spells */
-        if (!goal_recalling && saveGame.WordOfRecallDelay != 0)
+        if (!goal_recalling && game.WordOfRecallDelay != 0)
         {
             goal_recalling = true;
         }
         if (!borg_prot_from_evil)
         {
-            borg_prot_from_evil = (saveGame.ProtectionFromEvilTimer.Value != 0);
+            borg_prot_from_evil = (game.ProtectionFromEvilTimer.Value != 0);
         }
         if (!borg_speed)
         {
             // Borg code set borg_speed true when haste, sprint or terror.  We don't have sprint and terror doesn't give us speed.
-            borg_speed = saveGame.HasteTimer.Value != 0;
+            borg_speed = game.HasteTimer.Value != 0;
         }
-        borg_skill.BI_TRACID = saveGame.AcidResistanceTimer.Value != 0;
-        borg_skill.BI_TRELEC = saveGame.LightningResistanceTimer.Value != 0;
-        borg_skill.BI_TRFIRE = saveGame.FireResistanceTimer.Value != 0;
-        borg_skill.BI_TRCOLD = saveGame.ColdResistanceTimer.Value != 0;
-        borg_skill.BI_TRPOIS = saveGame.PoisonResistanceTimer.Value != 0;
-        borg_bless = saveGame.BlessingTimer.Value != 0;;
+        borg_skill.BI_TRACID = game.AcidResistanceTimer.Value != 0;
+        borg_skill.BI_TRELEC = game.LightningResistanceTimer.Value != 0;
+        borg_skill.BI_TRFIRE = game.FireResistanceTimer.Value != 0;
+        borg_skill.BI_TRCOLD = game.ColdResistanceTimer.Value != 0;
+        borg_skill.BI_TRPOIS = game.PoisonResistanceTimer.Value != 0;
+        borg_bless = game.BlessingTimer.Value != 0;;
         //borg_shield = (player->timed[TMD_SHIELD] ? true : false); // No equivalent in AngbandOS
-        borg_shield = saveGame.StoneskinTimer.Value != 0;
+        borg_shield = game.StoneskinTimer.Value != 0;
         //borg_fastcast = (player->timed[TMD_FASTCAST] ? true : false); // No equivalent in AngbandOS
-        borg_hero = saveGame.HeroismTimer.Value != 0;
-        borg_berserk = saveGame.SuperheroismTimer.Value != 0;
+        borg_hero = game.HeroismTimer.Value != 0;
+        borg_berserk = game.SuperheroismTimer.Value != 0;
         //borg_regen =  (player->.timed (player->timed[TMD_HEAL] ? true : false); // No equivalent in AngbandOS
         //borg_venom = (player->timed[TMD_ATT_POIS] ? true : false); // No equivalent in AngbandOS
         //borg_smite_evil = (player->timed[TMD_ATT_EVIL] ? true : false); // No equivalent in AngbandOS
@@ -2012,7 +2012,7 @@ internal static class borg1c
         /* gained from hasting is counted seperately. */
         if (borg_speed)
         {
-            if (saveGame.HasteTimer.Value != 0)
+            if (game.HasteTimer.Value != 0)
             {
                 borg_skill.BI_SPEED -= 10;
             }

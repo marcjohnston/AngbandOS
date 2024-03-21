@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Tiles;
 [Serializable]
 internal class FountainTile : Tile
 {
-    private FountainTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private FountainTile(Game game) : base(game) { } // This object is a singleton.
     protected override string SymbolName => nameof(TildeSymbol);
     public override ColorEnum Color => ColorEnum.BrightBlue;
     protected override string? AlterActionName => nameof(TunnelAlterAction);

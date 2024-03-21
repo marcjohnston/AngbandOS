@@ -13,16 +13,16 @@ namespace AngbandOS.Core.Activations;
 [Serializable]
 internal class Heal1000Every888Activation : Activation
 {
-    private Heal1000Every888Activation(SaveGame saveGame) : base(saveGame) { }
+    private Heal1000Every888Activation(Game game) : base(game) { }
     public override int RandomChance => 10;
 
     public override string? PreActivationMessage => "Your {0} glows a bright white...";
 
     protected override bool OnActivate(Item item)
     {
-        SaveGame.MsgPrint("You feel much better...");
-        SaveGame.RestoreHealth(1000);
-        SaveGame.BleedingTimer.ResetTimer();
+        Game.MsgPrint("You feel much better...");
+        Game.RestoreHealth(1000);
+        Game.BleedingTimer.ResetTimer();
         return true;
     }
 

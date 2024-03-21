@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class ResistAcidScript : Script, IScript
 {
-    private ResistAcidScript(SaveGame saveGame) : base(saveGame) { }
+    private ResistAcidScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script.
@@ -18,6 +18,6 @@ internal class ResistAcidScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        SaveGame.AcidResistanceTimer.AddTimer(SaveGame.DieRoll(20) + 20);
+        Game.AcidResistanceTimer.AddTimer(Game.DieRoll(20) + 20);
     }
 }

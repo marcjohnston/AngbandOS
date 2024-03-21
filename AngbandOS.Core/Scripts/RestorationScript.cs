@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class RestorationScript : Script, IScript, IStoreScript
 {
-    private RestorationScript(SaveGame saveGame) : base(saveGame) { }
+    private RestorationScript(Game game) : base(game) { }
 
     /// <summary>
     /// Allows the player to purchase the restoration for 750 gold.  Does not modify any of the store flags.
@@ -18,21 +18,21 @@ internal class RestorationScript : Script, IScript, IStoreScript
     /// <returns></returns>
     public void ExecuteStoreScript(StoreCommandEvent storeCommandEvent)
     {
-        if (!SaveGame.ServiceHaggle(750, out int price))
+        if (!Game.ServiceHaggle(750, out int price))
         {
-            if (price > SaveGame.Gold.Value)
+            if (price > Game.Gold.Value)
             {
-                SaveGame.MsgPrint("You do not have the gold!");
+                Game.MsgPrint("You do not have the gold!");
             }
             else
             {
-                SaveGame.Gold.Value -= price;
-                SaveGame.SayComment_1();
-                SaveGame.PlaySound(SoundEffectEnum.StoreTransaction);
-                SaveGame.StorePrtGold();
+                Game.Gold.Value -= price;
+                Game.SayComment_1();
+                Game.PlaySound(SoundEffectEnum.StoreTransaction);
+                Game.StorePrtGold();
                 ExecuteScript();
             }
-            SaveGame.HandleStuff();
+            Game.HandleStuff();
         }
     }
 
@@ -42,7 +42,7 @@ internal class RestorationScript : Script, IScript, IStoreScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        SaveGame.RunScript(nameof(RestoreBodyScript));
-        SaveGame.RunScript(nameof(RestoreLevelScript));
+        Game.RunScript(nameof(RestoreBodyScript));
+        Game.RunScript(nameof(RestoreLevelScript));
     }
 }

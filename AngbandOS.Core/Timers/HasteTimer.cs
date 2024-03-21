@@ -10,18 +10,18 @@ namespace AngbandOS.Core.Timers;
 [Serializable]
 internal class HasteTimer : Timer
 {
-    private HasteTimer(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private HasteTimer(Game game) : base(game) { } // This object is a singleton.
     protected override void EffectStopped()
     {
-        SaveGame.MsgPrint("You feel yourself slow down.");
+        Game.MsgPrint("You feel yourself slow down.");
     }
     protected override void EffectIncreased(int newRate, int currentRate)
     {
-        SaveGame.MsgPrint("You feel yourself moving faster!");
+        Game.MsgPrint("You feel yourself moving faster!");
     }
     protected override void Noticed()
     {
-        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
+        Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
         base.Noticed();
     }
 }

@@ -10,7 +10,7 @@ namespace AngbandOS.Core.ClassSpells;
 [Serializable]
 internal class HighMageSeeInvisibleFolkSpell : ClassSpell
 {
-    private HighMageSeeInvisibleFolkSpell(SaveGame saveGame) : base(saveGame) { }
+    private HighMageSeeInvisibleFolkSpell(Game game) : base(game) { }
     public override string SpellName => nameof(FolkSpellSeeInvisible);
     public override string CharacterClassName => nameof(HighMageCharacterClass);
     public override int Level => 22;

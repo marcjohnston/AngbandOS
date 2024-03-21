@@ -11,8 +11,8 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal abstract class ChestItemFactory : ItemFactory
 {
-    public ChestItemFactory(SaveGame saveGame) : base(saveGame) { }
-    public override ItemClass ItemClass => SaveGame.SingletonRepository.ItemClasses.Get(nameof(ChestsItemClass));
+    public ChestItemFactory(Game game) : base(game) { }
+    public override ItemClass ItemClass => Game.SingletonRepository.ItemClasses.Get(nameof(ChestsItemClass));
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Chest;
     public override bool HatesFire => true;
     public override bool HatesAcid => true;
@@ -33,7 +33,7 @@ internal abstract class ChestItemFactory : ItemFactory
         }
         else
         {
-            if (SaveGame.SingletonRepository.ChestTrapConfigurations[item.TypeSpecificValue].Traps.Length == 0)
+            if (Game.SingletonRepository.ChestTrapConfigurations[item.TypeSpecificValue].Traps.Length == 0)
             {
                 return Stompable[StompableType.Good];
             }
@@ -56,7 +56,7 @@ internal abstract class ChestItemFactory : ItemFactory
         }
         else if (item.TypeSpecificValue < 0)
         {
-            if (SaveGame.SingletonRepository.ChestTrapConfigurations[-item.TypeSpecificValue].IsTrapped)
+            if (Game.SingletonRepository.ChestTrapConfigurations[-item.TypeSpecificValue].IsTrapped)
             {
                 s += " (disarmed)";
             }
@@ -67,7 +67,7 @@ internal abstract class ChestItemFactory : ItemFactory
         }
         else
         {
-            s += $" {SaveGame.SingletonRepository.ChestTrapConfigurations[item.TypeSpecificValue].Description}";
+            s += $" {Game.SingletonRepository.ChestTrapConfigurations[item.TypeSpecificValue].Description}";
         }
 
         // Chests do not have Mods, Damage or Bonus.  We are omitting the description for those features.
@@ -89,12 +89,12 @@ internal abstract class ChestItemFactory : ItemFactory
     {
         if (item.Factory.LevelNormallyFound > 0)
         {
-            item.TypeSpecificValue = SaveGame.DieRoll(item.Factory.LevelNormallyFound);
+            item.TypeSpecificValue = Game.DieRoll(item.Factory.LevelNormallyFound);
             if (item.TypeSpecificValue > 55)
             {
-                int chestTrapConfigurationCount = SaveGame.SingletonRepository.ChestTrapConfigurations.Count;
+                int chestTrapConfigurationCount = Game.SingletonRepository.ChestTrapConfigurations.Count;
                 int randomRemaining = chestTrapConfigurationCount - 55;
-                item.TypeSpecificValue = (55 + SaveGame.RandomLessThan(randomRemaining));
+                item.TypeSpecificValue = (55 + Game.RandomLessThan(randomRemaining));
             }
         }
     }

@@ -10,7 +10,7 @@ namespace AngbandOS.Core.MonsterRaces;
 [Serializable]
 internal class JackalMonsterRace : MonsterRace
 {
-    protected JackalMonsterRace(SaveGame saveGame) : base(saveGame) { }
+    protected JackalMonsterRace(Game game) : base(game) { }
 
     protected override string SymbolName => nameof(UpperCSymbol);
     public override ColorEnum Color => ColorEnum.BrightBrown;

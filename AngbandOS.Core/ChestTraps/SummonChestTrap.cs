@@ -10,20 +10,20 @@ namespace AngbandOS.Core.ChestTraps;
 [Serializable]
 internal class SummonChestTrap : ChestTrap
 {
-    private SummonChestTrap(SaveGame saveGame) : base(saveGame) { }
+    private SummonChestTrap(Game game) : base(game) { }
     public override void Activate(ActivateChestTrapEventArgs eventArgs)
     {
-        int num = 2 + SaveGame.DieRoll(3);
-        SaveGame.MsgPrint("You are enveloped in a cloud of smoke!");
+        int num = 2 + Game.DieRoll(3);
+        Game.MsgPrint("You are enveloped in a cloud of smoke!");
         for (int i = 0; i < num; i++)
         {
-            if (SaveGame.DieRoll(100) < SaveGame.Difficulty)
+            if (Game.DieRoll(100) < Game.Difficulty)
             {
-                SaveGame.ActivateHiSummon();
+                Game.ActivateHiSummon();
             }
             else
             {
-                SaveGame.SummonSpecific(eventArgs.Y, eventArgs.X, SaveGame.Difficulty, null);
+                Game.SummonSpecific(eventArgs.Y, eventArgs.X, Game.Difficulty, null);
             }
         }
     }

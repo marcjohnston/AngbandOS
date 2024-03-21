@@ -10,24 +10,24 @@ namespace AngbandOS.Core.FlaggedActions;
 [Serializable]
 internal class NoticeReorderFlaggedAction : FlaggedAction
 {
-    private NoticeReorderFlaggedAction(SaveGame saveGame) : base(saveGame) { }
+    private NoticeReorderFlaggedAction(Game game) : base(game) { }
     protected override void Execute()
     {
         bool itemsWereReordered = SortPack();
         if (itemsWereReordered)
         {
-            SaveGame.MsgPrint("You reorder some items in your pack.");
+            Game.MsgPrint("You reorder some items in your pack.");
         }
     }
     private bool SortPack()
     {
-        PackInventorySlot packInventorySlot = (PackInventorySlot)SaveGame.SingletonRepository.InventorySlots.Get(nameof(PackInventorySlot));
+        PackInventorySlot packInventorySlot = (PackInventorySlot)Game.SingletonRepository.InventorySlots.Get(nameof(PackInventorySlot));
 
         // Create a list for all of the pack items.
         List<Item> packItems = new List<Item>();
         foreach (int index in packInventorySlot.InventorySlots)
         {
-            Item? item = SaveGame.GetInventoryItem(index);
+            Item? item = Game.GetInventoryItem(index);
             if (item != null)
             {
                 packItems.Add(item);
@@ -44,16 +44,16 @@ internal class NoticeReorderFlaggedAction : FlaggedAction
         {
             if (packItemIndex < packItems.Count)
             {
-                if (SaveGame.GetInventoryItem(index) != packItems[packItemIndex])
+                if (Game.GetInventoryItem(index) != packItems[packItemIndex])
                 {
                     itemsWereReordered = true;
                 }
-                SaveGame.SetInventoryItem(index, packItems[packItemIndex]);
+                Game.SetInventoryItem(index, packItems[packItemIndex]);
                 packItemIndex++;
             }
             else
             {
-                SaveGame.SetInventoryItem(index, null);
+                Game.SetInventoryItem(index, null);
             }
         }
         return itemsWereReordered;

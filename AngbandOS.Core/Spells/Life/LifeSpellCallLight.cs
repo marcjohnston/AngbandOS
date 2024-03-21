@@ -10,10 +10,10 @@ namespace AngbandOS.Core.Spells.Life;
 [Serializable]
 internal class LifeSpellCallLight : Spell
 {
-    private LifeSpellCallLight(SaveGame saveGame) : base(saveGame) { }
+    private LifeSpellCallLight(Game game) : base(game) { }
     protected override string? CastScriptName => nameof(LightAreaScript);
 
     public override string Name => "Call Light";
 
-    protected override string LearnedDetails => $"dam {10 + (SaveGame.ExperienceLevel.Value / 2)}";
+    protected override string LearnedDetails => $"dam {10 + (Game.ExperienceLevel.Value / 2)}";
 }

@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Vaults;
 [Serializable]
 internal class LesserVaultnotandVault : Vault
 {
-    private LesserVaultnotandVault(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private LesserVaultnotandVault(Game game) : base(game) { } // This object is a singleton.
     public override string Name => "Lesser vault ('not' 'and')";
     public override int Category => 7;
     public override int Height => 11;

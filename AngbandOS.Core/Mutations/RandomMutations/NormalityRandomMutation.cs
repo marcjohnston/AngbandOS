@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Mutations.RandomMutations;
 [Serializable]
 internal class NormalityRandomMutation : Mutation
 {
-    private NormalityRandomMutation(SaveGame saveGame) : base(saveGame) { }
+    private NormalityRandomMutation(Game game) : base(game) { }
     public override int Frequency => 3;
     public override string GainMessage => "You feel strangely normal.";
     public override string HaveMessage => "You may be chaotic, but you're recovering.";
@@ -18,9 +18,9 @@ internal class NormalityRandomMutation : Mutation
 
     public override void OnProcessWorld()
     {
-        if (base.SaveGame.DieRoll(5000) == 1)
+        if (base.Game.DieRoll(5000) == 1)
         {
-            SaveGame.LoseMutation();
+            Game.LoseMutation();
         }
     }
 }

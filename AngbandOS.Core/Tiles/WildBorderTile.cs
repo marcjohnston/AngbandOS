@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Tiles;
 [Serializable]
 internal class WildBorderTile : Tile
 {
-    private WildBorderTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private WildBorderTile(Game game) : base(game) { } // This object is a singleton.
     protected override string SymbolName => nameof(PeriodSymbol);
     public override ColorEnum Color => ColorEnum.BrightGreen;
     protected override string? MimicTileName => nameof(GrassTile);

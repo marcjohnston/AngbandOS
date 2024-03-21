@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class BattleFrenzyScript : Script, IScript
 {
-    private BattleFrenzyScript(SaveGame saveGame) : base(saveGame) { }
+    private BattleFrenzyScript(Game game) : base(game) { }
 
     /// <summary>
     /// Restores 30 points of health, removes fear, adds between 25 and 50 turns of super heroism and adds up to 5 turns of haste if the player already has
@@ -19,16 +19,16 @@ internal class BattleFrenzyScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        SaveGame.SuperheroismTimer.AddTimer(SaveGame.DieRoll(25) + 25);
-        SaveGame.RestoreHealth(30);
-        SaveGame.FearTimer.ResetTimer();
-        if (SaveGame.HasteTimer.Value == 0)
+        Game.SuperheroismTimer.AddTimer(Game.DieRoll(25) + 25);
+        Game.RestoreHealth(30);
+        Game.FearTimer.ResetTimer();
+        if (Game.HasteTimer.Value == 0)
         {
-            SaveGame.HasteTimer.SetTimer(SaveGame.DieRoll(20 + (SaveGame.ExperienceLevel.Value / 2)) + (SaveGame.ExperienceLevel.Value / 2));
+            Game.HasteTimer.SetTimer(Game.DieRoll(20 + (Game.ExperienceLevel.Value / 2)) + (Game.ExperienceLevel.Value / 2));
         }
         else
         {
-            SaveGame.HasteTimer.AddTimer(SaveGame.DieRoll(5));
+            Game.HasteTimer.AddTimer(Game.DieRoll(5));
         }
     }
 }

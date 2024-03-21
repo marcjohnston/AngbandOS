@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class CureMediumWounds4d8Script : Script, IScript
 {
-    private CureMediumWounds4d8Script(SaveGame saveGame) : base(saveGame) { }
+    private CureMediumWounds4d8Script(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script.
@@ -18,7 +18,7 @@ internal class CureMediumWounds4d8Script : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        SaveGame.RestoreHealth(SaveGame.DiceRoll(4, 8));
-        SaveGame.BleedingTimer.SetTimer((SaveGame.BleedingTimer.Value / 2) - 50);
+        Game.RestoreHealth(Game.DiceRoll(4, 8));
+        Game.BleedingTimer.SetTimer((Game.BleedingTimer.Value / 2) - 50);
     }
 }

@@ -10,7 +10,7 @@ namespace AngbandOS.Core.WizardCommands;
 [Serializable]
 internal class CarriageReturnWizardCommand : WizardCommand
 {
-    private CarriageReturnWizardCommand(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private CarriageReturnWizardCommand(Game game) : base(game) { } // This object is a singleton.
 
     public override char KeyChar => '\r';
 }

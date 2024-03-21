@@ -10,26 +10,26 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class FlamesRingItemFactory : RingItemFactory, IItemsCanBeActivated
 {
-    private FlamesRingItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private FlamesRingItemFactory(Game game) : base(game) { } // This object is a singleton.
 
     public void ActivateItem(Item item)
     {
-        if (!SaveGame.GetDirectionWithAim(out int dir))
+        if (!Game.GetDirectionWithAim(out int dir))
         {
             return;
         }
-        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(FireProjectile)), dir, 50, 2);
-        SaveGame.FireResistanceTimer.AddTimer(SaveGame.DieRoll(20) + 20);
-        item.RechargeTimeLeft = SaveGame.RandomLessThan(50) + 50;
+        Game.FireBall(Game.SingletonRepository.Projectiles.Get(nameof(FireProjectile)), dir, 50, 2);
+        Game.FireResistanceTimer.AddTimer(Game.DieRoll(20) + 20);
+        item.RechargeTimeLeft = Game.RandomLessThan(50) + 50;
     }
 
     public override string? DescribeActivationEffect => "ball of fire and resist fire";
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(EqualSignSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(EqualSignSymbol));
     public override string Name => "Flames";
 
     public override void ApplyMagic(Item item, int level, int power, Store? store)
     {
-        item.BonusArmorClass = 5 + SaveGame.DieRoll(5) + item.GetBonusValue(10, level);
+        item.BonusArmorClass = 5 + Game.DieRoll(5) + item.GetBonusValue(10, level);
     }
     public override bool Activate => true;
     public override int[] Chance => new int[] { 1, 0, 0, 0 };
@@ -41,5 +41,5 @@ internal class FlamesRingItemFactory : RingItemFactory, IItemsCanBeActivated
     public override bool ResFire => true;
     public override int ToA => 15;
     public override int Weight => 2;
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

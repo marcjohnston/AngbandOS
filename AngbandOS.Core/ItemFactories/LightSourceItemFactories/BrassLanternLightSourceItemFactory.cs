@@ -10,7 +10,7 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class BrassLanternLightSourceItemFactory : LightSourceItemFactory
 {
-    private BrassLanternLightSourceItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private BrassLanternLightSourceItemFactory(Game game) : base(game) { } // This object is a singleton.
 
     public override void ApplyMagic(Item item, int level, int power, Store? store)
     {
@@ -20,7 +20,7 @@ internal class BrassLanternLightSourceItemFactory : LightSourceItemFactory
         }
         else if (item.TypeSpecificValue != 0)
         {
-            item.TypeSpecificValue = SaveGame.DieRoll(item.TypeSpecificValue);
+            item.TypeSpecificValue = Game.DieRoll(item.TypeSpecificValue);
         }
     }
 
@@ -50,7 +50,7 @@ internal class BrassLanternLightSourceItemFactory : LightSourceItemFactory
     /// </summary>
     public override bool IsFuelForLantern => true;
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(TildeSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(TildeSymbol));
     public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "Brass Lantern";
 
@@ -70,12 +70,12 @@ internal class BrassLanternLightSourceItemFactory : LightSourceItemFactory
     /// Refill a lamp
     /// </summary>
     /// <param name="itemIndex"> The inventory index of the fuel </param>
-    public override void Refill(SaveGame saveGame, Item item)
+    public override void Refill(Game game, Item item)
     {
         // Get an item if we don't already have one
-        if (!saveGame.SelectItem(out Item? fuelSource, "Refill with which flask? ", false, true, true, SaveGame.SingletonRepository.ItemFilters.Get(nameof(LanternFuelItemFilter))))
+        if (!game.SelectItem(out Item? fuelSource, "Refill with which flask? ", false, true, true, Game.SingletonRepository.ItemFilters.Get(nameof(LanternFuelItemFilter))))
         {
-            saveGame.MsgPrint("You have no flasks of oil.");
+            game.MsgPrint("You have no flasks of oil.");
             return;
         }
 
@@ -86,30 +86,30 @@ internal class BrassLanternLightSourceItemFactory : LightSourceItemFactory
         }
 
         // Make sure our item is suitable fuel
-        if (!saveGame.ItemMatchesFilter(fuelSource, SaveGame.SingletonRepository.ItemFilters.Get(nameof(LanternFuelItemFilter))))
+        if (!game.ItemMatchesFilter(fuelSource, Game.SingletonRepository.ItemFilters.Get(nameof(LanternFuelItemFilter))))
         {
-            saveGame.MsgPrint("You can't refill a lantern from that!");
+            game.MsgPrint("You can't refill a lantern from that!");
             return;
         }
         // Refilling takes half a turn
-        saveGame.EnergyUse = 50;
+        game.EnergyUse = 50;
 
         // Add the fuel
         item.TypeSpecificValue += fuelSource.TypeSpecificValue;
-        saveGame.MsgPrint("You fuel your lamp.");
+        game.MsgPrint("You fuel your lamp.");
 
         // Check for overfilling
         if (item.TypeSpecificValue >= Constants.FuelLamp)
         {
             item.TypeSpecificValue = Constants.FuelLamp;
-            saveGame.MsgPrint("Your lamp is full.");
+            game.MsgPrint("Your lamp is full.");
         }
 
         // Update the inventory
         fuelSource.ItemIncrease(-1);
         fuelSource.ItemDescribe();
         fuelSource.ItemOptimize();
-        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateTorchRadiusFlaggedAction)).Set();
+        Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateTorchRadiusFlaggedAction)).Set();
     }
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

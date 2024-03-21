@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class EquipScript : Script, IScript, IRepeatableScript, IStoreScript
 {
-    private EquipScript(SaveGame saveGame) : base(saveGame) { }
+    private EquipScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the equip script.  Does not modify any of the store flags.
@@ -38,28 +38,28 @@ internal class EquipScript : Script, IScript, IRepeatableScript, IStoreScript
     public void ExecuteScript()
     {
         // We're viewing equipment
-        SaveGame.ViewingEquipment = true;
-        ScreenBuffer savedScreen = SaveGame.Screen.Clone();
+        Game.ViewingEquipment = true;
+        ScreenBuffer savedScreen = Game.Screen.Clone();
 
         // We're interested in seeing everything
-        SaveGame.ShowEquip(null);
+        Game.ShowEquip(null);
 
         // Get a command
-        string outVal = $"Equipment: carrying {SaveGame.WeightCarried / 10}.{SaveGame.WeightCarried % 10} pounds ({SaveGame.WeightCarried * 100 / (SaveGame.AbilityScores[Ability.Strength].StrCarryingCapacity * 100 / 2)}% of capacity). Command: ";
-        SaveGame.Screen.PrintLine(outVal, 0, 0);
-        char c = SaveGame.Inkey();
-        SaveGame.Screen.Restore(savedScreen);
+        string outVal = $"Equipment: carrying {Game.WeightCarried / 10}.{Game.WeightCarried % 10} pounds ({Game.WeightCarried * 100 / (Game.AbilityScores[Ability.Strength].StrCarryingCapacity * 100 / 2)}% of capacity). Command: ";
+        Game.Screen.PrintLine(outVal, 0, 0);
+        char c = Game.Inkey();
+        Game.Screen.Restore(savedScreen);
 
         // Display details if the player wants
         if (c != '\x1b')
         {
-            SaveGame._artificialKeyBuffer += c;
+            Game._artificialKeyBuffer += c;
         }
         else
         {
             // If the player selects a command that uses getitem, it will automatically show the
             // inventory
-            SaveGame.ViewingItemList = true;
+            Game.ViewingItemList = true;
         }
     }
 }

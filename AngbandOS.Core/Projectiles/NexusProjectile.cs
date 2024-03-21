@@ -10,11 +10,11 @@ namespace AngbandOS.Core.Projection;
 [Serializable]
 internal class NexusProjectile : Projectile
 {
-    private NexusProjectile(SaveGame saveGame) : base(saveGame) { }
+    private NexusProjectile(Game game) : base(game) { }
 
-    protected override ProjectileGraphic? BoltProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get(nameof(PinkBulletProjectileGraphic));
+    protected override ProjectileGraphic? BoltProjectileGraphic => Game.SingletonRepository.ProjectileGraphics.Get(nameof(PinkBulletProjectileGraphic));
 
-    protected override Animation EffectAnimation => SaveGame.SingletonRepository.Animations.Get(nameof(PinkSwirlAnimation));
+    protected override Animation EffectAnimation => Game.SingletonRepository.Animations.Get(nameof(PinkSwirlAnimation));
 
     protected override bool AffectMonster(int who, Monster mPtr, int dam, int r)
     {
@@ -30,7 +30,7 @@ internal class NexusProjectile : Projectile
         {
             note = " resists.";
             dam *= 3;
-            dam /= SaveGame.DieRoll(6) + 6;
+            dam /= Game.DieRoll(6) + 6;
             if (seen)
             {
                 rPtr.Knowledge.Characteristics.ResistNexus = true;
@@ -42,28 +42,28 @@ internal class NexusProjectile : Projectile
 
     protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
     {
-        bool blind = SaveGame.BlindnessTimer.Value != 0;
+        bool blind = Game.BlindnessTimer.Value != 0;
         if (dam > 1600)
         {
             dam = 1600;
         }
         dam = (dam + r) / (r + 1);
-        Monster mPtr = SaveGame.Monsters[who];
+        Monster mPtr = Game.Monsters[who];
         string killer = mPtr.IndefiniteVisibleName;
         if (blind)
         {
-            SaveGame.MsgPrint("You are hit by something strange!");
+            Game.MsgPrint("You are hit by something strange!");
         }
-        if (SaveGame.HasNexusResistance)
+        if (Game.HasNexusResistance)
         {
             dam *= 6;
-            dam /= SaveGame.DieRoll(6) + 6;
+            dam /= Game.DieRoll(6) + 6;
         }
         else
         {
-            SaveGame.ApplyNexus(mPtr);
+            Game.ApplyNexus(mPtr);
         }
-        SaveGame.TakeHit(dam, killer);
+        Game.TakeHit(dam, killer);
         return true;
     }
 }

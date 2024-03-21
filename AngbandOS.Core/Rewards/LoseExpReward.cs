@@ -10,11 +10,11 @@ namespace AngbandOS.Core.Rewards;
 [Serializable]
 internal class LoseExpReward : Reward
 {
-    private LoseExpReward(SaveGame saveGame) : base(saveGame) { }
+    private LoseExpReward(Game game) : base(game) { }
     public override void GetReward(Patron patron)
     {
-        SaveGame.MsgPrint($"The voice of {patron.ShortName} booms out:");
-        SaveGame.MsgPrint("'Thou didst not deserve that, slave.'");
-        SaveGame.LoseExperience(SaveGame.ExperiencePoints.Value / 6);
+        Game.MsgPrint($"The voice of {patron.ShortName} booms out:");
+        Game.MsgPrint("'Thou didst not deserve that, slave.'");
+        Game.LoseExperience(Game.ExperiencePoints.Value / 6);
     }
 }

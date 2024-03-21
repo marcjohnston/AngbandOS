@@ -8,7 +8,7 @@
 [Serializable]
 internal class GandarTheNeutralShopkeeper : Shopkeeper
 {
-    private GandarTheNeutralShopkeeper(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private GandarTheNeutralShopkeeper(Game game) : base(game) { } // This object is a singleton.
     public override string Name => "Gandar the Neutral";
     public override int MaxCost =>  25000;
     public override int MinInflate =>  110;

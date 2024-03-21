@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class ExamineScript : Script, IScript, IRepeatableScript, IStoreScript
 {
-    private ExamineScript(SaveGame saveGame) : base(saveGame) { }
+    private ExamineScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the examine script.  Does not modify any of the store flags.
@@ -38,9 +38,9 @@ internal class ExamineScript : Script, IScript, IRepeatableScript, IStoreScript
     public void ExecuteScript()
     {
         // Get the item to examine
-        if (!SaveGame.SelectItem(out Item? item, "Examine which item? ", true, true, true, null))
+        if (!Game.SelectItem(out Item? item, "Examine which item? ", true, true, true, null))
         {
-            SaveGame.MsgPrint("You have nothing to examine.");
+            Game.MsgPrint("You have nothing to examine.");
             return;
         }
         if (item == null)
@@ -50,16 +50,16 @@ internal class ExamineScript : Script, IScript, IRepeatableScript, IStoreScript
         // Do we know anything about it?
         if (!item.IdentMental)
         {
-            SaveGame.MsgPrint("You have no special knowledge about that item.");
+            Game.MsgPrint("You have no special knowledge about that item.");
             return;
         }
         string itemName = item.Description(true, 3);
-        SaveGame.MsgPrint($"Examining {itemName}...");
+        Game.MsgPrint($"Examining {itemName}...");
         // We're not actually identifying it, because it's already itentified, but we want to
         // repeat the identification text
         if (!item.IdentifyFully())
         {
-            SaveGame.MsgPrint("You see nothing special.");
+            Game.MsgPrint("You see nothing special.");
         }
     }
 }

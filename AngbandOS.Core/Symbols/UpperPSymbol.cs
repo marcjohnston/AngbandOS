@@ -8,7 +8,7 @@
 [Serializable]
 internal class UpperPSymbol : Symbol
 {
-    private UpperPSymbol(SaveGame saveGame) : base(saveGame) { }
+    private UpperPSymbol(Game game) : base(game) { }
     public override char Character => 'P';
     public override string Name => "Giant Humanoid";
 }

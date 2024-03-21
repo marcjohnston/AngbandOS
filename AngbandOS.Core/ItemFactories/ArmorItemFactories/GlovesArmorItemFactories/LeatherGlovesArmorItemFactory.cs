@@ -10,9 +10,9 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class LeatherGlovesArmorItemFactory : GlovesArmorItemFactory
 {
-    private LeatherGlovesArmorItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private LeatherGlovesArmorItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(CloseBraceSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(CloseBraceSymbol));
     public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "Set of Leather Gloves";
 
@@ -23,5 +23,5 @@ internal class LeatherGlovesArmorItemFactory : GlovesArmorItemFactory
     public override int LevelNormallyFound => 1;
     public override int[] Locale => new int[] { 1, 0, 0, 0 };
     public override int Weight => 5;
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

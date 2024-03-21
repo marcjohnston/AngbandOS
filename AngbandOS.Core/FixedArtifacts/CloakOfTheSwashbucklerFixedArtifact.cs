@@ -10,7 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class CloakOfTheSwashbucklerFixedArtifact : FixedArtifact
 {
-    private CloakOfTheSwashbucklerFixedArtifact(SaveGame saveGame) : base(saveGame) { }
+    private CloakOfTheSwashbucklerFixedArtifact(Game game) : base(game) { }
 
     protected override string BaseItemFactoryName => nameof(ClothCloakCloakArmorItemFactory);
 
@@ -19,7 +19,7 @@ internal class CloakOfTheSwashbucklerFixedArtifact : FixedArtifact
 
     public override void ApplyResistances(Item item)
     {
-        item.RandomPower = SaveGame.SingletonRepository.Powers.ToWeightedRandom(_power => _power.IsAbility == true).Choose();
+        item.RandomPower = Game.SingletonRepository.Powers.ToWeightedRandom(_power => _power.IsAbility == true).Choose();
     }
 
     public override ColorEnum Color => ColorEnum.Green;

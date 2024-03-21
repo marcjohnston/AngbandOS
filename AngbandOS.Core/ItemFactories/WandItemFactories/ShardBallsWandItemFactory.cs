@@ -10,14 +10,14 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class ShardBallsWandItemFactory : WandItemFactory
 {
-    private ShardBallsWandItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private ShardBallsWandItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(MinusSignSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(MinusSignSymbol));
     public override string Name => "Shard Balls";
 
     public override void ApplyMagic(Item item, int level, int power, Store? store)
     {
-        item.TypeSpecificValue = SaveGame.DieRoll(2) + 1;
+        item.TypeSpecificValue = Game.DieRoll(2) + 1;
     }
 
     public override int[] Chance => new int[] { 4, 0, 0, 0 };
@@ -33,10 +33,10 @@ internal class ShardBallsWandItemFactory : WandItemFactory
     public override int[] Locale => new int[] { 75, 0, 0, 0 };
     public override int Weight => 10;
 
-    public override bool ExecuteActivation(SaveGame saveGame, int dir)
+    public override bool ExecuteActivation(Game game, int dir)
     {
-        saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get(nameof(ShardProjectile)), dir, 75 + SaveGame.DieRoll(50), 2);
+        game.FireBall(game.SingletonRepository.Projectiles.Get(nameof(ShardProjectile)), dir, 75 + Game.DieRoll(50), 2);
         return true;
     }
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

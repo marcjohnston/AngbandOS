@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Spells.Nature;
 [Serializable]
 internal class NatureSpellWhirlwindAttack : Spell
 {
-    private NatureSpellWhirlwindAttack(SaveGame saveGame) : base(saveGame) { }
+    private NatureSpellWhirlwindAttack(Game game) : base(game) { }
     protected override string? CastScriptName => nameof(WhirlwindAttackScript);
 
     public override string Name => "Whirlwind Attack";

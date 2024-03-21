@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Spells.Chaos;
 [Serializable]
 internal class ChaosSpellTeleportOther : Spell
 {
-    private ChaosSpellTeleportOther(SaveGame saveGame) : base(saveGame) { }
+    private ChaosSpellTeleportOther(Game game) : base(game) { }
     protected override string? CastScriptName => nameof(TeleportOtherScript);
 
     protected override string? CastFailedScriptName => nameof(WildChaoticMagicScript);

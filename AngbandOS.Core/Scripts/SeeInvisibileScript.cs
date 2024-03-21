@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class SeeInvisibileScript : Script, IScript
 {
-    private SeeInvisibileScript(SaveGame saveGame) : base(saveGame) { }
+    private SeeInvisibileScript(Game game) : base(game) { }
 
     /// <summary>
     /// Adds between 24 and 48 turns of see invisibility.
@@ -18,6 +18,6 @@ internal class SeeInvisibileScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        SaveGame.SeeInvisibilityTimer.AddTimer(SaveGame.DieRoll(24) + 24);
+        Game.SeeInvisibilityTimer.AddTimer(Game.DieRoll(24) + 24);
     }
 }

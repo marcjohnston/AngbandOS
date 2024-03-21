@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Tiles;
 [Serializable]
 internal class SecretDoorTile : Tile
 {
-    private SecretDoorTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private SecretDoorTile(Game game) : base(game) { } // This object is a singleton.
     protected override string SymbolName => nameof(PoundSignSymbol);
     protected override string? AlterActionName => nameof(TunnelAlterAction);
     protected override string? MimicTileName => nameof(WallBasicTile);

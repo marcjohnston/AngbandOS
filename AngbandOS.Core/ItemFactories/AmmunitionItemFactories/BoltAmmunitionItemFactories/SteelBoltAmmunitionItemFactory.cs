@@ -10,9 +10,9 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class SteelBoltAmmunitionItemFactory : BoltAmmunitionItemFactory
 {
-    private SteelBoltAmmunitionItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private SteelBoltAmmunitionItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(OpenBracketSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(OpenBracketSymbol));
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "Bolt";
 
@@ -25,5 +25,5 @@ internal class SteelBoltAmmunitionItemFactory : BoltAmmunitionItemFactory
     public override int[] Locale => new int[] { 3, 25, 0, 0 };
     public override bool ShowMods => true;
     public override int Weight => 3;
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

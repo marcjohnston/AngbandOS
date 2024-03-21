@@ -33,18 +33,18 @@ internal class MonsterKnowledge
     private readonly string[] _wdHeCap = { "It", "He", "She" };
     private readonly string[] _wdHis = { "its", "his", "her" };
     private StringBuilder _description;
-    private readonly SaveGame SaveGame;
+    private readonly Game Game;
 
-    public MonsterKnowledge(SaveGame saveGame, MonsterRace monsterType)
+    public MonsterKnowledge(Game game, MonsterRace monsterType)
     {
-        SaveGame = saveGame;
+        Game = game;
         _monsterType = monsterType;
     }
 
     public void Display()
     {
-        SaveGame.MsgPrint(null);
-        SaveGame.Screen.Erase(1, 0);
+        Game.MsgPrint(null);
+        Game.Screen.Erase(1, 0);
         DisplayBody(ColorEnum.White);
         DisplayHeader();
     }
@@ -56,9 +56,9 @@ internal class MonsterKnowledge
         string[] vp = new string[64];
         MonsterKnowledge knowledge = this;
         _description = new StringBuilder();
-        if (SaveGame.IsWizard.Value)
+        if (Game.IsWizard.Value)
         {
-            knowledge = new MonsterKnowledge(SaveGame, _monsterType);
+            knowledge = new MonsterKnowledge(Game, _monsterType);
             for (m = 0; m < _monsterType.Attacks.Length; m++)
             {
                 if (_monsterType.Attacks[m].Effect != null || _monsterType.Attacks[m].Method != null)
@@ -322,9 +322,9 @@ internal class MonsterKnowledge
             {
                 _description.Append(" creature");
             }
-            int i = _monsterType.Mexp * _monsterType.Level / SaveGame.ExperienceLevel.Value;
-            int j = ((_monsterType.Mexp * _monsterType.Level % SaveGame.ExperienceLevel.Value * 1000 /
-                     SaveGame.ExperienceLevel.Value) + 5) / 10;
+            int i = _monsterType.Mexp * _monsterType.Level / Game.ExperienceLevel.Value;
+            int j = ((_monsterType.Mexp * _monsterType.Level % Game.ExperienceLevel.Value * 1000 /
+                     Game.ExperienceLevel.Value) + 5) / 10;
             if (i > 0)
             {
                 _description.Append(" is worth ").AppendFormat("{0:n0}", i).Append("xp");
@@ -338,8 +338,8 @@ internal class MonsterKnowledge
                 _description.Append(" is worth no xp");
             }
             p = "th";
-            i = SaveGame.ExperienceLevel.Value % 10;
-            if (SaveGame.ExperienceLevel.Value / 10 == 1)
+            i = Game.ExperienceLevel.Value % 10;
+            if (Game.ExperienceLevel.Value / 10 == 1)
             {
             }
             else if (i == 1)
@@ -355,7 +355,7 @@ internal class MonsterKnowledge
                 p = "rd";
             }
             q = "";
-            i = SaveGame.ExperienceLevel.Value;
+            i = Game.ExperienceLevel.Value;
             if (i == 8 || i == 11 || i == 18)
             {
                 q = "n";
@@ -1342,23 +1342,23 @@ internal class MonsterKnowledge
         {
             _description.Append("You feel an intense desire to kill this monster... ");
         }
-        SaveGame.Screen.PrintWrap(bodyColor, _description.ToString());
+        Game.Screen.PrintWrap(bodyColor, _description.ToString());
     }
 
     private void DisplayHeader()
     {
         char c1 = _monsterType.Symbol.Character;
         ColorEnum a1 = _monsterType.Color;
-        SaveGame.Screen.Erase(0, 0);
-        SaveGame.Screen.Goto(0, 0);
+        Game.Screen.Erase(0, 0);
+        Game.Screen.Goto(0, 0);
         if (!_monsterType.Unique)
         {
-            SaveGame.Screen.Print(ColorEnum.White, "The ");
+            Game.Screen.Print(ColorEnum.White, "The ");
         }
-        SaveGame.Screen.Print(ColorEnum.White, _monsterType.Name);
-        SaveGame.Screen.Print(ColorEnum.White, " ('");
-        SaveGame.Screen.Print(a1, c1.ToString());
-        SaveGame.Screen.Print(ColorEnum.White, "')");
+        Game.Screen.Print(ColorEnum.White, _monsterType.Name);
+        Game.Screen.Print(ColorEnum.White, " ('");
+        Game.Screen.Print(a1, c1.ToString());
+        Game.Screen.Print(ColorEnum.White, "')");
     }
 
     private bool KnowArmor(MonsterRace monsterType, MonsterKnowledge knowledge)

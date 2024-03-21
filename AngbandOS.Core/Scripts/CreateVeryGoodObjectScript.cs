@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class CreateVeryGoodObjectScript : Script, IScript
 {
-    private CreateVeryGoodObjectScript(SaveGame saveGame) : base(saveGame) { }
+    private CreateVeryGoodObjectScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script.
@@ -18,10 +18,10 @@ internal class CreateVeryGoodObjectScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        if (SaveGame.CommandArgument <= 0)
+        if (Game.CommandArgument <= 0)
         {
-            SaveGame.CommandArgument = 1;
+            Game.CommandArgument = 1;
         }
-        SaveGame.Acquirement(SaveGame.MapY, SaveGame.MapX, SaveGame.CommandArgument, true);
+        Game.Acquirement(Game.MapY, Game.MapX, Game.CommandArgument, true);
     }
 }

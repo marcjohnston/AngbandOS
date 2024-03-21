@@ -10,13 +10,13 @@ namespace AngbandOS.Core.Projection;
 [Serializable]
 internal class PoisProjectile : Projectile
 {
-    private PoisProjectile(SaveGame saveGame) : base(saveGame) { }
+    private PoisProjectile(Game game) : base(game) { }
 
-    protected override ProjectileGraphic? BoltProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get(nameof(GreenBulletProjectileGraphic));
+    protected override ProjectileGraphic? BoltProjectileGraphic => Game.SingletonRepository.ProjectileGraphics.Get(nameof(GreenBulletProjectileGraphic));
 
-    protected override ProjectileGraphic? ImpactProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get(nameof(GreenSplatProjectileGraphic));
+    protected override ProjectileGraphic? ImpactProjectileGraphic => Game.SingletonRepository.ProjectileGraphics.Get(nameof(GreenSplatProjectileGraphic));
 
-    protected override Animation EffectAnimation => SaveGame.SingletonRepository.Animations.Get(nameof(GreenCloudAnimation));
+    protected override Animation EffectAnimation => Game.SingletonRepository.Animations.Get(nameof(GreenCloudAnimation));
 
     protected override bool AffectMonster(int who, Monster mPtr, int dam, int r)
     {
@@ -43,41 +43,41 @@ internal class PoisProjectile : Projectile
 
     protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
     {
-        bool blind = SaveGame.BlindnessTimer.Value != 0;
+        bool blind = Game.BlindnessTimer.Value != 0;
         if (dam > 1600)
         {
             dam = 1600;
         }
         dam = (dam + r) / (r + 1);
-        Monster mPtr = SaveGame.Monsters[who];
+        Monster mPtr = Game.Monsters[who];
         string killer = mPtr.IndefiniteVisibleName;
         if (blind)
         {
-            SaveGame.MsgPrint("You are hit by poison!");
+            Game.MsgPrint("You are hit by poison!");
         }
-        if (SaveGame.HasPoisonResistance)
+        if (Game.HasPoisonResistance)
         {
             dam = (dam + 2) / 3;
         }
-        if (SaveGame.PoisonResistanceTimer.Value != 0)
+        if (Game.PoisonResistanceTimer.Value != 0)
         {
             dam = (dam + 2) / 3;
         }
-        if (!(SaveGame.PoisonResistanceTimer.Value != 0 || SaveGame.HasPoisonResistance) &&
-            SaveGame.DieRoll(SaveGame.HurtChance) == 1)
+        if (!(Game.PoisonResistanceTimer.Value != 0 || Game.HasPoisonResistance) &&
+            Game.DieRoll(Game.HurtChance) == 1)
         {
-            SaveGame.TryDecreasingAbilityScore(Ability.Constitution);
+            Game.TryDecreasingAbilityScore(Ability.Constitution);
         }
-        SaveGame.TakeHit(dam, killer);
-        if (!(SaveGame.HasPoisonResistance || SaveGame.PoisonResistanceTimer.Value != 0))
+        Game.TakeHit(dam, killer);
+        if (!(Game.HasPoisonResistance || Game.PoisonResistanceTimer.Value != 0))
         {
-            if (SaveGame.DieRoll(10) <= SaveGame.SingletonRepository.Gods.Get(nameof(HagargRyonisGod)).AdjustedFavour)
+            if (Game.DieRoll(10) <= Game.SingletonRepository.Gods.Get(nameof(HagargRyonisGod)).AdjustedFavour)
             {
-                SaveGame.MsgPrint("Hagarg Ryonis's favour protects you!");
+                Game.MsgPrint("Hagarg Ryonis's favour protects you!");
             }
             else
             {
-                SaveGame.PoisonTimer.AddTimer(SaveGame.RandomLessThan(dam) + 10);
+                Game.PoisonTimer.AddTimer(Game.RandomLessThan(dam) + 10);
             }
         }
         return true;

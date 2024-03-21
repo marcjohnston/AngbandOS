@@ -10,10 +10,10 @@ namespace AngbandOS.Core.MonsterSpells;
 [Serializable]
 internal class BreatheDarkMonsterSpell : BreatheProjectileMonsterSpell
 {
-    private BreatheDarkMonsterSpell(SaveGame saveGame) : base(saveGame) { }
+    private BreatheDarkMonsterSpell(Game game) : base(game) { }
     public override bool UsesDarkness => true;
     protected override string ElementName => "darkness";
-    protected override Projectile Projectile(SaveGame saveGame) => saveGame.SingletonRepository.Projectiles.Get(nameof(DarkProjectile));
+    protected override Projectile Projectile(Game game) => game.SingletonRepository.Projectiles.Get(nameof(DarkProjectile));
     protected override int Damage(Monster monster) => monster.Health / 6 > 400 ? 400 : monster.Health / 6;
-    public override SpellResistantDetection[] SmartLearn => new SpellResistantDetection[] { SaveGame.SingletonRepository.SpellResistantDetections.Get(nameof(DarkSpellResistantDetection)) };
+    public override SpellResistantDetection[] SmartLearn => new SpellResistantDetection[] { Game.SingletonRepository.SpellResistantDetections.Get(nameof(DarkSpellResistantDetection)) };
 }

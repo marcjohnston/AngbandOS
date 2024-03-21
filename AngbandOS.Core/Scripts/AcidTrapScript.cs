@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class AcidTrapScript : Script, IScript
 {
-    private AcidTrapScript(SaveGame saveGame) : base(saveGame) { }
+    private AcidTrapScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script.
@@ -19,8 +19,8 @@ internal class AcidTrapScript : Script, IScript
     public void ExecuteScript()
     {
         // Do 4d6 acid damage
-        SaveGame.MsgPrint("You are splashed with acid!");
-        int damage = SaveGame.DiceRoll(4, 6);
-        SaveGame.AcidDam(damage, "an acid trap");
+        Game.MsgPrint("You are splashed with acid!");
+        int damage = Game.DiceRoll(4, 6);
+        Game.AcidDam(damage, "an acid trap");
     }
 }

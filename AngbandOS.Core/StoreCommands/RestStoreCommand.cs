@@ -11,7 +11,7 @@ namespace AngbandOS.Core.StoreCommands;
 internal class RestStoreCommand : StoreCommand
 
 {
-    private RestStoreCommand(SaveGame saveGame) : base(saveGame) { }
+    private RestStoreCommand(Game game) : base(game) { }
     public override char KeyChar => 'r';
 
     public override string Description => "Rest a while";

@@ -10,5 +10,5 @@ namespace AngbandOS.Core.Repositories;
 [Serializable]
 internal class PatronsRepository : DictionaryRepository<Patron>
 {
-    public PatronsRepository(SaveGame saveGame) : base(saveGame) { }
+    public PatronsRepository(Game game) : base(game) { }
 }

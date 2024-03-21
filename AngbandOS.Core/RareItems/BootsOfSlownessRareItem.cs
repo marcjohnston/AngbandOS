@@ -10,8 +10,8 @@ namespace AngbandOS.Core.RareItems;
 [Serializable]
 internal class BootsOfSlownessRareItem : RareItem
 {
-    private BootsOfSlownessRareItem(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(CloseBraceSymbol));
+    private BootsOfSlownessRareItem(Game game) : base(game) { } // This object is a singleton.
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(CloseBraceSymbol));
     public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "Boots of Slowness";
     public override int Cost => 0;

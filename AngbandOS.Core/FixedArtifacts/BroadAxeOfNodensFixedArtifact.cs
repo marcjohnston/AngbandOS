@@ -10,7 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class BroadAxeOfNodensFixedArtifact : FixedArtifact
 {
-    private BroadAxeOfNodensFixedArtifact(SaveGame saveGame) : base(saveGame) { }
+    private BroadAxeOfNodensFixedArtifact(Game game) : base(game) { }
 
     protected override string BaseItemFactoryName => nameof(BroadAxePolearmWeaponItemFactory);
 

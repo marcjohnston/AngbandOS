@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class ZapScript : Script, IScript
 {
-    private ZapScript(SaveGame saveGame) : base(saveGame) { }
+    private ZapScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script.
@@ -19,24 +19,24 @@ internal class ZapScript : Script, IScript
     public void ExecuteScript()
     {
         int beam;
-        switch (SaveGame.BaseCharacterClass.ID)
+        switch (Game.BaseCharacterClass.ID)
         {
             case CharacterClass.Mage:
-                beam = SaveGame.ExperienceLevel.Value;
+                beam = Game.ExperienceLevel.Value;
                 break;
 
             case CharacterClass.HighMage:
-                beam = SaveGame.ExperienceLevel.Value + 10;
+                beam = Game.ExperienceLevel.Value + 10;
                 break;
 
             default:
-                beam = SaveGame.ExperienceLevel.Value / 2;
+                beam = Game.ExperienceLevel.Value / 2;
                 break;
         }
-        if (!SaveGame.GetDirectionWithAim(out int dir))
+        if (!Game.GetDirectionWithAim(out int dir))
         {
             return;
         }
-        SaveGame.FireBoltOrBeam(beam - 10, SaveGame.SingletonRepository.Projectiles.Get(nameof(ElecProjectile)), dir, SaveGame.DiceRoll(3 + ((SaveGame.ExperienceLevel.Value - 1) / 5), 3));
+        Game.FireBoltOrBeam(beam - 10, Game.SingletonRepository.Projectiles.Get(nameof(ElecProjectile)), dir, Game.DiceRoll(3 + ((Game.ExperienceLevel.Value - 1) / 5), 3));
     }
 }

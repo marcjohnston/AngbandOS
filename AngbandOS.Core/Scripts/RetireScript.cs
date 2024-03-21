@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class RetireScript : Script, IScript, IRepeatableScript
 {
-    private RetireScript(SaveGame saveGame) : base(saveGame) { }
+    private RetireScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the retire script and returns false.
@@ -29,9 +29,9 @@ internal class RetireScript : Script, IScript, IRepeatableScript
     public void ExecuteScript()
     {
         // If we're a winner it's a simple question with a more positive connotation
-        if (SaveGame.IsWinner.Value)
+        if (Game.IsWinner.Value)
         {
-            if (!SaveGame.GetCheck("Do you want to retire? "))
+            if (!Game.GetCheck("Do you want to retire? "))
             {
                 return;
             }
@@ -40,17 +40,17 @@ internal class RetireScript : Script, IScript, IRepeatableScript
         {
             // If we're not a winner, only ask if we're not also a wizard - giving up a wizard
             // character doesn't need a prompt/confirmation
-            if (!SaveGame.IsWizard.Value)
+            if (!Game.IsWizard.Value)
             {
-                if (!SaveGame.GetCheck("Do you really want to give up? "))
+                if (!Game.GetCheck("Do you really want to give up? "))
                 {
                     return;
                 }
                 // Require a confirmation to make sure the player doesn't accidentally give up a
                 // long-running character
-                SaveGame.Screen.PrintLine("Type the '@' sign to give up (this character will no longer be playable): ", 0, 0);
-                int i = SaveGame.Inkey();
-                SaveGame.MsgClear();
+                Game.Screen.PrintLine("Type the '@' sign to give up (this character will no longer be playable): ", 0, 0);
+                int i = Game.Inkey();
+                Game.MsgClear();
                 if (i != '@')
                 {
                     return;
@@ -58,15 +58,15 @@ internal class RetireScript : Script, IScript, IRepeatableScript
             }
             else
             {
-                if (!SaveGame.GetCheck("Do you really want to quit? "))
+                if (!Game.GetCheck("Do you really want to quit? "))
                 {
                     return;
                 }
             }
         }
         // Assuming whe player didn't give up, "kill" the character by quitting
-        SaveGame.Playing = false;
-        SaveGame.IsDead = true;
-        SaveGame.DiedFrom = "quitting";
+        Game.Playing = false;
+        Game.IsDead = true;
+        Game.DiedFrom = "quitting";
     }
 }

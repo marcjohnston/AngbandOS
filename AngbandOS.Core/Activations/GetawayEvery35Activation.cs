@@ -13,7 +13,7 @@ namespace AngbandOS.Core.Activations;
 [Serializable]
 internal class GetawayEvery35Activation : Activation
 {
-    private GetawayEvery35Activation(SaveGame saveGame) : base(saveGame) { }
+    private GetawayEvery35Activation(Game game) : base(game) { }
 
     public override int RandomChance => 5;
 
@@ -21,14 +21,14 @@ internal class GetawayEvery35Activation : Activation
 
     protected override bool OnActivate(Item item)
     {
-        switch (SaveGame.DieRoll(13))
+        switch (Game.DieRoll(13))
         {
             case 1:
             case 2:
             case 3:
             case 4:
             case 5:
-                SaveGame.RunScriptInt(nameof(TeleportSelfScript), 10);
+                Game.RunScriptInt(nameof(TeleportSelfScript), 10);
                 break;
 
             case 6:
@@ -36,22 +36,22 @@ internal class GetawayEvery35Activation : Activation
             case 8:
             case 9:
             case 10:
-                SaveGame.RunScriptInt(nameof(TeleportSelfScript), 222);
+                Game.RunScriptInt(nameof(TeleportSelfScript), 222);
                 break;
 
             case 11:
             case 12:
-                SaveGame.RunScript(nameof(CreateStairsScript));
+                Game.RunScript(nameof(CreateStairsScript));
                 break;
 
             default:
-                if (SaveGame.GetCheck("Leave this level? "))
+                if (Game.GetCheck("Leave this level? "))
                 {
                     {
-                        SaveGame.DoCmdSaveGame(true);
+                        Game.DoCmdSaveGame(true);
                     }
-                    SaveGame.NewLevelFlag = true;
-                    SaveGame.CameFrom = LevelStart.StartRandom;
+                    Game.NewLevelFlag = true;
+                    Game.CameFrom = LevelStart.StartRandom;
                 }
                 break;
         }

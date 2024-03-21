@@ -10,7 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class RapierOfMontoyaFixedArtifact : FixedArtifact
 {
-    private RapierOfMontoyaFixedArtifact(SaveGame saveGame) : base(saveGame) { }
+    private RapierOfMontoyaFixedArtifact(Game game) : base(game) { }
 
     protected override string BaseItemFactoryName => nameof(RapierWeaponItemFactory);
 

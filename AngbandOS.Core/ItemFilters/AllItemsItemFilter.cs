@@ -13,10 +13,10 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class AllItemsItemFilter : IGetKey, IItemFilter
 {
-    protected SaveGame SaveGame { get; }
-    protected AllItemsItemFilter(SaveGame saveGame)
+    protected Game Game { get; }
+    protected AllItemsItemFilter(Game game)
     {
-        SaveGame = saveGame;
+        Game = game;
     }
 
     /// <summary>
@@ -212,23 +212,23 @@ internal class AllItemsItemFilter : IGetKey, IItemFilter
             }
 
             // Ensure the player has magic.
-            if (SaveGame.PrimaryRealm == null)
+            if (Game.PrimaryRealm == null)
             {
                 return false;
             }
 
             // Check to see if the book doesn't belong to the primary realm.
-            if (SaveGame.PrimaryRealm != bookItemFactory.Realm)
+            if (Game.PrimaryRealm != bookItemFactory.Realm)
             {
                 // It doesn't.  Check to see if there is a secondary realm.
-                if (SaveGame.SecondaryRealm == null)
+                if (Game.SecondaryRealm == null)
                 {
                     // There isn't.  No match.
                     return false;
                 }
 
                 // There is a secondary realm, check to see if the book doesn't belong to it.
-                if (SaveGame.SecondaryRealm != bookItemFactory.Realm)
+                if (Game.SecondaryRealm != bookItemFactory.Realm)
                 {
                     return false;
                 }
@@ -240,7 +240,7 @@ internal class AllItemsItemFilter : IGetKey, IItemFilter
             BookItemFactory? bookItemFactory = item.TryGetFactory<BookItemFactory>();
             if (bookItemFactory != null)
             {
-                if (SaveGame.PrimaryRealm != null && SaveGame.PrimaryRealm == bookItemFactory.Realm || SaveGame.SecondaryRealm != null && SaveGame.SecondaryRealm == bookItemFactory.Realm)
+                if (Game.PrimaryRealm != null && Game.PrimaryRealm == bookItemFactory.Realm || Game.SecondaryRealm != null && Game.SecondaryRealm == bookItemFactory.Realm)
                 {
                     return false;
                 }

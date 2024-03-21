@@ -10,7 +10,7 @@ namespace AngbandOS.Core.AttackTypes;
 [Serializable]
 internal class SpitAttack : Attack
 {
-    private SpitAttack(SaveGame saveGame) : base(saveGame) { }
+    private SpitAttack(Game game) : base(game) { }
     public override string MonsterAction => "spits on {0}";
     public override string PlayerAction => $"spits on you";
     public override string KnowledgeAction => "spit";

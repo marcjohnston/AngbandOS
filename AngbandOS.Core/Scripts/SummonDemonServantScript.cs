@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class SummonDemonServantScript : Script, IScript
 {
-    private SummonDemonServantScript(SaveGame saveGame) : base(saveGame) { }
+    private SummonDemonServantScript(Game game) : base(game) { }
 
     /// <summary>
     /// Summons a demon monster.
@@ -18,28 +18,28 @@ internal class SummonDemonServantScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        if (SaveGame.DieRoll(3) == 1)
+        if (Game.DieRoll(3) == 1)
         {
-            if (SaveGame.SummonSpecific(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel.Value * 3 / 2, SaveGame.SingletonRepository.MonsterFilters.Get(nameof(DemonMonsterFilter))))
+            if (Game.SummonSpecific(Game.MapY, Game.MapX, Game.ExperienceLevel.Value * 3 / 2, Game.SingletonRepository.MonsterFilters.Get(nameof(DemonMonsterFilter))))
             {
-                SaveGame.MsgPrint("The area fills with a stench of sulphur and brimstone.");
-                SaveGame.MsgPrint("'NON SERVIAM! Wretch! I shall feast on thy mortal soul!'");
+                Game.MsgPrint("The area fills with a stench of sulphur and brimstone.");
+                Game.MsgPrint("'NON SERVIAM! Wretch! I shall feast on thy mortal soul!'");
             }
             else
             {
-                SaveGame.MsgPrint("No-one ever turns up.");
+                Game.MsgPrint("No-one ever turns up.");
             }
         }
         else
         {
-            if (SaveGame.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel.Value * 3 / 2, SaveGame.SingletonRepository.MonsterFilters.Get(nameof(DemonMonsterFilter)), SaveGame.ExperienceLevel.Value == 50))
+            if (Game.SummonSpecificFriendly(Game.MapY, Game.MapX, Game.ExperienceLevel.Value * 3 / 2, Game.SingletonRepository.MonsterFilters.Get(nameof(DemonMonsterFilter)), Game.ExperienceLevel.Value == 50))
             {
-                SaveGame.MsgPrint("The area fills with a stench of sulphur and brimstone.");
-                SaveGame.MsgPrint("'What is thy bidding... Master?'");
+                Game.MsgPrint("The area fills with a stench of sulphur and brimstone.");
+                Game.MsgPrint("'What is thy bidding... Master?'");
             }
             else
             {
-                SaveGame.MsgPrint("No-one ever turns up.");
+                Game.MsgPrint("No-one ever turns up.");
             }
         }
     }

@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Vaults;
 [Serializable]
 internal class FalseWallVault : Vault
 {
-    private FalseWallVault(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private FalseWallVault(Game game) : base(game) { } // This object is a singleton.
     public override string Name => "False Wall";
     public override int Category => 8;
     public override int Height => 15;

@@ -10,7 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class PikeOfTepesFixedArtifact : FixedArtifact
 {
-    private PikeOfTepesFixedArtifact(SaveGame saveGame) : base(saveGame) { }
+    private PikeOfTepesFixedArtifact(Game game) : base(game) { }
 
     protected override string BaseItemFactoryName => nameof(PikePolearmWeaponItemFactory);
 

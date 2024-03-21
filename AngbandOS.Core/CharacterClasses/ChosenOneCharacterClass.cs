@@ -10,7 +10,7 @@ namespace AngbandOS.Core.CharacterClasses;
 [Serializable]
 internal class ChosenOneCharacterClass : BaseCharacterClass
 {
-    private ChosenOneCharacterClass(SaveGame savedGame) : base(savedGame) { }
+    private ChosenOneCharacterClass(Game savedGame) : base(savedGame) { }
     public override int ID => 14;
     public override string Title => "Chosen One";
     public override int[] AbilityBonus => new[] { 3, -2, -2, 2, 2, -1 };
@@ -38,8 +38,8 @@ internal class ChosenOneCharacterClass : BaseCharacterClass
         "gain a large number of passive magical abilities (too long",
         "to list here) as they increase in level."
     };
-    public override IArtifactBias? ArtifactBias => SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(WarriorArtifactBias));
-    public override bool SenseInventoryTest(int level) => (0 != SaveGame.RandomLessThan(9000 / ((level * level) + 40)));
+    public override IArtifactBias? ArtifactBias => Game.SingletonRepository.ArtifactBiases.Get(nameof(WarriorArtifactBias));
+    public override bool SenseInventoryTest(int level) => (0 != Game.RandomLessThan(9000 / ((level * level) + 40)));
     public override bool DetailedSenseInventory => true;
     public override bool OutfitsWithScrollsOfLight => true;
 

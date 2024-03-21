@@ -10,19 +10,19 @@ namespace AngbandOS.Core.Repositories;
 [Serializable]
 internal class ScrollReadableFlavorsRepository : DictionaryRepository<ScrollReadableFlavor>
 {
-    public ScrollReadableFlavorsRepository(SaveGame saveGame) : base(saveGame) { }
+    public ScrollReadableFlavorsRepository(Game game) : base(game) { }
 
     public override void Load()
     {
-        if (SaveGame.Configuration.ScrollReadableFlavors == null)
+        if (Game.Configuration.ScrollReadableFlavors == null)
         {
             base.Load();
         }
         else
         {
-            foreach (ReadableFlavorDefinition readableFlavorDefinition in SaveGame.Configuration.ScrollReadableFlavors)
+            foreach (ReadableFlavorDefinition readableFlavorDefinition in Game.Configuration.ScrollReadableFlavors)
             {
-                Add(new GenericScrollReadableFlavor(SaveGame, readableFlavorDefinition));
+                Add(new GenericScrollReadableFlavor(Game, readableFlavorDefinition));
             }
         }
     }

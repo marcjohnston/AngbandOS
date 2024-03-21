@@ -13,7 +13,7 @@ namespace AngbandOS.Core.Towns;
 [Serializable]
 internal abstract class Town : IGetKey
 {
-    protected readonly SaveGame SaveGame;
+    protected readonly Game Game;
 
     /// <summary>
     /// Represents the RND seed that is used to generate the town.  This ensures the town is regenerated the same when the player returns.
@@ -62,9 +62,9 @@ internal abstract class Town : IGetKey
 
     public string GetKey => Key;
 
-    protected Town(SaveGame saveGame)
+    protected Town(Game game)
     {
-        SaveGame = saveGame;
+        Game = game;
     }
 
     /// <summary>
@@ -82,16 +82,16 @@ internal abstract class Town : IGetKey
         List<StoreFactory> storeFactoryList = new List<StoreFactory>();
         foreach (string storeName in StoreFactoryNames)
         {
-            storeFactoryList.Add(SaveGame.SingletonRepository.StoreFactories.Get(storeName));
+            storeFactoryList.Add(Game.SingletonRepository.StoreFactories.Get(storeName));
         }
         StoreFactories = storeFactoryList.ToArray();
 
-        Dungeon = SaveGame.SingletonRepository.Dungeons.Get(DungeonName);
+        Dungeon = Game.SingletonRepository.Dungeons.Get(DungeonName);
     }
 
     public void Initialize()
     {
-        Seed = SaveGame.RandomLessThan(int.MaxValue);
+        Seed = Game.RandomLessThan(int.MaxValue);
         Visited = false;
         X = 0;
         Y = 0;
@@ -99,7 +99,7 @@ internal abstract class Town : IGetKey
         List<Store> stores = new List<Store>();
         foreach (StoreFactory storeFactory in StoreFactories)
         {
-            Store store = new Store(SaveGame, storeFactory);
+            Store store = new Store(Game, storeFactory);
             store.StoreInit();
             store.StoreMaint();
             stores.Add(store);

@@ -10,7 +10,7 @@ namespace AngbandOS.Core.MonsterRaces;
 [Serializable]
 internal class TheStormbringerMonsterRace : MonsterRace
 {
-    protected TheStormbringerMonsterRace(SaveGame saveGame) : base(saveGame) { }
+    protected TheStormbringerMonsterRace(Game game) : base(game) { }
 
     protected override string SymbolName => nameof(VerticalBarSymbol);
     public override ColorEnum Color => ColorEnum.Black;

@@ -10,10 +10,10 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class CuringRodItemFactory : RodItemFactory
 {
-    private CuringRodItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private CuringRodItemFactory(Game game) : base(game) { } // This object is a singleton.
 
     public override bool RequiresAiming => false;
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(MinusSignSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(MinusSignSymbol));
     public override string Name => "Curing";
 
     public override int[] Chance => new int[] { 8, 0, 0, 0 };
@@ -26,31 +26,31 @@ internal class CuringRodItemFactory : RodItemFactory
     public override int Weight => 15;
     public override void Execute(ZapRodEvent zapRodEvent)
     {
-        if (SaveGame.BlindnessTimer.ResetTimer())
+        if (Game.BlindnessTimer.ResetTimer())
         {
             zapRodEvent.Identified = true;
         }
-        if (SaveGame.PoisonTimer.ResetTimer())
+        if (Game.PoisonTimer.ResetTimer())
         {
             zapRodEvent.Identified = true;
         }
-        if (SaveGame.ConfusedTimer.ResetTimer())
+        if (Game.ConfusedTimer.ResetTimer())
         {
             zapRodEvent.Identified = true;
         }
-        if (SaveGame.StunTimer.ResetTimer())
+        if (Game.StunTimer.ResetTimer())
         {
             zapRodEvent.Identified = true;
         }
-        if (SaveGame.BleedingTimer.ResetTimer())
+        if (Game.BleedingTimer.ResetTimer())
         {
             zapRodEvent.Identified = true;
         }
-        if (SaveGame.HallucinationsTimer.ResetTimer())
+        if (Game.HallucinationsTimer.ResetTimer())
         {
             zapRodEvent.Identified = true;
         }
         zapRodEvent.Item.TypeSpecificValue = 999;
     }
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

@@ -10,15 +10,15 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class ScytheOfGharneFixedArtifact : FixedArtifact, IFixedArtifactActivatible
 {
-    private ScytheOfGharneFixedArtifact(SaveGame saveGame) : base(saveGame) { }
+    private ScytheOfGharneFixedArtifact(Game game) : base(game) { }
 
     protected override string BaseItemFactoryName => nameof(ScythePolearmWeaponItemFactory);
 
     // G'Harne does Word of Recall
     public void ActivateItem(Item item)
     {
-        SaveGame.MsgPrint("Your scythe glows soft white...");
-        SaveGame.RunScript(nameof(ToggleRecallScript));
+        Game.MsgPrint("Your scythe glows soft white...");
+        Game.RunScript(nameof(ToggleRecallScript));
         item.RechargeTimeLeft = 200;
     }
     public string DescribeActivationEffect => "word of recall every 200 turns";

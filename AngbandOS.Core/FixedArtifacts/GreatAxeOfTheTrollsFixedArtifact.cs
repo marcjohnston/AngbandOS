@@ -10,7 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class GreatAxeOfTheTrollsFixedArtifact : FixedArtifact
 {
-    private GreatAxeOfTheTrollsFixedArtifact(SaveGame saveGame) : base(saveGame) { }
+    private GreatAxeOfTheTrollsFixedArtifact(Game game) : base(game) { }
 
     protected override string BaseItemFactoryName => nameof(GreatAxePolearmWeaponItemFactory);
 

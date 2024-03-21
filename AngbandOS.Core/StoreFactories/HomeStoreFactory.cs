@@ -10,7 +10,7 @@ namespace AngbandOS.Core.StoreFactories;
 [Serializable]
 internal class HomeStoreFactory : StoreFactory
 {
-    private HomeStoreFactory(SaveGame saveGame) : base(saveGame) { }
+    private HomeStoreFactory(Game game) : base(game) { }
 
     public override int MaxInventory => 100;
     protected override string[] ShopkeeperNames => new string[]
@@ -61,7 +61,7 @@ internal class HomeStoreFactory : StoreFactory
     /// <summary>
     /// Returns true, if this store is eligible to be bought as a home.
     /// </summary>
-    /// <param name="saveGame"></param>
+    /// <param name="game"></param>
     /// <returns></returns>
     public override bool IsHomeThatCanBeBought => true;
 }

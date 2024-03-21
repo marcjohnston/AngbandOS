@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Flavors;
 [Serializable]
 internal class TigerEyeRingReadableFlavor : RingReadableFlavor
 {
-    private TigerEyeRingReadableFlavor(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private TigerEyeRingReadableFlavor(Game game) : base(game) { } // This object is a singleton.
     protected override string SymbolName => nameof(EqualSignSymbol);
     public override ColorEnum Color => ColorEnum.Orange;
     public override string Name => "Tiger Eye";

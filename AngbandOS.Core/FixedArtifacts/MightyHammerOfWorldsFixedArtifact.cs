@@ -10,7 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class MightyHammerOfWorldsFixedArtifact : FixedArtifact
 {
-    private MightyHammerOfWorldsFixedArtifact(SaveGame saveGame) : base(saveGame) { }
+    private MightyHammerOfWorldsFixedArtifact(Game game) : base(game) { }
 
     protected override string BaseItemFactoryName => nameof(MightyHammerHaftedWeaponItemFactory);
 

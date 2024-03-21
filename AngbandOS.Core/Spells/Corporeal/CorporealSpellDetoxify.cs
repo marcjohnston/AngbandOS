@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Spells.Corporeal;
 [Serializable]
 internal class CorporealSpellDetoxify : Spell
 {
-    private CorporealSpellDetoxify(SaveGame saveGame) : base(saveGame) { }
+    private CorporealSpellDetoxify(Game game) : base(game) { }
     protected override string? CastScriptName => nameof(DetoxifyScript);
 
     public override string Name => "Detoxify";

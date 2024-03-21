@@ -10,7 +10,7 @@ namespace AngbandOS.Core.WizardCommands;
 [Serializable]
 internal class SummonNamedPetWizardCommand : WizardCommand
 {
-    private SummonNamedPetWizardCommand(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private SummonNamedPetWizardCommand(Game game) : base(game) { } // This object is a singleton.
 
     public override char KeyChar => 'N';
 

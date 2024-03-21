@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Tiles;
 [Serializable]
 internal class SlowDartTile : Tile
 {
-    private SlowDartTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private SlowDartTile(Game game) : base(game) { } // This object is a singleton.
     protected override string SymbolName => nameof(CaretSymbol);
     public override ColorEnum Color => ColorEnum.Red;
     protected override string? AlterActionName => nameof(DisarmAlterAction);

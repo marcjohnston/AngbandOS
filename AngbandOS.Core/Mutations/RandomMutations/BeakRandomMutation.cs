@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Mutations.RandomMutations;
 [Serializable]
 internal class BeakRandomMutation : Mutation
 {
-    private BeakRandomMutation(SaveGame saveGame) : base(saveGame) { }
+    private BeakRandomMutation(Game game) : base(game) { }
     public override int Frequency => 2;
     public override string GainMessage => "Your mouth turns into a sharp, powerful beak!";
     public override string HaveMessage => "You have a beak (dam. 2d4).";
@@ -23,11 +23,11 @@ internal class BeakRandomMutation : Mutation
 
     public override void OnGain()
     {
-        SaveGame.NaturalAttacks.Add(this);
+        Game.NaturalAttacks.Add(this);
     }
 
     public override void OnLose()
     {
-        SaveGame.NaturalAttacks.Remove(this);
+        Game.NaturalAttacks.Remove(this);
     }
 }

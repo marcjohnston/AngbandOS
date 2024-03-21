@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class PolymorphWoundsScript : Script, IScript, IRepeatableScript
 {
-    private PolymorphWoundsScript(SaveGame saveGame) : base(saveGame) { }
+    private PolymorphWoundsScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the polymorph-wounds script and returns false.
@@ -28,25 +28,25 @@ internal class PolymorphWoundsScript : Script, IScript, IRepeatableScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        int wounds = SaveGame.BleedingTimer.Value;
-        int hitP = SaveGame.MaxHealth.Value - SaveGame.Health.Value;
-        int change = SaveGame.DiceRoll(SaveGame.ExperienceLevel.Value, 5);
-        bool nastyEffect = SaveGame.DieRoll(5) == 1;
+        int wounds = Game.BleedingTimer.Value;
+        int hitP = Game.MaxHealth.Value - Game.Health.Value;
+        int change = Game.DiceRoll(Game.ExperienceLevel.Value, 5);
+        bool nastyEffect = Game.DieRoll(5) == 1;
         if (!(wounds != 0 || hitP != 0 || nastyEffect))
         {
             return;
         }
         if (nastyEffect)
         {
-            SaveGame.MsgPrint("A new wound was created!");
-            SaveGame.TakeHit(change, "a polymorphed wound");
-            SaveGame.BleedingTimer.SetTimer(change);
+            Game.MsgPrint("A new wound was created!");
+            Game.TakeHit(change, "a polymorphed wound");
+            Game.BleedingTimer.SetTimer(change);
         }
         else
         {
-            SaveGame.MsgPrint("Your wounds are polymorphed into less serious ones.");
-            SaveGame.RestoreHealth(change);
-            SaveGame.BleedingTimer.SetTimer(SaveGame.BleedingTimer.Value - (change / 2));
+            Game.MsgPrint("Your wounds are polymorphed into less serious ones.");
+            Game.RestoreHealth(change);
+            Game.BleedingTimer.SetTimer(Game.BleedingTimer.Value - (change / 2));
         }
         return;
     }

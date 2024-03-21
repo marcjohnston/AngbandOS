@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class TrapDoorScript : Script, IScript
 {
-    private TrapDoorScript(SaveGame saveGame) : base(saveGame) { }
+    private TrapDoorScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script.
@@ -19,32 +19,32 @@ internal class TrapDoorScript : Script, IScript
     public void ExecuteScript()
     {
         // Trap doors can be flown over with feather fall
-        if (SaveGame.HasFeatherFall)
+        if (Game.HasFeatherFall)
         {
-            SaveGame.MsgPrint("You fly over a trap door.");
+            Game.MsgPrint("You fly over a trap door.");
         }
         else
         {
-            SaveGame.MsgPrint("You fell through a trap door!");
+            Game.MsgPrint("You fell through a trap door!");
             // Trap doors do 2d8 fall damage
-            int damage = SaveGame.DiceRoll(2, 8);
+            int damage = Game.DiceRoll(2, 8);
             string name = "a trap door";
-            SaveGame.TakeHit(damage, name);
+            Game.TakeHit(damage, name);
             // Even if we survived, we need a new level
-            if (SaveGame.Health.Value >= 0)
+            if (Game.Health.Value >= 0)
             {
-                SaveGame.DoCmdSaveGame(true);
+                Game.DoCmdSaveGame(true);
             }
-            SaveGame.NewLevelFlag = true;
+            Game.NewLevelFlag = true;
             // In dungeons we fall to a deeper level, but in towers we fall to a
             // shallower level because they go up instead of down
-            if (SaveGame.CurDungeon.Tower)
+            if (Game.CurDungeon.Tower)
             {
-                SaveGame.CurrentDepth--;
+                Game.CurrentDepth--;
             }
             else
             {
-                SaveGame.CurrentDepth++;
+                Game.CurrentDepth++;
             }
         }
     }

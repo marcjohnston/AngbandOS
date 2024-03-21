@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class AddTelepathy25p1d30Script : Script, IScript
 {
-    private AddTelepathy25p1d30Script(SaveGame saveGame) : base(saveGame) { }
+    private AddTelepathy25p1d30Script(Game game) : base(game) { }
 
     /// <summary>
     /// Add between 25 and 55 turns of telepathy.
@@ -18,6 +18,6 @@ internal class AddTelepathy25p1d30Script : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        SaveGame.TelepathyTimer.AddTimer(SaveGame.DieRoll(30) + 25);
+        Game.TelepathyTimer.AddTimer(Game.DieRoll(30) + 25);
     }
 }

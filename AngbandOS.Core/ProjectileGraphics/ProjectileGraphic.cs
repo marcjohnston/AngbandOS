@@ -12,10 +12,10 @@ namespace AngbandOS.Core.ProjectileGraphics;
 [Serializable]
 internal abstract class ProjectileGraphic : IGetKey
 {
-    protected SaveGame SaveGame;
-    protected ProjectileGraphic(SaveGame saveGame)
+    protected Game Game;
+    protected ProjectileGraphic(Game game)
     {
-        SaveGame = saveGame;
+        Game = game;
     }
 
     /// <summary>

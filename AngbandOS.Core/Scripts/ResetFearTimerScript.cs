@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class ResetFearTimerScript : Script, IScript
 {
-    private ResetFearTimerScript(SaveGame saveGame) : base(saveGame) { }
+    private ResetFearTimerScript(Game game) : base(game) { }
 
     /// <summary>
     /// Resets the timed fear.
@@ -18,6 +18,6 @@ internal class ResetFearTimerScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        SaveGame.FearTimer.ResetTimer();
+        Game.FearTimer.ResetTimer();
     }
 }

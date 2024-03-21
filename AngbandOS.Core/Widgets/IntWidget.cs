@@ -12,28 +12,28 @@ namespace AngbandOS.Core.Widgets;
 [Serializable]
 internal abstract class IntWidget : Widget
 {
-    protected IntWidget(SaveGame saveGame) : base(saveGame) { }
+    protected IntWidget(Game game) : base(game) { }
     public abstract string IntChangeTrackingName { get; }
     public IIntChangeTracking IntChangeTracking { get; private set; }
 
     public override void Bind()
     {
         base.Bind();
-        Property? property = SaveGame.SingletonRepository.Properties.TryGet(IntChangeTrackingName);
+        Property? property = Game.SingletonRepository.Properties.TryGet(IntChangeTrackingName);
         if (property != null)
         {
             IntChangeTracking = (IIntChangeTracking)property;
         }
         else
         {
-            Timer? timer= SaveGame.SingletonRepository.TimedActions.TryGet(IntChangeTrackingName);
+            Timer? timer= Game.SingletonRepository.TimedActions.TryGet(IntChangeTrackingName);
             if (timer != null)
             {
                 IntChangeTracking = (IIntChangeTracking)timer;
             }
             else
             {
-                Function? function = SaveGame.SingletonRepository.Functions.TryGet(IntChangeTrackingName);
+                Function? function = Game.SingletonRepository.Functions.TryGet(IntChangeTrackingName);
                 if (function != null)
                 {
                     IntChangeTracking = (IIntChangeTracking)function;

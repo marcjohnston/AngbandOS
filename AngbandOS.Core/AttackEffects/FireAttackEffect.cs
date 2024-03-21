@@ -10,18 +10,18 @@ namespace AngbandOS.Core.AttackEffects;
 [Serializable]
 internal class FireAttackEffect : AttackEffect
 {
-    private FireAttackEffect(SaveGame saveGame) : base(saveGame) { }
+    private FireAttackEffect(Game game) : base(game) { }
     public override int Power => 10;
     public override string Description => "burn";
     public override void ApplyToPlayer(int monsterLevel, int monsterIndex, int armorClass, string monsterDescription, Monster monster, ref bool obvious, ref int damage, ref bool blinked)
     {
         obvious = true;
-        SaveGame.MsgPrint("You are enveloped in flames!");
-        SaveGame.FireDam(damage, monsterDescription);
-        SaveGame.UpdateSmartLearn(monster, SaveGame.SingletonRepository.SpellResistantDetections.Get(nameof(FireSpellResistantDetection)));
+        Game.MsgPrint("You are enveloped in flames!");
+        Game.FireDam(damage, monsterDescription);
+        Game.UpdateSmartLearn(monster, Game.SingletonRepository.SpellResistantDetections.Get(nameof(FireSpellResistantDetection)));
     }
     public override void ApplyToMonster(Monster monster, int armorClass, ref int damage, ref Projectile? pt, ref bool blinked)
     {
-        pt = SaveGame.SingletonRepository.Projectiles.Get(nameof(FireProjectile));
+        pt = Game.SingletonRepository.Projectiles.Get(nameof(FireProjectile));
     }
 }

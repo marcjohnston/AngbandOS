@@ -238,7 +238,7 @@ internal static class borg9c
      * especially if we attempt to do "item tracking" in the inventory
      * extraction code.
      */
-    static bool borg_think(SaveGame saveGame)
+    static bool borg_think(Game game)
     {
         int i;
 
@@ -250,7 +250,7 @@ internal static class borg9c
         bool justSaved = false; // BORG: Was static
 
         /* Fill up the borg_skill[] array */
-        borg_update_frame(saveGame);
+        borg_update_frame(game);
 
         /*** Process inventory/equipment ***/
 
@@ -644,7 +644,7 @@ internal static class borg9c
         //     if (borg_cancel) return (true);
 
         /* Do something */
-        return borg_think_dungeon(saveGame);
+        return borg_think_dungeon(game);
     }
 
     // static char** suffix_pain;

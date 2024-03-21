@@ -10,19 +10,19 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class ResistanceAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
 {
-    private ResistanceAmuletJeweleryItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private ResistanceAmuletJeweleryItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(DoubleQuoteSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(DoubleQuoteSymbol));
     public override string Name => "Resistance";
 
     public override void ApplyMagic(Item item, int level, int power, Store? store)
     {
-        if (SaveGame.DieRoll(3) == 1)
+        if (Game.DieRoll(3) == 1)
         {
             IArtifactBias? artifactBias = null;
-            item.ApplyRandomResistance(ref artifactBias, SaveGame.DieRoll(34) + 4);
+            item.ApplyRandomResistance(ref artifactBias, Game.DieRoll(34) + 4);
         }
-        if (SaveGame.DieRoll(5) == 1)
+        if (Game.DieRoll(5) == 1)
         {
             item.RandomArtifactItemCharacteristics.ResPois = true;
         }
@@ -43,5 +43,5 @@ internal class ResistanceAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
     public override bool ResFire => true;
     public override int Weight => 3;
     public override bool KindIsGood => true;
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

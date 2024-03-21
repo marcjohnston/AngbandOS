@@ -10,7 +10,7 @@ namespace AngbandOS.Core.ClassSpells;
 [Serializable]
 internal class RogueTeleportLevelSorcerySpell : ClassSpell
 {
-    private RogueTeleportLevelSorcerySpell(SaveGame saveGame) : base(saveGame) { }
+    private RogueTeleportLevelSorcerySpell(Game game) : base(game) { }
     public override string SpellName => nameof(SorcerySpellTeleportLevel);
     public override string CharacterClassName => nameof(RogueCharacterClass);
     public override int Level => 18;

@@ -12,9 +12,9 @@ internal class RedrawStudyFlaggedAction : FlaggedAction
 {
     private const int RowStudy = 44;
     private const int ColStudy = 60;
-    private RedrawStudyFlaggedAction(SaveGame saveGame) : base(saveGame) { }
+    private RedrawStudyFlaggedAction(Game game) : base(game) { }
     protected override void Execute()
     {
-        SaveGame.Screen.Print(SaveGame.SpareSpellSlots.Value != 0 ? "Study" : "     ", RowStudy, ColStudy);
+        Game.Screen.Print(Game.SpareSpellSlots.Value != 0 ? "Study" : "     ", RowStudy, ColStudy);
     }
 }

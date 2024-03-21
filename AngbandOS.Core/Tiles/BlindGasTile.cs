@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Tiles;
 [Serializable]
 internal class BlindGasTile : Tile
 {
-    private BlindGasTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private BlindGasTile(Game game) : base(game) { } // This object is a singleton.
     protected override string SymbolName => nameof(CaretSymbol);
     public override ColorEnum Color => ColorEnum.Green;
     protected override string? AlterActionName => nameof(DisarmAlterAction);

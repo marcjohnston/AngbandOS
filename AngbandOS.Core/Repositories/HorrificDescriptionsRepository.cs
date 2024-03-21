@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Repositories;
 [Serializable]
 internal class HorrificDescriptionsRepository : StringListRepository
 {
-    public HorrificDescriptionsRepository(SaveGame saveGame) : base(saveGame) { }
+    public HorrificDescriptionsRepository(Game game) : base(game) { }
 
     /// <summary>
     /// Returns HorrificDescriptions as the name of this string list repository.
@@ -19,7 +19,7 @@ internal class HorrificDescriptionsRepository : StringListRepository
 
     public override void Load()
     {
-        if (SaveGame.Configuration.HorrificDescriptions == null)
+        if (Game.Configuration.HorrificDescriptions == null)
         {
             Add("abominable", "abysmal", "appalling", "baleful", "blasphemous", "disgusting", "dreadful", "filthy",
                 "grisly", "hideous", "hellish", "horrible", "infernal", "loathsome", "nightmarish", "repulsive",
@@ -27,7 +27,7 @@ internal class HorrificDescriptionsRepository : StringListRepository
         }
         else
         {
-            Add(SaveGame.Configuration.HorrificDescriptions);
+            Add(Game.Configuration.HorrificDescriptions);
         }
     }
 }

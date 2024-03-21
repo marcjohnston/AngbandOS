@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class AimWandScript : Script, IScript, IRepeatableScript, ISuccessfulScript
 {
-    private AimWandScript(SaveGame saveGame) : base(saveGame) { }
+    private AimWandScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the aim wand script, disposes of the successful result and returns false.
@@ -38,9 +38,9 @@ internal class AimWandScript : Script, IScript, IRepeatableScript, ISuccessfulSc
     public bool ExecuteSuccessfulScript()
     {
         // Prompt for an item, showing only wands
-        if (!SaveGame.SelectItem(out Item? item, "Aim which wand? ", false, true, true, SaveGame.SingletonRepository.ItemFilters.Get(nameof(CanBeAimedItemFilter))))
+        if (!Game.SelectItem(out Item? item, "Aim which wand? ", false, true, true, Game.SingletonRepository.ItemFilters.Get(nameof(CanBeAimedItemFilter))))
         {
-            SaveGame.MsgPrint("You have no wand to aim.");
+            Game.MsgPrint("You have no wand to aim.");
             return false;
         }
         // Get the item and check if it is really a wand
@@ -48,72 +48,72 @@ internal class AimWandScript : Script, IScript, IRepeatableScript, ISuccessfulSc
         {
             return false;
         }
-        if (!SaveGame.ItemMatchesFilter(item, SaveGame.SingletonRepository.ItemFilters.Get(nameof(CanBeAimedItemFilter))))
+        if (!Game.ItemMatchesFilter(item, Game.SingletonRepository.ItemFilters.Get(nameof(CanBeAimedItemFilter))))
         {
-            SaveGame.MsgPrint("That is not a wand!");
+            Game.MsgPrint("That is not a wand!");
             return false;
         }
         // We can't use wands directly from the floor, since we need to aim them
         if (!item.IsInInventory && item.Count > 1)
         {
-            SaveGame.MsgPrint("You must first pick up the wand.");
+            Game.MsgPrint("You must first pick up the wand.");
             return false;
         }
         // Aim the wand
-        if (!SaveGame.GetDirectionWithAim(out int dir))
+        if (!Game.GetDirectionWithAim(out int dir))
         {
             return false;
         }
         // Using a wand takes 100 energy
-        SaveGame.EnergyUse = 100;
+        Game.EnergyUse = 100;
         bool ident = false;
         int itemLevel = item.Factory.LevelNormallyFound;
         // Chance of success is your skill - item level, with item level capped at 50 and your
         // skill halved if you're confused
-        int chance = SaveGame.SkillUseDevice;
-        if (SaveGame.ConfusedTimer.Value != 0)
+        int chance = Game.SkillUseDevice;
+        if (Game.ConfusedTimer.Value != 0)
         {
             chance /= 2;
         }
         chance -= itemLevel > 50 ? 50 : itemLevel;
         // Always a small chance of success
-        if (chance < Constants.UseDevice && SaveGame.RandomLessThan(Constants.UseDevice - chance + 1) == 0)
+        if (chance < Constants.UseDevice && Game.RandomLessThan(Constants.UseDevice - chance + 1) == 0)
         {
             chance = Constants.UseDevice;
         }
-        if (chance < Constants.UseDevice || SaveGame.DieRoll(chance) < Constants.UseDevice)
+        if (chance < Constants.UseDevice || Game.DieRoll(chance) < Constants.UseDevice)
         {
-            SaveGame.MsgPrint("You failed to use the wand properly.");
+            Game.MsgPrint("You failed to use the wand properly.");
             return false;
         }
         // Make sure we have charges
         if (item.TypeSpecificValue <= 0)
         {
-            SaveGame.MsgPrint("The wand has no charges left.");
+            Game.MsgPrint("The wand has no charges left.");
             item.IdentEmpty = true;
             return false;
         }
-        SaveGame.PlaySound(SoundEffectEnum.ZapRod);
+        Game.PlaySound(SoundEffectEnum.ZapRod);
         WandItemFactory activateableItem = (WandItemFactory)item.Factory;
-        if (activateableItem.ExecuteActivation(SaveGame, dir))
+        if (activateableItem.ExecuteActivation(Game, dir))
         {
             ident = true;
         }
 
-        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
+        Game.SingletonRepository.FlaggedActions.Get(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
         // Mark the wand as having been tried
         item.ObjectTried();
         // If we just discovered the item's flavor, mark it as so
         if (ident && !item.IsFlavorAware())
         {
             item.BecomeFlavorAware();
-            SaveGame.GainExperience((itemLevel + (SaveGame.ExperienceLevel.Value >> 1)) / SaveGame.ExperienceLevel.Value);
+            Game.GainExperience((itemLevel + (Game.ExperienceLevel.Value >> 1)) / Game.ExperienceLevel.Value);
         }
         // If we're a channeler then we should be using mana instead of charges
         bool channeled = false;
-        if (SaveGame.BaseCharacterClass.CanUseManaInsteadOfConsumingItem)
+        if (Game.BaseCharacterClass.CanUseManaInsteadOfConsumingItem)
         {
-            channeled = SaveGame.DoCmdChannel(item);
+            channeled = Game.DoCmdChannel(item);
         }
         // We didn't use mana, so decrease the wand's charges
         if (!channeled)
@@ -125,12 +125,12 @@ internal class AimWandScript : Script, IScript, IRepeatableScript, ISuccessfulSc
                 Item splitItem = item.Clone(1);
                 item.TypeSpecificValue++;
                 item.Count--;
-                SaveGame.WeightCarried -= splitItem.Weight;
-                SaveGame.InvenCarry(splitItem);
-                SaveGame.MsgPrint("You unstack your wand.");
+                Game.WeightCarried -= splitItem.Weight;
+                Game.InvenCarry(splitItem);
+                Game.MsgPrint("You unstack your wand.");
             }
             // Let us know we have used a charge
-            SaveGame.ReportChargeUsage(item);
+            Game.ReportChargeUsage(item);
         }
         return true;
     }

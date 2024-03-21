@@ -10,10 +10,10 @@ namespace AngbandOS.Core.Mutations;
 [Serializable]
 internal abstract class Mutation : IGetKey
 {
-    protected readonly SaveGame SaveGame;
-    protected Mutation(SaveGame saveGame)
+    protected readonly Game Game;
+    protected Mutation(Game game)
     {
-        SaveGame = saveGame;
+        Game = game;
     }
     public virtual string Key => GetType().Name;
 

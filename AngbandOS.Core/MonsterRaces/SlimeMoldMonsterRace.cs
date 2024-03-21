@@ -10,7 +10,7 @@ namespace AngbandOS.Core.MonsterRaces;
 [Serializable]
 internal class SlimeMoldMonsterRace : MonsterRace
 {
-    protected SlimeMoldMonsterRace(SaveGame saveGame) : base(saveGame) { }
+    protected SlimeMoldMonsterRace(Game game) : base(game) { }
 
     protected override string SymbolName => nameof(CommaSymbol);
     public override ColorEnum Color => ColorEnum.Green;

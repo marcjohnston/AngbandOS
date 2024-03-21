@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class SummonBizarreMonsterScript : Script, IScript
 {
-    private SummonBizarreMonsterScript(SaveGame saveGame) : base(saveGame) { }
+    private SummonBizarreMonsterScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script.
@@ -19,36 +19,36 @@ internal class SummonBizarreMonsterScript : Script, IScript
     public void ExecuteScript()
     {
         MonsterFilter? summonType = null;
-        SaveGame.MsgPrint("You concentrate on the Fool card...");
-        switch (SaveGame.DieRoll(4))
+        Game.MsgPrint("You concentrate on the Fool card...");
+        switch (Game.DieRoll(4))
         {
             case 1:
-                summonType = SaveGame.SingletonRepository.MonsterFilters.Get(nameof(Bizarre1MonsterFilter));
+                summonType = Game.SingletonRepository.MonsterFilters.Get(nameof(Bizarre1MonsterFilter));
                 break;
 
             case 2:
-                summonType = SaveGame.SingletonRepository.MonsterFilters.Get(nameof(Bizarre2MonsterFilter));
+                summonType = Game.SingletonRepository.MonsterFilters.Get(nameof(Bizarre2MonsterFilter));
                 break;
 
             case 3:
-                summonType = SaveGame.SingletonRepository.MonsterFilters.Get(nameof(Bizarre4MonsterFilter));
+                summonType = Game.SingletonRepository.MonsterFilters.Get(nameof(Bizarre4MonsterFilter));
                 break;
 
             case 4:
-                summonType = SaveGame.SingletonRepository.MonsterFilters.Get(nameof(Bizarre5MonsterFilter));
+                summonType = Game.SingletonRepository.MonsterFilters.Get(nameof(Bizarre5MonsterFilter));
                 break;
         }
-        if (SaveGame.DieRoll(2) == 1)
+        if (Game.DieRoll(2) == 1)
         {
-            SaveGame.MsgPrint(SaveGame.SummonSpecific(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel.Value, summonType)
+            Game.MsgPrint(Game.SummonSpecific(Game.MapY, Game.MapX, Game.ExperienceLevel.Value, summonType)
                 ? "The summoned creature gets angry!"
                 : "No-one ever turns up.");
         }
         else
         {
-            if (!SaveGame.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel.Value, summonType, false))
+            if (!Game.SummonSpecificFriendly(Game.MapY, Game.MapX, Game.ExperienceLevel.Value, summonType, false))
             {
-                SaveGame.MsgPrint("No-one ever turns up.");
+                Game.MsgPrint("No-one ever turns up.");
             }
         }
     }

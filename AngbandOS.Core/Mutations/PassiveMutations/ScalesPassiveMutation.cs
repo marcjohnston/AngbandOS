@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Mutations.PassiveMutations;
 [Serializable]
 internal class ScalesPassiveMutation : Mutation
 {
-    private ScalesPassiveMutation(SaveGame saveGame) : base(saveGame) { }
+    private ScalesPassiveMutation(Game game) : base(game) { }
     public override int Frequency => 3;
     public override string GainMessage => "Your skin turns into black scales!";
     public override string HaveMessage => "Your skin has turned into scales (-1 CHR, +10 AC).";
@@ -19,13 +19,13 @@ internal class ScalesPassiveMutation : Mutation
 
     public override void OnGain()
     {
-        SaveGame.CharismaBonus -= 1;
-        SaveGame.GenomeArmorClassBonus += 10;
+        Game.CharismaBonus -= 1;
+        Game.GenomeArmorClassBonus += 10;
     }
 
     public override void OnLose()
     {
-        SaveGame.CharismaBonus += 1;
-        SaveGame.GenomeArmorClassBonus -= 10;
+        Game.CharismaBonus += 1;
+        Game.GenomeArmorClassBonus -= 10;
     }
 }

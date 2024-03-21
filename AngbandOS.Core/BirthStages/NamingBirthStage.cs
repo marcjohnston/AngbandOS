@@ -10,14 +10,14 @@ namespace AngbandOS.Core.BirthStages;
 [Serializable]
 internal class NamingBirthStage : BirthStage
 {
-    private NamingBirthStage(SaveGame saveGame) : base(saveGame) { }
+    private NamingBirthStage(Game game) : base(game) { }
     public override BirthStage? Render()
     {
-        if (string.IsNullOrEmpty(SaveGame.PlayerName.Value))
+        if (string.IsNullOrEmpty(Game.PlayerName.Value))
         {
-            SaveGame.PlayerName.Value = SaveGame.Race.CreateRandomName();
+            Game.PlayerName.Value = Game.Race.CreateRandomName();
         }
-        SaveGame.InputPlayerName();
+        Game.InputPlayerName();
         return null;
     }
 }

@@ -10,7 +10,7 @@ namespace AngbandOS.Core.MonsterRaces;
 [Serializable]
 internal class ShriekerMushroomPatchMonsterRace : MonsterRace
 {
-    protected ShriekerMushroomPatchMonsterRace(SaveGame saveGame) : base(saveGame) { }
+    protected ShriekerMushroomPatchMonsterRace(Game game) : base(game) { }
 
     protected override string[]? SpellNames =>new string[] {
         nameof(ShriekMonsterSpell)

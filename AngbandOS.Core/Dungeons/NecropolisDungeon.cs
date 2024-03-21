@@ -9,7 +9,7 @@ namespace AngbandOS.Core.Dungeons;
 [Serializable]
 internal class NecropolisDungeon : Dungeon
 {
-    private NecropolisDungeon(SaveGame saveGame) : base(saveGame) { }
+    private NecropolisDungeon(Game game) : base(game) { }
     public override int BaseOffset => 30;
     /// <summary>
     /// Returns true because this dungeon is a tower.

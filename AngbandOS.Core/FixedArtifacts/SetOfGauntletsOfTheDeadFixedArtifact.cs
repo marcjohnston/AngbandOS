@@ -10,20 +10,20 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class SetOfGauntletsOfTheDeadFixedArtifact : FixedArtifact, IFixedArtifactActivatible
 {
-    private SetOfGauntletsOfTheDeadFixedArtifact(SaveGame saveGame) : base(saveGame) { }
+    private SetOfGauntletsOfTheDeadFixedArtifact(Game game) : base(game) { }
 
     protected override string BaseItemFactoryName => nameof(GauntletGlovesArmorItemFactory);
 
     // The Dead shoot acid bolts
     public void ActivateItem(Item item)
     {
-        SaveGame.MsgPrint("Your gauntlets are covered in acid...");
-        if (!SaveGame.GetDirectionWithAim(out int dir))
+        Game.MsgPrint("Your gauntlets are covered in acid...");
+        if (!Game.GetDirectionWithAim(out int dir))
         {
             return;
         }
-        SaveGame.FireBolt(SaveGame.SingletonRepository.Projectiles.Get(nameof(Projection.AcidProjectile)), dir, base.SaveGame.DiceRoll(5, 8));
-        item.RechargeTimeLeft = base.SaveGame.RandomLessThan(5) + 5;
+        Game.FireBolt(Game.SingletonRepository.Projectiles.Get(nameof(Projection.AcidProjectile)), dir, base.Game.DiceRoll(5, 8));
+        item.RechargeTimeLeft = base.Game.RandomLessThan(5) + 5;
     }
     public string DescribeActivationEffect => "acid bolt (5d8) every 5+d5 turns";
 

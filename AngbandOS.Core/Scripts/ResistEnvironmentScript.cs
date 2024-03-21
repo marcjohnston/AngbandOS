@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class ResistEnvironmentScript : Script, IScript
 {
-    private ResistEnvironmentScript(SaveGame saveGame) : base(saveGame) { }
+    private ResistEnvironmentScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script.
@@ -18,8 +18,8 @@ internal class ResistEnvironmentScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        SaveGame.ColdResistanceTimer.AddTimer(SaveGame.DieRoll(20) + 20);
-        SaveGame.FireResistanceTimer.AddTimer(SaveGame.DieRoll(20) + 20);
-        SaveGame.LightningResistanceTimer.AddTimer(SaveGame.DieRoll(20) + 20);
+        Game.ColdResistanceTimer.AddTimer(Game.DieRoll(20) + 20);
+        Game.FireResistanceTimer.AddTimer(Game.DieRoll(20) + 20);
+        Game.LightningResistanceTimer.AddTimer(Game.DieRoll(20) + 20);
     }
 }

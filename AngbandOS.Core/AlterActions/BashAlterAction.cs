@@ -10,9 +10,9 @@ namespace AngbandOS.Core.AlterActions;
 [Serializable]
 internal class BashAlterAction : AlterAction
 {
-    private BashAlterAction(SaveGame saveGame) : base(saveGame) { }
+    private BashAlterAction(Game game) : base(game) { }
     public override void Execute(AlterEventArgs alterEventArgs)
     {
-        alterEventArgs.More = SaveGame.BashClosedDoor(alterEventArgs.Y, alterEventArgs.X);
+        alterEventArgs.More = Game.BashClosedDoor(alterEventArgs.Y, alterEventArgs.X);
     }
 }

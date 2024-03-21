@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class ReadScrollScript : Script, IScript, IRepeatableScript
 {
-    private ReadScrollScript(SaveGame saveGame) : base(saveGame) { }
+    private ReadScrollScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the read scroll script and returns false.
@@ -29,24 +29,24 @@ internal class ReadScrollScript : Script, IScript, IRepeatableScript
     public void ExecuteScript()
     {
         // Make sure we're in a situation where we can read
-        if (SaveGame.BlindnessTimer.Value != 0)
+        if (Game.BlindnessTimer.Value != 0)
         {
-            SaveGame.MsgPrint("You can't see anything.");
+            Game.MsgPrint("You can't see anything.");
             return;
         }
-        if (SaveGame.NoLight())
+        if (Game.NoLight())
         {
-            SaveGame.MsgPrint("You have no light to read by.");
+            Game.MsgPrint("You have no light to read by.");
             return;
         }
-        if (SaveGame.ConfusedTimer.Value != 0)
+        if (Game.ConfusedTimer.Value != 0)
         {
-            SaveGame.MsgPrint("You are too confused!");
+            Game.MsgPrint("You are too confused!");
             return;
         }
-        if (!SaveGame.SelectItem(out Item? item, "Read which scroll? ", false, true, true, SaveGame.SingletonRepository.ItemFilters.Get(nameof(CanBeReadItemFilter))))
+        if (!Game.SelectItem(out Item? item, "Read which scroll? ", false, true, true, Game.SingletonRepository.ItemFilters.Get(nameof(CanBeReadItemFilter))))
         {
-            SaveGame.MsgPrint("You have no scrolls to read.");
+            Game.MsgPrint("You have no scrolls to read.");
             return;
         }
         if (item == null)
@@ -54,13 +54,13 @@ internal class ReadScrollScript : Script, IScript, IRepeatableScript
             return;
         }
         // Make sure the item is actually a scroll
-        if (!SaveGame.ItemMatchesFilter(item, SaveGame.SingletonRepository.ItemFilters.Get(nameof(CanBeReadItemFilter))))
+        if (!Game.ItemMatchesFilter(item, Game.SingletonRepository.ItemFilters.Get(nameof(CanBeReadItemFilter))))
         {
-            SaveGame.MsgPrint("That is not a scroll!");
+            Game.MsgPrint("That is not a scroll!");
             return;
         }
         // Scrolls use a full turn
-        SaveGame.EnergyUse = 100;
+        Game.EnergyUse = 100;
         //bool identified = false;
         //bool usedUp = true;
 
@@ -68,20 +68,20 @@ internal class ReadScrollScript : Script, IScript, IRepeatableScript
         ReadScrollEvent readScrollEventArgs = new ReadScrollEvent();
         scrollItem.Read(readScrollEventArgs);
 
-        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
+        Game.SingletonRepository.FlaggedActions.Get(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
         // We might have just identified the scroll
         item.ObjectTried();
         if (readScrollEventArgs.Identified && !item.IsFlavorAware())
         {
             item.BecomeFlavorAware();
             int itemLevel = item.Factory.LevelNormallyFound;
-            SaveGame.GainExperience((itemLevel + (SaveGame.ExperienceLevel.Value >> 1)) / SaveGame.ExperienceLevel.Value);
+            Game.GainExperience((itemLevel + (Game.ExperienceLevel.Value >> 1)) / Game.ExperienceLevel.Value);
         }
         bool channeled = false;
         // Channelers can use mana instead of the scroll being used up
-        if (SaveGame.BaseCharacterClass.CanUseManaInsteadOfConsumingItem)
+        if (Game.BaseCharacterClass.CanUseManaInsteadOfConsumingItem)
         {
-            channeled = SaveGame.DoCmdChannel(item);
+            channeled = Game.DoCmdChannel(item);
         }
         if (!channeled)
         {

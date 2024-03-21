@@ -13,6 +13,6 @@ namespace AngbandOS.Core.ItemFilters;
 [Serializable]
 internal class DragonScaleMailItemFilter : ItemFilter<DragonScaleMailArmorItemFactory>
 {
-    private DragonScaleMailItemFilter(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private DragonScaleMailItemFilter(Game game) : base(game) { } // This object is a singleton.
     public override bool? HasValue => true;
 }

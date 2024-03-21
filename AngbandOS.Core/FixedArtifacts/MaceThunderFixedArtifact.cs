@@ -10,7 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class MaceThunderFixedArtifact : FixedArtifact
 {
-    private MaceThunderFixedArtifact(SaveGame saveGame) : base(saveGame) { }
+    private MaceThunderFixedArtifact(Game game) : base(game) { }
 
     protected override string BaseItemFactoryName => nameof(MaceHaftedWeaponItemFactory);
 

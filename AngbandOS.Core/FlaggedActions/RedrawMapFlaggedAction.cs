@@ -10,33 +10,33 @@ namespace AngbandOS.Core.FlaggedActions;
 [Serializable]
 internal class RedrawMapFlaggedAction : FlaggedAction
 {
-    private RedrawMapFlaggedAction(SaveGame saveGame) : base(saveGame) { }
+    private RedrawMapFlaggedAction(Game game) : base(game) { }
     protected override void Execute()
     {
         // Save the cursor visible state, we will temporarily reset it.
-        bool v = SaveGame.Screen.CursorVisible;
+        bool v = Game.Screen.CursorVisible;
 
         // Turn off the cursor visible.
-        SaveGame.Screen.CursorVisible = false; // TODO: Is this really needed, if we have a double-buffer?
-        for (int y = SaveGame.PanelRowMin; y <= SaveGame.PanelRowMax; y++)
+        Game.Screen.CursorVisible = false; // TODO: Is this really needed, if we have a double-buffer?
+        for (int y = Game.PanelRowMin; y <= Game.PanelRowMax; y++)
         {
-            for (int x = SaveGame.PanelColMin; x <= SaveGame.PanelColMax; x++)
+            for (int x = Game.PanelColMin; x <= Game.PanelColMax; x++)
             {
-                SaveGame.MapInfo(y, x, out ColorEnum a, out char c);
-                if (SaveGame.InvulnerabilityTimer.Value != 0)
+                Game.MapInfo(y, x, out ColorEnum a, out char c);
+                if (Game.InvulnerabilityTimer.Value != 0)
                 {
                     a = ColorEnum.White;
                 }
-                else if (SaveGame.EtherealnessTimer.Value != 0)
+                else if (Game.EtherealnessTimer.Value != 0)
                 {
                     a = ColorEnum.Black;
                 }
-                SaveGame.Screen.Print(a, c, y - SaveGame.PanelRowPrt, x - SaveGame.PanelColPrt);
+                Game.Screen.Print(a, c, y - Game.PanelRowPrt, x - Game.PanelColPrt);
             }
         }
-        SaveGame.RedrawSingleLocation(SaveGame.MapY, SaveGame.MapX);
+        Game.RedrawSingleLocation(Game.MapY, Game.MapX);
 
         // Restore the cursor visible.
-        SaveGame.Screen.CursorVisible = v;
+        Game.Screen.CursorVisible = v;
     }
 }

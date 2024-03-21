@@ -12,10 +12,10 @@ namespace AngbandOS.Core.Commands;
 [Serializable]
 internal abstract class GameCommand : IGetKey
 {
-    protected SaveGame SaveGame { get; }
-    protected GameCommand(SaveGame saveGame)
+    protected Game Game { get; }
+    protected GameCommand(Game game)
     {
-        SaveGame = saveGame;
+        Game = game;
     }
 
     public virtual string Key => GetType().Name;
@@ -23,7 +23,7 @@ internal abstract class GameCommand : IGetKey
     public string GetKey => Key;
     public void Bind()
     {
-        ExecuteScript = ExecuteScriptName == null ? null : (IRepeatableScript)SaveGame.SingletonRepository.Scripts.Get(ExecuteScriptName);
+        ExecuteScript = ExecuteScriptName == null ? null : (IRepeatableScript)Game.SingletonRepository.Scripts.Get(ExecuteScriptName);
     }
 
     public abstract char KeyChar { get; }

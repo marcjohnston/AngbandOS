@@ -17,5 +17,5 @@ internal class FrontKickMartialArtsAttack : MartialArtsAttack
     public override int Effect => 0;
     public override int MinLevel => 2;
 
-    private FrontKickMartialArtsAttack(SaveGame saveGame) : base(saveGame) { }
+    private FrontKickMartialArtsAttack(Game game) : base(game) { }
 }

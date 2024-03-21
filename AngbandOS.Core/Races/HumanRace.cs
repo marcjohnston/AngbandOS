@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Races;
 [Serializable]
 internal class HumanRace : Race
 {
-    private HumanRace(SaveGame saveGame) : base(saveGame) { }
+    private HumanRace(Game game) : base(game) { }
     public override string Title => "Human";
     public override int[] AbilityBonus => new int[] { 0, 0, 0, 0, 0, 0 };
     public override int BaseDisarmBonus => 0;

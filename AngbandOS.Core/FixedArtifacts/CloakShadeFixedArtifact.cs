@@ -10,7 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class CloakShadeFixedArtifact : FixedArtifact
 {
-    private CloakShadeFixedArtifact(SaveGame saveGame) : base(saveGame) { }
+    private CloakShadeFixedArtifact(Game game) : base(game) { }
 
     protected override string BaseItemFactoryName => nameof(ClothCloakCloakArmorItemFactory);
 

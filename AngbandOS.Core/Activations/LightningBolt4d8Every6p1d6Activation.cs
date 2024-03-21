@@ -13,16 +13,16 @@ namespace AngbandOS.Core.Activations;
 [Serializable]
 internal class LightningBolt4d8Every6p1d6Activation : DirectionalActivation
 {
-    private LightningBolt4d8Every6p1d6Activation(SaveGame saveGame) : base(saveGame) { }
+    private LightningBolt4d8Every6p1d6Activation(Game game) : base(game) { }
     public override int RandomChance => 101;
 
     public override string? PreActivationMessage => "Your {0} is covered in sparks...";
 
-    public override int RechargeTime() => SaveGame.RandomLessThan(6) + 6;
+    public override int RechargeTime() => Game.RandomLessThan(6) + 6;
 
     protected override bool Activate(int direction)
     {
-        SaveGame.FireBolt(SaveGame.SingletonRepository.Projectiles.Get(nameof(ElecProjectile)), direction, SaveGame.DiceRoll(4, 8));
+        Game.FireBolt(Game.SingletonRepository.Projectiles.Get(nameof(ElecProjectile)), direction, Game.DiceRoll(4, 8));
         return true;
     }
 

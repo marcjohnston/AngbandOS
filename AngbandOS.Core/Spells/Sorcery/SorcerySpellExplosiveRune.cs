@@ -10,10 +10,10 @@ namespace AngbandOS.Core.Spells.Sorcery;
 [Serializable]
 internal class SorcerySpellYellowSign : Spell
 {
-    private SorcerySpellYellowSign(SaveGame saveGame) : base(saveGame) { }
+    private SorcerySpellYellowSign(Game game) : base(game) { }
     protected override string? CastScriptName => nameof(YellowSignScript);
 
     public override string Name => "Yellow Sign";
 
-    protected override string LearnedDetails => $"dam 7d7+{SaveGame.ExperienceLevel.Value / 2}";
+    protected override string LearnedDetails => $"dam 7d7+{Game.ExperienceLevel.Value / 2}";
 }

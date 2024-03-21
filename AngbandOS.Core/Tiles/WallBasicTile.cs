@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Tiles;
 [Serializable]
 internal class WallBasicTile : Tile
 {
-    private WallBasicTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private WallBasicTile(Game game) : base(game) { } // This object is a singleton.
     protected override string SymbolName => nameof(PoundSignSymbol);
     protected override string? AlterActionName => nameof(TunnelAlterAction);
     public override bool BlocksLos => true;

@@ -10,7 +10,7 @@ namespace AngbandOS.Core.WizardCommands;
 [Serializable]
 internal class NewLineWizardCommand : WizardCommand
 {
-    private NewLineWizardCommand(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private NewLineWizardCommand(Game game) : base(game) { } // This object is a singleton.
 
     public override char KeyChar => '\n';
 }

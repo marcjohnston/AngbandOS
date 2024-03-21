@@ -10,14 +10,14 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class OfTheMagiStaffItemFactory : StaffItemFactory
 {
-    private OfTheMagiStaffItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private OfTheMagiStaffItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UnderscoreSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(UnderscoreSymbol));
     public override string Name => "the Magi";
 
     public override void ApplyMagic(Item item, int level, int power, Store? store)
     {
-        item.TypeSpecificValue = SaveGame.DieRoll(2) + 2;
+        item.TypeSpecificValue = Game.DieRoll(2) + 2;
     }
     public override int[] Chance => new int[] { 2, 0, 0, 0 };
     public override int Cost => 4500;
@@ -30,17 +30,17 @@ internal class OfTheMagiStaffItemFactory : StaffItemFactory
 
     public override void UseStaff(UseStaffEvent eventArgs)
     {
-        if (SaveGame.TryRestoringAbilityScore(Ability.Intelligence))
+        if (Game.TryRestoringAbilityScore(Ability.Intelligence))
         {
             eventArgs.Identified = true;
         }
-        if (SaveGame.Mana.Value < SaveGame.MaxMana.Value)
+        if (Game.Mana.Value < Game.MaxMana.Value)
         {
-            SaveGame.Mana.Value = SaveGame.MaxMana.Value;
-            SaveGame.FractionalMana = 0;
+            Game.Mana.Value = Game.MaxMana.Value;
+            Game.FractionalMana = 0;
             eventArgs.Identified = true;
-            SaveGame.MsgPrint("Your feel your head clear.");
+            Game.MsgPrint("Your feel your head clear.");
         }
     }
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

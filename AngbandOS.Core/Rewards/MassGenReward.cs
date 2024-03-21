@@ -10,11 +10,11 @@ namespace AngbandOS.Core.Rewards;
 [Serializable]
 internal class MassGenReward : Reward
 {
-    private MassGenReward(SaveGame saveGame) : base(saveGame) { }
+    private MassGenReward(Game game) : base(game) { }
     public override void GetReward(Patron patron)
     {
-        SaveGame.MsgPrint($"The voice of {patron.ShortName} rings out:");
-        SaveGame.MsgPrint("'Let me relieve thee of thine oppressors!'");
-        SaveGame.RunScriptBool(nameof(MassCarnageScript), false);
+        Game.MsgPrint($"The voice of {patron.ShortName} rings out:");
+        Game.MsgPrint("'Let me relieve thee of thine oppressors!'");
+        Game.RunScriptBool(nameof(MassCarnageScript), false);
     }
 }

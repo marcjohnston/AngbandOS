@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class MeteorStormScript : Script, IScript
 {
-    private MeteorStormScript(SaveGame saveGame) : base(saveGame) { }
+    private MeteorStormScript(Game game) : base(game) { }
 
     /// <summary>
     /// Projects a meteor onto the location of the player.
@@ -18,10 +18,10 @@ internal class MeteorStormScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        int x = SaveGame.MapX;
-        int y = SaveGame.MapY;
+        int x = Game.MapX;
+        int y = Game.MapY;
         int count = 0;
-        int b = 10 + SaveGame.DieRoll(10);
+        int b = 10 + Game.DieRoll(10);
         for (int i = 0; i < b; i++)
         {
             int d;
@@ -32,18 +32,18 @@ internal class MeteorStormScript : Script, IScript
                 {
                     break;
                 }
-                x = SaveGame.MapX - 5 + SaveGame.DieRoll(10);
-                y = SaveGame.MapY - 5 + SaveGame.DieRoll(10);
-                int dx = SaveGame.MapX > x ? SaveGame.MapX - x : x - SaveGame.MapX;
-                int dy = SaveGame.MapY > y ? SaveGame.MapY - y : y - SaveGame.MapY;
+                x = Game.MapX - 5 + Game.DieRoll(10);
+                y = Game.MapY - 5 + Game.DieRoll(10);
+                int dx = Game.MapX > x ? Game.MapX - x : x - Game.MapX;
+                int dy = Game.MapY > y ? Game.MapY - y : y - Game.MapY;
                 d = dy > dx ? dy + (dx >> 1) : dx + (dy >> 1);
-            } while (d > 5 || !SaveGame.PlayerHasLosBold(y, x));
+            } while (d > 5 || !Game.PlayerHasLosBold(y, x));
             if (count > 1000)
             {
                 break;
             }
             count = 0;
-            SaveGame.Project(0, 2, y, x, SaveGame.ExperienceLevel.Value * 3 / 2, SaveGame.SingletonRepository.Projectiles.Get(nameof(MeteorProjectile)), ProjectionFlag.ProjectKill | ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem);
+            Game.Project(0, 2, y, x, Game.ExperienceLevel.Value * 3 / 2, Game.SingletonRepository.Projectiles.Get(nameof(MeteorProjectile)), ProjectionFlag.ProjectKill | ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem);
         }
     }
 }

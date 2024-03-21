@@ -10,13 +10,13 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class TeleportationStaffItemFactory : StaffItemFactory
 {
-    private TeleportationStaffItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private TeleportationStaffItemFactory(Game game) : base(game) { } // This object is a singleton.
 
     public override void ApplyMagic(Item item, int level, int power, Store? store)
     {
-        item.TypeSpecificValue = SaveGame.DieRoll(4) + 5;
+        item.TypeSpecificValue = Game.DieRoll(4) + 5;
     }
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UnderscoreSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(UnderscoreSymbol));
     public override string Name => "Teleportation";
 
     public override int[] Chance => new int[] { 1, 0, 0, 0 };
@@ -29,8 +29,8 @@ internal class TeleportationStaffItemFactory : StaffItemFactory
     public override int Weight => 50;
     public override void UseStaff(UseStaffEvent eventArgs)
     {
-        SaveGame.RunScriptInt(nameof(TeleportSelfScript), 100);
+        Game.RunScriptInt(nameof(TeleportSelfScript), 100);
         eventArgs.Identified = true;
     }
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

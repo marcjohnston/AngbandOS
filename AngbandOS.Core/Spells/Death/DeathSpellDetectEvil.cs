@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Spells.Death;
 [Serializable]
 internal class DeathSpellDetectEvil : Spell
 {
-    private DeathSpellDetectEvil(SaveGame saveGame) : base(saveGame) { }
+    private DeathSpellDetectEvil(Game game) : base(game) { }
     protected override string? CastScriptName => nameof(DetectEvilMonstersScript);
 
     protected override string? CastFailedScriptName => nameof(WildDeathMagicScript);

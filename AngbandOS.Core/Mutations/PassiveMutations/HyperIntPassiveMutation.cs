@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Mutations.PassiveMutations;
 [Serializable]
 internal class HyperIntPassiveMutation : Mutation
 {
-    private HyperIntPassiveMutation(SaveGame saveGame) : base(saveGame) { }
+    private HyperIntPassiveMutation(Game game) : base(game) { }
     public override int Frequency => 3;
     public override string GainMessage => "Your brain evolves into a living computer!";
     public override string HaveMessage => "Your brain is a living computer (+4 INT/WIS).";
@@ -19,13 +19,13 @@ internal class HyperIntPassiveMutation : Mutation
 
     public override void OnGain()
     {
-        SaveGame.IntelligenceBonus += 4;
-        SaveGame.WisdomBonus += 4;
+        Game.IntelligenceBonus += 4;
+        Game.WisdomBonus += 4;
     }
 
     public override void OnLose()
     {
-        SaveGame.IntelligenceBonus -= 4;
-        SaveGame.WisdomBonus -= 4;
+        Game.IntelligenceBonus -= 4;
+        Game.WisdomBonus -= 4;
     }
 }

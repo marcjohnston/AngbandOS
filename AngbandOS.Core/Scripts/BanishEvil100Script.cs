@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class BanishEvil100Script : Script, IScript
 {
-    private BanishEvil100Script(SaveGame saveGame) : base(saveGame) { }
+    private BanishEvil100Script(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script.
@@ -18,9 +18,9 @@ internal class BanishEvil100Script : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        if (SaveGame.BanishEvil(100))
+        if (Game.BanishEvil(100))
         {
-            SaveGame.MsgPrint("The power of your god banishes evil!");
+            Game.MsgPrint("The power of your god banishes evil!");
         }
     }
 }

@@ -10,7 +10,7 @@ namespace AngbandOS.Core.CharacterClasses;
 [Serializable]
 internal class MonkCharacterClass : BaseCharacterClass
 {
-    private MonkCharacterClass(SaveGame savedGame) : base(savedGame) { }
+    private MonkCharacterClass(Game savedGame) : base(savedGame) { }
     public override int ID => 8;
     public override string Title => "Monk";
     public override int[] AbilityBonus => new[] { 2, -1, 1, 3, 2, 1 };
@@ -85,19 +85,19 @@ internal class MonkCharacterClass : BaseCharacterClass
     public override string GetBookTitle(Item bookItem)
     {
         BookItemFactory bookItemFactory = (BookItemFactory)bookItem.Factory;
-        return $"{SaveGame.CountPluralize("Book", bookItem.Count)} of {bookItemFactory.DivineTitle}";
+        return $"{Game.CountPluralize("Book", bookItem.Count)} of {bookItemFactory.DivineTitle}";
     }
 
     public override int SpellStat => Ability.Wisdom;
     public override int MaximumMeleeAttacksPerRound(int level) => level < 40 ? 3 : 4;
     public override int MaximumWeight => 40;
     public override int AttackSpeedMultiplier => 4;
-    public override IArtifactBias? ArtifactBias => SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(PriestlyArtifactBias));
-    public override bool SenseInventoryTest(int level) => (0 != SaveGame.RandomLessThan(20000 / ((level * level) + 40)));
+    public override IArtifactBias? ArtifactBias => Game.SingletonRepository.ArtifactBiases.Get(nameof(PriestlyArtifactBias));
+    public override bool SenseInventoryTest(int level) => (0 != Game.RandomLessThan(20000 / ((level * level) + 40)));
     public override Realm[] AvailablePrimaryRealms => new Realm[] {
-        SaveGame.SingletonRepository.Realms.Get(nameof(ChaosRealm)),
-        SaveGame.SingletonRepository.Realms.Get(nameof(TarotRealm)),
-        SaveGame.SingletonRepository.Realms.Get(nameof(CorporealRealm))
+        Game.SingletonRepository.Realms.Get(nameof(ChaosRealm)),
+        Game.SingletonRepository.Realms.Get(nameof(TarotRealm)),
+        Game.SingletonRepository.Realms.Get(nameof(CorporealRealm))
     };
 
     protected override string[] OutfitItemFactoryNames => new string[]

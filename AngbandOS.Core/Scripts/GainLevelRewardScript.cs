@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class GainLevelRewardScript : Script, IScript
 {
-    private GainLevelRewardScript(SaveGame saveGame) : base(saveGame) { }
+    private GainLevelRewardScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script.
@@ -18,6 +18,6 @@ internal class GainLevelRewardScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        SaveGame.GooPatron.GetReward();
+        Game.GooPatron.GetReward();
     }
 }

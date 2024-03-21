@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Spells.Corporeal;
 [Serializable]
 internal class CorporealSpellKnowSelf : Spell
 {
-    private CorporealSpellKnowSelf(SaveGame saveGame) : base(saveGame) { }
+    private CorporealSpellKnowSelf(Game game) : base(game) { }
     protected override string? CastScriptName => nameof(SelfKnowledgeScript);
 
     public override string Name => "Know Self";

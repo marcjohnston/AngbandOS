@@ -3,7 +3,7 @@
 [Serializable]
 internal class LessThanSymbol : Symbol
 {
-    private LessThanSymbol(SaveGame saveGame) : base(saveGame) { }
+    private LessThanSymbol(Game game) : base(game) { }
     public override char Character => '<';
     public override string Name => "An up staircase";
 }

@@ -13,6 +13,6 @@ namespace AngbandOS.Core.ItemFilters;
 [Serializable]
 internal class TarotBooksOfValueItemFilter : ItemFilter<TarotBookItemFactory>
 {
-    private TarotBooksOfValueItemFilter(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private TarotBooksOfValueItemFilter(Game game) : base(game) { } // This object is a singleton.
     public override bool? HasValue => true;
 }

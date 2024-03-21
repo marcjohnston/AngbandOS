@@ -10,7 +10,7 @@ namespace AngbandOS.Core.MonsterRaces;
 [Serializable]
 internal class NetherHoundMonsterRace : MonsterRace
 {
-    protected NetherHoundMonsterRace(SaveGame saveGame) : base(saveGame) { }
+    protected NetherHoundMonsterRace(Game game) : base(game) { }
 
     protected override string[]? SpellNames =>new string[] {
         nameof(BreatheNetherMonsterSpell)

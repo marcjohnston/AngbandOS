@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class HypnoticEyesScript : Script, IScript
 {
-    private HypnoticEyesScript(SaveGame saveGame) : base(saveGame) { }
+    private HypnoticEyesScript(Game game) : base(game) { }
 
     /// <summary>
     /// Charms a monster in a chosen direction.
@@ -18,10 +18,10 @@ internal class HypnoticEyesScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        if (!SaveGame.GetDirectionWithAim(out int dir))
+        if (!Game.GetDirectionWithAim(out int dir))
         {
             return;
         }
-        SaveGame.CharmMonster(dir, SaveGame.ExperienceLevel.Value);
+        Game.CharmMonster(dir, Game.ExperienceLevel.Value);
     }
 }

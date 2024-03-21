@@ -10,9 +10,9 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class OrbLightSourceItemFactory : LightSourceItemFactory
 {
-    private OrbLightSourceItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private OrbLightSourceItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(TildeSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(TildeSymbol));
     public override ColorEnum Color => ColorEnum.BrightYellow;
     public override string Name => "Orb";
 
@@ -39,5 +39,5 @@ internal class OrbLightSourceItemFactory : LightSourceItemFactory
     public override int Weight => 50;
 
     public override bool HasQuality => true;
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

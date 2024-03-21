@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Repositories;
 [Serializable]
 internal class FunnyCommentsRepository : StringListRepository
 {
-    public FunnyCommentsRepository(SaveGame saveGame) : base(saveGame) { }
+    public FunnyCommentsRepository(Game game) : base(game) { }
 
     /// <summary>
     /// Returns FunnyComments as the name of this string list repository.
@@ -19,7 +19,7 @@ internal class FunnyCommentsRepository : StringListRepository
 
     public override void Load()
     {
-        if (SaveGame.Configuration.FunnyComments == null)
+        if (Game.Configuration.FunnyComments == null)
         {
             Add("Wow, cosmic, man!",
                 "Rad!",
@@ -30,7 +30,7 @@ internal class FunnyCommentsRepository : StringListRepository
         }
         else
         {
-            Add(SaveGame.Configuration.FunnyComments);
+            Add(Game.Configuration.FunnyComments);
         }
     }
 }

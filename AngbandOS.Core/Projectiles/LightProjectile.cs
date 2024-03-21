@@ -10,26 +10,26 @@ namespace AngbandOS.Core.Projection;
 [Serializable]
 internal class LightProjectile : Projectile
 {
-    private LightProjectile(SaveGame saveGame) : base(saveGame) { }
+    private LightProjectile(Game game) : base(game) { }
 
-    protected override ProjectileGraphic? BoltProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get(nameof(BrightWhiteBoltProjectileGraphic));
+    protected override ProjectileGraphic? BoltProjectileGraphic => Game.SingletonRepository.ProjectileGraphics.Get(nameof(BrightWhiteBoltProjectileGraphic));
 
-    protected override Animation EffectAnimation => SaveGame.SingletonRepository.Animations.Get(nameof(BrightWhiteCloudAnimation));
+    protected override Animation EffectAnimation => Game.SingletonRepository.Animations.Get(nameof(BrightWhiteCloudAnimation));
 
     protected override bool AffectFloor(int y, int x)
     {
-        GridTile cPtr = SaveGame.Grid[y][x];
+        GridTile cPtr = Game.Grid[y][x];
         bool obvious = false;
         cPtr.TileFlags.Set(GridTile.SelfLit);
-        SaveGame.NoteSpot(y, x);
-        SaveGame.RedrawSingleLocation(y, x);
-        if (SaveGame.PlayerCanSeeBold(y, x))
+        Game.NoteSpot(y, x);
+        Game.RedrawSingleLocation(y, x);
+        if (Game.PlayerCanSeeBold(y, x))
         {
             obvious = true;
         }
         if (cPtr.MonsterIndex != 0)
         {
-            SaveGame.UpdateMonsterVisibility(cPtr.MonsterIndex, false);
+            Game.UpdateMonsterVisibility(cPtr.MonsterIndex, false);
         }
         return obvious;
     }
@@ -71,39 +71,39 @@ internal class LightProjectile : Projectile
 
     protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
     {
-        bool blind = SaveGame.BlindnessTimer.Value != 0;
+        bool blind = Game.BlindnessTimer.Value != 0;
         if (dam > 1600)
         {
             dam = 1600;
         }
         dam = (dam + r) / (r + 1);
-        Monster mPtr = SaveGame.Monsters[who];
+        Monster mPtr = Game.Monsters[who];
         string killer = mPtr.IndefiniteVisibleName;
         if (blind)
         {
-            SaveGame.MsgPrint("You are hit by something!");
+            Game.MsgPrint("You are hit by something!");
         }
-        if (SaveGame.HasLightResistance)
+        if (Game.HasLightResistance)
         {
             dam *= 4;
-            dam /= SaveGame.DieRoll(6) + 6;
+            dam /= Game.DieRoll(6) + 6;
         }
-        else if (!blind && !SaveGame.HasBlindnessResistance)
+        else if (!blind && !Game.HasBlindnessResistance)
         {
-            SaveGame.BlindnessTimer.AddTimer(SaveGame.DieRoll(5) + 2);
+            Game.BlindnessTimer.AddTimer(Game.DieRoll(5) + 2);
         }
-        if (SaveGame.Race.IsBurnedBySunlight)
+        if (Game.Race.IsBurnedBySunlight)
         {
-            SaveGame.MsgPrint("The light scorches your flesh!");
+            Game.MsgPrint("The light scorches your flesh!");
             dam *= 2;
         }
-        SaveGame.TakeHit(dam, killer);
-        if (SaveGame.EtherealnessTimer.Value != 0)
+        Game.TakeHit(dam, killer);
+        if (Game.EtherealnessTimer.Value != 0)
         {
-            SaveGame.EtherealnessTimer.SetValue();
-            SaveGame.MsgPrint("The light forces you out of your incorporeal shadow form.");
-            SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawMapFlaggedAction)).Set();
-            SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateMonstersFlaggedAction)).Set();
+            Game.EtherealnessTimer.SetValue();
+            Game.MsgPrint("The light forces you out of your incorporeal shadow form.");
+            Game.SingletonRepository.FlaggedActions.Get(nameof(RedrawMapFlaggedAction)).Set();
+            Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateMonstersFlaggedAction)).Set();
         }
         return true;
     }

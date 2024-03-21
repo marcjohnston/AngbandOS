@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Mutations.RandomMutations;
 [Serializable]
 internal class CowardiceRandomMutation : Mutation
 {
-    private CowardiceRandomMutation(SaveGame saveGame) : base(saveGame) { }
+    private CowardiceRandomMutation(Game game) : base(game) { }
     public override int Frequency => 1;
     public override string GainMessage => "You become an incredible coward!";
     public override string HaveMessage => "You are subject to cowardice.";
@@ -19,16 +19,16 @@ internal class CowardiceRandomMutation : Mutation
 
     public override void OnProcessWorld()
     {
-        if (base.SaveGame.DieRoll(3000) != 13)
+        if (base.Game.DieRoll(3000) != 13)
         {
             return;
         }
-        if (SaveGame.HasFearResistance || SaveGame.HeroismTimer.Value != 0 || SaveGame.SuperheroismTimer.Value != 0)
+        if (Game.HasFearResistance || Game.HeroismTimer.Value != 0 || Game.SuperheroismTimer.Value != 0)
         {
             return;
         }
-        SaveGame.Disturb(false);
-        SaveGame.MsgPrint("It's so dark... so scary!");
-        SaveGame.FearTimer.AddTimer(13 + base.SaveGame.DieRoll(26));
+        Game.Disturb(false);
+        Game.MsgPrint("It's so dark... so scary!");
+        Game.FearTimer.AddTimer(13 + base.Game.DieRoll(26));
     }
 }

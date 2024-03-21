@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Spells.Folk;
 [Serializable]
 internal class FolkSpellTeleportLevel : Spell
 {
-    private FolkSpellTeleportLevel(SaveGame saveGame) : base(saveGame) { }
+    private FolkSpellTeleportLevel(Game game) : base(game) { }
     protected override string? CastScriptName => nameof(TeleportLevelScript);
 
     public override string Name => "Teleport Level";

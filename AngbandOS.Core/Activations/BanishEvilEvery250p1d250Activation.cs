@@ -13,21 +13,21 @@ namespace AngbandOS.Core.Activations;
 [Serializable]
 internal class BanishEvilEvery250p1d250Activation : Activation
 {
-    private BanishEvilEvery250p1d250Activation(SaveGame saveGame) : base(saveGame) { }
+    private BanishEvilEvery250p1d250Activation(Game game) : base(game) { }
     public override int RandomChance => 33;
 
     public override string? PreActivationMessage => "";
 
     protected override bool OnActivate(Item item)
     {
-        if (SaveGame.BanishEvil(100))
+        if (Game.BanishEvil(100))
         {
-            SaveGame.MsgPrint("The power of the artifact banishes evil!");
+            Game.MsgPrint("The power of the artifact banishes evil!");
         }
         return true;
     }
 
-    public override int RechargeTime() => 250 + SaveGame.DieRoll(250);
+    public override int RechargeTime() => 250 + Game.DieRoll(250);
 
     public override int Value => 3000;
 

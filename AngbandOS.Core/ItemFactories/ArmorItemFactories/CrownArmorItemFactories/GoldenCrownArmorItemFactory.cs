@@ -10,9 +10,9 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class GoldenCrownArmorItemFactory : CrownArmorItemFactory
 {
-    private GoldenCrownArmorItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private GoldenCrownArmorItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(CloseBraceSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(CloseBraceSymbol));
     public override ColorEnum Color => ColorEnum.Gold;
     public override string Name => "Golden Crown";
 
@@ -25,5 +25,5 @@ internal class GoldenCrownArmorItemFactory : CrownArmorItemFactory
     public override int LevelNormallyFound => 45;
     public override int[] Locale => new int[] { 45, 0, 0, 0 };
     public override int Weight => 30;
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

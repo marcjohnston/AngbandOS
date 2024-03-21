@@ -10,10 +10,10 @@ namespace AngbandOS.Core.Spells.Corporeal;
 [Serializable]
 internal class CorporealSpellWraithform : Spell
 {
-    private CorporealSpellWraithform(SaveGame saveGame) : base(saveGame) { }
+    private CorporealSpellWraithform(Game game) : base(game) { }
     protected override string? CastScriptName => nameof(WraithformScript);
 
     public override string Name => "Wraithform";
 
-    protected override string LearnedDetails => $"dur {SaveGame.ExperienceLevel.Value / 2}+d{SaveGame.ExperienceLevel.Value / 2}";
+    protected override string LearnedDetails => $"dur {Game.ExperienceLevel.Value / 2}+d{Game.ExperienceLevel.Value / 2}";
 }

@@ -13,7 +13,7 @@ namespace AngbandOS.Core.Commands;
 [Serializable]
 internal class TunnelGameCommand : GameCommand
 {
-    private TunnelGameCommand(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private TunnelGameCommand(Game game) : base(game) { } // This object is a singleton.
 
     public override char KeyChar => 'T';
 

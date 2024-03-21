@@ -10,7 +10,7 @@ namespace AngbandOS.Core.MonsterRaces;
 [Serializable]
 internal class AcidicCytoplasmMonsterRace : MonsterRace
 {
-    protected AcidicCytoplasmMonsterRace(SaveGame saveGame) : base(saveGame) { }
+    protected AcidicCytoplasmMonsterRace(Game game) : base(game) { }
 
     protected override string SymbolName => nameof(LowerJSymbol);
     public override ColorEnum Color => ColorEnum.Chartreuse;

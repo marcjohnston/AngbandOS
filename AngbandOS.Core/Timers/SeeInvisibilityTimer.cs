@@ -10,19 +10,19 @@ namespace AngbandOS.Core.Timers;
 [Serializable]
 internal class SeeInvisibilityTimer : Timer
 {
-    private SeeInvisibilityTimer(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private SeeInvisibilityTimer(Game game) : base(game) { } // This object is a singleton.
     protected override void EffectStopped()
     {
-        SaveGame.MsgPrint("Your eyes feel less sensitive.");
+        Game.MsgPrint("Your eyes feel less sensitive.");
     }
     protected override void EffectIncreased(int newRate, int currentRate)
     {
-        SaveGame.MsgPrint("Your eyes feel very sensitive!");
+        Game.MsgPrint("Your eyes feel very sensitive!");
     }
     protected override void Noticed()
     {
-        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
-        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateMonstersFlaggedAction)).Set();
+        Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
+        Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateMonstersFlaggedAction)).Set();
         base.Noticed();
     }
 }

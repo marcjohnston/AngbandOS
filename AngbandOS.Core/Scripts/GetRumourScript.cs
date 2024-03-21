@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class GetRumourScript : Script, IScript, IRepeatableScript
 {
-    private GetRumourScript(SaveGame saveGame) : base(saveGame) { }
+    private GetRumourScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the get rumor script and returns false.
@@ -30,30 +30,30 @@ internal class GetRumourScript : Script, IScript, IRepeatableScript
     {
         string rumor;
         // Build an array of all the possible rumours we can get
-        char[] rumorType = new char[SaveGame.Quests.Count + SaveGame.DungeonCount + SaveGame.DungeonCount];
-        int[] rumorIndex = new int[SaveGame.Quests.Count + SaveGame.DungeonCount + SaveGame.DungeonCount];
+        char[] rumorType = new char[Game.Quests.Count + Game.DungeonCount + Game.DungeonCount];
+        int[] rumorIndex = new int[Game.Quests.Count + Game.DungeonCount + Game.DungeonCount];
         int maxRumor = 0;
         // Add a rumour for each undiscovered quest
-        for (int i = 0; i < SaveGame.Quests.Count; i++)
+        for (int i = 0; i < Game.Quests.Count; i++)
         {
-            if (SaveGame.Quests[i].Level > 0 && !SaveGame.Quests[i].Discovered)
+            if (Game.Quests[i].Level > 0 && !Game.Quests[i].Discovered)
             {
                 rumorType[maxRumor] = 'q';
                 rumorIndex[maxRumor] = i;
                 maxRumor++;
             }
         }
-        for (int i = 0; i < SaveGame.DungeonCount; i++)
+        for (int i = 0; i < Game.DungeonCount; i++)
         {
             // Add a rumour for each dungeon we don't know the depth of
-            if (!SaveGame.SingletonRepository.Dungeons[i].KnownDepth)
+            if (!Game.SingletonRepository.Dungeons[i].KnownDepth)
             {
                 rumorType[maxRumor] = 'd';
                 rumorIndex[maxRumor] = i;
                 maxRumor++;
             }
             //Add a rumour for each dungeon we don't know the offset of
-            if (!SaveGame.SingletonRepository.Dungeons[i].KnownOffset)
+            if (!Game.SingletonRepository.Dungeons[i].KnownOffset)
             {
                 rumorType[maxRumor] = 'o';
                 rumorIndex[maxRumor] = i;
@@ -65,7 +65,7 @@ internal class GetRumourScript : Script, IScript, IRepeatableScript
         if (maxRumor == 0)
         {
             maxRumor = 0;
-            for (int i = 0; i < SaveGame.Quests.Count; i++)
+            for (int i = 0; i < Game.Quests.Count; i++)
             {
                 rumorType[maxRumor] = 'q';
                 rumorIndex[maxRumor] = i;
@@ -73,20 +73,20 @@ internal class GetRumourScript : Script, IScript, IRepeatableScript
             }
         }
         // Pick a random rumour from the list
-        int choice = SaveGame.RandomLessThan(maxRumor);
+        int choice = Game.RandomLessThan(maxRumor);
         char type = rumorType[choice];
         int index = rumorIndex[choice];
         // Give us the appropriate information based on the rumour's type
         if (type == 'q')
         {
             // The rumour describes a quest
-            SaveGame.Quests[index].Discovered = true;
-            rumor = SaveGame.Quests[index].Describe();
+            Game.Quests[index].Discovered = true;
+            rumor = Game.Quests[index].Describe();
         }
         else if (type == 'd')
         {
             // The rumour describes a dungeon depth
-            Dungeon d = SaveGame.SingletonRepository.Dungeons[index];
+            Dungeon d = Game.SingletonRepository.Dungeons[index];
             rumor = d.Tower
                 ? $"They say that {d.Name} has {d.MaxLevel} floors."
                 : $"They say that {d.Name} has {d.MaxLevel} levels.";
@@ -95,10 +95,10 @@ internal class GetRumourScript : Script, IScript, IRepeatableScript
         else
         {
             // The rumour describes a dungeon difficulty
-            Dungeon d = SaveGame.SingletonRepository.Dungeons[index];
+            Dungeon d = Game.SingletonRepository.Dungeons[index];
             rumor = $"They say that {d.Name} has a relative difficulty of {d.Offset}.";
             d.KnownOffset = true;
         }
-        SaveGame.MsgPrint(rumor);
+        Game.MsgPrint(rumor);
     }
 }

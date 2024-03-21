@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class DispelUndeadAndDemonsScript : Script, IScript
 {
-    private DispelUndeadAndDemonsScript(SaveGame saveGame) : base(saveGame) { }
+    private DispelUndeadAndDemonsScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script.
@@ -18,7 +18,7 @@ internal class DispelUndeadAndDemonsScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        SaveGame.DispelUndead(SaveGame.ExperienceLevel.Value * 3);
-        SaveGame.DispelDemons(SaveGame.ExperienceLevel.Value * 3);
+        Game.DispelUndead(Game.ExperienceLevel.Value * 3);
+        Game.DispelDemons(Game.ExperienceLevel.Value * 3);
     }
 }

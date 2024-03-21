@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Spells.Tarot;
 [Serializable]
 internal class TarotSpellExtraDimensionalBeing : Spell
 {
-    private TarotSpellExtraDimensionalBeing(SaveGame saveGame) : base(saveGame) { }
+    private TarotSpellExtraDimensionalBeing(Game game) : base(game) { }
     protected override string? CastScriptName => nameof(ExtraDimensionalBeingScript);
 
     public override string Name => "Extradimensional Being";

@@ -16,5 +16,5 @@ internal class ButtMartialArtsAttack : MartialArtsAttack
     public override int Ds => 5;
     public override int Effect => 0;
     public override int MinLevel => 9;
-    private ButtMartialArtsAttack(SaveGame saveGame) : base(saveGame) { }
+    private ButtMartialArtsAttack(Game game) : base(game) { }
 }

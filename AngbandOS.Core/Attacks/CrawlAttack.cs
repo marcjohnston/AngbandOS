@@ -10,7 +10,7 @@ namespace AngbandOS.Core.AttackTypes;
 [Serializable]
 internal class CrawlAttack : Attack
 {
-    private CrawlAttack(SaveGame saveGame) : base(saveGame) { }
+    private CrawlAttack(Game game) : base(game) { }
     public override string MonsterAction => "crawls on {0}";
     public override string PlayerAction => $"crawls on you";
     public override string KnowledgeAction => "crawl on you";

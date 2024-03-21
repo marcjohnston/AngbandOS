@@ -10,7 +10,7 @@ namespace AngbandOS.Core.ClassSpells;
 [Serializable]
 internal class DruidDetectDoorsAndTrapsNatureSpell : ClassSpell
 {
-    private DruidDetectDoorsAndTrapsNatureSpell(SaveGame saveGame) : base(saveGame) { }
+    private DruidDetectDoorsAndTrapsNatureSpell(Game game) : base(game) { }
     public override string SpellName => nameof(NatureSpellDetectDoorsAndTraps);
     public override string CharacterClassName => nameof(DruidCharacterClass);
     public override int Level => 2;

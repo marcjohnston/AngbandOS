@@ -8,7 +8,7 @@
 [Serializable]
 internal class VamogSlayerShopkeeper : Shopkeeper
 {
-    private VamogSlayerShopkeeper(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private VamogSlayerShopkeeper(Game game) : base(game) { } // This object is a singleton.
     public override string Name => "Vamog Slayer";
     public override int MaxCost =>  15000;
     public override int MinInflate =>  110;

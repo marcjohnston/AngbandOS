@@ -10,9 +10,9 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class LifePotionItemFactory : PotionItemFactory
 {
-    private LifePotionItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private LifePotionItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(ExclamationPointSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(ExclamationPointSymbol));
     public override string Name => "Life";
 
     public override int[] Chance => new int[] { 4, 2, 0, 0 };
@@ -27,27 +27,27 @@ internal class LifePotionItemFactory : PotionItemFactory
     {
         // Life heals you 5000 health, removes experience and ability score drains, and
         // cures blindness, confusion, stun, poison, and bleeding
-        SaveGame.MsgPrint("You feel life flow through your body!");
-        SaveGame.RunScript(nameof(RestoreLevelScript));
-        SaveGame.RestoreHealth(5000);
-        SaveGame.PoisonTimer.ResetTimer();
-        SaveGame.BlindnessTimer.ResetTimer();
-        SaveGame.ConfusedTimer.ResetTimer();
-        SaveGame.HallucinationsTimer.ResetTimer();
-        SaveGame.StunTimer.ResetTimer();
-        SaveGame.BleedingTimer.ResetTimer();
-        SaveGame.TryRestoringAbilityScore(Ability.Strength);
-        SaveGame.TryRestoringAbilityScore(Ability.Constitution);
-        SaveGame.TryRestoringAbilityScore(Ability.Dexterity);
-        SaveGame.TryRestoringAbilityScore(Ability.Wisdom);
-        SaveGame.TryRestoringAbilityScore(Ability.Intelligence);
-        SaveGame.TryRestoringAbilityScore(Ability.Charisma);
+        Game.MsgPrint("You feel life flow through your body!");
+        Game.RunScript(nameof(RestoreLevelScript));
+        Game.RestoreHealth(5000);
+        Game.PoisonTimer.ResetTimer();
+        Game.BlindnessTimer.ResetTimer();
+        Game.ConfusedTimer.ResetTimer();
+        Game.HallucinationsTimer.ResetTimer();
+        Game.StunTimer.ResetTimer();
+        Game.BleedingTimer.ResetTimer();
+        Game.TryRestoringAbilityScore(Ability.Strength);
+        Game.TryRestoringAbilityScore(Ability.Constitution);
+        Game.TryRestoringAbilityScore(Ability.Dexterity);
+        Game.TryRestoringAbilityScore(Ability.Wisdom);
+        Game.TryRestoringAbilityScore(Ability.Intelligence);
+        Game.TryRestoringAbilityScore(Ability.Charisma);
         return true;
     }
     public override bool Smash(int who, int y, int x)
     {
-        SaveGame.Project(who, 1, y, x, SaveGame.DiceRoll(50, 50), SaveGame.SingletonRepository.Projectiles.Get(nameof(OldHealProjectile)), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
+        Game.Project(who, 1, y, x, Game.DiceRoll(50, 50), Game.SingletonRepository.Projectiles.Get(nameof(OldHealProjectile)), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
         return false;
     }
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

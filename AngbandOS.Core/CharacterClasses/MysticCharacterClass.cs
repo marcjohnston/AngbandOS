@@ -10,7 +10,7 @@ namespace AngbandOS.Core.CharacterClasses;
 [Serializable]
 internal class MysticCharacterClass : BaseCharacterClass
 {
-    private MysticCharacterClass(SaveGame savedGame) : base(savedGame) { }
+    private MysticCharacterClass(Game savedGame) : base(savedGame) { }
     public override int ID => 15;
     public override string Title => "Mystic";
     public override int[] AbilityBonus => new[] { 2, -1, 2, 2, 2, 0 };
@@ -46,8 +46,8 @@ internal class MysticCharacterClass : BaseCharacterClass
     public override int MaximumMeleeAttacksPerRound(int level) => level < 40 ? 3 : 4;
     public override int MaximumWeight => 40;
     public override int AttackSpeedMultiplier => 4;
-    public override IArtifactBias? ArtifactBias => SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(PriestlyArtifactBias));
-    public override bool SenseInventoryTest(int level) => (0 != SaveGame.RandomLessThan(55000 / ((level * level) + 40)));
+    public override IArtifactBias? ArtifactBias => Game.SingletonRepository.ArtifactBiases.Get(nameof(PriestlyArtifactBias));
+    public override bool SenseInventoryTest(int level) => (0 != Game.RandomLessThan(55000 / ((level * level) + 40)));
 
     protected override string[] OutfitItemFactoryNames => new string[]
     {

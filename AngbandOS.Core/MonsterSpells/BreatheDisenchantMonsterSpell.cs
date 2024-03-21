@@ -10,10 +10,10 @@ namespace AngbandOS.Core.MonsterSpells;
 [Serializable]
 internal class BreatheDisenchantMonsterSpell : BreatheProjectileMonsterSpell
 {
-    private BreatheDisenchantMonsterSpell(SaveGame saveGame) : base(saveGame) { }
+    private BreatheDisenchantMonsterSpell(Game game) : base(game) { }
     public override bool UsesDisenchantment => true;
     protected override string ElementName => "disenchantment";
-    protected override Projectile Projectile(SaveGame saveGame) => saveGame.SingletonRepository.Projectiles.Get(nameof(DisenchantProjectile));
+    protected override Projectile Projectile(Game game) => game.SingletonRepository.Projectiles.Get(nameof(DisenchantProjectile));
     protected override int Damage(Monster monster) => monster.Health / 6 > 500 ? 500 : monster.Health / 6;
-    public override SpellResistantDetection[] SmartLearn => new SpellResistantDetection[] { SaveGame.SingletonRepository.SpellResistantDetections.Get(nameof(DisenSpellResistantDetection)) };
+    public override SpellResistantDetection[] SmartLearn => new SpellResistantDetection[] { Game.SingletonRepository.SpellResistantDetections.Get(nameof(DisenSpellResistantDetection)) };
 }

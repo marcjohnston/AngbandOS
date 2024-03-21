@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Gods;
 [Serializable]
 internal class HagargRyonisGod : God
 {
-    private HagargRyonisGod(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private HagargRyonisGod(Game game) : base(game) { } // This object is a singleton.
     public override string LongName => "Hagarg Ryonis, goddess of beasts";
     public override string ShortName => "Hagarg Ryonis";
     public override string FavorDescription => " ({0}% chance to avoid poison/life drain)";

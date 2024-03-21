@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class TeleportToTargetScript : Script, IScript
 {
-    private TeleportToTargetScript(SaveGame saveGame) : base(saveGame) { }
+    private TeleportToTargetScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script.
@@ -18,10 +18,10 @@ internal class TeleportToTargetScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        if (SaveGame.TargetWho == 0)
+        if (Game.TargetWho == 0)
         {
             return;
         }
-        SaveGame.TeleportPlayerTo(SaveGame.TargetRow, SaveGame.TargetCol);
+        Game.TeleportPlayerTo(Game.TargetRow, Game.TargetCol);
     }
 }

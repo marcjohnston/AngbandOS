@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Flavors;
 [Serializable]
 internal class GloopyGreenPotionReadableFlavor : PotionReadableFlavor
 {
-    private GloopyGreenPotionReadableFlavor(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private GloopyGreenPotionReadableFlavor(Game game) : base(game) { } // This object is a singleton.
     protected override string SymbolName => nameof(ExclamationPointSymbol);
     public override ColorEnum Color => ColorEnum.Green;
     public override string Name => "Gloopy Green";

@@ -10,9 +10,9 @@ namespace AngbandOS.Core.Projection;
 [Serializable]
 internal class TurnUndeadProjectile : Projectile
 {
-    private TurnUndeadProjectile(SaveGame saveGame) : base(saveGame) { }
+    private TurnUndeadProjectile(Game game) : base(game) { }
 
-    protected override Animation EffectAnimation => SaveGame.SingletonRepository.Animations.Get(nameof(WhiteControlAnimation));
+    protected override Animation EffectAnimation => Game.SingletonRepository.Animations.Get(nameof(WhiteControlAnimation));
 
     protected override bool ProjectileAngersMonster(Monster mPtr)
     {
@@ -23,7 +23,7 @@ internal class TurnUndeadProjectile : Projectile
 
     protected override bool AffectMonster(int who, Monster mPtr, int dam, int r)
     {
-        GridTile cPtr = SaveGame.Grid[mPtr.MapY][mPtr.MapX];
+        GridTile cPtr = Game.Grid[mPtr.MapY][mPtr.MapX];
         MonsterRace rPtr = mPtr.Race;
         bool seen = mPtr.IsVisible;
         bool obvious = false;
@@ -40,8 +40,8 @@ internal class TurnUndeadProjectile : Projectile
             {
                 obvious = true;
             }
-            doFear = SaveGame.DiceRoll(3, dam / 2) + 1;
-            if (rPtr.Level > SaveGame.DieRoll(dam - 10 < 1 ? 1 : dam - 10) + 10)
+            doFear = Game.DiceRoll(3, dam / 2) + 1;
+            if (rPtr.Level > Game.DieRoll(dam - 10 < 1 ? 1 : dam - 10) + 10)
             {
                 note = " is unaffected!";
                 obvious = false;

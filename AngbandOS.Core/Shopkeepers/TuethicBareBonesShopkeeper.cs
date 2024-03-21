@@ -8,7 +8,7 @@
 [Serializable]
 internal class TuethicBareBonesShopkeeper : Shopkeeper
 {
-    private TuethicBareBonesShopkeeper(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private TuethicBareBonesShopkeeper(Game game) : base(game) { } // This object is a singleton.
     public override string Name => "Tuethic Bare-Bones";
     public override int MaxCost =>  15000;
     public override int MinInflate =>  110;

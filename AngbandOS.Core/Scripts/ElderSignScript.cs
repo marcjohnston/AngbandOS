@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class ElderSignScript : Script, IScript
 {
-    private ElderSignScript(SaveGame saveGame) : base(saveGame) { }
+    private ElderSignScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script.
@@ -18,11 +18,11 @@ internal class ElderSignScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        if (!SaveGame.GridOpenNoItem(SaveGame.MapY, SaveGame.MapX))
+        if (!Game.GridOpenNoItem(Game.MapY, Game.MapX))
         {
-            SaveGame.MsgPrint("The object resists the spell.");
+            Game.MsgPrint("The object resists the spell.");
             return;
         }
-        SaveGame.CaveSetFeat(SaveGame.MapY, SaveGame.MapX, SaveGame.SingletonRepository.Tiles.Get(nameof(ElderSignSigilTile)));
+        Game.CaveSetFeat(Game.MapY, Game.MapX, Game.SingletonRepository.Tiles.Get(nameof(ElderSignSigilTile)));
     }
 }

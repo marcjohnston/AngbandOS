@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class ResistTrueScript : Script, IScript
 {
-    private ResistTrueScript(SaveGame saveGame) : base(saveGame) { }
+    private ResistTrueScript(Game game) : base(game) { }
 
     /// <summary>
     /// Adds between 20 and 40 turns of resistance to acid, lightning, fire, cold and poison.
@@ -18,10 +18,10 @@ internal class ResistTrueScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        SaveGame.AcidResistanceTimer.AddTimer(SaveGame.DieRoll(20) + 20);
-        SaveGame.LightningResistanceTimer.AddTimer(SaveGame.DieRoll(20) + 20);
-        SaveGame.FireResistanceTimer.AddTimer(SaveGame.DieRoll(20) + 20);
-        SaveGame.ColdResistanceTimer.AddTimer(SaveGame.DieRoll(20) + 20);
-        SaveGame.PoisonResistanceTimer.AddTimer(SaveGame.DieRoll(20) + 20);
+        Game.AcidResistanceTimer.AddTimer(Game.DieRoll(20) + 20);
+        Game.LightningResistanceTimer.AddTimer(Game.DieRoll(20) + 20);
+        Game.FireResistanceTimer.AddTimer(Game.DieRoll(20) + 20);
+        Game.ColdResistanceTimer.AddTimer(Game.DieRoll(20) + 20);
+        Game.PoisonResistanceTimer.AddTimer(Game.DieRoll(20) + 20);
     }
 }

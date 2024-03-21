@@ -10,26 +10,26 @@ namespace AngbandOS.Core.Projection;
 [Serializable]
 internal class LightWeakProjectile : Projectile
 {
-    private LightWeakProjectile(SaveGame saveGame) : base(saveGame) { }
+    private LightWeakProjectile(Game game) : base(game) { }
 
-    protected override ProjectileGraphic? BoltProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get(nameof(BrightWhiteBoltProjectileGraphic));
+    protected override ProjectileGraphic? BoltProjectileGraphic => Game.SingletonRepository.ProjectileGraphics.Get(nameof(BrightWhiteBoltProjectileGraphic));
 
-    protected override Animation EffectAnimation => SaveGame.SingletonRepository.Animations.Get(nameof(BrightWhiteCloudAnimation));
+    protected override Animation EffectAnimation => Game.SingletonRepository.Animations.Get(nameof(BrightWhiteCloudAnimation));
 
     protected override bool AffectFloor(int y, int x)
     {
-        GridTile cPtr = SaveGame.Grid[y][x];
+        GridTile cPtr = Game.Grid[y][x];
         bool obvious = false;
         cPtr.TileFlags.Set(GridTile.SelfLit);
-        SaveGame.NoteSpot(y, x);
-        SaveGame.RedrawSingleLocation(y, x);
-        if (SaveGame.PlayerCanSeeBold(y, x))
+        Game.NoteSpot(y, x);
+        Game.RedrawSingleLocation(y, x);
+        if (Game.PlayerCanSeeBold(y, x))
         {
             obvious = true;
         }
         if (cPtr.MonsterIndex != 0)
         {
-            SaveGame.UpdateMonsterVisibility(cPtr.MonsterIndex, false);
+            Game.UpdateMonsterVisibility(cPtr.MonsterIndex, false);
         }
         return obvious;
     }

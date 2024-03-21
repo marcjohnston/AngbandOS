@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Races;
 [Serializable]
 internal class NibelungRace : Race
 {
-    private NibelungRace(SaveGame saveGame) : base(saveGame) { }
+    private NibelungRace(Game game) : base(game) { }
     public override string Title => "Nibelung";
     public override int[] AbilityBonus => new int[] { 1, -1, 2, 0, 2, -4 };
     public override int BaseDisarmBonus => 3;
@@ -63,19 +63,19 @@ internal class NibelungRace : Race
 
     public override void CalcBonuses()
     {
-        SaveGame.HasDisenchantResistance = true;
-        SaveGame.HasDarkResistance = true;
+        Game.HasDisenchantResistance = true;
+        Game.HasDarkResistance = true;
     }
 
     public override void UseRacialPower()
     {
         // Nibelungen can detect traps, doors, and stairs
-        if (SaveGame.CheckIfRacialPowerWorks(5, 5, Ability.Wisdom, 10))
+        if (Game.CheckIfRacialPowerWorks(5, 5, Ability.Wisdom, 10))
         {
-            SaveGame.MsgPrint("You examine your surroundings.");
-            SaveGame.DetectTraps();
-            SaveGame.DetectDoors();
-            SaveGame.DetectStairs();
+            Game.MsgPrint("You examine your surroundings.");
+            Game.DetectTraps();
+            Game.DetectDoors();
+            Game.DetectStairs();
         }
     }
 }

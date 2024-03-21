@@ -8,7 +8,7 @@
 [Serializable]
 internal class LumwiseTheMadShopkeeper : Shopkeeper
 {
-    private LumwiseTheMadShopkeeper(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private LumwiseTheMadShopkeeper(Game game) : base(game) { } // This object is a singleton.
     public override string Name => "Lumwise the Mad";
     public override int MaxCost =>  15000;
     public override int MinInflate =>  110;

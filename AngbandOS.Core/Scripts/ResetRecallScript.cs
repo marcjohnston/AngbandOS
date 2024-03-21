@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class ResetRecallScript : Script, IScript
 {
-    private ResetRecallScript(SaveGame saveGame) : base(saveGame) { }
+    private ResetRecallScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script.
@@ -18,9 +18,9 @@ internal class ResetRecallScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        string ppp = $"Reset to which level (1-{SaveGame.CurDungeon.RecallLevel}): ";
-        string def = $"{Math.Max(SaveGame.CurrentDepth, 1)}";
-        if (!SaveGame.GetString(ppp, out string tmpVal, def, 10))
+        string ppp = $"Reset to which level (1-{Game.CurDungeon.RecallLevel}): ";
+        string def = $"{Math.Max(Game.CurrentDepth, 1)}";
+        if (!Game.GetString(ppp, out string tmpVal, def, 10))
         {
             return;
         }
@@ -32,10 +32,10 @@ internal class ResetRecallScript : Script, IScript
         {
             dummy = 1;
         }
-        if (dummy > SaveGame.CurDungeon.RecallLevel)
+        if (dummy > Game.CurDungeon.RecallLevel)
         {
-            dummy = SaveGame.CurDungeon.RecallLevel;
+            dummy = Game.CurDungeon.RecallLevel;
         }
-        SaveGame.MsgPrint($"Recall depth set to level {dummy}.");
+        Game.MsgPrint($"Recall depth set to level {dummy}.");
     }
 }

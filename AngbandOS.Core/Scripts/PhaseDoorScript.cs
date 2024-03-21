@@ -10,13 +10,13 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class PhaseDoorScript : Script, IScript
 {
-    private PhaseDoorScript(SaveGame saveGame) : base(saveGame) { }
+    private PhaseDoorScript(Game game) : base(game) { }
 
     /// <summary>
     /// Randomly teleports the player within a range of 10 tiles.
     /// </summary>
     public void ExecuteScript()
     {
-        SaveGame.RunScriptInt(nameof(TeleportSelfScript), 10);
+        Game.RunScriptInt(nameof(TeleportSelfScript), 10);
     }
 }

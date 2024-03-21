@@ -10,20 +10,20 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class SetOfGauntletsOfGhoulsFixedArtifact : FixedArtifact, IFixedArtifactActivatible
 {
-    private SetOfGauntletsOfGhoulsFixedArtifact(SaveGame saveGame) : base(saveGame) { }
+    private SetOfGauntletsOfGhoulsFixedArtifact(Game game) : base(game) { }
 
     protected override string BaseItemFactoryName => nameof(GauntletGlovesArmorItemFactory);
 
     // Ghouls shoot cold bolts
     public void ActivateItem(Item item)
     {
-        SaveGame.MsgPrint("Your gauntlets are covered in frost...");
-        if (!SaveGame.GetDirectionWithAim(out int dir))
+        Game.MsgPrint("Your gauntlets are covered in frost...");
+        if (!Game.GetDirectionWithAim(out int dir))
         {
             return;
         }
-        SaveGame.FireBolt(SaveGame.SingletonRepository.Projectiles.Get(nameof(Projection.ColdProjectile)), dir, base.SaveGame.DiceRoll(6, 8));
-        item.RechargeTimeLeft = base.SaveGame.RandomLessThan(7) + 7;
+        Game.FireBolt(Game.SingletonRepository.Projectiles.Get(nameof(Projection.ColdProjectile)), dir, base.Game.DiceRoll(6, 8));
+        item.RechargeTimeLeft = base.Game.RandomLessThan(7) + 7;
     }
     public string DescribeActivationEffect => "frost bolt (6d8) every 7+d7 turns";
 

@@ -10,7 +10,7 @@ namespace AngbandOS.Core.MonsterRaces;
 [Serializable]
 internal class LargeYellowSnakeMonsterRace : MonsterRace
 {
-    protected LargeYellowSnakeMonsterRace(SaveGame saveGame) : base(saveGame) { }
+    protected LargeYellowSnakeMonsterRace(Game game) : base(game) { }
 
     protected override string SymbolName => nameof(UpperJSymbol);
     public override ColorEnum Color => ColorEnum.BrightYellow;

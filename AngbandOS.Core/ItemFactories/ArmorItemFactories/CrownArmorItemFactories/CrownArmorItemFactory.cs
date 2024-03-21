@@ -18,31 +18,31 @@ internal abstract class CrownArmorItemFactory : ArmorItemFactory
     protected override void ApplyRandomGoodRareCharacteristics(Item item)
     {
         IArtifactBias artifactBias = null;
-        switch (SaveGame.DieRoll(8))
+        switch (Game.DieRoll(8))
         {
             case 1:
-                item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(HatOfTheMagiRareItem));
-                item.ApplyRandomResistance(ref artifactBias, SaveGame.DieRoll(22) + 16);
+                item.RareItem = Game.SingletonRepository.RareItems.Get(nameof(HatOfTheMagiRareItem));
+                item.ApplyRandomResistance(ref artifactBias, Game.DieRoll(22) + 16);
                 break;
             case 2:
-                item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(HatOfMightRareItem));
-                item.ApplyRandomResistance(ref artifactBias, SaveGame.DieRoll(22) + 16);
+                item.RareItem = Game.SingletonRepository.RareItems.Get(nameof(HatOfMightRareItem));
+                item.ApplyRandomResistance(ref artifactBias, Game.DieRoll(22) + 16);
                 break;
             case 3:
-                item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(HatOfTelepathyRareItem));
+                item.RareItem = Game.SingletonRepository.RareItems.Get(nameof(HatOfTelepathyRareItem));
                 break;
             case 4:
-                item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(HatOfRegenerationRareItem));
+                item.RareItem = Game.SingletonRepository.RareItems.Get(nameof(HatOfRegenerationRareItem));
                 break;
             case 5:
             case 6:
-                item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(HatOfLordlinessRareItem));
-                item.ApplyRandomResistance(ref artifactBias, SaveGame.DieRoll(22) + 16);
+                item.RareItem = Game.SingletonRepository.RareItems.Get(nameof(HatOfLordlinessRareItem));
+                item.ApplyRandomResistance(ref artifactBias, Game.DieRoll(22) + 16);
                 break;
             case 7:
             case 8:
-                item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(HatOfSeeingRareItem));
-                if (SaveGame.DieRoll(3) == 1)
+                item.RareItem = Game.SingletonRepository.RareItems.Get(nameof(HatOfSeeingRareItem));
+                if (Game.DieRoll(3) == 1)
                 {
                     item.RandomArtifactItemCharacteristics.Telepathy = true;
                 }
@@ -52,30 +52,30 @@ internal abstract class CrownArmorItemFactory : ArmorItemFactory
 
     protected override void ApplyRandomPoorRareCharacteristics(Item item)
     {
-        switch (SaveGame.DieRoll(7))
+        switch (Game.DieRoll(7))
         {
             case 1:
             case 2:
-                item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(HatOfStupidityRareItem));
+                item.RareItem = Game.SingletonRepository.RareItems.Get(nameof(HatOfStupidityRareItem));
                 break;
             case 3:
             case 4:
-                item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(HatOfNaivetyRareItem));
+                item.RareItem = Game.SingletonRepository.RareItems.Get(nameof(HatOfNaivetyRareItem));
                 break;
             case 5:
-                item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(HatOfUglinessRareItem));
+                item.RareItem = Game.SingletonRepository.RareItems.Get(nameof(HatOfUglinessRareItem));
                 break;
             case 6:
-                item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(HatOfSicklinessRareItem));
+                item.RareItem = Game.SingletonRepository.RareItems.Get(nameof(HatOfSicklinessRareItem));
                 break;
             case 7:
-                item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(HatOfTeleportationRareItem));
+                item.RareItem = Game.SingletonRepository.RareItems.Get(nameof(HatOfTeleportationRareItem));
                 break;
         }
     }
 
-    public CrownArmorItemFactory(SaveGame saveGame) : base(saveGame) { }
-    public override ItemClass ItemClass => SaveGame.SingletonRepository.ItemClasses.Get(nameof(CrownsItemClass));
+    public CrownArmorItemFactory(Game game) : base(game) { }
+    public override ItemClass ItemClass => Game.SingletonRepository.ItemClasses.Get(nameof(CrownsItemClass));
 
     /// <summary>
     /// Applies standard magic to crowns.
@@ -92,7 +92,7 @@ internal abstract class CrownArmorItemFactory : ArmorItemFactory
 
             if (power > 1)
             {
-                if (SaveGame.DieRoll(20) == 1)
+                if (Game.DieRoll(20) == 1)
                 {
                     item.CreateRandomArtifact(false);
                 }
@@ -107,7 +107,7 @@ internal abstract class CrownArmorItemFactory : ArmorItemFactory
             }
         }
     }
-    public override BaseInventorySlot BaseWieldSlot => SaveGame.SingletonRepository.InventorySlots.Get(nameof(HeadInventorySlot));
+    public override BaseInventorySlot BaseWieldSlot => Game.SingletonRepository.InventorySlots.Get(nameof(HeadInventorySlot));
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Crown;
     public override bool HatesAcid => true;
 

@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Mutations.PassiveMutations;
 [Serializable]
 internal class FleshRotPassiveMutation : Mutation
 {
-    private FleshRotPassiveMutation(SaveGame saveGame) : base(saveGame) { }
+    private FleshRotPassiveMutation(Game game) : base(game) { }
     public override int Frequency => 3;
     public override string GainMessage => "Your flesh is afflicted by a rotting disease!";
     public override string HaveMessage => "Your flesh is rotting (-2 CON, -1 CHR).";
@@ -19,15 +19,15 @@ internal class FleshRotPassiveMutation : Mutation
 
     public override void OnGain()
     {
-        SaveGame.ConstitutionBonus -= 2;
-        SaveGame.CharismaBonus -= 1;
-        SaveGame.SuppressRegen = true;
+        Game.ConstitutionBonus -= 2;
+        Game.CharismaBonus -= 1;
+        Game.SuppressRegen = true;
     }
 
     public override void OnLose()
     {
-        SaveGame.ConstitutionBonus += 2;
-        SaveGame.CharismaBonus += 1;
-        SaveGame.SuppressRegen = false;
+        Game.ConstitutionBonus += 2;
+        Game.CharismaBonus += 1;
+        Game.SuppressRegen = false;
     }
 }

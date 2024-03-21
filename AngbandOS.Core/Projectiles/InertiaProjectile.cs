@@ -10,11 +10,11 @@ namespace AngbandOS.Core.Projection;
 [Serializable]
 internal class InertiaProjectile : Projectile
 {
-    private InertiaProjectile(SaveGame saveGame) : base(saveGame) { }
+    private InertiaProjectile(Game game) : base(game) { }
 
-    protected override ProjectileGraphic? BoltProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get(nameof(OrangeBoltProjectileGraphic));
+    protected override ProjectileGraphic? BoltProjectileGraphic => Game.SingletonRepository.ProjectileGraphics.Get(nameof(OrangeBoltProjectileGraphic));
 
-    protected override ProjectileGraphic? ImpactProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get(nameof(OrangeSplatProjectileGraphic));
+    protected override ProjectileGraphic? ImpactProjectileGraphic => Game.SingletonRepository.ProjectileGraphics.Get(nameof(OrangeSplatProjectileGraphic));
 
     protected override bool AffectMonster(int who, Monster mPtr, int dam, int r)
     {
@@ -30,12 +30,12 @@ internal class InertiaProjectile : Projectile
         {
             note = " resists.";
             dam *= 3;
-            dam /= SaveGame.DieRoll(6) + 6;
+            dam /= Game.DieRoll(6) + 6;
         }
         else
         {
             if (rPtr.Unique ||
-                rPtr.Level > SaveGame.DieRoll(dam - 10 < 1 ? 1 : dam - 10) + 10)
+                rPtr.Level > Game.DieRoll(dam - 10 < 1 ? 1 : dam - 10) + 10)
             {
                 obvious = false;
             }
@@ -54,20 +54,20 @@ internal class InertiaProjectile : Projectile
 
     protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
     {
-        bool blind = SaveGame.BlindnessTimer.Value != 0;
+        bool blind = Game.BlindnessTimer.Value != 0;
         if (dam > 1600)
         {
             dam = 1600;
         }
         dam = (dam + r) / (r + 1);
-        Monster mPtr = SaveGame.Monsters[who];
+        Monster mPtr = Game.Monsters[who];
         string killer = mPtr.IndefiniteVisibleName;
         if (blind)
         {
-            SaveGame.MsgPrint("You are hit by something slow!");
+            Game.MsgPrint("You are hit by something slow!");
         }
-        SaveGame.SlowTimer.AddTimer(SaveGame.RandomLessThan(4) + 4);
-        SaveGame.TakeHit(dam, killer);
+        Game.SlowTimer.AddTimer(Game.RandomLessThan(4) + 4);
+        Game.TakeHit(dam, killer);
         return true;
     }
 }

@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Vaults;
 [Serializable]
 internal class LesserVaultmirrorVault : Vault
 {
-    private LesserVaultmirrorVault(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private LesserVaultmirrorVault(Game game) : base(game) { } // This object is a singleton.
     public override string Name => "Lesser vault (mirror)";
     public override int Category => 7;
     public override int Height => 17;

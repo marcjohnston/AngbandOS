@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class ChaosBoltScript : Script, IScript
 {
-    private ChaosBoltScript(SaveGame saveGame) : base(saveGame) { }
+    private ChaosBoltScript(Game game) : base(game) { }
 
     /// <summary>
     /// Fires a bolt or a beam of chaos in a chosen direction.
@@ -19,24 +19,24 @@ internal class ChaosBoltScript : Script, IScript
     public void ExecuteScript()
     {
         int beam;
-        switch (SaveGame.BaseCharacterClass.ID)
+        switch (Game.BaseCharacterClass.ID)
         {
             case CharacterClass.Mage:
-                beam = SaveGame.ExperienceLevel.Value;
+                beam = Game.ExperienceLevel.Value;
                 break;
 
             case CharacterClass.HighMage:
-                beam = SaveGame.ExperienceLevel.Value + 10;
+                beam = Game.ExperienceLevel.Value + 10;
                 break;
 
             default:
-                beam = SaveGame.ExperienceLevel.Value / 2;
+                beam = Game.ExperienceLevel.Value / 2;
                 break;
         }
-        if (!SaveGame.GetDirectionWithAim(out int dir))
+        if (!Game.GetDirectionWithAim(out int dir))
         {
             return;
         }
-        SaveGame.FireBoltOrBeam(beam, SaveGame.SingletonRepository.Projectiles.Get(nameof(ChaosProjectile)), dir, SaveGame.DiceRoll(10 + ((SaveGame.ExperienceLevel.Value - 5) / 4), 8));
+        Game.FireBoltOrBeam(beam, Game.SingletonRepository.Projectiles.Get(nameof(ChaosProjectile)), dir, Game.DiceRoll(10 + ((Game.ExperienceLevel.Value - 5) / 4), 8));
     }
 }

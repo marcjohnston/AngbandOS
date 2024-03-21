@@ -10,13 +10,13 @@ namespace AngbandOS.Core.AttackEffects;
 [Serializable]
 internal class LoseDexAttackEffect : AttackEffect
 {
-    private LoseDexAttackEffect(SaveGame saveGame) : base(saveGame) { }
+    private LoseDexAttackEffect(Game game) : base(game) { }
     public override int Power => 0;
     public override string Description => "reduce dexterity";
     public override void ApplyToPlayer(int monsterLevel, int monsterIndex, int armorClass, string monsterDescription, Monster monster, ref bool obvious, ref int damage, ref bool blinked)
     {
-        SaveGame.TakeHit(damage, monsterDescription);
-        if (SaveGame.TryDecreasingAbilityScore(Ability.Dexterity))
+        Game.TakeHit(damage, monsterDescription);
+        if (Game.TryDecreasingAbilityScore(Ability.Dexterity))
         {
             obvious = true;
         }

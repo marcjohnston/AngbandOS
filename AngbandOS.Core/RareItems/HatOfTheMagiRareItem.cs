@@ -10,12 +10,12 @@ namespace AngbandOS.Core.RareItems;
 [Serializable]
 internal class HatOfTheMagiRareItem : RareItem
 {
-    private HatOfTheMagiRareItem(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private HatOfTheMagiRareItem(Game game) : base(game) { } // This object is a singleton.
     public override void ApplyMagic(Item item)
     {
-        item.RandomPower = SaveGame.SingletonRepository.Powers.ToWeightedRandom(_power => _power.IsAbility == true).Choose();
+        item.RandomPower = Game.SingletonRepository.Powers.ToWeightedRandom(_power => _power.IsAbility == true).Choose();
     }
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(CloseBraceSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(CloseBraceSymbol));
     public override ColorEnum Color => ColorEnum.Brown;
     public override string Name => "Hat of the Magi";
     public override int Cost => 7500;

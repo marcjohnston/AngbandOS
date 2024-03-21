@@ -10,9 +10,9 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class BoozePotionItemFactory : PotionItemFactory
 {
-    private BoozePotionItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private BoozePotionItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(ExclamationPointSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(ExclamationPointSymbol));
     public override string Name => "Booze";
 
     public override int[] Chance => new int[] { 1, 0, 0, 0 };
@@ -26,37 +26,37 @@ internal class BoozePotionItemFactory : PotionItemFactory
         bool identified = false;
 
         // Confusion makes you confused and possibly other effects
-        if (!(SaveGame.HasConfusionResistance || SaveGame.HasChaosResistance))
+        if (!(Game.HasConfusionResistance || Game.HasChaosResistance))
         {
-            if (SaveGame.ConfusedTimer.AddTimer(SaveGame.RandomLessThan(20) + 15))
+            if (Game.ConfusedTimer.AddTimer(Game.RandomLessThan(20) + 15))
             {
                 identified = true;
             }
             // 50% chance of having hallucinations
-            if (SaveGame.DieRoll(2) == 1)
+            if (Game.DieRoll(2) == 1)
             {
-                if (SaveGame.HallucinationsTimer.AddTimer(SaveGame.RandomLessThan(150) + 150))
+                if (Game.HallucinationsTimer.AddTimer(Game.RandomLessThan(150) + 150))
                 {
                     identified = true;
                 }
             }
             // 1 in 13 chance of blacking out and waking up somewhere else
-            if (SaveGame.DieRoll(13) == 1)
+            if (Game.DieRoll(13) == 1)
             {
                 identified = true;
                 // 1 in 3 chance of losing your memories after blacking out
-                if (SaveGame.DieRoll(3) == 1)
+                if (Game.DieRoll(3) == 1)
                 {
-                    SaveGame.LoseAllInfo();
+                    Game.LoseAllInfo();
                 }
                 else
                 {
-                    SaveGame.RunScript(nameof(DarkScript));
+                    Game.RunScript(nameof(DarkScript));
                 }
-                SaveGame.RunScriptInt(nameof(TeleportSelfScript), 100);
-                SaveGame.RunScript(nameof(DarkScript));
-                SaveGame.MsgPrint("You wake up somewhere with a sore head...");
-                SaveGame.MsgPrint("You can't remember a thing, or how you got here!");
+                Game.RunScriptInt(nameof(TeleportSelfScript), 100);
+                Game.RunScript(nameof(DarkScript));
+                Game.MsgPrint("You wake up somewhere with a sore head...");
+                Game.MsgPrint("You can't remember a thing, or how you got here!");
             }
         }
         return identified;
@@ -64,8 +64,8 @@ internal class BoozePotionItemFactory : PotionItemFactory
 
     public override bool Smash(int who, int y, int x)
     {
-        SaveGame.Project(who, 2, y, x, 0, SaveGame.SingletonRepository.Projectiles.Get(nameof(OldConfProjectile)), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
+        Game.Project(who, 2, y, x, 0, Game.SingletonRepository.Projectiles.Get(nameof(OldConfProjectile)), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
         return true;
     }
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

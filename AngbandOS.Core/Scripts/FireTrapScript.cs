@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class FireTrapScript : Script, IScript
 {
-    private FireTrapScript(SaveGame saveGame) : base(saveGame) { }
+    private FireTrapScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script.
@@ -19,8 +19,8 @@ internal class FireTrapScript : Script, IScript
     public void ExecuteScript()
     {
         // Do 4d6 fire damage
-        SaveGame.MsgPrint("You are enveloped in flames!");
-        int damage = SaveGame.DiceRoll(4, 6);
-        SaveGame.FireDam(damage, "a fire trap");
+        Game.MsgPrint("You are enveloped in flames!");
+        int damage = Game.DiceRoll(4, 6);
+        Game.FireDam(damage, "a fire trap");
     }
 }

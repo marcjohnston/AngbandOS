@@ -13,7 +13,7 @@ namespace AngbandOS.Core.StoreCommands;
 internal class HireEscortStoreCommand : StoreCommand
 
 {
-    private HireEscortStoreCommand(SaveGame saveGame) : base(saveGame) { }
+    private HireEscortStoreCommand(Game game) : base(game) { }
     public override char KeyChar => 'r';
 
     public override string Description => "Hire an escort";

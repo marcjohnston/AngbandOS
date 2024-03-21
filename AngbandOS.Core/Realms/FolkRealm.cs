@@ -12,7 +12,7 @@ namespace AngbandOS.Core.Realms;
 [Serializable]
 internal class FolkRealm : Realm
 {
-    private FolkRealm(SaveGame savedGame) : base(savedGame) { }
+    private FolkRealm(Game savedGame) : base(savedGame) { }
 
     public override string[] Info => new string[] {
         "The Folk realm is the least specialised of all the realms.",

@@ -9,12 +9,12 @@ namespace AngbandOS.Core;
 
 internal class WeightedRandomAction
 {
-    private readonly SaveGame SaveGame;
+    private readonly Game Game;
     private Dictionary<int, Action> values = new Dictionary<int, Action>();
 
-    public WeightedRandomAction(SaveGame saveGame)
+    public WeightedRandomAction(Game game)
     {
-        SaveGame = saveGame;
+        Game = game;
     }
 
     public void Add(int weight, Action value)
@@ -26,7 +26,7 @@ internal class WeightedRandomAction
     }
     public void Choose()
     {
-        int choice = SaveGame.RandomLessThan(values.Count);
+        int choice = Game.RandomLessThan(values.Count);
         values[choice]();
     }
 }

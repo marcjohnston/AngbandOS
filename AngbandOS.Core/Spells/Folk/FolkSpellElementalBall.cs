@@ -10,10 +10,10 @@ namespace AngbandOS.Core.Spells.Folk;
 [Serializable]
 internal class FolkSpellElementalBall : Spell
 {
-    private FolkSpellElementalBall(SaveGame saveGame) : base(saveGame) { }
+    private FolkSpellElementalBall(Game game) : base(game) { }
     protected override string? CastScriptName => nameof(ElementalBallScript);
 
     public override string Name => "Teleport Away";
 
-    protected override string LearnedDetails => $"dam {75 + SaveGame.ExperienceLevel.Value}";
+    protected override string LearnedDetails => $"dam {75 + Game.ExperienceLevel.Value}";
 }

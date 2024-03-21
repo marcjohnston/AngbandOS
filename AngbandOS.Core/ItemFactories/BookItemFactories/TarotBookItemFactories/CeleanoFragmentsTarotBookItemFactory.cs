@@ -10,7 +10,7 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class CeleanoFragmentsTarotBookItemFactory : TarotBookItemFactory
 {
-    private CeleanoFragmentsTarotBookItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private CeleanoFragmentsTarotBookItemFactory(Game game) : base(game) { } // This object is a singleton.
 
 
     /// <summary>
@@ -18,7 +18,7 @@ internal class CeleanoFragmentsTarotBookItemFactory : TarotBookItemFactory
     /// </summary>
     public override int ExperienceGainDivisorForDestroying => 1;
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(QuestionMarkSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(QuestionMarkSymbol));
     public override ColorEnum Color => ColorEnum.Pink;
     public override string Name => "[Celeano Fragments]";
 
@@ -40,7 +40,7 @@ internal class CeleanoFragmentsTarotBookItemFactory : TarotBookItemFactory
     public override bool IsHighLevelBook => true;
     public override int Weight => 30;
     public override bool KindIsGood => true;
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 
     protected override string[] SpellNames => new string[]
     {

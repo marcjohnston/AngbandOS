@@ -10,7 +10,7 @@ namespace AngbandOS.Core.MonsterFilters;
 [Serializable]
 internal class JellyMonsterFilter : MonsterFilter
 {
-    private JellyMonsterFilter(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private JellyMonsterFilter(Game game) : base(game) { } // This object is a singleton.
     public override bool Matches(MonsterRace rPtr)
     {
         if (rPtr.Unique)

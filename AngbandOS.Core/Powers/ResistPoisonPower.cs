@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Powers;
 [Serializable]
 internal class ResistPoisonPower : Power
 {
-    private ResistPoisonPower(SaveGame saveGame) : base(saveGame) { } // This object is a singleton
+    private ResistPoisonPower(Game game) : base(game) { } // This object is a singleton
     public override bool IsResistance => true;
     public override void Activate(Item item)
     {

@@ -10,8 +10,8 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal abstract class NatureBookItemFactory : BookItemFactory
 {
-    public NatureBookItemFactory(SaveGame saveGame) : base(saveGame) { }
-    public override ItemClass ItemClass => SaveGame.SingletonRepository.ItemClasses.Get(nameof(NatureSpellBooksItemClass));
+    public NatureBookItemFactory(Game game) : base(game) { }
+    public override ItemClass ItemClass => Game.SingletonRepository.ItemClasses.Get(nameof(NatureSpellBooksItemClass));
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.NatureBook;
     public override string RealmName => "Nature";
 

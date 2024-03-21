@@ -9,7 +9,7 @@ namespace AngbandOS.Core;
 
 /// <summary>
 /// A dead player character, holding just the bare bones needed for the high score table and
-/// savegame preview, or to create a new character based on the previous one.
+/// game preview, or to create a new character based on the previous one.
 /// </summary>
 [Serializable]
 internal class ExPlayer

@@ -10,7 +10,7 @@ namespace AngbandOS.Core.AttackTypes;
 [Serializable]
 internal class GenericAttack : Attack
 {
-    public GenericAttack(SaveGame saveGame, AttackDefinition definition) : base(saveGame)
+    public GenericAttack(Game game, AttackDefinition definition) : base(game)
     {
         MonsterAction = definition.MonsterAction;
         Key = definition.Key;
@@ -33,7 +33,7 @@ internal class GenericAttack : Attack
     /// <summary>
     /// Returns the action message to be displayed, when the attack targets the player.
     /// </summary>
-    /// <param name="saveGame"></param>
+    /// <param name="game"></param>
     /// <returns></returns>
     public override string PlayerAction { get; }
 

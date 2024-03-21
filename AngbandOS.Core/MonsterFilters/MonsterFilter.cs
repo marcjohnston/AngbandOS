@@ -10,11 +10,11 @@ namespace AngbandOS.Core.MonsterFilters;
 [Serializable]
 internal abstract class MonsterFilter : IGetKey, IMonsterFilter
 {
-    protected readonly SaveGame SaveGame;
+    protected readonly Game Game;
 
-    protected MonsterFilter(SaveGame saveGame)
+    protected MonsterFilter(Game game)
     {
-        SaveGame = saveGame;
+        Game = game;
     }
     public virtual string Key => GetType().Name;
     public string GetKey => Key;
@@ -33,7 +33,7 @@ internal abstract class MonsterFilter : IGetKey, IMonsterFilter
     /// <summary>
     /// Returns true, if a monster matches the selector.
     /// </summary>
-    /// <param name="saveGame"></param>
+    /// <param name="game"></param>
     /// <param name="rPtr">The monster race to check.</param>
     /// <returns></returns>
     public abstract bool Matches(MonsterRace rPtr);

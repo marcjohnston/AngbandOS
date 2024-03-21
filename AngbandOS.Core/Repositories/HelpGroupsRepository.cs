@@ -10,18 +10,18 @@ namespace AngbandOS.Core.Repositories;
 [Serializable]
 internal class HelpGroupsRepository : DictionaryRepository<HelpGroup>
 {
-    public HelpGroupsRepository(SaveGame saveGame) : base(saveGame) { }
+    public HelpGroupsRepository(Game game) : base(game) { }
     public override void Load()
     {
-        if (SaveGame.Configuration.HelpGroups == null)
+        if (Game.Configuration.HelpGroups == null)
         {
             base.Load();
         }
         else
         {
-            foreach (HelpGroupDefinition helpGroupDefinition in SaveGame.Configuration.HelpGroups)
+            foreach (HelpGroupDefinition helpGroupDefinition in Game.Configuration.HelpGroups)
             {
-                Add(new GenericHelpGroup(SaveGame, helpGroupDefinition));
+                Add(new GenericHelpGroup(Game, helpGroupDefinition));
             }
         }
     }

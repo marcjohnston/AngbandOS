@@ -13,14 +13,14 @@ namespace AngbandOS.Core.Activations;
 [Serializable]
 internal class TeleAwayActivation : DirectionalActivation
 {
-    private TeleAwayActivation(SaveGame saveGame) : base(saveGame) { }
+    private TeleAwayActivation(Game game) : base(game) { }
     public override int RandomChance => 85;
 
     public override int RechargeTime() => 200;
 
     protected override bool Activate(int direction)
     {
-        SaveGame.FireBeam(SaveGame.SingletonRepository.Projectiles.Get(nameof(TeleportAwayAllProjectile)), direction, SaveGame.ExperienceLevel.Value);
+        Game.FireBeam(Game.SingletonRepository.Projectiles.Get(nameof(TeleportAwayAllProjectile)), direction, Game.ExperienceLevel.Value);
         return true;
     }
 

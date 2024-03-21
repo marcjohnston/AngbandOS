@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Powers;
 [Serializable]
 internal class SustainIntelligencePower : Power
 {
-    private SustainIntelligencePower(SaveGame saveGame) : base(saveGame) { } // This object is a singleton
+    private SustainIntelligencePower(Game game) : base(game) { } // This object is a singleton
     public override bool IsSustain => true;
     public override void Activate(Item item)
     {

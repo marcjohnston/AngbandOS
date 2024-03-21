@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Races;
 [Serializable]
 internal class HighElfRace : Race
 {
-    private HighElfRace(SaveGame saveGame) : base(saveGame) { }
+    private HighElfRace(Game game) : base(game) { }
     public override string Title => "High Elf";
     public override int[] AbilityBonus => new int[] { 1, 3, 2, 3, 1, 5 };
     public override int BaseDisarmBonus => 4;
@@ -51,6 +51,6 @@ internal class HighElfRace : Race
     public override string CreateRandomName() => CreateRandomNameFromSyllables(new ElvishSyllables());
     public override void CalcBonuses()
     {
-        SaveGame.HasSeeInvisibility = true;
+        Game.HasSeeInvisibility = true;
     }
 }

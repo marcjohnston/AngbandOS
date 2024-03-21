@@ -10,7 +10,7 @@ namespace AngbandOS.Core.MonsterSpells;
 [Serializable]
 internal abstract class CauseWoundsMonsterSpell : MonsterSpell
 {
-    protected CauseWoundsMonsterSpell(SaveGame saveGame) : base(saveGame) { }
+    protected CauseWoundsMonsterSpell(Game game) : base(game) { }
     public override bool IsAttack => true;
     public override bool Annoys => true;
 
@@ -39,44 +39,44 @@ internal abstract class CauseWoundsMonsterSpell : MonsterSpell
     /// Returns an additional amount of time the player will bleed.  Returns 0, by default.
     /// </summary>
     protected virtual int TimedBleeding => 0;
-    public override void ExecuteOnPlayer(SaveGame saveGame, Monster monster)
+    public override void ExecuteOnPlayer(Game game, Monster monster)
     {
-        if (SaveGame.RandomLessThan(100) < saveGame.SkillSavingThrow)
+        if (Game.RandomLessThan(100) < game.SkillSavingThrow)
         {
-            saveGame.MsgPrint("You resist the effects!");
+            game.MsgPrint("You resist the effects!");
         }
         else
         {
             string monsterDescription = monster.IndefiniteVisibleName;
 
-            saveGame.CurseEquipment(CurseEquipmentChance, HeavyCurseEquipmentChance);
-            saveGame.TakeHit(Damage, monsterDescription);
+            game.CurseEquipment(CurseEquipmentChance, HeavyCurseEquipmentChance);
+            game.TakeHit(Damage, monsterDescription);
 
             if (TimedBleeding > 0)
             {
-                saveGame.BleedingTimer.AddTimer(TimedBleeding);
+                game.BleedingTimer.AddTimer(TimedBleeding);
             }
         }
     }
 
-    public override void ExecuteOnMonster(SaveGame saveGame, Monster monster, Monster target)
+    public override void ExecuteOnMonster(Game game, Monster monster, Monster target)
     {
         int rlev = monster.Race.Level >= 1 ? monster.Race.Level : 1;
         string targetName = target.Name;
-        bool blind = saveGame.BlindnessTimer.Value != 0;
+        bool blind = game.BlindnessTimer.Value != 0;
         bool seeTarget = !blind && target.IsVisible;
         MonsterRace targetRace = target.Race;
 
-        if (targetRace.Level > SaveGame.DieRoll(rlev - 10 < 1 ? 1 : rlev - 10) + 10)
+        if (targetRace.Level > Game.DieRoll(rlev - 10 < 1 ? 1 : rlev - 10) + 10)
         {
             if (seeTarget)
             {
-                saveGame.MsgPrint($"{targetName} resists!");
+                game.MsgPrint($"{targetName} resists!");
             }
         }
         else
         {
-            target.TakeDamageFromAnotherMonster(saveGame, Damage, out _, " is destroyed.");
+            target.TakeDamageFromAnotherMonster(game, Damage, out _, " is destroyed.");
         }
     }
 }

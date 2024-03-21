@@ -13,16 +13,16 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class GridTile : IItemContainer
 {
-    protected readonly SaveGame SaveGame;
+    protected readonly Game Game;
     public readonly int X;
     public readonly int Y;
-    public GridTile(SaveGame saveGame, int x, int y)
+    public GridTile(Game game, int x, int y)
     {
-        SaveGame = saveGame;
+        Game = game;
         X = x;
         Y = y;
-        BackgroundFeature = SaveGame.SingletonRepository.Tiles.Get(nameof(NothingTile));
-        FeatureType = SaveGame.SingletonRepository.Tiles.Get(nameof(NothingTile));
+        BackgroundFeature = Game.SingletonRepository.Tiles.Get(nameof(NothingTile));
+        FeatureType = Game.SingletonRepository.Tiles.Get(nameof(NothingTile));
     }
 
     /// <summary>
@@ -138,7 +138,7 @@ internal class GridTile : IItemContainer
     public void ItemDescribe(Item oPtr)
     {
         string oName = oPtr.Description(true, 3);
-        SaveGame.MsgPrint($"You see {oName}.");
+        Game.MsgPrint($"You see {oName}.");
     }
 
     /// <summary>
@@ -186,7 +186,7 @@ internal class GridTile : IItemContainer
     [Obsolete("Use SetBackgroundFeature(Tile)")]
     public void SetBackgroundFeature(string name)
     {
-        BackgroundFeature = SaveGame.SingletonRepository.Tiles.Get(name);
+        BackgroundFeature = Game.SingletonRepository.Tiles.Get(name);
     }
 
     public void SetBackgroundFeature(Tile tile)

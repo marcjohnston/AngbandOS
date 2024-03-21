@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Spells.Folk;
 [Serializable]
 internal class FolkSpellRayOfLight : Spell
 {
-    private FolkSpellRayOfLight(SaveGame saveGame) : base(saveGame) { }
+    private FolkSpellRayOfLight(Game game) : base(game) { }
     protected override string? CastScriptName => nameof(RayOfLightScript);
 
     public override string Name => "Ray of Light";

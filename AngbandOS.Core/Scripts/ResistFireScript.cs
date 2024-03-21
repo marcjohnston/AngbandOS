@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class ResistFireScript : Script, IScript
 {
-    private ResistFireScript(SaveGame saveGame) : base(saveGame) { }
+    private ResistFireScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script.
@@ -18,6 +18,6 @@ internal class ResistFireScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        SaveGame.FireResistanceTimer.AddTimer(SaveGame.DieRoll(20) + 20);
+        Game.FireResistanceTimer.AddTimer(Game.DieRoll(20) + 20);
     }
 }

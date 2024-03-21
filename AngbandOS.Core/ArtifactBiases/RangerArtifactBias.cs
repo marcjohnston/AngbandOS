@@ -10,13 +10,13 @@ namespace AngbandOS.Core.ArtifactBiases;
 [Serializable]
 internal class RangerArtifactBias : ArtifactBias
 {
-    private RangerArtifactBias(SaveGame saveGame) : base(saveGame) { }
+    private RangerArtifactBias(Game game) : base(game) { }
     public override bool ApplyBonuses(Item item)
     {
         if (!item.RandomArtifactItemCharacteristics.Con)
         {
             item.RandomArtifactItemCharacteristics.Con = true;
-            if (SaveGame.DieRoll(2) == 1)
+            if (Game.DieRoll(2) == 1)
             {
                 return true;
             }
@@ -24,7 +24,7 @@ internal class RangerArtifactBias : ArtifactBias
         else if (!item.RandomArtifactItemCharacteristics.Dex)
         {
             item.RandomArtifactItemCharacteristics.Dex = true;
-            if (SaveGame.DieRoll(2) == 1)
+            if (Game.DieRoll(2) == 1)
             {
                 return true;
             }
@@ -32,7 +32,7 @@ internal class RangerArtifactBias : ArtifactBias
         else if (!item.RandomArtifactItemCharacteristics.Str)
         {
             item.RandomArtifactItemCharacteristics.Str = true;
-            if (SaveGame.DieRoll(2) == 1)
+            if (Game.DieRoll(2) == 1)
             {
                 return true;
             }
@@ -45,7 +45,7 @@ internal class RangerArtifactBias : ArtifactBias
         if (!item.RandomArtifactItemCharacteristics.SustCon)
         {
             item.RandomArtifactItemCharacteristics.SustCon = true;
-            if (SaveGame.DieRoll(2) == 1)
+            if (Game.DieRoll(2) == 1)
             {
                 return true;
             }
@@ -59,7 +59,7 @@ internal class RangerArtifactBias : ArtifactBias
             if (!item.RandomArtifactItemCharacteristics.SlayAnimal)
             {
                 item.RandomArtifactItemCharacteristics.SlayAnimal = true;
-                if (SaveGame.DieRoll(2) == 1)
+                if (Game.DieRoll(2) == 1)
                 {
                     return true;
                 }
@@ -70,29 +70,29 @@ internal class RangerArtifactBias : ArtifactBias
 
     public override Activation GetActivationPowerType(Item item)
     {
-        if (SaveGame.DieRoll(20) == 1)
+        if (Game.DieRoll(20) == 1)
         {
-            return SaveGame.SingletonRepository.Activations.Get(nameof(CharmAnimalEvery500Activation));
+            return Game.SingletonRepository.Activations.Get(nameof(CharmAnimalEvery500Activation));
         }
-        else if (SaveGame.DieRoll(7) == 1)
+        else if (Game.DieRoll(7) == 1)
         {
-            return SaveGame.SingletonRepository.Activations.Get(nameof(SummonAnimalActivation));
+            return Game.SingletonRepository.Activations.Get(nameof(SummonAnimalActivation));
         }
-        else if (SaveGame.DieRoll(6) == 1)
+        else if (Game.DieRoll(6) == 1)
         {
-            return SaveGame.SingletonRepository.Activations.Get(nameof(CharmAnimal1xEvery300Activation));
+            return Game.SingletonRepository.Activations.Get(nameof(CharmAnimal1xEvery300Activation));
         }
-        else if (SaveGame.DieRoll(4) == 1)
+        else if (Game.DieRoll(4) == 1)
         {
-            return SaveGame.SingletonRepository.Activations.Get(nameof(ResistAll40p1d40Activation));
+            return Game.SingletonRepository.Activations.Get(nameof(ResistAll40p1d40Activation));
         }
-        else if (SaveGame.DieRoll(3) == 1)
+        else if (Game.DieRoll(3) == 1)
         {
-            return SaveGame.SingletonRepository.Activations.Get(nameof(SatiateActivation));
+            return Game.SingletonRepository.Activations.Get(nameof(SatiateActivation));
         }
         else
         {
-            return SaveGame.SingletonRepository.Activations.Get(nameof(RemoveFearAndPoisonEvery5Activation));
+            return Game.SingletonRepository.Activations.Get(nameof(RemoveFearAndPoisonEvery5Activation));
         }
     }
 }

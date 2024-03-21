@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class BreatheChaosScript : Script, IScript
 {
-    private BreatheChaosScript(SaveGame saveGame) : base(saveGame) { }
+    private BreatheChaosScript(Game game) : base(game) { }
 
     /// <summary>
     /// Allows a direction to be chosen, then fires a chaos ball projectile with a damage that matches the players health with a radius of -2.
@@ -18,10 +18,10 @@ internal class BreatheChaosScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        if (!SaveGame.GetDirectionWithAim(out int dir))
+        if (!Game.GetDirectionWithAim(out int dir))
         {
             return;
         }
-        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(ChaosProjectile)), dir, SaveGame.Health.Value, -2);
+        Game.FireBall(Game.SingletonRepository.Projectiles.Get(nameof(ChaosProjectile)), dir, Game.Health.Value, -2);
     }
 }

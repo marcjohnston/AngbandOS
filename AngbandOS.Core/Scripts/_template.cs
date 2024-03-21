@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class _template : Script, IScript, IRepeatableScript, ISuccessfulScript, IStoreScript
 {
-    private _template(SaveGame saveGame) : base(saveGame) { }
+    private _template(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script.  Does not modify any of the store flags.

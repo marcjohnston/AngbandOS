@@ -10,14 +10,14 @@ namespace AngbandOS.Core.Timers;
 [Serializable]
 internal class AcidResistanceTimer : Timer
 {
-    private AcidResistanceTimer(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private AcidResistanceTimer(Game game) : base(game) { } // This object is a singleton.
 
     protected override void EffectIncreased(int newRate, int currentRate)
     {
-        SaveGame.MsgPrint("You feel resistant to acid!");
+        Game.MsgPrint("You feel resistant to acid!");
     }
     protected override void EffectStopped()
     {
-        SaveGame.MsgPrint("You feel less resistant to acid.");
+        Game.MsgPrint("You feel less resistant to acid.");
     }
 }

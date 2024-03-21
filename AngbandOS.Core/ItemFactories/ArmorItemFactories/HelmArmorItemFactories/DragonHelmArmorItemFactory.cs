@@ -10,9 +10,9 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class DragonHelmArmorItemFactory : HelmArmorItemFactory
 {
-    private DragonHelmArmorItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private DragonHelmArmorItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(CloseBraceSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(CloseBraceSymbol));
     public override ColorEnum Color => ColorEnum.BrightGreen;
     public override string Name => "Dragon Helm";
 
@@ -27,7 +27,7 @@ internal class DragonHelmArmorItemFactory : HelmArmorItemFactory
         // Apply the standard armor characteristics, regardless of the power.
         base.ApplyMagic(item, level, power, null);
 
-        SaveGame.TreasureRating += 5;
+        Game.TreasureRating += 5;
         ApplyDragonscaleResistance(item);
     }
     public override int Ac => 8;
@@ -44,5 +44,5 @@ internal class DragonHelmArmorItemFactory : HelmArmorItemFactory
     public override int[] Locale => new int[] { 80, 0, 0, 0 };
     public override int ToA => 10;
     public override int Weight => 50;
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

@@ -10,7 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class MaceOfDisruptionDeathwreakerFixedArtifact : FixedArtifact
 {
-    private MaceOfDisruptionDeathwreakerFixedArtifact(SaveGame saveGame) : base(saveGame) { }
+    private MaceOfDisruptionDeathwreakerFixedArtifact(Game game) : base(game) { }
 
     protected override string BaseItemFactoryName => nameof(MaceHaftedWeaponItemFactory);
 

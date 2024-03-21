@@ -10,11 +10,11 @@ namespace AngbandOS.Core.Projection;
 [Serializable]
 internal class DispLivingProjectile : Projectile
 {
-    private DispLivingProjectile(SaveGame saveGame) : base(saveGame) { }
+    private DispLivingProjectile(Game game) : base(game) { }
 
-    protected override ProjectileGraphic? BoltProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get(nameof(GreenSplatProjectileGraphic));
+    protected override ProjectileGraphic? BoltProjectileGraphic => Game.SingletonRepository.ProjectileGraphics.Get(nameof(GreenSplatProjectileGraphic));
 
-    protected override Animation EffectAnimation => SaveGame.SingletonRepository.Animations.Get(nameof(GreenExpandAnimation));
+    protected override Animation EffectAnimation => Game.SingletonRepository.Animations.Get(nameof(GreenExpandAnimation));
 
     protected override bool ProjectileAngersMonster(Monster mPtr)
     {

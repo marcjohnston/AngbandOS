@@ -10,9 +10,9 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class InvocationScrollItemFactory : ScrollItemFactory
 {
-    private InvocationScrollItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private InvocationScrollItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(QuestionMarkSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(QuestionMarkSymbol));
     public override string Name => "Invocation";
 
     public override int[] Chance => new int[] { 1, 2, 2, 0 };
@@ -24,10 +24,10 @@ internal class InvocationScrollItemFactory : ScrollItemFactory
 
     public override void Read(ReadScrollEvent eventArgs)
     {
-        var patron = SaveGame.SingletonRepository.Patrons.ToWeightedRandom().ChooseOrDefault();
-        SaveGame.MsgPrint($"You invoke the secret name of {patron.LongName}.");
+        var patron = Game.SingletonRepository.Patrons.ToWeightedRandom().ChooseOrDefault();
+        Game.MsgPrint($"You invoke the secret name of {patron.LongName}.");
         patron.GetReward();
         eventArgs.Identified = true;
     }
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

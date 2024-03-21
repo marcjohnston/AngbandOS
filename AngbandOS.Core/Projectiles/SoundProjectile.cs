@@ -10,15 +10,15 @@ namespace AngbandOS.Core.Projection;
 [Serializable]
 internal class SoundProjectile : Projectile
 {
-    private SoundProjectile(SaveGame saveGame) : base(saveGame) { }
+    private SoundProjectile(Game game) : base(game) { }
 
-    protected override ProjectileGraphic? BoltProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get(nameof(GoldSplatProjectileGraphic));
+    protected override ProjectileGraphic? BoltProjectileGraphic => Game.SingletonRepository.ProjectileGraphics.Get(nameof(GoldSplatProjectileGraphic));
 
-    protected override Animation EffectAnimation => SaveGame.SingletonRepository.Animations.Get(nameof(GoldCloudAnimation));
+    protected override Animation EffectAnimation => Game.SingletonRepository.Animations.Get(nameof(GoldCloudAnimation));
 
     protected override bool AffectItem(int who, int y, int x)
     {
-        GridTile cPtr = SaveGame.Grid[y][x];
+        GridTile cPtr = Game.Grid[y][x];
         bool obvious = false;
         string oName = "";
         foreach (Item oPtr in cPtr.Items)
@@ -49,23 +49,23 @@ internal class SoundProjectile : Projectile
                 if (oPtr.Marked)
                 {
                     string s = plural ? "are" : "is";
-                    SaveGame.MsgPrint($"The {oName} {s} unaffected!");
+                    Game.MsgPrint($"The {oName} {s} unaffected!");
                 }
             }
             else
             {
                 if (oPtr.Marked && string.IsNullOrEmpty(noteKill))
                 {
-                    SaveGame.MsgPrint($"The {oName}{noteKill}");
+                    Game.MsgPrint($"The {oName}{noteKill}");
                 }
                 bool isPotion = oPtr.Factory.CategoryEnum == ItemTypeEnum.Potion;
-                SaveGame.DeleteObject(oPtr);
+                Game.DeleteObject(oPtr);
                 if (isPotion)
                 {
                     PotionItemFactory potion = (PotionItemFactory)oPtr.Factory;
                     potion.Smash(who, y, x);
                 }
-                SaveGame.RedrawSingleLocation(y, x);
+                Game.RedrawSingleLocation(y, x);
             }
         }
         return obvious;
@@ -81,12 +81,12 @@ internal class SoundProjectile : Projectile
         {
             obvious = true;
         }
-        int doStun = (10 + SaveGame.DieRoll(15) + r) / (r + 1);
+        int doStun = (10 + Game.DieRoll(15) + r) / (r + 1);
         if (rPtr.BreatheSound)
         {
             note = " resists.";
             dam *= 2;
-            dam /= SaveGame.DieRoll(6) + 6;
+            dam /= Game.DieRoll(6) + 6;
         }
         if (doStun != 0 && !rPtr.BreatheSound && !rPtr.BreatheForce)
         {
@@ -109,33 +109,33 @@ internal class SoundProjectile : Projectile
 
     protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
     {
-        bool blind = SaveGame.BlindnessTimer.Value != 0;
+        bool blind = Game.BlindnessTimer.Value != 0;
         if (dam > 1600)
         {
             dam = 1600;
         }
         dam = (dam + r) / (r + 1);
-        Monster mPtr = SaveGame.Monsters[who];
+        Monster mPtr = Game.Monsters[who];
         string killer = mPtr.IndefiniteVisibleName;
         if (blind)
         {
-            SaveGame.MsgPrint("You are hit by a loud noise!");
+            Game.MsgPrint("You are hit by a loud noise!");
         }
-        if (SaveGame.HasSoundResistance)
+        if (Game.HasSoundResistance)
         {
             dam *= 5;
-            dam /= SaveGame.DieRoll(6) + 6;
+            dam /= Game.DieRoll(6) + 6;
         }
         else
         {
-            int kk = SaveGame.DieRoll(dam > 90 ? 35 : (dam / 3) + 5);
-            SaveGame.StunTimer.AddTimer(kk);
+            int kk = Game.DieRoll(dam > 90 ? 35 : (dam / 3) + 5);
+            Game.StunTimer.AddTimer(kk);
         }
-        if (!SaveGame.HasSoundResistance || SaveGame.DieRoll(13) == 1)
+        if (!Game.HasSoundResistance || Game.DieRoll(13) == 1)
         {
-            SaveGame.InvenDamage(SaveGame.SetColdDestroy, 2);
+            Game.InvenDamage(Game.SetColdDestroy, 2);
         }
-        SaveGame.TakeHit(dam, killer);
+        Game.TakeHit(dam, killer);
         return true;
     }
 }

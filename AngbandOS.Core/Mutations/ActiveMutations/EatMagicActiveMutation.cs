@@ -10,15 +10,15 @@ namespace AngbandOS.Core.Mutations.ActiveMutations;
 [Serializable]
 internal class EatMagicActiveMutation : Mutation
 {
-    private EatMagicActiveMutation(SaveGame saveGame) : base(saveGame) { }
+    private EatMagicActiveMutation(Game game) : base(game) { }
     public override void Activate()
     {
-        if (!SaveGame.SelectItem(out Item? oPtr, "Drain which item? ", false, true, true, SaveGame.SingletonRepository.ItemFilters.Get(nameof(CanBeRechargedItemFilter))))
+        if (!Game.SelectItem(out Item? oPtr, "Drain which item? ", false, true, true, Game.SingletonRepository.ItemFilters.Get(nameof(CanBeRechargedItemFilter))))
         {
-            SaveGame.MsgPrint("You have nothing appropriate to eat.");
+            Game.MsgPrint("You have nothing appropriate to eat.");
             return;
         }
-        if (!SaveGame.CheckIfRacialPowerWorks(17, 1, Ability.Wisdom, 15))
+        if (!Game.CheckIfRacialPowerWorks(17, 1, Ability.Wisdom, 15))
         {
             return;
         }
@@ -28,15 +28,15 @@ internal class EatMagicActiveMutation : Mutation
         }
 
         int lev = oPtr.Factory.LevelNormallyFound;
-        if (oPtr.Factory.ItemClass == SaveGame.SingletonRepository.ItemClasses.Get(nameof(RodsItemClass)))
+        if (oPtr.Factory.ItemClass == Game.SingletonRepository.ItemClasses.Get(nameof(RodsItemClass)))
         {
             if (oPtr.TypeSpecificValue > 0)
             {
-                SaveGame.MsgPrint("You can't absorb energy from a discharged rod.");
+                Game.MsgPrint("You can't absorb energy from a discharged rod.");
             }
             else
             {
-                SaveGame.Mana.Value += 2 * lev;
+                Game.Mana.Value += 2 * lev;
                 oPtr.TypeSpecificValue = 500;
             }
         }
@@ -44,20 +44,20 @@ internal class EatMagicActiveMutation : Mutation
         { // Light? Wands? Staves, Food??
             if (oPtr.TypeSpecificValue > 0)
             {
-                SaveGame.Mana.Value += oPtr.TypeSpecificValue * lev;
+                Game.Mana.Value += oPtr.TypeSpecificValue * lev;
                 oPtr.TypeSpecificValue = 0;
             }
             else
             {
-                SaveGame.MsgPrint("There's no energy there to absorb!");
+                Game.MsgPrint("There's no energy there to absorb!");
             }
             oPtr.IdentEmpty = true;
         }
-        if (SaveGame.Mana.Value > SaveGame.MaxMana.Value)
+        if (Game.Mana.Value > Game.MaxMana.Value)
         {
-            SaveGame.Mana.Value = SaveGame.MaxMana.Value;
+            Game.Mana.Value = Game.MaxMana.Value;
         }
-        base.SaveGame.SingletonRepository.FlaggedActions.Get(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
+        base.Game.SingletonRepository.FlaggedActions.Get(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
     }
 
     public override string ActivationSummary(int lvl)

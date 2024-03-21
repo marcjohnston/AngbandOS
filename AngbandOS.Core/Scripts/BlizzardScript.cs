@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class BlizzardScript : Script, IScript
 {
-    private BlizzardScript(SaveGame saveGame) : base(saveGame) { }
+    private BlizzardScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script.
@@ -18,10 +18,10 @@ internal class BlizzardScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        if (!SaveGame.GetDirectionWithAim(out int dir))
+        if (!Game.GetDirectionWithAim(out int dir))
         {
             return;
         }
-        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(ColdProjectile)), dir, 70 + SaveGame.ExperienceLevel.Value, (SaveGame.ExperienceLevel.Value / 12) + 1);
+        Game.FireBall(Game.SingletonRepository.Projectiles.Get(nameof(ColdProjectile)), dir, 70 + Game.ExperienceLevel.Value, (Game.ExperienceLevel.Value / 12) + 1);
     }
 }

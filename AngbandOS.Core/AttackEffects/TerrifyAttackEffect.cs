@@ -10,33 +10,33 @@ namespace AngbandOS.Core.AttackEffects;
 [Serializable]
 internal class TerrifyAttackEffect : AttackEffect
 {
-    private TerrifyAttackEffect(SaveGame saveGame) : base(saveGame) { }
+    private TerrifyAttackEffect(Game game) : base(game) { }
     public override int Power => 10;
     public override string Description => "terrify";
     public override void ApplyToPlayer(int monsterLevel, int monsterIndex, int armorClass, string monsterDescription, Monster monster, ref bool obvious, ref int damage, ref bool blinked)
     {
-        SaveGame.TakeHit(damage, monsterDescription);
-        if (SaveGame.HasFearResistance)
+        Game.TakeHit(damage, monsterDescription);
+        if (Game.HasFearResistance)
         {
-            SaveGame.MsgPrint("You stand your ground!");
+            Game.MsgPrint("You stand your ground!");
             obvious = true;
         }
-        else if (SaveGame.RandomLessThan(100) < SaveGame.SkillSavingThrow)
+        else if (Game.RandomLessThan(100) < Game.SkillSavingThrow)
         {
-            SaveGame.MsgPrint("You stand your ground!");
+            Game.MsgPrint("You stand your ground!");
             obvious = true;
         }
         else
         {
-            if (SaveGame.FearTimer.AddTimer(3 + SaveGame.DieRoll(monsterLevel)))
+            if (Game.FearTimer.AddTimer(3 + Game.DieRoll(monsterLevel)))
             {
                 obvious = true;
             }
         }
-        SaveGame.UpdateSmartLearn(monster, SaveGame.SingletonRepository.SpellResistantDetections.Get(nameof(FearSpellResistantDetection)));
+        Game.UpdateSmartLearn(monster, Game.SingletonRepository.SpellResistantDetections.Get(nameof(FearSpellResistantDetection)));
     }
     public override void ApplyToMonster(Monster monster, int armorClass, ref int damage, ref Projectile? pt, ref bool blinked)
     {
-        pt = SaveGame.SingletonRepository.Projectiles.Get(nameof(TurnAllProjectile));
+        pt = Game.SingletonRepository.Projectiles.Get(nameof(TurnAllProjectile));
     }
 }

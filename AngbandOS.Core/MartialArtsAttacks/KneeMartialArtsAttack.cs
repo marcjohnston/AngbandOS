@@ -16,5 +16,5 @@ internal class KneeMartialArtsAttack : MartialArtsAttack
     public override int Ds => 3;
     public override int Effect => Constants.MaKnee;
     public override int MinLevel => 5;
-    private KneeMartialArtsAttack(SaveGame saveGame) : base(saveGame) { }
+    private KneeMartialArtsAttack(Game game) : base(game) { }
 }

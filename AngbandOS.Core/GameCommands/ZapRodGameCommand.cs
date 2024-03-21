@@ -14,7 +14,7 @@ namespace AngbandOS.Core.Commands;
 [Serializable]
 internal class ZapRodGameCommand : GameCommand
 {
-    private ZapRodGameCommand(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private ZapRodGameCommand(Game game) : base(game) { } // This object is a singleton.
 
     public override char KeyChar => 'z';
 

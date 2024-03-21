@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Mutations.PassiveMutations;
 [Serializable]
 internal class IllNormPassiveMutation : Mutation
 {
-    private IllNormPassiveMutation(SaveGame saveGame) : base(saveGame) { }
+    private IllNormPassiveMutation(Game game) : base(game) { }
     public override int Frequency => 1;
     public override string GainMessage => "You start projecting a reassuring image.";
     public override string HaveMessage => "Your appearance is masked with illusion.";
@@ -18,11 +18,11 @@ internal class IllNormPassiveMutation : Mutation
 
     public override void OnGain()
     {
-        SaveGame.CharismaOverride = true;
+        Game.CharismaOverride = true;
     }
 
     public override void OnLose()
     {
-        SaveGame.CharismaOverride = false;
+        Game.CharismaOverride = false;
     }
 }

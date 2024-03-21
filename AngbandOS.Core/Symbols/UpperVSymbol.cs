@@ -1,7 +1,7 @@
 [Serializable]
 internal class UpperVSymbol : Symbol
 {
-    private UpperVSymbol(SaveGame saveGame) : base(saveGame) { }
+    private UpperVSymbol(Game game) : base(game) { }
     public override char Character => 'V';
     public override string Name => "Vampire";
 }

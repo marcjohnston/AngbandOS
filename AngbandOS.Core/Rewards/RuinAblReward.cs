@@ -10,15 +10,15 @@ namespace AngbandOS.Core.Rewards;
 [Serializable]
 internal class RuinAblReward : Reward
 {
-    private RuinAblReward(SaveGame saveGame) : base(saveGame) { }
+    private RuinAblReward(Game game) : base(game) { }
     public override void GetReward(Patron patron)
     {
-        SaveGame.MsgPrint($"The voice of {patron.ShortName} thunders:");
-        SaveGame.MsgPrint("'Thou needst a lesson in humility, mortal!'");
-        SaveGame.MsgPrint("You feel less powerful!");
+        Game.MsgPrint($"The voice of {patron.ShortName} thunders:");
+        Game.MsgPrint("'Thou needst a lesson in humility, mortal!'");
+        Game.MsgPrint("You feel less powerful!");
         for (int dummy = 0; dummy < 6; dummy++)
         {
-            SaveGame.DecreaseAbilityScore(dummy, 10 + SaveGame.DieRoll(15), true);
+            Game.DecreaseAbilityScore(dummy, 10 + Game.DieRoll(15), true);
         }
     }
 }

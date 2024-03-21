@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class CreateNamedArtifactScript : Script, IScript
 {
-    private CreateNamedArtifactScript(SaveGame saveGame) : base(saveGame) { }
+    private CreateNamedArtifactScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script.
@@ -18,19 +18,19 @@ internal class CreateNamedArtifactScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        int aIdx = SaveGame.CommandArgument;
-        if (aIdx < 0 || aIdx >= SaveGame.SingletonRepository.FixedArtifacts.Count)
+        int aIdx = Game.CommandArgument;
+        if (aIdx < 0 || aIdx >= Game.SingletonRepository.FixedArtifacts.Count)
         {
             return;
         }
-        FixedArtifact aPtr = SaveGame.SingletonRepository.FixedArtifacts[aIdx];
+        FixedArtifact aPtr = Game.SingletonRepository.FixedArtifacts[aIdx];
         if (aPtr.CurNum > 0)
         {
             return;
         }
         aPtr.CurNum = 1;
         Item qPtr = aPtr.BaseItemFactory.CreateItem();
-        qPtr.FixedArtifact = SaveGame.SingletonRepository.FixedArtifacts[aIdx];
+        qPtr.FixedArtifact = Game.SingletonRepository.FixedArtifacts[aIdx];
         qPtr.TypeSpecificValue = aPtr.Pval;
         qPtr.BaseArmorClass = aPtr.Ac;
         qPtr.DamageDice = aPtr.Dd;
@@ -44,7 +44,7 @@ internal class CreateNamedArtifactScript : Script, IScript
             qPtr.IdentCursed = true;
         }
         qPtr.GetFixedArtifactResistances();
-        SaveGame.DropNear(qPtr, -1, SaveGame.MapY, SaveGame.MapX);
-        SaveGame.MsgPrint("Allocated.");
+        Game.DropNear(qPtr, -1, Game.MapY, Game.MapX);
+        Game.MsgPrint("Allocated.");
     }
 }

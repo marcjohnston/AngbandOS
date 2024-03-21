@@ -10,5 +10,5 @@ namespace AngbandOS.Core.Repositories;
 [Serializable]
 internal class ProjectilesRepository : DictionaryRepository<Projectile>
 {
-    public ProjectilesRepository(SaveGame saveGame) : base(saveGame) { }
+    public ProjectilesRepository(Game game) : base(game) { }
 }

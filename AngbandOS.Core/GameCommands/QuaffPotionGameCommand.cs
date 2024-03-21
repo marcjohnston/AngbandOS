@@ -14,7 +14,7 @@ namespace AngbandOS.Core.Commands;
 [Serializable]
 internal class QuaffPotionGameCommand : GameCommand
 {
-    private QuaffPotionGameCommand(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private QuaffPotionGameCommand(Game game) : base(game) { } // This object is a singleton.
 
     public override char KeyChar => 'q';
 

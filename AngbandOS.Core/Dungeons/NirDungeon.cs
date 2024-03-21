@@ -9,7 +9,7 @@ namespace AngbandOS.Core.Dungeons;
 [Serializable]
 internal class NirDungeon : Dungeon
 {
-    private NirDungeon(SaveGame saveGame) : base(saveGame) { }
+    private NirDungeon(Game game) : base(game) { }
     public override int BaseOffset => 0;
     public override int MaxLevel => 7;
     protected override string? BiasMonsterFilterName => nameof(HumanMonsterFilter);

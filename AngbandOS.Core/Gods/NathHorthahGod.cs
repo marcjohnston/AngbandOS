@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Gods;
 [Serializable]
 internal class NathHorthahGod : God
 {
-    private NathHorthahGod(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private NathHorthahGod(Game game) : base(game) { } // This object is a singleton.
     public override string LongName => "Nath-Horthath, god of war";
     public override string ShortName => "Nath-Horthath";
     public override string FavorDescription => " (+{0}% max health)";

@@ -19,12 +19,12 @@ internal class ConsoleChar : ConsoleElement
 
     public override int Height => 1;
 
-    public override void Render(SaveGame saveGame, ConsoleWindow containerWindow, ConsoleAlignment parentAlignment)
+    public override void Render(Game game, ConsoleWindow containerWindow, ConsoleAlignment parentAlignment)
     {
         ConsoleAlignment alignment = Alignment ?? parentAlignment;
         ConsoleLocation location = alignment.ComputeTopLeftLocation(this, containerWindow);
-        location.ToWindow(Width, Height).Clear(saveGame, ColorEnum.Background);
-        saveGame.Screen.Print(Color, Char, location.Y, location.X);
+        location.ToWindow(Width, Height).Clear(game, ColorEnum.Background);
+        game.Screen.Print(Color, Char, location.Y, location.X);
     }
 
     public ConsoleChar(ColorEnum color, char c)

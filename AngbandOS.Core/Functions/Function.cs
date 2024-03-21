@@ -9,10 +9,10 @@
 [Serializable]
 internal abstract class Function : IGetKey, IChangeTracking
 {
-    protected readonly SaveGame SaveGame;
-    protected Function(SaveGame saveGame)
+    protected readonly Game Game;
+    protected Function(Game game)
     {
-        SaveGame = saveGame;
+        Game = game;
     }
     public bool IsChanged => Dependencies == null ? false : Dependencies.Any(_dependency => _dependency.IsChanged);
 
@@ -44,7 +44,7 @@ internal abstract class Function : IGetKey, IChangeTracking
             List<IChangeTracking> conditionalList = new();
             foreach (string dependencyName in DependencyNames)
             {
-                Property property = SaveGame.SingletonRepository.Properties.Get(dependencyName);
+                Property property = Game.SingletonRepository.Properties.Get(dependencyName);
                 conditionalList.Add(property);
             }
             Dependencies = conditionalList.ToArray();

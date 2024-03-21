@@ -10,13 +10,13 @@ namespace AngbandOS.Core.AttackEffects;
 [Serializable]
 internal class LoseStrAttackEffect : AttackEffect
 {
-    private LoseStrAttackEffect(SaveGame saveGame) : base(saveGame) { }
+    private LoseStrAttackEffect(Game game) : base(game) { }
     public override int Power => 0;
     public override string Description => "reduce strength";
     public override void ApplyToPlayer(int monsterLevel, int monsterIndex, int armorClass, string monsterDescription, Monster monster, ref bool obvious, ref int damage, ref bool blinked)
     {
-        SaveGame.TakeHit(damage, monsterDescription);
-        if (SaveGame.TryDecreasingAbilityScore(Ability.Strength))
+        Game.TakeHit(damage, monsterDescription);
+        if (Game.TryDecreasingAbilityScore(Ability.Strength))
         {
             obvious = true;
         }

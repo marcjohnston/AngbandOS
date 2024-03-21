@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class BurnResistanceScript : Script, IScript
 {
-    private BurnResistanceScript(SaveGame saveGame) : base(saveGame) { }
+    private BurnResistanceScript(Game game) : base(game) { }
 
     /// <summary>
     /// Adds temporary fire, lightning and acid resistance.
@@ -18,8 +18,8 @@ internal class BurnResistanceScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        SaveGame.FireResistanceTimer.AddTimer(SaveGame.DieRoll(20) + 20);
-        SaveGame.LightningResistanceTimer.AddTimer(SaveGame.DieRoll(20) + 20);
-        SaveGame.AcidResistanceTimer.AddTimer(SaveGame.DieRoll(20) + 20);
+        Game.FireResistanceTimer.AddTimer(Game.DieRoll(20) + 20);
+        Game.LightningResistanceTimer.AddTimer(Game.DieRoll(20) + 20);
+        Game.AcidResistanceTimer.AddTimer(Game.DieRoll(20) + 20);
     }
 }

@@ -16,7 +16,7 @@ namespace AngbandOS.Core.Scripts;
 /// </summary>
 internal class CreateItemScript : Script, IScript
 {
-    private CreateItemScript(SaveGame saveGame) : base(saveGame) { }
+    private CreateItemScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the create item script.
@@ -24,36 +24,36 @@ internal class CreateItemScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        SaveGame.FullScreenOverlay = true;
-        ScreenBuffer savedScreen = SaveGame.Screen.Clone();
-        SaveGame.SetBackground(BackgroundImageEnum.Normal);
+        Game.FullScreenOverlay = true;
+        ScreenBuffer savedScreen = Game.Screen.Clone();
+        Game.SetBackground(BackgroundImageEnum.Normal);
         int kIdx = WizCreateItemtype();
-        SaveGame.Screen.Restore(savedScreen);
-        SaveGame.FullScreenOverlay = false;
-        SaveGame.SetBackground(BackgroundImageEnum.Overhead);
+        Game.Screen.Restore(savedScreen);
+        Game.FullScreenOverlay = false;
+        Game.SetBackground(BackgroundImageEnum.Overhead);
         if (kIdx == 0)
         {
             return;
         }
-        ItemFactory itemFactory = SaveGame.SingletonRepository.ItemFactories[kIdx];
+        ItemFactory itemFactory = Game.SingletonRepository.ItemFactories[kIdx];
         Item qPtr = itemFactory.CreateItem();
 
-        if (!SaveGame.GetBool($"Ok Item (0=False, 1=True)? ", out bool ok))
+        if (!Game.GetBool($"Ok Item (0=False, 1=True)? ", out bool ok))
         {
             return;
         }
-        if (!SaveGame.GetBool($"Good Item (0=False, 1=True)? ", out bool good))
+        if (!Game.GetBool($"Good Item (0=False, 1=True)? ", out bool good))
         {
             return;
         }
-        if (!SaveGame.GetBool($"Great Item (0=False, 1=True)? ", out bool great))
+        if (!Game.GetBool($"Great Item (0=False, 1=True)? ", out bool great))
         {
             return;
         }
 
-        qPtr.ApplyMagic(SaveGame.Difficulty, ok, good, great, null);
-        SaveGame.DropNear(qPtr, -1, SaveGame.MapY, SaveGame.MapX);
-        SaveGame.MsgPrint("Allocated.");
+        qPtr.ApplyMagic(Game.Difficulty, ok, good, great, null);
+        Game.DropNear(qPtr, -1, Game.MapY, Game.MapX);
+        Game.MsgPrint("Allocated.");
         return;
     }
 
@@ -64,17 +64,17 @@ internal class CreateItemScript : Script, IScript
         int col, row;
         char ch;
         int[] choice = new int[60];
-        SaveGame.Screen.Clear();
-        for (num = 0; num < 60 && num < SaveGame.SingletonRepository.ItemClasses.Count; num++)
+        Game.Screen.Clear();
+        for (num = 0; num < 60 && num < Game.SingletonRepository.ItemClasses.Count; num++)
         {
-            ItemClass itemClass = SaveGame.SingletonRepository.ItemClasses[num];
+            ItemClass itemClass = Game.SingletonRepository.ItemClasses[num];
             row = 2 + (num % 20);
             col = 30 * (num / 20);
             ch = (char)(_head[num / 20] + (char)(num % 20));
-            SaveGame.Screen.PrintLine($"[{ch}] {SaveGame.Pluralize(itemClass.Name)}", row, col);
+            Game.Screen.PrintLine($"[{ch}] {Game.Pluralize(itemClass.Name)}", row, col);
         }
         int maxNum = num;
-        if (!SaveGame.GetCom("Get what type of object? ", out ch))
+        if (!Game.GetCom("Get what type of object? ", out ch))
         {
             return 0;
         }
@@ -95,15 +95,15 @@ internal class CreateItemScript : Script, IScript
         {
             return 0;
         }
-        ItemClass selectedItemClass = SaveGame.SingletonRepository.ItemClasses[num];
-        string tvalDesc = SaveGame.Pluralize(selectedItemClass.Name);
-        SaveGame.Screen.Clear();
+        ItemClass selectedItemClass = Game.SingletonRepository.ItemClasses[num];
+        string tvalDesc = Game.Pluralize(selectedItemClass.Name);
+        Game.Screen.Clear();
         const int maxLetters = 26;
         const int maxNumbers = 10;
         const int maxCount = maxLetters * 2 + maxNumbers; // 26 lower case, 26 uppercase, 10 numbers
-        for (num = 0, i = 1; num < maxCount && i < SaveGame.SingletonRepository.ItemFactories.Count; i++)
+        for (num = 0, i = 1; num < maxCount && i < Game.SingletonRepository.ItemFactories.Count; i++)
         {
-            ItemFactory kPtr = SaveGame.SingletonRepository.ItemFactories[i];
+            ItemFactory kPtr = Game.SingletonRepository.ItemFactories[i];
             if (kPtr.ItemClass == selectedItemClass)
             {
                 row = 2 + (num % maxLetters);
@@ -111,12 +111,12 @@ internal class CreateItemScript : Script, IScript
                 ch = (char)(_head[num / maxLetters] + (char)(num % maxLetters));
                 string itemName = kPtr.Name.Trim().Replace("$", "").Replace("~", "");
 
-                SaveGame.Screen.PrintLine($"[{ch}] {itemName}", row, col);
+                Game.Screen.PrintLine($"[{ch}] {itemName}", row, col);
                 choice[num++] = i;
             }
         }
         maxNum = num;
-        if (!SaveGame.GetCom($"What Kind of {tvalDesc}? ", out ch))
+        if (!Game.GetCom($"What Kind of {tvalDesc}? ", out ch))
         {
             return 0;
         }

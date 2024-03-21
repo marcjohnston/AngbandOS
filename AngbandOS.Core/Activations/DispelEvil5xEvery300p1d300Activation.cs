@@ -13,16 +13,16 @@ namespace AngbandOS.Core.Activations;
 [Serializable]
 internal class DispelEvil5xEvery300p1d300Activation : Activation
 {
-    private DispelEvil5xEvery300p1d300Activation(SaveGame saveGame) : base(saveGame) { }
+    private DispelEvil5xEvery300p1d300Activation(Game game) : base(game) { }
     public override int RandomChance => 33;
 
     public override string? PreActivationMessage => "Your {0} floods the area with goodness...";
 
-    public override int RechargeTime() => SaveGame.RandomLessThan(300) + 300;
+    public override int RechargeTime() => Game.RandomLessThan(300) + 300;
 
     protected override bool OnActivate(Item item)
     {
-        return SaveGame.RunCancellableScript(nameof(DispelEvil5xScript));
+        return Game.RunCancellableScript(nameof(DispelEvil5xScript));
     }
 
     public override int Value => 4000;

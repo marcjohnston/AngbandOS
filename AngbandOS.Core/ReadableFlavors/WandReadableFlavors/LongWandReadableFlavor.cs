@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Flavors;
 [Serializable]
 internal class LongWandReadableFlavor : WandReadableFlavor
 {
-    private LongWandReadableFlavor(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private LongWandReadableFlavor(Game game) : base(game) { } // This object is a singleton.
     protected override string SymbolName => nameof(MinusSignSymbol);
     public override ColorEnum Color => ColorEnum.Green;
     public override string Name => "Long";

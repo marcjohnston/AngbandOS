@@ -8,7 +8,7 @@
 [Serializable]
 internal class ElelenTheTelepathShopkeeper : Shopkeeper
 {
-    private ElelenTheTelepathShopkeeper(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private ElelenTheTelepathShopkeeper(Game game) : base(game) { } // This object is a singleton.
     public override string Name => "Elelen the Telepath";
     public override int MaxCost =>  15000;
     public override int MinInflate =>  111;

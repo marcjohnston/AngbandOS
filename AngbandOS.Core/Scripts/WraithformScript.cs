@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class WraithformScript : Script, IScript
 {
-    private WraithformScript(SaveGame saveGame) : base(saveGame) { }
+    private WraithformScript(Game game) : base(game) { }
 
     /// <summary>
     /// Adds between 1/2 the player experience to 1x the player experience of etherealness.
@@ -18,7 +18,7 @@ internal class WraithformScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        SaveGame.EtherealnessTimer.AddTimer(SaveGame.DieRoll(SaveGame.ExperienceLevel.Value / 2) + (SaveGame.ExperienceLevel.Value / 2));
+        Game.EtherealnessTimer.AddTimer(Game.DieRoll(Game.ExperienceLevel.Value / 2) + (Game.ExperienceLevel.Value / 2));
 
     }
 }

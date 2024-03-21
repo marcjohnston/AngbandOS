@@ -10,15 +10,15 @@ namespace AngbandOS.Core.Mutations.ActiveMutations;
 [Serializable]
 internal class ShriekActiveMutation : Mutation
 {
-    private ShriekActiveMutation(SaveGame saveGame) : base(saveGame) { }
+    private ShriekActiveMutation(Game game) : base(game) { }
     public override void Activate()
     {
-        if (!SaveGame.CheckIfRacialPowerWorks(4, 4, Ability.Constitution, 6))
+        if (!Game.CheckIfRacialPowerWorks(4, 4, Ability.Constitution, 6))
         {
             return;
         }
-        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(SoundProjectile)), 0, 4 * SaveGame.ExperienceLevel.Value, 8);
-        SaveGame.AggravateMonsters();
+        Game.FireBall(Game.SingletonRepository.Projectiles.Get(nameof(SoundProjectile)), 0, 4 * Game.ExperienceLevel.Value, 8);
+        Game.AggravateMonsters();
     }
 
     public override string ActivationSummary(int lvl)

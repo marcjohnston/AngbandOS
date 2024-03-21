@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class ClairvoyanceScript : Script, IScript
 {
-    private ClairvoyanceScript(SaveGame saveGame) : base(saveGame) { }
+    private ClairvoyanceScript(Game game) : base(game) { }
 
     /// <summary>
     /// Adds between 30 and 55 turns of telepathy.
@@ -18,10 +18,10 @@ internal class ClairvoyanceScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        SaveGame.RunScript(nameof(LightScript));
-        if (!SaveGame.HasTelepathy)
+        Game.RunScript(nameof(LightScript));
+        if (!Game.HasTelepathy)
         {
-            SaveGame.RunScript(nameof(AddTelepathy25p1d30Script));
+            Game.RunScript(nameof(AddTelepathy25p1d30Script));
         }
     }
 }

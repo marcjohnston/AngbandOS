@@ -10,7 +10,7 @@ namespace AngbandOS.Core.MonsterRaces;
 [Serializable]
 internal class TrapperMonsterRace : MonsterRace
 {
-    protected TrapperMonsterRace(SaveGame saveGame) : base(saveGame) { }
+    protected TrapperMonsterRace(Game game) : base(game) { }
 
     protected override string SymbolName => nameof(PeriodSymbol);
     public override string Name => "Trapper";

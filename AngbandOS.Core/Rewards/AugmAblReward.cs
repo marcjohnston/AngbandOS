@@ -10,14 +10,14 @@ namespace AngbandOS.Core.Rewards;
 [Serializable]
 internal class AugmAblReward : Reward
 {
-    private AugmAblReward(SaveGame saveGame) : base(saveGame) { }
+    private AugmAblReward(Game game) : base(game) { }
     public override void GetReward(Patron patron)
     {
-        SaveGame.MsgPrint($"The voice of {patron.ShortName} booms out:");
-        SaveGame.MsgPrint("'Receive this modest gift from me!'");
+        Game.MsgPrint($"The voice of {patron.ShortName} booms out:");
+        Game.MsgPrint("'Receive this modest gift from me!'");
         for (int dummy = 0; dummy < 6; dummy++)
         {
-            SaveGame.TryIncreasingAbilityScore(dummy);
+            Game.TryIncreasingAbilityScore(dummy);
         }
     }
 }

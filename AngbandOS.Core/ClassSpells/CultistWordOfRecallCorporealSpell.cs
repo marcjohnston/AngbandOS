@@ -10,7 +10,7 @@ namespace AngbandOS.Core.ClassSpells;
 [Serializable]
 internal class CultistWordOfRecallCorporealSpell : ClassSpell
 {
-    private CultistWordOfRecallCorporealSpell(SaveGame saveGame) : base(saveGame) { }
+    private CultistWordOfRecallCorporealSpell(Game game) : base(game) { }
     public override string SpellName => nameof(CorporealSpellWordOfRecall);
     public override string CharacterClassName => nameof(CultistCharacterClass);
     public override int Level => 28;

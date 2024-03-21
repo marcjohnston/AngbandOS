@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Flavors;
 [Serializable]
 internal class TortoiseshellAmuletReadableFlavor : AmuletReadableFlavor
 {
-    private TortoiseshellAmuletReadableFlavor(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private TortoiseshellAmuletReadableFlavor(Game game) : base(game) { } // This object is a singleton.
     protected override string SymbolName => nameof(DoubleQuoteSymbol);
     public override ColorEnum Color => ColorEnum.Yellow;
     public override string Name => "Tortoiseshell";

@@ -10,9 +10,9 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class RemoveCurseStaffItemFactory : StaffItemFactory
 {
-    private RemoveCurseStaffItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private RemoveCurseStaffItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UnderscoreSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(UnderscoreSymbol));
     public override string Name => "Remove Curse";
 
     public override int[] Chance => new int[] { 1, 0, 0, 0 };
@@ -20,7 +20,7 @@ internal class RemoveCurseStaffItemFactory : StaffItemFactory
     public override int Dd => 1;
     public override void ApplyMagic(Item item, int level, int power, Store? store)
     {
-        item.TypeSpecificValue = SaveGame.DieRoll(3) + 4;
+        item.TypeSpecificValue = Game.DieRoll(3) + 4;
     }
     public override int Ds => 2;
     public override string FriendlyName => "Remove Curse";
@@ -30,14 +30,14 @@ internal class RemoveCurseStaffItemFactory : StaffItemFactory
 
     public override void UseStaff(UseStaffEvent eventArgs)
     {
-        if (SaveGame.RunSuccessfulScript(nameof(RemoveCurseScript)))
+        if (Game.RunSuccessfulScript(nameof(RemoveCurseScript)))
         {
-            if (SaveGame.BlindnessTimer.Value == 0)
+            if (Game.BlindnessTimer.Value == 0)
             {
-                SaveGame.MsgPrint("The staff glows blue for a moment...");
+                Game.MsgPrint("The staff glows blue for a moment...");
             }
             eventArgs.Identified = true;
         }
     }
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

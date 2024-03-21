@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class RestInStoreScript : Script, IScript, IStoreScript
 {
-    private RestInStoreScript(SaveGame saveGame) : base(saveGame) { }
+    private RestInStoreScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the rest in store script.  Does not modify any of the store flags.
@@ -27,13 +27,13 @@ internal class RestInStoreScript : Script, IScript, IStoreScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        if (SaveGame.PoisonTimer.Value > 0 || SaveGame.BleedingTimer.Value > 0)
+        if (Game.PoisonTimer.Value > 0 || Game.BleedingTimer.Value > 0)
         {
-            SaveGame.MsgPrint("Your wounds prevent you from sleeping.");
+            Game.MsgPrint("Your wounds prevent you from sleeping.");
         }
         else
         {
-            SaveGame.RunScript(nameof(RestInRoomScript));
+            Game.RunScript(nameof(RestInRoomScript));
         }
     }
 }

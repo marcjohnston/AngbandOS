@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Spells;
 [Serializable]
 internal class GenericSpell : Spell
 {
-    public GenericSpell(SaveGame saveGame, SpellDefinition definition) : base(saveGame)
+    public GenericSpell(Game game, SpellDefinition definition) : base(game)
     {
         Key = definition.Key;
         Name = definition.Name;
@@ -22,7 +22,7 @@ internal class GenericSpell : Spell
     public override string Key { get; }
 
     /// <summary>
-    /// Returns the name of the spell, as rendered to the SaveGame.
+    /// Returns the name of the spell, as rendered to the Game.
     /// </summary>
     public override string Name { get; }
 

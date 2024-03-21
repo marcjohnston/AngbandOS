@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class VampiricDrainScript : Script, IScript
 {
-    private VampiricDrainScript(SaveGame saveGame) : base(saveGame) { }
+    private VampiricDrainScript(Game game) : base(game) { }
 
     /// <summary>
     /// Drains the health of a monster in a chosen direction and adds the same amount of health to the player.
@@ -18,20 +18,20 @@ internal class VampiricDrainScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        if (!SaveGame.GetDirectionWithAim(out int dir))
+        if (!Game.GetDirectionWithAim(out int dir))
         {
             return;
         }
-        int dummy = SaveGame.ExperienceLevel.Value + (SaveGame.DieRoll(SaveGame.ExperienceLevel.Value) * Math.Max(1, SaveGame.ExperienceLevel.Value / 10));
-        if (!SaveGame.DrainLife(dir, dummy))
+        int dummy = Game.ExperienceLevel.Value + (Game.DieRoll(Game.ExperienceLevel.Value) * Math.Max(1, Game.ExperienceLevel.Value / 10));
+        if (!Game.DrainLife(dir, dummy))
         {
             return;
         }
-        SaveGame.RestoreHealth(dummy);
-        dummy = SaveGame.Food.Value + Math.Min(5000, 100 * dummy);
-        if (SaveGame.Food.Value < Constants.PyFoodMax)
+        Game.RestoreHealth(dummy);
+        dummy = Game.Food.Value + Math.Min(5000, 100 * dummy);
+        if (Game.Food.Value < Constants.PyFoodMax)
         {
-            SaveGame.SetFood(dummy >= Constants.PyFoodMax ? Constants.PyFoodMax - 1 : dummy);
+            Game.SetFood(dummy >= Constants.PyFoodMax ? Constants.PyFoodMax - 1 : dummy);
         }
     }
 }

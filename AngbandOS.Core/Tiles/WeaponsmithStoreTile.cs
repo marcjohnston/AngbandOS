@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Tiles;
 [Serializable]
 internal class WeaponsmithStoreTile : Tile
 {
-    private WeaponsmithStoreTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private WeaponsmithStoreTile(Game game) : base(game) { } // This object is a singleton.
     public override bool BlocksLos => true;
     public override bool IsInteresting => true;
     public override bool IsPassable => true;

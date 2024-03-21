@@ -11,12 +11,12 @@ namespace AngbandOS.Core;
 [Serializable]
 internal abstract class DungeonGenerator
 {
-    protected readonly SaveGame SaveGame;
+    protected readonly Game Game;
 
     public abstract bool GenerateDungeon();
 
-    public DungeonGenerator(SaveGame saveGame)
+    public DungeonGenerator(Game game)
     {
-        SaveGame = saveGame;
+        Game = game;
     }
 }

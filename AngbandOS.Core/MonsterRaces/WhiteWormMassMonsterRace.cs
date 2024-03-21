@@ -10,7 +10,7 @@ namespace AngbandOS.Core.MonsterRaces;
 [Serializable]
 internal class WhiteWormMassMonsterRace : MonsterRace
 {
-    protected WhiteWormMassMonsterRace(SaveGame saveGame) : base(saveGame) { }
+    protected WhiteWormMassMonsterRace(Game game) : base(game) { }
 
     protected override string SymbolName => nameof(LowerWSymbol);
     public override string Name => "White worm mass";

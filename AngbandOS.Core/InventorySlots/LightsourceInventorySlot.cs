@@ -10,7 +10,7 @@ namespace AngbandOS.Core.InventorySlots;
 [Serializable]
 internal class LightsourceInventorySlot : EquipmentInventorySlot
 {
-    private LightsourceInventorySlot(SaveGame saveGame) : base(saveGame) { }
+    private LightsourceInventorySlot(Game game) : base(game) { }
     public override string Label(int index) => "g";
     public override string Label(Item oPtr) => "g";
     public override int[] InventorySlots => new int[] { InventorySlot.Lightsource };
@@ -36,7 +36,7 @@ internal class LightsourceInventorySlot : EquipmentInventorySlot
         int maxLight = 0; // The amount of light remaining on the lightsource with the most light.
         foreach (int index in InventorySlots)
         {
-            Item? oPtr = SaveGame.GetInventoryItem(index);
+            Item? oPtr = Game.GetInventoryItem(index);
             if (oPtr != null && oPtr.Category == ItemTypeEnum.Light)
             {
                 LightSourceItemFactory lightSourceItemFactory = (LightSourceItemFactory)oPtr.Factory;
@@ -46,7 +46,7 @@ internal class LightsourceInventorySlot : EquipmentInventorySlot
                     oPtr.TypeSpecificValue -= lightSourceItemFactory.BurnRate;
 
                     // If the player is blind, do not allow the light to go out completely.
-                    if (SaveGame.BlindnessTimer.Value != 0)
+                    if (Game.BlindnessTimer.Value != 0)
                     {
                         if (oPtr.TypeSpecificValue == 0)
                         {
@@ -62,12 +62,12 @@ internal class LightsourceInventorySlot : EquipmentInventorySlot
         }
         if (hadLight && maxLight == 0)
         {
-            SaveGame.Disturb(true);
-            SaveGame.MsgPrint("Your light has gone out!");
+            Game.Disturb(true);
+            Game.MsgPrint("Your light has gone out!");
         }
         else if (hadLight && maxLight < 100 && maxLight % 10 == 0)
         {
-            SaveGame.MsgPrint("Your light is growing faint.");
+            Game.MsgPrint("Your light is growing faint.");
         }
     }
 }

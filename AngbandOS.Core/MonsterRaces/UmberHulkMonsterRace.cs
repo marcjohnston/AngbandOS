@@ -10,7 +10,7 @@ namespace AngbandOS.Core.MonsterRaces;
 [Serializable]
 internal class UmberHulkMonsterRace : MonsterRace
 {
-    protected UmberHulkMonsterRace(SaveGame saveGame) : base(saveGame) { }
+    protected UmberHulkMonsterRace(Game game) : base(game) { }
 
     protected override string SymbolName => nameof(LowerXSymbol);
     public override ColorEnum Color => ColorEnum.Brown;

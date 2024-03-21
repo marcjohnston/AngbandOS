@@ -13,10 +13,10 @@ namespace AngbandOS.Core.Activations;
 /// </summary>
 internal abstract class Activation : IGetKey
 {
-    protected readonly SaveGame SaveGame;
-    protected Activation(SaveGame saveGame)
+    protected readonly Game Game;
+    protected Activation(Game game)
     {
-        SaveGame = saveGame;
+        Game = game;
     }
 
     /// <summary>
@@ -58,7 +58,7 @@ internal abstract class Activation : IGetKey
     /// <summary>
     /// Activates the artifact power; returning false, if the activation was cancelled by the user; true, otherwise.
     /// </summary>
-    /// <param name="saveGame"></param>
+    /// <param name="game"></param>
     /// <returns></returns>
     protected abstract bool OnActivate(Item item);
 
@@ -68,7 +68,7 @@ internal abstract class Activation : IGetKey
         {
             string itemClassName = item.Factory.ItemClass.Name.ToLower();
             string formattedPreActivationMessage = String.Format(PreActivationMessage, itemClassName);
-            SaveGame.MsgPrint(formattedPreActivationMessage);
+            Game.MsgPrint(formattedPreActivationMessage);
         }
         if (OnActivate(item))
         {

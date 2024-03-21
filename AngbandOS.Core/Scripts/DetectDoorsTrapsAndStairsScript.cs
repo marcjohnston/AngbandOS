@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class DetectDoorsTrapsAndStairsScript : Script, IScript
 {
-    private DetectDoorsTrapsAndStairsScript(SaveGame saveGame) : base(saveGame) { }
+    private DetectDoorsTrapsAndStairsScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script.
@@ -18,8 +18,8 @@ internal class DetectDoorsTrapsAndStairsScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        SaveGame.DetectTraps();
-        SaveGame.DetectDoors();
-        SaveGame.DetectStairs();
+        Game.DetectTraps();
+        Game.DetectDoors();
+        Game.DetectStairs();
     }
 }

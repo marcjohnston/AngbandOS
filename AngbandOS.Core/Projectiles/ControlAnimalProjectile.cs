@@ -10,11 +10,11 @@ namespace AngbandOS.Core.Projection;
 [Serializable]
 internal class ControlAnimalProjectile : Projectile
 {
-    private ControlAnimalProjectile(SaveGame saveGame) : base(saveGame) { }
+    private ControlAnimalProjectile(Game game) : base(game) { }
 
-    protected override ProjectileGraphic? BoltProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get(nameof(GreenBulletProjectileGraphic));
+    protected override ProjectileGraphic? BoltProjectileGraphic => Game.SingletonRepository.ProjectileGraphics.Get(nameof(GreenBulletProjectileGraphic));
 
-    protected override Animation EffectAnimation => SaveGame.SingletonRepository.Animations.Get(nameof(GreenControlAnimation));
+    protected override Animation EffectAnimation => Game.SingletonRepository.Animations.Get(nameof(GreenControlAnimation));
 
     protected override bool ProjectileAngersMonster(Monster mPtr)
     {
@@ -33,7 +33,7 @@ internal class ControlAnimalProjectile : Projectile
         }
         if (rPtr.Unique || !rPtr.Animal ||
             rPtr.ImmuneConfusion ||
-            rPtr.Level > SaveGame.DieRoll(dam - 10 < 1 ? 1 : dam - 10) + 10)
+            rPtr.Level > Game.DieRoll(dam - 10 < 1 ? 1 : dam - 10) + 10)
         {
             if (rPtr.ImmuneConfusion)
             {
@@ -45,7 +45,7 @@ internal class ControlAnimalProjectile : Projectile
             note = " is unaffected!";
             obvious = false;
         }
-        else if (SaveGame.HasAggravation || rPtr.Guardian)
+        else if (Game.HasAggravation || rPtr.Guardian)
         {
             note = " hates you too much!";
         }

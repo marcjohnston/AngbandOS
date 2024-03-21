@@ -10,11 +10,11 @@ namespace AngbandOS.Core.Rewards;
 [Serializable]
 internal class PolySlfReward : Reward
 {
-    private PolySlfReward(SaveGame saveGame) : base(saveGame) { }
+    private PolySlfReward(Game game) : base(game) { }
     public override void GetReward(Patron patron)
     {
-        SaveGame.MsgPrint($"The voice of {patron.ShortName} booms out:");
-        SaveGame.MsgPrint("'Thou needst a new form, mortal!'");
-        SaveGame.RunScript(nameof(PolymorphSelfScript));
+        Game.MsgPrint($"The voice of {patron.ShortName} booms out:");
+        Game.MsgPrint("'Thou needst a new form, mortal!'");
+        Game.RunScript(nameof(PolymorphSelfScript));
     }
 }

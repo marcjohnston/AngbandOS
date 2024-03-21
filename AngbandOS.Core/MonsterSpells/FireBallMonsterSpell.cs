@@ -10,16 +10,16 @@ namespace AngbandOS.Core.MonsterSpells;
 [Serializable]
 internal class FireBallMonsterSpell : BallProjectileMonsterSpell
 {
-    private FireBallMonsterSpell(SaveGame saveGame) : base(saveGame) { }
+    private FireBallMonsterSpell(Game game) : base(game) { }
     public override bool UsesFire => true;
 
     public override bool IsAttack => true;
     protected override string ActionName => "casts a fire ball";
-    protected override Projectile Projectile(SaveGame saveGame) => saveGame.SingletonRepository.Projectiles.Get(nameof(FireProjectile));
+    protected override Projectile Projectile(Game game) => game.SingletonRepository.Projectiles.Get(nameof(FireProjectile));
     protected override int Damage(Monster monster)
     {
         int monsterLevel = monster.Race.Level >= 1 ? monster.Race.Level : 1;
-        return SaveGame.DieRoll(monsterLevel * 7 / 2) + 10;
+        return Game.DieRoll(monsterLevel * 7 / 2) + 10;
     }
-    public override SpellResistantDetection[] SmartLearn => new SpellResistantDetection[] { SaveGame.SingletonRepository.SpellResistantDetections.Get(nameof(FireSpellResistantDetection)) };
+    public override SpellResistantDetection[] SmartLearn => new SpellResistantDetection[] { Game.SingletonRepository.SpellResistantDetections.Get(nameof(FireSpellResistantDetection)) };
 }

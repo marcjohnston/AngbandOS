@@ -13,14 +13,14 @@ namespace AngbandOS.Core.Activations;
 [Serializable]
 internal class DestroyDoorsEvery10Activation : Activation
 {
-    private DestroyDoorsEvery10Activation(SaveGame saveGame) : base(saveGame) { }
+    private DestroyDoorsEvery10Activation(Game game) : base(game) { }
     public override int RandomChance => 101;
 
     public override string? PreActivationMessage => "Your {0} glows bright red...";
 
     protected override bool OnActivate(Item item)
     {
-        return SaveGame.RunCancellableScript(nameof(DestroyAdjacentDoorsScript));
+        return Game.RunCancellableScript(nameof(DestroyAdjacentDoorsScript));
     }
 
     public override int RechargeTime() => 10;

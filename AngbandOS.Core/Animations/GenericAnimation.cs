@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Animations;
 [Serializable]
 internal class GenericAnimation : Animation
 {
-    public GenericAnimation(SaveGame saveGame, AnimationDefinition animationDefinition) : base(saveGame)
+    public GenericAnimation(Game game, AnimationDefinition animationDefinition) : base(game)
     {
         AlternateColor = animationDefinition.AlternateColor;
         Character = animationDefinition.Character;

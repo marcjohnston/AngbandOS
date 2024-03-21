@@ -10,9 +10,9 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class BrokenDaggerWeaponItemFactory : SwordWeaponItemFactory
 {
-    private BrokenDaggerWeaponItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private BrokenDaggerWeaponItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(VerticalBarSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(VerticalBarSymbol));
     public override ColorEnum Color => ColorEnum.Black;
     public override string Name => "Broken Dagger";
 
@@ -25,5 +25,5 @@ internal class BrokenDaggerWeaponItemFactory : SwordWeaponItemFactory
     public override int ToD => -4;
     public override int ToH => -2;
     public override int Weight => 5;
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

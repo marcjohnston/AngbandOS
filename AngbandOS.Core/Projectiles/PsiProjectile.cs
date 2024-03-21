@@ -10,9 +10,9 @@ namespace AngbandOS.Core.Projection;
 [Serializable]
 internal class PsiProjectile : Projectile
 {
-    private PsiProjectile(SaveGame saveGame) : base(saveGame) { }
+    private PsiProjectile(Game game) : base(game) { }
 
-    protected override Animation EffectAnimation => SaveGame.SingletonRepository.Animations.Get(nameof(DiamondSparkleAnimation));
+    protected override Animation EffectAnimation => Game.SingletonRepository.Animations.Get(nameof(DiamondSparkleAnimation));
 
     protected override bool ProjectileAngersMonster(Monster mPtr)
     {
@@ -42,33 +42,33 @@ internal class PsiProjectile : Projectile
             dam = 0;
             note = " is immune!";
         }
-        else if (rPtr.Stupid || rPtr.WeirdMind || rPtr.Animal || rPtr.Level > SaveGame.DieRoll(3 * dam))
+        else if (rPtr.Stupid || rPtr.WeirdMind || rPtr.Animal || rPtr.Level > Game.DieRoll(3 * dam))
         {
             dam /= 3;
             note = " resists.";
-            if ((rPtr.Undead || rPtr.Demon) && rPtr.Level > SaveGame.ExperienceLevel.Value / 2 && SaveGame.DieRoll(2) == 1)
+            if ((rPtr.Undead || rPtr.Demon) && rPtr.Level > Game.ExperienceLevel.Value / 2 && Game.DieRoll(2) == 1)
             {
                 note = null;
                 string s = seen ? "'s" : "s";
-                SaveGame.MsgPrint($"{mName}{s} corrupted mind backlashes your attack!");
-                if (SaveGame.RandomLessThan(100) < SaveGame.SkillSavingThrow)
+                Game.MsgPrint($"{mName}{s} corrupted mind backlashes your attack!");
+                if (Game.RandomLessThan(100) < Game.SkillSavingThrow)
                 {
-                    SaveGame.MsgPrint("You resist the effects!");
+                    Game.MsgPrint("You resist the effects!");
                 }
                 else
                 {
                     string killer = mPtr.IndefiniteVisibleName;
-                    SaveGame.TakeHit(dam, killer);
-                    if (SaveGame.DieRoll(4) == 1)
+                    Game.TakeHit(dam, killer);
+                    if (Game.DieRoll(4) == 1)
                     {
-                        switch (SaveGame.DieRoll(4))
+                        switch (Game.DieRoll(4))
                         {
                             case 1:
-                                SaveGame.ConfusedTimer.AddTimer(3 + SaveGame.DieRoll(dam));
+                                Game.ConfusedTimer.AddTimer(3 + Game.DieRoll(dam));
                                 break;
 
                             case 2:
-                                SaveGame.StunTimer.AddTimer(SaveGame.DieRoll(dam));
+                                Game.StunTimer.AddTimer(Game.DieRoll(dam));
                                 break;
 
                             case 3:
@@ -79,15 +79,15 @@ internal class PsiProjectile : Projectile
                                     }
                                     else
                                     {
-                                        SaveGame.FearTimer.AddTimer(3 + SaveGame.DieRoll(dam));
+                                        Game.FearTimer.AddTimer(3 + Game.DieRoll(dam));
                                     }
                                 }
                                 break;
 
                             default:
-                                if (!SaveGame.HasFreeAction)
+                                if (!Game.HasFreeAction)
                                 {
-                                    SaveGame.ParalysisTimer.AddTimer(SaveGame.DieRoll(dam));
+                                    Game.ParalysisTimer.AddTimer(Game.DieRoll(dam));
                                 }
                                 break;
                         }
@@ -96,24 +96,24 @@ internal class PsiProjectile : Projectile
                 dam = 0;
             }
         }
-        if (dam > 0 && SaveGame.DieRoll(4) == 1)
+        if (dam > 0 && Game.DieRoll(4) == 1)
         {
-            switch (SaveGame.DieRoll(4))
+            switch (Game.DieRoll(4))
             {
                 case 1:
-                    doConf = 3 + SaveGame.DieRoll(dam);
+                    doConf = 3 + Game.DieRoll(dam);
                     break;
 
                 case 2:
-                    doStun = 3 + SaveGame.DieRoll(dam);
+                    doStun = 3 + Game.DieRoll(dam);
                     break;
 
                 case 3:
-                    doFear = 3 + SaveGame.DieRoll(dam);
+                    doFear = 3 + Game.DieRoll(dam);
                     break;
 
                 default:
-                    doSleep = 3 + SaveGame.DieRoll(dam);
+                    doSleep = 3 + Game.DieRoll(dam);
                     break;
             }
         }

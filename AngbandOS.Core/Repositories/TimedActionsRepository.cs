@@ -10,5 +10,5 @@ namespace AngbandOS.Core.Repositories;
 [Serializable]
 internal class TimedActionsRepository : DictionaryRepository<Timers.Timer>
 {
-    public TimedActionsRepository(SaveGame saveGame) : base(saveGame) { }
+    public TimedActionsRepository(Game game) : base(game) { }
 }

@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class ViewCharacterScript : Script, IScript, IRepeatableScript, IStoreScript
 {
-    private ViewCharacterScript(SaveGame saveGame) : base(saveGame) { }
+    private ViewCharacterScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the view character script and sets the requires rerendering flag.
@@ -39,16 +39,16 @@ internal class ViewCharacterScript : Script, IScript, IRepeatableScript, IStoreS
     public void ExecuteScript()
     {
         // Save the current screen
-        SaveGame.FullScreenOverlay = true;
-        ScreenBuffer savedScreen = SaveGame.Screen.Clone();
-        SaveGame.SetBackground(BackgroundImageEnum.Paper);
+        Game.FullScreenOverlay = true;
+        ScreenBuffer savedScreen = Game.Screen.Clone();
+        Game.SetBackground(BackgroundImageEnum.Paper);
         // Load the character viewer
-        while (!SaveGame.Shutdown)
+        while (!Game.Shutdown)
         {
-            RenderCharacterScript showCharacterSheet = (RenderCharacterScript)SaveGame.SingletonRepository.Scripts.Get(nameof(RenderCharacterScript));
+            RenderCharacterScript showCharacterSheet = (RenderCharacterScript)Game.SingletonRepository.Scripts.Get(nameof(RenderCharacterScript));
             showCharacterSheet.ExecuteScript();
-            SaveGame.Screen.Print(ColorEnum.Orange, "[Press 'c' to change name, or ESC]", 43, 23);
-            char keyPress = SaveGame.Inkey();
+            Game.Screen.Print(ColorEnum.Orange, "[Press 'c' to change name, or ESC]", 43, 23);
+            char keyPress = Game.Inkey();
             // Escape breaks us out of the loop
             if (keyPress == '\x1b')
             {
@@ -57,22 +57,22 @@ internal class ViewCharacterScript : Script, IScript, IRepeatableScript, IStoreS
             // 'c' changes name
             if (keyPress == 'c' || keyPress == 'C')
             {
-                SaveGame.InputPlayerName();
+                Game.InputPlayerName();
             }
-            SaveGame.MsgPrint(null);
+            Game.MsgPrint(null);
         }
         // Restore the screen
-        SaveGame.SetBackground(BackgroundImageEnum.Overhead);
-        SaveGame.Screen.Restore(savedScreen);
-        SaveGame.FullScreenOverlay = false;
-        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawMapFlaggedAction)).Set();
-        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawEquippyFlaggedAction)).Set();
-        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(PrExtraRedrawActionGroupSetFlaggedAction)).Set();
-        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(PrBasicRedrawActionGroupSetFlaggedAction)).Set();
+        Game.SetBackground(BackgroundImageEnum.Overhead);
+        Game.Screen.Restore(savedScreen);
+        Game.FullScreenOverlay = false;
+        Game.SingletonRepository.FlaggedActions.Get(nameof(RedrawMapFlaggedAction)).Set();
+        Game.SingletonRepository.FlaggedActions.Get(nameof(RedrawEquippyFlaggedAction)).Set();
+        Game.SingletonRepository.FlaggedActions.Get(nameof(PrExtraRedrawActionGroupSetFlaggedAction)).Set();
+        Game.SingletonRepository.FlaggedActions.Get(nameof(PrBasicRedrawActionGroupSetFlaggedAction)).Set();
 
         // Invalidate the main screen.
-        SaveGame.MainForm.Invalidate();
+        Game.MainForm.Invalidate();
 
-        SaveGame.HandleStuff();
+        Game.HandleStuff();
     }
 }

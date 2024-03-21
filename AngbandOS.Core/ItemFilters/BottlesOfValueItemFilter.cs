@@ -13,5 +13,5 @@ namespace AngbandOS.Core.ItemFilters;
 [Serializable]
 internal class BottlesOfValueItemFilter : ItemFilter<BottleItemFactory>
 {
-    private BottlesOfValueItemFilter(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private BottlesOfValueItemFilter(Game game) : base(game) { } // This object is a singleton.
 }

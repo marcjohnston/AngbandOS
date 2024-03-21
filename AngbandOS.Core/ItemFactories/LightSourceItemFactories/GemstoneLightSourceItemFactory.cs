@@ -10,20 +10,20 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class GemstoneLightSourceItemFactory : LightSourceItemFactory
 {
-    private GemstoneLightSourceItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private GemstoneLightSourceItemFactory(Game game) : base(game) { } // This object is a singleton.
 
     public override void EquipmentProcessWorldHook()
     {
-        if (SaveGame.DieRoll(999) == 1 && !SaveGame.HasAntiMagic)
+        if (Game.DieRoll(999) == 1 && !Game.HasAntiMagic)
         {
-            if (SaveGame.InvulnerabilityTimer.Value == 0)
+            if (Game.InvulnerabilityTimer.Value == 0)
             {
-                SaveGame.MsgPrint("The Jewel of Judgement drains life from you!");
-                SaveGame.TakeHit(Math.Min(SaveGame.ExperienceLevel.Value, 50), "the Jewel of Judgement");
+                Game.MsgPrint("The Jewel of Judgement drains life from you!");
+                Game.TakeHit(Math.Min(Game.ExperienceLevel.Value, 50), "the Jewel of Judgement");
             }
         }
     }
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(AsteriskSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(AsteriskSymbol));
     public override ColorEnum Color => ColorEnum.Diamond;
     public override string Name => "Gemstone";
 
@@ -37,5 +37,5 @@ internal class GemstoneLightSourceItemFactory : LightSourceItemFactory
 
     public override bool ProvidesSunlight => true;
 
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

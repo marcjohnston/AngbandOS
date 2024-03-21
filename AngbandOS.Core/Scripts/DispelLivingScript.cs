@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class DispelLivingScript : Script, IScript, IScriptInt
 {
-    private DispelLivingScript(SaveGame saveGame) : base(saveGame) { }
+    private DispelLivingScript(Game game) : base(game) { }
 
     /// <summary>
     /// Dispels living.
@@ -18,7 +18,7 @@ internal class DispelLivingScript : Script, IScript, IScriptInt
     /// <returns></returns>
     public void ExecuteScriptInt(int dam)
     {
-        SaveGame.ProjectAtAllInLos(SaveGame.SingletonRepository.Projectiles.Get(nameof(DispLivingProjectile)), dam);
+        Game.ProjectAtAllInLos(Game.SingletonRepository.Projectiles.Get(nameof(DispLivingProjectile)), dam);
     }
 
     /// <summary>
@@ -26,6 +26,6 @@ internal class DispelLivingScript : Script, IScript, IScriptInt
     /// </summary>
     public void ExecuteScript()
     {
-        ExecuteScriptInt(SaveGame.ExperienceLevel.Value * 3);
+        ExecuteScriptInt(Game.ExperienceLevel.Value * 3);
     }
 }

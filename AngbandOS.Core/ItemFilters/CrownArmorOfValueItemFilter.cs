@@ -10,6 +10,6 @@ namespace AngbandOS.Core.ItemFilters;
 [Serializable]
 internal class CrownArmorOfValueItemFilter : ItemFilter<CrownArmorItemFactory>
 {
-    private CrownArmorOfValueItemFilter(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private CrownArmorOfValueItemFilter(Game game) : base(game) { } // This object is a singleton.
     public override bool? HasValue => true;
 }

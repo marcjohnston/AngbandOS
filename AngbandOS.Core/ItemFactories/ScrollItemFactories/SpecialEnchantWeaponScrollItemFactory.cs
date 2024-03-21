@@ -10,9 +10,9 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class SpecialEnchantWeaponScrollItemFactory : ScrollItemFactory
 {
-    private SpecialEnchantWeaponScrollItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private SpecialEnchantWeaponScrollItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(QuestionMarkSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(QuestionMarkSymbol));
     public override string Name => "*Enchant Weapon*";
 
     public override int[] Chance => new int[] { 1, 0, 0, 0 };
@@ -24,11 +24,11 @@ internal class SpecialEnchantWeaponScrollItemFactory : ScrollItemFactory
 
     public override void Read(ReadScrollEvent eventArgs)
     {
-        if (!SaveGame.EnchantItem(SaveGame.DieRoll(3), SaveGame.DieRoll(3), 0))
+        if (!Game.EnchantItem(Game.DieRoll(3), Game.DieRoll(3), 0))
         {
             eventArgs.UsedUp = false;
         }
         eventArgs.Identified = true;
     }
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

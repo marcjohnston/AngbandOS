@@ -13,6 +13,6 @@ namespace AngbandOS.Core.ItemFilters;
 [Serializable]
 internal class DiggingItemsOfValueItemFilter : ItemFilter<DiggingWeaponItemFactory>
 {
-    private DiggingItemsOfValueItemFilter(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private DiggingItemsOfValueItemFilter(Game game) : base(game) { } // This object is a singleton.
     public override bool? HasValue => true;
 }

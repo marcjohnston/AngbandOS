@@ -10,7 +10,7 @@ namespace AngbandOS.Core.MonsterRaces;
 [Serializable]
 internal class CopperheadSnakeMonsterRace : MonsterRace
 {
-    protected CopperheadSnakeMonsterRace(SaveGame saveGame) : base(saveGame) { }
+    protected CopperheadSnakeMonsterRace(Game game) : base(game) { }
 
     protected override string SymbolName => nameof(UpperJSymbol);
     public override ColorEnum Color => ColorEnum.Orange;

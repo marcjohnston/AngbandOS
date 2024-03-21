@@ -10,6 +10,6 @@ namespace AngbandOS.Core.Conditionals;
 [Serializable]
 internal class ExperienceLevelsAtMaxConditional : Conditional
 {
-    private ExperienceLevelsAtMaxConditional(SaveGame saveGame) : base(saveGame) { }
-    public override bool IsTrue => SaveGame.ExperienceLevel.Value >= Constants.PyMaxLevel;
+    private ExperienceLevelsAtMaxConditional(Game game) : base(game) { }
+    public override bool IsTrue => Game.ExperienceLevel.Value >= Constants.PyMaxLevel;
 }

@@ -8,7 +8,7 @@
 [Serializable]
 internal class GadrialdurTheFairShopkeeper : Shopkeeper
 {
-    private GadrialdurTheFairShopkeeper(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private GadrialdurTheFairShopkeeper(Game game) : base(game) { } // This object is a singleton.
     public override string Name => "Gadrialdur the Fair";
     public override int MaxCost =>  4000;
     public override int MinInflate =>  100;

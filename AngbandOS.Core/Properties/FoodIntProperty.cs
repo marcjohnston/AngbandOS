@@ -10,5 +10,5 @@ namespace AngbandOS.Core.Properties;
 [Serializable]
 internal class FoodIntProperty : IntProperty
 {
-    protected FoodIntProperty(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    protected FoodIntProperty(Game game) : base(game) { } // This object is a singleton.
 }

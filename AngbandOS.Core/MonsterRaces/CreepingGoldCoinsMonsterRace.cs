@@ -10,7 +10,7 @@ namespace AngbandOS.Core.MonsterRaces;
 [Serializable]
 internal class CreepingGoldCoinsMonsterRace : MonsterRace
 {
-    protected CreepingGoldCoinsMonsterRace(SaveGame saveGame) : base(saveGame) { }
+    protected CreepingGoldCoinsMonsterRace(Game game) : base(game) { }
 
     protected override string SymbolName => nameof(DollarSignSymbol);
     public override ColorEnum Color => ColorEnum.Gold;

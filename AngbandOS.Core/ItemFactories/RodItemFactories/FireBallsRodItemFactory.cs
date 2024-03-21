@@ -10,10 +10,10 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class FireBallsRodItemFactory : RodItemFactory
 {
-    private FireBallsRodItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private FireBallsRodItemFactory(Game game) : base(game) { } // This object is a singleton.
 
     public override bool RequiresAiming => true;
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(MinusSignSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(MinusSignSymbol));
     public override string Name => "Fire Balls";
 
     public override int[] Chance => new int[] { 1, 0, 0, 0 };
@@ -26,9 +26,9 @@ internal class FireBallsRodItemFactory : RodItemFactory
     public override int Weight => 15;
     public override void Execute(ZapRodEvent zapRodEvent)
     {
-        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(FireProjectile)), zapRodEvent.Dir.Value, 72, 2);
+        Game.FireBall(Game.SingletonRepository.Projectiles.Get(nameof(FireProjectile)), zapRodEvent.Dir.Value, 72, 2);
         zapRodEvent.Identified = true;
         zapRodEvent.Item.TypeSpecificValue = 30;
     }
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

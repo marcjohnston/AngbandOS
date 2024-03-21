@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class EsoteriaScript : Script, IScript
 {
-    private EsoteriaScript(SaveGame saveGame) : base(saveGame) { }
+    private EsoteriaScript(Game game) : base(game) { }
 
     /// <summary>
     /// Identifies an item.  50% of the time, the item is identified fully.
@@ -18,13 +18,13 @@ internal class EsoteriaScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        if (SaveGame.DieRoll(50) > SaveGame.ExperienceLevel.Value)
+        if (Game.DieRoll(50) > Game.ExperienceLevel.Value)
         {
-            SaveGame.RunScript(nameof(IdentifyItemScript));
+            Game.RunScript(nameof(IdentifyItemScript));
         }
         else
         {
-            SaveGame.RunScript(nameof(IdentifyItemFullyScript));
+            Game.RunScript(nameof(IdentifyItemFullyScript));
         }
     }
 }

@@ -10,14 +10,14 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class HardLeatherCapOfTheMindcrafterFixedArtifact : FixedArtifact
 {
-    private HardLeatherCapOfTheMindcrafterFixedArtifact(SaveGame saveGame) : base(saveGame) { }
+    private HardLeatherCapOfTheMindcrafterFixedArtifact(Game game) : base(game) { }
 
     protected override string BaseItemFactoryName => nameof(HardLeatherCapHelmArmorItemFactory);
 
     public override void ApplyResistances(Item item)
     {
         IArtifactBias artifactBias = null;
-        item.ApplyRandomResistance(ref artifactBias, SaveGame.DieRoll(22) + 16);
+        item.ApplyRandomResistance(ref artifactBias, Game.DieRoll(22) + 16);
     }
 
     public override ColorEnum Color => ColorEnum.Brown;

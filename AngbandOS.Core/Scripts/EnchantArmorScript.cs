@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class EnchantArmorScript : Script, IScript
 {
-    private EnchantArmorScript(SaveGame saveGame) : base(saveGame) { }
+    private EnchantArmorScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script.
@@ -18,6 +18,6 @@ internal class EnchantArmorScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        SaveGame.EnchantItem(0, 0, SaveGame.RandomLessThan(3) + 2);
+        Game.EnchantItem(0, 0, Game.RandomLessThan(3) + 2);
     }
 }

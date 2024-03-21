@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class OrbOfEntropyScript : Script, IScript
 {
-    private OrbOfEntropyScript(SaveGame saveGame) : base(saveGame) { }
+    private OrbOfEntropyScript(Game game) : base(game) { }
 
     /// <summary>
     /// Fires a ball of old drain in a chosen direction.
@@ -18,10 +18,10 @@ internal class OrbOfEntropyScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        if (!SaveGame.GetDirectionWithAim(out int dir))
+        if (!Game.GetDirectionWithAim(out int dir))
         {
             return;
         }
-        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(OldDrainProjectile)), dir, SaveGame.DiceRoll(3, 6) + SaveGame.ExperienceLevel.Value + (SaveGame.ExperienceLevel.Value / (SaveGame.BaseCharacterClass.ID == CharacterClass.Mage || SaveGame.BaseCharacterClass.ID == CharacterClass.HighMage ? 2 : 4)), SaveGame.ExperienceLevel.Value < 30 ? 2 : 3);
+        Game.FireBall(Game.SingletonRepository.Projectiles.Get(nameof(OldDrainProjectile)), dir, Game.DiceRoll(3, 6) + Game.ExperienceLevel.Value + (Game.ExperienceLevel.Value / (Game.BaseCharacterClass.ID == CharacterClass.Mage || Game.BaseCharacterClass.ID == CharacterClass.HighMage ? 2 : 4)), Game.ExperienceLevel.Value < 30 ? 2 : 3);
     }
 }

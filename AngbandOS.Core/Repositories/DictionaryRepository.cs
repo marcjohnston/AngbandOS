@@ -17,12 +17,12 @@ namespace AngbandOS.Core.Repositories;
 internal class DictionaryRepository<TValue> : ListRepository<TValue> where TValue : IGetKey
 {
     private Dictionary<string, TValue> dictionary = new Dictionary<string, TValue>();
-    public DictionaryRepository(SaveGame saveGame) : base(saveGame) { }
+    public DictionaryRepository(Game game) : base(game) { }
 
     /// <summary>
     /// Returns the pluralized type name for the TValue generic as the name of this string list repository.
     /// </summary>
-    public override string Name => SaveGame.Pluralize(typeof(TValue).Name);
+    public override string Name => Game.Pluralize(typeof(TValue).Name);
 
     public TValue Bind(string scriptName)
     {
@@ -87,7 +87,7 @@ internal class DictionaryRepository<TValue> : ListRepository<TValue> where TValu
             string serializedEntity = entity.ToJson();
             jsonEntityList.Add(new KeyValuePair<string, string>(key, serializedEntity));
         }
-        SaveGame.CorePersistentStorage.PersistEntities(Name, jsonEntityList.ToArray());
+        Game.CorePersistentStorage.PersistEntities(Name, jsonEntityList.ToArray());
     }
 
     public override string SerializeEntity(TValue entity)

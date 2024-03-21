@@ -10,18 +10,18 @@ namespace AngbandOS.Core.Rewards;
 [Serializable]
 internal class GainAblReward : Reward
 {
-    private GainAblReward(SaveGame saveGame) : base(saveGame) { }
+    private GainAblReward(Game game) : base(game) { }
     public override void GetReward(Patron patron)
     {
-        SaveGame.MsgPrint($"The voice of {patron.ShortName} rings out:");
-        SaveGame.MsgPrint("'Stay, mortal, and let me mould thee.'");
-        if (SaveGame.DieRoll(3) == 1 && !(patron.PreferredAbility < 0))
+        Game.MsgPrint($"The voice of {patron.ShortName} rings out:");
+        Game.MsgPrint("'Stay, mortal, and let me mould thee.'");
+        if (Game.DieRoll(3) == 1 && !(patron.PreferredAbility < 0))
         {
-            SaveGame.TryIncreasingAbilityScore(patron.PreferredAbility);
+            Game.TryIncreasingAbilityScore(patron.PreferredAbility);
         }
         else
         {
-            SaveGame.TryIncreasingAbilityScore(SaveGame.DieRoll(6) - 1);
+            Game.TryIncreasingAbilityScore(Game.DieRoll(6) - 1);
         }
     }
 }

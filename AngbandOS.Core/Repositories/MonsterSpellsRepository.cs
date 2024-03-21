@@ -10,5 +10,5 @@ namespace AngbandOS.Core.Repositories;
 [Serializable]
 internal class MonsterSpellsRepository : DictionaryRepository<MonsterSpell>
 {
-    public MonsterSpellsRepository(SaveGame saveGame) : base(saveGame) { }
+    public MonsterSpellsRepository(Game game) : base(game) { }
 }

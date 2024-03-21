@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class MapAreaScript : Script, IScript
 {
-    private MapAreaScript(SaveGame saveGame) : base(saveGame) { }
+    private MapAreaScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script.
@@ -18,31 +18,31 @@ internal class MapAreaScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        int y1 = SaveGame.PanelRowMin - SaveGame.DieRoll(10);
-        int y2 = SaveGame.PanelRowMax + SaveGame.DieRoll(10);
-        int x1 = SaveGame.PanelColMin - SaveGame.DieRoll(20);
-        int x2 = SaveGame.PanelColMax + SaveGame.DieRoll(20);
+        int y1 = Game.PanelRowMin - Game.DieRoll(10);
+        int y2 = Game.PanelRowMax + Game.DieRoll(10);
+        int x1 = Game.PanelColMin - Game.DieRoll(20);
+        int x2 = Game.PanelColMax + Game.DieRoll(20);
         if (y1 < 1)
         {
             y1 = 1;
         }
-        if (y2 > SaveGame.CurHgt - 2)
+        if (y2 > Game.CurHgt - 2)
         {
-            y2 = SaveGame.CurHgt - 2;
+            y2 = Game.CurHgt - 2;
         }
         if (x1 < 1)
         {
             x1 = 1;
         }
-        if (x2 > SaveGame.CurWid - 2)
+        if (x2 > Game.CurWid - 2)
         {
-            x2 = SaveGame.CurWid - 2;
+            x2 = Game.CurWid - 2;
         }
         for (int y = y1; y <= y2; y++)
         {
             for (int x = x1; x <= x2; x++)
             {
-                GridTile cPtr = SaveGame.Grid[y][x];
+                GridTile cPtr = Game.Grid[y][x];
                 if (!cPtr.FeatureType.IsWall)
                 {
                     if (!cPtr.FeatureType.IsOpenFloor)
@@ -51,7 +51,7 @@ internal class MapAreaScript : Script, IScript
                     }
                     for (int i = 0; i < 8; i++)
                     {
-                        cPtr = SaveGame.Grid[y + SaveGame.OrderedDirectionYOffset[i]][x + SaveGame.OrderedDirectionXOffset[i]];
+                        cPtr = Game.Grid[y + Game.OrderedDirectionYOffset[i]][x + Game.OrderedDirectionXOffset[i]];
                         if (cPtr.FeatureType.IsWall)
                         {
                             cPtr.TileFlags.Set(GridTile.PlayerMemorized);
@@ -60,6 +60,6 @@ internal class MapAreaScript : Script, IScript
                 }
             }
         }
-        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawMapFlaggedAction)).Set();
+        Game.SingletonRepository.FlaggedActions.Get(nameof(RedrawMapFlaggedAction)).Set();
     }
 }

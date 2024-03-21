@@ -10,5 +10,5 @@ namespace AngbandOS.Core.Repositories;
 [Serializable]
 internal class RealmsRepository : DictionaryRepository<Realm>
 {
-    public RealmsRepository(SaveGame saveGame) : base(saveGame) { }
+    public RealmsRepository(Game game) : base(game) { }
 }

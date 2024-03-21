@@ -13,7 +13,7 @@ namespace AngbandOS.Core;
 /// </summary>
 internal class SingletonRepository
 {
-    private readonly SaveGame SaveGame;
+    private readonly Game Game;
     private readonly List<ILoadable> _repositories = new();
 
     public ActivationsRepository Activations;
@@ -98,9 +98,9 @@ internal class SingletonRepository
     public WidgetsRepository Widgets;
     public WorshipPlayerAttacksRepository WorshipPlayerAttacks;
 
-    public SingletonRepository(SaveGame saveGame)
+    public SingletonRepository(Game game)
     {
-        SaveGame = saveGame;
+        Game = game;
     }
 
     private T AddRepository<T>(T repository) where T : ILoadable
@@ -129,91 +129,91 @@ internal class SingletonRepository
     /// Performs the load phase of the singleton repository.  This phase reads all of the types from the assembly and adds it into its respective
     /// collection--if the ExcludeFromRepository property returns false.  If the ExcludeFromRepository is true, the singleton object will be discarded.
     /// </summary>
-    /// <param name="saveGame"></param>
+    /// <param name="game"></param>
     public void Load()
     {
         // Create all of the repositories.  All of the repositories will be empty and have an instance to the save game.
-        Activations = AddRepository<ActivationsRepository>(new ActivationsRepository(SaveGame));
-        AlterActions = AddRepository<AlterActionsRepository>(new AlterActionsRepository(SaveGame));
-        AmuletReadableFlavors = AddRepository<AmuletReadableFlavorsRepository>(new AmuletReadableFlavorsRepository(SaveGame));
-        Animations = AddRepository<AnimationsRepository>(new AnimationsRepository(SaveGame));
-        ArtifactBiases = AddRepository<ArtifactBiasesRepository>(new ArtifactBiasesRepository(SaveGame));
-        AttackEffects = AddRepository<AttackEffectsRepository>(new AttackEffectsRepository(SaveGame));
-        Attacks = AddRepository<AttacksRepository>(new AttacksRepository(SaveGame));
-        BirthStages = AddRepository<BirthStagesRepository>(new BirthStagesRepository(SaveGame));
-        CharacterClasses = AddRepository<CharacterClassesRepository>(new CharacterClassesRepository(SaveGame));
-        ChestTrapConfigurations = AddRepository<ChestTrapConfigurationsRepository>(new ChestTrapConfigurationsRepository(SaveGame));
-        ChestTraps = AddRepository<ChestTrapsRepository>(new ChestTrapsRepository(SaveGame));
-        ClassSpells = AddRepository<ClassSpellsRepository>(new ClassSpellsRepository(SaveGame));
-        Conditionals = AddRepository<ConditionalsRepository>(new ConditionalsRepository(SaveGame));
-        DungeonGuardians = AddRepository<DungeonGuardiansRepository>(new DungeonGuardiansRepository(SaveGame));
-        Dungeons = AddRepository<DungeonsRepository>(new DungeonsRepository(SaveGame));
-        ElvishText = AddRepository<ElvishTextRepository>(new ElvishTextRepository(SaveGame));
-        FindQuests = AddRepository<FindQuestsRepository>(new FindQuestsRepository(SaveGame));
-        FixedArtifacts = AddRepository<FixedArtifactsRepository>(new FixedArtifactsRepository(SaveGame));
-        FlaggedActions = AddRepository<FlaggedActionsRepository>(new FlaggedActionsRepository(SaveGame));
-        Forms = AddRepository<FormsRepository>(new FormsRepository(SaveGame));
-        Functions = AddRepository<FunctionsRepository>(new FunctionsRepository(SaveGame));
-        FunnyComments = AddRepository<FunnyCommentsRepository>(new FunnyCommentsRepository(SaveGame));
-        FunnyDescriptions = AddRepository<FunnyDescriptionsRepository>(new FunnyDescriptionsRepository(SaveGame));
-        GameCommands = AddRepository<GameCommandsRepository>(new GameCommandsRepository(SaveGame));
-        Genders = AddRepository<GendersRepository>(new GendersRepository(SaveGame));
-        Gods = AddRepository<GodsRepository>(new GodsRepository(SaveGame));
-        HelpGroups = AddRepository<HelpGroupsRepository>(new HelpGroupsRepository(SaveGame));
-        HorrificDescriptions = AddRepository<HorrificDescriptionsRepository>(new HorrificDescriptionsRepository(SaveGame));
-        InsultPlayerAttacks = AddRepository<InsultPlayerAttacksRepository>(new InsultPlayerAttacksRepository(SaveGame));
-        InventorySlots = AddRepository<InventorySlotsRepository>(new InventorySlotsRepository(SaveGame));
-        ItemClasses = AddRepository<ItemClassesRepository>(new ItemClassesRepository(SaveGame));
-        ItemFactories = AddRepository<ItemFactoriesRepository>(new ItemFactoriesRepository(SaveGame));
-        ItemFilters = AddRepository<ItemFiltersRepository>(new ItemFiltersRepository(SaveGame));
-        ItemQualityRatings = AddRepository<ItemQualityRatingsRepository>(new ItemQualityRatingsRepository(SaveGame));
-        Justifications = AddRepository<JustificationsRepository>(new JustificationsRepository(SaveGame));
-        MartialArtsAttacks = AddRepository<MartialArtsAttacksRepository>(new MartialArtsAttacksRepository(SaveGame));
-        MoanPlayerAttacks = AddRepository<MoanPlayerAttacksRepository>(new MoanPlayerAttacksRepository(SaveGame));
-        MonsterFilters = AddRepository<MonsterFiltersRepository>(new MonsterFiltersRepository(SaveGame));
-        MonsterRaces = AddRepository<MonsterRacesRepository>(new MonsterRacesRepository(SaveGame));
-        MonsterSpells = AddRepository<MonsterSpellsRepository>(new MonsterSpellsRepository(SaveGame));
-        MushroomReadableFlavors = AddRepository<MushroomReadableFlavorsRepository>(new MushroomReadableFlavorsRepository(SaveGame));
-        Mutations = AddRepository<MutationsRepository>(new MutationsRepository(SaveGame));
-        Patrons = AddRepository<PatronsRepository>(new PatronsRepository(SaveGame));
-        Plurals = AddRepository<PluralsRepository>(new PluralsRepository(SaveGame));
-        PotionReadableFlavors = AddRepository<PotionReadableFlavorsRepository>(new PotionReadableFlavorsRepository(SaveGame));
-        Powers = AddRepository<PowersRepository>(new PowersRepository(SaveGame));
-        ProjectileGraphics = AddRepository<ProjectileGraphicsRepository>(new ProjectileGraphicsRepository(SaveGame));
-        Projectiles = AddRepository<ProjectilesRepository>(new ProjectilesRepository(SaveGame));
-        Properties = AddRepository<PropertiesRepository>(new PropertiesRepository(SaveGame));
-        Races = AddRepository<RacesRepository>(new RacesRepository(SaveGame));
-        RareItems = AddRepository<RareItemsRepository>(new RareItemsRepository(SaveGame));
-        Realms = AddRepository<RealmsRepository>(new RealmsRepository(SaveGame));
-        Rewards = AddRepository<RewardsRepository>(new RewardsRepository(SaveGame));
-        RingReadableFlavors = AddRepository<RingReadableFlavorsRepository>(new RingReadableFlavorsRepository(SaveGame));
-        RodReadableFlavors = AddRepository<RodReadableFlavorsRepository>(new RodReadableFlavorsRepository(SaveGame));
-        RoomLayouts = AddRepository<RoomLayoutsRepository>(new RoomLayoutsRepository(SaveGame));
-        Scripts = AddRepository<ScriptsRepository>(new ScriptsRepository(SaveGame));
-        ScrollReadableFlavors = AddRepository<ScrollReadableFlavorsRepository>(new ScrollReadableFlavorsRepository(SaveGame));
-        ShopkeeperAcceptedComments = AddRepository<ShopkeeperAcceptedCommentsRepository>(new ShopkeeperAcceptedCommentsRepository(SaveGame));
-        ShopkeeperBargainComments = AddRepository<ShopkeeperBargainCommentsRepository>(new ShopkeeperBargainCommentsRepository(SaveGame));
-        ShopkeeperGoodComments = AddRepository<ShopkeeperGoodCommentsRepository>(new ShopkeeperGoodCommentsRepository(SaveGame));
-        ShopkeeperLessThanGuessComments = AddRepository<ShopkeeperLessThanGuessCommentsRepository>(new ShopkeeperLessThanGuessCommentsRepository(SaveGame));
-        Shopkeepers = AddRepository<ShopkeepersRepository>(new ShopkeepersRepository(SaveGame));
-        ShopkeeperWorthlessComments = AddRepository<ShopkeeperWorthlessCommentsRepository>(new ShopkeeperWorthlessCommentsRepository(SaveGame));
-        SingingPlayerAttacks = AddRepository<SingingPlayerAttacksRepository>(new SingingPlayerAttacksRepository(SaveGame));
-        SpellResistantDetections = AddRepository<SpellResistantDetectionsRepository>(new SpellResistantDetectionsRepository(SaveGame));
-        Spells = AddRepository<SpellsRepository>(new SpellsRepository(SaveGame));
-        StaffReadableFlavors = AddRepository<StaffReadableFlavorsRepository>(new StaffReadableFlavorsRepository(SaveGame));
-        StoreCommands = AddRepository<StoreCommandsRepository>(new StoreCommandsRepository(SaveGame));
-        StoreFactories = AddRepository<StoreFactoriesRepository>(new StoreFactoriesRepository(SaveGame));
-        Symbols = AddRepository<SymbolsRepository>(new SymbolsRepository(SaveGame));
-        Talents = AddRepository<TalentsRepository>(new TalentsRepository(SaveGame));
-        Tiles = AddRepository<TilesRepository>(new TilesRepository(SaveGame));
-        TimedActions = AddRepository<TimedActionsRepository>(new TimedActionsRepository(SaveGame));
-        Towns = AddRepository<TownsRepository>(new TownsRepository(SaveGame));
-        UnreadableFlavorSyllables = AddRepository<UnreadableFlavorSyllablesRepository>(new UnreadableFlavorSyllablesRepository(SaveGame));
-        Vaults = AddRepository<VaultsRepository>(new VaultsRepository(SaveGame));
-        WandReadableFlavors = AddRepository<WandReadableFlavorsRepository>(new WandReadableFlavorsRepository(SaveGame));
-        WizardCommands = AddRepository<WizardCommandsRepository>(new WizardCommandsRepository(SaveGame));
-        Widgets = AddRepository<WidgetsRepository>(new WidgetsRepository(SaveGame));
-        WorshipPlayerAttacks = AddRepository<WorshipPlayerAttacksRepository>(new WorshipPlayerAttacksRepository(SaveGame));
+        Activations = AddRepository<ActivationsRepository>(new ActivationsRepository(Game));
+        AlterActions = AddRepository<AlterActionsRepository>(new AlterActionsRepository(Game));
+        AmuletReadableFlavors = AddRepository<AmuletReadableFlavorsRepository>(new AmuletReadableFlavorsRepository(Game));
+        Animations = AddRepository<AnimationsRepository>(new AnimationsRepository(Game));
+        ArtifactBiases = AddRepository<ArtifactBiasesRepository>(new ArtifactBiasesRepository(Game));
+        AttackEffects = AddRepository<AttackEffectsRepository>(new AttackEffectsRepository(Game));
+        Attacks = AddRepository<AttacksRepository>(new AttacksRepository(Game));
+        BirthStages = AddRepository<BirthStagesRepository>(new BirthStagesRepository(Game));
+        CharacterClasses = AddRepository<CharacterClassesRepository>(new CharacterClassesRepository(Game));
+        ChestTrapConfigurations = AddRepository<ChestTrapConfigurationsRepository>(new ChestTrapConfigurationsRepository(Game));
+        ChestTraps = AddRepository<ChestTrapsRepository>(new ChestTrapsRepository(Game));
+        ClassSpells = AddRepository<ClassSpellsRepository>(new ClassSpellsRepository(Game));
+        Conditionals = AddRepository<ConditionalsRepository>(new ConditionalsRepository(Game));
+        DungeonGuardians = AddRepository<DungeonGuardiansRepository>(new DungeonGuardiansRepository(Game));
+        Dungeons = AddRepository<DungeonsRepository>(new DungeonsRepository(Game));
+        ElvishText = AddRepository<ElvishTextRepository>(new ElvishTextRepository(Game));
+        FindQuests = AddRepository<FindQuestsRepository>(new FindQuestsRepository(Game));
+        FixedArtifacts = AddRepository<FixedArtifactsRepository>(new FixedArtifactsRepository(Game));
+        FlaggedActions = AddRepository<FlaggedActionsRepository>(new FlaggedActionsRepository(Game));
+        Forms = AddRepository<FormsRepository>(new FormsRepository(Game));
+        Functions = AddRepository<FunctionsRepository>(new FunctionsRepository(Game));
+        FunnyComments = AddRepository<FunnyCommentsRepository>(new FunnyCommentsRepository(Game));
+        FunnyDescriptions = AddRepository<FunnyDescriptionsRepository>(new FunnyDescriptionsRepository(Game));
+        GameCommands = AddRepository<GameCommandsRepository>(new GameCommandsRepository(Game));
+        Genders = AddRepository<GendersRepository>(new GendersRepository(Game));
+        Gods = AddRepository<GodsRepository>(new GodsRepository(Game));
+        HelpGroups = AddRepository<HelpGroupsRepository>(new HelpGroupsRepository(Game));
+        HorrificDescriptions = AddRepository<HorrificDescriptionsRepository>(new HorrificDescriptionsRepository(Game));
+        InsultPlayerAttacks = AddRepository<InsultPlayerAttacksRepository>(new InsultPlayerAttacksRepository(Game));
+        InventorySlots = AddRepository<InventorySlotsRepository>(new InventorySlotsRepository(Game));
+        ItemClasses = AddRepository<ItemClassesRepository>(new ItemClassesRepository(Game));
+        ItemFactories = AddRepository<ItemFactoriesRepository>(new ItemFactoriesRepository(Game));
+        ItemFilters = AddRepository<ItemFiltersRepository>(new ItemFiltersRepository(Game));
+        ItemQualityRatings = AddRepository<ItemQualityRatingsRepository>(new ItemQualityRatingsRepository(Game));
+        Justifications = AddRepository<JustificationsRepository>(new JustificationsRepository(Game));
+        MartialArtsAttacks = AddRepository<MartialArtsAttacksRepository>(new MartialArtsAttacksRepository(Game));
+        MoanPlayerAttacks = AddRepository<MoanPlayerAttacksRepository>(new MoanPlayerAttacksRepository(Game));
+        MonsterFilters = AddRepository<MonsterFiltersRepository>(new MonsterFiltersRepository(Game));
+        MonsterRaces = AddRepository<MonsterRacesRepository>(new MonsterRacesRepository(Game));
+        MonsterSpells = AddRepository<MonsterSpellsRepository>(new MonsterSpellsRepository(Game));
+        MushroomReadableFlavors = AddRepository<MushroomReadableFlavorsRepository>(new MushroomReadableFlavorsRepository(Game));
+        Mutations = AddRepository<MutationsRepository>(new MutationsRepository(Game));
+        Patrons = AddRepository<PatronsRepository>(new PatronsRepository(Game));
+        Plurals = AddRepository<PluralsRepository>(new PluralsRepository(Game));
+        PotionReadableFlavors = AddRepository<PotionReadableFlavorsRepository>(new PotionReadableFlavorsRepository(Game));
+        Powers = AddRepository<PowersRepository>(new PowersRepository(Game));
+        ProjectileGraphics = AddRepository<ProjectileGraphicsRepository>(new ProjectileGraphicsRepository(Game));
+        Projectiles = AddRepository<ProjectilesRepository>(new ProjectilesRepository(Game));
+        Properties = AddRepository<PropertiesRepository>(new PropertiesRepository(Game));
+        Races = AddRepository<RacesRepository>(new RacesRepository(Game));
+        RareItems = AddRepository<RareItemsRepository>(new RareItemsRepository(Game));
+        Realms = AddRepository<RealmsRepository>(new RealmsRepository(Game));
+        Rewards = AddRepository<RewardsRepository>(new RewardsRepository(Game));
+        RingReadableFlavors = AddRepository<RingReadableFlavorsRepository>(new RingReadableFlavorsRepository(Game));
+        RodReadableFlavors = AddRepository<RodReadableFlavorsRepository>(new RodReadableFlavorsRepository(Game));
+        RoomLayouts = AddRepository<RoomLayoutsRepository>(new RoomLayoutsRepository(Game));
+        Scripts = AddRepository<ScriptsRepository>(new ScriptsRepository(Game));
+        ScrollReadableFlavors = AddRepository<ScrollReadableFlavorsRepository>(new ScrollReadableFlavorsRepository(Game));
+        ShopkeeperAcceptedComments = AddRepository<ShopkeeperAcceptedCommentsRepository>(new ShopkeeperAcceptedCommentsRepository(Game));
+        ShopkeeperBargainComments = AddRepository<ShopkeeperBargainCommentsRepository>(new ShopkeeperBargainCommentsRepository(Game));
+        ShopkeeperGoodComments = AddRepository<ShopkeeperGoodCommentsRepository>(new ShopkeeperGoodCommentsRepository(Game));
+        ShopkeeperLessThanGuessComments = AddRepository<ShopkeeperLessThanGuessCommentsRepository>(new ShopkeeperLessThanGuessCommentsRepository(Game));
+        Shopkeepers = AddRepository<ShopkeepersRepository>(new ShopkeepersRepository(Game));
+        ShopkeeperWorthlessComments = AddRepository<ShopkeeperWorthlessCommentsRepository>(new ShopkeeperWorthlessCommentsRepository(Game));
+        SingingPlayerAttacks = AddRepository<SingingPlayerAttacksRepository>(new SingingPlayerAttacksRepository(Game));
+        SpellResistantDetections = AddRepository<SpellResistantDetectionsRepository>(new SpellResistantDetectionsRepository(Game));
+        Spells = AddRepository<SpellsRepository>(new SpellsRepository(Game));
+        StaffReadableFlavors = AddRepository<StaffReadableFlavorsRepository>(new StaffReadableFlavorsRepository(Game));
+        StoreCommands = AddRepository<StoreCommandsRepository>(new StoreCommandsRepository(Game));
+        StoreFactories = AddRepository<StoreFactoriesRepository>(new StoreFactoriesRepository(Game));
+        Symbols = AddRepository<SymbolsRepository>(new SymbolsRepository(Game));
+        Talents = AddRepository<TalentsRepository>(new TalentsRepository(Game));
+        Tiles = AddRepository<TilesRepository>(new TilesRepository(Game));
+        TimedActions = AddRepository<TimedActionsRepository>(new TimedActionsRepository(Game));
+        Towns = AddRepository<TownsRepository>(new TownsRepository(Game));
+        UnreadableFlavorSyllables = AddRepository<UnreadableFlavorSyllablesRepository>(new UnreadableFlavorSyllablesRepository(Game));
+        Vaults = AddRepository<VaultsRepository>(new VaultsRepository(Game));
+        WandReadableFlavors = AddRepository<WandReadableFlavorsRepository>(new WandReadableFlavorsRepository(Game));
+        WizardCommands = AddRepository<WizardCommandsRepository>(new WizardCommandsRepository(Game));
+        Widgets = AddRepository<WidgetsRepository>(new WidgetsRepository(Game));
+        WorshipPlayerAttacks = AddRepository<WorshipPlayerAttacksRepository>(new WorshipPlayerAttacksRepository(Game));
 
         // Load all of the objects into each repository.  This is where the assembly will be scanned or the database will be read.
         LoadRepositoryItems();

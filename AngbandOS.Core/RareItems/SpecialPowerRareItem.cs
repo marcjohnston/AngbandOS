@@ -10,8 +10,8 @@ namespace AngbandOS.Core.RareItems;
 [Serializable]
 internal class SpecialPowerRareItem : RareItem
 {
-    private SpecialPowerRareItem(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(LowerXSymbol));
+    private SpecialPowerRareItem(Game game) : base(game) { } // This object is a singleton.
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(LowerXSymbol));
     public override string Name => "Special Power";
     public override int Cost => 0;
     public override string FriendlyName => "";

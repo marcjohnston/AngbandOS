@@ -10,14 +10,14 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class AzathothChaosBookItemFactory : ChaosBookItemFactory
 {
-    private AzathothChaosBookItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private AzathothChaosBookItemFactory(Game game) : base(game) { } // This object is a singleton.
 
 
     /// <summary>
     /// Returns a divisor of 1 because this is the most powerful book for this realm of magic.  Destroying this book provides the most experience.
     /// </summary>
     public override int ExperienceGainDivisorForDestroying => 1;
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(QuestionMarkSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(QuestionMarkSymbol));
     public override ColorEnum Color => ColorEnum.Red;
     public override string Name => "[The Book of Azathoth]";
 
@@ -40,7 +40,7 @@ internal class AzathothChaosBookItemFactory : ChaosBookItemFactory
 
     public override int Weight => 30;
     public override bool KindIsGood => true;
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 
     protected override string[] SpellNames => new string[]
     {

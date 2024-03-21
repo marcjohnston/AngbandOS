@@ -10,7 +10,7 @@ namespace AngbandOS.Core.MonsterRaces;
 [Serializable]
 internal class BlackNagaMonsterRace : MonsterRace
 {
-    protected BlackNagaMonsterRace(SaveGame saveGame) : base(saveGame) { }
+    protected BlackNagaMonsterRace(Game game) : base(game) { }
 
     protected override string SymbolName => nameof(LowerNSymbol);
     public override ColorEnum Color => ColorEnum.Black;

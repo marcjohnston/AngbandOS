@@ -10,13 +10,13 @@ namespace AngbandOS.Core.ArtifactBiases;
 [Serializable]
 internal class PriestlyArtifactBias : ArtifactBias
 {
-    private PriestlyArtifactBias(SaveGame saveGame) : base(saveGame) { }
+    private PriestlyArtifactBias(Game game) : base(game) { }
     public override bool ApplyBonuses(Item item)
     {
         if (!item.RandomArtifactItemCharacteristics.Wis)
         {
             item.RandomArtifactItemCharacteristics.Wis = true;
-            if (SaveGame.DieRoll(2) == 1)
+            if (Game.DieRoll(2) == 1)
             {
                 return true;
             }
@@ -35,41 +35,41 @@ internal class PriestlyArtifactBias : ArtifactBias
 
     public override Activation GetActivationPowerType(Item item)
     {
-        if (SaveGame.DieRoll(13) == 1)
+        if (Game.DieRoll(13) == 1)
         {
-            return SaveGame.SingletonRepository.Activations.Get(nameof(EnslaveUndead1xEvery333Activation));
+            return Game.SingletonRepository.Activations.Get(nameof(EnslaveUndead1xEvery333Activation));
         }
-        else if (SaveGame.DieRoll(12) == 1)
+        else if (Game.DieRoll(12) == 1)
         {
-            return SaveGame.SingletonRepository.Activations.Get(nameof(BanishEvilEvery250p1d250Activation));
+            return Game.SingletonRepository.Activations.Get(nameof(BanishEvilEvery250p1d250Activation));
         }
-        else if (SaveGame.DieRoll(11) == 1)
+        else if (Game.DieRoll(11) == 1)
         {
-            return SaveGame.SingletonRepository.Activations.Get(nameof(DispelEvil5xEvery300p1d300Activation));
+            return Game.SingletonRepository.Activations.Get(nameof(DispelEvil5xEvery300p1d300Activation));
         }
-        else if (SaveGame.DieRoll(10) == 1)
+        else if (Game.DieRoll(10) == 1)
         {
-            return SaveGame.SingletonRepository.Activations.Get(nameof(ProtectionFromEvilActivation));
+            return Game.SingletonRepository.Activations.Get(nameof(ProtectionFromEvilActivation));
         }
-        else if (SaveGame.DieRoll(9) == 1)
+        else if (Game.DieRoll(9) == 1)
         {
-            return SaveGame.SingletonRepository.Activations.Get(nameof(Heal1000Every888Activation));
+            return Game.SingletonRepository.Activations.Get(nameof(Heal1000Every888Activation));
         }
-        else if (SaveGame.DieRoll(8) == 1)
+        else if (Game.DieRoll(8) == 1)
         {
-            return SaveGame.SingletonRepository.Activations.Get(nameof(Heal700Every25Activation));
+            return Game.SingletonRepository.Activations.Get(nameof(Heal700Every25Activation));
         }
-        else if (SaveGame.DieRoll(7) == 1)
+        else if (Game.DieRoll(7) == 1)
         {
-            return SaveGame.SingletonRepository.Activations.Get(nameof(RestAllActivation));
+            return Game.SingletonRepository.Activations.Get(nameof(RestAllActivation));
         }
-        else if (SaveGame.DieRoll(6) == 1)
+        else if (Game.DieRoll(6) == 1)
         {
-            return SaveGame.SingletonRepository.Activations.Get(nameof(RestLifeActivation));
+            return Game.SingletonRepository.Activations.Get(nameof(RestLifeActivation));
         }
         else
         {
-            return SaveGame.SingletonRepository.Activations.Get(nameof(Heal4d8AndWoundsEvery3p1d3Activation));
+            return Game.SingletonRepository.Activations.Get(nameof(Heal4d8AndWoundsEvery3p1d3Activation));
         }
     }
 }

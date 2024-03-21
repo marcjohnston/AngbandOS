@@ -10,9 +10,9 @@ namespace AngbandOS.Core.AttackTypes;
 [Serializable]
 internal class WorshipAttack : Attack
 {
-    private WorshipAttack(SaveGame saveGame) : base(saveGame) { }
+    private WorshipAttack(Game game) : base(game) { }
     public override string MonsterAction => "hero worships {0}";
-    public override string PlayerAction => SaveGame.SingletonRepository.WorshipPlayerAttacks.ToWeightedRandom().ChooseOrDefault();
+    public override string PlayerAction => Game.SingletonRepository.WorshipPlayerAttacks.ToWeightedRandom().ChooseOrDefault();
     public override string KnowledgeAction => "hero worship";
     public override bool AttackTouchesTarget => false;
 }

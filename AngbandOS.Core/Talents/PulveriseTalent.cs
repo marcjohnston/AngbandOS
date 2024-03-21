@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Talents;
 [Serializable]
 internal class PulveriseTalent : Talent
 {
-    private PulveriseTalent(SaveGame saveGame) : base(saveGame) { }
+    private PulveriseTalent(Game game) : base(game) { }
     public override string Name => "Pulverise";
     public override int Level => 11;
     public override int ManaCost => 7;
@@ -18,17 +18,17 @@ internal class PulveriseTalent : Talent
 
     public override void Use()
     {
-        if (!SaveGame.GetDirectionWithAim(out int dir))
+        if (!Game.GetDirectionWithAim(out int dir))
         {
             return;
         }
-        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(SoundProjectile)), dir,
-            SaveGame.DiceRoll(8 + ((SaveGame.ExperienceLevel.Value - 5) / 4), 8), SaveGame.ExperienceLevel.Value > 20 ? ((SaveGame.ExperienceLevel.Value - 20) / 8) + 1 : 0);
+        Game.FireBall(Game.SingletonRepository.Projectiles.Get(nameof(SoundProjectile)), dir,
+            Game.DiceRoll(8 + ((Game.ExperienceLevel.Value - 5) / 4), 8), Game.ExperienceLevel.Value > 20 ? ((Game.ExperienceLevel.Value - 20) / 8) + 1 : 0);
     }
 
     protected override string Comment()
     {
-        return $"dam {8 + ((SaveGame.ExperienceLevel.Value - 5) / 4)}d8";
+        return $"dam {8 + ((Game.ExperienceLevel.Value - 5) / 4)}d8";
         ;
     }
 }

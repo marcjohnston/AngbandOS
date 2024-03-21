@@ -10,18 +10,18 @@ namespace AngbandOS.Core.Timers;
 [Serializable]
 internal class ParalysisTimer : Timer
 {
-    private ParalysisTimer(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private ParalysisTimer(Game game) : base(game) { } // This object is a singleton.
     protected override void EffectStopped()
     {
-        SaveGame.MsgPrint("You can move again.");
+        Game.MsgPrint("You can move again.");
     }
     protected override void EffectIncreased(int newRate, int currentRate)
     {
-        SaveGame.MsgPrint("You are paralyzed!");
+        Game.MsgPrint("You are paralyzed!");
     }
     protected override void Noticed()
     {
-        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawStateFlaggedAction)).Set();
+        Game.SingletonRepository.FlaggedActions.Get(nameof(RedrawStateFlaggedAction)).Set();
         base.Noticed();
     }
 }

@@ -10,11 +10,11 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal abstract class FixedArtifact : IItemCharacteristics, IGetKey
 {
-    protected readonly SaveGame SaveGame;
+    protected readonly Game Game;
 
-    protected FixedArtifact(SaveGame saveGame)
+    protected FixedArtifact(Game game)
     {
-        SaveGame = saveGame;
+        Game = game;
     }
 
     /// <summary>
@@ -44,8 +44,8 @@ internal abstract class FixedArtifact : IItemCharacteristics, IGetKey
 
     public void Bind()
     {
-        BaseItemFactory = SaveGame.SingletonRepository.ItemFactories.Get(BaseItemFactoryName);
-        Activation = SaveGame.SingletonRepository.Activations.BindNullable(ActivationName);
+        BaseItemFactory = Game.SingletonRepository.ItemFactories.Get(BaseItemFactoryName);
+        Activation = Game.SingletonRepository.Activations.BindNullable(ActivationName);
     }
 
     /// <summary>

@@ -10,7 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class GoldenCrownOfTheSunFixedArtifact : FixedArtifact
 {
-    private GoldenCrownOfTheSunFixedArtifact(SaveGame saveGame) : base(saveGame) { }
+    private GoldenCrownOfTheSunFixedArtifact(Game game) : base(game) { }
 
     protected override string BaseItemFactoryName => nameof(GoldenCrownArmorItemFactory);
 
@@ -19,10 +19,10 @@ internal class GoldenCrownOfTheSunFixedArtifact : FixedArtifact
 
     public override void ApplyResistances(Item item)
     {
-        item.RandomPower = SaveGame.SingletonRepository.Powers.ToWeightedRandom(_power => _power.IsAbility == true).Choose();
+        item.RandomPower = Game.SingletonRepository.Powers.ToWeightedRandom(_power => _power.IsAbility == true).Choose();
 
         IArtifactBias artifactBias = null;
-        item.ApplyRandomResistance(ref artifactBias, SaveGame.DieRoll(22) + 16);
+        item.ApplyRandomResistance(ref artifactBias, Game.DieRoll(22) + 16);
     }
 
     public override ColorEnum Color => ColorEnum.Yellow;

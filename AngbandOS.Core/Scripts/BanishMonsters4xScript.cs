@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class BanishMonsters4xScript : Script, IScriptInt, IScript
 {
-    private BanishMonsters4xScript(SaveGame saveGame) : base(saveGame) { }
+    private BanishMonsters4xScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script and returns a success result.
@@ -18,7 +18,7 @@ internal class BanishMonsters4xScript : Script, IScriptInt, IScript
     /// <returns></returns>
     public void ExecuteScriptInt(int dist)
     {
-        SaveGame.ProjectAtAllInLos(SaveGame.SingletonRepository.Projectiles.Get(nameof(TeleportAwayAllProjectile)), dist);
+        Game.ProjectAtAllInLos(Game.SingletonRepository.Projectiles.Get(nameof(TeleportAwayAllProjectile)), dist);
     }
 
     /// <summary>
@@ -26,6 +26,6 @@ internal class BanishMonsters4xScript : Script, IScriptInt, IScript
     /// </summary>
     public void ExecuteScript()
     {
-        ExecuteScriptInt(SaveGame.ExperienceLevel.Value * 4);
+        ExecuteScriptInt(Game.ExperienceLevel.Value * 4);
     }
 }

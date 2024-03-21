@@ -10,7 +10,7 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class WoodenTorchLightSourceItemFactory : LightSourceItemFactory
 {
-    private WoodenTorchLightSourceItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private WoodenTorchLightSourceItemFactory(Game game) : base(game) { } // This object is a singleton.
 
     public override void ApplyMagic(Item item, int level, int power, Store? store)
     {
@@ -20,7 +20,7 @@ internal class WoodenTorchLightSourceItemFactory : LightSourceItemFactory
         }
         else if (item.TypeSpecificValue != 0)
         {
-            item.TypeSpecificValue = SaveGame.DieRoll(item.TypeSpecificValue);
+            item.TypeSpecificValue = Game.DieRoll(item.TypeSpecificValue);
         }
     }
 
@@ -45,7 +45,7 @@ internal class WoodenTorchLightSourceItemFactory : LightSourceItemFactory
     /// </summary>
     public override int BurnRate => 1;
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(TildeSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(TildeSymbol));
     public override ColorEnum Color => ColorEnum.Brown;
     public override string Name => "Wooden Torch";
 
@@ -68,12 +68,12 @@ internal class WoodenTorchLightSourceItemFactory : LightSourceItemFactory
     /// Refill a torch from another torch
     /// </summary>
     /// <param name="itemIndex"> The inventory index of the fuel </param>
-    public override void Refill(SaveGame saveGame, Item item)
+    public override void Refill(Game game, Item item)
     {
         // Get an item if we don't already have one
-        if (!saveGame.SelectItem(out Item? fuelSource, "Refuel with which torch? ", false, true, true, SaveGame.SingletonRepository.ItemFilters.Get(nameof(TorchFuelItemFilter))))
+        if (!game.SelectItem(out Item? fuelSource, "Refuel with which torch? ", false, true, true, Game.SingletonRepository.ItemFilters.Get(nameof(TorchFuelItemFilter))))
         {
-            saveGame.MsgPrint("You have no extra torches.");
+            game.MsgPrint("You have no extra torches.");
             return;
         }
         if (fuelSource == null)
@@ -82,41 +82,41 @@ internal class WoodenTorchLightSourceItemFactory : LightSourceItemFactory
         }
 
         // Check that our fuel is suitable
-        if (!saveGame.ItemMatchesFilter(fuelSource, SaveGame.SingletonRepository.ItemFilters.Get(nameof(TorchFuelItemFilter))))
+        if (!game.ItemMatchesFilter(fuelSource, Game.SingletonRepository.ItemFilters.Get(nameof(TorchFuelItemFilter))))
         {
-            saveGame.MsgPrint("You can't refill a torch with that!");
+            game.MsgPrint("You can't refill a torch with that!");
             return;
         }
         // Refueling takes half a turn
-        saveGame.EnergyUse = 50;
+        game.EnergyUse = 50;
 
         // Add the fuel
         item.TypeSpecificValue += fuelSource.TypeSpecificValue + 5;
-        saveGame.MsgPrint("You combine the torches.");
+        game.MsgPrint("You combine the torches.");
 
         // Check for overfilling
         if (item.TypeSpecificValue >= Constants.FuelTorch)
         {
             item.TypeSpecificValue = Constants.FuelTorch;
-            saveGame.MsgPrint("Your torch is fully fueled.");
+            game.MsgPrint("Your torch is fully fueled.");
         }
         else
         {
-            saveGame.MsgPrint("Your torch glows more brightly.");
+            game.MsgPrint("Your torch glows more brightly.");
         }
 
         // Update the player's inventory
         fuelSource.ItemIncrease(-1);
         fuelSource.ItemDescribe();
         fuelSource.ItemOptimize();
-        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateTorchRadiusFlaggedAction)).Set();
+        Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateTorchRadiusFlaggedAction)).Set();
     }
 
     /// <summary>
     /// Returns a new WoodenTorchLightSourceItem.
     /// </summary>
     /// <returns></returns>
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 
     /// <summary>
     /// Returns a radius of 1 because a torch provides light shorter than the default 2 radius for a typical light source.

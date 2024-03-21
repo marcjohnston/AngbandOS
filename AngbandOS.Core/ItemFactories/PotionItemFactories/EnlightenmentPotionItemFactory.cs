@@ -10,9 +10,9 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class EnlightenmentPotionItemFactory : PotionItemFactory
 {
-    private EnlightenmentPotionItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private EnlightenmentPotionItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(ExclamationPointSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(ExclamationPointSymbol));
     public override string Name => "Enlightenment";
 
     public override int[] Chance => new int[] { 1, 1, 1, 0 };
@@ -26,9 +26,9 @@ internal class EnlightenmentPotionItemFactory : PotionItemFactory
     public override bool Quaff()
     {
         // Enlightenment shows you the whole level
-        SaveGame.MsgPrint("An image of your surroundings forms in your mind...");
-        SaveGame.RunScript(nameof(LightScript));
+        Game.MsgPrint("An image of your surroundings forms in your mind...");
+        Game.RunScript(nameof(LightScript));
         return true;
     }
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Animations;
 [Serializable]
 internal class WhiteSwirlAnimation : Animation
 {
-    private WhiteSwirlAnimation(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private WhiteSwirlAnimation(Game game) : base(game) { } // This object is a singleton.
     public override char Character => '*';
     public override string Name => "WhiteSwirl";
     public override string Sequence => @"|/-\|/-\|/-\|/-\";

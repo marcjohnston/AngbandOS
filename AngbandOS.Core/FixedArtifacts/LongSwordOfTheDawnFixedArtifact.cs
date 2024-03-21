@@ -10,7 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class LongSwordOfTheDawnFixedArtifact : FixedArtifact
 {
-    private LongSwordOfTheDawnFixedArtifact(SaveGame saveGame) : base(saveGame) { }
+    private LongSwordOfTheDawnFixedArtifact(Game game) : base(game) { }
 
     protected override string BaseItemFactoryName => nameof(LongSwordWeaponItemFactory);
 

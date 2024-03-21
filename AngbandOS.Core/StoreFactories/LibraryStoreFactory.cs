@@ -10,7 +10,7 @@ namespace AngbandOS.Core.StoreFactories;
 [Serializable]
 internal class LibraryStoreFactory : StoreFactory
 {
-    private LibraryStoreFactory(SaveGame saveGame) : base(saveGame) { }
+    private LibraryStoreFactory(Game game) : base(game) { }
 
     protected override string[] ShopkeeperNames => new string[]
     {

@@ -10,7 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class RingOfMagicFixedArtifact : FixedArtifact, IFixedArtifactActivatible
 {
-    private RingOfMagicFixedArtifact(SaveGame saveGame) : base(saveGame) { }
+    private RingOfMagicFixedArtifact(Game game) : base(game) { }
 
     protected override string BaseItemFactoryName => nameof(BarahirRingItemFactory);
 
@@ -18,14 +18,14 @@ internal class RingOfMagicFixedArtifact : FixedArtifact, IFixedArtifactActivatib
     protected override string? ActivationName => nameof(DrainLife100Every100p1d100Activation);
     public void ActivateItem(Item item)
     {
-        SaveGame.MsgPrint("You order Frakir to strangle your opponent.");
-        if (!SaveGame.GetDirectionWithAim(out int dir))
+        Game.MsgPrint("You order Frakir to strangle your opponent.");
+        if (!Game.GetDirectionWithAim(out int dir))
         {
             return;
         }
-        if (SaveGame.DrainLife(dir, 100))
+        if (Game.DrainLife(dir, 100))
         {
-            item.RechargeTimeLeft = base.SaveGame.RandomLessThan(100) + 100;
+            item.RechargeTimeLeft = base.Game.RandomLessThan(100) + 100;
         }
     }
     public string DescribeActivationEffect => " every 100+d100 turns";

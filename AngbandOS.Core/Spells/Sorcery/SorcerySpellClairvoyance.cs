@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Spells.Sorcery;
 [Serializable]
 internal class SorcerySpellClairvoyance : Spell
 {
-    private SorcerySpellClairvoyance(SaveGame saveGame) : base(saveGame) { }
+    private SorcerySpellClairvoyance(Game game) : base(game) { }
     protected override string? CastScriptName => nameof(ClairvoyanceScript);
 
     public override string Name => "Clairvoyance";

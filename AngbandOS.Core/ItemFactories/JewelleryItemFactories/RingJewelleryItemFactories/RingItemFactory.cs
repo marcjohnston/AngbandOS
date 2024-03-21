@@ -23,7 +23,7 @@ internal abstract class RingItemFactory : JewelleryItemFactory, IFlavorFactory
         }
         string flavor = item.IdentityIsStoreBought ? "" : $"{FlavorFactory.Flavor.Name} ";
         string ofName = isFlavorAware ? $" of {FriendlyName}" : "";
-        string name = $"{flavor}{SaveGame.CountPluralize("Ring", item.Count)}{ofName}";
+        string name = $"{flavor}{Game.CountPluralize("Ring", item.Count)}{ofName}";
         return includeCountPrefix ? GetPrefixCount(true, name, item.Count, item.IsKnownArtifact) : name;
     }
 
@@ -34,7 +34,7 @@ internal abstract class RingItemFactory : JewelleryItemFactory, IFlavorFactory
     {
         get
         {
-            if (SaveGame.GetInventoryItem(InventorySlot.RightHand) == null)
+            if (Game.GetInventoryItem(InventorySlot.RightHand) == null)
             {
                 return InventorySlot.RightHand;
             }
@@ -42,13 +42,13 @@ internal abstract class RingItemFactory : JewelleryItemFactory, IFlavorFactory
         }
     }
 
-    public RingItemFactory(SaveGame saveGame) : base(saveGame) { }
-    public override ItemClass ItemClass => SaveGame.SingletonRepository.ItemClasses.Get(nameof(RingsItemClass));
+    public RingItemFactory(Game game) : base(game) { }
+    public override ItemClass ItemClass => Game.SingletonRepository.ItemClasses.Get(nameof(RingsItemClass));
 
     /// <summary>
     /// Returns the ring flavors repository because rings have flavors that need to be identified.
     /// </summary>
-    public IEnumerable<Flavor> GetFlavorRepository() => SaveGame.SingletonRepository.RingReadableFlavors;
+    public IEnumerable<Flavor> GetFlavorRepository() => Game.SingletonRepository.RingReadableFlavors;
 
     /// <inheritdoc/>
     public Flavor Flavor { get; set; }
@@ -57,12 +57,12 @@ internal abstract class RingItemFactory : JewelleryItemFactory, IFlavorFactory
     {
         get
         {
-            BaseInventorySlot rightHand = SaveGame.SingletonRepository.InventorySlots.Get(nameof(RightHandInventorySlot));
+            BaseInventorySlot rightHand = Game.SingletonRepository.InventorySlots.Get(nameof(RightHandInventorySlot));
             if (rightHand.Count == 0)
             {
                 return rightHand;
             }
-            return SaveGame.SingletonRepository.InventorySlots.Get(nameof(LeftHandInventorySlot));
+            return Game.SingletonRepository.InventorySlots.Get(nameof(LeftHandInventorySlot));
         }
     }
     public override int PackSort => 16;

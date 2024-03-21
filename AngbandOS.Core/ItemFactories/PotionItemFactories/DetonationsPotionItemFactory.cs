@@ -10,9 +10,9 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class DetonationsPotionItemFactory : PotionItemFactory
 {
-    private DetonationsPotionItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private DetonationsPotionItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(ExclamationPointSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(ExclamationPointSymbol));
     public override string Name => "Detonations";
 
     public override int[] Chance => new int[] { 8, 0, 0, 0 };
@@ -26,17 +26,17 @@ internal class DetonationsPotionItemFactory : PotionItemFactory
     public override bool Quaff()
     {
         // Detonations does 50d20 damage, stuns you, and gives you a stupid amount of bleeding
-        SaveGame.MsgPrint("Massive explosions rupture your body!");
-        SaveGame.TakeHit(SaveGame.DiceRoll(50, 20), "a potion of Detonation");
-        SaveGame.StunTimer.AddTimer(75);
-        SaveGame.BleedingTimer.AddTimer(5000);
+        Game.MsgPrint("Massive explosions rupture your body!");
+        Game.TakeHit(Game.DiceRoll(50, 20), "a potion of Detonation");
+        Game.StunTimer.AddTimer(75);
+        Game.BleedingTimer.AddTimer(5000);
         return true;
     }
 
     public override bool Smash(int who, int y, int x)
     {
-        SaveGame.Project(who, 2, y, x, SaveGame.DiceRoll(25, 25), SaveGame.SingletonRepository.Projectiles.Get(nameof(ExplodeProjectile)), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
+        Game.Project(who, 2, y, x, Game.DiceRoll(25, 25), Game.SingletonRepository.Projectiles.Get(nameof(ExplodeProjectile)), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
         return true;
     }
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

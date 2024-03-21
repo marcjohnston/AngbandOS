@@ -10,9 +10,9 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class IceScrollItemFactory : ScrollItemFactory
 {
-    private IceScrollItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private IceScrollItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(QuestionMarkSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(QuestionMarkSymbol));
     public override string Name => "Ice";
 
     public override int[] Chance => new int[] { 6, 0, 0, 0 };
@@ -25,12 +25,12 @@ internal class IceScrollItemFactory : ScrollItemFactory
 
     public override void Read(ReadScrollEvent eventArgs)
     {
-        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(IceProjectile)), 0, 175, 4);
-        if (!(SaveGame.ColdResistanceTimer.Value != 0 || SaveGame.HasColdResistance || SaveGame.HasColdImmunity))
+        Game.FireBall(Game.SingletonRepository.Projectiles.Get(nameof(IceProjectile)), 0, 175, 4);
+        if (!(Game.ColdResistanceTimer.Value != 0 || Game.HasColdResistance || Game.HasColdImmunity))
         {
-            SaveGame.TakeHit(100 + SaveGame.DieRoll(100), "a Scroll of Ice");
+            Game.TakeHit(100 + Game.DieRoll(100), "a Scroll of Ice");
         }
         eventArgs.Identified = true;
     }
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

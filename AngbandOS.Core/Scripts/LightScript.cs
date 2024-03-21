@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class LightScript : Script, IScript
 {
-    private LightScript(SaveGame saveGame) : base(saveGame) { }
+    private LightScript(Game game) : base(game) { }
 
     /// <summary>
     /// Lights the map.
@@ -18,18 +18,18 @@ internal class LightScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        for (int y = 1; y < SaveGame.CurHgt - 1; y++)
+        for (int y = 1; y < Game.CurHgt - 1; y++)
         {
-            for (int x = 1; x < SaveGame.CurWid - 1; x++)
+            for (int x = 1; x < Game.CurWid - 1; x++)
             {
-                GridTile cPtr = SaveGame.Grid[y][x];
+                GridTile cPtr = Game.Grid[y][x];
                 if (!cPtr.FeatureType.IsWall)
                 {
                     for (int i = 0; i < 9; i++)
                     {
-                        int yy = y + SaveGame.OrderedDirectionYOffset[i];
-                        int xx = x + SaveGame.OrderedDirectionXOffset[i];
-                        cPtr = SaveGame.Grid[yy][xx];
+                        int yy = y + Game.OrderedDirectionYOffset[i];
+                        int xx = x + Game.OrderedDirectionXOffset[i];
+                        cPtr = Game.Grid[yy][xx];
                         cPtr.TileFlags.Set(GridTile.SelfLit);
                         if (!cPtr.FeatureType.IsOpenFloor)
                         {
@@ -44,7 +44,7 @@ internal class LightScript : Script, IScript
                 }
             }
         }
-        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateMonstersFlaggedAction)).Set();
-        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawMapFlaggedAction)).Set();
+        Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateMonstersFlaggedAction)).Set();
+        Game.SingletonRepository.FlaggedActions.Get(nameof(RedrawMapFlaggedAction)).Set();
     }
 }

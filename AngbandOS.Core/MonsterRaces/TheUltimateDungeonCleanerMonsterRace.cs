@@ -10,7 +10,7 @@ namespace AngbandOS.Core.MonsterRaces;
 [Serializable]
 internal class TheUltimateDungeonCleanerMonsterRace : MonsterRace
 {
-    protected TheUltimateDungeonCleanerMonsterRace(SaveGame saveGame) : base(saveGame) { }
+    protected TheUltimateDungeonCleanerMonsterRace(Game game) : base(game) { }
 
     protected override string SymbolName => nameof(LowerGSymbol);
     public override ColorEnum Color => ColorEnum.Black;

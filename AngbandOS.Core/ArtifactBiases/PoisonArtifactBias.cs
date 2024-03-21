@@ -10,13 +10,13 @@ namespace AngbandOS.Core.ArtifactBiases;
 [Serializable]
 internal class PoisonArtifactBias : ArtifactBias
 {
-    private PoisonArtifactBias(SaveGame saveGame) : base(saveGame) { }
+    private PoisonArtifactBias(Game game) : base(game) { }
     public override bool ApplyRandomResistances(Item item)
     {
         if (!item.RandomArtifactItemCharacteristics.ResPois)
         {
             item.RandomArtifactItemCharacteristics.ResPois = true;
-            if (SaveGame.DieRoll(2) == 1)
+            if (Game.DieRoll(2) == 1)
             {
                 return true;
             }
@@ -31,7 +31,7 @@ internal class PoisonArtifactBias : ArtifactBias
             if (!item.RandomArtifactItemCharacteristics.BrandPois)
             {
                 item.RandomArtifactItemCharacteristics.BrandPois = true;
-                if (SaveGame.DieRoll(2) == 1)
+                if (Game.DieRoll(2) == 1)
                 {
                     return true;
                 }
@@ -42,6 +42,6 @@ internal class PoisonArtifactBias : ArtifactBias
 
     public override Activation GetActivationPowerType(Item item)
     {
-        return SaveGame.SingletonRepository.Activations.Get(nameof(StinkingCloud12Every4p1d4Activation));
+        return Game.SingletonRepository.Activations.Get(nameof(StinkingCloud12Every4p1d4Activation));
     }
 }

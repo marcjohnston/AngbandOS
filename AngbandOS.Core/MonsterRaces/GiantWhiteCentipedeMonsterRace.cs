@@ -10,7 +10,7 @@ namespace AngbandOS.Core.MonsterRaces;
 [Serializable]
 internal class GiantWhiteCentipedeMonsterRace : MonsterRace
 {
-    protected GiantWhiteCentipedeMonsterRace(SaveGame saveGame) : base(saveGame) { }
+    protected GiantWhiteCentipedeMonsterRace(Game game) : base(game) { }
 
     protected override string SymbolName => nameof(LowerCSymbol);
     public override string Name => "Giant white centipede";

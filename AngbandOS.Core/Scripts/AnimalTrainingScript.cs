@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class AnimalTrainingScript : Script, IScript
 {
-    private AnimalTrainingScript(SaveGame saveGame) : base(saveGame) { }
+    private AnimalTrainingScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script.
@@ -18,10 +18,10 @@ internal class AnimalTrainingScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        if (!SaveGame.GetDirectionWithAim(out int dir))
+        if (!Game.GetDirectionWithAim(out int dir))
         {
             return;
         }
-        SaveGame.CharmAnimal(dir, SaveGame.ExperienceLevel.Value);
+        Game.CharmAnimal(dir, Game.ExperienceLevel.Value);
     }
 }

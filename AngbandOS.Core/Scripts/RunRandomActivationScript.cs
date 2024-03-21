@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class RunRandomActivationScript : Script, IScript
 {
-    private RunRandomActivationScript(SaveGame saveGame) : base(saveGame) { }
+    private RunRandomActivationScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the activate power script.
@@ -19,31 +19,31 @@ internal class RunRandomActivationScript : Script, IScript
     public void ExecuteScript()
     {
         string selection;
-        SaveGame.FullScreenOverlay = true;
-        ScreenBuffer savedScreen = SaveGame.Screen.Clone();
+        Game.FullScreenOverlay = true;
+        ScreenBuffer savedScreen = Game.Screen.Clone();
         try
         {
-            SaveGame.SetBackground(BackgroundImageEnum.Normal);
+            Game.SetBackground(BackgroundImageEnum.Normal);
 
-            SaveGame.Screen.Clear();
+            Game.Screen.Clear();
             int index = 0;
-            foreach (Activation activationPower in SaveGame.SingletonRepository.Activations)
+            foreach (Activation activationPower in Game.SingletonRepository.Activations)
             {
                 int row = 2 + (index % 40);
                 int col = 30 * (index / 40);
-                SaveGame.Screen.PrintLine($"{index + 1}. {activationPower.Name}", row, col);
+                Game.Screen.PrintLine($"{index + 1}. {activationPower.Name}", row, col);
                 index++;
             }
-            if (!SaveGame.GetString("Activation power?", out selection, "", 3))
+            if (!Game.GetString("Activation power?", out selection, "", 3))
             {
                 return;
             }
         }
         finally
         {
-            SaveGame.Screen.Restore(savedScreen);
-            SaveGame.FullScreenOverlay = false;
-            SaveGame.SetBackground(BackgroundImageEnum.Overhead);
+            Game.Screen.Restore(savedScreen);
+            Game.FullScreenOverlay = false;
+            Game.SetBackground(BackgroundImageEnum.Overhead);
         }
 
         if (!Int32.TryParse(selection, out int selectedIndex))
@@ -51,12 +51,12 @@ internal class RunRandomActivationScript : Script, IScript
             return;
         }
         selectedIndex--;
-        if (selectedIndex < 0 || selectedIndex > SaveGame.SingletonRepository.Activations.Count)
+        if (selectedIndex < 0 || selectedIndex > Game.SingletonRepository.Activations.Count)
         {
             return;
         }
 
-        Activation activation = SaveGame.SingletonRepository.Activations[selectedIndex];
+        Activation activation = Game.SingletonRepository.Activations[selectedIndex];
         //activation.Activate();
     }
 }

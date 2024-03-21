@@ -13,7 +13,7 @@ namespace AngbandOS.Core.StoreCommands;
 [Serializable]
 internal class QuerySymbolStoreCommand : StoreCommand
 {
-    private QuerySymbolStoreCommand(SaveGame saveGame) : base(saveGame) { }
+    private QuerySymbolStoreCommand(Game game) : base(game) { }
     public override char KeyChar => '/';
 
     public override string Description => "";

@@ -11,7 +11,7 @@ namespace AngbandOS.Core.StoreCommands;
 internal class ResearchItemStoreCommand : StoreCommand
 
 {
-    private ResearchItemStoreCommand(SaveGame saveGame) : base(saveGame) { }
+    private ResearchItemStoreCommand(Game game) : base(game) { }
     public override char KeyChar => 'r';
 
     public override string Description => "Research an item";

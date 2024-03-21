@@ -10,7 +10,7 @@ namespace AngbandOS.Core.AttackEffects;
 [Serializable]
 internal class ParalyzeAttackEffect : AttackEffect
 {
-    private ParalyzeAttackEffect(SaveGame saveGame) : base(saveGame) { }
+    private ParalyzeAttackEffect(Game game) : base(game) { }
     public override int Power => 2;
     public override string Description => "paralyze";
     public override void ApplyToPlayer(int monsterLevel, int monsterIndex, int armorClass, string monsterDescription, Monster monster, ref bool obvious, ref int damage, ref bool blinked)
@@ -19,29 +19,29 @@ internal class ParalyzeAttackEffect : AttackEffect
         {
             damage = 1;
         }
-        SaveGame.TakeHit(damage, monsterDescription);
-        if (SaveGame.HasFreeAction)
+        Game.TakeHit(damage, monsterDescription);
+        if (Game.HasFreeAction)
         {
-            SaveGame.MsgPrint("You are unaffected!");
+            Game.MsgPrint("You are unaffected!");
             obvious = true;
         }
-        else if (SaveGame.RandomLessThan(100) < SaveGame.SkillSavingThrow)
+        else if (Game.RandomLessThan(100) < Game.SkillSavingThrow)
         {
-            SaveGame.MsgPrint("You resist the effects!");
+            Game.MsgPrint("You resist the effects!");
             obvious = true;
         }
         else
         {
-            if (SaveGame.ParalysisTimer.AddTimer(3 + SaveGame.DieRoll(monsterLevel)))
+            if (Game.ParalysisTimer.AddTimer(3 + Game.DieRoll(monsterLevel)))
             {
                 obvious = true;
             }
         }
-        SaveGame.UpdateSmartLearn(monster, SaveGame.SingletonRepository.SpellResistantDetections.Get(nameof(FreeSpellResistantDetection)));
+        Game.UpdateSmartLearn(monster, Game.SingletonRepository.SpellResistantDetections.Get(nameof(FreeSpellResistantDetection)));
     }
     public override void ApplyToMonster(Monster monster, int armorClass, ref int damage, ref Projectile? pt, ref bool blinked)
     {
-        pt = SaveGame.SingletonRepository.Projectiles.Get(nameof(OldSleepProjectile));
+        pt = Game.SingletonRepository.Projectiles.Get(nameof(OldSleepProjectile));
         damage = monster.Race.Level;
     }
 }

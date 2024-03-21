@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class DestroyAllScript : Script, IScript, IRepeatableScript, IStoreScript
 {
-    private DestroyAllScript(SaveGame saveGame) : base(saveGame) { }
+    private DestroyAllScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the destroy all script.  Does not modify any of the store flags.
@@ -41,7 +41,7 @@ internal class DestroyAllScript : Script, IScript, IRepeatableScript, IStoreScri
         // Look for worthless items
         for (int i = InventorySlot.PackCount - 1; i >= 0; i--)
         {
-            Item? item = SaveGame.GetInventoryItem(i);
+            Item? item = Game.GetInventoryItem(i);
             if (item == null)
             {
                 continue;
@@ -52,21 +52,21 @@ internal class DestroyAllScript : Script, IScript, IRepeatableScript, IStoreScri
                 continue;
             }
             string itemName = item.Description(true, 3);
-            SaveGame.MsgPrint($"You destroy {itemName}.");
+            Game.MsgPrint($"You destroy {itemName}.");
             count++;
             int amount = item.Count;
-            SaveGame.InvenItemIncrease(i, -amount);
-            SaveGame.InvenItemOptimize(i);
+            Game.InvenItemIncrease(i, -amount);
+            Game.InvenItemOptimize(i);
         }
         if (count == 0)
         {
-            SaveGame.MsgPrint("You are carrying nothing worth destroying.");
-            SaveGame.EnergyUse = 0;
+            Game.MsgPrint("You are carrying nothing worth destroying.");
+            Game.EnergyUse = 0;
         }
         else
         {
             // If we destroyed at least one thing, take a turn
-            SaveGame.EnergyUse = 100;
+            Game.EnergyUse = 100;
         }
     }
 }

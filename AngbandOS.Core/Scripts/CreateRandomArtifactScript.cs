@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class CreateRandomArtifactScript : Script, IScript
 {
-    private CreateRandomArtifactScript(SaveGame saveGame) : base(saveGame) { }
+    private CreateRandomArtifactScript(Game game) : base(game) { }
 
     /// <summary>
     /// Creates an artifact from a chosen item.
@@ -19,9 +19,9 @@ internal class CreateRandomArtifactScript : Script, IScript
     public void ExecuteScript()
     {
         bool okay;
-        if (!SaveGame.SelectItem(out Item? oPtr, "Enchant which item? ", true, true, true, SaveGame.SingletonRepository.ItemFilters.Get(nameof(WeaponsItemFilter))))
+        if (!Game.SelectItem(out Item? oPtr, "Enchant which item? ", true, true, true, Game.SingletonRepository.ItemFilters.Get(nameof(WeaponsItemFilter))))
         {
-            SaveGame.MsgPrint("You have nothing to enchant.");
+            Game.MsgPrint("You have nothing to enchant.");
             return;
         }
         if (oPtr == null)
@@ -31,35 +31,35 @@ internal class CreateRandomArtifactScript : Script, IScript
         string oName = oPtr.Description(false, 0);
         string your = oPtr.IsInInventory ? "Your" : "The";
         string s = oPtr.Count > 1 ? "" : "s";
-        SaveGame.MsgPrint($"{your} {oName} radiate{s} a blinding light!");
+        Game.MsgPrint($"{your} {oName} radiate{s} a blinding light!");
         if (oPtr.IsArtifact)
         {
             string are = oPtr.Count > 1 ? "are" : "is";
             s = oPtr.Count > 1 ? "artifacts" : "an artifact";
-            SaveGame.MsgPrint($"The {oName} {are} already {s}!");
+            Game.MsgPrint($"The {oName} {are} already {s}!");
             okay = false;
         }
         else if (oPtr.RareItem != null)
         {
             string are = oPtr.Count > 1 ? "are" : "is";
             s = oPtr.Count > 1 ? "rare items" : "a rare item";
-            SaveGame.MsgPrint($"The {oName} {are} already {s}!");
+            Game.MsgPrint($"The {oName} {are} already {s}!");
             okay = false;
         }
         else
         {
             if (oPtr.Count > 1)
             {
-                SaveGame.MsgPrint("Not enough energy to enchant more than one object!");
+                Game.MsgPrint("Not enough energy to enchant more than one object!");
                 s = oPtr.Count > 2 ? "were" : "was";
-                SaveGame.MsgPrint($"{oPtr.Count - 1} of your {oName} {s} destroyed!");
+                Game.MsgPrint($"{oPtr.Count - 1} of your {oName} {s} destroyed!");
                 oPtr.Count = 1;
             }
             okay = oPtr.CreateRandomArtifact(true);
         }
         if (!okay)
         {
-            SaveGame.MsgPrint("The enchantment failed.");
+            Game.MsgPrint("The enchantment failed.");
         }
     }
 }

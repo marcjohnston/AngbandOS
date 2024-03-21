@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Mutations.RandomMutations;
 [Serializable]
 internal class WastingRandomMutation : Mutation
 {
-    private WastingRandomMutation(SaveGame saveGame) : base(saveGame) { }
+    private WastingRandomMutation(Game game) : base(game) { }
     public override int Frequency => 1;
     public override string GainMessage => "You suddenly contract a horrible wasting disease.";
     public override string HaveMessage => "You have a horrible wasting disease.";
@@ -18,58 +18,58 @@ internal class WastingRandomMutation : Mutation
 
     public override void OnProcessWorld()
     {
-        if (base.SaveGame.DieRoll(3000) != 13)
+        if (base.Game.DieRoll(3000) != 13)
         {
             return;
         }
-        int whichStat = base.SaveGame.RandomLessThan(6);
+        int whichStat = base.Game.RandomLessThan(6);
         bool sustained = false;
         switch (whichStat)
         {
             case Ability.Strength:
-                if (SaveGame.HasSustainStrength)
+                if (Game.HasSustainStrength)
                 {
                     sustained = true;
                 }
                 break;
 
             case Ability.Intelligence:
-                if (SaveGame.HasSustainIntelligence)
+                if (Game.HasSustainIntelligence)
                 {
                     sustained = true;
                 }
                 break;
 
             case Ability.Wisdom:
-                if (SaveGame.HasSustainWisdom)
+                if (Game.HasSustainWisdom)
                 {
                     sustained = true;
                 }
                 break;
 
             case Ability.Dexterity:
-                if (SaveGame.HasSustainDexterity)
+                if (Game.HasSustainDexterity)
                 {
                     sustained = true;
                 }
                 break;
 
             case Ability.Constitution:
-                if (SaveGame.HasSustainConstitution)
+                if (Game.HasSustainConstitution)
                 {
                     sustained = true;
                 }
                 break;
 
             case Ability.Charisma:
-                if (SaveGame.HasSustainCharisma)
+                if (Game.HasSustainCharisma)
                 {
                     sustained = true;
                 }
                 break;
 
             default:
-                SaveGame.MsgPrint("Invalid stat chosen!");
+                Game.MsgPrint("Invalid stat chosen!");
                 sustained = true;
                 break;
         }
@@ -77,15 +77,15 @@ internal class WastingRandomMutation : Mutation
         {
             return;
         }
-        SaveGame.Disturb(false);
-        if (base.SaveGame.DieRoll(10) <= SaveGame.SingletonRepository.Gods.Get(nameof(LobonGod)).AdjustedFavour)
+        Game.Disturb(false);
+        if (base.Game.DieRoll(10) <= Game.SingletonRepository.Gods.Get(nameof(LobonGod)).AdjustedFavour)
         {
-            SaveGame.MsgPrint("Lobon's favour protects you from wasting away!");
-            SaveGame.MsgPrint(null);
+            Game.MsgPrint("Lobon's favour protects you from wasting away!");
+            Game.MsgPrint(null);
             return;
         }
-        SaveGame.MsgPrint("You can feel yourself wasting away!");
-        SaveGame.MsgPrint(null);
-        SaveGame.DecreaseAbilityScore(whichStat, base.SaveGame.DieRoll(6) + 6, base.SaveGame.DieRoll(3) == 1);
+        Game.MsgPrint("You can feel yourself wasting away!");
+        Game.MsgPrint(null);
+        Game.DecreaseAbilityScore(whichStat, base.Game.DieRoll(6) + 6, base.Game.DieRoll(3) == 1);
     }
 }

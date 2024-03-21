@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class GainMutationScript : Script, IScript
 {
-    private GainMutationScript(SaveGame saveGame) : base(saveGame) { }
+    private GainMutationScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script.
@@ -18,52 +18,52 @@ internal class GainMutationScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        if (SaveGame.MutationsNotPossessed.Count == 0)
+        if (Game.MutationsNotPossessed.Count == 0)
         {
             return;
         }
-        SaveGame.MsgPrint("You change...");
+        Game.MsgPrint("You change...");
         int total = 0;
-        foreach (Mutation mutation in SaveGame.MutationsNotPossessed)
+        foreach (Mutation mutation in Game.MutationsNotPossessed)
         {
             total += mutation.Frequency;
         }
-        int roll = SaveGame.DieRoll(total);
-        for (int i = 0; i < SaveGame.MutationsNotPossessed.Count; i++)
+        int roll = Game.DieRoll(total);
+        for (int i = 0; i < Game.MutationsNotPossessed.Count; i++)
         {
-            roll -= SaveGame.MutationsNotPossessed[i].Frequency;
+            roll -= Game.MutationsNotPossessed[i].Frequency;
             if (roll > 0)
             {
                 continue;
             }
-            Mutation mutation = SaveGame.MutationsNotPossessed[i];
-            SaveGame.MutationsNotPossessed.RemoveAt(i);
-            if (SaveGame.MutationsPossessed.Count > 0 && mutation.Group != MutationGroup.None)
+            Mutation mutation = Game.MutationsNotPossessed[i];
+            Game.MutationsNotPossessed.RemoveAt(i);
+            if (Game.MutationsPossessed.Count > 0 && mutation.Group != MutationGroup.None)
             {
                 int j = 0;
                 do
                 {
-                    if (SaveGame.MutationsPossessed[j].Group == mutation.Group)
+                    if (Game.MutationsPossessed[j].Group == mutation.Group)
                     {
-                        Mutation other = SaveGame.MutationsPossessed[j];
-                        SaveGame.MutationsPossessed.RemoveAt(j);
+                        Mutation other = Game.MutationsPossessed[j];
+                        Game.MutationsPossessed.RemoveAt(j);
                         other.OnLose();
-                        SaveGame.MsgPrint(other.LoseMessage);
-                        SaveGame.MutationsNotPossessed.Add(other);
+                        Game.MsgPrint(other.LoseMessage);
+                        Game.MutationsNotPossessed.Add(other);
                     }
                     else
                     {
                         j++;
                     }
-                } while (j < SaveGame.MutationsPossessed.Count);
+                } while (j < Game.MutationsPossessed.Count);
             }
-            SaveGame.MutationsPossessed.Add(mutation);
+            Game.MutationsPossessed.Add(mutation);
             mutation.OnGain();
-            SaveGame.MsgPrint(mutation.GainMessage);
-            SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
-            SaveGame.HandleStuff();
+            Game.MsgPrint(mutation.GainMessage);
+            Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
+            Game.HandleStuff();
             return;
         }
-        SaveGame.MsgPrint("Oops! Fell out of mutation list!");
+        Game.MsgPrint("Oops! Fell out of mutation list!");
     }
 }

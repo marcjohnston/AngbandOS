@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Spells.Sorcery;
 [Serializable]
 internal class SorcerySpellPhaseDoor : Spell
 {
-    private SorcerySpellPhaseDoor(SaveGame saveGame) : base(saveGame) { }
+    private SorcerySpellPhaseDoor(Game game) : base(game) { }
     protected override string? CastScriptName => nameof(PhaseDoorScript);
 
     public override string Name => "Phase Door";

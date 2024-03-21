@@ -10,15 +10,15 @@ namespace AngbandOS.Core.Projection;
 [Serializable]
 internal class NukeProjectile : Projectile
 {
-    private NukeProjectile(SaveGame saveGame) : base(saveGame) { }
+    private NukeProjectile(Game game) : base(game) { }
 
-    protected override ProjectileGraphic? BoltProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get(nameof(BrightChartreuseSplatProjectileGraphic));
+    protected override ProjectileGraphic? BoltProjectileGraphic => Game.SingletonRepository.ProjectileGraphics.Get(nameof(BrightChartreuseSplatProjectileGraphic));
 
-    protected override Animation EffectAnimation => SaveGame.SingletonRepository.Animations.Get(nameof(ChartreuseFlashAnimation));
+    protected override Animation EffectAnimation => Game.SingletonRepository.Animations.Get(nameof(ChartreuseFlashAnimation));
 
     protected override bool AffectMonster(int who, Monster mPtr, int dam, int r)
     {
-        GridTile cPtr = SaveGame.Grid[mPtr.MapY][mPtr.MapX];
+        GridTile cPtr = Game.Grid[mPtr.MapY][mPtr.MapX];
         MonsterRace rPtr = mPtr.Race;
         bool seen = mPtr.IsVisible;
         bool obvious = false;
@@ -32,13 +32,13 @@ internal class NukeProjectile : Projectile
         {
             note = " resists.";
             dam *= 3;
-            dam /= SaveGame.DieRoll(6) + 6;
+            dam /= Game.DieRoll(6) + 6;
             if (seen)
             {
                 rPtr.Knowledge.Characteristics.ImmunePoison = true;
             }
         }
-        else if (SaveGame.DieRoll(3) == 1)
+        else if (Game.DieRoll(3) == 1)
         {
             doPoly = true;
         }
@@ -50,19 +50,19 @@ internal class NukeProjectile : Projectile
         {
             doPoly = false;
         }
-        if (doPoly && SaveGame.DieRoll(90) > rPtr.Level)
+        if (doPoly && Game.DieRoll(90) > rPtr.Level)
         {
             note = " is unaffected!";
             bool charm = mPtr.SmFriendly;
-            int tmp = SaveGame.PolymorphMonster(mPtr.Race);
+            int tmp = Game.PolymorphMonster(mPtr.Race);
             if (tmp != mPtr.Race.Index)
             {
                 note = " changes!";
                 dam = 0;
-                SaveGame.DeleteMonsterByIndex(cPtr.MonsterIndex, true);
-                MonsterRace race = SaveGame.SingletonRepository.MonsterRaces[tmp];
-                SaveGame.PlaceMonsterAux(mPtr.MapY, mPtr.MapX, race, false, false, charm);
-                mPtr = SaveGame.Monsters[cPtr.MonsterIndex];
+                Game.DeleteMonsterByIndex(cPtr.MonsterIndex, true);
+                MonsterRace race = Game.SingletonRepository.MonsterRaces[tmp];
+                Game.PlaceMonsterAux(mPtr.MapY, mPtr.MapX, race, false, false, charm);
+                mPtr = Game.Monsters[cPtr.MonsterIndex];
             }
         }
         ApplyProjectileDamageToMonster(who, mPtr, dam, note);
@@ -71,45 +71,45 @@ internal class NukeProjectile : Projectile
 
     protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
     {
-        bool blind = SaveGame.BlindnessTimer.Value != 0;
+        bool blind = Game.BlindnessTimer.Value != 0;
         if (dam > 1600)
         {
             dam = 1600;
         }
         dam = (dam + r) / (r + 1);
-        Monster mPtr = SaveGame.Monsters[who];
+        Monster mPtr = Game.Monsters[who];
         string killer = mPtr.IndefiniteVisibleName;
         if (blind)
         {
-            SaveGame.MsgPrint("You are hit by radiation!");
+            Game.MsgPrint("You are hit by radiation!");
         }
-        if (SaveGame.HasPoisonResistance)
+        if (Game.HasPoisonResistance)
         {
             dam = ((2 * dam) + 2) / 5;
         }
-        if (SaveGame.PoisonResistanceTimer.Value != 0)
+        if (Game.PoisonResistanceTimer.Value != 0)
         {
             dam = ((2 * dam) + 2) / 5;
         }
-        SaveGame.TakeHit(dam, killer);
-        if (!(SaveGame.HasPoisonResistance || SaveGame.PoisonResistanceTimer.Value != 0))
+        Game.TakeHit(dam, killer);
+        if (!(Game.HasPoisonResistance || Game.PoisonResistanceTimer.Value != 0))
         {
-            SaveGame.PoisonTimer.AddTimer(SaveGame.RandomLessThan(dam) + 10);
-            if (SaveGame.DieRoll(5) == 1)
+            Game.PoisonTimer.AddTimer(Game.RandomLessThan(dam) + 10);
+            if (Game.DieRoll(5) == 1)
             {
-                SaveGame.MsgPrint("You undergo a freakish metamorphosis!");
-                if (SaveGame.DieRoll(4) == 1)
+                Game.MsgPrint("You undergo a freakish metamorphosis!");
+                if (Game.DieRoll(4) == 1)
                 {
-                    SaveGame.RunScript(nameof(PolymorphSelfScript));
+                    Game.RunScript(nameof(PolymorphSelfScript));
                 }
                 else
                 {
-                    SaveGame.ShuffleAbilityScores();
+                    Game.ShuffleAbilityScores();
                 }
             }
-            if (SaveGame.DieRoll(6) == 1)
+            if (Game.DieRoll(6) == 1)
             {
-                SaveGame.InvenDamage(SaveGame.SetAcidDestroy, 2);
+                Game.InvenDamage(Game.SetAcidDestroy, 2);
             }
         }
         return true;

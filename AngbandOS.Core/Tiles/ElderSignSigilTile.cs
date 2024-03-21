@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Tiles;
 [Serializable]
 internal class ElderSignSigilTile : Tile
 {
-    private ElderSignSigilTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private ElderSignSigilTile(Game game) : base(game) { } // This object is a singleton.
     protected override string SymbolName => nameof(AsteriskSymbol);
     public override ColorEnum Color => ColorEnum.Green;
     public override string Description => "Elder Sign";

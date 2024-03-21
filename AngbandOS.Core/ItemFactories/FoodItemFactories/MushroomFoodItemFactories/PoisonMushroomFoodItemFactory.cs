@@ -10,9 +10,9 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class PoisonMushroomFoodItemFactory : MushroomFoodItemFactory
 {
-    private PoisonMushroomFoodItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private PoisonMushroomFoodItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(CommaSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(CommaSymbol));
     public override string Name => "Poison";
 
     public override int[] Chance => new int[] { 1, 1, 0, 0 };
@@ -26,20 +26,20 @@ internal class PoisonMushroomFoodItemFactory : MushroomFoodItemFactory
 
     public override bool Eat()
     {
-        SaveGame.PlaySound(SoundEffectEnum.Eat);
-        if (!(SaveGame.HasPoisonResistance || SaveGame.PoisonResistanceTimer.Value != 0))
+        Game.PlaySound(SoundEffectEnum.Eat);
+        if (!(Game.HasPoisonResistance || Game.PoisonResistanceTimer.Value != 0))
         {
             // Hagarg Ryonis may protect us from poison
-            if (SaveGame.DieRoll(10) <= SaveGame.SingletonRepository.Gods.Get(nameof(HagargRyonisGod)).AdjustedFavour)
+            if (Game.DieRoll(10) <= Game.SingletonRepository.Gods.Get(nameof(HagargRyonisGod)).AdjustedFavour)
             {
-                SaveGame.MsgPrint("Hagarg Ryonis's favour protects you!");
+                Game.MsgPrint("Hagarg Ryonis's favour protects you!");
             }
-            else if (SaveGame.PoisonTimer.AddTimer(SaveGame.RandomLessThan(10) + 10))
+            else if (Game.PoisonTimer.AddTimer(Game.RandomLessThan(10) + 10))
             {
                 return true;
             }
         }
         return false;
     }
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

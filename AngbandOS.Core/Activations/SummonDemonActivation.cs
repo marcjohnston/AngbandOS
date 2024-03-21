@@ -13,31 +13,31 @@ namespace AngbandOS.Core.Activations;
 [Serializable]
 internal class SummonDemonActivation : Activation
 {
-    private SummonDemonActivation(SaveGame saveGame) : base(saveGame) { }
+    private SummonDemonActivation(Game game) : base(game) { }
     public override int RandomChance => 5;
 
     protected override bool OnActivate(Item item)
     {
-        if (SaveGame.DieRoll(3) == 1)
+        if (Game.DieRoll(3) == 1)
         {
-            if (SaveGame.SummonSpecific(SaveGame.MapY, SaveGame.MapX, (int)(SaveGame.ExperienceLevel.Value * 1.5), SaveGame.SingletonRepository.MonsterFilters.Get(nameof(DemonMonsterFilter))))
+            if (Game.SummonSpecific(Game.MapY, Game.MapX, (int)(Game.ExperienceLevel.Value * 1.5), Game.SingletonRepository.MonsterFilters.Get(nameof(DemonMonsterFilter))))
             {
-                SaveGame.MsgPrint("The area fills with a stench of sulphur and brimstone.");
-                SaveGame.MsgPrint("'NON SERVIAM! Wretch! I shall feast on thy mortal soul!'");
+                Game.MsgPrint("The area fills with a stench of sulphur and brimstone.");
+                Game.MsgPrint("'NON SERVIAM! Wretch! I shall feast on thy mortal soul!'");
             }
         }
         else
         {
-            if (SaveGame.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, (int)(SaveGame.ExperienceLevel.Value * 1.5), SaveGame.SingletonRepository.MonsterFilters.Get(nameof(DemonMonsterFilter)), SaveGame.ExperienceLevel.Value == 50))
+            if (Game.SummonSpecificFriendly(Game.MapY, Game.MapX, (int)(Game.ExperienceLevel.Value * 1.5), Game.SingletonRepository.MonsterFilters.Get(nameof(DemonMonsterFilter)), Game.ExperienceLevel.Value == 50))
             {
-                SaveGame.MsgPrint("The area fills with a stench of sulphur and brimstone.");
-                SaveGame.MsgPrint("'What is thy bidding... Master?'");
+                Game.MsgPrint("The area fills with a stench of sulphur and brimstone.");
+                Game.MsgPrint("'What is thy bidding... Master?'");
             }
         }
         return true;
     }
 
-    public override int RechargeTime() => 666 + SaveGame.DieRoll(333);
+    public override int RechargeTime() => 666 + Game.DieRoll(333);
 
     public override int Value => 20000;
 

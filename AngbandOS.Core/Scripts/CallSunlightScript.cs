@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class CallSunlightScript : Script, IScript
 {
-    private CallSunlightScript(SaveGame saveGame) : base(saveGame) { }
+    private CallSunlightScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script.
@@ -18,13 +18,13 @@ internal class CallSunlightScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(LightProjectile)), 0, 150, 8);
-        SaveGame.RunScript(nameof(LightScript));
-        if (!SaveGame.Race.IsBurnedBySunlight || SaveGame.HasLightResistance)
+        Game.FireBall(Game.SingletonRepository.Projectiles.Get(nameof(LightProjectile)), 0, 150, 8);
+        Game.RunScript(nameof(LightScript));
+        if (!Game.Race.IsBurnedBySunlight || Game.HasLightResistance)
         {
             return;
         }
-        SaveGame.MsgPrint("The sunlight scorches your flesh!");
-        SaveGame.TakeHit(50, "sunlight");
+        Game.MsgPrint("The sunlight scorches your flesh!");
+        Game.TakeHit(50, "sunlight");
     }
 }

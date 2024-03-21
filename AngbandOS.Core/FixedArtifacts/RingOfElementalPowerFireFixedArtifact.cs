@@ -10,7 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class RingOfElementalPowerFireFixedArtifact : FixedArtifact
 {
-    private RingOfElementalPowerFireFixedArtifact(SaveGame saveGame) : base(saveGame) { }
+    private RingOfElementalPowerFireFixedArtifact(Game game) : base(game) { }
 
     protected override string BaseItemFactoryName => nameof(NaryaRingItemFactory);
 

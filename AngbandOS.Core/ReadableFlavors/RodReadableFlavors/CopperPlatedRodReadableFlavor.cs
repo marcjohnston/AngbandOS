@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Flavors;
 [Serializable]
 internal class CopperPlatedRodReadableFlavor : RodReadableFlavor
 {
-    private CopperPlatedRodReadableFlavor(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private CopperPlatedRodReadableFlavor(Game game) : base(game) { } // This object is a singleton.
     protected override string SymbolName => nameof(MinusSignSymbol);
     public override ColorEnum Color => ColorEnum.Copper;
     public override string Name => "Copper-Plated";

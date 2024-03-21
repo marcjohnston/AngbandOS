@@ -10,10 +10,10 @@ namespace AngbandOS.Core.Spells.Sorcery;
 [Serializable]
 internal class SorcerySpellHasteSelf : Spell
 {
-    private SorcerySpellHasteSelf(SaveGame saveGame) : base(saveGame) { }
+    private SorcerySpellHasteSelf(Game game) : base(game) { }
     protected override string? CastScriptName => nameof(HasteScript);
 
     public override string Name => "Haste Self";
 
-    protected override string LearnedDetails => $"dur {SaveGame.ExperienceLevel.Value}+d{SaveGame.ExperienceLevel.Value + 20}";
+    protected override string LearnedDetails => $"dur {Game.ExperienceLevel.Value}+d{Game.ExperienceLevel.Value + 20}";
 }

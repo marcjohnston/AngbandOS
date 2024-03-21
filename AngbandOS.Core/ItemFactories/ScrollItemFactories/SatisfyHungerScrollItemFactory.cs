@@ -10,9 +10,9 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class SatisfyHungerScrollItemFactory : ScrollItemFactory
 {
-    private SatisfyHungerScrollItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private SatisfyHungerScrollItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(QuestionMarkSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(QuestionMarkSymbol));
     public override string Name => "Satisfy Hunger";
 
     public override int[] Chance => new int[] { 1, 1, 1, 1 };
@@ -24,10 +24,10 @@ internal class SatisfyHungerScrollItemFactory : ScrollItemFactory
 
     public override void Read(ReadScrollEvent eventArgs)
     {
-        if (SaveGame.SetFood(Constants.PyFoodMax - 1))
+        if (Game.SetFood(Constants.PyFoodMax - 1))
         {
             eventArgs.Identified = true;
         }
     }
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

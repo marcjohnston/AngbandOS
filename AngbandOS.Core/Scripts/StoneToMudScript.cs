@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class StoneToMudScript : Script, IScript
 {
-    private StoneToMudScript(SaveGame saveGame) : base(saveGame) { }
+    private StoneToMudScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script.
@@ -18,10 +18,10 @@ internal class StoneToMudScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        if (!SaveGame.GetDirectionWithAim(out int dir))
+        if (!Game.GetDirectionWithAim(out int dir))
         {
             return;
         }
-        SaveGame.WallToMud(dir);
+        Game.WallToMud(dir);
     }
 }

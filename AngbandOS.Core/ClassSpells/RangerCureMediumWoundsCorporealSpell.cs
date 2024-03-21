@@ -10,7 +10,7 @@ namespace AngbandOS.Core.ClassSpells;
 [Serializable]
 internal class RangerCureMediumWoundsCorporealSpell : ClassSpell
 {
-    private RangerCureMediumWoundsCorporealSpell(SaveGame saveGame) : base(saveGame) { }
+    private RangerCureMediumWoundsCorporealSpell(Game game) : base(game) { }
     public override string SpellName => nameof(CorporealSpellCureMediumWounds);
     public override string CharacterClassName => nameof(RangerCharacterClass);
     public override int Level => 13;

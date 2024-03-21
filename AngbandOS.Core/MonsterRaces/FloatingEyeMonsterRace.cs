@@ -10,7 +10,7 @@ namespace AngbandOS.Core.MonsterRaces;
 [Serializable]
 internal class FloatingEyeMonsterRace : MonsterRace
 {
-    protected FloatingEyeMonsterRace(SaveGame saveGame) : base(saveGame) { }
+    protected FloatingEyeMonsterRace(Game game) : base(game) { }
 
     protected override string SymbolName => nameof(LowerESymbol);
     public override string Name => "Floating eye";

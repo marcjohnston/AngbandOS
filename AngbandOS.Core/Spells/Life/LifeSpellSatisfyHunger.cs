@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Spells.Life;
 [Serializable]
 internal class LifeSpellSatisfyHunger : Spell
 {
-    private LifeSpellSatisfyHunger(SaveGame saveGame) : base(saveGame) { }
+    private LifeSpellSatisfyHunger(Game game) : base(game) { }
     protected override string? CastScriptName => nameof(SatisfyHungerScript);
 
     public override string Name => "Satisfy Hunger";

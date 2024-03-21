@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Mutations.RandomMutations;
 [Serializable]
 internal class HpToSpRandomMutation : Mutation
 {
-    private HpToSpRandomMutation(SaveGame saveGame) : base(saveGame) { }
+    private HpToSpRandomMutation(Game game) : base(game) { }
     public override int Frequency => 1;
     public override string GainMessage => "You are subject to fits of painful clarity.";
     public override string HaveMessage => "Your blood sometimes rushes to your head.";
@@ -18,21 +18,21 @@ internal class HpToSpRandomMutation : Mutation
 
     public override void OnProcessWorld()
     {
-        if (SaveGame.HasAntiMagic || base.SaveGame.DieRoll(4000) != 1)
+        if (Game.HasAntiMagic || base.Game.DieRoll(4000) != 1)
         {
             return;
         }
-        int wounds = SaveGame.MaxMana.Value - SaveGame.Mana.Value;
+        int wounds = Game.MaxMana.Value - Game.Mana.Value;
         if (wounds <= 0)
         {
             return;
         }
-        int healing = SaveGame.Health.Value;
+        int healing = Game.Health.Value;
         if (healing > wounds)
         {
             healing = wounds;
         }
-        SaveGame.Mana.Value += healing;
-        SaveGame.TakeHit(healing, "blood rushing to the head");
+        Game.Mana.Value += healing;
+        Game.TakeHit(healing, "blood rushing to the head");
     }
 }

@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Mutations.PassiveMutations;
 [Serializable]
 internal class WartSkinPassiveMutation : Mutation
 {
-    private WartSkinPassiveMutation(SaveGame saveGame) : base(saveGame) { }
+    private WartSkinPassiveMutation(Game game) : base(game) { }
     public override int Frequency => 1;
     public override string GainMessage => "Disgusting warts appear everywhere on you!";
     public override string HaveMessage => "Your skin is covered with warts (-2 CHR, +5 AC).";
@@ -19,13 +19,13 @@ internal class WartSkinPassiveMutation : Mutation
 
     public override void OnGain()
     {
-        SaveGame.CharismaBonus -= 2;
-        SaveGame.GenomeArmorClassBonus += 5;
+        Game.CharismaBonus -= 2;
+        Game.GenomeArmorClassBonus += 5;
     }
 
     public override void OnLose()
     {
-        SaveGame.CharismaBonus += 2;
-        SaveGame.GenomeArmorClassBonus -= 5;
+        Game.CharismaBonus += 2;
+        Game.GenomeArmorClassBonus -= 5;
     }
 }

@@ -11,19 +11,19 @@ namespace AngbandOS.Core.BirthStages;
 internal class GenderSelectionBirthStage : BirthStage
 {
     private int currentSelection = 0;
-    private GenderSelectionBirthStage(SaveGame saveGame) : base(saveGame) { }
+    private GenderSelectionBirthStage(Game game) : base(game) { }
     public override BirthStage? Render()
     {
         DisplayPartialCharacter();
-        string[]? menuItems = SaveGame.SingletonRepository.Genders
+        string[]? menuItems = Game.SingletonRepository.Genders
             .Select(_gender => _gender.Title)
             .ToArray();
-        SaveGame.Screen.Print(ColorEnum.Orange, "[Use up and down to select an option, right to confirm, or left to go back.]", 43, 1);
-        while (!SaveGame.Shutdown)
+        Game.Screen.Print(ColorEnum.Orange, "[Use up and down to select an option, right to confirm, or left to go back.]", 43, 1);
+        while (!Game.Shutdown)
         {
-            SaveGame.MenuDisplay(currentSelection, menuItems);
+            Game.MenuDisplay(currentSelection, menuItems);
             RenderSelection(currentSelection);
-            char c = SaveGame.Inkey();
+            char c = Game.Inkey();
             switch (c)
             {
                 case '8':
@@ -43,7 +43,7 @@ internal class GenderSelectionBirthStage : BirthStage
                 case '4':
                     return GoBack();
                 case 'h':
-                    SaveGame.ShowManual();
+                    Game.ShowManual();
                     break;
             }
         }
@@ -52,27 +52,27 @@ internal class GenderSelectionBirthStage : BirthStage
 
     private bool RenderSelection(int index)
     {
-        SaveGame.Screen.Print(ColorEnum.Purple, "Your sex has no effect on gameplay.", 35, 21);
+        Game.Screen.Print(ColorEnum.Purple, "Your sex has no effect on gameplay.", 35, 21);
         return true;
     }
     private BirthStage? GoForward(int index)
     {
-        SaveGame.Gender = SaveGame.SingletonRepository.Genders[index];
-        return SaveGame.SingletonRepository.BirthStages.Get(nameof(ConfirmationBirthStage));
+        Game.Gender = Game.SingletonRepository.Genders[index];
+        return Game.SingletonRepository.BirthStages.Get(nameof(ConfirmationBirthStage));
     }
 
     private BirthStage? GoBack()
     {
-        int availablePrimaryRealmCount = SaveGame.BaseCharacterClass.AvailablePrimaryRealms.Length;
-        int remainingAvailableSecondaryRealmCount = SaveGame.BaseCharacterClass.RemainingAvailableSecondaryRealms().Length;
+        int availablePrimaryRealmCount = Game.BaseCharacterClass.AvailablePrimaryRealms.Length;
+        int remainingAvailableSecondaryRealmCount = Game.BaseCharacterClass.RemainingAvailableSecondaryRealms().Length;
         if (remainingAvailableSecondaryRealmCount <= 1 && availablePrimaryRealmCount <= 1)
         {
-            return SaveGame.SingletonRepository.BirthStages.Get(nameof(RaceSelectionBirthStage));
+            return Game.SingletonRepository.BirthStages.Get(nameof(RaceSelectionBirthStage));
         }
         else if (remainingAvailableSecondaryRealmCount <= 1)
         {
-            return SaveGame.SingletonRepository.BirthStages.Get(nameof(Realm1SelectionBirthStage));
+            return Game.SingletonRepository.BirthStages.Get(nameof(Realm1SelectionBirthStage));
         }
-        return SaveGame.SingletonRepository.BirthStages.Get(nameof(Realm2SelectionBirthStage));
+        return Game.SingletonRepository.BirthStages.Get(nameof(Realm2SelectionBirthStage));
     }
 }

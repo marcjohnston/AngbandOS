@@ -10,9 +10,9 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class FilthyRagSoftArmorItemFactory : SoftArmorItemFactory
 {
-    private FilthyRagSoftArmorItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private FilthyRagSoftArmorItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(OpenParenthesisSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(OpenParenthesisSymbol));
     public override ColorEnum Color => ColorEnum.Black;
     public override string Name => "Filthy Rag";
 
@@ -22,5 +22,5 @@ internal class FilthyRagSoftArmorItemFactory : SoftArmorItemFactory
     public override string FriendlyName => "& Filthy Rag~";
     public override int ToA => -1;
     public override int Weight => 20;
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

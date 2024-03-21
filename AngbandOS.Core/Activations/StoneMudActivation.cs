@@ -13,7 +13,7 @@ namespace AngbandOS.Core.Activations;
 [Serializable]
 internal class StoneMudActivation : DirectionalActivation
 {
-    private StoneMudActivation(SaveGame saveGame) : base(saveGame) { }
+    private StoneMudActivation(Game game) : base(game) { }
     public override int RandomChance => 101;
 
     public override string? PreActivationMessage => "Your {0} pulsates...";
@@ -22,7 +22,7 @@ internal class StoneMudActivation : DirectionalActivation
 
     protected override bool Activate(int direction)
     {
-        SaveGame.WallToMud(direction);
+        Game.WallToMud(direction);
         return true;
     }
 

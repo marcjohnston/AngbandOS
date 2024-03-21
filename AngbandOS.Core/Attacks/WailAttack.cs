@@ -10,7 +10,7 @@ namespace AngbandOS.Core.AttackTypes;
 [Serializable]
 internal class WailAttack : Attack
 {
-    private WailAttack(SaveGame saveGame) : base(saveGame) { }
+    private WailAttack(Game game) : base(game) { }
     public override string MonsterAction => "wails at {0}";
     public override string PlayerAction => $"wails at you";
     public override string KnowledgeAction => "wail";

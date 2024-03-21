@@ -21,15 +21,15 @@
 //        public int Index;
 //        public bool Living;
 
-//        public HighScore(SaveGame saveGame)
+//        public HighScore(Game game)
 //        {
-//            Pts = saveGame.GetScore(saveGame);
-//            Prace = saveGame.Race;
-//            Pclass = saveGame.ProfessionIndex;
-//            if (saveGame.IsDead)
+//            Pts = game.GetScore(game);
+//            Prace = game.Race;
+//            Pclass = game.ProfessionIndex;
+//            if (game.IsDead)
 //            {
 //                When = DateTime.Now.ToString("dd-MMM-yyyy");
-//                How = saveGame.DiedFrom;
+//                How = game.DiedFrom;
 //            }
 //            else
 //            {
@@ -37,17 +37,17 @@
 //                When = "TODAY";
 //                How = "nobody (yet!)";
 //            }
-//            Who = $"{saveGame.Name.Trim()}{saveGame.Generation.ToRoman(true)} the level {saveGame.Level} {saveGame.Race.Title} {Profession.ClassSubName(saveGame.ProfessionIndex, saveGame.Realm1)}";
-//            if (saveGame.CurrentDepth > 0)
+//            Who = $"{game.Name.Trim()}{game.Generation.ToRoman(true)} the level {game.Level} {game.Race.Title} {Profession.ClassSubName(game.ProfessionIndex, game.Realm1)}";
+//            if (game.CurrentDepth > 0)
 //            {
-//                Where = $"on level {saveGame.CurrentDepth} of {saveGame.CurDungeon.Name}";
+//                Where = $"on level {game.CurrentDepth} of {game.CurDungeon.Name}";
 //            }
 //            else
 //            {
 //                Where = "in the wilderness";
-//                foreach (Town t in saveGame.Towns)
+//                foreach (Town t in game.Towns)
 //                {
-//                    if (saveGame.WildernessX == t.X && saveGame.WildernessY == t.Y)
+//                    if (game.WildernessX == t.X && game.WildernessY == t.Y)
 //                    {
 //                        Where = $"in {t.Name}";
 //                    }

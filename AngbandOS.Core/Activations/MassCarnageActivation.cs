@@ -13,14 +13,14 @@ namespace AngbandOS.Core.Activations;
 [Serializable]
 internal class MassCarnageActivation : Activation
 {
-    private MassCarnageActivation(SaveGame saveGame) : base(saveGame) { }
+    private MassCarnageActivation(Game game) : base(game) { }
     public override int RandomChance => 33;
 
     public override string? PreActivationMessage => "Your {0} lets out a long, shrill note...";
 
     protected override bool OnActivate(Item item)
     {
-        SaveGame.RunScriptBool(nameof(MassCarnageScript), true);
+        Game.RunScriptBool(nameof(MassCarnageScript), true);
         return true;
     }
 

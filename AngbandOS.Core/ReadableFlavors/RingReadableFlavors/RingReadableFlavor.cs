@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Flavors;
 [Serializable]
 internal abstract class RingReadableFlavor : ReadableFlavor
 {
-    protected RingReadableFlavor(SaveGame saveGame) : base(saveGame)
+    protected RingReadableFlavor(Game game) : base(game)
     {
     }
 }

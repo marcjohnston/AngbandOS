@@ -10,16 +10,16 @@ namespace AngbandOS.Core.Mutations.ActiveMutations;
 [Serializable]
 internal class GrowMoldActiveMutation : Mutation
 {
-    private GrowMoldActiveMutation(SaveGame saveGame) : base(saveGame) { }
+    private GrowMoldActiveMutation(Game game) : base(game) { }
     public override void Activate()
     {
-        if (!SaveGame.CheckIfRacialPowerWorks(1, 6, Ability.Constitution, 14))
+        if (!Game.CheckIfRacialPowerWorks(1, 6, Ability.Constitution, 14))
         {
             return;
         }
         for (int i = 0; i < 8; i++)
         {
-            SaveGame.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel.Value, SaveGame.SingletonRepository.MonsterFilters.Get(nameof(Bizarre1MonsterFilter)), false);
+            Game.SummonSpecificFriendly(Game.MapY, Game.MapX, Game.ExperienceLevel.Value, Game.SingletonRepository.MonsterFilters.Get(nameof(Bizarre1MonsterFilter)), false);
         }
     }
 

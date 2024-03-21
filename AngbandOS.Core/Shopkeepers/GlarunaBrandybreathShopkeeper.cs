@@ -8,7 +8,7 @@
 [Serializable]
 internal class GlarunaBrandybreathShopkeeper : Shopkeeper
 {
-    private GlarunaBrandybreathShopkeeper(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private GlarunaBrandybreathShopkeeper(Game game) : base(game) { } // This object is a singleton.
     public override string Name => "Glaruna Brandybreath";
     public override int MaxCost =>  20000;
     public override int MinInflate =>  105;

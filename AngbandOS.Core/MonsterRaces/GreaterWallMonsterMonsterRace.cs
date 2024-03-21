@@ -10,7 +10,7 @@ namespace AngbandOS.Core.MonsterRaces;
 [Serializable]
 internal class GreaterWallMonsterMonsterRace : MonsterRace
 {
-    protected GreaterWallMonsterMonsterRace(SaveGame saveGame) : base(saveGame) { }
+    protected GreaterWallMonsterMonsterRace(Game game) : base(game) { }
 
     protected override string SymbolName => nameof(PoundSignSymbol);
     public override string Name => "Greater wall monster";

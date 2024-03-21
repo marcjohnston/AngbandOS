@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class OpenScript : Script, IScript, IRepeatableScript
 {
-    private OpenScript(SaveGame saveGame) : base(saveGame) { }
+    private OpenScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the open script and disposes of the repeatable result.
@@ -29,8 +29,8 @@ internal class OpenScript : Script, IScript, IRepeatableScript
     {
         bool more = false;
         // Check if there's only one thing we can open
-        int numDoors = SaveGame.CountClosedDoors(out GridCoordinate? doorCoord);
-        int numChests = SaveGame.CountChests(out GridCoordinate? chestCoord, false);
+        int numDoors = Game.CountClosedDoors(out GridCoordinate? doorCoord);
+        int numChests = Game.CountChests(out GridCoordinate? chestCoord, false);
         if (numDoors != 0 || numChests != 0)
         {
             bool tooMany = (numDoors != 0 && numChests != 0) || numDoors > 1 || numChests > 1;
@@ -38,27 +38,27 @@ internal class OpenScript : Script, IScript, IRepeatableScript
             {
                 // There's only one thing we can open, so assume we mean that thing
                 GridCoordinate coord = numDoors == 1 ? doorCoord : chestCoord;
-                SaveGame.CommandDirection = SaveGame.CoordsToDir(coord.Y, coord.X);
+                Game.CommandDirection = Game.CoordsToDir(coord.Y, coord.X);
             }
         }
         // If we don't already have a direction, prompt for one
-        if (SaveGame.GetDirectionNoAim(out int dir))
+        if (Game.GetDirectionNoAim(out int dir))
         {
-            int y = SaveGame.MapY + SaveGame.KeypadDirectionYOffset[dir];
-            int x = SaveGame.MapX + SaveGame.KeypadDirectionXOffset[dir];
-            GridTile tile = SaveGame.Grid[y][x];
-            Item? chestItem = SaveGame.ChestCheck(y, x);
+            int y = Game.MapY + Game.KeypadDirectionYOffset[dir];
+            int x = Game.MapX + Game.KeypadDirectionXOffset[dir];
+            GridTile tile = Game.Grid[y][x];
+            Item? chestItem = Game.ChestCheck(y, x);
             // Make sure there is something to open in the direction we chose
             if (!tile.FeatureType.IsVisibleDoor && chestItem == null)
             {
-                SaveGame.MsgPrint("You see nothing there to open.");
+                Game.MsgPrint("You see nothing there to open.");
             }
             // Can't open something if there's a monster in the way
             else if (tile.MonsterIndex != 0)
             {
-                SaveGame.EnergyUse = 100;
-                SaveGame.MsgPrint("There is a monster in the way!");
-                SaveGame.PlayerAttackMonster(y, x);
+                Game.EnergyUse = 100;
+                Game.MsgPrint("There is a monster in the way!");
+                Game.PlayerAttackMonster(y, x);
             }
             // Open the chest or door
             else if (chestItem != null)
@@ -67,7 +67,7 @@ internal class OpenScript : Script, IScript, IRepeatableScript
             }
             else
             {
-                more = SaveGame.OpenDoor(y, x);
+                more = Game.OpenDoor(y, x);
             }
         }
         return more;
@@ -85,20 +85,20 @@ internal class OpenScript : Script, IScript, IRepeatableScript
         bool openedSuccessfully = true;
         bool more = false;
         // Opening a chest takes an action
-        SaveGame.EnergyUse = 100;
+        Game.EnergyUse = 100;
         // If the chest is locked, we may need to pick it
         if (chestItem.TypeSpecificValue > 0)
         {
             openedSuccessfully = false;
             // Our disable traps skill also doubles up as a lockpicking skill
-            int i = SaveGame.SkillDisarmTraps;
+            int i = Game.SkillDisarmTraps;
             // Hard to pick locks in the dark
-            if (SaveGame.BlindnessTimer.Value != 0 || SaveGame.NoLight())
+            if (Game.BlindnessTimer.Value != 0 || Game.NoLight())
             {
                 i /= 10;
             }
             // Hard to pick locks when you're confused or hallucinating
-            if (SaveGame.ConfusedTimer.Value != 0 || SaveGame.HallucinationsTimer.Value != 0)
+            if (Game.ConfusedTimer.Value != 0 || Game.HallucinationsTimer.Value != 0)
             {
                 i /= 10;
             }
@@ -109,23 +109,23 @@ internal class OpenScript : Script, IScript, IRepeatableScript
                 j = 2;
             }
             // See if we succeeded
-            if (SaveGame.RandomLessThan(100) < j)
+            if (Game.RandomLessThan(100) < j)
             {
-                SaveGame.MsgPrint("You have picked the lock.");
-                SaveGame.GainExperience(1);
+                Game.MsgPrint("You have picked the lock.");
+                Game.GainExperience(1);
                 openedSuccessfully = true;
             }
             else
             {
                 more = true;
-                SaveGame.MsgPrint("You failed to pick the lock.");
+                Game.MsgPrint("You failed to pick the lock.");
             }
         }
         // If we successfully opened it, set of any traps and then actually open the chest
         if (openedSuccessfully)
         {
-            SaveGame.ActivateChestTrap(y, x, chestItem);
-            SaveGame.OpenChest(y, x, chestItem);
+            Game.ActivateChestTrap(y, x, chestItem);
+            Game.OpenChest(y, x, chestItem);
         }
         return more;
     }

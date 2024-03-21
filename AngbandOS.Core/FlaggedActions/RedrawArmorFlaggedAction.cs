@@ -12,11 +12,11 @@ internal class RedrawArmorFlaggedAction : FlaggedAction
 {
     private const int ColAc = 0;
     private const int RowAc = 22;
-    private RedrawArmorFlaggedAction(SaveGame saveGame) : base(saveGame) { }
+    private RedrawArmorFlaggedAction(Game game) : base(game) { }
     protected override void Execute()
     {
-        SaveGame.Screen.Print("Cur AC ", RowAc, ColAc);
-        string tmp = (SaveGame.DisplayedBaseArmorClass.Value + SaveGame.DisplayedArmorClassBonus.Value).ToString().PadLeft(5);
-        SaveGame.Screen.Print(ColorEnum.BrightGreen, tmp, RowAc, ColAc + 7);
+        Game.Screen.Print("Cur AC ", RowAc, ColAc);
+        string tmp = (Game.DisplayedBaseArmorClass.Value + Game.DisplayedArmorClassBonus.Value).ToString().PadLeft(5);
+        Game.Screen.Print(ColorEnum.BrightGreen, tmp, RowAc, ColAc + 7);
     }
 }

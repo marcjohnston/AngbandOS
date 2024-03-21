@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Tiles;
 [Serializable]
 internal class GraveTile : Tile
 {
-    private GraveTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private GraveTile(Game game) : base(game) { } // This object is a singleton.
     protected override string SymbolName => nameof(PlusSignSymbol);
     protected override string? AlterActionName => nameof(TunnelAlterAction);
     public override bool BlocksLos => true;

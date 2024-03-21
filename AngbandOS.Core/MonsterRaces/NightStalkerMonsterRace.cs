@@ -10,7 +10,7 @@ namespace AngbandOS.Core.MonsterRaces;
 [Serializable]
 internal class NightStalkerMonsterRace : MonsterRace
 {
-    protected NightStalkerMonsterRace(SaveGame saveGame) : base(saveGame) { }
+    protected NightStalkerMonsterRace(Game game) : base(game) { }
 
     protected override string SymbolName => nameof(UpperESymbol);
     public override ColorEnum Color => ColorEnum.Grey;

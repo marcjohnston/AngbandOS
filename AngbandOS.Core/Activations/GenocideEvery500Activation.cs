@@ -13,14 +13,14 @@ namespace AngbandOS.Core.Activations;
 [Serializable]
 internal class GenocideEvery500Activation : Activation
 {
-    private GenocideEvery500Activation(SaveGame saveGame) : base(saveGame) { }
+    private GenocideEvery500Activation(Game game) : base(game) { }
     public override int RandomChance => 33;
 
     public override string? PreActivationMessage => "Your {0} glows deep blue...";
 
     protected override bool OnActivate(Item item)
     {
-        SaveGame.RunScript(nameof(GenocideScript));
+        Game.RunScript(nameof(GenocideScript));
         return true;
     }
 

@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Flavors;
 [Serializable]
 internal class WireRingReadableFlavor : RingReadableFlavor
 {
-    private WireRingReadableFlavor(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private WireRingReadableFlavor(Game game) : base(game) { } // This object is a singleton.
     protected override string SymbolName => nameof(EqualSignSymbol);
     public override string Name => "Wire";
 }

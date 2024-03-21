@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Repositories;
 [Serializable]
 internal class SingingPlayerAttacksRepository : StringListRepository
 {
-    public SingingPlayerAttacksRepository(SaveGame saveGame) : base(saveGame) { }
+    public SingingPlayerAttacksRepository(Game game) : base(game) { }
 
     /// <summary>
     /// Returns SingingPlayerAttacks as the name of this string list repository.
@@ -19,7 +19,7 @@ internal class SingingPlayerAttacksRepository : StringListRepository
 
     public override void Load()
     {
-        if (SaveGame.Configuration.SingingPlayerAttacks == null)
+        if (Game.Configuration.SingingPlayerAttacks == null)
         {
             Add("sings 'We are a happy family.'",
                 "sings 'I love you, you love me.'"
@@ -27,7 +27,7 @@ internal class SingingPlayerAttacksRepository : StringListRepository
         }
         else
         {
-            Add(SaveGame.Configuration.SingingPlayerAttacks);
+            Add(Game.Configuration.SingingPlayerAttacks);
         }
     }
 }

@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Realms;
 [Serializable]
 internal class NatureRealm : Realm
 {
-    private NatureRealm(SaveGame savedGame) : base(savedGame) { }
+    private NatureRealm(Game savedGame) : base(savedGame) { }
 
     public override string[] Info => new string[] {
         "The Nature realm has a large number of summoning spells and",

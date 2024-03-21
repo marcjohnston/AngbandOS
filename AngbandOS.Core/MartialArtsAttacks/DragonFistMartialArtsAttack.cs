@@ -16,5 +16,5 @@ internal class DragonFistMartialArtsAttack : MartialArtsAttack
     public override int Ds => 10;
     public override int Effect => 16;
     public override int MinLevel => 45;
-    private DragonFistMartialArtsAttack(SaveGame saveGame) : base(saveGame) { }
+    private DragonFistMartialArtsAttack(Game game) : base(game) { }
 }

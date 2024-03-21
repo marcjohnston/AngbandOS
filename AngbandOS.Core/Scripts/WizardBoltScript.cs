@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class WizardBoltScript : Script, IScript
 {
-    private WizardBoltScript(SaveGame saveGame) : base(saveGame) { }
+    private WizardBoltScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script.
@@ -19,18 +19,18 @@ internal class WizardBoltScript : Script, IScript
     public void ExecuteScript()
     {
         ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill;
-        if (!SaveGame.GetDirectionWithAim(out int dir))
+        if (!Game.GetDirectionWithAim(out int dir))
         {
             return;
         }
-        int tx = SaveGame.MapX + (99 * SaveGame.KeypadDirectionXOffset[dir]);
-        int ty = SaveGame.MapY + (99 * SaveGame.KeypadDirectionYOffset[dir]);
-        if (dir == 5 && SaveGame.TargetOkay())
+        int tx = Game.MapX + (99 * Game.KeypadDirectionXOffset[dir]);
+        int ty = Game.MapY + (99 * Game.KeypadDirectionYOffset[dir]);
+        if (dir == 5 && Game.TargetOkay())
         {
             flg &= ~ProjectionFlag.ProjectStop;
-            tx = SaveGame.TargetCol;
-            ty = SaveGame.TargetRow;
+            tx = Game.TargetCol;
+            ty = Game.TargetRow;
         }
-        SaveGame.Project(0, 0, ty, tx, 1000000, SaveGame.SingletonRepository.Projectiles.Get(nameof(WizardBoltProjectile)), flg);
+        Game.Project(0, 0, ty, tx, 1000000, Game.SingletonRepository.Projectiles.Get(nameof(WizardBoltProjectile)), flg);
     }
 }

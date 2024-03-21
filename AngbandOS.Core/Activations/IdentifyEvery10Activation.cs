@@ -13,14 +13,14 @@ namespace AngbandOS.Core.Activations;
 [Serializable]
 internal class IdentifyEvery10Activation : Activation
 {
-    private IdentifyEvery10Activation(SaveGame saveGame) : base(saveGame) { }
+    private IdentifyEvery10Activation(Game game) : base(game) { }
     public override int RandomChance => 75;
 
     public override string? PreActivationMessage => "Your {0} glows yellow...";
 
     protected override bool OnActivate(Item item)
     {
-        return SaveGame.RunSuccessfulScript(nameof(IdentifyItemScript));
+        return Game.RunSuccessfulScript(nameof(IdentifyItemScript));
     }
 
     public override int RechargeTime() => 10;

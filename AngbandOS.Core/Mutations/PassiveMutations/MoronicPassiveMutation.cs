@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Mutations.PassiveMutations;
 [Serializable]
 internal class MoronicPassiveMutation : Mutation
 {
-    private MoronicPassiveMutation(SaveGame saveGame) : base(saveGame) { }
+    private MoronicPassiveMutation(Game game) : base(game) { }
     public override int Frequency => 3;
     public override string GainMessage => "Your brain withers away...";
     public override string HaveMessage => "You are moronic (-4 INT/WIS).";
@@ -19,13 +19,13 @@ internal class MoronicPassiveMutation : Mutation
 
     public override void OnGain()
     {
-        SaveGame.IntelligenceBonus -= 4;
-        SaveGame.WisdomBonus -= 4;
+        Game.IntelligenceBonus -= 4;
+        Game.WisdomBonus -= 4;
     }
 
     public override void OnLose()
     {
-        SaveGame.IntelligenceBonus += 4;
-        SaveGame.WisdomBonus += 4;
+        Game.IntelligenceBonus += 4;
+        Game.WisdomBonus += 4;
     }
 }

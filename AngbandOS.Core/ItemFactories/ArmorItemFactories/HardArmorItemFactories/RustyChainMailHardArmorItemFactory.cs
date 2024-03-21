@@ -10,9 +10,9 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class RustyChainMailHardArmorItemFactory : HardArmorItemFactory
 {
-    private RustyChainMailHardArmorItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private RustyChainMailHardArmorItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(OpenBraceSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(OpenBraceSymbol));
     public override ColorEnum Color => ColorEnum.Red;
     public override string Name => "Rusty Chain Mail";
 
@@ -27,5 +27,5 @@ internal class RustyChainMailHardArmorItemFactory : HardArmorItemFactory
     public override int ToA => -8;
     public override int ToH => -5;
     public override int Weight => 200;
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

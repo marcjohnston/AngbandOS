@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Spells.Sorcery;
 [Serializable]
 internal class SorcerySpellWordOfRecall : Spell
 {
-    private SorcerySpellWordOfRecall(SaveGame saveGame) : base(saveGame) { }
+    private SorcerySpellWordOfRecall(Game game) : base(game) { }
     protected override string? CastScriptName => nameof(ToggleRecallScript);
 
     public override string Name => "Word of Recall";

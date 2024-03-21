@@ -3,7 +3,7 @@
 [Serializable]
 internal class UpperYSymbol : Symbol
 {
-    private UpperYSymbol(SaveGame saveGame) : base(saveGame) { }
+    private UpperYSymbol(Game game) : base(game) { }
     public override char Character => 'Y';
     public override string Name => "Yeti";
 }

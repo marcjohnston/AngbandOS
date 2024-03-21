@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class EnterWizardModeScript : Script, IScript, IRepeatableScript
 {
-    private EnterWizardModeScript(SaveGame saveGame) : base(saveGame) { }
+    private EnterWizardModeScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the wizard mode script and returns false.
@@ -28,10 +28,10 @@ internal class EnterWizardModeScript : Script, IScript, IRepeatableScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        if (SaveGame.IsWizard.Value)
+        if (Game.IsWizard.Value)
         {
-            SaveGame.GetCom("Wizard Command: ", out char cmd);
-            foreach (WizardCommand wizardCommand in SaveGame.SingletonRepository.WizardCommands)
+            Game.GetCom("Wizard Command: ", out char cmd);
+            foreach (WizardCommand wizardCommand in Game.SingletonRepository.WizardCommands)
             {
                 if (wizardCommand.IsEnabled && wizardCommand.KeyChar == cmd)
                 {
@@ -42,21 +42,21 @@ internal class EnterWizardModeScript : Script, IScript, IRepeatableScript
                     return;
                 }
             }
-            SaveGame.MsgPrint("That is not a valid wizard command.");
+            Game.MsgPrint("That is not a valid wizard command.");
         }
         else
         {
-            SaveGame.Screen.PrintLine("Enter Wizard Code: ", 0, 0);
-            if (!SaveGame.AskforAux(out string tmp, "", 31))
+            Game.Screen.PrintLine("Enter Wizard Code: ", 0, 0);
+            if (!Game.AskforAux(out string tmp, "", 31))
             {
-                SaveGame.Screen.Erase(0, 0);
+                Game.Screen.Erase(0, 0);
                 return;
             }
-            SaveGame.Screen.Erase(0, 0);
+            Game.Screen.Erase(0, 0);
             if (tmp == "Dumbledore")
             {
-                SaveGame.IsWizard.Value = true;
-                SaveGame.MsgPrint("Wizard mode activated.");
+                Game.IsWizard.Value = true;
+                Game.MsgPrint("Wizard mode activated.");
             }
         }
     }

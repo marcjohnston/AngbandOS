@@ -10,9 +10,9 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class SelfKnowledgePotionItemFactory : PotionItemFactory
 {
-    private SelfKnowledgePotionItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private SelfKnowledgePotionItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(ExclamationPointSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(ExclamationPointSymbol));
     public override string Name => "Self Knowledge";
 
     public override int[] Chance => new int[] { 1, 0, 0, 0 };
@@ -26,10 +26,10 @@ internal class SelfKnowledgePotionItemFactory : PotionItemFactory
     public override bool Quaff()
     {
         // Self knowledge gives you information about yourself
-        SaveGame.MsgPrint("You begin to know yourself a little better...");
-        SaveGame.MsgPrint(null);
-        SaveGame.RunScript(nameof(SelfKnowledgeScript));
+        Game.MsgPrint("You begin to know yourself a little better...");
+        Game.MsgPrint(null);
+        Game.RunScript(nameof(SelfKnowledgeScript));
         return true;
     }
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

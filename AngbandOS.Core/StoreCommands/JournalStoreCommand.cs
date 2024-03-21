@@ -13,7 +13,7 @@ namespace AngbandOS.Core.StoreCommands;
 [Serializable]
 internal class JournalStoreCommand : StoreCommand
 {
-    private JournalStoreCommand(SaveGame saveGame) : base(saveGame) { }
+    private JournalStoreCommand(Game game) : base(game) { }
     public override char KeyChar => 'J';
 
     public override string Description => "";

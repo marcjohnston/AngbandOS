@@ -10,9 +10,9 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class WoeRingItemFactory : RingItemFactory
 {
-    private WoeRingItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private WoeRingItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(EqualSignSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(EqualSignSymbol));
     public override string Name => "Woe";
 
     public override void ApplyMagic(Item item, int level, int power, Store? store)
@@ -34,5 +34,5 @@ internal class WoeRingItemFactory : RingItemFactory
     public override bool Teleport => true;
     public override int Weight => 2;
     public override bool Wis => true;
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

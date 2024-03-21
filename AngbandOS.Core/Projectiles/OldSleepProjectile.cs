@@ -10,9 +10,9 @@ namespace AngbandOS.Core.Projection;
 [Serializable]
 internal class OldSleepProjectile : Projectile
 {
-    private OldSleepProjectile(SaveGame saveGame) : base(saveGame) { }
+    private OldSleepProjectile(Game game) : base(game) { }
 
-    protected override Animation EffectAnimation => SaveGame.SingletonRepository.Animations.Get(nameof(YellowSparkleAnimation));
+    protected override Animation EffectAnimation => Game.SingletonRepository.Animations.Get(nameof(YellowSparkleAnimation));
 
     protected override bool AffectMonster(int who, Monster mPtr, int dam, int r)
     {
@@ -26,7 +26,7 @@ internal class OldSleepProjectile : Projectile
         }
         string note;
         if (rPtr.Unique || rPtr.ImmuneSleep ||
-            rPtr.Level > SaveGame.DieRoll(dam - 10 < 1 ? 1 : dam - 10) + 10)
+            rPtr.Level > Game.DieRoll(dam - 10 < 1 ? 1 : dam - 10) + 10)
         {
             if (rPtr.ImmuneSleep)
             {
@@ -58,21 +58,21 @@ internal class OldSleepProjectile : Projectile
 
     protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
     {
-        bool blind = SaveGame.BlindnessTimer.Value != 0;
+        bool blind = Game.BlindnessTimer.Value != 0;
         if (dam > 1600)
         {
             dam = 1600;
         }
         dam = (dam + r) / (r + 1);
-        if (SaveGame.HasFreeAction)
+        if (Game.HasFreeAction)
         {
             return false;
         }
         if (blind)
         {
-            SaveGame.MsgPrint("You fall asleep!");
+            Game.MsgPrint("You fall asleep!");
         }
-        SaveGame.ParalysisTimer.AddTimer(dam);
+        Game.ParalysisTimer.AddTimer(dam);
         return true;
     }
 }

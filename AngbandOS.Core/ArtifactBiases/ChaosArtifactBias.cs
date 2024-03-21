@@ -10,14 +10,14 @@ namespace AngbandOS.Core.ArtifactBiases;
 [Serializable]
 internal class ChaosArtifactBias : ArtifactBias
 {
-    private ChaosArtifactBias(SaveGame saveGame) : base(saveGame) { }
+    private ChaosArtifactBias(Game game) : base(game) { }
 
     public override bool ApplyRandomResistances(Item item)
     {
         if (!item.RandomArtifactItemCharacteristics.ResChaos)
         {
             item.RandomArtifactItemCharacteristics.ResChaos = true;
-            if (SaveGame.DieRoll(2) == 1)
+            if (Game.DieRoll(2) == 1)
             {
                 return true;
             }
@@ -25,7 +25,7 @@ internal class ChaosArtifactBias : ArtifactBias
         if (!item.RandomArtifactItemCharacteristics.ResConf)
         {
             item.RandomArtifactItemCharacteristics.ResConf = true;
-            if (SaveGame.DieRoll(2) == 1)
+            if (Game.DieRoll(2) == 1)
             {
                 return true;
             }
@@ -33,7 +33,7 @@ internal class ChaosArtifactBias : ArtifactBias
         if (!item.RandomArtifactItemCharacteristics.ResDisen)
         {
             item.RandomArtifactItemCharacteristics.ResDisen = false;
-            if (SaveGame.DieRoll(2) == 1)
+            if (Game.DieRoll(2) == 1)
             {
                 return true;
             }
@@ -46,7 +46,7 @@ internal class ChaosArtifactBias : ArtifactBias
         if (!item.RandomArtifactItemCharacteristics.Teleport)
         {
             item.RandomArtifactItemCharacteristics.Teleport = true;
-            if (SaveGame.DieRoll(2) == 1)
+            if (Game.DieRoll(2) == 1)
             {
                 return true;
             }
@@ -60,7 +60,7 @@ internal class ChaosArtifactBias : ArtifactBias
             if (!item.RandomArtifactItemCharacteristics.Chaotic)
             {
                 item.RandomArtifactItemCharacteristics.Chaotic = true;
-                if (SaveGame.DieRoll(2) == 1)
+                if (Game.DieRoll(2) == 1)
                 {
                     return true;
                 }
@@ -73,13 +73,13 @@ internal class ChaosArtifactBias : ArtifactBias
 
     public override Activation GetActivationPowerType(Item item)
     {
-        if (SaveGame.DieRoll(6) == 1)
+        if (Game.DieRoll(6) == 1)
         {
-            return SaveGame.SingletonRepository.Activations.Get(nameof(SummonDemonActivation));
+            return Game.SingletonRepository.Activations.Get(nameof(SummonDemonActivation));
         }
         else
         {
-            return SaveGame.SingletonRepository.Activations.Get(nameof(CallChaosEvery350Activation));
+            return Game.SingletonRepository.Activations.Get(nameof(CallChaosEvery350Activation));
         }
     }
 }

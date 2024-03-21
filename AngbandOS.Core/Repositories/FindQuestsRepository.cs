@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Repositories;
 [Serializable]
 internal class FindQuestsRepository : StringListRepository
 {
-    public FindQuestsRepository(SaveGame saveGame) : base(saveGame) { }
+    public FindQuestsRepository(Game game) : base(game) { }
 
     /// <summary>
     /// Returns FindQuests as the name of this string list repository.
@@ -19,7 +19,7 @@ internal class FindQuestsRepository : StringListRepository
 
     public override void Load()
     {
-        if (SaveGame.Configuration.FindQuests == null)
+        if (Game.Configuration.FindQuests == null)
         {
             Add("You find the following inscription in the floor",
                 "You see a message inscribed in the wall",
@@ -30,7 +30,7 @@ internal class FindQuestsRepository : StringListRepository
         }
         else
         {
-            Add(SaveGame.Configuration.FindQuests);
+            Add(Game.Configuration.FindQuests);
         }
     }
 }

@@ -10,10 +10,10 @@ namespace AngbandOS.Core.SpellResistantDetections;
 [Serializable]
 internal class ReflectSpellResistantDetection : SpellResistantDetection
 {
-    private ReflectSpellResistantDetection(SaveGame saveGame) : base(saveGame) { }
+    private ReflectSpellResistantDetection(Game game) : base(game) { }
     public override void Learn(Monster monster)
     {
-        if (SaveGame.HasReflection)
+        if (Game.HasReflection)
         {
             monster.SmImmReflect = true;
         }

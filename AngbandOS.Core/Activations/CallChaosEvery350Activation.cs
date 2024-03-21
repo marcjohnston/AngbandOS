@@ -13,7 +13,7 @@ namespace AngbandOS.Core.Activations;
 [Serializable]
 internal class CallChaosEvery350Activation : Activation
 {
-    private CallChaosEvery350Activation(SaveGame saveGame) : base(saveGame) { }
+    private CallChaosEvery350Activation(Game game) : base(game) { }
     public override int RandomChance => 25;
 
     public override string? PreActivationMessage => "Your {0} glows in scintillating colors...";
@@ -22,7 +22,7 @@ internal class CallChaosEvery350Activation : Activation
 
     protected override bool OnActivate(Item item)
     {
-        SaveGame.RunCancellableScript(nameof(CallChaosScript));
+        Game.RunCancellableScript(nameof(CallChaosScript));
         return true;
     }
 

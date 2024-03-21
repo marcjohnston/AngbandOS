@@ -10,7 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class MithrilChainMailOfTheVampireHunterFixedArtifact : FixedArtifact
 {
-    private MithrilChainMailOfTheVampireHunterFixedArtifact(SaveGame saveGame) : base(saveGame) { }
+    private MithrilChainMailOfTheVampireHunterFixedArtifact(Game game) : base(game) { }
 
     protected override string BaseItemFactoryName => nameof(MithrilChainMailHardArmorItemFactory);
 

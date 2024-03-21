@@ -10,24 +10,24 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class SetOfCestiOfCombatFixedArtifact : FixedArtifact, IFixedArtifactActivatible
 {
-    private SetOfCestiOfCombatFixedArtifact(SaveGame saveGame) : base(saveGame) { }
+    private SetOfCestiOfCombatFixedArtifact(Game game) : base(game) { }
 
     protected override string BaseItemFactoryName => nameof(CestiGlovesArmorItemFactory);
 
     // Cesti shoot arrows
     public void ActivateItem(Item item)
     {
-        SaveGame.MsgPrint("Your cesti grows magical spikes...");
-        if (!SaveGame.GetDirectionWithAim(out int dir))
+        Game.MsgPrint("Your cesti grows magical spikes...");
+        if (!Game.GetDirectionWithAim(out int dir))
         {
             return;
         }
-        SaveGame.FireBolt(SaveGame.SingletonRepository.Projectiles.Get(nameof(ArrowProjectile)), dir, 150);
-        item.RechargeTimeLeft = base.SaveGame.RandomLessThan(90) + 90;
+        Game.FireBolt(Game.SingletonRepository.Projectiles.Get(nameof(ArrowProjectile)), dir, 150);
+        item.RechargeTimeLeft = base.Game.RandomLessThan(90) + 90;
     }
     public override void ApplyResistances(Item item)
     {
-        item.RandomPower = SaveGame.SingletonRepository.Powers.ToWeightedRandom(_power => _power.IsAbility == true).Choose();
+        item.RandomPower = Game.SingletonRepository.Powers.ToWeightedRandom(_power => _power.IsAbility == true).Choose();
     }
     public string DescribeActivationEffect => "a magical arrow (150) every 90+d90 turns";
 

@@ -10,9 +10,9 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class RemoveCurseScrollItemFactory : ScrollItemFactory
 {
-    private RemoveCurseScrollItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private RemoveCurseScrollItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(QuestionMarkSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(QuestionMarkSymbol));
     public override string Name => "Remove Curse";
 
     public override int[] Chance => new int[] { 1, 2, 2, 0 };
@@ -24,11 +24,11 @@ internal class RemoveCurseScrollItemFactory : ScrollItemFactory
 
     public override void Read(ReadScrollEvent eventArgs)
     {
-        if (SaveGame.RunSuccessfulScript(nameof(RemoveCurseScript)))
+        if (Game.RunSuccessfulScript(nameof(RemoveCurseScript)))
         {
-            SaveGame.MsgPrint("You feel as if someone is watching over you.");
+            Game.MsgPrint("You feel as if someone is watching over you.");
             eventArgs.Identified = true;
         }
     }
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

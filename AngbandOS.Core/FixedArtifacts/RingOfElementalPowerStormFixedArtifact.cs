@@ -10,7 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class RingOfElementalPowerStormFixedArtifact : FixedArtifact
 {
-    private RingOfElementalPowerStormFixedArtifact(SaveGame saveGame) : base(saveGame) { }
+    private RingOfElementalPowerStormFixedArtifact(Game game) : base(game) { }
 
     protected override string BaseItemFactoryName => nameof(VilyaRingItemFactory);
 
@@ -19,7 +19,7 @@ internal class RingOfElementalPowerStormFixedArtifact : FixedArtifact
 
     public override void ApplyResistances(Item item)
     {
-        item.RandomPower = SaveGame.SingletonRepository.Powers.ToWeightedRandom(_power => _power.IsAbility == true).Choose();
+        item.RandomPower = Game.SingletonRepository.Powers.ToWeightedRandom(_power => _power.IsAbility == true).Choose();
     }
 
     public override string Name => "The Ring of Elemental Power (Storm)";

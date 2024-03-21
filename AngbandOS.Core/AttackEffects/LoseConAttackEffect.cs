@@ -10,13 +10,13 @@ namespace AngbandOS.Core.AttackEffects;
 [Serializable]
 internal class LoseConAttackEffect : AttackEffect
 {
-    private LoseConAttackEffect(SaveGame saveGame) : base(saveGame) { }
+    private LoseConAttackEffect(Game game) : base(game) { }
     public override int Power => 0;
     public override string Description => "reduce constitution";
     public override void ApplyToPlayer(int monsterLevel, int monsterIndex, int armorClass, string monsterDescription, Monster monster, ref bool obvious, ref int damage, ref bool blinked)
     {
-        SaveGame.TakeHit(damage, monsterDescription);
-        if (SaveGame.TryDecreasingAbilityScore(Ability.Constitution))
+        Game.TakeHit(damage, monsterDescription);
+        if (Game.TryDecreasingAbilityScore(Ability.Constitution))
         {
             obvious = true;
         }

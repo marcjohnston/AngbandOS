@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Tiles;
 [Serializable]
 internal class UpStaircaseTile : Tile
 {
-    private UpStaircaseTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private UpStaircaseTile(Game game) : base(game) { } // This object is a singleton.
     protected override string SymbolName => nameof(LessThanSymbol);
     public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Description => "up staircase";

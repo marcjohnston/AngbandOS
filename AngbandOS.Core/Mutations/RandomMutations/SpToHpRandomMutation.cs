@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Mutations.RandomMutations;
 [Serializable]
 internal class SpToHpRandomMutation : Mutation
 {
-    private SpToHpRandomMutation(SaveGame saveGame) : base(saveGame) { }
+    private SpToHpRandomMutation(Game game) : base(game) { }
     public override int Frequency => 2;
     public override string GainMessage => "You are subject to fits of magical healing.";
     public override string HaveMessage => "Your blood sometimes rushes to your muscles.";
@@ -18,21 +18,21 @@ internal class SpToHpRandomMutation : Mutation
 
     public override void OnProcessWorld()
     {
-        if (base.SaveGame.DieRoll(2000) != 1)
+        if (base.Game.DieRoll(2000) != 1)
         {
             return;
         }
-        int wounds = SaveGame.MaxHealth.Value - SaveGame.Health.Value;
+        int wounds = Game.MaxHealth.Value - Game.Health.Value;
         if (wounds <= 0)
         {
             return;
         }
-        int healing = SaveGame.Mana.Value;
+        int healing = Game.Mana.Value;
         if (healing > wounds)
         {
             healing = wounds;
         }
-        SaveGame.RestoreHealth(healing);
-        SaveGame.Mana.Value -= healing;
+        Game.RestoreHealth(healing);
+        Game.Mana.Value -= healing;
     }
 }

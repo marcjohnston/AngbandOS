@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class LookScript : Script, IScript, IRepeatableScript
 {
-    private LookScript(SaveGame saveGame) : base(saveGame) { }
+    private LookScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the look script and returns false.
@@ -28,9 +28,9 @@ internal class LookScript : Script, IScript, IRepeatableScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        if (SaveGame.TargetSet(Constants.TargetLook))
+        if (Game.TargetSet(Constants.TargetLook))
         {
-            SaveGame.MsgPrint(SaveGame.TargetWho > 0 ? "Target Selected." : "Location Targeted.");
+            Game.MsgPrint(Game.TargetWho > 0 ? "Target Selected." : "Location Targeted.");
         }
     }
 }

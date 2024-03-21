@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class PopupMenuScript : Script, IScript, IRepeatableScript
 {
-    private PopupMenuScript(SaveGame saveGame) : base(saveGame) { }
+    private PopupMenuScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the popup-menu script and returns false.
@@ -30,7 +30,7 @@ internal class PopupMenuScript : Script, IScript, IRepeatableScript
     {
         List<string> menuItems = new List<string>() { "Resume Game", "Save and Quit" };
         PopupMenu menu = new PopupMenu(menuItems);
-        int result = menu.Show(SaveGame);
+        int result = menu.Show(Game);
         switch (result)
         {
             // Escape or Resume Game
@@ -39,7 +39,7 @@ internal class PopupMenuScript : Script, IScript, IRepeatableScript
                 break;
             // Save and Quit
             case 1:
-                SaveGame.Playing = false; // TODO: Need to use event arguments
+                Game.Playing = false; // TODO: Need to use event arguments
                 break;
         }
     }

@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Spells.Corporeal;
 [Serializable]
 internal class CorporealSpellCureMediumWounds : Spell
 {
-    private CorporealSpellCureMediumWounds(SaveGame saveGame) : base(saveGame) { }
+    private CorporealSpellCureMediumWounds(Game game) : base(game) { }
     protected override string? CastScriptName => nameof(CureMediumWounds4d10Script);
 
     public override string Name => "Cure Medium Wounds";

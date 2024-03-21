@@ -13,19 +13,19 @@ namespace AngbandOS.Core.Activations;
 [Serializable]
 internal class Heal4d8AndWoundsEvery3p1d3Activation : Activation
 {
-    private Heal4d8AndWoundsEvery3p1d3Activation(SaveGame saveGame) : base(saveGame) { }
+    private Heal4d8AndWoundsEvery3p1d3Activation(Game game) : base(game) { }
     public override int RandomChance => 101;
 
     public override string? PreActivationMessage => "Your {0} radiates deep purple...";
 
     protected override bool OnActivate(Item item)
     {
-        SaveGame.RestoreHealth(SaveGame.DiceRoll(4, 8));
-        SaveGame.BleedingTimer.SetTimer((SaveGame.BleedingTimer.Value / 2) - 50);
+        Game.RestoreHealth(Game.DiceRoll(4, 8));
+        Game.BleedingTimer.SetTimer((Game.BleedingTimer.Value / 2) - 50);
         return true;
     }
 
-    public override int RechargeTime() => SaveGame.RandomLessThan(3) + 3;
+    public override int RechargeTime() => Game.RandomLessThan(3) + 3;
 
     public override int Value => 750;
 

@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Races;
 [Serializable]
 internal class TchoTchoRace : Race
 {
-    private TchoTchoRace(SaveGame saveGame) : base(saveGame) { }
+    private TchoTchoRace(Game game) : base(game) { }
     public override string Title => "Tcho-Tcho";
     public override int[] AbilityBonus => new int[] { 3, -2, -1, 1, 2, -2 };
     public override int BaseDisarmBonus => -2;
@@ -60,16 +60,16 @@ internal class TchoTchoRace : Race
     }
     public override void CalcBonuses()
     {
-        SaveGame.HasFearResistance = true;
+        Game.HasFearResistance = true;
     }
 
     public override void UseRacialPower()
     {
         // Tcho-Tcho can create The Yellow Sign
-        if (SaveGame.CheckIfRacialPowerWorks(25, 35, Ability.Intelligence, 15))
+        if (Game.CheckIfRacialPowerWorks(25, 35, Ability.Intelligence, 15))
         {
-            SaveGame.MsgPrint("You carefully draw The Yellow Sign...");
-            SaveGame.RunScript(nameof(YellowSignScript));
+            Game.MsgPrint("You carefully draw The Yellow Sign...");
+            Game.RunScript(nameof(YellowSignScript));
         }
     }
 
@@ -77,7 +77,7 @@ internal class TchoTchoRace : Race
     {
         if (itemClass is FearResistanceRingItemFactory)
         {
-            return SaveGame.SingletonRepository.ItemFactories.Get(nameof(SustainStrengthRingItemFactory));
+            return Game.SingletonRepository.ItemFactories.Get(nameof(SustainStrengthRingItemFactory));
         }
         return itemClass;
     }

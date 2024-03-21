@@ -10,7 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class ExecutionersSwordOfNyarlathotepFixedArtifact : FixedArtifact
 {
-    private ExecutionersSwordOfNyarlathotepFixedArtifact(SaveGame saveGame) : base(saveGame) { }
+    private ExecutionersSwordOfNyarlathotepFixedArtifact(Game game) : base(game) { }
 
     protected override string BaseItemFactoryName => nameof(ExecutionersSwordWeaponItemFactory);
     public override ColorEnum Color => ColorEnum.Red;

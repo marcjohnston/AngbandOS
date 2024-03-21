@@ -10,10 +10,10 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class DisarmingRodItemFactory : RodItemFactory
 {
-    private DisarmingRodItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private DisarmingRodItemFactory(Game game) : base(game) { } // This object is a singleton.
 
     public override bool RequiresAiming => true;
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(MinusSignSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(MinusSignSymbol));
     public override string Name => "Disarming";
 
     public override int[] Chance => new int[] { 1, 0, 0, 0 };
@@ -26,11 +26,11 @@ internal class DisarmingRodItemFactory : RodItemFactory
     public override int Weight => 15;
     public override void Execute(ZapRodEvent zapRodEvent)
     {
-        if (SaveGame.DisarmTrap(zapRodEvent.Dir.Value))
+        if (Game.DisarmTrap(zapRodEvent.Dir.Value))
         {
             zapRodEvent.Identified = true;
         }
-        zapRodEvent.Item.TypeSpecificValue = 15 + SaveGame.DieRoll(15);
+        zapRodEvent.Item.TypeSpecificValue = 15 + Game.DieRoll(15);
     }
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

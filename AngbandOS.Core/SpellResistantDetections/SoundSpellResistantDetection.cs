@@ -10,10 +10,10 @@ namespace AngbandOS.Core.SpellResistantDetections;
 [Serializable]
 internal class SoundSpellResistantDetection : SpellResistantDetection
 {
-    private SoundSpellResistantDetection(SaveGame saveGame) : base(saveGame) { }
+    private SoundSpellResistantDetection(Game game) : base(game) { }
     public override void Learn(Monster monster)
     {
-        if (SaveGame.HasSoundResistance)
+        if (Game.HasSoundResistance)
         {
             monster.SmResSound = true;
         }

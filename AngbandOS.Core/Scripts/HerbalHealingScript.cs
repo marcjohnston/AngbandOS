@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class HerbalHealingScript : Script, IScript
 {
-    private HerbalHealingScript(SaveGame saveGame) : base(saveGame) { }
+    private HerbalHealingScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script.
@@ -18,9 +18,9 @@ internal class HerbalHealingScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        SaveGame.RestoreHealth(1000);
-        SaveGame.StunTimer.ResetTimer();
-        SaveGame.BleedingTimer.ResetTimer();
-        SaveGame.PoisonTimer.ResetTimer();
+        Game.RestoreHealth(1000);
+        Game.StunTimer.ResetTimer();
+        Game.BleedingTimer.ResetTimer();
+        Game.PoisonTimer.ResetTimer();
     }
 }

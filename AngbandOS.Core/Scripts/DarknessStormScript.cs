@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class DarknessStormScript : Script, IScript
 {
-    private DarknessStormScript(SaveGame saveGame) : base(saveGame) { }
+    private DarknessStormScript(Game game) : base(game) { }
 
     /// <summary>
     /// Fires a ball of dark in a chosen direction with a damage of 120.
@@ -18,10 +18,10 @@ internal class DarknessStormScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        if (!SaveGame.GetDirectionWithAim(out int dir))
+        if (!Game.GetDirectionWithAim(out int dir))
         {
             return;
         }
-        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(DarkProjectile)), dir, 120, 4);
+        Game.FireBall(Game.SingletonRepository.Projectiles.Get(nameof(DarkProjectile)), dir, 120, 4);
     }
 }

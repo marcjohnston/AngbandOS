@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class ZapRodScript : Script, IScript, IRepeatableScript
 {
-    private ZapRodScript(SaveGame saveGame) : base(saveGame) { }
+    private ZapRodScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the zap rod script and returns false.
@@ -28,9 +28,9 @@ internal class ZapRodScript : Script, IScript, IRepeatableScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        if (!SaveGame.SelectItem(out Item? item, "Zap which rod? ", false, true, true, SaveGame.SingletonRepository.ItemFilters.Get(nameof(CanBeZappedItemFilter))))
+        if (!Game.SelectItem(out Item? item, "Zap which rod? ", false, true, true, Game.SingletonRepository.ItemFilters.Get(nameof(CanBeZappedItemFilter))))
         {
-            SaveGame.MsgPrint("You have no rod to zap.");
+            Game.MsgPrint("You have no rod to zap.");
             return;
         }
         if (item == null)
@@ -38,15 +38,15 @@ internal class ZapRodScript : Script, IScript, IRepeatableScript
             return;
         }
         // Make sure the item is actually a rod
-        if (!SaveGame.ItemMatchesFilter(item, SaveGame.SingletonRepository.ItemFilters.Get(nameof(CanBeZappedItemFilter))))
+        if (!Game.ItemMatchesFilter(item, Game.SingletonRepository.ItemFilters.Get(nameof(CanBeZappedItemFilter))))
         {
-            SaveGame.MsgPrint("That is not a rod!");
+            Game.MsgPrint("That is not a rod!");
             return;
         }
         // Rods can't be used from the floor
         if (!item.IsInInventory && item.Count > 1)
         {
-            SaveGame.MsgPrint("You must first pick up the rods.");
+            Game.MsgPrint("You must first pick up the rods.");
             return;
         }
         // We may need to aim the rod.  If we know that the rod requires aiming, we get a direction from the player.  Otherwise, if we do not know what
@@ -56,7 +56,7 @@ internal class ZapRodScript : Script, IScript, IRepeatableScript
         int? dir = 5;
         if (rodItemCategory.RequiresAiming || !item.IsFlavorAware())
         {
-            if (!SaveGame.GetDirectionWithAim(out int direction))
+            if (!Game.GetDirectionWithAim(out int direction))
             {
                 return;
             }
@@ -64,46 +64,46 @@ internal class ZapRodScript : Script, IScript, IRepeatableScript
         }
 
         // Using a rod takes a whole turn
-        SaveGame.EnergyUse = 100;
+        Game.EnergyUse = 100;
         bool identified = false;
         int itemLevel = item.Factory.LevelNormallyFound;
         // Chance to successfully use it is skill (halved if confused) - rod level (capped at 50)
-        int chance = SaveGame.SkillUseDevice;
-        if (SaveGame.ConfusedTimer.Value != 0)
+        int chance = Game.SkillUseDevice;
+        if (Game.ConfusedTimer.Value != 0)
         {
             chance /= 2;
         }
         chance -= itemLevel > 50 ? 50 : itemLevel;
         // There's always a small chance of success
-        if (chance < Constants.UseDevice && SaveGame.RandomLessThan(Constants.UseDevice - chance + 1) == 0)
+        if (chance < Constants.UseDevice && Game.RandomLessThan(Constants.UseDevice - chance + 1) == 0)
         {
             chance = Constants.UseDevice;
         }
         // Do the actual check
-        if (chance < Constants.UseDevice || SaveGame.DieRoll(chance) < Constants.UseDevice)
+        if (chance < Constants.UseDevice || Game.DieRoll(chance) < Constants.UseDevice)
         {
-            SaveGame.MsgPrint("You failed to use the rod properly.");
+            Game.MsgPrint("You failed to use the rod properly.");
             return;
         }
         // Rods only have a single charge but recharge over time
         if (item.TypeSpecificValue != 0)
         {
-            SaveGame.MsgPrint("The rod is still charging.");
+            Game.MsgPrint("The rod is still charging.");
             return;
         }
-        SaveGame.PlaySound(SoundEffectEnum.ZapRod);
+        Game.PlaySound(SoundEffectEnum.ZapRod);
         // Do the rod-specific effect
         bool useCharge = true;
         RodItemFactory rodItem = (RodItemFactory)item.Factory;
         ZapRodEvent zapRodEvent = new ZapRodEvent(item, dir);
         rodItem.Execute(zapRodEvent);
-        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
+        Game.SingletonRepository.FlaggedActions.Get(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
         // We may have just discovered what the rod does
         item.ObjectTried();
         if (identified && !item.IsFlavorAware())
         {
             item.BecomeFlavorAware();
-            SaveGame.GainExperience((itemLevel + (SaveGame.ExperienceLevel.Value >> 1)) / SaveGame.ExperienceLevel.Value);
+            Game.GainExperience((itemLevel + (Game.ExperienceLevel.Value >> 1)) / Game.ExperienceLevel.Value);
         }
         // We may not have actually used a charge
         if (!useCharge)
@@ -114,9 +114,9 @@ internal class ZapRodScript : Script, IScript, IRepeatableScript
 
         // Channelers can spend mana instead of a charge
         bool channeled = false;
-        if (SaveGame.BaseCharacterClass.CanUseManaInsteadOfConsumingItem)
+        if (Game.BaseCharacterClass.CanUseManaInsteadOfConsumingItem)
         {
-            channeled = SaveGame.DoCmdChannel(item);
+            channeled = Game.DoCmdChannel(item);
             if (channeled)
             {
                 item.TypeSpecificValue = 0;
@@ -131,9 +131,9 @@ internal class ZapRodScript : Script, IScript, IRepeatableScript
                 Item singleRod = item.Clone(1);
                 item.TypeSpecificValue = 0;
                 item.Count--;
-                SaveGame.WeightCarried -= singleRod.Weight;
-                SaveGame.InvenCarry(singleRod);
-                SaveGame.MsgPrint("You unstack your rod.");
+                Game.WeightCarried -= singleRod.Weight;
+                Game.InvenCarry(singleRod);
+                Game.MsgPrint("You unstack your rod.");
             }
         }
     }

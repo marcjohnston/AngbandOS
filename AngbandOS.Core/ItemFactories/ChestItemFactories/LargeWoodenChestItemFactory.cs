@@ -10,9 +10,9 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class LargeWoodenChestItemFactory : ChestItemFactory
 {
-    private LargeWoodenChestItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private LargeWoodenChestItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(TildeSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(TildeSymbol));
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "Large wooden chest";
 
@@ -26,5 +26,5 @@ internal class LargeWoodenChestItemFactory : ChestItemFactory
     public override int Weight => 500;
     public override bool IsSmall => false;
     public override int NumberOfItemsContained => 2;
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

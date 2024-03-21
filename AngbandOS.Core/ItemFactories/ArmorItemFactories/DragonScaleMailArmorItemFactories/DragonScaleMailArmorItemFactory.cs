@@ -29,13 +29,13 @@ internal abstract class DragonScaleMailArmorItemFactory : ArmorItemFactory
             // Apply the standard armor characteristics.
             base.ApplyMagic(item, level, power, null);
 
-            SaveGame.TreasureRating += 30;
+            Game.TreasureRating += 30;
         }
     }
 
-    public DragonScaleMailArmorItemFactory(SaveGame saveGame) : base(saveGame) { }
-    public override ItemClass ItemClass => SaveGame.SingletonRepository.ItemClasses.Get(nameof(DragonScaleMailsItemClass));
-    public override BaseInventorySlot BaseWieldSlot => SaveGame.SingletonRepository.InventorySlots.Get(nameof(OnBodyInventorySlot));
+    public DragonScaleMailArmorItemFactory(Game game) : base(game) { }
+    public override ItemClass ItemClass => Game.SingletonRepository.ItemClasses.Get(nameof(DragonScaleMailsItemClass));
+    public override BaseInventorySlot BaseWieldSlot => Game.SingletonRepository.InventorySlots.Get(nameof(OnBodyInventorySlot));
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.DragArmor;
     public override int PackSort => 19;
     public override bool HatesAcid => true;

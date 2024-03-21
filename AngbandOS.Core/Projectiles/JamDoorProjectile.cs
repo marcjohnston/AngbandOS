@@ -10,13 +10,13 @@ namespace AngbandOS.Core.Projection;
 [Serializable]
 internal class JamDoorProjectile : Projectile
 {
-    private JamDoorProjectile(SaveGame saveGame) : base(saveGame) { }
+    private JamDoorProjectile(Game game) : base(game) { }
 
-    protected override Animation EffectAnimation => SaveGame.SingletonRepository.Animations.Get(nameof(YellowSwirlAnimation));
+    protected override Animation EffectAnimation => Game.SingletonRepository.Animations.Get(nameof(YellowSwirlAnimation));
 
     protected override bool AffectFloor(int y, int x)
     {
-        GridTile cPtr = SaveGame.Grid[y][x];
+        GridTile cPtr = Game.Grid[y][x];
         bool obvious = false;
         if (cPtr.FeatureType.IsVisibleDoor)
         {
@@ -26,9 +26,9 @@ internal class JamDoorProjectile : Projectile
                 throw new Exception("No jammed door specified.");
             }
             cPtr.SetFeature(jammedTile);
-            if (SaveGame.PlayerHasLosBold(y, x))
+            if (Game.PlayerHasLosBold(y, x))
             {
-                SaveGame.MsgPrint("The door seems stuck.");
+                Game.MsgPrint("The door seems stuck.");
                 obvious = true;
             }
         }

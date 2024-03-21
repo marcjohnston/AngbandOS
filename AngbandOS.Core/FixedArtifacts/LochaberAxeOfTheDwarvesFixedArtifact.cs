@@ -10,7 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class LochaberAxeOfTheDwarvesFixedArtifact : FixedArtifact
 {
-    private LochaberAxeOfTheDwarvesFixedArtifact(SaveGame saveGame) : base(saveGame) { }
+    private LochaberAxeOfTheDwarvesFixedArtifact(Game game) : base(game) { }
 
     protected override string BaseItemFactoryName => nameof(LochaberAxePolearmWeaponItemFactory);
 

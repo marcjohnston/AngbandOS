@@ -10,7 +10,7 @@ namespace AngbandOS.Core.WizardCommands;
 [Serializable]
 internal class CreateNamedArtifactWizardCommand : WizardCommand
 {
-    private CreateNamedArtifactWizardCommand(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private CreateNamedArtifactWizardCommand(Game game) : base(game) { } // This object is a singleton.
 
     public override char KeyChar => 'C';
 

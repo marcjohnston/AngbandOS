@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class IdentifyItemFullyScript : Script, IScript, ISuccessfulScript
 {
-    private IdentifyItemFullyScript(SaveGame saveGame) : base(saveGame) { }
+    private IdentifyItemFullyScript(Game game) : base(game) { }
 
     /// <summary>
     /// Identifies an item completely and returns true, if an item was chosen to be identified; false, of the item selection was cancelled.
@@ -18,9 +18,9 @@ internal class IdentifyItemFullyScript : Script, IScript, ISuccessfulScript
     /// <returns></returns>
     public bool ExecuteSuccessfulScript()
     {
-        if (!SaveGame.SelectItem(out Item? oPtr, "Identify which item? ", true, true, true, null))
+        if (!Game.SelectItem(out Item? oPtr, "Identify which item? ", true, true, true, null))
         {
-            SaveGame.MsgPrint("You have nothing to identify.");
+            Game.MsgPrint("You have nothing to identify.");
             return false;
         }
         if (oPtr == null)
@@ -30,18 +30,18 @@ internal class IdentifyItemFullyScript : Script, IScript, ISuccessfulScript
         oPtr.BecomeFlavorAware();
         oPtr.BecomeKnown();
         oPtr.IdentMental = true;
-        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
-        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
-        SaveGame.HandleStuff();
+        Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
+        Game.SingletonRepository.FlaggedActions.Get(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
+        Game.HandleStuff();
         string oName = oPtr.Description(true, 3);
 
-        SaveGame.MsgPrint($"{oPtr.DescribeLocation()}: {oName} ({oPtr.Label}).");
+        Game.MsgPrint($"{oPtr.DescribeLocation()}: {oName} ({oPtr.Label}).");
 
         // Check to see if the player is carrying the item and it is stompable.
         if (oPtr.IsInInventory && oPtr.Stompable())
         {
             string itemName = oPtr.Description(true, 3);
-            SaveGame.MsgPrint($"You destroy {oName}.");
+            Game.MsgPrint($"You destroy {oName}.");
             int amount = oPtr.Count;
             oPtr.ItemIncrease(-amount);
             oPtr.ItemOptimize();

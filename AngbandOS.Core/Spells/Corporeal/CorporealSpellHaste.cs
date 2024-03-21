@@ -10,10 +10,10 @@ namespace AngbandOS.Core.Spells.Corporeal;
 [Serializable]
 internal class CorporealSpellHaste : Spell
 {
-    private CorporealSpellHaste(SaveGame saveGame) : base(saveGame) { }
+    private CorporealSpellHaste(Game game) : base(game) { }
     protected override string? CastScriptName => nameof(HasteScript);
 
     public override string Name => "Haste";
 
-    protected override string LearnedDetails => $"dur {SaveGame.ExperienceLevel.Value}+d{20 + SaveGame.ExperienceLevel.Value}";
+    protected override string LearnedDetails => $"dur {Game.ExperienceLevel.Value}+d{20 + Game.ExperienceLevel.Value}";
 }

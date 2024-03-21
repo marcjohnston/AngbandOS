@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class SummonSpiderScript : Script, IScript
 {
-    private SummonSpiderScript(SaveGame saveGame) : base(saveGame) { }
+    private SummonSpiderScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script.
@@ -18,21 +18,21 @@ internal class SummonSpiderScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        SaveGame.MsgPrint("You concentrate on the image of a spider...");
-        if (SaveGame.DieRoll(5) > 2)
+        Game.MsgPrint("You concentrate on the image of a spider...");
+        if (Game.DieRoll(5) > 2)
         {
-            if (!SaveGame.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel.Value, SaveGame.SingletonRepository.MonsterFilters.Get(nameof(SpiderMonsterFilter)), true))
+            if (!Game.SummonSpecificFriendly(Game.MapY, Game.MapX, Game.ExperienceLevel.Value, Game.SingletonRepository.MonsterFilters.Get(nameof(SpiderMonsterFilter)), true))
             {
-                SaveGame.MsgPrint("No-one ever turns up.");
+                Game.MsgPrint("No-one ever turns up.");
             }
         }
-        else if (SaveGame.SummonSpecific(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel.Value, SaveGame.SingletonRepository.MonsterFilters.Get(nameof(SpiderMonsterFilter))))
+        else if (Game.SummonSpecific(Game.MapY, Game.MapX, Game.ExperienceLevel.Value, Game.SingletonRepository.MonsterFilters.Get(nameof(SpiderMonsterFilter))))
         {
-            SaveGame.MsgPrint("The summoned spiders get angry!");
+            Game.MsgPrint("The summoned spiders get angry!");
         }
         else
         {
-            SaveGame.MsgPrint("No-one ever turns up.");
+            Game.MsgPrint("No-one ever turns up.");
         }
     }
 }

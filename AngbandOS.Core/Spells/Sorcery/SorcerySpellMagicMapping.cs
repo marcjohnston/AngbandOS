@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Spells.Sorcery;
 [Serializable]
 internal class SorcerySpellMagicMapping : Spell
 {
-    private SorcerySpellMagicMapping(SaveGame saveGame) : base(saveGame) { }
+    private SorcerySpellMagicMapping(Game game) : base(game) { }
     protected override string? CastScriptName => nameof(MapAreaScript);
 
     public override string Name => "Magic Mapping";

@@ -10,11 +10,11 @@ namespace AngbandOS.Core.Projection;
 [Serializable]
 internal class OldSlowProjectile : Projectile
 {
-    private OldSlowProjectile(SaveGame saveGame) : base(saveGame) { }
+    private OldSlowProjectile(Game game) : base(game) { }
 
-    protected override ProjectileGraphic? BoltProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get(nameof(BlueBulletProjectileGraphic));
+    protected override ProjectileGraphic? BoltProjectileGraphic => Game.SingletonRepository.ProjectileGraphics.Get(nameof(BlueBulletProjectileGraphic));
 
-    protected override Animation EffectAnimation => SaveGame.SingletonRepository.Animations.Get(nameof(BlueSwirlAnimation));
+    protected override Animation EffectAnimation => Game.SingletonRepository.Animations.Get(nameof(BlueSwirlAnimation));
 
     protected override bool AffectMonster(int who, Monster mPtr, int dam, int r)
     {
@@ -27,7 +27,7 @@ internal class OldSlowProjectile : Projectile
             obvious = true;
         }
         if (rPtr.Unique ||
-            rPtr.Level > SaveGame.DieRoll(dam - 10 < 1 ? 1 : dam - 10) + 10)
+            rPtr.Level > Game.DieRoll(dam - 10 < 1 ? 1 : dam - 10) + 10)
         {
             note = " is unaffected!";
             obvious = false;
@@ -47,12 +47,12 @@ internal class OldSlowProjectile : Projectile
 
     protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
     {
-        bool blind = SaveGame.BlindnessTimer.Value != 0;
+        bool blind = Game.BlindnessTimer.Value != 0;
         if (blind)
         {
-            SaveGame.MsgPrint("You are hit by something slow!");
+            Game.MsgPrint("You are hit by something slow!");
         }
-        SaveGame.SlowTimer.AddTimer(SaveGame.RandomLessThan(4) + 4);
+        Game.SlowTimer.AddTimer(Game.RandomLessThan(4) + 4);
         return true;
     }
 }

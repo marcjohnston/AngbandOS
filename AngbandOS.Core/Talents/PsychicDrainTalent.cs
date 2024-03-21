@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Talents;
 [Serializable]
 internal class PsychicDrainTalent : Talent
 {
-    private PsychicDrainTalent(SaveGame saveGame) : base(saveGame) { }
+    private PsychicDrainTalent(Game game) : base(game) { }
     public override string Name => "Psychic Drain";
     public override int Level => 25;
     public override int ManaCost => 10;
@@ -18,19 +18,19 @@ internal class PsychicDrainTalent : Talent
 
     public override void Use()
     {
-        if (!SaveGame.GetDirectionWithAim(out int dir))
+        if (!Game.GetDirectionWithAim(out int dir))
         {
             return;
         }
-        int i = SaveGame.DiceRoll(SaveGame.ExperienceLevel.Value / 2, 6);
-        if (SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(PsiDrainProjectile)), dir, i, 0 + ((SaveGame.ExperienceLevel.Value - 25) / 10)))
+        int i = Game.DiceRoll(Game.ExperienceLevel.Value / 2, 6);
+        if (Game.FireBall(Game.SingletonRepository.Projectiles.Get(nameof(PsiDrainProjectile)), dir, i, 0 + ((Game.ExperienceLevel.Value - 25) / 10)))
         {
-            SaveGame.Energy -= SaveGame.DieRoll(150);
+            Game.Energy -= Game.DieRoll(150);
         }
     }
 
     protected override string Comment()
     {
-        return $"dam {SaveGame.ExperienceLevel.Value / 2}d6";
+        return $"dam {Game.ExperienceLevel.Value / 2}d6";
     }
 }

@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class SpawnMonsterScript : Script, IScript
 {
-    private SpawnMonsterScript(SaveGame saveGame) : base(saveGame) { }
+    private SpawnMonsterScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the spawn monster script.
@@ -18,15 +18,15 @@ internal class SpawnMonsterScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        SaveGame.FullScreenOverlay = true;
-        ScreenBuffer savedScreen = SaveGame.Screen.Clone();
-        SaveGame.SetBackground(BackgroundImageEnum.Normal);
-        SaveGame.Screen.Clear();
+        Game.FullScreenOverlay = true;
+        ScreenBuffer savedScreen = Game.Screen.Clone();
+        Game.SetBackground(BackgroundImageEnum.Normal);
+        Game.Screen.Clear();
 
         try
         {
             ConsoleTable table = new ConsoleTable("Name", "Character", "Level");
-            MonsterRace[] monsterRaces = SaveGame.SingletonRepository.MonsterRaces.OrderBy(_monsterRace => _monsterRace.Name).ToArray();
+            MonsterRace[] monsterRaces = Game.SingletonRepository.MonsterRaces.OrderBy(_monsterRace => _monsterRace.Name).ToArray();
             foreach (MonsterRace monsterRace in monsterRaces)
             {
                 ConsoleTableRow tableRow = table.AddRow();
@@ -62,9 +62,9 @@ internal class SpawnMonsterScript : Script, IScript
                     c.Color = ColorEnum.Red;
                 }
 
-                table.Render(SaveGame, consoleWindow, new ConsoleTopLeftAlignment());
+                table.Render(Game, consoleWindow, new ConsoleTopLeftAlignment());
 
-                if (!SaveGame.GetCom("Spawn Which Monster? ", out char ch))
+                if (!Game.GetCom("Spawn Which Monster? ", out char ch))
                 {
                     return;
                 }
@@ -89,17 +89,17 @@ internal class SpawnMonsterScript : Script, IScript
                         break;
                     case '\r':
                         MonsterRace monsterRace = monsterRaces[selectedIndex];
-                        SaveGame.Scatter(out int y, out int x, SaveGame.MapY, SaveGame.MapX, 1);
-                        SaveGame.PlaceMonsterAux(y, x, monsterRace, false, false, false);
+                        Game.Scatter(out int y, out int x, Game.MapY, Game.MapX, 1);
+                        Game.PlaceMonsterAux(y, x, monsterRace, false, false, false);
                         return;
                 }
             }
         }
         finally
         {
-            SaveGame.Screen.Restore(savedScreen);
-            SaveGame.FullScreenOverlay = false;
-            SaveGame.SetBackground(BackgroundImageEnum.Overhead);
+            Game.Screen.Restore(savedScreen);
+            Game.FullScreenOverlay = false;
+            Game.SetBackground(BackgroundImageEnum.Overhead);
         }
     }
 }

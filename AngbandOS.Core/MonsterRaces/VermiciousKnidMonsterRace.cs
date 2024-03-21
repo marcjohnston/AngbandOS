@@ -10,7 +10,7 @@ namespace AngbandOS.Core.MonsterRaces;
 [Serializable]
 internal class VermiciousKnidMonsterRace : MonsterRace
 {
-    protected VermiciousKnidMonsterRace(SaveGame saveGame) : base(saveGame) { }
+    protected VermiciousKnidMonsterRace(Game game) : base(game) { }
 
     protected override string SymbolName => nameof(UpperASymbol);
     public override ColorEnum Color => ColorEnum.Brown;

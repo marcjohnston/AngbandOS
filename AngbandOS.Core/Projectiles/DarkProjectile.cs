@@ -10,26 +10,26 @@ namespace AngbandOS.Core.Projection;
 [Serializable]
 internal class DarkProjectile : Projectile
 {
-    private DarkProjectile(SaveGame saveGame) : base(saveGame) { }
+    private DarkProjectile(Game game) : base(game) { }
 
-    protected override ProjectileGraphic? BoltProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get(nameof(BlackBoltProjectileGraphic));
+    protected override ProjectileGraphic? BoltProjectileGraphic => Game.SingletonRepository.ProjectileGraphics.Get(nameof(BlackBoltProjectileGraphic));
 
-    protected override ProjectileGraphic? ImpactProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get(nameof(BlackSplatProjectileGraphic));
+    protected override ProjectileGraphic? ImpactProjectileGraphic => Game.SingletonRepository.ProjectileGraphics.Get(nameof(BlackSplatProjectileGraphic));
 
     protected override bool AffectFloor(int y, int x)
     {
-        GridTile cPtr = SaveGame.Grid[y][x];
-        bool obvious = SaveGame.PlayerCanSeeBold(y, x);
+        GridTile cPtr = Game.Grid[y][x];
+        bool obvious = Game.PlayerCanSeeBold(y, x);
         cPtr.TileFlags.Clear(GridTile.SelfLit);
         if (cPtr.FeatureType.IsOpenFloor)
         {
             cPtr.TileFlags.Clear(GridTile.PlayerMemorized);
-            SaveGame.NoteSpot(y, x);
+            Game.NoteSpot(y, x);
         }
-        SaveGame.RedrawSingleLocation(y, x);
+        Game.RedrawSingleLocation(y, x);
         if (cPtr.MonsterIndex != 0)
         {
-            SaveGame.UpdateMonsterVisibility(cPtr.MonsterIndex, false);
+            Game.UpdateMonsterVisibility(cPtr.MonsterIndex, false);
         }
         return obvious;
     }
@@ -55,7 +55,7 @@ internal class DarkProjectile : Projectile
         {
             note = " resists.";
             dam *= 2;
-            dam /= SaveGame.DieRoll(6) + 6;
+            dam /= Game.DieRoll(6) + 6;
         }
         ApplyProjectileDamageToMonster(who, mPtr, dam, note);
         return obvious;
@@ -63,38 +63,38 @@ internal class DarkProjectile : Projectile
 
     protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
     {
-        bool blind = SaveGame.BlindnessTimer.Value != 0;
+        bool blind = Game.BlindnessTimer.Value != 0;
         if (dam > 1600)
         {
             dam = 1600;
         }
         dam = (dam + r) / (r + 1);
-        Monster mPtr = SaveGame.Monsters[who];
+        Monster mPtr = Game.Monsters[who];
         string killer = mPtr.IndefiniteVisibleName;
         if (blind)
         {
-            SaveGame.MsgPrint("You are hit by something!");
+            Game.MsgPrint("You are hit by something!");
         }
-        if (SaveGame.HasDarkResistance)
+        if (Game.HasDarkResistance)
         {
             dam *= 4;
-            dam /= SaveGame.DieRoll(6) + 6;
-            if (!SaveGame.Race.IsDamagedByDarkness)
+            dam /= Game.DieRoll(6) + 6;
+            if (!Game.Race.IsDamagedByDarkness)
             {
                 dam = 0;
             }
         }
-        else if (!blind && !SaveGame.HasBlindnessResistance)
+        else if (!blind && !Game.HasBlindnessResistance)
         {
-            SaveGame.BlindnessTimer.AddTimer(SaveGame.DieRoll(5) + 2);
+            Game.BlindnessTimer.AddTimer(Game.DieRoll(5) + 2);
         }
-        if (SaveGame.EtherealnessTimer.Value != 0)
+        if (Game.EtherealnessTimer.Value != 0)
         {
-            SaveGame.RestoreHealth(dam);
+            Game.RestoreHealth(dam);
         }
         else
         {
-            SaveGame.TakeHit(dam, killer);
+            Game.TakeHit(dam, killer);
         }
         return true;
     }

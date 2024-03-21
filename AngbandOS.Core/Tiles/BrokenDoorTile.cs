@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Tiles;
 [Serializable]
 internal class BrokenDoorTile : Tile
 {
-    private BrokenDoorTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private BrokenDoorTile(Game game) : base(game) { } // This object is a singleton.
     protected override string SymbolName => nameof(SingleQuoteSymbol);
     public override ColorEnum Color => ColorEnum.BrightBrown;
     protected override string? AlterActionName => nameof(CloseAlterAction);

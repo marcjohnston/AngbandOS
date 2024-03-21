@@ -10,20 +10,20 @@ namespace AngbandOS.Core.Mutations.ActiveMutations;
 [Serializable]
 internal class VampirismActiveMutation : Mutation
 {
-    private VampirismActiveMutation(SaveGame saveGame) : base(saveGame) { }
+    private VampirismActiveMutation(Game game) : base(game) { }
     public override void Activate()
     {
-        if (!SaveGame.CheckIfRacialPowerWorks(13, SaveGame.ExperienceLevel.Value, Ability.Constitution, 14))
+        if (!Game.CheckIfRacialPowerWorks(13, Game.ExperienceLevel.Value, Ability.Constitution, 14))
         {
             return;
         }
-        if (!SaveGame.GetDirectionWithAim(out int dir))
+        if (!Game.GetDirectionWithAim(out int dir))
         {
             return;
         }
-        if (SaveGame.DrainLife(dir, SaveGame.ExperienceLevel.Value * 2))
+        if (Game.DrainLife(dir, Game.ExperienceLevel.Value * 2))
         {
-            SaveGame.RestoreHealth(SaveGame.ExperienceLevel.Value + base.SaveGame.DieRoll(SaveGame.ExperienceLevel.Value));
+            Game.RestoreHealth(Game.ExperienceLevel.Value + base.Game.DieRoll(Game.ExperienceLevel.Value));
         }
     }
 

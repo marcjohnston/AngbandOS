@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class RestInPlaceScript : Script, IScript, IRepeatableScript
 {
-    private RestInPlaceScript(SaveGame saveGame) : base(saveGame) { }
+    private RestInPlaceScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the rest script and disposes of the repeatable result.
@@ -27,10 +27,10 @@ internal class RestInPlaceScript : Script, IScript, IRepeatableScript
     /// <returns></returns>
     public bool ExecuteRepeatableScript()
     {
-        if (SaveGame.CommandArgument <= 0)
+        if (Game.CommandArgument <= 0)
         {
             const string prompt = "Rest (0-9999, '*' for HP/SP, '&' as needed): ";
-            if (!SaveGame.GetString(prompt, out string choice, "&", 4))
+            if (!Game.GetString(prompt, out string choice, "&", 4))
             {
                 return false; // We are not returning by chance.  The user opted out.
             }
@@ -44,25 +44,25 @@ internal class RestInPlaceScript : Script, IScript, IRepeatableScript
             // -2 means rest until we're fine
             if (choice[0] == '&')
             {
-                SaveGame.CommandArgument = -2;
+                Game.CommandArgument = -2;
             }
 
             // -1 means rest until we're at full health, but don't worry about waiting for other
             // status effects to go away
             else if (choice[0] == '*')
             {
-                SaveGame.CommandArgument = -1;
+                Game.CommandArgument = -1;
             }
             else
             {
                 // A number means rest for that many turns
                 if (int.TryParse(choice, out int i))
                 {
-                    SaveGame.CommandArgument = i;
+                    Game.CommandArgument = i;
                 }
 
                 // The player might not have put a number in - so abandon if they didn't
-                if (SaveGame.CommandArgument <= 0)
+                if (Game.CommandArgument <= 0)
                 {
                     return false; // We are not returning by chance.  The user entered an invalid count.
                 }
@@ -70,19 +70,19 @@ internal class RestInPlaceScript : Script, IScript, IRepeatableScript
         }
 
         // Can't rest for more than 9999 turns
-        if (SaveGame.CommandArgument > 9999)
+        if (Game.CommandArgument > 9999)
         {
-            SaveGame.CommandArgument = 9999;
+            Game.CommandArgument = 9999;
         }
 
         // Resting takes at least one turn (we'll also be skipping future turns)
-        SaveGame.EnergyUse = 100;
-        SaveGame.Resting = SaveGame.CommandArgument;
-        SaveGame.IsSearching = false;
-        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
-        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawStateFlaggedAction)).Set();
-        SaveGame.HandleStuff();
-        SaveGame.UpdateScreen();
+        Game.EnergyUse = 100;
+        Game.Resting = Game.CommandArgument;
+        Game.IsSearching = false;
+        Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
+        Game.SingletonRepository.FlaggedActions.Get(nameof(RedrawStateFlaggedAction)).Set();
+        Game.HandleStuff();
+        Game.UpdateScreen();
         return true; // This can and should repeated.
     }
 }

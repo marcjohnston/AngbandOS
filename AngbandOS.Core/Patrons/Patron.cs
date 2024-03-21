@@ -10,10 +10,10 @@ namespace AngbandOS.Core.Patrons;
 [Serializable]
 internal abstract class Patron : IGetKey
 {
-    protected readonly SaveGame SaveGame;
-    protected Patron(SaveGame saveGame)
+    protected readonly Game Game;
+    protected Patron(Game game)
     {
-        SaveGame = saveGame;
+        Game = game;
     }
 
     /// <summary>
@@ -47,25 +47,25 @@ internal abstract class Patron : IGetKey
             return;
         }
         MultiRew = true;
-        if (SaveGame.ExperienceLevel.Value == 13)
+        if (Game.ExperienceLevel.Value == 13)
         {
             nastyChance = 2;
         }
-        else if (SaveGame.ExperienceLevel.Value % 13 == 0)
+        else if (Game.ExperienceLevel.Value % 13 == 0)
         {
             nastyChance = 3;
         }
-        else if (SaveGame.ExperienceLevel.Value % 14 == 0)
+        else if (Game.ExperienceLevel.Value % 14 == 0)
         {
             nastyChance = 12;
         }
-        if (SaveGame.DieRoll(nastyChance) == 1)
+        if (Game.DieRoll(nastyChance) == 1)
         {
-            type = SaveGame.DieRoll(20);
+            type = Game.DieRoll(20);
         }
         else
         {
-            type = SaveGame.DieRoll(15) + 5;
+            type = Game.DieRoll(15) + 5;
         }
         if (type < 1)
         {
@@ -77,10 +77,10 @@ internal abstract class Patron : IGetKey
         }
         type--;
         Reward effect = Rewards[type];
-        if (SaveGame.DieRoll(6) == 1)
+        if (Game.DieRoll(6) == 1)
         {
-            SaveGame.MsgPrint($"{ShortName} rewards you with a mutation!");
-            SaveGame.RunScript(nameof(GainMutationScript));
+            Game.MsgPrint($"{ShortName} rewards you with a mutation!");
+            Game.RunScript(nameof(GainMutationScript));
             return;
         }
         effect.GetReward(this);

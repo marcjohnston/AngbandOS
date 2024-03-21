@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Spells.Nature;
 [Serializable]
 internal class NatureSpellEarthquake : Spell
 {
-    private NatureSpellEarthquake(SaveGame saveGame) : base(saveGame) { }
+    private NatureSpellEarthquake(Game game) : base(game) { }
     protected override string? CastScriptName => nameof(EarthquakeScript);
 
     public override string Name => "Earthquake";

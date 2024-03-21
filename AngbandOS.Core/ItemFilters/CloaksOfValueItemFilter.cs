@@ -13,6 +13,6 @@ namespace AngbandOS.Core.ItemFilters;
 [Serializable]
 internal class CloaksOfValueItemFilter : ItemFilter<CloakArmorItemFactory>
 {
-    private CloaksOfValueItemFilter(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private CloaksOfValueItemFilter(Game game) : base(game) { } // This object is a singleton.
     public override bool? HasValue => true;
 }

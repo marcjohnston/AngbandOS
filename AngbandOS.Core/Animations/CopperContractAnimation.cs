@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Animations;
 [Serializable]
 internal class CopperContractAnimation : Animation
 {
-    private CopperContractAnimation(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private CopperContractAnimation(Game game) : base(game) { } // This object is a singleton.
     public override char Character => '*';
     public override ColorEnum Color => ColorEnum.Copper;
     public override string Name => "CopperContract";

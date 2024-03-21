@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class FlameStrikeScript : Script, IScript
 {
-    private FlameStrikeScript(SaveGame saveGame) : base(saveGame) { }
+    private FlameStrikeScript(Game game) : base(game) { }
 
     /// <summary>
     /// Fires a ball of fire at the location of the player.
@@ -18,6 +18,6 @@ internal class FlameStrikeScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(FireProjectile)), 0, 150 + (2 * SaveGame.ExperienceLevel.Value), 8);
+        Game.FireBall(Game.SingletonRepository.Projectiles.Get(nameof(FireProjectile)), 0, 150 + (2 * Game.ExperienceLevel.Value), 8);
     }
 }

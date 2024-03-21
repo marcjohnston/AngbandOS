@@ -10,7 +10,7 @@ namespace AngbandOS.Core.MonsterRaces;
 [Serializable]
 internal class GapingMawMonsterRace : MonsterRace
 {
-    protected GapingMawMonsterRace(SaveGame saveGame) : base(saveGame) { }
+    protected GapingMawMonsterRace(Game game) : base(game) { }
 
     protected override string SymbolName => nameof(PeriodSymbol);
     public override string Name => "Gaping Maw";

@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Flavors;
 [Serializable]
 internal abstract class MushroomReadableFlavor : ReadableFlavor
 {
-    protected MushroomReadableFlavor(SaveGame saveGame) : base(saveGame)
+    protected MushroomReadableFlavor(Game game) : base(game)
     {
     }
 }

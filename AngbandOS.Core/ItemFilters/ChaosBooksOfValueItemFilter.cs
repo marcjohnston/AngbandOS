@@ -13,6 +13,6 @@ namespace AngbandOS.Core.ItemFilters;
 [Serializable]
 internal class ChaosBooksOfValueItemFilter : ItemFilter<ChaosBookItemFactory>
 {
-    private ChaosBooksOfValueItemFilter(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private ChaosBooksOfValueItemFilter(Game game) : base(game) { } // This object is a singleton.
     public override bool? HasValue => true;
 }

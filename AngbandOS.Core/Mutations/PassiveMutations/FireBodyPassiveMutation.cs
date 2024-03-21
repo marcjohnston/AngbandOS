@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Mutations.PassiveMutations;
 [Serializable]
 internal class FireBodyPassiveMutation : Mutation
 {
-    private FireBodyPassiveMutation(SaveGame saveGame) : base(saveGame) { }
+    private FireBodyPassiveMutation(Game game) : base(game) { }
     public override int Frequency => 2;
     public override string GainMessage => "Your body is enveloped in flames!";
     public override string HaveMessage => "Your body is enveloped in flames.";
@@ -18,11 +18,11 @@ internal class FireBodyPassiveMutation : Mutation
 
     public override void OnGain()
     {
-        SaveGame.FireHit = true;
+        Game.FireHit = true;
     }
 
     public override void OnLose()
     {
-        SaveGame.FireHit = false;
+        Game.FireHit = false;
     }
 }

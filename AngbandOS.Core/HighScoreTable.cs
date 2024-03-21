@@ -13,11 +13,11 @@
 //        public int RaceFilter = -1;
 
 //        private readonly List<HighScore> _scores;
-//        private readonly SaveGame SaveGame;
+//        private readonly Game Game;
 
-//        public HighScoreTable(SaveGame saveGame)
+//        public HighScoreTable(Game game)
 //        {
-//            //SaveGame = saveGame;
+//            //Game = game;
 //            //_scores = GameServer.DeserializeFromSaveFolder<List<HighScore>>($"highscores.v_{Constants.VersionMajor}_{Constants.VersionMinor}_scorefile") ?? new List<HighScore>();
 //            //ClearScoreFlags();
 //        }
@@ -78,11 +78,11 @@
 //            }
 //            if (collectedScores.Count == 0)
 //            {
-//                SaveGame.Clear();
-//                SaveGame.SetBackground(BackgroundImage.Normal);
-//                SaveGame.Print(Color.Yellow, "High Scores", 1, 34);
-//                SaveGame.Print(Color.Yellow, "===========", 2, 34);
-//                SaveGame.AnyKey(43);
+//                Game.Clear();
+//                Game.SetBackground(BackgroundImage.Normal);
+//                Game.Print(Color.Yellow, "High Scores", 1, 34);
+//                Game.Print(Color.Yellow, "===========", 2, 34);
+//                Game.AnyKey(43);
 //                return;
 //            }
 
@@ -93,10 +93,10 @@
 //            {
 //                if (line == 0)
 //                {
-//                    SaveGame.Clear();
-//                    SaveGame.SetBackground(BackgroundImage.Normal);
-//                    SaveGame.Print(Color.Yellow, "High Scores", 1, 34);
-//                    SaveGame.Print(Color.Yellow, "===========", 2, 34);
+//                    Game.Clear();
+//                    Game.SetBackground(BackgroundImage.Normal);
+//                    Game.Print(Color.Yellow, "High Scores", 1, 34);
+//                    Game.Print(Color.Yellow, "===========", 2, 34);
 //                }
 //                ShowScore(collectedScores[0], line);
 //                line++;
@@ -104,7 +104,7 @@
 //                if (line > 9 || collectedScores.Count == 0)
 //                {
 //                    line = 0;
-//                    SaveGame.AnyKey(43);
+//                    Game.AnyKey(43);
 //                }
 //            } while (collectedScores.Count > 0);
 //        }
@@ -272,15 +272,15 @@
 //            if (score.Living)
 //            {
 //                color = Color.BrightGreen;
-//                SaveGame.Print(color, $"{score.Index,2}) {score.Pts,5} {score.Who}", (line * 3) + 5, 1);
-//                SaveGame.Print(color, $"killed by {score.How}", (line * 3) + 6, 11);
-//                SaveGame.Print(color, $"{score.Where}", (line * 3) + 7, 11);
+//                Game.Print(color, $"{score.Index,2}) {score.Pts,5} {score.Who}", (line * 3) + 5, 1);
+//                Game.Print(color, $"killed by {score.How}", (line * 3) + 6, 11);
+//                Game.Print(color, $"{score.Where}", (line * 3) + 7, 11);
 //            }
 //            else
 //            {
-//                SaveGame.Print(color, $"{score.Index,2}) {score.Pts,5} {score.Who}", (line * 3) + 5, 1);
-//                SaveGame.Print(color, $"killed, {score.When}, by {score.How}", (line * 3) + 6, 11);
-//                SaveGame.Print(color, $"{score.Where}", (line * 3) + 7, 11);
+//                Game.Print(color, $"{score.Index,2}) {score.Pts,5} {score.Who}", (line * 3) + 5, 1);
+//                Game.Print(color, $"killed, {score.When}, by {score.How}", (line * 3) + 6, 11);
+//                Game.Print(color, $"{score.Where}", (line * 3) + 7, 11);
 //            }
 //        }
 

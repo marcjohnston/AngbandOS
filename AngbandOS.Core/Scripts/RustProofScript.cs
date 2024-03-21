@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class RustProofScript : Script, IScript
 {
-    private RustProofScript(SaveGame saveGame) : base(saveGame) { }
+    private RustProofScript(Game game) : base(game) { }
 
     /// <summary>
     /// Make a piece of armor immune to acid damage, removing any penalty at the same time
@@ -18,9 +18,9 @@ internal class RustProofScript : Script, IScript
     public void ExecuteScript()
     {
         // Get a piece of armor
-        if (!SaveGame.SelectItem(out Item? item, "Rustproof which piece of armor? ", true, true, true, SaveGame.SingletonRepository.ItemFilters.Get(nameof(ArmorItemFilter))))
+        if (!Game.SelectItem(out Item? item, "Rustproof which piece of armor? ", true, true, true, Game.SingletonRepository.ItemFilters.Get(nameof(ArmorItemFilter))))
         {
-            SaveGame.MsgPrint("You have nothing to rustproof.");
+            Game.MsgPrint("You have nothing to rustproof.");
             return;
         }
         if (item == null)
@@ -36,10 +36,10 @@ internal class RustProofScript : Script, IScript
         if (item.BonusArmorClass < 0 && !item.IdentCursed)
         {
             s = item.Count > 1 ? "" : "s";
-            SaveGame.MsgPrint($"{your} {itenName} look{s} as good as new!");
+            Game.MsgPrint($"{your} {itenName} look{s} as good as new!");
             item.BonusArmorClass = 0;
         }
         s = item.Count > 1 ? "are" : "is";
-        SaveGame.MsgPrint($"{your} {itenName} {s} now protected against corrosion.");
+        Game.MsgPrint($"{your} {itenName} {s} now protected against corrosion.");
     }
 }

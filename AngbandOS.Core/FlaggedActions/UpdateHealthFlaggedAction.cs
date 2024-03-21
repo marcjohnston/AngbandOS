@@ -10,34 +10,34 @@ namespace AngbandOS.Core.FlaggedActions;
 [Serializable]
 internal class UpdateHealthFlaggedAction : FlaggedAction
 {
-    private UpdateHealthFlaggedAction(SaveGame saveGame) : base(saveGame) { }
+    private UpdateHealthFlaggedAction(Game game) : base(game) { }
     protected override void Execute()
     {
-        int bonus = SaveGame.AbilityScores[Ability.Constitution].ConHealthBonus;
-        int mhp = SaveGame.PlayerHp[SaveGame.ExperienceLevel.Value - 1] + (bonus * SaveGame.ExperienceLevel.Value / 2);
-        if (mhp < SaveGame.ExperienceLevel.Value + 1)
+        int bonus = Game.AbilityScores[Ability.Constitution].ConHealthBonus;
+        int mhp = Game.PlayerHp[Game.ExperienceLevel.Value - 1] + (bonus * Game.ExperienceLevel.Value / 2);
+        if (mhp < Game.ExperienceLevel.Value + 1)
         {
-            mhp = SaveGame.ExperienceLevel.Value + 1;
+            mhp = Game.ExperienceLevel.Value + 1;
         }
-        if (SaveGame.HeroismTimer.Value != 0)
+        if (Game.HeroismTimer.Value != 0)
         {
             mhp += 10;
         }
-        if (SaveGame.SuperheroismTimer.Value != 0)
+        if (Game.SuperheroismTimer.Value != 0)
         {
             mhp += 30;
         }
-        var mult = SaveGame.SingletonRepository.Gods.Get(nameof(NathHorthahGod)).AdjustedFavour + 10;
+        var mult = Game.SingletonRepository.Gods.Get(nameof(NathHorthahGod)).AdjustedFavour + 10;
         mhp *= mult;
         mhp /= 10;
-        if (SaveGame.MaxHealth.Value != mhp)
+        if (Game.MaxHealth.Value != mhp)
         {
-            if (SaveGame.Health.Value >= mhp)
+            if (Game.Health.Value >= mhp)
             {
-                SaveGame.Health.Value = mhp;
-                SaveGame.FractionalHealth = 0;
+                Game.Health.Value = mhp;
+                Game.FractionalHealth = 0;
             }
-            SaveGame.MaxHealth.Value = mhp;
+            Game.MaxHealth.Value = mhp;
         }
     }
 }

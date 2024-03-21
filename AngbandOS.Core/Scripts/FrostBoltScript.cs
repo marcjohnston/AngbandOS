@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class FrostBoltScript : Script, IScript
 {
-    private FrostBoltScript(SaveGame saveGame) : base(saveGame) { }
+    private FrostBoltScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script.
@@ -19,24 +19,24 @@ internal class FrostBoltScript : Script, IScript
     public void ExecuteScript()
     {
         int beam;
-        switch (SaveGame.BaseCharacterClass.ID)
+        switch (Game.BaseCharacterClass.ID)
         {
             case CharacterClass.Mage:
-                beam = SaveGame.ExperienceLevel.Value;
+                beam = Game.ExperienceLevel.Value;
                 break;
 
             case CharacterClass.HighMage:
-                beam = SaveGame.ExperienceLevel.Value + 10;
+                beam = Game.ExperienceLevel.Value + 10;
                 break;
 
             default:
-                beam = SaveGame.ExperienceLevel.Value / 2;
+                beam = Game.ExperienceLevel.Value / 2;
                 break;
         }
-        if (!SaveGame.GetDirectionWithAim(out int dir))
+        if (!Game.GetDirectionWithAim(out int dir))
         {
             return;
         }
-        SaveGame.FireBoltOrBeam(beam - 10, SaveGame.SingletonRepository.Projectiles.Get(nameof(ColdProjectile)), dir, SaveGame.DiceRoll(5 + ((SaveGame.ExperienceLevel.Value - 5) / 4), 8));
+        Game.FireBoltOrBeam(beam - 10, Game.SingletonRepository.Projectiles.Get(nameof(ColdProjectile)), dir, Game.DiceRoll(5 + ((Game.ExperienceLevel.Value - 5) / 4), 8));
     }
 }

@@ -10,18 +10,18 @@ namespace AngbandOS.Core.SpellResistantDetections;
 [Serializable]
 internal class FireSpellResistantDetection : SpellResistantDetection
 {
-    private FireSpellResistantDetection(SaveGame saveGame) : base(saveGame) { }
+    private FireSpellResistantDetection(Game game) : base(game) { }
     public override void Learn(Monster monster)
     {
-        if (SaveGame.HasFireResistance)
+        if (Game.HasFireResistance)
         {
             monster.SmResFire = true;
         }
-        if (SaveGame.FireResistanceTimer.Value != 0)
+        if (Game.FireResistanceTimer.Value != 0)
         {
             monster.SmOppFire = true;
         }
-        if (SaveGame.HasFireImmunity)
+        if (Game.HasFireImmunity)
         {
             monster.SmImmFire = true;
         }

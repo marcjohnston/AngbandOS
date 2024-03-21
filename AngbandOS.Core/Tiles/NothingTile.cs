@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Tiles;
 [Serializable]
 internal class NothingTile : Tile
 {
-    private NothingTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private NothingTile(Game game) : base(game) { } // This object is a singleton.
     protected override string SymbolName => nameof(SpaceBarSymbol);
     public override string Description => "nothing";
     public override int MapPriority => 0;

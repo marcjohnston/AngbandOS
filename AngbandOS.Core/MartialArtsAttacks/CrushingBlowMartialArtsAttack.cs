@@ -16,5 +16,5 @@ internal class CrushingBlowMartialArtsAttack : MartialArtsAttack
     public override int Ds => 12;
     public override int Effect => 18;
     public override int MinLevel => 48;
-    private CrushingBlowMartialArtsAttack(SaveGame saveGame) : base(saveGame) { }
+    private CrushingBlowMartialArtsAttack(Game game) : base(game) { }
 }

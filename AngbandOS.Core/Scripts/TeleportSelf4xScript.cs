@@ -10,10 +10,10 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class TeleportSelf4xScript : Script, IScript
 {
-    private TeleportSelf4xScript(SaveGame saveGame) : base(saveGame) { }
+    private TeleportSelf4xScript(Game game) : base(game) { }
 
     public void ExecuteScript()
     {
-        SaveGame.RunScriptInt(nameof(TeleportSelfScript), SaveGame.ExperienceLevel.Value * 4);
+        Game.RunScriptInt(nameof(TeleportSelfScript), Game.ExperienceLevel.Value * 4);
     }
 }

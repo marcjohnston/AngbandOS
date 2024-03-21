@@ -10,14 +10,14 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class LightStaffItemFactory : StaffItemFactory
 {
-    private LightStaffItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private LightStaffItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UnderscoreSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(UnderscoreSymbol));
     public override string Name => "Light";
 
     public override void ApplyMagic(Item item, int level, int power, Store? store)
     {
-        item.TypeSpecificValue = SaveGame.DieRoll(20) + 8;
+        item.TypeSpecificValue = Game.DieRoll(20) + 8;
     }
     public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int Cost => 250;
@@ -30,10 +30,10 @@ internal class LightStaffItemFactory : StaffItemFactory
 
     public override void UseStaff(UseStaffEvent eventArgs)
     {
-        if (SaveGame.LightArea(SaveGame.DiceRoll(2, 8), 2))
+        if (Game.LightArea(Game.DiceRoll(2, 8), 2))
         {
             eventArgs.Identified = true;
         }
     }
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

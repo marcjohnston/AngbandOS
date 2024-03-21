@@ -12,7 +12,7 @@ namespace AngbandOS.Core.StoreFactories;
 [Serializable]
 internal abstract class StoreFactory : IItemFilter, IGetKey
 {
-    protected readonly SaveGame SaveGame;
+    protected readonly Game Game;
     public string GetKey => Key;
 
     /// <summary>
@@ -71,36 +71,36 @@ internal abstract class StoreFactory : IItemFilter, IGetKey
         return JsonSerializer.Serialize(definition);
     }
 
-    protected StoreFactory(SaveGame saveGame)
+    protected StoreFactory(Game game)
     {
-        SaveGame = saveGame;
+        Game = game;
     }
 
     public void Bind()
     {
         // Bind the advertised commands.
-        AdvertisedStoreCommand1 = AdvertisedStoreCommand1Name == null ? null : SaveGame.SingletonRepository.StoreCommands.Get(AdvertisedStoreCommand1Name);
-        AdvertisedStoreCommand2 = AdvertisedStoreCommand2Name == null ? null : SaveGame.SingletonRepository.StoreCommands.Get(AdvertisedStoreCommand2Name);
-        AdvertisedStoreCommand3 = AdvertisedStoreCommand3Name == null ? null : SaveGame.SingletonRepository.StoreCommands.Get(AdvertisedStoreCommand3Name);
-        AdvertisedStoreCommand4 = AdvertisedStoreCommand4Name == null ? null : SaveGame.SingletonRepository.StoreCommands.Get(AdvertisedStoreCommand4Name);
-        AdvertisedStoreCommand5 = AdvertisedStoreCommand5Name == null ? null : SaveGame.SingletonRepository.StoreCommands.Get(AdvertisedStoreCommand5Name);
+        AdvertisedStoreCommand1 = AdvertisedStoreCommand1Name == null ? null : Game.SingletonRepository.StoreCommands.Get(AdvertisedStoreCommand1Name);
+        AdvertisedStoreCommand2 = AdvertisedStoreCommand2Name == null ? null : Game.SingletonRepository.StoreCommands.Get(AdvertisedStoreCommand2Name);
+        AdvertisedStoreCommand3 = AdvertisedStoreCommand3Name == null ? null : Game.SingletonRepository.StoreCommands.Get(AdvertisedStoreCommand3Name);
+        AdvertisedStoreCommand4 = AdvertisedStoreCommand4Name == null ? null : Game.SingletonRepository.StoreCommands.Get(AdvertisedStoreCommand4Name);
+        AdvertisedStoreCommand5 = AdvertisedStoreCommand5Name == null ? null : Game.SingletonRepository.StoreCommands.Get(AdvertisedStoreCommand5Name);
 
         // Bind the store owners.
         List<Shopkeeper> shopkeepersList = new();
         foreach (string shopkeeperName in ShopkeeperNames)
         {
-            shopkeepersList.Add(SaveGame.SingletonRepository.Shopkeepers.Get(shopkeeperName));
+            shopkeepersList.Add(Game.SingletonRepository.Shopkeepers.Get(shopkeeperName));
         }
         Shopkeepers = shopkeepersList.ToArray();
 
         // Bind the symbol.
-        Tile = SaveGame.SingletonRepository.Tiles.Get(TileName);
+        Tile = Game.SingletonRepository.Tiles.Get(TileName);
 
         // Bind the item filters.
         List<AllItemsItemFilter> itemFilters = new();
         foreach (string itemFilterName in ItemFilterNames)
         {
-            itemFilters.Add(SaveGame.SingletonRepository.ItemFilters.Get(itemFilterName));
+            itemFilters.Add(Game.SingletonRepository.ItemFilters.Get(itemFilterName));
         }
         ItemFilters = itemFilters.ToArray();
 
@@ -109,7 +109,7 @@ internal abstract class StoreFactory : IItemFilter, IGetKey
         if (StoreStockManifestDefinitions != null) {
             foreach (StoreStockManifestDefinition storeStockManifestDefinition in StoreStockManifestDefinitions)
             {
-                ItemFactory itemFactory = SaveGame.SingletonRepository.ItemFactories.Get(storeStockManifestDefinition.ItemFactoryName);
+                ItemFactory itemFactory = Game.SingletonRepository.ItemFactories.Get(storeStockManifestDefinition.ItemFactoryName);
                 storeStockManifestList.Add(new StoreStockManifest(itemFactory, storeStockManifestDefinition.Weight));
             }
         }
@@ -185,13 +185,13 @@ internal abstract class StoreFactory : IItemFilter, IGetKey
         }
 
         // If the player doesn't own a home, the doors are locked.
-        if (SaveGame.TownWithHouse == null)
+        if (Game.TownWithHouse == null)
         {
             return true;
         }
 
         // Make sure this town matches the town where the player bought the home.
-        return SaveGame.TownWithHouse != SaveGame.CurTown;
+        return Game.TownWithHouse != Game.CurTown;
     }
 
     /// <summary>

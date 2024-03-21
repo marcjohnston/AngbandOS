@@ -10,5 +10,5 @@ namespace AngbandOS.Core.Repositories;
 [Serializable]
 internal class RacesRepository : DictionaryRepository<Race>
 {
-    public RacesRepository(SaveGame saveGame) : base(saveGame) { }
+    public RacesRepository(Game game) : base(game) { }
 }

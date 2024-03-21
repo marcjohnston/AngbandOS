@@ -10,7 +10,7 @@ namespace AngbandOS.Core.WizardCommands;
 [Serializable]
 internal class LearnAboutObjectsWizardCommand : WizardCommand
 {
-    private LearnAboutObjectsWizardCommand(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private LearnAboutObjectsWizardCommand(Game game) : base(game) { } // This object is a singleton.
 
     public override char KeyChar => 'l';
 

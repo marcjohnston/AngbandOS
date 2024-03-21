@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Spells.Folk;
 [Serializable]
 internal class FolkSpellResistFire : Spell
 {
-    private FolkSpellResistFire(SaveGame saveGame) : base(saveGame) { }
+    private FolkSpellResistFire(Game game) : base(game) { }
     protected override string? CastScriptName => nameof(ResistFireScript);
 
     public override string Name => "Resist Fire";

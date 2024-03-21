@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Timers;
 [Serializable]
 internal class BleedingTimer : Timer
 {
-    private BleedingTimer(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private BleedingTimer(Game game) : base(game) { } // This object is a singleton.
 
     protected override int GetRate(int value)
     {
@@ -50,36 +50,36 @@ internal class BleedingTimer : Timer
 
     protected override void EffectIncreased(int newRate, int oldRate)
     {
-        if (SaveGame.DieRoll(1000) < newRate || SaveGame.DieRoll(16) == 1)
+        if (Game.DieRoll(1000) < newRate || Game.DieRoll(16) == 1)
         {
-            if (!SaveGame.HasSustainCharisma)
+            if (!Game.HasSustainCharisma)
             {
-                SaveGame.MsgPrint("You have been horribly scarred.");
-                SaveGame.TryDecreasingAbilityScore(Ability.Charisma);
+                Game.MsgPrint("You have been horribly scarred.");
+                Game.TryDecreasingAbilityScore(Ability.Charisma);
             }
         }
         switch (newRate)
         {
             case 1:
-                SaveGame.MsgPrint("You have been given a graze.");
+                Game.MsgPrint("You have been given a graze.");
                 break;
             case 2:
-                SaveGame.MsgPrint("You have been given a light cut.");
+                Game.MsgPrint("You have been given a light cut.");
                 break;
             case 3:
-                SaveGame.MsgPrint("You have been given a bad cut.");
+                Game.MsgPrint("You have been given a bad cut.");
                 break;
             case 4:
-                SaveGame.MsgPrint("You have been given a nasty cut.");
+                Game.MsgPrint("You have been given a nasty cut.");
                 break;
             case 5:
-                SaveGame.MsgPrint("You have been given a severe cut.");
+                Game.MsgPrint("You have been given a severe cut.");
                 break;
             case 6:
-                SaveGame.MsgPrint("You have been given a deep gash.");
+                Game.MsgPrint("You have been given a deep gash.");
                 break;
             case 7:
-                SaveGame.MsgPrint("You have been given a mortal wound.");
+                Game.MsgPrint("You have been given a mortal wound.");
                 break;
             default:
                 throw new Exception("Invalid rate for EffectStarted.");
@@ -88,18 +88,18 @@ internal class BleedingTimer : Timer
 
     protected override void EffectStopped()
     {
-        SaveGame.MsgPrint("You are no longer bleeding.");
+        Game.MsgPrint("You are no longer bleeding.");
     }
 
     protected override void Noticed()
     {
-        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
+        Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
         base.Noticed();
     }
 
     public override bool SetTimer(int value)
     {
-        if (!SaveGame.Race.CanBleed(SaveGame.ExperienceLevel.Value))
+        if (!Game.Race.CanBleed(Game.ExperienceLevel.Value))
         {
             value = 0;
         }
@@ -113,7 +113,7 @@ internal class BleedingTimer : Timer
     {
         if (Value > 0)
         {
-            int adjust = SaveGame.AbilityScores[Ability.Constitution].ConRecoverySpeed + 1;
+            int adjust = Game.AbilityScores[Ability.Constitution].ConRecoverySpeed + 1;
             if (Value > 1000)
             {
                 adjust = 0;

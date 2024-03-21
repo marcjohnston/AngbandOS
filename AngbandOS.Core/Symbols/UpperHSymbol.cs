@@ -3,7 +3,7 @@
 [Serializable]
 internal class UpperHSymbol : Symbol
 {
-    private UpperHSymbol(SaveGame saveGame) : base(saveGame) { }
+    private UpperHSymbol(Game game) : base(game) { }
     public override char Character => 'H';
     public override string Name => "Hybrid";
 }

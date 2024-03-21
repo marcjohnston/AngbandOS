@@ -10,14 +10,14 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class LotOfGoldGoldItemFactory : GoldItemFactory
 {
-    private LotOfGoldGoldItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private LotOfGoldGoldItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(DollarSignSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(DollarSignSymbol));
     public override ColorEnum Color => ColorEnum.Gold;
     public override string Name => "gold**";
 
     public override int Cost => 16;
     public override string FriendlyName => "gold";
     public override int LevelNormallyFound => 1;
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

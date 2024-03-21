@@ -10,7 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class AugmentedChainMailOfTheOgreLordsFixedArtifact : FixedArtifact
 {
-    private AugmentedChainMailOfTheOgreLordsFixedArtifact(SaveGame saveGame) : base(saveGame) { }
+    private AugmentedChainMailOfTheOgreLordsFixedArtifact(Game game) : base(game) { }
 
     protected override string BaseItemFactoryName => nameof(AugmentedChainMailHardArmorItemFactory);
 
@@ -20,7 +20,7 @@ internal class AugmentedChainMailOfTheOgreLordsFixedArtifact : FixedArtifact
     public override void ApplyResistances(Item item)
     {
         IArtifactBias artifactBias = null;
-        item.ApplyRandomResistance(ref artifactBias, SaveGame.DieRoll(22) + 16);
+        item.ApplyRandomResistance(ref artifactBias, Game.DieRoll(22) + 16);
     }
 
     public override ColorEnum Color => ColorEnum.Grey;

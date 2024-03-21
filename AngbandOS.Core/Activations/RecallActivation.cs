@@ -13,14 +13,14 @@ namespace AngbandOS.Core.Activations;
 [Serializable]
 internal class RecallActivation : Activation
 {
-    private RecallActivation(SaveGame saveGame) : base(saveGame) { }
+    private RecallActivation(Game game) : base(game) { }
     public override int RandomChance => 85;
 
     public override string? PreActivationMessage => "Your {0} glows soft white...";
 
     protected override bool OnActivate(Item item)
     {
-        SaveGame.RunScript(nameof(ToggleRecallScript));
+        Game.RunScript(nameof(ToggleRecallScript));
         return true;
     }
 

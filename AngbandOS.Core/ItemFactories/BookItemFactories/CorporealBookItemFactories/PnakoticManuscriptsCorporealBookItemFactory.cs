@@ -10,9 +10,9 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class PnakoticManuscriptsCorporealBookItemFactory : CorporealBookItemFactory
 {
-    private PnakoticManuscriptsCorporealBookItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private PnakoticManuscriptsCorporealBookItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(QuestionMarkSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(QuestionMarkSymbol));
     public override ColorEnum Color => ColorEnum.BrightYellow;
     public override string Name => "[Pnakotic Manuscripts]";
 
@@ -40,7 +40,7 @@ internal class PnakoticManuscriptsCorporealBookItemFactory : CorporealBookItemFa
     public override bool IsHighLevelBook => true;
     public override int Weight => 30;
     public override bool KindIsGood => true;
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 
     protected override string[] SpellNames => new string[]
     {

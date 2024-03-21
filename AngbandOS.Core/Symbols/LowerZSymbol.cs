@@ -3,7 +3,7 @@
 [Serializable]
 internal class LowerZSymbol : Symbol
 {
-    private LowerZSymbol(SaveGame saveGame) : base(saveGame) { }
+    private LowerZSymbol(Game game) : base(game) { }
     public override char Character => 'z';
     public override string Name => "Zombie/Mummy";
 }

@@ -13,16 +13,16 @@ namespace AngbandOS.Core.Activations;
 [Serializable]
 internal class SummonAnimalActivation : Activation
 {
-    private SummonAnimalActivation(SaveGame saveGame) : base(saveGame) { }
+    private SummonAnimalActivation(Game game) : base(game) { }
     public override int RandomChance => 40;
 
     protected override bool OnActivate(Item item)
     {
-        SaveGame.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel.Value, SaveGame.SingletonRepository.MonsterFilters.Get(nameof(AnimalRangerMonsterFilter)), true);
+        Game.SummonSpecificFriendly(Game.MapY, Game.MapX, Game.ExperienceLevel.Value, Game.SingletonRepository.MonsterFilters.Get(nameof(AnimalRangerMonsterFilter)), true);
         return true;
     }
 
-    public override int RechargeTime() => 200 + SaveGame.DieRoll(300);
+    public override int RechargeTime() => 200 + Game.DieRoll(300);
 
     public override int Value => 10000;
 

@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class MutantPowerScript : Script, IScript, IRepeatableScript
 {
-    private MutantPowerScript(SaveGame saveGame) : base(saveGame) { }
+    private MutantPowerScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the mutant power script and returns false.
@@ -36,33 +36,33 @@ internal class MutantPowerScript : Script, IScript, IRepeatableScript
         int petCtr;
         bool allPets = false;
         Monster monster;
-        bool hasRacial = SaveGame.Race.HasRacialPowers;
-        string racialPowersDescription = SaveGame.Race.RacialPowersDescription(SaveGame.ExperienceLevel.Value);
+        bool hasRacial = Game.Race.HasRacialPowers;
+        string racialPowersDescription = Game.Race.RacialPowersDescription(Game.ExperienceLevel.Value);
         for (num = 0; num < 36; num++)
         {
             powers[num] = 0;
             powerDesc[num] = "";
         }
         num = 0;
-        if (SaveGame.ConfusedTimer.Value != 0)
+        if (Game.ConfusedTimer.Value != 0)
         {
-            SaveGame.MsgPrint("You are too confused to use any powers!");
-            SaveGame.EnergyUse = 0;
+            Game.MsgPrint("You are too confused to use any powers!");
+            Game.EnergyUse = 0;
             return;
         }
-        for (petCtr = SaveGame.MMax - 1; petCtr >= 1; petCtr--)
+        for (petCtr = Game.MMax - 1; petCtr >= 1; petCtr--)
         {
-            monster = SaveGame.Monsters[petCtr];
+            monster = Game.Monsters[petCtr];
             if (monster.SmFriendly)
             {
                 pets++;
             }
         }
-        List<Mutation> activeMutations = SaveGame.ActivatableMutations();
+        List<Mutation> activeMutations = Game.ActivatableMutations();
         if (!hasRacial && activeMutations.Count == 0 && pets == 0)
         {
-            SaveGame.MsgPrint("You have no powers to activate.");
-            SaveGame.EnergyUse = 0;
+            Game.MsgPrint("You have no powers to activate.");
+            Game.EnergyUse = 0;
             return;
         }
         if (hasRacial)
@@ -74,7 +74,7 @@ internal class MutantPowerScript : Script, IScript, IRepeatableScript
         for (int j = 0; j < activeMutations.Count; j++)
         {
             powers[num] = j + 100;
-            powerDesc[num] = activeMutations[j].ActivationSummary(SaveGame.ExperienceLevel.Value);
+            powerDesc[num] = activeMutations[j].ActivationSummary(Game.ExperienceLevel.Value);
             num++;
         }
         if (pets > 0)
@@ -85,7 +85,7 @@ internal class MutantPowerScript : Script, IScript, IRepeatableScript
         bool flag = false;
         ScreenBuffer? savedScreen = null;
         string outVal = $"(Powers {0.IndexToLetter()}-{(num - 1).IndexToLetter()}, *=List, ESC=exit) Use which power? ";
-        while (!flag && SaveGame.GetCom(outVal, out char choice))
+        while (!flag && Game.GetCom(outVal, out char choice))
         {
             if (choice == ' ' || choice == '*' || choice == '?')
             {
@@ -93,19 +93,19 @@ internal class MutantPowerScript : Script, IScript, IRepeatableScript
                 {
                     int y = 1, x = 13;
                     int ctr = 0;
-                    savedScreen = SaveGame.Screen.Clone();
-                    SaveGame.Screen.PrintLine("", y++, x);
+                    savedScreen = Game.Screen.Clone();
+                    Game.Screen.PrintLine("", y++, x);
                     while (ctr < num)
                     {
                         string dummy = $"{ctr.IndexToLetter()}) {powerDesc[ctr]}";
-                        SaveGame.Screen.PrintLine(dummy, y + ctr, x);
+                        Game.Screen.PrintLine(dummy, y + ctr, x);
                         ctr++;
                     }
-                    SaveGame.Screen.PrintLine("", y + ctr, x);
+                    Game.Screen.PrintLine("", y + ctr, x);
                 }
                 else
                 {
-                    SaveGame.Screen.Restore(savedScreen);
+                    Game.Screen.Restore(savedScreen);
                     savedScreen = null;
                 }
                 continue;
@@ -127,7 +127,7 @@ internal class MutantPowerScript : Script, IScript, IRepeatableScript
             if (ask)
             {
                 string tmpVal = $"Use {powerDesc[i]}? ";
-                if (!SaveGame.GetCheck(tmpVal))
+                if (!Game.GetCheck(tmpVal))
                 {
                     continue;
                 }
@@ -136,11 +136,11 @@ internal class MutantPowerScript : Script, IScript, IRepeatableScript
         }
         if (savedScreen != null)
         {
-            SaveGame.Screen.Restore(savedScreen);
+            Game.Screen.Restore(savedScreen);
         }
         if (!flag)
         {
-            SaveGame.EnergyUse = 0;
+            Game.EnergyUse = 0;
             return;
         }
         if (powers[i] == int.MaxValue)
@@ -150,13 +150,13 @@ internal class MutantPowerScript : Script, IScript, IRepeatableScript
         else if (powers[i] == 3)
         {
             int dismissed = 0;
-            if (SaveGame.GetCheck("Dismiss all pets? "))
+            if (Game.GetCheck("Dismiss all pets? "))
             {
                 allPets = true;
             }
-            for (petCtr = SaveGame.MMax - 1; petCtr >= 1; petCtr--)
+            for (petCtr = Game.MMax - 1; petCtr >= 1; petCtr--)
             {
-                monster = SaveGame.Monsters[petCtr];
+                monster = Game.Monsters[petCtr];
                 if (monster.SmFriendly)
                 {
                     bool deleteThis = false;
@@ -168,24 +168,24 @@ internal class MutantPowerScript : Script, IScript, IRepeatableScript
                     {
                         string friendName = monster.VisibleName;
                         string checkFriend = $"Dismiss {friendName}? ";
-                        if (SaveGame.GetCheck(checkFriend))
+                        if (Game.GetCheck(checkFriend))
                         {
                             deleteThis = true;
                         }
                     }
                     if (deleteThis)
                     {
-                        SaveGame.DeleteMonsterByIndex(petCtr, true);
+                        Game.DeleteMonsterByIndex(petCtr, true);
                         dismissed++;
                     }
                 }
             }
             string s = dismissed == 1 ? "" : "s";
-            SaveGame.MsgPrint($"You have dismissed {dismissed} pet{s}.");
+            Game.MsgPrint($"You have dismissed {dismissed} pet{s}.");
         }
         else
         {
-            SaveGame.EnergyUse = 100;
+            Game.EnergyUse = 100;
             activeMutations[powers[i] - 100].Activate();
         }
     }
@@ -196,6 +196,6 @@ internal class MutantPowerScript : Script, IScript, IRepeatableScript
     public void UseRacialPower()
     {
         // Check the player's race to see what their power is
-        SaveGame.Race.UseRacialPower();
+        Game.Race.UseRacialPower();
     }
 }

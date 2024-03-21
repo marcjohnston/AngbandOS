@@ -8,7 +8,7 @@
 [Serializable]
 internal class GobblegutsThunderbreathShopkeeper : Shopkeeper
 {
-    private GobblegutsThunderbreathShopkeeper(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private GobblegutsThunderbreathShopkeeper(Game game) : base(game) { } // This object is a singleton.
     public override string Name => "Gobbleguts Thunderbreath";
     public override int MaxCost =>  25000;
     public override int MinInflate =>  110;

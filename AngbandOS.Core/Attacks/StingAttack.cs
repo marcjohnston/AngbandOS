@@ -10,7 +10,7 @@ namespace AngbandOS.Core.AttackTypes;
 [Serializable]
 internal class StingAttack : Attack
 {
-    private StingAttack(SaveGame saveGame) : base(saveGame) { }
+    private StingAttack(Game game) : base(game) { }
     public override string MonsterAction => "stings {0}";
     public override string PlayerAction => $"stings you";
     public override string KnowledgeAction => "string";

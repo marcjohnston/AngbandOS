@@ -10,7 +10,7 @@ namespace AngbandOS.Core.WizardCommands;
 [Serializable]
 internal class PersistConfigurationWizardCommand : WizardCommand
 {
-    private PersistConfigurationWizardCommand(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private PersistConfigurationWizardCommand(Game game) : base(game) { } // This object is a singleton.
 
     public override char KeyChar => 'P';
 

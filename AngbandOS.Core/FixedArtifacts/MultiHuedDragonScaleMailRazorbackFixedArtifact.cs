@@ -10,7 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class MultiHuedDragonScaleMailRazorbackFixedArtifact : FixedArtifact
 {
-    private MultiHuedDragonScaleMailRazorbackFixedArtifact(SaveGame saveGame) : base(saveGame) { }
+    private MultiHuedDragonScaleMailRazorbackFixedArtifact(Game game) : base(game) { }
 
     protected override string BaseItemFactoryName => nameof(MultiHuedDragonScaleMailArmorItemFactory);
 

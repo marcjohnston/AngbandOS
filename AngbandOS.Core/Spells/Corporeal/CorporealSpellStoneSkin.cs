@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Spells.Corporeal;
 [Serializable]
 internal class CorporealSpellStoneSkin : Spell
 {
-    private CorporealSpellStoneSkin(SaveGame saveGame) : base(saveGame) { }
+    private CorporealSpellStoneSkin(Game game) : base(game) { }
     protected override string? CastScriptName => nameof(StoneSkinScript);
 
     public override string Name => "Stone Skin";

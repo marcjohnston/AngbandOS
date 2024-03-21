@@ -10,9 +10,9 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class ElvenCloakArmorItemFactory : CloakArmorItemFactory
 {
-    private ElvenCloakArmorItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private ElvenCloakArmorItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(OpenParenthesisSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(OpenParenthesisSymbol));
     public override ColorEnum Color => ColorEnum.BrightGreen;
     public override string Name => "Elven Cloak";
 
@@ -24,10 +24,10 @@ internal class ElvenCloakArmorItemFactory : CloakArmorItemFactory
             // Apply the standard armor characteristics.
             base.ApplyMagic(item, level, power, null);
 
-            item.TypeSpecificValue = SaveGame.DieRoll(4);
+            item.TypeSpecificValue = Game.DieRoll(4);
             if (power > 1)
             {
-                if (SaveGame.DieRoll(20) == 1)
+                if (Game.DieRoll(20) == 1)
                 {
                     item.CreateRandomArtifact(false);
                 }
@@ -57,5 +57,5 @@ internal class ElvenCloakArmorItemFactory : CloakArmorItemFactory
     public override bool Stealth => true;
     public override int ToA => 4;
     public override int Weight => 5;
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

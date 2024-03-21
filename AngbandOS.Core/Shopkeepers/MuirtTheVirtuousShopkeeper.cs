@@ -8,7 +8,7 @@
 [Serializable]
 internal class MuirtTheVirtuousShopkeeper : Shopkeeper
 {
-    private MuirtTheVirtuousShopkeeper(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private MuirtTheVirtuousShopkeeper(Game game) : base(game) { } // This object is a singleton.
     public override string Name => "Muirt the Virtuous";
     public override int MaxCost =>  25000;
     public override int MinInflate =>  107;

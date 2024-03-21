@@ -10,11 +10,11 @@ namespace AngbandOS.Core.Projection;
 [Serializable]
 internal class GravityProjectile : Projectile
 {
-    private GravityProjectile(SaveGame saveGame) : base(saveGame) { }
+    private GravityProjectile(Game game) : base(game) { }
 
-    protected override ProjectileGraphic? BoltProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get(nameof(TurquoiseBoltProjectileGraphic));
+    protected override ProjectileGraphic? BoltProjectileGraphic => Game.SingletonRepository.ProjectileGraphics.Get(nameof(TurquoiseBoltProjectileGraphic));
 
-    protected override ProjectileGraphic? ImpactProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get(nameof(TurquoiseSplatProjectileGraphic));
+    protected override ProjectileGraphic? ImpactProjectileGraphic => Game.SingletonRepository.ProjectileGraphics.Get(nameof(TurquoiseSplatProjectileGraphic));
 
     protected override bool AffectMonster(int who, Monster mPtr, int dam, int r)
     {
@@ -39,7 +39,7 @@ internal class GravityProjectile : Projectile
                 note = " is unaffected!";
                 resistTele = true;
             }
-            else if (rPtr.Level > SaveGame.DieRoll(100))
+            else if (rPtr.Level > Game.DieRoll(100))
             {
                 if (seen)
                 {
@@ -54,12 +54,12 @@ internal class GravityProjectile : Projectile
         {
             note = " resists.";
             dam *= 3;
-            dam /= SaveGame.DieRoll(6) + 6;
+            dam /= Game.DieRoll(6) + 6;
             doDist = 0;
         }
         else
         {
-            if (rPtr.Unique || rPtr.Level > SaveGame.DieRoll(dam - 10 < 1 ? 1 : dam - 10) + 10)
+            if (rPtr.Unique || rPtr.Level > Game.DieRoll(dam - 10 < 1 ? 1 : dam - 10) + 10)
             {
                 obvious = false;
             }
@@ -71,8 +71,8 @@ internal class GravityProjectile : Projectile
                 }
                 note = " starts moving slower.";
             }
-            doStun = SaveGame.DiceRoll((SaveGame.ExperienceLevel.Value / 10) + 3, dam) + 1;
-            if (rPtr.Unique || rPtr.Level > SaveGame.DieRoll(dam - 10 < 1 ? 1 : dam - 10) + 10)
+            doStun = Game.DiceRoll((Game.ExperienceLevel.Value / 10) + 3, dam) + 1;
+            if (rPtr.Unique || rPtr.Level > Game.DieRoll(dam - 10 < 1 ? 1 : dam - 10) + 10)
             {
                 doStun = 0;
                 note = " is unaffected!";
@@ -86,7 +86,7 @@ internal class GravityProjectile : Projectile
                 obvious = true;
             }
             note = " disappears!";
-            mPtr.TeleportAway(SaveGame, doDist);
+            mPtr.TeleportAway(Game, doDist);
         }
         else if (doStun != 0 && !rPtr.BreatheSound && !rPtr.BreatheForce)
         {
@@ -113,38 +113,38 @@ internal class GravityProjectile : Projectile
 
     protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
     {
-        bool blind = SaveGame.BlindnessTimer.Value != 0;
+        bool blind = Game.BlindnessTimer.Value != 0;
         if (dam > 1600)
         {
             dam = 1600;
         }
         dam = (dam + r) / (r + 1);
-        Monster mPtr = SaveGame.Monsters[who];
+        Monster mPtr = Game.Monsters[who];
         string killer = mPtr.IndefiniteVisibleName;
         if (blind)
         {
-            SaveGame.MsgPrint("You are hit by something heavy!");
+            Game.MsgPrint("You are hit by something heavy!");
         }
-        SaveGame.MsgPrint("Gravity warps around you.");
-        SaveGame.RunScriptInt(nameof(TeleportSelfScript), 5);
-        if (!SaveGame.HasFeatherFall)
+        Game.MsgPrint("Gravity warps around you.");
+        Game.RunScriptInt(nameof(TeleportSelfScript), 5);
+        if (!Game.HasFeatherFall)
         {
-            SaveGame.SlowTimer.AddTimer(SaveGame.RandomLessThan(4) + 4);
+            Game.SlowTimer.AddTimer(Game.RandomLessThan(4) + 4);
         }
-        if (!(SaveGame.HasSoundResistance || SaveGame.HasFeatherFall))
+        if (!(Game.HasSoundResistance || Game.HasFeatherFall))
         {
-            int kk = SaveGame.DieRoll(dam > 90 ? 35 : (dam / 3) + 5);
-            SaveGame.StunTimer.AddTimer(kk);
+            int kk = Game.DieRoll(dam > 90 ? 35 : (dam / 3) + 5);
+            Game.StunTimer.AddTimer(kk);
         }
-        if (SaveGame.HasFeatherFall)
+        if (Game.HasFeatherFall)
         {
             dam = dam * 2 / 3;
         }
-        if (!SaveGame.HasFeatherFall || SaveGame.DieRoll(13) == 1)
+        if (!Game.HasFeatherFall || Game.DieRoll(13) == 1)
         {
-            SaveGame.InvenDamage(SaveGame.SetColdDestroy, 2);
+            Game.InvenDamage(Game.SetColdDestroy, 2);
         }
-        SaveGame.TakeHit(dam, killer);
+        Game.TakeHit(dam, killer);
         return true;
     }
 }

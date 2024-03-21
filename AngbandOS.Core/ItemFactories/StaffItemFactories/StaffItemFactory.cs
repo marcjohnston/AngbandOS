@@ -10,8 +10,8 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal abstract class StaffItemFactory : ItemFactory, IFlavorFactory
 {
-    public StaffItemFactory(SaveGame saveGame) : base(saveGame) { }
-    public override ItemClass ItemClass => SaveGame.SingletonRepository.ItemClasses.Get(nameof(StaffsItemClass));
+    public StaffItemFactory(Game game) : base(game) { }
+    public override ItemClass ItemClass => Game.SingletonRepository.ItemClasses.Get(nameof(StaffsItemClass));
 
     /// <summary>
     /// Returns the factory that this item was created by; casted as an IFlavor.
@@ -23,7 +23,7 @@ internal abstract class StaffItemFactory : ItemFactory, IFlavorFactory
         string s = "";
         if (item.IsKnown())
         {
-            s += $" ({item.TypeSpecificValue} {SaveGame.CountPluralize("charge", item.TypeSpecificValue)})";
+            s += $" ({item.TypeSpecificValue} {Game.CountPluralize("charge", item.TypeSpecificValue)})";
         }
         s += base.GetVerboseDescription(item);
         return s;
@@ -33,7 +33,7 @@ internal abstract class StaffItemFactory : ItemFactory, IFlavorFactory
     {
         string flavor = item.IdentityIsStoreBought ? "" : $"{FlavorFactory.Flavor.Name} ";
         string ofName = isFlavorAware ? $" of {FriendlyName}" : "";
-        string name = $"{flavor}{SaveGame.CountPluralize("Staff", item.Count)}{ofName}";
+        string name = $"{flavor}{Game.CountPluralize("Staff", item.Count)}{ofName}";
         return includeCountPrefix ? GetPrefixCount(true, name, item.Count, item.IsKnownArtifact) : name;
     }
 
@@ -45,7 +45,7 @@ internal abstract class StaffItemFactory : ItemFactory, IFlavorFactory
     /// <summary>
     /// Returns the staff flavors repository because staves have flavors that need to be identified.
     /// </summary>
-    public IEnumerable<Flavor>? GetFlavorRepository() => SaveGame.SingletonRepository.StaffReadableFlavors;
+    public IEnumerable<Flavor>? GetFlavorRepository() => Game.SingletonRepository.StaffReadableFlavors;
 
     public override bool CanBeUsed => true;
 
@@ -56,7 +56,7 @@ internal abstract class StaffItemFactory : ItemFactory, IFlavorFactory
     /// <summary>
     /// Executes the staff action.  Returns true, if the usage identifies the staff.
     /// </summary>
-    /// <param name="saveGame"></param>
+    /// <param name="game"></param>
     /// <returns></returns>
     public abstract void UseStaff(UseStaffEvent eventArgs);
 

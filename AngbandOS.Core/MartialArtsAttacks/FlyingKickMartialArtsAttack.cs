@@ -16,5 +16,5 @@ internal class FlyingKickMartialArtsAttack : MartialArtsAttack
     public override int Ds => 10;
     public override int Effect => 12;
     public override int MinLevel => 41;
-    private FlyingKickMartialArtsAttack(SaveGame saveGame) : base(saveGame) { }
+    private FlyingKickMartialArtsAttack(Game game) : base(game) { }
 }

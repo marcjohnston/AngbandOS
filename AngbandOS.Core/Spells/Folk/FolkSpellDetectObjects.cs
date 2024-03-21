@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Spells.Folk;
 [Serializable]
 internal class FolkSpellDetectObjects : Spell
 {
-    private FolkSpellDetectObjects(SaveGame saveGame) : base(saveGame) { }
+    private FolkSpellDetectObjects(Game game) : base(game) { }
     protected override string? CastScriptName => nameof(DetectNormalObjectsScript);
 
     public override string Name => "Detect Objects";

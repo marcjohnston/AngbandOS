@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Animations;
 [Serializable]
 internal class ChartreuseExpandAnimation : Animation
 {
-    private ChartreuseExpandAnimation(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private ChartreuseExpandAnimation(Game game) : base(game) { } // This object is a singleton.
     public override char Character => '*';
     public override ColorEnum Color => ColorEnum.Chartreuse;
     public override string Name => "ChartreuseExpand";

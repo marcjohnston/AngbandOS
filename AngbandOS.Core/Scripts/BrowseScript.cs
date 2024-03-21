@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class BrowseScript : Script, IScript, IRepeatableScript, ISuccessfulScript, IStoreScript
 {
-    private BrowseScript(SaveGame saveGame) : base(saveGame) { }
+    private BrowseScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the browse script.  Does not modify any of the store flags.
@@ -47,15 +47,15 @@ internal class BrowseScript : Script, IScript, IRepeatableScript, ISuccessfulScr
     public bool ExecuteSuccessfulScript()
     {
         // Make sure we can read
-        if (!SaveGame.CanCastSpells)
+        if (!Game.CanCastSpells)
         {
-            SaveGame.MsgPrint("You cannot read books!");
+            Game.MsgPrint("You cannot read books!");
             return false;
         }
         // Get a book to read if we don't already have one
-        if (!SaveGame.SelectItem(out Item? item, "Browse which book? ", false, true, true, SaveGame.SingletonRepository.ItemFilters.Get(nameof(IsUsableSpellBookItemFilter))))
+        if (!Game.SelectItem(out Item? item, "Browse which book? ", false, true, true, Game.SingletonRepository.ItemFilters.Get(nameof(IsUsableSpellBookItemFilter))))
         {
-            SaveGame.MsgPrint("You have no books that you can read.");
+            Game.MsgPrint("You have no books that you can read.");
             return false;
         }
         if (item == null)
@@ -63,22 +63,22 @@ internal class BrowseScript : Script, IScript, IRepeatableScript, ISuccessfulScr
             return false;
         }
         // Check that the book is useable by the player
-        if (!SaveGame.ItemMatchesFilter(item, SaveGame.SingletonRepository.ItemFilters.Get(nameof(IsUsableSpellBookItemFilter))))
+        if (!Game.ItemMatchesFilter(item, Game.SingletonRepository.ItemFilters.Get(nameof(IsUsableSpellBookItemFilter))))
         {
-            SaveGame.MsgPrint("You can't read that.");
+            Game.MsgPrint("You can't read that.");
             return false;
         }
-        SaveGame.HandleStuff();
+        Game.HandleStuff();
 
         // Save the screen and overprint the spells in the book
-        ScreenBuffer savedScreen = SaveGame.Screen.Clone();
+        ScreenBuffer savedScreen = Game.Screen.Clone();
         BookItemFactory book = (BookItemFactory)item.Factory;
-        SaveGame.PrintSpells(book.Spells.ToArray(), 1, 20);
-        SaveGame.MsgClear();
+        Game.PrintSpells(book.Spells.ToArray(), 1, 20);
+        Game.MsgClear();
         // Wait for a keypress and re-load the screen
-        SaveGame.Screen.Print("[Press any key to continue]", 0, 23);
-        SaveGame.Inkey();
-        SaveGame.Screen.Restore(savedScreen);
+        Game.Screen.Print("[Press any key to continue]", 0, 23);
+        Game.Inkey();
+        Game.Screen.Restore(savedScreen);
         return true;
     }
 }

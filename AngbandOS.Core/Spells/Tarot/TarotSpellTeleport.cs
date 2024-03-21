@@ -10,10 +10,10 @@ namespace AngbandOS.Core.Spells.Tarot;
 [Serializable]
 internal class TarotSpellTeleport : Spell
 {
-    private TarotSpellTeleport(SaveGame saveGame) : base(saveGame) { }
+    private TarotSpellTeleport(Game game) : base(game) { }
     protected override string? CastScriptName => nameof(TeleportSelf4xScript);
 
     public override string Name => "Teleport";
 
-    protected override string LearnedDetails => $"range {SaveGame.ExperienceLevel.Value * 4}";
+    protected override string LearnedDetails => $"range {Game.ExperienceLevel.Value * 4}";
 }

@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Spells.Sorcery;
 [Serializable]
 internal class SorcerySpellEnchantArmor : Spell
 {
-    private SorcerySpellEnchantArmor(SaveGame saveGame) : base(saveGame) { }
+    private SorcerySpellEnchantArmor(Game game) : base(game) { }
     protected override string? CastScriptName => nameof(EnchantArmorScript);
 
     public override string Name => "Enchant Armor";

@@ -10,7 +10,7 @@ namespace AngbandOS.Core.RoomTypes;
 [Serializable]
 internal class Type7RoomLayout : RoomLayout
 {
-    private Type7RoomLayout(SaveGame saveGame) : base(saveGame) { }
+    private Type7RoomLayout(Game game) : base(game) { }
     public override int Type => 7;
     public override int Dy1 => -1;
     public override int Dy2 => 2;
@@ -19,32 +19,32 @@ internal class Type7RoomLayout : RoomLayout
     public override int Level => 10;
     public override void Build(int yval, int xval)
     {
-        Vault vPtr = SaveGame.SingletonRepository.Vaults[0];
+        Vault vPtr = Game.SingletonRepository.Vaults[0];
         int dummy = 0;
-        while (dummy < SaveGame.SafeMaxAttempts)
+        while (dummy < Game.SafeMaxAttempts)
         {
             dummy++;
-            vPtr = SaveGame.SingletonRepository.Vaults.ToWeightedRandom().ChooseOrDefault();
+            vPtr = Game.SingletonRepository.Vaults.ToWeightedRandom().ChooseOrDefault();
             if (vPtr.Category == 7)
             {
                 var minX = xval - (vPtr.Width / 2);
                 var maxX = xval + (vPtr.Width / 2);
                 var minY = yval - (vPtr.Height / 2);
                 var maxY = yval + (vPtr.Height / 2);
-                if (minX >= 1 && minY >= 1 && maxX < SaveGame.CurWid - 1 && maxY < SaveGame.CurHgt - 1)
+                if (minX >= 1 && minY >= 1 && maxX < Game.CurWid - 1 && maxY < Game.CurHgt - 1)
                 {
                     break;
                 }
             }
         }
-        if (dummy >= SaveGame.SafeMaxAttempts)
+        if (dummy >= Game.SafeMaxAttempts)
         {
             return;
         }
-        SaveGame.DangerRating += vPtr.Rating;
-        if (SaveGame.Difficulty <= 50 || SaveGame.DieRoll(((SaveGame.Difficulty - 40) * (SaveGame.Difficulty - 40)) + 50) < 400)
+        Game.DangerRating += vPtr.Rating;
+        if (Game.Difficulty <= 50 || Game.DieRoll(((Game.Difficulty - 40) * (Game.Difficulty - 40)) + 50) < 400)
         {
-            SaveGame.SpecialDanger = true;
+            Game.SpecialDanger = true;
         }
         BuildVault(yval, xval, vPtr.Height, vPtr.Width, vPtr.Text);
     }

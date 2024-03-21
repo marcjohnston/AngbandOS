@@ -15,9 +15,9 @@ internal abstract class BootsArmorItemFactory : ArmorItemFactory
     /// </summary>
     public override int WieldSlot => InventorySlot.Feet;
 
-    public BootsArmorItemFactory(SaveGame saveGame) : base(saveGame) { }
-    public override ItemClass ItemClass => SaveGame.SingletonRepository.ItemClasses.Get(nameof(BootsItemClass));
-    public override BaseInventorySlot BaseWieldSlot => SaveGame.SingletonRepository.InventorySlots.Get(nameof(FeetInventorySlot));
+    public BootsArmorItemFactory(Game game) : base(game) { }
+    public override ItemClass ItemClass => Game.SingletonRepository.ItemClasses.Get(nameof(BootsItemClass));
+    public override BaseInventorySlot BaseWieldSlot => Game.SingletonRepository.InventorySlots.Get(nameof(FeetInventorySlot));
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Boots;
     public override bool HatesFire => true;
     public override bool HatesAcid => true;
@@ -40,7 +40,7 @@ internal abstract class BootsArmorItemFactory : ArmorItemFactory
 
             if (power > 1)
             {
-                if (SaveGame.DieRoll(20) == 1)
+                if (Game.DieRoll(20) == 1)
                 {
                     item.CreateRandomArtifact(false);
                 }
@@ -58,16 +58,16 @@ internal abstract class BootsArmorItemFactory : ArmorItemFactory
 
     protected override void ApplyRandomGoodRareCharacteristics(Item item)
     {
-        switch (SaveGame.DieRoll(24))
+        switch (Game.DieRoll(24))
         {
             case 1:
-                item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(BootsOfSpeedRareItem));
+                item.RareItem = Game.SingletonRepository.RareItems.Get(nameof(BootsOfSpeedRareItem));
                 break;
             case 2:
             case 3:
             case 4:
             case 5:
-                item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(BootsOfFreeActionRareItem));
+                item.RareItem = Game.SingletonRepository.RareItems.Get(nameof(BootsOfFreeActionRareItem));
                 break;
             case 6:
             case 7:
@@ -77,7 +77,7 @@ internal abstract class BootsArmorItemFactory : ArmorItemFactory
             case 11:
             case 12:
             case 13:
-                item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(BootsOfStealthRareItem));
+                item.RareItem = Game.SingletonRepository.RareItems.Get(nameof(BootsOfStealthRareItem));
                 break;
             case 14:
             case 15:
@@ -90,11 +90,11 @@ internal abstract class BootsArmorItemFactory : ArmorItemFactory
             case 22:
             case 23:
             case 24:
-                item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(BootsWingedRareItem));
-                if (SaveGame.DieRoll(2) == 1)
+                item.RareItem = Game.SingletonRepository.RareItems.Get(nameof(BootsWingedRareItem));
+                if (Game.DieRoll(2) == 1)
                 {
                     IArtifactBias artifactBias = null;
-                    item.ApplyRandomResistance(ref artifactBias, SaveGame.DieRoll(22) + 16);
+                    item.ApplyRandomResistance(ref artifactBias, Game.DieRoll(22) + 16);
                 }
                 break;
         }
@@ -106,16 +106,16 @@ internal abstract class BootsArmorItemFactory : ArmorItemFactory
     /// <param name="item"></param>
     protected override void ApplyRandomPoorRareCharacteristics(Item item)
     {
-        switch (SaveGame.DieRoll(3))
+        switch (Game.DieRoll(3))
         {
             case 1:
-                item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(BootsOfNoiseRareItem));
+                item.RareItem = Game.SingletonRepository.RareItems.Get(nameof(BootsOfNoiseRareItem));
                 break;
             case 2:
-                item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(BootsOfSlownessRareItem));
+                item.RareItem = Game.SingletonRepository.RareItems.Get(nameof(BootsOfSlownessRareItem));
                 break;
             case 3:
-                item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(BootsOfAnnoyanceRareItem));
+                item.RareItem = Game.SingletonRepository.RareItems.Get(nameof(BootsOfAnnoyanceRareItem));
                 break;
         }
     }

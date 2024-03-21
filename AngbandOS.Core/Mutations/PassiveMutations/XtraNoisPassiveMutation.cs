@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Mutations.PassiveMutations;
 [Serializable]
 internal class XtraNoisPassiveMutation : Mutation
 {
-    private XtraNoisPassiveMutation(SaveGame saveGame) : base(saveGame) { }
+    private XtraNoisPassiveMutation(Game game) : base(game) { }
     public override int Frequency => 3;
     public override string GainMessage => "You start making strange noise!";
     public override string HaveMessage => "You make a lot of strange noise (-3 stealth).";
@@ -18,11 +18,11 @@ internal class XtraNoisPassiveMutation : Mutation
 
     public override void OnGain()
     {
-        SaveGame.StealthBonus -= 3;
+        Game.StealthBonus -= 3;
     }
 
     public override void OnLose()
     {
-        SaveGame.StealthBonus += 3;
+        Game.StealthBonus += 3;
     }
 }

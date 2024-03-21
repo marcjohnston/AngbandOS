@@ -12,7 +12,7 @@ internal interface IFixedArtifactActivatible
     /// <summary>
     /// Activates the special ability of the fixed artifact.
     /// </summary>
-    /// <param name="saveGame"></param>
+    /// <param name="game"></param>
     /// <param name="item"></param>
     public abstract void ActivateItem(Item item);
 

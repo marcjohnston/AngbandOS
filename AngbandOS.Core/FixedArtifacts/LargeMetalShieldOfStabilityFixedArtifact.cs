@@ -10,14 +10,14 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class LargeMetalShieldOfStabilityFixedArtifact : FixedArtifact
 {
-    private LargeMetalShieldOfStabilityFixedArtifact(SaveGame saveGame) : base(saveGame) { }
+    private LargeMetalShieldOfStabilityFixedArtifact(Game game) : base(game) { }
 
     protected override string BaseItemFactoryName => nameof(LargeMetalShieldArmorItemFactory);
 
     public override void ApplyResistances(Item item)
     {
         IArtifactBias artifactBias = null;
-        item.ApplyRandomResistance(ref artifactBias, SaveGame.DieRoll(22) + 16);
+        item.ApplyRandomResistance(ref artifactBias, Game.DieRoll(22) + 16);
     }
 
     public override ColorEnum Color => ColorEnum.Grey;

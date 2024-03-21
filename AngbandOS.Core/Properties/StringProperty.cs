@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Properties;
 [Serializable]
 internal abstract class StringProperty : Property, IStringChangeTracking
 {
-    protected StringProperty(SaveGame saveGame) : base(saveGame) { }
+    protected StringProperty(Game game) : base(game) { }
 
     private string _value;
     public string Value

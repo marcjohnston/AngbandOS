@@ -10,10 +10,10 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class SlowMonsterRodItemFactory : RodItemFactory
 {
-    private SlowMonsterRodItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private SlowMonsterRodItemFactory(Game game) : base(game) { } // This object is a singleton.
 
     public override bool RequiresAiming => true;
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(MinusSignSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(MinusSignSymbol));
     public override string Name => "Slow Monster";
 
     public override int[] Chance => new int[] { 1, 0, 0, 0 };
@@ -26,11 +26,11 @@ internal class SlowMonsterRodItemFactory : RodItemFactory
     public override int Weight => 15;
     public override void Execute(ZapRodEvent zapRodEvent)
     {
-        if (SaveGame.SlowMonster(zapRodEvent.Dir.Value))
+        if (Game.SlowMonster(zapRodEvent.Dir.Value))
         {
             zapRodEvent.Identified = true;
         }
         zapRodEvent.Item.TypeSpecificValue = 20;
     }
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

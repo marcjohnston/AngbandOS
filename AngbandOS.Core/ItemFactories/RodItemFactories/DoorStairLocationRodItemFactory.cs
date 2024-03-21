@@ -10,10 +10,10 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class DoorStairLocationRodItemFactory : RodItemFactory
 {
-    private DoorStairLocationRodItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private DoorStairLocationRodItemFactory(Game game) : base(game) { } // This object is a singleton.
 
     public override bool RequiresAiming => false;
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(MinusSignSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(MinusSignSymbol));
     public override string Name => "Door/Stair Location";
 
     public override int[] Chance => new int[] { 1, 0, 0, 0 };
@@ -27,15 +27,15 @@ internal class DoorStairLocationRodItemFactory : RodItemFactory
 
     public override void Execute(ZapRodEvent zapRodEvent)
     {
-        if (SaveGame.DetectDoors())
+        if (Game.DetectDoors())
         {
             zapRodEvent.Identified = true;
         }
-        if (SaveGame.DetectStairs())
+        if (Game.DetectStairs())
         {
             zapRodEvent.Identified = true;
         }
         zapRodEvent.Item.TypeSpecificValue = 70;
     }
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

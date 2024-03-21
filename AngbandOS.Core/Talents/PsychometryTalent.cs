@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Talents;
 [Serializable]
 internal class PsychometryTalent : Talent
 {
-    private PsychometryTalent(SaveGame saveGame) : base(saveGame) { }
+    private PsychometryTalent(Game game) : base(game) { }
     public override string Name => "Psychometry";
     public override int Level => 15;
     public override int ManaCost => 12;
@@ -18,13 +18,13 @@ internal class PsychometryTalent : Talent
 
     public override void Use()
     {
-        if (SaveGame.ExperienceLevel.Value < 40)
+        if (Game.ExperienceLevel.Value < 40)
         {
             Psychometry();
         }
         else
         {
-            SaveGame.RunScript(nameof(IdentifyItemScript));
+            Game.RunScript(nameof(IdentifyItemScript));
         }
     }
 
@@ -35,9 +35,9 @@ internal class PsychometryTalent : Talent
 
     private void Psychometry()
     {
-        if (!SaveGame.SelectItem(out Item? oPtr, "Meditate on which item? ", true, true, true, null))
+        if (!Game.SelectItem(out Item? oPtr, "Meditate on which item? ", true, true, true, null))
         {
-            SaveGame.MsgPrint("You have nothing appropriate.");
+            Game.MsgPrint("You have nothing appropriate.");
             return;
         }
         if (oPtr == null)
@@ -46,23 +46,23 @@ internal class PsychometryTalent : Talent
         }
         if (oPtr.IsKnown() || oPtr.IdentSense)
         {
-            SaveGame.MsgPrint("You cannot find out anything more about that.");
+            Game.MsgPrint("You cannot find out anything more about that.");
             return;
         }
         string feel = oPtr.GetDetailedFeeling();
         string oName = oPtr.Description(false, 0);
         if (string.IsNullOrEmpty(feel))
         {
-            SaveGame.MsgPrint($"You do not perceive anything unusual about the {oName}.");
+            Game.MsgPrint($"You do not perceive anything unusual about the {oName}.");
             return;
         }
         string s = oPtr.Count == 1 ? "is" : "are";
-        SaveGame.MsgPrint($"You feel that the {oName} {s} {feel}...");
+        Game.MsgPrint($"You feel that the {oName} {s} {feel}...");
         oPtr.IdentSense = true;
         if (string.IsNullOrEmpty(oPtr.Inscription))
         {
             oPtr.Inscription = feel;
         }
-        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
+        Game.SingletonRepository.FlaggedActions.Get(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
     }
 }

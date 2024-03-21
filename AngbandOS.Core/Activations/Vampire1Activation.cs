@@ -13,7 +13,7 @@ namespace AngbandOS.Core.Activations;
 [Serializable]
 internal class Vampire1Activation : DirectionalActivation
 {
-    private Vampire1Activation(SaveGame saveGame) : base(saveGame) { }
+    private Vampire1Activation(Game game) : base(game) { }
     public override int RandomChance => 66;
 
     public override int RechargeTime() => 400;
@@ -22,9 +22,9 @@ internal class Vampire1Activation : DirectionalActivation
     {
         for (int i = 0; i < 3; i++)
         {
-            if (SaveGame.DrainLife(direction, 50))
+            if (Game.DrainLife(direction, 50))
             {
-                SaveGame.RestoreHealth(50);
+                Game.RestoreHealth(50);
             }
         }
         return true;

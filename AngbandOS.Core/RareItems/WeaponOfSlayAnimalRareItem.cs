@@ -10,8 +10,8 @@ namespace AngbandOS.Core.RareItems;
 [Serializable]
 internal class WeaponOfSlayAnimalRareItem : RareItem
 {
-    private WeaponOfSlayAnimalRareItem(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(VerticalBarSymbol));
+    private WeaponOfSlayAnimalRareItem(Game game) : base(game) { } // This object is a singleton.
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(VerticalBarSymbol));
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "Weapon of Slay Animal";
     public override int Cost => 3500;

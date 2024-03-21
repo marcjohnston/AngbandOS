@@ -10,7 +10,7 @@ namespace AngbandOS.Core.StoreFactories;
 [Serializable]
 internal class GenericStoreFactory : StoreFactory
 {
-    public GenericStoreFactory(SaveGame saveGame, StoreFactoryDefinition storeFactoryDefinition) : base(saveGame)
+    public GenericStoreFactory(Game game, StoreFactoryDefinition storeFactoryDefinition) : base(game)
     {
         IsEmptyLot = storeFactoryDefinition.IsEmptyLot;
         BuildingsMadeFromPermanentRock = storeFactoryDefinition.BuildingsMadeFromPermanentRock;

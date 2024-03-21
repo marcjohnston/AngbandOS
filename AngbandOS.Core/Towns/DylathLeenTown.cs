@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Towns;
 [Serializable]
 internal class DylathLeenTown : Town
 {
-    private DylathLeenTown(SaveGame saveGame) : base(saveGame) { }
+    private DylathLeenTown(Game game) : base(game) { }
     protected override string[] StoreFactoryNames => new string[] {
         nameof(GeneralStoreFactory),
         nameof(ArmoryStoreFactory),

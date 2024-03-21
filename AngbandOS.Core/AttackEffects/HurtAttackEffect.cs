@@ -10,7 +10,7 @@ namespace AngbandOS.Core.AttackEffects;
 [Serializable]
 internal class HurtAttackEffect : AttackEffect
 {
-    private HurtAttackEffect(SaveGame saveGame) : base(saveGame) { }
+    private HurtAttackEffect(Game game) : base(game) { }
     public override int Power => 60;
     public override string Description => "attack";
     public override void ApplyToPlayer(int monsterLevel, int monsterIndex, int armorClass, string monsterDescription, Monster monster, ref bool obvious, ref int damage, ref bool blinked)
@@ -18,7 +18,7 @@ internal class HurtAttackEffect : AttackEffect
         // Normal damage is reduced by armor
         obvious = true;
         damage -= damage * (armorClass < 150 ? armorClass : 150) / 250;
-        SaveGame.TakeHit(damage, monsterDescription);
+        Game.TakeHit(damage, monsterDescription);
     }
 
     public override void ApplyToMonster(Monster monster, int armorClass, ref int damage, ref Projectile? pt, ref bool blinked)

@@ -10,7 +10,7 @@ namespace AngbandOS.Core.WizardCommands;
 [Serializable]
 internal class RedrawWizardCommand : WizardCommand
 {
-    private RedrawWizardCommand(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private RedrawWizardCommand(Game game) : base(game) { } // This object is a singleton.
 
     public override char KeyChar => 'R';
 

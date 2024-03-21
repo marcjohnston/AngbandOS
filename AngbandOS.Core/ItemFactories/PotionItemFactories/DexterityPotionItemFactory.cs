@@ -10,9 +10,9 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class DexterityPotionItemFactory : PotionItemFactory
 {
-    private DexterityPotionItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private DexterityPotionItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(ExclamationPointSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(ExclamationPointSymbol));
     public override string Name => "Dexterity";
 
     public override int[] Chance => new int[] { 6, 3, 1, 0 };
@@ -26,7 +26,7 @@ internal class DexterityPotionItemFactory : PotionItemFactory
     public override bool Quaff()
     {
         // Dexterity increases your dexterity
-        return SaveGame.TryIncreasingAbilityScore(Ability.Dexterity);
+        return Game.TryIncreasingAbilityScore(Ability.Dexterity);
     }
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Realms;
 [Serializable]
 internal class DeathRealm : Realm
 {
-    private DeathRealm(SaveGame savedGame) : base(savedGame) { }
+    private DeathRealm(Game savedGame) : base(savedGame) { }
 
     public override string[] Info => new string[] {
         "The Death realm has a combination of life-draining spells,",

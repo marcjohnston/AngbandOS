@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Spells.Death;
 [Serializable]
 internal class DeathSpellOrbOfEntropy : Spell
 {
-    private DeathSpellOrbOfEntropy(SaveGame saveGame) : base(saveGame) { }
+    private DeathSpellOrbOfEntropy(Game game) : base(game) { }
     protected override string? CastScriptName => nameof(OrbOfEntropyScript);
 
     protected override string? CastFailedScriptName => nameof(WildDeathMagicScript);
@@ -21,7 +21,7 @@ internal class DeathSpellOrbOfEntropy : Spell
     {
         get
         {
-            int s = SaveGame.ExperienceLevel.Value + (SaveGame.ExperienceLevel.Value / (SaveGame.BaseCharacterClass.ID == CharacterClass.Mage || SaveGame.BaseCharacterClass.ID == CharacterClass.HighMage ? 2 : 4));
+            int s = Game.ExperienceLevel.Value + (Game.ExperienceLevel.Value / (Game.BaseCharacterClass.ID == CharacterClass.Mage || Game.BaseCharacterClass.ID == CharacterClass.HighMage ? 2 : 4));
             return $"dam 3d6+{s}";
         }
     }

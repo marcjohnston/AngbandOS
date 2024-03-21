@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Races;
 [Serializable]
 internal class SpriteRace : Race
 {
-    private SpriteRace(SaveGame saveGame) : base(saveGame) { }
+    private SpriteRace(Game game) : base(game) { }
     public override string Title => "Sprite";
     public override int[] AbilityBonus => new int[] { -4, 3, 3, 3, -2, 2 };
     public override int BaseDisarmBonus => 10;
@@ -65,25 +65,25 @@ internal class SpriteRace : Race
     }
     public override void CalcBonuses()
     {
-        SaveGame.HasFeatherFall = true;
-        SaveGame.HasGlow = true;
-        SaveGame.HasLightResistance = true;
-        SaveGame.Speed.Value += SaveGame.ExperienceLevel.Value / 10;
+        Game.HasFeatherFall = true;
+        Game.HasGlow = true;
+        Game.HasLightResistance = true;
+        Game.Speed.Value += Game.ExperienceLevel.Value / 10;
     }
 
     public override void UseRacialPower()
     {
         // Sprites can sleep monsters
-        if (SaveGame.CheckIfRacialPowerWorks(12, 12, Ability.Intelligence, 15))
+        if (Game.CheckIfRacialPowerWorks(12, 12, Ability.Intelligence, 15))
         {
-            SaveGame.MsgPrint("You throw some magic dust...");
-            if (SaveGame.ExperienceLevel.Value < 25)
+            Game.MsgPrint("You throw some magic dust...");
+            if (Game.ExperienceLevel.Value < 25)
             {
-                SaveGame.SleepMonstersTouch();
+                Game.SleepMonstersTouch();
             }
             else
             {
-                SaveGame.RunScript(nameof(SleepMonstersScript));
+                Game.RunScript(nameof(SleepMonstersScript));
             }
         }
     }

@@ -10,9 +10,9 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class DwarvenPickDiggingWeaponItemFactory : DiggingWeaponItemFactory
 {
-    private DwarvenPickDiggingWeaponItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private DwarvenPickDiggingWeaponItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(BackSlashSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(BackSlashSymbol));
     public override ColorEnum Color => ColorEnum.Blue;
     public override string Name => "Dwarven Pick";
 
@@ -27,5 +27,5 @@ internal class DwarvenPickDiggingWeaponItemFactory : DiggingWeaponItemFactory
     public override bool ShowMods => true;
     public override bool Tunnel => true;
     public override int Weight => 200;
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

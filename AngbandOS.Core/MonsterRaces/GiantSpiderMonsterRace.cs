@@ -10,7 +10,7 @@ namespace AngbandOS.Core.MonsterRaces;
 [Serializable]
 internal class GiantSpiderMonsterRace : MonsterRace
 {
-    protected GiantSpiderMonsterRace(SaveGame saveGame) : base(saveGame) { }
+    protected GiantSpiderMonsterRace(Game game) : base(game) { }
 
     protected override string SymbolName => nameof(UpperSSymbol);
     public override ColorEnum Color => ColorEnum.Grey;

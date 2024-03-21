@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class SlowMonsterScript : Script, IScript
 {
-    private SlowMonsterScript(SaveGame saveGame) : base(saveGame) { }
+    private SlowMonsterScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script.
@@ -18,10 +18,10 @@ internal class SlowMonsterScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        if (!SaveGame.GetDirectionWithAim(out int dir))
+        if (!Game.GetDirectionWithAim(out int dir))
         {
             return;
         }
-        SaveGame.SlowMonster(dir);
+        Game.SlowMonster(dir);
     }
 }

@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Races;
 [Serializable]
 internal class KoboldRace : Race
 {
-    private KoboldRace(SaveGame saveGame) : base(saveGame) { }
+    private KoboldRace(Game game) : base(game) { }
     public override string Title => "Kobold";
     public override int[] AbilityBonus => new int[] { 1, -1, 0, 1, 0, -4 };
     public override int BaseDisarmBonus => -2;
@@ -60,18 +60,18 @@ internal class KoboldRace : Race
     }
     public override void CalcBonuses()
     {
-        SaveGame.HasPoisonResistance = true;
+        Game.HasPoisonResistance = true;
     }
 
     public override void UseRacialPower()
     {
         // Kobolds can throw poison darts
-        if (SaveGame.CheckIfRacialPowerWorks(12, 8, Ability.Dexterity, 14))
+        if (Game.CheckIfRacialPowerWorks(12, 8, Ability.Dexterity, 14))
         {
-            if (SaveGame.GetDirectionWithAim(out int direction))
+            if (Game.GetDirectionWithAim(out int direction))
             {
-                SaveGame.MsgPrint("You throw a dart of poison.");
-                SaveGame.FireBolt(SaveGame.SingletonRepository.Projectiles.Get(nameof(PoisProjectile)), direction, SaveGame.ExperienceLevel.Value);
+                Game.MsgPrint("You throw a dart of poison.");
+                Game.FireBolt(Game.SingletonRepository.Projectiles.Get(nameof(PoisProjectile)), direction, Game.ExperienceLevel.Value);
             }
         }
     }

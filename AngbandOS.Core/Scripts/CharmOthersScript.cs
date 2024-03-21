@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class CharmOthersScript : Script, IScript, IScriptInt, ICancellableScript
 {
-    private CharmOthersScript(SaveGame saveGame) : base(saveGame) { }
+    private CharmOthersScript(Game game) : base(game) { }
 
     /// <summary>
     /// Runs the script and returns true because the player cannot cancel the script.
@@ -24,7 +24,7 @@ internal class CharmOthersScript : Script, IScript, IScriptInt, ICancellableScri
 
     public void ExecuteScriptInt(int damage)
     {
-        SaveGame.ProjectAtAllInLos(SaveGame.SingletonRepository.Projectiles.Get(nameof(ControlAnimalProjectile)), damage);
+        Game.ProjectAtAllInLos(Game.SingletonRepository.Projectiles.Get(nameof(ControlAnimalProjectile)), damage);
     }
 
     /// <summary>
@@ -33,6 +33,6 @@ internal class CharmOthersScript : Script, IScript, IScriptInt, ICancellableScri
     /// <returns></returns>
     public void ExecuteScript()
     {
-        ExecuteScriptInt(SaveGame.ExperienceLevel.Value * 2);
+        ExecuteScriptInt(Game.ExperienceLevel.Value * 2);
     }
 }

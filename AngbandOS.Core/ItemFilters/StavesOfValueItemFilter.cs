@@ -13,6 +13,6 @@ namespace AngbandOS.Core.ItemFilters;
 [Serializable]
 internal class StavesOfValueItemFilter : ItemFilter<StaffItemFactory>
 {
-    private StavesOfValueItemFilter(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private StavesOfValueItemFilter(Game game) : base(game) { } // This object is a singleton.
     public override bool? HasValue => true;
 }

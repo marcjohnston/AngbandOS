@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class DispelGood4xScript : Script, IScript
 {
-    private DispelGood4xScript(SaveGame saveGame) : base(saveGame) { }
+    private DispelGood4xScript(Game game) : base(game) { }
 
     /// <summary>
     /// Projects a dispeal good to all monsters in the line-of-sight.
@@ -18,6 +18,6 @@ internal class DispelGood4xScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        SaveGame.ProjectAtAllInLos(SaveGame.SingletonRepository.Projectiles.Get(nameof(DispGoodProjectile)), SaveGame.ExperienceLevel.Value * 4);
+        Game.ProjectAtAllInLos(Game.SingletonRepository.Projectiles.Get(nameof(DispGoodProjectile)), Game.ExperienceLevel.Value * 4);
     }
 }

@@ -10,9 +10,9 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class StarEssenceGaladrielLightSourceItemFactory : LightSourceItemFactory
 {
-    private StarEssenceGaladrielLightSourceItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private StarEssenceGaladrielLightSourceItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(AsteriskSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(AsteriskSymbol));
     public override ColorEnum Color => ColorEnum.Yellow;
     public override string Name => "Star Essence Galadriel";
 
@@ -24,5 +24,5 @@ internal class StarEssenceGaladrielLightSourceItemFactory : LightSourceItemFacto
     public override int LevelNormallyFound => 1;
     public override int Weight => 10;
     public override bool ProvidesSunlight => true;
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

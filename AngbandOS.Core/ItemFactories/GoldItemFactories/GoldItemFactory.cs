@@ -11,14 +11,14 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal abstract class GoldItemFactory : ItemFactory
 {
-    public GoldItemFactory(SaveGame saveGame) : base(saveGame) { }
-    public override ItemClass ItemClass => SaveGame.SingletonRepository.ItemClasses.Get(nameof(GoldItemClass));
+    public GoldItemFactory(Game game) : base(game) { }
+    public override ItemClass ItemClass => Game.SingletonRepository.ItemClasses.Get(nameof(GoldItemClass));
     public override int PackSort => 0;
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Gold;
 
     /// <summary>
     /// Returns the value of the gold, which is assigned to the type specific value.  The value of the gold defaults to 8dCost+1d8;
     /// </summary>
-    public override int InitialTypeSpecificValue => Cost + (8 * SaveGame.DieRoll(Cost)) + SaveGame.DieRoll(8);
+    public override int InitialTypeSpecificValue => Cost + (8 * Game.DieRoll(Cost)) + Game.DieRoll(8);
     public override bool IsIgnoredByMonsters => true;
 }

@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Mutations.RandomMutations;
 [Serializable]
 internal class SpeedFluxRandomMutation : Mutation
 {
-    private SpeedFluxRandomMutation(SaveGame saveGame) : base(saveGame) { }
+    private SpeedFluxRandomMutation(Game game) : base(game) { }
     public override int Frequency => 2;
     public override string GainMessage => "You have become unstuck in time.";
     public override string HaveMessage => "You move faster or slower randomly.";
@@ -18,34 +18,34 @@ internal class SpeedFluxRandomMutation : Mutation
 
     public override void OnProcessWorld()
     {
-        if (base.SaveGame.DieRoll(6000) == 1)
+        if (base.Game.DieRoll(6000) == 1)
         {
-            SaveGame.Disturb(false);
-            if (base.SaveGame.DieRoll(2) == 1)
+            Game.Disturb(false);
+            if (base.Game.DieRoll(2) == 1)
             {
-                SaveGame.MsgPrint("Everything around you speeds up.");
-                if (SaveGame.HasteTimer.Value > 0)
+                Game.MsgPrint("Everything around you speeds up.");
+                if (Game.HasteTimer.Value > 0)
                 {
-                    SaveGame.HasteTimer.ResetTimer();
+                    Game.HasteTimer.ResetTimer();
                 }
                 else
                 {
-                    SaveGame.SlowTimer.AddTimer(base.SaveGame.DieRoll(30) + 10);
+                    Game.SlowTimer.AddTimer(base.Game.DieRoll(30) + 10);
                 }
             }
             else
             {
-                SaveGame.MsgPrint("Everything around you slows down.");
-                if (SaveGame.SlowTimer.Value > 0)
+                Game.MsgPrint("Everything around you slows down.");
+                if (Game.SlowTimer.Value > 0)
                 {
-                    SaveGame.SlowTimer.ResetTimer();
+                    Game.SlowTimer.ResetTimer();
                 }
                 else
                 {
-                    SaveGame.HasteTimer.AddTimer(base.SaveGame.DieRoll(30) + 10);
+                    Game.HasteTimer.AddTimer(base.Game.DieRoll(30) + 10);
                 }
             }
-            SaveGame.MsgPrint(null);
+            Game.MsgPrint(null);
         }
     }
 }

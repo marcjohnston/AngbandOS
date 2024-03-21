@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class MassSummonsScript : Script, IScript
 {
-    private MassSummonsScript(SaveGame saveGame) : base(saveGame) { }
+    private MassSummonsScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script.
@@ -19,25 +19,25 @@ internal class MassSummonsScript : Script, IScript
     public void ExecuteScript()
     {
         bool noneCame = true;
-        SaveGame.MsgPrint("You concentrate on several images at once...");
-        for (int dummy = 0; dummy < 3 + (SaveGame.ExperienceLevel.Value / 10); dummy++)
+        Game.MsgPrint("You concentrate on several images at once...");
+        for (int dummy = 0; dummy < 3 + (Game.ExperienceLevel.Value / 10); dummy++)
         {
-            if (SaveGame.DieRoll(10) > 3)
+            if (Game.DieRoll(10) > 3)
             {
-                if (SaveGame.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel.Value, SaveGame.SingletonRepository.MonsterFilters.Get(nameof(NoUniquesMonsterFilter)), false))
+                if (Game.SummonSpecificFriendly(Game.MapY, Game.MapX, Game.ExperienceLevel.Value, Game.SingletonRepository.MonsterFilters.Get(nameof(NoUniquesMonsterFilter)), false))
                 {
                     noneCame = false;
                 }
             }
-            else if (SaveGame.SummonSpecific(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel.Value, null))
+            else if (Game.SummonSpecific(Game.MapY, Game.MapX, Game.ExperienceLevel.Value, null))
             {
-                SaveGame.MsgPrint("A summoned creature gets angry!");
+                Game.MsgPrint("A summoned creature gets angry!");
                 noneCame = false;
             }
         }
         if (noneCame)
         {
-            SaveGame.MsgPrint("No-one ever turns up.");
+            Game.MsgPrint("No-one ever turns up.");
         }
     }
 }

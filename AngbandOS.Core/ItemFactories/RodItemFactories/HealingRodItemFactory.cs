@@ -10,10 +10,10 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class HealingRodItemFactory : RodItemFactory
 {
-    private HealingRodItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private HealingRodItemFactory(Game game) : base(game) { } // This object is a singleton.
 
     public override bool RequiresAiming => false;
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(MinusSignSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(MinusSignSymbol));
     public override string Name => "Healing";
 
     public override int[] Chance => new int[] { 8, 0, 0, 0 };
@@ -26,19 +26,19 @@ internal class HealingRodItemFactory : RodItemFactory
     public override int Weight => 15;
     public override void Execute(ZapRodEvent zapRodEvent)
     {
-        if (SaveGame.RestoreHealth(500))
+        if (Game.RestoreHealth(500))
         {
             zapRodEvent.Identified = true;
         }
-        if (SaveGame.StunTimer.ResetTimer())
+        if (Game.StunTimer.ResetTimer())
         {
             zapRodEvent.Identified = true;
         }
-        if (SaveGame.BleedingTimer.ResetTimer())
+        if (Game.BleedingTimer.ResetTimer())
         {
             zapRodEvent.Identified = true;
         }
         zapRodEvent.Item.TypeSpecificValue = 999;
     }
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

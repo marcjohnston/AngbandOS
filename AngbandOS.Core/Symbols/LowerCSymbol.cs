@@ -1,7 +1,7 @@
 [Serializable]
 internal class LowerCSymbol : Symbol
 {
-    private LowerCSymbol(SaveGame saveGame) : base(saveGame) { }
+    private LowerCSymbol(Game game) : base(game) { }
     public override char Character => 'c';
     public override string Name => "Centipede";
 }

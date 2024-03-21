@@ -10,9 +10,9 @@ namespace AngbandOS.Core.MonsterSpells;
 [Serializable]
 internal class CauseLightWoundsMonsterSpell : CauseWoundsMonsterSpell
 {
-    private CauseLightWoundsMonsterSpell(SaveGame saveGame) : base(saveGame) { }
+    private CauseLightWoundsMonsterSpell(Game game) : base(game) { }
     protected override int CurseEquipmentChance => 33;
     protected override int HeavyCurseEquipmentChance => 0;
-    protected override int Damage => SaveGame.DiceRoll(3, 8);
+    protected override int Damage => Game.DiceRoll(3, 8);
     public override string? VsMonsterSeenMessage(Monster monster, Monster target) => $"{monster.Name} points at {target.Name} and curses horribly.";
 }

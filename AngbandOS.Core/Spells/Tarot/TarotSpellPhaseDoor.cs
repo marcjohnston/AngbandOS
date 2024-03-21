@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Spells.Tarot;
 [Serializable]
 internal class TarotSpellPhaseDoor : Spell
 {
-    private TarotSpellPhaseDoor(SaveGame saveGame) : base(saveGame) { }
+    private TarotSpellPhaseDoor(Game game) : base(game) { }
     protected override string? CastScriptName => nameof(PhaseDoorScript);
 
     public override string Name => "Phase Door";

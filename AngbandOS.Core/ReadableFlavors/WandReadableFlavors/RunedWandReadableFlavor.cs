@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Flavors;
 [Serializable]
 internal class RunedWandReadableFlavor : WandReadableFlavor
 {
-    private RunedWandReadableFlavor(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private RunedWandReadableFlavor(Game game) : base(game) { } // This object is a singleton.
     protected override string SymbolName => nameof(MinusSignSymbol);
     public override ColorEnum Color => ColorEnum.Purple;
     public override string Name => "Runed";

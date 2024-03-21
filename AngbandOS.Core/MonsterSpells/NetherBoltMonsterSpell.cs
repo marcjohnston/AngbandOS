@@ -10,7 +10,7 @@ namespace AngbandOS.Core.MonsterSpells;
 [Serializable]
 internal class NetherBoltMonsterSpell : BoltProjectileMonsterSpell
 {
-    private NetherBoltMonsterSpell(SaveGame saveGame) : base(saveGame) { }
+    private NetherBoltMonsterSpell(Game game) : base(game) { }
     public override bool UsesNether => true;
 
     public override bool CanBeReflected => true;
@@ -19,8 +19,8 @@ internal class NetherBoltMonsterSpell : BoltProjectileMonsterSpell
     protected override int Damage(Monster monster)
     {
         int monsterLevel = monster.Race.Level >= 1 ? monster.Race.Level : 1;
-        return 30 + SaveGame.DiceRoll(5, 5) + (monsterLevel * 3 / 2);
+        return 30 + Game.DiceRoll(5, 5) + (monsterLevel * 3 / 2);
     }
-    protected override Projectile Projectile(SaveGame saveGame) => saveGame.SingletonRepository.Projectiles.Get(nameof(NetherProjectile));
-    public override SpellResistantDetection[] SmartLearn => new SpellResistantDetection[] { SaveGame.SingletonRepository.SpellResistantDetections.Get(nameof(NethSpellResistantDetection)), SaveGame.SingletonRepository.SpellResistantDetections.Get(nameof(ReflectSpellResistantDetection)) };
+    protected override Projectile Projectile(Game game) => game.SingletonRepository.Projectiles.Get(nameof(NetherProjectile));
+    public override SpellResistantDetection[] SmartLearn => new SpellResistantDetection[] { Game.SingletonRepository.SpellResistantDetections.Get(nameof(NethSpellResistantDetection)), Game.SingletonRepository.SpellResistantDetections.Get(nameof(ReflectSpellResistantDetection)) };
 }

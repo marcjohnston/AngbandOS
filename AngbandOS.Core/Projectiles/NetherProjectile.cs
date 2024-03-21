@@ -10,11 +10,11 @@ namespace AngbandOS.Core.Projection;
 [Serializable]
 internal class NetherProjectile : Projectile
 {
-    private NetherProjectile(SaveGame saveGame) : base(saveGame) { }
+    private NetherProjectile(Game game) : base(game) { }
 
-    protected override ProjectileGraphic? BoltProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get(nameof(BlackBoltProjectileGraphic));
+    protected override ProjectileGraphic? BoltProjectileGraphic => Game.SingletonRepository.ProjectileGraphics.Get(nameof(BlackBoltProjectileGraphic));
 
-    protected override ProjectileGraphic? ImpactProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get(nameof(BlackSplatProjectileGraphic));
+    protected override ProjectileGraphic? ImpactProjectileGraphic => Game.SingletonRepository.ProjectileGraphics.Get(nameof(BlackSplatProjectileGraphic));
 
     protected override bool AffectMonster(int who, Monster mPtr, int dam, int r)
     {
@@ -39,7 +39,7 @@ internal class NetherProjectile : Projectile
         {
             note = " resists.";
             dam *= 3;
-            dam /= SaveGame.DieRoll(6) + 6;
+            dam /= Game.DieRoll(6) + 6;
             if (seen)
             {
                 rPtr.Knowledge.Characteristics.ResistNether = true;
@@ -60,55 +60,55 @@ internal class NetherProjectile : Projectile
 
     protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
     {
-        bool blind = SaveGame.BlindnessTimer.Value != 0;
+        bool blind = Game.BlindnessTimer.Value != 0;
         if (dam > 1600)
         {
             dam = 1600;
         }
         dam = (dam + r) / (r + 1);
-        Monster mPtr = SaveGame.Monsters[who];
+        Monster mPtr = Game.Monsters[who];
         string killer = mPtr.IndefiniteVisibleName;
         if (blind)
         {
-            SaveGame.MsgPrint("You are hit by nether forces!");
+            Game.MsgPrint("You are hit by nether forces!");
         }
-        if (SaveGame.HasNetherResistance)
+        if (Game.HasNetherResistance)
         {
-            if (SaveGame.Race.NegatesNetherResistance)
+            if (Game.Race.NegatesNetherResistance)
             {
                 dam *= 6;
             }
-            dam /= SaveGame.DieRoll(6) + 6;
+            dam /= Game.DieRoll(6) + 6;
         }
         else
         {
-            if (SaveGame.HasHoldLife && SaveGame.RandomLessThan(100) < 75)
+            if (Game.HasHoldLife && Game.RandomLessThan(100) < 75)
             {
-                SaveGame.MsgPrint("You keep hold of your life force!");
+                Game.MsgPrint("You keep hold of your life force!");
             }
-            else if (SaveGame.DieRoll(10) <= SaveGame.SingletonRepository.Gods.Get(nameof(HagargRyonisGod)).AdjustedFavour)
+            else if (Game.DieRoll(10) <= Game.SingletonRepository.Gods.Get(nameof(HagargRyonisGod)).AdjustedFavour)
             {
-                SaveGame.MsgPrint("Hagarg Ryonis's favour protects you!");
+                Game.MsgPrint("Hagarg Ryonis's favour protects you!");
             }
-            else if (SaveGame.HasHoldLife)
+            else if (Game.HasHoldLife)
             {
-                SaveGame.MsgPrint("You feel your life slipping away!");
-                SaveGame.LoseExperience(200 + (SaveGame.ExperiencePoints.Value / 1000 * Constants.MonDrainLife));
+                Game.MsgPrint("You feel your life slipping away!");
+                Game.LoseExperience(200 + (Game.ExperiencePoints.Value / 1000 * Constants.MonDrainLife));
             }
             else
             {
-                SaveGame.MsgPrint("You feel your life draining away!");
-                SaveGame.LoseExperience(200 + (SaveGame.ExperiencePoints.Value / 100 * Constants.MonDrainLife));
+                Game.MsgPrint("You feel your life draining away!");
+                Game.LoseExperience(200 + (Game.ExperiencePoints.Value / 100 * Constants.MonDrainLife));
             }
         }
-        if (SaveGame.Race.ProjectingNetherRestoresHealth)
+        if (Game.Race.ProjectingNetherRestoresHealth)
         {
-            SaveGame.MsgPrint("You feel invigorated!");
-            SaveGame.RestoreHealth(dam / 4);
+            Game.MsgPrint("You feel invigorated!");
+            Game.RestoreHealth(dam / 4);
         }
         else
         {
-            SaveGame.TakeHit(dam, killer);
+            Game.TakeHit(dam, killer);
         }
         return true;
     }

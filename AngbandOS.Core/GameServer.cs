@@ -12,15 +12,15 @@ using System.Text.Json;
 namespace AngbandOS.Core;
 
 /// <summary>
-/// Represents a wrapper for an in-progress game.  The SaveGame object has an "internal" scope that prevents the SaveGame and ANY associated objects from being exposed publically.
-/// This GameServer object encapsulates the SaveGame object and provides a wrapper that exposes limited functionality as public.
+/// Represents a wrapper for an in-progress game.  The Game object has an "internal" scope that prevents the Game and ANY associated objects from being exposed publically.
+/// This GameServer object encapsulates the Game object and provides a wrapper that exposes limited functionality as public.
 /// </summary>
 public class GameServer
 {
     /// <summary>
     /// Represents the in-progress game.
     /// </summary>
-    private SaveGame SaveGame;
+    private Game Game;
 
     /// <summary>
     /// Returns the current level of the player.  If the player is dead, null is returned.
@@ -30,13 +30,13 @@ public class GameServer
     {
         get
         {
-            if (SaveGame == null || SaveGame.IsDead)
+            if (Game == null || Game.IsDead)
             {
                 return null;
             }
             else
             {
-                return SaveGame.ExperienceLevel.Value;
+                return Game.ExperienceLevel.Value;
             }
         }
     }
@@ -49,13 +49,13 @@ public class GameServer
     {
         get
         {
-            if (SaveGame == null || SaveGame.IsDead)
+            if (Game == null || Game.IsDead)
             {
                 return null;
             }
             else
             {
-                return SaveGame.Gold.Value;
+                return Game.Gold.Value;
             }
         }
     }
@@ -68,13 +68,13 @@ public class GameServer
     {
         get
         {
-            if (SaveGame == null || SaveGame.IsDead)
+            if (Game == null || Game.IsDead)
             {
                 return null;
             }
             else
             {
-                return SaveGame.PlayerName.Value;
+                return Game.PlayerName.Value;
             }
         }
     }
@@ -86,11 +86,11 @@ public class GameServer
     {
         get
         {
-            if (SaveGame == null || SaveGame.GameTime == null)
+            if (Game == null || Game.GameTime == null)
             {
                 return null;
             }
-            return SaveGame.GameTime.ElapsedGameTime;
+            return Game.GameTime.ElapsedGameTime;
         }
     }
 
@@ -101,11 +101,11 @@ public class GameServer
     {
         get
         {
-            if (SaveGame?.LastInputReceived == null)
+            if (Game?.LastInputReceived == null)
             {
                 return null;
             }
-            return SaveGame.LastInputReceived;
+            return Game.LastInputReceived;
         }
     }
 
@@ -115,7 +115,7 @@ public class GameServer
     /// <param name="spectatorConsole"></param>
     public void RefreshSpectatorConsole(IViewPort spectatorConsole)
     {
-        SaveGame.Screen.RefreshSpectatorConsole(spectatorConsole);
+        Game.Screen.RefreshSpectatorConsole(spectatorConsole);
     }
 
     /// <summary>
@@ -146,7 +146,7 @@ public class GameServer
     /// <param name="firstIndex">The maximum number of records to return.  Defaults to null, which does not limit the number of records.</param>
     public PageOfGameMessages? GetPageOfGameMessages(int? firstIndex = null, int lastIndex = 0, int? maximumMessagesToRetrieve = null)
     {
-        return SaveGame.GetPageOfGameMessages(firstIndex, lastIndex, maximumMessagesToRetrieve);
+        return Game.GetPageOfGameMessages(firstIndex, lastIndex, maximumMessagesToRetrieve);
     }
 
     /// <summary>
@@ -154,9 +154,9 @@ public class GameServer
     /// </summary>
     public void InitiateShutDown()
     {
-        if (SaveGame != null)
+        if (Game != null)
         {
-            SaveGame.Shutdown = true;
+            Game.Shutdown = true;
         }
     }
 
@@ -259,8 +259,8 @@ public class GameServer
 
         try
         {
-            SaveGame = new SaveGame(configuration);
-            SaveGame.Play(console, persistentStorage);
+            Game = new Game(configuration);
+            Game.Play(console, persistentStorage);
         }
         catch (Exception ex)
         {
@@ -291,8 +291,8 @@ public class GameServer
         try
         {
             // Retrieve the game from persistent storage.
-            SaveGame = SaveGame.LoadGame(persistentStorage);
-            SaveGame.Play(console, persistentStorage);
+            Game = Game.LoadGame(persistentStorage);
+            Game.Play(console, persistentStorage);
         }
         catch (Exception ex)
         {

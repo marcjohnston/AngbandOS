@@ -8,7 +8,7 @@
 [Serializable]
 internal class SirParsivalThePureShopkeeper : Shopkeeper
 {
-    private SirParsivalThePureShopkeeper(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private SirParsivalThePureShopkeeper(Game game) : base(game) { } // This object is a singleton.
     public override string Name => "Sir Parsival the Pure";
     public override int MaxCost =>  25000;
     public override int MinInflate =>  107;

@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Animations;
 [Serializable]
 internal class RedControlAnimation : Animation
 {
-    private RedControlAnimation(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private RedControlAnimation(Game game) : base(game) { } // This object is a singleton.
     public override char Character => '*';
     public override ColorEnum Color => ColorEnum.Red;
     public override string Name => "RedControl";

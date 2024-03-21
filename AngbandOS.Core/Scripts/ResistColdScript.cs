@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class ResistColdScript : Script, IScript
 {
-    private ResistColdScript(SaveGame saveGame) : base(saveGame) { }
+    private ResistColdScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script.
@@ -18,6 +18,6 @@ internal class ResistColdScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        SaveGame.ColdResistanceTimer.AddTimer(SaveGame.DieRoll(20) + 20);
+        Game.ColdResistanceTimer.AddTimer(Game.DieRoll(20) + 20);
     }
 }

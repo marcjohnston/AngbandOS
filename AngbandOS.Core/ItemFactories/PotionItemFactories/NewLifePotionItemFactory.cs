@@ -10,9 +10,9 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class NewLifePotionItemFactory : PotionItemFactory
 {
-    private NewLifePotionItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private NewLifePotionItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(ExclamationPointSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(ExclamationPointSymbol));
     public override string Name => "New Life";
 
     public override int[] Chance => new int[] { 20, 10, 5, 0 };
@@ -27,22 +27,22 @@ internal class NewLifePotionItemFactory : PotionItemFactory
     public override bool Quaff()
     {
         // New life rerolls your health, cures all mutations, and restores you to your birth race
-        SaveGame.RunScript(nameof(RerollHitPointsScript));
-        if (SaveGame.HasMutations)
+        Game.RunScript(nameof(RerollHitPointsScript));
+        if (Game.HasMutations)
         {
-            SaveGame.MsgPrint("You are cured of all mutations.");
-            SaveGame.LoseAllMutations();
-            SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
-            SaveGame.HandleStuff();
+            Game.MsgPrint("You are cured of all mutations.");
+            Game.LoseAllMutations();
+            Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
+            Game.HandleStuff();
         }
-        if (!(SaveGame.Race.GetType() == SaveGame.RaceAtBirth.GetType()))
+        if (!(Game.Race.GetType() == Game.RaceAtBirth.GetType()))
         {
-            var oldRaceName = SaveGame.RaceAtBirth.Title;
-            SaveGame.MsgPrint($"You feel more {oldRaceName} again.");
-            SaveGame.ChangeRace(SaveGame.RaceAtBirth);
-            SaveGame.RedrawSingleLocation(SaveGame.MapY, SaveGame.MapX);
+            var oldRaceName = Game.RaceAtBirth.Title;
+            Game.MsgPrint($"You feel more {oldRaceName} again.");
+            Game.ChangeRace(Game.RaceAtBirth);
+            Game.RedrawSingleLocation(Game.MapY, Game.MapX);
         }
         return true;
     }
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

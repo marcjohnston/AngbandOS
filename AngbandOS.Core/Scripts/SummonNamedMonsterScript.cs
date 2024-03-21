@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class SummonNamedMonsterScript : Script, IScript
 {
-    private SummonNamedMonsterScript(SaveGame saveGame) : base(saveGame) { }
+    private SummonNamedMonsterScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script.
@@ -18,6 +18,6 @@ internal class SummonNamedMonsterScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        SaveGame.SummonNamedMonster(true);
+        Game.SummonNamedMonster(true);
     }
 }

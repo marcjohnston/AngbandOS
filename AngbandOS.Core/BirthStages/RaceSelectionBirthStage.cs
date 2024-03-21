@@ -11,20 +11,20 @@ namespace AngbandOS.Core.BirthStages;
 internal class RaceSelectionBirthStage : BirthStage
 {
     private int currentSelection = 16;
-    private RaceSelectionBirthStage(SaveGame saveGame) : base(saveGame) { }
+    private RaceSelectionBirthStage(Game game) : base(game) { }
     public override BirthStage? Render()
     {
         DisplayPartialCharacter();
-        string[]? menuItems = SaveGame.SingletonRepository.Races
+        string[]? menuItems = Game.SingletonRepository.Races
             .OrderBy((Race race) => race.Title)
             .Select((Race race) => race.Title)
             .ToArray(); ;
-        SaveGame.Screen.Print(ColorEnum.Orange, "[Use up and down to select an option, right to confirm, or left to go back.]", 43, 1);
-        while (!SaveGame.Shutdown)
+        Game.Screen.Print(ColorEnum.Orange, "[Use up and down to select an option, right to confirm, or left to go back.]", 43, 1);
+        while (!Game.Shutdown)
         {
-            SaveGame.MenuDisplay(currentSelection, menuItems);
+            Game.MenuDisplay(currentSelection, menuItems);
             RenderSelection(currentSelection);
-            char c = SaveGame.Inkey();
+            char c = Game.Inkey();
             switch (c)
             {
                 case '8':
@@ -44,7 +44,7 @@ internal class RaceSelectionBirthStage : BirthStage
                 case '4':
                     return GoBack();
                 case 'h':
-                    SaveGame.ShowManual();
+                    Game.ShowManual();
                     break;
             }
         }
@@ -53,50 +53,50 @@ internal class RaceSelectionBirthStage : BirthStage
 
     private bool RenderSelection(int index)
     {
-        Race[] races = SaveGame.SingletonRepository.Races
+        Race[] races = Game.SingletonRepository.Races
             .OrderBy((Race race) => race.Title)
             .ToArray();
         Race race = races[index];
-        SaveGame.Screen.Print(ColorEnum.Purple, "STR:", 36, 21);
-        SaveGame.Screen.Print(ColorEnum.Purple, "INT:", 37, 21);
-        SaveGame.Screen.Print(ColorEnum.Purple, "WIS:", 38, 21);
-        SaveGame.Screen.Print(ColorEnum.Purple, "DEX:", 39, 21);
-        SaveGame.Screen.Print(ColorEnum.Purple, "CON:", 40, 21);
-        SaveGame.Screen.Print(ColorEnum.Purple, "CHA:", 41, 21);
+        Game.Screen.Print(ColorEnum.Purple, "STR:", 36, 21);
+        Game.Screen.Print(ColorEnum.Purple, "INT:", 37, 21);
+        Game.Screen.Print(ColorEnum.Purple, "WIS:", 38, 21);
+        Game.Screen.Print(ColorEnum.Purple, "DEX:", 39, 21);
+        Game.Screen.Print(ColorEnum.Purple, "CON:", 40, 21);
+        Game.Screen.Print(ColorEnum.Purple, "CHA:", 41, 21);
         for (int i = 0; i < 6; i++)
         {
-            int bonus = race.AbilityBonus[i] + SaveGame.BaseCharacterClass.AbilityBonus[i];
-            SaveGame.DisplayStatBonus(26, 36 + i, bonus);
+            int bonus = race.AbilityBonus[i] + Game.BaseCharacterClass.AbilityBonus[i];
+            Game.DisplayStatBonus(26, 36 + i, bonus);
         }
-        SaveGame.Screen.Print(ColorEnum.Purple, "Disarming   :", 36, 53);
-        SaveGame.Screen.Print(ColorEnum.Purple, "Magic Device:", 37, 53);
-        SaveGame.Screen.Print(ColorEnum.Purple, "Saving Throw:", 38, 53);
-        SaveGame.Screen.Print(ColorEnum.Purple, "Stealth     :", 39, 53);
-        SaveGame.Screen.Print(ColorEnum.Purple, "Fighting    :", 40, 53);
-        SaveGame.Screen.Print(ColorEnum.Purple, "Shooting    :", 41, 53);
-        SaveGame.Screen.Print(ColorEnum.Purple, "Experience  :", 36, 31);
-        SaveGame.Screen.Print(ColorEnum.Purple, "Hit Dice    :", 37, 31);
-        SaveGame.Screen.Print(ColorEnum.Purple, "Infravision :", 38, 31);
-        SaveGame.Screen.Print(ColorEnum.Purple, "Searching   :", 39, 31);
-        SaveGame.Screen.Print(ColorEnum.Purple, "Perception  :", 40, 31);
-        SaveGame.DisplayAPlusB(67, 36, SaveGame.BaseCharacterClass.BaseDisarmBonus + race.BaseDisarmBonus, SaveGame.BaseCharacterClass.DisarmBonusPerLevel);
-        SaveGame.DisplayAPlusB(67, 37, SaveGame.BaseCharacterClass.BaseDeviceBonus + race.BaseDeviceBonus, SaveGame.BaseCharacterClass.DeviceBonusPerLevel);
-        SaveGame.DisplayAPlusB(67, 38, SaveGame.BaseCharacterClass.BaseSaveBonus + race.BaseSaveBonus, SaveGame.BaseCharacterClass.SaveBonusPerLevel);
-        SaveGame.DisplayAPlusB(67, 39, (SaveGame.BaseCharacterClass.BaseStealthBonus * 4) + (race.BaseStealthBonus * 4), SaveGame.BaseCharacterClass.StealthBonusPerLevel * 4);
-        SaveGame.DisplayAPlusB(67, 40, SaveGame.BaseCharacterClass.BaseMeleeAttackBonus + race.BaseMeleeAttackBonus, SaveGame.BaseCharacterClass.MeleeAttackBonusPerLevel);
-        SaveGame.DisplayAPlusB(67, 41, SaveGame.BaseCharacterClass.BaseRangedAttackBonus + race.BaseRangedAttackBonus, SaveGame.BaseCharacterClass.RangedAttackBonusPerLevel);
-        SaveGame.Screen.Print(ColorEnum.Black, race.ExperienceFactor + SaveGame.BaseCharacterClass.ExperienceFactor + "%", 36, 45);
-        SaveGame.Screen.Print(ColorEnum.Black, "1d" + (race.HitDieBonus + SaveGame.BaseCharacterClass.HitDieBonus), 37, 45);
+        Game.Screen.Print(ColorEnum.Purple, "Disarming   :", 36, 53);
+        Game.Screen.Print(ColorEnum.Purple, "Magic Device:", 37, 53);
+        Game.Screen.Print(ColorEnum.Purple, "Saving Throw:", 38, 53);
+        Game.Screen.Print(ColorEnum.Purple, "Stealth     :", 39, 53);
+        Game.Screen.Print(ColorEnum.Purple, "Fighting    :", 40, 53);
+        Game.Screen.Print(ColorEnum.Purple, "Shooting    :", 41, 53);
+        Game.Screen.Print(ColorEnum.Purple, "Experience  :", 36, 31);
+        Game.Screen.Print(ColorEnum.Purple, "Hit Dice    :", 37, 31);
+        Game.Screen.Print(ColorEnum.Purple, "Infravision :", 38, 31);
+        Game.Screen.Print(ColorEnum.Purple, "Searching   :", 39, 31);
+        Game.Screen.Print(ColorEnum.Purple, "Perception  :", 40, 31);
+        Game.DisplayAPlusB(67, 36, Game.BaseCharacterClass.BaseDisarmBonus + race.BaseDisarmBonus, Game.BaseCharacterClass.DisarmBonusPerLevel);
+        Game.DisplayAPlusB(67, 37, Game.BaseCharacterClass.BaseDeviceBonus + race.BaseDeviceBonus, Game.BaseCharacterClass.DeviceBonusPerLevel);
+        Game.DisplayAPlusB(67, 38, Game.BaseCharacterClass.BaseSaveBonus + race.BaseSaveBonus, Game.BaseCharacterClass.SaveBonusPerLevel);
+        Game.DisplayAPlusB(67, 39, (Game.BaseCharacterClass.BaseStealthBonus * 4) + (race.BaseStealthBonus * 4), Game.BaseCharacterClass.StealthBonusPerLevel * 4);
+        Game.DisplayAPlusB(67, 40, Game.BaseCharacterClass.BaseMeleeAttackBonus + race.BaseMeleeAttackBonus, Game.BaseCharacterClass.MeleeAttackBonusPerLevel);
+        Game.DisplayAPlusB(67, 41, Game.BaseCharacterClass.BaseRangedAttackBonus + race.BaseRangedAttackBonus, Game.BaseCharacterClass.RangedAttackBonusPerLevel);
+        Game.Screen.Print(ColorEnum.Black, race.ExperienceFactor + Game.BaseCharacterClass.ExperienceFactor + "%", 36, 45);
+        Game.Screen.Print(ColorEnum.Black, "1d" + (race.HitDieBonus + Game.BaseCharacterClass.HitDieBonus), 37, 45);
         if (race.Infravision == 0)
         {
-            SaveGame.Screen.Print(ColorEnum.Black, "nil", 38, 45);
+            Game.Screen.Print(ColorEnum.Black, "nil", 38, 45);
         }
         else
         {
-            SaveGame.Screen.Print(ColorEnum.Green, race.Infravision + "0 feet", 38, 45);
+            Game.Screen.Print(ColorEnum.Green, race.Infravision + "0 feet", 38, 45);
         }
-        SaveGame.Screen.Print(ColorEnum.Black, $"{race.BaseSearchBonus + SaveGame.BaseCharacterClass.BaseSearchBonus:00}%", 39, 45);
-        SaveGame.Screen.Print(ColorEnum.Black, $"{race.BaseSearchFrequency + SaveGame.BaseCharacterClass.BaseSearchFrequency:00}%", 40, 45);
+        Game.Screen.Print(ColorEnum.Black, $"{race.BaseSearchBonus + Game.BaseCharacterClass.BaseSearchBonus:00}%", 39, 45);
+        Game.Screen.Print(ColorEnum.Black, $"{race.BaseSearchFrequency + Game.BaseCharacterClass.BaseSearchFrequency:00}%", 40, 45);
 
         // Retrieve the description for the race and split the description into lines.
         string[] description = race.Description.Split("\n");
@@ -105,57 +105,57 @@ internal class RaceSelectionBirthStage : BirthStage
         int descriptionRow = 32 - (int)Math.Floor((double)description.Length / 2);
         foreach (string descriptionLine in description)
         {
-            SaveGame.Screen.Print(ColorEnum.Purple, descriptionLine, descriptionRow++, 21);
+            Game.Screen.Print(ColorEnum.Purple, descriptionLine, descriptionRow++, 21);
         }
         return true;
     }
     private BirthStage? GoForward(int index)
     {
-        Race[] races = SaveGame.SingletonRepository.Races
+        Race[] races = Game.SingletonRepository.Races
             .OrderBy((Race race) => race.Title)
             .ToArray();
-        SaveGame.Race = races[index];
-        SaveGame.GetFirstLevelMutation = SaveGame.Race.AutomaticallyGainsFirstLevelMutationAtBirth;
+        Game.Race = races[index];
+        Game.GetFirstLevelMutation = Game.Race.AutomaticallyGainsFirstLevelMutationAtBirth;
 
         // Check to see how many realms the player can study.
-        int availablePrimaryRealmCount = SaveGame.BaseCharacterClass.AvailablePrimaryRealms.Length;
-        Realm[] remainingAvailableSecondaryRealms = SaveGame.BaseCharacterClass.RemainingAvailableSecondaryRealms();
+        int availablePrimaryRealmCount = Game.BaseCharacterClass.AvailablePrimaryRealms.Length;
+        Realm[] remainingAvailableSecondaryRealms = Game.BaseCharacterClass.RemainingAvailableSecondaryRealms();
         int remainingAvailableSecondaryRealmCount = remainingAvailableSecondaryRealms.Length;
         if (availablePrimaryRealmCount == 0)
         {
             // The player cannot study any realms.
-            SaveGame.PrimaryRealm = null;
-            SaveGame.SecondaryRealm = null;
-            return SaveGame.SingletonRepository.BirthStages.Get(nameof(GenderSelectionBirthStage));
+            Game.PrimaryRealm = null;
+            Game.SecondaryRealm = null;
+            return Game.SingletonRepository.BirthStages.Get(nameof(GenderSelectionBirthStage));
         }
         else if (availablePrimaryRealmCount == 1)
         {
             // There is only one realm, auto select it.
-            SaveGame.PrimaryRealm = SaveGame.BaseCharacterClass.AvailablePrimaryRealms[0];
+            Game.PrimaryRealm = Game.BaseCharacterClass.AvailablePrimaryRealms[0];
 
             // Check the secondary realm selection.
             if (remainingAvailableSecondaryRealmCount == 0)
             {
-                SaveGame.SecondaryRealm = null;
-                return SaveGame.SingletonRepository.BirthStages.Get(nameof(GenderSelectionBirthStage));
+                Game.SecondaryRealm = null;
+                return Game.SingletonRepository.BirthStages.Get(nameof(GenderSelectionBirthStage));
             }
             else if (remainingAvailableSecondaryRealmCount == 1)
             {
                 // There is only one realm, auto select it.
-                SaveGame.SecondaryRealm = remainingAvailableSecondaryRealms[0];
-                return SaveGame.SingletonRepository.BirthStages.Get(nameof(GenderSelectionBirthStage));
+                Game.SecondaryRealm = remainingAvailableSecondaryRealms[0];
+                return Game.SingletonRepository.BirthStages.Get(nameof(GenderSelectionBirthStage));
             }
             else
             {
-                return SaveGame.SingletonRepository.BirthStages.Get(nameof(Realm2SelectionBirthStage));
+                return Game.SingletonRepository.BirthStages.Get(nameof(Realm2SelectionBirthStage));
             }
         }
 
-        return SaveGame.SingletonRepository.BirthStages.Get(nameof(Realm1SelectionBirthStage));
+        return Game.SingletonRepository.BirthStages.Get(nameof(Realm1SelectionBirthStage));
     }
 
     private BirthStage? GoBack()
     {
-        return SaveGame.SingletonRepository.BirthStages.Get(nameof(ClassSelectionBirthStage));
+        return Game.SingletonRepository.BirthStages.Get(nameof(ClassSelectionBirthStage));
     }
 }

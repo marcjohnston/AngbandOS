@@ -10,11 +10,11 @@ namespace AngbandOS.Core.Projection;
 [Serializable]
 internal class OldHealProjectile : Projectile
 {
-    private OldHealProjectile(SaveGame saveGame) : base(saveGame) { }
+    private OldHealProjectile(Game game) : base(game) { }
 
-    protected override ProjectileGraphic? BoltProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get(nameof(WhiteBulletProjectileGraphic));
+    protected override ProjectileGraphic? BoltProjectileGraphic => Game.SingletonRepository.ProjectileGraphics.Get(nameof(WhiteBulletProjectileGraphic));
 
-    protected override Animation EffectAnimation => SaveGame.SingletonRepository.Animations.Get(nameof(WhiteSparkleAnimation));
+    protected override Animation EffectAnimation => Game.SingletonRepository.Animations.Get(nameof(WhiteSparkleAnimation));
 
     protected override bool ProjectileAngersMonster(Monster mPtr)
     {
@@ -23,7 +23,7 @@ internal class OldHealProjectile : Projectile
 
     protected override bool AffectMonster(int who, Monster mPtr, int dam, int r)
     {
-        GridTile cPtr = SaveGame.Grid[mPtr.MapY][mPtr.MapX];
+        GridTile cPtr = Game.Grid[mPtr.MapY][mPtr.MapX];
         MonsterRace rPtr = mPtr.Race;
         bool seen = mPtr.IsVisible;
         bool obvious = false;
@@ -37,9 +37,9 @@ internal class OldHealProjectile : Projectile
         {
             mPtr.Health = mPtr.MaxHealth;
         }
-        if (SaveGame.TrackedMonsterIndex == cPtr.MonsterIndex)
+        if (Game.TrackedMonsterIndex == cPtr.MonsterIndex)
         {
-            SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawMonsterHealthFlaggedAction)).Set();
+            Game.SingletonRepository.FlaggedActions.Get(nameof(RedrawMonsterHealthFlaggedAction)).Set();
         }
         string? note = " looks healthier.";
         dam = 0;
@@ -49,7 +49,7 @@ internal class OldHealProjectile : Projectile
 
     protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
     {
-        bool blind = SaveGame.BlindnessTimer.Value != 0;
+        bool blind = Game.BlindnessTimer.Value != 0;
         if (dam > 1600)
         {
             dam = 1600;
@@ -57,9 +57,9 @@ internal class OldHealProjectile : Projectile
         dam = (dam + r) / (r + 1);
         if (blind)
         {
-            SaveGame.MsgPrint("You are hit by something invigorating!");
+            Game.MsgPrint("You are hit by something invigorating!");
         }
-        SaveGame.RestoreHealth(dam);
+        Game.RestoreHealth(dam);
         return true;
     }
 }

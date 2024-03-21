@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Spells.Nature;
 [Serializable]
 internal class NatureSpellProtectFromCorrosion : Spell
 {
-    private NatureSpellProtectFromCorrosion(SaveGame saveGame) : base(saveGame) { }
+    private NatureSpellProtectFromCorrosion(Game game) : base(game) { }
     protected override string? CastScriptName => nameof(RustProofScript);
 
     public override string Name => "Protection from Corrosion";

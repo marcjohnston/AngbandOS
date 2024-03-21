@@ -10,26 +10,26 @@ namespace AngbandOS.Core.MonsterSpells;
 [Serializable]
 internal class ForgetMonsterSpell : MonsterSpell
 {
-    private ForgetMonsterSpell(SaveGame saveGame) : base(saveGame) { }
+    private ForgetMonsterSpell(Game game) : base(game) { }
     public override bool Annoys => true;
 
     public override string? VsPlayerBlindMessage => $"Someone tries to blank your mind.";
     public override string? VsPlayerActionMessage(Monster monster) => $"{monster.Name} tries to blank your mind.";
-    public override void ExecuteOnPlayer(SaveGame saveGame, Monster monster)
+    public override void ExecuteOnPlayer(Game game, Monster monster)
     {
         string monsterName = monster.Name;
 
-        if (SaveGame.RandomLessThan(100) < saveGame.SkillSavingThrow)
+        if (Game.RandomLessThan(100) < game.SkillSavingThrow)
         {
-            saveGame.MsgPrint("You resist the effects!");
+            game.MsgPrint("You resist the effects!");
         }
-        else if (saveGame.LoseAllInfo())
+        else if (game.LoseAllInfo())
         {
-            saveGame.MsgPrint("Your memories fade away.");
+            game.MsgPrint("Your memories fade away.");
         }
     }
 
-    public override void ExecuteOnMonster(SaveGame saveGame, Monster monster, Monster target)
+    public override void ExecuteOnMonster(Game game, Monster monster, Monster target)
     {
     }
 }

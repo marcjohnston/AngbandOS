@@ -10,13 +10,13 @@ namespace AngbandOS.Core.Timers;
 [Serializable]
 internal class LightningResistanceTimer : Timer
 {
-    private LightningResistanceTimer(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private LightningResistanceTimer(Game game) : base(game) { } // This object is a singleton.
     protected override void EffectStopped()
     {
-        SaveGame.MsgPrint("You feel less resistant to electricity.");
+        Game.MsgPrint("You feel less resistant to electricity.");
     }
     protected override void EffectIncreased(int newRate, int currentRate)
     {
-        SaveGame.MsgPrint("You feel resistant to electricity!");
+        Game.MsgPrint("You feel resistant to electricity!");
     }
 }

@@ -13,14 +13,14 @@ namespace AngbandOS.Core.Activations;
 [Serializable]
 internal class InvulnActivation : Activation
 {
-    private InvulnActivation(SaveGame saveGame) : base(saveGame) { }
+    private InvulnActivation(Game game) : base(game) { }
     public override int RandomChance => 5;
 
     public override string? PreActivationMessage => "";
 
     protected override bool OnActivate(Item item)
     {
-        SaveGame.InvulnerabilityTimer.AddTimer(SaveGame.DieRoll(8) + 8);
+        Game.InvulnerabilityTimer.AddTimer(Game.DieRoll(8) + 8);
         return true;
     }
 

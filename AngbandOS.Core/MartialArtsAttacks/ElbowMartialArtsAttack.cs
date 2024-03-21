@@ -16,5 +16,5 @@ internal class ElbowMartialArtsAttack : MartialArtsAttack
     public override int Ds => 8;
     public override int Effect => 0;
     public override int MinLevel => 7;
-    private ElbowMartialArtsAttack(SaveGame saveGame) : base(saveGame) { }
+    private ElbowMartialArtsAttack(Game game) : base(game) { }
 }

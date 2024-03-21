@@ -10,11 +10,11 @@ namespace AngbandOS.Core.Rewards;
 [Serializable]
 internal class DreadCurseReward : Reward
 {
-    private DreadCurseReward(SaveGame saveGame) : base(saveGame) { }
+    private DreadCurseReward(Game game) : base(game) { }
     public override void GetReward(Patron patron)
     {
-        SaveGame.MsgPrint($"The voice of {patron.ShortName} thunders:");
-        SaveGame.MsgPrint("'Thou art growing arrogant, mortal.'");
-        SaveGame.ActivateDreadCurse();
+        Game.MsgPrint($"The voice of {patron.ShortName} thunders:");
+        Game.MsgPrint("'Thou art growing arrogant, mortal.'");
+        Game.ActivateDreadCurse();
     }
 }

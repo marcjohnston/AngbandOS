@@ -10,9 +10,9 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class MonsterConfusionScrollItemFactory : ScrollItemFactory
 {
-    private MonsterConfusionScrollItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private MonsterConfusionScrollItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(QuestionMarkSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(QuestionMarkSymbol));
     public override string Name => "Monster Confusion";
 
     public override int[] Chance => new int[] { 1, 0, 0, 0 };
@@ -24,12 +24,12 @@ internal class MonsterConfusionScrollItemFactory : ScrollItemFactory
 
     public override void Read(ReadScrollEvent eventArgs)
     {
-        if (!SaveGame.HasConfusingTouch)
+        if (!Game.HasConfusingTouch)
         {
-            SaveGame.MsgPrint("Your hands begin to glow.");
-            SaveGame.HasConfusingTouch = true;
+            Game.MsgPrint("Your hands begin to glow.");
+            Game.HasConfusingTouch = true;
             eventArgs.Identified = true;
         }
     }
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

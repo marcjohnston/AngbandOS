@@ -13,6 +13,6 @@ namespace AngbandOS.Core.ItemFilters;
 [Serializable]
 internal class ArmorItemFilter : AllItemsItemFilter
 {
-    private ArmorItemFilter(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private ArmorItemFilter(Game game) : base(game) { } // This object is a singleton.
     public override bool? IsArmor => true;
 }

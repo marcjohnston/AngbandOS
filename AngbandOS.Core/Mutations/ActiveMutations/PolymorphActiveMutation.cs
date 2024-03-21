@@ -10,12 +10,12 @@ namespace AngbandOS.Core.Mutations.ActiveMutations;
 [Serializable]
 internal class PolymorphActiveMutation : Mutation
 {
-    private PolymorphActiveMutation(SaveGame saveGame) : base(saveGame) { }
+    private PolymorphActiveMutation(Game game) : base(game) { }
     public override void Activate()
     {
-        if (SaveGame.CheckIfRacialPowerWorks(18, 20, Ability.Constitution, 18))
+        if (Game.CheckIfRacialPowerWorks(18, 20, Ability.Constitution, 18))
         {
-            SaveGame.RunScript(nameof(PolymorphSelfScript));
+            Game.RunScript(nameof(PolymorphSelfScript));
         }
     }
 

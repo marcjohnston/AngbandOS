@@ -10,10 +10,10 @@ namespace AngbandOS.Core.FlaggedActions;
 [Serializable]
 internal abstract class FlaggedAction : IGetKey
 {
-    protected readonly SaveGame SaveGame;
-    protected FlaggedAction(SaveGame saveGame)
+    protected readonly Game Game;
+    protected FlaggedAction(Game game)
     {
-        SaveGame = saveGame;
+        Game = game;
     }
 
     public virtual string Key => GetType().Name;

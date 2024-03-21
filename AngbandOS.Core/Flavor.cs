@@ -13,10 +13,10 @@ namespace AngbandOS.Core;
 [Serializable]
 internal abstract class Flavor
 {
-    protected SaveGame SaveGame;
-    protected Flavor(SaveGame saveGame)
+    protected Game Game;
+    protected Flavor(Game game)
     {
-        SaveGame = saveGame;
+        Game = game;
     }
 
     /// <summary>

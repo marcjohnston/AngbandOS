@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class EditStatsScript : Script, IScript
 {
-    private EditStatsScript(SaveGame saveGame) : base(saveGame) { }
+    private EditStatsScript(Game game) : base(game) { }
 
     /// <summary>
     /// Allows the wizard to edit all of the player stats.
@@ -23,7 +23,7 @@ internal class EditStatsScript : Script, IScript
         for (int i = 0; i < 6; i++)
         {
             string ppp = $"{Constants.StatNames[i]} (3-118): ";
-            if (!SaveGame.GetString(ppp, out tmpVal, $"{SaveGame.AbilityScores[i].InnateMax}", 3))
+            if (!Game.GetString(ppp, out tmpVal, $"{Game.AbilityScores[i].InnateMax}", 3))
             {
                 return;
             }
@@ -39,10 +39,10 @@ internal class EditStatsScript : Script, IScript
             {
                 tmpInt = 3;
             }
-            SaveGame.AbilityScores[i].Innate = tmpInt;
-            SaveGame.AbilityScores[i].InnateMax = tmpInt;
+            Game.AbilityScores[i].Innate = tmpInt;
+            Game.AbilityScores[i].InnateMax = tmpInt;
         }
-        if (!SaveGame.GetString("Gold: ", out tmpVal, $"{SaveGame.Gold.Value}", 9))
+        if (!Game.GetString("Gold: ", out tmpVal, $"{Game.Gold.Value}", 9))
         {
             return;
         }
@@ -54,9 +54,9 @@ internal class EditStatsScript : Script, IScript
         {
             tmpInt = 0;
         }
-        SaveGame.Gold.Value = tmpInt;
+        Game.Gold.Value = tmpInt;
 
-        if (!SaveGame.GetString("Mana: ", out tmpVal, $"{SaveGame.Mana.Value}", 9))
+        if (!Game.GetString("Mana: ", out tmpVal, $"{Game.Mana.Value}", 9))
         {
             return;
         }
@@ -68,9 +68,9 @@ internal class EditStatsScript : Script, IScript
         {
             tmpInt = 0;
         }
-        SaveGame.Mana.Value = tmpInt;
+        Game.Mana.Value = tmpInt;
 
-        if (!SaveGame.GetString("Experience: ", out tmpVal, $"{SaveGame.MaxExperienceGained}", 9))
+        if (!Game.GetString("Experience: ", out tmpVal, $"{Game.MaxExperienceGained}", 9))
         {
             return;
         }
@@ -82,9 +82,9 @@ internal class EditStatsScript : Script, IScript
         {
             tmpInt = 0;
         }
-        SaveGame.MaxExperienceGained = tmpInt;
+        Game.MaxExperienceGained = tmpInt;
 
-        SaveGame.CheckExperience();
-        SaveGame.RunScript(nameof(RedrawScript));
+        Game.CheckExperience();
+        Game.RunScript(nameof(RedrawScript));
     }
 }

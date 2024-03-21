@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class CureLightWounds2d8Script : Script, IScript
 {
-    private CureLightWounds2d8Script(SaveGame saveGame) : base(saveGame) { }
+    private CureLightWounds2d8Script(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script.  Does not modify any of the store flags.
@@ -18,8 +18,8 @@ internal class CureLightWounds2d8Script : Script, IScript
     /// <returns></returns>
     public void ExecuteStoreScript(StoreCommandEvent storeCommandEvent)
     {
-        SaveGame.RestoreHealth(SaveGame.DiceRoll(2, 8));
-        SaveGame.BleedingTimer.AddTimer(-10);
+        Game.RestoreHealth(Game.DiceRoll(2, 8));
+        Game.BleedingTimer.AddTimer(-10);
     }
 
     /// <summary>

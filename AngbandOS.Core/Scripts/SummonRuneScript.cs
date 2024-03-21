@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class SummonRuneScript : Script, IScript
 {
-    private SummonRuneScript(SaveGame saveGame) : base(saveGame) { }
+    private SummonRuneScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script.
@@ -18,24 +18,24 @@ internal class SummonRuneScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        GridTile tile = SaveGame.Grid[SaveGame.MapY][SaveGame.MapX];
-        SaveGame.MsgPrint("There is a flash of shimmering light!");
+        GridTile tile = Game.Grid[Game.MapY][Game.MapX];
+        Game.MsgPrint("There is a flash of shimmering light!");
         // Trap disappears when triggered
         tile.TileFlags.Clear(GridTile.PlayerMemorized);
-        SaveGame.RevertTileToBackground(SaveGame.MapY, SaveGame.MapX);
+        Game.RevertTileToBackground(Game.MapY, Game.MapX);
         // Summon 1d3+2 monsters
-        int num = 2 + SaveGame.DieRoll(3);
+        int num = 2 + Game.DieRoll(3);
         for (int i = 0; i < num; i++)
         {
-            SaveGame.SummonSpecific(SaveGame.MapY, SaveGame.MapX, SaveGame.Difficulty, null);
+            Game.SummonSpecific(Game.MapY, Game.MapX, Game.Difficulty, null);
         }
         // Have a chance of also cursing the player
-        if (SaveGame.Difficulty > SaveGame.DieRoll(100))
+        if (Game.Difficulty > Game.DieRoll(100))
         {
             do
             {
-                SaveGame.ActivateDreadCurse();
-            } while (SaveGame.DieRoll(6) == 1);
+                Game.ActivateDreadCurse();
+            } while (Game.DieRoll(6) == 1);
         }
     }
 }

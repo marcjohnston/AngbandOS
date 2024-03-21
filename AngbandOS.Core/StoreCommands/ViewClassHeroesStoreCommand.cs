@@ -10,7 +10,7 @@ namespace AngbandOS.Core.StoreCommands;
 [Serializable]
 internal class ViewClassHeroesStoreCommand : StoreCommand
 {
-    private ViewClassHeroesStoreCommand(SaveGame saveGame) : base(saveGame) { }
+    private ViewClassHeroesStoreCommand(Game game) : base(game) { }
     public override char KeyChar => 'c';
 
     public override string Description => "view Class heroes";

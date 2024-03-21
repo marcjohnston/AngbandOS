@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Repositories;
 [Serializable]
 internal class ShopkeeperWorthlessCommentsRepository : StringListRepository
 {
-    public ShopkeeperWorthlessCommentsRepository(SaveGame saveGame) : base(saveGame) { }
+    public ShopkeeperWorthlessCommentsRepository(Game game) : base(game) { }
 
     /// <summary>
     /// Returns ShopkeeperWorthlessComments as the name of this string list repository.
@@ -19,7 +19,7 @@ internal class ShopkeeperWorthlessCommentsRepository : StringListRepository
 
     public override void Load()
     {
-        if (SaveGame.Configuration.ShopkeeperWorthlessComments == null)
+        if (Game.Configuration.ShopkeeperWorthlessComments == null)
         {
             Add("Arrgghh!",
                 "You bastard!",
@@ -29,7 +29,7 @@ internal class ShopkeeperWorthlessCommentsRepository : StringListRepository
         }
         else
         {
-            Add(SaveGame.Configuration.ShopkeeperWorthlessComments);
+            Add(Game.Configuration.ShopkeeperWorthlessComments);
         }
     }
 }

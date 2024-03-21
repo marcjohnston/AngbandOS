@@ -10,36 +10,36 @@ namespace AngbandOS.Core.Rewards;
 [Serializable]
 internal class PissOffReward : Reward
 {
-    private PissOffReward(SaveGame saveGame) : base(saveGame) { }
+    private PissOffReward(Game game) : base(game) { }
     public override void GetReward(Patron patron)
     {
-        SaveGame.MsgPrint($"The voice of {patron.ShortName} whispers:");
-        SaveGame.MsgPrint("'Now thou shalt pay for annoying me.'");
-        switch (SaveGame.DieRoll(4))
+        Game.MsgPrint($"The voice of {patron.ShortName} whispers:");
+        Game.MsgPrint("'Now thou shalt pay for annoying me.'");
+        switch (Game.DieRoll(4))
         {
             case 1:
-                SaveGame.ActivateDreadCurse();
+                Game.ActivateDreadCurse();
                 break;
 
             case 2:
-                SaveGame.ActivateHiSummon();
+                Game.ActivateHiSummon();
                 break;
 
             case 3:
-                if (SaveGame.DieRoll(2) == 1)
+                if (Game.DieRoll(2) == 1)
                 {
-                    SaveGame.CurseWeapon();
+                    Game.CurseWeapon();
                 }
                 else
                 {
-                    SaveGame.CurseArmor();
+                    Game.CurseArmor();
                 }
                 break;
 
             default:
                 for (int dummy = 0; dummy < 6; dummy++)
                 {
-                    SaveGame.DecreaseAbilityScore(dummy, 10 + SaveGame.DieRoll(15), true);
+                    Game.DecreaseAbilityScore(dummy, 10 + Game.DieRoll(15), true);
                 }
                 break;
         }

@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class HireRoomScript : Script, IStoreScript
 {
-    private HireRoomScript(SaveGame saveGame) : base(saveGame) { }
+    private HireRoomScript(Game game) : base(game) { }
 
     /// <summary>
     /// Offers and sells a room.  When sold the player wakes up the next day fully rested.  Does not modify any of the store flags.
@@ -19,26 +19,26 @@ internal class HireRoomScript : Script, IStoreScript
     public void ExecuteStoreScript(StoreCommandEvent storeCommandEvent)
     {
         int price;
-        if (SaveGame.PoisonTimer.Value > 0 || SaveGame.BleedingTimer.Value > 0)
+        if (Game.PoisonTimer.Value > 0 || Game.BleedingTimer.Value > 0)
         {
-            SaveGame.MsgPrint("You need a healer, not a room!");
-            SaveGame.MsgPrint("I'm sorry, but  I don't want anyone dying in here.");
+            Game.MsgPrint("You need a healer, not a room!");
+            Game.MsgPrint("I'm sorry, but  I don't want anyone dying in here.");
         }
         else
         {
-            if (!SaveGame.ServiceHaggle(10, out price))
+            if (!Game.ServiceHaggle(10, out price))
             {
-                if (price >= SaveGame.Gold.Value)
+                if (price >= Game.Gold.Value)
                 {
-                    SaveGame.MsgPrint("You do not have the gold!");
+                    Game.MsgPrint("You do not have the gold!");
                 }
                 else
                 {
-                    SaveGame.Gold.Value -= price;
-                    SaveGame.SayComment_1();
-                    SaveGame.PlaySound(SoundEffectEnum.StoreTransaction);
-                    SaveGame.StorePrtGold();
-                    SaveGame.RunScript(nameof(RestInRoomScript));
+                    Game.Gold.Value -= price;
+                    Game.SayComment_1();
+                    Game.PlaySound(SoundEffectEnum.StoreTransaction);
+                    Game.StorePrtGold();
+                    Game.RunScript(nameof(RestInRoomScript));
                 }
             }
         }

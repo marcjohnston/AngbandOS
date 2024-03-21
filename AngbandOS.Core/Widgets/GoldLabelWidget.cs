@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Widgets;
 [Serializable]
 internal class GoldLabelWidget : Widget
 {
-    private GoldLabelWidget(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private GoldLabelWidget(Game game) : base(game) { } // This object is a singleton.
     public override int X => 0;
     public override int Y => 11;
     public override string Text => "GP";

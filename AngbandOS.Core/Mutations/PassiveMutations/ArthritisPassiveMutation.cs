@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Mutations.PassiveMutations;
 [Serializable]
 internal class ArthritisPassiveMutation : Mutation
 {
-    private ArthritisPassiveMutation(SaveGame saveGame) : base(saveGame) { }
+    private ArthritisPassiveMutation(Game game) : base(game) { }
     public override int Frequency => 3;
     public override string GainMessage => "Your joints suddenly hurt.";
     public override string HaveMessage => "Your joints ache constantly (-3 DEX).";
@@ -19,11 +19,11 @@ internal class ArthritisPassiveMutation : Mutation
 
     public override void OnGain()
     {
-        SaveGame.DexterityBonus -= 3;
+        Game.DexterityBonus -= 3;
     }
 
     public override void OnLose()
     {
-        SaveGame.DexterityBonus += 3;
+        Game.DexterityBonus += 3;
     }
 }

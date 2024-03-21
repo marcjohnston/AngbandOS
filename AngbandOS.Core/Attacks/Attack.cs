@@ -14,10 +14,10 @@ namespace AngbandOS.Core.AttackTypes;
 [Serializable]
 internal abstract class Attack : IGetKey
 {
-    protected readonly SaveGame SaveGame;
-    protected Attack(SaveGame saveGame)
+    protected readonly Game Game;
+    protected Attack(Game game)
     {
-        SaveGame = saveGame;
+        Game = game;
     }
 
     public virtual string Key => GetType().Name;
@@ -54,7 +54,7 @@ internal abstract class Attack : IGetKey
     /// <summary>
     /// Returns the action message to be displayed, when the attack targets the player.
     /// </summary>
-    /// <param name="saveGame"></param>
+    /// <param name="game"></param>
     /// <returns></returns>
     public abstract string PlayerAction { get; }
 

@@ -10,5 +10,5 @@ namespace AngbandOS.Core.Properties;
 [Serializable]
 internal class ManaIntProperty : IntProperty
 {
-    protected ManaIntProperty(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    protected ManaIntProperty(Game game) : base(game) { } // This object is a singleton.
 }

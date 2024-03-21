@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Mutations.RandomMutations;
 [Serializable]
 internal class BersRageRandomMutation : Mutation
 {
-    private BersRageRandomMutation(SaveGame saveGame) : base(saveGame) { }
+    private BersRageRandomMutation(Game game) : base(game) { }
     public override int Frequency => 1;
     public override string GainMessage => "You become subject to fits of berserk rage!";
     public override string HaveMessage => "You are subject to berserker fits.";
@@ -18,13 +18,13 @@ internal class BersRageRandomMutation : Mutation
 
     public override void OnProcessWorld()
     {
-        if (base.SaveGame.DieRoll(3000) != 1)
+        if (base.Game.DieRoll(3000) != 1)
         {
             return;
         }
-        SaveGame.Disturb(false);
-        SaveGame.MsgPrint("RAAAAGHH!");
-        SaveGame.MsgPrint("You feel a fit of rage coming over you!");
-        SaveGame.SuperheroismTimer.AddTimer(10 + base.SaveGame.DieRoll(SaveGame.ExperienceLevel.Value));
+        Game.Disturb(false);
+        Game.MsgPrint("RAAAAGHH!");
+        Game.MsgPrint("You feel a fit of rage coming over you!");
+        Game.SuperheroismTimer.AddTimer(10 + base.Game.DieRoll(Game.ExperienceLevel.Value));
     }
 }

@@ -10,7 +10,7 @@ namespace AngbandOS.Core.StoreFactories;
 [Serializable]
 internal class BlackMarketStoreFactory : StoreFactory
 {
-    private BlackMarketStoreFactory(SaveGame saveGame) : base(saveGame) { }
+    private BlackMarketStoreFactory(Game game) : base(game) { }
 
     public override int MaxInventory => 78; // Should be 18
     public override int MinInventory => 36; // Should be 6

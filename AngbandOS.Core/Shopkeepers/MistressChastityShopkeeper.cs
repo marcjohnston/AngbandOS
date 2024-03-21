@@ -8,7 +8,7 @@
 [Serializable]
 internal class MistressChastityShopkeeper : Shopkeeper
 {
-    private MistressChastityShopkeeper(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private MistressChastityShopkeeper(Game game) : base(game) { } // This object is a singleton.
     public override string Name => "Mistress Chastity";
     public override int MaxCost =>  15000;
     public override int MinInflate =>  110;

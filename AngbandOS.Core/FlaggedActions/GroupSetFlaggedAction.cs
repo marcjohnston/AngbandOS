@@ -11,7 +11,7 @@ namespace AngbandOS.Core.FlaggedActions;
 internal class GroupSetFlaggedAction : FlaggedAction
 {
     protected FlaggedAction[] RedrawActions;
-    protected GroupSetFlaggedAction(SaveGame saveGame) : base(saveGame) { }
+    protected GroupSetFlaggedAction(Game game) : base(game) { }
     public override bool IsSet => RedrawActions.Any(_redrawAction => _redrawAction.IsSet);
     public override void Set() => Array.ForEach<FlaggedAction>(RedrawActions, _redrawAction => _redrawAction.Set());
     public override void Clear() => Array.ForEach<FlaggedAction>(RedrawActions, _redrawAction => _redrawAction.Clear());

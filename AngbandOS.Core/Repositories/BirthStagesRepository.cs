@@ -10,5 +10,5 @@ namespace AngbandOS.Core.Repositories;
 [Serializable]
 internal class BirthStagesRepository : DictionaryRepository<BirthStage>
 {
-    public BirthStagesRepository(SaveGame saveGame) : base(saveGame) { }
+    public BirthStagesRepository(Game game) : base(game) { }
 }

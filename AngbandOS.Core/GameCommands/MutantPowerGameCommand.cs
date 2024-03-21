@@ -13,7 +13,7 @@ namespace AngbandOS.Core.Commands;
 [Serializable]
 internal class MutantPowerGameCommand : GameCommand
 {
-    private MutantPowerGameCommand(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private MutantPowerGameCommand(Game game) : base(game) { } // This object is a singleton.
 
     public override char KeyChar => 'p';
 

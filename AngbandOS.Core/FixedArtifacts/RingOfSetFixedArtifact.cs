@@ -10,28 +10,28 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class RingOfSetFixedArtifact : FixedArtifact, IFixedArtifactActivatible
 {
-    private RingOfSetFixedArtifact(SaveGame saveGame) : base(saveGame) { }
+    private RingOfSetFixedArtifact(Game game) : base(game) { }
 
     protected override string BaseItemFactoryName => nameof(PowerRingItemFactory);
 
     // Ring of Set has a random effect
     public void ActivateItem(Item item)
     {
-        SaveGame.MsgPrint("The ring glows intensely black...");
-        if (!SaveGame.GetDirectionWithAim(out int dir))
+        Game.MsgPrint("The ring glows intensely black...");
+        if (!Game.GetDirectionWithAim(out int dir))
         {
             return;
         }
         RingOfSetPower(dir);
-        item.RechargeTimeLeft = base.SaveGame.RandomLessThan(450) + 450;
+        item.RechargeTimeLeft = base.Game.RandomLessThan(450) + 450;
     }
     public string DescribeActivationEffect => "bizarre things every 450+d450 turns";
     public override void ApplyResistances(Item item)
     {
-        item.RandomPower = SaveGame.SingletonRepository.Powers.ToWeightedRandom(_power => _power.IsAbility == true).Choose();
+        item.RandomPower = Game.SingletonRepository.Powers.ToWeightedRandom(_power => _power.IsAbility == true).Choose();
 
         IArtifactBias artifactBias = null;
-        item.ApplyRandomResistance(ref artifactBias, SaveGame.DieRoll(22) + 16);
+        item.ApplyRandomResistance(ref artifactBias, Game.DieRoll(22) + 16);
     }
 
     public override ColorEnum Color => ColorEnum.Yellow;
@@ -88,30 +88,30 @@ internal class RingOfSetFixedArtifact : FixedArtifact, IFixedArtifactActivatible
     /// <param name="direction"> The direction the player is aiming </param>
     private void RingOfSetPower(int direction)
     {
-        switch (SaveGame.DieRoll(10))
+        switch (Game.DieRoll(10))
         {
             case 1:
             case 2:
                 {
                     // Decrease all the players ability scores, bypassing sustain and divine protection
-                    SaveGame.MsgPrint("You are surrounded by a malignant aura.");
-                    SaveGame.DecreaseAbilityScore(Ability.Strength, 50, true);
-                    SaveGame.DecreaseAbilityScore(Ability.Intelligence, 50, true);
-                    SaveGame.DecreaseAbilityScore(Ability.Wisdom, 50, true);
-                    SaveGame.DecreaseAbilityScore(Ability.Dexterity, 50, true);
-                    SaveGame.DecreaseAbilityScore(Ability.Constitution, 50, true);
-                    SaveGame.DecreaseAbilityScore(Ability.Charisma, 50, true);
+                    Game.MsgPrint("You are surrounded by a malignant aura.");
+                    Game.DecreaseAbilityScore(Ability.Strength, 50, true);
+                    Game.DecreaseAbilityScore(Ability.Intelligence, 50, true);
+                    Game.DecreaseAbilityScore(Ability.Wisdom, 50, true);
+                    Game.DecreaseAbilityScore(Ability.Dexterity, 50, true);
+                    Game.DecreaseAbilityScore(Ability.Constitution, 50, true);
+                    Game.DecreaseAbilityScore(Ability.Charisma, 50, true);
                     // Reduce both experience and maximum experience
-                    SaveGame.ExperiencePoints.Value -= SaveGame.ExperiencePoints.Value / 4;
-                    SaveGame.MaxExperienceGained -= SaveGame.ExperiencePoints.Value / 4;
-                    SaveGame.CheckExperience();
+                    Game.ExperiencePoints.Value -= Game.ExperiencePoints.Value / 4;
+                    Game.MaxExperienceGained -= Game.ExperiencePoints.Value / 4;
+                    Game.CheckExperience();
                     break;
                 }
             case 3:
                 {
                     // Dispel monsters
-                    SaveGame.MsgPrint("You are surrounded by a powerful aura.");
-                    SaveGame.DispelMonsters(1000);
+                    Game.MsgPrint("You are surrounded by a powerful aura.");
+                    Game.DispelMonsters(1000);
                     break;
                 }
             case 4:
@@ -119,7 +119,7 @@ internal class RingOfSetFixedArtifact : FixedArtifact, IFixedArtifactActivatible
             case 6:
                 {
                     // Do a 300 damage mana ball
-                    SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(ManaProjectile)), direction, 300, 3);
+                    Game.FireBall(Game.SingletonRepository.Projectiles.Get(nameof(ManaProjectile)), direction, 300, 3);
                     break;
                 }
             case 7:
@@ -128,7 +128,7 @@ internal class RingOfSetFixedArtifact : FixedArtifact, IFixedArtifactActivatible
             case 10:
                 {
                     // Do a 250 damage mana bolt
-                    SaveGame.FireBolt(SaveGame.SingletonRepository.Projectiles.Get(nameof(ManaProjectile)), direction, 250);
+                    Game.FireBolt(Game.SingletonRepository.Projectiles.Get(nameof(ManaProjectile)), direction, 250);
                     break;
                 }
         }

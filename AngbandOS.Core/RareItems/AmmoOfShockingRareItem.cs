@@ -10,8 +10,8 @@ namespace AngbandOS.Core.RareItems;
 [Serializable]
 internal class AmmoOfShockingRareItem : RareItem
 {
-    private AmmoOfShockingRareItem(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(OpenBracketSymbol));
+    private AmmoOfShockingRareItem(Game game) : base(game) { } // This object is a singleton.
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(OpenBracketSymbol));
     public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "Ammo of Shocking";
     public override bool BrandElec => true;

@@ -10,9 +10,9 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class BlackPrayersDeathBookItemFactory : DeathBookItemFactory
 {
-    private BlackPrayersDeathBookItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private BlackPrayersDeathBookItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(QuestionMarkSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(QuestionMarkSymbol));
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "[Black Prayers]";
 
@@ -25,7 +25,7 @@ internal class BlackPrayersDeathBookItemFactory : DeathBookItemFactory
     public override int[] Locale => new int[] { 10, 0, 0, 0 };
     public override int Weight => 30;
     public override bool KindIsGood => false;
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 
     protected override string[] SpellNames => new string[]
     {

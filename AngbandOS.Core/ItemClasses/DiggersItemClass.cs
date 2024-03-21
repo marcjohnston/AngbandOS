@@ -3,6 +3,6 @@ namespace AngbandOS.Core.ItemClasses;
 [Serializable]
 internal class DiggersItemClass : ItemClass
 {
-    private DiggersItemClass(SaveGame saveGame) : base(saveGame) { }
+    private DiggersItemClass(Game game) : base(game) { }
     public override string Name => "Digger";
 }

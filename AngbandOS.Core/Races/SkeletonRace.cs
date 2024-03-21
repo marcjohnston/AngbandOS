@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Races;
 [Serializable]
 internal class SkeletonRace : Race
 {
-    private SkeletonRace(SaveGame saveGame) : base(saveGame) { }
+    private SkeletonRace(Game game) : base(game) { }
     public override string Title => "Skeleton";
     public override int[] AbilityBonus => new int[] { 0, -2, -2, 0, 1, -4 };
     public override int BaseDisarmBonus => -5;
@@ -65,13 +65,13 @@ internal class SkeletonRace : Race
     }
     public override void CalcBonuses()
     {
-        SaveGame.HasShardResistance = true;
-        SaveGame.HasHoldLife = true;
-        SaveGame.HasSeeInvisibility = true;
-        SaveGame.HasPoisonResistance = true;
-        if (SaveGame.ExperienceLevel.Value > 9)
+        Game.HasShardResistance = true;
+        Game.HasHoldLife = true;
+        Game.HasSeeInvisibility = true;
+        Game.HasPoisonResistance = true;
+        if (Game.ExperienceLevel.Value > 9)
         {
-            SaveGame.HasColdResistance = true;
+            Game.HasColdResistance = true;
         }
     }
     public override bool RestsTillDuskInsteadOfDawn => true;
@@ -84,33 +84,33 @@ internal class SkeletonRace : Race
         if (foodItemFactory.VanishesWhenEatenBySkeletons)
         {
             // These magical food types vanish.
-            SaveGame.MsgPrint("The food falls through your jaws and vanishes!");
+            Game.MsgPrint("The food falls through your jaws and vanishes!");
         }
         else
         {
             // Spawn a new food item on the floor to make up for the one that will be destroyed
             Item floorItem = item.Factory.CreateItem();
-            SaveGame.MsgPrint("The food falls through your jaws!");
-            SaveGame.DropNear(floorItem, -1, SaveGame.MapY, SaveGame.MapX);
+            Game.MsgPrint("The food falls through your jaws!");
+            Game.DropNear(floorItem, -1, Game.MapY, Game.MapX);
         }
     }
 
     public override void Quaff(PotionItemFactory potion)
     {
-        if (SaveGame.DieRoll(12) == 1)
+        if (Game.DieRoll(12) == 1)
         {
-            SaveGame.MsgPrint("Some of the fluid falls through your jaws!");
-            potion.Smash(0, SaveGame.MapY, SaveGame.MapX);
+            Game.MsgPrint("Some of the fluid falls through your jaws!");
+            potion.Smash(0, Game.MapY, Game.MapX);
         }
     }
     public override bool CanBleed(int level) => false;
     public override void UseRacialPower()
     {
         // Skeletons and zombies can restore their life energy
-        if (SaveGame.CheckIfRacialPowerWorks(30, 30, Ability.Wisdom, 18))
+        if (Game.CheckIfRacialPowerWorks(30, 30, Ability.Wisdom, 18))
         {
-            SaveGame.MsgPrint("You attempt to restore your lost energies.");
-            SaveGame.RunScript(nameof(RestoreLevelScript));
+            Game.MsgPrint("You attempt to restore your lost energies.");
+            Game.RunScript(nameof(RestoreLevelScript));
         }
     }
     public override bool OutfitsWithScrollsOfSatisfyHunger => true;

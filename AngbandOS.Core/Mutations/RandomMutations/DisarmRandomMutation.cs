@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Mutations.RandomMutations;
 [Serializable]
 internal class DisarmRandomMutation : Mutation
 {
-    private DisarmRandomMutation(SaveGame saveGame) : base(saveGame) { }
+    private DisarmRandomMutation(Game game) : base(game) { }
     public override int Frequency => 1;
     public override string GainMessage => "Your feet grow to four times their former size.";
     public override string HaveMessage => "You occasionally stumble and drop things.";
@@ -18,20 +18,20 @@ internal class DisarmRandomMutation : Mutation
 
     public override void OnProcessWorld()
     {
-        if (base.SaveGame.DieRoll(10000) != 1)
+        if (base.Game.DieRoll(10000) != 1)
         {
             return;
         }
-        SaveGame.Disturb(false);
-        SaveGame.MsgPrint("You trip over your own feet!");
-        SaveGame.TakeHit(base.SaveGame.DieRoll(SaveGame.Weight / 6), "tripping");
-        SaveGame.MsgPrint(null);
-        Item? oPtr = SaveGame.GetInventoryItem(InventorySlot.MeleeWeapon);
+        Game.Disturb(false);
+        Game.MsgPrint("You trip over your own feet!");
+        Game.TakeHit(base.Game.DieRoll(Game.Weight / 6), "tripping");
+        Game.MsgPrint(null);
+        Item? oPtr = Game.GetInventoryItem(InventorySlot.MeleeWeapon);
         if (oPtr == null)
         {
             return;
         }
-        SaveGame.MsgPrint("You drop your weapon!");
-        SaveGame.InvenDrop(InventorySlot.MeleeWeapon, 1);
+        Game.MsgPrint("You drop your weapon!");
+        Game.InvenDrop(InventorySlot.MeleeWeapon, 1);
     }
 }

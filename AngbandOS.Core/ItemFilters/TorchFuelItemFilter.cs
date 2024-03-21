@@ -13,6 +13,6 @@ namespace AngbandOS.Core.ItemFilters;
 [Serializable]
 internal class TorchFuelItemFilter : AllItemsItemFilter
 {
-    private TorchFuelItemFilter(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private TorchFuelItemFilter(Game game) : base(game) { } // This object is a singleton.
     public override bool? IsFuelForTorch => true;
 }

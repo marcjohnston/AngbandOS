@@ -10,9 +10,9 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class ConstitutionPotionItemFactory : PotionItemFactory
 {
-    private ConstitutionPotionItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private ConstitutionPotionItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(ExclamationPointSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(ExclamationPointSymbol));
     public override string Name => "Constitution";
 
     public override int[] Chance => new int[] { 6, 3, 1, 0 };
@@ -26,7 +26,7 @@ internal class ConstitutionPotionItemFactory : PotionItemFactory
     public override bool Quaff()
     {
         // Constitution increases your constitution
-        return SaveGame.TryIncreasingAbilityScore(Ability.Constitution);
+        return Game.TryIncreasingAbilityScore(Ability.Constitution);
     }
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Widgets;
 [Serializable]
 internal class MaxManaLabelWidget : Widget
 {
-    private MaxManaLabelWidget(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private MaxManaLabelWidget(Game game) : base(game) { } // This object is a singleton.
     public override int X => 0;
     public override int Y => 25;
     public override string Text => "Max SP";

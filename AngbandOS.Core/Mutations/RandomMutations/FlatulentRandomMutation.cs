@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Mutations.RandomMutations;
 [Serializable]
 internal class FlatulentRandomMutation : Mutation
 {
-    private FlatulentRandomMutation(SaveGame saveGame) : base(saveGame) { }
+    private FlatulentRandomMutation(Game game) : base(game) { }
     public override int Frequency => 1;
     public override string GainMessage => "You become subject to uncontrollable flatulence.";
     public override string HaveMessage => "You are subject to uncontrollable flatulence.";
@@ -18,12 +18,12 @@ internal class FlatulentRandomMutation : Mutation
 
     public override void OnProcessWorld()
     {
-        if (base.SaveGame.DieRoll(3000) == 13)
+        if (base.Game.DieRoll(3000) == 13)
         {
-            SaveGame.Disturb(false);
-            SaveGame.MsgPrint("BRRAAAP! Oops.");
-            SaveGame.MsgPrint(null);
-            SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(PoisProjectile)), 0, SaveGame.ExperienceLevel.Value, 3);
+            Game.Disturb(false);
+            Game.MsgPrint("BRRAAAP! Oops.");
+            Game.MsgPrint(null);
+            Game.FireBall(Game.SingletonRepository.Projectiles.Get(nameof(PoisProjectile)), 0, Game.ExperienceLevel.Value, 3);
         }
     }
 }

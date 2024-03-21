@@ -10,9 +10,9 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class PieceOfElvishWaybreadFoodItemFactory : FoodItemFactory
 {
-    private PieceOfElvishWaybreadFoodItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private PieceOfElvishWaybreadFoodItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(CommaSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(CommaSymbol));
     public override ColorEnum Color => ColorEnum.BrightBlue;
     public override string Name => "Piece of Elvish Waybread";
 
@@ -25,10 +25,10 @@ internal class PieceOfElvishWaybreadFoodItemFactory : FoodItemFactory
     public override int Weight => 3;
     public override bool Eat()
     {
-        SaveGame.PlaySound(SoundEffectEnum.Eat);
-        SaveGame.MsgPrint("That tastes good.");
-        SaveGame.PoisonTimer.ResetTimer();
-        SaveGame.RestoreHealth(SaveGame.DiceRoll(4, 8));
+        Game.PlaySound(SoundEffectEnum.Eat);
+        Game.MsgPrint("That tastes good.");
+        Game.PoisonTimer.ResetTimer();
+        Game.RestoreHealth(Game.DiceRoll(4, 8));
         return true;
     }
 
@@ -37,5 +37,5 @@ internal class PieceOfElvishWaybreadFoodItemFactory : FoodItemFactory
     /// </summary>
     public override bool VanishesWhenEatenBySkeletons => true;
     
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

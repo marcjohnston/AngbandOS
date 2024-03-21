@@ -10,18 +10,18 @@ namespace AngbandOS.Core.Repositories;
 [Serializable]
 internal class StoreFactoriesRepository : DictionaryRepository<StoreFactory>
 {
-    public StoreFactoriesRepository(SaveGame saveGame) : base(saveGame) { }
+    public StoreFactoriesRepository(Game game) : base(game) { }
     public override void Load()
     {
-        if (SaveGame.Configuration.StoreFactories == null)
+        if (Game.Configuration.StoreFactories == null)
         {
             base.Load();
         }
         else
         {
-            foreach (StoreFactoryDefinition storeFactoryDefinition in SaveGame.Configuration.StoreFactories)
+            foreach (StoreFactoryDefinition storeFactoryDefinition in Game.Configuration.StoreFactories)
             {
-                Add(new GenericStoreFactory(SaveGame, storeFactoryDefinition));
+                Add(new GenericStoreFactory(Game, storeFactoryDefinition));
             }
         }
     }

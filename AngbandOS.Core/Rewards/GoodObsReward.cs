@@ -10,11 +10,11 @@ namespace AngbandOS.Core.Rewards;
 [Serializable]
 internal class GoodObsReward : Reward
 {
-    private GoodObsReward(SaveGame saveGame) : base(saveGame) { }
+    private GoodObsReward(Game game) : base(game) { }
     public override void GetReward(Patron patron)
     {
-        SaveGame.MsgPrint($"The voice of {patron.ShortName} booms out:");
-        SaveGame.MsgPrint("'Thy deed hath earned thee a worthy reward.'");
-        SaveGame.Acquirement(SaveGame.MapY, SaveGame.MapX, SaveGame.DieRoll(2) + 1, false);
+        Game.MsgPrint($"The voice of {patron.ShortName} booms out:");
+        Game.MsgPrint("'Thy deed hath earned thee a worthy reward.'");
+        Game.Acquirement(Game.MapY, Game.MapX, Game.DieRoll(2) + 1, false);
     }
 }

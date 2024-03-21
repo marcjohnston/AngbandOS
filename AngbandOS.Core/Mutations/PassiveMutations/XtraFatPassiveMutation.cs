@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Mutations.PassiveMutations;
 [Serializable]
 internal class XtraFatPassiveMutation : Mutation
 {
-    private XtraFatPassiveMutation(SaveGame saveGame) : base(saveGame) { }
+    private XtraFatPassiveMutation(Game game) : base(game) { }
     public override int Frequency => 2;
     public override string GainMessage => "You become sickeningly fat!";
     public override string HaveMessage => "You are extremely fat (+2 CON, -2 speed).";
@@ -18,13 +18,13 @@ internal class XtraFatPassiveMutation : Mutation
 
     public override void OnGain()
     {
-        SaveGame.ConstitutionBonus += 2;
-        SaveGame.SpeedBonus -= 2;
+        Game.ConstitutionBonus += 2;
+        Game.SpeedBonus -= 2;
     }
 
     public override void OnLose()
     {
-        SaveGame.ConstitutionBonus -= 2;
-        SaveGame.SpeedBonus += 2;
+        Game.ConstitutionBonus -= 2;
+        Game.SpeedBonus += 2;
     }
 }

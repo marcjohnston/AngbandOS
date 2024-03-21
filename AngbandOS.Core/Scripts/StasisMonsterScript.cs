@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class StasisMonsterScript : Script, IScript
 {
-    private StasisMonsterScript(SaveGame saveGame) : base(saveGame) { }
+    private StasisMonsterScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script.
@@ -18,10 +18,10 @@ internal class StasisMonsterScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        if (!SaveGame.GetDirectionWithAim(out int dir))
+        if (!Game.GetDirectionWithAim(out int dir))
         {
             return;
         }
-        SaveGame.StasisMonster(dir);
+        Game.StasisMonster(dir);
     }
 }

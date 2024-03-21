@@ -13,12 +13,12 @@ internal class Store
     private int _x;
     private int _y;
 
-    protected readonly SaveGame SaveGame;
+    protected readonly Game Game;
     public readonly StoreFactory StoreFactory;
 
-    public Store(SaveGame saveGame, StoreFactory storeFactory)
+    public Store(Game game, StoreFactory storeFactory)
     {
-        SaveGame = saveGame;
+        Game = game;
         StoreFactory = storeFactory;
 
         StoreInventoryList.Clear();
@@ -122,7 +122,7 @@ internal class Store
     {
         if (storeCommand != null)
         {
-            SaveGame.Screen.PrintLine($" {storeCommand.KeyChar}) {storeCommand.Description}.", row, col);
+            Game.Screen.PrintLine($" {storeCommand.KeyChar}) {storeCommand.Description}.", row, col);
         }
     }
 
@@ -131,40 +131,40 @@ internal class Store
         int maxwid = StoreFactory.WidthOfDescriptionColumn;
         Item oPtr = StoreInventoryList[itemIndex];
         string outVal = $"{letter}) ";
-        SaveGame.Screen.PrintLine(outVal, row, 0);
+        Game.Screen.PrintLine(outVal, row, 0);
         ColorEnum a = oPtr.Factory.FlavorColor;
         char c = oPtr.Factory.FlavorSymbol.Character;
-        SaveGame.Screen.Print(a, c.ToString(), row, 3);
+        Game.Screen.Print(a, c.ToString(), row, 3);
         string oName = StoreFactory.GetItemDescription(oPtr);
         if (maxwid < oName.Length)
         {
             oName = oName.Substring(0, maxwid);
         }
-        SaveGame.Screen.Print(oPtr.Factory.Color, oName, row, 5);
+        Game.Screen.Print(oPtr.Factory.Color, oName, row, 5);
         int wgt = oPtr.Weight;
         outVal = $"{wgt / 10,3}.{wgt % 10}{(StoreFactory.RenderWeightUnitOfMeasurement ? " lb" : "")}";
 
         if (StoreFactory.ShowItemPricing)
         {
-            SaveGame.Screen.Print(outVal, row, 61);
+            Game.Screen.Print(outVal, row, 61);
             int x;
             if (oPtr.IdentFixed)
             {
                 x = MarkupItem(oPtr);
                 outVal = $"{x,9} F";
-                SaveGame.Screen.Print(outVal, row, 68);
+                Game.Screen.Print(outVal, row, 68);
             }
             else
             {
                 x = MarkupItem(oPtr);
                 x += x / 10;
                 outVal = $"{x,9}  ";
-                SaveGame.Screen.Print(outVal, row, 68);
+                Game.Screen.Print(outVal, row, 68);
             }
         }
         else
         {
-            SaveGame.Screen.Print(outVal, row, 68);
+            Game.Screen.Print(outVal, row, 68);
         }
     }
 
@@ -188,37 +188,37 @@ internal class Store
         bool pageUpAvailable = StoreTop > 0;
         if (pageUpAvailable && pageDownAvailable)
         {
-            SaveGame.Screen.PrintLine("-page up/down-", pageIndex + 6, 3);
+            Game.Screen.PrintLine("-page up/down-", pageIndex + 6, 3);
             pageIndex++;
         }
         else if (pageDownAvailable)
         {
-            SaveGame.Screen.PrintLine("-page down-", pageIndex + 6, 3);
+            Game.Screen.PrintLine("-page down-", pageIndex + 6, 3);
             pageIndex++;
         }
         else if (pageUpAvailable)
         {
-            SaveGame.Screen.PrintLine("-page up-", pageIndex + 6, 3);
+            Game.Screen.PrintLine("-page up-", pageIndex + 6, 3);
             pageIndex++;
         }
 
         // For any additional inventory lines that remain, we need to clear the screen.
         while (pageIndex < StoreFactory.PageSize)
         {
-            SaveGame.Screen.PrintLine("", pageIndex + 6, 0);
+            Game.Screen.PrintLine("", pageIndex + 6, 0);
             pageIndex++;
         }
 
-        SaveGame.Screen.Print(new string(' ', StoreInventoryList.Count.ToString().Length * 2 + 11), 5, 20);
+        Game.Screen.Print(new string(' ', StoreInventoryList.Count.ToString().Length * 2 + 11), 5, 20);
         if (StoreInventoryList.Count > StoreFactory.PageSize)
         {
-            SaveGame.Screen.Print($"(Page {StoreTop / StoreFactory.PageSize + 1} of {StoreInventoryList.Count / StoreFactory.PageSize + 1})", 5, 20);
+            Game.Screen.Print($"(Page {StoreTop / StoreFactory.PageSize + 1} of {StoreInventoryList.Count / StoreFactory.PageSize + 1})", 5, 20);
         }
     }
 
     private Shopkeeper GetRandomOwner()
     {
-        return StoreFactory.Shopkeepers[SaveGame.RandomLessThan(StoreFactory.Shopkeepers.Length)];
+        return StoreFactory.Shopkeepers[Game.RandomLessThan(StoreFactory.Shopkeepers.Length)];
     }
 
     private void StoreCreate()
@@ -235,8 +235,8 @@ internal class Store
             int? level = StoreFactory.LevelForRandomItemCreation;
             if (level != null)
             {
-                level = level.Value + SaveGame.RandomLessThan(level.Value);
-                ItemFactory? itemFactory = SaveGame.RandomItemType(level.Value, false, false);
+                level = level.Value + Game.RandomLessThan(level.Value);
+                ItemFactory? itemFactory = Game.RandomItemType(level.Value, false, false);
                 if (itemFactory == null)
                 {
                     continue;
@@ -246,10 +246,10 @@ internal class Store
             else
             {
                 // Pick a random item fctory that will be used to create the item.
-                ItemFactory itemFactory = InventoryFactories[SaveGame.RandomLessThan(InventoryFactories.Length)];
+                ItemFactory itemFactory = InventoryFactories[Game.RandomLessThan(InventoryFactories.Length)];
 
                 // Generate a level for the item.
-                level = SaveGame.RandomBetween(1, Constants.StoreObjLevel);
+                level = Game.RandomBetween(1, Constants.StoreObjLevel);
 
                 // Create the item.
                 newItem = itemFactory.CreateItem();
@@ -281,13 +281,13 @@ internal class Store
 
     private void StoreDelete()
     {
-        int what = SaveGame.RandomLessThan(StoreInventoryList.Count);
+        int what = Game.RandomLessThan(StoreInventoryList.Count);
         int num = StoreInventoryList[what].Count;
-        if (SaveGame.RandomLessThan(100) < 50)
+        if (Game.RandomLessThan(100) < 50)
         {
             num = (num + 1) / 2;
         }
-        if (SaveGame.RandomLessThan(100) < 50)
+        if (Game.RandomLessThan(100) < 50)
         {
             num = 1;
         }
@@ -329,11 +329,11 @@ internal class Store
 
     private void ProcessCommand()
     {
-        char c = SaveGame.CurrentCommand;
+        char c = Game.CurrentCommand;
         bool matchingCommandFound = false;
 
         // Process commands
-        foreach (StoreCommand command in SaveGame.SingletonRepository.StoreCommands)
+        foreach (StoreCommand command in Game.SingletonRepository.StoreCommands)
         {
             // TODO: The IF statement below can be converted into a dictionary with the applicable object 
             // attached for improved performance.
@@ -360,53 +360,53 @@ internal class Store
 
         if (matchingCommandFound)
         {
-            SaveGame.MsgPrint("That command does not work in this Store.");
+            Game.MsgPrint("That command does not work in this Store.");
         }
         else
         {
-            SaveGame.MsgPrint("That command does not work in stores.");
+            Game.MsgPrint("That command does not work in stores.");
         }
     }
 
     private void DisplayStore()
     {
-        SaveGame.Screen.Clear();
-        SaveGame.SetBackground(BackgroundImageEnum.Normal);
+        Game.Screen.Clear();
+        Game.SetBackground(BackgroundImageEnum.Normal);
         string ownerName = OwnerName;
         if (string.IsNullOrEmpty(ownerName))
         {
-            SaveGame.Screen.PrintLine(Title, 3, 30);
+            Game.Screen.PrintLine(Title, 3, 30);
         }
         else
         {
-            SaveGame.Screen.Print(OwnerName, 3, 10);
-            SaveGame.Screen.PrintLine(Title, 3, 50);
+            Game.Screen.Print(OwnerName, 3, 10);
+            Game.Screen.PrintLine(Title, 3, 50);
         }
 
         if (StoreFactory.StoreMaintainsInventory)
         {
-            SaveGame.Screen.Print("Item Description", 5, 3);
+            Game.Screen.Print("Item Description", 5, 3);
             if (StoreFactory.ShowItemPricing)
             {
-                SaveGame.Screen.Print("Weight", 5, 60);
-                SaveGame.Screen.Print("Price", 5, 72);
+                Game.Screen.Print("Weight", 5, 60);
+                Game.Screen.Print("Price", 5, 72);
             }
             else
             {
-                SaveGame.Screen.Print("Weight", 5, 70);
+                Game.Screen.Print("Weight", 5, 70);
             }
         }
-        SaveGame.StorePrtGold();
+        Game.StorePrtGold();
         DisplayInventory();
     }
 
     public bool GetStock(out int comVal, string pmt, int i, int j)
     {
         char command;
-        SaveGame.MsgPrint(null);
+        Game.MsgPrint(null);
         comVal = -1;
         string outVal = $"(Items {i.IndexToLetter()}-{j.IndexToLetter()}, ESC to exit) {pmt}";
-        while (SaveGame.GetCom(outVal, out command))
+        while (Game.GetCom(outVal, out command))
         {
             int k = char.IsLower(command) ? command.LetterToNumber() : -1;
             if (k >= i && k <= j)
@@ -415,7 +415,7 @@ internal class Store
                 break;
             }
         }
-        SaveGame.MsgClear();
+        Game.MsgClear();
         return command != '\x1b';
     }
 
@@ -513,19 +513,19 @@ internal class Store
         {
             discount = 0;
         }
-        else if (SaveGame.RandomLessThan(25) == 0)
+        else if (Game.RandomLessThan(25) == 0)
         {
             discount = 25;
         }
-        else if (SaveGame.RandomLessThan(150) == 0)
+        else if (Game.RandomLessThan(150) == 0)
         {
             discount = 50;
         }
-        else if (SaveGame.RandomLessThan(300) == 0)
+        else if (Game.RandomLessThan(300) == 0)
         {
             discount = 75;
         }
-        else if (SaveGame.RandomLessThan(500) == 0)
+        else if (Game.RandomLessThan(500) == 0)
         {
             discount = 90;
         }
@@ -555,7 +555,7 @@ internal class Store
 
         // Create a charisma factor that affects the store owner.
         int factor = 100;
-        factor += SaveGame.AbilityScores[Ability.Charisma].ChaPriceAdjustment;
+        factor += Game.AbilityScores[Ability.Charisma].ChaPriceAdjustment;
         adjust = 100 + (greed + factor - 300);
         if (adjust < 100)
         {
@@ -590,7 +590,7 @@ internal class Store
 
         // Create a charisma factor that affects the store owner.
         int factor = 100;
-        factor += SaveGame.AbilityScores[Ability.Charisma].ChaPriceAdjustment;
+        factor += Game.AbilityScores[Ability.Charisma].ChaPriceAdjustment;
         adjust = 100 + (300 - (greed + factor));
         if (adjust > 100)
         {
@@ -633,45 +633,45 @@ internal class Store
         _leaveStore = false;
         while (!_leaveStore)
         {
-            SaveGame.Screen.PrintLine("", 1, 0);
-            int tmpCha = SaveGame.AbilityScores[Ability.Charisma].Adjusted;
-            SaveGame.Screen.Clear(41);
-            SaveGame.Screen.PrintLine(" ESC) Exit from Building.", 42, 0);
+            Game.Screen.PrintLine("", 1, 0);
+            int tmpCha = Game.AbilityScores[Ability.Charisma].Adjusted;
+            Game.Screen.Clear(41);
+            Game.Screen.PrintLine(" ESC) Exit from Building.", 42, 0);
             RenderAdvertisedCommand(StoreFactory.AdvertisedStoreCommand1, 42, 31);
             RenderAdvertisedCommand(StoreFactory.AdvertisedStoreCommand2, 43, 31);
             RenderAdvertisedCommand(StoreFactory.AdvertisedStoreCommand3, 42, 56);
             RenderAdvertisedCommand(StoreFactory.AdvertisedStoreCommand5, 43, 0); // This needs to be before #4 to not erase it.
             RenderAdvertisedCommand(StoreFactory.AdvertisedStoreCommand4, 43, 56);
-            SaveGame.Screen.Print("You may: ", 41, 0);
-            SaveGame.RequestCommand(true);
+            Game.Screen.Print("You may: ", 41, 0);
+            Game.RequestCommand(true);
             ProcessCommand();
-            SaveGame.FullScreenOverlay = true;
-            SaveGame.NoticeStuff();
-            SaveGame.HandleStuff();
+            Game.FullScreenOverlay = true;
+            Game.NoticeStuff();
+            Game.HandleStuff();
             const int itemIndex = InventorySlot.PackCount;
-            Item? oPtr = SaveGame.GetInventoryItem(itemIndex);
+            Item? oPtr = Game.GetInventoryItem(itemIndex);
             if (oPtr != null)
             {
                 if (GetType() != typeof(HomeStoreFactory))
                 {
-                    SaveGame.MsgPrint("Your pack is so full that you flee the Stores...");
+                    Game.MsgPrint("Your pack is so full that you flee the Stores...");
                     _leaveStore = true;
                 }
                 else if (!StoreCanAcceptMoreItems(oPtr))
                 {
-                    SaveGame.MsgPrint("Your pack is so full that you flee your home...");
+                    Game.MsgPrint("Your pack is so full that you flee your home...");
                     _leaveStore = true;
                 }
                 else
                 {
-                    SaveGame.MsgPrint("Your pack overflows!");
+                    Game.MsgPrint("Your pack overflows!");
                     Item qPtr = oPtr.Clone();
                     string oName = qPtr.Description(true, 3);
-                    SaveGame.MsgPrint($"You drop {oName} ({itemIndex.IndexToLabel()}).");
-                    SaveGame.InvenItemIncrease(itemIndex, -255);
-                    SaveGame.InvenItemDescribe(itemIndex);
-                    SaveGame.InvenItemOptimize(itemIndex);
-                    SaveGame.HandleStuff();
+                    Game.MsgPrint($"You drop {oName} ({itemIndex.IndexToLabel()}).");
+                    Game.InvenItemIncrease(itemIndex, -255);
+                    Game.InvenItemDescribe(itemIndex);
+                    Game.InvenItemOptimize(itemIndex);
+                    Game.HandleStuff();
                     int itemPos = HomeCarry(qPtr);
                     if (itemPos >= 0)
                     {
@@ -680,24 +680,24 @@ internal class Store
                     }
                 }
             }
-            if (tmpCha != SaveGame.AbilityScores[Ability.Charisma].Adjusted)
+            if (tmpCha != Game.AbilityScores[Ability.Charisma].Adjusted)
             {
                 DisplayInventory();
             }
         }
-        SaveGame.EnergyUse = 0;
-        SaveGame.FullScreenOverlay = false;
-        SaveGame.ViewingItemList = false;
-        SaveGame.MsgPrint(null); // TODO: This is a PrWipeRedrawAction
-        SaveGame.Screen.Clear();// TODO: This is a PrWipeRedrawAction
-        SaveGame.SetBackground(BackgroundImageEnum.Overhead);
-        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateLightFlaggedAction)).Set();
-        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateViewFlaggedAction)).Set();
-        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateMonstersFlaggedAction)).Set();
-        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(PrExtraRedrawActionGroupSetFlaggedAction)).Set();
-        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(PrBasicRedrawActionGroupSetFlaggedAction)).Set();
-        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawMapFlaggedAction)).Set();
-        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawEquippyFlaggedAction)).Set();
+        Game.EnergyUse = 0;
+        Game.FullScreenOverlay = false;
+        Game.ViewingItemList = false;
+        Game.MsgPrint(null); // TODO: This is a PrWipeRedrawAction
+        Game.Screen.Clear();// TODO: This is a PrWipeRedrawAction
+        Game.SetBackground(BackgroundImageEnum.Overhead);
+        Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateLightFlaggedAction)).Set();
+        Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateViewFlaggedAction)).Set();
+        Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateMonstersFlaggedAction)).Set();
+        Game.SingletonRepository.FlaggedActions.Get(nameof(PrExtraRedrawActionGroupSetFlaggedAction)).Set();
+        Game.SingletonRepository.FlaggedActions.Get(nameof(PrBasicRedrawActionGroupSetFlaggedAction)).Set();
+        Game.SingletonRepository.FlaggedActions.Get(nameof(RedrawMapFlaggedAction)).Set();
+        Game.SingletonRepository.FlaggedActions.Get(nameof(RedrawEquippyFlaggedAction)).Set();
     }
 
     /// <summary>
@@ -747,11 +747,11 @@ internal class Store
 
         // We need to preserve the treasure rating for the level because we will be creating items that will alter the treasure rating state.  We will restore
         // this treasure rating when we are done.
-        int oldRating = SaveGame.TreasureRating;
+        int oldRating = Game.TreasureRating;
 
         // First phase, is to delete some items from the store.  Get the number of inventory items and alter this count by the turnover rate.
         int desiredTurnOverInventoryCount = StoreInventoryList.Count;
-        desiredTurnOverInventoryCount -= SaveGame.DieRoll(StoreFactory.StoreTurnover);
+        desiredTurnOverInventoryCount -= Game.DieRoll(StoreFactory.StoreTurnover);
 
         // Ensure the count didn't go below zero.
         if (desiredTurnOverInventoryCount < 0)
@@ -769,7 +769,7 @@ internal class Store
         int desiredFinalInventoryCount = StoreInventoryList.Count;
 
         // Add a turnover rating to the count.
-        desiredFinalInventoryCount += SaveGame.DieRoll(StoreFactory.StoreTurnover);
+        desiredFinalInventoryCount += Game.DieRoll(StoreFactory.StoreTurnover);
 
         // Ensure the new inventory level meets the store standards.
         if (desiredFinalInventoryCount > StoreFactory.MaxInventory)
@@ -790,7 +790,7 @@ internal class Store
         }
 
         // Restore the level treasure rating.
-        SaveGame.TreasureRating = oldRating;
+        Game.TreasureRating = oldRating;
     }
 
     public void StoreShuffle()

@@ -13,7 +13,7 @@ namespace AngbandOS.Core.Activations;
 [Serializable]
 internal class StarBall150Every1000p1d325Activation : DirectionalActivation
 {
-    private StarBall150Every1000p1d325Activation(SaveGame saveGame) : base(saveGame) { }
+    private StarBall150Every1000p1d325Activation(Game game) : base(game) { }
     public override int RandomChance => 50;
 
     public override string? PreActivationMessage => "Your {0} is surrounded by lightning...";
@@ -24,7 +24,7 @@ internal class StarBall150Every1000p1d325Activation : DirectionalActivation
     {
         for (int i = 0; i < 8; i++)
         {
-            SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(ElecProjectile)), SaveGame.OrderedDirection[i], 150, 3);
+            Game.FireBall(Game.SingletonRepository.Projectiles.Get(nameof(ElecProjectile)), Game.OrderedDirection[i], 150, 3);
         }
         return true;
     }

@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Races;
 [Serializable]
 internal class MiriNigriRace : Race
 {
-    private MiriNigriRace(SaveGame saveGame) : base(saveGame) { }
+    private MiriNigriRace(Game game) : base(game) { }
     public override string Title => "Miri Nigri";
     public override int[] AbilityBonus => new int[] { 2, -2, -1, -1, 2, -4 };
     public override int BaseDisarmBonus => -5;
@@ -50,8 +50,8 @@ internal class MiriNigriRace : Race
     public override string CreateRandomName() => CreateRandomNameFromSyllables(new CthuloidSyllables());
     public override void CalcBonuses()
     {
-        SaveGame.HasConfusionResistance = true;
-        SaveGame.HasSoundResistance = true;
+        Game.HasConfusionResistance = true;
+        Game.HasSoundResistance = true;
     }
 
     public override bool AutomaticallyGainsFirstLevelMutationAtBirth => true;

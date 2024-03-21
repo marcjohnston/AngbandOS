@@ -10,11 +10,11 @@ namespace AngbandOS.Core.Rewards;
 [Serializable]
 internal class CurseWpReward : Reward
 {
-    private CurseWpReward(SaveGame saveGame) : base(saveGame) { }
+    private CurseWpReward(Game game) : base(game) { }
     public override void GetReward(Patron patron)
     {
-        SaveGame.MsgPrint($"The voice of {patron.ShortName} booms out:");
-        SaveGame.MsgPrint("'Thou reliest too much on thine weapon.'");
-        SaveGame.CurseWeapon();
+        Game.MsgPrint($"The voice of {patron.ShortName} booms out:");
+        Game.MsgPrint("'Thou reliest too much on thine weapon.'");
+        Game.CurseWeapon();
     }
 }

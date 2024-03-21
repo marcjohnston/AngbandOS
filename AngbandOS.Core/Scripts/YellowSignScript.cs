@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class YellowSignScript : Script, IScript
 {
-    private YellowSignScript(SaveGame saveGame) : base(saveGame) { }
+    private YellowSignScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script.
@@ -18,11 +18,11 @@ internal class YellowSignScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        if (!SaveGame.GridOpenNoItem(SaveGame.MapY, SaveGame.MapX))
+        if (!Game.GridOpenNoItem(Game.MapY, Game.MapX))
         {
-            SaveGame.MsgPrint("The object resists the spell.");
+            Game.MsgPrint("The object resists the spell.");
             return;
         }
-        SaveGame.CaveSetFeat(SaveGame.MapY, SaveGame.MapX, SaveGame.SingletonRepository.Tiles.Get(nameof(YellowSignSigilTile)));
+        Game.CaveSetFeat(Game.MapY, Game.MapX, Game.SingletonRepository.Tiles.Get(nameof(YellowSignSigilTile)));
     }
 }

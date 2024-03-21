@@ -10,9 +10,9 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class FireScrollItemFactory : ScrollItemFactory
 {
-    private FireScrollItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private FireScrollItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(QuestionMarkSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(QuestionMarkSymbol));
     public override string Name => "Fire";
 
     public override int[] Chance => new int[] { 4, 0, 0, 0 };
@@ -25,12 +25,12 @@ internal class FireScrollItemFactory : ScrollItemFactory
 
     public override void Read(ReadScrollEvent eventArgs)
     {
-        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(FireProjectile)), 0, 150, 4);
-        if (!(SaveGame.FireResistanceTimer.Value != 0 || SaveGame.HasFireResistance || SaveGame.HasFireImmunity))
+        Game.FireBall(Game.SingletonRepository.Projectiles.Get(nameof(FireProjectile)), 0, 150, 4);
+        if (!(Game.FireResistanceTimer.Value != 0 || Game.HasFireResistance || Game.HasFireImmunity))
         {
-            SaveGame.TakeHit(50 + SaveGame.DieRoll(50), "a Scroll of Fire");
+            Game.TakeHit(50 + Game.DieRoll(50), "a Scroll of Fire");
         }
         eventArgs.Identified = true;
     }
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

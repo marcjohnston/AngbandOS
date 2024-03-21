@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Mutations.RandomMutations;
 [Serializable]
 internal class WalkShadRandomMutation : Mutation
 {
-    private WalkShadRandomMutation(SaveGame saveGame) : base(saveGame) { }
+    private WalkShadRandomMutation(Game game) : base(game) { }
     public override int Frequency => 1;
     public override string GainMessage => "You feel like reality is as thin as paper.";
     public override string HaveMessage => "You occasionally stumble into other shadows.";
@@ -18,9 +18,9 @@ internal class WalkShadRandomMutation : Mutation
 
     public override void OnProcessWorld()
     {
-        if (!SaveGame.HasAntiMagic && base.SaveGame.DieRoll(12000) == 1)
+        if (!Game.HasAntiMagic && base.Game.DieRoll(12000) == 1)
         {
-            SaveGame.AlterReality();
+            Game.AlterReality();
         }
     }
 }

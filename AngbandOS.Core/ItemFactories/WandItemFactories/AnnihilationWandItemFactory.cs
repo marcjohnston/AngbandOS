@@ -10,13 +10,13 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class AnnihilationWandItemFactory : WandItemFactory
 {
-    private AnnihilationWandItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private AnnihilationWandItemFactory(Game game) : base(game) { } // This object is a singleton.
 
     public override void ApplyMagic(Item item, int level, int power, Store? store)
     {
-        item.TypeSpecificValue = SaveGame.DieRoll(2) + 1;
+        item.TypeSpecificValue = Game.DieRoll(2) + 1;
     }
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(MinusSignSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(MinusSignSymbol));
     public override string Name => "Annihilation";
 
     public override int[] Chance => new int[] { 4, 0, 0, 0 };
@@ -31,9 +31,9 @@ internal class AnnihilationWandItemFactory : WandItemFactory
     public override int LevelNormallyFound => 60;
     public override int[] Locale => new int[] { 60, 0, 0, 0 };
     public override int Weight => 10;
-    public override bool ExecuteActivation(SaveGame saveGame, int dir)
+    public override bool ExecuteActivation(Game game, int dir)
     {
-        return saveGame.DrainLife(dir, 125);
+        return game.DrainLife(dir, 125);
     }
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

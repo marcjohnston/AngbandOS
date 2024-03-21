@@ -10,7 +10,7 @@ namespace AngbandOS.Core.MonsterRaces;
 [Serializable]
 internal class ClearHoundMonsterRace : MonsterRace
 {
-    protected ClearHoundMonsterRace(SaveGame saveGame) : base(saveGame) { }
+    protected ClearHoundMonsterRace(Game game) : base(game) { }
 
     protected override string SymbolName => nameof(UpperZSymbol);
     public override ColorEnum Color => ColorEnum.Diamond;

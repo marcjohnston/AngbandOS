@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class DetectNonlivingScript : Script, IScript
 {
-    private DetectNonlivingScript(SaveGame saveGame) : base(saveGame) { }
+    private DetectNonlivingScript(Game game) : base(game) { }
 
     /// <summary>
     /// Detects monsters that are not-living.
@@ -19,9 +19,9 @@ internal class DetectNonlivingScript : Script, IScript
     public void ExecuteScript()
     {
         bool flag = false;
-        for (int i = 1; i < SaveGame.MMax; i++)
+        for (int i = 1; i < Game.MMax; i++)
         {
-            Monster mPtr = SaveGame.Monsters[i];
+            Monster mPtr = Game.Monsters[i];
             MonsterRace rPtr = mPtr.Race;
             if (mPtr.Race == null)
             {
@@ -29,23 +29,23 @@ internal class DetectNonlivingScript : Script, IScript
             }
             int y = mPtr.MapY;
             int x = mPtr.MapX;
-            if (!SaveGame.PanelContains(y, x))
+            if (!Game.PanelContains(y, x))
             {
                 continue;
             }
             if (rPtr.Nonliving || rPtr.Undead ||
                 rPtr.Cthuloid || rPtr.Demon)
             {
-                SaveGame.RepairMonsters = true;
+                Game.RepairMonsters = true;
                 mPtr.IndividualMonsterFlags |= Constants.MflagMark | Constants.MflagShow;
                 mPtr.IsVisible = true;
-                SaveGame.RedrawSingleLocation(y, x);
+                Game.RedrawSingleLocation(y, x);
                 flag = true;
             }
         }
         if (flag)
         {
-            SaveGame.MsgPrint("You sense the presence of unnatural beings!");
+            Game.MsgPrint("You sense the presence of unnatural beings!");
         }
     }
 }

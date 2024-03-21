@@ -10,11 +10,11 @@ namespace AngbandOS.Core.Projection;
 [Serializable]
 internal class ShardProjectile : Projectile
 {
-    private ShardProjectile(SaveGame saveGame) : base(saveGame) { }
+    private ShardProjectile(Game game) : base(game) { }
 
-    protected override ProjectileGraphic? BoltProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get(nameof(BrightBrownSplatProjectileGraphic));
+    protected override ProjectileGraphic? BoltProjectileGraphic => Game.SingletonRepository.ProjectileGraphics.Get(nameof(BrightBrownSplatProjectileGraphic));
 
-    protected override ProjectileGraphic? ImpactProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get(nameof(BrightBrownSplatProjectileGraphic));
+    protected override ProjectileGraphic? ImpactProjectileGraphic => Game.SingletonRepository.ProjectileGraphics.Get(nameof(BrightBrownSplatProjectileGraphic));
 
     protected override bool AffectMonster(int who, Monster mPtr, int dam, int r)
     {
@@ -30,7 +30,7 @@ internal class ShardProjectile : Projectile
         {
             note = " resists.";
             dam *= 3;
-            dam /= SaveGame.DieRoll(6) + 6;
+            dam /= Game.DieRoll(6) + 6;
         }
         ApplyProjectileDamageToMonster(who, mPtr, dam, note);
         return obvious;
@@ -38,35 +38,35 @@ internal class ShardProjectile : Projectile
 
     protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
     {
-        bool blind = SaveGame.BlindnessTimer.Value != 0;
+        bool blind = Game.BlindnessTimer.Value != 0;
         if (dam > 1600)
         {
             dam = 1600;
         }
         dam = (dam + r) / (r + 1);
-        Monster mPtr = SaveGame.Monsters[who];
+        Monster mPtr = Game.Monsters[who];
         string killer = mPtr.IndefiniteVisibleName;
         if (blind)
         {
-            SaveGame.MsgPrint("You are hit by shards of crystal!");
+            Game.MsgPrint("You are hit by shards of crystal!");
         }
-        if (!SaveGame.HasSoundResistance)
+        if (!Game.HasSoundResistance)
         {
-            SaveGame.StunTimer.AddTimer(SaveGame.DieRoll(20));
+            Game.StunTimer.AddTimer(Game.DieRoll(20));
         }
-        if (SaveGame.HasShardResistance)
+        if (Game.HasShardResistance)
         {
             dam /= 2;
         }
         else
         {
-            SaveGame.BleedingTimer.AddTimer((dam / 2));
+            Game.BleedingTimer.AddTimer((dam / 2));
         }
-        if (!SaveGame.HasShardResistance || SaveGame.DieRoll(12) == 1)
+        if (!Game.HasShardResistance || Game.DieRoll(12) == 1)
         {
-            SaveGame.InvenDamage(SaveGame.SetColdDestroy, 3);
+            Game.InvenDamage(Game.SetColdDestroy, 3);
         }
-        SaveGame.TakeHit(dam, killer);
+        Game.TakeHit(dam, killer);
         return true;
     }
 }

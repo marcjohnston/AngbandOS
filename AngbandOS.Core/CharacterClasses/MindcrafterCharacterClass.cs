@@ -11,7 +11,7 @@ namespace AngbandOS.Core.CharacterClasses;
 [Serializable]
 internal class MindcrafterCharacterClass : BaseCharacterClass
 {
-    private MindcrafterCharacterClass(SaveGame savedGame) : base(savedGame) { }
+    private MindcrafterCharacterClass(Game savedGame) : base(savedGame) { }
     public override int ID => 9;
     public override string Title => "Mindcrafter";
     public override int[] AbilityBonus => new[] { -1, 0, 3, -1, -1, 2 };
@@ -46,8 +46,8 @@ internal class MindcrafterCharacterClass : BaseCharacterClass
     public override void Cast() => CastMentalism();
 
     public override int SpellStat => Ability.Wisdom;
-    public override IArtifactBias? ArtifactBias => (SaveGame.DieRoll(5) > 2 ? SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(PriestlyArtifactBias)) : null);
-    public override bool SenseInventoryTest(int level) => (0 != SaveGame.RandomLessThan(55000 / ((level * level) + 40)));
+    public override IArtifactBias? ArtifactBias => (Game.DieRoll(5) > 2 ? Game.SingletonRepository.ArtifactBiases.Get(nameof(PriestlyArtifactBias)) : null);
+    public override bool SenseInventoryTest(int level) => (0 != Game.RandomLessThan(55000 / ((level * level) + 40)));
 
     protected override string[] OutfitItemFactoryNames => new string[]
     {

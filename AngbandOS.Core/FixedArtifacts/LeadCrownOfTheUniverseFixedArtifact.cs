@@ -10,7 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class LeadCrownOfTheUniverseFixedArtifact : FixedArtifact
 {
-    private LeadCrownOfTheUniverseFixedArtifact(SaveGame saveGame) : base(saveGame) { }
+    private LeadCrownOfTheUniverseFixedArtifact(Game game) : base(game) { }
 
     protected override string BaseItemFactoryName => nameof(LeadCrownArmorItemFactory);
 

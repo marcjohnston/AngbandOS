@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class CallTheVoidScript : Script, IScript
 {
-    private CallTheVoidScript(SaveGame saveGame) : base(saveGame) { }
+    private CallTheVoidScript(Game game) : base(game) { }
 
     /// <summary>
     /// Blast energy in all directions.
@@ -19,10 +19,10 @@ internal class CallTheVoidScript : Script, IScript
     public void ExecuteScript()
     {
         // Make sure we're not next to a wall
-        if (SaveGame.GridPassable(SaveGame.MapY - 1, SaveGame.MapX - 1) && SaveGame.GridPassable(SaveGame.MapY - 1, SaveGame.MapX) &&
-            SaveGame.GridPassable(SaveGame.MapY - 1, SaveGame.MapX + 1) && SaveGame.GridPassable(SaveGame.MapY, SaveGame.MapX - 1) &&
-            SaveGame.GridPassable(SaveGame.MapY, SaveGame.MapX + 1) && SaveGame.GridPassable(SaveGame.MapY + 1, SaveGame.MapX - 1) &&
-            SaveGame.GridPassable(SaveGame.MapY + 1, SaveGame.MapX) && SaveGame.GridPassable(SaveGame.MapY + 1, SaveGame.MapX + 1))
+        if (Game.GridPassable(Game.MapY - 1, Game.MapX - 1) && Game.GridPassable(Game.MapY - 1, Game.MapX) &&
+            Game.GridPassable(Game.MapY - 1, Game.MapX + 1) && Game.GridPassable(Game.MapY, Game.MapX - 1) &&
+            Game.GridPassable(Game.MapY, Game.MapX + 1) && Game.GridPassable(Game.MapY + 1, Game.MapX - 1) &&
+            Game.GridPassable(Game.MapY + 1, Game.MapX) && Game.GridPassable(Game.MapY + 1, Game.MapX + 1))
         {
             // Fire area effect shards, mana, and nukes in all directions
             int i;
@@ -30,34 +30,34 @@ internal class CallTheVoidScript : Script, IScript
             {
                 if (i - 5 != 0)
                 {
-                    SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(ShardProjectile)), i, 175, 2);
+                    Game.FireBall(Game.SingletonRepository.Projectiles.Get(nameof(ShardProjectile)), i, 175, 2);
                 }
             }
             for (i = 1; i < 10; i++)
             {
                 if (i - 5 != 0)
                 {
-                    SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(ManaProjectile)), i, 175, 3);
+                    Game.FireBall(Game.SingletonRepository.Projectiles.Get(nameof(ManaProjectile)), i, 175, 3);
                 }
             }
             for (i = 1; i < 10; i++)
             {
                 if (i - 5 != 0)
                 {
-                    SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(NukeProjectile)), i, 175, 4);
+                    Game.FireBall(Game.SingletonRepository.Projectiles.Get(nameof(NukeProjectile)), i, 175, 4);
                 }
             }
         }
         else
         {
             // We were too close to a wall, so earthquake instead
-            string cast = SaveGame.BaseCharacterClass.CastVerb;
-            string spell = SaveGame.BaseCharacterClass.SpellNoun;
-            SaveGame.MsgPrint($"You {cast} the {spell} too close to a wall!");
-            SaveGame.MsgPrint("There is a loud explosion!");
-            SaveGame.DestroyArea(SaveGame.MapY, SaveGame.MapX, 20 + SaveGame.ExperienceLevel.Value);
-            SaveGame.MsgPrint("The dungeon collapses...");
-            SaveGame.TakeHit(100 + SaveGame.DieRoll(150), "a suicidal Call the Void");
+            string cast = Game.BaseCharacterClass.CastVerb;
+            string spell = Game.BaseCharacterClass.SpellNoun;
+            Game.MsgPrint($"You {cast} the {spell} too close to a wall!");
+            Game.MsgPrint("There is a loud explosion!");
+            Game.DestroyArea(Game.MapY, Game.MapX, 20 + Game.ExperienceLevel.Value);
+            Game.MsgPrint("The dungeon collapses...");
+            Game.TakeHit(100 + Game.DieRoll(150), "a suicidal Call the Void");
         }
     }
 }

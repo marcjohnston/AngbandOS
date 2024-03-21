@@ -10,7 +10,7 @@ namespace AngbandOS.Core.InventorySlots;
 [Serializable]
 internal abstract class EquipmentInventorySlot : BaseInventorySlot
 {
-    protected EquipmentInventorySlot(SaveGame saveGame) : base(saveGame) { }
+    protected EquipmentInventorySlot(Game game) : base(game) { }
 
     /// <summary>
     /// Returns true.
@@ -29,10 +29,10 @@ internal abstract class EquipmentInventorySlot : BaseInventorySlot
             return;
         }
         int foundSlot = FindInventorySlot(oPtr);
-        SaveGame.SetInventoryItem(foundSlot, null);
-        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
-        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateTorchRadiusFlaggedAction)).Set();
-        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateManaFlaggedAction)).Set();
+        Game.SetInventoryItem(foundSlot, null);
+        Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
+        Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateTorchRadiusFlaggedAction)).Set();
+        Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateManaFlaggedAction)).Set();
     }
 
     /// <summary>
@@ -46,28 +46,28 @@ internal abstract class EquipmentInventorySlot : BaseInventorySlot
         // Allow the base functionality to process items.
         foreach (int index in InventorySlots)
         {
-            Item? oPtr = SaveGame.GetInventoryItem(index);
+            Item? oPtr = Game.GetInventoryItem(index);
             if (oPtr != null)
             {
                 oPtr.Factory.EquipmentProcessWorldHook();
             }
         }
 
-        if (SaveGame.Race.IsBurnedBySunlight) // TODO: This needs to use a hook.
+        if (Game.Race.IsBurnedBySunlight) // TODO: This needs to use a hook.
         {
             foreach (int index in InventorySlots)
             {
-                Item? oPtr = SaveGame.GetInventoryItem(index);
-                if (oPtr != null && oPtr.Factory.ProvidesSunlight && !SaveGame.HasLightResistance)
+                Item? oPtr = Game.GetInventoryItem(index);
+                if (oPtr != null && oPtr.Factory.ProvidesSunlight && !Game.HasLightResistance)
                 {
                     string oName = oPtr.Description(false, 0);
-                    SaveGame.MsgPrint($"The {oName} scorches your undead flesh!");
+                    Game.MsgPrint($"The {oName} scorches your undead flesh!");
                     processWorldEventArgs.DisableRegeneration = true;
                     oName = oPtr.Description(true, 0);
                     string ouch = $"wielding {oName}";
-                    if (SaveGame.InvulnerabilityTimer.Value == 0)
+                    if (Game.InvulnerabilityTimer.Value == 0)
                     {
-                        SaveGame.TakeHit(1, ouch);
+                        Game.TakeHit(1, ouch);
                     }
                 }
             }

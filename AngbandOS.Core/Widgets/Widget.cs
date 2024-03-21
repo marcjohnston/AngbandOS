@@ -15,10 +15,10 @@ namespace AngbandOS.Core.Widgets;
 [Serializable]
 internal abstract class Widget : IGetKey
 {
-    protected readonly SaveGame SaveGame;
-    protected Widget(SaveGame saveGame)
+    protected readonly Game Game;
+    protected Widget(Game game)
     {
-        SaveGame = saveGame;
+        Game = game;
     }
 
     /// <summary>
@@ -89,7 +89,7 @@ internal abstract class Widget : IGetKey
 
     public virtual void Bind()
     {
-        Justification = JustificationName == null ? null : SaveGame.SingletonRepository.Justifications.Get(JustificationName);
+        Justification = JustificationName == null ? null : Game.SingletonRepository.Justifications.Get(JustificationName);
 
         if (EnabledConditionalNames == null)
         {
@@ -100,14 +100,14 @@ internal abstract class Widget : IGetKey
             List<(IConditional, bool)> conditionalList = new();
             foreach ((string conditionalName, bool isTrue) in EnabledConditionalNames)
             {
-                Conditional? conditional = SaveGame.SingletonRepository.Conditionals.TryGet(conditionalName);
+                Conditional? conditional = Game.SingletonRepository.Conditionals.TryGet(conditionalName);
                 if (conditional != null)
                 {
                     conditionalList.Add((conditional, isTrue));
                 }
                 else
                 {
-                    Property? property = SaveGame.SingletonRepository.Properties.TryGet(conditionalName);
+                    Property? property = Game.SingletonRepository.Properties.TryGet(conditionalName);
                     if (property == null)
                     {
                         throw new Exception($"A {conditionalName} {nameof(Conditional)} or {nameof(Property)} cannot be found.");
@@ -135,7 +135,7 @@ internal abstract class Widget : IGetKey
         {
             justifiedText = Justification.Format(justifiedText, Width);
         }
-        SaveGame.Screen.Print(Color, justifiedText, Y, X);
+        Game.Screen.Print(Color, justifiedText, Y, X);
     }
 
     /// <summary>

@@ -10,7 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class IronHelmSkullkeeperFixedArtifact : FixedArtifact
 {
-    private IronHelmSkullkeeperFixedArtifact(SaveGame saveGame) : base(saveGame) { }
+    private IronHelmSkullkeeperFixedArtifact(Game game) : base(game) { }
 
     protected override string BaseItemFactoryName => nameof(IronHelmArmorItemFactory);
 

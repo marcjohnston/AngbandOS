@@ -13,7 +13,7 @@ namespace AngbandOS.Core.Activations;
 [Serializable]
 internal class QuakeActivation : Activation
 {
-    private QuakeActivation(SaveGame saveGame) : base(saveGame) { }
+    private QuakeActivation(Game game) : base(game) { }
     public override int RandomChance => 101;
 
     public override string? PreActivationMessage => "";
@@ -22,7 +22,7 @@ internal class QuakeActivation : Activation
 
     protected override bool OnActivate(Item item)
     {
-        SaveGame.Earthquake(SaveGame.MapY, SaveGame.MapX, 10);
+        Game.Earthquake(Game.MapY, Game.MapX, 10);
         return true;
     }
 

@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class EnterStoreScript : Script, IScript, IRepeatableScript
 {
-    private EnterStoreScript(SaveGame saveGame) : base(saveGame) { }
+    private EnterStoreScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the enter store script and returns false.
@@ -28,25 +28,25 @@ internal class EnterStoreScript : Script, IScript, IRepeatableScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        GridTile tile = SaveGame.Grid[SaveGame.MapY][SaveGame.MapX];
+        GridTile tile = Game.Grid[Game.MapY][Game.MapX];
         // Make sure we're actually on a shop tile
         if (!tile.FeatureType.IsShop)
         {
-            SaveGame.MsgPrint("You see no Stores here.");
+            Game.MsgPrint("You see no Stores here.");
             return;
         }
-        Store which = SaveGame.GetWhichStore();
+        Store which = Game.GetWhichStore();
         // We can't enter a house unless we own it
         if (which.DoorsLocked())
         {
-            SaveGame.MsgPrint("The door is locked.");
+            Game.MsgPrint("The door is locked.");
             return;
         }
         // Switch from the normal game interface to the store interface
-        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RemoveLightFlaggedAction)).Check(true);
-        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RemoveViewFlaggedAction)).Check(true);
-        SaveGame.FullScreenOverlay = true;
-        SaveGame.CommandArgument = 0;
+        Game.SingletonRepository.FlaggedActions.Get(nameof(RemoveLightFlaggedAction)).Check(true);
+        Game.SingletonRepository.FlaggedActions.Get(nameof(RemoveViewFlaggedAction)).Check(true);
+        Game.FullScreenOverlay = true;
+        Game.CommandArgument = 0;
         which.EnterStore();
     }
 }

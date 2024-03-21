@@ -10,9 +10,9 @@ namespace AngbandOS.Core.Projection;
 [Serializable]
 internal class DominationProjectile : Projectile
 {
-    private DominationProjectile(SaveGame saveGame) : base(saveGame) { }
+    private DominationProjectile(Game game) : base(game) { }
 
-    protected override Animation EffectAnimation => SaveGame.SingletonRepository.Animations.Get(nameof(WhiteControlAnimation));
+    protected override Animation EffectAnimation => Game.SingletonRepository.Animations.Get(nameof(WhiteControlAnimation));
 
     protected override bool ProjectileAngersMonster(Monster mPtr)
     {
@@ -35,7 +35,7 @@ internal class DominationProjectile : Projectile
         {
             obvious = true;
         }
-        if (rPtr.Unique || rPtr.ImmuneConfusion || rPtr.Level > SaveGame.DieRoll(dam - 10 < 1 ? 1 : dam - 10) + 10)
+        if (rPtr.Unique || rPtr.ImmuneConfusion || rPtr.Level > Game.DieRoll(dam - 10 < 1 ? 1 : dam - 10) + 10)
         {
             if (rPtr.ImmuneConfusion)
             {
@@ -45,24 +45,24 @@ internal class DominationProjectile : Projectile
                 }
             }
             doConf = 0;
-            if ((rPtr.Undead || rPtr.Demon) && rPtr.Level > SaveGame.ExperienceLevel.Value / 2 && SaveGame.DieRoll(2) == 1)
+            if ((rPtr.Undead || rPtr.Demon) && rPtr.Level > Game.ExperienceLevel.Value / 2 && Game.DieRoll(2) == 1)
             {
                 string s = seen ? "'s" : "s";
-                SaveGame.MsgPrint($"{mName}{s} corrupted mind backlashes your attack!");
-                if (SaveGame.RandomLessThan(100) < SaveGame.SkillSavingThrow)
+                Game.MsgPrint($"{mName}{s} corrupted mind backlashes your attack!");
+                if (Game.RandomLessThan(100) < Game.SkillSavingThrow)
                 {
-                    SaveGame.MsgPrint("You resist the effects!");
+                    Game.MsgPrint("You resist the effects!");
                 }
                 else
                 {
-                    switch (SaveGame.DieRoll(4))
+                    switch (Game.DieRoll(4))
                     {
                         case 1:
-                            SaveGame.StunTimer.AddTimer((dam / 2));
+                            Game.StunTimer.AddTimer((dam / 2));
                             break;
 
                         case 2:
-                            SaveGame.ConfusedTimer.AddTimer((dam / 2));
+                            Game.ConfusedTimer.AddTimer((dam / 2));
                             break;
 
                         default:
@@ -73,7 +73,7 @@ internal class DominationProjectile : Projectile
                                 }
                                 else
                                 {
-                                    SaveGame.FearTimer.AddTimer(dam);
+                                    Game.FearTimer.AddTimer(dam);
                                 }
                                 break;
                             }
@@ -94,14 +94,14 @@ internal class DominationProjectile : Projectile
             }
             else
             {
-                if (dam > 29 && SaveGame.DieRoll(100) < dam)
+                if (dam > 29 && Game.DieRoll(100) < dam)
                 {
                     note = " is in your thrall!";
                     mPtr.SmFriendly = true;
                 }
                 else
                 {
-                    switch (SaveGame.DieRoll(4))
+                    switch (Game.DieRoll(4))
                     {
                         case 1:
                             doStun = dam / 2;

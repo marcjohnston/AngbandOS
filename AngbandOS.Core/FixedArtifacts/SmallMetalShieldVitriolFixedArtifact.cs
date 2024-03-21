@@ -10,14 +10,14 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class SmallMetalShieldVitriolFixedArtifact : FixedArtifact
 {
-    private SmallMetalShieldVitriolFixedArtifact(SaveGame saveGame) : base(saveGame) { }
+    private SmallMetalShieldVitriolFixedArtifact(Game game) : base(game) { }
 
     protected override string BaseItemFactoryName => nameof(SmallMetalShieldArmorItemFactory);
 
     public override void ApplyResistances(Item item)
     {
         IArtifactBias artifactBias = null;
-        item.ApplyRandomResistance(ref artifactBias, SaveGame.DieRoll(22) + 16);
+        item.ApplyRandomResistance(ref artifactBias, Game.DieRoll(22) + 16);
     }
 
     public override ColorEnum Color => ColorEnum.Grey;

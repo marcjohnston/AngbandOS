@@ -10,9 +10,9 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class HardStuddedLeatherSoftArmorItemFactory : SoftArmorItemFactory
 {
-    private HardStuddedLeatherSoftArmorItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private HardStuddedLeatherSoftArmorItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(OpenParenthesisSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(OpenParenthesisSymbol));
     public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "Hard Studded Leather";
 
@@ -26,5 +26,5 @@ internal class HardStuddedLeatherSoftArmorItemFactory : SoftArmorItemFactory
     public override int[] Locale => new int[] { 10, 0, 0, 0 };
     public override int ToH => -1;
     public override int Weight => 110;
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

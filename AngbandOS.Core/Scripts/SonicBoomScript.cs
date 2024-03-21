@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class SonicBoomScript : Script, IScript
 {
-    private SonicBoomScript(SaveGame saveGame) : base(saveGame) { }
+    private SonicBoomScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script.
@@ -18,6 +18,6 @@ internal class SonicBoomScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        SaveGame.Project(0, 2 + (SaveGame.ExperienceLevel.Value / 10), SaveGame.MapY, SaveGame.MapX, 45 + SaveGame.ExperienceLevel.Value, SaveGame.SingletonRepository.Projectiles.Get(nameof(SoundProjectile)), ProjectionFlag.ProjectKill | ProjectionFlag.ProjectItem);
+        Game.Project(0, 2 + (Game.ExperienceLevel.Value / 10), Game.MapY, Game.MapX, 45 + Game.ExperienceLevel.Value, Game.SingletonRepository.Projectiles.Get(nameof(SoundProjectile)), ProjectionFlag.ProjectKill | ProjectionFlag.ProjectItem);
     }
 }

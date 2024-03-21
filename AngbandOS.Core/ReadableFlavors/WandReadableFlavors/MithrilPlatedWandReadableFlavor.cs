@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Flavors;
 [Serializable]
 internal class MithrilPlatedWandReadableFlavor : WandReadableFlavor
 {
-    private MithrilPlatedWandReadableFlavor(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private MithrilPlatedWandReadableFlavor(Game game) : base(game) { } // This object is a singleton.
     protected override string SymbolName => nameof(MinusSignSymbol);
     public override ColorEnum Color => ColorEnum.BrightBlue;
     public override string Name => "Mithril-Plated";

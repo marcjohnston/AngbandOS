@@ -10,9 +10,9 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class MagicMappingScrollItemFactory : ScrollItemFactory
 {
-    private MagicMappingScrollItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private MagicMappingScrollItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(QuestionMarkSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(QuestionMarkSymbol));
     public override string Name => "Magic Mapping";
 
     public override int[] Chance => new int[] { 1, 0, 0, 0 };
@@ -24,8 +24,8 @@ internal class MagicMappingScrollItemFactory : ScrollItemFactory
 
     public override void Read(ReadScrollEvent eventArgs)
     {
-        SaveGame.RunScript(nameof(MapAreaScript));
+        Game.RunScript(nameof(MapAreaScript));
         eventArgs.Identified = true;
     }
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

@@ -10,9 +10,9 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class DestructionScrollItemFactory : ScrollItemFactory
 {
-    private DestructionScrollItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private DestructionScrollItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(QuestionMarkSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(QuestionMarkSymbol));
     public override string Name => "*Destruction*";
 
     public override int[] Chance => new int[] { 1, 0, 0, 0 };
@@ -23,8 +23,8 @@ internal class DestructionScrollItemFactory : ScrollItemFactory
     public override int Weight => 5;
     public override void Read(ReadScrollEvent eventArgs)
     {
-        SaveGame.DestroyArea(SaveGame.MapY, SaveGame.MapX, 15);
+        Game.DestroyArea(Game.MapY, Game.MapX, 15);
         eventArgs.Identified = true;
     }
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

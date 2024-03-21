@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Flavors;
 [Serializable]
 internal class ZincPlatedWandReadableFlavor : WandReadableFlavor
 {
-    private ZincPlatedWandReadableFlavor(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private ZincPlatedWandReadableFlavor(Game game) : base(game) { } // This object is a singleton.
     protected override string SymbolName => nameof(MinusSignSymbol);
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "Zinc-Plated";

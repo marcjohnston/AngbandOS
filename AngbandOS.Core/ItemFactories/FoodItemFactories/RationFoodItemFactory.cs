@@ -10,9 +10,9 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class RationFoodItemFactory : FoodItemFactory
 {
-    private RationFoodItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private RationFoodItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(CommaSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(CommaSymbol));
     public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "Ration of Food";
 
@@ -25,9 +25,9 @@ internal class RationFoodItemFactory : FoodItemFactory
 
     public override bool Eat()
     {
-        SaveGame.PlaySound(SoundEffectEnum.Eat);
-        SaveGame.MsgPrint("That tastes good.");
+        Game.PlaySound(SoundEffectEnum.Eat);
+        Game.MsgPrint("That tastes good.");
         return true;
     }
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

@@ -10,8 +10,8 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal abstract class CorporealBookItemFactory : BookItemFactory
 {
-    public CorporealBookItemFactory(SaveGame saveGame) : base(saveGame) { }
-    public override ItemClass ItemClass => SaveGame.SingletonRepository.ItemClasses.Get(nameof(CorporealSpellBooksItemClass));
+    public CorporealBookItemFactory(Game game) : base(game) { }
+    public override ItemClass ItemClass => Game.SingletonRepository.ItemClasses.Get(nameof(CorporealSpellBooksItemClass));
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.CorporealBook;
     public override string RealmName => "Corporeal";
     public override int PackSort => 1;

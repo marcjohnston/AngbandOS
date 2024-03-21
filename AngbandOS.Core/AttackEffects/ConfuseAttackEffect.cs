@@ -10,23 +10,23 @@ namespace AngbandOS.Core.AttackEffects;
 [Serializable]
 internal class ConfuseAttackEffect : AttackEffect
 {
-    private ConfuseAttackEffect(SaveGame saveGame) : base(saveGame) { }
+    private ConfuseAttackEffect(Game game) : base(game) { }
     public override int Power => 10;
     public override string Description => "confuse";
     public override void ApplyToPlayer(int monsterLevel, int monsterIndex, int armorClass, string monsterDescription, Monster monster, ref bool obvious, ref int damage, ref bool blinked)
     {
-        SaveGame.TakeHit(damage, monsterDescription);
-        if (!SaveGame.HasConfusionResistance)
+        Game.TakeHit(damage, monsterDescription);
+        if (!Game.HasConfusionResistance)
         {
-            if (SaveGame.ConfusedTimer.AddTimer(3 + SaveGame.DieRoll(monsterLevel)))
+            if (Game.ConfusedTimer.AddTimer(3 + Game.DieRoll(monsterLevel)))
             {
                 obvious = true;
             }
         }
-        SaveGame.UpdateSmartLearn(monster, SaveGame.SingletonRepository.SpellResistantDetections.Get(nameof(ConfSpellResistantDetection)));
+        Game.UpdateSmartLearn(monster, Game.SingletonRepository.SpellResistantDetections.Get(nameof(ConfSpellResistantDetection)));
     }
     public override void ApplyToMonster(Monster monster, int armorClass, ref int damage, ref Projectile? pt, ref bool blinked)
     {
-        pt = SaveGame.SingletonRepository.Projectiles.Get(nameof(ConfusionProjectile));
+        pt = Game.SingletonRepository.Projectiles.Get(nameof(ConfusionProjectile));
     }
 }

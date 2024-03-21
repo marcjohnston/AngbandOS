@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Spells.Corporeal;
 [Serializable]
 internal class CorporealSpellHypnoticEyes : Spell
 {
-    private CorporealSpellHypnoticEyes(SaveGame saveGame) : base(saveGame) { }
+    private CorporealSpellHypnoticEyes(Game game) : base(game) { }
     protected override string? CastScriptName => nameof(HypnoticEyesScript);
 
     public override string Name => "Hypnotic Eyes";

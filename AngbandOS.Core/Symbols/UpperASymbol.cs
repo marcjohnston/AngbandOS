@@ -1,7 +1,7 @@
 [Serializable]
 internal class UpperASymbol : Symbol
 {
-    private UpperASymbol(SaveGame saveGame) : base(saveGame) { }
+    private UpperASymbol(Game game) : base(game) { }
     public override char Character => 'A';
     public override string Name => "Abomination";
 }

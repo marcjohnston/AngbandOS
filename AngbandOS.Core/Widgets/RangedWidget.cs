@@ -14,7 +14,7 @@ internal abstract class RangedWidget : IntWidget
     private string _text;
     private ColorEnum _color;
 
-    protected RangedWidget(SaveGame saveGame) : base(saveGame)
+    protected RangedWidget(Game game) : base(game)
     {
         _text = DefaultText;
         _color = DefaultColor;

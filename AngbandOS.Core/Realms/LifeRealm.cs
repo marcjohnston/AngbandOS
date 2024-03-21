@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Realms;
 [Serializable]
 internal class LifeRealm : Realm
 {
-    private LifeRealm(SaveGame savedGame) : base(savedGame) { }
+    private LifeRealm(Game savedGame) : base(savedGame) { }
 
     public override string[] Info => new string[] {
         "The Life realm is devoted to healing and buffing, with some", 

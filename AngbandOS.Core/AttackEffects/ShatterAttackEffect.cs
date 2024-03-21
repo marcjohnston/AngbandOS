@@ -10,25 +10,25 @@ namespace AngbandOS.Core.AttackEffects;
 [Serializable]
 internal class ShatterAttackEffect : AttackEffect
 {
-    private ShatterAttackEffect(SaveGame saveGame) : base(saveGame) { }
+    private ShatterAttackEffect(Game game) : base(game) { }
     public override int Power => 60;
     public override string Description => "shatter";
     public override void ApplyToPlayer(int monsterLevel, int monsterIndex, int armorClass, string monsterDescription, Monster monster, ref bool obvious, ref int damage, ref bool blinked)
     {
         obvious = true;
         damage -= damage * (armorClass < 150 ? armorClass : 150) / 250;
-        SaveGame.TakeHit(damage, monsterDescription);
+        Game.TakeHit(damage, monsterDescription);
         // Do an earthquake only if we did enough damage on the hit
         if (damage > 23)
         {
-            SaveGame.Earthquake(monster.MapY, monster.MapX, 8);
+            Game.Earthquake(monster.MapY, monster.MapX, 8);
         }
     }
     public override void ApplyToMonster(Monster monster, int armorClass, ref int damage, ref Projectile? pt, ref bool blinked)
     {
         if (damage > 23)
         {
-            SaveGame.Earthquake(monster.MapY, monster.MapX, 8);
+            Game.Earthquake(monster.MapY, monster.MapX, 8);
         }
     }
 }

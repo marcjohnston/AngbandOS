@@ -10,9 +10,9 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class BarahirRingItemFactory : RingItemFactory
 {
-    private BarahirRingItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private BarahirRingItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(EqualSignSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(EqualSignSymbol));
     public override string Name => "Barahir";
 
     public override int Cost => 65000;
@@ -20,5 +20,5 @@ internal class BarahirRingItemFactory : RingItemFactory
     public override bool InstaArt => true;
     public override int LevelNormallyFound => 50;
     public override int Weight => 2;
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

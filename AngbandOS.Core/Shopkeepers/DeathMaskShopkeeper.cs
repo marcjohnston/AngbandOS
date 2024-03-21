@@ -8,7 +8,7 @@
 [Serializable]
 internal class DeathMaskShopkeeper : Shopkeeper
 {
-    private DeathMaskShopkeeper(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private DeathMaskShopkeeper(Game game) : base(game) { } // This object is a singleton.
     public override string Name => "Death Mask";
     public override int MaxCost =>  30000;
     public override int MinInflate =>  105;

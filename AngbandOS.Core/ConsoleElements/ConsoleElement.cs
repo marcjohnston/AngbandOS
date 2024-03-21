@@ -21,5 +21,5 @@ internal abstract class ConsoleElement
     /// </summary>
     public ConsoleAlignment? Alignment { get; set; } = null;
 
-    public abstract void Render(SaveGame saveGame, ConsoleWindow containerWindow, ConsoleAlignment parentAlignment);
+    public abstract void Render(Game game, ConsoleWindow containerWindow, ConsoleAlignment parentAlignment);
 }

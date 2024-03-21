@@ -10,13 +10,13 @@ namespace AngbandOS.Core.Timers;
 [Serializable]
 internal class ColdResistanceTimer : Timer
 {
-    private ColdResistanceTimer(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private ColdResistanceTimer(Game game) : base(game) { } // This object is a singleton.
     protected override void EffectStopped()
     {
-        SaveGame.MsgPrint("You feel less resistant to cold.");
+        Game.MsgPrint("You feel less resistant to cold.");
     }
     protected override void EffectIncreased(int newRate, int currentRate)
     {
-        SaveGame.MsgPrint("You feel resistant to cold!");
+        Game.MsgPrint("You feel resistant to cold!");
     }
 }

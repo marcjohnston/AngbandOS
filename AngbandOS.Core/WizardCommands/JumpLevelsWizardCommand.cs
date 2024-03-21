@@ -10,7 +10,7 @@ namespace AngbandOS.Core.WizardCommands;
 [Serializable]
 internal class JumpLevelsWizardCommand : WizardCommand
 {
-    private JumpLevelsWizardCommand(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private JumpLevelsWizardCommand(Game game) : base(game) { } // This object is a singleton.
 
     public override char KeyChar => 'j';
 

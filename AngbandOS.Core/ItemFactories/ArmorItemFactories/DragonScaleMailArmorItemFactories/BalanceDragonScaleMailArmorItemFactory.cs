@@ -12,20 +12,20 @@ internal class BalanceDragonScaleMailArmorItemFactory : DragonScaleMailArmorItem
 {
     public void ActivateItem(Item item)
     {
-        if (!SaveGame.GetDirectionWithAim(out int dir))
+        if (!Game.GetDirectionWithAim(out int dir))
         {
             return;
         }
-        int chance = SaveGame.RandomLessThan(4);
+        int chance = Game.RandomLessThan(4);
         string element = chance == 1 ? "chaos" : (chance == 2 ? "disenchantment" : (chance == 3 ? "sound" : "shards"));
-        SaveGame.MsgPrint($"You breathe {element}.");
-        SaveGame.FireBall(chance == 1 ? SaveGame.SingletonRepository.Projectiles.Get(nameof(ChaosProjectile)) : (chance == 2 ? SaveGame.SingletonRepository.Projectiles.Get(nameof(DisenchantProjectile)) : (chance == 3 ? (Projectile)SaveGame.SingletonRepository.Projectiles.Get(nameof(SoundProjectile)) : SaveGame.SingletonRepository.Projectiles.Get(nameof(ExplodeProjectile)))), dir, 250, -2);
-        item.RechargeTimeLeft = SaveGame.RandomLessThan(300) + 300;
+        Game.MsgPrint($"You breathe {element}.");
+        Game.FireBall(chance == 1 ? Game.SingletonRepository.Projectiles.Get(nameof(ChaosProjectile)) : (chance == 2 ? Game.SingletonRepository.Projectiles.Get(nameof(DisenchantProjectile)) : (chance == 3 ? (Projectile)Game.SingletonRepository.Projectiles.Get(nameof(SoundProjectile)) : Game.SingletonRepository.Projectiles.Get(nameof(ExplodeProjectile)))), dir, 250, -2);
+        item.RechargeTimeLeft = Game.RandomLessThan(300) + 300;
     }
-    private BalanceDragonScaleMailArmorItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private BalanceDragonScaleMailArmorItemFactory(Game game) : base(game) { } // This object is a singleton.
 
     public override string? DescribeActivationEffect => "You breathe balance (250) every 300+d300 turns";
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(OpenBraceSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(OpenBraceSymbol));
     public override ColorEnum Color => ColorEnum.Silver;
     public override string Name => "Balance Dragon Scale Mail";
 
@@ -49,5 +49,5 @@ internal class BalanceDragonScaleMailArmorItemFactory : DragonScaleMailArmorItem
     public override int ToA => 10;
     public override int ToH => -2;
     public override int Weight => 200;
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

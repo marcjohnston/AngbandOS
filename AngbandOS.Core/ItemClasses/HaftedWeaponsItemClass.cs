@@ -3,6 +3,6 @@ namespace AngbandOS.Core.ItemClasses;
 [Serializable]
 internal class HaftedWeaponsItemClass : ItemClass
 {
-    private HaftedWeaponsItemClass(SaveGame saveGame) : base(saveGame) { }
+    private HaftedWeaponsItemClass(Game game) : base(game) { }
     public override string Name => "Hafted Weapon";
 }

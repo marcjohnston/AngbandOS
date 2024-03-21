@@ -10,7 +10,7 @@ namespace AngbandOS.Core.ClassSpells;
 [Serializable]
 internal class MageDeathRayDeathSpell : ClassSpell
 {
-    private MageDeathRayDeathSpell(SaveGame saveGame) : base(saveGame) { }
+    private MageDeathRayDeathSpell(Game game) : base(game) { }
     public override string SpellName => nameof(DeathSpellDeathRay);
     public override string CharacterClassName => nameof(MageCharacterClass);
     public override int Level => 20;

@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class PolymorphSelfScript : Script, IScript, IRepeatableScript
 {
-    private PolymorphSelfScript(SaveGame saveGame) : base(saveGame) { }
+    private PolymorphSelfScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the polymorph-self script and returns false.
@@ -28,24 +28,24 @@ internal class PolymorphSelfScript : Script, IScript, IRepeatableScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        int effects = SaveGame.DieRoll(2);
+        int effects = Game.DieRoll(2);
         int tmp = 0;
         bool moreEffects = true;
-        SaveGame.MsgPrint("You feel a change coming over you...");
+        Game.MsgPrint("You feel a change coming over you...");
         while (effects-- != 0 && moreEffects)
         {
-            switch (SaveGame.DieRoll(12))
+            switch (Game.DieRoll(12))
             {
                 case 1:
                 case 2:
                 case 3:
-                    SaveGame.RunScript(nameof(PolymorphWoundsScript));
+                    Game.RunScript(nameof(PolymorphWoundsScript));
                     break;
 
                 case 4:
                 case 5:
                 case 6:
-                    SaveGame.RunScript(nameof(GainMutationScript));
+                    Game.RunScript(nameof(GainMutationScript));
                     break;
 
                 case 7:
@@ -54,33 +54,33 @@ internal class PolymorphSelfScript : Script, IScript, IRepeatableScript
                         Race newRace;
                         do
                         {
-                            newRaceIndex = SaveGame.RandomLessThan(SaveGame.SingletonRepository.Races.Count);
-                            newRace = SaveGame.SingletonRepository.Races[newRaceIndex];
+                            newRaceIndex = Game.RandomLessThan(Game.SingletonRepository.Races.Count);
+                            newRace = Game.SingletonRepository.Races[newRaceIndex];
                         } while (newRace is Race);
-                        SaveGame.MsgPrint($"You turn into {newRace.IndefiniteArticleForTitle} {newRace.Title}!");
-                        SaveGame.ChangeRace(newRace);
+                        Game.MsgPrint($"You turn into {newRace.IndefiniteArticleForTitle} {newRace.Title}!");
+                        Game.ChangeRace(newRace);
                     }
-                    SaveGame.RedrawSingleLocation(SaveGame.MapY, SaveGame.MapX);
+                    Game.RedrawSingleLocation(Game.MapY, Game.MapX);
                     moreEffects = false;
                     break;
 
                 case 8:
-                    SaveGame.MsgPrint("You polymorph into an abomination!");
+                    Game.MsgPrint("You polymorph into an abomination!");
                     while (tmp < 6)
                     {
-                        SaveGame.DecreaseAbilityScore(tmp, SaveGame.FixedSeed + 6, SaveGame.DieRoll(3) == 1);
+                        Game.DecreaseAbilityScore(tmp, Game.FixedSeed + 6, Game.DieRoll(3) == 1);
                         tmp++;
                     }
-                    if (SaveGame.DieRoll(6) == 1)
+                    if (Game.DieRoll(6) == 1)
                     {
-                        SaveGame.MsgPrint("You find living difficult in your present form!");
-                        SaveGame.TakeHit(SaveGame.DiceRoll(SaveGame.DieRoll(SaveGame.ExperienceLevel.Value), SaveGame.ExperienceLevel.Value), "a lethal mutation");
+                        Game.MsgPrint("You find living difficult in your present form!");
+                        Game.TakeHit(Game.DiceRoll(Game.DieRoll(Game.ExperienceLevel.Value), Game.ExperienceLevel.Value), "a lethal mutation");
                     }
-                    SaveGame.ShuffleAbilityScores();
+                    Game.ShuffleAbilityScores();
                     break;
 
                 default:
-                    SaveGame.ShuffleAbilityScores();
+                    Game.ShuffleAbilityScores();
                     break;
             }
         }

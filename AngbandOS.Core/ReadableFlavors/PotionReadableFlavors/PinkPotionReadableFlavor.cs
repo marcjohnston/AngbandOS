@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Flavors;
 [Serializable]
 internal class PinkPotionReadableFlavor : PotionReadableFlavor
 {
-    private PinkPotionReadableFlavor(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private PinkPotionReadableFlavor(Game game) : base(game) { } // This object is a singleton.
     protected override string SymbolName => nameof(ExclamationPointSymbol);
     public override ColorEnum Color => ColorEnum.Pink;
     public override string Name => "Pink";

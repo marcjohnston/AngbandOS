@@ -10,7 +10,7 @@ namespace AngbandOS.Core.MonsterSpells;
 [Serializable]
 internal class ShriekMonsterSpell : MonsterSpell
 {
-    private ShriekMonsterSpell(SaveGame saveGame) : base(saveGame) { }
+    private ShriekMonsterSpell(Game game) : base(game) { }
     public override bool IsInnate => true;
     public override bool Annoys => true;
 
@@ -20,12 +20,12 @@ internal class ShriekMonsterSpell : MonsterSpell
     public override string? VsMonsterSeenMessage(Monster monster, Monster target) => $"{monster.Name} shrieks at {target.Name}.";
 
 
-    public override void ExecuteOnPlayer(SaveGame saveGame, Monster monster)
+    public override void ExecuteOnPlayer(Game game, Monster monster)
     {
-        saveGame.AggravateMonsters(monster);
+        game.AggravateMonsters(monster);
     }
 
-    public override void ExecuteOnMonster(SaveGame saveGame, Monster monster, Monster target)
+    public override void ExecuteOnMonster(Game game, Monster monster, Monster target)
     {
         // No additional processing needed.  It only wakes the monster.
     }

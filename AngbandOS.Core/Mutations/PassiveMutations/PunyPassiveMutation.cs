@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Mutations.PassiveMutations;
 [Serializable]
 internal class PunyPassiveMutation : Mutation
 {
-    private PunyPassiveMutation(SaveGame saveGame) : base(saveGame) { }
+    private PunyPassiveMutation(Game game) : base(game) { }
     public override int Frequency => 3;
     public override string GainMessage => "Your muscles wither away...";
     public override string HaveMessage => "You are puny (-4 STR).";
@@ -19,11 +19,11 @@ internal class PunyPassiveMutation : Mutation
 
     public override void OnGain()
     {
-        SaveGame.StrengthBonus -= 4;
+        Game.StrengthBonus -= 4;
     }
 
     public override void OnLose()
     {
-        SaveGame.StrengthBonus += 4;
+        Game.StrengthBonus += 4;
     }
 }

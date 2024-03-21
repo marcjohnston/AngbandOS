@@ -10,27 +10,27 @@ namespace AngbandOS.Core.MonsterSpells;
 [Serializable]
 internal class WaterBallMonsterSpell : BallProjectileMonsterSpell
 {
-    private WaterBallMonsterSpell(SaveGame saveGame) : base(saveGame) { }
+    private WaterBallMonsterSpell(Game game) : base(game) { }
     public override bool IsAttack => true;
     protected override string ActionName => "gestures fluidly";
-    protected override Projectile Projectile(SaveGame saveGame) => saveGame.SingletonRepository.Projectiles.Get(nameof(WaterProjectile));
+    protected override Projectile Projectile(Game game) => game.SingletonRepository.Projectiles.Get(nameof(WaterProjectile));
     protected override int Damage(Monster monster)
     {
         int monsterLevel = monster.Race.Level >= 1 ? monster.Race.Level : 1;
-        return SaveGame.DieRoll(monsterLevel * 5 / 2) + 50;
+        return Game.DieRoll(monsterLevel * 5 / 2) + 50;
     }
     protected override int Radius => 4;
 
-    public override void ExecuteOnPlayer(SaveGame saveGame, Monster monster)
+    public override void ExecuteOnPlayer(Game game, Monster monster)
     {
-        base.ExecuteOnPlayer(saveGame, monster);
-        saveGame.MsgPrint("You are engulfed in a whirlpool.");
+        base.ExecuteOnPlayer(game, monster);
+        game.MsgPrint("You are engulfed in a whirlpool.");
     }
 
-    public override void ExecuteOnMonster(SaveGame saveGame, Monster monster, Monster target)
+    public override void ExecuteOnMonster(Game game, Monster monster, Monster target)
     {
-        base.ExecuteOnMonster(saveGame, monster, target);
+        base.ExecuteOnMonster(game, monster, target);
         string targetName = target.Name;
-        saveGame.MsgPrint($"{targetName} is engulfed in a whirlpool.");
+        game.MsgPrint($"{targetName} is engulfed in a whirlpool.");
     }
 }

@@ -13,7 +13,7 @@ namespace AngbandOS.Core.Properties;
 [Serializable]
 internal abstract class BoolProperty : Property, IBoolChangeTracking, IConditional
 {
-    protected BoolProperty(SaveGame saveGame) : base(saveGame) { }
+    protected BoolProperty(Game game) : base(game) { }
 
     public bool IsTrue => Value;
 

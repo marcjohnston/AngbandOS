@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Tiles;
 [Serializable]
 internal class MagmaHiddenTreasureTile : Tile
 {
-    private MagmaHiddenTreasureTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private MagmaHiddenTreasureTile(Game game) : base(game) { } // This object is a singleton.
     protected override string SymbolName => nameof(PoundSignSymbol);
     public override ColorEnum Color => ColorEnum.Grey;
     protected override string? AlterActionName => nameof(TunnelAlterAction);

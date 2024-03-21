@@ -10,24 +10,24 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class TridentOfTheGnorriFixedArtifact : FixedArtifact, IFixedArtifactActivatible
 {
-    private TridentOfTheGnorriFixedArtifact(SaveGame saveGame) : base(saveGame) { }
+    private TridentOfTheGnorriFixedArtifact(Game game) : base(game) { }
 
     protected override string BaseItemFactoryName => nameof(TridentPolearmWeaponItemFactory);
 
     // Gnorri teleports monsters away
     public void ActivateItem(Item item)
     {
-        SaveGame.MsgPrint("Your trident glows deep red...");
-        if (!SaveGame.GetDirectionWithAim(out int dir))
+        Game.MsgPrint("Your trident glows deep red...");
+        if (!Game.GetDirectionWithAim(out int dir))
         {
             return;
         }
-        SaveGame.TeleportMonster(dir);
+        Game.TeleportMonster(dir);
         item.RechargeTimeLeft = 150;
     }
     public override void ApplyResistances(Item item)
     {
-        item.RandomPower = SaveGame.SingletonRepository.Powers.ToWeightedRandom(_power => _power.IsAbility == true).Choose();
+        item.RandomPower = Game.SingletonRepository.Powers.ToWeightedRandom(_power => _power.IsAbility == true).Choose();
     }
     public string DescribeActivationEffect => "teleport away every 150 turns";
 

@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Flavors;
 [Serializable]
 internal class GenericScrollReadableFlavor : ScrollReadableFlavor
 {
-    public GenericScrollReadableFlavor(SaveGame saveGame, ReadableFlavorDefinition readableFlavorDefninition) : base(saveGame)
+    public GenericScrollReadableFlavor(Game game, ReadableFlavorDefinition readableFlavorDefninition) : base(game)
     {
         Key = readableFlavorDefninition.Key;
         Name = readableFlavorDefninition.Name;

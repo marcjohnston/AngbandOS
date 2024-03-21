@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Spells.Corporeal;
 [Serializable]
 internal class CorporealSpellBurnResistance : Spell
 {
-    private CorporealSpellBurnResistance(SaveGame saveGame) : base(saveGame) { }
+    private CorporealSpellBurnResistance(Game game) : base(game) { }
     protected override string? CastScriptName => nameof(BurnResistanceScript);
 
     public override string Name => "Burn Resistance";

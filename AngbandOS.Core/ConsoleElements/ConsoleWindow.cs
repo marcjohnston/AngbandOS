@@ -22,13 +22,13 @@ internal class ConsoleWindow
 
     public int Width => Right - Left + 1;
 
-    public void Clear(SaveGame saveGame, ColorEnum color)
+    public void Clear(Game game, ColorEnum color)
     {
         for (int y = Top; y <= Bottom; y++)
         {
             for (int x  = Left; x <= Right; x++)
             {
-                saveGame.Screen.Print(color, ' ', y, x);
+                game.Screen.Print(color, ' ', y, x);
             }
         }
     }

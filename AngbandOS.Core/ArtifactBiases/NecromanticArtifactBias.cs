@@ -10,13 +10,13 @@ namespace AngbandOS.Core.ArtifactBiases;
 [Serializable]
 internal class NecromanticArtifactBias : ArtifactBias
 {
-    private NecromanticArtifactBias(SaveGame saveGame) : base(saveGame) { }
+    private NecromanticArtifactBias(Game game) : base(game) { }
     public override bool ApplyRandomResistances(Item item)
     {
         if (!item.RandomArtifactItemCharacteristics.ResNether)
         {
             item.RandomArtifactItemCharacteristics.ResNether = true;
-            if (SaveGame.DieRoll(2) == 1)
+            if (Game.DieRoll(2) == 1)
             {
                 return true;
             }
@@ -24,7 +24,7 @@ internal class NecromanticArtifactBias : ArtifactBias
         if (!item.RandomArtifactItemCharacteristics.ResPois)
         {
             item.RandomArtifactItemCharacteristics.ResPois = true;
-            if (SaveGame.DieRoll(2) == 1)
+            if (Game.DieRoll(2) == 1)
             {
                 return true;
             }
@@ -32,7 +32,7 @@ internal class NecromanticArtifactBias : ArtifactBias
         if (!item.RandomArtifactItemCharacteristics.ResDark)
         {
             item.RandomArtifactItemCharacteristics.ResDark = true;
-            if (SaveGame.DieRoll(2) == 1)
+            if (Game.DieRoll(2) == 1)
             {
                 return true;
             }
@@ -47,15 +47,15 @@ internal class NecromanticArtifactBias : ArtifactBias
             if (!item.RandomArtifactItemCharacteristics.Vampiric)
             {
                 item.RandomArtifactItemCharacteristics.Vampiric = true;
-                if (SaveGame.DieRoll(2) == 1)
+                if (Game.DieRoll(2) == 1)
                 {
                     return true;
                 }
             }
-            if (!item.RandomArtifactItemCharacteristics.BrandPois && SaveGame.DieRoll(2) == 1)
+            if (!item.RandomArtifactItemCharacteristics.BrandPois && Game.DieRoll(2) == 1)
             {
                 item.RandomArtifactItemCharacteristics.BrandPois = true;
-                if (SaveGame.DieRoll(2) == 1)
+                if (Game.DieRoll(2) == 1)
                 {
                     return true;
                 }
@@ -66,37 +66,37 @@ internal class NecromanticArtifactBias : ArtifactBias
 
     public override Activation GetActivationPowerType(Item item)
     {
-        if (SaveGame.DieRoll(66) == 1)
+        if (Game.DieRoll(66) == 1)
         {
-            return SaveGame.SingletonRepository.Activations.Get(nameof(WraithActivation));
+            return Game.SingletonRepository.Activations.Get(nameof(WraithActivation));
         }
-        else if (SaveGame.DieRoll(13) == 1)
+        else if (Game.DieRoll(13) == 1)
         {
-            return SaveGame.SingletonRepository.Activations.Get(nameof(DispelGood5xEvery300p1d300Activation));
+            return Game.SingletonRepository.Activations.Get(nameof(DispelGood5xEvery300p1d300Activation));
         }
-        else if (SaveGame.DieRoll(9) == 1)
+        else if (Game.DieRoll(9) == 1)
         {
-            return SaveGame.SingletonRepository.Activations.Get(nameof(MassCarnageActivation));
+            return Game.SingletonRepository.Activations.Get(nameof(MassCarnageActivation));
         }
-        else if (SaveGame.DieRoll(8) == 1)
+        else if (Game.DieRoll(8) == 1)
         {
-            return SaveGame.SingletonRepository.Activations.Get(nameof(GenocideEvery500Activation));
+            return Game.SingletonRepository.Activations.Get(nameof(GenocideEvery500Activation));
         }
-        else if (SaveGame.DieRoll(13) == 1)
+        else if (Game.DieRoll(13) == 1)
         {
-            return SaveGame.SingletonRepository.Activations.Get(nameof(SummonUndeadActivation));
+            return Game.SingletonRepository.Activations.Get(nameof(SummonUndeadActivation));
         }
-        else if (SaveGame.DieRoll(9) == 1)
+        else if (Game.DieRoll(9) == 1)
         {
-            return SaveGame.SingletonRepository.Activations.Get(nameof(Vampire2Activation));
+            return Game.SingletonRepository.Activations.Get(nameof(Vampire2Activation));
         }
-        else if (SaveGame.DieRoll(6) == 1)
+        else if (Game.DieRoll(6) == 1)
         {
-            return SaveGame.SingletonRepository.Activations.Get(nameof(EnslaveUndead1xEvery333Activation));
+            return Game.SingletonRepository.Activations.Get(nameof(EnslaveUndead1xEvery333Activation));
         }
         else
         {
-            return SaveGame.SingletonRepository.Activations.Get(nameof(Vampire1Activation));
+            return Game.SingletonRepository.Activations.Get(nameof(Vampire1Activation));
         }
     }
 }

@@ -14,7 +14,7 @@ namespace AngbandOS.Core.Activations;
 /// </summary>
 internal abstract class DirectionalActivation : Activation
 {
-    protected DirectionalActivation(SaveGame saveGame) : base(saveGame) { }
+    protected DirectionalActivation(Game game) : base(game) { }
 
     /// <summary>
     /// Returns the message to be displayed to the player, after the player has selected a direction.  No message is rendered, if empty or null.  Returns null, by default.
@@ -23,13 +23,13 @@ internal abstract class DirectionalActivation : Activation
 
     protected override bool OnActivate(Item item)
     {
-        if (!SaveGame.GetDirectionWithAim(out int direction))
+        if (!Game.GetDirectionWithAim(out int direction))
         {
             return false;
         }
         if (!String.IsNullOrEmpty(PostAimingMessage))
         {
-            SaveGame.MsgPrint(PostAimingMessage);
+            Game.MsgPrint(PostAimingMessage);
         }
         return Activate(direction);
     }

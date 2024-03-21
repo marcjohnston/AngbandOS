@@ -10,7 +10,7 @@ namespace AngbandOS.Core.RoomTypes;
 [Serializable]
 internal class Type5RoomLayout : RoomLayout
 {
-    private Type5RoomLayout(SaveGame saveGame) : base(saveGame) { }
+    private Type5RoomLayout(Game game) : base(game) { }
     public override int Type => 5;
     public override int Dy1 => 0;
     public override int Dy2 => 0;
@@ -32,46 +32,46 @@ internal class Type5RoomLayout : RoomLayout
         {
             for (x = x1 - 1; x <= x2 + 1; x++)
             {
-                cPtr = SaveGame.Grid[y][x];
+                cPtr = Game.Grid[y][x];
                 cPtr.RevertToBackground();
                 cPtr.TileFlags.Set(GridTile.InRoom);
             }
         }
-        Tile wallOuterTile = SaveGame.SingletonRepository.Tiles.Get(nameof(WallOuterTile));
+        Tile wallOuterTile = Game.SingletonRepository.Tiles.Get(nameof(WallOuterTile));
         for (y = y1 - 1; y <= y2 + 1; y++)
         {
-            cPtr = SaveGame.Grid[y][x1 - 1];
+            cPtr = Game.Grid[y][x1 - 1];
             cPtr.SetFeature(wallOuterTile);
-            cPtr = SaveGame.Grid[y][x2 + 1];
+            cPtr = Game.Grid[y][x2 + 1];
             cPtr.SetFeature(wallOuterTile);
         }
         for (x = x1 - 1; x <= x2 + 1; x++)
         {
-            cPtr = SaveGame.Grid[y1 - 1][x];
+            cPtr = Game.Grid[y1 - 1][x];
             cPtr.SetFeature(wallOuterTile);
-            cPtr = SaveGame.Grid[y2 + 1][x];
+            cPtr = Game.Grid[y2 + 1][x];
             cPtr.SetFeature(wallOuterTile);
         }
         y1 += 2;
         y2 -= 2;
         x1 += 2;
         x2 -= 2;
-        Tile wallInnerTile = SaveGame.SingletonRepository.Tiles.Get(nameof(WallInnerTile));
+        Tile wallInnerTile = Game.SingletonRepository.Tiles.Get(nameof(WallInnerTile));
         for (y = y1 - 1; y <= y2 + 1; y++)
         {
-            cPtr = SaveGame.Grid[y][x1 - 1];
+            cPtr = Game.Grid[y][x1 - 1];
             cPtr.SetFeature(wallInnerTile);
-            cPtr = SaveGame.Grid[y][x2 + 1];
+            cPtr = Game.Grid[y][x2 + 1];
             cPtr.SetFeature(wallInnerTile);
         }
         for (x = x1 - 1; x <= x2 + 1; x++)
         {
-            cPtr = SaveGame.Grid[y1 - 1][x];
+            cPtr = Game.Grid[y1 - 1][x];
             cPtr.SetFeature(wallInnerTile);
-            cPtr = SaveGame.Grid[y2 + 1][x];
+            cPtr = Game.Grid[y2 + 1][x];
             cPtr.SetFeature(wallInnerTile);
         }
-        switch (SaveGame.DieRoll(4))
+        switch (Game.DieRoll(4))
         {
             case 1:
                 PlaceSecretDoor(y1 - 1, xval);
@@ -89,59 +89,59 @@ internal class Type5RoomLayout : RoomLayout
                 PlaceSecretDoor(yval, x2 + 1);
                 break;
         }
-        int tmp = SaveGame.DieRoll(SaveGame.Difficulty);
-        if (tmp < 25 && SaveGame.DieRoll(2) != 1)
+        int tmp = Game.DieRoll(Game.Difficulty);
+        if (tmp < 25 && Game.DieRoll(2) != 1)
         {
             int _templateRace;
 
             do
             {
-                _templateRace = SaveGame.DieRoll(SaveGame.SingletonRepository.MonsterRaces.Count - 2);
-            } while (SaveGame.SingletonRepository.MonsterRaces[_templateRace].Unique ||
-                     SaveGame.SingletonRepository.MonsterRaces[_templateRace].Level + SaveGame.DieRoll(5) >
-                     SaveGame.Difficulty + SaveGame.DieRoll(5));
-            if (SaveGame.DieRoll(2) != 1 && SaveGame.Difficulty >= 25 + SaveGame.DieRoll(15))
+                _templateRace = Game.DieRoll(Game.SingletonRepository.MonsterRaces.Count - 2);
+            } while (Game.SingletonRepository.MonsterRaces[_templateRace].Unique ||
+                     Game.SingletonRepository.MonsterRaces[_templateRace].Level + Game.DieRoll(5) >
+                     Game.Difficulty + Game.DieRoll(5));
+            if (Game.DieRoll(2) != 1 && Game.Difficulty >= 25 + Game.DieRoll(15))
             {
-                getMonNumHook = new SymbolDynamicMonsterFilter(SaveGame, SaveGame.SingletonRepository.MonsterRaces[_templateRace].Symbol.Character);
+                getMonNumHook = new SymbolDynamicMonsterFilter(Game, Game.SingletonRepository.MonsterRaces[_templateRace].Symbol.Character);
             }
             else
             {
-                getMonNumHook = new CloneDynamicMonsterFilter(SaveGame, SaveGame.SingletonRepository.MonsterRaces[_templateRace]);
+                getMonNumHook = new CloneDynamicMonsterFilter(Game, Game.SingletonRepository.MonsterRaces[_templateRace]);
             }
         }
         else if (tmp < 25)
         {
-            getMonNumHook = SaveGame.SingletonRepository.MonsterFilters.Get(nameof(JellyMonsterFilter));
+            getMonNumHook = Game.SingletonRepository.MonsterFilters.Get(nameof(JellyMonsterFilter));
         }
         else if (tmp < 50)
         {
-            getMonNumHook = SaveGame.SingletonRepository.MonsterFilters.Get(nameof(TreasureMonsterFilter));
+            getMonNumHook = Game.SingletonRepository.MonsterFilters.Get(nameof(TreasureMonsterFilter));
         }
         else if (tmp < 65)
         {
-            if (SaveGame.DieRoll(3) == 1)
+            if (Game.DieRoll(3) == 1)
             {
-                getMonNumHook = SaveGame.SingletonRepository.MonsterFilters.Get(nameof(KennelMonsterFilter));
+                getMonNumHook = Game.SingletonRepository.MonsterFilters.Get(nameof(KennelMonsterFilter));
             }
             else
             {
-                getMonNumHook = SaveGame.SingletonRepository.MonsterFilters.Get(nameof(AnimalMonsterFilter));
+                getMonNumHook = Game.SingletonRepository.MonsterFilters.Get(nameof(AnimalMonsterFilter));
             }
         }
         else
         {
-            if (SaveGame.DieRoll(3) == 1)
+            if (Game.DieRoll(3) == 1)
             {
-                getMonNumHook = SaveGame.SingletonRepository.MonsterFilters.Get(nameof(ChapelMonsterFilter));
+                getMonNumHook = Game.SingletonRepository.MonsterFilters.Get(nameof(ChapelMonsterFilter));
             }
             else
             {
-                getMonNumHook = SaveGame.SingletonRepository.MonsterFilters.Get(nameof(UndeadMonsterFilter));
+                getMonNumHook = Game.SingletonRepository.MonsterFilters.Get(nameof(UndeadMonsterFilter));
             }
         }
         for (int i = 0; i < 64; i++)
         {
-            what[i] = SaveGame.GetMonNum(SaveGame.Difficulty + 10, getMonNumHook);
+            what[i] = Game.GetMonNum(Game.Difficulty + 10, getMonNumHook);
             if (what[i] == 0)
             {
                 empty = true;
@@ -151,18 +151,18 @@ internal class Type5RoomLayout : RoomLayout
         {
             return;
         }
-        SaveGame.DangerRating += 10;
-        if (SaveGame.Difficulty <= 40 && SaveGame.DieRoll((SaveGame.Difficulty * SaveGame.Difficulty) + 50) < 300)
+        Game.DangerRating += 10;
+        if (Game.Difficulty <= 40 && Game.DieRoll((Game.Difficulty * Game.Difficulty) + 50) < 300)
         {
-            SaveGame.SpecialDanger = true;
+            Game.SpecialDanger = true;
         }
         for (y = yval - 2; y <= yval + 2; y++)
         {
             for (x = xval - 9; x <= xval + 9; x++)
             {
-                int rIdx = what[SaveGame.RandomLessThan(64)];
-                MonsterRace race = SaveGame.SingletonRepository.MonsterRaces[rIdx];
-                SaveGame.PlaceMonsterAux(y, x, race, false, false, false);
+                int rIdx = what[Game.RandomLessThan(64)];
+                MonsterRace race = Game.SingletonRepository.MonsterRaces[rIdx];
+                Game.PlaceMonsterAux(y, x, race, false, false, false);
             }
         }
     }

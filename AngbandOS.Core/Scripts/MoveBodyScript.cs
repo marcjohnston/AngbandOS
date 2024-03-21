@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class MoveBodyScript : Script, IScript
 {
-    private MoveBodyScript(SaveGame saveGame) : base(saveGame) { }
+    private MoveBodyScript(Game game) : base(game) { }
 
     /// <summary>
     /// Teleports the player to a chosen destination.
@@ -18,23 +18,23 @@ internal class MoveBodyScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        SaveGame.MsgPrint("You focus your Chi. Choose a destination.");
-        if (!SaveGame.TgtPt(out int ii, out int ij))
+        Game.MsgPrint("You focus your Chi. Choose a destination.");
+        if (!Game.TgtPt(out int ii, out int ij))
         {
             return;
         }
-        SaveGame.Energy -= 60 - SaveGame.ExperienceLevel.Value;
-        if (!SaveGame.GridPassableNoCreature(ij, ii) || SaveGame.Grid[ij][ii].TileFlags.IsSet(GridTile.InVault) ||
-            SaveGame.Distance(ij, ii, SaveGame.MapY, SaveGame.MapX) > SaveGame.ExperienceLevel.Value + 2 ||
-            SaveGame.RandomLessThan(SaveGame.ExperienceLevel.Value * SaveGame.ExperienceLevel.Value / 2) == 0)
+        Game.Energy -= 60 - Game.ExperienceLevel.Value;
+        if (!Game.GridPassableNoCreature(ij, ii) || Game.Grid[ij][ii].TileFlags.IsSet(GridTile.InVault) ||
+            Game.Distance(ij, ii, Game.MapY, Game.MapX) > Game.ExperienceLevel.Value + 2 ||
+            Game.RandomLessThan(Game.ExperienceLevel.Value * Game.ExperienceLevel.Value / 2) == 0)
         {
-            SaveGame.MsgPrint("You fail to concentrate correctly!");
-            SaveGame.Energy -= 100;
-            SaveGame.RunScriptInt(nameof(TeleportSelfScript), 10);
+            Game.MsgPrint("You fail to concentrate correctly!");
+            Game.Energy -= 100;
+            Game.RunScriptInt(nameof(TeleportSelfScript), 10);
         }
         else
         {
-            SaveGame.TeleportPlayerTo(ij, ii);
+            Game.TeleportPlayerTo(ij, ii);
         }
     }
 }

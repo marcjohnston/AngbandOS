@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Repositories;
 [Serializable]
 internal class MoanPlayerAttacksRepository : StringListRepository
 {
-    public MoanPlayerAttacksRepository(SaveGame saveGame) : base(saveGame) { }
+    public MoanPlayerAttacksRepository(Game game) : base(game) { }
 
     /// <summary>
     /// Returns MoanPlayerAttacks as the name of this string list repository.
@@ -19,7 +19,7 @@ internal class MoanPlayerAttacksRepository : StringListRepository
 
     public override void Load()
     {
-        if (SaveGame.Configuration.MoanPlayerAttacks == null)
+        if (Game.Configuration.MoanPlayerAttacks == null)
         {
             Add("seems sad about something.",
                 "asks if you have seen his dogs.",
@@ -29,7 +29,7 @@ internal class MoanPlayerAttacksRepository : StringListRepository
         }
         else
         {
-            Add(SaveGame.Configuration.MoanPlayerAttacks);
+            Add(Game.Configuration.MoanPlayerAttacks);
         }
     }
 }

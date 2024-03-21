@@ -12,10 +12,10 @@ namespace AngbandOS.Core.Vaults;
 [Serializable]
 internal abstract class Vault : IGetKey
 {
-    protected SaveGame SaveGame;
-    protected Vault(SaveGame saveGame)
+    protected Game Game;
+    protected Vault(Game game)
     {
-        SaveGame = saveGame;
+        Game = game;
     }
 
     public virtual string Key => GetType().Name;

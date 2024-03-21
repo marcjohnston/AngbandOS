@@ -10,10 +10,10 @@ namespace AngbandOS.Core.MonsterSpells;
 [Serializable]
 internal class SummonReaverMonsterSpell : SummonMonsterSpell
 {
-    private SummonReaverMonsterSpell(SaveGame saveGame) : base(saveGame) { }
+    private SummonReaverMonsterSpell(Game game) : base(game) { }
     protected override string SummonName(Monster monster) => "Black Reavers";
 
-    protected override int MaximumSummonCount(SaveGame saveGame) => (saveGame.Difficulty / 50) + SaveGame.DieRoll(6);
+    protected override int MaximumSummonCount(Game game) => (game.Difficulty / 50) + Game.DieRoll(6);
 
     protected override int SummonLevel(Monster monster) => 100;
 
@@ -22,5 +22,5 @@ internal class SummonReaverMonsterSpell : SummonMonsterSpell
     /// </summary>
     /// <param name="monster"></param>
     /// <returns></returns>
-    protected override MonsterFilter? MonsterSelector(Monster monster) => SaveGame.SingletonRepository.MonsterFilters.Get(nameof(ReaverMonsterFilter));
+    protected override MonsterFilter? MonsterSelector(Monster monster) => Game.SingletonRepository.MonsterFilters.Get(nameof(ReaverMonsterFilter));
 }

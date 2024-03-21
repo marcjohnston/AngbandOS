@@ -10,7 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class RingOfBastFixedArtifact : FixedArtifact
 {
-    private RingOfBastFixedArtifact(SaveGame saveGame) : base(saveGame) { }
+    private RingOfBastFixedArtifact(Game game) : base(game) { }
 
     protected override string BaseItemFactoryName => nameof(TulkasRingItemFactory);
 

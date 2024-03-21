@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class FireItemScript : Script, IScript, IRepeatableScript
 {
-    private FireItemScript(SaveGame saveGame) : base(saveGame) { }
+    private FireItemScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the fire script and returns false.
@@ -29,18 +29,18 @@ internal class FireItemScript : Script, IScript, IRepeatableScript
     public void ExecuteScript()
     {
         // Check that we're actually wielding a ranged weapon
-        RangedWeaponInventorySlot rangedWeaponInventorySlot = (RangedWeaponInventorySlot)SaveGame.SingletonRepository.InventorySlots.Get(nameof(RangedWeaponInventorySlot));
+        RangedWeaponInventorySlot rangedWeaponInventorySlot = (RangedWeaponInventorySlot)Game.SingletonRepository.InventorySlots.Get(nameof(RangedWeaponInventorySlot));
         WeightedRandom<int> weightedRandom = rangedWeaponInventorySlot.WeightedRandom;
-        Item? missileWeapon = SaveGame.GetInventoryItem(weightedRandom.ChooseOrDefault());
+        Item? missileWeapon = Game.GetInventoryItem(weightedRandom.ChooseOrDefault());
         if (missileWeapon == null || missileWeapon.Category == 0)
         {
-            SaveGame.MsgPrint("You have nothing to fire with.");
+            Game.MsgPrint("You have nothing to fire with.");
             return;
         }
         // Get the ammunition to fire
-        if (!SaveGame.SelectItem(out Item? ammunitionStack, "Fire which item? ", false, true, true, SaveGame.SingletonRepository.ItemFilters.Get(nameof(CanBeFiredItemFilter))))
+        if (!Game.SelectItem(out Item? ammunitionStack, "Fire which item? ", false, true, true, Game.SingletonRepository.ItemFilters.Get(nameof(CanBeFiredItemFilter))))
         {
-            SaveGame.MsgPrint("You have nothing to fire.");
+            Game.MsgPrint("You have nothing to fire.");
             return;
         }
         if (ammunitionStack == null)
@@ -48,7 +48,7 @@ internal class FireItemScript : Script, IScript, IRepeatableScript
             return;
         }
         // Find out where we're aiming at
-        if (!SaveGame.GetDirectionWithAim(out int dir))
+        if (!Game.GetDirectionWithAim(out int dir))
         {
             return;
         }
@@ -61,20 +61,20 @@ internal class FireItemScript : Script, IScript, IRepeatableScript
             ammunitionStack.ItemDescribe();
         }
         ammunitionStack.ItemOptimize();
-        SaveGame.PlaySound(SoundEffectEnum.Shoot);
+        Game.PlaySound(SoundEffectEnum.Shoot);
         // Get the details of the shot
         string missileName = individualAmmunition.Description(false, 3);
         ColorEnum missileColor = individualAmmunition.Factory.FlavorColor;
         char missileCharacter = individualAmmunition.Factory.FlavorSymbol.Character;
-        int shotSpeed = SaveGame.MissileAttacksPerRound;
-        int shotDamage = SaveGame.DiceRoll(individualAmmunition.DamageDice, individualAmmunition.DamageDiceSides) + individualAmmunition.BonusDamage + missileWeapon.BonusDamage;
-        int attackBonus = SaveGame.AttackBonus + individualAmmunition.BonusToHit + missileWeapon.BonusToHit;
-        int chanceToHit = SaveGame.SkillRanged + (attackBonus * Constants.BthPlusAdj);
+        int shotSpeed = Game.MissileAttacksPerRound;
+        int shotDamage = Game.DiceRoll(individualAmmunition.DamageDice, individualAmmunition.DamageDiceSides) + individualAmmunition.BonusDamage + missileWeapon.BonusDamage;
+        int attackBonus = Game.AttackBonus + individualAmmunition.BonusToHit + missileWeapon.BonusToHit;
+        int chanceToHit = Game.SkillRanged + (attackBonus * Constants.BthPlusAdj);
         // Damage multiplier depends on weapon
         BowWeaponItemFactory missileWeaponItemCategory = (BowWeaponItemFactory)missileWeapon.Factory;
         int damageMultiplier = missileWeaponItemCategory.MissileDamageMultiplier;
         // Extra might gives us an increased multiplier
-        if (SaveGame.HasExtraMight)
+        if (Game.HasExtraMight)
         {
             damageMultiplier++;
         }
@@ -82,18 +82,18 @@ internal class FireItemScript : Script, IScript, IRepeatableScript
         // We're actually going to track the shot and draw it square by square
         int shotDistance = 10 + (5 * damageMultiplier);
         // Divide by our shot speed to give the equivalent of x shots per turn
-        SaveGame.EnergyUse = 100 / shotSpeed;
-        int y = SaveGame.MapY;
-        int x = SaveGame.MapX;
-        int targetX = SaveGame.MapX + (99 * SaveGame.KeypadDirectionXOffset[dir]);
-        int targetY = SaveGame.MapY + (99 * SaveGame.KeypadDirectionYOffset[dir]);
+        Game.EnergyUse = 100 / shotSpeed;
+        int y = Game.MapY;
+        int x = Game.MapX;
+        int targetX = Game.MapX + (99 * Game.KeypadDirectionXOffset[dir]);
+        int targetY = Game.MapY + (99 * Game.KeypadDirectionYOffset[dir]);
         // Special case for if we're hitting our own square
-        if (dir == 5 && SaveGame.TargetOkay())
+        if (dir == 5 && Game.TargetOkay())
         {
-            targetX = SaveGame.TargetCol;
-            targetY = SaveGame.TargetRow;
+            targetX = Game.TargetCol;
+            targetY = Game.TargetRow;
         }
-        SaveGame.HandleStuff();
+        Game.HandleStuff();
         bool hitBody = false;
         // Loop until we've reached our distance or hit something
         for (int curDis = 0; curDis <= shotDistance;)
@@ -103,9 +103,9 @@ internal class FireItemScript : Script, IScript, IRepeatableScript
                 break;
             }
             // Move a step towards the target
-            SaveGame.MoveOneStepTowards(out int newY, out int newX, y, x, SaveGame.MapY, SaveGame.MapX, targetY, targetX);
+            Game.MoveOneStepTowards(out int newY, out int newX, y, x, Game.MapY, Game.MapX, targetY, targetX);
             // If we were blocked by a wall or something then stop short
-            if (!SaveGame.GridPassable(newY, newX))
+            if (!Game.GridPassable(newY, newX))
             {
                 break;
             }
@@ -114,31 +114,31 @@ internal class FireItemScript : Script, IScript, IRepeatableScript
             y = newY;
             int msec = Constants.DelayFactorInMilliseconds;
             // If we can see the current projectile location, show it briefly
-            if (SaveGame.PanelContains(y, x) && SaveGame.PlayerCanSeeBold(y, x))
+            if (Game.PanelContains(y, x) && Game.PlayerCanSeeBold(y, x))
             {
-                SaveGame.PrintCharacterAtMapLocation(missileCharacter, missileColor, y, x);
-                SaveGame.MoveCursorRelative(y, x);
-                SaveGame.UpdateScreen();
-                SaveGame.Pause(msec);
-                SaveGame.RedrawSingleLocation(y, x);
-                SaveGame.UpdateScreen();
+                Game.PrintCharacterAtMapLocation(missileCharacter, missileColor, y, x);
+                Game.MoveCursorRelative(y, x);
+                Game.UpdateScreen();
+                Game.Pause(msec);
+                Game.RedrawSingleLocation(y, x);
+                Game.UpdateScreen();
             }
             else
             {
                 // Pause even if we can't see it so it doesn't look weird if it goes in and out
                 // of sight
-                SaveGame.Pause(msec);
+                Game.Pause(msec);
             }
             // Check if we might hit a monster (not necessarily the one we were aiming at)
-            if (SaveGame.Grid[y][x].MonsterIndex != 0)
+            if (Game.Grid[y][x].MonsterIndex != 0)
             {
-                GridTile tile = SaveGame.Grid[y][x];
-                Monster monster = SaveGame.Monsters[tile.MonsterIndex];
+                GridTile tile = Game.Grid[y][x];
+                Monster monster = Game.Monsters[tile.MonsterIndex];
                 MonsterRace race = monster.Race;
                 bool visible = monster.IsVisible;
                 hitBody = true;
                 // Check if we actually hit it
-                if (SaveGame.PlayerCheckRangedHitOnMonster(chanceToHit - curDis, race.ArmorClass, monster.IsVisible))
+                if (Game.PlayerCheckRangedHitOnMonster(chanceToHit - curDis, race.ArmorClass, monster.IsVisible))
                 {
                     string noteDies = " dies.";
                     if (race.Demon || race.Undead || race.Cthuloid || race.Stupid || "Evg".Contains(race.Symbol.Character.ToString()))
@@ -147,43 +147,43 @@ internal class FireItemScript : Script, IScript, IRepeatableScript
                     }
                     if (!visible)
                     {
-                        SaveGame.MsgPrint($"The {missileName} finds a mark.");
+                        Game.MsgPrint($"The {missileName} finds a mark.");
                     }
                     else
                     {
                         string monsterName = monster.Name;
-                        SaveGame.MsgPrint($"The {missileName} hits {monsterName}.");
+                        Game.MsgPrint($"The {missileName} hits {monsterName}.");
                         if (monster.IsVisible)
                         {
-                            SaveGame.HealthTrack(tile.MonsterIndex);
+                            Game.HealthTrack(tile.MonsterIndex);
                         }
                         // Note that pets only get angry if they see us and we see them
                         if (monster.SmFriendly)
                         {
                             monsterName = monster.Name;
-                            SaveGame.MsgPrint($"{monsterName} gets angry!");
+                            Game.MsgPrint($"{monsterName} gets angry!");
                             monster.SmFriendly = false;
                         }
                     }
                     // Work out the damage done
                     shotDamage = individualAmmunition.AdjustDamageForMonsterType(shotDamage, monster);
-                    shotDamage = SaveGame.PlayerCriticalRanged(individualAmmunition.Weight, individualAmmunition.BonusToHit, shotDamage);
+                    shotDamage = Game.PlayerCriticalRanged(individualAmmunition.Weight, individualAmmunition.BonusToHit, shotDamage);
                     if (shotDamage < 0)
                     {
                         shotDamage = 0;
                     }
-                    if (SaveGame.DamageMonster(tile.MonsterIndex, shotDamage, out bool fear, noteDies))
+                    if (Game.DamageMonster(tile.MonsterIndex, shotDamage, out bool fear, noteDies))
                     {
                         // The monster is dead, so don't add further statuses or messages
                     }
                     else
                     {
-                        SaveGame.MessagePain(tile.MonsterIndex, shotDamage);
+                        Game.MessagePain(tile.MonsterIndex, shotDamage);
                         if (fear && monster.IsVisible)
                         {
-                            SaveGame.PlaySound(SoundEffectEnum.MonsterFlees);
+                            Game.PlaySound(SoundEffectEnum.MonsterFlees);
                             string mName = monster.Name;
-                            SaveGame.MsgPrint($"{mName} flees in terror!");
+                            Game.MsgPrint($"{mName} flees in terror!");
                         }
                     }
                 }
@@ -194,6 +194,6 @@ internal class FireItemScript : Script, IScript, IRepeatableScript
         // If we hit something we have a chance to break the ammo, otherwise it just drops at
         // the end of its travel
         int j = hitBody ? individualAmmunition.Factory.PercentageBreakageChance : 0;
-        SaveGame.DropNear(individualAmmunition, j, y, x);
+        Game.DropNear(individualAmmunition, j, y, x);
     }
 }

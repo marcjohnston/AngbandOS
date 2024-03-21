@@ -10,17 +10,17 @@ namespace AngbandOS.Core.DynamicMonsterFilters;
 [Serializable]
 internal class PlaceOkayDynamicMonsterFilter : IMonsterFilter
 {
-    private readonly SaveGame SaveGame;
+    private readonly Game Game;
     private int _placeMonsterIdx;
-    public PlaceOkayDynamicMonsterFilter(SaveGame saveGame, int placeMonsterIdx)
+    public PlaceOkayDynamicMonsterFilter(Game game, int placeMonsterIdx)
     {
         _placeMonsterIdx = placeMonsterIdx;
-        SaveGame = saveGame;
+        Game = game;
     }
 
     public bool Matches(MonsterRace rPtr)
     {
-        MonsterRace pPtr = SaveGame.SingletonRepository.MonsterRaces[_placeMonsterIdx];
+        MonsterRace pPtr = Game.SingletonRepository.MonsterRaces[_placeMonsterIdx];
         if (rPtr.Symbol.Character != pPtr.Symbol.Character)
         {
             return false;

@@ -10,7 +10,7 @@ namespace AngbandOS.Core.CharacterClasses;
 [Serializable]
 internal class WarriorMageCharacterClass : BaseCharacterClass
 {
-    private WarriorMageCharacterClass(SaveGame savedGame) : base(savedGame) { }
+    private WarriorMageCharacterClass(Game savedGame) : base(savedGame) { }
     public override int ID => 6;
     public override string Title => "Warrior-Mage";
     public override int[] AbilityBonus => new[] { 2, 2, 0, 1, 0, 1 };
@@ -57,21 +57,21 @@ internal class WarriorMageCharacterClass : BaseCharacterClass
 
     public override bool DoesNotGainSpellLevelsUntilFirstSpellLevel => true;
     public override int SpellStat => Ability.Intelligence;
-    public override IArtifactBias? ArtifactBias => SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(MageArtifactBias));
+    public override IArtifactBias? ArtifactBias => Game.SingletonRepository.ArtifactBiases.Get(nameof(MageArtifactBias));
     public override int FromScrollWarriorArtifactBiasPercentageChance => 40;
-    public override bool SenseInventoryTest(int level) => (0 != SaveGame.RandomLessThan(75000 / ((level * level) + 40)));
+    public override bool SenseInventoryTest(int level) => (0 != Game.RandomLessThan(75000 / ((level * level) + 40)));
     public override Realm[] AvailablePrimaryRealms => new Realm[] {
-        SaveGame.SingletonRepository.Realms.Get(nameof(NatureRealm))
+        Game.SingletonRepository.Realms.Get(nameof(NatureRealm))
     };
     public override Realm[] AvailableSecondaryRealms => new Realm[] {
-        SaveGame.SingletonRepository.Realms.Get(nameof(LifeRealm)),
-        SaveGame.SingletonRepository.Realms.Get(nameof(SorceryRealm)),
-        SaveGame.SingletonRepository.Realms.Get(nameof(NatureRealm)),
-        SaveGame.SingletonRepository.Realms.Get(nameof(ChaosRealm)),
-        SaveGame.SingletonRepository.Realms.Get(nameof(DeathRealm)),
-        SaveGame.SingletonRepository.Realms.Get(nameof(TarotRealm)),
-        SaveGame.SingletonRepository.Realms.Get(nameof(FolkRealm)),
-        SaveGame.SingletonRepository.Realms.Get(nameof(CorporealRealm))
+        Game.SingletonRepository.Realms.Get(nameof(LifeRealm)),
+        Game.SingletonRepository.Realms.Get(nameof(SorceryRealm)),
+        Game.SingletonRepository.Realms.Get(nameof(NatureRealm)),
+        Game.SingletonRepository.Realms.Get(nameof(ChaosRealm)),
+        Game.SingletonRepository.Realms.Get(nameof(DeathRealm)),
+        Game.SingletonRepository.Realms.Get(nameof(TarotRealm)),
+        Game.SingletonRepository.Realms.Get(nameof(FolkRealm)),
+        Game.SingletonRepository.Realms.Get(nameof(CorporealRealm))
     };
     public override bool WorshipsADeity => true;
 

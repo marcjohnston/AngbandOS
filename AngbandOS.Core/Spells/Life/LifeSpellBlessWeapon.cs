@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Spells.Life;
 [Serializable]
 internal class LifeSpellBlessWeapon : Spell
 {
-    private LifeSpellBlessWeapon(SaveGame saveGame) : base(saveGame) { }
+    private LifeSpellBlessWeapon(Game game) : base(game) { }
     protected override string? CastScriptName => nameof(BlessWeaponScript);
 
     public override string Name => "Bless Weapon";

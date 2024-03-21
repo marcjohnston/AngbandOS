@@ -12,10 +12,10 @@ namespace AngbandOS.Core.Realms;
 [Serializable]
 internal abstract class Realm : IGetKey
 {
-    protected SaveGame SaveGame { get; }
-    protected Realm(SaveGame saveGame)
+    protected Game Game { get; }
+    protected Realm(Game game)
     {
-        SaveGame = saveGame;
+        Game = game;
     }
 
     /// <summary>
@@ -35,7 +35,7 @@ internal abstract class Realm : IGetKey
         List<BookItemFactory> bookItemFactoryList = new List<BookItemFactory>();
         foreach (string bookItemFactoryName in SpellBookNames)
         {
-            BookItemFactory bookItemFactory = (BookItemFactory)SaveGame.SingletonRepository.ItemFactories.Get(bookItemFactoryName);
+            BookItemFactory bookItemFactory = (BookItemFactory)Game.SingletonRepository.ItemFactories.Get(bookItemFactoryName);
             bookItemFactoryList.Add(bookItemFactory);
         }
         SpellBooks = bookItemFactoryList.ToArray();
@@ -52,7 +52,7 @@ internal abstract class Realm : IGetKey
         // Create an item from the factory.
         Item item = outfitItem.CreateItem();
 
-        SaveGame.OutfitPlayerWithItem(item);
+        Game.OutfitPlayerWithItem(item);
     }
 
     /// <summary>

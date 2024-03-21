@@ -10,11 +10,11 @@ namespace AngbandOS.Core.Rewards;
 [Serializable]
 internal class CarnageReward : Reward
 {
-    private CarnageReward(SaveGame saveGame) : base(saveGame) { }
+    private CarnageReward(Game game) : base(game) { }
     public override void GetReward(Patron patron)
     {
-        SaveGame.MsgPrint($"The voice of {patron.ShortName} booms out:");
-        SaveGame.MsgPrint("'Let me relieve thee of thine oppressors!'");
-        SaveGame.RunScriptBool(nameof(GenocideScript), false);
+        Game.MsgPrint($"The voice of {patron.ShortName} booms out:");
+        Game.MsgPrint("'Let me relieve thee of thine oppressors!'");
+        Game.RunScriptBool(nameof(GenocideScript), false);
     }
 }

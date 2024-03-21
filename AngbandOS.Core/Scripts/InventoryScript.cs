@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class InventoryScript : Script, IScript, IRepeatableScript, IStoreScript
 {
-    private InventoryScript(SaveGame saveGame) : base(saveGame) { }
+    private InventoryScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the inventory script.  Does not modify any of the store flags.
@@ -38,30 +38,30 @@ internal class InventoryScript : Script, IScript, IRepeatableScript, IStoreScrip
     public void ExecuteScript()
     {
         // We're not viewing equipment
-        SaveGame.ViewingEquipment = false;
-        ScreenBuffer savedScreen = SaveGame.Screen.Clone();
+        Game.ViewingEquipment = false;
+        ScreenBuffer savedScreen = Game.Screen.Clone();
         // We want to see everything
-        bool inventoryShown = SaveGame.ShowInven(_inventorySlot => !_inventorySlot.IsEquipment, null);
+        bool inventoryShown = Game.ShowInven(_inventorySlot => !_inventorySlot.IsEquipment, null);
         if (!inventoryShown)
         {
-            SaveGame.MsgPrint("You have nothing.");
+            Game.MsgPrint("You have nothing.");
             return;
         }
         // Get a new command
-        string outVal = $"Inventory: carrying {SaveGame.WeightCarried / 10}.{SaveGame.WeightCarried % 10} pounds ({SaveGame.WeightCarried * 100 / (SaveGame.AbilityScores[Ability.Strength].StrCarryingCapacity * 100 / 2)}% of capacity). Command: ";
-        SaveGame.Screen.PrintLine(outVal, 0, 0);
-        char c = SaveGame.Inkey();
-        SaveGame.Screen.Restore(savedScreen);
+        string outVal = $"Inventory: carrying {Game.WeightCarried / 10}.{Game.WeightCarried % 10} pounds ({Game.WeightCarried * 100 / (Game.AbilityScores[Ability.Strength].StrCarryingCapacity * 100 / 2)}% of capacity). Command: ";
+        Game.Screen.PrintLine(outVal, 0, 0);
+        char c = Game.Inkey();
+        Game.Screen.Restore(savedScreen);
         // Display details if the player wants
         if (c != '\x1b')
         {
-            SaveGame._artificialKeyBuffer += c;
+            Game._artificialKeyBuffer += c;
         }
         else
         {
             // If the player selected a command that needs to select an item, it will automatically
             // show the inventory
-            SaveGame.ViewingItemList = true;
+            Game.ViewingItemList = true;
         }
     }
 }

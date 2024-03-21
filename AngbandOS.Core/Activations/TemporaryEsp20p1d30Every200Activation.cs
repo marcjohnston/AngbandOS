@@ -13,14 +13,14 @@ namespace AngbandOS.Core.Activations;
 [Serializable]
 internal class TemporaryEsp20p1d30Every200Activation : Activation
 {
-    private TemporaryEsp20p1d30Every200Activation(SaveGame saveGame) : base(saveGame) { }
+    private TemporaryEsp20p1d30Every200Activation(Game game) : base(game) { }
     public override int RandomChance => 85;
 
     public override string? PreActivationMessage => "";
 
     protected override bool OnActivate(Item item)
     {
-        SaveGame.RunScript(nameof(AddTelepathy25p1d30Script));
+        Game.RunScript(nameof(AddTelepathy25p1d30Script));
         return true;
     }
 

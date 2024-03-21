@@ -10,7 +10,7 @@ namespace AngbandOS.Core.InventorySlots;
 [Serializable]
 internal class LeftHandInventorySlot : EquipmentInventorySlot
 {
-    private LeftHandInventorySlot(SaveGame saveGame) : base(saveGame) { }
+    private LeftHandInventorySlot(Game game) : base(game) { }
     public override int[] InventorySlots => new int[] { InventorySlot.LeftHand };
     public override string Label(int index) => "d";
     public override string Label(Item oPtr) => "d";

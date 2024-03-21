@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class WordOfDestructionScript : Script, IScript
 {
-    private WordOfDestructionScript(SaveGame saveGame) : base(saveGame) { }
+    private WordOfDestructionScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script.
@@ -18,6 +18,6 @@ internal class WordOfDestructionScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        SaveGame.DestroyArea(SaveGame.MapY, SaveGame.MapX, 15);
+        Game.DestroyArea(Game.MapY, Game.MapX, 15);
     }
 }

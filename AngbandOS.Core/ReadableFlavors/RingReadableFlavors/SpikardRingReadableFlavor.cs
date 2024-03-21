@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Flavors;
 [Serializable]
 internal class SpikardRingReadableFlavor : RingReadableFlavor
 {
-    private SpikardRingReadableFlavor(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private SpikardRingReadableFlavor(Game game) : base(game) { } // This object is a singleton.
     protected override string SymbolName => nameof(EqualSignSymbol);
     public override ColorEnum Color => ColorEnum.Pink;
     public override string Name => "Spikard";

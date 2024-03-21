@@ -10,7 +10,7 @@ namespace AngbandOS.Core.ClassSpells;
 [Serializable]
 internal class HighMageCallLightLifeSpell : ClassSpell
 {
-    private HighMageCallLightLifeSpell(SaveGame saveGame) : base(saveGame) { }
+    private HighMageCallLightLifeSpell(Game game) : base(game) { }
     public override string SpellName => nameof(LifeSpellCallLight);
     public override string CharacterClassName => nameof(HighMageCharacterClass);
     public override int Level => 5;

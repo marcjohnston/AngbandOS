@@ -10,19 +10,19 @@ namespace AngbandOS.Core.Repositories;
 [Serializable]
 internal class GodsRepository : DictionaryRepository<God>
 {
-    public GodsRepository(SaveGame saveGame) : base(saveGame) { }
+    public GodsRepository(Game game) : base(game) { }
 
     public override void Load()
     {
-        if (SaveGame.Configuration.Gods == null)
+        if (Game.Configuration.Gods == null)
         {
             base.Load();
         }
         else
         {
-            foreach (GodDefinition definition in SaveGame.Configuration.Gods)
+            foreach (GodDefinition definition in Game.Configuration.Gods)
             {
-                Add(new GenericGod(SaveGame, definition));
+                Add(new GenericGod(Game, definition));
             }
         }
     }

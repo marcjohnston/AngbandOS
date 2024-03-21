@@ -12,10 +12,10 @@ namespace AngbandOS.Core.DungeonGuardians;
 [Serializable]
 internal abstract class DungeonGuardian : IGetKey
 {
-    protected readonly SaveGame SaveGame;
-    protected DungeonGuardian(SaveGame saveGame)
+    protected readonly Game Game;
+    protected DungeonGuardian(Game game)
     {
-        SaveGame = saveGame;
+        Game = game;
     }
 
     public virtual string Key => GetType().Name;
@@ -36,7 +36,7 @@ internal abstract class DungeonGuardian : IGetKey
 
     public void Bind()
     {
-        MonsterRace = SaveGame.SingletonRepository.MonsterRaces.Get(MonsterRaceName);
+        MonsterRace = Game.SingletonRepository.MonsterRaces.Get(MonsterRaceName);
     }
 
     public string ToJson()

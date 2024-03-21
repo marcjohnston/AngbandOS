@@ -10,7 +10,7 @@ namespace AngbandOS.Core.CharacterClasses;
 [Serializable]
 internal class DruidCharacterClass : BaseCharacterClass
 {
-    private DruidCharacterClass(SaveGame savedGame) : base(savedGame) { }
+    private DruidCharacterClass(Game savedGame) : base(savedGame) { }
     public override int ID => 11;
     public override string Title => "Druid";
     public override int[] AbilityBonus => new[] { -1, -3, 4, -2, 0, 3 };
@@ -66,14 +66,14 @@ internal class DruidCharacterClass : BaseCharacterClass
     public override string GetBookTitle(Item bookItem)
     {
         BookItemFactory bookItemFactory = (BookItemFactory)bookItem.Factory;
-        return $"{SaveGame.CountPluralize("Book", bookItem.Count)} of {bookItemFactory.DivineTitle}";
+        return $"{Game.CountPluralize("Book", bookItem.Count)} of {bookItemFactory.DivineTitle}";
     }
 
     public override int SpellStat => Ability.Wisdom;
-    public override IArtifactBias? ArtifactBias => SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(PriestlyArtifactBias));
-    public override bool SenseInventoryTest(int level) => (0 != SaveGame.RandomLessThan(10000 / ((level * level) + 40)));
+    public override IArtifactBias? ArtifactBias => Game.SingletonRepository.ArtifactBiases.Get(nameof(PriestlyArtifactBias));
+    public override bool SenseInventoryTest(int level) => (0 != Game.RandomLessThan(10000 / ((level * level) + 40)));
     public override Realm[] AvailablePrimaryRealms => new Realm[] {
-        SaveGame.SingletonRepository.Realms.Get(nameof(NatureRealm))
+        Game.SingletonRepository.Realms.Get(nameof(NatureRealm))
     };
 
     protected override string[] OutfitItemFactoryNames => new string[]

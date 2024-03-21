@@ -10,31 +10,31 @@ namespace AngbandOS.Core.Patrons;
 [Serializable]
 internal class PatronAbhoth : Patron
 {
-    private PatronAbhoth(SaveGame saveGame) : base(saveGame) { }
+    private PatronAbhoth(Game game) : base(game) { }
     public override string ShortName => "Abhoth";
     public override string LongName => "Abhoth, the Unclean";
     public override int PreferredAbility => Ability.Strength;
     protected override Reward[] Rewards => new Reward[]
     {
-        SaveGame.SingletonRepository.Rewards.Get(nameof(WrathReward)),
-        SaveGame.SingletonRepository.Rewards.Get(nameof(HurtLotReward)),
-        SaveGame.SingletonRepository.Rewards.Get(nameof(HurtLotReward)),
-        SaveGame.SingletonRepository.Rewards.Get(nameof(HSummonReward)),
-        SaveGame.SingletonRepository.Rewards.Get(nameof(HSummonReward)),
-        SaveGame.SingletonRepository.Rewards.Get(nameof(IgnoreReward)),
-        SaveGame.SingletonRepository.Rewards.Get(nameof(IgnoreReward)),
-        SaveGame.SingletonRepository.Rewards.Get(nameof(IgnoreReward)),
-        SaveGame.SingletonRepository.Rewards.Get(nameof(SerMonsReward)),
-        SaveGame.SingletonRepository.Rewards.Get(nameof(SerDemoReward)),
-        SaveGame.SingletonRepository.Rewards.Get(nameof(PolySlfReward)),
-        SaveGame.SingletonRepository.Rewards.Get(nameof(PolyWndReward)),
-        SaveGame.SingletonRepository.Rewards.Get(nameof(HealFulReward)),
-        SaveGame.SingletonRepository.Rewards.Get(nameof(GoodObjReward)),
-        SaveGame.SingletonRepository.Rewards.Get(nameof(GoodObjReward)),
-        SaveGame.SingletonRepository.Rewards.Get(nameof(ChaosWpReward)),
-        SaveGame.SingletonRepository.Rewards.Get(nameof(GoodObsReward)),
-        SaveGame.SingletonRepository.Rewards.Get(nameof(GoodObsReward)),
-        SaveGame.SingletonRepository.Rewards.Get(nameof(GreaObjReward)),
-        SaveGame.SingletonRepository.Rewards.Get(nameof(GreaObsReward))
+        Game.SingletonRepository.Rewards.Get(nameof(WrathReward)),
+        Game.SingletonRepository.Rewards.Get(nameof(HurtLotReward)),
+        Game.SingletonRepository.Rewards.Get(nameof(HurtLotReward)),
+        Game.SingletonRepository.Rewards.Get(nameof(HSummonReward)),
+        Game.SingletonRepository.Rewards.Get(nameof(HSummonReward)),
+        Game.SingletonRepository.Rewards.Get(nameof(IgnoreReward)),
+        Game.SingletonRepository.Rewards.Get(nameof(IgnoreReward)),
+        Game.SingletonRepository.Rewards.Get(nameof(IgnoreReward)),
+        Game.SingletonRepository.Rewards.Get(nameof(SerMonsReward)),
+        Game.SingletonRepository.Rewards.Get(nameof(SerDemoReward)),
+        Game.SingletonRepository.Rewards.Get(nameof(PolySlfReward)),
+        Game.SingletonRepository.Rewards.Get(nameof(PolyWndReward)),
+        Game.SingletonRepository.Rewards.Get(nameof(HealFulReward)),
+        Game.SingletonRepository.Rewards.Get(nameof(GoodObjReward)),
+        Game.SingletonRepository.Rewards.Get(nameof(GoodObjReward)),
+        Game.SingletonRepository.Rewards.Get(nameof(ChaosWpReward)),
+        Game.SingletonRepository.Rewards.Get(nameof(GoodObsReward)),
+        Game.SingletonRepository.Rewards.Get(nameof(GoodObsReward)),
+        Game.SingletonRepository.Rewards.Get(nameof(GreaObjReward)),
+        Game.SingletonRepository.Rewards.Get(nameof(GreaObsReward))
     };
 }

@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Mutations.PassiveMutations;
 [Serializable]
 internal class InfravisPassiveMutation : Mutation
 {
-    private InfravisPassiveMutation(SaveGame saveGame) : base(saveGame) { }
+    private InfravisPassiveMutation(Game game) : base(game) { }
     public override int Frequency => 3;
     public override string GainMessage => "Your infravision is improved.";
     public override string HaveMessage => "You have remarkable infravision (+3).";
@@ -18,11 +18,11 @@ internal class InfravisPassiveMutation : Mutation
 
     public override void OnGain()
     {
-        SaveGame.InfravisionBonus += 3;
+        Game.InfravisionBonus += 3;
     }
 
     public override void OnLose()
     {
-        SaveGame.InfravisionBonus -= 3;
+        Game.InfravisionBonus -= 3;
     }
 }

@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class WieldScript : Script, IScript, IRepeatableScript, IStoreScript
 {
-    private WieldScript(SaveGame saveGame) : base(saveGame) { }
+    private WieldScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the wield script.  Does not modify any of the store flags.
@@ -38,9 +38,9 @@ internal class WieldScript : Script, IScript, IRepeatableScript, IStoreScript
     public void ExecuteScript()
     {
         // Only interested in wearable items
-        if (!SaveGame.SelectItem(out Item? item, "Wear/Wield which item? ", false, true, true, SaveGame.SingletonRepository.ItemFilters.Get(nameof(CanBeWornItemFilter))))
+        if (!Game.SelectItem(out Item? item, "Wear/Wield which item? ", false, true, true, Game.SingletonRepository.ItemFilters.Get(nameof(CanBeWornItemFilter))))
         {
-            SaveGame.MsgPrint("You have nothing you can wear or wield.");
+            Game.MsgPrint("You have nothing you can wear or wield.");
             return;
         }
         if (item == null)
@@ -52,11 +52,11 @@ internal class WieldScript : Script, IScript, IRepeatableScript, IStoreScript
         int slot = item.Factory.WieldSlot;
 
         // Can't replace a cursed item
-        Item? wieldingItem = SaveGame.GetInventoryItem(slot);
+        Item? wieldingItem = Game.GetInventoryItem(slot);
         if (wieldingItem != null && wieldingItem.IsCursed())
         {
             string cursedItemName = wieldingItem.Description(false, 0);
-            SaveGame.MsgPrint($"The {cursedItemName} you are {SaveGame.DescribeWieldLocation(slot)} appears to be cursed.");
+            Game.MsgPrint($"The {cursedItemName} you are {Game.DescribeWieldLocation(slot)} appears to be cursed.");
             return;
         }
 
@@ -65,14 +65,14 @@ internal class WieldScript : Script, IScript, IRepeatableScript, IStoreScript
         {
             string cursedItemName = item.Description(false, 0);
             string dummy = $"Really use the {cursedItemName} {{cursed}}? ";
-            if (!SaveGame.GetCheck(dummy))
+            if (!Game.GetCheck(dummy))
             {
                 return;
             }
         }
 
         // Use some energy
-        SaveGame.EnergyUse = 100;
+        Game.EnergyUse = 100;
 
         // Pull one item out of the item stack
         Item wornItem = item.Clone(1);
@@ -82,30 +82,30 @@ internal class WieldScript : Script, IScript, IRepeatableScript, IStoreScript
         item.ItemOptimize();
 
         // Take off the old item
-        Item? wasWieldingItem = SaveGame.GetInventoryItem(slot);
+        Item? wasWieldingItem = Game.GetInventoryItem(slot);
         if (wasWieldingItem != null)
         {
-            SaveGame.InvenTakeoff(slot, 255);
+            Game.InvenTakeoff(slot, 255);
         }
         // Put the item into the wield slot
-        SaveGame.SetInventoryItem(slot, wornItem);
+        Game.SetInventoryItem(slot, wornItem);
         // Add the weight of the item
-        SaveGame.WeightCarried += wornItem.Weight;
+        Game.WeightCarried += wornItem.Weight;
 
         // Inform us what we did
-        BaseInventorySlot inventorySlot = SaveGame.SingletonRepository.InventorySlots.Single(_inventorySlot => _inventorySlot.InventorySlots.Contains(slot));
+        BaseInventorySlot inventorySlot = Game.SingletonRepository.InventorySlots.Single(_inventorySlot => _inventorySlot.InventorySlots.Contains(slot));
         string wieldPhrase = inventorySlot.WieldPhrase;
         string itemName = wornItem.Description(true, 3);
-        SaveGame.MsgPrint($"{wieldPhrase} {itemName} ({slot.IndexToLabel()}).");
+        Game.MsgPrint($"{wieldPhrase} {itemName} ({slot.IndexToLabel()}).");
         // Let us know if it's cursed
         if (wornItem.IsCursed())
         {
-            SaveGame.MsgPrint("Oops! It feels deathly cold!");
+            Game.MsgPrint("Oops! It feels deathly cold!");
             wornItem.IdentSense = true;
         }
-        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
-        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateTorchRadiusFlaggedAction)).Set();
-        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateManaFlaggedAction)).Set();
-        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawEquippyFlaggedAction)).Set();
+        Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
+        Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateTorchRadiusFlaggedAction)).Set();
+        Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateManaFlaggedAction)).Set();
+        Game.SingletonRepository.FlaggedActions.Get(nameof(RedrawEquippyFlaggedAction)).Set();
     }
 }

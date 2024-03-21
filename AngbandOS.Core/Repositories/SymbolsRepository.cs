@@ -10,18 +10,18 @@ namespace AngbandOS.Core.Repositories;
 [Serializable]
 internal class SymbolsRepository : DictionaryRepository<Symbol>
 {
-    public SymbolsRepository(SaveGame saveGame) : base(saveGame) { }
+    public SymbolsRepository(Game game) : base(game) { }
     public override void Load()
     {
-        if (SaveGame.Configuration.Symbols == null)
+        if (Game.Configuration.Symbols == null)
         {
             base.Load();
         }
         else
         {
-            foreach (SymbolDefinition symbolDefinition in SaveGame.Configuration.Symbols)
+            foreach (SymbolDefinition symbolDefinition in Game.Configuration.Symbols)
             {
-                Add(new GenericSymbol(SaveGame, symbolDefinition));
+                Add(new GenericSymbol(Game, symbolDefinition));
             }
         }
     }

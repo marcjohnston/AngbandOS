@@ -10,9 +10,9 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class HolyPrayerScrollItemFactory : ScrollItemFactory
 {
-    private HolyPrayerScrollItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private HolyPrayerScrollItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(QuestionMarkSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(QuestionMarkSymbol));
     public override string Name => "Holy Prayer";
 
     public override int[] Chance => new int[] { 1, 0, 0, 0 };
@@ -24,10 +24,10 @@ internal class HolyPrayerScrollItemFactory : ScrollItemFactory
 
     public override void Read(ReadScrollEvent eventArgs)
     {
-        if (SaveGame.BlessingTimer.AddTimer(SaveGame.DieRoll(48) + 24))
+        if (Game.BlessingTimer.AddTimer(Game.DieRoll(48) + 24))
         {
             eventArgs.Identified = true;
         }
     }
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

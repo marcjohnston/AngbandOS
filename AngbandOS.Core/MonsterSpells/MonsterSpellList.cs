@@ -34,9 +34,9 @@ internal class MonsterSpellList
     /// Returns a weighted random list from the spells.
     /// </summary>
     /// <returns></returns>
-    public WeightedRandom<MonsterSpell> ToWeightedRandom(SaveGame saveGame)
+    public WeightedRandom<MonsterSpell> ToWeightedRandom(Game game)
     {
-        return new WeightedRandom<MonsterSpell>(saveGame, _spells);
+        return new WeightedRandom<MonsterSpell>(game, _spells);
     }
 
     /// <summary>

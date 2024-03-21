@@ -10,15 +10,15 @@ namespace AngbandOS.Core.Projection;
 [Serializable]
 internal class ForceProjectile : Projectile
 {
-    private ForceProjectile(SaveGame saveGame) : base(saveGame) { }
+    private ForceProjectile(Game game) : base(game) { }
 
-    protected override ProjectileGraphic? BoltProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get(nameof(BrightTurquoiseBoltProjectileGraphic));
+    protected override ProjectileGraphic? BoltProjectileGraphic => Game.SingletonRepository.ProjectileGraphics.Get(nameof(BrightTurquoiseBoltProjectileGraphic));
 
-    protected override ProjectileGraphic? ImpactProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get(nameof(BrightTurquoiseSplatProjectileGraphic));
+    protected override ProjectileGraphic? ImpactProjectileGraphic => Game.SingletonRepository.ProjectileGraphics.Get(nameof(BrightTurquoiseSplatProjectileGraphic));
 
     protected override bool AffectItem(int who, int y, int x)
     {
-        GridTile cPtr = SaveGame.Grid[y][x];
+        GridTile cPtr = Game.Grid[y][x];
         bool obvious = false;
         string oName = "";
         foreach (Item oPtr in cPtr.Items)
@@ -47,23 +47,23 @@ internal class ForceProjectile : Projectile
                     if (oPtr.Marked)
                     {
                         string s = plural ? "are" : "is";
-                        SaveGame.MsgPrint($"The {oName} {s} unaffected!");
+                        Game.MsgPrint($"The {oName} {s} unaffected!");
                     }
                 }
                 else
                 {
                     if (oPtr.Marked && string.IsNullOrEmpty(noteKill))
                     {
-                        SaveGame.MsgPrint($"The {oName}{noteKill}");
+                        Game.MsgPrint($"The {oName}{noteKill}");
                     }
                     bool isPotion = oPtr.Factory.CategoryEnum == ItemTypeEnum.Potion;
-                    SaveGame.DeleteObject(oPtr);
+                    Game.DeleteObject(oPtr);
                     if (isPotion)
                     {
                         PotionItemFactory potion = (PotionItemFactory)oPtr.Factory;
                         potion.Smash(who, y, x);
                     }
-                    SaveGame.RedrawSingleLocation(y, x);
+                    Game.RedrawSingleLocation(y, x);
                 }
             }
         }
@@ -80,12 +80,12 @@ internal class ForceProjectile : Projectile
         {
             obvious = true;
         }
-        int doStun = (SaveGame.DieRoll(15) + r) / (r + 1);
+        int doStun = (Game.DieRoll(15) + r) / (r + 1);
         if (rPtr.BreatheForce)
         {
             note = " resists.";
             dam *= 3;
-            dam /= SaveGame.DieRoll(6) + 6;
+            dam /= Game.DieRoll(6) + 6;
         }
         if (doStun != 0 && !rPtr.BreatheSound && !rPtr.BreatheForce)
         {
@@ -108,23 +108,23 @@ internal class ForceProjectile : Projectile
 
     protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
     {
-        bool blind = SaveGame.BlindnessTimer.Value != 0;
+        bool blind = Game.BlindnessTimer.Value != 0;
         if (dam > 1600)
         {
             dam = 1600;
         }
         dam = (dam + r) / (r + 1);
-        Monster mPtr = SaveGame.Monsters[who];
+        Monster mPtr = Game.Monsters[who];
         string killer = mPtr.IndefiniteVisibleName;
         if (blind)
         {
-            SaveGame.MsgPrint("You are hit by kinetic force!");
+            Game.MsgPrint("You are hit by kinetic force!");
         }
-        if (!SaveGame.HasSoundResistance)
+        if (!Game.HasSoundResistance)
         {
-            SaveGame.StunTimer.AddTimer(SaveGame.DieRoll(20));
+            Game.StunTimer.AddTimer(Game.DieRoll(20));
         }
-        SaveGame.TakeHit(dam, killer);
+        Game.TakeHit(dam, killer);
         return true;
     }
 }

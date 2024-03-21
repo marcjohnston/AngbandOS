@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class SlowDartScript : Script, IScript
 {
-    private SlowDartScript(SaveGame saveGame) : base(saveGame) { }
+    private SlowDartScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script.
@@ -19,18 +19,18 @@ internal class SlowDartScript : Script, IScript
     public void ExecuteScript()
     {
         // Dart traps need a to-hit roll
-        if (SaveGame.TrapCheckHitOnPlayer(125))
+        if (Game.TrapCheckHitOnPlayer(125))
         {
-            SaveGame.MsgPrint("A small dart hits you!");
+            Game.MsgPrint("A small dart hits you!");
             // Do 1d4 damage plus slow
-            int damage = SaveGame.DiceRoll(1, 4);
+            int damage = Game.DiceRoll(1, 4);
             string name = "a trap";
-            SaveGame.TakeHit(damage, name);
-            SaveGame.SlowTimer.AddTimer(SaveGame.RandomLessThan(20) + 20);
+            Game.TakeHit(damage, name);
+            Game.SlowTimer.AddTimer(Game.RandomLessThan(20) + 20);
         }
         else
         {
-            SaveGame.MsgPrint("A small dart barely misses you.");
+            Game.MsgPrint("A small dart barely misses you.");
         }
     }
 }

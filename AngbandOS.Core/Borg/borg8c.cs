@@ -4306,7 +4306,7 @@ internal static class borg8c
      * then takes a nap to recover from damage, but gets yanked
      * back to town before he can collect his reward.
      */
-    public static bool borg_think_dungeon(SaveGame saveGame)
+    public static bool borg_think_dungeon(Game game)
     {
         int i, j;
         int b_j = -1;

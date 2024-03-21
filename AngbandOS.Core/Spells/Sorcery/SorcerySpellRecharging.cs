@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Spells.Sorcery;
 [Serializable]
 internal class SorcerySpellRecharging : Spell
 {
-    private SorcerySpellRecharging(SaveGame saveGame) : base(saveGame) { }
+    private SorcerySpellRecharging(Game game) : base(game) { }
     protected override string? CastScriptName => nameof(RechargeItemScript);
 
     public override string Name => "Recharging";

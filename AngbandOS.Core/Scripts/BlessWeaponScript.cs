@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class BlessWeaponScript : Script, IScript, ISuccessfulScript
 {
-    private BlessWeaponScript(SaveGame saveGame) : base(saveGame) { }
+    private BlessWeaponScript(Game game) : base(game) { }
 
     /// <summary>
     /// Blesses a chosen weapon and return true if blessing wasn't cancelled during the weapon selection process; false, if the blessing was cancelled.
@@ -18,9 +18,9 @@ internal class BlessWeaponScript : Script, IScript, ISuccessfulScript
     /// <returns></returns>
     public bool ExecuteSuccessfulScript()
     {
-        if (!SaveGame.SelectItem(out Item? oPtr, "Bless which weapon? ", true, true, true, SaveGame.SingletonRepository.ItemFilters.Get(nameof(WeaponsItemFilter))))
+        if (!Game.SelectItem(out Item? oPtr, "Bless which weapon? ", true, true, true, Game.SingletonRepository.ItemFilters.Get(nameof(WeaponsItemFilter))))
         {
-            SaveGame.MsgPrint("You have no weapon to bless.");
+            Game.MsgPrint("You have no weapon to bless.");
             return false;
         }
         if (oPtr == null)
@@ -32,39 +32,39 @@ internal class BlessWeaponScript : Script, IScript, ISuccessfulScript
         oPtr.RefreshFlagBasedProperties();
         if (oPtr.IdentCursed)
         {
-            if ((oPtr.Characteristics.HeavyCurse && SaveGame.DieRoll(100) < 33) || oPtr.Characteristics.PermaCurse)
+            if ((oPtr.Characteristics.HeavyCurse && Game.DieRoll(100) < 33) || oPtr.Characteristics.PermaCurse)
             {
-                SaveGame.MsgPrint($"The black aura on {your} {oName} disrupts the blessing!");
+                Game.MsgPrint($"The black aura on {your} {oName} disrupts the blessing!");
                 return true;
             }
-            SaveGame.MsgPrint($"A malignant aura leaves {your} {oName}.");
+            Game.MsgPrint($"A malignant aura leaves {your} {oName}.");
             oPtr.IdentCursed = false;
             oPtr.IdentSense = true;
             oPtr.Inscription = "uncursed";
-            SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
+            Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
         }
         if (oPtr.Characteristics.Blessed)
         {
             string s = oPtr.Count > 1 ? "were" : "was";
-            SaveGame.MsgPrint($"{your} {oName} {s} blessed already.");
+            Game.MsgPrint($"{your} {oName} {s} blessed already.");
             return true;
         }
-        if (!oPtr.IsArtifact || SaveGame.DieRoll(3) == 1)
+        if (!oPtr.IsArtifact || Game.DieRoll(3) == 1)
         {
             string s = oPtr.Count > 1 ? "" : "s";
-            SaveGame.MsgPrint($"{your} {oName} shine{s}!");
+            Game.MsgPrint($"{your} {oName} shine{s}!");
             oPtr.RandomArtifactItemCharacteristics.Blessed = true;
         }
         else
         {
             bool disHappened = false;
-            SaveGame.MsgPrint("The artifact resists your blessing!");
+            Game.MsgPrint("The artifact resists your blessing!");
             if (oPtr.BonusToHit > 0)
             {
                 oPtr.BonusToHit--;
                 disHappened = true;
             }
-            if (oPtr.BonusToHit > 5 && SaveGame.RandomLessThan(100) < 33)
+            if (oPtr.BonusToHit > 5 && Game.RandomLessThan(100) < 33)
             {
                 oPtr.BonusToHit--;
             }
@@ -73,7 +73,7 @@ internal class BlessWeaponScript : Script, IScript, ISuccessfulScript
                 oPtr.BonusDamage--;
                 disHappened = true;
             }
-            if (oPtr.BonusDamage > 5 && SaveGame.RandomLessThan(100) < 33)
+            if (oPtr.BonusDamage > 5 && Game.RandomLessThan(100) < 33)
             {
                 oPtr.BonusDamage--;
             }
@@ -82,18 +82,18 @@ internal class BlessWeaponScript : Script, IScript, ISuccessfulScript
                 oPtr.BonusArmorClass--;
                 disHappened = true;
             }
-            if (oPtr.BonusArmorClass > 5 && SaveGame.RandomLessThan(100) < 33)
+            if (oPtr.BonusArmorClass > 5 && Game.RandomLessThan(100) < 33)
             {
                 oPtr.BonusArmorClass--;
             }
             if (disHappened)
             {
-                SaveGame.MsgPrint("There is a  feeling in the air...");
+                Game.MsgPrint("There is a  feeling in the air...");
                 string s = oPtr.Count > 1 ? "were" : "was";
-                SaveGame.MsgPrint($"{your} {oName} {s} disenchanted!");
+                Game.MsgPrint($"{your} {oName} {s} disenchanted!");
             }
         }
-        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
+        Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
         return true;
     }
 

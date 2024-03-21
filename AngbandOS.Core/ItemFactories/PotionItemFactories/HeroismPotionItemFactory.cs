@@ -10,9 +10,9 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class HeroismPotionItemFactory : PotionItemFactory
 {
-    private HeroismPotionItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private HeroismPotionItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(ExclamationPointSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(ExclamationPointSymbol));
     public override string Name => "Heroism";
 
     public override int[] Chance => new int[] { 1, 0, 0, 0 };
@@ -27,19 +27,19 @@ internal class HeroismPotionItemFactory : PotionItemFactory
     {
         bool identified = false;
         // Heroism removes fear, cures 10 health, and gives you timed heroism
-        if (SaveGame.FearTimer.ResetTimer())
+        if (Game.FearTimer.ResetTimer())
         {
             identified = true;
         }
-        if (SaveGame.HeroismTimer.AddTimer(SaveGame.DieRoll(25) + 25))
+        if (Game.HeroismTimer.AddTimer(Game.DieRoll(25) + 25))
         {
             identified = true;
         }
-        if (SaveGame.RestoreHealth(10))
+        if (Game.RestoreHealth(10))
         {
             identified = true;
         }
         return identified;
     }
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

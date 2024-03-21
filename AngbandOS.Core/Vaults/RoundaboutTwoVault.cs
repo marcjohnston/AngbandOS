@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Vaults;
 [Serializable]
 internal class RoundaboutTwoVault : Vault
 {
-    private RoundaboutTwoVault(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private RoundaboutTwoVault(Game game) : base(game) { } // This object is a singleton.
     public override string Name => "Roundabout Two";
     public override int Category => 8;
     public override int Height => 25;

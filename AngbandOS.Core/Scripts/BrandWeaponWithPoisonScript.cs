@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class BrandWeaponWithPoisonScript : Script, IScript
 {
-    private BrandWeaponWithPoisonScript(SaveGame saveGame) : base(saveGame) { }
+    private BrandWeaponWithPoisonScript(Game game) : base(game) { }
 
     /// <summary>
     /// Enchants the melee weapon with poison.
@@ -18,7 +18,7 @@ internal class BrandWeaponWithPoisonScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        Item? item = SaveGame.GetInventoryItem(InventorySlot.MeleeWeapon);
+        Item? item = Game.GetInventoryItem(InventorySlot.MeleeWeapon);
 
         // We must have a non-rare, non-artifact weapon that isn't cursed
         if (item != null && !item.IsArtifact && !item.IsRare() && !item.IsCursed())
@@ -26,15 +26,15 @@ internal class BrandWeaponWithPoisonScript : Script, IScript
             string itemName = item.Description(false, 0);
 
             // Make it a poison brand
-            item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(WeaponOfPoisoningRareItem));
+            item.RareItem = Game.SingletonRepository.RareItems.Get(nameof(WeaponOfPoisoningRareItem));
 
             // Let the player know what happened
-            SaveGame.MsgPrint($"Your {itemName} is coated with poison.");
-            SaveGame.Enchant(item, SaveGame.RandomLessThan(3) + 4, Constants.EnchTohit | Constants.EnchTodam);
+            Game.MsgPrint($"Your {itemName} is coated with poison.");
+            Game.Enchant(item, Game.RandomLessThan(3) + 4, Constants.EnchTohit | Constants.EnchTodam);
         }
         else
         {
-            SaveGame.MsgPrint($"The branding failed.");
+            Game.MsgPrint($"The branding failed.");
         }
     }
 }

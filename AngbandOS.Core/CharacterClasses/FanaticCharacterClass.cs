@@ -10,7 +10,7 @@ namespace AngbandOS.Core.CharacterClasses;
 [Serializable]
 internal class FanaticCharacterClass : BaseCharacterClass
 {
-    private FanaticCharacterClass(SaveGame savedGame) : base(savedGame) { }
+    private FanaticCharacterClass(Game savedGame) : base(savedGame) { }
     public override int ID => 7;
     public override string Title => "Fanatic";
     public override int[] AbilityBonus => new[] { 2, 1, 0, 1, 2, -2 };
@@ -66,18 +66,18 @@ internal class FanaticCharacterClass : BaseCharacterClass
     public override string GetBookTitle(Item bookItem)
     {
         BookItemFactory bookItemFactory = (BookItemFactory)bookItem.Factory;
-        return $"{SaveGame.CountPluralize("Book", bookItem.Count)} of {bookItemFactory.DivineTitle}";
+        return $"{Game.CountPluralize("Book", bookItem.Count)} of {bookItemFactory.DivineTitle}";
     }
 
     public override int SpellStat => Ability.Intelligence;
     public override int MaximumWeight => 30;
     public override int AttackSpeedMultiplier => 4;
-    public override IArtifactBias? ArtifactBias => SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(ChaosArtifactBias));
+    public override IArtifactBias? ArtifactBias => Game.SingletonRepository.ArtifactBiases.Get(nameof(ChaosArtifactBias));
     public override int FromScrollWarriorArtifactBiasPercentageChance => 40;
-    public override bool SenseInventoryTest(int level) => (0 != SaveGame.RandomLessThan(80000 / ((level * level) + 40)));
+    public override bool SenseInventoryTest(int level) => (0 != Game.RandomLessThan(80000 / ((level * level) + 40)));
     public override bool DetailedSenseInventory => true;
     public override Realm[] AvailablePrimaryRealms => new Realm[] {
-        SaveGame.SingletonRepository.Realms.Get(nameof(ChaosRealm))
+        Game.SingletonRepository.Realms.Get(nameof(ChaosRealm))
     };
 
     protected override string[] OutfitItemFactoryNames => new string[]

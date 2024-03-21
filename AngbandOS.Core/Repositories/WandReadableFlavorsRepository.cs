@@ -10,19 +10,19 @@ namespace AngbandOS.Core.Repositories;
 [Serializable]
 internal class WandReadableFlavorsRepository : DictionaryRepository<WandReadableFlavor>
 {
-    public WandReadableFlavorsRepository(SaveGame saveGame) : base(saveGame) { }
+    public WandReadableFlavorsRepository(Game game) : base(game) { }
 
     public override void Load()
     {
-        if (SaveGame.Configuration.WandReadableFlavors == null)
+        if (Game.Configuration.WandReadableFlavors == null)
         {
             base.Load();
         }
         else
         {
-            foreach (ReadableFlavorDefinition readableFlavorDefinition in SaveGame.Configuration.WandReadableFlavors)
+            foreach (ReadableFlavorDefinition readableFlavorDefinition in Game.Configuration.WandReadableFlavors)
             {
-                Add(new GenericWandReadableFlavor(SaveGame, readableFlavorDefinition));
+                Add(new GenericWandReadableFlavor(Game, readableFlavorDefinition));
             }
         }
     }

@@ -13,7 +13,7 @@ namespace AngbandOS.Core.Activations;
 [Serializable]
 internal class CharmAnimalEvery500Activation : Activation
 {
-    private CharmAnimalEvery500Activation(SaveGame saveGame) : base(saveGame) { }
+    private CharmAnimalEvery500Activation(Game game) : base(game) { }
     public override int RandomChance => 25;
 
     public override string? PreActivationMessage => "";
@@ -22,7 +22,7 @@ internal class CharmAnimalEvery500Activation : Activation
 
     protected override bool OnActivate(Item item)
     {
-        return SaveGame.RunCancellableScript(nameof(CharmOthersScript));
+        return Game.RunCancellableScript(nameof(CharmOthersScript));
     }
 
     public override int Value => 12500;

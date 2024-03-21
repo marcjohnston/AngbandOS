@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class ConfuseMonsterScript : Script, IScript
 {
-    private ConfuseMonsterScript(SaveGame saveGame) : base(saveGame) { }
+    private ConfuseMonsterScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script.
@@ -18,10 +18,10 @@ internal class ConfuseMonsterScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        if (!SaveGame.GetDirectionWithAim(out int dir))
+        if (!Game.GetDirectionWithAim(out int dir))
         {
             return;
         }
-        SaveGame.ConfuseMonster(dir, SaveGame.ExperienceLevel.Value * 3 / 2);
+        Game.ConfuseMonster(dir, Game.ExperienceLevel.Value * 3 / 2);
     }
 }

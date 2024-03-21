@@ -13,6 +13,6 @@ namespace AngbandOS.Core.ItemFilters;
 [Serializable]
 internal class LanternFuelItemFilter : AllItemsItemFilter
 {
-    private LanternFuelItemFilter(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private LanternFuelItemFilter(Game game) : base(game) { } // This object is a singleton.
     public override bool? IsLanternFuel => true;
 }

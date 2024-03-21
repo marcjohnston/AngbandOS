@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Dungeons;
 [Serializable]
 internal class UltharDungeon : Dungeon
 {
-    private UltharDungeon(SaveGame saveGame) : base(saveGame) { }
+    private UltharDungeon(Game game) : base(game) { }
     public override int BaseOffset => 0;
     public override int MaxLevel => 7;
     protected override string? BiasMonsterFilterName => nameof(AnimalMonsterFilter);

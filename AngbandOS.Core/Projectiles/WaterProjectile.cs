@@ -10,11 +10,11 @@ namespace AngbandOS.Core.Projection;
 [Serializable]
 internal class WaterProjectile : Projectile
 {
-    private WaterProjectile(SaveGame saveGame) : base(saveGame) { }
+    private WaterProjectile(Game game) : base(game) { }
 
-    protected override ProjectileGraphic? BoltProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get(nameof(BlueSplatProjectileGraphic));
+    protected override ProjectileGraphic? BoltProjectileGraphic => Game.SingletonRepository.ProjectileGraphics.Get(nameof(BlueSplatProjectileGraphic));
 
-    protected override ProjectileGraphic? ImpactProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get(nameof(BlueSplatProjectileGraphic));
+    protected override ProjectileGraphic? ImpactProjectileGraphic => Game.SingletonRepository.ProjectileGraphics.Get(nameof(BlueSplatProjectileGraphic));
 
     protected override bool AffectMonster(int who, Monster mPtr, int dam, int r)
     {
@@ -36,7 +36,7 @@ internal class WaterProjectile : Projectile
         {
             note = " resists.";
             dam *= 3;
-            dam /= SaveGame.DieRoll(6) + 6;
+            dam /= Game.DieRoll(6) + 6;
             if (seen)
             {
                 rPtr.Knowledge.Characteristics.ResistWater = true;
@@ -48,31 +48,31 @@ internal class WaterProjectile : Projectile
 
     protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
     {
-        bool blind = SaveGame.BlindnessTimer.Value != 0;
+        bool blind = Game.BlindnessTimer.Value != 0;
         if (dam > 1600)
         {
             dam = 1600;
         }
         dam = (dam + r) / (r + 1);
-        Monster mPtr = SaveGame.Monsters[who];
+        Monster mPtr = Game.Monsters[who];
         string killer = mPtr.IndefiniteVisibleName;
         if (blind)
         {
-            SaveGame.MsgPrint("You are hit by something wet!");
+            Game.MsgPrint("You are hit by something wet!");
         }
-        if (!SaveGame.HasSoundResistance)
+        if (!Game.HasSoundResistance)
         {
-            SaveGame.StunTimer.AddTimer(SaveGame.DieRoll(40));
+            Game.StunTimer.AddTimer(Game.DieRoll(40));
         }
-        if (!SaveGame.HasConfusionResistance)
+        if (!Game.HasConfusionResistance)
         {
-            SaveGame.ConfusedTimer.AddTimer(SaveGame.DieRoll(5) + 5);
+            Game.ConfusedTimer.AddTimer(Game.DieRoll(5) + 5);
         }
-        if (SaveGame.DieRoll(5) == 1)
+        if (Game.DieRoll(5) == 1)
         {
-            SaveGame.InvenDamage(SaveGame.SetColdDestroy, 3);
+            Game.InvenDamage(Game.SetColdDestroy, 3);
         }
-        SaveGame.TakeHit(dam, killer);
+        Game.TakeHit(dam, killer);
         return true;
     }
 }

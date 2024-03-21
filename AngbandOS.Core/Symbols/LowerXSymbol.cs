@@ -4,7 +4,7 @@ namespace AngbandOS.Core.Symbols;
 [Serializable]
 internal class LowerXSymbol : Symbol
 {
-    private LowerXSymbol(SaveGame saveGame) : base(saveGame) { }
+    private LowerXSymbol(Game game) : base(game) { }
     public override char Character => 'x';
     public override string Name => "Xorn/Xaren/etc";
 }

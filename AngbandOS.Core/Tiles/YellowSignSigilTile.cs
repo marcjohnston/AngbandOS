@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Tiles;
 [Serializable]
 internal class YellowSignSigilTile : Tile
 {
-    private YellowSignSigilTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private YellowSignSigilTile(Game game) : base(game) { } // This object is a singleton.
     protected override string SymbolName => nameof(SemiColonSymbol);
     public override ColorEnum Color => ColorEnum.BrightYellow;
     public override string Description => "Yellow Sign";

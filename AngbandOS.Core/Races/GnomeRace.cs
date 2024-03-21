@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Races;
 [Serializable]
 internal class GnomeRace : Race
 {
-    private GnomeRace(SaveGame saveGame) : base(saveGame) { }
+    private GnomeRace(Game game) : base(game) { }
     public override string Title => "Gnome";
     public override int[] AbilityBonus => new int[] { -1, 2, 0, 2, 1, -2 };
     public override int BaseDisarmBonus => 10;
@@ -62,16 +62,16 @@ internal class GnomeRace : Race
 
     public override void CalcBonuses()
     {
-        SaveGame.HasFreeAction = true;
+        Game.HasFreeAction = true;
     }
 
     public override void UseRacialPower()
     {
         // Gnomes can do a short-range teleport
-        if (SaveGame.CheckIfRacialPowerWorks(5, 5 + (SaveGame.ExperienceLevel.Value / 5), Ability.Intelligence, 12))
+        if (Game.CheckIfRacialPowerWorks(5, 5 + (Game.ExperienceLevel.Value / 5), Ability.Intelligence, 12))
         {
-            SaveGame.MsgPrint("Blink!");
-            SaveGame.RunScriptInt(nameof(TeleportSelfScript), 10 + SaveGame.ExperienceLevel.Value);
+            Game.MsgPrint("Blink!");
+            Game.RunScriptInt(nameof(TeleportSelfScript), 10 + Game.ExperienceLevel.Value);
         }
     }
 }

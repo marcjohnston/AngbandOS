@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Races;
 [Serializable]
 internal class DwarfRace : Race
 {
-    private DwarfRace(SaveGame saveGame) : base(saveGame) { }
+    private DwarfRace(Game game) : base(game) { }
     public override string Title => "Dwarf";
     public override int[] AbilityBonus => new int[] { 2, -2, 2, -2, 2, -3 };
     public override int BaseDisarmBonus => 2;
@@ -60,17 +60,17 @@ internal class DwarfRace : Race
 
     public override void CalcBonuses()
     {
-        SaveGame.HasBlindnessResistance = true;
+        Game.HasBlindnessResistance = true;
     }
     public override void UseRacialPower()
     {
         // Dwarves can detect traps, doors, and stairs
-        if (SaveGame.CheckIfRacialPowerWorks(5, 5, Ability.Wisdom, 12))
+        if (Game.CheckIfRacialPowerWorks(5, 5, Ability.Wisdom, 12))
         {
-            SaveGame.MsgPrint("You examine your surroundings.");
-            SaveGame.DetectTraps();
-            SaveGame.DetectDoors();
-            SaveGame.DetectStairs();
+            Game.MsgPrint("You examine your surroundings.");
+            Game.DetectTraps();
+            Game.DetectDoors();
+            Game.DetectStairs();
         }
     }
 }

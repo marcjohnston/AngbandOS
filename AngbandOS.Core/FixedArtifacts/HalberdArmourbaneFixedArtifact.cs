@@ -10,7 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class HalberdArmorbaneFixedArtifact : FixedArtifact
 {
-    private HalberdArmorbaneFixedArtifact(SaveGame saveGame) : base(saveGame) { }
+    private HalberdArmorbaneFixedArtifact(Game game) : base(game) { }
 
     protected override string BaseItemFactoryName => nameof(HalberdPolearmWeaponItemFactory);
 

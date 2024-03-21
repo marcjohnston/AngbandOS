@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Gods;
 [Serializable]
 internal class LobonGod : God
 {
-    private LobonGod(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private LobonGod(Game game) : base(game) { } // This object is a singleton.
     public override string LongName => "Lobon, god of youth";
     public override string ShortName => "Lobon";
     public override string FavorDescription => " ({0}% chance to avoid ability drain)";

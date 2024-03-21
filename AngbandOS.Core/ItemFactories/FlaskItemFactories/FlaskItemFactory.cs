@@ -10,8 +10,8 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal abstract class FlaskItemFactory : ItemFactory
 {
-    public FlaskItemFactory(SaveGame saveGame) : base(saveGame) { }
-    public override ItemClass ItemClass => SaveGame.SingletonRepository.ItemClasses.Get(nameof(FlasksItemClass));
+    public FlaskItemFactory(Game game) : base(game) { }
+    public override ItemClass ItemClass => Game.SingletonRepository.ItemClasses.Get(nameof(FlasksItemClass));
     public override bool EasyKnow => true;
     public override int GetAdditionalMassProduceCount(Item item)
     {

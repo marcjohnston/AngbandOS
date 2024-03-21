@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class RaiseTheDeadScript : Script, IScript
 {
-    private RaiseTheDeadScript(SaveGame saveGame) : base(saveGame) { }
+    private RaiseTheDeadScript(Game game) : base(game) { }
 
     /// <summary>
     /// Summons specific monsters, 1/3 of the time they are not friendly.
@@ -18,28 +18,28 @@ internal class RaiseTheDeadScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        if (SaveGame.DieRoll(3) == 1)
+        if (Game.DieRoll(3) == 1)
         {
-            if (SaveGame.SummonSpecific(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel.Value * 3 / 2, SaveGame.ExperienceLevel.Value > 47 ? SaveGame.SingletonRepository.MonsterFilters.Get(nameof(HiUndeadMonsterFilter)) : SaveGame.SingletonRepository.MonsterFilters.Get(nameof(UndeadMonsterFilter))))
+            if (Game.SummonSpecific(Game.MapY, Game.MapX, Game.ExperienceLevel.Value * 3 / 2, Game.ExperienceLevel.Value > 47 ? Game.SingletonRepository.MonsterFilters.Get(nameof(HiUndeadMonsterFilter)) : Game.SingletonRepository.MonsterFilters.Get(nameof(UndeadMonsterFilter))))
             {
-                SaveGame.MsgPrint("Cold winds begin to swirl around you, carrying with them the stench of decay...");
-                SaveGame.MsgPrint("'The dead arise... to punish you for disturbing them!'");
+                Game.MsgPrint("Cold winds begin to swirl around you, carrying with them the stench of decay...");
+                Game.MsgPrint("'The dead arise... to punish you for disturbing them!'");
             }
             else
             {
-                SaveGame.MsgPrint("No-one ever turns up.");
+                Game.MsgPrint("No-one ever turns up.");
             }
         }
         else
         {
-            if (SaveGame.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel.Value * 3 / 2, SaveGame.ExperienceLevel.Value > 47 ? SaveGame.SingletonRepository.MonsterFilters.Get(nameof(HiUndeadNoUniquesMonsterFilter)) : SaveGame.SingletonRepository.MonsterFilters.Get(nameof(UndeadMonsterFilter)), SaveGame.ExperienceLevel.Value > 24 && SaveGame.DieRoll(3) == 1))
+            if (Game.SummonSpecificFriendly(Game.MapY, Game.MapX, Game.ExperienceLevel.Value * 3 / 2, Game.ExperienceLevel.Value > 47 ? Game.SingletonRepository.MonsterFilters.Get(nameof(HiUndeadNoUniquesMonsterFilter)) : Game.SingletonRepository.MonsterFilters.Get(nameof(UndeadMonsterFilter)), Game.ExperienceLevel.Value > 24 && Game.DieRoll(3) == 1))
             {
-                SaveGame.MsgPrint("Cold winds begin to swirl around you, carrying with them the stench of decay...");
-                SaveGame.MsgPrint("Ancient, long-dead forms arise from the ground to serve you!");
+                Game.MsgPrint("Cold winds begin to swirl around you, carrying with them the stench of decay...");
+                Game.MsgPrint("Ancient, long-dead forms arise from the ground to serve you!");
             }
             else
             {
-                SaveGame.MsgPrint("No-one ever turns up.");
+                Game.MsgPrint("No-one ever turns up.");
             }
         }
     }

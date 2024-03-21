@@ -13,14 +13,14 @@ namespace AngbandOS.Core.Activations;
 [Serializable]
 internal class RechargeActivation : Activation
 {
-    private RechargeActivation(SaveGame saveGame) : base(saveGame) { }
+    private RechargeActivation(Game game) : base(game) { }
     public override int RandomChance => 85;
 
     public override string? PreActivationMessage => "Your {0}  glows bright yellow...";
 
     protected override bool OnActivate(Item item)
     {
-        SaveGame.RunSuccessfulScriptInt(nameof(RechargeItemScript), 60);
+        Game.RunSuccessfulScriptInt(nameof(RechargeItemScript), 60);
         return true;
     }
 

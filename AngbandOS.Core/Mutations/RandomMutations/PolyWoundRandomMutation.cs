@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Mutations.RandomMutations;
 [Serializable]
 internal class PolyWoundRandomMutation : Mutation
 {
-    private PolyWoundRandomMutation(SaveGame saveGame) : base(saveGame) { }
+    private PolyWoundRandomMutation(Game game) : base(game) { }
     public override int Frequency => 1;
     public override string GainMessage => "You feel forces of chaos entering your old scars.";
     public override string HaveMessage => "Your health is subject to chaotic forces.";
@@ -18,9 +18,9 @@ internal class PolyWoundRandomMutation : Mutation
 
     public override void OnProcessWorld()
     {
-        if (base.SaveGame.DieRoll(3000) == 1)
+        if (base.Game.DieRoll(3000) == 1)
         {
-            SaveGame.RunScript(nameof(PolymorphWoundsScript));
+            Game.RunScript(nameof(PolymorphWoundsScript));
         }
     }
 }

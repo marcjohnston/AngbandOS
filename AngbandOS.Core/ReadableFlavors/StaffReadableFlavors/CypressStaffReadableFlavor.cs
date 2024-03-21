@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Flavors;
 [Serializable]
 internal class CypressStaffReadableFlavor : StaffReadableFlavor
 {
-    private CypressStaffReadableFlavor(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private CypressStaffReadableFlavor(Game game) : base(game) { } // This object is a singleton.
     protected override string SymbolName => nameof(UnderscoreSymbol);
     public override ColorEnum Color => ColorEnum.Brown;
     public override string Name => "Cypress";

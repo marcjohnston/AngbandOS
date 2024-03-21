@@ -10,7 +10,7 @@ namespace AngbandOS.Core.DungeonGuardians;
 [Serializable]
 internal class VortTheKoboldQueenDungeonGuardian : DungeonGuardian
 {
-    private VortTheKoboldQueenDungeonGuardian(SaveGame saveGame) : base(saveGame) { } // This object is a singleton
+    private VortTheKoboldQueenDungeonGuardian(Game game) : base(game) { } // This object is a singleton
     protected override string MonsterRaceName => nameof(VortTheKoboldQueenMonsterRace);
     public override int LevelFound => 5;
 }

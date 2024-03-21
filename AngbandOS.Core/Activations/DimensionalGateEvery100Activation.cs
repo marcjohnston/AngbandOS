@@ -13,30 +13,30 @@ namespace AngbandOS.Core.Activations;
 [Serializable]
 internal class DimensionalGateEvery100Activation : Activation
 {
-    private DimensionalGateEvery100Activation(SaveGame saveGame) : base(saveGame) { }
+    private DimensionalGateEvery100Activation(Game game) : base(game) { }
     public override int RandomChance => 10;
 
     public override string? PreActivationMessage => "You open a dimensional gate. Choose a destination.";
 
     protected override bool OnActivate(Item item)
     {
-        if (!SaveGame.TgtPt(out int ii, out int ij))
+        if (!Game.TgtPt(out int ii, out int ij))
         {
             return false;
         }
-        SaveGame.Energy -= 60 - SaveGame.ExperienceLevel.Value;
-        if (!SaveGame.GridPassableNoCreature(ij, ii) ||
-            SaveGame.Grid[ij][ii].TileFlags.IsSet(GridTile.InVault) ||
-            SaveGame.Distance(ij, ii, SaveGame.MapY, SaveGame.MapX) > SaveGame.ExperienceLevel.Value + 2 ||
-            SaveGame.RandomLessThan(SaveGame.ExperienceLevel.Value * SaveGame.ExperienceLevel.Value / 2) == 0)
+        Game.Energy -= 60 - Game.ExperienceLevel.Value;
+        if (!Game.GridPassableNoCreature(ij, ii) ||
+            Game.Grid[ij][ii].TileFlags.IsSet(GridTile.InVault) ||
+            Game.Distance(ij, ii, Game.MapY, Game.MapX) > Game.ExperienceLevel.Value + 2 ||
+            Game.RandomLessThan(Game.ExperienceLevel.Value * Game.ExperienceLevel.Value / 2) == 0)
         {
-            SaveGame.MsgPrint("You fail to exit the astral plane correctly!");
-            SaveGame.Energy -= 100;
-            SaveGame.RunScriptInt(nameof(TeleportSelfScript), 10);
+            Game.MsgPrint("You fail to exit the astral plane correctly!");
+            Game.Energy -= 100;
+            Game.RunScriptInt(nameof(TeleportSelfScript), 10);
         }
         else
         {
-            SaveGame.TeleportPlayerTo(ij, ii);
+            Game.TeleportPlayerTo(ij, ii);
         }
         return true;
     }

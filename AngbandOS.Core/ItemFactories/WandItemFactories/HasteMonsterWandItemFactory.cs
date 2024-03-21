@@ -10,14 +10,14 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class HasteMonsterWandItemFactory : WandItemFactory
 {
-    private HasteMonsterWandItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private HasteMonsterWandItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(MinusSignSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(MinusSignSymbol));
     public override string Name => "Haste Monster";
 
     public override void ApplyMagic(Item item, int level, int power, Store? store)
     {
-        item.TypeSpecificValue = SaveGame.DieRoll(20) + 8;
+        item.TypeSpecificValue = Game.DieRoll(20) + 8;
     }
     public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int Dd => 1;
@@ -26,9 +26,9 @@ internal class HasteMonsterWandItemFactory : WandItemFactory
     public override int LevelNormallyFound => 2;
     public override int[] Locale => new int[] { 2, 0, 0, 0 };
     public override int Weight => 10;
-    public override bool ExecuteActivation(SaveGame saveGame, int dir)
+    public override bool ExecuteActivation(Game game, int dir)
     {
-        return saveGame.SpeedMonster(dir);
+        return game.SpeedMonster(dir);
     }
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

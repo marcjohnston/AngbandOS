@@ -10,7 +10,7 @@ namespace AngbandOS.Core.MonsterRaces;
 [Serializable]
 internal class SpottedMushroomPatchMonsterRace : MonsterRace
 {
-    protected SpottedMushroomPatchMonsterRace(SaveGame saveGame) : base(saveGame) { }
+    protected SpottedMushroomPatchMonsterRace(Game game) : base(game) { }
 
     protected override string SymbolName => nameof(CommaSymbol);
     public override ColorEnum Color => ColorEnum.Orange;

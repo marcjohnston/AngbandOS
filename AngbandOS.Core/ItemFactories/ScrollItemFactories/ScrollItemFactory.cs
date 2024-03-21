@@ -10,8 +10,8 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal abstract class ScrollItemFactory : ItemFactory, IFlavorFactory
 {
-    public ScrollItemFactory(SaveGame saveGame) : base(saveGame) { }
-    public override ItemClass ItemClass => SaveGame.SingletonRepository.ItemClasses.Get(nameof(ScrollsItemClass));
+    public ScrollItemFactory(Game game) : base(game) { }
+    public override ItemClass ItemClass => Game.SingletonRepository.ItemClasses.Get(nameof(ScrollsItemClass));
 
     /// <summary>
     /// Returns the factory that this item was created by; casted as an IFlavor.
@@ -22,14 +22,14 @@ internal abstract class ScrollItemFactory : ItemFactory, IFlavorFactory
     {
         string flavor = item.IdentityIsStoreBought ? "" : $" titled \"{FlavorFactory.Flavor.Name}\"";
         string ofName = isFlavorAware ? $" of {FriendlyName}" : "";
-        string name = $"{SaveGame.CountPluralize("Scroll", item.Count)}{flavor}{ofName}";
+        string name = $"{Game.CountPluralize("Scroll", item.Count)}{flavor}{ofName}";
         return includeCountPrefix ? GetPrefixCount(true, name, item.Count, item.IsKnownArtifact) : name;
     }
 
     /// <summary>
     /// Returns the scroll flavors repository because scrolls have flavors that need to be identified.
     /// </summary>
-    public IEnumerable<Flavor>? GetFlavorRepository() => SaveGame.UnreadableScrollFlavors;
+    public IEnumerable<Flavor>? GetFlavorRepository() => Game.UnreadableScrollFlavors;
 
     public override int GetAdditionalMassProduceCount(Item item)
     {

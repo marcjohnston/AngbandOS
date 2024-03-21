@@ -10,10 +10,10 @@ namespace AngbandOS.Core.MonsterSpells;
 [Serializable]
 internal abstract class MonsterSpell : IGetKey
 {
-    protected readonly SaveGame SaveGame;
-    protected MonsterSpell(SaveGame saveGame) 
+    protected readonly Game Game;
+    protected MonsterSpell(Game game) 
     {
-        SaveGame = saveGame;
+        Game = game;
     }
 
     /// <summary>
@@ -230,14 +230,14 @@ internal abstract class MonsterSpell : IGetKey
     /// <summary>
     /// Performs the spell on the player.
     /// </summary>
-    /// <param name="saveGame"></param>
+    /// <param name="game"></param>
     /// <param name="monster"></param>
-    public abstract void ExecuteOnPlayer(SaveGame saveGame, Monster monster);
+    public abstract void ExecuteOnPlayer(Game game, Monster monster);
 
     /// <summary>
     /// Performs the spell on a monster.
     /// </summary>
-    /// <param name="saveGame"></param>
+    /// <param name="game"></param>
     /// <param name="monster"></param>
-    public abstract void ExecuteOnMonster(SaveGame saveGame, Monster monster, Monster target);
+    public abstract void ExecuteOnMonster(Game game, Monster monster, Monster target);
 }

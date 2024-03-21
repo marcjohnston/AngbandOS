@@ -10,7 +10,7 @@ namespace AngbandOS.Core.ProjectileGraphics;
 [Serializable]
 internal class GreenSplatProjectileGraphic : ProjectileGraphic
 {
-    private GreenSplatProjectileGraphic(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private GreenSplatProjectileGraphic(Game game) : base(game) { } // This object is a singleton.
     public override char Character => '*';
     public override ColorEnum Color => ColorEnum.Green;
 }

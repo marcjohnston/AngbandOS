@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Tiles;
 [Serializable]
 internal class GrassTile : Tile
 {
-    private GrassTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private GrassTile(Game game) : base(game) { } // This object is a singleton.
     protected override string SymbolName => nameof(PeriodSymbol);
     public override ColorEnum Color => ColorEnum.BrightGreen;
     public override string Description => "open floor";

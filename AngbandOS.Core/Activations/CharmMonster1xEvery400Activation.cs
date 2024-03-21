@@ -13,7 +13,7 @@ namespace AngbandOS.Core.Activations;
 [Serializable]
 internal class CharmMonster1xEvery400Activation : DirectionalActivation
 {
-    private CharmMonster1xEvery400Activation(SaveGame saveGame) : base(saveGame) { }
+    private CharmMonster1xEvery400Activation(Game game) : base(game) { }
     public override int RandomChance => 33;
 
     public override string? PreActivationMessage => "";
@@ -22,7 +22,7 @@ internal class CharmMonster1xEvery400Activation : DirectionalActivation
 
     protected override bool Activate(int direction)
     {
-        SaveGame.CharmMonster(direction, SaveGame.ExperienceLevel.Value);
+        Game.CharmMonster(direction, Game.ExperienceLevel.Value);
         return true;
     }
 

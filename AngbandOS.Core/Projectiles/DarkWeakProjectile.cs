@@ -10,26 +10,26 @@ namespace AngbandOS.Core.Projection;
 [Serializable]
 internal class DarkWeakProjectile : Projectile
 {
-    private DarkWeakProjectile(SaveGame saveGame) : base(saveGame) { }
+    private DarkWeakProjectile(Game game) : base(game) { }
 
-    protected override ProjectileGraphic? BoltProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get(nameof(GreyBoltProjectileGraphic));
+    protected override ProjectileGraphic? BoltProjectileGraphic => Game.SingletonRepository.ProjectileGraphics.Get(nameof(GreyBoltProjectileGraphic));
 
-    protected override ProjectileGraphic? ImpactProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get(nameof(GreySplatProjectileGraphic));
+    protected override ProjectileGraphic? ImpactProjectileGraphic => Game.SingletonRepository.ProjectileGraphics.Get(nameof(GreySplatProjectileGraphic));
 
     protected override bool AffectFloor(int y, int x)
     {
-        GridTile cPtr = SaveGame.Grid[y][x];
-        bool obvious = SaveGame.PlayerCanSeeBold(y, x);
+        GridTile cPtr = Game.Grid[y][x];
+        bool obvious = Game.PlayerCanSeeBold(y, x);
         cPtr.TileFlags.Clear(GridTile.SelfLit);
         if (cPtr.FeatureType.IsOpenFloor)
         {
             cPtr.TileFlags.Clear(GridTile.PlayerMemorized);
-            SaveGame.NoteSpot(y, x);
+            Game.NoteSpot(y, x);
         }
-        SaveGame.RedrawSingleLocation(y, x);
+        Game.RedrawSingleLocation(y, x);
         if (cPtr.MonsterIndex != 0)
         {
-            SaveGame.UpdateMonsterVisibility(cPtr.MonsterIndex, false);
+            Game.UpdateMonsterVisibility(cPtr.MonsterIndex, false);
         }
         return obvious;
     }

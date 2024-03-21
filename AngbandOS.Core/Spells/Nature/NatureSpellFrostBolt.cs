@@ -10,10 +10,10 @@ namespace AngbandOS.Core.Spells.Nature;
 [Serializable]
 internal class NatureSpellFrostBolt : Spell
 {
-    private NatureSpellFrostBolt(SaveGame saveGame) : base(saveGame) { }
+    private NatureSpellFrostBolt(Game game) : base(game) { }
     protected override string? CastScriptName => nameof(FrostBoltScript);
 
     public override string Name => "Frost Bolt";
 
-    protected override string LearnedDetails => $"dam {5 + ((SaveGame.ExperienceLevel.Value - 5) / 4)}d8";
+    protected override string LearnedDetails => $"dam {5 + ((Game.ExperienceLevel.Value - 5) / 4)}d8";
 }

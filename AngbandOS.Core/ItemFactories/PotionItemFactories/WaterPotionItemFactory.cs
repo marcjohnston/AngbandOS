@@ -10,8 +10,8 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class WaterPotionItemFactory : PotionItemFactory
 {
-    private WaterPotionItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(ExclamationPointSymbol));
+    private WaterPotionItemFactory(Game game) : base(game) { } // This object is a singleton
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(ExclamationPointSymbol));
     public override string Name => "Water";
 
     public override int[] Chance => new int[] { 1, 0, 0, 0 };
@@ -25,7 +25,7 @@ internal class WaterPotionItemFactory : PotionItemFactory
     public override bool Quaff()
     {
         // Water has no effect
-        SaveGame.MsgPrint("You feel less thirsty.");
+        Game.MsgPrint("You feel less thirsty.");
         return true;
     }
 
@@ -34,7 +34,7 @@ internal class WaterPotionItemFactory : PotionItemFactory
     /// </summary>
     public override IEnumerable<ReadableFlavor>? GetFlavorRepository()
     {
-        Flavor = SaveGame.SingletonRepository.PotionReadableFlavors.Get(nameof(ClearPotionReadableFlavor));
+        Flavor = Game.SingletonRepository.PotionReadableFlavors.Get(nameof(ClearPotionReadableFlavor));
         return null;
     }
 
@@ -42,5 +42,5 @@ internal class WaterPotionItemFactory : PotionItemFactory
     {
         return true;
     }
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

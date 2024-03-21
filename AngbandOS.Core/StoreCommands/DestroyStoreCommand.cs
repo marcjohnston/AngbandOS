@@ -13,7 +13,7 @@ namespace AngbandOS.Core.StoreCommands;
 [Serializable]
 internal class DestroyStoreCommand : StoreCommand
 {
-    private DestroyStoreCommand(SaveGame saveGame) : base(saveGame) { }
+    private DestroyStoreCommand(Game game) : base(game) { }
     public override char KeyChar => 'k';
 
     public override string Description => "";

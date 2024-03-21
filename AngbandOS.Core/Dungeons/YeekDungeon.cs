@@ -9,7 +9,7 @@ namespace AngbandOS.Core.Dungeons;
 [Serializable]
 internal class YeekDungeon : Dungeon
 {
-    private YeekDungeon(SaveGame saveGame) : base(saveGame) { }
+    private YeekDungeon(Game game) : base(game) { }
     public override int BaseOffset => 2;
     public override int MaxLevel => 8;
     protected override string? BiasMonsterFilterName => nameof(YeekMonsterFilter);

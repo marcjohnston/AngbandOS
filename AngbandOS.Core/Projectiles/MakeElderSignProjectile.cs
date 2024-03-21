@@ -10,17 +10,17 @@ namespace AngbandOS.Core.Projection;
 [Serializable]
 internal class MakeElderSignProjectile : Projectile
 {
-    private MakeElderSignProjectile(SaveGame saveGame) : base(saveGame) { }
+    private MakeElderSignProjectile(Game game) : base(game) { }
 
-    protected override Animation EffectAnimation => SaveGame.SingletonRepository.Animations.Get(nameof(BrightGreenSparkleAnimation));
+    protected override Animation EffectAnimation => Game.SingletonRepository.Animations.Get(nameof(BrightGreenSparkleAnimation));
 
     protected override bool AffectFloor(int y, int x)
     {
-        if (!SaveGame.GridOpenNoItemOrCreature(y, x))
+        if (!Game.GridOpenNoItemOrCreature(y, x))
         {
             return false;
         }
-        SaveGame.CaveSetFeat(y, x, SaveGame.SingletonRepository.Tiles.Get(nameof(ElderSignSigilTile)));
+        Game.CaveSetFeat(y, x, Game.SingletonRepository.Tiles.Get(nameof(ElderSignSigilTile)));
         return false;
     }
 

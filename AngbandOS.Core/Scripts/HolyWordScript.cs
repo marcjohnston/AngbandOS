@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class HolyWordScript : Script, IScript
 {
-    private HolyWordScript(SaveGame saveGame) : base(saveGame) { }
+    private HolyWordScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script.
@@ -18,11 +18,11 @@ internal class HolyWordScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        SaveGame.RunScriptInt(nameof(DispelEvil4xScript), SaveGame.ExperienceLevel.Value * 4);
-        SaveGame.RestoreHealth(1000);
-        SaveGame.FearTimer.ResetTimer();
-        SaveGame.PoisonTimer.ResetTimer();
-        SaveGame.StunTimer.ResetTimer();
-        SaveGame.BleedingTimer.ResetTimer();
+        Game.RunScriptInt(nameof(DispelEvil4xScript), Game.ExperienceLevel.Value * 4);
+        Game.RestoreHealth(1000);
+        Game.FearTimer.ResetTimer();
+        Game.PoisonTimer.ResetTimer();
+        Game.StunTimer.ResetTimer();
+        Game.BleedingTimer.ResetTimer();
     }
 }

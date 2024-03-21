@@ -13,7 +13,7 @@ namespace AngbandOS.Core.StoreCommands;
 [Serializable]
 internal class HelpStoreCommand : StoreCommand
 {
-    private HelpStoreCommand(SaveGame saveGame) : base(saveGame) { }
+    private HelpStoreCommand(Game game) : base(game) { }
     public override char KeyChar => 'h';
 
     public override string Description => "Get help for this store.";

@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Tiles;
 [Serializable]
 internal class ScarecrowTile : Tile
 {
-    private ScarecrowTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private ScarecrowTile(Game game) : base(game) { } // This object is a singleton.
     protected override string SymbolName => nameof(LowerTSymbol);
     public override ColorEnum Color => ColorEnum.BrightBrown;
     protected override string? AlterActionName => nameof(TunnelAlterAction);

@@ -10,7 +10,7 @@ namespace AngbandOS.Core.MonsterRaces;
 [Serializable]
 internal class PitifulLookingBeggarMonsterRace : MonsterRace
 {
-    protected PitifulLookingBeggarMonsterRace(SaveGame saveGame) : base(saveGame) { }
+    protected PitifulLookingBeggarMonsterRace(Game game) : base(game) { }
 
     protected override string SymbolName => nameof(LowerTSymbol);
     public override ColorEnum Color => ColorEnum.BrightBrown;

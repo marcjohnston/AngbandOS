@@ -10,9 +10,9 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class ShadowCloakArmorItemFactory : CloakArmorItemFactory
 {
-    private ShadowCloakArmorItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private ShadowCloakArmorItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(OpenParenthesisSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(OpenParenthesisSymbol));
     public override ColorEnum Color => ColorEnum.Black;
     public override string Name => "Shadow Cloak";
 
@@ -26,5 +26,5 @@ internal class ShadowCloakArmorItemFactory : CloakArmorItemFactory
     public override bool ResLight => true;
     public override int ToA => 4;
     public override int Weight => 5;
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

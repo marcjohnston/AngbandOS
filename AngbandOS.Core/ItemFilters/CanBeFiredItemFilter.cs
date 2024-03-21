@@ -14,7 +14,7 @@ namespace AngbandOS.Core.ItemFilters;
 [Serializable]
 internal class CanBeFiredItemFilter : AllItemsItemFilter
 {
-    private CanBeFiredItemFilter(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private CanBeFiredItemFilter(Game game) : base(game) { } // This object is a singleton.
 
     public override bool? CanBeFired => true;
 }

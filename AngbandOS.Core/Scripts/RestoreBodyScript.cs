@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class RestoreBodyScript : Script, IScript
 {
-    private RestoreBodyScript(SaveGame saveGame) : base(saveGame) { }
+    private RestoreBodyScript(Game game) : base(game) { }
 
     /// <summary>
     /// Restores the ability score for strength, intelligence, wisdon, dexterity, constitution and charisma.
@@ -18,11 +18,11 @@ internal class RestoreBodyScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        SaveGame.TryRestoringAbilityScore(Ability.Strength);
-        SaveGame.TryRestoringAbilityScore(Ability.Intelligence);
-        SaveGame.TryRestoringAbilityScore(Ability.Wisdom);
-        SaveGame.TryRestoringAbilityScore(Ability.Dexterity);
-        SaveGame.TryRestoringAbilityScore(Ability.Constitution);
-        SaveGame.TryRestoringAbilityScore(Ability.Charisma);
+        Game.TryRestoringAbilityScore(Ability.Strength);
+        Game.TryRestoringAbilityScore(Ability.Intelligence);
+        Game.TryRestoringAbilityScore(Ability.Wisdom);
+        Game.TryRestoringAbilityScore(Ability.Dexterity);
+        Game.TryRestoringAbilityScore(Ability.Constitution);
+        Game.TryRestoringAbilityScore(Ability.Charisma);
     }
 }

@@ -10,14 +10,14 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class PolymorphWandItemFactory : WandItemFactory
 {
-    private PolymorphWandItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private PolymorphWandItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(MinusSignSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(MinusSignSymbol));
     public override string Name => "Polymorph";
 
     public override void ApplyMagic(Item item, int level, int power, Store? store)
     {
-        item.TypeSpecificValue = SaveGame.DieRoll(8) + 6;
+        item.TypeSpecificValue = Game.DieRoll(8) + 6;
     }
     public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int Cost => 400;
@@ -27,9 +27,9 @@ internal class PolymorphWandItemFactory : WandItemFactory
     public override int LevelNormallyFound => 20;
     public override int[] Locale => new int[] { 20, 0, 0, 0 };
     public override int Weight => 10;
-    public override bool ExecuteActivation(SaveGame saveGame, int dir)
+    public override bool ExecuteActivation(Game game, int dir)
     {
-        return saveGame.PolyMonster(dir);
+        return game.PolyMonster(dir);
     }
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

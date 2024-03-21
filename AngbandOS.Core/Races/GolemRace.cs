@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Races;
 [Serializable]
 internal class GolemRace : Race
 {
-    private GolemRace(SaveGame saveGame) : base(saveGame) { }
+    private GolemRace(Game game) : base(game) { }
     public override string Title => "Golem";
     public override int[] AbilityBonus => new int[] { 4, -5, -5, 0, 4, -4 };
     public override int BaseDisarmBonus => -5;
@@ -68,23 +68,23 @@ internal class GolemRace : Race
     }
     public override void CalcBonuses()
     {
-        if (SaveGame.ExperienceLevel.Value > 34)
+        if (Game.ExperienceLevel.Value > 34)
         {
-            SaveGame.HasHoldLife = true;
+            Game.HasHoldLife = true;
         }
-        SaveGame.HasSlowDigestion = true;
-        SaveGame.HasFreeAction = true;
-        SaveGame.HasSeeInvisibility = true;
-        SaveGame.HasPoisonResistance = true;
-        SaveGame.ArmorClassBonus += 20 + (SaveGame.ExperienceLevel.Value / 5);
-        SaveGame.DisplayedArmorClassBonus.Value += 20 + (SaveGame.ExperienceLevel.Value / 5);
+        Game.HasSlowDigestion = true;
+        Game.HasFreeAction = true;
+        Game.HasSeeInvisibility = true;
+        Game.HasPoisonResistance = true;
+        Game.ArmorClassBonus += 20 + (Game.ExperienceLevel.Value / 5);
+        Game.DisplayedArmorClassBonus.Value += 20 + (Game.ExperienceLevel.Value / 5);
     }
 
     public override void Eat(Item item)
     {
         // This race only gets 1/20th of the food value
-        SaveGame.MsgPrint("The food of mortals is poor sustenance for you.");
-        SaveGame.SetFood(SaveGame.Food.Value + (item.TypeSpecificValue / 20));
+        Game.MsgPrint("The food of mortals is poor sustenance for you.");
+        Game.SetFood(Game.Food.Value + (item.TypeSpecificValue / 20));
     }
 
     public override bool CanBleed(int level) => false;
@@ -92,9 +92,9 @@ internal class GolemRace : Race
     public override void UseRacialPower()
     {
         // Golems can harden their skin
-        if (SaveGame.CheckIfRacialPowerWorks(20, 15, Ability.Constitution, 8))
+        if (Game.CheckIfRacialPowerWorks(20, 15, Ability.Constitution, 8))
         {
-            SaveGame.StoneskinTimer.AddTimer(SaveGame.DieRoll(20) + 30);
+            Game.StoneskinTimer.AddTimer(Game.DieRoll(20) + 30);
         }
     }
     public override bool OutfitsWithScrollsOfSatisfyHunger => true;

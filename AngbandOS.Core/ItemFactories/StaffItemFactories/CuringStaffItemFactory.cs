@@ -10,14 +10,14 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class CuringStaffItemFactory : StaffItemFactory
 {
-    private CuringStaffItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private CuringStaffItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UnderscoreSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(UnderscoreSymbol));
     public override string Name => "Curing";
 
     public override void ApplyMagic(Item item, int level, int power, Store? store)
     {
-        item.TypeSpecificValue = SaveGame.DieRoll(3) + 4;
+        item.TypeSpecificValue = Game.DieRoll(3) + 4;
     }
 
     public override int[] Chance => new int[] { 1, 0, 0, 0 };
@@ -31,30 +31,30 @@ internal class CuringStaffItemFactory : StaffItemFactory
 
     public override void UseStaff(UseStaffEvent eventArgs)
     {
-        if (SaveGame.BlindnessTimer.ResetTimer())
+        if (Game.BlindnessTimer.ResetTimer())
         {
             eventArgs.Identified = true;
         }
-        if (SaveGame.PoisonTimer.ResetTimer())
+        if (Game.PoisonTimer.ResetTimer())
         {
             eventArgs.Identified = true;
         }
-        if (SaveGame.ConfusedTimer.ResetTimer())
+        if (Game.ConfusedTimer.ResetTimer())
         {
             eventArgs.Identified = true;
         }
-        if (SaveGame.StunTimer.ResetTimer())
+        if (Game.StunTimer.ResetTimer())
         {
             eventArgs.Identified = true;
         }
-        if (SaveGame.BleedingTimer.ResetTimer())
+        if (Game.BleedingTimer.ResetTimer())
         {
             eventArgs.Identified = true;
         }
-        if (SaveGame.HallucinationsTimer.ResetTimer())
+        if (Game.HallucinationsTimer.ResetTimer())
         {
             eventArgs.Identified = true;
         }
     }
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class BlessScript : Script, IScript
 {
-    private BlessScript(SaveGame saveGame) : base(saveGame) { }
+    private BlessScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script.
@@ -18,6 +18,6 @@ internal class BlessScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        SaveGame.BlessingTimer.AddTimer(SaveGame.DieRoll(12) + 12);
+        Game.BlessingTimer.AddTimer(Game.DieRoll(12) + 12);
     }
 }

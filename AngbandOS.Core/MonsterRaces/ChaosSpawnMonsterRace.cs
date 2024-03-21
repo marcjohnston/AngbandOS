@@ -10,7 +10,7 @@ namespace AngbandOS.Core.MonsterRaces;
 [Serializable]
 internal class ChaosSpawnMonsterRace : MonsterRace
 {
-    protected ChaosSpawnMonsterRace(SaveGame saveGame) : base(saveGame) { }
+    protected ChaosSpawnMonsterRace(Game game) : base(game) { }
 
     protected override string SymbolName => nameof(LowerESymbol);
     public override ColorEnum Color => ColorEnum.Purple;

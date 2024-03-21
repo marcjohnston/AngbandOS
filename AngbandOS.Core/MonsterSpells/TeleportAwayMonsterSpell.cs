@@ -10,7 +10,7 @@ namespace AngbandOS.Core.MonsterSpells;
 [Serializable]
 internal class TeleportAwayMonsterSpell : MonsterSpell
 {
-    private TeleportAwayMonsterSpell(SaveGame saveGame) : base(saveGame) { }
+    private TeleportAwayMonsterSpell(Game game) : base(game) { }
     public override bool IsIntelligent => true;
 
     public override bool ProvidesEscape => true;
@@ -20,16 +20,16 @@ internal class TeleportAwayMonsterSpell : MonsterSpell
     public override string? VsMonsterSeenMessage(Monster monster, Monster target) => $"{monster.Name} teleports {target.Name} away.";
     public override string? VsMonsterUnseenMessage => null;
 
-    public override void ExecuteOnPlayer(SaveGame saveGame, Monster monster)
+    public override void ExecuteOnPlayer(Game game, Monster monster)
     {
-        SaveGame.RunScriptInt(nameof(TeleportSelfScript), 100);
+        Game.RunScriptInt(nameof(TeleportSelfScript), 100);
     }
 
-    public override void ExecuteOnMonster(SaveGame saveGame, Monster monster, Monster target)
+    public override void ExecuteOnMonster(Game game, Monster monster, Monster target)
     {
         bool resistsTele = false;
         string targetName = target.Name;
-        bool blind = saveGame.BlindnessTimer.Value != 0;
+        bool blind = game.BlindnessTimer.Value != 0;
         bool seeTarget = !blind && target.IsVisible;
         MonsterRace targetRace = target.Race;
 
@@ -40,23 +40,23 @@ internal class TeleportAwayMonsterSpell : MonsterSpell
                 if (seeTarget)
                 {
                     targetRace.Knowledge.Characteristics.ResistTeleport = true;
-                    saveGame.MsgPrint($"{targetName} is unaffected!");
+                    game.MsgPrint($"{targetName} is unaffected!");
                 }
                 resistsTele = true;
             }
-            else if (targetRace.Level > SaveGame.DieRoll(100))
+            else if (targetRace.Level > Game.DieRoll(100))
             {
                 if (seeTarget)
                 {
                     targetRace.Knowledge.Characteristics.ResistTeleport = true;
-                    saveGame.MsgPrint($"{targetName} resists!");
+                    game.MsgPrint($"{targetName} resists!");
                 }
                 resistsTele = true;
             }
         }
         if (!resistsTele)
         {
-            target.TeleportAway(saveGame, (Constants.MaxSight * 2) + 5);
+            target.TeleportAway(game, (Constants.MaxSight * 2) + 5);
         }
     }
 }

@@ -10,9 +10,9 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class TulwarWeaponItemFactory : SwordWeaponItemFactory
 {
-    private TulwarWeaponItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private TulwarWeaponItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(VerticalBarSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(VerticalBarSymbol));
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "Tulwar";
 
@@ -25,5 +25,5 @@ internal class TulwarWeaponItemFactory : SwordWeaponItemFactory
     public override int[] Locale => new int[] { 5, 0, 0, 0 };
     public override bool ShowMods => true;
     public override int Weight => 100;
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

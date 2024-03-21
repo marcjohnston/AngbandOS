@@ -10,9 +10,9 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class ExperiencePotionItemFactory : PotionItemFactory
 {
-    private ExperiencePotionItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private ExperiencePotionItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(ExclamationPointSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(ExclamationPointSymbol));
     public override string Name => "Experience";
 
     public override int[] Chance => new int[] { 1, 0, 0, 0 };
@@ -27,18 +27,18 @@ internal class ExperiencePotionItemFactory : PotionItemFactory
     {
         // Experience increases your experience points by 50%, with a minimum of +10 and
         // maximuum of +10,000
-        if (SaveGame.ExperiencePoints.Value < Constants.PyMaxExp)
+        if (Game.ExperiencePoints.Value < Constants.PyMaxExp)
         {
-            int ee = (SaveGame.ExperiencePoints.Value / 2) + 10;
+            int ee = (Game.ExperiencePoints.Value / 2) + 10;
             if (ee > 100000)
             {
                 ee = 100000;
             }
-            SaveGame.MsgPrint("You feel more experienced.");
-            SaveGame.GainExperience(ee);
+            Game.MsgPrint("You feel more experienced.");
+            Game.GainExperience(ee);
             return true;
         }
         return false;
     }
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

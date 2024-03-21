@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class WildChaoticMagicScript : Script, ISpellScript
 {
-    private WildChaoticMagicScript(SaveGame saveGame) : base(saveGame) { }
+    private WildChaoticMagicScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes a random chaotic spell.
@@ -20,91 +20,91 @@ internal class WildChaoticMagicScript : Script, ISpellScript
     public void ExecuteSpellScript(Spell spell)
     {
         int spellIndex = spell.SpellIndex;
-        SaveGame.MsgPrint("You produce a chaotic effect!");
-        switch (SaveGame.DieRoll(spellIndex) + SaveGame.DieRoll(8)) // TODO: Convert this to WeightedRandom
+        Game.MsgPrint("You produce a chaotic effect!");
+        switch (Game.DieRoll(spellIndex) + Game.DieRoll(8)) // TODO: Convert this to WeightedRandom
         {
             case 1:
             case 2:
             case 3:
-                SaveGame.RunScriptInt(nameof(TeleportSelfScript), 10);
+                Game.RunScriptInt(nameof(TeleportSelfScript), 10);
                 break;
 
             case 4:
             case 5:
             case 6:
-                SaveGame.RunScriptInt(nameof(TeleportSelfScript), 100);
+                Game.RunScriptInt(nameof(TeleportSelfScript), 100);
                 break;
 
             case 7:
             case 8:
-                SaveGame.RunScriptInt(nameof(TeleportSelfScript), 200);
+                Game.RunScriptInt(nameof(TeleportSelfScript), 200);
                 break;
 
             case 9:
             case 10:
             case 11:
-                SaveGame.UnlightArea(10, 3);
+                Game.UnlightArea(10, 3);
                 break;
 
             case 12:
             case 13:
             case 14:
-                SaveGame.LightArea(SaveGame.DiceRoll(2, 3), 2);
+                Game.LightArea(Game.DiceRoll(2, 3), 2);
                 break;
 
             case 15:
-                SaveGame.RunScript(nameof(DestroyAdjacentDoorsScript));
+                Game.RunScript(nameof(DestroyAdjacentDoorsScript));
                 break;
 
             case 16:
             case 17:
-                SaveGame.WallBreaker();
+                Game.WallBreaker();
                 break;
 
             case 18:
-                SaveGame.SleepMonstersTouch();
+                Game.SleepMonstersTouch();
                 break;
 
             case 19:
             case 20:
-                SaveGame.TrapCreation();
+                Game.TrapCreation();
                 break;
 
             case 21:
             case 22:
-                SaveGame.RunScript(nameof(CreateDoorScript));
+                Game.RunScript(nameof(CreateDoorScript));
                 break;
 
             case 23:
             case 24:
             case 25:
-                SaveGame.AggravateMonsters();
+                Game.AggravateMonsters();
                 break;
 
             case 26:
-                SaveGame.Earthquake(SaveGame.MapY, SaveGame.MapX, 5);
+                Game.Earthquake(Game.MapY, Game.MapX, 5);
                 break;
 
             case 27:
             case 28:
-                SaveGame.RunScript(nameof(GainMutationScript));
+                Game.RunScript(nameof(GainMutationScript));
                 break;
 
             case 29:
             case 30:
-                SaveGame.RunScript(nameof(ApplyDisenchantScript));
+                Game.RunScript(nameof(ApplyDisenchantScript));
                 break;
 
             case 31:
-                SaveGame.LoseAllInfo();
+                Game.LoseAllInfo();
                 break;
 
             case 32:
-                SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(ChaosProjectile)), 0, spellIndex + 5, 1 + (spellIndex / 10));
+                Game.FireBall(Game.SingletonRepository.Projectiles.Get(nameof(ChaosProjectile)), 0, spellIndex + 5, 1 + (spellIndex / 10));
                 break;
 
             case 33:
-                SaveGame.RunScript(nameof(WallOfStoneScript));
+                Game.RunScript(nameof(WallOfStoneScript));
                 break;
 
             case 34:
@@ -112,21 +112,21 @@ internal class WildChaoticMagicScript : Script, ISpellScript
                 int counter = 0;
                 while (counter++ < 8)
                 {
-                    SaveGame.SummonSpecific(SaveGame.MapY, SaveGame.MapX, SaveGame.Difficulty * 3 / 2, SaveGame.GetRandomBizarreMonsterSelector());
+                    Game.SummonSpecific(Game.MapY, Game.MapX, Game.Difficulty * 3 / 2, Game.GetRandomBizarreMonsterSelector());
                 }
                 break;
 
             case 36:
             case 37:
-                SaveGame.ActivateHiSummon();
+                Game.ActivateHiSummon();
                 break;
 
             case 38:
-                SaveGame.SummonReaver();
+                Game.SummonReaver();
                 break;
 
             default:
-                SaveGame.ActivateDreadCurse();
+                Game.ActivateDreadCurse();
                 break;
         }
     }

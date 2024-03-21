@@ -13,7 +13,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class ActivateScript : Script, IScript, IRepeatableScript, ISuccessfulScript
 {
-    private ActivateScript(SaveGame saveGame) : base(saveGame) { }
+    private ActivateScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the activate script and disposes of the successful result.
@@ -40,9 +40,9 @@ internal class ActivateScript : Script, IScript, IRepeatableScript, ISuccessfulS
     public bool ExecuteSuccessfulScript()
     {
         // No item passed in, so get one; filtering to activatable items only
-        if (!SaveGame.SelectItem(out Item? item, "Activate which item? ", true, true, false, SaveGame.SingletonRepository.ItemFilters.Get(nameof(KnownAndActivableItemFilter))))
+        if (!Game.SelectItem(out Item? item, "Activate which item? ", true, true, false, Game.SingletonRepository.ItemFilters.Get(nameof(KnownAndActivableItemFilter))))
         {
-            SaveGame.MsgPrint("You have nothing to activate.");
+            Game.MsgPrint("You have nothing to activate.");
             return false;
         }
         // Get the item from the index
@@ -52,7 +52,7 @@ internal class ActivateScript : Script, IScript, IRepeatableScript, ISuccessfulS
         }
 
         // Activating an item uses 100 energy
-        SaveGame.EnergyUse = 100;
+        Game.EnergyUse = 100;
 
         // Get the level of the item
         int itemLevel = item.Factory.LevelNormallyFound;
@@ -63,8 +63,8 @@ internal class ActivateScript : Script, IScript, IRepeatableScript, ISuccessfulS
 
         // Work out the chance of using the item successfully based on its level and the
         // player's skill
-        int chance = SaveGame.SkillUseDevice;
-        if (SaveGame.ConfusedTimer.Value != 0)
+        int chance = Game.SkillUseDevice;
+        if (Game.ConfusedTimer.Value != 0)
         {
             chance /= 2;
         }
@@ -72,28 +72,28 @@ internal class ActivateScript : Script, IScript, IRepeatableScript, ISuccessfulS
         chance -= itemLevel > 50 ? 50 : itemLevel;
 
         // Always give a slight chance of success
-        if (chance < Constants.UseDevice && SaveGame.RandomLessThan(Constants.UseDevice - chance + 1) == 0)
+        if (chance < Constants.UseDevice && Game.RandomLessThan(Constants.UseDevice - chance + 1) == 0)
         {
             chance = Constants.UseDevice;
         }
 
         // If we fail our use item roll just tell us and quit
-        if (chance < Constants.UseDevice || SaveGame.DieRoll(chance) < Constants.UseDevice)
+        if (chance < Constants.UseDevice || Game.DieRoll(chance) < Constants.UseDevice)
         {
-            SaveGame.MsgPrint("You failed to activate it properly.");
+            Game.MsgPrint("You failed to activate it properly.");
             return false;
         }
 
         // If the item is still recharging, then just tell us and quit
         if (item.RechargeTimeLeft != 0)
         {
-            SaveGame.MsgPrint("It whines, glows and fades...");
+            Game.MsgPrint("It whines, glows and fades...");
             return false;
         }
 
         // We passed the checks, so the item is activated
-        SaveGame.MsgPrint("You activate it...");
-        SaveGame.PlaySound(SoundEffectEnum.ActivateArtifact);
+        Game.MsgPrint("You activate it...");
+        Game.PlaySound(SoundEffectEnum.ActivateArtifact);
 
         // If it is a random artifact then use its ability and quit
         if (item.IsRandomArtifact)

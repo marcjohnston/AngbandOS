@@ -3,6 +3,6 @@ namespace AngbandOS.Core.ItemClasses;
 [Serializable]
 internal class JunkItemClass : ItemClass
 {
-    private JunkItemClass(SaveGame saveGame) : base(saveGame) { }
+    private JunkItemClass(Game game) : base(game) { }
     public override string Name => "Junk";
 }

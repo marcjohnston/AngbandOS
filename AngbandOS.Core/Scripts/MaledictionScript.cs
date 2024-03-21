@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class MaledictionScript : Script, IScript
 {
-    private MaledictionScript(SaveGame saveGame) : base(saveGame) { }
+    private MaledictionScript(Game game) : base(game) { }
 
     /// <summary>
     /// Fires a ball of hellfire in a chosen direction and 80% of the time an additional bolt of deathray (0.001% [1/1000]), turn all (50%), old confusion (30%) or stun 
@@ -19,28 +19,28 @@ internal class MaledictionScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        if (!SaveGame.GetDirectionWithAim(out int dir))
+        if (!Game.GetDirectionWithAim(out int dir))
         {
             return;
         }
-        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(HellfireProjectile)), dir, SaveGame.DiceRoll(3 + ((SaveGame.ExperienceLevel.Value - 1) / 5), 3), 0);
-        if (SaveGame.DieRoll(5) != 1)
+        Game.FireBall(Game.SingletonRepository.Projectiles.Get(nameof(HellfireProjectile)), dir, Game.DiceRoll(3 + ((Game.ExperienceLevel.Value - 1) / 5), 3), 0);
+        if (Game.DieRoll(5) != 1)
         {
             return;
         }
-        int dummy = SaveGame.DieRoll(1000);
+        int dummy = Game.DieRoll(1000);
         if (dummy == 666)
         {
-            SaveGame.FireBolt(SaveGame.SingletonRepository.Projectiles.Get(nameof(DeathRayProjectile)), dir, SaveGame.ExperienceLevel.Value);
+            Game.FireBolt(Game.SingletonRepository.Projectiles.Get(nameof(DeathRayProjectile)), dir, Game.ExperienceLevel.Value);
         }
         if (dummy < 500)
         {
-            SaveGame.FireBolt(SaveGame.SingletonRepository.Projectiles.Get(nameof(TurnAllProjectile)), dir, SaveGame.ExperienceLevel.Value);
+            Game.FireBolt(Game.SingletonRepository.Projectiles.Get(nameof(TurnAllProjectile)), dir, Game.ExperienceLevel.Value);
         }
         if (dummy < 800)
         {
-            SaveGame.FireBolt(SaveGame.SingletonRepository.Projectiles.Get(nameof(OldConfProjectile)), dir, SaveGame.ExperienceLevel.Value);
+            Game.FireBolt(Game.SingletonRepository.Projectiles.Get(nameof(OldConfProjectile)), dir, Game.ExperienceLevel.Value);
         }
-        SaveGame.FireBolt(SaveGame.SingletonRepository.Projectiles.Get(nameof(StunProjectile)), dir, SaveGame.ExperienceLevel.Value);
+        Game.FireBolt(Game.SingletonRepository.Projectiles.Get(nameof(StunProjectile)), dir, Game.ExperienceLevel.Value);
     }
 }

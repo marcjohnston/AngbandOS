@@ -14,10 +14,10 @@ namespace AngbandOS.Core.ChestTraps;
 [Serializable]
 internal abstract class ChestTrap : IGetKey
 {
-    protected readonly SaveGame SaveGame;
-    protected ChestTrap(SaveGame saveGame)
+    protected readonly Game Game;
+    protected ChestTrap(Game game)
     {
-        SaveGame = saveGame;
+        Game = game;
     }
 
     /// <summary>
@@ -37,7 +37,7 @@ internal abstract class ChestTrap : IGetKey
     /// <summary>
     /// Activate the trap.
     /// </summary>
-    /// <param name="saveGame"></param>
+    /// <param name="game"></param>
     public abstract void Activate(ActivateChestTrapEventArgs eventArgs);
     public abstract string Description { get; }
 }

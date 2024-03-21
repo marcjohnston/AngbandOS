@@ -10,13 +10,13 @@ namespace AngbandOS.Core.Projection;
 [Serializable]
 internal class TeleportAwayEvilProjectile : Projectile
 {
-    private TeleportAwayEvilProjectile(SaveGame saveGame) : base(saveGame) { }
+    private TeleportAwayEvilProjectile(Game game) : base(game) { }
 
-    protected override ProjectileGraphic? BoltProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get(nameof(PinkBulletProjectileGraphic));
+    protected override ProjectileGraphic? BoltProjectileGraphic => Game.SingletonRepository.ProjectileGraphics.Get(nameof(PinkBulletProjectileGraphic));
 
-    protected override ProjectileGraphic? ImpactProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get(nameof(PinkBulletProjectileGraphic));
+    protected override ProjectileGraphic? ImpactProjectileGraphic => Game.SingletonRepository.ProjectileGraphics.Get(nameof(PinkBulletProjectileGraphic));
 
-    protected override Animation EffectAnimation => SaveGame.SingletonRepository.Animations.Get(nameof(PinkSwirlAnimation));
+    protected override Animation EffectAnimation => Game.SingletonRepository.Animations.Get(nameof(PinkSwirlAnimation));
 
     protected override bool ProjectileAngersMonster(Monster mPtr)
     {
@@ -25,7 +25,7 @@ internal class TeleportAwayEvilProjectile : Projectile
 
     protected override bool AffectMonster(int who, Monster mPtr, int dam, int r)
     {
-        GridTile cPtr = SaveGame.Grid[mPtr.MapY][mPtr.MapX];
+        GridTile cPtr = Game.Grid[mPtr.MapY][mPtr.MapX];
         MonsterRace rPtr = mPtr.Race;
         bool seen = mPtr.IsVisible;
         bool obvious = false;
@@ -46,7 +46,7 @@ internal class TeleportAwayEvilProjectile : Projectile
                     note = " is unaffected!";
                     resistsTele = true;
                 }
-                else if (rPtr.Level > SaveGame.DieRoll(100))
+                else if (rPtr.Level > Game.DieRoll(100))
                 {
                     if (seen)
                     {
@@ -85,8 +85,8 @@ internal class TeleportAwayEvilProjectile : Projectile
                 obvious = true;
             }
             note = " disappears!";
-            mPtr.TeleportAway(SaveGame, doDist);
-            cPtr = SaveGame.Grid[mPtr.MapY][mPtr.MapX];
+            mPtr.TeleportAway(Game, doDist);
+            cPtr = Game.Grid[mPtr.MapY][mPtr.MapX];
         }
         ApplyProjectileDamageToMonster(who, mPtr, dam, note);
         return obvious;

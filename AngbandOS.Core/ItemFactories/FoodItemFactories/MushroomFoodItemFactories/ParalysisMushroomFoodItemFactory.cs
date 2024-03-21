@@ -10,9 +10,9 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class ParalysisMushroomFoodItemFactory : MushroomFoodItemFactory
 {
-    private ParalysisMushroomFoodItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private ParalysisMushroomFoodItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(CommaSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(CommaSymbol));
     public override string Name => "Paralysis";
 
     public override int[] Chance => new int[] { 1, 0, 0, 0 };
@@ -24,15 +24,15 @@ internal class ParalysisMushroomFoodItemFactory : MushroomFoodItemFactory
 
     public override bool Eat()
     {
-        SaveGame.PlaySound(SoundEffectEnum.Eat);
-        if (!SaveGame.HasFreeAction)
+        Game.PlaySound(SoundEffectEnum.Eat);
+        if (!Game.HasFreeAction)
         {
-            if (SaveGame.ParalysisTimer.AddTimer(SaveGame.RandomLessThan(10) + 10))
+            if (Game.ParalysisTimer.AddTimer(Game.RandomLessThan(10) + 10))
             {
                 return true;
             }
         }
         return false;
     }
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

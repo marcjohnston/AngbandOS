@@ -10,7 +10,7 @@ namespace AngbandOS.Core.MonsterRaces;
 [Serializable]
 internal class ColdVortexMonsterRace : MonsterRace
 {
-    protected ColdVortexMonsterRace(SaveGame saveGame) : base(saveGame) { }
+    protected ColdVortexMonsterRace(Game game) : base(game) { }
 
     protected override string[]? SpellNames =>new string[] {
         nameof(BreatheColdMonsterSpell)

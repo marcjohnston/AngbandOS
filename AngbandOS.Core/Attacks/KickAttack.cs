@@ -10,7 +10,7 @@ namespace AngbandOS.Core.AttackTypes;
 [Serializable]
 internal class KickAttack : Attack
 {
-    private KickAttack(SaveGame saveGame) : base(saveGame) { }
+    private KickAttack(Game game) : base(game) { }
     public override string MonsterAction => "kicks {0}";
     public override string PlayerAction => $"kicks you";
     public override string KnowledgeAction => "kick";

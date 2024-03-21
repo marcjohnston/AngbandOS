@@ -10,14 +10,14 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class DragonsBreathWandItemFactory : WandItemFactory
 {
-    private DragonsBreathWandItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private DragonsBreathWandItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(MinusSignSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(MinusSignSymbol));
     public override string Name => "Dragon's Breath";
 
     public override void ApplyMagic(Item item, int level, int power, Store? store)
     {
-        item.TypeSpecificValue = SaveGame.DieRoll(3) + 1;
+        item.TypeSpecificValue = Game.DieRoll(3) + 1;
     }
     public override int[] Chance => new int[] { 4, 0, 0, 0 };
     public override int Cost => 2400;
@@ -31,29 +31,29 @@ internal class DragonsBreathWandItemFactory : WandItemFactory
     public override int LevelNormallyFound => 60;
     public override int[] Locale => new int[] { 60, 0, 0, 0 };
     public override int Weight => 10;
-    public override bool ExecuteActivation(SaveGame saveGame, int dir)
+    public override bool ExecuteActivation(Game game, int dir)
     {
-        switch (SaveGame.RandomLessThan(5))
+        switch (Game.RandomLessThan(5))
         {
             case 0:
-                saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get(nameof(AcidProjectile)), dir, 100, -3);
+                game.FireBall(game.SingletonRepository.Projectiles.Get(nameof(AcidProjectile)), dir, 100, -3);
                 break;
             case 1:
-                saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get(nameof(ElecProjectile)), dir, 80, -3);
+                game.FireBall(game.SingletonRepository.Projectiles.Get(nameof(ElecProjectile)), dir, 80, -3);
                 break;
             case 2:
-                saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get(nameof(FireProjectile)), dir, 100, -3);
+                game.FireBall(game.SingletonRepository.Projectiles.Get(nameof(FireProjectile)), dir, 100, -3);
                 break;
             case 3:
-                saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get(nameof(ColdProjectile)), dir, 80, -3);
+                game.FireBall(game.SingletonRepository.Projectiles.Get(nameof(ColdProjectile)), dir, 80, -3);
                 break;
             case 4:
-                saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get(nameof(PoisProjectile)), dir, 60, -3);
+                game.FireBall(game.SingletonRepository.Projectiles.Get(nameof(PoisProjectile)), dir, 60, -3);
                 break;
             default:
                 throw new Exception("Internal error.");
         }
         return true;
     }
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

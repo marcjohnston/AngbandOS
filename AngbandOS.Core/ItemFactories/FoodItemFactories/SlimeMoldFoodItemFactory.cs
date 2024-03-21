@@ -10,9 +10,9 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class SlimeMoldFoodItemFactory : FoodItemFactory
 {
-    private SlimeMoldFoodItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private SlimeMoldFoodItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(CommaSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(CommaSymbol));
     public override ColorEnum Color => ColorEnum.Green;
     public override string Name => "Slime Mold";
 
@@ -25,10 +25,10 @@ internal class SlimeMoldFoodItemFactory : FoodItemFactory
     public override int Weight => 5;
     public override bool Eat()
     {
-        SaveGame.PlaySound(SoundEffectEnum.Eat);
-        PotionItemFactory slimeMold = (PotionItemFactory)SaveGame.SingletonRepository.ItemFactories.Get(nameof(SlimeMoldJuicePotionItemFactory));
+        Game.PlaySound(SoundEffectEnum.Eat);
+        PotionItemFactory slimeMold = (PotionItemFactory)Game.SingletonRepository.ItemFactories.Get(nameof(SlimeMoldJuicePotionItemFactory));
         slimeMold.Quaff();
         return true;
     }
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

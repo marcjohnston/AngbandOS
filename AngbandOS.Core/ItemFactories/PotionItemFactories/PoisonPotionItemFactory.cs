@@ -10,9 +10,9 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class PoisonPotionItemFactory : PotionItemFactory
 {
-    private PoisonPotionItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private PoisonPotionItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(ExclamationPointSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(ExclamationPointSymbol));
     public override string Name => "Poison";
 
     public override int[] Chance => new int[] { 1, 0, 0, 0 };
@@ -26,14 +26,14 @@ internal class PoisonPotionItemFactory : PotionItemFactory
     public override bool Quaff()
     {
         // Poison simply poisons you
-        if (!(SaveGame.HasPoisonResistance || SaveGame.PoisonResistanceTimer.Value != 0))
+        if (!(Game.HasPoisonResistance || Game.PoisonResistanceTimer.Value != 0))
         {
             // Hagarg Ryonis can protect you against poison
-            if (SaveGame.DieRoll(10) <= SaveGame.SingletonRepository.Gods.Get(nameof(HagargRyonisGod)).AdjustedFavour)
+            if (Game.DieRoll(10) <= Game.SingletonRepository.Gods.Get(nameof(HagargRyonisGod)).AdjustedFavour)
             {
-                SaveGame.MsgPrint("Hagarg Ryonis's favour protects you!");
+                Game.MsgPrint("Hagarg Ryonis's favour protects you!");
             }
-            else if (SaveGame.PoisonTimer.AddTimer(SaveGame.RandomLessThan(15) + 10))
+            else if (Game.PoisonTimer.AddTimer(Game.RandomLessThan(15) + 10))
             {
                 return true;
             }
@@ -43,8 +43,8 @@ internal class PoisonPotionItemFactory : PotionItemFactory
 
     public override bool Smash(int who, int y, int x)
     {
-        SaveGame.Project(who, 2, y, x, 3, SaveGame.SingletonRepository.Projectiles.Get(nameof(PoisProjectile)), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
+        Game.Project(who, 2, y, x, 3, Game.SingletonRepository.Projectiles.Get(nameof(PoisProjectile)), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
         return true;
     }
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

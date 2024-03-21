@@ -10,5 +10,5 @@ namespace AngbandOS.Core.Repositories;
 [Serializable]
 internal class MutationsRepository : DictionaryRepository<Mutation>
 {
-    public MutationsRepository(SaveGame saveGame) : base(saveGame) { }
+    public MutationsRepository(Game game) : base(game) { }
 }

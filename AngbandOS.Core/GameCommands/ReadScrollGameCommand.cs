@@ -14,7 +14,7 @@ namespace AngbandOS.Core.Commands;
 [Serializable]
 internal class ReadScrollGameCommand : GameCommand
 {
-    private ReadScrollGameCommand(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private ReadScrollGameCommand(Game game) : base(game) { } // This object is a singleton.
 
     public override char KeyChar => 'r';
 

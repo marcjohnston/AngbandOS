@@ -12,11 +12,11 @@ namespace AngbandOS.Core.Spells;
 [Serializable]
 internal abstract class Spell : IGetKey
 {
-    protected readonly SaveGame SaveGame;
+    protected readonly Game Game;
 
-    protected Spell(SaveGame saveGame)
+    protected Spell(Game game)
     {
-        SaveGame = saveGame;
+        Game = game;
     }
 
     public BookItemFactory BookItemFactory { get; private set; }
@@ -50,8 +50,8 @@ internal abstract class Spell : IGetKey
 
     public void Bind()
     {
-        CastScript = SaveGame.SingletonRepository.Scripts.BindNullable<ISpellScript, IScript>(CastScriptName);
-        CastFailedScript = SaveGame.SingletonRepository.Scripts.BindNullable<ISpellScript, IScript>(CastFailedScriptName);
+        CastScript = Game.SingletonRepository.Scripts.BindNullable<ISpellScript, IScript>(CastScriptName);
+        CastFailedScript = Game.SingletonRepository.Scripts.BindNullable<ISpellScript, IScript>(CastFailedScriptName);
     }
 
     /// <summary>
@@ -66,7 +66,7 @@ internal abstract class Spell : IGetKey
     public bool Learned;
 
     /// <summary>
-    /// Returns the name of the spell, as rendered to the SaveGame.
+    /// Returns the name of the spell, as rendered to the Game.
     /// </summary>
     public abstract string Name { get; }
 
@@ -128,32 +128,32 @@ internal abstract class Spell : IGetKey
     /// <returns></returns>
     public int FailureChance() 
     {
-        if (!SaveGame.CanCastSpells)
+        if (!Game.CanCastSpells)
         {
             return 100;
         }
         int chance = ClassSpell.BaseFailure;
-        chance -= 3 * (SaveGame.ExperienceLevel.Value - ClassSpell.Level);
-        chance -= 3 * (SaveGame.AbilityScores[SaveGame.BaseCharacterClass.SpellStat].SpellFailureReduction - 1);
-        if (ClassSpell.ManaCost > SaveGame.Mana.Value)
+        chance -= 3 * (Game.ExperienceLevel.Value - ClassSpell.Level);
+        chance -= 3 * (Game.AbilityScores[Game.BaseCharacterClass.SpellStat].SpellFailureReduction - 1);
+        if (ClassSpell.ManaCost > Game.Mana.Value)
         {
-            chance += 5 * (ClassSpell.ManaCost - SaveGame.Mana.Value);
+            chance += 5 * (ClassSpell.ManaCost - Game.Mana.Value);
         }
-        int minfail = SaveGame.AbilityScores[SaveGame.BaseCharacterClass.SpellStat].SpellMinFailChance;
-        if (SaveGame.BaseCharacterClass.ID != CharacterClass.Priest && SaveGame.BaseCharacterClass.ID != CharacterClass.Druid &&
-            SaveGame.BaseCharacterClass.ID != CharacterClass.Mage && SaveGame.BaseCharacterClass.ID != CharacterClass.HighMage &&
-            SaveGame.BaseCharacterClass.ID != CharacterClass.Cultist)
+        int minfail = Game.AbilityScores[Game.BaseCharacterClass.SpellStat].SpellMinFailChance;
+        if (Game.BaseCharacterClass.ID != CharacterClass.Priest && Game.BaseCharacterClass.ID != CharacterClass.Druid &&
+            Game.BaseCharacterClass.ID != CharacterClass.Mage && Game.BaseCharacterClass.ID != CharacterClass.HighMage &&
+            Game.BaseCharacterClass.ID != CharacterClass.Cultist)
         {
             if (minfail < 5)
             {
                 minfail = 5;
             }
         }
-        if ((SaveGame.BaseCharacterClass.ID == CharacterClass.Priest || SaveGame.BaseCharacterClass.ID == CharacterClass.Druid) && SaveGame.HasUnpriestlyWeapon)
+        if ((Game.BaseCharacterClass.ID == CharacterClass.Priest || Game.BaseCharacterClass.ID == CharacterClass.Druid) && Game.HasUnpriestlyWeapon)
         {
             chance += 25;
         }
-        if (SaveGame.BaseCharacterClass.ID == CharacterClass.Cultist && SaveGame.HasUnpriestlyWeapon)
+        if (Game.BaseCharacterClass.ID == CharacterClass.Cultist && Game.HasUnpriestlyWeapon)
         {
             chance += 25;
         }
@@ -161,11 +161,11 @@ internal abstract class Spell : IGetKey
         {
             chance = minfail;
         }
-        if (SaveGame.StunTimer.Value > 50)
+        if (Game.StunTimer.Value > 50)
         {
             chance += 25;
         }
-        else if (SaveGame.StunTimer.Value != 0)
+        else if (Game.StunTimer.Value != 0)
         {
             chance += 15;
         }
@@ -178,8 +178,8 @@ internal abstract class Spell : IGetKey
 
     public void Initialize(BookItemFactory bookItemFactory, int spellIndex)
     {
-        BaseCharacterClass characterClass = SaveGame.BaseCharacterClass;
-        ClassSpell = SaveGame.SingletonRepository.ClassSpells.Get($"{characterClass.Key}.{this.Key}");
+        BaseCharacterClass characterClass = Game.BaseCharacterClass;
+        ClassSpell = Game.SingletonRepository.ClassSpells.Get($"{characterClass.Key}.{this.Key}");
         SpellIndex = spellIndex;
         BookItemFactory = bookItemFactory;
     }

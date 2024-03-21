@@ -10,7 +10,7 @@ namespace AngbandOS.Core.MonsterSpells;
 [Serializable]
 internal class ChaosBallMonsterSpell : BallProjectileMonsterSpell
 {
-    private ChaosBallMonsterSpell(SaveGame saveGame) : base(saveGame) { }
+    private ChaosBallMonsterSpell(Game game) : base(game) { }
     /// <summary>
     /// Returns a message that the monster is mumbling something frighteningly.
     /// </summary>
@@ -22,12 +22,12 @@ internal class ChaosBallMonsterSpell : BallProjectileMonsterSpell
     public override bool UsesChaos => true;
     public override bool IsAttack => true;
     protected override string ActionName => "invokes raw chaos";
-    protected override Projectile Projectile(SaveGame saveGame) => saveGame.SingletonRepository.Projectiles.Get(nameof(ChaosProjectile));
+    protected override Projectile Projectile(Game game) => game.SingletonRepository.Projectiles.Get(nameof(ChaosProjectile));
     protected override int Damage(Monster monster)
     {
         int monsterLevel = monster.Race.Level >= 1 ? monster.Race.Level : 1;
-        return (monsterLevel * 2) + SaveGame.DiceRoll(10, 10);
+        return (monsterLevel * 2) + Game.DiceRoll(10, 10);
     }
     protected override int Radius => 4;
-    public override SpellResistantDetection[] SmartLearn => new SpellResistantDetection[] { SaveGame.SingletonRepository.SpellResistantDetections.Get(nameof(ChaosSpellResistantDetection)) };
+    public override SpellResistantDetection[] SmartLearn => new SpellResistantDetection[] { Game.SingletonRepository.SpellResistantDetections.Get(nameof(ChaosSpellResistantDetection)) };
 }

@@ -10,9 +10,9 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class BrokenSkullSkeletonItemFactory : SkeletonItemFactory
 {
-    private BrokenSkullSkeletonItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private BrokenSkullSkeletonItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(TildeSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(TildeSymbol));
     public override ColorEnum Color => ColorEnum.Beige;
     public override string Name => "Broken Skull";
 
@@ -21,5 +21,5 @@ internal class BrokenSkullSkeletonItemFactory : SkeletonItemFactory
     public override int Ds => 1;
     public override string FriendlyName => "& Broken Skull~";
     public override int Weight => 1;
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

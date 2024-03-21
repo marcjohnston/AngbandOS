@@ -13,7 +13,7 @@ namespace AngbandOS.Core.Activations;
 [Serializable]
 internal class SleepActivation : Activation
 {
-    private SleepActivation(SaveGame saveGame) : base(saveGame) { }
+    private SleepActivation(Game game) : base(game) { }
     public override int RandomChance => 101;
 
     public override string? PreActivationMessage => "Your {0} glows deep blue...";
@@ -22,7 +22,7 @@ internal class SleepActivation : Activation
 
     protected override bool OnActivate(Item item)
     {
-        SaveGame.SleepMonstersTouch();
+        Game.SleepMonstersTouch();
         return true;
     }
 

@@ -13,18 +13,18 @@ namespace AngbandOS.Core.Activations;
 [Serializable]
 internal class DispelGood5xEvery300p1d300Activation : Activation
 {
-    private DispelGood5xEvery300p1d300Activation(SaveGame saveGame) : base(saveGame) { }
+    private DispelGood5xEvery300p1d300Activation(Game game) : base(game) { }
     public override int RandomChance => 33;
 
     public override string? PreActivationMessage => "Your {0} floods the area with evil...";
 
     protected override bool OnActivate(Item item)
     {
-        SaveGame.RunScriptInt(nameof(DispelGood4xScript), SaveGame.ExperienceLevel.Value * 5);
+        Game.RunScriptInt(nameof(DispelGood4xScript), Game.ExperienceLevel.Value * 5);
         return true;
     }
 
-    public override int RechargeTime() => SaveGame.RandomLessThan(300) + 300;
+    public override int RechargeTime() => Game.RandomLessThan(300) + 300;
 
     public override int Value => 3500;
 

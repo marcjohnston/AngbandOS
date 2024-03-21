@@ -10,10 +10,10 @@ namespace AngbandOS.Core.Spells.Folk;
 [Serializable]
 internal class FolkSpellLightArea : Spell
 {
-    private FolkSpellLightArea(SaveGame saveGame) : base(saveGame) { }
+    private FolkSpellLightArea(Game game) : base(game) { }
     protected override string? CastScriptName => nameof(LightAreaScript);
 
     public override string Name => "Light Area";
 
-    protected override string LearnedDetails => $"dam 2d{SaveGame.ExperienceLevel.Value / 2}";
+    protected override string LearnedDetails => $"dam 2d{Game.ExperienceLevel.Value / 2}";
 }

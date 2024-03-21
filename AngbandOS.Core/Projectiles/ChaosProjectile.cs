@@ -10,19 +10,19 @@ namespace AngbandOS.Core.Projection;
 [Serializable]
 internal class ChaosProjectile : Projectile
 {
-    private ChaosProjectile(SaveGame saveGame) : base(saveGame) { }
+    private ChaosProjectile(Game game) : base(game) { }
 
-    protected override ProjectileGraphic? BoltProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get(nameof(PurpleBulletProjectileGraphic));
+    protected override ProjectileGraphic? BoltProjectileGraphic => Game.SingletonRepository.ProjectileGraphics.Get(nameof(PurpleBulletProjectileGraphic));
 
-    protected override ProjectileGraphic? ImpactProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get(nameof(PurpleSplatProjectileGraphic));
+    protected override ProjectileGraphic? ImpactProjectileGraphic => Game.SingletonRepository.ProjectileGraphics.Get(nameof(PurpleSplatProjectileGraphic));
 
-    protected override Animation? EffectAnimation => SaveGame.SingletonRepository.Animations.Get(nameof(PinkPurpleFlashAnimation));
+    protected override Animation? EffectAnimation => Game.SingletonRepository.Animations.Get(nameof(PinkPurpleFlashAnimation));
 
     protected override bool AffectFloor(int y, int x) => true;
 
     protected override bool AffectItem(int who, int y, int x)
     {
-        GridTile cPtr = SaveGame.Grid[y][x];
+        GridTile cPtr = Game.Grid[y][x];
         bool obvious = false;
         string oName = "";
         foreach (Item oPtr in cPtr.Items)
@@ -49,23 +49,23 @@ internal class ChaosProjectile : Projectile
                 if (oPtr.Marked)
                 {
                     string s = plural ? "are" : "is";
-                    SaveGame.MsgPrint($"The {oName} {s} unaffected!");
+                    Game.MsgPrint($"The {oName} {s} unaffected!");
                 }
             }
             else
             {
                 if (oPtr.Marked && string.IsNullOrEmpty(noteKill))
                 {
-                    SaveGame.MsgPrint($"The {oName}{noteKill}");
+                    Game.MsgPrint($"The {oName}{noteKill}");
                 }
                 bool isPotion = oPtr.Factory.CategoryEnum == ItemTypeEnum.Potion;
-                SaveGame.DeleteObject(oPtr);
+                Game.DeleteObject(oPtr);
                 if (isPotion)
                 {
                     PotionItemFactory potion = (PotionItemFactory)oPtr.Factory;
                     potion.Smash(who, y, x);
                 }
-                SaveGame.RedrawSingleLocation(y, x);
+                Game.RedrawSingleLocation(y, x);
             }
         }
         return obvious;
@@ -73,7 +73,7 @@ internal class ChaosProjectile : Projectile
 
     protected override bool AffectMonster(int who, Monster mPtr, int dam, int r)
     {
-        GridTile cPtr = SaveGame.Grid[mPtr.MapY][mPtr.MapX];
+        GridTile cPtr = Game.Grid[mPtr.MapY][mPtr.MapX];
         MonsterRace rPtr = mPtr.Race;
         bool seen = mPtr.IsVisible;
         bool obvious = false;
@@ -83,13 +83,13 @@ internal class ChaosProjectile : Projectile
             obvious = true;
         }
         bool doPoly = true;
-        int doConf = (5 + SaveGame.DieRoll(11) + r) / (r + 1);
+        int doConf = (5 + Game.DieRoll(11) + r) / (r + 1);
         if (rPtr.BreatheChaos ||
-            (rPtr.Demon && SaveGame.DieRoll(3) == 1))
+            (rPtr.Demon && Game.DieRoll(3) == 1))
         {
             note = " resists.";
             dam *= 3;
-            dam /= SaveGame.DieRoll(6) + 6;
+            dam /= Game.DieRoll(6) + 6;
             doPoly = false;
         }
         if (rPtr.Unique)
@@ -100,19 +100,19 @@ internal class ChaosProjectile : Projectile
         {
             doPoly = false;
         }
-        if (doPoly && SaveGame.DieRoll(90) > rPtr.Level)
+        if (doPoly && Game.DieRoll(90) > rPtr.Level)
         {
             note = " is unaffected!";
             bool charm = mPtr.SmFriendly;
-            int tmp = SaveGame.PolymorphMonster(mPtr.Race);
+            int tmp = Game.PolymorphMonster(mPtr.Race);
             if (tmp != mPtr.Race.Index)
             {
                 note = " changes!";
                 dam = 0;
-                SaveGame.DeleteMonsterByIndex(cPtr.MonsterIndex, true);
-                MonsterRace race = SaveGame.SingletonRepository.MonsterRaces[tmp];
-                SaveGame.PlaceMonsterAux(mPtr.MapY, mPtr.MapX, race, false, false, charm);
-                mPtr = SaveGame.Monsters[cPtr.MonsterIndex];
+                Game.DeleteMonsterByIndex(cPtr.MonsterIndex, true);
+                MonsterRace race = Game.SingletonRepository.MonsterRaces[tmp];
+                Game.PlaceMonsterAux(mPtr.MapY, mPtr.MapX, race, false, false, charm);
+                mPtr = Game.Monsters[cPtr.MonsterIndex];
             }
         }
         else if (doConf != 0 && !rPtr.ImmuneConfusion && !rPtr.BreatheConfusion && !rPtr.BreatheChaos)
@@ -136,63 +136,63 @@ internal class ChaosProjectile : Projectile
 
     protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
     {
-        bool blind = SaveGame.BlindnessTimer.Value != 0;
+        bool blind = Game.BlindnessTimer.Value != 0;
         if (dam > 1600)
         {
             dam = 1600;
         }
         dam = (dam + r) / (r + 1);
-        Monster mPtr = SaveGame.Monsters[who];
+        Monster mPtr = Game.Monsters[who];
         string killer = mPtr.IndefiniteVisibleName;
         if (blind)
         {
-            SaveGame.MsgPrint("You are hit by a wave of anarchy!");
+            Game.MsgPrint("You are hit by a wave of anarchy!");
         }
-        if (SaveGame.HasChaosResistance)
+        if (Game.HasChaosResistance)
         {
             dam *= 6;
-            dam /= SaveGame.DieRoll(6) + 6;
+            dam /= Game.DieRoll(6) + 6;
         }
-        if (!SaveGame.HasConfusionResistance)
+        if (!Game.HasConfusionResistance)
         {
-            SaveGame.ConfusedTimer.AddTimer(SaveGame.RandomLessThan(20) + 10);
+            Game.ConfusedTimer.AddTimer(Game.RandomLessThan(20) + 10);
         }
-        if (!SaveGame.HasChaosResistance)
+        if (!Game.HasChaosResistance)
         {
-            SaveGame.HallucinationsTimer.AddTimer(SaveGame.DieRoll(10));
-            if (SaveGame.DieRoll(3) == 1)
+            Game.HallucinationsTimer.AddTimer(Game.DieRoll(10));
+            if (Game.DieRoll(3) == 1)
             {
-                SaveGame.MsgPrint("Your body is twisted by chaos!");
-                SaveGame.RunScript(nameof(GainMutationScript));
+                Game.MsgPrint("Your body is twisted by chaos!");
+                Game.RunScript(nameof(GainMutationScript));
             }
         }
-        if (!SaveGame.HasNetherResistance && !SaveGame.HasChaosResistance)
+        if (!Game.HasNetherResistance && !Game.HasChaosResistance)
         {
-            if (SaveGame.HasHoldLife && SaveGame.RandomLessThan(100) < 75)
+            if (Game.HasHoldLife && Game.RandomLessThan(100) < 75)
             {
-                SaveGame.MsgPrint("You keep hold of your life force!");
+                Game.MsgPrint("You keep hold of your life force!");
             }
-            else if (SaveGame.DieRoll(10) <= SaveGame.SingletonRepository.Gods.Get(nameof(HagargRyonisGod)).AdjustedFavour)
+            else if (Game.DieRoll(10) <= Game.SingletonRepository.Gods.Get(nameof(HagargRyonisGod)).AdjustedFavour)
             {
-                SaveGame.MsgPrint("Hagarg Ryonis's favour protects you!");
+                Game.MsgPrint("Hagarg Ryonis's favour protects you!");
             }
-            else if (SaveGame.HasHoldLife)
+            else if (Game.HasHoldLife)
             {
-                SaveGame.MsgPrint("You feel your life slipping away!");
-                SaveGame.LoseExperience(500 + (SaveGame.ExperiencePoints.Value / 1000 * Constants.MonDrainLife));
+                Game.MsgPrint("You feel your life slipping away!");
+                Game.LoseExperience(500 + (Game.ExperiencePoints.Value / 1000 * Constants.MonDrainLife));
             }
             else
             {
-                SaveGame.MsgPrint("You feel your life draining away!");
-                SaveGame.LoseExperience(5000 + (SaveGame.ExperiencePoints.Value / 100 * Constants.MonDrainLife));
+                Game.MsgPrint("You feel your life draining away!");
+                Game.LoseExperience(5000 + (Game.ExperiencePoints.Value / 100 * Constants.MonDrainLife));
             }
         }
-        if (!SaveGame.HasChaosResistance || SaveGame.DieRoll(9) == 1)
+        if (!Game.HasChaosResistance || Game.DieRoll(9) == 1)
         {
-            SaveGame.InvenDamage(SaveGame.SetElecDestroy, 2);
-            SaveGame.InvenDamage(SaveGame.SetFireDestroy, 2);
+            Game.InvenDamage(Game.SetElecDestroy, 2);
+            Game.InvenDamage(Game.SetFireDestroy, 2);
         }
-        SaveGame.TakeHit(dam, killer);
+        Game.TakeHit(dam, killer);
         return true;
     }
 }

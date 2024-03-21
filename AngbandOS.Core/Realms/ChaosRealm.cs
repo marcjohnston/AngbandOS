@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Realms;
 [Serializable]
 internal class ChaosRealm : Realm
 {
-    private ChaosRealm(SaveGame savedGame) : base(savedGame) { }
+    private ChaosRealm(Game savedGame) : base(savedGame) { }
 
     public override string[] Info => new string[] {
         "The Chaos realm is the most destructive realm. It focuses",

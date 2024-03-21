@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Spells.Tarot;
 [Serializable]
 internal class TarotSpellResetRecall : Spell
 {
-    private TarotSpellResetRecall(SaveGame saveGame) : base(saveGame) { }
+    private TarotSpellResetRecall(Game game) : base(game) { }
     protected override string? CastScriptName => nameof(ResetRecallScript);
 
     public override string Name => "Reset Recall";

@@ -8,7 +8,7 @@
 [Serializable]
 internal class EowilithTheFairShopkeeper : Shopkeeper
 {
-    private EowilithTheFairShopkeeper(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private EowilithTheFairShopkeeper(Game game) : base(game) { } // This object is a singleton.
     public override string Name => "Eowilith the Fair";
     public override int MaxCost =>  25000;
     public override int MinInflate =>  115;

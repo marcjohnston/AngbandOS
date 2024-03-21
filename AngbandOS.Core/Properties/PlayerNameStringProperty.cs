@@ -13,11 +13,11 @@ namespace AngbandOS.Core.Properties;
 [Serializable]
 internal class PlayerNameStringProperty : StringProperty
 {
-    protected PlayerNameStringProperty(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    protected PlayerNameStringProperty(Game game) : base(game) { } // This object is a singleton.
 
     protected override void OnAfterSet()
     {
         // Send a message to the attached view port so that the consuming application knows that the gold value has been updated.
-        SaveGame.ConsoleViewPort.CharacterRenamed(Value);
+        Game.ConsoleViewPort.CharacterRenamed(Value);
     }
 }

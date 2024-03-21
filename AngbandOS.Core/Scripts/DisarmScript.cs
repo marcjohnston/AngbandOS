@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class DisarmScript : Script, IScript, IRepeatableScript
 {
-    private DisarmScript(SaveGame saveGame) : base(saveGame) { }
+    private DisarmScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the disarm script and disposes of the repeatable result.
@@ -28,8 +28,8 @@ internal class DisarmScript : Script, IScript, IRepeatableScript
     public bool ExecuteRepeatableScript()
     {
         bool more = false;
-        int numTraps = SaveGame.CountKnownTraps(out GridCoordinate? trapCoord);
-        int numChests = SaveGame.CountChests(out GridCoordinate? chestCoord, true);
+        int numTraps = Game.CountKnownTraps(out GridCoordinate? trapCoord);
+        int numChests = Game.CountChests(out GridCoordinate? chestCoord, true);
         // Count the possible traps and chests we might want to disarm
         if (numTraps != 0 || numChests != 0)
         {
@@ -38,35 +38,35 @@ internal class DisarmScript : Script, IScript, IRepeatableScript
             if (!tooMany)
             {
                 GridCoordinate coord = numTraps == 1 ? trapCoord : chestCoord;
-                SaveGame.CommandDirection = SaveGame.CoordsToDir(coord.Y, coord.X);
+                Game.CommandDirection = Game.CoordsToDir(coord.Y, coord.X);
             }
         }
         // Get a direction if we don't already have one
-        if (SaveGame.GetDirectionNoAim(out int dir))
+        if (Game.GetDirectionNoAim(out int dir))
         {
-            int y = SaveGame.MapY + SaveGame.KeypadDirectionYOffset[dir];
-            int x = SaveGame.MapX + SaveGame.KeypadDirectionXOffset[dir];
-            GridTile tile = SaveGame.Grid[y][x];
+            int y = Game.MapY + Game.KeypadDirectionYOffset[dir];
+            int x = Game.MapX + Game.KeypadDirectionXOffset[dir];
+            GridTile tile = Game.Grid[y][x];
             // Check for a chest
-            Item? chestItem = SaveGame.ChestCheck(y, x);
+            Item? chestItem = Game.ChestCheck(y, x);
             if (!tile.FeatureType.IsTrap && chestItem == null)
             {
-                SaveGame.MsgPrint("You see nothing there to disarm.");
+                Game.MsgPrint("You see nothing there to disarm.");
             }
             // Can't disarm with a monster in the way
             else if (tile.MonsterIndex != 0)
             {
-                SaveGame.MsgPrint("There is a monster in the way!");
-                SaveGame.PlayerAttackMonster(y, x);
+                Game.MsgPrint("There is a monster in the way!");
+                Game.PlayerAttackMonster(y, x);
             }
             // Disarm the chest or trap
             else if (chestItem != null)
             {
-                more = SaveGame.DisarmChest(y, x, chestItem);
+                more = Game.DisarmChest(y, x, chestItem);
             }
             else
             {
-                more = SaveGame.DisarmTrap(y, x);
+                more = Game.DisarmTrap(y, x);
             }
         }
         return more;

@@ -14,8 +14,8 @@ internal abstract class GlovesArmorItemFactory : ArmorItemFactory
     /// Returns the hands inventory slots for gloves.
     /// </summary>
     public override int WieldSlot => InventorySlot.Hands;
-    public GlovesArmorItemFactory(SaveGame saveGame) : base(saveGame) { }
-    public override ItemClass ItemClass => SaveGame.SingletonRepository.ItemClasses.Get(nameof(GlovesItemClass));
+    public GlovesArmorItemFactory(Game game) : base(game) { }
+    public override ItemClass ItemClass => Game.SingletonRepository.ItemClasses.Get(nameof(GlovesItemClass));
 
     /// <summary>
     /// Applies a good random rare characteristics to gloves.
@@ -23,27 +23,27 @@ internal abstract class GlovesArmorItemFactory : ArmorItemFactory
     /// <param name="item"></param>
     protected override void ApplyRandomGoodRareCharacteristics(Item item)
     {
-        switch (SaveGame.DieRoll(10))
+        switch (Game.DieRoll(10))
         {
             case 1:
             case 2:
             case 3:
             case 4:
-                item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(GlovesOfFreeActionRareItem));
+                item.RareItem = Game.SingletonRepository.RareItems.Get(nameof(GlovesOfFreeActionRareItem));
                 break;
             case 5:
             case 6:
             case 7:
-                item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(GlovesOfSlayingRareItem));
+                item.RareItem = Game.SingletonRepository.RareItems.Get(nameof(GlovesOfSlayingRareItem));
                 break;
             case 8:
             case 9:
-                item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(GlovesOfAgilityRareItem));
+                item.RareItem = Game.SingletonRepository.RareItems.Get(nameof(GlovesOfAgilityRareItem));
                 break;
             case 10:
                 IArtifactBias artifactBias = null;
-                item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(GlovesOfPowerRareItem));
-                item.ApplyRandomResistance(ref artifactBias, SaveGame.DieRoll(22) + 16);
+                item.RareItem = Game.SingletonRepository.RareItems.Get(nameof(GlovesOfPowerRareItem));
+                item.ApplyRandomResistance(ref artifactBias, Game.DieRoll(22) + 16);
                 break;
         }
     }
@@ -54,16 +54,16 @@ internal abstract class GlovesArmorItemFactory : ArmorItemFactory
     /// <param name="item"></param>
     protected override void ApplyRandomPoorRareCharacteristics(Item item)
     {
-        switch (SaveGame.DieRoll(2))
+        switch (Game.DieRoll(2))
         {
             case 1:
                 {
-                    item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(GlovesOfClumsinessRareItem));
+                    item.RareItem = Game.SingletonRepository.RareItems.Get(nameof(GlovesOfClumsinessRareItem));
                     break;
                 }
             default:
                 {
-                    item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(GlovesOfWeaknessRareItem));
+                    item.RareItem = Game.SingletonRepository.RareItems.Get(nameof(GlovesOfWeaknessRareItem));
                     break;
                 }
         }
@@ -84,7 +84,7 @@ internal abstract class GlovesArmorItemFactory : ArmorItemFactory
 
             if (power > 1)
             {
-                if (SaveGame.DieRoll(20) == 1)
+                if (Game.DieRoll(20) == 1)
                 {
                     item.CreateRandomArtifact(false);
                 }
@@ -100,7 +100,7 @@ internal abstract class GlovesArmorItemFactory : ArmorItemFactory
         }
     }
     public override int PackSort => 26;
-    public override BaseInventorySlot BaseWieldSlot => SaveGame.SingletonRepository.InventorySlots.Get(nameof(HandsInventorySlot));
+    public override BaseInventorySlot BaseWieldSlot => Game.SingletonRepository.InventorySlots.Get(nameof(HandsInventorySlot));
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Gloves;
     public override bool HatesFire => true;
     public override bool HatesAcid => true;

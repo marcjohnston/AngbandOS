@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class ResearchSpellScript : Script, IScript, IStoreScript
 {
-    private ResearchSpellScript(SaveGame saveGame) : base(saveGame) { }
+    private ResearchSpellScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the research item script.  Does not modify any of the store flags.
@@ -27,37 +27,37 @@ internal class ResearchSpellScript : Script, IScript, IStoreScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        string spellType = SaveGame.BaseCharacterClass.SpellNoun;
+        string spellType = Game.BaseCharacterClass.SpellNoun;
         // If we don't have a realm then we can't do anything
-        if (!SaveGame.CanCastSpells)
+        if (!Game.CanCastSpells)
         {
-            SaveGame.MsgPrint("You cannot read books!");
+            Game.MsgPrint("You cannot read books!");
             return;
         }
         // We can't learn spells if we're blind or confused
-        if (SaveGame.BlindnessTimer.Value != 0)
+        if (Game.BlindnessTimer.Value != 0)
         {
-            SaveGame.MsgPrint("You cannot see!");
+            Game.MsgPrint("You cannot see!");
             return;
         }
-        if (SaveGame.ConfusedTimer.Value != 0)
+        if (Game.ConfusedTimer.Value != 0)
         {
-            SaveGame.MsgPrint("You are too confused!");
+            Game.MsgPrint("You are too confused!");
             return;
         }
         // We can only learn new spells if we have spare slots
-        if (SaveGame.SpareSpellSlots.Value == 0)
+        if (Game.SpareSpellSlots.Value == 0)
         {
-            SaveGame.MsgPrint($"You cannot learn any new {spellType}s!");
+            Game.MsgPrint($"You cannot learn any new {spellType}s!");
             return;
         }
-        string plural = SaveGame.SpareSpellSlots.Value == 1 ? "" : "s";
-        SaveGame.MsgPrint($"You can learn {SaveGame.SpareSpellSlots.Value} new {spellType}{plural}.");
-        SaveGame.MsgPrint(null);
+        string plural = Game.SpareSpellSlots.Value == 1 ? "" : "s";
+        Game.MsgPrint($"You can learn {Game.SpareSpellSlots.Value} new {spellType}{plural}.");
+        Game.MsgPrint(null);
         // Get the spell books we have
-        if (!SaveGame.SelectItem(out Item? item, "Study which book? ", false, true, true, SaveGame.SingletonRepository.ItemFilters.Get(nameof(IsUsableSpellBookItemFilter))))
+        if (!Game.SelectItem(out Item? item, "Study which book? ", false, true, true, Game.SingletonRepository.ItemFilters.Get(nameof(IsUsableSpellBookItemFilter))))
         {
-            SaveGame.MsgPrint("You have no books that you can read.");
+            Game.MsgPrint("You have no books that you can read.");
             return;
         }
         // Check each book
@@ -65,17 +65,17 @@ internal class ResearchSpellScript : Script, IScript, IStoreScript
         {
             return;
         }
-        SaveGame.HandleStuff();
+        Game.HandleStuff();
 
         // Arcane casters can choose their spell
         Spell? spell = null;
-        if (SaveGame.BaseCharacterClass.CanChooseSpellToStudy)
+        if (Game.BaseCharacterClass.CanChooseSpellToStudy)
         {
             // Allow the user to select a spell.
-            if (!SaveGame.GetSpell(out spell, "study", item, false))
+            if (!Game.GetSpell(out spell, "study", item, false))
             {
                 // There are no spells.
-                SaveGame.MsgPrint($"You cannot learn any {spellType}s from that book.");
+                Game.MsgPrint($"You cannot learn any {spellType}s from that book.");
                 return;
             }
 
@@ -95,10 +95,10 @@ internal class ResearchSpellScript : Script, IScript, IStoreScript
             // Gather the potential spells from the book
             foreach (Spell sPtr in bookItemFactory.Spells)
             {
-                if (SaveGame.SpellOkay(sPtr, false))
+                if (Game.SpellOkay(sPtr, false))
                 {
                     k++;
-                    if (SaveGame.RandomLessThan(k) == 0)
+                    if (Game.RandomLessThan(k) == 0)
                     {
                         spell = sPtr;
                     }
@@ -108,27 +108,27 @@ internal class ResearchSpellScript : Script, IScript, IStoreScript
         // If we failed to get a spell, return
         if (spell == null)
         {
-            SaveGame.MsgPrint($"You cannot learn any {spellType}s from that book.");
+            Game.MsgPrint($"You cannot learn any {spellType}s from that book.");
             return;
         }
         // Learning a spell takes a turn (although that's not very relevant)
-        SaveGame.EnergyUse = 100;
+        Game.EnergyUse = 100;
         // Mark the spell as learned
         spell.Learned = true;
 
         // Mark the spell as the last spell learned, in case we need to start forgetting them
-        SaveGame.SpellOrder.Add(spell);
+        Game.SpellOrder.Add(spell);
 
         // Let the player know they've learned a spell
-        SaveGame.MsgPrint($"You have learned the {spellType} of {spell.Name}.");
-        SaveGame.PlaySound(SoundEffectEnum.Study);
-        SaveGame.SpareSpellSlots.Value--;
-        if (SaveGame.SpareSpellSlots.Value != 0)
+        Game.MsgPrint($"You have learned the {spellType} of {spell.Name}.");
+        Game.PlaySound(SoundEffectEnum.Study);
+        Game.SpareSpellSlots.Value--;
+        if (Game.SpareSpellSlots.Value != 0)
         {
-            plural = SaveGame.SpareSpellSlots.Value != 1 ? "s" : "";
-            SaveGame.MsgPrint($"You can learn {SaveGame.SpareSpellSlots.Value} more {spellType}{plural}.");
+            plural = Game.SpareSpellSlots.Value != 1 ? "s" : "";
+            Game.MsgPrint($"You can learn {Game.SpareSpellSlots.Value} more {spellType}{plural}.");
         }
-        SaveGame.OldSpareSpellSlots = SaveGame.SpareSpellSlots.Value;
-        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawStudyFlaggedAction)).Set();
+        Game.OldSpareSpellSlots = Game.SpareSpellSlots.Value;
+        Game.SingletonRepository.FlaggedActions.Get(nameof(RedrawStudyFlaggedAction)).Set();
     }
 }

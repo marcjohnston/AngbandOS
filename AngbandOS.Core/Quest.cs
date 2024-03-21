@@ -20,7 +20,7 @@ internal class Quest
     public int Level;
     public int RIdx;
     public int ToKill;
-    protected readonly SaveGame SaveGame;
+    protected readonly Game Game;
 
     public bool IsActive => (Level != 0 && Killed < ToKill);
 
@@ -31,7 +31,7 @@ internal class Quest
     public string Describe()
     {
         string buf;
-        MonsterRace rPtr = SaveGame.SingletonRepository.MonsterRaces[RIdx];
+        MonsterRace rPtr = Game.SingletonRepository.MonsterRaces[RIdx];
         string name = rPtr.Name;
         int qNum = ToKill;
         string dunName = Dungeon.Name;
@@ -77,8 +77,8 @@ internal class Quest
         return buf;
     }
 
-    public Quest(SaveGame saveGame)
+    public Quest(Game game)
     {
-        SaveGame = saveGame;
+        Game = game;
     }
 }

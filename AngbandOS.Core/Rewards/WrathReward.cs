@@ -12,26 +12,26 @@ namespace AngbandOS.Core.Rewards;
 [Serializable]
 internal class WrathReward : Reward
 {
-    private WrathReward(SaveGame saveGame) : base(saveGame) { }
+    private WrathReward(Game game) : base(game) { }
     public override void GetReward(Patron patron)
     {
         string wrathReason = $"the Wrath of {patron.ShortName}";
-        SaveGame.MsgPrint($"The voice of {patron.ShortName} thunders:");
-        SaveGame.MsgPrint("'Die, mortal!'");
-        SaveGame.TakeHit(SaveGame.ExperienceLevel.Value * 4, wrathReason);
+        Game.MsgPrint($"The voice of {patron.ShortName} thunders:");
+        Game.MsgPrint("'Die, mortal!'");
+        Game.TakeHit(Game.ExperienceLevel.Value * 4, wrathReason);
         for (int dummy = 0; dummy < 6; dummy++)
         {
-            SaveGame.DecreaseAbilityScore(dummy, 10 + SaveGame.DieRoll(15), false);
+            Game.DecreaseAbilityScore(dummy, 10 + Game.DieRoll(15), false);
         }
-        SaveGame.ActivateHiSummon();
-        SaveGame.ActivateDreadCurse();
-        if (SaveGame.DieRoll(2) == 1)
+        Game.ActivateHiSummon();
+        Game.ActivateDreadCurse();
+        if (Game.DieRoll(2) == 1)
         {
-            SaveGame.CurseWeapon();
+            Game.CurseWeapon();
         }
-        if (SaveGame.DieRoll(2) == 1)
+        if (Game.DieRoll(2) == 1)
         {
-            SaveGame.CurseArmor();
+            Game.CurseArmor();
         }
     }
 }

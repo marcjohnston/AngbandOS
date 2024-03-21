@@ -4,7 +4,7 @@ namespace AngbandOS.Core.Symbols;
 [Serializable]
 internal class LowerTSymbol : Symbol
 {
-    private LowerTSymbol(SaveGame saveGame) : base(saveGame) { }
+    private LowerTSymbol(Game game) : base(game) { }
     public override char Character => 't';
     public override string Name => "Townsperson";
 }

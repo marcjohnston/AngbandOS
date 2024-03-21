@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class HasteScript : Script, IScript
 {
-    private HasteScript(SaveGame saveGame) : base(saveGame) { }
+    private HasteScript(Game game) : base(game) { }
 
     /// <summary>
     /// Temporarily adds a random amount of haste from the experience level up to 2x the experience level + 20, if the player
@@ -19,13 +19,13 @@ internal class HasteScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        if (SaveGame.HasteTimer.Value == 0)
+        if (Game.HasteTimer.Value == 0)
         {
-            SaveGame.HasteTimer.SetTimer(SaveGame.DieRoll(20 + SaveGame.ExperienceLevel.Value) + SaveGame.ExperienceLevel.Value);
+            Game.HasteTimer.SetTimer(Game.DieRoll(20 + Game.ExperienceLevel.Value) + Game.ExperienceLevel.Value);
         }
         else
         {
-            SaveGame.HasteTimer.AddTimer(SaveGame.DieRoll(5));
+            Game.HasteTimer.AddTimer(Game.DieRoll(5));
         }
     }
 }

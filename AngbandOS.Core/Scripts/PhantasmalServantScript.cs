@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class PhantasmalServantScript : Script, IScript
 {
-    private PhantasmalServantScript(SaveGame saveGame) : base(saveGame) { }
+    private PhantasmalServantScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script.
@@ -18,8 +18,8 @@ internal class PhantasmalServantScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        bool success = SaveGame.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel.Value * 3 / 2, SaveGame.SingletonRepository.MonsterFilters.Get(nameof(PhantomMonsterFilter)), false);
+        bool success = Game.SummonSpecificFriendly(Game.MapY, Game.MapX, Game.ExperienceLevel.Value * 3 / 2, Game.SingletonRepository.MonsterFilters.Get(nameof(PhantomMonsterFilter)), false);
         string msg = success ? "'Your wish, master?'" : "No-one ever turns up.";
-        SaveGame.MsgPrint(msg);
+        Game.MsgPrint(msg);
     }
 }

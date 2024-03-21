@@ -12,32 +12,32 @@ internal class RedrawHungerFlaggedAction : FlaggedAction
 {
     private const int ColHungry = 0;
     private const int RowHungry = 44;
-    private RedrawHungerFlaggedAction(SaveGame saveGame) : base(saveGame) { }
+    private RedrawHungerFlaggedAction(Game game) : base(game) { }
     protected override void Execute()
     {
-        if (SaveGame.Food.Value < Constants.PyFoodFaint)
+        if (Game.Food.Value < Constants.PyFoodFaint)
         {
-            SaveGame.Screen.Print(ColorEnum.Red, "Weak  ", RowHungry, ColHungry);
+            Game.Screen.Print(ColorEnum.Red, "Weak  ", RowHungry, ColHungry);
         }
-        else if (SaveGame.Food.Value < Constants.PyFoodWeak)
+        else if (Game.Food.Value < Constants.PyFoodWeak)
         {
-            SaveGame.Screen.Print(ColorEnum.Orange, "Weak  ", RowHungry, ColHungry);
+            Game.Screen.Print(ColorEnum.Orange, "Weak  ", RowHungry, ColHungry);
         }
-        else if (SaveGame.Food.Value < Constants.PyFoodAlert)
+        else if (Game.Food.Value < Constants.PyFoodAlert)
         {
-            SaveGame.Screen.Print(ColorEnum.Yellow, "Hungry", RowHungry, ColHungry);
+            Game.Screen.Print(ColorEnum.Yellow, "Hungry", RowHungry, ColHungry);
         }
-        else if (SaveGame.Food.Value < Constants.PyFoodFull)
+        else if (Game.Food.Value < Constants.PyFoodFull)
         {
-            SaveGame.Screen.Print(ColorEnum.BrightGreen, "      ", RowHungry, ColHungry);
+            Game.Screen.Print(ColorEnum.BrightGreen, "      ", RowHungry, ColHungry);
         }
-        else if (SaveGame.Food.Value < Constants.PyFoodMax)
+        else if (Game.Food.Value < Constants.PyFoodMax)
         {
-            SaveGame.Screen.Print(ColorEnum.BrightGreen, "Full  ", RowHungry, ColHungry);
+            Game.Screen.Print(ColorEnum.BrightGreen, "Full  ", RowHungry, ColHungry);
         }
         else
         {
-            SaveGame.Screen.Print(ColorEnum.Green, "Gorged", RowHungry, ColHungry);
+            Game.Screen.Print(ColorEnum.Green, "Gorged", RowHungry, ColHungry);
         }
     }
 }

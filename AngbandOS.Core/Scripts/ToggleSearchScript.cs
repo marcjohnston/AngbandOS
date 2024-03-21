@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class ToggleSearchScript : Script, IScript, IRepeatableScript
 {
-    private ToggleSearchScript(SaveGame saveGame) : base(saveGame) { }
+    private ToggleSearchScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the toggle search script and returns false.
@@ -28,9 +28,9 @@ internal class ToggleSearchScript : Script, IScript, IRepeatableScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        SaveGame.IsSearching = !SaveGame.IsSearching;
-        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawSpeedFlaggedAction)).Set();
-        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
-        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawStateFlaggedAction)).Set();
+        Game.IsSearching = !Game.IsSearching;
+        Game.SingletonRepository.FlaggedActions.Get(nameof(RedrawSpeedFlaggedAction)).Set();
+        Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
+        Game.SingletonRepository.FlaggedActions.Get(nameof(RedrawStateFlaggedAction)).Set();
     }
 }

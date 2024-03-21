@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class PurchaseStoreItemScript : Script, IStoreScript
 {
-    private PurchaseStoreItemScript(SaveGame saveGame) : base(saveGame) { }
+    private PurchaseStoreItemScript(Game game) : base(game) { }
 
     /// <summary>
     /// Allows the selection of and purchase of an item from the store.  Does not modify any of the store flags.
@@ -22,7 +22,7 @@ internal class PurchaseStoreItemScript : Script, IStoreScript
         string oName;
         if (storeCommandEvent.Store.StoreInventoryList.Count <= 0)
         {
-            SaveGame.MsgPrint(storeCommandEvent.Store.StoreFactory.NoStockMessage);
+            Game.MsgPrint(storeCommandEvent.Store.StoreFactory.NoStockMessage);
             return;
         }
         int i = storeCommandEvent.Store.StoreInventoryList.Count - storeCommandEvent.Store.StoreTop;
@@ -39,9 +39,9 @@ internal class PurchaseStoreItemScript : Script, IStoreScript
         Item oPtr = storeCommandEvent.Store.StoreInventoryList[inventoryItemIndex];
         int amt = 1;
         Item jPtr = oPtr.Clone(amt);
-        if (!SaveGame.InvenCarryOkay(jPtr))
+        if (!Game.InvenCarryOkay(jPtr))
         {
-            SaveGame.MsgPrint("You cannot carry that many different items.");
+            Game.MsgPrint("You cannot carry that many different items.");
             return;
         }
         int best = storeCommandEvent.Store.MarkupItem(jPtr);
@@ -49,16 +49,16 @@ internal class PurchaseStoreItemScript : Script, IStoreScript
         {
             if (storeCommandEvent.Store.StoreFactory.StoreSellsItems && oPtr.IdentFixed)
             {
-                SaveGame.MsgPrint($"That costs {best} gold per item.");
+                Game.MsgPrint($"That costs {best} gold per item.");
             }
-            int maxBuy = Math.Min(SaveGame.Gold.Value / best, oPtr.Count);
+            int maxBuy = Math.Min(Game.Gold.Value / best, oPtr.Count);
             if (maxBuy < 2)
             {
                 amt = 1;
             }
             else
             {
-                amt = SaveGame.GetQuantity(null, maxBuy, false);
+                amt = Game.GetQuantity(null, maxBuy, false);
                 if (amt <= 0)
                 {
                     return;
@@ -66,9 +66,9 @@ internal class PurchaseStoreItemScript : Script, IStoreScript
             }
         }
         jPtr = oPtr.Clone(amt);
-        if (!SaveGame.InvenCarryOkay(jPtr))
+        if (!Game.InvenCarryOkay(jPtr))
         {
-            SaveGame.MsgPrint("You cannot carry that many items.");
+            Game.MsgPrint("You cannot carry that many items.");
             return;
         }
         if (storeCommandEvent.Store.StoreFactory.StoreSellsItems)
@@ -83,18 +83,18 @@ internal class PurchaseStoreItemScript : Script, IStoreScript
             else
             {
                 oName = storeCommandEvent.Store.StoreFactory.GetItemDescription(jPtr);
-                SaveGame.MsgPrint($"Buying {oName} ({letterIndex.IndexToLetter()}).");
-                SaveGame.MsgPrint(null);
+                Game.MsgPrint($"Buying {oName} ({letterIndex.IndexToLetter()}).");
+                Game.MsgPrint(null);
                 choice = PurchaseHaggle(storeCommandEvent.Store, jPtr, out price);
             }
             if (!choice)
             {
-                if (SaveGame.Gold.Value >= price)
+                if (Game.Gold.Value >= price)
                 {
-                    SaveGame.SayComment_1();
-                    SaveGame.PlaySound(SoundEffectEnum.StoreTransaction);
-                    SaveGame.Gold.Value -= price;
-                    SaveGame.StorePrtGold();
+                    Game.SayComment_1();
+                    Game.PlaySound(SoundEffectEnum.StoreTransaction);
+                    Game.Gold.Value -= price;
+                    Game.StorePrtGold();
                     if (storeCommandEvent.Store.StoreFactory.StoreIdentifiesItems)
                     {
                         jPtr.BecomeFlavorAware();
@@ -104,22 +104,22 @@ internal class PurchaseStoreItemScript : Script, IStoreScript
                     
                     if (storeCommandEvent.Store.StoreFactory.BoughtMessageAsBoughtBack)
                     {
-                        SaveGame.MsgPrint($"You bought back {oName} for {price} gold.");
+                        Game.MsgPrint($"You bought back {oName} for {price} gold.");
                     }
                     else
                     {
-                        SaveGame.MsgPrint($"You bought {oName} for {price} gold.");
+                        Game.MsgPrint($"You bought {oName} for {price} gold.");
                     }
                     jPtr.Inscription = "";
-                    itemNew = SaveGame.InvenCarry(jPtr);
-                    Item? newItemInInventory = SaveGame.GetInventoryItem(itemNew);
+                    itemNew = Game.InvenCarry(jPtr);
+                    Item? newItemInInventory = Game.GetInventoryItem(itemNew);
                     if (newItemInInventory == null)
                     {
                         return; // TODO: This should never be.
                     }
                     oName = newItemInInventory.Description(true, 3);
-                    SaveGame.MsgPrint($"You have {oName} ({itemNew.IndexToLabel()}).");
-                    SaveGame.HandleStuff();
+                    Game.MsgPrint($"You have {oName} ({itemNew.IndexToLabel()}).");
+                    Game.HandleStuff();
                     i = storeCommandEvent.Store.StoreInventoryList.Count;
                     storeCommandEvent.Store.StoreItemIncrease(inventoryItemIndex, -amt);
                     storeCommandEvent.Store.StoreItemOptimize(inventoryItemIndex);
@@ -132,14 +132,14 @@ internal class PurchaseStoreItemScript : Script, IStoreScript
                     {
                         if (storeCommandEvent.Store.StoreFactory.MaintainsStockLevels)
                         {
-                            if (SaveGame.RandomLessThan(Constants.StoreShuffle) == 0)
+                            if (Game.RandomLessThan(Constants.StoreShuffle) == 0)
                             {
-                                SaveGame.MsgPrint("The shopkeeper retires.");
+                                Game.MsgPrint("The shopkeeper retires.");
                                 storeCommandEvent.Store.StoreShuffle();
                             }
                             else
                             {
-                                SaveGame.MsgPrint("The shopkeeper brings out some new stock.");
+                                Game.MsgPrint("The shopkeeper brings out some new stock.");
                             }
                             for (i = 0; i < 10; i++)
                             {
@@ -153,21 +153,21 @@ internal class PurchaseStoreItemScript : Script, IStoreScript
                 }
                 else
                 {
-                    SaveGame.MsgPrint("You do not have enough gold.");
+                    Game.MsgPrint("You do not have enough gold.");
                 }
             }
         }
         else
         {
-            itemNew = SaveGame.InvenCarry(jPtr);
-            Item? newItemInInventory = SaveGame.GetInventoryItem(itemNew);
+            itemNew = Game.InvenCarry(jPtr);
+            Item? newItemInInventory = Game.GetInventoryItem(itemNew);
             if (newItemInInventory == null)
             {
                 return; // TODO: This should never be.
             }
             oName = newItemInInventory.Description(true, 3);
-            SaveGame.MsgPrint($"You have {oName} ({itemNew.IndexToLabel()}).");
-            SaveGame.HandleStuff();
+            Game.MsgPrint($"You have {oName} ({itemNew.IndexToLabel()}).");
+            Game.HandleStuff();
             i = storeCommandEvent.Store.StoreInventoryList.Count;
             storeCommandEvent.Store.StoreItemIncrease(inventoryItemIndex, -amt);
             storeCommandEvent.Store.StoreItemOptimize(inventoryItemIndex);
@@ -193,14 +193,14 @@ internal class PurchaseStoreItemScript : Script, IStoreScript
     private bool PurchaseHaggle(Store store, Item oPtr, out int price)
     {
         int finalAsk = store.MarkupItem(oPtr);
-        SaveGame.MsgPrint("You quickly agree upon the price.");
-        SaveGame.MsgPrint(null);
+        Game.MsgPrint("You quickly agree upon the price.");
+        Game.MsgPrint(null);
         finalAsk += finalAsk / 10;
         const string pmt = "Final Offer";
         finalAsk *= oPtr.Count;
         price = finalAsk;
         string outVal = $"{pmt} :  {finalAsk}";
-        SaveGame.Screen.Print(outVal, 1, 0);
-        return !SaveGame.GetCheck("Accept deal? ");
+        Game.Screen.Print(outVal, 1, 0);
+        return !Game.GetCheck("Accept deal? ");
     }
 }

@@ -12,7 +12,7 @@ internal class RedrawEquippyFlaggedAction : FlaggedAction
 {
     private const int ColEquippy = 0;
     private const int RowEquippy = 13;
-    private RedrawEquippyFlaggedAction(SaveGame saveGame) : base(saveGame) { }
+    private RedrawEquippyFlaggedAction(Game game) : base(game) { }
 
     /// <summary>
     /// Display the 'Equippy' characters (the visual representation of a character's equipment)
@@ -21,6 +21,6 @@ internal class RedrawEquippyFlaggedAction : FlaggedAction
     /// <param name="player"> The player whose equippy characters should be displayed </param>
     protected override void Execute()
     {
-        SaveGame.DisplayPlayerEquippy(RowEquippy, ColEquippy);
+        Game.DisplayPlayerEquippy(RowEquippy, ColEquippy);
     }
 }

@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class ShardBallScript : Script, IScript
 {
-    private ShardBallScript(SaveGame saveGame) : base(saveGame) { }
+    private ShardBallScript(Game game) : base(game) { }
 
     /// <summary>
     /// Fires a ball of shards in a chosen direction.
@@ -18,10 +18,10 @@ internal class ShardBallScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        if (!SaveGame.GetDirectionWithAim(out int dir))
+        if (!Game.GetDirectionWithAim(out int dir))
         {
             return;
         }
-        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(ShardProjectile)), dir, 120 + SaveGame.ExperienceLevel.Value, 2);
+        Game.FireBall(Game.SingletonRepository.Projectiles.Get(nameof(ShardProjectile)), dir, 120 + Game.ExperienceLevel.Value, 2);
     }
 }

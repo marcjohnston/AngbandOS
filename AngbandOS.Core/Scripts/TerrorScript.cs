@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class TerrorScript : Script, IScript
 {
-    private TerrorScript(SaveGame saveGame) : base(saveGame) { }
+    private TerrorScript(Game game) : base(game) { }
 
     /// <summary>
     /// Adds fear and health damage to all monsters in a distance of 30 + the player experience.
@@ -18,6 +18,6 @@ internal class TerrorScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        SaveGame.TurnMonsters(30 + SaveGame.ExperienceLevel.Value);
+        Game.TurnMonsters(30 + Game.ExperienceLevel.Value);
     }
 }

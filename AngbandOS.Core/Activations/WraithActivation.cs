@@ -13,14 +13,14 @@ namespace AngbandOS.Core.Activations;
 [Serializable]
 internal class WraithActivation : Activation
 {
-    private WraithActivation(SaveGame saveGame) : base(saveGame) { }
+    private WraithActivation(Game game) : base(game) { }
     public override int RandomChance => 5;
 
     public override string? PreActivationMessage => "";
 
     protected override bool OnActivate(Item item)
     {
-        SaveGame.EtherealnessTimer.AddTimer(SaveGame.DieRoll(SaveGame.ExperienceLevel.Value));
+        Game.EtherealnessTimer.AddTimer(Game.DieRoll(Game.ExperienceLevel.Value));
         return true;
     }
 

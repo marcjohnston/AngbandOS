@@ -10,21 +10,21 @@ namespace AngbandOS.Core.ArtifactBiases;
 [Serializable]
 internal class ColdArtifactBias : ArtifactBias
 {
-    private ColdArtifactBias(SaveGame saveGame) : base(saveGame) { }
+    private ColdArtifactBias(Game game) : base(game) { }
     public override bool ApplyRandomResistances(Item item)
     {
         if (!item.RandomArtifactItemCharacteristics.ResCold)
         {
             item.RandomArtifactItemCharacteristics.ResCold = true;
-            if (SaveGame.DieRoll(2) == 1)
+            if (Game.DieRoll(2) == 1)
             {
                 return true;
             }
         }
-        if (SaveGame.DieRoll(ImmunityLuckOneInChance) == 1 && !item.RandomArtifactItemCharacteristics.ImCold)
+        if (Game.DieRoll(ImmunityLuckOneInChance) == 1 && !item.RandomArtifactItemCharacteristics.ImCold)
         {
             item.RandomArtifactItemCharacteristics.ImCold = true;
-            if (SaveGame.DieRoll(2) == 1)
+            if (Game.DieRoll(2) == 1)
             {
                 return true;
             }
@@ -39,7 +39,7 @@ internal class ColdArtifactBias : ArtifactBias
             if (!item.RandomArtifactItemCharacteristics.BrandCold)
             {
                 item.RandomArtifactItemCharacteristics.BrandCold = true;
-                if (SaveGame.DieRoll(2) == 1)
+                if (Game.DieRoll(2) == 1)
                 {
                     return true;
                 }
@@ -50,21 +50,21 @@ internal class ColdArtifactBias : ArtifactBias
 
     public override Activation GetActivationPowerType(Item item)
     {
-        if (SaveGame.DieRoll(3) != 1)
+        if (Game.DieRoll(3) != 1)
         {
-            return SaveGame.SingletonRepository.Activations.Get(nameof(FrostBolt6d8Every7p1d7Activation));
+            return Game.SingletonRepository.Activations.Get(nameof(FrostBolt6d8Every7p1d7Activation));
         }
-        else if (SaveGame.DieRoll(3) != 1)
+        else if (Game.DieRoll(3) != 1)
         {
-            return SaveGame.SingletonRepository.Activations.Get(nameof(BallOfCold48r2Every400Activation));
+            return Game.SingletonRepository.Activations.Get(nameof(BallOfCold48r2Every400Activation));
         }
-        else if (SaveGame.DieRoll(3) != 1)
+        else if (Game.DieRoll(3) != 1)
         {
-            return SaveGame.SingletonRepository.Activations.Get(nameof(BallOfCold100r2Every300Activation));
+            return Game.SingletonRepository.Activations.Get(nameof(BallOfCold100r2Every300Activation));
         }
         else
         {
-            return SaveGame.SingletonRepository.Activations.Get(nameof(LargeFrostBall200Every325p1d325Activation));
+            return Game.SingletonRepository.Activations.Get(nameof(LargeFrostBall200Every325p1d325Activation));
         }
     }
 }

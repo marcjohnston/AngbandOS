@@ -22,8 +22,8 @@ internal class StandardDungeonGenerator : DungeonGenerator
     private const int DoorMax = 200;
     private const int _blockHgt = 21; // This is the vertical height of a block that is used to divide the dungeon into grid blocks for room placement.
     private const int _blockWid = 11; // This is the horizontal width of a block that is used to divide the dungeon into grid blocks for room placement.
-    private const int MaxRoomsCol = SaveGame.MaxWid / _blockWid; // This is the number of horizontal grid blocks for the current dungeon.
-    private const int MaxRoomsRow = SaveGame.MaxHgt / _blockHgt; // This is the number of vertical grid blocks for the current dungeon.
+    private const int MaxRoomsCol = Game.MaxWid / _blockWid; // This is the number of horizontal grid blocks for the current dungeon.
+    private const int MaxRoomsRow = Game.MaxHgt / _blockHgt; // This is the number of vertical grid blocks for the current dungeon.
     private const int _allocSetBoth = 3;
     private const int _allocSetCorr = 1;
     private const int _allocSetRoom = 2;
@@ -65,7 +65,7 @@ internal class StandardDungeonGenerator : DungeonGenerator
     private int TunnN;
     private int WallN;
 
-    public StandardDungeonGenerator(SaveGame saveGame) : base(saveGame) { }
+    public StandardDungeonGenerator(Game game) : base(game) { }
 
 
     /// <summary>
@@ -74,48 +74,48 @@ internal class StandardDungeonGenerator : DungeonGenerator
     /// <returns></returns>
     public override bool GenerateDungeon()
     {
-        SaveGame.DungeonDifficulty = SaveGame.CurDungeon.Offset;
-        SaveGame.DunBias = SaveGame.CurDungeon.BiasMonsterFilter;
-        if (SaveGame.CurDungeon.Tower)
+        Game.DungeonDifficulty = Game.CurDungeon.Offset;
+        Game.DunBias = Game.CurDungeon.BiasMonsterFilter;
+        if (Game.CurDungeon.Tower)
         {
-            SaveGame.CurHgt = Constants.PlayableScreenHeight;
-            SaveGame.CurWid = Constants.PlayableScreenWidth;
-            SaveGame.MaxPanelRows = 0;
-            SaveGame.MaxPanelCols = 0;
-            SaveGame.PanelRow = 0;
-            SaveGame.PanelCol = 0;
+            Game.CurHgt = Constants.PlayableScreenHeight;
+            Game.CurWid = Constants.PlayableScreenWidth;
+            Game.MaxPanelRows = 0;
+            Game.MaxPanelCols = 0;
+            Game.PanelRow = 0;
+            Game.PanelCol = 0;
         }
         else
         {
             // Test if this should be a small dungeon.  Small levels are less than the full size of the screen, but need to be at least large enough for type 1 rooms.
-            if (SaveGame.DieRoll(_smallLevel) == 1)
+            if (Game.DieRoll(_smallLevel) == 1)
             {
-                int tester1 = SaveGame.DieRoll(SaveGame.MaxHgt / Constants.PlayableScreenHeight);
-                int tester2 = SaveGame.DieRoll(SaveGame.MaxWid / Constants.PlayableScreenWidth);
-                SaveGame.CurHgt = tester1 * Constants.PlayableScreenHeight;
-                SaveGame.CurWid = tester2 * Constants.PlayableScreenWidth;
-                SaveGame.MaxPanelRows = (SaveGame.CurHgt / Constants.PlayableScreenHeight * 2) - 2;
-                SaveGame.MaxPanelCols = (SaveGame.CurWid / Constants.PlayableScreenWidth * 2) - 2;
-                SaveGame.PanelRow = SaveGame.MaxPanelRows;
-                SaveGame.PanelCol = SaveGame.MaxPanelCols;
+                int tester1 = Game.DieRoll(Game.MaxHgt / Constants.PlayableScreenHeight);
+                int tester2 = Game.DieRoll(Game.MaxWid / Constants.PlayableScreenWidth);
+                Game.CurHgt = tester1 * Constants.PlayableScreenHeight;
+                Game.CurWid = tester2 * Constants.PlayableScreenWidth;
+                Game.MaxPanelRows = (Game.CurHgt / Constants.PlayableScreenHeight * 2) - 2;
+                Game.MaxPanelCols = (Game.CurWid / Constants.PlayableScreenWidth * 2) - 2;
+                Game.PanelRow = Game.MaxPanelRows;
+                Game.PanelCol = Game.MaxPanelCols;
             }
             else
             {
-                SaveGame.CurHgt = SaveGame.MaxHgt;
-                SaveGame.CurWid = SaveGame.MaxWid;
-                SaveGame.MaxPanelRows = (SaveGame.CurHgt / Constants.PlayableScreenHeight * 2) - 2;
-                SaveGame.MaxPanelCols = (SaveGame.CurWid / Constants.PlayableScreenWidth * 2) - 2;
-                SaveGame.PanelRow = SaveGame.MaxPanelRows;
-                SaveGame.PanelCol = SaveGame.MaxPanelCols;
+                Game.CurHgt = Game.MaxHgt;
+                Game.CurWid = Game.MaxWid;
+                Game.MaxPanelRows = (Game.CurHgt / Constants.PlayableScreenHeight * 2) - 2;
+                Game.MaxPanelCols = (Game.CurWid / Constants.PlayableScreenWidth * 2) - 2;
+                Game.PanelRow = Game.MaxPanelRows;
+                Game.PanelCol = Game.MaxPanelCols;
             }
         }
 
         ResetGuardians();
-        if (SaveGame.IsQuest(SaveGame.CurrentDepth))
+        if (Game.IsQuest(Game.CurrentDepth))
         {
-            SaveGame.SingletonRepository.MonsterRaces[GetQuestMonster()].Guardian = true;
+            Game.SingletonRepository.MonsterRaces[GetQuestMonster()].Guardian = true;
         }
-        if (SaveGame.PercentileRoll(4) && !SaveGame.CurDungeon.Tower)
+        if (Game.PercentileRoll(4) && !Game.CurDungeon.Tower)
         {
             MakeCavernLevel();
         }
@@ -125,18 +125,18 @@ internal class StandardDungeonGenerator : DungeonGenerator
         }
 
         // Generate downstairs.
-        AllocStairs(SaveGame.SingletonRepository.Tiles.Get(nameof(DownStaircaseTile)), SaveGame.RandomBetween(3, 4), 3);
+        AllocStairs(Game.SingletonRepository.Tiles.Get(nameof(DownStaircaseTile)), Game.RandomBetween(3, 4), 3);
 
         // Generate upstairs.
-        AllocStairs(SaveGame.SingletonRepository.Tiles.Get(nameof(UpStaircaseTile)), SaveGame.RandomBetween(1, 2), 3);
+        AllocStairs(Game.SingletonRepository.Tiles.Get(nameof(UpStaircaseTile)), Game.RandomBetween(1, 2), 3);
 
         // Choose a spot for the player.
-        if (!SaveGame.NewPlayerSpot())
+        if (!Game.NewPlayerSpot())
         {
             return false;
         }
 
-        int k = SaveGame.Difficulty / 3;
+        int k = Game.Difficulty / 3;
         if (k > 10)
         {
             k = 10;
@@ -145,37 +145,37 @@ internal class StandardDungeonGenerator : DungeonGenerator
         {
             k = 2;
         }
-        if (SaveGame.IsQuest(SaveGame.CurrentDepth))
+        if (Game.IsQuest(Game.CurrentDepth))
         {
             int rIdx = GetQuestMonster();
-            int qIdx = SaveGame.GetQuestNumber();
-            while (SaveGame.SingletonRepository.MonsterRaces[rIdx].CurNum < (SaveGame.Quests[qIdx].ToKill - SaveGame.Quests[qIdx].Killed))
+            int qIdx = Game.GetQuestNumber();
+            while (Game.SingletonRepository.MonsterRaces[rIdx].CurNum < (Game.Quests[qIdx].ToKill - Game.Quests[qIdx].Killed))
             {
-                PutQuestMonster(SaveGame.Quests[qIdx].RIdx);
+                PutQuestMonster(Game.Quests[qIdx].RIdx);
             }
         }
         int i = Constants.MinMAllocLevel;
-        if (SaveGame.CurHgt < SaveGame.MaxHgt || SaveGame.CurWid < SaveGame.MaxWid)
+        if (Game.CurHgt < Game.MaxHgt || Game.CurWid < Game.MaxWid)
         {
             int smallTester = i;
-            i = i * SaveGame.CurHgt / SaveGame.MaxHgt;
-            i = i * SaveGame.CurWid / SaveGame.MaxWid;
+            i = i * Game.CurHgt / Game.MaxHgt;
+            i = i * Game.CurWid / Game.MaxWid;
             i++;
             if (i > smallTester)
             {
                 i = smallTester;
             }
         }
-        i += SaveGame.DieRoll(8);
+        i += Game.DieRoll(8);
         for (i += k; i > 0; i--)
         {
-            SaveGame.AllocMonster(0, true);
+            Game.AllocMonster(0, true);
         }
-        AllocObject(_allocSetBoth, _allocTypTrap, SaveGame.DieRoll(k));
-        AllocObject(_allocSetCorr, _allocTypRubble, SaveGame.DieRoll(k));
-        AllocObject(_allocSetRoom, _allocTypObject, SaveGame.RandomNormal(_dunAmtRoom, 3));
-        AllocObject(_allocSetBoth, _allocTypObject, SaveGame.RandomNormal(_dunAmtItem, 3));
-        AllocObject(_allocSetBoth, _allocTypGold, SaveGame.RandomNormal(_dunAmtGold, 3));
+        AllocObject(_allocSetBoth, _allocTypTrap, Game.DieRoll(k));
+        AllocObject(_allocSetCorr, _allocTypRubble, Game.DieRoll(k));
+        AllocObject(_allocSetRoom, _allocTypObject, Game.RandomNormal(_dunAmtRoom, 3));
+        AllocObject(_allocSetBoth, _allocTypObject, Game.RandomNormal(_dunAmtItem, 3));
+        AllocObject(_allocSetBoth, _allocTypGold, Game.RandomNormal(_dunAmtGold, 3));
         return true;
     }
 
@@ -237,34 +237,34 @@ internal class StandardDungeonGenerator : DungeonGenerator
 
     private void DestroyLevel()
     {
-        Tile wallBasicTile = SaveGame.SingletonRepository.Tiles.Get(nameof(WallBasicTile));
-        Tile quartzTile = SaveGame.SingletonRepository.Tiles.Get(nameof(QuartzTile));
-        Tile magmaTile = SaveGame.SingletonRepository.Tiles.Get(nameof(MagmaTile));
-        for (int n = 0; n < SaveGame.DieRoll(5); n++)
+        Tile wallBasicTile = Game.SingletonRepository.Tiles.Get(nameof(WallBasicTile));
+        Tile quartzTile = Game.SingletonRepository.Tiles.Get(nameof(QuartzTile));
+        Tile magmaTile = Game.SingletonRepository.Tiles.Get(nameof(MagmaTile));
+        for (int n = 0; n < Game.DieRoll(5); n++)
         {
-            int x1 = SaveGame.RandomBetween(5, SaveGame.CurWid - 1 - 5);
-            int y1 = SaveGame.RandomBetween(5, SaveGame.CurHgt - 1 - 5);
+            int x1 = Game.RandomBetween(5, Game.CurWid - 1 - 5);
+            int y1 = Game.RandomBetween(5, Game.CurHgt - 1 - 5);
             int y;
             for (y = y1 - 15; y <= y1 + 15; y++)
             {
                 int x;
                 for (x = x1 - 15; x <= x1 + 15; x++)
                 {
-                    if (!SaveGame.InBounds(y, x))
+                    if (!Game.InBounds(y, x))
                     {
                         continue;
                     }
-                    int k = SaveGame.Distance(y1, x1, y, x);
+                    int k = Game.Distance(y1, x1, y, x);
                     if (k >= 16)
                     {
                         continue;
                     }
-                    SaveGame.DeleteMonster(y, x);
-                    if (SaveGame.CaveValidBold(y, x))
+                    Game.DeleteMonster(y, x);
+                    if (Game.CaveValidBold(y, x))
                     {
-                        SaveGame.DeleteObject(y, x);
-                        GridTile cPtr = SaveGame.Grid[y][x];
-                        int t = SaveGame.RandomLessThan(200);
+                        Game.DeleteObject(y, x);
+                        GridTile cPtr = Game.Grid[y][x];
+                        int t = Game.RandomLessThan(200);
                         if (t < 20)
                         {
                             cPtr.SetFeature(wallBasicTile);
@@ -292,10 +292,10 @@ internal class StandardDungeonGenerator : DungeonGenerator
     private void BuildStreamer(Tile tile, int chance)
     {
         int dummy = 0;
-        int y = SaveGame.RandomSpread(SaveGame.CurHgt / 2, 10);
-        int x = SaveGame.RandomSpread(SaveGame.CurWid / 2, 15);
-        int dir = SaveGame.OrderedDirection[SaveGame.RandomLessThan(8)];
-        while (dummy < SaveGame.SafeMaxAttempts)
+        int y = Game.RandomSpread(Game.CurHgt / 2, 10);
+        int x = Game.RandomSpread(Game.CurWid / 2, 15);
+        int dir = Game.OrderedDirection[Game.RandomLessThan(8)];
+        while (dummy < Game.SafeMaxAttempts)
         {
             dummy++;
             for (int i = 0; i < _dunStrDen; i++)
@@ -305,22 +305,22 @@ internal class StandardDungeonGenerator : DungeonGenerator
                 int ty;
                 while (true)
                 {
-                    ty = SaveGame.RandomSpread(y, d);
-                    tx = SaveGame.RandomSpread(x, d);
-                    if (!SaveGame.InBounds2(ty, tx))
+                    ty = Game.RandomSpread(y, d);
+                    tx = Game.RandomSpread(x, d);
+                    if (!Game.InBounds2(ty, tx))
                     {
                         continue;
                     }
                     break;
                 }
-                GridTile cPtr = SaveGame.Grid[ty][tx];
+                GridTile cPtr = Game.Grid[ty][tx];
 
                 if (!cPtr.FeatureType.IsBasicWall)
                 {
                     continue;
                 }
                 cPtr.SetFeature(tile);
-                if (SaveGame.RandomLessThan(chance) == 0)
+                if (Game.RandomLessThan(chance) == 0)
                 {
                     Tile? visibleTreasureTile = cPtr.FeatureType.VisibleTreasureForTile;
                     if (visibleTreasureTile == null)
@@ -330,13 +330,13 @@ internal class StandardDungeonGenerator : DungeonGenerator
                     cPtr.SetFeature(visibleTreasureTile);
                 }
             }
-            if (dummy >= SaveGame.SafeMaxAttempts)
+            if (dummy >= Game.SafeMaxAttempts)
             {
                 return;
             }
-            y += SaveGame.KeypadDirectionYOffset[dir];
-            x += SaveGame.KeypadDirectionXOffset[dir];
-            if (!SaveGame.InBounds(y, x))
+            y += Game.KeypadDirectionYOffset[dir];
+            x += Game.KeypadDirectionXOffset[dir];
+            if (!Game.InBounds(y, x))
             {
                 break;
             }
@@ -348,18 +348,18 @@ internal class StandardDungeonGenerator : DungeonGenerator
     /// </summary>
     private void MakeCavernLevel()
     {
-        PerlinNoise perlinNoise = new PerlinNoise(SaveGame.RandomBetween(0, int.MaxValue - 1));
-        double widthDivisor = 1 / (double)SaveGame.CurWid;
-        double heightDivisor = 1 / (double)SaveGame.CurHgt;
-        for (int y = 0; y < SaveGame.CurHgt; y++)
+        PerlinNoise perlinNoise = new PerlinNoise(Game.RandomBetween(0, int.MaxValue - 1));
+        double widthDivisor = 1 / (double)Game.CurWid;
+        double heightDivisor = 1 / (double)Game.CurHgt;
+        for (int y = 0; y < Game.CurHgt; y++)
         {
-            for (int x = 0; x < SaveGame.CurWid; x++)
+            for (int x = 0; x < Game.CurWid; x++)
             {
-                GridTile cPtr = SaveGame.Grid[y][x];
+                GridTile cPtr = Game.Grid[y][x];
                 double v = perlinNoise.Noise(10 * x * widthDivisor, 10 * y * heightDivisor, -0.5);
                 v = (v + 1) / 2;
-                double dX = Math.Abs(x - (SaveGame.CurWid / 2)) * widthDivisor;
-                double dY = Math.Abs(y - (SaveGame.CurHgt / 2)) * heightDivisor;
+                double dX = Math.Abs(x - (Game.CurWid / 2)) * widthDivisor;
+                double dY = Math.Abs(y - (Game.CurHgt / 2)) * heightDivisor;
                 double d = Math.Max(dX, dY);
                 const double elevation = 0.05;
                 const double steepness = 6.0;
@@ -369,51 +369,51 @@ internal class StandardDungeonGenerator : DungeonGenerator
                 int rounded = (int)(v * 10);
                 if (rounded < 2 || rounded > 5)
                 {
-                    cPtr.SetFeature(SaveGame.SingletonRepository.Tiles.Get(nameof(WallBasicTile)));
+                    cPtr.SetFeature(Game.SingletonRepository.Tiles.Get(nameof(WallBasicTile)));
                 }
                 else
                 {
-                    cPtr.SetFeature(SaveGame.SingletonRepository.Tiles.Get(nameof(DungeonFloorTile)));
+                    cPtr.SetFeature(Game.SingletonRepository.Tiles.Get(nameof(DungeonFloorTile)));
                 }
             }
         }
         for (int i = 0; i < _dunStrMag; i++)
         {
-            BuildStreamer(SaveGame.SingletonRepository.Tiles.Get(nameof(MagmaTile)), _dunStrMc);
+            BuildStreamer(Game.SingletonRepository.Tiles.Get(nameof(MagmaTile)), _dunStrMc);
         }
         for (int i = 0; i < _dunStrQua; i++)
         {
-            BuildStreamer(SaveGame.SingletonRepository.Tiles.Get(nameof(QuartzTile)), _dunStrQc);
+            BuildStreamer(Game.SingletonRepository.Tiles.Get(nameof(QuartzTile)), _dunStrQc);
         }
-        for (int x = 0; x < SaveGame.CurWid; x++)
+        for (int x = 0; x < Game.CurWid; x++)
         {
-            GridTile cPtr = SaveGame.Grid[0][x];
-            cPtr.SetFeature(SaveGame.SingletonRepository.Tiles.Get(nameof(WallPermentSolidTile)));
+            GridTile cPtr = Game.Grid[0][x];
+            cPtr.SetFeature(Game.SingletonRepository.Tiles.Get(nameof(WallPermentSolidTile)));
         }
-        for (int x = 0; x < SaveGame.CurWid; x++)
+        for (int x = 0; x < Game.CurWid; x++)
         {
-            GridTile cPtr = SaveGame.Grid[SaveGame.CurHgt - 1][x];
-            cPtr.SetFeature(SaveGame.SingletonRepository.Tiles.Get(nameof(WallPermentSolidTile)));
+            GridTile cPtr = Game.Grid[Game.CurHgt - 1][x];
+            cPtr.SetFeature(Game.SingletonRepository.Tiles.Get(nameof(WallPermentSolidTile)));
         }
-        for (int y = 0; y < SaveGame.CurHgt; y++)
+        for (int y = 0; y < Game.CurHgt; y++)
         {
-            GridTile cPtr = SaveGame.Grid[y][0];
-            cPtr.SetFeature(SaveGame.SingletonRepository.Tiles.Get(nameof(WallPermentSolidTile)));
+            GridTile cPtr = Game.Grid[y][0];
+            cPtr.SetFeature(Game.SingletonRepository.Tiles.Get(nameof(WallPermentSolidTile)));
         }
-        for (int y = 0; y < SaveGame.CurHgt; y++)
+        for (int y = 0; y < Game.CurHgt; y++)
         {
-            GridTile cPtr = SaveGame.Grid[y][SaveGame.CurWid - 1];
-            cPtr.SetFeature(SaveGame.SingletonRepository.Tiles.Get(nameof(WallPermentSolidTile)));
+            GridTile cPtr = Game.Grid[y][Game.CurWid - 1];
+            cPtr.SetFeature(Game.SingletonRepository.Tiles.Get(nameof(WallPermentSolidTile)));
         }
-        if (SaveGame.DieRoll(_darkEmpty) != 1 || SaveGame.DieRoll(100) > SaveGame.Difficulty)
+        if (Game.DieRoll(_darkEmpty) != 1 || Game.DieRoll(100) > Game.Difficulty)
         {
-            SaveGame.RunScript(nameof(LightScript));
+            Game.RunScript(nameof(LightScript));
         }
     }
 
     private void ResetGuardians()
     {
-        foreach (MonsterRace race in SaveGame.SingletonRepository.MonsterRaces)
+        foreach (MonsterRace race in Game.SingletonRepository.MonsterRaces)
         {
             race.Guardian = false;
         }
@@ -422,19 +422,19 @@ internal class StandardDungeonGenerator : DungeonGenerator
     private int NextToWalls(int y, int x)
     {
         int k = 0;
-        if (SaveGame.Grid[y + 1][x].FeatureType.IsWall)
+        if (Game.Grid[y + 1][x].FeatureType.IsWall)
         {
             k++;
         }
-        if (SaveGame.Grid[y - 1][x].FeatureType.IsWall)
+        if (Game.Grid[y - 1][x].FeatureType.IsWall)
         {
             k++;
         }
-        if (SaveGame.Grid[y][x + 1].FeatureType.IsWall)
+        if (Game.Grid[y][x + 1].FeatureType.IsWall)
         {
             k++;
         }
-        if (SaveGame.Grid[y][x - 1].FeatureType.IsWall)
+        if (Game.Grid[y][x - 1].FeatureType.IsWall)
         {
             k++;
         }
@@ -449,9 +449,9 @@ internal class StandardDungeonGenerator : DungeonGenerator
             {
                 for (int j = 0; !flag && j <= 3000; j++)
                 {
-                    int y = SaveGame.RandomLessThan(SaveGame.CurHgt);
-                    int x = SaveGame.RandomLessThan(SaveGame.CurWid);
-                    if (!SaveGame.GridOpenNoItemOrCreature(y, x))
+                    int y = Game.RandomLessThan(Game.CurHgt);
+                    int x = Game.RandomLessThan(Game.CurWid);
+                    if (!Game.GridOpenNoItemOrCreature(y, x))
                     {
                         continue;
                     }
@@ -459,14 +459,14 @@ internal class StandardDungeonGenerator : DungeonGenerator
                     {
                         continue;
                     }
-                    GridTile cPtr = SaveGame.Grid[y][x];
-                    if (SaveGame.CurrentDepth <= 0)
+                    GridTile cPtr = Game.Grid[y][x];
+                    if (Game.CurrentDepth <= 0)
                     {
-                        cPtr.SetFeature(SaveGame.SingletonRepository.Tiles.Get(nameof(DownStaircaseTile)));
+                        cPtr.SetFeature(Game.SingletonRepository.Tiles.Get(nameof(DownStaircaseTile)));
                     }
-                    else if (SaveGame.IsQuest(SaveGame.CurrentDepth) || SaveGame.CurrentDepth == SaveGame.CurDungeon.MaxLevel)
+                    else if (Game.IsQuest(Game.CurrentDepth) || Game.CurrentDepth == Game.CurDungeon.MaxLevel)
                     {
-                        cPtr.SetFeature(SaveGame.CurDungeon.Tower ? SaveGame.SingletonRepository.Tiles.Get(nameof(DownStaircaseTile)) : SaveGame.SingletonRepository.Tiles.Get(nameof(UpStaircaseTile)));
+                        cPtr.SetFeature(Game.CurDungeon.Tower ? Game.SingletonRepository.Tiles.Get(nameof(DownStaircaseTile)) : Game.SingletonRepository.Tiles.Get(nameof(UpStaircaseTile)));
                     }
                     else
                     {
@@ -484,11 +484,11 @@ internal class StandardDungeonGenerator : DungeonGenerator
 
     private int GetQuestMonster()
     {
-        for (int i = 0; i < SaveGame.Quests.Count; i++)
+        for (int i = 0; i < Game.Quests.Count; i++)
         {
-            if (SaveGame.Quests[i].Level == SaveGame.CurrentDepth && SaveGame.Quests[i].Dungeon == SaveGame.CurDungeon)
+            if (Game.Quests[i].Level == Game.CurrentDepth && Game.Quests[i].Dungeon == Game.CurDungeon)
             {
-                return SaveGame.Quests[i].RIdx;
+                return Game.Quests[i].RIdx;
             }
         }
         return 0;
@@ -497,35 +497,35 @@ internal class StandardDungeonGenerator : DungeonGenerator
     private void PutQuestMonster(int rIdx)
     {
         int y, x;
-        if (SaveGame.SingletonRepository.MonsterRaces[rIdx].MaxNum == 0)
+        if (Game.SingletonRepository.MonsterRaces[rIdx].MaxNum == 0)
         {
-            SaveGame.SingletonRepository.MonsterRaces[rIdx].MaxNum++;
-            SaveGame.MsgPrint("Resurrecting guardian to fix corrupted savefile...");
+            Game.SingletonRepository.MonsterRaces[rIdx].MaxNum++;
+            Game.MsgPrint("Resurrecting guardian to fix corrupted savefile...");
         }
         do
         {
             while (true)
             {
-                y = SaveGame.RandomLessThan(SaveGame.MaxHgt);
-                x = SaveGame.RandomLessThan(SaveGame.MaxWid);
-                if (!SaveGame.GridOpenNoItemOrCreature(y, x))
+                y = Game.RandomLessThan(Game.MaxHgt);
+                x = Game.RandomLessThan(Game.MaxWid);
+                if (!Game.GridOpenNoItemOrCreature(y, x))
                 {
                     continue;
                 }
                 {
-                    if (SaveGame.Distance(y, x, SaveGame.MapY, SaveGame.MapX) > 15)
+                    if (Game.Distance(y, x, Game.MapY, Game.MapX) > 15)
                     {
                         break;
                     }
                 }
             }
-        } while (!SaveGame.PlaceMonsterByIndex(y, x, rIdx, false, false, false));
+        } while (!Game.PlaceMonsterByIndex(y, x, rIdx, false, false, false));
     }
 
     private void PlaceRubble(int y, int x)
     {
-        GridTile cPtr = SaveGame.Grid[y][x];
-        cPtr.SetFeature(SaveGame.SingletonRepository.Tiles.Get(nameof(RubbleTile)));
+        GridTile cPtr = Game.Grid[y][x];
+        cPtr.SetFeature(Game.SingletonRepository.Tiles.Get(nameof(RubbleTile)));
     }
 
     private void AllocObject(int set, int typ, int num)
@@ -535,16 +535,16 @@ internal class StandardDungeonGenerator : DungeonGenerator
         int dummy = 0;
         for (int k = 0; k < num; k++)
         {
-            while (dummy < SaveGame.SafeMaxAttempts)
+            while (dummy < Game.SafeMaxAttempts)
             {
                 dummy++;
-                y = SaveGame.RandomLessThan(SaveGame.CurHgt);
-                x = SaveGame.RandomLessThan(SaveGame.CurWid);
-                if (!SaveGame.GridOpenNoItemOrCreature(y, x))
+                y = Game.RandomLessThan(Game.CurHgt);
+                x = Game.RandomLessThan(Game.CurWid);
+                if (!Game.GridOpenNoItemOrCreature(y, x))
                 {
                     continue;
                 }
-                bool isRoom = SaveGame.Grid[y][x].TileFlags.IsSet(GridTile.InRoom);
+                bool isRoom = Game.Grid[y][x].TileFlags.IsSet(GridTile.InRoom);
                 if (set == _allocSetCorr && isRoom)
                 {
                     continue;
@@ -555,7 +555,7 @@ internal class StandardDungeonGenerator : DungeonGenerator
                 }
                 break;
             }
-            if (dummy >= SaveGame.SafeMaxAttempts)
+            if (dummy >= Game.SafeMaxAttempts)
             {
                 return;
             }
@@ -568,17 +568,17 @@ internal class StandardDungeonGenerator : DungeonGenerator
                     }
                 case _allocTypTrap:
                     {
-                        SaveGame.PlaceTrap(y, x);
+                        Game.PlaceTrap(y, x);
                         break;
                     }
                 case _allocTypGold:
                     {
-                        SaveGame.PlaceGold(y, x);
+                        Game.PlaceGold(y, x);
                         break;
                     }
                 case _allocTypObject:
                     {
-                        SaveGame.PlaceObject(y, x, false, false);
+                        Game.PlaceObject(y, x, false, false);
                         break;
                     }
             }
@@ -590,13 +590,13 @@ internal class StandardDungeonGenerator : DungeonGenerator
         int k = 0;
         for (int i = 0; i < 4; i++)
         {
-            int y = y1 + SaveGame.OrderedDirectionYOffset[i];
-            int x = x1 + SaveGame.OrderedDirectionXOffset[i];
-            if (!SaveGame.GridPassable(y, x))
+            int y = y1 + Game.OrderedDirectionYOffset[i];
+            int x = x1 + Game.OrderedDirectionXOffset[i];
+            if (!Game.GridPassable(y, x))
             {
                 continue;
             }
-            GridTile cPtr = SaveGame.Grid[y][x];
+            GridTile cPtr = Game.Grid[y][x];
             if (!cPtr.FeatureType.IsOpenFloor)
             {
                 continue;
@@ -614,11 +614,11 @@ internal class StandardDungeonGenerator : DungeonGenerator
     {
         if (NextToCorr(y, x) >= 2)
         {
-            if (SaveGame.Grid[y - 1][x].FeatureType.IsWall && SaveGame.Grid[y + 1][x].FeatureType.IsWall)
+            if (Game.Grid[y - 1][x].FeatureType.IsWall && Game.Grid[y + 1][x].FeatureType.IsWall)
             {
                 return true;
             }
-            if (SaveGame.Grid[y][x - 1].FeatureType.IsWall && SaveGame.Grid[y][x + 1].FeatureType.IsWall)
+            if (Game.Grid[y][x - 1].FeatureType.IsWall && Game.Grid[y][x + 1].FeatureType.IsWall)
             {
                 return true;
             }
@@ -628,21 +628,21 @@ internal class StandardDungeonGenerator : DungeonGenerator
 
     private void TryDoor(int y, int x)
     {
-        if (!SaveGame.InBounds(y, x))
+        if (!Game.InBounds(y, x))
         {
             return;
         }
-        if (SaveGame.Grid[y][x].FeatureType.IsWall)
+        if (Game.Grid[y][x].FeatureType.IsWall)
         {
             return;
         }
-        if (SaveGame.Grid[y][x].TileFlags.IsSet(GridTile.InRoom))
+        if (Game.Grid[y][x].TileFlags.IsSet(GridTile.InRoom))
         {
             return;
         }
-        if (SaveGame.RandomLessThan(100) < _dunTunJct && PossibleDoorway(y, x))
+        if (Game.RandomLessThan(100) < _dunTunJct && PossibleDoorway(y, x))
         {
-            SaveGame.PlaceRandomDoor(y, x);
+            Game.PlaceRandomDoor(y, x);
         }
     }
 
@@ -652,7 +652,7 @@ internal class StandardDungeonGenerator : DungeonGenerator
         cdir = x1 == x2 ? 0 : x1 < x2 ? 1 : -1;
         if (rdir != 0 && cdir != 0)
         {
-            if (SaveGame.RandomLessThan(100) < 50)
+            if (Game.RandomLessThan(100) < 50)
             {
                 rdir = 0;
             }
@@ -665,9 +665,9 @@ internal class StandardDungeonGenerator : DungeonGenerator
 
     private void RandDir(out int rdir, out int cdir)
     {
-        int i = SaveGame.RandomLessThan(4);
-        rdir = SaveGame.OrderedDirectionYOffset[i];
-        cdir = SaveGame.OrderedDirectionXOffset[i];
+        int i = Game.RandomLessThan(4);
+        rdir = Game.OrderedDirectionYOffset[i];
+        cdir = Game.OrderedDirectionXOffset[i];
     }
 
     private void BuildTunnel(int row1, int col1, int row2, int col2)
@@ -687,27 +687,27 @@ internal class StandardDungeonGenerator : DungeonGenerator
             {
                 break;
             }
-            if (SaveGame.RandomLessThan(100) < _dunTunChg)
+            if (Game.RandomLessThan(100) < _dunTunChg)
             {
                 CorrectDir(out rowDir, out colDir, row1, col1, row2, col2);
-                if (SaveGame.RandomLessThan(100) < _dunTunRnd)
+                if (Game.RandomLessThan(100) < _dunTunRnd)
                 {
                     RandDir(out rowDir, out colDir);
                 }
             }
             int tmpRow = row1 + rowDir;
             int tmpCol = col1 + colDir;
-            while (!SaveGame.InBounds(tmpRow, tmpCol))
+            while (!Game.InBounds(tmpRow, tmpCol))
             {
                 CorrectDir(out rowDir, out colDir, row1, col1, row2, col2);
-                if (SaveGame.RandomLessThan(100) < _dunTunRnd)
+                if (Game.RandomLessThan(100) < _dunTunRnd)
                 {
                     RandDir(out rowDir, out colDir);
                 }
                 tmpRow = row1 + rowDir;
                 tmpCol = col1 + colDir;
             }
-            cPtr = SaveGame.Grid[tmpRow][tmpCol];
+            cPtr = Game.Grid[tmpRow][tmpCol];
             if (cPtr.FeatureType is WallPermentSolidTile)
             {
                 continue;
@@ -724,19 +724,19 @@ internal class StandardDungeonGenerator : DungeonGenerator
             {
                 y = tmpRow + rowDir;
                 x = tmpCol + colDir;
-                if (SaveGame.Grid[y][x].FeatureType is WallPermentSolidTile)
+                if (Game.Grid[y][x].FeatureType is WallPermentSolidTile)
                 {
                     continue;
                 }
-                if (SaveGame.Grid[y][x].FeatureType is WallPermanentOuterTile)
+                if (Game.Grid[y][x].FeatureType is WallPermanentOuterTile)
                 {
                     continue;
                 }
-                if (SaveGame.Grid[y][x].FeatureType is WallOuterTile)
+                if (Game.Grid[y][x].FeatureType is WallOuterTile)
                 {
                     continue;
                 }
-                if (SaveGame.Grid[y][x].FeatureType is WallSolidTile)
+                if (Game.Grid[y][x].FeatureType is WallSolidTile)
                 {
                     continue;
                 }
@@ -751,9 +751,9 @@ internal class StandardDungeonGenerator : DungeonGenerator
                 {
                     for (x = col1 - 1; x <= col1 + 1; x++)
                     {
-                        if (SaveGame.Grid[y][x].FeatureType is WallOuterTile)
+                        if (Game.Grid[y][x].FeatureType is WallOuterTile)
                         {
-                            SaveGame.Grid[y][x].SetFeature(SaveGame.SingletonRepository.Tiles.Get(nameof(WallSolidTile)));
+                            Game.Grid[y][x].SetFeature(Game.SingletonRepository.Tiles.Get(nameof(WallSolidTile)));
                         }
                     }
                 }
@@ -787,7 +787,7 @@ internal class StandardDungeonGenerator : DungeonGenerator
                     }
                     doorFlag = true;
                 }
-                if (SaveGame.RandomLessThan(100) >= _dunTunCon)
+                if (Game.RandomLessThan(100) >= _dunTunCon)
                 {
                     tmpRow = row1 - startRow;
                     if (tmpRow < 0)
@@ -810,18 +810,18 @@ internal class StandardDungeonGenerator : DungeonGenerator
         {
             y = Tunn[i].Y;
             x = Tunn[i].X;
-            cPtr = SaveGame.Grid[y][x];
+            cPtr = Game.Grid[y][x];
             cPtr.RevertToBackground();
         }
         for (i = 0; i < WallN; i++)
         {
             y = Wall[i].Y;
             x = Wall[i].X;
-            cPtr = SaveGame.Grid[y][x];
+            cPtr = Game.Grid[y][x];
             cPtr.RevertToBackground();
-            if (SaveGame.RandomLessThan(100) < _dunTunPen)
+            if (Game.RandomLessThan(100) < _dunTunPen)
             {
-                SaveGame.PlaceRandomDoor(y, x);
+                Game.PlaceRandomDoor(y, x);
             }
         }
     }
@@ -846,20 +846,20 @@ internal class StandardDungeonGenerator : DungeonGenerator
         Tunn = new GridCoordinate[TunnMax];
 
         // Compute the number of grid blocks for this size of dungeon.
-        RowRooms = SaveGame.CurHgt / _blockHgt;
-        ColRooms = SaveGame.CurWid / _blockWid;
+        RowRooms = Game.CurHgt / _blockHgt;
+        ColRooms = Game.CurWid / _blockWid;
 
         // The dungeon must be large enough to support at least one type-1 room.
-        Type1RoomLayout type1RoomLayout = (Type1RoomLayout)SaveGame.SingletonRepository.RoomLayouts.Get(nameof(Type1RoomLayout));
+        Type1RoomLayout type1RoomLayout = (Type1RoomLayout)Game.SingletonRepository.RoomLayouts.Get(nameof(Type1RoomLayout));
         if (RowRooms < type1RoomLayout.Height)
         {
-            SaveGame.CurHgt = type1RoomLayout.Height * _blockHgt;
-            RowRooms = SaveGame.CurHgt / _blockHgt;
+            Game.CurHgt = type1RoomLayout.Height * _blockHgt;
+            RowRooms = Game.CurHgt / _blockHgt;
         }
         if (ColRooms < type1RoomLayout.Width)
         {
-            SaveGame.CurWid = type1RoomLayout.Width * _blockWid;
-            ColRooms = SaveGame.CurWid / _blockWid;
+            Game.CurWid = type1RoomLayout.Width * _blockWid;
+            ColRooms = Game.CurWid / _blockWid;
         }
 
         // Initialize the grid of rooms to prevent overlapping.
@@ -869,38 +869,38 @@ internal class StandardDungeonGenerator : DungeonGenerator
             RoomMap[i] = new bool[MaxRoomsCol];
         }
 
-        if (SaveGame.MaxPanelRows == 0)
+        if (Game.MaxPanelRows == 0)
         {
             maxVaultOk--;
         }
-        if (SaveGame.MaxPanelCols == 0)
+        if (Game.MaxPanelCols == 0)
         {
             maxVaultOk--;
         }
-        if (SaveGame.DieRoll(_emptyLevel) == 1)
+        if (Game.DieRoll(_emptyLevel) == 1)
         {
             emptyLevel = true;
         }
-        for (y = 0; y < SaveGame.CurHgt; y++)
+        for (y = 0; y < Game.CurHgt; y++)
         {
-            for (x = 0; x < SaveGame.CurWid; x++)
+            for (x = 0; x < Game.CurWid; x++)
             {
-                GridTile cPtr = SaveGame.Grid[y][x];
+                GridTile cPtr = Game.Grid[y][x];
                 if (emptyLevel)
                 {
                     cPtr.RevertToBackground();
                 }
                 else
                 {
-                    cPtr.SetFeature(SaveGame.SingletonRepository.Tiles.Get(nameof(WallBasicTile)));
+                    cPtr.SetFeature(Game.SingletonRepository.Tiles.Get(nameof(WallBasicTile)));
                 }
             }
         }
-        if (SaveGame.Difficulty > 10 && SaveGame.RandomLessThan(_dunDest) == 0)
+        if (Game.Difficulty > 10 && Game.RandomLessThan(_dunDest) == 0)
         {
             destroyed = true;
         }
-        if (SaveGame.IsQuest(SaveGame.CurrentDepth))
+        if (Game.IsQuest(Game.CurrentDepth))
         {
             destroyed = false;
         }
@@ -920,8 +920,8 @@ internal class StandardDungeonGenerator : DungeonGenerator
         {
             roomAttemptCount++;
 
-            y = SaveGame.RandomLessThan(RowRooms);
-            x = SaveGame.RandomLessThan(ColRooms);
+            y = Game.RandomLessThan(RowRooms);
+            x = Game.RandomLessThan(ColRooms);
             if (x % 3 == 0)
             {
                 x++;
@@ -932,21 +932,21 @@ internal class StandardDungeonGenerator : DungeonGenerator
             }
             if (destroyed)
             {
-                if (RoomBuild(y, x, SaveGame.SingletonRepository.RoomLayouts.Get(nameof(Type1RoomLayout)), SaveGame.Difficulty))
+                if (RoomBuild(y, x, Game.SingletonRepository.RoomLayouts.Get(nameof(Type1RoomLayout)), Game.Difficulty))
                 {
                 }
                 continue;
             }
-            if (SaveGame.RandomLessThan(_dunUnusual) < SaveGame.Difficulty)
+            if (Game.RandomLessThan(_dunUnusual) < Game.Difficulty)
             {
-                k = SaveGame.RandomLessThan(100);
-                if (SaveGame.RandomLessThan(_dunUnusual) < SaveGame.Difficulty)
+                k = Game.RandomLessThan(100);
+                if (Game.RandomLessThan(_dunUnusual) < Game.Difficulty)
                 {
                     if (k < 10)
                     {
                         if (maxVaultOk > 1)
                         {
-                            if (RoomBuild(y, x, SaveGame.SingletonRepository.RoomLayouts.Get(nameof(Type8RoomLayout)), SaveGame.Difficulty))
+                            if (RoomBuild(y, x, Game.SingletonRepository.RoomLayouts.Get(nameof(Type8RoomLayout)), Game.Difficulty))
                             {
                                 continue;
                             }
@@ -956,35 +956,35 @@ internal class StandardDungeonGenerator : DungeonGenerator
                     {
                         if (maxVaultOk > 0)
                         {
-                            if (RoomBuild(y, x, SaveGame.SingletonRepository.RoomLayouts.Get(nameof(Type7RoomLayout)), SaveGame.Difficulty))
+                            if (RoomBuild(y, x, Game.SingletonRepository.RoomLayouts.Get(nameof(Type7RoomLayout)), Game.Difficulty))
                             {
                                 continue;
                             }
                         }
                     }
-                    if (k < 40 && RoomBuild(y, x, SaveGame.SingletonRepository.RoomLayouts.Get(nameof(Type5RoomLayout)), SaveGame.Difficulty))
+                    if (k < 40 && RoomBuild(y, x, Game.SingletonRepository.RoomLayouts.Get(nameof(Type5RoomLayout)), Game.Difficulty))
                     {
                         continue;
                     }
-                    if (k < 55 && RoomBuild(y, x, SaveGame.SingletonRepository.RoomLayouts.Get(nameof(Type6RoomLayout)), SaveGame.Difficulty))
+                    if (k < 55 && RoomBuild(y, x, Game.SingletonRepository.RoomLayouts.Get(nameof(Type6RoomLayout)), Game.Difficulty))
                     {
                         continue;
                     }
                 }
-                if (k < 25 && RoomBuild(y, x, SaveGame.SingletonRepository.RoomLayouts.Get(nameof(Type4RoomLayout)), SaveGame.Difficulty))
+                if (k < 25 && RoomBuild(y, x, Game.SingletonRepository.RoomLayouts.Get(nameof(Type4RoomLayout)), Game.Difficulty))
                 {
                     continue;
                 }
-                if (k < 50 && RoomBuild(y, x, SaveGame.SingletonRepository.RoomLayouts.Get(nameof(Type3RoomLayout)), SaveGame.Difficulty))
+                if (k < 50 && RoomBuild(y, x, Game.SingletonRepository.RoomLayouts.Get(nameof(Type3RoomLayout)), Game.Difficulty))
                 {
                     continue;
                 }
-                if (k < 100 && RoomBuild(y, x, SaveGame.SingletonRepository.RoomLayouts.Get(nameof(Type2RoomLayout)), SaveGame.Difficulty))
+                if (k < 100 && RoomBuild(y, x, Game.SingletonRepository.RoomLayouts.Get(nameof(Type2RoomLayout)), Game.Difficulty))
                 {
                     continue;
                 }
             }
-            if (RoomBuild(y, x, SaveGame.SingletonRepository.RoomLayouts.Get(nameof(Type1RoomLayout)), SaveGame.Difficulty))
+            if (RoomBuild(y, x, Game.SingletonRepository.RoomLayouts.Get(nameof(Type1RoomLayout)), Game.Difficulty))
             {
             }
         }
@@ -992,30 +992,30 @@ internal class StandardDungeonGenerator : DungeonGenerator
         {
             CentN = CentN;
         }
-        for (x = 0; x < SaveGame.CurWid; x++)
+        for (x = 0; x < Game.CurWid; x++)
         {
-            GridTile cPtr = SaveGame.Grid[0][x];
-            cPtr.SetFeature(SaveGame.SingletonRepository.Tiles.Get(nameof(WallPermentSolidTile)));
+            GridTile cPtr = Game.Grid[0][x];
+            cPtr.SetFeature(Game.SingletonRepository.Tiles.Get(nameof(WallPermentSolidTile)));
         }
-        for (x = 0; x < SaveGame.CurWid; x++)
+        for (x = 0; x < Game.CurWid; x++)
         {
-            GridTile cPtr = SaveGame.Grid[SaveGame.CurHgt - 1][x];
-            cPtr.SetFeature(SaveGame.SingletonRepository.Tiles.Get(nameof(WallPermentSolidTile)));
+            GridTile cPtr = Game.Grid[Game.CurHgt - 1][x];
+            cPtr.SetFeature(Game.SingletonRepository.Tiles.Get(nameof(WallPermentSolidTile)));
         }
-        for (y = 0; y < SaveGame.CurHgt; y++)
+        for (y = 0; y < Game.CurHgt; y++)
         {
-            GridTile cPtr = SaveGame.Grid[y][0];
-            cPtr.SetFeature(SaveGame.SingletonRepository.Tiles.Get(nameof(WallPermentSolidTile)));
+            GridTile cPtr = Game.Grid[y][0];
+            cPtr.SetFeature(Game.SingletonRepository.Tiles.Get(nameof(WallPermentSolidTile)));
         }
-        for (y = 0; y < SaveGame.CurHgt; y++)
+        for (y = 0; y < Game.CurHgt; y++)
         {
-            GridTile cPtr = SaveGame.Grid[y][SaveGame.CurWid - 1];
-            cPtr.SetFeature(SaveGame.SingletonRepository.Tiles.Get(nameof(WallPermentSolidTile)));
+            GridTile cPtr = Game.Grid[y][Game.CurWid - 1];
+            cPtr.SetFeature(Game.SingletonRepository.Tiles.Get(nameof(WallPermentSolidTile)));
         }
         for (int i = 0; i < CentN; i++)
         {
-            int pick1 = SaveGame.RandomLessThan(CentN);
-            int pick2 = SaveGame.RandomLessThan(CentN);
+            int pick1 = Game.RandomLessThan(CentN);
+            int pick2 = Game.RandomLessThan(CentN);
             int y1 = Cent[pick1].Y;
             int x1 = Cent[pick1].X;
             Cent[pick1] = Cent[pick2].Clone();
@@ -1048,19 +1048,19 @@ internal class StandardDungeonGenerator : DungeonGenerator
         }
         for (int i = 0; i < _dunStrMag; i++)
         {
-            BuildStreamer(SaveGame.SingletonRepository.Tiles.Get(nameof(MagmaTile)), _dunStrMc);
+            BuildStreamer(Game.SingletonRepository.Tiles.Get(nameof(MagmaTile)), _dunStrMc);
         }
         for (int i = 0; i < _dunStrQua; i++)
         {
-            BuildStreamer(SaveGame.SingletonRepository.Tiles.Get(nameof(QuartzTile)), _dunStrQc);
+            BuildStreamer(Game.SingletonRepository.Tiles.Get(nameof(QuartzTile)), _dunStrQc);
         }
         if (destroyed)
         {
             DestroyLevel();
         }
-        if (emptyLevel && (SaveGame.DieRoll(_darkEmpty) != 1 || SaveGame.DieRoll(100) > SaveGame.Difficulty))
+        if (emptyLevel && (Game.DieRoll(_darkEmpty) != 1 || Game.DieRoll(100) > Game.Difficulty))
         {
-            SaveGame.RunScript(nameof(LightScript));
+            Game.RunScript(nameof(LightScript));
         }
     }
 }

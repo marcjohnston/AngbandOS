@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class BuyHouseScript : Script, IScript, IStoreScript
 {
-    private BuyHouseScript(SaveGame saveGame) : base(saveGame) { }
+    private BuyHouseScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the buy house script.  Does not modify any of the store flags.
@@ -28,37 +28,37 @@ internal class BuyHouseScript : Script, IScript, IStoreScript
     public void ExecuteScript()
     {
         int price;
-        if (SaveGame.TownWithHouse != null && SaveGame.TownWithHouse == SaveGame.CurTown)
+        if (Game.TownWithHouse != null && Game.TownWithHouse == Game.CurTown)
         {
-            SaveGame.MsgPrint("You already have the deeds!");
+            Game.MsgPrint("You already have the deeds!");
         }
         else
         {
-            if (!SaveGame.ServiceHaggle(SaveGame.CurTown.HousePrice, out price))
+            if (!Game.ServiceHaggle(Game.CurTown.HousePrice, out price))
             {
-                if (price >= SaveGame.Gold.Value)
+                if (price >= Game.Gold.Value)
                 {
-                    SaveGame.MsgPrint("You do not have the gold!");
+                    Game.MsgPrint("You do not have the gold!");
                 }
                 else
                 {
-                    SaveGame.Gold.Value -= price;
-                    SaveGame.SayComment_1();
-                    SaveGame.PlaySound(SoundEffectEnum.StoreTransaction);
-                    SaveGame.StorePrtGold();
-                    Town? oldHouse = SaveGame.TownWithHouse;
-                    SaveGame.TownWithHouse = SaveGame.CurTown;
+                    Game.Gold.Value -= price;
+                    Game.SayComment_1();
+                    Game.PlaySound(SoundEffectEnum.StoreTransaction);
+                    Game.StorePrtGold();
+                    Town? oldHouse = Game.TownWithHouse;
+                    Game.TownWithHouse = Game.CurTown;
                     if (oldHouse == null)
                     {
-                        SaveGame.MsgPrint("You may move in at once.");
+                        Game.MsgPrint("You may move in at once.");
                     }
                     else
                     {
-                        SaveGame.MsgPrint("I've sold your old house to pay for the removal service.");
-                        SaveGame.MoveHouse(oldHouse, SaveGame.TownWithHouse);
+                        Game.MsgPrint("I've sold your old house to pay for the removal service.");
+                        Game.MoveHouse(oldHouse, Game.TownWithHouse);
                     }
                 }
-                SaveGame.HandleStuff();
+                Game.HandleStuff();
             }
         }
     }

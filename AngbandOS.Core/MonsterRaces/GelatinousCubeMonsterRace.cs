@@ -10,7 +10,7 @@ namespace AngbandOS.Core.MonsterRaces;
 [Serializable]
 internal class GelatinousCubeMonsterRace : MonsterRace
 {
-    protected GelatinousCubeMonsterRace(SaveGame saveGame) : base(saveGame) { }
+    protected GelatinousCubeMonsterRace(Game game) : base(game) { }
 
     protected override string SymbolName => nameof(LowerJSymbol);
     public override ColorEnum Color => ColorEnum.Diamond;

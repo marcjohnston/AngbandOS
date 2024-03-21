@@ -10,9 +10,9 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class BeakedAxePolearmWeaponItemFactory : PolearmWeaponItemFactory
 {
-    private BeakedAxePolearmWeaponItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private BeakedAxePolearmWeaponItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(ForwardSlashSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(ForwardSlashSymbol));
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "Beaked Axe";
 
@@ -25,5 +25,5 @@ internal class BeakedAxePolearmWeaponItemFactory : PolearmWeaponItemFactory
     public override int[] Locale => new int[] { 15, 0, 0, 0 };
     public override bool ShowMods => true;
     public override int Weight => 180;
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

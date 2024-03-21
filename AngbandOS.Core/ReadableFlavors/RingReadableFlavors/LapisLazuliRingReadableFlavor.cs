@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Flavors;
 [Serializable]
 internal class LapisLazuliRingReadableFlavor : RingReadableFlavor
 {
-    private LapisLazuliRingReadableFlavor(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private LapisLazuliRingReadableFlavor(Game game) : base(game) { } // This object is a singleton.
     protected override string SymbolName => nameof(EqualSignSymbol);
     public override ColorEnum Color => ColorEnum.Turquoise;
     public override string Name => "Lapis Lazuli";

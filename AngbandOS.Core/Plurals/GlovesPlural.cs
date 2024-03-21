@@ -3,7 +3,7 @@
 [Serializable]
 internal class GlovesPlural : Plural
 {
-    private GlovesPlural(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private GlovesPlural(Game game) : base(game) { } // This object is a singleton.
 
     public override string Key => "Gloves";
 

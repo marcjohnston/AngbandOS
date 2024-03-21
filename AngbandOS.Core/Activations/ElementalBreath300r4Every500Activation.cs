@@ -13,7 +13,7 @@ namespace AngbandOS.Core.Activations;
 [Serializable]
 internal class ElementalBreath300r4Every500Activation : DirectionalActivation
 {
-    private ElementalBreath300r4Every500Activation(SaveGame saveGame) : base(saveGame) { }
+    private ElementalBreath300r4Every500Activation(Game game) : base(game) { }
     public override int RandomChance => 33;
 
     public override string? PreActivationMessage => ""; // No message is displayed to the player.
@@ -24,7 +24,7 @@ internal class ElementalBreath300r4Every500Activation : DirectionalActivation
 
     protected override bool Activate(int direction)
     {
-        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(MissileProjectile)), direction, 300, -4);
+        Game.FireBall(Game.SingletonRepository.Projectiles.Get(nameof(MissileProjectile)), direction, 300, -4);
         return true;
     }
 

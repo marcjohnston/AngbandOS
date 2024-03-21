@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class MutateBodyScript : Script, IScript
 {
-    private MutateBodyScript(SaveGame saveGame) : base(saveGame) { }
+    private MutateBodyScript(Game game) : base(game) { }
 
     /// <summary>
     /// Gains a mutation.
@@ -18,6 +18,6 @@ internal class MutateBodyScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        SaveGame.RunScript(nameof(GainMutationScript));
+        Game.RunScript(nameof(GainMutationScript));
     }
 }

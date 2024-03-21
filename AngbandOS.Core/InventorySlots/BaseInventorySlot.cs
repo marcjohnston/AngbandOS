@@ -13,10 +13,10 @@ namespace AngbandOS.Core.InventorySlots;
 internal abstract class BaseInventorySlot : IEnumerable<int>, IItemContainer, IGetKey // TODO: Rename to InventorySlot when the enumeration is refactored out of existence
 {
     protected const string alphabet = "abcdefghijklmnopqrstuvwxyz";
-    public SaveGame SaveGame { get; }
-    protected BaseInventorySlot(SaveGame saveGame)
+    public Game Game { get; }
+    protected BaseInventorySlot(Game game)
     {
-        SaveGame = saveGame;
+        Game = game;
     }
 
     /// <summary>
@@ -60,23 +60,23 @@ internal abstract class BaseInventorySlot : IEnumerable<int>, IItemContainer, IG
         if (num != 0)
         {
             oPtr.Count += num;
-            SaveGame.WeightCarried += num * oPtr.Weight;
-            SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
-            SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateManaFlaggedAction)).Set();
-            SaveGame.SingletonRepository.FlaggedActions.Get(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
+            Game.WeightCarried += num * oPtr.Weight;
+            Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
+            Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateManaFlaggedAction)).Set();
+            Game.SingletonRepository.FlaggedActions.Get(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
         }
     }
 
     public virtual void AddItem(Item oPtr) // TODO: this doesn't support the multi-item slots
     {
         int slot = oPtr.Factory.WieldSlot;
-        SaveGame.SetInventoryItem(slot, oPtr);
+        Game.SetInventoryItem(slot, oPtr);
     }
 
     public virtual void RemoveItem(Item oPtr) // TODO: this doesn't support the multi-item slots
     {
         int slot = FindInventorySlot(oPtr);
-        SaveGame.SetInventoryItem(slot, null);
+        Game.SetInventoryItem(slot, null);
     }
 
     /// <summary>
@@ -92,17 +92,17 @@ internal abstract class BaseInventorySlot : IEnumerable<int>, IItemContainer, IG
     public virtual void ItemDescribe(Item oPtr)
     {
         string oName = oPtr.Description(true, 3);
-        SaveGame.MsgPrint($"You have {oName}.");
+        Game.MsgPrint($"You have {oName}.");
     }
 
     [Obsolete("Use InventorySlot.Items WIP")]
     protected int FindInventorySlot(Item oPtr)
     {
-        foreach (BaseInventorySlot inventorySlot in SaveGame.SingletonRepository.InventorySlots)
+        foreach (BaseInventorySlot inventorySlot in Game.SingletonRepository.InventorySlots)
         {
             foreach (int slot in inventorySlot.InventorySlots)
             {
-                if (SaveGame.GetInventoryItem(slot) == oPtr)
+                if (Game.GetInventoryItem(slot) == oPtr)
                 {
                     return slot;
                 }
@@ -139,10 +139,10 @@ internal abstract class BaseInventorySlot : IEnumerable<int>, IItemContainer, IG
     /// <summary>
     /// Returns a new mana value after the inventory items performs its effect.  By default, the initial mana amount is returned, with no change.
     /// </summary>
-    /// <param name="saveGame"></param>
+    /// <param name="game"></param>
     /// <param name="msp">The total amount of mana.</param>
     /// <returns></returns>
-    public virtual int CalcMana(SaveGame saveGame, int msp)
+    public virtual int CalcMana(Game game, int msp)
     {
         return msp;
     }
@@ -152,7 +152,7 @@ internal abstract class BaseInventorySlot : IEnumerable<int>, IItemContainer, IG
     /// <summary>
     /// Returns a weighted random chooser for an item in the slot.  Each item has an equal weight.
     /// </summary>
-    public WeightedRandom<int> WeightedRandom => new WeightedRandom<int>(SaveGame, InventorySlots);
+    public WeightedRandom<int> WeightedRandom => new WeightedRandom<int>(Game, InventorySlots);
 
     /// <summary>
     /// Returns true, if the inventory slot provides light; false, otherwise.  Returns false, by default.
@@ -252,7 +252,7 @@ internal abstract class BaseInventorySlot : IEnumerable<int>, IItemContainer, IG
             int count = 0;
             foreach (int index in InventorySlots)
             {
-                if (SaveGame.GetInventoryItem(index) != null)
+                if (Game.GetInventoryItem(index) != null)
                 {
                     count++;
                 }

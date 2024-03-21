@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class DispelEvil4xScript : Script, ISuccessfulScriptInt, IScriptInt, IScript
 {
-    private DispelEvil4xScript(SaveGame saveGame) : base(saveGame) { }
+    private DispelEvil4xScript(Game game) : base(game) { }
 
     /// <summary>
     /// Projects dispel evil at all monsters in the players line-of-sight and return true, if the project actually hits and affects a monster; false, otherwise.
@@ -18,7 +18,7 @@ internal class DispelEvil4xScript : Script, ISuccessfulScriptInt, IScriptInt, IS
     /// <returns></returns>
     public bool ExecuteSuccessfulScriptInt(int dam)
     {
-        return SaveGame.ProjectAtAllInLos(SaveGame.SingletonRepository.Projectiles.Get(nameof(DispEvilProjectile)), dam);
+        return Game.ProjectAtAllInLos(Game.SingletonRepository.Projectiles.Get(nameof(DispEvilProjectile)), dam);
     }
 
     /// <summary>
@@ -35,6 +35,6 @@ internal class DispelEvil4xScript : Script, ISuccessfulScriptInt, IScriptInt, IS
     /// </summary>
     public void ExecuteScript()
     {
-        ExecuteScriptInt(SaveGame.ExperienceLevel.Value * 4);
+        ExecuteScriptInt(Game.ExperienceLevel.Value * 4);
     }
 }

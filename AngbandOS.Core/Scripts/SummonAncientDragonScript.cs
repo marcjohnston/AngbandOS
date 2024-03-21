@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class SummonAncientDragonScript : Script, IScript
 {
-    private SummonAncientDragonScript(SaveGame saveGame) : base(saveGame) { }
+    private SummonAncientDragonScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script.
@@ -18,21 +18,21 @@ internal class SummonAncientDragonScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        SaveGame.MsgPrint("You concentrate on the image of an ancient dragon...");
-        if (SaveGame.DieRoll(10) > 3)
+        Game.MsgPrint("You concentrate on the image of an ancient dragon...");
+        if (Game.DieRoll(10) > 3)
         {
-            if (!SaveGame.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel.Value, SaveGame.SingletonRepository.MonsterFilters.Get(nameof(HiDragonNoUniquesMonsterFilter)), true))
+            if (!Game.SummonSpecificFriendly(Game.MapY, Game.MapX, Game.ExperienceLevel.Value, Game.SingletonRepository.MonsterFilters.Get(nameof(HiDragonNoUniquesMonsterFilter)), true))
             {
-                SaveGame.MsgPrint("No-one ever turns up.");
+                Game.MsgPrint("No-one ever turns up.");
             }
         }
-        else if (SaveGame.SummonSpecific(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel.Value, SaveGame.SingletonRepository.MonsterFilters.Get(nameof(HiDragonNoUniquesMonsterFilter))))
+        else if (Game.SummonSpecific(Game.MapY, Game.MapX, Game.ExperienceLevel.Value, Game.SingletonRepository.MonsterFilters.Get(nameof(HiDragonNoUniquesMonsterFilter))))
         {
-            SaveGame.MsgPrint("The summoned dragon gets angry!");
+            Game.MsgPrint("The summoned dragon gets angry!");
         }
         else
         {
-            SaveGame.MsgPrint("No-one ever turns up.");
+            Game.MsgPrint("No-one ever turns up.");
         }
     }
 }

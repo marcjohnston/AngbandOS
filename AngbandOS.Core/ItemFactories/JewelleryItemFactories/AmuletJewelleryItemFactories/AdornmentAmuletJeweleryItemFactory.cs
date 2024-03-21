@@ -10,9 +10,9 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class AdornmentAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
 {
-    private AdornmentAmuletJeweleryItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private AdornmentAmuletJeweleryItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(DoubleQuoteSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(DoubleQuoteSymbol));
     public override string Name => "Adornment";
 
     public override int[] Chance => new int[] { 1, 0, 0, 0 };
@@ -22,5 +22,5 @@ internal class AdornmentAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
     public override int LevelNormallyFound => 15;
     public override int[] Locale => new int[] { 15, 0, 0, 0 };
     public override int Weight => 3;
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

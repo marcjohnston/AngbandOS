@@ -10,11 +10,11 @@ namespace AngbandOS.Core.Projection;
 [Serializable]
 internal class StunProjectile : Projectile
 {
-    private StunProjectile(SaveGame saveGame) : base(saveGame) { }
+    private StunProjectile(Game game) : base(game) { }
 
-    protected override ProjectileGraphic? BoltProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get(nameof(GoldBoltProjectileGraphic));
+    protected override ProjectileGraphic? BoltProjectileGraphic => Game.SingletonRepository.ProjectileGraphics.Get(nameof(GoldBoltProjectileGraphic));
 
-    protected override ProjectileGraphic? ImpactProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get(nameof(GoldSplatProjectileGraphic));
+    protected override ProjectileGraphic? ImpactProjectileGraphic => Game.SingletonRepository.ProjectileGraphics.Get(nameof(GoldSplatProjectileGraphic));
 
     protected override bool AffectMonster(int who, Monster mPtr, int dam, int r)
     {
@@ -26,9 +26,9 @@ internal class StunProjectile : Projectile
         {
             obvious = true;
         }
-        int doStun = SaveGame.DiceRoll((SaveGame.ExperienceLevel.Value / 10) + 3, dam) + 1;
+        int doStun = Game.DiceRoll((Game.ExperienceLevel.Value / 10) + 3, dam) + 1;
         if (rPtr.Unique ||
-            rPtr.Level > SaveGame.DieRoll(dam - 10 < 1 ? 1 : dam - 10) + 10)
+            rPtr.Level > Game.DieRoll(dam - 10 < 1 ? 1 : dam - 10) + 10)
         {
             doStun = 0;
             note = " is unaffected!";

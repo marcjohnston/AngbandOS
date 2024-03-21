@@ -13,7 +13,7 @@ namespace AngbandOS.Core.Activations;
 [Serializable]
 internal class BrandBoltsEvery999Activation : Activation
 {
-    private BrandBoltsEvery999Activation(SaveGame saveGame) : base(saveGame) { }
+    private BrandBoltsEvery999Activation(Game game) : base(game) { }
 
     public override int RandomChance => 5;
 
@@ -21,7 +21,7 @@ internal class BrandBoltsEvery999Activation : Activation
 
     protected override bool OnActivate(Item item)
     {
-        return SaveGame.RunCancellableScript(nameof(BrandBoltsScript));
+        return Game.RunCancellableScript(nameof(BrandBoltsScript));
     }
 
     public override int RechargeTime() => 999;

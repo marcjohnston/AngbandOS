@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class AugmentScript : Script, INoticeableScript
 {
-    private AugmentScript(SaveGame saveGame) : base(saveGame) { }
+    private AugmentScript(Game game) : base(game) { }
 
     /// <summary>
     /// Augments all ability scores and returns true, if any ability score was increased; false, otherwise.
@@ -21,27 +21,27 @@ internal class AugmentScript : Script, INoticeableScript
         bool identified = false;
 
         // Augmentation increases all ability scores
-        if (SaveGame.TryIncreasingAbilityScore(Ability.Strength))
+        if (Game.TryIncreasingAbilityScore(Ability.Strength))
         {
             identified = true;
         }
-        if (SaveGame.TryIncreasingAbilityScore(Ability.Intelligence))
+        if (Game.TryIncreasingAbilityScore(Ability.Intelligence))
         {
             identified = true;
         }
-        if (SaveGame.TryIncreasingAbilityScore(Ability.Wisdom))
+        if (Game.TryIncreasingAbilityScore(Ability.Wisdom))
         {
             identified = true;
         }
-        if (SaveGame.TryIncreasingAbilityScore(Ability.Dexterity))
+        if (Game.TryIncreasingAbilityScore(Ability.Dexterity))
         {
             identified = true;
         }
-        if (SaveGame.TryIncreasingAbilityScore(Ability.Constitution))
+        if (Game.TryIncreasingAbilityScore(Ability.Constitution))
         {
             identified = true;
         }
-        if (SaveGame.TryIncreasingAbilityScore(Ability.Charisma))
+        if (Game.TryIncreasingAbilityScore(Ability.Charisma))
         {
             identified = true;
         }

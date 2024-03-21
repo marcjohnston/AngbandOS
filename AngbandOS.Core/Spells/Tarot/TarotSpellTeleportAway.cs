@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Spells.Tarot;
 [Serializable]
 internal class TarotSpellTeleportAway : Spell
 {
-    private TarotSpellTeleportAway(SaveGame saveGame) : base(saveGame) { }
+    private TarotSpellTeleportAway(Game game) : base(game) { }
     protected override string? CastScriptName => nameof(TeleportOtherScript);
 
     public override string Name => "Teleport Away";

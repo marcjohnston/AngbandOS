@@ -10,7 +10,7 @@ namespace AngbandOS.Core.StoreCommands;
 [Serializable]
 internal class RemoveCurseStoreCommand : StoreCommand
 {
-    private RemoveCurseStoreCommand(SaveGame saveGame) : base(saveGame) { }
+    private RemoveCurseStoreCommand(Game game) : base(game) { }
     public override char KeyChar => 'r';
 
     public override string Description => "buy Remove Curse";

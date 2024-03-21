@@ -10,7 +10,7 @@ namespace AngbandOS.Core.MonsterRaces;
 [Serializable]
 internal class DraconicQuylthulgMonsterRace : MonsterRace
 {
-    protected DraconicQuylthulgMonsterRace(SaveGame saveGame) : base(saveGame) { }
+    protected DraconicQuylthulgMonsterRace(Game game) : base(game) { }
 
     protected override string[]? SpellNames =>new string[] {
         nameof(BlinkMonsterSpell),

@@ -15,7 +15,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class AlchemyScript : Script, IScript, ICancellableScript
 {
-    private AlchemyScript(SaveGame saveGame) : base(saveGame) { }
+    private AlchemyScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script returning false, if the player cancels the selection or confirmation dialog; true, otherwise.
@@ -24,10 +24,10 @@ internal class AlchemyScript : Script, IScript, ICancellableScript
     public bool ExecuteCancellableScript()
     {
         int amt = 1;
-        bool force = SaveGame.CommandArgument > 0;
-        if (!SaveGame.SelectItem(out Item? oPtr, "Turn which item to gold? ", false, true, true, null))
+        bool force = Game.CommandArgument > 0;
+        if (!Game.SelectItem(out Item? oPtr, "Turn which item to gold? ", false, true, true, null))
         {
-            SaveGame.MsgPrint("You have nothing to turn to gold.");
+            Game.MsgPrint("You have nothing to turn to gold.");
             return false;
         }
         if (oPtr == null)
@@ -36,7 +36,7 @@ internal class AlchemyScript : Script, IScript, ICancellableScript
         }
         if (oPtr.Count > 1)
         {
-            amt = SaveGame.GetQuantity(null, oPtr.Count, true);
+            amt = Game.GetQuantity(null, oPtr.Count, true);
             if (amt <= 0)
             {
                 return false;
@@ -51,7 +51,7 @@ internal class AlchemyScript : Script, IScript, ICancellableScript
             if (!(oPtr.Value() < 1))
             {
                 string outVal = $"Really turn {oName} to gold? ";
-                if (!SaveGame.GetCheck(outVal))
+                if (!Game.GetCheck(outVal))
                 {
                     return false;
                 }
@@ -60,20 +60,20 @@ internal class AlchemyScript : Script, IScript, ICancellableScript
         if (oPtr.IsArtifact)
         {
             string feel = "special";
-            SaveGame.MsgPrint($"You fail to turn {oName} to gold!");
+            Game.MsgPrint($"You fail to turn {oName} to gold!");
             if (oPtr.IsCursed() || oPtr.IsBroken())
             {
                 feel = "terrible";
             }
             oPtr.Inscription = feel;
             oPtr.IdentSense = true;
-            SaveGame.SingletonRepository.FlaggedActions.Get(nameof(NoticeCombineFlaggedAction)).Set();
+            Game.SingletonRepository.FlaggedActions.Get(nameof(NoticeCombineFlaggedAction)).Set();
             return true;
         }
         int price = oPtr.RealValue();
         if (price <= 0)
         {
-            SaveGame.MsgPrint($"You turn {oName} to fool's gold.");
+            Game.MsgPrint($"You turn {oName} to fool's gold.");
         }
         else
         {
@@ -86,8 +86,8 @@ internal class AlchemyScript : Script, IScript, ICancellableScript
             {
                 price = 30000;
             }
-            SaveGame.MsgPrint($"You turn {oName} to {price} coins worth of gold.");
-            SaveGame.Gold.Value += price;
+            Game.MsgPrint($"You turn {oName} to {price} coins worth of gold.");
+            Game.Gold.Value += price;
         }
         oPtr.ItemIncrease(-amt);
         oPtr.ItemDescribe();

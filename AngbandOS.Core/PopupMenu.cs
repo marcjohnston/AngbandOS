@@ -34,38 +34,38 @@ internal class PopupMenu
         }
     }
 
-    public int DisplayMenu(SaveGame saveGame)
+    public int DisplayMenu(Game game)
     {
-        var top = saveGame.Screen.Height / 2 - (_items.Count + _text.Count) / 2;
-        var left = saveGame.Screen.Width / 2 - _menuWidth / 2;
+        var top = game.Screen.Height / 2 - (_items.Count + _text.Count) / 2;
+        var left = game.Screen.Width / 2 - _menuWidth / 2;
         var topBottomBorder = "+" + new string('-', _menuWidth) + "+";
         var leftRightBorder = "|" + new string(' ', _menuWidth) + "|";
         var chosenItem = 0;
-        saveGame.Screen.Print(ColorEnum.White, topBottomBorder, top, left);
+        game.Screen.Print(ColorEnum.White, topBottomBorder, top, left);
         for (int i = 0; i < _text.Count + _items.Count; i++)
         {
-            saveGame.Screen.Print(ColorEnum.White, leftRightBorder, top + i + 1, left);
+            game.Screen.Print(ColorEnum.White, leftRightBorder, top + i + 1, left);
         }
-        saveGame.Screen.Print(ColorEnum.White, topBottomBorder, top + _items.Count + _text.Count + 1, left);
+        game.Screen.Print(ColorEnum.White, topBottomBorder, top + _items.Count + _text.Count + 1, left);
         for (int i = 0; i < _text.Count; i++)
         {
-            saveGame.Screen.Print(ColorEnum.White, _text[i], top + i + 1, left + 1);
+            game.Screen.Print(ColorEnum.White, _text[i], top + i + 1, left + 1);
         }
-        while (!saveGame.Shutdown)
+        while (!game.Shutdown)
         {
             for (int i = 0; i < _items.Count; i++)
             {
                 if (i == chosenItem)
                 {
-                    saveGame.Screen.Print(ColorEnum.BrightPurple, _chosenItems[i], top + _text.Count + i + 1, left + 1);
+                    game.Screen.Print(ColorEnum.BrightPurple, _chosenItems[i], top + _text.Count + i + 1, left + 1);
                 }
                 else
                 {
-                    saveGame.Screen.Print(ColorEnum.White, _items[i], top + _text.Count + i + 1, left + 1);
+                    game.Screen.Print(ColorEnum.White, _items[i], top + _text.Count + i + 1, left + 1);
                 }
             }
-            saveGame.HideCursorOnFullScreenInkey = true;
-            char k = saveGame.Inkey();
+            game.HideCursorOnFullScreenInkey = true;
+            char k = game.Inkey();
 
             switch (k)
             {
@@ -96,15 +96,15 @@ internal class PopupMenu
         return -1;
     }
 
-    public int Show(SaveGame saveGame)
+    public int Show(Game game)
     {
-        saveGame.InPopupMenu = true;
-        saveGame.FullScreenOverlay = true;
-        ScreenBuffer savedScreen = saveGame.Screen.Clone();
-        var result = DisplayMenu(saveGame);
-        saveGame.Screen.Restore(savedScreen);
-        saveGame.InPopupMenu = false;
-        saveGame.FullScreenOverlay = false;
+        game.InPopupMenu = true;
+        game.FullScreenOverlay = true;
+        ScreenBuffer savedScreen = game.Screen.Clone();
+        var result = DisplayMenu(game);
+        game.Screen.Restore(savedScreen);
+        game.InPopupMenu = false;
+        game.FullScreenOverlay = false;
         return result;
     }
 }

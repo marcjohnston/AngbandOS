@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class ExamineStoreItemScript : Script, IStoreScript
 {
-    private ExamineStoreItemScript(SaveGame saveGame) : base(saveGame) { }
+    private ExamineStoreItemScript(Game game) : base(game) { }
 
     /// <summary>
     /// Allows the selection of an item in the store and renders a detailed description of the item.  Does not modify any of the store flags.
@@ -20,7 +20,7 @@ internal class ExamineStoreItemScript : Script, IStoreScript
     {
         if (storeCommandEvent.Store.StoreInventoryList.Count <= 0)
         {
-            SaveGame.MsgPrint(storeCommandEvent.Store.StoreFactory.NoStockMessage);
+            Game.MsgPrint(storeCommandEvent.Store.StoreFactory.NoStockMessage);
             return;
         }
         int i = storeCommandEvent.Store.StoreInventoryList.Count - storeCommandEvent.Store.StoreTop;
@@ -38,37 +38,37 @@ internal class ExamineStoreItemScript : Script, IStoreScript
         BookItemFactory? bookItemFactory = oPtr.TryGetFactory<BookItemFactory>();
         if (bookItemFactory != null)
         {
-            if (SaveGame.SingletonRepository.ItemFilters.Get(nameof(IsUsableSpellBookItemFilter)).ItemMatches(oPtr))
+            if (Game.SingletonRepository.ItemFilters.Get(nameof(IsUsableSpellBookItemFilter)).ItemMatches(oPtr))
             {
                 DoStoreBrowse(oPtr);
             }
             else
             {
-                SaveGame.MsgPrint("The spells in the book are unintelligible to you.");
+                Game.MsgPrint("The spells in the book are unintelligible to you.");
                 return;
             }
         }
         if (!oPtr.IdentMental)
         {
-            SaveGame.MsgPrint("You have no special knowledge about that item.");
+            Game.MsgPrint("You have no special knowledge about that item.");
             return;
         }
         string oName = oPtr.Description(true, 3);
-        SaveGame.MsgPrint($"Examining {oName}...");
+        Game.MsgPrint($"Examining {oName}...");
         if (!oPtr.IdentifyFully())
         {
-            SaveGame.MsgPrint("You see nothing special.");
+            Game.MsgPrint("You see nothing special.");
         }
     }
 
     private void DoStoreBrowse(Item oPtr)
     {
-        ScreenBuffer savedScreen = SaveGame.Screen.Clone();
+        ScreenBuffer savedScreen = Game.Screen.Clone();
         BookItemFactory book = (BookItemFactory)oPtr.Factory;
-        SaveGame.PrintSpells(book.Spells.ToArray(), 1, 20);
-        SaveGame.MsgClear();
-        SaveGame.Screen.Print("[Press any key to continue]", 0, 23);
-        SaveGame.Inkey();
-        SaveGame.Screen.Restore(savedScreen);
+        Game.PrintSpells(book.Spells.ToArray(), 1, 20);
+        Game.MsgClear();
+        Game.Screen.Print("[Press any key to continue]", 0, 23);
+        Game.Inkey();
+        Game.Screen.Restore(savedScreen);
     }
 }

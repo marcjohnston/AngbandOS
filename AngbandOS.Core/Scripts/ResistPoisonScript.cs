@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class ResistPoisonScript : Script, IScript
 {
-    private ResistPoisonScript(SaveGame saveGame) : base(saveGame) { }
+    private ResistPoisonScript(Game game) : base(game) { }
 
     /// <summary>
     /// Adds between 20 and 40 turns of resist poison.
@@ -18,6 +18,6 @@ internal class ResistPoisonScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        SaveGame.PoisonResistanceTimer.AddTimer(SaveGame.DieRoll(20) + 20);
+        Game.PoisonResistanceTimer.AddTimer(Game.DieRoll(20) + 20);
     }
 }

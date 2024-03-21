@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class BlindingGasScript : Script, IScript
 {
-    private BlindingGasScript(SaveGame saveGame) : base(saveGame) { }
+    private BlindingGasScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script.
@@ -19,10 +19,10 @@ internal class BlindingGasScript : Script, IScript
     public void ExecuteScript()
     {
         // Blind the player
-        SaveGame.MsgPrint("A black gas surrounds you!");
-        if (!SaveGame.HasBlindnessResistance)
+        Game.MsgPrint("A black gas surrounds you!");
+        if (!Game.HasBlindnessResistance)
         {
-            SaveGame.BlindnessTimer.AddTimer(SaveGame.RandomLessThan(50) + 25);
+            Game.BlindnessTimer.AddTimer(Game.RandomLessThan(50) + 25);
         }
     }
 }

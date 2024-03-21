@@ -10,7 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class SetOfGauntletsOfThanosFixedArtifact : FixedArtifact
 {
-    private SetOfGauntletsOfThanosFixedArtifact(SaveGame saveGame) : base(saveGame) { }
+    private SetOfGauntletsOfThanosFixedArtifact(Game game) : base(game) { }
 
     protected override string BaseItemFactoryName => nameof(GauntletGlovesArmorItemFactory);
 

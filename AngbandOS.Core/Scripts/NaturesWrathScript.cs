@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class NaturesWrathScript : Script, IScript
 {
-    private NaturesWrathScript(SaveGame saveGame) : base(saveGame) { }
+    private NaturesWrathScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script.
@@ -18,8 +18,8 @@ internal class NaturesWrathScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        SaveGame.DispelMonsters(SaveGame.ExperienceLevel.Value * 4);
-        SaveGame.Earthquake(SaveGame.MapY, SaveGame.MapX, 20 + (SaveGame.ExperienceLevel.Value / 2));
-        SaveGame.Project(0, 1 + (SaveGame.ExperienceLevel.Value / 12), SaveGame.MapY, SaveGame.MapX, 100 + SaveGame.ExperienceLevel.Value, SaveGame.SingletonRepository.Projectiles.Get(nameof(DisintegrateProjectile)), ProjectionFlag.ProjectKill | ProjectionFlag.ProjectItem);
+        Game.DispelMonsters(Game.ExperienceLevel.Value * 4);
+        Game.Earthquake(Game.MapY, Game.MapX, 20 + (Game.ExperienceLevel.Value / 2));
+        Game.Project(0, 1 + (Game.ExperienceLevel.Value / 12), Game.MapY, Game.MapX, 100 + Game.ExperienceLevel.Value, Game.SingletonRepository.Projectiles.Get(nameof(DisintegrateProjectile)), ProjectionFlag.ProjectKill | ProjectionFlag.ProjectItem);
     }
 }

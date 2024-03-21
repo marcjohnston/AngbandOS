@@ -10,19 +10,19 @@ namespace AngbandOS.Core.Mutations.ActiveMutations;
 [Serializable]
 internal class DetCurseActiveMutation : Mutation
 {
-    private DetCurseActiveMutation(SaveGame saveGame) : base(saveGame) { }
+    private DetCurseActiveMutation(Game game) : base(game) { }
     public override void Activate()
     {
-        if (!SaveGame.CheckIfRacialPowerWorks(7, 14, Ability.Wisdom, 14))
+        if (!Game.CheckIfRacialPowerWorks(7, 14, Ability.Wisdom, 14))
         {
             return;
         }
 
-        foreach (BaseInventorySlot inventorySlot in SaveGame.SingletonRepository.InventorySlots)
+        foreach (BaseInventorySlot inventorySlot in Game.SingletonRepository.InventorySlots)
         {
             foreach (int slot in inventorySlot.InventorySlots)
             {
-                Item? oPtr = SaveGame.GetInventoryItem(slot);
+                Item? oPtr = Game.GetInventoryItem(slot);
                 if (oPtr != null && oPtr.IsCursed())
                 {
                     oPtr.Inscription = "cursed";

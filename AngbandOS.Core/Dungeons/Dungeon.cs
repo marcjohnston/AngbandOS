@@ -14,14 +14,14 @@ namespace AngbandOS.Core.Dungeons;
 [Serializable]
 internal abstract class Dungeon : IGetKey
 {
-    protected readonly SaveGame SaveGame;
+    protected readonly Game Game;
 
     /// <summary>
     /// Create the dungeon
     /// </summary>
-    protected Dungeon(SaveGame saveGame)
+    protected Dungeon(Game game)
     {
-        SaveGame = saveGame;
+        Game = game;
         Offset = BaseOffset;
     }
 
@@ -32,7 +32,7 @@ internal abstract class Dungeon : IGetKey
     {
         if (BiasMonsterFilterName != null)
         {
-            BiasMonsterFilter = SaveGame.SingletonRepository.MonsterFilters.Get(BiasMonsterFilterName);
+            BiasMonsterFilter = Game.SingletonRepository.MonsterFilters.Get(BiasMonsterFilterName);
         }
 
         List<DungeonGuardian> dungeonGuardianList = new List<DungeonGuardian>();
@@ -40,7 +40,7 @@ internal abstract class Dungeon : IGetKey
         {
             foreach (string dungeonGuardianName in DungeonGuardianNames)
             {
-                dungeonGuardianList.Add(SaveGame.SingletonRepository.DungeonGuardians.Get(dungeonGuardianName));
+                dungeonGuardianList.Add(Game.SingletonRepository.DungeonGuardians.Get(dungeonGuardianName));
             }
         }
         DungeonGuardians = dungeonGuardianList.ToArray();
@@ -136,9 +136,9 @@ internal abstract class Dungeon : IGetKey
     public int ActiveQuestCount()
     {
         int activeQuestCount = 0;
-        for (int i = 0; i < SaveGame.Quests.Count; i++)
+        for (int i = 0; i < Game.Quests.Count; i++)
         {
-            if (SaveGame.Quests[i].IsActive && SaveGame.Quests[i].Dungeon == this)
+            if (Game.Quests[i].IsActive && Game.Quests[i].Dungeon == this)
             {
                 activeQuestCount++;
             }
@@ -150,9 +150,9 @@ internal abstract class Dungeon : IGetKey
     {
         int lev = -1;
         int first = -1;
-        for (int i = 0; i < SaveGame.Quests.Count; i++)
+        for (int i = 0; i < Game.Quests.Count; i++)
         {
-            Quest q = SaveGame.Quests[i];
+            Quest q = Game.Quests[i];
             if (q.Level > 0 && q.Dungeon == this)
             {
                 if (first == -1 || q.Level < lev)
@@ -173,9 +173,9 @@ internal abstract class Dungeon : IGetKey
         // Maximum offset is the dungeon's base offset or 10, whichever is less (but since we're
         // using 'less than', we add one to both values here)
         int range = Math.Min((BaseOffset + 1), 11);
-        int offsetChange = SaveGame.RandomLessThan(range);
+        int offsetChange = Game.RandomLessThan(range);
         // Dungeons are equally likely to be more or less difficult
-        if (SaveGame.DieRoll(6) >= 4)
+        if (Game.DieRoll(6) >= 4)
         {
             Offset = BaseOffset + offsetChange;
         }

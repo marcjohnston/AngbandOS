@@ -8,7 +8,7 @@
 [Serializable]
 internal class FeatherwingShopkeeper : Shopkeeper
 {
-    private FeatherwingShopkeeper(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private FeatherwingShopkeeper(Game game) : base(game) { } // This object is a singleton.
     public override string Name => "Featherwing";
     public override int MaxCost =>  5000;
     public override int MinInflate =>  100;

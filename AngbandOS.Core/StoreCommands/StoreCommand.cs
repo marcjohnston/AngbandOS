@@ -12,10 +12,10 @@ namespace AngbandOS.Core.StoreCommands;
 [Serializable]
 internal abstract class StoreCommand : IGetKey, IToJson
 {
-    protected SaveGame SaveGame { get; }
-    protected StoreCommand(SaveGame saveGame)
+    protected Game Game { get; }
+    protected StoreCommand(Game game)
     {
-        SaveGame = saveGame;
+        Game = game;
     }
 
     public virtual string Key => GetType().Name;
@@ -37,7 +37,7 @@ internal abstract class StoreCommand : IGetKey, IToJson
     public void Bind()
     {
         // Get the script from the singleton repository.
-        ExecuteScript = ExecuteScriptName == null ? null : (IStoreScript)SaveGame.SingletonRepository.Scripts.Get(ExecuteScriptName);
+        ExecuteScript = ExecuteScriptName == null ? null : (IStoreScript)Game.SingletonRepository.Scripts.Get(ExecuteScriptName);
 
         if (ValidStoreFactoryNames == null)
         {
@@ -48,7 +48,7 @@ internal abstract class StoreCommand : IGetKey, IToJson
             List<StoreFactory> storeFactoryList = new();
             foreach (string storeName in ValidStoreFactoryNames)
             {
-                storeFactoryList.Add(SaveGame.SingletonRepository.StoreFactories.Get(storeName));
+                storeFactoryList.Add(Game.SingletonRepository.StoreFactories.Get(storeName));
             }
             ValidStoreFactories = storeFactoryList.ToArray();
         }

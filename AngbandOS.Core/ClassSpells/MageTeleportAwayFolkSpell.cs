@@ -10,7 +10,7 @@ namespace AngbandOS.Core.ClassSpells;
 [Serializable]
 internal class MageTeleportAwayFolkSpell : ClassSpell
 {
-    private MageTeleportAwayFolkSpell(SaveGame saveGame) : base(saveGame) { }
+    private MageTeleportAwayFolkSpell(Game game) : base(game) { }
     public override string SpellName => nameof(FolkSpellTeleportAway);
     public override string CharacterClassName => nameof(MageCharacterClass);
     public override int Level => 40;

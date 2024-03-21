@@ -10,9 +10,9 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class SlownessPotionItemFactory : PotionItemFactory
 {
-    private SlownessPotionItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private SlownessPotionItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(ExclamationPointSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(ExclamationPointSymbol));
     public override string Name => "Slowness";
 
     public override int[] Chance => new int[] { 1, 0, 0, 0 };
@@ -27,13 +27,13 @@ internal class SlownessPotionItemFactory : PotionItemFactory
     public override bool Quaff()
     {
         // Slowness slows you down.
-        return SaveGame.SlowTimer.AddTimer(SaveGame.DieRoll(25) + 15);
+        return Game.SlowTimer.AddTimer(Game.DieRoll(25) + 15);
     }
 
     public override bool Smash(int who, int y, int x)
     {
-        SaveGame.Project(who, 2, y, x, 5, SaveGame.SingletonRepository.Projectiles.Get(nameof(OldSlowProjectile)), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
+        Game.Project(who, 2, y, x, 5, Game.SingletonRepository.Projectiles.Get(nameof(OldSlowProjectile)), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
         return true;
     }
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

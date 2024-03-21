@@ -10,7 +10,7 @@ namespace AngbandOS.Core.MonsterRaces;
 [Serializable]
 internal class TimeElementalMonsterRace : MonsterRace
 {
-    protected TimeElementalMonsterRace(SaveGame saveGame) : base(saveGame) { }
+    protected TimeElementalMonsterRace(Game game) : base(game) { }
 
     protected override string[]? SpellNames =>new string[] {
         nameof(BreatheTimeMonsterSpell),

@@ -10,7 +10,7 @@ namespace AngbandOS.Core.DungeonGuardians;
 [Serializable]
 internal class BoldorKingOfTheYeeksDungeonGuardian : DungeonGuardian
 {
-    private BoldorKingOfTheYeeksDungeonGuardian(SaveGame saveGame) : base(saveGame) { } // This object is a singleton
+    private BoldorKingOfTheYeeksDungeonGuardian(Game game) : base(game) { } // This object is a singleton
     protected override string MonsterRaceName => nameof(BoldorKingOfTheYeeksMonsterRace);
     public override int LevelFound => 8;
 }

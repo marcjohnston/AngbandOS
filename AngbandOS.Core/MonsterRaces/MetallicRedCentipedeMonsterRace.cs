@@ -10,7 +10,7 @@ namespace AngbandOS.Core.MonsterRaces;
 [Serializable]
 internal class MetallicRedCentipedeMonsterRace : MonsterRace
 {
-    protected MetallicRedCentipedeMonsterRace(SaveGame saveGame) : base(saveGame) { }
+    protected MetallicRedCentipedeMonsterRace(Game game) : base(game) { }
 
     protected override string SymbolName => nameof(LowerCSymbol);
     public override ColorEnum Color => ColorEnum.BrightRed;

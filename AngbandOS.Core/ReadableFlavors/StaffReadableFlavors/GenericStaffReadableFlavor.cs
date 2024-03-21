@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Flavors;
 [Serializable]
 internal class GenericStaffReadableFlavor : StaffReadableFlavor
 {
-    public GenericStaffReadableFlavor(SaveGame saveGame, ReadableFlavorDefinition readableFlavorDefninition) : base(saveGame)
+    public GenericStaffReadableFlavor(Game game, ReadableFlavorDefinition readableFlavorDefninition) : base(game)
     {
         Key = readableFlavorDefninition.Key;
         Name = readableFlavorDefninition.Name;

@@ -9,7 +9,7 @@ namespace AngbandOS.Core.Dungeons;
 [Serializable]
 internal class VaultDungeon : Dungeon
 {
-    private VaultDungeon(SaveGame saveGame) : base(saveGame) { }
+    private VaultDungeon(Game game) : base(game) { }
     public override int BaseOffset => 10;
     public override int MaxLevel => 30;
     protected override string[]? DungeonGuardianNames => new string[]

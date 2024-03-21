@@ -10,35 +10,35 @@ namespace AngbandOS.Core.Mutations.ActiveMutations;
 [Serializable]
 internal class BanishActiveMutation : Mutation
 {
-    private BanishActiveMutation(SaveGame saveGame) : base(saveGame) { }
+    private BanishActiveMutation(Game game) : base(game) { }
     public override void Activate()
     {
-        if (!SaveGame.CheckIfRacialPowerWorks(25, 25, Ability.Wisdom, 18))
+        if (!Game.CheckIfRacialPowerWorks(25, 25, Ability.Wisdom, 18))
         {
             return;
         }
-        if (!SaveGame.GetDirectionNoAim(out int dir))
+        if (!Game.GetDirectionNoAim(out int dir))
         {
             return;
         }
-        int y = SaveGame.MapY + SaveGame.KeypadDirectionYOffset[dir];
-        int x = SaveGame.MapX + SaveGame.KeypadDirectionXOffset[dir];
-        GridTile cPtr = SaveGame.Grid[y][x];
+        int y = Game.MapY + Game.KeypadDirectionYOffset[dir];
+        int x = Game.MapX + Game.KeypadDirectionXOffset[dir];
+        GridTile cPtr = Game.Grid[y][x];
         if (cPtr.MonsterIndex == 0)
         {
-            SaveGame.MsgPrint("You sense no evil there!");
+            Game.MsgPrint("You sense no evil there!");
             return;
         }
-        Monster mPtr = SaveGame.Monsters[cPtr.MonsterIndex];
+        Monster mPtr = Game.Monsters[cPtr.MonsterIndex];
         MonsterRace rPtr = mPtr.Race;
         if (rPtr.Evil)
         {
-            SaveGame.DeleteMonsterByIndex(cPtr.MonsterIndex, true);
-            SaveGame.MsgPrint("The evil creature vanishes in a puff of sulfurous smoke!");
+            Game.DeleteMonsterByIndex(cPtr.MonsterIndex, true);
+            Game.MsgPrint("The evil creature vanishes in a puff of sulfurous smoke!");
         }
         else
         {
-            SaveGame.MsgPrint("Your invocation is ineffectual!");
+            Game.MsgPrint("Your invocation is ineffectual!");
         }
     }
 

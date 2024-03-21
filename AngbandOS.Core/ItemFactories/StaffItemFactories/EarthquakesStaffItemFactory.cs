@@ -10,14 +10,14 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class EarthquakesStaffItemFactory : StaffItemFactory
 {
-    private EarthquakesStaffItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private EarthquakesStaffItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UnderscoreSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(UnderscoreSymbol));
     public override string Name => "Earthquakes";
 
     public override void ApplyMagic(Item item, int level, int power, Store? store)
     {
-        item.TypeSpecificValue = SaveGame.DieRoll(5) + 3;
+        item.TypeSpecificValue = Game.DieRoll(5) + 3;
     }
     public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int Cost => 350;
@@ -29,8 +29,8 @@ internal class EarthquakesStaffItemFactory : StaffItemFactory
     public override int Weight => 50;
     public override void UseStaff(UseStaffEvent eventArgs)
     {
-        SaveGame.Earthquake(SaveGame.MapY, SaveGame.MapX, 10);
+        Game.Earthquake(Game.MapY, Game.MapX, 10);
         eventArgs.Identified = true;
     }
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

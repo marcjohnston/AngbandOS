@@ -10,7 +10,7 @@ namespace AngbandOS.Core.MonsterSpells;
 [Serializable]
 internal class BlindnessMonsterSpell : MonsterSpell
 {
-    private BlindnessMonsterSpell(SaveGame saveGame) : base(saveGame) { }
+    private BlindnessMonsterSpell(Game game) : base(game) { }
     public override bool IsIntelligent => true;
     public override bool UsesBlindness => true;
     public override bool Annoys => true;
@@ -24,29 +24,29 @@ internal class BlindnessMonsterSpell : MonsterSpell
         return $"{monster.Name} casts a spell, burning {targetName}{it} eyes.";
     }
 
-    public override void ExecuteOnPlayer(SaveGame saveGame, Monster monster)
+    public override void ExecuteOnPlayer(Game game, Monster monster)
     {
 
-        if (saveGame.HasBlindnessResistance)
+        if (game.HasBlindnessResistance)
         {
-            saveGame.MsgPrint("You are unaffected!");
+            game.MsgPrint("You are unaffected!");
         }
-        else if (SaveGame.RandomLessThan(100) < saveGame.SkillSavingThrow)
+        else if (Game.RandomLessThan(100) < game.SkillSavingThrow)
         {
-            saveGame.MsgPrint("You resist the effects!");
+            game.MsgPrint("You resist the effects!");
         }
         else
         {
-            saveGame.BlindnessTimer.SetTimer(12 + SaveGame.RandomLessThan(4));
+            game.BlindnessTimer.SetTimer(12 + Game.RandomLessThan(4));
         }
-        saveGame.UpdateSmartLearn(monster, SaveGame.SingletonRepository.SpellResistantDetections.Get(nameof(BlindSpellResistantDetection)));
+        game.UpdateSmartLearn(monster, Game.SingletonRepository.SpellResistantDetections.Get(nameof(BlindSpellResistantDetection)));
     }
 
-    public override void ExecuteOnMonster(SaveGame saveGame, Monster monster, Monster target)
+    public override void ExecuteOnMonster(Game game, Monster monster, Monster target)
     {
         int rlev = monster.Race.Level >= 1 ? monster.Race.Level : 1;
         string targetName = target.Name;
-        bool blind = saveGame.BlindnessTimer.Value != 0;
+        bool blind = game.BlindnessTimer.Value != 0;
         bool seeTarget = !blind && target.IsVisible;
         MonsterRace targetRace = target.Race;
 
@@ -54,23 +54,23 @@ internal class BlindnessMonsterSpell : MonsterSpell
         {
             if (seeTarget)
             {
-                saveGame.MsgPrint($"{targetName} is unaffected.");
+                game.MsgPrint($"{targetName} is unaffected.");
             }
         }
-        else if (targetRace.Level > SaveGame.DieRoll(rlev - 10 < 1 ? 1 : rlev - 10) + 10)
+        else if (targetRace.Level > Game.DieRoll(rlev - 10 < 1 ? 1 : rlev - 10) + 10)
         {
             if (seeTarget)
             {
-                saveGame.MsgPrint($"{targetName} is unaffected.");
+                game.MsgPrint($"{targetName} is unaffected.");
             }
         }
         else
         {
             if (seeTarget)
             {
-                saveGame.MsgPrint($"{targetName} is blinded!");
+                game.MsgPrint($"{targetName} is blinded!");
             }
-            target.ConfusionLevel += 12 + SaveGame.RandomLessThan(4);
+            target.ConfusionLevel += 12 + Game.RandomLessThan(4);
         }
     }
 }

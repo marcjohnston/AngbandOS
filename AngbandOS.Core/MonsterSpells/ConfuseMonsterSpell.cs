@@ -10,7 +10,7 @@ namespace AngbandOS.Core.MonsterSpells;
 [Serializable]
 internal class ConfuseMonsterSpell : MonsterSpell
 {
-    private ConfuseMonsterSpell(SaveGame saveGame) : base(saveGame) { }
+    private ConfuseMonsterSpell(Game game) : base(game) { }
     public override bool IsIntelligent => true;
     public override bool UsesConfusion => true;
     public override bool Annoys => true;
@@ -19,27 +19,27 @@ internal class ConfuseMonsterSpell : MonsterSpell
     public override string? VsPlayerActionMessage(Monster monster) => $"{monster.Name} creates a mesmerising illusion.";
     public override string? VsMonsterSeenMessage(Monster monster, Monster target) => $"{monster.Name} creates a mesmerising illusion in front of {target.Name}";
 
-    public override void ExecuteOnPlayer(SaveGame saveGame, Monster monster)
+    public override void ExecuteOnPlayer(Game game, Monster monster)
     {
-        if (saveGame.HasConfusionResistance)
+        if (game.HasConfusionResistance)
         {
-            saveGame.MsgPrint("You disbelieve the feeble spell.");
+            game.MsgPrint("You disbelieve the feeble spell.");
         }
-        else if (SaveGame.RandomLessThan(100) < saveGame.SkillSavingThrow)
+        else if (Game.RandomLessThan(100) < game.SkillSavingThrow)
         {
-            saveGame.MsgPrint("You disbelieve the feeble spell.");
+            game.MsgPrint("You disbelieve the feeble spell.");
         }
         else
         {
-            saveGame.ConfusedTimer.AddTimer(SaveGame.RandomLessThan(4) + 4);
+            game.ConfusedTimer.AddTimer(Game.RandomLessThan(4) + 4);
         }
-        saveGame.UpdateSmartLearn(monster, SaveGame.SingletonRepository.SpellResistantDetections.Get(nameof(ConfSpellResistantDetection)));
+        game.UpdateSmartLearn(monster, Game.SingletonRepository.SpellResistantDetections.Get(nameof(ConfSpellResistantDetection)));
     }
 
-    public override void ExecuteOnMonster(SaveGame saveGame, Monster monster, Monster target)
+    public override void ExecuteOnMonster(Game game, Monster monster, Monster target)
     {
         int rlev = monster.Race.Level >= 1 ? monster.Race.Level : 1;
-        bool blind = saveGame.BlindnessTimer.Value != 0;
+        bool blind = game.BlindnessTimer.Value != 0;
         bool seeTarget = !blind && target.IsVisible;
         string targetName = target.Name;
         MonsterRace targetRace = target.Race;
@@ -48,23 +48,23 @@ internal class ConfuseMonsterSpell : MonsterSpell
         {
             if (seeTarget)
             {
-                saveGame.MsgPrint($"{targetName} disbelieves the feeble spell.");
+                game.MsgPrint($"{targetName} disbelieves the feeble spell.");
             }
         }
-        else if (targetRace.Level > SaveGame.DieRoll(rlev - 10 < 1 ? 1 : rlev - 10) + 10)
+        else if (targetRace.Level > Game.DieRoll(rlev - 10 < 1 ? 1 : rlev - 10) + 10)
         {
             if (seeTarget)
             {
-                saveGame.MsgPrint($"{targetName} disbelieves the feeble spell.");
+                game.MsgPrint($"{targetName} disbelieves the feeble spell.");
             }
         }
         else
         {
             if (seeTarget)
             {
-                saveGame.MsgPrint($"{targetName} seems confused.");
+                game.MsgPrint($"{targetName} seems confused.");
             }
-            target.ConfusionLevel += 12 + SaveGame.RandomLessThan(4);
+            target.ConfusionLevel += 12 + Game.RandomLessThan(4);
         }
     }
 }

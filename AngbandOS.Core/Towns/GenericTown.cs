@@ -12,7 +12,7 @@ namespace AngbandOS.Core.Towns;
 [Serializable]
 internal class GenericTown : Town
 {
-    public GenericTown(SaveGame saveGame, TownDefinition townDefinition) : base(saveGame)
+    public GenericTown(Game game, TownDefinition townDefinition) : base(game)
     {
         Key = townDefinition.Key;
         DungeonName = townDefinition.DungeonName;

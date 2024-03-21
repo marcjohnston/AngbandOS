@@ -11,27 +11,27 @@ namespace AngbandOS.Core.BirthStages;
 internal class Realm2SelectionBirthStage : BirthStage
 {
     private int currentSelection = 0;
-    private Realm2SelectionBirthStage(SaveGame saveGame) : base(saveGame) { }
+    private Realm2SelectionBirthStage(Game game) : base(game) { }
     public override BirthStage? Render()
     {
         DisplayPartialCharacter();
-        string[]? menuItems = SaveGame.BaseCharacterClass.AvailableSecondaryRealms
-            .Where(_realm => _realm != SaveGame.PrimaryRealm)
+        string[]? menuItems = Game.BaseCharacterClass.AvailableSecondaryRealms
+            .Where(_realm => _realm != Game.PrimaryRealm)
             .Select(_realm => _realm.Name)
             .ToArray(); ;
-        SaveGame.Screen.Print(ColorEnum.Orange, "[Use up and down to select an option, right to confirm, or left to go back.]", 43, 1);
+        Game.Screen.Print(ColorEnum.Orange, "[Use up and down to select an option, right to confirm, or left to go back.]", 43, 1);
 
         // The index might be out of range if the user switches between classes.
-        if (currentSelection >= SaveGame.BaseCharacterClass.AvailablePrimaryRealms.Length)
+        if (currentSelection >= Game.BaseCharacterClass.AvailablePrimaryRealms.Length)
         {
-            currentSelection = SaveGame.BaseCharacterClass.AvailablePrimaryRealms.Length - 1;
+            currentSelection = Game.BaseCharacterClass.AvailablePrimaryRealms.Length - 1;
         }
 
-        while (!SaveGame.Shutdown)
+        while (!Game.Shutdown)
         {
-            SaveGame.MenuDisplay(currentSelection, menuItems);
+            Game.MenuDisplay(currentSelection, menuItems);
             RenderSelection(currentSelection);
-            char c = SaveGame.Inkey();
+            char c = Game.Inkey();
             switch (c)
             {
                 case '8':
@@ -51,7 +51,7 @@ internal class Realm2SelectionBirthStage : BirthStage
                 case '4':
                     return GoBack();
                 case 'h':
-                    SaveGame.ShowManual();
+                    Game.ShowManual();
                     break;
             }
         }
@@ -60,26 +60,26 @@ internal class Realm2SelectionBirthStage : BirthStage
 
     private bool RenderSelection(int index)
     {
-        Realm[] remainingRealms = SaveGame.BaseCharacterClass.AvailableSecondaryRealms.Where(_realm => _realm != SaveGame.PrimaryRealm).ToArray();
+        Realm[] remainingRealms = Game.BaseCharacterClass.AvailableSecondaryRealms.Where(_realm => _realm != Game.PrimaryRealm).ToArray();
         Realm realm = remainingRealms[index];
-        SaveGame.DisplayRealmInfo(realm);
+        Game.DisplayRealmInfo(realm);
         return true;
     }
     private BirthStage? GoForward(int index)
     {
-        Realm[] remainingRealms = SaveGame.BaseCharacterClass.AvailableSecondaryRealms.Where(_realm => _realm != SaveGame.PrimaryRealm).ToArray();
-        SaveGame.SecondaryRealm = remainingRealms[index];
-        SaveGame.God = SaveGame.BaseCharacterClass.DefaultDeity(SaveGame.SecondaryRealm);
-        return SaveGame.SingletonRepository.BirthStages.Get(nameof(GenderSelectionBirthStage));
+        Realm[] remainingRealms = Game.BaseCharacterClass.AvailableSecondaryRealms.Where(_realm => _realm != Game.PrimaryRealm).ToArray();
+        Game.SecondaryRealm = remainingRealms[index];
+        Game.God = Game.BaseCharacterClass.DefaultDeity(Game.SecondaryRealm);
+        return Game.SingletonRepository.BirthStages.Get(nameof(GenderSelectionBirthStage));
     }
 
     private BirthStage? GoBack()
     {
-        int availablePrimaryRealmCount = SaveGame.BaseCharacterClass.AvailablePrimaryRealms.Length;
+        int availablePrimaryRealmCount = Game.BaseCharacterClass.AvailablePrimaryRealms.Length;
         if (availablePrimaryRealmCount <= 1)
         {
-            return SaveGame.SingletonRepository.BirthStages.Get(nameof(RaceSelectionBirthStage));
+            return Game.SingletonRepository.BirthStages.Get(nameof(RaceSelectionBirthStage));
         }
-        return SaveGame.SingletonRepository.BirthStages.Get(nameof(Realm1SelectionBirthStage));
+        return Game.SingletonRepository.BirthStages.Get(nameof(Realm1SelectionBirthStage));
     }
 }

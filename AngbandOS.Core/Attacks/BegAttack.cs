@@ -10,7 +10,7 @@ namespace AngbandOS.Core.AttackTypes;
 [Serializable]
 internal class BegAttack : Attack
 {
-    private BegAttack(SaveGame saveGame) : base(saveGame) { }
+    private BegAttack(Game game) : base(game) { }
     public override string MonsterAction => "begs {0} for money";
     public override string PlayerAction => $"begs you for money";
     public override string KnowledgeAction => "beg";

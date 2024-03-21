@@ -10,7 +10,7 @@ namespace AngbandOS.Core.MonsterRaces;
 [Serializable]
 internal class WildCatMonsterRace : MonsterRace
 {
-    protected WildCatMonsterRace(SaveGame saveGame) : base(saveGame) { }
+    protected WildCatMonsterRace(Game game) : base(game) { }
 
     protected override string SymbolName => nameof(LowerFSymbol);
     public override ColorEnum Color => ColorEnum.BrightBrown;

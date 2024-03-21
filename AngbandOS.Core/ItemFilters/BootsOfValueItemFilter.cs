@@ -13,6 +13,6 @@ namespace AngbandOS.Core.ItemFilters;
 [Serializable]
 internal class BootsOfValueItemFilter : ItemFilter<BootsArmorItemFactory>
 {
-    private BootsOfValueItemFilter(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private BootsOfValueItemFilter(Game game) : base(game) { } // This object is a singleton.
 }
 

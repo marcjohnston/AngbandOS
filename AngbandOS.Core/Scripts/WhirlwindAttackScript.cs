@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class WhirlwindAttackScript : Script, IScript
 {
-    private WhirlwindAttackScript(SaveGame saveGame) : base(saveGame) { }
+    private WhirlwindAttackScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script.
@@ -20,13 +20,13 @@ internal class WhirlwindAttackScript : Script, IScript
     {
         for (int dir = 0; dir <= 9; dir++)
         {
-            int y = SaveGame.MapY + SaveGame.KeypadDirectionYOffset[dir];
-            int x = SaveGame.MapX + SaveGame.KeypadDirectionXOffset[dir];
-            GridTile cPtr = SaveGame.Grid[y][x];
-            Monster mPtr = SaveGame.Monsters[cPtr.MonsterIndex];
-            if (cPtr.MonsterIndex != 0 && (mPtr.IsVisible || SaveGame.GridPassable(y, x)))
+            int y = Game.MapY + Game.KeypadDirectionYOffset[dir];
+            int x = Game.MapX + Game.KeypadDirectionXOffset[dir];
+            GridTile cPtr = Game.Grid[y][x];
+            Monster mPtr = Game.Monsters[cPtr.MonsterIndex];
+            if (cPtr.MonsterIndex != 0 && (mPtr.IsVisible || Game.GridPassable(y, x)))
             {
-                SaveGame.PlayerAttackMonster(y, x);
+                Game.PlayerAttackMonster(y, x);
             }
         }
     }

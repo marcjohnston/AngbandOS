@@ -10,7 +10,7 @@ namespace AngbandOS.Core.MonsterRaces;
 [Serializable]
 internal class AimlessLookingMerchantMonsterRace : MonsterRace
 {
-    protected AimlessLookingMerchantMonsterRace(SaveGame saveGame) : base(saveGame) { }
+    protected AimlessLookingMerchantMonsterRace(Game game) : base(game) { }
 
     protected override string SymbolName => nameof(LowerTSymbol);
     public override ColorEnum Color => ColorEnum.Orange;

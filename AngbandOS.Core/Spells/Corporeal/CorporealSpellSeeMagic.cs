@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Spells.Corporeal;
 [Serializable]
 internal class CorporealSpellSeeMagic : Spell
 {
-    private CorporealSpellSeeMagic(SaveGame saveGame) : base(saveGame) { }
+    private CorporealSpellSeeMagic(Game game) : base(game) { }
     protected override string? CastScriptName => nameof(DetectMagicalObjectsScript);
 
     public override string Name => "See Magic";

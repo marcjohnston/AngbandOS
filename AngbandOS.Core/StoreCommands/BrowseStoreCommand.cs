@@ -13,7 +13,7 @@ namespace AngbandOS.Core.StoreCommands;
 [Serializable]
 internal class BrowseStoreCommand : StoreCommand
 {
-    private BrowseStoreCommand(SaveGame saveGame) : base(saveGame) { }
+    private BrowseStoreCommand(Game game) : base(game) { }
     public override char KeyChar => 'b';
 
     public override string Description => "";

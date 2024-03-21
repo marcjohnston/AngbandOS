@@ -10,5 +10,5 @@ namespace AngbandOS.Core.Properties;
 [Serializable]
 internal class SpeedIntProperty : IntProperty
 {
-    protected SpeedIntProperty(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    protected SpeedIntProperty(Game game) : base(game) { } // This object is a singleton.
 }

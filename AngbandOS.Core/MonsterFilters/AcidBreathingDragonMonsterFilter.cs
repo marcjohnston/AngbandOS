@@ -10,7 +10,7 @@ namespace AngbandOS.Core.MonsterFilters;
 [Serializable]
 internal class AcidBreathingDragonMonsterFilter : MonsterFilter
 {
-    private AcidBreathingDragonMonsterFilter(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private AcidBreathingDragonMonsterFilter(Game game) : base(game) { } // This object is a singleton.
     public override bool Matches(MonsterRace rPtr)
     {
         return !rPtr.Unique && "Dd".Contains(rPtr.Symbol.Character.ToString()) && rPtr.BreatheAcid;

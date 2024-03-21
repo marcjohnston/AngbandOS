@@ -10,7 +10,7 @@ namespace AngbandOS.Core.CharacterClasses;
 [Serializable]
 internal class ChannelerCharacterClass : BaseCharacterClass
 {
-    private ChannelerCharacterClass(SaveGame savedGame) : base(savedGame) { }
+    private ChannelerCharacterClass(Game savedGame) : base(savedGame) { }
     public override int ID => 13;
     public override string Title => "Channeler";
     public override int[] AbilityBonus => new[] { -1, 0, 2, -1, -1, 3 };
@@ -50,8 +50,8 @@ internal class ChannelerCharacterClass : BaseCharacterClass
     public override int MaximumMeleeAttacksPerRound(int level) => 4;
     public override int MaximumWeight => 40;
     public override int AttackSpeedMultiplier => 2;
-    public override IArtifactBias? ArtifactBias => SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(MageArtifactBias));
-    public override bool SenseInventoryTest(int level) => (0 != SaveGame.RandomLessThan(9000 / ((level * level) + 40)));
+    public override IArtifactBias? ArtifactBias => Game.SingletonRepository.ArtifactBiases.Get(nameof(MageArtifactBias));
+    public override bool SenseInventoryTest(int level) => (0 != Game.RandomLessThan(9000 / ((level * level) + 40)));
     public override bool DetailedSenseInventory => true;
 
     protected override string[] OutfitItemFactoryNames => new string[]

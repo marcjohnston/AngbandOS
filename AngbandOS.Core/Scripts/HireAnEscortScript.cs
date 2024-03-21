@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class HireAnEscortScript : Script, IScript, IStoreScript, ISuccessfulScript
 {
-    private HireAnEscortScript(SaveGame saveGame) : base(saveGame) { }
+    private HireAnEscortScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the hire escort script successful script and sets the leave store flag to true, if the script was successful.
@@ -37,54 +37,54 @@ internal class HireAnEscortScript : Script, IScript, IStoreScript, ISuccessfulSc
     public bool ExecuteSuccessfulScript()
     {
         var validTowns = new Dictionary<char, Town>();
-        foreach (Town town in SaveGame.SingletonRepository.Towns)
+        foreach (Town town in Game.SingletonRepository.Towns)
         {
-            if (town.Visited && town.Name != SaveGame.CurTown.Name && town.CanBeEscortedHere)
+            if (town.Visited && town.Name != Game.CurTown.Name && town.CanBeEscortedHere)
             {
                 validTowns.Add(town.Char, town);
             }
         }
         if (validTowns.Count == 0)
         {
-            SaveGame.MsgPrint("There are no valid destinations to be escorted to.");
-            SaveGame.MsgPrint("You must have visited a town before you can be escorted there.");
+            Game.MsgPrint("There are no valid destinations to be escorted to.");
+            Game.MsgPrint("You must have visited a town before you can be escorted there.");
         }
         else
         {
             var destination = GetEscortDestination(validTowns);
             if (destination != null)
             {
-                if (!SaveGame.ServiceHaggle(200, out int price))
+                if (!Game.ServiceHaggle(200, out int price))
                 {
-                    if (price > SaveGame.Gold.Value)
+                    if (price > Game.Gold.Value)
                     {
-                        SaveGame.MsgPrint("You do not have the gold!");
+                        Game.MsgPrint("You do not have the gold!");
                     }
                     else
                     {
-                        SaveGame.Gold.Value -= price;
-                        SaveGame.SayComment_1();
-                        SaveGame.PlaySound(SoundEffectEnum.StoreTransaction);
-                        SaveGame.StorePrtGold();
-                        SaveGame.WildernessX = destination.X;
-                        SaveGame.WildernessY = destination.Y;
-                        SaveGame.CurTown = destination;
-                        SaveGame.NewLevelFlag = true;
-                        SaveGame.CameFrom = LevelStart.StartRandom;
-                        SaveGame.MsgPrint("The journey takes all day.");
-                        SaveGame.GameTime.ToNextDusk();
+                        Game.Gold.Value -= price;
+                        Game.SayComment_1();
+                        Game.PlaySound(SoundEffectEnum.StoreTransaction);
+                        Game.StorePrtGold();
+                        Game.WildernessX = destination.X;
+                        Game.WildernessY = destination.Y;
+                        Game.CurTown = destination;
+                        Game.NewLevelFlag = true;
+                        Game.CameFrom = LevelStart.StartRandom;
+                        Game.MsgPrint("The journey takes all day.");
+                        Game.GameTime.ToNextDusk();
                         return true;
                     }
                 }
             }
         }
-        SaveGame.HandleStuff();
+        Game.HandleStuff();
         return false;
     }
 
     private Town? GetEscortDestination(Dictionary<char, Town> towns)
     {
-        ScreenBuffer savedScreen = SaveGame.Screen.Clone();
+        ScreenBuffer savedScreen = Game.Screen.Clone();
         try
         {
             var keys = towns.Keys.ToList();
@@ -92,10 +92,10 @@ internal class HireAnEscortScript : Script, IScript, IStoreScript, ISuccessfulSc
             string outVal = $"Destination town ({keys[0].ToString().ToLower()} to {keys[keys.Count - 1].ToString().ToLower()})? ";
             for (int i = 0; i < keys.Count; i++)
             {
-                SaveGame.Screen.Print(ColorEnum.White, $" {keys[i].ToString().ToLower()}) {towns[keys[i]].Name}".PadRight(60), i + 1, 20);
+                Game.Screen.Print(ColorEnum.White, $" {keys[i].ToString().ToLower()}) {towns[keys[i]].Name}".PadRight(60), i + 1, 20);
             }
-            SaveGame.Screen.Print(ColorEnum.White, "".PadRight(60), keys.Count + 1, 20);
-            while (SaveGame.GetCom(outVal, out char choice))
+            Game.Screen.Print(ColorEnum.White, "".PadRight(60), keys.Count + 1, 20);
+            while (Game.GetCom(outVal, out char choice))
             {
                 choice = choice.ToString().ToUpper()[0];
                 foreach (var c in keys)
@@ -109,7 +109,7 @@ internal class HireAnEscortScript : Script, IScript, IStoreScript, ISuccessfulSc
         }
         finally
         {
-            SaveGame.Screen.Restore(savedScreen);
+            Game.Screen.Restore(savedScreen);
         }
         return null;
     }

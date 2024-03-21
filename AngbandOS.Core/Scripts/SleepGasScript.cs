@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class SleepGasScript : Script, IScript
 {
-    private SleepGasScript(SaveGame saveGame) : base(saveGame) { }
+    private SleepGasScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script.
@@ -19,10 +19,10 @@ internal class SleepGasScript : Script, IScript
     public void ExecuteScript()
     {
         // Paralyse the player
-        SaveGame.MsgPrint("A strange white mist surrounds you!");
-        if (!SaveGame.HasFreeAction)
+        Game.MsgPrint("A strange white mist surrounds you!");
+        if (!Game.HasFreeAction)
         {
-            SaveGame.ParalysisTimer.AddTimer(SaveGame.RandomLessThan(10) + 5);
+            Game.ParalysisTimer.AddTimer(Game.RandomLessThan(10) + 5);
         }
     }
 }

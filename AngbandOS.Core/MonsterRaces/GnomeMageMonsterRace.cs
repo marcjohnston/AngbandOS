@@ -10,7 +10,7 @@ namespace AngbandOS.Core.MonsterRaces;
 [Serializable]
 internal class GnomeMageMonsterRace : MonsterRace
 {
-    protected GnomeMageMonsterRace(SaveGame saveGame) : base(saveGame) { }
+    protected GnomeMageMonsterRace(Game game) : base(game) { }
 
     protected override string[]? SpellNames =>new string[] {
         nameof(ColdBoltMonsterSpell),

@@ -12,7 +12,7 @@ namespace AngbandOS.Core.InventorySlots;
 [Serializable]
 internal class MeleeWeaponInventorySlot : EquipmentInventorySlot
 {
-    private MeleeWeaponInventorySlot(SaveGame saveGame) : base(saveGame) { }
+    private MeleeWeaponInventorySlot(Game game) : base(game) { }
     public override int[] InventorySlots => new int[] { InventorySlot.MeleeWeapon };
     public override int SortOrder => 1;
     public override string Label(int index) => "a";
@@ -25,8 +25,8 @@ internal class MeleeWeaponInventorySlot : EquipmentInventorySlot
         string p = "Wielding";
         if (Count > 0 && index.HasValue)
         {
-            Item? oPtr = SaveGame.GetInventoryItem(index.Value);
-            if (oPtr != null && SaveGame.AbilityScores[Ability.Strength].StrMaxWeaponWeight < oPtr.Weight / 10)
+            Item? oPtr = Game.GetInventoryItem(index.Value);
+            if (oPtr != null && Game.AbilityScores[Ability.Strength].StrMaxWeaponWeight < oPtr.Weight / 10)
             {
                 p = "Just lifting";
             }
@@ -39,8 +39,8 @@ internal class MeleeWeaponInventorySlot : EquipmentInventorySlot
         string p = "attacking monsters with";
         if (Count > 0)
         {
-            Item? oPtr = SaveGame.GetInventoryItem(index);
-            if (oPtr != null && SaveGame.AbilityScores[Ability.Strength].StrMaxWeaponWeight < oPtr.Weight / 10)
+            Item? oPtr = Game.GetInventoryItem(index);
+            if (oPtr != null && Game.AbilityScores[Ability.Strength].StrMaxWeaponWeight < oPtr.Weight / 10)
             {
                 p = "just lifting";
             }
@@ -53,7 +53,7 @@ internal class MeleeWeaponInventorySlot : EquipmentInventorySlot
         string p = "attacking monsters with";
 
         // Check to see if we have a weapon.
-        if (oPtr != null && SaveGame.AbilityScores[Ability.Strength].StrMaxWeaponWeight < oPtr.Weight / 10)
+        if (oPtr != null && Game.AbilityScores[Ability.Strength].StrMaxWeaponWeight < oPtr.Weight / 10)
         {
             p = "just lifting";
         }

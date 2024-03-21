@@ -10,8 +10,8 @@ namespace AngbandOS.Core.RareItems;
 [Serializable]
 internal class BowOfExtraMightRareItem : RareItem
 {
-    private BowOfExtraMightRareItem(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(CloseBracketSymbol));
+    private BowOfExtraMightRareItem(Game game) : base(game) { } // This object is a singleton.
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(CloseBracketSymbol));
     public override ColorEnum Color => ColorEnum.Brown;
     public override string Name => "Bow of Extra Might";
     public override int Cost => 10000;

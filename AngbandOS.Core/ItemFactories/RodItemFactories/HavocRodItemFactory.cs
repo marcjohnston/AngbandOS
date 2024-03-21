@@ -10,10 +10,10 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class HavocRodItemFactory : RodItemFactory
 {
-    private HavocRodItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private HavocRodItemFactory(Game game) : base(game) { } // This object is a singleton.
 
     public override bool RequiresAiming => true;
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(MinusSignSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(MinusSignSymbol));
     public override string Name => "Havoc";
 
     public override int[] Chance => new int[] { 16, 0, 0, 0 };
@@ -26,9 +26,9 @@ internal class HavocRodItemFactory : RodItemFactory
     public override int Weight => 15;
     public override void Execute(ZapRodEvent zapRodEvent)
     {
-        SaveGame.RunScript(nameof(CallChaosScript));
+        Game.RunScript(nameof(CallChaosScript));
         zapRodEvent.Identified = true;
         zapRodEvent.Item.TypeSpecificValue = 250;
     }
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

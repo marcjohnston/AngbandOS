@@ -17,5 +17,5 @@ internal class PunchMartialArtsAttack : MartialArtsAttack
     public override int Effect => 0;
     public override int MinLevel => 1;
     public override bool IsDefault => true;
-    private PunchMartialArtsAttack(SaveGame saveGame) : base(saveGame) { }
+    private PunchMartialArtsAttack(Game game) : base(game) { }
 }

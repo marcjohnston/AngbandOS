@@ -10,19 +10,19 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class SpeedRingItemFactory : RingItemFactory
 {
-    private SpeedRingItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private SpeedRingItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(EqualSignSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(EqualSignSymbol));
     public override string Name => "Speed";
 
     public override void ApplyMagic(Item item, int level, int power, Store? store)
     {
-        if (power == 0 && SaveGame.RandomLessThan(100) < 50)
+        if (power == 0 && Game.RandomLessThan(100) < 50)
         {
             power = -1;
         }
-        item.TypeSpecificValue = SaveGame.DieRoll(5) + item.GetBonusValue(5, level);
-        while (SaveGame.RandomLessThan(100) < 50)
+        item.TypeSpecificValue = Game.DieRoll(5) + item.GetBonusValue(5, level);
+        while (Game.RandomLessThan(100) < 50)
         {
             item.TypeSpecificValue++;
         }
@@ -34,7 +34,7 @@ internal class SpeedRingItemFactory : RingItemFactory
         }
         else
         {
-            SaveGame.TreasureRating += 25;
+            Game.TreasureRating += 25;
         }
     }
 
@@ -48,5 +48,5 @@ internal class SpeedRingItemFactory : RingItemFactory
     public override int Weight => 2;
 
     public override bool KindIsGood => true;
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

@@ -10,9 +10,9 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class LargeMetalShieldArmorItemFactory : ShieldArmorItemFactory
 {
-    private LargeMetalShieldArmorItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private LargeMetalShieldArmorItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(CloseParenthesisSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(CloseParenthesisSymbol));
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "Large Metal Shield";
 
@@ -25,5 +25,5 @@ internal class LargeMetalShieldArmorItemFactory : ShieldArmorItemFactory
     public override int LevelNormallyFound => 30;
     public override int[] Locale => new int[] { 30, 0, 0, 0 };
     public override int Weight => 120;
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

@@ -10,7 +10,7 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal abstract class AmmunitionItemFactory : WeaponItemFactory
 {
-    public AmmunitionItemFactory(SaveGame saveGame) : base(saveGame) { }
+    public AmmunitionItemFactory(Game game) : base(game) { }
 
     public override int GetAdditionalMassProduceCount(Item item)
     {
@@ -57,39 +57,39 @@ internal abstract class AmmunitionItemFactory : WeaponItemFactory
         base.ApplyMagic(item, level, power, null);
         if (power > 1)
         {
-            switch (SaveGame.DieRoll(12))
+            switch (Game.DieRoll(12))
             {
                 case 1:
                 case 2:
                 case 3:
-                    item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(AmmoOfWoundingRareItem));
+                    item.RareItem = Game.SingletonRepository.RareItems.Get(nameof(AmmoOfWoundingRareItem));
                     break;
                 case 4:
-                    item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(AmmoOfFlameRareItem));
+                    item.RareItem = Game.SingletonRepository.RareItems.Get(nameof(AmmoOfFlameRareItem));
                     break;
                 case 5:
-                    item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(AmmoOfFrostRareItem));
+                    item.RareItem = Game.SingletonRepository.RareItems.Get(nameof(AmmoOfFrostRareItem));
                     break;
                 case 6:
                 case 7:
-                    item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(AmmoOfHurtAnimalRareItem));
+                    item.RareItem = Game.SingletonRepository.RareItems.Get(nameof(AmmoOfHurtAnimalRareItem));
                     break;
                 case 8:
                 case 9:
-                    item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(AmmoOfHurtEvilRareItem));
+                    item.RareItem = Game.SingletonRepository.RareItems.Get(nameof(AmmoOfHurtEvilRareItem));
                     break;
                 case 10:
-                    item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(AmmoOfHurtDragonRareItem));
+                    item.RareItem = Game.SingletonRepository.RareItems.Get(nameof(AmmoOfHurtDragonRareItem));
                     break;
                 case 11:
-                    item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(AmmoOfShockingRareItem));
+                    item.RareItem = Game.SingletonRepository.RareItems.Get(nameof(AmmoOfShockingRareItem));
                     break;
                 case 12:
-                    item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(AmmoOfSlayingRareItem));
+                    item.RareItem = Game.SingletonRepository.RareItems.Get(nameof(AmmoOfSlayingRareItem));
                     item.DamageDice++;
                     break;
             }
-            while (SaveGame.RandomLessThan(10 * item.DamageDice * item.DamageDiceSides) == 0)
+            while (Game.RandomLessThan(10 * item.DamageDice * item.DamageDiceSides) == 0)
             {
                 item.DamageDice++;
             }
@@ -100,14 +100,14 @@ internal abstract class AmmunitionItemFactory : WeaponItemFactory
         }
         else if (power < -1)
         {
-            if (SaveGame.RandomLessThan(Constants.MaxDepth) < level)
+            if (Game.RandomLessThan(Constants.MaxDepth) < level)
             {
-                item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(AmmoOfBackbitingRareItem));
+                item.RareItem = Game.SingletonRepository.RareItems.Get(nameof(AmmoOfBackbitingRareItem));
             }
         }
     }
 
-    public override int MakeObjectCount => SaveGame.DiceRoll(6, 7);
+    public override int MakeObjectCount => Game.DiceRoll(6, 7);
     public override int PercentageBreakageChance => 25;
 
     public override bool IsWeapon => true;

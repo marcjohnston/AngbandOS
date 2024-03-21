@@ -13,16 +13,16 @@ namespace AngbandOS.Core.Activations;
 [Serializable]
 internal class LargeFrostBall200Every325p1d325Activation : DirectionalActivation
 {
-    private LargeFrostBall200Every325p1d325Activation(SaveGame saveGame) : base(saveGame) { }
+    private LargeFrostBall200Every325p1d325Activation(Game game) : base(game) { }
     public override int RandomChance => 50;
 
     public override string? PreActivationMessage => "Your {0} glows bright white...";
 
-    public override int RechargeTime() => SaveGame.RandomLessThan(325) + 325;
+    public override int RechargeTime() => Game.RandomLessThan(325) + 325;
 
     protected override bool Activate(int direction)
     {
-        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(ColdProjectile)), direction, 200, 3);
+        Game.FireBall(Game.SingletonRepository.Projectiles.Get(nameof(ColdProjectile)), direction, 200, 3);
         return true;
     }
 

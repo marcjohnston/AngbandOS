@@ -10,14 +10,14 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class SummoningStaffItemFactory : StaffItemFactory
 {
-    private SummoningStaffItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private SummoningStaffItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UnderscoreSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(UnderscoreSymbol));
     public override string Name => "Summoning";
 
     public override void ApplyMagic(Item item, int level, int power, Store? store)
     {
-        item.TypeSpecificValue = SaveGame.DieRoll(3) + 1;
+        item.TypeSpecificValue = Game.DieRoll(3) + 1;
     }
 
     public override int Dd => 1;
@@ -28,13 +28,13 @@ internal class SummoningStaffItemFactory : StaffItemFactory
     public override int Weight => 50;
     public override void UseStaff(UseStaffEvent eventArgs)
     {
-        for (int k = 0; k < SaveGame.DieRoll(4); k++)
+        for (int k = 0; k < Game.DieRoll(4); k++)
         {
-            if (SaveGame.SummonSpecific(SaveGame.MapY, SaveGame.MapX, SaveGame.Difficulty, null))
+            if (Game.SummonSpecific(Game.MapY, Game.MapX, Game.Difficulty, null))
             {
                 eventArgs.Identified = true;
             }
         }
     }
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

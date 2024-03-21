@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Shopkeepers;
 [Serializable]
 internal class MauserTheChemistShopkeeper : Shopkeeper
 {
-    private MauserTheChemistShopkeeper(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private MauserTheChemistShopkeeper(Game game) : base(game) { } // This object is a singleton.
     public override string Name => "Mauser the Chemist";
     public override int MaxCost =>  10000;
     public override int MinInflate =>  111;

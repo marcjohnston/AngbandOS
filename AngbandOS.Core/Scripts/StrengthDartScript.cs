@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class StrengthDartScript : Script, IScript
 {
-    private StrengthDartScript(SaveGame saveGame) : base(saveGame) { }
+    private StrengthDartScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script.
@@ -19,17 +19,17 @@ internal class StrengthDartScript : Script, IScript
     public void ExecuteScript()
     {
         // Dart traps need a to-hit roll
-        if (SaveGame.TrapCheckHitOnPlayer(125))
+        if (Game.TrapCheckHitOnPlayer(125))
         {
-            SaveGame.MsgPrint("A small dart hits you!");
+            Game.MsgPrint("A small dart hits you!");
             // Do 1d4 damage plus strength drain
-            int damage = SaveGame.DiceRoll(1, 4);
-            SaveGame.TakeHit(damage, "a dart trap");
-            SaveGame.TryDecreasingAbilityScore(Ability.Strength);
+            int damage = Game.DiceRoll(1, 4);
+            Game.TakeHit(damage, "a dart trap");
+            Game.TryDecreasingAbilityScore(Ability.Strength);
         }
         else
         {
-            SaveGame.MsgPrint("A small dart barely misses you.");
+            Game.MsgPrint("A small dart barely misses you.");
         }
     }
 }

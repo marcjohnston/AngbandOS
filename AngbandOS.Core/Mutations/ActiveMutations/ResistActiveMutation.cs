@@ -10,36 +10,36 @@ namespace AngbandOS.Core.Mutations.ActiveMutations;
 [Serializable]
 internal class ResistActiveMutation : Mutation
 {
-    private ResistActiveMutation(SaveGame saveGame) : base(saveGame) { }
+    private ResistActiveMutation(Game game) : base(game) { }
     public override void Activate()
     {
-        if (SaveGame.CheckIfRacialPowerWorks(10, 12, Ability.Constitution, 12))
+        if (Game.CheckIfRacialPowerWorks(10, 12, Ability.Constitution, 12))
         {
-            int num = SaveGame.ExperienceLevel.Value / 10;
-            int dur = base.SaveGame.DieRoll(20) + 20;
-            if (base.SaveGame.RandomLessThan(5) < num)
+            int num = Game.ExperienceLevel.Value / 10;
+            int dur = base.Game.DieRoll(20) + 20;
+            if (base.Game.RandomLessThan(5) < num)
             {
-                SaveGame.AcidResistanceTimer.AddTimer(dur);
+                Game.AcidResistanceTimer.AddTimer(dur);
                 num--;
             }
-            if (base.SaveGame.RandomLessThan(4) < num)
+            if (base.Game.RandomLessThan(4) < num)
             {
-                SaveGame.LightningResistanceTimer.AddTimer(dur);
+                Game.LightningResistanceTimer.AddTimer(dur);
                 num--;
             }
-            if (base.SaveGame.RandomLessThan(3) < num)
+            if (base.Game.RandomLessThan(3) < num)
             {
-                SaveGame.FireResistanceTimer.AddTimer(dur);
+                Game.FireResistanceTimer.AddTimer(dur);
                 num--;
             }
-            if (base.SaveGame.RandomLessThan(2) < num)
+            if (base.Game.RandomLessThan(2) < num)
             {
-                SaveGame.ColdResistanceTimer.AddTimer(dur);
+                Game.ColdResistanceTimer.AddTimer(dur);
                 num--;
             }
             if (num != 0)
             {
-                SaveGame.PoisonResistanceTimer.AddTimer(dur);
+                Game.PoisonResistanceTimer.AddTimer(dur);
             }
         }
     }

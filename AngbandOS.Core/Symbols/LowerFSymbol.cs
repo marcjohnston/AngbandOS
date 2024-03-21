@@ -3,7 +3,7 @@
 [Serializable]
 internal class LowerFSymbol : Symbol
 {
-    private LowerFSymbol(SaveGame saveGame) : base(saveGame) { }
+    private LowerFSymbol(Game game) : base(game) { }
     public override char Character => 'f';
     public override string Name => "Feline";
 }

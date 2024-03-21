@@ -10,7 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class TwoHandedFlailThunderfistFixedArtifact : FixedArtifact
 {
-    private TwoHandedFlailThunderfistFixedArtifact(SaveGame saveGame) : base(saveGame) { }
+    private TwoHandedFlailThunderfistFixedArtifact(Game game) : base(game) { }
 
     protected override string BaseItemFactoryName => nameof(TwoHandedFlailHaftedWeaponItemFactory);
 

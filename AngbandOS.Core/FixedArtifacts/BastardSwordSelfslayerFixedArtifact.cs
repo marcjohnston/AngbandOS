@@ -10,7 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class BastardSwordSelfSlayerFixedArtifact : FixedArtifact
 {
-    private BastardSwordSelfSlayerFixedArtifact(SaveGame saveGame) : base(saveGame) { }
+    private BastardSwordSelfSlayerFixedArtifact(Game game) : base(game) { }
 
     protected override string BaseItemFactoryName => nameof(BastardSwordSwordWeaponItemFactory);
 

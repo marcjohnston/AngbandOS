@@ -13,20 +13,20 @@ namespace AngbandOS.Core.Activations;
 [Serializable]
 internal class RestAllActivation : Activation
 {
-    private RestAllActivation(SaveGame saveGame) : base(saveGame) { }
+    private RestAllActivation(Game game) : base(game) { }
     public override int RandomChance => 33;
 
     public override string? PreActivationMessage => "Your {0} glows a deep green...";
 
     protected override bool OnActivate(Item item)
     {
-        SaveGame.TryRestoringAbilityScore(Ability.Strength);
-        SaveGame.TryRestoringAbilityScore(Ability.Intelligence);
-        SaveGame.TryRestoringAbilityScore(Ability.Wisdom);
-        SaveGame.TryRestoringAbilityScore(Ability.Dexterity);
-        SaveGame.TryRestoringAbilityScore(Ability.Constitution);
-        SaveGame.TryRestoringAbilityScore(Ability.Charisma);
-        SaveGame.RunScript(nameof(RestoreLevelScript));
+        Game.TryRestoringAbilityScore(Ability.Strength);
+        Game.TryRestoringAbilityScore(Ability.Intelligence);
+        Game.TryRestoringAbilityScore(Ability.Wisdom);
+        Game.TryRestoringAbilityScore(Ability.Dexterity);
+        Game.TryRestoringAbilityScore(Ability.Constitution);
+        Game.TryRestoringAbilityScore(Ability.Charisma);
+        Game.RunScript(nameof(RestoreLevelScript));
         return true;
     }
 

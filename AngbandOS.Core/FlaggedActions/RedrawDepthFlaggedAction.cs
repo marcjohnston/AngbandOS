@@ -12,31 +12,31 @@ internal class RedrawDepthFlaggedAction : FlaggedAction
 {
     private const int ColDepth = 69;
     private const int RowDepth = 44;
-    private RedrawDepthFlaggedAction(SaveGame saveGame) : base(saveGame) { }
+    private RedrawDepthFlaggedAction(Game game) : base(game) { }
     protected override void Execute()
     {
         string depths;
-        if (SaveGame.CurrentDepth == 0)
+        if (Game.CurrentDepth == 0)
         {
-            if (SaveGame.Wilderness[SaveGame.WildernessY][SaveGame.WildernessX].Dungeon != null)
+            if (Game.Wilderness[Game.WildernessY][Game.WildernessX].Dungeon != null)
             {
-                depths = SaveGame.Wilderness[SaveGame.WildernessY][SaveGame.WildernessX].Dungeon.Shortname;
-                SaveGame.Wilderness[SaveGame.WildernessY][SaveGame.WildernessX].Dungeon.Visited = true;
+                depths = Game.Wilderness[Game.WildernessY][Game.WildernessX].Dungeon.Shortname;
+                Game.Wilderness[Game.WildernessY][Game.WildernessX].Dungeon.Visited = true;
             }
             else
             {
-                depths = $"Wild ({SaveGame.WildernessX},{SaveGame.WildernessY})";
+                depths = $"Wild ({Game.WildernessX},{Game.WildernessY})";
             }
         }
         else
         {
-            depths = $"lvl {SaveGame.CurrentDepth}+{SaveGame.DungeonDifficulty}";
-            SaveGame.CurDungeon.KnownOffset = true;
-            if (SaveGame.CurrentDepth == SaveGame.CurDungeon.MaxLevel)
+            depths = $"lvl {Game.CurrentDepth}+{Game.DungeonDifficulty}";
+            Game.CurDungeon.KnownOffset = true;
+            if (Game.CurrentDepth == Game.CurDungeon.MaxLevel)
             {
-                SaveGame.CurDungeon.KnownDepth = true;
+                Game.CurDungeon.KnownDepth = true;
             }
         }
-        SaveGame.Screen.PrintLine(depths.PadLeft(9), RowDepth, ColDepth);
+        Game.Screen.PrintLine(depths.PadLeft(9), RowDepth, ColDepth);
     }
 }

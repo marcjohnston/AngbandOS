@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class LearnScript : Script, IScript
 {
-    private LearnScript(SaveGame saveGame) : base(saveGame) { }
+    private LearnScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the learn script.
@@ -18,9 +18,9 @@ internal class LearnScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        foreach (ItemFactory kPtr in SaveGame.SingletonRepository.ItemFactories)
+        foreach (ItemFactory kPtr in Game.SingletonRepository.ItemFactories)
         {
-            if (kPtr.LevelNormallyFound <= SaveGame.CommandArgument)
+            if (kPtr.LevelNormallyFound <= Game.CommandArgument)
             {
                 kPtr.FlavorAware = true;
             }

@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Mutations.RandomMutations;
 [Serializable]
 internal class RawChaosRandomMutation : Mutation
 {
-    private RawChaosRandomMutation(SaveGame saveGame) : base(saveGame) { }
+    private RawChaosRandomMutation(Game game) : base(game) { }
     public override int Frequency => 1;
     public override string GainMessage => "You feel the universe is less stable around you.";
     public override string HaveMessage => "You occasionally are surrounded with raw chaos.";
@@ -18,13 +18,13 @@ internal class RawChaosRandomMutation : Mutation
 
     public override void OnProcessWorld()
     {
-        if (SaveGame.HasAntiMagic || base.SaveGame.DieRoll(8000) != 1)
+        if (Game.HasAntiMagic || base.Game.DieRoll(8000) != 1)
         {
             return;
         }
-        SaveGame.Disturb(false);
-        SaveGame.MsgPrint("You feel the world warping around you!");
-        SaveGame.MsgPrint(null);
-        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(ChaosProjectile)), 0, SaveGame.ExperienceLevel.Value, 8);
+        Game.Disturb(false);
+        Game.MsgPrint("You feel the world warping around you!");
+        Game.MsgPrint(null);
+        Game.FireBall(Game.SingletonRepository.Projectiles.Get(nameof(ChaosProjectile)), 0, Game.ExperienceLevel.Value, 8);
     }
 }

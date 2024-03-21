@@ -10,13 +10,13 @@ namespace AngbandOS.Core.DynamicMonsterFilters;
 [Serializable]
 internal class SymbolDynamicMonsterFilter : IMonsterFilter
 {
-    private readonly SaveGame SaveGame;
+    private readonly Game Game;
     private char _character;
 
-    public SymbolDynamicMonsterFilter(SaveGame saveGame, char character)
+    public SymbolDynamicMonsterFilter(Game game, char character)
     {
         character = _character;
-        SaveGame = saveGame;
+        Game = game;
     }
 
     public bool Matches(MonsterRace rPtr)

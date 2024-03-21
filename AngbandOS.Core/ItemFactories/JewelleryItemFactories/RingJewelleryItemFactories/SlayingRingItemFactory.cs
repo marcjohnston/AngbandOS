@@ -10,19 +10,19 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class SlayingRingItemFactory : RingItemFactory
 {
-    private SlayingRingItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private SlayingRingItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(EqualSignSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(EqualSignSymbol));
     public override string Name => "Slaying";
 
     public override void ApplyMagic(Item item, int level, int power, Store? store)
     {
-        if (power == 0 && SaveGame.RandomLessThan(100) < 50)
+        if (power == 0 && Game.RandomLessThan(100) < 50)
         {
             power = -1;
         }
-        item.BonusDamage = SaveGame.DieRoll(7) + item.GetBonusValue(10, level);
-        item.BonusToHit = SaveGame.DieRoll(7) + item.GetBonusValue(10, level);
+        item.BonusDamage = Game.DieRoll(7) + item.GetBonusValue(10, level);
+        item.BonusToHit = Game.DieRoll(7) + item.GetBonusValue(10, level);
         if (power < 0)
         {
             item.IdentBroken = true;
@@ -39,5 +39,5 @@ internal class SlayingRingItemFactory : RingItemFactory
     public override int[] Locale => new int[] { 40, 0, 0, 0 };
     public override bool ShowMods => true;
     public override int Weight => 2;
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

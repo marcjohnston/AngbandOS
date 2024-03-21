@@ -8,7 +8,7 @@
 [Serializable]
 internal class EdorTheShortShopkeeper : Shopkeeper
 {
-    private EdorTheShortShopkeeper(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private EdorTheShortShopkeeper(Game game) : base(game) { } // This object is a singleton.
     public override string Name => "Edor the Short";
     public override int MaxCost =>  25000;
     public override int MinInflate =>  115;

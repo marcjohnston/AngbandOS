@@ -10,9 +10,9 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class FullPlateHardArmorItemFactory : HardArmorItemFactory
 {
-    private FullPlateHardArmorItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private FullPlateHardArmorItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(OpenBraceSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(OpenBraceSymbol));
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "Full Plate Armor";
 
@@ -26,5 +26,5 @@ internal class FullPlateHardArmorItemFactory : HardArmorItemFactory
     public override int[] Locale => new int[] { 45, 0, 0, 0 };
     public override int ToH => -3;
     public override int Weight => 380;
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

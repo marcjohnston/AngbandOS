@@ -10,17 +10,17 @@ namespace AngbandOS.Core.Mutations.ActiveMutations;
 [Serializable]
 internal class TelekinesActiveMutation : Mutation
 {
-    private TelekinesActiveMutation(SaveGame saveGame) : base(saveGame) { }
+    private TelekinesActiveMutation(Game game) : base(game) { }
     public override void Activate()
     {
-        if (!SaveGame.CheckIfRacialPowerWorks(9, 9, Ability.Wisdom, 14))
+        if (!Game.CheckIfRacialPowerWorks(9, 9, Ability.Wisdom, 14))
         {
             return;
         }
-        SaveGame.MsgPrint("You concentrate...");
-        if (SaveGame.GetDirectionWithAim(out int dir))
+        Game.MsgPrint("You concentrate...");
+        if (Game.GetDirectionWithAim(out int dir))
         {
-            SaveGame.SummonItem(dir, SaveGame.ExperienceLevel.Value * 10, true);
+            Game.SummonItem(dir, Game.ExperienceLevel.Value * 10, true);
         }
     }
 

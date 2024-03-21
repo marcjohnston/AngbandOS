@@ -10,10 +10,10 @@ namespace AngbandOS.Core.Spells.Folk;
 [Serializable]
 internal class FolkSpellZap : Spell
 {
-    private FolkSpellZap(SaveGame saveGame) : base(saveGame) { }
+    private FolkSpellZap(Game game) : base(game) { }
     protected override string? CastScriptName => nameof(ZapScript);
 
     public override string Name => "Zap";
 
-    protected override string LearnedDetails => $"dam {3 + ((SaveGame.ExperienceLevel.Value - 1) / 5)}d3";
+    protected override string LearnedDetails => $"dam {3 + ((Game.ExperienceLevel.Value - 1) / 5)}d3";
 }

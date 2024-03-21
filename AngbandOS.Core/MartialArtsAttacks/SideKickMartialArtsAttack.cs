@@ -16,5 +16,5 @@ internal class SideKickMartialArtsAttack : MartialArtsAttack
     public override int Ds => 4;
     public override int Effect => Constants.MaSlow;
     public override int MinLevel => 11;
-    private SideKickMartialArtsAttack(SaveGame saveGame) : base(saveGame) { }
+    private SideKickMartialArtsAttack(Game game) : base(game) { }
 }

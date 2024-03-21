@@ -10,9 +10,9 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class ResistHeatPotionItemFactory : PotionItemFactory
 {
-    private ResistHeatPotionItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private ResistHeatPotionItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(ExclamationPointSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(ExclamationPointSymbol));
     public override string Name => "Resist Heat";
 
     public override int[] Chance => new int[] { 1, 0, 0, 0 };
@@ -26,7 +26,7 @@ internal class ResistHeatPotionItemFactory : PotionItemFactory
     public override bool Quaff()
     {
         // Resist heat gives you timed fire resistance
-        return SaveGame.FireResistanceTimer.AddTimer(SaveGame.DieRoll(10) + 10);
+        return Game.FireResistanceTimer.AddTimer(Game.DieRoll(10) + 10);
     }
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

@@ -10,8 +10,8 @@ namespace AngbandOS.Core.MonsterSpells;
 [Serializable]
 internal class SummonHoundMonsterSpell : SummonMonsterSpell
 {
-    private SummonHoundMonsterSpell(SaveGame saveGame) : base(saveGame) { }
+    private SummonHoundMonsterSpell(Game game) : base(game) { }
     protected override string SummonName(Monster monster) => "hounds";
 
-    protected override MonsterFilter? MonsterSelector(Monster monster) => SaveGame.SingletonRepository.MonsterFilters.Get(nameof(HoundMonsterFilter));
+    protected override MonsterFilter? MonsterSelector(Monster monster) => Game.SingletonRepository.MonsterFilters.Get(nameof(HoundMonsterFilter));
 }

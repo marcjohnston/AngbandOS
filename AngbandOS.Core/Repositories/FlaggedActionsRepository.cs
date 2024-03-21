@@ -10,5 +10,5 @@ namespace AngbandOS.Core.Repositories;
 [Serializable]
 internal class FlaggedActionsRepository : DictionaryRepository<FlaggedAction>
 {
-    public FlaggedActionsRepository(SaveGame saveGame) : base(saveGame) { }
+    public FlaggedActionsRepository(Game game) : base(game) { }
 }

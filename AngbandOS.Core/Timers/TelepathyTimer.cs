@@ -10,19 +10,19 @@ namespace AngbandOS.Core.Timers;
 [Serializable]
 internal class TelepathyTimer : Timer
 {
-    private TelepathyTimer(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private TelepathyTimer(Game game) : base(game) { } // This object is a singleton.
     protected override void EffectStopped()
     {
-        SaveGame.MsgPrint("Your consciousness contracts again.");
+        Game.MsgPrint("Your consciousness contracts again.");
     }
     protected override void EffectIncreased(int newRate, int currentRate)
     {
-        SaveGame.MsgPrint("You feel your consciousness expand!");
+        Game.MsgPrint("You feel your consciousness expand!");
     }
     protected override void Noticed()
     {
-        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
-        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateMonstersFlaggedAction)).Set();
+        Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
+        Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateMonstersFlaggedAction)).Set();
         base.Noticed();
     }
 }

@@ -10,7 +10,7 @@ namespace AngbandOS.Core.MonsterSpells;
 [Serializable]
 internal abstract class ArrowProjectileMonsterSpell : BoltProjectileMonsterSpell
 {
-    protected ArrowProjectileMonsterSpell(SaveGame saveGame) : base(saveGame) { }
+    protected ArrowProjectileMonsterSpell(Game game) : base(game) { }
     public override bool IsInnate => true;
     public override bool CanBeReflected => true;
     public override bool IsAttack => true;
@@ -21,6 +21,6 @@ internal abstract class ArrowProjectileMonsterSpell : BoltProjectileMonsterSpell
     /// <returns></returns>
     public override string? VsPlayerBlindMessage => $"You hear a strange noise.";
     protected override string ActionName => "fires an arrow";
-    protected override Projectile Projectile(SaveGame saveGame) => saveGame.SingletonRepository.Projectiles.Get(nameof(ArrowProjectile));
-    public override SpellResistantDetection[] SmartLearn => new SpellResistantDetection[] { SaveGame.SingletonRepository.SpellResistantDetections.Get(nameof(ReflectSpellResistantDetection)) };
+    protected override Projectile Projectile(Game game) => game.SingletonRepository.Projectiles.Get(nameof(ArrowProjectile));
+    public override SpellResistantDetection[] SmartLearn => new SpellResistantDetection[] { Game.SingletonRepository.SpellResistantDetections.Get(nameof(ReflectSpellResistantDetection)) };
 }

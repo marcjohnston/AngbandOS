@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Tiles;
 [Serializable]
 internal class SpikedPitTile : Tile
 {
-    private SpikedPitTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private SpikedPitTile(Game game) : base(game) { } // This object is a singleton.
     protected override string SymbolName => nameof(CaretSymbol);
     public override ColorEnum Color => ColorEnum.Grey;
     protected override string? AlterActionName => nameof(DisarmAlterAction);

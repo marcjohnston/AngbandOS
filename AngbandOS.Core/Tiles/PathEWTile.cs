@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Tiles;
 [Serializable]
 internal class PathEWTile : Tile
 {
-    private PathEWTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private PathEWTile(Game game) : base(game) { } // This object is a singleton.
     protected override string SymbolName => nameof(MinusSignSymbol);
     public override ColorEnum Color => ColorEnum.BrightBrown;
     public override bool IsPath => true;

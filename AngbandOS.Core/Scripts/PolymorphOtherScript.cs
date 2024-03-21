@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class PolymorphOtherScript : Script, IScript
 {
-    private PolymorphOtherScript(SaveGame saveGame) : base(saveGame) { }
+    private PolymorphOtherScript(Game game) : base(game) { }
 
     /// <summary>
     /// Polymorphs the monster in a chosen direction.
@@ -18,10 +18,10 @@ internal class PolymorphOtherScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        if (!SaveGame.GetDirectionWithAim(out int dir))
+        if (!Game.GetDirectionWithAim(out int dir))
         {
             return;
         }
-        SaveGame.PolyMonster(dir);
+        Game.PolyMonster(dir);
     }
 }

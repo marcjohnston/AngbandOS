@@ -13,6 +13,6 @@ namespace AngbandOS.Core.ItemFilters;
 [Serializable]
 internal class ShotsOfValueItemFilter : ItemFilter<ShotAmmunitionItemFactory>
 {
-    private ShotsOfValueItemFilter(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private ShotsOfValueItemFilter(Game game) : base(game) { } // This object is a singleton.
     public override bool? HasValue => true;
 }

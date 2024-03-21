@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Widgets;
 [Serializable]
 internal class GoldWidget : IntWidget
 {
-    private GoldWidget(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private GoldWidget(Game game) : base(game) { } // This object is a singleton.
     public override int X => 3;
     public override int Y => 11;
     public override int Width => 9;

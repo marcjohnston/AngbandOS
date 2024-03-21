@@ -10,7 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class LanceSkewerFixedArtifact : FixedArtifact
 {
-    private LanceSkewerFixedArtifact(SaveGame saveGame) : base(saveGame) { }
+    private LanceSkewerFixedArtifact(Game game) : base(game) { }
 
     protected override string BaseItemFactoryName => nameof(LancePolearmWeaponItemFactory);
 

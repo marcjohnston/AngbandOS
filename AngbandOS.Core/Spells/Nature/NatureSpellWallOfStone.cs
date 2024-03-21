@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Spells.Nature;
 [Serializable]
 internal class NatureSpellWallOfStone : Spell
 {
-    private NatureSpellWallOfStone(SaveGame saveGame) : base(saveGame) { }
+    private NatureSpellWallOfStone(Game game) : base(game) { }
     protected override string? CastScriptName => nameof(WallOfStoneScript);
 
     public override string Name => "Wall of Stone";

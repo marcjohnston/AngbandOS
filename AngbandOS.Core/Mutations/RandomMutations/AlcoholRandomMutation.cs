@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Mutations.RandomMutations;
 [Serializable]
 internal class AlcoholRandomMutation : Mutation
 {
-    private AlcoholRandomMutation(SaveGame saveGame) : base(saveGame) { }
+    private AlcoholRandomMutation(Game game) : base(game) { }
     public override int Frequency => 1;
     public override string GainMessage => "Your body starts producing alcohol!";
     public override string HaveMessage => "Your body produces alcohol.";
@@ -18,43 +18,43 @@ internal class AlcoholRandomMutation : Mutation
 
     public override void OnProcessWorld()
     {
-        if (base.SaveGame.DieRoll(6400) != 321)
+        if (base.Game.DieRoll(6400) != 321)
         {
             return;
         }
-        if (SaveGame.HasChaosResistance && SaveGame.HasConfusionResistance)
+        if (Game.HasChaosResistance && Game.HasConfusionResistance)
         {
             return;
         }
-        SaveGame.Disturb(false);
-        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(PrExtraRedrawActionGroupSetFlaggedAction)).Set();
-        SaveGame.MsgPrint("You feel a SSSCHtupor cOmINg over yOu... *HIC*!");
-        if (base.SaveGame.DieRoll(20) == 1)
+        Game.Disturb(false);
+        Game.SingletonRepository.FlaggedActions.Get(nameof(PrExtraRedrawActionGroupSetFlaggedAction)).Set();
+        Game.MsgPrint("You feel a SSSCHtupor cOmINg over yOu... *HIC*!");
+        if (base.Game.DieRoll(20) == 1)
         {
-            SaveGame.MsgPrint(null);
-            if (base.SaveGame.DieRoll(3) == 1)
+            Game.MsgPrint(null);
+            if (base.Game.DieRoll(3) == 1)
             {
-                SaveGame.LoseAllInfo();
+                Game.LoseAllInfo();
             }
             else
             {
-                SaveGame.RunScript(nameof(DarkScript));
+                Game.RunScript(nameof(DarkScript));
             }
-            SaveGame.RunScriptInt(nameof(TeleportSelfScript), 100);
-            SaveGame.RunScript(nameof(DarkScript));
-            SaveGame.MsgPrint("You wake up somewhere with a sore head...");
-            SaveGame.MsgPrint("You can't remember a thing, or how you got here!");
+            Game.RunScriptInt(nameof(TeleportSelfScript), 100);
+            Game.RunScript(nameof(DarkScript));
+            Game.MsgPrint("You wake up somewhere with a sore head...");
+            Game.MsgPrint("You can't remember a thing, or how you got here!");
         }
         else
         {
-            if (!SaveGame.HasConfusionResistance)
+            if (!Game.HasConfusionResistance)
             {
-                SaveGame.ConfusedTimer.AddTimer(base.SaveGame.RandomLessThan(20) + 15);
+                Game.ConfusedTimer.AddTimer(base.Game.RandomLessThan(20) + 15);
             }
-            if (base.SaveGame.DieRoll(3) == 1 && !SaveGame.HasChaosResistance)
+            if (base.Game.DieRoll(3) == 1 && !Game.HasChaosResistance)
             {
-                SaveGame.MsgPrint("Thishcischs GooDSChtuff!");
-                SaveGame.HallucinationsTimer.AddTimer(base.SaveGame.RandomLessThan(150) + 150);
+                Game.MsgPrint("Thishcischs GooDSChtuff!");
+                Game.HallucinationsTimer.AddTimer(base.Game.RandomLessThan(150) + 150);
             }
         }
     }

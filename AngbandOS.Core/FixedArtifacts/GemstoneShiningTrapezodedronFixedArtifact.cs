@@ -10,7 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class GemstoneShiningTrapezodedronFixedArtifact : FixedArtifact
 {
-    private GemstoneShiningTrapezodedronFixedArtifact(SaveGame saveGame) : base(saveGame) { }
+    private GemstoneShiningTrapezodedronFixedArtifact(Game game) : base(game) { }
 
     protected override string BaseItemFactoryName => nameof(GemstoneLightSourceItemFactory);
 

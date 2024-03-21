@@ -15,10 +15,10 @@ namespace AngbandOS.Core.Animations;
 [Serializable]
 internal abstract class Animation : IGetKey
 {
-    protected SaveGame SaveGame;
-    protected Animation(SaveGame saveGame)
+    protected Game Game;
+    protected Animation(Game game)
     {
-        SaveGame = saveGame;
+        Game = game;
     }
 
     /// <summary>
@@ -61,17 +61,17 @@ internal abstract class Animation : IGetKey
         {
             for (int j = 0; j < grids; j++)
             {
-                if (SaveGame.PlayerHasLosBold(y[j], x[j]) && SaveGame.PanelContains(y[j], x[j]))
+                if (Game.PlayerHasLosBold(y[j], x[j]) && Game.PanelContains(y[j], x[j]))
                 {
                     ColorEnum color = oddFrame ? Color : AlternateColor;
-                    SaveGame.PrintCharacterAtMapLocation(character, color, y[j], x[j]);
+                    Game.PrintCharacterAtMapLocation(character, color, y[j], x[j]);
                     drawn = true;
                 }
             }
             if (drawn)
             {
-                SaveGame.UpdateScreen();
-                SaveGame.Pause(msec);
+                Game.UpdateScreen();
+                Game.Pause(msec);
             }
             oddFrame = !oddFrame;
         }
@@ -79,12 +79,12 @@ internal abstract class Animation : IGetKey
         {
             for (int j = 0; j < grids; j++)
             {
-                if (SaveGame.PlayerHasLosBold(y[j], x[j]) && SaveGame.PanelContains(y[j], x[j]))
+                if (Game.PlayerHasLosBold(y[j], x[j]) && Game.PanelContains(y[j], x[j]))
                 {
-                    SaveGame.RedrawSingleLocation(y[j], x[j]);
+                    Game.RedrawSingleLocation(y[j], x[j]);
                 }
             }
-            SaveGame.UpdateScreen();
+            Game.UpdateScreen();
         }
     }
 }

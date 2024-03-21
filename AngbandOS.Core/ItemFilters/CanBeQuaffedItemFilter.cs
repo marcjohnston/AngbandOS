@@ -13,7 +13,7 @@ namespace AngbandOS.Core.ItemFilters;
 [Serializable]
 internal class CanBeQuaffedItemFilter : AllItemsItemFilter
 {
-    private CanBeQuaffedItemFilter(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private CanBeQuaffedItemFilter(Game game) : base(game) { } // This object is a singleton.
 
     public override bool? CanBeQuaffed => true;
 }

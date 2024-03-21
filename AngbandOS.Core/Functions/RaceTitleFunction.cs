@@ -9,6 +9,6 @@
 [Serializable]
 internal class RaceTitleFunction : StringFunction
 {
-    private RaceTitleFunction(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-    public override string Value => SaveGame.Race.Title;
+    private RaceTitleFunction(Game game) : base(game) { } // This object is a singleton.
+    public override string Value => Game.Race.Title;
 }

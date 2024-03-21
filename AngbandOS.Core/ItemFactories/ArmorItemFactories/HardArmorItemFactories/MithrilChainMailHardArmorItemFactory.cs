@@ -10,9 +10,9 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class MithrilChainMailHardArmorItemFactory : HardArmorItemFactory
 {
-    private MithrilChainMailHardArmorItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private MithrilChainMailHardArmorItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(OpenBraceSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(OpenBraceSymbol));
     public override ColorEnum Color => ColorEnum.BrightBlue;
     public override string Name => "Mithril Chain Mail";
 
@@ -27,5 +27,5 @@ internal class MithrilChainMailHardArmorItemFactory : HardArmorItemFactory
     public override int[] Locale => new int[] { 55, 0, 0, 0 };
     public override int ToH => -1;
     public override int Weight => 150;
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

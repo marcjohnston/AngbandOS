@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class ViewMapScript : Script, IScript, IRepeatableScript
 {
-    private ViewMapScript(SaveGame saveGame) : base(saveGame) { }
+    private ViewMapScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the view map script and returns false.
@@ -30,40 +30,40 @@ internal class ViewMapScript : Script, IScript, IRepeatableScript
     {
         int cy = -1;
         int cx = -1;
-        SaveGame.FullScreenOverlay = true;
-        ScreenBuffer savedScreen = SaveGame.Screen.Clone();
-        SaveGame.Screen.Clear();
+        Game.FullScreenOverlay = true;
+        ScreenBuffer savedScreen = Game.Screen.Clone();
+        Game.Screen.Clear();
         // If we're on the surface, display the island map
-        if (SaveGame.CurrentDepth == 0)
+        if (Game.CurrentDepth == 0)
         {
-            SaveGame.SetBackground(BackgroundImageEnum.WildMap);
-            SaveGame.DisplayWildMap();
+            Game.SetBackground(BackgroundImageEnum.WildMap);
+            Game.DisplayWildMap();
         }
         else
         {
             // We're not on the surface, so draw the level map
-            SaveGame.SetBackground(BackgroundImageEnum.Map);
+            Game.SetBackground(BackgroundImageEnum.Map);
             DisplayMap(out cy, out cx);
         }
         // Give us a prompt, and display the cursor in the player's location
-        SaveGame.Screen.Print(ColorEnum.Orange, "[Press any key to continue]", 43, 26);
-        if (SaveGame.CurrentDepth == 0)
+        Game.Screen.Print(ColorEnum.Orange, "[Press any key to continue]", 43, 26);
+        if (Game.CurrentDepth == 0)
         {
-            SaveGame.Screen.Goto(SaveGame.WildernessY + 2, SaveGame.WildernessX + 2);
+            Game.Screen.Goto(Game.WildernessY + 2, Game.WildernessX + 2);
         }
         else
         {
-            SaveGame.Screen.Goto(cy, cx);
+            Game.Screen.Goto(cy, cx);
         }
         // Wait for a keypress, and restore the screen (looking at the map takes no time)
-        SaveGame.Inkey();
-        SaveGame.Screen.Restore(savedScreen);
-        SaveGame.FullScreenOverlay = false;
-        SaveGame.SetBackground(BackgroundImageEnum.Overhead);
+        Game.Inkey();
+        Game.Screen.Restore(savedScreen);
+        Game.FullScreenOverlay = false;
+        Game.SetBackground(BackgroundImageEnum.Overhead);
     }
 
-    private const int _mapHgt = SaveGame.MaxHgt / _ratio;
-    private const int _mapWid = SaveGame.MaxWid / _ratio;
+    private const int _mapHgt = Game.MaxHgt / _ratio;
+    private const int _mapWid = Game.MaxWid / _ratio;
     private const int _ratio = 3;
 
     public void DisplayMap(out int cy, out int cx)
@@ -96,9 +96,9 @@ internal class ViewMapScript : Script, IScript, IRepeatableScript
             }
         }
         int maxx = maxy = 0;
-        for (int i = 0; i < SaveGame.CurWid; ++i)
+        for (int i = 0; i < Game.CurWid; ++i)
         {
-            for (int j = 0; j < SaveGame.CurHgt; ++j)
+            for (int j = 0; j < Game.CurHgt; ++j)
             {
                 // Compute the zoomed out coordinate for this specific map location.
                 x = (i / _ratio) + 1;
@@ -113,10 +113,10 @@ internal class ViewMapScript : Script, IScript, IRepeatableScript
                 }
 
                 // Determine the color and character of this specific map location.
-                SaveGame.MapInfo(j, i, out tempColor, out tempCharacter);
+                Game.MapInfo(j, i, out tempColor, out tempCharacter);
 
                 // Get the priority of the specific map location.
-                int tempPriority = SaveGame.Grid[j][i].FeatureType.MapPriority;
+                int tempPriority = Game.Grid[j][i].FeatureType.MapPriority;
                 if (tempColor == ColorEnum.Background)
                 {
                     tempPriority = 0;
@@ -131,8 +131,8 @@ internal class ViewMapScript : Script, IScript, IRepeatableScript
         }
         x = maxx + 1;
         y = maxy + 1;
-        int xOffset = (SaveGame.Screen.Width - x) / 2;
-        int yOffset = (SaveGame.Screen.Height - 1 - y) / 2;
+        int xOffset = (Game.Screen.Width - x) / 2;
+        int yOffset = (Game.Screen.Height - 1 - y) / 2;
         mc[0][0] = '+';
         ma[0][0] = ColorEnum.Purple;
         mc[0][x] = '+';
@@ -157,23 +157,23 @@ internal class ViewMapScript : Script, IScript, IRepeatableScript
         }
         for (y = 0; y < maxy + 2; ++y)
         {
-            SaveGame.Screen.Goto(yOffset + y, xOffset);
+            Game.Screen.Goto(yOffset + y, xOffset);
             for (x = 0; x < maxx + 2; ++x)
             {
                 tempColor = ma[y][x];
                 tempCharacter = mc[y][x];
-                if (SaveGame.InvulnerabilityTimer.Value != 0)
+                if (Game.InvulnerabilityTimer.Value != 0)
                 {
                     tempColor = ColorEnum.White;
                 }
-                else if (SaveGame.EtherealnessTimer.Value != 0)
+                else if (Game.EtherealnessTimer.Value != 0)
                 {
                     tempColor = ColorEnum.Black;
                 }
-                SaveGame.Screen.Print(tempColor, tempCharacter.ToString());
+                Game.Screen.Print(tempColor, tempCharacter.ToString());
             }
         }
-        cy = yOffset + (SaveGame.MapY / _ratio) + 1;
-        cx = xOffset + (SaveGame.MapX / _ratio) + 1;
+        cy = yOffset + (Game.MapY / _ratio) + 1;
+        cx = xOffset + (Game.MapX / _ratio) + 1;
     }
 }

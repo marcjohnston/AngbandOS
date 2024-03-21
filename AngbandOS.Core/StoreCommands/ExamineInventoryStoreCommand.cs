@@ -13,7 +13,7 @@ namespace AngbandOS.Core.StoreCommands;
 [Serializable]
 internal class ExamineInventoryStoreCommand : StoreCommand
 {
-    private ExamineInventoryStoreCommand(SaveGame saveGame) : base(saveGame) { }
+    private ExamineInventoryStoreCommand(Game game) : base(game) { }
     public override char KeyChar => 'I';
 
     public override string Description => "";

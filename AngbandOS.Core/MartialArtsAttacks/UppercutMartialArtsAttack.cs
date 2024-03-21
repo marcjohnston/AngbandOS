@@ -16,5 +16,5 @@ internal class UppercutMartialArtsAttack : MartialArtsAttack
     public override int Ds => 4;
     public override int Effect => 6;
     public override int MinLevel => 13;
-    private UppercutMartialArtsAttack(SaveGame saveGame) : base(saveGame) { }
+    private UppercutMartialArtsAttack(Game game) : base(game) { }
 }

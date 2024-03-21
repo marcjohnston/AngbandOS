@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Mutations.RandomMutations;
 [Serializable]
 internal class HalluRandomMutation : Mutation
 {
-    private HalluRandomMutation(SaveGame saveGame) : base(saveGame) { }
+    private HalluRandomMutation(Game game) : base(game) { }
     public override int Frequency => 1;
     public override string GainMessage => "You are afflicted by a hallucinatory insanity!";
     public override string HaveMessage => "You have a hallucinatory insanity.";
@@ -18,16 +18,16 @@ internal class HalluRandomMutation : Mutation
 
     public override void OnProcessWorld()
     {
-        if (base.SaveGame.DieRoll(6400) != 42)
+        if (base.Game.DieRoll(6400) != 42)
         {
             return;
         }
-        if (SaveGame.HasChaosResistance)
+        if (Game.HasChaosResistance)
         {
             return;
         }
-        SaveGame.Disturb(false);
-        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(PrExtraRedrawActionGroupSetFlaggedAction)).Set();
-        SaveGame.HallucinationsTimer.AddTimer(base.SaveGame.RandomLessThan(50) + 20);
+        Game.Disturb(false);
+        Game.SingletonRepository.FlaggedActions.Get(nameof(PrExtraRedrawActionGroupSetFlaggedAction)).Set();
+        Game.HallucinationsTimer.AddTimer(base.Game.RandomLessThan(50) + 20);
     }
 }

@@ -10,11 +10,11 @@ namespace AngbandOS.Core.Projection;
 [Serializable]
 internal class TimeProjectile : Projectile
 {
-    private TimeProjectile(SaveGame saveGame) : base(saveGame) { }
+    private TimeProjectile(Game game) : base(game) { }
 
-    protected override ProjectileGraphic? BoltProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get(nameof(BrightGreenBoltProjectileGraphic));
+    protected override ProjectileGraphic? BoltProjectileGraphic => Game.SingletonRepository.ProjectileGraphics.Get(nameof(BrightGreenBoltProjectileGraphic));
 
-    protected override Animation EffectAnimation => SaveGame.SingletonRepository.Animations.Get(nameof(BrightGreenCloudAnimation));
+    protected override Animation EffectAnimation => Game.SingletonRepository.Animations.Get(nameof(BrightGreenCloudAnimation));
 
     protected override bool AffectMonster(int who, Monster mPtr, int dam, int r)
     {
@@ -30,7 +30,7 @@ internal class TimeProjectile : Projectile
         {
             note = " resists.";
             dam *= 3;
-            dam /= SaveGame.DieRoll(6) + 6;
+            dam /= Game.DieRoll(6) + 6;
         }
         ApplyProjectileDamageToMonster(who, mPtr, dam, note);
         return obvious;
@@ -39,28 +39,28 @@ internal class TimeProjectile : Projectile
     protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
     {
         int k = 0;
-        bool blind = SaveGame.BlindnessTimer.Value != 0;
+        bool blind = Game.BlindnessTimer.Value != 0;
         string act = null;
         if (dam > 1600)
         {
             dam = 1600;
         }
         dam = (dam + r) / (r + 1);
-        Monster mPtr = SaveGame.Monsters[who];
+        Monster mPtr = Game.Monsters[who];
         string killer = mPtr.IndefiniteVisibleName;
         if (blind)
         {
-            SaveGame.MsgPrint("You are hit by a blast from the past!");
+            Game.MsgPrint("You are hit by a blast from the past!");
         }
-        if (SaveGame.HasTimeResistance)
+        if (Game.HasTimeResistance)
         {
             dam *= 4;
-            dam /= SaveGame.DieRoll(6) + 6;
-            SaveGame.MsgPrint("You feel as if time is passing you by.");
+            dam /= Game.DieRoll(6) + 6;
+            Game.MsgPrint("You feel as if time is passing you by.");
         }
         else
         {
-            switch (SaveGame.DieRoll(10))
+            switch (Game.DieRoll(10))
             {
                 case 1:
                 case 2:
@@ -68,8 +68,8 @@ internal class TimeProjectile : Projectile
                 case 4:
                 case 5:
                     {
-                        SaveGame.MsgPrint("You feel life has clocked back.");
-                        SaveGame.LoseExperience(100 + (SaveGame.ExperiencePoints.Value / 100 * Constants.MonDrainLife));
+                        Game.MsgPrint("You feel life has clocked back.");
+                        Game.LoseExperience(100 + (Game.ExperiencePoints.Value / 100 * Constants.MonDrainLife));
                         break;
                     }
                 case 6:
@@ -77,7 +77,7 @@ internal class TimeProjectile : Projectile
                 case 8:
                 case 9:
                     {
-                        switch (SaveGame.DieRoll(6))
+                        switch (Game.DieRoll(6))
                         {
                             case 1:
                                 k = Ability.Strength;
@@ -109,32 +109,32 @@ internal class TimeProjectile : Projectile
                                 act = "beautiful";
                                 break;
                         }
-                        SaveGame.MsgPrint($"You're not as {act} as you used to be...");
-                        SaveGame.AbilityScores[k].Innate = SaveGame.AbilityScores[k].Innate * 3 / 4;
-                        if (SaveGame.AbilityScores[k].Innate < 3)
+                        Game.MsgPrint($"You're not as {act} as you used to be...");
+                        Game.AbilityScores[k].Innate = Game.AbilityScores[k].Innate * 3 / 4;
+                        if (Game.AbilityScores[k].Innate < 3)
                         {
-                            SaveGame.AbilityScores[k].Innate = 3;
+                            Game.AbilityScores[k].Innate = 3;
                         }
-                        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
+                        Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
                         break;
                     }
                 case 10:
                     {
-                        SaveGame.MsgPrint("You're not as powerful as you used to be...");
+                        Game.MsgPrint("You're not as powerful as you used to be...");
                         for (k = 0; k < 6; k++)
                         {
-                            SaveGame.AbilityScores[k].Innate = SaveGame.AbilityScores[k].Innate * 3 / 4;
-                            if (SaveGame.AbilityScores[k].Innate < 3)
+                            Game.AbilityScores[k].Innate = Game.AbilityScores[k].Innate * 3 / 4;
+                            if (Game.AbilityScores[k].Innate < 3)
                             {
-                                SaveGame.AbilityScores[k].Innate = 3;
+                                Game.AbilityScores[k].Innate = 3;
                             }
                         }
-                        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
+                        Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
                         break;
                     }
             }
         }
-        SaveGame.TakeHit(dam, killer);
+        Game.TakeHit(dam, killer);
         return true;
     }
 }

@@ -10,9 +10,9 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class LongBowWeaponItemFactory : BowWeaponItemFactory
 {
-    private LongBowWeaponItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private LongBowWeaponItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(CloseBracketSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(CloseBracketSymbol));
     public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "Long Bow";
 
@@ -25,5 +25,5 @@ internal class LongBowWeaponItemFactory : BowWeaponItemFactory
     public override int Weight => 40;
     public override int MissileDamageMultiplier => 3;
     public override ItemTypeEnum AmmunitionItemCategory => ItemTypeEnum.Arrow;
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

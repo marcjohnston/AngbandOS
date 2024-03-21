@@ -10,6 +10,6 @@ namespace AngbandOS.Core.ChestTrapConfigurations;
 [Serializable]
 internal class ChestTrapConfiguration7 : ChestTrapConfiguration
 {
-    private ChestTrapConfiguration7(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private ChestTrapConfiguration7(Game game) : base(game) { } // This object is a singleton.
     public override ChestTrap[] Traps => new ChestTrap[] { };  
 }

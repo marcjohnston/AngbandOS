@@ -10,21 +10,21 @@ namespace AngbandOS.Core.Projection;
 [Serializable]
 internal class OldPolyProjectile : Projectile
 {
-    private OldPolyProjectile(SaveGame saveGame) : base(saveGame) { }
+    private OldPolyProjectile(Game game) : base(game) { }
 
-    protected override ProjectileGraphic? BoltProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get(nameof(PurpleSplatProjectileGraphic));
+    protected override ProjectileGraphic? BoltProjectileGraphic => Game.SingletonRepository.ProjectileGraphics.Get(nameof(PurpleSplatProjectileGraphic));
 
-    protected override Animation EffectAnimation => SaveGame.SingletonRepository.Animations.Get(nameof(PurpleSparkleAnimation));
+    protected override Animation EffectAnimation => Game.SingletonRepository.Animations.Get(nameof(PurpleSparkleAnimation));
 
     protected override bool ProjectileAngersMonster(Monster mPtr)
     {
         // The attack will turn friends 1 in 8 times.
-        return (SaveGame.DieRoll(8) == 1);
+        return (Game.DieRoll(8) == 1);
     }
 
     protected override bool AffectMonster(int who, Monster mPtr, int dam, int r)
     {
-        GridTile cPtr = SaveGame.Grid[mPtr.MapY][mPtr.MapX];
+        GridTile cPtr = Game.Grid[mPtr.MapY][mPtr.MapX];
         MonsterRace rPtr = mPtr.Race;
         bool seen = mPtr.IsVisible;
         bool obvious = false;
@@ -34,7 +34,7 @@ internal class OldPolyProjectile : Projectile
             obvious = true;
         }
         bool doPoly = true;
-        if (rPtr.Unique || rPtr.Level > SaveGame.DieRoll(dam - 10 < 1 ? 1 : dam - 10) + 10)
+        if (rPtr.Unique || rPtr.Level > Game.DieRoll(dam - 10 < 1 ? 1 : dam - 10) + 10)
         {
             note = " is unaffected!";
             doPoly = false;
@@ -49,19 +49,19 @@ internal class OldPolyProjectile : Projectile
         {
             doPoly = false;
         }
-        if (doPoly && SaveGame.DieRoll(90) > rPtr.Level)
+        if (doPoly && Game.DieRoll(90) > rPtr.Level)
         {
             note = " is unaffected!";
             bool charm = mPtr.SmFriendly;
-            int tmp = SaveGame.PolymorphMonster(mPtr.Race);
+            int tmp = Game.PolymorphMonster(mPtr.Race);
             if (tmp != mPtr.Race.Index)
             {
                 note = " changes!";
                 dam = 0;
-                SaveGame.DeleteMonsterByIndex(cPtr.MonsterIndex, true);
-                MonsterRace race = SaveGame.SingletonRepository.MonsterRaces[tmp];
-                SaveGame.PlaceMonsterAux(mPtr.MapY, mPtr.MapX, race, false, false, charm);
-                mPtr = SaveGame.Monsters[cPtr.MonsterIndex];
+                Game.DeleteMonsterByIndex(cPtr.MonsterIndex, true);
+                MonsterRace race = Game.SingletonRepository.MonsterRaces[tmp];
+                Game.PlaceMonsterAux(mPtr.MapY, mPtr.MapX, race, false, false, charm);
+                mPtr = Game.Monsters[cPtr.MonsterIndex];
             }
         }
         ApplyProjectileDamageToMonster(who, mPtr, dam, note);

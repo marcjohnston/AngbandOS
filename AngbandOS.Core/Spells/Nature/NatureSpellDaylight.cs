@@ -10,10 +10,10 @@ namespace AngbandOS.Core.Spells.Nature;
 [Serializable]
 internal class NatureSpellDaylight : Spell
 {
-    private NatureSpellDaylight(SaveGame saveGame) : base(saveGame) { }
+    private NatureSpellDaylight(Game game) : base(game) { }
     protected override string? CastScriptName => nameof(CallDaylightScript);
 
     public override string Name => "Daylight";
 
-    protected override string LearnedDetails => $"dam 2d{SaveGame.ExperienceLevel.Value / 2}";
+    protected override string LearnedDetails => $"dam 2d{Game.ExperienceLevel.Value / 2}";
 }

@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class LightAreaScript : Script, IScript
 {
-    private LightAreaScript(SaveGame saveGame) : base(saveGame) { }
+    private LightAreaScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script.
@@ -18,6 +18,6 @@ internal class LightAreaScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        SaveGame.LightArea(SaveGame.DiceRoll(2, SaveGame.ExperienceLevel.Value / 2), (SaveGame.ExperienceLevel.Value / 10) + 1);
+        Game.LightArea(Game.DiceRoll(2, Game.ExperienceLevel.Value / 2), (Game.ExperienceLevel.Value / 10) + 1);
     }
 }

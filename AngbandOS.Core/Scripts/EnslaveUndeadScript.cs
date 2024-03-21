@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class EnslaveUndeadScript : Script, IScript
 {
-    private EnslaveUndeadScript(SaveGame saveGame) : base(saveGame) { }
+    private EnslaveUndeadScript(Game game) : base(game) { }
 
     /// <summary>
     /// Changes the monster in a chosen direction into being friendly.
@@ -18,10 +18,10 @@ internal class EnslaveUndeadScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        if (!SaveGame.GetDirectionWithAim(out int dir))
+        if (!Game.GetDirectionWithAim(out int dir))
         {
             return;
         }
-        SaveGame.ControlOneUndead(dir, SaveGame.ExperienceLevel.Value);
+        Game.ControlOneUndead(dir, Game.ExperienceLevel.Value);
     }
 }

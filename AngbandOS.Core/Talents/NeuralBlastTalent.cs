@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Talents;
 [Serializable]
 internal class NeuralBlastTalent : Talent
 {
-    private NeuralBlastTalent(SaveGame saveGame) : base(saveGame) { }
+    private NeuralBlastTalent(Game game) : base(game) { }
     public override string Name => "Neural Blast";
     public override int Level => 2;
     public override int ManaCost => 1;
@@ -18,24 +18,24 @@ internal class NeuralBlastTalent : Talent
 
     public override void Use()
     {
-        if (!SaveGame.GetDirectionWithAim(out int dir))
+        if (!Game.GetDirectionWithAim(out int dir))
         {
             return;
         }
-        if (SaveGame.DieRoll(100) < SaveGame.ExperienceLevel.Value * 2)
+        if (Game.DieRoll(100) < Game.ExperienceLevel.Value * 2)
         {
-            SaveGame.FireBeam(SaveGame.SingletonRepository.Projectiles.Get(nameof(PsiProjectile)), dir,
-                SaveGame.DiceRoll(3 + ((SaveGame.ExperienceLevel.Value - 1) / 4), 3 + (SaveGame.ExperienceLevel.Value / 15)));
+            Game.FireBeam(Game.SingletonRepository.Projectiles.Get(nameof(PsiProjectile)), dir,
+                Game.DiceRoll(3 + ((Game.ExperienceLevel.Value - 1) / 4), 3 + (Game.ExperienceLevel.Value / 15)));
         }
         else
         {
-            SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(PsiProjectile)), dir,
-                SaveGame.DiceRoll(3 + ((SaveGame.ExperienceLevel.Value - 1) / 4), 3 + (SaveGame.ExperienceLevel.Value / 15)), 0);
+            Game.FireBall(Game.SingletonRepository.Projectiles.Get(nameof(PsiProjectile)), dir,
+                Game.DiceRoll(3 + ((Game.ExperienceLevel.Value - 1) / 4), 3 + (Game.ExperienceLevel.Value / 15)), 0);
         }
     }
 
     protected override string Comment()
     {
-        return $"dam {3 + ((SaveGame.ExperienceLevel.Value - 1) / 4)}d{3 + (SaveGame.ExperienceLevel.Value / 15)}";
+        return $"dam {3 + ((Game.ExperienceLevel.Value - 1) / 4)}d{3 + (Game.ExperienceLevel.Value / 15)}";
     }
 }

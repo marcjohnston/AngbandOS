@@ -10,8 +10,8 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal abstract class JunkItemFactory : ItemFactory
 {
-    public JunkItemFactory(SaveGame saveGame) : base(saveGame) { }
-    public override ItemClass ItemClass => SaveGame.SingletonRepository.ItemClasses.Get(nameof(JunkItemClass));
+    public JunkItemFactory(Game game) : base(game) { }
+    public override ItemClass ItemClass => Game.SingletonRepository.ItemClasses.Get(nameof(JunkItemClass));
     public override int PackSort => 38;
     public override bool EasyKnow => true;
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Junk;

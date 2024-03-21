@@ -9,7 +9,7 @@ namespace AngbandOS.Core.Dungeons;
 [Serializable]
 internal class DylathLeenDungeon : Dungeon
 {
-    private DylathLeenDungeon(SaveGame saveGame) : base(saveGame) { }
+    private DylathLeenDungeon(Game game) : base(game) { }
     public override int BaseOffset => 1;
     public override int MaxLevel => 9;
     public override string Name => "the Sewers under Dylath Leen";

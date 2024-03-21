@@ -10,17 +10,17 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class DoomAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
 {
-    private DoomAmuletJeweleryItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private DoomAmuletJeweleryItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(DoubleQuoteSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(DoubleQuoteSymbol));
     public override string Name => "DOOM";
 
     public override void ApplyMagic(Item item, int level, int power, Store? store)
     {
         item.IdentBroken = true;
         item.IdentCursed = true;
-        item.TypeSpecificValue = 0 - (SaveGame.DieRoll(5) + item.GetBonusValue(5, level));
-        item.BonusArmorClass = 0 - (SaveGame.DieRoll(5) + item.GetBonusValue(5, level));
+        item.TypeSpecificValue = 0 - (Game.DieRoll(5) + item.GetBonusValue(5, level));
+        item.BonusArmorClass = 0 - (Game.DieRoll(5) + item.GetBonusValue(5, level));
     }
     public override bool Cha => true;
     public override int[] Chance => new int[] { 1, 0, 0, 0 };
@@ -36,5 +36,5 @@ internal class DoomAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
     public override bool Str => true;
     public override int Weight => 3;
     public override bool Wis => true;
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

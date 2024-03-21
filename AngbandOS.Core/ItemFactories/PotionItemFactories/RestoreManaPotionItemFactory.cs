@@ -10,9 +10,9 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class RestoreManaPotionItemFactory : PotionItemFactory
 {
-    private RestoreManaPotionItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private RestoreManaPotionItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(ExclamationPointSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(ExclamationPointSymbol));
     public override string Name => "Restore Mana";
 
     public override int[] Chance => new int[] { 1, 0, 0, 0 };
@@ -26,11 +26,11 @@ internal class RestoreManaPotionItemFactory : PotionItemFactory
     public override bool Quaff()
     {
         // Restore mana restores your to maximum mana
-        if (SaveGame.Mana.Value < SaveGame.MaxMana.Value)
+        if (Game.Mana.Value < Game.MaxMana.Value)
         {
-            SaveGame.Mana.Value = SaveGame.MaxMana.Value;
-            SaveGame.FractionalMana = 0;
-            SaveGame.MsgPrint("Your feel your head clear.");
+            Game.Mana.Value = Game.MaxMana.Value;
+            Game.FractionalMana = 0;
+            Game.MsgPrint("Your feel your head clear.");
             return true;
         }
         return false;
@@ -38,8 +38,8 @@ internal class RestoreManaPotionItemFactory : PotionItemFactory
 
     public override bool Smash(int who, int y, int x)
     {
-        SaveGame.Project(who, 1, y, x, SaveGame.DiceRoll(10, 10), SaveGame.SingletonRepository.Projectiles.Get(nameof(ManaProjectile)), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
+        Game.Project(who, 1, y, x, Game.DiceRoll(10, 10), Game.SingletonRepository.Projectiles.Get(nameof(ManaProjectile)), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
         return false;
     }
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

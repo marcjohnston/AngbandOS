@@ -10,10 +10,10 @@ namespace AngbandOS.Core.SpellResistantDetections;
 [Serializable]
 internal class FreeSpellResistantDetection : SpellResistantDetection
 {
-    private FreeSpellResistantDetection(SaveGame saveGame) : base(saveGame) { }
+    private FreeSpellResistantDetection(Game game) : base(game) { }
     public override void Learn(Monster monster)
     {
-        if (SaveGame.HasFreeAction)
+        if (Game.HasFreeAction)
         {
             monster.SmImmFree = true;
         }

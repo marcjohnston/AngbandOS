@@ -10,6 +10,6 @@ namespace AngbandOS.Core.Conditionals;
 [Serializable]
 internal class ExperienceLevelsLostConditional : Conditional
 {
-    private ExperienceLevelsLostConditional(SaveGame saveGame) : base(saveGame) { }
-    public override bool IsTrue => SaveGame.ExperienceLevel.Value < SaveGame.MaxLevelGained;
+    private ExperienceLevelsLostConditional(Game game) : base(game) { }
+    public override bool IsTrue => Game.ExperienceLevel.Value < Game.MaxLevelGained;
 }

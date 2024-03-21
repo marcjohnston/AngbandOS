@@ -10,7 +10,7 @@ namespace AngbandOS.Core.MonsterRaces;
 [Serializable]
 internal class MeanLookingMercenaryMonsterRace : MonsterRace
 {
-    protected MeanLookingMercenaryMonsterRace(SaveGame saveGame) : base(saveGame) { }
+    protected MeanLookingMercenaryMonsterRace(Game game) : base(game) { }
 
     protected override string SymbolName => nameof(LowerTSymbol);
     public override ColorEnum Color => ColorEnum.BrightRed;

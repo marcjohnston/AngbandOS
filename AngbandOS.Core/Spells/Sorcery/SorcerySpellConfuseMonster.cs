@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Spells.Sorcery;
 [Serializable]
 internal class SorcerySpellConfuseMonster : Spell
 {
-    private SorcerySpellConfuseMonster(SaveGame saveGame) : base(saveGame) { }
+    private SorcerySpellConfuseMonster(Game game) : base(game) { }
     protected override string? CastScriptName => nameof(ConfuseMonsterScript);
 
     public override string Name => "Confuse Monster";

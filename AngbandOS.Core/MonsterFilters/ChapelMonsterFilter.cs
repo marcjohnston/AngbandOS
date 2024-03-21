@@ -10,7 +10,7 @@ namespace AngbandOS.Core.MonsterFilters;
 [Serializable]
 internal class ChapelMonsterFilter : MonsterFilter
 {
-    private ChapelMonsterFilter(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private ChapelMonsterFilter(Game game) : base(game) { } // This object is a singleton.
     /// <summary>
     /// Returns true, if a monster is not unique and is a Shaman.
     /// </summary>

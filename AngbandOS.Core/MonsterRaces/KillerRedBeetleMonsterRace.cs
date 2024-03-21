@@ -10,7 +10,7 @@ namespace AngbandOS.Core.MonsterRaces;
 [Serializable]
 internal class KillerRedBeetleMonsterRace : MonsterRace
 {
-    protected KillerRedBeetleMonsterRace(SaveGame saveGame) : base(saveGame) { }
+    protected KillerRedBeetleMonsterRace(Game game) : base(game) { }
 
     protected override string SymbolName => nameof(UpperKSymbol);
     public override ColorEnum Color => ColorEnum.Red;

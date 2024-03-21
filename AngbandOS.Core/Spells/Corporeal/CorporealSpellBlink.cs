@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Spells.Corporeal;
 [Serializable]
 internal class CorporealSpellBlink : Spell
 {
-    private CorporealSpellBlink(SaveGame saveGame) : base(saveGame) { }
+    private CorporealSpellBlink(Game game) : base(game) { }
     protected override string? CastScriptName => nameof(PhaseDoorScript);
 
     public override string Name => "Blink";

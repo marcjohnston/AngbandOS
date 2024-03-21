@@ -10,16 +10,16 @@ namespace AngbandOS.Core.MonsterSpells;
 [Serializable]
 internal class RadiationBallMonsterSpell : BallProjectileMonsterSpell
 {
-    private RadiationBallMonsterSpell(SaveGame saveGame) : base(saveGame) { }
+    private RadiationBallMonsterSpell(Game game) : base(game) { }
     public override bool IsInnate => true;
     public override bool UsesRadiation => true;
     public override bool IsAttack => true;
     protected override string ActionName => "casts a ball of radiation";
-    protected override Projectile Projectile(SaveGame saveGame) => saveGame.SingletonRepository.Projectiles.Get(nameof(NukeProjectile));
+    protected override Projectile Projectile(Game game) => game.SingletonRepository.Projectiles.Get(nameof(NukeProjectile));
     protected override int Damage(Monster monster)
     {
         int monsterLevel = monster.Race.Level >= 1 ? monster.Race.Level : 1;
-        return monsterLevel + SaveGame.DiceRoll(10, 6);
+        return monsterLevel + Game.DiceRoll(10, 6);
     }
-    public override SpellResistantDetection[] SmartLearn => new SpellResistantDetection[] { SaveGame.SingletonRepository.SpellResistantDetections.Get(nameof(PoisSpellResistantDetection)) };
+    public override SpellResistantDetection[] SmartLearn => new SpellResistantDetection[] { Game.SingletonRepository.SpellResistantDetections.Get(nameof(PoisSpellResistantDetection)) };
 }

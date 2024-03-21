@@ -10,8 +10,8 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal abstract class WandItemFactory : ItemFactory, IFlavorFactory
 {
-    public WandItemFactory(SaveGame saveGame) : base(saveGame) { }
-    public override ItemClass ItemClass => SaveGame.SingletonRepository.ItemClasses.Get(nameof(WandsItemClass));
+    public WandItemFactory(Game game) : base(game) { }
+    public override ItemClass ItemClass => Game.SingletonRepository.ItemClasses.Get(nameof(WandsItemClass));
 
     /// <summary>
     /// Returns the factory that this item was created by; casted as an IFlavor.
@@ -23,7 +23,7 @@ internal abstract class WandItemFactory : ItemFactory, IFlavorFactory
         string s = "";
         if (item.IsKnown())
         {
-            s += $" ({item.TypeSpecificValue} {SaveGame.CountPluralize("charge", item.TypeSpecificValue)})";
+            s += $" ({item.TypeSpecificValue} {Game.CountPluralize("charge", item.TypeSpecificValue)})";
         }
         s += base.GetVerboseDescription(item);
         return s;
@@ -32,7 +32,7 @@ internal abstract class WandItemFactory : ItemFactory, IFlavorFactory
     {
         string flavor = item.IdentityIsStoreBought ? "" : $"{FlavorFactory.Flavor.Name} ";
         string ofName = isFlavorAware ? $" of {FriendlyName}" : "";
-        string name = $"{flavor}{SaveGame.CountPluralize("Wand", item.Count)}{ofName}";
+        string name = $"{flavor}{Game.CountPluralize("Wand", item.Count)}{ofName}";
         return includeCountPrefix ? GetPrefixCount(true, name, item.Count, item.IsKnownArtifact) : name;
     }
 
@@ -44,7 +44,7 @@ internal abstract class WandItemFactory : ItemFactory, IFlavorFactory
     /// <summary>
     /// Returns the want flavors repository because wands have flavors that need to be identified.
     /// </summary>
-    public IEnumerable<Flavor>? GetFlavorRepository() => SaveGame.SingletonRepository.WandReadableFlavors;
+    public IEnumerable<Flavor>? GetFlavorRepository() => Game.SingletonRepository.WandReadableFlavors;
 
     /// <inheritdoc/>
     public Flavor Flavor { get; set; }
@@ -53,7 +53,7 @@ internal abstract class WandItemFactory : ItemFactory, IFlavorFactory
 
     public override int PackSort => 14;
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Wand;
-    public abstract bool ExecuteActivation(SaveGame saveGame, int dir);
+    public abstract bool ExecuteActivation(Game game, int dir);
     public override int BaseValue => 50;
     public override bool CanBeAimed => true;
     public override bool HatesElectricity => true;

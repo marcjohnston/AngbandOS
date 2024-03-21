@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class LightningStormScript : Script, IScript
 {
-    private LightningStormScript(SaveGame saveGame) : base(saveGame) { }
+    private LightningStormScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script.
@@ -18,10 +18,10 @@ internal class LightningStormScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        if (!SaveGame.GetDirectionWithAim(out int dir))
+        if (!Game.GetDirectionWithAim(out int dir))
         {
             return;
         }
-        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(ElecProjectile)), dir, 90 + SaveGame.ExperienceLevel.Value, (SaveGame.ExperienceLevel.Value / 12) + 1);
+        Game.FireBall(Game.SingletonRepository.Projectiles.Get(nameof(ElecProjectile)), dir, 90 + Game.ExperienceLevel.Value, (Game.ExperienceLevel.Value / 12) + 1);
     }
 }

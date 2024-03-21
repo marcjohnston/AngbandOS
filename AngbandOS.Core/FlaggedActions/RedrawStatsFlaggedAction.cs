@@ -12,24 +12,24 @@ internal class RedrawStatsFlaggedAction : FlaggedAction
 {
     private const int RowStat = 15;
     private const int ColStat = 6;
-    private RedrawStatsFlaggedAction(SaveGame saveGame) : base(saveGame) { }
+    private RedrawStatsFlaggedAction(Game game) : base(game) { }
     private void PrtStat(int stat)
     {
-        if (SaveGame.AbilityScores[stat].Innate < SaveGame.AbilityScores[stat].InnateMax)
+        if (Game.AbilityScores[stat].Innate < Game.AbilityScores[stat].InnateMax)
         {
-            SaveGame.Screen.Print(Constants.StatNamesReduced[stat], RowStat + stat, 0);
-            string tmp = SaveGame.AbilityScores[stat].Adjusted.StatToString();
-            SaveGame.Screen.Print(ColorEnum.Yellow, tmp, RowStat + stat, ColStat);
+            Game.Screen.Print(Constants.StatNamesReduced[stat], RowStat + stat, 0);
+            string tmp = Game.AbilityScores[stat].Adjusted.StatToString();
+            Game.Screen.Print(ColorEnum.Yellow, tmp, RowStat + stat, ColStat);
         }
         else
         {
-            SaveGame.Screen.Print(Constants.StatNames[stat], RowStat + stat, 0);
-            string tmp = SaveGame.AbilityScores[stat].Adjusted.StatToString();
-            SaveGame.Screen.Print(ColorEnum.BrightGreen, tmp, RowStat + stat, ColStat);
+            Game.Screen.Print(Constants.StatNames[stat], RowStat + stat, 0);
+            string tmp = Game.AbilityScores[stat].Adjusted.StatToString();
+            Game.Screen.Print(ColorEnum.BrightGreen, tmp, RowStat + stat, ColStat);
         }
-        if (SaveGame.AbilityScores[stat].InnateMax == 18 + 100)
+        if (Game.AbilityScores[stat].InnateMax == 18 + 100)
         {
-            SaveGame.Screen.Print("!", RowStat + stat, 3);
+            Game.Screen.Print("!", RowStat + stat, 3);
         }
     }
 

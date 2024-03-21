@@ -10,12 +10,12 @@ namespace AngbandOS.Core.Spells.Death;
 [Serializable]
 internal class DeathSpellMalediction : Spell
 {
-    private DeathSpellMalediction(SaveGame saveGame) : base(saveGame) { }
+    private DeathSpellMalediction(Game game) : base(game) { }
     protected override string? CastScriptName => nameof(MaledictionScript);
 
     protected override string? CastFailedScriptName => nameof(WildDeathMagicScript);
 
     public override string Name => "Malediction";
 
-    protected override string LearnedDetails => $"dam {3 + ((SaveGame.ExperienceLevel.Value - 1) / 5)}d3";
+    protected override string LearnedDetails => $"dam {3 + ((Game.ExperienceLevel.Value - 1) / 5)}d3";
 }

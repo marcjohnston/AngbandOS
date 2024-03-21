@@ -10,7 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class FullPlateArmorOfTheGodsFixedArtifact : FixedArtifact
 {
-    private FullPlateArmorOfTheGodsFixedArtifact(SaveGame saveGame) : base(saveGame) { }
+    private FullPlateArmorOfTheGodsFixedArtifact(Game game) : base(game) { }
 
     protected override string BaseItemFactoryName => nameof(FullPlateHardArmorItemFactory);
 

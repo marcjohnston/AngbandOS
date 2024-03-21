@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Mutations.RandomMutations;
 [Serializable]
 internal class InvulnRandomMutation : Mutation
 {
-    private InvulnRandomMutation(SaveGame saveGame) : base(saveGame) { }
+    private InvulnRandomMutation(Game game) : base(game) { }
     public override int Frequency => 1;
     public override string GainMessage => "You are blessed with fits of invulnerability.";
     public override string HaveMessage => "You occasionally feel invincible.";
@@ -18,12 +18,12 @@ internal class InvulnRandomMutation : Mutation
 
     public override void OnProcessWorld()
     {
-        if (!SaveGame.HasAntiMagic && base.SaveGame.DieRoll(5000) == 1)
+        if (!Game.HasAntiMagic && base.Game.DieRoll(5000) == 1)
         {
-            SaveGame.Disturb(false);
-            SaveGame.MsgPrint("You feel invincible!");
-            SaveGame.MsgPrint(null);
-            SaveGame.InvulnerabilityTimer.AddTimer(base.SaveGame.DieRoll(8) + 8);
+            Game.Disturb(false);
+            Game.MsgPrint("You feel invincible!");
+            Game.MsgPrint(null);
+            Game.InvulnerabilityTimer.AddTimer(base.Game.DieRoll(8) + 8);
         }
     }
 }

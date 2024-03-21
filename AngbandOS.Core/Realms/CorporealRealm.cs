@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Realms;
 [Serializable]
 internal class CorporealRealm : Realm
 {
-    private CorporealRealm(SaveGame savedGame) : base(savedGame) { }
+    private CorporealRealm(Game savedGame) : base(savedGame) { }
 
     public override string[] Info => new string[] {
         "The Corporeal realm contains spells that exclusively affect",

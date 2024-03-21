@@ -10,7 +10,7 @@ namespace AngbandOS.Core.ClassSpells;
 [Serializable]
 internal class MageSatisfyHungerCorporealSpell : ClassSpell
 {
-    private MageSatisfyHungerCorporealSpell(SaveGame saveGame) : base(saveGame) { }
+    private MageSatisfyHungerCorporealSpell(Game game) : base(game) { }
     public override string SpellName => nameof(CorporealSpellSatisfyHunger);
     public override string CharacterClassName => nameof(MageCharacterClass);
     public override int Level => 7;

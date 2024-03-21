@@ -12,10 +12,10 @@ namespace AngbandOS.Core.WizardCommands;
 [Serializable]
 internal abstract class WizardCommand : IHelpCommand, IGetKey
 {
-    protected SaveGame SaveGame { get; }
-    protected WizardCommand(SaveGame saveGame)
+    protected Game Game { get; }
+    protected WizardCommand(Game game)
     {
-        SaveGame = saveGame;
+        Game = game;
     }
 
     /// <summary>
@@ -41,8 +41,8 @@ internal abstract class WizardCommand : IHelpCommand, IGetKey
     public string GetKey => Key;
     public void Bind() 
     {
-        ExecuteScript = ExecuteScriptName == null ? null : (IScript)SaveGame.SingletonRepository.Scripts.Get(ExecuteScriptName);
-        HelpGroup = HelpGroupName == null ? null : SaveGame.SingletonRepository.HelpGroups.Get(HelpGroupName);
+        ExecuteScript = ExecuteScriptName == null ? null : (IScript)Game.SingletonRepository.Scripts.Get(ExecuteScriptName);
+        HelpGroup = HelpGroupName == null ? null : Game.SingletonRepository.HelpGroups.Get(HelpGroupName);
     }
 
     public abstract char KeyChar { get; }

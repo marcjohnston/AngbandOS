@@ -10,13 +10,13 @@ namespace AngbandOS.Core.ArtifactBiases;
 [Serializable]
 internal class CharismaArtifactBias : ArtifactBias
 {
-    private CharismaArtifactBias(SaveGame saveGame) : base(saveGame) { }
+    private CharismaArtifactBias(Game game) : base(game) { }
     public override bool ApplyBonuses(Item item)
     {
         if (!item.RandomArtifactItemCharacteristics.Cha)
         {
             item.RandomArtifactItemCharacteristics.Cha = true;
-            if (SaveGame.DieRoll(2) == 1)
+            if (Game.DieRoll(2) == 1)
             {
                 return true;
             }
@@ -28,7 +28,7 @@ internal class CharismaArtifactBias : ArtifactBias
         if (!item.RandomArtifactItemCharacteristics.SustCha)
         {
             item.RandomArtifactItemCharacteristics.SustCha = true;
-            if (SaveGame.DieRoll(2) == 1)
+            if (Game.DieRoll(2) == 1)
             {
                 return true;
             }

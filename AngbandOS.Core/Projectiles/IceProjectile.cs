@@ -10,15 +10,15 @@ namespace AngbandOS.Core.Projection;
 [Serializable]
 internal class IceProjectile : Projectile
 {
-    private IceProjectile(SaveGame saveGame) : base(saveGame) { }
+    private IceProjectile(Game game) : base(game) { }
 
-    protected override ProjectileGraphic? BoltProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get(nameof(DiamondBoltProjectileGraphic));
+    protected override ProjectileGraphic? BoltProjectileGraphic => Game.SingletonRepository.ProjectileGraphics.Get(nameof(DiamondBoltProjectileGraphic));
 
-    protected override ProjectileGraphic? ImpactProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get(nameof(DiamondSplatProjectileGraphic));
+    protected override ProjectileGraphic? ImpactProjectileGraphic => Game.SingletonRepository.ProjectileGraphics.Get(nameof(DiamondSplatProjectileGraphic));
 
     protected override bool AffectItem(int who, int y, int x)
     {
-        GridTile cPtr = SaveGame.Grid[y][x];
+        GridTile cPtr = Game.Grid[y][x];
         bool obvious = false;
         string oName = "";
         foreach (Item oPtr in cPtr.Items)
@@ -47,23 +47,23 @@ internal class IceProjectile : Projectile
                     if (oPtr.Marked)
                     {
                         string s = plural ? "are" : "is";
-                        SaveGame.MsgPrint($"The {oName} {s} unaffected!");
+                        Game.MsgPrint($"The {oName} {s} unaffected!");
                     }
                 }
                 else
                 {
                     if (oPtr.Marked && string.IsNullOrEmpty(noteKill))
                     {
-                        SaveGame.MsgPrint($"The {oName}{noteKill}");
+                        Game.MsgPrint($"The {oName}{noteKill}");
                     }
                     bool isPotion = oPtr.Factory.CategoryEnum == ItemTypeEnum.Potion;
-                    SaveGame.DeleteObject(oPtr);
+                    Game.DeleteObject(oPtr);
                     if (isPotion)
                     {
                         PotionItemFactory potion = (PotionItemFactory)oPtr.Factory;
                         potion.Smash(who, y, x);
                     }
-                    SaveGame.RedrawSingleLocation(y, x);
+                    Game.RedrawSingleLocation(y, x);
                 }
             }
         }
@@ -80,7 +80,7 @@ internal class IceProjectile : Projectile
         {
             obvious = true;
         }
-        int doStun = (SaveGame.DieRoll(15) + 1) / (r + 1);
+        int doStun = (Game.DieRoll(15) + 1) / (r + 1);
         if (rPtr.ImmuneCold)
         {
             note = " resists a lot.";
@@ -111,32 +111,32 @@ internal class IceProjectile : Projectile
 
     protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
     {
-        bool blind = SaveGame.BlindnessTimer.Value != 0;
+        bool blind = Game.BlindnessTimer.Value != 0;
         if (dam > 1600)
         {
             dam = 1600;
         }
         dam = (dam + r) / (r + 1);
-        Monster mPtr = SaveGame.Monsters[who];
+        Monster mPtr = Game.Monsters[who];
         string killer = mPtr.IndefiniteVisibleName;
         if (blind)
         {
-            SaveGame.MsgPrint("You are hit by something sharp and cold!");
+            Game.MsgPrint("You are hit by something sharp and cold!");
         }
-        SaveGame.ColdDam(dam, killer);
-        if (!SaveGame.HasShardResistance)
+        Game.ColdDam(dam, killer);
+        if (!Game.HasShardResistance)
         {
-            SaveGame.BleedingTimer.AddTimer(SaveGame.DiceRoll(5, 8));
+            Game.BleedingTimer.AddTimer(Game.DiceRoll(5, 8));
         }
-        if (!SaveGame.HasSoundResistance)
+        if (!Game.HasSoundResistance)
         {
-            SaveGame.StunTimer.AddTimer(SaveGame.DieRoll(15));
+            Game.StunTimer.AddTimer(Game.DieRoll(15));
         }
-        if (!(SaveGame.HasColdResistance || SaveGame.ColdResistanceTimer.Value != 0) || SaveGame.DieRoll(12) == 1)
+        if (!(Game.HasColdResistance || Game.ColdResistanceTimer.Value != 0) || Game.DieRoll(12) == 1)
         {
-            if (!SaveGame.HasColdImmunity)
+            if (!Game.HasColdImmunity)
             {
-                SaveGame.InvenDamage(SaveGame.SetColdDestroy, 3);
+                Game.InvenDamage(Game.SetColdDestroy, 3);
             }
         }
         return true;

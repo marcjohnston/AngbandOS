@@ -10,26 +10,26 @@ namespace AngbandOS.Core.Projection;
 [Serializable]
 internal class MakeDoorProjectile : Projectile
 {
-    private MakeDoorProjectile(SaveGame saveGame) : base(saveGame) { }
+    private MakeDoorProjectile(Game game) : base(game) { }
 
-    protected override Animation EffectAnimation => SaveGame.SingletonRepository.Animations.Get(nameof(BrightBrownSparkleAnimation));
+    protected override Animation EffectAnimation => Game.SingletonRepository.Animations.Get(nameof(BrightBrownSparkleAnimation));
 
     protected override bool AffectFloor(int y, int x)
     {
-        GridTile cPtr = SaveGame.Grid[y][x];
+        GridTile cPtr = Game.Grid[y][x];
         bool obvious = false;
-        if (!SaveGame.GridOpenNoItemOrCreature(y, x))
+        if (!Game.GridOpenNoItemOrCreature(y, x))
         {
             return false;
         }
-        SaveGame.CaveSetFeat(y, x, SaveGame.SingletonRepository.Tiles.Get(nameof(LockedDoor0Tile)));
+        Game.CaveSetFeat(y, x, Game.SingletonRepository.Tiles.Get(nameof(LockedDoor0Tile)));
         if (cPtr.TileFlags.IsSet(GridTile.PlayerMemorized))
         {
             obvious = true;
         }
-        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateMonstersFlaggedAction)).Set();
-        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateLightFlaggedAction)).Set();
-        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateViewFlaggedAction)).Set();
+        Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateMonstersFlaggedAction)).Set();
+        Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateLightFlaggedAction)).Set();
+        Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateViewFlaggedAction)).Set();
         return obvious;
     }
 

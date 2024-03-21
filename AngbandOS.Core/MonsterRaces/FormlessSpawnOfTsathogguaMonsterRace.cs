@@ -10,7 +10,7 @@ namespace AngbandOS.Core.MonsterRaces;
 [Serializable]
 internal class FormlessSpawnOfTsathogguaMonsterRace : MonsterRace
 {
-    protected FormlessSpawnOfTsathogguaMonsterRace(SaveGame saveGame) : base(saveGame) { }
+    protected FormlessSpawnOfTsathogguaMonsterRace(Game game) : base(game) { }
 
     protected override string[]? SpellNames =>new string[] {
         nameof(AcidBoltMonsterSpell),

@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Spells.Corporeal;
 [Serializable]
 internal class CorporealSpellWordOfRecall : Spell
 {
-    private CorporealSpellWordOfRecall(SaveGame saveGame) : base(saveGame) { }
+    private CorporealSpellWordOfRecall(Game game) : base(game) { }
     protected override string? CastScriptName => nameof(ToggleRecallScript);
 
     public override string Name => "Word of Recall";

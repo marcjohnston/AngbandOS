@@ -10,7 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class PowerDragonScaleMailBladeturnerFixedArtifact : FixedArtifact
 {
-    private PowerDragonScaleMailBladeturnerFixedArtifact(SaveGame saveGame) : base(saveGame) { }
+    private PowerDragonScaleMailBladeturnerFixedArtifact(Game game) : base(game) { }
 
     protected override string BaseItemFactoryName => nameof(PowerDragonScaleMailArmorItemFactory);
 

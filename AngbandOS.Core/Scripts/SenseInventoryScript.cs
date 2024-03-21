@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class SenseInventoryScript : Script, IScript
 {
-    private SenseInventoryScript(SaveGame saveGame) : base(saveGame) { }
+    private SenseInventoryScript(Game game) : base(game) { }
 
     /// <summary>
     /// Senses magical items in the inventory.
@@ -18,24 +18,24 @@ internal class SenseInventoryScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        int playerLevel = SaveGame.ExperienceLevel.Value;
-        if (SaveGame.ConfusedTimer.Value != 0)
+        int playerLevel = Game.ExperienceLevel.Value;
+        if (Game.ConfusedTimer.Value != 0)
         {
             return;
         }
-        if (!SaveGame.BaseCharacterClass.SenseInventoryTest(SaveGame.ExperienceLevel.Value))
+        if (!Game.BaseCharacterClass.SenseInventoryTest(Game.ExperienceLevel.Value))
         {
             return;
         }
-        bool detailed = SaveGame.BaseCharacterClass.DetailedSenseInventory;
+        bool detailed = Game.BaseCharacterClass.DetailedSenseInventory;
 
         // Enumerate each of the inventory slots.
-        foreach (BaseInventorySlot inventorySlot in SaveGame.SingletonRepository.InventorySlots)
+        foreach (BaseInventorySlot inventorySlot in Game.SingletonRepository.InventorySlots)
         {
             // Enumerate each of the items in the inventory slot.
             foreach (int i in inventorySlot)
             {
-                Item? item = SaveGame.GetInventoryItem(i);
+                Item? item = Game.GetInventoryItem(i);
                 if (item == null)
                 {
                     continue;
@@ -64,13 +64,13 @@ internal class SenseInventoryScript : Script, IScript
                 }
                 string oName = item.Description(false, 0);
                 string isare = item.Count == 1 ? "is" : "are";
-                SaveGame.MsgPrint($"You feel the {oName} ({i.IndexToLabel()}) {inventorySlot.SenseLocation(i)} {isare} {qualityRating.Description}...");
+                Game.MsgPrint($"You feel the {oName} ({i.IndexToLabel()}) {inventorySlot.SenseLocation(i)} {isare} {qualityRating.Description}...");
                 item.IdentSense = true;
                 if (string.IsNullOrEmpty(item.Inscription))
                 {
                     item.Inscription = qualityRating.Description;
                 }
-                SaveGame.SingletonRepository.FlaggedActions.Get(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
+                Game.SingletonRepository.FlaggedActions.Get(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
             }
         }
     }

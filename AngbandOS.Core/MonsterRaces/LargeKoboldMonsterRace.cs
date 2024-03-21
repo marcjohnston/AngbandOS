@@ -10,7 +10,7 @@ namespace AngbandOS.Core.MonsterRaces;
 [Serializable]
 internal class LargeKoboldMonsterRace : MonsterRace
 {
-    protected LargeKoboldMonsterRace(SaveGame saveGame) : base(saveGame) { }
+    protected LargeKoboldMonsterRace(Game game) : base(game) { }
 
     protected override string SymbolName => nameof(LowerKSymbol);
     public override string Name => "Large kobold";

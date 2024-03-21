@@ -8,7 +8,7 @@
 [Serializable]
 internal class LuminTheBlueShopkeeper : Shopkeeper
 {
-    private LuminTheBlueShopkeeper(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private LuminTheBlueShopkeeper(Game game) : base(game) { } // This object is a singleton.
     public override string Name => "Lumin the Blue";
     public override int MaxCost =>  15000;
     public override int MinInflate =>  108;

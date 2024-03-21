@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Repositories;
 [Serializable]
 internal class WorshipPlayerAttacksRepository : StringListRepository
 {
-    public WorshipPlayerAttacksRepository(SaveGame saveGame) : base(saveGame) { }
+    public WorshipPlayerAttacksRepository(Game game) : base(game) { }
 
     /// <summary>
     /// Returns WorshipPlayerAttacks as the name of this string list repository.
@@ -19,7 +19,7 @@ internal class WorshipPlayerAttacksRepository : StringListRepository
 
     public override void Load()
     {
-        if (SaveGame.Configuration.WorshipPlayerAttacks == null)
+        if (Game.Configuration.WorshipPlayerAttacks == null)
         {
             Add("looks up at you!",
                 "asks how many dragons you've killed!",
@@ -33,7 +33,7 @@ internal class WorshipPlayerAttacksRepository : StringListRepository
         }
         else
         {
-            Add(SaveGame.Configuration.WorshipPlayerAttacks);
+            Add(Game.Configuration.WorshipPlayerAttacks);
         }
     }
 }

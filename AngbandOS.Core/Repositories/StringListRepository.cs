@@ -15,7 +15,7 @@ namespace AngbandOS.Core.Repositories;
 [Serializable]
 internal abstract class StringListRepository : ListRepository<string>
 {
-    protected StringListRepository(SaveGame saveGame) : base(saveGame) { }
+    protected StringListRepository(Game game) : base(game) { }
     public override void PersistEntities()
     {
         List<string> values = new List<string>();
@@ -24,7 +24,7 @@ internal abstract class StringListRepository : ListRepository<string>
             values.Add(entity);
         }
         string json = JsonSerializer.Serialize(values);
-        SaveGame.CorePersistentStorage.PersistEntity(Name, json);
+        Game.CorePersistentStorage.PersistEntity(Name, json);
     }
 
     public override string SerializeEntity(string entity)

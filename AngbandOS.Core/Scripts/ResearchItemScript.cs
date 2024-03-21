@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class ResearchItemScript : Script, IScript, IStoreScript
 {
-    private ResearchItemScript(SaveGame saveGame) : base(saveGame) { }
+    private ResearchItemScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the research item script.  Does not modify any of the store flags.
@@ -27,21 +27,21 @@ internal class ResearchItemScript : Script, IScript, IStoreScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        if (!SaveGame.ServiceHaggle(2000, out int price))
+        if (!Game.ServiceHaggle(2000, out int price))
         {
-            if (price > SaveGame.Gold.Value)
+            if (price > Game.Gold.Value)
             {
-                SaveGame.MsgPrint("You do not have the gold!");
+                Game.MsgPrint("You do not have the gold!");
             }
             else
             {
-                SaveGame.Gold.Value -= price;
-                SaveGame.SayComment_1();
-                SaveGame.PlaySound(SoundEffectEnum.StoreTransaction);
-                SaveGame.StorePrtGold();
-                SaveGame.RunScript(nameof(IdentifyItemFullyScript));
+                Game.Gold.Value -= price;
+                Game.SayComment_1();
+                Game.PlaySound(SoundEffectEnum.StoreTransaction);
+                Game.StorePrtGold();
+                Game.RunScript(nameof(IdentifyItemFullyScript));
             }
-            SaveGame.HandleStuff();
+            Game.HandleStuff();
         }
     }
 }

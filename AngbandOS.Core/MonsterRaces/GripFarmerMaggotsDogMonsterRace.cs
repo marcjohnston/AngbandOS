@@ -10,7 +10,7 @@ namespace AngbandOS.Core.MonsterRaces;
 [Serializable]
 internal class GripFarmerMaggotsDogMonsterRace : MonsterRace
 {
-    protected GripFarmerMaggotsDogMonsterRace(SaveGame saveGame) : base(saveGame) { }
+    protected GripFarmerMaggotsDogMonsterRace(Game game) : base(game) { }
 
     protected override string SymbolName => nameof(UpperCSymbol);
     public override ColorEnum Color => ColorEnum.BrightWhite;

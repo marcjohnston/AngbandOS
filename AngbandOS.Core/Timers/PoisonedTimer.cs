@@ -10,20 +10,20 @@ namespace AngbandOS.Core.Timers;
 [Serializable]
 internal class PoisonedTimer : Timer
 {
-    private PoisonedTimer(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private PoisonedTimer(Game game) : base(game) { } // This object is a singleton.
     protected override void EffectStopped()
     {
-        SaveGame.MsgPrint("You are no longer poisoned.");
+        Game.MsgPrint("You are no longer poisoned.");
     }
     protected override void EffectIncreased(int newRate, int currentRate)
     {
-        SaveGame.MsgPrint("You are poisoned!");
+        Game.MsgPrint("You are poisoned!");
     }
     public override void ProcessWorld()
     {
         if (Value != 0)
         {
-            int adjust = SaveGame.AbilityScores[Ability.Constitution].ConRecoverySpeed + 1;
+            int adjust = Game.AbilityScores[Ability.Constitution].ConRecoverySpeed + 1;
             AddTimer(-adjust);
         }
     }   

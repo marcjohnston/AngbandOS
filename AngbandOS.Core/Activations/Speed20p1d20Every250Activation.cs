@@ -13,20 +13,20 @@ namespace AngbandOS.Core.Activations;
 [Serializable]
 internal class Speed20p1d20Every250Activation : Activation
 {
-    private Speed20p1d20Every250Activation(SaveGame saveGame) : base(saveGame) { }
+    private Speed20p1d20Every250Activation(Game game) : base(game) { }
     public override int RandomChance => 25;
 
     public override string? PreActivationMessage => "Your {0} glows bright green...";
 
     protected override bool OnActivate(Item item)
     {
-        if (SaveGame.HasteTimer.Value == 0)
+        if (Game.HasteTimer.Value == 0)
         {
-            SaveGame.HasteTimer.SetTimer(SaveGame.DieRoll(20) + 20);
+            Game.HasteTimer.SetTimer(Game.DieRoll(20) + 20);
         }
         else
         {
-            SaveGame.HasteTimer.AddTimer(5);
+            Game.HasteTimer.AddTimer(5);
         }
         return true;
     }

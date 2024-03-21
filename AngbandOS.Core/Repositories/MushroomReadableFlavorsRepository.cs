@@ -10,19 +10,19 @@ namespace AngbandOS.Core.Repositories;
 [Serializable]
 internal class MushroomReadableFlavorsRepository : DictionaryRepository<MushroomReadableFlavor>
 {
-    public MushroomReadableFlavorsRepository(SaveGame saveGame) : base(saveGame) { }
+    public MushroomReadableFlavorsRepository(Game game) : base(game) { }
 
     public override void Load()
     {
-        if (SaveGame.Configuration.MushroomReadableFlavors == null)
+        if (Game.Configuration.MushroomReadableFlavors == null)
         {
             base.Load();
         }
         else
         {
-            foreach (ReadableFlavorDefinition readableFlavorDefinition in SaveGame.Configuration.MushroomReadableFlavors)
+            foreach (ReadableFlavorDefinition readableFlavorDefinition in Game.Configuration.MushroomReadableFlavors)
             {
-                Add(new GenericMushroomReadableFlavor(SaveGame, readableFlavorDefinition));
+                Add(new GenericMushroomReadableFlavor(Game, readableFlavorDefinition));
             }
         }
     }

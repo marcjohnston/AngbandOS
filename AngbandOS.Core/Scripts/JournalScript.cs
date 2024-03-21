@@ -17,7 +17,7 @@ internal class JournalScript : Script, IScript, IRepeatableScript, IStoreScript
     private readonly string[] _menuItem = new string[128];
     private int _menuLength;
 
-    private JournalScript(SaveGame saveGame) : base(saveGame) { }
+    private JournalScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the journal script and sets the RequiresRerendering flag.
@@ -45,27 +45,27 @@ internal class JournalScript : Script, IScript, IRepeatableScript, IStoreScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        SaveGame.FullScreenOverlay = true;
-        ScreenBuffer savedScreen = SaveGame.Screen.Clone();
-        SaveGame.SetBackground(BackgroundImageEnum.Paper);
-        while (!SaveGame.Shutdown)
+        Game.FullScreenOverlay = true;
+        ScreenBuffer savedScreen = Game.Screen.Clone();
+        Game.SetBackground(BackgroundImageEnum.Paper);
+        while (!Game.Shutdown)
         {
-            SaveGame.UpdateScreen();
-            SaveGame.Screen.Clear();
-            SaveGame.Screen.Print(ColorEnum.Blue, "Journal", 0, 1);
-            SaveGame.Screen.Print(ColorEnum.Blue, "=======", 1, 1);
-            SaveGame.Screen.Print(ColorEnum.Blue, "(a) Abilities", 3, 0);
-            SaveGame.Screen.Print(ColorEnum.Blue, "(d) Deities", 4, 0);
-            SaveGame.Screen.Print(ColorEnum.Blue, "(k) Kill Count", 5, 0);
-            SaveGame.Screen.Print(ColorEnum.Blue, "(m) Mutations", 6, 0);
-            SaveGame.Screen.Print(ColorEnum.Blue, "(p) Pets", 7, 0);
-            SaveGame.Screen.Print(ColorEnum.Blue, "(q) Quests", 8, 0);
-            SaveGame.Screen.Print(ColorEnum.Blue, "(r) Word of Recall", 9, 0);
-            SaveGame.Screen.Print(ColorEnum.Blue, "(s) Monsters Seen", 10, 0);
-            SaveGame.Screen.Print(ColorEnum.Blue, "(u) Uniques", 11, 0);
-            SaveGame.Screen.Print(ColorEnum.Blue, "(w) Worthless Items", 12, 0);
-            SaveGame.Screen.Print(ColorEnum.Orange, "[Select a journal section, or Escape to finish.]", 43, 1);
-            char k = SaveGame.Inkey();
+            Game.UpdateScreen();
+            Game.Screen.Clear();
+            Game.Screen.Print(ColorEnum.Blue, "Journal", 0, 1);
+            Game.Screen.Print(ColorEnum.Blue, "=======", 1, 1);
+            Game.Screen.Print(ColorEnum.Blue, "(a) Abilities", 3, 0);
+            Game.Screen.Print(ColorEnum.Blue, "(d) Deities", 4, 0);
+            Game.Screen.Print(ColorEnum.Blue, "(k) Kill Count", 5, 0);
+            Game.Screen.Print(ColorEnum.Blue, "(m) Mutations", 6, 0);
+            Game.Screen.Print(ColorEnum.Blue, "(p) Pets", 7, 0);
+            Game.Screen.Print(ColorEnum.Blue, "(q) Quests", 8, 0);
+            Game.Screen.Print(ColorEnum.Blue, "(r) Word of Recall", 9, 0);
+            Game.Screen.Print(ColorEnum.Blue, "(s) Monsters Seen", 10, 0);
+            Game.Screen.Print(ColorEnum.Blue, "(u) Uniques", 11, 0);
+            Game.Screen.Print(ColorEnum.Blue, "(w) Worthless Items", 12, 0);
+            Game.Screen.Print(ColorEnum.Orange, "[Select a journal section, or Escape to finish.]", 43, 1);
+            char k = Game.Inkey();
             if (k == '\x1b')
             {
                 break;
@@ -123,20 +123,20 @@ internal class JournalScript : Script, IScript, IRepeatableScript, IStoreScript
                     break;
             }
         }
-        SaveGame.SetBackground(BackgroundImageEnum.Overhead);
-        SaveGame.Screen.Restore(savedScreen);
-        SaveGame.FullScreenOverlay = false;
+        Game.SetBackground(BackgroundImageEnum.Overhead);
+        Game.Screen.Restore(savedScreen);
+        Game.FullScreenOverlay = false;
     }
 
     private void DisplayStat(string title, int row, int col, Func<IItemCharacteristics, bool> getStat)
     {
         // Determine if the stat is granted via any equipment.  This allows us to choose the color before rendering any of the inventory slots.
         bool anyHasStat = false;
-        foreach (BaseInventorySlot inventorySlot in SaveGame.SingletonRepository.InventorySlots.Where(_inventorySlot => _inventorySlot.IsEquipment))
+        foreach (BaseInventorySlot inventorySlot in Game.SingletonRepository.InventorySlots.Where(_inventorySlot => _inventorySlot.IsEquipment))
         {
             foreach (int i in inventorySlot.InventorySlots)
             {
-                Item? oPtr = SaveGame.GetInventoryItem(i);
+                Item? oPtr = Game.GetInventoryItem(i);
                 if (oPtr != null)
                 {
                     IItemCharacteristics itemCharacteristics = oPtr.ObjectFlagsKnown();
@@ -149,17 +149,17 @@ internal class JournalScript : Script, IScript, IRepeatableScript, IStoreScript
         }
 
         ColorEnum baseColor = anyHasStat ? ColorEnum.Green : ColorEnum.Blue; // Blue default color for missing stat, green when stat is possessed.
-        SaveGame.Screen.Print(baseColor, title, row, col);
-        SaveGame.Screen.Print(baseColor, ':', row, col + 10); // Right aligned
+        Game.Screen.Print(baseColor, title, row, col);
+        Game.Screen.Print(baseColor, ':', row, col + 10); // Right aligned
 
         // Now render all of the inventory slots.
         int index = 0;
-        foreach (BaseInventorySlot inventorySlot in SaveGame.SingletonRepository.InventorySlots.Where(_inventorySlot => _inventorySlot.IsEquipment).OrderBy(_inventorySlot => _inventorySlot.SortOrder))
+        foreach (BaseInventorySlot inventorySlot in Game.SingletonRepository.InventorySlots.Where(_inventorySlot => _inventorySlot.IsEquipment).OrderBy(_inventorySlot => _inventorySlot.SortOrder))
         {
             foreach (int i in inventorySlot.InventorySlots)
             {
                 bool thisHasStat = false;
-                Item? oPtr = SaveGame.GetInventoryItem(i);
+                Item? oPtr = Game.GetInventoryItem(i);
                 if (oPtr != null)
                 {
                     IItemCharacteristics itemCharacteristics = oPtr.ObjectFlagsKnown();
@@ -170,67 +170,67 @@ internal class JournalScript : Script, IScript, IRepeatableScript, IStoreScript
                 }
                 if (thisHasStat)
                 {
-                    SaveGame.Screen.Print(baseColor, "+", row, col + 10 + index + 1);
+                    Game.Screen.Print(baseColor, "+", row, col + 10 + index + 1);
                 }
                 else
                 {
-                    SaveGame.Screen.Print(ColorEnum.Grey, ".", row, col + 10 + index + 1);
+                    Game.Screen.Print(ColorEnum.Grey, ".", row, col + 10 + index + 1);
                 }
                 index++;
             }
         }
 
-        ItemCharacteristics playerCharacteristics = SaveGame.GetAbilitiesAsItemFlags();
+        ItemCharacteristics playerCharacteristics = Game.GetAbilitiesAsItemFlags();
         if (getStat(playerCharacteristics))
         {
-            SaveGame.Screen.Print(baseColor, "+", row, col + 10 + 26); // col + 10 + InventorySlot.Total - InventorySlot.MeleeWeapon + 1);
+            Game.Screen.Print(baseColor, "+", row, col + 10 + 26); // col + 10 + InventorySlot.Total - InventorySlot.MeleeWeapon + 1);
         }
         else
         {
-            SaveGame.Screen.Print(ColorEnum.Grey, ".", row, col + 10 + 26); // col + 10 + InventorySlot.Total - InventorySlot.MeleeWeapon + 1);
+            Game.Screen.Print(ColorEnum.Grey, ".", row, col + 10 + 26); // col + 10 + InventorySlot.Total - InventorySlot.MeleeWeapon + 1);
         }
 
     }
 
     private void DisplayMonster(int rIdx, int num, int of)
     {
-        foreach (Symbol symbol in SaveGame.SingletonRepository.Symbols)
+        foreach (Symbol symbol in Game.SingletonRepository.Symbols)
         {
-            if (symbol.Character == SaveGame.SingletonRepository.MonsterRaces[rIdx].Symbol.Character)
+            if (symbol.Character == Game.SingletonRepository.MonsterRaces[rIdx].Symbol.Character)
             {
                 string name = symbol.Name;
                 string buf = $"Monster Type: {name} ({num + 1} of {of})";
-                SaveGame.Screen.Print(ColorEnum.Blue, buf, 3, 0);
+                Game.Screen.Print(ColorEnum.Blue, buf, 3, 0);
                 break;
             }
 
         }
-        SaveGame.Screen.Goto(5, 0);
+        Game.Screen.Goto(5, 0);
         DisplayMonsterHeader(rIdx);
-        SaveGame.Screen.Goto(6, 0);
-        SaveGame.SingletonRepository.MonsterRaces[rIdx].Knowledge.DisplayBody(ColorEnum.Brown);
+        Game.Screen.Goto(6, 0);
+        Game.SingletonRepository.MonsterRaces[rIdx].Knowledge.DisplayBody(ColorEnum.Brown);
     }
 
     private void DisplayMonsterHeader(int rIdx)
     {
-        MonsterRace rPtr = SaveGame.SingletonRepository.MonsterRaces[rIdx];
+        MonsterRace rPtr = Game.SingletonRepository.MonsterRaces[rIdx];
         char c1 = rPtr.Symbol.Character;
         ColorEnum a1 = rPtr.Color;
         if (!rPtr.Unique)
         {
-            SaveGame.Screen.Print(ColorEnum.Brown, "The ");
+            Game.Screen.Print(ColorEnum.Brown, "The ");
         }
-        SaveGame.Screen.Print(ColorEnum.Brown, $"{rPtr.Name} ('");
-        SaveGame.Screen.Print(a1, c1.ToString());
-        SaveGame.Screen.Print(ColorEnum.Brown, "')");
+        Game.Screen.Print(ColorEnum.Brown, $"{rPtr.Name} ('");
+        Game.Screen.Print(a1, c1.ToString());
+        Game.Screen.Print(ColorEnum.Brown, "')");
     }
 
     private void JournalAbilities()
     {
-        SaveGame.Screen.Clear();
+        Game.Screen.Clear();
 
-        SaveGame.DisplayPlayerEquippy(0, 0 + 11);
-        SaveGame.Screen.Print(ColorEnum.Blue, "abcdefghijklm@", 1, 0 + 11);
+        Game.DisplayPlayerEquippy(0, 0 + 11);
+        Game.Screen.Print(ColorEnum.Blue, "abcdefghijklm@", 1, 0 + 11);
         DisplayStat("Add Str", 2, 0, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.Str);
         DisplayStat("Add Int", 3, 0, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.Int);
         DisplayStat("Add Wis", 4, 0, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.Wis);
@@ -248,8 +248,8 @@ internal class JournalScript : Script, IScript, IRepeatableScript, IStoreScript
         DisplayStat("Chaotic", 16, 0, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.Chaotic);
         DisplayStat("Vampiric", 17, 0, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.Vampiric);
 
-        SaveGame.DisplayPlayerEquippy(0, 26 + 11);
-        SaveGame.Screen.Print(ColorEnum.Blue, "abcdefghijklm@", 1, 26 + 11);
+        Game.DisplayPlayerEquippy(0, 26 + 11);
+        Game.Screen.Print(ColorEnum.Blue, "abcdefghijklm@", 1, 26 + 11);
         DisplayStat("Slay Anim.", 2, 26, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.SlayAnimal);
         DisplayStat("Slay Evil", 3, 26, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.SlayEvil);
         DisplayStat("Slay Und.", 4, 26, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.SlayUndead);
@@ -267,8 +267,8 @@ internal class JournalScript : Script, IScript, IRepeatableScript, IStoreScript
         DisplayStat("Fire Brand", 16, 26, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.BrandFire);
         DisplayStat("Cold Brand", 17, 26, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.BrandCold);
 
-        SaveGame.DisplayPlayerEquippy(0, 52 + 11);
-        SaveGame.Screen.Print(ColorEnum.Blue, "abcdefghijklm@", 1, 52 + 11);
+        Game.DisplayPlayerEquippy(0, 52 + 11);
+        Game.Screen.Print(ColorEnum.Blue, "abcdefghijklm@", 1, 52 + 11);
         DisplayStat("Sust Str", 2, 52, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.SustStr);
         DisplayStat("Sust Int", 3, 52, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.SustInt);
         DisplayStat("Sust Wis", 4, 52, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.SustWis);
@@ -286,8 +286,8 @@ internal class JournalScript : Script, IScript, IRepeatableScript, IStoreScript
         DisplayStat("Free Act", 16, 52, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.FreeAct);
         DisplayStat("Hold Life", 17, 52, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.HoldLife);
 
-        SaveGame.DisplayPlayerEquippy(20, 0 + 11);
-        SaveGame.Screen.Print(ColorEnum.Blue, "abcdefghijklm@", 21, 0 + 11);
+        Game.DisplayPlayerEquippy(20, 0 + 11);
+        Game.Screen.Print(ColorEnum.Blue, "abcdefghijklm@", 21, 0 + 11);
         DisplayStat("Res Acid", 22, 0, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.ResAcid);
         DisplayStat("Res Elec", 23, 0, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.ResElec);
         DisplayStat("Res Fire", 24, 0, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.ResFire);
@@ -305,8 +305,8 @@ internal class JournalScript : Script, IScript, IRepeatableScript, IStoreScript
         DisplayStat("Res Chaos", 36, 0, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.ResChaos);
         DisplayStat("Res Disen", 37, 0, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.ResDisen);
 
-        SaveGame.DisplayPlayerEquippy(20, 26 + 11);
-        SaveGame.Screen.Print(ColorEnum.Blue, "abcdefghijklm@", 21, 26 + 11);
+        Game.DisplayPlayerEquippy(20, 26 + 11);
+        Game.Screen.Print(ColorEnum.Blue, "abcdefghijklm@", 21, 26 + 11);
         DisplayStat("Aura Fire", 22, 26, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.ShFire);
         DisplayStat("Aura Elec", 23, 26, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.ShElec);
 
@@ -324,8 +324,8 @@ internal class JournalScript : Script, IScript, IRepeatableScript, IStoreScript
         DisplayStat("See Invis", 36, 26, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.SeeInvis);
         DisplayStat("Telepathy", 37, 26, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.Telepathy);
 
-        SaveGame.DisplayPlayerEquippy(20, 52 + 11);
-        SaveGame.Screen.Print(ColorEnum.Blue, "abcdefghijklm@", 21, 52 + 11);
+        Game.DisplayPlayerEquippy(20, 52 + 11);
+        Game.Screen.Print(ColorEnum.Blue, "abcdefghijklm@", 21, 52 + 11);
         DisplayStat("Digestion", 22, 52, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.SlowDigest);
         DisplayStat("Regen", 23, 52, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.Regen);
         DisplayStat("Xtra Might", 24, 52, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.XtraMight);
@@ -343,18 +343,18 @@ internal class JournalScript : Script, IScript, IRepeatableScript, IStoreScript
         DisplayStat("Hvy Curse", 36, 52, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.HeavyCurse);
         DisplayStat("Prm Curse", 37, 52, (IItemCharacteristics itemCharacteristics) => itemCharacteristics.PermaCurse);
 
-        SaveGame.Screen.Print(ColorEnum.Orange, "[Press any key to finish.]", 43, 1);
-        SaveGame.Inkey();
+        Game.Screen.Print(ColorEnum.Orange, "[Press any key to finish.]", 43, 1);
+        Game.Inkey();
     }
 
     private void JournalDeities()
     {
-        SaveGame.Screen.Clear();
-        SaveGame.Screen.Print(ColorEnum.Blue, "Standings with Deities", 0, 1);
-        SaveGame.Screen.Print(ColorEnum.Blue, "======================", 1, 1);
+        Game.Screen.Clear();
+        Game.Screen.Print(ColorEnum.Blue, "Standings with Deities", 0, 1);
+        Game.Screen.Print(ColorEnum.Blue, "======================", 1, 1);
         int row = 3;
         God patron = null;
-        foreach (var deity in SaveGame.SingletonRepository.Gods)
+        foreach (var deity in Game.SingletonRepository.Gods)
         {
             var text = deity.ShortName;
             if (deity.IsPatron)
@@ -428,33 +428,33 @@ internal class JournalScript : Script, IScript, IRepeatableScript, IStoreScript
                 text += String.Format(deity.FavorDescription, adjusted * 10);
             }
             text += ".";
-            SaveGame.Screen.Print(ColorEnum.Blue, text, row, 1);
+            Game.Screen.Print(ColorEnum.Blue, text, row, 1);
             row++;
         }
         if (patron != null)
         {
-            SaveGame.Screen.Print(ColorEnum.Blue, $"You are a follower of {patron.LongName}.", 12, 1);
-            SaveGame.Screen.Print(ColorEnum.Blue, $"Over time, your standing with {patron.ShortName} will revert to approval.", 13, 1);
-            SaveGame.Screen.Print(ColorEnum.Blue, $"Your standing with other deities will revert to annoyance.", 14, 1);
+            Game.Screen.Print(ColorEnum.Blue, $"You are a follower of {patron.LongName}.", 12, 1);
+            Game.Screen.Print(ColorEnum.Blue, $"Over time, your standing with {patron.ShortName} will revert to approval.", 13, 1);
+            Game.Screen.Print(ColorEnum.Blue, $"Your standing with other deities will revert to annoyance.", 14, 1);
         }
         else
         {
-            SaveGame.Screen.Print(ColorEnum.Blue, "Over time, your standing with all deities will revert back to indifference.", 12, 1);
+            Game.Screen.Print(ColorEnum.Blue, "Over time, your standing with all deities will revert back to indifference.", 12, 1);
         }
-        SaveGame.Screen.Print(ColorEnum.Orange, "[Press any key to finish.]", 43, 1);
-        SaveGame.Inkey();
+        Game.Screen.Print(ColorEnum.Orange, "[Press any key to finish.]", 43, 1);
+        Game.Inkey();
     }
 
     private void JournalKills()
     {
-        string[] names = new string[SaveGame.SingletonRepository.MonsterRaces.Count];
-        int[] counts = new int[SaveGame.SingletonRepository.MonsterRaces.Count];
-        bool[] unique = new bool[SaveGame.SingletonRepository.MonsterRaces.Count];
+        string[] names = new string[Game.SingletonRepository.MonsterRaces.Count];
+        int[] counts = new int[Game.SingletonRepository.MonsterRaces.Count];
+        bool[] unique = new bool[Game.SingletonRepository.MonsterRaces.Count];
         int maxCount = 0;
         int total = 0;
-        for (int i = 0; i < SaveGame.SingletonRepository.MonsterRaces.Count - 1; i++)
+        for (int i = 0; i < Game.SingletonRepository.MonsterRaces.Count - 1; i++)
         {
-            MonsterRace monster = SaveGame.SingletonRepository.MonsterRaces[i];
+            MonsterRace monster = Game.SingletonRepository.MonsterRaces[i];
             if (monster.Unique)
             {
                 bool dead = monster.MaxNum == 0;
@@ -499,15 +499,15 @@ internal class JournalScript : Script, IScript, IRepeatableScript, IStoreScript
             }
         }
         int first = 0;
-        while (!SaveGame.Shutdown)
+        while (!Game.Shutdown)
         {
             string buf;
-            SaveGame.Screen.Clear();
-            SaveGame.Screen.Print(ColorEnum.Blue, "Kill Count", 0, 1);
-            SaveGame.Screen.Print(ColorEnum.Blue, "==========", 1, 1);
+            Game.Screen.Clear();
+            Game.Screen.Print(ColorEnum.Blue, "Kill Count", 0, 1);
+            Game.Screen.Print(ColorEnum.Blue, "==========", 1, 1);
             if (maxCount == 0)
             {
-                SaveGame.Screen.Print(ColorEnum.Blue, "You haven't killed anything yet!", 3, 0);
+                Game.Screen.Print(ColorEnum.Blue, "You haven't killed anything yet!", 3, 0);
             }
             for (int i = first; i < first + 38; i++)
             {
@@ -529,13 +529,13 @@ internal class JournalScript : Script, IScript, IRepeatableScript, IStoreScript
                             buf = $"You have killed {counts[i]} {names[i]}";
                         }
                     }
-                    SaveGame.Screen.Print(ColorEnum.Blue, buf, i - first + 3, 0);
+                    Game.Screen.Print(ColorEnum.Blue, buf, i - first + 3, 0);
                 }
             }
             buf = $"Total Kills: {total}";
-            SaveGame.Screen.Print(ColorEnum.Blue, buf, 41, 0);
-            SaveGame.Screen.Print(ColorEnum.Orange, "[Use up and down to navigate list, and Escape to finish.]", 43, 1);
-            int c = SaveGame.Inkey();
+            Game.Screen.Print(ColorEnum.Blue, buf, 41, 0);
+            Game.Screen.Print(ColorEnum.Orange, "[Use up and down to navigate list, and Escape to finish.]", 43, 1);
+            int c = Game.Inkey();
             if (c == '\x1b')
             {
                 break;
@@ -565,8 +565,8 @@ internal class JournalScript : Script, IScript, IRepeatableScript, IStoreScript
 
     private void JournalMonsters()
     {
-        int[] seen = new int[SaveGame.SingletonRepository.MonsterRaces.Count];
-        int[] filtered = new int[SaveGame.SingletonRepository.MonsterRaces.Count];
+        int[] seen = new int[Game.SingletonRepository.MonsterRaces.Count];
+        int[] filtered = new int[Game.SingletonRepository.MonsterRaces.Count];
         int maxSeen = 0;
         bool[] filterMask = new bool[256];
         int[] filterLookup = new int[256];
@@ -576,13 +576,13 @@ internal class JournalScript : Script, IScript, IRepeatableScript, IStoreScript
         {
             filterMask[i] = false;
         }
-        for (int i = 1; i < SaveGame.SingletonRepository.MonsterRaces.Count; i++)
+        for (int i = 1; i < Game.SingletonRepository.MonsterRaces.Count; i++)
         {
-            if (SaveGame.SingletonRepository.MonsterRaces[i].Knowledge.RSights != 0 || SaveGame.IsWizard.Value)
+            if (Game.SingletonRepository.MonsterRaces[i].Knowledge.RSights != 0 || Game.IsWizard.Value)
             {
                 seen[maxSeen] = i;
                 maxSeen++;
-                char symbol = SaveGame.SingletonRepository.MonsterRaces[i].Symbol.Character;
+                char symbol = Game.SingletonRepository.MonsterRaces[i].Symbol.Character;
                 if (!filterMask[symbol])
                 {
                     filterMask[symbol] = true;
@@ -602,23 +602,23 @@ internal class JournalScript : Script, IScript, IRepeatableScript, IStoreScript
         }
         if (maxSeen == 0)
         {
-            SaveGame.Screen.Clear();
-            SaveGame.Screen.Print(ColorEnum.Blue, "Monsters Seen", 0, 1);
-            SaveGame.Screen.Print(ColorEnum.Blue, "=============", 1, 1);
-            SaveGame.Screen.Print(ColorEnum.Blue, "You haven't seen any monsters yet!", 3, 0);
-            SaveGame.Screen.Print(ColorEnum.Orange, "[Press any key to finish]", 43, 1);
-            SaveGame.Inkey();
+            Game.Screen.Clear();
+            Game.Screen.Print(ColorEnum.Blue, "Monsters Seen", 0, 1);
+            Game.Screen.Print(ColorEnum.Blue, "=============", 1, 1);
+            Game.Screen.Print(ColorEnum.Blue, "You haven't seen any monsters yet!", 3, 0);
+            Game.Screen.Print(ColorEnum.Orange, "[Press any key to finish]", 43, 1);
+            Game.Inkey();
             return;
         }
         int currentFilterIndex = 0;
         char currentFilter = usedFilters[0];
         bool useMax = false;
-        while (!SaveGame.Shutdown)
+        while (!Game.Shutdown)
         {
             int maxFiltered = 0;
             for (int i = 0; i < maxSeen; i++)
             {
-                if (SaveGame.SingletonRepository.MonsterRaces[seen[i]].Symbol.Character == currentFilter)
+                if (Game.SingletonRepository.MonsterRaces[seen[i]].Symbol.Character == currentFilter)
                 {
                     filtered[maxFiltered] = seen[i];
                     maxFiltered++;
@@ -630,14 +630,14 @@ internal class JournalScript : Script, IScript, IRepeatableScript, IStoreScript
                 currentIndex = maxFiltered - 1;
             }
             char c = '\x00';
-            while (!SaveGame.Shutdown)
+            while (!Game.Shutdown)
             {
-                SaveGame.Screen.Clear();
-                SaveGame.Screen.Print(ColorEnum.Blue, "Monsters Seen", 0, 1);
-                SaveGame.Screen.Print(ColorEnum.Blue, "=============", 1, 1);
+                Game.Screen.Clear();
+                Game.Screen.Print(ColorEnum.Blue, "Monsters Seen", 0, 1);
+                Game.Screen.Print(ColorEnum.Blue, "=============", 1, 1);
                 DisplayMonster(filtered[currentIndex], currentIndex, maxFiltered);
-                SaveGame.Screen.Print(ColorEnum.Orange, "[Up and down to change type, left and right to change monster, Esc to finish]", 43, 1);
-                c = SaveGame.Inkey();
+                Game.Screen.Print(ColorEnum.Orange, "[Up and down to change type, left and right to change monster, Esc to finish]", 43, 1);
+                c = Game.Inkey();
                 if (c == '4')
                 {
                     if (currentIndex > 0)
@@ -711,17 +711,17 @@ internal class JournalScript : Script, IScript, IRepeatableScript, IStoreScript
 
     private void JournalMutations()
     {
-        string[] features = SaveGame.GetMutationList();
+        string[] features = Game.GetMutationList();
         int maxFeature = features.Length;
         int first = 0;
-        while (!SaveGame.Shutdown)
+        while (!Game.Shutdown)
         {
-            SaveGame.Screen.Clear();
-            SaveGame.Screen.Print(ColorEnum.Blue, "Mutations", 0, 1);
-            SaveGame.Screen.Print(ColorEnum.Blue, "=========", 1, 1);
+            Game.Screen.Clear();
+            Game.Screen.Print(ColorEnum.Blue, "Mutations", 0, 1);
+            Game.Screen.Print(ColorEnum.Blue, "=========", 1, 1);
             if (maxFeature == 0)
             {
-                SaveGame.Screen.Print(ColorEnum.Blue, "You have no mutations.", 3, 0);
+                Game.Screen.Print(ColorEnum.Blue, "You have no mutations.", 3, 0);
             }
             else
             {
@@ -729,12 +729,12 @@ internal class JournalScript : Script, IScript, IRepeatableScript, IStoreScript
                 {
                     if (i < maxFeature)
                     {
-                        SaveGame.Screen.Print(ColorEnum.Blue, features[i], i - first + 3, 0);
+                        Game.Screen.Print(ColorEnum.Blue, features[i], i - first + 3, 0);
                     }
                 }
             }
-            SaveGame.Screen.Print(ColorEnum.Orange, "[Use up and down to navigate list, and Escape to finish.]", 43, 1);
-            int c = SaveGame.Inkey();
+            Game.Screen.Print(ColorEnum.Orange, "[Use up and down to navigate list, and Escape to finish.]", 43, 1);
+            int c = Game.Inkey();
             if (c == '\x1b')
             {
                 break;
@@ -766,9 +766,9 @@ internal class JournalScript : Script, IScript, IRepeatableScript, IStoreScript
     {
         List<string> petNames = new List<string>();
         int pets = 0;
-        for (int petCtr = SaveGame.MMax - 1; petCtr >= 1; petCtr--)
+        for (int petCtr = Game.MMax - 1; petCtr >= 1; petCtr--)
         {
-            Monster mPtr = SaveGame.Monsters[petCtr];
+            Monster mPtr = Game.Monsters[petCtr];
             if (!mPtr.SmFriendly)
             {
                 continue;
@@ -777,14 +777,14 @@ internal class JournalScript : Script, IScript, IRepeatableScript, IStoreScript
             pets++;
         }
         int first = 0;
-        while (!SaveGame.Shutdown)
+        while (!Game.Shutdown)
         {
-            SaveGame.Screen.Clear();
-            SaveGame.Screen.Print(ColorEnum.Blue, "Pets", 0, 1);
-            SaveGame.Screen.Print(ColorEnum.Blue, "====", 1, 1);
+            Game.Screen.Clear();
+            Game.Screen.Print(ColorEnum.Blue, "Pets", 0, 1);
+            Game.Screen.Print(ColorEnum.Blue, "====", 1, 1);
             if (pets == 0)
             {
-                SaveGame.Screen.Print(ColorEnum.Blue, "You have no pets.", 3, 0);
+                Game.Screen.Print(ColorEnum.Blue, "You have no pets.", 3, 0);
             }
             else
             {
@@ -792,12 +792,12 @@ internal class JournalScript : Script, IScript, IRepeatableScript, IStoreScript
                 {
                     if (i < pets)
                     {
-                        SaveGame.Screen.Print(ColorEnum.Blue, petNames[i], i - first + 3, 0);
+                        Game.Screen.Print(ColorEnum.Blue, petNames[i], i - first + 3, 0);
                     }
                 }
             }
-            SaveGame.Screen.Print(ColorEnum.Orange, "[Use up and down to navigate list, and Escape to finish.]", 43, 1);
-            int c = SaveGame.Inkey();
+            Game.Screen.Print(ColorEnum.Orange, "[Use up and down to navigate list, and Escape to finish.]", 43, 1);
+            int c = Game.Inkey();
             if (c == '\x1b')
             {
                 break;
@@ -827,44 +827,44 @@ internal class JournalScript : Script, IScript, IRepeatableScript, IStoreScript
 
     private void JournalQuests()
     {
-        SaveGame.Screen.Clear();
-        SaveGame.Screen.Print(ColorEnum.Blue, "Outstanding Quests", 0, 1);
-        SaveGame.Screen.Print(ColorEnum.Blue, "==================", 1, 1);
+        Game.Screen.Clear();
+        Game.Screen.Print(ColorEnum.Blue, "Outstanding Quests", 0, 1);
+        Game.Screen.Print(ColorEnum.Blue, "==================", 1, 1);
         int row = 3;
-        for (int i = 0; i < SaveGame.DungeonCount; i++)
+        for (int i = 0; i < Game.DungeonCount; i++)
         {
-            int firstQuest = SaveGame.SingletonRepository.Dungeons[i].FirstQuest();
+            int firstQuest = Game.SingletonRepository.Dungeons[i].FirstQuest();
             if (firstQuest != -1)
             {
-                string line = SaveGame.Quests[firstQuest].Describe();
-                SaveGame.Screen.Print(ColorEnum.Blue, line, row, 0);
+                string line = Game.Quests[firstQuest].Describe();
+                Game.Screen.Print(ColorEnum.Blue, line, row, 0);
                 row++;
             }
         }
         if (row == 3)
         {
-            SaveGame.Screen.Print(ColorEnum.Blue, "Congratulations! You have completed all the quests.", row, 0);
+            Game.Screen.Print(ColorEnum.Blue, "Congratulations! You have completed all the quests.", row, 0);
         }
-        SaveGame.Screen.Print(ColorEnum.Orange, "[Press any key to finish.]", 43, 1);
-        SaveGame.Inkey();
+        Game.Screen.Print(ColorEnum.Orange, "[Press any key to finish.]", 43, 1);
+        Game.Inkey();
     }
 
     private void JournalRecall()
     {
-        SaveGame.Screen.Clear();
-        SaveGame.Screen.Print(ColorEnum.Blue, "Word of Recall", 0, 1);
-        SaveGame.Screen.Print(ColorEnum.Blue, "==============", 1, 1);
-        string recallTown = SaveGame.TownWithHouse != null ? SaveGame.TownWithHouse.Name : SaveGame.CurTown.Name;
-        string recallDungeon = SaveGame.RecallDungeon.Name;
-        int recallLev = SaveGame.RecallDungeon.RecallLevel;
-        SaveGame.Screen.Print(ColorEnum.Blue, $"Your Word of Recall position is level {recallLev} of {recallDungeon}.", 3, 0);
-        SaveGame.Screen.Print(ColorEnum.Blue, $"Your home town is {recallTown}.", 4, 0);
-        if (SaveGame.TownWithHouse != null)
+        Game.Screen.Clear();
+        Game.Screen.Print(ColorEnum.Blue, "Word of Recall", 0, 1);
+        Game.Screen.Print(ColorEnum.Blue, "==============", 1, 1);
+        string recallTown = Game.TownWithHouse != null ? Game.TownWithHouse.Name : Game.CurTown.Name;
+        string recallDungeon = Game.RecallDungeon.Name;
+        int recallLev = Game.RecallDungeon.RecallLevel;
+        Game.Screen.Print(ColorEnum.Blue, $"Your Word of Recall position is level {recallLev} of {recallDungeon}.", 3, 0);
+        Game.Screen.Print(ColorEnum.Blue, $"Your home town is {recallTown}.", 4, 0);
+        if (Game.TownWithHouse != null)
         {
-            recallTown = "your house in " + SaveGame.TownWithHouse.Dungeon.Shortname;
+            recallTown = "your house in " + Game.TownWithHouse.Dungeon.Shortname;
         }
-        SaveGame.Screen.Print(ColorEnum.Brown,
-            SaveGame.CurrentDepth == 0
+        Game.Screen.Print(ColorEnum.Brown,
+            Game.CurrentDepth == 0
                 ? $"If you recall now, you will return to level {recallLev} of {recallDungeon}."
                 : $"If you recall now, you will return to {recallTown}.", 6, 0);
         string description =
@@ -874,22 +874,22 @@ internal class JournalScript : Script, IScript, IRepeatableScript, IStoreScript
         description += "Your Word of Recall position has its dungeon location updated ";
         description += "only when you recall from a new dungeon or tower; but has its level updated ";
         description += "each time you reach a new level within that dungeon or tower. In either case, you will be transported to a random location on the dungeon or tower level.)";
-        SaveGame.Screen.Goto(8, 0);
-        SaveGame.Screen.PrintWrap(ColorEnum.Blue, description);
-        SaveGame.Screen.Print(ColorEnum.Orange, "[Press any key to finish.]", 43, 1);
-        SaveGame.Inkey();
+        Game.Screen.Goto(8, 0);
+        Game.Screen.PrintWrap(ColorEnum.Blue, description);
+        Game.Screen.Print(ColorEnum.Orange, "[Press any key to finish.]", 43, 1);
+        Game.Inkey();
     }
 
     private void JournalUniques()
     {
-        string[] names = new string[SaveGame.SingletonRepository.MonsterRaces.Count];
-        bool[] alive = new bool[SaveGame.SingletonRepository.MonsterRaces.Count];
+        string[] names = new string[Game.SingletonRepository.MonsterRaces.Count];
+        bool[] alive = new bool[Game.SingletonRepository.MonsterRaces.Count];
         int maxCount = 0;
-        for (int i = 0; i < SaveGame.SingletonRepository.MonsterRaces.Count - 1; i++)
+        for (int i = 0; i < Game.SingletonRepository.MonsterRaces.Count - 1; i++)
         {
-            MonsterRace monster = SaveGame.SingletonRepository.MonsterRaces[i];
+            MonsterRace monster = Game.SingletonRepository.MonsterRaces[i];
             if (monster.Unique &&
-                (monster.Knowledge.RSights > 0 || SaveGame.IsWizard.Value))
+                (monster.Knowledge.RSights > 0 || Game.IsWizard.Value))
             {
                 names[maxCount] = monster.Name;
                 bool dead = monster.MaxNum == 0;
@@ -898,25 +898,25 @@ internal class JournalScript : Script, IScript, IRepeatableScript, IStoreScript
             }
         }
         int first = 0;
-        while (!SaveGame.Shutdown)
+        while (!Game.Shutdown)
         {
-            SaveGame.Screen.Clear();
-            SaveGame.Screen.Print(ColorEnum.Blue, "Unique Foes", 0, 1);
-            SaveGame.Screen.Print(ColorEnum.Blue, "===========", 1, 1);
+            Game.Screen.Clear();
+            Game.Screen.Print(ColorEnum.Blue, "Unique Foes", 0, 1);
+            Game.Screen.Print(ColorEnum.Blue, "===========", 1, 1);
             if (maxCount == 0)
             {
-                SaveGame.Screen.Print(ColorEnum.Blue, "You know of no unique foes!", 3, 0);
+                Game.Screen.Print(ColorEnum.Blue, "You know of no unique foes!", 3, 0);
             }
             for (int i = first; i < first + 38; i++)
             {
                 if (i < maxCount)
                 {
                     string buf = alive[i] ? $"{names[i]} is alive." : $"{names[i]} is dead.";
-                    SaveGame.Screen.Print(ColorEnum.Blue, buf, i - first + 3, 0);
+                    Game.Screen.Print(ColorEnum.Blue, buf, i - first + 3, 0);
                 }
             }
-            SaveGame.Screen.Print(ColorEnum.Orange, "[Use up and down to navigate list, and Escape to finish.]", 43, 1);
-            int c = SaveGame.Inkey();
+            Game.Screen.Print(ColorEnum.Orange, "[Use up and down to navigate list, and Escape to finish.]", 43, 1);
+            int c = Game.Inkey();
             if (c == '\x1b')
             {
                 break;
@@ -947,12 +947,12 @@ internal class JournalScript : Script, IScript, IRepeatableScript, IStoreScript
     private void BuildMenuForForWorthlessItems()
     {
         _menuLength = 0;
-        for (int i = 0; i < SaveGame.SingletonRepository.ItemClasses.Count - 1; i++)
+        for (int i = 0; i < Game.SingletonRepository.ItemClasses.Count - 1; i++)
         {
-            ItemClass itemClass = SaveGame.SingletonRepository.ItemClasses[i];
+            ItemClass itemClass = Game.SingletonRepository.ItemClasses[i];
             if (itemClass.AllowStomp)
             {
-                _menuItem[_menuLength] = SaveGame.Pluralize(SaveGame.SingletonRepository.ItemClasses[i].Name);
+                _menuItem[_menuLength] = Game.Pluralize(Game.SingletonRepository.ItemClasses[i].Name);
                 _menuColors[_menuLength] = ColorEnum.Blue;
                 _menuLength++;
             }
@@ -961,26 +961,26 @@ internal class JournalScript : Script, IScript, IRepeatableScript, IStoreScript
 
     private void JournalWorthlessItems()
     {
-        SaveGame.Screen.Clear();
-        SaveGame.Screen.Print(ColorEnum.Blue, "Worthless Items", 0, 1);
-        SaveGame.Screen.Print(ColorEnum.Blue, "===============", 1, 1);
-        SaveGame.Screen.Goto(3, 0);
+        Game.Screen.Clear();
+        Game.Screen.Print(ColorEnum.Blue, "Worthless Items", 0, 1);
+        Game.Screen.Print(ColorEnum.Blue, "===============", 1, 1);
+        Game.Screen.Goto(3, 0);
         string text = "Items marked in red ";
         text += "will be considered 'worthless' and you will stomp on them (destroying them) rather than ";
         text += "picking them up. Destroying (using 'k' or 'K') a worthless object will be done automatically ";
         text += "without you being prompted. Items will only be destroyed if they are on the floor or in your ";
         text += "inventory. Items you are wielding will never be destroyed (giving you chance to improve their ";
         text += "quality to a non-worthless level).";
-        SaveGame.Screen.PrintWrap(ColorEnum.Blue, text);
+        Game.Screen.PrintWrap(ColorEnum.Blue, text);
         BuildMenuForForWorthlessItems();
         int menu = _menuLength / 2;
-        while (!SaveGame.Shutdown)
+        while (!Game.Shutdown)
         {
             MenuDisplay(menu);
-            SaveGame.Screen.Print(ColorEnum.Orange, "[Up/Down = select item type, Left/Right = forward/back.]", 43, 1);
+            Game.Screen.Print(ColorEnum.Orange, "[Up/Down = select item type, Left/Right = forward/back.]", 43, 1);
             while (true)
             {
-                char c = SaveGame.Inkey();
+                char c = Game.Inkey();
                 if (c == '8' && menu > 0)
                 {
                     menu--;
@@ -993,9 +993,9 @@ internal class JournalScript : Script, IScript, IRepeatableScript, IStoreScript
                 }
                 if (c == '6')
                 {
-                    WorthlessItemTypeSelection(SaveGame.SingletonRepository.ItemClasses.First(_itemClass => SaveGame.Pluralize(_itemClass.Name) == _menuItem[menu]));
+                    WorthlessItemTypeSelection(Game.SingletonRepository.ItemClasses.First(_itemClass => Game.Pluralize(_itemClass.Name) == _menuItem[menu]));
                     BuildMenuForForWorthlessItems();
-                    _menuLength = SaveGame.SingletonRepository.ItemClasses.Count - 1;
+                    _menuLength = Game.SingletonRepository.ItemClasses.Count - 1;
                     break;
                 }
                 if (c == '4')
@@ -1008,8 +1008,8 @@ internal class JournalScript : Script, IScript, IRepeatableScript, IStoreScript
 
     private void MenuDisplay(int current)
     {
-        SaveGame.Screen.Clear(9);
-        SaveGame.Screen.Print(ColorEnum.Orange, "=>", 25, 0);
+        Game.Screen.Clear(9);
+        Game.Screen.Print(ColorEnum.Orange, "=>", 25, 0);
         string desc = string.Empty;
         ColorEnum descColor = ColorEnum.Brown;
         for (int i = 0; i < _menuLength; i++)
@@ -1041,9 +1041,9 @@ internal class JournalScript : Script, IScript, IRepeatableScript, IStoreScript
                 }
                 descColor = a;
             }
-            SaveGame.Screen.Print(a, _menuItem[i], row, 2);
+            Game.Screen.Print(a, _menuItem[i], row, 2);
         }
-        SaveGame.Screen.Print(descColor, desc, 25, 33);
+        Game.Screen.Print(descColor, desc, 25, 33);
     }
 
     private string StripDownName(string name)
@@ -1065,13 +1065,13 @@ internal class JournalScript : Script, IScript, IRepeatableScript, IStoreScript
         }
         _menuLength = 4;
         int menu = 1;
-        while (!SaveGame.Shutdown)
+        while (!Game.Shutdown)
         {
             MenuDisplay(menu);
-            SaveGame.Screen.Print(ColorEnum.Orange, "[Up/Down = select item type, Left/Right = forward/back.]", 43, 1);
+            Game.Screen.Print(ColorEnum.Orange, "[Up/Down = select item type, Left/Right = forward/back.]", 43, 1);
             while (true)
             {
-                char c = SaveGame.Inkey();
+                char c = Game.Inkey();
                 if (c == '8' && menu > 0)
                 {
                     menu--;
@@ -1107,13 +1107,13 @@ internal class JournalScript : Script, IScript, IRepeatableScript, IStoreScript
         }
         _menuLength = 4;
         int menu = 1;
-        while (!SaveGame.Shutdown)
+        while (!Game.Shutdown)
         {
             MenuDisplay(menu);
-            SaveGame.Screen.Print(ColorEnum.Orange, "[Up/Down = select item type, Left/Right = forward/back.]", 43, 1);
+            Game.Screen.Print(ColorEnum.Orange, "[Up/Down = select item type, Left/Right = forward/back.]", 43, 1);
             while (true)
             {
-                char c = SaveGame.Inkey();
+                char c = Game.Inkey();
                 if (c == '8' && menu > 0)
                 {
                     menu--;
@@ -1141,9 +1141,9 @@ internal class JournalScript : Script, IScript, IRepeatableScript, IStoreScript
     private void WorthlessItemTypeSelection(ItemClass tval)
     {
         _menuLength = 0;
-        for (int i = 0; i < SaveGame.SingletonRepository.ItemFactories.Count; i++)
+        for (int i = 0; i < Game.SingletonRepository.ItemFactories.Count; i++)
         {
-            ItemFactory kPtr = SaveGame.SingletonRepository.ItemFactories[i];
+            ItemFactory kPtr = Game.SingletonRepository.ItemFactories[i];
             if (kPtr.ItemClass == tval)
             {
                 if (kPtr.InstaArt)
@@ -1164,13 +1164,13 @@ internal class JournalScript : Script, IScript, IRepeatableScript, IStoreScript
             }
         }
         int menu = _menuLength / 2;
-        while (!SaveGame.Shutdown)
+        while (!Game.Shutdown)
         {
             MenuDisplay(menu);
-            SaveGame.Screen.Print(ColorEnum.Orange, "[Up/Down = select item type, Left/Right = forward/back.]", 43, 1);
+            Game.Screen.Print(ColorEnum.Orange, "[Up/Down = select item type, Left/Right = forward/back.]", 43, 1);
             while (true)
             {
-                char c = SaveGame.Inkey();
+                char c = Game.Inkey();
                 if (c == '8' && menu > 0)
                 {
                     menu--;
@@ -1183,14 +1183,14 @@ internal class JournalScript : Script, IScript, IRepeatableScript, IStoreScript
                 }
                 if (c == '6')
                 {
-                    ItemFactory kPtr = SaveGame.SingletonRepository.ItemFactories[_menuIndices[menu]];
+                    ItemFactory kPtr = Game.SingletonRepository.ItemFactories[_menuIndices[menu]];
                     if (kPtr.HasQuality)
                     {
                         WorthlessItemQualitySelection(kPtr);
                         _menuLength = 0;
-                        for (int i = 0; i < SaveGame.SingletonRepository.ItemFactories.Count; i++)
+                        for (int i = 0; i < Game.SingletonRepository.ItemFactories.Count; i++)
                         {
-                            kPtr = SaveGame.SingletonRepository.ItemFactories[i];
+                            kPtr = Game.SingletonRepository.ItemFactories[i];
                             if (kPtr.ItemClass == tval)
                             {
                                 if (kPtr.InstaArt)
@@ -1215,9 +1215,9 @@ internal class JournalScript : Script, IScript, IRepeatableScript, IStoreScript
                     {
                         WorthlessItemChestSelection(kPtr);
                         _menuLength = 0;
-                        for (int i = 0; i < SaveGame.SingletonRepository.ItemFactories.Count; i++)
+                        for (int i = 0; i < Game.SingletonRepository.ItemFactories.Count; i++)
                         {
-                            kPtr = SaveGame.SingletonRepository.ItemFactories[i];
+                            kPtr = Game.SingletonRepository.ItemFactories[i];
                             if (kPtr.ItemClass == tval)
                             {
                                 if (kPtr.InstaArt)

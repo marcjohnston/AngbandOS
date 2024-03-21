@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class PitTrapScript : Script, IScript
 {
-    private PitTrapScript(SaveGame saveGame) : base(saveGame) { }
+    private PitTrapScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script.
@@ -19,17 +19,17 @@ internal class PitTrapScript : Script, IScript
     public void ExecuteScript()
     {
         // A pit can be flown over with feather fall
-        if (SaveGame.HasFeatherFall)
+        if (Game.HasFeatherFall)
         {
-            SaveGame.MsgPrint("You fly over a pit trap.");
+            Game.MsgPrint("You fly over a pit trap.");
         }
         else
         {
-            SaveGame.MsgPrint("You fell into a pit!");
+            Game.MsgPrint("You fell into a pit!");
             // Pits do 2d6 fall damage
-            int damage = SaveGame.DiceRoll(2, 6);
+            int damage = Game.DiceRoll(2, 6);
             string name = "a pit trap";
-            SaveGame.TakeHit(damage, name);
+            Game.TakeHit(damage, name);
         }
     }
 }

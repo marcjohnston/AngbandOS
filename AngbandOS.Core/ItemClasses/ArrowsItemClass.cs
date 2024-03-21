@@ -3,6 +3,6 @@ namespace AngbandOS.Core.ItemClasses;
 [Serializable]
 internal class ArrowsItemClass : ItemClass
 {
-    private ArrowsItemClass(SaveGame saveGame) : base(saveGame) { }
+    private ArrowsItemClass(Game game) : base(game) { }
     public override string Name => "Arrow";
 }

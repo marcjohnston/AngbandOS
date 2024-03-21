@@ -14,12 +14,12 @@ internal class RedrawTimeFlaggedAction : FlaggedAction
     private const int RowDate = 9;
     private const int ColTime = 0;
     private const int RowTime = 8;
-    private RedrawTimeFlaggedAction(SaveGame saveGame) : base(saveGame) { }
+    private RedrawTimeFlaggedAction(Game game) : base(game) { }
     protected override void Execute()
     {
-        SaveGame.Screen.Print(ColorEnum.White, "Time", RowTime, ColTime);
-        SaveGame.Screen.Print(ColorEnum.White, "Day", RowDate, ColDate);
-        SaveGame.Screen.Print(ColorEnum.BrightGreen, SaveGame.GameTime.TimeText.PadLeft(8), RowTime, ColTime + 4);
-        SaveGame.Screen.Print(ColorEnum.BrightGreen, SaveGame.GameTime.DateText.PadLeft(8), RowDate, ColDate + 4);
+        Game.Screen.Print(ColorEnum.White, "Time", RowTime, ColTime);
+        Game.Screen.Print(ColorEnum.White, "Day", RowDate, ColDate);
+        Game.Screen.Print(ColorEnum.BrightGreen, Game.GameTime.TimeText.PadLeft(8), RowTime, ColTime + 4);
+        Game.Screen.Print(ColorEnum.BrightGreen, Game.GameTime.DateText.PadLeft(8), RowDate, ColDate + 4);
     }
 }

@@ -10,9 +10,9 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class SpeedPotionItemFactory : PotionItemFactory
 {
-    private SpeedPotionItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private SpeedPotionItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(ExclamationPointSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(ExclamationPointSymbol));
     public override string Name => "Speed";
 
     public override int[] Chance => new int[] { 1, 1, 1, 0 };
@@ -26,24 +26,24 @@ internal class SpeedPotionItemFactory : PotionItemFactory
     public override bool Quaff()
     {
         // Speed temporarily hastes you.  But it is not additive.
-        if (SaveGame.HasteTimer.Value == 0)
+        if (Game.HasteTimer.Value == 0)
         {
-            if (SaveGame.HasteTimer.SetTimer(SaveGame.DieRoll(25) + 15))
+            if (Game.HasteTimer.SetTimer(Game.DieRoll(25) + 15))
             {
                 return true;
             }
         }
         else
         {
-            SaveGame.HasteTimer.AddTimer(5);
+            Game.HasteTimer.AddTimer(5);
         }
         return false;
     }
 
     public override bool Smash(int who, int y, int x)
     {
-        SaveGame.Project(who, 2, y, x, 0, SaveGame.SingletonRepository.Projectiles.Get(nameof(OldSpeedProjectile)), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
+        Game.Project(who, 2, y, x, 0, Game.SingletonRepository.Projectiles.Get(nameof(OldSpeedProjectile)), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
         return false;
     }
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

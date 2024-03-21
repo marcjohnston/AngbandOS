@@ -12,5 +12,5 @@ namespace AngbandOS.Core.Repositories;
 [Serializable]
 internal class ItemFactoriesRepository : DictionaryRepository<ItemFactory>
 {
-    public ItemFactoriesRepository(SaveGame saveGame) : base(saveGame) { }
+    public ItemFactoriesRepository(Game game) : base(game) { }
 }

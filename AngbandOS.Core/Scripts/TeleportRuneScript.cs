@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class TeleportRuneScript : Script, IScript
 {
-    private TeleportRuneScript(SaveGame saveGame) : base(saveGame) { }
+    private TeleportRuneScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script.
@@ -19,7 +19,7 @@ internal class TeleportRuneScript : Script, IScript
     public void ExecuteScript()
     {
         // Teleport the player up to 100 squares
-        SaveGame.MsgPrint("You hit a teleport trap!");
-        SaveGame.RunScriptInt(nameof(TeleportSelfScript), 100);
+        Game.MsgPrint("You hit a teleport trap!");
+        Game.RunScriptInt(nameof(TeleportSelfScript), 100);
     }
 }

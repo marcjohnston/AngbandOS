@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class ElementalBallScript : Script, IScript
 {
-    private ElementalBallScript(SaveGame saveGame) : base(saveGame) { }
+    private ElementalBallScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script.
@@ -18,29 +18,29 @@ internal class ElementalBallScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        if (!SaveGame.GetDirectionWithAim(out int dir))
+        if (!Game.GetDirectionWithAim(out int dir))
         {
             return;
         }
         Projectile dummy;
-        switch (SaveGame.DieRoll(4))
+        switch (Game.DieRoll(4))
         {
             case 1:
-                dummy = SaveGame.SingletonRepository.Projectiles.Get(nameof(FireProjectile));
+                dummy = Game.SingletonRepository.Projectiles.Get(nameof(FireProjectile));
                 break;
 
             case 2:
-                dummy = SaveGame.SingletonRepository.Projectiles.Get(nameof(ElecProjectile));
+                dummy = Game.SingletonRepository.Projectiles.Get(nameof(ElecProjectile));
                 break;
 
             case 3:
-                dummy = SaveGame.SingletonRepository.Projectiles.Get(nameof(ColdProjectile));
+                dummy = Game.SingletonRepository.Projectiles.Get(nameof(ColdProjectile));
                 break;
 
             default:
-                dummy = SaveGame.SingletonRepository.Projectiles.Get(nameof(AcidProjectile));
+                dummy = Game.SingletonRepository.Projectiles.Get(nameof(AcidProjectile));
                 break;
         }
-        SaveGame.FireBall(dummy, dir, 75 + SaveGame.ExperienceLevel.Value, 2);
+        Game.FireBall(dummy, dir, 75 + Game.ExperienceLevel.Value, 2);
     }
 }

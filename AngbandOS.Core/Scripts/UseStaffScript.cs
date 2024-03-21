@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class UseStaffScript : Script, IScript, IRepeatableScript
 {
-    private UseStaffScript(SaveGame saveGame) : base(saveGame) { }
+    private UseStaffScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the use staff script and returns false.
@@ -28,9 +28,9 @@ internal class UseStaffScript : Script, IScript, IRepeatableScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        if (!SaveGame.SelectItem(out Item? item, "Use which staff? ", false, true, true, SaveGame.SingletonRepository.ItemFilters.Get(nameof(CanBeUsedItemFilter))))
+        if (!Game.SelectItem(out Item? item, "Use which staff? ", false, true, true, Game.SingletonRepository.ItemFilters.Get(nameof(CanBeUsedItemFilter))))
         {
-            SaveGame.MsgPrint("You have no staff to use.");
+            Game.MsgPrint("You have no staff to use.");
             return;
         }
         if (item == null)
@@ -38,9 +38,9 @@ internal class UseStaffScript : Script, IScript, IRepeatableScript
             return;
         }
         // Make sure the item is actually a staff
-        if (!SaveGame.ItemMatchesFilter(item, SaveGame.SingletonRepository.ItemFilters.Get(nameof(CanBeUsedItemFilter))))
+        if (!Game.ItemMatchesFilter(item, Game.SingletonRepository.ItemFilters.Get(nameof(CanBeUsedItemFilter))))
         {
-            SaveGame.MsgPrint("That is not a staff!");
+            Game.MsgPrint("That is not a staff!");
             return;
         }
 
@@ -49,51 +49,51 @@ internal class UseStaffScript : Script, IScript, IRepeatableScript
         // We can't use a staff from the floor
         if (!item.IsInInventory && item.Count > 1)
         {
-            SaveGame.MsgPrint("You must first pick up the staff.");
+            Game.MsgPrint("You must first pick up the staff.");
             return;
         }
         // Using a staff costs a full turn
-        SaveGame.EnergyUse = 100;
+        Game.EnergyUse = 100;
         int itemLevel = item.Factory.LevelNormallyFound;
         // We have a chance of the device working equal to skill (halved if confused) - item
         // level (capped at 50)
-        int chance = SaveGame.SkillUseDevice;
-        if (SaveGame.ConfusedTimer.Value != 0)
+        int chance = Game.SkillUseDevice;
+        if (Game.ConfusedTimer.Value != 0)
         {
             chance /= 2;
         }
         chance -= itemLevel > 50 ? 50 : itemLevel;
         // Always a small chance of it working
-        if (chance < Constants.UseDevice && SaveGame.RandomLessThan(Constants.UseDevice - chance + 1) == 0)
+        if (chance < Constants.UseDevice && Game.RandomLessThan(Constants.UseDevice - chance + 1) == 0)
         {
             chance = Constants.UseDevice;
         }
         // Check to see if we use it properly
-        if (chance < Constants.UseDevice || SaveGame.DieRoll(chance) < Constants.UseDevice)
+        if (chance < Constants.UseDevice || Game.DieRoll(chance) < Constants.UseDevice)
         {
-            SaveGame.MsgPrint("You failed to use the staff properly.");
+            Game.MsgPrint("You failed to use the staff properly.");
             return;
         }
         // Make sure it has charges left
         if (item.TypeSpecificValue <= 0)
         {
-            SaveGame.MsgPrint("The staff has no charges left.");
+            Game.MsgPrint("The staff has no charges left.");
             item.IdentEmpty = true;
             return;
         }
-        SaveGame.PlaySound(SoundEffectEnum.UseStaff);
+        Game.PlaySound(SoundEffectEnum.UseStaff);
         UseStaffEvent useStaffEventArgs = new UseStaffEvent();
 
         // Do the specific effect for the type of staff
         staffItem.UseStaff(useStaffEventArgs);
 
-        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
+        Game.SingletonRepository.FlaggedActions.Get(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
         // We might now know what the staff does
         item.ObjectTried();
         if (useStaffEventArgs.Identified && !item.IsFlavorAware())
         {
             item.BecomeFlavorAware();
-            SaveGame.GainExperience((itemLevel + (SaveGame.ExperienceLevel.Value >> 1)) / SaveGame.ExperienceLevel.Value);
+            Game.GainExperience((itemLevel + (Game.ExperienceLevel.Value >> 1)) / Game.ExperienceLevel.Value);
         }
         // We may not have used up a charge
         if (!useStaffEventArgs.ChargeUsed)
@@ -102,9 +102,9 @@ internal class UseStaffScript : Script, IScript, IRepeatableScript
         }
         // Channelers can use mana instead of a charge
         bool channeled = false;
-        if (SaveGame.BaseCharacterClass.CanUseManaInsteadOfConsumingItem)
+        if (Game.BaseCharacterClass.CanUseManaInsteadOfConsumingItem)
         {
-            channeled = SaveGame.DoCmdChannel(item);
+            channeled = Game.DoCmdChannel(item);
         }
         if (!channeled)
         {
@@ -116,12 +116,12 @@ internal class UseStaffScript : Script, IScript, IRepeatableScript
                 Item singleStaff = item.Clone(1);
                 item.TypeSpecificValue++;
                 item.Count--;
-                SaveGame.WeightCarried -= singleStaff.Weight;
-                SaveGame.InvenCarry(singleStaff);
-                SaveGame.MsgPrint("You unstack your staff.");
+                Game.WeightCarried -= singleStaff.Weight;
+                Game.InvenCarry(singleStaff);
+                Game.MsgPrint("You unstack your staff.");
             }
             // Let the player know what happened
-            SaveGame.ReportChargeUsage(item);
+            Game.ReportChargeUsage(item);
         }
     }
 }

@@ -13,16 +13,16 @@ namespace AngbandOS.Core.Activations;
 [Serializable]
 internal class AcidBolt5d8Every5p1d5Activation : DirectionalActivation
 {
-    private AcidBolt5d8Every5p1d5Activation(SaveGame saveGame) : base(saveGame) { }
+    private AcidBolt5d8Every5p1d5Activation(Game game) : base(game) { }
     public override int RandomChance => 101;
 
     public override string? PreActivationMessage => "Your {0} is covered in acid...";
 
-    public override int RechargeTime() => SaveGame.RandomLessThan(5) + 5;
+    public override int RechargeTime() => Game.RandomLessThan(5) + 5;
 
     protected override bool Activate(int direction)
     {
-        SaveGame.FireBolt(SaveGame.SingletonRepository.Projectiles.Get(nameof(AcidProjectile)), direction, SaveGame.DiceRoll(5, 8));
+        Game.FireBolt(Game.SingletonRepository.Projectiles.Get(nameof(AcidProjectile)), direction, Game.DiceRoll(5, 8));
         return true;
     }
 

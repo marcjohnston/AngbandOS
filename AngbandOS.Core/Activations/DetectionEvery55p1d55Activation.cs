@@ -13,19 +13,19 @@ namespace AngbandOS.Core.Activations;
 [Serializable]
 internal class DetectionEvery55p1d55Activation : Activation
 {
-    private DetectionEvery55p1d55Activation(SaveGame saveGame) : base(saveGame) { }
+    private DetectionEvery55p1d55Activation(Game game) : base(game) { }
     public override int RandomChance => 85;
 
     public override string? PreActivationMessage => "Your {0} glows bright white...";
 
     protected override bool OnActivate(Item item)
     {
-        SaveGame.MsgPrint("An image forms in your mind...");
-        SaveGame.RunScript(nameof(DetectionScript));
+        Game.MsgPrint("An image forms in your mind...");
+        Game.RunScript(nameof(DetectionScript));
         return true;
     }
 
-    public override int RechargeTime() => SaveGame.RandomLessThan(55) + 55;
+    public override int RechargeTime() => Game.RandomLessThan(55) + 55;
 
     public override int Value => 1000;
 

@@ -9,7 +9,7 @@ namespace AngbandOS.Core.Dungeons;
 [Serializable]
 internal class FortDungeon : Dungeon
 {
-    private FortDungeon(SaveGame saveGame) : base(saveGame) { }
+    private FortDungeon(Game game) : base(game) { }
     public override int BaseOffset => 1;
     /// <summary>
     /// Returns true because this dungeon is a tower.

@@ -10,8 +10,8 @@ namespace AngbandOS.Core.RareItems;
 [Serializable]
 internal class ShieldOfReflectionRareItem : RareItem
 {
-    private ShieldOfReflectionRareItem(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(CloseParenthesisSymbol));
+    private ShieldOfReflectionRareItem(Game game) : base(game) { } // This object is a singleton.
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(CloseParenthesisSymbol));
     public override ColorEnum Color => ColorEnum.Brown;
     public override string Name => "Shield of Reflection";
     public override int Cost => 15000;

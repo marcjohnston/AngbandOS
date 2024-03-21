@@ -17,40 +17,40 @@ internal class UpdateManaFlaggedAction : FlaggedAction
     /// </summary>
     private bool OldRestrictingArmor;
 
-    private UpdateManaFlaggedAction(SaveGame saveGame) : base(saveGame) { }
+    private UpdateManaFlaggedAction(Game game) : base(game) { }
     protected override void Execute()
     {       
-        if (SaveGame.UsesMana)
+        if (Game.UsesMana)
         {
             return;
         }
-        int msp = SaveGame.AbilityScores[SaveGame.BaseCharacterClass.SpellStat].ManaBonus * SaveGame.HalfLevelsOfSpellcraft() / 2;
+        int msp = Game.AbilityScores[Game.BaseCharacterClass.SpellStat].ManaBonus * Game.HalfLevelsOfSpellcraft() / 2;
         if (msp != 0)
         {
             msp++;
         }
-        if (msp != 0 && SaveGame.BaseCharacterClass.ID == CharacterClass.HighMage)
+        if (msp != 0 && Game.BaseCharacterClass.ID == CharacterClass.HighMage)
         {
             msp += msp / 4;
         }
 
         // Allow inventory slots access to the CalcMana process.
-        foreach (BaseInventorySlot inventorySlot in SaveGame.SingletonRepository.InventorySlots)
+        foreach (BaseInventorySlot inventorySlot in Game.SingletonRepository.InventorySlots)
         {
             // Update the mana for the inventory slot.
-            msp = inventorySlot.CalcMana(SaveGame, msp);
+            msp = inventorySlot.CalcMana(Game, msp);
         }
 
-        if (SaveGame.BaseCharacterClass.WeightEncumbersMovement)
+        if (Game.BaseCharacterClass.WeightEncumbersMovement)
         {
             int curWgt = 0;
-            foreach (BaseInventorySlot inventorySlot in SaveGame.SingletonRepository.InventorySlots)
+            foreach (BaseInventorySlot inventorySlot in Game.SingletonRepository.InventorySlots)
             {
                 if (inventorySlot.IsWeightRestricting)
                 {
                     foreach (int index in inventorySlot)
                     {
-                        Item? item = SaveGame.GetInventoryItem(index);
+                        Item? item = Game.GetInventoryItem(index);
                         if (item != null)
                         {
                             curWgt += item.Weight;
@@ -58,13 +58,13 @@ internal class UpdateManaFlaggedAction : FlaggedAction
                     }
                 }
             }
-            int maxWgt = SaveGame.BaseCharacterClass.SpellWeight;
+            int maxWgt = Game.BaseCharacterClass.SpellWeight;
             if ((curWgt - maxWgt) / 10 > 0)
             {
                 msp -= (curWgt - maxWgt) / 10;
                 if (!OldRestrictingArmor)
                 {
-                    SaveGame.MsgPrint("The weight of your armor encumbers your movement.");
+                    Game.MsgPrint("The weight of your armor encumbers your movement.");
                     OldRestrictingArmor = true;
                 }
             }
@@ -72,7 +72,7 @@ internal class UpdateManaFlaggedAction : FlaggedAction
             {
                 if (OldRestrictingArmor)
                 {
-                    SaveGame.MsgPrint("You feel able to move more freely.");
+                    Game.MsgPrint("You feel able to move more freely.");
                     OldRestrictingArmor = false;
                 }
             }
@@ -83,17 +83,17 @@ internal class UpdateManaFlaggedAction : FlaggedAction
             msp = 0;
         }
 
-        var mult = SaveGame.SingletonRepository.Gods.Get(nameof(TamashGod)).AdjustedFavour + 10;
+        var mult = Game.SingletonRepository.Gods.Get(nameof(TamashGod)).AdjustedFavour + 10;
         msp *= mult;
         msp /= 10;
-        if (SaveGame.MaxMana.Value != msp)
+        if (Game.MaxMana.Value != msp)
         {
-            if (SaveGame.Mana.Value >= msp)
+            if (Game.Mana.Value >= msp)
             {
-                SaveGame.Mana.Value = msp;
-                SaveGame.FractionalMana = 0;
+                Game.Mana.Value = msp;
+                Game.FractionalMana = 0;
             }
-            SaveGame.MaxMana.Value = msp;
+            Game.MaxMana.Value = msp;
         }
     }
 }

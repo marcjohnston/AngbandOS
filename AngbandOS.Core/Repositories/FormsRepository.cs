@@ -10,5 +10,5 @@ namespace AngbandOS.Core.Repositories;
 [Serializable]
 internal class FormsRepository : DictionaryRepository<Form>
 {
-    public FormsRepository(SaveGame saveGame) : base(saveGame) { }
+    public FormsRepository(Game game) : base(game) { }
 }

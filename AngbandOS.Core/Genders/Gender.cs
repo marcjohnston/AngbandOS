@@ -10,10 +10,10 @@ namespace AngbandOS.Core.Genders;
 [Serializable]
 internal abstract class Gender : IGetKey
 {
-    protected readonly SaveGame SaveGame;
-    protected Gender(SaveGame saveGame)
+    protected readonly Game Game;
+    protected Gender(Game game)
     {
-        SaveGame = saveGame;
+        Game = game;
     }
 
     /// <summary>

@@ -8,7 +8,7 @@
 [Serializable]
 internal class YojoIIShopkeeper : Shopkeeper
 {
-    private YojoIIShopkeeper(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private YojoIIShopkeeper(Game game) : base(game) { } // This object is a singleton.
     public override string Name => "Yojo II";
     public override int MaxCost =>  25000;
     public override int MinInflate =>  112;

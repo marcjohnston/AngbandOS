@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class CreateDoorScript : Script, IScript
 {
-    private CreateDoorScript(SaveGame saveGame) : base(saveGame) { }
+    private CreateDoorScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script.
@@ -19,6 +19,6 @@ internal class CreateDoorScript : Script, IScript
     public void ExecuteScript()
     {
         ProjectionFlag flg = ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectHide;
-        SaveGame.Project(0, 1, SaveGame.MapY, SaveGame.MapX, 0, SaveGame.SingletonRepository.Projectiles.Get(nameof(MakeDoorProjectile)), flg);
+        Game.Project(0, 1, Game.MapY, Game.MapX, 0, Game.SingletonRepository.Projectiles.Get(nameof(MakeDoorProjectile)), flg);
     }
 }

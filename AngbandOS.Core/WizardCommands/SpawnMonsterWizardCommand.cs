@@ -10,7 +10,7 @@ namespace AngbandOS.Core.WizardCommands;
 [Serializable]
 internal class SpawnMonsterWizardCommand : WizardCommand
 {
-    private SpawnMonsterWizardCommand(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private SpawnMonsterWizardCommand(Game game) : base(game) { } // This object is a singleton.
 
     public override char KeyChar => 'O';
 

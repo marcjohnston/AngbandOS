@@ -10,7 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class SpearGaeBulgFixedArtifact : FixedArtifact
 {
-    private SpearGaeBulgFixedArtifact(SaveGame saveGame) : base(saveGame) { }
+    private SpearGaeBulgFixedArtifact(Game game) : base(game) { }
 
     protected override string BaseItemFactoryName => nameof(SpearPolearmWeaponItemFactory);
 

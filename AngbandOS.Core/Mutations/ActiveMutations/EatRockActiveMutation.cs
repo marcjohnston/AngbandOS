@@ -10,65 +10,65 @@ namespace AngbandOS.Core.Mutations.ActiveMutations;
 [Serializable]
 internal class EatRockActiveMutation : Mutation
 {
-    private EatRockActiveMutation(SaveGame saveGame) : base(saveGame) { }
+    private EatRockActiveMutation(Game game) : base(game) { }
     public override void Activate()
     {
-        if (!SaveGame.CheckIfRacialPowerWorks(8, 12, Ability.Constitution, 18))
+        if (!Game.CheckIfRacialPowerWorks(8, 12, Ability.Constitution, 18))
         {
             return;
         }
-        if (!SaveGame.GetDirectionNoAim(out int dir))
+        if (!Game.GetDirectionNoAim(out int dir))
         {
             return;
         }
-        int y = SaveGame.MapY + SaveGame.KeypadDirectionYOffset[dir];
-        int x = SaveGame.MapX + SaveGame.KeypadDirectionXOffset[dir];
-        GridTile cPtr = SaveGame.Grid[y][x];
-        if (SaveGame.GridPassable(y, x))
+        int y = Game.MapY + Game.KeypadDirectionYOffset[dir];
+        int x = Game.MapX + Game.KeypadDirectionXOffset[dir];
+        GridTile cPtr = Game.Grid[y][x];
+        if (Game.GridPassable(y, x))
         {
-            SaveGame.MsgPrint("You bite into thin air!");
+            Game.MsgPrint("You bite into thin air!");
             return;
         }
         if (cPtr.FeatureType.IsPermanent)
         {
-            SaveGame.MsgPrint("Ouch!  This wall is harder than your teeth!");
+            Game.MsgPrint("Ouch!  This wall is harder than your teeth!");
             return;
         }
         if (cPtr.MonsterIndex != 0)
         {
-            SaveGame.MsgPrint("There's something in the way!");
+            Game.MsgPrint("There's something in the way!");
             return;
         }
         if (cPtr.FeatureType.IsTree)
         {
-            SaveGame.MsgPrint("You don't like the woody taste!");
+            Game.MsgPrint("You don't like the woody taste!");
             return;
         }
         if (cPtr.FeatureType.IsVisibleDoor || cPtr.FeatureType.IsSecretDoor || cPtr.FeatureType.IsRubble)
         {
-            SaveGame.SetFood(SaveGame.Food.Value + 3000);
+            Game.SetFood(Game.Food.Value + 3000);
         }
         else if (cPtr.FeatureType.IsVein)
         {
-            SaveGame.SetFood(SaveGame.Food.Value + 5000);
+            Game.SetFood(Game.Food.Value + 5000);
         }
         else
         {
-            SaveGame.MsgPrint("This granite is very filling!");
-            SaveGame.SetFood(SaveGame.Food.Value + 10000);
+            Game.MsgPrint("This granite is very filling!");
+            Game.SetFood(Game.Food.Value + 10000);
         }
-        SaveGame.WallToMud(dir);
-        int oy = SaveGame.MapY;
-        int ox = SaveGame.MapX;
-        SaveGame.MapY = y;
-        SaveGame.MapX = x;
-        SaveGame.RedrawSingleLocation(SaveGame.MapY, SaveGame.MapX);
-        SaveGame.RedrawSingleLocation(oy, ox);
-        SaveGame.RecenterScreenAroundPlayer();
-        base.SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateScentFlaggedAction)).Set();
-        base.SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateLightFlaggedAction)).Set();
-        base.SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateViewFlaggedAction)).Set();
-        base.SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateDistancesFlaggedAction)).Set();
+        Game.WallToMud(dir);
+        int oy = Game.MapY;
+        int ox = Game.MapX;
+        Game.MapY = y;
+        Game.MapX = x;
+        Game.RedrawSingleLocation(Game.MapY, Game.MapX);
+        Game.RedrawSingleLocation(oy, ox);
+        Game.RecenterScreenAroundPlayer();
+        base.Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateScentFlaggedAction)).Set();
+        base.Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateLightFlaggedAction)).Set();
+        base.Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateViewFlaggedAction)).Set();
+        base.Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateDistancesFlaggedAction)).Set();
     }
 
     public override string ActivationSummary(int lvl)

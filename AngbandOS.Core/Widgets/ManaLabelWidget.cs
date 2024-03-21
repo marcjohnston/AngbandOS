@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Widgets;
 [Serializable]
 internal class ManaLabelWidget : Widget
 {
-    private ManaLabelWidget(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private ManaLabelWidget(Game game) : base(game) { } // This object is a singleton.
     public override int X => 0;
     public override int Y => 26;
     public override string Text => "Cur SP";

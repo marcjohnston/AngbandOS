@@ -10,7 +10,7 @@ namespace AngbandOS.Core.StoreCommands;
 [Serializable]
 internal class ScrollItemsStoreCommand : StoreCommand
 {
-    private ScrollItemsStoreCommand(SaveGame saveGame) : base(saveGame) { }
+    private ScrollItemsStoreCommand(Game game) : base(game) { }
     public override char KeyChar => ';';
 
     /// <summary>

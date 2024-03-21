@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Vaults;
 [Serializable]
 internal class GreaterVaultNethackSamuraiCastleVault : Vault
 {
-    private GreaterVaultNethackSamuraiCastleVault(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private GreaterVaultNethackSamuraiCastleVault(Game game) : base(game) { } // This object is a singleton.
     public override string Name => "Greater vault (nethack samurai castle)";
     public override int Category => 8;
     public override int Height => 20;

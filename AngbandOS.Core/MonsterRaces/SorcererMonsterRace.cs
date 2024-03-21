@@ -10,7 +10,7 @@ namespace AngbandOS.Core.MonsterRaces;
 [Serializable]
 internal class SorcererMonsterRace : MonsterRace
 {
-    protected SorcererMonsterRace(SaveGame saveGame) : base(saveGame) { }
+    protected SorcererMonsterRace(Game game) : base(game) { }
 
     protected override string[]? SpellNames =>new string[] {
         nameof(AcidBoltMonsterSpell),

@@ -10,13 +10,13 @@ namespace AngbandOS.Core.ArtifactBiases;
 [Serializable]
 internal class MageArtifactBias : ArtifactBias
 {
-    private MageArtifactBias(SaveGame saveGame) : base(saveGame) { }
+    private MageArtifactBias(Game game) : base(game) { }
     public override bool ApplyBonuses(Item item)
     {
         if (!item.RandomArtifactItemCharacteristics.Int)
         {
             item.RandomArtifactItemCharacteristics.Int = true;
-            if (SaveGame.DieRoll(2) == 1)
+            if (Game.DieRoll(2) == 1)
             {
                 return true;
             }
@@ -28,21 +28,21 @@ internal class MageArtifactBias : ArtifactBias
 
     public override Activation GetActivationPowerType(Item item)
     {
-        if (SaveGame.DieRoll(20) == 1)
+        if (Game.DieRoll(20) == 1)
         {
-            return SaveGame.SingletonRepository.Activations.Get(nameof(SummonElementalActivation));
+            return Game.SingletonRepository.Activations.Get(nameof(SummonElementalActivation));
         }
-        else if (SaveGame.DieRoll(10) == 1)
+        else if (Game.DieRoll(10) == 1)
         {
-            return SaveGame.SingletonRepository.Activations.Get(nameof(SummonPhantomActivation));
+            return Game.SingletonRepository.Activations.Get(nameof(SummonPhantomActivation));
         }
-        else if (SaveGame.DieRoll(5) == 1)
+        else if (Game.DieRoll(5) == 1)
         {
-            return SaveGame.SingletonRepository.Activations.Get(nameof(RuneExploActivation));
+            return Game.SingletonRepository.Activations.Get(nameof(RuneExploActivation));
         }
         else
         {
-            return SaveGame.SingletonRepository.Activations.Get(nameof(TemporaryEsp20p1d30Every200Activation));
+            return Game.SingletonRepository.Activations.Get(nameof(TemporaryEsp20p1d30Every200Activation));
         }
     }
 }

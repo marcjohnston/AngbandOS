@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Forms;
 [Serializable]
 internal class MainForm : Form
 {
-    private MainForm(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private MainForm(Game game) : base(game) { } // This object is a singleton.
 
     protected override string[] WidgetNames => new string[]
     {

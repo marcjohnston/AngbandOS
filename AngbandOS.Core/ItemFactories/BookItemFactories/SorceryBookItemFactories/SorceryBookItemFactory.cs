@@ -10,14 +10,14 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal abstract class SorceryBookItemFactory : BookItemFactory
 {
-    public SorceryBookItemFactory(SaveGame saveGame) : base(saveGame) { }
+    public SorceryBookItemFactory(Game game) : base(game) { }
 
     /// <summary>
     /// Returns just the realm name because Sorcery automatically assumes magic--so we omit the "Magic" suffix from the divine title.
     /// </summary>
     public override string DivineTitle => RealmName;
     public override string RealmName => "Sorcery";
-    public override ItemClass ItemClass => SaveGame.SingletonRepository.ItemClasses.Get(nameof(SorcerySpellBooksItemClass));
+    public override ItemClass ItemClass => Game.SingletonRepository.ItemClasses.Get(nameof(SorcerySpellBooksItemClass));
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.SorceryBook;
     public override bool HatesFire => true;
     public override int PackSort => 7;

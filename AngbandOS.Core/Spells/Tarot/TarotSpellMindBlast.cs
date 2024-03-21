@@ -10,10 +10,10 @@ namespace AngbandOS.Core.Spells.Tarot;
 [Serializable]
 internal class TarotSpellMindBlast : Spell
 {
-    private TarotSpellMindBlast(SaveGame saveGame) : base(saveGame) { }
+    private TarotSpellMindBlast(Game game) : base(game) { }
     protected override string? CastScriptName => nameof(MindBlastScript);
 
     public override string Name => "Mind Blast";
 
-    protected override string LearnedDetails => $"dam {3 + ((SaveGame.ExperienceLevel.Value - 1) / 5)}d3";
+    protected override string LearnedDetails => $"dam {3 + ((Game.ExperienceLevel.Value - 1) / 5)}d3";
 }

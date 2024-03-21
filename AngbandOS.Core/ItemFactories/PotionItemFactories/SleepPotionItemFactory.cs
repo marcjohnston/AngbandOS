@@ -10,9 +10,9 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class SleepPotionItemFactory : PotionItemFactory
 {
-    private SleepPotionItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private SleepPotionItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(ExclamationPointSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(ExclamationPointSymbol));
     public override string Name => "Sleep";
 
     public override int[] Chance => new int[] { 1, 0, 0, 0 };
@@ -25,9 +25,9 @@ internal class SleepPotionItemFactory : PotionItemFactory
     public override bool Quaff()
     {
         // Sleep paralyses you
-        if (!SaveGame.HasFreeAction)
+        if (!Game.HasFreeAction)
         {
-            if (SaveGame.ParalysisTimer.AddTimer(SaveGame.RandomLessThan(4) + 4))
+            if (Game.ParalysisTimer.AddTimer(Game.RandomLessThan(4) + 4))
             {
                 return true;
             }
@@ -37,8 +37,8 @@ internal class SleepPotionItemFactory : PotionItemFactory
 
     public override bool Smash(int who, int y, int x)
     {
-        SaveGame.Project(who, 2, y, x, 0, SaveGame.SingletonRepository.Projectiles.Get(nameof(OldSleepProjectile)), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
+        Game.Project(who, 2, y, x, 0, Game.SingletonRepository.Projectiles.Get(nameof(OldSleepProjectile)), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
         return true;
     }
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

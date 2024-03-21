@@ -3,7 +3,7 @@
 [Serializable]
 internal class GenericPlural : Plural
 {
-    public GenericPlural(SaveGame saveGame, PluralDefinition pluralDefinition) : base(saveGame)
+    public GenericPlural(Game game, PluralDefinition pluralDefinition) : base(game)
     {
         Key = pluralDefinition.Key;
         PluralForm = pluralDefinition.PluralForm;

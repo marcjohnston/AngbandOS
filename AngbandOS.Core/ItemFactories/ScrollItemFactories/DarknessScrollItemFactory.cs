@@ -10,9 +10,9 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class DarknessScrollItemFactory : ScrollItemFactory
 {
-    private DarknessScrollItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private DarknessScrollItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(QuestionMarkSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(QuestionMarkSymbol));
     public override string Name => "Darkness";
 
     public override int[] Chance => new int[] { 1, 0, 0, 0 };
@@ -23,14 +23,14 @@ internal class DarknessScrollItemFactory : ScrollItemFactory
 
     public override void Read(ReadScrollEvent eventArgs)
     {
-        if (!SaveGame.HasBlindnessResistance && !SaveGame.HasDarkResistance)
+        if (!Game.HasBlindnessResistance && !Game.HasDarkResistance)
         {
-            SaveGame.BlindnessTimer.AddTimer(3 + SaveGame.DieRoll(5));
+            Game.BlindnessTimer.AddTimer(3 + Game.DieRoll(5));
         }
-        if (SaveGame.UnlightArea(10, 3))
+        if (Game.UnlightArea(10, 3))
         {
             eventArgs.Identified = true;
         }
     }
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

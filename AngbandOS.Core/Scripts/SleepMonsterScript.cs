@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class SleepMonsterScript : Script, IScript
 {
-    private SleepMonsterScript(SaveGame saveGame) : base(saveGame) { }
+    private SleepMonsterScript(Game game) : base(game) { }
 
     /// <summary>
     /// Puts a monster to sleep in a chosen direction.
@@ -18,10 +18,10 @@ internal class SleepMonsterScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        if (!SaveGame.GetDirectionWithAim(out int dir))
+        if (!Game.GetDirectionWithAim(out int dir))
         {
             return;
         }
-        SaveGame.SleepMonster(dir);
+        Game.SleepMonster(dir);
     }
 }

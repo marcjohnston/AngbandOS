@@ -10,7 +10,7 @@ namespace AngbandOS.Core.ProjectileGraphics;
 [Serializable]
 internal class BrightChartreuseBulletProjectileGraphic : ProjectileGraphic
 {
-    private BrightChartreuseBulletProjectileGraphic(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private BrightChartreuseBulletProjectileGraphic(Game game) : base(game) { } // This object is a singleton.
     public override char Character => '·';
     public override ColorEnum Color => ColorEnum.BrightChartreuse;
 }

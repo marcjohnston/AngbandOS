@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Races;
 [Serializable]
 internal class SpectreRace : Race
 {
-    private SpectreRace(SaveGame saveGame) : base(saveGame) { }
+    private SpectreRace(Game game) : base(game) { }
     public override string Title => "Spectre";
     public override int[] AbilityBonus => new int[] { -5, 4, 4, 2, -3, -6 };
     public override int BaseDisarmBonus => 10;
@@ -70,25 +70,25 @@ internal class SpectreRace : Race
     }
     public override void CalcBonuses()
     {
-        SaveGame.HasFeatherFall = true;
-        SaveGame.HasNetherResistance = true;
-        SaveGame.HasHoldLife = true;
-        SaveGame.HasSeeInvisibility = true;
-        SaveGame.HasPoisonResistance = true;
-        SaveGame.HasSlowDigestion = true;
-        SaveGame.HasColdResistance = true;
-        SaveGame.HasGlow = true;
-        if (SaveGame.ExperienceLevel.Value > 34)
+        Game.HasFeatherFall = true;
+        Game.HasNetherResistance = true;
+        Game.HasHoldLife = true;
+        Game.HasSeeInvisibility = true;
+        Game.HasPoisonResistance = true;
+        Game.HasSlowDigestion = true;
+        Game.HasColdResistance = true;
+        Game.HasGlow = true;
+        if (Game.ExperienceLevel.Value > 34)
         {
-            SaveGame.HasTelepathy = true;
+            Game.HasTelepathy = true;
         }
     }
     public override bool RestsTillDuskInsteadOfDawn => true;
     public override void Eat(Item item)
     {
         // This race only gets 1/20th of the food value
-        SaveGame.MsgPrint("The food of mortals is poor sustenance for you.");
-        SaveGame.SetFood(SaveGame.Food.Value + (item.TypeSpecificValue / 20));
+        Game.MsgPrint("The food of mortals is poor sustenance for you.");
+        Game.SetFood(Game.Food.Value + (item.TypeSpecificValue / 20));
     }
     public override bool CanBleed(int level) => false;
 
@@ -99,12 +99,12 @@ internal class SpectreRace : Race
     public override void UseRacialPower()
     {
         // Spectres can howl
-        if (SaveGame.CheckIfRacialPowerWorks(4, 6, Ability.Intelligence, 3))
+        if (Game.CheckIfRacialPowerWorks(4, 6, Ability.Intelligence, 3))
         {
-            SaveGame.MsgPrint("You emit an eldritch howl!");
-            if (SaveGame.GetDirectionWithAim(out int direction))
+            Game.MsgPrint("You emit an eldritch howl!");
+            if (Game.GetDirectionWithAim(out int direction))
             {
-                SaveGame.FearMonster(direction, SaveGame.ExperienceLevel.Value);
+                Game.FearMonster(direction, Game.ExperienceLevel.Value);
             }
         }
     }

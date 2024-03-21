@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class ProtectionFromEvilScript : Script, IScript
 {
-    private ProtectionFromEvilScript(SaveGame saveGame) : base(saveGame) { }
+    private ProtectionFromEvilScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script.
@@ -18,6 +18,6 @@ internal class ProtectionFromEvilScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        SaveGame.ProtectionFromEvilTimer.AddTimer(SaveGame.DieRoll(25) + (3 * SaveGame.ExperienceLevel.Value));
+        Game.ProtectionFromEvilTimer.AddTimer(Game.DieRoll(25) + (3 * Game.ExperienceLevel.Value));
     }
 }

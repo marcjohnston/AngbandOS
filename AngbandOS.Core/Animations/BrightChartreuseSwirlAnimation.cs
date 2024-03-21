@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Animations;
 [Serializable]
 internal class BrightChartreuseSwirlAnimation : Animation
 {
-    private BrightChartreuseSwirlAnimation(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private BrightChartreuseSwirlAnimation(Game game) : base(game) { } // This object is a singleton.
     public override char Character => '*';
     public override ColorEnum Color => ColorEnum.BrightChartreuse;
     public override string Name => "BrightChartreuseSwirl";

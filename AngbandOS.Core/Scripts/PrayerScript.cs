@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class PrayerScript : Script, IScript
 {
-    private PrayerScript(SaveGame saveGame) : base(saveGame) { }
+    private PrayerScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script.
@@ -18,6 +18,6 @@ internal class PrayerScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        SaveGame.BlessingTimer.AddTimer(SaveGame.DieRoll(48) + 48);
+        Game.BlessingTimer.AddTimer(Game.DieRoll(48) + 48);
     }
 }

@@ -9,7 +9,7 @@ namespace AngbandOS.Core.Dungeons;
 [Serializable]
 internal class IlekVadDungeon : Dungeon
 {
-    private IlekVadDungeon(SaveGame saveGame) : base(saveGame) { }
+    private IlekVadDungeon(Game game) : base(game) { }
     public override int BaseOffset => 0;
     public override int MaxLevel => 5;
     public override string Name => "the Sewers under Ilek-Vad";

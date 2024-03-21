@@ -10,7 +10,7 @@ namespace AngbandOS.Core.AttackTypes;
 [Serializable]
 internal class PunchAttack : Attack
 {
-    private PunchAttack(SaveGame saveGame) : base(saveGame) { }
+    private PunchAttack(Game game) : base(game) { }
     public override string MonsterAction => "punches {0}";
     public override string PlayerAction => $"punches you";
     public override string KnowledgeAction => "punch";

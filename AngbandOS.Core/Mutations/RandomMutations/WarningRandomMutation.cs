@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Mutations.RandomMutations;
 [Serializable]
 internal class WarningRandomMutation : Mutation
 {
-    private WarningRandomMutation(SaveGame saveGame) : base(saveGame) { }
+    private WarningRandomMutation(Game game) : base(game) { }
     public override int Frequency => 2;
     public override string GainMessage => "You suddenly feel paranoid.";
     public override string HaveMessage => "You receive warnings about your foes.";
@@ -18,47 +18,47 @@ internal class WarningRandomMutation : Mutation
 
     public override void OnProcessWorld()
     {
-        if (base.SaveGame.DieRoll(1000) != 1)
+        if (base.Game.DieRoll(1000) != 1)
         {
             return;
         }
         int dangerAmount = 0;
-        for (int monster = 0; monster < SaveGame.MMax; monster++)
+        for (int monster = 0; monster < Game.MMax; monster++)
         {
-            Monster mPtr = SaveGame.Monsters[monster];
+            Monster mPtr = Game.Monsters[monster];
             MonsterRace rPtr = mPtr.Race;
             if (mPtr.Race == null)
             {
                 continue;
             }
-            if (rPtr.Level >= SaveGame.ExperienceLevel.Value)
+            if (rPtr.Level >= Game.ExperienceLevel.Value)
             {
-                dangerAmount += rPtr.Level - SaveGame.ExperienceLevel.Value + 1;
+                dangerAmount += rPtr.Level - Game.ExperienceLevel.Value + 1;
             }
         }
         if (dangerAmount > 100)
         {
-            SaveGame.MsgPrint("You feel utterly terrified!");
+            Game.MsgPrint("You feel utterly terrified!");
         }
         else if (dangerAmount > 50)
         {
-            SaveGame.MsgPrint("You feel terrified!");
+            Game.MsgPrint("You feel terrified!");
         }
         else if (dangerAmount > 20)
         {
-            SaveGame.MsgPrint("You feel very worried!");
+            Game.MsgPrint("You feel very worried!");
         }
         else if (dangerAmount > 10)
         {
-            SaveGame.MsgPrint("You feel paranoid!");
+            Game.MsgPrint("You feel paranoid!");
         }
         else if (dangerAmount > 5)
         {
-            SaveGame.MsgPrint("You feel almost safe.");
+            Game.MsgPrint("You feel almost safe.");
         }
         else
         {
-            SaveGame.MsgPrint("You feel lonely.");
+            Game.MsgPrint("You feel lonely.");
         }
     }
 }

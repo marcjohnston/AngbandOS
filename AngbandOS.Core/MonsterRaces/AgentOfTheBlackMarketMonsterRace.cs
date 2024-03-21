@@ -10,7 +10,7 @@ namespace AngbandOS.Core.MonsterRaces;
 [Serializable]
 internal class AgentOfTheBlackMarketMonsterRace : MonsterRace
 {
-    protected AgentOfTheBlackMarketMonsterRace(SaveGame saveGame) : base(saveGame) { }
+    protected AgentOfTheBlackMarketMonsterRace(Game game) : base(game) { }
 
     protected override string SymbolName => nameof(LowerTSymbol);
     public override ColorEnum Color => ColorEnum.Black;

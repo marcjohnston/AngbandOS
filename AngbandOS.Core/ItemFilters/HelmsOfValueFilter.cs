@@ -13,5 +13,5 @@ namespace AngbandOS.Core.ItemFilters;
 [Serializable]
 internal class HelmsOfValueFilter : ItemFilter<HelmArmorItemFactory>
 {
-    private HelmsOfValueFilter(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private HelmsOfValueFilter(Game game) : base(game) { } // This object is a singleton.
 }

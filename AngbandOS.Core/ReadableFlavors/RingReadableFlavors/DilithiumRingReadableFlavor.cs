@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Flavors;
 [Serializable]
 internal class DilithiumRingReadableFlavor : RingReadableFlavor
 {
-    private DilithiumRingReadableFlavor(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private DilithiumRingReadableFlavor(Game game) : base(game) { } // This object is a singleton.
     protected override string SymbolName => nameof(EqualSignSymbol);
     public override ColorEnum Color => ColorEnum.BrightPink;
     public override string Name => "Dilithium";

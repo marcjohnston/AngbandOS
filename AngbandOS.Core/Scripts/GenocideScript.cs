@@ -10,15 +10,15 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class GenocideScript : Script, IScript, IScriptBool
 {
-    private GenocideScript(SaveGame saveGame) : base(saveGame) { }
+    private GenocideScript(Game game) : base(game) { }
 
     public void ExecuteScriptBool(bool playerCast)
     {
         int msec = Constants.DelayFactorInMilliseconds;
-        SaveGame.GetCom("Choose a monster race (by symbol) to carnage: ", out char typ);
-        for (int i = 1; i < SaveGame.MMax; i++)
+        Game.GetCom("Choose a monster race (by symbol) to carnage: ", out char typ);
+        for (int i = 1; i < Game.MMax; i++)
         {
-            Monster mPtr = SaveGame.Monsters[i];
+            Monster mPtr = Game.Monsters[i];
             MonsterRace rPtr = mPtr.Race;
             if (mPtr.Race == null)
             {
@@ -36,15 +36,15 @@ internal class GenocideScript : Script, IScript, IScriptBool
             {
                 continue;
             }
-            SaveGame.DeleteMonsterByIndex(i, true);
+            Game.DeleteMonsterByIndex(i, true);
             if (playerCast)
             {
-                SaveGame.TakeHit(SaveGame.DieRoll(4), "the strain of casting Carnage");
+                Game.TakeHit(Game.DieRoll(4), "the strain of casting Carnage");
             }
-            SaveGame.MoveCursorRelative(SaveGame.MapY, SaveGame.MapX);
-            SaveGame.HandleStuff();
-            SaveGame.UpdateScreen();
-            SaveGame.Pause(msec);
+            Game.MoveCursorRelative(Game.MapY, Game.MapX);
+            Game.HandleStuff();
+            Game.UpdateScreen();
+            Game.Pause(msec);
         }
     }
 

@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Vaults;
 [Serializable]
 internal class RockHardVault : Vault
 {
-    private RockHardVault(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private RockHardVault(Game game) : base(game) { } // This object is a singleton.
        public override string Name => "Rock-Hard";
     public override int Category => 7;
     public override int Height => 11;

@@ -10,21 +10,21 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class BroadSwordBlackIceFixedArtifact : FixedArtifact
 {
-    private BroadSwordBlackIceFixedArtifact(SaveGame saveGame) : base(saveGame) { }
+    private BroadSwordBlackIceFixedArtifact(Game game) : base(game) { }
 
     protected override string BaseItemFactoryName => nameof(BroadSwordWeaponItemFactory);
 
 
     public override void ApplyResistances(Item item)
     {
-        if (SaveGame.DieRoll(2) == 1)
+        if (Game.DieRoll(2) == 1)
         {
             IArtifactBias artifactBias = null;
-            item.ApplyRandomResistance(ref artifactBias, SaveGame.DieRoll(22) + 16);
+            item.ApplyRandomResistance(ref artifactBias, Game.DieRoll(22) + 16);
         }
         else
         {
-            item.RandomPower = SaveGame.SingletonRepository.Powers.ToWeightedRandom(_power => _power.IsAbility == true).Choose();
+            item.RandomPower = Game.SingletonRepository.Powers.ToWeightedRandom(_power => _power.IsAbility == true).Choose();
         }
     }
     public override ColorEnum Color => ColorEnum.BrightWhite;

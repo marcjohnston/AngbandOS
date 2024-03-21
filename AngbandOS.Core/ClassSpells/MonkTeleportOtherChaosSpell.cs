@@ -10,7 +10,7 @@ namespace AngbandOS.Core.ClassSpells;
 [Serializable]
 internal class MonkTeleportOtherChaosSpell : ClassSpell
 {
-    private MonkTeleportOtherChaosSpell(SaveGame saveGame) : base(saveGame) { }
+    private MonkTeleportOtherChaosSpell(Game game) : base(game) { }
     public override string SpellName => nameof(ChaosSpellTeleportOther);
     public override string CharacterClassName => nameof(MonkCharacterClass);
     public override int Level => 37;

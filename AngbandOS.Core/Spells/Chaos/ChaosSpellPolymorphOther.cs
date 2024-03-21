@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Spells.Chaos;
 [Serializable]
 internal class ChaosSpellPolymorphOther : Spell
 {
-    private ChaosSpellPolymorphOther(SaveGame saveGame) : base(saveGame) { }
+    private ChaosSpellPolymorphOther(Game game) : base(game) { }
     protected override string? CastScriptName => nameof(PolymorphOtherScript);
 
     protected override string? CastFailedScriptName => nameof(WildChaoticMagicScript);

@@ -10,9 +10,9 @@ namespace AngbandOS.Core.Rewards;
 [Serializable]
 internal class IgnoreReward : Reward
 {
-    private IgnoreReward(SaveGame saveGame) : base(saveGame) { }
+    private IgnoreReward(Game game) : base(game) { }
     public override void GetReward(Patron patron)
     {
-        SaveGame.MsgPrint($"{patron.ShortName} ignores you.");
+        Game.MsgPrint($"{patron.ShortName} ignores you.");
     }
 }

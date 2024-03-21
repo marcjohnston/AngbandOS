@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class BrandWeaponWithChaosScript : Script, IScript
 {
-    private BrandWeaponWithChaosScript(SaveGame saveGame) : base(saveGame) { }
+    private BrandWeaponWithChaosScript(Game game) : base(game) { }
 
     /// <summary>
     /// Enchants the melee weapon with chaos.
@@ -18,7 +18,7 @@ internal class BrandWeaponWithChaosScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        Item? item = SaveGame.GetInventoryItem(InventorySlot.MeleeWeapon);
+        Item? item = Game.GetInventoryItem(InventorySlot.MeleeWeapon);
 
         // We must have a non-rare, non-artifact weapon that isn't cursed
         if (item != null && !item.IsArtifact && !item.IsRare() && !item.IsCursed())
@@ -28,15 +28,15 @@ internal class BrandWeaponWithChaosScript : Script, IScript
 
             // Make it a chaotic weapon
             act = "is engulfed in raw chaos!";
-            item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(WeaponChaoticRareItem));
+            item.RareItem = Game.SingletonRepository.RareItems.Get(nameof(WeaponChaoticRareItem));
 
             // Let the player know what happened
-            SaveGame.MsgPrint($"Your {itemName} {act}");
-            SaveGame.Enchant(item, SaveGame.RandomLessThan(3) + 4, Constants.EnchTohit | Constants.EnchTodam);
+            Game.MsgPrint($"Your {itemName} {act}");
+            Game.Enchant(item, Game.RandomLessThan(3) + 4, Constants.EnchTohit | Constants.EnchTodam);
         }
         else
         {
-            SaveGame.MsgPrint("The Branding failed.");
+            Game.MsgPrint("The Branding failed.");
         }
     }
 }

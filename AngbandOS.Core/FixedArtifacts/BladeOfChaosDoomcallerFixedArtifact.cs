@@ -10,7 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class BladeOfChaosDoomcallerFixedArtifact : FixedArtifact
 {
-    private BladeOfChaosDoomcallerFixedArtifact(SaveGame saveGame) : base(saveGame) { }
+    private BladeOfChaosDoomcallerFixedArtifact(Game game) : base(game) { }
 
     protected override string BaseItemFactoryName => nameof(BladeOfChaosWeaponItemFactory);
 

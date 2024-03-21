@@ -10,19 +10,19 @@ namespace AngbandOS.Core.Repositories;
 [Serializable]
 internal class ShopkeepersRepository : DictionaryRepository<Shopkeeper>
 {
-    public ShopkeepersRepository(SaveGame saveGame) : base(saveGame) { }
+    public ShopkeepersRepository(Game game) : base(game) { }
 
     public override void Load()
     {
-        if (SaveGame.Configuration.Shopkeepers == null)
+        if (Game.Configuration.Shopkeepers == null)
         {
             base.Load();
         }
         else
         {
-            foreach (ShopkeeperDefinition shopkeeperDefinition in SaveGame.Configuration.Shopkeepers)
+            foreach (ShopkeeperDefinition shopkeeperDefinition in Game.Configuration.Shopkeepers)
             {
-                Add(new GenericShopkeeper(SaveGame, shopkeeperDefinition));
+                Add(new GenericShopkeeper(Game, shopkeeperDefinition));
             }
         }
     }

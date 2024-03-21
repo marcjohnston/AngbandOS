@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Repositories;
 [Serializable]
 internal class ElvishTextRepository : StringListRepository
 {
-    public ElvishTextRepository(SaveGame saveGame) : base(saveGame) { }
+    public ElvishTextRepository(Game game) : base(game) { }
 
     /// <summary>
     /// Returns ElvishTexts as the name of this string list repository.
@@ -19,7 +19,7 @@ internal class ElvishTextRepository : StringListRepository
 
     public override void Load()
     {
-        if (SaveGame.Configuration.ElvishTexts == null)
+        if (Game.Configuration.ElvishTexts == null)
         {
             Add("adan", "ael", "in", "agl", "ar", "aina", "alda", "al", "qua", "am", "arth", "amon", "anca", "an", "dune",
                 "anga", "anna", "ann", "on", "ar", "ien", "atar", "band", "bar", "ad", "bel", "eg", "brag", "ol", "breth",
@@ -39,7 +39,7 @@ internal class ElvishTextRepository : StringListRepository
         }
         else
         {
-            Add(SaveGame.Configuration.ElvishTexts);
+            Add(Game.Configuration.ElvishTexts);
         }
     }
 }

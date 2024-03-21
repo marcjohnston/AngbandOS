@@ -10,10 +10,10 @@ namespace AngbandOS.Core.Spells.Life;
 [Serializable]
 internal class LifeSpellHolyWord : Spell
 {
-    private LifeSpellHolyWord(SaveGame saveGame) : base(saveGame) { }
+    private LifeSpellHolyWord(Game game) : base(game) { }
     protected override string? CastScriptName => nameof(HolyWordScript);
 
     public override string Name => "Holy Word";
 
-    protected override string LearnedDetails => $"d {4 * SaveGame.ExperienceLevel.Value}/h 1000";
+    protected override string LearnedDetails => $"d {4 * Game.ExperienceLevel.Value}/h 1000";
 }

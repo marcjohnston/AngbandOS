@@ -10,7 +10,7 @@ namespace AngbandOS.Core.CharacterClasses;
 [Serializable]
 internal class PaladinCharacterClass : BaseCharacterClass
 {
-    private PaladinCharacterClass(SaveGame savedGame) : base(savedGame) { }
+    private PaladinCharacterClass(Game savedGame) : base(savedGame) { }
     public override int ID => 5;
     public override string Title => "Paladin";
     public override int[] AbilityBonus => new[] { 3, -3, 1, 0, 2, 2 };
@@ -56,21 +56,21 @@ internal class PaladinCharacterClass : BaseCharacterClass
     public override int SpellStat => Ability.Wisdom;
     public override int MaximumWeight => 30;
     public override int AttackSpeedMultiplier => 4;
-    public override IArtifactBias? ArtifactBias => SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(PriestlyArtifactBias));
+    public override IArtifactBias? ArtifactBias => Game.SingletonRepository.ArtifactBiases.Get(nameof(PriestlyArtifactBias));
     public override int FromScrollWarriorArtifactBiasPercentageChance => 40;
-    public override bool SenseInventoryTest(int level) => (0 != SaveGame.RandomLessThan(77777 / ((level * level) + 40)));
+    public override bool SenseInventoryTest(int level) => (0 != Game.RandomLessThan(77777 / ((level * level) + 40)));
     public override bool DetailedSenseInventory => true;
     public override Realm[] AvailablePrimaryRealms => new Realm[] {
-        SaveGame.SingletonRepository.Realms.Get(nameof(LifeRealm)),
-        SaveGame.SingletonRepository.Realms.Get(nameof(DeathRealm))
+        Game.SingletonRepository.Realms.Get(nameof(LifeRealm)),
+        Game.SingletonRepository.Realms.Get(nameof(DeathRealm))
     };
 
     public override void ItemDestroyed(Item item, int amount)
     {
         // Warriors and paladins get experience for destroying magic books
-        if (SaveGame.ItemFilterHighLevelBook(item))
+        if (Game.ItemFilterHighLevelBook(item))
         {
-            if (SaveGame.Studies<LifeRealm>())
+            if (Game.Studies<LifeRealm>())
             {
                 if (item.Category == ItemTypeEnum.DeathBook)
                 {

@@ -10,53 +10,53 @@ namespace AngbandOS.Core.Timers;
 [Serializable]
 internal class StunnedTimer : Timer
 {
-    private StunnedTimer(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private StunnedTimer(Game game) : base(game) { } // This object is a singleton.
     protected override void EffectStopped()
     {
-        SaveGame.MsgPrint("You are no longer stunned.");
+        Game.MsgPrint("You are no longer stunned.");
     }
     protected override void EffectIncreased(int newRate, int currentRate) 
     {
         switch (newRate)
         {
             case 1:
-                SaveGame.MsgPrint("You have been stunned.");
+                Game.MsgPrint("You have been stunned.");
                 break;
 
             case 2:
-                SaveGame.MsgPrint("You have been heavily stunned.");
+                Game.MsgPrint("You have been heavily stunned.");
                 break;
 
             case 3:
-                SaveGame.MsgPrint("You have been knocked out.");
+                Game.MsgPrint("You have been knocked out.");
                 break;
         }
-        if (SaveGame.DieRoll(1000) < newRate || SaveGame.DieRoll(16) == 1)
+        if (Game.DieRoll(1000) < newRate || Game.DieRoll(16) == 1)
         {
-            SaveGame.MsgPrint("A vicious Attack hits your head.");
-            if (SaveGame.DieRoll(3) == 1)
+            Game.MsgPrint("A vicious Attack hits your head.");
+            if (Game.DieRoll(3) == 1)
             {
-                if (!SaveGame.HasSustainIntelligence)
+                if (!Game.HasSustainIntelligence)
                 {
-                    SaveGame.TryDecreasingAbilityScore(Ability.Intelligence);
+                    Game.TryDecreasingAbilityScore(Ability.Intelligence);
                 }
-                if (!SaveGame.HasSustainWisdom)
+                if (!Game.HasSustainWisdom)
                 {
-                    SaveGame.TryDecreasingAbilityScore(Ability.Wisdom);
+                    Game.TryDecreasingAbilityScore(Ability.Wisdom);
                 }
             }
-            else if (SaveGame.DieRoll(2) == 1)
+            else if (Game.DieRoll(2) == 1)
             {
-                if (!SaveGame.HasSustainIntelligence)
+                if (!Game.HasSustainIntelligence)
                 {
-                    SaveGame.TryDecreasingAbilityScore(Ability.Intelligence);
+                    Game.TryDecreasingAbilityScore(Ability.Intelligence);
                 }
             }
             else
             {
-                if (!SaveGame.HasSustainWisdom)
+                if (!Game.HasSustainWisdom)
                 {
-                    SaveGame.TryDecreasingAbilityScore(Ability.Wisdom);
+                    Game.TryDecreasingAbilityScore(Ability.Wisdom);
                 }
             }
         }
@@ -65,7 +65,7 @@ internal class StunnedTimer : Timer
     {
         if (Value != 0)
         {
-            int adjust = SaveGame.AbilityScores[Ability.Constitution].ConRecoverySpeed + 1;
+            int adjust = Game.AbilityScores[Ability.Constitution].ConRecoverySpeed + 1;
             AddTimer(-adjust);
         }
     }
@@ -90,7 +90,7 @@ internal class StunnedTimer : Timer
     }
     protected override void Noticed()
     {
-        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
+        Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
         base.Noticed();
     }
 }

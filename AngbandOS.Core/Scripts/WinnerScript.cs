@@ -12,7 +12,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class WinnerScript : Script, IScript
 {
-    private WinnerScript(SaveGame saveGame) : base(saveGame) { }
+    private WinnerScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script.
@@ -20,9 +20,9 @@ internal class WinnerScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        SaveGame.IsWinner.Value = true;
-        SaveGame.MsgPrint("*** CONGRATULATIONS ***");
-        SaveGame.MsgPrint("You have won the game!");
-        SaveGame.MsgPrint("You may retire ('Q') when you are ready.");
+        Game.IsWinner.Value = true;
+        Game.MsgPrint("*** CONGRATULATIONS ***");
+        Game.MsgPrint("You have won the game!");
+        Game.MsgPrint("You may retire ('Q') when you are ready.");
     }
 }

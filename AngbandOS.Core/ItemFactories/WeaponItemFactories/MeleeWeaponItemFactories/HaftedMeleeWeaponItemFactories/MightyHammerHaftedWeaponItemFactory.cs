@@ -10,9 +10,9 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class MightyHammerHaftedWeaponItemFactory : HaftedWeaponItemFactory
 {
-    private MightyHammerHaftedWeaponItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private MightyHammerHaftedWeaponItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(BackSlashSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(BackSlashSymbol));
     public override ColorEnum Color => ColorEnum.Black;
     public override string Name => "Mighty Hammer";
 
@@ -24,5 +24,5 @@ internal class MightyHammerHaftedWeaponItemFactory : HaftedWeaponItemFactory
     public override int LevelNormallyFound => 15;
     public override bool ShowMods => true;
     public override int Weight => 200;
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

@@ -10,10 +10,10 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class SpeedRodItemFactory : RodItemFactory
 {
-    private SpeedRodItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private SpeedRodItemFactory(Game game) : base(game) { } // This object is a singleton.
 
     public override bool RequiresAiming => false;
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(MinusSignSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(MinusSignSymbol));
     public override string Name => "Speed";
 
     public override int[] Chance => new int[] { 16, 0, 0, 0 };
@@ -26,18 +26,18 @@ internal class SpeedRodItemFactory : RodItemFactory
     public override int Weight => 15;
     public override void Execute(ZapRodEvent zapRodEvent)
     {
-        if (SaveGame.HasteTimer.Value == 0)
+        if (Game.HasteTimer.Value == 0)
         {
-            if (SaveGame.HasteTimer.SetTimer(SaveGame.DieRoll(30) + 15))
+            if (Game.HasteTimer.SetTimer(Game.DieRoll(30) + 15))
             {
                 zapRodEvent.Identified = true;
             }
         }
         else
         {
-            SaveGame.HasteTimer.AddTimer(5);
+            Game.HasteTimer.AddTimer(5);
         }
         zapRodEvent.Item.TypeSpecificValue = 99;
     }
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

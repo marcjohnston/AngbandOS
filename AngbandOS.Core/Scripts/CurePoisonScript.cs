@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class CurePoisonScript : Script, IScript
 {
-    private CurePoisonScript(SaveGame saveGame) : base(saveGame) { }
+    private CurePoisonScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script.
@@ -18,6 +18,6 @@ internal class CurePoisonScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        SaveGame.PoisonTimer.ResetTimer();
+        Game.PoisonTimer.ResetTimer();
     }
 }

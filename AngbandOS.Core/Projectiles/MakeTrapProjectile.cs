@@ -10,17 +10,17 @@ namespace AngbandOS.Core.Projection;
 [Serializable]
 internal class MakeTrapProjectile : Projectile
 {
-    private MakeTrapProjectile(SaveGame saveGame) : base(saveGame) { }
+    private MakeTrapProjectile(Game game) : base(game) { }
 
-    protected override Animation EffectAnimation => SaveGame.SingletonRepository.Animations.Get(nameof(BrightRedSparkleAnimation));
+    protected override Animation EffectAnimation => Game.SingletonRepository.Animations.Get(nameof(BrightRedSparkleAnimation));
 
     protected override bool AffectFloor(int y, int x)
     {
-        if (!SaveGame.GridOpenNoItemOrCreature(y, x))
+        if (!Game.GridOpenNoItemOrCreature(y, x))
         {
             return false;
         }
-        SaveGame.PlaceTrap(y, x);
+        Game.PlaceTrap(y, x);
         return false;
     }
 

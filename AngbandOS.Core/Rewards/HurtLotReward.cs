@@ -10,13 +10,13 @@ namespace AngbandOS.Core.Rewards;
 [Serializable]
 internal class HurtLotReward : Reward
 {
-    private HurtLotReward(SaveGame saveGame) : base(saveGame) { }
+    private HurtLotReward(Game game) : base(game) { }
     public override void GetReward(Patron patron)
     {
         string wrathReason = $"the Wrath of {patron.ShortName}";
-        SaveGame.MsgPrint($"The voice of {patron.ShortName} booms out:");
-        SaveGame.MsgPrint("'Suffer, pathetic fool!'");
-        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(DisintegrateProjectile)), 0, SaveGame.ExperienceLevel.Value * 4, 4);
-        SaveGame.TakeHit(SaveGame.ExperienceLevel.Value * 4, wrathReason);
+        Game.MsgPrint($"The voice of {patron.ShortName} booms out:");
+        Game.MsgPrint("'Suffer, pathetic fool!'");
+        Game.FireBall(Game.SingletonRepository.Projectiles.Get(nameof(DisintegrateProjectile)), 0, Game.ExperienceLevel.Value * 4, 4);
+        Game.TakeHit(Game.ExperienceLevel.Value * 4, wrathReason);
     }
 }

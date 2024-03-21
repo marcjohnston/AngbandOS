@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Repositories;
 [Serializable]
 internal class InsultPlayerAttacksRepository : StringListRepository
 {
-    public InsultPlayerAttacksRepository(SaveGame saveGame) : base(saveGame) { }
+    public InsultPlayerAttacksRepository(Game game) : base(game) { }
 
     /// <summary>
     /// Returns InsultPlayerAttacks as the name of this string list repository.
@@ -19,14 +19,14 @@ internal class InsultPlayerAttacksRepository : StringListRepository
 
     public override void Load()
     {
-        if (SaveGame.Configuration.InsultPlayerAttacks == null)
+        if (Game.Configuration.InsultPlayerAttacks == null)
         {
             Add("insults you!", "insults your mother!", "gives you the finger!", "humiliates you!", "defiles you!",
                 "dances around you!", "makes obscene gestures!", "moons you!");
         }
         else
         {
-            Add(SaveGame.Configuration.InsultPlayerAttacks);
+            Add(Game.Configuration.InsultPlayerAttacks);
         }
     }
 }

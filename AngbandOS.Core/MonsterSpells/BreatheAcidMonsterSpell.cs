@@ -10,10 +10,10 @@ namespace AngbandOS.Core.MonsterSpells;
 [Serializable]
 internal class BreatheAcidMonsterSpell : BreatheProjectileMonsterSpell
 {
-    private BreatheAcidMonsterSpell(SaveGame saveGame) : base(saveGame) { }
+    private BreatheAcidMonsterSpell(Game game) : base(game) { }
     public override bool UsesAcid => true;
     protected override string ElementName => "acid";
-    protected override Projectile Projectile(SaveGame saveGame) => saveGame.SingletonRepository.Projectiles.Get(nameof(AcidProjectile));
+    protected override Projectile Projectile(Game game) => game.SingletonRepository.Projectiles.Get(nameof(AcidProjectile));
     protected override int Damage(Monster monster) => monster.Health / 3 > 1600 ? 1600 : monster.Health / 3;
-    public override SpellResistantDetection[] SmartLearn => new SpellResistantDetection[] { SaveGame.SingletonRepository.SpellResistantDetections.Get(nameof(AcidSpellResistantDetection)) };
+    public override SpellResistantDetection[] SmartLearn => new SpellResistantDetection[] { Game.SingletonRepository.SpellResistantDetections.Get(nameof(AcidSpellResistantDetection)) };
 }

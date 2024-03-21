@@ -10,10 +10,10 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class LightRodItemFactory : RodItemFactory
 {
-    private LightRodItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private LightRodItemFactory(Game game) : base(game) { } // This object is a singleton.
 
     public override bool RequiresAiming => true;
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(MinusSignSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(MinusSignSymbol));
     public override string Name => "Light";
 
     public override int[] Chance => new int[] { 1, 0, 0, 0 };
@@ -26,10 +26,10 @@ internal class LightRodItemFactory : RodItemFactory
     public override int Weight => 15;
     public override void Execute(ZapRodEvent zapRodEvent)
     {
-        SaveGame.MsgPrint("A line of blue shimmering light appears.");
-        SaveGame.LightLine(zapRodEvent.Dir.Value);
+        Game.MsgPrint("A line of blue shimmering light appears.");
+        Game.LightLine(zapRodEvent.Dir.Value);
         zapRodEvent.Identified = true;
         zapRodEvent.Item.TypeSpecificValue = 9;
     }
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

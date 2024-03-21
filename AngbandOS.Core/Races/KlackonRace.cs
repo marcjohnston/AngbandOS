@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Races;
 [Serializable]
 internal class KlackonRace : Race
 {
-    private KlackonRace(SaveGame saveGame) : base(saveGame) { }
+    private KlackonRace(Game game) : base(game) { }
     public override string Title => "Klackon";
     public override int[] AbilityBonus => new int[] { 2, -1, -1, 1, 2, -2 };
     public override int BaseDisarmBonus => 10;
@@ -64,25 +64,25 @@ internal class KlackonRace : Race
     }
     public override void CalcBonuses()
     {
-        SaveGame.HasConfusionResistance = true;
-        SaveGame.HasAcidResistance = true;
-        SaveGame.Speed.Value += SaveGame.ExperienceLevel.Value / 10;
+        Game.HasConfusionResistance = true;
+        Game.HasAcidResistance = true;
+        Game.Speed.Value += Game.ExperienceLevel.Value / 10;
     }
     public override void UseRacialPower()
     {
         // Klackons can spit acid
-        if (SaveGame.CheckIfRacialPowerWorks(9, 9, Ability.Dexterity, 14))
+        if (Game.CheckIfRacialPowerWorks(9, 9, Ability.Dexterity, 14))
         {
-            if (SaveGame.GetDirectionWithAim(out int direction))
+            if (Game.GetDirectionWithAim(out int direction))
             {
-                SaveGame.MsgPrint("You spit acid.");
-                if (SaveGame.ExperienceLevel.Value < 25)
+                Game.MsgPrint("You spit acid.");
+                if (Game.ExperienceLevel.Value < 25)
                 {
-                    SaveGame.FireBolt(SaveGame.SingletonRepository.Projectiles.Get(nameof(AcidProjectile)), direction, SaveGame.ExperienceLevel.Value);
+                    Game.FireBolt(Game.SingletonRepository.Projectiles.Get(nameof(AcidProjectile)), direction, Game.ExperienceLevel.Value);
                 }
                 else
                 {
-                    SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(AcidProjectile)), direction, SaveGame.ExperienceLevel.Value, 2);
+                    Game.FireBall(Game.SingletonRepository.Projectiles.Get(nameof(AcidProjectile)), direction, Game.ExperienceLevel.Value, 2);
                 }
             }
         }

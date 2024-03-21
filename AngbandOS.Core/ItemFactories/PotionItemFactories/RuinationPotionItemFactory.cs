@@ -10,9 +10,9 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class RuinationPotionItemFactory : PotionItemFactory
 {
-    private RuinationPotionItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private RuinationPotionItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(ExclamationPointSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(ExclamationPointSymbol));
     public override string Name => "Ruination";
 
     public override int[] Chance => new int[] { 8, 0, 0, 0 };
@@ -26,21 +26,21 @@ internal class RuinationPotionItemFactory : PotionItemFactory
     {
         // Ruination does 10d10 damage and reduces all your ability scores, bypassing
         // sustains and divine protection
-        SaveGame.MsgPrint("Your nerves and muscles feel weak and lifeless!");
-        SaveGame.TakeHit(SaveGame.DiceRoll(10, 10), "a potion of Ruination");
-        SaveGame.DecreaseAbilityScore(Ability.Dexterity, 25, true);
-        SaveGame.DecreaseAbilityScore(Ability.Wisdom, 25, true);
-        SaveGame.DecreaseAbilityScore(Ability.Constitution, 25, true);
-        SaveGame.DecreaseAbilityScore(Ability.Strength, 25, true);
-        SaveGame.DecreaseAbilityScore(Ability.Charisma, 25, true);
-        SaveGame.DecreaseAbilityScore(Ability.Intelligence, 25, true);
+        Game.MsgPrint("Your nerves and muscles feel weak and lifeless!");
+        Game.TakeHit(Game.DiceRoll(10, 10), "a potion of Ruination");
+        Game.DecreaseAbilityScore(Ability.Dexterity, 25, true);
+        Game.DecreaseAbilityScore(Ability.Wisdom, 25, true);
+        Game.DecreaseAbilityScore(Ability.Constitution, 25, true);
+        Game.DecreaseAbilityScore(Ability.Strength, 25, true);
+        Game.DecreaseAbilityScore(Ability.Charisma, 25, true);
+        Game.DecreaseAbilityScore(Ability.Intelligence, 25, true);
         return true;
     }
 
     public override bool Smash(int who, int y, int x)
     {
-        SaveGame.Project(who, 2, y, x, SaveGame.DiceRoll(25, 25), SaveGame.SingletonRepository.Projectiles.Get(nameof(ExplodeProjectile)), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
+        Game.Project(who, 2, y, x, Game.DiceRoll(25, 25), Game.SingletonRepository.Projectiles.Get(nameof(ExplodeProjectile)), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
         return true;
     }
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

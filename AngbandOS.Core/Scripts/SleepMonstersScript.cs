@@ -10,11 +10,11 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class SleepMonstersScript : Script, IScript, ISuccessfulScript
 {
-    private SleepMonstersScript(SaveGame saveGame) : base(saveGame) { }
+    private SleepMonstersScript(Game game) : base(game) { }
 
     public bool ExecuteSuccessfulScript()
     {
-        return SaveGame.ProjectAtAllInLos(SaveGame.SingletonRepository.Projectiles.Get(nameof(OldSleepProjectile)), SaveGame.ExperienceLevel.Value);
+        return Game.ProjectAtAllInLos(Game.SingletonRepository.Projectiles.Get(nameof(OldSleepProjectile)), Game.ExperienceLevel.Value);
     }
 
     /// <summary>

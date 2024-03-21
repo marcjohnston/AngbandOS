@@ -10,15 +10,15 @@ namespace AngbandOS.Core.FlaggedActions;
 [Serializable]
 internal class RemoveLightFlaggedAction : FlaggedAction
 {
-    private RemoveLightFlaggedAction(SaveGame saveGame) : base(saveGame) { }
+    private RemoveLightFlaggedAction(Game game) : base(game) { }
     protected override void Execute()
     {
-        foreach (GridCoordinate gridCoordinate in SaveGame.Light)
+        foreach (GridCoordinate gridCoordinate in Game.Light)
         {
-            SaveGame.Grid[gridCoordinate.Y][gridCoordinate.X].TileFlags.Clear(GridTile.PlayerLit);
-            SaveGame.RedrawSingleLocation(gridCoordinate.Y, gridCoordinate.X);
+            Game.Grid[gridCoordinate.Y][gridCoordinate.X].TileFlags.Clear(GridTile.PlayerLit);
+            Game.RedrawSingleLocation(gridCoordinate.Y, gridCoordinate.X);
 
         }
-        SaveGame.Light.Clear();
+        Game.Light.Clear();
     }
 }

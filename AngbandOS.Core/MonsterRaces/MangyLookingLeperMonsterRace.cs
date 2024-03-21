@@ -10,7 +10,7 @@ namespace AngbandOS.Core.MonsterRaces;
 [Serializable]
 internal class MangyLookingLeperMonsterRace : MonsterRace
 {
-    protected MangyLookingLeperMonsterRace(SaveGame saveGame) : base(saveGame) { }
+    protected MangyLookingLeperMonsterRace(Game game) : base(game) { }
 
     protected override string SymbolName => nameof(LowerTSymbol);
     public override ColorEnum Color => ColorEnum.Brown;

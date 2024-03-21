@@ -10,7 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class DaggerOfThothFixedArtifact : FixedArtifact
 {
-    private DaggerOfThothFixedArtifact(SaveGame saveGame) : base(saveGame) { }
+    private DaggerOfThothFixedArtifact(Game game) : base(game) { }
 
     protected override string BaseItemFactoryName => nameof(DaggerWeaponItemFactory);
 

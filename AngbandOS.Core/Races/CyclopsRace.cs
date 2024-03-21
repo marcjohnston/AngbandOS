@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Races;
 [Serializable]
 internal class CyclopsRace : Race
 {
-    private CyclopsRace(SaveGame saveGame) : base(saveGame) { }
+    private CyclopsRace(Game game) : base(game) { }
     public override string Title => "Cyclops";
     public override int[] AbilityBonus => new int[] { 4, -3, -3, -3, 4, -6 };
     public override int BaseDisarmBonus => -4;
@@ -62,18 +62,18 @@ internal class CyclopsRace : Race
     }
     public override void CalcBonuses()
     {
-        SaveGame.HasSoundResistance = true;
+        Game.HasSoundResistance = true;
     }
 
     public override void UseRacialPower()
     {
         // Cyclopes can throw boulders
-        if (SaveGame.CheckIfRacialPowerWorks(20, 15, Ability.Strength, 12))
+        if (Game.CheckIfRacialPowerWorks(20, 15, Ability.Strength, 12))
         {
-            if (SaveGame.GetDirectionWithAim(out int direction))
+            if (Game.GetDirectionWithAim(out int direction))
             {
-                SaveGame.MsgPrint("You throw a huge boulder.");
-                SaveGame.FireBolt(SaveGame.SingletonRepository.Projectiles.Get(nameof(MissileProjectile)), direction, 3 * SaveGame.ExperienceLevel.Value / 2);
+                Game.MsgPrint("You throw a huge boulder.");
+                Game.FireBolt(Game.SingletonRepository.Projectiles.Get(nameof(MissileProjectile)), direction, 3 * Game.ExperienceLevel.Value / 2);
             }
         }
     }

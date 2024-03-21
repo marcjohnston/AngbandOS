@@ -10,14 +10,14 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class MetalScaleMailOfTheOrcsFixedArtifact : FixedArtifact
 {
-    private MetalScaleMailOfTheOrcsFixedArtifact(SaveGame saveGame) : base(saveGame) { }
+    private MetalScaleMailOfTheOrcsFixedArtifact(Game game) : base(game) { }
 
     protected override string BaseItemFactoryName => nameof(MetalScaleMailHardArmorItemFactory);
 
     public override void ApplyResistances(Item item)
     {
         IArtifactBias artifactBias = null;
-        item.ApplyRandomResistance(ref artifactBias, SaveGame.DieRoll(22) + 16);
+        item.ApplyRandomResistance(ref artifactBias, Game.DieRoll(22) + 16);
     }
 
     // Orc does Carnage

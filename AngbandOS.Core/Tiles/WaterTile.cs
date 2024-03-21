@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Tiles;
 [Serializable]
 internal class WaterTile : Tile
 {
-    private WaterTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private WaterTile(Game game) : base(game) { } // This object is a singleton.
     protected override string SymbolName => nameof(TildeSymbol);
     public override ColorEnum Color => ColorEnum.Blue;
     public override string Description => "water";

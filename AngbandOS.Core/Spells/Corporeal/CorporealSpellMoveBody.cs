@@ -10,10 +10,10 @@ namespace AngbandOS.Core.Spells.Corporeal;
 [Serializable]
 internal class CorporealSpellMoveBody : Spell
 {
-    private CorporealSpellMoveBody(SaveGame saveGame) : base(saveGame) { }
+    private CorporealSpellMoveBody(Game game) : base(game) { }
     protected override string? CastScriptName => nameof(MoveBodyScript);
 
     public override string Name => "Move Body";
 
-    protected override string LearnedDetails => $"range {SaveGame.ExperienceLevel.Value + 2}";
+    protected override string LearnedDetails => $"range {Game.ExperienceLevel.Value + 2}";
 }

@@ -10,7 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class DaggerFaithFixedArtifact : FixedArtifact
 {
-    private DaggerFaithFixedArtifact(SaveGame saveGame) : base(saveGame) { }
+    private DaggerFaithFixedArtifact(Game game) : base(game) { }
 
     protected override string BaseItemFactoryName => nameof(DaggerWeaponItemFactory);
 
@@ -20,7 +20,7 @@ internal class DaggerFaithFixedArtifact : FixedArtifact
     public override void ApplyResistances(Item item)
     {
         IArtifactBias artifactBias = null;
-        item.ApplyRandomResistance(ref artifactBias, SaveGame.DieRoll(22) + 16);
+        item.ApplyRandomResistance(ref artifactBias, Game.DieRoll(22) + 16);
     }
 
     public override ColorEnum Color => ColorEnum.BrightWhite;

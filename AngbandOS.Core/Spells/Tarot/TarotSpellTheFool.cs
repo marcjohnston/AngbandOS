@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Spells.Tarot;
 [Serializable]
 internal class TarotSpellTheFool : Spell
 {
-    private TarotSpellTheFool(SaveGame saveGame) : base(saveGame) { }
+    private TarotSpellTheFool(Game game) : base(game) { }
     protected override string? CastScriptName => nameof(SummonBizarreMonsterScript);
 
     public override string Name => "The Fool";

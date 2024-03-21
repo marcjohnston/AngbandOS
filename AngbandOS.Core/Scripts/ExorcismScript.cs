@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class ExorcismScript : Script, IScript
 {
-    private ExorcismScript(SaveGame saveGame) : base(saveGame) { }
+    private ExorcismScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script.
@@ -18,8 +18,8 @@ internal class ExorcismScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        SaveGame.DispelUndead(SaveGame.ExperienceLevel.Value);
-        SaveGame.DispelDemons(SaveGame.ExperienceLevel.Value);
-        SaveGame.TurnEvil(SaveGame.ExperienceLevel.Value);
+        Game.DispelUndead(Game.ExperienceLevel.Value);
+        Game.DispelDemons(Game.ExperienceLevel.Value);
+        Game.TurnEvil(Game.ExperienceLevel.Value);
     }
 }

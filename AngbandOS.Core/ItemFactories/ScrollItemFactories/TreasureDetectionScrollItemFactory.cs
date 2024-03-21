@@ -10,9 +10,9 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class TreasureDetectionScrollItemFactory : ScrollItemFactory
 {
-    private TreasureDetectionScrollItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private TreasureDetectionScrollItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(QuestionMarkSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(QuestionMarkSymbol));
     public override string Name => "Treasure Detection";
 
     public override int[] Chance => new int[] { 1, 0, 0, 0 };
@@ -22,14 +22,14 @@ internal class TreasureDetectionScrollItemFactory : ScrollItemFactory
 
     public override void Read(ReadScrollEvent eventArgs)
     {
-        if (SaveGame.DetectTreasure())
+        if (Game.DetectTreasure())
         {
             eventArgs.Identified = true;
         }
-        if (SaveGame.DetectObjectsGold())
+        if (Game.DetectObjectsGold())
         {
             eventArgs.Identified = true;
         }
     }
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

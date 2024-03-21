@@ -13,10 +13,10 @@ namespace AngbandOS.Core.AlterActions;
 [Serializable]
 internal abstract class AlterAction : IGetKey
 {
-    protected readonly SaveGame SaveGame;
-    protected AlterAction(SaveGame saveGame)
+    protected readonly Game Game;
+    protected AlterAction(Game game)
     {
-        SaveGame = saveGame;
+        Game = game;
     }
 
     /// <summary>

@@ -10,10 +10,10 @@ namespace AngbandOS.Core.Rewards;
 [Serializable]
 internal class PolyWndReward : Reward
 {
-    private PolyWndReward(SaveGame saveGame) : base(saveGame) { }
+    private PolyWndReward(Game game) : base(game) { }
     public override void GetReward(Patron patron)
     {
-        SaveGame.MsgPrint($"You feel the power of {patron.ShortName} touch you.");
-        SaveGame.RunScript(nameof(PolymorphWoundsScript));
+        Game.MsgPrint($"You feel the power of {patron.ShortName} touch you.");
+        Game.RunScript(nameof(PolymorphWoundsScript));
     }
 }

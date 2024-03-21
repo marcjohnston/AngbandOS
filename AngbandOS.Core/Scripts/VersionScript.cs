@@ -13,7 +13,7 @@ namespace AngbandOS.Core.Scripts;
 internal class VersionScript : Script, IScript, IRepeatableScript
 {
 
-    private VersionScript(SaveGame saveGame) : base(saveGame) { }
+    private VersionScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the version script and returns false.
@@ -32,6 +32,6 @@ internal class VersionScript : Script, IScript, IRepeatableScript
     public void ExecuteScript()
     {
         AssemblyName assembly = Assembly.GetExecutingAssembly().GetName();
-        SaveGame.MsgPrint($"You are playing {assembly.Name} {assembly.Version}.");
+        Game.MsgPrint($"You are playing {assembly.Name} {assembly.Version}.");
     }
 }

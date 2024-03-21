@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Animations;
 [Serializable]
 internal class SilverCloudAnimation : Animation
 {
-    private SilverCloudAnimation(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private SilverCloudAnimation(Game game) : base(game) { } // This object is a singleton.
     public override char Character => '*';
     public override ColorEnum Color => ColorEnum.Silver;
     public override string Name => "SilverCloud";

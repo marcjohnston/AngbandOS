@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class ToggleRecallScript : Script, IScript
 {
-    private ToggleRecallScript(SaveGame saveGame) : base(saveGame) { }
+    private ToggleRecallScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script.
@@ -18,15 +18,15 @@ internal class ToggleRecallScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        if (SaveGame.WordOfRecallDelay == 0)
+        if (Game.WordOfRecallDelay == 0)
         {
-            SaveGame.WordOfRecallDelay = SaveGame.DieRoll(20) + 15;
-            SaveGame.MsgPrint("The air about you becomes charged...");
+            Game.WordOfRecallDelay = Game.DieRoll(20) + 15;
+            Game.MsgPrint("The air about you becomes charged...");
         }
         else
         {
-            SaveGame.WordOfRecallDelay = 0;
-            SaveGame.MsgPrint("A tension leaves the air around you...");
+            Game.WordOfRecallDelay = 0;
+            Game.MsgPrint("A tension leaves the air around you...");
         }
     }
 }

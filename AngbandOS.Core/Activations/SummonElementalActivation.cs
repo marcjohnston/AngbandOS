@@ -13,25 +13,25 @@ namespace AngbandOS.Core.Activations;
 [Serializable]
 internal class SummonElementalActivation : Activation
 {
-    private SummonElementalActivation(SaveGame saveGame) : base(saveGame) { }
+    private SummonElementalActivation(Game game) : base(game) { }
     public override int RandomChance => 25;
 
     protected override bool OnActivate(Item item)
     {
-        if (SaveGame.DieRoll(3) == 1)
+        if (Game.DieRoll(3) == 1)
         {
-            if (SaveGame.SummonSpecific(SaveGame.MapY, SaveGame.MapX, (int)(SaveGame.ExperienceLevel.Value * 1.5), SaveGame.SingletonRepository.MonsterFilters.Get(nameof(ElementalMonsterFilter))))
+            if (Game.SummonSpecific(Game.MapY, Game.MapX, (int)(Game.ExperienceLevel.Value * 1.5), Game.SingletonRepository.MonsterFilters.Get(nameof(ElementalMonsterFilter))))
             {
-                SaveGame.MsgPrint("An elemental materializes...");
-                SaveGame.MsgPrint("You fail to control it!");
+                Game.MsgPrint("An elemental materializes...");
+                Game.MsgPrint("You fail to control it!");
             }
         }
         else
         {
-            if (SaveGame.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, (int)(SaveGame.ExperienceLevel.Value * 1.5), SaveGame.SingletonRepository.MonsterFilters.Get(nameof(ElementalMonsterFilter)), SaveGame.ExperienceLevel.Value == 50))
+            if (Game.SummonSpecificFriendly(Game.MapY, Game.MapX, (int)(Game.ExperienceLevel.Value * 1.5), Game.SingletonRepository.MonsterFilters.Get(nameof(ElementalMonsterFilter)), Game.ExperienceLevel.Value == 50))
             {
-                SaveGame.MsgPrint("An elemental materializes...");
-                SaveGame.MsgPrint("It seems obedient to you.");
+                Game.MsgPrint("An elemental materializes...");
+                Game.MsgPrint("It seems obedient to you.");
             }
         }
         return true;

@@ -10,9 +10,9 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class RestoringMushroomFoodItemFactory : MushroomFoodItemFactory
 {
-    private RestoringMushroomFoodItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private RestoringMushroomFoodItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(CommaSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(CommaSymbol));
     public override string Name => "Restoring";
 
     public override int[] Chance => new int[] { 8, 4, 1, 0 };
@@ -24,33 +24,33 @@ internal class RestoringMushroomFoodItemFactory : MushroomFoodItemFactory
     public override int Weight => 1;
     public override bool Eat()
     {
-        SaveGame.PlaySound(SoundEffectEnum.Eat);
+        Game.PlaySound(SoundEffectEnum.Eat);
         bool ident = false;
-        if (SaveGame.TryRestoringAbilityScore(Ability.Strength))
+        if (Game.TryRestoringAbilityScore(Ability.Strength))
         {
             ident = true;
         }
-        if (SaveGame.TryRestoringAbilityScore(Ability.Intelligence))
+        if (Game.TryRestoringAbilityScore(Ability.Intelligence))
         {
             ident = true;
         }
-        if (SaveGame.TryRestoringAbilityScore(Ability.Wisdom))
+        if (Game.TryRestoringAbilityScore(Ability.Wisdom))
         {
             ident = true;
         }
-        if (SaveGame.TryRestoringAbilityScore(Ability.Dexterity))
+        if (Game.TryRestoringAbilityScore(Ability.Dexterity))
         {
             ident = true;
         }
-        if (SaveGame.TryRestoringAbilityScore(Ability.Constitution))
+        if (Game.TryRestoringAbilityScore(Ability.Constitution))
         {
             ident = true;
         }
-        if (SaveGame.TryRestoringAbilityScore(Ability.Charisma))
+        if (Game.TryRestoringAbilityScore(Ability.Charisma))
         {
             ident = true;
         }
         return ident;
     }
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

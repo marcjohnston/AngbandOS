@@ -85,11 +85,11 @@ internal class ConsoleTable : ConsoleElement
 
     public int TopRow = 0;
 
-    public override void Render(SaveGame saveGame, ConsoleWindow containerWindow, ConsoleAlignment parentAlignment)
+    public override void Render(Game game, ConsoleWindow containerWindow, ConsoleAlignment parentAlignment)
     {
         ConsoleAlignment alignment = Alignment ?? parentAlignment;
         ConsoleLocation rowLocation = alignment.ComputeTopLeftLocation(this, containerWindow);
-        rowLocation.ToWindow(Width, Height).Clear(saveGame, ColorEnum.Background);
+        rowLocation.ToWindow(Width, Height).Clear(game, ColorEnum.Background);
         Dictionary<ConsoleTableColumn, int> columnWidths = new Dictionary<ConsoleTableColumn, int>();
 
         int rowIndex = TopRow;
@@ -119,7 +119,7 @@ internal class ConsoleTable : ConsoleElement
                     ConsoleElement? element = row[column.Name];
                     if (element != null)
                     {
-                        element.Render(saveGame, columnLocation.ToWindow(columnWidth, 1), column.Alignment);
+                        element.Render(game, columnLocation.ToWindow(columnWidth, 1), column.Alignment);
                     }
                     columnLocation = columnLocation.Offset(columnWidth + 1, 0);
                 }

@@ -16,10 +16,10 @@ namespace AngbandOS.Core.RareItems;
 [Serializable]
 internal abstract class RareItem : IItemCharacteristics, IGetKey
 {
-    protected SaveGame SaveGame;
-    protected RareItem(SaveGame saveGame)
+    protected Game Game;
+    protected RareItem(Game game)
     {
-        SaveGame = saveGame;
+        Game = game;
     }
 
     /// <summary>

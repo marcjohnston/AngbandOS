@@ -10,15 +10,15 @@ namespace AngbandOS.Core.Projection;
 [Serializable]
 internal class ExplodeProjectile : Projectile
 {
-    private ExplodeProjectile(SaveGame saveGame) : base(saveGame) { }
+    private ExplodeProjectile(Game game) : base(game) { }
 
-    protected override ProjectileGraphic? BoltProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get(nameof(BrightRedSplatProjectileGraphic));
+    protected override ProjectileGraphic? BoltProjectileGraphic => Game.SingletonRepository.ProjectileGraphics.Get(nameof(BrightRedSplatProjectileGraphic));
 
-    protected override Animation EffectAnimation => SaveGame.SingletonRepository.Animations.Get(nameof(RedOrangeFlashAnimation));
+    protected override Animation EffectAnimation => Game.SingletonRepository.Animations.Get(nameof(RedOrangeFlashAnimation));
 
     protected override bool AffectItem(int who, int y, int x)
     {
-        GridTile cPtr = SaveGame.Grid[y][x];
+        GridTile cPtr = Game.Grid[y][x];
         bool obvious = false;
         string oName = "";
         foreach (Item oPtr in cPtr.Items)
@@ -49,23 +49,23 @@ internal class ExplodeProjectile : Projectile
                 if (oPtr.Marked)
                 {
                     string s = plural ? "are" : "is";
-                    SaveGame.MsgPrint($"The {oName} {s} unaffected!");
+                    Game.MsgPrint($"The {oName} {s} unaffected!");
                 }
             }
             else
             {
                 if (oPtr.Marked && string.IsNullOrEmpty(noteKill))
                 {
-                    SaveGame.MsgPrint($"The {oName}{noteKill}");
+                    Game.MsgPrint($"The {oName}{noteKill}");
                 }
                 bool isPotion = oPtr.Factory.CategoryEnum == ItemTypeEnum.Potion;
-                SaveGame.DeleteObject(oPtr);
+                Game.DeleteObject(oPtr);
                 if (isPotion)
                 {
                     PotionItemFactory potion = (PotionItemFactory)oPtr.Factory;
                     potion.Smash(who, y, x);
                 }
-                SaveGame.RedrawSingleLocation(y, x);
+                Game.RedrawSingleLocation(y, x);
             }
         }
         return obvious;
@@ -85,7 +85,7 @@ internal class ExplodeProjectile : Projectile
         {
             note = " resists.";
             dam *= 3;
-            dam /= SaveGame.DieRoll(6) + 6;
+            dam /= Game.DieRoll(6) + 6;
         }
         ApplyProjectileDamageToMonster(who, mPtr, dam, note);
         return obvious;
@@ -93,32 +93,32 @@ internal class ExplodeProjectile : Projectile
 
     protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
     {
-        bool blind = SaveGame.BlindnessTimer.Value != 0;
+        bool blind = Game.BlindnessTimer.Value != 0;
         if (dam > 1600)
         {
             dam = 1600;
         }
         dam = (dam + r) / (r + 1);
-        Monster mPtr = SaveGame.Monsters[who];
+        Monster mPtr = Game.Monsters[who];
         string killer = mPtr.IndefiniteVisibleName;
         if (blind)
         {
-            SaveGame.MsgPrint("You are hit by an explosion of shrapnel!");
+            Game.MsgPrint("You are hit by an explosion of shrapnel!");
         }
-        if (SaveGame.HasShardResistance)
+        if (Game.HasShardResistance)
         {
             dam *= 6;
-            dam /= SaveGame.DieRoll(6) + 6;
+            dam /= Game.DieRoll(6) + 6;
         }
         else
         {
-            SaveGame.BleedingTimer.AddTimer(dam);
+            Game.BleedingTimer.AddTimer(dam);
         }
-        if (!SaveGame.HasShardResistance || SaveGame.DieRoll(13) == 1)
+        if (!Game.HasShardResistance || Game.DieRoll(13) == 1)
         {
-            SaveGame.InvenDamage(SaveGame.SetColdDestroy, 2);
+            Game.InvenDamage(Game.SetColdDestroy, 2);
         }
-        SaveGame.TakeHit(dam, killer);
+        Game.TakeHit(dam, killer);
         return true;
     }
 }

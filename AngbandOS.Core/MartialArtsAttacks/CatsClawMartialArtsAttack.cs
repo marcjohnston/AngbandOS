@@ -16,5 +16,5 @@ internal class CatsClawMartialArtsAttack : MartialArtsAttack
     public override int Ds => 5;
     public override int Effect => 0;
     public override int MinLevel => 20;
-    private CatsClawMartialArtsAttack(SaveGame saveGame) : base(saveGame) { }
+    private CatsClawMartialArtsAttack(Game game) : base(game) { }
 }

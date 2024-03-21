@@ -13,7 +13,7 @@ namespace AngbandOS.Core.ItemFilters;
 [Serializable]
 internal class KnownAndActivableItemFilter : AllItemsItemFilter
 {
-    private KnownAndActivableItemFilter(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private KnownAndActivableItemFilter(Game game) : base(game) { } // This object is a singleton.
     public override bool? IsKnown => true;
     public override bool? CanBeActivated => true;
 }

@@ -10,14 +10,14 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class ChainMailHeartguardFixedArtifact : FixedArtifact
 {
-    private ChainMailHeartguardFixedArtifact(SaveGame saveGame) : base(saveGame) { }
+    private ChainMailHeartguardFixedArtifact(Game game) : base(game) { }
 
     protected override string BaseItemFactoryName => nameof(ChainMailHardArmorItemFactory);
 
     public override void ApplyResistances(Item item)
     {
         IArtifactBias artifactBias = null;
-        item.ApplyRandomResistance(ref artifactBias, SaveGame.DieRoll(22) + 16);
+        item.ApplyRandomResistance(ref artifactBias, Game.DieRoll(22) + 16);
     }
 
     public override ColorEnum Color => ColorEnum.Grey;

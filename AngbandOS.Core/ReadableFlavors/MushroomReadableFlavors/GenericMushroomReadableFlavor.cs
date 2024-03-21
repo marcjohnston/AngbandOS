@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Flavors;
 [Serializable]
 internal class GenericMushroomReadableFlavor : MushroomReadableFlavor
 {
-    public GenericMushroomReadableFlavor(SaveGame saveGame, ReadableFlavorDefinition readableFlavorDefninition) : base(saveGame)
+    public GenericMushroomReadableFlavor(Game game, ReadableFlavorDefinition readableFlavorDefninition) : base(game)
     {
         Key = readableFlavorDefninition.Key;
         Name = readableFlavorDefninition.Name;

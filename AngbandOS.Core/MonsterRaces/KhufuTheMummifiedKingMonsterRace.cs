@@ -10,7 +10,7 @@ namespace AngbandOS.Core.MonsterRaces;
 [Serializable]
 internal class KhufuTheMummifiedKingMonsterRace : MonsterRace
 {
-    protected KhufuTheMummifiedKingMonsterRace(SaveGame saveGame) : base(saveGame) { }
+    protected KhufuTheMummifiedKingMonsterRace(Game game) : base(game) { }
 
     protected override string[]? SpellNames =>new string[] {
         nameof(CauseCriticalWoundsMonsterSpell),

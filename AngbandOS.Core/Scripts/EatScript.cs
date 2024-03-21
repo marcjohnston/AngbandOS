@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class EatScript : Script, IScript, IRepeatableScript
 {
-    private EatScript(SaveGame saveGame) : base(saveGame) { }
+    private EatScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the eat script and returns false.
@@ -28,9 +28,9 @@ internal class EatScript : Script, IScript, IRepeatableScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        if (!SaveGame.SelectItem(out Item? item, "Eat which item? ", false, true, true, SaveGame.SingletonRepository.ItemFilters.Get(nameof(CanBeEatenItemFilter))))
+        if (!Game.SelectItem(out Item? item, "Eat which item? ", false, true, true, Game.SingletonRepository.ItemFilters.Get(nameof(CanBeEatenItemFilter))))
         {
-            SaveGame.MsgPrint("You have nothing to eat.");
+            Game.MsgPrint("You have nothing to eat.");
             return;
         }
         if (item == null)
@@ -42,18 +42,18 @@ internal class EatScript : Script, IScript, IRepeatableScript
         FoodItemFactory? foodItemFactory = item.TryGetFactory<FoodItemFactory>();
         if (foodItemFactory == null)
         {
-            SaveGame.MsgPrint("You can't eat that!");
+            Game.MsgPrint("You can't eat that!");
             return;
         }
 
         // Eating costs 100 energy
-        SaveGame.EnergyUse = 100;
+        Game.EnergyUse = 100;
         int itemLevel = item.Factory.LevelNormallyFound;
 
         // Allow the food item to process the consumption.
         bool ident = foodItemFactory.Eat();
 
-        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
+        Game.SingletonRepository.FlaggedActions.Get(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
 
         // We've tried this type of object
         item.ObjectTried();
@@ -62,11 +62,11 @@ internal class EatScript : Script, IScript, IRepeatableScript
         if (ident && !item.IsFlavorAware())
         {
             item.BecomeFlavorAware();
-            SaveGame.GainExperience((itemLevel + (SaveGame.ExperienceLevel.Value >> 1)) / SaveGame.ExperienceLevel.Value);
+            Game.GainExperience((itemLevel + (Game.ExperienceLevel.Value >> 1)) / Game.ExperienceLevel.Value);
         }
 
         // Now races process the sustenance.
-        SaveGame.Race.Eat(item);
+        Game.Race.Eat(item);
 
         // Dwarf bread isn't actually eaten so return early
         if (!foodItemFactory.IsConsumedWhenEaten)

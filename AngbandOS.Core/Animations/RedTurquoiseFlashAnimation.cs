@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Animations;
 [Serializable]
 internal class RedTurquoiseFlashAnimation : Animation
 {
-    private RedTurquoiseFlashAnimation(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private RedTurquoiseFlashAnimation(Game game) : base(game) { } // This object is a singleton.
     public override char Character => '*';
     public override ColorEnum Color => ColorEnum.BrightTurquoise;
     public override string Name => "RedTurquoiseFlash";

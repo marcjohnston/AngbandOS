@@ -13,7 +13,7 @@ namespace AngbandOS.Core.Activations;
 [Serializable]
 internal class BallOfCold100r2Every300Activation : DirectionalActivation
 {
-    private BallOfCold100r2Every300Activation(SaveGame saveGame) : base(saveGame) { }
+    private BallOfCold100r2Every300Activation(Game game) : base(game) { }
     public override int RandomChance => 0; // TODO: Confirm this artifact does not have a corresponding random chance.  It is only used with biased artifacts.
 
     public override string? PreActivationMessage => "Your {0} glows an intense blue...";
@@ -22,7 +22,7 @@ internal class BallOfCold100r2Every300Activation : DirectionalActivation
 
     protected override bool Activate(int direction)
     {
-        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(ColdProjectile)), direction, 100, 2);
+        Game.FireBall(Game.SingletonRepository.Projectiles.Get(nameof(ColdProjectile)), direction, 100, 2);
         return true;
     }
 

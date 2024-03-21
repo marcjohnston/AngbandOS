@@ -10,9 +10,9 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class RoundedPebbleShotAmmunitionItemFactory : ShotAmmunitionItemFactory
 {
-    private RoundedPebbleShotAmmunitionItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private RoundedPebbleShotAmmunitionItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(OpenBracketSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(OpenBracketSymbol));
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "Rounded Pebble";
 
@@ -23,5 +23,5 @@ internal class RoundedPebbleShotAmmunitionItemFactory : ShotAmmunitionItemFactor
     public override string FriendlyName => "& Rounded Pebble~";
     public override bool ShowMods => true;
     public override int Weight => 4;
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

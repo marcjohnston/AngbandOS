@@ -10,10 +10,10 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class DrainLifeRodItemFactory : RodItemFactory
 {
-    private DrainLifeRodItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private DrainLifeRodItemFactory(Game game) : base(game) { } // This object is a singleton.
 
     public override bool RequiresAiming => true;
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(MinusSignSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(MinusSignSymbol));
     public override string Name => "Drain Life";
 
     public override int[] Chance => new int[] { 4, 0, 0, 0 };
@@ -26,11 +26,11 @@ internal class DrainLifeRodItemFactory : RodItemFactory
     public override int Weight => 15;
     public override void Execute(ZapRodEvent zapRodEvent)
     {
-        if (SaveGame.DrainLife(zapRodEvent.Dir.Value, 75))
+        if (Game.DrainLife(zapRodEvent.Dir.Value, 75))
         {
             zapRodEvent.Identified = true;
         }
         zapRodEvent.Item.TypeSpecificValue = 23;
     }
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

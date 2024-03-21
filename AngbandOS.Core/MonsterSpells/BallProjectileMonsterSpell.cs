@@ -14,7 +14,7 @@ namespace AngbandOS.Core.MonsterSpells;
 [Serializable]
 internal abstract class BallProjectileMonsterSpell : BoltProjectileMonsterSpell
 {
-    protected BallProjectileMonsterSpell(SaveGame saveGame) : base(saveGame) { }
+    protected BallProjectileMonsterSpell(Game game) : base(game) { }
     /// <summary>
     /// Returns the radius of the damage.  Returns 2, by default.
     /// </summary>
@@ -22,7 +22,7 @@ internal abstract class BallProjectileMonsterSpell : BoltProjectileMonsterSpell
 
     protected override ProjectionFlag ProjectionFlags => ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill;
 
-    protected override bool Project(SaveGame saveGame, Monster monster, int rad, int y, int x, int dam, Projectile projectile, ProjectionFlag flg)
+    protected override bool Project(Game game, Monster monster, int rad, int y, int x, int dam, Projectile projectile, ProjectionFlag flg)
     {
         // A ball injects a radius.
         int radius = Radius;
@@ -33,6 +33,6 @@ internal abstract class BallProjectileMonsterSpell : BoltProjectileMonsterSpell
             radius = monster.Race.Powerful ? 3 : 2;
         }
 
-        return base.Project(saveGame, monster, rad, y, x, dam, projectile, flg);
+        return base.Project(game, monster, rad, y, x, dam, projectile, flg);
     }
 }

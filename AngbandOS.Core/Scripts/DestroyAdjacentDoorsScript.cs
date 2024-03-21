@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class DestroyAdjacentDoorsScript : Script, IScript, ISuccessfulScript, ICancellableScript
 {
-    private DestroyAdjacentDoorsScript(SaveGame saveGame) : base(saveGame) { }
+    private DestroyAdjacentDoorsScript(Game game) : base(game) { }
 
     /// <summary>
     /// Runs the successful script and returns true because the player cannot cancel the script.
@@ -29,7 +29,7 @@ internal class DestroyAdjacentDoorsScript : Script, IScript, ISuccessfulScript, 
     public bool ExecuteSuccessfulScript()
     {
         ProjectionFlag flg = ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectHide;
-        return SaveGame.Project(0, 1, SaveGame.MapY, SaveGame.MapX, 0, SaveGame.SingletonRepository.Projectiles.Get(nameof(KillDoorProjectile)), flg);
+        return Game.Project(0, 1, Game.MapY, Game.MapX, 0, Game.SingletonRepository.Projectiles.Get(nameof(KillDoorProjectile)), flg);
     }
 
     /// <summary>

@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Spells.Corporeal;
 [Serializable]
 internal class CorporealSpellMutateBody : Spell
 {
-    private CorporealSpellMutateBody(SaveGame saveGame) : base(saveGame) { }
+    private CorporealSpellMutateBody(Game game) : base(game) { }
     protected override string? CastScriptName => nameof(MutateBodyScript);
 
     public override string Name => "Mutate Body";

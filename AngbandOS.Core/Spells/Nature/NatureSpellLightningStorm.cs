@@ -10,10 +10,10 @@ namespace AngbandOS.Core.Spells.Nature;
 [Serializable]
 internal class NatureSpellLightningStorm : Spell
 {
-    private NatureSpellLightningStorm(SaveGame saveGame) : base(saveGame) { }
+    private NatureSpellLightningStorm(Game game) : base(game) { }
     protected override string? CastScriptName => nameof(LightningStormScript);
 
     public override string Name => "Lightning Storm";
 
-    protected override string LearnedDetails => $"dam {90 + SaveGame.ExperienceLevel.Value}";
+    protected override string LearnedDetails => $"dam {90 + Game.ExperienceLevel.Value}";
 }

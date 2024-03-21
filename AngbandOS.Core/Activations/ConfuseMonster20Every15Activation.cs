@@ -13,7 +13,7 @@ namespace AngbandOS.Core.Activations;
 [Serializable]
 internal class ConfuseMonster20Every15Activation : DirectionalActivation
 {
-    private ConfuseMonster20Every15Activation(SaveGame saveGame) : base(saveGame) { }
+    private ConfuseMonster20Every15Activation(Game game) : base(game) { }
     public override int RandomChance => 101;
 
     public override string? PreActivationMessage => "Your {0} glows in scintillating colors...";
@@ -22,7 +22,7 @@ internal class ConfuseMonster20Every15Activation : DirectionalActivation
 
     protected override bool Activate(int direction)
     {
-        SaveGame.ConfuseMonster(direction, 20);
+        Game.ConfuseMonster(direction, 20);
         return true;
     }
 

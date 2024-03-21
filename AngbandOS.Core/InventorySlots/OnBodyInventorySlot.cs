@@ -10,14 +10,14 @@ namespace AngbandOS.Core.InventorySlots;
 [Serializable]
 internal class OnBodyInventorySlot : EquipmentInventorySlot
 {
-    private OnBodyInventorySlot(SaveGame saveGame) : base(saveGame) { }
+    private OnBodyInventorySlot(Game game) : base(game) { }
     public override string Label(int index) => "h";
     public override string Label(Item oPtr) => "h";
     public override int[] InventorySlots => new int[] { InventorySlot.OnBody };
     public override string MentionUse(int? index) => "On body";
     public override string DescribeWieldLocation(int index) => "wearing on your body";
     public override string DescribeItemLocation(Item oPtr) => "wearing on your body";
-    public override int BareArmorClassBonus => SaveGame.ExperienceLevel.Value * 3 / 2;
+    public override int BareArmorClassBonus => Game.ExperienceLevel.Value * 3 / 2;
     public override bool IsWeightRestricting => true;
     public override bool IsArmor => true;
     public override bool CanBeCursed => true;

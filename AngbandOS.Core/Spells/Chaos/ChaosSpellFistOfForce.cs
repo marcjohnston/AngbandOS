@@ -10,12 +10,12 @@ namespace AngbandOS.Core.Spells.Chaos;
 [Serializable]
 internal class ChaosSpellFistOfForce : Spell
 {
-    private ChaosSpellFistOfForce(SaveGame saveGame) : base(saveGame) { }
+    private ChaosSpellFistOfForce(Game game) : base(game) { }
     protected override string? CastScriptName => nameof(FistOfForceScript);
 
     protected override string? CastFailedScriptName => nameof(WildChaoticMagicScript);
 
     public override string Name => "Fist of Force";
 
-    protected override string LearnedDetails => $"dam {8 + ((SaveGame.ExperienceLevel.Value - 5) / 4)}d8";
+    protected override string LearnedDetails => $"dam {8 + ((Game.ExperienceLevel.Value - 5) / 4)}d8";
 }

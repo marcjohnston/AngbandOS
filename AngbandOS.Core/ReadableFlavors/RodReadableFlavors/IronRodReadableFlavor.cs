@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Flavors;
 [Serializable]
 internal class IronRodReadableFlavor : RodReadableFlavor
 {
-    private IronRodReadableFlavor(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private IronRodReadableFlavor(Game game) : base(game) { } // This object is a singleton.
     protected override string SymbolName => nameof(MinusSignSymbol);
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "Iron";

@@ -10,7 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class BattleAxeSpleenSlicerFixedArtifact : FixedArtifact
 {
-    private BattleAxeSpleenSlicerFixedArtifact(SaveGame saveGame) : base(saveGame) { }
+    private BattleAxeSpleenSlicerFixedArtifact(Game game) : base(game) { }
 
     protected override string BaseItemFactoryName => nameof(BattleAxePolearmWeaponItemFactory);
 

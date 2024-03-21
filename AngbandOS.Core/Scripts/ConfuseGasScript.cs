@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class ConfuseGasScript : Script, IScript
 {
-    private ConfuseGasScript(SaveGame saveGame) : base(saveGame) { }
+    private ConfuseGasScript(Game game) : base(game) { }
 
      /// <summary>
     /// Executes the script.
@@ -19,10 +19,10 @@ internal class ConfuseGasScript : Script, IScript
     public void ExecuteScript()
     {
         // Confuse the player
-        SaveGame.MsgPrint("A gas of scintillating colors surrounds you!");
-        if (!SaveGame.HasConfusionResistance)
+        Game.MsgPrint("A gas of scintillating colors surrounds you!");
+        if (!Game.HasConfusionResistance)
         {
-            SaveGame.ConfusedTimer.AddTimer(SaveGame.RandomLessThan(20) + 10);
+            Game.ConfusedTimer.AddTimer(Game.RandomLessThan(20) + 10);
         }
     }
 }

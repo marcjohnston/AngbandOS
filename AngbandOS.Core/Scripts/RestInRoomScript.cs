@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class RestInRoomScript : Script, IScript
 {
-    private RestInRoomScript(SaveGame saveGame) : base(saveGame) { }
+    private RestInRoomScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the rest in a room script.
@@ -18,24 +18,24 @@ internal class RestInRoomScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        bool toDusk = SaveGame.Race.RestsTillDuskInsteadOfDawn;
+        bool toDusk = Game.Race.RestsTillDuskInsteadOfDawn;
         if (toDusk)
         {
-            SaveGame.GameTime.ToNextDusk();
-            SaveGame.MsgPrint("You awake, ready for the night.");
-            SaveGame.MsgPrint("You eat a tasty supper.");
+            Game.GameTime.ToNextDusk();
+            Game.MsgPrint("You awake, ready for the night.");
+            Game.MsgPrint("You eat a tasty supper.");
         }
         else
         {
-            SaveGame.GameTime.ToNextDawn();
-            SaveGame.MsgPrint("You awake refreshed for the new day.");
-            SaveGame.MsgPrint("You eat a hearty breakfast.");
+            Game.GameTime.ToNextDawn();
+            Game.MsgPrint("You awake refreshed for the new day.");
+            Game.MsgPrint("You eat a hearty breakfast.");
         }
-        SaveGame.DecayFavour();
-        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateHealthFlaggedAction)).Set();
-        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateManaFlaggedAction)).Set();
-        SaveGame.SetFood(Constants.PyFoodMax - 1);
-        foreach (Town town in SaveGame.SingletonRepository.Towns)
+        Game.DecayFavour();
+        Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateHealthFlaggedAction)).Set();
+        Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateManaFlaggedAction)).Set();
+        Game.SetFood(Constants.PyFoodMax - 1);
+        foreach (Town town in Game.SingletonRepository.Towns)
         {
             foreach (Store store in town.Stores)
             {
@@ -45,36 +45,36 @@ internal class RestInRoomScript : Script, IScript
                 }
             }
         }
-        SaveGame.HasteTimer.SetValue();
-        SaveGame.SlowTimer.SetValue();
-        SaveGame.BlindnessTimer.SetValue();
-        SaveGame.ParalysisTimer.SetValue();
-        SaveGame.ConfusedTimer.SetValue();
-        SaveGame.FearTimer.SetValue();
-        SaveGame.HallucinationsTimer.SetValue();
-        SaveGame.PoisonTimer.SetValue();
-        SaveGame.BleedingTimer.SetValue();
-        SaveGame.StunTimer.SetValue();
-        SaveGame.ProtectionFromEvilTimer.SetValue();
-        SaveGame.InvulnerabilityTimer.SetValue();
-        SaveGame.HeroismTimer.SetValue();
-        SaveGame.SuperheroismTimer.SetValue();
-        SaveGame.StoneskinTimer.SetValue();
-        SaveGame.BlessingTimer.SetValue();
-        SaveGame.SeeInvisibilityTimer.SetValue();
-        SaveGame.EtherealnessTimer.SetValue();
-        SaveGame.InfravisionTimer.SetValue();
-        SaveGame.AcidResistanceTimer.SetValue();
-        SaveGame.LightningResistanceTimer.SetValue();
-        SaveGame.FireResistanceTimer.SetValue();
-        SaveGame.ColdResistanceTimer.SetValue();
-        SaveGame.PoisonResistanceTimer.SetValue();
-        SaveGame.Health.Value = SaveGame.MaxHealth.Value;
-        SaveGame.Mana.Value = SaveGame.MaxMana.Value;
-        SaveGame.BlindnessTimer.SetValue();
-        SaveGame.ConfusedTimer.SetValue();
-        SaveGame.StunTimer.SetValue();
-        SaveGame.NewLevelFlag = true;
-        SaveGame.CameFrom = LevelStart.StartWalk;
+        Game.HasteTimer.SetValue();
+        Game.SlowTimer.SetValue();
+        Game.BlindnessTimer.SetValue();
+        Game.ParalysisTimer.SetValue();
+        Game.ConfusedTimer.SetValue();
+        Game.FearTimer.SetValue();
+        Game.HallucinationsTimer.SetValue();
+        Game.PoisonTimer.SetValue();
+        Game.BleedingTimer.SetValue();
+        Game.StunTimer.SetValue();
+        Game.ProtectionFromEvilTimer.SetValue();
+        Game.InvulnerabilityTimer.SetValue();
+        Game.HeroismTimer.SetValue();
+        Game.SuperheroismTimer.SetValue();
+        Game.StoneskinTimer.SetValue();
+        Game.BlessingTimer.SetValue();
+        Game.SeeInvisibilityTimer.SetValue();
+        Game.EtherealnessTimer.SetValue();
+        Game.InfravisionTimer.SetValue();
+        Game.AcidResistanceTimer.SetValue();
+        Game.LightningResistanceTimer.SetValue();
+        Game.FireResistanceTimer.SetValue();
+        Game.ColdResistanceTimer.SetValue();
+        Game.PoisonResistanceTimer.SetValue();
+        Game.Health.Value = Game.MaxHealth.Value;
+        Game.Mana.Value = Game.MaxMana.Value;
+        Game.BlindnessTimer.SetValue();
+        Game.ConfusedTimer.SetValue();
+        Game.StunTimer.SetValue();
+        Game.NewLevelFlag = true;
+        Game.CameFrom = LevelStart.StartWalk;
     }
 }

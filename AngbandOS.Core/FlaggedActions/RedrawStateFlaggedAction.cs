@@ -12,28 +12,28 @@ internal class RedrawStateFlaggedAction : FlaggedAction
 {
     private const int ColState = 27;
     private const int RowState = 43;
-    private RedrawStateFlaggedAction(SaveGame saveGame) : base(saveGame) { }
+    private RedrawStateFlaggedAction(Game game) : base(game) { }
     protected override void Execute()
     {
         ColorEnum attr = ColorEnum.White;
         string text;
-        if (SaveGame.ParalysisTimer.Value > 0)
+        if (Game.ParalysisTimer.Value > 0)
         {
             attr = ColorEnum.Red;
             text = "Paralyzed!";
         }
-        else if (SaveGame.Resting != 0)
+        else if (Game.Resting != 0)
         {
             text = "Rest ";
-            if (SaveGame.Resting > 0)
+            if (Game.Resting > 0)
             {
-                text += SaveGame.Resting.ToString().PadLeft(5);
+                text += Game.Resting.ToString().PadLeft(5);
             }
-            else if (SaveGame.Resting == -1)
+            else if (Game.Resting == -1)
             {
                 text += "*****";
             }
-            else if (SaveGame.Resting == -2)
+            else if (Game.Resting == -2)
             {
                 text += "&&&&&";
             }
@@ -42,18 +42,18 @@ internal class RedrawStateFlaggedAction : FlaggedAction
                 text += "?????";
             }
         }
-        else if (SaveGame.CommandRepeat != 0)
+        else if (Game.CommandRepeat != 0)
         {
-            if (SaveGame.CommandRepeat > 999)
+            if (Game.CommandRepeat > 999)
             {
-                text = "Rep. " + SaveGame.CommandRepeat.ToString().PadRight(5);
+                text = "Rep. " + Game.CommandRepeat.ToString().PadRight(5);
             }
             else
             {
-                text = "Repeat " + SaveGame.CommandRepeat.ToString().PadRight(3);
+                text = "Repeat " + Game.CommandRepeat.ToString().PadRight(3);
             }
         }
-        else if (SaveGame.IsSearching)
+        else if (Game.IsSearching)
         {
             text = "Searching ";
         }
@@ -61,6 +61,6 @@ internal class RedrawStateFlaggedAction : FlaggedAction
         {
             text = "          ";
         }
-        SaveGame.Screen.Print(attr, text, RowState, ColState);
+        Game.Screen.Print(attr, text, RowState, ColState);
     }
 }

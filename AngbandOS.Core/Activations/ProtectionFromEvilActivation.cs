@@ -13,19 +13,19 @@ namespace AngbandOS.Core.Activations;
 [Serializable]
 internal class ProtectionFromEvilActivation : Activation
 {
-    private ProtectionFromEvilActivation(SaveGame saveGame) : base(saveGame) { }
+    private ProtectionFromEvilActivation(Game game) : base(game) { }
     public override int RandomChance => 75;
 
     public override string? PreActivationMessage => "Your {0} lets out a shrill wail...";
 
     protected override bool OnActivate(Item item)
     {
-        int k = 3 * SaveGame.ExperienceLevel.Value;
-        SaveGame.ProtectionFromEvilTimer.AddTimer(SaveGame.DieRoll(25) + k);
+        int k = 3 * Game.ExperienceLevel.Value;
+        Game.ProtectionFromEvilTimer.AddTimer(Game.DieRoll(25) + k);
         return true;
     }
 
-    public override int RechargeTime() => SaveGame.RandomLessThan(225) + 225;
+    public override int RechargeTime() => Game.RandomLessThan(225) + 225;
 
     public override int Value => 5000;
 

@@ -10,9 +10,9 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class WoodenArrowAmmunitionItemFactory : ArrowAmmunitionItemFactory
 {
-    private WoodenArrowAmmunitionItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private WoodenArrowAmmunitionItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(OpenBracketSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(OpenBracketSymbol));
     public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "Arrow";
 
@@ -25,5 +25,5 @@ internal class WoodenArrowAmmunitionItemFactory : ArrowAmmunitionItemFactory
     public override int[] Locale => new int[] { 3, 15, 0, 0 };
     public override bool ShowMods => true;
     public override int Weight => 2;
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

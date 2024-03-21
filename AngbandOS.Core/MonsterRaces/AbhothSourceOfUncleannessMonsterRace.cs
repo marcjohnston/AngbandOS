@@ -12,7 +12,7 @@ namespace AngbandOS.Core.MonsterRaces;
 [Serializable]
 internal class AbhothSourceOfUncleannessMonsterRace : MonsterRace
 {
-    protected AbhothSourceOfUncleannessMonsterRace(SaveGame saveGame) : base(saveGame) { }
+    protected AbhothSourceOfUncleannessMonsterRace(Game game) : base(game) { }
 
     protected override string[]? SpellNames =>new string[] {
         nameof(BreatheNexusMonsterSpell),

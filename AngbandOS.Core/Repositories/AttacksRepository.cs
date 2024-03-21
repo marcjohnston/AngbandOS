@@ -10,19 +10,19 @@ namespace AngbandOS.Core.Repositories;
 [Serializable]
 internal class AttacksRepository : DictionaryRepository<Attack>
 {
-    public AttacksRepository(SaveGame saveGame) : base(saveGame) { }
+    public AttacksRepository(Game game) : base(game) { }
 
     public override void Load()
     {
-        if (SaveGame.Configuration.Attacks == null)
+        if (Game.Configuration.Attacks == null)
         {
             base.Load();
         }
         else
         {
-            foreach (AttackDefinition definition in SaveGame.Configuration.Attacks)
+            foreach (AttackDefinition definition in Game.Configuration.Attacks)
             {
-                Add(new GenericAttack(SaveGame, definition));
+                Add(new GenericAttack(Game, definition));
             }
         }
     }

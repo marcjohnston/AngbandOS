@@ -10,7 +10,7 @@ namespace AngbandOS.Core.MonsterRaces;
 [Serializable]
 internal class IceTrollMonsterRace : MonsterRace
 {
-    protected IceTrollMonsterRace(SaveGame saveGame) : base(saveGame) { }
+    protected IceTrollMonsterRace(Game game) : base(game) { }
 
     protected override string SymbolName => nameof(UpperTSymbol);
     public override string Name => "Ice troll";

@@ -10,12 +10,12 @@ namespace AngbandOS.Core.Spells.Chaos;
 [Serializable]
 internal class ChaosSpellBreatheChaos : Spell
 {
-    private ChaosSpellBreatheChaos(SaveGame saveGame) : base(saveGame) { }
+    private ChaosSpellBreatheChaos(Game game) : base(game) { }
     protected override string? CastScriptName => nameof(BreatheChaosScript);
 
     protected override string? CastFailedScriptName => nameof(WildChaoticMagicScript);
 
     public override string Name => "Breathe Chaos";
     
-    protected override string LearnedDetails => $"dam {SaveGame.Health.Value}";
+    protected override string LearnedDetails => $"dam {Game.Health.Value}";
 }

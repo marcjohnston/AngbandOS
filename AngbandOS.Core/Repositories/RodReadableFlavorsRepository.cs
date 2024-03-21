@@ -10,19 +10,19 @@ namespace AngbandOS.Core.Repositories;
 [Serializable]
 internal class RodReadableFlavorsRepository : DictionaryRepository<RodReadableFlavor>
 {
-    public RodReadableFlavorsRepository(SaveGame saveGame) : base(saveGame) { }
+    public RodReadableFlavorsRepository(Game game) : base(game) { }
 
     public override void Load()
     {
-        if (SaveGame.Configuration.RodReadableFlavors == null)
+        if (Game.Configuration.RodReadableFlavors == null)
         {
             base.Load();
         }
         else
         {
-            foreach (ReadableFlavorDefinition readableFlavorDefinition in SaveGame.Configuration.RodReadableFlavors)
+            foreach (ReadableFlavorDefinition readableFlavorDefinition in Game.Configuration.RodReadableFlavors)
             {
-                Add(new GenericRodReadableFlavor(SaveGame, readableFlavorDefinition));
+                Add(new GenericRodReadableFlavor(Game, readableFlavorDefinition));
             }
         }
     }

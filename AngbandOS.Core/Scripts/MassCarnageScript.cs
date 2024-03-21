@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class MassCarnageScript : Script, IScriptBool, IScript
 {
-    private MassCarnageScript(SaveGame saveGame) : base(saveGame) { }
+    private MassCarnageScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script.
@@ -19,9 +19,9 @@ internal class MassCarnageScript : Script, IScriptBool, IScript
     public void ExecuteScriptBool(bool playerCast)
     {
         int msec = Constants.DelayFactorInMilliseconds;
-        for (int i = 1; i < SaveGame.MMax; i++)
+        for (int i = 1; i < Game.MMax; i++)
         {
-            Monster mPtr = SaveGame.Monsters[i];
+            Monster mPtr = Game.Monsters[i];
             MonsterRace rPtr = mPtr.Race;
             if (mPtr.Race == null)
             {
@@ -39,15 +39,15 @@ internal class MassCarnageScript : Script, IScriptBool, IScript
             {
                 continue;
             }
-            SaveGame.DeleteMonsterByIndex(i, true);
+            Game.DeleteMonsterByIndex(i, true);
             if (playerCast)
             {
-                SaveGame.TakeHit(SaveGame.DieRoll(3), "the strain of casting Mass Carnage");
+                Game.TakeHit(Game.DieRoll(3), "the strain of casting Mass Carnage");
             }
-            SaveGame.MoveCursorRelative(SaveGame.MapY, SaveGame.MapX);
-            SaveGame.HandleStuff();
-            SaveGame.UpdateScreen();
-            SaveGame.Pause(msec);
+            Game.MoveCursorRelative(Game.MapY, Game.MapX);
+            Game.HandleStuff();
+            Game.UpdateScreen();
+            Game.Pause(msec);
         }
     }
 

@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class CreateStairsScript : Script, IScript
 {
-    private CreateStairsScript(SaveGame saveGame) : base(saveGame) { }
+    private CreateStairsScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script.
@@ -18,27 +18,27 @@ internal class CreateStairsScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        if (!SaveGame.CaveValidBold(SaveGame.MapY, SaveGame.MapX))
+        if (!Game.CaveValidBold(Game.MapY, Game.MapX))
         {
-            SaveGame.MsgPrint("The object resists the spell.");
+            Game.MsgPrint("The object resists the spell.");
             return;
         }
-        SaveGame.DeleteObject(SaveGame.MapY, SaveGame.MapX);
-        if (SaveGame.CurrentDepth <= 0)
+        Game.DeleteObject(Game.MapY, Game.MapX);
+        if (Game.CurrentDepth <= 0)
         {
-            SaveGame.CaveSetFeat(SaveGame.MapY, SaveGame.MapX, SaveGame.SingletonRepository.Tiles.Get(nameof(DownStaircaseTile)));
+            Game.CaveSetFeat(Game.MapY, Game.MapX, Game.SingletonRepository.Tiles.Get(nameof(DownStaircaseTile)));
         }
-        else if (SaveGame.IsQuest(SaveGame.CurrentDepth) || SaveGame.CurrentDepth >= SaveGame.CurDungeon.MaxLevel)
+        else if (Game.IsQuest(Game.CurrentDepth) || Game.CurrentDepth >= Game.CurDungeon.MaxLevel)
         {
-            SaveGame.CaveSetFeat(SaveGame.MapY, SaveGame.MapX, SaveGame.CurDungeon.Tower ? SaveGame.SingletonRepository.Tiles.Get(nameof(DownStaircaseTile)) : SaveGame.SingletonRepository.Tiles.Get(nameof(UpStaircaseTile)));
+            Game.CaveSetFeat(Game.MapY, Game.MapX, Game.CurDungeon.Tower ? Game.SingletonRepository.Tiles.Get(nameof(DownStaircaseTile)) : Game.SingletonRepository.Tiles.Get(nameof(UpStaircaseTile)));
         }
-        else if (SaveGame.RandomLessThan(100) < 50)
+        else if (Game.RandomLessThan(100) < 50)
         {
-            SaveGame.CaveSetFeat(SaveGame.MapY, SaveGame.MapX, SaveGame.SingletonRepository.Tiles.Get(nameof(DownStaircaseTile)));
+            Game.CaveSetFeat(Game.MapY, Game.MapX, Game.SingletonRepository.Tiles.Get(nameof(DownStaircaseTile)));
         }
         else
         {
-            SaveGame.CaveSetFeat(SaveGame.MapY, SaveGame.MapX, SaveGame.SingletonRepository.Tiles.Get(nameof(UpStaircaseTile)));
+            Game.CaveSetFeat(Game.MapY, Game.MapX, Game.SingletonRepository.Tiles.Get(nameof(UpStaircaseTile)));
         }
     }
 }

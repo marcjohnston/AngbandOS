@@ -10,16 +10,16 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class SearchingAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
 {
-    private SearchingAmuletJeweleryItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private SearchingAmuletJeweleryItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(DoubleQuoteSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(DoubleQuoteSymbol));
     public override string Name => "Searching";
 
 
     public override void ApplyMagic(Item item, int level, int power, Store? store)
     {
-        item.TypeSpecificValue = SaveGame.DieRoll(5) + item.GetBonusValue(5, level);
-        if (power < 0 || (power == 0 && SaveGame.RandomLessThan(100) < 50))
+        item.TypeSpecificValue = Game.DieRoll(5) + item.GetBonusValue(5, level);
+        if (power < 0 || (power == 0 && Game.RandomLessThan(100) < 50))
         {
             item.IdentBroken = true;
             item.IdentCursed = true;
@@ -34,5 +34,5 @@ internal class SearchingAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
     public override int[] Locale => new int[] { 30, 0, 0, 0 };
     public override bool Search => true;
     public override int Weight => 3;
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

@@ -10,17 +10,17 @@ namespace AngbandOS.Core.MonsterSpells;
 [Serializable]
 internal class HealMonsterSpell : MonsterSpell
 {
-    private HealMonsterSpell(SaveGame saveGame) : base(saveGame) { }
+    private HealMonsterSpell(Game game) : base(game) { }
     public override bool IsIntelligent => true;
     public override bool Heals => true;
 
     public override string? VsPlayerActionMessage(Monster monster) => $"{monster.Name} concentrates on {monster.PossessiveName} wounds.";
 
-    public override void ExecuteOnPlayer(SaveGame saveGame, Monster monster)
+    public override void ExecuteOnPlayer(Game game, Monster monster)
     {
         string monsterPossessive = monster.PossessiveName;
         string monsterName = monster.Name;
-        bool playerIsBlind = saveGame.BlindnessTimer.Value != 0;
+        bool playerIsBlind = game.BlindnessTimer.Value != 0;
         int monsterLevel = monster.Race.Level >= 1 ? monster.Race.Level : 1;
         bool seenByPlayer = !playerIsBlind && monster.IsVisible;
 
@@ -28,50 +28,50 @@ internal class HealMonsterSpell : MonsterSpell
         if (monster.Health >= monster.MaxHealth)
         {
             monster.Health = monster.MaxHealth;
-            saveGame.MsgPrint(seenByPlayer ? $"{monsterName} looks completely healed!" : $"{monsterName} sounds completely healed!");
+            game.MsgPrint(seenByPlayer ? $"{monsterName} looks completely healed!" : $"{monsterName} sounds completely healed!");
         }
         else
         {
-            saveGame.MsgPrint(seenByPlayer ? $"{monsterName} looks healthier." : $"{monsterName} sounds healthier.");
+            game.MsgPrint(seenByPlayer ? $"{monsterName} looks healthier." : $"{monsterName} sounds healthier.");
         }
-        if (saveGame.TrackedMonsterIndex == monster.GetMonsterIndex())
+        if (game.TrackedMonsterIndex == monster.GetMonsterIndex())
         {
-            SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawMonsterHealthFlaggedAction)).Set();
+            Game.SingletonRepository.FlaggedActions.Get(nameof(RedrawMonsterHealthFlaggedAction)).Set();
         }
         if (monster.FearLevel != 0)
         {
             monster.FearLevel = 0;
-            saveGame.MsgPrint($"{monsterName} recovers {monsterPossessive} courage.");
+            game.MsgPrint($"{monsterName} recovers {monsterPossessive} courage.");
         }
     }
 
-    public override void ExecuteOnMonster(SaveGame saveGame, Monster monster, Monster target)
+    public override void ExecuteOnMonster(Game game, Monster monster, Monster target)
     {
         int rlev = monster.Race.Level >= 1 ? monster.Race.Level : 1;
         string monsterName = monster.Name;
-        bool blind = saveGame.BlindnessTimer.Value != 0;
+        bool blind = game.BlindnessTimer.Value != 0;
         bool seen = !blind && monster.IsVisible;
 
         monster.Health += rlev * 6;
         if (monster.Health >= monster.MaxHealth)
         {
             monster.Health = monster.MaxHealth;
-            saveGame.MsgPrint(seen ? $"{monsterName} looks completely healed!" : $"{monsterName} sounds completely healed!");
+            game.MsgPrint(seen ? $"{monsterName} looks completely healed!" : $"{monsterName} sounds completely healed!");
         }
         else
         {
-            saveGame.MsgPrint(seen ? $"{monsterName} looks healthier." : $"{monsterName} sounds healthier.");
+            game.MsgPrint(seen ? $"{monsterName} looks healthier." : $"{monsterName} sounds healthier.");
         }
-        if (saveGame.TrackedMonsterIndex == monster.GetMonsterIndex())
+        if (game.TrackedMonsterIndex == monster.GetMonsterIndex())
         {
-            SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawMonsterHealthFlaggedAction)).Set();
+            Game.SingletonRepository.FlaggedActions.Get(nameof(RedrawMonsterHealthFlaggedAction)).Set();
         }
         if (monster.FearLevel != 0)
         {
             monster.FearLevel = 0;
             if (seen)
             {
-                saveGame.MsgPrint($"{monsterName} recovers {monster.PossessiveName} courage.");
+                game.MsgPrint($"{monsterName} recovers {monster.PossessiveName} courage.");
             }
         }
     }

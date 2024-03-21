@@ -10,9 +10,9 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class AggravateMonsterScrollItemFactory : ScrollItemFactory
 {
-    private AggravateMonsterScrollItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private AggravateMonsterScrollItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(QuestionMarkSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(QuestionMarkSymbol));
     public override string Name => "Aggravate Monster";
 
     public override int[] Chance => new int[] { 1, 0, 0, 0 };
@@ -23,9 +23,9 @@ internal class AggravateMonsterScrollItemFactory : ScrollItemFactory
 
     public override void Read(ReadScrollEvent eventArgs)
     {
-        SaveGame.MsgPrint("There is a high pitched humming noise.");
-        SaveGame.AggravateMonsters();
+        Game.MsgPrint("There is a high pitched humming noise.");
+        Game.AggravateMonsters();
         eventArgs.Identified = true;
     }
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

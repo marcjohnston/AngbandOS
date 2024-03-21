@@ -10,9 +10,9 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class MaceHaftedWeaponItemFactory : HaftedWeaponItemFactory
 {
-    private MaceHaftedWeaponItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private MaceHaftedWeaponItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(BackSlashSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(BackSlashSymbol));
     public override ColorEnum Color => ColorEnum.Black;
     public override string Name => "Mace";
 
@@ -25,5 +25,5 @@ internal class MaceHaftedWeaponItemFactory : HaftedWeaponItemFactory
     public override int[] Locale => new int[] { 5, 0, 0, 0 };
     public override bool ShowMods => true;
     public override int Weight => 120;
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

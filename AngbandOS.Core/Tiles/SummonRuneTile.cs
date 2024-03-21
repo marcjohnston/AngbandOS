@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Tiles;
 [Serializable]
 internal class SummonRuneTile : Tile
 {
-    private SummonRuneTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private SummonRuneTile(Game game) : base(game) { } // This object is a singleton.
     protected override string SymbolName => nameof(CaretSymbol);
     public override ColorEnum Color => ColorEnum.Yellow;
     protected override string? AlterActionName => nameof(DisarmAlterAction);

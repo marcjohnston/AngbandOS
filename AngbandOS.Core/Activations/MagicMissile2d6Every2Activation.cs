@@ -13,7 +13,7 @@ namespace AngbandOS.Core.Activations;
 [Serializable]
 internal class MagicMissile2d6Every2Activation : DirectionalActivation
 {
-    private MagicMissile2d6Every2Activation(SaveGame saveGame) : base(saveGame) { }
+    private MagicMissile2d6Every2Activation(Game game) : base(game) { }
     public override int RandomChance => 101;
 
     public override string? PreActivationMessage => "Your {0} glows extremely brightly...";
@@ -22,7 +22,7 @@ internal class MagicMissile2d6Every2Activation : DirectionalActivation
 
     protected override bool Activate(int direction)
     {
-        SaveGame.FireBolt(SaveGame.SingletonRepository.Projectiles.Get(nameof(MissileProjectile)), direction, SaveGame.DiceRoll(2, 6));
+        Game.FireBolt(Game.SingletonRepository.Projectiles.Get(nameof(MissileProjectile)), direction, Game.DiceRoll(2, 6));
         return true;
     }
 

@@ -10,9 +10,9 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class InfravisionPotionItemFactory : PotionItemFactory
 {
-    private InfravisionPotionItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private InfravisionPotionItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(ExclamationPointSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(ExclamationPointSymbol));
     public override string Name => "Infra-vision";
 
     public override int[] Chance => new int[] { 1, 0, 0, 0 };
@@ -26,7 +26,7 @@ internal class InfravisionPotionItemFactory : PotionItemFactory
     public override bool Quaff()
     {
         // Infravision gives you timed infravision
-        return SaveGame.InfravisionTimer.AddTimer(100 + SaveGame.DieRoll(100));
+        return Game.InfravisionTimer.AddTimer(100 + Game.DieRoll(100));
     }
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

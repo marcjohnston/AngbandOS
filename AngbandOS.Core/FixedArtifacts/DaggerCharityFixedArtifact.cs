@@ -10,7 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class DaggerCharityFixedArtifact : FixedArtifact
 {
-    private DaggerCharityFixedArtifact(SaveGame saveGame) : base(saveGame) { }
+    private DaggerCharityFixedArtifact(Game game) : base(game) { }
 
     protected override string BaseItemFactoryName => nameof(DaggerWeaponItemFactory);
 
@@ -20,7 +20,7 @@ internal class DaggerCharityFixedArtifact : FixedArtifact
     public override void ApplyResistances(Item item)
     {
         IArtifactBias artifactBias = null;
-        item.ApplyRandomResistance(ref artifactBias, SaveGame.DieRoll(22) + 16);
+        item.ApplyRandomResistance(ref artifactBias, Game.DieRoll(22) + 16);
     }
     public string DescribeActivationEffect => "lightning bolt (4d8) every 6+d6 turns";
 

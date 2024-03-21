@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Mutations.RandomMutations;
 [Serializable]
 internal class RteleportRandomMutation : Mutation
 {
-    private RteleportRandomMutation(SaveGame saveGame) : base(saveGame) { }
+    private RteleportRandomMutation(Game game) : base(game) { }
     public override int Frequency => 1;
     public override string GainMessage => "Your position seems very uncertain...";
     public override string HaveMessage => "You are teleporting randomly.";
@@ -18,17 +18,17 @@ internal class RteleportRandomMutation : Mutation
 
     public override void OnProcessWorld()
     {
-        if (base.SaveGame.DieRoll(5000) != 88)
+        if (base.Game.DieRoll(5000) != 88)
         {
             return;
         }
-        if (SaveGame.HasNexusResistance || SaveGame.HasAntiTeleport)
+        if (Game.HasNexusResistance || Game.HasAntiTeleport)
         {
             return;
         }
-        SaveGame.Disturb(false);
-        SaveGame.MsgPrint("Your position suddenly seems very uncertain...");
-        SaveGame.MsgPrint(null);
-        SaveGame.RunScriptInt(nameof(TeleportSelfScript), 40);
+        Game.Disturb(false);
+        Game.MsgPrint("Your position suddenly seems very uncertain...");
+        Game.MsgPrint(null);
+        Game.RunScriptInt(nameof(TeleportSelfScript), 40);
     }
 }

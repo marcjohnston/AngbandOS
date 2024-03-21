@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Tiles;
 [Serializable]
 internal class TrapDoorTile : Tile
 {
-    private TrapDoorTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private TrapDoorTile(Game game) : base(game) { } // This object is a singleton.
     protected override string SymbolName => nameof(CaretSymbol);
     protected override string? AlterActionName => nameof(DisarmAlterAction);
     public override string Description => "trap door";

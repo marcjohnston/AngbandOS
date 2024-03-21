@@ -10,22 +10,22 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class BlueDragonScaleMailArmorItemFactory : DragonScaleMailArmorItemFactory, IItemsCanBeActivated
 {
-    private BlueDragonScaleMailArmorItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private BlueDragonScaleMailArmorItemFactory(Game game) : base(game) { } // This object is a singleton.
 
     public void ActivateItem(Item item)
     {
-        if (!SaveGame.GetDirectionWithAim(out int dir))
+        if (!Game.GetDirectionWithAim(out int dir))
         {
             return;
         }
-        SaveGame.MsgPrint("You breathe lightning.");
-        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(ElecProjectile)), dir, 100, -2);
-        item.RechargeTimeLeft = SaveGame.RandomLessThan(450) + 450;
+        Game.MsgPrint("You breathe lightning.");
+        Game.FireBall(Game.SingletonRepository.Projectiles.Get(nameof(ElecProjectile)), dir, 100, -2);
+        item.RechargeTimeLeft = Game.RandomLessThan(450) + 450;
     }
-    //public override Activation? ActivationPower => SaveGame.SingletonRepository.Activations.Get(nameof(BreatheLightingActivation));
+    //public override Activation? ActivationPower => Game.SingletonRepository.Activations.Get(nameof(BreatheLightingActivation));
     public override string? DescribeActivationEffect =>"breathe lightning (100) every 450+d450 turns";
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(OpenBraceSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(OpenBraceSymbol));
     public override ColorEnum Color => ColorEnum.Blue;
     public override string Name => "Blue Dragon Scale Mail";
 
@@ -46,5 +46,5 @@ internal class BlueDragonScaleMailArmorItemFactory : DragonScaleMailArmorItemFac
     public override int ToA => 10;
     public override int ToH => -2;
     public override int Weight => 200;
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

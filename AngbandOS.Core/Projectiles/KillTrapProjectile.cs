@@ -10,30 +10,30 @@ namespace AngbandOS.Core.Projection;
 [Serializable]
 internal class KillTrapProjectile : Projectile
 {
-    private KillTrapProjectile(SaveGame saveGame) : base(saveGame) { }
+    private KillTrapProjectile(Game game) : base(game) { }
 
-    protected override Animation EffectAnimation => SaveGame.SingletonRepository.Animations.Get(nameof(RedSwirlAnimation));
+    protected override Animation EffectAnimation => Game.SingletonRepository.Animations.Get(nameof(RedSwirlAnimation));
 
     protected override bool AffectFloor(int y, int x)
     {
-        GridTile cPtr = SaveGame.Grid[y][x];
+        GridTile cPtr = Game.Grid[y][x];
         bool obvious = false;
         if (cPtr.FeatureType.IsUnidentifiedTrap || cPtr.FeatureType.IsTrap)
         {
-            if (SaveGame.PlayerHasLosBold(y, x))
+            if (Game.PlayerHasLosBold(y, x))
             {
-                SaveGame.MsgPrint("There is a bright flash of light!");
+                Game.MsgPrint("There is a bright flash of light!");
                 obvious = true;
             }
             cPtr.TileFlags.Clear(GridTile.PlayerMemorized);
-            SaveGame.RevertTileToBackground(y, x);
+            Game.RevertTileToBackground(y, x);
         }
         else if (cPtr.FeatureType.IsSecretDoor || cPtr.FeatureType.IsClosedDoor)
         {
-            SaveGame.CaveSetFeat(y, x, SaveGame.SingletonRepository.Tiles.Get(nameof(LockedDoor0Tile)));
-            if (SaveGame.PlayerHasLosBold(y, x))
+            Game.CaveSetFeat(y, x, Game.SingletonRepository.Tiles.Get(nameof(LockedDoor0Tile)));
+            if (Game.PlayerHasLosBold(y, x))
             {
-                SaveGame.MsgPrint("Click!");
+                Game.MsgPrint("Click!");
                 obvious = true;
             }
         }
@@ -42,7 +42,7 @@ internal class KillTrapProjectile : Projectile
 
     protected override bool AffectItem(int who, int y, int x)
     {
-        GridTile cPtr = SaveGame.Grid[y][x];
+        GridTile cPtr = Game.Grid[y][x];
         bool obvious = false;
         foreach (Item oPtr in cPtr.Items)
         {
@@ -54,7 +54,7 @@ internal class KillTrapProjectile : Projectile
                     oPtr.BecomeKnown();
                     if (oPtr.Marked)
                     {
-                        SaveGame.MsgPrint("Click!");
+                        Game.MsgPrint("Click!");
                         obvious = true;
                     }
                 }

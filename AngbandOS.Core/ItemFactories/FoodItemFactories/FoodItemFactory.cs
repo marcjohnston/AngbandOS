@@ -10,8 +10,8 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal abstract class FoodItemFactory : ItemFactory
 {
-    public FoodItemFactory(SaveGame saveGame) : base(saveGame) { }
-    public override ItemClass ItemClass => SaveGame.SingletonRepository.ItemClasses.Get(nameof(FoodItemClass));
+    public FoodItemFactory(Game game) : base(game) { }
+    public override ItemClass ItemClass => Game.SingletonRepository.ItemClasses.Get(nameof(FoodItemClass));
     public override int PercentageBreakageChance => 100;
     public override bool EasyKnow => true;
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Food;

@@ -20,11 +20,11 @@ internal abstract class ShieldArmorItemFactory : ArmorItemFactory
     /// </summary>
     protected override void ApplyRandomGoodRareCharacteristics(Item item)
     {
-        switch (SaveGame.DieRoll(23))
+        switch (Game.DieRoll(23))
         {
             case 1:
             case 11:
-                item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(ShieldOfResistAcidRareItem));
+                item.RareItem = Game.SingletonRepository.RareItems.Get(nameof(ShieldOfResistAcidRareItem));
                 break;
             case 2:
             case 3:
@@ -32,13 +32,13 @@ internal abstract class ShieldArmorItemFactory : ArmorItemFactory
             case 12:
             case 13:
             case 14:
-                item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(ShieldOfResistLightningRareItem));
+                item.RareItem = Game.SingletonRepository.RareItems.Get(nameof(ShieldOfResistLightningRareItem));
                 break;
             case 5:
             case 6:
             case 15:
             case 16:
-                item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(ShieldOfResistFireRareItem));
+                item.RareItem = Game.SingletonRepository.RareItems.Get(nameof(ShieldOfResistFireRareItem));
                 break;
             case 7:
             case 8:
@@ -46,21 +46,21 @@ internal abstract class ShieldArmorItemFactory : ArmorItemFactory
             case 17:
             case 18:
             case 19:
-                item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(ShieldOfResistColdRareItem));
+                item.RareItem = Game.SingletonRepository.RareItems.Get(nameof(ShieldOfResistColdRareItem));
                 break;
             case 10:
             case 20:
                 IArtifactBias artifactBias = null;
-                item.ApplyRandomResistance(ref artifactBias, SaveGame.DieRoll(34) + 4);
-                if (SaveGame.DieRoll(4) == 1)
+                item.ApplyRandomResistance(ref artifactBias, Game.DieRoll(34) + 4);
+                if (Game.DieRoll(4) == 1)
                 {
                     item.RandomArtifactItemCharacteristics.ResPois = true;
                 }
-                item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(ShieldOfResistanceRareItem));
+                item.RareItem = Game.SingletonRepository.RareItems.Get(nameof(ShieldOfResistanceRareItem));
                 break;
             case 21:
             case 22:
-                item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(ShieldOfReflectionRareItem));
+                item.RareItem = Game.SingletonRepository.RareItems.Get(nameof(ShieldOfReflectionRareItem));
                 break;
             case 23:
                 item.CreateRandomArtifact(false);
@@ -87,9 +87,9 @@ internal abstract class ShieldArmorItemFactory : ArmorItemFactory
             }
         }
     }
-    public ShieldArmorItemFactory(SaveGame saveGame) : base(saveGame) { }
-    public override ItemClass ItemClass => SaveGame.SingletonRepository.ItemClasses.Get(nameof(ShieldsItemClass));
-    public override BaseInventorySlot BaseWieldSlot => SaveGame.SingletonRepository.InventorySlots.Get(nameof(ArmInventorySlot));
+    public ShieldArmorItemFactory(Game game) : base(game) { }
+    public override ItemClass ItemClass => Game.SingletonRepository.ItemClasses.Get(nameof(ShieldsItemClass));
+    public override BaseInventorySlot BaseWieldSlot => Game.SingletonRepository.InventorySlots.Get(nameof(ArmInventorySlot));
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Shield;
     public override int PackSort => 23;
     public override bool HatesAcid => true;

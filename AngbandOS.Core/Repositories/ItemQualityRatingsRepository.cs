@@ -10,5 +10,5 @@ namespace AngbandOS.Core.Repositories;
 [Serializable]
 internal class ItemQualityRatingsRepository : DictionaryRepository<ItemQualityRating>
 {
-    public ItemQualityRatingsRepository(SaveGame saveGame) : base(saveGame) { }
+    public ItemQualityRatingsRepository(Game game) : base(game) { }
 }

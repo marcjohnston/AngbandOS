@@ -10,26 +10,26 @@ namespace AngbandOS.Core.AttackEffects;
 [Serializable]
 internal class EatFoodAttackEffect : AttackEffect
 {
-    private EatFoodAttackEffect(SaveGame saveGame) : base(saveGame) { }
+    private EatFoodAttackEffect(Game game) : base(game) { }
     public override int Power => 5;
     public override string Description => "eat your food";
     public override void ApplyToPlayer(int monsterLevel, int monsterIndex, int armorClass, string monsterDescription, Monster monster, ref bool obvious, ref int damage, ref bool blinked)
     {
-        SaveGame.TakeHit(damage, monsterDescription);
+        Game.TakeHit(damage, monsterDescription);
         // Have ten tries at grabbing a food item from the player
         for (int k = 0; k < 10; k++)
         {
-            BaseInventorySlot packInventorySlot = SaveGame.SingletonRepository.InventorySlots.Get(nameof(PackInventorySlot));
+            BaseInventorySlot packInventorySlot = Game.SingletonRepository.InventorySlots.Get(nameof(PackInventorySlot));
             int i = packInventorySlot.WeightedRandom.Choose();
-            Item? item = SaveGame.GetInventoryItem(i);
+            Item? item = Game.GetInventoryItem(i);
             if (item != null && item.Factory.CanBeEatenByMonsters)
             {
                 // Note that the monster doesn't actually get the food item - it's gone
                 string itemName = item.Description(false, 0);
                 string y = item.Count > 1 ? "One of y" : "Y";
-                SaveGame.MsgPrint($"{y}our {itemName} ({i.IndexToLabel()}) was eaten!");
-                SaveGame.InvenItemIncrease(i, -1);
-                SaveGame.InvenItemOptimize(i);
+                Game.MsgPrint($"{y}our {itemName} ({i.IndexToLabel()}) was eaten!");
+                Game.InvenItemIncrease(i, -1);
+                Game.InvenItemOptimize(i);
                 obvious = true;
                 return;
             }

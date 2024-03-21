@@ -10,7 +10,7 @@ namespace AngbandOS.Core.WizardCommands;
 [Serializable]
 internal class GenerateVeryGoodObjectWizardCommand : WizardCommand
 {
-    private GenerateVeryGoodObjectWizardCommand(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private GenerateVeryGoodObjectWizardCommand(Game game) : base(game) { } // This object is a singleton.
 
     public override char KeyChar => 'v';
 

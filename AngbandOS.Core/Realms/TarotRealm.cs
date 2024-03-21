@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Realms;
 [Serializable]
 internal class TarotRealm : Realm
 {
-    private TarotRealm(SaveGame savedGame) : base(savedGame) { }
+    private TarotRealm(Game savedGame) : base(savedGame) { }
 
     public override string[] Info => new string[] {
         "The Tarot realm is one of the most specialised realms of", 

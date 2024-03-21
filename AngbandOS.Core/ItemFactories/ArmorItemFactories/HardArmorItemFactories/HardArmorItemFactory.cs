@@ -34,9 +34,9 @@ internal abstract class HardArmorItemFactory : ArmorItemFactory
             }
         }
     }
-    public HardArmorItemFactory(SaveGame saveGame) : base(saveGame) { }
-    public override ItemClass ItemClass => SaveGame.SingletonRepository.ItemClasses.Get(nameof(HardArmorsItemClass));
-    public override BaseInventorySlot BaseWieldSlot => SaveGame.SingletonRepository.InventorySlots.Get(nameof(OnBodyInventorySlot));
+    public HardArmorItemFactory(Game game) : base(game) { }
+    public override ItemClass ItemClass => Game.SingletonRepository.ItemClasses.Get(nameof(HardArmorsItemClass));
+    public override BaseInventorySlot BaseWieldSlot => Game.SingletonRepository.InventorySlots.Get(nameof(OnBodyInventorySlot));
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.HardArmor;
     public override int PackSort => 20;
     public override bool HatesAcid => true;

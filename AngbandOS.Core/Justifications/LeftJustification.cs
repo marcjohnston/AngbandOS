@@ -10,7 +10,7 @@ namespace AngbandOS.Core.PropertyFormatters;
 [Serializable]
 internal class LeftJustification : Justification
 {
-    private LeftJustification(SaveGame saveGame) : base(saveGame) { }
+    private LeftJustification(Game game) : base(game) { }
     public override string Format(string value, int width)
     {
         if (value.Length > width)

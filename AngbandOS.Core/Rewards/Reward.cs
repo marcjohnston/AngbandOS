@@ -10,10 +10,10 @@ namespace AngbandOS.Core.Rewards;
 [Serializable]
 internal abstract class Reward : IGetKey
 {
-    protected readonly SaveGame SaveGame;
-    protected Reward(SaveGame saveGame)
+    protected readonly Game Game;
+    protected Reward(Game game)
     {
-        SaveGame = saveGame;
+        Game = game;
     }
 
     /// <summary>

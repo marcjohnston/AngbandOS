@@ -10,7 +10,7 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal abstract class BookItemFactory : ItemFactory
 {
-    public BookItemFactory(SaveGame saveGame) : base(saveGame) { }
+    public BookItemFactory(Game game) : base(game) { }
 
     public override void Bind()
     {
@@ -21,7 +21,7 @@ internal abstract class BookItemFactory : ItemFactory
         List<Spell> spellList = new List<Spell>();
         foreach (string spellName in SpellNames)
         {
-            Spell spell = SaveGame.SingletonRepository.Spells.Get(spellName);
+            Spell spell = Game.SingletonRepository.Spells.Get(spellName);
             spellList.Add(spell);
         }
         Spells = spellList.ToArray();
@@ -54,7 +54,7 @@ internal abstract class BookItemFactory : ItemFactory
 
     public override string GetDescription(Item item, bool includeCountPrefix, bool isFlavorAware)
     {
-        string name = SaveGame.BaseCharacterClass.GetBookTitle(item);
+        string name = Game.BaseCharacterClass.GetBookTitle(item);
         name = $"{name} {FriendlyName}";
         return includeCountPrefix ? GetPrefixCount(true, name, item.Count, item.IsKnownArtifact) : name;
     }

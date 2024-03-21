@@ -10,10 +10,10 @@ namespace AngbandOS.Core.Spells.Life;
 [Serializable]
 internal class LifeSpellDispelUndeadAndDemons : Spell
 {
-    private LifeSpellDispelUndeadAndDemons(SaveGame saveGame) : base(saveGame) { }
+    private LifeSpellDispelUndeadAndDemons(Game game) : base(game) { }
     protected override string? CastScriptName => nameof(DispelUndeadAndDemonsScript);
 
     public override string Name => "Dispel Undead & Demons";
 
-    protected override string LearnedDetails => $"dam {3 * SaveGame.ExperienceLevel.Value}+{3 * SaveGame.ExperienceLevel.Value}";
+    protected override string LearnedDetails => $"dam {3 * Game.ExperienceLevel.Value}+{3 * Game.ExperienceLevel.Value}";
 }

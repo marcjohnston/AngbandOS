@@ -10,7 +10,7 @@ namespace AngbandOS.Core.ClassSpells;
 [Serializable]
 internal class FanaticFistOfForceChaosSpell : ClassSpell
 {
-    private FanaticFistOfForceChaosSpell(SaveGame saveGame) : base(saveGame) { }
+    private FanaticFistOfForceChaosSpell(Game game) : base(game) { }
     public override string SpellName => nameof(ChaosSpellFistOfForce);
     public override string CharacterClassName => nameof(FanaticCharacterClass);
     public override int Level => 15;

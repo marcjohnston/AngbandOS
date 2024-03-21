@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Spells.Sorcery;
 [Serializable]
 internal class SorcerySpellDetectDoorsAndTraps : Spell
 {
-    private SorcerySpellDetectDoorsAndTraps(SaveGame saveGame) : base(saveGame) { }
+    private SorcerySpellDetectDoorsAndTraps(Game game) : base(game) { }
     protected override string? CastScriptName => nameof(DetectDoorsTrapsAndStairsScript);
 
     public override string Name => "Detect Doors and Traps";

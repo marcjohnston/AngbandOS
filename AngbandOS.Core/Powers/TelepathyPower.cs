@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Powers;
 [Serializable]
 internal class TelepathyPower : Power
 {
-    private TelepathyPower(SaveGame saveGame) : base(saveGame) { } // This object is a singleton
+    private TelepathyPower(Game game) : base(game) { } // This object is a singleton
     public override bool IsAbility => true;
     public override void Activate(Item item)
     {

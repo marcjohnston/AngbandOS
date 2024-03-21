@@ -13,16 +13,16 @@ namespace AngbandOS.Core.Activations;
 [Serializable]
 internal class ProbingDetectionAndFullIdEvery1000Activation : Activation
 {
-    private ProbingDetectionAndFullIdEvery1000Activation(SaveGame saveGame) : base(saveGame) { }
+    private ProbingDetectionAndFullIdEvery1000Activation(Game game) : base(game) { }
     public override int RandomChance => 10;
 
     public override string? PreActivationMessage => "Your {0} glows brightly...";
 
     protected override bool OnActivate(Item item)
     {
-        SaveGame.RunScript(nameof(DetectionScript));
-        SaveGame.Probing();
-        SaveGame.RunScript(nameof(IdentifyItemFullyScript));
+        Game.RunScript(nameof(DetectionScript));
+        Game.Probing();
+        Game.RunScript(nameof(IdentifyItemFullyScript));
         return true;
     }
 

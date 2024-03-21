@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Talents;
 [Serializable]
 internal class PrecognitionTalent : Talent
 {
-    private PrecognitionTalent(SaveGame saveGame) : base(saveGame) { }
+    private PrecognitionTalent(Game game) : base(game) { }
     public override string Name => "Precognition";
     public override int Level => 1;
     public override int ManaCost => 1;
@@ -18,38 +18,38 @@ internal class PrecognitionTalent : Talent
 
     public override void Use()
     {
-        if (SaveGame.ExperienceLevel.Value > 44)
+        if (Game.ExperienceLevel.Value > 44)
         {
-            SaveGame.RunScript(nameof(LightScript));
+            Game.RunScript(nameof(LightScript));
         }
-        else if (SaveGame.ExperienceLevel.Value > 19)
+        else if (Game.ExperienceLevel.Value > 19)
         {
-            SaveGame.RunScript(nameof(MapAreaScript));
+            Game.RunScript(nameof(MapAreaScript));
         }
         bool b;
-        if (SaveGame.ExperienceLevel.Value < 30)
+        if (Game.ExperienceLevel.Value < 30)
         {
-            b = SaveGame.RunSuccessfulScript(nameof(DetectNormalMonstersScript));
-            if (SaveGame.ExperienceLevel.Value > 14)
+            b = Game.RunSuccessfulScript(nameof(DetectNormalMonstersScript));
+            if (Game.ExperienceLevel.Value > 14)
             {
-                b |= SaveGame.DetectMonstersInvis();
+                b |= Game.DetectMonstersInvis();
             }
-            if (SaveGame.ExperienceLevel.Value > 4)
+            if (Game.ExperienceLevel.Value > 4)
             {
-                b |= SaveGame.DetectTraps();
+                b |= Game.DetectTraps();
             }
         }
         else
         {
-            b = SaveGame.RunSuccessfulScript(nameof(DetectionScript));
+            b = Game.RunSuccessfulScript(nameof(DetectionScript));
         }
-        if (SaveGame.ExperienceLevel.Value > 24 && SaveGame.ExperienceLevel.Value < 40)
+        if (Game.ExperienceLevel.Value > 24 && Game.ExperienceLevel.Value < 40)
         {
-            SaveGame.TelepathyTimer.AddTimer(SaveGame.ExperienceLevel.Value);
+            Game.TelepathyTimer.AddTimer(Game.ExperienceLevel.Value);
         }
         if (!b)
         {
-            SaveGame.MsgPrint("You feel safe.");
+            Game.MsgPrint("You feel safe.");
         }
     }
 

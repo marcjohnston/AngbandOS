@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class BrandWeaponWithFireOrIceScript : Script, IScript
 {
-    private BrandWeaponWithFireOrIceScript(SaveGame saveGame) : base(saveGame) { }
+    private BrandWeaponWithFireOrIceScript(Game game) : base(game) { }
 
     /// <summary>
     /// Enchants the melee weapon with fire 25% of the time; ice, the other 75%.
@@ -18,7 +18,7 @@ internal class BrandWeaponWithFireOrIceScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        Item? item = SaveGame.GetInventoryItem(InventorySlot.MeleeWeapon);
+        Item? item = Game.GetInventoryItem(InventorySlot.MeleeWeapon);
         // We must have a non-rare, non-artifact weapon that isn't cursed
         if (item != null && !item.IsArtifact && !item.IsRare() && !item.IsCursed())
         {
@@ -26,24 +26,24 @@ internal class BrandWeaponWithFireOrIceScript : Script, IScript
             string itemName = item.Description(false, 0);
 
             // Make it a fire or ice weapon
-            if (SaveGame.RandomLessThan(100) < 25)
+            if (Game.RandomLessThan(100) < 25)
             {
                 act = "is covered in a fiery shield!";
-                item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(WeaponOfBurningRareItem));
+                item.RareItem = Game.SingletonRepository.RareItems.Get(nameof(WeaponOfBurningRareItem));
             }
             else
             {
                 act = "glows deep, icy blue!";
-                item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(WeaponOfFreezingRareItem));
+                item.RareItem = Game.SingletonRepository.RareItems.Get(nameof(WeaponOfFreezingRareItem));
             }
 
             // Let the player know what happened
-            SaveGame.MsgPrint($"Your {itemName} {act}");
-            SaveGame.Enchant(item, SaveGame.RandomLessThan(3) + 4, Constants.EnchTohit | Constants.EnchTodam);
+            Game.MsgPrint($"Your {itemName} {act}");
+            Game.Enchant(item, Game.RandomLessThan(3) + 4, Constants.EnchTohit | Constants.EnchTodam);
         }
         else
         {
-            SaveGame.MsgPrint("The Branding failed.");
+            Game.MsgPrint("The Branding failed.");
         }
     }
 }

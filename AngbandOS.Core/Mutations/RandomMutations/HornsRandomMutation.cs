@@ -12,7 +12,7 @@ namespace AngbandOS.Core.Mutations.RandomMutations;
 [Serializable]
 internal class HornsRandomMutation : Mutation
 {
-    private HornsRandomMutation(SaveGame saveGame) : base(saveGame) { }
+    private HornsRandomMutation(Game game) : base(game) { }
     public override int Frequency => 2;
     public override string GainMessage => "Horns pop forth into your forehead!";
     public override string HaveMessage => "You have horns (dam. 2d6).";
@@ -24,11 +24,11 @@ internal class HornsRandomMutation : Mutation
 
     public override void OnGain()
     {
-        SaveGame.NaturalAttacks.Add(this);
+        Game.NaturalAttacks.Add(this);
     }
 
     public override void OnLose()
     {
-        SaveGame.NaturalAttacks.Remove(this);
+        Game.NaturalAttacks.Remove(this);
     }
 }

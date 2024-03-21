@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class TouchOfConfusionScript : Script, IScript
 {
-    private TouchOfConfusionScript(SaveGame saveGame) : base(saveGame) { }
+    private TouchOfConfusionScript(Game game) : base(game) { }
 
     /// <summary>
     /// Sets the HasConfusingTouch property to true.
@@ -18,10 +18,10 @@ internal class TouchOfConfusionScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        if (!SaveGame.HasConfusingTouch)
+        if (!Game.HasConfusingTouch)
         {
-            SaveGame.MsgPrint("Your hands start glowing.");
-            SaveGame.HasConfusingTouch = true;
+            Game.MsgPrint("Your hands start glowing.");
+            Game.HasConfusingTouch = true;
         }
     }
 }

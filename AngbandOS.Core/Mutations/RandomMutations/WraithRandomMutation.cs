@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Mutations.RandomMutations;
 [Serializable]
 internal class WraithRandomMutation : Mutation
 {
-    private WraithRandomMutation(SaveGame saveGame) : base(saveGame) { }
+    private WraithRandomMutation(Game game) : base(game) { }
     public override int Frequency => 1;
     public override string GainMessage => "You start to fade in and out of the physical world.";
     public override string HaveMessage => "You fade in and out of physical reality.";
@@ -18,13 +18,13 @@ internal class WraithRandomMutation : Mutation
 
     public override void OnProcessWorld()
     {
-        if (SaveGame.HasAntiMagic || SaveGame.DieRoll(3000) != 13)
+        if (Game.HasAntiMagic || Game.DieRoll(3000) != 13)
         {
             return;
         }
-        SaveGame.Disturb(false);
-        SaveGame.MsgPrint("You feel insubstantial!");
-        SaveGame.MsgPrint(null);
-        SaveGame.EtherealnessTimer.AddTimer(SaveGame.DieRoll(SaveGame.ExperienceLevel.Value / 2) + SaveGame.ExperienceLevel.Value / 2);
+        Game.Disturb(false);
+        Game.MsgPrint("You feel insubstantial!");
+        Game.MsgPrint(null);
+        Game.EtherealnessTimer.AddTimer(Game.DieRoll(Game.ExperienceLevel.Value / 2) + Game.ExperienceLevel.Value / 2);
     }
 }

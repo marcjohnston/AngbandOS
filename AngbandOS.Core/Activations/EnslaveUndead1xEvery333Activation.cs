@@ -13,7 +13,7 @@ namespace AngbandOS.Core.Activations;
 [Serializable]
 internal class EnslaveUndead1xEvery333Activation : DirectionalActivation
 {
-    private EnslaveUndead1xEvery333Activation(SaveGame saveGame) : base(saveGame) { }
+    private EnslaveUndead1xEvery333Activation(Game game) : base(game) { }
     public override int RandomChance => 33;
 
     public override string? PreActivationMessage => "";
@@ -22,7 +22,7 @@ internal class EnslaveUndead1xEvery333Activation : DirectionalActivation
 
     protected override bool Activate(int direction)
     {
-        SaveGame.ControlOneUndead(direction, SaveGame.ExperienceLevel.Value);
+        Game.ControlOneUndead(direction, Game.ExperienceLevel.Value);
         return true;
     }
 

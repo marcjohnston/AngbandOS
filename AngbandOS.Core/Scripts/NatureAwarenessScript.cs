@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class NatureAwarenessScript : Script, IScript
 {
-    private NatureAwarenessScript(SaveGame saveGame) : base(saveGame) { }
+    private NatureAwarenessScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script.
@@ -18,10 +18,10 @@ internal class NatureAwarenessScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        SaveGame.RunScript(nameof(MapAreaScript));
-        SaveGame.DetectTraps();
-        SaveGame.DetectDoors();
-        SaveGame.DetectStairs();
-        SaveGame.RunScript(nameof(DetectNormalMonstersScript));
+        Game.RunScript(nameof(MapAreaScript));
+        Game.DetectTraps();
+        Game.DetectDoors();
+        Game.DetectStairs();
+        Game.RunScript(nameof(DetectNormalMonstersScript));
     }
 }

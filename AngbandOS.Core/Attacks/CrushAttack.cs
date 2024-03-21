@@ -10,7 +10,7 @@ namespace AngbandOS.Core.AttackTypes;
 [Serializable]
 internal class CrushAttack : Attack
 {
-    private CrushAttack(SaveGame saveGame) : base(saveGame) { }
+    private CrushAttack(Game game) : base(game) { }
     public override string MonsterAction => "crushes {0}";
     public override string PlayerAction => $"crushes you";
     public override string KnowledgeAction => "crush";

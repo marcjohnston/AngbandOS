@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class AlterRealityScript : Script, IScript, IRepeatableScript
 {
-    private AlterRealityScript(SaveGame saveGame) : base(saveGame) { }
+    private AlterRealityScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script and returns false.
@@ -28,9 +28,9 @@ internal class AlterRealityScript : Script, IScript, IRepeatableScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        SaveGame.MsgPrint("The world changes!");
-        SaveGame.DoCmdSaveGame(true);
-        SaveGame.NewLevelFlag = true;
-        SaveGame.CameFrom = LevelStart.StartRandom;
+        Game.MsgPrint("The world changes!");
+        Game.DoCmdSaveGame(true);
+        Game.NewLevelFlag = true;
+        Game.CameFrom = LevelStart.StartRandom;
     }
 }

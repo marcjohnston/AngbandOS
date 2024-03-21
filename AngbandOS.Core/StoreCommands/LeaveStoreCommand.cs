@@ -10,7 +10,7 @@ namespace AngbandOS.Core.StoreCommands;
 [Serializable]
 internal class LeaveStoreCommand : StoreCommand
 {
-    private LeaveStoreCommand(SaveGame saveGame) : base(saveGame) { }
+    private LeaveStoreCommand(Game game) : base(game) { }
     public override char KeyChar => '\x1b';
 
     public override string Description => "";

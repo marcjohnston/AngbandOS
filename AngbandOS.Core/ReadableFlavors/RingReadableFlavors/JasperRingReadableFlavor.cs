@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Flavors;
 [Serializable]
 internal class JasperRingReadableFlavor : RingReadableFlavor
 {
-    private JasperRingReadableFlavor(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private JasperRingReadableFlavor(Game game) : base(game) { } // This object is a singleton.
     protected override string SymbolName => nameof(EqualSignSymbol);
     public override ColorEnum Color => ColorEnum.Orange;
     public override string Name => "Jasper";

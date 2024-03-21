@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class TunnelScript : Script, IScript, IRepeatableScript
 {
-    private TunnelScript(SaveGame saveGame) : base(saveGame) { }
+    private TunnelScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the tunnel script and disposes of the repeatable result.
@@ -29,32 +29,32 @@ internal class TunnelScript : Script, IScript, IRepeatableScript
     {
         bool more = false;
         // Get the direction in which we wish to tunnel
-        if (SaveGame.GetDirectionNoAim(out int dir))
+        if (Game.GetDirectionNoAim(out int dir))
         {
             // Pick up the tile that the player wishes to tunnel through
-            int tileY = SaveGame.MapY + SaveGame.KeypadDirectionYOffset[dir];
-            int tileX = SaveGame.MapX + SaveGame.KeypadDirectionXOffset[dir];
-            GridTile tile = SaveGame.Grid[tileY][tileX];
+            int tileY = Game.MapY + Game.KeypadDirectionYOffset[dir];
+            int tileX = Game.MapX + Game.KeypadDirectionXOffset[dir];
+            GridTile tile = Game.Grid[tileY][tileX];
             // Check if it can be tunneled through
             if (tile.FeatureType.IsPassable || tile.FeatureType is YellowSignSigilTile)
             {
-                SaveGame.MsgPrint("You cannot tunnel through air.");
+                Game.MsgPrint("You cannot tunnel through air.");
             }
             else if (tile.FeatureType.IsVisibleDoor)
             {
-                SaveGame.MsgPrint("You cannot tunnel through doors.");
+                Game.MsgPrint("You cannot tunnel through doors.");
             }
             // Can't tunnel if there's a monster there - so attack the monster instead
             else if (tile.MonsterIndex != 0)
             {
-                SaveGame.EnergyUse = 100;
-                SaveGame.MsgPrint("There is a monster in the way!");
-                SaveGame.PlayerAttackMonster(tileY, tileX);
+                Game.EnergyUse = 100;
+                Game.MsgPrint("There is a monster in the way!");
+                Game.PlayerAttackMonster(tileY, tileX);
             }
             else
             {
                 // Tunnel through the tile
-                more = SaveGame.TunnelThroughTile(tileY, tileX);
+                more = Game.TunnelThroughTile(tileY, tileX);
             }
         }
         return more;

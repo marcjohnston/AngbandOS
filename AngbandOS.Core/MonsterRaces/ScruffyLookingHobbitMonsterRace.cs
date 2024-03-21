@@ -10,7 +10,7 @@ namespace AngbandOS.Core.MonsterRaces;
 [Serializable]
 internal class ScruffyLookingHobbitMonsterRace : MonsterRace
 {
-    protected ScruffyLookingHobbitMonsterRace(SaveGame saveGame) : base(saveGame) { }
+    protected ScruffyLookingHobbitMonsterRace(Game game) : base(game) { }
 
     protected override string SymbolName => nameof(LowerHSymbol);
     public override ColorEnum Color => ColorEnum.BrightOrange;

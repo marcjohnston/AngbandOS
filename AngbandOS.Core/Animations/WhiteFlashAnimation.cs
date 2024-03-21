@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Animations;
 [Serializable]
 internal class WhiteFlashAnimation : Animation
 {
-    private WhiteFlashAnimation(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private WhiteFlashAnimation(Game game) : base(game) { } // This object is a singleton.
     public override char Character => '*';
     public override string Name => "WhiteFlash";
     public override ColorEnum AlternateColor => ColorEnum.BrightWhite;

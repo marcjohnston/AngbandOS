@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Races;
 [Serializable]
 internal class HalfTrollRace : Race
 {
-    private HalfTrollRace(SaveGame saveGame) : base(saveGame) { }
+    private HalfTrollRace(Game game) : base(game) { }
     public override string Title => "Half Troll";
     public override int[] AbilityBonus => new int[] { 4, -4, -2, -4, 3, -6 };
     public override int BaseDisarmBonus => -5;
@@ -67,23 +67,23 @@ internal class HalfTrollRace : Race
 
     public override void CalcBonuses()
     {
-        SaveGame.HasSustainStrength = true;
-        if (SaveGame.ExperienceLevel.Value > 14)
+        Game.HasSustainStrength = true;
+        if (Game.ExperienceLevel.Value > 14)
         {
-            SaveGame.HasRegeneration = true;
-            SaveGame.HasSlowDigestion = true;
+            Game.HasRegeneration = true;
+            Game.HasSlowDigestion = true;
         }
     }
 
     public override void UseRacialPower()
     {
         // Half-trolls can go berserk, which also heals them
-        if (SaveGame.CheckIfRacialPowerWorks(10, 12, Ability.Wisdom, SaveGame.BaseCharacterClass.ID == CharacterClass.Warrior ? 6 : 12))
+        if (Game.CheckIfRacialPowerWorks(10, 12, Ability.Wisdom, Game.BaseCharacterClass.ID == CharacterClass.Warrior ? 6 : 12))
         {
-            SaveGame.MsgPrint("RAAAGH!");
-            SaveGame.FearTimer.ResetTimer();
-            SaveGame.SuperheroismTimer.AddTimer(10 + SaveGame.DieRoll(SaveGame.ExperienceLevel.Value));
-            SaveGame.RestoreHealth(30);
+            Game.MsgPrint("RAAAGH!");
+            Game.FearTimer.ResetTimer();
+            Game.SuperheroismTimer.AddTimer(10 + Game.DieRoll(Game.ExperienceLevel.Value));
+            Game.RestoreHealth(30);
         }
     }
 }

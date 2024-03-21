@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class DetoxifyScript : Script, IScript
 {
-    private DetoxifyScript(SaveGame saveGame) : base(saveGame) { }
+    private DetoxifyScript(Game game) : base(game) { }
 
     /// <summary>
     /// Instantly cures poison.
@@ -18,6 +18,6 @@ internal class DetoxifyScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        SaveGame.PoisonTimer.ResetTimer();
+        Game.PoisonTimer.ResetTimer();
     }
 }

@@ -8,7 +8,7 @@
 [Serializable]
 internal class ForovirTheCheapShopkeeper : Shopkeeper
 {
-    private ForovirTheCheapShopkeeper(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private ForovirTheCheapShopkeeper(Game game) : base(game) { } // This object is a singleton.
     public override string Name => "Forovir the Cheap";
     public override int MaxCost =>  250;
     public override int MinInflate =>  108;

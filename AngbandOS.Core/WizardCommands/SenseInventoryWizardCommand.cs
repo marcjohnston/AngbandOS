@@ -10,7 +10,7 @@ namespace AngbandOS.Core.WizardCommands;
 [Serializable]
 internal class SenseInventoryWizardCommand : WizardCommand
 {
-    private SenseInventoryWizardCommand(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private SenseInventoryWizardCommand(Game game) : base(game) { } // This object is a singleton.
 
     public override char KeyChar => 'S';
 

@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Spells.Folk;
 [Serializable]
 internal class FolkSpellBlink : Spell
 {
-    private FolkSpellBlink(SaveGame saveGame) : base(saveGame) { }
+    private FolkSpellBlink(Game game) : base(game) { }
     protected override string? CastScriptName => nameof(PhaseDoorScript);
 
     public override string Name => "Blink";

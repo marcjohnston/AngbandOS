@@ -8,6 +8,6 @@
 [Serializable]
 internal class CharacterSubclassNameFunction : StringFunction
 {
-    private CharacterSubclassNameFunction(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-    public override string Value => SaveGame.BaseCharacterClass.ClassSubName(SaveGame.PrimaryRealm);
+    private CharacterSubclassNameFunction(Game game) : base(game) { } // This object is a singleton.
+    public override string Value => Game.BaseCharacterClass.ClassSubName(Game.PrimaryRealm);
 }

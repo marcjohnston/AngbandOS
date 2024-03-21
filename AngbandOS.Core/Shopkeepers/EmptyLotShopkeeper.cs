@@ -8,7 +8,7 @@
 [Serializable]
 internal class EmptyLotShopkeeper : Shopkeeper
 {
-    private EmptyLotShopkeeper(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private EmptyLotShopkeeper(Game game) : base(game) { } // This object is a singleton.
     public override string Name => "Empty lot";
     public override int MaxCost =>  0;
     public override int MinInflate =>  100;

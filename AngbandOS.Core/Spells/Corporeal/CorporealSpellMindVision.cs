@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Spells.Corporeal;
 [Serializable]
 internal class CorporealSpellMindVision : Spell
 {
-    private CorporealSpellMindVision(SaveGame saveGame) : base(saveGame) { }
+    private CorporealSpellMindVision(Game game) : base(game) { }
     protected override string? CastScriptName => nameof(AddTelepathy25p1d30Script);
 
     public override string Name => "Mind Vision";

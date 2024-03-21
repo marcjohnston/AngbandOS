@@ -10,7 +10,7 @@ namespace AngbandOS.Core.MonsterRaces;
 [Serializable]
 internal class NobodyTheUndefinedGhostMonsterRace : MonsterRace
 {
-    protected NobodyTheUndefinedGhostMonsterRace(SaveGame saveGame) : base(saveGame) { }
+    protected NobodyTheUndefinedGhostMonsterRace(Game game) : base(game) { }
 
     protected override string SymbolName => nameof(UpperGSymbol);
     public override string Name => "Nobody, the Undefined Ghost";

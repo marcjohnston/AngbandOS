@@ -10,20 +10,20 @@ namespace AngbandOS.Core.Timers;
 [Serializable]
 internal class HallucinationsTimer : Timer
 {
-    private HallucinationsTimer(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private HallucinationsTimer(Game game) : base(game) { } // This object is a singleton.
 
     protected override void EffectStopped()
     {
-        SaveGame.MsgPrint("You can see clearly again.");
+        Game.MsgPrint("You can see clearly again.");
     }
     protected override void EffectIncreased(int newRate, int currentRate)
     {
-        SaveGame.MsgPrint("Oh, wow! Everything looks so cosmic now!");
+        Game.MsgPrint("Oh, wow! Everything looks so cosmic now!");
     }
     protected override void Noticed()
     {
-        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawMapFlaggedAction)).Set();
-        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateMonstersFlaggedAction)).Set();
+        Game.SingletonRepository.FlaggedActions.Get(nameof(RedrawMapFlaggedAction)).Set();
+        Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateMonstersFlaggedAction)).Set();
         base.Noticed();
     }
 }

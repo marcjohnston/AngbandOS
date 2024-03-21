@@ -13,18 +13,18 @@ namespace AngbandOS.Core.Activations;
 [Serializable]
 internal class SummonPhantomActivation : Activation
 {
-    private SummonPhantomActivation(SaveGame saveGame) : base(saveGame) { }
+    private SummonPhantomActivation(Game game) : base(game) { }
     public override int RandomChance => 33;
 
     public override string? PreActivationMessage => "You summon a phantasmal servant.";
 
     protected override bool OnActivate(Item item)
     {
-        SaveGame.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, SaveGame.Difficulty, SaveGame.SingletonRepository.MonsterFilters.Get(nameof(PhantomMonsterFilter)), true);
+        Game.SummonSpecificFriendly(Game.MapY, Game.MapX, Game.Difficulty, Game.SingletonRepository.MonsterFilters.Get(nameof(PhantomMonsterFilter)), true);
         return true;
     }
 
-    public override int RechargeTime() => 200 + SaveGame.DieRoll(200);
+    public override int RechargeTime() => 200 + Game.DieRoll(200);
 
     public override int Value => 12000;
 

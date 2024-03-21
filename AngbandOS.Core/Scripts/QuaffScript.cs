@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class QuaffScript : Script, IScript, IRepeatableScript
 {
-    private QuaffScript(SaveGame saveGame) : base(saveGame) { }
+    private QuaffScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the quaff script and returns false.
@@ -28,9 +28,9 @@ internal class QuaffScript : Script, IScript, IRepeatableScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        if (!SaveGame.SelectItem(out Item? item, "Quaff which potion? ", false, true, true, SaveGame.SingletonRepository.ItemFilters.Get(nameof(CanBeQuaffedItemFilter))))
+        if (!Game.SelectItem(out Item? item, "Quaff which potion? ", false, true, true, Game.SingletonRepository.ItemFilters.Get(nameof(CanBeQuaffedItemFilter))))
         {
-            SaveGame.MsgPrint("You have no potions to quaff.");
+            Game.MsgPrint("You have no potions to quaff.");
             return;
         }
         if (item == null)
@@ -38,36 +38,36 @@ internal class QuaffScript : Script, IScript, IRepeatableScript
             return;
         }
         // Make sure the item is a potion
-        if (!SaveGame.ItemMatchesFilter(item, SaveGame.SingletonRepository.ItemFilters.Get(nameof(CanBeQuaffedItemFilter))))
+        if (!Game.ItemMatchesFilter(item, Game.SingletonRepository.ItemFilters.Get(nameof(CanBeQuaffedItemFilter))))
         {
-            SaveGame.MsgPrint("That is not a potion!");
+            Game.MsgPrint("That is not a potion!");
             return;
         }
-        SaveGame.PlaySound(SoundEffectEnum.Quaff);
+        Game.PlaySound(SoundEffectEnum.Quaff);
         // Drinking a potion costs a whole turn
-        SaveGame.EnergyUse = 100;
+        Game.EnergyUse = 100;
         int itemLevel = item.Factory.LevelNormallyFound;
         // Do the actual potion effect
         PotionItemFactory potion = (PotionItemFactory)item.Factory; // The item will be a potion.
         bool identified = potion.Quaff();
 
         // Skeletons are messy drinkers
-        SaveGame.Race.Quaff(potion);
-        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
+        Game.Race.Quaff(potion);
+        Game.SingletonRepository.FlaggedActions.Get(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
         // We may now know the potion's type
         item.ObjectTried();
         if (identified && !item.IsFlavorAware())
         {
             item.BecomeFlavorAware();
-            SaveGame.GainExperience((itemLevel + (SaveGame.ExperienceLevel.Value >> 1)) / SaveGame.ExperienceLevel.Value);
+            Game.GainExperience((itemLevel + (Game.ExperienceLevel.Value >> 1)) / Game.ExperienceLevel.Value);
         }
         // Most potions give us a bit of food too
-        SaveGame.SetFood(SaveGame.Food.Value + item.TypeSpecificValue);
+        Game.SetFood(Game.Food.Value + item.TypeSpecificValue);
         bool channeled = false;
         // If we're a channeler, we might be able to spend mana instead of using it up
-        if (SaveGame.BaseCharacterClass.CanUseManaInsteadOfConsumingItem)
+        if (Game.BaseCharacterClass.CanUseManaInsteadOfConsumingItem)
         {
-            channeled = SaveGame.DoCmdChannel(item);
+            channeled = Game.DoCmdChannel(item);
         }
         if (!channeled)
         {

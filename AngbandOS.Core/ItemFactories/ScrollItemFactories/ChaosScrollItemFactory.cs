@@ -10,9 +10,9 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class ChaosScrollItemFactory : ScrollItemFactory
 {
-    private ChaosScrollItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private ChaosScrollItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(QuestionMarkSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(QuestionMarkSymbol));
     public override string Name => "Chaos";
 
     public override int[] Chance => new int[] { 8, 0, 0, 0 };
@@ -28,12 +28,12 @@ internal class ChaosScrollItemFactory : ScrollItemFactory
 
     public override void Read(ReadScrollEvent eventArgs)
     {
-        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(ChaosProjectile)), 0, 222, 4);
-        if (!SaveGame.HasChaosResistance)
+        Game.FireBall(Game.SingletonRepository.Projectiles.Get(nameof(ChaosProjectile)), 0, 222, 4);
+        if (!Game.HasChaosResistance)
         {
-            SaveGame.TakeHit(111 + SaveGame.DieRoll(111), "a Scroll of Chaos");
+            Game.TakeHit(111 + Game.DieRoll(111), "a Scroll of Chaos");
         }
         eventArgs.Identified = true;
     }
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

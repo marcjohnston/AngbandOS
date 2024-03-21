@@ -10,7 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class KatanaOfGrooFixedArtifact : FixedArtifact
 {
-    private KatanaOfGrooFixedArtifact(SaveGame saveGame) : base(saveGame) { }
+    private KatanaOfGrooFixedArtifact(Game game) : base(game) { }
 
     protected override string BaseItemFactoryName => nameof(KatanaWeaponItemFactory);
 

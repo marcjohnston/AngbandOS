@@ -13,19 +13,19 @@ namespace AngbandOS.Core.Activations;
 [Serializable]
 internal class MapLightActivation : Activation
 {
-    private MapLightActivation(SaveGame saveGame) : base(saveGame) { }
+    private MapLightActivation(Game game) : base(game) { }
     public override int RandomChance => 101;
 
     public override string? PreActivationMessage => "Your {0} shines brightly...";
 
     protected override bool OnActivate(Item item)
     {
-        SaveGame.RunScript(nameof(MapAreaScript));
-        SaveGame.LightArea(SaveGame.DiceRoll(2, 15), 3);
+        Game.RunScript(nameof(MapAreaScript));
+        Game.LightArea(Game.DiceRoll(2, 15), 3);
         return true;
     }
 
-    public override int RechargeTime() => SaveGame.RandomLessThan(50) + 50;
+    public override int RechargeTime() => Game.RandomLessThan(50) + 50;
 
     public override int Value => 500;
 

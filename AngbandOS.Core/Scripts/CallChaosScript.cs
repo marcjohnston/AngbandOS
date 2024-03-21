@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class CallChaosScript : Script, IScript, ICancellableScript
 {
-    private CallChaosScript(SaveGame saveGame) : base(saveGame) { }
+    private CallChaosScript(Game game) : base(game) { }
 
     /// <summary>
     /// Runs the script and returns true because the player cannot cancel the script.
@@ -28,47 +28,47 @@ internal class CallChaosScript : Script, IScript, ICancellableScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        int plev = SaveGame.ExperienceLevel.Value;
+        int plev = Game.ExperienceLevel.Value;
         bool lineChaos = false;
         Projectile[] hurtTypes =
         {
-            SaveGame.SingletonRepository.Projectiles.Get(nameof(ElecProjectile)),
-            SaveGame.SingletonRepository.Projectiles.Get(nameof(PoisProjectile)),
-            SaveGame.SingletonRepository.Projectiles.Get(nameof(AcidProjectile)),
-            SaveGame.SingletonRepository.Projectiles.Get(nameof(ColdProjectile)),
-            SaveGame.SingletonRepository.Projectiles.Get(nameof(FireProjectile)),
-            SaveGame.SingletonRepository.Projectiles.Get(nameof(MissileProjectile)),
-            SaveGame.SingletonRepository.Projectiles.Get(nameof(ArrowProjectile)),
-            SaveGame.SingletonRepository.Projectiles.Get(nameof(PlasmaProjectile)),
-            SaveGame.SingletonRepository.Projectiles.Get(nameof(HolyFireProjectile)),
-            SaveGame.SingletonRepository.Projectiles.Get(nameof(WaterProjectile)),
-            SaveGame.SingletonRepository.Projectiles.Get(nameof(LightProjectile)),
-            SaveGame.SingletonRepository.Projectiles.Get(nameof(DarkProjectile)),
-            SaveGame.SingletonRepository.Projectiles.Get(nameof(ForceProjectile)),
-            SaveGame.SingletonRepository.Projectiles.Get(nameof(InertiaProjectile)),
-            SaveGame.SingletonRepository.Projectiles.Get(nameof(ManaProjectile)),
-            SaveGame.SingletonRepository.Projectiles.Get(nameof(MeteorProjectile)),
-            SaveGame.SingletonRepository.Projectiles.Get(nameof(IceProjectile)),
-            SaveGame.SingletonRepository.Projectiles.Get(nameof(ChaosProjectile)),
-            SaveGame.SingletonRepository.Projectiles.Get(nameof(NetherProjectile)),
-            SaveGame.SingletonRepository.Projectiles.Get(nameof(DisenchantProjectile)),
-            SaveGame.SingletonRepository.Projectiles.Get(nameof(ExplodeProjectile)),
-            SaveGame.SingletonRepository.Projectiles.Get(nameof(SoundProjectile)),
-            SaveGame.SingletonRepository.Projectiles.Get(nameof(NexusProjectile)),
-            SaveGame.SingletonRepository.Projectiles.Get(nameof(ConfusionProjectile)),
-            SaveGame.SingletonRepository.Projectiles.Get(nameof(TimeProjectile)),
-            SaveGame.SingletonRepository.Projectiles.Get(nameof(GravityProjectile)),
-            SaveGame.SingletonRepository.Projectiles.Get(nameof(ShardProjectile)),
-            SaveGame.SingletonRepository.Projectiles.Get(nameof(NukeProjectile)),
-            SaveGame.SingletonRepository.Projectiles.Get(nameof(HellfireProjectile)),
-            SaveGame.SingletonRepository.Projectiles.Get(nameof(DisintegrateProjectile))
+            Game.SingletonRepository.Projectiles.Get(nameof(ElecProjectile)),
+            Game.SingletonRepository.Projectiles.Get(nameof(PoisProjectile)),
+            Game.SingletonRepository.Projectiles.Get(nameof(AcidProjectile)),
+            Game.SingletonRepository.Projectiles.Get(nameof(ColdProjectile)),
+            Game.SingletonRepository.Projectiles.Get(nameof(FireProjectile)),
+            Game.SingletonRepository.Projectiles.Get(nameof(MissileProjectile)),
+            Game.SingletonRepository.Projectiles.Get(nameof(ArrowProjectile)),
+            Game.SingletonRepository.Projectiles.Get(nameof(PlasmaProjectile)),
+            Game.SingletonRepository.Projectiles.Get(nameof(HolyFireProjectile)),
+            Game.SingletonRepository.Projectiles.Get(nameof(WaterProjectile)),
+            Game.SingletonRepository.Projectiles.Get(nameof(LightProjectile)),
+            Game.SingletonRepository.Projectiles.Get(nameof(DarkProjectile)),
+            Game.SingletonRepository.Projectiles.Get(nameof(ForceProjectile)),
+            Game.SingletonRepository.Projectiles.Get(nameof(InertiaProjectile)),
+            Game.SingletonRepository.Projectiles.Get(nameof(ManaProjectile)),
+            Game.SingletonRepository.Projectiles.Get(nameof(MeteorProjectile)),
+            Game.SingletonRepository.Projectiles.Get(nameof(IceProjectile)),
+            Game.SingletonRepository.Projectiles.Get(nameof(ChaosProjectile)),
+            Game.SingletonRepository.Projectiles.Get(nameof(NetherProjectile)),
+            Game.SingletonRepository.Projectiles.Get(nameof(DisenchantProjectile)),
+            Game.SingletonRepository.Projectiles.Get(nameof(ExplodeProjectile)),
+            Game.SingletonRepository.Projectiles.Get(nameof(SoundProjectile)),
+            Game.SingletonRepository.Projectiles.Get(nameof(NexusProjectile)),
+            Game.SingletonRepository.Projectiles.Get(nameof(ConfusionProjectile)),
+            Game.SingletonRepository.Projectiles.Get(nameof(TimeProjectile)),
+            Game.SingletonRepository.Projectiles.Get(nameof(GravityProjectile)),
+            Game.SingletonRepository.Projectiles.Get(nameof(ShardProjectile)),
+            Game.SingletonRepository.Projectiles.Get(nameof(NukeProjectile)),
+            Game.SingletonRepository.Projectiles.Get(nameof(HellfireProjectile)),
+            Game.SingletonRepository.Projectiles.Get(nameof(DisintegrateProjectile))
         };
-        Projectile chaosType = hurtTypes[SaveGame.DieRoll(30) - 1];
-        if (SaveGame.DieRoll(4) == 1)
+        Projectile chaosType = hurtTypes[Game.DieRoll(30) - 1];
+        if (Game.DieRoll(4) == 1)
         {
             lineChaos = true;
         }
-        if (SaveGame.DieRoll(6) == 1)
+        if (Game.DieRoll(6) == 1)
         {
             for (int dummy = 1; dummy < 10; dummy++)
             {
@@ -76,32 +76,32 @@ internal class CallChaosScript : Script, IScript, ICancellableScript
                 {
                     if (lineChaos)
                     {
-                        SaveGame.FireBeam(chaosType, dummy, 75);
+                        Game.FireBeam(chaosType, dummy, 75);
                     }
                     else
                     {
-                        SaveGame.FireBall(chaosType, dummy, 75, 2);
+                        Game.FireBall(chaosType, dummy, 75, 2);
                     }
                 }
             }
         }
-        else if (SaveGame.DieRoll(3) == 1)
+        else if (Game.DieRoll(3) == 1)
         {
-            SaveGame.FireBall(chaosType, 0, 300, 8);
+            Game.FireBall(chaosType, 0, 300, 8);
         }
         else
         {
-            if (!SaveGame.GetDirectionWithAim(out int dir))
+            if (!Game.GetDirectionWithAim(out int dir))
             {
                 return;
             }
             if (lineChaos)
             {
-                SaveGame.FireBeam(chaosType, dir, 150);
+                Game.FireBeam(chaosType, dir, 150);
             }
             else
             {
-                SaveGame.FireBall(chaosType, dir, 150, 3 + (plev / 35));
+                Game.FireBall(chaosType, dir, 150, 3 + (plev / 35));
             }
         }
     }

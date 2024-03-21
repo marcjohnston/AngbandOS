@@ -10,7 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class GlaiveOfPainFixedArtifact : FixedArtifact
 {
-    private GlaiveOfPainFixedArtifact(SaveGame saveGame) : base(saveGame) { }
+    private GlaiveOfPainFixedArtifact(Game game) : base(game) { }
 
     protected override string BaseItemFactoryName => nameof(GlaivePolearmWeaponItemFactory);
 

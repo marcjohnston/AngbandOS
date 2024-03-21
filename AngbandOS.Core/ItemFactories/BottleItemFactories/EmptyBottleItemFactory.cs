@@ -10,9 +10,9 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class EmptyBottleItemFactory : BottleItemFactory
 {
-    private EmptyBottleItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private EmptyBottleItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(ExclamationPointSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(ExclamationPointSymbol));
     public override string Name => "Empty Bottle";
 
     public override int[] Chance => new int[] { 1, 0, 0, 0 };
@@ -21,5 +21,5 @@ internal class EmptyBottleItemFactory : BottleItemFactory
     public override int Ds => 1;
     public override string FriendlyName => "& Empty Bottle~";
     public override int Weight => 2;
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

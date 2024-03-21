@@ -10,9 +10,9 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class HealingPotionItemFactory : PotionItemFactory
 {
-    private HealingPotionItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private HealingPotionItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(ExclamationPointSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(ExclamationPointSymbol));
     public override string Name => "Healing";
 
     public override int[] Chance => new int[] { 1, 1, 1, 0 };
@@ -29,27 +29,27 @@ internal class HealingPotionItemFactory : PotionItemFactory
         bool identified = false;
 
         // Healing heals you 300 health, and cures blindness, confusion, stun, poison, and bleeding
-        if (SaveGame.RestoreHealth(300))
+        if (Game.RestoreHealth(300))
         {
             identified = true;
         }
-        if (SaveGame.BlindnessTimer.ResetTimer())
+        if (Game.BlindnessTimer.ResetTimer())
         {
             identified = true;
         }
-        if (SaveGame.ConfusedTimer.ResetTimer())
+        if (Game.ConfusedTimer.ResetTimer())
         {
             identified = true;
         }
-        if (SaveGame.PoisonTimer.ResetTimer())
+        if (Game.PoisonTimer.ResetTimer())
         {
             identified = true;
         }
-        if (SaveGame.StunTimer.ResetTimer())
+        if (Game.StunTimer.ResetTimer())
         {
             identified = true;
         }
-        if (SaveGame.BleedingTimer.ResetTimer())
+        if (Game.BleedingTimer.ResetTimer())
         {
             identified = true;
         }
@@ -59,8 +59,8 @@ internal class HealingPotionItemFactory : PotionItemFactory
 
     public override bool Smash(int who, int y, int x)
     {
-        SaveGame.Project(who, 2, y, x, SaveGame.DiceRoll(10, 10), SaveGame.SingletonRepository.Projectiles.Get(nameof(OldHealProjectile)), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
+        Game.Project(who, 2, y, x, Game.DiceRoll(10, 10), Game.SingletonRepository.Projectiles.Get(nameof(OldHealProjectile)), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
         return false;
     }
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

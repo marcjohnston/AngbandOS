@@ -3,7 +3,7 @@
 [Serializable]
 internal class LowerJSymbol : Symbol
 {
-    private LowerJSymbol(SaveGame saveGame) : base(saveGame) { }
+    private LowerJSymbol(Game game) : base(game) { }
     public override char Character => 'j';
     public override string Name => "Jelly";
 }

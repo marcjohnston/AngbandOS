@@ -8,7 +8,7 @@
 [Serializable]
 internal class KonDarTheUglyShopkeeper : Shopkeeper
 {
-    private KonDarTheUglyShopkeeper(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private KonDarTheUglyShopkeeper(Game game) : base(game) { } // This object is a singleton.
     public override string Name => "Kon-Dar the Ugly";
     public override int MaxCost =>  10000;
     public override int MinInflate =>  115;

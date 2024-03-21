@@ -10,7 +10,7 @@ namespace AngbandOS.Core.MonsterRaces;
 [Serializable]
 internal class CaveSpiderMonsterRace : MonsterRace
 {
-    protected CaveSpiderMonsterRace(SaveGame saveGame) : base(saveGame) { }
+    protected CaveSpiderMonsterRace(Game game) : base(game) { }
 
     protected override string SymbolName => nameof(UpperSSymbol);
     public override ColorEnum Color => ColorEnum.Black;

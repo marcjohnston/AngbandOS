@@ -13,19 +13,19 @@ namespace AngbandOS.Core.Activations;
 [Serializable]
 internal class Berserk50p1d50Every100p1d100Activation : Activation
 {
-    private Berserk50p1d50Every100p1d100Activation(SaveGame saveGame) : base(saveGame) { }
+    private Berserk50p1d50Every100p1d100Activation(Game game) : base(game) { }
     public override int RandomChance => 101;
 
     public override string? PreActivationMessage => "";
 
     protected override bool OnActivate(Item item)
     {
-        SaveGame.SuperheroismTimer.AddTimer(SaveGame.DieRoll(50) + 50);
-        SaveGame.BlessingTimer.AddTimer(SaveGame.DieRoll(50) + 50);
+        Game.SuperheroismTimer.AddTimer(Game.DieRoll(50) + 50);
+        Game.BlessingTimer.AddTimer(Game.DieRoll(50) + 50);
         return true;
     }
 
-    public override int RechargeTime() => 100 + SaveGame.DieRoll(100);
+    public override int RechargeTime() => 100 + Game.DieRoll(100);
 
     public override int Value => 800;
 

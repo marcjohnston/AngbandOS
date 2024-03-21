@@ -83,11 +83,11 @@ internal sealed class Item : IComparable<Item>
     public IItemContainer GetContainer()
     {
         // Check to see if the item is in the players inventory.
-        foreach (BaseInventorySlot inventorySlot in SaveGame.SingletonRepository.InventorySlots)
+        foreach (BaseInventorySlot inventorySlot in Game.SingletonRepository.InventorySlots)
         {
             foreach (int slot in inventorySlot.InventorySlots)
             {
-                if (SaveGame.GetInventoryItem(slot) == this)
+                if (Game.GetInventoryItem(slot) == this)
                 {
                     return inventorySlot;
                 }
@@ -97,13 +97,13 @@ internal sealed class Item : IComparable<Item>
         // Check to see if a monster is holding the item.
         if (HoldingMonsterIndex != 0)
         {
-            return SaveGame.Monsters[HoldingMonsterIndex];
+            return Game.Monsters[HoldingMonsterIndex];
         }
 
         // Check to see if the item in on the floor.
         if (X != 0 && Y != 0)
         {
-            return SaveGame.Grid[Y][X];
+            return Game.Grid[Y][X];
         }
 
         // Something is wrong.
@@ -248,12 +248,12 @@ internal sealed class Item : IComparable<Item>
     public int Weight;
     public int X;
     public int Y;
-    private readonly SaveGame SaveGame;
+    private readonly Game Game;
     public ItemCharacteristics Characteristics = new ItemCharacteristics();
 
-    public Item(SaveGame saveGame, ItemFactory factory)
+    public Item(Game game, ItemFactory factory)
     {
-        SaveGame = saveGame;
+        Game = game;
         Factory = factory;
         TypeSpecificValue = Factory.InitialTypeSpecificValue;
         Count = 1;
@@ -288,22 +288,22 @@ internal sealed class Item : IComparable<Item>
         BookItemFactory? oPtrBookFactory = oPtr.Factory.TryCast<BookItemFactory>();
         if (thisBookFactory != null && oPtrBookFactory != null)
         {
-            if (thisBookFactory.Realm == SaveGame.PrimaryRealm && oPtrBookFactory.Realm != SaveGame.PrimaryRealm)
+            if (thisBookFactory.Realm == Game.PrimaryRealm && oPtrBookFactory.Realm != Game.PrimaryRealm)
             {
                 return -1;
             }
-            if (thisBookFactory.Realm != SaveGame.PrimaryRealm && oPtrBookFactory.Realm == SaveGame.PrimaryRealm)
+            if (thisBookFactory.Realm != Game.PrimaryRealm && oPtrBookFactory.Realm == Game.PrimaryRealm)
             {
                 return 1;
             }
 
             // Second level sort (secondary realm spell books).
             // A book that matches the second realm, will always come before a book that doesn't match the second realm.
-            if (thisBookFactory.Realm == SaveGame.SecondaryRealm && oPtrBookFactory.Realm != SaveGame.SecondaryRealm)
+            if (thisBookFactory.Realm == Game.SecondaryRealm && oPtrBookFactory.Realm != Game.SecondaryRealm)
             {
                 return 1;
             }
-            if (thisBookFactory.Realm != SaveGame.SecondaryRealm && oPtrBookFactory.Realm == SaveGame.SecondaryRealm)
+            if (thisBookFactory.Realm != Game.SecondaryRealm && oPtrBookFactory.Realm == Game.SecondaryRealm)
             {
                 return -1;
             }
@@ -1156,35 +1156,35 @@ internal sealed class Item : IComparable<Item>
         {
             if (IsCursed() || IsBroken())
             {
-                return SaveGame.SingletonRepository.ItemQualityRatings.Get(nameof(TerribleItemQualityRating));
+                return Game.SingletonRepository.ItemQualityRatings.Get(nameof(TerribleItemQualityRating));
             }
-            return SaveGame.SingletonRepository.ItemQualityRatings.Get(nameof(SpecialItemQualityRating));
+            return Game.SingletonRepository.ItemQualityRatings.Get(nameof(SpecialItemQualityRating));
         }
         if (IsRare())
         {
             if (IsCursed() || IsBroken())
             {
-                return SaveGame.SingletonRepository.ItemQualityRatings.Get(nameof(WorthlessItemQualityRating));
+                return Game.SingletonRepository.ItemQualityRatings.Get(nameof(WorthlessItemQualityRating));
             }
-            return SaveGame.SingletonRepository.ItemQualityRatings.Get(nameof(ExcellentItemQualityRating));
+            return Game.SingletonRepository.ItemQualityRatings.Get(nameof(ExcellentItemQualityRating));
         }
         if (IsCursed())
         {
-            return SaveGame.SingletonRepository.ItemQualityRatings.Get(nameof(CursedItemQualityRating));
+            return Game.SingletonRepository.ItemQualityRatings.Get(nameof(CursedItemQualityRating));
         }
         if (IsBroken())
         {
-            return SaveGame.SingletonRepository.ItemQualityRatings.Get(nameof(BrokenItemQualityRating));
+            return Game.SingletonRepository.ItemQualityRatings.Get(nameof(BrokenItemQualityRating));
         }
         if (BonusArmorClass > 0)
         {
-            return SaveGame.SingletonRepository.ItemQualityRatings.Get(nameof(GoodItemQualityRating));
+            return Game.SingletonRepository.ItemQualityRatings.Get(nameof(GoodItemQualityRating));
         }
         if (BonusToHit + BonusDamage > 0)
         {
-            return SaveGame.SingletonRepository.ItemQualityRatings.Get(nameof(GoodItemQualityRating));
+            return Game.SingletonRepository.ItemQualityRatings.Get(nameof(GoodItemQualityRating));
         }
-        return SaveGame.SingletonRepository.ItemQualityRatings.Get(nameof(AverageItemQualityRating));
+        return Game.SingletonRepository.ItemQualityRatings.Get(nameof(AverageItemQualityRating));
     }
 
     public string GetDetailedFeeling()
@@ -1231,27 +1231,27 @@ internal sealed class Item : IComparable<Item>
     { 
         if (IsCursed())
         {
-            return SaveGame.SingletonRepository.ItemQualityRatings.Get(nameof(CursedItemQualityRating));
+            return Game.SingletonRepository.ItemQualityRatings.Get(nameof(CursedItemQualityRating));
         }
         if (IsBroken())
         {
-            return SaveGame.SingletonRepository.ItemQualityRatings.Get(nameof(BrokenItemQualityRating));
+            return Game.SingletonRepository.ItemQualityRatings.Get(nameof(BrokenItemQualityRating));
         }
         if (IsArtifact)
         {
-            return SaveGame.SingletonRepository.ItemQualityRatings.Get(nameof(SpecialItemQualityRating));
+            return Game.SingletonRepository.ItemQualityRatings.Get(nameof(SpecialItemQualityRating));
         }
         if (IsRare())
         {
-            return SaveGame.SingletonRepository.ItemQualityRatings.Get(nameof(GoodItemQualityRating));
+            return Game.SingletonRepository.ItemQualityRatings.Get(nameof(GoodItemQualityRating));
         }
         if (BonusArmorClass > 0)
         {
-            return SaveGame.SingletonRepository.ItemQualityRatings.Get(nameof(GoodItemQualityRating));
+            return Game.SingletonRepository.ItemQualityRatings.Get(nameof(GoodItemQualityRating));
         }
         if (BonusToHit + BonusDamage > 0)
         {
-            return SaveGame.SingletonRepository.ItemQualityRatings.Get(nameof(GoodItemQualityRating));
+            return Game.SingletonRepository.ItemQualityRatings.Get(nameof(GoodItemQualityRating));
         }
         return null;
     }
@@ -1651,28 +1651,28 @@ internal sealed class Item : IComparable<Item>
         {
             return false;
         }
-        ScreenBuffer savedScreen = SaveGame.Screen.Clone();
+        ScreenBuffer savedScreen = Game.Screen.Clone();
         for (k = 1; k < 24; k++)
         {
-            SaveGame.Screen.PrintLine("", k, 13);
+            Game.Screen.PrintLine("", k, 13);
         }
-        SaveGame.Screen.PrintLine("     Item Attributes:", 1, 15);
+        Game.Screen.PrintLine("     Item Attributes:", 1, 15);
         for (k = 2, j = 0; j < i; j++)
         {
-            SaveGame.Screen.PrintLine(info[j], k++, 15);
+            Game.Screen.PrintLine(info[j], k++, 15);
             if (k == 22 && j + 1 < i)
             {
-                SaveGame.Screen.PrintLine("-- more --", k, 15);
-                SaveGame.Inkey();
+                Game.Screen.PrintLine("-- more --", k, 15);
+                Game.Inkey();
                 for (; k > 2; k--)
                 {
-                    SaveGame.Screen.PrintLine("", k, 15);
+                    Game.Screen.PrintLine("", k, 15);
                 }
             }
         }
-        SaveGame.Screen.PrintLine("[Press any key to continue]", k, 15);
-        SaveGame.Inkey();
-        SaveGame.Screen.Restore(savedScreen);
+        Game.Screen.PrintLine("[Press any key to continue]", k, 15);
+        Game.Inkey();
+        Game.Screen.Restore(savedScreen);
         return true;
     }
 
@@ -1853,18 +1853,18 @@ internal sealed class Item : IComparable<Item>
             f2 = 20;
         }
         int power = 0;
-        if (good || SaveGame.PercentileRoll(f1))
+        if (good || Game.PercentileRoll(f1))
         {
             power = 1;
-            if (great || SaveGame.PercentileRoll(f2))
+            if (great || Game.PercentileRoll(f2))
             {
                 power = 2;
             }
         }
-        else if (SaveGame.PercentileRoll(f1))
+        else if (Game.PercentileRoll(f1))
         {
             power = -1;
-            if (SaveGame.PercentileRoll(f2))
+            if (Game.PercentileRoll(f2))
             {
                 power = -2;
             }
@@ -1908,18 +1908,18 @@ internal sealed class Item : IComparable<Item>
             {
                 IdentCursed = true;
             }
-            SaveGame.TreasureRating += 10;
+            Game.TreasureRating += 10;
             if (FixedArtifact.Cost > 50000)
             {
-                SaveGame.TreasureRating += 10;
+                Game.TreasureRating += 10;
             }
-            SaveGame.SpecialTreasure = true;
+            Game.SpecialTreasure = true;
             return;
         }
         Factory.ApplyMagic(this, lev, power, store);
         if (IsRandomArtifact)
         {
-            SaveGame.TreasureRating += 40;
+            Game.TreasureRating += 40;
         }
         else if (RareItem != null)
         {
@@ -1936,41 +1936,41 @@ internal sealed class Item : IComparable<Item>
             {
                 if (RareItem.MaxToH != 0)
                 {
-                    BonusToHit -= SaveGame.DieRoll(RareItem.MaxToH);
+                    BonusToHit -= Game.DieRoll(RareItem.MaxToH);
                 }
                 if (RareItem.MaxToD != 0)
                 {
-                    BonusDamage -= SaveGame.DieRoll(RareItem.MaxToD);
+                    BonusDamage -= Game.DieRoll(RareItem.MaxToD);
                 }
                 if (RareItem.MaxToA != 0)
                 {
-                    BonusArmorClass -= SaveGame.DieRoll(RareItem.MaxToA);
+                    BonusArmorClass -= Game.DieRoll(RareItem.MaxToA);
                 }
                 if (RareItem.MaxPval != 0)
                 {
-                    TypeSpecificValue -= SaveGame.DieRoll(RareItem.MaxPval);
+                    TypeSpecificValue -= Game.DieRoll(RareItem.MaxPval);
                 }
             }
             else
             {
                 if (RareItem.MaxToH != 0)
                 {
-                    BonusToHit += SaveGame.DieRoll(RareItem.MaxToH);
+                    BonusToHit += Game.DieRoll(RareItem.MaxToH);
                 }
                 if (RareItem.MaxToD != 0)
                 {
-                    BonusDamage += SaveGame.DieRoll(RareItem.MaxToD);
+                    BonusDamage += Game.DieRoll(RareItem.MaxToD);
                 }
                 if (RareItem.MaxToA != 0)
                 {
-                    BonusArmorClass += SaveGame.DieRoll(RareItem.MaxToA);
+                    BonusArmorClass += Game.DieRoll(RareItem.MaxToA);
                 }
                 if (RareItem.MaxPval != 0)
                 {
-                    TypeSpecificValue += SaveGame.DieRoll(RareItem.MaxPval);
+                    TypeSpecificValue += Game.DieRoll(RareItem.MaxPval);
                 }
             }
-            SaveGame.TreasureRating += RareItem.Rating;
+            Game.TreasureRating += RareItem.Rating;
             return;
         }
         if (Factory != null)
@@ -1996,10 +1996,10 @@ internal sealed class Item : IComparable<Item>
             }
 
         }
-        switch (specific != 0 ? specific : SaveGame.DieRoll(41))
+        switch (specific != 0 ? specific : Game.DieRoll(41))
         {
             case 1:
-                if (SaveGame.DieRoll(Constants.WeirdLuck) != 1)
+                if (Game.DieRoll(Constants.WeirdLuck) != 1)
                 {
                     ApplyRandomResistance(ref artifactBias, 0);
                 }
@@ -2008,13 +2008,13 @@ internal sealed class Item : IComparable<Item>
                     RandomArtifactItemCharacteristics.ImAcid = true;
                     if (artifactBias == null)
                     {
-                        artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(AcidArtifactBias));
+                        artifactBias = Game.SingletonRepository.ArtifactBiases.Get(nameof(AcidArtifactBias));
                     }
                 }
                 break;
 
             case 2:
-                if (SaveGame.DieRoll(Constants.WeirdLuck) != 1)
+                if (Game.DieRoll(Constants.WeirdLuck) != 1)
                 {
                     ApplyRandomResistance(ref artifactBias, 0);
                 }
@@ -2023,13 +2023,13 @@ internal sealed class Item : IComparable<Item>
                     RandomArtifactItemCharacteristics.ImElec = true;
                     if (artifactBias == null)
                     {
-                        artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(ElectricityArtifactBias));
+                        artifactBias = Game.SingletonRepository.ArtifactBiases.Get(nameof(ElectricityArtifactBias));
                     }
                 }
                 break;
 
             case 3:
-                if (SaveGame.DieRoll(Constants.WeirdLuck) != 1)
+                if (Game.DieRoll(Constants.WeirdLuck) != 1)
                 {
                     ApplyRandomResistance(ref artifactBias, 0);
                 }
@@ -2038,13 +2038,13 @@ internal sealed class Item : IComparable<Item>
                     RandomArtifactItemCharacteristics.ImCold = true;
                     if (artifactBias == null)
                     {
-                        artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(ColdArtifactBias));
+                        artifactBias = Game.SingletonRepository.ArtifactBiases.Get(nameof(ColdArtifactBias));
                     }
                 }
                 break;
 
             case 4:
-                if (SaveGame.DieRoll(Constants.WeirdLuck) != 1)
+                if (Game.DieRoll(Constants.WeirdLuck) != 1)
                 {
                     ApplyRandomResistance(ref artifactBias, 0);
                 }
@@ -2053,7 +2053,7 @@ internal sealed class Item : IComparable<Item>
                     RandomArtifactItemCharacteristics.ImFire = true;
                     if (artifactBias == null)
                     {
-                        artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(FireArtifactBias));
+                        artifactBias = Game.SingletonRepository.ArtifactBiases.Get(nameof(FireArtifactBias));
                     }
                 }
                 break;
@@ -2064,7 +2064,7 @@ internal sealed class Item : IComparable<Item>
                 RandomArtifactItemCharacteristics.ResAcid = true;
                 if (artifactBias == null)
                 {
-                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(AcidArtifactBias));
+                    artifactBias = Game.SingletonRepository.ArtifactBiases.Get(nameof(AcidArtifactBias));
                 }
                 break;
 
@@ -2074,7 +2074,7 @@ internal sealed class Item : IComparable<Item>
                 RandomArtifactItemCharacteristics.ResElec = true;
                 if (artifactBias == null)
                 {
-                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(ElectricityArtifactBias));
+                    artifactBias = Game.SingletonRepository.ArtifactBiases.Get(nameof(ElectricityArtifactBias));
                 }
                 break;
 
@@ -2084,7 +2084,7 @@ internal sealed class Item : IComparable<Item>
                 RandomArtifactItemCharacteristics.ResFire = true;
                 if (artifactBias == null)
                 {
-                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(FireArtifactBias));
+                    artifactBias = Game.SingletonRepository.ArtifactBiases.Get(nameof(FireArtifactBias));
                 }
                 break;
 
@@ -2094,33 +2094,33 @@ internal sealed class Item : IComparable<Item>
                 RandomArtifactItemCharacteristics.ResCold = true;
                 if (artifactBias == null)
                 {
-                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(ColdArtifactBias));
+                    artifactBias = Game.SingletonRepository.ArtifactBiases.Get(nameof(ColdArtifactBias));
                 }
                 break;
 
             case 17:
             case 18:
                 RandomArtifactItemCharacteristics.ResPois = true;
-                if (artifactBias == null && SaveGame.DieRoll(4) != 1)
+                if (artifactBias == null && Game.DieRoll(4) != 1)
                 {
-                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(PoisonArtifactBias));
+                    artifactBias = Game.SingletonRepository.ArtifactBiases.Get(nameof(PoisonArtifactBias));
                 }
-                else if (artifactBias == null && SaveGame.DieRoll(2) == 1)
+                else if (artifactBias == null && Game.DieRoll(2) == 1)
                 {
-                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(NecromanticArtifactBias));
+                    artifactBias = Game.SingletonRepository.ArtifactBiases.Get(nameof(NecromanticArtifactBias));
                 }
-                else if (artifactBias == null && SaveGame.DieRoll(2) == 1)
+                else if (artifactBias == null && Game.DieRoll(2) == 1)
                 {
-                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(RogueArtifactBias));
+                    artifactBias = Game.SingletonRepository.ArtifactBiases.Get(nameof(RogueArtifactBias));
                 }
                 break;
 
             case 19:
             case 20:
                 RandomArtifactItemCharacteristics.ResFear = true;
-                if (artifactBias == null && SaveGame.DieRoll(3) == 1)
+                if (artifactBias == null && Game.DieRoll(3) == 1)
                 {
-                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(WarriorArtifactBias));
+                    artifactBias = Game.SingletonRepository.ArtifactBiases.Get(nameof(WarriorArtifactBias));
                 }
                 break;
 
@@ -2140,9 +2140,9 @@ internal sealed class Item : IComparable<Item>
             case 25:
             case 26:
                 RandomArtifactItemCharacteristics.ResConf = true;
-                if (artifactBias == null && SaveGame.DieRoll(6) == 1)
+                if (artifactBias == null && Game.DieRoll(6) == 1)
                 {
-                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(ChaosArtifactBias));
+                    artifactBias = Game.SingletonRepository.ArtifactBiases.Get(nameof(ChaosArtifactBias));
                 }
                 break;
 
@@ -2159,9 +2159,9 @@ internal sealed class Item : IComparable<Item>
             case 31:
             case 32:
                 RandomArtifactItemCharacteristics.ResNether = true;
-                if (artifactBias == null && SaveGame.DieRoll(3) == 1)
+                if (artifactBias == null && Game.DieRoll(3) == 1)
                 {
-                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(NecromanticArtifactBias));
+                    artifactBias = Game.SingletonRepository.ArtifactBiases.Get(nameof(NecromanticArtifactBias));
                 }
                 break;
 
@@ -2173,9 +2173,9 @@ internal sealed class Item : IComparable<Item>
             case 35:
             case 36:
                 RandomArtifactItemCharacteristics.ResChaos = true;
-                if (artifactBias == null && SaveGame.DieRoll(2) == 1)
+                if (artifactBias == null && Game.DieRoll(2) == 1)
                 {
-                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(ChaosArtifactBias));
+                    artifactBias = Game.SingletonRepository.ArtifactBiases.Get(nameof(ChaosArtifactBias));
                 }
                 break;
 
@@ -2195,7 +2195,7 @@ internal sealed class Item : IComparable<Item>
                 }
                 if (artifactBias == null)
                 {
-                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(ElectricityArtifactBias));
+                    artifactBias = Game.SingletonRepository.ArtifactBiases.Get(nameof(ElectricityArtifactBias));
                 }
                 break;
 
@@ -2210,7 +2210,7 @@ internal sealed class Item : IComparable<Item>
                 }
                 if (artifactBias == null)
                 {
-                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(FireArtifactBias));
+                    artifactBias = Game.SingletonRepository.ArtifactBiases.Get(nameof(FireArtifactBias));
                 }
                 break;
 
@@ -2231,29 +2231,29 @@ internal sealed class Item : IComparable<Item>
     {
         const int ArtifactCurseChance = 13;
         bool hasPval = false;
-        int powers = SaveGame.DieRoll(5) + 1;
+        int powers = Game.DieRoll(5) + 1;
         bool aCursed = false;
         int warriorArtifactBias = 0;
         IArtifactBias? artifactBias = null;
-        if (fromScroll && SaveGame.DieRoll(4) == 1)
+        if (fromScroll && Game.DieRoll(4) == 1)
         {
-            artifactBias = SaveGame.BaseCharacterClass.ArtifactBias;
-            warriorArtifactBias = SaveGame.BaseCharacterClass.FromScrollWarriorArtifactBiasPercentageChance;
+            artifactBias = Game.BaseCharacterClass.ArtifactBias;
+            warriorArtifactBias = Game.BaseCharacterClass.FromScrollWarriorArtifactBiasPercentageChance;
         }
-        if (SaveGame.DieRoll(100) <= warriorArtifactBias && fromScroll)
+        if (Game.DieRoll(100) <= warriorArtifactBias && fromScroll)
         {
-            artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(WarriorArtifactBias));
+            artifactBias = Game.SingletonRepository.ArtifactBiases.Get(nameof(WarriorArtifactBias));
         }
         string newName;
-        if (!fromScroll && SaveGame.DieRoll(ArtifactCurseChance) == 1)
+        if (!fromScroll && Game.DieRoll(ArtifactCurseChance) == 1)
         {
             aCursed = true;
         }
-        while (SaveGame.DieRoll(powers) == 1 || SaveGame.DieRoll(7) == 1 || SaveGame.DieRoll(10) == 1)
+        while (Game.DieRoll(powers) == 1 || Game.DieRoll(7) == 1 || Game.DieRoll(10) == 1)
         {
             powers++;
         }
-        if (!aCursed && SaveGame.DieRoll(Constants.WeirdLuck) == 1)
+        if (!aCursed && Game.DieRoll(Constants.WeirdLuck) == 1)
         {
             powers *= 2;
         }
@@ -2264,7 +2264,7 @@ internal sealed class Item : IComparable<Item>
         while (powers-- != 0)
         {
             int maxType = (Factory.CanApplySlayingBonus ? 7 : 5);
-            switch (SaveGame.DieRoll(maxType))
+            switch (Game.DieRoll(maxType))
             {
                 case 1:
                 case 2:
@@ -2295,17 +2295,17 @@ internal sealed class Item : IComparable<Item>
         {
             if (RandomArtifactItemCharacteristics.Blows)
             {
-                TypeSpecificValue = SaveGame.DieRoll(2) + 1;
+                TypeSpecificValue = Game.DieRoll(2) + 1;
             }
             else
             {
                 do
                 {
                     TypeSpecificValue++;
-                } while (TypeSpecificValue < SaveGame.DieRoll(5) ||
-                         SaveGame.DieRoll(TypeSpecificValue) == 1);
+                } while (TypeSpecificValue < Game.DieRoll(5) ||
+                         Game.DieRoll(TypeSpecificValue) == 1);
             }
-            if (TypeSpecificValue > 4 && SaveGame.DieRoll(Constants.WeirdLuck) != 1)
+            if (TypeSpecificValue > 4 && Game.DieRoll(Constants.WeirdLuck) != 1)
             {
                 TypeSpecificValue = 4;
             }
@@ -2320,7 +2320,7 @@ internal sealed class Item : IComparable<Item>
         {
             CurseRandart();
         }
-        if (!aCursed && SaveGame.DieRoll(Factory.RandartActivationChance) == 1)
+        if (!aCursed && Game.DieRoll(Factory.RandartActivationChance) == 1)
         {
             RandomArtifactActivation = null;
             GiveActivationPower(ref artifactBias);
@@ -2329,7 +2329,7 @@ internal sealed class Item : IComparable<Item>
         {
             IdentifyFully();
             IdentityIsStoreBought = true;
-            if (!SaveGame.GetString("What do you want to call the artifact? ", out string dummyName, "(a DIY artifact)", 80))
+            if (!Game.GetString("What do you want to call the artifact? ", out string dummyName, "(a DIY artifact)", 80))
             {
                 newName = "(a DIY artifact)";
             }
@@ -2363,7 +2363,7 @@ internal sealed class Item : IComparable<Item>
         {
             return false;
         }
-        foreach (FixedArtifact aPtr in SaveGame.SingletonRepository.FixedArtifacts)
+        foreach (FixedArtifact aPtr in Game.SingletonRepository.FixedArtifacts)
         {
             if (aPtr.HasOwnType)
             {
@@ -2380,15 +2380,15 @@ internal sealed class Item : IComparable<Item>
             {
                 continue;
             }
-            if (aPtr.Level > SaveGame.Difficulty)
+            if (aPtr.Level > Game.Difficulty)
             {
-                int d = (aPtr.Level - SaveGame.Difficulty) * 2;
-                if (SaveGame.RandomLessThan(d) != 0)
+                int d = (aPtr.Level - Game.Difficulty) * 2;
+                if (Game.RandomLessThan(d) != 0)
                 {
                     continue;
                 }
             }
-            if (SaveGame.RandomLessThan(aPtr.Rarity) != 0)
+            if (Game.RandomLessThan(aPtr.Rarity) != 0)
             {
                 continue;
             }
@@ -2408,97 +2408,97 @@ internal sealed class Item : IComparable<Item>
                 return;
             }
         }
-        switch (SaveGame.DieRoll(23))
+        switch (Game.DieRoll(23))
         {
             case 1:
             case 2:
                 RandomArtifactItemCharacteristics.Str = true;
-                if (artifactBias == null && SaveGame.DieRoll(13) != 1)
+                if (artifactBias == null && Game.DieRoll(13) != 1)
                 {
-                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(StrengthArtifactBias));
+                    artifactBias = Game.SingletonRepository.ArtifactBiases.Get(nameof(StrengthArtifactBias));
                 }
-                else if (artifactBias == null && SaveGame.DieRoll(7) == 1)
+                else if (artifactBias == null && Game.DieRoll(7) == 1)
                 {
-                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(WarriorArtifactBias));
+                    artifactBias = Game.SingletonRepository.ArtifactBiases.Get(nameof(WarriorArtifactBias));
                 }
                 break;
 
             case 3:
             case 4:
                 RandomArtifactItemCharacteristics.Int = true;
-                if (artifactBias == null && SaveGame.DieRoll(13) != 1)
+                if (artifactBias == null && Game.DieRoll(13) != 1)
                 {
-                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(IntelligenceArtifactBias));
+                    artifactBias = Game.SingletonRepository.ArtifactBiases.Get(nameof(IntelligenceArtifactBias));
                 }
-                else if (artifactBias == null && SaveGame.DieRoll(7) == 1)
+                else if (artifactBias == null && Game.DieRoll(7) == 1)
                 {
-                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(MageArtifactBias));
+                    artifactBias = Game.SingletonRepository.ArtifactBiases.Get(nameof(MageArtifactBias));
                 }
                 break;
 
             case 5:
             case 6:
                 RandomArtifactItemCharacteristics.Wis = true;
-                if (artifactBias == null && SaveGame.DieRoll(13) != 1)
+                if (artifactBias == null && Game.DieRoll(13) != 1)
                 {
-                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(WisdomArtifactBias));
+                    artifactBias = Game.SingletonRepository.ArtifactBiases.Get(nameof(WisdomArtifactBias));
                 }
-                else if (artifactBias == null && SaveGame.DieRoll(7) == 1)
+                else if (artifactBias == null && Game.DieRoll(7) == 1)
                 {
-                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(PriestlyArtifactBias));
+                    artifactBias = Game.SingletonRepository.ArtifactBiases.Get(nameof(PriestlyArtifactBias));
                 }
                 break;
 
             case 7:
             case 8:
                 RandomArtifactItemCharacteristics.Dex = true;
-                if (artifactBias == null && SaveGame.DieRoll(13) != 1)
+                if (artifactBias == null && Game.DieRoll(13) != 1)
                 {
-                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(DexterityArtifactBias));
+                    artifactBias = Game.SingletonRepository.ArtifactBiases.Get(nameof(DexterityArtifactBias));
                 }
-                else if (artifactBias == null && SaveGame.DieRoll(7) == 1)
+                else if (artifactBias == null && Game.DieRoll(7) == 1)
                 {
-                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(RogueArtifactBias));
+                    artifactBias = Game.SingletonRepository.ArtifactBiases.Get(nameof(RogueArtifactBias));
                 }
                 break;
 
             case 9:
             case 10:
                 RandomArtifactItemCharacteristics.Con = true;
-                if (artifactBias == null && SaveGame.DieRoll(13) != 1)
+                if (artifactBias == null && Game.DieRoll(13) != 1)
                 {
-                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(ConstitutionArtifactBias));
+                    artifactBias = Game.SingletonRepository.ArtifactBiases.Get(nameof(ConstitutionArtifactBias));
                 }
-                else if (artifactBias == null && SaveGame.DieRoll(9) == 1)
+                else if (artifactBias == null && Game.DieRoll(9) == 1)
                 {
-                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(RangerArtifactBias));
+                    artifactBias = Game.SingletonRepository.ArtifactBiases.Get(nameof(RangerArtifactBias));
                 }
                 break;
 
             case 11:
             case 12:
                 RandomArtifactItemCharacteristics.Cha = true;
-                if (artifactBias == null && SaveGame.DieRoll(13) != 1)
+                if (artifactBias == null && Game.DieRoll(13) != 1)
                 {
-                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(CharismaArtifactBias));
+                    artifactBias = Game.SingletonRepository.ArtifactBiases.Get(nameof(CharismaArtifactBias));
                 }
                 break;
 
             case 13:
             case 14:
                 RandomArtifactItemCharacteristics.Stealth = true;
-                if (artifactBias == null && SaveGame.DieRoll(3) == 1)
+                if (artifactBias == null && Game.DieRoll(3) == 1)
                 {
-                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(RogueArtifactBias));
+                    artifactBias = Game.SingletonRepository.ArtifactBiases.Get(nameof(RogueArtifactBias));
                 }
                 break;
 
             case 15:
             case 16:
                 RandomArtifactItemCharacteristics.Search = true;
-                if (artifactBias == null && SaveGame.DieRoll(9) == 1)
+                if (artifactBias == null && Game.DieRoll(9) == 1)
                 {
-                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(RangerArtifactBias));
+                    artifactBias = Game.SingletonRepository.ArtifactBiases.Get(nameof(RangerArtifactBias));
                 }
                 break;
 
@@ -2509,9 +2509,9 @@ internal sealed class Item : IComparable<Item>
 
             case 19:
                 RandomArtifactItemCharacteristics.Speed = true;
-                if (artifactBias == null && SaveGame.DieRoll(11) == 1)
+                if (artifactBias == null && Game.DieRoll(11) == 1)
                 {
-                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(RogueArtifactBias));
+                    artifactBias = Game.SingletonRepository.ArtifactBiases.Get(nameof(RogueArtifactBias));
                 }
                 break;
 
@@ -2529,9 +2529,9 @@ internal sealed class Item : IComparable<Item>
                 else
                 {
                     RandomArtifactItemCharacteristics.Blows = true;
-                    if (artifactBias == null && SaveGame.DieRoll(11) == 1)
+                    if (artifactBias == null && Game.DieRoll(11) == 1)
                     {
-                        artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(WarriorArtifactBias));
+                        artifactBias = Game.SingletonRepository.ArtifactBiases.Get(nameof(WarriorArtifactBias));
                     }
                 }
                 break;
@@ -2544,13 +2544,13 @@ internal sealed class Item : IComparable<Item>
         {
             artifactBias.ApplyMiscPowers(this);
         }
-        switch (SaveGame.DieRoll(31))
+        switch (Game.DieRoll(31))
         {
             case 1:
                 RandomArtifactItemCharacteristics.SustStr = true;
                 if (artifactBias == null)
                 {
-                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(StrengthArtifactBias));
+                    artifactBias = Game.SingletonRepository.ArtifactBiases.Get(nameof(StrengthArtifactBias));
                 }
                 break;
 
@@ -2558,7 +2558,7 @@ internal sealed class Item : IComparable<Item>
                 RandomArtifactItemCharacteristics.SustInt = true;
                 if (artifactBias == null)
                 {
-                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(IntelligenceArtifactBias));
+                    artifactBias = Game.SingletonRepository.ArtifactBiases.Get(nameof(IntelligenceArtifactBias));
                 }
                 break;
 
@@ -2566,7 +2566,7 @@ internal sealed class Item : IComparable<Item>
                 RandomArtifactItemCharacteristics.SustWis = true;
                 if (artifactBias == null)
                 {
-                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(WisdomArtifactBias));
+                    artifactBias = Game.SingletonRepository.ArtifactBiases.Get(nameof(WisdomArtifactBias));
                 }
                 break;
 
@@ -2574,7 +2574,7 @@ internal sealed class Item : IComparable<Item>
                 RandomArtifactItemCharacteristics.SustDex = true;
                 if (artifactBias == null)
                 {
-                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(DexterityArtifactBias));
+                    artifactBias = Game.SingletonRepository.ArtifactBiases.Get(nameof(DexterityArtifactBias));
                 }
                 break;
 
@@ -2582,7 +2582,7 @@ internal sealed class Item : IComparable<Item>
                 RandomArtifactItemCharacteristics.SustCon = true;
                 if (artifactBias == null)
                 {
-                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(ConstitutionArtifactBias));
+                    artifactBias = Game.SingletonRepository.ArtifactBiases.Get(nameof(ConstitutionArtifactBias));
                 }
                 break;
 
@@ -2590,7 +2590,7 @@ internal sealed class Item : IComparable<Item>
                 RandomArtifactItemCharacteristics.SustCha = true;
                 if (artifactBias == null)
                 {
-                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(CharismaArtifactBias));
+                    artifactBias = Game.SingletonRepository.ArtifactBiases.Get(nameof(CharismaArtifactBias));
                 }
                 break;
 
@@ -2602,13 +2602,13 @@ internal sealed class Item : IComparable<Item>
 
             case 9:
                 RandomArtifactItemCharacteristics.HoldLife = true;
-                if (artifactBias == null && SaveGame.DieRoll(5) == 1)
+                if (artifactBias == null && Game.DieRoll(5) == 1)
                 {
-                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(PriestlyArtifactBias));
+                    artifactBias = Game.SingletonRepository.ArtifactBiases.Get(nameof(PriestlyArtifactBias));
                 }
-                else if (artifactBias == null && SaveGame.DieRoll(6) == 1)
+                else if (artifactBias == null && Game.DieRoll(6) == 1)
                 {
-                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(NecromanticArtifactBias));
+                    artifactBias = Game.SingletonRepository.ArtifactBiases.Get(nameof(NecromanticArtifactBias));
                 }
                 break;
 
@@ -2630,9 +2630,9 @@ internal sealed class Item : IComparable<Item>
 
             case 18:
                 RandomArtifactItemCharacteristics.Telepathy = true;
-                if (artifactBias == null && SaveGame.DieRoll(9) == 1)
+                if (artifactBias == null && Game.DieRoll(9) == 1)
                 {
-                    artifactBias = SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(MageArtifactBias));
+                    artifactBias = Game.SingletonRepository.ArtifactBiases.Get(nameof(MageArtifactBias));
                 }
                 break;
 
@@ -2660,7 +2660,7 @@ internal sealed class Item : IComparable<Item>
                 else
                 {
                     RandomArtifactItemCharacteristics.ShowMods = true;
-                    BonusArmorClass = 4 + SaveGame.DieRoll(11);
+                    BonusArmorClass = 4 + Game.DieRoll(11);
                 }
                 break;
 
@@ -2668,8 +2668,8 @@ internal sealed class Item : IComparable<Item>
             case 28:
             case 29:
                 RandomArtifactItemCharacteristics.ShowMods = true;
-                BonusToHit += 4 + SaveGame.DieRoll(11);
-                BonusDamage += 4 + SaveGame.DieRoll(11);
+                BonusToHit += 4 + Game.DieRoll(11);
+                BonusDamage += 4 + Game.DieRoll(11);
                 break;
 
             case 30:
@@ -2686,47 +2686,47 @@ internal sealed class Item : IComparable<Item>
     {
         if (TypeSpecificValue != 0)
         {
-            TypeSpecificValue = 0 - (TypeSpecificValue + SaveGame.DieRoll(4));
+            TypeSpecificValue = 0 - (TypeSpecificValue + Game.DieRoll(4));
         }
         if (BonusArmorClass != 0)
         {
-            BonusArmorClass = 0 - (BonusArmorClass + SaveGame.DieRoll(4));
+            BonusArmorClass = 0 - (BonusArmorClass + Game.DieRoll(4));
         }
         if (BonusToHit != 0)
         {
-            BonusToHit = 0 - (BonusToHit + SaveGame.DieRoll(4));
+            BonusToHit = 0 - (BonusToHit + Game.DieRoll(4));
         }
         if (BonusDamage != 0)
         {
-            BonusDamage = 0 - (BonusDamage + SaveGame.DieRoll(4));
+            BonusDamage = 0 - (BonusDamage + Game.DieRoll(4));
         }
         RandomArtifactItemCharacteristics.HeavyCurse = true;
         RandomArtifactItemCharacteristics.Cursed = true;
-        if (SaveGame.DieRoll(4) == 1)
+        if (Game.DieRoll(4) == 1)
         {
             RandomArtifactItemCharacteristics.PermaCurse = true;
         }
-        if (SaveGame.DieRoll(3) == 1)
+        if (Game.DieRoll(3) == 1)
         {
             RandomArtifactItemCharacteristics.DreadCurse = true;
         }
-        if (SaveGame.DieRoll(2) == 1)
+        if (Game.DieRoll(2) == 1)
         {
             RandomArtifactItemCharacteristics.Aggravate = true;
         }
-        if (SaveGame.DieRoll(3) == 1)
+        if (Game.DieRoll(3) == 1)
         {
             RandomArtifactItemCharacteristics.DrainExp = true;
         }
-        if (SaveGame.DieRoll(2) == 1)
+        if (Game.DieRoll(2) == 1)
         {
             RandomArtifactItemCharacteristics.Teleport = true;
         }
-        else if (SaveGame.DieRoll(3) == 1)
+        else if (Game.DieRoll(3) == 1)
         {
             RandomArtifactItemCharacteristics.NoTele = true;
         }
-        if (SaveGame.BaseCharacterClass.ID != CharacterClass.Warrior && SaveGame.DieRoll(3) == 1)
+        if (Game.BaseCharacterClass.ID != CharacterClass.Warrior && Game.DieRoll(3) == 1)
         {
             RandomArtifactItemCharacteristics.NoMagic = true;
         }
@@ -2735,21 +2735,21 @@ internal sealed class Item : IComparable<Item>
 
     private string GenerateRandomArtifactName()
     {
-        int testcounter = SaveGame.DieRoll(3) + 1;
+        int testcounter = Game.DieRoll(3) + 1;
         string outString = "";
-        if (SaveGame.DieRoll(3) == 2)
+        if (Game.DieRoll(3) == 2)
         {
             while (testcounter-- != 0)
             {
-                outString += SaveGame.SingletonRepository.UnreadableFlavorSyllables.ToWeightedRandom().ChooseOrDefault();
+                outString += Game.SingletonRepository.UnreadableFlavorSyllables.ToWeightedRandom().ChooseOrDefault();
             }
         }
         else
         {
-            testcounter = SaveGame.DieRoll(2) + 1;
+            testcounter = Game.DieRoll(2) + 1;
             while (testcounter-- != 0)
             {
-                outString += SaveGame.SingletonRepository.ElvishText.ToWeightedRandom().ChooseOrDefault();
+                outString += Game.SingletonRepository.ElvishText.ToWeightedRandom().ChooseOrDefault();
             }
         }
         return "'" + outString.Substring(0, 1).ToUpper() + outString.Substring(1) + "'";
@@ -2760,7 +2760,7 @@ internal sealed class Item : IComparable<Item>
         Activation type = null;
         if (artifactBias != null)
         {
-            if (SaveGame.DieRoll(100) < artifactBias.ActivationPowerChance)
+            if (Game.DieRoll(100) < artifactBias.ActivationPowerChance)
             {
                 type = artifactBias.GetActivationPowerType(this);
             }
@@ -2768,9 +2768,9 @@ internal sealed class Item : IComparable<Item>
         if (type == null)
         {
             int chance = 0;
-            while (type == null || SaveGame.DieRoll(100) >= chance)
+            while (type == null || Game.DieRoll(100) >= chance)
             {
-                type = SaveGame.SingletonRepository.Activations.ToWeightedRandom().ChooseOrDefault();
+                type = Game.SingletonRepository.Activations.ToWeightedRandom().ChooseOrDefault();
                 chance = type.RandomChance;
             }
         }
@@ -2787,17 +2787,17 @@ internal sealed class Item : IComparable<Item>
         }
         int bonus = max * level / Constants.MaxDepth;
         int extra = max * level % Constants.MaxDepth;
-        if (SaveGame.RandomLessThan(Constants.MaxDepth) < extra)
+        if (Game.RandomLessThan(Constants.MaxDepth) < extra)
         {
             bonus++;
         }
         int stand = max / 4;
         extra = max % 4;
-        if (SaveGame.RandomLessThan(4) < extra)
+        if (Game.RandomLessThan(4) < extra)
         {
             stand++;
         }
-        int value = SaveGame.RandomNormal(bonus, stand);
+        int value = Game.RandomNormal(bonus, stand);
         if (value < 0)
         {
             return 0;
@@ -2886,7 +2886,7 @@ internal sealed class Item : IComparable<Item>
         int t = 0;
         for (int i = 0; i < num; i++)
         {
-            t += SaveGame.RandomLessThan(max);
+            t += Game.RandomLessThan(max);
         }
         return t;
     }

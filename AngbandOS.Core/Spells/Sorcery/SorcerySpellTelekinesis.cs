@@ -10,10 +10,10 @@ namespace AngbandOS.Core.Spells.Sorcery;
 [Serializable]
 internal class SorcerySpellTelekinesis : Spell
 {
-    private SorcerySpellTelekinesis(SaveGame saveGame) : base(saveGame) { }
+    private SorcerySpellTelekinesis(Game game) : base(game) { }
     protected override string? CastScriptName => nameof(TelekinesisScript);
 
     public override string Name => "Telekinesis";
 
-    protected override string LearnedDetails => $"max wgt {SaveGame.ExperienceLevel.Value * 15 / 10}";
+    protected override string LearnedDetails => $"max wgt {Game.ExperienceLevel.Value * 15 / 10}";
 }

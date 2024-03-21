@@ -10,7 +10,7 @@ namespace AngbandOS.Core.CharacterClasses;
 [Serializable]
 internal class RogueCharacterClass : BaseCharacterClass
 {
-    private RogueCharacterClass(SaveGame savedGame) : base(savedGame) { }
+    private RogueCharacterClass(Game savedGame) : base(savedGame) { }
     public override int ID => 3;
     public override string Title => "Rogue";
     public override int[] AbilityBonus => new[] { 2, 1, -2, 3, 1, -1 };
@@ -75,15 +75,15 @@ internal class RogueCharacterClass : BaseCharacterClass
     public override bool DoesNotGainSpellLevelsUntilFirstSpellLevel => true;
     public override int SpellStat => Ability.Intelligence;
     public override int MaximumWeight => 30;
-    public override IArtifactBias? ArtifactBias => SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(RogueArtifactBias));
+    public override IArtifactBias? ArtifactBias => Game.SingletonRepository.ArtifactBiases.Get(nameof(RogueArtifactBias));
     public override int FromScrollWarriorArtifactBiasPercentageChance => 25;
-    public override bool SenseInventoryTest(int level) => (0 != SaveGame.RandomLessThan(20000 / ((level * level) + 40)));
+    public override bool SenseInventoryTest(int level) => (0 != Game.RandomLessThan(20000 / ((level * level) + 40)));
     public override bool DetailedSenseInventory => true;
     public override Realm[] AvailablePrimaryRealms => new Realm[] {
-        SaveGame.SingletonRepository.Realms.Get(nameof(SorceryRealm)),
-        SaveGame.SingletonRepository.Realms.Get(nameof(DeathRealm)),
-        SaveGame.SingletonRepository.Realms.Get(nameof(TarotRealm)),
-        SaveGame.SingletonRepository.Realms.Get(nameof(FolkRealm))
+        Game.SingletonRepository.Realms.Get(nameof(SorceryRealm)),
+        Game.SingletonRepository.Realms.Get(nameof(DeathRealm)),
+        Game.SingletonRepository.Realms.Get(nameof(TarotRealm)),
+        Game.SingletonRepository.Realms.Get(nameof(FolkRealm))
     };
 
     protected override string[] OutfitItemFactoryNames => new string[]
@@ -94,9 +94,9 @@ internal class RogueCharacterClass : BaseCharacterClass
 
     protected override void OutfitItem(Item item)
     {
-        if (item.Factory.CategoryEnum == ItemTypeEnum.Sword && SaveGame.Studies<DeathRealm>())
+        if (item.Factory.CategoryEnum == ItemTypeEnum.Sword && Game.Studies<DeathRealm>())
         {
-            item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(WeaponOfPoisoningRareItem));
+            item.RareItem = Game.SingletonRepository.RareItems.Get(nameof(WeaponOfPoisoningRareItem));
         }
     }
 }

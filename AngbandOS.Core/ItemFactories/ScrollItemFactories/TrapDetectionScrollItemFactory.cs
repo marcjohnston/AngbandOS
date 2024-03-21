@@ -10,9 +10,9 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class TrapDetectionScrollItemFactory : ScrollItemFactory
 {
-    private TrapDetectionScrollItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private TrapDetectionScrollItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(QuestionMarkSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(QuestionMarkSymbol));
     public override string Name => "Trap Detection";
 
     public override int[] Chance => new int[] { 1, 1, 0, 0 };
@@ -24,10 +24,10 @@ internal class TrapDetectionScrollItemFactory : ScrollItemFactory
 
     public override void Read(ReadScrollEvent eventArgs)
     {
-        if (SaveGame.DetectTraps())
+        if (Game.DetectTraps())
         {
             eventArgs.Identified = true;
         }
     }
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

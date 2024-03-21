@@ -10,13 +10,13 @@ namespace AngbandOS.Core.Projection;
 [Serializable]
 internal class TeleportAwayUndeadProjectile : Projectile
 {
-    private TeleportAwayUndeadProjectile(SaveGame saveGame) : base(saveGame) { }
+    private TeleportAwayUndeadProjectile(Game game) : base(game) { }
 
-    protected override ProjectileGraphic? BoltProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get(nameof(PinkBulletProjectileGraphic));
+    protected override ProjectileGraphic? BoltProjectileGraphic => Game.SingletonRepository.ProjectileGraphics.Get(nameof(PinkBulletProjectileGraphic));
 
-    protected override Animation EffectAnimation => SaveGame.SingletonRepository.Animations.Get(nameof(PinkSwirlAnimation));
+    protected override Animation EffectAnimation => Game.SingletonRepository.Animations.Get(nameof(PinkSwirlAnimation));
 
-    protected override ProjectileGraphic? ImpactProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get(nameof(PinkBulletProjectileGraphic));
+    protected override ProjectileGraphic? ImpactProjectileGraphic => Game.SingletonRepository.ProjectileGraphics.Get(nameof(PinkBulletProjectileGraphic));
 
     protected override bool ProjectileAngersMonster(Monster mPtr)
     {
@@ -45,7 +45,7 @@ internal class TeleportAwayUndeadProjectile : Projectile
                     note = " is unaffected!";
                     resistsTele = true;
                 }
-                else if (rPtr.Level > SaveGame.DieRoll(100))
+                else if (rPtr.Level > Game.DieRoll(100))
                 {
                     if (seen)
                     {
@@ -84,7 +84,7 @@ internal class TeleportAwayUndeadProjectile : Projectile
                 obvious = true;
             }
             note = " disappears!";
-            mPtr.TeleportAway(SaveGame, doDist);
+            mPtr.TeleportAway(Game, doDist);
         }
         ApplyProjectileDamageToMonster(who, mPtr, dam, note);
         return obvious;

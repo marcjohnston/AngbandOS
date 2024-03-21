@@ -10,5 +10,5 @@ namespace AngbandOS.Core.Properties;
 [Serializable]
 internal class SpareSpellSlotsIntProperty : IntProperty
 {
-    protected SpareSpellSlotsIntProperty(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    protected SpareSpellSlotsIntProperty(Game game) : base(game) { } // This object is a singleton.
 }

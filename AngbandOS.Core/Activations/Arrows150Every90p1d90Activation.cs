@@ -13,16 +13,16 @@ namespace AngbandOS.Core.Activations;
 [Serializable]
 internal class Arrows150Every90p1d90Activation : DirectionalActivation
 {
-    private Arrows150Every90p1d90Activation(SaveGame saveGame) : base(saveGame) { }
+    private Arrows150Every90p1d90Activation(Game game) : base(game) { }
     public override int RandomChance => 66;
 
     public override string? PreActivationMessage => "Your {0} grows magical spikes...";
 
-    public override int RechargeTime() => SaveGame.RandomLessThan(90) + 90;
+    public override int RechargeTime() => Game.RandomLessThan(90) + 90;
 
     protected override bool Activate(int direction)
     {
-        SaveGame.FireBolt(SaveGame.SingletonRepository.Projectiles.Get(nameof(ArrowProjectile)), direction, 150);
+        Game.FireBolt(Game.SingletonRepository.Projectiles.Get(nameof(ArrowProjectile)), direction, 150);
         return true;
     }
 

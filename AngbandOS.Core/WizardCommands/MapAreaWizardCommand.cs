@@ -10,7 +10,7 @@ namespace AngbandOS.Core.WizardCommands;
 [Serializable]
 internal class MapAreaWizardCommand : WizardCommand
 {
-    private MapAreaWizardCommand(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private MapAreaWizardCommand(Game game) : base(game) { } // This object is a singleton.
 
     public override char KeyChar => 'm';
 

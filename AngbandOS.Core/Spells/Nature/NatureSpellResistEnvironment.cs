@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Spells.Nature;
 [Serializable]
 internal class NatureSpellResistEnvironment : Spell
 {
-    private NatureSpellResistEnvironment(SaveGame saveGame) : base(saveGame) { }
+    private NatureSpellResistEnvironment(Game game) : base(game) { }
     protected override string? CastScriptName => nameof(ResistEnvironmentScript);
 
     public override string Name => "Resist Environment";

@@ -10,18 +10,18 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class IronHelmTerrorMaskFixedArtifact : FixedArtifact
 {
-    private IronHelmTerrorMaskFixedArtifact(SaveGame saveGame) : base(saveGame) { }
+    private IronHelmTerrorMaskFixedArtifact(Game game) : base(game) { }
 
     protected override string BaseItemFactoryName => nameof(IronHelmArmorItemFactory);
 
     public override void ApplyResistances(Item item)
     {
-        if (SaveGame.BaseCharacterClass.ID == CharacterClass.Warrior)
+        if (Game.BaseCharacterClass.ID == CharacterClass.Warrior)
         {
-            item.RandomPower = SaveGame.SingletonRepository.Powers.ToWeightedRandom(_power => _power.IsAbility == true).Choose();
+            item.RandomPower = Game.SingletonRepository.Powers.ToWeightedRandom(_power => _power.IsAbility == true).Choose();
 
             IArtifactBias artifactBias = null;
-            item.ApplyRandomResistance(ref artifactBias, SaveGame.DieRoll(22) + 16);
+            item.ApplyRandomResistance(ref artifactBias, Game.DieRoll(22) + 16);
         }
         else
         {

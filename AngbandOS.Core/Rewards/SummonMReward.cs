@@ -10,14 +10,14 @@ namespace AngbandOS.Core.Rewards;
 [Serializable]
 internal class SummonMReward : Reward
 {
-    private SummonMReward(SaveGame saveGame) : base(saveGame) { }
+    private SummonMReward(Game game) : base(game) { }
     public override void GetReward(Patron patron)
     {
-        SaveGame.MsgPrint($"The voice of {patron.ShortName} booms out:");
-        SaveGame.MsgPrint("'My pets, destroy the arrogant mortal!'");
-        for (int dummy = 0; dummy < SaveGame.DieRoll(5) + 1; dummy++)
+        Game.MsgPrint($"The voice of {patron.ShortName} booms out:");
+        Game.MsgPrint("'My pets, destroy the arrogant mortal!'");
+        for (int dummy = 0; dummy < Game.DieRoll(5) + 1; dummy++)
         {
-            SaveGame.SummonSpecific(SaveGame.MapY, SaveGame.MapX, SaveGame.Difficulty, null);
+            Game.SummonSpecific(Game.MapY, Game.MapX, Game.Difficulty, null);
         }
     }
 }

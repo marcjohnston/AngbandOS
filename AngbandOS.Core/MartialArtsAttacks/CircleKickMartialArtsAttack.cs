@@ -16,5 +16,5 @@ internal class CircleKickMartialArtsAttack : MartialArtsAttack
     public override int Ds => 8;
     public override int Effect => 10;
     public override int MinLevel => 33;
-    private CircleKickMartialArtsAttack(SaveGame saveGame) : base(saveGame) { }
+    private CircleKickMartialArtsAttack(Game game) : base(game) { }
 }

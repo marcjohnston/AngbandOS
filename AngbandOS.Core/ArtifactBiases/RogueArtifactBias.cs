@@ -10,13 +10,13 @@ namespace AngbandOS.Core.ArtifactBiases;
 [Serializable]
 internal class RogueArtifactBias : ArtifactBias
 {
-    private RogueArtifactBias(SaveGame saveGame) : base(saveGame) { }
+    private RogueArtifactBias(Game game) : base(game) { }
     public override bool ApplyBonuses(Item item)
     {
         if (!item.RandomArtifactItemCharacteristics.Stealth)
         {
             item.RandomArtifactItemCharacteristics.Stealth = true;
-            if (SaveGame.DieRoll(2) == 1)
+            if (Game.DieRoll(2) == 1)
             {
                 return true;
             }
@@ -31,7 +31,7 @@ internal class RogueArtifactBias : ArtifactBias
             if (!item.RandomArtifactItemCharacteristics.BrandPois)
             {
                 item.RandomArtifactItemCharacteristics.BrandPois = true;
-                if (SaveGame.DieRoll(2) == 1)
+                if (Game.DieRoll(2) == 1)
                 {
                     return true;
                 }
@@ -42,25 +42,25 @@ internal class RogueArtifactBias : ArtifactBias
 
     public override Activation GetActivationPowerType(Item item)
     {
-        if (SaveGame.DieRoll(50) == 1)
+        if (Game.DieRoll(50) == 1)
         {
-            return SaveGame.SingletonRepository.Activations.Get(nameof(Speed20p1d20Every250Activation));
+            return Game.SingletonRepository.Activations.Get(nameof(Speed20p1d20Every250Activation));
         }
-        else if (SaveGame.DieRoll(4) == 1)
+        else if (Game.DieRoll(4) == 1)
         {
-            return SaveGame.SingletonRepository.Activations.Get(nameof(SleepActivation));
+            return Game.SingletonRepository.Activations.Get(nameof(SleepActivation));
         }
-        else if (SaveGame.DieRoll(3) == 1)
+        else if (Game.DieRoll(3) == 1)
         {
-            return SaveGame.SingletonRepository.Activations.Get(nameof(DetectionEvery55p1d55Activation));
+            return Game.SingletonRepository.Activations.Get(nameof(DetectionEvery55p1d55Activation));
         }
-        else if (SaveGame.DieRoll(8) == 1)
+        else if (Game.DieRoll(8) == 1)
         {
-            return SaveGame.SingletonRepository.Activations.Get(nameof(IdentifyFullyEvery750Activation));
+            return Game.SingletonRepository.Activations.Get(nameof(IdentifyFullyEvery750Activation));
         }
         else
         {
-            return SaveGame.SingletonRepository.Activations.Get(nameof(IdentifyItemScript));
+            return Game.SingletonRepository.Activations.Get(nameof(IdentifyItemScript));
         }
     }
 }

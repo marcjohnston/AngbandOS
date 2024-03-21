@@ -10,10 +10,10 @@ namespace AngbandOS.Core.Races;
 [Serializable]
 internal abstract class Race : IGetKey
 {
-    protected readonly SaveGame SaveGame;
-    protected Race(SaveGame saveGame)
+    protected readonly Game Game;
+    protected Race(Game game)
     {
-        SaveGame = saveGame;
+        Game = game;
     }
 
     /// <summary>
@@ -69,7 +69,7 @@ internal abstract class Race : IGetKey
     public abstract string Description { get; }
 
     /// <summary>
-    /// Returns the PlayerHistory (SaveGame._backgroundTable) group used to produce the backstory fragments that are joined together on character generation.  Returns
+    /// Returns the PlayerHistory (Game._backgroundTable) group used to produce the backstory fragments that are joined together on character generation.  Returns
     /// default argument values for races that do not have mutant powers.
     /// </summary>
     public abstract int Chart { get; }
@@ -100,9 +100,9 @@ internal abstract class Race : IGetKey
         string name = "";
         do
         {
-            name = syllables.BeginningSyllables[SaveGame.RandomLessThan(syllables.BeginningSyllables.Length)];
-            name += syllables.MiddleSyllables[SaveGame.RandomLessThan(syllables.MiddleSyllables.Length)];
-            name += syllables.EndingSyllables[SaveGame.RandomLessThan(syllables.EndingSyllables.Length)];
+            name = syllables.BeginningSyllables[Game.RandomLessThan(syllables.BeginningSyllables.Length)];
+            name += syllables.MiddleSyllables[Game.RandomLessThan(syllables.MiddleSyllables.Length)];
+            name += syllables.EndingSyllables[Game.RandomLessThan(syllables.EndingSyllables.Length)];
         } while (name.Length > 12);
 
         return name;
@@ -148,18 +148,18 @@ internal abstract class Race : IGetKey
     /// <summary>
     /// Allow the race to consume food.  The full value of the food item is gained, by default.
     /// </summary>
-    /// <param name="saveGame"></param>
+    /// <param name="game"></param>
     /// <param name="item"></param>
     public virtual void Eat(Item item)
     {
         // Everyone else gets the full value
-        SaveGame.SetFood(SaveGame.Food.Value + item.TypeSpecificValue);
+        Game.SetFood(Game.Food.Value + item.TypeSpecificValue);
     }
 
     /// <summary>
     /// Allow the race to quaff a potion.  Does nothing by default.  Skeletons are messy drinkers.
     /// </summary>
-    /// <param name="saveGame"></param>
+    /// <param name="game"></param>
     /// <param name="item"></param>
     public virtual void Quaff(PotionItemFactory potion)
     {
@@ -190,8 +190,8 @@ internal abstract class Race : IGetKey
     public virtual void UseRacialPower()
     {
         // Other races don't have powers
-        SaveGame.MsgPrint("This race has no bonus power.");
-        SaveGame.EnergyUse = 0;
+        Game.MsgPrint("This race has no bonus power.");
+        Game.EnergyUse = 0;
     }
 
     /// <summary>

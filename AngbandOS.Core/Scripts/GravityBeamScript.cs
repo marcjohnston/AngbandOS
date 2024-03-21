@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class GravityBeamScript : Script, IScript
 {
-    private GravityBeamScript(SaveGame saveGame) : base(saveGame) { }
+    private GravityBeamScript(Game game) : base(game) { }
 
     /// <summary>
     /// Fires beam of gravity in a chosen direction.
@@ -18,10 +18,10 @@ internal class GravityBeamScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        if (!SaveGame.GetDirectionWithAim(out int dir))
+        if (!Game.GetDirectionWithAim(out int dir))
         {
             return;
         }
-        SaveGame.FireBeam(SaveGame.SingletonRepository.Projectiles.Get(nameof(GravityProjectile)), dir, SaveGame.DiceRoll(9 + ((SaveGame.ExperienceLevel.Value - 5) / 4), 8));
+        Game.FireBeam(Game.SingletonRepository.Projectiles.Get(nameof(GravityProjectile)), dir, Game.DiceRoll(9 + ((Game.ExperienceLevel.Value - 5) / 4), 8));
     }
 }

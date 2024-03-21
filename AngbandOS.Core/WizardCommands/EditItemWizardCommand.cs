@@ -10,7 +10,7 @@ namespace AngbandOS.Core.WizardCommands;
 [Serializable]
 internal class EditItemWizardCommand : WizardCommand
 {
-    private EditItemWizardCommand(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private EditItemWizardCommand(Game game) : base(game) { } // This object is a singleton.
 
     public override char KeyChar => 'I';
 

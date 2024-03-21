@@ -10,19 +10,19 @@ namespace AngbandOS.Core.ChestTraps;
 [Serializable]
 internal class PoisonChestTrap : ChestTrap
 {
-    private PoisonChestTrap(SaveGame saveGame) : base(saveGame) { }
+    private PoisonChestTrap(Game game) : base(game) { }
     public override void Activate(ActivateChestTrapEventArgs eventArgs)
     {
-        SaveGame.MsgPrint("A puff of green gas surrounds you!");
-        if (!(SaveGame.HasPoisonResistance || SaveGame.PoisonResistanceTimer.Value != 0))
+        Game.MsgPrint("A puff of green gas surrounds you!");
+        if (!(Game.HasPoisonResistance || Game.PoisonResistanceTimer.Value != 0))
         {
-            if (SaveGame.DieRoll(10) <= SaveGame.SingletonRepository.Gods.Get(nameof(HagargRyonisGod)).AdjustedFavour)
+            if (Game.DieRoll(10) <= Game.SingletonRepository.Gods.Get(nameof(HagargRyonisGod)).AdjustedFavour)
             {
-                SaveGame.MsgPrint("Hagarg Ryonis's favour protects you!");
+                Game.MsgPrint("Hagarg Ryonis's favour protects you!");
             }
             else
             {
-                SaveGame.PoisonTimer.AddTimer(10 + SaveGame.DieRoll(20));
+                Game.PoisonTimer.AddTimer(10 + Game.DieRoll(20));
             }
         }
     }

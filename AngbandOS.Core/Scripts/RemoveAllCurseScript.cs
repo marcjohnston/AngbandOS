@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class RemoveAllCurseScript : Script, IScript
 {
-    private RemoveAllCurseScript(SaveGame saveGame) : base(saveGame) { }
+    private RemoveAllCurseScript(Game game) : base(game) { }
 
     /// <summary>
     /// Removes a curse from all items including heavy curses.
@@ -18,6 +18,6 @@ internal class RemoveAllCurseScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        SaveGame.RemoveCurseAux(true);
+        Game.RemoveCurseAux(true);
     }
 }

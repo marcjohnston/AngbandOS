@@ -10,7 +10,7 @@ namespace AngbandOS.Core.ItemFilters;
 [Serializable]
 internal abstract class ItemFilter<TItemFactory> : AllItemsItemFilter where TItemFactory : ItemFactory
 {
-    protected ItemFilter(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    protected ItemFilter(Game game) : base(game) { } // This object is a singleton.
     public virtual string? ItemFactoryName => null;
     public override bool ItemMatches(Item item)
     {

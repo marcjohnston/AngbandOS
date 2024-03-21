@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Spells.Nature;
 [Serializable]
 internal class NatureSpellHerbalHealing : Spell
 {
-    private NatureSpellHerbalHealing(SaveGame saveGame) : base(saveGame) { }
+    private NatureSpellHerbalHealing(Game game) : base(game) { }
     protected override string? CastScriptName => nameof(HerbalHealingScript);
 
     public override string Name => "Herbal Healing";

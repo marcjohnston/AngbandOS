@@ -10,15 +10,15 @@ namespace AngbandOS.Core.Projection;
 [Serializable]
 internal class ElecProjectile : Projectile
 {
-    private ElecProjectile(SaveGame saveGame) : base(saveGame) { }
+    private ElecProjectile(Game game) : base(game) { }
 
-    protected override ProjectileGraphic? BoltProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get(nameof(BrightYellowBoltProjectileGraphic));
+    protected override ProjectileGraphic? BoltProjectileGraphic => Game.SingletonRepository.ProjectileGraphics.Get(nameof(BrightYellowBoltProjectileGraphic));
 
-    protected override Animation EffectAnimation => SaveGame.SingletonRepository.Animations.Get(nameof(BrightYellowCloudAnimation));
+    protected override Animation EffectAnimation => Game.SingletonRepository.Animations.Get(nameof(BrightYellowCloudAnimation));
 
     protected override bool AffectItem(int who, int y, int x)
     {
-        GridTile cPtr = SaveGame.Grid[y][x];
+        GridTile cPtr = Game.Grid[y][x];
         bool obvious = false;
         string oName = "";
         foreach (Item oPtr in cPtr.Items)
@@ -57,22 +57,22 @@ internal class ElecProjectile : Projectile
                     continue;
                 }
                 string s = plural ? "are" : "is";
-                SaveGame.MsgPrint($"The {oName} {s} unaffected!");
+                Game.MsgPrint($"The {oName} {s} unaffected!");
             }
             else
             {
                 if (oPtr.Marked && string.IsNullOrEmpty(noteKill))
                 {
-                    SaveGame.MsgPrint($"The {oName}{noteKill}");
+                    Game.MsgPrint($"The {oName}{noteKill}");
                 }
                 bool isPotion = oPtr.Factory.CategoryEnum == ItemTypeEnum.Potion;
-                SaveGame.DeleteObject(oPtr);
+                Game.DeleteObject(oPtr);
                 if (isPotion)
                 {
                     PotionItemFactory potion = (PotionItemFactory)oPtr.Factory;
                     potion.Smash(who, y, x);
                 }
-                SaveGame.RedrawSingleLocation(y, x);
+                Game.RedrawSingleLocation(y, x);
             }
         }
         return obvious;
@@ -103,19 +103,19 @@ internal class ElecProjectile : Projectile
 
     protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
     {
-        bool blind = SaveGame.BlindnessTimer.Value != 0;
+        bool blind = Game.BlindnessTimer.Value != 0;
         if (dam > 1600)
         {
             dam = 1600;
         }
         dam = (dam + r) / (r + 1);
-        Monster mPtr = SaveGame.Monsters[who];
+        Monster mPtr = Game.Monsters[who];
         string killer = mPtr.IndefiniteVisibleName;
         if (blind)
         {
-            SaveGame.MsgPrint("You are hit by lightning!");
+            Game.MsgPrint("You are hit by lightning!");
         }
-        SaveGame.ElecDam(dam, killer);
+        Game.ElecDam(dam, killer);
         return true;
     }
 }

@@ -10,7 +10,7 @@ namespace AngbandOS.Core.MonsterRaces;
 [Serializable]
 internal class MasterRogueMonsterRace : MonsterRace
 {
-    protected MasterRogueMonsterRace(SaveGame saveGame) : base(saveGame) { }
+    protected MasterRogueMonsterRace(Game game) : base(game) { }
 
     protected override string SymbolName => nameof(LowerPSymbol);
     public override ColorEnum Color => ColorEnum.Black;

@@ -13,7 +13,7 @@ namespace AngbandOS.Core.Activations;
 [Serializable]
 internal class DrainLife120Every400Activation : DirectionalActivation
 {
-    private DrainLife120Every400Activation(SaveGame saveGame) : base(saveGame) { }
+    private DrainLife120Every400Activation(Game game) : base(game) { }
     public override int RandomChance => 66;
 
     public override string? PreActivationMessage => "Your {0} glows black...";
@@ -22,7 +22,7 @@ internal class DrainLife120Every400Activation : DirectionalActivation
 
     protected override bool Activate(int direction)
     {
-        SaveGame.DrainLife(direction, 120);
+        Game.DrainLife(direction, 120);
         return true;
     }
 

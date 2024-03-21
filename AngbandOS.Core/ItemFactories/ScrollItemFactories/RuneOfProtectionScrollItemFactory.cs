@@ -10,9 +10,9 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class RuneOfProtectionScrollItemFactory : ScrollItemFactory
 {
-    private RuneOfProtectionScrollItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private RuneOfProtectionScrollItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(QuestionMarkSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(QuestionMarkSymbol));
     public override string Name => "Rune of Protection";
 
     public override int[] Chance => new int[] { 2, 4, 0, 0 };
@@ -24,8 +24,8 @@ internal class RuneOfProtectionScrollItemFactory : ScrollItemFactory
 
     public override void Read(ReadScrollEvent eventArgs)
     {
-        SaveGame.RunScript(nameof(ElderSignScript));
+        Game.RunScript(nameof(ElderSignScript));
         eventArgs.Identified = true;
     }
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

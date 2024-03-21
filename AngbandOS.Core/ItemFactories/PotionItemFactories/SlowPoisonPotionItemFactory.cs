@@ -10,9 +10,9 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class SlowPoisonPotionItemFactory : PotionItemFactory
 {
-    private SlowPoisonPotionItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private SlowPoisonPotionItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(ExclamationPointSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(ExclamationPointSymbol));
     public override string Name => "Slow Poison";
 
     public override int[] Chance => new int[] { 1, 0, 0, 0 };
@@ -26,7 +26,7 @@ internal class SlowPoisonPotionItemFactory : PotionItemFactory
     public override bool Quaff()
     {
         // Slow poison halves the remaining duration of any poison you have
-        return SaveGame.PoisonTimer.SetTimer(SaveGame.PoisonTimer.Value / 2);
+        return Game.PoisonTimer.SetTimer(Game.PoisonTimer.Value / 2);
     }
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

@@ -8,7 +8,7 @@
 [Serializable]
 internal class OlvarBookwormShopkeeper : Shopkeeper
 {
-    private OlvarBookwormShopkeeper(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private OlvarBookwormShopkeeper(Game game) : base(game) { } // This object is a singleton.
     public override string Name => "Olvar Bookworm";
     public override int MaxCost =>  20000;
     public override int MinInflate =>  105;

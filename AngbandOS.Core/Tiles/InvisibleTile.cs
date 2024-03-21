@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Tiles;
 [Serializable]
 internal class InvisibleTile : Tile
 {
-    private InvisibleTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private InvisibleTile(Game game) : base(game) { } // This object is a singleton.
     protected override string SymbolName => nameof(PeriodSymbol);
     public override string Description => "invisible trap";
     public override bool DimsOutsideLOS => true;

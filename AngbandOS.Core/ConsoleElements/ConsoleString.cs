@@ -49,15 +49,15 @@ internal class ConsoleString : ConsoleElement, IEnumerable<ConsoleChar>
         return characters.GetEnumerator();
     }
 
-    public override void Render(SaveGame saveGame, ConsoleWindow containerWindow, ConsoleAlignment parentAlignment)
+    public override void Render(Game game, ConsoleWindow containerWindow, ConsoleAlignment parentAlignment)
     {
         ConsoleAlignment alignment = Alignment ?? parentAlignment;
         ConsoleLocation location = alignment.ComputeTopLeftLocation(this, containerWindow);
-        location.ToWindow(Width, Height).Clear(saveGame, ColorEnum.Background);
+        location.ToWindow(Width, Height).Clear(game, ColorEnum.Background);
 
         foreach (ConsoleChar consoleChar in characters)
         {
-            consoleChar.Render(saveGame, location.ToWindow(consoleChar.Width, consoleChar.Height), alignment);
+            consoleChar.Render(game, location.ToWindow(consoleChar.Width, consoleChar.Height), alignment);
             location = location.Offset(1, 0);
         }
     }

@@ -10,15 +10,15 @@ namespace AngbandOS.Core.AttackEffects;
 [Serializable]
 internal class EatLightAttackEffect : AttackEffect
 {
-    private EatLightAttackEffect(SaveGame saveGame) : base(saveGame) { }
+    private EatLightAttackEffect(Game game) : base(game) { }
     public override int Power => 5;
     public override string Description => "absorb light";
     public override void ApplyToPlayer(int monsterLevel, int monsterIndex, int armorClass, string monsterDescription, Monster monster, ref bool obvious, ref int damage, ref bool blinked)
     {
-        SaveGame.TakeHit(damage, monsterDescription);
+        Game.TakeHit(damage, monsterDescription);
 
         // Choose an inventory slot for lights.
-        BaseInventorySlot? chosenLightSourceInventorySlot = SaveGame.SingletonRepository.InventorySlots.ToWeightedRandom(inventorySlot => inventorySlot.ProvidesLight).ChooseOrDefault();
+        BaseInventorySlot? chosenLightSourceInventorySlot = Game.SingletonRepository.InventorySlots.ToWeightedRandom(inventorySlot => inventorySlot.ProvidesLight).ChooseOrDefault();
 
         // Check to see if there are no slots.
         if (chosenLightSourceInventorySlot == null)
@@ -34,7 +34,7 @@ internal class EatLightAttackEffect : AttackEffect
             return;
         }
 
-        Item? item = SaveGame.GetInventoryItem(i.Value);
+        Item? item = Game.GetInventoryItem(i.Value);
         if (item == null)
         {
             return;
@@ -43,14 +43,14 @@ internal class EatLightAttackEffect : AttackEffect
         // Only dim lights that consume fuel
         if (item.TypeSpecificValue > 0 && item.FixedArtifact == null)
         {
-            item.TypeSpecificValue -= 250 + SaveGame.DieRoll(250);
+            item.TypeSpecificValue -= 250 + Game.DieRoll(250);
             if (item.TypeSpecificValue < 1)
             {
                 item.TypeSpecificValue = 1;
             }
-            if (SaveGame.BlindnessTimer.Value == 0)
+            if (Game.BlindnessTimer.Value == 0)
             {
-                SaveGame.MsgPrint("Your light dims.");
+                Game.MsgPrint("Your light dims.");
                 obvious = true;
             }
         }

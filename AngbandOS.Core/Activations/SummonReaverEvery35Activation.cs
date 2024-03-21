@@ -13,17 +13,17 @@ namespace AngbandOS.Core.Activations;
 [Serializable]
 internal class SummonReaverEvery500p1d500Activation : Activation
 {
-    private SummonReaverEvery500p1d500Activation(SaveGame saveGame) : base(saveGame) { }
+    private SummonReaverEvery500p1d500Activation(Game game) : base(game) { }
     public override string? PreActivationMessage => "Your {0} flickers black for a moment...";
     public override int RandomChance => 20;
 
     protected override bool OnActivate(Item item)
     {
-        SaveGame.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, SaveGame.Difficulty, SaveGame.SingletonRepository.MonsterFilters.Get(nameof(ReaverMonsterFilter)), true);
+        Game.SummonSpecificFriendly(Game.MapY, Game.MapX, Game.Difficulty, Game.SingletonRepository.MonsterFilters.Get(nameof(ReaverMonsterFilter)), true);
         return true;
     }
 
-    public override int RechargeTime() => 500 + SaveGame.DieRoll(500);
+    public override int RechargeTime() => 500 + Game.DieRoll(500);
 
     public override int Value => 10000;
 

@@ -10,5 +10,5 @@ namespace AngbandOS.Core.Repositories;
 [Serializable]
 internal class ActivationsRepository : DictionaryRepository<Activation>
 {
-    public ActivationsRepository(SaveGame saveGame) : base(saveGame) { }
+    public ActivationsRepository(Game game) : base(game) { }
 }

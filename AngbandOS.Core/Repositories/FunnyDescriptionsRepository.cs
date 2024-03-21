@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Repositories;
 [Serializable]
 internal class FunnyDescriptionsRepository : StringListRepository
 {
-    public FunnyDescriptionsRepository(SaveGame saveGame) : base(saveGame) { }
+    public FunnyDescriptionsRepository(Game game) : base(game) { }
 
     /// <summary>
     /// Returns FunnyDescriptions as the name of this string list repository.
@@ -19,7 +19,7 @@ internal class FunnyDescriptionsRepository : StringListRepository
 
     public override void Load()
     {
-        if (SaveGame.Configuration.FunnyDescriptions == null)
+        if (Game.Configuration.FunnyDescriptions == null)
         {
             Add("silly", "hilarious", "absurd", "insipid", "ridiculous", "laughable", "ludicrous", "far-out", "groovy",
                 "postmodern", "fantastic", "dadaistic", "cubistic", "cosmic", "awesome", "incomprehensible", "fabulous",
@@ -27,7 +27,7 @@ internal class FunnyDescriptionsRepository : StringListRepository
         }
         else
         {
-            Add(SaveGame.Configuration.FunnyDescriptions);
+            Add(Game.Configuration.FunnyDescriptions);
         }
     }
 }

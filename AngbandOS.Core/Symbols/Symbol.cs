@@ -5,10 +5,10 @@ namespace AngbandOS.Core.Symbols;
 [Serializable]
 internal abstract class Symbol : IGetKey
 {
-    protected readonly SaveGame SaveGame;
-    protected Symbol(SaveGame saveGame)
+    protected readonly Game Game;
+    protected Symbol(Game game)
     {
-        SaveGame = saveGame;
+        Game = game;
     }
     
     public abstract char Character { get; }

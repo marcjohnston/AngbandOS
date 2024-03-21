@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Animations;
 [Serializable]
 internal class DiamondSwirlAnimation : Animation
 {
-    private DiamondSwirlAnimation(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private DiamondSwirlAnimation(Game game) : base(game) { } // This object is a singleton.
     public override char Character => '*';
     public override ColorEnum Color => ColorEnum.Diamond;
     public override string Name => "DiamondSwirl";

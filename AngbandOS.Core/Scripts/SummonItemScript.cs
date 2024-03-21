@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class SummonItemScript : Script, IScript
 {
-    private SummonItemScript(SaveGame saveGame) : base(saveGame) { }
+    private SummonItemScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script.
@@ -18,10 +18,10 @@ internal class SummonItemScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        if (!SaveGame.GetDirectionWithAim(out int dir))
+        if (!Game.GetDirectionWithAim(out int dir))
         {
             return;
         }
-        SaveGame.SummonItem(dir, SaveGame.ExperienceLevel.Value * 15, true);
+        Game.SummonItem(dir, Game.ExperienceLevel.Value * 15, true);
     }
 }

@@ -3,6 +3,6 @@ namespace AngbandOS.Core.ItemClasses;
 [Serializable]
 internal class FlasksItemClass : ItemClass
 {
-    private FlasksItemClass(SaveGame saveGame) : base(saveGame) { }
+    private FlasksItemClass(Game game) : base(game) { }
     public override string Name => "Flask";
 }

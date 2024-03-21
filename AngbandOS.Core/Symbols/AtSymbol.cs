@@ -3,7 +3,7 @@
 [Serializable]
 internal class AtSymbol : Symbol
 {
-    private AtSymbol(SaveGame saveGame) : base(saveGame) { }
+    private AtSymbol(Game game) : base(game) { }
     public override char Character => '@';
     public override string Name => "You (or the entrance to your home)";
 }

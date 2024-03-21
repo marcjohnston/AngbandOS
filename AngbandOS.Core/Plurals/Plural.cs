@@ -4,10 +4,10 @@ namespace AngbandOS.Core.Plurals;
 [Serializable]
 internal abstract class Plural : IGetKey
 {
-    protected readonly SaveGame SaveGame;
-    protected Plural(SaveGame saveGame)
+    protected readonly Game Game;
+    protected Plural(Game game)
     {
-        SaveGame = saveGame;
+        Game = game;
     }
 
     /// <summary>

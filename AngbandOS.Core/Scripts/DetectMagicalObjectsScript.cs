@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class DetectMagicalObjectsScript : Script, IScript
 {
-    private DetectMagicalObjectsScript(SaveGame saveGame) : base(saveGame) { }
+    private DetectMagicalObjectsScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script.
@@ -19,14 +19,14 @@ internal class DetectMagicalObjectsScript : Script, IScript
     public void ExecuteScript()
     {
         bool detect = false;
-        for (int y = 1; y < SaveGame.CurHgt - 1; y++)
+        for (int y = 1; y < Game.CurHgt - 1; y++)
         {
-            for (int x = 1; x < SaveGame.CurWid - 1; x++)
+            for (int x = 1; x < Game.CurWid - 1; x++)
             {
-                GridTile cPtr = SaveGame.Grid[y][x];
+                GridTile cPtr = Game.Grid[y][x];
                 foreach (Item oPtr in cPtr.Items)
                 {
-                    if (!SaveGame.PanelContains(y, x))
+                    if (!Game.PanelContains(y, x))
                     {
                         continue;
                     }
@@ -40,7 +40,7 @@ internal class DetectMagicalObjectsScript : Script, IScript
                         oPtr.BonusArmorClass > 0 || oPtr.BonusToHit + oPtr.BonusDamage > 0)
                     {
                         oPtr.Marked = true;
-                        SaveGame.RedrawSingleLocation(y, x);
+                        Game.RedrawSingleLocation(y, x);
                         detect = true;
                     }
                 }
@@ -48,7 +48,7 @@ internal class DetectMagicalObjectsScript : Script, IScript
         }
         if (detect)
         {
-            SaveGame.MsgPrint("You sense the presence of magic objects!");
+            Game.MsgPrint("You sense the presence of magic objects!");
         }
     }
 }

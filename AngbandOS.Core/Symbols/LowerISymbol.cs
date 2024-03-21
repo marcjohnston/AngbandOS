@@ -1,7 +1,7 @@
 [Serializable]
 internal class LowerISymbol : Symbol
 {
-    private LowerISymbol(SaveGame saveGame) : base(saveGame) { }
+    private LowerISymbol(Game game) : base(game) { }
     public override char Character => 'i';
     public override string Name => "Icky Thing";
 }

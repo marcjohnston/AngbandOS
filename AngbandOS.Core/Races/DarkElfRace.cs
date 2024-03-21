@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Races;
 [Serializable]
 internal class DarkElfRace : Race
 {
-    private DarkElfRace(SaveGame saveGame) : base(saveGame) { }
+    private DarkElfRace(Game game) : base(game) { }
     public override string Title => "Dark Elf";
     public override int[] AbilityBonus => new int[] { -1, 3, 2, 2, -2, 1 };
     public override int BaseDisarmBonus => 5;
@@ -60,22 +60,22 @@ internal class DarkElfRace : Race
     }
     public override void CalcBonuses()
     {
-        SaveGame.HasDarkResistance = true;
-        if (SaveGame.ExperienceLevel.Value > 19)
+        Game.HasDarkResistance = true;
+        if (Game.ExperienceLevel.Value > 19)
         {
-            SaveGame.HasSeeInvisibility = true;
+            Game.HasSeeInvisibility = true;
         }
     }
 
     public override void UseRacialPower()
     {
         // Dark elves can cast magic missile
-        if (SaveGame.CheckIfRacialPowerWorks(2, 2, Ability.Intelligence, 9))
+        if (Game.CheckIfRacialPowerWorks(2, 2, Ability.Intelligence, 9))
         {
-            if (SaveGame.GetDirectionWithAim(out int direction))
+            if (Game.GetDirectionWithAim(out int direction))
             {
-                SaveGame.MsgPrint("You cast a magic missile.");
-                SaveGame.FireBoltOrBeam(10, SaveGame.SingletonRepository.Projectiles.Get(nameof(MissileProjectile)), direction, SaveGame.DiceRoll(3 + ((SaveGame.ExperienceLevel.Value - 1) / 5), 4));
+                Game.MsgPrint("You cast a magic missile.");
+                Game.FireBoltOrBeam(10, Game.SingletonRepository.Projectiles.Get(nameof(MissileProjectile)), direction, Game.DiceRoll(3 + ((Game.ExperienceLevel.Value - 1) / 5), 4));
             }
         }
     }

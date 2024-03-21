@@ -10,10 +10,10 @@ namespace AngbandOS.Core.Spells.Sorcery;
 [Serializable]
 internal class SorcerySpellLightArea : Spell
 {
-    private SorcerySpellLightArea(SaveGame saveGame) : base(saveGame) { }
+    private SorcerySpellLightArea(Game game) : base(game) { }
     protected override string? CastScriptName => nameof(LightAreaScript);
 
     public override string Name => "Light Area";
 
-    protected override string LearnedDetails => $"dam {10 + (SaveGame.ExperienceLevel.Value / 2)}";
+    protected override string LearnedDetails => $"dam {10 + (Game.ExperienceLevel.Value / 2)}";
 }

@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Spells.Chaos;
 [Serializable]
 internal class ChaosSpellCallTheVoid : Spell
 {
-    private ChaosSpellCallTheVoid(SaveGame saveGame) : base(saveGame) { }
+    private ChaosSpellCallTheVoid(Game game) : base(game) { }
     protected override string? CastScriptName => nameof(CallTheVoidScript);
 
     protected override string? CastFailedScriptName => nameof(WildChaoticMagicScript);

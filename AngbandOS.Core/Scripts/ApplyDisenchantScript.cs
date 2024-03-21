@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class ApplyDisenchantScript : Script, IScript, ISuccessfulScript
 {
-    private ApplyDisenchantScript(SaveGame saveGame) : base(saveGame) { }
+    private ApplyDisenchantScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script and returns a success result.
@@ -19,7 +19,7 @@ internal class ApplyDisenchantScript : Script, IScript, ISuccessfulScript
     public bool ExecuteSuccessfulScript()
     {
         // Select an inventory slot where items can be disenchanted.
-        BaseInventorySlot? inventorySlot = SaveGame.SingletonRepository.InventorySlots.ToWeightedRandom(_inventorySlot => _inventorySlot.CanBeDisenchanted).ChooseOrDefault();
+        BaseInventorySlot? inventorySlot = Game.SingletonRepository.InventorySlots.ToWeightedRandom(_inventorySlot => _inventorySlot.CanBeDisenchanted).ChooseOrDefault();
         if (inventorySlot == null)
         {
             // There are no inventory slots capable of being disenchanted.
@@ -28,7 +28,7 @@ internal class ApplyDisenchantScript : Script, IScript, ISuccessfulScript
 
         // Select an item in the inventory slot to be disenchanted.
         int i = inventorySlot.WeightedRandom.ChooseOrDefault();
-        Item? oPtr = SaveGame.GetInventoryItem(i);
+        Item? oPtr = Game.GetInventoryItem(i);
 
         // The chosen slot does not have an item to disenchant.
         if (oPtr == null)
@@ -41,17 +41,17 @@ internal class ApplyDisenchantScript : Script, IScript, ISuccessfulScript
         }
         string oName = oPtr.Description(false, 0);
         string s;
-        if (oPtr.IsArtifact && SaveGame.RandomLessThan(100) < 71)
+        if (oPtr.IsArtifact && Game.RandomLessThan(100) < 71)
         {
             s = oPtr.Count != 1 ? "" : "s";
-            SaveGame.MsgPrint($"Your {oName} ({i.IndexToLabel()}) resist{s} disenchantment!");
+            Game.MsgPrint($"Your {oName} ({i.IndexToLabel()}) resist{s} disenchantment!");
             return true;
         }
         if (oPtr.BonusToHit > 0)
         {
             oPtr.BonusToHit--;
         }
-        if (oPtr.BonusToHit > 5 && SaveGame.RandomLessThan(100) < 20)
+        if (oPtr.BonusToHit > 5 && Game.RandomLessThan(100) < 20)
         {
             oPtr.BonusToHit--;
         }
@@ -59,7 +59,7 @@ internal class ApplyDisenchantScript : Script, IScript, ISuccessfulScript
         {
             oPtr.BonusDamage--;
         }
-        if (oPtr.BonusDamage > 5 && SaveGame.RandomLessThan(100) < 20)
+        if (oPtr.BonusDamage > 5 && Game.RandomLessThan(100) < 20)
         {
             oPtr.BonusDamage--;
         }
@@ -67,13 +67,13 @@ internal class ApplyDisenchantScript : Script, IScript, ISuccessfulScript
         {
             oPtr.BonusArmorClass--;
         }
-        if (oPtr.BonusArmorClass > 5 && SaveGame.RandomLessThan(100) < 20)
+        if (oPtr.BonusArmorClass > 5 && Game.RandomLessThan(100) < 20)
         {
             oPtr.BonusArmorClass--;
         }
         s = oPtr.Count != 1 ? "were" : "was";
-        SaveGame.MsgPrint($"Your {oName} ({i.IndexToLabel()}) {s} disenchanted!");
-        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
+        Game.MsgPrint($"Your {oName} ({i.IndexToLabel()}) {s} disenchanted!");
+        Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
         return true;
     }
 

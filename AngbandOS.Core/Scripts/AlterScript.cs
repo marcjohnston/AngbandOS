@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class AlterScript : Script, IScript, IRepeatableScript
 {
-    private AlterScript(SaveGame saveGame) : base(saveGame) { }
+    private AlterScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the alter script and disposes of the successful result.
@@ -31,17 +31,17 @@ internal class AlterScript : Script, IScript, IRepeatableScript
         bool more = false;
 
         // Get the direction in which to alter something
-        if (SaveGame.GetDirectionNoAim(out int dir))
+        if (Game.GetDirectionNoAim(out int dir))
         {
-            int y = SaveGame.MapY + SaveGame.KeypadDirectionYOffset[dir];
-            int x = SaveGame.MapX + SaveGame.KeypadDirectionXOffset[dir];
-            GridTile tile = SaveGame.Grid[y][x];
+            int y = Game.MapY + Game.KeypadDirectionYOffset[dir];
+            int x = Game.MapX + Game.KeypadDirectionXOffset[dir];
+            GridTile tile = Game.Grid[y][x];
             // Altering a tile will take a turn
-            SaveGame.EnergyUse = 100;
+            Game.EnergyUse = 100;
             // We 'alter' a tile by attacking it
             if (tile.MonsterIndex != 0)
             {
-                SaveGame.PlayerAttackMonster(y, x);
+                Game.PlayerAttackMonster(y, x);
             }
             else
             {
@@ -49,7 +49,7 @@ internal class AlterScript : Script, IScript, IRepeatableScript
                 AlterAction? alterAction = tile.FeatureType.AlterAction;
                 if (alterAction == null)
                 {
-                    SaveGame.MsgPrint("You're not sure what you can do with that...");
+                    Game.MsgPrint("You're not sure what you can do with that...");
                 }
                 else
                 {

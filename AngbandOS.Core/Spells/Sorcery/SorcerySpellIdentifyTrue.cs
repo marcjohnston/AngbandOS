@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Spells.Sorcery;
 [Serializable]
 internal class SorcerySpellIdentifyTrue : Spell
 {
-    private SorcerySpellIdentifyTrue(SaveGame saveGame) : base(saveGame) { }
+    private SorcerySpellIdentifyTrue(Game game) : base(game) { }
     protected override string? CastScriptName => nameof(IdentifyItemFullyScript);
 
     public override string Name => "Identify True";

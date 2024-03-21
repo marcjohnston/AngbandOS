@@ -10,10 +10,10 @@ namespace AngbandOS.Core.Spells.Life;
 [Serializable]
 internal class LifeSpellProtectionFromEvil : Spell
 {
-    private LifeSpellProtectionFromEvil(SaveGame saveGame) : base(saveGame) { }
+    private LifeSpellProtectionFromEvil(Game game) : base(game) { }
     protected override string? CastScriptName => nameof(ProtectionFromEvilScript);
 
     public override string Name => "Protection from Evil";
 
-    protected override string LearnedDetails => $"dur d25+{3 * SaveGame.ExperienceLevel.Value}";
+    protected override string LearnedDetails => $"dur d25+{3 * Game.ExperienceLevel.Value}";
 }

@@ -10,5 +10,5 @@ namespace AngbandOS.Core.Properties;
 [Serializable]
 internal class IsWizardBoolProperty : BoolProperty
 {
-    protected IsWizardBoolProperty(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    protected IsWizardBoolProperty(Game game) : base(game) { } // This object is a singleton.
 }

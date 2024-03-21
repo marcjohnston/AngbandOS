@@ -10,7 +10,7 @@ namespace AngbandOS.Core.MonsterSpells;
 [Serializable]
 internal class DarkBallMonsterSpell : BallProjectileMonsterSpell
 {
-    private DarkBallMonsterSpell(SaveGame saveGame) : base(saveGame) { }
+    private DarkBallMonsterSpell(Game game) : base(game) { }
     public override bool UsesDarkness => true;
     public override bool IsAttack => true;
 
@@ -22,12 +22,12 @@ internal class DarkBallMonsterSpell : BallProjectileMonsterSpell
     public override string? VsPlayerBlindMessage => $"You hear someone mumble powerfully.";
 
     protected override string ActionName => "invokes a darkness storm";
-    protected override Projectile Projectile(SaveGame saveGame) => saveGame.SingletonRepository.Projectiles.Get(nameof(DarkProjectile));
+    protected override Projectile Projectile(Game game) => game.SingletonRepository.Projectiles.Get(nameof(DarkProjectile));
     protected override int Damage(Monster monster)
     {
         int monsterLevel = monster.Race.Level >= 1 ? monster.Race.Level : 1;
-        return (monsterLevel * 5) + SaveGame.DiceRoll(10, 10);
+        return (monsterLevel * 5) + Game.DiceRoll(10, 10);
     }
     protected override int Radius => 4;
-    public override SpellResistantDetection[] SmartLearn => new SpellResistantDetection[] { SaveGame.SingletonRepository.SpellResistantDetections.Get(nameof(DarkSpellResistantDetection)) };
+    public override SpellResistantDetection[] SmartLearn => new SpellResistantDetection[] { Game.SingletonRepository.SpellResistantDetections.Get(nameof(DarkSpellResistantDetection)) };
 }

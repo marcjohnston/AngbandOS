@@ -12,7 +12,7 @@ namespace AngbandOS.Core.Widgets;
 [Serializable]
 internal class ExperiencePointsForNextLevelAtMaxWidget : Widget
 {
-    private ExperiencePointsForNextLevelAtMaxWidget(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private ExperiencePointsForNextLevelAtMaxWidget(Game game) : base(game) { } // This object is a singleton.
 
     public override int X => 4;
     public override int Y => 6;

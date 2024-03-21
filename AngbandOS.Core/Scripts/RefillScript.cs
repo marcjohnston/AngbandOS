@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class RefillScript : Script, IScript, IRepeatableScript
 {
-    private RefillScript(SaveGame saveGame) : base(saveGame) { }
+    private RefillScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the refill script and returns false.
@@ -29,12 +29,12 @@ internal class RefillScript : Script, IScript, IRepeatableScript
     public void ExecuteScript()
     {
         // Make sure we actually have a light source to refuel.           
-        BaseInventorySlot? chosenLightSourceInventorySlot = SaveGame.SingletonRepository.InventorySlots.ToWeightedRandom(inventorySlot => inventorySlot.ProvidesLight).ChooseOrDefault();
+        BaseInventorySlot? chosenLightSourceInventorySlot = Game.SingletonRepository.InventorySlots.ToWeightedRandom(inventorySlot => inventorySlot.ProvidesLight).ChooseOrDefault();
 
         // Check to ensure there is an inventory slot for light sources.
         if (chosenLightSourceInventorySlot == null)
         {
-            SaveGame.MsgPrint("You are not wielding a light.");
+            Game.MsgPrint("You are not wielding a light.");
             return;
         }
 
@@ -42,18 +42,18 @@ internal class RefillScript : Script, IScript, IRepeatableScript
         int? i = chosenLightSourceInventorySlot.WeightedRandom.ChooseOrDefault();
         if (i == null)
         {
-            SaveGame.MsgPrint("You are not wielding a light.");
+            Game.MsgPrint("You are not wielding a light.");
             return;
         }
 
-        Item? lightSource = SaveGame.GetInventoryItem(i.Value);
+        Item? lightSource = Game.GetInventoryItem(i.Value);
         if (lightSource == null)
         {
-            SaveGame.MsgPrint("You are not wielding a light.");
+            Game.MsgPrint("You are not wielding a light.");
             return;
         }
 
         LightSourceItemFactory lightSourceItem = (LightSourceItemFactory)lightSource.Factory;
-        lightSourceItem.Refill(SaveGame, lightSource);
+        lightSourceItem.Refill(Game, lightSource);
     }
 }

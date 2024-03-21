@@ -10,8 +10,8 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal abstract class ChaosBookItemFactory : BookItemFactory
 {
-    public ChaosBookItemFactory(SaveGame saveGame) : base(saveGame) { }
-    public override ItemClass ItemClass => SaveGame.SingletonRepository.ItemClasses.Get(nameof(ChaosSpellBooksItemClass));
+    public ChaosBookItemFactory(Game game) : base(game) { }
+    public override ItemClass ItemClass => Game.SingletonRepository.ItemClasses.Get(nameof(ChaosSpellBooksItemClass));
     public override string RealmName => "Chaos";
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.ChaosBook;
     public override int PackSort => 5;

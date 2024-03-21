@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Gods;
 [Serializable]
 internal class TamashGod : God
 {
-    private TamashGod(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private TamashGod(Game game) : base(game) { } // This object is a singleton.
     public override string LongName => "Tamash, god of illusion and magic";
     public override string ShortName => "Tamash";
     public override string FavorDescription => " (+{0}% max mana)";

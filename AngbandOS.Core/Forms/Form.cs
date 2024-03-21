@@ -10,11 +10,11 @@ namespace AngbandOS.Core.Forms;
 [Serializable]
 internal abstract class Form : IGetKey
 {
-    protected readonly SaveGame SaveGame;
+    protected readonly Game Game;
 
-    protected Form(SaveGame saveGame)
+    protected Form(Game game)
     {
-        SaveGame = saveGame;
+        Game = game;
     }
     protected abstract string[] WidgetNames { get; }
     public Widget[] Widgets { get; private set; }
@@ -27,7 +27,7 @@ internal abstract class Form : IGetKey
         List<Widget> widgetList = new List<Widget>();
         foreach (string widgetName in WidgetNames)
         {
-            widgetList.Add(SaveGame.SingletonRepository.Widgets.Get(widgetName));
+            widgetList.Add(Game.SingletonRepository.Widgets.Get(widgetName));
         }
         Widgets = widgetList.ToArray();
     }
@@ -40,8 +40,8 @@ internal abstract class Form : IGetKey
     public void Invalidate()
     {
         // Clear the screen.
-        SaveGame.MsgPrint(null);
-        SaveGame.Screen.Clear();
+        Game.MsgPrint(null);
+        Game.Screen.Clear();
 
         // Force all of the widgets to redraw.
         foreach (Widget widget in Widgets)

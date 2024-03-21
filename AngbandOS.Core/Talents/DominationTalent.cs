@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Talents;
 [Serializable]
 internal class DominationTalent : Talent
 {
-    private DominationTalent(SaveGame saveGame) : base(saveGame) { }
+    private DominationTalent(Game game) : base(game) { }
     public override string Name => "Domination";
     public override int Level => 9;
     public override int ManaCost => 7;
@@ -18,17 +18,17 @@ internal class DominationTalent : Talent
 
     public override void Use()
     {
-        if (SaveGame.ExperienceLevel.Value < 30)
+        if (Game.ExperienceLevel.Value < 30)
         {
-            if (!SaveGame.GetDirectionWithAim(out int dir))
+            if (!Game.GetDirectionWithAim(out int dir))
             {
                 return;
             }
-            SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(DominationProjectile)), dir, SaveGame.ExperienceLevel.Value, 0);
+            Game.FireBall(Game.SingletonRepository.Projectiles.Get(nameof(DominationProjectile)), dir, Game.ExperienceLevel.Value, 0);
         }
         else
         {
-            SaveGame.RunScript(nameof(CharmOthersScript));
+            Game.RunScript(nameof(CharmOthersScript));
         }
     }
 

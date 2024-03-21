@@ -10,12 +10,12 @@ namespace AngbandOS.Core.Spells.Death;
 [Serializable]
 internal class DeathSpellEvocation : Spell
 {
-    private DeathSpellEvocation(SaveGame saveGame) : base(saveGame) { }
+    private DeathSpellEvocation(Game game) : base(game) { }
     protected override string? CastScriptName => nameof(EvocationScript);
 
     protected override string? CastFailedScriptName => nameof(WildDeathMagicScript);
 
     public override string Name => "Evocation";
 
-    protected override string LearnedDetails => $"dam {SaveGame.ExperienceLevel.Value * 4}";
+    protected override string LearnedDetails => $"dam {Game.ExperienceLevel.Value * 4}";
 }

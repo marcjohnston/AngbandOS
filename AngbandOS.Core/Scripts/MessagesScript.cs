@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class MessagesScript : Script, IScript, IRepeatableScript, IStoreScript
 {
-    private MessagesScript(SaveGame saveGame) : base(saveGame) { }
+    private MessagesScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the messages script.  Does not modify any of the store flags.
@@ -37,31 +37,31 @@ internal class MessagesScript : Script, IScript, IRepeatableScript, IStoreScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        int messageNumber = SaveGame.MessageNum();
+        int messageNumber = Game.MessageNum();
         int index = 0;
         int horizontalOffset = 0;
-        SaveGame.FullScreenOverlay = true;
-        ScreenBuffer savedScreen = SaveGame.Screen.Clone();
-        SaveGame.SetBackground(BackgroundImageEnum.Normal);
+        Game.FullScreenOverlay = true;
+        ScreenBuffer savedScreen = Game.Screen.Clone();
+        Game.SetBackground(BackgroundImageEnum.Normal);
         // Infinite loop showing a page of messages from the index
-        while (!SaveGame.Shutdown)
+        while (!Game.Shutdown)
         {
             // Clear the screen
-            SaveGame.Screen.Clear();
+            Game.Screen.Clear();
 
             // Print the messages
             int row;
             for (row = 0; row < 40 && index + row < messageNumber; row++)
             {
-                string msg = SaveGame.GetMessageText((short)(index + row));
+                string msg = Game.GetMessageText((short)(index + row));
                 msg = msg.Length >= horizontalOffset ? msg.Substring(horizontalOffset) : "";
-                SaveGame.Screen.Print(ColorEnum.White, msg, 41 - row, 0);
+                Game.Screen.Print(ColorEnum.White, msg, 41 - row, 0);
             }
 
             // Get a command
-            SaveGame.Screen.PrintLine($"Message Recall ({index}-{index + row - 1} of {messageNumber}), Offset {horizontalOffset}", 0, 0);
-            SaveGame.Screen.PrintLine("[Press 'p' for older, 'n' for newer, <dir> to scroll, or ESCAPE]", 43, 0);
-            int keyCode = SaveGame.Inkey();
+            Game.Screen.PrintLine($"Message Recall ({index}-{index + row - 1} of {messageNumber}), Offset {horizontalOffset}", 0, 0);
+            Game.Screen.PrintLine("[Press 'p' for older, 'n' for newer, <dir> to scroll, or ESCAPE]", 43, 0);
+            int keyCode = Game.Inkey();
             if (keyCode == '\x1b')
             {
                 // Break out of the infinite loop
@@ -101,7 +101,7 @@ internal class MessagesScript : Script, IScript, IRepeatableScript, IStoreScript
             }
         }
         // Tidy up after ourselves
-        SaveGame.Screen.Restore(savedScreen);
-        SaveGame.FullScreenOverlay = false;
+        Game.Screen.Restore(savedScreen);
+        Game.FullScreenOverlay = false;
     }
 }

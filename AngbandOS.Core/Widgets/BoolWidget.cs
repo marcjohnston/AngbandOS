@@ -12,28 +12,28 @@ namespace AngbandOS.Core.Widgets;
 [Serializable]
 internal abstract class BoolWidget : Widget
 {
-    protected BoolWidget(SaveGame saveGame) : base(saveGame) { }
+    protected BoolWidget(Game game) : base(game) { }
     public abstract string BoolChangeTrackingName { get; }
     public IBoolChangeTracking BoolChangeTracking { get; private set; }
 
     public override void Bind()
     {
         base.Bind();
-        Property? property = SaveGame.SingletonRepository.Properties.TryGet(BoolChangeTrackingName);
+        Property? property = Game.SingletonRepository.Properties.TryGet(BoolChangeTrackingName);
         if (property != null)
         {
             BoolChangeTracking = (IBoolChangeTracking)property;
         }
         else
         {
-            Timer? timer = SaveGame.SingletonRepository.TimedActions.TryGet(BoolChangeTrackingName);
+            Timer? timer = Game.SingletonRepository.TimedActions.TryGet(BoolChangeTrackingName);
             if (timer != null)
             {
                 BoolChangeTracking = (IBoolChangeTracking)timer;
             }
             else
             {
-                Function? function = SaveGame.SingletonRepository.Functions.TryGet(BoolChangeTrackingName);
+                Function? function = Game.SingletonRepository.Functions.TryGet(BoolChangeTrackingName);
                 if (function != null)
                 {
                     BoolChangeTracking = (IBoolChangeTracking)function;

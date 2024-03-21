@@ -3,7 +3,7 @@
 [Serializable]
 internal class UpperLSymbol : Symbol
 {
-    private UpperLSymbol(SaveGame saveGame) : base(saveGame) { }
+    private UpperLSymbol(Game game) : base(game) { }
     public override char Character => 'L';
     public override string Name => "Lich";
 }

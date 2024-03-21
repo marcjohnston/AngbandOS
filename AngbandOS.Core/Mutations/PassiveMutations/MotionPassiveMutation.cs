@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Mutations.PassiveMutations;
 [Serializable]
 internal class MotionPassiveMutation : Mutation
 {
-    private MotionPassiveMutation(SaveGame saveGame) : base(saveGame) { }
+    private MotionPassiveMutation(Game game) : base(game) { }
     public override int Frequency => 3;
     public override string GainMessage => "You move with new assurance.";
     public override string HaveMessage => "Your movements are precise and forceful (+1 STL).";
@@ -18,13 +18,13 @@ internal class MotionPassiveMutation : Mutation
 
     public override void OnGain()
     {
-        SaveGame.StealthBonus += 1;
-        SaveGame.FreeAction = true;
+        Game.StealthBonus += 1;
+        Game.FreeAction = true;
     }
 
     public override void OnLose()
     {
-        SaveGame.StealthBonus -= 1;
-        SaveGame.FreeAction = false;
+        Game.StealthBonus -= 1;
+        Game.FreeAction = false;
     }
 }

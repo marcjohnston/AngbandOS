@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Spells.Corporeal;
 [Serializable]
 internal class CorporealSpellAttunement : Spell
 {
-    private CorporealSpellAttunement(SaveGame saveGame) : base(saveGame) { }
+    private CorporealSpellAttunement(Game game) : base(game) { }
     protected override string? CastScriptName => nameof(IdentifyItemFullyScript);
 
     public override string Name => "Attunement";

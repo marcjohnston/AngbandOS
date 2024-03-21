@@ -10,7 +10,7 @@
 [Serializable]
 internal abstract class StringFunction : Function, IStringChangeTracking
 {
-    protected StringFunction(SaveGame saveGame) : base(saveGame) { }
+    protected StringFunction(Game game) : base(game) { }
 
     public abstract string Value { get; }
 }

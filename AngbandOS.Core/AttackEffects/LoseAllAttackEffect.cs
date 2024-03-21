@@ -10,34 +10,34 @@ namespace AngbandOS.Core.AttackEffects;
 [Serializable]
 internal class LoseAllAttackEffect : AttackEffect
 {
-    private LoseAllAttackEffect(SaveGame saveGame) : base(saveGame) { }
+    private LoseAllAttackEffect(Game game) : base(game) { }
     public override int Power => 2;
     public override string Description => "reduce all stats";
     public override void ApplyToPlayer(int monsterLevel, int monsterIndex, int armorClass, string monsterDescription, Monster monster, ref bool obvious, ref int damage, ref bool blinked)
     {
         // Try to decrease all six ability scores
-        SaveGame.TakeHit(damage, monsterDescription);
-        if (SaveGame.TryDecreasingAbilityScore(Ability.Strength))
+        Game.TakeHit(damage, monsterDescription);
+        if (Game.TryDecreasingAbilityScore(Ability.Strength))
         {
             obvious = true;
         }
-        if (SaveGame.TryDecreasingAbilityScore(Ability.Dexterity))
+        if (Game.TryDecreasingAbilityScore(Ability.Dexterity))
         {
             obvious = true;
         }
-        if (SaveGame.TryDecreasingAbilityScore(Ability.Constitution))
+        if (Game.TryDecreasingAbilityScore(Ability.Constitution))
         {
             obvious = true;
         }
-        if (SaveGame.TryDecreasingAbilityScore(Ability.Intelligence))
+        if (Game.TryDecreasingAbilityScore(Ability.Intelligence))
         {
             obvious = true;
         }
-        if (SaveGame.TryDecreasingAbilityScore(Ability.Wisdom))
+        if (Game.TryDecreasingAbilityScore(Ability.Wisdom))
         {
             obvious = true;
         }
-        if (SaveGame.TryDecreasingAbilityScore(Ability.Charisma))
+        if (Game.TryDecreasingAbilityScore(Ability.Charisma))
         {
             obvious = true;
         }

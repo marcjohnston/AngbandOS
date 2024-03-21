@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class SummonMonsterScript : Script, IScript
 {
-    private SummonMonsterScript(SaveGame saveGame) : base(saveGame) { }
+    private SummonMonsterScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script.
@@ -18,21 +18,21 @@ internal class SummonMonsterScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        SaveGame.MsgPrint("You concentrate on the image of a monster...");
-        if (SaveGame.DieRoll(5) > 2)
+        Game.MsgPrint("You concentrate on the image of a monster...");
+        if (Game.DieRoll(5) > 2)
         {
-            if (!SaveGame.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel.Value, SaveGame.SingletonRepository.MonsterFilters.Get(nameof(NoUniquesMonsterFilter)), false))
+            if (!Game.SummonSpecificFriendly(Game.MapY, Game.MapX, Game.ExperienceLevel.Value, Game.SingletonRepository.MonsterFilters.Get(nameof(NoUniquesMonsterFilter)), false))
             {
-                SaveGame.MsgPrint("No-one ever turns up.");
+                Game.MsgPrint("No-one ever turns up.");
             }
         }
-        else if (SaveGame.SummonSpecific(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel.Value, null))
+        else if (Game.SummonSpecific(Game.MapY, Game.MapX, Game.ExperienceLevel.Value, null))
         {
-            SaveGame.MsgPrint("The summoned creature gets angry!");
+            Game.MsgPrint("The summoned creature gets angry!");
         }
         else
         {
-            SaveGame.MsgPrint("No-one ever turns up.");
+            Game.MsgPrint("No-one ever turns up.");
         }
     }
 }

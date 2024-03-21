@@ -10,13 +10,13 @@ namespace AngbandOS.Core.ChestTraps;
 [Serializable]
 internal class ParalyzeChestTrap : ChestTrap
 {
-    private ParalyzeChestTrap(SaveGame saveGame) : base(saveGame) { }
+    private ParalyzeChestTrap(Game game) : base(game) { }
     public override void Activate(ActivateChestTrapEventArgs eventArgs)
     {
-        SaveGame.MsgPrint("A puff of yellow gas surrounds you!");
-        if (!SaveGame.HasFreeAction)
+        Game.MsgPrint("A puff of yellow gas surrounds you!");
+        if (!Game.HasFreeAction)
         {
-            SaveGame.ParalysisTimer.AddTimer(10 + SaveGame.DieRoll(20));
+            Game.ParalysisTimer.AddTimer(10 + Game.DieRoll(20));
         }
     }
 

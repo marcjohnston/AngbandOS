@@ -10,17 +10,17 @@ namespace AngbandOS.Core.Mutations.ActiveMutations;
 [Serializable]
 internal class SpitAcidActiveMutation : Mutation
 {
-    private SpitAcidActiveMutation(SaveGame saveGame) : base(saveGame) { }
+    private SpitAcidActiveMutation(Game game) : base(game) { }
     public override void Activate()
     {
-        if (!SaveGame.CheckIfRacialPowerWorks(9, 9, Ability.Dexterity, 15))
+        if (!Game.CheckIfRacialPowerWorks(9, 9, Ability.Dexterity, 15))
         {
             return;
         }
-        SaveGame.MsgPrint("You spit acid...");
-        if (SaveGame.GetDirectionWithAim(out int dir))
+        Game.MsgPrint("You spit acid...");
+        if (Game.GetDirectionWithAim(out int dir))
         {
-            SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(AcidProjectile)), dir, SaveGame.ExperienceLevel.Value, 1 + (SaveGame.ExperienceLevel.Value / 30));
+            Game.FireBall(Game.SingletonRepository.Projectiles.Get(nameof(AcidProjectile)), dir, Game.ExperienceLevel.Value, 1 + (Game.ExperienceLevel.Value / 30));
         }
     }
 

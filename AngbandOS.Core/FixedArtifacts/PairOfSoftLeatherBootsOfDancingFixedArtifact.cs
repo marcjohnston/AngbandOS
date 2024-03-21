@@ -10,7 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class PairOfSoftLeatherBootsOfDancingFixedArtifact : FixedArtifact
 {
-    private PairOfSoftLeatherBootsOfDancingFixedArtifact(SaveGame saveGame) : base(saveGame) { }
+    private PairOfSoftLeatherBootsOfDancingFixedArtifact(Game game) : base(game) { }
 
     protected override string BaseItemFactoryName => nameof(SoftLeatherBootsArmorItemFactory);
 

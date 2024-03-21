@@ -15,7 +15,7 @@ namespace AngbandOS.Core.Flavors;
 [Serializable]
 internal abstract class ReadableFlavor : Flavor, IGetKey
 {
-    protected ReadableFlavor(SaveGame saveGame) : base(saveGame) { }
+    protected ReadableFlavor(Game game) : base(game) { }
 
     private Symbol _symbol;
 
@@ -47,7 +47,7 @@ internal abstract class ReadableFlavor : Flavor, IGetKey
 
     public void Bind()
     {
-        _symbol = SaveGame.SingletonRepository.Symbols.Get(SymbolName);
+        _symbol = Game.SingletonRepository.Symbols.Get(SymbolName);
     }
 
     /// <summary>

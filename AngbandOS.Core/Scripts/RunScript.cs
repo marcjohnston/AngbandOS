@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class RunScript : Script, IScript, IRepeatableScript
 {
-    private RunScript(SaveGame saveGame) : base(saveGame) { }
+    private RunScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the run script and disposes of the repeatable result.
@@ -28,18 +28,18 @@ internal class RunScript : Script, IScript, IRepeatableScript
     public bool ExecuteRepeatableScript()
     {
         // Can't run if we're confused
-        if (SaveGame.ConfusedTimer.Value != 0)
+        if (Game.ConfusedTimer.Value != 0)
         {
-            SaveGame.MsgPrint("You are too confused!");
+            Game.MsgPrint("You are too confused!");
             return false; // Don't repeat this.
         }
         // Get a direction if we don't already have one
-        if (SaveGame.GetDirectionNoAim(out int dir))
+        if (Game.GetDirectionNoAim(out int dir))
         {
             // If we don't have a distance, assume we'll run for 1,000 steps
-            SaveGame.Running = SaveGame.CommandArgument != 0 ? SaveGame.CommandArgument : 1000;
+            Game.Running = Game.CommandArgument != 0 ? Game.CommandArgument : 1000;
             // Run one step in the chosen direction
-            SaveGame.RunOneStep(dir);
+            Game.RunOneStep(dir);
         }
         return true; // Repeat the run.
     }

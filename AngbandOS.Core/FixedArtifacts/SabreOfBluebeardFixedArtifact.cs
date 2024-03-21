@@ -10,7 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class SabreOfBluebeardFixedArtifact : FixedArtifact
 {
-    private SabreOfBluebeardFixedArtifact(SaveGame saveGame) : base(saveGame) { }
+    private SabreOfBluebeardFixedArtifact(Game game) : base(game) { }
 
     protected override string BaseItemFactoryName => nameof(SabreWeaponItemFactory);
 

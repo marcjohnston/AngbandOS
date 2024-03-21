@@ -10,7 +10,7 @@ namespace AngbandOS.Core.MonsterFilters;
 [Serializable]
 internal class DemonMonsterFilter : MonsterFilter
 {
-    private DemonMonsterFilter(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private DemonMonsterFilter(Game game) : base(game) { } // This object is a singleton.
     public override bool Matches(MonsterRace rPtr)
     {
         return rPtr.Demon && !rPtr.Unique;

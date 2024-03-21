@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Tiles;
 [Serializable]
 internal class ConstitutionDartTile : Tile
 {
-    private ConstitutionDartTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private ConstitutionDartTile(Game game) : base(game) { } // This object is a singleton.
     protected override string SymbolName => nameof(CaretSymbol);
     public override ColorEnum Color => ColorEnum.Red;
     protected override string? AlterActionName => nameof(DisarmAlterAction);

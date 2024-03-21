@@ -10,7 +10,7 @@ namespace AngbandOS.Core.StoreFactories;
 [Serializable]
 internal partial class TempleStoreFactory : StoreFactory
 {
-    private TempleStoreFactory(SaveGame saveGame) : base(saveGame) { }
+    private TempleStoreFactory(Game game) : base(game) { }
 
     protected override string TileName => nameof(TempleStoreTile);
 

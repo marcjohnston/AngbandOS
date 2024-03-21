@@ -10,7 +10,7 @@ namespace AngbandOS.Core.MonsterRaces;
 [Serializable]
 internal class WhiteJellyMonsterRace : MonsterRace
 {
-    protected WhiteJellyMonsterRace(SaveGame saveGame) : base(saveGame) { }
+    protected WhiteJellyMonsterRace(Game game) : base(game) { }
 
     protected override string SymbolName => nameof(LowerJSymbol);
     public override ColorEnum Color => ColorEnum.BrightWhite;

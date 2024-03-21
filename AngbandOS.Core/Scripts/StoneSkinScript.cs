@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class StoneSkinScript : Script, IScript
 {
-    private StoneSkinScript(SaveGame saveGame) : base(saveGame) { }
+    private StoneSkinScript(Game game) : base(game) { }
 
     /// <summary>
     /// Adds between 30 and 50 turns of stoneskin.
@@ -18,6 +18,6 @@ internal class StoneSkinScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        SaveGame.StoneskinTimer.AddTimer(SaveGame.DieRoll(20) + 30);
+        Game.StoneskinTimer.AddTimer(Game.DieRoll(20) + 30);
     }
 }

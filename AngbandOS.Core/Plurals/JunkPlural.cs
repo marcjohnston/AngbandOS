@@ -3,7 +3,7 @@
 [Serializable]
 internal class JunkPlural : Plural
 {
-    private JunkPlural(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private JunkPlural(Game game) : base(game) { } // This object is a singleton.
 
     public override string Key => "Junk";
 

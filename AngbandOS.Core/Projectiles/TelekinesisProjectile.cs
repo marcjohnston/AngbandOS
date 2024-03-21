@@ -10,11 +10,11 @@ namespace AngbandOS.Core.Projection;
 [Serializable]
 internal class TelekinesisProjectile : Projectile
 {
-    private TelekinesisProjectile(SaveGame saveGame) : base(saveGame) { }
+    private TelekinesisProjectile(Game game) : base(game) { }
 
-    protected override ProjectileGraphic? BoltProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get(nameof(TurquoiseBoltProjectileGraphic));
+    protected override ProjectileGraphic? BoltProjectileGraphic => Game.SingletonRepository.ProjectileGraphics.Get(nameof(TurquoiseBoltProjectileGraphic));
 
-    protected override Animation EffectAnimation => SaveGame.SingletonRepository.Animations.Get(nameof(TurquoiseSwirlAnimation));
+    protected override Animation EffectAnimation => Game.SingletonRepository.Animations.Get(nameof(TurquoiseSwirlAnimation));
 
     protected override bool AffectMonster(int who, Monster mPtr, int dam, int r)
     {
@@ -27,8 +27,8 @@ internal class TelekinesisProjectile : Projectile
             obvious = true;
         }
         int doDist = 7;
-        int doStun = SaveGame.DiceRoll((SaveGame.ExperienceLevel.Value / 10) + 3, dam) + 1;
-        if (rPtr.Unique || rPtr.Level > 5 + SaveGame.DieRoll(dam))
+        int doStun = Game.DiceRoll((Game.ExperienceLevel.Value / 10) + 3, dam) + 1;
+        if (rPtr.Unique || rPtr.Level > 5 + Game.DieRoll(dam))
         {
             doStun = 0;
             obvious = false;
@@ -40,7 +40,7 @@ internal class TelekinesisProjectile : Projectile
                 obvious = true;
             }
             note = " disappears!";
-            mPtr.TeleportAway(SaveGame, doDist);
+            mPtr.TeleportAway(Game, doDist);
         }
         else if (doStun != 0 && !rPtr.BreatheSound && !rPtr.BreatheForce)
         {

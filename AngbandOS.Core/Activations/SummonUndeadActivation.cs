@@ -13,31 +13,31 @@ namespace AngbandOS.Core.Activations;
 [Serializable]
 internal class SummonUndeadActivation : Activation
 {
-    private SummonUndeadActivation(SaveGame saveGame) : base(saveGame) { }
+    private SummonUndeadActivation(Game game) : base(game) { }
     public override int RandomChance => 5;
 
     protected override bool OnActivate(Item item)
     {
-        if (SaveGame.DieRoll(3) == 1)
+        if (Game.DieRoll(3) == 1)
         {
-            if (SaveGame.SummonSpecific(SaveGame.MapY, SaveGame.MapX, (int)(SaveGame.ExperienceLevel.Value * 1.5), SaveGame.ExperienceLevel.Value > 47 ? SaveGame.SingletonRepository.MonsterFilters.Get(nameof(HiUndeadMonsterFilter)) : SaveGame.SingletonRepository.MonsterFilters.Get(nameof(UndeadMonsterFilter))))
+            if (Game.SummonSpecific(Game.MapY, Game.MapX, (int)(Game.ExperienceLevel.Value * 1.5), Game.ExperienceLevel.Value > 47 ? Game.SingletonRepository.MonsterFilters.Get(nameof(HiUndeadMonsterFilter)) : Game.SingletonRepository.MonsterFilters.Get(nameof(UndeadMonsterFilter))))
             {
-                SaveGame.MsgPrint("Cold winds begin to Attack around you, carrying with them the stench of decay...");
-                SaveGame.MsgPrint("'The dead arise... to punish you for disturbing them!'");
+                Game.MsgPrint("Cold winds begin to Attack around you, carrying with them the stench of decay...");
+                Game.MsgPrint("'The dead arise... to punish you for disturbing them!'");
             }
         }
         else
         {
-            if (SaveGame.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, (int)(SaveGame.ExperienceLevel.Value * 1.5), SaveGame.ExperienceLevel.Value > 47 ? SaveGame.SingletonRepository.MonsterFilters.Get(nameof(HiUndeadNoUniquesMonsterFilter)) : SaveGame.SingletonRepository.MonsterFilters.Get(nameof(UndeadMonsterFilter)), SaveGame.ExperienceLevel.Value > 24 && SaveGame.DieRoll(3) == 1))
+            if (Game.SummonSpecificFriendly(Game.MapY, Game.MapX, (int)(Game.ExperienceLevel.Value * 1.5), Game.ExperienceLevel.Value > 47 ? Game.SingletonRepository.MonsterFilters.Get(nameof(HiUndeadNoUniquesMonsterFilter)) : Game.SingletonRepository.MonsterFilters.Get(nameof(UndeadMonsterFilter)), Game.ExperienceLevel.Value > 24 && Game.DieRoll(3) == 1))
             {
-                SaveGame.MsgPrint("Cold winds begin to Attack around you, carrying with them the stench of decay...");
-                SaveGame.MsgPrint("Ancient, long-dead forms arise from the ground to serve you!");
+                Game.MsgPrint("Cold winds begin to Attack around you, carrying with them the stench of decay...");
+                Game.MsgPrint("Ancient, long-dead forms arise from the ground to serve you!");
             }
         }
         return true;
     }
 
-    public override int RechargeTime() => 666 + SaveGame.DieRoll(333);
+    public override int RechargeTime() => 666 + Game.DieRoll(333);
 
     public override int Value => 20000;
 

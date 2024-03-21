@@ -10,7 +10,7 @@ namespace AngbandOS.Core.MonsterRaces;
 [Serializable]
 internal class FrostGiantMonsterRace : MonsterRace
 {
-    protected FrostGiantMonsterRace(SaveGame saveGame) : base(saveGame) { }
+    protected FrostGiantMonsterRace(Game game) : base(game) { }
 
     protected override string SymbolName => nameof(UpperPSymbol);
     public override string Name => "Frost giant";

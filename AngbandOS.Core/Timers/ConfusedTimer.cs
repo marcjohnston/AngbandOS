@@ -10,13 +10,13 @@ namespace AngbandOS.Core.Timers;
 [Serializable]
 internal class ConfusedTimer : Timer
 {
-    private ConfusedTimer(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private ConfusedTimer(Game game) : base(game) { } // This object is a singleton.
     protected override void EffectStopped()
     {
-        SaveGame.MsgPrint("You feel less confused now.");
+        Game.MsgPrint("You feel less confused now.");
     }
     protected override void EffectIncreased(int newRate, int currentRate)
     {
-        SaveGame.MsgPrint("You are confused!");
+        Game.MsgPrint("You are confused!");
     }
 }

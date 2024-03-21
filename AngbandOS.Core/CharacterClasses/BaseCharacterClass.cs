@@ -10,56 +10,56 @@ namespace AngbandOS.Core.CharacterClasses;
 [Serializable]
 internal abstract class BaseCharacterClass : IGetKey
 {
-    protected SaveGame SaveGame { get; }
-    protected BaseCharacterClass(SaveGame saveGame)
+    protected Game Game { get; }
+    protected BaseCharacterClass(Game game)
     {
-        SaveGame = saveGame;
+        Game = game;
     }
 
     public virtual string GetBookTitle(Item bookItem)
     {
         BookItemFactory bookItemFactory = (BookItemFactory)bookItem.Factory;
-        return $"{bookItemFactory.RealmName} {SaveGame.CountPluralize("Spellbook", bookItem.Count)}";
+        return $"{bookItemFactory.RealmName} {Game.CountPluralize("Spellbook", bookItem.Count)}";
     }
 
     public virtual void Cast() => CastSpell();
 
     /// <summary>
-    /// Cast a spell.  SaveGame.DoCast is called by default.  Mentalism casting type calls SaveGame.DoMentalism.
+    /// Cast a spell.  Game.DoCast is called by default.  Mentalism casting type calls Game.DoMentalism.
     /// </summary>
     protected void CastSpell()
     {
-        string prayer = SaveGame.BaseCharacterClass.SpellNoun;
-        if (!SaveGame.CanCastSpells)
+        string prayer = Game.BaseCharacterClass.SpellNoun;
+        if (!Game.CanCastSpells)
         {
-            SaveGame.MsgPrint("You cannot cast spells!");
+            Game.MsgPrint("You cannot cast spells!");
             return;
         }
-        if (SaveGame.BlindnessTimer.Value != 0 || SaveGame.NoLight())
+        if (Game.BlindnessTimer.Value != 0 || Game.NoLight())
         {
-            SaveGame.MsgPrint("You cannot see!");
+            Game.MsgPrint("You cannot see!");
             return;
         }
-        if (SaveGame.ConfusedTimer.Value != 0)
+        if (Game.ConfusedTimer.Value != 0)
         {
-            SaveGame.MsgPrint("You are too confused!");
+            Game.MsgPrint("You are too confused!");
             return;
         }
-        if (!SaveGame.SelectItem(out Item? oPtr, "Use which book? ", false, true, true, SaveGame.SingletonRepository.ItemFilters.Get(nameof(IsUsableSpellBookItemFilter))))
+        if (!Game.SelectItem(out Item? oPtr, "Use which book? ", false, true, true, Game.SingletonRepository.ItemFilters.Get(nameof(IsUsableSpellBookItemFilter))))
         {
-            SaveGame.MsgPrint($"You have no {prayer} books!");
+            Game.MsgPrint($"You have no {prayer} books!");
             return;
         }
         if (oPtr == null)
         {
             return;
         }
-        SaveGame.HandleStuff();
+        Game.HandleStuff();
 
         // Allow the player to select the spell.
-        if (!SaveGame.GetSpell(out Spell? spell, SaveGame.BaseCharacterClass.CastVerb, oPtr, true))
+        if (!Game.GetSpell(out Spell? spell, Game.BaseCharacterClass.CastVerb, oPtr, true))
         {
-            SaveGame.MsgPrint($"You don't know any {prayer}s in that book.");
+            Game.MsgPrint($"You don't know any {prayer}s in that book.");
             return;
         }
 
@@ -69,22 +69,22 @@ internal abstract class BaseCharacterClass : IGetKey
             return;
         }
 
-        if (spell.ClassSpell.ManaCost > SaveGame.Mana.Value)
+        if (spell.ClassSpell.ManaCost > Game.Mana.Value)
         {
-            string cast = SaveGame.BaseCharacterClass.CastVerb;
-            SaveGame.MsgPrint($"You do not have enough mana to {cast} this {prayer}.");
-            if (!SaveGame.GetCheck("Attempt it anyway? "))
+            string cast = Game.BaseCharacterClass.CastVerb;
+            Game.MsgPrint($"You do not have enough mana to {cast} this {prayer}.");
+            if (!Game.GetCheck("Attempt it anyway? "))
             {
                 return;
             }
         }
         int failureChance = spell.FailureChance();
-        if (SaveGame.DieRoll(100) <= failureChance)
+        if (Game.DieRoll(100) <= failureChance)
         {
-            SaveGame.MsgPrint($"You failed to get the {prayer} off!");
+            Game.MsgPrint($"You failed to get the {prayer} off!");
 
             // Reroll again with the save failure chance to run the failed script.
-            if (SaveGame.DieRoll(100) <= failureChance)
+            if (Game.DieRoll(100) <= failureChance)
             {
                 spell.CastFailed();
             }
@@ -93,79 +93,79 @@ internal abstract class BaseCharacterClass : IGetKey
         {
             spell.CastSpell();
         }
-        SaveGame.EnergyUse = 100;
-        if (spell.ClassSpell.ManaCost <= SaveGame.Mana.Value)
+        Game.EnergyUse = 100;
+        if (spell.ClassSpell.ManaCost <= Game.Mana.Value)
         {
-            SaveGame.Mana.Value -= spell.ClassSpell.ManaCost;
+            Game.Mana.Value -= spell.ClassSpell.ManaCost;
         }
         else
         {
-            int oops = spell.ClassSpell.ManaCost - SaveGame.Mana.Value;
-            SaveGame.Mana.Value = 0;
-            SaveGame.FractionalMana = 0;
-            SaveGame.MsgPrint("You faint from the effort!");
-            SaveGame.ParalysisTimer.AddTimer(SaveGame.DieRoll((5 * oops) + 1));
-            if (SaveGame.RandomLessThan(100) < 50)
+            int oops = spell.ClassSpell.ManaCost - Game.Mana.Value;
+            Game.Mana.Value = 0;
+            Game.FractionalMana = 0;
+            Game.MsgPrint("You faint from the effort!");
+            Game.ParalysisTimer.AddTimer(Game.DieRoll((5 * oops) + 1));
+            if (Game.RandomLessThan(100) < 50)
             {
-                bool perm = SaveGame.RandomLessThan(100) < 25;
-                SaveGame.MsgPrint("You have damaged your health!");
-                SaveGame.DecreaseAbilityScore(Ability.Constitution, 15 + SaveGame.DieRoll(10), perm);
+                bool perm = Game.RandomLessThan(100) < 25;
+                Game.MsgPrint("You have damaged your health!");
+                Game.DecreaseAbilityScore(Ability.Constitution, 15 + Game.DieRoll(10), perm);
             }
         }
     }
 
     public void CastMentalism()
     {
-        int plev = SaveGame.ExperienceLevel.Value;
-        if (SaveGame.ConfusedTimer.Value != 0)
+        int plev = Game.ExperienceLevel.Value;
+        if (Game.ConfusedTimer.Value != 0)
         {
-            SaveGame.MsgPrint("You are too confused!");
+            Game.MsgPrint("You are too confused!");
             return;
         }
         if (!GetMentalismTalent(out int n))
         {
             return;
         }
-        Talents.Talent talent = SaveGame.Talents[n];
-        if (talent.ManaCost > SaveGame.Mana.Value)
+        Talents.Talent talent = Game.Talents[n];
+        if (talent.ManaCost > Game.Mana.Value)
         {
-            SaveGame.MsgPrint("You do not have enough mana to use this talent.");
-            if (!SaveGame.GetCheck("Attempt it anyway? "))
+            Game.MsgPrint("You do not have enough mana to use this talent.");
+            if (!Game.GetCheck("Attempt it anyway? "))
             {
                 return;
             }
         }
         int chance = talent.FailureChance();
-        if (SaveGame.RandomLessThan(100) < chance)
+        if (Game.RandomLessThan(100) < chance)
         {
-            SaveGame.MsgPrint("You failed to concentrate hard enough!");
-            if (SaveGame.DieRoll(100) < chance / 2)
+            Game.MsgPrint("You failed to concentrate hard enough!");
+            if (Game.DieRoll(100) < chance / 2)
             {
-                int i = SaveGame.DieRoll(100);
+                int i = Game.DieRoll(100);
                 if (i < 5)
                 {
-                    SaveGame.MsgPrint("Oh, no! Your mind has gone blank!");
-                    SaveGame.LoseAllInfo();
+                    Game.MsgPrint("Oh, no! Your mind has gone blank!");
+                    Game.LoseAllInfo();
                 }
                 else if (i < 15)
                 {
-                    SaveGame.MsgPrint("Weird visions seem to dance before your eyes...");
-                    SaveGame.HallucinationsTimer.AddTimer(5 + SaveGame.DieRoll(10));
+                    Game.MsgPrint("Weird visions seem to dance before your eyes...");
+                    Game.HallucinationsTimer.AddTimer(5 + Game.DieRoll(10));
                 }
                 else if (i < 45)
                 {
-                    SaveGame.MsgPrint("Your brain is addled!");
-                    SaveGame.ConfusedTimer.AddTimer(SaveGame.DieRoll(8));
+                    Game.MsgPrint("Your brain is addled!");
+                    Game.ConfusedTimer.AddTimer(Game.DieRoll(8));
                 }
                 else if (i < 90)
                 {
-                    SaveGame.StunTimer.AddTimer(SaveGame.DieRoll(8));
+                    Game.StunTimer.AddTimer(Game.DieRoll(8));
                 }
                 else
                 {
-                    SaveGame.MsgPrint("Your mind unleashes its power in an uncontrollable storm!");
-                    SaveGame.Project(1, 2 + (plev / 10), SaveGame.MapY, SaveGame.MapX, plev * 2, SaveGame.SingletonRepository.Projectiles.Get(nameof(ManaProjectile)), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectKill | ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem);
-                    SaveGame.Mana.Value = Math.Max(0, SaveGame.Mana.Value - (plev * Math.Max(1, plev / 10)));
+                    Game.MsgPrint("Your mind unleashes its power in an uncontrollable storm!");
+                    Game.Project(1, 2 + (plev / 10), Game.MapY, Game.MapX, plev * 2, Game.SingletonRepository.Projectiles.Get(nameof(ManaProjectile)), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectKill | ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem);
+                    Game.Mana.Value = Math.Max(0, Game.Mana.Value - (plev * Math.Max(1, plev / 10)));
                 }
             }
         }
@@ -173,23 +173,23 @@ internal abstract class BaseCharacterClass : IGetKey
         {
             talent.Use();
         }
-        SaveGame.EnergyUse = 100;
-        if (talent.ManaCost <= SaveGame.Mana.Value)
+        Game.EnergyUse = 100;
+        if (talent.ManaCost <= Game.Mana.Value)
         {
-            SaveGame.Mana.Value -= talent.ManaCost;
+            Game.Mana.Value -= talent.ManaCost;
         }
         else
         {
-            int oops = talent.ManaCost - SaveGame.Mana.Value;
-            SaveGame.Mana.Value = 0;
-            SaveGame.FractionalMana = 0;
-            SaveGame.MsgPrint("You faint from the effort!");
-            SaveGame.ParalysisTimer.AddTimer(SaveGame.DieRoll((5 * oops) + 1));
-            if (SaveGame.RandomLessThan(100) < 50)
+            int oops = talent.ManaCost - Game.Mana.Value;
+            Game.Mana.Value = 0;
+            Game.FractionalMana = 0;
+            Game.MsgPrint("You faint from the effort!");
+            Game.ParalysisTimer.AddTimer(Game.DieRoll((5 * oops) + 1));
+            if (Game.RandomLessThan(100) < 50)
             {
-                bool perm = SaveGame.RandomLessThan(100) < 25;
-                SaveGame.MsgPrint("You have damaged your mind!");
-                SaveGame.DecreaseAbilityScore(Ability.Wisdom, 15 + SaveGame.DieRoll(10), perm);
+                bool perm = Game.RandomLessThan(100) < 25;
+                Game.MsgPrint("You have damaged your mind!");
+                Game.DecreaseAbilityScore(Ability.Wisdom, 15 + Game.DieRoll(10), perm);
             }
         }
     }
@@ -200,12 +200,12 @@ internal abstract class BaseCharacterClass : IGetKey
         int num = 0;
         int y = 1;
         int x = 20;
-        int plev = SaveGame.ExperienceLevel.Value;
+        int plev = Game.ExperienceLevel.Value;
         string p = "talent";
         sn = -1;
         bool flag = false;
         ScreenBuffer? savedScreen = null;
-        List<Talent> talents = SaveGame.Talents;
+        List<Talent> talents = Game.Talents;
         for (i = 0; i < talents.Count; i++)
         {
             if (talents[i].Level <= plev)
@@ -214,16 +214,16 @@ internal abstract class BaseCharacterClass : IGetKey
             }
         }
         string outVal = $"({p}s {0.IndexToLetter()}-{(num - 1).IndexToLetter()}, *=List, ESC=exit) Use which {p}? ";
-        while (!flag && SaveGame.GetCom(outVal, out char choice))
+        while (!flag && Game.GetCom(outVal, out char choice))
         {
             if (choice == ' ' || choice == '*' || choice == '?')
             {
                 if (savedScreen == null)
                 {
-                    savedScreen = SaveGame.Screen.Clone();
-                    SaveGame.Screen.PrintLine("", y, x);
-                    SaveGame.Screen.Print("Name", y, x + 5);
-                    SaveGame.Screen.Print("Lv Mana Fail Info", y, x + 35);
+                    savedScreen = Game.Screen.Clone();
+                    Game.Screen.PrintLine("", y, x);
+                    Game.Screen.Print("Name", y, x + 5);
+                    Game.Screen.Print("Lv Mana Fail Info", y, x + 35);
                     for (i = 0; i < talents.Count; i++)
                     {
                         Talents.Talent talent = talents[i];
@@ -232,13 +232,13 @@ internal abstract class BaseCharacterClass : IGetKey
                             break;
                         }
                         string psiDesc = $"  {i.IndexToLetter()}) {talent.SummaryLine()}";
-                        SaveGame.Screen.PrintLine(psiDesc, y + i + 1, x);
+                        Game.Screen.PrintLine(psiDesc, y + i + 1, x);
                     }
-                    SaveGame.Screen.PrintLine("", y + i + 1, x);
+                    Game.Screen.PrintLine("", y + i + 1, x);
                 }
                 else
                 {
-                    SaveGame.Screen.Restore(savedScreen);
+                    Game.Screen.Restore(savedScreen);
                     savedScreen = null;
                 }
                 continue;
@@ -256,7 +256,7 @@ internal abstract class BaseCharacterClass : IGetKey
             if (ask)
             {
                 string tmpVal = $"Use {talents[i].Name}? ";
-                if (!SaveGame.GetCheck(tmpVal))
+                if (!Game.GetCheck(tmpVal))
                 {
                     continue;
                 }
@@ -265,7 +265,7 @@ internal abstract class BaseCharacterClass : IGetKey
         }
         if (savedScreen != null)
         {
-            SaveGame.Screen.Restore(savedScreen);
+            Game.Screen.Restore(savedScreen);
         }
         if (!flag)
         {
@@ -336,7 +336,7 @@ internal abstract class BaseCharacterClass : IGetKey
         List<ItemFactory> outfitItemFactories = new();
         foreach (string outfitItemFactoryName in OutfitItemFactoryNames)
         {
-            outfitItemFactories.Add(SaveGame.SingletonRepository.ItemFactories.Get(outfitItemFactoryName));
+            outfitItemFactories.Add(Game.SingletonRepository.ItemFactories.Get(outfitItemFactoryName));
         }
         OutfitItemFactories = outfitItemFactories.ToArray();
     }
@@ -426,7 +426,7 @@ internal abstract class BaseCharacterClass : IGetKey
 
     public Realm[] RemainingAvailableSecondaryRealms()
     {
-        return AvailableSecondaryRealms.Where(_realm => _realm != SaveGame.PrimaryRealm).ToArray();
+        return AvailableSecondaryRealms.Where(_realm => _realm != Game.PrimaryRealm).ToArray();
     }
 
     public virtual bool WorshipsADeity => false; // TODO: Only priests have a godname ... this seems off.
@@ -444,9 +444,9 @@ internal abstract class BaseCharacterClass : IGetKey
     /// <param name="amount">The amount.</param>
     protected void GainExperienceFromSpellBookDestroy(Item item, int amount)
     {
-        if (SaveGame.ExperiencePoints.Value < Constants.PyMaxExp)
+        if (Game.ExperiencePoints.Value < Constants.PyMaxExp)
         {
-            int testerExp = SaveGame.MaxExperienceGained / 20;
+            int testerExp = Game.MaxExperienceGained / 20;
             if (testerExp > 10000)
             {
                 testerExp = 10000;
@@ -457,8 +457,8 @@ internal abstract class BaseCharacterClass : IGetKey
             {
                 testerExp = 1;
             }
-            SaveGame.MsgPrint("You feel more experienced.");
-            SaveGame.GainExperience(testerExp * amount);
+            Game.MsgPrint("You feel more experienced.");
+            Game.GainExperience(testerExp * amount);
         }
     }
 
@@ -480,7 +480,7 @@ internal abstract class BaseCharacterClass : IGetKey
         foreach (ItemFactory itemFactory in OutfitItemFactories)
         {
             // Allow the race to modify the item as the race sees fit.
-            ItemFactory outfitItem = SaveGame.Race.OutfitItemClass(itemFactory);
+            ItemFactory outfitItem = Game.Race.OutfitItemClass(itemFactory);
 
             // Create an item from the factory.
             Item item = outfitItem.CreateItem();
@@ -488,7 +488,7 @@ internal abstract class BaseCharacterClass : IGetKey
             {
                 item.TypeSpecificValue = 1;
             }
-            SaveGame.OutfitPlayerWithItem(item);
+            Game.OutfitPlayerWithItem(item);
 
             // Allow the character class a chance to modify the item.
             OutfitItem(item);

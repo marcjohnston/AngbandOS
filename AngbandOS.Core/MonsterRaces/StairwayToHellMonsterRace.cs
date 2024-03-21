@@ -10,7 +10,7 @@ namespace AngbandOS.Core.MonsterRaces;
 [Serializable]
 internal class StairwayToHellMonsterRace : MonsterRace
 {
-    protected StairwayToHellMonsterRace(SaveGame saveGame) : base(saveGame) { }
+    protected StairwayToHellMonsterRace(Game game) : base(game) { }
 
     protected override string[]? SpellNames =>new string[] {
         nameof(ShriekMonsterSpell),

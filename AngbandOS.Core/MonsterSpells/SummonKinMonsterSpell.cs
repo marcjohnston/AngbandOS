@@ -10,7 +10,7 @@ namespace AngbandOS.Core.MonsterSpells;
 [Serializable]
 internal class SummonKinMonsterSpell : SummonMonsterSpell
 {
-    private SummonKinMonsterSpell(SaveGame saveGame) : base(saveGame) { }
+    private SummonKinMonsterSpell(Game game) : base(game) { }
     /// <summary>
     /// Returns an empty string because all messages are overridden.
     /// </summary>
@@ -26,5 +26,5 @@ internal class SummonKinMonsterSpell : SummonMonsterSpell
     /// </summary>
     /// <param name="monster"></param>
     /// <returns></returns>
-    protected override IMonsterFilter? MonsterSelector(Monster monster) => new KinDynamicMonsterFilter(SaveGame, monster.Race.Symbol.Character);
+    protected override IMonsterFilter? MonsterSelector(Monster monster) => new KinDynamicMonsterFilter(Game, monster.Race.Symbol.Character);
 }

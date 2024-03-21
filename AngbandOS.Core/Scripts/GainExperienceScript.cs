@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class GainExperienceScript : Script, IScript
 {
-    private GainExperienceScript(SaveGame saveGame) : base(saveGame) { }
+    private GainExperienceScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script.
@@ -18,13 +18,13 @@ internal class GainExperienceScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        if (SaveGame.CommandArgument != 0)
+        if (Game.CommandArgument != 0)
         {
-            SaveGame.GainExperience(SaveGame.CommandArgument);
+            Game.GainExperience(Game.CommandArgument);
         }
         else
         {
-            SaveGame.GainExperience(SaveGame.ExperiencePoints.Value + 1);
+            Game.GainExperience(Game.ExperiencePoints.Value + 1);
         }
     }
 }

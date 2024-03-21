@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class SayFeelingScript : Script, IScript, IRepeatableScript
 {
-    private SayFeelingScript(SaveGame saveGame) : base(saveGame) { }
+    private SayFeelingScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the say feeling script and returns false.
@@ -28,7 +28,7 @@ internal class SayFeelingScript : Script, IScript, IRepeatableScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        if (SaveGame.CurrentDepth > 0)
+        if (Game.CurrentDepth > 0)
         {
             string[] DangerFeelingText =
             {
@@ -61,38 +61,38 @@ internal class SayFeelingScript : Script, IScript, IRepeatableScript
             };
 
             // Some sanity checks
-            if (SaveGame.DangerFeeling < 0)
+            if (Game.DangerFeeling < 0)
             {
-                SaveGame.DangerFeeling = 0;
+                Game.DangerFeeling = 0;
             }
-            if (SaveGame.DangerFeeling > 10)
+            if (Game.DangerFeeling > 10)
             {
-                SaveGame.DangerFeeling = 10;
+                Game.DangerFeeling = 10;
             }
-            if (SaveGame.TreasureFeeling < 0)
+            if (Game.TreasureFeeling < 0)
             {
-                SaveGame.TreasureFeeling = 0;
+                Game.TreasureFeeling = 0;
             }
-            if (SaveGame.TreasureFeeling > 10)
+            if (Game.TreasureFeeling > 10)
             {
-                SaveGame.TreasureFeeling = 10;
+                Game.TreasureFeeling = 10;
             }
             // Special feeling overrides the normal two-part feeling
-            if (SaveGame.DangerFeeling == 1 || SaveGame.TreasureFeeling == 1)
+            if (Game.DangerFeeling == 1 || Game.TreasureFeeling == 1)
             {
                 string message = DangerFeelingText[1];
-                SaveGame.MsgPrint(SaveGame.GameTime.LevelFeel ? message : DangerFeelingText[0]);
+                Game.MsgPrint(Game.GameTime.LevelFeel ? message : DangerFeelingText[0]);
             }
             else
             {
                 // Make the two-part feeling make a bit more sense by using the correct conjunction
                 string conjunction = ", and ";
-                if ((SaveGame.DangerFeeling > 5 && SaveGame.TreasureFeeling < 6) || (SaveGame.DangerFeeling < 6 && SaveGame.TreasureFeeling > 5))
+                if ((Game.DangerFeeling > 5 && Game.TreasureFeeling < 6) || (Game.DangerFeeling < 6 && Game.TreasureFeeling > 5))
                 {
                     conjunction = ", but ";
                 }
-                string message = DangerFeelingText[SaveGame.DangerFeeling] + conjunction + TreasureFeelingText[SaveGame.TreasureFeeling];
-                SaveGame.MsgPrint(SaveGame.GameTime.LevelFeel ? message : DangerFeelingText[0]);
+                string message = DangerFeelingText[Game.DangerFeeling] + conjunction + TreasureFeelingText[Game.TreasureFeeling];
+                Game.MsgPrint(Game.GameTime.LevelFeel ? message : DangerFeelingText[0]);
             }
         }
     }

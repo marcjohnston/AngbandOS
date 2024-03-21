@@ -11,7 +11,7 @@ namespace AngbandOS.Core.StoreCommands;
 internal class BuyHouseStoreCommand : StoreCommand
 
 {
-    private BuyHouseStoreCommand(SaveGame saveGame) : base(saveGame) { }
+    private BuyHouseStoreCommand(Game game) : base(game) { }
     public override char KeyChar => 'r';
 
     public override string Description => "Buy a house";

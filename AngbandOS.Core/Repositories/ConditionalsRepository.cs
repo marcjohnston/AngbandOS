@@ -10,5 +10,5 @@ namespace AngbandOS.Core.Repositories;
 [Serializable]
 internal class ConditionalsRepository : DictionaryRepository<Conditional>
 {
-    public ConditionalsRepository(SaveGame saveGame) : base(saveGame) { }
+    public ConditionalsRepository(Game game) : base(game) { }
 }

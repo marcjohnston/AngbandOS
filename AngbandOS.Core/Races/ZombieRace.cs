@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Races;
 [Serializable]
 internal class ZombieRace : Race
 {
-    private ZombieRace(SaveGame saveGame) : base(saveGame) { }
+    private ZombieRace(Game game) : base(game) { }
     public override string Title => "Zombie";
     public override int[] AbilityBonus => new int[] { 2, -6, -6, 1, 4, -5 };
     public override int BaseDisarmBonus => -5;
@@ -68,32 +68,32 @@ internal class ZombieRace : Race
     }
     public override void CalcBonuses()
     {
-        SaveGame.HasNetherResistance = true;
-        SaveGame.HasHoldLife = true;
-        SaveGame.HasSeeInvisibility = true;
-        SaveGame.HasPoisonResistance = true;
-        SaveGame.HasSlowDigestion = true;
-        if (SaveGame.ExperienceLevel.Value > 4)
+        Game.HasNetherResistance = true;
+        Game.HasHoldLife = true;
+        Game.HasSeeInvisibility = true;
+        Game.HasPoisonResistance = true;
+        Game.HasSlowDigestion = true;
+        if (Game.ExperienceLevel.Value > 4)
         {
-            SaveGame.HasColdResistance = true;
+            Game.HasColdResistance = true;
         }
     }
     public override bool RestsTillDuskInsteadOfDawn => true;
     public override void Eat(Item item)
     {
         // This race only gets 1/20th of the food value
-        SaveGame.MsgPrint("The food of mortals is poor sustenance for you.");
-        SaveGame.SetFood(SaveGame.Food.Value + (item.TypeSpecificValue / 20));
+        Game.MsgPrint("The food of mortals is poor sustenance for you.");
+        Game.SetFood(Game.Food.Value + (item.TypeSpecificValue / 20));
     }
     public override bool CanBleed(int level) => (level > 11);
 
     public override void UseRacialPower()
     {
         // Skeletons and zombies can restore their life energy
-        if (SaveGame.CheckIfRacialPowerWorks(30, 30, Ability.Wisdom, 18))
+        if (Game.CheckIfRacialPowerWorks(30, 30, Ability.Wisdom, 18))
         {
-            SaveGame.MsgPrint("You attempt to restore your lost energies.");
-            SaveGame.RunScript(nameof(RestoreLevelScript));
+            Game.MsgPrint("You attempt to restore your lost energies.");
+            Game.RunScript(nameof(RestoreLevelScript));
         }
     }
 

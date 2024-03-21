@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class DestroyScript : Script, IScript, IRepeatableScript, IStoreScript
 {
-    private DestroyScript(SaveGame saveGame) : base(saveGame) { }
+    private DestroyScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the destroy script.  Does not modify any of the store flags.
@@ -38,11 +38,11 @@ internal class DestroyScript : Script, IScript, IRepeatableScript, IStoreScript
     public void ExecuteScript()
     {
         int amount = 1;
-        bool force = SaveGame.CommandArgument > 0;
+        bool force = Game.CommandArgument > 0;
         // Get an item to destroy
-        if (!SaveGame.SelectItem(out Item? item, "Destroy which item? ", false, true, true, null))
+        if (!Game.SelectItem(out Item? item, "Destroy which item? ", false, true, true, null))
         {
-            SaveGame.MsgPrint("You have nothing to destroy.");
+            Game.MsgPrint("You have nothing to destroy.");
             return;
         }
         if (item == null)
@@ -52,7 +52,7 @@ internal class DestroyScript : Script, IScript, IRepeatableScript, IStoreScript
         // If we have more than one we might not want to destroy all of them
         if (item.Count > 1)
         {
-            amount = SaveGame.GetQuantity(null, item.Count, true);
+            amount = Game.GetQuantity(null, item.Count, true);
             if (amount <= 0)
             {
                 return;
@@ -68,7 +68,7 @@ internal class DestroyScript : Script, IScript, IRepeatableScript, IStoreScript
             if (!item.Stompable())
             {
                 string outVal = $"Really destroy {itemName}? ";
-                if (!SaveGame.GetCheck(outVal))
+                if (!Game.GetCheck(outVal))
                 {
                     return;
                 }
@@ -77,7 +77,7 @@ internal class DestroyScript : Script, IScript, IRepeatableScript, IStoreScript
                 {
                     if (item.IsKnown())
                     {
-                        if (SaveGame.GetCheck($"Always destroy {itemName}?"))
+                        if (Game.GetCheck($"Always destroy {itemName}?"))
                         {
                             item.Factory.Stompable[0] = true;
                         }
@@ -86,27 +86,27 @@ internal class DestroyScript : Script, IScript, IRepeatableScript, IStoreScript
             }
         }
         // Destroying something takes a turn
-        SaveGame.EnergyUse = 100;
+        Game.EnergyUse = 100;
 
         // Can't destroy an artifact artifact
         if (item.IsArtifact)
         {
             string feel = "special";
-            SaveGame.EnergyUse = 0;
-            SaveGame.MsgPrint($"You cannot destroy {itemName}.");
+            Game.EnergyUse = 0;
+            Game.MsgPrint($"You cannot destroy {itemName}.");
             if (item.IsCursed() || item.IsBroken())
             {
                 feel = "terrible";
             }
             item.Inscription = feel;
             item.IdentSense = true;
-            SaveGame.SingletonRepository.FlaggedActions.Get(nameof(NoticeCombineFlaggedAction)).Set();
-            SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawEquippyFlaggedAction)).Set();
+            Game.SingletonRepository.FlaggedActions.Get(nameof(NoticeCombineFlaggedAction)).Set();
+            Game.SingletonRepository.FlaggedActions.Get(nameof(RedrawEquippyFlaggedAction)).Set();
             return;
         }
-        SaveGame.MsgPrint($"You destroy {itemName}.");
+        Game.MsgPrint($"You destroy {itemName}.");
 
-        SaveGame.BaseCharacterClass.ItemDestroyed(item, amount);
+        Game.BaseCharacterClass.ItemDestroyed(item, amount);
 
         // Tidy up the player's inventory
         item.ItemIncrease(-amount);

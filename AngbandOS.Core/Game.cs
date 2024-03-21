@@ -12,7 +12,7 @@ using Timer = AngbandOS.Core.Timers.Timer;
 namespace AngbandOS.Core;
 
 [Serializable]
-internal class SaveGame
+internal class Game
 {
     public const int DungeonCount = 20; // TODO: Use the Singleton.Dungeons.Count property
     public readonly Configuration Configuration;
@@ -603,7 +603,7 @@ internal class SaveGame
     /// Allocates all storage and creates a new game.  
     /// </summary>
     /// <param name="configuration">Represents configuration data to use when generating a new game.</param>
-    public SaveGame(Configuration? configuration)
+    public Game(Configuration? configuration)
     {
         // We need a default configuration, if one isn't provided.
         if (configuration == null)
@@ -723,11 +723,11 @@ internal class SaveGame
 
     /// <summary>
     /// Retrieves a save game from persistent storage.  If no persistent storage is specified, a new game is created. This static method is used as a factory
-    /// to generate the SaveGame object that can be played using the Play method.  This is the only static method.
+    /// to generate the Game object that can be played using the Play method.  This is the only static method.
     /// </summary>
     /// <param name="persistentStorage"></param>
     /// <returns></returns>
-    public static SaveGame LoadGame(ICorePersistentStorage persistentStorage)
+    public static Game LoadGame(ICorePersistentStorage persistentStorage)
     {
         if (persistentStorage == null)
         {
@@ -746,7 +746,7 @@ internal class SaveGame
         // Deserialize the game.
         BinaryFormatter formatter = new BinaryFormatter();
         MemoryStream memoryStream = new MemoryStream(data);
-        return (SaveGame)formatter.Deserialize(memoryStream);
+        return (Game)formatter.Deserialize(memoryStream);
     }
 
 
@@ -1716,7 +1716,7 @@ internal class SaveGame
             CharacterName = PlayerName.Value, // The player parameter
             Level = ExperienceLevel.Value, // The player parameter
             Gold = Gold.Value, // The parameter
-            IsAlive = !IsDead, // If the player is dead, then the savegame Player will be null.
+            IsAlive = !IsDead, // If the player is dead, then the game Player will be null.
             Comments = ""
         };
         CorePersistentStorage?.WriteGame(gameDetails, memoryStream.ToArray());
@@ -1745,7 +1745,7 @@ internal class SaveGame
 
     /// <summary>
     /// Initializes everything for a new game.  This method is called when starting a new game and when the player dies and a new game is started.  This method does not allocate
-    /// memory for a game, that is done in the SaveGame constructor.  This method resets all of the value.
+    /// memory for a game, that is done in the Game constructor.  This method resets all of the value.
     /// </summary>
     /// <exception cref="Exception"></exception>
     private void GenerateNewGame()
@@ -1883,7 +1883,7 @@ internal class SaveGame
     /// <param name="updateMonitor"></param>
     public void Play(IConsoleViewPort consoleViewPort, ICorePersistentStorage? persistentStorage)
     {
-        // If this game was restored, then the Random variable will not be here and we need to create them.  The Random were created when the SaveGame
+        // If this game was restored, then the Random variable will not be here and we need to create them.  The Random were created when the Game
         // was instantiated as part of the New game process so that Singletons have access to non-fixed random numbers.
         _mainSequence = new Random();
         _fixed = new Random();
@@ -13221,7 +13221,7 @@ internal class SaveGame
         return itemCharacteristics;
     }
 
-    public int GetScore(SaveGame saveGame)
+    public int GetScore(Game game)
     {
         int score = (MaxLevelGained - 1) * 100;
         foreach (Dungeon dungeon in SingletonRepository.Dungeons)

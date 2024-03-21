@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class SummonSpecificMonsterScript : Script, IScript
 {
-    private SummonSpecificMonsterScript(SaveGame saveGame) : base(saveGame) { }
+    private SummonSpecificMonsterScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script.
@@ -18,7 +18,7 @@ internal class SummonSpecificMonsterScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        int num = SaveGame.CommandArgument;
+        int num = Game.CommandArgument;
         if (num <= 0)
         {
             num = 1;
@@ -26,7 +26,7 @@ internal class SummonSpecificMonsterScript : Script, IScript
 
         for (int i = 0; i < num; i++)
         {
-            SaveGame.SummonSpecific(SaveGame.MapY, SaveGame.MapX, SaveGame.Difficulty, null);
+            Game.SummonSpecific(Game.MapY, Game.MapX, Game.Difficulty, null);
         }
     }
 }

@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class TeleportOtherScript : Script, IScript
 {
-    private TeleportOtherScript(SaveGame saveGame) : base(saveGame) { }
+    private TeleportOtherScript(Game game) : base(game) { }
 
     /// <summary>
     /// Fires a beam of teleport other in a chosen direction.
@@ -18,10 +18,10 @@ internal class TeleportOtherScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        if (!SaveGame.GetDirectionWithAim(out int dir))
+        if (!Game.GetDirectionWithAim(out int dir))
         {
             return;
         }
-        SaveGame.FireBeam(SaveGame.SingletonRepository.Projectiles.Get(nameof(TeleportAwayAllProjectile)), dir, SaveGame.ExperienceLevel.Value);
+        Game.FireBeam(Game.SingletonRepository.Projectiles.Get(nameof(TeleportAwayAllProjectile)), dir, Game.ExperienceLevel.Value);
     }
 }

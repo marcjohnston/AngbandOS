@@ -10,11 +10,11 @@ namespace AngbandOS.Core.Rewards;
 [Serializable]
 internal class DoHavocReward : Reward
 {
-    private DoHavocReward(SaveGame saveGame) : base(saveGame) { }
+    private DoHavocReward(Game game) : base(game) { }
     public override void GetReward(Patron patron)
     {
-        SaveGame.MsgPrint($"The voice of {patron.ShortName} whispers out:");
-        SaveGame.MsgPrint("'Death and destruction! This pleaseth me!'");
-        SaveGame.RunScript(nameof(CallChaosScript));
+        Game.MsgPrint($"The voice of {patron.ShortName} whispers out:");
+        Game.MsgPrint("'Death and destruction! This pleaseth me!'");
+        Game.RunScript(nameof(CallChaosScript));
     }
 }

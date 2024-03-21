@@ -13,14 +13,14 @@ namespace AngbandOS.Core.Activations;
 [Serializable]
 internal class RuneExploActivation : Activation
 {
-    private RuneExploActivation(SaveGame saveGame) : base(saveGame) { }
+    private RuneExploActivation(Game game) : base(game) { }
     public override int RandomChance => 33;
 
     public override string? PreActivationMessage => "Your {0} glows a sickly yellow...";
 
     protected override bool OnActivate(Item item)
     {
-        SaveGame.RunScript(nameof(YellowSignScript));
+        Game.RunScript(nameof(YellowSignScript));
         return true;
     }
 

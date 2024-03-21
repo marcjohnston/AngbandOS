@@ -10,7 +10,7 @@ namespace AngbandOS.Core.ClassSpells;
 [Serializable]
 internal class WarriorMageCallChaosChaosSpell : ClassSpell
 {
-    private WarriorMageCallChaosChaosSpell(SaveGame saveGame) : base(saveGame) { }
+    private WarriorMageCallChaosChaosSpell(Game game) : base(game) { }
     public override string SpellName => nameof(ChaosSpellCallChaos);
     public override string CharacterClassName => nameof(WarriorMageCharacterClass);
     public override int Level => 46;

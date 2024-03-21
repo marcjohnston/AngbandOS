@@ -13,7 +13,7 @@ namespace AngbandOS.Core.StoreCommands;
 internal class ResearchSpellStoreCommand : StoreCommand
 
 {
-    private ResearchSpellStoreCommand(SaveGame saveGame) : base(saveGame) { }
+    private ResearchSpellStoreCommand(Game game) : base(game) { }
     public override char KeyChar => 'r';
 
     public override string Description => "Research a spell";

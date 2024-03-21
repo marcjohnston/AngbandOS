@@ -13,14 +13,14 @@ namespace AngbandOS.Core.Activations;
 [Serializable]
 internal class Terror40xEvery3xp10Activation : Activation
 {
-    private Terror40xEvery3xp10Activation(SaveGame saveGame) : base(saveGame) { }
+    private Terror40xEvery3xp10Activation(Game game) : base(game) { }
     public override int RandomChance => 75;
 
-    public override int RechargeTime() => 3 * (SaveGame.ExperienceLevel.Value + 10);
+    public override int RechargeTime() => 3 * (Game.ExperienceLevel.Value + 10);
     public override string? PreActivationMessage => "rays of fear in every direction";
     protected override bool OnActivate(Item item)
     {
-        SaveGame.TurnMonsters(40 + SaveGame.ExperienceLevel.Value);
+        Game.TurnMonsters(40 + Game.ExperienceLevel.Value);
         return true;
     }
 

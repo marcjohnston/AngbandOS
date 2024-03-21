@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class DoomBoltScript : Script, IScript
 {
-    private DoomBoltScript(SaveGame saveGame) : base(saveGame) { }
+    private DoomBoltScript(Game game) : base(game) { }
 
     /// <summary>
     /// Fires a beam of mana in a chosen direction.
@@ -18,10 +18,10 @@ internal class DoomBoltScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        if (!SaveGame.GetDirectionWithAim(out int dir))
+        if (!Game.GetDirectionWithAim(out int dir))
         {
             return;
         }
-        SaveGame.FireBeam(SaveGame.SingletonRepository.Projectiles.Get(nameof(ManaProjectile)), dir, SaveGame.DiceRoll(11 + ((SaveGame.ExperienceLevel.Value - 5) / 4), 8));
+        Game.FireBeam(Game.SingletonRepository.Projectiles.Get(nameof(ManaProjectile)), dir, Game.DiceRoll(11 + ((Game.ExperienceLevel.Value - 5) / 4), 8));
     }
 }

@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class SummonElementalScript : Script, IScript
 {
-    private SummonElementalScript(SaveGame saveGame) : base(saveGame) { }
+    private SummonElementalScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script.
@@ -18,20 +18,20 @@ internal class SummonElementalScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        if (SaveGame.DieRoll(6) > 3)
+        if (Game.DieRoll(6) > 3)
         {
-            if (!SaveGame.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel.Value, SaveGame.SingletonRepository.MonsterFilters.Get(nameof(ElementalMonsterFilter)), false))
+            if (!Game.SummonSpecificFriendly(Game.MapY, Game.MapX, Game.ExperienceLevel.Value, Game.SingletonRepository.MonsterFilters.Get(nameof(ElementalMonsterFilter)), false))
             {
-                SaveGame.MsgPrint("No-one ever turns up.");
+                Game.MsgPrint("No-one ever turns up.");
             }
         }
-        else if (SaveGame.SummonSpecific(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel.Value, SaveGame.SingletonRepository.MonsterFilters.Get(nameof(ElementalMonsterFilter))))
+        else if (Game.SummonSpecific(Game.MapY, Game.MapX, Game.ExperienceLevel.Value, Game.SingletonRepository.MonsterFilters.Get(nameof(ElementalMonsterFilter))))
         {
-            SaveGame.MsgPrint("You fail to control the elemental creature!");
+            Game.MsgPrint("You fail to control the elemental creature!");
         }
         else
         {
-            SaveGame.MsgPrint("No-one ever turns up.");
+            Game.MsgPrint("No-one ever turns up.");
         }
     }
 }

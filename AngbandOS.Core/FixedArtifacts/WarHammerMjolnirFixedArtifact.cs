@@ -10,17 +10,17 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class WarHammerMjolnirFixedArtifact : FixedArtifact
 {
-    private WarHammerMjolnirFixedArtifact(SaveGame saveGame) : base(saveGame) { }
+    private WarHammerMjolnirFixedArtifact(Game game) : base(game) { }
 
     protected override string BaseItemFactoryName => nameof(WarHammerHaftedWeaponItemFactory);
 
 
     public override void ApplyResistances(Item item)
     {
-        item.RandomPower = SaveGame.SingletonRepository.Powers.ToWeightedRandom(_power => _power.IsAbility == true).Choose();
+        item.RandomPower = Game.SingletonRepository.Powers.ToWeightedRandom(_power => _power.IsAbility == true).Choose();
 
         IArtifactBias artifactBias = null;
-        item.ApplyRandomResistance(ref artifactBias, SaveGame.DieRoll(22) + 16);
+        item.ApplyRandomResistance(ref artifactBias, Game.DieRoll(22) + 16);
     }
     public override ColorEnum Color => ColorEnum.Black;
     public override string Name => "The War Hammer 'Mjolnir'";

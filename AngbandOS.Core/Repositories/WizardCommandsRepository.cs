@@ -10,11 +10,11 @@ namespace AngbandOS.Core.Repositories;
 [Serializable]
 internal class WizardCommandsRepository : DictionaryRepository<WizardCommand>
 {
-    public WizardCommandsRepository(SaveGame saveGame) : base(saveGame) { }
+    public WizardCommandsRepository(Game game) : base(game) { }
 
     public override void Load()
     {
-        if (SaveGame.Configuration.WizardCommands == null)
+        if (Game.Configuration.WizardCommands == null)
         {
             base.Load();
 
@@ -28,9 +28,9 @@ internal class WizardCommandsRepository : DictionaryRepository<WizardCommand>
         }
         else
         {
-            foreach (WizardCommandDefinition wizardCommandDefinition in SaveGame.Configuration.WizardCommands)
+            foreach (WizardCommandDefinition wizardCommandDefinition in Game.Configuration.WizardCommands)
             {
-                Add(new GenericWizardCommand(SaveGame, wizardCommandDefinition));
+                Add(new GenericWizardCommand(Game, wizardCommandDefinition));
             }
         }
     }

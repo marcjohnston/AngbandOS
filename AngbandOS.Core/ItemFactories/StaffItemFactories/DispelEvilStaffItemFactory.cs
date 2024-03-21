@@ -10,14 +10,14 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class DispelEvilStaffItemFactory : StaffItemFactory
 {
-    private DispelEvilStaffItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private DispelEvilStaffItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UnderscoreSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(UnderscoreSymbol));
     public override string Name => "Dispel Evil";
 
     public override void ApplyMagic(Item item, int level, int power, Store? store)
     {
-        item.TypeSpecificValue = SaveGame.DieRoll(3) + 4;
+        item.TypeSpecificValue = Game.DieRoll(3) + 4;
     }
     public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int Cost => 1200;
@@ -29,10 +29,10 @@ internal class DispelEvilStaffItemFactory : StaffItemFactory
     public override int Weight => 50;
     public override void UseStaff(UseStaffEvent eventArgs)
     {
-        if (SaveGame.RunSuccessfulScriptInt(nameof(DispelEvil4xScript), 60))
+        if (Game.RunSuccessfulScriptInt(nameof(DispelEvil4xScript), 60))
         {
             eventArgs.Identified = true;
         }
     }
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

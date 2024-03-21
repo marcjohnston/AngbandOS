@@ -10,14 +10,14 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class LightningBallsWandItemFactory : WandItemFactory
 {
-    private LightningBallsWandItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private LightningBallsWandItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(MinusSignSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(MinusSignSymbol));
     public override string Name => "Lightning Balls";
 
     public override void ApplyMagic(Item item, int level, int power, Store? store)
     {
-        item.TypeSpecificValue = SaveGame.DieRoll(8) + 4;
+        item.TypeSpecificValue = Game.DieRoll(8) + 4;
     }
     public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int Cost => 1200;
@@ -28,10 +28,10 @@ internal class LightningBallsWandItemFactory : WandItemFactory
     public override int LevelNormallyFound => 35;
     public override int[] Locale => new int[] { 35, 0, 0, 0 };
     public override int Weight => 10;
-    public override bool ExecuteActivation(SaveGame saveGame, int dir)
+    public override bool ExecuteActivation(Game game, int dir)
     {
-        saveGame.FireBall(saveGame.SingletonRepository.Projectiles.Get(nameof(ElecProjectile)), dir, 32, 2);
+        game.FireBall(game.SingletonRepository.Projectiles.Get(nameof(ElecProjectile)), dir, 32, 2);
         return true;
     }
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

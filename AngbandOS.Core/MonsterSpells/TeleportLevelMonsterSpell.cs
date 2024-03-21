@@ -10,7 +10,7 @@ namespace AngbandOS.Core.MonsterSpells;
 [Serializable]
 internal class TeleportLevelMonsterSpell : MonsterSpell
 {
-    private TeleportLevelMonsterSpell(SaveGame saveGame) : base(saveGame) { }
+    private TeleportLevelMonsterSpell(Game game) : base(game) { }
     public override bool IsIntelligent => true;
     public override bool UsesNexus => true;
     public override bool ProvidesEscape => true;
@@ -18,25 +18,25 @@ internal class TeleportLevelMonsterSpell : MonsterSpell
     public override string? VsPlayerBlindMessage => $"Someone mumbles strangely.";
     public override string? VsPlayerActionMessage(Monster monster) => $"{monster.Name} gestures at your feet.";
 
-    public override void ExecuteOnPlayer(SaveGame saveGame, Monster monster)
+    public override void ExecuteOnPlayer(Game game, Monster monster)
     {
 
-        if (saveGame.HasNexusResistance)
+        if (game.HasNexusResistance)
         {
-            saveGame.MsgPrint("You are unaffected!");
+            game.MsgPrint("You are unaffected!");
         }
-        else if (SaveGame.RandomLessThan(100) < saveGame.SkillSavingThrow)
+        else if (Game.RandomLessThan(100) < game.SkillSavingThrow)
         {
-            saveGame.MsgPrint("You resist the effects!");
+            game.MsgPrint("You resist the effects!");
         }
         else
         {
-            SaveGame.RunScript(nameof(TeleportLevelScript));
+            Game.RunScript(nameof(TeleportLevelScript));
         }
-        saveGame.UpdateSmartLearn(monster, SaveGame.SingletonRepository.SpellResistantDetections.Get(nameof(NexusSpellResistantDetection)));
+        game.UpdateSmartLearn(monster, Game.SingletonRepository.SpellResistantDetections.Get(nameof(NexusSpellResistantDetection)));
     }
 
-    public override void ExecuteOnMonster(SaveGame saveGame, Monster monster, Monster target)
+    public override void ExecuteOnMonster(Game game, Monster monster, Monster target)
     {
     }
 }

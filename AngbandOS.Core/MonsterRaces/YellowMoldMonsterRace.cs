@@ -10,7 +10,7 @@ namespace AngbandOS.Core.MonsterRaces;
 [Serializable]
 internal class YellowMoldMonsterRace : MonsterRace
 {
-    protected YellowMoldMonsterRace(SaveGame saveGame) : base(saveGame) { }
+    protected YellowMoldMonsterRace(Game game) : base(game) { }
 
     protected override string SymbolName => nameof(LowerMSymbol);
     public override ColorEnum Color => ColorEnum.Yellow;

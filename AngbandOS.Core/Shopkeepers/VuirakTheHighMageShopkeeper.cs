@@ -8,7 +8,7 @@
 [Serializable]
 internal class VuirakTheHighMageShopkeeper : Shopkeeper
 {
-    private VuirakTheHighMageShopkeeper(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private VuirakTheHighMageShopkeeper(Game game) : base(game) { } // This object is a singleton.
     public override string Name => "Vuirak the High-Mage";
     public override int MaxCost =>  15000;
     public override int MinInflate =>  110;

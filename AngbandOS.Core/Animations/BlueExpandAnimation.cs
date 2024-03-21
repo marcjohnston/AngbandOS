@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Animations;
 [Serializable]
 internal class BlueExpandAnimation : Animation
 {
-    private BlueExpandAnimation(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private BlueExpandAnimation(Game game) : base(game) { } // This object is a singleton.
     public override char Character => '*';
     public override ColorEnum Color => ColorEnum.Blue;
     public override string Name => "BlueExpand";

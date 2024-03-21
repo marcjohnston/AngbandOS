@@ -13,11 +13,11 @@ internal class UpdateScentFlaggedAction : FlaggedAction
     private int _flowHead;
     private int _flowN;
     private int _flowTail;
-    private UpdateScentFlaggedAction(SaveGame saveGame) : base(saveGame) { }
+    private UpdateScentFlaggedAction(Game game) : base(game) { }
     private void UpdateFlowAux(int y, int x, int n)
     {
         int oldHead = _flowHead;
-        GridTile cPtr = SaveGame.Grid[y][x];
+        GridTile cPtr = Game.Grid[y][x];
         if (cPtr.ScentAge == _flowN)
         {
             return;
@@ -32,8 +32,8 @@ internal class UpdateScentFlaggedAction : FlaggedAction
         {
             return;
         }
-        SaveGame.TempY[_flowHead] = y;
-        SaveGame.TempX[_flowHead] = x;
+        Game.TempY[_flowHead] = y;
+        Game.TempX[_flowHead] = x;
         if (++_flowHead == Constants.TempMax)
         {
             _flowHead = 0;
@@ -47,18 +47,18 @@ internal class UpdateScentFlaggedAction : FlaggedAction
     protected override void Execute()
     {
         int x, y;
-        if (SaveGame.TempN != 0)
+        if (Game.TempN != 0)
         {
             return;
         }
         if (_flowN == 255)
         {
-            for (y = 0; y < SaveGame.CurHgt; y++)
+            for (y = 0; y < Game.CurHgt; y++)
             {
-                for (x = 0; x < SaveGame.CurWid; x++)
+                for (x = 0; x < Game.CurWid; x++)
                 {
-                    int w = SaveGame.Grid[y][x].ScentAge;
-                    SaveGame.Grid[y][x].ScentAge = w > 128 ? w - 128 : 0;
+                    int w = Game.Grid[y][x].ScentAge;
+                    Game.Grid[y][x].ScentAge = w > 128 ? w - 128 : 0;
                 }
             }
             _flowN = 127;
@@ -66,18 +66,18 @@ internal class UpdateScentFlaggedAction : FlaggedAction
         _flowN++;
         _flowHead = 0;
         _flowTail = 0;
-        UpdateFlowAux(SaveGame.MapY, SaveGame.MapX, 0);
+        UpdateFlowAux(Game.MapY, Game.MapX, 0);
         while (_flowHead != _flowTail)
         {
-            y = SaveGame.TempY[_flowTail];
-            x = SaveGame.TempX[_flowTail];
+            y = Game.TempY[_flowTail];
+            x = Game.TempX[_flowTail];
             if (++_flowTail == Constants.TempMax)
             {
                 _flowTail = 0;
             }
             for (int d = 0; d < 8; d++)
             {
-                UpdateFlowAux(y + SaveGame.OrderedDirectionYOffset[d], x + SaveGame.OrderedDirectionXOffset[d], SaveGame.Grid[y][x].ScentStrength + 1);
+                UpdateFlowAux(y + Game.OrderedDirectionYOffset[d], x + Game.OrderedDirectionXOffset[d], Game.Grid[y][x].ScentStrength + 1);
             }
         }
         _flowHead = 0;

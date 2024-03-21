@@ -10,7 +10,7 @@ namespace AngbandOS.Core.WizardCommands;
 [Serializable]
 internal class TeleportWizardCommand : WizardCommand
 {
-    private TeleportWizardCommand(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private TeleportWizardCommand(Game game) : base(game) { } // This object is a singleton.
 
     public override char KeyChar => 't';
 

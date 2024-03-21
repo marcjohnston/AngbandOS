@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Talents;
 [Serializable]
 internal class AdrenalineChannelingTalent : Talent
 {
-    private AdrenalineChannelingTalent(SaveGame saveGame) : base(saveGame) { }
+    private AdrenalineChannelingTalent(Game game) : base(game) { }
 
     public override string Name => "Adrenaline Channeling";
     public override int Level => 23;
@@ -19,30 +19,30 @@ internal class AdrenalineChannelingTalent : Talent
 
     public override void Use()
     {
-        SaveGame.FearTimer.ResetTimer();
-        SaveGame.StunTimer.ResetTimer();
-        SaveGame.RestoreHealth(SaveGame.ExperienceLevel.Value);
-        int i = 10 + SaveGame.DieRoll(SaveGame.ExperienceLevel.Value * 3 / 2);
-        if (SaveGame.ExperienceLevel.Value < 35)
+        Game.FearTimer.ResetTimer();
+        Game.StunTimer.ResetTimer();
+        Game.RestoreHealth(Game.ExperienceLevel.Value);
+        int i = 10 + Game.DieRoll(Game.ExperienceLevel.Value * 3 / 2);
+        if (Game.ExperienceLevel.Value < 35)
         {
-            SaveGame.HeroismTimer.AddTimer(i);
+            Game.HeroismTimer.AddTimer(i);
         }
         else
         {
-            SaveGame.SuperheroismTimer.AddTimer(i);
+            Game.SuperheroismTimer.AddTimer(i);
         }
-        if (SaveGame.HasteTimer.Value == 0)
+        if (Game.HasteTimer.Value == 0)
         {
-            SaveGame.HasteTimer.SetTimer(i);
+            Game.HasteTimer.SetTimer(i);
         }
         else
         {
-            SaveGame.HasteTimer.AddTimer(i);
+            Game.HasteTimer.AddTimer(i);
         }
     }
 
     protected override string Comment()
     {
-        return $"dur 10+d{SaveGame.ExperienceLevel.Value * 3 / 2}";
+        return $"dur 10+d{Game.ExperienceLevel.Value * 3 / 2}";
     }
 }

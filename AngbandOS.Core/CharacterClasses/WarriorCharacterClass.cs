@@ -10,7 +10,7 @@ namespace AngbandOS.Core.CharacterClasses;
 [Serializable]
 internal class WarriorCharacterClass : BaseCharacterClass
 {
-    private WarriorCharacterClass(SaveGame savedGame) : base(savedGame) { }
+    private WarriorCharacterClass(Game savedGame) : base(savedGame) { }
     public override int ID => 0;
     public override string Title => "Warrior";
     public override int[] AbilityBonus => new[] { 5, -2, -2, 2, 2, -1 };
@@ -42,8 +42,8 @@ internal class WarriorCharacterClass : BaseCharacterClass
     public override int MaximumMeleeAttacksPerRound(int level) => 6;
     public override int MaximumWeight => 30;
     public override int AttackSpeedMultiplier => 5;
-    public override IArtifactBias? ArtifactBias => SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(WarriorArtifactBias));
-    public override bool SenseInventoryTest(int level) => (0 != SaveGame.RandomLessThan(9000 / ((level * level) + 40)));
+    public override IArtifactBias? ArtifactBias => Game.SingletonRepository.ArtifactBiases.Get(nameof(WarriorArtifactBias));
+    public override bool SenseInventoryTest(int level) => (0 != Game.RandomLessThan(9000 / ((level * level) + 40)));
     public override bool DetailedSenseInventory => true;
 
     /// <summary>
@@ -54,7 +54,7 @@ internal class WarriorCharacterClass : BaseCharacterClass
     public override void ItemDestroyed(Item item, int amount)
     {
         // Warriors and paladins get experience for destroying magic books
-        if (SaveGame.ItemFilterHighLevelBook(item))
+        if (Game.ItemFilterHighLevelBook(item))
         {
             GainExperienceFromSpellBookDestroy(item, amount);
         }

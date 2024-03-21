@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class ExtraDimensionalBeingScript : Script, IScript
 {
-    private ExtraDimensionalBeingScript(SaveGame saveGame) : base(saveGame) { }
+    private ExtraDimensionalBeingScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script.
@@ -18,7 +18,7 @@ internal class ExtraDimensionalBeingScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        SaveGame.MsgPrint("You have turned into a Extradimensional Being.");
-        SaveGame.RunScript(nameof(GainMutationScript));
+        Game.MsgPrint("You have turned into a Extradimensional Being.");
+        Game.RunScript(nameof(GainMutationScript));
     }
 }

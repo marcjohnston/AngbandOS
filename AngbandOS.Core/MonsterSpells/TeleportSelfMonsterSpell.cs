@@ -10,7 +10,7 @@ namespace AngbandOS.Core.MonsterSpells;
 [Serializable]
 internal class TeleportSelfMonsterSpell : MonsterSpell
 {
-    private TeleportSelfMonsterSpell(SaveGame saveGame) : base(saveGame) { }
+    private TeleportSelfMonsterSpell(Game game) : base(game) { }
     public override bool IsIntelligent => true;
     public override bool ProvidesEscape => true;
 
@@ -27,13 +27,13 @@ internal class TeleportSelfMonsterSpell : MonsterSpell
     /// <exception cref="NotImplementedException"></exception>
     public override string? VsPlayerActionMessage(Monster monster) => $"{monster.Name} teleports away.";
 
-    public override void ExecuteOnPlayer(SaveGame saveGame, Monster monster)
+    public override void ExecuteOnPlayer(Game game, Monster monster)
     {
-        monster.TeleportAway(saveGame, (Constants.MaxSight * 2) + 5);
+        monster.TeleportAway(game, (Constants.MaxSight * 2) + 5);
     }
 
-    public override void ExecuteOnMonster(SaveGame saveGame, Monster monster, Monster target)
+    public override void ExecuteOnMonster(Game game, Monster monster, Monster target)
     {
-        monster.TeleportAway(saveGame, (Constants.MaxSight * 2) + 5);
+        monster.TeleportAway(game, (Constants.MaxSight * 2) + 5);
     }
 }

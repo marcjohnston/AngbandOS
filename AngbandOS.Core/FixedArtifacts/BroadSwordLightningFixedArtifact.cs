@@ -10,7 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class BroadSwordLightningFixedArtifact : FixedArtifact
 {
-    private BroadSwordLightningFixedArtifact(SaveGame saveGame) : base(saveGame) { }
+    private BroadSwordLightningFixedArtifact(Game game) : base(game) { }
 
     protected override string BaseItemFactoryName => nameof(BroadSwordWeaponItemFactory);
 

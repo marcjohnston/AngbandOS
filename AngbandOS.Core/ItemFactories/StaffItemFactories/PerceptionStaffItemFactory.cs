@@ -10,14 +10,14 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class PerceptionStaffItemFactory : StaffItemFactory
 {
-    private PerceptionStaffItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private PerceptionStaffItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UnderscoreSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(UnderscoreSymbol));
     public override string Name => "Perception";
 
     public override void ApplyMagic(Item item, int level, int power, Store? store)
     {
-        item.TypeSpecificValue = SaveGame.DieRoll(15) + 5;
+        item.TypeSpecificValue = Game.DieRoll(15) + 5;
     }
     public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int Cost => 400;
@@ -30,11 +30,11 @@ internal class PerceptionStaffItemFactory : StaffItemFactory
 
     public override void UseStaff(UseStaffEvent eventArgs)
     {
-        if (!SaveGame.RunSuccessfulScript(nameof(IdentifyItemScript)))
+        if (!Game.RunSuccessfulScript(nameof(IdentifyItemScript)))
         {
             eventArgs.ChargeUsed = false;
         }
         eventArgs.Identified = true;
     }
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

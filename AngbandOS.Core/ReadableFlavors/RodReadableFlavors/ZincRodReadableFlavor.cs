@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Flavors;
 [Serializable]
 internal class ZincRodReadableFlavor : RodReadableFlavor
 {
-    private ZincRodReadableFlavor(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private ZincRodReadableFlavor(Game game) : base(game) { } // This object is a singleton.
     protected override string SymbolName => nameof(MinusSignSymbol);
     public override string Name => "Zinc";
 }

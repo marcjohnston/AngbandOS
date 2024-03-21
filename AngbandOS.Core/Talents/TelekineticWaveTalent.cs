@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Talents;
 [Serializable]
 internal class TelekineticWaveTalent : Talent
 {
-    private TelekineticWaveTalent(SaveGame saveGame) : base(saveGame) { }
+    private TelekineticWaveTalent(Game game) : base(game) { }
     public override string Name => "Telekinetic Wave";
     public override int Level => 28;
     public override int ManaCost => 20;
@@ -18,14 +18,14 @@ internal class TelekineticWaveTalent : Talent
 
     public override void Use()
     {
-        SaveGame.MsgPrint("A wave of pure physical force radiates out from your body!");
-        SaveGame.Project(0, 3 + (SaveGame.ExperienceLevel.Value / 10), SaveGame.MapY, SaveGame.MapX,
-            SaveGame.ExperienceLevel.Value * (SaveGame.ExperienceLevel.Value > 39 ? 4 : 3), SaveGame.SingletonRepository.Projectiles.Get(nameof(TelekinesisProjectile)),
+        Game.MsgPrint("A wave of pure physical force radiates out from your body!");
+        Game.Project(0, 3 + (Game.ExperienceLevel.Value / 10), Game.MapY, Game.MapX,
+            Game.ExperienceLevel.Value * (Game.ExperienceLevel.Value > 39 ? 4 : 3), Game.SingletonRepository.Projectiles.Get(nameof(TelekinesisProjectile)),
             ProjectionFlag.ProjectKill | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectGrid);
     }
 
     protected override string Comment()
     {
-        return $"dam {SaveGame.ExperienceLevel.Value * (SaveGame.ExperienceLevel.Value > 39 ? 4 : 3)}";
+        return $"dam {Game.ExperienceLevel.Value * (Game.ExperienceLevel.Value > 39 ? 4 : 3)}";
     }
 }

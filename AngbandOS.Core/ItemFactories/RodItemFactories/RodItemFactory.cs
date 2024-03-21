@@ -10,8 +10,8 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal abstract class RodItemFactory : ItemFactory, IFlavorFactory
 {
-    public RodItemFactory(SaveGame saveGame) : base(saveGame) { }
-    public override ItemClass ItemClass => SaveGame.SingletonRepository.ItemClasses.Get(nameof(RodsItemClass));
+    public RodItemFactory(Game game) : base(game) { }
+    public override ItemClass ItemClass => Game.SingletonRepository.ItemClasses.Get(nameof(RodsItemClass));
 
     /// <summary>
     /// Returns the factory that this item was created by; casted as an IFlavor.
@@ -33,14 +33,14 @@ internal abstract class RodItemFactory : ItemFactory, IFlavorFactory
     {
         string flavor = item.IdentityIsStoreBought ? "" : $"{FlavorFactory.Flavor.Name} ";
         string ofName = isFlavorAware ? $" of {FriendlyName}" : "";
-        string name = $"{flavor}{SaveGame.CountPluralize("Rod", item.Count)}{ofName}";
+        string name = $"{flavor}{Game.CountPluralize("Rod", item.Count)}{ofName}";
         return includeCountPrefix ? GetPrefixCount(true, name, item.Count, item.IsKnownArtifact) : name;
     }
 
     /// <summary>
     /// Returns the rod flavors repository because rods have flavors that need to be identified.
     /// </summary>
-    public IEnumerable<Flavor>? GetFlavorRepository() => SaveGame.SingletonRepository.RodReadableFlavors;
+    public IEnumerable<Flavor>? GetFlavorRepository() => Game.SingletonRepository.RodReadableFlavors;
     public override bool IsRechargable => true;
     public override bool CanBeZapped => true;
 

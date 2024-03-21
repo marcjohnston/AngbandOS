@@ -10,9 +10,9 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class LucerneHammerHaftedWeaponItemFactory : HaftedWeaponItemFactory
 {
-    private LucerneHammerHaftedWeaponItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private LucerneHammerHaftedWeaponItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(BackSlashSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(BackSlashSymbol));
     public override ColorEnum Color => ColorEnum.BrightBlue;
     public override string Name => "Lucerne Hammer";
 
@@ -25,5 +25,5 @@ internal class LucerneHammerHaftedWeaponItemFactory : HaftedWeaponItemFactory
     public override int[] Locale => new int[] { 10, 0, 0, 0 };
     public override bool ShowMods => true;
     public override int Weight => 120;
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

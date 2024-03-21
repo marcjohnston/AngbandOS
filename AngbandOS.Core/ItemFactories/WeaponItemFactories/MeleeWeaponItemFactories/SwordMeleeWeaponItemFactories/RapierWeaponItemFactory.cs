@@ -10,9 +10,9 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class RapierWeaponItemFactory : SwordWeaponItemFactory
 {
-    private RapierWeaponItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private RapierWeaponItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(VerticalBarSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(VerticalBarSymbol));
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "Rapier";
 
@@ -25,5 +25,5 @@ internal class RapierWeaponItemFactory : SwordWeaponItemFactory
     public override int[] Locale => new int[] { 5, 0, 0, 0 };
     public override bool ShowMods => true;
     public override int Weight => 40;
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

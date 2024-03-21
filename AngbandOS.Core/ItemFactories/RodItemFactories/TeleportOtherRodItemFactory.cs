@@ -10,10 +10,10 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class TeleportOtherRodItemFactory : RodItemFactory
 {
-    private TeleportOtherRodItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private TeleportOtherRodItemFactory(Game game) : base(game) { } // This object is a singleton.
 
     public override bool RequiresAiming => true;
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(MinusSignSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(MinusSignSymbol));
     public override string Name => "Teleport Other";
 
     public override int[] Chance => new int[] { 2, 0, 0, 0 };
@@ -26,11 +26,11 @@ internal class TeleportOtherRodItemFactory : RodItemFactory
     public override int Weight => 15;
     public override void Execute(ZapRodEvent zapRodEvent)
     {
-        if (SaveGame.TeleportMonster(zapRodEvent.Dir.Value))
+        if (Game.TeleportMonster(zapRodEvent.Dir.Value))
         {
             zapRodEvent.Identified = true;
         }
         zapRodEvent.Item.TypeSpecificValue = 25;
     }
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

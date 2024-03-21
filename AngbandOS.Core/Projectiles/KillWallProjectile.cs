@@ -10,15 +10,15 @@ namespace AngbandOS.Core.Projection;
 [Serializable]
 internal class KillWallProjectile : Projectile
 {
-    private KillWallProjectile(SaveGame saveGame) : base(saveGame) { }
+    private KillWallProjectile(Game game) : base(game) { }
 
-    protected override Animation EffectAnimation => SaveGame.SingletonRepository.Animations.Get(nameof(BrownSwirlAnimation));
+    protected override Animation EffectAnimation => Game.SingletonRepository.Animations.Get(nameof(BrownSwirlAnimation));
 
     protected override bool AffectFloor(int y, int x)
     {
-        GridTile cPtr = SaveGame.Grid[y][x];
+        GridTile cPtr = Game.Grid[y][x];
         bool obvious = false;
-        if (SaveGame.GridPassable(y, x))
+        if (Game.GridPassable(y, x))
         {
             return false;
         }
@@ -30,67 +30,67 @@ internal class KillWallProjectile : Projectile
         {
             if (cPtr.TileFlags.IsSet(GridTile.PlayerMemorized))
             {
-                SaveGame.MsgPrint("The vein turns into mud!");
-                SaveGame.MsgPrint("You have found something!");
+                Game.MsgPrint("The vein turns into mud!");
+                Game.MsgPrint("You have found something!");
                 obvious = true;
             }
             cPtr.TileFlags.Clear(GridTile.PlayerMemorized);
-            SaveGame.RevertTileToBackground(y, x);
-            SaveGame.PlaceGold(y, x);
+            Game.RevertTileToBackground(y, x);
+            Game.PlaceGold(y, x);
         }
         else if (cPtr.FeatureType.IsVein)
         {
             if (cPtr.TileFlags.IsSet(GridTile.PlayerMemorized))
             {
-                SaveGame.MsgPrint("The vein turns into mud!");
+                Game.MsgPrint("The vein turns into mud!");
                 obvious = true;
             }
             cPtr.TileFlags.Clear(GridTile.PlayerMemorized);
-            SaveGame.RevertTileToBackground(y, x);
+            Game.RevertTileToBackground(y, x);
         }
         else if (cPtr.FeatureType.IsWall)
         {
             if (cPtr.TileFlags.IsSet(GridTile.PlayerMemorized))
             {
-                SaveGame.MsgPrint("The wall turns into mud!");
+                Game.MsgPrint("The wall turns into mud!");
                 obvious = true;
             }
             cPtr.TileFlags.Clear(GridTile.PlayerMemorized);
-            SaveGame.RevertTileToBackground(y, x);
+            Game.RevertTileToBackground(y, x);
         }
         else if (cPtr.FeatureType is RubbleTile)
         {
             if (cPtr.TileFlags.IsSet(GridTile.PlayerMemorized))
             {
-                SaveGame.MsgPrint("The rubble turns into mud!");
+                Game.MsgPrint("The rubble turns into mud!");
                 obvious = true;
             }
             cPtr.TileFlags.Clear(GridTile.PlayerMemorized);
-            SaveGame.RevertTileToBackground(y, x);
-            if (SaveGame.RandomLessThan(100) < 10)
+            Game.RevertTileToBackground(y, x);
+            if (Game.RandomLessThan(100) < 10)
             {
-                if (SaveGame.PlayerCanSeeBold(y, x))
+                if (Game.PlayerCanSeeBold(y, x))
                 {
-                    SaveGame.MsgPrint("There was something buried in the rubble!");
+                    Game.MsgPrint("There was something buried in the rubble!");
                     obvious = true;
                 }
-                SaveGame.PlaceObject(y, x, false, false);
+                Game.PlaceObject(y, x, false, false);
             }
         }
         else
         {
             if (cPtr.TileFlags.IsSet(GridTile.PlayerMemorized))
             {
-                SaveGame.MsgPrint("The door turns into mud!");
+                Game.MsgPrint("The door turns into mud!");
                 obvious = true;
             }
             cPtr.TileFlags.Clear(GridTile.PlayerMemorized);
-            SaveGame.RevertTileToBackground(y, x);
+            Game.RevertTileToBackground(y, x);
         }
-        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateScentFlaggedAction)).Set();
-        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateMonstersFlaggedAction)).Set();
-        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateLightFlaggedAction)).Set();
-        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateViewFlaggedAction)).Set();
+        Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateScentFlaggedAction)).Set();
+        Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateMonstersFlaggedAction)).Set();
+        Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateLightFlaggedAction)).Set();
+        Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateViewFlaggedAction)).Set();
         return obvious;
     }
 

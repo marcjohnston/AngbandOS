@@ -10,22 +10,22 @@ namespace AngbandOS.Core.Rewards;
 [Serializable]
 internal class HealFulReward : Reward
 {
-    private HealFulReward(SaveGame saveGame) : base(saveGame) { }
+    private HealFulReward(Game game) : base(game) { }
     public override void GetReward(Patron patron)
     {
-        SaveGame.MsgPrint($"The voice of {patron.ShortName} booms out:");
-        SaveGame.MsgPrint("'Rise, my servant!'");
-        SaveGame.RunScript(nameof(RestoreLevelScript));
-        SaveGame.PoisonTimer.ResetTimer();
-        SaveGame.BlindnessTimer.ResetTimer();
-        SaveGame.ConfusedTimer.ResetTimer();
-        SaveGame.HallucinationsTimer.ResetTimer();
-        SaveGame.StunTimer.ResetTimer();
-        SaveGame.BleedingTimer.ResetTimer();
-        SaveGame.RestoreHealth(5000);
+        Game.MsgPrint($"The voice of {patron.ShortName} booms out:");
+        Game.MsgPrint("'Rise, my servant!'");
+        Game.RunScript(nameof(RestoreLevelScript));
+        Game.PoisonTimer.ResetTimer();
+        Game.BlindnessTimer.ResetTimer();
+        Game.ConfusedTimer.ResetTimer();
+        Game.HallucinationsTimer.ResetTimer();
+        Game.StunTimer.ResetTimer();
+        Game.BleedingTimer.ResetTimer();
+        Game.RestoreHealth(5000);
         for (int dummy = 0; dummy < 6; dummy++)
         {
-            SaveGame.TryRestoringAbilityScore(dummy);
+            Game.TryRestoringAbilityScore(dummy);
         }
     }
 }

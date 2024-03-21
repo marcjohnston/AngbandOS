@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Mutations.PassiveMutations;
 [Serializable]
 internal class BlankFacPassiveMutation : Mutation
 {
-    private BlankFacPassiveMutation(SaveGame saveGame) : base(saveGame) { }
+    private BlankFacPassiveMutation(Game game) : base(game) { }
     public override int Frequency => 2;
     public override string GainMessage => "Your face becomes completely featureless!";
     public override string HaveMessage => "Your face is featureless (-1 CHR).";
@@ -18,11 +18,11 @@ internal class BlankFacPassiveMutation : Mutation
 
     public override void OnGain()
     {
-        SaveGame.CharismaBonus -= 1;
+        Game.CharismaBonus -= 1;
     }
 
     public override void OnLose()
     {
-        SaveGame.CharismaBonus += 1;
+        Game.CharismaBonus += 1;
     }
 }

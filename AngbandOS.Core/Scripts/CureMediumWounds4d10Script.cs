@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class CureMediumWounds4d10Script : Script, IScript
 {
-    private CureMediumWounds4d10Script(SaveGame saveGame) : base(saveGame) { }
+    private CureMediumWounds4d10Script(Game game) : base(game) { }
 
     /// <summary>
     /// Restores health between 4 and 10 points and reduces the bleeding timer to 20 points less than half of the remaining turns.
@@ -18,7 +18,7 @@ internal class CureMediumWounds4d10Script : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        SaveGame.RestoreHealth(SaveGame.DiceRoll(4, 10));
-        SaveGame.BleedingTimer.SetTimer((SaveGame.BleedingTimer.Value / 2) - 20);
+        Game.RestoreHealth(Game.DiceRoll(4, 10));
+        Game.BleedingTimer.SetTimer((Game.BleedingTimer.Value / 2) - 20);
     }
 }

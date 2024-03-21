@@ -11,7 +11,7 @@ namespace AngbandOS.Core.AttackEffects;
 [Serializable]
 internal class Exp20AttackEffect : ExpAttackEffect
 {
-    private Exp20AttackEffect(SaveGame saveGame) : base(saveGame) { }
+    private Exp20AttackEffect(Game game) : base(game) { }
     public override int Power => 5;
     public override string Description => "lower experience (by 20d6+)";
     protected override int HoldLifePercentChange => 90;

@@ -10,19 +10,19 @@ namespace AngbandOS.Core.Timers;
 [Serializable]
 internal class HeroismTimer : Timer
 {
-    private HeroismTimer(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private HeroismTimer(Game game) : base(game) { } // This object is a singleton.
     protected override void EffectStopped()
     {
-        SaveGame.MsgPrint("The heroism wears off.");
+        Game.MsgPrint("The heroism wears off.");
     }
     protected override void EffectIncreased(int newRate, int currentRate)
     {
-        SaveGame.MsgPrint("You feel like a hero!");
+        Game.MsgPrint("You feel like a hero!");
     }
     protected override void Noticed()
     {
-        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
-        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateHealthFlaggedAction)).Set();
+        Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
+        Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateHealthFlaggedAction)).Set();
         base.Noticed();
     }
 }

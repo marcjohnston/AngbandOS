@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class FireBoltScript : Script, IScript
 {
-    private FireBoltScript(SaveGame saveGame) : base(saveGame) { }
+    private FireBoltScript(Game game) : base(game) { }
 
     /// <summary>
     /// Fires a bolt or beam of fire in a chosen direction.
@@ -19,24 +19,24 @@ internal class FireBoltScript : Script, IScript
     public void ExecuteScript()
     {
         int beam;
-        switch (SaveGame.BaseCharacterClass.ID)
+        switch (Game.BaseCharacterClass.ID)
         {
             case CharacterClass.Mage:
-                beam = SaveGame.ExperienceLevel.Value;
+                beam = Game.ExperienceLevel.Value;
                 break;
 
             case CharacterClass.HighMage:
-                beam = SaveGame.ExperienceLevel.Value + 10;
+                beam = Game.ExperienceLevel.Value + 10;
                 break;
 
             default:
-                beam = SaveGame.ExperienceLevel.Value / 2;
+                beam = Game.ExperienceLevel.Value / 2;
                 break;
         }
-        if (!SaveGame.GetDirectionWithAim(out int dir))
+        if (!Game.GetDirectionWithAim(out int dir))
         {
             return;
         }
-        SaveGame.FireBoltOrBeam(beam, SaveGame.SingletonRepository.Projectiles.Get(nameof(FireProjectile)), dir, SaveGame.DiceRoll(8 + ((SaveGame.ExperienceLevel.Value - 5) / 4), 8));
+        Game.FireBoltOrBeam(beam, Game.SingletonRepository.Projectiles.Get(nameof(FireProjectile)), dir, Game.DiceRoll(8 + ((Game.ExperienceLevel.Value - 5) / 4), 8));
     }
 }

@@ -13,7 +13,7 @@ namespace AngbandOS.Core.Activations;
 [Serializable]
 internal class SunlightActivation : DirectionalActivation
 {
-    private SunlightActivation(SaveGame saveGame) : base(saveGame) { }
+    private SunlightActivation(Game game) : base(game) { }
     public override int RandomChance => 101;
 
     protected override string? PostAimingMessage => "A line of sunlight appears.";
@@ -22,7 +22,7 @@ internal class SunlightActivation : DirectionalActivation
 
     protected override bool Activate(int direction)
     {
-        SaveGame.LightLine(direction);
+        Game.LightLine(direction);
         return true;
     }
 

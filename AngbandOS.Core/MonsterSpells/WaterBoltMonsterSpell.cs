@@ -10,15 +10,15 @@ namespace AngbandOS.Core.MonsterSpells;
 [Serializable]
 internal class WaterBoltMonsterSpell : BoltProjectileMonsterSpell
 {
-    private WaterBoltMonsterSpell(SaveGame saveGame) : base(saveGame) { }
+    private WaterBoltMonsterSpell(Game game) : base(game) { }
     public override bool CanBeReflected => true;
     public override bool IsAttack => true;
     protected override string ActionName => "casts a water bolt";
     protected override int Damage(Monster monster)
     {
         int monsterLevel = monster.Race.Level >= 1 ? monster.Race.Level : 1;
-        return SaveGame.DiceRoll(10, 10) + monsterLevel;
+        return Game.DiceRoll(10, 10) + monsterLevel;
     }
-    protected override Projectile Projectile(SaveGame saveGame) => saveGame.SingletonRepository.Projectiles.Get(nameof(WaterProjectile));
-    public override SpellResistantDetection[] SmartLearn => new SpellResistantDetection[] { SaveGame.SingletonRepository.SpellResistantDetections.Get(nameof(ReflectSpellResistantDetection)) };
+    protected override Projectile Projectile(Game game) => game.SingletonRepository.Projectiles.Get(nameof(WaterProjectile));
+    public override SpellResistantDetection[] SmartLearn => new SpellResistantDetection[] { Game.SingletonRepository.SpellResistantDetections.Get(nameof(ReflectSpellResistantDetection)) };
 }

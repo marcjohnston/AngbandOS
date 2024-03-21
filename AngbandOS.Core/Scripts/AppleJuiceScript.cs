@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class AppleJuiceScript : Script, IScript
 {
-    private AppleJuiceScript(SaveGame saveGame) : base(saveGame) { }
+    private AppleJuiceScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script.
@@ -19,6 +19,6 @@ internal class AppleJuiceScript : Script, IScript
     public void ExecuteScript()
     {
         // Apple juice has no effect
-        SaveGame.MsgPrint("You feel less thirsty.");
+        Game.MsgPrint("You feel less thirsty.");
     }
 }

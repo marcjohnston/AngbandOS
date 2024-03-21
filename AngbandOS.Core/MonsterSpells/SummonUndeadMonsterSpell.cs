@@ -10,10 +10,10 @@ namespace AngbandOS.Core.MonsterSpells;
 [Serializable]
 internal class SummonUndeadMonsterSpell : SummonMonsterSpell
 {
-    private SummonUndeadMonsterSpell(SaveGame saveGame) : base(saveGame) { }
+    private SummonUndeadMonsterSpell(Game game) : base(game) { }
     protected override string SummonName(Monster monster) => "an undead adversary";
 
-    protected override int MaximumSummonCount(SaveGame saveGame) => 1;
+    protected override int MaximumSummonCount(Game game) => 1;
 
-    protected override MonsterFilter? MonsterSelector(Monster monster) => SaveGame.SingletonRepository.MonsterFilters.Get(nameof(UndeadMonsterFilter));
+    protected override MonsterFilter? MonsterSelector(Monster monster) => Game.SingletonRepository.MonsterFilters.Get(nameof(UndeadMonsterFilter));
 }

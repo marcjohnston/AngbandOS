@@ -10,11 +10,11 @@ namespace AngbandOS.Core.Projection;
 [Serializable]
 internal class OldSpeedProjectile : Projectile
 {
-    private OldSpeedProjectile(SaveGame saveGame) : base(saveGame) { }
+    private OldSpeedProjectile(Game game) : base(game) { }
 
-    protected override ProjectileGraphic? BoltProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get(nameof(BrightBlueBulletProjectileGraphic));
+    protected override ProjectileGraphic? BoltProjectileGraphic => Game.SingletonRepository.ProjectileGraphics.Get(nameof(BrightBlueBulletProjectileGraphic));
 
-    protected override Animation EffectAnimation => SaveGame.SingletonRepository.Animations.Get(nameof(BrightBlueSwirlAnimation));
+    protected override Animation EffectAnimation => Game.SingletonRepository.Animations.Get(nameof(BrightBlueSwirlAnimation));
 
     protected override bool ProjectileAngersMonster(Monster mPtr)
     {
@@ -42,12 +42,12 @@ internal class OldSpeedProjectile : Projectile
 
     protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
     {
-        bool blind = SaveGame.BlindnessTimer.Value != 0;
+        bool blind = Game.BlindnessTimer.Value != 0;
         if (blind)
         {
-            SaveGame.MsgPrint("You are hit by something!");
+            Game.MsgPrint("You are hit by something!");
         }
-        SaveGame.HasteTimer.AddTimer(SaveGame.DieRoll(5));
+        Game.HasteTimer.AddTimer(Game.DieRoll(5));
         return true;
     }
 }

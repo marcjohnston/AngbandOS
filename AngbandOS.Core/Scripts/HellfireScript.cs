@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class HellfireScript : Script, IScript
 {
-    private HellfireScript(SaveGame saveGame) : base(saveGame) { }
+    private HellfireScript(Game game) : base(game) { }
 
     /// <summary>
     /// Fires a ball of hellfire in a chosen direction with 666 damage and radius of 3; also, causing between 50 and 100 points of damage to the player.
@@ -18,11 +18,11 @@ internal class HellfireScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        if (!SaveGame.GetDirectionWithAim(out int dir))
+        if (!Game.GetDirectionWithAim(out int dir))
         {
             return;
         }
-        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(HellfireProjectile)), dir, 666, 3);
-        SaveGame.TakeHit(50 + SaveGame.DieRoll(50), "the strain of casting Hellfire");
+        Game.FireBall(Game.SingletonRepository.Projectiles.Get(nameof(HellfireProjectile)), dir, 666, 3);
+        Game.TakeHit(50 + Game.DieRoll(50), "the strain of casting Hellfire");
     }
 }

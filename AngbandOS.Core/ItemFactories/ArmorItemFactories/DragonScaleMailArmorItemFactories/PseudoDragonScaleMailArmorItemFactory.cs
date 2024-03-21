@@ -10,22 +10,22 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class PseudoDragonScaleMailArmorItemFactory : DragonScaleMailArmorItemFactory, IItemsCanBeActivated
 {
-    private PseudoDragonScaleMailArmorItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private PseudoDragonScaleMailArmorItemFactory(Game game) : base(game) { } // This object is a singleton.
 
     public void ActivateItem(Item item)
     {
-        if (!SaveGame.GetDirectionWithAim(out int dir))
+        if (!Game.GetDirectionWithAim(out int dir))
         {
             return;
         }
-        int chance = SaveGame.RandomLessThan(2);
+        int chance = Game.RandomLessThan(2);
         string element = chance == 0 ? "light" : "darkness";
-        SaveGame.MsgPrint($"You breathe {element}.");
-        SaveGame.FireBall(chance == 0 ? (Projectile)SaveGame.SingletonRepository.Projectiles.Get(nameof(LightProjectile)) : SaveGame.SingletonRepository.Projectiles.Get(nameof(DarkProjectile)), dir, 200, -2);
-        item.RechargeTimeLeft = SaveGame.RandomLessThan(300) + 300;
+        Game.MsgPrint($"You breathe {element}.");
+        Game.FireBall(chance == 0 ? (Projectile)Game.SingletonRepository.Projectiles.Get(nameof(LightProjectile)) : Game.SingletonRepository.Projectiles.Get(nameof(DarkProjectile)), dir, 200, -2);
+        item.RechargeTimeLeft = Game.RandomLessThan(300) + 300;
     }
     public override string? DescribeActivationEffect => "breathe light/darkness (200) every 300+d300 turns";
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(OpenBraceSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(OpenBraceSymbol));
     public override ColorEnum Color => ColorEnum.Pink;
     public override string Name => "Pseudo Dragon Scale Mail";
 
@@ -47,5 +47,5 @@ internal class PseudoDragonScaleMailArmorItemFactory : DragonScaleMailArmorItemF
     public override int ToA => 10;
     public override int ToH => -2;
     public override int Weight => 200;
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

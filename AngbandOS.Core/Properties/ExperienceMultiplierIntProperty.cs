@@ -10,5 +10,5 @@ namespace AngbandOS.Core.Properties;
 [Serializable]
 internal class ExperienceMultiplierIntProperty : IntProperty
 {
-    private ExperienceMultiplierIntProperty(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private ExperienceMultiplierIntProperty(Game game) : base(game) { } // This object is a singleton.
 }

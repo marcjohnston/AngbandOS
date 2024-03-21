@@ -10,12 +10,12 @@ namespace AngbandOS.Core.Spells.Chaos;
 [Serializable]
 internal class ChaosSpellFlashOfLight : Spell
 {
-    private ChaosSpellFlashOfLight(SaveGame saveGame) : base(saveGame) { }
+    private ChaosSpellFlashOfLight(Game game) : base(game) { }
     protected override string? CastScriptName => nameof(LightAreaScript);
 
     protected override string? CastFailedScriptName => nameof(WildChaoticMagicScript);
 
     public override string Name => "Flash of Light";
 
-    protected override string LearnedDetails => $"dam 2d{SaveGame.ExperienceLevel.Value / 2}";
+    protected override string LearnedDetails => $"dam 2d{Game.ExperienceLevel.Value / 2}";
 }

@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Tiles;
 [Serializable]
 internal class FireTrapTile : Tile
 {
-    private FireTrapTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private FireTrapTile(Game game) : base(game) { } // This object is a singleton.
     protected override string SymbolName => nameof(CaretSymbol);
     public override ColorEnum Color => ColorEnum.Brown;
     protected override string? AlterActionName => nameof(DisarmAlterAction);

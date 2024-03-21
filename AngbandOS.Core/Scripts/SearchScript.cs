@@ -13,7 +13,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class SearchScript : Script, IScript, IRepeatableScript
 {
-    private SearchScript(SaveGame saveGame) : base(saveGame) { }
+    private SearchScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the search script and returns false.
@@ -32,44 +32,44 @@ internal class SearchScript : Script, IScript, IRepeatableScript
     public void ExecuteScript()
     {
         // Searching costs 100.
-        SaveGame.EnergyUse = 100;
+        Game.EnergyUse = 100;
 
         // The basic chance is equal to our searching skill
-        int chance = SaveGame.SkillSearching;
+        int chance = Game.SkillSearching;
         // If we can't see it's hard to search
-        if (SaveGame.BlindnessTimer.Value != 0 || SaveGame.NoLight())
+        if (Game.BlindnessTimer.Value != 0 || Game.NoLight())
         {
             chance /= 10;
         }
         // If we're confused it's hard to search
-        if (SaveGame.ConfusedTimer.Value != 0 || SaveGame.HallucinationsTimer.Value != 0)
+        if (Game.ConfusedTimer.Value != 0 || Game.HallucinationsTimer.Value != 0)
         {
             chance /= 10;
         }
         // Check the eight squares around us
-        for (int y = SaveGame.MapY - 1; y <= SaveGame.MapY + 1; y++)
+        for (int y = Game.MapY - 1; y <= Game.MapY + 1; y++)
         {
-            for (int x = SaveGame.MapX - 1; x <= SaveGame.MapX + 1; x++)
+            for (int x = Game.MapX - 1; x <= Game.MapX + 1; x++)
             {
                 // Check if we succeed
-                if (SaveGame.RandomLessThan(100) < chance)
+                if (Game.RandomLessThan(100) < chance)
                 {
                     // If there's a trap, then find it
-                    GridTile tile = SaveGame.Grid[y][x];
+                    GridTile tile = Game.Grid[y][x];
                     if (tile.FeatureType is InvisibleTile)
                     {
                         // Pick a random trap to replace the undetected one with
-                        SaveGame.PickTrap(y, x);
-                        SaveGame.MsgPrint("You have found a trap.");
-                        SaveGame.Disturb(false);
+                        Game.PickTrap(y, x);
+                        Game.MsgPrint("You have found a trap.");
+                        Game.Disturb(false);
                     }
                     if (tile.FeatureType.IsSecretDoor)
                     {
                         // Replace the secret door with a visible door
-                        SaveGame.MsgPrint("You have found a secret door.");
-                        SaveGame.GainExperience(1);
-                        SaveGame.ReplaceSecretDoor(y, x);
-                        SaveGame.Disturb(false);
+                        Game.MsgPrint("You have found a secret door.");
+                        Game.GainExperience(1);
+                        Game.ReplaceSecretDoor(y, x);
+                        Game.Disturb(false);
                     }
                     // Check the items on the tile
                     foreach (Item item in tile.Items)
@@ -83,16 +83,16 @@ internal class SearchScript : Script, IScript, IRepeatableScript
                         {
                             continue;
                         }
-                        if (SaveGame.SingletonRepository.ChestTrapConfigurations[item.TypeSpecificValue].NotTrapped)
+                        if (Game.SingletonRepository.ChestTrapConfigurations[item.TypeSpecificValue].NotTrapped)
                         {
                             continue;
                         }
                         // It was a trapped chest - if we didn't already know that then let us know
                         if (!item.IsKnown())
                         {
-                            SaveGame.MsgPrint("You have discovered a trap on the chest!");
+                            Game.MsgPrint("You have discovered a trap on the chest!");
                             item.BecomeKnown();
-                            SaveGame.Disturb(false);
+                            Game.Disturb(false);
                         }
                     }
                 }

@@ -13,7 +13,7 @@ namespace AngbandOS.Core.Commands;
 [Serializable]
 internal class FeelingAndLocationCommand : GameCommand
 {
-    private FeelingAndLocationCommand(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private FeelingAndLocationCommand(Game game) : base(game) { } // This object is a singleton.
 
     public override char KeyChar => 'H';
 

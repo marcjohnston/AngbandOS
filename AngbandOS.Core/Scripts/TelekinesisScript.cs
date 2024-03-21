@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class TelekinesisScript : Script, IScript
 {
-    private TelekinesisScript(SaveGame saveGame) : base(saveGame) { }
+    private TelekinesisScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script.
@@ -18,10 +18,10 @@ internal class TelekinesisScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        if (!SaveGame.GetDirectionWithAim(out int dir))
+        if (!Game.GetDirectionWithAim(out int dir))
         {
             return;
         }
-        SaveGame.SummonItem(dir, SaveGame.ExperienceLevel.Value * 15, false);
+        Game.SummonItem(dir, Game.ExperienceLevel.Value * 15, false);
     }
 }

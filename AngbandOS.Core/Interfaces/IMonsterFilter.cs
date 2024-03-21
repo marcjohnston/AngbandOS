@@ -18,7 +18,7 @@ internal interface IMonsterFilter
     /// <summary>
     /// Returns true, if a monster matches the selector.
     /// </summary>
-    /// <param name="saveGame"></param>
+    /// <param name="game"></param>
     /// <param name="rPtr">The monster race to check.</param>
     /// <returns></returns>
     bool Matches(MonsterRace rPtr);

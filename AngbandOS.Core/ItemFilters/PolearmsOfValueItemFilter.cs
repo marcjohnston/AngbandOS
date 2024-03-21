@@ -13,6 +13,6 @@ namespace AngbandOS.Core.ItemFilters;
 [Serializable]
 internal class PolearmsOfValueItemFilter : ItemFilter<PolearmWeaponItemFactory>
 {
-    private PolearmsOfValueItemFilter(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private PolearmsOfValueItemFilter(Game game) : base(game) { } // This object is a singleton.
     public override bool? HasValue => true;
 }

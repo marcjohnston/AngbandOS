@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class ManaStormScript : Script, IScript
 {
-    private ManaStormScript(SaveGame saveGame) : base(saveGame) { }
+    private ManaStormScript(Game game) : base(game) { }
 
     /// <summary>
     /// Fires a ball of mana in a chosen direction.
@@ -18,10 +18,10 @@ internal class ManaStormScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        if (!SaveGame.GetDirectionWithAim(out int dir))
+        if (!Game.GetDirectionWithAim(out int dir))
         {
             return;
         }
-        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(ManaProjectile)), dir, 300 + (SaveGame.ExperienceLevel.Value * 2), 4);
+        Game.FireBall(Game.SingletonRepository.Projectiles.Get(nameof(ManaProjectile)), dir, 300 + (Game.ExperienceLevel.Value * 2), 4);
     }
 }

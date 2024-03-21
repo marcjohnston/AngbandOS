@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class CarnageScript : Script, IScript
 {
-    private CarnageScript(SaveGame saveGame) : base(saveGame) { }
+    private CarnageScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script.
@@ -18,16 +18,16 @@ internal class CarnageScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        for (int i = 1; i < SaveGame.MMax; i++)
+        for (int i = 1; i < Game.MMax; i++)
         {
-            Monster mPtr = SaveGame.Monsters[i];
+            Monster mPtr = Game.Monsters[i];
             if (mPtr.Race == null)
             {
                 continue;
             }
             if (mPtr.DistanceFromPlayer <= Constants.MaxSight)
             {
-                SaveGame.DeleteMonsterByIndex(i, true);
+                Game.DeleteMonsterByIndex(i, true);
             }
         }
     }

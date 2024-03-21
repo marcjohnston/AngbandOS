@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class DetectInvisibilityScript : Script, IScript
 {
-    private DetectInvisibilityScript(SaveGame saveGame) : base(saveGame) { }
+    private DetectInvisibilityScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script.
@@ -18,6 +18,6 @@ internal class DetectInvisibilityScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        SaveGame.DetectMonstersInvis();
+        Game.DetectMonstersInvis();
     }
 }

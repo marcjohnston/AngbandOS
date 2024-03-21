@@ -13,7 +13,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class BashScript : Script, IScript, IRepeatableScript
 {
-    private BashScript(SaveGame saveGame) : base(saveGame) { }
+    private BashScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the bash script and disposes of the repeatable result.
@@ -34,27 +34,27 @@ internal class BashScript : Script, IScript, IRepeatableScript
         bool more = false;
 
         // Get the direction to bash
-        if (SaveGame.GetDirectionNoAim(out int dir))
+        if (Game.GetDirectionNoAim(out int dir))
         {
-            int y = SaveGame.MapY + SaveGame.KeypadDirectionYOffset[dir];
-            int x = SaveGame.MapX + SaveGame.KeypadDirectionXOffset[dir];
-            GridTile tile = SaveGame.Grid[y][x];
+            int y = Game.MapY + Game.KeypadDirectionYOffset[dir];
+            int x = Game.MapX + Game.KeypadDirectionXOffset[dir];
+            GridTile tile = Game.Grid[y][x];
             // Can only bash closed doors
             if (!tile.FeatureType.IsVisibleDoor)
             {
-                SaveGame.MsgPrint("You see nothing there to bash.");
+                Game.MsgPrint("You see nothing there to bash.");
             }
             else if (tile.MonsterIndex != 0)
             {
                 // Oops - a monster got in the way
-                SaveGame.EnergyUse = 100;
-                SaveGame.MsgPrint("There is a monster in the way!");
-                SaveGame.PlayerAttackMonster(y, x);
+                Game.EnergyUse = 100;
+                Game.MsgPrint("There is a monster in the way!");
+                Game.PlayerAttackMonster(y, x);
             }
             else
             {
                 // Bash the door.
-                more = SaveGame.BashClosedDoor(y, x);
+                more = Game.BashClosedDoor(y, x);
             }
         }
         return more;

@@ -10,18 +10,18 @@ namespace AngbandOS.Core.SpellResistantDetections;
 [Serializable]
 internal class ElecSpellResistantDetection : SpellResistantDetection
 {
-    private ElecSpellResistantDetection(SaveGame saveGame) : base(saveGame) { }
+    private ElecSpellResistantDetection(Game game) : base(game) { }
     public override void Learn(Monster monster)
     {
-        if (SaveGame.HasLightningResistance)
+        if (Game.HasLightningResistance)
         {
             monster.SmResElec = true;
         }
-        if (SaveGame.LightningResistanceTimer.Value != 0)
+        if (Game.LightningResistanceTimer.Value != 0)
         {
             monster.SmOppElec = true;
         }
-        if (SaveGame.HasLightningImmunity)
+        if (Game.HasLightningImmunity)
         {
             monster.SmImmElec = true;
         }

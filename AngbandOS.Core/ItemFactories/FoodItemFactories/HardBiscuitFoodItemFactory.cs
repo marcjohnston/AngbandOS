@@ -10,9 +10,9 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class HardBiscuitFoodItemFactory : FoodItemFactory
 {
-    private HardBiscuitFoodItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private HardBiscuitFoodItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(CommaSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(CommaSymbol));
     public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "Hard Biscuit";
 
@@ -22,8 +22,8 @@ internal class HardBiscuitFoodItemFactory : FoodItemFactory
     public override int Weight => 2;
     public override bool Eat()
     {
-        SaveGame.PlaySound(SoundEffectEnum.Eat);
-        SaveGame.MsgPrint("That tastes good.");
+        Game.PlaySound(SoundEffectEnum.Eat);
+        Game.MsgPrint("That tastes good.");
         return true;
     }
 
@@ -32,5 +32,5 @@ internal class HardBiscuitFoodItemFactory : FoodItemFactory
     /// </summary>
     public override bool VanishesWhenEatenBySkeletons => true;
 
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Flavors;
 [Serializable]
 internal class RubyRingReadableFlavor : RingReadableFlavor
 {
-    private RubyRingReadableFlavor(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private RubyRingReadableFlavor(Game game) : base(game) { } // This object is a singleton.
     protected override string SymbolName => nameof(EqualSignSymbol);
     public override ColorEnum Color => ColorEnum.BrightRed;
     public override string Name => "Ruby";

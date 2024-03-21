@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class PoisonPitScript : Script, IScript
 {
-    private PoisonPitScript(SaveGame saveGame) : base(saveGame) { }
+    private PoisonPitScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script.
@@ -19,39 +19,39 @@ internal class PoisonPitScript : Script, IScript
     public void ExecuteScript()
     {
         // A pit can be flown over with feather fall
-        if (SaveGame.HasFeatherFall)
+        if (Game.HasFeatherFall)
         {
-            SaveGame.MsgPrint("You fly over a spiked pit.");
+            Game.MsgPrint("You fly over a spiked pit.");
         }
         else
         {
-            SaveGame.MsgPrint("You fall into a spiked pit!");
+            Game.MsgPrint("You fall into a spiked pit!");
             // A pit does 2d6 fall damage
-            int damage = SaveGame.DiceRoll(2, 6);
+            int damage = Game.DiceRoll(2, 6);
             string name = "a pit trap";
             // 50% chance of doing double damage plus bleeding plus poison
-            if (SaveGame.RandomLessThan(100) < 50)
+            if (Game.RandomLessThan(100) < 50)
             {
-                SaveGame.MsgPrint("You are impaled on poisonous spikes!");
+                Game.MsgPrint("You are impaled on poisonous spikes!");
                 name = "a spiked pit";
                 damage *= 2;
-                SaveGame.BleedingTimer.AddTimer(SaveGame.DieRoll(damage));
+                Game.BleedingTimer.AddTimer(Game.DieRoll(damage));
                 // Hagarg Ryonis can save us from the poison
-                if (SaveGame.HasPoisonResistance || SaveGame.PoisonResistanceTimer.Value != 0)
+                if (Game.HasPoisonResistance || Game.PoisonResistanceTimer.Value != 0)
                 {
-                    SaveGame.MsgPrint("The poison does not affect you!");
+                    Game.MsgPrint("The poison does not affect you!");
                 }
-                else if (SaveGame.DieRoll(10) <= SaveGame.SingletonRepository.Gods.Get(nameof(HagargRyonisGod)).AdjustedFavour)
+                else if (Game.DieRoll(10) <= Game.SingletonRepository.Gods.Get(nameof(HagargRyonisGod)).AdjustedFavour)
                 {
-                    SaveGame.MsgPrint("Hagarg Ryonis's favour protects you!");
+                    Game.MsgPrint("Hagarg Ryonis's favour protects you!");
                 }
                 else
                 {
                     damage *= 2;
-                    SaveGame.PoisonTimer.AddTimer(SaveGame.DieRoll(damage));
+                    Game.PoisonTimer.AddTimer(Game.DieRoll(damage));
                 }
             }
-            SaveGame.TakeHit(damage, name);
+            Game.TakeHit(damage, name);
         }
     }
 }

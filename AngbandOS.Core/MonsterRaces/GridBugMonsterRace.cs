@@ -10,7 +10,7 @@ namespace AngbandOS.Core.MonsterRaces;
 [Serializable]
 internal class GridBugMonsterRace : MonsterRace
 {
-    protected GridBugMonsterRace(SaveGame saveGame) : base(saveGame) { }
+    protected GridBugMonsterRace(Game game) : base(game) { }
 
     protected override string SymbolName => nameof(UpperISymbol);
     public override ColorEnum Color => ColorEnum.BrightPurple;

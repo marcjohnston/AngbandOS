@@ -10,18 +10,18 @@ namespace AngbandOS.Core.Rewards;
 [Serializable]
 internal class LoseAblReward : Reward
 {
-    private LoseAblReward(SaveGame saveGame) : base(saveGame) { }
+    private LoseAblReward(Game game) : base(game) { }
     public override void GetReward(Patron patron)
     {
-        SaveGame.MsgPrint($"The voice of {patron.ShortName} booms out:");
-        SaveGame.MsgPrint("'I grow tired of thee, mortal.'");
-        if (SaveGame.DieRoll(3) == 1 && !(patron.PreferredAbility < 0))
+        Game.MsgPrint($"The voice of {patron.ShortName} booms out:");
+        Game.MsgPrint("'I grow tired of thee, mortal.'");
+        if (Game.DieRoll(3) == 1 && !(patron.PreferredAbility < 0))
         {
-            SaveGame.TryDecreasingAbilityScore(patron.PreferredAbility);
+            Game.TryDecreasingAbilityScore(patron.PreferredAbility);
         }
         else
         {
-            SaveGame.TryDecreasingAbilityScore(SaveGame.DieRoll(6) - 1);
+            Game.TryDecreasingAbilityScore(Game.DieRoll(6) - 1);
         }
     }
 }

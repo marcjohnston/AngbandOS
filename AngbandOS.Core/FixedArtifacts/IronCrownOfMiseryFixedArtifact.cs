@@ -10,14 +10,14 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class IronCrownOfMiseryFixedArtifact : FixedArtifact
 {
-    private IronCrownOfMiseryFixedArtifact(SaveGame saveGame) : base(saveGame) { }
+    private IronCrownOfMiseryFixedArtifact(Game game) : base(game) { }
 
     protected override string BaseItemFactoryName => nameof(IronCrownArmorItemFactory);
 
 
     public override void ApplyResistances(Item item)
     {
-        item.RandomPower = SaveGame.SingletonRepository.Powers.ToWeightedRandom(_power => _power.IsAbility == true).Choose();
+        item.RandomPower = Game.SingletonRepository.Powers.ToWeightedRandom(_power => _power.IsAbility == true).Choose();
     }
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "The Iron Crown of Misery";

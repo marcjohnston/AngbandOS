@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Flavors;
 [Serializable]
 internal abstract class StaffReadableFlavor : ReadableFlavor
 {
-    protected StaffReadableFlavor(SaveGame saveGame) : base(saveGame)
+    protected StaffReadableFlavor(Game game) : base(game)
     {
     }
 }

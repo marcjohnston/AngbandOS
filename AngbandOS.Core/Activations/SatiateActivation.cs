@@ -13,12 +13,12 @@ namespace AngbandOS.Core.Activations;
 [Serializable]
 internal class SatiateActivation : Activation
 {
-    private SatiateActivation(SaveGame saveGame) : base(saveGame) { }
+    private SatiateActivation(Game game) : base(game) { }
     public override int RandomChance => 85;
 
     protected override bool OnActivate(Item item)
     {
-        SaveGame.SetFood(Constants.PyFoodMax - 1);
+        Game.SetFood(Constants.PyFoodMax - 1);
         return true;
     }
 

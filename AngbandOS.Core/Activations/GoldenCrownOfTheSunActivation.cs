@@ -13,7 +13,7 @@ namespace AngbandOS.Core.Activations;
 [Serializable]
 internal class GoldenCrownOfTheSunActivation : Activation
 {
-    private GoldenCrownOfTheSunActivation(SaveGame saveGame) : base(saveGame) { }
+    private GoldenCrownOfTheSunActivation(Game game) : base(game) { }
 
     /// <summary>
     /// Returns a random chance of 0, because this activation only applies to a fixed artifact.
@@ -24,10 +24,10 @@ internal class GoldenCrownOfTheSunActivation : Activation
 
     protected override bool OnActivate(Item item)
     {
-        SaveGame.MsgPrint("Your crown glows deep yellow...");
-        SaveGame.MsgPrint("You feel a warm tingling inside...");
-        SaveGame.RestoreHealth(700);
-        SaveGame.BleedingTimer.ResetTimer();
+        Game.MsgPrint("Your crown glows deep yellow...");
+        Game.MsgPrint("You feel a warm tingling inside...");
+        Game.RestoreHealth(700);
+        Game.BleedingTimer.ResetTimer();
         return true;
     }
 

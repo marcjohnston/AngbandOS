@@ -13,14 +13,14 @@ namespace AngbandOS.Core.Activations;
 [Serializable]
 internal class MassCharmEvery750Activation : Activation
 {
-    private MassCharmEvery750Activation(SaveGame saveGame) : base(saveGame) { }
+    private MassCharmEvery750Activation(Game game) : base(game) { }
     public override int RandomChance => 25;
 
     public override string? PreActivationMessage => "";
 
     protected override bool OnActivate(Item item)
     {
-        SaveGame.RunScript(nameof(CharmOthersScript));
+        Game.RunScript(nameof(CharmOthersScript));
         return true;
     }
 

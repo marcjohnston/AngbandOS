@@ -12,7 +12,7 @@ namespace AngbandOS.Core.WizardCommands;
 [Serializable]
 internal class RerollHitPointsWizardCommand : WizardCommand
 {
-    private RerollHitPointsWizardCommand(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private RerollHitPointsWizardCommand(Game game) : base(game) { } // This object is a singleton.
 
     public override char KeyChar => 'h';
 

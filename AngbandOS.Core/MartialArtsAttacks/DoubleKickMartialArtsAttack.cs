@@ -16,5 +16,5 @@ internal class DoubleKickMartialArtsAttack : MartialArtsAttack
     public override int Ds => 4;
     public override int Effect => 8;
     public override int MinLevel => 16;
-    private DoubleKickMartialArtsAttack(SaveGame saveGame) : base(saveGame) { }
+    private DoubleKickMartialArtsAttack(Game game) : base(game) { }
 }

@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class SatisfyHungerScript : Script, IScript
 {
-    private SatisfyHungerScript(SaveGame saveGame) : base(saveGame) { }
+    private SatisfyHungerScript(Game game) : base(game) { }
 
     /// <summary>
     /// Maximizes the satiation.
@@ -18,6 +18,6 @@ internal class SatisfyHungerScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        SaveGame.SetFood(Constants.PyFoodMax - 1);
+        Game.SetFood(Constants.PyFoodMax - 1);
     }
 }

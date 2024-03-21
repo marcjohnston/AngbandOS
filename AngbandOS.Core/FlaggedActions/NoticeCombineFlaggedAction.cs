@@ -10,32 +10,32 @@ namespace AngbandOS.Core.FlaggedActions;
 [Serializable]
 internal class NoticeCombineFlaggedAction : FlaggedAction
 {
-    private NoticeCombineFlaggedAction(SaveGame saveGame) : base(saveGame) { }
+    private NoticeCombineFlaggedAction(Game game) : base(game) { }
 
     protected override void Execute()
     {
         bool flag = false;
         for (int i = InventorySlot.PackCount; i > 0; i--)
         {
-            Item? oPtr = SaveGame.GetInventoryItem(i);
+            Item? oPtr = Game.GetInventoryItem(i);
             if (oPtr != null)
             {
                 for (int j = 0; j < i; j++)
                 {
-                    Item jPtr = SaveGame.GetInventoryItem(j);
+                    Item jPtr = Game.GetInventoryItem(j);
                     if (jPtr != null)
                     {
                         if (jPtr.CanAbsorb(oPtr))
                         {
                             flag = true;
                             jPtr.Absorb(oPtr);
-                            SaveGame._invenCnt--;
+                            Game._invenCnt--;
                             int k;
                             for (k = i; k < InventorySlot.PackCount; k++)
                             {
-                                SaveGame.SetInventoryItem(k, SaveGame.GetInventoryItem(k + 1));
+                                Game.SetInventoryItem(k, Game.GetInventoryItem(k + 1));
                             }
-                            SaveGame.SetInventoryItem(k, null);
+                            Game.SetInventoryItem(k, null);
                             break;
                         }
                     }
@@ -44,7 +44,7 @@ internal class NoticeCombineFlaggedAction : FlaggedAction
         }
         if (flag)
         {
-            SaveGame.MsgPrint("You combine some items in your pack.");
+            Game.MsgPrint("You combine some items in your pack.");
         }
     }
 }

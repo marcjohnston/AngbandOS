@@ -10,7 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class QuarterstaffOfAtalFixedArtifact : FixedArtifact
 {
-    private QuarterstaffOfAtalFixedArtifact(SaveGame saveGame) : base(saveGame) { }
+    private QuarterstaffOfAtalFixedArtifact(Game game) : base(game) { }
 
     protected override string BaseItemFactoryName => nameof(QuarterstaffHaftedWeaponItemFactory);
 
@@ -18,7 +18,7 @@ internal class QuarterstaffOfAtalFixedArtifact : FixedArtifact
     protected override string? ActivationName => nameof(ProbingDetectionAndFullIdEvery1000Activation);
     public override void ApplyResistances(Item item)
     {
-        item.RandomPower = SaveGame.SingletonRepository.Powers.ToWeightedRandom(_power => _power.IsAbility == true).Choose();
+        item.RandomPower = Game.SingletonRepository.Powers.ToWeightedRandom(_power => _power.IsAbility == true).Choose();
     }
 
     public override ColorEnum Color => ColorEnum.BrightBrown;

@@ -10,9 +10,9 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class ShardResistanceRingItemFactory : RingItemFactory
 {
-    private ShardResistanceRingItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private ShardResistanceRingItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(EqualSignSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(EqualSignSymbol));
     public override string Name => "Shard Resistance";
 
     public override int[] Chance => new int[] { 2, 0, 0, 0 };
@@ -23,5 +23,5 @@ internal class ShardResistanceRingItemFactory : RingItemFactory
     public override int[] Locale => new int[] { 25, 0, 0, 0 };
     public override bool ResShards => true;
     public override int Weight => 2;
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

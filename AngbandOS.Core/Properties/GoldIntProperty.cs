@@ -10,11 +10,11 @@ namespace AngbandOS.Core.Properties;
 [Serializable]
 internal class GoldIntProperty : IntProperty
 {
-    protected GoldIntProperty(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    protected GoldIntProperty(Game game) : base(game) { } // This object is a singleton.
 
     protected override void OnAfterSet()
     {
         // Send a message to the attached view port so that the consuming application knows that the gold value has been updated.
-        SaveGame.ConsoleViewPort.GoldUpdated(Value);
+        Game.ConsoleViewPort.GoldUpdated(Value);
     }
 }

@@ -10,7 +10,7 @@ namespace AngbandOS.Core.DungeonGuardians;
 [Serializable]
 internal class GlaurungFatherOfTheDragonsDungeonGuardian : DungeonGuardian
 {
-    private GlaurungFatherOfTheDragonsDungeonGuardian(SaveGame saveGame) : base(saveGame) { } // This object is a singleton
+    private GlaurungFatherOfTheDragonsDungeonGuardian(Game game) : base(game) { } // This object is a singleton
     protected override string MonsterRaceName => nameof(GlaurungFatherOfTheDragonsMonsterRace);
     public override int LevelFound => 34;
 }

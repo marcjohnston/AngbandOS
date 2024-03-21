@@ -10,8 +10,8 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal abstract class PotionItemFactory : ItemFactory, IFlavorFactory
 {
-    public PotionItemFactory(SaveGame saveGame) : base(saveGame) { }
-    public override ItemClass ItemClass => SaveGame.SingletonRepository.ItemClasses.Get(nameof(PotionsItemClass));
+    public PotionItemFactory(Game game) : base(game) { }
+    public override ItemClass ItemClass => Game.SingletonRepository.ItemClasses.Get(nameof(PotionsItemClass));
 
     /// <summary>
     /// Returns the factory that this item was created by; casted as an IFlavor.
@@ -22,7 +22,7 @@ internal abstract class PotionItemFactory : ItemFactory, IFlavorFactory
     {
         string flavor = item.IdentityIsStoreBought ? "" : $"{FlavorFactory.Flavor.Name} ";
         string ofName = isFlavorAware ? $" of {FriendlyName}" : "";
-        string name = $"{flavor}{SaveGame.CountPluralize("Potion", item.Count)}{ofName}";
+        string name = $"{flavor}{Game.CountPluralize("Potion", item.Count)}{ofName}";
         return includeCountPrefix ? GetPrefixCount(true, name, item.Count, item.IsKnownArtifact) : name;
     }
 
@@ -50,7 +50,7 @@ internal abstract class PotionItemFactory : ItemFactory, IFlavorFactory
     /// Returns the potions flavors repository because potions have flavors that need to be identified.  The Apple Juice, Water and Slime-Mold
     /// potions override this
     /// </summary>
-    public virtual IEnumerable<Flavor>? GetFlavorRepository() => SaveGame.SingletonRepository.PotionReadableFlavors;
+    public virtual IEnumerable<Flavor>? GetFlavorRepository() => Game.SingletonRepository.PotionReadableFlavors;
 
     public override int PercentageBreakageChance => 100;
     public override bool CanBeQuaffed => true;
@@ -70,7 +70,7 @@ internal abstract class PotionItemFactory : ItemFactory, IFlavorFactory
     /// <summary>
     /// Perform a smash effect for the potion.
     /// </summary>
-    /// <param name="saveGame"></param>
+    /// <param name="game"></param>
     /// <param name="who"></param>
     /// <param name="y"></param>
     /// <param name="x"></param>

@@ -10,7 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class ShortSwordOfMerlinFixedArtifact : FixedArtifact
 {
-    private ShortSwordOfMerlinFixedArtifact(SaveGame saveGame) : base(saveGame) { }
+    private ShortSwordOfMerlinFixedArtifact(Game game) : base(game) { }
 
     protected override string BaseItemFactoryName => nameof(ShortSwordWeaponItemFactory);
 

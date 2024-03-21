@@ -10,19 +10,19 @@ namespace AngbandOS.Core.Repositories;
 [Serializable]
 internal class AmuletReadableFlavorsRepository : DictionaryRepository<AmuletReadableFlavor>
 {
-    public AmuletReadableFlavorsRepository(SaveGame saveGame) : base(saveGame) { }
+    public AmuletReadableFlavorsRepository(Game game) : base(game) { }
 
     public override void Load()
     {
-        if (SaveGame.Configuration.AmuletReadableFlavors == null)
+        if (Game.Configuration.AmuletReadableFlavors == null)
         {
             base.Load();
         }
         else
         {
-            foreach (ReadableFlavorDefinition readableFlavorDefinition in SaveGame.Configuration.AmuletReadableFlavors)
+            foreach (ReadableFlavorDefinition readableFlavorDefinition in Game.Configuration.AmuletReadableFlavors)
             {
-                Add(new GenericAmuletReadableFlavor(SaveGame, readableFlavorDefinition));
+                Add(new GenericAmuletReadableFlavor(Game, readableFlavorDefinition));
             }
         }
     }

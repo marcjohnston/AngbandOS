@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class InvokeChaosScript : Script, IScript
 {
-    private InvokeChaosScript(SaveGame saveGame) : base(saveGame) { }
+    private InvokeChaosScript(Game game) : base(game) { }
 
     /// <summary>
     /// Fires a ball of chaos in a chosen direction.
@@ -18,10 +18,10 @@ internal class InvokeChaosScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        if (!SaveGame.GetDirectionWithAim(out int dir))
+        if (!Game.GetDirectionWithAim(out int dir))
         {
             return;
         }
-        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(ChaosProjectile)), dir, 66 + SaveGame.ExperienceLevel.Value, SaveGame.ExperienceLevel.Value / 5);
+        Game.FireBall(Game.SingletonRepository.Projectiles.Get(nameof(ChaosProjectile)), dir, 66 + Game.ExperienceLevel.Value, Game.ExperienceLevel.Value / 5);
     }
 }

@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Tiles;
 [Serializable]
 internal class TowerFloorTile : Tile
 {
-    private TowerFloorTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private TowerFloorTile(Game game) : base(game) { } // This object is a singleton.
     protected override string SymbolName => nameof(PeriodSymbol);
     public override string Description => "open floor";
     public override bool DimsOutsideLOS => true;

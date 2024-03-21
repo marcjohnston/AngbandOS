@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Flavors;
 [Serializable]
 internal class GoldRingReadableFlavor : RingReadableFlavor
 {
-    private GoldRingReadableFlavor(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private GoldRingReadableFlavor(Game game) : base(game) { } // This object is a singleton.
     protected override string SymbolName => nameof(EqualSignSymbol);
     public override ColorEnum Color => ColorEnum.Gold;
     public override string Name => "Gold";

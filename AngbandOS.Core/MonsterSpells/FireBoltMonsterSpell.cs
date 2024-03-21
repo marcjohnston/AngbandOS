@@ -10,7 +10,7 @@ namespace AngbandOS.Core.MonsterSpells;
 [Serializable]
 internal class FireBoltMonsterSpell : BoltProjectileMonsterSpell
 {
-    private FireBoltMonsterSpell(SaveGame saveGame) : base(saveGame) { }
+    private FireBoltMonsterSpell(Game game) : base(game) { }
     public override bool UsesFire => true;
     public override bool CanBeReflected => true;
     public override bool IsAttack => true;
@@ -18,8 +18,8 @@ internal class FireBoltMonsterSpell : BoltProjectileMonsterSpell
     protected override int Damage(Monster monster)
     {
         int monsterLevel = monster.Race.Level >= 1 ? monster.Race.Level : 1;
-        return SaveGame.DiceRoll(9, 8) + (monsterLevel / 3);
+        return Game.DiceRoll(9, 8) + (monsterLevel / 3);
     }
-    protected override Projectile Projectile(SaveGame saveGame) => saveGame.SingletonRepository.Projectiles.Get(nameof(FireProjectile));
-    public override SpellResistantDetection[] SmartLearn => new SpellResistantDetection[] { SaveGame.SingletonRepository.SpellResistantDetections.Get(nameof(FireSpellResistantDetection)), SaveGame.SingletonRepository.SpellResistantDetections.Get(nameof(ReflectSpellResistantDetection)) };
+    protected override Projectile Projectile(Game game) => game.SingletonRepository.Projectiles.Get(nameof(FireProjectile));
+    public override SpellResistantDetection[] SmartLearn => new SpellResistantDetection[] { Game.SingletonRepository.SpellResistantDetections.Get(nameof(FireSpellResistantDetection)), Game.SingletonRepository.SpellResistantDetections.Get(nameof(ReflectSpellResistantDetection)) };
 }

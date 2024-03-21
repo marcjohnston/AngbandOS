@@ -10,12 +10,12 @@ namespace AngbandOS.Core.Spells.Chaos;
 [Serializable]
 internal class ChaosSpellTeleportSelf : Spell
 {
-    private ChaosSpellTeleportSelf(SaveGame saveGame) : base(saveGame) { }
+    private ChaosSpellTeleportSelf(Game game) : base(game) { }
     protected override string? CastScriptName => nameof(TeleportSelf5xScript);
 
     protected override string? CastFailedScriptName => nameof(WildChaoticMagicScript);
 
     public override string Name => "Teleport Self";
 
-    protected override string LearnedDetails => $"range {SaveGame.ExperienceLevel.Value * 5}";
+    protected override string LearnedDetails => $"range {Game.ExperienceLevel.Value * 5}";
 }

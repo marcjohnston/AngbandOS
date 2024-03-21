@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class DivineInterventionScript : Script, IScript
 {
-    private DivineInterventionScript(SaveGame saveGame) : base(saveGame) { }
+    private DivineInterventionScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script.
@@ -18,24 +18,24 @@ internal class DivineInterventionScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        SaveGame.Project(0, 1, SaveGame.MapY, SaveGame.MapX, 777, SaveGame.SingletonRepository.Projectiles.Get(nameof(HolyFireProjectile)), ProjectionFlag.ProjectKill);
-        SaveGame.DispelMonsters(SaveGame.ExperienceLevel.Value * 4);
-        SaveGame.RunScript(nameof(SlowMonstersScript));
-        SaveGame.StunMonsters(SaveGame.ExperienceLevel.Value * 4);
-        SaveGame.ConfuseMonsters(SaveGame.ExperienceLevel.Value * 4);
-        SaveGame.TurnMonsters(SaveGame.ExperienceLevel.Value * 4);
-        SaveGame.StasisMonsters(SaveGame.ExperienceLevel.Value * 4);
-        SaveGame.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel.Value, SaveGame.SingletonRepository.MonsterFilters.Get(nameof(CthuloidMonsterFilter)), true);
-        SaveGame.SuperheroismTimer.AddTimer(SaveGame.DieRoll(25) + 25);
-        SaveGame.RestoreHealth(300);
-        if (SaveGame.HasteTimer.Value == 0)
+        Game.Project(0, 1, Game.MapY, Game.MapX, 777, Game.SingletonRepository.Projectiles.Get(nameof(HolyFireProjectile)), ProjectionFlag.ProjectKill);
+        Game.DispelMonsters(Game.ExperienceLevel.Value * 4);
+        Game.RunScript(nameof(SlowMonstersScript));
+        Game.StunMonsters(Game.ExperienceLevel.Value * 4);
+        Game.ConfuseMonsters(Game.ExperienceLevel.Value * 4);
+        Game.TurnMonsters(Game.ExperienceLevel.Value * 4);
+        Game.StasisMonsters(Game.ExperienceLevel.Value * 4);
+        Game.SummonSpecificFriendly(Game.MapY, Game.MapX, Game.ExperienceLevel.Value, Game.SingletonRepository.MonsterFilters.Get(nameof(CthuloidMonsterFilter)), true);
+        Game.SuperheroismTimer.AddTimer(Game.DieRoll(25) + 25);
+        Game.RestoreHealth(300);
+        if (Game.HasteTimer.Value == 0)
         {
-            SaveGame.HasteTimer.SetTimer(SaveGame.DieRoll(20 + SaveGame.ExperienceLevel.Value) + SaveGame.ExperienceLevel.Value);
+            Game.HasteTimer.SetTimer(Game.DieRoll(20 + Game.ExperienceLevel.Value) + Game.ExperienceLevel.Value);
         }
         else
         {
-            SaveGame.HasteTimer.AddTimer(SaveGame.DieRoll(5));
+            Game.HasteTimer.AddTimer(Game.DieRoll(5));
         }
-        SaveGame.FearTimer.ResetTimer();
+        Game.FearTimer.ResetTimer();
     }
 }

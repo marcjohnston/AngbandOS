@@ -13,16 +13,16 @@ namespace AngbandOS.Core.Activations;
 [Serializable]
 internal class StinkingCloud12Every4p1d4Activation : DirectionalActivation
 {
-    private StinkingCloud12Every4p1d4Activation(SaveGame saveGame) : base(saveGame) { }
+    private StinkingCloud12Every4p1d4Activation(Game game) : base(game) { }
     public override int RandomChance => 101;
 
     public override string? PreActivationMessage => "Your {0} throbs deep green...";
 
-    public override int RechargeTime() => SaveGame.RandomLessThan(4) + 4;
+    public override int RechargeTime() => Game.RandomLessThan(4) + 4;
 
     protected override bool Activate(int direction)
     {
-        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(PoisProjectile)), direction, 12, 3);
+        Game.FireBall(Game.SingletonRepository.Projectiles.Get(nameof(PoisProjectile)), direction, 12, 3);
         return true;
     }
 

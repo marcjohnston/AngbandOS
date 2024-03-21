@@ -10,19 +10,19 @@ namespace AngbandOS.Core.Repositories;
 [Serializable]
 internal class PluralsRepository : DictionaryRepository<Plural>
 {
-    public PluralsRepository(SaveGame saveGame) : base(saveGame) { }
+    public PluralsRepository(Game game) : base(game) { }
 
     public override void Load()
     {
-        if (SaveGame.Configuration.Plurals == null)
+        if (Game.Configuration.Plurals == null)
         {
             base.Load();
         }
         else
         {
-            foreach (PluralDefinition definition in SaveGame.Configuration.Plurals)
+            foreach (PluralDefinition definition in Game.Configuration.Plurals)
             {
-                Add(new GenericPlural(SaveGame, definition));
+                Add(new GenericPlural(Game, definition));
             }
         }
     }

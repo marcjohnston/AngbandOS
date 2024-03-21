@@ -13,6 +13,6 @@ namespace AngbandOS.Core.ItemFilters;
 [Serializable]
 internal class CorporealBooksOfValueItemFilter : ItemFilter<CorporealBookItemFactory>
 {
-    private CorporealBooksOfValueItemFilter(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private CorporealBooksOfValueItemFilter(Game game) : base(game) { } // This object is a singleton.
     public override bool? HasValue => true;
 }

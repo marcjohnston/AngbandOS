@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class FireBallScript : Script, IScript
 {
-    private FireBallScript(SaveGame saveGame) : base(saveGame) { }
+    private FireBallScript(Game game) : base(game) { }
 
     /// <summary>
     /// Fires a ball of fire in a chosen direction.
@@ -18,10 +18,10 @@ internal class FireBallScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        if (!SaveGame.GetDirectionWithAim(out int dir))
+        if (!Game.GetDirectionWithAim(out int dir))
         {
             return;
         }
-        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(FireProjectile)), dir, 55 + SaveGame.ExperienceLevel.Value, 2);
+        Game.FireBall(Game.SingletonRepository.Projectiles.Get(nameof(FireProjectile)), dir, 55 + Game.ExperienceLevel.Value, 2);
     }
 }

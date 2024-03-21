@@ -10,11 +10,11 @@ namespace AngbandOS.Core.RareItems;
 [Serializable]
 internal class CloakOfAmanRareItem : RareItem
 {
-    private CloakOfAmanRareItem(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(OpenParenthesisSymbol));
+    private CloakOfAmanRareItem(Game game) : base(game) { } // This object is a singleton.
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(OpenParenthesisSymbol));
     public override void ApplyMagic(Item item)
     {
-        item.RandomPower = SaveGame.SingletonRepository.Powers.ToWeightedRandom(_power => _power.IsResistance == true).Choose();
+        item.RandomPower = Game.SingletonRepository.Powers.ToWeightedRandom(_power => _power.IsResistance == true).Choose();
     }
     public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "Cloak of Aman";

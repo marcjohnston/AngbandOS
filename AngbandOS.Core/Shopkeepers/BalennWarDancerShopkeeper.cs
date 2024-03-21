@@ -8,7 +8,7 @@
 [Serializable]
 internal class BalennWarDancerShopkeeper : Shopkeeper
 {
-    private BalennWarDancerShopkeeper(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private BalennWarDancerShopkeeper(Game game) : base(game) { } // This object is a singleton.
     public override string Name => "Balenn War-Dancer";
     public override int MaxCost =>  30000;
     public override int MinInflate =>  112;

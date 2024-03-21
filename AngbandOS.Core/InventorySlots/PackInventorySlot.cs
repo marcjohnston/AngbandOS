@@ -12,7 +12,7 @@ namespace AngbandOS.Core.InventorySlots;
 [Serializable]
 internal class PackInventorySlot : BaseInventorySlot
 {
-    private PackInventorySlot(SaveGame saveGame) : base(saveGame) { }
+    private PackInventorySlot(Game game) : base(game) { }
     public override int[] InventorySlots => new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26 };
     public override string Label(int index) => alphabet[index].ToString();
     public override string Label(Item oPtr)
@@ -29,7 +29,7 @@ internal class PackInventorySlot : BaseInventorySlot
 
     public override void AddItem(Item oPtr) // TODO: this doesn't support the multi-item slots
     {
-        SaveGame.InvenCarry(oPtr);
+        Game.InvenCarry(oPtr);
     }
 
     /// Checks the quantity of an item and removes it, when the quanity is zero.  The pack inventory slot will move subsequent items in the pack to the end of the pack.
@@ -46,12 +46,12 @@ internal class PackInventorySlot : BaseInventorySlot
 
         // Remove the item from the inventory slot.
         int foundSlot = FindInventorySlot(oPtr);
-        SaveGame._invenCnt--;
+        Game._invenCnt--;
         for (int i = foundSlot; i < InventorySlot.PackCount; i++)
         {
-            SaveGame.SetInventoryItem(i, SaveGame.GetInventoryItem(i + 1));
+            Game.SetInventoryItem(i, Game.GetInventoryItem(i + 1));
         }
-        SaveGame.SetInventoryItem(InventorySlot.PackCount, null);
+        Game.SetInventoryItem(InventorySlot.PackCount, null);
     }
 
     public override bool IsEquipment => false;
@@ -61,7 +61,7 @@ internal class PackInventorySlot : BaseInventorySlot
     /// <summary>
     /// Returns true, to sense the identity of items in the pack only 20% of the time.
     /// </summary>
-    public override bool IdentitySenseChanceTest => SaveGame.RandomLessThan(5) == 0;
+    public override bool IdentitySenseChanceTest => Game.RandomLessThan(5) == 0;
 
     /// <summary>
     /// Allows items being carried in a pack to hook into the ProcessWorld event.  By default, this method initiates the hook for all items in the inventory slot to perform processing 
@@ -73,7 +73,7 @@ internal class PackInventorySlot : BaseInventorySlot
 
         foreach (int index in InventorySlots)
         {
-            Item? oPtr = SaveGame.GetInventoryItem(index);
+            Item? oPtr = Game.GetInventoryItem(index);
             if (oPtr != null)
             {
                 oPtr.Factory.PackProcessWorldHook();

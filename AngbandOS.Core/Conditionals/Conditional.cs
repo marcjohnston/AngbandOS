@@ -10,10 +10,10 @@ namespace AngbandOS.Core.Conditionals;
 [Serializable]
 internal abstract class Conditional : IGetKey, IConditional
 {
-    protected readonly SaveGame SaveGame;
-    protected Conditional(SaveGame saveGame)
+    protected readonly Game Game;
+    protected Conditional(Game game)
     {
-        SaveGame = saveGame;
+        Game = game;
     }
 
     public abstract bool IsTrue { get; }

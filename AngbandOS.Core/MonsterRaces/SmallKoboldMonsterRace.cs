@@ -10,7 +10,7 @@ namespace AngbandOS.Core.MonsterRaces;
 [Serializable]
 internal class SmallKoboldMonsterRace : MonsterRace
 {
-    protected SmallKoboldMonsterRace(SaveGame saveGame) : base(saveGame) { }
+    protected SmallKoboldMonsterRace(Game game) : base(game) { }
 
     protected override string SymbolName => nameof(LowerKSymbol);
     public override ColorEnum Color => ColorEnum.BrightGreen;

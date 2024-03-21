@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class JumpToLevelScript : Script, IScript
 {
-    private JumpToLevelScript(SaveGame saveGame) : base(saveGame) { }
+    private JumpToLevelScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the jump to level script.
@@ -18,27 +18,27 @@ internal class JumpToLevelScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        if (SaveGame.CommandArgument <= 0)
+        if (Game.CommandArgument <= 0)
         {
-            string ppp = $"Jump to level (0-{SaveGame.CurDungeon.MaxLevel}): ";
-            string def = $"{SaveGame.CurrentDepth}";
-            if (!SaveGame.GetString(ppp, out string tmpVal, def, 10))
+            string ppp = $"Jump to level (0-{Game.CurDungeon.MaxLevel}): ";
+            string def = $"{Game.CurrentDepth}";
+            if (!Game.GetString(ppp, out string tmpVal, def, 10))
             {
                 return;
             }
-            SaveGame.CommandArgument = int.TryParse(tmpVal, out int i) ? i : 0;
+            Game.CommandArgument = int.TryParse(tmpVal, out int i) ? i : 0;
         }
-        if (SaveGame.CommandArgument < 1)
+        if (Game.CommandArgument < 1)
         {
-            SaveGame.CommandArgument = 1;
+            Game.CommandArgument = 1;
         }
-        if (SaveGame.CommandArgument > SaveGame.CurDungeon.MaxLevel)
+        if (Game.CommandArgument > Game.CurDungeon.MaxLevel)
         {
-            SaveGame.CommandArgument = SaveGame.CurDungeon.MaxLevel;
+            Game.CommandArgument = Game.CurDungeon.MaxLevel;
         }
-        SaveGame.MsgPrint($"You jump to dungeon level {SaveGame.CommandArgument}.");
-        SaveGame.DoCmdSaveGame(true);
-        SaveGame.CurrentDepth = SaveGame.CommandArgument;
-        SaveGame.NewLevelFlag = true;
+        Game.MsgPrint($"You jump to dungeon level {Game.CommandArgument}.");
+        Game.DoCmdSaveGame(true);
+        Game.CurrentDepth = Game.CommandArgument;
+        Game.NewLevelFlag = true;
     }
 }

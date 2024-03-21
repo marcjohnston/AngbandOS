@@ -3,7 +3,7 @@
 [Serializable]
 internal class NumberEightSymbol : Symbol
 {
-    private NumberEightSymbol(SaveGame saveGame) : base(saveGame) { }
+    private NumberEightSymbol(Game game) : base(game) { }
     public override char Character => '8';
     public override string Name => "Entrance to Hall of Records";
 }

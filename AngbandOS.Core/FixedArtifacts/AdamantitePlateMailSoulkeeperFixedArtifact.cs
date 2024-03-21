@@ -10,7 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class AdamantitePlateMailSoulkeeperFixedArtifact : FixedArtifact
 {
-    private AdamantitePlateMailSoulkeeperFixedArtifact(SaveGame saveGame) : base(saveGame) { }
+    private AdamantitePlateMailSoulkeeperFixedArtifact(Game game) : base(game) { }
 
     protected override string BaseItemFactoryName => nameof(AdamantitePlateMailHardArmorItemFactory);
 

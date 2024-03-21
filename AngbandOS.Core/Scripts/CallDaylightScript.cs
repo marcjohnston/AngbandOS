@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class CallDaylightScript : Script, IScript
 {
-    private CallDaylightScript(SaveGame saveGame) : base(saveGame) { }
+    private CallDaylightScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script.
@@ -18,12 +18,12 @@ internal class CallDaylightScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        SaveGame.RunScript(nameof(LightAreaScript));
-        if (!SaveGame.Race.IsBurnedBySunlight || SaveGame.HasLightResistance)
+        Game.RunScript(nameof(LightAreaScript));
+        if (!Game.Race.IsBurnedBySunlight || Game.HasLightResistance)
         {
             return;
         }
-        SaveGame.MsgPrint("The daylight scorches your flesh!");
-        SaveGame.TakeHit(SaveGame.DiceRoll(2, 2), "daylight");
+        Game.MsgPrint("The daylight scorches your flesh!");
+        Game.TakeHit(Game.DiceRoll(2, 2), "daylight");
     }
 }

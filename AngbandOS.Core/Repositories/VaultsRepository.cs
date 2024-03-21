@@ -10,19 +10,19 @@ namespace AngbandOS.Core.Repositories;
 [Serializable]
 internal class VaultsRepository : DictionaryRepository<Vault>
 {
-    public VaultsRepository(SaveGame saveGame) : base(saveGame) { }
+    public VaultsRepository(Game game) : base(game) { }
 
     public override void Load()
     {
-        if (SaveGame.Configuration.Towns == null)
+        if (Game.Configuration.Towns == null)
         {
             base.Load();
         }
         else
         {
-            foreach (VaultDefinition vaultDefinition in SaveGame.Configuration.Vaults)
+            foreach (VaultDefinition vaultDefinition in Game.Configuration.Vaults)
             {
-                Add(new GenericVault(SaveGame, vaultDefinition));
+                Add(new GenericVault(Game, vaultDefinition));
             }
         }
     }

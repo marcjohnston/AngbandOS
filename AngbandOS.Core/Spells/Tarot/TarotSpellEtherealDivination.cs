@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Spells.Tarot;
 [Serializable]
 internal class TarotSpellEtherealDivination : Spell
 {
-    private TarotSpellEtherealDivination(SaveGame saveGame) : base(saveGame) { }
+    private TarotSpellEtherealDivination(Game game) : base(game) { }
     protected override string? CastScriptName => nameof(DetectionScript);
 
     public override string Name => "Ethereal Divination";

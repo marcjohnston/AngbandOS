@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class ThrowScript : Script, IScript, IRepeatableScript
 {
-    private ThrowScript(SaveGame saveGame) : base(saveGame) { }
+    private ThrowScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the throw script and returns false.
@@ -28,6 +28,6 @@ internal class ThrowScript : Script, IScript, IRepeatableScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        SaveGame.DoCmdThrow(1);
+        Game.DoCmdThrow(1);
     }
 }

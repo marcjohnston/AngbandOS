@@ -10,18 +10,18 @@ namespace AngbandOS.Core.Timers;
 [Serializable]
 internal class SlowTimer : Timer
 {
-    private SlowTimer(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private SlowTimer(Game game) : base(game) { } // This object is a singleton.
     protected override void EffectStopped()
     {
-        SaveGame.MsgPrint("You feel yourself speed up.");
+        Game.MsgPrint("You feel yourself speed up.");
     }
     protected override void EffectIncreased(int newRate, int currentRate)
     {
-        SaveGame.MsgPrint("You feel yourself moving slower!");
+        Game.MsgPrint("You feel yourself moving slower!");
     }
     protected override void Noticed()
     {
-        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
+        Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
         base.Noticed();
     }
 }

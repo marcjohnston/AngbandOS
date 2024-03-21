@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class HealingScript : Script, IScript
 {
-    private HealingScript(SaveGame saveGame) : base(saveGame) { }
+    private HealingScript(Game game) : base(game) { }
 
     /// <summary>
     /// Restores 300 points of health and heals stun and bleeding.
@@ -18,8 +18,8 @@ internal class HealingScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        SaveGame.RestoreHealth(300);
-        SaveGame.StunTimer.ResetTimer();
-        SaveGame.BleedingTimer.ResetTimer();
+        Game.RestoreHealth(300);
+        Game.StunTimer.ResetTimer();
+        Game.BleedingTimer.ResetTimer();
     }
 }

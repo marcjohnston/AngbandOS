@@ -10,15 +10,15 @@ namespace AngbandOS.Core.MonsterSpells;
 [Serializable]
 internal class PoisonBallMonsterSpell : BallProjectileMonsterSpell
 {
-    private PoisonBallMonsterSpell(SaveGame saveGame) : base(saveGame) { }
+    private PoisonBallMonsterSpell(Game game) : base(game) { }
     public override bool UsesPoison => true;
     public override bool IsAttack => true;
     protected override string ActionName => "casts a stinking cloud";
-    protected override Projectile Projectile(SaveGame saveGame) => saveGame.SingletonRepository.Projectiles.Get(nameof(PoisProjectile));
+    protected override Projectile Projectile(Game game) => game.SingletonRepository.Projectiles.Get(nameof(PoisProjectile));
     protected override int Damage(Monster monster)
     {
         int monsterLevel = monster.Race.Level >= 1 ? monster.Race.Level : 1;
-        return SaveGame.DiceRoll(12, 2);
+        return Game.DiceRoll(12, 2);
     }
-    public override SpellResistantDetection[] SmartLearn => new SpellResistantDetection[] { SaveGame.SingletonRepository.SpellResistantDetections.Get(nameof(PoisSpellResistantDetection)) };
+    public override SpellResistantDetection[] SmartLearn => new SpellResistantDetection[] { Game.SingletonRepository.SpellResistantDetections.Get(nameof(PoisSpellResistantDetection)) };
 }

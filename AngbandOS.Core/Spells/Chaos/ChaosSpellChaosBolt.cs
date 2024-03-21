@@ -10,12 +10,12 @@ namespace AngbandOS.Core.Spells.Chaos;
 [Serializable]
 internal class ChaosSpellChaosBolt : Spell
 {
-    private ChaosSpellChaosBolt(SaveGame saveGame) : base(saveGame) { }
+    private ChaosSpellChaosBolt(Game game) : base(game) { }
     protected override string? CastScriptName => nameof(ChaosBoltScript);
 
     protected override string? CastFailedScriptName => nameof(WildChaoticMagicScript);
 
     public override string Name => "Chaos Bolt";
 
-    protected override string LearnedDetails => $"dam {10 + ((SaveGame.ExperienceLevel.Value - 5) / 4)}d8";
+    protected override string LearnedDetails => $"dam {10 + ((Game.ExperienceLevel.Value - 5) / 4)}d8";
 }

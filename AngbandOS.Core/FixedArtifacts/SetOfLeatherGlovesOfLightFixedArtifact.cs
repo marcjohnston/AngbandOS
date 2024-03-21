@@ -10,19 +10,19 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class SetOfLeatherGlovesOfLightFixedArtifact : FixedArtifact, IFixedArtifactActivatible
 {
-    private SetOfLeatherGlovesOfLightFixedArtifact(SaveGame saveGame) : base(saveGame) { }
+    private SetOfLeatherGlovesOfLightFixedArtifact(Game game) : base(game) { }
 
     protected override string BaseItemFactoryName => nameof(LeatherGlovesArmorItemFactory);
 
     // Light shoots magic missiles
     public void ActivateItem(Item item)
     {
-        SaveGame.MsgPrint("Your gloves glow extremely brightly...");
-        if (!SaveGame.GetDirectionWithAim(out int dir))
+        Game.MsgPrint("Your gloves glow extremely brightly...");
+        if (!Game.GetDirectionWithAim(out int dir))
         {
             return;
         }
-        SaveGame.FireBolt(SaveGame.SingletonRepository.Projectiles.Get(nameof(Projection.MissileProjectile)), dir, base.SaveGame.DiceRoll(2, 6));
+        Game.FireBolt(Game.SingletonRepository.Projectiles.Get(nameof(Projection.MissileProjectile)), dir, base.Game.DiceRoll(2, 6));
         item.RechargeTimeLeft = 2;
     }
     public string DescribeActivationEffect => "magic missile (2d6) every 2 turns";

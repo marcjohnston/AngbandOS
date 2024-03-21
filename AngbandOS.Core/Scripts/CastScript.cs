@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class CastScript : Script, IScript, IRepeatableScript
 {
-    private CastScript(SaveGame saveGame) : base(saveGame) { }
+    private CastScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the cast script and returns false.
@@ -28,19 +28,19 @@ internal class CastScript : Script, IScript, IRepeatableScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        if (SaveGame.HasAntiMagic)
+        if (Game.HasAntiMagic)
         {
-            string whichMagicType = SaveGame.BaseCharacterClass.MagicType;
-            if (SaveGame.BaseCharacterClass.ID == CharacterClass.Mindcrafter || SaveGame.BaseCharacterClass.ID == CharacterClass.Mystic)
+            string whichMagicType = Game.BaseCharacterClass.MagicType;
+            if (Game.BaseCharacterClass.ID == CharacterClass.Mindcrafter || Game.BaseCharacterClass.ID == CharacterClass.Mystic)
             {
                 whichMagicType = "psychic talents";
             }
-            SaveGame.MsgPrint($"An anti-magic shell disrupts your {whichMagicType}!");
-            SaveGame.EnergyUse = 5;
+            Game.MsgPrint($"An anti-magic shell disrupts your {whichMagicType}!");
+            Game.EnergyUse = 5;
         }
         else
         {
-            SaveGame.BaseCharacterClass.Cast();
+            Game.BaseCharacterClass.Cast();
         }
     }
 }

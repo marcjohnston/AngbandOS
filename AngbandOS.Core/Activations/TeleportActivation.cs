@@ -13,14 +13,14 @@ namespace AngbandOS.Core.Activations;
 [Serializable]
 internal class TeleportActivation : Activation
 {
-    private TeleportActivation(SaveGame saveGame) : base(saveGame) { }
+    private TeleportActivation(Game game) : base(game) { }
     public override int RandomChance => 101;
 
     public override string? PreActivationMessage => "Your {0} twists space around you...";
 
     protected override bool OnActivate(Item item)
     {
-        SaveGame.RunScriptInt(nameof(TeleportSelfScript), 100);
+        Game.RunScriptInt(nameof(TeleportSelfScript), 100);
         return true;
     }
 

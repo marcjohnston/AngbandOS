@@ -10,14 +10,14 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class SmallSwordStingFixedArtifact : FixedArtifact
 {
-    private SmallSwordStingFixedArtifact(SaveGame saveGame) : base(saveGame) { }
+    private SmallSwordStingFixedArtifact(Game game) : base(game) { }
 
     protected override string BaseItemFactoryName => nameof(ShortSwordWeaponItemFactory);
 
     public override void ApplyResistances(Item item)
     {
         IArtifactBias artifactBias = null;
-        item.ApplyRandomResistance(ref artifactBias, SaveGame.DieRoll(22) + 16);
+        item.ApplyRandomResistance(ref artifactBias, Game.DieRoll(22) + 16);
     }
 
     public override ColorEnum Color => ColorEnum.BrightWhite;

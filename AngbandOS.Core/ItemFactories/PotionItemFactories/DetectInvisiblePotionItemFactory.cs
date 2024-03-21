@@ -10,9 +10,9 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class DetectInvisiblePotionItemFactory : PotionItemFactory
 {
-    private DetectInvisiblePotionItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private DetectInvisiblePotionItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(ExclamationPointSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(ExclamationPointSymbol));
     public override string Name => "Detect Invisible";
 
     public override int[] Chance => new int[] { 1, 0, 0, 0 };
@@ -26,7 +26,7 @@ internal class DetectInvisiblePotionItemFactory : PotionItemFactory
     public override bool Quaff()
     {
         // Detect invisible gives you times see invisibility
-        return SaveGame.SeeInvisibilityTimer.AddTimer(12 + SaveGame.DieRoll(12));
+        return Game.SeeInvisibilityTimer.AddTimer(12 + Game.DieRoll(12));
     }
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

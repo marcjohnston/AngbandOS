@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Mutations.RandomMutations;
 [Serializable]
 internal class ProdManaRandomMutation : Mutation
 {
-    private ProdManaRandomMutation(SaveGame saveGame) : base(saveGame) { }
+    private ProdManaRandomMutation(Game game) : base(game) { }
     public override int Frequency => 1;
     public override string GainMessage => "You start producing magical energy uncontrollably.";
     public override string HaveMessage => "You are producing magical energy uncontrollably.";
@@ -18,14 +18,14 @@ internal class ProdManaRandomMutation : Mutation
 
     public override void OnProcessWorld()
     {
-        if (SaveGame.HasAntiMagic || base.SaveGame.DieRoll(9000) != 1)
+        if (Game.HasAntiMagic || base.Game.DieRoll(9000) != 1)
         {
             return;
         }
-        SaveGame.Disturb(false);
-        SaveGame.MsgPrint("Magical energy flows through you! You must release it!");
-        SaveGame.MsgPrint(null);
-        SaveGame.GetDirectionNoAutoAim(out int dire);
-        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(ManaProjectile)), dire, SaveGame.ExperienceLevel.Value * 2, 3);
+        Game.Disturb(false);
+        Game.MsgPrint("Magical energy flows through you! You must release it!");
+        Game.MsgPrint(null);
+        Game.GetDirectionNoAutoAim(out int dire);
+        Game.FireBall(Game.SingletonRepository.Projectiles.Get(nameof(ManaProjectile)), dire, Game.ExperienceLevel.Value * 2, 3);
     }
 }

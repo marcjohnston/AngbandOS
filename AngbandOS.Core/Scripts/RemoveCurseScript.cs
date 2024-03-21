@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class RemoveCurseScript : Script, IScript, IStoreScript, ISuccessfulScript
 {
-    private RemoveCurseScript(SaveGame saveGame) : base(saveGame) { }
+    private RemoveCurseScript(Game game) : base(game) { }
 
     /// <summary>
     /// Allows the player to purchase the remove curse for 500 gold.  Does not modify any of the store flags.
@@ -18,21 +18,21 @@ internal class RemoveCurseScript : Script, IScript, IStoreScript, ISuccessfulScr
     /// <returns></returns>
     public void ExecuteStoreScript(StoreCommandEvent storeCommandEvent)
     {
-        if (!SaveGame.ServiceHaggle(500, out int price))
+        if (!Game.ServiceHaggle(500, out int price))
         {
-            if (price > SaveGame.Gold.Value)
+            if (price > Game.Gold.Value)
             {
-                SaveGame.MsgPrint("You do not have the gold!");
+                Game.MsgPrint("You do not have the gold!");
             }
             else
             {
-                SaveGame.Gold.Value -= price;
-                SaveGame.SayComment_1();
-                SaveGame.PlaySound(SoundEffectEnum.StoreTransaction);
-                SaveGame.StorePrtGold();
+                Game.Gold.Value -= price;
+                Game.SayComment_1();
+                Game.PlaySound(SoundEffectEnum.StoreTransaction);
+                Game.StorePrtGold();
                 ExecuteScript();
             }
-            SaveGame.HandleStuff();
+            Game.HandleStuff();
         }
     }
 
@@ -42,7 +42,7 @@ internal class RemoveCurseScript : Script, IScript, IStoreScript, ISuccessfulScr
     /// <returns></returns>
     public bool ExecuteSuccessfulScript()
     {
-        return SaveGame.RemoveCurseAux(false);
+        return Game.RemoveCurseAux(false);
     }
 
     /// <summary>

@@ -11,7 +11,7 @@ namespace AngbandOS.Core.StoreCommands;
 internal class RestorationStoreCommand : StoreCommand
 
 {
-    private RestorationStoreCommand(SaveGame saveGame) : base(saveGame) { }
+    private RestorationStoreCommand(Game game) : base(game) { }
     public override char KeyChar => 'r';
 
     public override string Description => "buy Restoration";

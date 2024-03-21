@@ -10,7 +10,7 @@ namespace AngbandOS.Core.MonsterRaces;
 [Serializable]
 internal class ForestTrollMonsterRace : MonsterRace
 {
-    protected ForestTrollMonsterRace(SaveGame saveGame) : base(saveGame) { }
+    protected ForestTrollMonsterRace(Game game) : base(game) { }
 
     protected override string SymbolName => nameof(UpperTSymbol);
     public override ColorEnum Color => ColorEnum.BrightGreen;

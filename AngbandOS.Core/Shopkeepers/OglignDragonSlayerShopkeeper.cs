@@ -8,7 +8,7 @@
 [Serializable]
 internal class OglignDragonSlayerShopkeeper : Shopkeeper
 {
-    private OglignDragonSlayerShopkeeper(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private OglignDragonSlayerShopkeeper(Game game) : base(game) { } // This object is a singleton.
     public override string Name => "Oglign Dragon-Slayer";
     public override int MaxCost =>  30000;
     public override int MinInflate =>  112;

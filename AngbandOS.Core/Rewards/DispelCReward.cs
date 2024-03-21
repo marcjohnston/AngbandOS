@@ -10,10 +10,10 @@ namespace AngbandOS.Core.Rewards;
 [Serializable]
 internal class DispelCReward : Reward
 {
-    private DispelCReward(SaveGame saveGame) : base(saveGame) { }
+    private DispelCReward(Game game) : base(game) { }
     public override void GetReward(Patron patron)
     {
-        SaveGame.MsgPrint($"You can feel the power of {patron.ShortName} assault your enemies!");
-        SaveGame.DispelMonsters(SaveGame.ExperienceLevel.Value * 4);
+        Game.MsgPrint($"You can feel the power of {patron.ShortName} assault your enemies!");
+        Game.DispelMonsters(Game.ExperienceLevel.Value * 4);
     }
 }

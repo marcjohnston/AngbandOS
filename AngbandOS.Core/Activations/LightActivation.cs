@@ -13,18 +13,18 @@ namespace AngbandOS.Core.Activations;
 [Serializable]
 internal class LightActivation : Activation
 {
-    private LightActivation(SaveGame saveGame) : base(saveGame) { }
+    private LightActivation(Game game) : base(game) { }
     public override int RandomChance => 101;
 
     public override string? PreActivationMessage => "Your {0} swells with clear light...";
 
     protected override bool OnActivate(Item item)
     {
-        SaveGame.LightArea(SaveGame.DiceRoll(2, 15), 3);
+        Game.LightArea(Game.DiceRoll(2, 15), 3);
         return true;
     }
 
-    public override int RechargeTime() => SaveGame.RandomLessThan(10) + 10;
+    public override int RechargeTime() => Game.RandomLessThan(10) + 10;
 
     public override int Value => 150;
 

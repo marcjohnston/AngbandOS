@@ -16,5 +16,5 @@ internal class EaglesClawMartialArtsAttack : MartialArtsAttack
     public override int Ds => 6;
     public override int Effect => 0;
     public override int MinLevel => 29;
-    private EaglesClawMartialArtsAttack(SaveGame saveGame) : base(saveGame) { }
+    private EaglesClawMartialArtsAttack(Game game) : base(game) { }
 }

@@ -8,7 +8,7 @@
 [Serializable]
 internal class BulianceTheNecromancerShopkeeper : Shopkeeper
 {
-    private BulianceTheNecromancerShopkeeper(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private BulianceTheNecromancerShopkeeper(Game game) : base(game) { } // This object is a singleton.
     public override string Name => "Buliance the Necromancer";
     public override int MaxCost =>  30000;
     public override int MinInflate =>  110;

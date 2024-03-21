@@ -10,11 +10,11 @@ namespace AngbandOS.Core.BirthStages;
 [Serializable]
 internal abstract class BirthStage : IGetKey
 {
-    protected readonly SaveGame SaveGame;
+    protected readonly Game Game;
     public string GetKey => Key;
-    protected BirthStage(SaveGame saveGame)
+    protected BirthStage(Game game)
     {
-        SaveGame = saveGame;
+        Game = game;
     }
 
     /// <summary>
@@ -31,7 +31,7 @@ internal abstract class BirthStage : IGetKey
     public void Bind() { }
 
     /// <summary>
-    /// Renders the birth stage and returns the next birth stage to render or null when either the birth stage is complete or the SaveGame.Shutdown is true.
+    /// Renders the birth stage and returns the next birth stage to render or null when either the birth stage is complete or the Game.Shutdown is true.
     /// </summary>
     /// <returns></returns>
     public abstract BirthStage? Render();
@@ -39,64 +39,64 @@ internal abstract class BirthStage : IGetKey
     protected void DisplayPartialCharacter()
     {
         const string spaces = "                 ";
-        SaveGame.Screen.Clear(0);
-        SaveGame.Screen.Print(ColorEnum.Blue, "Name        :", 2, 1);
-        SaveGame.Screen.Print(ColorEnum.Brown, SaveGame.PlayerName.Value ?? spaces, 2, 15);
-        SaveGame.Screen.Print(ColorEnum.Blue, "Gender      :", 3, 1);
-        SaveGame.Screen.Print(ColorEnum.Brown, SaveGame.Gender?.Title ?? spaces, 3, 15);
-        SaveGame.Screen.Print(ColorEnum.Blue, "Race        :", 4, 1);
-        SaveGame.Screen.Print(ColorEnum.Brown, SaveGame.Race?.Title ?? spaces, 4, 15);
-        SaveGame.Screen.Print(ColorEnum.Blue, "Class       :", 5, 1);
-        SaveGame.Screen.Print(ColorEnum.Brown, SaveGame.BaseCharacterClass?.Title ?? spaces, 5, 15);
-        if (SaveGame.CanCastSpells)
+        Game.Screen.Clear(0);
+        Game.Screen.Print(ColorEnum.Blue, "Name        :", 2, 1);
+        Game.Screen.Print(ColorEnum.Brown, Game.PlayerName.Value ?? spaces, 2, 15);
+        Game.Screen.Print(ColorEnum.Blue, "Gender      :", 3, 1);
+        Game.Screen.Print(ColorEnum.Brown, Game.Gender?.Title ?? spaces, 3, 15);
+        Game.Screen.Print(ColorEnum.Blue, "Race        :", 4, 1);
+        Game.Screen.Print(ColorEnum.Brown, Game.Race?.Title ?? spaces, 4, 15);
+        Game.Screen.Print(ColorEnum.Blue, "Class       :", 5, 1);
+        Game.Screen.Print(ColorEnum.Brown, Game.BaseCharacterClass?.Title ?? spaces, 5, 15);
+        if (Game.CanCastSpells)
         {
-            SaveGame.Screen.Print(ColorEnum.Blue, "Magic       :", 6, 1);
-            SaveGame.Screen.Print(ColorEnum.Brown, SaveGame.RealmNames(SaveGame.PrimaryRealm, SaveGame.SecondaryRealm, spaces), 6, 15);
+            Game.Screen.Print(ColorEnum.Blue, "Magic       :", 6, 1);
+            Game.Screen.Print(ColorEnum.Brown, Game.RealmNames(Game.PrimaryRealm, Game.SecondaryRealm, spaces), 6, 15);
         }
-        SaveGame.Screen.Print(ColorEnum.Blue, "Birthday", 2, 32);
-        SaveGame.Screen.Print(ColorEnum.Blue, "Age          ", 3, 32);
-        SaveGame.Screen.Print(ColorEnum.Blue, "Height       ", 4, 32);
-        SaveGame.Screen.Print(ColorEnum.Blue, "Weight       ", 5, 32);
-        SaveGame.Screen.Print(ColorEnum.Blue, "Social Class ", 6, 32);
-        SaveGame.Screen.Print(ColorEnum.Blue, "STR:", 2 + Ability.Strength, 61);
-        SaveGame.Screen.Print(ColorEnum.Blue, "INT:", 2 + Ability.Intelligence, 61);
-        SaveGame.Screen.Print(ColorEnum.Blue, "WIS:", 2 + Ability.Wisdom, 61);
-        SaveGame.Screen.Print(ColorEnum.Blue, "DEX:", 2 + Ability.Dexterity, 61);
-        SaveGame.Screen.Print(ColorEnum.Blue, "CON:", 2 + Ability.Constitution, 61);
-        SaveGame.Screen.Print(ColorEnum.Blue, "CHA:", 2 + Ability.Charisma, 61);
-        SaveGame.Screen.Print(ColorEnum.Blue, "STR:", 14 + Ability.Strength, 1);
-        SaveGame.Screen.Print(ColorEnum.Blue, "INT:", 14 + Ability.Intelligence, 1);
-        SaveGame.Screen.Print(ColorEnum.Blue, "WIS:", 14 + Ability.Wisdom, 1);
-        SaveGame.Screen.Print(ColorEnum.Blue, "DEX:", 14 + Ability.Dexterity, 1);
-        SaveGame.Screen.Print(ColorEnum.Blue, "CON:", 14 + Ability.Constitution, 1);
-        SaveGame.Screen.Print(ColorEnum.Blue, "CHA:", 14 + Ability.Charisma, 1);
-        SaveGame.Screen.Print(ColorEnum.Blue, "STR:", 22 + Ability.Strength, 1);
-        SaveGame.Screen.Print(ColorEnum.Blue, "INT:", 22 + Ability.Intelligence, 1);
-        SaveGame.Screen.Print(ColorEnum.Blue, "WIS:", 22 + Ability.Wisdom, 1);
-        SaveGame.Screen.Print(ColorEnum.Blue, "DEX:", 22 + Ability.Dexterity, 1);
-        SaveGame.Screen.Print(ColorEnum.Blue, "CON:", 22 + Ability.Constitution, 1);
-        SaveGame.Screen.Print(ColorEnum.Blue, "CHA:", 22 + Ability.Charisma, 1);
-        SaveGame.Screen.Print(ColorEnum.Purple, "Initial", 21, 6);
-        SaveGame.Screen.Print(ColorEnum.Brown, "Race Class Mods", 21, 14);
-        SaveGame.Screen.Print(ColorEnum.Green, "Actual", 21, 30);
-        SaveGame.Screen.Print(ColorEnum.Red, "Reduced", 21, 37);
-        SaveGame.Screen.Print(ColorEnum.Blue, "abcdefghijklm@", 21, 45);
-        SaveGame.Screen.Print(ColorEnum.Grey, "..............", 22, 45);
-        SaveGame.Screen.Print(ColorEnum.Grey, "..............", 23, 45);
-        SaveGame.Screen.Print(ColorEnum.Grey, "..............", 24, 45);
-        SaveGame.Screen.Print(ColorEnum.Grey, "..............", 25, 45);
-        SaveGame.Screen.Print(ColorEnum.Grey, "..............", 26, 45);
-        SaveGame.Screen.Print(ColorEnum.Grey, "..............", 27, 45);
-        SaveGame.Screen.Print(ColorEnum.Blue, "Modifications", 28, 45);
+        Game.Screen.Print(ColorEnum.Blue, "Birthday", 2, 32);
+        Game.Screen.Print(ColorEnum.Blue, "Age          ", 3, 32);
+        Game.Screen.Print(ColorEnum.Blue, "Height       ", 4, 32);
+        Game.Screen.Print(ColorEnum.Blue, "Weight       ", 5, 32);
+        Game.Screen.Print(ColorEnum.Blue, "Social Class ", 6, 32);
+        Game.Screen.Print(ColorEnum.Blue, "STR:", 2 + Ability.Strength, 61);
+        Game.Screen.Print(ColorEnum.Blue, "INT:", 2 + Ability.Intelligence, 61);
+        Game.Screen.Print(ColorEnum.Blue, "WIS:", 2 + Ability.Wisdom, 61);
+        Game.Screen.Print(ColorEnum.Blue, "DEX:", 2 + Ability.Dexterity, 61);
+        Game.Screen.Print(ColorEnum.Blue, "CON:", 2 + Ability.Constitution, 61);
+        Game.Screen.Print(ColorEnum.Blue, "CHA:", 2 + Ability.Charisma, 61);
+        Game.Screen.Print(ColorEnum.Blue, "STR:", 14 + Ability.Strength, 1);
+        Game.Screen.Print(ColorEnum.Blue, "INT:", 14 + Ability.Intelligence, 1);
+        Game.Screen.Print(ColorEnum.Blue, "WIS:", 14 + Ability.Wisdom, 1);
+        Game.Screen.Print(ColorEnum.Blue, "DEX:", 14 + Ability.Dexterity, 1);
+        Game.Screen.Print(ColorEnum.Blue, "CON:", 14 + Ability.Constitution, 1);
+        Game.Screen.Print(ColorEnum.Blue, "CHA:", 14 + Ability.Charisma, 1);
+        Game.Screen.Print(ColorEnum.Blue, "STR:", 22 + Ability.Strength, 1);
+        Game.Screen.Print(ColorEnum.Blue, "INT:", 22 + Ability.Intelligence, 1);
+        Game.Screen.Print(ColorEnum.Blue, "WIS:", 22 + Ability.Wisdom, 1);
+        Game.Screen.Print(ColorEnum.Blue, "DEX:", 22 + Ability.Dexterity, 1);
+        Game.Screen.Print(ColorEnum.Blue, "CON:", 22 + Ability.Constitution, 1);
+        Game.Screen.Print(ColorEnum.Blue, "CHA:", 22 + Ability.Charisma, 1);
+        Game.Screen.Print(ColorEnum.Purple, "Initial", 21, 6);
+        Game.Screen.Print(ColorEnum.Brown, "Race Class Mods", 21, 14);
+        Game.Screen.Print(ColorEnum.Green, "Actual", 21, 30);
+        Game.Screen.Print(ColorEnum.Red, "Reduced", 21, 37);
+        Game.Screen.Print(ColorEnum.Blue, "abcdefghijklm@", 21, 45);
+        Game.Screen.Print(ColorEnum.Grey, "..............", 22, 45);
+        Game.Screen.Print(ColorEnum.Grey, "..............", 23, 45);
+        Game.Screen.Print(ColorEnum.Grey, "..............", 24, 45);
+        Game.Screen.Print(ColorEnum.Grey, "..............", 25, 45);
+        Game.Screen.Print(ColorEnum.Grey, "..............", 26, 45);
+        Game.Screen.Print(ColorEnum.Grey, "..............", 27, 45);
+        Game.Screen.Print(ColorEnum.Blue, "Modifications", 28, 45);
         for (int i = 0; i < 6; i++)
         {
-            string characterClassAbilityBonus = SaveGame.BaseCharacterClass?.AbilityBonus[i].ToString("+0;-0;+0").PadLeft(3) ?? "   ";
-            SaveGame.Screen.Print(ColorEnum.Brown, characterClassAbilityBonus, 22 + i, 20);
+            string characterClassAbilityBonus = Game.BaseCharacterClass?.AbilityBonus[i].ToString("+0;-0;+0").PadLeft(3) ?? "   ";
+            Game.Screen.Print(ColorEnum.Brown, characterClassAbilityBonus, 22 + i, 20);
         }
         for (int i = 0; i < 6; i++)
         {
-            string raceAbilityBonus = SaveGame.Race?.AbilityBonus[i].ToString("+0;-0;+0").PadLeft(3) ?? "   ";
-            SaveGame.Screen.Print(ColorEnum.Brown, raceAbilityBonus, 22 + i, 14);
+            string raceAbilityBonus = Game.Race?.AbilityBonus[i].ToString("+0;-0;+0").PadLeft(3) ?? "   ";
+            Game.Screen.Print(ColorEnum.Brown, raceAbilityBonus, 22 + i, 14);
         }
     }
 

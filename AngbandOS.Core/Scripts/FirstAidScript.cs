@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class FirstAidScript : Script, IScript
 {
-    private FirstAidScript(SaveGame saveGame) : base(saveGame) { }
+    private FirstAidScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script.
@@ -18,7 +18,7 @@ internal class FirstAidScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        SaveGame.RestoreHealth(SaveGame.DiceRoll(2, 8));
-        SaveGame.BleedingTimer.AddTimer(-15);
+        Game.RestoreHealth(Game.DiceRoll(2, 8));
+        Game.BleedingTimer.AddTimer(-15);
     }
 }

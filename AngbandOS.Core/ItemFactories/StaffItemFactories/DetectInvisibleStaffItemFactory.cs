@@ -10,14 +10,14 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class DetectInvisibleStaffItemFactory : StaffItemFactory
 {
-    private DetectInvisibleStaffItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private DetectInvisibleStaffItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UnderscoreSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(UnderscoreSymbol));
     public override string Name => "Detect Invisible";
 
     public override void ApplyMagic(Item item, int level, int power, Store? store)
     {
-        item.TypeSpecificValue = SaveGame.DieRoll(15) + 8;
+        item.TypeSpecificValue = Game.DieRoll(15) + 8;
     }
     public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int Cost => 200;
@@ -30,10 +30,10 @@ internal class DetectInvisibleStaffItemFactory : StaffItemFactory
 
     public override void UseStaff(UseStaffEvent eventArgs)
     {
-        if (SaveGame.DetectMonstersInvis())
+        if (Game.DetectMonstersInvis())
         {
             eventArgs.Identified = true;
         }
     }
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

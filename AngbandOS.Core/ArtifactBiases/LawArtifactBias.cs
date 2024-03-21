@@ -10,7 +10,7 @@ namespace AngbandOS.Core.ArtifactBiases;
 [Serializable]
 internal class LawArtifactBias : ArtifactBias
 {
-    private LawArtifactBias(SaveGame saveGame) : base(saveGame) { }
+    private LawArtifactBias(Game game) : base(game) { }
     public override bool ApplySlaying(Item item)
     {
         if (item.Factory.CanApplyArtifactBiasSlaying)
@@ -18,7 +18,7 @@ internal class LawArtifactBias : ArtifactBias
             if (!item.RandomArtifactItemCharacteristics.SlayEvil)
             {
                 item.RandomArtifactItemCharacteristics.SlayEvil = true;
-                if (SaveGame.DieRoll(2) == 1)
+                if (Game.DieRoll(2) == 1)
                 {
                     return true;
                 }
@@ -26,7 +26,7 @@ internal class LawArtifactBias : ArtifactBias
             if (!item.RandomArtifactItemCharacteristics.SlayUndead)
             {
                 item.RandomArtifactItemCharacteristics.SlayUndead = true;
-                if (SaveGame.DieRoll(2) == 1)
+                if (Game.DieRoll(2) == 1)
                 {
                     return true;
                 }
@@ -34,7 +34,7 @@ internal class LawArtifactBias : ArtifactBias
             if (!item.RandomArtifactItemCharacteristics.SlayDemon)
             {
                 item.RandomArtifactItemCharacteristics.SlayDemon = true;
-                if (SaveGame.DieRoll(2) == 1)
+                if (Game.DieRoll(2) == 1)
                 {
                     return true;
                 }
@@ -45,17 +45,17 @@ internal class LawArtifactBias : ArtifactBias
 
     public override Activation GetActivationPowerType(Item item)
     {
-        if (SaveGame.DieRoll(8) == 1)
+        if (Game.DieRoll(8) == 1)
         {
-            return SaveGame.SingletonRepository.Activations.Get(nameof(BanishEvilEvery250p1d250Activation));
+            return Game.SingletonRepository.Activations.Get(nameof(BanishEvilEvery250p1d250Activation));
         }
-        else if (SaveGame.DieRoll(4) == 1)
+        else if (Game.DieRoll(4) == 1)
         {
-            return SaveGame.SingletonRepository.Activations.Get(nameof(DispelEvil5xEvery300p1d300Activation));
+            return Game.SingletonRepository.Activations.Get(nameof(DispelEvil5xEvery300p1d300Activation));
         }
         else
         {
-            return SaveGame.SingletonRepository.Activations.Get(nameof(ProtectionFromEvilActivation));
+            return Game.SingletonRepository.Activations.Get(nameof(ProtectionFromEvilActivation));
         }
     }
 }

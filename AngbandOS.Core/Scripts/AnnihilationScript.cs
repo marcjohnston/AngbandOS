@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class AnnihilationScript : Script, IScript
 {
-    private AnnihilationScript(SaveGame saveGame) : base(saveGame) { }
+    private AnnihilationScript(Game game) : base(game) { }
 
     /// <summary>
     /// Destroys every monster, taking a hit for each one but adding mana for each too.
@@ -18,10 +18,10 @@ internal class AnnihilationScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        SaveGame.Mana.Value -= 100;
-        for (int i = 1; i < SaveGame.MMax; i++)
+        Game.Mana.Value -= 100;
+        for (int i = 1; i < Game.MMax; i++)
         {
-            Monster mPtr = SaveGame.Monsters[i];
+            Monster mPtr = Game.Monsters[i];
             MonsterRace rPtr = mPtr.Race;
             if (mPtr.Race == null)
             {
@@ -35,14 +35,14 @@ internal class AnnihilationScript : Script, IScript
             {
                 continue;
             }
-            SaveGame.DeleteMonsterByIndex(i, true);
-            SaveGame.TakeHit(SaveGame.DieRoll(4), "the strain of casting Annihilation");
-            SaveGame.Mana.Value++;
-            SaveGame.MoveCursorRelative(SaveGame.MapY, SaveGame.MapX);
-            SaveGame.HandleStuff();
-            SaveGame.UpdateScreen();
-            SaveGame.Pause(Constants.DelayFactorInMilliseconds);
+            Game.DeleteMonsterByIndex(i, true);
+            Game.TakeHit(Game.DieRoll(4), "the strain of casting Annihilation");
+            Game.Mana.Value++;
+            Game.MoveCursorRelative(Game.MapY, Game.MapX);
+            Game.HandleStuff();
+            Game.UpdateScreen();
+            Game.Pause(Constants.DelayFactorInMilliseconds);
         }
-        SaveGame.Mana.Value += 100;
+        Game.Mana.Value += 100;
     }
 }

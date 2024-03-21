@@ -13,20 +13,20 @@ namespace AngbandOS.Core.Activations;
 [Serializable]
 internal class Heal777CuringAndHeroism25pd25Every300Activation : Activation
 {
-    private Heal777CuringAndHeroism25pd25Every300Activation(SaveGame saveGame) : base(saveGame) { }
+    private Heal777CuringAndHeroism25pd25Every300Activation(Game game) : base(game) { }
     public override int RandomChance => 25;
 
     public override string? PreActivationMessage => "A heavenly choir sings...";
 
     protected override bool OnActivate(Item item)
     {
-        SaveGame.PoisonTimer.ResetTimer();
-        SaveGame.BleedingTimer.ResetTimer();
-        SaveGame.StunTimer.ResetTimer();
-        SaveGame.ConfusedTimer.ResetTimer();
-        SaveGame.BlindnessTimer.ResetTimer();
-        SaveGame.HeroismTimer.AddTimer(base.SaveGame.DieRoll(25) + 25);
-        SaveGame.RestoreHealth(777);
+        Game.PoisonTimer.ResetTimer();
+        Game.BleedingTimer.ResetTimer();
+        Game.StunTimer.ResetTimer();
+        Game.ConfusedTimer.ResetTimer();
+        Game.BlindnessTimer.ResetTimer();
+        Game.HeroismTimer.AddTimer(base.Game.DieRoll(25) + 25);
+        Game.RestoreHealth(777);
         return true;
     }
 

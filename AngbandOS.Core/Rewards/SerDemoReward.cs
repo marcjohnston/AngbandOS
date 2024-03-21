@@ -10,13 +10,13 @@ namespace AngbandOS.Core.Rewards;
 [Serializable]
 internal class SerDemoReward : Reward
 {
-    private SerDemoReward(SaveGame saveGame) : base(saveGame) { }
+    private SerDemoReward(Game game) : base(game) { }
     public override void GetReward(Patron patron)
     {
-        SaveGame.MsgPrint($"{patron.ShortName} rewards you with a demonic servant!");
-        if (!SaveGame.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, SaveGame.Difficulty, SaveGame.SingletonRepository.MonsterFilters.Get(nameof(DemonMonsterFilter)), false))
+        Game.MsgPrint($"{patron.ShortName} rewards you with a demonic servant!");
+        if (!Game.SummonSpecificFriendly(Game.MapY, Game.MapX, Game.Difficulty, Game.SingletonRepository.MonsterFilters.Get(nameof(DemonMonsterFilter)), false))
         {
-            SaveGame.MsgPrint("Nobody ever turns up...");
+            Game.MsgPrint("Nobody ever turns up...");
         }
     }
 }

@@ -10,7 +10,7 @@ namespace AngbandOS.Core.MonsterSpells;
 [Serializable]
 internal class SlowMonsterSpell : MonsterSpell
 {
-    private SlowMonsterSpell(SaveGame saveGame) : base(saveGame) { }
+    private SlowMonsterSpell(Game game) : base(game) { }
     public override bool IsIntelligent => true;
     public override bool RestrictsFreeAction => true;
     public override bool Annoys => true;
@@ -25,29 +25,29 @@ internal class SlowMonsterSpell : MonsterSpell
         return $"{monsterName} drains power from {targetName}{it} muscles.";
     }
 
-    public override void ExecuteOnPlayer(SaveGame saveGame, Monster monster)
+    public override void ExecuteOnPlayer(Game game, Monster monster)
     {
         string monsterName = monster.Name;
 
-        if (saveGame.HasFreeAction)
+        if (game.HasFreeAction)
         {
-            saveGame.MsgPrint("You are unaffected!");
+            game.MsgPrint("You are unaffected!");
         }
-        else if (SaveGame.RandomLessThan(100) < saveGame.SkillSavingThrow)
+        else if (Game.RandomLessThan(100) < game.SkillSavingThrow)
         {
-            saveGame.MsgPrint("You resist the effects!");
+            game.MsgPrint("You resist the effects!");
         }
         else
         {
-            saveGame.SlowTimer.AddTimer(SaveGame.RandomLessThan(4) + 4);
+            game.SlowTimer.AddTimer(Game.RandomLessThan(4) + 4);
         }
-        saveGame.UpdateSmartLearn(monster, SaveGame.SingletonRepository.SpellResistantDetections.Get(nameof(FreeSpellResistantDetection)));
+        game.UpdateSmartLearn(monster, Game.SingletonRepository.SpellResistantDetections.Get(nameof(FreeSpellResistantDetection)));
     }
 
-    public override void ExecuteOnMonster(SaveGame saveGame, Monster monster, Monster target)
+    public override void ExecuteOnMonster(Game game, Monster monster, Monster target)
     {
         int rlev = monster.Race.Level >= 1 ? monster.Race.Level : 1;
-        bool blind = saveGame.BlindnessTimer.Value != 0;
+        bool blind = game.BlindnessTimer.Value != 0;
         bool seeTarget = !blind && target.IsVisible;
         MonsterRace targetRace = target.Race;
         string targetName = target.Name;
@@ -56,14 +56,14 @@ internal class SlowMonsterSpell : MonsterSpell
         {
             if (seeTarget)
             {
-                saveGame.MsgPrint($"{targetName} is unaffected.");
+                game.MsgPrint($"{targetName} is unaffected.");
             }
         }
-        else if (targetRace.Level > SaveGame.DieRoll(rlev - 10 < 1 ? 1 : rlev - 10) + 10)
+        else if (targetRace.Level > Game.DieRoll(rlev - 10 < 1 ? 1 : rlev - 10) + 10)
         {
             if (seeTarget)
             {
-                saveGame.MsgPrint($"{targetName} is unaffected.");
+                game.MsgPrint($"{targetName} is unaffected.");
             }
         }
         else
@@ -71,7 +71,7 @@ internal class SlowMonsterSpell : MonsterSpell
             target.Speed -= 10;
             if (seeTarget)
             {
-                saveGame.MsgPrint($"{targetName} starts moving slower.");
+                game.MsgPrint($"{targetName} starts moving slower.");
             }
         }
     }

@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class DispelEvil5xScript : Script, ISuccessfulScript, IScript, ICancellableScript
 {
-    private DispelEvil5xScript(SaveGame saveGame) : base(saveGame) { }
+    private DispelEvil5xScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the successful script and returns true because the player cannot cancel the script.
@@ -28,7 +28,7 @@ internal class DispelEvil5xScript : Script, ISuccessfulScript, IScript, ICancell
     /// <returns></returns>
     public bool ExecuteSuccessfulScript()
     {
-        return SaveGame.ProjectAtAllInLos(SaveGame.SingletonRepository.Projectiles.Get(nameof(DispEvilProjectile)), SaveGame.ExperienceLevel.Value * 5);
+        return Game.ProjectAtAllInLos(Game.SingletonRepository.Projectiles.Get(nameof(DispEvilProjectile)), Game.ExperienceLevel.Value * 5);
     }
 
     /// <summary>

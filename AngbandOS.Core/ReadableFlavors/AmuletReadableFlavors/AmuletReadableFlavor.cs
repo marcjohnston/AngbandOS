@@ -12,7 +12,7 @@ namespace AngbandOS.Core.Flavors;
 [Serializable]
 internal abstract class AmuletReadableFlavor : ReadableFlavor
 {
-    protected AmuletReadableFlavor(SaveGame saveGame) : base(saveGame)
+    protected AmuletReadableFlavor(Game game) : base(game)
     {
     }
 }

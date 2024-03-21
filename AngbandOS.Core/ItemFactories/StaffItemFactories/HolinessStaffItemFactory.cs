@@ -10,14 +10,14 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class HolinessStaffItemFactory : StaffItemFactory
 {
-    private HolinessStaffItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private HolinessStaffItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UnderscoreSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(UnderscoreSymbol));
     public override string Name => "Holiness";
 
     public override void ApplyMagic(Item item, int level, int power, Store? store)
     {
-        item.TypeSpecificValue = SaveGame.DieRoll(2) + 2;
+        item.TypeSpecificValue = Game.DieRoll(2) + 2;
     }
     public override int[] Chance => new int[] { 2, 0, 0, 0 };
     public override int Cost => 4500;
@@ -29,35 +29,35 @@ internal class HolinessStaffItemFactory : StaffItemFactory
     public override int Weight => 50;
     public override void UseStaff(UseStaffEvent eventArgs)
     {
-        if (SaveGame.RunSuccessfulScriptInt(nameof(DispelEvil4xScript), 120))
+        if (Game.RunSuccessfulScriptInt(nameof(DispelEvil4xScript), 120))
         {
             eventArgs.Identified = true;
         }
-        int k = 3 * SaveGame.ExperienceLevel.Value;
-        if (SaveGame.ProtectionFromEvilTimer.AddTimer(SaveGame.DieRoll(25) + k))
+        int k = 3 * Game.ExperienceLevel.Value;
+        if (Game.ProtectionFromEvilTimer.AddTimer(Game.DieRoll(25) + k))
         {
             eventArgs.Identified = true;
         }
-        if (SaveGame.PoisonTimer.ResetTimer())
+        if (Game.PoisonTimer.ResetTimer())
         {
             eventArgs.Identified = true;
         }
-        if (SaveGame.FearTimer.ResetTimer())
+        if (Game.FearTimer.ResetTimer())
         {
             eventArgs.Identified = true;
         }
-        if (SaveGame.RestoreHealth(50))
+        if (Game.RestoreHealth(50))
         {
             eventArgs.Identified = true;
         }
-        if (SaveGame.StunTimer.ResetTimer())
+        if (Game.StunTimer.ResetTimer())
         {
             eventArgs.Identified = true;
         }
-        if (SaveGame.BleedingTimer.ResetTimer())
+        if (Game.BleedingTimer.ResetTimer())
         {
             eventArgs.Identified = true;
         }
     }
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

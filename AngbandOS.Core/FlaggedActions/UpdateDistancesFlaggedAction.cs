@@ -10,17 +10,17 @@ namespace AngbandOS.Core.FlaggedActions;
 [Serializable]
 internal class UpdateDistancesFlaggedAction : FlaggedAction
 {
-    private UpdateDistancesFlaggedAction(SaveGame saveGame) : base(saveGame) { }
+    private UpdateDistancesFlaggedAction(Game game) : base(game) { }
     protected override void Execute()
     {
-        for (int i = 1; i < SaveGame.MMax; i++)
+        for (int i = 1; i < Game.MMax; i++)
         {
-            Monster mPtr = SaveGame.Monsters[i];
+            Monster mPtr = Game.Monsters[i];
             if (mPtr.Race == null)
             {
                 continue;
             }
-            SaveGame.UpdateMonsterVisibility(i, true);
+            Game.UpdateMonsterVisibility(i, true);
         }
     }
 }

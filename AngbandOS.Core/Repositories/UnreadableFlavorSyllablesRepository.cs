@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Repositories;
 [Serializable]
 internal class UnreadableFlavorSyllablesRepository : StringListRepository
 {
-    public UnreadableFlavorSyllablesRepository(SaveGame saveGame) : base(saveGame) { }
+    public UnreadableFlavorSyllablesRepository(Game game) : base(game) { }
 
     /// <summary>
     /// Returns UnreadableFlavorSyllables as the name of this string list repository.
@@ -19,7 +19,7 @@ internal class UnreadableFlavorSyllablesRepository : StringListRepository
 
     public override void Load()
     {
-        if (SaveGame.Configuration.UnreadableFlavorSyllables == null)
+        if (Game.Configuration.UnreadableFlavorSyllables == null)
         {
             Add("a", "ab", "ag", "aks", "ala", "an", "ankh", "app", "arg", "arze", "ash", "aus", "ban", "bar", "bat", "bek",
                 "bie", "bin", "bit", "bjor", "blu", "bot", "bu", "byt", "comp", "con", "cos", "cre", "dalf", "dan", "den",
@@ -35,7 +35,7 @@ internal class UnreadableFlavorSyllablesRepository : StringListRepository
         }
         else
         {
-            Add(SaveGame.Configuration.UnreadableFlavorSyllables);
+            Add(Game.Configuration.UnreadableFlavorSyllables);
         }
     }
 }

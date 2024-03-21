@@ -10,9 +10,9 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class EnchantWeaponToDamScrollItemFactory : ScrollItemFactory
 {
-    private EnchantWeaponToDamScrollItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private EnchantWeaponToDamScrollItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(QuestionMarkSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(QuestionMarkSymbol));
     public override string Name => "Enchant Weapon To-Dam";
 
     public override int[] Chance => new int[] { 1, 0, 0, 0 };
@@ -24,11 +24,11 @@ internal class EnchantWeaponToDamScrollItemFactory : ScrollItemFactory
 
     public override void Read(ReadScrollEvent eventArgs)
     {
-        if (!SaveGame.EnchantItem(0, 1, 0))
+        if (!Game.EnchantItem(0, 1, 0))
         {
             eventArgs.UsedUp = false;
         }
         eventArgs.Identified = true;
     }
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

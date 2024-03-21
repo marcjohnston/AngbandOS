@@ -10,7 +10,7 @@ namespace AngbandOS.Core.WizardCommands;
 [Serializable]
 internal class SpaceWizardCommand : WizardCommand
 {
-    private SpaceWizardCommand(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private SpaceWizardCommand(Game game) : base(game) { } // This object is a singleton.
 
     public override char KeyChar => ' ';
 }

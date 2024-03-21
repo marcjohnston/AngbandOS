@@ -10,5 +10,5 @@ namespace AngbandOS.Core.Properties;
 [Serializable]
 internal class MaxHealthPointsIntProperty : IntProperty
 {
-    protected MaxHealthPointsIntProperty(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    protected MaxHealthPointsIntProperty(Game game) : base(game) { } // This object is a singleton.
 }

@@ -10,13 +10,13 @@ namespace AngbandOS.Core.ArtifactBiases;
 [Serializable]
 internal class FireArtifactBias : ArtifactBias
 {
-    private FireArtifactBias(SaveGame saveGame) : base(saveGame) { }
+    private FireArtifactBias(Game game) : base(game) { }
     public override bool ApplyRandomResistances(Item item)
     {
         if (!item.RandomArtifactItemCharacteristics.ResFire)
         {
             item.RandomArtifactItemCharacteristics.ResFire = true;
-            if (SaveGame.DieRoll(2) == 1)
+            if (Game.DieRoll(2) == 1)
             {
                 return true;
             }
@@ -24,15 +24,15 @@ internal class FireArtifactBias : ArtifactBias
         if (item.Factory.CanApplyArtifactBiasResistance && !item.RandomArtifactItemCharacteristics.ShFire)
         {
             item.RandomArtifactItemCharacteristics.ShFire = true;
-            if (SaveGame.DieRoll(2) == 1)
+            if (Game.DieRoll(2) == 1)
             {
                 return true;
             }
         }
-        if (SaveGame.DieRoll(ImmunityLuckOneInChance) == 1 && !item.RandomArtifactItemCharacteristics.ImFire)
+        if (Game.DieRoll(ImmunityLuckOneInChance) == 1 && !item.RandomArtifactItemCharacteristics.ImFire)
         {
             item.RandomArtifactItemCharacteristics.ImFire = true;
-            if (SaveGame.DieRoll(2) == 1)
+            if (Game.DieRoll(2) == 1)
             {
                 return true;
             }
@@ -56,7 +56,7 @@ internal class FireArtifactBias : ArtifactBias
             if (!item.RandomArtifactItemCharacteristics.BrandFire)
             {
                 item.RandomArtifactItemCharacteristics.BrandFire = true;
-                if (SaveGame.DieRoll(2) == 1)
+                if (Game.DieRoll(2) == 1)
                 {
                     return true;
                 }
@@ -67,17 +67,17 @@ internal class FireArtifactBias : ArtifactBias
 
     public override Activation GetActivationPowerType(Item item)
     {
-        if (SaveGame.DieRoll(3) != 1)
+        if (Game.DieRoll(3) != 1)
         {
-            return SaveGame.SingletonRepository.Activations.Get(nameof(FireBolt9d8Every8p1d8Activation));
+            return Game.SingletonRepository.Activations.Get(nameof(FireBolt9d8Every8p1d8Activation));
         }
-        else if (SaveGame.DieRoll(5) != 1)
+        else if (Game.DieRoll(5) != 1)
         {
-            return SaveGame.SingletonRepository.Activations.Get(nameof(BallOfFire72r2Every400Activation));
+            return Game.SingletonRepository.Activations.Get(nameof(BallOfFire72r2Every400Activation));
         }
         else
         {
-            return SaveGame.SingletonRepository.Activations.Get(nameof(FireBall120r3Every225p1d225Activation));
+            return Game.SingletonRepository.Activations.Get(nameof(FireBall120r3Every225p1d225Activation));
         }
     }
 }

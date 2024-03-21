@@ -10,9 +10,9 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class SignOfChaosChaosBookItemFactory : ChaosBookItemFactory
 {
-    private SignOfChaosChaosBookItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private SignOfChaosChaosBookItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(QuestionMarkSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(QuestionMarkSymbol));
     public override ColorEnum Color => ColorEnum.BrightRed;
     public override string Name => "[Sign of Chaos]";
 
@@ -38,5 +38,5 @@ internal class SignOfChaosChaosBookItemFactory : ChaosBookItemFactory
         nameof(ChaosSpellTeleportSelf)
     };
 
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

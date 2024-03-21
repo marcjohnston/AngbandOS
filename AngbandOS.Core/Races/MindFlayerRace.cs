@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Races;
 [Serializable]
 internal class MindFlayerRace : Race
 {
-    private MindFlayerRace(SaveGame saveGame) : base(saveGame) { }
+    private MindFlayerRace(Game game) : base(game) { }
     public override string Title => "Mind Flayer";
     public override int[] AbilityBonus => new int[] { -3, 4, 4, 0, -2, -5 };
     public override int BaseDisarmBonus => 10;
@@ -69,27 +69,27 @@ internal class MindFlayerRace : Race
     }
     public override void CalcBonuses()
     {
-        SaveGame.HasSustainIntelligence = true;
-        SaveGame.HasSustainWisdom = true;
-        if (SaveGame.ExperienceLevel.Value > 14)
+        Game.HasSustainIntelligence = true;
+        Game.HasSustainWisdom = true;
+        if (Game.ExperienceLevel.Value > 14)
         {
-            SaveGame.HasSeeInvisibility = true;
+            Game.HasSeeInvisibility = true;
         }
-        if (SaveGame.ExperienceLevel.Value > 29)
+        if (Game.ExperienceLevel.Value > 29)
         {
-            SaveGame.HasTelepathy = true;
+            Game.HasTelepathy = true;
         }
     }
 
     public override void UseRacialPower()
     {
         // Mind Flayers can shoot psychic bolts
-        if (SaveGame.CheckIfRacialPowerWorks(15, 12, Ability.Intelligence, 14))
+        if (Game.CheckIfRacialPowerWorks(15, 12, Ability.Intelligence, 14))
         {
-            if (SaveGame.GetDirectionWithAim(out int direction))
+            if (Game.GetDirectionWithAim(out int direction))
             {
-                SaveGame.MsgPrint("You concentrate and your eyes glow red...");
-                SaveGame.FireBolt(SaveGame.SingletonRepository.Projectiles.Get(nameof(PsiProjectile)), direction, SaveGame.ExperienceLevel.Value);
+                Game.MsgPrint("You concentrate and your eyes glow red...");
+                Game.FireBolt(Game.SingletonRepository.Projectiles.Get(nameof(PsiProjectile)), direction, Game.ExperienceLevel.Value);
             }
         }
     }

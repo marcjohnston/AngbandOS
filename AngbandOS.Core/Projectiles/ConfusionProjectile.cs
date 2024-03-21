@@ -10,11 +10,11 @@ namespace AngbandOS.Core.Projection;
 [Serializable]
 internal class ConfusionProjectile : Projectile
 {
-    private ConfusionProjectile(SaveGame saveGame) : base(saveGame) { }
+    private ConfusionProjectile(Game game) : base(game) { }
 
-    protected override ProjectileGraphic? BoltProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get(nameof(GreySplatProjectileGraphic));
+    protected override ProjectileGraphic? BoltProjectileGraphic => Game.SingletonRepository.ProjectileGraphics.Get(nameof(GreySplatProjectileGraphic));
 
-    protected override Animation EffectAnimation => SaveGame.SingletonRepository.Animations.Get(nameof(GreyQuestionAnimation));
+    protected override Animation EffectAnimation => Game.SingletonRepository.Animations.Get(nameof(GreyQuestionAnimation));
 
     protected override bool AffectMonster(int who, Monster mPtr, int dam, int r)
     {
@@ -26,12 +26,12 @@ internal class ConfusionProjectile : Projectile
         {
             obvious = true;
         }
-        int doConf = (10 + SaveGame.DieRoll(15) + r) / (r + 1);
+        int doConf = (10 + Game.DieRoll(15) + r) / (r + 1);
         if (rPtr.BreatheConfusion)
         {
             note = " resists.";
             dam *= 2;
-            dam /= SaveGame.DieRoll(6) + 6;
+            dam /= Game.DieRoll(6) + 6;
         }
         else if (rPtr.ImmuneConfusion)
         {
@@ -59,28 +59,28 @@ internal class ConfusionProjectile : Projectile
 
     protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
     {
-        bool blind = SaveGame.BlindnessTimer.Value != 0;
+        bool blind = Game.BlindnessTimer.Value != 0;
         if (dam > 1600)
         {
             dam = 1600;
         }
         dam = (dam + r) / (r + 1);
-        Monster mPtr = SaveGame.Monsters[who];
+        Monster mPtr = Game.Monsters[who];
         string killer = mPtr.IndefiniteVisibleName;
         if (blind)
         {
-            SaveGame.MsgPrint("You are hit by something puzzling!");
+            Game.MsgPrint("You are hit by something puzzling!");
         }
-        if (SaveGame.HasConfusionResistance)
+        if (Game.HasConfusionResistance)
         {
             dam *= 5;
-            dam /= SaveGame.DieRoll(6) + 6;
+            dam /= Game.DieRoll(6) + 6;
         }
-        if (!SaveGame.HasConfusionResistance)
+        if (!Game.HasConfusionResistance)
         {
-            SaveGame.ConfusedTimer.AddTimer(SaveGame.DieRoll(20) + 10);
+            Game.ConfusedTimer.AddTimer(Game.DieRoll(20) + 10);
         }
-        SaveGame.TakeHit(dam, killer);
+        Game.TakeHit(dam, killer);
         return true;
     }
 }

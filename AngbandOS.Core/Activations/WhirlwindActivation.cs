@@ -13,7 +13,7 @@ namespace AngbandOS.Core.Activations;
 [Serializable]
 internal class WhirlwindActivation : Activation
 {
-    private WhirlwindActivation(SaveGame saveGame) : base(saveGame) { }
+    private WhirlwindActivation(Game game) : base(game) { }
     public override int RandomChance => 50;
 
     public override string? PreActivationMessage => "";  // There is no message for this artifact power.
@@ -24,13 +24,13 @@ internal class WhirlwindActivation : Activation
     {
         for (int direction = 0; direction <= 9; direction++)
         {
-            int y = SaveGame.MapY + SaveGame.KeypadDirectionYOffset[direction];
-            int x = SaveGame.MapX + SaveGame.KeypadDirectionXOffset[direction];
-            GridTile cPtr = SaveGame.Grid[y][x];
-            Monster mPtr = SaveGame.Monsters[cPtr.MonsterIndex];
-            if (cPtr.MonsterIndex != 0 && (mPtr.IsVisible || SaveGame.GridPassable(y, x)))
+            int y = Game.MapY + Game.KeypadDirectionYOffset[direction];
+            int x = Game.MapX + Game.KeypadDirectionXOffset[direction];
+            GridTile cPtr = Game.Grid[y][x];
+            Monster mPtr = Game.Monsters[cPtr.MonsterIndex];
+            if (cPtr.MonsterIndex != 0 && (mPtr.IsVisible || Game.GridPassable(y, x)))
             {
-                SaveGame.PlayerAttackMonster(y, x);
+                Game.PlayerAttackMonster(y, x);
             }
         }
         return true;

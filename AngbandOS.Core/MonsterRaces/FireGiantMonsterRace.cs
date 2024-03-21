@@ -10,7 +10,7 @@ namespace AngbandOS.Core.MonsterRaces;
 [Serializable]
 internal class FireGiantMonsterRace : MonsterRace
 {
-    protected FireGiantMonsterRace(SaveGame saveGame) : base(saveGame) { }
+    protected FireGiantMonsterRace(Game game) : base(game) { }
 
     protected override string SymbolName => nameof(UpperPSymbol);
     public override ColorEnum Color => ColorEnum.Red;

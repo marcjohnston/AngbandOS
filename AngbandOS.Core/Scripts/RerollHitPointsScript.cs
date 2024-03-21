@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class RerollHitPointsScript : Script, IScript
 {
-    private RerollHitPointsScript(SaveGame saveGame) : base(saveGame) { }
+    private RerollHitPointsScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script.
@@ -19,29 +19,29 @@ internal class RerollHitPointsScript : Script, IScript
     public void ExecuteScript()
     {
         int i;
-        SaveGame.PlayerHp[0] = SaveGame.HitDie;
-        int lastroll = SaveGame.HitDie;
+        Game.PlayerHp[0] = Game.HitDie;
+        int lastroll = Game.HitDie;
         for (i = 1; i < Constants.PyMaxLevel; i++)
         {
-            SaveGame.PlayerHp[i] = lastroll;
+            Game.PlayerHp[i] = lastroll;
             lastroll--;
             if (lastroll < 1)
             {
-                lastroll = SaveGame.HitDie;
+                lastroll = Game.HitDie;
             }
         }
         for (i = 1; i < Constants.PyMaxLevel; i++)
         {
-            int j = SaveGame.DieRoll(Constants.PyMaxLevel - 1);
-            lastroll = SaveGame.PlayerHp[i];
-            SaveGame.PlayerHp[i] = SaveGame.PlayerHp[j];
-            SaveGame.PlayerHp[j] = lastroll;
+            int j = Game.DieRoll(Constants.PyMaxLevel - 1);
+            lastroll = Game.PlayerHp[i];
+            Game.PlayerHp[i] = Game.PlayerHp[j];
+            Game.PlayerHp[j] = lastroll;
         }
         for (i = 1; i < Constants.PyMaxLevel; i++)
         {
-            SaveGame.PlayerHp[i] = SaveGame.PlayerHp[i - 1] + SaveGame.PlayerHp[i];
+            Game.PlayerHp[i] = Game.PlayerHp[i - 1] + Game.PlayerHp[i];
         }
-        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateHealthFlaggedAction)).Set();
-        SaveGame.HandleStuff();
+        Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateHealthFlaggedAction)).Set();
+        Game.HandleStuff();
     }
 }

@@ -10,9 +10,9 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class LordlyProtectionRingItemFactory : RingItemFactory
 {
-    private LordlyProtectionRingItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private LordlyProtectionRingItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(EqualSignSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(EqualSignSymbol));
     public override string Name => "Lordly Protection";
 
     public override void ApplyMagic(Item item, int level, int power, Store? store)
@@ -20,10 +20,10 @@ internal class LordlyProtectionRingItemFactory : RingItemFactory
         IArtifactBias artifactBias = null;
         do
         {
-            item.ApplyRandomResistance(ref artifactBias, SaveGame.DieRoll(20) + 18);
-        } while (SaveGame.DieRoll(4) == 1);
-        item.BonusArmorClass = 10 + SaveGame.DieRoll(5) + item.GetBonusValue(10, level);
-        SaveGame.TreasureRating += 5;
+            item.ApplyRandomResistance(ref artifactBias, Game.DieRoll(20) + 18);
+        } while (Game.DieRoll(4) == 1);
+        item.BonusArmorClass = 10 + Game.DieRoll(5) + item.GetBonusValue(10, level);
+        Game.TreasureRating += 5;
     }
     public override int[] Chance => new int[] { 5, 0, 0, 0 };
     public override int Cost => 100000;
@@ -35,5 +35,5 @@ internal class LordlyProtectionRingItemFactory : RingItemFactory
     public override bool ResDisen => true;
     public override bool ResPois => true;
     public override int Weight => 2;
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

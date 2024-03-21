@@ -10,7 +10,7 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal abstract class AmuletJeweleryItemFactory : JewelleryItemFactory, IFlavorFactory
 {
-    public AmuletJeweleryItemFactory(SaveGame saveGame) : base(saveGame) { }
+    public AmuletJeweleryItemFactory(Game game) : base(game) { }
 
     /// <summary>
     /// Returns the neck inventory slot for amulets.
@@ -30,12 +30,12 @@ internal abstract class AmuletJeweleryItemFactory : JewelleryItemFactory, IFlavo
         }
         string flavor = item.IdentityIsStoreBought ? "" : $"{FlavorFactory.Flavor.Name} ";
         string ofName = isFlavorAware ? $" of {item.Factory.FriendlyName}" : "";
-        string name = $"{flavor}{SaveGame.CountPluralize("Amulet", item.Count)}{ofName}";
+        string name = $"{flavor}{Game.CountPluralize("Amulet", item.Count)}{ofName}";
         return includeCountPrefix ? GetPrefixCount(true, name, item.Count, item.IsKnownArtifact) : name;
     }
 
-    public override ItemClass ItemClass => SaveGame.SingletonRepository.ItemClasses.Get(nameof(AmuletsItemClass));
-    public override BaseInventorySlot BaseWieldSlot => SaveGame.SingletonRepository.InventorySlots.Get(nameof(NeckInventorySlot));
+    public override ItemClass ItemClass => Game.SingletonRepository.ItemClasses.Get(nameof(AmuletsItemClass));
+    public override BaseInventorySlot BaseWieldSlot => Game.SingletonRepository.InventorySlots.Get(nameof(NeckInventorySlot));
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Amulet;
     public override int PackSort => 17;
     public override int BaseValue => 45;
@@ -44,7 +44,7 @@ internal abstract class AmuletJeweleryItemFactory : JewelleryItemFactory, IFlavo
     /// <summary>
     /// Returns the amulet flavors repository because amulets have flavors that need to be identified.
     /// </summary>
-    public IEnumerable<Flavor>? GetFlavorRepository() => SaveGame.SingletonRepository.AmuletReadableFlavors;
+    public IEnumerable<Flavor>? GetFlavorRepository() => Game.SingletonRepository.AmuletReadableFlavors;
 
     /// <inheritdoc/>
     public Flavor Flavor { get; set; }

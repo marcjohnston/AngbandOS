@@ -9,7 +9,7 @@ namespace AngbandOS.Core.Dungeons;
 [Serializable]
 internal class KadathDungeon : Dungeon
 {
-    private KadathDungeon(SaveGame saveGame) : base(saveGame) { }
+    private KadathDungeon(Game game) : base(game) { }
     public override int BaseOffset => 50;
     public override int MaxLevel => 75;
     protected override string? BiasMonsterFilterName => nameof(CthuloidMonsterFilter);

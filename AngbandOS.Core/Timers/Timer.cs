@@ -13,7 +13,7 @@ namespace AngbandOS.Core.Timers;
 [Serializable]
 internal abstract class Timer : IGetKey, IIntChangeTracking
 {
-    protected SaveGame SaveGame { get; }
+    protected Game Game { get; }
 
     public virtual void ClearChangedFlag()
     {
@@ -22,9 +22,9 @@ internal abstract class Timer : IGetKey, IIntChangeTracking
 
     public virtual bool IsChanged { get; private set; }
 
-    public Timer(SaveGame saveGame)
+    public Timer(Game game)
     {
-        SaveGame = saveGame;
+        Game = game;
     }
 
     /// <summary>
@@ -111,8 +111,8 @@ internal abstract class Timer : IGetKey, IIntChangeTracking
     /// </summary>
     protected virtual void Noticed()
     {
-        SaveGame.Disturb(false);
-        SaveGame.HandleStuff();
+        Game.Disturb(false);
+        Game.HandleStuff();
     }
 
     /// <summary>

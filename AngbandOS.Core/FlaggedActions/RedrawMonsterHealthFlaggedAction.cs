@@ -12,31 +12,31 @@ internal class RedrawMonsterHealthFlaggedAction : FlaggedAction
 {
     private const int RowInfo = 32;
     private const int ColInfo = 0;
-    private RedrawMonsterHealthFlaggedAction(SaveGame saveGame) : base(saveGame) { }
+    private RedrawMonsterHealthFlaggedAction(Game game) : base(game) { }
     protected override void Execute()
     {
-        if (SaveGame.TrackedMonsterIndex == 0)
+        if (Game.TrackedMonsterIndex == 0)
         {
-            SaveGame.Screen.Erase(RowInfo, ColInfo, 12);
-            SaveGame.Screen.Erase(RowInfo - 3, ColInfo, 12);
-            SaveGame.Screen.Erase(RowInfo - 2, ColInfo, 12);
-            SaveGame.Screen.Erase(RowInfo - 1, ColInfo, 12);
+            Game.Screen.Erase(RowInfo, ColInfo, 12);
+            Game.Screen.Erase(RowInfo - 3, ColInfo, 12);
+            Game.Screen.Erase(RowInfo - 2, ColInfo, 12);
+            Game.Screen.Erase(RowInfo - 1, ColInfo, 12);
         }
-        else if (!SaveGame.Monsters[SaveGame.TrackedMonsterIndex].IsVisible)
+        else if (!Game.Monsters[Game.TrackedMonsterIndex].IsVisible)
         {
-            SaveGame.Screen.Print(ColorEnum.White, "[----------]", RowInfo, ColInfo);
+            Game.Screen.Print(ColorEnum.White, "[----------]", RowInfo, ColInfo);
         }
-        else if (SaveGame.HallucinationsTimer.Value != 0)
+        else if (Game.HallucinationsTimer.Value != 0)
         {
-            SaveGame.Screen.Print(ColorEnum.White, "[----------]", RowInfo, ColInfo);
+            Game.Screen.Print(ColorEnum.White, "[----------]", RowInfo, ColInfo);
         }
-        else if (SaveGame.Monsters[SaveGame.TrackedMonsterIndex].Health < 0)
+        else if (Game.Monsters[Game.TrackedMonsterIndex].Health < 0)
         {
-            SaveGame.Screen.Print(ColorEnum.White, "[----------]", RowInfo, ColInfo);
+            Game.Screen.Print(ColorEnum.White, "[----------]", RowInfo, ColInfo);
         }
         else
         {
-            Monster mPtr = SaveGame.Monsters[SaveGame.TrackedMonsterIndex];
+            Monster mPtr = Game.Monsters[Game.TrackedMonsterIndex];
             ColorEnum attr = ColorEnum.Red;
             string smb = "**********";
             int pct = 100 * mPtr.Health / mPtr.MaxHealth;
@@ -72,11 +72,11 @@ internal class RedrawMonsterHealthFlaggedAction : FlaggedAction
                 smb = "FRIENDLY**";
             }
             int len = pct < 10 ? 1 : pct < 90 ? (pct / 10) + 1 : 10;
-            SaveGame.Screen.Print(ColorEnum.White, "[----------]", RowInfo, ColInfo);
-            SaveGame.Screen.Print(attr, smb.Substring(0, len), RowInfo, ColInfo + 1);
-            SaveGame.Screen.Print(ColorEnum.White, mPtr.Race.SplitName1, RowInfo - 3, ColInfo);
-            SaveGame.Screen.Print(ColorEnum.White, mPtr.Race.SplitName2, RowInfo - 2, ColInfo);
-            SaveGame.Screen.Print(ColorEnum.White, mPtr.Race.SplitName3, RowInfo - 1, ColInfo);
+            Game.Screen.Print(ColorEnum.White, "[----------]", RowInfo, ColInfo);
+            Game.Screen.Print(attr, smb.Substring(0, len), RowInfo, ColInfo + 1);
+            Game.Screen.Print(ColorEnum.White, mPtr.Race.SplitName1, RowInfo - 3, ColInfo);
+            Game.Screen.Print(ColorEnum.White, mPtr.Race.SplitName2, RowInfo - 2, ColInfo);
+            Game.Screen.Print(ColorEnum.White, mPtr.Race.SplitName3, RowInfo - 1, ColInfo);
         }
     }
 }

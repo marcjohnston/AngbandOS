@@ -3,7 +3,7 @@
 [Serializable]
 internal class CommaSymbol : Symbol
 {
-    private CommaSymbol(SaveGame saveGame) : base(saveGame) { }
+    private CommaSymbol(Game game) : base(game) { }
     public override char Character => ',';
     public override string Name => "Food (or mushroom patch)";
 }

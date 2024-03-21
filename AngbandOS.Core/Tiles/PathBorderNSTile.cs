@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Tiles;
 [Serializable]
 internal class PathBorderNSTile : Tile
 {
-    private PathBorderNSTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private PathBorderNSTile(Game game) : base(game) { } // This object is a singleton.
     protected override string SymbolName => nameof(VerticalBarSymbol);
     public override ColorEnum Color => ColorEnum.BrightBrown;
     public override bool IsPath => true;

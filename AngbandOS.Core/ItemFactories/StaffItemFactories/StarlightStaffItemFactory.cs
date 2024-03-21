@@ -10,14 +10,14 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class StarlightStaffItemFactory : StaffItemFactory
 {
-    private StarlightStaffItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private StarlightStaffItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(UnderscoreSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(UnderscoreSymbol));
     public override string Name => "Starlight";
 
     public override void ApplyMagic(Item item, int level, int power, Store? store)
     {
-        item.TypeSpecificValue = SaveGame.DieRoll(5) + 6;
+        item.TypeSpecificValue = Game.DieRoll(5) + 6;
     }
 
     public override int[] Chance => new int[] { 1, 0, 0, 0 };
@@ -31,15 +31,15 @@ internal class StarlightStaffItemFactory : StaffItemFactory
 
     public override void UseStaff(UseStaffEvent eventArgs)
     {
-        if (SaveGame.BlindnessTimer.Value == 0)
+        if (Game.BlindnessTimer.Value == 0)
         {
-            SaveGame.MsgPrint("The end of the staff glows brightly...");
+            Game.MsgPrint("The end of the staff glows brightly...");
         }
         for (int k = 0; k < 8; k++)
         {
-            SaveGame.LightLine(SaveGame.OrderedDirection[k]);
+            Game.LightLine(Game.OrderedDirection[k]);
         }
         eventArgs.Identified = true;
     }
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

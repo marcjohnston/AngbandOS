@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Tiles;
 [Serializable]
 internal class FieldTile : Tile
 {
-    private FieldTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private FieldTile(Game game) : base(game) { } // This object is a singleton.
     protected override string SymbolName => nameof(PeriodSymbol);
     public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Description => "field";

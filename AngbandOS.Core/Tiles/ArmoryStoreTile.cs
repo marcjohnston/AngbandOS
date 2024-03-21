@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Tiles;
 [Serializable]
 internal class ArmoryStoreTile : Tile
 {
-    private ArmoryStoreTile(SaveGame saveGame) : base(saveGame) { }
+    private ArmoryStoreTile(Game game) : base(game) { }
     public override bool BlocksLos => true;
     public override bool IsInteresting => true;
     public override bool IsPassable => true;

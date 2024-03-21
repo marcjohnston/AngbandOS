@@ -10,7 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class MetalCapOfHolinessFixedArtifact : FixedArtifact
 {
-    private MetalCapOfHolinessFixedArtifact(SaveGame saveGame) : base(saveGame) { }
+    private MetalCapOfHolinessFixedArtifact(Game game) : base(game) { }
 
     protected override string BaseItemFactoryName => nameof(MetalCapHelmArmorFactory);
 

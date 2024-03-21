@@ -10,9 +10,9 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class RobeSoftArmorItemFactory : SoftArmorItemFactory
 {
-    private RobeSoftArmorItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private RobeSoftArmorItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(OpenParenthesisSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(OpenParenthesisSymbol));
     public override ColorEnum Color => ColorEnum.Blue;
     public override string Name => "Robe";
 
@@ -33,9 +33,9 @@ internal class RobeSoftArmorItemFactory : SoftArmorItemFactory
             if (power > 1)
             {
                 // Robes have a chance of having the armor of permanence instead of a random characteristic.
-                if (SaveGame.RandomLessThan(100) < 10)
+                if (Game.RandomLessThan(100) < 10)
                 {
-                    item.RareItem = SaveGame.SingletonRepository.RareItems.Get(nameof(ArmorOfPermanenceRareItem));
+                    item.RareItem = Game.SingletonRepository.RareItems.Get(nameof(ArmorOfPermanenceRareItem));
                 }
                 else
                 {
@@ -52,5 +52,5 @@ internal class RobeSoftArmorItemFactory : SoftArmorItemFactory
     public override int LevelNormallyFound => 1;
     public override int[] Locale => new int[] { 1, 50, 0, 0 };
     public override int Weight => 20;
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

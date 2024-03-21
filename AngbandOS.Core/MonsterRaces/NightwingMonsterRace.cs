@@ -10,7 +10,7 @@ namespace AngbandOS.Core.MonsterRaces;
 [Serializable]
 internal class NightwingMonsterRace : MonsterRace
 {
-    protected NightwingMonsterRace(SaveGame saveGame) : base(saveGame) { }
+    protected NightwingMonsterRace(Game game) : base(game) { }
 
     protected override string[]? SpellNames =>new string[] {
         nameof(BlindnessMonsterSpell),

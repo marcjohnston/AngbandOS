@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Flavors;
 [Serializable]
 internal class BeigeScrollReadableFlavor : ScrollReadableFlavor
 {
-    private BeigeScrollReadableFlavor(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private BeigeScrollReadableFlavor(Game game) : base(game) { } // This object is a singleton.
     protected override string SymbolName => nameof(QuestionMarkSymbol);
     public override ColorEnum Color => ColorEnum.Beige;
 

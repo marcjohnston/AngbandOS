@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Races;
 [Serializable]
 internal class HalfOgreRace : Race
 {
-    private HalfOgreRace(SaveGame saveGame) : base(saveGame) { }
+    private HalfOgreRace(Game game) : base(game) { }
     public override string Title => "Half Ogre";
     public override int[] AbilityBonus => new int[] { 3, -1, -1, -1, 3, -3 };
     public override int BaseDisarmBonus => -3;
@@ -63,19 +63,19 @@ internal class HalfOgreRace : Race
 
     public override void CalcBonuses()
     {
-        SaveGame.HasDarkResistance = true;
-        SaveGame.HasSustainStrength = true;
+        Game.HasDarkResistance = true;
+        Game.HasSustainStrength = true;
     }
 
     public override void UseRacialPower()
     {
         // Half-Ogres can go berserk
-        if (SaveGame.CheckIfRacialPowerWorks(8, 10, Ability.Wisdom, SaveGame.BaseCharacterClass.ID == CharacterClass.Warrior ? 6 : 12))
+        if (Game.CheckIfRacialPowerWorks(8, 10, Ability.Wisdom, Game.BaseCharacterClass.ID == CharacterClass.Warrior ? 6 : 12))
         {
-            SaveGame.MsgPrint("Raaagh!");
-            SaveGame.FearTimer.ResetTimer();
-            SaveGame.SuperheroismTimer.AddTimer(10 + SaveGame.DieRoll(SaveGame.ExperienceLevel.Value));
-            SaveGame.RestoreHealth(30);
+            Game.MsgPrint("Raaagh!");
+            Game.FearTimer.ResetTimer();
+            Game.SuperheroismTimer.AddTimer(10 + Game.DieRoll(Game.ExperienceLevel.Value));
+            Game.RestoreHealth(30);
         }
     }
 }

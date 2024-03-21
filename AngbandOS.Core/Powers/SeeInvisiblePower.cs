@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Powers;
 [Serializable]
 internal class SeeInvisiblePower : Power
 {
-    private SeeInvisiblePower(SaveGame saveGame) : base(saveGame) { } // This object is a singleton
+    private SeeInvisiblePower(Game game) : base(game) { } // This object is a singleton
     public override bool IsAbility => true;
     public override void Activate(Item item)
     {

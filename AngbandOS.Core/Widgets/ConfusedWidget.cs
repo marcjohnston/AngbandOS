@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Widgets;
 [Serializable]
 internal class ConfusedWidget : RangedWidget
 {
-    private ConfusedWidget(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private ConfusedWidget(Game game) : base(game) { } // This object is a singleton.
     public override int X => 15;
     public override int Y => 44;
     public override int Width => 8;

@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Activations;
 [Serializable]
 internal class LargeBallFire72Every100Activation : DirectionalActivation
 {
-    private LargeBallFire72Every100Activation(SaveGame saveGame) : base(saveGame) { }
+    private LargeBallFire72Every100Activation(Game game) : base(game) { }
     public override int RandomChance => 85;
 
     public override string? PreActivationMessage => "Your {0} rages in fire...";
@@ -19,7 +19,7 @@ internal class LargeBallFire72Every100Activation : DirectionalActivation
 
     protected override bool Activate(int direction)
     {
-        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(FireProjectile)), direction, 72, 3);
+        Game.FireBall(Game.SingletonRepository.Projectiles.Get(nameof(FireProjectile)), direction, 72, 3);
         return true;
     }
 

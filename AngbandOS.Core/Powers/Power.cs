@@ -10,10 +10,10 @@ namespace AngbandOS.Core.Powers;
 [Serializable]
 internal abstract class Power : IGetKey
 {
-    protected readonly SaveGame SaveGame;
-    protected Power(SaveGame saveGame)
+    protected readonly Game Game;
+    protected Power(Game game)
     {
-        SaveGame = saveGame;
+        Game = game;
     }
 
     public virtual string Key => GetType().Name;

@@ -12,7 +12,7 @@ namespace AngbandOS.Core.InventorySlots;
 [Serializable]
 internal class RangedWeaponInventorySlot : EquipmentInventorySlot
 {
-    private RangedWeaponInventorySlot(SaveGame saveGame) : base(saveGame) { }
+    private RangedWeaponInventorySlot(Game game) : base(game) { }
     public override string Label(int index) => "b";
     public override string Label(Item oPtr) => "b";
     public override int[] InventorySlots => new int[] { InventorySlot.RangedWeapon };
@@ -25,8 +25,8 @@ internal class RangedWeaponInventorySlot : EquipmentInventorySlot
         string p = "Shooting";
         if (Count > 0 && index.HasValue)
         {
-            Item? oPtr = SaveGame.GetInventoryItem(index.Value);
-            if (oPtr != null && SaveGame.AbilityScores[Ability.Strength].StrMaxWeaponWeight < oPtr.Weight / 10)
+            Item? oPtr = Game.GetInventoryItem(index.Value);
+            if (oPtr != null && Game.AbilityScores[Ability.Strength].StrMaxWeaponWeight < oPtr.Weight / 10)
             {
                 p = "Just holding";
             }
@@ -39,8 +39,8 @@ internal class RangedWeaponInventorySlot : EquipmentInventorySlot
         string p = "shooting missiles with";
         if (Count > 0)
         {
-            Item? oPtr = SaveGame.GetInventoryItem(index);
-            if (oPtr != null && SaveGame.AbilityScores[Ability.Strength].StrMaxWeaponWeight < oPtr.Weight / 10)
+            Item? oPtr = Game.GetInventoryItem(index);
+            if (oPtr != null && Game.AbilityScores[Ability.Strength].StrMaxWeaponWeight < oPtr.Weight / 10)
             {
                 p = "just holding";
             }
@@ -50,7 +50,7 @@ internal class RangedWeaponInventorySlot : EquipmentInventorySlot
     public override string DescribeItemLocation(Item oPtr)
     {
         string p = "shooting missiles with";
-        if (oPtr != null && SaveGame.AbilityScores[Ability.Strength].StrMaxWeaponWeight < oPtr.Weight / 10)
+        if (oPtr != null && Game.AbilityScores[Ability.Strength].StrMaxWeaponWeight < oPtr.Weight / 10)
         {
             p = "just holding";
         }

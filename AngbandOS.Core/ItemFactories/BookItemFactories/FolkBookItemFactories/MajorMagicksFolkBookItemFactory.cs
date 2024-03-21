@@ -10,9 +10,9 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class MajorMagicksFolkBookItemFactory : FolkBookItemFactory
 {
-    private MajorMagicksFolkBookItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private MajorMagicksFolkBookItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(QuestionMarkSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(QuestionMarkSymbol));
     public override ColorEnum Color => ColorEnum.BrightPurple;
     public override string Name => "[Major Magicks]";
 
@@ -30,7 +30,7 @@ internal class MajorMagicksFolkBookItemFactory : FolkBookItemFactory
     public override bool IsHighLevelBook => true;
     public override int Weight => 30;
     public override bool KindIsGood => true;
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
     protected override string[] SpellNames => new string[]
     {
         nameof(FolkSpellResistLightning),

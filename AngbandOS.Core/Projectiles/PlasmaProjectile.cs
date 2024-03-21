@@ -10,15 +10,15 @@ namespace AngbandOS.Core.Projection;
 [Serializable]
 internal class PlasmaProjectile : Projectile
 {
-    private PlasmaProjectile(SaveGame saveGame) : base(saveGame) { }
+    private PlasmaProjectile(Game game) : base(game) { }
 
-    protected override ProjectileGraphic? BoltProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get(nameof(BrightRedBoltProjectileGraphic));
+    protected override ProjectileGraphic? BoltProjectileGraphic => Game.SingletonRepository.ProjectileGraphics.Get(nameof(BrightRedBoltProjectileGraphic));
 
-    protected override ProjectileGraphic? ImpactProjectileGraphic => SaveGame.SingletonRepository.ProjectileGraphics.Get(nameof(BrightRedSplatProjectileGraphic));
+    protected override ProjectileGraphic? ImpactProjectileGraphic => Game.SingletonRepository.ProjectileGraphics.Get(nameof(BrightRedSplatProjectileGraphic));
 
     protected override bool AffectItem(int who, int y, int x)
     {
-        GridTile cPtr = SaveGame.Grid[y][x];
+        GridTile cPtr = Game.Grid[y][x];
         bool obvious = false;
         string oName = "";
         foreach (Item oPtr in cPtr.Items)
@@ -65,23 +65,23 @@ internal class PlasmaProjectile : Projectile
                 if (oPtr.Marked)
                 {
                     string s = plural ? "are" : "is";
-                    SaveGame.MsgPrint($"The {oName} {s} unaffected!");
+                    Game.MsgPrint($"The {oName} {s} unaffected!");
                 }
             }
             else
             {
                 if (oPtr.Marked && string.IsNullOrEmpty(noteKill))
                 {
-                    SaveGame.MsgPrint($"The {oName}{noteKill}");
+                    Game.MsgPrint($"The {oName}{noteKill}");
                 }
                 bool isPotion = oPtr.Factory.CategoryEnum == ItemTypeEnum.Potion;
-                SaveGame.DeleteObject(oPtr);
+                Game.DeleteObject(oPtr);
                 if (isPotion)
                 {
                     PotionItemFactory potion = (PotionItemFactory)oPtr.Factory;
                     potion.Smash(who, y, x);
                 }
-                SaveGame.RedrawSingleLocation(y, x);
+                Game.RedrawSingleLocation(y, x);
             }
         }
         return obvious;
@@ -101,7 +101,7 @@ internal class PlasmaProjectile : Projectile
         {
             note = " resists.";
             dam *= 3;
-            dam /= SaveGame.DieRoll(6) + 6;
+            dam /= Game.DieRoll(6) + 6;
             if (seen)
             {
                 rPtr.Knowledge.Characteristics.ResistPlasma = true;
@@ -113,27 +113,27 @@ internal class PlasmaProjectile : Projectile
 
     protected override bool AffectPlayer(int who, int r, int y, int x, int dam, int aRad)
     {
-        bool blind = SaveGame.BlindnessTimer.Value != 0;
+        bool blind = Game.BlindnessTimer.Value != 0;
         if (dam > 1600)
         {
             dam = 1600;
         }
         dam = (dam + r) / (r + 1);
-        Monster mPtr = SaveGame.Monsters[who];
+        Monster mPtr = Game.Monsters[who];
         string killer = mPtr.IndefiniteVisibleName;
         if (blind)
         {
-            SaveGame.MsgPrint("You are hit by something *HOT*!");
+            Game.MsgPrint("You are hit by something *HOT*!");
         }
-        SaveGame.TakeHit(dam, killer);
-        if (!SaveGame.HasSoundResistance)
+        Game.TakeHit(dam, killer);
+        if (!Game.HasSoundResistance)
         {
-            int kk = SaveGame.DieRoll(dam > 40 ? 35 : (dam * 3 / 4) + 5);
-            SaveGame.StunTimer.AddTimer(kk);
+            int kk = Game.DieRoll(dam > 40 ? 35 : (dam * 3 / 4) + 5);
+            Game.StunTimer.AddTimer(kk);
         }
-        if (!(SaveGame.HasFireResistance || SaveGame.FireResistanceTimer.Value != 0 || SaveGame.HasFireImmunity))
+        if (!(Game.HasFireResistance || Game.FireResistanceTimer.Value != 0 || Game.HasFireImmunity))
         {
-            SaveGame.InvenDamage(SaveGame.SetAcidDestroy, 3);
+            Game.InvenDamage(Game.SetAcidDestroy, 3);
         }
         return true;
     }

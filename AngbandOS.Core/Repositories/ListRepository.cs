@@ -17,7 +17,7 @@ internal abstract class ListRepository<T> : Repository<T>
 {
     private List<T> list = new List<T>();
 
-    protected ListRepository(SaveGame saveGame) : base(saveGame) { }
+    protected ListRepository(Game game) : base(game) { }
 
     /// <summary>
     /// Returns an item in the repository by the ordinal index.
@@ -46,7 +46,7 @@ internal abstract class ListRepository<T> : Repository<T>
     /// </summary>
     /// <param name="predicate"></param>
     /// <returns></returns>
-    public WeightedRandom<T> ToWeightedRandom(Func<T, bool>? predicate = null) => new WeightedRandom<T>(SaveGame, this, predicate);
+    public WeightedRandom<T> ToWeightedRandom(Func<T, bool>? predicate = null) => new WeightedRandom<T>(Game, this, predicate);
 
     /// <summary>
     /// Adds an item to the repository.  This is often used to add configured objects.

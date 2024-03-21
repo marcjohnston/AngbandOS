@@ -10,19 +10,19 @@ namespace AngbandOS.Core.Repositories;
 [Serializable]
 internal class TownsRepository : DictionaryRepository<Town>
 {
-    public TownsRepository(SaveGame saveGame) : base(saveGame) { }
+    public TownsRepository(Game game) : base(game) { }
 
     public override void Load()
     {
-        if (SaveGame.Configuration.Towns == null)
+        if (Game.Configuration.Towns == null)
         {
             base.Load();
         }
         else
         {
-            foreach (TownDefinition townDefinition in SaveGame.Configuration.Towns)
+            foreach (TownDefinition townDefinition in Game.Configuration.Towns)
             {
-                Add(new GenericTown(SaveGame, townDefinition));
+                Add(new GenericTown(Game, townDefinition));
             }
         }
     }

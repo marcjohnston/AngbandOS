@@ -10,5 +10,5 @@ namespace AngbandOS.Core.Repositories;
 [Serializable]
 internal class AlterActionsRepository : DictionaryRepository<AlterAction>
 {
-    public AlterActionsRepository(SaveGame saveGame) : base(saveGame) { }
+    public AlterActionsRepository(Game game) : base(game) { }
 }

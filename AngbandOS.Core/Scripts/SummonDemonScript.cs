@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class SummonDemonScript : Script, IScript
 {
-    private SummonDemonScript(SaveGame saveGame) : base(saveGame) { }
+    private SummonDemonScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script.
@@ -18,21 +18,21 @@ internal class SummonDemonScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        SaveGame.MsgPrint("You concentrate on the image of a demon...");
-        if (SaveGame.DieRoll(10) > 3)
+        Game.MsgPrint("You concentrate on the image of a demon...");
+        if (Game.DieRoll(10) > 3)
         {
-            if (!SaveGame.SummonSpecificFriendly(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel.Value, SaveGame.SingletonRepository.MonsterFilters.Get(nameof(DemonMonsterFilter)), true))
+            if (!Game.SummonSpecificFriendly(Game.MapY, Game.MapX, Game.ExperienceLevel.Value, Game.SingletonRepository.MonsterFilters.Get(nameof(DemonMonsterFilter)), true))
             {
-                SaveGame.MsgPrint("No-one ever turns up.");
+                Game.MsgPrint("No-one ever turns up.");
             }
         }
-        else if (SaveGame.SummonSpecific(SaveGame.MapY, SaveGame.MapX, SaveGame.ExperienceLevel.Value, SaveGame.SingletonRepository.MonsterFilters.Get(nameof(DemonMonsterFilter))))
+        else if (Game.SummonSpecific(Game.MapY, Game.MapX, Game.ExperienceLevel.Value, Game.SingletonRepository.MonsterFilters.Get(nameof(DemonMonsterFilter))))
         {
-            SaveGame.MsgPrint("The summoned demon gets angry!");
+            Game.MsgPrint("The summoned demon gets angry!");
         }
         else
         {
-            SaveGame.MsgPrint("No-one ever turns up.");
+            Game.MsgPrint("No-one ever turns up.");
         }
     }
 }

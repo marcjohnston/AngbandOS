@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class WizardHelpScript : Script, IScript
 {
-    private WizardHelpScript(SaveGame saveGame) : base(saveGame) { }
+    private WizardHelpScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the wizard help script.
@@ -18,18 +18,18 @@ internal class WizardHelpScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        SaveGame.FullScreenOverlay = true;
-        ScreenBuffer savedScreen = SaveGame.Screen.Clone();
+        Game.FullScreenOverlay = true;
+        ScreenBuffer savedScreen = Game.Screen.Clone();
         try
         {
-            SaveGame.UpdateScreen();
-            SaveGame.Screen.Clear();
-            SaveGame.SetBackground(BackgroundImageEnum.Normal);
-            SaveGame.Screen.Print(ColorEnum.Red, "Wizard Commands", 1, 31);
-            SaveGame.Screen.Print(ColorEnum.Red, "===============", 2, 31);
+            Game.UpdateScreen();
+            Game.Screen.Clear();
+            Game.SetBackground(BackgroundImageEnum.Normal);
+            Game.Screen.Print(ColorEnum.Red, "Wizard Commands", 1, 31);
+            Game.Screen.Print(ColorEnum.Red, "===============", 2, 31);
 
             List<IHelpCommand> allCommands = new List<IHelpCommand>();
-            foreach (IHelpCommand command in SaveGame.SingletonRepository.WizardCommands)
+            foreach (IHelpCommand command in Game.SingletonRepository.WizardCommands)
             {
                 if (command.IsEnabled && command.HelpGroup != null && !String.IsNullOrEmpty(command.HelpDescription))
                 {
@@ -67,15 +67,15 @@ internal class WizardHelpScript : Script, IScript
                 }
                 consoleGrid.AddCard(card);
             }
-            consoleGrid.Render(SaveGame, new ConsoleWindow(1, 4, 79, 21), new ConsoleTopLeftAlignment());
-            SaveGame.Screen.Print("Hit any key to continue", 43, 23);
-            SaveGame.Inkey();
+            consoleGrid.Render(Game, new ConsoleWindow(1, 4, 79, 21), new ConsoleTopLeftAlignment());
+            Game.Screen.Print("Hit any key to continue", 43, 23);
+            Game.Inkey();
         }
         finally
         {
-            SaveGame.Screen.Restore(savedScreen);
-            SaveGame.SetBackground(BackgroundImageEnum.Overhead);
-            SaveGame.FullScreenOverlay = false;
+            Game.Screen.Restore(savedScreen);
+            Game.SetBackground(BackgroundImageEnum.Overhead);
+            Game.FullScreenOverlay = false;
         }
     }
 }

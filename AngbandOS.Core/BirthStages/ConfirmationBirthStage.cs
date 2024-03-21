@@ -10,64 +10,64 @@ namespace AngbandOS.Core.BirthStages;
 [Serializable]
 internal class ConfirmationBirthStage : BirthStage
 {
-    private ConfirmationBirthStage(SaveGame saveGame) : base(saveGame) { }
+    private ConfirmationBirthStage(Game game) : base(game) { }
 
     public override BirthStage? Render()
     {
-        SaveGame.GetStats();
-        SaveGame.GetExtra();
-        SaveGame.GetAhw();
-        SaveGame.GetHistory();
-        SaveGame.GetMoney();
-        SaveGame.RefreshGods();
+        Game.GetStats();
+        Game.GetExtra();
+        Game.GetAhw();
+        Game.GetHistory();
+        Game.GetMoney();
+        Game.RefreshGods();
 
-        SaveGame.Talents = new List<Talent>();
-        foreach (Talent talent in SaveGame.SingletonRepository.Talents)
+        Game.Talents = new List<Talent>();
+        foreach (Talent talent in Game.SingletonRepository.Talents)
         {
-            SaveGame.Talents.Add(talent);
+            Game.Talents.Add(talent);
         }
-        if (SaveGame.PrimaryRealm != null)
+        if (Game.PrimaryRealm != null)
         {
-            SaveGame.PrimaryRealm.InitializeSpells();
-            SaveGame.LevelOfFirstSpell = SaveGame.PrimaryRealm.FirstSpellLevel;
+            Game.PrimaryRealm.InitializeSpells();
+            Game.LevelOfFirstSpell = Game.PrimaryRealm.FirstSpellLevel;
 
-            if (SaveGame.SecondaryRealm != null)
+            if (Game.SecondaryRealm != null)
             {
-                SaveGame.SecondaryRealm.InitializeSpells();
-                if (SaveGame.LevelOfFirstSpell == null)
+                Game.SecondaryRealm.InitializeSpells();
+                if (Game.LevelOfFirstSpell == null)
                 {
-                    SaveGame.LevelOfFirstSpell = SaveGame.SecondaryRealm.FirstSpellLevel;
+                    Game.LevelOfFirstSpell = Game.SecondaryRealm.FirstSpellLevel;
                 }
-                else if (SaveGame.SecondaryRealm.FirstSpellLevel != null)
+                else if (Game.SecondaryRealm.FirstSpellLevel != null)
                 {
-                    SaveGame.LevelOfFirstSpell = Math.Min(SaveGame.LevelOfFirstSpell.Value, SaveGame.SecondaryRealm.FirstSpellLevel.Value);
+                    Game.LevelOfFirstSpell = Math.Min(Game.LevelOfFirstSpell.Value, Game.SecondaryRealm.FirstSpellLevel.Value);
                 }
             }
         }
 
-        SaveGame.SpellOrder.Clear();
+        Game.SpellOrder.Clear();
 
-        SaveGame.GooPatron = SaveGame.SingletonRepository.Patrons.ToWeightedRandom().ChooseOrDefault();
-        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateHealthFlaggedAction)).Set();
-        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
-        SaveGame.UpdateStuff();
-        SaveGame.Health.Value = SaveGame.MaxHealth.Value;
-        SaveGame.Mana.Value = SaveGame.MaxMana.Value;
-        SaveGame.Energy = 150;
-        while (!SaveGame.Shutdown)
+        Game.GooPatron = Game.SingletonRepository.Patrons.ToWeightedRandom().ChooseOrDefault();
+        Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateHealthFlaggedAction)).Set();
+        Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
+        Game.UpdateStuff();
+        Game.Health.Value = Game.MaxHealth.Value;
+        Game.Mana.Value = Game.MaxMana.Value;
+        Game.Energy = 150;
+        while (!Game.Shutdown)
         {
-            SaveGame.Screen.Print(ColorEnum.Orange, "[Use return to confirm, or left to go back.]", 43, 1);
-            RenderCharacterScript showCharacterSheet = (RenderCharacterScript)SaveGame.SingletonRepository.Scripts.Get(nameof(RenderCharacterScript));
+            Game.Screen.Print(ColorEnum.Orange, "[Use return to confirm, or left to go back.]", 43, 1);
+            RenderCharacterScript showCharacterSheet = (RenderCharacterScript)Game.SingletonRepository.Scripts.Get(nameof(RenderCharacterScript));
             showCharacterSheet.ExecuteScript();
-            char c = SaveGame.Inkey();
+            char c = Game.Inkey();
             switch (c)
             {
                 case (char)13:
-                    return SaveGame.SingletonRepository.BirthStages.Get(nameof(NamingBirthStage));
+                    return Game.SingletonRepository.BirthStages.Get(nameof(NamingBirthStage));
                 case '4':
-                    return SaveGame.SingletonRepository.BirthStages.Get(nameof(GenderSelectionBirthStage));
+                    return Game.SingletonRepository.BirthStages.Get(nameof(GenderSelectionBirthStage));
                 case 'h':
-                    SaveGame.ShowManual();
+                    Game.ShowManual();
                     break;
             }
         }

@@ -8,7 +8,7 @@
 [Serializable]
 internal class HallOfRecordsShopkeeper : Shopkeeper
 {
-    private HallOfRecordsShopkeeper(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private HallOfRecordsShopkeeper(Game game) : base(game) { } // This object is a singleton.
     public override string Name => "Hall of Records";
     public override int MaxCost =>  0;
     public override int MinInflate =>  100;

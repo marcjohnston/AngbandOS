@@ -1,7 +1,7 @@
 [Serializable]
 internal class LowerESymbol : Symbol
 {
-    private LowerESymbol(SaveGame saveGame) : base(saveGame) { }
+    private LowerESymbol(Game game) : base(game) { }
     public override char Character => 'e';
     public override string Name => "Floating Eye";
 }

@@ -10,16 +10,16 @@ namespace AngbandOS.Core.FlaggedActions;
 [Serializable]
 internal class PrExtraRedrawActionGroupSetFlaggedAction : GroupSetFlaggedAction
 {
-    private PrExtraRedrawActionGroupSetFlaggedAction(SaveGame saveGame) : base(saveGame) { }
+    private PrExtraRedrawActionGroupSetFlaggedAction(Game game) : base(game) { }
 
     public override void Bind()
     {
         RedrawActions = new FlaggedAction[] {
-            SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawHungerFlaggedAction)),
-            SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawDTrapFlaggedAction)),
-            SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawStateFlaggedAction)),
-            SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawSpeedFlaggedAction)),
-            SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawStudyFlaggedAction))
+            Game.SingletonRepository.FlaggedActions.Get(nameof(RedrawHungerFlaggedAction)),
+            Game.SingletonRepository.FlaggedActions.Get(nameof(RedrawDTrapFlaggedAction)),
+            Game.SingletonRepository.FlaggedActions.Get(nameof(RedrawStateFlaggedAction)),
+            Game.SingletonRepository.FlaggedActions.Get(nameof(RedrawSpeedFlaggedAction)),
+            Game.SingletonRepository.FlaggedActions.Get(nameof(RedrawStudyFlaggedAction))
         };
     }
 }

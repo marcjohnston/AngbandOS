@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class SummonNamedPetScript : Script, IScript
 {
-    private SummonNamedPetScript(SaveGame saveGame) : base(saveGame) { }
+    private SummonNamedPetScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script.
@@ -18,6 +18,6 @@ internal class SummonNamedPetScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        SaveGame.DoCmdWizNamedFriendly(true);
+        Game.DoCmdWizNamedFriendly(true);
     }
 }

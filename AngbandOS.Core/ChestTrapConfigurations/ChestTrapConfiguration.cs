@@ -10,10 +10,10 @@ namespace AngbandOS.Core.ChestTrapConfigurations;
 [Serializable]
 internal abstract class ChestTrapConfiguration : IGetKey
 {
-    protected SaveGame SaveGame;
-    protected ChestTrapConfiguration(SaveGame saveGame)
+    protected Game Game;
+    protected ChestTrapConfiguration(Game game)
     {
-        SaveGame = saveGame;
+        Game = game;
     }
 
     /// <summary>
@@ -51,16 +51,16 @@ internal abstract class ChestTrapConfiguration : IGetKey
             }
         }
     }
-    public void Activate(SaveGame saveGame, Item chestItem)
+    public void Activate(Game game, Item chestItem)
     {
         foreach (ChestTrap trap in Traps)
         {
-            ActivateChestTrapEventArgs eventArgs = new ActivateChestTrapEventArgs(saveGame.MapX, saveGame.MapY);
+            ActivateChestTrapEventArgs eventArgs = new ActivateChestTrapEventArgs(game.MapX, game.MapY);
             trap.Activate(eventArgs);
 
             if (eventArgs.DestroysContents)
             {
-                SaveGame.MsgPrint("Everything inside the chest is destroyed!");
+                Game.MsgPrint("Everything inside the chest is destroyed!");
                 chestItem.TypeSpecificValue = 0;
             }
         }

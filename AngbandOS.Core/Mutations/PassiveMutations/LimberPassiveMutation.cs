@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Mutations.PassiveMutations;
 [Serializable]
 internal class LimberPassiveMutation : Mutation
 {
-    private LimberPassiveMutation(SaveGame saveGame) : base(saveGame) { }
+    private LimberPassiveMutation(Game game) : base(game) { }
     public override int Frequency => 3;
     public override string GainMessage => "Your muscles become limber.";
     public override string HaveMessage => "Your body is very limber (+3 DEX).";
@@ -19,11 +19,11 @@ internal class LimberPassiveMutation : Mutation
 
     public override void OnGain()
     {
-        SaveGame.DexterityBonus += 3;
+        Game.DexterityBonus += 3;
     }
 
     public override void OnLose()
     {
-        SaveGame.DexterityBonus -= 3;
+        Game.DexterityBonus -= 3;
     }
 }

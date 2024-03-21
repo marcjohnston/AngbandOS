@@ -10,7 +10,7 @@ namespace AngbandOS.Core.ClassSpells;
 [Serializable]
 internal class MageMagicMappingSorcerySpell : ClassSpell
 {
-    private MageMagicMappingSorcerySpell(SaveGame saveGame) : base(saveGame) { }
+    private MageMagicMappingSorcerySpell(Game game) : base(game) { }
     public override string SpellName => nameof(SorcerySpellMagicMapping);
     public override string CharacterClassName => nameof(MageCharacterClass);
     public override int Level => 9;

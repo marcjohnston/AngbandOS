@@ -11,37 +11,37 @@ namespace AngbandOS.Core.FlaggedActions;
 internal class UpdateTorchRadiusFlaggedAction : FlaggedAction
 {
     private int OldLightLevel;
-    private UpdateTorchRadiusFlaggedAction(SaveGame saveGame) : base(saveGame) { }
+    private UpdateTorchRadiusFlaggedAction(Game game) : base(game) { }
     /// <summary>
     /// Compute the level of light.  The player may be wielding multiple sources of light.
     /// </summary>
     protected override void Execute()
     {
-        SaveGame.LightLevel = 0;
-        foreach (BaseInventorySlot inventorySlot in SaveGame.SingletonRepository.InventorySlots.Where(_inventorySlot => _inventorySlot.IsEquipment))
+        Game.LightLevel = 0;
+        foreach (BaseInventorySlot inventorySlot in Game.SingletonRepository.InventorySlots.Where(_inventorySlot => _inventorySlot.IsEquipment))
         {
             foreach (int i in inventorySlot.InventorySlots)
             {
-                Item? oPtr = SaveGame.GetInventoryItem(i);
+                Item? oPtr = Game.GetInventoryItem(i);
                 if (oPtr != null)
                 {
-                    SaveGame.LightLevel += oPtr.Factory.CalculateTorch(oPtr);
+                    Game.LightLevel += oPtr.Factory.CalculateTorch(oPtr);
                 }
             }
         }
-        if (SaveGame.LightLevel > 5)
+        if (Game.LightLevel > 5)
         {
-            SaveGame.LightLevel = 5;
+            Game.LightLevel = 5;
         }
-        if (SaveGame.LightLevel == 0 && SaveGame.HasGlow)
+        if (Game.LightLevel == 0 && Game.HasGlow)
         {
-            SaveGame.LightLevel = 1;
+            Game.LightLevel = 1;
         }
-        if (OldLightLevel != SaveGame.LightLevel)
+        if (OldLightLevel != Game.LightLevel)
         {
-            SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateLightFlaggedAction)).Set();
-            SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateMonstersFlaggedAction)).Set();
-            OldLightLevel = SaveGame.LightLevel;
+            Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateLightFlaggedAction)).Set();
+            Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateMonstersFlaggedAction)).Set();
+            OldLightLevel = Game.LightLevel;
         }
     }
 }

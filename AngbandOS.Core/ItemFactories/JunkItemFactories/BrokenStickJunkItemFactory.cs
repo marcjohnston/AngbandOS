@@ -10,9 +10,9 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class BrokenStickJunkItemFactory : JunkItemFactory
 {
-    private BrokenStickJunkItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private BrokenStickJunkItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(TildeSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(TildeSymbol));
     public override ColorEnum Color => ColorEnum.Red;
     public override string Name => "Broken Stick";
 
@@ -21,5 +21,5 @@ internal class BrokenStickJunkItemFactory : JunkItemFactory
     public override int Ds => 1;
     public override string FriendlyName => "& Broken Stick~";
     public override int Weight => 3;
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

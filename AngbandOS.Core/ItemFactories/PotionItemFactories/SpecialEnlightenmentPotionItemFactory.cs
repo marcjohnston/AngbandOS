@@ -10,9 +10,9 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class SpecialEnlightenmentPotionItemFactory : PotionItemFactory
 {
-    private SpecialEnlightenmentPotionItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private SpecialEnlightenmentPotionItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(ExclamationPointSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(ExclamationPointSymbol));
     public override string Name => "*Enlightenment*";
 
     public override int[] Chance => new int[] { 4, 0, 0, 0 };
@@ -27,20 +27,20 @@ internal class SpecialEnlightenmentPotionItemFactory : PotionItemFactory
     {
         // *Enlightenment* shows you the whole level, increases your intelligence and
         // wisdom, identifies all your items, and detects everything
-        SaveGame.MsgPrint("You begin to feel more enlightened...");
-        SaveGame.MsgPrint(null);
-        SaveGame.RunScript(nameof(LightScript));
-        SaveGame.TryIncreasingAbilityScore(Ability.Intelligence);
-        SaveGame.TryIncreasingAbilityScore(Ability.Wisdom);
-        SaveGame.DetectTraps();
-        SaveGame.DetectDoors();
-        SaveGame.DetectStairs();
-        SaveGame.DetectTreasure();
-        SaveGame.DetectObjectsGold();
-        SaveGame.RunScript(nameof(DetectNormalObjectsScript));
-        SaveGame.RunScript(nameof(IdentifyAllItemsScript));
-        SaveGame.RunScript(nameof(SelfKnowledgeScript));
+        Game.MsgPrint("You begin to feel more enlightened...");
+        Game.MsgPrint(null);
+        Game.RunScript(nameof(LightScript));
+        Game.TryIncreasingAbilityScore(Ability.Intelligence);
+        Game.TryIncreasingAbilityScore(Ability.Wisdom);
+        Game.DetectTraps();
+        Game.DetectDoors();
+        Game.DetectStairs();
+        Game.DetectTreasure();
+        Game.DetectObjectsGold();
+        Game.RunScript(nameof(DetectNormalObjectsScript));
+        Game.RunScript(nameof(IdentifyAllItemsScript));
+        Game.RunScript(nameof(SelfKnowledgeScript));
         return true;
     }
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

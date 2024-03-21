@@ -10,18 +10,18 @@ namespace AngbandOS.Core.Timers;
 [Serializable]
 internal class StoneskinTimer : Timer
 {
-    private StoneskinTimer(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private StoneskinTimer(Game game) : base(game) { } // This object is a singleton.
     protected override void EffectStopped()
     {
-        SaveGame.MsgPrint("Your skin returns to normal.");
+        Game.MsgPrint("Your skin returns to normal.");
     }
     protected override void EffectIncreased(int newRate, int currentRate)
     {
-        SaveGame.MsgPrint("Your skin turns to stone.");
+        Game.MsgPrint("Your skin turns to stone.");
     }
     protected override void Noticed()
     {
-        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
+        Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
         base.Noticed();
     }
 }

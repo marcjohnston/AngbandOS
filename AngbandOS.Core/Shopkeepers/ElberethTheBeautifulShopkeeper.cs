@@ -8,7 +8,7 @@
 [Serializable]
 internal class ElberethTheBeautifulShopkeeper : Shopkeeper
 {
-    private ElberethTheBeautifulShopkeeper(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private ElberethTheBeautifulShopkeeper(Game game) : base(game) { } // This object is a singleton.
     public override string Name => "Elbereth the Beautiful";
     public override int MaxCost =>  500;
     public override int MinInflate =>  108;

@@ -10,7 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class MorningStarFirestarterFixedArtifact : FixedArtifact
 {
-    private MorningStarFirestarterFixedArtifact(SaveGame saveGame) : base(saveGame) { }
+    private MorningStarFirestarterFixedArtifact(Game game) : base(game) { }
 
     protected override string BaseItemFactoryName => nameof(MorningStarHaftedWeaponItemFactory);
 

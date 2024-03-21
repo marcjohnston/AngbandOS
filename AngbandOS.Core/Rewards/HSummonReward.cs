@@ -10,11 +10,11 @@ namespace AngbandOS.Core.Rewards;
 [Serializable]
 internal class HSummonReward : Reward
 {
-    private HSummonReward(SaveGame saveGame) : base(saveGame) { }
+    private HSummonReward(Game game) : base(game) { }
     public override void GetReward(Patron patron)
     {
-        SaveGame.MsgPrint($"The voice of {patron.ShortName} booms out:");
-        SaveGame.MsgPrint("'Thou needst worthier opponents!'");
-        SaveGame.ActivateHiSummon();
+        Game.MsgPrint($"The voice of {patron.ShortName} booms out:");
+        Game.MsgPrint("'Thou needst worthier opponents!'");
+        Game.ActivateHiSummon();
     }
 }

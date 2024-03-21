@@ -19,7 +19,7 @@ internal class ConsoleCard : ConsoleElement
 
     public override int Width => _width;
     public override int Height => _height;
-    public override void Render(SaveGame saveGame, ConsoleWindow containerWindow, ConsoleAlignment parentAlignment)
+    public override void Render(Game game, ConsoleWindow containerWindow, ConsoleAlignment parentAlignment)
     {
         for (int rowIndex = 0; rowIndex < screen.Length; rowIndex++)
         {
@@ -30,7 +30,7 @@ internal class ConsoleCard : ConsoleElement
                 if (consoleChar != null)
                 {
                     ConsoleLocation consoleLocation = containerWindow.TopLeft.Offset(col, rowIndex);
-                    consoleChar.Render(saveGame, consoleLocation.ToWindow(1, 1), parentAlignment);
+                    consoleChar.Render(game, consoleLocation.ToWindow(1, 1), parentAlignment);
                 }
             }
         }

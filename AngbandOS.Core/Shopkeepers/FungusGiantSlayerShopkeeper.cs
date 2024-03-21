@@ -8,7 +8,7 @@
 [Serializable]
 internal class FungusGiantSlayerShopkeeper : Shopkeeper
 {
-    private FungusGiantSlayerShopkeeper(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private FungusGiantSlayerShopkeeper(Game game) : base(game) { } // This object is a singleton.
     public override string Name => "Fungus Giant-Slayer";
     public override int MaxCost =>  30000;
     public override int MinInflate =>  112;

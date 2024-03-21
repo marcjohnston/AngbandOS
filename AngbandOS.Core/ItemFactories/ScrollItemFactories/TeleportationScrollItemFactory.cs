@@ -10,9 +10,9 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class TeleportationScrollItemFactory : ScrollItemFactory
 {
-    private TeleportationScrollItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private TeleportationScrollItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(QuestionMarkSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(QuestionMarkSymbol));
     public override string Name => "Teleportation";
 
     public override int[] Chance => new int[] { 1, 0, 0, 0 };
@@ -23,8 +23,8 @@ internal class TeleportationScrollItemFactory : ScrollItemFactory
     public override int Weight => 5;
     public override void Read(ReadScrollEvent eventArgs)
     {
-        SaveGame.RunScriptInt(nameof(TeleportSelfScript), 100);
+        Game.RunScriptInt(nameof(TeleportSelfScript), 100);
         eventArgs.Identified = true;
     }
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

@@ -10,22 +10,22 @@ namespace AngbandOS.Core.ArtifactBiases;
 [Serializable]
 internal class AcidArtifactBias : ArtifactBias
 {
-    private AcidArtifactBias(SaveGame saveGame) : base(saveGame) { }
+    private AcidArtifactBias(Game game) : base(game) { }
 
     public override bool ApplyRandomResistances(Item item)
     {
         if (!item.RandomArtifactItemCharacteristics.ResAcid)
         {
             item.RandomArtifactItemCharacteristics.ResAcid = true;
-            if (SaveGame.DieRoll(2) == 1)
+            if (Game.DieRoll(2) == 1)
             {
                 return true;
             }
         }
-        if (SaveGame.DieRoll(ImmunityLuckOneInChance) == 1 && !item.RandomArtifactItemCharacteristics.ImAcid)
+        if (Game.DieRoll(ImmunityLuckOneInChance) == 1 && !item.RandomArtifactItemCharacteristics.ImAcid)
         {
             item.RandomArtifactItemCharacteristics.ImAcid = true;
-            if (SaveGame.DieRoll(2) == 1)
+            if (Game.DieRoll(2) == 1)
             {
                 return true;
             }
@@ -40,7 +40,7 @@ internal class AcidArtifactBias : ArtifactBias
             if (!item.RandomArtifactItemCharacteristics.BrandAcid)
             {
                 item.RandomArtifactItemCharacteristics.BrandAcid = true;
-                if (SaveGame.DieRoll(2) == 1)
+                if (Game.DieRoll(2) == 1)
                 {
                     return true;
                 }

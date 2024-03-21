@@ -10,9 +10,9 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class ResistancePotionItemFactory : PotionItemFactory
 {
-    private ResistancePotionItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private ResistancePotionItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(ExclamationPointSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(ExclamationPointSymbol));
     public override string Name => "Resistance";
 
     public override int[] Chance => new int[] { 1, 1, 1, 1 };
@@ -31,12 +31,12 @@ internal class ResistancePotionItemFactory : PotionItemFactory
     public override bool Quaff()
     {
         // Resistance gives you all timed resistances
-        SaveGame.AcidResistanceTimer.AddTimer(SaveGame.DieRoll(20) + 20);
-        SaveGame.LightningResistanceTimer.AddTimer(SaveGame.DieRoll(20) + 20);
-        SaveGame.FireResistanceTimer.AddTimer(SaveGame.DieRoll(20) + 20);
-        SaveGame.ColdResistanceTimer.AddTimer(SaveGame.DieRoll(20) + 20);
-        SaveGame.PoisonResistanceTimer.AddTimer(SaveGame.DieRoll(20) + 20);
+        Game.AcidResistanceTimer.AddTimer(Game.DieRoll(20) + 20);
+        Game.LightningResistanceTimer.AddTimer(Game.DieRoll(20) + 20);
+        Game.FireResistanceTimer.AddTimer(Game.DieRoll(20) + 20);
+        Game.ColdResistanceTimer.AddTimer(Game.DieRoll(20) + 20);
+        Game.PoisonResistanceTimer.AddTimer(Game.DieRoll(20) + 20);
         return true;
     }
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

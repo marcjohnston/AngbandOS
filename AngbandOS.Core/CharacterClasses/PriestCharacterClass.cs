@@ -10,7 +10,7 @@ namespace AngbandOS.Core.CharacterClasses;
 [Serializable]
 internal class PriestCharacterClass : BaseCharacterClass
 {
-    private PriestCharacterClass(SaveGame savedGame) : base(savedGame) { }
+    private PriestCharacterClass(Game savedGame) : base(savedGame) { }
     public override int ID => 2;
     public override string Title => "Priest";
     public override int[] AbilityBonus => new[] { -1, -3, 3, -1, 0, 2 };
@@ -76,22 +76,22 @@ internal class PriestCharacterClass : BaseCharacterClass
     public override string GetBookTitle(Item bookItem)
     {
         BookItemFactory bookItemFactory = (BookItemFactory)bookItem.Factory;
-        return $"{SaveGame.CountPluralize("Book", bookItem.Count)} of {bookItemFactory.DivineTitle}";
+        return $"{Game.CountPluralize("Book", bookItem.Count)} of {bookItemFactory.DivineTitle}";
     }
 
     public override int SpellStat => Ability.Wisdom;
-    public override IArtifactBias? ArtifactBias => SaveGame.SingletonRepository.ArtifactBiases.Get(nameof(PriestlyArtifactBias));
-    public override bool SenseInventoryTest(int level) => (0 != SaveGame.RandomLessThan(10000 / ((level * level) + 40)));
+    public override IArtifactBias? ArtifactBias => Game.SingletonRepository.ArtifactBiases.Get(nameof(PriestlyArtifactBias));
+    public override bool SenseInventoryTest(int level) => (0 != Game.RandomLessThan(10000 / ((level * level) + 40)));
     public override Realm[] AvailablePrimaryRealms => new Realm[] {
-        SaveGame.SingletonRepository.Realms.Get(nameof(LifeRealm)),
-        SaveGame.SingletonRepository.Realms.Get(nameof(DeathRealm))
+        Game.SingletonRepository.Realms.Get(nameof(LifeRealm)),
+        Game.SingletonRepository.Realms.Get(nameof(DeathRealm))
     };
     public override Realm[] AvailableSecondaryRealms => new Realm[] {
-        SaveGame.SingletonRepository.Realms.Get(nameof(NatureRealm)),
-        SaveGame.SingletonRepository.Realms.Get(nameof(ChaosRealm)),
-        SaveGame.SingletonRepository.Realms.Get(nameof(TarotRealm)),
-        SaveGame.SingletonRepository.Realms.Get(nameof(FolkRealm)),
-        SaveGame.SingletonRepository.Realms.Get(nameof(CorporealRealm))
+        Game.SingletonRepository.Realms.Get(nameof(NatureRealm)),
+        Game.SingletonRepository.Realms.Get(nameof(ChaosRealm)),
+        Game.SingletonRepository.Realms.Get(nameof(TarotRealm)),
+        Game.SingletonRepository.Realms.Get(nameof(FolkRealm)),
+        Game.SingletonRepository.Realms.Get(nameof(CorporealRealm))
     };
     public override bool WorshipsADeity => true;
 
@@ -100,19 +100,19 @@ internal class PriestCharacterClass : BaseCharacterClass
         switch (realm)
         {
             case NatureRealm:
-                return SaveGame.SingletonRepository.Gods.Get(nameof(HagargRyonisGod));
+                return Game.SingletonRepository.Gods.Get(nameof(HagargRyonisGod));
 
             case FolkRealm:
-                return SaveGame.SingletonRepository.Gods.Get(nameof(ZoKalarGod));
+                return Game.SingletonRepository.Gods.Get(nameof(ZoKalarGod));
 
             case ChaosRealm:
-                return SaveGame.SingletonRepository.Gods.Get(nameof(NathHorthahGod));
+                return Game.SingletonRepository.Gods.Get(nameof(NathHorthahGod));
 
             case CorporealRealm:
-                return SaveGame.SingletonRepository.Gods.Get(nameof(LobonGod));
+                return Game.SingletonRepository.Gods.Get(nameof(LobonGod));
 
             case TarotRealm:
-                return SaveGame.SingletonRepository.Gods.Get(nameof(TamashGod));
+                return Game.SingletonRepository.Gods.Get(nameof(TamashGod));
 
             default:
                 return null;

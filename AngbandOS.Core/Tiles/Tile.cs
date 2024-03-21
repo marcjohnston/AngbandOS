@@ -13,10 +13,10 @@ namespace AngbandOS.Core.Tiles;
 [Serializable]
 internal abstract class Tile : IGetKey
 {
-    protected SaveGame SaveGame;
-    protected Tile(SaveGame saveGame)
+    protected Game Game;
+    protected Tile(Game game)
     {
-        SaveGame = saveGame;
+        Game = game;
     }
 
     public Tile? OnJammedTile { get; protected set; }
@@ -81,12 +81,13 @@ internal abstract class Tile : IGetKey
     public string GetKey => Key;
     public void Bind()
     {
-        MimicTile = MimicTileName == null ? null : SaveGame.SingletonRepository.Tiles.Get(MimicTileName);
-        HiddenTreasureForTile = HiddenTreasureForTileName == null ? null : SaveGame.SingletonRepository.Tiles.Get(HiddenTreasureForTileName);
-        OnJammedTile = OnJammedTileName == null ? null : SaveGame.SingletonRepository.Tiles.Get(OnJammedTileName);
-        VisibleTreasureForTile = VisibleTreasureForTileName == null ? null : SaveGame.SingletonRepository.Tiles.Get(VisibleTreasureForTileName);
-        AlterAction = AlterActionName == null ? null : SaveGame.SingletonRepository.AlterActions.Get(AlterActionName);
-        Symbol = SaveGame.SingletonRepository.Symbols.Get(SymbolName);
+        MimicTile = MimicTileName == null ? null : Game.SingletonRepository.Tiles.Get(MimicTileName);
+        HiddenTreasureForTile = HiddenTreasureForTileName == null ? null : Game.SingletonRepository.Tiles.Get(HiddenTreasureForTileName);
+        OnJammedTile = OnJammedTileName == null ? null : Game.SingletonRepository.Tiles.Get(OnJammedTileName);
+        VisibleTreasureForTile = VisibleTreasureForTileName == null ? null : Game.SingletonRepository.Tiles.Get(VisibleTreasureForTileName);
+        AlterAction = AlterActionName == null ? null : Game.SingletonRepository.AlterActions.Get(AlterActionName);
+        Symbol = Game.SingletonRepository.Symbols.Get(SymbolName);
+        StepOnScript = StepOnScriptName == null ? null : (IScript)Game.SingletonRepository.Scripts.Get(StepOnScriptName);
     }
 
     /// <summary>

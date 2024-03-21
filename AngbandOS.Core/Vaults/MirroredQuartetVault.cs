@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Vaults;
 [Serializable]
 internal class MirroredQuartetVault : Vault
 {
-    private MirroredQuartetVault(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private MirroredQuartetVault(Game game) : base(game) { } // This object is a singleton.
     public override string Name => "Mirrored Quartet";
     public override int Category => 8;
     public override int Height => 21;

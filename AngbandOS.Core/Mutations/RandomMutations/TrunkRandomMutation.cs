@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Mutations.RandomMutations;
 [Serializable]
 internal class TrunkRandomMutation : Mutation
 {
-    private TrunkRandomMutation(SaveGame saveGame) : base(saveGame) { }
+    private TrunkRandomMutation(Game game) : base(game) { }
     public override int Frequency => 2;
     public override string GainMessage => "Your nose grows into an elephant-like trunk.";
     public override string HaveMessage => "You have an elephantine trunk (dam 1d4).";
@@ -23,11 +23,11 @@ internal class TrunkRandomMutation : Mutation
 
     public override void OnGain()
     {
-        SaveGame.NaturalAttacks.Add(this);
+        Game.NaturalAttacks.Add(this);
     }
 
     public override void OnLose()
     {
-        SaveGame.NaturalAttacks.Remove(this);
+        Game.NaturalAttacks.Remove(this);
     }
 }

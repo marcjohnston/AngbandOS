@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Races;
 [Serializable]
 internal class YeekRace : Race
 {
-    private YeekRace(SaveGame saveGame) : base(saveGame) { }
+    private YeekRace(Game game) : base(game) { }
     public override string Title => "Yeek";
     public override int[] AbilityBonus => new int[] { -2, 1, 1, 1, -2, -7 };
     public override int BaseDisarmBonus => 2;
@@ -63,22 +63,22 @@ internal class YeekRace : Race
     }
     public override void CalcBonuses()
     {
-        SaveGame.HasAcidResistance = true;
-        if (SaveGame.ExperienceLevel.Value > 19)
+        Game.HasAcidResistance = true;
+        if (Game.ExperienceLevel.Value > 19)
         {
-            SaveGame.HasAcidImmunity = true;
+            Game.HasAcidImmunity = true;
         }
     }
 
     public override void UseRacialPower()
     {
         // Yeeks can scream
-        if (SaveGame.CheckIfRacialPowerWorks(15, 15, Ability.Wisdom, 10))
+        if (Game.CheckIfRacialPowerWorks(15, 15, Ability.Wisdom, 10))
         {
-            if (SaveGame.GetDirectionWithAim(out int direction))
+            if (Game.GetDirectionWithAim(out int direction))
             {
-                SaveGame.MsgPrint("You make a horrible scream!");
-                SaveGame.FearMonster(direction, SaveGame.ExperienceLevel.Value);
+                Game.MsgPrint("You make a horrible scream!");
+                Game.FearMonster(direction, Game.ExperienceLevel.Value);
             }
         }
     }

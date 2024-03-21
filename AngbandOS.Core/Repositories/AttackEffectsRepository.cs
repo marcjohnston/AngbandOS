@@ -10,5 +10,5 @@ namespace AngbandOS.Core.Repositories;
 [Serializable]
 internal class AttackEffectsRepository : DictionaryRepository<AttackEffect>
 {
-    public AttackEffectsRepository(SaveGame saveGame) : base(saveGame) { }
+    public AttackEffectsRepository(Game game) : base(game) { }
 }

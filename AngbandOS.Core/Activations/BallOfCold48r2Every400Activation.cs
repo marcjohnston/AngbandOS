@@ -13,7 +13,7 @@ namespace AngbandOS.Core.Activations;
 [Serializable]
 internal class BallOfCold48r2Every400Activation : DirectionalActivation
 {
-    private BallOfCold48r2Every400Activation(SaveGame saveGame) : base(saveGame) { }
+    private BallOfCold48r2Every400Activation(Game game) : base(game) { }
     public override int RandomChance => 85;
 
     public override string? PreActivationMessage => "Your {0} is covered in frost...";
@@ -22,7 +22,7 @@ internal class BallOfCold48r2Every400Activation : DirectionalActivation
 
     protected override bool Activate(int direction)
     {
-        SaveGame.FireBall(SaveGame.SingletonRepository.Projectiles.Get(nameof(ColdProjectile)), direction, 48, 2);
+        Game.FireBall(Game.SingletonRepository.Projectiles.Get(nameof(ColdProjectile)), direction, 48, 2);
         return true;
     }
 

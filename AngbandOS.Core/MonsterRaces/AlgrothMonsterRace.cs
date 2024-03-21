@@ -10,7 +10,7 @@ namespace AngbandOS.Core.MonsterRaces;
 [Serializable]
 internal class AlgrothMonsterRace : MonsterRace
 {
-    protected AlgrothMonsterRace(SaveGame saveGame) : base(saveGame) { }
+    protected AlgrothMonsterRace(Game game) : base(game) { }
 
     protected override string SymbolName => nameof(UpperTSymbol);
     public override ColorEnum Color => ColorEnum.Grey;

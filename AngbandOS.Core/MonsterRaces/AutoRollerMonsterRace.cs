@@ -10,7 +10,7 @@ namespace AngbandOS.Core.MonsterRaces;
 [Serializable]
 internal class AutoRollerMonsterRace : MonsterRace
 {
-    protected AutoRollerMonsterRace(SaveGame saveGame) : base(saveGame) { }
+    protected AutoRollerMonsterRace(Game game) : base(game) { }
 
     protected override string SymbolName => nameof(LowerGSymbol);
     public override string Name => "Auto-roller";

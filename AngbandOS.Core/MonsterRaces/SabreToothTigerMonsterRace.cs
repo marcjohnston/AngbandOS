@@ -10,7 +10,7 @@ namespace AngbandOS.Core.MonsterRaces;
 [Serializable]
 internal class SabreToothTigerMonsterRace : MonsterRace
 {
-    protected SabreToothTigerMonsterRace(SaveGame saveGame) : base(saveGame) { }
+    protected SabreToothTigerMonsterRace(Game game) : base(game) { }
 
     protected override string SymbolName => nameof(LowerFSymbol);
     public override ColorEnum Color => ColorEnum.Yellow;

@@ -10,9 +10,9 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class LightScrollItemFactory : ScrollItemFactory
 {
-    private LightScrollItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private LightScrollItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(QuestionMarkSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(QuestionMarkSymbol));
     public override string Name => "Light";
 
     public override int[] Chance => new int[] { 1, 1, 1, 0 };
@@ -23,10 +23,10 @@ internal class LightScrollItemFactory : ScrollItemFactory
 
     public override void Read(ReadScrollEvent eventArgs)
     {
-        if (SaveGame.LightArea(SaveGame.DiceRoll(2, 8), 2))
+        if (Game.LightArea(Game.DiceRoll(2, 8), 2))
         {
             eventArgs.Identified = true;
         }
     }
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

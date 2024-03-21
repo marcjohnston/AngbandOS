@@ -13,7 +13,7 @@ namespace AngbandOS.Core.MonsterSpells;
 [Serializable]
 internal abstract class BoltProjectileMonsterSpell : MonsterSpell
 {
-    protected BoltProjectileMonsterSpell(SaveGame saveGame) : base(saveGame) { }
+    protected BoltProjectileMonsterSpell(Game game) : base(game) { }
     /// <summary>
     /// Returns a message that the monster performed an action specified by the protected ActionName method.
     /// </summary>
@@ -47,9 +47,9 @@ internal abstract class BoltProjectileMonsterSpell : MonsterSpell
     /// <summary>
     /// Returns the projectile that the monster will use when attacking with the spell.
     /// </summary>
-    /// <param name="saveGame"></param>
+    /// <param name="game"></param>
     /// <returns></returns>
-    protected abstract Projectile Projectile(SaveGame saveGame);
+    protected abstract Projectile Projectile(Game game);
 
     /// <summary>
     /// Returns the amount of damage the projectile will incur on the target.
@@ -61,7 +61,7 @@ internal abstract class BoltProjectileMonsterSpell : MonsterSpell
     /// <summary>
     /// Fires the projectile.  This method allows derived classes to override the projectile parameters.
     /// </summary>
-    /// <param name="saveGame"></param>
+    /// <param name="game"></param>
     /// <param name="who"></param>
     /// <param name="rad"></param>
     /// <param name="y"></param>
@@ -70,22 +70,22 @@ internal abstract class BoltProjectileMonsterSpell : MonsterSpell
     /// <param name="projectile"></param>
     /// <param name="flg"></param>
     /// <returns></returns>
-    protected virtual bool Project(SaveGame saveGame, Monster monster, int rad, int y, int x, int dam, Projectile projectile, ProjectionFlag flg)
+    protected virtual bool Project(Game game, Monster monster, int rad, int y, int x, int dam, Projectile projectile, ProjectionFlag flg)
     {
-        return saveGame.Project(monster.GetMonsterIndex(), rad, saveGame.MapY, saveGame.MapX, dam, projectile, flg);
+        return game.Project(monster.GetMonsterIndex(), rad, game.MapY, game.MapX, dam, projectile, flg);
     }
 
-    public override void ExecuteOnPlayer(SaveGame saveGame, Monster monster)
+    public override void ExecuteOnPlayer(Game game, Monster monster)
     {
-        Projectile projectile = Projectile(saveGame);
+        Projectile projectile = Projectile(game);
         int damage = Damage(monster);
-        Project(saveGame, monster, 0, saveGame.MapY, saveGame.MapX, damage, projectile, ProjectionFlags);
+        Project(game, monster, 0, game.MapY, game.MapX, damage, projectile, ProjectionFlags);
     }
 
-    public override void ExecuteOnMonster(SaveGame saveGame, Monster monster, Monster target)
+    public override void ExecuteOnMonster(Game game, Monster monster, Monster target)
     {
-        Projectile projectile = Projectile(saveGame);
+        Projectile projectile = Projectile(game);
         int damage = Damage(monster);
-        Project(saveGame, monster, 0, target.MapY, target.MapX, damage, projectile, ProjectionFlags);
+        Project(game, monster, 0, target.MapY, target.MapX, damage, projectile, ProjectionFlags);
     }
 }

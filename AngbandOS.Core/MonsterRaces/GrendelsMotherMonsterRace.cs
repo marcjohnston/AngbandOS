@@ -10,7 +10,7 @@ namespace AngbandOS.Core.MonsterRaces;
 [Serializable]
 internal class GrendelsMotherMonsterRace : MonsterRace
 {
-    protected GrendelsMotherMonsterRace(SaveGame saveGame) : base(saveGame) { }
+    protected GrendelsMotherMonsterRace(Game game) : base(game) { }
 
     protected override string SymbolName => nameof(UpperOSymbol);
     public override ColorEnum Color => ColorEnum.Green;

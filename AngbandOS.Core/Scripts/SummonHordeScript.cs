@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class SummonHordeScript : Script, IScript
 {
-    private SummonHordeScript(SaveGame saveGame) : base(saveGame) { }
+    private SummonHordeScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script.
@@ -18,16 +18,16 @@ internal class SummonHordeScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        int wy = SaveGame.MapY, wx = SaveGame.MapX;
+        int wy = Game.MapY, wx = Game.MapX;
         int attempts = 1000;
         while (--attempts != 0)
         {
-            SaveGame.Scatter(out wy, out wx, SaveGame.MapY, SaveGame.MapX, 3);
-            if (SaveGame.GridOpenNoItemOrCreature(wy, wx))
+            Game.Scatter(out wy, out wx, Game.MapY, Game.MapX, 3);
+            if (Game.GridOpenNoItemOrCreature(wy, wx))
             {
                 break;
             }
         }
-        SaveGame.AllocHorde(wy, wx);
+        Game.AllocHorde(wy, wx);
     }
 }

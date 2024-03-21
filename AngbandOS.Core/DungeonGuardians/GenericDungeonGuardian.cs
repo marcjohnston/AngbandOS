@@ -10,7 +10,7 @@ namespace AngbandOS.Core.DungeonGuardians;
 [Serializable]
 internal class GenericDungeonGuardian : DungeonGuardian
 {
-    public GenericDungeonGuardian(SaveGame saveGame, DungeonGuardianDefinition dungeonGuardianDefinition) : base(saveGame)
+    public GenericDungeonGuardian(Game game, DungeonGuardianDefinition dungeonGuardianDefinition) : base(game)
     {
         Key = dungeonGuardianDefinition.Key;
         MonsterRaceName = dungeonGuardianDefinition.MonsterRaceName;

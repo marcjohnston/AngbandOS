@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class SayLocationAndFeelingScript : Script, IScript, IRepeatableScript
 {
-    private SayLocationAndFeelingScript(SaveGame saveGame) : base(saveGame) { }
+    private SayLocationAndFeelingScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the say location and feeling script and returns false.
@@ -28,30 +28,30 @@ internal class SayLocationAndFeelingScript : Script, IScript, IRepeatableScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        if (SaveGame.CurrentDepth <= 0)
+        if (Game.CurrentDepth <= 0)
         {
             // If we need to say where we are, do so
-            if (SaveGame.Wilderness[SaveGame.WildernessY][SaveGame.WildernessX].Town != null)
+            if (Game.Wilderness[Game.WildernessY][Game.WildernessX].Town != null)
             {
-                SaveGame.MsgPrint($"You are in {SaveGame.CurTown.Name}.");
+                Game.MsgPrint($"You are in {Game.CurTown.Name}.");
             }
-            else if (SaveGame.Wilderness[SaveGame.WildernessY][SaveGame.WildernessX].Dungeon != null)
+            else if (Game.Wilderness[Game.WildernessY][Game.WildernessX].Dungeon != null)
             {
-                SaveGame.MsgPrint($"You are outside {SaveGame.Wilderness[SaveGame.WildernessY][SaveGame.WildernessX].Dungeon.Name}.");
+                Game.MsgPrint($"You are outside {Game.Wilderness[Game.WildernessY][Game.WildernessX].Dungeon.Name}.");
             }
             else
             {
-                SaveGame.MsgPrint("You are wandering around outside.");
+                Game.MsgPrint("You are wandering around outside.");
             }
         }
         else
         {
-            SaveGame.MsgPrint($"You are in {SaveGame.CurDungeon.Name}.");
-            if (SaveGame.IsQuest(SaveGame.CurrentDepth))
+            Game.MsgPrint($"You are in {Game.CurDungeon.Name}.");
+            if (Game.IsQuest(Game.CurrentDepth))
             {
-                SaveGame.PrintQuestMessage();
+                Game.PrintQuestMessage();
             }
         }
-        SaveGame.RunScript(nameof(SayFeelingScript));
+        Game.RunScript(nameof(SayFeelingScript));
     }
 }

@@ -12,13 +12,13 @@ internal class RedrawSpeedFlaggedAction : FlaggedAction
 {
     private const int ColSpeed = 43;
     private const int RowSpeed = 44;
-    private RedrawSpeedFlaggedAction(SaveGame saveGame) : base(saveGame) { }
+    private RedrawSpeedFlaggedAction(Game game) : base(game) { }
     protected override void Execute()
     {
-        int i = SaveGame.Speed.Value;
+        int i = Game.Speed.Value;
         ColorEnum attr = ColorEnum.White;
         string buf = "";
-        if (SaveGame.IsSearching)
+        if (Game.IsSearching)
         {
             i += 10;
         }
@@ -33,6 +33,6 @@ internal class RedrawSpeedFlaggedAction : FlaggedAction
             attr = ColorEnum.BrightBrown;
             buf = $"Slow {energy / 10.0}";
         }
-        SaveGame.Screen.Print(attr, buf.PadRight(14), RowSpeed, ColSpeed);
+        Game.Screen.Print(attr, buf.PadRight(14), RowSpeed, ColSpeed);
     }
 }

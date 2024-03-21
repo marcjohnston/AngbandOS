@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Races;
 [Serializable]
 internal class HalfGiantRace : Race
 {
-    private HalfGiantRace(SaveGame saveGame) : base(saveGame) { }
+    private HalfGiantRace(Game game) : base(game) { }
     public override string Title => "Half Giant";
     public override int[] AbilityBonus => new int[] { 4, -2, -2, -2, 3, -3 };
     public override int BaseDisarmBonus => -6;
@@ -62,19 +62,19 @@ internal class HalfGiantRace : Race
 
     public override void CalcBonuses()
     {
-        SaveGame.HasSustainStrength = true;
-        SaveGame.HasShardResistance = true;
+        Game.HasSustainStrength = true;
+        Game.HasShardResistance = true;
     }
 
     public override void UseRacialPower()
     {
         // Half-giants can bash through stone walls
-        if (SaveGame.CheckIfRacialPowerWorks(20, 10, Ability.Strength, 12))
+        if (Game.CheckIfRacialPowerWorks(20, 10, Ability.Strength, 12))
         {
-            if (SaveGame.GetDirectionWithAim(out int direction))
+            if (Game.GetDirectionWithAim(out int direction))
             {
-                SaveGame.MsgPrint("You bash at a stone wall.");
-                SaveGame.WallToMud(direction);
+                Game.MsgPrint("You bash at a stone wall.");
+                Game.WallToMud(direction);
             }
         }
     }

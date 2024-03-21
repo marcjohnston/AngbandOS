@@ -10,13 +10,13 @@ namespace AngbandOS.Core.ArtifactBiases;
 [Serializable]
 internal class ElectricityArtifactBias : ArtifactBias
 {
-    private ElectricityArtifactBias(SaveGame saveGame) : base(saveGame) { }
+    private ElectricityArtifactBias(Game game) : base(game) { }
     public override bool ApplyRandomResistances(Item item)
     {
         if (!item.RandomArtifactItemCharacteristics.ResElec)
         {
             item.RandomArtifactItemCharacteristics.ResElec = true;
-            if (SaveGame.DieRoll(2) == 1)
+            if (Game.DieRoll(2) == 1)
             {
                 return true;
             }
@@ -24,15 +24,15 @@ internal class ElectricityArtifactBias : ArtifactBias
         if (item.Factory.CanApplyArtifactBiasResistance && !item.RandomArtifactItemCharacteristics.ShElec)
         {
             item.RandomArtifactItemCharacteristics.ShElec = true;
-            if (SaveGame.DieRoll(2) == 1)
+            if (Game.DieRoll(2) == 1)
             {
                 return true;
             }
         }
-        if (SaveGame.DieRoll(ImmunityLuckOneInChance) == 1 && !item.RandomArtifactItemCharacteristics.ImElec)
+        if (Game.DieRoll(ImmunityLuckOneInChance) == 1 && !item.RandomArtifactItemCharacteristics.ImElec)
         {
             item.RandomArtifactItemCharacteristics.ImElec = true;
-            if (SaveGame.DieRoll(2) == 1)
+            if (Game.DieRoll(2) == 1)
             {
                 return true;
             }
@@ -47,7 +47,7 @@ internal class ElectricityArtifactBias : ArtifactBias
             if (!item.RandomArtifactItemCharacteristics.BrandElec)
             {
                 item.RandomArtifactItemCharacteristics.BrandElec = true;
-                if (SaveGame.DieRoll(2) == 1)
+                if (Game.DieRoll(2) == 1)
                 {
                     return true;
                 }
@@ -58,17 +58,17 @@ internal class ElectricityArtifactBias : ArtifactBias
 
     public override Activation GetActivationPowerType(Item item)
     {
-        if (SaveGame.DieRoll(3) != 1)
+        if (Game.DieRoll(3) != 1)
         {
-            return SaveGame.SingletonRepository.Activations.Get(nameof(LightningBolt4d8Every6p1d6Activation));
+            return Game.SingletonRepository.Activations.Get(nameof(LightningBolt4d8Every6p1d6Activation));
         }
-        else if (SaveGame.DieRoll(5) != 1)
+        else if (Game.DieRoll(5) != 1)
         {
-            return SaveGame.SingletonRepository.Activations.Get(nameof(BallOfLightning100r3Every500Activation));
+            return Game.SingletonRepository.Activations.Get(nameof(BallOfLightning100r3Every500Activation));
         }
         else
         {
-            return SaveGame.SingletonRepository.Activations.Get(nameof(LargeLightningBall250Every425p1d425Activation));
+            return Game.SingletonRepository.Activations.Get(nameof(LargeLightningBall250Every425p1d425Activation));
         }
     }
 }

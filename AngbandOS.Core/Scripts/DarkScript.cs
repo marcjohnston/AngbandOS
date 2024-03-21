@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class DarkScript : Script, IScript
 {
-    private DarkScript(SaveGame saveGame) : base(saveGame) { }
+    private DarkScript(Game game) : base(game) { }
 
     /// <summary>
     /// Darkens the map.
@@ -18,11 +18,11 @@ internal class DarkScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        for (int y = 0; y < SaveGame.CurHgt; y++)
+        for (int y = 0; y < Game.CurHgt; y++)
         {
-            for (int x = 0; x < SaveGame.CurWid; x++)
+            for (int x = 0; x < Game.CurWid; x++)
             {
-                GridTile cPtr = SaveGame.Grid[y][x];
+                GridTile cPtr = Game.Grid[y][x];
                 cPtr.TileFlags.Clear(GridTile.PlayerMemorized);
                 foreach (Item oPtr in cPtr.Items)
                 {
@@ -30,11 +30,11 @@ internal class DarkScript : Script, IScript
                 }
             }
         }
-        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RemoveLightFlaggedAction)).Set();
-        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RemoveViewFlaggedAction)).Set();
-        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateLightFlaggedAction)).Set();
-        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateViewFlaggedAction)).Set();
-        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateMonstersFlaggedAction)).Set();
-        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawMapFlaggedAction)).Set();
+        Game.SingletonRepository.FlaggedActions.Get(nameof(RemoveLightFlaggedAction)).Set();
+        Game.SingletonRepository.FlaggedActions.Get(nameof(RemoveViewFlaggedAction)).Set();
+        Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateLightFlaggedAction)).Set();
+        Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateViewFlaggedAction)).Set();
+        Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateMonstersFlaggedAction)).Set();
+        Game.SingletonRepository.FlaggedActions.Get(nameof(RedrawMapFlaggedAction)).Set();
     }
 }

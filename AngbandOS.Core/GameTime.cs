@@ -28,11 +28,11 @@ internal class GameTime
     private DateTime _gameStartDateTime;
     private int _levelEntryTurn;
     private TimeSpan _tick = new TimeSpan(0, 0, 0, 0, MillisecondsPerTurn);
-    private readonly SaveGame SaveGame;
+    private readonly Game Game;
 
-    public GameTime(SaveGame saveGame, int startDate, bool startAtDusk)
+    public GameTime(Game game, int startDate, bool startAtDusk)
     {
-        SaveGame = saveGame;
+        Game = game;
         _currentGameDateTime = new DateTime(1297, 1, 1, 0, 0, 0, 0);
         _currentGameDateTime = _currentGameDateTime.AddDays(startDate - 1);
         _birthday = startDate;
@@ -176,7 +176,7 @@ internal class GameTime
         }
 
         // Send an update to the calling application, that the game time has changed.
-        SaveGame.ConsoleViewPort.GameTimeElapsed();
+        Game.ConsoleViewPort.GameTimeElapsed();
     }
 
     public void ToNextDawn()

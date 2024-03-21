@@ -10,13 +10,13 @@ namespace AngbandOS.Core.Timers;
 [Serializable]
 internal class PoisonResistanceTimer :Timer
 {
-    private PoisonResistanceTimer(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private PoisonResistanceTimer(Game game) : base(game) { } // This object is a singleton.
     protected override void EffectStopped()
     {
-        SaveGame.MsgPrint("You feel less resistant to poison.");
+        Game.MsgPrint("You feel less resistant to poison.");
     }
     protected override void EffectIncreased(int newRate, int currentRate)
     {
-        SaveGame.MsgPrint("You feel resistant to poison!");
+        Game.MsgPrint("You feel resistant to poison!");
     }
 }

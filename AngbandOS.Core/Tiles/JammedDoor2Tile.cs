@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Tiles;
 [Serializable]
 internal class JammedDoor2Tile : Tile
 {
-    private JammedDoor2Tile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private JammedDoor2Tile(Game game) : base(game) { } // This object is a singleton.
     protected override string SymbolName => nameof(PlusSignSymbol);
     public override ColorEnum Color => ColorEnum.BrightBrown;
     protected override string? AlterActionName => nameof(BashAlterAction);

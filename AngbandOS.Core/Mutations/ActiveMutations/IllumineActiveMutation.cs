@@ -10,12 +10,12 @@ namespace AngbandOS.Core.Mutations.ActiveMutations;
 [Serializable]
 internal class IllumineActiveMutation : Mutation
 {
-    private IllumineActiveMutation(SaveGame saveGame) : base(saveGame) { }
+    private IllumineActiveMutation(Game game) : base(game) { }
     public override void Activate()
     {
-        if (SaveGame.CheckIfRacialPowerWorks(3, 2, Ability.Intelligence, 10))
+        if (Game.CheckIfRacialPowerWorks(3, 2, Ability.Intelligence, 10))
         {
-            SaveGame.LightArea(base.SaveGame.DiceRoll(2, SaveGame.ExperienceLevel.Value / 2), (SaveGame.ExperienceLevel.Value / 10) + 1);
+            Game.LightArea(base.Game.DiceRoll(2, Game.ExperienceLevel.Value / 2), (Game.ExperienceLevel.Value / 10) + 1);
         }
     }
 

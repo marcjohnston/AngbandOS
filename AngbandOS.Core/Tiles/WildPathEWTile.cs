@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Tiles;
 [Serializable]
 internal class WildPathEWTile : Tile
 {
-    private WildPathEWTile(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private WildPathEWTile(Game game) : base(game) { } // This object is a singleton.
     protected override string SymbolName => nameof(MinusSignSymbol);
     public override ColorEnum Color => ColorEnum.BrightBrown;
     public override bool IsWildPath => true;

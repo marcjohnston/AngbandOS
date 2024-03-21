@@ -10,10 +10,10 @@ namespace AngbandOS.Core.Spells.Tarot;
 [Serializable]
 internal class TarotSpellDeathDealing : Spell
 {
-    private TarotSpellDeathDealing(SaveGame saveGame) : base(saveGame) { }
+    private TarotSpellDeathDealing(Game game) : base(game) { }
     protected override string? CastScriptName => nameof(DispelLivingScript);
 
     public override string Name => "Death Dealing";
 
-    protected override string LearnedDetails => $"dam {SaveGame.ExperienceLevel.Value * 3}";
+    protected override string LearnedDetails => $"dam {Game.ExperienceLevel.Value * 3}";
 }

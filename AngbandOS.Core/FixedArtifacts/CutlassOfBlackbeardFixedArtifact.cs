@@ -10,7 +10,7 @@ namespace AngbandOS.Core.FixedArtifacts;
 [Serializable]
 internal class CutlassOfBlackbeardFixedArtifact : FixedArtifact
 {
-    private CutlassOfBlackbeardFixedArtifact(SaveGame saveGame) : base(saveGame) { }
+    private CutlassOfBlackbeardFixedArtifact(Game game) : base(game) { }
 
     protected override string BaseItemFactoryName => nameof(CutlassWeaponItemFactory);
 

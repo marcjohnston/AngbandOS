@@ -10,9 +10,9 @@ namespace AngbandOS.Core.Projection;
 [Serializable]
 internal class TurnAllProjectile : Projectile
 {
-    private TurnAllProjectile(SaveGame saveGame) : base(saveGame) { }
+    private TurnAllProjectile(Game game) : base(game) { }
 
-    protected override Animation EffectAnimation => SaveGame.SingletonRepository.Animations.Get(nameof(WhiteControlAnimation));
+    protected override Animation EffectAnimation => Game.SingletonRepository.Animations.Get(nameof(WhiteControlAnimation));
 
     protected override bool AffectMonster(int who, Monster mPtr, int dam, int r)
     {
@@ -24,8 +24,8 @@ internal class TurnAllProjectile : Projectile
         {
             obvious = true;
         }
-        int doFear = SaveGame.DiceRoll(3, dam / 2) + 1;
-        if (rPtr.Unique || rPtr.ImmuneFear || rPtr.Level > SaveGame.DieRoll(dam - 10 < 1 ? 1 : dam - 10) + 10)
+        int doFear = Game.DiceRoll(3, dam / 2) + 1;
+        if (rPtr.Unique || rPtr.ImmuneFear || rPtr.Level > Game.DieRoll(dam - 10 < 1 ? 1 : dam - 10) + 10)
         {
             note = " is unaffected!";
             obvious = false;

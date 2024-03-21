@@ -10,13 +10,13 @@ namespace AngbandOS.Core.Timers;
 [Serializable]
 internal class FearTimer : Timer
 {
-    private FearTimer(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private FearTimer(Game game) : base(game) { } // This object is a singleton.
     protected override void EffectStopped()
     {
-        SaveGame.MsgPrint("You feel bolder now.");
+        Game.MsgPrint("You feel bolder now.");
     }
     protected override void EffectIncreased(int newRate, int currentRate)
     {
-        SaveGame.MsgPrint("You are terrified!");
+        Game.MsgPrint("You are terrified!");
     }
 }

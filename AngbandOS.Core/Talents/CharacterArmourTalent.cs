@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Talents;
 [Serializable]
 internal class CharacterArmorTalent : Talent
 {
-    private CharacterArmorTalent(SaveGame saveGame) : base(saveGame) { }
+    private CharacterArmorTalent(Game game) : base(game) { }
     public override string Name => "Character Armor";
     public override int Level => 13;
     public override int ManaCost => 12;
@@ -18,31 +18,31 @@ internal class CharacterArmorTalent : Talent
 
     public override void Use()
     {
-        SaveGame.StoneskinTimer.AddTimer(SaveGame.ExperienceLevel.Value);
-        if (SaveGame.ExperienceLevel.Value > 14)
+        Game.StoneskinTimer.AddTimer(Game.ExperienceLevel.Value);
+        if (Game.ExperienceLevel.Value > 14)
         {
-            SaveGame.AcidResistanceTimer.AddTimer(SaveGame.ExperienceLevel.Value);
+            Game.AcidResistanceTimer.AddTimer(Game.ExperienceLevel.Value);
         }
-        if (SaveGame.ExperienceLevel.Value > 19)
+        if (Game.ExperienceLevel.Value > 19)
         {
-            SaveGame.FireResistanceTimer.AddTimer(SaveGame.ExperienceLevel.Value);
+            Game.FireResistanceTimer.AddTimer(Game.ExperienceLevel.Value);
         }
-        if (SaveGame.ExperienceLevel.Value > 24)
+        if (Game.ExperienceLevel.Value > 24)
         {
-            SaveGame.ColdResistanceTimer.AddTimer(SaveGame.ExperienceLevel.Value);
+            Game.ColdResistanceTimer.AddTimer(Game.ExperienceLevel.Value);
         }
-        if (SaveGame.ExperienceLevel.Value > 29)
+        if (Game.ExperienceLevel.Value > 29)
         {
-            SaveGame.LightningResistanceTimer.AddTimer(SaveGame.ExperienceLevel.Value);
+            Game.LightningResistanceTimer.AddTimer(Game.ExperienceLevel.Value);
         }
-        if (SaveGame.ExperienceLevel.Value > 34)
+        if (Game.ExperienceLevel.Value > 34)
         {
-            SaveGame.PoisonResistanceTimer.AddTimer(SaveGame.ExperienceLevel.Value);
+            Game.PoisonResistanceTimer.AddTimer(Game.ExperienceLevel.Value);
         }
     }
 
     protected override string Comment()
     {
-        return $"dur {SaveGame.ExperienceLevel.Value}";
+        return $"dur {Game.ExperienceLevel.Value}";
     }
 }

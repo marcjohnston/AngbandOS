@@ -10,9 +10,9 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal class ResistFireRingItemFactory : RingItemFactory
 {
-    private ResistFireRingItemFactory(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    private ResistFireRingItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => SaveGame.SingletonRepository.Symbols.Get(nameof(EqualSignSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(EqualSignSymbol));
     public override string Name => "Resist Fire";
 
     public override int[] Chance => new int[] { 1, 0, 0, 0 };
@@ -24,5 +24,5 @@ internal class ResistFireRingItemFactory : RingItemFactory
     public override int[] Locale => new int[] { 10, 0, 0, 0 };
     public override bool ResFire => true;
     public override int Weight => 2;
-    public override Item CreateItem() => new Item(SaveGame, this);
+    public override Item CreateItem() => new Item(Game, this);
 }

@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Mutations.RandomMutations;
 [Serializable]
 internal class ScorTailRandomMutation : Mutation
 {
-    private ScorTailRandomMutation(SaveGame saveGame) : base(saveGame) { }
+    private ScorTailRandomMutation(Game game) : base(game) { }
     public override int Frequency => 2;
     public override string GainMessage => "You grow a scorpion tail!";
     public override string HaveMessage => "You have a scorpion tail (poison, 3d7).";
@@ -23,11 +23,11 @@ internal class ScorTailRandomMutation : Mutation
 
     public override void OnGain()
     {
-        SaveGame.NaturalAttacks.Add(this);
+        Game.NaturalAttacks.Add(this);
     }
 
     public override void OnLose()
     {
-        SaveGame.NaturalAttacks.Remove(this);
+        Game.NaturalAttacks.Remove(this);
     }
 }

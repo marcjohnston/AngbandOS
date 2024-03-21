@@ -10,14 +10,14 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class RechargeItemScript : Script, IScript, ISuccessfulScriptInt
 {
-    private RechargeItemScript(SaveGame saveGame) : base(saveGame) { }
+    private RechargeItemScript(Game game) : base(game) { }
 
     public bool ExecuteSuccessfulScriptInt(int num)
     {
         int i, t;
-        if (!SaveGame.SelectItem(out Item? oPtr, "Recharge which item? ", false, true, true, SaveGame.SingletonRepository.ItemFilters.Get(nameof(CanBeRechargedItemFilter))))
+        if (!Game.SelectItem(out Item? oPtr, "Recharge which item? ", false, true, true, Game.SingletonRepository.ItemFilters.Get(nameof(CanBeRechargedItemFilter))))
         {
-            SaveGame.MsgPrint("You have nothing to recharge.");
+            Game.MsgPrint("You have nothing to recharge.");
             return false;
         }
         if (oPtr == null)
@@ -32,9 +32,9 @@ internal class RechargeItemScript : Script, IScript, ISuccessfulScriptInt
             {
                 i = 1;
             }
-            if (SaveGame.RandomLessThan(i) == 0)
+            if (Game.RandomLessThan(i) == 0)
             {
-                SaveGame.MsgPrint("The recharge backfires, draining the rod further!");
+                Game.MsgPrint("The recharge backfires, draining the rod further!");
                 if (oPtr.TypeSpecificValue < 10000)
                 {
                     oPtr.TypeSpecificValue = (oPtr.TypeSpecificValue + 100) * 2;
@@ -42,7 +42,7 @@ internal class RechargeItemScript : Script, IScript, ISuccessfulScriptInt
             }
             else
             {
-                t = num * SaveGame.DiceRoll(2, 4);
+                t = num * Game.DiceRoll(2, 4);
                 if (oPtr.TypeSpecificValue > t)
                 {
                     oPtr.TypeSpecificValue -= t;
@@ -60,9 +60,9 @@ internal class RechargeItemScript : Script, IScript, ISuccessfulScriptInt
             {
                 i = 1;
             }
-            if (SaveGame.RandomLessThan(i) == 0)
+            if (Game.RandomLessThan(i) == 0)
             {
-                SaveGame.MsgPrint("There is a bright flash of light.");
+                Game.MsgPrint("There is a bright flash of light.");
                 oPtr.ItemIncrease(-999);
                 oPtr.ItemDescribe();
                 oPtr.ItemOptimize();
@@ -72,13 +72,13 @@ internal class RechargeItemScript : Script, IScript, ISuccessfulScriptInt
                 t = (num / (lev + 2)) + 1;
                 if (t > 0)
                 {
-                    oPtr.TypeSpecificValue += 2 + SaveGame.DieRoll(t);
+                    oPtr.TypeSpecificValue += 2 + Game.DieRoll(t);
                 }
                 oPtr.IdentKnown = false;
                 oPtr.IdentEmpty = false;
             }
         }
-        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
+        Game.SingletonRepository.FlaggedActions.Get(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
         return true;
     }
 
@@ -88,6 +88,6 @@ internal class RechargeItemScript : Script, IScript, ISuccessfulScriptInt
     /// <returns></returns>
     public void ExecuteScript()
     {
-        ExecuteSuccessfulScriptInt(SaveGame.ExperienceLevel.Value * 2);
+        ExecuteSuccessfulScriptInt(Game.ExperienceLevel.Value * 2);
     }
 }

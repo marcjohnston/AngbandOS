@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Mutations.PassiveMutations;
 [Serializable]
 internal class ResTimePassiveMutation : Mutation
 {
-    private ResTimePassiveMutation(SaveGame saveGame) : base(saveGame) { }
+    private ResTimePassiveMutation(Game game) : base(game) { }
     public override int Frequency => 1;
     public override string GainMessage => "You feel immortal.";
     public override string HaveMessage => "You are protected from the ravages of time.";
@@ -18,11 +18,11 @@ internal class ResTimePassiveMutation : Mutation
 
     public override void OnGain()
     {
-        SaveGame.ResTime = true;
+        Game.ResTime = true;
     }
 
     public override void OnLose()
     {
-        SaveGame.ResTime = false;
+        Game.ResTime = false;
     }
 }

@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class DropScript : Script, IScript, IRepeatableScript, ISuccessfulScript
 {
-    private DropScript(SaveGame saveGame) : base(saveGame) { }
+    private DropScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the drop script, disposes of the successful result and returns false.
@@ -39,9 +39,9 @@ internal class DropScript : Script, IScript, IRepeatableScript, ISuccessfulScrip
     {
         int amount = 1;
         // Get an item from the inventory/equipment
-        if (!SaveGame.SelectItem(out Item? item, "Drop which item? ", true, true, false, null))
+        if (!Game.SelectItem(out Item? item, "Drop which item? ", true, true, false, null))
         {
-            SaveGame.MsgPrint("You have nothing to drop.");
+            Game.MsgPrint("You have nothing to drop.");
             return false;
         }
         if (item == null)
@@ -51,23 +51,23 @@ internal class DropScript : Script, IScript, IRepeatableScript, ISuccessfulScrip
         // Can't drop a cursed item
         if (item.IsInEquipment && item.IsCursed())
         {
-            SaveGame.MsgPrint("Hmmm, it seems to be cursed.");
+            Game.MsgPrint("Hmmm, it seems to be cursed.");
             return false;
         }
         // It's a stack, so find out how many to drop
         if (item.Count > 1)
         {
-            amount = SaveGame.GetQuantity(null, item.Count, true);
+            amount = Game.GetQuantity(null, item.Count, true);
             if (amount <= 0)
             {
                 return false;
             }
         }
         // Dropping things takes half a turn
-        SaveGame.EnergyUse = 50;
+        Game.EnergyUse = 50;
         // Drop it
-        SaveGame.InvenDrop(item, amount);
-        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawEquippyFlaggedAction)).Set();
+        Game.InvenDrop(item, amount);
+        Game.SingletonRepository.FlaggedActions.Get(nameof(RedrawEquippyFlaggedAction)).Set();
         return true;
     }
 }

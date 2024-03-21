@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class LocateScript : Script, IScript, IRepeatableScript
 {
-    private LocateScript(SaveGame saveGame) : base(saveGame) { }
+    private LocateScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the locate script and returns false.
@@ -28,8 +28,8 @@ internal class LocateScript : Script, IScript, IRepeatableScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        int startRow = SaveGame.PanelRow;
-        int startCol = SaveGame.PanelCol;
+        int startRow = Game.PanelRow;
+        int startCol = Game.PanelCol;
         int currentRow = startRow;
         int currentCol = startCol;
 
@@ -54,11 +54,11 @@ internal class LocateScript : Script, IScript, IRepeatableScript
             int dir = 0;
             while (dir == 0)
             {
-                if (!SaveGame.GetCom(message, out char command))
+                if (!Game.GetCom(message, out char command))
                 {
                     break;
                 }
-                dir = SaveGame.GetKeymapDir(command);
+                dir = Game.GetKeymapDir(command);
             }
             if (dir == 0)
             {
@@ -66,19 +66,19 @@ internal class LocateScript : Script, IScript, IRepeatableScript
             }
 
             // Move the view based on the direction
-            currentRow += SaveGame.KeypadDirectionYOffset[dir];
-            currentCol += SaveGame.KeypadDirectionXOffset[dir];
-            if (currentRow > SaveGame.MaxPanelRows)
+            currentRow += Game.KeypadDirectionYOffset[dir];
+            currentCol += Game.KeypadDirectionXOffset[dir];
+            if (currentRow > Game.MaxPanelRows)
             {
-                currentRow = SaveGame.MaxPanelRows;
+                currentRow = Game.MaxPanelRows;
             }
             else if (currentRow < 0)
             {
                 currentRow = 0;
             }
-            if (currentCol > SaveGame.MaxPanelCols)
+            if (currentCol > Game.MaxPanelCols)
             {
-                currentCol = SaveGame.MaxPanelCols;
+                currentCol = Game.MaxPanelCols;
             }
             else if (currentCol < 0)
             {
@@ -86,26 +86,26 @@ internal class LocateScript : Script, IScript, IRepeatableScript
             }
 
             // Update the view if necessary
-            if (currentRow != SaveGame.PanelRow || currentCol != SaveGame.PanelCol)
+            if (currentRow != Game.PanelRow || currentCol != Game.PanelCol)
             {
-                SaveGame.PanelRow = currentRow;
-                SaveGame.PanelCol = currentCol;
-                SaveGame.PanelRowMin = SaveGame.PanelRow * (Constants.PlayableScreenHeight / 2);
-                SaveGame.PanelRowMax = SaveGame.PanelRowMin + Constants.PlayableScreenHeight - 1;
-                SaveGame.PanelRowPrt = SaveGame.PanelRowMin - 1;
-                SaveGame.PanelColMin = SaveGame.PanelCol * (Constants.PlayableScreenWidth / 2);
-                SaveGame.PanelColMax = SaveGame.PanelColMin + Constants.PlayableScreenWidth - 1;
-                SaveGame.PanelColPrt = SaveGame.PanelColMin - 13;
-                SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateMonstersFlaggedAction)).Set();
-                SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawMapFlaggedAction)).Set();
-                SaveGame.HandleStuff();
+                Game.PanelRow = currentRow;
+                Game.PanelCol = currentCol;
+                Game.PanelRowMin = Game.PanelRow * (Constants.PlayableScreenHeight / 2);
+                Game.PanelRowMax = Game.PanelRowMin + Constants.PlayableScreenHeight - 1;
+                Game.PanelRowPrt = Game.PanelRowMin - 1;
+                Game.PanelColMin = Game.PanelCol * (Constants.PlayableScreenWidth / 2);
+                Game.PanelColMax = Game.PanelColMin + Constants.PlayableScreenWidth - 1;
+                Game.PanelColPrt = Game.PanelColMin - 13;
+                Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateMonstersFlaggedAction)).Set();
+                Game.SingletonRepository.FlaggedActions.Get(nameof(RedrawMapFlaggedAction)).Set();
+                Game.HandleStuff();
             }
         }
 
         // We've finished, so snap back to the player's location
-        SaveGame.RecenterScreenAroundPlayer();
-        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(UpdateMonstersFlaggedAction)).Set();
-        SaveGame.SingletonRepository.FlaggedActions.Get(nameof(RedrawMapFlaggedAction)).Set();
-        SaveGame.HandleStuff();
+        Game.RecenterScreenAroundPlayer();
+        Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateMonstersFlaggedAction)).Set();
+        Game.SingletonRepository.FlaggedActions.Get(nameof(RedrawMapFlaggedAction)).Set();
+        Game.HandleStuff();
     }
 }

@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal class EarthquakeScript : Script, IScript
 {
-    private EarthquakeScript(SaveGame saveGame) : base(saveGame) { }
+    private EarthquakeScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script.
@@ -18,6 +18,6 @@ internal class EarthquakeScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        SaveGame.Earthquake(SaveGame.MapY, SaveGame.MapX, 10);
+        Game.Earthquake(Game.MapY, Game.MapX, 10);
     }
 }
