@@ -8,14 +8,14 @@
 namespace AngbandOS.Core.Widgets;
 
 [Serializable]
-internal class ExperienceLevelWidget : DynamicWidget
+internal class ExperienceLevelWidget : IntWidget
 {
     private ExperienceLevelWidget(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override int X => 6;
     public override int Y => 5;
     public override int Width => 6;
     public override ColorEnum Color => ColorEnum.BrightGreen;
-    public override string IntChangeTrackableName => nameof(ExperienceLevelIntProperty);
+    public override string IntChangeTrackingName => nameof(ExperienceLevelIntProperty);
     public override string? JustificationName => nameof(RightJustification);
     public override (string, bool)[]? EnabledConditionalNames => new (string, bool)[]
     {

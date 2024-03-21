@@ -5,16 +5,19 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using AngbandOS.Core.Interface;
+using System.Xml.Linq;
+
 namespace AngbandOS.Core.Properties;
 
 [Serializable]
-internal class GoldIntProperty : IntProperty
+internal class PlayerNameStringProperty : StringProperty
 {
-    protected GoldIntProperty(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
+    protected PlayerNameStringProperty(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
 
     protected override void OnAfterSet()
     {
         // Send a message to the attached view port so that the consuming application knows that the gold value has been updated.
-        SaveGame.ConsoleViewPort.GoldUpdated(Value);
+        SaveGame.ConsoleViewPort.CharacterRenamed(Value);
     }
 }

@@ -7,18 +7,13 @@
 
 namespace AngbandOS.Core.Properties;
 
-/// <summary>
-/// Represents a boolean game property.  These properties can be referenced by widgets and conditionals.
-/// </summary>
 [Serializable]
-internal abstract class BoolProperty : Property, IBoolChangeTracking, IConditional
+internal abstract class StringProperty : Property, IStringChangeTracking
 {
-    protected BoolProperty(SaveGame saveGame) : base(saveGame) { }
+    protected StringProperty(SaveGame saveGame) : base(saveGame) { }
 
-    public bool IsTrue => Value;
-
-    private bool _value;
-    public bool Value
+    private string _value;
+    public string Value
     {
         get
         {
@@ -46,6 +41,6 @@ internal abstract class BoolProperty : Property, IBoolChangeTracking, ICondition
 
     public override string ToString()
     {
-        return _value.ToString();
+        return _value;
     }
 }

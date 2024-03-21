@@ -13,9 +13,9 @@ internal class NamingBirthStage : BirthStage
     private NamingBirthStage(SaveGame saveGame) : base(saveGame) { }
     public override BirthStage? Render()
     {
-        if (string.IsNullOrEmpty(SaveGame.Name))
+        if (string.IsNullOrEmpty(SaveGame.PlayerName.Value))
         {
-            SaveGame.Name = SaveGame.Race.CreateRandomName();
+            SaveGame.PlayerName.Value = SaveGame.Race.CreateRandomName();
         }
         SaveGame.InputPlayerName();
         return null;

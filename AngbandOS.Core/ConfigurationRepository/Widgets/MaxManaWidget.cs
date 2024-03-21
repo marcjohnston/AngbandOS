@@ -8,14 +8,14 @@
 namespace AngbandOS.Core.Widgets;
 
 [Serializable]
-internal class MaxManaWidget : DynamicWidget
+internal class MaxManaWidget : IntWidget
 {
     private MaxManaWidget(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override int X => 7;
     public override int Y => 25;
     public override int Width => 5;
     public override ColorEnum Color => ColorEnum.BrightGreen;
-    public override string IntChangeTrackableName => nameof(MaxManaIntProperty);
+    public override string IntChangeTrackingName => nameof(MaxManaIntProperty);
     public override string? JustificationName => nameof(RightJustification);
     public override (string, bool)[]? EnabledConditionalNames => new (string, bool)[]
     {

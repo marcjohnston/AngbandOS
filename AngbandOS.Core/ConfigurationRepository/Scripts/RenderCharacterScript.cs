@@ -507,7 +507,7 @@ internal class RenderCharacterScript : Script, IScript, IRepeatableScript
         {
             SaveGame.Screen.Print(ColorEnum.Blue, "Magic       :", 6, 1);
         }
-        SaveGame.Screen.Print(ColorEnum.Brown, SaveGame.Name, 2, 15);
+        SaveGame.Screen.Print(ColorEnum.Brown, SaveGame.PlayerName.Value, 2, 15);
         SaveGame.Screen.Print(ColorEnum.Brown, SaveGame.Gender.Title, 3, 15);
         SaveGame.Screen.Print(ColorEnum.Brown, SaveGame.Race.Title, 4, 15);
         SaveGame.Screen.Print(ColorEnum.Brown, SaveGame.BaseCharacterClass.ClassSubName(SaveGame.PrimaryRealm), 5, 15);

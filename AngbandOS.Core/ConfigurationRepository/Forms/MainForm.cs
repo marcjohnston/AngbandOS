@@ -36,6 +36,7 @@ internal class MainForm : Form
         nameof(MaxHealthPointsWidget),
         nameof(MaxManaLabelWidget),
         nameof(MaxManaWidget),
+        nameof(PlayerNameWidget),
         nameof(PlayerTitleIsWinnerWidget),
         nameof(PlayerTitleIsWizardWidget),
         nameof(PlayerTitleWidget),

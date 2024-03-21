@@ -14,7 +14,7 @@ internal class BlindnessWidget : RangedWidget
     public override int X => 8;
     public override int Y => 44;
     public override int Width => 5;
-    public override string IntChangeTrackableName => nameof(BlindnessTimer);
+    public override string IntChangeTrackingName => nameof(BlindnessTimer);
 
     public override (int, string, ColorEnum)[] Ranges => new (int, string, ColorEnum)[]
     {

@@ -14,7 +14,7 @@ internal class PoisonedWidget : RangedWidget
     public override int X => 33;
     public override int Y => 44;
     public override int Width => 8;
-    public override string IntChangeTrackableName => nameof(PoisonedTimer);
+    public override string IntChangeTrackingName => nameof(PoisonedTimer);
 
     public override (int, string, ColorEnum)[] Ranges => new (int, string, ColorEnum)[]
     {

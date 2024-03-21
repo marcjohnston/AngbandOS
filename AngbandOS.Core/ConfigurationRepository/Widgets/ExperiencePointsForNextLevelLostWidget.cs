@@ -10,14 +10,14 @@ using System.Diagnostics;
 namespace AngbandOS.Core.Widgets;
 
 [Serializable]
-internal class ExperiencePointsForNextLevelLostWidget : DynamicWidget
+internal class ExperiencePointsForNextLevelLostWidget : IntWidget
 {
     private ExperiencePointsForNextLevelLostWidget(SaveGame saveGame) : base(saveGame) { } // This object is a singleton.
     public override int X => 4;
     public override int Y => 6;
     public override int Width => 8;
     public override ColorEnum Color => ColorEnum.Yellow;
-    public override string IntChangeTrackableName => nameof(ExperiencePointsForNextLevelFunction);
+    public override string IntChangeTrackingName => nameof(ExperiencePointsForNextLevelFunction);
     public override string? JustificationName => nameof(RightJustification);
     public override (string conditionalName, bool isTrue)[]? EnabledConditionalNames => new[] {
         (nameof(ExperienceLevelsAtMaxConditional), false),

@@ -10,8 +10,6 @@ namespace AngbandOS.Core.FlaggedActions;
 [Serializable]
 internal class RedrawPlayerFlaggedAction : FlaggedAction
 {
-    private const int ColName = 0;
-    private const int RowName = 1;
     private const int ColRace = 0;
     private const int RowRace = 2;
     private const int ColClass = 0;
@@ -24,7 +22,6 @@ internal class RedrawPlayerFlaggedAction : FlaggedAction
     }
     protected override void Execute()
     {
-        PrtField(SaveGame.Name, RowName, ColName);
         PrtField(SaveGame.Race.Title, RowRace, ColRace);
         PrtField(SaveGame.BaseCharacterClass.ClassSubName(SaveGame.PrimaryRealm), RowClass, ColClass);
     }

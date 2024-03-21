@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Conditionals;
 
 [Serializable]
-internal abstract class Conditional : IGetKey<string>, IBool
+internal abstract class Conditional : IGetKey<string>, IConditional
 {
     protected readonly SaveGame SaveGame;
     protected Conditional(SaveGame saveGame)

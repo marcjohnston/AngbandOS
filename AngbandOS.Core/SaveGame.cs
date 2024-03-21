@@ -224,6 +224,8 @@ internal class SaveGame
     public readonly ExperiencePointsIntProperty ExperiencePoints;
     public readonly DisplayedArmorClassBonusIntProperty DisplayedArmorClassBonus;
     public readonly DisplayedBaseArmorClassIntProperty DisplayedBaseArmorClass;
+    public readonly StringProperty PlayerName;
+
     /// <summary>
     /// 
     /// </summary>
@@ -343,19 +345,6 @@ internal class SaveGame
     public int MaxLevelGained;
     public int MeleeAttacksPerRound;
     public int MissileAttacksPerRound;
-    private string _name;
-    public string Name
-    {
-        get
-        {
-            return _name;
-        }
-        set
-        {
-            _name = value;
-            ConsoleViewPort.CharacterRenamed(_name);
-        }
-    }
     public int OldSpareSpellSlots;
 
     /// <summary>
@@ -654,6 +643,7 @@ internal class SaveGame
         ExperienceMultiplier = (ExperienceMultiplierIntProperty)SingletonRepository.Properties.Get(nameof(ExperienceMultiplierIntProperty));
         IsWinner = (IsWinnerBoolProperty)SingletonRepository.Properties.Get(nameof(IsWinnerBoolProperty));
         IsWizard = (IsWizardBoolProperty)SingletonRepository.Properties.Get(nameof(IsWizardBoolProperty));
+        PlayerName = (PlayerNameStringProperty)SingletonRepository.Properties.Get(nameof(PlayerNameStringProperty));
 
         AcidResistanceTimer = (AcidResistanceTimer)SingletonRepository.TimedActions.Get(nameof(Timers.AcidResistanceTimer));
         BleedingTimer = (BleedingTimer)SingletonRepository.TimedActions.Get(nameof(Timers.BleedingTimer));
@@ -1723,7 +1713,7 @@ internal class SaveGame
         memoryStream.Position = 0;
         GameDetails gameDetails = new GameDetails()
         {
-            CharacterName = Name, // The player parameter
+            CharacterName = PlayerName.Value, // The player parameter
             Level = ExperienceLevel.Value, // The player parameter
             Gold = Gold.Value, // The parameter
             IsAlive = !IsDead, // If the player is dead, then the savegame Player will be null.
@@ -1956,10 +1946,10 @@ internal class SaveGame
                 MsgPrint(null);
                 if (IsDead)
                 {
-                    ConsoleViewPort.PlayerDied(Name, DiedFrom, ExperienceLevel.Value);
+                    ConsoleViewPort.PlayerDied(PlayerName.Value, DiedFrom, ExperienceLevel.Value);
 
                     // Store the player info
-                    ExPlayer = new ExPlayer(Gender, Race, RaceAtBirth, BaseCharacterClass?.GetType().Name, PrimaryRealm, SecondaryRealm, Name, ExperienceLevel.Value, Generation);
+                    ExPlayer = new ExPlayer(Gender, Race, RaceAtBirth, BaseCharacterClass?.GetType().Name, PrimaryRealm, SecondaryRealm, PlayerName.Value, ExperienceLevel.Value, Generation);
                     break;
                 }
                 GenerateNewLevel();
@@ -3391,7 +3381,7 @@ internal class SaveGame
                 PlayMusic(MusicTrackEnum.Death);
             }
             Screen.Clear();
-            string buf = Name.Trim() + Generation.ToRoman(true);
+            string buf = PlayerName.Value.Trim() + Generation.ToRoman(true);
             if (IsWinner.Value || ExperienceLevel.Value > Constants.PyMaxLevel)
             {
                 buf += " the Magnificent";
@@ -13277,12 +13267,12 @@ internal class SaveGame
         while (!Shutdown)
         {
             Screen.Goto(2, col);
-            if (AskforAux(out string newName, Name, 12))
+            if (AskforAux(out string newName, PlayerName.Value, 12))
             {
-                Name = newName;
+                PlayerName.Value = newName;
 
                 // Check to see if the name has actually changed (excluding any leading or trailing spaces).
-                if (newName.Trim() != Name.Trim())
+                if (newName.Trim() != PlayerName.Value.Trim())
                 {
                     Generation = 1;
                 }
@@ -13290,8 +13280,8 @@ internal class SaveGame
 
             break;
         }
-        Name = Name.PadRight(12);
-        Screen.Print(ColorEnum.Brown, Name, 2, col);
+        PlayerName.Value = PlayerName.Value.PadRight(12);
+        Screen.Print(ColorEnum.Brown, PlayerName.Value, 2, col);
         //Screen.Clear(22);
     }
 

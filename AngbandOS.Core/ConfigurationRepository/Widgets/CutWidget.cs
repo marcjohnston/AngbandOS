@@ -14,7 +14,7 @@ internal class CutWidget : RangedWidget
     public override int X => 13;
     public override int Y => 43;
     public override int Width => 12;
-    public override string IntChangeTrackableName => nameof(BleedingTimer);
+    public override string IntChangeTrackingName => nameof(BleedingTimer);
 
     public override (int, string, ColorEnum)[] Ranges => new (int, string, ColorEnum)[]
     {

@@ -7,7 +7,7 @@
 
 namespace AngbandOS.Core.Interfaces;
 
-internal interface IBool
+internal interface IConditional
 {
     bool IsTrue { get; }
 }

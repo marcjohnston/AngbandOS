@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Widgets;
 
 [Serializable]
-internal abstract class RangedWidget : DynamicWidget
+internal abstract class RangedWidget : IntWidget
 {
     private bool _sortValidated = false;
     private string _text;
@@ -61,13 +61,13 @@ internal abstract class RangedWidget : DynamicWidget
     public override void Update()
     {
         // Check to see if the see if the underlying value changed.
-        if (IntChangeTrackable.IsChanged)
+        if (IntChangeTracking.IsChanged)
         {
             // Now that we need to check the ranges, validate that the ranges are properly sorted in descending order.  We only do this once.
             ValidateRangeSorting();
 
             // Grab a copy of the value so that we do not retrieve it for every range.
-            int intValue = IntChangeTrackable.Value;
+            int intValue = IntChangeTracking.Value;
 
             // Apply the default text and color.
             (string text, ColorEnum color) found = (DefaultText, DefaultColor);

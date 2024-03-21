@@ -8,9 +8,9 @@
 namespace AngbandOS.Core.Interfaces;
 
 /// <summary>
-/// Represents an interface for a boolean value that has change tracking associated with it.
+/// Represents an interface for a string value that has change tracking associated with it.
 /// </summary>
-internal interface IBoolChangeTracking : IChangeTracking
+internal interface IStringChangeTracking : IChangeTracking
 {
-    bool Value { get; }
+    string Value { get; }
 }

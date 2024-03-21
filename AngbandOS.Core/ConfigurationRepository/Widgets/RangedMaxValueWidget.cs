@@ -10,7 +10,7 @@ using Timer = AngbandOS.Core.Timers.Timer;
 namespace AngbandOS.Core.Widgets;
 
 [Serializable]
-internal abstract class RangedMaxValueWidget : DynamicWidget
+internal abstract class RangedMaxValueWidget : IntWidget
 {
     private bool _sortValidated = false;
     private int _value;
@@ -84,13 +84,13 @@ internal abstract class RangedMaxValueWidget : DynamicWidget
     public override void Update()
     {
         // Check to see if the see if the underlying value changed or the max value changed.
-        if (IntChangeTrackable.IsChanged || MaxIntChangeTrackable.IsChanged)
+        if (IntChangeTracking.IsChanged || MaxIntChangeTrackable.IsChanged)
         {
             // Now that we need to check the ranges, validate that the ranges are properly sorted in descending order.  We only do this once.
             ValidateRangeSorting();
 
             // Grab a copy of the value and max value so that we do not retrieve it for every range.
-            int intValue = IntChangeTrackable.Value;
+            int intValue = IntChangeTracking.Value;
             int maxValue = MaxIntChangeTrackable.Value;
 
             // Apply the default text and color.

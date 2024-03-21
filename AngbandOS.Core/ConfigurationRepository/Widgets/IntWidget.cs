@@ -10,37 +10,37 @@ using Timer = AngbandOS.Core.Timers.Timer;
 namespace AngbandOS.Core.Widgets;
 
 [Serializable]
-internal abstract class DynamicWidget : Widget
+internal abstract class IntWidget : Widget
 {
-    protected DynamicWidget(SaveGame saveGame) : base(saveGame) { }
-    public abstract string IntChangeTrackableName { get; }
-    public IIntChangeTracking IntChangeTrackable { get; private set; }
+    protected IntWidget(SaveGame saveGame) : base(saveGame) { }
+    public abstract string IntChangeTrackingName { get; }
+    public IIntChangeTracking IntChangeTracking { get; private set; }
 
     public override void Bind()
     {
         base.Bind();
-        Property? property = SaveGame.SingletonRepository.Properties.TryGet(IntChangeTrackableName);
+        Property? property = SaveGame.SingletonRepository.Properties.TryGet(IntChangeTrackingName);
         if (property != null)
         {
-            IntChangeTrackable = (IIntChangeTracking)property;
+            IntChangeTracking = (IIntChangeTracking)property;
         }
         else
         {
-            Timer? timer= SaveGame.SingletonRepository.TimedActions.TryGet(IntChangeTrackableName);
+            Timer? timer= SaveGame.SingletonRepository.TimedActions.TryGet(IntChangeTrackingName);
             if (timer != null)
             {
-                IntChangeTrackable = (IIntChangeTracking)timer;
+                IntChangeTracking = (IIntChangeTracking)timer;
             }
             else
             {
-                Function? function = SaveGame.SingletonRepository.Functions.TryGet(IntChangeTrackableName);
+                Function? function = SaveGame.SingletonRepository.Functions.TryGet(IntChangeTrackingName);
                 if (function != null)
                 {
-                    IntChangeTrackable = (IIntChangeTracking)function;
+                    IntChangeTracking = (IIntChangeTracking)function;
                 }
                 else
                 {
-                    throw new Exception($"The {nameof(IntChangeTrackableName)} property does not specify a valid {nameof(Property)}, {nameof(Timer)} or {nameof(Function)}.");
+                    throw new Exception($"The {nameof(IntChangeTrackingName)} property does not specify a valid {nameof(Property)}, {nameof(Timer)} or {nameof(Function)}.");
                 }
             }
         } 
@@ -49,7 +49,7 @@ internal abstract class DynamicWidget : Widget
     public override void Update()
     {
         // Check to see if the value has changed.
-        if (IntChangeTrackable.IsChanged)
+        if (IntChangeTracking.IsChanged)
         {
             // It has, invalidate the widget.
             base.Invalidate();
@@ -59,5 +59,5 @@ internal abstract class DynamicWidget : Widget
         base.Update();
     }
 
-    public override string Text => IntChangeTrackable.Value.ToString();
+    public override string Text => IntChangeTracking.Value.ToString();
 }

@@ -74,7 +74,7 @@ public class GameServer
             }
             else
             {
-                return SaveGame.Name;
+                return SaveGame.PlayerName.Value;
             }
         }
     }

@@ -38,7 +38,7 @@ internal abstract class Widget : IGetKey<string>
     /// Returns an array of conditionals that need to be met for the widget to rendered; or null, if there are no conditions.  All conditions must return true for the widget
     /// to be enabled.
     /// </summary>
-    public (IBool conditional, bool isTrue)[]? Enabled { get; private set; }
+    public (IConditional conditional, bool isTrue)[]? Enabled { get; private set; }
 
     public virtual (string conditionalName, bool isTrue)[]? EnabledConditionalNames => null;
 
@@ -97,7 +97,7 @@ internal abstract class Widget : IGetKey<string>
         }
         else
         {
-            List<(IBool, bool)> conditionalList = new();
+            List<(IConditional, bool)> conditionalList = new();
             foreach ((string conditionalName, bool isTrue) in EnabledConditionalNames)
             {
                 Conditional? conditional = SaveGame.SingletonRepository.Conditionals.TryGet(conditionalName);
@@ -112,7 +112,7 @@ internal abstract class Widget : IGetKey<string>
                     {
                         throw new Exception($"A {conditionalName} {nameof(Conditional)} or {nameof(Property)} cannot be found.");
                     }
-                    IBool boolProperty = (IBool)property;
+                    IConditional boolProperty = (IConditional)property;
                     conditionalList.Add((boolProperty, isTrue));
                 }
             }
