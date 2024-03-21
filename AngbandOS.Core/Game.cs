@@ -244,7 +244,7 @@ internal class Game
     ///
     /// </summary>
     /// <remarks>borg: This was player->exp</remarks>
-    public readonly FoodIntProperty Food;
+    public readonly FoodIntProperty Food; // TODO: How is this different from a timer
 
     /// <summary>
     /// 
@@ -4004,7 +4004,6 @@ internal class Game
         SingletonRepository.FlaggedActions.Get(nameof(RedrawArmorFlaggedAction)).Check();
         SingletonRepository.FlaggedActions.Get(nameof(RedrawDepthFlaggedAction)).Check();
         SingletonRepository.FlaggedActions.Get(nameof(RedrawMonsterHealthFlaggedAction)).Check();
-        SingletonRepository.FlaggedActions.Get(nameof(RedrawHungerFlaggedAction)).Check();
         SingletonRepository.FlaggedActions.Get(nameof(RedrawDTrapFlaggedAction)).Check();
         SingletonRepository.FlaggedActions.Get(nameof(RedrawStateFlaggedAction)).Check();
         SingletonRepository.FlaggedActions.Get(nameof(RedrawSpeedFlaggedAction)).Check();
@@ -13519,7 +13518,6 @@ internal class Game
         }
         Disturb(false);
         SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
-        SingletonRepository.FlaggedActions.Get(nameof(RedrawHungerFlaggedAction)).Set();
         HandleStuff();
         return true;
     }
