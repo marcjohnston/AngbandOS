@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Races;
 
 [Serializable]
-internal abstract class Race : IGetKey<string>
+internal abstract class Race : IGetKey
 {
     protected readonly SaveGame SaveGame;
     protected Race(SaveGame saveGame)

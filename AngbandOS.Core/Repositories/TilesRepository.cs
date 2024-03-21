@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Repositories;
 
 [Serializable]
-internal class TilesRepository : DictionaryRepository<string, Tile>
+internal class TilesRepository : DictionaryRepository<Tile>
 {
     public TilesRepository(SaveGame saveGame) : base(saveGame) { }
     public override void Load()

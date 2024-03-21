@@ -11,7 +11,7 @@ using System.Text.Json;
 namespace AngbandOS.Core.Tiles;
 
 [Serializable]
-internal abstract class Tile : IGetKey<string>
+internal abstract class Tile : IGetKey
 {
     protected SaveGame SaveGame;
     protected Tile(SaveGame saveGame)

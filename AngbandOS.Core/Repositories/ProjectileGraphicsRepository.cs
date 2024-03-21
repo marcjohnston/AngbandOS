@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Repositories;
 
 [Serializable]
-internal class ProjectileGraphicsRepository : DictionaryRepository<string, ProjectileGraphic>
+internal class ProjectileGraphicsRepository : DictionaryRepository<ProjectileGraphic>
 {
     public ProjectileGraphicsRepository(SaveGame saveGame) : base(saveGame) { }
     public override void Load()

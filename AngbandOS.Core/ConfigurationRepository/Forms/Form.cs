@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Forms;
 
 [Serializable]
-internal abstract class Form : IGetKey<string>
+internal abstract class Form : IGetKey
 {
     protected readonly SaveGame SaveGame;
 

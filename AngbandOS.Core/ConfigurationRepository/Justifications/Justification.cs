@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.PropertyFormatters;
 
 [Serializable]
-internal abstract class Justification : IGetKey<string>
+internal abstract class Justification : IGetKey
 {
     protected readonly SaveGame SaveGame;
     protected Justification(SaveGame saveGame)

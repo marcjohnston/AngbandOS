@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Powers;
 
 [Serializable]
-internal abstract class Power : IGetKey<string>
+internal abstract class Power : IGetKey
 {
     protected readonly SaveGame SaveGame;
     protected Power(SaveGame saveGame)

@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Repositories;
 
 [Serializable]
-internal class ScriptsRepository : DictionaryRepository<string, Script>
+internal class ScriptsRepository : DictionaryRepository<Script>
 {
     public ScriptsRepository(SaveGame saveGame) : base(saveGame) { }
 }

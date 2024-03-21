@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Activations;
 /// <summary>
 /// Represents a power that can be assigned to a random artifact that can be activated.
 /// </summary>
-internal abstract class Activation : IGetKey<string>
+internal abstract class Activation : IGetKey
 {
     protected readonly SaveGame SaveGame;
     protected Activation(SaveGame saveGame)

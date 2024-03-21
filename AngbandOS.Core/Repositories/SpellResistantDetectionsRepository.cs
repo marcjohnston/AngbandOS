@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Repositories;
 
 [Serializable]
-internal class SpellResistantDetectionsRepository : DictionaryRepository<string, SpellResistantDetection>
+internal class SpellResistantDetectionsRepository : DictionaryRepository<SpellResistantDetection>
 {
     public SpellResistantDetectionsRepository(SaveGame saveGame) : base(saveGame) { }
 }

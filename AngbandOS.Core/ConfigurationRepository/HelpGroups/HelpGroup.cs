@@ -11,7 +11,7 @@ using System.Text.Json;
 namespace AngbandOS.Core.HelpGroups;
 
 [Serializable]
-internal abstract class HelpGroup : IGetKey<string>, IToJson
+internal abstract class HelpGroup : IGetKey, IToJson
 {
     protected SaveGame SaveGame { get; }
     protected HelpGroup(SaveGame saveGame) 

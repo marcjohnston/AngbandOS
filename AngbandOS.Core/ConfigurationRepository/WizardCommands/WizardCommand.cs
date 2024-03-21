@@ -10,7 +10,7 @@ using System.Text.Json;
 namespace AngbandOS.Core.WizardCommands;
 
 [Serializable]
-internal abstract class WizardCommand : IHelpCommand, IGetKey<string>
+internal abstract class WizardCommand : IHelpCommand, IGetKey
 {
     protected SaveGame SaveGame { get; }
     protected WizardCommand(SaveGame saveGame)

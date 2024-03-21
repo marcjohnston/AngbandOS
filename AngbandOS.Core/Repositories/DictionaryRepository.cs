@@ -14,9 +14,9 @@ namespace AngbandOS.Core.Repositories;
 /// <typeparam name="TKey"></typeparam>
 /// <typeparam name="TValue"></typeparam>
 [Serializable]
-internal class DictionaryRepository<TKey, TValue> : ListRepository<TValue> where TValue : IGetKey<TKey> where TKey : notnull
+internal class DictionaryRepository<TValue> : ListRepository<TValue> where TValue : IGetKey
 {
-    private Dictionary<TKey, TValue> dictionary = new Dictionary<TKey, TValue>();
+    private Dictionary<string, TValue> dictionary = new Dictionary<string, TValue>();
     public DictionaryRepository(SaveGame saveGame) : base(saveGame) { }
 
     /// <summary>
@@ -24,12 +24,12 @@ internal class DictionaryRepository<TKey, TValue> : ListRepository<TValue> where
     /// </summary>
     public override string Name => SaveGame.Pluralize(typeof(TValue).Name);
 
-    public TValue Bind(TKey scriptName)
+    public TValue Bind(string scriptName)
     {
         return Get(scriptName);
     }
 
-    public TValue? BindNullable(TKey? scriptName)
+    public TValue? BindNullable(string? scriptName)
     {
         if (scriptName == null)
         {
@@ -38,7 +38,7 @@ internal class DictionaryRepository<TKey, TValue> : ListRepository<TValue> where
         return Get(scriptName);
     }
 
-    public TValue? BindNullable<T>(TKey? scriptName)
+    public TValue? BindNullable<T>(string? scriptName)
     {
         if (scriptName == null)
         {
@@ -54,7 +54,7 @@ internal class DictionaryRepository<TKey, TValue> : ListRepository<TValue> where
         }
     }
 
-    public TValue? BindNullable<T, T2>(TKey? scriptName)
+    public TValue? BindNullable<T, T2>(string? scriptName)
     {
         if (scriptName == null)
         {
@@ -95,7 +95,7 @@ internal class DictionaryRepository<TKey, TValue> : ListRepository<TValue> where
         return entity.ToJson();
     }
 
-    public virtual TValue Get(TKey key)
+    public virtual TValue Get(string key)
     {
         if (!dictionary.TryGetValue(key, out TValue? value))
         {
@@ -104,7 +104,7 @@ internal class DictionaryRepository<TKey, TValue> : ListRepository<TValue> where
         return value;
     }
 
-    public virtual TValue? TryGet(TKey key)
+    public virtual TValue? TryGet(string key)
     {
         if (!dictionary.TryGetValue(key, out TValue? value))
         {
@@ -119,7 +119,7 @@ internal class DictionaryRepository<TKey, TValue> : ListRepository<TValue> where
     /// <param name="item"></param>
     public override void Add(TValue item)
     {
-        TKey key = item.GetKey;
+        string key = item.GetKey;
         if (dictionary.TryGetValue(key, out TValue? existingSingletonRepositoryItem))
         {
             throw new Exception($"The {GetType().Name} singleton has a duplicate key value of {item.GetKey} with {existingSingletonRepositoryItem.GetType().Name}.");

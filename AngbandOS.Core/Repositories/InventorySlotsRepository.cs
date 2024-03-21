@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Repositories;
 
 [Serializable]
-internal class InventorySlotsRepository : DictionaryRepository<string, BaseInventorySlot>
+internal class InventorySlotsRepository : DictionaryRepository<BaseInventorySlot>
 {
     public InventorySlotsRepository(SaveGame saveGame) : base(saveGame) { }
 }

@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.BirthStages;
 
 [Serializable]
-internal abstract class BirthStage : IGetKey<string>
+internal abstract class BirthStage : IGetKey
 {
     protected readonly SaveGame SaveGame;
     public string GetKey => Key;

@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.RoomTypes;
 
 [Serializable]
-internal abstract class RoomLayout : IGetKey<string>
+internal abstract class RoomLayout : IGetKey
 {
     protected readonly SaveGame SaveGame;
     protected RoomLayout(SaveGame saveGame)

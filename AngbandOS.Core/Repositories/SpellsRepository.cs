@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Repositories;
 
 [Serializable]
-internal class SpellsRepository : DictionaryRepository<string, Spell>
+internal class SpellsRepository : DictionaryRepository<Spell>
 {
     public SpellsRepository(SaveGame saveGame) : base(saveGame) { }
     public override void Load()

@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Repositories;
 
 [Serializable]
-internal class JustificationsRepository : DictionaryRepository<string, Justification>
+internal class JustificationsRepository : DictionaryRepository<Justification>
 {
     public JustificationsRepository(SaveGame saveGame) : base(saveGame) { }
 }

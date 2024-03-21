@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Talents;
 
 [Serializable]
-internal abstract class Talent : IGetKey<string>
+internal abstract class Talent : IGetKey
 {
     protected readonly SaveGame SaveGame;
     protected Talent(SaveGame saveGame)

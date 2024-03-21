@@ -10,7 +10,7 @@ using System.Text.Json;
 namespace AngbandOS.Core.Gods;
 
 [Serializable]
-internal abstract class God : IGetKey<string>
+internal abstract class God : IGetKey
 {
     protected readonly SaveGame SaveGame;
     protected God(SaveGame saveGame)

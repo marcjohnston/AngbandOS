@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Repositories;
 
 [Serializable]
-internal class GodsRepository : DictionaryRepository<string, God>
+internal class GodsRepository : DictionaryRepository<God>
 {
     public GodsRepository(SaveGame saveGame) : base(saveGame) { }
 

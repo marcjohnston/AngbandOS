@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Repositories;
 
 [Serializable]
-internal class RoomLayoutsRepository : DictionaryRepository<string, RoomLayout>
+internal class RoomLayoutsRepository : DictionaryRepository<RoomLayout>
 {
     public RoomLayoutsRepository(SaveGame saveGame) : base(saveGame) { }
 }

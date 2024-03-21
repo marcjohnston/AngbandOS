@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Repositories;
 
 [Serializable]
-internal class AnimationsRepository : DictionaryRepository<string, Animation>
+internal class AnimationsRepository : DictionaryRepository<Animation>
 {
     public AnimationsRepository(SaveGame saveGame) : base(saveGame) { }
     public override void Load()

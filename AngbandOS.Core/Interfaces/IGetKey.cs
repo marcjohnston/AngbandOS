@@ -5,14 +5,12 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Interfaces;
-
-internal interface IGetKey<TKey> : IToJson
+internal interface IGetKey : IToJson
 {
     /// <summary>
     /// Returns the key to be used for other items to link to this repository item.
     /// </summary>
-    TKey GetKey { get; }
+    string GetKey { get; }
 
     /// <summary>
     /// Process the binding phase for addressable repository items.  The loaded phase happens once all of the repository items are created.  This allows items to link to

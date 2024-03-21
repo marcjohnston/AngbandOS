@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Repositories;
 
 [Serializable]
-internal class PropertiesRepository : DictionaryRepository<string, Property>
+internal class PropertiesRepository : DictionaryRepository<Property>
 {
     public PropertiesRepository(SaveGame saveGame) : base(saveGame) { }
 }

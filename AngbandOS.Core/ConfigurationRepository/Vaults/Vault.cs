@@ -10,7 +10,7 @@ using System.Text.Json;
 namespace AngbandOS.Core.Vaults;
 
 [Serializable]
-internal abstract class Vault : IGetKey<string>
+internal abstract class Vault : IGetKey
 {
     protected SaveGame SaveGame;
     protected Vault(SaveGame saveGame)

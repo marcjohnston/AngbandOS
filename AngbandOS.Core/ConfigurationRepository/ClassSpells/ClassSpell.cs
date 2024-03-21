@@ -10,7 +10,7 @@ using System.Text.Json;
 namespace AngbandOS.Core.ClassSpells;
 
 [Serializable]
-internal abstract class ClassSpell : IGetKey<string>
+internal abstract class ClassSpell : IGetKey
 {
     protected readonly SaveGame SaveGame;
     protected ClassSpell(SaveGame saveGame)

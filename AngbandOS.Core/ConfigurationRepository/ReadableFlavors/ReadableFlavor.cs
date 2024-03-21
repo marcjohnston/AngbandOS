@@ -13,7 +13,7 @@ namespace AngbandOS.Core.Flavors;
 /// Represents a single flavor for a group of items that participate in the IFlavor interface.
 /// </summary>
 [Serializable]
-internal abstract class ReadableFlavor : Flavor, IGetKey<string>
+internal abstract class ReadableFlavor : Flavor, IGetKey
 {
     protected ReadableFlavor(SaveGame saveGame) : base(saveGame) { }
 

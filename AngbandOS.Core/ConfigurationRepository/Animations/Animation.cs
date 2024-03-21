@@ -13,7 +13,7 @@ namespace AngbandOS.Core.Animations;
 /// Represents an animation that occurs when a projectile is launched.
 /// </summary>
 [Serializable]
-internal abstract class Animation : IGetKey<string>
+internal abstract class Animation : IGetKey
 {
     protected SaveGame SaveGame;
     protected Animation(SaveGame saveGame)

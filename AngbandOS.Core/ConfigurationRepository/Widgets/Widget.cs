@@ -13,7 +13,7 @@ namespace AngbandOS.Core.Widgets;
 /// classes can override the Text property to provide different text and can override the 
 /// </summary>
 [Serializable]
-internal abstract class Widget : IGetKey<string>
+internal abstract class Widget : IGetKey
 {
     protected readonly SaveGame SaveGame;
     protected Widget(SaveGame saveGame)

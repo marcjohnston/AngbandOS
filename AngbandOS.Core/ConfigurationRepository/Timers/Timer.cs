@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Timers;
 /// Represents an action that occurs over a period of time.
 /// </summary>
 [Serializable]
-internal abstract class Timer : IGetKey<string>, IIntChangeTracking
+internal abstract class Timer : IGetKey, IIntChangeTracking
 {
     protected SaveGame SaveGame { get; }
 

@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.FixedArtifacts;
 
 [Serializable]
-internal abstract class FixedArtifact : IItemCharacteristics, IGetKey<string>
+internal abstract class FixedArtifact : IItemCharacteristics, IGetKey
 {
     protected readonly SaveGame SaveGame;
 

@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Repositories;
 
 [Serializable]
-internal class GendersRepository : DictionaryRepository<string, Gender>
+internal class GendersRepository : DictionaryRepository<Gender>
 {
     public GendersRepository(SaveGame saveGame) : base(saveGame) { }
 }

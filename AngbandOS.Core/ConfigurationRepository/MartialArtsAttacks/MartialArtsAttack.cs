@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.MartialArtsAttacks;
 
 [Serializable]
-internal abstract class MartialArtsAttack : IGetKey<string>
+internal abstract class MartialArtsAttack : IGetKey
 {
     protected readonly SaveGame SaveGame;
 

@@ -13,7 +13,7 @@ namespace AngbandOS.Core;
 /// Represents an item filter for all items regardless of their value.  Does not filter any items out of the selection.
 /// </summary>
 [Serializable]
-internal class AllItemsItemFilter : IGetKey<string>, IItemFilter
+internal class AllItemsItemFilter : IGetKey, IItemFilter
 {
     protected SaveGame SaveGame { get; }
     protected AllItemsItemFilter(SaveGame saveGame)

@@ -12,7 +12,7 @@ using System.Xml.Linq;
 namespace AngbandOS.Core.AttackTypes;
 
 [Serializable]
-internal abstract class Attack : IGetKey<string>
+internal abstract class Attack : IGetKey
 {
     protected readonly SaveGame SaveGame;
     protected Attack(SaveGame saveGame)

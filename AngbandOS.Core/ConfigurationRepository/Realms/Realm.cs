@@ -10,7 +10,7 @@ using AngbandOS.Core.ItemFactories;
 namespace AngbandOS.Core.Realms;
 
 [Serializable]
-internal abstract class Realm : IGetKey<string>
+internal abstract class Realm : IGetKey
 {
     protected SaveGame SaveGame { get; }
     protected Realm(SaveGame saveGame)

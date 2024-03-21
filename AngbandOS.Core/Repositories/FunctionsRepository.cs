@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Repositories;
 
 [Serializable]
-internal class FunctionsRepository : DictionaryRepository<string, Function>
+internal class FunctionsRepository : DictionaryRepository<Function>
 {
     public FunctionsRepository(SaveGame saveGame) : base(saveGame) { }
 }

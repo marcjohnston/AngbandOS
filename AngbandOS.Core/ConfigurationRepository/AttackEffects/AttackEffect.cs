@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.AttackEffects;
 
 [Serializable]
-internal abstract class AttackEffect : IGetKey<string>
+internal abstract class AttackEffect : IGetKey
 {
     protected readonly SaveGame SaveGame;
     protected AttackEffect(SaveGame saveGame)

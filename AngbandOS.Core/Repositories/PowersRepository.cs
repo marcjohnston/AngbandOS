@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Repositories;
 
 [Serializable]
-internal class PowersRepository : DictionaryRepository<string, Power>
+internal class PowersRepository : DictionaryRepository<Power>
 {
     public PowersRepository(SaveGame saveGame) : base(saveGame) { }
 }

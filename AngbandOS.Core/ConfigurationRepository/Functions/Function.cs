@@ -6,7 +6,7 @@
 // copies. Other copyrights may also apply.”
 
 [Serializable]
-internal abstract class Function : IGetKey<string>, IIntChangeTracking
+internal abstract class Function : IGetKey, IIntChangeTracking
 {
     protected readonly SaveGame SaveGame;
     protected Function(SaveGame saveGame)

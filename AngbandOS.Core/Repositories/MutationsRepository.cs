@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Repositories;
 
 [Serializable]
-internal class MutationsRepository : DictionaryRepository<string, Mutation>
+internal class MutationsRepository : DictionaryRepository<Mutation>
 {
     public MutationsRepository(SaveGame saveGame) : base(saveGame) { }
 }

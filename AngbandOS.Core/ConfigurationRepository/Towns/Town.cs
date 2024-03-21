@@ -11,7 +11,7 @@ using System.Text.Json;
 namespace AngbandOS.Core.Towns;
 
 [Serializable]
-internal abstract class Town : IGetKey<string>
+internal abstract class Town : IGetKey
 {
     protected readonly SaveGame SaveGame;
 

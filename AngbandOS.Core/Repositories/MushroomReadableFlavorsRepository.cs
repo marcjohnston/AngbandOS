@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Repositories;
 
 [Serializable]
-internal class MushroomReadableFlavorsRepository : DictionaryRepository<string, MushroomReadableFlavor>
+internal class MushroomReadableFlavorsRepository : DictionaryRepository<MushroomReadableFlavor>
 {
     public MushroomReadableFlavorsRepository(SaveGame saveGame) : base(saveGame) { }
 

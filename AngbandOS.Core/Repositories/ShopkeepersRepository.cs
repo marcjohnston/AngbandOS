@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Repositories;
 
 [Serializable]
-internal class ShopkeepersRepository : DictionaryRepository<string, Shopkeeper>
+internal class ShopkeepersRepository : DictionaryRepository<Shopkeeper>
 {
     public ShopkeepersRepository(SaveGame saveGame) : base(saveGame) { }
 

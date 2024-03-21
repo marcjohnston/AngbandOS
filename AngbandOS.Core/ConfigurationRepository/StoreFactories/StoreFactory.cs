@@ -10,7 +10,7 @@ using System.Text.Json;
 namespace AngbandOS.Core.StoreFactories;
 
 [Serializable]
-internal abstract class StoreFactory : IItemFilter, IGetKey<string>
+internal abstract class StoreFactory : IItemFilter, IGetKey
 {
     protected readonly SaveGame SaveGame;
     public string GetKey => Key;

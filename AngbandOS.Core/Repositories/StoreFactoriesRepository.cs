@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Repositories;
 
 [Serializable]
-internal class StoreFactoriesRepository : DictionaryRepository<string, StoreFactory>
+internal class StoreFactoriesRepository : DictionaryRepository<StoreFactory>
 {
     public StoreFactoriesRepository(SaveGame saveGame) : base(saveGame) { }
     public override void Load()

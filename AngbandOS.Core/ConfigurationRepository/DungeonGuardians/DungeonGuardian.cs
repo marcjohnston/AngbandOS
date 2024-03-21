@@ -10,7 +10,7 @@ using System.Text.Json;
 namespace AngbandOS.Core.DungeonGuardians;
 
 [Serializable]
-internal abstract class DungeonGuardian : IGetKey<string>
+internal abstract class DungeonGuardian : IGetKey
 {
     protected readonly SaveGame SaveGame;
     protected DungeonGuardian(SaveGame saveGame)

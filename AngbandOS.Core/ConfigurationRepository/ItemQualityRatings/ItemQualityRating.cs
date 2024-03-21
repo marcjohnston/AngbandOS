@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.ItemQualityRatings;
 
 [Serializable]
-internal abstract class ItemQualityRating : IGetKey<string>
+internal abstract class ItemQualityRating : IGetKey
 {
     protected readonly SaveGame SaveGame;
     protected ItemQualityRating(SaveGame saveGame)

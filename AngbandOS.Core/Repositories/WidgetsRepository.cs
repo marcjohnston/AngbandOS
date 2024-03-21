@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Repositories;
 
 [Serializable]
-internal class WidgetsRepository : DictionaryRepository<string, Widget>
+internal class WidgetsRepository : DictionaryRepository<Widget>
 {
     public WidgetsRepository(SaveGame saveGame) : base(saveGame) { }
 }

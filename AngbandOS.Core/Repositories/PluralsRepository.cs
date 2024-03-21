@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Repositories;
 
 [Serializable]
-internal class PluralsRepository : DictionaryRepository<string, Plural>
+internal class PluralsRepository : DictionaryRepository<Plural>
 {
     public PluralsRepository(SaveGame saveGame) : base(saveGame) { }
 

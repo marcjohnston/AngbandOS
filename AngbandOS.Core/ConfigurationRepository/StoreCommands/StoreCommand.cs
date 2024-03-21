@@ -10,7 +10,7 @@ using System.Text.Json;
 namespace AngbandOS.Core.StoreCommands;
 
 [Serializable]
-internal abstract class StoreCommand : IGetKey<string>, IToJson
+internal abstract class StoreCommand : IGetKey, IToJson
 {
     protected SaveGame SaveGame { get; }
     protected StoreCommand(SaveGame saveGame)

@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Projection;
 
 [Serializable]
-internal abstract class Projectile : IGetKey<string>
+internal abstract class Projectile : IGetKey
 {
     protected readonly SaveGame SaveGame;
     protected int ProjectMn;

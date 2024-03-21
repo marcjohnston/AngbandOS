@@ -13,7 +13,7 @@ namespace AngbandOS.Core.ItemFactories;
 /// </summary>
 [Serializable]
 
-internal abstract class ItemFactory : IItemCharacteristics, IGetKey<string>
+internal abstract class ItemFactory : IItemCharacteristics, IGetKey
 {
     protected readonly SaveGame SaveGame;
 

@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Repositories;
 
 [Serializable]
-internal class HelpGroupsRepository : DictionaryRepository<string, HelpGroup>
+internal class HelpGroupsRepository : DictionaryRepository<HelpGroup>
 {
     public HelpGroupsRepository(SaveGame saveGame) : base(saveGame) { }
     public override void Load()

@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Repositories;
 
 [Serializable]
-internal class ScrollReadableFlavorsRepository : DictionaryRepository<string, ScrollReadableFlavor>
+internal class ScrollReadableFlavorsRepository : DictionaryRepository<ScrollReadableFlavor>
 {
     public ScrollReadableFlavorsRepository(SaveGame saveGame) : base(saveGame) { }
 

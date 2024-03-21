@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Mutations;
 
 [Serializable]
-internal abstract class Mutation : IGetKey<string>
+internal abstract class Mutation : IGetKey
 {
     protected readonly SaveGame SaveGame;
     protected Mutation(SaveGame saveGame)

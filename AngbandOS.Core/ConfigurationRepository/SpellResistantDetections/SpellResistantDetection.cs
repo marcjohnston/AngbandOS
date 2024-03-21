@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.SpellResistantDetections;
 
 [Serializable]
-internal abstract class SpellResistantDetection : IGetKey<string>
+internal abstract class SpellResistantDetection : IGetKey
 {
     protected readonly SaveGame SaveGame;
     protected SpellResistantDetection(SaveGame saveGame)

@@ -10,7 +10,7 @@ using System.Text.Json;
 namespace AngbandOS.Core.ProjectileGraphics;
 
 [Serializable]
-internal abstract class ProjectileGraphic : IGetKey<string>
+internal abstract class ProjectileGraphic : IGetKey
 {
     protected SaveGame SaveGame;
     protected ProjectileGraphic(SaveGame saveGame)

@@ -10,7 +10,7 @@ using System.Text.Json;
 namespace AngbandOS.Core.Commands;
 
 [Serializable]
-internal abstract class GameCommand : IGetKey<string>
+internal abstract class GameCommand : IGetKey
 {
     protected SaveGame SaveGame { get; }
     protected GameCommand(SaveGame saveGame)

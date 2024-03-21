@@ -2,7 +2,7 @@ using System.Text.Json;
 
 namespace AngbandOS.Core.Plurals;
 [Serializable]
-internal abstract class Plural : IGetKey<string>
+internal abstract class Plural : IGetKey
 {
     protected readonly SaveGame SaveGame;
     protected Plural(SaveGame saveGame)
