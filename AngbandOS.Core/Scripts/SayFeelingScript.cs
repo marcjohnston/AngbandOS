@@ -81,7 +81,7 @@ internal class SayFeelingScript : Script, IScript, IRepeatableScript
             if (Game.DangerFeeling == 1 || Game.TreasureFeeling == 1)
             {
                 string message = DangerFeelingText[1];
-                Game.MsgPrint(Game.GameTime.LevelFeel ? message : DangerFeelingText[0]);
+                Game.MsgPrint(Game.LevelFeel ? message : DangerFeelingText[0]);
             }
             else
             {
@@ -92,7 +92,7 @@ internal class SayFeelingScript : Script, IScript, IRepeatableScript
                     conjunction = ", but ";
                 }
                 string message = DangerFeelingText[Game.DangerFeeling] + conjunction + TreasureFeelingText[Game.TreasureFeeling];
-                Game.MsgPrint(Game.GameTime.LevelFeel ? message : DangerFeelingText[0]);
+                Game.MsgPrint(Game.LevelFeel ? message : DangerFeelingText[0]);
             }
         }
     }

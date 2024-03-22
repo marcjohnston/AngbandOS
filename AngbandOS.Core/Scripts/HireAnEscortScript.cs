@@ -72,7 +72,7 @@ internal class HireAnEscortScript : Script, IScript, IStoreScript, ISuccessfulSc
                         Game.NewLevelFlag = true;
                         Game.CameFrom = LevelStart.StartRandom;
                         Game.MsgPrint("The journey takes all day.");
-                        Game.GameTime.ToNextDusk();
+                        Game.ToNextDusk();
                         return true;
                     }
                 }

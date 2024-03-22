@@ -86,11 +86,11 @@ public class GameServer
     {
         get
         {
-            if (Game == null || Game.GameTime == null)
+            if (Game == null)
             {
                 return null;
             }
-            return Game.GameTime.ElapsedGameTime;
+            return Game.ElapsedGameTime;
         }
     }
 

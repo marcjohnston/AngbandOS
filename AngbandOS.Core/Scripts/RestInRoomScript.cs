@@ -21,13 +21,13 @@ internal class RestInRoomScript : Script, IScript
         bool toDusk = Game.Race.RestsTillDuskInsteadOfDawn;
         if (toDusk)
         {
-            Game.GameTime.ToNextDusk();
+            Game.ToNextDusk();
             Game.MsgPrint("You awake, ready for the night.");
             Game.MsgPrint("You eat a tasty supper.");
         }
         else
         {
-            Game.GameTime.ToNextDawn();
+            Game.ToNextDawn();
             Game.MsgPrint("You awake refreshed for the new day.");
             Game.MsgPrint("You eat a hearty breakfast.");
         }

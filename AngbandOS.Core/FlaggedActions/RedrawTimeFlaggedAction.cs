@@ -19,7 +19,7 @@ internal class RedrawTimeFlaggedAction : FlaggedAction
     {
         Game.Screen.Print(ColorEnum.White, "Time", RowTime, ColTime);
         Game.Screen.Print(ColorEnum.White, "Day", RowDate, ColDate);
-        Game.Screen.Print(ColorEnum.BrightGreen, Game.GameTime.TimeText.PadLeft(8), RowTime, ColTime + 4);
-        Game.Screen.Print(ColorEnum.BrightGreen, Game.GameTime.DateText.PadLeft(8), RowDate, ColDate + 4);
+        Game.Screen.Print(ColorEnum.BrightGreen, Game.TimeText.PadLeft(8), RowTime, ColTime + 4);
+        Game.Screen.Print(ColorEnum.BrightGreen, Game.DateText.PadLeft(8), RowDate, ColDate + 4);
     }
 }

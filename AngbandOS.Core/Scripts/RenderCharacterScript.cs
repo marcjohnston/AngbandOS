@@ -530,7 +530,7 @@ internal class RenderCharacterScript : Script, IScript, IRepeatableScript
             Game.Screen.Print(ColorEnum.Brown, Game.God.LongName, 7, 15);
         }
         Game.Screen.Print(ColorEnum.Blue, "Birthday", 2, 32);
-        string dateBuff = Game.GameTime.BirthdayText.PadLeft(8);
+        string dateBuff = Game.BirthdayText.PadLeft(8);
         Game.Screen.Print(ColorEnum.Brown, dateBuff, 2, 46);
         PrintShortScore("Age          ", Game.Age, 3, 32, ColorEnum.Brown);
         PrintShortScore("Height       ", Game.Height, 4, 32, ColorEnum.Brown);

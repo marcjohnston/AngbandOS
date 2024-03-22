@@ -14,6 +14,25 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class Game
 {
+    public bool IsBirthday;
+    public bool IsDawn;
+    public bool IsDusk;
+    public bool IsFeelTime;
+    public bool IsHalloween;
+    public bool IsMidnight;
+    public bool IsNewYear;
+
+    private const int LevelFeelDelay = 2500;
+    private const int MillisecondsPerTurn = 800;
+    private int _birthday;
+    private DateTime _currentGameDateTime;
+    private int _currentTurn;
+    private DateTime _dawn;
+    private DateTime _dusk;
+    private DateTime _gameStartDateTime;
+    private int _levelEntryTurn;
+    private TimeSpan _tick = new TimeSpan(0, 0, 0, 0, MillisecondsPerTurn);
+
     public const int DungeonCount = 20; // TODO: Use the Singleton.Dungeons.Count property
     public readonly Configuration Configuration;
     public bool IsDead;
@@ -213,7 +232,6 @@ internal class Game
     public int FractionalExperiencePoints;
     public int FractionalHealth;
     public int FractionalMana;
-    public GameTime GameTime;
     public Gender? Gender = null; // The gender will be null until the player has selected the gender.
     public int Generation; // This is how many times the character name has changed.
     public bool GetFirstLevelMutation;
@@ -3187,8 +3205,8 @@ internal class Game
             {
                 break;
             }
-            GameTime.Tick();
-            if (!GameTime.IsFeelTime)
+            Tick();
+            if (!IsFeelTime)
             {
                 continue;
             }
@@ -3561,25 +3579,25 @@ internal class Game
 
     private void ProcessWorld()
     {
-        if (GameTime.IsBirthday)
+        if (IsBirthday)
         {
             MsgPrint("Happy Birthday!");
             Acquirement(MapY, MapX, DieRoll(2) + 1, true);
             Age++;
         }
-        if (GameTime.IsNewYear)
+        if (IsNewYear)
         {
             MsgPrint("Happy New Year!");
             Acquirement(MapY, MapX, DieRoll(2) + 1, true);
         }
-        if (GameTime.IsHalloween)
+        if (IsHalloween)
         {
             MsgPrint("All Hallows Eve and the ghouls come out to play...");
             SummonSpecific(MapY, MapX, Difficulty, SingletonRepository.MonsterFilters.Get(nameof(UndeadMonsterFilter)));
         }
         if (CurrentDepth <= 0)
         {
-            if (GameTime.IsDawn)
+            if (IsDawn)
             {
                 MsgPrint("The sun has risen.");
                 for (int y = 0; y < CurHgt; y++)
@@ -3593,7 +3611,7 @@ internal class Game
                     }
                 }
             }
-            else if (GameTime.IsDusk)
+            else if (IsDusk)
             {
                 MsgPrint("The sun has fallen.");
                 for (int y = 0; y < CurHgt; y++)
@@ -3612,7 +3630,7 @@ internal class Game
             SingletonRepository.FlaggedActions.Get(nameof(UpdateMonstersFlaggedAction)).Set();
             SingletonRepository.FlaggedActions.Get(nameof(RedrawMapFlaggedAction)).Set();
         }
-        if (GameTime.IsMidnight)
+        if (IsMidnight)
         {
             DecayFavour();
             SingletonRepository.FlaggedActions.Get(nameof(UpdateHealthFlaggedAction)).Set();
@@ -3631,7 +3649,7 @@ internal class Game
                 SingletonRepository.Towns[town].Stores[store].StoreShuffle();
             }
         }
-        if (!GameTime.IsTurnTen)
+        if (!IsTurnTen)
         {
             return;
         }
@@ -3639,7 +3657,7 @@ internal class Game
         {
             AllocMonster(Constants.MaxSight + 5, false);
         }
-        if (GameTime.IsTurnHundred)
+        if (IsTurnHundred)
         {
             RegenMonsters();
         }
@@ -3706,7 +3724,7 @@ internal class Game
         }
         if (Food.Value < Constants.PyFoodMax)
         {
-            if (GameTime.IsTurnHundred)
+            if (IsTurnHundred)
             {
                 int additionalEnergy = Constants.ExtractEnergy[Speed.Value] * 2;
                 if (HasRegeneration)
@@ -4007,7 +4025,7 @@ internal class Game
         SingletonRepository.FlaggedActions.Get(nameof(RedrawStateFlaggedAction)).Check();
         SingletonRepository.FlaggedActions.Get(nameof(RedrawSpeedFlaggedAction)).Check();
         SingletonRepository.FlaggedActions.Get(nameof(RedrawStudyFlaggedAction)).Check();
-        SingletonRepository.FlaggedActions.Get(nameof(RedrawTimeFlaggedAction)).Check(true); // TODO: Trigger this from GameTime
+        SingletonRepository.FlaggedActions.Get(nameof(RedrawTimeFlaggedAction)).Check(true);
 
         // Clear the change tracking flags.
         // TODO: Other types will need to do this like functions
@@ -9057,12 +9075,201 @@ internal class Game
             Screen.Print(ColorEnum.Green, buf, y, x);
         }
     }
+    public TimeSpan ElapsedGameTime
+    {
+        get
+        {
+            return _currentGameDateTime - _gameStartDateTime;
+        }
+    }
+
+    public string BirthdayText
+    {
+        get
+        {
+            return _gameStartDateTime.ToString("MMM d");
+        }
+    }
+
+    public string DateText
+    {
+        get
+        {
+            return _currentGameDateTime.ToString("MMM d");
+        }
+    }
+
+    public bool IsLight
+    {
+        get
+        {
+            return (_currentGameDateTime >= _dawn) && (_currentGameDateTime <= _dusk);
+        }
+    }
+
+    public bool IsTurnHundred
+    {
+        get
+        {
+            return _currentTurn % 100 == 0;
+        }
+    }
+
+    public bool IsTurnTen
+    {
+        get
+        {
+            return _currentTurn % 10 == 0;
+        }
+    }
+
+    public bool LevelFeel
+    {
+        get
+        {
+            return (_currentTurn - _levelEntryTurn) >= LevelFeelDelay;
+        }
+    }
+
+    public string TimeText
+    {
+        get
+        {
+            return _currentGameDateTime.ToString("h:mmtt");
+        }
+    }
+
+    public int Turn
+    {
+        get
+        {
+            return _currentTurn;
+        }
+    }
+
+    public void MarkLevelEntry()
+    {
+        _levelEntryTurn = _currentTurn;
+    }
+
+    public void Tick()
+    {
+        var oldDay = _currentGameDateTime.DayOfYear;
+        _currentTurn++;
+        var oldDateTime = _currentGameDateTime;
+        _currentGameDateTime += _tick;
+        var newDay = _currentGameDateTime.DayOfYear;
+        IsBirthday = false;
+        IsDawn = false;
+        IsDusk = false;
+        IsFeelTime = false;
+        IsHalloween = false;
+        IsMidnight = false;
+        IsNewYear = false;
+        if (_currentTurn - _levelEntryTurn == LevelFeelDelay)
+        {
+            IsFeelTime = true;
+        }
+        if (oldDay != newDay)
+        {
+            IsMidnight = true;
+            RecalculateDawnAndDusk();
+            if (newDay == 1)
+            {
+                IsNewYear = true;
+            }
+            if (newDay == _birthday)
+            {
+                IsBirthday = true;
+            }
+            if (newDay == 305)
+            {
+                IsHalloween = true;
+            }
+        }
+        if (oldDateTime < _dawn && _currentGameDateTime >= _dawn)
+        {
+            IsDawn = true;
+        }
+        if (oldDateTime < _dusk && _currentGameDateTime >= _dusk)
+        {
+            IsDusk = true;
+        }
+        var year = _currentGameDateTime.Year;
+        if (year > 1297)
+        {
+            _currentGameDateTime = _currentGameDateTime.AddYears(1297 - year);
+        }
+
+        // Send an update to the calling application, that the game time has changed.
+        ConsoleViewPort.GameTimeElapsed();
+    }
+
+    public void ToNextDawn()
+    {
+        var midnight = new DateTime(_currentGameDateTime.Year, _currentGameDateTime.Month, _currentGameDateTime.Day, 0, 0, 0);
+        midnight += new TimeSpan(1, 0, 0, 0);
+        _currentGameDateTime = midnight;
+        RecalculateDawnAndDusk();
+        _currentGameDateTime = _dawn;
+        ReverseEngineerTurn();
+        Tick();
+    }
+
+    public void ToNextDusk()
+    {
+        var midnight = new DateTime(_currentGameDateTime.Year, _currentGameDateTime.Month, _currentGameDateTime.Day, 0, 0, 0);
+        midnight += new TimeSpan(1, 0, 0, 0);
+        _currentGameDateTime = midnight;
+        RecalculateDawnAndDusk();
+        _currentGameDateTime = _dusk;
+        ReverseEngineerTurn();
+        Tick();
+    }
+
+    private void RecalculateDawnAndDusk()
+    {
+        var midnight = new DateTime(_currentGameDateTime.Year, _currentGameDateTime.Month, _currentGameDateTime.Day, 0, 0, 0);
+        var n = midnight.DayOfYear;
+        var delta = 23.45 * Math.Sin((360.0 / 365.0 * (n + 284)) * (Math.PI / 180.0)) * (Math.PI / 180.0);
+        const double phi = 50.838 * (Math.PI / 180.0);
+        var omega = Math.Acos(Math.Tan(delta) * -Math.Tan(phi)) * (180.0 / Math.PI);
+        var sunriseHoursBeforeNoon = omega / 15.0;
+        var sunrise = TimeSpan.FromHours(12.0 - sunriseHoursBeforeNoon);
+        sunrise = new TimeSpan(0, 0, 0, (int)sunrise.TotalSeconds, 0);
+        var sunset = TimeSpan.FromHours(12.0 + sunriseHoursBeforeNoon);
+        sunset = new TimeSpan(0, 0, 0, (int)sunset.TotalSeconds, 0);
+        _dawn = midnight + sunrise;
+        _dusk = midnight + sunset;
+    }
+
+    private void ReverseEngineerTurn()
+    {
+        var totalTime = _currentGameDateTime - _gameStartDateTime;
+        var milliseconds = totalTime.TotalMilliseconds;
+        _currentTurn = (int)(milliseconds / MillisecondsPerTurn);
+    }
 
     public void GetAhw()
     {
         Age = Race.BaseAge + DieRoll(Race.AgeRange);
+
         bool startAtDusk = Race.RestsTillDuskInsteadOfDawn;
-        GameTime = new GameTime(this, DieRoll(365), startAtDusk);
+        int startDate = DieRoll(365);
+        _currentGameDateTime = new DateTime(1297, 1, 1, 0, 0, 0, 0);
+        _currentGameDateTime = _currentGameDateTime.AddDays(startDate - 1);
+        _birthday = startDate;
+        RecalculateDawnAndDusk();
+        if (startAtDusk)
+        {
+            _gameStartDateTime = _dusk;
+        }
+        else
+        {
+            _gameStartDateTime = _dawn;
+        }
+        _currentGameDateTime = _gameStartDateTime;
+        Tick();
 
         if (Gender.Index == Constants.SexMale)
         {
@@ -10091,7 +10298,7 @@ internal class Game
             // Reset the level so that we can attempt again.
             WipeMList();
         }
-        GameTime.MarkLevelEntry();
+        MarkLevelEntry();
     }
 
     private void BuildField(int yy, int xx)
@@ -11523,7 +11730,7 @@ internal class Game
         MakeCornerTowers(WildernessX, WildernessY);
         MakeTownContents();
         ResolvePaths();
-        if (GameTime.IsLight)
+        if (IsLight)
         {
             for (int y = 0; y < CurHgt; y++)
             {
@@ -11641,7 +11848,7 @@ internal class Game
                 }
             }
         }
-        if (this.GameTime.IsLight)
+        if (IsLight)
         {
             for (y = 0; y < CurHgt; y++)
             {

@@ -140,7 +140,7 @@ internal class VampireRace : Race
         if (Game.CurrentDepth <= 0 && 
             !Game.HasLightResistance &&
             Game.InvulnerabilityTimer.Value == 0 &&
-            Game.GameTime.IsLight)
+            Game.IsLight)
         {
             if (Game.Grid[Game.MapY][Game.MapX].TileFlags.IsSet(GridTile.SelfLit))
             {
