@@ -4026,7 +4026,6 @@ internal class Game
         SingletonRepository.FlaggedActions.Get(nameof(RedrawStateFlaggedAction)).Check();
         SingletonRepository.FlaggedActions.Get(nameof(RedrawSpeedFlaggedAction)).Check();
         SingletonRepository.FlaggedActions.Get(nameof(RedrawStudyFlaggedAction)).Check();
-        SingletonRepository.FlaggedActions.Get(nameof(RedrawTimeFlaggedAction)).Check(true);
 
         // Clear the change tracking flags.
         // TODO: Other types will need to do this like functions
@@ -9092,14 +9091,6 @@ internal class Game
         }
     }
 
-    public string DateText
-    {
-        get
-        {
-            return CurrentGameDateTime.Value.ToString("MMM d");
-        }
-    }
-
     public bool IsLight
     {
         get
@@ -9129,14 +9120,6 @@ internal class Game
         get
         {
             return (_currentTurn - _levelEntryTurn) >= LevelFeelDelay;
-        }
-    }
-
-    public string TimeText
-    {
-        get
-        {
-            return CurrentGameDateTime.Value.ToString("h:mmtt");
         }
     }
 
