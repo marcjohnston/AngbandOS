@@ -5,13 +5,12 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Widgets;
+namespace AngbandOS.Core.Interfaces;
 
-[Serializable]
-internal class MainFormMapWidget : MapWidget
+internal interface IPutWidget
 {
-    private MainFormMapWidget(Game game) : base(game) { } // This object is a singleton.
-    public override int X => 13;
-    public override int Y => 1;
-    public override string MapChangeTrackingName => nameof(MapProperty);
+    void MoveCursorRelative(int row, int col);
+    void PutChar(ColorEnum attr, char ch, int row, int col);
+    void Print(ColorEnum attr, char ch, int row, int col); // TODO: Should use PutChar
 }
+

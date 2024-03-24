@@ -12,6 +12,42 @@ internal class MainForm : Form
 {
     private MainForm(Game game) : base(game) { } // This object is a singleton.
 
+    public void MoveCursorRelative(int row, int col)
+    {
+        foreach (Widget widget in Widgets) // TODO: Need a repo for IPutWidget
+        {
+            if (typeof(IPutWidget).IsAssignableFrom(widget.GetType()))
+            {
+                IPutWidget putWidget = (IPutWidget)widget;
+                putWidget.MoveCursorRelative(row, col);
+            }
+        }
+    }
+
+    public void PutChar(ColorEnum attr, char ch, int row, int col)
+    {
+        foreach (Widget widget in Widgets) // TODO: Need a repo for IPutWidget
+        {
+            if (typeof(IPutWidget).IsAssignableFrom(widget.GetType()))
+            {
+                IPutWidget putWidget = (IPutWidget)widget;
+                putWidget.PutChar(attr, ch, row, col);
+            }
+        }
+    }
+
+    public void Print(ColorEnum attr, char ch, int row, int col)
+    {
+        foreach (Widget widget in Widgets) // TODO: Need a repo for IPutWidget
+        {
+            if (typeof(IPutWidget).IsAssignableFrom(widget.GetType()))
+            {
+                IPutWidget putWidget = (IPutWidget)widget;
+                putWidget.Print(attr, ch, row, col);
+            }
+        }
+    }
+
     protected override string[] WidgetNames => new string[]
     {
         nameof(AfraidWidget),

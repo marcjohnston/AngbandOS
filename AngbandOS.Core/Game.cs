@@ -584,16 +584,6 @@ internal class Game
     /// </summary>
     public int PanelRowMin;
 
-    /// <summary>
-    /// Returns the first level row that is visible in the viewport.
-    /// </summary>
-    public int PanelRowPrt;
-
-    /// <summary>
-    /// Returns the first level column that is visible in the viewport.
-    /// </summary>
-    public int PanelColPrt;
-
     public bool SpecialDanger;
     public bool SpecialTreasure;
     public int TempN;
@@ -14370,10 +14360,8 @@ internal class Game
     {
         PanelRow = PanelRowMin / (Constants.PlayableScreenHeight / 2);
         PanelRowMax = PanelRowMin + Constants.PlayableScreenHeight - 1;
-        PanelRowPrt = PanelRowMin - 1;
         PanelCol = PanelColMin / (Constants.PlayableScreenWidth / 2);
         PanelColMax = PanelColMin + Constants.PlayableScreenWidth - 1;
-        PanelColPrt = PanelColMin - 13;
     }
 
     public void Acquirement(int y1, int x1, int num, bool great)
@@ -14866,7 +14854,7 @@ internal class Game
     /// <param name="col"></param>
     public void MoveCursorRelative(int row, int col)
     {
-        Screen.Goto(row - PanelRowPrt, col - PanelColPrt);
+        MainForm.MoveCursorRelative(row, col); // TODO: 
     }
 
     public void MoveOneStepTowards(out int newY, out int newX, int currentY, int currentX, int startY, int startX, int targetY, int targetX)
@@ -15111,7 +15099,7 @@ internal class Game
             {
                 a = ColorEnum.Black;
             }
-            Screen.PutChar(a, c, y - PanelRowPrt, x - PanelColPrt);
+            MainForm.PutChar(a, c, y, x);
         }
     }
 
@@ -15152,7 +15140,7 @@ internal class Game
             {
                 a = ColorEnum.Black;
             }
-            Screen.Print(a, c, y - PanelRowPrt, x - PanelColPrt);
+            MainForm.Print(a, c, y, x);
         }
     }
 

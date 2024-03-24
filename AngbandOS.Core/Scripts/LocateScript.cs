@@ -92,10 +92,8 @@ internal class LocateScript : Script, IScript, IRepeatableScript
                 Game.PanelCol = currentCol;
                 Game.PanelRowMin = Game.PanelRow * (Constants.PlayableScreenHeight / 2);
                 Game.PanelRowMax = Game.PanelRowMin + Constants.PlayableScreenHeight - 1;
-                Game.PanelRowPrt = Game.PanelRowMin - 1;
                 Game.PanelColMin = Game.PanelCol * (Constants.PlayableScreenWidth / 2);
                 Game.PanelColMax = Game.PanelColMin + Constants.PlayableScreenWidth - 1;
-                Game.PanelColPrt = Game.PanelColMin - 13;
                 Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateMonstersFlaggedAction)).Set();
                 Game.Map.SetChangedFlag();
                 Game.HandleStuff();
