@@ -10,7 +10,7 @@ using System.Diagnostics;
 namespace AngbandOS.Core.Widgets;
 
 [Serializable]
-internal class ExperiencePointsForNextLevelAtMaxWidget : Widget
+internal class ExperiencePointsForNextLevelAtMaxWidget : TextWidget
 {
     private ExperiencePointsForNextLevelAtMaxWidget(Game game) : base(game) { } // This object is a singleton.
 

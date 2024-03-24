@@ -5,13 +5,12 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Widgets;
+namespace AngbandOS.Core.Interfaces;
 
-[Serializable]
-internal class HealthPointsLabelWidget : TextWidget
+/// <summary>
+/// Represents the interface that a class needs to implement to participate in change tracking for an integer value.  This interface adds an Int value signature to the 
+/// change trackable interface and is used by DynamicWidgets to render integer values that change.
+/// </summary>
+internal interface IMapChangeTracking : IChangeTracking
 {
-    private HealthPointsLabelWidget(Game game) : base(game) { } // This object is a singleton.
-    public override int X => 0;
-    public override int Y => 24;
-    public override string Text => "Cur HP";
 }

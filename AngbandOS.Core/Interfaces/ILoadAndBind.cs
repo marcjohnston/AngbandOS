@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Interfaces;
 /// <summary>
 /// Represents the interface a singleton repository entity needs to implement so that it can participate in the load and bind phases.
 /// </summary>
-internal interface ILoadable
+internal interface ILoadAndBind
 {
     void Load();
     void Bind();

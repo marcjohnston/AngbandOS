@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Widgets;
 
 [Serializable]
-internal class ExperiencePointsLabelWidget : Widget
+internal class ExperiencePointsLabelWidget : TextWidget
 {
     private ExperiencePointsLabelWidget(Game game) : base(game) { } // This object is a singleton.
     public override int X => 0;

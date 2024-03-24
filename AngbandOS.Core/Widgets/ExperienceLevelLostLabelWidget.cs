@@ -10,7 +10,7 @@
 namespace AngbandOS.Core.Widgets;
 
 [Serializable]
-internal class ExperienceLevelLostLabelWidget : Widget
+internal class ExperienceLevelLostLabelWidget : TextWidget
 {
     private ExperienceLevelLostLabelWidget(Game game) : base(game) { } // This object is a singleton.
     public override int X => 0;

@@ -9,7 +9,7 @@
 namespace AngbandOS.Core.Widgets;
 
 [Serializable]
-internal class CurrentTimeLabelWidget : Widget
+internal class CurrentTimeLabelWidget : TextWidget
 {
     private CurrentTimeLabelWidget(Game game) : base(game) { } // This object is a singleton.
     public override int X => 0;

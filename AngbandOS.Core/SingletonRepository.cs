@@ -14,7 +14,7 @@ namespace AngbandOS.Core;
 internal class SingletonRepository
 {
     private readonly Game Game;
-    private readonly List<ILoadable> _repositories = new();
+    private readonly List<ILoadAndBind> _repositories = new();
 
     public ActivationsRepository Activations;
     public AlterActionsRepository AlterActions;
@@ -103,7 +103,7 @@ internal class SingletonRepository
         Game = game;
     }
 
-    private T AddRepository<T>(T repository) where T : ILoadable
+    private T AddRepository<T>(T repository) where T : ILoadAndBind
     {
         _repositories.Add(repository);
         return repository;
@@ -111,7 +111,7 @@ internal class SingletonRepository
 
     private void LoadRepositoryItems()
     {
-        foreach (ILoadable repository in _repositories)
+        foreach (ILoadAndBind repository in _repositories)
         {
             repository.Load();
         }
@@ -119,7 +119,7 @@ internal class SingletonRepository
 
     private void BindRepositoryItems()
     {
-        foreach (ILoadable repository in _repositories)
+        foreach (ILoadAndBind repository in _repositories)
         {
             repository.Bind();
         }

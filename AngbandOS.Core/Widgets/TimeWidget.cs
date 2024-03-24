@@ -10,7 +10,7 @@ using Timer = AngbandOS.Core.Timers.Timer;
 namespace AngbandOS.Core.Widgets;
 
 [Serializable]
-internal abstract class TimeWidget : Widget
+internal abstract class TimeWidget : TextWidget
 {
     protected TimeWidget(Game game) : base(game) { }
     public abstract string DateTimeChangeTrackingName { get; }

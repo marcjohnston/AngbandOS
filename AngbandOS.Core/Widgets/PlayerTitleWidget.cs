@@ -10,7 +10,7 @@
 namespace AngbandOS.Core.Widgets;
 
 [Serializable]
-internal class PlayerTitleWidget : Widget
+internal class PlayerTitleWidget : TextWidget
 {
     private PlayerTitleWidget(Game game) : base(game) { } // This object is a singleton.
     public override int X => 0;

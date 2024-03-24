@@ -5,13 +5,15 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Widgets;
+namespace AngbandOS.Core.Properties;
 
 [Serializable]
-internal class HealthPointsLabelWidget : TextWidget
+internal class MapProperty : Property, IMapChangeTracking
 {
-    private HealthPointsLabelWidget(Game game) : base(game) { } // This object is a singleton.
-    public override int X => 0;
-    public override int Y => 24;
-    public override string Text => "Cur HP";
+    private MapProperty(Game game) : base(game) { } // This object is a singleton.
+
+    public new void SetChangedFlag() // TODO: This method expose the ability to flag the property as updated because the dependencies on the Grid and Panels are complex.
+    {
+        base.SetChangedFlag();
+    }
 }

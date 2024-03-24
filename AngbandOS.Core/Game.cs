@@ -14,6 +14,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class Game
 {
+    public readonly MapProperty Map;
     public bool IsBirthday;
     public bool IsDawn;
     public bool IsDusk;
@@ -663,6 +664,7 @@ internal class Game
         IsWizard = (IsWizardBoolProperty)SingletonRepository.Properties.Get(nameof(IsWizardBoolProperty));
         PlayerName = (PlayerNameStringProperty)SingletonRepository.Properties.Get(nameof(PlayerNameStringProperty));
         CurrentGameDateTime = (CurrentGameDateTimeProperty)SingletonRepository.Properties.Get(nameof(CurrentGameDateTimeProperty));
+        Map = (MapProperty)SingletonRepository.Properties.Get(nameof(MapProperty));
 
         AcidResistanceTimer = (AcidResistanceTimer)SingletonRepository.TimedActions.Get(nameof(Timers.AcidResistanceTimer));
         BleedingTimer = (BleedingTimer)SingletonRepository.TimedActions.Get(nameof(Timers.BleedingTimer));
@@ -3104,7 +3106,7 @@ internal class Game
         SingletonRepository.FlaggedActions.Get(nameof(RedrawEquippyFlaggedAction)).Set();
         SingletonRepository.FlaggedActions.Get(nameof(PrExtraRedrawActionGroupSetFlaggedAction)).Set();
         SingletonRepository.FlaggedActions.Get(nameof(PrBasicRedrawActionGroupSetFlaggedAction)).Set();
-        SingletonRepository.FlaggedActions.Get(nameof(RedrawMapFlaggedAction)).Set();
+        Map.SetChangedFlag();
         SingletonRepository.FlaggedActions.Get(nameof(UpdateHealthFlaggedAction)).Set();
         SingletonRepository.FlaggedActions.Get(nameof(UpdateManaFlaggedAction)).Set();
         SingletonRepository.FlaggedActions.Get(nameof(UpdateSpellsFlaggedAction)).Set();
@@ -3629,7 +3631,7 @@ internal class Game
                 }
             }
             SingletonRepository.FlaggedActions.Get(nameof(UpdateMonstersFlaggedAction)).Set();
-            SingletonRepository.FlaggedActions.Get(nameof(RedrawMapFlaggedAction)).Set();
+            Map.SetChangedFlag();
         }
         if (IsMidnight)
         {
@@ -4017,7 +4019,6 @@ internal class Game
             widget.Update();
         }
 
-        SingletonRepository.FlaggedActions.Get(nameof(RedrawMapFlaggedAction)).Check();
         SingletonRepository.FlaggedActions.Get(nameof(RedrawEquippyFlaggedAction)).Check();
         SingletonRepository.FlaggedActions.Get(nameof(RedrawStatsFlaggedAction)).Check();
         SingletonRepository.FlaggedActions.Get(nameof(RedrawDepthFlaggedAction)).Check();
@@ -4430,7 +4431,7 @@ internal class Game
         SingletonRepository.FlaggedActions.Get(nameof(UpdateLightFlaggedAction)).Set();
         SingletonRepository.FlaggedActions.Get(nameof(UpdateViewFlaggedAction)).Set();
         SingletonRepository.FlaggedActions.Get(nameof(UpdateMonstersFlaggedAction)).Set();
-        SingletonRepository.FlaggedActions.Get(nameof(RedrawMapFlaggedAction)).Set();
+        Map.SetChangedFlag();
     }
 
     public bool DestroyDoor(int dir)
@@ -4580,7 +4581,7 @@ internal class Game
             }
         }
         SingletonRepository.FlaggedActions.Get(nameof(RedrawDTrapFlaggedAction)).Set();
-        SingletonRepository.FlaggedActions.Get(nameof(RedrawMapFlaggedAction)).Set();
+        Map.SetChangedFlag();
         if (detect)
         {
             MsgPrint("You sense the presence of traps!");
@@ -4908,7 +4909,7 @@ internal class Game
         SingletonRepository.FlaggedActions.Get(nameof(UpdateViewFlaggedAction)).Set();
         SingletonRepository.FlaggedActions.Get(nameof(UpdateDistancesFlaggedAction)).Set();
         SingletonRepository.FlaggedActions.Get(nameof(RedrawMonsterHealthFlaggedAction)).Set();
-        SingletonRepository.FlaggedActions.Get(nameof(RedrawMapFlaggedAction)).Set();
+        Map.SetChangedFlag();
     }
 
     public void ElecDam(int dam, string kbStr)
@@ -6853,7 +6854,7 @@ internal class Game
         SingletonRepository.FlaggedActions.Get(nameof(UpdateLightFlaggedAction)).Set();
         SingletonRepository.FlaggedActions.Get(nameof(UpdateViewFlaggedAction)).Set();
         SingletonRepository.FlaggedActions.Get(nameof(UpdateDistancesFlaggedAction)).Set();
-        SingletonRepository.FlaggedActions.Get(nameof(RedrawMapFlaggedAction)).Set();
+        Map.SetChangedFlag();
         // If we're not actively searching, then have a chance of doing it passively
         if (SkillSearchFrequency >= 50 || 0 == RandomLessThan(50 - SkillSearchFrequency))
         {
@@ -7918,7 +7919,7 @@ internal class Game
         item.Y = MapY;
         item.X = MapX;
         NoteSpot(MapY, MapX);
-        SingletonRepository.FlaggedActions.Get(nameof(RedrawMapFlaggedAction)).Set();
+        Map.SetChangedFlag();
     }
 
     /// <summary>
@@ -12885,7 +12886,7 @@ internal class Game
         PanelColMin = pcolMin;
         PanelBoundsCenter();
         SingletonRepository.FlaggedActions.Get(nameof(UpdateMonstersFlaggedAction)).Set();
-        SingletonRepository.FlaggedActions.Get(nameof(RedrawMapFlaggedAction)).Set();
+        Map.SetChangedFlag();
     }
 
     public void ChangeRace(Race newRace)

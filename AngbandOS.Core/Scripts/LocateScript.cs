@@ -97,7 +97,7 @@ internal class LocateScript : Script, IScript, IRepeatableScript
                 Game.PanelColMax = Game.PanelColMin + Constants.PlayableScreenWidth - 1;
                 Game.PanelColPrt = Game.PanelColMin - 13;
                 Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateMonstersFlaggedAction)).Set();
-                Game.SingletonRepository.FlaggedActions.Get(nameof(RedrawMapFlaggedAction)).Set();
+                Game.Map.SetChangedFlag();
                 Game.HandleStuff();
             }
         }
@@ -105,7 +105,7 @@ internal class LocateScript : Script, IScript, IRepeatableScript
         // We've finished, so snap back to the player's location
         Game.RecenterScreenAroundPlayer();
         Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateMonstersFlaggedAction)).Set();
-        Game.SingletonRepository.FlaggedActions.Get(nameof(RedrawMapFlaggedAction)).Set();
+        Game.Map.SetChangedFlag();
         Game.HandleStuff();
     }
 }

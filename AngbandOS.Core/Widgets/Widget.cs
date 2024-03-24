@@ -42,55 +42,12 @@ internal abstract class Widget : IGetKey
 
     public virtual (string conditionalName, bool isTrue)[]? EnabledConditionalNames => null;
 
-    /// <summary>
-    /// Returns the text to be rendered for the widget.
-    /// </summary>
-    public abstract string Text { get; }
-
-    /// <summary>
-    /// Returns the color that the widget <see cref="Text"/> will be drawn.  Returns the color white by default.
-    /// </summary>
-    public virtual ColorEnum Color => ColorEnum.White;
-
-    /// <summary>
-    /// Returns the x-coordinate on the <see cref="Form"/> where the widget will be drawn.
-    /// </summary>
-    public abstract int X { get; }
-
-    /// <summary>
-    /// Returns the y-coordinate on the <see cref="Form"/> where the widget will be drawn.
-    /// </summary>
-    public abstract int Y { get; }
-
-    /// <summary>
-    /// Returns the width of the widget.  A width that is equal to the length of the <see cref="Text"/> property is returned by default.
-    /// </summary>
-    public virtual int Width => Text.Length;
-
-    /// <summary>
-    /// Returns the height of the widget.  A height of 1 is returned by default.
-    /// </summary>
-    public virtual int Height => 1;
-
-    /// <summary>
-    /// Returns the <see cref="Justification"/> object to be used to justify the text within the <see cref="Width"/> of the <see cref="Widget"/>.  This property is bound using
-    /// the <see cref="JustificationName"/> property during the bind phase.
-    /// </summary>
-    protected Justification? Justification { get; private set; }
-
-    /// <summary>
-    /// Returns the name of the <see cref="Justification"/> object to be used to justify the text within the <see cref="Width"/> of the <see cref="Widget" />.  This property
-    /// is used to bind the <see cref="Justification"/> property.  Defaults to <see cref="LeftJustification"/>.
-    /// </summary>
-    public virtual string? JustificationName => nameof(LeftJustification);
     public virtual string Key => GetType().Name;
 
     public string GetKey => Key;
 
     public virtual void Bind()
     {
-        Justification = JustificationName == null ? null : Game.SingletonRepository.Justifications.Get(JustificationName);
-
         if (EnabledConditionalNames == null)
         {
             Enabled = null;
@@ -128,15 +85,7 @@ internal abstract class Widget : IGetKey
     /// <summary>
     /// Paint the widget on the screen.  No checks or resets of the validation status are or should be performed during this method.
     /// </summary>
-    protected virtual void Paint()
-    {
-        string justifiedText = Text;
-        if (Justification != null)
-        {
-            justifiedText = Justification.Format(justifiedText, Width);
-        }
-        Game.Screen.Print(Color, justifiedText, Y, X);
-    }
+    protected abstract void Paint();
 
     /// <summary>
     /// Update the widget on the screen, if the widget needs to be redrawn.  The widget will be redrawn, if the widget was invalidated or the derived widget returns true

@@ -22,7 +22,7 @@ internal class HallucinationsTimer : Timer
     }
     protected override void Noticed()
     {
-        Game.SingletonRepository.FlaggedActions.Get(nameof(RedrawMapFlaggedAction)).Set();
+        Game.Map.SetChangedFlag();
         Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateMonstersFlaggedAction)).Set();
         base.Noticed();
     }

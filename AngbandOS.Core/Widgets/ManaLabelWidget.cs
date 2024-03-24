@@ -9,7 +9,7 @@
 namespace AngbandOS.Core.Widgets;
 
 [Serializable]
-internal class ManaLabelWidget : Widget
+internal class ManaLabelWidget : TextWidget
 {
     private ManaLabelWidget(Game game) : base(game) { } // This object is a singleton.
     public override int X => 0;

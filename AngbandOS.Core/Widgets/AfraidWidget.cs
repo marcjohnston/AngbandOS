@@ -15,10 +15,6 @@ internal class AfraidWidget : RangedWidget
     public override int Y => 44;
     public override int Width => 6;
     public override string IntChangeTrackingName => nameof(FearTimer);
-    public override void Bind()
-    {
-        base.Bind();
-    }
     public override (int, string, ColorEnum)[] Ranges => new (int, string, ColorEnum)[]
     {
         (1, "Afraid", ColorEnum.Orange),

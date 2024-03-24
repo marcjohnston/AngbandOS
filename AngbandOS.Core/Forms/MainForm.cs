@@ -40,6 +40,7 @@ internal class MainForm : Form
         nameof(HungerWidget),
         nameof(ManaLabelWidget),
         nameof(ManaWidget),
+        nameof(MainFormMapWidget),
         nameof(MaxHealthPointsLabelWidget),
         nameof(MaxHealthPointsWidget),
         nameof(MaxManaLabelWidget),

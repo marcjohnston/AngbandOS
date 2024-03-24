@@ -10,7 +10,7 @@ using Timer = AngbandOS.Core.Timers.Timer;
 namespace AngbandOS.Core.Widgets;
 
 [Serializable]
-internal abstract class IntWidget : Widget
+internal abstract class IntWidget : TextWidget
 {
     protected IntWidget(Game game) : base(game) { }
     public abstract string IntChangeTrackingName { get; }
