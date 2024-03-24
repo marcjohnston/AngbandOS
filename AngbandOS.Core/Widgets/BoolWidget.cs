@@ -26,7 +26,7 @@ internal abstract class BoolWidget : TextWidget
         }
         else
         {
-            Timer? timer = Game.SingletonRepository.TimedActions.TryGet(BoolChangeTrackingName);
+            Timer? timer = Game.SingletonRepository.Timers.TryGet(BoolChangeTrackingName);
             if (timer != null)
             {
                 BoolChangeTracking = (IBoolChangeTracking)timer;

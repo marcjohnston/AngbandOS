@@ -26,7 +26,7 @@ internal abstract class StringWidget : TextWidget
         }
         else
         {
-            Timer? timer = Game.SingletonRepository.TimedActions.TryGet(StringChangeTrackingName);
+            Timer? timer = Game.SingletonRepository.Timers.TryGet(StringChangeTrackingName);
             if (timer != null)
             {
                 StringChangeTracking = (IStringChangeTracking)timer;

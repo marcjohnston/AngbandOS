@@ -102,7 +102,7 @@ internal class LightProjectile : Projectile
         {
             Game.EtherealnessTimer.SetValue();
             Game.MsgPrint("The light forces you out of your incorporeal shadow form.");
-            Game.Map.SetChangedFlag();
+            Game.Map.SetChangedFlag(); // TODO: Needs to convert to dependencies in the MapWidget
             Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateMonstersFlaggedAction)).Set();
         }
         return true;

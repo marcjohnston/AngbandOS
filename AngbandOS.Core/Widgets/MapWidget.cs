@@ -37,7 +37,7 @@ internal abstract class MapWidget : Widget, IPutWidget
         }
         else
         {
-            Timer? timer = Game.SingletonRepository.TimedActions.TryGet(MapChangeTrackingName);
+            Timer? timer = Game.SingletonRepository.Timers.TryGet(MapChangeTrackingName);
             if (timer != null)
             {
                 MapChangeTracking = (IMapChangeTracking)timer;

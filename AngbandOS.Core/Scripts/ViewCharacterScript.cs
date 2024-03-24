@@ -65,7 +65,7 @@ internal class ViewCharacterScript : Script, IScript, IRepeatableScript, IStoreS
         Game.SetBackground(BackgroundImageEnum.Overhead);
         Game.Screen.Restore(savedScreen);
         Game.FullScreenOverlay = false;
-        Game.Map.SetChangedFlag();
+        Game.Map.SetChangedFlag(); // TODO: Needs to convert to dependencies in the MapWidget
         Game.SingletonRepository.FlaggedActions.Get(nameof(RedrawEquippyFlaggedAction)).Set();
         Game.SingletonRepository.FlaggedActions.Get(nameof(PrExtraRedrawActionGroupSetFlaggedAction)).Set();
         Game.SingletonRepository.FlaggedActions.Get(nameof(PrBasicRedrawActionGroupSetFlaggedAction)).Set();

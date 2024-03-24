@@ -89,7 +89,7 @@ internal class SingletonRepository
     public SymbolsRepository Symbols;
     public TalentsRepository Talents;
     public TilesRepository Tiles;
-    public TimedActionsRepository TimedActions;
+    public TimersRepository Timers;
     public TownsRepository Towns;
     public UnreadableFlavorSyllablesRepository UnreadableFlavorSyllables;
     public VaultsRepository Vaults;
@@ -206,7 +206,7 @@ internal class SingletonRepository
         Symbols = AddRepository<SymbolsRepository>(new SymbolsRepository(Game));
         Talents = AddRepository<TalentsRepository>(new TalentsRepository(Game));
         Tiles = AddRepository<TilesRepository>(new TilesRepository(Game));
-        TimedActions = AddRepository<TimedActionsRepository>(new TimedActionsRepository(Game));
+        Timers = AddRepository<TimersRepository>(new TimersRepository(Game));
         Towns = AddRepository<TownsRepository>(new TownsRepository(Game));
         UnreadableFlavorSyllables = AddRepository<UnreadableFlavorSyllablesRepository>(new UnreadableFlavorSyllablesRepository(Game));
         Vaults = AddRepository<VaultsRepository>(new VaultsRepository(Game));

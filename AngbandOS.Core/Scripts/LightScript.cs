@@ -45,6 +45,6 @@ internal class LightScript : Script, IScript
             }
         }
         Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateMonstersFlaggedAction)).Set();
-        Game.Map.SetChangedFlag();
+        Game.Map.SetChangedFlag(); // TODO: Needs to convert to dependencies in the MapWidget
     }
 }

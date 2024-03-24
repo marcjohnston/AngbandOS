@@ -14,7 +14,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class Game
 {
-    public readonly MapProperty Map;
+    public readonly RefreshMapProperty Map;
     public bool IsBirthday;
     public bool IsDawn;
     public bool IsDusk;
@@ -654,33 +654,33 @@ internal class Game
         IsWizard = (IsWizardBoolProperty)SingletonRepository.Properties.Get(nameof(IsWizardBoolProperty));
         PlayerName = (PlayerNameStringProperty)SingletonRepository.Properties.Get(nameof(PlayerNameStringProperty));
         CurrentGameDateTime = (CurrentGameDateTimeProperty)SingletonRepository.Properties.Get(nameof(CurrentGameDateTimeProperty));
-        Map = (MapProperty)SingletonRepository.Properties.Get(nameof(MapProperty));
+        Map = (RefreshMapProperty)SingletonRepository.Properties.Get(nameof(RefreshMapProperty));
 
-        AcidResistanceTimer = (AcidResistanceTimer)SingletonRepository.TimedActions.Get(nameof(Timers.AcidResistanceTimer));
-        BleedingTimer = (BleedingTimer)SingletonRepository.TimedActions.Get(nameof(Timers.BleedingTimer));
-        BlessingTimer = (BlessingTimer)SingletonRepository.TimedActions.Get(nameof(Timers.BlessingTimer));
-        BlindnessTimer = (BlindnessTimer)SingletonRepository.TimedActions.Get(nameof(Timers.BlindnessTimer));
-        ColdResistanceTimer = (ColdResistanceTimer)SingletonRepository.TimedActions.Get(nameof(Timers.ColdResistanceTimer));
-        ConfusedTimer = (ConfusedTimer)SingletonRepository.TimedActions.Get(nameof(Timers.ConfusedTimer));
-        EtherealnessTimer = (EtherealnessTimer)SingletonRepository.TimedActions.Get(nameof(Timers.EtherealnessTimer));
-        FearTimer = (FearTimer)SingletonRepository.TimedActions.Get(nameof(Timers.FearTimer));
-        FireResistanceTimer = (FireResistanceTimer)SingletonRepository.TimedActions.Get(nameof(Timers.FireResistanceTimer));
-        HallucinationsTimer = (HallucinationsTimer)SingletonRepository.TimedActions.Get(nameof(Timers.HallucinationsTimer));
-        HasteTimer = (HasteTimer)SingletonRepository.TimedActions.Get(nameof(Timers.HasteTimer));
-        HeroismTimer = (HeroismTimer)SingletonRepository.TimedActions.Get(nameof(Timers.HeroismTimer));
-        InfravisionTimer = (InfravisionTimer)SingletonRepository.TimedActions.Get(nameof(Timers.InfravisionTimer));
-        InvulnerabilityTimer = (InvulnerabilityTimer)SingletonRepository.TimedActions.Get(nameof(Timers.InvulnerabilityTimer));
-        LightningResistanceTimer = (LightningResistanceTimer)SingletonRepository.TimedActions.Get(nameof(Timers.LightningResistanceTimer));
-        ParalysisTimer = (ParalysisTimer)SingletonRepository.TimedActions.Get(nameof(Timers.ParalysisTimer));
-        PoisonTimer = (PoisonedTimer)SingletonRepository.TimedActions.Get(nameof(Timers.PoisonedTimer));
-        PoisonResistanceTimer = (PoisonResistanceTimer)SingletonRepository.TimedActions.Get(nameof(Timers.PoisonResistanceTimer));
-        ProtectionFromEvilTimer = (ProtectionFromEvilTimer)SingletonRepository.TimedActions.Get(nameof(Timers.ProtectionFromEvilTimer));
-        SeeInvisibilityTimer = (SeeInvisibilityTimer)SingletonRepository.TimedActions.Get(nameof(Timers.SeeInvisibilityTimer));
-        SlowTimer = (SlowTimer)SingletonRepository.TimedActions.Get(nameof(Timers.SlowTimer));
-        StoneskinTimer = (StoneskinTimer)SingletonRepository.TimedActions.Get(nameof(Timers.StoneskinTimer));
-        StunTimer = (StunnedTimer)SingletonRepository.TimedActions.Get(nameof(Timers.StunnedTimer));
-        SuperheroismTimer = (SuperHeroismTimer)SingletonRepository.TimedActions.Get(nameof(SuperHeroismTimer));
-        TelepathyTimer = (TelepathyTimer)SingletonRepository.TimedActions.Get(nameof(Timers.TelepathyTimer));
+        AcidResistanceTimer = (AcidResistanceTimer)SingletonRepository.Timers.Get(nameof(Timers.AcidResistanceTimer));
+        BleedingTimer = (BleedingTimer)SingletonRepository.Timers.Get(nameof(Timers.BleedingTimer));
+        BlessingTimer = (BlessingTimer)SingletonRepository.Timers.Get(nameof(Timers.BlessingTimer));
+        BlindnessTimer = (BlindnessTimer)SingletonRepository.Timers.Get(nameof(Timers.BlindnessTimer));
+        ColdResistanceTimer = (ColdResistanceTimer)SingletonRepository.Timers.Get(nameof(Timers.ColdResistanceTimer));
+        ConfusedTimer = (ConfusedTimer)SingletonRepository.Timers.Get(nameof(Timers.ConfusedTimer));
+        EtherealnessTimer = (EtherealnessTimer)SingletonRepository.Timers.Get(nameof(Timers.EtherealnessTimer));
+        FearTimer = (FearTimer)SingletonRepository.Timers.Get(nameof(Timers.FearTimer));
+        FireResistanceTimer = (FireResistanceTimer)SingletonRepository.Timers.Get(nameof(Timers.FireResistanceTimer));
+        HallucinationsTimer = (HallucinationsTimer)SingletonRepository.Timers.Get(nameof(Timers.HallucinationsTimer));
+        HasteTimer = (HasteTimer)SingletonRepository.Timers.Get(nameof(Timers.HasteTimer));
+        HeroismTimer = (HeroismTimer)SingletonRepository.Timers.Get(nameof(Timers.HeroismTimer));
+        InfravisionTimer = (InfravisionTimer)SingletonRepository.Timers.Get(nameof(Timers.InfravisionTimer));
+        InvulnerabilityTimer = (InvulnerabilityTimer)SingletonRepository.Timers.Get(nameof(Timers.InvulnerabilityTimer));
+        LightningResistanceTimer = (LightningResistanceTimer)SingletonRepository.Timers.Get(nameof(Timers.LightningResistanceTimer));
+        ParalysisTimer = (ParalysisTimer)SingletonRepository.Timers.Get(nameof(Timers.ParalysisTimer));
+        PoisonTimer = (PoisonedTimer)SingletonRepository.Timers.Get(nameof(Timers.PoisonedTimer));
+        PoisonResistanceTimer = (PoisonResistanceTimer)SingletonRepository.Timers.Get(nameof(Timers.PoisonResistanceTimer));
+        ProtectionFromEvilTimer = (ProtectionFromEvilTimer)SingletonRepository.Timers.Get(nameof(Timers.ProtectionFromEvilTimer));
+        SeeInvisibilityTimer = (SeeInvisibilityTimer)SingletonRepository.Timers.Get(nameof(Timers.SeeInvisibilityTimer));
+        SlowTimer = (SlowTimer)SingletonRepository.Timers.Get(nameof(Timers.SlowTimer));
+        StoneskinTimer = (StoneskinTimer)SingletonRepository.Timers.Get(nameof(Timers.StoneskinTimer));
+        StunTimer = (StunnedTimer)SingletonRepository.Timers.Get(nameof(Timers.StunnedTimer));
+        SuperheroismTimer = (SuperHeroismTimer)SingletonRepository.Timers.Get(nameof(SuperHeroismTimer));
+        TelepathyTimer = (TelepathyTimer)SingletonRepository.Timers.Get(nameof(Timers.TelepathyTimer));
 
         MainForm = (MainForm)SingletonRepository.Forms.Get(nameof(MainForm));
 
@@ -3096,7 +3096,7 @@ internal class Game
         SingletonRepository.FlaggedActions.Get(nameof(RedrawEquippyFlaggedAction)).Set();
         SingletonRepository.FlaggedActions.Get(nameof(PrExtraRedrawActionGroupSetFlaggedAction)).Set();
         SingletonRepository.FlaggedActions.Get(nameof(PrBasicRedrawActionGroupSetFlaggedAction)).Set();
-        Map.SetChangedFlag();
+        Map.SetChangedFlag(); // TODO: Needs to convert to dependencies in the MapWidget
         SingletonRepository.FlaggedActions.Get(nameof(UpdateHealthFlaggedAction)).Set();
         SingletonRepository.FlaggedActions.Get(nameof(UpdateManaFlaggedAction)).Set();
         SingletonRepository.FlaggedActions.Get(nameof(UpdateSpellsFlaggedAction)).Set();
@@ -3621,7 +3621,7 @@ internal class Game
                 }
             }
             SingletonRepository.FlaggedActions.Get(nameof(UpdateMonstersFlaggedAction)).Set();
-            Map.SetChangedFlag();
+            Map.SetChangedFlag(); // TODO: Needs to convert to dependencies in the MapWidget
         }
         if (IsMidnight)
         {
@@ -4421,7 +4421,7 @@ internal class Game
         SingletonRepository.FlaggedActions.Get(nameof(UpdateLightFlaggedAction)).Set();
         SingletonRepository.FlaggedActions.Get(nameof(UpdateViewFlaggedAction)).Set();
         SingletonRepository.FlaggedActions.Get(nameof(UpdateMonstersFlaggedAction)).Set();
-        Map.SetChangedFlag();
+        Map.SetChangedFlag(); // TODO: Needs to convert to dependencies in the MapWidget
     }
 
     public bool DestroyDoor(int dir)
@@ -4571,7 +4571,7 @@ internal class Game
             }
         }
         SingletonRepository.FlaggedActions.Get(nameof(RedrawDTrapFlaggedAction)).Set();
-        Map.SetChangedFlag();
+        Map.SetChangedFlag(); // TODO: Needs to convert to dependencies in the MapWidget
         if (detect)
         {
             MsgPrint("You sense the presence of traps!");
@@ -4899,7 +4899,7 @@ internal class Game
         SingletonRepository.FlaggedActions.Get(nameof(UpdateViewFlaggedAction)).Set();
         SingletonRepository.FlaggedActions.Get(nameof(UpdateDistancesFlaggedAction)).Set();
         SingletonRepository.FlaggedActions.Get(nameof(RedrawMonsterHealthFlaggedAction)).Set();
-        Map.SetChangedFlag();
+        Map.SetChangedFlag(); // TODO: Needs to convert to dependencies in the MapWidget
     }
 
     public void ElecDam(int dam, string kbStr)
@@ -6844,7 +6844,7 @@ internal class Game
         SingletonRepository.FlaggedActions.Get(nameof(UpdateLightFlaggedAction)).Set();
         SingletonRepository.FlaggedActions.Get(nameof(UpdateViewFlaggedAction)).Set();
         SingletonRepository.FlaggedActions.Get(nameof(UpdateDistancesFlaggedAction)).Set();
-        Map.SetChangedFlag();
+        Map.SetChangedFlag(); // TODO: Needs to convert to dependencies in the MapWidget
         // If we're not actively searching, then have a chance of doing it passively
         if (SkillSearchFrequency >= 50 || 0 == RandomLessThan(50 - SkillSearchFrequency))
         {
@@ -7909,7 +7909,7 @@ internal class Game
         item.Y = MapY;
         item.X = MapX;
         NoteSpot(MapY, MapX);
-        Map.SetChangedFlag();
+        Map.SetChangedFlag(); // TODO: Needs to convert to dependencies in the MapWidget
     }
 
     /// <summary>
@@ -12876,7 +12876,7 @@ internal class Game
         PanelColMin = pcolMin;
         PanelBoundsCenter();
         SingletonRepository.FlaggedActions.Get(nameof(UpdateMonstersFlaggedAction)).Set();
-        Map.SetChangedFlag();
+        Map.SetChangedFlag(); // TODO: Needs to convert to dependencies in the MapWidget
     }
 
     public void ChangeRace(Race newRace)

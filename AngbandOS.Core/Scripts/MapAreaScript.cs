@@ -60,6 +60,6 @@ internal class MapAreaScript : Script, IScript
                 }
             }
         }
-        Game.Map.SetChangedFlag();
+        Game.Map.SetChangedFlag(); // TODO: Needs to convert to dependencies in the MapWidget
     }
 }

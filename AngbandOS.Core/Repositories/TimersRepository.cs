@@ -5,15 +5,12 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Properties;
+using Timer = AngbandOS.Core.Timers.Timer;
+
+namespace AngbandOS.Core.Repositories;
 
 [Serializable]
-internal class MapProperty : Property, IMapChangeTracking
+internal class TimersRepository : DictionaryRepository<Timer>
 {
-    private MapProperty(Game game) : base(game) { } // This object is a singleton.
-
-    public new void SetChangedFlag() // TODO: This method expose the ability to flag the property as updated because the dependencies on the Grid and Panels are complex.
-    {
-        base.SetChangedFlag();
-    }
+    public TimersRepository(Game game) : base(game) { }
 }

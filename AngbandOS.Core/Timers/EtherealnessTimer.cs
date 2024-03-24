@@ -21,7 +21,7 @@ internal class EtherealnessTimer : Timer
     }
     protected override void Noticed()
     {
-        Game.Map.SetChangedFlag();
+        Game.Map.SetChangedFlag(); // TODO: Needs to convert to dependencies in the MapWidget
         Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateMonstersFlaggedAction)).Set();
         Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
         base.Noticed();

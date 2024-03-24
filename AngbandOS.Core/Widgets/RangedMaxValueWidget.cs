@@ -48,7 +48,7 @@ internal abstract class RangedMaxValueWidget : IntWidget
         }
         else
         {
-            Timer? timer = Game.SingletonRepository.TimedActions.TryGet(MaxIntChangeTrackableName);
+            Timer? timer = Game.SingletonRepository.Timers.TryGet(MaxIntChangeTrackableName);
             if (timer != null)
             {
                 MaxIntChangeTrackable = (IIntChangeTracking)timer;

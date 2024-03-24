@@ -6,6 +6,8 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using Timer = AngbandOS.Core.Timers.Timer;
+
 [Serializable]
 internal abstract class Function : IGetKey, IChangeTracking
 {
@@ -44,8 +46,31 @@ internal abstract class Function : IGetKey, IChangeTracking
             List<IChangeTracking> conditionalList = new();
             foreach (string dependencyName in DependencyNames)
             {
-                Property property = Game.SingletonRepository.Properties.Get(dependencyName);
-                conditionalList.Add(property);
+                Property? property = Game.SingletonRepository.Properties.TryGet(dependencyName);
+                if (property != null)
+                {
+                    conditionalList.Add(property);
+                }
+                else
+                {
+                    Function? function = Game.SingletonRepository.Functions.TryGet(dependencyName);
+                    if (function != null)
+                    {
+                        conditionalList.Add(function);
+                    }
+                    else
+                    {
+                        Timer? timer = Game.SingletonRepository.Timers.TryGet(dependencyName);
+                        if (timer != null)
+                        {
+                            conditionalList.Add(timer);
+                        }
+                        else
+                        {
+                            throw new Exception($"{dependencyName} dependency not found as {nameof(Property)}, {nameof(Timer)} or {nameof(Function)}.");
+                        }
+                    }
+                }
             }
             Dependencies = conditionalList.ToArray();
         }

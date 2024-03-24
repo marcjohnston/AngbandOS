@@ -26,7 +26,7 @@ internal abstract class TimeWidget : TextWidget
         }
         else
         {
-            Timer? timer= Game.SingletonRepository.TimedActions.TryGet(DateTimeChangeTrackingName);
+            Timer? timer= Game.SingletonRepository.Timers.TryGet(DateTimeChangeTrackingName);
             if (timer != null)
             {
                 DateTimeChangeTracking = (IDateTimeChangeTracking)timer;
