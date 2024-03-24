@@ -535,7 +535,7 @@ internal class Screen
     }
 
     /// <summary>
-    /// Places a character without moving the text position
+    /// Print a character in a specified color at a specified location without moving the curosr.  The location is checked to ensure it is on the screen.
     /// </summary>
     /// <param name="attr"> The color to use for the character </param>
     /// <param name="ch"> The character to place </param>
@@ -559,14 +559,14 @@ internal class Screen
     }
 
     /// <summary>
-    /// Prints a string on the screen, without moving the cursor.  No checks are made to ensure the string fits on the string.
+    /// Prints a string on the screen in a specified color, without moving the cursor.  No checks are made to ensure the string fits on the string.
     /// </summary>
     /// <param name="x"> The x location to display the string </param>
     /// <param name="y"> The y location to display the string </param>
     /// <param name="n"> The number of characters to display (-1 for all) </param>
     /// <param name="a"> The color in which to display the string </param>
     /// <param name="s"> The string to print </param>
-    public void RenderString(int x, int y, ColorEnum a, string s)
+    private void RenderString(int x, int y, ColorEnum a, string s)
     {
         int? x1 = null;
         int? x2 = null;

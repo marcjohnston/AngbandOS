@@ -5,7 +5,6 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-using static System.Net.Mime.MediaTypeNames;
 using Timer = AngbandOS.Core.Timers.Timer;
 
 namespace AngbandOS.Core.Widgets;
@@ -114,12 +113,5 @@ internal abstract class MapWidget : Widget, IPutWidget
         int offsetX = Game.PanelColMin - X;
         int offsetY = Game.PanelRowMin - Y;
         Game.Screen.PutChar(attr, ch, row - offsetY, col -+ offsetX);// TODO: The - is weird and should be +
-    }
-
-    public void Print(ColorEnum attr, char ch, int row, int col) // TODO: Should use PutChar
-    {
-        int offsetX = Game.PanelColMin - X;
-        int offsetY = Game.PanelRowMin - Y;
-        Game.Screen.Print(attr, ch, row - offsetY, col - offsetX); // TODO: The - is weird and should be +
     }
 }

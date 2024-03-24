@@ -36,18 +36,6 @@ internal class MainForm : Form
         }
     }
 
-    public void Print(ColorEnum attr, char ch, int row, int col)
-    {
-        foreach (Widget widget in Widgets) // TODO: Need a repo for IPutWidget
-        {
-            if (typeof(IPutWidget).IsAssignableFrom(widget.GetType()))
-            {
-                IPutWidget putWidget = (IPutWidget)widget;
-                putWidget.Print(attr, ch, row, col);
-            }
-        }
-    }
-
     protected override string[] WidgetNames => new string[]
     {
         nameof(AfraidWidget),

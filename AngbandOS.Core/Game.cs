@@ -15091,15 +15091,34 @@ internal class Game
     {
         if (PanelContains(y, x))
         {
-            if (InvulnerabilityTimer.Value != 0)
-            {
-                a = ColorEnum.White;
-            }
-            else if (EtherealnessTimer.Value != 0)
-            {
-                a = ColorEnum.Black;
-            }
-            MainForm.PutChar(a, c, y, x);
+            PutMapChar(c, a, y, x);
+        }
+    }
+
+    private void PutMapChar(char c, ColorEnum a, int y, int x)
+    {
+        if (InvulnerabilityTimer.Value != 0)
+        {
+            a = ColorEnum.White;
+        }
+        else if (EtherealnessTimer.Value != 0)
+        {
+            a = ColorEnum.Black;
+        }
+        MainForm.PutChar(a, c, y, x);
+    }
+
+    /// <summary>
+    /// Moves the cursor to a specific map location and redraws the map location.
+    /// </summary>
+    /// <param name="y"></param>
+    /// <param name="x"></param>
+    public void RedrawSingleLocation(int y, int x)
+    {
+        if (PanelContains(y, x)) // TODO: This check is now done twice.
+        {
+            MapInfo(y, x, out ColorEnum a, out char c);
+            PutMapChar(c, a, y, x);
         }
     }
 
@@ -15120,28 +15139,6 @@ internal class Game
             MoveOneStepTowards(out y, out x, y, x, y1, x1, y2, x2);
         }
         return false;
-    }
-
-    /// <summary>
-    /// Moves the cursor to a specific map location and redraws the map location.
-    /// </summary>
-    /// <param name="y"></param>
-    /// <param name="x"></param>
-    public void RedrawSingleLocation(int y, int x)
-    {
-        if (PanelContains(y, x))
-        {
-            MapInfo(y, x, out ColorEnum a, out char c);
-            if (InvulnerabilityTimer.Value != 0)
-            {
-                a = ColorEnum.White;
-            }
-            else if (EtherealnessTimer.Value != 0)
-            {
-                a = ColorEnum.Black;
-            }
-            MainForm.Print(a, c, y, x);
-        }
     }
 
     public void ReplacePets(int y, int x, List<Monster> petList)

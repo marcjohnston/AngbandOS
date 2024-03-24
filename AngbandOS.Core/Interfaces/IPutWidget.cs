@@ -11,6 +11,5 @@ internal interface IPutWidget
 {
     void MoveCursorRelative(int row, int col);
     void PutChar(ColorEnum attr, char ch, int row, int col);
-    void Print(ColorEnum attr, char ch, int row, int col); // TODO: Should use PutChar
 }
 
