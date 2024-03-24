@@ -118,7 +118,7 @@ internal abstract class Projectile : IGetKey
             {
                 if (ImpactProjectileGraphic != null)
                 {
-                    Game.PrintCharacterAtMapLocation(ImpactProjectileGraphic.Character, ImpactProjectileGraphic.Color, y, x);
+                    Game.MainForm.PutCharAtMapLocation(ImpactProjectileGraphic.Character, ImpactProjectileGraphic.Color, y, x);
                 }
             }
             cPtr = Game.Grid[y][x];
@@ -155,12 +155,12 @@ internal abstract class Projectile : IGetKey
                         {
                             directionalCharacter = BoltChar(y, x, y9, x9);
                         }
-                        Game.PrintCharacterAtMapLocation(directionalCharacter, BoltProjectileGraphic.Color, y9, x9);
-                        Game.MoveCursorRelative(y9, x9);
+                        Game.MainForm.PutCharAtMapLocation(directionalCharacter, BoltProjectileGraphic.Color, y9, x9);
+                        Game.MainForm.GotoMapLocation(y9, x9);
                         Game.UpdateScreen();
                         visual = true;
                         Game.Pause(msec); // This actually allows the screen to update.
-                        Game.RedrawSingleLocation(y9, x9);
+                        Game.MainForm.RefreshMapLocation(y9, x9);
                         Game.UpdateScreen();
                     }
                 }
@@ -297,13 +297,13 @@ internal abstract class Projectile : IGetKey
                         if (ImpactProjectileGraphic != null)
                         {
                             drawn = true;
-                            Game.PrintCharacterAtMapLocation(ImpactProjectileGraphic.Character, ImpactProjectileGraphic.Color, y, x);
+                            Game.MainForm.PutCharAtMapLocation(ImpactProjectileGraphic.Character, ImpactProjectileGraphic.Color, y, x);
                         }
                     }
                 }
                 if (ImpactProjectileGraphic != null)
                 {
-                    Game.MoveCursorRelative(y2, x2);
+                    Game.MainForm.GotoMapLocation(y2, x2);
                     Game.UpdateScreen();
                     if (visual || drawn)
                     {
@@ -319,10 +319,10 @@ internal abstract class Projectile : IGetKey
                     x = gx[i];
                     if (Game.PlayerHasLosBold(y, x) && Game.PanelContains(y, x))
                     {
-                        Game.RedrawSingleLocation(y, x);
+                        Game.MainForm.RefreshMapLocation(y, x);
                     }
                 }
-                Game.MoveCursorRelative(y2, x2);
+                Game.MainForm.GotoMapLocation(y2, x2);
                 Game.UpdateScreen();
             }
         }
@@ -564,7 +564,7 @@ internal abstract class Projectile : IGetKey
 
         GridTile newGridTile = Game.Grid[mPtr.MapY][mPtr.MapX];
         Game.UpdateMonsterVisibility(newGridTile.MonsterIndex, false);
-        Game.RedrawSingleLocation(y, x);
+        Game.MainForm.RefreshMapLocation(y, x);
         ProjectMn++;
         ProjectMx = mPtr.MapX;
         ProjectMy = mPtr.MapY;

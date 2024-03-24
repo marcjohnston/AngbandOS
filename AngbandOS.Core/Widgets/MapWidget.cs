@@ -82,7 +82,7 @@ internal abstract class MapWidget : Widget, IPutWidget
                 Game.Screen.Print(a, c, y - offsetY, x - offsetX); // TODO: The - is weird and should be +
             }
         }
-        Game.RedrawSingleLocation(Game.MapY, Game.MapX);
+        Game.MainForm.RefreshMapLocation(Game.MapY, Game.MapX);
 
         // Restore the cursor visible.
         Game.Screen.CursorVisible = v;
@@ -101,7 +101,12 @@ internal abstract class MapWidget : Widget, IPutWidget
         base.Update();
     }
 
-    public void MoveCursorRelative(int row, int col)
+    /// <summary>
+    /// Locate the cursor in the viewport at a specific level grid x, y coordinate.
+    /// </summary>
+    /// <param name="row"></param>
+    /// <param name="col"></param>
+    public void Goto(int row, int col)
     {
         int offsetX = Game.PanelColMin - X;
         int offsetY = Game.PanelRowMin - Y;

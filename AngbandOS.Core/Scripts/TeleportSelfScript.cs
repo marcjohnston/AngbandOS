@@ -74,7 +74,7 @@ internal class TeleportSelfScript : Script, IScript, IScriptInt
         int ox = Game.MapX;
         Game.MapY = y;
         Game.MapX = x;
-        Game.RedrawSingleLocation(oy, ox);
+        Game.MainForm.RefreshMapLocation(oy, ox);
         while (xx < 2)
         {
             int yy = -1;
@@ -101,7 +101,7 @@ internal class TeleportSelfScript : Script, IScript, IScriptInt
             }
             xx++;
         }
-        Game.RedrawSingleLocation(Game.MapY, Game.MapX);
+        Game.MainForm.RefreshMapLocation(Game.MapY, Game.MapX);
         Game.RecenterScreenAroundPlayer();
         Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateScentFlaggedAction)).Set();
         Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateLightFlaggedAction)).Set();
@@ -184,7 +184,7 @@ internal class TeleportSelfScript : Script, IScript, IScriptInt
         mPtr.MapY = ny;
         mPtr.MapX = nx;
         Game.UpdateMonsterVisibility(mIdx, true);
-        Game.RedrawSingleLocation(oy, ox);
-        Game.RedrawSingleLocation(ny, nx);
+        Game.MainForm.RefreshMapLocation(oy, ox);
+        Game.MainForm.RefreshMapLocation(ny, nx);
     }
 }

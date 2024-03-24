@@ -1049,8 +1049,8 @@ internal class Monster : IItemContainer
                 MapY = newY;
                 MapX = newX;
                 Game.UpdateMonsterVisibility(GetMonsterIndex(), true);
-                Game.RedrawSingleLocation(oldY, oldX);
-                Game.RedrawSingleLocation(newY, newX);
+                Game.MainForm.RefreshMapLocation(oldY, oldX);
+                Game.MainForm.RefreshMapLocation(newY, newX);
                 // If we are hostile and the player saw us move, then game.Disturb them
                 if (IsVisible && (IndividualMonsterFlags & Constants.MflagView) != 0)
                 {
@@ -3012,8 +3012,8 @@ internal class Monster : IItemContainer
         MapY = ny;
         MapX = nx;
         game.UpdateMonsterVisibility(GetMonsterIndex(), true);
-        game.RedrawSingleLocation(oy, ox);
-        game.RedrawSingleLocation(ny, nx);
+        game.MainForm.RefreshMapLocation(oy, ox);
+        game.MainForm.RefreshMapLocation(ny, nx);
     }
 
     /// <summary>

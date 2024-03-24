@@ -26,7 +26,7 @@ internal class DarkWeakProjectile : Projectile
             cPtr.TileFlags.Clear(GridTile.PlayerMemorized);
             Game.NoteSpot(y, x);
         }
-        Game.RedrawSingleLocation(y, x);
+        Game.MainForm.RefreshMapLocation(y, x);
         if (cPtr.MonsterIndex != 0)
         {
             Game.UpdateMonsterVisibility(cPtr.MonsterIndex, false);

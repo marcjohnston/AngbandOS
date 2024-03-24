@@ -38,7 +38,7 @@ internal class DetectNormalMonstersScript : Script, IScript, ISuccessfulScript
                 Game.RepairMonsters = true;
                 mPtr.IndividualMonsterFlags |= Constants.MflagMark | Constants.MflagShow;
                 mPtr.IsVisible = true;
-                Game.RedrawSingleLocation(y, x);
+                Game.MainForm.RefreshMapLocation(y, x);
                 flag = true;
             }
         }

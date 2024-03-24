@@ -16,7 +16,7 @@ internal class RemoveLightFlaggedAction : FlaggedAction
         foreach (GridCoordinate gridCoordinate in Game.Light)
         {
             Game.Grid[gridCoordinate.Y][gridCoordinate.X].TileFlags.Clear(GridTile.PlayerLit);
-            Game.RedrawSingleLocation(gridCoordinate.Y, gridCoordinate.X);
+            Game.MainForm.RefreshMapLocation(gridCoordinate.Y, gridCoordinate.X);
 
         }
         Game.Light.Clear();

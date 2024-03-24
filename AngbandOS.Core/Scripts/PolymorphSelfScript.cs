@@ -60,7 +60,7 @@ internal class PolymorphSelfScript : Script, IScript, IRepeatableScript
                         Game.MsgPrint($"You turn into {newRace.IndefiniteArticleForTitle} {newRace.Title}!");
                         Game.ChangeRace(newRace);
                     }
-                    Game.RedrawSingleLocation(Game.MapY, Game.MapX);
+                    Game.MainForm.RefreshMapLocation(Game.MapY, Game.MapX);
                     moreEffects = false;
                     break;
 

@@ -9,7 +9,13 @@ namespace AngbandOS.Core.Interfaces;
 
 internal interface IPutWidget
 {
-    void MoveCursorRelative(int row, int col);
+    /// <summary>
+    /// Locate the cursor in the viewport at a specific level grid x, y coordinate.
+    /// </summary>
+    /// <param name="row"></param>
+    /// <param name="col"></param>
+    void Goto(int row, int col);
+
     void PutChar(ColorEnum attr, char ch, int row, int col);
 }
 

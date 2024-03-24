@@ -40,7 +40,7 @@ internal class NewLifePotionItemFactory : PotionItemFactory
             var oldRaceName = Game.RaceAtBirth.Title;
             Game.MsgPrint($"You feel more {oldRaceName} again.");
             Game.ChangeRace(Game.RaceAtBirth);
-            Game.RedrawSingleLocation(Game.MapY, Game.MapX);
+            Game.MainForm.RefreshMapLocation(Game.MapY, Game.MapX);
         }
         return true;
     }

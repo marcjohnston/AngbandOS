@@ -22,7 +22,7 @@ internal class LightWeakProjectile : Projectile
         bool obvious = false;
         cPtr.TileFlags.Set(GridTile.SelfLit);
         Game.NoteSpot(y, x);
-        Game.RedrawSingleLocation(y, x);
+        Game.MainForm.RefreshMapLocation(y, x);
         if (Game.PlayerCanSeeBold(y, x))
         {
             obvious = true;

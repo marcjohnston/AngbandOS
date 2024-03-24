@@ -29,7 +29,7 @@ internal class DetectNormalObjectsScript : Script, IScript, ISuccessfulScript
                     if (oPtr.Category != ItemTypeEnum.Gold)
                     {
                         oPtr.Marked = true;
-                        Game.RedrawSingleLocation(y, x);
+                        Game.MainForm.RefreshMapLocation(y, x);
                         detect = true;
                     }
                 }

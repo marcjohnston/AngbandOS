@@ -38,7 +38,7 @@ internal class AnnihilationScript : Script, IScript
             Game.DeleteMonsterByIndex(i, true);
             Game.TakeHit(Game.DieRoll(4), "the strain of casting Annihilation");
             Game.Mana.Value++;
-            Game.MoveCursorRelative(Game.MapY, Game.MapX);
+            Game.MainForm.GotoMapLocation(Game.MapY, Game.MapX);
             Game.HandleStuff();
             Game.UpdateScreen();
             Game.Pause(Constants.DelayFactorInMilliseconds);

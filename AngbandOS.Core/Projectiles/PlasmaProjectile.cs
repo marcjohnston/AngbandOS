@@ -81,7 +81,7 @@ internal class PlasmaProjectile : Projectile
                     PotionItemFactory potion = (PotionItemFactory)oPtr.Factory;
                     potion.Smash(who, y, x);
                 }
-                Game.RedrawSingleLocation(y, x);
+                Game.MainForm.RefreshMapLocation(y, x);
             }
         }
         return obvious;

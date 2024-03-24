@@ -414,7 +414,7 @@ internal class UpdateViewFlaggedAction : FlaggedAction
                 continue;
             }
             Game.NoteSpot(gridCoordinate.Y, gridCoordinate.X);
-            Game.RedrawSingleLocation(gridCoordinate.Y, gridCoordinate.X);
+            Game.MainForm.RefreshMapLocation(gridCoordinate.Y, gridCoordinate.X);
         }
         for (n = 0; n < Game.TempN; n++)
         {
@@ -426,7 +426,7 @@ internal class UpdateViewFlaggedAction : FlaggedAction
             {
                 continue;
             }
-            Game.RedrawSingleLocation(y, x);
+            Game.MainForm.RefreshMapLocation(y, x);
         }
         Game.TempN = 0;
     }

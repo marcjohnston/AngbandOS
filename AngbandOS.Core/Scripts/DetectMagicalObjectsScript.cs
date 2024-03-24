@@ -40,7 +40,7 @@ internal class DetectMagicalObjectsScript : Script, IScript
                         oPtr.BonusArmorClass > 0 || oPtr.BonusToHit + oPtr.BonusDamage > 0)
                     {
                         oPtr.Marked = true;
-                        Game.RedrawSingleLocation(y, x);
+                        Game.MainForm.RefreshMapLocation(y, x);
                         detect = true;
                     }
                 }
