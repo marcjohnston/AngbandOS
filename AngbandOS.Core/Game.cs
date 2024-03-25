@@ -3093,23 +3093,19 @@ internal class Game
         // Invalidate the main screen.
         MainForm.Invalidate();
 
+        // TOSO: These flagged actions are not part of the main form yet
         SingletonRepository.FlaggedActions.Get(nameof(RedrawEquippyFlaggedAction)).Set();
         SingletonRepository.FlaggedActions.Get(nameof(PrExtraRedrawActionGroupSetFlaggedAction)).Set();
         SingletonRepository.FlaggedActions.Get(nameof(PrBasicRedrawActionGroupSetFlaggedAction)).Set();
-        Map.SetChangedFlag(); // TODO: Needs to convert to dependencies in the MapWidget
         SingletonRepository.FlaggedActions.Get(nameof(UpdateHealthFlaggedAction)).Set();
         SingletonRepository.FlaggedActions.Get(nameof(UpdateManaFlaggedAction)).Set();
         SingletonRepository.FlaggedActions.Get(nameof(UpdateSpellsFlaggedAction)).Set();
         SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
         SingletonRepository.FlaggedActions.Get(nameof(UpdateTorchRadiusFlaggedAction)).Set();
-        UpdateStuff();
-        RedrawStuff();
         SingletonRepository.FlaggedActions.Get(nameof(UpdateScentFlaggedAction)).Set();
         SingletonRepository.FlaggedActions.Get(nameof(UpdateDistancesFlaggedAction)).Set();
         SingletonRepository.FlaggedActions.Get(nameof(UpdateLightFlaggedAction)).Set();
         SingletonRepository.FlaggedActions.Get(nameof(UpdateViewFlaggedAction)).Set();
-        UpdateStuff();
-        RedrawStuff();
         CharacterXtra = false;
         SingletonRepository.FlaggedActions.Get(nameof(UpdateHealthFlaggedAction)).Set();
         SingletonRepository.FlaggedActions.Get(nameof(UpdateManaFlaggedAction)).Set();
