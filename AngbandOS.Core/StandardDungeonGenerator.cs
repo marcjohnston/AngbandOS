@@ -281,8 +281,10 @@ internal class StandardDungeonGenerator : DungeonGenerator
                         {
                             cPtr.RevertToBackground();
                         }
-                        cPtr.TileFlags.Clear(GridTile.InRoom | GridTile.InVault);
-                        cPtr.TileFlags.Clear(GridTile.PlayerMemorized | GridTile.SelfLit);
+                        cPtr.InVault = false;
+                        cPtr.InRoom = false;
+                        cPtr.PlayerMemorized = false;
+                        cPtr.SelfLit = false;
                     }
                 }
             }
@@ -544,7 +546,7 @@ internal class StandardDungeonGenerator : DungeonGenerator
                 {
                     continue;
                 }
-                bool isRoom = Game.Grid[y][x].TileFlags.IsSet(GridTile.InRoom);
+                bool isRoom = Game.Grid[y][x].InRoom;
                 if (set == _allocSetCorr && isRoom)
                 {
                     continue;
@@ -601,7 +603,7 @@ internal class StandardDungeonGenerator : DungeonGenerator
             {
                 continue;
             }
-            if (cPtr.TileFlags.IsSet(GridTile.InRoom))
+            if (cPtr.InRoom)
             {
                 continue;
             }
@@ -636,7 +638,7 @@ internal class StandardDungeonGenerator : DungeonGenerator
         {
             return;
         }
-        if (Game.Grid[y][x].TileFlags.IsSet(GridTile.InRoom))
+        if (Game.Grid[y][x].InRoom)
         {
             return;
         }
@@ -758,7 +760,7 @@ internal class StandardDungeonGenerator : DungeonGenerator
                     }
                 }
             }
-            else if (cPtr.TileFlags.IsSet(GridTile.InRoom))
+            else if (cPtr.InRoom)
             {
                 row1 = tmpRow;
                 col1 = tmpCol;

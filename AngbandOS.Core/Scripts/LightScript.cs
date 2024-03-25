@@ -30,12 +30,12 @@ internal class LightScript : Script, IScript
                         int yy = y + Game.OrderedDirectionYOffset[i];
                         int xx = x + Game.OrderedDirectionXOffset[i];
                         cPtr = Game.Grid[yy][xx];
-                        cPtr.TileFlags.Set(GridTile.SelfLit);
+                        cPtr.SelfLit = true;
                         if (!cPtr.FeatureType.IsOpenFloor)
                         {
-                            cPtr.TileFlags.Set(GridTile.PlayerMemorized);
+                            cPtr.PlayerMemorized = true;
                         }
-                        cPtr.TileFlags.Set(GridTile.PlayerMemorized);
+                        cPtr.PlayerMemorized = true;
                     }
                 }
                 foreach (Item oPtr in cPtr.Items)

@@ -39,10 +39,10 @@ internal class Type3RoomLayout : RoomLayout
             {
                 cPtr = Game.Grid[y][x];
                 cPtr.RevertToBackground();
-                cPtr.TileFlags.Set(GridTile.InRoom);
+                cPtr.InRoom = true;
                 if (light)
                 {
-                    cPtr.TileFlags.Set(GridTile.SelfLit);
+                    cPtr.SelfLit = true;
                 }
             }
         }
@@ -52,10 +52,10 @@ internal class Type3RoomLayout : RoomLayout
             {
                 cPtr = Game.Grid[y][x];
                 cPtr.RevertToBackground();
-                cPtr.TileFlags.Set(GridTile.InRoom);
+                cPtr.InRoom = true;
                 if (light)
                 {
-                    cPtr.TileFlags.Set(GridTile.SelfLit);
+                    cPtr.SelfLit = true;
                 }
             }
         }

@@ -16,7 +16,7 @@ internal class RemoveViewFlaggedAction : FlaggedAction
         foreach (GridCoordinate gridCoordinate in Game.View)
         {
             GridTile cPtr = Game.Grid[gridCoordinate.Y][gridCoordinate.X];
-            cPtr.TileFlags.Clear(GridTile.IsVisible);
+            cPtr.IsVisible = false;
             Game.MainForm.RefreshMapLocation(gridCoordinate.Y, gridCoordinate.X);
         }
         Game.View.Clear();

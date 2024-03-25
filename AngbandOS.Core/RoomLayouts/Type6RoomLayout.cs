@@ -34,7 +34,7 @@ internal class Type6RoomLayout : RoomLayout
             {
                 cPtr = Game.Grid[y][x];
                 cPtr.RevertToBackground();
-                cPtr.TileFlags.Set(GridTile.InRoom);
+                cPtr.InRoom = true;
             }
         }
         Tile wallOuterTile = Game.SingletonRepository.Tiles.Get(nameof(WallOuterTile));

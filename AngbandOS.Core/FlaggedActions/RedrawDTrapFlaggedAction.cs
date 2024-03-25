@@ -16,24 +16,24 @@ internal class RedrawDTrapFlaggedAction : FlaggedAction
     protected override void Execute()
     {
         int count = 0;
-        if (Game.Grid[Game.MapY][Game.MapX].TileFlags.IsClear(GridTile.TrapsDetected))
+        if (!Game.Grid[Game.MapY][Game.MapX].TrapsDetected)
         {
             Game.Screen.Print(ColorEnum.Green, "     ", RowDtrap, ColDtrap);
             return;
         }
-        if (Game.Grid[Game.MapY - 1][Game.MapX].TileFlags.IsSet(GridTile.TrapsDetected))
+        if (Game.Grid[Game.MapY - 1][Game.MapX].TrapsDetected)
         {
             count++;
         }
-        if (Game.Grid[Game.MapY + 1][Game.MapX].TileFlags.IsSet(GridTile.TrapsDetected))
+        if (Game.Grid[Game.MapY + 1][Game.MapX].TrapsDetected)
         {
             count++;
         }
-        if (Game.Grid[Game.MapY][Game.MapX - 1].TileFlags.IsSet(GridTile.TrapsDetected))
+        if (Game.Grid[Game.MapY][Game.MapX - 1].TrapsDetected)
         {
             count++;
         }
-        if (Game.Grid[Game.MapY][Game.MapX + 1].TileFlags.IsSet(GridTile.TrapsDetected))
+        if (Game.Grid[Game.MapY][Game.MapX + 1].TrapsDetected)
         {
             count++;
         }

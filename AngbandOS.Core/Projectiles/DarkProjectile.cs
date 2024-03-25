@@ -20,10 +20,10 @@ internal class DarkProjectile : Projectile
     {
         GridTile cPtr = Game.Grid[y][x];
         bool obvious = Game.PlayerCanSeeBold(y, x);
-        cPtr.TileFlags.Clear(GridTile.SelfLit);
+        cPtr.SelfLit = false;
         if (cPtr.FeatureType.IsOpenFloor)
         {
-            cPtr.TileFlags.Clear(GridTile.PlayerMemorized);
+            cPtr.PlayerMemorized = false;
             Game.NoteSpot(y, x);
         }
         Game.MainForm.RefreshMapLocation(y, x);

@@ -13,7 +13,7 @@ internal class UpdateLightFlaggedAction : FlaggedAction
     private UpdateLightFlaggedAction(Game game) : base(game) { }
     private void CaveLightHack(int y, int x)
     {
-        Game.Grid[y][x].TileFlags.Set(GridTile.PlayerLit);
+        Game.Grid[y][x].PlayerLit = true;
         Game.Light.Add(new GridCoordinate(x, y));
     }
 
@@ -27,8 +27,8 @@ internal class UpdateLightFlaggedAction : FlaggedAction
         }
         foreach (GridCoordinate gridCoordinate in Game.Light)
         {
-            Game.Grid[gridCoordinate.Y][gridCoordinate.X].TileFlags.Clear(GridTile.PlayerLit);
-            Game.Grid[gridCoordinate.Y][gridCoordinate.X].TileFlags.Set(GridTile.TempFlag);
+            Game.Grid[gridCoordinate.Y][gridCoordinate.X].PlayerLit = false;
+            Game.Grid[gridCoordinate.Y][gridCoordinate.X].TempFlag = true;
             Game.TempY[Game.TempN] = gridCoordinate.Y;
             Game.TempX[Game.TempN] = gridCoordinate.X;
             Game.TempN++;
@@ -140,7 +140,7 @@ internal class UpdateLightFlaggedAction : FlaggedAction
         }
         foreach (GridCoordinate gridCoordinate in Game.Light)
         {
-            if (Game.Grid[gridCoordinate.Y][gridCoordinate.X].TileFlags.IsSet(GridTile.TempFlag))
+            if (Game.Grid[gridCoordinate.Y][gridCoordinate.X].TempFlag)
             {
                 continue;
             }
@@ -151,8 +151,8 @@ internal class UpdateLightFlaggedAction : FlaggedAction
         {
             int y = Game.TempY[i];
             int x = Game.TempX[i];
-            Game.Grid[y][x].TileFlags.Clear(GridTile.TempFlag);
-            if (Game.Grid[y][x].TileFlags.IsSet(GridTile.PlayerLit))
+            Game.Grid[y][x].TempFlag = false;
+            if (Game.Grid[y][x].PlayerLit)
             {
                 continue;
             }

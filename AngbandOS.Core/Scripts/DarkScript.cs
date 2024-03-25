@@ -23,7 +23,7 @@ internal class DarkScript : Script, IScript
             for (int x = 0; x < Game.CurWid; x++)
             {
                 GridTile cPtr = Game.Grid[y][x];
-                cPtr.TileFlags.Clear(GridTile.PlayerMemorized);
+                cPtr.PlayerMemorized = false;
                 foreach (Item oPtr in cPtr.Items)
                 {
                     oPtr.Marked = false;

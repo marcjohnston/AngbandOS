@@ -28,44 +28,44 @@ internal class KillWallProjectile : Projectile
         }
         if (cPtr.FeatureType.IsTreasure)
         {
-            if (cPtr.TileFlags.IsSet(GridTile.PlayerMemorized))
+            if (cPtr.PlayerMemorized)
             {
                 Game.MsgPrint("The vein turns into mud!");
                 Game.MsgPrint("You have found something!");
                 obvious = true;
             }
-            cPtr.TileFlags.Clear(GridTile.PlayerMemorized);
+            cPtr.PlayerMemorized = false;
             Game.RevertTileToBackground(y, x);
             Game.PlaceGold(y, x);
         }
         else if (cPtr.FeatureType.IsVein)
         {
-            if (cPtr.TileFlags.IsSet(GridTile.PlayerMemorized))
+            if (cPtr.PlayerMemorized)
             {
                 Game.MsgPrint("The vein turns into mud!");
                 obvious = true;
             }
-            cPtr.TileFlags.Clear(GridTile.PlayerMemorized);
+            cPtr.PlayerMemorized = false;
             Game.RevertTileToBackground(y, x);
         }
         else if (cPtr.FeatureType.IsWall)
         {
-            if (cPtr.TileFlags.IsSet(GridTile.PlayerMemorized))
+            if (cPtr.PlayerMemorized)
             {
                 Game.MsgPrint("The wall turns into mud!");
                 obvious = true;
             }
-            cPtr.TileFlags.Clear(GridTile.PlayerMemorized);
+            cPtr.PlayerMemorized = false;
             Game.RevertTileToBackground(y, x);
         }
         else if (cPtr.FeatureType is RubbleTile)
         {
-            if (cPtr.TileFlags.IsSet(GridTile.PlayerMemorized))
+            if (cPtr.PlayerMemorized)
             {
                 Game.MsgPrint("The rubble turns into mud!");
                 obvious = true;
             }
-            cPtr.TileFlags.Clear(GridTile.PlayerMemorized);
+            cPtr.PlayerMemorized = false;
             Game.RevertTileToBackground(y, x);
             if (Game.RandomLessThan(100) < 10)
             {
@@ -79,12 +79,12 @@ internal class KillWallProjectile : Projectile
         }
         else
         {
-            if (cPtr.TileFlags.IsSet(GridTile.PlayerMemorized))
+            if (cPtr.PlayerMemorized)
             {
                 Game.MsgPrint("The door turns into mud!");
                 obvious = true;
             }
-            cPtr.TileFlags.Clear(GridTile.PlayerMemorized);
+            cPtr.PlayerMemorized = false;
             Game.RevertTileToBackground(y, x);
         }
         Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateScentFlaggedAction)).Set();

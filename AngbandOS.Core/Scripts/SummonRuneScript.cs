@@ -21,7 +21,7 @@ internal class SummonRuneScript : Script, IScript
         GridTile tile = Game.Grid[Game.MapY][Game.MapX];
         Game.MsgPrint("There is a flash of shimmering light!");
         // Trap disappears when triggered
-        tile.TileFlags.Clear(GridTile.PlayerMemorized);
+        tile.PlayerMemorized = false;
         Game.RevertTileToBackground(Game.MapY, Game.MapX);
         // Summon 1d3+2 monsters
         int num = 2 + Game.DieRoll(3);

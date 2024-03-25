@@ -20,7 +20,7 @@ internal class LightWeakProjectile : Projectile
     {
         GridTile cPtr = Game.Grid[y][x];
         bool obvious = false;
-        cPtr.TileFlags.Set(GridTile.SelfLit);
+        cPtr.SelfLit = true;
         Game.NoteSpot(y, x);
         Game.MainForm.RefreshMapLocation(y, x);
         if (Game.PlayerCanSeeBold(y, x))

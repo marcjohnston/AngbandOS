@@ -87,7 +87,8 @@ internal abstract class RoomLayout : IGetKey
                 }
                 GridTile cPtr = Game.Grid[y][x];
                 cPtr.RevertToBackground();
-                cPtr.TileFlags.Set(GridTile.InRoom | GridTile.InVault);
+                cPtr.InVault = true;
+                cPtr.InRoom = true;
                 switch (t)
                 {
                     case '%':

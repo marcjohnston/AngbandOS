@@ -25,7 +25,7 @@ internal class KillTrapProjectile : Projectile
                 Game.MsgPrint("There is a bright flash of light!");
                 obvious = true;
             }
-            cPtr.TileFlags.Clear(GridTile.PlayerMemorized);
+            cPtr.PlayerMemorized = false;
             Game.RevertTileToBackground(y, x);
         }
         else if (cPtr.FeatureType.IsSecretDoor || cPtr.FeatureType.IsClosedDoor)

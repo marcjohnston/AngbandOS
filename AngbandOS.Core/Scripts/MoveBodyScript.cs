@@ -24,9 +24,7 @@ internal class MoveBodyScript : Script, IScript
             return;
         }
         Game.Energy -= 60 - Game.ExperienceLevel.Value;
-        if (!Game.GridPassableNoCreature(ij, ii) || Game.Grid[ij][ii].TileFlags.IsSet(GridTile.InVault) ||
-            Game.Distance(ij, ii, Game.MapY, Game.MapX) > Game.ExperienceLevel.Value + 2 ||
-            Game.RandomLessThan(Game.ExperienceLevel.Value * Game.ExperienceLevel.Value / 2) == 0)
+        if (!Game.GridPassableNoCreature(ij, ii) || Game.Grid[ij][ii].InVault || Game.Distance(ij, ii, Game.MapY, Game.MapX) > Game.ExperienceLevel.Value + 2 || Game.RandomLessThan(Game.ExperienceLevel.Value * Game.ExperienceLevel.Value / 2) == 0)
         {
             Game.MsgPrint("You fail to concentrate correctly!");
             Game.Energy -= 100;

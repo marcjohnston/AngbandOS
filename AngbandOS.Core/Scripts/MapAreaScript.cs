@@ -47,14 +47,14 @@ internal class MapAreaScript : Script, IScript
                 {
                     if (!cPtr.FeatureType.IsOpenFloor)
                     {
-                        cPtr.TileFlags.Set(GridTile.PlayerMemorized);
+                        cPtr.PlayerMemorized = true;
                     }
                     for (int i = 0; i < 8; i++)
                     {
                         cPtr = Game.Grid[y + Game.OrderedDirectionYOffset[i]][x + Game.OrderedDirectionXOffset[i]];
                         if (cPtr.FeatureType.IsWall)
                         {
-                            cPtr.TileFlags.Set(GridTile.PlayerMemorized);
+                            cPtr.PlayerMemorized = true;
                         }
                     }
                 }

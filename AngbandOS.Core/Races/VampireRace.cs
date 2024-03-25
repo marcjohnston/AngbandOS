@@ -142,7 +142,7 @@ internal class VampireRace : Race
             Game.InvulnerabilityTimer.Value == 0 &&
             Game.IsLight)
         {
-            if (Game.Grid[Game.MapY][Game.MapX].TileFlags.IsSet(GridTile.SelfLit))
+            if (Game.Grid[Game.MapY][Game.MapX].SelfLit)
             {
                 Game.MsgPrint("The sun's rays scorch your undead flesh!");
                 Game.TakeHit(1, "sunlight");

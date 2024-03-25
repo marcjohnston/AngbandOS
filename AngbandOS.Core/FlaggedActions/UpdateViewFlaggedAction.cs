@@ -26,7 +26,7 @@ internal class UpdateViewFlaggedAction : FlaggedAction
     /// <param name="x"></param>
     private void CaveViewHack(GridTile c, int y, int x)
     {
-        c.TileFlags.Set(GridTile.IsVisible);
+        c.IsVisible = true;
         Game.View.Add(new GridCoordinate(x, y));
     }
 
@@ -40,19 +40,19 @@ internal class UpdateViewFlaggedAction : FlaggedAction
         {
             return true;
         }
-        bool v1 = f1 && g1CPtr.TileFlags.IsSet(GridTile.IsVisible);
-        bool v2 = f2 && g2CPtr.TileFlags.IsSet(GridTile.IsVisible);
+        bool v1 = f1 && g1CPtr.IsVisible;
+        bool v2 = f2 && g2CPtr.IsVisible;
         if (!v1 && !v2)
         {
             return true;
         }
         GridTile cPtr = Game.Grid[y][x];
         bool wall = cPtr.FeatureType.BlocksLos;
-        bool z1 = v1 && g1CPtr.TileFlags.IsSet(GridTile.EasyVisibility);
-        bool z2 = v2 && g2CPtr.TileFlags.IsSet(GridTile.EasyVisibility);
+        bool z1 = v1 && g1CPtr.EasyVisibility;
+        bool z2 = v2 && g2CPtr.EasyVisibility;
         if (z1 && z2)
         {
-            cPtr.TileFlags.Set(GridTile.EasyVisibility);
+            cPtr.EasyVisibility= true;
             CaveViewHack(cPtr, y, x);
             return wall;
         }
@@ -92,8 +92,8 @@ internal class UpdateViewFlaggedAction : FlaggedAction
         foreach (GridCoordinate gridCoordinate in Game.View)
         {
             cPtr = Game.Grid[gridCoordinate.Y][gridCoordinate.X];
-            cPtr.TileFlags.Clear(GridTile.IsVisible);
-            cPtr.TileFlags.Set(GridTile.TempFlag);
+            cPtr.IsVisible = false;
+            cPtr.TempFlag = true;
             Game.TempY[Game.TempN] = gridCoordinate.Y;
             Game.TempX[Game.TempN] = gridCoordinate.X;
             Game.TempN++;
@@ -104,13 +104,13 @@ internal class UpdateViewFlaggedAction : FlaggedAction
         int y = Game.MapY;
         int x = Game.MapX;
         cPtr = Game.Grid[y][x];
-        cPtr.TileFlags.Set(GridTile.EasyVisibility);
+        cPtr.EasyVisibility= true;
         CaveViewHack(cPtr, y, x);
         int z = full * 2 / 3;
         for (d = 1; d <= z; d++)
         {
             cPtr = Game.Grid[y + d][x + d];
-            cPtr.TileFlags.Set(GridTile.EasyVisibility);
+            cPtr.EasyVisibility= true;
             CaveViewHack(cPtr, y + d, x + d);
             if (cPtr.FeatureType.BlocksLos)
             {
@@ -124,7 +124,7 @@ internal class UpdateViewFlaggedAction : FlaggedAction
         for (d = 1; d <= z; d++)
         {
             cPtr = Game.Grid[y + d][x - d];
-            cPtr.TileFlags.Set(GridTile.EasyVisibility);
+            cPtr.EasyVisibility= true;
             CaveViewHack(cPtr, y + d, x - d);
             if (cPtr.FeatureType.BlocksLos)
             {
@@ -138,7 +138,7 @@ internal class UpdateViewFlaggedAction : FlaggedAction
         for (d = 1; d <= z; d++)
         {
             cPtr = Game.Grid[y - d][x + d];
-            cPtr.TileFlags.Set(GridTile.EasyVisibility);
+            cPtr.EasyVisibility= true;
             CaveViewHack(cPtr, y - d, x + d);
             if (cPtr.FeatureType.BlocksLos)
             {
@@ -152,7 +152,7 @@ internal class UpdateViewFlaggedAction : FlaggedAction
         for (d = 1; d <= z; d++)
         {
             cPtr = Game.Grid[y - d][x - d];
-            cPtr.TileFlags.Set(GridTile.EasyVisibility);
+            cPtr.EasyVisibility= true;
             CaveViewHack(cPtr, y - d, x - d);
             if (cPtr.FeatureType.BlocksLos)
             {
@@ -166,7 +166,7 @@ internal class UpdateViewFlaggedAction : FlaggedAction
         for (d = 1; d <= full; d++)
         {
             cPtr = Game.Grid[y + d][x];
-            cPtr.TileFlags.Set(GridTile.EasyVisibility);
+            cPtr.EasyVisibility= true;
             CaveViewHack(cPtr, y + d, x);
             if (cPtr.FeatureType.BlocksLos)
             {
@@ -182,7 +182,7 @@ internal class UpdateViewFlaggedAction : FlaggedAction
         for (d = 1; d <= full; d++)
         {
             cPtr = Game.Grid[y - d][x];
-            cPtr.TileFlags.Set(GridTile.EasyVisibility);
+            cPtr.EasyVisibility= true;
             CaveViewHack(cPtr, y - d, x);
             if (cPtr.FeatureType.BlocksLos)
             {
@@ -198,7 +198,7 @@ internal class UpdateViewFlaggedAction : FlaggedAction
         for (d = 1; d <= full; d++)
         {
             cPtr = Game.Grid[y][x + d];
-            cPtr.TileFlags.Set(GridTile.EasyVisibility);
+            cPtr.EasyVisibility= true;
             CaveViewHack(cPtr, y, x + d);
             if (cPtr.FeatureType.BlocksLos)
             {
@@ -214,7 +214,7 @@ internal class UpdateViewFlaggedAction : FlaggedAction
         for (d = 1; d <= full; d++)
         {
             cPtr = Game.Grid[y][x - d];
-            cPtr.TileFlags.Set(GridTile.EasyVisibility);
+            cPtr.EasyVisibility= true;
             CaveViewHack(cPtr, y, x - d);
             if (cPtr.FeatureType.BlocksLos)
             {
@@ -408,8 +408,8 @@ internal class UpdateViewFlaggedAction : FlaggedAction
         foreach (GridCoordinate gridCoordinate in Game.View)
         {
             cPtr = Game.Grid[gridCoordinate.Y][gridCoordinate.X];
-            cPtr.TileFlags.Clear(GridTile.EasyVisibility);
-            if (cPtr.TileFlags.IsSet(GridTile.TempFlag))
+            cPtr.EasyVisibility = false;
+            if (cPtr.TempFlag)
             {
                 continue;
             }
@@ -421,8 +421,8 @@ internal class UpdateViewFlaggedAction : FlaggedAction
             y = Game.TempY[n];
             x = Game.TempX[n];
             cPtr = Game.Grid[y][x];
-            cPtr.TileFlags.Clear(GridTile.TempFlag);
-            if (cPtr.TileFlags.IsSet(GridTile.IsVisible))
+            cPtr.TempFlag = false;
+            if (cPtr.IsVisible)
             {
                 continue;
             }

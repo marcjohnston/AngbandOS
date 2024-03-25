@@ -28,52 +28,47 @@ internal class GridTile : IItemContainer
     /// <summary>
     /// Used within the view code to mark tiles that are "easily" visible
     /// </summary>
-    public const int EasyVisibility = 0x0080;
+    public bool EasyVisibility;
 
     /// <summary>
     /// Set if the grid tile is part of a room
     /// </summary>
-    public const int InRoom = 0x0008;
+    public bool InRoom;
 
     /// <summary>
     /// Set if the grid tile is part of a vault
     /// </summary>
-    public const int InVault = 0x0004;
+    public bool InVault;
 
     /// <summary>
     /// Set if the grid tile is visible to the player
     /// </summary>
-    public const int IsVisible = 0x0020;
+    public bool IsVisible;
 
     /// <summary>
     /// Set if the grid tile is currently lit by the player's light source
     /// </summary>
-    public const int PlayerLit = 0x0010;
+    public bool PlayerLit;
 
     /// <summary>
     /// Set if the player should remember the grid's contents
     /// </summary>
-    public const int PlayerMemorized = 0x0001;
+    public bool PlayerMemorized;
 
     /// <summary>
     /// Set if the grid tile is lit independently of the player's light source
     /// </summary>
-    public const int SelfLit = 0x0002;
+    public bool SelfLit;
 
     /// <summary>
     /// Used within the view and light code to mark tiles that might need a redraw
     /// </summary>
-    public const int TempFlag = 0x0040;
+    public bool TempFlag;
 
     /// <summary>
     /// Set if the grid tile has had a Detect Traps used on it
     /// </summary>
-    public const int TrapsDetected = 0x0100;
-
-    /// <summary>
-    /// Flags for the tile
-    /// </summary>
-    public readonly FlagSet TileFlags = new FlagSet();
+    public bool TrapsDetected;
 
     /// <summary>
     /// The type of feature in this grid tile

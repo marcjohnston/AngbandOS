@@ -865,7 +865,7 @@ internal class Monster : IItemContainer
                 }
                 // Remove the wall (and the player's memory of it) and remind ourselves to
                 // update the view if the player can see it
-                tile.TileFlags.Clear(GridTile.PlayerMemorized);
+                tile.PlayerMemorized = false;
                 Game.RevertTileToBackground(newY, newX);
                 if (Game.PlayerHasLosBold(newY, newX))
                 {
@@ -937,11 +937,11 @@ internal class Monster : IItemContainer
                 if (Game.DieRoll(BreakElderSign) < Race.Level)
                 {
                     // If the player knows the sign is there, let them know it was broken
-                    if (tile.TileFlags.IsSet(GridTile.PlayerMemorized))
+                    if (tile.PlayerMemorized)
                     {
                         Game.MsgPrint("The Elder Sign is broken!");
                     }
-                    tile.TileFlags.Clear(GridTile.PlayerMemorized);
+                    tile.PlayerMemorized = false;
                     Game.RevertTileToBackground(newY, newX);
                     // Breaking the sign means we can move after all
                     doMove = true;
@@ -956,7 +956,7 @@ internal class Monster : IItemContainer
                 if (Game.DieRoll(Constants.BreakYellowSign) < Race.Level)
                 {
                     // If the player knows about the sign, let them know it was broken
-                    if (tile.TileFlags.IsSet(GridTile.PlayerMemorized))
+                    if (tile.PlayerMemorized)
                     {
                         // If the player was on the sign, hurt them
                         if (newY == Game.MapY && newX == Game.MapX)
@@ -969,7 +969,7 @@ internal class Monster : IItemContainer
                             Game.MsgPrint("An Yellow Sign was disarmed.");
                         }
                     }
-                    tile.TileFlags.Clear(GridTile.PlayerMemorized);
+                    tile.PlayerMemorized = false;
                     Game.RevertTileToBackground(newY, newX);
                     // We can do the move after all
                     doMove = true;
@@ -2164,7 +2164,7 @@ internal class Monster : IItemContainer
                 // Check if the player is in a room by counting the room tiles around them
                 for (int i = 0; i < 8; i++)
                 {
-                    if (game.Grid[game.MapY + game.OrderedDirectionYOffset[i]][game.MapX + game.OrderedDirectionXOffset[i]].TileFlags.IsSet(GridTile.InRoom))
+                    if (game.Grid[game.MapY + game.OrderedDirectionYOffset[i]][game.MapX + game.OrderedDirectionXOffset[i]].InRoom)
                     {
                         room++;
                     }

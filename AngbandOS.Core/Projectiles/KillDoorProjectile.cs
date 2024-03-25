@@ -31,7 +31,7 @@ internal class KillDoorProjectile : Projectile
                     Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateViewFlaggedAction)).Set();
                 }
             }
-            cPtr.TileFlags.Clear(GridTile.PlayerMemorized);
+            cPtr.PlayerMemorized = false;
             Game.RevertTileToBackground(y, x);
         }
         return obvious;

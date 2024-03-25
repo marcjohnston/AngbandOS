@@ -59,7 +59,7 @@ internal class TeleportSelfScript : Script, IScript, IScriptInt
                 {
                     continue;
                 }
-                if (Game.Grid[y][x].TileFlags.IsSet(GridTile.InVault))
+                if (Game.Grid[y][x].InVault)
                 {
                     continue;
                 }
