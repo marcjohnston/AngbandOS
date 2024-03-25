@@ -15,7 +15,7 @@ internal class StoneskinTimer : Timer
     {
         Game.MsgPrint("Your skin returns to normal.");
     }
-    protected override void EffectIncreased(int newRate, int currentRate)
+    protected override void OnRateIncreased(int newRate, int currentRate)
     {
         Game.MsgPrint("Your skin turns to stone.");
     }

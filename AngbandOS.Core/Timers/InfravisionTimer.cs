@@ -15,7 +15,7 @@ internal class InfravisionTimer : Timer
     {
         Game.MsgPrint("Your eyes stop tingling.");
     }
-    protected override void EffectIncreased(int newRate, int currentRate)
+    protected override void OnRateIncreased(int newRate, int currentRate)
     {
         Game.MsgPrint("Your eyes begin to tingle!");
     }

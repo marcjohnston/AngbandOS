@@ -15,7 +15,7 @@ internal class TelepathyTimer : Timer
     {
         Game.MsgPrint("Your consciousness contracts again.");
     }
-    protected override void EffectIncreased(int newRate, int currentRate)
+    protected override void OnRateIncreased(int newRate, int currentRate)
     {
         Game.MsgPrint("You feel your consciousness expand!");
     }

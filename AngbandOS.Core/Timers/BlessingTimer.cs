@@ -15,7 +15,7 @@ internal class BlessingTimer : Timer
     {
         Game.MsgPrint("The prayer has expired.");
     }
-    protected override void EffectIncreased(int newRate, int currentRate)
+    protected override void OnRateIncreased(int newRate, int currentRate)
     {
         Game.MsgPrint("You feel righteous!");
     }

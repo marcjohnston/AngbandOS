@@ -48,7 +48,7 @@ internal class BleedingTimer : Timer
         }
     }
 
-    protected override void EffectIncreased(int newRate, int oldRate)
+    protected override void OnRateIncreased(int newRate, int oldRate)
     {
         if (Game.DieRoll(1000) < newRate || Game.DieRoll(16) == 1)
         {

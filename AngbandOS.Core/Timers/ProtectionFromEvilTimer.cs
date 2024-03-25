@@ -15,7 +15,7 @@ internal class ProtectionFromEvilTimer : Timer
     {
         Game.MsgPrint("You no longer feel safe from evil.");
     }
-    protected override void EffectIncreased(int newRate, int currentRate)
+    protected override void OnRateIncreased(int newRate, int currentRate)
     {
         Game.MsgPrint("You feel safe from evil!");
     }

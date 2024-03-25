@@ -15,7 +15,7 @@ internal class SuperHeroismTimer : Timer
     {
         Game.MsgPrint("You feel less Berserk.");
     }
-    protected override void EffectIncreased(int newRate, int currentRate)
+    protected override void OnRateIncreased(int newRate, int currentRate)
     {
         Game.MsgPrint("You feel like a killing machine!");
     }

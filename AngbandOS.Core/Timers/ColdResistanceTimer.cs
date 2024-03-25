@@ -15,7 +15,7 @@ internal class ColdResistanceTimer : Timer
     {
         Game.MsgPrint("You feel less resistant to cold.");
     }
-    protected override void EffectIncreased(int newRate, int currentRate)
+    protected override void OnRateIncreased(int newRate, int currentRate)
     {
         Game.MsgPrint("You feel resistant to cold!");
     }

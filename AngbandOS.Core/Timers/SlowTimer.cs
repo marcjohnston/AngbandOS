@@ -15,7 +15,7 @@ internal class SlowTimer : Timer
     {
         Game.MsgPrint("You feel yourself speed up.");
     }
-    protected override void EffectIncreased(int newRate, int currentRate)
+    protected override void OnRateIncreased(int newRate, int currentRate)
     {
         Game.MsgPrint("You feel yourself moving slower!");
     }

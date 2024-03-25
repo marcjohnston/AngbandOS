@@ -15,7 +15,7 @@ internal class PoisonedTimer : Timer
     {
         Game.MsgPrint("You are no longer poisoned.");
     }
-    protected override void EffectIncreased(int newRate, int currentRate)
+    protected override void OnRateIncreased(int newRate, int currentRate)
     {
         Game.MsgPrint("You are poisoned!");
     }

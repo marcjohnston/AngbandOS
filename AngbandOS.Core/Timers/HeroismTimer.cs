@@ -15,7 +15,7 @@ internal class HeroismTimer : Timer
     {
         Game.MsgPrint("The heroism wears off.");
     }
-    protected override void EffectIncreased(int newRate, int currentRate)
+    protected override void OnRateIncreased(int newRate, int currentRate)
     {
         Game.MsgPrint("You feel like a hero!");
     }

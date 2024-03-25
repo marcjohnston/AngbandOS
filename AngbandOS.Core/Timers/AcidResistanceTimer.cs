@@ -12,7 +12,7 @@ internal class AcidResistanceTimer : Timer
 {
     private AcidResistanceTimer(Game game) : base(game) { } // This object is a singleton.
 
-    protected override void EffectIncreased(int newRate, int currentRate)
+    protected override void OnRateIncreased(int newRate, int currentRate)
     {
         Game.MsgPrint("You feel resistant to acid!");
     }

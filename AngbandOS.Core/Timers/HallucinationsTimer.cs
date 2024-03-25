@@ -16,7 +16,7 @@ internal class HallucinationsTimer : Timer
     {
         Game.MsgPrint("You can see clearly again.");
     }
-    protected override void EffectIncreased(int newRate, int currentRate)
+    protected override void OnRateIncreased(int newRate, int currentRate)
     {
         Game.MsgPrint("Oh, wow! Everything looks so cosmic now!");
     }

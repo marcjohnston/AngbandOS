@@ -15,7 +15,7 @@ internal class StunnedTimer : Timer
     {
         Game.MsgPrint("You are no longer stunned.");
     }
-    protected override void EffectIncreased(int newRate, int currentRate) 
+    protected override void OnRateIncreased(int newRate, int currentRate) 
     {
         switch (newRate)
         {

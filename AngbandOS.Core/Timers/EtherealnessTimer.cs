@@ -15,7 +15,7 @@ internal class EtherealnessTimer : Timer
     {
         Game.MsgPrint("You feel opaque.");
     }
-    protected override void EffectIncreased(int newRate, int currentRate)
+    protected override void OnRateIncreased(int newRate, int currentRate)
     {
         Game.MsgPrint("You leave the physical world and turn into a wraith-being!");
     }

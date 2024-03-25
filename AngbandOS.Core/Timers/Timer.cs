@@ -15,11 +15,17 @@ internal abstract class Timer : IGetKey, IIntChangeTracking
 {
     protected Game Game { get; }
 
+    /// <summary>
+    /// Resets the <see cref="IsChanged"/> change tracking flag.
+    /// </summary>
     public virtual void ClearChangedFlag()
     {
         IsChanged = false;
     }
 
+    /// <summary>
+    /// Returns true, if the value has changed since the last <see cref="ClearChangedFlag"/>.
+    /// </summary>
     public virtual bool IsChanged { get; private set; }
 
     public Timer(Game game)
@@ -46,6 +52,7 @@ internal abstract class Timer : IGetKey, IIntChangeTracking
     /// <summary>
     /// Gets or sets the number of turns remaining on the timer.
     /// </summary>
+    /// <remarks>This property encapsulated the _value field.  When the actual value changes, the <see cref="IsChanged"/> property is set to true.</remarks>
     public int Value
     {
         get
@@ -54,15 +61,16 @@ internal abstract class Timer : IGetKey, IIntChangeTracking
         }
         private set
         {
-            // TODO: There is no detection that the value actually changed to detect the change and _changed = true.
+            if (_value  != value)
+            {
+                IsChanged = true;
+            }
             _value = value;
-            IsChanged = true;
         }
     }
 
     /// <summary>
-    /// Adds (or subtracts) time from the timer and returns true, if the action was noticed.  The action is noticed, if the timer was stopped.  The action is not
-    /// noticed, if the timer was already running.
+    /// Adds (or subtracts) turns from the timer and returns true, if the timer is started or stopped.
     /// </summary>
     /// <param name="deltaValue"></param>
     /// <returns></returns>
@@ -72,7 +80,8 @@ internal abstract class Timer : IGetKey, IIntChangeTracking
     }
 
     /// <summary>
-    /// Converts a number of turns into a rate.  This rate is used to provide separation between grades of effects.
+    /// Converts the current timer into a rate.  Rates are ranges of values.  By default, a rate of 1 is returns for all timer values greater than 0 and a rate of 0 is returned
+    /// when the timer is stopped.  Derived timers can modify these rates.
     /// </summary>
     /// <param name="turns"></param>
     /// <returns></returns>
@@ -89,7 +98,7 @@ internal abstract class Timer : IGetKey, IIntChangeTracking
     }
 
     /// <summary>
-    /// Returns the maximum number of turns the effect is allowed to have.
+    /// Returns the maximum number of turns for the timer.  
     /// </summary>
     protected virtual int MaxTurns => 10000;
 
@@ -99,12 +108,12 @@ internal abstract class Timer : IGetKey, IIntChangeTracking
     protected abstract void EffectStopped();
 
     /// <summary>
-    /// Returns the message to be rendered when the effect is increased by at least 1 rate.  This transition is not noticed.
+    /// This event is fired when the rate is increased.
     /// </summary>
     /// <param name="newRate"></param>
     /// <param name="oldRate"></param>
     /// <returns></returns>
-    protected abstract void EffectIncreased(int newRate, int oldRate);
+    protected abstract void OnRateIncreased(int newRate, int oldRate);
 
     /// <summary>
     /// Performs additional actions, when the effect is noticed.  The effect is only noticed when the rate transitions above or below zero.
@@ -132,7 +141,7 @@ internal abstract class Timer : IGetKey, IIntChangeTracking
 
         if (newRate > currentRate)
         {
-            EffectIncreased(newRate, currentRate);
+            OnRateIncreased(newRate, currentRate);
 
             // We only notice when the current rate is zero.
             notice = (currentRate == 0);
@@ -152,8 +161,7 @@ internal abstract class Timer : IGetKey, IIntChangeTracking
     }
 
     /// <summary>
-    /// Stops the timer associated with the action and returns true, if the action was noticed.  The action will be noticed, if the timer was running.  The action 
-    /// will not be noticed if the timer was already stopped.
+    /// Stops the timer and returns true, if the action was noticed.  The action will be noticed, if the timer was already running.
     /// </summary>
     /// <param name="turns"></param>
     /// <returns></returns>

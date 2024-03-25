@@ -15,7 +15,7 @@ internal class ConfusedTimer : Timer
     {
         Game.MsgPrint("You feel less confused now.");
     }
-    protected override void EffectIncreased(int newRate, int currentRate)
+    protected override void OnRateIncreased(int newRate, int currentRate)
     {
         Game.MsgPrint("You are confused!");
     }

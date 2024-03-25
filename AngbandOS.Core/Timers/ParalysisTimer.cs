@@ -15,7 +15,7 @@ internal class ParalysisTimer : Timer
     {
         Game.MsgPrint("You can move again.");
     }
-    protected override void EffectIncreased(int newRate, int currentRate)
+    protected override void OnRateIncreased(int newRate, int currentRate)
     {
         Game.MsgPrint("You are paralyzed!");
     }
