@@ -1,15 +1,18 @@
-﻿
-// AngbandOS: 2022 Marc Johnston
+﻿// AngbandOS: 2022 Marc Johnston
 //
 // This game is released under the “Angband License”, defined as: “© 1997 Ben Harrison, James E.
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+/// <summary>
+/// Represents a function that determines when the map needs to be updated.  Widgets that reference the map will use this function and the <see cref="IMapChangeTracking"/> interface
+/// to repaint the map as needed.
+/// </summary>
 [Serializable]
-internal class MapFunction : Function, IMapChangeTracking
+internal class RefreshMapFunction : Function, IMapChangeTracking
 {
-    private MapFunction(Game game) : base(game) { } // This object is a singleton.
+    private RefreshMapFunction(Game game) : base(game) { } // This object is a singleton.
     public override string[]? DependencyNames => new string[]
     {
         nameof(RefreshMapProperty), // Manual map refresh

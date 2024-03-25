@@ -7,6 +7,10 @@
 
 namespace AngbandOS.Core.Properties;
 
+/// <summary>
+/// Represents a property that is used to track when the map needs to be refreshed.  This property is only used to flag a manual refreshing until the <see cref="RefreshMapFunction"/>
+/// function has all dependencies setup properly.
+/// </summary>
 [Serializable]
 internal class RefreshMapProperty : Property, IMapChangeTracking
 {

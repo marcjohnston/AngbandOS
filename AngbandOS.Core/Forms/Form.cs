@@ -45,6 +45,9 @@ internal abstract class Form : IGetKey
         return "";
     }
 
+    /// <summary>
+    /// Invalidates all of the widgets that are associated with the form.  This will force all widgets to be redrawn.
+    /// </summary>
     public void Invalidate()
     {
         // Clear the screen.
