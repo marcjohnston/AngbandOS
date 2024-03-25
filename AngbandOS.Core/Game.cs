@@ -3617,7 +3617,7 @@ internal class Game
                 }
             }
             SingletonRepository.FlaggedActions.Get(nameof(UpdateMonstersFlaggedAction)).Set();
-            Map.SetChangedFlag(); // TODO: Needs to convert to dependencies in the MapWidget
+            Map.SetChangedFlag(); // TODO: Needs to convert to dependencies in the MapWidget.  In this case, the Grid array was modified.
         }
         if (IsMidnight)
         {
@@ -4417,7 +4417,7 @@ internal class Game
         SingletonRepository.FlaggedActions.Get(nameof(UpdateLightFlaggedAction)).Set();
         SingletonRepository.FlaggedActions.Get(nameof(UpdateViewFlaggedAction)).Set();
         SingletonRepository.FlaggedActions.Get(nameof(UpdateMonstersFlaggedAction)).Set();
-        Map.SetChangedFlag(); // TODO: Needs to convert to dependencies in the MapWidget
+        Map.SetChangedFlag(); // TODO: Needs to convert to dependencies in the MapWidget.  In this case, the grid was modified.
     }
 
     public bool DestroyDoor(int dir)
