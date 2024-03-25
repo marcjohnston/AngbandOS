@@ -4084,7 +4084,7 @@ internal class Game
         {
             dam = (dam + 2) / 3;
         }
-        if (!(AcidResistanceTimer.Value != 0 || HasAcidResistance) && DieRoll(HurtChance) == 1)
+        if (AcidResistanceTimer.Value == 0 && !HasAcidResistance && DieRoll(HurtChance) == 1)
         {
             TryDecreasingAbilityScore(Ability.Charisma);
         }
@@ -4093,7 +4093,7 @@ internal class Game
             dam = (dam + 1) / 2;
         }
         TakeHit(dam, kbStr);
-        if (!(AcidResistanceTimer.Value != 0 && HasAcidResistance))
+        if (AcidResistanceTimer.Value == 0 && !HasAcidResistance)
         {
             InvenDamage(SetAcidDestroy, inv);
         }
