@@ -16,7 +16,11 @@ internal abstract class Function : IGetKey, IChangeTracking
     {
         Game = game;
     }
-    public bool IsChanged => Dependencies == null ? false : Dependencies.Any(_dependency => _dependency.IsChanged);
+
+    /// <summary>
+    /// Returns true, if there are no dependencies or if any the change tracking on any dependency is flagged as changed.
+    /// </summary>
+    public bool IsChanged => Dependencies == null ? true : Dependencies.Any(_dependency => _dependency.IsChanged);
 
     /// <summary>
     /// Does nothing, because functions are not sinks for tracking.
