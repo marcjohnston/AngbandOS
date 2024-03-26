@@ -15,28 +15,12 @@ internal class RedrawDTrapFlaggedAction : FlaggedAction
     private RedrawDTrapFlaggedAction(Game game) : base(game) { }
     protected override void Execute()
     {
-        int count = 0;
         if (!Game.Grid[Game.MapY][Game.MapX].TrapsDetected)
         {
             Game.Screen.Print(ColorEnum.Green, "     ", RowDtrap, ColDtrap);
             return;
         }
-        if (Game.Grid[Game.MapY - 1][Game.MapX].TrapsDetected)
-        {
-            count++;
-        }
-        if (Game.Grid[Game.MapY + 1][Game.MapX].TrapsDetected)
-        {
-            count++;
-        }
-        if (Game.Grid[Game.MapY][Game.MapX - 1].TrapsDetected)
-        {
-            count++;
-        }
-        if (Game.Grid[Game.MapY][Game.MapX + 1].TrapsDetected)
-        {
-            count++;
-        }
+        int count = Game.CountTraps(Game.MapX, Game.MapY);
         if (count == 4)
         {
             Game.Screen.Print(ColorEnum.Green, "DTrap", RowDtrap, ColDtrap);

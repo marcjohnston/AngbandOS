@@ -15435,6 +15435,28 @@ internal class Game
         }
     }
 
+    public int CountTraps(int x, int y)
+    {
+        int count = 0;
+        if (Grid[y - 1][x].TrapsDetected)
+        {
+            count++;
+        }
+        if (Grid[y + 1][x].TrapsDetected)
+        {
+            count++;
+        }
+        if (Grid[y][x - 1].TrapsDetected)
+        {
+            count++;
+        }
+        if (Grid[y][x + 1].TrapsDetected)
+        {
+            count++;
+        }
+        return count;
+    }
+
     /// <summary>
     /// Returns the color and character of the symbol to be rendered at a specific map location.  No validation for the map coordinates is performed.
     /// </summary>
@@ -15477,23 +15499,7 @@ internal class Game
                     }
                     if (cPtr.TrapsDetected)
                     {
-                        int count = 0;
-                        if (Grid[y - 1][x].TrapsDetected)
-                        {
-                            count++;
-                        }
-                        if (Grid[y + 1][x].TrapsDetected)
-                        {
-                            count++;
-                        }
-                        if (Grid[y][x - 1].TrapsDetected)
-                        {
-                            count++;
-                        }
-                        if (Grid[y][x + 1].TrapsDetected)
-                        {
-                            count++;
-                        }
+                        int count = CountTraps(x, y);
                         if (count != 4)
                         {
                             a = ColorEnum.BrightChartreuse;
