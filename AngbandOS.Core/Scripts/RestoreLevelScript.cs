@@ -18,10 +18,10 @@ internal class RestoreLevelScript : Script, IScript, ISuccessfulScript
     /// <returns></returns>
     public bool ExecuteSuccessfulScript()
     {
-        if (Game.ExperiencePoints.Value < Game.MaxExperienceGained)
+        if (Game.ExperiencePoints.Value < Game.MaxExperienceGained.Value)
         {
             Game.MsgPrint("You feel your life energies returning.");
-            Game.ExperiencePoints.Value = Game.MaxExperienceGained;
+            Game.ExperiencePoints.Value = Game.MaxExperienceGained.Value;
             Game.CheckExperience();
             return true;
         }

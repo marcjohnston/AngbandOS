@@ -54,8 +54,8 @@ internal abstract class SummonMonsterSpell : MonsterSpell
     /// <returns></returns>
     protected virtual bool Summon(Game game, Monster monster)
     {
-        int playerX = game.MapX;
-        int playerY = game.MapY;
+        int playerX = game.MapX.Value;
+        int playerY = game.MapY.Value;
 
         return game.SummonSpecific(playerY, playerX, SummonLevel(monster), MonsterSelector(monster));
     }

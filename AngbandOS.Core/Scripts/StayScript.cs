@@ -41,7 +41,7 @@ internal class StayScript : Script, IScript, IRepeatableScript
         Game.StepOnGrid(false);
 
         // If we're in a shop doorway, enter the shop
-        GridTile tile = Game.Grid[Game.MapY][Game.MapX];
+        GridTile tile = Game.Grid[Game.MapY.Value][Game.MapX.Value];
         if (tile.FeatureType.IsShop)
         {
             Game.Disturb(false);

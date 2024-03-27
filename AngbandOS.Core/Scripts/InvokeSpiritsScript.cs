@@ -46,7 +46,7 @@ internal class InvokeSpiritsScript : Script, IScript
         if (die < 8)
         {
             Game.MsgPrint("Oh no! Mouldering forms rise from the earth around you!");
-            Game.SummonSpecific(Game.MapY, Game.MapX, Game.Difficulty, Game.SingletonRepository.MonsterFilters.Get(nameof(UndeadMonsterFilter)));
+            Game.SummonSpecific(Game.MapY.Value, Game.MapX.Value, Game.Difficulty, Game.SingletonRepository.MonsterFilters.Get(nameof(UndeadMonsterFilter)));
         }
         if (die < 14)
         {
@@ -121,11 +121,11 @@ internal class InvokeSpiritsScript : Script, IScript
         }
         if (die < 104)
         {
-            Game.Earthquake(Game.MapY, Game.MapX, 12);
+            Game.Earthquake(Game.MapY.Value, Game.MapX.Value, 12);
         }
         if (die < 106)
         {
-            Game.DestroyArea(Game.MapY, Game.MapX, 15);
+            Game.DestroyArea(Game.MapY.Value, Game.MapX.Value, 15);
         }
         if (die < 108)
         {

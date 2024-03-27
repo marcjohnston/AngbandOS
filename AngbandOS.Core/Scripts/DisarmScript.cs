@@ -44,8 +44,8 @@ internal class DisarmScript : Script, IScript, IRepeatableScript
         // Get a direction if we don't already have one
         if (Game.GetDirectionNoAim(out int dir))
         {
-            int y = Game.MapY + Game.KeypadDirectionYOffset[dir];
-            int x = Game.MapX + Game.KeypadDirectionXOffset[dir];
+            int y = Game.MapY.Value + Game.KeypadDirectionYOffset[dir];
+            int x = Game.MapX.Value + Game.KeypadDirectionXOffset[dir];
             GridTile tile = Game.Grid[y][x];
             // Check for a chest
             Item? chestItem = Game.ChestCheck(y, x);

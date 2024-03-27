@@ -29,7 +29,7 @@ internal class EarthquakesStaffItemFactory : StaffItemFactory
     public override int Weight => 50;
     public override void UseStaff(UseStaffEvent eventArgs)
     {
-        Game.Earthquake(Game.MapY, Game.MapX, 10);
+        Game.Earthquake(Game.MapY.Value, Game.MapX.Value, 10);
         eventArgs.Identified = true;
     }
     public override Item CreateItem() => new Item(Game, this);

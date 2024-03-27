@@ -22,7 +22,7 @@ internal class UpdateLightFlaggedAction : FlaggedAction
         if (Game.LightLevel <= 0)
         {
             Game.SingletonRepository.FlaggedActions.Get(nameof(RemoveLightFlaggedAction)).Check(true);
-            Game.MainForm.RefreshMapLocation(Game.MapY, Game.MapX);
+            Game.MainForm.RefreshMapLocation(Game.MapY.Value, Game.MapX.Value);
             return;
         }
         foreach (GridCoordinate gridCoordinate in Game.Light)
@@ -34,43 +34,43 @@ internal class UpdateLightFlaggedAction : FlaggedAction
             Game.TempN++;
         }
         Game.Light.Clear();
-        CaveLightHack(Game.MapY, Game.MapX);
+        CaveLightHack(Game.MapY.Value, Game.MapX.Value);
         if (Game.LightLevel >= 1)
         {
-            CaveLightHack(Game.MapY + 1, Game.MapX);
-            CaveLightHack(Game.MapY - 1, Game.MapX);
-            CaveLightHack(Game.MapY, Game.MapX + 1);
-            CaveLightHack(Game.MapY, Game.MapX - 1);
-            CaveLightHack(Game.MapY + 1, Game.MapX + 1);
-            CaveLightHack(Game.MapY + 1, Game.MapX - 1);
-            CaveLightHack(Game.MapY - 1, Game.MapX + 1);
-            CaveLightHack(Game.MapY - 1, Game.MapX - 1);
+            CaveLightHack(Game.MapY.Value + 1, Game.MapX.Value);
+            CaveLightHack(Game.MapY.Value - 1, Game.MapX.Value);
+            CaveLightHack(Game.MapY.Value, Game.MapX.Value + 1);
+            CaveLightHack(Game.MapY.Value, Game.MapX.Value - 1);
+            CaveLightHack(Game.MapY.Value + 1, Game.MapX.Value + 1);
+            CaveLightHack(Game.MapY.Value + 1, Game.MapX.Value - 1);
+            CaveLightHack(Game.MapY.Value - 1, Game.MapX.Value + 1);
+            CaveLightHack(Game.MapY.Value - 1, Game.MapX.Value - 1);
         }
         if (Game.LightLevel >= 2)
         {
-            if (Game.GridPassable(Game.MapY + 1, Game.MapX))
+            if (Game.GridPassable(Game.MapY.Value + 1, Game.MapX.Value))
             {
-                CaveLightHack(Game.MapY + 2, Game.MapX);
-                CaveLightHack(Game.MapY + 2, Game.MapX + 1);
-                CaveLightHack(Game.MapY + 2, Game.MapX - 1);
+                CaveLightHack(Game.MapY.Value + 2, Game.MapX.Value);
+                CaveLightHack(Game.MapY.Value + 2, Game.MapX.Value + 1);
+                CaveLightHack(Game.MapY.Value + 2, Game.MapX.Value - 1);
             }
-            if (Game.GridPassable(Game.MapY - 1, Game.MapX))
+            if (Game.GridPassable(Game.MapY.Value - 1, Game.MapX.Value))
             {
-                CaveLightHack(Game.MapY - 2, Game.MapX);
-                CaveLightHack(Game.MapY - 2, Game.MapX + 1);
-                CaveLightHack(Game.MapY - 2, Game.MapX - 1);
+                CaveLightHack(Game.MapY.Value - 2, Game.MapX.Value);
+                CaveLightHack(Game.MapY.Value - 2, Game.MapX.Value + 1);
+                CaveLightHack(Game.MapY.Value - 2, Game.MapX.Value - 1);
             }
-            if (Game.GridPassable(Game.MapY, Game.MapX + 1))
+            if (Game.GridPassable(Game.MapY.Value, Game.MapX.Value + 1))
             {
-                CaveLightHack(Game.MapY, Game.MapX + 2);
-                CaveLightHack(Game.MapY + 1, Game.MapX + 2);
-                CaveLightHack(Game.MapY - 1, Game.MapX + 2);
+                CaveLightHack(Game.MapY.Value, Game.MapX.Value + 2);
+                CaveLightHack(Game.MapY.Value + 1, Game.MapX.Value + 2);
+                CaveLightHack(Game.MapY.Value - 1, Game.MapX.Value + 2);
             }
-            if (Game.GridPassable(Game.MapY, Game.MapX - 1))
+            if (Game.GridPassable(Game.MapY.Value, Game.MapX.Value - 1))
             {
-                CaveLightHack(Game.MapY, Game.MapX - 2);
-                CaveLightHack(Game.MapY + 1, Game.MapX - 2);
-                CaveLightHack(Game.MapY - 1, Game.MapX - 2);
+                CaveLightHack(Game.MapY.Value, Game.MapX.Value - 2);
+                CaveLightHack(Game.MapY.Value + 1, Game.MapX.Value - 2);
+                CaveLightHack(Game.MapY.Value - 1, Game.MapX.Value - 2);
             }
         }
         if (Game.LightLevel >= 3)
@@ -80,38 +80,38 @@ internal class UpdateLightFlaggedAction : FlaggedAction
             {
                 p = 5;
             }
-            if (Game.GridPassable(Game.MapY + 1, Game.MapX + 1))
+            if (Game.GridPassable(Game.MapY.Value + 1, Game.MapX.Value + 1))
             {
-                CaveLightHack(Game.MapY + 2, Game.MapX + 2);
+                CaveLightHack(Game.MapY.Value + 2, Game.MapX.Value + 2);
             }
-            if (Game.GridPassable(Game.MapY + 1, Game.MapX - 1))
+            if (Game.GridPassable(Game.MapY.Value + 1, Game.MapX.Value - 1))
             {
-                CaveLightHack(Game.MapY + 2, Game.MapX - 2);
+                CaveLightHack(Game.MapY.Value + 2, Game.MapX.Value - 2);
             }
-            if (Game.GridPassable(Game.MapY - 1, Game.MapX + 1))
+            if (Game.GridPassable(Game.MapY.Value - 1, Game.MapX.Value + 1))
             {
-                CaveLightHack(Game.MapY - 2, Game.MapX + 2);
+                CaveLightHack(Game.MapY.Value - 2, Game.MapX.Value + 2);
             }
-            if (Game.GridPassable(Game.MapY - 1, Game.MapX - 1))
+            if (Game.GridPassable(Game.MapY.Value - 1, Game.MapX.Value - 1))
             {
-                CaveLightHack(Game.MapY - 2, Game.MapX - 2);
+                CaveLightHack(Game.MapY.Value - 2, Game.MapX.Value - 2);
             }
-            int minY = Game.MapY - p;
+            int minY = Game.MapY.Value - p;
             if (minY < 0)
             {
                 minY = 0;
             }
-            int maxY = Game.MapY + p;
+            int maxY = Game.MapY.Value + p;
             if (maxY > Game.CurHgt - 1)
             {
                 maxY = Game.CurHgt - 1;
             }
-            int minX = Game.MapX - p;
+            int minX = Game.MapX.Value - p;
             if (minX < 0)
             {
                 minX = 0;
             }
-            int maxX = Game.MapX + p;
+            int maxX = Game.MapX.Value + p;
             if (maxX > Game.CurWid - 1)
             {
                 maxX = Game.CurWid - 1;
@@ -120,8 +120,8 @@ internal class UpdateLightFlaggedAction : FlaggedAction
             {
                 for (int x = minX; x <= maxX; x++)
                 {
-                    int dy = Game.MapY > y ? Game.MapY - y : y - Game.MapY;
-                    int dx = Game.MapX > x ? Game.MapX - x : x - Game.MapX;
+                    int dy = Game.MapY.Value > y ? Game.MapY.Value - y : y - Game.MapY.Value;
+                    int dx = Game.MapX.Value > x ? Game.MapX.Value - x : x - Game.MapX.Value;
                     if (dy <= 2 && dx <= 2)
                     {
                         continue;

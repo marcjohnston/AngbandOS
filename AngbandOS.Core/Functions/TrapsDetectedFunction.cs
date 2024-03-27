@@ -6,18 +6,14 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Widgets;
-
 [Serializable]
-internal class ManaLabelWidget : TextWidget
+internal class TrapsDetectedFunction : BoolFunction
 {
-    private ManaLabelWidget(Game game) : base(game) { } // This object is a singleton.
-    public override int X => 0;
-    public override int Y => 26;
-    public override string Text => "Cur SP";
-    public override (string, bool)[]? EnabledNames => new (string, bool)[]
+    private TrapsDetectedFunction(Game game) : base(game) { } // This object is a singleton.
+    public override bool Value => Game.Grid[Game.MapY.Value][Game.MapX.Value].TrapsDetected;
+    public override string[]? DependencyNames => new string[]
     {
-        (nameof(UsesManaFunction), true)
+        nameof(MapXIntProperty),
+        nameof(MapYIntProperty)
     };
 }
-

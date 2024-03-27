@@ -19,8 +19,8 @@ internal class ExperiencePointsForNextLevelWidget : IntWidget
     public override ColorEnum Color => ColorEnum.BrightGreen;
     public override string IntChangeTrackingName => nameof(ExperiencePointsForNextLevelFunction);
     public override string? JustificationName => nameof(RightJustification);
-    public override (string conditionalName, bool isTrue)[]? EnabledConditionalNames => new[] {
-        (nameof(ExperienceLevelsAtMaxConditional), false),
-        (nameof(ExperiencePointsLostConditional), false)
+    public override (string conditionalName, bool isTrue)[]? EnabledNames => new[] {
+        (nameof(ExperienceLevelsAtMaxFunction), false),
+        (nameof(ExperiencePointsLostFunction), false)
     };
 }

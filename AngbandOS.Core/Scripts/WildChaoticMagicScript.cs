@@ -82,7 +82,7 @@ internal class WildChaoticMagicScript : Script, ISpellScript
                 break;
 
             case 26:
-                Game.Earthquake(Game.MapY, Game.MapX, 5);
+                Game.Earthquake(Game.MapY.Value, Game.MapX.Value, 5);
                 break;
 
             case 27:
@@ -112,7 +112,7 @@ internal class WildChaoticMagicScript : Script, ISpellScript
                 int counter = 0;
                 while (counter++ < 8)
                 {
-                    Game.SummonSpecific(Game.MapY, Game.MapX, Game.Difficulty * 3 / 2, Game.GetRandomBizarreMonsterSelector());
+                    Game.SummonSpecific(Game.MapY.Value, Game.MapX.Value, Game.Difficulty * 3 / 2, Game.GetRandomBizarreMonsterSelector());
                 }
                 break;
 

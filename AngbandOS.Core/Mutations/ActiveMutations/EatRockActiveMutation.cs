@@ -21,8 +21,8 @@ internal class EatRockActiveMutation : Mutation
         {
             return;
         }
-        int y = Game.MapY + Game.KeypadDirectionYOffset[dir];
-        int x = Game.MapX + Game.KeypadDirectionXOffset[dir];
+        int y = Game.MapY.Value + Game.KeypadDirectionYOffset[dir];
+        int x = Game.MapX.Value + Game.KeypadDirectionXOffset[dir];
         GridTile cPtr = Game.Grid[y][x];
         if (Game.GridPassable(y, x))
         {
@@ -58,11 +58,11 @@ internal class EatRockActiveMutation : Mutation
             Game.SetFood(Game.Food.Value + 10000);
         }
         Game.WallToMud(dir);
-        int oy = Game.MapY;
-        int ox = Game.MapX;
-        Game.MapY = y;
-        Game.MapX = x;
-        Game.MainForm.RefreshMapLocation(Game.MapY, Game.MapX);
+        int oy = Game.MapY.Value;
+        int ox = Game.MapX.Value;
+        Game.MapY.Value = y;
+        Game.MapX.Value = x;
+        Game.MainForm.RefreshMapLocation(Game.MapY.Value, Game.MapX.Value);
         Game.MainForm.RefreshMapLocation(oy, ox);
         Game.RecenterScreenAroundPlayer();
         base.Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateScentFlaggedAction)).Set();

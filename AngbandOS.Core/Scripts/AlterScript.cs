@@ -33,8 +33,8 @@ internal class AlterScript : Script, IScript, IRepeatableScript
         // Get the direction in which to alter something
         if (Game.GetDirectionNoAim(out int dir))
         {
-            int y = Game.MapY + Game.KeypadDirectionYOffset[dir];
-            int x = Game.MapX + Game.KeypadDirectionXOffset[dir];
+            int y = Game.MapY.Value + Game.KeypadDirectionYOffset[dir];
+            int x = Game.MapX.Value + Game.KeypadDirectionXOffset[dir];
             GridTile tile = Game.Grid[y][x];
             // Altering a tile will take a turn
             Game.EnergyUse = 100;

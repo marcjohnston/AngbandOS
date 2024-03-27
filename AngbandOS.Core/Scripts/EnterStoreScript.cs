@@ -28,7 +28,7 @@ internal class EnterStoreScript : Script, IScript, IRepeatableScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        GridTile tile = Game.Grid[Game.MapY][Game.MapX];
+        GridTile tile = Game.Grid[Game.MapY.Value][Game.MapX.Value];
         // Make sure we're actually on a shop tile
         if (!tile.FeatureType.IsShop)
         {

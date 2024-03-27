@@ -91,7 +91,7 @@ internal class SkeletonRace : Race
             // Spawn a new food item on the floor to make up for the one that will be destroyed
             Item floorItem = item.Factory.CreateItem();
             Game.MsgPrint("The food falls through your jaws!");
-            Game.DropNear(floorItem, -1, Game.MapY, Game.MapX);
+            Game.DropNear(floorItem, -1, Game.MapY.Value, Game.MapX.Value);
         }
     }
 
@@ -100,7 +100,7 @@ internal class SkeletonRace : Race
         if (Game.DieRoll(12) == 1)
         {
             Game.MsgPrint("Some of the fluid falls through your jaws!");
-            potion.Smash(0, Game.MapY, Game.MapX);
+            potion.Smash(0, Game.MapY.Value, Game.MapX.Value);
         }
     }
     public override bool CanBleed(int level) => false;

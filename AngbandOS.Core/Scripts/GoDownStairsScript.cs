@@ -29,7 +29,7 @@ internal class GoDownStairsScript : Script, IScript, IRepeatableScript
     public void ExecuteScript()
     {
         bool isTrapDoor = false;
-        GridTile tile = Game.Grid[Game.MapY][Game.MapX];
+        GridTile tile = Game.Grid[Game.MapY.Value][Game.MapX.Value];
         if (tile.FeatureType.IsTrapDoor)
         {
             isTrapDoor = true;

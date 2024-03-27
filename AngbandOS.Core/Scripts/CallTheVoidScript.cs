@@ -19,10 +19,10 @@ internal class CallTheVoidScript : Script, IScript
     public void ExecuteScript()
     {
         // Make sure we're not next to a wall
-        if (Game.GridPassable(Game.MapY - 1, Game.MapX - 1) && Game.GridPassable(Game.MapY - 1, Game.MapX) &&
-            Game.GridPassable(Game.MapY - 1, Game.MapX + 1) && Game.GridPassable(Game.MapY, Game.MapX - 1) &&
-            Game.GridPassable(Game.MapY, Game.MapX + 1) && Game.GridPassable(Game.MapY + 1, Game.MapX - 1) &&
-            Game.GridPassable(Game.MapY + 1, Game.MapX) && Game.GridPassable(Game.MapY + 1, Game.MapX + 1))
+        if (Game.GridPassable(Game.MapY.Value - 1, Game.MapX.Value - 1) && Game.GridPassable(Game.MapY.Value - 1, Game.MapX.Value) &&
+            Game.GridPassable(Game.MapY.Value - 1, Game.MapX.Value + 1) && Game.GridPassable(Game.MapY.Value, Game.MapX.Value - 1) &&
+            Game.GridPassable(Game.MapY.Value, Game.MapX.Value + 1) && Game.GridPassable(Game.MapY.Value + 1, Game.MapX.Value - 1) &&
+            Game.GridPassable(Game.MapY.Value + 1, Game.MapX.Value) && Game.GridPassable(Game.MapY.Value + 1, Game.MapX.Value + 1))
         {
             // Fire area effect shards, mana, and nukes in all directions
             int i;
@@ -55,7 +55,7 @@ internal class CallTheVoidScript : Script, IScript
             string spell = Game.BaseCharacterClass.SpellNoun;
             Game.MsgPrint($"You {cast} the {spell} too close to a wall!");
             Game.MsgPrint("There is a loud explosion!");
-            Game.DestroyArea(Game.MapY, Game.MapX, 20 + Game.ExperienceLevel.Value);
+            Game.DestroyArea(Game.MapY.Value, Game.MapX.Value, 20 + Game.ExperienceLevel.Value);
             Game.MsgPrint("The dungeon collapses...");
             Game.TakeHit(100 + Game.DieRoll(150), "a suicidal Call the Void");
         }

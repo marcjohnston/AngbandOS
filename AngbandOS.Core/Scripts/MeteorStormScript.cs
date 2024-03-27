@@ -18,8 +18,8 @@ internal class MeteorStormScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        int x = Game.MapX;
-        int y = Game.MapY;
+        int x = Game.MapX.Value;
+        int y = Game.MapY.Value;
         int count = 0;
         int b = 10 + Game.DieRoll(10);
         for (int i = 0; i < b; i++)
@@ -32,10 +32,10 @@ internal class MeteorStormScript : Script, IScript
                 {
                     break;
                 }
-                x = Game.MapX - 5 + Game.DieRoll(10);
-                y = Game.MapY - 5 + Game.DieRoll(10);
-                int dx = Game.MapX > x ? Game.MapX - x : x - Game.MapX;
-                int dy = Game.MapY > y ? Game.MapY - y : y - Game.MapY;
+                x = Game.MapX.Value - 5 + Game.DieRoll(10);
+                y = Game.MapY.Value - 5 + Game.DieRoll(10);
+                int dx = Game.MapX.Value > x ? Game.MapX.Value - x : x - Game.MapX.Value;
+                int dy = Game.MapY.Value > y ? Game.MapY.Value - y : y - Game.MapY.Value;
                 d = dy > dx ? dy + (dx >> 1) : dx + (dy >> 1);
             } while (d > 5 || !Game.PlayerHasLosBold(y, x));
             if (count > 1000)

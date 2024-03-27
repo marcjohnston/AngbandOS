@@ -27,7 +27,7 @@ internal class DimensionalGateEvery100Activation : Activation
         Game.Energy -= 60 - Game.ExperienceLevel.Value;
         if (!Game.GridPassableNoCreature(ij, ii) ||
             Game.Grid[ij][ii].InVault ||
-            Game.Distance(ij, ii, Game.MapY, Game.MapX) > Game.ExperienceLevel.Value + 2 ||
+            Game.Distance(ij, ii, Game.MapY.Value, Game.MapX.Value) > Game.ExperienceLevel.Value + 2 ||
             Game.RandomLessThan(Game.ExperienceLevel.Value * Game.ExperienceLevel.Value / 2) == 0)
         {
             Game.MsgPrint("You fail to exit the astral plane correctly!");

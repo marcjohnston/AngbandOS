@@ -83,10 +83,10 @@ internal class FireItemScript : Script, IScript, IRepeatableScript
         int shotDistance = 10 + (5 * damageMultiplier);
         // Divide by our shot speed to give the equivalent of x shots per turn
         Game.EnergyUse = 100 / shotSpeed;
-        int y = Game.MapY;
-        int x = Game.MapX;
-        int targetX = Game.MapX + (99 * Game.KeypadDirectionXOffset[dir]);
-        int targetY = Game.MapY + (99 * Game.KeypadDirectionYOffset[dir]);
+        int y = Game.MapY.Value;
+        int x = Game.MapX.Value;
+        int targetX = Game.MapX.Value + (99 * Game.KeypadDirectionXOffset[dir]);
+        int targetY = Game.MapY.Value + (99 * Game.KeypadDirectionYOffset[dir]);
         // Special case for if we're hitting our own square
         if (dir == 5 && Game.TargetOkay())
         {
@@ -103,7 +103,7 @@ internal class FireItemScript : Script, IScript, IRepeatableScript
                 break;
             }
             // Move a step towards the target
-            Game.MoveOneStepTowards(out int newY, out int newX, y, x, Game.MapY, Game.MapX, targetY, targetX);
+            Game.MoveOneStepTowards(out int newY, out int newX, y, x, Game.MapY.Value, Game.MapX.Value, targetY, targetX);
             // If we were blocked by a wall or something then stop short
             if (!Game.GridPassable(newY, newX))
             {

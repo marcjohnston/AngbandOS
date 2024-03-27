@@ -18,7 +18,7 @@ internal class SummonAnimalActivation : Activation
 
     protected override bool OnActivate(Item item)
     {
-        Game.SummonSpecificFriendly(Game.MapY, Game.MapX, Game.ExperienceLevel.Value, Game.SingletonRepository.MonsterFilters.Get(nameof(AnimalRangerMonsterFilter)), true);
+        Game.SummonSpecificFriendly(Game.MapY.Value, Game.MapX.Value, Game.ExperienceLevel.Value, Game.SingletonRepository.MonsterFilters.Get(nameof(AnimalRangerMonsterFilter)), true);
         return true;
     }
 

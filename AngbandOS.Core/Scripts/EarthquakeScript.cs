@@ -18,6 +18,6 @@ internal class EarthquakeScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        Game.Earthquake(Game.MapY, Game.MapX, 10);
+        Game.Earthquake(Game.MapY.Value, Game.MapX.Value, 10);
     }
 }

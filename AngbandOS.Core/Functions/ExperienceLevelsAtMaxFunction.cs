@@ -1,15 +1,20 @@
-﻿// AngbandOS: 2022 Marc Johnston
+﻿
+// AngbandOS: 2022 Marc Johnston
 //
 // This game is released under the “Angband License”, defined as: “© 1997 Ben Harrison, James E.
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Conditionals;
-
 [Serializable]
-internal class ExperienceLevelsAtMaxConditional : Conditional
+internal class ExperienceLevelsAtMaxFunction : BoolFunction
 {
-    private ExperienceLevelsAtMaxConditional(Game game) : base(game) { }
-    public override bool IsTrue => Game.ExperienceLevel.Value >= Constants.PyMaxLevel;
+    private ExperienceLevelsAtMaxFunction(Game game) : base(game) { }
+    public override bool Value => Game.ExperienceLevel.Value >= Constants.PyMaxLevel;
+
+    public override string[]? DependencyNames => new string[]
+    {
+        nameof(ExperienceLevelIntProperty)
+    };
 }
+

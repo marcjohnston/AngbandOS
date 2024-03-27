@@ -14,7 +14,7 @@ internal class SerDemoReward : Reward
     public override void GetReward(Patron patron)
     {
         Game.MsgPrint($"{patron.ShortName} rewards you with a demonic servant!");
-        if (!Game.SummonSpecificFriendly(Game.MapY, Game.MapX, Game.Difficulty, Game.SingletonRepository.MonsterFilters.Get(nameof(DemonMonsterFilter)), false))
+        if (!Game.SummonSpecificFriendly(Game.MapY.Value, Game.MapX.Value, Game.Difficulty, Game.SingletonRepository.MonsterFilters.Get(nameof(DemonMonsterFilter)), false))
         {
             Game.MsgPrint("Nobody ever turns up...");
         }

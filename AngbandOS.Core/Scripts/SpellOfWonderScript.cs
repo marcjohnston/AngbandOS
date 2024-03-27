@@ -116,11 +116,11 @@ internal class SpellOfWonderScript : Script, IScript
         }
         else if (die < 104)
         {
-            Game.Earthquake(Game.MapY, Game.MapX, 12);
+            Game.Earthquake(Game.MapY.Value, Game.MapX.Value, 12);
         }
         else if (die < 106)
         {
-            Game.DestroyArea(Game.MapY, Game.MapX, 15);
+            Game.DestroyArea(Game.MapY.Value, Game.MapX.Value, 15);
         }
         else if (die < 108)
         {

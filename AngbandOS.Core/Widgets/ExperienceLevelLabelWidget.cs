@@ -15,8 +15,8 @@ internal class ExperienceLevelLabelWidget : TextWidget
     public override int X => 0;
     public override int Y => 5;
     public override string Text => "LEVEL";
-    public override (string, bool)[]? EnabledConditionalNames => new (string, bool)[]
+    public override (string, bool)[]? EnabledNames => new (string, bool)[]
     {
-        (nameof(MaxLevelAttainedConditional), true)
+        (nameof(MaxLevelAttainedFunction), true)
     };
 }

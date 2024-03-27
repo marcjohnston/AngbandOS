@@ -17,8 +17,8 @@ internal class MaxManaWidget : IntWidget
     public override ColorEnum Color => ColorEnum.BrightGreen;
     public override string IntChangeTrackingName => nameof(MaxManaIntProperty);
     public override string? JustificationName => nameof(RightJustification);
-    public override (string, bool)[]? EnabledConditionalNames => new (string, bool)[]
+    public override (string, bool)[]? EnabledNames => new (string, bool)[]
     {
-        (nameof(UsesManaConditional), true)
+        (nameof(UsesManaFunction), true)
     };
 }

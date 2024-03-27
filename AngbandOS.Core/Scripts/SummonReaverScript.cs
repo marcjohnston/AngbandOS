@@ -21,12 +21,12 @@ internal class SummonReaverScript : Script, IScript
         Game.MsgPrint("You concentrate on the image of a Black Reaver...");
         if (Game.DieRoll(10) > 3)
         {
-            if (!Game.SummonSpecificFriendly(Game.MapY, Game.MapX, Game.ExperienceLevel.Value, Game.SingletonRepository.MonsterFilters.Get(nameof(ReaverMonsterFilter)), true))
+            if (!Game.SummonSpecificFriendly(Game.MapY.Value, Game.MapX.Value, Game.ExperienceLevel.Value, Game.SingletonRepository.MonsterFilters.Get(nameof(ReaverMonsterFilter)), true))
             {
                 Game.MsgPrint("No-one ever turns up.");
             }
         }
-        else if (Game.SummonSpecific(Game.MapY, Game.MapX, Game.ExperienceLevel.Value, Game.SingletonRepository.MonsterFilters.Get(nameof(ReaverMonsterFilter))))
+        else if (Game.SummonSpecific(Game.MapY.Value, Game.MapX.Value, Game.ExperienceLevel.Value, Game.SingletonRepository.MonsterFilters.Get(nameof(ReaverMonsterFilter))))
         {
             Game.MsgPrint("The summoned Black Reaver gets angry!");
         }

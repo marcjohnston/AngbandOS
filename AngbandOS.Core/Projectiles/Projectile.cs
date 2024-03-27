@@ -73,8 +73,8 @@ internal abstract class Projectile : IGetKey
         }
         else if (who == 0)
         {
-            x1 = Game.MapX;
-            y1 = Game.MapY;
+            x1 = Game.MapX.Value;
+            y1 = Game.MapY.Value;
         }
         else
         {
@@ -453,7 +453,7 @@ internal abstract class Projectile : IGetKey
                 x = gx[i];
 
                 // Check to see if the projectile can affect the player.
-                if (x == Game.MapX && y == Game.MapY && who != 0)
+                if (x == Game.MapX.Value && y == Game.MapY.Value && who != 0)
                 {
                     // Check to see if the projectile attack bounces off the player.
                     if (!CheckBounceOffPlayer(who, dam, rad))

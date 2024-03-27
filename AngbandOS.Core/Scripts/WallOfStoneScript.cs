@@ -19,7 +19,7 @@ internal class WallOfStoneScript : Script, IScript
     public void ExecuteScript()
     {
         ProjectionFlag flg = ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem;
-        Game.Project(0, 1, Game.MapY, Game.MapX, 0, Game.SingletonRepository.Projectiles.Get(nameof(StoneWallProjectile)), flg);
+        Game.Project(0, 1, Game.MapY.Value, Game.MapX.Value, 0, Game.SingletonRepository.Projectiles.Get(nameof(StoneWallProjectile)), flg);
         Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateScentFlaggedAction)).Set();
         Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateLightFlaggedAction)).Set();
         Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateViewFlaggedAction)).Set();

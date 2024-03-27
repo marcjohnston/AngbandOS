@@ -72,7 +72,7 @@ internal class HobbitRace : Race
         {
             ItemFactory foodItemClass = Game.SingletonRepository.ItemFactories.Get(nameof(RationFoodItemFactory));
             Item item = foodItemClass.CreateItem();
-            Game.DropNear(item, -1, Game.MapY, Game.MapX);
+            Game.DropNear(item, -1, Game.MapY.Value, Game.MapX.Value);
             Game.MsgPrint("You cook some food.");
         }
     }

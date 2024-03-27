@@ -21,8 +21,8 @@ internal class ColdTouchActiveMutation : Mutation
         {
             return;
         }
-        int y = Game.MapY + Game.KeypadDirectionYOffset[dir];
-        int x = Game.MapX + Game.KeypadDirectionXOffset[dir];
+        int y = Game.MapY.Value + Game.KeypadDirectionYOffset[dir];
+        int x = Game.MapX.Value + Game.KeypadDirectionXOffset[dir];
         GridTile cPtr = Game.Grid[y][x];
         if (cPtr.MonsterIndex == 0)
         {

@@ -14,7 +14,7 @@ internal class SerUndeReward : Reward
     public override void GetReward(Patron patron)
     {
         Game.MsgPrint($"{patron.ShortName} rewards you with an undead servant!");
-        if (!Game.SummonSpecificFriendly(Game.MapY, Game.MapX, Game.Difficulty, Game.SingletonRepository.MonsterFilters.Get(nameof(UndeadMonsterFilter)), false))
+        if (!Game.SummonSpecificFriendly(Game.MapY.Value, Game.MapX.Value, Game.Difficulty, Game.SingletonRepository.MonsterFilters.Get(nameof(UndeadMonsterFilter)), false))
         {
             Game.MsgPrint("Nobody ever turns up...");
         }

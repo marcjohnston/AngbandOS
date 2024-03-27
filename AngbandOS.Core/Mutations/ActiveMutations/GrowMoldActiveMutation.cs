@@ -19,7 +19,7 @@ internal class GrowMoldActiveMutation : Mutation
         }
         for (int i = 0; i < 8; i++)
         {
-            Game.SummonSpecificFriendly(Game.MapY, Game.MapX, Game.ExperienceLevel.Value, Game.SingletonRepository.MonsterFilters.Get(nameof(Bizarre1MonsterFilter)), false);
+            Game.SummonSpecificFriendly(Game.MapY.Value, Game.MapX.Value, Game.ExperienceLevel.Value, Game.SingletonRepository.MonsterFilters.Get(nameof(Bizarre1MonsterFilter)), false);
         }
     }
 

@@ -96,8 +96,8 @@ internal class VampireRace : Race
         {
             if (Game.GetDirectionNoAim(out int direction))
             {
-                int y = Game.MapY + Game.KeypadDirectionYOffset[direction];
-                int x = Game.MapX + Game.KeypadDirectionXOffset[direction];
+                int y = Game.MapY.Value + Game.KeypadDirectionYOffset[direction];
+                int x = Game.MapX.Value + Game.KeypadDirectionXOffset[direction];
                 GridTile tile = Game.Grid[y][x];
                 if (tile.MonsterIndex == 0)
                 {
@@ -142,7 +142,7 @@ internal class VampireRace : Race
             Game.InvulnerabilityTimer.Value == 0 &&
             Game.IsLight)
         {
-            if (Game.Grid[Game.MapY][Game.MapX].SelfLit)
+            if (Game.Grid[Game.MapY.Value][Game.MapX.Value].SelfLit)
             {
                 Game.MsgPrint("The sun's rays scorch your undead flesh!");
                 Game.TakeHit(1, "sunlight");

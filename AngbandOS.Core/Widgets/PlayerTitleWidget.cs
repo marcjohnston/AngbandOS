@@ -17,7 +17,7 @@ internal class PlayerTitleWidget : TextWidget
     public override int Y => 4;
     public override string Text => "";
     public override ColorEnum Color => ColorEnum.BrightBlue;
-    public override (string, bool)[]? EnabledConditionalNames => new (string, bool)[]
+    public override (string, bool)[]? EnabledNames => new (string, bool)[]
     {
         (nameof(IsWizardBoolProperty), false),
         (nameof(IsWinnerBoolProperty), false)

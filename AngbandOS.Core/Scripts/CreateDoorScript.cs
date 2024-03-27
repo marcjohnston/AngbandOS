@@ -19,6 +19,6 @@ internal class CreateDoorScript : Script, IScript
     public void ExecuteScript()
     {
         ProjectionFlag flg = ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectHide;
-        Game.Project(0, 1, Game.MapY, Game.MapX, 0, Game.SingletonRepository.Projectiles.Get(nameof(MakeDoorProjectile)), flg);
+        Game.Project(0, 1, Game.MapY.Value, Game.MapX.Value, 0, Game.SingletonRepository.Projectiles.Get(nameof(MakeDoorProjectile)), flg);
     }
 }

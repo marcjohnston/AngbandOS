@@ -20,8 +20,8 @@ internal class WhirlwindAttackScript : Script, IScript
     {
         for (int dir = 0; dir <= 9; dir++)
         {
-            int y = Game.MapY + Game.KeypadDirectionYOffset[dir];
-            int x = Game.MapX + Game.KeypadDirectionXOffset[dir];
+            int y = Game.MapY.Value + Game.KeypadDirectionYOffset[dir];
+            int x = Game.MapX.Value + Game.KeypadDirectionXOffset[dir];
             GridTile cPtr = Game.Grid[y][x];
             Monster mPtr = Game.Monsters[cPtr.MonsterIndex];
             if (cPtr.MonsterIndex != 0 && (mPtr.IsVisible || Game.GridPassable(y, x)))

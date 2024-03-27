@@ -20,7 +20,7 @@ internal class SummonPhantomActivation : Activation
 
     protected override bool OnActivate(Item item)
     {
-        Game.SummonSpecificFriendly(Game.MapY, Game.MapX, Game.Difficulty, Game.SingletonRepository.MonsterFilters.Get(nameof(PhantomMonsterFilter)), true);
+        Game.SummonSpecificFriendly(Game.MapY.Value, Game.MapX.Value, Game.Difficulty, Game.SingletonRepository.MonsterFilters.Get(nameof(PhantomMonsterFilter)), true);
         return true;
     }
 

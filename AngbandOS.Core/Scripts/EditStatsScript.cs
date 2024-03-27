@@ -70,7 +70,7 @@ internal class EditStatsScript : Script, IScript
         }
         Game.Mana.Value = tmpInt;
 
-        if (!Game.GetString("Experience: ", out tmpVal, $"{Game.MaxExperienceGained}", 9))
+        if (!Game.GetString("Experience: ", out tmpVal, $"{Game.MaxExperienceGained.Value}", 9))
         {
             return;
         }
@@ -82,7 +82,7 @@ internal class EditStatsScript : Script, IScript
         {
             tmpInt = 0;
         }
-        Game.MaxExperienceGained = tmpInt;
+        Game.MaxExperienceGained.Value = tmpInt;
 
         Game.CheckExperience();
         Game.RunScript(nameof(RedrawScript));

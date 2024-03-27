@@ -361,8 +361,8 @@ internal class RenderCharacterScript : Script, IScript, IRepeatableScript
         PrintShortScore("  Base AC   ", Game.DisplayedBaseArmorClass.Value, 33, 1, ColorEnum.Brown);
         PrintShortScore("Level      ", Game.ExperienceLevel.Value, 30, 28, ColorEnum.Green);
         PrintLongScore("Experience ", Game.ExperiencePoints.Value, 31, 28,
-            Game.ExperiencePoints.Value >= Game.MaxExperienceGained ? ColorEnum.Green : ColorEnum.Red);
-        PrintLongScore("Max Exp    ", Game.MaxExperienceGained, 32, 28, ColorEnum.Green);
+            Game.ExperiencePoints.Value >= Game.MaxExperienceGained.Value ? ColorEnum.Green : ColorEnum.Red);
+        PrintLongScore("Max Exp    ", Game.MaxExperienceGained.Value, 32, 28, ColorEnum.Green);
         // If we're max level we don't have any experience to advance
         if (Game.ExperienceLevel.Value >= Constants.PyMaxLevel)
         {

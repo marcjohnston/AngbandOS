@@ -44,8 +44,8 @@ internal class OpenScript : Script, IScript, IRepeatableScript
         // If we don't already have a direction, prompt for one
         if (Game.GetDirectionNoAim(out int dir))
         {
-            int y = Game.MapY + Game.KeypadDirectionYOffset[dir];
-            int x = Game.MapX + Game.KeypadDirectionXOffset[dir];
+            int y = Game.MapY.Value + Game.KeypadDirectionYOffset[dir];
+            int x = Game.MapX.Value + Game.KeypadDirectionXOffset[dir];
             GridTile tile = Game.Grid[y][x];
             Item? chestItem = Game.ChestCheck(y, x);
             // Make sure there is something to open in the direction we chose

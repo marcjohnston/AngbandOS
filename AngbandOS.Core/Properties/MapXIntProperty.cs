@@ -5,10 +5,10 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Repositories;
+namespace AngbandOS.Core.Properties;
 
 [Serializable]
-internal class ConditionalsRepository : DictionaryRepository<Conditional>
+internal class MapXIntProperty : IntProperty
 {
-    public ConditionalsRepository(Game game) : base(game) { }
+    protected MapXIntProperty(Game game) : base(game) { } // This object is a singleton.
 }

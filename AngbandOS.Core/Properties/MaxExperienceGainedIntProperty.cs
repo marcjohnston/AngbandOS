@@ -5,11 +5,10 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Conditionals;
+namespace AngbandOS.Core.Properties;
 
 [Serializable]
-internal class ExperiencePointsLostConditional : Conditional
+internal class MaxExperienceGainedIntProperty : IntProperty
 {
-    private ExperiencePointsLostConditional(Game game) : base(game) { }
-    public override bool IsTrue => Game.ExperiencePoints.Value < Game.MaxExperienceGained;
+    protected MaxExperienceGainedIntProperty(Game game) : base(game) { } // This object is a singleton.
 }

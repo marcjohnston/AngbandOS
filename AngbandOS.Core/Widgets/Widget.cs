@@ -40,7 +40,7 @@ internal abstract class Widget : IGetKey
     /// </summary>
     public (IConditional conditional, bool isTrue)[]? Enabled { get; private set; }
 
-    public virtual (string conditionalName, bool isTrue)[]? EnabledConditionalNames => null;
+    public virtual (string conditionalName, bool isTrue)[]? EnabledNames => null;
 
     public virtual string Key => GetType().Name;
 
@@ -48,29 +48,28 @@ internal abstract class Widget : IGetKey
 
     public virtual void Bind()
     {
-        if (EnabledConditionalNames == null)
+        if (EnabledNames == null)
         {
             Enabled = null;
         }
         else
         {
             List<(IConditional, bool)> conditionalList = new();
-            foreach ((string conditionalName, bool isTrue) in EnabledConditionalNames)
+            foreach ((string enabledName, bool isTrue) in EnabledNames)
             {
-                Conditional? conditional = Game.SingletonRepository.Conditionals.TryGet(conditionalName);
-                if (conditional != null)
+                Property? property = Game.SingletonRepository.Properties.TryGet(enabledName);
+                if (property != null)
                 {
-                    conditionalList.Add((conditional, isTrue));
-                }
+                    conditionalList.Add(((IConditional)property, isTrue));
+                } 
                 else
-                {
-                    Property? property = Game.SingletonRepository.Properties.TryGet(conditionalName);
-                    if (property == null)
+                { 
+                    Function? function = Game.SingletonRepository.Functions.TryGet(enabledName);
+                    if (function == null)
                     {
-                        throw new Exception($"A {conditionalName} {nameof(Conditional)} or {nameof(Property)} cannot be found.");
+                        throw new Exception($"The {enabledName} enabled dependency cannot be found as a {nameof(Property)} or {nameof(Function)}.");
                     }
-                    IConditional boolProperty = (IConditional)property;
-                    conditionalList.Add((boolProperty, isTrue));
+                    conditionalList.Add(((IConditional)function, isTrue));
                 }
             }
             Enabled = conditionalList.ToArray();

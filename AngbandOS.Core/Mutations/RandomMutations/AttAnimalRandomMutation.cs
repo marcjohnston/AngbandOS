@@ -25,11 +25,11 @@ internal class AttAnimalRandomMutation : Mutation
         bool aSummon;
         if (base.Game.DieRoll(3) == 1)
         {
-            aSummon = Game.SummonSpecificFriendly(Game.MapY, Game.MapX, Game.Difficulty, Game.SingletonRepository.MonsterFilters.Get(nameof(AnimalMonsterFilter)), true);
+            aSummon = Game.SummonSpecificFriendly(Game.MapY.Value, Game.MapX.Value, Game.Difficulty, Game.SingletonRepository.MonsterFilters.Get(nameof(AnimalMonsterFilter)), true);
         }
         else
         {
-            aSummon = Game.SummonSpecific(Game.MapY, Game.MapX, Game.Difficulty, Game.SingletonRepository.MonsterFilters.Get(nameof(AnimalMonsterFilter)));
+            aSummon = Game.SummonSpecific(Game.MapY.Value, Game.MapX.Value, Game.Difficulty, Game.SingletonRepository.MonsterFilters.Get(nameof(AnimalMonsterFilter)));
         }
         if (!aSummon)
         {

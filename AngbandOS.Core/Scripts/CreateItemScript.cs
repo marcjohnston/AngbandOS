@@ -52,7 +52,7 @@ internal class CreateItemScript : Script, IScript
         }
 
         qPtr.ApplyMagic(Game.Difficulty, ok, good, great, null);
-        Game.DropNear(qPtr, -1, Game.MapY, Game.MapX);
+        Game.DropNear(qPtr, -1, Game.MapY.Value, Game.MapX.Value);
         Game.MsgPrint("Allocated.");
         return;
     }

@@ -16,7 +16,7 @@ internal class PlayerTitleIsWizardWidget : TextWidget
     public override int Y => 4;
     public override string Text => "-=<WIZARD>=-";
     public override ColorEnum Color => ColorEnum.BrightBlue;
-    public override (string, bool)[]? EnabledConditionalNames => new (string, bool)[]
+    public override (string, bool)[]? EnabledNames => new (string, bool)[]
     {
         (nameof(IsWizardBoolProperty), true)
     };

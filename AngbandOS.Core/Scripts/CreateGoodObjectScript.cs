@@ -22,6 +22,6 @@ internal class CreateGoodObjectScript : Script, IScript
         {
             Game.CommandArgument = 1;
         }
-        Game.Acquirement(Game.MapY, Game.MapX, Game.CommandArgument, false);
+        Game.Acquirement(Game.MapY.Value, Game.MapX.Value, Game.CommandArgument, false);
     }
 }

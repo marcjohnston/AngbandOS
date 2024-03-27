@@ -833,7 +833,7 @@ internal class Monster : IItemContainer
                 doMove = true;
             }
             // We can always attack the player, even if the move would otherwse not be allowed
-            else if (newY == Game.MapY && newX == Game.MapX)
+            else if (newY == Game.MapY.Value && newX == Game.MapX.Value)
             {
                 doMove = true;
             }
@@ -959,7 +959,7 @@ internal class Monster : IItemContainer
                     if (tile.PlayerMemorized)
                     {
                         // If the player was on the sign, hurt them
-                        if (newY == Game.MapY && newX == Game.MapX)
+                        if (newY == Game.MapY.Value && newX == Game.MapX.Value)
                         {
                             Game.MsgPrint("The rune explodes!");
                             Game.FireBall(Game.SingletonRepository.Projectiles.Get(nameof(ManaProjectile)), 0, 2 * ((Game.ExperienceLevel.Value / 2) + Game.DiceRoll(7, 7)), 2);
@@ -976,12 +976,12 @@ internal class Monster : IItemContainer
                 }
             }
             // If we're going to attack the player, but our race never attacks, then cancel the move
-            if (doMove && newY == Game.MapY && newX == Game.MapX && Race.NeverAttack)
+            if (doMove && newY == Game.MapY.Value && newX == Game.MapX.Value && Race.NeverAttack)
             {
                 doMove = false;
             }
             // If we're trying to move onto the player, then attack them instead
-            if (doMove && newY == Game.MapY && newX == Game.MapX)
+            if (doMove && newY == Game.MapY.Value && newX == Game.MapX.Value)
             {
                 MonsterAttackPlayer();
                 doMove = false;
@@ -1427,7 +1427,7 @@ internal class Monster : IItemContainer
         }
 
         // If we have no line of sight to the player, don't cast a spell
-        if (!Game.Projectable(MapY, MapX, Game.MapY, Game.MapX))
+        if (!Game.Projectable(MapY, MapX, Game.MapY.Value, Game.MapX.Value))
         {
             return false;
         }
@@ -1466,14 +1466,14 @@ internal class Monster : IItemContainer
         }
 
         // If we don't have a clean shot, and we're stupid, remove bolt spells
-        if (spells.Contains((_spell) => _spell.CanBeReflected) && !Race.Stupid && !Game.CleanShot(MapY, MapX, Game.MapY, Game.MapX))
+        if (spells.Contains((_spell) => _spell.CanBeReflected) && !Race.Stupid && !Game.CleanShot(MapY, MapX, Game.MapY.Value, Game.MapX.Value))
         {
             spells = spells.Remove((_spell) => _spell.CanBeReflected);
         }
 
         // If there's nowhere around the player to put a summoned creature, then remove
         // summoning spells
-        if (spells.Contains((_spell) => _spell.SummonsHelp) && !Race.Stupid && !Game.SummonPossible(Game.MapY, Game.MapX))
+        if (spells.Contains((_spell) => _spell.SummonsHelp) && !Race.Stupid && !Game.SummonPossible(Game.MapY.Value, Game.MapX.Value))
         {
             spells = spells.Remove((_spell) => _spell.SummonsHelp);
         }
@@ -1753,7 +1753,7 @@ internal class Monster : IItemContainer
         {
             radius = Race.Powerful ? 3 : 2;
         }
-        game.Project(GetMonsterIndex(), radius, game.MapY, game.MapX, damage, projectile, projectionFlag);
+        game.Project(GetMonsterIndex(), radius, game.MapY.Value, game.MapX.Value, damage, projectile, projectionFlag);
     }
 
     /// <summary>
@@ -1775,7 +1775,7 @@ internal class Monster : IItemContainer
         }
         // Make the radius negative to indicate we need a cone instead of a ball
         radius = 0 - radius;
-        game.Project(GetMonsterIndex(), radius, game.MapY, game.MapX, damage, projectile, projectionFlags);
+        game.Project(GetMonsterIndex(), radius, game.MapY.Value, game.MapX.Value, damage, projectile, projectionFlags);
     }
 
     /// <summary>
@@ -1887,7 +1887,7 @@ internal class Monster : IItemContainer
     public void FireBoltAtPlayer(Projectile projectile, int damage)
     {
         const ProjectionFlag projectionFlags = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;
-        Game.Project(GetMonsterIndex(), 0, Game.MapY, Game.MapX, damage, projectile, projectionFlags);
+        Game.Project(GetMonsterIndex(), 0, Game.MapY.Value, Game.MapX.Value, damage, projectile, projectionFlags);
     }
 
     /// <summary>
@@ -2149,7 +2149,7 @@ internal class Monster : IItemContainer
         int moveVal = 0;
         bool done = false;
         // Default to moving towards the player's exact location
-        GridCoordinate targetLocation = new GridCoordinate(game.MapX, game.MapY);
+        GridCoordinate targetLocation = new GridCoordinate(game.MapX.Value, game.MapY.Value);
         // Adjust our target based on the player's scent if we can't move in a straight line to them
         TrackPlayerByScent(game, targetLocation);
         // Get the relative move needed to reach our target location
@@ -2164,7 +2164,7 @@ internal class Monster : IItemContainer
                 // Check if the player is in a room by counting the room tiles around them
                 for (int i = 0; i < 8; i++)
                 {
-                    if (game.Grid[game.MapY + game.OrderedDirectionYOffset[i]][game.MapX + game.OrderedDirectionXOffset[i]].InRoom)
+                    if (game.Grid[game.MapY.Value + game.OrderedDirectionYOffset[i]][game.MapX.Value + game.OrderedDirectionXOffset[i]].InRoom)
                     {
                         room++;
                     }
@@ -2186,12 +2186,12 @@ internal class Monster : IItemContainer
                 for (int i = 0; i < 8; i++)
                 {
                     int monsterIndex = GetMonsterIndex();
-                    targetLocation = new GridCoordinate(game.MapX + game.OrderedDirectionXOffset[(monsterIndex + i) & 7], game.MapY + game.OrderedDirectionYOffset[(monsterIndex + i) & 7]);
+                    targetLocation = new GridCoordinate(game.MapX.Value + game.OrderedDirectionXOffset[(monsterIndex + i) & 7], game.MapY.Value + game.OrderedDirectionYOffset[(monsterIndex + i) & 7]);
                     // We might have got a '5' meaning stay where we are, so replace that with
                     // moving towards the player
                     if (MapY == targetLocation.Y && MapX == targetLocation.X)
                     {
-                        targetLocation = new GridCoordinate(game.MapX, game.MapY);
+                        targetLocation = new GridCoordinate(game.MapX.Value, game.MapY.Value);
                         break;
                     }
                     // Repeat till we get a direction we can move in
@@ -2424,7 +2424,7 @@ internal class Monster : IItemContainer
         int dY = monsterY - coord.Y;
         int dX = monsterX - coord.X;
         // If the scent too strong, keep going where we were going
-        if (game.Grid[monsterY][monsterX].ScentAge < game.Grid[game.MapY][game.MapX].ScentAge)
+        if (game.Grid[monsterY][monsterX].ScentAge < game.Grid[game.MapY.Value][game.MapX.Value].ScentAge)
         {
             return;
         }
@@ -2499,7 +2499,7 @@ internal class Monster : IItemContainer
         int x1 = MapX;
         GridTile cPtr = game.Grid[y1][x1];
         // If we have no scent of the player then don't change where we were going
-        if (cPtr.ScentAge < game.Grid[game.MapY][game.MapX].ScentAge)
+        if (cPtr.ScentAge < game.Grid[game.MapY.Value][game.MapX.Value].ScentAge)
         {
             if (cPtr.ScentAge == 0)
             {
@@ -2541,7 +2541,7 @@ internal class Monster : IItemContainer
             when = game.Grid[y][x].ScentAge;
             cost = game.Grid[y][x].ScentStrength;
             // Give us a target in the general direction of the strongest scent
-            target = new GridCoordinate(game.MapX + (16 * game.OrderedDirectionXOffset[i]), game.MapY + (16 * game.OrderedDirectionYOffset[i]));
+            target = new GridCoordinate(game.MapX.Value + (16 * game.OrderedDirectionXOffset[i]), game.MapY.Value + (16 * game.OrderedDirectionYOffset[i]));
         }
     }
 
@@ -2560,7 +2560,7 @@ internal class Monster : IItemContainer
         int hidingSpotY = 0;
         int hidingSpotX = 0;
         int shortestDistance = 999;
-        int tooCloseToPlayer = (game.Distance(game.MapY, game.MapX, fy, fx) * 3 / 4) + 2;
+        int tooCloseToPlayer = (game.Distance(game.MapY.Value, game.MapX.Value, fy, fx) * 3 / 4) + 2;
         // Start with a short search radius and slowly increase
         for (int d = 1; d < 10; d++)
         {
@@ -2589,7 +2589,7 @@ internal class Monster : IItemContainer
                     {
                         // If the spot is closer to the player than any previously found spot
                         // (but not too close), remember it
-                        int dis = game.Distance(y, x, game.MapY, game.MapX);
+                        int dis = game.Distance(y, x, game.MapY.Value, game.MapX.Value);
                         if (dis < shortestDistance && dis >= tooCloseToPlayer)
                         {
                             hidingSpotY = y;
@@ -3169,7 +3169,7 @@ internal class Monster : IItemContainer
         // tactical spell
         MonsterSpellList attackSpells = spells.Where((_spell) => _spell.IsAttack);
         MonsterSpellList tacticalSpells = spells.Where((_spell) => _spell.IsTactical);
-        if (Game.Distance(Game.MapY, Game.MapX, MapY, MapX) < 4 && attackSpells.Count > 0 && this.Game.RandomLessThan(100) < 75)
+        if (Game.Distance(Game.MapY.Value, Game.MapX.Value, MapY, MapX) < 4 && attackSpells.Count > 0 && this.Game.RandomLessThan(100) < 75)
         {
             if (tacticalSpells.Count > 0)
             {
@@ -3260,7 +3260,7 @@ internal class Monster : IItemContainer
                         continue;
                     }
                     // Reject spots that smell too strongly of the player
-                    if (game.Grid[y][x].ScentAge < game.Grid[game.MapY][game.MapX].ScentAge)
+                    if (game.Grid[y][x].ScentAge < game.Grid[game.MapY.Value][game.MapX.Value].ScentAge)
                     {
                         continue;
                     }
@@ -3269,11 +3269,11 @@ internal class Monster : IItemContainer
                         continue;
                     }
                     // Make sure the spot is actually hidden
-                    if (!game.Projectable(y, x, game.MapY, game.MapX))
+                    if (!game.Projectable(y, x, game.MapY.Value, game.MapX.Value))
                     {
                         // If the spot is further from the player than any previously found
                         // spot, remember it
-                        int dis = game.Distance(y, x, game.MapY, game.MapX);
+                        int dis = game.Distance(y, x, game.MapY.Value, game.MapX.Value);
                         if (dis > longestDistance)
                         {
                             safeSpotY = y;

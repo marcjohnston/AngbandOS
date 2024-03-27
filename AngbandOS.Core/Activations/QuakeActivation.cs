@@ -22,7 +22,7 @@ internal class QuakeActivation : Activation
 
     protected override bool OnActivate(Item item)
     {
-        Game.Earthquake(Game.MapY, Game.MapX, 10);
+        Game.Earthquake(Game.MapY.Value, Game.MapX.Value, 10);
         return true;
     }
 

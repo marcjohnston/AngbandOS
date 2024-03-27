@@ -15,6 +15,9 @@ internal abstract class BoolProperty : Property, IBoolChangeTracking, ICondition
 {
     protected BoolProperty(Game game) : base(game) { }
 
+    /// <summary>
+    /// Returns the boolean result of the function.  This method provides the implementation for the IConditional interface.
+    /// </summary>
     public bool IsTrue => Value;
 
     private bool _value;

@@ -19,7 +19,7 @@ internal class SummonReaverEvery500p1d500Activation : Activation
 
     protected override bool OnActivate(Item item)
     {
-        Game.SummonSpecificFriendly(Game.MapY, Game.MapX, Game.Difficulty, Game.SingletonRepository.MonsterFilters.Get(nameof(ReaverMonsterFilter)), true);
+        Game.SummonSpecificFriendly(Game.MapY.Value, Game.MapX.Value, Game.Difficulty, Game.SingletonRepository.MonsterFilters.Get(nameof(ReaverMonsterFilter)), true);
         return true;
     }
 

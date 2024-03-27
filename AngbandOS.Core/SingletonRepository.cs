@@ -28,7 +28,6 @@ internal class SingletonRepository
     public ChestTrapConfigurationsRepository ChestTrapConfigurations;
     public ChestTrapsRepository ChestTraps;
     public ClassSpellsRepository ClassSpells;
-    public ConditionalsRepository Conditionals;
     public DungeonGuardiansRepository DungeonGuardians;
     public DungeonsRepository Dungeons;
     public ElvishTextRepository ElvishText;
@@ -145,7 +144,6 @@ internal class SingletonRepository
         ChestTrapConfigurations = AddRepository<ChestTrapConfigurationsRepository>(new ChestTrapConfigurationsRepository(Game));
         ChestTraps = AddRepository<ChestTrapsRepository>(new ChestTrapsRepository(Game));
         ClassSpells = AddRepository<ClassSpellsRepository>(new ClassSpellsRepository(Game));
-        Conditionals = AddRepository<ConditionalsRepository>(new ConditionalsRepository(Game));
         DungeonGuardians = AddRepository<DungeonGuardiansRepository>(new DungeonGuardiansRepository(Game));
         Dungeons = AddRepository<DungeonsRepository>(new DungeonsRepository(Game));
         ElvishText = AddRepository<ElvishTextRepository>(new ElvishTextRepository(Game));

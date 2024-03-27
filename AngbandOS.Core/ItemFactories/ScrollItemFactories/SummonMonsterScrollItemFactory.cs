@@ -25,7 +25,7 @@ internal class SummonMonsterScrollItemFactory : ScrollItemFactory
     {
         for (int i = 0; i < Game.DieRoll(3); i++)
         {
-            if (Game.SummonSpecific(Game.MapY, Game.MapX, Game.Difficulty, null))
+            if (Game.SummonSpecific(Game.MapY.Value, Game.MapX.Value, Game.Difficulty, null))
             {
                 eventArgs.Identified = true;
             }

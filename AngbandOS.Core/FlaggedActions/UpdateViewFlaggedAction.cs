@@ -71,7 +71,7 @@ internal class UpdateViewFlaggedAction : FlaggedAction
             CaveViewHack(cPtr, y, x);
             return true;
         }
-        if (Game.Los(Game.MapY, Game.MapX, y, x))
+        if (Game.Los(Game.MapY.Value, Game.MapX.Value, y, x))
         {
             CaveViewHack(cPtr, y, x);
             return false;
@@ -101,8 +101,8 @@ internal class UpdateViewFlaggedAction : FlaggedAction
 
         // Now clear the view coordinates.
         Game.View.Clear();
-        int y = Game.MapY;
-        int x = Game.MapX;
+        int y = Game.MapY.Value;
+        int x = Game.MapX.Value;
         cPtr = Game.Grid[y][x];
         cPtr.EasyVisibility= true;
         CaveViewHack(cPtr, y, x);

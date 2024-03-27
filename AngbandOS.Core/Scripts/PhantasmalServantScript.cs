@@ -18,7 +18,7 @@ internal class PhantasmalServantScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        bool success = Game.SummonSpecificFriendly(Game.MapY, Game.MapX, Game.ExperienceLevel.Value * 3 / 2, Game.SingletonRepository.MonsterFilters.Get(nameof(PhantomMonsterFilter)), false);
+        bool success = Game.SummonSpecificFriendly(Game.MapY.Value, Game.MapX.Value, Game.ExperienceLevel.Value * 3 / 2, Game.SingletonRepository.MonsterFilters.Get(nameof(PhantomMonsterFilter)), false);
         string msg = success ? "'Your wish, master?'" : "No-one ever turns up.";
         Game.MsgPrint(msg);
     }

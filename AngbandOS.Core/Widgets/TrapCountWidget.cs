@@ -5,23 +5,18 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-using System.Diagnostics;
-
 namespace AngbandOS.Core.Widgets;
 
 [Serializable]
-internal class ExperiencePointsForNextLevelAtMaxWidget : TextWidget
+internal class TrapCountWidget : IntWidget
 {
-    private ExperiencePointsForNextLevelAtMaxWidget(Game game) : base(game) { } // This object is a singleton.
-
-    public override int X => 4;
-    public override int Y => 6;
-    public override int Width => 8;
-    public override string Text => "   *****";
-    public override string? JustificationName => nameof(RightJustification);
-    public override ColorEnum Color => ColorEnum.BrightGreen;
+    private TrapCountWidget(Game game) : base(game) { } // This object is a singleton.
+    public override int X => 53;
+    public override int Y => 44;
+    public override int Width => 5;
+    public override string IntChangeTrackingName => nameof(TrapCountFunction);
     public override (string conditionalName, bool isTrue)[]? EnabledNames => new (string, bool)[]
     {
-        (nameof(ExperienceLevelsAtMaxFunction), true)
+        (nameof(TrapsDetectedFunction), false)
     };
 }

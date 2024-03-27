@@ -23,8 +23,8 @@ internal class WizardBoltScript : Script, IScript
         {
             return;
         }
-        int tx = Game.MapX + (99 * Game.KeypadDirectionXOffset[dir]);
-        int ty = Game.MapY + (99 * Game.KeypadDirectionYOffset[dir]);
+        int tx = Game.MapX.Value + (99 * Game.KeypadDirectionXOffset[dir]);
+        int ty = Game.MapY.Value + (99 * Game.KeypadDirectionYOffset[dir]);
         if (dir == 5 && Game.TargetOkay())
         {
             flg &= ~ProjectionFlag.ProjectStop;
