@@ -16,7 +16,7 @@ internal class ExperienceLevelWidget : IntWidget
     public override int Width => 6;
     public override ColorEnum Color => ColorEnum.BrightGreen;
     public override string IntChangeTrackingName => nameof(ExperienceLevelIntProperty);
-    public override string? JustificationName => nameof(RightJustification);
+    public override string JustificationName => nameof(RightJustification);
     public override (string, bool)[]? EnabledNames => new (string, bool)[]
     {
         (nameof(MaxLevelAttainedFunction), true)

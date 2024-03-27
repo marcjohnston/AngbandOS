@@ -3452,7 +3452,6 @@ internal class Game
         }
         while (Energy >= 100 && !Shutdown)
         {
-            SingletonRepository.FlaggedActions.Get(nameof(RedrawDTrapFlaggedAction)).Set();
             NoticeStuff();
             UpdateStuff();
             RedrawStuff();
@@ -4011,7 +4010,6 @@ internal class Game
         SingletonRepository.FlaggedActions.Get(nameof(RedrawEquippyFlaggedAction)).Check();
         SingletonRepository.FlaggedActions.Get(nameof(RedrawStatsFlaggedAction)).Check();
         SingletonRepository.FlaggedActions.Get(nameof(RedrawMonsterHealthFlaggedAction)).Check();
-        SingletonRepository.FlaggedActions.Get(nameof(RedrawDTrapFlaggedAction)).Check();
         SingletonRepository.FlaggedActions.Get(nameof(RedrawStateFlaggedAction)).Check();
         SingletonRepository.FlaggedActions.Get(nameof(RedrawSpeedFlaggedAction)).Check();
 
@@ -4569,7 +4567,6 @@ internal class Game
                 }
             }
         }
-        SingletonRepository.FlaggedActions.Get(nameof(RedrawDTrapFlaggedAction)).Set();
         Map.SetChangedFlag(); // TODO: Needs to convert to dependencies in the MapWidget
         if (detect)
         {
@@ -6818,7 +6815,6 @@ internal class Game
         // the notification
         if (oldTrapsDetected != newTrapsDetected)
         {
-            SingletonRepository.FlaggedActions.Get(nameof(RedrawDTrapFlaggedAction)).Set();
         }
         // If we're leaving an area where we've detected traps at a run, then stop running
         if (Running != 0 && oldTrapsDetected && !newTrapsDetected)

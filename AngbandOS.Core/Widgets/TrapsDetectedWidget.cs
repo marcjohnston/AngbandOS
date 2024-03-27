@@ -17,8 +17,12 @@ internal class TrapsDetectedWidget : BoolWidget
     public override string BoolChangeTrackingName => nameof(TrapsDetectedFunction);
     public override string TrueValue => "";
     public override string FalseValue => "";
+
+    /// <summary>
+    /// Returns a tuple with the nameof the TrapsDetectedFunction and a value of false as the condition to render this widget.
+    /// </summary>
     public override (string conditionalName, bool isTrue)[]? EnabledNames => new (string, bool)[]
     {
-        (nameof(TrapsDetectedFunction), true)
+        (nameof(TrapsDetectedFunction), false)
     };
 }

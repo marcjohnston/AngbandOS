@@ -11,9 +11,11 @@ internal class TrapsDetectedFunction : BoolFunction
 {
     private TrapsDetectedFunction(Game game) : base(game) { } // This object is a singleton.
     public override bool Value => Game.Grid[Game.MapY.Value][Game.MapX.Value].TrapsDetected;
-    public override string[]? DependencyNames => new string[]
-    {
-        nameof(MapXIntProperty),
-        nameof(MapYIntProperty)
-    };
+
+    // TODO: These dependencies do not work when the scroll is read.  There is no detection yet
+    //public override string[]? DependencyNames => new string[]
+    //{
+    //    nameof(MapXIntProperty),
+    //    nameof(MapYIntProperty)
+    //};
 }

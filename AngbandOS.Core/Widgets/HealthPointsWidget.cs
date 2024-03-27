@@ -17,7 +17,7 @@ internal class HealthPointsWidget : RangedMaxValueWidget
     protected override ColorEnum DefaultColor => ColorEnum.BrightRed;
     public override string IntChangeTrackingName => nameof(HealthPointsIntProperty);
     public override string MaxIntChangeTrackableName => nameof(MaxHealthPointsIntProperty);
-    public override string? JustificationName => nameof(RightJustification);
+    public override string JustificationName => nameof(RightJustification);
 
     public override (int, ColorEnum)[] Ranges => new (int, ColorEnum)[]
     {

@@ -15,6 +15,6 @@ internal class CurrentDateWidget : DateWidget
     public override int Y => 9;
     public override int Width => 8;
     public override ColorEnum Color => ColorEnum.BrightGreen;
-    public override string? JustificationName => nameof(RightJustification);
+    public override string JustificationName => nameof(RightJustification);
     public override string DateTimeChangeTrackingName => nameof(CurrentGameDateTimeProperty);
 }

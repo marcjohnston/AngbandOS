@@ -17,7 +17,7 @@ internal class ManaWidget : RangedMaxValueWidget
     protected override ColorEnum DefaultColor => ColorEnum.BrightRed;
     public override string IntChangeTrackingName => nameof(ManaIntProperty);
     public override string MaxIntChangeTrackableName => nameof(MaxManaIntProperty);
-    public override string? JustificationName => nameof(RightJustification);
+    public override string JustificationName => nameof(RightJustification);
     public override (string, bool)[]? EnabledNames => new (string, bool)[]
     {
         (nameof(UsesManaFunction), true)

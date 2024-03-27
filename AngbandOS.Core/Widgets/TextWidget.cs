@@ -46,18 +46,18 @@ internal abstract class TextWidget : Widget
     /// Returns the <see cref="Justification"/> object to be used to justify the text within the <see cref="Width"/> of the <see cref="TextWidget"/>.  This property is bound using
     /// the <see cref="JustificationName"/> property during the bind phase.
     /// </summary>
-    protected Justification? Justification { get; private set; }
+    protected Justification Justification { get; private set; }
 
     /// <summary>
     /// Returns the name of the <see cref="Justification"/> object to be used to justify the text within the <see cref="Width"/> of the <see cref="TextWidget" />.  This property
     /// is used to bind the <see cref="Justification"/> property.  Defaults to <see cref="LeftJustification"/>.
     /// </summary>
-    public virtual string? JustificationName => nameof(LeftJustification);
+    public virtual string JustificationName => nameof(LeftJustification);
 
     public override void Bind()
     {
         base.Bind();
-        Justification = JustificationName == null ? null : Game.SingletonRepository.Justifications.Get(JustificationName);
+        Justification = Game.SingletonRepository.Justifications.Get(JustificationName);
     }
 
     /// <summary>
@@ -66,10 +66,7 @@ internal abstract class TextWidget : Widget
     protected override void Paint()
     {
         string justifiedText = Text;
-        if (Justification != null)
-        {
-            justifiedText = Justification.Format(justifiedText, Width);
-        }
+        justifiedText = Justification.Format(justifiedText, Width);
         Game.Screen.Print(Color, justifiedText, Y, X);
     }
 }

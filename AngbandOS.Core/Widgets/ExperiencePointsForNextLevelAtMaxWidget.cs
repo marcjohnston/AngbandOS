@@ -18,7 +18,7 @@ internal class ExperiencePointsForNextLevelAtMaxWidget : TextWidget
     public override int Y => 6;
     public override int Width => 8;
     public override string Text => "   *****";
-    public override string? JustificationName => nameof(RightJustification);
+    public override string JustificationName => nameof(RightJustification);
     public override ColorEnum Color => ColorEnum.BrightGreen;
     public override (string conditionalName, bool isTrue)[]? EnabledNames => new (string, bool)[]
     {
