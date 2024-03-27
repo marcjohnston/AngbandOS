@@ -46,8 +46,8 @@ internal abstract class BoolWidget : TextWidget
         }
     }
 
-    public virtual string TrueValue => "Yes";
-    public virtual string FalseValue => "No";
+    public abstract string TrueValue { get; }
+    public abstract string FalseValue { get; }
 
     public override void Update()
     {

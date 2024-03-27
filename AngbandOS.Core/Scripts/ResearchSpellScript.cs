@@ -129,6 +129,5 @@ internal class ResearchSpellScript : Script, IScript, IStoreScript
             Game.MsgPrint($"You can learn {Game.SpareSpellSlots.Value} more {spellType}{plural}.");
         }
         Game.OldSpareSpellSlots = Game.SpareSpellSlots.Value;
-        Game.SingletonRepository.FlaggedActions.Get(nameof(RedrawStudyFlaggedAction)).Set();
     }
 }

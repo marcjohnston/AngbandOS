@@ -689,15 +689,14 @@ internal class Store
         Game.FullScreenOverlay = false;
         Game.ViewingItemList = false;
         Game.MsgPrint(null); // TODO: This is a PrWipeRedrawAction
-        Game.Screen.Clear();// TODO: This is a PrWipeRedrawAction
         Game.SetBackground(BackgroundImageEnum.Overhead);
         Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateLightFlaggedAction)).Set();
         Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateViewFlaggedAction)).Set();
         Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateMonstersFlaggedAction)).Set();
         Game.SingletonRepository.FlaggedActions.Get(nameof(PrExtraRedrawActionGroupSetFlaggedAction)).Set();
         Game.SingletonRepository.FlaggedActions.Get(nameof(PrBasicRedrawActionGroupSetFlaggedAction)).Set();
-        Game.Map.SetChangedFlag(); // TODO: Needs to convert to dependencies in the MapWidget
         Game.SingletonRepository.FlaggedActions.Get(nameof(RedrawEquippyFlaggedAction)).Set();
+        Game.MainForm.Invalidate();
     }
 
     /// <summary>

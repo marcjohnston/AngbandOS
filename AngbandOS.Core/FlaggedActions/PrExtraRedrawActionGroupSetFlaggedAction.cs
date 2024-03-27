@@ -18,7 +18,6 @@ internal class PrExtraRedrawActionGroupSetFlaggedAction : GroupSetFlaggedAction
             Game.SingletonRepository.FlaggedActions.Get(nameof(RedrawDTrapFlaggedAction)),
             Game.SingletonRepository.FlaggedActions.Get(nameof(RedrawStateFlaggedAction)),
             Game.SingletonRepository.FlaggedActions.Get(nameof(RedrawSpeedFlaggedAction)),
-            Game.SingletonRepository.FlaggedActions.Get(nameof(RedrawStudyFlaggedAction))
         };
     }
 }

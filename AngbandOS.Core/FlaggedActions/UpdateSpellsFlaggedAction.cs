@@ -167,7 +167,6 @@ internal class UpdateSpellsFlaggedAction : FlaggedAction
                 }
             }
             Game.OldSpareSpellSlots = Game.SpareSpellSlots.Value;
-            Game.SingletonRepository.FlaggedActions.Get(nameof(RedrawStudyFlaggedAction)).Set();
         }
     }
 }

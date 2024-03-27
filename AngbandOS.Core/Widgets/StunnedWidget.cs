@@ -23,3 +23,15 @@ internal class StunnedWidget : RangedWidget
         (1, "Stun", ColorEnum.Orange)
     };
 }
+
+[Serializable]
+internal class StudyWidget : BoolWidget
+{
+    private StudyWidget(Game game) : base(game) { } // This object is a singleton.
+    public override int X => 60;
+    public override int Y => 44;
+    public override int Width => 5;
+    public override string BoolChangeTrackingName => nameof(CanStudyFunction);
+    public override string TrueValue => "Study";
+    public override string FalseValue => "";
+}

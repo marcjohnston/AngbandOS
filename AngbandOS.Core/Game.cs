@@ -4012,7 +4012,6 @@ internal class Game
         SingletonRepository.FlaggedActions.Get(nameof(RedrawDTrapFlaggedAction)).Check();
         SingletonRepository.FlaggedActions.Get(nameof(RedrawStateFlaggedAction)).Check();
         SingletonRepository.FlaggedActions.Get(nameof(RedrawSpeedFlaggedAction)).Check();
-        SingletonRepository.FlaggedActions.Get(nameof(RedrawStudyFlaggedAction)).Check();
 
         // Clear the change tracking flags.
         // TODO: Other types will need to do this like functions
