@@ -25,6 +25,7 @@ internal class MainForm : Form
         nameof(CurrentTimeLabelWidget),
         nameof(CurrentTimeWidget),
         nameof(CutWidget),
+        nameof(DepthWidget),
         nameof(ExperienceLevelLabelWidget),
         nameof(ExperienceLevelLostLabelWidget),
         nameof(ExperienceLevelLostWidget),
