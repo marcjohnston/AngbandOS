@@ -121,7 +121,7 @@ internal abstract class Projectile : IGetKey
                     Game.MainForm.PutCharAtMapLocation(ImpactProjectileGraphic.Character, ImpactProjectileGraphic.Color, y, x);
                 }
             }
-            cPtr = Game.Grid[y][x];
+            cPtr = Game.Map.Grid[y][x];
             if (dist != 0 && !Game.GridPassable(y, x))
             {
                 break;
@@ -429,7 +429,7 @@ internal abstract class Projectile : IGetKey
             {
                 x = ProjectMx;
                 y = ProjectMy;
-                cPtr = Game.Grid[y][x];
+                cPtr = Game.Map.Grid[y][x];
                 if (cPtr.MonsterIndex != 0)
                 {
                     Monster mPtr = Game.Monsters[cPtr.MonsterIndex];
@@ -531,7 +531,7 @@ internal abstract class Projectile : IGetKey
     protected bool AffectMonster(int who, int r, int y, int x, int dam)
     {
         // Get the grid tile for the location in question.
-        GridTile cPtr = Game.Grid[y][x];
+        GridTile cPtr = Game.Map.Grid[y][x];
 
         // Check to see if there is a monster at this location.
         if (cPtr.MonsterIndex == 0)
@@ -562,7 +562,7 @@ internal abstract class Projectile : IGetKey
 
         bool notice = AffectMonster(who, mPtr, dam, r);
 
-        GridTile newGridTile = Game.Grid[mPtr.MapY][mPtr.MapX];
+        GridTile newGridTile = Game.Map.Grid[mPtr.MapY][mPtr.MapX];
         Game.UpdateMonsterVisibility(newGridTile.MonsterIndex, false);
         Game.MainForm.RefreshMapLocation(y, x);
         ProjectMn++;
@@ -663,7 +663,7 @@ internal abstract class Projectile : IGetKey
         }
 
         string mName = mPtr.Name;
-        GridTile cPtr = Game.Grid[mPtr.MapY][mPtr.MapX];
+        GridTile cPtr = Game.Map.Grid[mPtr.MapY][mPtr.MapX];
         MonsterRace rPtr = mPtr.Race;
 
         if (noteDies == null)

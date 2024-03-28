@@ -32,7 +32,7 @@ internal class Type5RoomLayout : RoomLayout
         {
             for (x = x1 - 1; x <= x2 + 1; x++)
             {
-                cPtr = Game.Grid[y][x];
+                cPtr = Game.Map.Grid[y][x];
                 cPtr.RevertToBackground();
                 cPtr.InRoom = true;
             }
@@ -40,16 +40,16 @@ internal class Type5RoomLayout : RoomLayout
         Tile wallOuterTile = Game.SingletonRepository.Tiles.Get(nameof(WallOuterTile));
         for (y = y1 - 1; y <= y2 + 1; y++)
         {
-            cPtr = Game.Grid[y][x1 - 1];
+            cPtr = Game.Map.Grid[y][x1 - 1];
             cPtr.SetFeature(wallOuterTile);
-            cPtr = Game.Grid[y][x2 + 1];
+            cPtr = Game.Map.Grid[y][x2 + 1];
             cPtr.SetFeature(wallOuterTile);
         }
         for (x = x1 - 1; x <= x2 + 1; x++)
         {
-            cPtr = Game.Grid[y1 - 1][x];
+            cPtr = Game.Map.Grid[y1 - 1][x];
             cPtr.SetFeature(wallOuterTile);
-            cPtr = Game.Grid[y2 + 1][x];
+            cPtr = Game.Map.Grid[y2 + 1][x];
             cPtr.SetFeature(wallOuterTile);
         }
         y1 += 2;
@@ -59,16 +59,16 @@ internal class Type5RoomLayout : RoomLayout
         Tile wallInnerTile = Game.SingletonRepository.Tiles.Get(nameof(WallInnerTile));
         for (y = y1 - 1; y <= y2 + 1; y++)
         {
-            cPtr = Game.Grid[y][x1 - 1];
+            cPtr = Game.Map.Grid[y][x1 - 1];
             cPtr.SetFeature(wallInnerTile);
-            cPtr = Game.Grid[y][x2 + 1];
+            cPtr = Game.Map.Grid[y][x2 + 1];
             cPtr.SetFeature(wallInnerTile);
         }
         for (x = x1 - 1; x <= x2 + 1; x++)
         {
-            cPtr = Game.Grid[y1 - 1][x];
+            cPtr = Game.Map.Grid[y1 - 1][x];
             cPtr.SetFeature(wallInnerTile);
-            cPtr = Game.Grid[y2 + 1][x];
+            cPtr = Game.Map.Grid[y2 + 1][x];
             cPtr.SetFeature(wallInnerTile);
         }
         switch (Game.DieRoll(4))

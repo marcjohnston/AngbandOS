@@ -19,7 +19,7 @@ internal class DetectNormalObjectsScript : Script, IScript, ISuccessfulScript
         {
             for (int x = 1; x < Game.CurWid - 1; x++)
             {
-                GridTile cPtr = Game.Grid[y][x];
+                GridTile cPtr = Game.Map.Grid[y][x];
                 foreach (Item oPtr in cPtr.Items)
                 {
                     if (!Game.PanelContains(y, x))

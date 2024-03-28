@@ -46,7 +46,7 @@ internal class OpenScript : Script, IScript, IRepeatableScript
         {
             int y = Game.MapY.Value + Game.KeypadDirectionYOffset[dir];
             int x = Game.MapX.Value + Game.KeypadDirectionXOffset[dir];
-            GridTile tile = Game.Grid[y][x];
+            GridTile tile = Game.Map.Grid[y][x];
             Item? chestItem = Game.ChestCheck(y, x);
             // Make sure there is something to open in the direction we chose
             if (!tile.FeatureType.IsVisibleDoor && chestItem == null)

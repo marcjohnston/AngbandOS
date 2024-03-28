@@ -22,7 +22,7 @@ internal class ChaosProjectile : Projectile
 
     protected override bool AffectItem(int who, int y, int x)
     {
-        GridTile cPtr = Game.Grid[y][x];
+        GridTile cPtr = Game.Map.Grid[y][x];
         bool obvious = false;
         string oName = "";
         foreach (Item oPtr in cPtr.Items)
@@ -73,7 +73,7 @@ internal class ChaosProjectile : Projectile
 
     protected override bool AffectMonster(int who, Monster mPtr, int dam, int r)
     {
-        GridTile cPtr = Game.Grid[mPtr.MapY][mPtr.MapX];
+        GridTile cPtr = Game.Map.Grid[mPtr.MapY][mPtr.MapX];
         MonsterRace rPtr = mPtr.Race;
         bool seen = mPtr.IsVisible;
         bool obvious = false;

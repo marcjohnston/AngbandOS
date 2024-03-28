@@ -23,7 +23,7 @@ internal class BanishActiveMutation : Mutation
         }
         int y = Game.MapY.Value + Game.KeypadDirectionYOffset[dir];
         int x = Game.MapX.Value + Game.KeypadDirectionXOffset[dir];
-        GridTile cPtr = Game.Grid[y][x];
+        GridTile cPtr = Game.Map.Grid[y][x];
         if (cPtr.MonsterIndex == 0)
         {
             Game.MsgPrint("You sense no evil there!");

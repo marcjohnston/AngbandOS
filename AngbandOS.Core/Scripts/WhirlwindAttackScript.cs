@@ -22,7 +22,7 @@ internal class WhirlwindAttackScript : Script, IScript
         {
             int y = Game.MapY.Value + Game.KeypadDirectionYOffset[dir];
             int x = Game.MapX.Value + Game.KeypadDirectionXOffset[dir];
-            GridTile cPtr = Game.Grid[y][x];
+            GridTile cPtr = Game.Map.Grid[y][x];
             Monster mPtr = Game.Monsters[cPtr.MonsterIndex];
             if (cPtr.MonsterIndex != 0 && (mPtr.IsVisible || Game.GridPassable(y, x)))
             {

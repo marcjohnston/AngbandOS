@@ -16,7 +16,7 @@ internal class MakeDoorProjectile : Projectile
 
     protected override bool AffectFloor(int y, int x)
     {
-        GridTile cPtr = Game.Grid[y][x];
+        GridTile cPtr = Game.Map.Grid[y][x];
         bool obvious = false;
         if (!Game.GridOpenNoItemOrCreature(y, x))
         {

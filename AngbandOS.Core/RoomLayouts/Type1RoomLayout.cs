@@ -30,7 +30,7 @@ internal class Type1RoomLayout : RoomLayout
         {
             for (x = x1 - 1; x <= x2 + 1; x++)
             {
-                cPtr = Game.Grid[y][x];
+                cPtr = Game.Map.Grid[y][x];
                 cPtr.RevertToBackground();
                 cPtr.InRoom = true;
                 if (light)
@@ -42,16 +42,16 @@ internal class Type1RoomLayout : RoomLayout
         Tile wallOuter = Game.SingletonRepository.Tiles.Get(nameof(WallOuterTile));
         for (y = y1 - 1; y <= y2 + 1; y++)
         {
-            cPtr = Game.Grid[y][x1 - 1];
+            cPtr = Game.Map.Grid[y][x1 - 1];
             cPtr.SetFeature(wallOuter);
-            cPtr = Game.Grid[y][x2 + 1];
+            cPtr = Game.Map.Grid[y][x2 + 1];
             cPtr.SetFeature(wallOuter);
         }
         for (x = x1 - 1; x <= x2 + 1; x++)
         {
-            cPtr = Game.Grid[y1 - 1][x];
+            cPtr = Game.Map.Grid[y1 - 1][x];
             cPtr.SetFeature(wallOuter);
-            cPtr = Game.Grid[y2 + 1][x];
+            cPtr = Game.Map.Grid[y2 + 1][x];
             cPtr.SetFeature(wallOuter);
         }
         Tile pillar = Game.SingletonRepository.Tiles.Get(nameof(PillarTile));
@@ -61,7 +61,7 @@ internal class Type1RoomLayout : RoomLayout
             {
                 for (x = x1; x <= x2; x += 2)
                 {
-                    cPtr = Game.Grid[y][x];
+                    cPtr = Game.Map.Grid[y][x];
                     cPtr.SetFeature(pillar);
                 }
             }
@@ -70,16 +70,16 @@ internal class Type1RoomLayout : RoomLayout
         {
             for (y = y1 + 2; y <= y2 - 2; y += 2)
             {
-                cPtr = Game.Grid[y][x1];
+                cPtr = Game.Map.Grid[y][x1];
                 cPtr.SetFeature(pillar);
-                cPtr = Game.Grid[y][x2];
+                cPtr = Game.Map.Grid[y][x2];
                 cPtr.SetFeature(pillar);
             }
             for (x = x1 + 2; x <= x2 - 2; x += 2)
             {
-                cPtr = Game.Grid[y1][x];
+                cPtr = Game.Map.Grid[y1][x];
                 cPtr.SetFeature(pillar);
-                cPtr = Game.Grid[y2][x];
+                cPtr = Game.Map.Grid[y2][x];
                 cPtr.SetFeature(pillar);
             }
         }

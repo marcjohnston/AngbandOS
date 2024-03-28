@@ -85,7 +85,7 @@ internal abstract class RoomLayout : IGetKey
                 {
                     continue;
                 }
-                GridTile cPtr = Game.Grid[y][x];
+                GridTile cPtr = Game.Map.Grid[y][x];
                 cPtr.RevertToBackground();
                 cPtr.InVault = true;
                 cPtr.InRoom = true;
@@ -256,7 +256,7 @@ internal abstract class RoomLayout : IGetKey
 
     protected void PlaceSecretDoor(int y, int x)
     {
-        GridTile cPtr = Game.Grid[y][x];
+        GridTile cPtr = Game.Map.Grid[y][x];
         cPtr.SetFeature(Game.SingletonRepository.Tiles.Get(nameof(SecretDoorTile)));
     }
 }

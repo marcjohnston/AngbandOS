@@ -59,7 +59,7 @@ internal class TeleportSelfScript : Script, IScript, IScriptInt
                 {
                     continue;
                 }
-                if (Game.Grid[y][x].InVault)
+                if (Game.Map.Grid[y][x].InVault)
                 {
                     continue;
                 }
@@ -85,14 +85,14 @@ internal class TeleportSelfScript : Script, IScript, IScriptInt
                 }
                 else
                 {
-                    if (Game.Grid[oy + yy][ox + xx].MonsterIndex != 0)
+                    if (Game.Map.Grid[oy + yy][ox + xx].MonsterIndex != 0)
                     {
-                        if (Game.Monsters[Game.Grid[oy + yy][ox + xx].MonsterIndex].Race.TeleportSelf &&
-                            !Game.Monsters[Game.Grid[oy + yy][ox + xx].MonsterIndex].Race.ResistTeleport)
+                        if (Game.Monsters[Game.Map.Grid[oy + yy][ox + xx].MonsterIndex].Race.TeleportSelf &&
+                            !Game.Monsters[Game.Map.Grid[oy + yy][ox + xx].MonsterIndex].Race.ResistTeleport)
                         {
-                            if (Game.Monsters[Game.Grid[oy + yy][ox + xx].MonsterIndex].SleepLevel == 0)
+                            if (Game.Monsters[Game.Map.Grid[oy + yy][ox + xx].MonsterIndex].SleepLevel == 0)
                             {
-                                TeleportToPlayer(Game.Grid[oy + yy][ox + xx].MonsterIndex);
+                                TeleportToPlayer(Game.Map.Grid[oy + yy][ox + xx].MonsterIndex);
                             }
                         }
                     }
@@ -160,11 +160,11 @@ internal class TeleportSelfScript : Script, IScript, IScriptInt
                 {
                     continue;
                 }
-                if (Game.Grid[ny][nx].FeatureType is ElderSignSigilTile)
+                if (Game.Map.Grid[ny][nx].FeatureType is ElderSignSigilTile)
                 {
                     continue;
                 }
-                if (Game.Grid[ny][nx].FeatureType is YellowSignSigilTile)
+                if (Game.Map.Grid[ny][nx].FeatureType is YellowSignSigilTile)
                 {
                     continue;
                 }
@@ -179,8 +179,8 @@ internal class TeleportSelfScript : Script, IScript, IScriptInt
             return;
         }
         Game.PlaySound(SoundEffectEnum.Teleport);
-        Game.Grid[ny][nx].MonsterIndex = mIdx;
-        Game.Grid[oy][ox].MonsterIndex = 0;
+        Game.Map.Grid[ny][nx].MonsterIndex = mIdx;
+        Game.Map.Grid[oy][ox].MonsterIndex = 0;
         mPtr.MapY = ny;
         mPtr.MapX = nx;
         Game.UpdateMonsterVisibility(mIdx, true);

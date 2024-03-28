@@ -18,7 +18,7 @@ internal class ElecProjectile : Projectile
 
     protected override bool AffectItem(int who, int y, int x)
     {
-        GridTile cPtr = Game.Grid[y][x];
+        GridTile cPtr = Game.Map.Grid[y][x];
         bool obvious = false;
         string oName = "";
         foreach (Item oPtr in cPtr.Items)

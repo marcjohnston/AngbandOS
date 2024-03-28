@@ -55,7 +55,7 @@ internal class SearchScript : Script, IScript, IRepeatableScript
                 if (Game.RandomLessThan(100) < chance)
                 {
                     // If there's a trap, then find it
-                    GridTile tile = Game.Grid[y][x];
+                    GridTile tile = Game.Map.Grid[y][x];
                     if (tile.FeatureType is InvisibleTile)
                     {
                         // Pick a random trap to replace the undetected one with

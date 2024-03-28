@@ -26,7 +26,7 @@ internal class BlindnessTimer : Timer
         Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateLightFlaggedAction)).Set();
         Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateViewFlaggedAction)).Set();
         Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateMonstersFlaggedAction)).Set();
-        Game.Map.SetChangedFlag(); // TODO: Needs to convert to dependencies in the MapWidget
+        Game.RefreshMap.SetChangedFlag(); // TODO: Needs to convert to dependencies in the MapWidget
         base.Noticed();
     }
 }

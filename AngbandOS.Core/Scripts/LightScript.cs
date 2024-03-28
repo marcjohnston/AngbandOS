@@ -22,14 +22,14 @@ internal class LightScript : Script, IScript
         {
             for (int x = 1; x < Game.CurWid - 1; x++)
             {
-                GridTile cPtr = Game.Grid[y][x];
+                GridTile cPtr = Game.Map.Grid[y][x];
                 if (!cPtr.FeatureType.IsWall)
                 {
                     for (int i = 0; i < 9; i++)
                     {
                         int yy = y + Game.OrderedDirectionYOffset[i];
                         int xx = x + Game.OrderedDirectionXOffset[i];
-                        cPtr = Game.Grid[yy][xx];
+                        cPtr = Game.Map.Grid[yy][xx];
                         cPtr.SelfLit = true;
                         if (!cPtr.FeatureType.IsOpenFloor)
                         {
@@ -45,6 +45,6 @@ internal class LightScript : Script, IScript
             }
         }
         Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateMonstersFlaggedAction)).Set();
-        Game.Map.SetChangedFlag(); // TODO: Needs to convert to dependencies in the MapWidget
+        Game.RefreshMap.SetChangedFlag(); // TODO: Needs to convert to dependencies in the MapWidget
     }
 }

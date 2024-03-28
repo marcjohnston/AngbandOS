@@ -23,7 +23,7 @@ internal class PanicHitActiveMutation : Mutation
         }
         int y = Game.MapY.Value + Game.KeypadDirectionYOffset[dir];
         int x = Game.MapX.Value + Game.KeypadDirectionXOffset[dir];
-        if (Game.Grid[y][x].MonsterIndex != 0)
+        if (Game.Map.Grid[y][x].MonsterIndex != 0)
         {
             Game.PlayerAttackMonster(y, x);
             Game.RunScriptInt(nameof(TeleportSelfScript), 30);

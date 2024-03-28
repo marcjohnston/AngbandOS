@@ -22,7 +22,7 @@ internal class DarkScript : Script, IScript
         {
             for (int x = 0; x < Game.CurWid; x++)
             {
-                GridTile cPtr = Game.Grid[y][x];
+                GridTile cPtr = Game.Map.Grid[y][x];
                 cPtr.PlayerMemorized = false;
                 foreach (Item oPtr in cPtr.Items)
                 {
@@ -35,6 +35,6 @@ internal class DarkScript : Script, IScript
         Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateLightFlaggedAction)).Set();
         Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateViewFlaggedAction)).Set();
         Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateMonstersFlaggedAction)).Set();
-        Game.Map.SetChangedFlag(); // TODO: Needs to convert to dependencies in the MapWidget
+        Game.RefreshMap.SetChangedFlag(); // TODO: Needs to convert to dependencies in the MapWidget
     }
 }

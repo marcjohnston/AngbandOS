@@ -41,7 +41,7 @@ internal class StayAndPickupScript : Script, IScript, IRepeatableScript
         Game.StepOnGrid(true);
 
         // If we're in a shop doorway, enter the shop
-        GridTile tile = Game.Grid[Game.MapY.Value][Game.MapX.Value];
+        GridTile tile = Game.Map.Grid[Game.MapY.Value][Game.MapX.Value];
         if (tile.FeatureType.IsShop)
         {
             Game.Disturb(false);

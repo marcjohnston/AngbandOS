@@ -23,7 +23,7 @@ internal class EatRockActiveMutation : Mutation
         }
         int y = Game.MapY.Value + Game.KeypadDirectionYOffset[dir];
         int x = Game.MapX.Value + Game.KeypadDirectionXOffset[dir];
-        GridTile cPtr = Game.Grid[y][x];
+        GridTile cPtr = Game.Map.Grid[y][x];
         if (Game.GridPassable(y, x))
         {
             Game.MsgPrint("You bite into thin air!");

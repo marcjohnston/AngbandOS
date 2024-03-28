@@ -263,7 +263,7 @@ internal class StandardDungeonGenerator : DungeonGenerator
                     if (Game.CaveValidBold(y, x))
                     {
                         Game.DeleteObject(y, x);
-                        GridTile cPtr = Game.Grid[y][x];
+                        GridTile cPtr = Game.Map.Grid[y][x];
                         int t = Game.RandomLessThan(200);
                         if (t < 20)
                         {
@@ -315,7 +315,7 @@ internal class StandardDungeonGenerator : DungeonGenerator
                     }
                     break;
                 }
-                GridTile cPtr = Game.Grid[ty][tx];
+                GridTile cPtr = Game.Map.Grid[ty][tx];
 
                 if (!cPtr.FeatureType.IsBasicWall)
                 {
@@ -357,7 +357,7 @@ internal class StandardDungeonGenerator : DungeonGenerator
         {
             for (int x = 0; x < Game.CurWid; x++)
             {
-                GridTile cPtr = Game.Grid[y][x];
+                GridTile cPtr = Game.Map.Grid[y][x];
                 double v = perlinNoise.Noise(10 * x * widthDivisor, 10 * y * heightDivisor, -0.5);
                 v = (v + 1) / 2;
                 double dX = Math.Abs(x - (Game.CurWid / 2)) * widthDivisor;
@@ -389,22 +389,22 @@ internal class StandardDungeonGenerator : DungeonGenerator
         }
         for (int x = 0; x < Game.CurWid; x++)
         {
-            GridTile cPtr = Game.Grid[0][x];
+            GridTile cPtr = Game.Map.Grid[0][x];
             cPtr.SetFeature(Game.SingletonRepository.Tiles.Get(nameof(WallPermentSolidTile)));
         }
         for (int x = 0; x < Game.CurWid; x++)
         {
-            GridTile cPtr = Game.Grid[Game.CurHgt - 1][x];
+            GridTile cPtr = Game.Map.Grid[Game.CurHgt - 1][x];
             cPtr.SetFeature(Game.SingletonRepository.Tiles.Get(nameof(WallPermentSolidTile)));
         }
         for (int y = 0; y < Game.CurHgt; y++)
         {
-            GridTile cPtr = Game.Grid[y][0];
+            GridTile cPtr = Game.Map.Grid[y][0];
             cPtr.SetFeature(Game.SingletonRepository.Tiles.Get(nameof(WallPermentSolidTile)));
         }
         for (int y = 0; y < Game.CurHgt; y++)
         {
-            GridTile cPtr = Game.Grid[y][Game.CurWid - 1];
+            GridTile cPtr = Game.Map.Grid[y][Game.CurWid - 1];
             cPtr.SetFeature(Game.SingletonRepository.Tiles.Get(nameof(WallPermentSolidTile)));
         }
         if (Game.DieRoll(_darkEmpty) != 1 || Game.DieRoll(100) > Game.Difficulty)
@@ -424,19 +424,19 @@ internal class StandardDungeonGenerator : DungeonGenerator
     private int NextToWalls(int y, int x)
     {
         int k = 0;
-        if (Game.Grid[y + 1][x].FeatureType.IsWall)
+        if (Game.Map.Grid[y + 1][x].FeatureType.IsWall)
         {
             k++;
         }
-        if (Game.Grid[y - 1][x].FeatureType.IsWall)
+        if (Game.Map.Grid[y - 1][x].FeatureType.IsWall)
         {
             k++;
         }
-        if (Game.Grid[y][x + 1].FeatureType.IsWall)
+        if (Game.Map.Grid[y][x + 1].FeatureType.IsWall)
         {
             k++;
         }
-        if (Game.Grid[y][x - 1].FeatureType.IsWall)
+        if (Game.Map.Grid[y][x - 1].FeatureType.IsWall)
         {
             k++;
         }
@@ -461,7 +461,7 @@ internal class StandardDungeonGenerator : DungeonGenerator
                     {
                         continue;
                     }
-                    GridTile cPtr = Game.Grid[y][x];
+                    GridTile cPtr = Game.Map.Grid[y][x];
                     if (Game.CurrentDepth <= 0)
                     {
                         cPtr.SetFeature(Game.SingletonRepository.Tiles.Get(nameof(DownStaircaseTile)));
@@ -526,7 +526,7 @@ internal class StandardDungeonGenerator : DungeonGenerator
 
     private void PlaceRubble(int y, int x)
     {
-        GridTile cPtr = Game.Grid[y][x];
+        GridTile cPtr = Game.Map.Grid[y][x];
         cPtr.SetFeature(Game.SingletonRepository.Tiles.Get(nameof(RubbleTile)));
     }
 
@@ -546,7 +546,7 @@ internal class StandardDungeonGenerator : DungeonGenerator
                 {
                     continue;
                 }
-                bool isRoom = Game.Grid[y][x].InRoom;
+                bool isRoom = Game.Map.Grid[y][x].InRoom;
                 if (set == _allocSetCorr && isRoom)
                 {
                     continue;
@@ -598,7 +598,7 @@ internal class StandardDungeonGenerator : DungeonGenerator
             {
                 continue;
             }
-            GridTile cPtr = Game.Grid[y][x];
+            GridTile cPtr = Game.Map.Grid[y][x];
             if (!cPtr.FeatureType.IsOpenFloor)
             {
                 continue;
@@ -616,11 +616,11 @@ internal class StandardDungeonGenerator : DungeonGenerator
     {
         if (NextToCorr(y, x) >= 2)
         {
-            if (Game.Grid[y - 1][x].FeatureType.IsWall && Game.Grid[y + 1][x].FeatureType.IsWall)
+            if (Game.Map.Grid[y - 1][x].FeatureType.IsWall && Game.Map.Grid[y + 1][x].FeatureType.IsWall)
             {
                 return true;
             }
-            if (Game.Grid[y][x - 1].FeatureType.IsWall && Game.Grid[y][x + 1].FeatureType.IsWall)
+            if (Game.Map.Grid[y][x - 1].FeatureType.IsWall && Game.Map.Grid[y][x + 1].FeatureType.IsWall)
             {
                 return true;
             }
@@ -634,11 +634,11 @@ internal class StandardDungeonGenerator : DungeonGenerator
         {
             return;
         }
-        if (Game.Grid[y][x].FeatureType.IsWall)
+        if (Game.Map.Grid[y][x].FeatureType.IsWall)
         {
             return;
         }
-        if (Game.Grid[y][x].InRoom)
+        if (Game.Map.Grid[y][x].InRoom)
         {
             return;
         }
@@ -709,7 +709,7 @@ internal class StandardDungeonGenerator : DungeonGenerator
                 tmpRow = row1 + rowDir;
                 tmpCol = col1 + colDir;
             }
-            cPtr = Game.Grid[tmpRow][tmpCol];
+            cPtr = Game.Map.Grid[tmpRow][tmpCol];
             if (cPtr.FeatureType is WallPermentSolidTile)
             {
                 continue;
@@ -726,19 +726,19 @@ internal class StandardDungeonGenerator : DungeonGenerator
             {
                 y = tmpRow + rowDir;
                 x = tmpCol + colDir;
-                if (Game.Grid[y][x].FeatureType is WallPermentSolidTile)
+                if (Game.Map.Grid[y][x].FeatureType is WallPermentSolidTile)
                 {
                     continue;
                 }
-                if (Game.Grid[y][x].FeatureType is WallPermanentOuterTile)
+                if (Game.Map.Grid[y][x].FeatureType is WallPermanentOuterTile)
                 {
                     continue;
                 }
-                if (Game.Grid[y][x].FeatureType is WallOuterTile)
+                if (Game.Map.Grid[y][x].FeatureType is WallOuterTile)
                 {
                     continue;
                 }
-                if (Game.Grid[y][x].FeatureType is WallSolidTile)
+                if (Game.Map.Grid[y][x].FeatureType is WallSolidTile)
                 {
                     continue;
                 }
@@ -753,9 +753,9 @@ internal class StandardDungeonGenerator : DungeonGenerator
                 {
                     for (x = col1 - 1; x <= col1 + 1; x++)
                     {
-                        if (Game.Grid[y][x].FeatureType is WallOuterTile)
+                        if (Game.Map.Grid[y][x].FeatureType is WallOuterTile)
                         {
-                            Game.Grid[y][x].SetFeature(Game.SingletonRepository.Tiles.Get(nameof(WallSolidTile)));
+                            Game.Map.Grid[y][x].SetFeature(Game.SingletonRepository.Tiles.Get(nameof(WallSolidTile)));
                         }
                     }
                 }
@@ -812,14 +812,14 @@ internal class StandardDungeonGenerator : DungeonGenerator
         {
             y = Tunn[i].Y;
             x = Tunn[i].X;
-            cPtr = Game.Grid[y][x];
+            cPtr = Game.Map.Grid[y][x];
             cPtr.RevertToBackground();
         }
         for (i = 0; i < WallN; i++)
         {
             y = Wall[i].Y;
             x = Wall[i].X;
-            cPtr = Game.Grid[y][x];
+            cPtr = Game.Map.Grid[y][x];
             cPtr.RevertToBackground();
             if (Game.RandomLessThan(100) < _dunTunPen)
             {
@@ -887,7 +887,7 @@ internal class StandardDungeonGenerator : DungeonGenerator
         {
             for (x = 0; x < Game.CurWid; x++)
             {
-                GridTile cPtr = Game.Grid[y][x];
+                GridTile cPtr = Game.Map.Grid[y][x];
                 if (emptyLevel)
                 {
                     cPtr.RevertToBackground();
@@ -996,22 +996,22 @@ internal class StandardDungeonGenerator : DungeonGenerator
         }
         for (x = 0; x < Game.CurWid; x++)
         {
-            GridTile cPtr = Game.Grid[0][x];
+            GridTile cPtr = Game.Map.Grid[0][x];
             cPtr.SetFeature(Game.SingletonRepository.Tiles.Get(nameof(WallPermentSolidTile)));
         }
         for (x = 0; x < Game.CurWid; x++)
         {
-            GridTile cPtr = Game.Grid[Game.CurHgt - 1][x];
+            GridTile cPtr = Game.Map.Grid[Game.CurHgt - 1][x];
             cPtr.SetFeature(Game.SingletonRepository.Tiles.Get(nameof(WallPermentSolidTile)));
         }
         for (y = 0; y < Game.CurHgt; y++)
         {
-            GridTile cPtr = Game.Grid[y][0];
+            GridTile cPtr = Game.Map.Grid[y][0];
             cPtr.SetFeature(Game.SingletonRepository.Tiles.Get(nameof(WallPermentSolidTile)));
         }
         for (y = 0; y < Game.CurHgt; y++)
         {
-            GridTile cPtr = Game.Grid[y][Game.CurWid - 1];
+            GridTile cPtr = Game.Map.Grid[y][Game.CurWid - 1];
             cPtr.SetFeature(Game.SingletonRepository.Tiles.Get(nameof(WallPermentSolidTile)));
         }
         for (int i = 0; i < CentN; i++)

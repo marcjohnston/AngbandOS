@@ -16,7 +16,7 @@ internal class KillTrapProjectile : Projectile
 
     protected override bool AffectFloor(int y, int x)
     {
-        GridTile cPtr = Game.Grid[y][x];
+        GridTile cPtr = Game.Map.Grid[y][x];
         bool obvious = false;
         if (cPtr.FeatureType.IsUnidentifiedTrap || cPtr.FeatureType.IsTrap)
         {
@@ -42,7 +42,7 @@ internal class KillTrapProjectile : Projectile
 
     protected override bool AffectItem(int who, int y, int x)
     {
-        GridTile cPtr = Game.Grid[y][x];
+        GridTile cPtr = Game.Map.Grid[y][x];
         bool obvious = false;
         foreach (Item oPtr in cPtr.Items)
         {

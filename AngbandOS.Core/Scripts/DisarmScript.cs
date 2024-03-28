@@ -46,7 +46,7 @@ internal class DisarmScript : Script, IScript, IRepeatableScript
         {
             int y = Game.MapY.Value + Game.KeypadDirectionYOffset[dir];
             int x = Game.MapX.Value + Game.KeypadDirectionXOffset[dir];
-            GridTile tile = Game.Grid[y][x];
+            GridTile tile = Game.Map.Grid[y][x];
             // Check for a chest
             Item? chestItem = Game.ChestCheck(y, x);
             if (!tile.FeatureType.IsTrap && chestItem == null)

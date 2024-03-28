@@ -18,7 +18,7 @@ internal class LightProjectile : Projectile
 
     protected override bool AffectFloor(int y, int x)
     {
-        GridTile cPtr = Game.Grid[y][x];
+        GridTile cPtr = Game.Map.Grid[y][x];
         bool obvious = false;
         cPtr.SelfLit = true;
         Game.NoteSpot(y, x);
@@ -102,7 +102,7 @@ internal class LightProjectile : Projectile
         {
             Game.EtherealnessTimer.SetValue();
             Game.MsgPrint("The light forces you out of your incorporeal shadow form.");
-            Game.Map.SetChangedFlag(); // TODO: Needs to convert to dependencies in the MapWidget
+            Game.RefreshMap.SetChangedFlag(); // TODO: Needs to convert to dependencies in the MapWidget
             Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateMonstersFlaggedAction)).Set();
         }
         return true;

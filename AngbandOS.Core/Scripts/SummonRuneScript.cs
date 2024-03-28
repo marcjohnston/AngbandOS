@@ -18,7 +18,7 @@ internal class SummonRuneScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        GridTile tile = Game.Grid[Game.MapY.Value][Game.MapX.Value];
+        GridTile tile = Game.Map.Grid[Game.MapY.Value][Game.MapX.Value];
         Game.MsgPrint("There is a flash of shimmering light!");
         // Trap disappears when triggered
         tile.PlayerMemorized = false;

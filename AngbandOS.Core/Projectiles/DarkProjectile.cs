@@ -18,7 +18,7 @@ internal class DarkProjectile : Projectile
 
     protected override bool AffectFloor(int y, int x)
     {
-        GridTile cPtr = Game.Grid[y][x];
+        GridTile cPtr = Game.Map.Grid[y][x];
         bool obvious = Game.PlayerCanSeeBold(y, x);
         cPtr.SelfLit = false;
         if (cPtr.FeatureType.IsOpenFloor)

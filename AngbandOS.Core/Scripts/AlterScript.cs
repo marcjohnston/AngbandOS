@@ -35,7 +35,7 @@ internal class AlterScript : Script, IScript, IRepeatableScript
         {
             int y = Game.MapY.Value + Game.KeypadDirectionYOffset[dir];
             int x = Game.MapX.Value + Game.KeypadDirectionXOffset[dir];
-            GridTile tile = Game.Grid[y][x];
+            GridTile tile = Game.Map.Grid[y][x];
             // Altering a tile will take a turn
             Game.EnergyUse = 100;
             // We 'alter' a tile by attacking it
