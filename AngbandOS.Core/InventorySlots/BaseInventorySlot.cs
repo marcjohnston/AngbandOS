@@ -89,10 +89,10 @@ internal abstract class BaseInventorySlot : IEnumerable<int>, IItemContainer, IG
     /// Renders a description of the item.  For an inventory slot, the description is rendered as possessive.
     /// </summary>
     /// <param name="item"></param>
-    public virtual void ItemDescribe(Item oPtr)
+    public string DescribeContainer(Item oPtr)
     {
         string oName = oPtr.Description(true, 3);
-        Game.MsgPrint($"You have {oName}.");
+        return $"You have {oName}.";
     }
 
     [Obsolete("Use InventorySlot.Items WIP")]

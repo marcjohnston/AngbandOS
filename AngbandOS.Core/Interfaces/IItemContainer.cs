@@ -20,10 +20,10 @@ internal interface IItemContainer
     void ItemIncrease(Item oPtr, int num);
 
     /// <summary>
-    /// Renders a description of the item.  For an inventory slot, the description is rendered as possessive; non-inventory slots, render as the player is viewing the item.
+    /// Returns a description of the item as it is in the container.  For an inventory slot, the description is rendered as possessive; non-inventory slots, render as the player is viewing the item.
     /// </summary>
     /// <param name="item"></param>
-    void ItemDescribe(Item oPtr);
+    string DescribeContainer(Item oPtr);
 
     /// <summary>
     /// Checks the quantity of an item and removes it, when the quanity is zero.  This process differs depending on which container is containing the item.

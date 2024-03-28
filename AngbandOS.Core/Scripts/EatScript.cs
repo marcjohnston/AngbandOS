@@ -78,7 +78,8 @@ internal class EatScript : Script, IScript, IRepeatableScript
         IItemContainer container = item.GetContainer();
         item.ItemIncrease(-1);
         item.ItemOptimize();
-        container.ItemDescribe(item);
+        string containerDescription = container.DescribeContainer(item);
+        Game.MsgPrint(containerDescription);
         return;
     }
 }

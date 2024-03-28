@@ -147,7 +147,8 @@ internal sealed class Item : IComparable<Item>
         {
             throw new Exception("Missing item container.");
         }
-        container.ItemDescribe(this);
+        string containerDescription = container.DescribeContainer(this);
+        Game.MsgPrint(containerDescription);
     }
 
     /// <summary>

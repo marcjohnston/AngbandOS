@@ -118,10 +118,10 @@ internal class Monster : IItemContainer
     /// Renders a description of the item.  For a non-inventory slot, the description is rendered as the player viewing the item.
     /// </summary>
     /// <param name="item"></param>
-    public void ItemDescribe(Item oPtr)
+    public string DescribeContainer(Item oPtr)
     {
         string oName = oPtr.Description(true, 3);
-        Game.MsgPrint($"You see {oName}.");
+        return $"You see {oName}.";
     }
 
     /// <summary>

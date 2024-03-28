@@ -10086,7 +10086,8 @@ internal class Game
                 Map.Grid[y] = new GridTile[MaxWid];
                 for (int x = 0; x < MaxWid; x++)
                 {
-                    GridTile newTile = new GridTile(this);
+                    Tile nothingTile = SingletonRepository.Tiles.Get(nameof(NothingTile));
+                    GridTile newTile = new GridTile(nothingTile, nothingTile);
                     Map.Grid[y][x] = newTile;
                     if (CurrentDepth == 0)
                     {

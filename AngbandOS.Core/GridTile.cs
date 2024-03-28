@@ -13,12 +13,10 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class GridTile : IItemContainer
 {
-    protected readonly Game Game;
-    public GridTile(Game game)
+    public GridTile(Tile backgroundFeature, Tile featureType)
     {
-        Game = game;
-        BackgroundFeature = Game.SingletonRepository.Tiles.Get(nameof(NothingTile));
-        FeatureType = Game.SingletonRepository.Tiles.Get(nameof(NothingTile));
+        BackgroundFeature = backgroundFeature;
+        FeatureType = featureType;
     }
 
     /// <summary>
@@ -126,10 +124,10 @@ internal class GridTile : IItemContainer
     /// Renders a description of the item.  For a non-inventory slot, the description is rendered as the player viewing the item.
     /// </summary>
     /// <param name="item"></param>
-    public void ItemDescribe(Item oPtr)
+    public string DescribeContainer(Item oPtr)
     {
         string oName = oPtr.Description(true, 3);
-        Game.MsgPrint($"You see {oName}.");
+        return $"You see {oName}.";
     }
 
     /// <summary>
