@@ -8,14 +8,12 @@
 namespace AngbandOS.Core.Properties;
 
 /// <summary>
-/// Represents a property that is used to track when the map needs to be refreshed.  This property is only used to flag a manual refreshing until the <see cref="RefreshMapFunction"/>
-/// function has all dependencies setup properly.
+/// Represents a change tracking property that is set to true, when a GridTile.TrapsDetected property is set either true or false.
 /// </summary>
 [Serializable]
-internal class RefreshMapProperty : Property, IMapChangeTracking // TODO: This property has a meaningless value property and should be 
+internal class TrapsDetectedProperty : Property
 {
-    private RefreshMapProperty(Game game) : base(game) { } // This object is a singleton.
-
+    protected TrapsDetectedProperty(Game game) : base(game) { } // This object is a singleton.
     public new void SetChangedFlag() 
     {
         base.SetChangedFlag();

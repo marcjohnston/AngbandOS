@@ -10081,28 +10081,7 @@ internal class Game
             bool okay = true;
 
             // Allocate and reset the grid tiles.
-            for (int y = 0; y < MaxHgt; y++)
-            {
-                Map.Grid[y] = new GridTile[MaxWid];
-                for (int x = 0; x < MaxWid; x++)
-                {
-                    Tile nothingTile = SingletonRepository.Tiles.Get(nameof(NothingTile));
-                    GridTile newTile = new GridTile(nothingTile, nothingTile);
-                    Map.Grid[y][x] = newTile;
-                    if (CurrentDepth == 0)
-                    {
-                        newTile.SetBackgroundFeature(SingletonRepository.Tiles.Get(nameof(GrassTile)));
-                    }
-                    else if (Wilderness[WildernessY][WildernessX].Dungeon.Tower)
-                    {
-                        newTile.SetBackgroundFeature(SingletonRepository.Tiles.Get(nameof(TowerFloorTile)));
-                    }
-                    else
-                    {
-                        newTile.SetBackgroundFeature(SingletonRepository.Tiles.Get(nameof(DungeonFloorTile)));
-                    }
-                }
-            }
+            Map.Initialize();
 
             PanelRowMin = 0;
             PanelRowMax = 0;

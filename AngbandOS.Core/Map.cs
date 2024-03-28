@@ -21,4 +21,35 @@ internal class Map
 
     public readonly GridTile[][] Grid = new GridTile[Game.MaxHgt][];
 
+    public void Initialize()
+    {
+        TrapsDetectedProperty trapsDetectedProperty = (TrapsDetectedProperty)Game.SingletonRepository.Properties.Get(nameof(TrapsDetectedProperty));
+        GrassTile grassTile = (GrassTile)Game.SingletonRepository.Tiles.Get(nameof(GrassTile));
+        DungeonFloorTile dungeonFloorTile = (DungeonFloorTile)Game.SingletonRepository.Tiles.Get(nameof(DungeonFloorTile));
+        TowerFloorTile towerFloorTile = (TowerFloorTile)Game.SingletonRepository.Tiles.Get(nameof(TowerFloorTile));
+        NothingTile nothingTile = (NothingTile)Game.SingletonRepository.Tiles.Get(nameof(NothingTile));
+        bool isTower = Game.Wilderness[Game.WildernessY][Game.WildernessX].Dungeon.Tower;
+
+        for (int y = 0; y < Game.MaxHgt; y++)
+        {
+            Grid[y] = new GridTile[Game.MaxWid];
+            for (int x = 0; x < Game.MaxWid; x++)
+            {
+                GridTile newTile = new GridTile(trapsDetectedProperty, nothingTile, nothingTile);
+                Grid[y][x] = newTile;
+                if (Game.CurrentDepth == 0)
+                {
+                    newTile.SetBackgroundFeature(grassTile);
+                }
+                else if (isTower)
+                {
+                    newTile.SetBackgroundFeature(dungeonFloorTile);
+                }
+                else
+                {
+                    newTile.SetBackgroundFeature(dungeonFloorTile);
+                }
+            }
+        }
+    }
 }

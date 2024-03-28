@@ -13,8 +13,10 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class GridTile : IItemContainer
 {
-    public GridTile(Tile backgroundFeature, Tile featureType)
+    private readonly TrapsDetectedProperty TrapsDetectedProperty;
+    public GridTile(TrapsDetectedProperty trapsDetectedProperty, Tile backgroundFeature, Tile featureType)
     {
+        TrapsDetectedProperty = trapsDetectedProperty;
         BackgroundFeature = backgroundFeature;
         FeatureType = featureType;
     }
@@ -59,10 +61,22 @@ internal class GridTile : IItemContainer
     /// </summary>
     public bool TempFlag;
 
+    private bool _trapsDetected;
     /// <summary>
     /// Set if the grid tile has had a Detect Traps used on it
     /// </summary>
-    public bool TrapsDetected;
+    public bool TrapsDetected
+    {
+        get
+        {
+            return _trapsDetected;
+        }
+        set
+        {
+            _trapsDetected = value;
+            TrapsDetectedProperty.SetChangedFlag();
+        }
+    }
 
     /// <summary>
     /// The type of feature in this grid tile

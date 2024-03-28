@@ -12,10 +12,10 @@ internal class TrapCountFunction : IntFunction
     private TrapCountFunction(Game game) : base(game) { } // This object is a singleton.
     public override int Value => Game.CountTraps(Game.MapX.Value, Game.MapY.Value);
 
-    // TODO: These dependencies do not work when the scroll is read.  There is no detection yet
-    //public override string[]? DependencyNames => new string[]
-    //{
-    //    nameof(MapXIntProperty),
-    //    nameof(MapYIntProperty)
-    //};
+    public override string[]? DependencyNames => new string[]
+    {
+        nameof(MapXIntProperty),
+        nameof(MapYIntProperty),
+        nameof(TrapsDetectedProperty)
+    };
 }
