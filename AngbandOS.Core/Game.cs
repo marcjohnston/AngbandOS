@@ -35,7 +35,9 @@ internal class Game
     private TimeSpan _tick = new TimeSpan(0, 0, 0, 0, MillisecondsPerTurn);
 
     public const int DungeonCount = 20; // TODO: Use the Singleton.Dungeons.Count property
-    public readonly Configuration Configuration;
+
+    [Obsolete]
+    public readonly Configuration? Configuration = null;
     public bool IsDead;
 
     public const int OneInChanceUpStairsReturnsToTownLevel = 5;
@@ -609,6 +611,16 @@ internal class Game
     public int ActiveQuests => Quests.Where(q => q.IsActive).Count();
 
     /// <summary>
+    /// Returns the maximum number of messages that can be stored in the message log.  Once this log size has been filled, the oldest messages will be deleted.
+    /// </summary>
+    public readonly int MaxMessageLogLength = 2048;
+
+    /// <summary>
+    /// Returns the name of the town that the player will start in; or null, for a random eligible town to be selected.  Returns null, by default.
+    /// </summary>
+    public readonly string? StartupTownName = null;
+
+    /// <summary>
     /// Allocates all storage and creates a new game.  
     /// </summary>
     /// <param name="configuration">Represents configuration data to use when generating a new game.</param>
@@ -635,6 +647,11 @@ internal class Game
         DateTime startTime = DateTime.Now;
         SingletonRepository.Load();
         TimeSpan elapsedTime = DateTime.Now - startTime;
+        if (configuration.MaxMessageLogLength != null)
+        {
+            MaxMessageLogLength = configuration.MaxMessageLogLength.Value;
+        }
+        Configuration = null; // TODO: This erases the configuration
         Debug.Print($"Singleton repository load took {elapsedTime.TotalSeconds.ToString()} seconds.");
 
         Quests = new List<Quest>();
@@ -947,9 +964,9 @@ internal class Game
         RecentMessages.Clear();
 
         // Limit the length of the queue.
-        if (Configuration.MaxMessageLogLength != null)
+        if (MaxMessageLogLength != null)
         {
-            while (MessageLog.Count > Configuration.MaxMessageLogLength)
+            while (MessageLog.Count > MaxMessageLogLength)
             {
                 // Drop the first message.
                 MessageLog.RemoveAt(0);
@@ -1851,9 +1868,9 @@ internal class Game
         }
         ResetStompability();
         CurrentDepth = 0;
-        if (Configuration.StartupTownName != null)
+        if (StartupTownName != null)
         {
-            Town? startupTown = SingletonRepository.Towns.Get(Configuration.StartupTownName);
+            Town? startupTown = SingletonRepository.Towns.Get(StartupTownName);
             if (startupTown == null)
             {
                 throw new Exception("The configured startup town does not exist.");

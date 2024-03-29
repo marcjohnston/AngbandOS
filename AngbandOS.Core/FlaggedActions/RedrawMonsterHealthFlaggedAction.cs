@@ -18,9 +18,9 @@ internal class RedrawMonsterHealthFlaggedAction : FlaggedAction
         if (Game.TrackedMonsterIndex == null)
         {
             Game.Screen.Erase(RowInfo, ColInfo, 12);
-            Game.Screen.Erase(RowInfo - 3, ColInfo, 12);
-            Game.Screen.Erase(RowInfo - 2, ColInfo, 12);
-            Game.Screen.Erase(RowInfo - 1, ColInfo, 12);
+            //Game.Screen.Erase(RowInfo - 3, ColInfo, 12);
+            //Game.Screen.Erase(RowInfo - 2, ColInfo, 12);
+            //Game.Screen.Erase(RowInfo - 1, ColInfo, 12);
         }
         else if (!Game.Monsters[Game.TrackedMonsterIndex.Value].IsVisible)
         {
