@@ -14,8 +14,7 @@ internal class BlackReaverMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperUSymbol);
     public override ColorEnum Color => ColorEnum.Brown;
-    public override string Name => "Black reaver";
-
+    
     public override int ArmorClass => 90;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -48,8 +47,6 @@ internal class BlackReaverMonsterRace : MonsterRace
     public override bool ResistTeleport => true;
     public override int Sleep => 90;
     public override int Speed => 120;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "   Black    ";
-    public override string SplitName3 => "   reaver   ";
+    public override string? MultilineName => "Black\nreaver";
     public override bool Undead => true;
 }

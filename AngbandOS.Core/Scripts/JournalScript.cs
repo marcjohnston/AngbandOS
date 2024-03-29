@@ -220,7 +220,7 @@ internal class JournalScript : Script, IScript, IRepeatableScript, IStoreScript
         {
             Game.Screen.Print(ColorEnum.Brown, "The ");
         }
-        Game.Screen.Print(ColorEnum.Brown, $"{rPtr.Name} ('");
+        Game.Screen.Print(ColorEnum.Brown, $"{rPtr.FriendlyName} ('");
         Game.Screen.Print(a1, c1.ToString());
         Game.Screen.Print(ColorEnum.Brown, "')");
     }
@@ -461,7 +461,7 @@ internal class JournalScript : Script, IScript, IRepeatableScript, IStoreScript
                 if (dead)
                 {
                     total++;
-                    names[maxCount] = monster.Name;
+                    names[maxCount] = monster.FriendlyName;
                     counts[maxCount] = 1;
                     unique[maxCount] = true;
                     maxCount++;
@@ -472,7 +472,7 @@ internal class JournalScript : Script, IScript, IRepeatableScript, IStoreScript
                 if (monster.Knowledge.RPkills > 0)
                 {
                     total += monster.Knowledge.RPkills;
-                    names[maxCount] = monster.Name;
+                    names[maxCount] = monster.FriendlyName;
                     counts[maxCount] = monster.Knowledge.RPkills;
                     unique[maxCount] = false;
                     maxCount++;
@@ -773,7 +773,7 @@ internal class JournalScript : Script, IScript, IRepeatableScript, IStoreScript
             {
                 continue;
             }
-            petNames.Add(mPtr.Race.Name);
+            petNames.Add(mPtr.Race.FriendlyName);
             pets++;
         }
         int first = 0;
@@ -891,7 +891,7 @@ internal class JournalScript : Script, IScript, IRepeatableScript, IStoreScript
             if (monster.Unique &&
                 (monster.Knowledge.RSights > 0 || Game.IsWizard.Value))
             {
-                names[maxCount] = monster.Name;
+                names[maxCount] = monster.FriendlyName;
                 bool dead = monster.MaxNum == 0;
                 alive[maxCount] = !dead;
                 maxCount++;

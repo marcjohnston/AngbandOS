@@ -14,8 +14,7 @@ internal class WaterTrollMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperTSymbol);
     public override ColorEnum Color => ColorEnum.Blue;
-    public override string Name => "Water troll";
-
+    
     public override int ArmorClass => 50;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -46,8 +45,6 @@ internal class WaterTrollMonsterRace : MonsterRace
     public override int Rarity => 1;
     public override int Sleep => 50;
     public override int Speed => 110;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "   Water    ";
-    public override string SplitName3 => "   troll    ";
+    public override string? MultilineName => "Water\ntroll";
     public override bool Troll => true;
 }

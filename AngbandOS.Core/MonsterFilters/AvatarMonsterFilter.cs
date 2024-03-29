@@ -13,6 +13,6 @@ internal class AvatarMonsterFilter : MonsterFilter
     private AvatarMonsterFilter(Game game) : base(game) { } // This object is a singleton.
     public override bool Matches(MonsterRace rPtr)
     {
-        return rPtr.Name == "Avatar of Nyarlathotep" && !rPtr.Unique;
+        return rPtr.FriendlyName == "Avatar of Nyarlathotep" && !rPtr.Unique;
     }
 }

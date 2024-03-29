@@ -14,8 +14,7 @@ internal class DeathSwordMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(VerticalBarSymbol);
     public override ColorEnum Color => ColorEnum.BrightWhite;
-    public override string Name => "Death sword";
-
+    
     public override int ArmorClass => 40;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -51,8 +50,6 @@ internal class DeathSwordMonsterRace : MonsterRace
     public override int Rarity => 5;
     public override int Sleep => 0;
     public override int Speed => 130;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "   Death    ";
-    public override string SplitName3 => "   sword    ";
+    public override string? MultilineName => "Death\nsword";
     public override bool Stupid => true;
 }

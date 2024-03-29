@@ -20,8 +20,7 @@ internal class MimeTheNibelungMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerHSymbol);
     public override ColorEnum Color => ColorEnum.Brown;
-    public override string Name => "Mime, the Nibelung";
-
+    
     public override int ArmorClass => 80;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -57,8 +56,6 @@ internal class MimeTheNibelungMonsterRace : MonsterRace
     public override bool ResistTeleport => true;
     public override int Sleep => 10;
     public override int Speed => 110;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "            ";
-    public override string SplitName3 => "    Mime    ";
+    public override string? MultilineName => "Mime";
     public override bool Unique => true;
 }

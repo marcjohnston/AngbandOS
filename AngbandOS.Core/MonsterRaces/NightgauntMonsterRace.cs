@@ -20,8 +20,7 @@ internal class NightgauntMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperUSymbol);
     public override ColorEnum Color => ColorEnum.Purple;
-    public override string Name => "Nightgaunt";
-
+    
     public override int ArmorClass => 50;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -54,7 +53,5 @@ internal class NightgauntMonsterRace : MonsterRace
     public override int Rarity => 2;
     public override int Sleep => 80;
     public override int Speed => 110;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "            ";
-    public override string SplitName3 => " Nightgaunt ";
+    public override string? MultilineName => "Nightgaunt";
 }

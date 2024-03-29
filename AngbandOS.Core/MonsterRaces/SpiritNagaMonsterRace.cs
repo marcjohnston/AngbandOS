@@ -21,8 +21,7 @@ internal class SpiritNagaMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerNSymbol);
     public override ColorEnum Color => ColorEnum.Turquoise;
-    public override string Name => "Spirit naga";
-
+    
     public override int ArmorClass => 75;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -55,7 +54,5 @@ internal class SpiritNagaMonsterRace : MonsterRace
     public override int Rarity => 2;
     public override int Sleep => 120;
     public override int Speed => 110;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "   Spirit   ";
-    public override string SplitName3 => "    naga    ";
+    public override string? MultilineName => "Spirit\nnaga";
 }

@@ -14,8 +14,7 @@ internal class RockLizardMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperRSymbol);
     public override ColorEnum Color => ColorEnum.BrightBrown;
-    public override string Name => "Rock lizard";
-
+    
     public override bool Animal => true;
     public override int ArmorClass => 4;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
@@ -34,7 +33,5 @@ internal class RockLizardMonsterRace : MonsterRace
     public override int Rarity => 1;
     public override int Sleep => 15;
     public override int Speed => 110;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "    Rock    ";
-    public override string SplitName3 => "   lizard   ";
+    public override string? MultilineName => "Rock\nlizard";
 }

@@ -31,7 +31,7 @@ internal abstract class SummonMonsterSpell : MonsterSpell
     /// <summary>
     /// Returns the maximum number of monsters that will be summoned.  Returns 6, by default.
     /// </summary>
-    protected virtual int MaximumSummonCount(Game game) => 6;
+    protected virtual int MaximumSummonCount => 6;
 
     /// <summary>
     /// Returns a monster filter that is used to specify which type of monster to be summoned or null, for any monster.
@@ -60,21 +60,21 @@ internal abstract class SummonMonsterSpell : MonsterSpell
         return game.SummonSpecific(playerY, playerX, SummonLevel(monster), MonsterSelector(monster));
     }
 
-    public override void ExecuteOnPlayer(Game game, Monster monster)
+    public override void ExecuteOnPlayer(Monster monster)
     {
-        bool playerIsBlind = game.BlindnessTimer.Value != 0;
+        bool playerIsBlind = Game.BlindnessTimer.Value != 0;
         int count = 0;
 
-        for (int k = 0; k < MaximumSummonCount(game); k++)
+        for (int k = 0; k < MaximumSummonCount; k++)
         {
-            if (Summon(game, monster))
+            if (Summon(Game, monster))
             {
                 count++;
             }
         }
         if (playerIsBlind && count != 0)
         {
-            game.MsgPrint("You hear many things appear nearby.");
+            Game.MsgPrint("You hear many things appear nearby.");
         }
     }
 
@@ -84,9 +84,9 @@ internal abstract class SummonMonsterSpell : MonsterSpell
     /// </summary>
     protected virtual string BlindNonZeroSummonedMessage => "You hear many things appear nearby.";
 
-    public override void ExecuteOnMonster(Game game, Monster monster, Monster target)
+    public override void ExecuteOnMonster(Monster monster, Monster target)
     {
-        bool playerIsBlind = game.BlindnessTimer.Value != 0;
+        bool playerIsBlind = Game.BlindnessTimer.Value != 0;
         bool friendly = monster.SmFriendly;
         int count = 0;
 
@@ -94,14 +94,14 @@ internal abstract class SummonMonsterSpell : MonsterSpell
         {
             if (friendly)
             {
-                if (game.SummonSpecificFriendly(target.MapY, target.MapX, SummonLevel(monster), FriendlyMonsterSelector(monster), true))
+                if (Game.SummonSpecificFriendly(target.MapY, target.MapX, SummonLevel(monster), FriendlyMonsterSelector(monster), true))
                 {
                     count++;
                 }
             }
             else
             {
-                if (Summon(game, monster))
+                if (Summon(Game, monster))
                 {
                     count++;
                 }
@@ -109,7 +109,7 @@ internal abstract class SummonMonsterSpell : MonsterSpell
         }
         if (playerIsBlind && count != 0)
         {
-            game.MsgPrint(BlindNonZeroSummonedMessage);
+            Game.MsgPrint(BlindNonZeroSummonedMessage);
         }
     }
 }

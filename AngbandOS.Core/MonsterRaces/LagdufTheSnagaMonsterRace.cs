@@ -14,8 +14,7 @@ internal class LagdufTheSnagaMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerOSymbol);
     public override ColorEnum Color => ColorEnum.Chartreuse;
-    public override string Name => "Lagduf, the Snaga";
-
+    
     public override int ArmorClass => 32;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -46,8 +45,6 @@ internal class LagdufTheSnagaMonsterRace : MonsterRace
     public override int Rarity => 2;
     public override int Sleep => 30;
     public override int Speed => 110;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "            ";
-    public override string SplitName3 => "   Lagduf   ";
+    public override string? MultilineName => "Lagduf";
     public override bool Unique => true;
 }

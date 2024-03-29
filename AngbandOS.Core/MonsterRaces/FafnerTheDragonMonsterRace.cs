@@ -22,8 +22,7 @@ internal class FafnerTheDragonMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperDSymbol);
     public override ColorEnum Color => ColorEnum.BrightGreen;
-    public override string Name => "Fafner the Dragon";
-
+    
     public override int ArmorClass => 100;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -62,8 +61,6 @@ internal class FafnerTheDragonMonsterRace : MonsterRace
     public override int Rarity => 4;
     public override int Sleep => 70;
     public override int Speed => 120;
-    public override string SplitName1 => "   Fafner   ";
-    public override string SplitName2 => "    the     ";
-    public override string SplitName3 => "   Dragon   ";
+    public override string? MultilineName => "Fafner\nthe\nDragon";
     public override bool Unique => true;
 }

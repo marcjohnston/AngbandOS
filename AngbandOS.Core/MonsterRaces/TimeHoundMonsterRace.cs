@@ -18,8 +18,7 @@ internal class TimeHoundMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperZSymbol);
     public override ColorEnum Color => ColorEnum.BrightGreen;
-    public override string Name => "Time hound";
-
+    
     public override bool Animal => true;
     public override int ArmorClass => 100;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
@@ -47,7 +46,5 @@ internal class TimeHoundMonsterRace : MonsterRace
     public override int Rarity => 4;
     public override int Sleep => 0;
     public override int Speed => 130;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "    Time    ";
-    public override string SplitName3 => "   hound    ";
+    public override string? MultilineName => "Time\nhound";
 }

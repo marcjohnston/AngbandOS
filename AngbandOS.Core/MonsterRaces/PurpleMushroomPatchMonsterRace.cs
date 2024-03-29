@@ -14,8 +14,7 @@ internal class PurpleMushroomPatchMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(CommaSymbol);
     public override ColorEnum Color => ColorEnum.Purple;
-    public override string Name => "Purple mushroom patch";
-
+    
     public override int ArmorClass => 1;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -40,8 +39,6 @@ internal class PurpleMushroomPatchMonsterRace : MonsterRace
     public override int Rarity => 2;
     public override int Sleep => 0;
     public override int Speed => 110;
-    public override string SplitName1 => "   Purple   ";
-    public override string SplitName2 => "  mushroom  ";
-    public override string SplitName3 => "   patch    ";
+    public override string? MultilineName => "Purple\nmushroom\npatch";
     public override bool Stupid => true;
 }

@@ -21,8 +21,7 @@ internal class AncientBlueDragonMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperDSymbol);
     public override ColorEnum Color => ColorEnum.Blue;
-    public override string Name => "Ancient blue dragon";
-
+    
     public override int ArmorClass => 80;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -55,7 +54,5 @@ internal class AncientBlueDragonMonsterRace : MonsterRace
     public override int Sleep => 80;
     public override bool Smart => true;
     public override int Speed => 120;
-    public override string SplitName1 => "  Ancient   ";
-    public override string SplitName2 => "    blue    ";
-    public override string SplitName3 => "   dragon   ";
+    public override string? MultilineName => "Ancient\nblue\ndragon";
 }

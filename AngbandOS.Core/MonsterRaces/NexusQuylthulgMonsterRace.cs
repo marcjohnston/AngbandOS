@@ -19,8 +19,7 @@ internal class NexusQuylthulgMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperQSymbol);
     public override ColorEnum Color => ColorEnum.Pink;
-    public override string Name => "Nexus quylthulg";
-
+    
     public override int ArmorClass => 1;
     public override string Description => "It is a very unstable, strange pulsing mound of flesh.";
     public override bool EmptyMind => true;
@@ -44,7 +43,5 @@ internal class NexusQuylthulgMonsterRace : MonsterRace
     public override bool ResistTeleport => true;
     public override int Sleep => 0;
     public override int Speed => 110;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "   Nexus    ";
-    public override string SplitName3 => " quylthulg  ";
+    public override string? MultilineName => "Nexus\nquylthulg";
 }

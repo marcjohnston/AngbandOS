@@ -25,8 +25,7 @@ internal class IllusionistMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerPSymbol);
     public override ColorEnum Color => ColorEnum.Pink;
-    public override string Name => "Illusionist";
-
+    
     public override int ArmorClass => 10;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -51,7 +50,5 @@ internal class IllusionistMonsterRace : MonsterRace
     public override int Sleep => 10;
     public override bool Smart => true;
     public override int Speed => 110;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "            ";
-    public override string SplitName3 => "Illusionist ";
+    public override string? MultilineName => "Illusionist";
 }

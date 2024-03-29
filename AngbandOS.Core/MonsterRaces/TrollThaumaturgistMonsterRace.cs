@@ -22,8 +22,7 @@ internal class TrollThaumaturgistMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperTSymbol);
     public override ColorEnum Color => ColorEnum.BrightPurple;
-    public override string Name => "Troll thaumaturgist";
-
+    
     public override int ArmorClass => 50;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -53,8 +52,6 @@ internal class TrollThaumaturgistMonsterRace : MonsterRace
     public override int Rarity => 1;
     public override int Sleep => 30;
     public override int Speed => 110;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "   Troll    ";
-    public override string SplitName3 => "thaumaturgis";
+    public override string? MultilineName => "Troll\nthaumaturgis";
     public override bool Troll => true;
 }

@@ -18,8 +18,7 @@ internal class RedweedMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerMSymbol);
     public override ColorEnum Color => ColorEnum.BrightRed;
-    public override string Name => "Redweed";
-
+    
     public override int ArmorClass => 3;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -43,8 +42,6 @@ internal class RedweedMonsterRace : MonsterRace
     public override int Rarity => 4;
     public override int Sleep => 10;
     public override int Speed => 100;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "            ";
-    public override string SplitName3 => "  Redweed   ";
+    public override string? MultilineName => "Redweed";
     public override bool Stupid => true;
 }

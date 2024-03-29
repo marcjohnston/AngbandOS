@@ -27,8 +27,7 @@ internal class MandorMasterOfChaosMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerPSymbol);
     public override ColorEnum Color => ColorEnum.Purple;
-    public override string Name => "Mandor, Master of Chaos";
-
+    
     public override int ArmorClass => 90;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -60,9 +59,7 @@ internal class MandorMasterOfChaosMonsterRace : MonsterRace
     public override int Sleep => 40;
     public override bool Smart => true;
     public override int Speed => 120;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "            ";
-    public override string SplitName3 => "   Mandor   ";
+    public override string? MultilineName => "Mandor";
     public override bool TakeItem => true;
     public override bool Unique => true;
 }

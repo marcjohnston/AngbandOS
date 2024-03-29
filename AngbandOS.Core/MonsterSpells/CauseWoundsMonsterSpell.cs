@@ -39,44 +39,44 @@ internal abstract class CauseWoundsMonsterSpell : MonsterSpell
     /// Returns an additional amount of time the player will bleed.  Returns 0, by default.
     /// </summary>
     protected virtual int TimedBleeding => 0;
-    public override void ExecuteOnPlayer(Game game, Monster monster)
+    public override void ExecuteOnPlayer(Monster monster)
     {
-        if (Game.RandomLessThan(100) < game.SkillSavingThrow)
+        if (base.Game.RandomLessThan(100) < Game.SkillSavingThrow)
         {
-            game.MsgPrint("You resist the effects!");
+            Game.MsgPrint("You resist the effects!");
         }
         else
         {
             string monsterDescription = monster.IndefiniteVisibleName;
 
-            game.CurseEquipment(CurseEquipmentChance, HeavyCurseEquipmentChance);
-            game.TakeHit(Damage, monsterDescription);
+            Game.CurseEquipment(CurseEquipmentChance, HeavyCurseEquipmentChance);
+            Game.TakeHit(Damage, monsterDescription);
 
             if (TimedBleeding > 0)
             {
-                game.BleedingTimer.AddTimer(TimedBleeding);
+                Game.BleedingTimer.AddTimer(TimedBleeding);
             }
         }
     }
 
-    public override void ExecuteOnMonster(Game game, Monster monster, Monster target)
+    public override void ExecuteOnMonster(Monster monster, Monster target)
     {
         int rlev = monster.Race.Level >= 1 ? monster.Race.Level : 1;
         string targetName = target.Name;
-        bool blind = game.BlindnessTimer.Value != 0;
+        bool blind = Game.BlindnessTimer.Value != 0;
         bool seeTarget = !blind && target.IsVisible;
         MonsterRace targetRace = target.Race;
 
-        if (targetRace.Level > Game.DieRoll(rlev - 10 < 1 ? 1 : rlev - 10) + 10)
+        if (targetRace.Level > base.Game.DieRoll(rlev - 10 < 1 ? 1 : rlev - 10) + 10)
         {
             if (seeTarget)
             {
-                game.MsgPrint($"{targetName} resists!");
+                Game.MsgPrint($"{targetName} resists!");
             }
         }
         else
         {
-            target.TakeDamageFromAnotherMonster(game, Damage, out _, " is destroyed.");
+            target.TakeDamageFromAnotherMonster(Damage, out _, " is destroyed.");
         }
     }
 }

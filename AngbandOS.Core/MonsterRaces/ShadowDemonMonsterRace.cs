@@ -18,8 +18,7 @@ internal class ShadowDemonMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperGSymbol);
     public override ColorEnum Color => ColorEnum.Black;
-    public override string Name => "Shadow demon";
-
+    
     public override int ArmorClass => 30;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -57,8 +56,6 @@ internal class ShadowDemonMonsterRace : MonsterRace
     public override bool ResistNether => true;
     public override int Sleep => 20;
     public override int Speed => 120;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "   Shadow   ";
-    public override string SplitName3 => "   demon    ";
+    public override string? MultilineName => "Shadow\ndemon";
     public override bool Undead => true;
 }

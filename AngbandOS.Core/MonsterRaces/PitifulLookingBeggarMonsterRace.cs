@@ -14,8 +14,7 @@ internal class PitifulLookingBeggarMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerTSymbol);
     public override ColorEnum Color => ColorEnum.BrightBrown;
-    public override string Name => "Pitiful looking beggar";
-
+    
     public override int ArmorClass => 1;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -36,8 +35,6 @@ internal class PitifulLookingBeggarMonsterRace : MonsterRace
     public override int Rarity => 1;
     public override int Sleep => 40;
     public override int Speed => 110;
-    public override string SplitName1 => "  Pitiful   ";
-    public override string SplitName2 => "  looking   ";
-    public override string SplitName3 => "   beggar   ";
+    public override string? MultilineName => "Pitiful\nlooking\nbeggar";
     public override bool TakeItem => true;
 }

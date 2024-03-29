@@ -31,26 +31,26 @@ internal class DrainManaMonsterSpell : MonsterSpell
     public override bool DrainsMana => true;
     public override bool Annoys => true;
 
-    public override void ExecuteOnPlayer(Game game, Monster monster)
+    public override void ExecuteOnPlayer(Monster monster)
     {
         string monsterName = monster.Name;
-        bool playerIsBlind = game.BlindnessTimer.Value != 0;
+        bool playerIsBlind = Game.BlindnessTimer.Value != 0;
         int monsterLevel = monster.Race.Level >= 1 ? monster.Race.Level : 1;
         bool seenByPlayer = !playerIsBlind && monster.IsVisible;
 
-        if (game.Mana.Value != 0)
+        if (Game.Mana.Value != 0)
         {
-            game.MsgPrint($"{monsterName} draws psychic energy from you!");
-            int r1 = (Game.DieRoll(monsterLevel) / 2) + 1;
-            if (r1 >= game.Mana.Value)
+            Game.MsgPrint($"{monsterName} draws psychic energy from you!");
+            int r1 = (base.Game.DieRoll(monsterLevel) / 2) + 1;
+            if (r1 >= Game.Mana.Value)
             {
-                r1 = game.Mana.Value;
-                game.Mana.Value = 0;
-                game.FractionalMana = 0;
+                r1 = Game.Mana.Value;
+                Game.Mana.Value = 0;
+                Game.FractionalMana = 0;
             }
             else
             {
-                game.Mana.Value -= r1;
+                Game.Mana.Value -= r1;
             }
             if (monster.Health < monster.MaxHealth)
             {
@@ -59,39 +59,39 @@ internal class DrainManaMonsterSpell : MonsterSpell
                 {
                     monster.Health = monster.MaxHealth;
                 }
-                if (game.TrackedMonsterIndex == monster.GetMonsterIndex())
+                if (Game.TrackedMonsterIndex != null && Game.TrackedMonsterIndex.Value == monster.GetMonsterIndex())
                 {
-                    Game.SingletonRepository.FlaggedActions.Get(nameof(RedrawMonsterHealthFlaggedAction)).Set();
+                    base.Game.SingletonRepository.FlaggedActions.Get(nameof(FlaggedActions.RedrawMonsterHealthFlaggedAction)).Set();
                 }
                 if (seenByPlayer)
                 {
-                    game.MsgPrint($"{monsterName} appears healthier.");
+                    Game.MsgPrint($"{monsterName} appears healthier.");
                 }
             }
         }
-        game.UpdateSmartLearn(monster, Game.SingletonRepository.SpellResistantDetections.Get(nameof(ManaSpellResistantDetection)));
+        Game.UpdateSmartLearn(monster, base.Game.SingletonRepository.SpellResistantDetections.Get(nameof(SpellResistantDetections.ManaSpellResistantDetection)));
     }
 
-    public override void ExecuteOnMonster(Game game, Monster monster, Monster target)
+    public override void ExecuteOnMonster(Monster monster, Monster target)
     {
         int rlev = monster.Race.Level >= 1 ? monster.Race.Level : 1;
-        bool playerIsBlind = game.BlindnessTimer.Value != 0;
+        bool playerIsBlind = Game.BlindnessTimer.Value != 0;
         bool seen = !playerIsBlind && monster.IsVisible;
         string monsterName = monster.Name;
         string targetName = target.Name;
-        bool blind = game.BlindnessTimer.Value != 0;
+        bool blind = Game.BlindnessTimer.Value != 0;
         bool seeTarget = !blind && target.IsVisible;
         bool seeBoth = seen && seeTarget;
         MonsterRace targetRace = target.Race;
 
-        int r1 = (Game.DieRoll(rlev) / 2) + 1;
+        int r1 = (base.Game.DieRoll(rlev) / 2) + 1;
         if (monster.Health < monster.MaxHealth)
         {
             if (targetRace.Spells.Count == 0)
             {
                 if (seeBoth)
                 {
-                    game.MsgPrint($"{targetName} is unaffected!");
+                    Game.MsgPrint($"{targetName} is unaffected!");
                 }
             }
             else
@@ -101,13 +101,13 @@ internal class DrainManaMonsterSpell : MonsterSpell
                 {
                     monster.Health = monster.MaxHealth;
                 }
-                if (game.TrackedMonsterIndex == monster.GetMonsterIndex())
+                if (Game.TrackedMonsterIndex != null && Game.TrackedMonsterIndex.Value == monster.GetMonsterIndex())
                 {
-                    Game.SingletonRepository.FlaggedActions.Get(nameof(RedrawMonsterHealthFlaggedAction)).Set();
+                    base.Game.SingletonRepository.FlaggedActions.Get(nameof(FlaggedActions.RedrawMonsterHealthFlaggedAction)).Set();
                 }
                 if (seen)
                 {
-                    game.MsgPrint($"{monsterName} appears healthier.");
+                    Game.MsgPrint($"{monsterName} appears healthier.");
                 }
             }
         }

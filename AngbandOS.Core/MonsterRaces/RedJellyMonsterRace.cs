@@ -14,8 +14,7 @@ internal class RedJellyMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerJSymbol);
     public override ColorEnum Color => ColorEnum.BrightRed;
-    public override string Name => "Red jelly";
-
+    
     public override int ArmorClass => 1;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -39,8 +38,6 @@ internal class RedJellyMonsterRace : MonsterRace
     public override int Rarity => 1;
     public override int Sleep => 99;
     public override int Speed => 110;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "    Red     ";
-    public override string SplitName3 => "   jelly    ";
+    public override string? MultilineName => "Red\njelly";
     public override bool Stupid => true;
 }

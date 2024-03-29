@@ -31,8 +31,7 @@ internal class StarSpawnOfCthulhuMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperUSymbol);
     public override ColorEnum Color => ColorEnum.BrightGreen;
-    public override string Name => "Star-spawn of Cthulhu";
-
+    
     public override int ArmorClass => 90;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -75,7 +74,5 @@ internal class StarSpawnOfCthulhuMonsterRace : MonsterRace
     public override bool ResistTeleport => true;
     public override int Sleep => 90;
     public override int Speed => 130;
-    public override string SplitName1 => " Star-spawn ";
-    public override string SplitName2 => "     of     ";
-    public override string SplitName3 => "  Cthulhu   ";
+    public override string? MultilineName => "Star-spawn\nof\nCthulhu";
 }

@@ -13,8 +13,7 @@ internal class LivingstoneMonsterRace : MonsterRace
     protected LivingstoneMonsterRace(Game game) : base(game) { }
 
     protected override string SymbolName => nameof(PoundSignSymbol);
-    public override string Name => "Livingstone";
-
+    
     public override int ArmorClass => 28;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -47,7 +46,5 @@ internal class LivingstoneMonsterRace : MonsterRace
     public override int Rarity => 4;
     public override int Sleep => 20;
     public override int Speed => 110;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "            ";
-    public override string SplitName3 => "Livingstone ";
+    public override string? MultilineName => "Livingstone";
 }

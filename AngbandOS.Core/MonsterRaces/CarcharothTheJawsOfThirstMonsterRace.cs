@@ -22,8 +22,7 @@ internal class CarcharothTheJawsOfThirstMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperCSymbol);
     public override ColorEnum Color => ColorEnum.Black;
-    public override string Name => "Carcharoth, the Jaws of Thirst";
-
+    
     public override bool Animal => true;
     public override int ArmorClass => 110;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
@@ -62,9 +61,7 @@ internal class CarcharothTheJawsOfThirstMonsterRace : MonsterRace
     public override int Sleep => 10;
     public override bool Smart => true;
     public override int Speed => 130;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "            ";
-    public override string SplitName3 => " Carcharoth ";
+    public override string? MultilineName => "Carcharoth";
     public override bool TakeItem => true;
     public override bool Unique => true;
 }

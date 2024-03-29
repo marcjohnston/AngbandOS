@@ -14,8 +14,7 @@ internal class KingCobraMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperJSymbol);
     public override ColorEnum Color => ColorEnum.Yellow;
-    public override string Name => "King cobra";
-
+    
     public override bool Animal => true;
     public override int ArmorClass => 30;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
@@ -38,7 +37,5 @@ internal class KingCobraMonsterRace : MonsterRace
     public override int Rarity => 2;
     public override int Sleep => 1;
     public override int Speed => 110;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "    King    ";
-    public override string SplitName3 => "   cobra    ";
+    public override string? MultilineName => "King\ncobra";
 }

@@ -20,8 +20,7 @@ internal class MatureGoldDragonMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerDSymbol);
     public override ColorEnum Color => ColorEnum.Yellow;
-    public override string Name => "Mature gold dragon";
-
+    
     public override int ArmorClass => 80;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -49,7 +48,5 @@ internal class MatureGoldDragonMonsterRace : MonsterRace
     public override int Rarity => 2;
     public override int Sleep => 150;
     public override int Speed => 110;
-    public override string SplitName1 => "   Mature   ";
-    public override string SplitName2 => "    gold    ";
-    public override string SplitName3 => "   dragon   ";
+    public override string? MultilineName => "Mature\ngold\ndragon";
 }

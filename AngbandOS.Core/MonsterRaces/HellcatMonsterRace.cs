@@ -14,8 +14,7 @@ internal class HellcatMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerFSymbol);
     public override ColorEnum Color => ColorEnum.Red;
-    public override string Name => "Hellcat";
-
+    
     public override bool Animal => true;
     public override int ArmorClass => 30;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
@@ -40,8 +39,6 @@ internal class HellcatMonsterRace : MonsterRace
     public override int Rarity => 1;
     public override int Sleep => 30;
     public override int Speed => 120;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "            ";
-    public override string SplitName3 => "  Hellcat   ";
+    public override string? MultilineName => "Hellcat";
     public override bool WeirdMind => true;
 }

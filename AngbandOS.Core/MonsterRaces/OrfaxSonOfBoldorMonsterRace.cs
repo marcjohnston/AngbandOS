@@ -23,8 +23,7 @@ internal class OrfaxSonOfBoldorMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerYSymbol);
     public override ColorEnum Color => ColorEnum.BrightBlue;
-    public override string Name => "Orfax, Son of Boldor";
-
+    
     public override bool Animal => true;
     public override int ArmorClass => 20;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
@@ -59,8 +58,6 @@ internal class OrfaxSonOfBoldorMonsterRace : MonsterRace
     public override int Sleep => 10;
     public override bool Smart => true;
     public override int Speed => 120;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "            ";
-    public override string SplitName3 => "   Orfax    ";
+    public override string? MultilineName => "Orfax";
     public override bool Unique => true;
 }

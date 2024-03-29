@@ -14,8 +14,7 @@ internal class WyvernMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerDSymbol);
     public override ColorEnum Color => ColorEnum.Brown;
-    public override string Name => "Wyvern";
-
+    
     public override bool Animal => true;
     public override int ArmorClass => 65;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
@@ -47,7 +46,5 @@ internal class WyvernMonsterRace : MonsterRace
     public override int Rarity => 2;
     public override int Sleep => 20;
     public override int Speed => 120;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "            ";
-    public override string SplitName3 => "   Wyvern   ";
+    public override string? MultilineName => "Wyvern";
 }

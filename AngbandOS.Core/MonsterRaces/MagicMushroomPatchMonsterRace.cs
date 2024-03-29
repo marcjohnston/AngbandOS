@@ -21,8 +21,7 @@ internal class MagicMushroomPatchMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(CommaSymbol);
     public override ColorEnum Color => ColorEnum.BrightBlue;
-    public override string Name => "Magic mushroom patch";
-
+    
     public override int ArmorClass => 10;
     public override string Description => "Yum! It looks quite tasty. It seems to glow with an unusual light.";
     public override bool ForceSleep => true;
@@ -44,8 +43,6 @@ internal class MagicMushroomPatchMonsterRace : MonsterRace
     public override bool ResistTeleport => true;
     public override int Sleep => 0;
     public override int Speed => 130;
-    public override string SplitName1 => "   Magic    ";
-    public override string SplitName2 => "  mushroom  ";
-    public override string SplitName3 => "   patch    ";
+    public override string? MultilineName => "Magic\nmushroom\npatch";
     public override bool Stupid => true;
 }

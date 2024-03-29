@@ -14,8 +14,7 @@ internal class HardenedWarriorMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerPSymbol);
     public override ColorEnum Color => ColorEnum.Brown;
-    public override string Name => "Hardened warrior";
-
+    
     public override int ArmorClass => 40;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -39,8 +38,6 @@ internal class HardenedWarriorMonsterRace : MonsterRace
     public override int Rarity => 1;
     public override int Sleep => 40;
     public override int Speed => 110;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "  Hardened  ";
-    public override string SplitName3 => "  warrior   ";
+    public override string? MultilineName => "Hardened\nwarrior";
     public override bool TakeItem => true;
 }

@@ -25,8 +25,7 @@ internal class ElderThingMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperASymbol);
     public override ColorEnum Color => ColorEnum.Purple;
-    public override string Name => "Elder thing";
-
+    
     public override int ArmorClass => 70;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -60,7 +59,5 @@ internal class ElderThingMonsterRace : MonsterRace
     public override bool ResistTeleport => true;
     public override int Sleep => 50;
     public override int Speed => 110;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "   Elder    ";
-    public override string SplitName3 => "   thing    ";
+    public override string? MultilineName => "Elder\nthing";
 }

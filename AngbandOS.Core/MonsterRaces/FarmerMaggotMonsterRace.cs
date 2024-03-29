@@ -14,8 +14,7 @@ internal class FarmerMaggotMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerTSymbol);
     public override ColorEnum Color => ColorEnum.BrightPink;
-    public override string Name => "Farmer Maggot";
-
+    
     public override int ArmorClass => 10;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -44,8 +43,6 @@ internal class FarmerMaggotMonsterRace : MonsterRace
     public override int Rarity => 4;
     public override int Sleep => 3;
     public override int Speed => 110;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "   Farmer   ";
-    public override string SplitName3 => "   Maggot   ";
+    public override string? MultilineName => "Farmer\nMaggot";
     public override bool Unique => true;
 }

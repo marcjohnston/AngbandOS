@@ -18,8 +18,7 @@ internal class ShamblerMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperESymbol);
     public override ColorEnum Color => ColorEnum.BrightWhite;
-    public override string Name => "Shambler";
-
+    
     public override int ArmorClass => 150;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -53,7 +52,5 @@ internal class ShamblerMonsterRace : MonsterRace
     public override bool ResistTeleport => true;
     public override int Sleep => 50;
     public override int Speed => 130;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "            ";
-    public override string SplitName3 => "  Shambler  ";
+    public override string? MultilineName => "Shambler";
 }

@@ -14,8 +14,7 @@ internal class WildCatMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerFSymbol);
     public override ColorEnum Color => ColorEnum.BrightBrown;
-    public override string Name => "Wild cat";
-
+    
     public override bool Animal => true;
     public override int ArmorClass => 12;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
@@ -36,7 +35,5 @@ internal class WildCatMonsterRace : MonsterRace
     public override int Rarity => 2;
     public override int Sleep => 0;
     public override int Speed => 120;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "    Wild    ";
-    public override string SplitName3 => "    cat     ";
+    public override string? MultilineName => "Wild\ncat";
 }

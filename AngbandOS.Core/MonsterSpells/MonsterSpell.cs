@@ -232,12 +232,12 @@ internal abstract class MonsterSpell : IGetKey
     /// </summary>
     /// <param name="game"></param>
     /// <param name="monster"></param>
-    public abstract void ExecuteOnPlayer(Game game, Monster monster);
+    public abstract void ExecuteOnPlayer(Monster monster);
 
     /// <summary>
     /// Performs the spell on a monster.
     /// </summary>
     /// <param name="game"></param>
     /// <param name="monster"></param>
-    public abstract void ExecuteOnMonster(Game game, Monster monster, Monster target);
+    public abstract void ExecuteOnMonster(Monster monster, Monster target);
 }

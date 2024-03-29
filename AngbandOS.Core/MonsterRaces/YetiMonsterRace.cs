@@ -13,8 +13,7 @@ internal class YetiMonsterRace : MonsterRace
     protected YetiMonsterRace(Game game) : base(game) { }
 
     protected override string SymbolName => nameof(UpperYSymbol);
-    public override string Name => "Yeti";
-
+    
     public override bool Animal => true;
     public override int ArmorClass => 24;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
@@ -38,7 +37,5 @@ internal class YetiMonsterRace : MonsterRace
     public override int Rarity => 3;
     public override int Sleep => 10;
     public override int Speed => 110;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "            ";
-    public override string SplitName3 => "    Yeti    ";
+    public override string? MultilineName => "Yeti";
 }

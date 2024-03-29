@@ -18,8 +18,7 @@ internal class UnmakerMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperESymbol);
     public override ColorEnum Color => ColorEnum.Purple;
-    public override string Name => "Unmaker";
-
+    
     public override int ArmorClass => 50;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -66,7 +65,5 @@ internal class UnmakerMonsterRace : MonsterRace
     public override bool Shapechanger => true;
     public override int Sleep => 60;
     public override int Speed => 120;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "            ";
-    public override string SplitName3 => "  Unmaker   ";
+    public override string? MultilineName => "Unmaker";
 }

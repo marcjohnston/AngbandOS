@@ -23,8 +23,7 @@ internal class BaphometTheMinotaurLordMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperHSymbol);
     public override ColorEnum Color => ColorEnum.Red;
-    public override string Name => "Baphomet, the Minotaur Lord";
-
+    
     public override int ArmorClass => 120;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -58,8 +57,6 @@ internal class BaphometTheMinotaurLordMonsterRace : MonsterRace
     public override int Rarity => 4;
     public override int Sleep => 30;
     public override int Speed => 130;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "            ";
-    public override string SplitName3 => "  Baphomet  ";
+    public override string? MultilineName => "Baphomet";
     public override bool Unique => true;
 }

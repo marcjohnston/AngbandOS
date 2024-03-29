@@ -27,8 +27,7 @@ internal class RingMimicMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(EqualSignSymbol);
     public override ColorEnum Color => ColorEnum.Gold;
-    public override string Name => "Ring mimic";
-
+    
     public override int ArmorClass => 60;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -57,7 +56,5 @@ internal class RingMimicMonsterRace : MonsterRace
     public override int Rarity => 4;
     public override int Sleep => 100;
     public override int Speed => 120;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "    Ring    ";
-    public override string SplitName3 => "   mimic    ";
+    public override string? MultilineName => "Ring\nmimic";
 }

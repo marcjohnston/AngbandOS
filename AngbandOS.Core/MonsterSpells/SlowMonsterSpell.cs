@@ -25,29 +25,29 @@ internal class SlowMonsterSpell : MonsterSpell
         return $"{monsterName} drains power from {targetName}{it} muscles.";
     }
 
-    public override void ExecuteOnPlayer(Game game, Monster monster)
+    public override void ExecuteOnPlayer(Monster monster)
     {
         string monsterName = monster.Name;
 
-        if (game.HasFreeAction)
+        if (Game.HasFreeAction)
         {
-            game.MsgPrint("You are unaffected!");
+            Game.MsgPrint("You are unaffected!");
         }
-        else if (Game.RandomLessThan(100) < game.SkillSavingThrow)
+        else if (base.Game.RandomLessThan(100) < Game.SkillSavingThrow)
         {
-            game.MsgPrint("You resist the effects!");
+            Game.MsgPrint("You resist the effects!");
         }
         else
         {
-            game.SlowTimer.AddTimer(Game.RandomLessThan(4) + 4);
+            Game.SlowTimer.AddTimer(base.Game.RandomLessThan(4) + 4);
         }
-        game.UpdateSmartLearn(monster, Game.SingletonRepository.SpellResistantDetections.Get(nameof(FreeSpellResistantDetection)));
+        Game.UpdateSmartLearn(monster, base.Game.SingletonRepository.SpellResistantDetections.Get(nameof(SpellResistantDetections.FreeSpellResistantDetection)));
     }
 
-    public override void ExecuteOnMonster(Game game, Monster monster, Monster target)
+    public override void ExecuteOnMonster(Monster monster, Monster target)
     {
         int rlev = monster.Race.Level >= 1 ? monster.Race.Level : 1;
-        bool blind = game.BlindnessTimer.Value != 0;
+        bool blind = Game.BlindnessTimer.Value != 0;
         bool seeTarget = !blind && target.IsVisible;
         MonsterRace targetRace = target.Race;
         string targetName = target.Name;
@@ -56,14 +56,14 @@ internal class SlowMonsterSpell : MonsterSpell
         {
             if (seeTarget)
             {
-                game.MsgPrint($"{targetName} is unaffected.");
+                Game.MsgPrint($"{targetName} is unaffected.");
             }
         }
-        else if (targetRace.Level > Game.DieRoll(rlev - 10 < 1 ? 1 : rlev - 10) + 10)
+        else if (targetRace.Level > base.Game.DieRoll(rlev - 10 < 1 ? 1 : rlev - 10) + 10)
         {
             if (seeTarget)
             {
-                game.MsgPrint($"{targetName} is unaffected.");
+                Game.MsgPrint($"{targetName} is unaffected.");
             }
         }
         else
@@ -71,7 +71,7 @@ internal class SlowMonsterSpell : MonsterSpell
             target.Speed -= 10;
             if (seeTarget)
             {
-                game.MsgPrint($"{targetName} starts moving slower.");
+                Game.MsgPrint($"{targetName} starts moving slower.");
             }
         }
     }

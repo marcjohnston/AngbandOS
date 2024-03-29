@@ -26,8 +26,7 @@ internal class IronLichMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperLSymbol);
     public override ColorEnum Color => ColorEnum.Grey;
-    public override string Name => "Iron lich";
-
+    
     public override int ArmorClass => 100;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -64,8 +63,6 @@ internal class IronLichMonsterRace : MonsterRace
     public override bool ResistTeleport => true;
     public override int Sleep => 10;
     public override int Speed => 120;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "    Iron    ";
-    public override string SplitName3 => "    lich    ";
+    public override string? MultilineName => "Iron\nlich";
     public override bool Undead => true;
 }

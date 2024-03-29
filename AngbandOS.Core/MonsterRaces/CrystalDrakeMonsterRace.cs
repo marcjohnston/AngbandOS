@@ -21,8 +21,7 @@ internal class CrystalDrakeMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerDSymbol);
     public override ColorEnum Color => ColorEnum.Diamond;
-    public override string Name => "Crystal drake";
-
+    
     public override int ArmorClass => 100;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -55,7 +54,5 @@ internal class CrystalDrakeMonsterRace : MonsterRace
     public override bool Reflecting => true;
     public override int Sleep => 30;
     public override int Speed => 120;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "  Crystal   ";
-    public override string SplitName3 => "   drake    ";
+    public override string? MultilineName => "Crystal\ndrake";
 }

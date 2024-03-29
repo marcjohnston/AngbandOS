@@ -14,8 +14,7 @@ internal class NightLizardMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperRSymbol);
     public override ColorEnum Color => ColorEnum.Yellow;
-    public override string Name => "Night lizard";
-
+    
     public override bool Animal => true;
     public override int ArmorClass => 16;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
@@ -35,7 +34,5 @@ internal class NightLizardMonsterRace : MonsterRace
     public override int Rarity => 2;
     public override int Sleep => 30;
     public override int Speed => 110;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "   Night    ";
-    public override string SplitName3 => "   lizard   ";
+    public override string? MultilineName => "Night\nlizard";
 }

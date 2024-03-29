@@ -14,8 +14,7 @@ internal class PantherMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerFSymbol);
     public override ColorEnum Color => ColorEnum.Black;
-    public override string Name => "Panther";
-
+    
     public override bool Animal => true;
     public override int ArmorClass => 30;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
@@ -36,7 +35,5 @@ internal class PantherMonsterRace : MonsterRace
     public override int Rarity => 2;
     public override int Sleep => 0;
     public override int Speed => 120;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "            ";
-    public override string SplitName3 => "  Panther   ";
+    public override string? MultilineName => "Panther";
 }

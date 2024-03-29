@@ -18,8 +18,7 @@ internal class MatureWhiteDragonMonsterRace : MonsterRace
     };
 
     protected override string SymbolName => nameof(LowerDSymbol);
-    public override string Name => "Mature white dragon";
-
+    
     public override int ArmorClass => 65;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -49,7 +48,5 @@ internal class MatureWhiteDragonMonsterRace : MonsterRace
     public override int Rarity => 1;
     public override int Sleep => 70;
     public override int Speed => 110;
-    public override string SplitName1 => "   Mature   ";
-    public override string SplitName2 => "   white    ";
-    public override string SplitName3 => "   dragon   ";
+    public override string? MultilineName => "Mature\nwhite\ndragon";
 }

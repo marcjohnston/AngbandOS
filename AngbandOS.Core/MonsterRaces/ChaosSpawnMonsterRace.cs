@@ -14,8 +14,7 @@ internal class ChaosSpawnMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerESymbol);
     public override ColorEnum Color => ColorEnum.Purple;
-    public override string Name => "Chaos spawn";
-
+    
     public override int ArmorClass => 50;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -39,7 +38,5 @@ internal class ChaosSpawnMonsterRace : MonsterRace
     public override int Rarity => 2;
     public override int Sleep => 20;
     public override int Speed => 110;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "   Chaos    ";
-    public override string SplitName3 => "   spawn    ";
+    public override string? MultilineName => "Chaos\nspawn";
 }

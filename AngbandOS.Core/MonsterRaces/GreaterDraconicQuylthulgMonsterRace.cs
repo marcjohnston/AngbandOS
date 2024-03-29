@@ -20,8 +20,7 @@ internal class GreaterDraconicQuylthulgMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperQSymbol);
     public override ColorEnum Color => ColorEnum.Green;
-    public override string Name => "Greater draconic quylthulg";
-
+    
     public override bool Animal => true;
     public override int ArmorClass => 1;
     public override string Description => "A massive mound of scaled flesh, throbbing and pulsating with multi-hued light.";
@@ -47,7 +46,5 @@ internal class GreaterDraconicQuylthulgMonsterRace : MonsterRace
     public override bool ResistTeleport => true;
     public override int Sleep => 0;
     public override int Speed => 120;
-    public override string SplitName1 => "  Greater   ";
-    public override string SplitName2 => "  draconic  ";
-    public override string SplitName3 => " quylthulg  ";
+    public override string? MultilineName => "Greater\ndraconic\nquylthulg";
 }

@@ -14,8 +14,7 @@ internal class UmberHulkMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerXSymbol);
     public override ColorEnum Color => ColorEnum.Brown;
-    public override string Name => "Umber hulk";
-
+    
     public override bool Animal => true;
     public override int ArmorClass => 50;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
@@ -46,7 +45,5 @@ internal class UmberHulkMonsterRace : MonsterRace
     public override int Rarity => 1;
     public override int Sleep => 10;
     public override int Speed => 110;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "   Umber    ";
-    public override string SplitName3 => "    hulk    ";
+    public override string? MultilineName => "Umber\nhulk";
 }

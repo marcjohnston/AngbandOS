@@ -31,8 +31,7 @@ internal class TheCollectorMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerHSymbol);
     public override ColorEnum Color => ColorEnum.Copper;
-    public override string Name => "The Collector";
-
+    
     public override int ArmorClass => 100;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -72,8 +71,6 @@ internal class TheCollectorMonsterRace : MonsterRace
     public override int Sleep => 10;
     public override bool Smart => true;
     public override int Speed => 150;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "    The     ";
-    public override string SplitName3 => " Collector  ";
+    public override string? MultilineName => "The\nCollector";
     public override bool Unique => true;
 }

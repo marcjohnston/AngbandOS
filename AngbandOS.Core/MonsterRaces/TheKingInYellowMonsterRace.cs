@@ -25,8 +25,7 @@ internal class TheKingInYellowMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(QuestionMarkSymbol);
     public override ColorEnum Color => ColorEnum.BrightYellow;
-    public override string Name => "The King in Yellow";
-
+    
     public override int ArmorClass => 150;
     public override bool CharMulti => true;
     public override bool ColdBlood => true;
@@ -60,7 +59,5 @@ internal class TheKingInYellowMonsterRace : MonsterRace
     public override bool ResistTeleport => true;
     public override int Sleep => 15;
     public override int Speed => 120;
-    public override string SplitName1 => "    The     ";
-    public override string SplitName2 => "  King in   ";
-    public override string SplitName3 => "   Yellow   ";
+    public override string? MultilineName => "The\nKing in\nYellow";
 }

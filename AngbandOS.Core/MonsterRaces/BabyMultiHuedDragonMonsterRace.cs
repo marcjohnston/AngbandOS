@@ -22,8 +22,7 @@ internal class BabyMultiHuedDragonMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerDSymbol);
     public override ColorEnum Color => ColorEnum.Purple;
-    public override string Name => "Baby multi-hued dragon";
-
+    
     public override int ArmorClass => 30;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -58,7 +57,5 @@ internal class BabyMultiHuedDragonMonsterRace : MonsterRace
     public override int Rarity => 2;
     public override int Sleep => 70;
     public override int Speed => 110;
-    public override string SplitName1 => "    Baby    ";
-    public override string SplitName2 => " multi-hued ";
-    public override string SplitName3 => "   dragon   ";
+    public override string? MultilineName => "Baby\nmulti-hued\ndragon";
 }

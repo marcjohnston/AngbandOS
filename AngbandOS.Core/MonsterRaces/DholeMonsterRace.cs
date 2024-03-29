@@ -18,8 +18,7 @@ internal class DholeMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperASymbol);
     public override ColorEnum Color => ColorEnum.Beige;
-    public override string Name => "Dhole";
-
+    
     public override bool Animal => true;
     public override int ArmorClass => 64;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
@@ -45,7 +44,5 @@ internal class DholeMonsterRace : MonsterRace
     public override int Rarity => 4;
     public override int Sleep => 25;
     public override int Speed => 110;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "            ";
-    public override string SplitName3 => "   Dhole    ";
+    public override string? MultilineName => "Dhole";
 }

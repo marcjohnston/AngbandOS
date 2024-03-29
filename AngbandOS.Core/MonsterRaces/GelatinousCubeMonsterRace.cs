@@ -14,8 +14,7 @@ internal class GelatinousCubeMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerJSymbol);
     public override ColorEnum Color => ColorEnum.Diamond;
-    public override string Name => "Gelatinous cube";
-
+    
     public override int ArmorClass => 18;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -50,9 +49,7 @@ internal class GelatinousCubeMonsterRace : MonsterRace
     public override int Rarity => 4;
     public override int Sleep => 1;
     public override int Speed => 110;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => " Gelatinous ";
-    public override string SplitName3 => "    cube    ";
+    public override string? MultilineName => "Gelatinous\ncube";
     public override bool Stupid => true;
     public override bool TakeItem => true;
 }

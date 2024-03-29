@@ -22,8 +22,7 @@ internal class DrolemMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerGSymbol);
     public override ColorEnum Color => ColorEnum.Green;
-    public override string Name => "Drolem";
-
+    
     public override int ArmorClass => 130;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -60,7 +59,5 @@ internal class DrolemMonsterRace : MonsterRace
     public override bool ResistTeleport => true;
     public override int Sleep => 30;
     public override int Speed => 120;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "            ";
-    public override string SplitName3 => "   Drolem   ";
+    public override string? MultilineName => "Drolem";
 }

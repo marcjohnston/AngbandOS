@@ -27,15 +27,15 @@ internal class DarknessMonsterSpell : BallProjectileMonsterSpell
     }
     public override SpellResistantDetection[] SmartLearn => new SpellResistantDetection[] { Game.SingletonRepository.SpellResistantDetections.Get(nameof(AcidSpellResistantDetection)) };
 
-    public override void ExecuteOnPlayer(Game game, Monster monster)
+    public override void ExecuteOnPlayer(Monster monster)
     {
-        base.ExecuteOnPlayer(game, monster);
-        game.UnlightArea(0, 3);
+        base.ExecuteOnPlayer(monster);
+        Game.UnlightArea(0, 3);
     }
 
-    public override void ExecuteOnMonster(Game game, Monster monster, Monster target)
+    public override void ExecuteOnMonster(Monster monster, Monster target)
     {
-        base.ExecuteOnMonster(game, monster, target);
-        game.UnlightRoom(target.MapY, target.MapX);
+        base.ExecuteOnMonster(monster, target);
+        Game.UnlightRoom(target.MapY, target.MapX);
     }
 }

@@ -14,8 +14,7 @@ internal class CreepingCopperCoinsMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(DollarSignSymbol);
     public override ColorEnum Color => ColorEnum.Copper;
-    public override string Name => "Creeping copper coins";
-
+    
     public override bool Animal => true;
     public override int ArmorClass => 24;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
@@ -42,7 +41,5 @@ internal class CreepingCopperCoinsMonsterRace : MonsterRace
     public override int Rarity => 2;
     public override int Sleep => 10;
     public override int Speed => 100;
-    public override string SplitName1 => "  Creeping  ";
-    public override string SplitName2 => "   copper   ";
-    public override string SplitName3 => "   coins    ";
+    public override string? MultilineName => "Creeping\ncopper\ncoins";
 }

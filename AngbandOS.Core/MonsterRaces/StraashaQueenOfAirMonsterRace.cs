@@ -20,8 +20,7 @@ internal class StraashaQueenOfAirMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperESymbol);
     public override ColorEnum Color => ColorEnum.BrightBlue;
-    public override string Name => "Straasha, Queen of Air";
-
+    
     public override int ArmorClass => 50;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -62,8 +61,6 @@ internal class StraashaQueenOfAirMonsterRace : MonsterRace
     public override int Rarity => 4;
     public override int Sleep => 50;
     public override int Speed => 130;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "            ";
-    public override string SplitName3 => "  Straasha  ";
+    public override string? MultilineName => "Straasha";
     public override bool Unique => true;
 }

@@ -21,8 +21,7 @@ internal class WillOTheWispMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperESymbol);
     public override ColorEnum Color => ColorEnum.BrightTurquoise;
-    public override string Name => "Will o' the wisp";
-
+    
     public override int ArmorClass => 150;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -60,7 +59,5 @@ internal class WillOTheWispMonsterRace : MonsterRace
     public override int Sleep => 0;
     public override bool Smart => true;
     public override int Speed => 130;
-    public override string SplitName1 => "    Will    ";
-    public override string SplitName2 => "   o' the   ";
-    public override string SplitName3 => "    wisp    ";
+    public override string? MultilineName => "Will\no' the\nwisp";
 }

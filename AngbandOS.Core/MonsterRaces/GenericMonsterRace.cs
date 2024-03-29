@@ -22,8 +22,8 @@ internal class GenericMonsterRace : MonsterRace
         Key = monsterRaceDefinition.Key;
         SpellNames = monsterRaceDefinition.SpellNames;
         SymbolName = monsterRaceDefinition.SymbolName;
+        MultilineName = monsterRaceDefinition.MultilineName;
         Color = monsterRaceDefinition.Color;
-        Name = monsterRaceDefinition.Name;
         Animal = monsterRaceDefinition.Animal;
         ArmorClass = monsterRaceDefinition.ArmorClass;
         AttackDefinitions = monsterRaceDefinition.AttackDefinitions;
@@ -112,9 +112,6 @@ internal class GenericMonsterRace : MonsterRace
         Sleep = monsterRaceDefinition.Sleep;
         Smart = monsterRaceDefinition.Smart;
         Speed = monsterRaceDefinition.Speed;
-        SplitName1 = monsterRaceDefinition.SplitName1;
-        SplitName2 = monsterRaceDefinition.SplitName2;
-        SplitName3 = monsterRaceDefinition.SplitName3;
         Stupid = monsterRaceDefinition.Stupid;
         TakeItem = monsterRaceDefinition.TakeItem;
         Troll = monsterRaceDefinition.Troll;
@@ -134,14 +131,14 @@ internal class GenericMonsterRace : MonsterRace
     protected override string SymbolName { get; }
 
     /// <summary>
+    /// Returns a multiline version of the monster race that is shown to the player.  Defaults to the <see cref="FriendlyName"/>.  Word-breaks are encoded with a \n character.
+    /// </summary>
+    public override string? MultilineName { get; }
+
+    /// <summary>
     /// The color to display the monster as.
     /// </summary>
     public override ColorEnum Color { get; } = ColorEnum.White;
-
-    /// <summary>
-    /// A unique identifier for the entity
-    /// </summary>
-    public override string Name { get; }
 
     /// <summary>
     /// The monster is an animal.
@@ -434,21 +431,6 @@ internal class GenericMonsterRace : MonsterRace
     /// how fast the monster moves (110 = normal speed, higher is better).
     /// </summary>
     public override int Speed { get; }
-
-    /// <summary>
-    /// The shortened name of the monster.
-    /// </summary>
-    public override string SplitName1 { get; }
-
-    /// <summary>
-    /// The shortened name of the monster.
-    /// </summary>
-    public override string SplitName2 { get; }
-
-    /// <summary>
-    /// The shortened name of the monster.
-    /// </summary>
-    public override string SplitName3 { get; }
 
     public override bool Stupid { get; } = false;
 

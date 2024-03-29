@@ -14,8 +14,7 @@ internal class VortTheKoboldQueenMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerKSymbol);
     public override ColorEnum Color => ColorEnum.Blue;
-    public override string Name => "Vort the Kobold Queen";
-
+    
     public override int ArmorClass => 20;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -46,8 +45,6 @@ internal class VortTheKoboldQueenMonsterRace : MonsterRace
     public override int Rarity => 3;
     public override int Sleep => 20;
     public override int Speed => 110;
-    public override string SplitName1 => "  Vort the  ";
-    public override string SplitName2 => "   Kobold   ";
-    public override string SplitName3 => "   Queen    ";
+    public override string? MultilineName => "Vort the\nKobold\nQueen";
     public override bool Unique => true;
 }

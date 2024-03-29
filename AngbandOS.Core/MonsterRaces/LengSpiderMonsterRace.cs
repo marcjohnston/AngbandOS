@@ -24,8 +24,7 @@ internal class LengSpiderMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperSSymbol);
     public override ColorEnum Color => ColorEnum.Purple;
-    public override string Name => "Leng spider";
-
+    
     public override int ArmorClass => 68;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -60,8 +59,6 @@ internal class LengSpiderMonsterRace : MonsterRace
     public override int Sleep => 255;
     public override bool Smart => true;
     public override int Speed => 120;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "    Leng    ";
-    public override string SplitName3 => "   spider   ";
+    public override string? MultilineName => "Leng\nspider";
     public override bool TakeItem => true;
 }

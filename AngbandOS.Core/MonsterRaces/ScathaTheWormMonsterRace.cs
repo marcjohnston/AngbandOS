@@ -20,8 +20,7 @@ internal class ScathaTheWormMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperDSymbol);
     public override ColorEnum Color => ColorEnum.BrightPink;
-    public override string Name => "Scatha the Worm";
-
+    
     public override int ArmorClass => 130;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -57,8 +56,6 @@ internal class ScathaTheWormMonsterRace : MonsterRace
     public override int Rarity => 2;
     public override int Sleep => 70;
     public override int Speed => 120;
-    public override string SplitName1 => "   Scatha   ";
-    public override string SplitName2 => "    the     ";
-    public override string SplitName3 => "    Worm    ";
+    public override string? MultilineName => "Scatha\nthe\nWorm";
     public override bool Unique => true;
 }

@@ -18,8 +18,7 @@ internal class HeadlessMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperHSymbol);
     public override ColorEnum Color => ColorEnum.BrightGreen;
-    public override string Name => "Headless";
-
+    
     public override int ArmorClass => 50;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -43,7 +42,5 @@ internal class HeadlessMonsterRace : MonsterRace
     public override int Rarity => 1;
     public override int Sleep => 40;
     public override int Speed => 110;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "            ";
-    public override string SplitName3 => "  Headless  ";
+    public override string? MultilineName => "Headless";
 }

@@ -80,7 +80,7 @@ internal class Monster : IItemContainer
         Game = game;
     }
 
-    public string DescribeItemLocation(Item oPtr) => $"being held by {Race.Name}";
+    public string DescribeItemLocation(Item oPtr) => $"being held by {Race.FriendlyName}";
 
     public string Label(Item oPtr) => ""; // TODO: Items held by a monster cannot be selected.
 
@@ -210,7 +210,7 @@ internal class Monster : IItemContainer
             return string.Empty;
         }
         string desc;
-        string name = Race.Name;
+        string name = Race.FriendlyName;
         if (Game.HallucinationsTimer.Value != 0)
         {
             MonsterRace halluRace;
@@ -218,7 +218,7 @@ internal class Monster : IItemContainer
             {
                 halluRace = Game.SingletonRepository.MonsterRaces[Game.DieRoll(Game.SingletonRepository.MonsterRaces.Count - 2)];
             } while (halluRace.Unique);
-            string sillyName = halluRace.Name;
+            string sillyName = halluRace.FriendlyName;
             name = sillyName;
         }
         bool seen = (mode & 0x80) != 0 || ((mode & 0x40) == 0 && IsVisible);
@@ -775,7 +775,7 @@ internal class Monster : IItemContainer
         {
             if (DistanceFromPlayer > Constants.FollowDistance)
             {
-                GetMovesTowardsPlayer(Game, potentialMoves);
+                GetMovesTowardsPlayer(potentialMoves);
             }
             else
             {
@@ -785,14 +785,14 @@ internal class Monster : IItemContainer
                 potentialMoves[2] = 5;
                 potentialMoves[3] = 5;
                 // Possibly override these random moves with attacks on enemies
-                GetMovesTowardsEnemyMonsters(Game, potentialMoves);
+                GetMovesTowardsEnemyMonsters(potentialMoves);
             }
         }
         // If all the above fail, we must be a hostile monster who wants to move towards the player
         else
         {
             // If we fail to get sensible moves, give up on our turn
-            if (!GetMovesTowardsPlayer(Game, potentialMoves))
+            if (!GetMovesTowardsPlayer(potentialMoves))
             {
                 return;
             }
@@ -1373,7 +1373,7 @@ internal class Monster : IItemContainer
         if (blinked)
         {
             Game.MsgPrint(IsVisible ? "The thief flees laughing!" : "You hear laughter!");
-            TeleportAway(Game, (Constants.MaxSight * 2) + 5);
+            TeleportAway((Constants.MaxSight * 2) + 5);
         }
         // We made the attack
         return true;
@@ -1457,7 +1457,7 @@ internal class Monster : IItemContainer
         }
 
         // Ditch any spells that we've seen the player resist before so we know they'll be ineffective
-        spells = RemoveIneffectiveSpells(Game, spells);
+        spells = RemoveIneffectiveSpells(spells);
 
         // If we just got rid of all our spells then don't cast
         if (spells.Count == 0)
@@ -1528,7 +1528,7 @@ internal class Monster : IItemContainer
         }
 
         // Execute the spell.
-        thrownSpell.ExecuteOnPlayer(Game, this);
+        thrownSpell.ExecuteOnPlayer(this);
 
         // Learn from the spell.
         foreach (SpellResistantDetection smartLearn in thrownSpell.SmartLearn)
@@ -1676,7 +1676,7 @@ internal class Monster : IItemContainer
             }
 
             // Execute the action on the monster.
-            thrownSpell.ExecuteOnMonster(Game, this, target);
+            thrownSpell.ExecuteOnMonster(this, target);
 
             // Spells will wake up the target if it's asleep
             if (thrownSpell.WakesSleepingMonsters)
@@ -1726,7 +1726,7 @@ internal class Monster : IItemContainer
     /// <param name="projectile"> The type of breath being used </param>
     /// <param name="damage"> The damage the breath will do </param>
     /// <param name="radius"> The radius of the attack, or zero for the default radius </param>
-    public void BreatheAtMonster(Game game, int targetY, int targetX, Projectile projectile, int damage, int radius)
+    public void BreatheAtMonster(int targetY, int targetX, Projectile projectile, int damage, int radius) // TODO: Why is this not used
     {
         const ProjectionFlag projectionFlags = ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill;
         // Radius 0 means use the default radius
@@ -1736,7 +1736,7 @@ internal class Monster : IItemContainer
         }
         // Make the radius negative to indicate we need a cone instead of a ball
         radius = 0 - radius;
-        game.Project(GetMonsterIndex(), radius, targetY, targetX, damage, projectile, projectionFlags);
+        Game.Project(GetMonsterIndex(), radius, targetY, targetX, damage, projectile, projectionFlags);
     }
 
     /// <summary>
@@ -1746,14 +1746,14 @@ internal class Monster : IItemContainer
     /// <param name="projectile"> The type of effect the ball has </param>
     /// <param name="damage"> The damage done by the ball </param>
     /// <param name="radius"> The radius of the ball, or zero to use the default radius </param>
-    public void FireBallAtPlayer(Game game, Projectile projectile, int damage, int radius)
+    public void FireBallAtPlayer(Projectile projectile, int damage, int radius) // TODO: Why is this not used
     {
         const ProjectionFlag projectionFlag = ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill;
         if (radius < 1)
         {
             radius = Race.Powerful ? 3 : 2;
         }
-        game.Project(GetMonsterIndex(), radius, game.MapY.Value, game.MapX.Value, damage, projectile, projectionFlag);
+        Game.Project(GetMonsterIndex(), radius, Game.MapY.Value, Game.MapX.Value, damage, projectile, projectionFlag);
     }
 
     /// <summary>
@@ -1765,7 +1765,7 @@ internal class Monster : IItemContainer
     /// <param name="radius">
     /// The (positive) radius of the breath weapon, or zero for the default radius
     /// </param>
-    public void BreatheAtPlayer(Game game, Projectile projectile, int damage, int radius)
+    public void BreatheAtPlayer(Projectile projectile, int damage, int radius) // TODO: Why is this not used
     {
         const ProjectionFlag projectionFlags = ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill;
         // Radius 0 means use the default radius
@@ -1775,7 +1775,7 @@ internal class Monster : IItemContainer
         }
         // Make the radius negative to indicate we need a cone instead of a ball
         radius = 0 - radius;
-        game.Project(GetMonsterIndex(), radius, game.MapY.Value, game.MapX.Value, damage, projectile, projectionFlags);
+        Game.Project(GetMonsterIndex(), radius, Game.MapY.Value, Game.MapX.Value, damage, projectile, projectionFlags);
     }
 
     /// <summary>
@@ -1786,10 +1786,10 @@ internal class Monster : IItemContainer
     /// <param name="targetX"> The x coordinate of the target </param>
     /// <param name="projectile"> The projectile to be fired </param>
     /// <param name="damage"> The damage the projectile should do </param>
-    public void FireBoltAtMonster(Game game, int targetY, int targetX, Projectile projectile, int damage)
+    public void FireBoltAtMonster(int targetY, int targetX, Projectile projectile, int damage) // TODO: Why is this not used
     {
         const ProjectionFlag projectionFlags = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;
-        game.Project(GetMonsterIndex(), 0, targetY, targetX, damage, projectile, projectionFlags);
+        Game.Project(GetMonsterIndex(), 0, targetY, targetX, damage, projectile, projectionFlags);
     }
 
     /// <summary>
@@ -1799,11 +1799,11 @@ internal class Monster : IItemContainer
     /// <param name="damage"> The damage taken </param>
     /// <param name="fear"> Whether the damage makes us afraid </param>
     /// <param name="note"> A special descriptive note that replaces the normal death message </param>
-    public void TakeDamageFromAnotherMonster(Game game, int damage, out bool fear, string note)
+    public void TakeDamageFromAnotherMonster(int damage, out bool fear, string note)
     {
         fear = false;
         // Track the monster that has just taken damage
-        if (game.TrackedMonsterIndex == GetMonsterIndex())
+        if (Game.TrackedMonsterIndex != null && Game.TrackedMonsterIndex.Value == GetMonsterIndex())
         {
             Game.SingletonRepository.FlaggedActions.Get(nameof(RedrawMonsterHealthFlaggedAction)).Set();
         }
@@ -1822,11 +1822,11 @@ internal class Monster : IItemContainer
             {
                 // Construct a message telling the player what happened
                 string monsterName = Name;
-                game.PlaySound(SoundEffectEnum.MonsterDies);
+                Game.PlaySound(SoundEffectEnum.MonsterDies);
                 // Append the note if there is one
                 if (!string.IsNullOrEmpty(note))
                 {
-                    game.MsgPrint(monsterName + note);
+                    Game.MsgPrint(monsterName + note);
                 }
                 // Don't tell the player if the monster is not visible
                 else if (!IsVisible)
@@ -1837,16 +1837,16 @@ internal class Monster : IItemContainer
                          Race.Cthuloid || Race.Stupid ||
                          Race.Nonliving || "Evg".Contains(Race.Symbol.Character.ToString()))
                 {
-                    game.MsgPrint($"{monsterName} is destroyed.");
+                    Game.MsgPrint($"{monsterName} is destroyed.");
                 }
                 else
                 {
-                    game.MsgPrint($"{monsterName} is killed.");
+                    Game.MsgPrint($"{monsterName} is killed.");
                 }
                 // Let the save game know we've died
-                game.MonsterDeath(GetMonsterIndex());
+                Game.MonsterDeath(GetMonsterIndex());
                 // Delete us from the monster list
-                game.DeleteMonsterByIndex(GetMonsterIndex(), true);
+                Game.DeleteMonsterByIndex(GetMonsterIndex(), true);
                 fear = false;
                 return;
             }
@@ -1930,7 +1930,7 @@ internal class Monster : IItemContainer
     /// <summary>
     /// Remove flags for ineffective spells from the monster's flags and return them.
     /// </summary>
-    private MonsterSpellList RemoveIneffectiveSpells(Game game, MonsterSpellList spells)
+    private MonsterSpellList RemoveIneffectiveSpells(MonsterSpellList spells)
     {
         // If we're stupid, we won't realise how ineffective things are
         if (Race.Stupid)
@@ -2144,14 +2144,14 @@ internal class Monster : IItemContainer
     /// <param name="monsterIndex"> the index of the monster who is moving </param>
     /// <param name="movesList"> The list to be populated with moves </param>
     /// <returns> True if we have potential moves or false if we don't </returns>
-    private bool GetMovesTowardsPlayer(Game game, PotentialMovesList movesList)
+    private bool GetMovesTowardsPlayer(PotentialMovesList movesList)
     {
         int moveVal = 0;
         bool done = false;
         // Default to moving towards the player's exact location
-        GridCoordinate targetLocation = new GridCoordinate(game.MapX.Value, game.MapY.Value);
+        GridCoordinate targetLocation = new GridCoordinate(Game.MapX.Value, Game.MapY.Value);
         // Adjust our target based on the player's scent if we can't move in a straight line to them
-        TrackPlayerByScent(game, targetLocation);
+        TrackPlayerByScent(targetLocation);
         // Get the relative move needed to reach our target location
         GridCoordinate desiredRelativeMovement = new GridCoordinate(MapX - targetLocation.X, MapY - targetLocation.Y);
         if (!SmFriendly)
@@ -2164,16 +2164,16 @@ internal class Monster : IItemContainer
                 // Check if the player is in a room by counting the room tiles around them
                 for (int i = 0; i < 8; i++)
                 {
-                    if (game.Map.Grid[game.MapY.Value + game.OrderedDirectionYOffset[i]][game.MapX.Value + game.OrderedDirectionXOffset[i]].InRoom)
+                    if (Game.Map.Grid[Game.MapY.Value + Game.OrderedDirectionYOffset[i]][Game.MapX.Value + Game.OrderedDirectionXOffset[i]].InRoom)
                     {
                         room++;
                     }
                 }
                 // If the player isn't in a room and they're healthy, wait to ambush them rather
                 // than running headlong into the corridor after them and queueing up to get hit
-                if (room < 8 && game.Health.Value > game.MaxHealth.Value * 3 / 4)
+                if (room < 8 && Game.Health.Value > Game.MaxHealth.Value * 3 / 4)
                 {
-                    if (FindAmbushSpot(game, desiredRelativeMovement))
+                    if (FindAmbushSpot(desiredRelativeMovement))
                     {
                         done = true;
                     }
@@ -2186,16 +2186,16 @@ internal class Monster : IItemContainer
                 for (int i = 0; i < 8; i++)
                 {
                     int monsterIndex = GetMonsterIndex();
-                    targetLocation = new GridCoordinate(game.MapX.Value + game.OrderedDirectionXOffset[(monsterIndex + i) & 7], game.MapY.Value + game.OrderedDirectionYOffset[(monsterIndex + i) & 7]);
+                    targetLocation = new GridCoordinate(Game.MapX.Value + Game.OrderedDirectionXOffset[(monsterIndex + i) & 7], Game.MapY.Value + Game.OrderedDirectionYOffset[(monsterIndex + i) & 7]);
                     // We might have got a '5' meaning stay where we are, so replace that with
                     // moving towards the player
                     if (MapY == targetLocation.Y && MapX == targetLocation.X)
                     {
-                        targetLocation = new GridCoordinate(game.MapX.Value, game.MapY.Value);
+                        targetLocation = new GridCoordinate(Game.MapX.Value, Game.MapY.Value);
                         break;
                     }
                     // Repeat till we get a direction we can move in
-                    if (!game.GridPassableNoCreature(targetLocation.Y, targetLocation.X))
+                    if (!Game.GridPassableNoCreature(targetLocation.Y, targetLocation.X))
                     {
                         continue;
                     }
@@ -2208,7 +2208,7 @@ internal class Monster : IItemContainer
         // If we're an ally then check if we should retreat
         if (SmFriendly)
         {
-            if (MonsterShouldRetreat(game))
+            if (MonsterShouldRetreat())
             {
                 // If we should be scared, simply move the opposite way to the player
                 desiredRelativeMovement = new GridCoordinate(-desiredRelativeMovement.X, - desiredRelativeMovement.Y);
@@ -2217,11 +2217,11 @@ internal class Monster : IItemContainer
         else
         {
             // If we're not an ally then check if we should retreat
-            if (!done && MonsterShouldRetreat(game))
+            if (!done && MonsterShouldRetreat())
             {
                 // If we should retreat, then try to find a safe spot where the player can't
                 // shoot or see us
-                if (!FindSafeSpot(game, desiredRelativeMovement))
+                if (!FindSafeSpot(desiredRelativeMovement))
                 {
                     // If we failed to find one, just back off
                     desiredRelativeMovement = new GridCoordinate(-desiredRelativeMovement.X, -desiredRelativeMovement.Y);
@@ -2229,7 +2229,7 @@ internal class Monster : IItemContainer
                 else
                 {
                     // We found a safe spot, so head there, but prioritise avoiding the player's scent
-                    AvoidPlayersScent(game, desiredRelativeMovement);
+                    AvoidPlayersScent(desiredRelativeMovement);
                 }
             }
         }
@@ -2417,22 +2417,22 @@ internal class Monster : IItemContainer
     /// </summary>
     /// <param name="monsterIndex"> The index of the monster </param>
     /// <param name="coord"> The location we're moving to </param>
-    private void AvoidPlayersScent(Game game, GridCoordinate coord)
+    private void AvoidPlayersScent(GridCoordinate coord)
     {
         int monsterY = MapY;
         int monsterX = MapX;
         int dY = monsterY - coord.Y;
         int dX = monsterX - coord.X;
         // If the scent too strong, keep going where we were going
-        if (game.Map.Grid[monsterY][monsterX].ScentAge < game.Map.Grid[game.MapY.Value][game.MapX.Value].ScentAge)
+        if (Game.Map.Grid[monsterY][monsterX].ScentAge < Game.Map.Grid[Game.MapY.Value][Game.MapX.Value].ScentAge)
         {
             return;
         }
-        if (game.Map.Grid[monsterY][monsterX].ScentStrength > Constants.MonsterFlowDepth)
+        if (Game.Map.Grid[monsterY][monsterX].ScentStrength > Constants.MonsterFlowDepth)
         {
             return;
         }
-        if (game.Map.Grid[monsterY][monsterX].ScentStrength > Race.NoticeRange)
+        if (Game.Map.Grid[monsterY][monsterX].ScentStrength > Race.NoticeRange)
         {
             return;
         }
@@ -2443,20 +2443,20 @@ internal class Monster : IItemContainer
         // Check each of the eight directions
         for (int i = 7; i >= 0; i--)
         {
-            int y = monsterY + game.OrderedDirectionYOffset[i];
-            int x = monsterX + game.OrderedDirectionXOffset[i];
+            int y = monsterY + Game.OrderedDirectionYOffset[i];
+            int x = monsterX + Game.OrderedDirectionXOffset[i];
             // If we have no scent there, or the scent is too recent, ignore it
-            if (game.Map.Grid[y][x].ScentAge == 0)
+            if (Game.Map.Grid[y][x].ScentAge == 0)
             {
                 continue;
             }
-            if (game.Map.Grid[y][x].ScentAge < when)
+            if (Game.Map.Grid[y][x].ScentAge < when)
             {
                 continue;
             }
             // If the scent is weaker than in the other directions, go that way
-            int dis = game.Distance(y, x, dY, dX);
-            int s = (5000 / (dis + 3)) - (500 / (game.Map.Grid[y][x].ScentStrength + 1));
+            int dis = Game.Distance(y, x, dY, dX);
+            int s = (5000 / (dis + 3)) - (500 / (Game.Map.Grid[y][x].ScentStrength + 1));
             if (s < 0)
             {
                 s = 0;
@@ -2465,7 +2465,7 @@ internal class Monster : IItemContainer
             {
                 continue;
             }
-            when = game.Map.Grid[y][x].ScentAge;
+            when = Game.Map.Grid[y][x].ScentAge;
             score = s;
             gy = y;
             gx = x;
@@ -2484,7 +2484,7 @@ internal class Monster : IItemContainer
     /// </summary>
     /// <param name="monsterIndex"> The index of the monster trying to move </param>
     /// <param name="target"> The target location we're moving to </param>
-    private void TrackPlayerByScent(Game game, GridCoordinate target)
+    private void TrackPlayerByScent(GridCoordinate target)
     {
         // If we can move through walls then we don't need to adjust anything
         if (Race.PassWall)
@@ -2497,9 +2497,9 @@ internal class Monster : IItemContainer
         }
         int y1 = MapY;
         int x1 = MapX;
-        GridTile cPtr = game.Map.Grid[y1][x1];
+        GridTile cPtr = Game.Map.Grid[y1][x1];
         // If we have no scent of the player then don't change where we were going
-        if (cPtr.ScentAge < game.Map.Grid[game.MapY.Value][game.MapX.Value].ScentAge)
+        if (cPtr.ScentAge < Game.Map.Grid[Game.MapY.Value][Game.MapX.Value].ScentAge)
         {
             if (cPtr.ScentAge == 0)
             {
@@ -2515,7 +2515,7 @@ internal class Monster : IItemContainer
             return;
         }
         // If we can actually see the player then don't change where we are going
-        if (game.PlayerHasLosBold(y1, x1))
+        if (Game.PlayerHasLosBold(y1, x1))
         {
             return;
         }
@@ -2524,24 +2524,24 @@ internal class Monster : IItemContainer
         // Check the eight directions we can move to see which has the most recent or strongest scent
         for (int i = 7; i >= 0; i--)
         {
-            int y = y1 + game.OrderedDirectionYOffset[i];
-            int x = x1 + game.OrderedDirectionXOffset[i];
-            if (game.Map.Grid[y][x].ScentAge == 0)
+            int y = y1 + Game.OrderedDirectionYOffset[i];
+            int x = x1 + Game.OrderedDirectionXOffset[i];
+            if (Game.Map.Grid[y][x].ScentAge == 0)
             {
                 continue;
             }
-            if (game.Map.Grid[y][x].ScentAge < when)
+            if (Game.Map.Grid[y][x].ScentAge < when)
             {
                 continue;
             }
-            if (game.Map.Grid[y][x].ScentStrength > cost)
+            if (Game.Map.Grid[y][x].ScentStrength > cost)
             {
                 continue;
             }
-            when = game.Map.Grid[y][x].ScentAge;
-            cost = game.Map.Grid[y][x].ScentStrength;
+            when = Game.Map.Grid[y][x].ScentAge;
+            cost = Game.Map.Grid[y][x].ScentStrength;
             // Give us a target in the general direction of the strongest scent
-            target = new GridCoordinate(game.MapX.Value + (16 * game.OrderedDirectionXOffset[i]), game.MapY.Value + (16 * game.OrderedDirectionYOffset[i]));
+            target = new GridCoordinate(Game.MapX.Value + (16 * Game.OrderedDirectionXOffset[i]), Game.MapY.Value + (16 * Game.OrderedDirectionYOffset[i]));
         }
     }
 
@@ -2553,14 +2553,14 @@ internal class Monster : IItemContainer
     /// A map location, which will be amended to contain the hiding spot
     /// </param>
     /// <returns> True if a hiding spot was found, or false if it wasn't </returns>
-    private bool FindAmbushSpot(Game game, GridCoordinate relativeTarget)
+    private bool FindAmbushSpot(GridCoordinate relativeTarget)
     {
         int fy = MapY;
         int fx = MapX;
         int hidingSpotY = 0;
         int hidingSpotX = 0;
         int shortestDistance = 999;
-        int tooCloseToPlayer = (game.Distance(game.MapY.Value, game.MapX.Value, fy, fx) * 3 / 4) + 2;
+        int tooCloseToPlayer = (Game.Distance(Game.MapY.Value, Game.MapX.Value, fy, fx) * 3 / 4) + 2;
         // Start with a short search radius and slowly increase
         for (int d = 1; d < 10; d++)
         {
@@ -2571,25 +2571,25 @@ internal class Monster : IItemContainer
                 for (x = fx - d; x <= fx + d; x++)
                 {
                     // Make sure the spot is valid
-                    if (!game.InBounds(y, x))
+                    if (!Game.InBounds(y, x))
                     {
                         continue;
                     }
-                    if (!game.GridPassable(y, x))
+                    if (!Game.GridPassable(y, x))
                     {
                         continue;
                     }
                     // Make sure the spot is the right distance
-                    if (game.Distance(y, x, fy, fx) != d)
+                    if (Game.Distance(y, x, fy, fx) != d)
                     {
                         continue;
                     }
                     // Make sure the spot is actually hidden
-                    if (!game.PlayerCanSeeBold(y, x) && game.CleanShot(fy, fx, y, x))
+                    if (!Game.PlayerCanSeeBold(y, x) && Game.CleanShot(fy, fx, y, x))
                     {
                         // If the spot is closer to the player than any previously found spot
                         // (but not too close), remember it
-                        int dis = game.Distance(y, x, game.MapY.Value, game.MapX.Value);
+                        int dis = Game.Distance(y, x, Game.MapY.Value, Game.MapX.Value);
                         if (dis < shortestDistance && dis >= tooCloseToPlayer)
                         {
                             hidingSpotY = y;
@@ -2617,7 +2617,7 @@ internal class Monster : IItemContainer
     /// </summary>
     /// <param name="monsterIndex"> The index of the monster </param>
     /// <returns> True if the monster should run away, false if not </returns>
-    private bool MonsterShouldRetreat(Game game)
+    private bool MonsterShouldRetreat()
     {
         // Don't move away if we're already too far away to see the player
         if (DistanceFromPlayer > Constants.MaxSight + 5)
@@ -2639,7 +2639,7 @@ internal class Monster : IItemContainer
         {
             return false;
         }
-        int playerLevel = game.ExperienceLevel.Value;
+        int playerLevel = Game.ExperienceLevel.Value;
         int monsterLevel = Race.Level + (GetMonsterIndex() & 0x08) + 25;
         // If we're tougher than the player, don't move away
         if (monsterLevel > playerLevel + 4)
@@ -2652,8 +2652,8 @@ internal class Monster : IItemContainer
             return true;
         }
         // If we're significantly less healthy than the player, move away
-        int playerHealth = game.Health.Value;
-        int playerMaxHealth = game.MaxHealth.Value;
+        int playerHealth = Game.Health.Value;
+        int playerMaxHealth = Game.MaxHealth.Value;
         int monsterHealth = Health;
         int monsterMaxHealth = MaxHealth;
         int playerHealthFactor = (playerLevel * playerMaxHealth) + (playerHealth << 2);
@@ -2728,7 +2728,7 @@ internal class Monster : IItemContainer
             }
                 
             // Check if the monster actually hits us
-            if (effect == null || MonsterCheckHitOnPlayer(this.Game, power, monsterLevel))
+            if (effect == null || MonsterCheckHitOnPlayer(power, monsterLevel))
             {
                 Game.Disturb(true);
                 // Protection From Evil might repel the attack
@@ -2938,7 +2938,7 @@ internal class Monster : IItemContainer
         if (blinked)
         {
             Game.MsgPrint("The thief flees laughing!");
-            TeleportAway(Game, (Constants.MaxSight * 2) + 5);
+            TeleportAway((Constants.MaxSight * 2) + 5);
         }
         // If the attack just killed the player, let future generations remember what killed
         // their ancestor
@@ -2954,7 +2954,7 @@ internal class Monster : IItemContainer
         }
     }
 
-    public void TeleportAway(Game game, int dis)
+    public void TeleportAway(int dis)
     {
         int ny = 0;
         int nx = 0;
@@ -2976,27 +2976,27 @@ internal class Monster : IItemContainer
             {
                 while (true)
                 {
-                    ny = Game.RandomSpread(oy, dis);
-                    nx = Game.RandomSpread(ox, dis);
-                    int d = game.Distance(oy, ox, ny, nx);
+                    ny = this.Game.RandomSpread(oy, dis);
+                    nx = this.Game.RandomSpread(ox, dis);
+                    int d = Game.Distance(oy, ox, ny, nx);
                     if (d >= min && d <= dis)
                     {
                         break;
                     }
                 }
-                if (!game.InBounds(ny, nx))
+                if (!Game.InBounds(ny, nx))
                 {
                     continue;
                 }
-                if (!game.GridPassableNoCreature(ny, nx))
+                if (!Game.GridPassableNoCreature(ny, nx))
                 {
                     continue;
                 }
-                if (game.Map.Grid[ny][nx].FeatureType is ElderSignSigilTile)
+                if (Game.Map.Grid[ny][nx].FeatureType is ElderSignSigilTile)
                 {
                     continue;
                 }
-                if (game.Map.Grid[ny][nx].FeatureType is YellowSignSigilTile)
+                if (Game.Map.Grid[ny][nx].FeatureType is YellowSignSigilTile)
                 {
                     continue;
                 }
@@ -3006,14 +3006,14 @@ internal class Monster : IItemContainer
             dis *= 2;
             min /= 2;
         }
-        game.PlaySound(SoundEffectEnum.Teleport);
-        game.Map.Grid[ny][nx].MonsterIndex = GetMonsterIndex();
-        game.Map.Grid[oy][ox].MonsterIndex = 0;
+        Game.PlaySound(SoundEffectEnum.Teleport);
+        Game.Map.Grid[ny][nx].MonsterIndex = GetMonsterIndex();
+        Game.Map.Grid[oy][ox].MonsterIndex = 0;
         MapY = ny;
         MapX = nx;
-        game.UpdateMonsterVisibility(GetMonsterIndex(), true);
-        game.MainForm.RefreshMapLocation(oy, ox);
-        game.MainForm.RefreshMapLocation(ny, nx);
+        Game.UpdateMonsterVisibility(GetMonsterIndex(), true);
+        Game.MainForm.RefreshMapLocation(oy, ox);
+        Game.MainForm.RefreshMapLocation(ny, nx);
     }
 
     /// <summary>
@@ -3021,7 +3021,7 @@ internal class Monster : IItemContainer
     /// </summary>
     /// <param name="monster"> The monster making the moves </param>
     /// <param name="movesList"> The list in which to insert the moves </param>
-    private void GetMovesTowardsEnemyMonsters(Game game, PotentialMovesList movesList)
+    private void GetMovesTowardsEnemyMonsters(PotentialMovesList movesList)
     {
         int[][] spiralGridOffsets =
         {
@@ -3045,11 +3045,11 @@ internal class Monster : IItemContainer
             int y = MapY + spiralGridOffsets[i][0];
             int x = MapX + spiralGridOffsets[i][1];
             // Check if we're in bounds and have a monster
-            if (game.InBounds(y, x))
+            if (Game.InBounds(y, x))
             {
-                if (game.Map.Grid[y][x].MonsterIndex != 0)
+                if (Game.Map.Grid[y][x].MonsterIndex != 0)
                 {
-                    Monster enemy = game.Monsters[game.Map.Grid[y][x].MonsterIndex];
+                    Monster enemy = Game.Monsters[Game.Map.Grid[y][x].MonsterIndex];
                     // Only go for monsters who are awake and on the opposing side
                     if (enemy.SmFriendly != SmFriendly && enemy.SleepLevel == 0)
                     {
@@ -3231,7 +3231,7 @@ internal class Monster : IItemContainer
     /// A map location, which will be amended to contain the safe spot
     /// </param>
     /// <returns> True if a safe spot was found, or false if it wasn't </returns>
-    private bool FindSafeSpot(Game game, GridCoordinate relativeTarget)
+    private bool FindSafeSpot(GridCoordinate relativeTarget)
     {
         int safeSpotY = 0;
         int safeSpotX = 0;
@@ -3246,34 +3246,34 @@ internal class Monster : IItemContainer
                 for (x = MapY - d; x <= MapY + d; x++)
                 {
                     // Make sure the spot is valid
-                    if (!game.InBounds(y, x))
+                    if (!Game.InBounds(y, x))
                     {
                         continue;
                     }
-                    if (!game.GridPassable(y, x))
+                    if (!Game.GridPassable(y, x))
                     {
                         continue;
                     }
                     // Make sure the spot is the right distance
-                    if (game.Distance(y, x, MapY, MapY) != d)
+                    if (Game.Distance(y, x, MapY, MapY) != d)
                     {
                         continue;
                     }
                     // Reject spots that smell too strongly of the player
-                    if (game.Map.Grid[y][x].ScentAge < game.Map.Grid[game.MapY.Value][game.MapX.Value].ScentAge)
+                    if (Game.Map.Grid[y][x].ScentAge < Game.Map.Grid[Game.MapY.Value][Game.MapX.Value].ScentAge)
                     {
                         continue;
                     }
-                    if (game.Map.Grid[y][x].ScentStrength > game.Map.Grid[MapY][MapY].ScentStrength + (2 * d))
+                    if (Game.Map.Grid[y][x].ScentStrength > Game.Map.Grid[MapY][MapY].ScentStrength + (2 * d))
                     {
                         continue;
                     }
                     // Make sure the spot is actually hidden
-                    if (!game.Projectable(y, x, game.MapY.Value, game.MapX.Value))
+                    if (!Game.Projectable(y, x, Game.MapY.Value, Game.MapX.Value))
                     {
                         // If the spot is further from the player than any previously found
                         // spot, remember it
-                        int dis = game.Distance(y, x, game.MapY.Value, game.MapX.Value);
+                        int dis = Game.Distance(y, x, Game.MapY.Value, Game.MapX.Value);
                         if (dis > longestDistance)
                         {
                             safeSpotY = y;
@@ -3300,18 +3300,18 @@ internal class Monster : IItemContainer
     /// <param name="attackPower"> The power of the attack </param>
     /// <param name="monsterLevel"> The level of the monster making the attack </param>
     /// <returns> True if the attack hit, false if not </returns>
-    private bool MonsterCheckHitOnPlayer(Game game, int attackPower, int monsterLevel)
+    private bool MonsterCheckHitOnPlayer(int attackPower, int monsterLevel)
     {
         // Straight five percent chance of hit or miss
-        int k = Game.RandomLessThan(100);
+        int k = this.Game.RandomLessThan(100);
         if (k < 10)
         {
             return k < 5;
         }
         // Otherwise, compare the power and level to the player's armor class
         int i = attackPower + (monsterLevel * 3);
-        int ac = game.BaseArmorClass + game.ArmorClassBonus;
-        return i > 0 && Game.DieRoll(i) > ac * 3 / 4;
+        int ac = Game.BaseArmorClass + Game.ArmorClassBonus;
+        return i > 0 && this.Game.DieRoll(i) > ac * 3 / 4;
     }
 
     /// <summary>

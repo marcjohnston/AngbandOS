@@ -18,8 +18,7 @@ internal class ChaosVortexMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerVSymbol);
     public override ColorEnum Color => ColorEnum.Purple;
-    public override string Name => "Chaos vortex";
-
+    
     public override int ArmorClass => 80;
     public override bool AttrAny => true;
     public override bool AttrMulti => true;
@@ -46,7 +45,5 @@ internal class ChaosVortexMonsterRace : MonsterRace
     public override int Rarity => 1;
     public override int Sleep => 0;
     public override int Speed => 140;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "   Chaos    ";
-    public override string SplitName3 => "   vortex   ";
+    public override string? MultilineName => "Chaos\nvortex";
 }

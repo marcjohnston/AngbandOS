@@ -24,40 +24,40 @@ internal class MindBlastMonsterSpell : MonsterSpell
 
     public override string? VsMonsterSeenMessage(Monster monster, Monster target) => $"{monster.Name} gazes intently at {target.Name}";
 
-    public override void ExecuteOnPlayer(Game game, Monster monster)
+    public override void ExecuteOnPlayer(Monster monster)
     {
-        if (Game.RandomLessThan(100) < game.SkillSavingThrow)
+        if (base.Game.RandomLessThan(100) < Game.SkillSavingThrow)
         {
-            game.MsgPrint("You resist the effects!");
+            Game.MsgPrint("You resist the effects!");
         }
         else
         {
-            game.MsgPrint("Your mind is blasted by psionic energy.");
-            if (!game.HasConfusionResistance)
+            Game.MsgPrint("Your mind is blasted by psionic energy.");
+            if (!Game.HasConfusionResistance)
             {
-                game.ConfusedTimer.AddTimer(Game.RandomLessThan(4) + 4);
+                Game.ConfusedTimer.AddTimer(base.Game.RandomLessThan(4) + 4);
             }
-            if (!game.HasChaosResistance && Game.DieRoll(3) == 1)
+            if (!Game.HasChaosResistance && base.Game.DieRoll(3) == 1)
             {
-                game.HallucinationsTimer.AddTimer(Game.RandomLessThan(250) + 150);
+                Game.HallucinationsTimer.AddTimer(base.Game.RandomLessThan(250) + 150);
             }
 
             string monsterDescription = monster.IndefiniteVisibleName;
-            game.TakeHit(Game.DiceRoll(8, 8), monsterDescription);
+            Game.TakeHit(base.Game.DiceRoll(8, 8), monsterDescription);
         }
     }
 
-    public override void ExecuteOnMonster(Game game, Monster monster, Monster target)
+    public override void ExecuteOnMonster(Monster monster, Monster target)
     {
         int rlev = monster.Race.Level >= 1 ? monster.Race.Level : 1;
-        bool playerIsBlind = game.BlindnessTimer.Value != 0;
+        bool playerIsBlind = Game.BlindnessTimer.Value != 0;
         bool seen = !playerIsBlind && monster.IsVisible;
         string monsterName = monster.Name;
         string targetName = target.Name;
-        bool blind = game.BlindnessTimer.Value != 0;
+        bool blind = Game.BlindnessTimer.Value != 0;
         MonsterRace targetRace = target.Race;
 
-        if (targetRace.Unique || targetRace.ImmuneConfusion || targetRace.Level > Game.DieRoll(rlev - 10 < 1 ? 1 : rlev - 10) + 10)
+        if (targetRace.Unique || targetRace.ImmuneConfusion || targetRace.Level > base.Game.DieRoll(rlev - 10 < 1 ? 1 : rlev - 10) + 10)
         {
             if (targetRace.ImmuneConfusion && seen)
             {
@@ -65,14 +65,14 @@ internal class MindBlastMonsterSpell : MonsterSpell
             }
             if (!blind && target.IsVisible)
             {
-                game.MsgPrint($"{targetName} is unaffected!");
+                Game.MsgPrint($"{targetName} is unaffected!");
             }
         }
         else
         {
-            game.MsgPrint($"{targetName} is blasted by psionic energy.");
-            target.ConfusionLevel += Game.RandomLessThan(4) + 4;
-            target.TakeDamageFromAnotherMonster(game, Game.DiceRoll(8, 8), out _, " collapses, a mindless husk.");
+            Game.MsgPrint($"{targetName} is blasted by psionic energy.");
+            target.ConfusionLevel += base.Game.RandomLessThan(4) + 4;
+            target.TakeDamageFromAnotherMonster(base.Game.DiceRoll(8, 8), out _, " collapses, a mindless husk.");
         }
     }
 }

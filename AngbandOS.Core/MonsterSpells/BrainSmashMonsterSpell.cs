@@ -21,58 +21,58 @@ internal class BrainSmashMonsterSpell : MonsterSpell
 
     public override string? VsMonsterSeenMessage(Monster monster, Monster target) => $"{monster.Name} gazes intently at {target.Name}";
 
-    public override void ExecuteOnPlayer(Game game, Monster monster)
+    public override void ExecuteOnPlayer(Monster monster)
     {
-        bool playerIsBlind = game.BlindnessTimer.Value != 0;
+        bool playerIsBlind = Game.BlindnessTimer.Value != 0;
         string monsterDescription = monster.IndefiniteVisibleName;
 
-        if (Game.RandomLessThan(100) < game.SkillSavingThrow)
+        if (base.Game.RandomLessThan(100) < Game.SkillSavingThrow)
         {
-            game.MsgPrint("You resist the effects!");
+            Game.MsgPrint("You resist the effects!");
         }
         else
         {
-            game.MsgPrint("Your mind is blasted by psionic energy.");
-            game.TakeHit(Game.DiceRoll(12, 15), monsterDescription);
-            if (!game.HasBlindnessResistance)
+            Game.MsgPrint("Your mind is blasted by psionic energy.");
+            Game.TakeHit(base.Game.DiceRoll(12, 15), monsterDescription);
+            if (!Game.HasBlindnessResistance)
             {
-                game.BlindnessTimer.AddTimer(8 + Game.RandomLessThan(8));
+                Game.BlindnessTimer.AddTimer(8 + base.Game.RandomLessThan(8));
             }
-            if (!game.HasConfusionResistance)
+            if (!Game.HasConfusionResistance)
             {
-                game.ConfusedTimer.AddTimer(Game.RandomLessThan(4) + 4);
+                Game.ConfusedTimer.AddTimer(base.Game.RandomLessThan(4) + 4);
             }
-            if (!game.HasFreeAction)
+            if (!Game.HasFreeAction)
             {
-                game.ParalysisTimer.AddTimer(Game.RandomLessThan(4) + 4);
+                Game.ParalysisTimer.AddTimer(base.Game.RandomLessThan(4) + 4);
             }
-            game.SlowTimer.AddTimer(Game.RandomLessThan(4) + 4);
-            while (Game.RandomLessThan(100) > game.SkillSavingThrow)
+            Game.SlowTimer.AddTimer(base.Game.RandomLessThan(4) + 4);
+            while (base.Game.RandomLessThan(100) > Game.SkillSavingThrow)
             {
-                game.TryDecreasingAbilityScore(Ability.Intelligence);
+                Game.TryDecreasingAbilityScore(Ability.Intelligence);
             }
-            while (Game.RandomLessThan(100) > game.SkillSavingThrow)
+            while (base.Game.RandomLessThan(100) > Game.SkillSavingThrow)
             {
-                game.TryDecreasingAbilityScore(Ability.Wisdom);
+                Game.TryDecreasingAbilityScore(Ability.Wisdom);
             }
-            if (!game.HasChaosResistance)
+            if (!Game.HasChaosResistance)
             {
-                game.HallucinationsTimer.AddTimer(Game.RandomLessThan(250) + 150);
+                Game.HallucinationsTimer.AddTimer(base.Game.RandomLessThan(250) + 150);
             }
         }
     }
-    public override void ExecuteOnMonster(Game game, Monster monster, Monster target)
+    public override void ExecuteOnMonster(Monster monster, Monster target)
     {
         int rlev = monster.Race.Level >= 1 ? monster.Race.Level : 1;
-        bool playerIsBlind = game.BlindnessTimer.Value != 0;
+        bool playerIsBlind = Game.BlindnessTimer.Value != 0;
         bool seen = !playerIsBlind && monster.IsVisible;
         string targetName = target.Name;
-        bool blind = game.BlindnessTimer.Value != 0;
+        bool blind = Game.BlindnessTimer.Value != 0;
         bool seeTarget = !blind && target.IsVisible;
         MonsterRace targetRace = target.Race;
 
         if (targetRace.Unique || targetRace.ImmuneConfusion ||
-            targetRace.Level > Game.DieRoll(rlev - 10 < 1 ? 1 : rlev - 10) + 10)
+            targetRace.Level > base.Game.DieRoll(rlev - 10 < 1 ? 1 : rlev - 10) + 10)
         {
             if (targetRace.ImmuneConfusion && seen)
             {
@@ -80,19 +80,19 @@ internal class BrainSmashMonsterSpell : MonsterSpell
             }
             if (seeTarget)
             {
-                game.MsgPrint($"{targetName} is unaffected!");
+                Game.MsgPrint($"{targetName} is unaffected!");
             }
         }
         else
         {
             if (seeTarget)
             {
-                game.MsgPrint($"{targetName} is blasted by psionic energy.");
+                Game.MsgPrint($"{targetName} is blasted by psionic energy.");
             }
-            target.ConfusionLevel += Game.RandomLessThan(4) + 4;
-            target.Speed -= Game.RandomLessThan(4) + 4;
-            target.StunLevel += Game.RandomLessThan(4) + 4;
-            target.TakeDamageFromAnotherMonster(game, Game.DiceRoll(12, 15), out _, " collapses, a mindless husk.");
+            target.ConfusionLevel += base.Game.RandomLessThan(4) + 4;
+            target.Speed -= base.Game.RandomLessThan(4) + 4;
+            target.StunLevel += base.Game.RandomLessThan(4) + 4;
+            target.TakeDamageFromAnotherMonster(base.Game.DiceRoll(12, 15), out _, " collapses, a mindless husk.");
         }
     }
 }

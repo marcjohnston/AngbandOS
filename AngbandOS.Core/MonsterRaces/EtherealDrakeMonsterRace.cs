@@ -22,8 +22,7 @@ internal class EtherealDrakeMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerDSymbol);
     public override ColorEnum Color => ColorEnum.BrightGrey;
-    public override string Name => "Ethereal drake";
-
+    
     public override int ArmorClass => 100;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -53,7 +52,5 @@ internal class EtherealDrakeMonsterRace : MonsterRace
     public override int Rarity => 3;
     public override int Sleep => 15;
     public override int Speed => 110;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "  Ethereal  ";
-    public override string SplitName3 => "   drake    ";
+    public override string? MultilineName => "Ethereal\ndrake";
 }

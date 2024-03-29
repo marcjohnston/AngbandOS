@@ -26,8 +26,7 @@ internal class KavlaxTheManyHeadedMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerDSymbol);
     public override ColorEnum Color => ColorEnum.Purple;
-    public override string Name => "Kavlax the Many-Headed";
-
+    
     public override int ArmorClass => 85;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -68,8 +67,6 @@ internal class KavlaxTheManyHeadedMonsterRace : MonsterRace
     public override bool ResistNexus => true;
     public override int Sleep => 30;
     public override int Speed => 120;
-    public override string SplitName1 => "   Kavlax   ";
-    public override string SplitName2 => "    the     ";
-    public override string SplitName3 => "Many-Headed ";
+    public override string? MultilineName => "Kavlax\nthe\nMany-Headed";
     public override bool Unique => true;
 }

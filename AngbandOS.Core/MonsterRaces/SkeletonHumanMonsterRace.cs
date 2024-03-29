@@ -14,8 +14,7 @@ internal class SkeletonHumanMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerSSymbol);
     public override ColorEnum Color => ColorEnum.BrightBeige;
-    public override string Name => "Skeleton human";
-
+    
     public override int ArmorClass => 30;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -43,8 +42,6 @@ internal class SkeletonHumanMonsterRace : MonsterRace
     public override int Rarity => 1;
     public override int Sleep => 30;
     public override int Speed => 110;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "  Skeleton  ";
-    public override string SplitName3 => "   human    ";
+    public override string? MultilineName => "Skeleton\nhuman";
     public override bool Undead => true;
 }

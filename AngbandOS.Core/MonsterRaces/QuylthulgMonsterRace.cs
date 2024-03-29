@@ -19,8 +19,7 @@ internal class QuylthulgMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperQSymbol);
     public override ColorEnum Color => ColorEnum.BrightWhite;
-    public override string Name => "Quylthulg";
-
+    
     public override int ArmorClass => 1;
     public override string Description => "It is a strange pulsing mound of flesh.";
     public override bool EmptyMind => true;
@@ -42,7 +41,5 @@ internal class QuylthulgMonsterRace : MonsterRace
     public override int Rarity => 1;
     public override int Sleep => 0;
     public override int Speed => 110;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "            ";
-    public override string SplitName3 => " Quylthulg  ";
+    public override string? MultilineName => "Quylthulg";
 }

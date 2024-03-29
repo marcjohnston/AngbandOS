@@ -14,8 +14,7 @@ internal class TheEmissaryMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerPSymbol);
     public override ColorEnum Color => ColorEnum.Orange;
-    public override string Name => "The Emissary";
-
+    
     public override int ArmorClass => 40;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -45,9 +44,7 @@ internal class TheEmissaryMonsterRace : MonsterRace
     public override int Rarity => 3;
     public override int Sleep => 40;
     public override int Speed => 110;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "    The     ";
-    public override string SplitName3 => "  Emissary  ";
+    public override string? MultilineName => "The\nEmissary";
     public override bool TakeItem => true;
     public override bool Unique => true;
 }

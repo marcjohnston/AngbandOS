@@ -20,8 +20,7 @@ internal class HagenSonOfAlberichMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerHSymbol);
     public override ColorEnum Color => ColorEnum.Orange;
-    public override string Name => "Hagen, son of Alberich";
-
+    
     public override int ArmorClass => 80;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -56,8 +55,6 @@ internal class HagenSonOfAlberichMonsterRace : MonsterRace
     public override bool ResistTeleport => true;
     public override int Sleep => 10;
     public override int Speed => 110;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "            ";
-    public override string SplitName3 => "   Hagen    ";
+    public override string? MultilineName => "Hagen";
     public override bool Unique => true;
 }

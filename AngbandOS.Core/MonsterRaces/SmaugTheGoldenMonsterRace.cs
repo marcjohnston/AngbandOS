@@ -20,8 +20,7 @@ internal class SmaugTheGoldenMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperDSymbol);
     public override ColorEnum Color => ColorEnum.BrightRed;
-    public override string Name => "Smaug the Golden";
-
+    
     public override int ArmorClass => 100;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -58,8 +57,6 @@ internal class SmaugTheGoldenMonsterRace : MonsterRace
     public override bool Reflecting => true;
     public override int Sleep => 70;
     public override int Speed => 120;
-    public override string SplitName1 => "   Smaug    ";
-    public override string SplitName2 => "    the     ";
-    public override string SplitName3 => "   Golden   ";
+    public override string? MultilineName => "Smaug\nthe\nGolden";
     public override bool Unique => true;
 }

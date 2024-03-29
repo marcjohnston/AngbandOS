@@ -27,13 +27,13 @@ internal class TeleportSelfMonsterSpell : MonsterSpell
     /// <exception cref="NotImplementedException"></exception>
     public override string? VsPlayerActionMessage(Monster monster) => $"{monster.Name} teleports away.";
 
-    public override void ExecuteOnPlayer(Game game, Monster monster)
+    public override void ExecuteOnPlayer(Monster monster)
     {
-        monster.TeleportAway(game, (Constants.MaxSight * 2) + 5);
+        monster.TeleportAway((Constants.MaxSight * 2) + 5);
     }
 
-    public override void ExecuteOnMonster(Game game, Monster monster, Monster target)
+    public override void ExecuteOnMonster(Monster monster, Monster target)
     {
-        monster.TeleportAway(game, (Constants.MaxSight * 2) + 5);
+        monster.TeleportAway((Constants.MaxSight * 2) + 5);
     }
 }

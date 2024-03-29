@@ -26,8 +26,7 @@ internal class GothmogTheHighCaptainOfBalrogsMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperUSymbol);
     public override ColorEnum Color => ColorEnum.Red;
-    public override string Name => "Gothmog, the High Captain of Balrogs";
-
+    
     public override int ArmorClass => 140;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -72,8 +71,6 @@ internal class GothmogTheHighCaptainOfBalrogsMonsterRace : MonsterRace
     public override int Rarity => 1;
     public override int Sleep => 0;
     public override int Speed => 130;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "            ";
-    public override string SplitName3 => "  Gothmog   ";
+    public override string? MultilineName => "Gothmog";
     public override bool Unique => true;
 }

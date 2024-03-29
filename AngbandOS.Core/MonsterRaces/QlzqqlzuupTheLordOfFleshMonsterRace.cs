@@ -32,8 +32,7 @@ internal class QlzqqlzuupTheLordOfFleshMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperQSymbol);
     public override ColorEnum Color => ColorEnum.BrightBlue;
-    public override string Name => "Qlzqqlzuup, the Lord of Flesh";
-
+    
     public override bool Animal => true;
     public override int ArmorClass => 1;
     public override bool AttrMulti => true;
@@ -61,8 +60,6 @@ internal class QlzqqlzuupTheLordOfFleshMonsterRace : MonsterRace
     public override bool ResistTeleport => true;
     public override int Sleep => 0;
     public override int Speed => 130;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "            ";
-    public override string SplitName3 => " Qlzqqlzuup ";
+    public override string? MultilineName => "Qlzqqlzuup";
     public override bool Unique => true;
 }

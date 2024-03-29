@@ -36,8 +36,7 @@ internal class SarumanOfManyColorsMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerPSymbol);
     public override ColorEnum Color => ColorEnum.Purple;
-    public override string Name => "Saruman of Many Colors";
-
+    
     public override int ArmorClass => 100;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -79,8 +78,6 @@ internal class SarumanOfManyColorsMonsterRace : MonsterRace
     public override int Sleep => 0;
     public override bool Smart => true;
     public override int Speed => 120;
-    public override string SplitName1 => "  Saruman   ";
-    public override string SplitName2 => "  of Many   ";
-    public override string SplitName3 => "  Colors   ";
+    public override string? MultilineName => "Saruman\nof Many\nColors";
     public override bool Unique => true;
 }

@@ -14,8 +14,7 @@ internal class HippogriffMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperHSymbol);
     public override ColorEnum Color => ColorEnum.BrightGrey;
-    public override string Name => "Hippogriff";
-
+    
     public override bool Animal => true;
     public override int ArmorClass => 14;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
@@ -36,7 +35,5 @@ internal class HippogriffMonsterRace : MonsterRace
     public override int Rarity => 1;
     public override int Sleep => 10;
     public override int Speed => 110;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "            ";
-    public override string SplitName3 => " Hippogriff ";
+    public override string? MultilineName => "Hippogriff";
 }

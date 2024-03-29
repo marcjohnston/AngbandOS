@@ -14,8 +14,7 @@ internal class KillerBeeMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperISymbol);
     public override ColorEnum Color => ColorEnum.BrightYellow;
-    public override string Name => "Killer bee";
-
+    
     public override bool Animal => true;
     public override int ArmorClass => 34;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
@@ -36,8 +35,6 @@ internal class KillerBeeMonsterRace : MonsterRace
     public override int Rarity => 2;
     public override int Sleep => 10;
     public override int Speed => 120;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "   Killer   ";
-    public override string SplitName3 => "    bee     ";
+    public override string? MultilineName => "Killer\nbee";
     public override bool WeirdMind => true;
 }

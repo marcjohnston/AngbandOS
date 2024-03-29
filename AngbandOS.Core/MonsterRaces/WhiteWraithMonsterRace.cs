@@ -19,8 +19,7 @@ internal class WhiteWraithMonsterRace : MonsterRace
     };
 
     protected override string SymbolName => nameof(UpperWSymbol);
-    public override string Name => "White wraith";
-
+    
     public override int ArmorClass => 40;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -51,8 +50,6 @@ internal class WhiteWraithMonsterRace : MonsterRace
     public override int Rarity => 1;
     public override int Sleep => 10;
     public override int Speed => 110;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "   White    ";
-    public override string SplitName3 => "   wraith   ";
+    public override string? MultilineName => "White\nwraith";
     public override bool Undead => true;
 }

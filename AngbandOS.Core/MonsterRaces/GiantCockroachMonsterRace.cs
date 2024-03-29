@@ -14,8 +14,7 @@ internal class GiantCockroachMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperISymbol);
     public override ColorEnum Color => ColorEnum.Brown;
-    public override string Name => "Giant cockroach";
-
+    
     public override bool Animal => true;
     public override int ArmorClass => 25;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
@@ -40,9 +39,7 @@ internal class GiantCockroachMonsterRace : MonsterRace
     public override bool ResistDisenchant => true;
     public override int Sleep => 10;
     public override int Speed => 120;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "   Giant    ";
-    public override string SplitName3 => " cockroach  ";
+    public override string? MultilineName => "Giant\ncockroach";
     public override bool TakeItem => true;
     public override bool WeirdMind => true;
 }

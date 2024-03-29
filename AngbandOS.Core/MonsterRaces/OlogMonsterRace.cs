@@ -14,8 +14,7 @@ internal class OlogMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperTSymbol);
     public override ColorEnum Color => ColorEnum.Green;
-    public override string Name => "Olog";
-
+    
     public override int ArmorClass => 50;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -44,8 +43,6 @@ internal class OlogMonsterRace : MonsterRace
     public override int Sleep => 50;
     public override bool Smart => true;
     public override int Speed => 110;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "            ";
-    public override string SplitName3 => "    Olog    ";
+    public override string? MultilineName => "Olog";
     public override bool Troll => true;
 }

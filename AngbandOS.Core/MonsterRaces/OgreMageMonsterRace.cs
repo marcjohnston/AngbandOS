@@ -22,8 +22,7 @@ internal class OgreMageMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperOSymbol);
     public override ColorEnum Color => ColorEnum.Orange;
-    public override string Name => "Ogre mage";
-
+    
     public override int ArmorClass => 40;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -50,7 +49,5 @@ internal class OgreMageMonsterRace : MonsterRace
     public override int Rarity => 2;
     public override int Sleep => 30;
     public override int Speed => 110;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "    Ogre    ";
-    public override string SplitName3 => "    mage    ";
+    public override string? MultilineName => "Ogre\nmage";
 }

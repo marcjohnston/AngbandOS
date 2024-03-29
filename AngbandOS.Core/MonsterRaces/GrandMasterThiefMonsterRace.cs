@@ -18,8 +18,7 @@ internal class GrandMasterThiefMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerPSymbol);
     public override ColorEnum Color => ColorEnum.Black;
-    public override string Name => "Grand master thief";
-
+    
     public override int ArmorClass => 90;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -52,8 +51,6 @@ internal class GrandMasterThiefMonsterRace : MonsterRace
     public override bool ResistTeleport => true;
     public override int Sleep => 0;
     public override int Speed => 140;
-    public override string SplitName1 => "   Grand    ";
-    public override string SplitName2 => "   master   ";
-    public override string SplitName3 => "   thief    ";
+    public override string? MultilineName => "Grand\nmaster\nthief";
     public override bool TakeItem => true;
 }

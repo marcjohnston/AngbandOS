@@ -22,8 +22,7 @@ internal class DeepOneMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerHSymbol);
     public override ColorEnum Color => ColorEnum.Green;
-    public override string Name => "Deep One";
-
+    
     public override int ArmorClass => 60;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -53,8 +52,6 @@ internal class DeepOneMonsterRace : MonsterRace
     public override int Rarity => 6;
     public override int Sleep => 255;
     public override int Speed => 110;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "    Deep    ";
-    public override string SplitName3 => "    One     ";
+    public override string? MultilineName => "Deep\nOne";
     public override bool TakeItem => true;
 }

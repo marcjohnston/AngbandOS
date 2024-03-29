@@ -14,8 +14,7 @@ internal class MetallicBlueCentipedeMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerCSymbol);
     public override ColorEnum Color => ColorEnum.BrightBlue;
-    public override string Name => "Metallic blue centipede";
-
+    
     public override bool Animal => true;
     public override int ArmorClass => 6;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
@@ -36,8 +35,6 @@ internal class MetallicBlueCentipedeMonsterRace : MonsterRace
     public override int Rarity => 1;
     public override int Sleep => 15;
     public override int Speed => 120;
-    public override string SplitName1 => "  Metallic  ";
-    public override string SplitName2 => "    blue    ";
-    public override string SplitName3 => " centipede  ";
+    public override string? MultilineName => "Metallic\nblue\ncentipede";
     public override bool WeirdMind => true;
 }

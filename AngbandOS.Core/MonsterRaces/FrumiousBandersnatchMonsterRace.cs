@@ -14,8 +14,7 @@ internal class FrumiousBandersnatchMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerCSymbol);
     public override ColorEnum Color => ColorEnum.BrightOrange;
-    public override string Name => "Frumious bandersnatch";
-
+    
     public override bool Animal => true;
     public override int ArmorClass => 30;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
@@ -37,8 +36,6 @@ internal class FrumiousBandersnatchMonsterRace : MonsterRace
     public override int Rarity => 2;
     public override int Sleep => 30;
     public override int Speed => 120;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "  Frumious  ";
-    public override string SplitName3 => "bandersnatch";
+    public override string? MultilineName => "Frumious\nbandersnatch";
     public override bool WeirdMind => true;
 }

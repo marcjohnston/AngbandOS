@@ -28,8 +28,7 @@ internal class MasterLichMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperLSymbol);
     public override ColorEnum Color => ColorEnum.BrightWhite;
-    public override string Name => "Master lich";
-
+    
     public override int ArmorClass => 80;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -65,8 +64,6 @@ internal class MasterLichMonsterRace : MonsterRace
     public override int Sleep => 50;
     public override bool Smart => true;
     public override int Speed => 120;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "   Master   ";
-    public override string SplitName3 => "    lich    ";
+    public override string? MultilineName => "Master\nlich";
     public override bool Undead => true;
 }

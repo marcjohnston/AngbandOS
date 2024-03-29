@@ -14,8 +14,7 @@ internal class NewtMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperRSymbol);
     public override ColorEnum Color => ColorEnum.Orange;
-    public override string Name => "Newt";
-
+    
     public override bool Animal => true;
     public override int ArmorClass => 12;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
@@ -35,8 +34,6 @@ internal class NewtMonsterRace : MonsterRace
     public override int Rarity => 1;
     public override int Sleep => 30;
     public override int Speed => 110;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "            ";
-    public override string SplitName3 => "    Newt    ";
+    public override string? MultilineName => "Newt";
     public override bool WeirdMind => true;
 }

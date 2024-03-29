@@ -25,8 +25,7 @@ internal class ServitorOfTheOuterGodsMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperASymbol);
     public override ColorEnum Color => ColorEnum.BrightGreen;
-    public override string Name => "Servitor of the outer gods";
-
+    
     public override int ArmorClass => 140;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -65,8 +64,6 @@ internal class ServitorOfTheOuterGodsMonsterRace : MonsterRace
     public override int Sleep => 255;
     public override bool Smart => true;
     public override int Speed => 130;
-    public override string SplitName1 => "Servitor of ";
-    public override string SplitName2 => " the outer  ";
-    public override string SplitName3 => "    gods    ";
+    public override string? MultilineName => "Servitor of\nthe outer\ngods";
     public override bool TakeItem => true;
 }

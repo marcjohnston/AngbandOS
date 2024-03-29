@@ -13,8 +13,7 @@ internal class FrostGiantMonsterRace : MonsterRace
     protected FrostGiantMonsterRace(Game game) : base(game) { }
 
     protected override string SymbolName => nameof(UpperPSymbol);
-    public override string Name => "Frost giant";
-
+    
     public override int ArmorClass => 50;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -40,7 +39,5 @@ internal class FrostGiantMonsterRace : MonsterRace
     public override int Rarity => 1;
     public override int Sleep => 50;
     public override int Speed => 110;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "   Frost    ";
-    public override string SplitName3 => "   giant    ";
+    public override string? MultilineName => "Frost\ngiant";
 }

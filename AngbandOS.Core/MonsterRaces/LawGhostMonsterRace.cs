@@ -19,8 +19,7 @@ internal class LawGhostMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperGSymbol);
     public override ColorEnum Color => ColorEnum.Silver;
-    public override string Name => "Law ghost";
-
+    
     public override int ArmorClass => 30;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -52,8 +51,6 @@ internal class LawGhostMonsterRace : MonsterRace
     public override int Rarity => 3;
     public override int Sleep => 20;
     public override int Speed => 120;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "    Law     ";
-    public override string SplitName3 => "   ghost    ";
+    public override string? MultilineName => "Law\nghost";
     public override bool Undead => true;
 }

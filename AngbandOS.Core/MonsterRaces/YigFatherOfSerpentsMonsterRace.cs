@@ -20,8 +20,7 @@ internal class YigFatherOfSerpentsMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperJSymbol);
     public override ColorEnum Color => ColorEnum.Green;
-    public override string Name => "Yig, Father of Serpents";
-
+    
     public override int ArmorClass => 185;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -64,8 +63,6 @@ internal class YigFatherOfSerpentsMonsterRace : MonsterRace
     public override bool ResistTeleport => true;
     public override int Sleep => 20;
     public override int Speed => 130;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "            ";
-    public override string SplitName3 => "    Yig     ";
+    public override string? MultilineName => "Yig";
     public override bool Unique => true;
 }

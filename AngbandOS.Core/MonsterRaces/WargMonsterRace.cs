@@ -14,8 +14,7 @@ internal class WargMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperCSymbol);
     public override ColorEnum Color => ColorEnum.Grey;
-    public override string Name => "Warg";
-
+    
     public override bool Animal => true;
     public override int ArmorClass => 20;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
@@ -38,7 +37,5 @@ internal class WargMonsterRace : MonsterRace
     public override int Rarity => 2;
     public override int Sleep => 40;
     public override int Speed => 120;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "            ";
-    public override string SplitName3 => "    Warg    ";
+    public override string? MultilineName => "Warg";
 }

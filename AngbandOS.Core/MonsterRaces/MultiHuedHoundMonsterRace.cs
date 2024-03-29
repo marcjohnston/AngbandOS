@@ -22,8 +22,7 @@ internal class MultiHuedHoundMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperZSymbol);
     public override ColorEnum Color => ColorEnum.Purple;
-    public override string Name => "Multi-hued hound";
-
+    
     public override bool Animal => true;
     public override int ArmorClass => 40;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
@@ -56,7 +55,5 @@ internal class MultiHuedHoundMonsterRace : MonsterRace
     public override int Rarity => 2;
     public override int Sleep => 0;
     public override int Speed => 120;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => " Multi-hued ";
-    public override string SplitName3 => "   hound    ";
+    public override string? MultilineName => "Multi-hued\nhound";
 }

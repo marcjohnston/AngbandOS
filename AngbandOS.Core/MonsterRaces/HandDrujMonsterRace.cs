@@ -24,8 +24,7 @@ internal class HandDrujMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerSSymbol);
     public override ColorEnum Color => ColorEnum.BrightGrey;
-    public override string Name => "Hand druj";
-
+    
     public override int ArmorClass => 110;
     public override bool ColdBlood => true;
     public override string Description => "A skeletal hand floating in the air, motionless except for its flexing fingers.";
@@ -52,8 +51,6 @@ internal class HandDrujMonsterRace : MonsterRace
     public override int Sleep => 10;
     public override bool Smart => true;
     public override int Speed => 130;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "    Hand    ";
-    public override string SplitName3 => "    druj    ";
+    public override string? MultilineName => "Hand\ndruj";
     public override bool Undead => true;
 }

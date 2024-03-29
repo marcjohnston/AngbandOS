@@ -20,8 +20,7 @@ internal class RottingQuylthulgMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperQSymbol);
     public override ColorEnum Color => ColorEnum.BrightBrown;
-    public override string Name => "Rotting quylthulg";
-
+    
     public override bool Animal => true;
     public override int ArmorClass => 1;
     public override string Description => "It is a pulsing flesh mound that reeks of death and putrefaction.";
@@ -46,7 +45,5 @@ internal class RottingQuylthulgMonsterRace : MonsterRace
     public override int Rarity => 1;
     public override int Sleep => 0;
     public override int Speed => 120;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "  Rotting   ";
-    public override string SplitName3 => " quylthulg  ";
+    public override string? MultilineName => "Rotting\nquylthulg";
 }

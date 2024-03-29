@@ -14,8 +14,7 @@ internal class ManesMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerUSymbol);
     public override ColorEnum Color => ColorEnum.BrightRed;
-    public override string Name => "Manes";
-
+    
     public override int ArmorClass => 32;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -40,7 +39,5 @@ internal class ManesMonsterRace : MonsterRace
     public override int Rarity => 2;
     public override int Sleep => 30;
     public override int Speed => 110;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "            ";
-    public override string SplitName3 => "   Manes    ";
+    public override string? MultilineName => "Manes";
 }

@@ -20,8 +20,7 @@ internal class ByakheeMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperBSymbol);
     public override ColorEnum Color => ColorEnum.Black;
-    public override string Name => "Byakhee";
-
+    
     public override int ArmorClass => 40;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -54,7 +53,5 @@ internal class ByakheeMonsterRace : MonsterRace
     public override int Rarity => 3;
     public override int Sleep => 80;
     public override int Speed => 110;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "            ";
-    public override string SplitName3 => "  Byakhee   ";
+    public override string? MultilineName => "Byakhee";
 }

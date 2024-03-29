@@ -35,8 +35,7 @@ internal class AetherVortexMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerVSymbol);
     public override ColorEnum Color => ColorEnum.BrightGrey;
-    public override string Name => "Aether vortex";
-
+    
     public override int ArmorClass => 40;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -79,7 +78,5 @@ internal class AetherVortexMonsterRace : MonsterRace
     public override bool ResistPlasma => true;
     public override int Sleep => 0;
     public override int Speed => 130;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "   Aether   ";
-    public override string SplitName3 => "   vortex   ";
+    public override string? MultilineName => "Aether\nvortex";
 }

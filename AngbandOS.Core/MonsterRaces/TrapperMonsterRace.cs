@@ -13,8 +13,7 @@ internal class TrapperMonsterRace : MonsterRace
     protected TrapperMonsterRace(Game game) : base(game) { }
 
     protected override string SymbolName => nameof(PeriodSymbol);
-    public override string Name => "Trapper";
-
+    
     public override int ArmorClass => 75;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -45,7 +44,5 @@ internal class TrapperMonsterRace : MonsterRace
     public override int Rarity => 3;
     public override int Sleep => 10;
     public override int Speed => 120;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "            ";
-    public override string SplitName3 => "  Trapper   ";
+    public override string? MultilineName => "Trapper";
 }

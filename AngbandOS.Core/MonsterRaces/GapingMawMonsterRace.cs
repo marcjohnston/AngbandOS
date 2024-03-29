@@ -13,8 +13,7 @@ internal class GapingMawMonsterRace : MonsterRace
     protected GapingMawMonsterRace(Game game) : base(game) { }
 
     protected override string SymbolName => nameof(PeriodSymbol);
-    public override string Name => "Gaping Maw";
-
+    
     public override int ArmorClass => 14;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -37,7 +36,5 @@ internal class GapingMawMonsterRace : MonsterRace
     public override int Rarity => 2;
     public override int Sleep => 20;
     public override int Speed => 110;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "   Gaping   ";
-    public override string SplitName3 => "    Maw     ";
+    public override string? MultilineName => "Gaping\nMaw";
 }

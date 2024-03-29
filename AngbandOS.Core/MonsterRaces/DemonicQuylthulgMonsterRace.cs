@@ -20,8 +20,7 @@ internal class DemonicQuylthulgMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperQSymbol);
     public override ColorEnum Color => ColorEnum.BrightRed;
-    public override string Name => "Demonic quylthulg";
-
+    
     public override bool Animal => true;
     public override int ArmorClass => 1;
     public override string Description => "A pile of pulsing flesh that glows with an inner hellish fire. The world itself seems to cry out against it.";
@@ -46,7 +45,5 @@ internal class DemonicQuylthulgMonsterRace : MonsterRace
     public override int Rarity => 1;
     public override int Sleep => 0;
     public override int Speed => 120;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "  Demonic   ";
-    public override string SplitName3 => " quylthulg  ";
+    public override string? MultilineName => "Demonic\nquylthulg";
 }

@@ -24,8 +24,7 @@ internal class SkyDrakeMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperDSymbol);
     public override ColorEnum Color => ColorEnum.BrightBlue;
-    public override string Name => "Sky Drake";
-
+    
     public override int ArmorClass => 200;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -63,7 +62,5 @@ internal class SkyDrakeMonsterRace : MonsterRace
     public override bool ResistTeleport => true;
     public override int Sleep => 255;
     public override int Speed => 130;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "    Sky     ";
-    public override string SplitName3 => "   Drake    ";
+    public override string? MultilineName => "Sky\nDrake";
 }

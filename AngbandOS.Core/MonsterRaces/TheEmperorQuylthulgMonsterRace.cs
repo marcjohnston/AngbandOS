@@ -20,8 +20,7 @@ internal class TheEmperorQuylthulgMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperQSymbol);
     public override ColorEnum Color => ColorEnum.BrightPink;
-    public override string Name => "The Emperor Quylthulg";
-
+    
     public override bool Animal => true;
     public override int ArmorClass => 1;
     public override string Description => "A huge seething mass of flesh with a rudimentary intelligence, the Emperor Quylthulg changes colors in front of your eyes. Pulsating first one color then the next, it knows only it must bring help to protect itself.";
@@ -48,8 +47,6 @@ internal class TheEmperorQuylthulgMonsterRace : MonsterRace
     public override bool ResistTeleport => true;
     public override int Sleep => 0;
     public override int Speed => 130;
-    public override string SplitName1 => "    The     ";
-    public override string SplitName2 => "  Emperor   ";
-    public override string SplitName3 => " Quylthulg  ";
+    public override string? MultilineName => "The\nEmperor\nQuylthulg";
     public override bool Unique => true;
 }

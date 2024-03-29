@@ -14,8 +14,7 @@ internal class UndeadMassMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerJSymbol);
     public override ColorEnum Color => ColorEnum.Brown;
-    public override string Name => "Undead mass";
-
+    
     public override int ArmorClass => 12;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -45,8 +44,6 @@ internal class UndeadMassMonsterRace : MonsterRace
     public override int Rarity => 2;
     public override int Sleep => 5;
     public override int Speed => 110;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "   Undead   ";
-    public override string SplitName3 => "    mass    ";
+    public override string? MultilineName => "Undead\nmass";
     public override bool Undead => true;
 }

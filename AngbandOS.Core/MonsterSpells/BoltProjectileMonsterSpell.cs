@@ -70,22 +70,22 @@ internal abstract class BoltProjectileMonsterSpell : MonsterSpell
     /// <param name="projectile"></param>
     /// <param name="flg"></param>
     /// <returns></returns>
-    protected virtual bool Project(Game game, Monster monster, int rad, int y, int x, int dam, Projectile projectile, ProjectionFlag flg)
+    protected virtual bool Project(Monster monster, int rad, int y, int x, int dam, Projectile projectile, ProjectionFlag flg)
     {
-        return game.Project(monster.GetMonsterIndex(), rad, game.MapY.Value, game.MapX.Value, dam, projectile, flg);
+        return Game.Project(monster.GetMonsterIndex(), rad, Game.MapY.Value, Game.MapX.Value, dam, projectile, flg);
     }
 
-    public override void ExecuteOnPlayer(Game game, Monster monster)
+    public override void ExecuteOnPlayer(Monster monster)
     {
-        Projectile projectile = Projectile(game);
+        Projectile projectile = Projectile(Game);
         int damage = Damage(monster);
-        Project(game, monster, 0, game.MapY.Value, game.MapX.Value, damage, projectile, ProjectionFlags);
+        Project(monster, 0, Game.MapY.Value, Game.MapX.Value, damage, projectile, ProjectionFlags);
     }
 
-    public override void ExecuteOnMonster(Game game, Monster monster, Monster target)
+    public override void ExecuteOnMonster(Monster monster, Monster target)
     {
-        Projectile projectile = Projectile(game);
+        Projectile projectile = Projectile(Game);
         int damage = Damage(monster);
-        Project(game, monster, 0, target.MapY, target.MapX, damage, projectile, ProjectionFlags);
+        Project(monster, 0, target.MapY, target.MapX, damage, projectile, ProjectionFlags);
     }
 }

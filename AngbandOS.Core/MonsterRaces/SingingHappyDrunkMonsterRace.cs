@@ -14,8 +14,7 @@ internal class SingingHappyDrunkMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerTSymbol);
     public override ColorEnum Color => ColorEnum.Yellow;
-    public override string Name => "Singing, happy drunk";
-
+    
     public override int ArmorClass => 1;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -39,8 +38,6 @@ internal class SingingHappyDrunkMonsterRace : MonsterRace
     public override int Rarity => 1;
     public override int Sleep => 0;
     public override int Speed => 110;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "            ";
-    public override string SplitName3 => "  Singing   ";
+    public override string? MultilineName => "Singing";
     public override bool TakeItem => true;
 }

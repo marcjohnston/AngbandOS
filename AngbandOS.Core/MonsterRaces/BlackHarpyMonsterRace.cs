@@ -14,8 +14,7 @@ internal class BlackHarpyMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperHSymbol);
     public override ColorEnum Color => ColorEnum.Black;
-    public override string Name => "Black harpy";
-
+    
     public override bool Animal => true;
     public override int ArmorClass => 22;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
@@ -39,7 +38,5 @@ internal class BlackHarpyMonsterRace : MonsterRace
     public override int Rarity => 1;
     public override int Sleep => 10;
     public override int Speed => 120;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "   Black    ";
-    public override string SplitName3 => "   harpy    ";
+    public override string? MultilineName => "Black\nharpy";
 }

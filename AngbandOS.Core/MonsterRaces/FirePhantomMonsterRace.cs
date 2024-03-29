@@ -22,8 +22,7 @@ internal class FirePhantomMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperGSymbol);
     public override ColorEnum Color => ColorEnum.BrightRed;
-    public override string Name => "Fire Phantom";
-
+    
     public override int ArmorClass => 90;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -52,9 +51,7 @@ internal class FirePhantomMonsterRace : MonsterRace
     public override bool Regenerate => true;
     public override int Sleep => 40;
     public override int Speed => 120;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "    Fire    ";
-    public override string SplitName3 => "  Phantom   ";
+    public override string? MultilineName => "Fire\nPhantom";
     public override bool TakeItem => true;
     public override bool Undead => true;
     public override bool Unique => true;

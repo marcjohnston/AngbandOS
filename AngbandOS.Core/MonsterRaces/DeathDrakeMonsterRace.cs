@@ -21,8 +21,7 @@ internal class DeathDrakeMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperDSymbol);
     public override ColorEnum Color => ColorEnum.Brown;
-    public override string Name => "Death drake";
-
+    
     public override int ArmorClass => 100;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -59,8 +58,6 @@ internal class DeathDrakeMonsterRace : MonsterRace
     public override bool ResistTeleport => true;
     public override int Sleep => 30;
     public override int Speed => 120;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "   Death    ";
-    public override string SplitName3 => "   drake    ";
+    public override string? MultilineName => "Death\ndrake";
     public override bool TakeItem => true;
 }

@@ -26,8 +26,7 @@ internal class ChthonianMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperASymbol);
     public override ColorEnum Color => ColorEnum.Yellow;
-    public override string Name => "Chthonian";
-
+    
     public override int ArmorClass => 90;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -60,7 +59,5 @@ internal class ChthonianMonsterRace : MonsterRace
     public override bool ResistTeleport => true;
     public override int Sleep => 20;
     public override int Speed => 120;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "            ";
-    public override string SplitName3 => " Chthonian  ";
+    public override string? MultilineName => "Chthonian";
 }

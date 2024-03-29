@@ -28,8 +28,7 @@ internal class GoatOfMendesMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerQSymbol);
     public override ColorEnum Color => ColorEnum.Red;
-    public override string Name => "Goat of Mendes";
-
+    
     public override int ArmorClass => 66;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -67,7 +66,5 @@ internal class GoatOfMendesMonsterRace : MonsterRace
     public override int Sleep => 40;
     public override bool Smart => true;
     public override int Speed => 120;
-    public override string SplitName1 => "    Goat    ";
-    public override string SplitName2 => "     of     ";
-    public override string SplitName3 => "   Mendes   ";
+    public override string? MultilineName => "Goat\nof\nMendes";
 }

@@ -14,8 +14,7 @@ internal class KoboldMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerKSymbol);
     public override ColorEnum Color => ColorEnum.Green;
-    public override string Name => "Kobold";
-
+    
     public override int ArmorClass => 16;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -38,7 +37,5 @@ internal class KoboldMonsterRace : MonsterRace
     public override int Rarity => 1;
     public override int Sleep => 10;
     public override int Speed => 110;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "            ";
-    public override string SplitName3 => "   Kobold   ";
+    public override string? MultilineName => "Kobold";
 }

@@ -14,8 +14,7 @@ internal class CreepingGoldCoinsMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(DollarSignSymbol);
     public override ColorEnum Color => ColorEnum.Gold;
-    public override string Name => "Creeping gold coins";
-
+    
     public override bool Animal => true;
     public override int ArmorClass => 36;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
@@ -43,7 +42,5 @@ internal class CreepingGoldCoinsMonsterRace : MonsterRace
     public override int Rarity => 3;
     public override int Sleep => 10;
     public override int Speed => 100;
-    public override string SplitName1 => "  Creeping  ";
-    public override string SplitName2 => "    gold    ";
-    public override string SplitName3 => "   coins    ";
+    public override string? MultilineName => "Creeping\ngold\ncoins";
 }

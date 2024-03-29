@@ -23,8 +23,7 @@ internal class TsathogguaMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperXSymbol);
     public override ColorEnum Color => ColorEnum.Purple;
-    public override string Name => "Tsathoggua";
-
+    
     public override int ArmorClass => 150;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -76,9 +75,7 @@ internal class TsathogguaMonsterRace : MonsterRace
     public override bool ResistTeleport => true;
     public override int Sleep => 100;
     public override int Speed => 130;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "            ";
-    public override string SplitName3 => " Tsathoggua ";
+    public override string? MultilineName => "Tsathoggua";
     public override bool Stupid => true;
     public override bool Unique => true;
 }

@@ -14,8 +14,7 @@ internal class CopperheadSnakeMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperJSymbol);
     public override ColorEnum Color => ColorEnum.Orange;
-    public override string Name => "Copperhead snake";
-
+    
     public override bool Animal => true;
     public override int ArmorClass => 20;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
@@ -37,7 +36,5 @@ internal class CopperheadSnakeMonsterRace : MonsterRace
     public override int Rarity => 1;
     public override int Sleep => 1;
     public override int Speed => 110;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => " Copperhead ";
-    public override string SplitName3 => "   snake    ";
+    public override string? MultilineName => "Copperhead\nsnake";
 }

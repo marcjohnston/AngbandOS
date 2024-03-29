@@ -18,8 +18,7 @@ internal class WildManMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerHSymbol);
     public override ColorEnum Color => ColorEnum.BrightGreen;
-    public override string Name => "Wild man";
-
+    
     public override int ArmorClass => 10;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -42,7 +41,5 @@ internal class WildManMonsterRace : MonsterRace
     public override int Rarity => 2;
     public override int Sleep => 10;
     public override int Speed => 110;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "    Wild    ";
-    public override string SplitName3 => "    man     ";
+    public override string? MultilineName => "Wild\nman";
 }

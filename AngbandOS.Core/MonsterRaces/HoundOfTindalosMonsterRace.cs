@@ -21,8 +21,7 @@ internal class HoundOfTindalosMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperCSymbol);
     public override ColorEnum Color => ColorEnum.Chartreuse;
-    public override string Name => "Hound of Tindalos";
-
+    
     public override bool Animal => true;
     public override int ArmorClass => 100;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
@@ -53,7 +52,5 @@ internal class HoundOfTindalosMonsterRace : MonsterRace
     public override bool ResistNether => true;
     public override int Sleep => 0;
     public override int Speed => 120;
-    public override string SplitName1 => "   Hound    ";
-    public override string SplitName2 => "     of     ";
-    public override string SplitName3 => "  Tindalos  ";
+    public override string? MultilineName => "Hound\nof\nTindalos";
 }

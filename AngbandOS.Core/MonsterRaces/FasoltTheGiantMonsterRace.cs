@@ -14,8 +14,7 @@ internal class FasoltTheGiantMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperPSymbol);
     public override ColorEnum Color => ColorEnum.Brown;
-    public override string Name => "Fasolt the Giant";
-
+    
     public override int ArmorClass => 70;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -47,9 +46,7 @@ internal class FasoltTheGiantMonsterRace : MonsterRace
     public override int Rarity => 7;
     public override int Sleep => 50;
     public override int Speed => 110;
-    public override string SplitName1 => "   Fasolt   ";
-    public override string SplitName2 => "    the     ";
-    public override string SplitName3 => "   Giant    ";
+    public override string? MultilineName => "Fasolt\nthe\nGiant";
     public override bool TakeItem => true;
     public override bool Unique => true;
 }

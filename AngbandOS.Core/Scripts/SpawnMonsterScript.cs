@@ -26,11 +26,11 @@ internal class SpawnMonsterScript : Script, IScript
         try
         {
             ConsoleTable table = new ConsoleTable("Name", "Character", "Level");
-            MonsterRace[] monsterRaces = Game.SingletonRepository.MonsterRaces.OrderBy(_monsterRace => _monsterRace.Name).ToArray();
+            MonsterRace[] monsterRaces = Game.SingletonRepository.MonsterRaces.OrderBy(_monsterRace => _monsterRace.FriendlyName).ToArray();
             foreach (MonsterRace monsterRace in monsterRaces)
             {
                 ConsoleTableRow tableRow = table.AddRow();
-                tableRow["Name"] = new ConsoleString(ColorEnum.White, monsterRace.Name);
+                tableRow["Name"] = new ConsoleString(ColorEnum.White, monsterRace.FriendlyName);
                 tableRow["Character"] = new ConsoleString(ColorEnum.White, monsterRace.Symbol.Character.ToString());
                 tableRow["Level"] = new ConsoleString(ColorEnum.White, monsterRace.LevelFound.ToString());
             }

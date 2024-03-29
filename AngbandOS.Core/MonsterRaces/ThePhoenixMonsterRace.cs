@@ -23,8 +23,7 @@ internal class ThePhoenixMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperBSymbol);
     public override ColorEnum Color => ColorEnum.Red;
-    public override string Name => "The Phoenix";
-
+    
     public override bool Animal => true;
     public override int ArmorClass => 130;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
@@ -62,8 +61,6 @@ internal class ThePhoenixMonsterRace : MonsterRace
     public override bool ResistPlasma => true;
     public override int Sleep => 0;
     public override int Speed => 120;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "    The     ";
-    public override string SplitName3 => "  Phoenix   ";
+    public override string? MultilineName => "The\nPhoenix";
     public override bool Unique => true;
 }

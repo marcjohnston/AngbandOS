@@ -33,8 +33,7 @@ internal class VecnaTheEmperorLichMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperLSymbol);
     public override ColorEnum Color => ColorEnum.Gold;
-    public override string Name => "Vecna, the Emperor Lich";
-
+    
     public override int ArmorClass => 85;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -73,9 +72,7 @@ internal class VecnaTheEmperorLichMonsterRace : MonsterRace
     public override int Sleep => 50;
     public override bool Smart => true;
     public override int Speed => 130;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "            ";
-    public override string SplitName3 => "   Vecna    ";
+    public override string? MultilineName => "Vecna";
     public override bool Undead => true;
     public override bool Unique => true;
 }

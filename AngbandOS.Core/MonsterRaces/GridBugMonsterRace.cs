@@ -14,8 +14,7 @@ internal class GridBugMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperISymbol);
     public override ColorEnum Color => ColorEnum.BrightPurple;
-    public override string Name => "Grid bug";
-
+    
     public override bool Animal => true;
     public override int ArmorClass => 2;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
@@ -38,9 +37,7 @@ internal class GridBugMonsterRace : MonsterRace
     public override int Rarity => 1;
     public override int Sleep => 10;
     public override int Speed => 110;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "    Grid    ";
-    public override string SplitName3 => "    bug     ";
+    public override string? MultilineName => "Grid\nbug";
     public override bool Stupid => true;
     public override bool WeirdMind => true;
 }

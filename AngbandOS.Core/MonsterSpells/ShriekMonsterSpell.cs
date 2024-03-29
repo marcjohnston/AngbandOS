@@ -20,12 +20,12 @@ internal class ShriekMonsterSpell : MonsterSpell
     public override string? VsMonsterSeenMessage(Monster monster, Monster target) => $"{monster.Name} shrieks at {target.Name}.";
 
 
-    public override void ExecuteOnPlayer(Game game, Monster monster)
+    public override void ExecuteOnPlayer(Monster monster)
     {
-        game.AggravateMonsters(monster);
+        Game.AggravateMonsters(monster);
     }
 
-    public override void ExecuteOnMonster(Game game, Monster monster, Monster target)
+    public override void ExecuteOnMonster(Monster monster, Monster target)
     {
         // No additional processing needed.  It only wakes the monster.
     }

@@ -18,8 +18,7 @@ internal class InertiaHoundMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperZSymbol);
     public override ColorEnum Color => ColorEnum.Orange;
-    public override string Name => "Inertia hound";
-
+    
     public override bool Animal => true;
     public override int ArmorClass => 30;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
@@ -46,7 +45,5 @@ internal class InertiaHoundMonsterRace : MonsterRace
     public override int Rarity => 2;
     public override int Sleep => 0;
     public override int Speed => 110;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "  Inertia   ";
-    public override string SplitName3 => "   hound    ";
+    public override string? MultilineName => "Inertia\nhound";
 }

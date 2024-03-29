@@ -19,8 +19,7 @@ internal class KoukoMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperWSymbol);
     public override ColorEnum Color => ColorEnum.BrightGreen;
-    public override string Name => "Kouko";
-
+    
     public override int ArmorClass => 30;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -53,8 +52,6 @@ internal class KoukoMonsterRace : MonsterRace
     public override int Rarity => 1;
     public override int Sleep => 30;
     public override int Speed => 110;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "            ";
-    public override string SplitName3 => "   Kouko    ";
+    public override string? MultilineName => "Kouko";
     public override bool Undead => true;
 }

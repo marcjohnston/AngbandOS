@@ -14,8 +14,7 @@ internal class GrendelsMotherMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperOSymbol);
     public override ColorEnum Color => ColorEnum.Green;
-    public override string Name => "Grendel's mother";
-
+    
     public override int ArmorClass => 100;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -46,8 +45,6 @@ internal class GrendelsMotherMonsterRace : MonsterRace
     public override int Rarity => 2;
     public override int Sleep => 20;
     public override int Speed => 120;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => " Grendel's  ";
-    public override string SplitName3 => "   mother   ";
+    public override string? MultilineName => "Grendel's\nmother";
     public override bool Unique => true;
 }

@@ -21,8 +21,7 @@ internal class GreatHellWyrmMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperDSymbol);
     public override ColorEnum Color => ColorEnum.Red;
-    public override string Name => "Great hell wyrm";
-
+    
     public override int ArmorClass => 170;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -59,7 +58,5 @@ internal class GreatHellWyrmMonsterRace : MonsterRace
     public override int Rarity => 2;
     public override int Sleep => 40;
     public override int Speed => 120;
-    public override string SplitName1 => "   Great    ";
-    public override string SplitName2 => "    hell    ";
-    public override string SplitName3 => "    wyrm    ";
+    public override string? MultilineName => "Great\nhell\nwyrm";
 }

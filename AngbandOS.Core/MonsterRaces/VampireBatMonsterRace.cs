@@ -14,8 +14,7 @@ internal class VampireBatMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerBSymbol);
     public override ColorEnum Color => ColorEnum.Black;
-    public override string Name => "Vampire bat";
-
+    
     public override bool Animal => true;
     public override int ArmorClass => 40;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
@@ -44,8 +43,6 @@ internal class VampireBatMonsterRace : MonsterRace
     public override bool Regenerate => true;
     public override int Sleep => 50;
     public override int Speed => 120;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "  Vampire   ";
-    public override string SplitName3 => "    bat     ";
+    public override string? MultilineName => "Vampire\nbat";
     public override bool Undead => true;
 }

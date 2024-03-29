@@ -14,8 +14,7 @@ internal class BroddaTheEasterlingMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerPSymbol);
     public override ColorEnum Color => ColorEnum.Orange;
-    public override string Name => "Brodda, the Easterling";
-
+    
     public override int ArmorClass => 25;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -44,8 +43,6 @@ internal class BroddaTheEasterlingMonsterRace : MonsterRace
     public override int Rarity => 2;
     public override int Sleep => 20;
     public override int Speed => 110;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "            ";
-    public override string SplitName3 => "   Brodda   ";
+    public override string? MultilineName => "Brodda";
     public override bool Unique => true;
 }

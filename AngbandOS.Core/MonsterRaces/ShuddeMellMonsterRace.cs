@@ -26,8 +26,7 @@ internal class ShuddeMellMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperXSymbol);
     public override ColorEnum Color => ColorEnum.Brown;
-    public override string Name => "Shudde M'ell";
-
+    
     public override int ArmorClass => 90;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -61,8 +60,6 @@ internal class ShuddeMellMonsterRace : MonsterRace
     public override bool ResistTeleport => true;
     public override int Sleep => 20;
     public override int Speed => 120;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "   Shudde   ";
-    public override string SplitName3 => "   M'ell    ";
+    public override string? MultilineName => "Shudde\nM'ell";
     public override bool Unique => true;
 }

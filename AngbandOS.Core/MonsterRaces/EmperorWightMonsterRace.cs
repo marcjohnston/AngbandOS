@@ -21,8 +21,7 @@ internal class EmperorWightMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperWSymbol);
     public override ColorEnum Color => ColorEnum.Yellow;
-    public override string Name => "Emperor wight";
-
+    
     public override int ArmorClass => 40;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -57,8 +56,6 @@ internal class EmperorWightMonsterRace : MonsterRace
     public override int Rarity => 2;
     public override int Sleep => 10;
     public override int Speed => 120;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "  Emperor   ";
-    public override string SplitName3 => "   wight    ";
+    public override string? MultilineName => "Emperor\nwight";
     public override bool Undead => true;
 }

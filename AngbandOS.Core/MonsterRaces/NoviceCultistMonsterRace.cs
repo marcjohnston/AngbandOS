@@ -20,8 +20,7 @@ internal class NoviceCultistMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerPSymbol);
     public override ColorEnum Color => ColorEnum.BrightBlue;
-    public override string Name => "Novice cultist";
-
+    
     public override int ArmorClass => 10;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -44,7 +43,5 @@ internal class NoviceCultistMonsterRace : MonsterRace
     public override int Rarity => 1;
     public override int Sleep => 10;
     public override int Speed => 110;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "   Novice   ";
-    public override string SplitName3 => "  cultist   ";
+    public override string? MultilineName => "Novice\ncultist";
 }

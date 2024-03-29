@@ -26,8 +26,7 @@ internal class OrientalVampireMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperVSymbol);
     public override ColorEnum Color => ColorEnum.Green;
-    public override string Name => "Oriental vampire";
-
+    
     public override int ArmorClass => 60;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -63,8 +62,6 @@ internal class OrientalVampireMonsterRace : MonsterRace
     public override bool ResistTeleport => true;
     public override int Sleep => 10;
     public override int Speed => 110;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "  Oriental  ";
-    public override string SplitName3 => "  vampire   ";
+    public override string? MultilineName => "Oriental\nvampire";
     public override bool Undead => true;
 }

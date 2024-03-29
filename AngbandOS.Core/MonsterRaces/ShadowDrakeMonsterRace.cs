@@ -22,8 +22,7 @@ internal class ShadowDrakeMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerDSymbol);
     public override ColorEnum Color => ColorEnum.Black;
-    public override string Name => "Shadow drake";
-
+    
     public override bool Animal => true;
     public override int ArmorClass => 50;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
@@ -54,8 +53,6 @@ internal class ShadowDrakeMonsterRace : MonsterRace
     public override int Rarity => 2;
     public override int Sleep => 30;
     public override int Speed => 110;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "   Shadow   ";
-    public override string SplitName3 => "   drake    ";
+    public override string? MultilineName => "Shadow\ndrake";
     public override bool TakeItem => true;
 }

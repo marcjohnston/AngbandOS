@@ -14,8 +14,7 @@ internal class TyrannosaurMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperRSymbol);
     public override ColorEnum Color => ColorEnum.Green;
-    public override string Name => "Tyrannosaur";
-
+    
     public override bool Animal => true;
     public override int ArmorClass => 70;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
@@ -41,7 +40,5 @@ internal class TyrannosaurMonsterRace : MonsterRace
     public override int Rarity => 2;
     public override int Sleep => 20;
     public override int Speed => 120;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "            ";
-    public override string SplitName3 => "Tyrannosaur ";
+    public override string? MultilineName => "Tyrannosaur";
 }

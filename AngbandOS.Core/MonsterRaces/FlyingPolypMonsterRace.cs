@@ -24,8 +24,7 @@ internal class FlyingPolypMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperASymbol);
     public override ColorEnum Color => ColorEnum.Diamond;
-    public override string Name => "Flying polyp";
-
+    
     public override int ArmorClass => 68;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -67,9 +66,7 @@ internal class FlyingPolypMonsterRace : MonsterRace
     public override int Sleep => 255;
     public override bool Smart => true;
     public override int Speed => 120;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "   Flying   ";
-    public override string SplitName3 => "   polyp    ";
+    public override string? MultilineName => "Flying\npolyp";
     public override bool TakeItem => true;
     public override bool WeirdMind => true;
 }

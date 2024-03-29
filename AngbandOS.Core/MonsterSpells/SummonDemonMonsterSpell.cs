@@ -13,7 +13,7 @@ internal class SummonDemonMonsterSpell : SummonMonsterSpell
     private SummonDemonMonsterSpell(Game game) : base(game) { }
     protected override string SummonName(Monster monster) => "a demon";
 
-    protected override int MaximumSummonCount(Game game) => 1;
+    protected override int MaximumSummonCount => 1;
 
     protected override MonsterFilter? MonsterSelector(Monster monster) => Game.SingletonRepository.MonsterFilters.Get(nameof(DemonMonsterFilter));
 }

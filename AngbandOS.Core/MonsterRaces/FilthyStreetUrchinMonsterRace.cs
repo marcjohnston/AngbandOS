@@ -14,8 +14,7 @@ internal class FilthyStreetUrchinMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerTSymbol);
     public override ColorEnum Color => ColorEnum.BrightGrey;
-    public override string Name => "Filthy street urchin";
-
+    
     public override int ArmorClass => 1;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -39,8 +38,6 @@ internal class FilthyStreetUrchinMonsterRace : MonsterRace
     public override int Rarity => 2;
     public override int Sleep => 40;
     public override int Speed => 110;
-    public override string SplitName1 => "   Filthy   ";
-    public override string SplitName2 => "   street   ";
-    public override string SplitName3 => "   urchin   ";
+    public override string? MultilineName => "Filthy\nstreet\nurchin";
     public override bool TakeItem => true;
 }

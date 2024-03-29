@@ -14,8 +14,7 @@ internal class MirkwoodSpiderMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperSSymbol);
     public override ColorEnum Color => ColorEnum.Brown;
-    public override string Name => "Mirkwood spider";
-
+    
     public override bool Animal => true;
     public override int ArmorClass => 25;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
@@ -41,8 +40,6 @@ internal class MirkwoodSpiderMonsterRace : MonsterRace
     public override int Rarity => 2;
     public override int Sleep => 80;
     public override int Speed => 120;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "  Mirkwood  ";
-    public override string SplitName3 => "   spider   ";
+    public override string? MultilineName => "Mirkwood\nspider";
     public override bool WeirdMind => true;
 }

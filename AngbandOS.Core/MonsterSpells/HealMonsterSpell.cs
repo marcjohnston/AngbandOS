@@ -16,11 +16,11 @@ internal class HealMonsterSpell : MonsterSpell
 
     public override string? VsPlayerActionMessage(Monster monster) => $"{monster.Name} concentrates on {monster.PossessiveName} wounds.";
 
-    public override void ExecuteOnPlayer(Game game, Monster monster)
+    public override void ExecuteOnPlayer(Monster monster)
     {
         string monsterPossessive = monster.PossessiveName;
         string monsterName = monster.Name;
-        bool playerIsBlind = game.BlindnessTimer.Value != 0;
+        bool playerIsBlind = Game.BlindnessTimer.Value != 0;
         int monsterLevel = monster.Race.Level >= 1 ? monster.Race.Level : 1;
         bool seenByPlayer = !playerIsBlind && monster.IsVisible;
 
@@ -28,50 +28,50 @@ internal class HealMonsterSpell : MonsterSpell
         if (monster.Health >= monster.MaxHealth)
         {
             monster.Health = monster.MaxHealth;
-            game.MsgPrint(seenByPlayer ? $"{monsterName} looks completely healed!" : $"{monsterName} sounds completely healed!");
+            Game.MsgPrint(seenByPlayer ? $"{monsterName} looks completely healed!" : $"{monsterName} sounds completely healed!");
         }
         else
         {
-            game.MsgPrint(seenByPlayer ? $"{monsterName} looks healthier." : $"{monsterName} sounds healthier.");
+            Game.MsgPrint(seenByPlayer ? $"{monsterName} looks healthier." : $"{monsterName} sounds healthier.");
         }
-        if (game.TrackedMonsterIndex == monster.GetMonsterIndex())
+        if (Game.TrackedMonsterIndex != null && Game.TrackedMonsterIndex.Value == monster.GetMonsterIndex())
         {
             Game.SingletonRepository.FlaggedActions.Get(nameof(RedrawMonsterHealthFlaggedAction)).Set();
         }
         if (monster.FearLevel != 0)
         {
             monster.FearLevel = 0;
-            game.MsgPrint($"{monsterName} recovers {monsterPossessive} courage.");
+            Game.MsgPrint($"{monsterName} recovers {monsterPossessive} courage.");
         }
     }
 
-    public override void ExecuteOnMonster(Game game, Monster monster, Monster target)
+    public override void ExecuteOnMonster(Monster monster, Monster target)
     {
         int rlev = monster.Race.Level >= 1 ? monster.Race.Level : 1;
         string monsterName = monster.Name;
-        bool blind = game.BlindnessTimer.Value != 0;
+        bool blind = Game.BlindnessTimer.Value != 0;
         bool seen = !blind && monster.IsVisible;
 
         monster.Health += rlev * 6;
         if (monster.Health >= monster.MaxHealth)
         {
             monster.Health = monster.MaxHealth;
-            game.MsgPrint(seen ? $"{monsterName} looks completely healed!" : $"{monsterName} sounds completely healed!");
+            Game.MsgPrint(seen ? $"{monsterName} looks completely healed!" : $"{monsterName} sounds completely healed!");
         }
         else
         {
-            game.MsgPrint(seen ? $"{monsterName} looks healthier." : $"{monsterName} sounds healthier.");
+            Game.MsgPrint(seen ? $"{monsterName} looks healthier." : $"{monsterName} sounds healthier.");
         }
-        if (game.TrackedMonsterIndex == monster.GetMonsterIndex())
+        if (Game.TrackedMonsterIndex != null && Game.TrackedMonsterIndex.Value == monster.GetMonsterIndex())
         {
-            Game.SingletonRepository.FlaggedActions.Get(nameof(RedrawMonsterHealthFlaggedAction)).Set();
+            base.Game.SingletonRepository.FlaggedActions.Get(nameof(FlaggedActions.RedrawMonsterHealthFlaggedAction)).Set();
         }
         if (monster.FearLevel != 0)
         {
             monster.FearLevel = 0;
             if (seen)
             {
-                game.MsgPrint($"{monsterName} recovers {monster.PossessiveName} courage.");
+                Game.MsgPrint($"{monsterName} recovers {monster.PossessiveName} courage.");
             }
         }
     }

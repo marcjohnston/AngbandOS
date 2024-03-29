@@ -53,9 +53,9 @@ internal abstract class BreatheProjectileMonsterSpell : BallProjectileMonsterSpe
     /// </summary>
     protected override int Radius => 0;
 
-    protected override bool Project(Game game, Monster monster, int rad, int y, int x, int dam, Projectile projectile, ProjectionFlag flg)
+    protected override bool Project(Monster monster, int rad, int y, int x, int dam, Projectile projectile, ProjectionFlag flg)
     {
         // Make the radius negative to indicate we need a cone instead of a ball.
-        return base.Project(game, monster, -rad, y, x, dam, projectile, flg);
+        return base.Project(monster, -rad, y, x, dam, projectile, flg);
     }
 }

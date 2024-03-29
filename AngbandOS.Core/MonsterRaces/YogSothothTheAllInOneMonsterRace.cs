@@ -28,8 +28,7 @@ internal class YogSothothTheAllInOneMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperXSymbol);
     public override ColorEnum Color => ColorEnum.Orange;
-    public override string Name => "Yog-Sothoth, the All-in-One";
-
+    
     public override int ArmorClass => 100;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -75,8 +74,6 @@ internal class YogSothothTheAllInOneMonsterRace : MonsterRace
     public override int Sleep => 20;
     public override bool Smart => true;
     public override int Speed => 130;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "            ";
-    public override string SplitName3 => "Yog-Sothoth ";
+    public override string? MultilineName => "Yog-Sothoth";
     public override bool Unique => true;
 }

@@ -23,8 +23,7 @@ internal class BoldorKingOfTheYeeksMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerYSymbol);
     public override ColorEnum Color => ColorEnum.Purple;
-    public override string Name => "Boldor, King of the Yeeks";
-
+    
     public override bool Animal => true;
     public override int ArmorClass => 24;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
@@ -59,8 +58,6 @@ internal class BoldorKingOfTheYeeksMonsterRace : MonsterRace
     public override int Sleep => 10;
     public override bool Smart => true;
     public override int Speed => 120;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "            ";
-    public override string SplitName3 => "   Boldor   ";
+    public override string? MultilineName => "Boldor";
     public override bool Unique => true;
 }

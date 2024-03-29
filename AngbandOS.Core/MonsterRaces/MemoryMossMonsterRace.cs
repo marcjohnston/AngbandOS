@@ -18,8 +18,7 @@ internal class MemoryMossMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(CommaSymbol);
     public override ColorEnum Color => ColorEnum.Blue;
-    public override string Name => "Memory moss";
-
+    
     public override int ArmorClass => 1;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -44,8 +43,6 @@ internal class MemoryMossMonsterRace : MonsterRace
     public override int Rarity => 3;
     public override int Sleep => 5;
     public override int Speed => 110;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "   Memory   ";
-    public override string SplitName3 => "    moss    ";
+    public override string? MultilineName => "Memory\nmoss";
     public override bool Stupid => true;
 }

@@ -14,8 +14,7 @@ internal class SmeagolMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerHSymbol);
     public override ColorEnum Color => ColorEnum.Beige;
-    public override string Name => "Smeagol";
-
+    
     public override int ArmorClass => 12;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -46,9 +45,7 @@ internal class SmeagolMonsterRace : MonsterRace
     public override int Sleep => 5;
     public override bool Smart => true;
     public override int Speed => 130;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "            ";
-    public override string SplitName3 => "  Smeagol   ";
+    public override string? MultilineName => "Smeagol";
     public override bool TakeItem => true;
     public override bool Unique => true;
 }

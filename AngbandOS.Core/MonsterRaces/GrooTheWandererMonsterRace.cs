@@ -14,8 +14,7 @@ internal class GrooTheWandererMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerPSymbol);
     public override ColorEnum Color => ColorEnum.BrightOrange;
-    public override string Name => "Groo the Wanderer";
-
+    
     public override int ArmorClass => 70;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -45,9 +44,7 @@ internal class GrooTheWandererMonsterRace : MonsterRace
     public override int Rarity => 7;
     public override int Sleep => 50;
     public override int Speed => 110;
-    public override string SplitName1 => "    Groo    ";
-    public override string SplitName2 => "    the     ";
-    public override string SplitName3 => "  Wanderer  ";
+    public override string? MultilineName => "Groo\nthe\nWanderer";
     public override bool Troll => true;
     public override bool Unique => true;
     public override bool WeirdMind => true;

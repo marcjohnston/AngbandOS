@@ -18,8 +18,7 @@ internal class NexusVortexMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerVSymbol);
     public override ColorEnum Color => ColorEnum.Pink;
-    public override string Name => "Nexus vortex";
-
+    
     public override int ArmorClass => 40;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -49,7 +48,5 @@ internal class NexusVortexMonsterRace : MonsterRace
     public override bool ResistTeleport => true;
     public override int Sleep => 0;
     public override int Speed => 120;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "   Nexus    ";
-    public override string SplitName3 => "   vortex   ";
+    public override string? MultilineName => "Nexus\nvortex";
 }

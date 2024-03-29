@@ -17,6 +17,7 @@ internal class SingletonRepository
     private readonly List<ILoadAndBind> _repositories = new();
 
     public ActivationsRepository Activations;
+    public AlignmentsRepository Alignments;
     public AlterActionsRepository AlterActions;
     public AmuletReadableFlavorsRepository AmuletReadableFlavors;
     public AnimationsRepository Animations;
@@ -133,6 +134,7 @@ internal class SingletonRepository
     {
         // Create all of the repositories.  All of the repositories will be empty and have an instance to the save game.
         Activations = AddRepository<ActivationsRepository>(new ActivationsRepository(Game));
+        Alignments = AddRepository<AlignmentsRepository>(new AlignmentsRepository(Game));
         AlterActions = AddRepository<AlterActionsRepository>(new AlterActionsRepository(Game));
         AmuletReadableFlavors = AddRepository<AmuletReadableFlavorsRepository>(new AmuletReadableFlavorsRepository(Game));
         Animations = AddRepository<AnimationsRepository>(new AnimationsRepository(Game));

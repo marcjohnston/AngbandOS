@@ -14,8 +14,7 @@ internal class MinotaurMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperHSymbol);
     public override ColorEnum Color => ColorEnum.BrightBrown;
-    public override string Name => "Minotaur";
-
+    
     public override int ArmorClass => 25;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -38,7 +37,5 @@ internal class MinotaurMonsterRace : MonsterRace
     public override int Rarity => 2;
     public override int Sleep => 10;
     public override int Speed => 130;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "            ";
-    public override string SplitName3 => "  Minotaur  ";
+    public override string? MultilineName => "Minotaur";
 }

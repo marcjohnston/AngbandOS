@@ -27,8 +27,7 @@ internal class AtlachNachaTheSpiderGodMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperSSymbol);
     public override ColorEnum Color => ColorEnum.Red;
-    public override string Name => "Atlach-Nacha, the Spider God";
-
+    
     public override bool Animal => true;
     public override int ArmorClass => 160;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
@@ -67,8 +66,6 @@ internal class AtlachNachaTheSpiderGodMonsterRace : MonsterRace
     public override int Sleep => 80;
     public override bool Smart => true;
     public override int Speed => 120;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "            ";
-    public override string SplitName3 => "Atlach-Nacha";
+    public override string? MultilineName => "Atlach-Nacha";
     public override bool Unique => true;
 }

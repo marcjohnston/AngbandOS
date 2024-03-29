@@ -14,8 +14,7 @@ internal class NightStalkerMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperESymbol);
     public override ColorEnum Color => ColorEnum.Grey;
-    public override string Name => "Night stalker";
-
+    
     public override int ArmorClass => 46;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -49,8 +48,6 @@ internal class NightStalkerMonsterRace : MonsterRace
     public override int Rarity => 3;
     public override int Sleep => 20;
     public override int Speed => 130;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "   Night    ";
-    public override string SplitName3 => "  stalker   ";
+    public override string? MultilineName => "Night\nstalker";
     public override bool Undead => true;
 }

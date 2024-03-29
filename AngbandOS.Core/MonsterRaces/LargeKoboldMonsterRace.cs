@@ -13,8 +13,7 @@ internal class LargeKoboldMonsterRace : MonsterRace
     protected LargeKoboldMonsterRace(Game game) : base(game) { }
 
     protected override string SymbolName => nameof(LowerKSymbol);
-    public override string Name => "Large kobold";
-
+    
     public override int ArmorClass => 32;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -37,7 +36,5 @@ internal class LargeKoboldMonsterRace : MonsterRace
     public override int Rarity => 1;
     public override int Sleep => 30;
     public override int Speed => 110;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "   Large    ";
-    public override string SplitName3 => "   kobold   ";
+    public override string? MultilineName => "Large\nkobold";
 }

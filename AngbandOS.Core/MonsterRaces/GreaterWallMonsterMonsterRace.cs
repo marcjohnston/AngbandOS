@@ -13,8 +13,7 @@ internal class GreaterWallMonsterMonsterRace : MonsterRace
     protected GreaterWallMonsterMonsterRace(Game game) : base(game) { }
 
     protected override string SymbolName => nameof(PoundSignSymbol);
-    public override string Name => "Greater wall monster";
-
+    
     public override int ArmorClass => 80;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -51,7 +50,5 @@ internal class GreaterWallMonsterMonsterRace : MonsterRace
     public override int Rarity => 4;
     public override int Sleep => 20;
     public override int Speed => 120;
-    public override string SplitName1 => "  Greater   ";
-    public override string SplitName2 => "    wall    ";
-    public override string SplitName3 => "  monster   ";
+    public override string? MultilineName => "Greater\nwall\nmonster";
 }

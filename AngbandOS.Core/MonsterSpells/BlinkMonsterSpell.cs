@@ -17,13 +17,13 @@ internal class BlinkMonsterSpell : MonsterSpell
     public override string? VsPlayerBlindMessage => $"You hear someone blink away.";
     public override string? VsPlayerActionMessage(Monster monster) => monster.IsVisible ? $"{monster.Name} blinks away." : null;
 
-    public override void ExecuteOnPlayer(Game game, Monster monster)
+    public override void ExecuteOnPlayer(Monster monster)
     {
-        monster.TeleportAway(game, 10);
+        monster.TeleportAway(10);
     }
 
-    public override void ExecuteOnMonster(Game game, Monster monster, Monster target)
+    public override void ExecuteOnMonster(Monster monster, Monster target)
     {
-        monster.TeleportAway(game, 10);
+        monster.TeleportAway(10);
     }
 }

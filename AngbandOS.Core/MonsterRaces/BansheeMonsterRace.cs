@@ -19,8 +19,7 @@ internal class BansheeMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperGSymbol);
     public override ColorEnum Color => ColorEnum.BrightBlue;
-    public override string Name => "Banshee";
-
+    
     public override int ArmorClass => 24;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -50,9 +49,7 @@ internal class BansheeMonsterRace : MonsterRace
     public override int Rarity => 2;
     public override int Sleep => 10;
     public override int Speed => 120;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "            ";
-    public override string SplitName3 => "  Banshee   ";
+    public override string? MultilineName => "Banshee";
     public override bool TakeItem => true;
     public override bool Undead => true;
 }

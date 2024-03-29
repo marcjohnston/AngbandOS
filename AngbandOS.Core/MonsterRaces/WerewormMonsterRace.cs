@@ -14,8 +14,7 @@ internal class WerewormMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerWSymbol);
     public override ColorEnum Color => ColorEnum.Brown;
-    public override string Name => "Wereworm";
-
+    
     public override bool Animal => true;
     public override int ArmorClass => 70;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
@@ -40,7 +39,5 @@ internal class WerewormMonsterRace : MonsterRace
     public override int Rarity => 3;
     public override int Sleep => 20;
     public override int Speed => 110;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "            ";
-    public override string SplitName3 => "  Wereworm  ";
+    public override string? MultilineName => "Wereworm";
 }

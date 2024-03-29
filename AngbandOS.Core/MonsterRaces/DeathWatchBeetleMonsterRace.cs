@@ -14,8 +14,7 @@ internal class DeathWatchBeetleMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperKSymbol);
     public override ColorEnum Color => ColorEnum.BrightBrown;
-    public override string Name => "Death watch beetle";
-
+    
     public override bool Animal => true;
     public override int ArmorClass => 60;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
@@ -36,8 +35,6 @@ internal class DeathWatchBeetleMonsterRace : MonsterRace
     public override int Rarity => 3;
     public override int Sleep => 30;
     public override int Speed => 110;
-    public override string SplitName1 => "   Death    ";
-    public override string SplitName2 => "   watch    ";
-    public override string SplitName3 => "   beetle   ";
+    public override string? MultilineName => "Death\nwatch\nbeetle";
     public override bool WeirdMind => true;
 }

@@ -20,8 +20,7 @@ internal class GibberingMoutherMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerJSymbol);
     public override ColorEnum Color => ColorEnum.Orange;
-    public override string Name => "Gibbering mouther";
-
+    
     public override int ArmorClass => 20;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -45,7 +44,5 @@ internal class GibberingMoutherMonsterRace : MonsterRace
     public override int Rarity => 4;
     public override int Sleep => 20;
     public override int Speed => 110;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => " Gibbering  ";
-    public override string SplitName3 => "  mouther   ";
+    public override string? MultilineName => "Gibbering\nmouther";
 }

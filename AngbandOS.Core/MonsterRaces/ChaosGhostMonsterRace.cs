@@ -21,8 +21,7 @@ internal class ChaosGhostMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperGSymbol);
     public override ColorEnum Color => ColorEnum.Purple;
-    public override string Name => "Chaos ghost";
-
+    
     public override int ArmorClass => 30;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -57,9 +56,7 @@ internal class ChaosGhostMonsterRace : MonsterRace
     public override int Rarity => 3;
     public override int Sleep => 10;
     public override int Speed => 120;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "   Chaos    ";
-    public override string SplitName3 => "   ghost    ";
+    public override string? MultilineName => "Chaos\nghost";
     public override bool TakeItem => true;
     public override bool Undead => true;
 }

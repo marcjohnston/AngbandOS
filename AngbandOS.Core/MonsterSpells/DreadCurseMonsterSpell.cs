@@ -16,29 +16,29 @@ internal class DreadCurseMonsterSpell : MonsterSpell
     public override string? VsPlayerActionMessage(Monster monster) => $"{monster.Name} invokes the Dread Curse of Azathoth!";
     public override string? VsMonsterSeenMessage(Monster monster, Monster target) => $"{monster.Name} invokes the Dread Curse of Azathoth on {target.Name}";
 
-    public override void ExecuteOnPlayer(Game game, Monster monster)
+    public override void ExecuteOnPlayer(Monster monster)
     {
-        if (Game.RandomLessThan(100) < game.SkillSavingThrow)
+        if (base.Game.RandomLessThan(100) < Game.SkillSavingThrow)
         {
-            game.MsgPrint("You resist the effects!");
+            Game.MsgPrint("You resist the effects!");
         }
         else
         {
-            int dummy = (65 + Game.DieRoll(25)) * game.Health.Value / 100;
-            game.MsgPrint("Your feel your life fade away!");
-            game.TakeHit(dummy, monster.Name);
-            game.CurseEquipment(100, 20);
-            if (game.Health.Value < 1)
+            int dummy = (65 + base.Game.DieRoll(25)) * Game.Health.Value / 100;
+            Game.MsgPrint("Your feel your life fade away!");
+            Game.TakeHit(dummy, monster.Name);
+            Game.CurseEquipment(100, 20);
+            if (Game.Health.Value < 1)
             {
-                game.Health.Value = 1;
+                Game.Health.Value = 1;
             }
         }
     }
 
-    public override void ExecuteOnMonster(Game game, Monster monster, Monster target)
+    public override void ExecuteOnMonster(Monster monster, Monster target)
     {
         string targetName = target.Name;
-        bool blind = game.BlindnessTimer.Value != 0;
+        bool blind = Game.BlindnessTimer.Value != 0;
         bool seeTarget = !blind && target.IsVisible;
         MonsterRace targetRace = target.Race;
 
@@ -46,14 +46,14 @@ internal class DreadCurseMonsterSpell : MonsterSpell
         {
             if (!blind && seeTarget)
             {
-                game.MsgPrint($"{targetName} is unaffected!");
+                Game.MsgPrint($"{targetName} is unaffected!");
             }
         }
         else
         {
-            if (monster.Race.Level + Game.DieRoll(20) > targetRace.Level + 10 + Game.DieRoll(20))
+            if (monster.Race.Level + base.Game.DieRoll(20) > targetRace.Level + 10 + base.Game.DieRoll(20))
             {
-                target.Health -= (65 + Game.DieRoll(25)) * target.Health / 100;
+                target.Health -= (65 + base.Game.DieRoll(25)) * target.Health / 100;
                 if (target.Health < 1)
                 {
                     target.Health = 1;
@@ -63,7 +63,7 @@ internal class DreadCurseMonsterSpell : MonsterSpell
             {
                 if (seeTarget)
                 {
-                    game.MsgPrint($"{targetName} resists!");
+                    Game.MsgPrint($"{targetName} resists!");
                 }
             }
         }

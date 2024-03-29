@@ -32,8 +32,7 @@ internal class HasturTheUnspeakableMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperXSymbol);
     public override ColorEnum Color => ColorEnum.Blue;
-    public override string Name => "Hastur the Unspeakable";
-
+    
     public override int ArmorClass => 150;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -77,8 +76,6 @@ internal class HasturTheUnspeakableMonsterRace : MonsterRace
     public override int Sleep => 10;
     public override bool Smart => true;
     public override int Speed => 120;
-    public override string SplitName1 => "   Hastur   ";
-    public override string SplitName2 => "    the     ";
-    public override string SplitName3 => "Unspeakable ";
+    public override string? MultilineName => "Hastur\nthe\nUnspeakable";
     public override bool Unique => true;
 }

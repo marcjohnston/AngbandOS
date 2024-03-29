@@ -32,7 +32,7 @@ internal class Quest
     {
         string buf;
         MonsterRace rPtr = Game.SingletonRepository.MonsterRaces[RIdx];
-        string name = rPtr.Name;
+        string name = rPtr.FriendlyName;
         int qNum = ToKill;
         string dunName = Dungeon.Name;
         int lev = Level;

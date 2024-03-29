@@ -17,8 +17,7 @@ internal class GiantWhiteDragonFlyMonsterRace : MonsterRace
     };
 
     protected override string SymbolName => nameof(UpperFSymbol);
-    public override string Name => "Giant white dragon fly";
-
+    
     public override bool Animal => true;
     public override int ArmorClass => 20;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
@@ -41,8 +40,6 @@ internal class GiantWhiteDragonFlyMonsterRace : MonsterRace
     public override int Rarity => 3;
     public override int Sleep => 50;
     public override int Speed => 110;
-    public override string SplitName1 => "Giant white ";
-    public override string SplitName2 => "   dragon   ";
-    public override string SplitName3 => "    fly     ";
+    public override string? MultilineName => "Giant white\ndragon\nfly";
     public override bool WeirdMind => true;
 }

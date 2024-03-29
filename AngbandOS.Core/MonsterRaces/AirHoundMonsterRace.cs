@@ -18,8 +18,7 @@ internal class AirHoundMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperZSymbol);
     public override ColorEnum Color => ColorEnum.BrightBlue;
-    public override string Name => "Air hound";
-
+    
     public override bool Animal => true;
     public override int ArmorClass => 30;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
@@ -45,7 +44,5 @@ internal class AirHoundMonsterRace : MonsterRace
     public override int Rarity => 1;
     public override int Sleep => 0;
     public override int Speed => 110;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "    Air     ";
-    public override string SplitName3 => "   hound    ";
+    public override string? MultilineName => "Air\nhound";
 }

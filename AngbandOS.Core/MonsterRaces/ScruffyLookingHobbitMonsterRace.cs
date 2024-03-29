@@ -14,8 +14,7 @@ internal class ScruffyLookingHobbitMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerHSymbol);
     public override ColorEnum Color => ColorEnum.BrightOrange;
-    public override string Name => "Scruffy looking hobbit";
-
+    
     public override int ArmorClass => 8;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -39,8 +38,6 @@ internal class ScruffyLookingHobbitMonsterRace : MonsterRace
     public override int Rarity => 1;
     public override int Sleep => 10;
     public override int Speed => 110;
-    public override string SplitName1 => "  Scruffy   ";
-    public override string SplitName2 => "  looking   ";
-    public override string SplitName3 => "   hobbit   ";
+    public override string? MultilineName => "Scruffy\nlooking\nhobbit";
     public override bool TakeItem => true;
 }

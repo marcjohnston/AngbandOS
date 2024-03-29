@@ -28,8 +28,7 @@ internal class TulzschaMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperXSymbol);
     public override ColorEnum Color => ColorEnum.Chartreuse;
-    public override string Name => "Tulzscha";
-
+    
     public override int ArmorClass => 170;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -74,9 +73,7 @@ internal class TulzschaMonsterRace : MonsterRace
     public override int Sleep => 10;
     public override bool Smart => true;
     public override int Speed => 130;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "            ";
-    public override string SplitName3 => "  Tulzscha  ";
+    public override string? MultilineName => "Tulzscha";
     public override bool TakeItem => true;
     public override bool Unique => true;
 }

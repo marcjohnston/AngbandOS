@@ -21,13 +21,13 @@ internal class WaterProjectile : Projectile
         bool obvious = false;
         string? note = null;
         MonsterRace rPtr = mPtr.Race;
-        string name = rPtr.Name;
+        string name = rPtr.FriendlyName;
         bool seen = mPtr.IsVisible;
         if (seen)
         {
             obvious = true;
         }
-        if (rPtr.Symbol.Character == 'E' && (name.StartsWith("W") || rPtr.Name.Contains("Unmaker")))
+        if (rPtr.Symbol.Character == 'E' && (name.StartsWith("W") || rPtr.FriendlyName.Contains("Unmaker")))
         {
             note = " is immune.";
             dam = 0;

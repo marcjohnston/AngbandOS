@@ -21,6 +21,11 @@ public class MonsterRaceDefinition : IPoco
     public virtual string[]? SpellNames { get; set; } = null;
 
     /// <summary>
+    /// Returns a multiline version of the monster race that is shown to the player.  Defaults to the <see cref="FriendlyName"/>.  Word-breaks are encoded with a \n character.
+    /// </summary>
+    public virtual string? MultilineName { get; set; }
+
+    /// <summary>
     /// Returns the key for the symbol to be used.  The actual Symbol object is bound to the Symbol property during the
     /// bind phase.
     /// </summary>
@@ -30,11 +35,6 @@ public class MonsterRaceDefinition : IPoco
     /// The color to display the monster as.
     /// </summary>
     public virtual ColorEnum Color { get; set; } = ColorEnum.White;
-
-    /// <summary>
-    /// A unique identifier for the entity
-    /// </summary>
-    public virtual string Name { get; set; }
 
     /// <summary>
     /// The monster is an animal.
@@ -328,21 +328,6 @@ public class MonsterRaceDefinition : IPoco
     /// </summary>
     public virtual int Speed { get; set; }
 
-    /// <summary>
-    /// The shortened name of the monster.
-    /// </summary>
-    public virtual string SplitName1 { get; set; }
-
-    /// <summary>
-    /// The shortened name of the monster.
-    /// </summary>
-    public virtual string SplitName2 { get; set; }
-
-    /// <summary>
-    /// The shortened name of the monster.
-    /// </summary>
-    public virtual string SplitName3 { get; set; }
-
     public virtual bool Stupid { get; set; } = false;
 
     public virtual bool TakeItem { get; set; } = false;
@@ -361,7 +346,6 @@ public class MonsterRaceDefinition : IPoco
         if (Key == null ||
             SymbolName == null ||
             Color == null ||
-            Name == null ||
             Animal == null ||
             ArmorClass == null ||
             AttrAny == null ||
@@ -449,9 +433,6 @@ public class MonsterRaceDefinition : IPoco
             Sleep == null ||
             Smart == null ||
             Speed == null ||
-            SplitName1 == null ||
-            SplitName2 == null ||
-            SplitName3 == null ||
             Stupid == null ||
             TakeItem == null ||
             Troll == null ||

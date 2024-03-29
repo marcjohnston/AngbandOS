@@ -14,8 +14,7 @@ internal class AvatarOfNyarlathotepMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerPSymbol);
     public override ColorEnum Color => ColorEnum.BrightRed;
-    public override string Name => "Avatar of Nyarlathotep";
-
+    
     public override int ArmorClass => 70;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -47,7 +46,5 @@ internal class AvatarOfNyarlathotepMonsterRace : MonsterRace
     public override bool Shapechanger => true;
     public override int Sleep => 20;
     public override int Speed => 120;
-    public override string SplitName1 => "   Avatar   ";
-    public override string SplitName2 => "     of     ";
-    public override string SplitName3 => "Nyarlathotep";
+    public override string? MultilineName => "Avatar\nof\nNyarlathotep";
 }

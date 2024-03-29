@@ -25,8 +25,7 @@ internal class TheLerneanHydraMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperMSymbol);
     public override ColorEnum Color => ColorEnum.BrightTurquoise;
-    public override string Name => "The Lernean Hydra";
-
+    
     public override bool Animal => true;
     public override int ArmorClass => 140;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
@@ -62,8 +61,6 @@ internal class TheLerneanHydraMonsterRace : MonsterRace
     public override int Sleep => 20;
     public override bool Smart => true;
     public override int Speed => 120;
-    public override string SplitName1 => "    The     ";
-    public override string SplitName2 => "  Lernean   ";
-    public override string SplitName3 => "   Hydra    ";
+    public override string? MultilineName => "The\nLernean\nHydra";
     public override bool Unique => true;
 }

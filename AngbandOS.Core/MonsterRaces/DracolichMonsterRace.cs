@@ -21,8 +21,7 @@ internal class DracolichMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperDSymbol);
     public override ColorEnum Color => ColorEnum.BrightBeige;
-    public override string Name => "Dracolich";
-
+    
     public override int ArmorClass => 120;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -60,9 +59,7 @@ internal class DracolichMonsterRace : MonsterRace
     public override bool ResistTeleport => true;
     public override int Sleep => 30;
     public override int Speed => 120;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "            ";
-    public override string SplitName3 => " Dracolich  ";
+    public override string? MultilineName => "Dracolich";
     public override bool TakeItem => true;
     public override bool Undead => true;
 }

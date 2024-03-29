@@ -14,8 +14,7 @@ internal class SasquatchMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperYSymbol);
     public override ColorEnum Color => ColorEnum.BrightWhite;
-    public override string Name => "Sasquatch";
-
+    
     public override bool Animal => true;
     public override int ArmorClass => 40;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
@@ -39,7 +38,5 @@ internal class SasquatchMonsterRace : MonsterRace
     public override int Rarity => 3;
     public override int Sleep => 10;
     public override int Speed => 120;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "            ";
-    public override string SplitName3 => " Sasquatch  ";
+    public override string? MultilineName => "Sasquatch";
 }

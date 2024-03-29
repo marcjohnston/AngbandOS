@@ -14,8 +14,7 @@ internal class HillGiantMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperPSymbol);
     public override ColorEnum Color => ColorEnum.BrightBrown;
-    public override string Name => "Hill giant";
-
+    
     public override int ArmorClass => 45;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -40,7 +39,5 @@ internal class HillGiantMonsterRace : MonsterRace
     public override int Rarity => 1;
     public override int Sleep => 50;
     public override int Speed => 110;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "    Hill    ";
-    public override string SplitName3 => "   giant    ";
+    public override string? MultilineName => "Hill\ngiant";
 }

@@ -14,8 +14,7 @@ internal class GremlinMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerUSymbol);
     public override ColorEnum Color => ColorEnum.BrightChartreuse;
-    public override string Name => "Gremlin";
-
+    
     public override int ArmorClass => 30;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -41,8 +40,6 @@ internal class GremlinMonsterRace : MonsterRace
     public override int Rarity => 3;
     public override int Sleep => 20;
     public override int Speed => 110;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "            ";
-    public override string SplitName3 => "  Gremlin   ";
+    public override string? MultilineName => "Gremlin";
     public override bool TakeItem => true;
 }

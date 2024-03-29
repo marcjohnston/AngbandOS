@@ -20,8 +20,7 @@ internal class TheInsaneCrusaderMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerPSymbol);
     public override ColorEnum Color => ColorEnum.BrightYellow;
-    public override string Name => "The Insane Crusader";
-
+    
     public override int ArmorClass => 100;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -58,8 +57,6 @@ internal class TheInsaneCrusaderMonsterRace : MonsterRace
     public override int Rarity => 2;
     public override int Sleep => 10;
     public override int Speed => 120;
-    public override string SplitName1 => "    The     ";
-    public override string SplitName2 => "   Insane   ";
-    public override string SplitName3 => "  Crusader  ";
+    public override string? MultilineName => "The\nInsane\nCrusader";
     public override bool Unique => true;
 }

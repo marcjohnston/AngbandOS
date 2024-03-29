@@ -19,8 +19,7 @@ internal class BlinkDogMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperCSymbol);
     public override ColorEnum Color => ColorEnum.BrightBlue;
-    public override string Name => "Blink dog";
-
+    
     public override bool Animal => true;
     public override int ArmorClass => 20;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
@@ -43,7 +42,5 @@ internal class BlinkDogMonsterRace : MonsterRace
     public override bool ResistTeleport => true;
     public override int Sleep => 10;
     public override int Speed => 120;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "   Blink    ";
-    public override string SplitName3 => "    dog     ";
+    public override string? MultilineName => "Blink\ndog";
 }

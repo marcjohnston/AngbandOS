@@ -25,8 +25,7 @@ internal class AntiPaladinMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerPSymbol);
     public override ColorEnum Color => ColorEnum.Grey;
-    public override string Name => "Anti-paladin";
-
+    
     public override int ArmorClass => 50;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -56,8 +55,6 @@ internal class AntiPaladinMonsterRace : MonsterRace
     public override int Rarity => 2;
     public override int Sleep => 30;
     public override int Speed => 120;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "            ";
-    public override string SplitName3 => "Anti-paladin";
+    public override string? MultilineName => "Anti-paladin";
     public override bool TakeItem => true;
 }

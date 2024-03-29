@@ -14,8 +14,7 @@ internal class GreenGluttonGhostMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperGSymbol);
     public override ColorEnum Color => ColorEnum.Green;
-    public override string Name => "Green glutton ghost";
-
+    
     public override int ArmorClass => 20;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -43,8 +42,6 @@ internal class GreenGluttonGhostMonsterRace : MonsterRace
     public override int Rarity => 1;
     public override int Sleep => 10;
     public override int Speed => 130;
-    public override string SplitName1 => "   Green    ";
-    public override string SplitName2 => "  glutton   ";
-    public override string SplitName3 => "   ghost    ";
+    public override string? MultilineName => "Green\nglutton\nghost";
     public override bool Undead => true;
 }

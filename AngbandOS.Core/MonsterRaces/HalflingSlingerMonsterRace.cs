@@ -18,8 +18,7 @@ internal class HalflingSlingerMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerHSymbol);
     public override ColorEnum Color => ColorEnum.BrightBrown;
-    public override string Name => "Halfling slinger";
-
+    
     public override int ArmorClass => 40;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -47,7 +46,5 @@ internal class HalflingSlingerMonsterRace : MonsterRace
     public override int Sleep => 30;
     public override bool Smart => true;
     public override int Speed => 110;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "  Halfling  ";
-    public override string SplitName3 => "  slinger   ";
+    public override string? MultilineName => "Halfling\nslinger";
 }

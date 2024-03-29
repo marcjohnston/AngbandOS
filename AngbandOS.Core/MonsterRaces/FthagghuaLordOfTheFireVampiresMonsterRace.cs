@@ -23,8 +23,7 @@ internal class FthagghuaLordOfTheFireVampiresMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperXSymbol);
     public override ColorEnum Color => ColorEnum.BrightRed;
-    public override string Name => "Fthagghua, Lord of the fire vampires";
-
+    
     public override int ArmorClass => 160;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -67,9 +66,7 @@ internal class FthagghuaLordOfTheFireVampiresMonsterRace : MonsterRace
     public override int Sleep => 10;
     public override bool Smart => true;
     public override int Speed => 130;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "            ";
-    public override string SplitName3 => " Fthagghua  ";
+    public override string? MultilineName => "Fthagghua";
     public override bool TakeItem => true;
     public override bool Unique => true;
 }

@@ -14,8 +14,7 @@ internal class HoboMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerTSymbol);
     public override ColorEnum Color => ColorEnum.Green;
-    public override string Name => "Hobo";
-
+    
     public override int ArmorClass => 1;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -37,8 +36,6 @@ internal class HoboMonsterRace : MonsterRace
     public override int Rarity => 1;
     public override int Sleep => 0;
     public override int Speed => 110;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "            ";
-    public override string SplitName3 => "    Hobo    ";
+    public override string? MultilineName => "Hobo";
     public override bool TakeItem => true;
 }

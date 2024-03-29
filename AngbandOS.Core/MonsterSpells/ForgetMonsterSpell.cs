@@ -15,21 +15,21 @@ internal class ForgetMonsterSpell : MonsterSpell
 
     public override string? VsPlayerBlindMessage => $"Someone tries to blank your mind.";
     public override string? VsPlayerActionMessage(Monster monster) => $"{monster.Name} tries to blank your mind.";
-    public override void ExecuteOnPlayer(Game game, Monster monster)
+    public override void ExecuteOnPlayer(Monster monster)
     {
         string monsterName = monster.Name;
 
-        if (Game.RandomLessThan(100) < game.SkillSavingThrow)
+        if (Game.RandomLessThan(100) < Game.SkillSavingThrow)
         {
-            game.MsgPrint("You resist the effects!");
+            Game.MsgPrint("You resist the effects!");
         }
-        else if (game.LoseAllInfo())
+        else if (Game.LoseAllInfo())
         {
-            game.MsgPrint("Your memories fade away.");
+            Game.MsgPrint("Your memories fade away.");
         }
     }
 
-    public override void ExecuteOnMonster(Game game, Monster monster, Monster target)
+    public override void ExecuteOnMonster(Monster monster, Monster target)
     {
     }
 }

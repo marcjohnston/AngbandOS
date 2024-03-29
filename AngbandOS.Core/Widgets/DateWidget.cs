@@ -52,7 +52,7 @@ internal abstract class DateWidget : TextWidget
         if (DateTimeChangeTracking.IsChanged)
         {
             // It has, invalidate the widget.
-            base.Invalidate();
+            Invalidate();
         }
 
         // Update the widget.

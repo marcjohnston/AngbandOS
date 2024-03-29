@@ -14,8 +14,7 @@ internal class AimlessLookingMerchantMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerTSymbol);
     public override ColorEnum Color => ColorEnum.Orange;
-    public override string Name => "Aimless looking merchant";
-
+    
     public override int ArmorClass => 1;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -39,8 +38,6 @@ internal class AimlessLookingMerchantMonsterRace : MonsterRace
     public override int Rarity => 1;
     public override int Sleep => 255;
     public override int Speed => 110;
-    public override string SplitName1 => "  Aimless   ";
-    public override string SplitName2 => "  looking   ";
-    public override string SplitName3 => "  merchant  ";
+    public override string? MultilineName => "Aimless\nlooking\nmerchant";
     public override bool TakeItem => true;
 }

@@ -14,8 +14,7 @@ internal class DisplacerBeastMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerFSymbol);
     public override ColorEnum Color => ColorEnum.Blue;
-    public override string Name => "Displacer beast";
-
+    
     public override bool Animal => true;
     public override int ArmorClass => 100;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
@@ -39,7 +38,5 @@ internal class DisplacerBeastMonsterRace : MonsterRace
     public override int Rarity => 2;
     public override int Sleep => 20;
     public override int Speed => 110;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => " Displacer  ";
-    public override string SplitName3 => "   beast    ";
+    public override string? MultilineName => "Displacer\nbeast";
 }

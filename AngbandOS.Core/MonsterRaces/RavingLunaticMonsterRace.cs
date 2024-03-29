@@ -14,8 +14,7 @@ internal class RavingLunaticMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerTSymbol);
     public override ColorEnum Color => ColorEnum.BrightGreen;
-    public override string Name => "Raving lunatic";
-
+    
     public override int ArmorClass => 1;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -35,8 +34,6 @@ internal class RavingLunaticMonsterRace : MonsterRace
     public override int Rarity => 1;
     public override int Sleep => 0;
     public override int Speed => 120;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "   Raving   ";
-    public override string SplitName3 => "  lunatic   ";
+    public override string? MultilineName => "Raving\nlunatic";
     public override bool TakeItem => true;
 }

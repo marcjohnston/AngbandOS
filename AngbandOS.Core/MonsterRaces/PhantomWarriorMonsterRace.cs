@@ -14,8 +14,7 @@ internal class PhantomWarriorMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperGSymbol);
     public override ColorEnum Color => ColorEnum.BrightTurquoise;
-    public override string Name => "Phantom warrior";
-
+    
     public override int ArmorClass => 10;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -41,7 +40,5 @@ internal class PhantomWarriorMonsterRace : MonsterRace
     public override int Rarity => 1;
     public override int Sleep => 40;
     public override int Speed => 110;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "  Phantom   ";
-    public override string SplitName3 => "  warrior   ";
+    public override string? MultilineName => "Phantom\nwarrior";
 }

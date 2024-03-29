@@ -14,8 +14,7 @@ internal class GolfimbulTheHillOrcChiefMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerOSymbol);
     public override ColorEnum Color => ColorEnum.Copper;
-    public override string Name => "Golfimbul, the Hill Orc Chief";
-
+    
     public override int ArmorClass => 60;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -50,8 +49,6 @@ internal class GolfimbulTheHillOrcChiefMonsterRace : MonsterRace
     public override int Rarity => 3;
     public override int Sleep => 20;
     public override int Speed => 110;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "            ";
-    public override string SplitName3 => " Golfimbul  ";
+    public override string? MultilineName => "Golfimbul";
     public override bool Unique => true;
 }

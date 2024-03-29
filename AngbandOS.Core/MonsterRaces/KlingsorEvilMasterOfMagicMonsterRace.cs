@@ -31,8 +31,7 @@ internal class KlingsorEvilMasterOfMagicMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerPSymbol);
     public override ColorEnum Color => ColorEnum.Yellow;
-    public override string Name => "Klingsor, Evil Master of Magic";
-
+    
     public override int ArmorClass => 100;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -72,8 +71,6 @@ internal class KlingsorEvilMasterOfMagicMonsterRace : MonsterRace
     public override int Sleep => 10;
     public override bool Smart => true;
     public override int Speed => 130;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "            ";
-    public override string SplitName3 => "  Klingsor  ";
+    public override string? MultilineName => "Klingsor";
     public override bool Unique => true;
 }

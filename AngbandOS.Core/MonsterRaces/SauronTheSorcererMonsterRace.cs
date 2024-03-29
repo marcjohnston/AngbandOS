@@ -38,8 +38,7 @@ internal class SauronTheSorcererMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerPSymbol);
     public override ColorEnum Color => ColorEnum.Gold;
-    public override string Name => "Sauron, the Sorcerer";
-
+    
     public override int ArmorClass => 160;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -84,8 +83,6 @@ internal class SauronTheSorcererMonsterRace : MonsterRace
     public override int Sleep => 0;
     public override bool Smart => true;
     public override int Speed => 130;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "            ";
-    public override string SplitName3 => "   Sauron   ";
+    public override string? MultilineName => "Sauron";
     public override bool Unique => true;
 }

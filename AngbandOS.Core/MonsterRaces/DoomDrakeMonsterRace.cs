@@ -18,8 +18,7 @@ internal class DoomDrakeMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerDSymbol);
     public override ColorEnum Color => ColorEnum.Beige;
-    public override string Name => "Doom drake";
-
+    
     public override int ArmorClass => 100;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -52,7 +51,5 @@ internal class DoomDrakeMonsterRace : MonsterRace
     public override int Rarity => 3;
     public override int Sleep => 30;
     public override int Speed => 110;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "    Doom    ";
-    public override string SplitName3 => "   drake    ";
+    public override string? MultilineName => "Doom\ndrake";
 }

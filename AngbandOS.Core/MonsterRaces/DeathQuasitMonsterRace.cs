@@ -22,8 +22,7 @@ internal class DeathQuasitMonsterRace : MonsterRace
     };
 
     protected override string SymbolName => nameof(LowerUSymbol);
-    public override string Name => "Death quasit";
-
+    
     public override int ArmorClass => 80;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -61,7 +60,5 @@ internal class DeathQuasitMonsterRace : MonsterRace
     public override int Sleep => 0;
     public override bool Smart => true;
     public override int Speed => 130;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "   Death    ";
-    public override string SplitName3 => "   quasit   ";
+    public override string? MultilineName => "Death\nquasit";
 }

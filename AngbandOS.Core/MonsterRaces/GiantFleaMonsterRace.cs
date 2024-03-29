@@ -14,8 +14,7 @@ internal class GiantFleaMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperISymbol);
     public override ColorEnum Color => ColorEnum.Grey;
-    public override string Name => "Giant flea";
-
+    
     public override bool Animal => true;
     public override int ArmorClass => 7;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
@@ -36,8 +35,6 @@ internal class GiantFleaMonsterRace : MonsterRace
     public override int Rarity => 1;
     public override int Sleep => 10;
     public override int Speed => 120;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "   Giant    ";
-    public override string SplitName3 => "    flea    ";
+    public override string? MultilineName => "Giant\nflea";
     public override bool WeirdMind => true;
 }

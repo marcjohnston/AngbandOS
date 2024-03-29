@@ -43,8 +43,7 @@ internal class GreatCthulhuMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperXSymbol);
     public override ColorEnum Color => ColorEnum.Green;
-    public override string Name => "Great Cthulhu";
-
+    
     public override int ArmorClass => 140;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -97,8 +96,6 @@ internal class GreatCthulhuMonsterRace : MonsterRace
     public override int Sleep => 100;
     public override bool Smart => true;
     public override int Speed => 130;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "   Great    ";
-    public override string SplitName3 => "  Cthulhu   ";
+    public override string? MultilineName => "Great\nCthulhu";
     public override bool Unique => true;
 }

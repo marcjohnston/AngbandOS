@@ -23,8 +23,7 @@ internal class AncalagonTheBlackMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperDSymbol);
     public override ColorEnum Color => ColorEnum.Black;
-    public override string Name => "Ancalagon the Black";
-
+    
     public override int ArmorClass => 125;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -62,8 +61,6 @@ internal class AncalagonTheBlackMonsterRace : MonsterRace
     public override int Rarity => 3;
     public override int Sleep => 70;
     public override int Speed => 120;
-    public override string SplitName1 => " Ancalagon  ";
-    public override string SplitName2 => "    the     ";
-    public override string SplitName3 => "   Black    ";
+    public override string? MultilineName => "Ancalagon\nthe\nBlack";
     public override bool Unique => true;
 }

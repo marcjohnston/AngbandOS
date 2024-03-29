@@ -37,7 +37,7 @@ internal class OldHealProjectile : Projectile
         {
             mPtr.Health = mPtr.MaxHealth;
         }
-        if (Game.TrackedMonsterIndex == cPtr.MonsterIndex)
+        if (Game.TrackedMonsterIndex != null && Game.TrackedMonsterIndex.Value == cPtr.MonsterIndex)
         {
             Game.SingletonRepository.FlaggedActions.Get(nameof(RedrawMonsterHealthFlaggedAction)).Set();
         }

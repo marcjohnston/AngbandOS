@@ -21,8 +21,7 @@ internal class GreatStormWyrmMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperDSymbol);
     public override ColorEnum Color => ColorEnum.BrightTurquoise;
-    public override string Name => "Great storm wyrm";
-
+    
     public override int ArmorClass => 150;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -58,7 +57,5 @@ internal class GreatStormWyrmMonsterRace : MonsterRace
     public override int Rarity => 2;
     public override int Sleep => 80;
     public override int Speed => 120;
-    public override string SplitName1 => "   Great    ";
-    public override string SplitName2 => "   storm    ";
-    public override string SplitName3 => "    wyrm    ";
+    public override string? MultilineName => "Great\nstorm\nwyrm";
 }

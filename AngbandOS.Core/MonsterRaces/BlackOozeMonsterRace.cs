@@ -18,8 +18,7 @@ internal class BlackOozeMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerJSymbol);
     public override ColorEnum Color => ColorEnum.Grey;
-    public override string Name => "Black ooze";
-
+    
     public override int ArmorClass => 6;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -46,9 +45,7 @@ internal class BlackOozeMonsterRace : MonsterRace
     public override int Rarity => 1;
     public override int Sleep => 1;
     public override int Speed => 90;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "   Black    ";
-    public override string SplitName3 => "    ooze    ";
+    public override string? MultilineName => "Black\nooze";
     public override bool Stupid => true;
     public override bool TakeItem => true;
 }

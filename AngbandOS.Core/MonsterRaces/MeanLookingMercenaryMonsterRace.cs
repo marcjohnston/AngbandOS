@@ -14,8 +14,7 @@ internal class MeanLookingMercenaryMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerTSymbol);
     public override ColorEnum Color => ColorEnum.BrightRed;
-    public override string Name => "Mean looking mercenary";
-
+    
     public override int ArmorClass => 20;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -39,8 +38,6 @@ internal class MeanLookingMercenaryMonsterRace : MonsterRace
     public override int Rarity => 1;
     public override int Sleep => 250;
     public override int Speed => 110;
-    public override string SplitName1 => "    Mean    ";
-    public override string SplitName2 => "  looking   ";
-    public override string SplitName3 => " mercenary  ";
+    public override string? MultilineName => "Mean\nlooking\nmercenary";
     public override bool TakeItem => true;
 }

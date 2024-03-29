@@ -1355,7 +1355,7 @@ internal class MonsterKnowledge
         {
             Game.Screen.Print(ColorEnum.White, "The ");
         }
-        Game.Screen.Print(ColorEnum.White, _monsterType.Name);
+        Game.Screen.Print(ColorEnum.White, _monsterType.FriendlyName);
         Game.Screen.Print(ColorEnum.White, " ('");
         Game.Screen.Print(a1, c1.ToString());
         Game.Screen.Print(ColorEnum.White, "')");

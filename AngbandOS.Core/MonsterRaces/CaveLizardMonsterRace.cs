@@ -14,8 +14,7 @@ internal class CaveLizardMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperRSymbol);
     public override ColorEnum Color => ColorEnum.Brown;
-    public override string Name => "Cave lizard";
-
+    
     public override bool Animal => true;
     public override int ArmorClass => 16;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
@@ -34,7 +33,5 @@ internal class CaveLizardMonsterRace : MonsterRace
     public override int Rarity => 1;
     public override int Sleep => 80;
     public override int Speed => 110;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "    Cave    ";
-    public override string SplitName3 => "   lizard   ";
+    public override string? MultilineName => "Cave\nlizard";
 }

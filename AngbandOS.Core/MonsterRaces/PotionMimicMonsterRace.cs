@@ -21,8 +21,7 @@ internal class PotionMimicMonsterRace : MonsterRace
     };
 
     protected override string SymbolName => nameof(ExclamationPointSymbol);
-    public override string Name => "Potion mimic";
-
+    
     public override int ArmorClass => 30;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -50,7 +49,5 @@ internal class PotionMimicMonsterRace : MonsterRace
     public override int Rarity => 3;
     public override int Sleep => 0;
     public override int Speed => 110;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "   Potion   ";
-    public override string SplitName3 => "   mimic    ";
+    public override string? MultilineName => "Potion\nmimic";
 }

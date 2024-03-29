@@ -14,8 +14,7 @@ internal class NibelungMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerHSymbol);
     public override ColorEnum Color => ColorEnum.Silver;
-    public override string Name => "Nibelung";
-
+    
     public override int ArmorClass => 12;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -42,8 +41,6 @@ internal class NibelungMonsterRace : MonsterRace
     public override bool ResistDisenchant => true;
     public override int Sleep => 5;
     public override int Speed => 110;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "            ";
-    public override string SplitName3 => "  Nibelung  ";
+    public override string? MultilineName => "Nibelung";
     public override bool TakeItem => true;
 }

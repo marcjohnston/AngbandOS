@@ -14,8 +14,7 @@ internal class AgentOfTheBlackMarketMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerTSymbol);
     public override ColorEnum Color => ColorEnum.Black;
-    public override string Name => "Agent of the black market";
-
+    
     public override int ArmorClass => 8;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -39,8 +38,6 @@ internal class AgentOfTheBlackMarketMonsterRace : MonsterRace
     public override int Rarity => 1;
     public override int Sleep => 99;
     public override int Speed => 110;
-    public override string SplitName1 => "  Agent of  ";
-    public override string SplitName2 => " the black  ";
-    public override string SplitName3 => "   market   ";
+    public override string? MultilineName => "Agent of\nthe black\nmarket";
     public override bool TakeItem => true;
 }

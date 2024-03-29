@@ -20,8 +20,7 @@ internal class MaulotaurMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperHSymbol);
     public override ColorEnum Color => ColorEnum.Brown;
-    public override string Name => "Maulotaur";
-
+    
     public override int ArmorClass => 50;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -51,8 +50,6 @@ internal class MaulotaurMonsterRace : MonsterRace
     public override bool ResistTeleport => true;
     public override int Sleep => 10;
     public override int Speed => 130;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "            ";
-    public override string SplitName3 => " Maulotaur  ";
+    public override string? MultilineName => "Maulotaur";
     public override bool Stupid => true;
 }

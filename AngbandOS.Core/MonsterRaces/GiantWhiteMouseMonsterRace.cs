@@ -13,8 +13,7 @@ internal class GiantWhiteMouseMonsterRace : MonsterRace
     protected GiantWhiteMouseMonsterRace(Game game) : base(game) { }
 
     protected override string SymbolName => nameof(LowerRSymbol);
-    public override string Name => "Giant white mouse";
-
+    
     public override bool Animal => true;
     public override int ArmorClass => 4;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
@@ -35,7 +34,5 @@ internal class GiantWhiteMouseMonsterRace : MonsterRace
     public override int Rarity => 1;
     public override int Sleep => 20;
     public override int Speed => 110;
-    public override string SplitName1 => "   Giant    ";
-    public override string SplitName2 => "   white    ";
-    public override string SplitName3 => "   mouse    ";
+    public override string? MultilineName => "Giant\nwhite\nmouse";
 }

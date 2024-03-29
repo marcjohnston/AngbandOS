@@ -18,8 +18,7 @@ internal class ColbranMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerGSymbol);
     public override ColorEnum Color => ColorEnum.Blue;
-    public override string Name => "Colbran";
-
+    
     public override int ArmorClass => 80;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -50,7 +49,5 @@ internal class ColbranMonsterRace : MonsterRace
     public override bool Reflecting => true;
     public override int Sleep => 10;
     public override int Speed => 120;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "            ";
-    public override string SplitName3 => "  Colbran   ";
+    public override string? MultilineName => "Colbran";
 }

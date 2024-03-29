@@ -28,8 +28,7 @@ internal class MephistophelesLordOfHellMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperUSymbol);
     public override ColorEnum Color => ColorEnum.Red;
-    public override string Name => "Mephistopheles, Lord of Hell";
-
+    
     public override int ArmorClass => 150;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -74,8 +73,6 @@ internal class MephistophelesLordOfHellMonsterRace : MonsterRace
     public override bool ResistPlasma => true;
     public override int Sleep => 50;
     public override int Speed => 140;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "            ";
-    public override string SplitName3 => "Mephistophel";
+    public override string? MultilineName => "Mephistophel";
     public override bool Unique => true;
 }

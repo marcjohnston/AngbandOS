@@ -14,8 +14,7 @@ internal class DisenchanterWormMassMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerWSymbol);
     public override ColorEnum Color => ColorEnum.Chartreuse;
-    public override string Name => "Disenchanter worm mass";
-
+    
     public override bool Animal => true;
     public override int ArmorClass => 5;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
@@ -41,9 +40,7 @@ internal class DisenchanterWormMassMonsterRace : MonsterRace
     public override bool ResistDisenchant => true;
     public override int Sleep => 10;
     public override int Speed => 100;
-    public override string SplitName1 => "Disenchanter";
-    public override string SplitName2 => "    worm    ";
-    public override string SplitName3 => "    mass    ";
+    public override string? MultilineName => "Disenchanter\nworm\nmass";
     public override bool Stupid => true;
     public override bool WeirdMind => true;
 }

@@ -30,8 +30,7 @@ internal class OmaraxTheEyeTyrantMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerESymbol);
     public override ColorEnum Color => ColorEnum.Yellow;
-    public override string Name => "Omarax the Eye Tyrant";
-
+    
     public override int ArmorClass => 80;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -62,8 +61,6 @@ internal class OmaraxTheEyeTyrantMonsterRace : MonsterRace
     public override int Sleep => 10;
     public override bool Smart => true;
     public override int Speed => 130;
-    public override string SplitName1 => "   Omarax   ";
-    public override string SplitName2 => "  the Eye   ";
-    public override string SplitName3 => "   Tyrant   ";
+    public override string? MultilineName => "Omarax\nthe Eye\nTyrant";
     public override bool Unique => true;
 }

@@ -18,8 +18,7 @@ internal class BlackOrcMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerOSymbol);
     public override ColorEnum Color => ColorEnum.Black;
-    public override string Name => "Black orc";
-
+    
     public override int ArmorClass => 36;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -46,7 +45,5 @@ internal class BlackOrcMonsterRace : MonsterRace
     public override int Rarity => 2;
     public override int Sleep => 20;
     public override int Speed => 110;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "   Black    ";
-    public override string SplitName3 => "    orc     ";
+    public override string? MultilineName => "Black\norc";
 }

@@ -18,8 +18,7 @@ internal class ManticoreMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperHSymbol);
     public override ColorEnum Color => ColorEnum.Orange;
-    public override string Name => "Manticore";
-
+    
     public override int ArmorClass => 15;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -44,7 +43,5 @@ internal class ManticoreMonsterRace : MonsterRace
     public override int Rarity => 2;
     public override int Sleep => 10;
     public override int Speed => 120;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "            ";
-    public override string SplitName3 => " Manticore  ";
+    public override string? MultilineName => "Manticore";
 }

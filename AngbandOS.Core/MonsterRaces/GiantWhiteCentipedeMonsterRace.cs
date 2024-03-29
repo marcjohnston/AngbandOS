@@ -13,8 +13,7 @@ internal class GiantWhiteCentipedeMonsterRace : MonsterRace
     protected GiantWhiteCentipedeMonsterRace(Game game) : base(game) { }
 
     protected override string SymbolName => nameof(LowerCSymbol);
-    public override string Name => "Giant white centipede";
-
+    
     public override bool Animal => true;
     public override int ArmorClass => 10;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
@@ -36,8 +35,6 @@ internal class GiantWhiteCentipedeMonsterRace : MonsterRace
     public override int Rarity => 1;
     public override int Sleep => 40;
     public override int Speed => 110;
-    public override string SplitName1 => "   Giant    ";
-    public override string SplitName2 => "   white    ";
-    public override string SplitName3 => " centipede  ";
+    public override string? MultilineName => "Giant\nwhite\ncentipede";
     public override bool WeirdMind => true;
 }

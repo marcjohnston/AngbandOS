@@ -14,8 +14,7 @@ internal class DeathMoldMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerMSymbol);
     public override ColorEnum Color => ColorEnum.Black;
-    public override string Name => "Death mold";
-
+    
     public override int ArmorClass => 60;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -47,7 +46,5 @@ internal class DeathMoldMonsterRace : MonsterRace
     public override int Rarity => 1;
     public override int Sleep => 0;
     public override int Speed => 140;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "   Death    ";
-    public override string SplitName3 => "    mold    ";
+    public override string? MultilineName => "Death\nmold";
 }

@@ -14,8 +14,7 @@ internal class VermiciousKnidMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperASymbol);
     public override ColorEnum Color => ColorEnum.Brown;
-    public override string Name => "Vermicious Knid";
-
+    
     public override int ArmorClass => 55;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -45,8 +44,6 @@ internal class VermiciousKnidMonsterRace : MonsterRace
     public override int Sleep => 100;
     public override bool Smart => true;
     public override int Speed => 110;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => " Vermicious ";
-    public override string SplitName3 => "    Knid    ";
+    public override string? MultilineName => "Vermicious\nKnid";
     public override bool WeirdMind => true;
 }

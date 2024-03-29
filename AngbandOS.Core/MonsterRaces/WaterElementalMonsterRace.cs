@@ -18,8 +18,7 @@ internal class WaterElementalMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperESymbol);
     public override ColorEnum Color => ColorEnum.Blue;
-    public override string Name => "Water elemental";
-
+    
     public override int ArmorClass => 40;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -52,7 +51,5 @@ internal class WaterElementalMonsterRace : MonsterRace
     public override int Rarity => 2;
     public override int Sleep => 50;
     public override int Speed => 110;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "   Water    ";
-    public override string SplitName3 => " elemental  ";
+    public override string? MultilineName => "Water\nelemental";
 }

@@ -14,8 +14,7 @@ internal class GiantClearCentipedeMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerCSymbol);
     public override ColorEnum Color => ColorEnum.Diamond;
-    public override string Name => "Giant clear centipede";
-
+    
     public override bool Animal => true;
     public override int ArmorClass => 30;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
@@ -38,8 +37,6 @@ internal class GiantClearCentipedeMonsterRace : MonsterRace
     public override int Rarity => 2;
     public override int Sleep => 30;
     public override int Speed => 110;
-    public override string SplitName1 => "   Giant    ";
-    public override string SplitName2 => "   clear    ";
-    public override string SplitName3 => " centipede  ";
+    public override string? MultilineName => "Giant\nclear\ncentipede";
     public override bool WeirdMind => true;
 }

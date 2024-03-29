@@ -26,8 +26,7 @@ internal class BalrogMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperUSymbol);
     public override ColorEnum Color => ColorEnum.BrightRed;
-    public override string Name => "Balrog";
-
+    
     public override int ArmorClass => 80;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -66,7 +65,5 @@ internal class BalrogMonsterRace : MonsterRace
     public override int Sleep => 80;
     public override bool Smart => true;
     public override int Speed => 120;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "            ";
-    public override string SplitName3 => "   Balrog   ";
+    public override string? MultilineName => "Balrog";
 }

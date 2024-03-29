@@ -29,8 +29,7 @@ internal class IthaquaTheWindwalkerMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperXSymbol);
     public override ColorEnum Color => ColorEnum.BrightBlue;
-    public override string Name => "Ithaqua the Windwalker";
-
+    
     public override int ArmorClass => 125;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -74,8 +73,6 @@ internal class IthaquaTheWindwalkerMonsterRace : MonsterRace
     public override bool ResistTeleport => true;
     public override int Sleep => 10;
     public override int Speed => 140;
-    public override string SplitName1 => "  Ithaqua   ";
-    public override string SplitName2 => "    the     ";
-    public override string SplitName3 => " Windwalker ";
+    public override string? MultilineName => "Ithaqua\nthe\nWindwalker";
     public override bool Unique => true;
 }

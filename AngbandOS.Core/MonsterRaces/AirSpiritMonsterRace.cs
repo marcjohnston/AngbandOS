@@ -14,8 +14,7 @@ internal class AirSpiritMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperESymbol);
     public override ColorEnum Color => ColorEnum.Diamond;
-    public override string Name => "Air spirit";
-
+    
     public override int ArmorClass => 40;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -44,7 +43,5 @@ internal class AirSpiritMonsterRace : MonsterRace
     public override int Rarity => 2;
     public override int Sleep => 20;
     public override int Speed => 130;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "    Air     ";
-    public override string SplitName3 => "   spirit   ";
+    public override string? MultilineName => "Air\nspirit";
 }

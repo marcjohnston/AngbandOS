@@ -19,8 +19,7 @@ internal class CryptCreepMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerSSymbol);
     public override ColorEnum Color => ColorEnum.Black;
-    public override string Name => "Crypt creep";
-
+    
     public override int ArmorClass => 12;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -50,8 +49,6 @@ internal class CryptCreepMonsterRace : MonsterRace
     public override int Rarity => 2;
     public override int Sleep => 14;
     public override int Speed => 110;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "   Crypt    ";
-    public override string SplitName3 => "   creep    ";
+    public override string? MultilineName => "Crypt\ncreep";
     public override bool Undead => true;
 }

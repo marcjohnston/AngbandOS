@@ -16,25 +16,25 @@ internal class HasteMonsterSpell : MonsterSpell
 
     public override string? VsPlayerActionMessage(Monster monster) => $"{monster.Name} concentrates on {monster.PossessiveName} body.";
 
-    public override void ExecuteOnPlayer(Game game, Monster monster)
+    public override void ExecuteOnPlayer(Monster monster)
     {
         string monsterName = monster.Name;
 
         if (monster.Speed < monster.Race.Speed + 10)
         {
-            game.MsgPrint($"{monsterName} starts moving faster.");
+            Game.MsgPrint($"{monsterName} starts moving faster.");
             monster.Speed += 10;
         }
         else if (monster.Speed < monster.Race.Speed + 20)
         {
-            game.MsgPrint($"{monsterName} starts moving faster.");
+            Game.MsgPrint($"{monsterName} starts moving faster.");
             monster.Speed += 2;
         }
     }
 
-    public override void ExecuteOnMonster(Game game, Monster monster, Monster target)
+    public override void ExecuteOnMonster(Monster monster, Monster target)
     {
-        bool blind = game.BlindnessTimer.Value != 0;
+        bool blind = Game.BlindnessTimer.Value != 0;
         bool seen = !blind && monster.IsVisible;
         MonsterRace targetRace = target.Race;
 
@@ -42,7 +42,7 @@ internal class HasteMonsterSpell : MonsterSpell
         {
             if (seen)
             {
-                game.MsgPrint($"{monster.Name} starts moving faster.");
+                Game.MsgPrint($"{monster.Name} starts moving faster.");
             }
             monster.Speed += 10;
         }
@@ -50,7 +50,7 @@ internal class HasteMonsterSpell : MonsterSpell
         {
             if (seen)
             {
-                game.MsgPrint($"{monster.Name} starts moving faster.");
+                Game.MsgPrint($"{monster.Name} starts moving faster.");
             }
             monster.Speed += 2;
         }

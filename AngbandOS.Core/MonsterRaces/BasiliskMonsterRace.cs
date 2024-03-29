@@ -18,8 +18,7 @@ internal class BasiliskMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperRSymbol);
     public override ColorEnum Color => ColorEnum.Black;
-    public override string Name => "Basilisk";
-
+    
     public override bool Animal => true;
     public override int ArmorClass => 90;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
@@ -48,7 +47,5 @@ internal class BasiliskMonsterRace : MonsterRace
     public override int Rarity => 3;
     public override int Sleep => 30;
     public override int Speed => 120;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "            ";
-    public override string SplitName3 => "  Basilisk  ";
+    public override string? MultilineName => "Basilisk";
 }

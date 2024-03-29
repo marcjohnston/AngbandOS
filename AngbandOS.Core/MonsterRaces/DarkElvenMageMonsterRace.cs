@@ -22,8 +22,7 @@ internal class DarkElvenMageMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerHSymbol);
     public override ColorEnum Color => ColorEnum.BrightRed;
-    public override string Name => "Dark elven mage";
-
+    
     public override int ArmorClass => 16;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -51,7 +50,5 @@ internal class DarkElvenMageMonsterRace : MonsterRace
     public override int Rarity => 1;
     public override int Sleep => 20;
     public override int Speed => 120;
-    public override string SplitName1 => "    Dark    ";
-    public override string SplitName2 => "   elven    ";
-    public override string SplitName3 => "    mage    ";
+    public override string? MultilineName => "Dark\nelven\nmage";
 }

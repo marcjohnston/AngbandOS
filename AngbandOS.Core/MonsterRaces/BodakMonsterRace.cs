@@ -20,8 +20,7 @@ internal class BodakMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerUSymbol);
     public override ColorEnum Color => ColorEnum.Black;
-    public override string Name => "Bodak";
-
+    
     public override int ArmorClass => 68;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -52,8 +51,6 @@ internal class BodakMonsterRace : MonsterRace
     public override int Rarity => 2;
     public override int Sleep => 90;
     public override int Speed => 110;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "            ";
-    public override string SplitName3 => "   Bodak    ";
+    public override string? MultilineName => "Bodak";
     public override bool TakeItem => true;
 }

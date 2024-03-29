@@ -18,8 +18,7 @@ internal class BloodshotEyeMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerESymbol);
     public override ColorEnum Color => ColorEnum.Red;
-    public override string Name => "Bloodshot eye";
-
+    
     public override int ArmorClass => 6;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -40,7 +39,5 @@ internal class BloodshotEyeMonsterRace : MonsterRace
     public override int Rarity => 3;
     public override int Sleep => 10;
     public override int Speed => 110;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => " Bloodshot  ";
-    public override string SplitName3 => "    eye     ";
+    public override string? MultilineName => "Bloodshot\neye";
 }

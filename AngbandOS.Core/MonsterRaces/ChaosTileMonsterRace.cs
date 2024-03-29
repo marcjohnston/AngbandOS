@@ -23,8 +23,7 @@ internal class ChaosTileMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(PeriodSymbol);
     public override ColorEnum Color => ColorEnum.Purple;
-    public override string Name => "Chaos tile";
-
+    
     public override int ArmorClass => 60;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -54,7 +53,5 @@ internal class ChaosTileMonsterRace : MonsterRace
     public override int Rarity => 6;
     public override int Sleep => 100;
     public override int Speed => 120;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "   Chaos    ";
-    public override string SplitName3 => "    tile    ";
+    public override string? MultilineName => "Chaos\ntile";
 }

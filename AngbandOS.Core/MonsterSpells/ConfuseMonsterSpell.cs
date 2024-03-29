@@ -19,27 +19,27 @@ internal class ConfuseMonsterSpell : MonsterSpell
     public override string? VsPlayerActionMessage(Monster monster) => $"{monster.Name} creates a mesmerising illusion.";
     public override string? VsMonsterSeenMessage(Monster monster, Monster target) => $"{monster.Name} creates a mesmerising illusion in front of {target.Name}";
 
-    public override void ExecuteOnPlayer(Game game, Monster monster)
+    public override void ExecuteOnPlayer(Monster monster)
     {
-        if (game.HasConfusionResistance)
+        if (Game.HasConfusionResistance)
         {
-            game.MsgPrint("You disbelieve the feeble spell.");
+            Game.MsgPrint("You disbelieve the feeble spell.");
         }
-        else if (Game.RandomLessThan(100) < game.SkillSavingThrow)
+        else if (base.Game.RandomLessThan(100) < Game.SkillSavingThrow)
         {
-            game.MsgPrint("You disbelieve the feeble spell.");
+            Game.MsgPrint("You disbelieve the feeble spell.");
         }
         else
         {
-            game.ConfusedTimer.AddTimer(Game.RandomLessThan(4) + 4);
+            Game.ConfusedTimer.AddTimer(base.Game.RandomLessThan(4) + 4);
         }
-        game.UpdateSmartLearn(monster, Game.SingletonRepository.SpellResistantDetections.Get(nameof(ConfSpellResistantDetection)));
+        Game.UpdateSmartLearn(monster, base.Game.SingletonRepository.SpellResistantDetections.Get(nameof(SpellResistantDetections.ConfSpellResistantDetection)));
     }
 
-    public override void ExecuteOnMonster(Game game, Monster monster, Monster target)
+    public override void ExecuteOnMonster(Monster monster, Monster target)
     {
         int rlev = monster.Race.Level >= 1 ? monster.Race.Level : 1;
-        bool blind = game.BlindnessTimer.Value != 0;
+        bool blind = Game.BlindnessTimer.Value != 0;
         bool seeTarget = !blind && target.IsVisible;
         string targetName = target.Name;
         MonsterRace targetRace = target.Race;
@@ -48,23 +48,23 @@ internal class ConfuseMonsterSpell : MonsterSpell
         {
             if (seeTarget)
             {
-                game.MsgPrint($"{targetName} disbelieves the feeble spell.");
+                Game.MsgPrint($"{targetName} disbelieves the feeble spell.");
             }
         }
-        else if (targetRace.Level > Game.DieRoll(rlev - 10 < 1 ? 1 : rlev - 10) + 10)
+        else if (targetRace.Level > base.Game.DieRoll(rlev - 10 < 1 ? 1 : rlev - 10) + 10)
         {
             if (seeTarget)
             {
-                game.MsgPrint($"{targetName} disbelieves the feeble spell.");
+                Game.MsgPrint($"{targetName} disbelieves the feeble spell.");
             }
         }
         else
         {
             if (seeTarget)
             {
-                game.MsgPrint($"{targetName} seems confused.");
+                Game.MsgPrint($"{targetName} seems confused.");
             }
-            target.ConfusionLevel += 12 + Game.RandomLessThan(4);
+            target.ConfusionLevel += 12 + base.Game.RandomLessThan(4);
         }
     }
 }

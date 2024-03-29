@@ -13,8 +13,7 @@ internal class NobodyTheUndefinedGhostMonsterRace : MonsterRace
     protected NobodyTheUndefinedGhostMonsterRace(Game game) : base(game) { }
 
     protected override string SymbolName => nameof(UpperGSymbol);
-    public override string Name => "Nobody, the Undefined Ghost";
-
+    
     public override int ArmorClass => 0;
     public override string Description => "It seems strangely familiar...";
     public override int FreqInate => 0;
@@ -30,8 +29,6 @@ internal class NobodyTheUndefinedGhostMonsterRace : MonsterRace
     public override int Rarity => 0;
     public override int Sleep => 0;
     public override int Speed => 0;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "            ";
-    public override string SplitName3 => "   Nobody   ";
+    public override string? MultilineName => "Nobody";
     public override bool Unique => true;
 }

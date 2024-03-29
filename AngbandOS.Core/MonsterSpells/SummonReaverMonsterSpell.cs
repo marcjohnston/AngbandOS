@@ -13,7 +13,7 @@ internal class SummonReaverMonsterSpell : SummonMonsterSpell
     private SummonReaverMonsterSpell(Game game) : base(game) { }
     protected override string SummonName(Monster monster) => "Black Reavers";
 
-    protected override int MaximumSummonCount(Game game) => (game.Difficulty / 50) + Game.DieRoll(6);
+    protected override int MaximumSummonCount => (Game.Difficulty / 50) + Game.DieRoll(6);
 
     protected override int SummonLevel(Monster monster) => 100;
 

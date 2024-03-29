@@ -24,8 +24,7 @@ internal class MedusaTheGorgonMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerNSymbol);
     public override ColorEnum Color => ColorEnum.Purple;
-    public override string Name => "Medusa, the Gorgon";
-
+    
     public override int ArmorClass => 100;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -62,8 +61,6 @@ internal class MedusaTheGorgonMonsterRace : MonsterRace
     public override int Sleep => 5;
     public override bool Smart => true;
     public override int Speed => 120;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "            ";
-    public override string SplitName3 => "   Medusa   ";
+    public override string? MultilineName => "Medusa";
     public override bool Unique => true;
 }

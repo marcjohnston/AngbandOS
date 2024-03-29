@@ -21,16 +21,16 @@ internal class WaterBallMonsterSpell : BallProjectileMonsterSpell
     }
     protected override int Radius => 4;
 
-    public override void ExecuteOnPlayer(Game game, Monster monster)
+    public override void ExecuteOnPlayer(Monster monster)
     {
-        base.ExecuteOnPlayer(game, monster);
-        game.MsgPrint("You are engulfed in a whirlpool.");
+        base.ExecuteOnPlayer(monster);
+        Game.MsgPrint("You are engulfed in a whirlpool.");
     }
 
-    public override void ExecuteOnMonster(Game game, Monster monster, Monster target)
+    public override void ExecuteOnMonster(Monster monster, Monster target)
     {
-        base.ExecuteOnMonster(game, monster, target);
+        base.ExecuteOnMonster(monster, target);
         string targetName = target.Name;
-        game.MsgPrint($"{targetName} is engulfed in a whirlpool.");
+        Game.MsgPrint($"{targetName} is engulfed in a whirlpool.");
     }
 }

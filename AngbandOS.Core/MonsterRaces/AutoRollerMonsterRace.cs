@@ -13,8 +13,7 @@ internal class AutoRollerMonsterRace : MonsterRace
     protected AutoRollerMonsterRace(Game game) : base(game) { }
 
     protected override string SymbolName => nameof(LowerGSymbol);
-    public override string Name => "Auto-roller";
-
+    
     public override int ArmorClass => 80;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -48,7 +47,5 @@ internal class AutoRollerMonsterRace : MonsterRace
     public override bool ResistTeleport => true;
     public override int Sleep => 12;
     public override int Speed => 120;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "            ";
-    public override string SplitName3 => "Auto-roller ";
+    public override string? MultilineName => "Auto-roller";
 }

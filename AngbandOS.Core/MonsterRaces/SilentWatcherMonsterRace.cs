@@ -24,8 +24,7 @@ internal class SilentWatcherMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerGSymbol);
     public override ColorEnum Color => ColorEnum.Grey;
-    public override string Name => "Silent watcher";
-
+    
     public override int ArmorClass => 80;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -61,7 +60,5 @@ internal class SilentWatcherMonsterRace : MonsterRace
     public override bool ResistTeleport => true;
     public override int Sleep => 10;
     public override int Speed => 110;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "   Silent   ";
-    public override string SplitName3 => "  watcher   ";
+    public override string? MultilineName => "Silent\nwatcher";
 }

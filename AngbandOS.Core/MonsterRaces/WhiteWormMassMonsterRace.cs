@@ -13,8 +13,7 @@ internal class WhiteWormMassMonsterRace : MonsterRace
     protected WhiteWormMassMonsterRace(Game game) : base(game) { }
 
     protected override string SymbolName => nameof(LowerWSymbol);
-    public override string Name => "White worm mass";
-
+    
     public override bool Animal => true;
     public override int ArmorClass => 1;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
@@ -39,9 +38,7 @@ internal class WhiteWormMassMonsterRace : MonsterRace
     public override int Rarity => 1;
     public override int Sleep => 10;
     public override int Speed => 100;
-    public override string SplitName1 => "   White    ";
-    public override string SplitName2 => "    worm    ";
-    public override string SplitName3 => "    mass    ";
+    public override string? MultilineName => "White\nworm\nmass";
     public override bool Stupid => true;
     public override bool WeirdMind => true;
 }

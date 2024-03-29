@@ -22,8 +22,7 @@ internal class MoonBeastMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperASymbol);
     public override ColorEnum Color => ColorEnum.BrightWhite;
-    public override string Name => "Moon beast";
-
+    
     public override bool Animal => true;
     public override int ArmorClass => 30;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
@@ -50,7 +49,5 @@ internal class MoonBeastMonsterRace : MonsterRace
     public override int Rarity => 1;
     public override int Sleep => 20;
     public override int Speed => 120;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "    Moon    ";
-    public override string SplitName3 => "   beast    ";
+    public override string? MultilineName => "Moon\nbeast";
 }

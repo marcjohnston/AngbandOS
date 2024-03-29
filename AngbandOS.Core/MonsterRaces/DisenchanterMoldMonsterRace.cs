@@ -18,8 +18,7 @@ internal class DisenchanterMoldMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerMSymbol);
     public override ColorEnum Color => ColorEnum.Chartreuse;
-    public override string Name => "Disenchanter mold";
-
+    
     public override int ArmorClass => 20;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -45,8 +44,6 @@ internal class DisenchanterMoldMonsterRace : MonsterRace
     public override bool ResistDisenchant => true;
     public override int Sleep => 70;
     public override int Speed => 110;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "Disenchanter";
-    public override string SplitName3 => "    mold    ";
+    public override string? MultilineName => "Disenchanter\nmold";
     public override bool Stupid => true;
 }

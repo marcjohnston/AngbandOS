@@ -17,15 +17,15 @@ internal class CreateTrapsMonsterSpell : MonsterSpell
     public override string? VsPlayerBlindMessage => $"Someone mumbles and then cackles evilly.";
     public override string? VsPlayerActionMessage(Monster monster) => $"{monster.Name} casts a spell and cackles evilly.";
 
-    public override void ExecuteOnPlayer(Game game, Monster monster)
+    public override void ExecuteOnPlayer(Monster monster)
     {
         ProjectionFlag flg = ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectHide;
-        game.Project(0, 1, game.MapY.Value, game.MapX.Value, 0, game.SingletonRepository.Projectiles.Get(nameof(MakeTrapProjectile)), flg);
+        Game.Project(0, 1, Game.MapY.Value, Game.MapX.Value, 0, Game.SingletonRepository.Projectiles.Get(nameof(MakeTrapProjectile)), flg);
     }
 
-    public override void ExecuteOnMonster(Game game, Monster monster, Monster target)
+    public override void ExecuteOnMonster(Monster monster, Monster target)
     {
         ProjectionFlag flg = ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectHide;
-        game.Project(0, 1, target.MapY, target.MapX, 0, game.SingletonRepository.Projectiles.Get(nameof(MakeTrapProjectile)), flg);
+        Game.Project(0, 1, target.MapY, target.MapX, 0, Game.SingletonRepository.Projectiles.Get(nameof(MakeTrapProjectile)), flg);
     }
 }

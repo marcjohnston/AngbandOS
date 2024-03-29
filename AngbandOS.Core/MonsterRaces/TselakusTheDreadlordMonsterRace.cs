@@ -24,8 +24,7 @@ internal class TselakusTheDreadlordMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperGSymbol);
     public override ColorEnum Color => ColorEnum.Red;
-    public override string Name => "Tselakus, the Dreadlord";
-
+    
     public override int ArmorClass => 150;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -61,9 +60,7 @@ internal class TselakusTheDreadlordMonsterRace : MonsterRace
     public override int Rarity => 2;
     public override int Sleep => 10;
     public override int Speed => 130;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "            ";
-    public override string SplitName3 => "  Tselakus  ";
+    public override string? MultilineName => "Tselakus";
     public override bool Undead => true;
     public override bool Unique => true;
 }

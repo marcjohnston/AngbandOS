@@ -18,8 +18,7 @@ internal class NoviceFanaticMonsterRace : MonsterRace
     };
 
     protected override string SymbolName => nameof(LowerPSymbol);
-    public override string Name => "Novice fanatic";
-
+    
     public override int ArmorClass => 16;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -45,7 +44,5 @@ internal class NoviceFanaticMonsterRace : MonsterRace
     public override int Rarity => 2;
     public override int Sleep => 5;
     public override int Speed => 110;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "   Novice   ";
-    public override string SplitName3 => "  fanatic   ";
+    public override string? MultilineName => "Novice\nfanatic";
 }

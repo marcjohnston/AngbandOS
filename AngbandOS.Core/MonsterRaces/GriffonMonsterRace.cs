@@ -14,8 +14,7 @@ internal class GriffonMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperHSymbol);
     public override ColorEnum Color => ColorEnum.BrightYellow;
-    public override string Name => "Griffon";
-
+    
     public override bool Animal => true;
     public override int ArmorClass => 15;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
@@ -36,7 +35,5 @@ internal class GriffonMonsterRace : MonsterRace
     public override int Rarity => 1;
     public override int Sleep => 10;
     public override int Speed => 110;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "            ";
-    public override string SplitName3 => "  Griffon   ";
+    public override string? MultilineName => "Griffon";
 }

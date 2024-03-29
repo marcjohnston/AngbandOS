@@ -13,8 +13,7 @@ internal class WhiteWolfMonsterRace : MonsterRace
     protected WhiteWolfMonsterRace(Game game) : base(game) { }
 
     protected override string SymbolName => nameof(UpperCSymbol);
-    public override string Name => "White wolf";
-
+    
     public override bool Animal => true;
     public override int ArmorClass => 30;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
@@ -38,7 +37,5 @@ internal class WhiteWolfMonsterRace : MonsterRace
     public override int Rarity => 1;
     public override int Sleep => 20;
     public override int Speed => 120;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "   White    ";
-    public override string SplitName3 => "    wolf    ";
+    public override string? MultilineName => "White\nwolf";
 }

@@ -18,8 +18,7 @@ internal class FireElementalMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperESymbol);
     public override ColorEnum Color => ColorEnum.Red;
-    public override string Name => "Fire elemental";
-
+    
     public override int ArmorClass => 50;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -52,7 +51,5 @@ internal class FireElementalMonsterRace : MonsterRace
     public override int Rarity => 2;
     public override int Sleep => 50;
     public override int Speed => 110;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "    Fire    ";
-    public override string SplitName3 => " elemental  ";
+    public override string? MultilineName => "Fire\nelemental";
 }

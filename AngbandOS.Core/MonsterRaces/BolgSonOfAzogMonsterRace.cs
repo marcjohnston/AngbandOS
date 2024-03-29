@@ -14,8 +14,7 @@ internal class BolgSonOfAzogMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerOSymbol);
     public override ColorEnum Color => ColorEnum.BrightRed;
-    public override string Name => "Bolg, Son of Azog";
-
+    
     public override int ArmorClass => 50;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -47,8 +46,6 @@ internal class BolgSonOfAzogMonsterRace : MonsterRace
     public override int Rarity => 4;
     public override int Sleep => 20;
     public override int Speed => 120;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "            ";
-    public override string SplitName3 => "    Bolg    ";
+    public override string? MultilineName => "Bolg";
     public override bool Unique => true;
 }

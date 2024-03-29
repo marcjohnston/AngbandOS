@@ -18,25 +18,25 @@ internal class TeleportLevelMonsterSpell : MonsterSpell
     public override string? VsPlayerBlindMessage => $"Someone mumbles strangely.";
     public override string? VsPlayerActionMessage(Monster monster) => $"{monster.Name} gestures at your feet.";
 
-    public override void ExecuteOnPlayer(Game game, Monster monster)
+    public override void ExecuteOnPlayer(Monster monster)
     {
 
-        if (game.HasNexusResistance)
+        if (Game.HasNexusResistance)
         {
-            game.MsgPrint("You are unaffected!");
+            Game.MsgPrint("You are unaffected!");
         }
-        else if (Game.RandomLessThan(100) < game.SkillSavingThrow)
+        else if (base.Game.RandomLessThan(100) < Game.SkillSavingThrow)
         {
-            game.MsgPrint("You resist the effects!");
+            Game.MsgPrint("You resist the effects!");
         }
         else
         {
-            Game.RunScript(nameof(TeleportLevelScript));
+            base.Game.RunScript(nameof(Scripts.TeleportLevelScript));
         }
-        game.UpdateSmartLearn(monster, Game.SingletonRepository.SpellResistantDetections.Get(nameof(NexusSpellResistantDetection)));
+        Game.UpdateSmartLearn(monster, base.Game.SingletonRepository.SpellResistantDetections.Get(nameof(SpellResistantDetections.NexusSpellResistantDetection)));
     }
 
-    public override void ExecuteOnMonster(Game game, Monster monster, Monster target)
+    public override void ExecuteOnMonster(Monster monster, Monster target) // TODO: Not implemented
     {
     }
 }

@@ -14,8 +14,7 @@ internal class NightMareMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerQSymbol);
     public override ColorEnum Color => ColorEnum.Black;
-    public override string Name => "Night mare";
-
+    
     public override int ArmorClass => 85;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -47,8 +46,6 @@ internal class NightMareMonsterRace : MonsterRace
     public override int Rarity => 3;
     public override int Sleep => 0;
     public override int Speed => 120;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "   Night    ";
-    public override string SplitName3 => "    mare    ";
+    public override string? MultilineName => "Night\nmare";
     public override bool Undead => true;
 }

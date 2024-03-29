@@ -44,8 +44,7 @@ internal class NyarlathotepMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperXSymbol);
     public override ColorEnum Color => ColorEnum.Red;
-    public override string Name => "Nyarlathotep";
-
+    
     public override int ArmorClass => 165;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -94,8 +93,6 @@ internal class NyarlathotepMonsterRace : MonsterRace
     public override int Sleep => 0;
     public override bool Smart => true;
     public override int Speed => 145;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "            ";
-    public override string SplitName3 => "Nyarlathotep";
+    public override string? MultilineName => "Nyarlathotep";
     public override bool Unique => true;
 }

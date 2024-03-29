@@ -18,8 +18,7 @@ internal class PlasmaVortexMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerVSymbol);
     public override ColorEnum Color => ColorEnum.BrightRed;
-    public override string Name => "Plasma vortex";
-
+    
     public override int ArmorClass => 40;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -51,7 +50,5 @@ internal class PlasmaVortexMonsterRace : MonsterRace
     public override bool ResistPlasma => true;
     public override int Sleep => 0;
     public override int Speed => 120;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "   Plasma   ";
-    public override string SplitName3 => "   vortex   ";
+    public override string? MultilineName => "Plasma\nvortex";
 }

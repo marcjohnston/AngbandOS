@@ -13,8 +13,7 @@ internal class GiantWhiteAntMonsterRace : MonsterRace
     protected GiantWhiteAntMonsterRace(Game game) : base(game) { }
 
     protected override string SymbolName => nameof(LowerASymbol);
-    public override string Name => "Giant white ant";
-
+    
     public override bool Animal => true;
     public override int ArmorClass => 16;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
@@ -34,8 +33,6 @@ internal class GiantWhiteAntMonsterRace : MonsterRace
     public override int Rarity => 1;
     public override int Sleep => 80;
     public override int Speed => 110;
-    public override string SplitName1 => "   Giant    ";
-    public override string SplitName2 => "   white    ";
-    public override string SplitName3 => "    ant     ";
+    public override string? MultilineName => "Giant\nwhite\nant";
     public override bool WeirdMind => true;
 }

@@ -30,11 +30,6 @@ internal abstract class MonsterRace : IMonsterCharacteristics, IGetKey
     public virtual ColorEnum Color => ColorEnum.White;
 
     /// <summary>
-    /// A unique identifier for the entity
-    /// </summary>
-    public abstract string Name { get; }
-
-    /// <summary>
     /// The monster is an animal.
     /// </summary>
     public virtual bool Animal => false;
@@ -180,9 +175,17 @@ internal abstract class MonsterRace : IMonsterCharacteristics, IGetKey
     public abstract int FreqSpell { get; }
 
     /// <summary>
-    /// The name that the game shows the player (may have duplicates).
+    /// Returns the full name of the monster race that is shown to the player.  Duplicate names is supported.
     /// </summary>
     public abstract string FriendlyName { get; }
+
+    /// <summary>
+    /// Returns a multiline version of the monster race that is shown to the player.  Returns null, if the <see cref="FriendlyName"/> should be used.  Word-breaks
+    /// are encoded with a \n character.
+    /// </summary>
+    public virtual string? MultilineName => null;
+
+    public string[] GetMultilineName => Game.ConvertToMultiline(MultilineName ?? FriendlyName);
 
     /// <summary>
     /// The monster comes with friends of the same race.
@@ -325,21 +328,6 @@ internal abstract class MonsterRace : IMonsterCharacteristics, IGetKey
     /// how fast the monster moves (110 = normal speed, higher is better).
     /// </summary>
     public abstract int Speed { get; }
-
-    /// <summary>
-    /// The shortened name of the monster.
-    /// </summary>
-    public abstract string SplitName1 { get; }
-
-    /// <summary>
-    /// The shortened name of the monster.
-    /// </summary>
-    public abstract string SplitName2 { get; }
-
-    /// <summary>
-    /// The shortened name of the monster.
-    /// </summary>
-    public abstract string SplitName3 { get; }
 
     public virtual bool Stupid => false;
 
@@ -484,45 +472,45 @@ internal abstract class MonsterRace : IMonsterCharacteristics, IGetKey
 
     public int GetCoinType()
     {
-        if (Symbol.Character == '$')
+        if (Symbol.Character == '$') // TODO: Hardcoding
         {
-            if (Name.Contains(" copper "))
+            if (FriendlyName.Contains(" copper ")) // TODO: Hardcoding
             {
                 return 2;
             }
-            if (Name.Contains(" silver "))
+            if (FriendlyName.Contains(" silver ")) // TODO: Hardcoding
             {
                 return 5;
             }
-            if (Name.Contains(" gold "))
+            if (FriendlyName.Contains(" gold ")) // TODO: Hardcoding
             {
                 return 10;
             }
-            if (Name.Contains(" mithril "))
+            if (FriendlyName.Contains(" mithril ")) // TODO: Hardcoding
             {
                 return 16;
             }
-            if (Name.Contains(" adamantite "))
+            if (FriendlyName.Contains(" adamantite ")) // TODO: Hardcoding
             {
                 return 17;
             }
-            if (Name.StartsWith("Copper "))
+            if (FriendlyName.StartsWith("Copper ")) // TODO: Hardcoding
             {
                 return 2;
             }
-            if (Name.StartsWith("Silver "))
+            if (FriendlyName.StartsWith("Silver ")) // TODO: Hardcoding
             {
                 return 5;
             }
-            if (Name.StartsWith("Gold "))
+            if (FriendlyName.StartsWith("Gold ")) // TODO: Hardcoding
             {
                 return 10;
             }
-            if (Name.StartsWith("Mithril "))
+            if (FriendlyName.StartsWith("Mithril ")) // TODO: Hardcoding
             {
                 return 16;
             }
-            if (Name.StartsWith("Adamantite "))
+            if (FriendlyName.StartsWith("Adamantite ")) // TODO: Hardcoding
             {
                 return 17;
             }
@@ -532,7 +520,7 @@ internal abstract class MonsterRace : IMonsterCharacteristics, IGetKey
 
     public override string ToString()
     {
-        return $"{Name} (lvl {Level})";
+        return $"{FriendlyName} (lvl {Level})";
     }
 
     public string ToJson()
@@ -544,7 +532,6 @@ internal abstract class MonsterRace : IMonsterCharacteristics, IGetKey
             SpellNames = SpellNames,
             SymbolName = SymbolName,
             Color = Color,
-            Name = Name,
             Animal = Animal,
             ArmorClass = ArmorClass,
             AttackDefinitions = AttackDefinitions,
@@ -633,9 +620,6 @@ internal abstract class MonsterRace : IMonsterCharacteristics, IGetKey
             Sleep = Sleep,
             Smart = Smart,
             Speed = Speed,
-            SplitName1 = SplitName1,
-            SplitName2 = SplitName2,
-            SplitName3 = SplitName3,
             Stupid = Stupid,
             TakeItem = TakeItem,
             Troll = Troll,

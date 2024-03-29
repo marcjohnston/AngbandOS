@@ -14,8 +14,7 @@ internal class TheStormbringerMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(VerticalBarSymbol);
     public override ColorEnum Color => ColorEnum.Black;
-    public override string Name => "The Stormbringer";
-
+    
     public override int ArmorClass => 99;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -50,8 +49,6 @@ internal class TheStormbringerMonsterRace : MonsterRace
     public override bool ResistNether => true;
     public override int Sleep => 20;
     public override int Speed => 120;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "    The     ";
-    public override string SplitName3 => "Stormbringer";
+    public override string? MultilineName => "The\nStormbringer";
     public override bool Unique => true;
 }

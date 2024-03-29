@@ -29,8 +29,7 @@ internal class KascheiTheImmortalMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperLSymbol);
     public override ColorEnum Color => ColorEnum.Purple;
-    public override string Name => "Kaschei the Immortal";
-
+    
     public override int ArmorClass => 100;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -73,9 +72,7 @@ internal class KascheiTheImmortalMonsterRace : MonsterRace
     public override int Sleep => 0;
     public override bool Smart => true;
     public override int Speed => 130;
-    public override string SplitName1 => "  Kaschei   ";
-    public override string SplitName2 => "    the     ";
-    public override string SplitName3 => "  Immortal  ";
+    public override string? MultilineName => "Kaschei\nthe\nImmortal";
     public override bool Undead => true;
     public override bool Unique => true;
 }

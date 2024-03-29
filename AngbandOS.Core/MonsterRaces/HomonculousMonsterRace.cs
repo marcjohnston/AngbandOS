@@ -14,8 +14,7 @@ internal class HomonculousMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerUSymbol);
     public override ColorEnum Color => ColorEnum.Yellow;
-    public override string Name => "Homonculous";
-
+    
     public override int ArmorClass => 32;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -41,7 +40,5 @@ internal class HomonculousMonsterRace : MonsterRace
     public override int Rarity => 3;
     public override int Sleep => 30;
     public override int Speed => 110;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "            ";
-    public override string SplitName3 => "Homonculous ";
+    public override string? MultilineName => "Homonculous";
 }

@@ -23,8 +23,7 @@ internal class MasterQuylthulgMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperQSymbol);
     public override ColorEnum Color => ColorEnum.Blue;
-    public override string Name => "Master quylthulg";
-
+    
     public override bool Animal => true;
     public override int ArmorClass => 1;
     public override string Description => "A pulsating mound of flesh, shining with silver pulses of throbbing light.";
@@ -50,7 +49,5 @@ internal class MasterQuylthulgMonsterRace : MonsterRace
     public override bool ResistTeleport => true;
     public override int Sleep => 0;
     public override int Speed => 120;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "   Master   ";
-    public override string SplitName3 => " quylthulg  ";
+    public override string? MultilineName => "Master\nquylthulg";
 }

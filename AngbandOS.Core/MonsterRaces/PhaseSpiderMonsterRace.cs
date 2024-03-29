@@ -19,8 +19,7 @@ internal class PhaseSpiderMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperSSymbol);
     public override ColorEnum Color => ColorEnum.Pink;
-    public override string Name => "Phase spider";
-
+    
     public override bool Animal => true;
     public override int ArmorClass => 25;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
@@ -45,8 +44,6 @@ internal class PhaseSpiderMonsterRace : MonsterRace
     public override bool ResistTeleport => true;
     public override int Sleep => 80;
     public override int Speed => 120;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "   Phase    ";
-    public override string SplitName3 => "   spider   ";
+    public override string? MultilineName => "Phase\nspider";
     public override bool WeirdMind => true;
 }

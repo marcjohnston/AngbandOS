@@ -21,5 +21,5 @@ internal class SummonMonsterMonsterSpell : SummonMonsterSpell
     /// <summary>
     /// Returns 1, to summon a single monster.
     /// </summary>
-    protected override int MaximumSummonCount(Game game) => 1;
+    protected override int MaximumSummonCount => 1;
 }

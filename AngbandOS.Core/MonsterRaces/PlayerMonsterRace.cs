@@ -14,8 +14,7 @@ internal class PlayerMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(AtSymbol);
     public override ColorEnum Color => ColorEnum.BrightWhite;
-    public override string Name => "Player";
-
+    
     public override int ArmorClass => 0;
     public override string Description => "You";
     public override int FreqInate => 0;
@@ -29,7 +28,5 @@ internal class PlayerMonsterRace : MonsterRace
     public override int Rarity => 0;
     public override int Sleep => 0;
     public override int Speed => 0;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "            ";
-    public override string SplitName3 => "   Player   ";
+    public override string? MultilineName => "Player";
 }

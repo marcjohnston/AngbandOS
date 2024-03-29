@@ -14,8 +14,7 @@ internal class RottingCorpseMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerZSymbol);
     public override ColorEnum Color => ColorEnum.Grey;
-    public override string Name => "Rotting corpse";
-
+    
     public override int ArmorClass => 20;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -45,8 +44,6 @@ internal class RottingCorpseMonsterRace : MonsterRace
     public override int Rarity => 1;
     public override int Sleep => 20;
     public override int Speed => 110;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "  Rotting   ";
-    public override string SplitName3 => "   corpse   ";
+    public override string? MultilineName => "Rotting\ncorpse";
     public override bool Undead => true;
 }

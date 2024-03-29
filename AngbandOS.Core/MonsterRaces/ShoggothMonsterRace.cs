@@ -14,8 +14,7 @@ internal class ShoggothMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperASymbol);
     public override ColorEnum Color => ColorEnum.Black;
-    public override string Name => "Shoggoth";
-
+    
     public override int ArmorClass => 80;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -60,7 +59,5 @@ internal class ShoggothMonsterRace : MonsterRace
     public override bool ResistTeleport => true;
     public override int Sleep => 20;
     public override int Speed => 140;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "            ";
-    public override string SplitName3 => "  Shoggoth  ";
+    public override string? MultilineName => "Shoggoth";
 }

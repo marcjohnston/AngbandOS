@@ -29,8 +29,7 @@ internal class TheWitchKingOfAngmarMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperWSymbol);
     public override ColorEnum Color => ColorEnum.Black;
-    public override string Name => "The Witch-King of Angmar";
-
+    
     public override int ArmorClass => 120;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -70,9 +69,7 @@ internal class TheWitchKingOfAngmarMonsterRace : MonsterRace
     public override int Sleep => 10;
     public override bool Smart => true;
     public override int Speed => 130;
-    public override string SplitName1 => "    The     ";
-    public override string SplitName2 => "Witch-King o";
-    public override string SplitName3 => "   Angmar   ";
+    public override string? MultilineName => "The\nWitch-King o\nAngmar";
     public override bool Undead => true;
     public override bool Unique => true;
 }

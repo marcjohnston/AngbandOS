@@ -19,8 +19,7 @@ internal class KarakalSpiritOfFireMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperESymbol);
     public override ColorEnum Color => ColorEnum.Red;
-    public override string Name => "Karakal, Spirit of Fire";
-
+    
     public override int ArmorClass => 50;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -56,8 +55,6 @@ internal class KarakalSpiritOfFireMonsterRace : MonsterRace
     public override int Rarity => 3;
     public override int Sleep => 50;
     public override int Speed => 120;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "            ";
-    public override string SplitName3 => "  Karakal   ";
+    public override string? MultilineName => "Karakal";
     public override bool Unique => true;
 }

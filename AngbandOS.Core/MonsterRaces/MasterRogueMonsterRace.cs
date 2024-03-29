@@ -14,8 +14,7 @@ internal class MasterRogueMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerPSymbol);
     public override ColorEnum Color => ColorEnum.Black;
-    public override string Name => "Master rogue";
-
+    
     public override int ArmorClass => 30;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -40,8 +39,6 @@ internal class MasterRogueMonsterRace : MonsterRace
     public override int Rarity => 2;
     public override int Sleep => 40;
     public override int Speed => 120;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "   Master   ";
-    public override string SplitName3 => "   rogue    ";
+    public override string? MultilineName => "Master\nrogue";
     public override bool TakeItem => true;
 }

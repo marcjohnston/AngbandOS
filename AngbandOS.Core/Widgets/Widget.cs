@@ -5,14 +5,11 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-using System.Diagnostics;
-
 namespace AngbandOS.Core.Widgets;
 
 /// <summary>
-/// Represents an on-screen text widget that renders game data.  Widgets are invalidated when they need to be updated.  The Update method determines whether or not the widget
-/// needs to be updated and the Paint method is used to actually draw the widget.  This basic widget supports text drawn with justification within a specified width.  Derived
-/// classes can override the Text property to provide different text and can override the 
+/// Represents an on-screen widget that renders game data.  Widgets are invalidated when they need to be updated.  The Update method determines whether or not the widget
+/// needs to be updated and the Paint method is used to actually draw the widget.  
 /// </summary>
 [Serializable]
 internal abstract class Widget : IGetKey

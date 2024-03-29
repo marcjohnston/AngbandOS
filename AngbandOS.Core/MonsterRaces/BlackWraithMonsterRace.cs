@@ -22,8 +22,7 @@ internal class BlackWraithMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperWSymbol);
     public override ColorEnum Color => ColorEnum.Grey;
-    public override string Name => "Black wraith";
-
+    
     public override int ArmorClass => 55;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -58,8 +57,6 @@ internal class BlackWraithMonsterRace : MonsterRace
     public override int Rarity => 2;
     public override int Sleep => 10;
     public override int Speed => 120;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "   Black    ";
-    public override string SplitName3 => "   wraith   ";
+    public override string? MultilineName => "Black\nwraith";
     public override bool Undead => true;
 }

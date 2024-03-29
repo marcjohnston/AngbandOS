@@ -18,8 +18,7 @@ internal class PoltergeistMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperGSymbol);
     public override ColorEnum Color => ColorEnum.Grey;
-    public override string Name => "Poltergeist";
-
+    
     public override int ArmorClass => 15;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -50,9 +49,7 @@ internal class PoltergeistMonsterRace : MonsterRace
     public override int Rarity => 1;
     public override int Sleep => 10;
     public override int Speed => 130;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "            ";
-    public override string SplitName3 => "Poltergeist ";
+    public override string? MultilineName => "Poltergeist";
     public override bool TakeItem => true;
     public override bool Undead => true;
 }

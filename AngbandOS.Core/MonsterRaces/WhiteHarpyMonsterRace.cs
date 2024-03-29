@@ -13,8 +13,7 @@ internal class WhiteHarpyMonsterRace : MonsterRace
     protected WhiteHarpyMonsterRace(Game game) : base(game) { }
 
     protected override string SymbolName => nameof(UpperHSymbol);
-    public override string Name => "White harpy";
-
+    
     public override bool Animal => true;
     public override int ArmorClass => 17;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
@@ -38,7 +37,5 @@ internal class WhiteHarpyMonsterRace : MonsterRace
     public override int Rarity => 1;
     public override int Sleep => 10;
     public override int Speed => 110;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "   White    ";
-    public override string SplitName3 => "   harpy    ";
+    public override string? MultilineName => "White\nharpy";
 }

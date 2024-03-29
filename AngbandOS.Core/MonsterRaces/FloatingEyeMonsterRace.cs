@@ -13,8 +13,7 @@ internal class FloatingEyeMonsterRace : MonsterRace
     protected FloatingEyeMonsterRace(Game game) : base(game) { }
 
     protected override string SymbolName => nameof(LowerESymbol);
-    public override string Name => "Floating eye";
-
+    
     public override int ArmorClass => 6;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -35,7 +34,5 @@ internal class FloatingEyeMonsterRace : MonsterRace
     public override int Rarity => 1;
     public override int Sleep => 10;
     public override int Speed => 110;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "  Floating  ";
-    public override string SplitName3 => "    eye     ";
+    public override string? MultilineName => "Floating\neye";
 }

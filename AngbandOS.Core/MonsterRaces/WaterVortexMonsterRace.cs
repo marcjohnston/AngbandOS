@@ -18,8 +18,7 @@ internal class WaterVortexMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerVSymbol);
     public override ColorEnum Color => ColorEnum.Blue;
-    public override string Name => "Water vortex";
-
+    
     public override int ArmorClass => 30;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -47,7 +46,5 @@ internal class WaterVortexMonsterRace : MonsterRace
     public override int Rarity => 1;
     public override int Sleep => 0;
     public override int Speed => 110;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "   Water    ";
-    public override string SplitName3 => "   vortex   ";
+    public override string? MultilineName => "Water\nvortex";
 }

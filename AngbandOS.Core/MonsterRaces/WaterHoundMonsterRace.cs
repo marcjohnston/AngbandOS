@@ -18,8 +18,7 @@ internal class WaterHoundMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperZSymbol);
     public override ColorEnum Color => ColorEnum.Blue;
-    public override string Name => "Water hound";
-
+    
     public override bool Animal => true;
     public override int ArmorClass => 30;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
@@ -45,7 +44,5 @@ internal class WaterHoundMonsterRace : MonsterRace
     public override int Rarity => 2;
     public override int Sleep => 0;
     public override int Speed => 110;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "   Water    ";
-    public override string SplitName3 => "   hound    ";
+    public override string? MultilineName => "Water\nhound";
 }

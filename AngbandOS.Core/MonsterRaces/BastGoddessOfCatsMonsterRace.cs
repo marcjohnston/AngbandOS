@@ -20,8 +20,7 @@ internal class BastGoddessOfCatsMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerFSymbol);
     public override ColorEnum Color => ColorEnum.Orange;
-    public override string Name => "Bast, Goddess of Cats";
-
+    
     public override int ArmorClass => 200;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -58,8 +57,6 @@ internal class BastGoddessOfCatsMonsterRace : MonsterRace
     public override int Rarity => 3;
     public override int Sleep => 0;
     public override int Speed => 130;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "            ";
-    public override string SplitName3 => "    Bast    ";
+    public override string? MultilineName => "Bast";
     public override bool Unique => true;
 }

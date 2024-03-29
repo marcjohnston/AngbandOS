@@ -18,8 +18,7 @@ internal class NetherHoundMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperZSymbol);
     public override ColorEnum Color => ColorEnum.Black;
-    public override string Name => "Nether hound";
-
+    
     public override bool Animal => true;
     public override int ArmorClass => 100;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
@@ -48,7 +47,5 @@ internal class NetherHoundMonsterRace : MonsterRace
     public override bool ResistNether => true;
     public override int Sleep => 0;
     public override int Speed => 120;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "   Nether   ";
-    public override string SplitName3 => "   hound    ";
+    public override string? MultilineName => "Nether\nhound";
 }

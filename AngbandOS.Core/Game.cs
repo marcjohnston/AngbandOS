@@ -112,7 +112,7 @@ internal class Game
     public int TargetWho;
     public int TotalFriendLevels;
     public int TotalFriends;
-    public int TrackedMonsterIndex;
+    public int? TrackedMonsterIndex = null;
 
     /// <summary>
     /// Returns true, when the GetItem/SelectItem is rendering the equipment list, instead of the inventory list (when the ViewingItemList is true).
@@ -1600,18 +1600,6 @@ internal class Game
         return goldItemFactories[goldType.Value].CreateItem();
     }
 
-    public int GetMonsterIndexFromName(string name)
-    {
-        foreach (MonsterRace race in SingletonRepository.MonsterRaces)
-        {
-            if (race.Name == name)
-            {
-                return race.Index;
-            }
-        }
-        return 0;
-    }
-
     private void ResetUniqueOnlyGuardianStatus()
     {
         foreach (MonsterRace race in SingletonRepository.MonsterRaces)
@@ -1949,7 +1937,7 @@ internal class Game
                 UpdateStuff();
                 RedrawStuff();
                 TargetWho = 0;
-                HealthTrack(0);
+                HealthTrack(null);
                 SingletonRepository.FlaggedActions.Get(nameof(RemoveLightFlaggedAction)).Check(true);
                 SingletonRepository.FlaggedActions.Get(nameof(RemoveViewFlaggedAction)).Check(true);
                 if (!Playing && !IsDead)
@@ -2547,7 +2535,39 @@ internal class Game
         RedrawStuff();
     }
 
-    public void HealthTrack(int mIdx)
+    public string[] ConvertToMultiline(string multiLineName)
+    {
+
+        List<string> names = new();
+        int width = 12;
+        string[] ff = multiLineName.Split('\n');
+        foreach (string fff in ff)
+        {
+            string f = fff;
+            while (f.Length > width)
+            {
+                int pos = width;
+                while (f[pos] != ' ' && pos > 0)
+                {
+                    pos--;
+                }
+                if (pos == 0)
+                {
+                    names.Add(f.Substring(0, width));
+                    f = f.Substring(width);
+                }
+                else
+                {
+                    names.Add(f.Substring(0, pos));
+                    f = f.Substring(pos + 1);
+                }
+            }
+            names.Add(f);
+        }
+        return names.ToArray();
+    }
+
+    public void HealthTrack(int? mIdx)
     {
         TrackedMonsterIndex = mIdx;
         SingletonRepository.FlaggedActions.Get(nameof(RedrawMonsterHealthFlaggedAction)).Set();
@@ -3051,7 +3071,7 @@ internal class Game
         CommandArgument = 0;
         CommandDirection = 0;
         TargetWho = 0;
-        HealthTrack(0);
+        HealthTrack(null);
         ShimmerMonsters = true;
         RepairMonsters = true;
         Disturb(true);
@@ -4048,7 +4068,7 @@ internal class Game
                 {
                     mPtr.Health = mPtr.MaxHealth;
                 }
-                if (TrackedMonsterIndex == i)
+                if (TrackedMonsterIndex != null && TrackedMonsterIndex.Value == i)
                 {
                     SingletonRepository.FlaggedActions.Get(nameof(RedrawMonsterHealthFlaggedAction)).Set();
                 }
@@ -7012,12 +7032,12 @@ internal class Game
                 else if (backstab)
                 {
                     MsgPrint(
-                        $"You cruelly stab the helpless, sleeping {monster.Race.Name}!");
+                        $"You cruelly stab the helpless, sleeping {monster.Race.FriendlyName}!");
                 }
                 else
                 {
                     MsgPrint(
-                        $"You backstab the fleeing {monster.Race.Name}!");
+                        $"You backstab the fleeing {monster.Race.FriendlyName}!");
                 }
                 // Default to 1 damage for an unarmed hit
                 int totalDamage = 1;
@@ -7280,7 +7300,7 @@ internal class Game
                 else if (chaosEffect && DieRoll(2) == 1)
                 {
                     MsgPrint($"{monsterName} disappears!");
-                    monster.TeleportAway(this, 50);
+                    monster.TeleportAway(50);
                     // Can't have any more attacks because the monster isn't here any more
                     noExtra = true;
                     break;
@@ -12918,7 +12938,7 @@ internal class Game
     {
         int qIdx = GetQuestNumber();
         MonsterRace rPtr = SingletonRepository.MonsterRaces[Quests[qIdx].RIdx];
-        string name = rPtr.Name;
+        string name = rPtr.FriendlyName;
         int qNum = Quests[qIdx].ToKill - Quests[qIdx].Killed;
         if (Quests[qIdx].ToKill == 1)
         {
@@ -12939,7 +12959,7 @@ internal class Game
     {
         int qIdx = GetQuestNumber();
         MonsterRace rPtr = SingletonRepository.MonsterRaces[Quests[qIdx].RIdx];
-        string name = rPtr.Name;
+        string name = rPtr.FriendlyName;
         int qNum = Quests[qIdx].ToKill;
         MsgPrint(SingletonRepository.FindQuests.ToWeightedRandom().ChooseOrDefault());
         MsgPrint(null);
@@ -15807,7 +15827,7 @@ internal class Game
         fear = false;
         Monster mPtr = Monsters[mIdx];
         MonsterRace rPtr = mPtr.Race;
-        if (TrackedMonsterIndex == mIdx)
+        if (TrackedMonsterIndex != null && TrackedMonsterIndex.Value == mIdx)
         {
             SingletonRepository.FlaggedActions.Get(nameof(RedrawMonsterHealthFlaggedAction)).Set();
         }
@@ -15946,9 +15966,9 @@ internal class Game
         {
             TargetWho = 0;
         }
-        if (i == TrackedMonsterIndex)
+        if (TrackedMonsterIndex != null && TrackedMonsterIndex.Value == i)
         {
-            HealthTrack(0);
+            HealthTrack(null);
         }
         Map.Grid[y][x].MonsterIndex = 0;
         mPtr.Items.Clear();
@@ -16587,7 +16607,7 @@ internal class Game
             {
                 mPtr.IsVisible = true;
                 MainForm.RefreshMapLocation(fy, fx);
-                if (TrackedMonsterIndex == mIdx)
+                if (TrackedMonsterIndex != null && TrackedMonsterIndex.Value == mIdx)
                 {
                     SingletonRepository.FlaggedActions.Get(nameof(RedrawMonsterHealthFlaggedAction)).Set();
                 }
@@ -16630,7 +16650,7 @@ internal class Game
             {
                 mPtr.IsVisible = false;
                 MainForm.RefreshMapLocation(fy, fx);
-                if (TrackedMonsterIndex == mIdx)
+                if (TrackedMonsterIndex != null && TrackedMonsterIndex.Value == mIdx)
                 {
                     SingletonRepository.FlaggedActions.Get(nameof(RedrawMonsterHealthFlaggedAction)).Set();
                 }
@@ -16703,7 +16723,7 @@ internal class Game
         MCnt = 0;
         NumRepro = 0;
         TargetWho = 0;
-        HealthTrack(0);
+        HealthTrack(null);
     }
 
     private void CompactMonstersAux(int i1, int i2)
@@ -16723,7 +16743,7 @@ internal class Game
         {
             TargetWho = i2;
         }
-        if (TrackedMonsterIndex == i1)
+        if (TrackedMonsterIndex != null && TrackedMonsterIndex.Value == i1)
         {
             HealthTrack(i2);
         }
@@ -16821,7 +16841,7 @@ internal class Game
         }
 
         // Monster cannot be the player.
-        if (rPtr.Name.StartsWith("Player"))
+        if (rPtr.FriendlyName.StartsWith("Player"))
         {
             return false;
         }
@@ -16845,8 +16865,8 @@ internal class Game
         }
 
         // Ensure the monster name is not empty or null.
-        string name = rPtr.Name;
-        if (string.IsNullOrEmpty(rPtr.Name))
+        string name = rPtr.FriendlyName;
+        if (string.IsNullOrEmpty(rPtr.FriendlyName))
         {
             return false;
         }

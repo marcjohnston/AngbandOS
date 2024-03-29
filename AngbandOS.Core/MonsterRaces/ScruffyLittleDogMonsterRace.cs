@@ -14,8 +14,7 @@ internal class ScruffyLittleDogMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperCSymbol);
     public override ColorEnum Color => ColorEnum.BrightGrey;
-    public override string Name => "Scruffy little dog";
-
+    
     public override bool Animal => true;
     public override int ArmorClass => 1;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
@@ -35,7 +34,5 @@ internal class ScruffyLittleDogMonsterRace : MonsterRace
     public override int Rarity => 3;
     public override int Sleep => 5;
     public override int Speed => 110;
-    public override string SplitName1 => "  Scruffy   ";
-    public override string SplitName2 => "   little   ";
-    public override string SplitName3 => "    dog     ";
+    public override string? MultilineName => "Scruffy\nlittle\ndog";
 }

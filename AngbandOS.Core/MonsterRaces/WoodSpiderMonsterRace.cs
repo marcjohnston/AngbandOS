@@ -14,8 +14,7 @@ internal class WoodSpiderMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperSSymbol);
     public override ColorEnum Color => ColorEnum.BrightBrown;
-    public override string Name => "Wood spider";
-
+    
     public override bool Animal => true;
     public override int ArmorClass => 16;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
@@ -38,8 +37,6 @@ internal class WoodSpiderMonsterRace : MonsterRace
     public override int Rarity => 3;
     public override int Sleep => 80;
     public override int Speed => 120;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "    Wood    ";
-    public override string SplitName3 => "   spider   ";
+    public override string? MultilineName => "Wood\nspider";
     public override bool WeirdMind => true;
 }

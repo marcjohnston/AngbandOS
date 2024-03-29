@@ -19,8 +19,7 @@ internal class EnchantressMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerPSymbol);
     public override ColorEnum Color => ColorEnum.Yellow;
-    public override string Name => "Enchantress";
-
+    
     public override int ArmorClass => 60;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -51,7 +50,5 @@ internal class EnchantressMonsterRace : MonsterRace
     public override int Rarity => 4;
     public override int Sleep => 10;
     public override int Speed => 130;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "            ";
-    public override string SplitName3 => "Enchantress ";
+    public override string? MultilineName => "Enchantress";
 }

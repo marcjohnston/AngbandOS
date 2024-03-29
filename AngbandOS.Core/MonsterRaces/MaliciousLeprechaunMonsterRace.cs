@@ -21,8 +21,7 @@ internal class MaliciousLeprechaunMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerHSymbol);
     public override ColorEnum Color => ColorEnum.Chartreuse;
-    public override string Name => "Malicious leprechaun";
-
+    
     public override int ArmorClass => 13;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -49,8 +48,6 @@ internal class MaliciousLeprechaunMonsterRace : MonsterRace
     public override int Rarity => 4;
     public override int Sleep => 8;
     public override int Speed => 120;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => " Malicious  ";
-    public override string SplitName3 => " leprechaun ";
+    public override string? MultilineName => "Malicious\nleprechaun";
     public override bool TakeItem => true;
 }

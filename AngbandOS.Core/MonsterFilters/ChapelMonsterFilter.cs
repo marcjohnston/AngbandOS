@@ -22,7 +22,7 @@ internal class ChapelMonsterFilter : MonsterFilter
         {
             return false;
         }
-        if (!rPtr.Name.Contains("haman"))
+        if (!rPtr.FriendlyName.Contains("haman"))
         {
             return false;
         }

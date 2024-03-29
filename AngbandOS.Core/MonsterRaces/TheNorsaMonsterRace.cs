@@ -27,8 +27,7 @@ internal class TheNorsaMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperHSymbol);
     public override ColorEnum Color => ColorEnum.BrightBlue;
-    public override string Name => "The Norsa";
-
+    
     public override int ArmorClass => 125;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -73,8 +72,6 @@ internal class TheNorsaMonsterRace : MonsterRace
     public override int Rarity => 4;
     public override int Sleep => 70;
     public override int Speed => 130;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "    The     ";
-    public override string SplitName3 => "   Norsa    ";
+    public override string? MultilineName => "The\nNorsa";
     public override bool Unique => true;
 }

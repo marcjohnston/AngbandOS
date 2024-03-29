@@ -14,8 +14,7 @@ internal class HellbatMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerBSymbol);
     public override ColorEnum Color => ColorEnum.Red;
-    public override string Name => "Hellbat";
-
+    
     public override bool Animal => true;
     public override int ArmorClass => 80;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
@@ -41,8 +40,6 @@ internal class HellbatMonsterRace : MonsterRace
     public override int Rarity => 2;
     public override int Sleep => 8;
     public override int Speed => 110;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "            ";
-    public override string SplitName3 => "  Hellbat   ";
+    public override string? MultilineName => "Hellbat";
     public override bool WeirdMind => true;
 }

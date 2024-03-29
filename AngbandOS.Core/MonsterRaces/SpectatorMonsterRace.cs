@@ -21,8 +21,7 @@ internal class SpectatorMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerESymbol);
     public override ColorEnum Color => ColorEnum.BrightGreen;
-    public override string Name => "Spectator";
-
+    
     public override int ArmorClass => 1;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -47,8 +46,6 @@ internal class SpectatorMonsterRace : MonsterRace
     public override int Rarity => 3;
     public override int Sleep => 5;
     public override int Speed => 110;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "            ";
-    public override string SplitName3 => " Spectator  ";
+    public override string? MultilineName => "Spectator";
     public override bool Stupid => true;
 }

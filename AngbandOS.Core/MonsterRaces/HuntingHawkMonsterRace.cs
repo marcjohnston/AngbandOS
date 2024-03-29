@@ -14,8 +14,7 @@ internal class HuntingHawkMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperBSymbol);
     public override ColorEnum Color => ColorEnum.Brown;
-    public override string Name => "Hunting hawk";
-
+    
     public override bool Animal => true;
     public override int ArmorClass => 25;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
@@ -37,7 +36,5 @@ internal class HuntingHawkMonsterRace : MonsterRace
     public override int Rarity => 2;
     public override int Sleep => 10;
     public override int Speed => 120;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "  Hunting   ";
-    public override string SplitName3 => "    hawk    ";
+    public override string? MultilineName => "Hunting\nhawk";
 }

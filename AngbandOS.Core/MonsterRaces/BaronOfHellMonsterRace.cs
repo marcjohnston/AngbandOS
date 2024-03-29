@@ -18,8 +18,7 @@ internal class BaronOfHellMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperUSymbol);
     public override ColorEnum Color => ColorEnum.BrightBrown;
-    public override string Name => "Baron of hell";
-
+    
     public override int ArmorClass => 130;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -52,7 +51,5 @@ internal class BaronOfHellMonsterRace : MonsterRace
     public override bool ResistTeleport => true;
     public override int Sleep => 40;
     public override int Speed => 110;
-    public override string SplitName1 => "   Baron    ";
-    public override string SplitName2 => "     of     ";
-    public override string SplitName3 => "    hell    ";
+    public override string? MultilineName => "Baron\nof\nhell";
 }

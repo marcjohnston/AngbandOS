@@ -18,8 +18,7 @@ internal class GiantSlimeMoldMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(CommaSymbol);
     public override ColorEnum Color => ColorEnum.Green;
-    public override string Name => "Giant slime mold";
-
+    
     public override int ArmorClass => 16;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -47,8 +46,6 @@ internal class GiantSlimeMoldMonsterRace : MonsterRace
     public override int Rarity => 2;
     public override int Sleep => 40;
     public override int Speed => 110;
-    public override string SplitName1 => "   Giant    ";
-    public override string SplitName2 => "   slime    ";
-    public override string SplitName3 => "    mold    ";
+    public override string? MultilineName => "Giant\nslime\nmold";
     public override bool Stupid => true;
 }

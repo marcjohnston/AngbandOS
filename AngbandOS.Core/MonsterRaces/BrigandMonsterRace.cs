@@ -14,8 +14,7 @@ internal class BrigandMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerPSymbol);
     public override ColorEnum Color => ColorEnum.Black;
-    public override string Name => "Brigand";
-
+    
     public override int ArmorClass => 32;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -40,8 +39,6 @@ internal class BrigandMonsterRace : MonsterRace
     public override int Rarity => 3;
     public override int Sleep => 10;
     public override int Speed => 110;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "            ";
-    public override string SplitName3 => "  Brigand   ";
+    public override string? MultilineName => "Brigand";
     public override bool TakeItem => true;
 }

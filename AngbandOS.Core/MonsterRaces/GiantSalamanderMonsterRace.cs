@@ -18,8 +18,7 @@ internal class GiantSalamanderMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperRSymbol);
     public override ColorEnum Color => ColorEnum.Red;
-    public override string Name => "Giant salamander";
-
+    
     public override bool Animal => true;
     public override int ArmorClass => 40;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
@@ -41,7 +40,5 @@ internal class GiantSalamanderMonsterRace : MonsterRace
     public override int Rarity => 1;
     public override int Sleep => 1;
     public override int Speed => 110;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "   Giant    ";
-    public override string SplitName3 => " salamander ";
+    public override string? MultilineName => "Giant\nsalamander";
 }

@@ -14,8 +14,7 @@ internal class KillerCrimsonBeetleMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperKSymbol);
     public override ColorEnum Color => ColorEnum.BrightRed;
-    public override string Name => "Killer crimson beetle";
-
+    
     public override bool Animal => true;
     public override int ArmorClass => 50;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
@@ -36,8 +35,6 @@ internal class KillerCrimsonBeetleMonsterRace : MonsterRace
     public override int Rarity => 2;
     public override int Sleep => 30;
     public override int Speed => 110;
-    public override string SplitName1 => "   Killer   ";
-    public override string SplitName2 => "  crimson   ";
-    public override string SplitName3 => "   beetle   ";
+    public override string? MultilineName => "Killer\ncrimson\nbeetle";
     public override bool WeirdMind => true;
 }

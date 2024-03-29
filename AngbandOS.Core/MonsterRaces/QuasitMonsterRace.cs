@@ -24,8 +24,7 @@ internal class QuasitMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerUSymbol);
     public override ColorEnum Color => ColorEnum.BrightWhite;
-    public override string Name => "Quasit";
-
+    
     public override int ArmorClass => 30;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -56,7 +55,5 @@ internal class QuasitMonsterRace : MonsterRace
     public override int Sleep => 20;
     public override bool Smart => true;
     public override int Speed => 110;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "            ";
-    public override string SplitName3 => "   Quasit   ";
+    public override string? MultilineName => "Quasit";
 }

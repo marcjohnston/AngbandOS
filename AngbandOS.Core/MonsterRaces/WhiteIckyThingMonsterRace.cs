@@ -13,8 +13,7 @@ internal class WhiteIckyThingMonsterRace : MonsterRace
     protected WhiteIckyThingMonsterRace(Game game) : base(game) { }
 
     protected override string SymbolName => nameof(LowerISymbol);
-    public override string Name => "White icky thing";
-
+    
     public override int ArmorClass => 7;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -35,7 +34,5 @@ internal class WhiteIckyThingMonsterRace : MonsterRace
     public override int Rarity => 1;
     public override int Sleep => 10;
     public override int Speed => 110;
-    public override string SplitName1 => "   White    ";
-    public override string SplitName2 => "    icky    ";
-    public override string SplitName3 => "   thing    ";
+    public override string? MultilineName => "White\nicky\nthing";
 }

@@ -14,8 +14,7 @@ internal class BattleScarredVeteranMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerTSymbol);
     public override ColorEnum Color => ColorEnum.Red;
-    public override string Name => "Battle scarred veteran";
-
+    
     public override int ArmorClass => 30;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -38,8 +37,6 @@ internal class BattleScarredVeteranMonsterRace : MonsterRace
     public override int Rarity => 1;
     public override int Sleep => 250;
     public override int Speed => 110;
-    public override string SplitName1 => "   Battle   ";
-    public override string SplitName2 => "  scarred   ";
-    public override string SplitName3 => "  veteran   ";
+    public override string? MultilineName => "Battle\nscarred\nveteran";
     public override bool TakeItem => true;
 }

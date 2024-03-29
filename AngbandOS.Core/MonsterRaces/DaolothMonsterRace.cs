@@ -21,8 +21,7 @@ internal class DaolothMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperXSymbol);
     public override ColorEnum Color => ColorEnum.Yellow;
-    public override string Name => "Daoloth";
-
+    
     public override int ArmorClass => 180;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -67,9 +66,7 @@ internal class DaolothMonsterRace : MonsterRace
     public override int Sleep => 10;
     public override bool Smart => true;
     public override int Speed => 130;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "            ";
-    public override string SplitName3 => "  Daoloth   ";
+    public override string? MultilineName => "Daoloth";
     public override bool TakeItem => true;
     public override bool Unique => true;
 }

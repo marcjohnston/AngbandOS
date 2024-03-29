@@ -14,8 +14,7 @@ internal class RattlesnakeMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperJSymbol);
     public override ColorEnum Color => ColorEnum.BrightBrown;
-    public override string Name => "Rattlesnake";
-
+    
     public override bool Animal => true;
     public override int ArmorClass => 24;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
@@ -37,7 +36,5 @@ internal class RattlesnakeMonsterRace : MonsterRace
     public override int Rarity => 1;
     public override int Sleep => 1;
     public override int Speed => 110;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "            ";
-    public override string SplitName3 => "Rattlesnake ";
+    public override string? MultilineName => "Rattlesnake";
 }

@@ -21,8 +21,7 @@ internal class BarrowWightMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperWSymbol);
     public override ColorEnum Color => ColorEnum.BrightWhite;
-    public override string Name => "Barrow wight";
-
+    
     public override int ArmorClass => 40;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -54,8 +53,6 @@ internal class BarrowWightMonsterRace : MonsterRace
     public override int Rarity => 3;
     public override int Sleep => 10;
     public override int Speed => 110;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "   Barrow   ";
-    public override string SplitName3 => "   wight    ";
+    public override string? MultilineName => "Barrow\nwight";
     public override bool Undead => true;
 }

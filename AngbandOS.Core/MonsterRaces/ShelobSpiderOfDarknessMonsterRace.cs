@@ -27,8 +27,7 @@ internal class ShelobSpiderOfDarknessMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperSSymbol);
     public override ColorEnum Color => ColorEnum.Black;
-    public override string Name => "Shelob, Spider of Darkness";
-
+    
     public override bool Animal => true;
     public override int ArmorClass => 80;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
@@ -65,8 +64,6 @@ internal class ShelobSpiderOfDarknessMonsterRace : MonsterRace
     public override int Sleep => 80;
     public override bool Smart => true;
     public override int Speed => 110;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "            ";
-    public override string SplitName3 => "   Shelob   ";
+    public override string? MultilineName => "Shelob";
     public override bool Unique => true;
 }

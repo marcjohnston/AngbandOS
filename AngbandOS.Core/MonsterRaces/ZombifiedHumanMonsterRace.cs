@@ -14,8 +14,7 @@ internal class ZombifiedHumanMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerZSymbol);
     public override ColorEnum Color => ColorEnum.Chartreuse;
-    public override string Name => "Zombified human";
-
+    
     public override int ArmorClass => 24;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -44,8 +43,6 @@ internal class ZombifiedHumanMonsterRace : MonsterRace
     public override int Rarity => 1;
     public override int Sleep => 20;
     public override int Speed => 110;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => " Zombified  ";
-    public override string SplitName3 => "   human    ";
+    public override string? MultilineName => "Zombified\nhuman";
     public override bool Undead => true;
 }

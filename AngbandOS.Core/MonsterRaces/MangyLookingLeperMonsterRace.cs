@@ -14,8 +14,7 @@ internal class MangyLookingLeperMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerTSymbol);
     public override ColorEnum Color => ColorEnum.Brown;
-    public override string Name => "Mangy looking leper";
-
+    
     public override int ArmorClass => 1;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -37,8 +36,6 @@ internal class MangyLookingLeperMonsterRace : MonsterRace
     public override int Rarity => 1;
     public override int Sleep => 50;
     public override int Speed => 110;
-    public override string SplitName1 => "   Mangy    ";
-    public override string SplitName2 => "  looking   ";
-    public override string SplitName3 => "   leper    ";
+    public override string? MultilineName => "Mangy\nlooking\nleper";
     public override bool TakeItem => true;
 }

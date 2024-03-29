@@ -14,8 +14,7 @@ internal class ShagratTheOrcCaptainMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerOSymbol);
     public override ColorEnum Color => ColorEnum.Orange;
-    public override string Name => "Shagrat, the Orc Captain";
-
+    
     public override int ArmorClass => 60;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -47,8 +46,6 @@ internal class ShagratTheOrcCaptainMonsterRace : MonsterRace
     public override int Rarity => 2;
     public override int Sleep => 20;
     public override int Speed => 110;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "            ";
-    public override string SplitName3 => "  Shagrat   ";
+    public override string? MultilineName => "Shagrat";
     public override bool Unique => true;
 }

@@ -20,8 +20,7 @@ internal class GreaterRottingQuylthulgMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperQSymbol);
     public override ColorEnum Color => ColorEnum.Brown;
-    public override string Name => "Greater rotting quylthulg";
-
+    
     public override bool Animal => true;
     public override int ArmorClass => 1;
     public override string Description => "A massive pile of rotting flesh. A disgusting stench fills the air as it throbs and writhes.";
@@ -47,7 +46,5 @@ internal class GreaterRottingQuylthulgMonsterRace : MonsterRace
     public override bool ResistTeleport => true;
     public override int Sleep => 0;
     public override int Speed => 120;
-    public override string SplitName1 => "  Greater   ";
-    public override string SplitName2 => "  rotting   ";
-    public override string SplitName3 => " quylthulg  ";
+    public override string? MultilineName => "Greater\nrotting\nquylthulg";
 }

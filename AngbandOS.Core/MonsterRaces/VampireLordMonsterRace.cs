@@ -26,8 +26,7 @@ internal class VampireLordMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperVSymbol);
     public override ColorEnum Color => ColorEnum.Blue;
-    public override string Name => "Vampire lord";
-
+    
     public override int ArmorClass => 70;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -63,8 +62,6 @@ internal class VampireLordMonsterRace : MonsterRace
     public override bool ResistTeleport => true;
     public override int Sleep => 10;
     public override int Speed => 120;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "  Vampire   ";
-    public override string SplitName3 => "    lord    ";
+    public override string? MultilineName => "Vampire\nlord";
     public override bool Undead => true;
 }

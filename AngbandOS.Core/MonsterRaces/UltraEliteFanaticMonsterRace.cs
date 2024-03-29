@@ -17,8 +17,7 @@ internal class UltraEliteFanaticMonsterRace : MonsterRace
     };
 
     protected override string SymbolName => nameof(LowerPSymbol);
-    public override string Name => "Ultra-elite fanatic";
-
+    
     public override int ArmorClass => 100;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -60,7 +59,5 @@ internal class UltraEliteFanaticMonsterRace : MonsterRace
     public override bool ResistTeleport => true;
     public override int Sleep => 20;
     public override int Speed => 120;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "Ultra-elite ";
-    public override string SplitName3 => "  fanatic   ";
+    public override string? MultilineName => "Ultra-elite\nfanatic";
 }

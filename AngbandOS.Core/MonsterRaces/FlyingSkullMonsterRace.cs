@@ -14,8 +14,7 @@ internal class FlyingSkullMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerSSymbol);
     public override ColorEnum Color => ColorEnum.Beige;
-    public override string Name => "Flying skull";
-
+    
     public override int ArmorClass => 30;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -44,9 +43,7 @@ internal class FlyingSkullMonsterRace : MonsterRace
     public override int Rarity => 3;
     public override int Sleep => 20;
     public override int Speed => 110;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "   Flying   ";
-    public override string SplitName3 => "   skull    ";
+    public override string? MultilineName => "Flying\nskull";
     public override bool Undead => true;
     public override bool WeirdMind => true;
 }

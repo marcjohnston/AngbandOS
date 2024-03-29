@@ -21,8 +21,7 @@ internal class SpectreMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperGSymbol);
     public override ColorEnum Color => ColorEnum.BrightGreen;
-    public override string Name => "Spectre";
-
+    
     public override int ArmorClass => 30;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -54,9 +53,7 @@ internal class SpectreMonsterRace : MonsterRace
     public override int Rarity => 3;
     public override int Sleep => 10;
     public override int Speed => 120;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "            ";
-    public override string SplitName3 => "  Spectre   ";
+    public override string? MultilineName => "Spectre";
     public override bool TakeItem => true;
     public override bool Undead => true;
 }

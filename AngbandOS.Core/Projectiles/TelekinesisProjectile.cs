@@ -40,7 +40,7 @@ internal class TelekinesisProjectile : Projectile
                 obvious = true;
             }
             note = " disappears!";
-            mPtr.TeleportAway(Game, doDist);
+            mPtr.TeleportAway(doDist);
         }
         else if (doStun != 0 && !rPtr.BreatheSound && !rPtr.BreatheForce)
         {

@@ -14,8 +14,7 @@ internal class SmallChildMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerTSymbol);
     public override ColorEnum Color => ColorEnum.BrightWhite;
-    public override string Name => "Small child";
-
+    
     public override int ArmorClass => 1;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -36,7 +35,5 @@ internal class SmallChildMonsterRace : MonsterRace
     public override int Rarity => 1;
     public override int Sleep => 0;
     public override int Speed => 110;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "   Small    ";
-    public override string SplitName3 => "   child    ";
+    public override string? MultilineName => "Small\nchild";
 }

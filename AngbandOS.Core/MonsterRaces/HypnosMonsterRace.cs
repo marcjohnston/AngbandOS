@@ -33,8 +33,7 @@ internal class HypnosMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerPSymbol);
     public override ColorEnum Color => ColorEnum.BrightWhite;
-    public override string Name => "Hypnos";
-
+    
     public override int ArmorClass => 100;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -78,8 +77,6 @@ internal class HypnosMonsterRace : MonsterRace
     public override int Sleep => 15;
     public override bool Smart => true;
     public override int Speed => 130;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "            ";
-    public override string SplitName3 => "   Hypnos   ";
+    public override string? MultilineName => "Hypnos";
     public override bool Unique => true;
 }

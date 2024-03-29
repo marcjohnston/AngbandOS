@@ -18,8 +18,7 @@ internal class NexusHoundMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperZSymbol);
     public override ColorEnum Color => ColorEnum.Pink;
-    public override string Name => "Nexus hound";
-
+    
     public override bool Animal => true;
     public override int ArmorClass => 30;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
@@ -47,7 +46,5 @@ internal class NexusHoundMonsterRace : MonsterRace
     public override bool ResistNexus => true;
     public override int Sleep => 0;
     public override int Speed => 110;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "   Nexus    ";
-    public override string SplitName3 => "   hound    ";
+    public override string? MultilineName => "Nexus\nhound";
 }

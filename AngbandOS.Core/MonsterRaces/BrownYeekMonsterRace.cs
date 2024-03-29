@@ -14,8 +14,7 @@ internal class BrownYeekMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerYSymbol);
     public override ColorEnum Color => ColorEnum.Brown;
-    public override string Name => "Brown yeek";
-
+    
     public override bool Animal => true;
     public override int ArmorClass => 18;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
@@ -38,7 +37,5 @@ internal class BrownYeekMonsterRace : MonsterRace
     public override int Rarity => 1;
     public override int Sleep => 10;
     public override int Speed => 110;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "   Brown    ";
-    public override string SplitName3 => "    yeek    ";
+    public override string? MultilineName => "Brown\nyeek";
 }

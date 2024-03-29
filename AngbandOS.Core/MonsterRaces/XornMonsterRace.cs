@@ -14,8 +14,7 @@ internal class XornMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerXSymbol);
     public override ColorEnum Color => ColorEnum.Orange;
-    public override string Name => "Xorn";
-
+    
     public override int ArmorClass => 80;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -48,7 +47,5 @@ internal class XornMonsterRace : MonsterRace
     public override int Rarity => 2;
     public override int Sleep => 10;
     public override int Speed => 110;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "            ";
-    public override string SplitName3 => "    Xorn    ";
+    public override string? MultilineName => "Xorn";
 }

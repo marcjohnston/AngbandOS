@@ -18,8 +18,7 @@ internal class TheQueenAntMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerASymbol);
     public override ColorEnum Color => ColorEnum.Gold;
-    public override string Name => "The Queen Ant";
-
+    
     public override bool Animal => true;
     public override int ArmorClass => 100;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
@@ -54,9 +53,7 @@ internal class TheQueenAntMonsterRace : MonsterRace
     public override int Rarity => 2;
     public override int Sleep => 10;
     public override int Speed => 120;
-    public override string SplitName1 => "    The     ";
-    public override string SplitName2 => "   Queen    ";
-    public override string SplitName3 => "    Ant     ";
+    public override string? MultilineName => "The\nQueen\nAnt";
     public override bool Unique => true;
     public override bool WeirdMind => true;
 }

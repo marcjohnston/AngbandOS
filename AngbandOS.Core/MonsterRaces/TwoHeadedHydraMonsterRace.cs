@@ -18,8 +18,7 @@ internal class TwoHeadedHydraMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperMSymbol);
     public override ColorEnum Color => ColorEnum.BrightChartreuse;
-    public override string Name => "2-headed hydra";
-
+    
     public override bool Animal => true;
     public override int ArmorClass => 60;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
@@ -44,7 +43,5 @@ internal class TwoHeadedHydraMonsterRace : MonsterRace
     public override int Rarity => 2;
     public override int Sleep => 20;
     public override int Speed => 110;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "  2-headed  ";
-    public override string SplitName3 => "   hydra    ";
+    public override string? MultilineName => "2-headed\nhydra";
 }

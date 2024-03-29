@@ -14,8 +14,7 @@ internal class MummifiedOrcMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerZSymbol);
     public override ColorEnum Color => ColorEnum.Yellow;
-    public override string Name => "Mummified orc";
-
+    
     public override int ArmorClass => 28;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -46,8 +45,6 @@ internal class MummifiedOrcMonsterRace : MonsterRace
     public override int Rarity => 1;
     public override int Sleep => 75;
     public override int Speed => 110;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => " Mummified  ";
-    public override string SplitName3 => "    orc     ";
+    public override string? MultilineName => "Mummified\norc";
     public override bool Undead => true;
 }

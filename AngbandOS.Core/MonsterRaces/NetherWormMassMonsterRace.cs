@@ -14,8 +14,7 @@ internal class NetherWormMassMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerWSymbol);
     public override ColorEnum Color => ColorEnum.Black;
-    public override string Name => "Nether worm mass";
-
+    
     public override bool Animal => true;
     public override int ArmorClass => 15;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
@@ -40,9 +39,7 @@ internal class NetherWormMassMonsterRace : MonsterRace
     public override int Rarity => 4;
     public override int Sleep => 3;
     public override int Speed => 100;
-    public override string SplitName1 => "   Nether   ";
-    public override string SplitName2 => "    worm    ";
-    public override string SplitName3 => "    mass    ";
+    public override string? MultilineName => "Nether\nworm\nmass";
     public override bool Stupid => true;
     public override bool WeirdMind => true;
 }

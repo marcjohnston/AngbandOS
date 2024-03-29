@@ -17,7 +17,7 @@ internal class CultMonsterFilter : MonsterFilter
         {
             return false;
         }
-        if (!rPtr.Name.Contains("Cult"))
+        if (!rPtr.FriendlyName.Contains("Cult"))
         {
             return false;
         }

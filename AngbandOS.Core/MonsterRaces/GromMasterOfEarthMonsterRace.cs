@@ -19,8 +19,7 @@ internal class GromMasterOfEarthMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperESymbol);
     public override ColorEnum Color => ColorEnum.Brown;
-    public override string Name => "Grom, Master of Earth";
-
+    
     public override int ArmorClass => 97;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -60,8 +59,6 @@ internal class GromMasterOfEarthMonsterRace : MonsterRace
     public override int Rarity => 4;
     public override int Sleep => 90;
     public override int Speed => 110;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "            ";
-    public override string SplitName3 => "    Grom    ";
+    public override string? MultilineName => "Grom";
     public override bool Unique => true;
 }

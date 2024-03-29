@@ -18,8 +18,7 @@ internal class ShriekerMushroomPatchMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(CommaSymbol);
     public override ColorEnum Color => ColorEnum.BrightRed;
-    public override string Name => "Shrieker mushroom patch";
-
+    
     public override int ArmorClass => 1;
     public override string Description => "Yum! These look quite tasty.";
     public override bool EmptyMind => true;
@@ -41,8 +40,6 @@ internal class ShriekerMushroomPatchMonsterRace : MonsterRace
     public override int Rarity => 1;
     public override int Sleep => 0;
     public override int Speed => 110;
-    public override string SplitName1 => "  Shrieker  ";
-    public override string SplitName2 => "  mushroom  ";
-    public override string SplitName3 => "   patch    ";
+    public override string? MultilineName => "Shrieker\nmushroom\npatch";
     public override bool Stupid => true;
 }

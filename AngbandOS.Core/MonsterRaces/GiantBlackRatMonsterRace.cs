@@ -14,8 +14,7 @@ internal class GiantBlackRatMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerRSymbol);
     public override ColorEnum Color => ColorEnum.Black;
-    public override string Name => "Giant black rat";
-
+    
     public override bool Animal => true;
     public override int ArmorClass => 12;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
@@ -37,7 +36,5 @@ internal class GiantBlackRatMonsterRace : MonsterRace
     public override int Rarity => 1;
     public override int Sleep => 20;
     public override int Speed => 110;
-    public override string SplitName1 => "   Giant    ";
-    public override string SplitName2 => "   black    ";
-    public override string SplitName3 => "    rat     ";
+    public override string? MultilineName => "Giant\nblack\nrat";
 }

@@ -14,8 +14,7 @@ internal class AzogKingOfTheUrukHaiMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerOSymbol);
     public override ColorEnum Color => ColorEnum.Red;
-    public override string Name => "Azog, King of the Uruk-Hai";
-
+    
     public override int ArmorClass => 80;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -47,8 +46,6 @@ internal class AzogKingOfTheUrukHaiMonsterRace : MonsterRace
     public override int Rarity => 5;
     public override int Sleep => 20;
     public override int Speed => 120;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "            ";
-    public override string SplitName3 => "    Azog    ";
+    public override string? MultilineName => "Azog";
     public override bool Unique => true;
 }

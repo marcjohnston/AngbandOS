@@ -19,8 +19,7 @@ internal class MoaningSpiritMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperGSymbol);
     public override ColorEnum Color => ColorEnum.BrightBrown;
-    public override string Name => "Moaning spirit";
-
+    
     public override int ArmorClass => 20;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -50,8 +49,6 @@ internal class MoaningSpiritMonsterRace : MonsterRace
     public override int Rarity => 2;
     public override int Sleep => 10;
     public override int Speed => 120;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "  Moaning   ";
-    public override string SplitName3 => "   spirit   ";
+    public override string? MultilineName => "Moaning\nspirit";
     public override bool Undead => true;
 }

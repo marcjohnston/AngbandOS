@@ -24,8 +24,7 @@ internal class KhufuTheMummifiedKingMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerZSymbol);
     public override ColorEnum Color => ColorEnum.Gold;
-    public override string Name => "Khufu the mummified King";
-
+    
     public override int ArmorClass => 40;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -61,9 +60,7 @@ internal class KhufuTheMummifiedKingMonsterRace : MonsterRace
     public override bool ResistTeleport => true;
     public override int Sleep => 40;
     public override int Speed => 110;
-    public override string SplitName1 => " Khufu the  ";
-    public override string SplitName2 => " mummified  ";
-    public override string SplitName3 => "    King    ";
+    public override string? MultilineName => "Khufu the\nmummified\nKing";
     public override bool Undead => true;
     public override bool Unique => true;
 }

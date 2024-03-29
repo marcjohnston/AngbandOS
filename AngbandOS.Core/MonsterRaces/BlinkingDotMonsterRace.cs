@@ -18,8 +18,7 @@ internal class BlinkingDotMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(CommaSymbol);
     public override ColorEnum Color => ColorEnum.Grey;
-    public override string Name => "Blinking dot";
-
+    
     public override int ArmorClass => 1;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -43,8 +42,6 @@ internal class BlinkingDotMonsterRace : MonsterRace
     public override int Rarity => 1;
     public override int Sleep => 0;
     public override int Speed => 110;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "  Blinking  ";
-    public override string SplitName3 => "    dot     ";
+    public override string? MultilineName => "Blinking\ndot";
     public override bool Stupid => true;
 }

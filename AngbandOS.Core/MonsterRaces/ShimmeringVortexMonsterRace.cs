@@ -19,8 +19,7 @@ internal class ShimmeringVortexMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerVSymbol);
     public override ColorEnum Color => ColorEnum.Purple;
-    public override string Name => "Shimmering vortex";
-
+    
     public override int ArmorClass => 30;
     public override bool AttrMulti => true;
     public override bool BashDoor => true;
@@ -47,7 +46,5 @@ internal class ShimmeringVortexMonsterRace : MonsterRace
     public override bool ResistTeleport => true;
     public override int Sleep => 0;
     public override int Speed => 140;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => " Shimmering ";
-    public override string SplitName3 => "   vortex   ";
+    public override string? MultilineName => "Shimmering\nvortex";
 }

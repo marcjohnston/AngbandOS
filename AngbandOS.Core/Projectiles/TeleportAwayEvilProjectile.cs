@@ -85,7 +85,7 @@ internal class TeleportAwayEvilProjectile : Projectile
                 obvious = true;
             }
             note = " disappears!";
-            mPtr.TeleportAway(Game, doDist);
+            mPtr.TeleportAway(doDist);
             cPtr = Game.Map.Grid[mPtr.MapY][mPtr.MapX];
         }
         ApplyProjectileDamageToMonster(who, mPtr, dam, note);

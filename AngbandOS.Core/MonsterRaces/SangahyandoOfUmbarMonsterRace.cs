@@ -19,8 +19,7 @@ internal class SangahyandoOfUmbarMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerPSymbol);
     public override ColorEnum Color => ColorEnum.Orange;
-    public override string Name => "Sangahyando of Umbar";
-
+    
     public override int ArmorClass => 80;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -55,8 +54,6 @@ internal class SangahyandoOfUmbarMonsterRace : MonsterRace
     public override int Rarity => 2;
     public override int Sleep => 25;
     public override int Speed => 110;
-    public override string SplitName1 => "Sangahyando ";
-    public override string SplitName2 => "     of     ";
-    public override string SplitName3 => "   Umbar    ";
+    public override string? MultilineName => "Sangahyando\nof\nUmbar";
     public override bool Unique => true;
 }

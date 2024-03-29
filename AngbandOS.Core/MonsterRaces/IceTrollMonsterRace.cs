@@ -13,8 +13,7 @@ internal class IceTrollMonsterRace : MonsterRace
     protected IceTrollMonsterRace(Game game) : base(game) { }
 
     protected override string SymbolName => nameof(UpperTSymbol);
-    public override string Name => "Ice troll";
-
+    
     public override int ArmorClass => 56;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -41,8 +40,6 @@ internal class IceTrollMonsterRace : MonsterRace
     public override int Rarity => 1;
     public override int Sleep => 50;
     public override int Speed => 110;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "    Ice     ";
-    public override string SplitName3 => "   troll    ";
+    public override string? MultilineName => "Ice\ntroll";
     public override bool Troll => true;
 }

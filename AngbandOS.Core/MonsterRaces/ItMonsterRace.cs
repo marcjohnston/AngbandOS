@@ -32,8 +32,7 @@ internal class ItMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(PeriodSymbol);
     public override ColorEnum Color => ColorEnum.BrightWhite;
-    public override string Name => "It";
-
+    
     public override int ArmorClass => 80;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -74,8 +73,6 @@ internal class ItMonsterRace : MonsterRace
     public override int Sleep => 25;
     public override bool Smart => true;
     public override int Speed => 110;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "            ";
-    public override string SplitName3 => "     It     ";
+    public override string? MultilineName => "It";
     public override bool Unique => true;
 }

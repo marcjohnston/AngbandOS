@@ -22,8 +22,7 @@ internal class FormlessSpawnOfTsathogguaMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperASymbol);
     public override ColorEnum Color => ColorEnum.Grey;
-    public override string Name => "Formless spawn of Tsathoggua";
-
+    
     public override int ArmorClass => 40;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -61,7 +60,5 @@ internal class FormlessSpawnOfTsathogguaMonsterRace : MonsterRace
     public override bool ResistTeleport => true;
     public override int Sleep => 80;
     public override int Speed => 110;
-    public override string SplitName1 => "  Formless  ";
-    public override string SplitName2 => "  spawn of  ";
-    public override string SplitName3 => " Tsathoggua ";
+    public override string? MultilineName => "Formless\nspawn of\nTsathoggua";
 }

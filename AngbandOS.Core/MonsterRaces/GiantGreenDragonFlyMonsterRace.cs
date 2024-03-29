@@ -18,8 +18,7 @@ internal class GiantGreenDragonFlyMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperFSymbol);
     public override ColorEnum Color => ColorEnum.BrightGreen;
-    public override string Name => "Giant green dragon fly";
-
+    
     public override bool Animal => true;
     public override int ArmorClass => 20;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
@@ -43,8 +42,6 @@ internal class GiantGreenDragonFlyMonsterRace : MonsterRace
     public override int Rarity => 2;
     public override int Sleep => 50;
     public override int Speed => 110;
-    public override string SplitName1 => "Giant green ";
-    public override string SplitName2 => "   dragon   ";
-    public override string SplitName3 => "    fly     ";
+    public override string? MultilineName => "Giant green\ndragon\nfly";
     public override bool WeirdMind => true;
 }

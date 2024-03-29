@@ -29,8 +29,7 @@ internal class NyogthaTheThingThatShouldNotBeMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperXSymbol);
     public override ColorEnum Color => ColorEnum.Black;
-    public override string Name => "Nyogtha, the Thing that Should not Be";
-
+    
     public override int ArmorClass => 120;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -81,8 +80,6 @@ internal class NyogthaTheThingThatShouldNotBeMonsterRace : MonsterRace
     public override int Sleep => 20;
     public override bool Smart => true;
     public override int Speed => 130;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "            ";
-    public override string SplitName3 => "  Nyogtha   ";
+    public override string? MultilineName => "Nyogtha";
     public override bool Unique => true;
 }

@@ -14,8 +14,7 @@ internal class GiantTarantulaMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperSSymbol);
     public override ColorEnum Color => ColorEnum.BrightGreen;
-    public override string Name => "Giant tarantula";
-
+    
     public override bool Animal => true;
     public override int ArmorClass => 32;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
@@ -38,8 +37,6 @@ internal class GiantTarantulaMonsterRace : MonsterRace
     public override int Rarity => 3;
     public override int Sleep => 80;
     public override int Speed => 120;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "   Giant    ";
-    public override string SplitName3 => " tarantula  ";
+    public override string? MultilineName => "Giant\ntarantula";
     public override bool WeirdMind => true;
 }

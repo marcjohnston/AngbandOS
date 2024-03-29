@@ -19,8 +19,7 @@ internal class GhostMonsterRace : MonsterRace
     };
 
     protected override string SymbolName => nameof(UpperGSymbol);
-    public override string Name => "Ghost";
-
+    
     public override int ArmorClass => 30;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -53,9 +52,7 @@ internal class GhostMonsterRace : MonsterRace
     public override int Rarity => 1;
     public override int Sleep => 10;
     public override int Speed => 120;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "            ";
-    public override string SplitName3 => "   Ghost    ";
+    public override string? MultilineName => "Ghost";
     public override bool TakeItem => true;
     public override bool Undead => true;
 }

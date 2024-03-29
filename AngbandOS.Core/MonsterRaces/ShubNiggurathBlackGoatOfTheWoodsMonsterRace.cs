@@ -31,8 +31,7 @@ internal class ShubNiggurathBlackGoatOfTheWoodsMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperXSymbol);
     public override ColorEnum Color => ColorEnum.BrightGreen;
-    public override string Name => "Shub-Niggurath, Black Goat of the Woods";
-
+    
     public override int ArmorClass => 100;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -79,8 +78,6 @@ internal class ShubNiggurathBlackGoatOfTheWoodsMonsterRace : MonsterRace
     public override int Sleep => 20;
     public override bool Smart => true;
     public override int Speed => 130;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "            ";
-    public override string SplitName3 => "Shub-Niggura";
+    public override string? MultilineName => "Shub-Niggura";
     public override bool Unique => true;
 }

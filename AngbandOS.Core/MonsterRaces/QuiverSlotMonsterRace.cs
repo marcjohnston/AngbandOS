@@ -18,8 +18,7 @@ internal class QuiverSlotMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(CommaSymbol);
     public override ColorEnum Color => ColorEnum.BrightBrown;
-    public override string Name => "Quiver slot";
-
+    
     public override int ArmorClass => 1;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -44,8 +43,6 @@ internal class QuiverSlotMonsterRace : MonsterRace
     public override int Rarity => 2;
     public override int Sleep => 0;
     public override int Speed => 120;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "   Quiver   ";
-    public override string SplitName3 => "    slot    ";
+    public override string? MultilineName => "Quiver\nslot";
     public override bool Stupid => true;
 }

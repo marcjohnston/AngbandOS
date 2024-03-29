@@ -36,8 +36,7 @@ internal class AetherHoundMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperZSymbol);
     public override ColorEnum Color => ColorEnum.BrightGrey;
-    public override string Name => "Aether hound";
-
+    
     public override bool Animal => true;
     public override int ArmorClass => 100;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
@@ -77,7 +76,5 @@ internal class AetherHoundMonsterRace : MonsterRace
     public override bool ResistPlasma => true;
     public override int Sleep => 0;
     public override int Speed => 120;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "   Aether   ";
-    public override string SplitName3 => "   hound    ";
+    public override string? MultilineName => "Aether\nhound";
 }

@@ -13,6 +13,6 @@ internal class ElementalMonsterFilter : MonsterFilter
     private ElementalMonsterFilter(Game game) : base(game) { } // This object is a singleton.
     public override bool Matches(MonsterRace rPtr)
     {
-        return rPtr.Name.Contains("lemental") && !rPtr.Unique;
+        return rPtr.FriendlyName.Contains("lemental") && !rPtr.Unique;
     }
 }

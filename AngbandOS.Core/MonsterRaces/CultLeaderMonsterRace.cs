@@ -25,8 +25,7 @@ internal class CultLeaderMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerPSymbol);
     public override ColorEnum Color => ColorEnum.BrightTurquoise;
-    public override string Name => "Cult leader";
-
+    
     public override int ArmorClass => 60;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -58,7 +57,5 @@ internal class CultLeaderMonsterRace : MonsterRace
     public override int Sleep => 10;
     public override bool Smart => true;
     public override int Speed => 120;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "    Cult    ";
-    public override string SplitName3 => "   leader   ";
+    public override string? MultilineName => "Cult\nleader";
 }

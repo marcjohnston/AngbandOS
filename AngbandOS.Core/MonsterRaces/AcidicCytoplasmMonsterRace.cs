@@ -14,8 +14,7 @@ internal class AcidicCytoplasmMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerJSymbol);
     public override ColorEnum Color => ColorEnum.Chartreuse;
-    public override string Name => "Acidic cytoplasm";
-
+    
     public override int ArmorClass => 18;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -51,9 +50,7 @@ internal class AcidicCytoplasmMonsterRace : MonsterRace
     public override int Rarity => 5;
     public override int Sleep => 1;
     public override int Speed => 120;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "   Acidic   ";
-    public override string SplitName3 => " cytoplasm  ";
+    public override string? MultilineName => "Acidic\ncytoplasm";
     public override bool Stupid => true;
     public override bool TakeItem => true;
 }

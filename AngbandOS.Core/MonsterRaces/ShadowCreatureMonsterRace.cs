@@ -14,8 +14,7 @@ internal class ShadowCreatureMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerHSymbol);
     public override ColorEnum Color => ColorEnum.Grey;
-    public override string Name => "Shadow creature";
-
+    
     public override int ArmorClass => 12;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -42,7 +41,5 @@ internal class ShadowCreatureMonsterRace : MonsterRace
     public override int Rarity => 2;
     public override int Sleep => 16;
     public override int Speed => 110;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "   Shadow   ";
-    public override string SplitName3 => "  creature  ";
+    public override string? MultilineName => "Shadow\ncreature";
 }

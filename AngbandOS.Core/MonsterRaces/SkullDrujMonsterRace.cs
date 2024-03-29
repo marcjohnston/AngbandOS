@@ -26,8 +26,7 @@ internal class SkullDrujMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerSSymbol);
     public override ColorEnum Color => ColorEnum.BrightGrey;
-    public override string Name => "Skull druj";
-
+    
     public override int ArmorClass => 120;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -61,8 +60,6 @@ internal class SkullDrujMonsterRace : MonsterRace
     public override int Sleep => 10;
     public override bool Smart => true;
     public override int Speed => 130;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "   Skull    ";
-    public override string SplitName3 => "    druj    ";
+    public override string? MultilineName => "Skull\ndruj";
     public override bool Undead => true;
 }

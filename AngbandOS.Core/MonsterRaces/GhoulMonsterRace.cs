@@ -19,8 +19,7 @@ internal class GhoulMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerZSymbol);
     public override ColorEnum Color => ColorEnum.BrightBrown;
-    public override string Name => "Ghoul";
-
+    
     public override int ArmorClass => 30;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -51,8 +50,6 @@ internal class GhoulMonsterRace : MonsterRace
     public override int Rarity => 1;
     public override int Sleep => 20;
     public override int Speed => 110;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "            ";
-    public override string SplitName3 => "   Ghoul    ";
+    public override string? MultilineName => "Ghoul";
     public override bool Undead => true;
 }

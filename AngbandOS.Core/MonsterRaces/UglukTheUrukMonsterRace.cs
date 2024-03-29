@@ -14,8 +14,7 @@ internal class UglukTheUrukMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerOSymbol);
     public override ColorEnum Color => ColorEnum.BrightWhite;
-    public override string Name => "Ugluk, the Uruk";
-
+    
     public override int ArmorClass => 90;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -47,8 +46,6 @@ internal class UglukTheUrukMonsterRace : MonsterRace
     public override int Rarity => 4;
     public override int Sleep => 20;
     public override int Speed => 110;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "            ";
-    public override string SplitName3 => "   Ugluk    ";
+    public override string? MultilineName => "Ugluk";
     public override bool Unique => true;
 }

@@ -22,8 +22,7 @@ internal class WormtongueAgentOfSarumanMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerPSymbol);
     public override ColorEnum Color => ColorEnum.Yellow;
-    public override string Name => "Wormtongue, Agent of Saruman";
-
+    
     public override int ArmorClass => 30;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -54,9 +53,7 @@ internal class WormtongueAgentOfSarumanMonsterRace : MonsterRace
     public override bool ResistTeleport => true;
     public override int Sleep => 20;
     public override int Speed => 110;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "            ";
-    public override string SplitName3 => " Wormtongue ";
+    public override string? MultilineName => "Wormtongue";
     public override bool TakeItem => true;
     public override bool Unique => true;
 }

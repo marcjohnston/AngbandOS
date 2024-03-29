@@ -14,8 +14,7 @@ internal class JubjubBirdMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperBSymbol);
     public override ColorEnum Color => ColorEnum.Pink;
-    public override string Name => "Jubjub bird";
-
+    
     public override bool Animal => true;
     public override int ArmorClass => 70;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
@@ -38,7 +37,5 @@ internal class JubjubBirdMonsterRace : MonsterRace
     public override int Rarity => 3;
     public override int Sleep => 10;
     public override int Speed => 110;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "   Jubjub   ";
-    public override string SplitName3 => "    bird    ";
+    public override string? MultilineName => "Jubjub\nbird";
 }

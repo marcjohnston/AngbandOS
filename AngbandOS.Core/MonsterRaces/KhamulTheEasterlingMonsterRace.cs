@@ -29,8 +29,7 @@ internal class KhamulTheEasterlingMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperWSymbol);
     public override ColorEnum Color => ColorEnum.Black;
-    public override string Name => "Khamul the Easterling";
-
+    
     public override int ArmorClass => 100;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -72,9 +71,7 @@ internal class KhamulTheEasterlingMonsterRace : MonsterRace
     public override int Sleep => 10;
     public override bool Smart => true;
     public override int Speed => 120;
-    public override string SplitName1 => "   Khamul   ";
-    public override string SplitName2 => "    the     ";
-    public override string SplitName3 => " Easterling ";
+    public override string? MultilineName => "Khamul\nthe\nEasterling";
     public override bool Undead => true;
     public override bool Unique => true;
 }

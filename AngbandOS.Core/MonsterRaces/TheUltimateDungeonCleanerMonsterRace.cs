@@ -14,8 +14,7 @@ internal class TheUltimateDungeonCleanerMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerGSymbol);
     public override ColorEnum Color => ColorEnum.Black;
-    public override string Name => "The Ultimate Dungeon Cleaner";
-
+    
     public override int ArmorClass => 80;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -53,8 +52,6 @@ internal class TheUltimateDungeonCleanerMonsterRace : MonsterRace
     public override bool ResistTeleport => true;
     public override int Sleep => 12;
     public override int Speed => 120;
-    public override string SplitName1 => "The Ultimate";
-    public override string SplitName2 => "  Dungeon   ";
-    public override string SplitName3 => "  Cleaner   ";
+    public override string? MultilineName => "The Ultimate\nDungeon\nCleaner";
     public override bool Unique => true;
 }

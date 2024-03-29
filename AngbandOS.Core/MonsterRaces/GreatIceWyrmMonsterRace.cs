@@ -20,8 +20,7 @@ internal class GreatIceWyrmMonsterRace : MonsterRace
     };
 
     protected override string SymbolName => nameof(UpperDSymbol);
-    public override string Name => "Great ice wyrm";
-
+    
     public override int ArmorClass => 170;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -56,7 +55,5 @@ internal class GreatIceWyrmMonsterRace : MonsterRace
     public override int Rarity => 2;
     public override int Sleep => 80;
     public override int Speed => 120;
-    public override string SplitName1 => "   Great    ";
-    public override string SplitName2 => "    ice     ";
-    public override string SplitName3 => "    wyrm    ";
+    public override string? MultilineName => "Great\nice\nwyrm";
 }

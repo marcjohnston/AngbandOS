@@ -21,8 +21,7 @@ internal class TenguMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerUSymbol);
     public override ColorEnum Color => ColorEnum.Blue;
-    public override string Name => "Tengu";
-
+    
     public override int ArmorClass => 32;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -47,7 +46,5 @@ internal class TenguMonsterRace : MonsterRace
     public override bool ResistTeleport => true;
     public override int Sleep => 30;
     public override int Speed => 120;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "            ";
-    public override string SplitName3 => "   Tengu    ";
+    public override string? MultilineName => "Tengu";
 }

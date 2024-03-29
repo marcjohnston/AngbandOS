@@ -25,8 +25,7 @@ internal class DreadmasterMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperGSymbol);
     public override ColorEnum Color => ColorEnum.Orange;
-    public override string Name => "Dreadmaster";
-
+    
     public override int ArmorClass => 100;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -62,9 +61,7 @@ internal class DreadmasterMonsterRace : MonsterRace
     public override int Sleep => 10;
     public override bool Smart => true;
     public override int Speed => 120;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "            ";
-    public override string SplitName3 => "Dreadmaster ";
+    public override string? MultilineName => "Dreadmaster";
     public override bool TakeItem => true;
     public override bool Undead => true;
 }

@@ -14,8 +14,7 @@ internal class StoneGolemMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerGSymbol);
     public override ColorEnum Color => ColorEnum.BrightBrown;
-    public override string Name => "Stone golem";
-
+    
     public override int ArmorClass => 75;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -46,7 +45,5 @@ internal class StoneGolemMonsterRace : MonsterRace
     public override int Rarity => 2;
     public override int Sleep => 10;
     public override int Speed => 100;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "   Stone    ";
-    public override string SplitName3 => "   golem    ";
+    public override string? MultilineName => "Stone\ngolem";
 }

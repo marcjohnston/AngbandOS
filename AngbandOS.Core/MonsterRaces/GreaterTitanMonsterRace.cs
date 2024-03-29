@@ -20,8 +20,7 @@ internal class GreaterTitanMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperPSymbol);
     public override ColorEnum Color => ColorEnum.BrightYellow;
-    public override string Name => "Greater titan";
-
+    
     public override int ArmorClass => 125;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -54,8 +53,6 @@ internal class GreaterTitanMonsterRace : MonsterRace
     public override int Sleep => 15;
     public override bool Smart => true;
     public override int Speed => 120;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "  Greater   ";
-    public override string SplitName3 => "   titan    ";
+    public override string? MultilineName => "Greater\ntitan";
     public override bool TakeItem => true;
 }

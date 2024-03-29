@@ -23,8 +23,7 @@ internal class StormGiantMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperPSymbol);
     public override ColorEnum Color => ColorEnum.BrightTurquoise;
-    public override string Name => "Storm giant";
-
+    
     public override int ArmorClass => 60;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -55,8 +54,6 @@ internal class StormGiantMonsterRace : MonsterRace
     public override int Rarity => 1;
     public override int Sleep => 40;
     public override int Speed => 110;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "   Storm    ";
-    public override string SplitName3 => "   giant    ";
+    public override string? MultilineName => "Storm\ngiant";
     public override bool TakeItem => true;
 }

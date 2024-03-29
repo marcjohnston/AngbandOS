@@ -20,8 +20,7 @@ internal class ChaosShapechangerMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperHSymbol);
     public override ColorEnum Color => ColorEnum.Purple;
-    public override string Name => "Chaos shapechanger";
-
+    
     public override int ArmorClass => 14;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -46,7 +45,5 @@ internal class ChaosShapechangerMonsterRace : MonsterRace
     public override bool Shapechanger => true;
     public override int Sleep => 12;
     public override int Speed => 110;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "   Chaos    ";
-    public override string SplitName3 => "shapechanger";
+    public override string? MultilineName => "Chaos\nshapechanger";
 }

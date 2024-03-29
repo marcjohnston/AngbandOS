@@ -21,8 +21,7 @@ internal class ChaosMasterMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerPSymbol);
     public override ColorEnum Color => ColorEnum.Purple;
-    public override string Name => "Chaos master";
-
+    
     public override int ArmorClass => 50;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -57,7 +56,5 @@ internal class ChaosMasterMonsterRace : MonsterRace
     public override int Rarity => 3;
     public override int Sleep => 5;
     public override int Speed => 120;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "   Chaos    ";
-    public override string SplitName3 => "   master   ";
+    public override string? MultilineName => "Chaos\nmaster";
 }

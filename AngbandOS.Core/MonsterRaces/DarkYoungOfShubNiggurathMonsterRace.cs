@@ -21,8 +21,7 @@ internal class DarkYoungOfShubNiggurathMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperASymbol);
     public override ColorEnum Color => ColorEnum.Green;
-    public override string Name => "Dark young of Shub-Niggurath";
-
+    
     public override int ArmorClass => 75;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -59,7 +58,5 @@ internal class DarkYoungOfShubNiggurathMonsterRace : MonsterRace
     public override bool ResistTeleport => true;
     public override int Sleep => 80;
     public override int Speed => 120;
-    public override string SplitName1 => "    Dark    ";
-    public override string SplitName2 => "  young of  ";
-    public override string SplitName3 => "Shub-Niggura";
+    public override string? MultilineName => "Dark\nyoung of\nShub-Niggura";
 }

@@ -24,29 +24,29 @@ internal class BlindnessMonsterSpell : MonsterSpell
         return $"{monster.Name} casts a spell, burning {targetName}{it} eyes.";
     }
 
-    public override void ExecuteOnPlayer(Game game, Monster monster)
+    public override void ExecuteOnPlayer(Monster monster)
     {
 
-        if (game.HasBlindnessResistance)
+        if (Game.HasBlindnessResistance)
         {
-            game.MsgPrint("You are unaffected!");
+            Game.MsgPrint("You are unaffected!");
         }
-        else if (Game.RandomLessThan(100) < game.SkillSavingThrow)
+        else if (base.Game.RandomLessThan(100) < Game.SkillSavingThrow)
         {
-            game.MsgPrint("You resist the effects!");
+            Game.MsgPrint("You resist the effects!");
         }
         else
         {
-            game.BlindnessTimer.SetTimer(12 + Game.RandomLessThan(4));
+            Game.BlindnessTimer.SetTimer(12 + base.Game.RandomLessThan(4));
         }
-        game.UpdateSmartLearn(monster, Game.SingletonRepository.SpellResistantDetections.Get(nameof(BlindSpellResistantDetection)));
+        Game.UpdateSmartLearn(monster, base.Game.SingletonRepository.SpellResistantDetections.Get(nameof(SpellResistantDetections.BlindSpellResistantDetection)));
     }
 
-    public override void ExecuteOnMonster(Game game, Monster monster, Monster target)
+    public override void ExecuteOnMonster(Monster monster, Monster target)
     {
         int rlev = monster.Race.Level >= 1 ? monster.Race.Level : 1;
         string targetName = target.Name;
-        bool blind = game.BlindnessTimer.Value != 0;
+        bool blind = Game.BlindnessTimer.Value != 0;
         bool seeTarget = !blind && target.IsVisible;
         MonsterRace targetRace = target.Race;
 
@@ -54,23 +54,23 @@ internal class BlindnessMonsterSpell : MonsterSpell
         {
             if (seeTarget)
             {
-                game.MsgPrint($"{targetName} is unaffected.");
+                Game.MsgPrint($"{targetName} is unaffected.");
             }
         }
-        else if (targetRace.Level > Game.DieRoll(rlev - 10 < 1 ? 1 : rlev - 10) + 10)
+        else if (targetRace.Level > base.Game.DieRoll(rlev - 10 < 1 ? 1 : rlev - 10) + 10)
         {
             if (seeTarget)
             {
-                game.MsgPrint($"{targetName} is unaffected.");
+                Game.MsgPrint($"{targetName} is unaffected.");
             }
         }
         else
         {
             if (seeTarget)
             {
-                game.MsgPrint($"{targetName} is blinded!");
+                Game.MsgPrint($"{targetName} is blinded!");
             }
-            target.ConfusionLevel += 12 + Game.RandomLessThan(4);
+            target.ConfusionLevel += 12 + base.Game.RandomLessThan(4);
         }
     }
 }

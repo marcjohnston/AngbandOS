@@ -25,8 +25,7 @@ internal class UndeadBeholderMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerESymbol);
     public override ColorEnum Color => ColorEnum.Grey;
-    public override string Name => "Undead beholder";
-
+    
     public override int ArmorClass => 100;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -60,8 +59,6 @@ internal class UndeadBeholderMonsterRace : MonsterRace
     public override bool ResistTeleport => true;
     public override int Sleep => 10;
     public override int Speed => 120;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "   Undead   ";
-    public override string SplitName3 => "  beholder  ";
+    public override string? MultilineName => "Undead\nbeholder";
     public override bool Undead => true;
 }

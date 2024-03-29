@@ -17,8 +17,7 @@ internal class UrukMonsterRace : MonsterRace
     };
 
     protected override string SymbolName => nameof(LowerOSymbol);
-    public override string Name => "Uruk";
-
+    
     public override int ArmorClass => 50;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -46,7 +45,5 @@ internal class UrukMonsterRace : MonsterRace
     public override int Rarity => 1;
     public override int Sleep => 20;
     public override int Speed => 110;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "            ";
-    public override string SplitName3 => "    Uruk    ";
+    public override string? MultilineName => "Uruk";
 }

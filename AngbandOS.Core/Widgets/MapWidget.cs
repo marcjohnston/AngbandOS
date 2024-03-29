@@ -94,7 +94,7 @@ internal abstract class MapWidget : Widget, IPutWidget
         if (MapChangeTracking.IsChanged)
         {
             // It has, invalidate the widget.
-            base.Invalidate();
+            Invalidate();
         }
 
         // Update the widget.

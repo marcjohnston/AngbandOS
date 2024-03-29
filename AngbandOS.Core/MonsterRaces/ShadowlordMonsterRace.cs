@@ -29,8 +29,7 @@ internal class ShadowlordMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperGSymbol);
     public override ColorEnum Color => ColorEnum.Blue;
-    public override string Name => "Shadowlord";
-
+    
     public override int ArmorClass => 150;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -66,9 +65,7 @@ internal class ShadowlordMonsterRace : MonsterRace
     public override bool ResistTeleport => true;
     public override int Sleep => 10;
     public override int Speed => 120;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "            ";
-    public override string SplitName3 => " Shadowlord ";
+    public override string? MultilineName => "Shadowlord";
     public override bool TakeItem => true;
     public override bool Undead => true;
 }

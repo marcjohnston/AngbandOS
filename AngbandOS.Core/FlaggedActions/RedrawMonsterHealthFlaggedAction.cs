@@ -15,14 +15,14 @@ internal class RedrawMonsterHealthFlaggedAction : FlaggedAction
     private RedrawMonsterHealthFlaggedAction(Game game) : base(game) { }
     protected override void Execute()
     {
-        if (Game.TrackedMonsterIndex == 0)
+        if (Game.TrackedMonsterIndex == null)
         {
             Game.Screen.Erase(RowInfo, ColInfo, 12);
             Game.Screen.Erase(RowInfo - 3, ColInfo, 12);
             Game.Screen.Erase(RowInfo - 2, ColInfo, 12);
             Game.Screen.Erase(RowInfo - 1, ColInfo, 12);
         }
-        else if (!Game.Monsters[Game.TrackedMonsterIndex].IsVisible)
+        else if (!Game.Monsters[Game.TrackedMonsterIndex.Value].IsVisible)
         {
             Game.Screen.Print(ColorEnum.White, "[----------]", RowInfo, ColInfo);
         }
@@ -30,13 +30,13 @@ internal class RedrawMonsterHealthFlaggedAction : FlaggedAction
         {
             Game.Screen.Print(ColorEnum.White, "[----------]", RowInfo, ColInfo);
         }
-        else if (Game.Monsters[Game.TrackedMonsterIndex].Health < 0)
+        else if (Game.Monsters[Game.TrackedMonsterIndex.Value].Health < 0)
         {
             Game.Screen.Print(ColorEnum.White, "[----------]", RowInfo, ColInfo);
         }
         else
         {
-            Monster mPtr = Game.Monsters[Game.TrackedMonsterIndex];
+            Monster mPtr = Game.Monsters[Game.TrackedMonsterIndex.Value];
             ColorEnum attr = ColorEnum.Red;
             string smb = "**********";
             int pct = 100 * mPtr.Health / mPtr.MaxHealth;
@@ -74,9 +74,9 @@ internal class RedrawMonsterHealthFlaggedAction : FlaggedAction
             int len = pct < 10 ? 1 : pct < 90 ? (pct / 10) + 1 : 10;
             Game.Screen.Print(ColorEnum.White, "[----------]", RowInfo, ColInfo);
             Game.Screen.Print(attr, smb.Substring(0, len), RowInfo, ColInfo + 1);
-            Game.Screen.Print(ColorEnum.White, mPtr.Race.SplitName1, RowInfo - 3, ColInfo);
-            Game.Screen.Print(ColorEnum.White, mPtr.Race.SplitName2, RowInfo - 2, ColInfo);
-            Game.Screen.Print(ColorEnum.White, mPtr.Race.SplitName3, RowInfo - 1, ColInfo);
+            //Game.Screen.Print(ColorEnum.White, mPtr.Race.SplitName1, RowInfo - 3, ColInfo);
+            //Game.Screen.Print(ColorEnum.White, mPtr.Race.SplitName2, RowInfo - 2, ColInfo);
+            //Game.Screen.Print(ColorEnum.White, mPtr.Race.SplitName3, RowInfo - 1, ColInfo);
         }
     }
 }

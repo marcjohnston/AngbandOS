@@ -20,8 +20,7 @@ internal class DraconicQuylthulgMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperQSymbol);
     public override ColorEnum Color => ColorEnum.BrightGreen;
-    public override string Name => "Draconic quylthulg";
-
+    
     public override bool Animal => true;
     public override int ArmorClass => 1;
     public override string Description => "It looks like it was once a dragon corpse, now deeply infected with magical bacteria that make it pulse in a foul and degrading way.";
@@ -46,7 +45,5 @@ internal class DraconicQuylthulgMonsterRace : MonsterRace
     public override int Rarity => 3;
     public override int Sleep => 0;
     public override int Speed => 120;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "  Draconic  ";
-    public override string SplitName3 => " quylthulg  ";
+    public override string? MultilineName => "Draconic\nquylthulg";
 }

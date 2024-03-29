@@ -26,8 +26,7 @@ internal class GlaryssaSuccubusQueenMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperUSymbol);
     public override ColorEnum Color => ColorEnum.BrightPink;
-    public override string Name => "Glaryssa, Succubus Queen";
-
+    
     public override int ArmorClass => 60;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -63,8 +62,6 @@ internal class GlaryssaSuccubusQueenMonsterRace : MonsterRace
     public override int Rarity => 3;
     public override int Sleep => 10;
     public override int Speed => 120;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "            ";
-    public override string SplitName3 => "  Glaryssa  ";
+    public override string? MultilineName => "Glaryssa";
     public override bool Unique => true;
 }

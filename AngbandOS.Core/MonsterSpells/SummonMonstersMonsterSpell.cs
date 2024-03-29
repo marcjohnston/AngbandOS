@@ -16,7 +16,7 @@ internal class SummonMonstersMonsterSpell : SummonMonsterSpell
     /// <summary>
     /// Returns 8, to summon upto 8 monsters.
     /// </summary>
-    protected override int MaximumSummonCount(Game game) => 8;
+    protected override int MaximumSummonCount => 8;
 
     /// <summary>
     /// Returns null, for any monster to be summoned.

@@ -14,8 +14,7 @@ internal class MithrilGolemMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerGSymbol);
     public override ColorEnum Color => ColorEnum.BrightBlue;
-    public override string Name => "Mithril golem";
-
+    
     public override int ArmorClass => 100;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -50,7 +49,5 @@ internal class MithrilGolemMonsterRace : MonsterRace
     public override bool Reflecting => true;
     public override int Sleep => 10;
     public override int Speed => 110;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "  Mithril   ";
-    public override string SplitName3 => "   golem    ";
+    public override string? MultilineName => "Mithril\ngolem";
 }

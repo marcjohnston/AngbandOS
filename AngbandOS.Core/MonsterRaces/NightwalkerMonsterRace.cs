@@ -24,8 +24,7 @@ internal class NightwalkerMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerZSymbol);
     public override ColorEnum Color => ColorEnum.Black;
-    public override string Name => "Nightwalker";
-
+    
     public override int ArmorClass => 175;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -63,8 +62,6 @@ internal class NightwalkerMonsterRace : MonsterRace
     public override int Sleep => 10;
     public override bool Smart => true;
     public override int Speed => 130;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "            ";
-    public override string SplitName3 => "Nightwalker ";
+    public override string? MultilineName => "Nightwalker";
     public override bool Undead => true;
 }

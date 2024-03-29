@@ -20,8 +20,7 @@ internal class AncientWhiteDragonMonsterRace : MonsterRace
     };
 
     protected override string SymbolName => nameof(UpperDSymbol);
-    public override string Name => "Ancient white dragon";
-
+    
     public override int ArmorClass => 90;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -54,7 +53,5 @@ internal class AncientWhiteDragonMonsterRace : MonsterRace
     public override int Sleep => 80;
     public override bool Smart => true;
     public override int Speed => 120;
-    public override string SplitName1 => "  Ancient   ";
-    public override string SplitName2 => "   white    ";
-    public override string SplitName3 => "   dragon   ";
+    public override string? MultilineName => "Ancient\nwhite\ndragon";
 }

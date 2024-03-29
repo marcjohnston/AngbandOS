@@ -14,8 +14,7 @@ internal class GreyMoldMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerMSymbol);
     public override ColorEnum Color => ColorEnum.Grey;
-    public override string Name => "Grey mold";
-
+    
     public override int ArmorClass => 1;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -40,8 +39,6 @@ internal class GreyMoldMonsterRace : MonsterRace
     public override int Rarity => 1;
     public override int Sleep => 0;
     public override int Speed => 110;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "    Grey    ";
-    public override string SplitName3 => "    mold    ";
+    public override string? MultilineName => "Grey\nmold";
     public override bool Stupid => true;
 }

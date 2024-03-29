@@ -16,12 +16,12 @@ internal class TeleportToMonsterSpell : MonsterSpell
     public override string? VsPlayerBlindMessage => $"Someone commands you to return.";
     public override string? VsPlayerActionMessage(Monster monster) => $"{monster.Name} commands you to return.";
 
-    public override void ExecuteOnPlayer(Game game, Monster monster)
+    public override void ExecuteOnPlayer(Monster monster)
     {
-        game.TeleportPlayerTo(monster.MapY, monster.MapX);
+        Game.TeleportPlayerTo(monster.MapY, monster.MapX);
     }
 
-    public override void ExecuteOnMonster(Game game, Monster monster, Monster target)
+    public override void ExecuteOnMonster(Monster monster, Monster target) // TODO: Not implemented
     {
     }
 }

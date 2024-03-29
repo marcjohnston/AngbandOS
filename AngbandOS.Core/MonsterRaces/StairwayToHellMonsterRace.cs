@@ -19,8 +19,7 @@ internal class StairwayToHellMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(GreaterThanSymbol);
     public override ColorEnum Color => ColorEnum.Red;
-    public override string Name => "Stairway to hell";
-
+    
     public override int ArmorClass => 40;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -55,8 +54,6 @@ internal class StairwayToHellMonsterRace : MonsterRace
     public override int Rarity => 5;
     public override int Sleep => 20;
     public override int Speed => 120;
-    public override string SplitName1 => "  Stairway  ";
-    public override string SplitName2 => "     to     ";
-    public override string SplitName3 => "    hell    ";
+    public override string? MultilineName => "Stairway\nto\nhell";
     public override bool Undead => true;
 }

@@ -14,8 +14,7 @@ internal class LargeYellowSnakeMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperJSymbol);
     public override ColorEnum Color => ColorEnum.BrightYellow;
-    public override string Name => "Large yellow snake";
-
+    
     public override bool Animal => true;
     public override int ArmorClass => 38;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
@@ -37,7 +36,5 @@ internal class LargeYellowSnakeMonsterRace : MonsterRace
     public override int Rarity => 1;
     public override int Sleep => 75;
     public override int Speed => 100;
-    public override string SplitName1 => "   Large    ";
-    public override string SplitName2 => "   yellow   ";
-    public override string SplitName3 => "   snake    ";
+    public override string? MultilineName => "Large\nyellow\nsnake";
 }

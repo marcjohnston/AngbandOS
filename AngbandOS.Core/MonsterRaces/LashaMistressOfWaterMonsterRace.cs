@@ -21,8 +21,7 @@ internal class LashaMistressOfWaterMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperESymbol);
     public override ColorEnum Color => ColorEnum.Blue;
-    public override string Name => "Lasha, Mistress of Water";
-
+    
     public override int ArmorClass => 40;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -56,8 +55,6 @@ internal class LashaMistressOfWaterMonsterRace : MonsterRace
     public override int Rarity => 3;
     public override int Sleep => 50;
     public override int Speed => 120;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "            ";
-    public override string SplitName3 => "   Lasha    ";
+    public override string? MultilineName => "Lasha";
     public override bool Unique => true;
 }

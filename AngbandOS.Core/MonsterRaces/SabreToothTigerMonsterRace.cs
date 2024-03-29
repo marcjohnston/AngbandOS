@@ -14,8 +14,7 @@ internal class SabreToothTigerMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerFSymbol);
     public override ColorEnum Color => ColorEnum.Yellow;
-    public override string Name => "Sabre-tooth tiger";
-
+    
     public override bool Animal => true;
     public override int ArmorClass => 50;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
@@ -38,7 +37,5 @@ internal class SabreToothTigerMonsterRace : MonsterRace
     public override int Rarity => 2;
     public override int Sleep => 0;
     public override int Speed => 120;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "Sabre-tooth ";
-    public override string SplitName3 => "   tiger    ";
+    public override string? MultilineName => "Sabre-tooth\ntiger";
 }

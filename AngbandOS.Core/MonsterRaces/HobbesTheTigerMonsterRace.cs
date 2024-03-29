@@ -14,8 +14,7 @@ internal class HobbesTheTigerMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerFSymbol);
     public override ColorEnum Color => ColorEnum.BrightYellow;
-    public override string Name => "Hobbes the Tiger";
-
+    
     public override bool Animal => true;
     public override int ArmorClass => 30;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
@@ -41,8 +40,6 @@ internal class HobbesTheTigerMonsterRace : MonsterRace
     public override int Rarity => 2;
     public override int Sleep => 0;
     public override int Speed => 120;
-    public override string SplitName1 => "   Hobbes   ";
-    public override string SplitName2 => "    the     ";
-    public override string SplitName3 => "   Tiger    ";
+    public override string? MultilineName => "Hobbes\nthe\nTiger";
     public override bool Unique => true;
 }

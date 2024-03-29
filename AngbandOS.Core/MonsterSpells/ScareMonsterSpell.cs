@@ -22,27 +22,27 @@ internal class ScareMonsterSpell : MonsterSpell
 
     public override string? VsMonsterSeenMessage(Monster monster, Monster target) => $"{monster.Name} casts a fearful illusion at {target.Name}";
 
-    public override void ExecuteOnPlayer(Game game, Monster monster)
+    public override void ExecuteOnPlayer(Monster monster)
     {
-        if (game.HasFearResistance)
+        if (Game.HasFearResistance)
         {
-            game.MsgPrint("You refuse to be frightened.");
+            Game.MsgPrint("You refuse to be frightened.");
         }
-        else if (Game.RandomLessThan(100) < game.SkillSavingThrow)
+        else if (base.Game.RandomLessThan(100) < Game.SkillSavingThrow)
         {
-            game.MsgPrint("You refuse to be frightened.");
+            Game.MsgPrint("You refuse to be frightened.");
         }
         else
         {
-            game.FearTimer.AddTimer(Game.RandomLessThan(4) + 4);
+            Game.FearTimer.AddTimer(base.Game.RandomLessThan(4) + 4);
         }
-        game.UpdateSmartLearn(monster, Game.SingletonRepository.SpellResistantDetections.Get(nameof(FearSpellResistantDetection)));
+        Game.UpdateSmartLearn(monster, base.Game.SingletonRepository.SpellResistantDetections.Get(nameof(SpellResistantDetections.FearSpellResistantDetection)));
     }
 
-    public override void ExecuteOnMonster(Game game, Monster monster, Monster target)
+    public override void ExecuteOnMonster(Monster monster, Monster target)
     {
         MonsterRace targetRace = target.Race;
-        bool playerIsBlind = game.BlindnessTimer.Value != 0;
+        bool playerIsBlind = Game.BlindnessTimer.Value != 0;
         bool seeTarget = !playerIsBlind && target.IsVisible;
         string targetName = target.Name;
         int rlev = monster.Race.Level >= 1 ? monster.Race.Level : 1;
@@ -51,23 +51,23 @@ internal class ScareMonsterSpell : MonsterSpell
         {
             if (seeTarget)
             {
-                game.MsgPrint($"{targetName} refuses to be frightened.");
+                Game.MsgPrint($"{targetName} refuses to be frightened.");
             }
         }
-        else if (targetRace.Level > Game.DieRoll(rlev - 10 < 1 ? 1 : rlev - 10) + 10)
+        else if (targetRace.Level > base.Game.DieRoll(rlev - 10 < 1 ? 1 : rlev - 10) + 10)
         {
             if (seeTarget)
             {
-                game.MsgPrint($"{targetName} refuses to be frightened.");
+                Game.MsgPrint($"{targetName} refuses to be frightened.");
             }
         }
         else
         {
             if (target.FearLevel == 0 && seeTarget)
             {
-                game.MsgPrint($"{targetName} flees in terror!");
+                Game.MsgPrint($"{targetName} flees in terror!");
             }
-            target.FearLevel += Game.RandomLessThan(4) + 4;
+            target.FearLevel += base.Game.RandomLessThan(4) + 4;
         }
 
         // Most spells will wake up the target if it's asleep

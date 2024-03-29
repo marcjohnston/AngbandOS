@@ -7,6 +7,10 @@
 
 namespace AngbandOS.Core.Widgets;
 
+/// <summary>
+/// Represents a widget that renders a single line of text at the coordinates specified by <see cref="X"/> and <see cref="Y"/>.  Text is automatically justified using the <see cref="Justification"/>
+/// property within the space provided by the <see cref="Width"/> property.  The text is drawn in the color specified by the <see cref="Color"/> property.
+/// </summary>
 [Serializable]
 internal abstract class TextWidget : Widget
 {
@@ -36,11 +40,6 @@ internal abstract class TextWidget : Widget
     /// Returns the width of the widget.  A width that is equal to the length of the <see cref="Text"/> property is returned by default.
     /// </summary>
     public virtual int Width => Text.Length;
-
-    /// <summary>
-    /// Returns the height of the widget.  A height of 1 is returned by default.
-    /// </summary>
-    public virtual int Height => 1;
 
     /// <summary>
     /// Returns the <see cref="Justification"/> object to be used to justify the text within the <see cref="Width"/> of the <see cref="TextWidget"/>.  This property is bound using

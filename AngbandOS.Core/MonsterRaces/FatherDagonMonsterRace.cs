@@ -26,8 +26,7 @@ internal class FatherDagonMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperXSymbol);
     public override ColorEnum Color => ColorEnum.BrightChartreuse;
-    public override string Name => "Father Dagon";
-
+    
     public override int ArmorClass => 50;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -64,8 +63,6 @@ internal class FatherDagonMonsterRace : MonsterRace
     public override bool ResistTeleport => true;
     public override int Sleep => 20;
     public override int Speed => 120;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "   Father   ";
-    public override string SplitName3 => "   Dagon    ";
+    public override string? MultilineName => "Father\nDagon";
     public override bool Unique => true;
 }

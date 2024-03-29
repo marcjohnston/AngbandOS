@@ -23,8 +23,7 @@ internal class AlberichTheNibelungKingMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerHSymbol);
     public override ColorEnum Color => ColorEnum.Gold;
-    public override string Name => "Alberich, the Nibelung King";
-
+    
     public override int ArmorClass => 80;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -64,8 +63,6 @@ internal class AlberichTheNibelungKingMonsterRace : MonsterRace
     public override bool ResistTeleport => true;
     public override int Sleep => 20;
     public override int Speed => 120;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "            ";
-    public override string SplitName3 => "  Alberich  ";
+    public override string? MultilineName => "Alberich";
     public override bool Unique => true;
 }

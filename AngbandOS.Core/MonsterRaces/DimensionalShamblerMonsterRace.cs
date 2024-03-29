@@ -24,8 +24,7 @@ internal class DimensionalShamblerMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperASymbol);
     public override ColorEnum Color => ColorEnum.BrightBlue;
-    public override string Name => "Dimensional shambler";
-
+    
     public override int ArmorClass => 68;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -60,8 +59,6 @@ internal class DimensionalShamblerMonsterRace : MonsterRace
     public override int Sleep => 255;
     public override bool Smart => true;
     public override int Speed => 110;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "Dimensional ";
-    public override string SplitName3 => "  shambler  ";
+    public override string? MultilineName => "Dimensional\nshambler";
     public override bool TakeItem => true;
 }

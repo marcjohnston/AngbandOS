@@ -34,8 +34,7 @@ internal class AzathothTheDaemonSultanMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperXSymbol);
     public override ColorEnum Color => ColorEnum.Pink;
-    public override string Name => "Azathoth, The Daemon Sultan";
-
+    
     public override int ArmorClass => 175;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -88,8 +87,6 @@ internal class AzathothTheDaemonSultanMonsterRace : MonsterRace
     public override int Sleep => 0;
     public override bool Smart => true;
     public override int Speed => 155;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "            ";
-    public override string SplitName3 => "  Azathoth  ";
+    public override string? MultilineName => "Azathoth";
     public override bool Unique => true;
 }

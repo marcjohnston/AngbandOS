@@ -55,7 +55,7 @@ internal abstract class BoolWidget : TextWidget
         if (BoolChangeTracking.IsChanged)
         {
             // It has, invalidate the widget.
-            base.Invalidate();
+            Invalidate();
         }
 
         // Update the widget.

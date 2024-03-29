@@ -14,8 +14,7 @@ internal class WarTrollMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperTSymbol);
     public override ColorEnum Color => ColorEnum.Red;
-    public override string Name => "War troll";
-
+    
     public override int ArmorClass => 100;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -46,8 +45,6 @@ internal class WarTrollMonsterRace : MonsterRace
     public override bool Regenerate => true;
     public override int Sleep => 50;
     public override int Speed => 120;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "    War     ";
-    public override string SplitName3 => "   troll    ";
+    public override string? MultilineName => "War\ntroll";
     public override bool Troll => true;
 }

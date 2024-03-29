@@ -14,8 +14,7 @@ internal class ForestTrollMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperTSymbol);
     public override ColorEnum Color => ColorEnum.BrightGreen;
-    public override string Name => "Forest troll";
-
+    
     public override int ArmorClass => 50;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -42,8 +41,6 @@ internal class ForestTrollMonsterRace : MonsterRace
     public override int Rarity => 1;
     public override int Sleep => 40;
     public override int Speed => 110;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "   Forest   ";
-    public override string SplitName3 => "   troll    ";
+    public override string? MultilineName => "Forest\ntroll";
     public override bool Troll => true;
 }

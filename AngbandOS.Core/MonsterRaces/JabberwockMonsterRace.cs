@@ -19,8 +19,7 @@ internal class JabberwockMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperHSymbol);
     public override ColorEnum Color => ColorEnum.BrightRed;
-    public override string Name => "Jabberwock";
-
+    
     public override bool Animal => true;
     public override int ArmorClass => 125;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
@@ -50,7 +49,5 @@ internal class JabberwockMonsterRace : MonsterRace
     public override bool ResistTeleport => true;
     public override int Sleep => 255;
     public override int Speed => 130;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "            ";
-    public override string SplitName3 => " Jabberwock ";
+    public override string? MultilineName => "Jabberwock";
 }

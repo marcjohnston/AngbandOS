@@ -27,8 +27,7 @@ internal class CantorasTheSkeletalLordMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerSSymbol);
     public override ColorEnum Color => ColorEnum.BrightBlue;
-    public override string Name => "Cantoras, the Skeletal Lord";
-
+    
     public override int ArmorClass => 120;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -70,9 +69,7 @@ internal class CantorasTheSkeletalLordMonsterRace : MonsterRace
     public override int Sleep => 80;
     public override bool Smart => true;
     public override int Speed => 140;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "            ";
-    public override string SplitName3 => "  Cantoras  ";
+    public override string? MultilineName => "Cantoras";
     public override bool Undead => true;
     public override bool Unique => true;
 }

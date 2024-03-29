@@ -20,8 +20,7 @@ internal class NineHeadedHydraMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(UpperMSymbol);
     public override ColorEnum Color => ColorEnum.BrightGreen;
-    public override string Name => "9-headed hydra";
-
+    
     public override bool Animal => true;
     public override int ArmorClass => 95;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
@@ -51,7 +50,5 @@ internal class NineHeadedHydraMonsterRace : MonsterRace
     public override int Rarity => 2;
     public override int Sleep => 20;
     public override int Speed => 120;
-    public override string SplitName1 => "            ";
-    public override string SplitName2 => "  9-headed  ";
-    public override string SplitName3 => "   hydra    ";
+    public override string? MultilineName => "9-headed\nhydra";
 }

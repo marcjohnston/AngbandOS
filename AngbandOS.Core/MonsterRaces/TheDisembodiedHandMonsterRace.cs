@@ -14,8 +14,7 @@ internal class TheDisembodiedHandMonsterRace : MonsterRace
 
     protected override string SymbolName => nameof(LowerZSymbol);
     public override ColorEnum Color => ColorEnum.Green;
-    public override string Name => "The disembodied hand";
-
+    
     public override int ArmorClass => 15;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
@@ -43,9 +42,7 @@ internal class TheDisembodiedHandMonsterRace : MonsterRace
     public override int Rarity => 2;
     public override int Sleep => 20;
     public override int Speed => 130;
-    public override string SplitName1 => "    The     ";
-    public override string SplitName2 => "disembodied ";
-    public override string SplitName3 => "    hand    ";
+    public override string? MultilineName => "The\ndisembodied\nhand";
     public override bool Undead => true;
     public override bool Unique => true;
 }
