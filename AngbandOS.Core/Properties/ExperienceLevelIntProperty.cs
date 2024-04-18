@@ -7,6 +7,9 @@
 
 namespace AngbandOS.Core.Properties;
 
+/// <summary>
+/// Represents an integer value property that returns the current experience level of the player.
+/// </summary>
 [Serializable]
 internal class ExperienceLevelIntProperty : IntProperty
 {
