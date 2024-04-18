@@ -80,6 +80,9 @@ internal abstract class ConditionalWidget : Widget
         FalseWidget = Game.SingletonRepository.Widgets.Get(FalseWidgetName);
     }
 
+    /// <summary>
+    /// Evaluates the <see cref="Enabled"/> property as a Product of Sums expression and returns true or false accordingly.
+    /// </summary>
     protected bool EvaluateEnabledExpression
     {
         get
@@ -115,13 +118,18 @@ internal abstract class ConditionalWidget : Widget
     /// </summary>
     public override void Update()
     {
-        if (IsInvalid || EvaluateEnabledExpression)
+        if (IsInvalid)
         {
-            TrueWidget.Update();
-        }
-        else
-        {
-            FalseWidget.Update();
+            if (EvaluateEnabledExpression)
+            {
+                TrueWidget.Invalidate();
+                TrueWidget.Update();
+            }
+            else
+            {
+                FalseWidget.Invalidate();
+                FalseWidget.Update();
+            }
         }
     }
 }

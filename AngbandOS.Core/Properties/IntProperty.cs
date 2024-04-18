@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Properties;
 
 [Serializable]
-internal abstract class IntProperty : Property, IIntChangeTracking
+internal abstract class IntProperty : Property, IIntChangeTracking, IIntValue
 {
     protected IntProperty(Game game) : base(game) { }
 
@@ -35,6 +35,7 @@ internal abstract class IntProperty : Property, IIntChangeTracking
         }
     }
 
+    public int IntValue => Value;
 
     protected virtual void OnBeforeSet() { }
     protected virtual void OnAfterSet() { }

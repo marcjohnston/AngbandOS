@@ -7,18 +7,17 @@
 
 namespace AngbandOS.Core.Widgets;
 
+/// <summary>
+/// Represents the widget used to render the experience level of the player when the player has lost one or more levels of expereience.
+/// </summary>
 [Serializable]
-internal class ExperienceLevelWidget : IntWidget
+internal class ExperienceLevelsLostIntWidget : IntTextWidget
 {
-    private ExperienceLevelWidget(Game game) : base(game) { } // This object is a singleton.
+    private ExperienceLevelsLostIntWidget(Game game) : base(game) { } // This object is a singleton.
     public override int X => 6;
     public override int Y => 5;
     public override int Width => 6;
-    public override ColorEnum Color => ColorEnum.BrightGreen;
-    public override string IntChangeTrackingName => nameof(ExperienceLevelIntProperty);
+    public override ColorEnum Color => ColorEnum.Yellow;
+    public override string IntValuePropertyName => nameof(ExperienceLevelIntProperty);
     public override string JustificationName => nameof(RightJustification);
-    public override (string, bool)[]? EnabledNames => new (string, bool)[]
-    {
-        (nameof(ExperienceLevelsLostFunction), false)
-    };
 }
