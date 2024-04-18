@@ -62,7 +62,9 @@ internal abstract class ChangeTrackingWidget : Widget
             NextWidget.Update();
         }
 
-        // Update the widget.
+        // Update this widget.
         base.Update();
     }
+
+    protected override void Paint() {  }
 }
