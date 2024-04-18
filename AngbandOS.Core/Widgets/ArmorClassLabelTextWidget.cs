@@ -9,9 +9,9 @@
 namespace AngbandOS.Core.Widgets;
 
 [Serializable]
-internal class ArmorClassLabelWidget : TextWidget
+internal class ArmorClassLabelTextWidget : TextWidget
 {
-    private ArmorClassLabelWidget(Game game) : base(game) { } // This object is a singleton.
+    private ArmorClassLabelTextWidget(Game game) : base(game) { } // This object is a singleton.
     public override int X => 0;
     public override int Y => 22;
     public override string Text => "Cur AC";

@@ -31,28 +31,28 @@ internal abstract class ConditionalWidget : Widget
     public new abstract (string conditionalName, bool isTrue, int term)[] EnabledNames { get; }
 
     /// <summary>
-    /// Returns the name of the widget to invalidate when the <see cref="Enabled"/> property returns true.  This property is used to bind the <see cref="TrueWidget"/> property
-    /// during the bind phase.
+    /// Returns the name of the widget to invalidate when the <see cref="Enabled"/> property returns true; or null, if no widget should be invalidated.  This 
+    /// property is used to bind the <see cref="TrueWidget"/> property during the bind phase.  Returns null, by default.
     /// </summary>
-    public abstract string TrueWidgetName { get; }
+    public virtual string? TrueWidgetName => null;
 
     /// <summary>
-    /// Returns the name of the widget to invalidate when the <see cref="Enabled"/> property returns false.  This property is used to bind the <see cref="FalseWidget"/> property
-    /// during the bind phase.
+    /// Returns the name of the widget to invalidate when the <see cref="Enabled"/> property returns false; or null, if no widget should be invalidated.  This 
+    /// property is used to bind the <see cref="FalseWidget"/> property during the bind phase.  Returns null, by default.
     /// </summary>
-    public abstract string FalseWidgetName { get; }
+    public virtual string? FalseWidgetName => null;
 
     /// <summary>
     /// Returns the widget to invalidate when the <see cref="Enabled"/> property returns true.  This property is bound using the <see cref="TrueWidgetName"/> property 
     /// during the bind phase.
     /// </summary>
-    protected Widget TrueWidget { get; private set; }
+    protected Widget? TrueWidget { get; private set; }
 
     /// <summary>
     /// Returns the widget to invalidate when the <see cref="Enabled"/> property returns false.  This property is bound using the <see cref="FalseWidgetName"/> property 
     /// during the bind phase.
     /// </summary>
-    protected Widget FalseWidget { get; private set; }
+    protected Widget? FalseWidget { get; private set; }
 
     public override void Bind()
     {
@@ -76,8 +76,8 @@ internal abstract class ConditionalWidget : Widget
         }
         Enabled = conditionalList.ToArray();
 
-        TrueWidget = Game.SingletonRepository.Widgets.Get(TrueWidgetName);
-        FalseWidget = Game.SingletonRepository.Widgets.Get(FalseWidgetName);
+        TrueWidget = TrueWidgetName == null ? null : Game.SingletonRepository.Widgets.Get(TrueWidgetName);
+        FalseWidget = FalseWidgetName == null ? null : Game.SingletonRepository.Widgets.Get(FalseWidgetName);
     }
 
     /// <summary>
@@ -122,13 +122,19 @@ internal abstract class ConditionalWidget : Widget
         {
             if (EvaluateEnabledExpression)
             {
-                TrueWidget.Invalidate();
-                TrueWidget.Update();
+                if (TrueWidget != null)
+                {
+                    TrueWidget.Invalidate();
+                    TrueWidget.Update();
+                }
             }
             else
             {
-                FalseWidget.Invalidate();
-                FalseWidget.Update();
+                if (FalseWidget != null)
+                {
+                    FalseWidget.Invalidate();
+                    FalseWidget.Update();
+                }
             }
         }
     }
