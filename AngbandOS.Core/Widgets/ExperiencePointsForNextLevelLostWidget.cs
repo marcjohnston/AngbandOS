@@ -20,7 +20,7 @@ internal class ExperiencePointsForNextLevelLostWidget : IntWidget
     public override string IntChangeTrackingName => nameof(ExperiencePointsForNextLevelFunction);
     public override string JustificationName => nameof(RightJustification);
     public override (string conditionalName, bool isTrue)[]? EnabledNames => new[] {
-        (nameof(ExperienceLevelsAtMaxFunction), false),
+        (nameof(ExperienceLevelAtMaxFunction), false),
         (nameof(ExperiencePointsLostFunction), true)
     };
 }

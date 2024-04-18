@@ -22,6 +22,6 @@ internal class ExperiencePointsForNextLevelAtMaxWidget : TextWidget
     public override ColorEnum Color => ColorEnum.BrightGreen;
     public override (string conditionalName, bool isTrue)[]? EnabledNames => new (string, bool)[]
     {
-        (nameof(ExperienceLevelsAtMaxFunction), true)
+        (nameof(ExperienceLevelAtMaxFunction), true)
     };
 }
