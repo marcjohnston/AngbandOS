@@ -9,14 +9,34 @@ using Timer = AngbandOS.Core.Timers.Timer;
 
 namespace AngbandOS.Core.Widgets;
 
+/// <summary>
+/// Represents a widget that invalidates a child widget when a change in a property value is detected.
+/// </summary>
 [Serializable]
 internal abstract class ChangeTrackingWidget : Widget
 {
     protected ChangeTrackingWidget(Game game) : base(game) { }
+
+    /// <summary>
+    /// Returns the name of the property that participates in change tracking.  This property is used to bind the <see cref="ChangeTracking"/> property during the bind phase.
+    /// </summary>
     public abstract string ChangeTrackingName { get; }
+
+    /// <summary>
+    /// Returns the property that participates in change tracking.  This property is bound from the <see cref="ChangeTrackingName"/> property during the bind phase.
+    /// </summary>
     public IChangeTracking ChangeTracking { get; private set; }
+
+    /// <summary>
+    /// Returns the name of the widget to render when the change tracking property of the specified property indicates that the value has changed.  This property is
+    /// used to bind the <see cref="NextWidget"/> property during the bind phase.
+    /// </summary>
     public virtual string NextWidgetName { get; }
 
+    /// <summary>
+    /// Returns the widget to render when the change tracking indicates that the dependent property value has changed.  This property is bound using the <see cref="NextWidgetName"/>
+    /// property during the bind phase.
+    /// </summary>
     protected Widget NextWidget { get; private set; }
 
     public override void Bind()
@@ -65,6 +85,4 @@ internal abstract class ChangeTrackingWidget : Widget
         // Update this widget.
         base.Update();
     }
-
-    protected override void Paint() {  }
 }
