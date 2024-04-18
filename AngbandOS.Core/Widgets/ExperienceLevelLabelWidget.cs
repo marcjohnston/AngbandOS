@@ -9,14 +9,23 @@
 namespace AngbandOS.Core.Widgets;
 
 [Serializable]
+internal class ExperienceLevelLabelConditionalWidget : ConditionalWidget
+{
+    private ExperienceLevelLabelConditionalWidget(Game game) : base(game) { } // This object is a singleton.
+    public override (string, bool, int)[] EnabledNames => new (string, bool, int)[]
+    {
+        (nameof(ExperienceLevelsLostFunction), true, 0)
+    };
+    public override string TrueWidgetName => nameof(ExperienceLevelLostLabelWidget);
+
+    public override string FalseWidgetName => nameof(ExperienceLevelLabelWidget);
+}
+
+[Serializable]
 internal class ExperienceLevelLabelWidget : TextWidget
 {
     private ExperienceLevelLabelWidget(Game game) : base(game) { } // This object is a singleton.
     public override int X => 0;
     public override int Y => 5;
     public override string Text => "LEVEL";
-    public override (string, bool)[]? EnabledNames => new (string, bool)[]
-    {
-        (nameof(ExperienceLevelsLostFunction), false)
-    };
 }

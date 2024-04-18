@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Widgets;
 
 /// <summary>
-/// Represents the widget used to render either the <see cref="ExperienceLevelsLostIntWidget"/> widget when the player has lost one or more levels of expereience or the 
+/// Represents the widget used to render either the <see cref="ExperienceLevelLostIntWidget"/> widget when the player has lost one or more levels of expereience or the 
 /// <see cref="ExperienceLevelIntWidget"/> widget when the experience level of the player is at the maximum level that the player has attained.
 /// </summary>
 [Serializable]
@@ -21,7 +21,7 @@ internal class ExperienceLevelConditionalWidget : ConditionalWidget
         (nameof(ExperienceLevelsLostFunction), true, 0)
     };
 
-    public override string TrueWidgetName => nameof(ExperienceLevelsLostIntWidget);
+    public override string TrueWidgetName => nameof(ExperienceLevelLostIntWidget);
 
     public override string FalseWidgetName => nameof(ExperienceLevelIntWidget);
 }

@@ -13,6 +13,7 @@ internal abstract class IntProperty : Property, IIntChangeTracking, IIntValue
     protected IntProperty(Game game) : base(game) { }
 
     private int _value;
+
     public int Value
     {
         get

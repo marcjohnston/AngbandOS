@@ -16,8 +16,4 @@ internal class ExperienceLevelLostLabelWidget : TextWidget
     public override int X => 0;
     public override int Y => 5;
     public override string Text => "Level";
-    public override (string, bool)[]? EnabledNames => new (string, bool)[]
-    {
-        (nameof(ExperienceLevelsLostFunction), true)
-    };
 }
