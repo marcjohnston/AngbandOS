@@ -7,7 +7,7 @@
 // copies. Other copyrights may also apply.”
 
 /// <summary>
-/// Represents a function that returns true, when the experience level of the player has reached the maximum attainable level for the game; false, otherwise.
+/// Represents a boolean value function that returns true, when the experience level of the player has reached the maximum attainable level for the game; false, otherwise.
 /// </summary>
 [Serializable]
 internal class ExperienceLevelAtMaxFunction : BoolFunction

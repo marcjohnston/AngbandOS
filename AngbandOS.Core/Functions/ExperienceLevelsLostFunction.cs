@@ -6,6 +6,9 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+/// <summary>
+/// Represents a boolean value function that returns true when the experience level for the player has dropped below the maximum level the player has attained; false, otherwise.
+/// </summary>
 [Serializable]
 internal class ExperienceLevelsLostFunction : BoolFunction
 {
