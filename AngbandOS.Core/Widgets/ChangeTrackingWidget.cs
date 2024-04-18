@@ -1,0 +1,68 @@
+﻿// AngbandOS: 2022 Marc Johnston
+//
+// This game is released under the “Angband License”, defined as: “© 1997 Ben Harrison, James E.
+// Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
+// and not for profit purposes provided that this copyright and statement are included in all such
+// copies. Other copyrights may also apply.”
+
+using Timer = AngbandOS.Core.Timers.Timer;
+
+namespace AngbandOS.Core.Widgets;
+
+[Serializable]
+internal abstract class ChangeTrackingWidget : Widget
+{
+    protected ChangeTrackingWidget(Game game) : base(game) { }
+    public abstract string ChangeTrackingName { get; }
+    public IChangeTracking ChangeTracking { get; private set; }
+    public virtual string NextWidgetName { get; }
+
+    protected Widget NextWidget { get; private set; }
+
+    public override void Bind()
+    {
+        base.Bind();
+        Property? property = Game.SingletonRepository.Properties.TryGet(ChangeTrackingName);
+        if (property != null)
+        {
+            ChangeTracking = (IChangeTracking)property;
+        }
+        else
+        {
+            Timer? timer = Game.SingletonRepository.Timers.TryGet(ChangeTrackingName);
+            if (timer != null)
+            {
+                ChangeTracking = (IChangeTracking)timer;
+            }
+            else
+            {
+                Function? function = Game.SingletonRepository.Functions.TryGet(ChangeTrackingName);
+                if (function != null)
+                {
+                    ChangeTracking = (IChangeTracking)function;
+                }
+                else
+                {
+                    throw new Exception($"The {ChangeTrackingName} property does not specify a valid {nameof(Property)}, {nameof(Timer)} or {nameof(Function)}.");
+                }
+            }
+        }
+        NextWidget = Game.SingletonRepository.Widgets.Get(NextWidgetName);
+    }
+
+    public override void Update()
+    {
+        // Check to see if the value has changed.
+        if (IsInvalid || ChangeTracking.IsChanged)
+        {
+            // It has, invalidate the widget.
+            NextWidget.Invalidate();
+
+            // Now force the widget to update.
+            NextWidget.Update();
+        }
+
+        // Update the widget.
+        base.Update();
+    }
+}

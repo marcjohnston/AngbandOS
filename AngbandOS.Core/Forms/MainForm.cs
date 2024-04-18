@@ -16,7 +16,7 @@ internal class MainForm : Form
     {
         nameof(AfraidWidget),
         nameof(ArmorClassLabelWidget),
-        nameof(ArmorClassWidget),
+        nameof(ArmorClassChangeTrackingWidget),
         nameof(BlindnessWidget),
         nameof(CharacterSubclassNameWidget),
         nameof(ConfusedWidget),

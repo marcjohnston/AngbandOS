@@ -9,6 +9,7 @@ using Timer = AngbandOS.Core.Timers.Timer;
 
 namespace AngbandOS.Core.Widgets;
 
+[Obsolete($"Use {nameof(IntTextWidget)}")]
 [Serializable]
 internal abstract class IntWidget : TextWidget
 {
