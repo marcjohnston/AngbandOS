@@ -37,8 +37,10 @@ internal abstract class Widget : IGetKey
     /// Returns an array of conditionals that need to be met for the widget to rendered; or null, if there are no conditions.  All conditions must return true for the widget
     /// to be enabled.
     /// </summary>
+    [Obsolete("Use ConditionalWidget")]
     public (IConditional conditional, bool isTrue)[]? Enabled { get; private set; }
 
+    [Obsolete("Use ConditionalWidget")]
     public virtual (string conditionalName, bool isTrue)[]? EnabledNames => null;
 
     public virtual string Key => GetType().Name;
