@@ -19,6 +19,6 @@ internal class ExperienceLevelWidget : IntWidget
     public override string JustificationName => nameof(RightJustification);
     public override (string, bool)[]? EnabledNames => new (string, bool)[]
     {
-        (nameof(MaxLevelAttainedFunction), true)
+        (nameof(ExperienceLevelsLostFunction), false)
     };
 }

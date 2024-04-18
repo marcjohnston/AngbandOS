@@ -17,6 +17,6 @@ internal class ExperienceLevelLabelWidget : TextWidget
     public override string Text => "LEVEL";
     public override (string, bool)[]? EnabledNames => new (string, bool)[]
     {
-        (nameof(MaxLevelAttainedFunction), true)
+        (nameof(ExperienceLevelsLostFunction), false)
     };
 }

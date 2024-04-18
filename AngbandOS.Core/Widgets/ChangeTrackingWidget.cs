@@ -85,4 +85,6 @@ internal abstract class ChangeTrackingWidget : Widget
         // Update this widget.
         base.Update();
     }
+
+    protected override void Paint() {  }
 }
