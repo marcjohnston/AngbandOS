@@ -8,9 +8,9 @@
 namespace AngbandOS.Core.Widgets;
 
 [Serializable]
-internal class TargetedMonsterRaceNameWidget : MultilineNullableStringTextWidget
+internal class TargetedMonsterRaceNameMultilineNullableStringWidget : MultilineNullableStringWidget
 {
-    private TargetedMonsterRaceNameWidget(Game game) : base(game) { } // This object is a singleton.
+    private TargetedMonsterRaceNameMultilineNullableStringWidget(Game game) : base(game) { } // This object is a singleton.
     public override int X => 0;
     public override int Y => 29;
 

@@ -8,9 +8,9 @@
 namespace AngbandOS.Core.Widgets;
 
 [Serializable]
-internal abstract class MultilineNullableTextWidget : Widget
+internal abstract class MultilineNullableWidget : Widget
 {
-    protected MultilineNullableTextWidget(Game game) : base(game) { }
+    protected MultilineNullableWidget(Game game) : base(game) { }
 
     /// <summary>
     /// Returns the text to be rendered for the widget.

@@ -1,4 +1,5 @@
-﻿// AngbandOS: 2022 Marc Johnston
+﻿
+// AngbandOS: 2022 Marc Johnston
 //
 // This game is released under the “Angband License”, defined as: “© 1997 Ben Harrison, James E.
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
@@ -8,10 +9,11 @@
 namespace AngbandOS.Core.Widgets;
 
 [Serializable]
-internal class MainFormMapWidget : MapWidget
+internal class CharacterSubclassNameStringWidget : StringWidget
 {
-    private MainFormMapWidget(Game game) : base(game) { } // This object is a singleton.
-    public override int X => 13;
-    public override int Y => 1;
-    public override string MapChangeTrackingName => nameof(RefreshMapFunction);
+    private CharacterSubclassNameStringWidget(Game game) : base(game) { } // This object is a singleton.
+    public override int X => 0;
+    public override int Y => 3;
+    public override string StringChangeTrackingName => nameof(CharacterSubclassNameFunction);
 }
+

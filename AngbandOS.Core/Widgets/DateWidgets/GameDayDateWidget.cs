@@ -8,9 +8,9 @@
 namespace AngbandOS.Core.Widgets;
 
 [Serializable]
-internal class CurrentDateWidget : DateWidget
+internal class GameDayDateWidget : DateWidget
 {
-    private CurrentDateWidget(Game game) : base(game) { } // This object is a singleton.
+    private GameDayDateWidget(Game game) : base(game) { } // This object is a singleton.
     public override int X => 4;
     public override int Y => 9;
     public override int Width => 8;

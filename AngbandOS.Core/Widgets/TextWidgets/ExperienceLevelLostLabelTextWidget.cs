@@ -6,13 +6,14 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+
 namespace AngbandOS.Core.Widgets;
 
 [Serializable]
-internal class CurrentTimeLabelWidget : TextWidget
+internal class ExperienceLevelLostLabelTextWidget : TextWidget
 {
-    private CurrentTimeLabelWidget(Game game) : base(game) { } // This object is a singleton.
+    private ExperienceLevelLostLabelTextWidget(Game game) : base(game) { } // This object is a singleton.
     public override int X => 0;
-    public override int Y => 8;
-    public override string Text => "Time";
+    public override int Y => 5;
+    public override string Text => "Level";
 }

@@ -10,9 +10,9 @@ using Timer = AngbandOS.Core.Timers.Timer;
 namespace AngbandOS.Core.Widgets;
 
 [Serializable]
-internal abstract class MultilineNullableStringTextWidget : MultilineNullableTextWidget
+internal abstract class MultilineNullableStringWidget : MultilineNullableWidget
 {
-    protected MultilineNullableStringTextWidget(Game game) : base(game) { }
+    protected MultilineNullableStringWidget(Game game) : base(game) { }
 
     public abstract string MultilineNullableStringChangeTrackingName { get; }
     public IMultilineNullableStringChangeTracking MultilineNullableStringChangeTracking { get; private set; }

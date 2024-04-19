@@ -9,9 +9,9 @@
 namespace AngbandOS.Core.Widgets;
 
 [Serializable]
-internal class CurrentDateLabelWidget : TextWidget
+internal class CurrentDateLabelTextWidget : TextWidget
 {
-    private CurrentDateLabelWidget(Game game) : base(game) { } // This object is a singleton.
+    private CurrentDateLabelTextWidget(Game game) : base(game) { } // This object is a singleton.
     public override int X => 0;
     public override int Y => 9;
     public override string Text => "Day";

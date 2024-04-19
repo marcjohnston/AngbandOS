@@ -5,17 +5,16 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-
 namespace AngbandOS.Core.Widgets;
 
 [Serializable]
-internal class CurrentTimeWidget : TimeWidget
+internal class GoldIntWidget : IntWidget
 {
-    private CurrentTimeWidget(Game game) : base(game) { } // This object is a singleton.
-    public override int X => 4;
-    public override int Y => 8;
-    public override int Width => 8;
+    private GoldIntWidget(Game game) : base(game) { } // This object is a singleton.
+    public override int X => 3;
+    public override int Y => 11;
+    public override int Width => 9;
     public override ColorEnum Color => ColorEnum.BrightGreen;
+    public override string IntChangeTrackingName => nameof(GoldIntProperty);
     public override string JustificationName => nameof(RightJustification);
-    public override string DateTimeChangeTrackingName => nameof(CurrentGameDateTimeProperty);
 }
