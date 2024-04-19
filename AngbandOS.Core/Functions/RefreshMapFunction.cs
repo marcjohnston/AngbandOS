@@ -5,6 +5,8 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+namespace AngbandOS.Core.Functions;
+
 /// <summary>
 /// Represents a function that determines when the map needs to be updated.  Widgets that reference the map will use this function and the <see cref="IMapChangeTracking"/> interface
 /// to repaint the map as needed.

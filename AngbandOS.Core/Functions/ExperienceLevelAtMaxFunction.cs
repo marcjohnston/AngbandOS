@@ -6,6 +6,8 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+namespace AngbandOS.Core.Functions;
+
 /// <summary>
 /// Represents a boolean value function that returns true, when the experience level of the player has reached the maximum attainable level for the game; false, otherwise.
 /// </summary>
