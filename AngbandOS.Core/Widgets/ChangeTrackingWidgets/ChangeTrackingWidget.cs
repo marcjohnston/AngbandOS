@@ -29,15 +29,15 @@ internal abstract class ChangeTrackingWidget : Widget
 
     /// <summary>
     /// Returns the name of the widget to render when the change tracking property of the specified property indicates that the value has changed.  This property is
-    /// used to bind the <see cref="NextWidget"/> property during the bind phase.
+    /// used to bind the <see cref="Widgets"/> property during the bind phase.
     /// </summary>
-    public abstract string NextWidgetName { get; }
+    public abstract string[] WidgetNames { get; }
 
     /// <summary>
-    /// Returns the widget to render when the change tracking indicates that the dependent property value has changed.  This property is bound using the <see cref="NextWidgetName"/>
+    /// Returns the widget to render when the change tracking indicates that the dependent property value has changed.  This property is bound using the <see cref="WidgetNames"/>
     /// property during the bind phase.
     /// </summary>
-    protected Widget NextWidget { get; private set; }
+    protected Widget[] Widgets { get; private set; }
 
     public override void Bind()
     {
@@ -67,7 +67,13 @@ internal abstract class ChangeTrackingWidget : Widget
                 }
             }
         }
-        NextWidget = Game.SingletonRepository.Widgets.Get(NextWidgetName);
+
+        List<Widget> widgetList = new List<Widget>();
+        foreach (string widgetName in WidgetNames)
+        {
+            widgetList.Add(Game.SingletonRepository.Widgets.Get(widgetName));
+        }
+        Widgets = widgetList.ToArray();
     }
 
     public override void Update()
@@ -75,11 +81,14 @@ internal abstract class ChangeTrackingWidget : Widget
         // Check to see if the value has changed.
         if (IsInvalid || ChangeTracking.IsChanged)
         {
-            // It has, invalidate the widget.
-            NextWidget.Invalidate();
+            foreach (Widget widget in Widgets)
+            {
+                // It has, invalidate the widget.
+                widget.Invalidate();
 
-            // Now force the widget to update.
-            NextWidget.Update();
+                // Now force the widget to update.
+                widget.Update();
+            }
         }
 
         // Update this widget.

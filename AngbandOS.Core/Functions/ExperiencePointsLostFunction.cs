@@ -8,6 +8,10 @@
 
 namespace AngbandOS.Core.Functions;
 
+/// <summary>
+/// Represents a boolean function that returns true, when the experience points for the player is lower than the maximum experience points that the player
+/// has gained; false, otherwise.
+/// </summary>
 [Serializable]
 internal class ExperiencePointsLostFunction : BoolFunction
 {
@@ -16,6 +20,6 @@ internal class ExperiencePointsLostFunction : BoolFunction
     public override string[]? DependencyNames => new string[]
     {
         nameof(ExperiencePointsIntProperty),
-        nameof(MaxExperienceGainedIntProperty)
+        nameof(MaxExperiencePointsGainedIntProperty)
     };
 }

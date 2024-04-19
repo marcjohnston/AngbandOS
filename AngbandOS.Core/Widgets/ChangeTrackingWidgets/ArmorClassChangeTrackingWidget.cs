@@ -12,5 +12,5 @@ internal class ArmorClassChangeTrackingWidget : ChangeTrackingWidget
 {
     private ArmorClassChangeTrackingWidget(Game game) : base(game) { } // This object is a singleton.
     public override string ChangeTrackingName => nameof(ArmorClassFunction);
-    public override string NextWidgetName => nameof(ArmorClassIntWidget);
+    public override string[] WidgetNames => new string[] { nameof(ArmorClassIntWidget) };
 }

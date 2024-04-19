@@ -9,18 +9,18 @@ using System.Diagnostics;
 
 namespace AngbandOS.Core.Widgets;
 
+/// <summary>
+/// Represents a widget that renders the experience points that are needed for the player to gain the next level in a highlight color because they are higher than 
+/// the experience points that the player has gained.
+/// </summary>
 [Serializable]
-internal class ExperiencePointsForNextLevelLostWidget : IntWidget
+internal class ExperiencePointsForNextLevelLostIntWidget : IntTextWidget
 {
-    private ExperiencePointsForNextLevelLostWidget(Game game) : base(game) { } // This object is a singleton.
+    private ExperiencePointsForNextLevelLostIntWidget(Game game) : base(game) { } // This object is a singleton.
     public override int X => 4;
     public override int Y => 6;
     public override int Width => 8;
     public override ColorEnum Color => ColorEnum.Yellow;
-    public override string IntChangeTrackingName => nameof(ExperiencePointsForNextLevelFunction);
+    public override string IntValuePropertyName => nameof(ExperiencePointsForNextLevelFunction);
     public override string JustificationName => nameof(RightJustification);
-    public override (string conditionalName, bool isTrue)[]? EnabledNames => new[] {
-        (nameof(ExperienceLevelAtMaxFunction), false),
-        (nameof(ExperiencePointsLostFunction), true)
-    };
 }

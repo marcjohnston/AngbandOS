@@ -9,6 +9,10 @@
 
 namespace AngbandOS.Core.Widgets;
 
+/// <summary>
+/// Represents a widget that renders the label for the experience level in Pascal case when the player has lost one or more levels from their maximum gained
+/// experience level.
+/// </summary>
 [Serializable]
 internal class ExperienceLevelLostLabelTextWidget : TextWidget
 {

@@ -5,22 +5,20 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-using System.Diagnostics;
-
 namespace AngbandOS.Core.Widgets;
 
+/// <summary>
+/// Represents a text widget that renders asterisks when the player has attained the maximum number of experience points.
+/// </summary>
 [Serializable]
-internal class ExperiencePointsForNextLevelWidget : IntWidget
+internal class ExperiencePointsAtMaxTextWidget : TextWidget
 {
-    private ExperiencePointsForNextLevelWidget(Game game) : base(game) { } // This object is a singleton.
+    private ExperiencePointsAtMaxTextWidget(Game game) : base(game) { } // This object is a singleton.
+
     public override int X => 4;
     public override int Y => 6;
     public override int Width => 8;
-    public override ColorEnum Color => ColorEnum.BrightGreen;
-    public override string IntChangeTrackingName => nameof(ExperiencePointsForNextLevelFunction);
+    public override string Text => "   *****";
     public override string JustificationName => nameof(RightJustification);
-    public override (string conditionalName, bool isTrue)[]? EnabledNames => new[] {
-        (nameof(ExperienceLevelAtMaxFunction), false),
-        (nameof(ExperiencePointsLostFunction), false)
-    };
+    public override ColorEnum Color => ColorEnum.BrightGreen;
 }

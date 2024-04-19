@@ -8,13 +8,13 @@
 namespace AngbandOS.Core.Widgets;
 
 /// <summary>
-/// Represents the widget used to render the ExperienceLevel value.  This is the first widget in the chain and detects when the <see cref="ExperienceLevelIntProperty"/>
-/// property has changed before rendering the child <see cref="ExperienceLevelConditionalWidget"/> widget.
+/// Represents a change tracking widget used to render the ExperienceLevel value and label widgets when the experience level changes.  This is the first widget in 
+/// the chain and detects when the <see cref="ExperienceLevelIntProperty"/> property has changed before rendering the child <see cref="ExperienceLevelConditionalWidget"/> widget.
 /// </summary>
 [Serializable]
 internal class ExperienceLevelChangeTrackingWidget : ChangeTrackingWidget
 {
     private ExperienceLevelChangeTrackingWidget(Game game) : base(game) { } // This object is a singleton.
-    public override string NextWidgetName => nameof(ExperienceLevelConditionalWidget);
+    public override string[] WidgetNames => new string[] { nameof(ExperienceLevelConditionalWidget) };
     public override string ChangeTrackingName => nameof(ExperienceLevelIntProperty);
 }

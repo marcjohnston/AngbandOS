@@ -32,27 +32,27 @@ internal abstract class ConditionalWidget : Widget
 
     /// <summary>
     /// Returns the name of the widget to invalidate when the <see cref="Enabled"/> property returns true; or null, if no widget should be invalidated.  This 
-    /// property is used to bind the <see cref="TrueWidget"/> property during the bind phase.  Returns null, by default.
+    /// property is used to bind the <see cref="TrueWidgets"/> property during the bind phase.  Returns null, by default.
     /// </summary>
-    public virtual string? TrueWidgetName => null;
+    public virtual string[]? TrueWidgetNames => null;
 
     /// <summary>
     /// Returns the name of the widget to invalidate when the <see cref="Enabled"/> property returns false; or null, if no widget should be invalidated.  This 
-    /// property is used to bind the <see cref="FalseWidget"/> property during the bind phase.  Returns null, by default.
+    /// property is used to bind the <see cref="FalseWidgets"/> property during the bind phase.  Returns null, by default.
     /// </summary>
-    public virtual string? FalseWidgetName => null;
+    public virtual string[]? FalseWidgetNames => null;
 
     /// <summary>
-    /// Returns the widget to invalidate when the <see cref="Enabled"/> property returns true.  This property is bound using the <see cref="TrueWidgetName"/> property 
+    /// Returns the widget to invalidate when the <see cref="Enabled"/> property returns true.  This property is bound using the <see cref="TrueWidgetNames"/> property 
     /// during the bind phase.
     /// </summary>
-    protected Widget? TrueWidget { get; private set; }
+    protected Widget[]? TrueWidgets { get; private set; }
 
     /// <summary>
-    /// Returns the widget to invalidate when the <see cref="Enabled"/> property returns false.  This property is bound using the <see cref="FalseWidgetName"/> property 
+    /// Returns the widget to invalidate when the <see cref="Enabled"/> property returns false.  This property is bound using the <see cref="FalseWidgetNames"/> property 
     /// during the bind phase.
     /// </summary>
-    protected Widget? FalseWidget { get; private set; }
+    protected Widget[]? FalseWidgets { get; private set; }
 
     public override void Bind()
     {
@@ -76,8 +76,19 @@ internal abstract class ConditionalWidget : Widget
         }
         Enabled = conditionalList.ToArray();
 
-        TrueWidget = TrueWidgetName == null ? null : Game.SingletonRepository.Widgets.Get(TrueWidgetName);
-        FalseWidget = FalseWidgetName == null ? null : Game.SingletonRepository.Widgets.Get(FalseWidgetName);
+        List<Widget> trueWidgetList = new List<Widget>();
+        foreach (string widgetName in TrueWidgetNames)
+        {
+            trueWidgetList.Add(Game.SingletonRepository.Widgets.Get(widgetName));
+        }
+        TrueWidgets = trueWidgetList.ToArray();
+
+        List<Widget> falseWidgetList = new List<Widget>();
+        foreach (string widgetName in FalseWidgetNames)
+        {
+            falseWidgetList.Add(Game.SingletonRepository.Widgets.Get(widgetName));
+        }
+        FalseWidgets = falseWidgetList.ToArray();
     }
 
     /// <summary>
@@ -120,20 +131,17 @@ internal abstract class ConditionalWidget : Widget
     {
         if (IsInvalid)
         {
-            if (EvaluateEnabledExpression)
+            // Select the list of widgets to use based on the condition.
+            Widget[]? widgets = EvaluateEnabledExpression ? TrueWidgets : FalseWidgets;
+
+            // Check to see if there are widgets that need to be rendered.
+            if (widgets != null)
             {
-                if (TrueWidget != null)
+                // Render each of the widgets.
+                foreach (Widget widget in widgets)
                 {
-                    TrueWidget.Invalidate();
-                    TrueWidget.Update();
-                }
-            }
-            else
-            {
-                if (FalseWidget != null)
-                {
-                    FalseWidget.Invalidate();
-                    FalseWidget.Update();
+                    widget.Invalidate();
+                    widget.Update();
                 }
             }
         }

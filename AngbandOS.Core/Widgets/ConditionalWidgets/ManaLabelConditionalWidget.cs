@@ -16,5 +16,5 @@ internal class ManaLabelConditionalWidget : ConditionalWidget
     {
         (nameof(UsesManaFunction), true, 0)
     };
-    public override string? TrueWidgetName => nameof(ManaLabelWidget);
+    public override string[]? TrueWidgetNames => new string[] { nameof(ManaLabelWidget) };
 }

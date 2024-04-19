@@ -357,7 +357,7 @@ internal class Game
     /// 
     /// </summary>
     /// <remarks>borg: player->max_exp</remarks>
-    public readonly MaxExperienceGainedIntProperty MaxExperienceGained;
+    public readonly MaxExperiencePointsGainedIntProperty MaxExperienceGained;
 
     /// <summary>
     ///
@@ -675,7 +675,7 @@ internal class Game
         RefreshMap = (RefreshMapProperty)SingletonRepository.Properties.Get(nameof(RefreshMapProperty));
         MapX = (MapXIntProperty)SingletonRepository.Properties.Get(nameof(MapXIntProperty));
         MapY = (MapYIntProperty)SingletonRepository.Properties.Get(nameof(MapYIntProperty));
-        MaxExperienceGained = (MaxExperienceGainedIntProperty)SingletonRepository.Properties.Get(nameof(MaxExperienceGainedIntProperty));
+        MaxExperienceGained = (MaxExperiencePointsGainedIntProperty)SingletonRepository.Properties.Get(nameof(MaxExperiencePointsGainedIntProperty));
         
         AcidResistanceTimer = (AcidResistanceTimer)SingletonRepository.Timers.Get(nameof(Timers.AcidResistanceTimer));
         BleedingTimer = (BleedingTimer)SingletonRepository.Timers.Get(nameof(Timers.BleedingTimer));

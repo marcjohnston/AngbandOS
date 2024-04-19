@@ -21,7 +21,7 @@ internal class ExperienceLevelConditionalWidget : ConditionalWidget
         (nameof(ExperienceLevelsLostFunction), true, 0)
     };
 
-    public override string? TrueWidgetName => nameof(ExperienceLevelLostIntWidget);
+    public override string[]? TrueWidgetNames => new string[] { nameof(ExperienceLevelLostIntWidget), nameof(ExperienceLevelLostLabelTextWidget) };
 
-    public override string? FalseWidgetName => nameof(ExperienceLevelIntWidget);
+    public override string[]? FalseWidgetNames => new string[] { nameof(ExperienceLevelIntWidget), nameof(ExperienceLevelLabelTextWidget) };
 }

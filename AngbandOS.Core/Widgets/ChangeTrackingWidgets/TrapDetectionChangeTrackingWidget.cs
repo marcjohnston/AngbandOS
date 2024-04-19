@@ -15,5 +15,5 @@ internal class TrapDetectionChangeTrackingWidget : ChangeTrackingWidget
 {
     private TrapDetectionChangeTrackingWidget(Game game) : base(game) { } // This object is a singleton.
     public override string ChangeTrackingName => nameof(TrapsDetectedFunction);
-    public override string NextWidgetName => nameof(TrapDetectionConditionalWidget);
+    public override string[] WidgetNames => new string[] { nameof(TrapDetectionConditionalWidget) };
 }

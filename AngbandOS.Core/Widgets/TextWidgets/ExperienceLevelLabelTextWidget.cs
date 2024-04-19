@@ -8,6 +8,9 @@
 
 namespace AngbandOS.Core.Widgets;
 
+/// <summary>
+/// Represents a widget that renders the experience level label when the player hasn't lost any experience levels.
+/// </summary>
 [Serializable]
 internal class ExperienceLevelLabelTextWidget : TextWidget
 {

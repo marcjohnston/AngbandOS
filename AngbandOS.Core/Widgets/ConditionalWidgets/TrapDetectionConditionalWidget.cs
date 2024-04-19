@@ -14,11 +14,12 @@ namespace AngbandOS.Core.Widgets;
 internal class TrapDetectionConditionalWidget : ConditionalWidget
 {
     private TrapDetectionConditionalWidget(Game game) : base(game) { } // This object is a singleton.
-    public override string? TrueWidgetName => nameof(TrapCountRangedWidget);
-    public override string? FalseWidgetName => nameof(NoTrapsDetectedTextWidget);
 
     public override (string, bool, int)[] EnabledNames => new (string, bool, int)[]
     {
         (nameof(TrapsDetectedFunction), true, 0)
     };
+
+    public override string[]? TrueWidgetNames => new string[] { nameof(TrapCountRangedWidget) };
+    public override string[]? FalseWidgetNames => new string[] { nameof(NoTrapsDetectedTextWidget) };
 }
