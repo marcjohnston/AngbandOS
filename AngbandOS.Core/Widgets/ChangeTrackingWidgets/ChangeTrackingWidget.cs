@@ -31,7 +31,7 @@ internal abstract class ChangeTrackingWidget : Widget
     /// Returns the name of the widget to render when the change tracking property of the specified property indicates that the value has changed.  This property is
     /// used to bind the <see cref="NextWidget"/> property during the bind phase.
     /// </summary>
-    public virtual string NextWidgetName { get; }
+    public abstract string NextWidgetName { get; }
 
     /// <summary>
     /// Returns the widget to render when the change tracking indicates that the dependent property value has changed.  This property is bound using the <see cref="NextWidgetName"/>

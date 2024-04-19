@@ -7,10 +7,14 @@
 
 namespace AngbandOS.Core.Widgets;
 
+/// <summary>
+/// Represents a widget that renders the "DTrap" trap detector in green, when the North, South, East and West map grid coordinates from the player are within the
+/// boundaries of the traps detected area.  This widget is a child of the true branch of the <see cref="TrapDetectionConditionalWidget"/> widget.
+/// </summary>
 [Serializable]
-internal class TrapCountWidget : RangedWidget
+internal class TrapCountRangedWidget : RangedWidget
 {
-    private TrapCountWidget(Game game) : base(game) { } // This object is a singleton.
+    private TrapCountRangedWidget(Game game) : base(game) { } // This object is a singleton.
     public override int X => 53;
     public override int Y => 44;
     public override int Width => 5;
@@ -20,10 +24,5 @@ internal class TrapCountWidget : RangedWidget
     public override (int startValue, string textToRender, ColorEnum color)[] Ranges => new (int, string, ColorEnum)[]
     {
         (4, "DTrap", ColorEnum.Green)
-    };
-
-    public override (string conditionalName, bool isTrue)[]? EnabledNames => new (string, bool)[]
-    {
-        (nameof(TrapsDetectedFunction), true)
     };
 }

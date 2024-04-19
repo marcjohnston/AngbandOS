@@ -34,9 +34,4 @@ internal class TargetedMonsterRaceNameMultilineNullableStringWidget : MultilineN
     /// Returns the <see cref="TargetedMonsterNameFunction"/> function to render a multiline version of the monster race name.
     /// </summary>
     public override string MultilineNullableStringChangeTrackingName => nameof(TargetedMonsterNameFunction);
-
-    public override void Update()
-    {
-        base.Update();
-    }
 }
