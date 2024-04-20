@@ -8,20 +8,16 @@
 namespace AngbandOS.Core.Widgets;
 
 [Serializable]
-internal class ManaWidget : RangedMaxValueWidget
+internal class HealthPointsMaxRangedWidget : MaxRangedWidget
 {
-    private ManaWidget(Game game) : base(game) { } // This object is a singleton.
+    private HealthPointsMaxRangedWidget(Game game) : base(game) { } // This object is a singleton.
     public override int X => 7;
-    public override int Y => 26;
+    public override int Y => 24;
     public override int Width => 5;
     protected override ColorEnum DefaultColor => ColorEnum.BrightRed;
-    public override string IntChangeTrackingName => nameof(ManaIntProperty);
-    public override string MaxIntChangeTrackableName => nameof(MaxManaIntProperty);
+    public override string IntChangeTrackingName => nameof(HealthPointsIntProperty);
+    public override string MaxIntChangeTrackableName => nameof(MaxHealthPointsIntProperty);
     public override string JustificationName => nameof(RightJustification);
-    public override (string, bool)[]? EnabledNames => new (string, bool)[]
-    {
-        (nameof(UsesManaFunction), true)
-    };
 
     public override (int, ColorEnum)[] Ranges => new (int, ColorEnum)[]
     {

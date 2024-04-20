@@ -8,6 +8,9 @@
 
 namespace AngbandOS.Core.Widgets;
 
+/// <summary>
+/// Represents a widget that renders the Mana label.
+/// </summary>
 [Serializable]
 internal class ManaLabelWidget : TextWidget
 {

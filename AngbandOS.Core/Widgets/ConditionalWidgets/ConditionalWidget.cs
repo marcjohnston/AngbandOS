@@ -77,16 +77,22 @@ internal abstract class ConditionalWidget : Widget
         Enabled = conditionalList.ToArray();
 
         List<Widget> trueWidgetList = new List<Widget>();
-        foreach (string widgetName in TrueWidgetNames)
+        if (TrueWidgetNames != null)
         {
-            trueWidgetList.Add(Game.SingletonRepository.Widgets.Get(widgetName));
+            foreach (string widgetName in TrueWidgetNames)
+            {
+                trueWidgetList.Add(Game.SingletonRepository.Widgets.Get(widgetName));
+            }
         }
         TrueWidgets = trueWidgetList.ToArray();
 
         List<Widget> falseWidgetList = new List<Widget>();
-        foreach (string widgetName in FalseWidgetNames)
+        if (FalseWidgetNames != null)
         {
-            falseWidgetList.Add(Game.SingletonRepository.Widgets.Get(widgetName));
+            foreach (string widgetName in FalseWidgetNames)
+            {
+                falseWidgetList.Add(Game.SingletonRepository.Widgets.Get(widgetName));
+            }
         }
         FalseWidgets = falseWidgetList.ToArray();
     }

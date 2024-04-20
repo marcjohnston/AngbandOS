@@ -7,16 +7,19 @@
 
 namespace AngbandOS.Core.Widgets;
 
+/// <summary>
+/// Represents a widget that renders the current mana integer value in varying color based on the percentage of mana the player has to their maximum.
+/// </summary>
 [Serializable]
-internal class HealthPointsWidget : RangedMaxValueWidget
+internal class ManaMaxRangedWidget : MaxRangedWidget
 {
-    private HealthPointsWidget(Game game) : base(game) { } // This object is a singleton.
+    private ManaMaxRangedWidget(Game game) : base(game) { } // This object is a singleton.
     public override int X => 7;
-    public override int Y => 24;
+    public override int Y => 26;
     public override int Width => 5;
     protected override ColorEnum DefaultColor => ColorEnum.BrightRed;
-    public override string IntChangeTrackingName => nameof(HealthPointsIntProperty);
-    public override string MaxIntChangeTrackableName => nameof(MaxHealthPointsIntProperty);
+    public override string IntChangeTrackingName => nameof(ManaIntProperty);
+    public override string MaxIntChangeTrackableName => nameof(MaxManaIntProperty);
     public override string JustificationName => nameof(RightJustification);
 
     public override (int, ColorEnum)[] Ranges => new (int, ColorEnum)[]

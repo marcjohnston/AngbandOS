@@ -10,13 +10,13 @@ using Timer = AngbandOS.Core.Timers.Timer;
 namespace AngbandOS.Core.Widgets;
 
 [Serializable]
-internal abstract class RangedMaxValueWidget : IntWidget
+internal abstract class MaxRangedWidget : IntWidget
 {
     private bool _sortValidated = false;
     private int _value;
     private ColorEnum _color;
 
-    protected RangedMaxValueWidget(Game game) : base(game)
+    protected MaxRangedWidget(Game game) : base(game)
     {
         _color = DefaultColor;
     }

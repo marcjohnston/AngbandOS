@@ -7,18 +7,17 @@
 
 namespace AngbandOS.Core.Widgets;
 
+/// <summary>
+/// Represents a widget that renders the players maximum mana value.
+/// </summary>
 [Serializable]
-internal class MaxManaWidget : IntWidget
+internal class MaxManaWidget : IntTextWidget
 {
     private MaxManaWidget(Game game) : base(game) { } // This object is a singleton.
     public override int X => 7;
     public override int Y => 25;
     public override int Width => 5;
     public override ColorEnum Color => ColorEnum.BrightGreen;
-    public override string IntChangeTrackingName => nameof(MaxManaIntProperty);
+    public override string IntValuePropertyName => nameof(MaxManaIntProperty);
     public override string JustificationName => nameof(RightJustification);
-    public override (string, bool)[]? EnabledNames => new (string, bool)[]
-    {
-        (nameof(UsesManaFunction), true)
-    };
 }
