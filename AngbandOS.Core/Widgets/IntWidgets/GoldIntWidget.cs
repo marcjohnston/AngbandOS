@@ -8,13 +8,13 @@
 namespace AngbandOS.Core.Widgets;
 
 [Serializable]
-internal class GoldIntWidget : IntWidget
+internal class GoldIntWidget : IntTextWidget
 {
     private GoldIntWidget(Game game) : base(game) { } // This object is a singleton.
     public override int X => 3;
     public override int Y => 11;
     public override int Width => 9;
     public override ColorEnum Color => ColorEnum.BrightGreen;
-    public override string IntChangeTrackingName => nameof(GoldIntProperty);
+    public override string IntValuePropertyName => nameof(GoldIntProperty);
     public override string JustificationName => nameof(RightJustification);
 }

@@ -8,13 +8,13 @@
 namespace AngbandOS.Core.Widgets;
 
 [Serializable]
-internal class MaxHealthPointsWidget : IntWidget
+internal class MaxHealthPointsWidget : IntTextWidget
 {
     private MaxHealthPointsWidget(Game game) : base(game) { } // This object is a singleton.
     public override int X => 7;
     public override int Y => 23;
     public override int Width => 5;
     public override ColorEnum Color => ColorEnum.BrightGreen;
-    public override string IntChangeTrackingName => nameof(MaxHealthPointsIntProperty);
+    public override string IntValuePropertyName => nameof(MaxHealthPointsIntProperty);
     public override string JustificationName => nameof(RightJustification);
 }
