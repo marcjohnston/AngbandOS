@@ -21,6 +21,6 @@ internal class ExperiencePointsForNextLevelLostIntWidget : IntTextWidget
     public override int Y => 6;
     public override int Width => 8;
     public override ColorEnum Color => ColorEnum.Yellow;
-    public override string IntValuePropertyName => nameof(ExperiencePointsForNextLevelFunction);
+    public override string IntValueName => nameof(ExperiencePointsForNextLevelFunction);
     public override string JustificationName => nameof(RightJustification);
 }

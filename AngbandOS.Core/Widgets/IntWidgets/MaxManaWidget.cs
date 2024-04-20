@@ -18,6 +18,6 @@ internal class MaxManaWidget : IntTextWidget
     public override int Y => 25;
     public override int Width => 5;
     public override ColorEnum Color => ColorEnum.BrightGreen;
-    public override string IntValuePropertyName => nameof(MaxManaIntProperty);
+    public override string IntValueName => nameof(MaxManaIntProperty);
     public override string JustificationName => nameof(RightJustification);
 }

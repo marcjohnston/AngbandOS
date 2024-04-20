@@ -13,8 +13,8 @@ namespace AngbandOS.Core.Widgets;
 internal abstract class IntTextWidget : TextWidget
 {
     protected IntTextWidget(Game game) : base(game) { }
-    public abstract string IntValuePropertyName { get; }
-    public IIntValue IntValueProperty { get; private set; }
+    public abstract string IntValueName { get; }
+    public IIntValue IntValue { get; private set; }
 
     /// <summary>
     /// 
@@ -22,33 +22,33 @@ internal abstract class IntTextWidget : TextWidget
     /// <remarks>
     /// This override is sealed because the data source for the Text property is being rerouted from a property with a non-string property.
     /// </remarks>
-    public sealed override string Text => IntValueProperty.IntValue.ToString();
+    public sealed override string Text => IntValue.IntValue.ToString();
 
     public override void Bind()
     {
         base.Bind();
-        Property? property = Game.SingletonRepository.Properties.TryGet(IntValuePropertyName);
+        Property? property = Game.SingletonRepository.Properties.TryGet(IntValueName);
         if (property != null)
         {
-            IntValueProperty = (IIntValue)property;
+            IntValue = (IIntValue)property;
         }
         else
         {
-            Timer? timer = Game.SingletonRepository.Timers.TryGet(IntValuePropertyName);
+            Timer? timer = Game.SingletonRepository.Timers.TryGet(IntValueName);
             if (timer != null)
             {
-                IntValueProperty = (IIntValue)timer;
+                IntValue = (IIntValue)timer;
             }
             else
             {
-                Function? function = Game.SingletonRepository.Functions.TryGet(IntValuePropertyName);
+                Function? function = Game.SingletonRepository.Functions.TryGet(IntValueName);
                 if (function != null)
                 {
-                    IntValueProperty = (IIntValue)function;
+                    IntValue = (IIntValue)function;
                 }
                 else
                 {
-                    throw new Exception($"The {IntValuePropertyName} property does not specify a valid {nameof(Property)}, {nameof(Timer)} or {nameof(Function)}.");
+                    throw new Exception($"The {IntValueName} property does not specify a valid {nameof(Property)}, {nameof(Timer)} or {nameof(Function)}.");
                 }
             }
         }

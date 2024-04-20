@@ -15,6 +15,6 @@ internal class MaxHealthPointsWidget : IntTextWidget
     public override int Y => 23;
     public override int Width => 5;
     public override ColorEnum Color => ColorEnum.BrightGreen;
-    public override string IntValuePropertyName => nameof(MaxHealthPointsIntProperty);
+    public override string IntValueName => nameof(MaxHealthPointsIntProperty);
     public override string JustificationName => nameof(RightJustification);
 }
