@@ -33,7 +33,7 @@ internal class MainForm : Form
         nameof(GoldLabelWidget),
         nameof(GoldIntWidget),
         nameof(HealthPointsLabelWidget),
-        nameof(HealthPointsMaxRangedWidget),
+        nameof(HealthPointsChangeTrackingWidget),
         nameof(HungerChangeTrackingWidget),
         nameof(ManaConditionalWidget),
         nameof(MaxHealthPointsLabelWidget),

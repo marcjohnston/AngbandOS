@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Functions;
 using Timer = AngbandOS.Core.Timers.Timer;
 
 [Serializable]
-internal abstract class Function : IGetKey, IChangeTracking
+internal abstract class Function : IGetKey, IChangeTracker
 {
     protected readonly Game Game;
     protected Function(Game game)
@@ -34,7 +34,7 @@ internal abstract class Function : IGetKey, IChangeTracking
         return "";
     }
 
-    protected IChangeTracking[]? Dependencies { get; private set; }
+    protected IChangeTracker[]? Dependencies { get; private set; }
     public virtual string[]? DependencyNames => null;
 
     public string Key => GetType().Name;
@@ -49,7 +49,7 @@ internal abstract class Function : IGetKey, IChangeTracking
         }
         else
         {
-            List<IChangeTracking> conditionalList = new();
+            List<IChangeTracker> conditionalList = new();
             foreach (string dependencyName in DependencyNames)
             {
                 Property? property = Game.SingletonRepository.Properties.TryGet(dependencyName);

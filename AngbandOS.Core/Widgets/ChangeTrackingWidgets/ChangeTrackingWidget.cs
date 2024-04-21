@@ -18,14 +18,14 @@ internal abstract class ChangeTrackingWidget : Widget
     protected ChangeTrackingWidget(Game game) : base(game) { }
 
     /// <summary>
-    /// Returns the name of the property that participates in change tracking.  This property is used to bind the <see cref="ChangeTracking"/> property during the bind phase.
+    /// Returns the name of the property that participates in change tracking.  This property is used to bind the <see cref="ChangeTrackers"/> property during the bind phase.
     /// </summary>
-    public abstract string ChangeTrackingName { get; }
+    public abstract string[] ChangeTrackerNames { get; }
 
     /// <summary>
-    /// Returns the property that participates in change tracking.  This property is bound from the <see cref="ChangeTrackingName"/> property during the bind phase.
+    /// Returns the property that participates in change tracking.  This property is bound from the <see cref="ChangeTrackerNames"/> property during the bind phase.
     /// </summary>
-    public IChangeTracking ChangeTracking { get; private set; }
+    public IChangeTracker[] ChangeTrackers { get; private set; }
 
     /// <summary>
     /// Returns the name of the widget to render when the change tracking property of the specified property indicates that the value has changed.  This property is
@@ -42,31 +42,37 @@ internal abstract class ChangeTrackingWidget : Widget
     public override void Bind()
     {
         base.Bind();
-        Property? property = Game.SingletonRepository.Properties.TryGet(ChangeTrackingName);
-        if (property != null)
+
+        List<IChangeTracker> changeTrackersList = new List<IChangeTracker>();
+        foreach (string changeTrackingName in ChangeTrackerNames)
         {
-            ChangeTracking = (IChangeTracking)property;
-        }
-        else
-        {
-            Timer? timer = Game.SingletonRepository.Timers.TryGet(ChangeTrackingName);
-            if (timer != null)
+            Property? property = Game.SingletonRepository.Properties.TryGet(changeTrackingName);
+            if (property != null)
             {
-                ChangeTracking = (IChangeTracking)timer;
+                changeTrackersList.Add((IChangeTracker)property);
             }
             else
             {
-                Function? function = Game.SingletonRepository.Functions.TryGet(ChangeTrackingName);
-                if (function != null)
+                Timer? timer = Game.SingletonRepository.Timers.TryGet(changeTrackingName);
+                if (timer != null)
                 {
-                    ChangeTracking = (IChangeTracking)function;
+                    changeTrackersList.Add((IChangeTracker)timer);
                 }
                 else
                 {
-                    throw new Exception($"The {ChangeTrackingName} property does not specify a valid {nameof(Property)}, {nameof(Timer)} or {nameof(Function)}.");
+                    Function? function = Game.SingletonRepository.Functions.TryGet(changeTrackingName);
+                    if (function != null)
+                    {
+                        changeTrackersList.Add((IChangeTracker)function);
+                    }
+                    else
+                    {
+                        throw new Exception($"The {ChangeTrackerNames} property does not specify a valid {nameof(Property)}, {nameof(Timer)} or {nameof(Function)}.");
+                    }
                 }
             }
         }
+        ChangeTrackers = changeTrackersList.ToArray();
 
         List<Widget> widgetList = new List<Widget>();
         foreach (string widgetName in WidgetNames)
@@ -79,7 +85,7 @@ internal abstract class ChangeTrackingWidget : Widget
     public override void Update()
     {
         // Check to see if the value has changed.
-        if (IsInvalid || ChangeTracking.IsChanged)
+        if (IsInvalid || ChangeTrackers.Any(_changeTracker => _changeTracker.IsChanged))
         {
             foreach (Widget widget in Widgets)
             {

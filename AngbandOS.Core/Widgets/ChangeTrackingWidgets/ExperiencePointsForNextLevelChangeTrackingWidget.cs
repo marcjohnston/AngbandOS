@@ -15,6 +15,6 @@ namespace AngbandOS.Core.Widgets;
 internal class ExperiencePointsForNextLevelChangeTrackingWidget : ChangeTrackingWidget
 {
     private ExperiencePointsForNextLevelChangeTrackingWidget(Game game) : base(game) { } // This object is a singleton.
-    public override string ChangeTrackingName => nameof(ExperiencePointsForNextLevelFunction);
+    public override string[] ChangeTrackerNames => new string[] { nameof(ExperiencePointsForNextLevelFunction) };
     public override string[] WidgetNames => new string[] { nameof(ExperiencePointsAtMaxConditionalWidget) };
 }

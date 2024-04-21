@@ -8,9 +8,9 @@
 namespace AngbandOS.Core.Widgets;
 
 [Serializable]
-internal class CutChangeTrackingWidget : ChangeTrackingWidget
+internal class HealthPointsChangeTrackingWidget : ChangeTrackingWidget
 {
-    private CutChangeTrackingWidget(Game game) : base(game) { } // This object is a singleton.
-    public override string[] ChangeTrackerNames => new string[] { nameof(BleedingTimer) };
-    public override string[] WidgetNames => new string[] { nameof(CutRangedWidget) };
+    private HealthPointsChangeTrackingWidget(Game game) : base(game) { } // This object is a singleton.
+    public override string[] ChangeTrackerNames => new string[] { nameof(HealthPointsIntProperty), nameof(MaxHealthPointsIntProperty) };
+    public override string[] WidgetNames => new string[] { nameof(HealthPointsMaxRangedWidget) };
 }

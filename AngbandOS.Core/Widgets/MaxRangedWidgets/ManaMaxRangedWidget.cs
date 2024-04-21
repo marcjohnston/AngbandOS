@@ -18,8 +18,8 @@ internal class ManaMaxRangedWidget : MaxRangedWidget
     public override int Y => 26;
     public override int Width => 5;
     protected override ColorEnum DefaultColor => ColorEnum.BrightRed;
-    public override string IntChangeTrackingName => nameof(ManaIntProperty);
-    public override string MaxIntChangeTrackableName => nameof(MaxManaIntProperty);
+    public override string IntValueName => nameof(ManaIntProperty);
+    public override string MaxIntValueName => nameof(MaxManaIntProperty);
     public override string JustificationName => nameof(RightJustification);
 
     public override (int, ColorEnum)[] Ranges => new (int, ColorEnum)[]

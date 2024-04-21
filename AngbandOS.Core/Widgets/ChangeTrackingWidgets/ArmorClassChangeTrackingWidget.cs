@@ -11,6 +11,6 @@ namespace AngbandOS.Core.Widgets;
 internal class ArmorClassChangeTrackingWidget : ChangeTrackingWidget
 {
     private ArmorClassChangeTrackingWidget(Game game) : base(game) { } // This object is a singleton.
-    public override string ChangeTrackingName => nameof(ArmorClassFunction);
+    public override string[] ChangeTrackerNames => new string[] { nameof(ArmorClassFunction) };
     public override string[] WidgetNames => new string[] { nameof(ArmorClassIntWidget) };
 }

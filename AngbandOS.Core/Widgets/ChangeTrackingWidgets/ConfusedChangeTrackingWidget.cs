@@ -11,6 +11,6 @@ namespace AngbandOS.Core.Widgets;
 internal class ConfusedChangeTrackingWidget : ChangeTrackingWidget
 {
     private ConfusedChangeTrackingWidget(Game game) : base(game) { } // This object is a singleton.
-    public override string ChangeTrackingName => nameof(ConfusedTimer);
+    public override string[] ChangeTrackerNames => new string[] { nameof(ConfusedTimer) };
     public override string[] WidgetNames => new string[] { nameof(ConfusedRangedWidget) };
 }

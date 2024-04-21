@@ -7,7 +7,7 @@
 
 namespace AngbandOS.Core.Interfaces;
 
-internal interface IMultilineNullableStringChangeTracking : IChangeTracking
+internal interface IMultilineNullableStringChangeTracking : IChangeTracker
 {
     string[]? Value { get; }
 }

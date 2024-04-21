@@ -7,6 +7,6 @@
 
 namespace AngbandOS.Core.Interfaces;
 
-internal interface IMapChangeTracking : IChangeTracking
+internal interface IMapChangeTracking : IChangeTracker
 {
 }

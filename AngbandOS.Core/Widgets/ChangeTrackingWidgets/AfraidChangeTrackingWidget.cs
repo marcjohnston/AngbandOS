@@ -14,6 +14,6 @@ namespace AngbandOS.Core.Widgets;
 internal class AfraidChangeTrackingWidget : ChangeTrackingWidget
 {
     private AfraidChangeTrackingWidget(Game game) : base(game) { } // This object is a singleton.
-    public override string ChangeTrackingName => nameof(FearTimer);
+    public override string[] ChangeTrackerNames => new string[] { nameof(FearTimer) };
     public override string[] WidgetNames => new string[] { nameof(AfraidRangedWidget) };
 }

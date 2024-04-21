@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Interfaces;
 /// <summary>
 /// Represents an interface for a string value that has change tracking associated with it.
 /// </summary>
-internal interface IStringChangeTracking : IChangeTracking
+internal interface IStringChangeTracking : IChangeTracker
 {
     string Value { get; }
 }

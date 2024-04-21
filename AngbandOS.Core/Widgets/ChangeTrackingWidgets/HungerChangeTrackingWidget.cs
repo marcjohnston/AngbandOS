@@ -11,6 +11,6 @@ namespace AngbandOS.Core.Widgets;
 internal class HungerChangeTrackingWidget : ChangeTrackingWidget
 {
     private HungerChangeTrackingWidget(Game game) : base(game) { } // This object is a singleton.
-    public override string ChangeTrackingName => nameof(FoodIntProperty);
+    public override string[] ChangeTrackerNames => new string[] { nameof(FoodIntProperty) };
     public override string[] WidgetNames => new string[] { nameof(HungerRangedWidget) };
 }

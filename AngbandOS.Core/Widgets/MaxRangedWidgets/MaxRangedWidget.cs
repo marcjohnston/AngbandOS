@@ -5,12 +5,13 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using AngbandOS.Core.Interfaces;
 using Timer = AngbandOS.Core.Timers.Timer;
 
 namespace AngbandOS.Core.Widgets;
 
 [Serializable]
-internal abstract class MaxRangedWidget : IntWidget
+internal abstract class MaxRangedWidget : TextWidget
 {
     private bool _sortValidated = false;
     private int _value;
@@ -35,29 +36,58 @@ internal abstract class MaxRangedWidget : IntWidget
     /// </summary>
     protected virtual ColorEnum DefaultColor => ColorEnum.White;
 
-    public abstract string MaxIntChangeTrackableName { get; }
-    public IIntChangeTracking MaxIntChangeTrackable { get; private set; }
+    public abstract string MaxIntValueName { get; }
+    public IIntValue MaxIntValue { get; private set; }
+
+    public abstract string IntValueName { get; }
+    public IIntValue IntValue { get; private set; }
 
     public override void Bind()
     {
-        base.Bind();
-        Property? property = Game.SingletonRepository.Properties.TryGet(MaxIntChangeTrackableName);
-        if (property != null)
+        Property? maxProperty = Game.SingletonRepository.Properties.TryGet(MaxIntValueName);
+        if (maxProperty != null)
         {
-            MaxIntChangeTrackable = (IIntChangeTracking)property;
+            MaxIntValue = (IIntValue)maxProperty;
         }
         else
         {
-            Timer? timer = Game.SingletonRepository.Timers.TryGet(MaxIntChangeTrackableName);
+            Timer? timer = Game.SingletonRepository.Timers.TryGet(MaxIntValueName);
             if (timer != null)
             {
-                MaxIntChangeTrackable = (IIntChangeTracking)timer;
+                MaxIntValue = (IIntValue)timer;
             }
             else
             {
-                throw new Exception($"The {nameof(MaxIntChangeTrackableName)} property does not specify a valid {nameof(Property)} or {nameof(Timer)}.");
+                throw new Exception($"The {nameof(MaxIntValueName)} property does not specify a valid {nameof(Property)} or {nameof(Timer)}.");
             }
         }
+
+        Property? property = Game.SingletonRepository.Properties.TryGet(IntValueName);
+        if (property != null)
+        {
+            IntValue = (IIntValue)property;
+        }
+        else
+        {
+            Timer? timer = Game.SingletonRepository.Timers.TryGet(IntValueName);
+            if (timer != null)
+            {
+                IntValue = (IIntValue)timer;
+            }
+            else
+            {
+                Function? function = Game.SingletonRepository.Functions.TryGet(IntValueName);
+                if (function != null)
+                {
+                    IntValue = (IIntValue)function;
+                }
+                else
+                {
+                    throw new Exception($"The {IntValueName} property does not specify a valid {nameof(Property)}, {nameof(Timer)} or {nameof(Function)}.");
+                }
+            }
+        }
+        base.Bind();
     }
 
     private void ValidateRangeSorting()
@@ -83,45 +113,41 @@ internal abstract class MaxRangedWidget : IntWidget
 
     public override void Update()
     {
-        // Check to see if the see if the underlying value changed or the max value changed.
-        if (IntChangeTracking.IsChanged || MaxIntChangeTrackable.IsChanged)
+        // Now that we need to check the ranges, validate that the ranges are properly sorted in descending order.  We only do this once.
+        ValidateRangeSorting();
+
+        // Grab a copy of the value and max value so that we do not retrieve it for every range.
+        int intValue = IntValue.IntValue;
+        int maxValue = MaxIntValue.IntValue;
+
+        // Apply the default text and color.
+        ColorEnum foundColor = DefaultColor;
+
+        // Scan the ranges for the first valid range.
+        foreach ((int percentage, ColorEnum color) in Ranges)
         {
-            // Now that we need to check the ranges, validate that the ranges are properly sorted in descending order.  We only do this once.
-            ValidateRangeSorting();
-
-            // Grab a copy of the value and max value so that we do not retrieve it for every range.
-            int intValue = IntChangeTracking.Value;
-            int maxValue = MaxIntChangeTrackable.Value;
-
-            // Apply the default text and color.
-            ColorEnum foundColor = DefaultColor;
-
-            // Scan the ranges for the first valid range.
-            foreach ((int percentage, ColorEnum color) in Ranges)
+            (int quotient, int remainder) = Math.DivRem(maxValue * percentage, 100);
+            if (remainder > 0)
             {
-                (int quotient, int remainder) = Math.DivRem(maxValue * percentage, 100);
-                if (remainder > 0)
-                {
-                    quotient++;
-                }
-
-                // Check the value with the percentage of the maximum value.
-                if (intValue >= quotient) // We are rounding up so that small max values wont match percentages resulting in a 0 from a round down
-                {
-                    foundColor = color;
-                    break;
-                }
+                quotient++;
             }
 
-            // Check to see if the value has changed or color has changed.
-            if (foundColor != _color || intValue != _value)
+            // Check the value with the percentage of the maximum value.
+            if (intValue >= quotient) // We are rounding up so that small max values wont match percentages resulting in a 0 from a round down
             {
-                // Update the exposed value and color.
-                _value = intValue;
-                _color = foundColor;
-
-                Invalidate();
+                foundColor = color;
+                break;
             }
+        }
+
+        // Check to see if the value has changed or color has changed.
+        if (foundColor != _color || intValue != _value)
+        {
+            // Update the exposed value and color.
+            _value = intValue;
+            _color = foundColor;
+
+            Invalidate();
         }
 
         base.Update();

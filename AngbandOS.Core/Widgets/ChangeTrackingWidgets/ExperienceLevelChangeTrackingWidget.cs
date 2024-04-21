@@ -16,5 +16,5 @@ internal class ExperienceLevelChangeTrackingWidget : ChangeTrackingWidget
 {
     private ExperienceLevelChangeTrackingWidget(Game game) : base(game) { } // This object is a singleton.
     public override string[] WidgetNames => new string[] { nameof(ExperienceLevelConditionalWidget) };
-    public override string ChangeTrackingName => nameof(ExperienceLevelIntProperty);
+    public override string[] ChangeTrackerNames => new string[] { nameof(ExperienceLevelIntProperty) };
 }

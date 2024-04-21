@@ -14,6 +14,6 @@ namespace AngbandOS.Core.Widgets;
 internal class ManaChangeTrackingWidget : ChangeTrackingWidget
 {
     private ManaChangeTrackingWidget(Game game) : base(game) { } // This object is a singleton.
-    public override string ChangeTrackingName => nameof(ManaIntProperty);
+    public override string[] ChangeTrackerNames => new string[] { nameof(ManaIntProperty) };
     public override string[] WidgetNames => new string[] { nameof(ManaMaxRangedWidget) };
 }

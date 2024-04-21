@@ -51,6 +51,7 @@ internal abstract class RangedWidget : TextWidget
         }
         base.Bind();
     }
+
     /// <summary>
     /// Returns an array of tuples that specify the text and color to render for a range of values.  The <paramref name="startValue"/> element specifies the smallest (or start) value of the range.  Ranges must be sorted in
     /// descending order (from the largest value to the smallest).  This sorting is validated once upon first usage.  If the value is larger than the first range, the first range will match.  If the value is smaller than the last range specified, the
