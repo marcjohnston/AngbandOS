@@ -20,7 +20,7 @@ internal class TrapCountRangedWidget : RangedWidget
     public override int Width => 5;
     protected override ColorEnum DefaultColor => ColorEnum.Yellow;
     protected override string DefaultText => "DTRAP";
-    public override string IntChangeTrackingName => nameof(TrapCountFunction);
+    public override string IntValueName => nameof(TrapCountFunction);
     public override (int startValue, string textToRender, ColorEnum color)[] Ranges => new (int, string, ColorEnum)[]
     {
         (4, "DTrap", ColorEnum.Green)

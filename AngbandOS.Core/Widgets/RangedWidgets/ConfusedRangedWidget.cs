@@ -14,7 +14,7 @@ internal class ConfusedRangedWidget : RangedWidget
     public override int X => 15;
     public override int Y => 44;
     public override int Width => 8;
-    public override string IntChangeTrackingName => nameof(ConfusedTimer);
+    public override string IntValueName => nameof(ConfusedTimer);
 
     public override (int, string, ColorEnum)[] Ranges => new (int, string, ColorEnum)[]
     {

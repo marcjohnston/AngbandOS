@@ -8,13 +8,13 @@
 namespace AngbandOS.Core.Widgets;
 
 [Serializable]
-internal class CutWidget : RangedWidget
+internal class CutRangedWidget : RangedWidget
 {
-    private CutWidget(Game game) : base(game) { } // This object is a singleton.
+    private CutRangedWidget(Game game) : base(game) { } // This object is a singleton.
     public override int X => 13;
     public override int Y => 43;
     public override int Width => 12;
-    public override string IntChangeTrackingName => nameof(BleedingTimer);
+    public override string IntValueName => nameof(BleedingTimer);
 
     public override (int, string, ColorEnum)[] Ranges => new (int, string, ColorEnum)[]
     {

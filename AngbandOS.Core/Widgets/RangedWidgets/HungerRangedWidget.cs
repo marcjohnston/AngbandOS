@@ -8,15 +8,15 @@
 namespace AngbandOS.Core.Widgets;
 
 [Serializable]
-internal class HungerWidget : RangedWidget
+internal class HungerRangedWidget : RangedWidget
 {
-    private HungerWidget(Game game) : base(game) { } // This object is a singleton.
+    private HungerRangedWidget(Game game) : base(game) { } // This object is a singleton.
     public override int X => 0;
     public override int Y => 44;
     public override int Width => 6;
     protected override ColorEnum DefaultColor => ColorEnum.BrightRed;
     protected override string DefaultText => "Dead";
-    public override string IntChangeTrackingName => nameof(FoodIntProperty);
+    public override string IntValueName => nameof(FoodIntProperty);
 
     public override (int, string, ColorEnum)[] Ranges => new (int, string, ColorEnum)[]
     {

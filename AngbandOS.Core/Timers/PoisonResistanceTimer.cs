@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Timers;
 
 [Serializable]
-internal class PoisonResistanceTimer :Timer
+internal class PoisonResistanceTimer : Timer
 {
     private PoisonResistanceTimer(Game game) : base(game) { } // This object is a singleton.
     protected override void EffectStopped()

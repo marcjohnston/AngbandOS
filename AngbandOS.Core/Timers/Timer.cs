@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Timers;
 /// Represents an action that occurs over a period of time.
 /// </summary>
 [Serializable]
-internal abstract class Timer : IGetKey, IIntChangeTracking
+internal abstract class Timer : IGetKey, IIntChangeTracking, IIntValue
 {
     protected Game Game { get; }
 
@@ -101,6 +101,8 @@ internal abstract class Timer : IGetKey, IIntChangeTracking
     /// Returns the maximum number of turns for the timer.  
     /// </summary>
     protected virtual int MaxTurns => 10000;
+
+    public int IntValue => Value;
 
     /// <summary>
     /// Returns the message to be rendered when the effect transitions from above zero to zero.  This transition is noticed.

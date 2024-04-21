@@ -14,15 +14,15 @@ internal class MainForm : Form
 
     protected override string[] WidgetNames => new string[]
     {
-        nameof(AfraidRangedWidget),
+        nameof(AfraidChangeTrackingWidget),
         nameof(ArmorClassLabelTextWidget),
         nameof(ArmorClassChangeTrackingWidget),
-        nameof(BlindnessRangedWidget),
+        nameof(BlindnessChangeTrackingWidget),
         nameof(CharacterSubclassNameStringWidget),
-        nameof(ConfusedRangedWidget),
+        nameof(ConfusedChangeTrackingWidget),
         nameof(CurrentDateLabelTextWidget),
         nameof(CurrentTimeLabelTextWidget),
-        nameof(CutWidget),
+        nameof(CutChangeTrackingWidget),
         nameof(DepthWidget),
         nameof(DungeonMapWidget),
         nameof(ExperienceLevelChangeTrackingWidget),
@@ -34,7 +34,7 @@ internal class MainForm : Form
         nameof(GoldIntWidget),
         nameof(HealthPointsLabelWidget),
         nameof(HealthPointsMaxRangedWidget),
-        nameof(HungerWidget),
+        nameof(HungerChangeTrackingWidget),
         nameof(ManaConditionalWidget),
         nameof(MaxHealthPointsLabelWidget),
         nameof(MaxHealthPointsWidget),
@@ -42,10 +42,10 @@ internal class MainForm : Form
         nameof(PlayerTitleIsWinnerWidget),
         nameof(PlayerTitleIsWizardWidget),
         nameof(PlayerTitleWidget),
-        nameof(PoisonedWidget),
+        nameof(PoisonedChangeTrackingWidget),
         nameof(RaceTitleWidget),
         nameof(StudyWidget),
-        nameof(StunnedWidget),
+        nameof(StunnedChangeTrackingWidget),
         nameof(TargetedMonsterRaceNameMultilineNullableStringWidget),
         nameof(TrapDetectionChangeTrackingWidget)
     };

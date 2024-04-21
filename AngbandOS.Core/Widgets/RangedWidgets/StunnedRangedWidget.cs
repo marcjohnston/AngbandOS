@@ -8,13 +8,13 @@
 namespace AngbandOS.Core.Widgets;
 
 [Serializable]
-internal class StunnedWidget : RangedWidget
+internal class StunnedRangedWidget : RangedWidget
 {
-    private StunnedWidget(Game game) : base(game) { } // This object is a singleton.
+    private StunnedRangedWidget(Game game) : base(game) { } // This object is a singleton.
     public override int X => 0;
     public override int Y => 44;
     public override int Width => 11;
-    public override string IntChangeTrackingName => nameof(StunnedTimer);
+    public override string IntValueName => nameof(StunnedTimer);
 
     public override (int, string, ColorEnum)[] Ranges => new (int, string, ColorEnum)[]
     {
