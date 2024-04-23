@@ -9,7 +9,7 @@
 namespace AngbandOS.Core.Functions;
 
 [Serializable]
-internal abstract class IntFunction : Function, IIntChangeTracking, IIntValue
+internal abstract class IntFunction : Function, IIntValue, IChangeTracker
 {
     protected IntFunction(Game game) : base(game) { }
 
