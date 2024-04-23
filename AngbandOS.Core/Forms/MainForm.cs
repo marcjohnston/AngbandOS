@@ -44,7 +44,7 @@ internal class MainForm : Form
         nameof(PlayerTitleWidget),
         nameof(PoisonedChangeTrackingWidget),
         nameof(RaceTitleWidget),
-        nameof(StudyWidget),
+        nameof(StudyChangeTrackingWidget),
         nameof(StunnedChangeTrackingWidget),
         nameof(TargetedMonsterRaceNameMultilineNullableStringWidget),
         nameof(TrapDetectionChangeTrackingWidget)

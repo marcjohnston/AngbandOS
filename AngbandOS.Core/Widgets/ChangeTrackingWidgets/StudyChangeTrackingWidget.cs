@@ -8,13 +8,9 @@
 namespace AngbandOS.Core.Widgets;
 
 [Serializable]
-internal class StudyWidget : BoolWidget
+internal class StudyChangeTrackingWidget : ChangeTrackingWidget
 {
-    private StudyWidget(Game game) : base(game) { } // This object is a singleton.
-    public override int X => 60;
-    public override int Y => 44;
-    public override int Width => 5;
-    public override string BoolChangeTrackingName => nameof(CanStudyFunction);
-    public override string TrueValue => "Study";
-    public override string FalseValue => "";
+    private StudyChangeTrackingWidget(Game game) : base(game) { } // This object is a singleton.
+    public override string[] ChangeTrackerNames => new string[] { nameof(CanStudyFunction) };
+    public override string[] WidgetNames => new string[] { nameof(StudyBoolWidget) };
 }
