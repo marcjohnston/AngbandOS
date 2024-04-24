@@ -19,5 +19,5 @@ internal class ManaConditionalWidget : ConditionalWidget
     {
         (nameof(UsesManaFunction), true, 0)
     };
-    public override string[]? TrueWidgetNames => new string[] { nameof(ManaChangeTrackingWidget), nameof(ManaLabelWidget), nameof(MaxManaLabelWidget), nameof(MaxManaIntWidget) };
+    public override string[]? TrueWidgetNames => new string[] { nameof(ManaChangeTrackingWidget), nameof(ManaLabelTextWidget), nameof(MaxManaLabelTextWidget), nameof(MaxManaIntWidget) };
 }

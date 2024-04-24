@@ -17,6 +17,6 @@ internal class PlayerTitleConditionalWidget : ConditionalWidget
     {
         (nameof(IsWizardBoolProperty), true, 0),
     };
-    public override string[]? TrueWidgetNames => new string[] { nameof(WizardTitleWidget) };
+    public override string[]? TrueWidgetNames => new string[] { nameof(WizardTitleTextWidget) };
     public override string[]? FalseWidgetNames => new string[] { nameof(WinnerConditionalWidget) };
 }

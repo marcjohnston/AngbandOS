@@ -9,9 +9,9 @@
 namespace AngbandOS.Core.Widgets;
 
 [Serializable]
-internal class WizardTitleWidget : TextWidget
+internal class WizardTitleTextWidget : TextWidget
 {
-    private WizardTitleWidget(Game game) : base(game) { } // This object is a singleton.
+    private WizardTitleTextWidget(Game game) : base(game) { } // This object is a singleton.
     public override int X => 0;
     public override int Y => 4;
     public override string Text => "-=<WIZARD>=-";

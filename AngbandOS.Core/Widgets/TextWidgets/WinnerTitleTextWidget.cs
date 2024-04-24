@@ -6,17 +6,15 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+
 namespace AngbandOS.Core.Widgets;
 
-/// <summary>
-/// Represents a widget that renders the Mana label.
-/// </summary>
 [Serializable]
-internal class ManaLabelWidget : TextWidget
+internal class WinnerTitleTextWidget : TextWidget
 {
-    private ManaLabelWidget(Game game) : base(game) { } // This object is a singleton.
+    private WinnerTitleTextWidget(Game game) : base(game) { } // This object is a singleton.
     public override int X => 0;
-    public override int Y => 26;
-    public override string Text => "Cur SP";
+    public override int Y => 4;
+    public override string Text => "***WINNER***";
+    public override ColorEnum Color => ColorEnum.BrightBlue;
 }
-

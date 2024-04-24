@@ -8,10 +8,10 @@
 namespace AngbandOS.Core.Widgets;
 
 [Serializable]
-internal class ExperiencePointsLabelWidget : TextWidget
+internal class HealthPointsLabelTextWidget : TextWidget
 {
-    private ExperiencePointsLabelWidget(Game game) : base(game) { } // This object is a singleton.
+    private HealthPointsLabelTextWidget(Game game) : base(game) { } // This object is a singleton.
     public override int X => 0;
-    public override int Y => 6;
-    public override string Text => "NEXT";
+    public override int Y => 24;
+    public override string Text => "Cur HP";
 }

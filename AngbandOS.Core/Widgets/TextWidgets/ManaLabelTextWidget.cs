@@ -8,11 +8,15 @@
 
 namespace AngbandOS.Core.Widgets;
 
+/// <summary>
+/// Represents a widget that renders the Mana label.
+/// </summary>
 [Serializable]
-internal class GoldLabelWidget : TextWidget
+internal class ManaLabelTextWidget : TextWidget
 {
-    private GoldLabelWidget(Game game) : base(game) { } // This object is a singleton.
+    private ManaLabelTextWidget(Game game) : base(game) { } // This object is a singleton.
     public override int X => 0;
-    public override int Y => 11;
-    public override string Text => "GP";
+    public override int Y => 26;
+    public override string Text => "Cur SP";
 }
+

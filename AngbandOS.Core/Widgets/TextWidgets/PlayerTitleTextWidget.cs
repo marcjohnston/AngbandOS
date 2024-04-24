@@ -6,17 +6,15 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+
 namespace AngbandOS.Core.Widgets;
 
 [Serializable]
-internal class MaxManaLabelWidget : TextWidget
+internal class PlayerTitleTextWidget : TextWidget
 {
-    private MaxManaLabelWidget(Game game) : base(game) { } // This object is a singleton.
+    private PlayerTitleTextWidget(Game game) : base(game) { } // This object is a singleton.
     public override int X => 0;
-    public override int Y => 25;
-    public override string Text => "Max SP";
-    public override (string, bool)[]? EnabledNames => new (string, bool)[]
-    {
-        (nameof(UsesManaFunction), true)
-    };
+    public override int Y => 4;
+    public override string Text => "";
+    public override ColorEnum Color => ColorEnum.BrightBlue;
 }
