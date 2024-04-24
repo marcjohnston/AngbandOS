@@ -67,6 +67,7 @@ internal class LightsourceInventorySlot : EquipmentInventorySlot
         }
         else if (hadLight && maxLight < 100 && maxLight % 10 == 0)
         {
+            Game.Disturb(true);
             Game.MsgPrint("Your light is growing faint.");
         }
     }

@@ -52,11 +52,12 @@ internal class EatLightRandomMutation : Mutation
                 }
                 else if (oPtr.TypeSpecificValue == 0)
                 {
-                    Game.Disturb(false);
+                    Game.Disturb(true);
                     Game.MsgPrint("Your light has gone out!");
                 }
                 else if (oPtr.TypeSpecificValue < 100 && oPtr.TypeSpecificValue % 10 == 0)
                 {
+                    Game.Disturb(true);
                     Game.MsgPrint("Your light is growing faint.");
                 }
             }
