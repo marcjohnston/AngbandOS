@@ -9,10 +9,11 @@
 namespace AngbandOS.Core.Widgets;
 
 [Serializable]
-internal class CurrentDateLabelTextWidget : TextWidget
+internal class WizardTitleWidget : TextWidget
 {
-    private CurrentDateLabelTextWidget(Game game) : base(game) { } // This object is a singleton.
+    private WizardTitleWidget(Game game) : base(game) { } // This object is a singleton.
     public override int X => 0;
-    public override int Y => 9;
-    public override string Text => "Day";
+    public override int Y => 4;
+    public override string Text => "-=<WIZARD>=-";
+    public override ColorEnum Color => ColorEnum.BrightBlue;
 }

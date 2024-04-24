@@ -9,16 +9,10 @@
 namespace AngbandOS.Core.Widgets;
 
 [Serializable]
-internal class PlayerTitleIsWizardWidget : TextWidget
+internal class GameTimeLabelTextWidget : TextWidget
 {
-    private PlayerTitleIsWizardWidget(Game game) : base(game) { } // This object is a singleton.
+    private GameTimeLabelTextWidget(Game game) : base(game) { } // This object is a singleton.
     public override int X => 0;
-    public override int Y => 4;
-    public override string Text => "-=<WIZARD>=-";
-    public override ColorEnum Color => ColorEnum.BrightBlue;
-    public override (string, bool)[]? EnabledNames => new (string, bool)[]
-    {
-        (nameof(IsWizardBoolProperty), true)
-    };
+    public override int Y => 8;
+    public override string Text => "Time";
 }
-

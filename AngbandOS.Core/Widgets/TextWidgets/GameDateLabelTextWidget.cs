@@ -6,20 +6,13 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-
 namespace AngbandOS.Core.Widgets;
 
 [Serializable]
-internal class PlayerTitleIsWinnerWidget : TextWidget
+internal class GameDateLabelTextWidget : TextWidget
 {
-    private PlayerTitleIsWinnerWidget(Game game) : base(game) { } // This object is a singleton.
+    private GameDateLabelTextWidget(Game game) : base(game) { } // This object is a singleton.
     public override int X => 0;
-    public override int Y => 4;
-    public override string Text => "***WINNER***";
-    public override ColorEnum Color => ColorEnum.BrightBlue;
-    public override (string, bool)[]? EnabledNames => new (string, bool)[]
-    {
-        (nameof(IsWizardBoolProperty), false),
-        (nameof(IsWinnerBoolProperty), true)
-    };
+    public override int Y => 9;
+    public override string Text => "Day";
 }
