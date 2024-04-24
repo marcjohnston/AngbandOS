@@ -5,17 +5,15 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-using Timer = AngbandOS.Core.Timers.Timer;
-
 namespace AngbandOS.Core.Widgets;
 
+/// <summary>
+/// Represents a widget that renders a dungeon map.  This widget supports the ability to "poke" a character directly into the map grid.
+/// </summary>
 [Serializable]
-internal abstract class MapWidget : Widget, IPutWidget
+internal abstract class MapWidget : Widget, IPoke
 {
     protected MapWidget(Game game) : base(game) { }
-
-    public abstract string MapChangeTrackingName { get; }
-    public IMapChangeTracking MapChangeTracking { get; private set; }
 
     /// <summary>
     /// Returns the x-coordinate on the <see cref="Form"/> where the widget will be drawn.
@@ -26,36 +24,6 @@ internal abstract class MapWidget : Widget, IPutWidget
     /// Returns the y-coordinate on the <see cref="Form"/> where the widget will be drawn.
     /// </summary>
     public abstract int Y { get; }
-
-    public override void Bind()
-    {
-        base.Bind();
-        Property? property = Game.SingletonRepository.Properties.TryGet(MapChangeTrackingName);
-        if (property != null)
-        {
-            MapChangeTracking = (IMapChangeTracking)property;
-        }
-        else
-        {
-            Timer? timer = Game.SingletonRepository.Timers.TryGet(MapChangeTrackingName);
-            if (timer != null)
-            {
-                MapChangeTracking = (IMapChangeTracking)timer;
-            }
-            else
-            {
-                Function? function = Game.SingletonRepository.Functions.TryGet(MapChangeTrackingName);
-                if (function != null)
-                {
-                    MapChangeTracking = (IMapChangeTracking)function;
-                }
-                else
-                {
-                    throw new Exception($"The {nameof(MapChangeTrackingName)} property does not specify a valid {nameof(Property)}, {nameof(Timer)} or {nameof(Function)}.");
-                }
-            }
-        }
-    }
 
     protected override void Paint()
     {
@@ -88,32 +56,19 @@ internal abstract class MapWidget : Widget, IPutWidget
         Game.Screen.CursorVisible = v;
     }
 
-    public override void Update()
-    {
-        // Check to see if the value has changed.
-        if (MapChangeTracking.IsChanged)
-        {
-            // It has, invalidate the widget.
-            Invalidate();
-        }
-
-        // Update the widget.
-        base.Update();
-    }
-
     /// <summary>
     /// Locate the cursor in the viewport at a specific level grid x, y coordinate.
     /// </summary>
     /// <param name="row"></param>
     /// <param name="col"></param>
-    public void Goto(int row, int col)
+    public void MoveCursorTo(int row, int col)
     {
         int offsetX = Game.PanelColMin - X;
         int offsetY = Game.PanelRowMin - Y;
         Game.Screen.Goto(row - offsetY, col - offsetX); // TODO: The - is weird and should be +
     }
 
-    public void PutChar(ColorEnum attr, char ch, int row, int col)
+    public void Poke(ColorEnum attr, char ch, int row, int col)
     {
         int offsetX = Game.PanelColMin - X;
         int offsetY = Game.PanelRowMin - Y;

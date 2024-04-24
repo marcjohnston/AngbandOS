@@ -13,5 +13,4 @@ internal class DungeonMapWidget : MapWidget
     private DungeonMapWidget(Game game) : base(game) { } // This object is a singleton.
     public override int X => 13;
     public override int Y => 1;
-    public override string MapChangeTrackingName => nameof(RefreshMapFunction);
 }

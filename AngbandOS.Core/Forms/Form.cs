@@ -20,10 +20,10 @@ internal abstract class Form : IGetKey
     public Widget[] Widgets { get; private set; }
 
     /// <summary>
-    /// Returns the widgets that support the ability to "put" a character into a dungeon map.  These types of widgets are the only widgets that "Update" inbetween the
+    /// Returns the widgets that support the ability to "poke" a character directly into a dungeon map.  These types of widgets are the only widgets that "Update" inbetween the
     /// widget update phases.
     /// </summary>
-    protected IPutWidget[] IPutWidgets { get; private set; }
+    protected IPoke[] PokeWidgets { get; private set; }
 
     public string Key => GetType().Name;
     public string GetKey => Key;
@@ -31,18 +31,18 @@ internal abstract class Form : IGetKey
     public void Bind()
     {
         List<Widget> widgetList = new List<Widget>();
-        List<IPutWidget> iPutWidgetList = new List<IPutWidget>();
+        List<IPoke> iPutWidgetList = new List<IPoke>();
         foreach (string widgetName in WidgetNames)
         {
             Widget widget = Game.SingletonRepository.Widgets.Get(widgetName);
-            if (typeof(IPutWidget).IsAssignableFrom(widget.GetType()))
+            if (typeof(IPoke).IsAssignableFrom(widget.GetType()))
             {
-                iPutWidgetList.Add((IPutWidget)widget);
+                iPutWidgetList.Add((IPoke)widget);
             }
             widgetList.Add(widget);
         }
         Widgets = widgetList.ToArray();
-        IPutWidgets = iPutWidgetList.ToArray();
+        PokeWidgets = iPutWidgetList.ToArray();
     }
 
     public string ToJson()
@@ -92,10 +92,10 @@ internal abstract class Form : IGetKey
             a = ColorEnum.Black;
         }
 
-        foreach (IPutWidget widget in IPutWidgets)
+        foreach (IPoke widget in PokeWidgets)
         {
-            IPutWidget putWidget = (IPutWidget)widget;
-            putWidget.PutChar(a, c, y, x);
+            IPoke putWidget = (IPoke)widget;
+            putWidget.Poke(a, c, y, x);
         }
     }
 
@@ -120,10 +120,10 @@ internal abstract class Form : IGetKey
     /// <param name="col"></param>
     public void GotoMapLocation(int row, int col)
     {
-        foreach (IPutWidget widget in IPutWidgets) 
+        foreach (IPoke widget in PokeWidgets) 
         {
-            IPutWidget putWidget = (IPutWidget)widget;
-            putWidget.Goto(row, col);
+            IPoke putWidget = (IPoke)widget;
+            putWidget.MoveCursorTo(row, col);
         }
     }
 }

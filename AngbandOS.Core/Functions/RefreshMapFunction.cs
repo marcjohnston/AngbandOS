@@ -12,7 +12,7 @@ namespace AngbandOS.Core.Functions;
 /// to repaint the map as needed.
 /// </summary>
 [Serializable]
-internal class RefreshMapFunction : Function, IMapChangeTracking
+internal class RefreshMapFunction : Function
 {
     private RefreshMapFunction(Game game) : base(game) { } // This object is a singleton.
     public override string[]? DependencyNames => new string[]

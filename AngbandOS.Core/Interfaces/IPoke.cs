@@ -8,17 +8,17 @@
 namespace AngbandOS.Core.Interfaces;
 
 /// <summary>
-/// Represents the interface a widget needs to implement to support the ability to "put" a character into a map.
+/// Represents the interface a widget needs to implement to support the ability to "poke" a character directly into a map grid.
 /// </summary>
-internal interface IPutWidget
+internal interface IPoke
 {
     /// <summary>
     /// Locate the cursor in the viewport at a specific level grid x, y coordinate.
     /// </summary>
     /// <param name="row"></param>
     /// <param name="col"></param>
-    void Goto(int row, int col);
+    void MoveCursorTo(int row, int col);
 
-    void PutChar(ColorEnum attr, char ch, int row, int col);
+    void Poke(ColorEnum attr, char ch, int row, int col);
 }
 
