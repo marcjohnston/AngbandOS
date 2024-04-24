@@ -13,34 +13,34 @@ namespace AngbandOS.Core.Widgets;
 internal abstract class BoolWidget : TextWidget
 {
     protected BoolWidget(Game game) : base(game) { }
-    public abstract string BoolChangeTrackingName { get; }
-    public IBoolChangeTracking BoolChangeTracking { get; private set; }
+    public abstract string BoolValueName { get; }
+    public IBoolValue BoolValue { get; private set; }
 
     public override void Bind()
     {
         base.Bind();
-        Property? property = Game.SingletonRepository.Properties.TryGet(BoolChangeTrackingName);
+        Property? property = Game.SingletonRepository.Properties.TryGet(BoolValueName);
         if (property != null)
         {
-            BoolChangeTracking = (IBoolChangeTracking)property;
+            BoolValue = (IBoolValue)property;
         }
         else
         {
-            Timer? timer = Game.SingletonRepository.Timers.TryGet(BoolChangeTrackingName);
+            Timer? timer = Game.SingletonRepository.Timers.TryGet(BoolValueName);
             if (timer != null)
             {
-                BoolChangeTracking = (IBoolChangeTracking)timer;
+                BoolValue = (IBoolValue)timer;
             }
             else
             {
-                Function? function = Game.SingletonRepository.Functions.TryGet(BoolChangeTrackingName);
+                Function? function = Game.SingletonRepository.Functions.TryGet(BoolValueName);
                 if (function != null)
                 {
-                    BoolChangeTracking = (IBoolChangeTracking)function;
+                    BoolValue = (IBoolValue)function;
                 }
                 else
                 {
-                    throw new Exception($"The {nameof(BoolChangeTrackingName)} property does not specify a valid {nameof(Property)}, {nameof(Timer)} or {nameof(Function)}.");
+                    throw new Exception($"The {nameof(BoolValueName)} property does not specify a valid {nameof(Property)}, {nameof(Timer)} or {nameof(Function)}.");
                 }
             }
         }
@@ -49,18 +49,5 @@ internal abstract class BoolWidget : TextWidget
     public abstract string TrueValue { get; }
     public abstract string FalseValue { get; }
 
-    public override void Update()
-    {
-        // Check to see if the value has changed.
-        if (BoolChangeTracking.IsChanged)
-        {
-            // It has, invalidate the widget.
-            Invalidate();
-        }
-
-        // Update the widget.
-        base.Update();
-    }
-
-    public override string Text => BoolChangeTracking.Value ? TrueValue : FalseValue;
+    public override string Text => BoolValue.Value ? TrueValue : FalseValue;
 }

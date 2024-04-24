@@ -9,7 +9,7 @@
 namespace AngbandOS.Core.Functions;
 
 [Serializable]
-internal abstract class BoolFunction : Function, IBoolChangeTracking, IConditional
+internal abstract class BoolFunction : Function, IBoolValue, IConditional
 {
     protected BoolFunction(Game game) : base(game) { }
 

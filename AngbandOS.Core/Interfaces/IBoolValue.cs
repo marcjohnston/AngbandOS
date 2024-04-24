@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Interfaces;
 /// <summary>
 /// Represents an interface for a boolean value that has change tracking associated with it.
 /// </summary>
-internal interface IBoolChangeTracking : IChangeTracker
+internal interface IBoolValue
 {
     bool Value { get; }
 }
