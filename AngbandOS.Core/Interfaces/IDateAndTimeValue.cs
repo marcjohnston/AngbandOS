@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Interfaces;
 /// Represents the interface that a class needs to implement to participate in change tracking for an integer value.  This interface adds an Int value signature to the 
 /// change trackable interface and is used by DynamicWidgets to render integer values that change.
 /// </summary>
-internal interface IDateTimeChangeTracking : IChangeTracker
+internal interface IDateAndTimeValue
 {
-    DateTime Value { get; }
+    DateTime DateAndTimeValue { get; }
 }

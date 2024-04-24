@@ -8,12 +8,13 @@
 namespace AngbandOS.Core.Properties;
 
 [Serializable]
-internal abstract class DateTimeProperty : Property, IDateTimeChangeTracking
+internal abstract class DateTimeProperty : Property, IDateAndTimeValue
 {
     protected DateTimeProperty(Game game) : base(game) { }
 
     private DateTime _value;
-    public DateTime Value
+
+    public DateTime DateAndTimeValue
     {
         get
         {
@@ -34,7 +35,6 @@ internal abstract class DateTimeProperty : Property, IDateTimeChangeTracking
             OnAfterSet();
         }
     }
-
 
     protected virtual void OnBeforeSet() { }
     protected virtual void OnAfterSet() { }

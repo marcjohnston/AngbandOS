@@ -13,51 +13,38 @@ namespace AngbandOS.Core.Widgets;
 internal abstract class TimeWidget : TextWidget
 {
     protected TimeWidget(Game game) : base(game) { }
-    public abstract string DateTimeChangeTrackingName { get; }
-    public IDateTimeChangeTracking DateTimeChangeTracking { get; private set; }
+    public abstract string DateAndTimeValueName { get; }
+    public IDateAndTimeValue DateAndTimeValue { get; private set; }
 
     public override void Bind()
     {
         base.Bind();
-        Property? property = Game.SingletonRepository.Properties.TryGet(DateTimeChangeTrackingName);
+        Property? property = Game.SingletonRepository.Properties.TryGet(DateAndTimeValueName);
         if (property != null)
         {
-            DateTimeChangeTracking = (IDateTimeChangeTracking)property;
+            DateAndTimeValue = (IDateAndTimeValue)property;
         }
         else
         {
-            Timer? timer= Game.SingletonRepository.Timers.TryGet(DateTimeChangeTrackingName);
+            Timer? timer= Game.SingletonRepository.Timers.TryGet(DateAndTimeValueName);
             if (timer != null)
             {
-                DateTimeChangeTracking = (IDateTimeChangeTracking)timer;
+                DateAndTimeValue = (IDateAndTimeValue)timer;
             }
             else
             {
-                Function? function = Game.SingletonRepository.Functions.TryGet(DateTimeChangeTrackingName);
+                Function? function = Game.SingletonRepository.Functions.TryGet(DateAndTimeValueName);
                 if (function != null)
                 {
-                    DateTimeChangeTracking = (IDateTimeChangeTracking)function;
+                    DateAndTimeValue = (IDateAndTimeValue)function;
                 }
                 else
                 {
-                    throw new Exception($"The {nameof(DateTimeChangeTrackingName)} property does not specify a valid {nameof(Property)}, {nameof(Timer)} or {nameof(Function)}.");
+                    throw new Exception($"The {nameof(DateAndTimeValueName)} property does not specify a valid {nameof(Property)}, {nameof(Timer)} or {nameof(Function)}.");
                 }
             }
         } 
     }
 
-    public override void Update()
-    {
-        // Check to see if the value has changed.
-        if (DateTimeChangeTracking.IsChanged)
-        {
-            // It has, invalidate the widget.
-            Invalidate();
-        }
-
-        // Update the widget.
-        base.Update();
-    }
-
-    public override string Text => DateTimeChangeTracking.Value.ToString("h:mmtt");
+    public override string Text => DateAndTimeValue.DateAndTimeValue.ToString("h:mmtt");
 }

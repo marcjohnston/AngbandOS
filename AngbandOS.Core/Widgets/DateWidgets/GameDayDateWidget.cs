@@ -16,5 +16,5 @@ internal class GameDayDateWidget : DateWidget
     public override int Width => 8;
     public override ColorEnum Color => ColorEnum.BrightGreen;
     public override string JustificationName => nameof(RightJustification);
-    public override string DateTimeChangeTrackingName => nameof(CurrentGameDateTimeProperty);
+    public override string DateValueName => nameof(CurrentGameDateTimeProperty);
 }

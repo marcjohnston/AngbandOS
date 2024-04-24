@@ -28,8 +28,17 @@ internal class Game
     private int _birthday;
     private readonly CurrentGameDateTimeProperty CurrentGameDateTime;
     private int _currentTurn;
+
+    /// <summary>
+    /// Returns the date and time for the next dawn.  This is computed on a regular basis.
+    /// </summary>
     private DateTime _dawn;
+
+    /// <summary>
+    /// Returns the date and time for the next dusk.  This is computed on a regular basic.
+    /// </summary>
     private DateTime _dusk;
+
     private DateTime _gameStartDateTime;
     private int _levelEntryTurn;
     private TimeSpan _tick = new TimeSpan(0, 0, 0, 0, MillisecondsPerTurn);
@@ -9105,7 +9114,7 @@ internal class Game
     {
         get
         {
-            return CurrentGameDateTime.Value - _gameStartDateTime;
+            return CurrentGameDateTime.DateAndTimeValue - _gameStartDateTime;
         }
     }
 
@@ -9121,7 +9130,7 @@ internal class Game
     {
         get
         {
-            return (CurrentGameDateTime.Value >= _dawn) && (CurrentGameDateTime.Value <= _dusk);
+            return (CurrentGameDateTime.DateAndTimeValue >= _dawn) && (CurrentGameDateTime.DateAndTimeValue <= _dusk);
         }
     }
 
@@ -9164,11 +9173,11 @@ internal class Game
 
     public void Tick()
     {
-        var oldDay = CurrentGameDateTime.Value.DayOfYear;
+        var oldDay = CurrentGameDateTime.DateAndTimeValue.DayOfYear;
         _currentTurn++;
-        var oldDateTime = CurrentGameDateTime.Value;
-        CurrentGameDateTime.Value += _tick;
-        var newDay = CurrentGameDateTime.Value.DayOfYear;
+        var oldDateTime = CurrentGameDateTime.DateAndTimeValue;
+        CurrentGameDateTime.DateAndTimeValue += _tick;
+        var newDay = CurrentGameDateTime.DateAndTimeValue.DayOfYear;
         IsBirthday = false;
         IsDawn = false;
         IsDusk = false;
@@ -9197,18 +9206,18 @@ internal class Game
                 IsHalloween = true;
             }
         }
-        if (oldDateTime < _dawn && CurrentGameDateTime.Value >= _dawn)
+        if (oldDateTime < _dawn && CurrentGameDateTime.DateAndTimeValue >= _dawn)
         {
             IsDawn = true;
         }
-        if (oldDateTime < _dusk && CurrentGameDateTime.Value >= _dusk)
+        if (oldDateTime < _dusk && CurrentGameDateTime.DateAndTimeValue >= _dusk)
         {
             IsDusk = true;
         }
-        var year = CurrentGameDateTime.Value.Year;
+        var year = CurrentGameDateTime.DateAndTimeValue.Year;
         if (year > 1297)
         {
-            CurrentGameDateTime.Value = CurrentGameDateTime.Value.AddYears(1297 - year);
+            CurrentGameDateTime.DateAndTimeValue = CurrentGameDateTime.DateAndTimeValue.AddYears(1297 - year);
         }
 
         // Send an update to the calling application, that the game time has changed.
@@ -9217,29 +9226,29 @@ internal class Game
 
     public void ToNextDawn()
     {
-        var midnight = new DateTime(CurrentGameDateTime.Value.Year, CurrentGameDateTime.Value.Month, CurrentGameDateTime.Value.Day, 0, 0, 0);
+        var midnight = new DateTime(CurrentGameDateTime.DateAndTimeValue.Year, CurrentGameDateTime.DateAndTimeValue.Month, CurrentGameDateTime.DateAndTimeValue.Day, 0, 0, 0);
         midnight += new TimeSpan(1, 0, 0, 0);
-        CurrentGameDateTime.Value = midnight;
+        CurrentGameDateTime.DateAndTimeValue = midnight;
         RecalculateDawnAndDusk();
-        CurrentGameDateTime.Value = _dawn;
+        CurrentGameDateTime.DateAndTimeValue = _dawn;
         ReverseEngineerTurn();
         Tick();
     }
 
     public void ToNextDusk()
     {
-        var midnight = new DateTime(CurrentGameDateTime.Value.Year, CurrentGameDateTime.Value.Month, CurrentGameDateTime.Value.Day, 0, 0, 0);
+        var midnight = new DateTime(CurrentGameDateTime.DateAndTimeValue.Year, CurrentGameDateTime.DateAndTimeValue.Month, CurrentGameDateTime.DateAndTimeValue.Day, 0, 0, 0);
         midnight += new TimeSpan(1, 0, 0, 0);
-        CurrentGameDateTime.Value = midnight;
+        CurrentGameDateTime.DateAndTimeValue = midnight;
         RecalculateDawnAndDusk();
-        CurrentGameDateTime.Value = _dusk;
+        CurrentGameDateTime.DateAndTimeValue = _dusk;
         ReverseEngineerTurn();
         Tick();
     }
 
     private void RecalculateDawnAndDusk()
     {
-        var midnight = new DateTime(CurrentGameDateTime.Value.Year, CurrentGameDateTime.Value.Month, CurrentGameDateTime.Value.Day, 0, 0, 0);
+        var midnight = new DateTime(CurrentGameDateTime.DateAndTimeValue.Year, CurrentGameDateTime.DateAndTimeValue.Month, CurrentGameDateTime.DateAndTimeValue.Day, 0, 0, 0);
         var n = midnight.DayOfYear;
         var delta = 23.45 * Math.Sin((360.0 / 365.0 * (n + 284)) * (Math.PI / 180.0)) * (Math.PI / 180.0);
         const double phi = 50.838 * (Math.PI / 180.0);
@@ -9255,7 +9264,7 @@ internal class Game
 
     private void ReverseEngineerTurn()
     {
-        var totalTime = CurrentGameDateTime.Value - _gameStartDateTime;
+        var totalTime = CurrentGameDateTime.DateAndTimeValue - _gameStartDateTime;
         var milliseconds = totalTime.TotalMilliseconds;
         _currentTurn = (int)(milliseconds / MillisecondsPerTurn);
     }
@@ -9266,8 +9275,8 @@ internal class Game
 
         bool startAtDusk = Race.RestsTillDuskInsteadOfDawn;
         int startDate = DieRoll(365);
-        CurrentGameDateTime.Value = new DateTime(1297, 1, 1, 0, 0, 0, 0);
-        CurrentGameDateTime.Value = CurrentGameDateTime.Value.AddDays(startDate - 1);
+        CurrentGameDateTime.DateAndTimeValue = new DateTime(1297, 1, 1, 0, 0, 0, 0);
+        CurrentGameDateTime.DateAndTimeValue = CurrentGameDateTime.DateAndTimeValue.AddDays(startDate - 1);
         _birthday = startDate;
         RecalculateDawnAndDusk();
         if (startAtDusk)
@@ -9278,7 +9287,7 @@ internal class Game
         {
             _gameStartDateTime = _dawn;
         }
-        CurrentGameDateTime.Value = _gameStartDateTime;
+        CurrentGameDateTime.DateAndTimeValue = _gameStartDateTime;
         Tick();
 
         if (Gender.Index == Constants.SexMale)
