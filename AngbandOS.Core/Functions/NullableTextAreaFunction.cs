@@ -1,13 +1,16 @@
-﻿// AngbandOS: 2022 Marc Johnston
+﻿
+// AngbandOS: 2022 Marc Johnston
 //
 // This game is released under the “Angband License”, defined as: “© 1997 Ben Harrison, James E.
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Interfaces;
+namespace AngbandOS.Core.Functions;
 
-internal interface IMultilineNullableStringChangeTracking : IChangeTracker
+[Serializable]
+internal abstract class NullableTextAreaFunction : Function, INullableTextAreaValue
 {
-    string[]? Value { get; }
+    protected NullableTextAreaFunction(Game game) : base(game) { } // This object is a singleton.
+    public abstract string[]? NullableTextAreaValue { get; }
 }

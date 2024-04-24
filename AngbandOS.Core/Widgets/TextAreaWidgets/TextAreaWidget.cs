@@ -8,14 +8,14 @@
 namespace AngbandOS.Core.Widgets;
 
 [Serializable]
-internal abstract class MultilineNullableWidget : Widget
+internal abstract class TextAreaWidget : Widget
 {
-    protected MultilineNullableWidget(Game game) : base(game) { }
+    protected TextAreaWidget(Game game) : base(game) { }
 
     /// <summary>
     /// Returns the text to be rendered for the widget.
     /// </summary>
-    public abstract string[]? Text { get; }
+    public abstract string[] Text { get; }
 
     /// <summary>
     /// Returns the color that the widget <see cref="Text"/> will be drawn.  Returns the color white by default.
@@ -74,20 +74,12 @@ internal abstract class MultilineNullableWidget : Widget
     }
 
     /// <summary>
-    /// Returns the text to render when the value is null.  By default, returns a single line of an empty string.  The alignment will vertically add lines and the justification
-    /// will horizontally add space.
-    /// </summary>
-    public virtual string[] NullText => new string[] { String.Empty };
-
-    /// <summary>
     /// Paint the widget on the screen.  No checks or resets of the validation status are or should be performed during this method.
     /// </summary>
     protected override void Paint()
     {
-        string[] text = Text ?? NullText;
-
         // Align the text vertically.
-        string[] alignedText = Alignment.Align(text, Height);
+        string[] alignedText = Alignment.Align(Text, Height);
 
         // Ensure we do not exceed the maximum height.
         alignedText = alignedText.Take(Height).ToArray();

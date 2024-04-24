@@ -1,0 +1,61 @@
+﻿// AngbandOS: 2022 Marc Johnston
+//
+// This game is released under the “Angband License”, defined as: “© 1997 Ben Harrison, James E.
+// Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
+// and not for profit purposes provided that this copyright and statement are included in all such
+// copies. Other copyrights may also apply.”
+
+using Timer = AngbandOS.Core.Timers.Timer;
+
+namespace AngbandOS.Core.Widgets;
+
+[Serializable]
+internal abstract class NullableStringsTextAreaWidget : NullableTextAreaWidget
+{
+    protected NullableStringsTextAreaWidget(Game game) : base(game) { }
+
+    public abstract string NullableTextAreaValueName { get; }
+    public INullableTextAreaValue NullableTextAreaValue { get; private set; }
+    public override string[]? NullableText => NullableTextAreaValue.NullableTextAreaValue;
+    public override void Bind()
+    {
+        base.Bind();
+        Property? property = Game.SingletonRepository.Properties.TryGet(NullableTextAreaValueName);
+        if (property != null)
+        {
+            NullableTextAreaValue = (INullableTextAreaValue)property;
+        }
+        else
+        {
+            Timer? timer = Game.SingletonRepository.Timers.TryGet(NullableTextAreaValueName);
+            if (timer != null)
+            {
+                NullableTextAreaValue = (INullableTextAreaValue)timer;
+            }
+            else
+            {
+                Function? function = Game.SingletonRepository.Functions.TryGet(NullableTextAreaValueName);
+                if (function != null)
+                {
+                    NullableTextAreaValue = (INullableTextAreaValue)function;
+                }
+                else
+                {
+                    throw new Exception($"The {nameof(NullableTextAreaValueName)} property does not specify a valid {nameof(Property)}, {nameof(Timer)} or {nameof(Function)}.");
+                }
+            }
+        }
+    }
+
+    public override void Update()
+    {
+        // Check to see if the value has changed.
+        if (NullableTextAreaValue.IsChanged)
+        {
+            // It has, invalidate the widget.
+            Invalidate();
+        }
+
+        base.Update();
+    }
+}

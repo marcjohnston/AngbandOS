@@ -9,8 +9,8 @@
 namespace AngbandOS.Core.Functions;
 
 [Serializable]
-internal class TargetedMonsterNameFunction : MultilineNullableStringFunction
+internal class TargetedMonsterNameFunction : NullableTextAreaFunction
 {
     private TargetedMonsterNameFunction(Game game) : base(game) { } // This object is a singleton.
-    public override string[]? Value => Game.TrackedMonsterIndex == null ? null : Game.Monsters[Game.TrackedMonsterIndex.Value].Race.GetMultilineName;
+    public override string[]? NullableTextAreaValue => Game.TrackedMonsterIndex == null ? null : Game.Monsters[Game.TrackedMonsterIndex.Value].Race.GetMultilineName;
 }

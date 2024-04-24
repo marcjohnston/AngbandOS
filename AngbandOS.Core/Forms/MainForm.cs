@@ -44,7 +44,7 @@ internal class MainForm : Form
         nameof(RaceTitleChangeTrackingWidget),
         nameof(StudyChangeTrackingWidget),
         nameof(StunnedChangeTrackingWidget),
-        nameof(TargetedMonsterRaceNameMultilineNullableStringChangeTrackingWidget),
+        nameof(TargetedMonsterRaceNameChangeTrackingWidget),
         nameof(TrapDetectionChangeTrackingWidget)
     };
 }
