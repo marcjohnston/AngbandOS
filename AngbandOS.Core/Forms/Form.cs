@@ -18,6 +18,11 @@ internal abstract class Form : IGetKey
     }
     protected abstract string[] WidgetNames { get; }
     public Widget[] Widgets { get; private set; }
+
+    /// <summary>
+    /// Returns the widgets that support the ability to "put" a character into a dungeon map.  These types of widgets are the only widgets that "Update" inbetween the
+    /// widget update phases.
+    /// </summary>
     protected IPutWidget[] IPutWidgets { get; private set; }
 
     public string Key => GetType().Name;

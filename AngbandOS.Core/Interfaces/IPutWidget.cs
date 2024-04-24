@@ -7,6 +7,9 @@
 
 namespace AngbandOS.Core.Interfaces;
 
+/// <summary>
+/// Represents the interface a widget needs to implement to support the ability to "put" a character into a map.
+/// </summary>
 internal interface IPutWidget
 {
     /// <summary>
