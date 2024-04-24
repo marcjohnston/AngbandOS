@@ -8,9 +8,9 @@
 namespace AngbandOS.Core.Widgets;
 
 [Serializable]
-internal class TargetedMonsterRaceNameNullableStringsTextAreaWidget : NullableStringsTextAreaWidget
+internal class TrackedMonsterRaceNameNullableStringsTextAreaWidget : NullableStringsTextAreaWidget
 {
-    private TargetedMonsterRaceNameNullableStringsTextAreaWidget(Game game) : base(game) { } // This object is a singleton.
+    private TrackedMonsterRaceNameNullableStringsTextAreaWidget(Game game) : base(game) { } // This object is a singleton.
     public override int X => 0;
     public override int Y => 29;
 
@@ -31,7 +31,7 @@ internal class TargetedMonsterRaceNameNullableStringsTextAreaWidget : NullableSt
     public override string JustificationName => nameof(CenterJustification);
 
     /// <summary>
-    /// Returns the <see cref="TargetedMonsterNameFunction"/> function to render a multiline version of the monster race name.
+    /// Returns the <see cref="TrackedMonsterNameFunction"/> function to render a multiline version of the monster race name.
     /// </summary>
-    public override string NullableTextAreaValueName => nameof(TargetedMonsterNameFunction);
+    public override string NullableTextAreaValueName => nameof(TrackedMonsterNameFunction);
 }

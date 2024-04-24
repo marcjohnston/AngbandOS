@@ -11,6 +11,7 @@ namespace AngbandOS.Core.Widgets;
 internal class TargetedMonsterRaceNameChangeTrackingWidget : ChangeTrackingWidget
 {
     private TargetedMonsterRaceNameChangeTrackingWidget(Game game) : base(game) { } // This object is a singleton.
-    public override string[] ChangeTrackerNames => new string[] { nameof(TargetedMonsterNameFunction) };
-    public override string[] WidgetNames => new string[] { nameof(TargetedMonsterRaceNameNullableStringsTextAreaWidget) };
+    public override string[] ChangeTrackerNames => new string[] { nameof(TrackedMonsterNameFunction) };
+    public override string[] WidgetNames => new string[] { nameof(TrackedMonsterRaceNameNullableStringsTextAreaWidget) };
 }
+
