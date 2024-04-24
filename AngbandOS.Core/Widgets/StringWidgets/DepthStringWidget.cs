@@ -5,12 +5,14 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Interfaces;
+namespace AngbandOS.Core.Widgets;
 
-/// <summary>
-/// Represents an interface for a string value that has change tracking associated with it.
-/// </summary>
-internal interface IStringChangeTracking : IChangeTracker
+[Serializable]
+internal class DepthStringWidget : StringWidget
 {
-    string Value { get; }
+    private DepthStringWidget(Game game) : base(game) { } // This object is a singleton.
+    public override int X => 69;
+    public override int Y => 44;
+    public override int Width => 9;
+    public override string StringValueName => nameof(DepthFunction);
 }

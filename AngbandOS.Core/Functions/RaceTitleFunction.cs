@@ -12,5 +12,5 @@ namespace AngbandOS.Core.Functions;
 internal class RaceTitleFunction : StringFunction
 {
     private RaceTitleFunction(Game game) : base(game) { } // This object is a singleton.
-    public override string Value => Game.Race.Title;
+    public override string StringValue => Game.Race.Title;
 }

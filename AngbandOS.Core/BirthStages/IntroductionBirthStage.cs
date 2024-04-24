@@ -50,7 +50,7 @@ internal class IntroductionBirthStage : BirthStage
 
     private string[]? GetMenu()
     {
-        Game.PlayerName.Value = Game._prevName;
+        Game.PlayerName.StringValue = Game._prevName;
         Game.Gender = Game._prevSex;
         Game.Race = Game._prevRace;
         Game.BaseCharacterClass = Game._prevCharacterClass;
@@ -112,7 +112,7 @@ internal class IntroductionBirthStage : BirthStage
             Gender[] availableRandomGenders = Game.SingletonRepository.Genders.Where(_gender => _gender.CanBeRandomlySelected).ToArray();
             int genderIndex = Game.RandomBetween(0, availableRandomGenders.Length - 1);
             Game.Gender = availableRandomGenders[genderIndex];
-            Game.PlayerName.Value = Game.Race.CreateRandomName();
+            Game.PlayerName.StringValue = Game.Race.CreateRandomName();
             Game.Generation = 1;
             return Game.SingletonRepository.BirthStages.Get(nameof(ConfirmationBirthStage));
         }
@@ -125,13 +125,13 @@ internal class IntroductionBirthStage : BirthStage
             Game.SecondaryRealm = Game._prevSecondaryRealm;
             Game.God = Game.BaseCharacterClass.DefaultDeity(Game.SecondaryRealm);
             Game.Gender = Game._prevSex;
-            Game.PlayerName.Value = Game._prevName;
+            Game.PlayerName.StringValue = Game._prevName;
             Game.Generation = Game._prevGeneration + 1;
             return Game.SingletonRepository.BirthStages.Get(nameof(ConfirmationBirthStage));
         }
         else
         {
-            Game.PlayerName.Value = "";
+            Game.PlayerName.StringValue = "";
             Game.Generation = 1;
             Game.Gender = null; // Wait until the player has selected the gender.
             Game.BaseCharacterClass = null; // Wait until the player has selected the character class.

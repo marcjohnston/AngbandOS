@@ -1742,7 +1742,7 @@ internal class Game
         memoryStream.Position = 0;
         GameDetails gameDetails = new GameDetails()
         {
-            CharacterName = PlayerName.Value, // The player parameter
+            CharacterName = PlayerName.StringValue, // The player parameter
             Level = ExperienceLevel.Value, // The player parameter
             Gold = Gold.Value, // The parameter
             IsAlive = !IsDead, // If the player is dead, then the game Player will be null.
@@ -1975,10 +1975,10 @@ internal class Game
                 MsgPrint(null);
                 if (IsDead)
                 {
-                    ConsoleViewPort.PlayerDied(PlayerName.Value, DiedFrom, ExperienceLevel.Value);
+                    ConsoleViewPort.PlayerDied(PlayerName.StringValue, DiedFrom, ExperienceLevel.Value);
 
                     // Store the player info
-                    ExPlayer = new ExPlayer(Gender, Race, RaceAtBirth, BaseCharacterClass?.GetType().Name, PrimaryRealm, SecondaryRealm, PlayerName.Value, ExperienceLevel.Value, Generation);
+                    ExPlayer = new ExPlayer(Gender, Race, RaceAtBirth, BaseCharacterClass?.GetType().Name, PrimaryRealm, SecondaryRealm, PlayerName.StringValue, ExperienceLevel.Value, Generation);
                     break;
                 }
                 GenerateNewLevel();
@@ -3438,7 +3438,7 @@ internal class Game
                 PlayMusic(MusicTrackEnum.Death);
             }
             Screen.Clear();
-            string buf = PlayerName.Value.Trim() + Generation.ToRoman(true);
+            string buf = PlayerName.StringValue.Trim() + Generation.ToRoman(true);
             if (IsWinner.BoolValue || ExperienceLevel.Value > Constants.PyMaxLevel)
             {
                 buf += " the Magnificent";
@@ -13671,12 +13671,12 @@ internal class Game
         while (!Shutdown)
         {
             Screen.Goto(2, col);
-            if (AskforAux(out string newName, PlayerName.Value, 12))
+            if (AskforAux(out string newName, PlayerName.StringValue, 12))
             {
-                PlayerName.Value = newName;
+                PlayerName.StringValue = newName;
 
                 // Check to see if the name has actually changed (excluding any leading or trailing spaces).
-                if (newName.Trim() != PlayerName.Value.Trim())
+                if (newName.Trim() != PlayerName.StringValue.Trim())
                 {
                     Generation = 1;
                 }
@@ -13684,8 +13684,8 @@ internal class Game
 
             break;
         }
-        PlayerName.Value = PlayerName.Value.PadRight(12);
-        Screen.Print(ColorEnum.Brown, PlayerName.Value, 2, col);
+        PlayerName.StringValue = PlayerName.StringValue.PadRight(12);
+        Screen.Print(ColorEnum.Brown, PlayerName.StringValue, 2, col);
         //Screen.Clear(22);
     }
 

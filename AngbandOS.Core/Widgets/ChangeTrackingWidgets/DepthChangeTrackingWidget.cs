@@ -1,5 +1,4 @@
-﻿
-// AngbandOS: 2022 Marc Johnston
+﻿// AngbandOS: 2022 Marc Johnston
 //
 // This game is released under the “Angband License”, defined as: “© 1997 Ben Harrison, James E.
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
@@ -9,11 +8,9 @@
 namespace AngbandOS.Core.Widgets;
 
 [Serializable]
-internal class CharacterSubclassNameStringWidget : StringWidget
+internal class DepthChangeTrackingWidget : ChangeTrackingWidget
 {
-    private CharacterSubclassNameStringWidget(Game game) : base(game) { } // This object is a singleton.
-    public override int X => 0;
-    public override int Y => 3;
-    public override string StringValueName => nameof(CharacterSubclassNameFunction);
+    private DepthChangeTrackingWidget(Game game) : base(game) { } // This object is a singleton.
+    public override string[] ChangeTrackerNames => new string[] { nameof(DepthFunction) };
+    public override string[] WidgetNames => new string[] { nameof(DepthStringWidget) };
 }
-

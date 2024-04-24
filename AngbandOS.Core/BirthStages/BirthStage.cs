@@ -41,7 +41,7 @@ internal abstract class BirthStage : IGetKey
         const string spaces = "                 ";
         Game.Screen.Clear(0);
         Game.Screen.Print(ColorEnum.Blue, "Name        :", 2, 1);
-        Game.Screen.Print(ColorEnum.Brown, Game.PlayerName.Value ?? spaces, 2, 15);
+        Game.Screen.Print(ColorEnum.Brown, Game.PlayerName.StringValue ?? spaces, 2, 15);
         Game.Screen.Print(ColorEnum.Blue, "Gender      :", 3, 1);
         Game.Screen.Print(ColorEnum.Brown, Game.Gender?.Title ?? spaces, 3, 15);
         Game.Screen.Print(ColorEnum.Blue, "Race        :", 4, 1);

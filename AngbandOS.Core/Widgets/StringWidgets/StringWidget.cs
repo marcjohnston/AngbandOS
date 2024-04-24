@@ -13,51 +13,38 @@ namespace AngbandOS.Core.Widgets;
 internal abstract class StringWidget : TextWidget
 {
     protected StringWidget(Game game) : base(game) { }
-    public abstract string StringChangeTrackingName { get; }
-    public IStringChangeTracking StringChangeTracking { get; private set; }
+    public abstract string StringValueName { get; }
+    public IStringValue StringValue { get; private set; }
 
     public override void Bind()
     {
         base.Bind();
-        Property? property = Game.SingletonRepository.Properties.TryGet(StringChangeTrackingName);
+        Property? property = Game.SingletonRepository.Properties.TryGet(StringValueName);
         if (property != null)
         {
-            StringChangeTracking = (IStringChangeTracking)property;
+            StringValue = (IStringValue)property;
         }
         else
         {
-            Timer? timer = Game.SingletonRepository.Timers.TryGet(StringChangeTrackingName);
+            Timer? timer = Game.SingletonRepository.Timers.TryGet(StringValueName);
             if (timer != null)
             {
-                StringChangeTracking = (IStringChangeTracking)timer;
+                StringValue = (IStringValue)timer;
             }
             else
             {
-                Function? function = Game.SingletonRepository.Functions.TryGet(StringChangeTrackingName);
+                Function? function = Game.SingletonRepository.Functions.TryGet(StringValueName);
                 if (function != null)
                 {
-                    StringChangeTracking = (IStringChangeTracking)function;
+                    StringValue = (IStringValue)function;
                 }
                 else
                 {
-                    throw new Exception($"The {nameof(StringChangeTrackingName)} property does not specify a valid {nameof(Property)}, {nameof(Timer)} or {nameof(Function)}.");
+                    throw new Exception($"The {nameof(StringValueName)} property does not specify a valid {nameof(Property)}, {nameof(Timer)} or {nameof(Function)}.");
                 }
             }
         }
     }
 
-    public override void Update()
-    {
-        // Check to see if the value has changed.
-        if (StringChangeTracking.IsChanged)
-        {
-            // It has, invalidate the widget.
-            Invalidate();
-        }
-
-        // Update the widget.
-        base.Update();
-    }
-
-    public override string Text => StringChangeTracking.Value;
+    public override string Text => StringValue.StringValue;
 }

@@ -9,11 +9,11 @@
 namespace AngbandOS.Core.Widgets;
 
 [Serializable]
-internal class PlayerNameWidget : StringWidget
+internal class RaceTitleStringWidget : StringWidget
 {
-    private PlayerNameWidget(Game game) : base(game) { } // This object is a singleton.
+    private RaceTitleStringWidget(Game game) : base(game) { } // This object is a singleton.
     public override int X => 0;
-    public override int Y => 1;
-    public override string StringChangeTrackingName => nameof(PlayerNameStringProperty);
+    public override int Y => 2;
+    public override string StringValueName => nameof(RaceTitleFunction);
 }
 

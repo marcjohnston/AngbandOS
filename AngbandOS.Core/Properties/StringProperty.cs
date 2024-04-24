@@ -8,12 +8,12 @@
 namespace AngbandOS.Core.Properties;
 
 [Serializable]
-internal abstract class StringProperty : Property, IStringChangeTracking
+internal abstract class StringProperty : Property, IStringValue
 {
     protected StringProperty(Game game) : base(game) { }
 
     private string _value;
-    public string Value
+    public string StringValue
     {
         get
         {

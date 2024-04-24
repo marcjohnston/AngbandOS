@@ -12,7 +12,7 @@ namespace AngbandOS.Core.Functions;
 internal class DepthFunction : StringFunction
 {
     private DepthFunction(Game game) : base(game) { } // This object is a singleton.
-    public override string Value
+    public override string StringValue
     {
         get
         {

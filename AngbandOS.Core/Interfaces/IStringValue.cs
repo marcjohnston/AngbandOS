@@ -5,11 +5,12 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Functions;
+namespace AngbandOS.Core.Interfaces;
 
-[Serializable]
-internal class CharacterSubclassNameFunction : StringFunction
+/// <summary>
+/// Represents an interface for a string value that has change tracking associated with it.
+/// </summary>
+internal interface IStringValue
 {
-    private CharacterSubclassNameFunction(Game game) : base(game) { } // This object is a singleton.
-    public override string StringValue => Game.BaseCharacterClass.ClassSubName(Game.PrimaryRealm);
+    string StringValue { get; }
 }

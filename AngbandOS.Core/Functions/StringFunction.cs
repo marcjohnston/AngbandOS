@@ -9,9 +9,9 @@
 namespace AngbandOS.Core.Functions;
 
 [Serializable]
-internal abstract class StringFunction : Function, IStringChangeTracking
+internal abstract class StringFunction : Function, IStringValue
 {
     protected StringFunction(Game game) : base(game) { }
 
-    public abstract string Value { get; }
+    public abstract string StringValue { get; }
 }

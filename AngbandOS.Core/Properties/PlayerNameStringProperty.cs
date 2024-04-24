@@ -18,6 +18,6 @@ internal class PlayerNameStringProperty : StringProperty
     protected override void OnAfterSet()
     {
         // Send a message to the attached view port so that the consuming application knows that the gold value has been updated.
-        Game.ConsoleViewPort.CharacterRenamed(Value);
+        Game.ConsoleViewPort.CharacterRenamed(StringValue);
     }
 }

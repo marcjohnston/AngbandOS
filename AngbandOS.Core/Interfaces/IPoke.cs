@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Interfaces;
 
 /// <summary>
-/// Represents the interface a widget needs to implement to support the ability to "poke" a character directly into a map grid.
+/// Represents the interface a widget needs to implement to support the ability to "poke" a character directly into it.  The MapWidget currently supports this interface.
 /// </summary>
 internal interface IPoke
 {

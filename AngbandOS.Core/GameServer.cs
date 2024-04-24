@@ -74,7 +74,7 @@ public class GameServer
             }
             else
             {
-                return Game.PlayerName.Value;
+                return Game.PlayerName.StringValue;
             }
         }
     }

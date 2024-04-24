@@ -9,11 +9,9 @@
 namespace AngbandOS.Core.Widgets;
 
 [Serializable]
-internal class CharacterSubclassNameStringWidget : StringWidget
+internal class CharacterSubclassNameChangeTrackingWidget : ChangeTrackingWidget
 {
-    private CharacterSubclassNameStringWidget(Game game) : base(game) { } // This object is a singleton.
-    public override int X => 0;
-    public override int Y => 3;
-    public override string StringValueName => nameof(CharacterSubclassNameFunction);
+    private CharacterSubclassNameChangeTrackingWidget(Game game) : base(game) { } // This object is a singleton.
+    public override string[] ChangeTrackerNames => new string[] { nameof(CharacterSubclassNameFunction) };
+    public override string[] WidgetNames => new string[] { nameof(CharacterSubclassNameStringWidget) };
 }
-
