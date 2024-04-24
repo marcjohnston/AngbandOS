@@ -10,9 +10,9 @@ using Timer = AngbandOS.Core.Timers.Timer;
 namespace AngbandOS.Core.Widgets;
 
 [Serializable]
-internal abstract class IntTextWidget : TextWidget
+internal abstract class IntWidget : TextWidget
 {
-    protected IntTextWidget(Game game) : base(game) { }
+    protected IntWidget(Game game) : base(game) { }
     public abstract string IntValueName { get; }
     public IIntValue IntValue { get; private set; }
 

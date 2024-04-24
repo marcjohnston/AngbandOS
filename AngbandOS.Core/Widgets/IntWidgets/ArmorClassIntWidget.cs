@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Widgets;
 
 [Serializable]
-internal class ArmorClassIntWidget : IntTextWidget
+internal class ArmorClassIntWidget : IntWidget
 {
     private ArmorClassIntWidget(Game game) : base(game) { } // This object is a singleton.
     public override int X => 7;

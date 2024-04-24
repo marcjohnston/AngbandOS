@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Widgets;
 /// Represents the widget used to render the experience level of the player when the player has lost one or more levels of expereience.
 /// </summary>
 [Serializable]
-internal class ExperienceLevelLostIntWidget : IntTextWidget
+internal class ExperienceLevelLostIntWidget : IntWidget
 {
     private ExperienceLevelLostIntWidget(Game game) : base(game) { } // This object is a singleton.
     public override int X => 6;

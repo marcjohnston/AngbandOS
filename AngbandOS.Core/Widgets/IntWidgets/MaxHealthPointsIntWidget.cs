@@ -8,9 +8,9 @@
 namespace AngbandOS.Core.Widgets;
 
 [Serializable]
-internal class MaxHealthPointsWidget : IntTextWidget
+internal class MaxHealthPointsIntWidget : IntWidget
 {
-    private MaxHealthPointsWidget(Game game) : base(game) { } // This object is a singleton.
+    private MaxHealthPointsIntWidget(Game game) : base(game) { } // This object is a singleton.
     public override int X => 7;
     public override int Y => 23;
     public override int Width => 5;

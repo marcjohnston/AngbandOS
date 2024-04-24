@@ -37,7 +37,7 @@ internal class MainForm : Form
         nameof(HungerChangeTrackingWidget),
         nameof(ManaConditionalWidget),
         nameof(MaxHealthPointsLabelWidget),
-        nameof(MaxHealthPointsWidget),
+        nameof(MaxHealthPointsIntWidget),
         nameof(PlayerNameChangeTrackingWidget),
         nameof(PlayerTitleConditionalWidget),
         nameof(PoisonedChangeTrackingWidget),

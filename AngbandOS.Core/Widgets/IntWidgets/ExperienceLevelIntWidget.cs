@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Widgets;
 /// Represents the widget used to render the experience level of the player when the experience level of the player is at the maximum level that the player has attained.
 /// </summary>
 [Serializable]
-internal class ExperienceLevelIntWidget : IntTextWidget
+internal class ExperienceLevelIntWidget : IntWidget
 {
     private ExperienceLevelIntWidget(Game game) : base(game) { } // This object is a singleton.
     public override int X => 6;

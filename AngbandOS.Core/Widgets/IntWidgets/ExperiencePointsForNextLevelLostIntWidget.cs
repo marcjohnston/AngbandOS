@@ -14,7 +14,7 @@ namespace AngbandOS.Core.Widgets;
 /// the experience points that the player has gained.
 /// </summary>
 [Serializable]
-internal class ExperiencePointsForNextLevelLostIntWidget : IntTextWidget
+internal class ExperiencePointsForNextLevelLostIntWidget : IntWidget
 {
     private ExperiencePointsForNextLevelLostIntWidget(Game game) : base(game) { } // This object is a singleton.
     public override int X => 4;

@@ -11,9 +11,9 @@ namespace AngbandOS.Core.Widgets;
 /// Represents a widget that renders the players maximum mana value.
 /// </summary>
 [Serializable]
-internal class MaxManaWidget : IntTextWidget
+internal class MaxManaIntWidget : IntWidget
 {
-    private MaxManaWidget(Game game) : base(game) { } // This object is a singleton.
+    private MaxManaIntWidget(Game game) : base(game) { } // This object is a singleton.
     public override int X => 7;
     public override int Y => 25;
     public override int Width => 5;

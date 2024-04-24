@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Widgets;
 /// Represents a widget that renders the experience points that are needed for the player to gain the next level.
 /// </summary>
 [Serializable]
-internal class ExperiencePointsForNextLevelIntWidget : IntTextWidget
+internal class ExperiencePointsForNextLevelIntWidget : IntWidget
 {
     private ExperiencePointsForNextLevelIntWidget(Game game) : base(game) { } // This object is a singleton.
     public override int X => 4;
