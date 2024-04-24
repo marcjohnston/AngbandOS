@@ -29,7 +29,7 @@ internal class RetireScript : Script, IScript, IRepeatableScript
     public void ExecuteScript()
     {
         // If we're a winner it's a simple question with a more positive connotation
-        if (Game.IsWinner.Value)
+        if (Game.IsWinner.BoolValue)
         {
             if (!Game.GetCheck("Do you want to retire? "))
             {
@@ -40,7 +40,7 @@ internal class RetireScript : Script, IScript, IRepeatableScript
         {
             // If we're not a winner, only ask if we're not also a wizard - giving up a wizard
             // character doesn't need a prompt/confirmation
-            if (!Game.IsWizard.Value)
+            if (!Game.IsWizard.BoolValue)
             {
                 if (!Game.GetCheck("Do you really want to give up? "))
                 {

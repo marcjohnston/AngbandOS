@@ -28,7 +28,7 @@ internal class EnterWizardModeScript : Script, IScript, IRepeatableScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        if (Game.IsWizard.Value)
+        if (Game.IsWizard.BoolValue)
         {
             Game.GetCom("Wizard Command: ", out char cmd);
             foreach (WizardCommand wizardCommand in Game.SingletonRepository.WizardCommands)
@@ -55,7 +55,7 @@ internal class EnterWizardModeScript : Script, IScript, IRepeatableScript
             Game.Screen.Erase(0, 0);
             if (tmp == "Dumbledore")
             {
-                Game.IsWizard.Value = true;
+                Game.IsWizard.BoolValue = true;
                 Game.MsgPrint("Wizard mode activated.");
             }
         }

@@ -20,7 +20,7 @@ internal class WinnerScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        Game.IsWinner.Value = true;
+        Game.IsWinner.BoolValue = true;
         Game.MsgPrint("*** CONGRATULATIONS ***");
         Game.MsgPrint("You have won the game!");
         Game.MsgPrint("You may retire ('Q') when you are ready.");

@@ -1810,8 +1810,8 @@ internal class Game
         }
         SingletonRepository.MonsterRaces[SingletonRepository.MonsterRaces.Count - 1].MaxNum = 0;
         Food.Value = Constants.PyFoodFull - 1;
-        IsWizard.Value = false;
-        IsWinner.Value = false;
+        IsWizard.BoolValue = false;
+        IsWinner.BoolValue = false;
 
         // Reset the home ownership for the player.
         TownWithHouse = null;
@@ -2860,7 +2860,7 @@ internal class Game
         FullScreenOverlay = true;
         if (IsDead)
         {
-            if (IsWinner.Value)
+            if (IsWinner.BoolValue)
             {
                 Kingly();
             }
@@ -2868,7 +2868,7 @@ internal class Game
             //HighScore score = new HighScore(this);
             SavePlayer();
             PrintTomb();
-            if (IsWizard.Value)
+            if (IsWizard.BoolValue)
             {
                 return;
             }
@@ -3418,7 +3418,7 @@ internal class Game
     {
         {
             DateTime ct = DateTime.Now;
-            if (IsWinner.Value)
+            if (IsWinner.BoolValue)
             {
                 SetBackground(BackgroundImageEnum.Sunset);
                 PlayMusic(MusicTrackEnum.Victory);
@@ -3430,7 +3430,7 @@ internal class Game
             }
             Screen.Clear();
             string buf = PlayerName.Value.Trim() + Generation.ToRoman(true);
-            if (IsWinner.Value || ExperienceLevel.Value > Constants.PyMaxLevel)
+            if (IsWinner.BoolValue || ExperienceLevel.Value > Constants.PyMaxLevel)
             {
                 buf += " the Magnificent";
             }
@@ -13634,7 +13634,7 @@ internal class Game
                 score += 100;
             }
         }
-        if (IsWinner.Value)
+        if (IsWinner.BoolValue)
         {
             score += 1000;
         }
@@ -13996,7 +13996,7 @@ internal class Game
             }
             else
             {
-                if (IsWizard.Value && !GetCheck("Die? "))
+                if (IsWizard.BoolValue && !GetCheck("Die? "))
                 {
                     Health.Value += damage;
                 }
@@ -14010,7 +14010,7 @@ internal class Game
                     {
                         DiedFrom += "(?)";
                     }
-                    IsWinner.Value = false;
+                    IsWinner.BoolValue = false;
                     IsDead = true;
                     return;
                 }
@@ -16613,7 +16613,7 @@ internal class Game
             {
                 flag = true;
             }
-            if (IsWizard.Value)
+            if (IsWizard.BoolValue)
             {
                 flag = true;
             }

@@ -12,5 +12,5 @@ namespace AngbandOS.Core.Interfaces;
 /// </summary>
 internal interface IBoolValue
 {
-    bool Value { get; }
+    bool BoolValue { get; }
 }

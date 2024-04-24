@@ -11,17 +11,16 @@ namespace AngbandOS.Core.Properties;
 /// Represents a boolean game property.  These properties can be referenced by widgets and conditionals.
 /// </summary>
 [Serializable]
-internal abstract class BoolProperty : Property, IBoolValue, IConditional
+internal abstract class BoolProperty : Property, IBoolValue
 {
     protected BoolProperty(Game game) : base(game) { }
+
+    private bool _value;
 
     /// <summary>
     /// Returns the boolean result of the function.  This method provides the implementation for the IConditional interface.
     /// </summary>
-    public bool IsTrue => Value;
-
-    private bool _value;
-    public bool Value
+    public bool BoolValue
     {
         get
         {

@@ -9,14 +9,12 @@
 namespace AngbandOS.Core.Functions;
 
 [Serializable]
-internal abstract class BoolFunction : Function, IBoolValue, IConditional
+internal abstract class BoolFunction : Function, IBoolValue
 {
     protected BoolFunction(Game game) : base(game) { }
-
-    public abstract bool Value { get; }
 
     /// <summary>
     /// Returns the boolean result of the function.  This method provides the implementation for the IConditional interface.
     /// </summary>
-    public bool IsTrue => Value;
+    public abstract bool BoolValue { get; }
 }

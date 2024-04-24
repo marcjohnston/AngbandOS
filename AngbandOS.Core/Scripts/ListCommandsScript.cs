@@ -95,7 +95,7 @@ internal class ListCommandsScript : Script, IScript, IRepeatableScript
         Game.Screen.Print("S = Auto-search on/off", 21, 52);
         Game.Screen.Print("T = Tunnel", 22, 52);
         Game.Screen.Print("V = Version info", 24, 52);
-        if (Game.IsWizard.Value)
+        if (Game.IsWizard.BoolValue)
         {
             Game.Screen.Print("W = Wizard command", 25, 52);
         }

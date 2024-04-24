@@ -12,7 +12,7 @@ namespace AngbandOS.Core.Functions;
 internal class CanStudyFunction : BoolFunction
 {
     private CanStudyFunction(Game game) : base(game) { } // This object is a singleton.
-    public override bool Value => Game.SpareSpellSlots.Value != 0;
+    public override bool BoolValue => Game.SpareSpellSlots.Value != 0;
     public override string[]? DependencyNames => new string[]
     {
         nameof(SpareSpellSlotsIntProperty)

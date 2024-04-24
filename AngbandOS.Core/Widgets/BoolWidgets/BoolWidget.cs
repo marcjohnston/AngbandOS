@@ -49,5 +49,5 @@ internal abstract class BoolWidget : TextWidget
     public abstract string TrueValue { get; }
     public abstract string FalseValue { get; }
 
-    public override string Text => BoolValue.Value ? TrueValue : FalseValue;
+    public override string Text => BoolValue.BoolValue ? TrueValue : FalseValue;
 }

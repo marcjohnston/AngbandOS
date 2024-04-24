@@ -38,7 +38,7 @@ internal abstract class Widget : IGetKey
     /// to be enabled.
     /// </summary>
     [Obsolete("Use ConditionalWidget")]
-    public (IConditional conditional, bool isTrue)[]? Enabled { get; private set; }
+    public (IBoolValue conditional, bool isTrue)[]? Enabled { get; private set; }
 
     [Obsolete("Use ConditionalWidget")]
     public virtual (string conditionalName, bool isTrue)[]? EnabledNames => null;
@@ -55,13 +55,13 @@ internal abstract class Widget : IGetKey
         }
         else
         {
-            List<(IConditional, bool)> conditionalList = new();
+            List<(IBoolValue, bool)> conditionalList = new();
             foreach ((string enabledName, bool isTrue) in EnabledNames)
             {
                 Property? property = Game.SingletonRepository.Properties.TryGet(enabledName);
                 if (property != null)
                 {
-                    conditionalList.Add(((IConditional)property, isTrue));
+                    conditionalList.Add(((IBoolValue)property, isTrue));
                 } 
                 else
                 { 
@@ -70,7 +70,7 @@ internal abstract class Widget : IGetKey
                     {
                         throw new Exception($"The {enabledName} enabled dependency cannot be found as a {nameof(Property)} or {nameof(Function)}.");
                     }
-                    conditionalList.Add(((IConditional)function, isTrue));
+                    conditionalList.Add(((IBoolValue)function, isTrue));
                 }
             }
             Enabled = conditionalList.ToArray();
@@ -94,7 +94,7 @@ internal abstract class Widget : IGetKey
     public virtual void Update()
     {
         // Check to see if the widget is enabled.  All conditionals must be true.
-        if (Enabled != null && Enabled.Any(_conditions => _conditions.conditional.IsTrue != _conditions.isTrue))
+        if (Enabled != null && Enabled.Any(_conditions => _conditions.conditional.BoolValue != _conditions.isTrue))
         {
             return;
         }

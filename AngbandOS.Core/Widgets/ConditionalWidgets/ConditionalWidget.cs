@@ -19,7 +19,7 @@ internal abstract class ConditionalWidget : Widget
     /// the conditions that make up a term.  All conditions with the same term value are considered to belong to the same term (sum).  Use Gaussian Elimination to convert existing
     /// boolean expressions into POS format.
     /// </summary>
-    protected new (IConditional conditional, bool valueConditionalMustBe, int term)[] Enabled { get; private set; }
+    protected new (IBoolValue conditional, bool valueConditionalMustBe, int term)[] Enabled { get; private set; }
 
     /// <summary>
     /// Returns an array of the names of the conditionals that need to be met for the widget to rendered; or null, if there are no conditions.  All conditions must return true for 
@@ -56,13 +56,13 @@ internal abstract class ConditionalWidget : Widget
 
     public override void Bind()
     {
-        List<(IConditional, bool, int)> conditionalList = new();
+        List<(IBoolValue, bool, int)> conditionalList = new();
         foreach ((string enabledName, bool isTrue, int term) in EnabledNames)
         {
             Property? property = Game.SingletonRepository.Properties.TryGet(enabledName);
             if (property != null)
             {
-                conditionalList.Add(((IConditional)property, isTrue, term));
+                conditionalList.Add(((IBoolValue)property, isTrue, term));
             }
             else
             {
@@ -71,7 +71,7 @@ internal abstract class ConditionalWidget : Widget
                 {
                     throw new Exception($"The {enabledName} enabled dependency cannot be found as a {nameof(Property)} or {nameof(Function)}.");
                 }
-                conditionalList.Add(((IConditional)function, isTrue, term));
+                conditionalList.Add(((IBoolValue)function, isTrue, term));
             }
         }
         Enabled = conditionalList.ToArray();
@@ -106,16 +106,16 @@ internal abstract class ConditionalWidget : Widget
         {
             // Check to see if the widget is enabled.  Evaluate the product of sums.
             Dictionary<int, bool> terms = new Dictionary<int, bool>();
-            foreach ((IConditional condition, bool isTrue, int term) in Enabled)
+            foreach ((IBoolValue condition, bool isTrue, int term) in Enabled)
             {
                 if (!terms.ContainsKey(term))
                 {
-                    bool conditionIsTrue = condition.IsTrue;
+                    bool conditionIsTrue = condition.BoolValue;
                     terms.Add(term, conditionIsTrue);
                 }
                 else if (terms[term] == false) // Short circuit evaluation
                 {
-                    bool conditionIsTrue = condition.IsTrue;
+                    bool conditionIsTrue = condition.BoolValue;
                     terms[term] |= conditionIsTrue;
                 }
             }

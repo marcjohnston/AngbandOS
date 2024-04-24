@@ -12,5 +12,5 @@ namespace AngbandOS.Core.Functions;
 internal class UsesManaFunction : BoolFunction
 {
     private UsesManaFunction(Game game) : base(game) { }
-    public override bool Value => Game.UsesMana;
+    public override bool BoolValue => Game.UsesMana;
 }

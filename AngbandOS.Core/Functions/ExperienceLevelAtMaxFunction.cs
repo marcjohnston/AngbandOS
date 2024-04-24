@@ -15,7 +15,7 @@ namespace AngbandOS.Core.Functions;
 internal class ExperienceLevelAtMaxFunction : BoolFunction
 {
     private ExperienceLevelAtMaxFunction(Game game) : base(game) { }
-    public override bool Value => Game.ExperienceLevel.Value >= Constants.PyMaxLevel;
+    public override bool BoolValue => Game.ExperienceLevel.Value >= Constants.PyMaxLevel;
 
     public override string[]? DependencyNames => new string[]
     {
