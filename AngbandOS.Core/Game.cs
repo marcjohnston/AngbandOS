@@ -118,11 +118,12 @@ internal class Game
     public int Resting;
     public int Running;
     public List<UnreadableScrollFlavor> UnreadableScrollFlavors; // These are generated from the available base scrolls.
+
     public int TargetCol;
     public int TargetRow;
 
     /// <summary>
-    /// Returns a monster index.
+    /// Returns the monster index for the monster that the player has targeted; or 0, if the player is targeting a location.
     /// </summary>
     public int TargetWho;
 
@@ -5171,7 +5172,7 @@ internal class Game
         ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill;
         int tx = MapX.Value + (99 * KeypadDirectionXOffset[dir]);
         int ty = MapY.Value + (99 * KeypadDirectionYOffset[dir]);
-        if (dir == 5 && TargetOkay())
+        if (dir == 5 && TargetOkay(TargetWho))
         {
             flg &= ~ProjectionFlag.ProjectStop;
             tx = TargetCol;
@@ -5553,7 +5554,7 @@ internal class Game
     public void TeleportSwap(int dir)
     {
         int tx, ty;
-        if (dir == 5 && TargetOkay())
+        if (dir == 5 && TargetOkay(TargetWho))
         {
             tx = TargetCol;
             ty = TargetRow;
@@ -5952,7 +5953,7 @@ internal class Game
         flg |= ProjectionFlag.ProjectThru;
         int tx = MapX.Value + KeypadDirectionXOffset[dir];
         int ty = MapY.Value + KeypadDirectionYOffset[dir];
-        if (dir == 5 && TargetOkay())
+        if (dir == 5 && TargetOkay(TargetWho))
         {
             tx = TargetCol;
             ty = TargetRow;
@@ -7613,7 +7614,7 @@ internal class Game
         int x = MapX.Value;
         int targetX = MapX.Value + (99 * KeypadDirectionXOffset[dir]);
         int targetY = MapY.Value + (99 * KeypadDirectionYOffset[dir]);
-        if (dir == 5 && TargetOkay())
+        if (dir == 5 && TargetOkay(TargetWho))
         {
             targetX = TargetCol;
             targetY = TargetRow;
@@ -7909,7 +7910,7 @@ internal class Game
             return;
         }
         // If we didn't have a direction, we might have an existing target
-        if (dir == 5 && TargetOkay())
+        if (dir == 5 && TargetOkay(TargetWho))
         {
             targetX = TargetCol;
             targetY = TargetRow;
@@ -12112,9 +12113,7 @@ internal class Game
         int dir = 0;
         while (dir == 0)
         {
-            string p = !TargetOkay()
-                ? "Direction ('*' to choose a target, Escape to cancel)? "
-                : "Direction ('5' for target, '*' to re-target, Escape to cancel)? ";
+            string p = !TargetOkay(TargetWho) ? "Direction ('*' to choose a target, Escape to cancel)? " : "Direction ('5' for target, '*' to re-target, Escape to cancel)? ";
             if (!GetCom(p, out char command))
             {
                 break;
@@ -12144,7 +12143,7 @@ internal class Game
                         break;
                     }
             }
-            if (dir == 5 && !TargetOkay())
+            if (dir == 5 && !TargetOkay(TargetWho))
             {
                 dir = 0;
             }
@@ -12169,15 +12168,13 @@ internal class Game
     {
         dp = 0;
         int dir = CommandDirection;
-        if (TargetOkay())
+        if (TargetOkay(TargetWho))
         {
             dir = 5;
         }
         while (dir == 0)
         {
-            string p = !TargetOkay()
-                ? "Direction ('*' to choose a target, Escape to cancel)? "
-                : "Direction ('5' for target, '*' to re-target, Escape to cancel)? ";
+            string p = !TargetOkay(TargetWho) ? "Direction ('*' to choose a target, Escape to cancel)? " : "Direction ('5' for target, '*' to re-target, Escape to cancel)? ";
             if (!GetCom(p, out char command))
             {
                 break;
@@ -12207,7 +12204,7 @@ internal class Game
                         break;
                     }
             }
-            if (dir == 5 && !TargetOkay())
+            if (dir == 5 && !TargetOkay(TargetWho))
             {
                 dir = 0;
             }
@@ -12229,17 +12226,21 @@ internal class Game
         return true;
     }
 
-    public bool TargetOkay()
+    /// <summary>
+    /// Returns true, if the player has targeted a monster and the monster can still be targetted.  Updates the TargetRow and TargetCol, if true.
+    /// </summary>
+    /// <returns></returns>
+    public bool TargetOkay(int mIdx)
     {
-        if (TargetWho <= 0)
+        if (mIdx <= 0)
         {
             return false;
         }
-        if (!TargetAble(TargetWho))
+        if (!TargetAble(mIdx))
         {
             return false;
         }
-        Monster mPtr = Monsters[TargetWho];
+        Monster mPtr = Monsters[mIdx];
         TargetRow = mPtr.MapY;
         TargetCol = mPtr.MapX;
         return true;
