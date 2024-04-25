@@ -118,11 +118,13 @@ internal class Game
     public int Resting;
     public int Running;
     public List<UnreadableScrollFlavor> UnreadableScrollFlavors; // These are generated from the available base scrolls.
+
+
     public int TargetCol;
     public int TargetRow;
 
     /// <summary>
-    /// Returns a monster index.
+    /// Returns zero, if the player has not selected a target; -1, if the player has selected a location to target; or greater than 0 (>0) for a monster index to target.
     /// </summary>
     public int TargetWho;
 
