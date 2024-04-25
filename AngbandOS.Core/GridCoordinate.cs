@@ -13,8 +13,8 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class GridCoordinate
 {
-    public readonly int X;
-    public readonly int Y;
+    public int X { get; }
+    public int Y { get; }
 
     public GridCoordinate Clone()
     {
