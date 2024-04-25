@@ -8,9 +8,10 @@
 namespace AngbandOS.Core.Interfaces;
 
 /// <summary>
-/// Represents an interface for an object to implement for it to participate in returning an integer value.
+/// Represents an interface for an object to implement for it to participate in returning a nullable integer value.
 /// </summary>
-internal interface IIntValue
+internal interface INullIntValue
 {
-    int IntValue { get; }
+    int? NullIntValue { get; }
 }
+

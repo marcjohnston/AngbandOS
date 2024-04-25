@@ -46,16 +46,4 @@ internal abstract class NullableStringsTextAreaWidget : NullableTextAreaWidget
             }
         }
     }
-
-    public override void Update()
-    {
-        // Check to see if the value has changed.
-        if (NullableTextAreaValue.IsChanged)
-        {
-            // It has, invalidate the widget.
-            Invalidate();
-        }
-
-        base.Update();
-    }
 }

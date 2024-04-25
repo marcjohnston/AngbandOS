@@ -11,9 +11,11 @@ namespace AngbandOS.Core.Widgets;
 /// Represents a widget that renders a dungeon map.  This widget supports the ability to "poke" a character directly into the map grid.
 /// </summary>
 [Serializable]
-internal abstract class MapWidget : Widget, IPoke
+internal abstract class MapWidget : Widget
 {
     protected MapWidget(Game game) : base(game) { }
+
+    public override bool CanPoke => true;
 
     /// <summary>
     /// Returns the x-coordinate on the <see cref="Form"/> where the widget will be drawn.
@@ -61,14 +63,14 @@ internal abstract class MapWidget : Widget, IPoke
     /// </summary>
     /// <param name="row"></param>
     /// <param name="col"></param>
-    public void MoveCursorTo(int row, int col)
+    public override void MoveCursorTo(int row, int col)
     {
         int offsetX = Game.PanelColMin - X;
         int offsetY = Game.PanelRowMin - Y;
         Game.Screen.Goto(row - offsetY, col - offsetX); // TODO: The - is weird and should be +
     }
 
-    public void Poke(ColorEnum attr, char ch, int row, int col)
+    public override void Poke(ColorEnum attr, char ch, int row, int col)
     {
         int offsetX = Game.PanelColMin - X;
         int offsetY = Game.PanelRowMin - Y;

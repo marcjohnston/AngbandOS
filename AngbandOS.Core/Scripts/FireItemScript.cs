@@ -117,7 +117,7 @@ internal class FireItemScript : Script, IScript, IRepeatableScript
             if (Game.PanelContains(y, x) && Game.PlayerCanSeeBold(y, x))
             {
                 Game.MainForm.PutCharAtMapLocation(missileCharacter, missileColor, y, x);
-                Game.MainForm.GotoMapLocation(y, x);
+                Game.MainForm.MoveCursorTo(y, x);
                 Game.UpdateScreen();
                 Game.Pause(msec);
                 Game.MainForm.RefreshMapLocation(y, x);

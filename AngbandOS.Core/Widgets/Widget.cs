@@ -20,6 +20,17 @@ internal abstract class Widget : IGetKey
         Game = game;
     }
 
+    public virtual bool CanPoke => false;
+
+    /// <summary>
+    /// Locate the cursor in the viewport at a specific level grid x, y coordinate.
+    /// </summary>
+    /// <param name="row"></param>
+    /// <param name="col"></param>
+    public virtual void MoveCursorTo(int row, int col) { }
+
+    public virtual void Poke(ColorEnum attr, char ch, int row, int col) {}
+
     /// <summary>
     /// Returns true, if the widget is invalid and needs to be redrawn.
     /// </summary>

@@ -17,6 +17,33 @@ internal abstract class ChangeTrackingWidget : Widget
 {
     protected ChangeTrackingWidget(Game game) : base(game) { }
 
+    private Widget[]? PokeableWidgets = null;
+    private bool _hasPokeableWidgets = false;
+
+    public override bool CanPoke => _hasPokeableWidgets;
+
+    public override void MoveCursorTo(int row, int col)
+    {
+        if (PokeableWidgets != null)
+        {
+            foreach (Widget pokeableWidget in PokeableWidgets)
+            {
+                pokeableWidget.MoveCursorTo(row, col);
+            }
+        }
+    }
+
+    public override void Poke(ColorEnum attr, char ch, int row, int col)    
+    {
+        if (PokeableWidgets != null)
+        {
+            foreach (Widget pokeableWidget in PokeableWidgets)
+            {
+                pokeableWidget.Poke(attr, ch, row, col);
+            }
+        }
+    }
+
     /// <summary>
     /// Returns the name of the property that participates in change tracking.  This property is used to bind the <see cref="ChangeTrackers"/> property during the bind phase.
     /// </summary>
@@ -75,11 +102,19 @@ internal abstract class ChangeTrackingWidget : Widget
         ChangeTrackers = changeTrackersList.ToArray();
 
         List<Widget> widgetList = new List<Widget>();
+        List<Widget> pokeableWidgetList = new List<Widget>();
         foreach (string widgetName in WidgetNames)
         {
-            widgetList.Add(Game.SingletonRepository.Widgets.Get(widgetName));
+            Widget widget = Game.SingletonRepository.Widgets.Get(widgetName);
+            widgetList.Add(widget);
+            if (widget.CanPoke)
+            {
+                pokeableWidgetList.Add(widget);
+            }
         }
         Widgets = widgetList.ToArray();
+        PokeableWidgets = pokeableWidgetList.ToArray();
+        _hasPokeableWidgets = PokeableWidgets.Length > 0;
     }
 
     public override void Update()

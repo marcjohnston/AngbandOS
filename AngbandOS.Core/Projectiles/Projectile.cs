@@ -156,7 +156,7 @@ internal abstract class Projectile : IGetKey
                             directionalCharacter = BoltChar(y, x, y9, x9);
                         }
                         Game.MainForm.PutCharAtMapLocation(directionalCharacter, BoltProjectileGraphic.Color, y9, x9);
-                        Game.MainForm.GotoMapLocation(y9, x9);
+                        Game.MainForm.MoveCursorTo(y9, x9);
                         Game.UpdateScreen();
                         visual = true;
                         Game.Pause(msec); // This actually allows the screen to update.
@@ -303,7 +303,7 @@ internal abstract class Projectile : IGetKey
                 }
                 if (ImpactProjectileGraphic != null)
                 {
-                    Game.MainForm.GotoMapLocation(y2, x2);
+                    Game.MainForm.MoveCursorTo(y2, x2);
                     Game.UpdateScreen();
                     if (visual || drawn)
                     {
@@ -322,7 +322,7 @@ internal abstract class Projectile : IGetKey
                         Game.MainForm.RefreshMapLocation(y, x);
                     }
                 }
-                Game.MainForm.GotoMapLocation(y2, x2);
+                Game.MainForm.MoveCursorTo(y2, x2);
                 Game.UpdateScreen();
             }
         }
@@ -680,7 +680,7 @@ internal abstract class Projectile : IGetKey
         }
         if (who != 0)
         {
-            if (Game.TrackedMonsterIndex != null && Game.TrackedMonsterIndex.Value == cPtr.MonsterIndex)
+            if (Game.TrackedMonsterIndex.Value != null && Game.TrackedMonsterIndex.Value.Value == cPtr.MonsterIndex)
             {
                 Game.SingletonRepository.FlaggedActions.Get(nameof(RedrawMonsterHealthFlaggedAction)).Set();
             }

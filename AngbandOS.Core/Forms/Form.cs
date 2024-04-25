@@ -20,10 +20,11 @@ internal abstract class Form : IGetKey
     public Widget[] Widgets { get; private set; }
 
     /// <summary>
-    /// Returns the widgets that support the ability to "poke" a character directly into a dungeon map.  These types of widgets are the only widgets that "Update" inbetween the
-    /// widget update phases.
+    /// Returns the widgets that support the ability to "poke" a character directly into a dungeon map; or null, if the pokeable widgets haven't been bound yet.  These types of 
+    /// widgets are the only widgets that "Update" inbetween the widget update phases.  Binding of pokeable widgets cannot be performed during the binding phase because the
+    /// widgets themselves may not have been bound when the form binds; in that case, null is used.
     /// </summary>
-    protected IPoke[] PokeWidgets { get; private set; }
+    private Widget[]? PokeWidgets = null;
 
     public string Key => GetType().Name;
     public string GetKey => Key;
@@ -31,18 +32,24 @@ internal abstract class Form : IGetKey
     public void Bind()
     {
         List<Widget> widgetList = new List<Widget>();
-        List<IPoke> iPutWidgetList = new List<IPoke>();
         foreach (string widgetName in WidgetNames)
         {
-            Widget widget = Game.SingletonRepository.Widgets.Get(widgetName);
-            if (typeof(IPoke).IsAssignableFrom(widget.GetType()))
-            {
-                iPutWidgetList.Add((IPoke)widget);
-            }
-            widgetList.Add(widget);
+            widgetList.Add(Game.SingletonRepository.Widgets.Get(widgetName));
         }
         Widgets = widgetList.ToArray();
-        PokeWidgets = iPutWidgetList.ToArray();
+    }
+
+    private Widget[] GetPokeWidgets()
+    {
+        List<Widget> iPutWidgetList = new List<Widget>();
+        foreach (Widget widget in Widgets)
+        {
+            if (widget.CanPoke)
+            {
+                iPutWidgetList.Add(widget);
+            }
+        }
+        return iPutWidgetList.ToArray();
     }
 
     public string ToJson()
@@ -77,11 +84,11 @@ internal abstract class Form : IGetKey
     {
         if (Game.PanelContains(y, x))
         {
-            PutMapChar(c, a, y, x);
+            Poke(c, a, y, x);
         }
     }
 
-    private void PutMapChar(char c, ColorEnum a, int y, int x)
+    private void Poke(char c, ColorEnum a, int y, int x)
     {
         if (Game.InvulnerabilityTimer.Value != 0)
         {
@@ -92,10 +99,14 @@ internal abstract class Form : IGetKey
             a = ColorEnum.Black;
         }
 
-        foreach (IPoke widget in PokeWidgets)
+        if (PokeWidgets == null)
         {
-            IPoke putWidget = (IPoke)widget;
-            putWidget.Poke(a, c, y, x);
+            PokeWidgets = GetPokeWidgets();
+        }
+
+        foreach (Widget widget in PokeWidgets)
+        {
+            widget.Poke(a, c, y, x);
         }
     }
 
@@ -109,7 +120,7 @@ internal abstract class Form : IGetKey
         if (Game.PanelContains(y, x)) // TODO: This check is now done twice.
         {
             Game.MapInfo(y, x, out ColorEnum a, out char c);
-            PutMapChar(c, a, y, x);
+            Poke(c, a, y, x);
         }
     }
 
@@ -118,12 +129,16 @@ internal abstract class Form : IGetKey
     /// </summary>
     /// <param name="row"></param>
     /// <param name="col"></param>
-    public void GotoMapLocation(int row, int col)
+    public void MoveCursorTo(int row, int col)
     {
-        foreach (IPoke widget in PokeWidgets) 
+        if (PokeWidgets == null)
         {
-            IPoke putWidget = (IPoke)widget;
-            putWidget.MoveCursorTo(row, col);
+            PokeWidgets = GetPokeWidgets();
+        }
+
+        foreach (Widget widget in PokeWidgets) 
+        {
+            widget.MoveCursorTo(row, col);
         }
     }
 }

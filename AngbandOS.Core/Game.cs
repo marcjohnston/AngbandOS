@@ -123,7 +123,7 @@ internal class Game
     public int TargetWho;
     public int TotalFriendLevels;
     public int TotalFriends;
-    public int? TrackedMonsterIndex = null;
+    public TrackedMonsterNullableIntProperty TrackedMonsterIndex = null;
 
     /// <summary>
     /// Returns true, when the GetItem/SelectItem is rendering the equipment list, instead of the inventory list (when the ViewingItemList is true).
@@ -685,6 +685,7 @@ internal class Game
         MapX = (MapXIntProperty)SingletonRepository.Properties.Get(nameof(MapXIntProperty));
         MapY = (MapYIntProperty)SingletonRepository.Properties.Get(nameof(MapYIntProperty));
         MaxExperienceGained = (MaxExperiencePointsGainedIntProperty)SingletonRepository.Properties.Get(nameof(MaxExperiencePointsGainedIntProperty));
+        TrackedMonsterIndex = (TrackedMonsterNullableIntProperty)SingletonRepository.Properties.Get(nameof(TrackedMonsterNullableIntProperty));
         
         AcidResistanceTimer = (AcidResistanceTimer)SingletonRepository.Timers.Get(nameof(Timers.AcidResistanceTimer));
         BleedingTimer = (BleedingTimer)SingletonRepository.Timers.Get(nameof(Timers.BleedingTimer));
@@ -2595,7 +2596,7 @@ internal class Game
 
     public void HealthTrack(int? mIdx)
     {
-        TrackedMonsterIndex = mIdx;
+        TrackedMonsterIndex.Value = mIdx;
         SingletonRepository.FlaggedActions.Get(nameof(RedrawMonsterHealthFlaggedAction)).Set();
     }
 
@@ -3219,7 +3220,7 @@ internal class Game
             NoticeStuff();
             UpdateStuff();
             RedrawStuff();
-            MainForm.GotoMapLocation(MapY.Value, MapX.Value);
+            MainForm.MoveCursorTo(MapY.Value, MapX.Value);
             if (!Playing || IsDead || NewLevelFlag)
             {
                 break;
@@ -3230,7 +3231,7 @@ internal class Game
             NoticeStuff();
             UpdateStuff();
             RedrawStuff();
-            MainForm.GotoMapLocation(MapY.Value, MapX.Value);
+            MainForm.MoveCursorTo(MapY.Value, MapX.Value);
             if (!Playing || IsDead || NewLevelFlag)
             {
                 break;
@@ -3239,7 +3240,7 @@ internal class Game
             NoticeStuff();
             UpdateStuff();
             RedrawStuff();
-            MainForm.GotoMapLocation(MapY.Value, MapX.Value);
+            MainForm.MoveCursorTo(MapY.Value, MapX.Value);
             if (!Playing || IsDead || NewLevelFlag)
             {
                 break;
@@ -3502,7 +3503,7 @@ internal class Game
             NoticeStuff();
             UpdateStuff();
             RedrawStuff();
-            MainForm.GotoMapLocation(MapY.Value, MapX.Value);
+            MainForm.MoveCursorTo(MapY.Value, MapX.Value);
             UpdateScreen();
             const int item = InventorySlot.PackCount;
             Item? oPtr = GetInventoryItem(item);
@@ -3548,7 +3549,7 @@ internal class Game
             }
             else
             {
-                MainForm.GotoMapLocation(MapY.Value, MapX.Value);
+                MainForm.MoveCursorTo(MapY.Value, MapX.Value);
                 RequestCommand(false);
                 ProcessCommand(false);
                 CloseBatchOfMessages();
@@ -4094,7 +4095,7 @@ internal class Game
                 {
                     mPtr.Health = mPtr.MaxHealth;
                 }
-                if (TrackedMonsterIndex != null && TrackedMonsterIndex.Value == i)
+                if (TrackedMonsterIndex.Value != null && TrackedMonsterIndex.Value.Value == i)
                 {
                     SingletonRepository.FlaggedActions.Get(nameof(RedrawMonsterHealthFlaggedAction)).Set();
                 }
@@ -7640,7 +7641,7 @@ internal class Game
             if (PanelContains(y, x) && PlayerCanSeeBold(y, x))
             {
                 MainForm.PutCharAtMapLocation(missileCharacter, missileColor, y, x);
-                MainForm.GotoMapLocation(y, x);
+                MainForm.MoveCursorTo(y, x);
                 UpdateScreen();
                 Pause(msec);
                 MainForm.RefreshMapLocation(y, x);
@@ -12351,7 +12352,7 @@ internal class Game
         MsgPrint("Select a point and press space.");
         while (ch != 27 && ch != ' ' && !Shutdown)
         {
-            MainForm.GotoMapLocation(y, x);
+            MainForm.MoveCursorTo(y, x);
             ch = Inkey();
             switch (ch)
             {
@@ -12514,7 +12515,7 @@ internal class Game
                 const string name = "something strange";
                 outVal = $"{s1}{s2}{s3}{name} [{info}]";
                 Screen.PrintLine(outVal, 0, 0);
-                MainForm.GotoMapLocation(y, x);
+                MainForm.MoveCursorTo(y, x);
                 query = Inkey();
                 if (!Shutdown)
                 {
@@ -12554,7 +12555,7 @@ internal class Game
                             string a = mPtr.SmFriendly ? " (allied) " : " ";
                             outVal = $"{s1}{s2}{s3}{mName} ({LookMonDesc(cPtr.MonsterIndex)}){c}{a}[r,{info}]";
                             Screen.PrintLine(outVal, 0, 0);
-                            MainForm.GotoMapLocation(y, x);
+                            MainForm.MoveCursorTo(y, x);
                             query = Inkey();
                         }
                         if (query != 'r')
@@ -12588,7 +12589,7 @@ internal class Game
                         outVal = $"{s1}{s2}{s3}{oName} [{info}]";
                         Screen.PrintLine(outVal, 0, 0);
                         Screen.UpdateScreen();
-                        MainForm.GotoMapLocation(y, x);
+                        MainForm.MoveCursorTo(y, x);
                         query = Inkey();
                         if (query != '\r' && query != '\n' && query != ' ')
                         {
@@ -12618,7 +12619,7 @@ internal class Game
                     string oName = oPtr.Description(true, 3);
                     outVal = $"{s1}{s2}{s3}{oName} [{info}]";
                     Screen.PrintLine(outVal, 0, 0);
-                    MainForm.GotoMapLocation(y, x);
+                    MainForm.MoveCursorTo(y, x);
                     query = Inkey();
                     if (query != '\r' && query != '\n' && query != ' ')
                     {
@@ -12665,7 +12666,7 @@ internal class Game
                 }
                 outVal = $"{s1}{s2}{s3}{name} [{info}]";
                 Screen.PrintLine(outVal, 0, 0);
-                MainForm.GotoMapLocation(y, x);
+                MainForm.MoveCursorTo(y, x);
                 query = Inkey();
                 if (query != '\r' && query != '\n' && query != ' ')
                 {
@@ -15853,7 +15854,7 @@ internal class Game
         fear = false;
         Monster mPtr = Monsters[mIdx];
         MonsterRace rPtr = mPtr.Race;
-        if (TrackedMonsterIndex != null && TrackedMonsterIndex.Value == mIdx)
+        if (TrackedMonsterIndex.Value != null && TrackedMonsterIndex.Value.Value == mIdx)
         {
             SingletonRepository.FlaggedActions.Get(nameof(RedrawMonsterHealthFlaggedAction)).Set();
         }
@@ -15992,7 +15993,7 @@ internal class Game
         {
             TargetWho = 0;
         }
-        if (TrackedMonsterIndex != null && TrackedMonsterIndex.Value == i)
+        if (TrackedMonsterIndex.Value != null && TrackedMonsterIndex.Value.Value == i)
         {
             HealthTrack(null);
         }
@@ -16633,7 +16634,7 @@ internal class Game
             {
                 mPtr.IsVisible = true;
                 MainForm.RefreshMapLocation(fy, fx);
-                if (TrackedMonsterIndex != null && TrackedMonsterIndex.Value == mIdx)
+                if (TrackedMonsterIndex.Value != null && TrackedMonsterIndex.Value.Value == mIdx)
                 {
                     SingletonRepository.FlaggedActions.Get(nameof(RedrawMonsterHealthFlaggedAction)).Set();
                 }
@@ -16676,7 +16677,7 @@ internal class Game
             {
                 mPtr.IsVisible = false;
                 MainForm.RefreshMapLocation(fy, fx);
-                if (TrackedMonsterIndex != null && TrackedMonsterIndex.Value == mIdx)
+                if (TrackedMonsterIndex.Value != null && TrackedMonsterIndex.Value.Value == mIdx)
                 {
                     SingletonRepository.FlaggedActions.Get(nameof(RedrawMonsterHealthFlaggedAction)).Set();
                 }
@@ -16769,7 +16770,7 @@ internal class Game
         {
             TargetWho = i2;
         }
-        if (TrackedMonsterIndex != null && TrackedMonsterIndex.Value == i1)
+        if (TrackedMonsterIndex.Value != null && TrackedMonsterIndex.Value.Value == i1)
         {
             HealthTrack(i2);
         }

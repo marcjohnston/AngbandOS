@@ -8,13 +8,13 @@
 namespace AngbandOS.Core.Properties;
 
 [Serializable]
-internal abstract class IntProperty : Property, IIntValue
+internal abstract class NullableIntProperty : Property, INullIntValue
 {
-    protected IntProperty(Game game) : base(game) { }
+    protected NullableIntProperty(Game game) : base(game) { }
 
-    private int _value;
+    private int? _value;
 
-    public int Value
+    public int? Value
     {
         get
         {
@@ -36,10 +36,11 @@ internal abstract class IntProperty : Property, IIntValue
         }
     }
 
-    public int IntValue => Value;
+    public int? NullIntValue => Value;
 
     protected virtual void OnBeforeSet() { }
     protected virtual void OnAfterSet() { }
+
 
     /// <summary>
     /// Returns a string representation of the property value.
@@ -47,6 +48,6 @@ internal abstract class IntProperty : Property, IIntValue
     /// <returns></returns>
     public override string ToString()
     {
-        return _value.ToString();
+        return _value.HasValue ? _value.Value.ToString() : "null";
     }
 }

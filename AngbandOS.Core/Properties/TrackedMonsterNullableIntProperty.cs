@@ -5,12 +5,10 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Interfaces;
+namespace AngbandOS.Core.Properties;
 
-/// <summary>
-/// Represents an interface for an object to implement for it to participate in returning an integer value.
-/// </summary>
-internal interface IIntValue
+[Serializable]
+internal class TrackedMonsterNullableIntProperty : NullableIntProperty
 {
-    int IntValue { get; }
+    protected TrackedMonsterNullableIntProperty(Game game) : base(game) { } // This object is a singleton.
 }
