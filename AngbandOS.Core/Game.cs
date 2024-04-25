@@ -12178,9 +12178,7 @@ internal class Game
         }
         while (dir == 0)
         {
-            string p = !TargetOkay()
-                ? "Direction ('*' to choose a target, Escape to cancel)? "
-                : "Direction ('5' for target, '*' to re-target, Escape to cancel)? ";
+            string p = !TargetOkay() ? "Direction ('*' to choose a target, Escape to cancel)? " : "Direction ('5' for target, '*' to re-target, Escape to cancel)? ";
             if (!GetCom(p, out char command))
             {
                 break;
