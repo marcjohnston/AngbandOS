@@ -30,7 +30,10 @@ internal class LookScript : Script, IScript, IRepeatableScript
     {
         if (Game.TargetSet(Constants.TargetLook))
         {
-            Game.MsgPrint(Game.TargetWho > 0 ? "Target Selected." : "Location Targeted.");
+            if (Game.TargetWho != null)
+            {
+                Game.MsgPrint(Game.TargetWho.SelectionMessage);
+            }
         }
     }
 }

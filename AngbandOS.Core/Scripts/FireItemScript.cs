@@ -88,10 +88,14 @@ internal class FireItemScript : Script, IScript, IRepeatableScript
         int targetX = Game.MapX.Value + (99 * Game.KeypadDirectionXOffset[dir]);
         int targetY = Game.MapY.Value + (99 * Game.KeypadDirectionYOffset[dir]);
         // Special case for if we're hitting our own square
-        if (dir == 5 && Game.TargetOkay())
+        if (dir == 5 && Game.TargetWho != null)
         {
-            targetX = Game.TargetCol;
-            targetY = Game.TargetRow;
+            GridCoordinate? target = Game.TargetWho.GetTargetLocation();
+            if (target != null)
+            {
+                targetX = target.X;
+                targetY = target.Y;
+            }
         }
         Game.HandleStuff();
         bool hitBody = false;

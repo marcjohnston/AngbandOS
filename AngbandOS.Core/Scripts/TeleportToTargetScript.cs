@@ -18,10 +18,16 @@ internal class TeleportToTargetScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        if (Game.TargetWho == 0)
+        if (Game.TargetWho == null)
         {
             return;
         }
-        Game.TeleportPlayerTo(Game.TargetRow, Game.TargetCol);
+
+        GridCoordinate? target = Game.TargetWho.GetTargetLocation();
+        if (target == null)
+        {
+            return;
+        }
+        Game.TeleportPlayerTo(target.Y, target.X);
     }
 }

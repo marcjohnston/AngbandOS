@@ -25,7 +25,9 @@ internal class ProdManaRandomMutation : Mutation
         Game.Disturb(false);
         Game.MsgPrint("Magical energy flows through you! You must release it!");
         Game.MsgPrint(null);
-        Game.GetDirectionNoAutoAim(out int dire);
+
+        // Get a direction.  We do not care if the player cancels the direction, we will release the energy anyway.
+        Game.GetDirectionWithAim(out int dire);
         Game.FireBall(Game.SingletonRepository.Projectiles.Get(nameof(ManaProjectile)), dire, Game.ExperienceLevel.Value * 2, 3);
     }
 }

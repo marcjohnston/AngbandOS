@@ -119,14 +119,10 @@ internal class Game
     public int Running;
     public List<UnreadableScrollFlavor> UnreadableScrollFlavors; // These are generated from the available base scrolls.
 
-
-    public int TargetCol;
-    public int TargetRow;
-
     /// <summary>
-    /// Returns zero, if the player has not selected a target; -1, if the player has selected a location to target; or greater than 0 (>0) for a monster index to target.
+    /// Returns the target the player has selected; or null, if the player hasn't chosen a target.
     /// </summary>
-    public int TargetWho;
+    public Target? TargetWho;
 
     public int TotalFriendLevels;
     public int TotalFriends;
@@ -1972,7 +1968,7 @@ internal class Game
                 NoticeStuff();
                 UpdateStuff();
                 RedrawStuff();
-                TargetWho = 0;
+                TargetWho = null;
                 HealthTrack(null);
                 SingletonRepository.FlaggedActions.Get(nameof(RemoveLightFlaggedAction)).Check(true);
                 SingletonRepository.FlaggedActions.Get(nameof(RemoveViewFlaggedAction)).Check(true);
@@ -3105,7 +3101,7 @@ internal class Game
         CommandRepeat = 0;
         CommandArgument = 0;
         CommandDirection = 0;
-        TargetWho = 0;
+        TargetWho = null;
         HealthTrack(null);
         ShimmerMonsters = true;
         RepairMonsters = true;
@@ -5176,11 +5172,15 @@ internal class Game
         ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill;
         int tx = MapX.Value + (99 * KeypadDirectionXOffset[dir]);
         int ty = MapY.Value + (99 * KeypadDirectionYOffset[dir]);
-        if (dir == 5 && TargetOkay())
+        if (dir == 5 && TargetWho != null)
         {
-            flg &= ~ProjectionFlag.ProjectStop;
-            tx = TargetCol;
-            ty = TargetRow;
+            GridCoordinate? target = TargetWho.GetTargetLocation();
+            if (target != null)
+            {
+                flg &= ~ProjectionFlag.ProjectStop;
+                tx = target.X;
+                ty = target.Y;
+            }
         }
         return Project(0, rad, ty, tx, dam, projectile, flg);
     }
@@ -5558,16 +5558,19 @@ internal class Game
     public void TeleportSwap(int dir)
     {
         int tx, ty;
-        if (dir == 5 && TargetOkay())
+        tx = MapX.Value + KeypadDirectionXOffset[dir];
+        ty = MapY.Value + KeypadDirectionYOffset[dir];
+
+        if (dir == 5 && TargetWho != null)
         {
-            tx = TargetCol;
-            ty = TargetRow;
+            GridCoordinate? target = TargetWho.GetTargetLocation();
+            if (target != null)
+            {
+                tx = target.X;
+                ty = target.Y;
+            }
         }
-        else
-        {
-            tx = MapX.Value + KeypadDirectionXOffset[dir];
-            ty = MapY.Value + KeypadDirectionYOffset[dir];
-        }
+
         GridTile cPtr = Map.Grid[ty][tx];
         if (cPtr.MonsterIndex == 0)
         {
@@ -5957,10 +5960,14 @@ internal class Game
         flg |= ProjectionFlag.ProjectThru;
         int tx = MapX.Value + KeypadDirectionXOffset[dir];
         int ty = MapY.Value + KeypadDirectionYOffset[dir];
-        if (dir == 5 && TargetOkay())
+        if (dir == 5 && TargetWho != null)
         {
-            tx = TargetCol;
-            ty = TargetRow;
+            GridCoordinate? target = TargetWho.GetTargetLocation();
+            if (target != null)
+            {
+                tx = target.X;
+                ty = target.Y;
+            }
         }
         return Project(0, 0, ty, tx, dam, projectile, flg);
     }
@@ -7618,11 +7625,17 @@ internal class Game
         int x = MapX.Value;
         int targetX = MapX.Value + (99 * KeypadDirectionXOffset[dir]);
         int targetY = MapY.Value + (99 * KeypadDirectionYOffset[dir]);
-        if (dir == 5 && TargetOkay())
+
+        if (dir == 5 && TargetWho != null)
         {
-            targetX = TargetCol;
-            targetY = TargetRow;
+            GridCoordinate? target = TargetWho.GetTargetLocation();
+            if (target != null)
+            {
+                targetX = target.X;
+                targetY = target.Y;
+            }
         }
+
         HandleStuff();
         int newY = MapY.Value;
         int newX = MapX.Value;
@@ -7914,10 +7927,23 @@ internal class Game
             return;
         }
         // If we didn't have a direction, we might have an existing target
-        if (dir == 5 && TargetOkay())
+        if (dir == 5)
         {
-            targetX = TargetCol;
-            targetY = TargetRow;
+            if (TargetWho == null)
+            {
+                // This direction is invalid for a summon and there is no target.
+                return;
+            }
+
+            GridCoordinate? target = TargetWho.GetTargetLocation();
+            if (target == null)
+            {
+                // This direction is invalid for a summon and there is no target.
+                return;
+            }
+
+            targetX = target.X;
+            targetY = target.Y;
             // Check the range
             if (Distance(MapY.Value, MapX.Value, targetY, targetX) > Constants.MaxRange)
             {
@@ -12111,15 +12137,17 @@ internal class Game
         return true;
     }
 
-    public void GetDirectionNoAutoAim(out int dp)
+    public bool GetDirectionWithAim(out int dp)
     {
         dp = 0;
         int dir = 0;
         while (dir == 0)
         {
-            string p = !TargetOkay()
-                ? "Direction ('*' to choose a target, Escape to cancel)? "
-                : "Direction ('5' for target, '*' to re-target, Escape to cancel)? ";
+            string p = "Direction ('*' to choose a target, Escape to cancel)? ";
+            if (TargetWho != null && TargetWho.GetTargetLocation() != null)
+            {
+                p = "Direction ('5' for target, '*' to re-target, Escape to cancel)? ";
+            }
             if (!GetCom(p, out char command))
             {
                 break;
@@ -12149,68 +12177,7 @@ internal class Game
                         break;
                     }
             }
-            if (dir == 5 && !TargetOkay())
-            {
-                dir = 0;
-            }
-        }
-        if (dir == 0)
-        {
-            return;
-        }
-        CommandDirection = dir;
-        if (ConfusedTimer.Value != 0)
-        {
-            dir = OrderedDirection[RandomLessThan(8)];
-        }
-        if (CommandDirection != dir)
-        {
-            MsgPrint("You are confused.");
-        }
-        dp = dir;
-    }
-
-    public bool GetDirectionWithAim(out int dp)
-    {
-        dp = 0;
-        int dir = CommandDirection;
-        if (TargetOkay())
-        {
-            dir = 5;
-        }
-        while (dir == 0)
-        {
-            string p = !TargetOkay() ? "Direction ('*' to choose a target, Escape to cancel)? " : "Direction ('5' for target, '*' to re-target, Escape to cancel)? ";
-            if (!GetCom(p, out char command))
-            {
-                break;
-            }
-            switch (command)
-            {
-                case 'T':
-                case 't':
-                case '.':
-                case '5':
-                case '0':
-                    {
-                        dir = 5;
-                        break;
-                    }
-                case '*':
-                    {
-                        if (TargetSet(Constants.TargetKill))
-                        {
-                            dir = 5;
-                        }
-                        break;
-                    }
-                default:
-                    {
-                        dir = GetKeymapDir(command);
-                        break;
-                    }
-            }
-            if (dir == 5 && !TargetOkay())
+            if (dir == 5 && (TargetWho == null || TargetWho.GetTargetLocation() == null))
             {
                 dir = 0;
             }
@@ -12229,37 +12196,6 @@ internal class Game
             MsgPrint("You are confused.");
         }
         dp = dir;
-        return true;
-    }
-
-    /// <summary>
-    /// Returns true, if the target that the player selected is valid.
-    /// </summary>
-    /// <returns></returns>
-    public bool TargetOkay()
-    {
-        // Check to see if there is a target at all.
-        if (TargetWho == 0)
-        {
-            return false;
-        }
-
-        // Check to see if the target was a location.
-        if (TargetWho == -1)
-        {
-            return true;
-        }
-
-        // The target is a monster.  Check it.
-        if (!TargetAble(TargetWho))
-        {
-            return false;
-        }
-
-        // Update the location to target with the current monster location.
-        Monster mPtr = Monsters[TargetWho];
-        TargetRow = mPtr.MapY;
-        TargetCol = mPtr.MapX;
         return true;
     }
 
@@ -12268,7 +12204,7 @@ internal class Game
         int y = MapY.Value;
         int x = MapX.Value;
         bool done = false;
-        TargetWho = 0;
+        TargetWho = null;
         TargetSetPrepare(mode);
         int m = 0;
         if (TempN != 0)
@@ -12297,17 +12233,13 @@ internal class Game
                         if (TargetAble(cPtr.MonsterIndex))
                         {
                             HealthTrack(cPtr.MonsterIndex);
-                            TargetWho = cPtr.MonsterIndex;
-                            TargetRow = y;
-                            TargetCol = x;
+                            TargetWho = new MonsterTarget(this, Monsters[cPtr.MonsterIndex]);
                             done = true;
                         }
                         break;
                     }
                 case 'l':
-                    TargetWho = -1;
-                    TargetRow = y;
-                    TargetCol = x;
+                    TargetWho = new LocationTarget(new GridCoordinate(x, y));
                     done = true;
                     break;
 
@@ -12363,7 +12295,7 @@ internal class Game
         }
         TempN = 0;
         MsgClear();
-        return TargetWho != 0;
+        return TargetWho != null;
     }
 
     public bool TgtPt(out int x, out int y)
@@ -12469,9 +12401,15 @@ internal class Game
     /// </summary>
     /// <param name="mIdx"></param>
     /// <returns></returns>
+    [Obsolete("Use TargetAble(Monster)")]
     private bool TargetAble(int mIdx)
     {
         Monster mPtr = Monsters[mIdx];
+        return TargetAble(mPtr);
+    }
+
+    public bool TargetAble(Monster mPtr)
+    {
         if (mPtr.Race == null)
         {
             return false;
@@ -16020,9 +15958,11 @@ internal class Game
         {
             NumRepro--;
         }
-        if (i == TargetWho)
+
+        // Check to see if this is the monster the player is tracking so that we can stop tracking the monster.
+        if (TargetWho != null && TargetWho.TargetedMonster == mPtr)
         {
-            TargetWho = 0;
+            TargetWho = null;
         }
         if (TrackedMonsterIndex != null && TrackedMonsterIndex.Value == i)
         {
@@ -16778,7 +16718,7 @@ internal class Game
         MMax = 1;
         MCnt = 0;
         NumRepro = 0;
-        TargetWho = 0;
+        TargetWho = null;
         HealthTrack(null);
     }
 
@@ -16795,9 +16735,9 @@ internal class Game
         cPtr.MonsterIndex = i2;
         Monster mPtr2 = Monsters[i2];
         mPtr2.Items.AddRange(mPtr.Items);
-        if (TargetWho == i1)
+        if (TargetWho != null && TargetWho.TargetedMonster == mPtr)
         {
-            TargetWho = i2;
+            TargetWho = new MonsterTarget(this, mPtr2);
         }
         if (TrackedMonsterIndex != null && TrackedMonsterIndex.Value == i1)
         {

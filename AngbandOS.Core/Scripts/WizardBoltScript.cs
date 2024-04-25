@@ -25,11 +25,15 @@ internal class WizardBoltScript : Script, IScript
         }
         int tx = Game.MapX.Value + (99 * Game.KeypadDirectionXOffset[dir]);
         int ty = Game.MapY.Value + (99 * Game.KeypadDirectionYOffset[dir]);
-        if (dir == 5 && Game.TargetOkay())
+        if (dir == 5 && Game.TargetWho != null)
         {
-            flg &= ~ProjectionFlag.ProjectStop;
-            tx = Game.TargetCol;
-            ty = Game.TargetRow;
+            GridCoordinate? target = Game.TargetWho.GetTargetLocation();
+            if (target != null)
+            {
+                flg &= ~ProjectionFlag.ProjectStop;
+                tx = target.X;
+                ty = target.Y;
+            }
         }
         Game.Project(0, 0, ty, tx, 1000000, Game.SingletonRepository.Projectiles.Get(nameof(WizardBoltProjectile)), flg);
     }
