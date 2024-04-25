@@ -12230,16 +12230,31 @@ internal class Game
         return true;
     }
 
+    /// <summary>
+    /// Returns true, if the target that the player selected is valid.
+    /// </summary>
+    /// <returns></returns>
     public bool TargetOkay()
     {
-        if (TargetWho <= 0)
+        // Check to see if there is a target at all.
+        if (TargetWho == 0)
         {
             return false;
         }
+
+        // Check to see if the target was a location.
+        if (TargetWho == -1)
+        {
+            return true;
+        }
+
+        // The target is a monster.  Check it.
         if (!TargetAble(TargetWho))
         {
             return false;
         }
+
+        // Update the location to target with the current monster location.
         Monster mPtr = Monsters[TargetWho];
         TargetRow = mPtr.MapY;
         TargetCol = mPtr.MapX;
@@ -12262,7 +12277,7 @@ internal class Game
         while (!done)
         {
             GridTile cPtr = Map.Grid[y][x];
-            string info = "T,*";
+            string info = "l,*";
             if (TargetAble(cPtr.MonsterIndex))
             {
                 info = $"t,{info}";
@@ -12287,7 +12302,7 @@ internal class Game
                         }
                         break;
                     }
-                case 'T':
+                case 'l':
                     TargetWho = -1;
                     TargetRow = y;
                     TargetCol = x;
