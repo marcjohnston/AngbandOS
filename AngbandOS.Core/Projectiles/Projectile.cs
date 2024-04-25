@@ -680,7 +680,7 @@ internal abstract class Projectile : IGetKey
         }
         if (who != 0)
         {
-            if (Game.TrackedMonsterIndex != null && Game.TrackedMonsterIndex.Value == cPtr.MonsterIndex)
+            if (Game.TrackedMonster != null && Game.TrackedMonster == mPtr)
             {
                 Game.SingletonRepository.FlaggedActions.Get(nameof(RedrawMonsterHealthFlaggedAction)).Set();
             }

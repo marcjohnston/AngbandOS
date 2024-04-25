@@ -126,7 +126,7 @@ internal class Game
 
     public int TotalFriendLevels;
     public int TotalFriends;
-    public int? TrackedMonsterIndex = null;
+    public Monster? TrackedMonster = null;
 
     /// <summary>
     /// Returns true, when the GetItem/SelectItem is rendering the equipment list, instead of the inventory list (when the ViewingItemList is true).
@@ -2601,7 +2601,7 @@ internal class Game
 
     public void HealthTrack(int? mIdx)
     {
-        TrackedMonsterIndex = mIdx;
+        TrackedMonster = mIdx == null ? null : Monsters[mIdx.Value];
         SingletonRepository.FlaggedActions.Get(nameof(RedrawMonsterHealthFlaggedAction)).Set();
     }
 
@@ -4099,7 +4099,7 @@ internal class Game
                 {
                     mPtr.Health = mPtr.MaxHealth;
                 }
-                if (TrackedMonsterIndex != null && TrackedMonsterIndex.Value == i)
+                if (TrackedMonster != null && TrackedMonster == mPtr)
                 {
                     SingletonRepository.FlaggedActions.Get(nameof(RedrawMonsterHealthFlaggedAction)).Set();
                 }
@@ -15823,7 +15823,7 @@ internal class Game
         fear = false;
         Monster mPtr = Monsters[mIdx];
         MonsterRace rPtr = mPtr.Race;
-        if (TrackedMonsterIndex != null && TrackedMonsterIndex.Value == mIdx)
+        if (TrackedMonster != null && TrackedMonster == mPtr)
         {
             SingletonRepository.FlaggedActions.Get(nameof(RedrawMonsterHealthFlaggedAction)).Set();
         }
@@ -15964,7 +15964,7 @@ internal class Game
         {
             TargetWho = null;
         }
-        if (TrackedMonsterIndex != null && TrackedMonsterIndex.Value == i)
+        if (TrackedMonster != null && TrackedMonster == mPtr)
         {
             HealthTrack(null);
         }
@@ -16603,7 +16603,7 @@ internal class Game
             {
                 mPtr.IsVisible = true;
                 MainForm.RefreshMapLocation(fy, fx);
-                if (TrackedMonsterIndex != null && TrackedMonsterIndex.Value == mIdx)
+                if (TrackedMonster != null && TrackedMonster == mPtr)
                 {
                     SingletonRepository.FlaggedActions.Get(nameof(RedrawMonsterHealthFlaggedAction)).Set();
                 }
@@ -16646,7 +16646,7 @@ internal class Game
             {
                 mPtr.IsVisible = false;
                 MainForm.RefreshMapLocation(fy, fx);
-                if (TrackedMonsterIndex != null && TrackedMonsterIndex.Value == mIdx)
+                if (TrackedMonster != null && TrackedMonster == mPtr)
                 {
                     SingletonRepository.FlaggedActions.Get(nameof(RedrawMonsterHealthFlaggedAction)).Set();
                 }
@@ -16739,7 +16739,7 @@ internal class Game
         {
             TargetWho = new MonsterTarget(this, mPtr2);
         }
-        if (TrackedMonsterIndex != null && TrackedMonsterIndex.Value == i1)
+        if (TrackedMonster != null && TrackedMonster == mPtr)
         {
             HealthTrack(i2);
         }

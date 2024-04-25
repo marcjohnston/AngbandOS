@@ -12,5 +12,5 @@ namespace AngbandOS.Core.Functions;
 internal class TrackedMonsterNameFunction : NullableTextAreaFunction
 {
     private TrackedMonsterNameFunction(Game game) : base(game) { } // This object is a singleton.
-    public override string[]? NullableTextAreaValue => Game.TrackedMonsterIndex == null ? null : Game.Monsters[Game.TrackedMonsterIndex.Value].Race.GetMultilineName;
+    public override string[]? NullableTextAreaValue => Game.TrackedMonster == null ? null : Game.TrackedMonster.Race.GetMultilineName;
 }

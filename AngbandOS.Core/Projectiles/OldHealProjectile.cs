@@ -23,7 +23,6 @@ internal class OldHealProjectile : Projectile
 
     protected override bool AffectMonster(int who, Monster mPtr, int dam, int r)
     {
-        GridTile cPtr = Game.Map.Grid[mPtr.MapY][mPtr.MapX];
         MonsterRace rPtr = mPtr.Race;
         bool seen = mPtr.IsVisible;
         bool obvious = false;
@@ -37,7 +36,7 @@ internal class OldHealProjectile : Projectile
         {
             mPtr.Health = mPtr.MaxHealth;
         }
-        if (Game.TrackedMonsterIndex != null && Game.TrackedMonsterIndex.Value == cPtr.MonsterIndex)
+        if (Game.TrackedMonster != null && Game.TrackedMonster == mPtr)
         {
             Game.SingletonRepository.FlaggedActions.Get(nameof(RedrawMonsterHealthFlaggedAction)).Set();
         }
