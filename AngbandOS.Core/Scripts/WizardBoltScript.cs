@@ -23,8 +23,8 @@ internal class WizardBoltScript : Script, IScript
         {
             return;
         }
-        int tx = Game.MapX.Value + (99 * Game.KeypadDirectionXOffset[dir]);
-        int ty = Game.MapY.Value + (99 * Game.KeypadDirectionYOffset[dir]);
+        int tx = Game.MapX.Value + (99 * Game.KeypadDirectionXOffset[dir]); // TODO: Fix the 99*
+        int ty = Game.MapY.Value + (99 * Game.KeypadDirectionYOffset[dir]); // TODO: Fix the 99*
         if (dir == 5 && Game.TargetWho != null)
         {
             GridCoordinate? target = Game.TargetWho.GetTargetLocation();

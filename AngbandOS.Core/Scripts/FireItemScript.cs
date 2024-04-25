@@ -85,8 +85,8 @@ internal class FireItemScript : Script, IScript, IRepeatableScript
         Game.EnergyUse = 100 / shotSpeed;
         int y = Game.MapY.Value;
         int x = Game.MapX.Value;
-        int targetX = Game.MapX.Value + (99 * Game.KeypadDirectionXOffset[dir]);
-        int targetY = Game.MapY.Value + (99 * Game.KeypadDirectionYOffset[dir]);
+        int targetX = Game.MapX.Value + (99 * Game.KeypadDirectionXOffset[dir]); // TODO: Fix the 99*
+        int targetY = Game.MapY.Value + (99 * Game.KeypadDirectionYOffset[dir]); // TODO: Fix the 99*
         // Special case for if we're hitting our own square
         if (dir == 5 && Game.TargetWho != null)
         {

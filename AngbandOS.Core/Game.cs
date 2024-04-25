@@ -5170,8 +5170,8 @@ internal class Game
     public bool FireBall(Projectile projectile, int dir, int dam, int rad)
     {
         ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill;
-        int tx = MapX.Value + (99 * KeypadDirectionXOffset[dir]);
-        int ty = MapY.Value + (99 * KeypadDirectionYOffset[dir]);
+        int tx = MapX.Value + (99 * KeypadDirectionXOffset[dir]); // TODO: Fix the 99*
+        int ty = MapY.Value + (99 * KeypadDirectionYOffset[dir]); // TODO: Fix the 99*
         if (dir == 5 && TargetWho != null)
         {
             GridCoordinate? target = TargetWho.GetTargetLocation();
@@ -7623,8 +7623,8 @@ internal class Game
         EnergyUse = 100;
         int y = MapY.Value;
         int x = MapX.Value;
-        int targetX = MapX.Value + (99 * KeypadDirectionXOffset[dir]);
-        int targetY = MapY.Value + (99 * KeypadDirectionYOffset[dir]);
+        int targetX = MapX.Value + (99 * KeypadDirectionXOffset[dir]); // TODO: Fix the 99*
+        int targetY = MapY.Value + (99 * KeypadDirectionYOffset[dir]); // TODO: Fix the 99*
 
         if (dir == 5 && TargetWho != null)
         {
