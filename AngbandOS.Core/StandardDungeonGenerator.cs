@@ -259,7 +259,7 @@ internal class StandardDungeonGenerator : DungeonGenerator
                     {
                         continue;
                     }
-                    Game.DeleteMonster(y, x);
+                    Game.DeleteMonsterAtGridLocation(y, x);
                     if (Game.CaveValidBold(y, x))
                     {
                         Game.DeleteObject(y, x);

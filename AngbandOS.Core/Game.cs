@@ -4426,7 +4426,7 @@ internal class Game
                 {
                     continue;
                 }
-                DeleteMonster(y, x);
+                DeleteMonsterAtGridLocation(y, x);
                 if (CaveValidBold(y, x))
                 {
                     DeleteObject(y, x);
@@ -4879,7 +4879,7 @@ internal class Game
                         if (mPtr.Health < 0)
                         {
                             MsgPrint($"{mName} is embedded in the rock!");
-                            DeleteMonster(yy, xx);
+                            DeleteMonsterAtGridLocation(yy, xx);
                             sn = 0;
                         }
                         if (sn != 0)
@@ -14657,7 +14657,7 @@ internal class Game
         return d[dx + 1][dy + 1];
     }
 
-    public void DeleteMonster(int y, int x)
+    public void DeleteMonsterAtGridLocation(int y, int x)
     {
         if (!InBounds(y, x))
         {

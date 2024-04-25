@@ -1000,7 +1000,7 @@ internal class Monster : IItemContainer
                     // Remove the other monster and replace it
                     doMove = true;
                     didKillBody = true;
-                    Game.DeleteMonster(newY, newX);
+                    Game.DeleteMonsterAtGridLocation(newY, newX);
                     monsterInTargetTile = Game.Monsters[tile.MonsterIndex];
                 }
                 // If we're not on the same team as the other monster or we're confused
