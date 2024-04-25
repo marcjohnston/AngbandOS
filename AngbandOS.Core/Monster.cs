@@ -21,6 +21,7 @@ internal class Monster : IItemContainer
 
     public int FearLevel;
 
+    public List<Item> Items = new List<Item>();
 
     /// <summary>
     /// Returns 0, if the monster is not a clone; or one plus the parent generation, when the monster is a clone.
