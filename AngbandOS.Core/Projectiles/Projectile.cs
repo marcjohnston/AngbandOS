@@ -689,7 +689,7 @@ internal abstract class Projectile : IGetKey
             if (mPtr.Health < 0)
             {
                 bool sad = mPtr.SmFriendly && !mPtr.IsVisible;
-                Game.MonsterDeath(cPtr.MonsterIndex);
+                Game.MonsterDeath(mPtr);
                 Game.DeleteMonsterByIndex(cPtr.MonsterIndex, true);
                 if (string.IsNullOrEmpty(note) == false)
                 {

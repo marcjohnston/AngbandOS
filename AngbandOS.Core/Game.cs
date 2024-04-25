@@ -2599,14 +2599,13 @@ internal class Game
         SingletonRepository.FlaggedActions.Get(nameof(RedrawMonsterHealthFlaggedAction)).Set();
     }
 
-    public void MonsterDeath(int mIdx)
+    public void MonsterDeath(Monster mPtr)
     {
         int dumpItem = 0;
         int dumpGold = 0;
         int number = 0;
         int qIdx = 0;
         bool quest = false;
-        Monster mPtr = Monsters[mIdx];
         MonsterRace rPtr = mPtr.Race;
         if (rPtr == null)
         {
@@ -2713,7 +2712,7 @@ internal class Game
         ObjectLevel = Difficulty;
         if (visible && (dumpItem != 0 || dumpGold != 0))
         {
-            LoreTreasure(mIdx, dumpItem, dumpGold);
+            LoreTreasure(mPtr, dumpItem, dumpGold);
         }
         if (!rPtr.Guardian)
         {
@@ -15928,7 +15927,7 @@ internal class Game
                 FractionalExperiencePoints = newExpFrac;
             }
             GainExperience(newExp);
-            MonsterDeath(mIdx);
+            MonsterDeath(mPtr);
             if (rPtr.Unique)
             {
                 rPtr.MaxNum = 0;
@@ -16161,9 +16160,8 @@ internal class Game
         knowledge.RSpells = rPtr.Spells;
     }
 
-    public void LoreTreasure(int mIdx, int numItem, int numGold)
+    public void LoreTreasure(Monster mPtr, int numItem, int numGold)
     {
-        Monster mPtr = Monsters[mIdx];
         MonsterRace rPtr = mPtr.Race;
         if (numItem > rPtr.Knowledge.RDropItem)
         {

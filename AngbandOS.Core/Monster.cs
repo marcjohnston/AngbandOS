@@ -1844,7 +1844,7 @@ internal class Monster : IItemContainer
                     Game.MsgPrint($"{monsterName} is killed.");
                 }
                 // Let the save game know we've died
-                Game.MonsterDeath(GetMonsterIndex());
+                Game.MonsterDeath(this);
                 // Delete us from the monster list
                 Game.DeleteMonsterByIndex(GetMonsterIndex(), true);
                 fear = false;
