@@ -7697,7 +7697,7 @@ internal class Game
                     else
                     {
                         // Let the player know what happens to the monster
-                        MessagePain(tile.MonsterIndex, damage);
+                        MessagePain(monster, damage);
                         if (monster.SmFriendly && missile.Factory.CategoryEnum != ItemTypeEnum.Potion)
                         {
                             string mName = monster.Name;
@@ -16181,9 +16181,8 @@ internal class Game
         }
     }
 
-    public void MessagePain(int mIdx, int dam)
+    public void MessagePain(Monster mPtr, int dam)
     {
-        Monster mPtr = Monsters[mIdx];
         MonsterRace rPtr = mPtr.Race;
         string mName = mPtr.Name;
         if (dam == 0)

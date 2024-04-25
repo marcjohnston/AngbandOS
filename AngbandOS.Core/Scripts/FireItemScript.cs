@@ -178,7 +178,7 @@ internal class FireItemScript : Script, IScript, IRepeatableScript
                     }
                     else
                     {
-                        Game.MessagePain(tile.MonsterIndex, shotDamage);
+                        Game.MessagePain(monster, shotDamage);
                         if (fear && monster.IsVisible)
                         {
                             Game.PlaySound(SoundEffectEnum.MonsterFlees);

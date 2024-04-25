@@ -708,7 +708,7 @@ internal abstract class Projectile : IGetKey
                 }
                 else if (dam > 0)
                 {
-                    Game.MessagePain(cPtr.MonsterIndex, dam);
+                    Game.MessagePain(mPtr, dam);
                 }
             }
         }
@@ -725,7 +725,7 @@ internal abstract class Projectile : IGetKey
                 }
                 else if (dam > 0)
                 {
-                    Game.MessagePain(cPtr.MonsterIndex, dam);
+                    Game.MessagePain(mPtr, dam);
                 }
                 if ((fear || addFear > 0) && mPtr.IsVisible)
                 {
