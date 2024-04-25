@@ -12261,7 +12261,11 @@ internal class Game
         while (!done)
         {
             GridTile cPtr = Map.Grid[y][x];
-            string info = TargetAble(cPtr.MonsterIndex) ? "t,T,*" : "T,*";
+            string info = "T,*";
+            if (TargetAble(cPtr.MonsterIndex))
+            {
+                info = $"t,{info}";
+            }
             char query = TargetSetAux(y, x, mode | Constants.TargetLook, info);
             switch (query)
             {
