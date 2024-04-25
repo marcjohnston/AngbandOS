@@ -7,6 +7,9 @@
 
 namespace AngbandOS.Core;
 
+/// <summary>
+/// Represents a delta location from the player which can be sorted by distance.
+/// </summary>
 [Serializable]
 internal class TargetLocation : IComparable<TargetLocation>
 {
@@ -22,8 +25,13 @@ internal class TargetLocation : IComparable<TargetLocation>
         _distance = distance;
     }
 
-    public int CompareTo(TargetLocation other)
+    public int CompareTo(TargetLocation? other)
     {
+        // Null targets come before actual targets.
+        if (other == null)
+        {
+            return -1;
+        }
         return _distance.CompareTo(other._distance);
     }
 }
