@@ -2760,7 +2760,7 @@ internal class Monster : IItemContainer
                 }
                 else
                 {
-                    effect.ApplyToPlayer(monsterLevel, GetMonsterIndex(), armorClass, monsterDescription, this, ref obvious, ref damage, ref blinked);
+                    effect.ApplyToPlayer(monsterLevel, armorClass, monsterDescription, this, ref obvious, ref damage, ref blinked);
                 }
 
                 // Be nice and don't let us be both stunned and cut by the same blow

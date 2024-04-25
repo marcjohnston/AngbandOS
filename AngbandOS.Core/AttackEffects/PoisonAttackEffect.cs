@@ -13,7 +13,7 @@ internal class PoisonAttackEffect : AttackEffect
     private PoisonAttackEffect(Game game) : base(game) { }
     public override int Power => 5;
     public override string Description => "poison";
-    public override void ApplyToPlayer(int monsterLevel, int monsterIndex, int armorClass, string monsterDescription, Monster monster, ref bool obvious, ref int damage, ref bool blinked)
+    public override void ApplyToPlayer(int monsterLevel, int armorClass, string monsterDescription, Monster monster, ref bool obvious, ref int damage, ref bool blinked)
     {
         // Poison does additional damage
         Game.TakeHit(damage, monsterDescription);

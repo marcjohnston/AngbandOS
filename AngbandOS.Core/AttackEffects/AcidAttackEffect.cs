@@ -13,7 +13,7 @@ internal class AcidAttackEffect : AttackEffect
     private AcidAttackEffect(Game game) : base(game) { }
     public override int Power => 0;
     public override string Description => "shoot acid";
-    public override void ApplyToPlayer(int monsterLevel, int monsterIndex, int armorClass, string monsterDescription, Monster monster, ref bool obvious, ref int damage, ref bool blinked)
+    public override void ApplyToPlayer(int monsterLevel, int armorClass, string monsterDescription, Monster monster, ref bool obvious, ref int damage, ref bool blinked)
     {
         obvious = true;
         Game.MsgPrint("You are covered in acid!");

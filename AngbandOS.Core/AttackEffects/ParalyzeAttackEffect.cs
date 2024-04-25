@@ -13,7 +13,7 @@ internal class ParalyzeAttackEffect : AttackEffect
     private ParalyzeAttackEffect(Game game) : base(game) { }
     public override int Power => 2;
     public override string Description => "paralyze";
-    public override void ApplyToPlayer(int monsterLevel, int monsterIndex, int armorClass, string monsterDescription, Monster monster, ref bool obvious, ref int damage, ref bool blinked)
+    public override void ApplyToPlayer(int monsterLevel, int armorClass, string monsterDescription, Monster monster, ref bool obvious, ref int damage, ref bool blinked)
     {
         if (damage == 0)
         {

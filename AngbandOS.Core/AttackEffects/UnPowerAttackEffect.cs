@@ -13,7 +13,7 @@ internal class UnPowerAttackEffect : AttackEffect
     private UnPowerAttackEffect(Game game) : base(game) { }
     public override int Power => 15;
     public override string Description => "drain charges";
-    public override void ApplyToPlayer(int monsterLevel, int monsterIndex, int armorClass, string monsterDescription, Monster monster, ref bool obvious, ref int damage, ref bool blinked)
+    public override void ApplyToPlayer(int monsterLevel, int armorClass, string monsterDescription, Monster monster, ref bool obvious, ref int damage, ref bool blinked)
     {
         // Unpower might drain charges from our items
         Game.TakeHit(damage, monsterDescription);
@@ -32,7 +32,7 @@ internal class UnPowerAttackEffect : AttackEffect
                 {
                     monster.Health = monster.MaxHealth;
                 }
-                if (Game.TrackedMonsterIndex != null && Game.TrackedMonsterIndex.Value == monsterIndex)
+                if (Game.TrackedMonsterIndex != null && Game.Monsters[Game.TrackedMonsterIndex.Value] == monster)
                 {
                     Game.SingletonRepository.FlaggedActions.Get(nameof(RedrawMonsterHealthFlaggedAction)).Set();
                 }

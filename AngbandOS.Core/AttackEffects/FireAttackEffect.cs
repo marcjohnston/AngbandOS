@@ -13,7 +13,7 @@ internal class FireAttackEffect : AttackEffect
     private FireAttackEffect(Game game) : base(game) { }
     public override int Power => 10;
     public override string Description => "burn";
-    public override void ApplyToPlayer(int monsterLevel, int monsterIndex, int armorClass, string monsterDescription, Monster monster, ref bool obvious, ref int damage, ref bool blinked)
+    public override void ApplyToPlayer(int monsterLevel, int armorClass, string monsterDescription, Monster monster, ref bool obvious, ref int damage, ref bool blinked)
     {
         obvious = true;
         Game.MsgPrint("You are enveloped in flames!");

@@ -14,7 +14,7 @@ internal abstract class ExpAttackEffect : AttackEffect
     protected abstract int HoldLifePercentChange { get; }
     protected abstract int DiceCount { get; }
 
-    public override void ApplyToPlayer(int monsterLevel, int monsterIndex, int armorClass, string monsterDescription, Monster monster, ref bool obvious, ref int damage, ref bool blinked)
+    public override void ApplyToPlayer(int monsterLevel, int armorClass, string monsterDescription, Monster monster, ref bool obvious, ref int damage, ref bool blinked)
     {
         obvious = true;
         Game.TakeHit(damage, monsterDescription);

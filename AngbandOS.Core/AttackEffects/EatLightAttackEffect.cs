@@ -13,7 +13,7 @@ internal class EatLightAttackEffect : AttackEffect
     private EatLightAttackEffect(Game game) : base(game) { }
     public override int Power => 5;
     public override string Description => "absorb light";
-    public override void ApplyToPlayer(int monsterLevel, int monsterIndex, int armorClass, string monsterDescription, Monster monster, ref bool obvious, ref int damage, ref bool blinked)
+    public override void ApplyToPlayer(int monsterLevel, int armorClass, string monsterDescription, Monster monster, ref bool obvious, ref int damage, ref bool blinked)
     {
         Game.TakeHit(damage, monsterDescription);
 

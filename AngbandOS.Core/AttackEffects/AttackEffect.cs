@@ -32,7 +32,7 @@ internal abstract class AttackEffect : IGetKey
 
     public abstract string Description { get; }
     public abstract int Power { get; }
-    public abstract void ApplyToPlayer(int monsterLevel, int monsterIndex, int armorClass, string monsterDescription, Monster monster, ref bool obvious, ref int damage, ref bool blinked);
+    public abstract void ApplyToPlayer(int monsterLevel, int armorClass, string monsterDescription, Monster monster, ref bool obvious, ref int damage, ref bool blinked);
 
     /// <summary>
     /// Apply the attack to another monster.  Does nothing by default.
