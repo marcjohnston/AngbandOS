@@ -120,7 +120,12 @@ internal class Game
     public List<UnreadableScrollFlavor> UnreadableScrollFlavors; // These are generated from the available base scrolls.
     public int TargetCol;
     public int TargetRow;
+
+    /// <summary>
+    /// Returns a monster index.
+    /// </summary>
     public int TargetWho;
+
     public int TotalFriendLevels;
     public int TotalFriends;
     public int? TrackedMonsterIndex = null;
@@ -12436,6 +12441,12 @@ internal class Game
         return living ? "almost dead" : "almost destroyed";
     }
 
+    /// <summary>
+    /// Returns true, if a monster can be targeted; false, otherwise.  Monsters cannot be targeted in they are not visible, is within a maximum range, has a line-of-sight
+    /// that is passable and that the line-of-sight does not pass through a YellowSignSigilTile and the player is not hallucinating.
+    /// </summary>
+    /// <param name="mIdx"></param>
+    /// <returns></returns>
     private bool TargetAble(int mIdx)
     {
         Monster mPtr = Monsters[mIdx];
