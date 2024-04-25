@@ -21,7 +21,10 @@ internal class Monster : IItemContainer
 
     public int FearLevel;
 
-    public List<Item> Items = new List<Item>();
+
+    /// <summary>
+    /// Returns 0, if the monster is not a clone; or one plus the parent generation, when the monster is a clone.
+    /// </summary>
     public int Generation;
     public int Health;
     public int IndividualMonsterFlags;
@@ -30,6 +33,9 @@ internal class Monster : IItemContainer
     public int MapY;
     public int MaxHealth;
 
+    /// <summary>
+    /// Returns true, if the monster is a clone via the MultiplyMonster.
+    /// </summary>
     public bool SmCloned = false;
     public bool SmFriendly = false;
     public bool SmImmAcid = false;

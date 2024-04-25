@@ -16312,7 +16312,7 @@ internal class Game
             Monsters[_hackMIdxIi].SmCloned = true;
         }
         mPtr.Generation++;
-        Monsters[_hackMIdxIi].Generation = mPtr.Generation;
+        Monsters[_hackMIdxIi].Generation = mPtr.Generation; // TODO: This should be needed ... it is a self assignment
         return result;
     }
 
