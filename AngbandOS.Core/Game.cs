@@ -12739,8 +12739,8 @@ internal class Game
         List<TargetLocation> list = new List<TargetLocation>();
         for (int i = 0; i < TempN; i++)
         {
-            list.Add(new TargetLocation(TempY[i], TempX[i],
-                Distance(TempY[i], TempX[i], MapY.Value, MapX.Value)));
+            int distance = Distance(TempY[i], TempX[i], MapY.Value, MapX.Value);
+            list.Add(new TargetLocation(TempY[i], TempX[i], distance));
         }
         list.Sort();
         for (int i = 0; i < TempN; i++)
