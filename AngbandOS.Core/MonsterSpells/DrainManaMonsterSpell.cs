@@ -59,7 +59,7 @@ internal class DrainManaMonsterSpell : MonsterSpell
                 {
                     monster.Health = monster.MaxHealth;
                 }
-                if (Game.TrackedMonster != null && Game.TrackedMonster == monster)
+                if (Game.TrackedMonster.Value != null && Game.TrackedMonster.Value == monster)
                 {
                     base.Game.SingletonRepository.FlaggedActions.Get(nameof(FlaggedActions.RedrawMonsterHealthFlaggedAction)).Set();
                 }
@@ -101,7 +101,7 @@ internal class DrainManaMonsterSpell : MonsterSpell
                 {
                     monster.Health = monster.MaxHealth;
                 }
-                if (Game.TrackedMonster != null && Game.TrackedMonster == monster)
+                if (Game.TrackedMonster.Value != null && Game.TrackedMonster.Value == monster)
                 {
                     base.Game.SingletonRepository.FlaggedActions.Get(nameof(FlaggedActions.RedrawMonsterHealthFlaggedAction)).Set();
                 }

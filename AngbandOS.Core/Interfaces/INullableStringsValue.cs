@@ -5,10 +5,9 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Properties;
+namespace AngbandOS.Core.Interfaces;
 
-[Serializable]
-internal class TrackedMonsterNullableIntProperty : NullableIntProperty
+internal interface INullableStringsValue
 {
-    protected TrackedMonsterNullableIntProperty(Game game) : base(game) { } // This object is a singleton.
+    string[]? NullableStringsValue { get; }
 }

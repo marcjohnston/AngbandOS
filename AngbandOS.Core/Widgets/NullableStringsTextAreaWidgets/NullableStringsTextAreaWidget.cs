@@ -15,29 +15,29 @@ internal abstract class NullableStringsTextAreaWidget : NullableTextAreaWidget
     protected NullableStringsTextAreaWidget(Game game) : base(game) { }
 
     public abstract string NullableTextAreaValueName { get; }
-    public INullableTextAreaValue NullableTextAreaValue { get; private set; }
-    public override string[]? NullableText => NullableTextAreaValue.NullableTextAreaValue;
+    public INullableStringsValue NullableTextAreaValue { get; private set; }
+    public override string[]? NullableText => NullableTextAreaValue.NullableStringsValue;
     public override void Bind()
     {
         base.Bind();
         Property? property = Game.SingletonRepository.Properties.TryGet(NullableTextAreaValueName);
         if (property != null)
         {
-            NullableTextAreaValue = (INullableTextAreaValue)property;
+            NullableTextAreaValue = (INullableStringsValue)property;
         }
         else
         {
             Timer? timer = Game.SingletonRepository.Timers.TryGet(NullableTextAreaValueName);
             if (timer != null)
             {
-                NullableTextAreaValue = (INullableTextAreaValue)timer;
+                NullableTextAreaValue = (INullableStringsValue)timer;
             }
             else
             {
                 Function? function = Game.SingletonRepository.Functions.TryGet(NullableTextAreaValueName);
                 if (function != null)
                 {
-                    NullableTextAreaValue = (INullableTextAreaValue)function;
+                    NullableTextAreaValue = (INullableStringsValue)function;
                 }
                 else
                 {

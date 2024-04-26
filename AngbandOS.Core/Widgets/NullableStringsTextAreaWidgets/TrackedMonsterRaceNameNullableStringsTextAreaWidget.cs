@@ -31,7 +31,7 @@ internal class TrackedMonsterRaceNameNullableStringsTextAreaWidget : NullableStr
     public override string JustificationName => nameof(CenterJustification);
 
     /// <summary>
-    /// Returns the <see cref="TrackedMonsterNameFunction"/> function to render a multiline version of the monster race name.
+    /// Returns the <see cref="TrackedMonsterRaceNameNullableStringsFunction"/> function to render a multiline version of the monster race name.
     /// </summary>
-    public override string NullableTextAreaValueName => nameof(TrackedMonsterNameFunction);
+    public override string NullableTextAreaValueName => nameof(TrackedMonsterRaceNameNullableStringsFunction);
 }

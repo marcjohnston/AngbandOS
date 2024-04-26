@@ -7,14 +7,17 @@
 
 namespace AngbandOS.Core.Properties;
 
+/// <summary>
+/// Represents a property that includes change tracking for a nullable monster.
+/// </summary>
 [Serializable]
-internal abstract class NullableIntProperty : Property, INullIntValue
+internal abstract class NullableMonsterProperty : Property, INullMonsterValue
 {
-    protected NullableIntProperty(Game game) : base(game) { }
+    protected NullableMonsterProperty(Game game) : base(game) { }
 
-    private int? _value;
+    private Monster? _value;
 
-    public int? Value
+    public Monster? Value
     {
         get
         {
@@ -36,7 +39,7 @@ internal abstract class NullableIntProperty : Property, INullIntValue
         }
     }
 
-    public int? NullIntValue => Value;
+    public Monster? NullMonsterValue => Value;
 
     protected virtual void OnBeforeSet() { }
     protected virtual void OnAfterSet() { }
@@ -48,6 +51,6 @@ internal abstract class NullableIntProperty : Property, INullIntValue
     /// <returns></returns>
     public override string ToString()
     {
-        return !_value.HasValue ? "" : _value.Value.ToString();
+        return _value == null ? "" : _value.Race.FriendlyName;
     }
 }

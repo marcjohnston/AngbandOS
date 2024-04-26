@@ -1810,7 +1810,7 @@ internal class Monster : IItemContainer
     {
         fear = false;
         // Track the monster that has just taken damage
-        if (Game.TrackedMonster != null && Game.TrackedMonster == this)
+        if (Game.TrackedMonster.Value != null && Game.TrackedMonster.Value == this)
         {
             Game.SingletonRepository.FlaggedActions.Get(nameof(RedrawMonsterHealthFlaggedAction)).Set();
         }

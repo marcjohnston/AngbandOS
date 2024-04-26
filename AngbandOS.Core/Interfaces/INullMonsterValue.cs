@@ -7,7 +7,11 @@
 
 namespace AngbandOS.Core.Interfaces;
 
-internal interface INullableTextAreaValue
+/// <summary>
+/// Represents an interface for an object to implement for it to participate in returning a nullable monster value.
+/// </summary>
+internal interface INullMonsterValue
 {
-    string[]? NullableTextAreaValue { get; }
+    Monster? NullMonsterValue { get; }
 }
+

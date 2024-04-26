@@ -15,14 +15,14 @@ internal class RedrawMonsterHealthFlaggedAction : FlaggedAction
     private RedrawMonsterHealthFlaggedAction(Game game) : base(game) { }
     protected override void Execute()
     {
-        if (Game.TrackedMonster == null)
+        if (Game.TrackedMonster.Value == null)
         {
             Game.Screen.Erase(RowInfo, ColInfo, 12);
             //Game.Screen.Erase(RowInfo - 3, ColInfo, 12);
             //Game.Screen.Erase(RowInfo - 2, ColInfo, 12);
             //Game.Screen.Erase(RowInfo - 1, ColInfo, 12);
         }
-        else if (!Game.TrackedMonster.IsVisible)
+        else if (!Game.TrackedMonster.Value.IsVisible)
         {
             Game.Screen.Print(ColorEnum.White, "[----------]", RowInfo, ColInfo);
         }
@@ -30,13 +30,13 @@ internal class RedrawMonsterHealthFlaggedAction : FlaggedAction
         {
             Game.Screen.Print(ColorEnum.White, "[----------]", RowInfo, ColInfo);
         }
-        else if (Game.TrackedMonster.Health < 0)
+        else if (Game.TrackedMonster.Value.Health < 0)
         {
             Game.Screen.Print(ColorEnum.White, "[----------]", RowInfo, ColInfo);
         }
         else
         {
-            Monster mPtr = Game.TrackedMonster;
+            Monster mPtr = Game.TrackedMonster.Value;
             ColorEnum attr = ColorEnum.Red;
             string smb = "**********";
             int pct = 100 * mPtr.Health / mPtr.MaxHealth;

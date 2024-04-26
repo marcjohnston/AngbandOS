@@ -14,4 +14,3 @@ internal interface INullIntValue
 {
     int? NullIntValue { get; }
 }
-

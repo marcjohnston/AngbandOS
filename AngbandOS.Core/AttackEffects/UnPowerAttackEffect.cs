@@ -32,7 +32,7 @@ internal class UnPowerAttackEffect : AttackEffect
                 {
                     monster.Health = monster.MaxHealth;
                 }
-                if (Game.TrackedMonster != null && Game.TrackedMonster == monster)
+                if (Game.TrackedMonster.Value != null && Game.TrackedMonster.Value == monster)
                 {
                     Game.SingletonRepository.FlaggedActions.Get(nameof(RedrawMonsterHealthFlaggedAction)).Set();
                 }
