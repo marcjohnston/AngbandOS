@@ -20,7 +20,7 @@ internal class WraithActivation : Activation
 
     protected override bool OnActivate(Item item)
     {
-        Game.EtherealnessTimer.AddTimer(Game.DieRoll(Game.ExperienceLevel.Value));
+        Game.EtherealnessTimer.AddTimer(Game.DieRoll(Game.ExperienceLevel.IntValue));
         return true;
     }
 

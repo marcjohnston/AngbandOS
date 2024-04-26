@@ -21,9 +21,9 @@ internal class AdrenalineChannelingTalent : Talent
     {
         Game.FearTimer.ResetTimer();
         Game.StunTimer.ResetTimer();
-        Game.RestoreHealth(Game.ExperienceLevel.Value);
-        int i = 10 + Game.DieRoll(Game.ExperienceLevel.Value * 3 / 2);
-        if (Game.ExperienceLevel.Value < 35)
+        Game.RestoreHealth(Game.ExperienceLevel.IntValue);
+        int i = 10 + Game.DieRoll(Game.ExperienceLevel.IntValue * 3 / 2);
+        if (Game.ExperienceLevel.IntValue < 35)
         {
             Game.HeroismTimer.AddTimer(i);
         }
@@ -43,6 +43,6 @@ internal class AdrenalineChannelingTalent : Talent
 
     protected override string Comment()
     {
-        return $"dur 10+d{Game.ExperienceLevel.Value * 3 / 2}";
+        return $"dur 10+d{Game.ExperienceLevel.IntValue * 3 / 2}";
     }
 }

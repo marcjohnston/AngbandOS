@@ -22,6 +22,6 @@ internal class ConfuseMonsterScript : Script, IScript
         {
             return;
         }
-        Game.ConfuseMonster(dir, Game.ExperienceLevel.Value * 3 / 2);
+        Game.ConfuseMonster(dir, Game.ExperienceLevel.IntValue * 3 / 2);
     }
 }

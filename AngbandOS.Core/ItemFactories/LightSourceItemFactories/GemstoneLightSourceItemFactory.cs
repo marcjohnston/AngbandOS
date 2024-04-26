@@ -19,7 +19,7 @@ internal class GemstoneLightSourceItemFactory : LightSourceItemFactory
             if (Game.InvulnerabilityTimer.Value == 0)
             {
                 Game.MsgPrint("The Jewel of Judgement drains life from you!");
-                Game.TakeHit(Math.Min(Game.ExperienceLevel.Value, 50), "the Jewel of Judgement");
+                Game.TakeHit(Math.Min(Game.ExperienceLevel.IntValue, 50), "the Jewel of Judgement");
             }
         }
     }

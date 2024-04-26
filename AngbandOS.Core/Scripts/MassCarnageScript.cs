@@ -44,7 +44,7 @@ internal class MassCarnageScript : Script, IScriptBool, IScript
             {
                 Game.TakeHit(Game.DieRoll(3), "the strain of casting Mass Carnage");
             }
-            Game.MainForm.MoveCursorTo(Game.MapY.Value, Game.MapX.Value);
+            Game.MainForm.MoveCursorTo(Game.MapY.IntValue, Game.MapX.IntValue);
             Game.HandleStuff();
             Game.UpdateScreen();
             Game.Pause(msec);

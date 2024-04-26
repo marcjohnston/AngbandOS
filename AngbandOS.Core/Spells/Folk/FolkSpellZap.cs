@@ -15,5 +15,5 @@ internal class FolkSpellZap : Spell
 
     public override string Name => "Zap";
 
-    protected override string LearnedDetails => $"dam {3 + ((Game.ExperienceLevel.Value - 1) / 5)}d3";
+    protected override string LearnedDetails => $"dam {3 + ((Game.ExperienceLevel.IntValue - 1) / 5)}d3";
 }

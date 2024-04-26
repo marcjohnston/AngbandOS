@@ -19,10 +19,10 @@ internal class HealthPointsMaxRangedWidget : MaxRangedWidget
     public override string MaxIntValueName => nameof(MaxHealthPointsIntProperty);
     public override string JustificationName => nameof(RightJustification);
 
-    public override (int, ColorEnum)[] Ranges => new (int, ColorEnum)[]
+    public override (int, string?, ColorEnum)[] Ranges => new (int, string?, ColorEnum)[]
     {
-        (100, ColorEnum.BrightGreen),
-        (40, ColorEnum.BrightYellow),
-        (20, ColorEnum.Orange)
+        (100, null, ColorEnum.BrightGreen),
+        (40, null, ColorEnum.BrightYellow),
+        (20, null, ColorEnum.Orange)
     };
 }

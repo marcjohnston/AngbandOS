@@ -62,7 +62,7 @@ internal class EatScript : Script, IScript, IRepeatableScript
         if (ident && !item.IsFlavorAware())
         {
             item.BecomeFlavorAware();
-            Game.GainExperience((itemLevel + (Game.ExperienceLevel.Value >> 1)) / Game.ExperienceLevel.Value);
+            Game.GainExperience((itemLevel + (Game.ExperienceLevel.IntValue >> 1)) / Game.ExperienceLevel.IntValue);
         }
 
         // Now races process the sustenance.

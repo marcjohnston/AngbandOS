@@ -20,7 +20,7 @@ internal class CreateTrapsMonsterSpell : MonsterSpell
     public override void ExecuteOnPlayer(Monster monster)
     {
         ProjectionFlag flg = ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectHide;
-        Game.Project(0, 1, Game.MapY.Value, Game.MapX.Value, 0, Game.SingletonRepository.Projectiles.Get(nameof(MakeTrapProjectile)), flg);
+        Game.Project(0, 1, Game.MapY.IntValue, Game.MapX.IntValue, 0, Game.SingletonRepository.Projectiles.Get(nameof(MakeTrapProjectile)), flg);
     }
 
     public override void ExecuteOnMonster(Monster monster, Monster target)

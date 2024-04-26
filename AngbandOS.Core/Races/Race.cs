@@ -153,7 +153,7 @@ internal abstract class Race : IGetKey
     public virtual void Eat(Item item)
     {
         // Everyone else gets the full value
-        Game.SetFood(Game.Food.Value + item.TypeSpecificValue);
+        Game.SetFood(Game.Food.IntValue + item.TypeSpecificValue);
     }
 
     /// <summary>

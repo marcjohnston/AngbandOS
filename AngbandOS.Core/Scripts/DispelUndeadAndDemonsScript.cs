@@ -18,7 +18,7 @@ internal class DispelUndeadAndDemonsScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        Game.DispelUndead(Game.ExperienceLevel.Value * 3);
-        Game.DispelDemons(Game.ExperienceLevel.Value * 3);
+        Game.DispelUndead(Game.ExperienceLevel.IntValue * 3);
+        Game.DispelDemons(Game.ExperienceLevel.IntValue * 3);
     }
 }

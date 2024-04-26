@@ -15,5 +15,5 @@ internal class LifeSpellProtectionFromEvil : Spell
 
     public override string Name => "Protection from Evil";
 
-    protected override string LearnedDetails => $"dur d25+{3 * Game.ExperienceLevel.Value}";
+    protected override string LearnedDetails => $"dur d25+{3 * Game.ExperienceLevel.IntValue}";
 }

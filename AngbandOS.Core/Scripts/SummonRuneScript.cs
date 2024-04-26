@@ -18,16 +18,16 @@ internal class SummonRuneScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        GridTile tile = Game.Map.Grid[Game.MapY.Value][Game.MapX.Value];
+        GridTile tile = Game.Map.Grid[Game.MapY.IntValue][Game.MapX.IntValue];
         Game.MsgPrint("There is a flash of shimmering light!");
         // Trap disappears when triggered
         tile.PlayerMemorized = false;
-        Game.RevertTileToBackground(Game.MapY.Value, Game.MapX.Value);
+        Game.RevertTileToBackground(Game.MapY.IntValue, Game.MapX.IntValue);
         // Summon 1d3+2 monsters
         int num = 2 + Game.DieRoll(3);
         for (int i = 0; i < num; i++)
         {
-            Game.SummonSpecific(Game.MapY.Value, Game.MapX.Value, Game.Difficulty, null);
+            Game.SummonSpecific(Game.MapY.IntValue, Game.MapX.IntValue, Game.Difficulty, null);
         }
         // Have a chance of also cursing the player
         if (Game.Difficulty > Game.DieRoll(100))

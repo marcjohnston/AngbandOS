@@ -19,8 +19,8 @@ internal class LifeSpellHolyOrb : Spell
     {
         get
         {
-            int orb = Game.ExperienceLevel.Value / (Game.BaseCharacterClass.ID == CharacterClass.Priest || Game.BaseCharacterClass.ID == CharacterClass.HighMage ? 2 : 4);
-            return $" dam 3d6+{Game.ExperienceLevel.Value + orb}";
+            int orb = Game.ExperienceLevel.IntValue / (Game.BaseCharacterClass.ID == CharacterClass.Priest || Game.BaseCharacterClass.ID == CharacterClass.HighMage ? 2 : 4);
+            return $" dam 3d6+{Game.ExperienceLevel.IntValue + orb}";
         }
     }
 }

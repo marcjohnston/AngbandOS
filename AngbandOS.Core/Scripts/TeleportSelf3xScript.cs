@@ -14,6 +14,6 @@ internal class TeleportSelf3xScript : Script, IScript
 
     public void ExecuteScript()
     {
-        Game.RunScriptInt(nameof(TeleportSelfScript), Game.ExperienceLevel.Value * 3);
+        Game.RunScriptInt(nameof(TeleportSelfScript), Game.ExperienceLevel.IntValue * 3);
     }
 }

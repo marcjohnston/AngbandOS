@@ -73,8 +73,8 @@ internal abstract class Projectile : IGetKey
         }
         else if (who == 0)
         {
-            x1 = Game.MapX.Value;
-            y1 = Game.MapY.Value;
+            x1 = Game.MapX.IntValue;
+            y1 = Game.MapY.IntValue;
         }
         else
         {
@@ -453,7 +453,7 @@ internal abstract class Projectile : IGetKey
                 x = gx[i];
 
                 // Check to see if the projectile can affect the player.
-                if (x == Game.MapX.Value && y == Game.MapY.Value && who != 0)
+                if (x == Game.MapX.IntValue && y == Game.MapY.IntValue && who != 0)
                 {
                     // Check to see if the projectile attack bounces off the player.
                     if (!CheckBounceOffPlayer(who, dam, rad))
@@ -680,10 +680,6 @@ internal abstract class Projectile : IGetKey
         }
         if (who != 0)
         {
-            if (Game.TrackedMonster.Value != null && Game.TrackedMonster.Value == mPtr)
-            {
-                Game.SingletonRepository.FlaggedActions.Get(nameof(RedrawMonsterHealthFlaggedAction)).Set();
-            }
             mPtr.SleepLevel = 0;
             mPtr.Health -= dam;
             if (mPtr.Health < 0)

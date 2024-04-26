@@ -30,7 +30,7 @@ internal class SelfKnowledgeScript : Script, IScript
                 inventoryCharacteristics.Merge(oPtr.Characteristics);
             }
         }
-        string[]? selfKnowledgeInfo = Game.Race.SelfKnowledge(Game.ExperienceLevel.Value);
+        string[]? selfKnowledgeInfo = Game.Race.SelfKnowledge(Game.ExperienceLevel.IntValue);
         if (selfKnowledgeInfo != null)
         {
             foreach (string infoLine in selfKnowledgeInfo)
@@ -118,7 +118,7 @@ internal class SelfKnowledgeScript : Script, IScript
         {
             info[infoCount++] = "You are looking around very carefully.";
         }
-        if (Game.SpareSpellSlots.Value != 0)
+        if (Game.SpareSpellSlots.IntValue != 0)
         {
             info[infoCount++] = "You can learn some spells/prayers.";
         }

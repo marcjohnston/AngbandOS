@@ -13,7 +13,7 @@ internal class ArmorClassFunction : IntFunction
 {
     private ArmorClassFunction(Game game) : base(game) { } // This object is a singleton.
 
-    public override int Value => Game.DisplayedBaseArmorClass.Value + Game.DisplayedArmorClassBonus.Value;
+    public override int Value => Game.DisplayedBaseArmorClass.IntValue + Game.DisplayedArmorClassBonus.IntValue;
     public override string[]? DependencyNames => new string[]
     {
         nameof(DisplayedBaseArmorClassIntProperty),

@@ -26,9 +26,9 @@ internal class RestoreManaPotionItemFactory : PotionItemFactory
     public override bool Quaff()
     {
         // Restore mana restores your to maximum mana
-        if (Game.Mana.Value < Game.MaxMana.Value)
+        if (Game.Mana.IntValue < Game.MaxMana.IntValue)
         {
-            Game.Mana.Value = Game.MaxMana.Value;
+            Game.Mana.IntValue = Game.MaxMana.IntValue;
             Game.FractionalMana = 0;
             Game.MsgPrint("Your feel your head clear.");
             return true;

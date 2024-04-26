@@ -7,6 +7,9 @@
 
 namespace AngbandOS.Core.Widgets;
 
+/// <summary>
+/// Represents a conditional widget that renders the monster name and status when the player is tracking a monster.
+/// </summary>
 [Serializable]
 internal class TrackedMonsterConditionalWidget : ConditionalWidget
 {
@@ -15,6 +18,6 @@ internal class TrackedMonsterConditionalWidget : ConditionalWidget
     {
         (nameof(PlayerIsTrackingMonsterBoolFunction), true, 0)
     };
-    public override string[]? TrueWidgetNames => new string[] { nameof(TrackedMonsterRaceNameNullableStringsTextAreaWidget) };
-    public override string[]? FalseWidgetNames => new string[] { nameof(TrackedMonsterRaceNameNullableStringsTextAreaWidget) };
+    public override string[]? TrueWidgetNames => new string[] { nameof(TrackedMonsterRaceNameNullableStringsTextAreaWidget), nameof(TrackedMonsterHealthIsInvisibleConditionalWidget) };
+    public override string[]? FalseWidgetNames => new string[] { nameof(TrackedMonsterRaceNameNullableStringsTextAreaWidget), nameof(NoTrackedMonsterHealthTextWidget) };
 }

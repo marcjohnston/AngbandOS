@@ -19,8 +19,8 @@ internal class TeleportSelfScript : Script, IScript, IScriptInt
     /// <returns></returns>
     public void ExecuteScriptInt(int distance)
     {
-        int x = Game.MapX.Value;
-        int y = Game.MapY.Value;
+        int x = Game.MapX.IntValue;
+        int y = Game.MapY.IntValue;
         int xx = -1;
         bool look = true;
         if (Game.HasAntiTeleport)
@@ -43,9 +43,9 @@ internal class TeleportSelfScript : Script, IScript, IScriptInt
             {
                 while (true)
                 {
-                    x = Game.RandomSpread(Game.MapX.Value, distance);
-                    y = Game.RandomSpread(Game.MapY.Value, distance);
-                    int d = Game.Distance(Game.MapY.Value, Game.MapX.Value, y, x);
+                    x = Game.RandomSpread(Game.MapX.IntValue, distance);
+                    y = Game.RandomSpread(Game.MapY.IntValue, distance);
+                    int d = Game.Distance(Game.MapY.IntValue, Game.MapX.IntValue, y, x);
                     if (d >= min && d <= distance)
                     {
                         break;
@@ -70,10 +70,10 @@ internal class TeleportSelfScript : Script, IScript, IScriptInt
             min /= 2;
         }
         Game.PlaySound(SoundEffectEnum.Teleport);
-        int oy = Game.MapY.Value;
-        int ox = Game.MapX.Value;
-        Game.MapY.Value = y;
-        Game.MapX.Value = x;
+        int oy = Game.MapY.IntValue;
+        int ox = Game.MapX.IntValue;
+        Game.MapY.IntValue = y;
+        Game.MapX.IntValue = x;
         Game.MainForm.RefreshMapLocation(oy, ox);
         while (xx < 2)
         {
@@ -101,7 +101,7 @@ internal class TeleportSelfScript : Script, IScript, IScriptInt
             }
             xx++;
         }
-        Game.MainForm.RefreshMapLocation(Game.MapY.Value, Game.MapX.Value);
+        Game.MainForm.RefreshMapLocation(Game.MapY.IntValue, Game.MapX.IntValue);
         Game.RecenterScreenAroundPlayer();
         Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateScentFlaggedAction)).Set();
         Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateLightFlaggedAction)).Set();
@@ -117,8 +117,8 @@ internal class TeleportSelfScript : Script, IScript, IScriptInt
 
     private void TeleportToPlayer(int mIdx)
     {
-        int ny = Game.MapY.Value;
-        int nx = Game.MapX.Value;
+        int ny = Game.MapY.IntValue;
+        int nx = Game.MapX.IntValue;
         int dis = 2;
         bool look = true;
         Monster mPtr = Game.Monsters[mIdx];
@@ -144,9 +144,9 @@ internal class TeleportSelfScript : Script, IScript, IScriptInt
             {
                 while (true)
                 {
-                    ny = Game.RandomSpread(Game.MapY.Value, dis);
-                    nx = Game.RandomSpread(Game.MapX.Value, dis);
-                    int d = Game.Distance(Game.MapY.Value, Game.MapX.Value, ny, nx);
+                    ny = Game.RandomSpread(Game.MapY.IntValue, dis);
+                    nx = Game.RandomSpread(Game.MapX.IntValue, dis);
+                    int d = Game.Distance(Game.MapY.IntValue, Game.MapX.IntValue, ny, nx);
                     if (d >= min && d <= dis)
                     {
                         break;

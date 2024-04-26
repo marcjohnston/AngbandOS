@@ -17,7 +17,7 @@ internal class ShriekActiveMutation : Mutation
         {
             return;
         }
-        Game.FireBall(Game.SingletonRepository.Projectiles.Get(nameof(SoundProjectile)), 0, 4 * Game.ExperienceLevel.Value, 8);
+        Game.FireBall(Game.SingletonRepository.Projectiles.Get(nameof(SoundProjectile)), 0, 4 * Game.ExperienceLevel.IntValue, 8);
         Game.AggravateMonsters();
     }
 

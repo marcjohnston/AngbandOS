@@ -15,5 +15,5 @@ internal class TarotSpellSummonObject : Spell
 
     public override string Name => "Summon Object";
 
-    protected override string LearnedDetails => $"max wgt {Game.ExperienceLevel.Value * 15 / 10}";
+    protected override string LearnedDetails => $"max wgt {Game.ExperienceLevel.IntValue * 15 / 10}";
 }

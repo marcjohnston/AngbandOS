@@ -17,5 +17,5 @@ internal class DeathSpellDispelGood : Spell
 
     public override string Name => "Dispel Good";
 
-    protected override string LearnedDetails => $"dam {4 * Game.ExperienceLevel.Value}";
+    protected override string LearnedDetails => $"dam {4 * Game.ExperienceLevel.IntValue}";
 }

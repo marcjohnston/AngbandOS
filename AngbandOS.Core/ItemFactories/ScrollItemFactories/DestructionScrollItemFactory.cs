@@ -23,7 +23,7 @@ internal class DestructionScrollItemFactory : ScrollItemFactory
     public override int Weight => 5;
     public override void Read(ReadScrollEvent eventArgs)
     {
-        Game.DestroyArea(Game.MapY.Value, Game.MapX.Value, 15);
+        Game.DestroyArea(Game.MapY.IntValue, Game.MapX.IntValue, 15);
         eventArgs.Identified = true;
     }
     public override Item CreateItem() => new Item(Game, this);

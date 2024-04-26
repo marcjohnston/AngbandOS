@@ -36,13 +36,13 @@ internal class BuyHouseScript : Script, IScript, IStoreScript
         {
             if (!Game.ServiceHaggle(Game.CurTown.HousePrice, out price))
             {
-                if (price >= Game.Gold.Value)
+                if (price >= Game.Gold.IntValue)
                 {
                     Game.MsgPrint("You do not have the gold!");
                 }
                 else
                 {
-                    Game.Gold.Value -= price;
+                    Game.Gold.IntValue -= price;
                     Game.SayComment_1();
                     Game.PlaySound(SoundEffectEnum.StoreTransaction);
                     Game.StorePrtGold();

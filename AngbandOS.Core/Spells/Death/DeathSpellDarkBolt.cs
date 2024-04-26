@@ -17,5 +17,5 @@ internal class DeathSpellDarkBolt : Spell
 
     public override string Name => "Dark Bolt";
 
-    protected override string LearnedDetails => $"dam {4 + ((Game.ExperienceLevel.Value - 5) / 4)}d8";
+    protected override string LearnedDetails => $"dam {4 + ((Game.ExperienceLevel.IntValue - 5) / 4)}d8";
 }

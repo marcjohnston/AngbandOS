@@ -22,7 +22,7 @@ internal class TarotDrawScript : Script, IScript
         int die = Game.DieRoll(120);
         if (Game.BaseCharacterClass.ID == CharacterClass.Rogue || Game.BaseCharacterClass.ID == CharacterClass.HighMage)
         {
-            die = Game.DieRoll(110) + (Game.ExperienceLevel.Value / 5);
+            die = Game.DieRoll(110) + (Game.ExperienceLevel.IntValue / 5);
         }
         Game.MsgPrint("You shuffle your Tarot deck and draw a card...");
         if (die < 7)
@@ -36,7 +36,7 @@ internal class TarotDrawScript : Script, IScript
         else if (die < 14)
         {
             Game.MsgPrint("Oh no! It's the Devil!");
-            Game.SummonSpecific(Game.MapY.Value, Game.MapX.Value, Game.Difficulty, Game.SingletonRepository.MonsterFilters.Get(nameof(DemonMonsterFilter)));
+            Game.SummonSpecific(Game.MapY.IntValue, Game.MapX.IntValue, Game.Difficulty, Game.SingletonRepository.MonsterFilters.Get(nameof(DemonMonsterFilter)));
         }
         else if (die < 18)
         {
@@ -58,7 +58,7 @@ internal class TarotDrawScript : Script, IScript
         {
             Game.MsgPrint("It's a picture of a strange monster.");
 
-            if (!Game.SummonSpecific(Game.MapY.Value, Game.MapX.Value, Game.Difficulty * 3 / 2, Game.GetRandomBizarreMonsterSelector()))
+            if (!Game.SummonSpecific(Game.MapY.IntValue, Game.MapX.IntValue, Game.Difficulty * 3 / 2, Game.GetRandomBizarreMonsterSelector()))
             {
                 noneCame = true;
             }
@@ -81,7 +81,7 @@ internal class TarotDrawScript : Script, IScript
         else if (die < 42)
         {
             Game.MsgPrint("It's the Star.");
-            Game.BlessingTimer.AddTimer(Game.ExperienceLevel.Value);
+            Game.BlessingTimer.AddTimer(Game.ExperienceLevel.IntValue);
         }
         else if (die < 47)
         {
@@ -106,12 +106,12 @@ internal class TarotDrawScript : Script, IScript
         else if (die < 80)
         {
             Game.MsgPrint("It's the Tower.");
-            Game.Earthquake(Game.MapY.Value, Game.MapX.Value, 5);
+            Game.Earthquake(Game.MapY.IntValue, Game.MapX.IntValue, 5);
         }
         else if (die < 82)
         {
             Game.MsgPrint("It's a picture of a friendly monster.");
-            if (!Game.SummonSpecificFriendly(Game.MapY.Value, Game.MapX.Value, Game.Difficulty * 3 / 2, Game.SingletonRepository.MonsterFilters.Get(nameof(Bizarre1MonsterFilter)), false))
+            if (!Game.SummonSpecificFriendly(Game.MapY.IntValue, Game.MapX.IntValue, Game.Difficulty * 3 / 2, Game.SingletonRepository.MonsterFilters.Get(nameof(Bizarre1MonsterFilter)), false))
             {
                 noneCame = true;
             }
@@ -119,7 +119,7 @@ internal class TarotDrawScript : Script, IScript
         else if (die < 84)
         {
             Game.MsgPrint("It's a picture of a friendly monster.");
-            if (!Game.SummonSpecificFriendly(Game.MapY.Value, Game.MapX.Value, Game.Difficulty * 3 / 2, Game.SingletonRepository.MonsterFilters.Get(nameof(Bizarre2MonsterFilter)), false))
+            if (!Game.SummonSpecificFriendly(Game.MapY.IntValue, Game.MapX.IntValue, Game.Difficulty * 3 / 2, Game.SingletonRepository.MonsterFilters.Get(nameof(Bizarre2MonsterFilter)), false))
             {
                 noneCame = true;
             }
@@ -127,7 +127,7 @@ internal class TarotDrawScript : Script, IScript
         else if (die < 86)
         {
             Game.MsgPrint("It's a picture of a friendly monster.");
-            if (!Game.SummonSpecificFriendly(Game.MapY.Value, Game.MapX.Value, Game.Difficulty * 3 / 2, Game.SingletonRepository.MonsterFilters.Get(nameof(Bizarre4MonsterFilter)), false))
+            if (!Game.SummonSpecificFriendly(Game.MapY.IntValue, Game.MapX.IntValue, Game.Difficulty * 3 / 2, Game.SingletonRepository.MonsterFilters.Get(nameof(Bizarre4MonsterFilter)), false))
             {
                 noneCame = true;
             }
@@ -135,7 +135,7 @@ internal class TarotDrawScript : Script, IScript
         else if (die < 88)
         {
             Game.MsgPrint("It's a picture of a friendly monster.");
-            if (!Game.SummonSpecificFriendly(Game.MapY.Value, Game.MapX.Value, Game.Difficulty * 3 / 2, Game.SingletonRepository.MonsterFilters.Get(nameof(Bizarre5MonsterFilter)), false))
+            if (!Game.SummonSpecificFriendly(Game.MapY.IntValue, Game.MapX.IntValue, Game.Difficulty * 3 / 2, Game.SingletonRepository.MonsterFilters.Get(nameof(Bizarre5MonsterFilter)), false))
             {
                 noneCame = true;
             }
@@ -147,7 +147,7 @@ internal class TarotDrawScript : Script, IScript
             {
                 return;
             }
-            Game.CharmMonster(dir, Math.Min(Game.ExperienceLevel.Value, 20));
+            Game.CharmMonster(dir, Math.Min(Game.ExperienceLevel.IntValue, 20));
         }
         else if (die < 101)
         {
@@ -174,9 +174,9 @@ internal class TarotDrawScript : Script, IScript
         else
         {
             Game.MsgPrint("It's the World.");
-            if (Game.ExperiencePoints.Value < Constants.PyMaxExp)
+            if (Game.ExperiencePoints.IntValue < Constants.PyMaxExp)
             {
-                int ee = (Game.ExperiencePoints.Value / 25) + 1;
+                int ee = (Game.ExperiencePoints.IntValue / 25) + 1;
                 if (ee > 5000)
                 {
                     ee = 5000;
@@ -254,7 +254,7 @@ internal class TarotDrawScript : Script, IScript
                 break;
 
             case 26:
-                Game.Earthquake(Game.MapY.Value, Game.MapX.Value, 5);
+                Game.Earthquake(Game.MapY.IntValue, Game.MapX.IntValue, 5);
                 break;
 
             case 27:
@@ -284,7 +284,7 @@ internal class TarotDrawScript : Script, IScript
                 int counter = 0;
                 while (counter++ < 8)
                 {
-                    Game.SummonSpecific(Game.MapY.Value, Game.MapX.Value, Game.Difficulty * 3 / 2, Game.GetRandomBizarreMonsterSelector());
+                    Game.SummonSpecific(Game.MapY.IntValue, Game.MapX.IntValue, Game.Difficulty * 3 / 2, Game.GetRandomBizarreMonsterSelector());
                 }
                 break;
 

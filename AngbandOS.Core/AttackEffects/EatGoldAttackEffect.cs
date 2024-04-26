@@ -18,7 +18,7 @@ internal class EatGoldAttackEffect : AttackEffect
         // Steal some money
         Game.TakeHit(damage, monsterDescription);
         obvious = true;
-        if ((Game.ParalysisTimer.Value == 0 && Game.RandomLessThan(100) < Game.AbilityScores[Ability.Dexterity].DexTheftAvoidance + Game.ExperienceLevel.Value) || Game.HasAntiTheft)
+        if ((Game.ParalysisTimer.Value == 0 && Game.RandomLessThan(100) < Game.AbilityScores[Ability.Dexterity].DexTheftAvoidance + Game.ExperienceLevel.IntValue) || Game.HasAntiTheft)
         {
             Game.MsgPrint("You quickly protect your money pouch!");
             if (Game.RandomLessThan(3) != 0)
@@ -29,20 +29,20 @@ internal class EatGoldAttackEffect : AttackEffect
         else
         {
             // The amount of gold taken depends on how much you're carrying
-            int gold = (Game.Gold.Value / 10) + Game.DieRoll(25);
+            int gold = (Game.Gold.IntValue / 10) + Game.DieRoll(25);
             if (gold < 2)
             {
                 gold = 2;
             }
             if (gold > 5000)
             {
-                gold = (Game.Gold.Value / 20) + Game.DieRoll(3000);
+                gold = (Game.Gold.IntValue / 20) + Game.DieRoll(3000);
             }
-            if (gold > Game.Gold.Value)
+            if (gold > Game.Gold.IntValue)
             {
-                gold = Game.Gold.Value;
+                gold = Game.Gold.IntValue;
             }
-            Game.Gold.Value -= gold;
+            Game.Gold.IntValue -= gold;
             // The monster gets the gold it stole, in case you kill it
             // before leaving the level
             monster.StolenGold += gold;
@@ -51,7 +51,7 @@ internal class EatGoldAttackEffect : AttackEffect
             {
                 Game.MsgPrint("Nothing was stolen.");
             }
-            else if (Game.Gold.Value != 0)
+            else if (Game.Gold.IntValue != 0)
             {
                 Game.MsgPrint("Your purse feels lighter.");
                 Game.MsgPrint($"{gold} coins were stolen!");

@@ -19,7 +19,7 @@ internal class EarthquakeActiveMutation : Mutation
         }
         if (!Game.IsQuest(Game.CurrentDepth) && Game.CurrentDepth != 0)
         {
-            Game.Earthquake(Game.MapY.Value, Game.MapX.Value, 10);
+            Game.Earthquake(Game.MapY.IntValue, Game.MapX.IntValue, 10);
         }
     }
 

@@ -322,9 +322,9 @@ internal class MonsterKnowledge
             {
                 _description.Append(" creature");
             }
-            int i = _monsterType.Mexp * _monsterType.Level / Game.ExperienceLevel.Value;
-            int j = ((_monsterType.Mexp * _monsterType.Level % Game.ExperienceLevel.Value * 1000 /
-                     Game.ExperienceLevel.Value) + 5) / 10;
+            int i = _monsterType.Mexp * _monsterType.Level / Game.ExperienceLevel.IntValue;
+            int j = ((_monsterType.Mexp * _monsterType.Level % Game.ExperienceLevel.IntValue * 1000 /
+                     Game.ExperienceLevel.IntValue) + 5) / 10;
             if (i > 0)
             {
                 _description.Append(" is worth ").AppendFormat("{0:n0}", i).Append("xp");
@@ -338,8 +338,8 @@ internal class MonsterKnowledge
                 _description.Append(" is worth no xp");
             }
             p = "th";
-            i = Game.ExperienceLevel.Value % 10;
-            if (Game.ExperienceLevel.Value / 10 == 1)
+            i = Game.ExperienceLevel.IntValue % 10;
+            if (Game.ExperienceLevel.IntValue / 10 == 1)
             {
             }
             else if (i == 1)
@@ -355,7 +355,7 @@ internal class MonsterKnowledge
                 p = "rd";
             }
             q = "";
-            i = Game.ExperienceLevel.Value;
+            i = Game.ExperienceLevel.IntValue;
             if (i == 8 || i == 11 || i == 18)
             {
                 q = "n";

@@ -17,7 +17,7 @@ internal class AboutBodyInventorySlot : EquipmentInventorySlot
     public override string MentionUse(int? index) => "About body";
     public override string DescribeWieldLocation(int index) => "wearing on your back";
     public override string DescribeItemLocation(Item oPtr) => "wearing on your back";
-    public override int BareArmorClassBonus => Game.ExperienceLevel.Value > 15 ? (Game.ExperienceLevel.Value - 13) / 3 : 0;
+    public override int BareArmorClassBonus => Game.ExperienceLevel.IntValue > 15 ? (Game.ExperienceLevel.IntValue - 13) / 3 : 0;
     public override bool IsWeightRestricting => true;
     public override bool IsArmor => true;
     public override int SortOrder => 9;

@@ -34,10 +34,6 @@ internal class HealMonsterSpell : MonsterSpell
         {
             Game.MsgPrint(seenByPlayer ? $"{monsterName} looks healthier." : $"{monsterName} sounds healthier.");
         }
-        if (Game.TrackedMonster.Value != null && Game.TrackedMonster.Value == monster)
-        {
-            Game.SingletonRepository.FlaggedActions.Get(nameof(RedrawMonsterHealthFlaggedAction)).Set();
-        }
         if (monster.FearLevel != 0)
         {
             monster.FearLevel = 0;
@@ -61,10 +57,6 @@ internal class HealMonsterSpell : MonsterSpell
         else
         {
             Game.MsgPrint(seen ? $"{monsterName} looks healthier." : $"{monsterName} sounds healthier.");
-        }
-        if (Game.TrackedMonster.Value != null && Game.TrackedMonster.Value == monster)
-        {
-            base.Game.SingletonRepository.FlaggedActions.Get(nameof(FlaggedActions.RedrawMonsterHealthFlaggedAction)).Set();
         }
         if (monster.FearLevel != 0)
         {

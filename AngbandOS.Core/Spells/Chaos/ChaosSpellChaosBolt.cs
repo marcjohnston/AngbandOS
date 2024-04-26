@@ -17,5 +17,5 @@ internal class ChaosSpellChaosBolt : Spell
 
     public override string Name => "Chaos Bolt";
 
-    protected override string LearnedDetails => $"dam {10 + ((Game.ExperienceLevel.Value - 5) / 4)}d8";
+    protected override string LearnedDetails => $"dam {10 + ((Game.ExperienceLevel.IntValue - 5) / 4)}d8";
 }

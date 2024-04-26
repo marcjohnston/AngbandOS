@@ -30,7 +30,7 @@ internal class WeirdMindRandomMutation : Mutation
         else
         {
             Game.MsgPrint("Your mind expands!");
-            Game.TelepathyTimer.SetTimer(Game.ExperienceLevel.Value);
+            Game.TelepathyTimer.SetTimer(Game.ExperienceLevel.IntValue);
         }
     }
 }

@@ -15,5 +15,5 @@ internal class SorcerySpellTelekinesis : Spell
 
     public override string Name => "Telekinesis";
 
-    protected override string LearnedDetails => $"max wgt {Game.ExperienceLevel.Value * 15 / 10}";
+    protected override string LearnedDetails => $"max wgt {Game.ExperienceLevel.IntValue * 15 / 10}";
 }

@@ -22,21 +22,21 @@ internal class DarkBoltScript : Script, IScript
         switch (Game.BaseCharacterClass.ID)
         {
             case CharacterClass.Mage:
-                beam = Game.ExperienceLevel.Value;
+                beam = Game.ExperienceLevel.IntValue;
                 break;
 
             case CharacterClass.HighMage:
-                beam = Game.ExperienceLevel.Value + 10;
+                beam = Game.ExperienceLevel.IntValue + 10;
                 break;
 
             default:
-                beam = Game.ExperienceLevel.Value / 2;
+                beam = Game.ExperienceLevel.IntValue / 2;
                 break;
         }
         if (!Game.GetDirectionWithAim(out int dir))
         {
             return;
         }
-        Game.FireBoltOrBeam(beam, Game.SingletonRepository.Projectiles.Get(nameof(DarkProjectile)), dir, Game.DiceRoll(4 + ((Game.ExperienceLevel.Value - 5) / 4), 8));
+        Game.FireBoltOrBeam(beam, Game.SingletonRepository.Projectiles.Get(nameof(DarkProjectile)), dir, Game.DiceRoll(4 + ((Game.ExperienceLevel.IntValue - 5) / 4), 8));
     }
 }

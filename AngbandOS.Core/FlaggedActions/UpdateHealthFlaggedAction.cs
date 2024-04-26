@@ -14,10 +14,10 @@ internal class UpdateHealthFlaggedAction : FlaggedAction
     protected override void Execute()
     {
         int bonus = Game.AbilityScores[Ability.Constitution].ConHealthBonus;
-        int mhp = Game.PlayerHp[Game.ExperienceLevel.Value - 1] + (bonus * Game.ExperienceLevel.Value / 2);
-        if (mhp < Game.ExperienceLevel.Value + 1)
+        int mhp = Game.PlayerHp[Game.ExperienceLevel.IntValue - 1] + (bonus * Game.ExperienceLevel.IntValue / 2);
+        if (mhp < Game.ExperienceLevel.IntValue + 1)
         {
-            mhp = Game.ExperienceLevel.Value + 1;
+            mhp = Game.ExperienceLevel.IntValue + 1;
         }
         if (Game.HeroismTimer.Value != 0)
         {
@@ -30,14 +30,14 @@ internal class UpdateHealthFlaggedAction : FlaggedAction
         var mult = Game.SingletonRepository.Gods.Get(nameof(NathHorthahGod)).AdjustedFavour + 10;
         mhp *= mult;
         mhp /= 10;
-        if (Game.MaxHealth.Value != mhp)
+        if (Game.MaxHealth.IntValue != mhp)
         {
-            if (Game.Health.Value >= mhp)
+            if (Game.Health.IntValue >= mhp)
             {
-                Game.Health.Value = mhp;
+                Game.Health.IntValue = mhp;
                 Game.FractionalHealth = 0;
             }
-            Game.MaxHealth.Value = mhp;
+            Game.MaxHealth.IntValue = mhp;
         }
     }
 }

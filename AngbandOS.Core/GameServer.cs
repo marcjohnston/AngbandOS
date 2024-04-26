@@ -36,7 +36,7 @@ public class GameServer
             }
             else
             {
-                return Game.ExperienceLevel.Value;
+                return Game.ExperienceLevel.IntValue;
             }
         }
     }
@@ -55,7 +55,7 @@ public class GameServer
             }
             else
             {
-                return Game.Gold.Value;
+                return Game.Gold.IntValue;
             }
         }
     }

@@ -30,7 +30,7 @@ internal class DestructionStaffItemFactory : StaffItemFactory
     public override int Weight => 50;
     public override void UseStaff(UseStaffEvent eventArgs)
     {
-        Game.DestroyArea(Game.MapY.Value, Game.MapX.Value, 15);
+        Game.DestroyArea(Game.MapY.IntValue, Game.MapX.IntValue, 15);
         eventArgs.Identified = true;
     }
     public override Item CreateItem() => new Item(Game, this);

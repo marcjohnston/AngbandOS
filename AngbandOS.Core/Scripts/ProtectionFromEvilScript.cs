@@ -18,6 +18,6 @@ internal class ProtectionFromEvilScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        Game.ProtectionFromEvilTimer.AddTimer(Game.DieRoll(25) + (3 * Game.ExperienceLevel.Value));
+        Game.ProtectionFromEvilTimer.AddTimer(Game.DieRoll(25) + (3 * Game.ExperienceLevel.IntValue));
     }
 }

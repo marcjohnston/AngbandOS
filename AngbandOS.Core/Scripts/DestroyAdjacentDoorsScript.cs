@@ -29,7 +29,7 @@ internal class DestroyAdjacentDoorsScript : Script, IScript, ISuccessfulScript, 
     public bool ExecuteSuccessfulScript()
     {
         ProjectionFlag flg = ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectHide;
-        return Game.Project(0, 1, Game.MapY.Value, Game.MapX.Value, 0, Game.SingletonRepository.Projectiles.Get(nameof(KillDoorProjectile)), flg);
+        return Game.Project(0, 1, Game.MapY.IntValue, Game.MapX.IntValue, 0, Game.SingletonRepository.Projectiles.Get(nameof(KillDoorProjectile)), flg);
     }
 
     /// <summary>

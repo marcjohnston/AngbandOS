@@ -25,7 +25,7 @@ internal class SummonUndeadScrollItemFactory : ScrollItemFactory
     {
         for (int i = 0; i < Game.DieRoll(3); i++)
         {
-            if (Game.SummonSpecific(Game.MapY.Value, Game.MapX.Value, Game.Difficulty, Game.SingletonRepository.MonsterFilters.Get(nameof(UndeadMonsterFilter))))
+            if (Game.SummonSpecific(Game.MapY.IntValue, Game.MapX.IntValue, Game.Difficulty, Game.SingletonRepository.MonsterFilters.Get(nameof(UndeadMonsterFilter))))
             {
                 eventArgs.Identified = true;
             }

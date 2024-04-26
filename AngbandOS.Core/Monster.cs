@@ -19,7 +19,30 @@ internal class Monster : IItemContainer
 
     public int Energy;
 
-    public int FearLevel;
+    /// <summary>
+    /// Returns the remaining health points for the monster.  A negative value (<0) means the monster is dead.
+    /// </summary>
+    private int _fearLevel;
+
+    /// <summary>
+    /// Returns the remaining health points for the monster.  A negative (<0) value means the monster is dead.  This property add change tracking when set to update the <see cref="Game.TrackedMonsterChanged"/> change tracking
+    /// property, when the tracked monster health changes.
+    /// </summary>
+    public int FearLevel
+    {
+        get
+        {
+            return _fearLevel;
+        }
+        set
+        {
+            _fearLevel = value;
+            if (Game.TrackedMonster.NullMonsterValue == this)
+            {
+                Game.TrackedMonsterChanged.SetChangedFlag();
+            }
+        }
+    }
 
     public List<Item> Items = new List<Item>();
 
@@ -27,18 +50,117 @@ internal class Monster : IItemContainer
     /// Returns 0, if the monster is not a clone; or one plus the parent generation, when the monster is a clone.
     /// </summary>
     public int Generation;
-    public int Health;
+
+    /// <summary>
+    /// Returns the remaining health points for the monster.  A negative value (<0) means the monster is dead.
+    /// </summary>
+    private int _health;
+
+    /// <summary>
+    /// Returns the remaining health points for the monster.  A negative (<0) value means the monster is dead.  This property add change tracking when set to update the <see cref="Game.TrackedMonsterChanged"/> change tracking
+    /// property, when the tracked monster health changes.
+    /// </summary>
+    public int Health
+    {
+        get
+        {
+            return _health;
+        }
+        set
+        {
+            _health = value;
+            if (Game.TrackedMonster.NullMonsterValue == this)
+            {
+                Game.TrackedMonsterChanged.SetChangedFlag();
+            }
+        }
+    }
+
     public int IndividualMonsterFlags;
-    public bool IsVisible;
+
+    /// <summary>
+    /// Returns true, if the monster is visible; false, otherwise.
+    /// </summary>
+    private bool _isVisible;
+
+    /// <summary>
+    /// Returns true, if the monster is visible; false, otherwise.  This property add change tracking when set to update the <see cref="Game.TrackedMonsterChanged"/> change tracking
+    /// property, when the tracked monster visibility changes.
+    /// </summary>
+    public bool IsVisible
+    {
+        get
+        {
+            return _isVisible;
+        }
+        set
+        {
+            _isVisible = value;
+            if (Game.TrackedMonster.NullMonsterValue == this)
+            {
+                Game.TrackedMonsterChanged.SetChangedFlag();
+            }
+        }
+    }
+
     public int MapX;
     public int MapY;
-    public int MaxHealth;
+
+    /// <summary>
+    /// Returns the maximum health points for the monster.
+    /// </summary>
+    private int _maxHealth;
+
+    /// <summary>
+    /// Returns the maximum health points for the monster.  This property add change tracking when set to update the <see cref="Game.TrackedMonsterChanged"/> change tracking
+    /// property, when the tracked monster health changes.
+    /// </summary>
+    public int MaxHealth
+    {
+        get
+        {
+            return _maxHealth;
+        }
+        set
+        {
+            _maxHealth = value;
+            if (Game.TrackedMonster.NullMonsterValue == this)
+            {
+                Game.TrackedMonsterChanged.SetChangedFlag();
+            }
+        }
+    }
 
     /// <summary>
     /// Returns true, if the monster is a clone via the MultiplyMonster.
     /// </summary>
     public bool SmCloned = false;
-    public bool SmFriendly = false;
+
+    /// <summary>
+    /// Returns the true, if the monster is friendly; false, otherwise.
+    /// </summary>
+    private bool _smFriendly;
+
+    /// <summary>
+    /// Returns the true, if the monster is friendly; false, otherwise.  This property add change tracking when set to update the <see cref="Game.TrackedMonsterChanged"/> change tracking
+    /// property, when the tracked monster health changes.
+    /// </summary>
+    public bool SmFriendly
+    {
+        get
+        {
+            return _smFriendly;
+        }
+        set
+        {
+            _smFriendly = value;
+            if (Game.TrackedMonster.NullMonsterValue == this)
+            {
+                Game.TrackedMonsterChanged.SetChangedFlag();
+            }
+        }
+    }
+
     public bool SmImmAcid = false;
     public bool SmImmCold = false;
     public bool SmImmElec = false;
@@ -73,9 +195,29 @@ internal class Monster : IItemContainer
     public MonsterRace Race;
 
     /// <summary>
-    /// How deeply the monster is sleeping
+    /// Returns the how deep a monster is sleeping.
     /// </summary>
-    public int SleepLevel;
+    private int _sleepLevel;
+
+    /// <summary>
+    /// Returns the how deep a monster is sleeping.  This property add change tracking when set to update the <see cref="Game.TrackedMonsterChanged"/> change tracking
+    /// property, when the tracked monster health changes.
+    /// </summary>
+    public int SleepLevel
+    {
+        get
+        {
+            return _sleepLevel;
+        }
+        set
+        {
+            _sleepLevel = value;
+            if (Game.TrackedMonster.NullMonsterValue == this)
+            {
+                Game.TrackedMonsterChanged.SetChangedFlag();
+            }
+        }
+    }
 
     public int Speed;
     public int StolenGold;
@@ -442,7 +584,7 @@ internal class Monster : IItemContainer
             Race.Knowledge.Characteristics.EldritchHorror = true;
 
             // Allow the race to resist.
-            if (Game.DieRoll(100) < Game.Race.ChanceOfSanityBlastImmunity(Game.ExperienceLevel.Value))
+            if (Game.DieRoll(100) < Game.Race.ChanceOfSanityBlastImmunity(Game.ExperienceLevel.IntValue))
             {
                 return;
             }
@@ -840,7 +982,7 @@ internal class Monster : IItemContainer
                 doMove = true;
             }
             // We can always attack the player, even if the move would otherwse not be allowed
-            else if (newY == Game.MapY.Value && newX == Game.MapX.Value)
+            else if (newY == Game.MapY.IntValue && newX == Game.MapX.IntValue)
             {
                 doMove = true;
             }
@@ -966,10 +1108,10 @@ internal class Monster : IItemContainer
                     if (tile.PlayerMemorized)
                     {
                         // If the player was on the sign, hurt them
-                        if (newY == Game.MapY.Value && newX == Game.MapX.Value)
+                        if (newY == Game.MapY.IntValue && newX == Game.MapX.IntValue)
                         {
                             Game.MsgPrint("The rune explodes!");
-                            Game.FireBall(Game.SingletonRepository.Projectiles.Get(nameof(ManaProjectile)), 0, 2 * ((Game.ExperienceLevel.Value / 2) + Game.DiceRoll(7, 7)), 2);
+                            Game.FireBall(Game.SingletonRepository.Projectiles.Get(nameof(ManaProjectile)), 0, 2 * ((Game.ExperienceLevel.IntValue / 2) + Game.DiceRoll(7, 7)), 2);
                         }
                         else
                         {
@@ -983,12 +1125,12 @@ internal class Monster : IItemContainer
                 }
             }
             // If we're going to attack the player, but our race never attacks, then cancel the move
-            if (doMove && newY == Game.MapY.Value && newX == Game.MapX.Value && Race.NeverAttack)
+            if (doMove && newY == Game.MapY.IntValue && newX == Game.MapX.IntValue && Race.NeverAttack)
             {
                 doMove = false;
             }
             // If we're trying to move onto the player, then attack them instead
-            if (doMove && newY == Game.MapY.Value && newX == Game.MapX.Value)
+            if (doMove && newY == Game.MapY.IntValue && newX == Game.MapX.IntValue)
             {
                 MonsterAttackPlayer();
                 doMove = false;
@@ -1434,7 +1576,7 @@ internal class Monster : IItemContainer
         }
 
         // If we have no line of sight to the player, don't cast a spell
-        if (!Game.Projectable(MapY, MapX, Game.MapY.Value, Game.MapX.Value))
+        if (!Game.Projectable(MapY, MapX, Game.MapY.IntValue, Game.MapX.IntValue))
         {
             return false;
         }
@@ -1473,14 +1615,14 @@ internal class Monster : IItemContainer
         }
 
         // If we don't have a clean shot, and we're stupid, remove bolt spells
-        if (spells.Contains((_spell) => _spell.CanBeReflected) && !Race.Stupid && !Game.CleanShot(MapY, MapX, Game.MapY.Value, Game.MapX.Value))
+        if (spells.Contains((_spell) => _spell.CanBeReflected) && !Race.Stupid && !Game.CleanShot(MapY, MapX, Game.MapY.IntValue, Game.MapX.IntValue))
         {
             spells = spells.Remove((_spell) => _spell.CanBeReflected);
         }
 
         // If there's nowhere around the player to put a summoned creature, then remove
         // summoning spells
-        if (spells.Contains((_spell) => _spell.SummonsHelp) && !Race.Stupid && !Game.SummonPossible(Game.MapY.Value, Game.MapX.Value))
+        if (spells.Contains((_spell) => _spell.SummonsHelp) && !Race.Stupid && !Game.SummonPossible(Game.MapY.IntValue, Game.MapX.IntValue))
         {
             spells = spells.Remove((_spell) => _spell.SummonsHelp);
         }
@@ -1760,7 +1902,7 @@ internal class Monster : IItemContainer
         {
             radius = Race.Powerful ? 3 : 2;
         }
-        Game.Project(GetMonsterIndex(), radius, Game.MapY.Value, Game.MapX.Value, damage, projectile, projectionFlag);
+        Game.Project(GetMonsterIndex(), radius, Game.MapY.IntValue, Game.MapX.IntValue, damage, projectile, projectionFlag);
     }
 
     /// <summary>
@@ -1782,7 +1924,7 @@ internal class Monster : IItemContainer
         }
         // Make the radius negative to indicate we need a cone instead of a ball
         radius = 0 - radius;
-        Game.Project(GetMonsterIndex(), radius, Game.MapY.Value, Game.MapX.Value, damage, projectile, projectionFlags);
+        Game.Project(GetMonsterIndex(), radius, Game.MapY.IntValue, Game.MapX.IntValue, damage, projectile, projectionFlags);
     }
 
     /// <summary>
@@ -1809,11 +1951,6 @@ internal class Monster : IItemContainer
     public void TakeDamageFromAnotherMonster(int damage, out bool fear, string note)
     {
         fear = false;
-        // Track the monster that has just taken damage
-        if (Game.TrackedMonster.Value != null && Game.TrackedMonster.Value == this)
-        {
-            Game.SingletonRepository.FlaggedActions.Get(nameof(RedrawMonsterHealthFlaggedAction)).Set();
-        }
         SleepLevel = 0;
         // Take the damage
         Health -= damage;
@@ -1894,7 +2031,7 @@ internal class Monster : IItemContainer
     public void FireBoltAtPlayer(Projectile projectile, int damage)
     {
         const ProjectionFlag projectionFlags = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;
-        Game.Project(GetMonsterIndex(), 0, Game.MapY.Value, Game.MapX.Value, damage, projectile, projectionFlags);
+        Game.Project(GetMonsterIndex(), 0, Game.MapY.IntValue, Game.MapX.IntValue, damage, projectile, projectionFlags);
     }
 
     /// <summary>
@@ -2156,7 +2293,7 @@ internal class Monster : IItemContainer
         int moveVal = 0;
         bool done = false;
         // Default to moving towards the player's exact location
-        GridCoordinate targetLocation = new GridCoordinate(Game.MapX.Value, Game.MapY.Value);
+        GridCoordinate targetLocation = new GridCoordinate(Game.MapX.IntValue, Game.MapY.IntValue);
         // Adjust our target based on the player's scent if we can't move in a straight line to them
         TrackPlayerByScent(targetLocation);
         // Get the relative move needed to reach our target location
@@ -2171,14 +2308,14 @@ internal class Monster : IItemContainer
                 // Check if the player is in a room by counting the room tiles around them
                 for (int i = 0; i < 8; i++)
                 {
-                    if (Game.Map.Grid[Game.MapY.Value + Game.OrderedDirectionYOffset[i]][Game.MapX.Value + Game.OrderedDirectionXOffset[i]].InRoom)
+                    if (Game.Map.Grid[Game.MapY.IntValue + Game.OrderedDirectionYOffset[i]][Game.MapX.IntValue + Game.OrderedDirectionXOffset[i]].InRoom)
                     {
                         room++;
                     }
                 }
                 // If the player isn't in a room and they're healthy, wait to ambush them rather
                 // than running headlong into the corridor after them and queueing up to get hit
-                if (room < 8 && Game.Health.Value > Game.MaxHealth.Value * 3 / 4)
+                if (room < 8 && Game.Health.IntValue > Game.MaxHealth.IntValue * 3 / 4)
                 {
                     if (FindAmbushSpot(desiredRelativeMovement))
                     {
@@ -2193,12 +2330,12 @@ internal class Monster : IItemContainer
                 for (int i = 0; i < 8; i++)
                 {
                     int monsterIndex = GetMonsterIndex();
-                    targetLocation = new GridCoordinate(Game.MapX.Value + Game.OrderedDirectionXOffset[(monsterIndex + i) & 7], Game.MapY.Value + Game.OrderedDirectionYOffset[(monsterIndex + i) & 7]);
+                    targetLocation = new GridCoordinate(Game.MapX.IntValue + Game.OrderedDirectionXOffset[(monsterIndex + i) & 7], Game.MapY.IntValue + Game.OrderedDirectionYOffset[(monsterIndex + i) & 7]);
                     // We might have got a '5' meaning stay where we are, so replace that with
                     // moving towards the player
                     if (MapY == targetLocation.Y && MapX == targetLocation.X)
                     {
-                        targetLocation = new GridCoordinate(Game.MapX.Value, Game.MapY.Value);
+                        targetLocation = new GridCoordinate(Game.MapX.IntValue, Game.MapY.IntValue);
                         break;
                     }
                     // Repeat till we get a direction we can move in
@@ -2431,7 +2568,7 @@ internal class Monster : IItemContainer
         int dY = monsterY - coord.Y;
         int dX = monsterX - coord.X;
         // If the scent too strong, keep going where we were going
-        if (Game.Map.Grid[monsterY][monsterX].ScentAge < Game.Map.Grid[Game.MapY.Value][Game.MapX.Value].ScentAge)
+        if (Game.Map.Grid[monsterY][monsterX].ScentAge < Game.Map.Grid[Game.MapY.IntValue][Game.MapX.IntValue].ScentAge)
         {
             return;
         }
@@ -2506,7 +2643,7 @@ internal class Monster : IItemContainer
         int x1 = MapX;
         GridTile cPtr = Game.Map.Grid[y1][x1];
         // If we have no scent of the player then don't change where we were going
-        if (cPtr.ScentAge < Game.Map.Grid[Game.MapY.Value][Game.MapX.Value].ScentAge)
+        if (cPtr.ScentAge < Game.Map.Grid[Game.MapY.IntValue][Game.MapX.IntValue].ScentAge)
         {
             if (cPtr.ScentAge == 0)
             {
@@ -2548,7 +2685,7 @@ internal class Monster : IItemContainer
             when = Game.Map.Grid[y][x].ScentAge;
             cost = Game.Map.Grid[y][x].ScentStrength;
             // Give us a target in the general direction of the strongest scent
-            target = new GridCoordinate(Game.MapX.Value + (16 * Game.OrderedDirectionXOffset[i]), Game.MapY.Value + (16 * Game.OrderedDirectionYOffset[i]));
+            target = new GridCoordinate(Game.MapX.IntValue + (16 * Game.OrderedDirectionXOffset[i]), Game.MapY.IntValue + (16 * Game.OrderedDirectionYOffset[i]));
         }
     }
 
@@ -2567,7 +2704,7 @@ internal class Monster : IItemContainer
         int hidingSpotY = 0;
         int hidingSpotX = 0;
         int shortestDistance = 999;
-        int tooCloseToPlayer = (Game.Distance(Game.MapY.Value, Game.MapX.Value, fy, fx) * 3 / 4) + 2;
+        int tooCloseToPlayer = (Game.Distance(Game.MapY.IntValue, Game.MapX.IntValue, fy, fx) * 3 / 4) + 2;
         // Start with a short search radius and slowly increase
         for (int d = 1; d < 10; d++)
         {
@@ -2596,7 +2733,7 @@ internal class Monster : IItemContainer
                     {
                         // If the spot is closer to the player than any previously found spot
                         // (but not too close), remember it
-                        int dis = Game.Distance(y, x, Game.MapY.Value, Game.MapX.Value);
+                        int dis = Game.Distance(y, x, Game.MapY.IntValue, Game.MapX.IntValue);
                         if (dis < shortestDistance && dis >= tooCloseToPlayer)
                         {
                             hidingSpotY = y;
@@ -2646,7 +2783,7 @@ internal class Monster : IItemContainer
         {
             return false;
         }
-        int playerLevel = Game.ExperienceLevel.Value;
+        int playerLevel = Game.ExperienceLevel.IntValue;
         int monsterLevel = Race.Level + (GetMonsterIndex() & 0x08) + 25;
         // If we're tougher than the player, don't move away
         if (monsterLevel > playerLevel + 4)
@@ -2659,8 +2796,8 @@ internal class Monster : IItemContainer
             return true;
         }
         // If we're significantly less healthy than the player, move away
-        int playerHealth = Game.Health.Value;
-        int playerMaxHealth = Game.MaxHealth.Value;
+        int playerHealth = Game.Health.IntValue;
+        int playerMaxHealth = Game.MaxHealth.IntValue;
         int monsterHealth = Health;
         int monsterMaxHealth = MaxHealth;
         int playerHealthFactor = (playerLevel * playerMaxHealth) + (playerHealth << 2);
@@ -2739,7 +2876,7 @@ internal class Monster : IItemContainer
             {
                 Game.Disturb(true);
                 // Protection From Evil might repel the attack
-                if (Game.ProtectionFromEvilTimer.Value > 0 && Race.Evil && Game.ExperienceLevel.Value >= monsterLevel && this.Game.RandomLessThan(100) + Game.ExperienceLevel.Value > 50)
+                if (Game.ProtectionFromEvilTimer.Value > 0 && Race.Evil && Game.ExperienceLevel.IntValue >= monsterLevel && this.Game.RandomLessThan(100) + Game.ExperienceLevel.IntValue > 50)
                 {
                     if (IsVisible)
                     {
@@ -3176,7 +3313,7 @@ internal class Monster : IItemContainer
         // tactical spell
         MonsterSpellList attackSpells = spells.Where((_spell) => _spell.IsAttack);
         MonsterSpellList tacticalSpells = spells.Where((_spell) => _spell.IsTactical);
-        if (Game.Distance(Game.MapY.Value, Game.MapX.Value, MapY, MapX) < 4 && attackSpells.Count > 0 && this.Game.RandomLessThan(100) < 75)
+        if (Game.Distance(Game.MapY.IntValue, Game.MapX.IntValue, MapY, MapX) < 4 && attackSpells.Count > 0 && this.Game.RandomLessThan(100) < 75)
         {
             if (tacticalSpells.Count > 0)
             {
@@ -3267,7 +3404,7 @@ internal class Monster : IItemContainer
                         continue;
                     }
                     // Reject spots that smell too strongly of the player
-                    if (Game.Map.Grid[y][x].ScentAge < Game.Map.Grid[Game.MapY.Value][Game.MapX.Value].ScentAge)
+                    if (Game.Map.Grid[y][x].ScentAge < Game.Map.Grid[Game.MapY.IntValue][Game.MapX.IntValue].ScentAge)
                     {
                         continue;
                     }
@@ -3276,11 +3413,11 @@ internal class Monster : IItemContainer
                         continue;
                     }
                     // Make sure the spot is actually hidden
-                    if (!Game.Projectable(y, x, Game.MapY.Value, Game.MapX.Value))
+                    if (!Game.Projectable(y, x, Game.MapY.IntValue, Game.MapX.IntValue))
                     {
                         // If the spot is further from the player than any previously found
                         // spot, remember it
-                        int dis = Game.Distance(y, x, Game.MapY.Value, Game.MapX.Value);
+                        int dis = Game.Distance(y, x, Game.MapY.IntValue, Game.MapX.IntValue);
                         if (dis > longestDistance)
                         {
                             safeSpotY = y;

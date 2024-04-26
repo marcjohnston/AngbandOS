@@ -12,7 +12,7 @@ namespace AngbandOS.Core.Functions;
 internal class TrapCountFunction : IntFunction
 {
     private TrapCountFunction(Game game) : base(game) { } // This object is a singleton.
-    public override int Value => Game.CountTraps(Game.MapX.Value, Game.MapY.Value);
+    public override int Value => Game.CountTraps(Game.MapX.IntValue, Game.MapY.IntValue);
 
     public override string[]? DependencyNames => new string[]
     {

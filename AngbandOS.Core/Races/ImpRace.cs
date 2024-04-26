@@ -75,11 +75,11 @@ internal class ImpRace : Race
     public override void CalcBonuses()
     {
         Game.HasFireResistance = true;
-        if (Game.ExperienceLevel.Value > 9)
+        if (Game.ExperienceLevel.IntValue > 9)
         {
             Game.HasSeeInvisibility = true;
         }
-        if (Game.ExperienceLevel.Value > 19)
+        if (Game.ExperienceLevel.IntValue > 19)
         {
             Game.HasFireImmunity = true;
         }
@@ -92,16 +92,16 @@ internal class ImpRace : Race
         {
             if (Game.GetDirectionWithAim(out int direction))
             {
-                if (Game.ExperienceLevel.Value >= 30)
+                if (Game.ExperienceLevel.IntValue >= 30)
                 {
                     Game.MsgPrint("You cast a ball of fire.");
-                    Game.FireBall(Game.SingletonRepository.Projectiles.Get(nameof(FireProjectile)), direction, Game.ExperienceLevel.Value,
+                    Game.FireBall(Game.SingletonRepository.Projectiles.Get(nameof(FireProjectile)), direction, Game.ExperienceLevel.IntValue,
                         2);
                 }
                 else
                 {
                     Game.MsgPrint("You cast a bolt of fire.");
-                    Game.FireBolt(Game.SingletonRepository.Projectiles.Get(nameof(FireProjectile)), direction, Game.ExperienceLevel.Value);
+                    Game.FireBolt(Game.SingletonRepository.Projectiles.Get(nameof(FireProjectile)), direction, Game.ExperienceLevel.IntValue);
                 }
             }
         }

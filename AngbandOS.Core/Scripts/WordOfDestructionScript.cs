@@ -18,6 +18,6 @@ internal class WordOfDestructionScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        Game.DestroyArea(Game.MapY.Value, Game.MapX.Value, 15);
+        Game.DestroyArea(Game.MapY.IntValue, Game.MapX.IntValue, 15);
     }
 }

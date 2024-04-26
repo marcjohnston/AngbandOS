@@ -15,6 +15,7 @@ namespace AngbandOS.Core;
 internal class Game
 {
     public readonly RefreshMapProperty RefreshMap;
+    public readonly TrackedMonsterChangedProperty TrackedMonsterChanged;
     public bool IsBirthday;
     public bool IsDawn;
     public bool IsDusk;
@@ -151,7 +152,7 @@ internal class Game
 
     public int HalfLevelsOfSpellcraft()
     {
-        int levels = ExperienceLevel.Value;
+        int levels = ExperienceLevel.IntValue;
         if (BaseCharacterClass.DoesNotGainSpellLevelsUntilFirstSpellLevel && LevelOfFirstSpell != null)
         {
             levels = levels - LevelOfFirstSpell.Value + 1;
@@ -688,6 +689,7 @@ internal class Game
         PlayerName = (PlayerNameStringProperty)SingletonRepository.Properties.Get(nameof(PlayerNameStringProperty));
         CurrentGameDateTime = (CurrentGameDateTimeProperty)SingletonRepository.Properties.Get(nameof(CurrentGameDateTimeProperty));
         RefreshMap = (RefreshMapProperty)SingletonRepository.Properties.Get(nameof(RefreshMapProperty));
+        TrackedMonsterChanged = (TrackedMonsterChangedProperty)SingletonRepository.Properties.Get(nameof(TrackedMonsterChangedProperty));
         MapX = (MapXIntProperty)SingletonRepository.Properties.Get(nameof(MapXIntProperty));
         MapY = (MapYIntProperty)SingletonRepository.Properties.Get(nameof(MapYIntProperty));
         MaxExperienceGained = (MaxExperiencePointsGainedIntProperty)SingletonRepository.Properties.Get(nameof(MaxExperiencePointsGainedIntProperty));
@@ -747,7 +749,7 @@ internal class Game
     public void StorePrtGold()
     {
         Screen.PrintLine("Gold Remaining: ", 39, 53);
-        string outVal = $"{Gold.Value, 9}";
+        string outVal = $"{Gold.IntValue, 9}";
         Screen.PrintLine(outVal, 39, 68);
     }
 
@@ -1214,12 +1216,12 @@ internal class Game
         bool wallAheadRight = false;
         bool wallAheadLeft = false;
         // Get the row and column of the first step in the run
-        int row = MapY.Value + KeypadDirectionYOffset[direction];
-        int col = MapX.Value + KeypadDirectionXOffset[direction];
+        int row = MapY.IntValue + KeypadDirectionYOffset[direction];
+        int col = MapX.IntValue + KeypadDirectionXOffset[direction];
         // Get the index of our run direction in the cycle
         int cycleIndex = _cycleEntryPoint[direction];
         // If there's a wall ahead-left of us, remember that
-        if (SeeWall(_directionCycle[cycleIndex + 1], MapY.Value, MapX.Value))
+        if (SeeWall(_directionCycle[cycleIndex + 1], MapY.IntValue, MapX.IntValue))
         {
             _findBreakleft = true;
             wallAheadLeft = true;
@@ -1231,7 +1233,7 @@ internal class Game
             wallDoubleAheadLeft = true;
         }
         // If there's a wall ahead-right of us, remember that
-        if (SeeWall(_directionCycle[cycleIndex - 1], MapY.Value, MapX.Value))
+        if (SeeWall(_directionCycle[cycleIndex - 1], MapY.IntValue, MapX.IntValue))
         {
             _findBreakright = true;
             wallAheadRight = true;
@@ -1299,8 +1301,8 @@ internal class Game
         {
             // Pick up the tile 0-2 rotations from the direction we previously moved
             newDirection = _directionCycle[_cycleEntryPoint[previousDirection] + i];
-            row = MapY.Value + KeypadDirectionYOffset[newDirection];
-            col = MapX.Value + KeypadDirectionXOffset[newDirection];
+            row = MapY.IntValue + KeypadDirectionYOffset[newDirection];
+            col = MapX.IntValue + KeypadDirectionXOffset[newDirection];
             tile = Map.Grid[row][col];
             // If there's a monster there we must stop moving
             if (tile.MonsterIndex != 0)
@@ -1390,8 +1392,8 @@ internal class Game
             for (i = -searchWidth; i < 0; i++)
             {
                 newDirection = _directionCycle[_cycleEntryPoint[previousDirection] + i];
-                row = MapY.Value + KeypadDirectionYOffset[newDirection];
-                col = MapX.Value + KeypadDirectionXOffset[newDirection];
+                row = MapY.IntValue + KeypadDirectionYOffset[newDirection];
+                col = MapX.IntValue + KeypadDirectionXOffset[newDirection];
                 tile = Map.Grid[row][col];
                 if (!tile.PlayerMemorized || !tile.FeatureType.IsWall)
                 {
@@ -1412,8 +1414,8 @@ internal class Game
             for (i = searchWidth; i > 0; i--)
             {
                 newDirection = _directionCycle[_cycleEntryPoint[previousDirection] + i];
-                row = MapY.Value + KeypadDirectionYOffset[newDirection];
-                col = MapX.Value + KeypadDirectionXOffset[newDirection];
+                row = MapY.IntValue + KeypadDirectionYOffset[newDirection];
+                col = MapX.IntValue + KeypadDirectionXOffset[newDirection];
                 tile = Map.Grid[row][col];
                 if (!tile.PlayerMemorized || !tile.FeatureType.IsWall)
                 {
@@ -1448,8 +1450,8 @@ internal class Game
             // if we don't see a wall in one of our two options, take that one
             else
             {
-                row = MapY.Value + KeypadDirectionYOffset[option];
-                col = MapX.Value + KeypadDirectionXOffset[option];
+                row = MapY.IntValue + KeypadDirectionYOffset[option];
+                col = MapX.IntValue + KeypadDirectionXOffset[option];
                 if (!SeeWall(option, row, col) || !SeeWall(checkDir, row, col))
                 {
                     if (SeeNothing(option, row, col) && SeeNothing(option2, row, col))
@@ -1470,7 +1472,7 @@ internal class Game
             }
         }
         // No options, so just return whether or not we can move forward
-        return SeeWall(CurrentRunDirection, MapY.Value, MapX.Value);
+        return SeeWall(CurrentRunDirection, MapY.IntValue, MapX.IntValue);
     }
 
     /// <summary>
@@ -1750,8 +1752,8 @@ internal class Game
         GameDetails gameDetails = new GameDetails()
         {
             CharacterName = PlayerName.StringValue, // The player parameter
-            Level = ExperienceLevel.Value, // The player parameter
-            Gold = Gold.Value, // The parameter
+            Level = ExperienceLevel.IntValue, // The player parameter
+            Gold = Gold.IntValue, // The parameter
             IsAlive = !IsDead, // If the player is dead, then the game Player will be null.
             Comments = ""
         };
@@ -1825,7 +1827,7 @@ internal class Game
             rPtr.Knowledge.RPkills = 0;
         }
         SingletonRepository.MonsterRaces[SingletonRepository.MonsterRaces.Count - 1].MaxNum = 0;
-        Food.Value = Constants.PyFoodFull - 1;
+        Food.IntValue = Constants.PyFoodFull - 1;
         IsWizard.BoolValue = false;
         IsWinner.BoolValue = false;
 
@@ -1951,7 +1953,7 @@ internal class Game
         FullScreenOverlay = false;
         SetBackground(BackgroundImageEnum.Overhead);
         Playing = true;
-        if (Health.Value < 0)
+        if (Health.IntValue < 0)
         {
             IsDead = true;
         }
@@ -1982,14 +1984,14 @@ internal class Game
                 MsgPrint(null);
                 if (IsDead)
                 {
-                    ConsoleViewPort.PlayerDied(PlayerName.StringValue, DiedFrom, ExperienceLevel.Value);
+                    ConsoleViewPort.PlayerDied(PlayerName.StringValue, DiedFrom, ExperienceLevel.IntValue);
 
                     // Store the player info
-                    ExPlayer = new ExPlayer(Gender, Race, RaceAtBirth, BaseCharacterClass?.GetType().Name, PrimaryRealm, SecondaryRealm, PlayerName.StringValue, ExperienceLevel.Value, Generation);
+                    ExPlayer = new ExPlayer(Gender, Race, RaceAtBirth, BaseCharacterClass?.GetType().Name, PrimaryRealm, SecondaryRealm, PlayerName.StringValue, ExperienceLevel.IntValue, Generation);
                     break;
                 }
                 GenerateNewLevel();
-                ReplacePets(MapY.Value, MapX.Value, _petList);
+                ReplacePets(MapY.IntValue, MapX.IntValue, _petList);
             }
         }
         ConsoleViewPort.GameStopped();
@@ -2040,14 +2042,14 @@ internal class Game
                 case 8:
                 case 9:
                 case 18:
-                    SummonSpecific(MapY.Value, MapX.Value, Difficulty, null);
+                    SummonSpecific(MapY.IntValue, MapX.IntValue, Difficulty, null);
                     break;
 
                 case 10:
                 case 11:
                 case 12:
                     MsgPrint("You feel your life draining away...");
-                    LoseExperience(ExperiencePoints.Value / 16);
+                    LoseExperience(ExperiencePoints.IntValue / 16);
                     break;
 
                 case 13:
@@ -2285,7 +2287,7 @@ internal class Game
     /// <returns></returns>
     public bool SelectItem(out Item? itemIndex, string prompt, bool canChooseFromEquipment, bool canChooseFromInventory, bool canChooseFromFloor, IItemFilter? itemFilter)
     {
-        GridTile tile = Map.Grid[MapY.Value][MapX.Value];
+        GridTile tile = Map.Grid[MapY.IntValue][MapX.IntValue];
         bool allowFloor = false;
         MsgPrint(null);
         bool done = false;
@@ -2549,7 +2551,7 @@ internal class Game
     {
         foreach (Store store in CurTown.Stores)
         {
-            if (MapX.Value == store.X && MapY.Value == store.Y)
+            if (MapX.IntValue == store.X && MapY.IntValue == store.Y)
             {
                 return store;
             }
@@ -2603,7 +2605,6 @@ internal class Game
     public void HealthTrack(int? mIdx)
     {
         TrackedMonster.Value = mIdx == null ? null : Monsters[mIdx.Value];
-        SingletonRepository.FlaggedActions.Get(nameof(RedrawMonsterHealthFlaggedAction)).Set();
     }
 
     public void MonsterDeath(Monster mPtr)
@@ -3107,9 +3108,9 @@ internal class Game
         ShimmerMonsters = true;
         RepairMonsters = true;
         Disturb(true);
-        if (MaxLevelGained < ExperienceLevel.Value)
+        if (MaxLevelGained < ExperienceLevel.IntValue)
         {
-            MaxLevelGained = ExperienceLevel.Value;
+            MaxLevelGained = ExperienceLevel.IntValue;
         }
         if (CurDungeon.RecallLevel < CurrentDepth)
         {
@@ -3133,10 +3134,10 @@ internal class Game
         }
         if (CreateUpStair || CreateDownStair)
         {
-            if (CaveValidBold(MapY.Value, MapX.Value))
+            if (CaveValidBold(MapY.IntValue, MapX.IntValue))
             {
-                DeleteObject(MapY.Value, MapX.Value);
-                CaveSetFeat(MapY.Value, MapX.Value, CreateDownStair ? SingletonRepository.Tiles.Get(nameof(DownStaircaseTile)) : SingletonRepository.Tiles.Get(nameof(UpStaircaseTile)));
+                DeleteObject(MapY.IntValue, MapX.IntValue);
+                CaveSetFeat(MapY.IntValue, MapX.IntValue, CreateDownStair ? SingletonRepository.Tiles.Get(nameof(DownStaircaseTile)) : SingletonRepository.Tiles.Get(nameof(UpStaircaseTile)));
             }
             CreateDownStair = false;
             CreateUpStair = false;
@@ -3225,7 +3226,7 @@ internal class Game
             NoticeStuff();
             UpdateStuff();
             RedrawStuff();
-            MainForm.MoveCursorTo(MapY.Value, MapX.Value);
+            MainForm.MoveCursorTo(MapY.IntValue, MapX.IntValue);
             if (!Playing || IsDead || NewLevelFlag)
             {
                 break;
@@ -3236,7 +3237,7 @@ internal class Game
             NoticeStuff();
             UpdateStuff();
             RedrawStuff();
-            MainForm.MoveCursorTo(MapY.Value, MapX.Value);
+            MainForm.MoveCursorTo(MapY.IntValue, MapX.IntValue);
             if (!Playing || IsDead || NewLevelFlag)
             {
                 break;
@@ -3245,7 +3246,7 @@ internal class Game
             NoticeStuff();
             UpdateStuff();
             RedrawStuff();
-            MainForm.MoveCursorTo(MapY.Value, MapX.Value);
+            MainForm.MoveCursorTo(MapY.IntValue, MapX.IntValue);
             if (!Playing || IsDead || NewLevelFlag)
             {
                 break;
@@ -3421,9 +3422,9 @@ internal class Game
     {
         CurrentDepth = 0;
         DiedFrom = "Ripe Old Age";
-        ExperiencePoints.Value = MaxExperienceGained.Value;
-        ExperienceLevel.Value = MaxLevelGained;
-        Gold.Value += 10000000;
+        ExperiencePoints.IntValue = MaxExperienceGained.IntValue;
+        ExperienceLevel.IntValue = MaxLevelGained;
+        Gold.IntValue += 10000000;
         SetBackground(BackgroundImageEnum.Crown);
         Screen.Clear();
         AnyKey(44);
@@ -3445,12 +3446,12 @@ internal class Game
             }
             Screen.Clear();
             string buf = PlayerName.StringValue.Trim() + Generation.ToRoman(true);
-            if (IsWinner.BoolValue || ExperienceLevel.Value > Constants.PyMaxLevel)
+            if (IsWinner.BoolValue || ExperienceLevel.IntValue > Constants.PyMaxLevel)
             {
                 buf += " the Magnificent";
             }
             Screen.Print(buf, 39, 1);
-            buf = $"Level {ExperienceLevel.Value} {BaseCharacterClass.ClassSubName(PrimaryRealm)}";
+            buf = $"Level {ExperienceLevel.IntValue} {BaseCharacterClass.ClassSubName(PrimaryRealm)}";
             Screen.Print(buf, 40, 1);
             string tmp = $"Killed on Level {CurrentDepth}".PadLeft(45);
             Screen.Print(tmp, 39, 34);
@@ -3470,7 +3471,7 @@ internal class Game
             RunScript(nameof(GainMutationScript));
             GetFirstLevelMutation = false;
         }
-        Energy += Constants.ExtractEnergy[Speed.Value];
+        Energy += Constants.ExtractEnergy[Speed.IntValue];
         if (Energy < 100)
         {
             return;
@@ -3479,14 +3480,14 @@ internal class Game
         {
             if (Resting == -1)
             {
-                if (Health.Value == MaxHealth.Value && Mana.Value >= MaxMana.Value)
+                if (Health.IntValue == MaxHealth.IntValue && Mana.IntValue >= MaxMana.IntValue)
                 {
                     Disturb(false);
                 }
             }
             else if (Resting == -2)
             {
-                if (Health.Value == MaxHealth.Value && Mana.Value == MaxMana.Value && BlindnessTimer.Value == 0 &&
+                if (Health.IntValue == MaxHealth.IntValue && Mana.IntValue == MaxMana.IntValue && BlindnessTimer.Value == 0 &&
                     ConfusedTimer.Value == 0 && PoisonTimer.Value == 0 && FearTimer.Value == 0 && StunTimer.Value == 0 &&
                     BleedingTimer.Value == 0 && SlowTimer.Value == 0 && ParalysisTimer.Value == 0 && HallucinationsTimer.Value == 0 &&
                     WordOfRecallDelay == 0)
@@ -3508,7 +3509,7 @@ internal class Game
             NoticeStuff();
             UpdateStuff();
             RedrawStuff();
-            MainForm.MoveCursorTo(MapY.Value, MapX.Value);
+            MainForm.MoveCursorTo(MapY.IntValue, MapX.IntValue);
             UpdateScreen();
             const int item = InventorySlot.PackCount;
             Item? oPtr = GetInventoryItem(item);
@@ -3518,7 +3519,7 @@ internal class Game
                 MsgPrint("Your pack overflows!");
                 string oName = oPtr.Description(true, 3);
                 MsgPrint($"You drop {oName} ({item.IndexToLabel()}).");
-                DropNear(oPtr, 0, MapY.Value, MapX.Value);
+                DropNear(oPtr, 0, MapY.IntValue, MapX.IntValue);
                 InvenItemIncrease(item, -255);
                 InvenItemDescribe(item);
                 InvenItemOptimize(item);
@@ -3554,7 +3555,7 @@ internal class Game
             }
             else
             {
-                MainForm.MoveCursorTo(MapY.Value, MapX.Value);
+                MainForm.MoveCursorTo(MapY.IntValue, MapX.IntValue);
                 RequestCommand(false);
                 ProcessCommand(false);
                 CloseBatchOfMessages();
@@ -3626,18 +3627,18 @@ internal class Game
         if (IsBirthday)
         {
             MsgPrint("Happy Birthday!");
-            Acquirement(MapY.Value, MapX.Value, DieRoll(2) + 1, true);
+            Acquirement(MapY.IntValue, MapX.IntValue, DieRoll(2) + 1, true);
             Age++;
         }
         if (IsNewYear)
         {
             MsgPrint("Happy New Year!");
-            Acquirement(MapY.Value, MapX.Value, DieRoll(2) + 1, true);
+            Acquirement(MapY.IntValue, MapX.IntValue, DieRoll(2) + 1, true);
         }
         if (IsHalloween)
         {
             MsgPrint("All Hallows Eve and the ghouls come out to play...");
-            SummonSpecific(MapY.Value, MapX.Value, Difficulty, SingletonRepository.MonsterFilters.Get(nameof(UndeadMonsterFilter)));
+            SummonSpecific(MapY.IntValue, MapX.IntValue, Difficulty, SingletonRepository.MonsterFilters.Get(nameof(UndeadMonsterFilter)));
         }
         if (CurrentDepth <= 0)
         {
@@ -3730,10 +3731,10 @@ internal class Game
             caveNoRegen = true;
         }
 
-        if (!GridPassable(MapY.Value, MapX.Value))
+        if (!GridPassable(MapY.IntValue, MapX.IntValue))
         {
             caveNoRegen = true;
-            if (InvulnerabilityTimer.Value == 0 && EtherealnessTimer.Value == 0 && (Health.Value > ExperienceLevel.Value / 5 || Race.IsEthereal))
+            if (InvulnerabilityTimer.Value == 0 && EtherealnessTimer.Value == 0 && (Health.IntValue > ExperienceLevel.IntValue / 5 || Race.IsEthereal))
             {
                 string damDesc;
                 if (Race.IsEthereal)
@@ -3746,7 +3747,7 @@ internal class Game
                     MsgPrint("You are being crushed!");
                     damDesc = "solid rock";
                 }
-                TakeHit(1 + (ExperienceLevel.Value / 5), damDesc);
+                TakeHit(1 + (ExperienceLevel.IntValue / 5), damDesc);
             }
         }
         if (BleedingTimer.Value != 0 && InvulnerabilityTimer.Value == 0)
@@ -3766,11 +3767,11 @@ internal class Game
             }
             TakeHit(damage, "a fatal wound");
         }
-        if (Food.Value < Constants.PyFoodMax)
+        if (Food.IntValue < Constants.PyFoodMax)
         {
             if (IsTurnHundred)
             {
-                int additionalEnergy = Constants.ExtractEnergy[Speed.Value] * 2;
+                int additionalEnergy = Constants.ExtractEnergy[Speed.IntValue] * 2;
                 if (HasRegeneration)
                 {
                     additionalEnergy += 30;
@@ -3783,29 +3784,29 @@ internal class Game
                 {
                     additionalEnergy = 1;
                 }
-                SetFood(Food.Value - additionalEnergy);
+                SetFood(Food.IntValue - additionalEnergy);
             }
         }
         else
         {
-            SetFood(Food.Value - 100);
+            SetFood(Food.IntValue - 100);
         }
-        if (Food.Value < Constants.PyFoodStarve)
+        if (Food.IntValue < Constants.PyFoodStarve)
         {
-            int i = (Constants.PyFoodStarve - Food.Value) / 10;
+            int i = (Constants.PyFoodStarve - Food.IntValue) / 10;
             if (InvulnerabilityTimer.Value == 0)
             {
                 TakeHit(i, "starvation");
             }
         }
         int regenAmount = Constants.PyRegenNormal;
-        if (Food.Value < Constants.PyFoodWeak)
+        if (Food.IntValue < Constants.PyFoodWeak)
         {
-            if (Food.Value < Constants.PyFoodStarve)
+            if (Food.IntValue < Constants.PyFoodStarve)
             {
                 regenAmount = 0;
             }
-            else if (Food.Value < Constants.PyFoodFaint)
+            else if (Food.IntValue < Constants.PyFoodFaint)
             {
                 regenAmount = Constants.PyRegenFaint;
             }
@@ -3813,7 +3814,7 @@ internal class Game
             {
                 regenAmount = Constants.PyRegenWeak;
             }
-            if (Food.Value < Constants.PyFoodFaint)
+            if (Food.IntValue < Constants.PyFoodFaint)
             {
                 if (ParalysisTimer.Value == 0 && RandomLessThan(100) < 10)
                 {
@@ -3843,7 +3844,7 @@ internal class Game
             {
                 upkeepDivider = 12;
             }
-            if (TotalFriends > 1 + (ExperienceLevel.Value / upkeepDivider))
+            if (TotalFriends > 1 + (ExperienceLevel.IntValue / upkeepDivider))
             {
                 upkeepFactor = TotalFriendLevels;
                 if (upkeepFactor > 100)
@@ -3856,7 +3857,7 @@ internal class Game
                 }
             }
         }
-        if (Mana.Value < MaxMana.Value)
+        if (Mana.IntValue < MaxMana.IntValue)
         {
             if (upkeepFactor != 0)
             {
@@ -3880,7 +3881,7 @@ internal class Game
         {
             regenAmount = 0;
         }
-        if (Health.Value < MaxHealth.Value && !caveNoRegen)
+        if (Health.IntValue < MaxHealth.IntValue && !caveNoRegen)
         {
             RegenerateHealth(regenAmount);
         }
@@ -3921,10 +3922,10 @@ internal class Game
         SingletonRepository.FlaggedActions.Get(nameof(UpdateTorchRadiusFlaggedAction)).Set();
         if (HasExperienceDrain)
         {
-            if (RandomLessThan(100) < 10 && ExperiencePoints.Value > 0)
+            if (RandomLessThan(100) < 10 && ExperiencePoints.IntValue > 0)
             {
-                ExperiencePoints.Value--;
-                MaxExperienceGained.Value--;
+                ExperiencePoints.IntValue--;
+                MaxExperienceGained.IntValue--;
                 CheckExperience();
             }
         }
@@ -4062,7 +4063,6 @@ internal class Game
 
         SingletonRepository.FlaggedActions.Get(nameof(RedrawEquippyFlaggedAction)).Check();
         SingletonRepository.FlaggedActions.Get(nameof(RedrawStatsFlaggedAction)).Check();
-        SingletonRepository.FlaggedActions.Get(nameof(RedrawMonsterHealthFlaggedAction)).Check();
         SingletonRepository.FlaggedActions.Get(nameof(RedrawStateFlaggedAction)).Check();
         SingletonRepository.FlaggedActions.Get(nameof(RedrawSpeedFlaggedAction)).Check();
 
@@ -4099,10 +4099,6 @@ internal class Game
                 if (mPtr.Health > mPtr.MaxHealth)
                 {
                     mPtr.Health = mPtr.MaxHealth;
-                }
-                if (TrackedMonster.Value != null && TrackedMonster.Value == mPtr)
-                {
-                    SingletonRepository.FlaggedActions.Get(nameof(RedrawMonsterHealthFlaggedAction)).Set();
                 }
             }
         }
@@ -4160,70 +4156,70 @@ internal class Game
             {
                 case 1:
                 case 2:
-                    SummonSpecific(MapY.Value, MapX.Value, Difficulty, SingletonRepository.MonsterFilters.Get(nameof(AntMonsterFilter)));
+                    SummonSpecific(MapY.IntValue, MapX.IntValue, Difficulty, SingletonRepository.MonsterFilters.Get(nameof(AntMonsterFilter)));
                     break;
 
                 case 3:
                 case 4:
-                    SummonSpecific(MapY.Value, MapX.Value, Difficulty, SingletonRepository.MonsterFilters.Get(nameof(SpiderMonsterFilter)));
+                    SummonSpecific(MapY.IntValue, MapX.IntValue, Difficulty, SingletonRepository.MonsterFilters.Get(nameof(SpiderMonsterFilter)));
                     break;
 
                 case 5:
                 case 6:
-                    SummonSpecific(MapY.Value, MapX.Value, Difficulty, SingletonRepository.MonsterFilters.Get(nameof(HoundMonsterFilter)));
+                    SummonSpecific(MapY.IntValue, MapX.IntValue, Difficulty, SingletonRepository.MonsterFilters.Get(nameof(HoundMonsterFilter)));
                     break;
 
                 case 7:
                 case 8:
-                    SummonSpecific(MapY.Value, MapX.Value, Difficulty, SingletonRepository.MonsterFilters.Get(nameof(HydraMonsterFilter)));
+                    SummonSpecific(MapY.IntValue, MapX.IntValue, Difficulty, SingletonRepository.MonsterFilters.Get(nameof(HydraMonsterFilter)));
                     break;
 
                 case 9:
                 case 10:
-                    SummonSpecific(MapY.Value, MapX.Value, Difficulty, SingletonRepository.MonsterFilters.Get(nameof(CthuloidMonsterFilter)));
+                    SummonSpecific(MapY.IntValue, MapX.IntValue, Difficulty, SingletonRepository.MonsterFilters.Get(nameof(CthuloidMonsterFilter)));
                     break;
 
                 case 11:
                 case 12:
-                    SummonSpecific(MapY.Value, MapX.Value, Difficulty, SingletonRepository.MonsterFilters.Get(nameof(UndeadMonsterFilter)));
+                    SummonSpecific(MapY.IntValue, MapX.IntValue, Difficulty, SingletonRepository.MonsterFilters.Get(nameof(UndeadMonsterFilter)));
                     break;
 
                 case 13:
                 case 14:
-                    SummonSpecific(MapY.Value, MapX.Value, Difficulty, SingletonRepository.MonsterFilters.Get(nameof(DragonMonsterFilter)));
+                    SummonSpecific(MapY.IntValue, MapX.IntValue, Difficulty, SingletonRepository.MonsterFilters.Get(nameof(DragonMonsterFilter)));
                     break;
 
                 case 15:
                 case 16:
-                    SummonSpecific(MapY.Value, MapX.Value, Difficulty, SingletonRepository.MonsterFilters.Get(nameof(DemonMonsterFilter)));
+                    SummonSpecific(MapY.IntValue, MapX.IntValue, Difficulty, SingletonRepository.MonsterFilters.Get(nameof(DemonMonsterFilter)));
                     break;
 
                 case 17:
-                    SummonSpecific(MapY.Value, MapX.Value, Difficulty, SingletonRepository.MonsterFilters.Get(nameof(GooMonsterFilter)));
+                    SummonSpecific(MapY.IntValue, MapX.IntValue, Difficulty, SingletonRepository.MonsterFilters.Get(nameof(GooMonsterFilter)));
                     break;
 
                 case 18:
                 case 19:
-                    SummonSpecific(MapY.Value, MapX.Value, Difficulty, SingletonRepository.MonsterFilters.Get(nameof(UniqueMonsterFilter)));
+                    SummonSpecific(MapY.IntValue, MapX.IntValue, Difficulty, SingletonRepository.MonsterFilters.Get(nameof(UniqueMonsterFilter)));
                     break;
 
                 case 20:
                 case 21:
-                    SummonSpecific(MapY.Value, MapX.Value, Difficulty, SingletonRepository.MonsterFilters.Get(nameof(HiUndeadMonsterFilter)));
+                    SummonSpecific(MapY.IntValue, MapX.IntValue, Difficulty, SingletonRepository.MonsterFilters.Get(nameof(HiUndeadMonsterFilter)));
                     break;
 
                 case 22:
                 case 23:
-                    SummonSpecific(MapY.Value, MapX.Value, Difficulty, SingletonRepository.MonsterFilters.Get(nameof(HiDragonMonsterFilter)));
+                    SummonSpecific(MapY.IntValue, MapX.IntValue, Difficulty, SingletonRepository.MonsterFilters.Get(nameof(HiDragonMonsterFilter)));
                     break;
 
                 case 24:
                 case 25:
-                    SummonSpecific(MapY.Value, MapX.Value, 100, SingletonRepository.MonsterFilters.Get(nameof(ReaverMonsterFilter)));
+                    SummonSpecific(MapY.IntValue, MapX.IntValue, 100, SingletonRepository.MonsterFilters.Get(nameof(ReaverMonsterFilter)));
                     break;
 
                 default:
-                    SummonSpecific(MapY.Value, MapX.Value, (Difficulty * 3 / 2) + 5, null);
+                    SummonSpecific(MapY.IntValue, MapX.IntValue, (Difficulty * 3 / 2) + 5, null);
                     break;
             }
         }
@@ -4424,7 +4420,7 @@ internal class Game
                 cPtr.InRoom = false;
                 cPtr.PlayerMemorized = false;
                 cPtr.SelfLit = false;
-                if (x == MapX.Value && y == MapY.Value)
+                if (x == MapX.IntValue && y == MapY.IntValue)
                 {
                     flag = true;
                     continue;
@@ -4739,7 +4735,7 @@ internal class Game
                     continue;
                 }
                 map[16 + yy - cy][16 + xx - cx] = true;
-                if (yy == MapY.Value && xx == MapX.Value)
+                if (yy == MapY.IntValue && xx == MapX.IntValue)
                 {
                     hurt = true;
                 }
@@ -4749,8 +4745,8 @@ internal class Game
         {
             for (i = 0; i < 8; i++)
             {
-                y = MapY.Value + KeypadDirectionYOffset[i];
-                x = MapX.Value + KeypadDirectionXOffset[i];
+                y = MapY.IntValue + KeypadDirectionYOffset[i];
+                x = MapX.IntValue + KeypadDirectionXOffset[i];
                 if (!GridPassableNoCreature(y, x))
                 {
                     continue;
@@ -4815,15 +4811,15 @@ internal class Game
                             break;
                         }
                 }
-                int oy = MapY.Value;
-                int ox = MapX.Value;
-                MapY.Value = sy;
-                MapX.Value = sx;
+                int oy = MapY.IntValue;
+                int ox = MapX.IntValue;
+                MapY.IntValue = sy;
+                MapX.IntValue = sx;
                 MainForm.RefreshMapLocation(oy, ox);
-                MainForm.RefreshMapLocation(MapY.Value, MapX.Value);
+                MainForm.RefreshMapLocation(MapY.IntValue, MapX.IntValue);
                 RecenterScreenAroundPlayer();
             }
-            map[16 + MapY.Value - cy][16 + MapX.Value - cx] = false;
+            map[16 + MapY.IntValue - cy][16 + MapX.IntValue - cx] = false;
             if (damage != 0)
             {
                 TakeHit(damage, "an earthquake");
@@ -4915,7 +4911,7 @@ internal class Game
                     continue;
                 }
                 cPtr = Map.Grid[yy][xx];
-                if (yy == MapY.Value && xx == MapX.Value)
+                if (yy == MapY.IntValue && xx == MapX.IntValue)
                 {
                     continue;
                 }
@@ -4949,7 +4945,6 @@ internal class Game
         SingletonRepository.FlaggedActions.Get(nameof(UpdateLightFlaggedAction)).Set();
         SingletonRepository.FlaggedActions.Get(nameof(UpdateViewFlaggedAction)).Set();
         SingletonRepository.FlaggedActions.Get(nameof(UpdateDistancesFlaggedAction)).Set();
-        SingletonRepository.FlaggedActions.Get(nameof(RedrawMonsterHealthFlaggedAction)).Set();
         RefreshMap.SetChangedFlag(); // TODO: Needs to convert to dependencies in the MapWidget
     }
 
@@ -5171,8 +5166,8 @@ internal class Game
     public bool FireBall(Projectile projectile, int dir, int dam, int rad)
     {
         ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill;
-        int tx = MapX.Value + (99 * KeypadDirectionXOffset[dir]); // TODO: Fix the 99*
-        int ty = MapY.Value + (99 * KeypadDirectionYOffset[dir]); // TODO: Fix the 99*
+        int tx = MapX.IntValue + (99 * KeypadDirectionXOffset[dir]); // TODO: Fix the 99*
+        int ty = MapY.IntValue + (99 * KeypadDirectionYOffset[dir]); // TODO: Fix the 99*
         if (dir == 5 && TargetWho != null)
         {
             GridCoordinate? target = TargetWho.GetTargetLocation();
@@ -5242,7 +5237,7 @@ internal class Game
 
     public bool HasteMonsters()
     {
-        return ProjectAtAllInLos(SingletonRepository.Projectiles.Get(nameof(OldSpeedProjectile)), ExperienceLevel.Value);
+        return ProjectAtAllInLos(SingletonRepository.Projectiles.Get(nameof(OldSpeedProjectile)), ExperienceLevel.IntValue);
     }
 
     public bool HealMonster(int dir)
@@ -5258,8 +5253,8 @@ internal class Game
         {
             MsgPrint("You are surrounded by a white light.");
         }
-        Project(0, rad, MapY.Value, MapX.Value, dam, SingletonRepository.Projectiles.Get(nameof(LightWeakProjectile)), flg);
-        LightRoom(MapY.Value, MapX.Value);
+        Project(0, rad, MapY.IntValue, MapX.IntValue, dam, SingletonRepository.Projectiles.Get(nameof(LightWeakProjectile)), flg);
+        LightRoom(MapY.IntValue, MapX.IntValue);
         return true;
     }
 
@@ -5313,7 +5308,7 @@ internal class Game
     public bool PolyMonster(int dir)
     {
         ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;
-        return TargetedProject(SingletonRepository.Projectiles.Get(nameof(OldPolyProjectile)), dir, ExperienceLevel.Value, flg);
+        return TargetedProject(SingletonRepository.Projectiles.Get(nameof(OldPolyProjectile)), dir, ExperienceLevel.IntValue, flg);
     }
 
     public int PolymorphMonster(MonsterRace rPtr)
@@ -5454,31 +5449,31 @@ internal class Game
     public bool SleepMonster(int dir)
     {
         ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;
-        return TargetedProject(SingletonRepository.Projectiles.Get(nameof(OldSleepProjectile)), dir, ExperienceLevel.Value, flg);
+        return TargetedProject(SingletonRepository.Projectiles.Get(nameof(OldSleepProjectile)), dir, ExperienceLevel.IntValue, flg);
     }
 
     public void SleepMonstersTouch()
     {
         ProjectionFlag flg = ProjectionFlag.ProjectKill | ProjectionFlag.ProjectHide;
-        Project(0, 1, MapY.Value, MapX.Value, ExperienceLevel.Value, SingletonRepository.Projectiles.Get(nameof(OldSleepProjectile)), flg);
+        Project(0, 1, MapY.IntValue, MapX.IntValue, ExperienceLevel.IntValue, SingletonRepository.Projectiles.Get(nameof(OldSleepProjectile)), flg);
     }
 
     public bool SlowMonster(int dir)
     {
         ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;
-        return TargetedProject(SingletonRepository.Projectiles.Get(nameof(OldSlowProjectile)), dir, ExperienceLevel.Value, flg);
+        return TargetedProject(SingletonRepository.Projectiles.Get(nameof(OldSlowProjectile)), dir, ExperienceLevel.IntValue, flg);
     }
 
     public bool SpeedMonster(int dir)
     {
         ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;
-        return TargetedProject(SingletonRepository.Projectiles.Get(nameof(OldSpeedProjectile)), dir, ExperienceLevel.Value, flg);
+        return TargetedProject(SingletonRepository.Projectiles.Get(nameof(OldSpeedProjectile)), dir, ExperienceLevel.IntValue, flg);
     }
 
     public void StasisMonster(int dir)
     {
         ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;
-        TargetedProject(SingletonRepository.Projectiles.Get(nameof(StasisProjectile)), dir, ExperienceLevel.Value, flg);
+        TargetedProject(SingletonRepository.Projectiles.Get(nameof(StasisProjectile)), dir, ExperienceLevel.IntValue, flg);
     }
 
     public void StasisMonsters(int dam)
@@ -5502,7 +5497,7 @@ internal class Game
         int maxReaver = (Difficulty / 50) + DieRoll(6);
         for (int i = 0; i < maxReaver; i++)
         {
-            SummonSpecific(MapY.Value, MapX.Value, 100, SingletonRepository.MonsterFilters.Get(nameof(ReaverMonsterFilter)));
+            SummonSpecific(MapY.IntValue, MapX.IntValue, 100, SingletonRepository.MonsterFilters.Get(nameof(ReaverMonsterFilter)));
         }
     }
 
@@ -5542,12 +5537,12 @@ internal class Game
             }
         }
         PlaySound(SoundEffectEnum.Teleport);
-        int oy = MapY.Value;
-        int ox = MapX.Value;
-        MapY.Value = y;
-        MapX.Value = x;
+        int oy = MapY.IntValue;
+        int ox = MapX.IntValue;
+        MapY.IntValue = y;
+        MapX.IntValue = x;
         MainForm.RefreshMapLocation(oy, ox);
-        MainForm.RefreshMapLocation(MapY.Value, MapX.Value);
+        MainForm.RefreshMapLocation(MapY.IntValue, MapX.IntValue);
         RecenterScreenAroundPlayer();
         SingletonRepository.FlaggedActions.Get(nameof(UpdateScentFlaggedAction)).Set();
         SingletonRepository.FlaggedActions.Get(nameof(UpdateLightFlaggedAction)).Set();
@@ -5559,8 +5554,8 @@ internal class Game
     public void TeleportSwap(int dir)
     {
         int tx, ty;
-        tx = MapX.Value + KeypadDirectionXOffset[dir];
-        ty = MapY.Value + KeypadDirectionYOffset[dir];
+        tx = MapX.IntValue + KeypadDirectionXOffset[dir];
+        ty = MapY.IntValue + KeypadDirectionYOffset[dir];
 
         if (dir == 5 && TargetWho != null)
         {
@@ -5588,17 +5583,17 @@ internal class Game
             else
             {
                 PlaySound(SoundEffectEnum.Teleport);
-                Map.Grid[MapY.Value][MapX.Value].MonsterIndex = cPtr.MonsterIndex;
+                Map.Grid[MapY.IntValue][MapX.IntValue].MonsterIndex = cPtr.MonsterIndex;
                 cPtr.MonsterIndex = 0;
-                mPtr.MapY = MapY.Value;
-                mPtr.MapX = MapX.Value;
-                MapX.Value = tx;
-                MapY.Value = ty;
+                mPtr.MapY = MapY.IntValue;
+                mPtr.MapX = MapX.IntValue;
+                MapX.IntValue = tx;
+                MapY.IntValue = ty;
                 tx = mPtr.MapX;
                 ty = mPtr.MapY;
                 UpdateMonsterVisibility(Map.Grid[ty][tx].MonsterIndex, true);
                 MainForm.RefreshMapLocation(ty, tx);
-                MainForm.RefreshMapLocation(MapY.Value, MapX.Value);
+                MainForm.RefreshMapLocation(MapY.IntValue, MapX.IntValue);
                 RecenterScreenAroundPlayer();
                 SingletonRepository.FlaggedActions.Get(nameof(UpdateScentFlaggedAction)).Set();
                 SingletonRepository.FlaggedActions.Get(nameof(UpdateLightFlaggedAction)).Set();
@@ -5612,7 +5607,7 @@ internal class Game
     public bool TrapCreation()
     {
         ProjectionFlag flg = ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectHide;
-        return Project(0, 1, MapY.Value, MapX.Value, 0, SingletonRepository.Projectiles.Get(nameof(MakeTrapProjectile)), flg);
+        return Project(0, 1, MapY.IntValue, MapX.IntValue, 0, SingletonRepository.Projectiles.Get(nameof(MakeTrapProjectile)), flg);
     }
 
     public void TurnEvil(int dam)
@@ -5632,8 +5627,8 @@ internal class Game
         {
             MsgPrint("Darkness surrounds you.");
         }
-        Project(0, rad, MapY.Value, MapX.Value, dam, SingletonRepository.Projectiles.Get(nameof(DarkWeakProjectile)), flg);
-        UnlightRoom(MapY.Value, MapX.Value);
+        Project(0, rad, MapY.IntValue, MapX.IntValue, dam, SingletonRepository.Projectiles.Get(nameof(DarkWeakProjectile)), flg);
+        UnlightRoom(MapY.IntValue, MapX.IntValue);
         return true;
     }
 
@@ -5663,7 +5658,7 @@ internal class Game
     public void WallBreaker()
     {
         int dummy;
-        if (DieRoll(80 + ExperienceLevel.Value) < 70)
+        if (DieRoll(80 + ExperienceLevel.IntValue) < 70)
         {
             do
             {
@@ -5673,7 +5668,7 @@ internal class Game
         }
         else if (DieRoll(100) > 30)
         {
-            Earthquake(MapY.Value, MapX.Value, 1);
+            Earthquake(MapY.IntValue, MapX.IntValue, 1);
         }
         else
         {
@@ -5959,8 +5954,8 @@ internal class Game
     public bool TargetedProject(Projectile projectile, int dir, int dam, ProjectionFlag flg)
     {
         flg |= ProjectionFlag.ProjectThru;
-        int tx = MapX.Value + KeypadDirectionXOffset[dir];
-        int ty = MapY.Value + KeypadDirectionYOffset[dir];
+        int tx = MapX.IntValue + KeypadDirectionXOffset[dir];
+        int ty = MapY.IntValue + KeypadDirectionYOffset[dir];
         if (dir == 5 && TargetWho != null)
         {
             GridCoordinate? target = TargetWho.GetTargetLocation();
@@ -6049,7 +6044,7 @@ internal class Game
             SingletonRepository.FlaggedActions.Get(nameof(UpdateViewFlaggedAction)).Set();
             SingletonRepository.FlaggedActions.Get(nameof(UpdateDistancesFlaggedAction)).Set();
         }
-        else if (RandomLessThan(100) < AbilityScores[Ability.Dexterity].DexTheftAvoidance + ExperienceLevel.Value)
+        else if (RandomLessThan(100) < AbilityScores[Ability.Dexterity].DexTheftAvoidance + ExperienceLevel.IntValue)
         {
             MsgPrint("The door holds firm.");
             more = true;
@@ -6073,9 +6068,9 @@ internal class Game
     public bool CheckIfRacialPowerWorks(int minLevel, int cost, int useStat, int difficulty)
     {
         // If we don't have enough mana we'll use health instead
-        bool useHealth = Mana.Value < cost;
+        bool useHealth = Mana.IntValue < cost;
         // Can't use it if we're too low level
-        if (ExperienceLevel.Value < minLevel)
+        if (ExperienceLevel.IntValue < minLevel)
         {
             MsgPrint($"You need to attain level {minLevel} to use this power.");
             EnergyUse = 0;
@@ -6089,7 +6084,7 @@ internal class Game
             return false;
         }
         // If we're about to kill ourselves, give us chance to back out
-        if (useHealth && Health.Value < cost)
+        if (useHealth && Health.IntValue < cost)
         {
             if (!GetCheck("Really use the power in your weakened state? "))
             {
@@ -6103,9 +6098,9 @@ internal class Game
             difficulty += StunTimer.Value;
         }
         // Easier to use powers if you're higher level than you need to be
-        else if (ExperienceLevel.Value > minLevel)
+        else if (ExperienceLevel.IntValue > minLevel)
         {
-            int levAdj = (ExperienceLevel.Value - minLevel) / 3;
+            int levAdj = (ExperienceLevel.IntValue - minLevel) / 3;
             if (levAdj > 10)
             {
                 levAdj = 10;
@@ -6126,7 +6121,7 @@ internal class Game
         }
         else
         {
-            Mana.Value -= (cost / 2) + DieRoll(cost / 2);
+            Mana.IntValue -= (cost / 2) + DieRoll(cost / 2);
         }
 
         // Check to see if we were successful
@@ -6178,8 +6173,8 @@ internal class Game
         mapCoordinate = null;
         for (int orderedDirection = 0; orderedDirection < 9; orderedDirection++)
         {
-            int yy = MapY.Value + OrderedDirectionYOffset[orderedDirection];
-            int xx = MapX.Value + OrderedDirectionXOffset[orderedDirection];
+            int yy = MapY.IntValue + OrderedDirectionYOffset[orderedDirection];
+            int xx = MapX.IntValue + OrderedDirectionXOffset[orderedDirection];
             // Get the index of first item in the tile that is a chest
             Item? chestItem = ChestCheck(yy, xx);
             if (chestItem == null)
@@ -6216,8 +6211,8 @@ internal class Game
         mapCoordinate = null;
         for (int orderedDirection = 0; orderedDirection < 9; orderedDirection++)
         {
-            int yy = MapY.Value + OrderedDirectionYOffset[orderedDirection];
-            int xx = MapX.Value + OrderedDirectionXOffset[orderedDirection];
+            int yy = MapY.IntValue + OrderedDirectionYOffset[orderedDirection];
+            int xx = MapX.IntValue + OrderedDirectionXOffset[orderedDirection];
             // We need to be aware of the door
             if (!Map.Grid[yy][xx].PlayerMemorized)
             {
@@ -6254,8 +6249,8 @@ internal class Game
         mapCoordinate = null;
         for (int orderedDirection = 0; orderedDirection < 9; orderedDirection++)
         {
-            int yy = MapY.Value + OrderedDirectionYOffset[orderedDirection];
-            int xx = MapX.Value + OrderedDirectionXOffset[orderedDirection];
+            int yy = MapY.IntValue + OrderedDirectionYOffset[orderedDirection];
+            int xx = MapX.IntValue + OrderedDirectionXOffset[orderedDirection];
             // We need to be aware of the trap
             if (!Map.Grid[yy][xx].PlayerMemorized)
             {
@@ -6287,8 +6282,8 @@ internal class Game
         mapCoordinate = null;
         for (int orderedDirection = 0; orderedDirection < 9; orderedDirection++)
         {
-            int yy = MapY.Value + OrderedDirectionYOffset[orderedDirection];
-            int xx = MapX.Value + OrderedDirectionXOffset[orderedDirection];
+            int yy = MapY.IntValue + OrderedDirectionYOffset[orderedDirection];
+            int xx = MapX.IntValue + OrderedDirectionXOffset[orderedDirection];
             // We must be aware of the door
             if (!Map.Grid[yy][xx].PlayerMemorized)
             {
@@ -6560,15 +6555,15 @@ internal class Game
             cost = 1;
         }
         // Spend the mana if we can
-        if (cost <= Mana.Value)
+        if (cost <= Mana.IntValue)
         {
             MsgPrint("You channel mana to power the effect.");
-            Mana.Value -= cost;
+            Mana.IntValue -= cost;
             return true;
         }
         // Use some mana in the attempt, even if we failed
         MsgPrint("You mana is insufficient to power the effect.");
-        Mana.Value -= RandomLessThan(Mana.Value / 2);
+        Mana.IntValue -= RandomLessThan(Mana.IntValue / 2);
         return false;
     }
 
@@ -6632,8 +6627,8 @@ internal class Game
     /// <param name="dontPickup"> Whether or not to skip picking up any objects we step on </param>
     public void MovePlayer(int direction, bool dontPickup)
     {
-        int newY = MapY.Value + KeypadDirectionYOffset[direction];
-        int newX = MapX.Value + KeypadDirectionXOffset[direction];
+        int newY = MapY.IntValue + KeypadDirectionYOffset[direction];
+        int newX = MapX.IntValue + KeypadDirectionXOffset[direction];
         MovePlayer(newY, newX, dontPickup);
     }
 
@@ -6669,14 +6664,14 @@ internal class Game
                     HealthTrack(tile.MonsterIndex);
                 }
                 // If we can't see it then let us push past it and tell us what happened
-                else if (GridPassable(MapY.Value, MapX.Value) || monster.Race.PassWall)
+                else if (GridPassable(MapY.IntValue, MapX.IntValue) || monster.Race.PassWall)
                 {
                     MsgPrint($"You push past {monsterName}.");
-                    monster.MapY = MapY.Value;
-                    monster.MapX = MapX.Value;
-                    Map.Grid[MapY.Value][MapX.Value].MonsterIndex = tile.MonsterIndex;
+                    monster.MapY = MapY.IntValue;
+                    monster.MapX = MapX.IntValue;
+                    Map.Grid[MapY.IntValue][MapX.IntValue].MonsterIndex = tile.MonsterIndex;
                     tile.MonsterIndex = 0;
-                    UpdateMonsterVisibility(Map.Grid[MapY.Value][MapX.Value].MonsterIndex, true);
+                    UpdateMonsterVisibility(Map.Grid[MapY.IntValue][MapX.IntValue].MonsterIndex, true);
                 }
                 // If we couldn't push past it, tell us it was in the way
                 else
@@ -6741,22 +6736,22 @@ internal class Game
                     }
                     if (newY == 0)
                     {
-                        MapY.Value = CurHgt - 2;
+                        MapY.IntValue = CurHgt - 2;
                         WildernessY--;
                     }
                     if (newY == CurHgt - 1)
                     {
-                        MapY.Value = 1;
+                        MapY.IntValue = 1;
                         WildernessY++;
                     }
                     if (newX == 0)
                     {
-                        MapX.Value = CurWid - 2;
+                        MapX.IntValue = CurWid - 2;
                         WildernessX--;
                     }
                     if (newX == CurWid - 1)
                     {
-                        MapX.Value = 1;
+                        MapX.IntValue = 1;
                         WildernessX++;
                     }
                     if (Wilderness[WildernessY][WildernessX].Town != null)
@@ -6823,22 +6818,22 @@ internal class Game
                     }
                     if (newY == 0)
                     {
-                        MapY.Value = CurHgt - 2;
+                        MapY.IntValue = CurHgt - 2;
                         WildernessY--;
                     }
                     if (newY == CurHgt - 1)
                     {
-                        MapY.Value = 1;
+                        MapY.IntValue = 1;
                         WildernessY++;
                     }
                     if (newX == 0)
                     {
-                        MapX.Value = CurWid - 2;
+                        MapX.IntValue = CurWid - 2;
                         WildernessX--;
                     }
                     if (newX == CurWid - 1)
                     {
-                        MapX.Value = 1;
+                        MapX.IntValue = 1;
                         WildernessX++;
                     }
                     if (Wilderness[WildernessY][WildernessX].Town != null)
@@ -6873,7 +6868,7 @@ internal class Game
             return;
         }
         // Assuming we didn't bump into anything, maybe we can actually move
-        bool oldTrapsDetected = Map.Grid[MapY.Value][MapX.Value].TrapsDetected;
+        bool oldTrapsDetected = Map.Grid[MapY.IntValue][MapX.IntValue].TrapsDetected;
         bool newTrapsDetected = Map.Grid[newY][newX].TrapsDetected;
         // If we're moving into or out of an area where we've detected traps, remember to redraw
         // the notification
@@ -6891,12 +6886,12 @@ internal class Game
             return;
         }
         // We've run out of things that could prevent us moving, so do the move
-        int oldY = MapY.Value;
-        int oldX = MapX.Value;
-        MapY.Value = newY;
-        MapX.Value = newX;
+        int oldY = MapY.IntValue;
+        int oldX = MapX.IntValue;
+        MapY.IntValue = newY;
+        MapX.IntValue = newX;
         // Redraw our old and new locations
-        MainForm.RefreshMapLocation(MapY.Value, MapX.Value);
+        MainForm.RefreshMapLocation(MapY.IntValue, MapX.IntValue);
         MainForm.RefreshMapLocation(oldY, oldX);
         // Recenter the screen if we have to
         RecenterScreenAroundPlayer();
@@ -6928,7 +6923,7 @@ internal class Game
         {
             Disturb(false);
             MsgPrint("You found a trap!");
-            PickTrap(MapY.Value, MapX.Value);
+            PickTrap(MapY.IntValue, MapX.IntValue);
             StepOnTrap();
         }
         // If it's a trap we couldn't (or didn't) disarm, then activate it
@@ -6947,7 +6942,7 @@ internal class Game
     /// </param>
     public void StepOnGrid(bool pickup)
     {
-        GridTile tile = Map.Grid[MapY.Value][MapX.Value];
+        GridTile tile = Map.Grid[MapY.IntValue][MapX.IntValue];
         foreach (Item item in tile.Items.ToArray()) // We need a ToArray to prevent the collection from being modified error
         {
             string itemName = item.Description(true, 3);
@@ -6956,7 +6951,7 @@ internal class Game
             if (item.Category == ItemTypeEnum.Gold)
             {
                 MsgPrint($"You collect {item.TypeSpecificValue} gold pieces worth of {itemName}.");
-                Gold.Value += item.TypeSpecificValue;
+                Gold.IntValue += item.TypeSpecificValue;
                 DeleteObject(item);
             }
             else
@@ -7131,14 +7126,14 @@ internal class Game
                         resistStun += 88;
                     }
                     // Have a number of attempts to choose a martial arts attack
-                    for (times = 0; times < (ExperienceLevel.Value < 7 ? 1 : ExperienceLevel.Value / 7); times++)
+                    for (times = 0; times < (ExperienceLevel.IntValue < 7 ? 1 : ExperienceLevel.IntValue / 7); times++)
                     {
                         // Choose an attack randomly, but reject it and re-choose if it's too
                         // high level or we fail a chance roll
                         do
                         {
                             martialArtsAttack = SingletonRepository.MartialArtsAttacks.ToWeightedRandom().ChooseOrDefault();
-                        } while (martialArtsAttack.MinLevel > ExperienceLevel.Value || DieRoll(ExperienceLevel.Value) < martialArtsAttack.Chance);
+                        } while (martialArtsAttack.MinLevel > ExperienceLevel.IntValue || DieRoll(ExperienceLevel.IntValue) < martialArtsAttack.Chance);
                         // We've chosen an attack, use it if it's better than the previous
                         // choice (unless we're stunned or confused in which case we're stuck
                         // with the weakest attack type
@@ -7190,7 +7185,7 @@ internal class Game
                         MsgPrint(string.Format(martialArtsAttack.Desc, monsterName));
                     }
                     // It might be a critical hit
-                    totalDamage = PlayerCriticalMelee(ExperienceLevel.Value * DieRoll(10), martialArtsAttack.MinLevel, totalDamage);
+                    totalDamage = PlayerCriticalMelee(ExperienceLevel.IntValue * DieRoll(10), martialArtsAttack.MinLevel, totalDamage);
                     // Make a groin attack into a stunning attack
                     if (specialEffect == Constants.MaKnee && totalDamage + DamageBonus < monster.Health)
                     {
@@ -7201,7 +7196,7 @@ internal class Game
                     // Slow if we had a knee attack
                     else if (specialEffect == Constants.MaSlow && totalDamage + DamageBonus < monster.Health)
                     {
-                        if (!race.Unique && DieRoll(ExperienceLevel.Value) > race.Level &&
+                        if (!race.Unique && DieRoll(ExperienceLevel.IntValue) > race.Level &&
                             monster.Speed > 60)
                         {
                             MsgPrint($"{monsterName} starts limping slower.");
@@ -7211,7 +7206,7 @@ internal class Game
                     // Stun if we had a stunning attack
                     if (stunEffect != 0 && totalDamage + DamageBonus < monster.Health)
                     {
-                        if (ExperienceLevel.Value > DieRoll(race.Level + resistStun + 10))
+                        if (ExperienceLevel.IntValue > DieRoll(race.Level + resistStun + 10))
                         {
                             MsgPrint(monster.StunLevel != 0 ? $"{monsterName} is more stunned." : $"{monsterName} is stunned.");
                             monster.StunLevel += stunEffect;
@@ -7227,7 +7222,7 @@ internal class Game
                     // Extra damage for backstabbing
                     if (backstab)
                     {
-                        totalDamage *= 3 + (ExperienceLevel.Value / 40);
+                        totalDamage *= 3 + (ExperienceLevel.IntValue / 40);
                     }
                     else if (stabFleeing)
                     {
@@ -7336,7 +7331,7 @@ internal class Game
                     else
                     {
                         MsgPrint($"{monsterName} appears confused.");
-                        monster.ConfusionLevel += 10 + (RandomLessThan(ExperienceLevel.Value) / 5);
+                        monster.ConfusionLevel += 10 + (RandomLessThan(ExperienceLevel.IntValue) / 5);
                     }
                 }
                 // A chaos blade might teleport the monster away
@@ -7396,7 +7391,7 @@ internal class Game
         }
         if (doQuake)
         {
-            Earthquake(MapY.Value, MapX.Value, 10);
+            Earthquake(MapY.IntValue, MapX.IntValue, 10);
         }
     }
 
@@ -7439,7 +7434,7 @@ internal class Game
     public int PlayerCriticalRanged(int weight, int plus, int damage)
     {
         // Chance of a critical is based on weight, level, and plusses
-        int i = weight + ((AttackBonus + plus) * 4) + (ExperienceLevel.Value * 2);
+        int i = weight + ((AttackBonus + plus) * 4) + (ExperienceLevel.IntValue * 2);
         if (DieRoll(5000) <= i)
         {
             int k = weight + DieRoll(500);
@@ -7474,7 +7469,7 @@ internal class Game
         if (direction != 0)
         {
             // Check if we can actually run in that direction
-            if (SeeWall(direction, MapY.Value, MapX.Value))
+            if (SeeWall(direction, MapY.IntValue, MapX.IntValue))
             {
                 MsgPrint("You cannot run in that direction.");
                 Disturb(false);
@@ -7622,10 +7617,10 @@ internal class Game
         int chance = SkillThrowing + (AttackBonus * Constants.BthPlusAdj);
         // Throwing something always uses a full turn, even if you can make multiple missile attacks
         EnergyUse = 100;
-        int y = MapY.Value;
-        int x = MapX.Value;
-        int targetX = MapX.Value + (99 * KeypadDirectionXOffset[dir]); // TODO: Fix the 99*
-        int targetY = MapY.Value + (99 * KeypadDirectionYOffset[dir]); // TODO: Fix the 99*
+        int y = MapY.IntValue;
+        int x = MapX.IntValue;
+        int targetX = MapX.IntValue + (99 * KeypadDirectionXOffset[dir]); // TODO: Fix the 99*
+        int targetY = MapY.IntValue + (99 * KeypadDirectionYOffset[dir]); // TODO: Fix the 99*
 
         if (dir == 5 && TargetWho != null)
         {
@@ -7638,8 +7633,8 @@ internal class Game
         }
 
         HandleStuff();
-        int newY = MapY.Value;
-        int newX = MapX.Value;
+        int newY = MapY.IntValue;
+        int newX = MapX.IntValue;
         bool hitBody = false;
         // Send the thrown object in the right direction one square at a time
         for (int curDis = 0; curDis <= throwDistance;)
@@ -7649,7 +7644,7 @@ internal class Game
             {
                 break;
             }
-            MoveOneStepTowards(out newY, out newX, y, x, MapY.Value, MapX.Value, targetY, targetX);
+            MoveOneStepTowards(out newY, out newX, y, x, MapY.IntValue, MapX.IntValue, targetY, targetX);
             // If we hit a wall or something stop moving
             if (!GridPassable(newY, newX))
             {
@@ -7922,7 +7917,7 @@ internal class Game
         int targetX;
         GridTile tile;
         // Can't summon something if we're already standing on something
-        if (Map.Grid[MapY.Value][MapX.Value].Items.Count > 0)
+        if (Map.Grid[MapY.IntValue][MapX.IntValue].Items.Count > 0)
         {
             MsgPrint("You can't fetch when you're already standing on something.");
             return;
@@ -7946,7 +7941,7 @@ internal class Game
             targetX = target.X;
             targetY = target.Y;
             // Check the range
-            if (Distance(MapY.Value, MapX.Value, targetY, targetX) > Constants.MaxRange)
+            if (Distance(MapY.IntValue, MapX.IntValue, targetY, targetX) > Constants.MaxRange)
             {
                 MsgPrint("You can't fetch something that far away!");
                 return;
@@ -7962,15 +7957,15 @@ internal class Game
         else
         {
             // We have a direction, so move along it until we find an item
-            targetY = MapY.Value;
-            targetX = MapX.Value;
+            targetY = MapY.IntValue;
+            targetX = MapX.IntValue;
             do
             {
                 targetY += KeypadDirectionYOffset[dir];
                 targetX += KeypadDirectionXOffset[dir];
                 tile = Map.Grid[targetY][targetX];
                 // Stop if we hit max range or we're blocked by something
-                if (Distance(MapY.Value, MapX.Value, targetY, targetX) > Constants.MaxRange || !GridPassable(targetY, targetX))
+                if (Distance(MapY.IntValue, MapX.IntValue, targetY, targetX) > Constants.MaxRange || !GridPassable(targetY, targetX))
                 {
                     return;
                 }
@@ -7984,11 +7979,11 @@ internal class Game
             return;
         }
         // Remove the entire item stack from the tile and move it to the player's tile
-        Map.Grid[MapY.Value][MapX.Value].Items.Add(item);
+        Map.Grid[MapY.IntValue][MapX.IntValue].Items.Add(item);
         tile.Items.Remove(item);
-        item.Y = MapY.Value;
-        item.X = MapX.Value;
-        NoteSpot(MapY.Value, MapX.Value);
+        item.Y = MapY.IntValue;
+        item.X = MapX.IntValue;
+        NoteSpot(MapY.IntValue, MapX.IntValue);
         RefreshMap.SetChangedFlag(); // TODO: Needs to convert to dependencies in the MapWidget
     }
 
@@ -8247,7 +8242,7 @@ internal class Game
     /// <returns> The damage total modified for a critical hit </returns>
     private int PlayerCriticalMelee(int weight, int plus, int damage)
     {
-        int i = weight + ((AttackBonus + plus) * 5) + (ExperienceLevel.Value * 3);
+        int i = weight + ((AttackBonus + plus) * 5) + (ExperienceLevel.IntValue * 3);
         if (DieRoll(5000) <= i)
         {
             int k = weight + DieRoll(650);
@@ -8379,7 +8374,7 @@ internal class Game
     private void StepOnTrap()
     {
         Disturb(false);
-        GridTile tile = Map.Grid[MapY.Value][MapX.Value];
+        GridTile tile = Map.Grid[MapY.IntValue][MapX.IntValue];
         // Check the type of trap
         tile.FeatureType.StepOnScript.ExecuteScript();
     }
@@ -8514,7 +8509,7 @@ internal class Game
                 test = true;
             }
             // 3) We've left scent where the monster is so it can smell us
-            else if (Map.Grid[MapY.Value][MapX.Value].ScentAge == Map.Grid[monsterY][monsterX].ScentAge &&
+            else if (Map.Grid[MapY.IntValue][MapX.IntValue].ScentAge == Map.Grid[monsterY][monsterX].ScentAge &&
                      Map.Grid[monsterY][monsterX].ScentStrength < Constants.MonsterFlowDepth &&
                      Map.Grid[monsterY][monsterX].ScentStrength < race.NoticeRange)
             {
@@ -9355,10 +9350,10 @@ internal class Game
     {
         int i;
         MaxLevelGained = 1;
-        ExperienceLevel.Value = 1;
-        ExperienceMultiplier.Value = Race.ExperienceFactor + BaseCharacterClass.ExperienceFactor;
+        ExperienceLevel.IntValue = 1;
+        ExperienceMultiplier.IntValue = Race.ExperienceFactor + BaseCharacterClass.ExperienceFactor;
         HitDie = Race.HitDieBonus + BaseCharacterClass.HitDieBonus;
-        MaxHealth.Value = HitDie;
+        MaxHealth.IntValue = HitDie;
         PlayerHp[0] = HitDie;
         int lastroll = HitDie;
         for (i = 1; i < Constants.PyMaxLevel; i++)
@@ -9409,7 +9404,7 @@ internal class Game
         {
             gold = 100;
         }
-        Gold.Value = gold;
+        Gold.IntValue = gold;
     }
 
     public void GetStats()
@@ -11099,8 +11094,8 @@ internal class Game
                 break;
 
             case LevelStart.StartStairs:
-                MapY.Value = downStairsLocation.Y;
-                MapX.Value = downStairsLocation.X;
+                MapY.IntValue = downStairsLocation.Y;
+                MapX.IntValue = downStairsLocation.X;
                 break;
 
             case LevelStart.StartWalk:
@@ -11113,8 +11108,8 @@ internal class Game
                     {
                         continue;
                     }
-                    MapY.Value = store.Y;
-                    MapX.Value = store.X;
+                    MapY.IntValue = store.Y;
+                    MapX.IntValue = store.X;
                 }
                 break;
 
@@ -11871,8 +11866,8 @@ internal class Game
         {
             return false;
         }
-        MapY.Value = y;
-        MapX.Value = x;
+        MapY.IntValue = y;
+        MapX.IntValue = x;
         return true;
     }
 
@@ -12063,14 +12058,14 @@ internal class Game
         }
         else if (CameFrom == LevelStart.StartStairs)
         {
-            this.MapY.Value = stairY;
-            this.MapX.Value = stairX;
+            this.MapY.IntValue = stairY;
+            this.MapX.IntValue = stairX;
         }
         else if (CameFrom == LevelStart.StartWalk)
         {
-            if (Map.Grid[this.MapY.Value][this.MapX.Value].FeatureType.IsTree || Map.Grid[this.MapY.Value][this.MapX.Value].FeatureType is WaterTile)
+            if (Map.Grid[this.MapY.IntValue][this.MapX.IntValue].FeatureType.IsTree || Map.Grid[this.MapY.IntValue][this.MapX.IntValue].FeatureType is WaterTile)
             {
-                Map.Grid[this.MapY.Value][this.MapX.Value].RevertToBackground();
+                Map.Grid[this.MapY.IntValue][this.MapX.IntValue].RevertToBackground();
             }
         }
         ResolvePaths();
@@ -12202,8 +12197,8 @@ internal class Game
 
     public bool TargetSet(int mode)
     {
-        int y = MapY.Value;
-        int x = MapX.Value;
+        int y = MapY.IntValue;
+        int x = MapX.IntValue;
         bool done = false;
         TargetWho = null;
         TargetSetPrepare(mode);
@@ -12303,8 +12298,8 @@ internal class Game
     {
         char ch = '\0';
         bool success = false;
-        x = MapX.Value;
-        y = MapY.Value;
+        x = MapX.IntValue;
+        y = MapY.IntValue;
         bool cv = Screen.CursorVisible;
         Screen.CursorVisible = true;
         MsgPrint("Select a point and press space.");
@@ -12419,7 +12414,7 @@ internal class Game
         {
             return false;
         }
-        if (!Projectable(MapY.Value, MapX.Value, mPtr.MapY, mPtr.MapX))
+        if (!Projectable(MapY.IntValue, MapX.IntValue, mPtr.MapY, mPtr.MapX))
         {
             return false;
         }
@@ -12432,7 +12427,7 @@ internal class Game
 
     private bool TargetSetAccept(int y, int x)
     {
-        if (y == MapY.Value && x == MapX.Value)
+        if (y == MapY.IntValue && x == MapX.IntValue)
         {
             return true;
         }
@@ -12474,7 +12469,7 @@ internal class Game
             string s1 = "You see ";
             string s2 = "";
             string s3 = "";
-            if (y == MapY.Value && x == MapX.Value)
+            if (y == MapY.IntValue && x == MapX.IntValue)
             {
                 s1 = "You are ";
                 s2 = "on ";
@@ -12678,7 +12673,7 @@ internal class Game
         List<TargetLocation> list = new List<TargetLocation>();
         for (int i = 0; i < TempN; i++)
         {
-            int distance = Distance(TempY[i], TempX[i], MapY.Value, MapX.Value);
+            int distance = Distance(TempY[i], TempX[i], MapY.IntValue, MapX.IntValue);
             list.Add(new TargetLocation(TempY[i], TempX[i], distance));
         }
         list.Sort();
@@ -12723,7 +12718,7 @@ internal class Game
                 }
             }
         }
-        return martialArtistArmWgt > 100 + (ExperienceLevel.Value * 4);
+        return martialArtistArmWgt > 100 + (ExperienceLevel.IntValue * 4);
     }
 
     public string RealmNames(Realm? primaryRealm, Realm? secondaryRealm, string defaultTitle = "None")
@@ -12752,7 +12747,7 @@ internal class Game
         for (int i = 0; i < 10; i++)
         {
             const int d = 1;
-            Scatter(out int y, out int x, MapY.Value, MapX.Value, d);
+            Scatter(out int y, out int x, MapY.IntValue, MapX.IntValue, d);
             if (!GridPassableNoCreature(y, x))
             {
                 continue;
@@ -12774,7 +12769,7 @@ internal class Game
         for (int i = 0; i < 10; i++)
         {
             const int d = 1;
-            Scatter(out int y, out int x, MapY.Value, MapX.Value, d);
+            Scatter(out int y, out int x, MapY.IntValue, MapX.IntValue, d);
             if (!GridPassableNoCreature(y, x))
             {
                 continue;
@@ -13042,8 +13037,8 @@ internal class Game
 
     public void RecenterScreenAroundPlayer()
     {
-        int y = MapY.Value;
-        int x = MapX.Value;
+        int y = MapY.IntValue;
+        int x = MapX.IntValue;
         int maxProwMin = MaxPanelRows * (Constants.PlayableScreenHeight / 2);
         int maxPcolMin = MaxPanelCols * (Constants.PlayableScreenWidth / 2);
         int prowMin = y - (Constants.PlayableScreenHeight / 2);
@@ -13078,7 +13073,7 @@ internal class Game
     public void ChangeRace(Race newRace)
     {
         Race = newRace;
-        ExperienceMultiplier.Value = Race.ExperienceFactor + BaseCharacterClass.ExperienceFactor;
+        ExperienceMultiplier.IntValue = Race.ExperienceFactor + BaseCharacterClass.ExperienceFactor;
         if (Gender.Index == Constants.SexMale)
         {
             Height = RandomNormal(Race.MaleBaseHeight, Race.MaleHeightRange);
@@ -13103,7 +13098,7 @@ internal class Game
             }
         }
         CheckExperience();
-        MaxLevelGained = ExperienceLevel.Value;
+        MaxLevelGained = ExperienceLevel.IntValue;
         SingletonRepository.FlaggedActions.Get(nameof(PrBasicRedrawActionGroupSetFlaggedAction)).Set();
         SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
         HandleStuff();
@@ -13113,44 +13108,44 @@ internal class Game
     {
         bool levelReward = false;
         bool levelMutation = false;
-        if (ExperiencePoints.Value < 0)
+        if (ExperiencePoints.IntValue < 0)
         {
-            ExperiencePoints.Value = 0;
+            ExperiencePoints.IntValue = 0;
         }
-        if (MaxExperienceGained.Value < 0)
+        if (MaxExperienceGained.IntValue < 0)
         {
-            MaxExperienceGained.Value = 0;
+            MaxExperienceGained.IntValue = 0;
         }
-        if (ExperiencePoints.Value > Constants.PyMaxExp)
+        if (ExperiencePoints.IntValue > Constants.PyMaxExp)
         {
-            ExperiencePoints.Value = Constants.PyMaxExp;
+            ExperiencePoints.IntValue = Constants.PyMaxExp;
         }
-        if (MaxExperienceGained.Value > Constants.PyMaxExp)
+        if (MaxExperienceGained.IntValue > Constants.PyMaxExp)
         {
-            MaxExperienceGained.Value = Constants.PyMaxExp;
+            MaxExperienceGained.IntValue = Constants.PyMaxExp;
         }
-        if (ExperiencePoints.Value > MaxExperienceGained.Value)
+        if (ExperiencePoints.IntValue > MaxExperienceGained.IntValue)
         {
-            MaxExperienceGained.Value = ExperiencePoints.Value;
+            MaxExperienceGained.IntValue = ExperiencePoints.IntValue;
         }
         HandleStuff();
-        while (ExperienceLevel.Value > 1 && ExperiencePoints.Value < Constants.PlayerExp[ExperienceLevel.Value - 2] * ExperienceMultiplier.Value / 100L)
+        while (ExperienceLevel.IntValue > 1 && ExperiencePoints.IntValue < Constants.PlayerExp[ExperienceLevel.IntValue - 2] * ExperienceMultiplier.IntValue / 100L)
         {
-            ExperienceLevel.Value--;
-            MainForm.RefreshMapLocation(MapY.Value, MapX.Value);
+            ExperienceLevel.IntValue--;
+            MainForm.RefreshMapLocation(MapY.IntValue, MapX.IntValue);
             SingletonRepository.FlaggedActions.Get(nameof(UpdateHealthFlaggedAction)).Set();
             SingletonRepository.FlaggedActions.Get(nameof(UpdateManaFlaggedAction)).Set();
             SingletonRepository.FlaggedActions.Get(nameof(UpdateSpellsFlaggedAction)).Set();
             SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
             HandleStuff();
         }
-        while (ExperienceLevel.Value < Constants.PyMaxLevel && ExperiencePoints.Value >= Constants.PlayerExp[ExperienceLevel.Value - 1] * ExperienceMultiplier.Value / 100L)
+        while (ExperienceLevel.IntValue < Constants.PyMaxLevel && ExperiencePoints.IntValue >= Constants.PlayerExp[ExperienceLevel.IntValue - 1] * ExperienceMultiplier.IntValue / 100L)
         {
-            ExperienceLevel.Value++;
-            MainForm.RefreshMapLocation(MapY.Value, MapX.Value);
-            if (ExperienceLevel.Value > MaxLevelGained)
+            ExperienceLevel.IntValue++;
+            MainForm.RefreshMapLocation(MapY.IntValue, MapX.IntValue);
+            if (ExperienceLevel.IntValue > MaxLevelGained)
             {
-                MaxLevelGained = ExperienceLevel.Value;
+                MaxLevelGained = ExperienceLevel.IntValue;
                 if (BaseCharacterClass.ID == CharacterClass.Fanatic || BaseCharacterClass.ID == CharacterClass.Cultist)
                 {
                     levelReward = true;
@@ -13168,7 +13163,7 @@ internal class Game
                 }
             }
             PlaySound(SoundEffectEnum.LevelGain);
-            MsgPrint($"Welcome to level {ExperienceLevel.Value}.");
+            MsgPrint($"Welcome to level {ExperienceLevel.IntValue}.");
             SingletonRepository.FlaggedActions.Get(nameof(UpdateHealthFlaggedAction)).Set();
             SingletonRepository.FlaggedActions.Get(nameof(UpdateManaFlaggedAction)).Set();
             SingletonRepository.FlaggedActions.Get(nameof(UpdateSpellsFlaggedAction)).Set();
@@ -13350,10 +13345,10 @@ internal class Game
 
     public void GainExperience(int amount)
     {
-        ExperiencePoints.Value += amount;
-        if (ExperiencePoints.Value < MaxExperienceGained.Value)
+        ExperiencePoints.IntValue += amount;
+        if (ExperiencePoints.IntValue < MaxExperienceGained.IntValue)
         {
-            MaxExperienceGained.Value += amount / 5;
+            MaxExperienceGained.IntValue += amount / 5;
         }
         CheckExperience();
     }
@@ -13365,64 +13360,64 @@ internal class Game
     public ItemCharacteristics GetAbilitiesAsItemFlags()
     {
         ItemCharacteristics itemCharacteristics = new ItemCharacteristics();
-        if ((BaseCharacterClass.ID == CharacterClass.Warrior && ExperienceLevel.Value > 29) || (BaseCharacterClass.ID == CharacterClass.Paladin && ExperienceLevel.Value > 39) || (BaseCharacterClass.ID == CharacterClass.Fanatic && ExperienceLevel.Value > 39))
+        if ((BaseCharacterClass.ID == CharacterClass.Warrior && ExperienceLevel.IntValue > 29) || (BaseCharacterClass.ID == CharacterClass.Paladin && ExperienceLevel.IntValue > 39) || (BaseCharacterClass.ID == CharacterClass.Fanatic && ExperienceLevel.IntValue > 39))
         {
             itemCharacteristics.ResFear = true;
         }
-        if (BaseCharacterClass.ID == CharacterClass.Fanatic && ExperienceLevel.Value > 29)
+        if (BaseCharacterClass.ID == CharacterClass.Fanatic && ExperienceLevel.IntValue > 29)
         {
             itemCharacteristics.ResChaos = true;
         }
-        if (BaseCharacterClass.ID == CharacterClass.Cultist && ExperienceLevel.Value > 19)
+        if (BaseCharacterClass.ID == CharacterClass.Cultist && ExperienceLevel.IntValue > 19)
         {
             itemCharacteristics.ResChaos = true;
         }
-        if (BaseCharacterClass.ID == CharacterClass.Monk && ExperienceLevel.Value > 9 && !MartialArtistHeavyArmor())
+        if (BaseCharacterClass.ID == CharacterClass.Monk && ExperienceLevel.IntValue > 9 && !MartialArtistHeavyArmor())
         {
             itemCharacteristics.Speed = true;
         }
-        if (BaseCharacterClass.ID == CharacterClass.Monk && ExperienceLevel.Value > 24 && !MartialArtistHeavyArmor())
+        if (BaseCharacterClass.ID == CharacterClass.Monk && ExperienceLevel.IntValue > 24 && !MartialArtistHeavyArmor())
         {
             itemCharacteristics.FreeAct = true;
         }
         if (BaseCharacterClass.ID == CharacterClass.Mindcrafter)
         {
-            if (ExperienceLevel.Value > 9)
+            if (ExperienceLevel.IntValue > 9)
             {
                 itemCharacteristics.ResFear = true;
             }
-            if (ExperienceLevel.Value > 19)
+            if (ExperienceLevel.IntValue > 19)
             {
                 itemCharacteristics.SustWis = true;
             }
-            if (ExperienceLevel.Value > 29)
+            if (ExperienceLevel.IntValue > 29)
             {
                 itemCharacteristics.ResConf = true;
             }
-            if (ExperienceLevel.Value > 39)
+            if (ExperienceLevel.IntValue > 39)
             {
                 itemCharacteristics.Telepathy = true;
             }
         }
         if (BaseCharacterClass.ID == CharacterClass.Mystic)
         {
-            if (ExperienceLevel.Value > 9)
+            if (ExperienceLevel.IntValue > 9)
             {
                 itemCharacteristics.ResConf = true;
             }
-            if (ExperienceLevel.Value > 9 && !MartialArtistHeavyArmor())
+            if (ExperienceLevel.IntValue > 9 && !MartialArtistHeavyArmor())
             {
                 itemCharacteristics.Speed = true;
             }
-            if (ExperienceLevel.Value > 24)
+            if (ExperienceLevel.IntValue > 24)
             {
                 itemCharacteristics.ResFear = true;
             }
-            if (ExperienceLevel.Value > 29 && !MartialArtistHeavyArmor())
+            if (ExperienceLevel.IntValue > 29 && !MartialArtistHeavyArmor())
             {
                 itemCharacteristics.FreeAct = true;
             }
-            if (ExperienceLevel.Value > 39)
+            if (ExperienceLevel.IntValue > 39)
             {
                 itemCharacteristics.Telepathy = true;
             }
@@ -13430,109 +13425,109 @@ internal class Game
         if (BaseCharacterClass.ID == CharacterClass.ChosenOne)
         {
             itemCharacteristics.Lightsource = true;
-            if (ExperienceLevel.Value >= 2)
+            if (ExperienceLevel.IntValue >= 2)
             {
                 itemCharacteristics.ResConf = true;
             }
-            if (ExperienceLevel.Value >= 4)
+            if (ExperienceLevel.IntValue >= 4)
             {
                 itemCharacteristics.ResFear = true;
             }
-            if (ExperienceLevel.Value >= 6)
+            if (ExperienceLevel.IntValue >= 6)
             {
                 itemCharacteristics.ResBlind = true;
             }
-            if (ExperienceLevel.Value >= 8)
+            if (ExperienceLevel.IntValue >= 8)
             {
                 itemCharacteristics.Feather = true;
             }
-            if (ExperienceLevel.Value >= 10)
+            if (ExperienceLevel.IntValue >= 10)
             {
                 itemCharacteristics.SeeInvis = true;
             }
-            if (ExperienceLevel.Value >= 12)
+            if (ExperienceLevel.IntValue >= 12)
             {
                 itemCharacteristics.SlowDigest = true;
             }
-            if (ExperienceLevel.Value >= 14)
+            if (ExperienceLevel.IntValue >= 14)
             {
                 itemCharacteristics.SustCon = true;
             }
-            if (ExperienceLevel.Value >= 16)
+            if (ExperienceLevel.IntValue >= 16)
             {
                 itemCharacteristics.ResPois = true;
             }
-            if (ExperienceLevel.Value >= 18)
+            if (ExperienceLevel.IntValue >= 18)
             {
                 itemCharacteristics.SustDex = true;
             }
-            if (ExperienceLevel.Value >= 20)
+            if (ExperienceLevel.IntValue >= 20)
             {
                 itemCharacteristics.SustStr = true;
             }
-            if (ExperienceLevel.Value >= 22)
+            if (ExperienceLevel.IntValue >= 22)
             {
                 itemCharacteristics.HoldLife = true;
             }
-            if (ExperienceLevel.Value >= 24)
+            if (ExperienceLevel.IntValue >= 24)
             {
                 itemCharacteristics.FreeAct = true;
             }
-            if (ExperienceLevel.Value >= 26)
+            if (ExperienceLevel.IntValue >= 26)
             {
                 itemCharacteristics.Telepathy = true;
             }
-            if (ExperienceLevel.Value >= 28)
+            if (ExperienceLevel.IntValue >= 28)
             {
                 itemCharacteristics.ResDark = true;
             }
-            if (ExperienceLevel.Value >= 30)
+            if (ExperienceLevel.IntValue >= 30)
             {
                 itemCharacteristics.ResLight = true;
             }
-            if (ExperienceLevel.Value >= 32)
+            if (ExperienceLevel.IntValue >= 32)
             {
                 itemCharacteristics.SustCha = true;
             }
-            if (ExperienceLevel.Value >= 34)
+            if (ExperienceLevel.IntValue >= 34)
             {
                 itemCharacteristics.ResSound = true;
             }
-            if (ExperienceLevel.Value >= 36)
+            if (ExperienceLevel.IntValue >= 36)
             {
                 itemCharacteristics.ResDisen = true;
             }
-            if (ExperienceLevel.Value >= 38)
+            if (ExperienceLevel.IntValue >= 38)
             {
                 itemCharacteristics.Regen = true;
             }
-            if (ExperienceLevel.Value >= 40)
+            if (ExperienceLevel.IntValue >= 40)
             {
                 itemCharacteristics.SustInt = true;
             }
-            if (ExperienceLevel.Value >= 42)
+            if (ExperienceLevel.IntValue >= 42)
             {
                 itemCharacteristics.ResChaos = true;
             }
-            if (ExperienceLevel.Value >= 44)
+            if (ExperienceLevel.IntValue >= 44)
             {
                 itemCharacteristics.SustWis = true;
             }
-            if (ExperienceLevel.Value >= 46)
+            if (ExperienceLevel.IntValue >= 46)
             {
                 itemCharacteristics.ResNexus = true;
             }
-            if (ExperienceLevel.Value >= 48)
+            if (ExperienceLevel.IntValue >= 48)
             {
                 itemCharacteristics.ResShards = true;
             }
-            if (ExperienceLevel.Value >= 50)
+            if (ExperienceLevel.IntValue >= 50)
             {
                 itemCharacteristics.ResNether = true;
             }
         }
 
-        Race.UpdateRacialAbilities(ExperienceLevel.Value, itemCharacteristics);
+        Race.UpdateRacialAbilities(ExperienceLevel.IntValue, itemCharacteristics);
         if (Regen)
         {
             itemCharacteristics.Regen = true;
@@ -13573,23 +13568,23 @@ internal class Game
         if (SustainAll)
         {
             itemCharacteristics.SustCon = true;
-            if (ExperienceLevel.Value > 9)
+            if (ExperienceLevel.IntValue > 9)
             {
                 itemCharacteristics.SustStr = true;
             }
-            if (ExperienceLevel.Value > 19)
+            if (ExperienceLevel.IntValue > 19)
             {
                 itemCharacteristics.SustDex = true;
             }
-            if (ExperienceLevel.Value > 29)
+            if (ExperienceLevel.IntValue > 29)
             {
                 itemCharacteristics.SustWis = true;
             }
-            if (ExperienceLevel.Value > 39)
+            if (ExperienceLevel.IntValue > 39)
             {
                 itemCharacteristics.SustInt = true;
             }
-            if (ExperienceLevel.Value > 49)
+            if (ExperienceLevel.IntValue > 49)
             {
                 itemCharacteristics.SustCha = true;
             }
@@ -13623,10 +13618,10 @@ internal class Game
             int prev = 0;
             if (MaxLevelGained > 1)
             {
-                prev = Constants.PlayerExp[MaxLevelGained - 2] * ExperienceMultiplier.Value / 100;
+                prev = Constants.PlayerExp[MaxLevelGained - 2] * ExperienceMultiplier.IntValue / 100;
             }
-            int next = Constants.PlayerExp[MaxLevelGained - 1] * ExperienceMultiplier.Value / 100;
-            int numerator = MaxExperienceGained.Value - prev;
+            int next = Constants.PlayerExp[MaxLevelGained - 1] * ExperienceMultiplier.IntValue / 100;
+            int numerator = MaxExperienceGained.IntValue - prev;
             int denominator = next - prev;
             int fraction = 100 * numerator / denominator;
             score += fraction;
@@ -13662,11 +13657,11 @@ internal class Game
 
     public void LoseExperience(int amount)
     {
-        if (amount > ExperiencePoints.Value)
+        if (amount > ExperiencePoints.IntValue)
         {
-            amount = ExperiencePoints.Value;
+            amount = ExperiencePoints.IntValue;
         }
-        ExperiencePoints.Value -= amount;
+        ExperiencePoints.IntValue -= amount;
         CheckExperience();
     }
 
@@ -13686,52 +13681,52 @@ internal class Game
 
     public void RegenerateHealth(int percent)
     {
-        int oldHealth = Health.Value;
-        int newHealth = (MaxHealth.Value * percent) + Constants.PyRegenHpbase;
-        Health.Value += newHealth >> 16;
-        if (Health.Value < 0 && oldHealth > 0)
+        int oldHealth = Health.IntValue;
+        int newHealth = (MaxHealth.IntValue * percent) + Constants.PyRegenHpbase;
+        Health.IntValue += newHealth >> 16;
+        if (Health.IntValue < 0 && oldHealth > 0)
         {
-            Health.Value = Constants.MaxShort;
+            Health.IntValue = Constants.MaxShort;
         }
         int newFractionalHealth = (newHealth & 0xFFFF) + FractionalHealth;
         if (newFractionalHealth >= 0x10000)
         {
             FractionalHealth = newFractionalHealth - 0x10000;
-            Health.Value++;
+            Health.IntValue++;
         }
         else
         {
             FractionalHealth = newFractionalHealth;
         }
-        if (Health.Value >= MaxHealth.Value)
+        if (Health.IntValue >= MaxHealth.IntValue)
         {
-            Health.Value = MaxHealth.Value;
+            Health.IntValue = MaxHealth.IntValue;
             FractionalHealth = 0;
         }
     }
 
     public void RegenerateMana(int percent)
     {
-        int oldMana = Mana.Value;
-        int newMana = (MaxMana.Value * percent) + Constants.PyRegenMnbase;
-        Mana.Value += newMana >> 16;
-        if (Mana.Value < 0 && oldMana > 0)
+        int oldMana = Mana.IntValue;
+        int newMana = (MaxMana.IntValue * percent) + Constants.PyRegenMnbase;
+        Mana.IntValue += newMana >> 16;
+        if (Mana.IntValue < 0 && oldMana > 0)
         {
-            Mana.Value = Constants.MaxShort;
+            Mana.IntValue = Constants.MaxShort;
         }
         int newFractionalMana = (newMana & 0xFFFF) + FractionalMana;
         if (newFractionalMana >= 0x10000L)
         {
             FractionalMana = newFractionalMana - 0x10000;
-            Mana.Value++;
+            Mana.IntValue++;
         }
         else
         {
             FractionalMana = newFractionalMana;
         }
-        if (Mana.Value >= MaxMana.Value)
+        if (Mana.IntValue >= MaxMana.IntValue)
         {
-            Mana.Value = MaxMana.Value;
+            Mana.IntValue = MaxMana.IntValue;
             FractionalMana = 0;
         }
     }
@@ -13754,12 +13749,12 @@ internal class Game
     /// <returns></returns>
     public bool RestoreHealth(int num)
     {
-        if (Health.Value < MaxHealth.Value)
+        if (Health.IntValue < MaxHealth.IntValue)
         {
-            Health.Value += num;
-            if (Health.Value >= MaxHealth.Value)
+            Health.IntValue += num;
+            if (Health.IntValue >= MaxHealth.IntValue)
             {
-                Health.Value = MaxHealth.Value;
+                Health.IntValue = MaxHealth.IntValue;
                 FractionalHealth = 0;
             }
             if (num < 5)
@@ -13788,23 +13783,23 @@ internal class Game
         int oldAux, newAux;
         bool notice = false;
         v = v > 20000 ? 20000 : v < 0 ? 0 : v;
-        if (Food.Value < Constants.PyFoodFaint)
+        if (Food.IntValue < Constants.PyFoodFaint)
         {
             oldAux = 0;
         }
-        else if (Food.Value < Constants.PyFoodWeak)
+        else if (Food.IntValue < Constants.PyFoodWeak)
         {
             oldAux = 1;
         }
-        else if (Food.Value < Constants.PyFoodAlert)
+        else if (Food.IntValue < Constants.PyFoodAlert)
         {
             oldAux = 2;
         }
-        else if (Food.Value < Constants.PyFoodFull)
+        else if (Food.IntValue < Constants.PyFoodFull)
         {
             oldAux = 3;
         }
-        else if (Food.Value < Constants.PyFoodMax)
+        else if (Food.IntValue < Constants.PyFoodMax)
         {
             oldAux = 4;
         }
@@ -13888,7 +13883,7 @@ internal class Game
             }
             notice = true;
         }
-        Food.Value = v;
+        Food.IntValue = v;
         if (!notice)
         {
             return false;
@@ -13919,7 +13914,7 @@ internal class Game
 
     public bool SpellOkay(Spell sPtr, bool known)
     {
-        if (sPtr.ClassSpell.Level > ExperienceLevel.Value)
+        if (sPtr.ClassSpell.Level > ExperienceLevel.IntValue)
         {
             return false;
         }
@@ -13937,7 +13932,7 @@ internal class Game
     public void TakeHit(int damage, string hitFrom)
     {
         bool penInvuln = false;
-        int warning = MaxHealth.Value * Constants.HitpointWarn / 10;
+        int warning = MaxHealth.IntValue * Constants.HitpointWarn / 10;
         if (IsDead)
         {
             return;
@@ -13962,23 +13957,23 @@ internal class Game
                 damage = 1;
             }
         }
-        Health.Value -= damage;
+        Health.IntValue -= damage;
         if (penInvuln)
         {
             MsgPrint("The attack penetrates your shield of invulnerability!");
         }
-        if (Health.Value < 0)
+        if (Health.IntValue < 0)
         {
             if (DieRoll(10) <= SingletonRepository.Gods.Get(nameof(ZoKalarGod)).AdjustedFavour)
             {
                 MsgPrint("Zo-Kalar's favour saves you from death!");
-                Health.Value += damage;
+                Health.IntValue += damage;
             }
             else
             {
                 if (IsWizard.BoolValue && !GetCheck("Die? "))
                 {
-                    Health.Value += damage;
+                    Health.IntValue += damage;
                 }
                 else
                 {
@@ -13996,7 +13991,7 @@ internal class Game
                 }
             }
         }
-        if (Health.Value < warning)
+        if (Health.IntValue < warning)
         {
             PlaySound(SoundEffectEnum.HealthWarning);
             MsgPrint("*** LOW HITPOINT WARNING! ***");
@@ -14258,7 +14253,7 @@ internal class Game
                     if (oPtr.Factory.CategoryEnum == ItemTypeEnum.Potion)
                     {
                         PotionItemFactory potion = (PotionItemFactory)oPtr.Factory;
-                        potion.Smash(0, MapY.Value, MapX.Value);
+                        potion.Smash(0, MapY.IntValue, MapX.IntValue);
                     }
                     InvenItemIncrease(i, -amt);
                     InvenItemOptimize(i);
@@ -14298,7 +14293,7 @@ internal class Game
         Item qPtr = oPtr.Clone(amt);
         string oName = qPtr.Description(true, 3);
         MsgPrint($"You drop {oName} ({oPtr.Label}).");
-        DropNear(qPtr, 0, MapY.Value, MapX.Value);
+        DropNear(qPtr, 0, MapY.IntValue, MapX.IntValue);
         oPtr.ItemIncrease(-amt);
         oPtr.ItemDescribe();
         oPtr.ItemOptimize();
@@ -14620,8 +14615,8 @@ internal class Game
     public int CoordsToDir(int y, int x)
     {
         int[][] d = { new[] { 7, 4, 1 }, new[] { 8, 5, 2 }, new[] { 9, 6, 3 } };
-        int dy = y - MapY.Value;
-        int dx = x - MapX.Value;
+        int dy = y - MapY.IntValue;
+        int dx = x - MapX.IntValue;
         if (Math.Abs(dx) > 1 || Math.Abs(dy) > 1)
         {
             return 0;
@@ -14799,7 +14794,7 @@ internal class Game
         NoteSpot(by, bx);
         MainForm.RefreshMapLocation(by, bx);
         PlaySound(SoundEffectEnum.Drop);
-        if (chance != 0 && by == MapY.Value && bx == MapX.Value)
+        if (chance != 0 && by == MapY.IntValue && bx == MapX.IntValue)
         {
             MsgPrint("You feel something roll beneath your feet.");
         }
@@ -14832,7 +14827,7 @@ internal class Game
 
     public bool GridOpenNoItemOrCreature(int y, int x)
     {
-        return Map.Grid[y][x].FeatureType.IsOpenFloor && Map.Grid[y][x].Items.Count == 0 && Map.Grid[y][x].MonsterIndex == 0 && !(y == MapY.Value && x == MapX.Value);
+        return Map.Grid[y][x].FeatureType.IsOpenFloor && Map.Grid[y][x].Items.Count == 0 && Map.Grid[y][x].MonsterIndex == 0 && !(y == MapY.IntValue && x == MapX.IntValue);
     }
 
     public bool GridPassable(int y, int x)
@@ -14842,7 +14837,7 @@ internal class Game
 
     public bool GridPassableNoCreature(int y, int x)
     {
-        return GridPassable(y, x) && Map.Grid[y][x].MonsterIndex == 0 && !(y == MapY.Value && x == MapX.Value);
+        return GridPassable(y, x) && Map.Grid[y][x].MonsterIndex == 0 && !(y == MapY.IntValue && x == MapX.IntValue);
     }
 
     // TODO: Convert to zero based
@@ -15074,7 +15069,7 @@ internal class Game
 
     public bool NoLight()
     {
-        return !PlayerCanSeeBold(MapY.Value, MapX.Value);
+        return !PlayerCanSeeBold(MapY.IntValue, MapX.IntValue);
     }
 
     public void NoteSpot(int y, int x)
@@ -15115,8 +15110,8 @@ internal class Game
             }
             else
             {
-                int yy = y < MapY.Value ? y + 1 : y > MapY.Value ? y - 1 : y;
-                int xx = x < MapX.Value ? x + 1 : x > MapX.Value ? x - 1 : x;
+                int yy = y < MapY.IntValue ? y + 1 : y > MapY.IntValue ? y - 1 : y;
+                int xx = x < MapX.IntValue ? x + 1 : x > MapX.IntValue ? x - 1 : x;
                 if (Map.Grid[yy][xx].SelfLit)
                 {
                     cPtr.PlayerMemorized = true;
@@ -15256,8 +15251,8 @@ internal class Game
         {
             return true;
         }
-        int yy = y < MapY.Value ? y + 1 : y > MapY.Value ? y - 1 : y;
-        int xx = x < MapX.Value ? x + 1 : x > MapX.Value ? x - 1 : x;
+        int yy = y < MapY.IntValue ? y + 1 : y > MapY.IntValue ? y - 1 : y;
+        int xx = x < MapX.IntValue ? x + 1 : x > MapX.IntValue ? x - 1 : x;
         return Map.Grid[yy][xx].SelfLit;
     }
 
@@ -15540,8 +15535,8 @@ internal class Game
                         }
                         else
                         {
-                            int yy = y < MapY.Value ? y + 1 : y > MapY.Value ? y - 1 : y;
-                            int xx = x < MapX.Value ? x + 1 : x > MapX.Value ? x - 1 : x;
+                            int yy = y < MapY.IntValue ? y + 1 : y > MapY.IntValue ? y - 1 : y;
+                            int xx = x < MapX.IntValue ? x + 1 : x > MapX.IntValue ? x - 1 : x;
                             if (!Map.Grid[yy][xx].SelfLit)
                             {
                                 a = DimColor(a);
@@ -15658,7 +15653,7 @@ internal class Game
                 }
             }
         }
-        if (y == MapY.Value && x == MapX.Value)
+        if (y == MapY.IntValue && x == MapX.IntValue)
         {
             MonsterRace rPtr = SingletonRepository.MonsterRaces[0];
             a = rPtr.Color;
@@ -15722,7 +15717,7 @@ internal class Game
             {
                 continue;
             }
-            if (Distance(y, x, MapY.Value, MapX.Value) > dis)
+            if (Distance(y, x, MapY.IntValue, MapX.IntValue) > dis)
             {
                 break;
             }
@@ -15824,10 +15819,6 @@ internal class Game
         fear = false;
         Monster mPtr = Monsters[mIdx];
         MonsterRace rPtr = mPtr.Race;
-        if (TrackedMonster.Value != null && TrackedMonster.Value == mPtr)
-        {
-            SingletonRepository.FlaggedActions.Get(nameof(RedrawMonsterHealthFlaggedAction)).Set();
-        }
         mPtr.SleepLevel = 0;
         mPtr.Health -= dam;
         if (mPtr.Health < 0)
@@ -16510,12 +16501,12 @@ internal class Game
         int fx = mPtr.MapX;
         if (full)
         {
-            int dy = MapY.Value > fy
-                ? MapY.Value - fy
-                : fy - MapY.Value;
-            int dx = MapX.Value > fx
-                ? MapX.Value - fx
-                : fx - MapX.Value;
+            int dy = MapY.IntValue > fy
+                ? MapY.IntValue - fy
+                : fy - MapY.IntValue;
+            int dx = MapX.IntValue > fx
+                ? MapX.IntValue - fx
+                : fx - MapX.IntValue;
             int d = dy > dx ? dy + (dx >> 1) : dx + (dy >> 1);
             mPtr.DistanceFromPlayer = d < 255 ? d : 255;
         }
@@ -16604,10 +16595,6 @@ internal class Game
             {
                 mPtr.IsVisible = true;
                 MainForm.RefreshMapLocation(fy, fx);
-                if (TrackedMonster.Value != null && TrackedMonster.Value == mPtr)
-                {
-                    SingletonRepository.FlaggedActions.Get(nameof(RedrawMonsterHealthFlaggedAction)).Set();
-                }
                 if (rPtr.Knowledge.RSights < Constants.MaxShort)
                 {
                     rPtr.Knowledge.RSights++;
@@ -16647,10 +16634,6 @@ internal class Game
             {
                 mPtr.IsVisible = false;
                 MainForm.RefreshMapLocation(fy, fx);
-                if (TrackedMonster.Value != null && TrackedMonster.Value == mPtr)
-                {
-                    SingletonRepository.FlaggedActions.Get(nameof(RedrawMonsterHealthFlaggedAction)).Set();
-                }
             }
         }
         if (easy)
@@ -17310,7 +17293,7 @@ internal class Game
         List<Mutation> list = new List<Mutation>();
         foreach (Mutation mutation in MutationsPossessed)
         {
-            if (string.IsNullOrEmpty(mutation.ActivationSummary(ExperienceLevel.Value)))
+            if (string.IsNullOrEmpty(mutation.ActivationSummary(ExperienceLevel.IntValue)))
             {
                 continue;
             }

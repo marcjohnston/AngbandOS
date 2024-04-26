@@ -59,10 +59,10 @@ internal class QuaffScript : Script, IScript, IRepeatableScript
         if (identified && !item.IsFlavorAware())
         {
             item.BecomeFlavorAware();
-            Game.GainExperience((itemLevel + (Game.ExperienceLevel.Value >> 1)) / Game.ExperienceLevel.Value);
+            Game.GainExperience((itemLevel + (Game.ExperienceLevel.IntValue >> 1)) / Game.ExperienceLevel.IntValue);
         }
         // Most potions give us a bit of food too
-        Game.SetFood(Game.Food.Value + item.TypeSpecificValue);
+        Game.SetFood(Game.Food.IntValue + item.TypeSpecificValue);
         bool channeled = false;
         // If we're a channeler, we might be able to spend mana instead of using it up
         if (Game.BaseCharacterClass.CanUseManaInsteadOfConsumingItem)

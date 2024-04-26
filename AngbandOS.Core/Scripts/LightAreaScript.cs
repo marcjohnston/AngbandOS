@@ -18,6 +18,6 @@ internal class LightAreaScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        Game.LightArea(Game.DiceRoll(2, Game.ExperienceLevel.Value / 2), (Game.ExperienceLevel.Value / 10) + 1);
+        Game.LightArea(Game.DiceRoll(2, Game.ExperienceLevel.IntValue / 2), (Game.ExperienceLevel.IntValue / 10) + 1);
     }
 }

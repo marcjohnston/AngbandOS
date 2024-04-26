@@ -17,5 +17,5 @@ internal class ChaosSpellDisintegrate : Spell
 
     public override string Name => "Disintegrate";
 
-    protected override string LearnedDetails => $"dam {80 + Game.ExperienceLevel.Value}";
+    protected override string LearnedDetails => $"dam {80 + Game.ExperienceLevel.IntValue}";
 }

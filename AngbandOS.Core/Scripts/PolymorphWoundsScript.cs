@@ -29,8 +29,8 @@ internal class PolymorphWoundsScript : Script, IScript, IRepeatableScript
     public void ExecuteScript()
     {
         int wounds = Game.BleedingTimer.Value;
-        int hitP = Game.MaxHealth.Value - Game.Health.Value;
-        int change = Game.DiceRoll(Game.ExperienceLevel.Value, 5);
+        int hitP = Game.MaxHealth.IntValue - Game.Health.IntValue;
+        int change = Game.DiceRoll(Game.ExperienceLevel.IntValue, 5);
         bool nastyEffect = Game.DieRoll(5) == 1;
         if (!(wounds != 0 || hitP != 0 || nastyEffect))
         {

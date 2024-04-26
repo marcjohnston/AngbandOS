@@ -22,17 +22,17 @@ internal class HpToSpRandomMutation : Mutation
         {
             return;
         }
-        int wounds = Game.MaxMana.Value - Game.Mana.Value;
+        int wounds = Game.MaxMana.IntValue - Game.Mana.IntValue;
         if (wounds <= 0)
         {
             return;
         }
-        int healing = Game.Health.Value;
+        int healing = Game.Health.IntValue;
         if (healing > wounds)
         {
             healing = wounds;
         }
-        Game.Mana.Value += healing;
+        Game.Mana.IntValue += healing;
         Game.TakeHit(healing, "blood rushing to the head");
     }
 }

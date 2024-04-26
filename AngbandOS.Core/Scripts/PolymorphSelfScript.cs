@@ -60,7 +60,7 @@ internal class PolymorphSelfScript : Script, IScript, IRepeatableScript
                         Game.MsgPrint($"You turn into {newRace.IndefiniteArticleForTitle} {newRace.Title}!");
                         Game.ChangeRace(newRace);
                     }
-                    Game.MainForm.RefreshMapLocation(Game.MapY.Value, Game.MapX.Value);
+                    Game.MainForm.RefreshMapLocation(Game.MapY.IntValue, Game.MapX.IntValue);
                     moreEffects = false;
                     break;
 
@@ -74,7 +74,7 @@ internal class PolymorphSelfScript : Script, IScript, IRepeatableScript
                     if (Game.DieRoll(6) == 1)
                     {
                         Game.MsgPrint("You find living difficult in your present form!");
-                        Game.TakeHit(Game.DiceRoll(Game.DieRoll(Game.ExperienceLevel.Value), Game.ExperienceLevel.Value), "a lethal mutation");
+                        Game.TakeHit(Game.DiceRoll(Game.DieRoll(Game.ExperienceLevel.IntValue), Game.ExperienceLevel.IntValue), "a lethal mutation");
                     }
                     Game.ShuffleAbilityScores();
                     break;

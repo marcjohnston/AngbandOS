@@ -22,6 +22,6 @@ internal class AnimalTrainingScript : Script, IScript
         {
             return;
         }
-        Game.CharmAnimal(dir, Game.ExperienceLevel.Value);
+        Game.CharmAnimal(dir, Game.ExperienceLevel.IntValue);
     }
 }

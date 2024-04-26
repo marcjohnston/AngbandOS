@@ -47,15 +47,15 @@ internal abstract class Patron : IGetKey
             return;
         }
         MultiRew = true;
-        if (Game.ExperienceLevel.Value == 13)
+        if (Game.ExperienceLevel.IntValue == 13)
         {
             nastyChance = 2;
         }
-        else if (Game.ExperienceLevel.Value % 13 == 0)
+        else if (Game.ExperienceLevel.IntValue % 13 == 0)
         {
             nastyChance = 3;
         }
-        else if (Game.ExperienceLevel.Value % 14 == 0)
+        else if (Game.ExperienceLevel.IntValue % 14 == 0)
         {
             nastyChance = 12;
         }

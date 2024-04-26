@@ -78,7 +78,7 @@ internal class SpectreRace : Race
         Game.HasSlowDigestion = true;
         Game.HasColdResistance = true;
         Game.HasGlow = true;
-        if (Game.ExperienceLevel.Value > 34)
+        if (Game.ExperienceLevel.IntValue > 34)
         {
             Game.HasTelepathy = true;
         }
@@ -88,7 +88,7 @@ internal class SpectreRace : Race
     {
         // This race only gets 1/20th of the food value
         Game.MsgPrint("The food of mortals is poor sustenance for you.");
-        Game.SetFood(Game.Food.Value + (item.TypeSpecificValue / 20));
+        Game.SetFood(Game.Food.IntValue + (item.TypeSpecificValue / 20));
     }
     public override bool CanBleed(int level) => false;
 
@@ -104,7 +104,7 @@ internal class SpectreRace : Race
             Game.MsgPrint("You emit an eldritch howl!");
             if (Game.GetDirectionWithAim(out int direction))
             {
-                Game.FearMonster(direction, Game.ExperienceLevel.Value);
+                Game.FearMonster(direction, Game.ExperienceLevel.IntValue);
             }
         }
     }

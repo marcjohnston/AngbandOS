@@ -133,11 +133,11 @@ internal abstract class Spell : IGetKey
             return 100;
         }
         int chance = ClassSpell.BaseFailure;
-        chance -= 3 * (Game.ExperienceLevel.Value - ClassSpell.Level);
+        chance -= 3 * (Game.ExperienceLevel.IntValue - ClassSpell.Level);
         chance -= 3 * (Game.AbilityScores[Game.BaseCharacterClass.SpellStat].SpellFailureReduction - 1);
-        if (ClassSpell.ManaCost > Game.Mana.Value)
+        if (ClassSpell.ManaCost > Game.Mana.IntValue)
         {
-            chance += 5 * (ClassSpell.ManaCost - Game.Mana.Value);
+            chance += 5 * (ClassSpell.ManaCost - Game.Mana.IntValue);
         }
         int minfail = Game.AbilityScores[Game.BaseCharacterClass.SpellStat].SpellMinFailChance;
         if (Game.BaseCharacterClass.ID != CharacterClass.Priest && Game.BaseCharacterClass.ID != CharacterClass.Druid &&

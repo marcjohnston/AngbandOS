@@ -22,6 +22,6 @@ internal class GravityBeamScript : Script, IScript
         {
             return;
         }
-        Game.FireBeam(Game.SingletonRepository.Projectiles.Get(nameof(GravityProjectile)), dir, Game.DiceRoll(9 + ((Game.ExperienceLevel.Value - 5) / 4), 8));
+        Game.FireBeam(Game.SingletonRepository.Projectiles.Get(nameof(GravityProjectile)), dir, Game.DiceRoll(9 + ((Game.ExperienceLevel.IntValue - 5) / 4), 8));
     }
 }

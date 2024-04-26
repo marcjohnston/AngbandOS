@@ -18,7 +18,7 @@ internal class MinorDisplacementTalent : Talent
 
     public override void Use()
     {
-        if (Game.ExperienceLevel.Value < 25)
+        if (Game.ExperienceLevel.IntValue < 25)
         {
             Game.RunScriptInt(nameof(TeleportSelfScript), 10);
         }
@@ -29,8 +29,8 @@ internal class MinorDisplacementTalent : Talent
             {
                 return;
             }
-            Game.Energy -= 60 - Game.ExperienceLevel.Value;
-            if (!Game.GridPassableNoCreature(j, i) || Game.Map.Grid[j][i].InVault || Game.Map.Grid[j][i].FeatureType is not WaterTile || Game.Distance(j, i, Game.MapY.Value, Game.MapX.Value) > Game.ExperienceLevel.Value + 2 || Game.RandomLessThan(Game.ExperienceLevel.Value * Game.ExperienceLevel.Value / 2) == 0)
+            Game.Energy -= 60 - Game.ExperienceLevel.IntValue;
+            if (!Game.GridPassableNoCreature(j, i) || Game.Map.Grid[j][i].InVault || Game.Map.Grid[j][i].FeatureType is not WaterTile || Game.Distance(j, i, Game.MapY.IntValue, Game.MapX.IntValue) > Game.ExperienceLevel.IntValue + 2 || Game.RandomLessThan(Game.ExperienceLevel.IntValue * Game.ExperienceLevel.IntValue / 2) == 0)
             {
                 Game.MsgPrint("Something disrupts your concentration!");
                 Game.Energy -= 100;
@@ -45,6 +45,6 @@ internal class MinorDisplacementTalent : Talent
 
     protected override string Comment()
     {
-        return $"range {(Game.ExperienceLevel.Value < 25 ? 10 : Game.ExperienceLevel.Value + 2)}";
+        return $"range {(Game.ExperienceLevel.IntValue < 25 ? 10 : Game.ExperienceLevel.IntValue + 2)}";
     }
 }

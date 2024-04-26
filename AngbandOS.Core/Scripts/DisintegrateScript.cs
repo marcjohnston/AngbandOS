@@ -22,6 +22,6 @@ internal class DisintegrateScript : Script, IScript
         {
             return;
         }
-        Game.FireBall(Game.SingletonRepository.Projectiles.Get(nameof(DisintegrateProjectile)), dir, 80 + Game.ExperienceLevel.Value, 3 + (Game.ExperienceLevel.Value / 40));
+        Game.FireBall(Game.SingletonRepository.Projectiles.Get(nameof(DisintegrateProjectile)), dir, 80 + Game.ExperienceLevel.IntValue, 3 + (Game.ExperienceLevel.IntValue / 40));
     }
 }

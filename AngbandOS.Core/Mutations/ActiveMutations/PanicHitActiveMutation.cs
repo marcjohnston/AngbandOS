@@ -21,8 +21,8 @@ internal class PanicHitActiveMutation : Mutation
         {
             return;
         }
-        int y = Game.MapY.Value + Game.KeypadDirectionYOffset[dir];
-        int x = Game.MapX.Value + Game.KeypadDirectionXOffset[dir];
+        int y = Game.MapY.IntValue + Game.KeypadDirectionYOffset[dir];
+        int x = Game.MapX.IntValue + Game.KeypadDirectionXOffset[dir];
         if (Game.Map.Grid[y][x].MonsterIndex != 0)
         {
             Game.PlayerAttackMonster(y, x);

@@ -68,7 +68,7 @@ internal class GolemRace : Race
     }
     public override void CalcBonuses()
     {
-        if (Game.ExperienceLevel.Value > 34)
+        if (Game.ExperienceLevel.IntValue > 34)
         {
             Game.HasHoldLife = true;
         }
@@ -76,15 +76,15 @@ internal class GolemRace : Race
         Game.HasFreeAction = true;
         Game.HasSeeInvisibility = true;
         Game.HasPoisonResistance = true;
-        Game.ArmorClassBonus += 20 + (Game.ExperienceLevel.Value / 5);
-        Game.DisplayedArmorClassBonus.Value += 20 + (Game.ExperienceLevel.Value / 5);
+        Game.ArmorClassBonus += 20 + (Game.ExperienceLevel.IntValue / 5);
+        Game.DisplayedArmorClassBonus.IntValue += 20 + (Game.ExperienceLevel.IntValue / 5);
     }
 
     public override void Eat(Item item)
     {
         // This race only gets 1/20th of the food value
         Game.MsgPrint("The food of mortals is poor sustenance for you.");
-        Game.SetFood(Game.Food.Value + (item.TypeSpecificValue / 20));
+        Game.SetFood(Game.Food.IntValue + (item.TypeSpecificValue / 20));
     }
 
     public override bool CanBleed(int level) => false;

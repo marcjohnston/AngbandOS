@@ -22,6 +22,6 @@ internal class DoomBoltScript : Script, IScript
         {
             return;
         }
-        Game.FireBeam(Game.SingletonRepository.Projectiles.Get(nameof(ManaProjectile)), dir, Game.DiceRoll(11 + ((Game.ExperienceLevel.Value - 5) / 4), 8));
+        Game.FireBeam(Game.SingletonRepository.Projectiles.Get(nameof(ManaProjectile)), dir, Game.DiceRoll(11 + ((Game.ExperienceLevel.IntValue - 5) / 4), 8));
     }
 }

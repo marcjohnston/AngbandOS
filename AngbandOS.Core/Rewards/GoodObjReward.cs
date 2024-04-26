@@ -15,6 +15,6 @@ internal class GoodObjReward : Reward
     {
         Game.MsgPrint($"The voice of {patron.ShortName} whispers:");
         Game.MsgPrint("'Use my gift wisely.'");
-        Game.Acquirement(Game.MapY.Value, Game.MapX.Value, 1, false);
+        Game.Acquirement(Game.MapY.IntValue, Game.MapX.IntValue, 1, false);
     }
 }

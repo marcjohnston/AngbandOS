@@ -15,5 +15,5 @@ internal class NatureSpellLightningStorm : Spell
 
     public override string Name => "Lightning Storm";
 
-    protected override string LearnedDetails => $"dam {90 + Game.ExperienceLevel.Value}";
+    protected override string LearnedDetails => $"dam {90 + Game.ExperienceLevel.IntValue}";
 }

@@ -15,5 +15,5 @@ internal class NatureSpellNaturesWrath : Spell
 
     public override string Name => "Nature's Wrath";
 
-    protected override string LearnedDetails => $"dam {4 * Game.ExperienceLevel.Value}+{100 + Game.ExperienceLevel.Value}";
+    protected override string LearnedDetails => $"dam {4 * Game.ExperienceLevel.IntValue}+{100 + Game.ExperienceLevel.IntValue}";
 }

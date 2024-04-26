@@ -20,7 +20,7 @@ internal class SpitAcidActiveMutation : Mutation
         Game.MsgPrint("You spit acid...");
         if (Game.GetDirectionWithAim(out int dir))
         {
-            Game.FireBall(Game.SingletonRepository.Projectiles.Get(nameof(AcidProjectile)), dir, Game.ExperienceLevel.Value, 1 + (Game.ExperienceLevel.Value / 30));
+            Game.FireBall(Game.SingletonRepository.Projectiles.Get(nameof(AcidProjectile)), dir, Game.ExperienceLevel.IntValue, 1 + (Game.ExperienceLevel.IntValue / 30));
         }
     }
 

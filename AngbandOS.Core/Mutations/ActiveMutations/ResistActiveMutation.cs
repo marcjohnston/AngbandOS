@@ -15,7 +15,7 @@ internal class ResistActiveMutation : Mutation
     {
         if (Game.CheckIfRacialPowerWorks(10, 12, Ability.Constitution, 12))
         {
-            int num = Game.ExperienceLevel.Value / 10;
+            int num = Game.ExperienceLevel.IntValue / 10;
             int dur = base.Game.DieRoll(20) + 20;
             if (base.Game.RandomLessThan(5) < num)
             {

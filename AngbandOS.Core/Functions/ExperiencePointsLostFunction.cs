@@ -16,7 +16,7 @@ namespace AngbandOS.Core.Functions;
 internal class ExperiencePointsLostFunction : BoolFunction
 {
     private ExperiencePointsLostFunction(Game game) : base(game) { }
-    public override bool BoolValue => Game.ExperiencePoints.Value < Game.MaxExperienceGained.Value;
+    public override bool BoolValue => Game.ExperiencePoints.IntValue < Game.MaxExperienceGained.IntValue;
     public override string[]? DependencyNames => new string[]
     {
         nameof(ExperiencePointsIntProperty),

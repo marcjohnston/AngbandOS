@@ -18,6 +18,6 @@ internal class DispelGood4xScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        Game.ProjectAtAllInLos(Game.SingletonRepository.Projectiles.Get(nameof(DispGoodProjectile)), Game.ExperienceLevel.Value * 4);
+        Game.ProjectAtAllInLos(Game.SingletonRepository.Projectiles.Get(nameof(DispGoodProjectile)), Game.ExperienceLevel.IntValue * 4);
     }
 }

@@ -43,7 +43,7 @@ internal class PsiDrainProjectile : Projectile
         {
             dam /= 3;
             note = " resists.";
-            if ((rPtr.Undead || rPtr.Demon) && rPtr.Level > Game.ExperienceLevel.Value / 2 && Game.DieRoll(2) == 1)
+            if ((rPtr.Undead || rPtr.Demon) && rPtr.Level > Game.ExperienceLevel.IntValue / 2 && Game.DieRoll(2) == 1)
             {
                 note = null;
                 string s = seen ? "'s" : "s";
@@ -56,7 +56,7 @@ internal class PsiDrainProjectile : Projectile
                 {
                     string killer = mPtr.IndefiniteVisibleName;
                     Game.MsgPrint("Your psychic energy is drained!");
-                    Game.Mana.Value = Math.Max(0, Game.Mana.Value - (Game.DiceRoll(5, dam) / 2));
+                    Game.Mana.IntValue = Math.Max(0, Game.Mana.IntValue - (Game.DiceRoll(5, dam) / 2));
                     Game.TakeHit(dam, killer);
                 }
                 dam = 0;
@@ -67,8 +67,8 @@ internal class PsiDrainProjectile : Projectile
             int b = Game.DiceRoll(5, dam) / 4;
             string s = seen ? "'s" : "s";
             Game.MsgPrint($"You convert {mName}{s} pain into psychic energy!");
-            b = Math.Min(Game.MaxMana.Value, Game.Mana.Value + b);
-            Game.Mana.Value = b;
+            b = Math.Min(Game.MaxMana.IntValue, Game.Mana.IntValue + b);
+            Game.Mana.IntValue = b;
         }
         string noteDies = " collapses, a mindless husk.";
         ApplyProjectileDamageToMonster(who, mPtr, dam, note, noteDies);

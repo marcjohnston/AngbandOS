@@ -18,11 +18,11 @@ internal class SummonHordeScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        int wy = Game.MapY.Value, wx = Game.MapX.Value;
+        int wy = Game.MapY.IntValue, wx = Game.MapX.IntValue;
         int attempts = 1000;
         while (--attempts != 0)
         {
-            Game.Scatter(out wy, out wx, Game.MapY.Value, Game.MapX.Value, 3);
+            Game.Scatter(out wy, out wx, Game.MapY.IntValue, Game.MapX.IntValue, 3);
             if (Game.GridOpenNoItemOrCreature(wy, wx))
             {
                 break;

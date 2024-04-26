@@ -15,9 +15,9 @@ internal class GainExpReward : Reward
     {
         Game.MsgPrint($"The voice of {patron.ShortName} booms out:");
         Game.MsgPrint("'Well done, mortal! Lead on!'");
-        if (Game.ExperiencePoints.Value < Constants.PyMaxExp)
+        if (Game.ExperiencePoints.IntValue < Constants.PyMaxExp)
         {
-            int ee = (Game.ExperiencePoints.Value / 2) + 10;
+            int ee = (Game.ExperiencePoints.IntValue / 2) + 10;
             if (ee > 100000)
             {
                 ee = 100000;

@@ -15,5 +15,5 @@ internal class TarotSpellMindBlast : Spell
 
     public override string Name => "Mind Blast";
 
-    protected override string LearnedDetails => $"dam {3 + ((Game.ExperienceLevel.Value - 1) / 5)}d3";
+    protected override string LearnedDetails => $"dam {3 + ((Game.ExperienceLevel.IntValue - 1) / 5)}d3";
 }

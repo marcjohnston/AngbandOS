@@ -14,7 +14,7 @@ namespace AngbandOS.Core.Widgets;
 internal abstract class MaxRangedWidget : TextWidget
 {
     private bool _sortValidated = false;
-    private int _value;
+    private string _value;
     private ColorEnum _color;
 
     protected MaxRangedWidget(Game game) : base(game)
@@ -29,7 +29,7 @@ internal abstract class MaxRangedWidget : TextWidget
     /// 
     /// The factor
     /// </summary>
-    public abstract (int percentage, ColorEnum color)[] Ranges { get; }
+    public abstract (int percentage, string? text, ColorEnum color)[] Ranges { get; }
 
     /// <summary>
     /// Returns the color for the <see cref="Text"/> to be rendered in when none of the ranges apply.  Returns the color white, by default.
@@ -58,7 +58,15 @@ internal abstract class MaxRangedWidget : TextWidget
             }
             else
             {
-                throw new Exception($"The {nameof(MaxIntValueName)} property does not specify a valid {nameof(Property)} or {nameof(Timer)}.");
+                Function? function = Game.SingletonRepository.Functions.TryGet(MaxIntValueName);
+                if (function != null)
+                {
+                    MaxIntValue = (IIntValue)function;
+                }
+                else
+                {
+                    throw new Exception($"The {MaxIntValueName} property does not specify a valid {nameof(Property)}, {nameof(Timer)} or {nameof(Function)}.");
+                }
             }
         }
 
@@ -95,7 +103,7 @@ internal abstract class MaxRangedWidget : TextWidget
         if (!_sortValidated)
         {
             int? previousMaxValue = null;
-            foreach ((int percentage, ColorEnum color) in Ranges)
+            foreach ((int percentage, string? text, ColorEnum color) in Ranges)
             {
                 if (previousMaxValue != null && percentage >= previousMaxValue.Value)
                 {
@@ -107,7 +115,7 @@ internal abstract class MaxRangedWidget : TextWidget
         }
     }
 
-    public sealed override string Text => _value.ToString();
+    public sealed override string Text => _value;
 
     public sealed override ColorEnum Color => _color;
 
@@ -118,13 +126,14 @@ internal abstract class MaxRangedWidget : TextWidget
 
         // Grab a copy of the value and max value so that we do not retrieve it for every range.
         int intValue = IntValue.IntValue;
+        string intTextValue = intValue.ToString();
         int maxValue = MaxIntValue.IntValue;
 
         // Apply the default text and color.
         ColorEnum foundColor = DefaultColor;
 
         // Scan the ranges for the first valid range.
-        foreach ((int percentage, ColorEnum color) in Ranges)
+        foreach ((int percentage, string? text, ColorEnum color) in Ranges)
         {
             (int quotient, int remainder) = Math.DivRem(maxValue * percentage, 100);
             if (remainder > 0)
@@ -135,16 +144,25 @@ internal abstract class MaxRangedWidget : TextWidget
             // Check the value with the percentage of the maximum value.
             if (intValue >= quotient) // We are rounding up so that small max values wont match percentages resulting in a 0 from a round down
             {
+                if (text != null)
+                {
+                    intTextValue = text;
+                }
+                else
+                {
+                    intTextValue = intValue.ToString();
+                }
                 foundColor = color;
                 break;
             }
         }
 
+
         // Check to see if the value has changed or color has changed.
-        if (foundColor != _color || intValue != _value)
+        if (foundColor != _color || intTextValue != _value)
         {
             // Update the exposed value and color.
-            _value = intValue;
+            _value = intTextValue;
             _color = foundColor;
 
             Invalidate();

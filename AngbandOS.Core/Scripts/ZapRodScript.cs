@@ -103,7 +103,7 @@ internal class ZapRodScript : Script, IScript, IRepeatableScript
         if (identified && !item.IsFlavorAware())
         {
             item.BecomeFlavorAware();
-            Game.GainExperience((itemLevel + (Game.ExperienceLevel.Value >> 1)) / Game.ExperienceLevel.Value);
+            Game.GainExperience((itemLevel + (Game.ExperienceLevel.IntValue >> 1)) / Game.ExperienceLevel.IntValue);
         }
         // We may not have actually used a charge
         if (!useCharge)

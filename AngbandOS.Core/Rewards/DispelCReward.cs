@@ -14,6 +14,6 @@ internal class DispelCReward : Reward
     public override void GetReward(Patron patron)
     {
         Game.MsgPrint($"You can feel the power of {patron.ShortName} assault your enemies!");
-        Game.DispelMonsters(Game.ExperienceLevel.Value * 4);
+        Game.DispelMonsters(Game.ExperienceLevel.IntValue * 4);
     }
 }

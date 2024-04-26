@@ -18,12 +18,12 @@ internal class SenseInventoryScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        int playerLevel = Game.ExperienceLevel.Value;
+        int playerLevel = Game.ExperienceLevel.IntValue;
         if (Game.ConfusedTimer.Value != 0)
         {
             return;
         }
-        if (!Game.BaseCharacterClass.SenseInventoryTest(Game.ExperienceLevel.Value))
+        if (!Game.BaseCharacterClass.SenseInventoryTest(Game.ExperienceLevel.IntValue))
         {
             return;
         }

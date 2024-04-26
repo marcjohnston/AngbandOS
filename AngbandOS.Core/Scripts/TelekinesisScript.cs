@@ -22,6 +22,6 @@ internal class TelekinesisScript : Script, IScript
         {
             return;
         }
-        Game.SummonItem(dir, Game.ExperienceLevel.Value * 15, false);
+        Game.SummonItem(dir, Game.ExperienceLevel.IntValue * 15, false);
     }
 }

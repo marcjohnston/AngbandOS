@@ -69,7 +69,7 @@ internal abstract class BaseCharacterClass : IGetKey
             return;
         }
 
-        if (spell.ClassSpell.ManaCost > Game.Mana.Value)
+        if (spell.ClassSpell.ManaCost > Game.Mana.IntValue)
         {
             string cast = Game.BaseCharacterClass.CastVerb;
             Game.MsgPrint($"You do not have enough mana to {cast} this {prayer}.");
@@ -94,14 +94,14 @@ internal abstract class BaseCharacterClass : IGetKey
             spell.CastSpell();
         }
         Game.EnergyUse = 100;
-        if (spell.ClassSpell.ManaCost <= Game.Mana.Value)
+        if (spell.ClassSpell.ManaCost <= Game.Mana.IntValue)
         {
-            Game.Mana.Value -= spell.ClassSpell.ManaCost;
+            Game.Mana.IntValue -= spell.ClassSpell.ManaCost;
         }
         else
         {
-            int oops = spell.ClassSpell.ManaCost - Game.Mana.Value;
-            Game.Mana.Value = 0;
+            int oops = spell.ClassSpell.ManaCost - Game.Mana.IntValue;
+            Game.Mana.IntValue = 0;
             Game.FractionalMana = 0;
             Game.MsgPrint("You faint from the effort!");
             Game.ParalysisTimer.AddTimer(Game.DieRoll((5 * oops) + 1));
@@ -116,7 +116,7 @@ internal abstract class BaseCharacterClass : IGetKey
 
     public void CastMentalism()
     {
-        int plev = Game.ExperienceLevel.Value;
+        int plev = Game.ExperienceLevel.IntValue;
         if (Game.ConfusedTimer.Value != 0)
         {
             Game.MsgPrint("You are too confused!");
@@ -127,7 +127,7 @@ internal abstract class BaseCharacterClass : IGetKey
             return;
         }
         Talents.Talent talent = Game.Talents[n];
-        if (talent.ManaCost > Game.Mana.Value)
+        if (talent.ManaCost > Game.Mana.IntValue)
         {
             Game.MsgPrint("You do not have enough mana to use this talent.");
             if (!Game.GetCheck("Attempt it anyway? "))
@@ -164,8 +164,8 @@ internal abstract class BaseCharacterClass : IGetKey
                 else
                 {
                     Game.MsgPrint("Your mind unleashes its power in an uncontrollable storm!");
-                    Game.Project(1, 2 + (plev / 10), Game.MapY.Value, Game.MapX.Value, plev * 2, Game.SingletonRepository.Projectiles.Get(nameof(ManaProjectile)), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectKill | ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem);
-                    Game.Mana.Value = Math.Max(0, Game.Mana.Value - (plev * Math.Max(1, plev / 10)));
+                    Game.Project(1, 2 + (plev / 10), Game.MapY.IntValue, Game.MapX.IntValue, plev * 2, Game.SingletonRepository.Projectiles.Get(nameof(ManaProjectile)), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectKill | ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem);
+                    Game.Mana.IntValue = Math.Max(0, Game.Mana.IntValue - (plev * Math.Max(1, plev / 10)));
                 }
             }
         }
@@ -174,14 +174,14 @@ internal abstract class BaseCharacterClass : IGetKey
             talent.Use();
         }
         Game.EnergyUse = 100;
-        if (talent.ManaCost <= Game.Mana.Value)
+        if (talent.ManaCost <= Game.Mana.IntValue)
         {
-            Game.Mana.Value -= talent.ManaCost;
+            Game.Mana.IntValue -= talent.ManaCost;
         }
         else
         {
-            int oops = talent.ManaCost - Game.Mana.Value;
-            Game.Mana.Value = 0;
+            int oops = talent.ManaCost - Game.Mana.IntValue;
+            Game.Mana.IntValue = 0;
             Game.FractionalMana = 0;
             Game.MsgPrint("You faint from the effort!");
             Game.ParalysisTimer.AddTimer(Game.DieRoll((5 * oops) + 1));
@@ -200,7 +200,7 @@ internal abstract class BaseCharacterClass : IGetKey
         int num = 0;
         int y = 1;
         int x = 20;
-        int plev = Game.ExperienceLevel.Value;
+        int plev = Game.ExperienceLevel.IntValue;
         string p = "talent";
         sn = -1;
         bool flag = false;
@@ -444,9 +444,9 @@ internal abstract class BaseCharacterClass : IGetKey
     /// <param name="amount">The amount.</param>
     protected void GainExperienceFromSpellBookDestroy(Item item, int amount)
     {
-        if (Game.ExperiencePoints.Value < Constants.PyMaxExp)
+        if (Game.ExperiencePoints.IntValue < Constants.PyMaxExp)
         {
-            int testerExp = Game.MaxExperienceGained.Value / 20;
+            int testerExp = Game.MaxExperienceGained.IntValue / 20;
             if (testerExp > 10000)
             {
                 testerExp = 10000;

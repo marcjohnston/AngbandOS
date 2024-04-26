@@ -18,13 +18,13 @@ internal class DominationTalent : Talent
 
     public override void Use()
     {
-        if (Game.ExperienceLevel.Value < 30)
+        if (Game.ExperienceLevel.IntValue < 30)
         {
             if (!Game.GetDirectionWithAim(out int dir))
             {
                 return;
             }
-            Game.FireBall(Game.SingletonRepository.Projectiles.Get(nameof(DominationProjectile)), dir, Game.ExperienceLevel.Value, 0);
+            Game.FireBall(Game.SingletonRepository.Projectiles.Get(nameof(DominationProjectile)), dir, Game.ExperienceLevel.IntValue, 0);
         }
         else
         {

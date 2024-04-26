@@ -357,51 +357,51 @@ internal class RenderCharacterScript : Script, IScript, IRepeatableScript
         // Print some basics
         PrintBonus("+ To Hit    ", showTohit, 30, 1, ColorEnum.Brown);
         PrintBonus("+ To Damage ", showTodam, 31, 1, ColorEnum.Brown);
-        PrintBonus("+ To AC     ", Game.DisplayedArmorClassBonus.Value, 32, 1, ColorEnum.Brown);
-        PrintShortScore("  Base AC   ", Game.DisplayedBaseArmorClass.Value, 33, 1, ColorEnum.Brown);
-        PrintShortScore("Level      ", Game.ExperienceLevel.Value, 30, 28, ColorEnum.Green);
-        PrintLongScore("Experience ", Game.ExperiencePoints.Value, 31, 28,
-            Game.ExperiencePoints.Value >= Game.MaxExperienceGained.Value ? ColorEnum.Green : ColorEnum.Red);
-        PrintLongScore("Max Exp    ", Game.MaxExperienceGained.Value, 32, 28, ColorEnum.Green);
+        PrintBonus("+ To AC     ", Game.DisplayedArmorClassBonus.IntValue, 32, 1, ColorEnum.Brown);
+        PrintShortScore("  Base AC   ", Game.DisplayedBaseArmorClass.IntValue, 33, 1, ColorEnum.Brown);
+        PrintShortScore("Level      ", Game.ExperienceLevel.IntValue, 30, 28, ColorEnum.Green);
+        PrintLongScore("Experience ", Game.ExperiencePoints.IntValue, 31, 28,
+            Game.ExperiencePoints.IntValue >= Game.MaxExperienceGained.IntValue ? ColorEnum.Green : ColorEnum.Red);
+        PrintLongScore("Max Exp    ", Game.MaxExperienceGained.IntValue, 32, 28, ColorEnum.Green);
         // If we're max level we don't have any experience to advance
-        if (Game.ExperienceLevel.Value >= Constants.PyMaxLevel)
+        if (Game.ExperienceLevel.IntValue >= Constants.PyMaxLevel)
         {
             Game.Screen.Print(ColorEnum.Blue, "Exp to Adv.", 33, 28);
             Game.Screen.Print(ColorEnum.Green, "    *****", 33, 28 + 11);
         }
         else
         {
-            PrintLongScore("Exp to Adv.", (int)(Constants.PlayerExp[Game.ExperienceLevel.Value - 1] * Game.ExperienceMultiplier.Value / 100L), 33, 28,
+            PrintLongScore("Exp to Adv.", (int)(Constants.PlayerExp[Game.ExperienceLevel.IntValue - 1] * Game.ExperienceMultiplier.IntValue / 100L), 33, 28,
                 ColorEnum.Green);
         }
-        PrintLongScore("Exp Factor ", Game.ExperienceMultiplier.Value, 34, 28, ColorEnum.Green);
-        PrintShortScore("Max Hit Points ", Game.MaxHealth.Value, 30, 52, ColorEnum.Green);
-        if (Game.Health.Value >= Game.MaxHealth.Value)
+        PrintLongScore("Exp Factor ", Game.ExperienceMultiplier.IntValue, 34, 28, ColorEnum.Green);
+        PrintShortScore("Max Hit Points ", Game.MaxHealth.IntValue, 30, 52, ColorEnum.Green);
+        if (Game.Health.IntValue >= Game.MaxHealth.IntValue)
         {
-            PrintShortScore("Cur Hit Points ", Game.Health.Value, 31, 52, ColorEnum.Green);
+            PrintShortScore("Cur Hit Points ", Game.Health.IntValue, 31, 52, ColorEnum.Green);
         }
-        else if (Game.Health.Value > Game.MaxHealth.Value * Constants.HitpointWarn / 10)
+        else if (Game.Health.IntValue > Game.MaxHealth.IntValue * Constants.HitpointWarn / 10)
         {
-            PrintShortScore("Cur Hit Points ", Game.Health.Value, 31, 52, ColorEnum.BrightYellow);
-        }
-        else
-        {
-            PrintShortScore("Cur Hit Points ", Game.Health.Value, 31, 52, ColorEnum.BrightRed);
-        }
-        PrintShortScore("Max SP (Mana)  ", Game.MaxMana.Value, 32, 52, ColorEnum.Green);
-        if (Game.Mana.Value >= Game.MaxMana.Value)
-        {
-            PrintShortScore("Cur SP (Mana)  ", Game.Mana.Value, 33, 52, ColorEnum.Green);
-        }
-        else if (Game.Mana.Value > Game.MaxMana.Value * Constants.HitpointWarn / 10)
-        {
-            PrintShortScore("Cur SP (Mana)  ", Game.Mana.Value, 33, 52, ColorEnum.BrightYellow);
+            PrintShortScore("Cur Hit Points ", Game.Health.IntValue, 31, 52, ColorEnum.BrightYellow);
         }
         else
         {
-            PrintShortScore("Cur SP (Mana)  ", Game.Mana.Value, 33, 52, ColorEnum.BrightRed);
+            PrintShortScore("Cur Hit Points ", Game.Health.IntValue, 31, 52, ColorEnum.BrightRed);
         }
-        PrintLongScore("Gold           ", Game.Gold.Value, 34, 52, ColorEnum.Green);
+        PrintShortScore("Max SP (Mana)  ", Game.MaxMana.IntValue, 32, 52, ColorEnum.Green);
+        if (Game.Mana.IntValue >= Game.MaxMana.IntValue)
+        {
+            PrintShortScore("Cur SP (Mana)  ", Game.Mana.IntValue, 33, 52, ColorEnum.Green);
+        }
+        else if (Game.Mana.IntValue > Game.MaxMana.IntValue * Constants.HitpointWarn / 10)
+        {
+            PrintShortScore("Cur SP (Mana)  ", Game.Mana.IntValue, 33, 52, ColorEnum.BrightYellow);
+        }
+        else
+        {
+            PrintShortScore("Cur SP (Mana)  ", Game.Mana.IntValue, 33, 52, ColorEnum.BrightRed);
+        }
+        PrintLongScore("Gold           ", Game.Gold.IntValue, 34, 52, ColorEnum.Green);
     }
 
     /// <summary>

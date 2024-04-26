@@ -17,5 +17,5 @@ internal class DeathSpellWraithform : Spell
 
     public override string Name => "Wraithform";
 
-    protected override string LearnedDetails => $"dur {Game.ExperienceLevel.Value / 2}+d{Game.ExperienceLevel.Value / 2}";
+    protected override string LearnedDetails => $"dur {Game.ExperienceLevel.IntValue / 2}+d{Game.ExperienceLevel.IntValue / 2}";
 }

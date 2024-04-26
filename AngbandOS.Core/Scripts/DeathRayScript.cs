@@ -23,6 +23,6 @@ internal class DeathRayScript : Script, IScript
             return;
         }
         ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;
-        Game.TargetedProject(Game.SingletonRepository.Projectiles.Get(nameof(DeathRayProjectile)), dir, Game.ExperienceLevel.Value, flg);
+        Game.TargetedProject(Game.SingletonRepository.Projectiles.Get(nameof(DeathRayProjectile)), dir, Game.ExperienceLevel.IntValue, flg);
     }
 }

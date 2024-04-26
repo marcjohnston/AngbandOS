@@ -39,11 +39,11 @@ internal abstract class Talent : IGetKey
     public int FailureChance()
     {
         int chance = BaseFailure;
-        chance -= 3 * (Game.ExperienceLevel.Value - Level);
+        chance -= 3 * (Game.ExperienceLevel.IntValue - Level);
         chance -= 3 * (Game.AbilityScores[Game.BaseCharacterClass.SpellStat].SpellFailureReduction - 1);
-        if (ManaCost > Game.Mana.Value)
+        if (ManaCost > Game.Mana.IntValue)
         {
-            chance += 5 * (ManaCost - Game.Mana.Value);
+            chance += 5 * (ManaCost - Game.Mana.IntValue);
         }
         int minfail = Game.AbilityScores[Game.BaseCharacterClass.SpellStat].SpellMinFailChance;
         if (chance < minfail)

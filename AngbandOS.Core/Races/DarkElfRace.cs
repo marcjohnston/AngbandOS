@@ -61,7 +61,7 @@ internal class DarkElfRace : Race
     public override void CalcBonuses()
     {
         Game.HasDarkResistance = true;
-        if (Game.ExperienceLevel.Value > 19)
+        if (Game.ExperienceLevel.IntValue > 19)
         {
             Game.HasSeeInvisibility = true;
         }
@@ -75,7 +75,7 @@ internal class DarkElfRace : Race
             if (Game.GetDirectionWithAim(out int direction))
             {
                 Game.MsgPrint("You cast a magic missile.");
-                Game.FireBoltOrBeam(10, Game.SingletonRepository.Projectiles.Get(nameof(MissileProjectile)), direction, Game.DiceRoll(3 + ((Game.ExperienceLevel.Value - 1) / 5), 4));
+                Game.FireBoltOrBeam(10, Game.SingletonRepository.Projectiles.Get(nameof(MissileProjectile)), direction, Game.DiceRoll(3 + ((Game.ExperienceLevel.IntValue - 1) / 5), 4));
             }
         }
     }

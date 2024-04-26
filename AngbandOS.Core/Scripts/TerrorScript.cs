@@ -18,6 +18,6 @@ internal class TerrorScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        Game.TurnMonsters(30 + Game.ExperienceLevel.Value);
+        Game.TurnMonsters(30 + Game.ExperienceLevel.IntValue);
     }
 }

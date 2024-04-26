@@ -16,7 +16,7 @@ internal class HurtLotReward : Reward
         string wrathReason = $"the Wrath of {patron.ShortName}";
         Game.MsgPrint($"The voice of {patron.ShortName} booms out:");
         Game.MsgPrint("'Suffer, pathetic fool!'");
-        Game.FireBall(Game.SingletonRepository.Projectiles.Get(nameof(DisintegrateProjectile)), 0, Game.ExperienceLevel.Value * 4, 4);
-        Game.TakeHit(Game.ExperienceLevel.Value * 4, wrathReason);
+        Game.FireBall(Game.SingletonRepository.Projectiles.Get(nameof(DisintegrateProjectile)), 0, Game.ExperienceLevel.IntValue * 4, 4);
+        Game.TakeHit(Game.ExperienceLevel.IntValue * 4, wrathReason);
     }
 }

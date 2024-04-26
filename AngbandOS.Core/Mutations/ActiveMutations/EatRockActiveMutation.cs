@@ -21,8 +21,8 @@ internal class EatRockActiveMutation : Mutation
         {
             return;
         }
-        int y = Game.MapY.Value + Game.KeypadDirectionYOffset[dir];
-        int x = Game.MapX.Value + Game.KeypadDirectionXOffset[dir];
+        int y = Game.MapY.IntValue + Game.KeypadDirectionYOffset[dir];
+        int x = Game.MapX.IntValue + Game.KeypadDirectionXOffset[dir];
         GridTile cPtr = Game.Map.Grid[y][x];
         if (Game.GridPassable(y, x))
         {
@@ -46,23 +46,23 @@ internal class EatRockActiveMutation : Mutation
         }
         if (cPtr.FeatureType.IsVisibleDoor || cPtr.FeatureType.IsSecretDoor || cPtr.FeatureType.IsRubble)
         {
-            Game.SetFood(Game.Food.Value + 3000);
+            Game.SetFood(Game.Food.IntValue + 3000);
         }
         else if (cPtr.FeatureType.IsVein)
         {
-            Game.SetFood(Game.Food.Value + 5000);
+            Game.SetFood(Game.Food.IntValue + 5000);
         }
         else
         {
             Game.MsgPrint("This granite is very filling!");
-            Game.SetFood(Game.Food.Value + 10000);
+            Game.SetFood(Game.Food.IntValue + 10000);
         }
         Game.WallToMud(dir);
-        int oy = Game.MapY.Value;
-        int ox = Game.MapX.Value;
-        Game.MapY.Value = y;
-        Game.MapX.Value = x;
-        Game.MainForm.RefreshMapLocation(Game.MapY.Value, Game.MapX.Value);
+        int oy = Game.MapY.IntValue;
+        int ox = Game.MapX.IntValue;
+        Game.MapY.IntValue = y;
+        Game.MapX.IntValue = x;
+        Game.MainForm.RefreshMapLocation(Game.MapY.IntValue, Game.MapX.IntValue);
         Game.MainForm.RefreshMapLocation(oy, ox);
         Game.RecenterScreenAroundPlayer();
         base.Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateScentFlaggedAction)).Set();

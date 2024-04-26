@@ -77,23 +77,23 @@ internal class DraconianRace : Race
     public override void CalcBonuses()
     {
         Game.HasFeatherFall = true;
-        if (Game.ExperienceLevel.Value > 4)
+        if (Game.ExperienceLevel.IntValue > 4)
         {
             Game.HasFireResistance = true;
         }
-        if (Game.ExperienceLevel.Value > 9)
+        if (Game.ExperienceLevel.IntValue > 9)
         {
             Game.HasColdResistance = true;
         }
-        if (Game.ExperienceLevel.Value > 14)
+        if (Game.ExperienceLevel.IntValue > 14)
         {
             Game.HasAcidResistance = true;
         }
-        if (Game.ExperienceLevel.Value > 19)
+        if (Game.ExperienceLevel.IntValue > 19)
         {
             Game.HasLightningResistance = true;
         }
-        if (Game.ExperienceLevel.Value > 34)
+        if (Game.ExperienceLevel.IntValue > 34)
         {
             Game.HasPoisonResistance = true;
         }
@@ -118,7 +118,7 @@ internal class DraconianRace : Race
         }
 
         // Chance of replacing the default fire/cold element with a special one
-        if (Game.DieRoll(100) < Game.ExperienceLevel.Value)
+        if (Game.DieRoll(100) < Game.ExperienceLevel.IntValue)
         {
             switch (Game.BaseCharacterClass.ID)
             {
@@ -223,12 +223,12 @@ internal class DraconianRace : Race
                     break;
             }
         }
-        if (Game.CheckIfRacialPowerWorks(1, Game.ExperienceLevel.Value, Ability.Constitution, 12))
+        if (Game.CheckIfRacialPowerWorks(1, Game.ExperienceLevel.IntValue, Ability.Constitution, 12))
         {
             if (Game.GetDirectionWithAim(out int direction))
             {
                 Game.MsgPrint($"You breathe {projectileDescription}.");
-                Game.FireBall(projectile, direction, Game.ExperienceLevel.Value * 2, -(Game.ExperienceLevel.Value / 15) + 1);
+                Game.FireBall(projectile, direction, Game.ExperienceLevel.IntValue * 2, -(Game.ExperienceLevel.IntValue / 15) + 1);
             }
         }
     }

@@ -87,7 +87,7 @@ internal class AlchemyScript : Script, IScript, ICancellableScript
                 price = 30000;
             }
             Game.MsgPrint($"You turn {oName} to {price} coins worth of gold.");
-            Game.Gold.Value += price;
+            Game.Gold.IntValue += price;
         }
         oPtr.ItemIncrease(-amt);
         oPtr.ItemDescribe();

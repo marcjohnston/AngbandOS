@@ -15,5 +15,5 @@ internal class LifeSpellExorcism : Spell
 
     public override string Name => "Exorcism";
 
-    protected override string LearnedDetails => $"dam {Game.ExperienceLevel.Value}+{Game.ExperienceLevel.Value}";
+    protected override string LearnedDetails => $"dam {Game.ExperienceLevel.IntValue}+{Game.ExperienceLevel.IntValue}";
 }

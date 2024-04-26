@@ -17,5 +17,5 @@ internal class ChaosSpellInvokeChaos : Spell
 
     public override string Name => "Invoke Chaos";
 
-    protected override string LearnedDetails => $"dam {66 + Game.ExperienceLevel.Value}";
+    protected override string LearnedDetails => $"dam {66 + Game.ExperienceLevel.IntValue}";
 }

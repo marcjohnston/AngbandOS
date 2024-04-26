@@ -29,7 +29,7 @@ internal class GoUpStairsScript : Script, IScript, IRepeatableScript
     public void ExecuteScript()
     {
         // We need to actually be on an up staircase
-        GridTile tile = Game.Map.Grid[Game.MapY.Value][Game.MapX.Value];
+        GridTile tile = Game.Map.Grid[Game.MapY.IntValue][Game.MapX.IntValue];
         if (tile.FeatureType is not UpStaircaseTile)
         {
             Game.MsgPrint("I see no up staircase here.");

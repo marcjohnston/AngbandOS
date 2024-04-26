@@ -24,8 +24,8 @@ internal class WhirlwindActivation : Activation
     {
         for (int direction = 0; direction <= 9; direction++)
         {
-            int y = Game.MapY.Value + Game.KeypadDirectionYOffset[direction];
-            int x = Game.MapX.Value + Game.KeypadDirectionXOffset[direction];
+            int y = Game.MapY.IntValue + Game.KeypadDirectionYOffset[direction];
+            int x = Game.MapX.IntValue + Game.KeypadDirectionXOffset[direction];
             GridTile cPtr = Game.Map.Grid[y][x];
             Monster mPtr = Game.Monsters[cPtr.MonsterIndex];
             if (cPtr.MonsterIndex != 0 && (mPtr.IsVisible || Game.GridPassable(y, x)))

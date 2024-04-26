@@ -17,5 +17,5 @@ internal class ChaosSpellFireBolt : Spell
 
     public override string Name => "Fire Bolt";
 
-    protected override string LearnedDetails => $"dam {6 + ((Game.ExperienceLevel.Value - 5) / 4)}d8";
+    protected override string LearnedDetails => $"dam {6 + ((Game.ExperienceLevel.IntValue - 5) / 4)}d8";
 }

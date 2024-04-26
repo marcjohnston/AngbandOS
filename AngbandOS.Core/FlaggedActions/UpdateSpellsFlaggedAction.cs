@@ -67,25 +67,25 @@ internal class UpdateSpellsFlaggedAction : FlaggedAction
                 numKnown++;
             }
         }
-        Game.SpareSpellSlots.Value = numAllowed - numKnown;
+        Game.SpareSpellSlots.IntValue = numAllowed - numKnown;
         if (numKnown != 0)
         {
             // Enumerate the spells that were learned, to determine if the level of the player fell below the level of the spell.
             foreach (Spell spell in Game.SpellOrder)
             {
-                if (spell.ClassSpell.Level > Game.ExperienceLevel.Value && spell.Learned)
+                if (spell.ClassSpell.Level > Game.ExperienceLevel.IntValue && spell.Learned)
                 {
                     spell.Forgotten = true;
                     spell.Learned = false;
                     numKnown--;
                     Game.MsgPrint($"You have forgotten the {p} of {spell.Name}.");
-                    Game.SpareSpellSlots.Value++;
+                    Game.SpareSpellSlots.IntValue++;
                 }
             }
 
             // Now check to see if there are too many spells learned and attempt to forget as many as needed.
             int forgetIndex = Game.SpellOrder.Count - 1;
-            while (Game.SpareSpellSlots.Value < 0 && forgetIndex >= 0)
+            while (Game.SpareSpellSlots.IntValue < 0 && forgetIndex >= 0)
             {
                 Spell spell = Game.SpellOrder[forgetIndex];
                 if (!spell.Learned)
@@ -96,7 +96,7 @@ internal class UpdateSpellsFlaggedAction : FlaggedAction
                 spell.Learned = false;
                 numKnown--;
                 Game.MsgPrint($"You have forgotten the {p} of {spell.Name}.");
-                Game.SpareSpellSlots.Value++;
+                Game.SpareSpellSlots.IntValue++;
             }
         }
 
@@ -112,10 +112,10 @@ internal class UpdateSpellsFlaggedAction : FlaggedAction
 
         // Check to see if we regain some forgotten spells.
         int spellOrderIndex = Game.SpellOrder.Count - 1;
-        while (Game.SpareSpellSlots.Value > 0 && forgottenTotal > 0 && spellOrderIndex >= 0)
+        while (Game.SpareSpellSlots.IntValue > 0 && forgottenTotal > 0 && spellOrderIndex >= 0)
         {
             Spell spell = Game.SpellOrder[spellOrderIndex];
-            if (Game.ExperienceLevel.Value >= spell.ClassSpell.Level && spell.Forgotten)
+            if (Game.ExperienceLevel.IntValue >= spell.ClassSpell.Level && spell.Forgotten)
             {
                 spell.Forgotten = false;
                 spell.Learned = true;
@@ -124,7 +124,7 @@ internal class UpdateSpellsFlaggedAction : FlaggedAction
                 {
                     Game.MsgPrint($"You have remembered the {p} of {spell.Name}.");
                 }
-                Game.SpareSpellSlots.Value--;
+                Game.SpareSpellSlots.IntValue--;
             }
             spellOrderIndex--;
         }
@@ -134,7 +134,7 @@ internal class UpdateSpellsFlaggedAction : FlaggedAction
         foreach (Spell spell in spellList)
         {
             // Check to see if the level of the spell is greater than where we are at.
-            if (spell.ClassSpell.Level > Game.ExperienceLevel.Value)
+            if (spell.ClassSpell.Level > Game.ExperienceLevel.IntValue)
             {
                 // Don't count this spell.
                 continue;
@@ -150,23 +150,23 @@ internal class UpdateSpellsFlaggedAction : FlaggedAction
         }
 
         // Check to see if we need to reduce the number of spare slots.
-        if (Game.SpareSpellSlots.Value > newSpareSpellSlots)
+        if (Game.SpareSpellSlots.IntValue > newSpareSpellSlots)
         {
             // Reduce the number of spare slots.
-            Game.SpareSpellSlots.Value = newSpareSpellSlots;
+            Game.SpareSpellSlots.IntValue = newSpareSpellSlots;
         }
 
-        if (Game.OldSpareSpellSlots != Game.SpareSpellSlots.Value)
+        if (Game.OldSpareSpellSlots != Game.SpareSpellSlots.IntValue)
         {
-            if (Game.SpareSpellSlots.Value != 0)
+            if (Game.SpareSpellSlots.IntValue != 0)
             {
                 if (!Game.FullScreenOverlay)
                 {
-                    string suffix = Game.SpareSpellSlots.Value != 1 ? "s" : "";
-                    Game.MsgPrint($"You can learn {Game.SpareSpellSlots.Value} more {p}{suffix}.");
+                    string suffix = Game.SpareSpellSlots.IntValue != 1 ? "s" : "";
+                    Game.MsgPrint($"You can learn {Game.SpareSpellSlots.IntValue} more {p}{suffix}.");
                 }
             }
-            Game.OldSpareSpellSlots = Game.SpareSpellSlots.Value;
+            Game.OldSpareSpellSlots = Game.SpareSpellSlots.IntValue;
         }
     }
 }

@@ -30,7 +30,7 @@ internal class SummoningStaffItemFactory : StaffItemFactory
     {
         for (int k = 0; k < Game.DieRoll(4); k++)
         {
-            if (Game.SummonSpecific(Game.MapY.Value, Game.MapX.Value, Game.Difficulty, null))
+            if (Game.SummonSpecific(Game.MapY.IntValue, Game.MapX.IntValue, Game.Difficulty, null))
             {
                 eventArgs.Identified = true;
             }

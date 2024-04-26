@@ -69,7 +69,7 @@ internal class SkeletonRace : Race
         Game.HasHoldLife = true;
         Game.HasSeeInvisibility = true;
         Game.HasPoisonResistance = true;
-        if (Game.ExperienceLevel.Value > 9)
+        if (Game.ExperienceLevel.IntValue > 9)
         {
             Game.HasColdResistance = true;
         }
@@ -91,7 +91,7 @@ internal class SkeletonRace : Race
             // Spawn a new food item on the floor to make up for the one that will be destroyed
             Item floorItem = item.Factory.CreateItem();
             Game.MsgPrint("The food falls through your jaws!");
-            Game.DropNear(floorItem, -1, Game.MapY.Value, Game.MapX.Value);
+            Game.DropNear(floorItem, -1, Game.MapY.IntValue, Game.MapX.IntValue);
         }
     }
 
@@ -100,7 +100,7 @@ internal class SkeletonRace : Race
         if (Game.DieRoll(12) == 1)
         {
             Game.MsgPrint("Some of the fluid falls through your jaws!");
-            potion.Smash(0, Game.MapY.Value, Game.MapX.Value);
+            potion.Smash(0, Game.MapY.IntValue, Game.MapX.IntValue);
         }
     }
     public override bool CanBleed(int level) => false;

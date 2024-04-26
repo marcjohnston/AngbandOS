@@ -173,7 +173,7 @@ internal class ViewMapScript : Script, IScript, IRepeatableScript
                 Game.Screen.Print(tempColor, tempCharacter.ToString());
             }
         }
-        cy = yOffset + (Game.MapY.Value / _ratio) + 1;
-        cx = xOffset + (Game.MapX.Value / _ratio) + 1;
+        cy = yOffset + (Game.MapY.IntValue / _ratio) + 1;
+        cx = xOffset + (Game.MapX.IntValue / _ratio) + 1;
     }
 }

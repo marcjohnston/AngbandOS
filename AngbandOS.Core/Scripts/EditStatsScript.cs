@@ -42,7 +42,7 @@ internal class EditStatsScript : Script, IScript
             Game.AbilityScores[i].Innate = tmpInt;
             Game.AbilityScores[i].InnateMax = tmpInt;
         }
-        if (!Game.GetString("Gold: ", out tmpVal, $"{Game.Gold.Value}", 9))
+        if (!Game.GetString("Gold: ", out tmpVal, $"{Game.Gold.IntValue}", 9))
         {
             return;
         }
@@ -54,9 +54,9 @@ internal class EditStatsScript : Script, IScript
         {
             tmpInt = 0;
         }
-        Game.Gold.Value = tmpInt;
+        Game.Gold.IntValue = tmpInt;
 
-        if (!Game.GetString("Mana: ", out tmpVal, $"{Game.Mana.Value}", 9))
+        if (!Game.GetString("Mana: ", out tmpVal, $"{Game.Mana.IntValue}", 9))
         {
             return;
         }
@@ -68,9 +68,9 @@ internal class EditStatsScript : Script, IScript
         {
             tmpInt = 0;
         }
-        Game.Mana.Value = tmpInt;
+        Game.Mana.IntValue = tmpInt;
 
-        if (!Game.GetString("Experience: ", out tmpVal, $"{Game.MaxExperienceGained.Value}", 9))
+        if (!Game.GetString("Experience: ", out tmpVal, $"{Game.MaxExperienceGained.IntValue}", 9))
         {
             return;
         }
@@ -82,7 +82,7 @@ internal class EditStatsScript : Script, IScript
         {
             tmpInt = 0;
         }
-        Game.MaxExperienceGained.Value = tmpInt;
+        Game.MaxExperienceGained.IntValue = tmpInt;
 
         Game.CheckExperience();
         Game.RunScript(nameof(RedrawScript));

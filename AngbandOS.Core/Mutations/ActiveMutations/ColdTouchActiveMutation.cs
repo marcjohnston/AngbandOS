@@ -21,15 +21,15 @@ internal class ColdTouchActiveMutation : Mutation
         {
             return;
         }
-        int y = Game.MapY.Value + Game.KeypadDirectionYOffset[dir];
-        int x = Game.MapX.Value + Game.KeypadDirectionXOffset[dir];
+        int y = Game.MapY.IntValue + Game.KeypadDirectionYOffset[dir];
+        int x = Game.MapX.IntValue + Game.KeypadDirectionXOffset[dir];
         GridTile cPtr = Game.Map.Grid[y][x];
         if (cPtr.MonsterIndex == 0)
         {
             Game.MsgPrint("You wave your hands in the air.");
             return;
         }
-        Game.FireBolt(Game.SingletonRepository.Projectiles.Get(nameof(ColdProjectile)), dir, 2 * Game.ExperienceLevel.Value);
+        Game.FireBolt(Game.SingletonRepository.Projectiles.Get(nameof(ColdProjectile)), dir, 2 * Game.ExperienceLevel.IntValue);
     }
 
     public override string ActivationSummary(int lvl)

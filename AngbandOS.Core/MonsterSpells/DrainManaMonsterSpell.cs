@@ -38,19 +38,19 @@ internal class DrainManaMonsterSpell : MonsterSpell
         int monsterLevel = monster.Race.Level >= 1 ? monster.Race.Level : 1;
         bool seenByPlayer = !playerIsBlind && monster.IsVisible;
 
-        if (Game.Mana.Value != 0)
+        if (Game.Mana.IntValue != 0)
         {
             Game.MsgPrint($"{monsterName} draws psychic energy from you!");
             int r1 = (base.Game.DieRoll(monsterLevel) / 2) + 1;
-            if (r1 >= Game.Mana.Value)
+            if (r1 >= Game.Mana.IntValue)
             {
-                r1 = Game.Mana.Value;
-                Game.Mana.Value = 0;
+                r1 = Game.Mana.IntValue;
+                Game.Mana.IntValue = 0;
                 Game.FractionalMana = 0;
             }
             else
             {
-                Game.Mana.Value -= r1;
+                Game.Mana.IntValue -= r1;
             }
             if (monster.Health < monster.MaxHealth)
             {
@@ -58,10 +58,6 @@ internal class DrainManaMonsterSpell : MonsterSpell
                 if (monster.Health > monster.MaxHealth)
                 {
                     monster.Health = monster.MaxHealth;
-                }
-                if (Game.TrackedMonster.Value != null && Game.TrackedMonster.Value == monster)
-                {
-                    base.Game.SingletonRepository.FlaggedActions.Get(nameof(FlaggedActions.RedrawMonsterHealthFlaggedAction)).Set();
                 }
                 if (seenByPlayer)
                 {
@@ -100,10 +96,6 @@ internal class DrainManaMonsterSpell : MonsterSpell
                 if (monster.Health > monster.MaxHealth)
                 {
                     monster.Health = monster.MaxHealth;
-                }
-                if (Game.TrackedMonster.Value != null && Game.TrackedMonster.Value == monster)
-                {
-                    base.Game.SingletonRepository.FlaggedActions.Get(nameof(FlaggedActions.RedrawMonsterHealthFlaggedAction)).Set();
                 }
                 if (seen)
                 {

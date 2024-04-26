@@ -93,12 +93,12 @@ internal class NetherProjectile : Projectile
             else if (Game.HasHoldLife)
             {
                 Game.MsgPrint("You feel your life slipping away!");
-                Game.LoseExperience(200 + (Game.ExperiencePoints.Value / 1000 * Constants.MonDrainLife));
+                Game.LoseExperience(200 + (Game.ExperiencePoints.IntValue / 1000 * Constants.MonDrainLife));
             }
             else
             {
                 Game.MsgPrint("You feel your life draining away!");
-                Game.LoseExperience(200 + (Game.ExperiencePoints.Value / 100 * Constants.MonDrainLife));
+                Game.LoseExperience(200 + (Game.ExperiencePoints.IntValue / 100 * Constants.MonDrainLife));
             }
         }
         if (Game.Race.ProjectingNetherRestoresHealth)

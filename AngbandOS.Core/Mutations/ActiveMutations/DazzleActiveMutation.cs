@@ -17,9 +17,9 @@ internal class DazzleActiveMutation : Mutation
         {
             return;
         }
-        Game.StunMonsters(Game.ExperienceLevel.Value * 4);
-        Game.ConfuseMonsters(Game.ExperienceLevel.Value * 4);
-        Game.TurnMonsters(Game.ExperienceLevel.Value * 4);
+        Game.StunMonsters(Game.ExperienceLevel.IntValue * 4);
+        Game.ConfuseMonsters(Game.ExperienceLevel.IntValue * 4);
+        Game.TurnMonsters(Game.ExperienceLevel.IntValue * 4);
     }
 
     public override string ActivationSummary(int lvl)

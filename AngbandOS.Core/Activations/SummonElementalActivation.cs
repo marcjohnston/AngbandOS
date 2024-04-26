@@ -20,7 +20,7 @@ internal class SummonElementalActivation : Activation
     {
         if (Game.DieRoll(3) == 1)
         {
-            if (Game.SummonSpecific(Game.MapY.Value, Game.MapX.Value, (int)(Game.ExperienceLevel.Value * 1.5), Game.SingletonRepository.MonsterFilters.Get(nameof(ElementalMonsterFilter))))
+            if (Game.SummonSpecific(Game.MapY.IntValue, Game.MapX.IntValue, (int)(Game.ExperienceLevel.IntValue * 1.5), Game.SingletonRepository.MonsterFilters.Get(nameof(ElementalMonsterFilter))))
             {
                 Game.MsgPrint("An elemental materializes...");
                 Game.MsgPrint("You fail to control it!");
@@ -28,7 +28,7 @@ internal class SummonElementalActivation : Activation
         }
         else
         {
-            if (Game.SummonSpecificFriendly(Game.MapY.Value, Game.MapX.Value, (int)(Game.ExperienceLevel.Value * 1.5), Game.SingletonRepository.MonsterFilters.Get(nameof(ElementalMonsterFilter)), Game.ExperienceLevel.Value == 50))
+            if (Game.SummonSpecificFriendly(Game.MapY.IntValue, Game.MapX.IntValue, (int)(Game.ExperienceLevel.IntValue * 1.5), Game.SingletonRepository.MonsterFilters.Get(nameof(ElementalMonsterFilter)), Game.ExperienceLevel.IntValue == 50))
             {
                 Game.MsgPrint("An elemental materializes...");
                 Game.MsgPrint("It seems obedient to you.");

@@ -47,9 +47,9 @@ internal class SearchScript : Script, IScript, IRepeatableScript
             chance /= 10;
         }
         // Check the eight squares around us
-        for (int y = Game.MapY.Value - 1; y <= Game.MapY.Value + 1; y++)
+        for (int y = Game.MapY.IntValue - 1; y <= Game.MapY.IntValue + 1; y++)
         {
-            for (int x = Game.MapX.Value - 1; x <= Game.MapX.Value + 1; x++)
+            for (int x = Game.MapX.IntValue - 1; x <= Game.MapX.IntValue + 1; x++)
             {
                 // Check if we succeed
                 if (Game.RandomLessThan(100) < chance)

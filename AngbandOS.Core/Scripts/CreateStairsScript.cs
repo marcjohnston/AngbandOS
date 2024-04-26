@@ -18,27 +18,27 @@ internal class CreateStairsScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        if (!Game.CaveValidBold(Game.MapY.Value, Game.MapX.Value))
+        if (!Game.CaveValidBold(Game.MapY.IntValue, Game.MapX.IntValue))
         {
             Game.MsgPrint("The object resists the spell.");
             return;
         }
-        Game.DeleteObject(Game.MapY.Value, Game.MapX.Value);
+        Game.DeleteObject(Game.MapY.IntValue, Game.MapX.IntValue);
         if (Game.CurrentDepth <= 0)
         {
-            Game.CaveSetFeat(Game.MapY.Value, Game.MapX.Value, Game.SingletonRepository.Tiles.Get(nameof(DownStaircaseTile)));
+            Game.CaveSetFeat(Game.MapY.IntValue, Game.MapX.IntValue, Game.SingletonRepository.Tiles.Get(nameof(DownStaircaseTile)));
         }
         else if (Game.IsQuest(Game.CurrentDepth) || Game.CurrentDepth >= Game.CurDungeon.MaxLevel)
         {
-            Game.CaveSetFeat(Game.MapY.Value, Game.MapX.Value, Game.CurDungeon.Tower ? Game.SingletonRepository.Tiles.Get(nameof(DownStaircaseTile)) : Game.SingletonRepository.Tiles.Get(nameof(UpStaircaseTile)));
+            Game.CaveSetFeat(Game.MapY.IntValue, Game.MapX.IntValue, Game.CurDungeon.Tower ? Game.SingletonRepository.Tiles.Get(nameof(DownStaircaseTile)) : Game.SingletonRepository.Tiles.Get(nameof(UpStaircaseTile)));
         }
         else if (Game.RandomLessThan(100) < 50)
         {
-            Game.CaveSetFeat(Game.MapY.Value, Game.MapX.Value, Game.SingletonRepository.Tiles.Get(nameof(DownStaircaseTile)));
+            Game.CaveSetFeat(Game.MapY.IntValue, Game.MapX.IntValue, Game.SingletonRepository.Tiles.Get(nameof(DownStaircaseTile)));
         }
         else
         {
-            Game.CaveSetFeat(Game.MapY.Value, Game.MapX.Value, Game.SingletonRepository.Tiles.Get(nameof(UpStaircaseTile)));
+            Game.CaveSetFeat(Game.MapY.IntValue, Game.MapX.IntValue, Game.SingletonRepository.Tiles.Get(nameof(UpStaircaseTile)));
         }
     }
 }

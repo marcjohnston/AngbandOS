@@ -515,7 +515,7 @@ internal class StandardDungeonGenerator : DungeonGenerator
                     continue;
                 }
                 {
-                    if (Game.Distance(y, x, Game.MapY.Value, Game.MapX.Value) > 15)
+                    if (Game.Distance(y, x, Game.MapY.IntValue, Game.MapX.IntValue) > 15)
                     {
                         break;
                     }

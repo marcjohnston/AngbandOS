@@ -15,5 +15,5 @@ internal class LifeSpellHolyWord : Spell
 
     public override string Name => "Holy Word";
 
-    protected override string LearnedDetails => $"d {4 * Game.ExperienceLevel.Value}/h 1000";
+    protected override string LearnedDetails => $"d {4 * Game.ExperienceLevel.IntValue}/h 1000";
 }

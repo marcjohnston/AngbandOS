@@ -15,6 +15,6 @@ internal class GreaObsReward : Reward
     {
         Game.MsgPrint($"The voice of {patron.ShortName} booms out:");
         Game.MsgPrint("'Behold, mortal, how generously I reward thy loyalty.'");
-        Game.Acquirement(Game.MapY.Value, Game.MapX.Value, Game.DieRoll(2) + 1, true);
+        Game.Acquirement(Game.MapY.IntValue, Game.MapX.IntValue, Game.DieRoll(2) + 1, true);
     }
 }

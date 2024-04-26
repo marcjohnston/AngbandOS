@@ -31,9 +31,9 @@ internal class WarningRandomMutation : Mutation
             {
                 continue;
             }
-            if (rPtr.Level >= Game.ExperienceLevel.Value)
+            if (rPtr.Level >= Game.ExperienceLevel.IntValue)
             {
-                dangerAmount += rPtr.Level - Game.ExperienceLevel.Value + 1;
+                dangerAmount += rPtr.Level - Game.ExperienceLevel.IntValue + 1;
             }
         }
         if (dangerAmount > 100)

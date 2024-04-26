@@ -15,6 +15,6 @@ internal class GoldIntProperty : IntProperty
     protected override void OnAfterSet()
     {
         // Send a message to the attached view port so that the consuming application knows that the gold value has been updated.
-        Game.ConsoleViewPort.GoldUpdated(Value);
+        Game.ConsoleViewPort.GoldUpdated(IntValue);
     }
 }

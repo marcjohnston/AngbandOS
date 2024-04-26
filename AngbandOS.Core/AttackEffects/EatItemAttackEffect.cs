@@ -17,7 +17,7 @@ internal class EatItemAttackEffect : AttackEffect
     {
         // Steal an item
         Game.TakeHit(damage, monsterDescription);
-        if ((Game.ParalysisTimer.Value == 0 && Game.RandomLessThan(100) < Game.AbilityScores[Ability.Dexterity].DexTheftAvoidance + Game.ExperienceLevel.Value) || Game.HasAntiTheft)
+        if ((Game.ParalysisTimer.Value == 0 && Game.RandomLessThan(100) < Game.AbilityScores[Ability.Dexterity].DexTheftAvoidance + Game.ExperienceLevel.IntValue) || Game.HasAntiTheft)
         {
             Game.MsgPrint("You grab hold of your backpack!");
             blinked = true;

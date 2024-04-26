@@ -15,5 +15,5 @@ internal class NatureSpellLightningBolt : Spell
 
     public override string Name => "Lightning Bolt";
 
-    protected override string LearnedDetails => $"dam {3 + ((Game.ExperienceLevel.Value - 5) / 4)}d8";
+    protected override string LearnedDetails => $"dam {3 + ((Game.ExperienceLevel.IntValue - 5) / 4)}d8";
 }

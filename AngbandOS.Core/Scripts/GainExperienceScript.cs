@@ -24,7 +24,7 @@ internal class GainExperienceScript : Script, IScript
         }
         else
         {
-            Game.GainExperience(Game.ExperiencePoints.Value + 1);
+            Game.GainExperience(Game.ExperiencePoints.IntValue + 1);
         }
     }
 }

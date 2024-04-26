@@ -36,8 +36,8 @@ internal class BashScript : Script, IScript, IRepeatableScript
         // Get the direction to bash
         if (Game.GetDirectionNoAim(out int dir))
         {
-            int y = Game.MapY.Value + Game.KeypadDirectionYOffset[dir];
-            int x = Game.MapX.Value + Game.KeypadDirectionXOffset[dir];
+            int y = Game.MapY.IntValue + Game.KeypadDirectionYOffset[dir];
+            int x = Game.MapX.IntValue + Game.KeypadDirectionXOffset[dir];
             GridTile tile = Game.Map.Grid[y][x];
             // Can only bash closed doors
             if (!tile.FeatureType.IsVisibleDoor)

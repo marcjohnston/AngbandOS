@@ -26,6 +26,6 @@ internal class DispelLivingScript : Script, IScript, IScriptInt
     /// </summary>
     public void ExecuteScript()
     {
-        ExecuteScriptInt(Game.ExperienceLevel.Value * 3);
+        ExecuteScriptInt(Game.ExperienceLevel.IntValue * 3);
     }
 }

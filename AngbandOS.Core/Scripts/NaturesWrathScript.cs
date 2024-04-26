@@ -18,8 +18,8 @@ internal class NaturesWrathScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        Game.DispelMonsters(Game.ExperienceLevel.Value * 4);
-        Game.Earthquake(Game.MapY.Value, Game.MapX.Value, 20 + (Game.ExperienceLevel.Value / 2));
-        Game.Project(0, 1 + (Game.ExperienceLevel.Value / 12), Game.MapY.Value, Game.MapX.Value, 100 + Game.ExperienceLevel.Value, Game.SingletonRepository.Projectiles.Get(nameof(DisintegrateProjectile)), ProjectionFlag.ProjectKill | ProjectionFlag.ProjectItem);
+        Game.DispelMonsters(Game.ExperienceLevel.IntValue * 4);
+        Game.Earthquake(Game.MapY.IntValue, Game.MapX.IntValue, 20 + (Game.ExperienceLevel.IntValue / 2));
+        Game.Project(0, 1 + (Game.ExperienceLevel.IntValue / 12), Game.MapY.IntValue, Game.MapX.IntValue, 100 + Game.ExperienceLevel.IntValue, Game.SingletonRepository.Projectiles.Get(nameof(DisintegrateProjectile)), ProjectionFlag.ProjectKill | ProjectionFlag.ProjectItem);
     }
 }

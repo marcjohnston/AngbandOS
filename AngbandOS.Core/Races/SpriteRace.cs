@@ -68,7 +68,7 @@ internal class SpriteRace : Race
         Game.HasFeatherFall = true;
         Game.HasGlow = true;
         Game.HasLightResistance = true;
-        Game.Speed.Value += Game.ExperienceLevel.Value / 10;
+        Game.Speed.IntValue += Game.ExperienceLevel.IntValue / 10;
     }
 
     public override void UseRacialPower()
@@ -77,7 +77,7 @@ internal class SpriteRace : Race
         if (Game.CheckIfRacialPowerWorks(12, 12, Ability.Intelligence, 15))
         {
             Game.MsgPrint("You throw some magic dust...");
-            if (Game.ExperienceLevel.Value < 25)
+            if (Game.ExperienceLevel.IntValue < 25)
             {
                 Game.SleepMonstersTouch();
             }

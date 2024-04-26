@@ -22,14 +22,14 @@ internal class VampiricDrainScript : Script, IScript
         {
             return;
         }
-        int dummy = Game.ExperienceLevel.Value + (Game.DieRoll(Game.ExperienceLevel.Value) * Math.Max(1, Game.ExperienceLevel.Value / 10));
+        int dummy = Game.ExperienceLevel.IntValue + (Game.DieRoll(Game.ExperienceLevel.IntValue) * Math.Max(1, Game.ExperienceLevel.IntValue / 10));
         if (!Game.DrainLife(dir, dummy))
         {
             return;
         }
         Game.RestoreHealth(dummy);
-        dummy = Game.Food.Value + Math.Min(5000, 100 * dummy);
-        if (Game.Food.Value < Constants.PyFoodMax)
+        dummy = Game.Food.IntValue + Math.Min(5000, 100 * dummy);
+        if (Game.Food.IntValue < Constants.PyFoodMax)
         {
             Game.SetFood(dummy >= Constants.PyFoodMax ? Constants.PyFoodMax - 1 : dummy);
         }

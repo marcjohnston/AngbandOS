@@ -18,7 +18,7 @@ internal class EsoteriaScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        if (Game.DieRoll(50) > Game.ExperienceLevel.Value)
+        if (Game.DieRoll(50) > Game.ExperienceLevel.IntValue)
         {
             Game.RunScript(nameof(IdentifyItemScript));
         }

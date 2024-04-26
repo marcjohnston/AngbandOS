@@ -19,13 +19,13 @@ internal class TelekineticWaveTalent : Talent
     public override void Use()
     {
         Game.MsgPrint("A wave of pure physical force radiates out from your body!");
-        Game.Project(0, 3 + (Game.ExperienceLevel.Value / 10), Game.MapY.Value, Game.MapX.Value,
-            Game.ExperienceLevel.Value * (Game.ExperienceLevel.Value > 39 ? 4 : 3), Game.SingletonRepository.Projectiles.Get(nameof(TelekinesisProjectile)),
+        Game.Project(0, 3 + (Game.ExperienceLevel.IntValue / 10), Game.MapY.IntValue, Game.MapX.IntValue,
+            Game.ExperienceLevel.IntValue * (Game.ExperienceLevel.IntValue > 39 ? 4 : 3), Game.SingletonRepository.Projectiles.Get(nameof(TelekinesisProjectile)),
             ProjectionFlag.ProjectKill | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectGrid);
     }
 
     protected override string Comment()
     {
-        return $"dam {Game.ExperienceLevel.Value * (Game.ExperienceLevel.Value > 39 ? 4 : 3)}";
+        return $"dam {Game.ExperienceLevel.IntValue * (Game.ExperienceLevel.IntValue > 39 ? 4 : 3)}";
     }
 }

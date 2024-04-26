@@ -89,7 +89,7 @@ internal class SpawnMonsterScript : Script, IScript
                         break;
                     case '\r':
                         MonsterRace monsterRace = monsterRaces[selectedIndex];
-                        Game.Scatter(out int y, out int x, Game.MapY.Value, Game.MapX.Value, 1);
+                        Game.Scatter(out int y, out int x, Game.MapY.IntValue, Game.MapX.IntValue, 1);
                         Game.PlaceMonsterAux(y, x, monsterRace, false, false, false);
                         return;
                 }

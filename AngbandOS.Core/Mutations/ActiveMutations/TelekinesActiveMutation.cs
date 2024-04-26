@@ -20,7 +20,7 @@ internal class TelekinesActiveMutation : Mutation
         Game.MsgPrint("You concentrate...");
         if (Game.GetDirectionWithAim(out int dir))
         {
-            Game.SummonItem(dir, Game.ExperienceLevel.Value * 10, true);
+            Game.SummonItem(dir, Game.ExperienceLevel.IntValue * 10, true);
         }
     }
 

@@ -52,7 +52,7 @@ internal abstract class MapWidget : Widget
                 Game.Screen.Print(a, c, y - offsetY, x - offsetX); // TODO: The - is weird and should be +
             }
         }
-        Game.MainForm.RefreshMapLocation(Game.MapY.Value, Game.MapX.Value);
+        Game.MainForm.RefreshMapLocation(Game.MapY.IntValue, Game.MapX.IntValue);
 
         // Restore the cursor visible.
         Game.Screen.CursorVisible = v;

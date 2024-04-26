@@ -55,7 +55,7 @@ internal abstract class ChestTrapConfiguration : IGetKey
     {
         foreach (ChestTrap trap in Traps)
         {
-            ActivateChestTrapEventArgs eventArgs = new ActivateChestTrapEventArgs(game.MapX.Value, game.MapY.Value);
+            ActivateChestTrapEventArgs eventArgs = new ActivateChestTrapEventArgs(game.MapX.IntValue, game.MapY.IntValue);
             trap.Activate(eventArgs);
 
             if (eventArgs.DestroysContents)

@@ -17,5 +17,5 @@ internal class DeathSpellStinkingCloud : Spell
 
     public override string Name => "Stinking Cloud";
 
-    protected override string LearnedDetails => $"dam {10 + (Game.ExperienceLevel.Value / 2)}";
+    protected override string LearnedDetails => $"dam {10 + (Game.ExperienceLevel.IntValue / 2)}";
 }

@@ -44,7 +44,7 @@ internal class CreateNamedArtifactScript : Script, IScript
             qPtr.IdentCursed = true;
         }
         qPtr.GetFixedArtifactResistances();
-        Game.DropNear(qPtr, -1, Game.MapY.Value, Game.MapX.Value);
+        Game.DropNear(qPtr, -1, Game.MapY.IntValue, Game.MapX.IntValue);
         Game.MsgPrint("Allocated.");
     }
 }

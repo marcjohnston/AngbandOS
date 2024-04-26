@@ -36,7 +36,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
     protected override void Execute()
     {
         int extraShots;
-        int oldSpeed = Game.Speed.Value;
+        int oldSpeed = Game.Speed.IntValue;
         bool oldTelepathy = Game.HasTelepathy;
         bool oldSeeInv = Game.HasSeeInvisibility;
         int extraBlows = extraShots = 0;
@@ -44,13 +44,13 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         {
             Game.AbilityScores[i].Bonus = 0;
         }
-        Game.DisplayedBaseArmorClass.Value = 0;
+        Game.DisplayedBaseArmorClass.IntValue = 0;
         Game.BaseArmorClass = 0;
         Game.DisplayedAttackBonus = 0;
         Game.AttackBonus = 0;
         Game.DisplayedDamageBonus = 0;
         Game.DamageBonus = 0;
-        Game.DisplayedArmorClassBonus.Value = 0;
+        Game.DisplayedArmorClassBonus.IntValue = 0;
         Game.ArmorClassBonus = 0;
         Game.HasAggravation = false;
         Game.HasRandomTeleport = false;
@@ -111,58 +111,58 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         Game.SkillRanged = Game.Race.BaseRangedAttackBonus + Game.BaseCharacterClass.BaseRangedAttackBonus;
         Game.SkillThrowing = Game.Race.BaseRangedAttackBonus + Game.BaseCharacterClass.BaseRangedAttackBonus;
         Game.SkillDigging = 0;
-        if ((Game.BaseCharacterClass.ID == CharacterClass.Warrior && Game.ExperienceLevel.Value > 29) ||
-            (Game.BaseCharacterClass.ID == CharacterClass.Paladin && Game.ExperienceLevel.Value > 39) ||
-            (Game.BaseCharacterClass.ID == CharacterClass.Fanatic && Game.ExperienceLevel.Value > 39))
+        if ((Game.BaseCharacterClass.ID == CharacterClass.Warrior && Game.ExperienceLevel.IntValue > 29) ||
+            (Game.BaseCharacterClass.ID == CharacterClass.Paladin && Game.ExperienceLevel.IntValue > 39) ||
+            (Game.BaseCharacterClass.ID == CharacterClass.Fanatic && Game.ExperienceLevel.IntValue > 39))
         {
             Game.HasFearResistance = true;
         }
-        if (Game.BaseCharacterClass.ID == CharacterClass.Fanatic && Game.ExperienceLevel.Value > 29)
+        if (Game.BaseCharacterClass.ID == CharacterClass.Fanatic && Game.ExperienceLevel.IntValue > 29)
         {
             Game.HasChaosResistance = true;
         }
-        if (Game.BaseCharacterClass.ID == CharacterClass.Cultist && Game.ExperienceLevel.Value > 19)
+        if (Game.BaseCharacterClass.ID == CharacterClass.Cultist && Game.ExperienceLevel.IntValue > 19)
         {
             Game.HasChaosResistance = true;
         }
         if (Game.BaseCharacterClass.ID == CharacterClass.Mindcrafter)
         {
-            if (Game.ExperienceLevel.Value > 9)
+            if (Game.ExperienceLevel.IntValue > 9)
             {
                 Game.HasFearResistance = true;
             }
-            if (Game.ExperienceLevel.Value > 19)
+            if (Game.ExperienceLevel.IntValue > 19)
             {
                 Game.HasSustainWisdom = true;
             }
-            if (Game.ExperienceLevel.Value > 29)
+            if (Game.ExperienceLevel.IntValue > 29)
             {
                 Game.HasConfusionResistance = true;
             }
-            if (Game.ExperienceLevel.Value > 39)
+            if (Game.ExperienceLevel.IntValue > 39)
             {
                 Game.HasTelepathy = true;
             }
         }
-        if (Game.BaseCharacterClass.ID == CharacterClass.Monk && Game.ExperienceLevel.Value > 24 && !Game.MartialArtistHeavyArmor())
+        if (Game.BaseCharacterClass.ID == CharacterClass.Monk && Game.ExperienceLevel.IntValue > 24 && !Game.MartialArtistHeavyArmor())
         {
             Game.HasFreeAction = true;
         }
         if (Game.BaseCharacterClass.ID == CharacterClass.Mystic)
         {
-            if (Game.ExperienceLevel.Value > 9)
+            if (Game.ExperienceLevel.IntValue > 9)
             {
                 Game.HasConfusionResistance = true;
             }
-            if (Game.ExperienceLevel.Value > 24)
+            if (Game.ExperienceLevel.IntValue > 24)
             {
                 Game.HasFearResistance = true;
             }
-            if (Game.ExperienceLevel.Value > 29 && !Game.MartialArtistHeavyArmor())
+            if (Game.ExperienceLevel.IntValue > 29 && !Game.MartialArtistHeavyArmor())
             {
                 Game.HasFreeAction = true;
             }
-            if (Game.ExperienceLevel.Value > 39)
+            if (Game.ExperienceLevel.IntValue > 39)
             {
                 Game.HasTelepathy = true;
             }
@@ -170,109 +170,109 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         if (Game.BaseCharacterClass.ID == CharacterClass.ChosenOne)
         {
             Game.HasGlow = true;
-            if (Game.ExperienceLevel.Value >= 2)
+            if (Game.ExperienceLevel.IntValue >= 2)
             {
                 Game.HasConfusionResistance = true;
             }
-            if (Game.ExperienceLevel.Value >= 4)
+            if (Game.ExperienceLevel.IntValue >= 4)
             {
                 Game.HasFearResistance = true;
             }
-            if (Game.ExperienceLevel.Value >= 6)
+            if (Game.ExperienceLevel.IntValue >= 6)
             {
                 Game.HasBlindnessResistance = true;
             }
-            if (Game.ExperienceLevel.Value >= 8)
+            if (Game.ExperienceLevel.IntValue >= 8)
             {
                 Game.HasFeatherFall = true;
             }
-            if (Game.ExperienceLevel.Value >= 10)
+            if (Game.ExperienceLevel.IntValue >= 10)
             {
                 Game.HasSeeInvisibility = true;
             }
-            if (Game.ExperienceLevel.Value >= 12)
+            if (Game.ExperienceLevel.IntValue >= 12)
             {
                 Game.HasSlowDigestion = true;
             }
-            if (Game.ExperienceLevel.Value >= 14)
+            if (Game.ExperienceLevel.IntValue >= 14)
             {
                 Game.HasSustainConstitution = true;
             }
-            if (Game.ExperienceLevel.Value >= 16)
+            if (Game.ExperienceLevel.IntValue >= 16)
             {
                 Game.HasPoisonResistance = true;
             }
-            if (Game.ExperienceLevel.Value >= 18)
+            if (Game.ExperienceLevel.IntValue >= 18)
             {
                 Game.HasSustainDexterity = true;
             }
-            if (Game.ExperienceLevel.Value >= 20)
+            if (Game.ExperienceLevel.IntValue >= 20)
             {
                 Game.HasSustainStrength = true;
             }
-            if (Game.ExperienceLevel.Value >= 22)
+            if (Game.ExperienceLevel.IntValue >= 22)
             {
                 Game.HasHoldLife = true;
             }
-            if (Game.ExperienceLevel.Value >= 24)
+            if (Game.ExperienceLevel.IntValue >= 24)
             {
                 Game.HasFreeAction = true;
             }
-            if (Game.ExperienceLevel.Value >= 26)
+            if (Game.ExperienceLevel.IntValue >= 26)
             {
                 Game.HasTelepathy = true;
             }
-            if (Game.ExperienceLevel.Value >= 28)
+            if (Game.ExperienceLevel.IntValue >= 28)
             {
                 Game.HasDarkResistance = true;
             }
-            if (Game.ExperienceLevel.Value >= 30)
+            if (Game.ExperienceLevel.IntValue >= 30)
             {
                 Game.HasLightResistance = true;
             }
-            if (Game.ExperienceLevel.Value >= 32)
+            if (Game.ExperienceLevel.IntValue >= 32)
             {
                 Game.HasSustainCharisma = true;
             }
-            if (Game.ExperienceLevel.Value >= 34)
+            if (Game.ExperienceLevel.IntValue >= 34)
             {
                 Game.HasSoundResistance = true;
             }
-            if (Game.ExperienceLevel.Value >= 36)
+            if (Game.ExperienceLevel.IntValue >= 36)
             {
                 Game.HasDisenchantResistance = true;
             }
-            if (Game.ExperienceLevel.Value >= 38)
+            if (Game.ExperienceLevel.IntValue >= 38)
             {
                 Game.HasRegeneration = true;
             }
-            if (Game.ExperienceLevel.Value >= 40)
+            if (Game.ExperienceLevel.IntValue >= 40)
             {
                 Game.HasSustainIntelligence = true;
             }
-            if (Game.ExperienceLevel.Value >= 42)
+            if (Game.ExperienceLevel.IntValue >= 42)
             {
                 Game.HasChaosResistance = true;
             }
-            if (Game.ExperienceLevel.Value >= 44)
+            if (Game.ExperienceLevel.IntValue >= 44)
             {
                 Game.HasSustainWisdom = true;
             }
-            if (Game.ExperienceLevel.Value >= 46)
+            if (Game.ExperienceLevel.IntValue >= 46)
             {
                 Game.HasNexusResistance = true;
             }
-            if (Game.ExperienceLevel.Value >= 48)
+            if (Game.ExperienceLevel.IntValue >= 48)
             {
                 Game.HasShardResistance = true;
             }
-            if (Game.ExperienceLevel.Value >= 50)
+            if (Game.ExperienceLevel.IntValue >= 50)
             {
                 Game.HasNetherResistance = true;
             }
         }
         Game.Race.CalcBonuses();
-        Game.Speed.Value = 110;
+        Game.Speed.IntValue = 110;
         Game.MeleeAttacksPerRound = 1;
         Game.MissileAttacksPerRound = 1;
         Game.AmmunitionItemCategory = 0;
@@ -286,7 +286,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         Game.AbilityScores[Ability.Dexterity].Bonus += Game.DexterityBonus;
         Game.AbilityScores[Ability.Constitution].Bonus += Game.ConstitutionBonus;
         Game.AbilityScores[Ability.Charisma].Bonus += Game.CharismaBonus;
-        Game.Speed.Value += Game.SpeedBonus;
+        Game.Speed.IntValue += Game.SpeedBonus;
         Game.HasRegeneration |= Game.Regen;
         Game.SkillSearchFrequency += Game.SearchBonus;
         Game.SkillSearching += Game.SearchBonus;
@@ -295,7 +295,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         Game.HasFireShield |= Game.FireHit;
         Game.HasGlow |= Game.FireHit;
         Game.ArmorClassBonus += Game.GenomeArmorClassBonus;
-        Game.DisplayedArmorClassBonus.Value += Game.GenomeArmorClassBonus;
+        Game.DisplayedArmorClassBonus.IntValue += Game.GenomeArmorClassBonus;
         Game.HasFeatherFall |= Game.FeatherFall;
         Game.HasFearResistance |= Game.ResFear;
         Game.HasTimeResistance |= Game.ResTime;
@@ -305,7 +305,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         Game.HasElementalVulnerability |= Game.Vulnerable;
         if (Game.MagicResistance)
         {
-            Game.SkillSavingThrow += 15 + (Game.ExperienceLevel.Value / 5);
+            Game.SkillSavingThrow += 15 + (Game.ExperienceLevel.IntValue / 5);
         }
         if (Game.SuppressRegen)
         {
@@ -318,23 +318,23 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         if (Game.SustainAll)
         {
             Game.HasSustainConstitution = true;
-            if (Game.ExperienceLevel.Value > 9)
+            if (Game.ExperienceLevel.IntValue > 9)
             {
                 Game.HasSustainStrength = true;
             }
-            if (Game.ExperienceLevel.Value > 19)
+            if (Game.ExperienceLevel.IntValue > 19)
             {
                 Game.HasSustainDexterity = true;
             }
-            if (Game.ExperienceLevel.Value > 29)
+            if (Game.ExperienceLevel.IntValue > 29)
             {
                 Game.HasSustainWisdom = true;
             }
-            if (Game.ExperienceLevel.Value > 39)
+            if (Game.ExperienceLevel.IntValue > 39)
             {
                 Game.HasSustainIntelligence = true;
             }
-            if (Game.ExperienceLevel.Value > 49)
+            if (Game.ExperienceLevel.IntValue > 49)
             {
                 Game.HasSustainCharisma = true;
             }
@@ -393,7 +393,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                     }
                     if (oPtr.Characteristics.Speed)
                     {
-                        Game.Speed.Value += oPtr.TypeSpecificValue;
+                        Game.Speed.IntValue += oPtr.TypeSpecificValue;
                     }
                     if (oPtr.Characteristics.Blows)
                     {
@@ -592,11 +592,11 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                         Game.HasSustainCharisma = true;
                     }
                     Game.BaseArmorClass += oPtr.BaseArmorClass;
-                    Game.DisplayedBaseArmorClass.Value += oPtr.BaseArmorClass;
+                    Game.DisplayedBaseArmorClass.IntValue += oPtr.BaseArmorClass;
                     Game.ArmorClassBonus += oPtr.BonusArmorClass;
                     if (oPtr.IsKnown())
                     {
-                        Game.DisplayedArmorClassBonus.Value += oPtr.BonusArmorClass;
+                        Game.DisplayedArmorClassBonus.IntValue += oPtr.BonusArmorClass;
                     }
                     if (inventorySlot.IsWeapon)
                     {
@@ -623,7 +623,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                 {
                     int bareArmorBonus = inventorySlot.BareArmorClassBonus;
                     Game.ArmorClassBonus += bareArmorBonus;
-                    Game.DisplayedArmorClassBonus.Value += bareArmorBonus;
+                    Game.DisplayedArmorClassBonus.IntValue += bareArmorBonus;
                 }
             }
         }
@@ -645,9 +645,9 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                 .ModifyStatValue(Game.AbilityScores[i].Innate, Game.AbilityScores[i].Bonus);
             if (i == Ability.Charisma && Game.CharismaOverride)
             {
-                if (use < 8 + (2 * Game.ExperienceLevel.Value))
+                if (use < 8 + (2 * Game.ExperienceLevel.IntValue))
                 {
-                    use = 8 + (2 * Game.ExperienceLevel.Value);
+                    use = 8 + (2 * Game.ExperienceLevel.IntValue);
                 }
             }
             if (Game.AbilityScores[i].Adjusted != use)
@@ -717,25 +717,25 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         if (Game.InvulnerabilityTimer.Value != 0)
         {
             Game.ArmorClassBonus += 100;
-            Game.DisplayedArmorClassBonus.Value += 100;
+            Game.DisplayedArmorClassBonus.IntValue += 100;
         }
         if (Game.EtherealnessTimer.Value != 0)
         {
             Game.ArmorClassBonus += 100;
-            Game.DisplayedArmorClassBonus.Value += 100;
+            Game.DisplayedArmorClassBonus.IntValue += 100;
             Game.HasReflection = true;
         }
         if (Game.BlessingTimer.Value != 0)
         {
             Game.ArmorClassBonus += 5;
-            Game.DisplayedArmorClassBonus.Value += 5;
+            Game.DisplayedArmorClassBonus.IntValue += 5;
             Game.AttackBonus += 10;
             Game.DisplayedAttackBonus += 10;
         }
         if (Game.StoneskinTimer.Value != 0)
         {
             Game.ArmorClassBonus += 50;
-            Game.DisplayedArmorClassBonus.Value += 50;
+            Game.DisplayedArmorClassBonus.IntValue += 50;
         }
         if (Game.HeroismTimer.Value != 0)
         {
@@ -747,19 +747,19 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
             Game.AttackBonus += 24;
             Game.DisplayedAttackBonus += 24;
             Game.ArmorClassBonus -= 10;
-            Game.DisplayedArmorClassBonus.Value -= 10;
+            Game.DisplayedArmorClassBonus.IntValue -= 10;
         }
         if (Game.HasteTimer.Value != 0)
         {
-            Game.Speed.Value += 10;
+            Game.Speed.IntValue += 10;
         }
         if (Game.SlowTimer.Value != 0)
         {
-            Game.Speed.Value -= 10;
+            Game.Speed.IntValue -= 10;
         }
         if ((Game.BaseCharacterClass.ID == CharacterClass.Monk || Game.BaseCharacterClass.ID == CharacterClass.Mystic) && !Game.MartialArtistHeavyArmor())
         {
-            Game.Speed.Value += Game.ExperienceLevel.Value / 10;
+            Game.Speed.IntValue += Game.ExperienceLevel.IntValue / 10;
         }
         if (Game.TelepathyTimer.Value != 0)
         {
@@ -796,17 +796,17 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
 
         if (j > ii / 2)
         {
-            Game.Speed.Value -= (j - (ii / 2)) / (ii / 10);
+            Game.Speed.IntValue -= (j - (ii / 2)) / (ii / 10);
         }
-        if (Game.Food.Value >= Constants.PyFoodMax)
+        if (Game.Food.IntValue >= Constants.PyFoodMax)
         {
-            Game.Speed.Value -= 10;
+            Game.Speed.IntValue -= 10;
         }
         if (Game.IsSearching)
         {
-            Game.Speed.Value -= 10;
+            Game.Speed.IntValue -= 10;
         }
-        if (Game.Speed.Value != oldSpeed)
+        if (Game.Speed.IntValue != oldSpeed)
         {
             Game.SingletonRepository.FlaggedActions.Get(nameof(RedrawSpeedFlaggedAction)).Set();
         }
@@ -814,7 +814,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         Game.DamageBonus += Game.AbilityScores[Ability.Strength].StrDamageBonus;
         Game.AttackBonus += Game.AbilityScores[Ability.Dexterity].DexAttackBonus;
         Game.AttackBonus += Game.AbilityScores[Ability.Strength].StrAttackBonus;
-        Game.DisplayedArmorClassBonus.Value += Game.AbilityScores[Ability.Dexterity].DexArmorClassBonus;
+        Game.DisplayedArmorClassBonus.IntValue += Game.AbilityScores[Ability.Dexterity].DexArmorClassBonus;
         Game.DisplayedDamageBonus += Game.AbilityScores[Ability.Strength].StrDamageBonus;
         Game.DisplayedAttackBonus += Game.AbilityScores[Ability.Dexterity].DexAttackBonus;
         Game.DisplayedAttackBonus += Game.AbilityScores[Ability.Strength].StrAttackBonus;
@@ -840,11 +840,11 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                         Game.AmmunitionItemCategory = missileWeaponItemCategory.AmmunitionItemCategory;
                         if (Game.BaseCharacterClass.ID == CharacterClass.Ranger && Game.AmmunitionItemCategory == ItemTypeEnum.Arrow)
                         {
-                            if (Game.ExperienceLevel.Value >= 20)
+                            if (Game.ExperienceLevel.IntValue >= 20)
                             {
                                 Game.MissileAttacksPerRound++;
                             }
-                            if (Game.ExperienceLevel.Value >= 40)
+                            if (Game.ExperienceLevel.IntValue >= 40)
                             {
                                 Game.MissileAttacksPerRound++;
                             }
@@ -852,11 +852,11 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                         if (Game.BaseCharacterClass.ID == CharacterClass.Warrior && Game.AmmunitionItemCategory <= ItemTypeEnum.Bolt &&
                             Game.AmmunitionItemCategory >= ItemTypeEnum.Shot)
                         {
-                            if (Game.ExperienceLevel.Value >= 25)
+                            if (Game.ExperienceLevel.IntValue >= 25)
                             {
                                 Game.MissileAttacksPerRound++;
                             }
-                            if (Game.ExperienceLevel.Value >= 50)
+                            if (Game.ExperienceLevel.IntValue >= 50)
                             {
                                 Game.MissileAttacksPerRound++;
                             }
@@ -885,7 +885,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                 }
                 if (oPtr != null && !Game.HasHeavyWeapon)
                 {
-                    int num = Game.BaseCharacterClass.MaximumMeleeAttacksPerRound(Game.ExperienceLevel.Value);
+                    int num = Game.BaseCharacterClass.MaximumMeleeAttacksPerRound(Game.ExperienceLevel.IntValue);
                     int wgt = Game.BaseCharacterClass.MaximumWeight;
                     int mul = Game.BaseCharacterClass.AttackSpeedMultiplier;
                     int div = oPtr.Weight < wgt ? wgt : oPtr.Weight;
@@ -907,7 +907,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                     Game.MeleeAttacksPerRound += extraBlows;
                     if (Game.BaseCharacterClass.ID == CharacterClass.Warrior)
                     {
-                        Game.MeleeAttacksPerRound += Game.ExperienceLevel.Value / 15;
+                        Game.MeleeAttacksPerRound += Game.ExperienceLevel.IntValue / 15;
                     }
                     if (Game.MeleeAttacksPerRound < 1)
                     {
@@ -918,31 +918,31 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                 else if ((Game.BaseCharacterClass.ID == CharacterClass.Monk || Game.BaseCharacterClass.ID == CharacterClass.Mystic) && Game.MartialArtistEmptyHands())
                 {
                     Game.MeleeAttacksPerRound = 0;
-                    if (Game.ExperienceLevel.Value > 9)
+                    if (Game.ExperienceLevel.IntValue > 9)
                     {
                         Game.MeleeAttacksPerRound++;
                     }
-                    if (Game.ExperienceLevel.Value > 19)
+                    if (Game.ExperienceLevel.IntValue > 19)
                     {
                         Game.MeleeAttacksPerRound++;
                     }
-                    if (Game.ExperienceLevel.Value > 29)
+                    if (Game.ExperienceLevel.IntValue > 29)
                     {
                         Game.MeleeAttacksPerRound++;
                     }
-                    if (Game.ExperienceLevel.Value > 34)
+                    if (Game.ExperienceLevel.IntValue > 34)
                     {
                         Game.MeleeAttacksPerRound++;
                     }
-                    if (Game.ExperienceLevel.Value > 39)
+                    if (Game.ExperienceLevel.IntValue > 39)
                     {
                         Game.MeleeAttacksPerRound++;
                     }
-                    if (Game.ExperienceLevel.Value > 44)
+                    if (Game.ExperienceLevel.IntValue > 44)
                     {
                         Game.MeleeAttacksPerRound++;
                     }
-                    if (Game.ExperienceLevel.Value > 49)
+                    if (Game.ExperienceLevel.IntValue > 49)
                     {
                         Game.MeleeAttacksPerRound++;
                     }
@@ -953,10 +953,10 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                     Game.MeleeAttacksPerRound += 1 + extraBlows;
                     if (!Game.MartialArtistHeavyArmor())
                     {
-                        Game.AttackBonus += Game.ExperienceLevel.Value / 3;
-                        Game.DamageBonus += Game.ExperienceLevel.Value / 3;
-                        Game.DisplayedAttackBonus += Game.ExperienceLevel.Value / 3;
-                        Game.DisplayedDamageBonus += Game.ExperienceLevel.Value / 3;
+                        Game.AttackBonus += Game.ExperienceLevel.IntValue / 3;
+                        Game.DamageBonus += Game.ExperienceLevel.IntValue / 3;
+                        Game.DisplayedAttackBonus += Game.ExperienceLevel.IntValue / 3;
+                        Game.DisplayedDamageBonus += Game.ExperienceLevel.IntValue / 3;
                     }
                 }
 
@@ -964,10 +964,10 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                 MartialArtistArmorAux = false;
                 if (Game.BaseCharacterClass.ID == CharacterClass.Warrior)
                 {
-                    Game.AttackBonus += Game.ExperienceLevel.Value / 5;
-                    Game.DamageBonus += Game.ExperienceLevel.Value / 5;
-                    Game.DisplayedAttackBonus += Game.ExperienceLevel.Value / 5;
-                    Game.DisplayedDamageBonus += Game.ExperienceLevel.Value / 5;
+                    Game.AttackBonus += Game.ExperienceLevel.IntValue / 5;
+                    Game.DamageBonus += Game.ExperienceLevel.IntValue / 5;
+                    Game.DisplayedAttackBonus += Game.ExperienceLevel.IntValue / 5;
+                    Game.DisplayedDamageBonus += Game.ExperienceLevel.IntValue / 5;
                 }
                 if ((Game.BaseCharacterClass.ID == CharacterClass.Priest || Game.BaseCharacterClass.ID == CharacterClass.Druid) && !Game.HasBlessedBlade && oPtr != null && (oPtr.Category == ItemTypeEnum.Sword || oPtr.Category == ItemTypeEnum.Polearm))
                 {
@@ -992,15 +992,15 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         Game.SkillUseDevice += Game.AbilityScores[Ability.Intelligence].IntUseDeviceBonus;
         Game.SkillSavingThrow += Game.AbilityScores[Ability.Wisdom].WisSavingThrowBonus;
         Game.SkillDigging += Game.AbilityScores[Ability.Strength].StrDiggingBonus;
-        Game.SkillDisarmTraps += (Game.BaseCharacterClass.DisarmBonusPerLevel * Game.ExperienceLevel.Value) / 10;
-        Game.SkillUseDevice += (Game.BaseCharacterClass.DeviceBonusPerLevel * Game.ExperienceLevel.Value) / 10;
-        Game.SkillSavingThrow += (Game.BaseCharacterClass.SaveBonusPerLevel * Game.ExperienceLevel.Value) / 10;
-        Game.SkillStealth += (Game.BaseCharacterClass.StealthBonusPerLevel * Game.ExperienceLevel.Value) / 10;
-        Game.SkillSearching += (Game.BaseCharacterClass.SearchBonusPerLevel * Game.ExperienceLevel.Value) / 10;
-        Game.SkillSearchFrequency += (Game.BaseCharacterClass.SearchFrequencyPerLevel * Game.ExperienceLevel.Value) / 10;
-        Game.SkillMelee += (Game.BaseCharacterClass.MeleeAttackBonusPerLevel * Game.ExperienceLevel.Value) / 10;
-        Game.SkillRanged += (Game.BaseCharacterClass.RangedAttackBonusPerLevel * Game.ExperienceLevel.Value) / 10;
-        Game.SkillThrowing += (Game.BaseCharacterClass.RangedAttackBonusPerLevel * Game.ExperienceLevel.Value) / 10;
+        Game.SkillDisarmTraps += (Game.BaseCharacterClass.DisarmBonusPerLevel * Game.ExperienceLevel.IntValue) / 10;
+        Game.SkillUseDevice += (Game.BaseCharacterClass.DeviceBonusPerLevel * Game.ExperienceLevel.IntValue) / 10;
+        Game.SkillSavingThrow += (Game.BaseCharacterClass.SaveBonusPerLevel * Game.ExperienceLevel.IntValue) / 10;
+        Game.SkillStealth += (Game.BaseCharacterClass.StealthBonusPerLevel * Game.ExperienceLevel.IntValue) / 10;
+        Game.SkillSearching += (Game.BaseCharacterClass.SearchBonusPerLevel * Game.ExperienceLevel.IntValue) / 10;
+        Game.SkillSearchFrequency += (Game.BaseCharacterClass.SearchFrequencyPerLevel * Game.ExperienceLevel.IntValue) / 10;
+        Game.SkillMelee += (Game.BaseCharacterClass.MeleeAttackBonusPerLevel * Game.ExperienceLevel.IntValue) / 10;
+        Game.SkillRanged += (Game.BaseCharacterClass.RangedAttackBonusPerLevel * Game.ExperienceLevel.IntValue) / 10;
+        Game.SkillThrowing += (Game.BaseCharacterClass.RangedAttackBonusPerLevel * Game.ExperienceLevel.IntValue) / 10;
         if (Game.SkillStealth > 30)
         {
             Game.SkillStealth = 30;

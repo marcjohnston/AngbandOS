@@ -22,20 +22,20 @@ internal class NeuralBlastTalent : Talent
         {
             return;
         }
-        if (Game.DieRoll(100) < Game.ExperienceLevel.Value * 2)
+        if (Game.DieRoll(100) < Game.ExperienceLevel.IntValue * 2)
         {
             Game.FireBeam(Game.SingletonRepository.Projectiles.Get(nameof(PsiProjectile)), dir,
-                Game.DiceRoll(3 + ((Game.ExperienceLevel.Value - 1) / 4), 3 + (Game.ExperienceLevel.Value / 15)));
+                Game.DiceRoll(3 + ((Game.ExperienceLevel.IntValue - 1) / 4), 3 + (Game.ExperienceLevel.IntValue / 15)));
         }
         else
         {
             Game.FireBall(Game.SingletonRepository.Projectiles.Get(nameof(PsiProjectile)), dir,
-                Game.DiceRoll(3 + ((Game.ExperienceLevel.Value - 1) / 4), 3 + (Game.ExperienceLevel.Value / 15)), 0);
+                Game.DiceRoll(3 + ((Game.ExperienceLevel.IntValue - 1) / 4), 3 + (Game.ExperienceLevel.IntValue / 15)), 0);
         }
     }
 
     protected override string Comment()
     {
-        return $"dam {3 + ((Game.ExperienceLevel.Value - 1) / 4)}d{3 + (Game.ExperienceLevel.Value / 15)}";
+        return $"dam {3 + ((Game.ExperienceLevel.IntValue - 1) / 4)}d{3 + (Game.ExperienceLevel.IntValue / 15)}";
     }
 }

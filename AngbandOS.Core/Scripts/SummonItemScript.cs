@@ -22,6 +22,6 @@ internal class SummonItemScript : Script, IScript
         {
             return;
         }
-        Game.SummonItem(dir, Game.ExperienceLevel.Value * 15, true);
+        Game.SummonItem(dir, Game.ExperienceLevel.IntValue * 15, true);
     }
 }

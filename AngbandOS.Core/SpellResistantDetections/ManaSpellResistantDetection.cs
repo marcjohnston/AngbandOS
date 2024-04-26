@@ -13,7 +13,7 @@ internal class ManaSpellResistantDetection : SpellResistantDetection
     private ManaSpellResistantDetection(Game game) : base(game) { }
     public override void Learn(Monster monster)
     {
-        if (Game.MaxMana.Value == 0)
+        if (Game.MaxMana.IntValue == 0)
         {
             monster.SmImmMana = true;
         }

@@ -18,7 +18,7 @@ internal class WrathReward : Reward
         string wrathReason = $"the Wrath of {patron.ShortName}";
         Game.MsgPrint($"The voice of {patron.ShortName} thunders:");
         Game.MsgPrint("'Die, mortal!'");
-        Game.TakeHit(Game.ExperienceLevel.Value * 4, wrathReason);
+        Game.TakeHit(Game.ExperienceLevel.IntValue * 4, wrathReason);
         for (int dummy = 0; dummy < 6; dummy++)
         {
             Game.DecreaseAbilityScore(dummy, 10 + Game.DieRoll(15), false);

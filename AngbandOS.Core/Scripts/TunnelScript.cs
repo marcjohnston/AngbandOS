@@ -32,8 +32,8 @@ internal class TunnelScript : Script, IScript, IRepeatableScript
         if (Game.GetDirectionNoAim(out int dir))
         {
             // Pick up the tile that the player wishes to tunnel through
-            int tileY = Game.MapY.Value + Game.KeypadDirectionYOffset[dir];
-            int tileX = Game.MapX.Value + Game.KeypadDirectionXOffset[dir];
+            int tileY = Game.MapY.IntValue + Game.KeypadDirectionYOffset[dir];
+            int tileX = Game.MapX.IntValue + Game.KeypadDirectionXOffset[dir];
             GridTile tile = Game.Map.Grid[tileY][tileX];
             // Check if it can be tunneled through
             if (tile.FeatureType.IsPassable || tile.FeatureType is YellowSignSigilTile)

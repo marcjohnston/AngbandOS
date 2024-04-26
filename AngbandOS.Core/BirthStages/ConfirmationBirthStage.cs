@@ -51,8 +51,8 @@ internal class ConfirmationBirthStage : BirthStage
         Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateHealthFlaggedAction)).Set();
         Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
         Game.UpdateStuff();
-        Game.Health.Value = Game.MaxHealth.Value;
-        Game.Mana.Value = Game.MaxMana.Value;
+        Game.Health.IntValue = Game.MaxHealth.IntValue;
+        Game.Mana.IntValue = Game.MaxMana.IntValue;
         Game.Energy = 150;
         while (!Game.Shutdown)
         {

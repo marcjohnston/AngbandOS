@@ -18,7 +18,7 @@ internal class SlowMonstersScript : Script, IScript, ISuccessfulScript
     /// <returns></returns>
     public bool ExecuteSuccessfulScript()
     {
-        return Game.ProjectAtAllInLos(Game.SingletonRepository.Projectiles.Get(nameof(OldSlowProjectile)), Game.ExperienceLevel.Value);
+        return Game.ProjectAtAllInLos(Game.SingletonRepository.Projectiles.Get(nameof(OldSlowProjectile)), Game.ExperienceLevel.IntValue);
     }
 
     /// <summary>

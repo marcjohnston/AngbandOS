@@ -15,5 +15,5 @@ internal class LifeSpellDispelEvil : Spell
 
     public override string Name => "Dispel Evil";
 
-    protected override string LearnedDetails => $"dam {4 * Game.ExperienceLevel.Value}";
+    protected override string LearnedDetails => $"dam {4 * Game.ExperienceLevel.IntValue}";
 }

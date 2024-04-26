@@ -20,7 +20,7 @@ internal class DispelGood5xEvery300p1d300Activation : Activation
 
     protected override bool OnActivate(Item item)
     {
-        Game.RunScriptInt(nameof(DispelGood4xScript), Game.ExperienceLevel.Value * 5);
+        Game.RunScriptInt(nameof(DispelGood4xScript), Game.ExperienceLevel.IntValue * 5);
         return true;
     }
 

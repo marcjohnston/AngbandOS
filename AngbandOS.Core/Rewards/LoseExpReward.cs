@@ -15,6 +15,6 @@ internal class LoseExpReward : Reward
     {
         Game.MsgPrint($"The voice of {patron.ShortName} booms out:");
         Game.MsgPrint("'Thou didst not deserve that, slave.'");
-        Game.LoseExperience(Game.ExperiencePoints.Value / 6);
+        Game.LoseExperience(Game.ExperiencePoints.IntValue / 6);
     }
 }

@@ -15,5 +15,5 @@ internal class SorcerySpellDimensionDoor : Spell
 
     public override string Name => "Dimension Door";
 
-    protected override string LearnedDetails => $"range {Game.ExperienceLevel.Value + 2}";
+    protected override string LearnedDetails => $"range {Game.ExperienceLevel.IntValue + 2}";
 }

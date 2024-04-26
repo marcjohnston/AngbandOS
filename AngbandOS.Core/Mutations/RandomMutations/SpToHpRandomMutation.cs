@@ -22,17 +22,17 @@ internal class SpToHpRandomMutation : Mutation
         {
             return;
         }
-        int wounds = Game.MaxHealth.Value - Game.Health.Value;
+        int wounds = Game.MaxHealth.IntValue - Game.Health.IntValue;
         if (wounds <= 0)
         {
             return;
         }
-        int healing = Game.Mana.Value;
+        int healing = Game.Mana.IntValue;
         if (healing > wounds)
         {
             healing = wounds;
         }
         Game.RestoreHealth(healing);
-        Game.Mana.Value -= healing;
+        Game.Mana.IntValue -= healing;
     }
 }

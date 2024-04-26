@@ -81,9 +81,9 @@ internal class VampireRace : Race
     public override void Eat(Item item)
     {
         // Vampires only get 1/10th of the food value
-        Game.SetFood(Game.Food.Value + (item.TypeSpecificValue / 10));
+        Game.SetFood(Game.Food.IntValue + (item.TypeSpecificValue / 10));
         Game.MsgPrint("Mere victuals hold scant sustenance for a being such as yourself.");
-        if (Game.Food.Value < Constants.PyFoodAlert)
+        if (Game.Food.IntValue < Constants.PyFoodAlert)
         {
             Game.MsgPrint("Your hunger can only be satisfied with fresh blood!");
         }
@@ -92,12 +92,12 @@ internal class VampireRace : Race
     public override void UseRacialPower()
     {
         // Vampires can drain health
-        if (Game.CheckIfRacialPowerWorks(2, 1 + (Game.ExperienceLevel.Value / 3), Ability.Constitution, 9))
+        if (Game.CheckIfRacialPowerWorks(2, 1 + (Game.ExperienceLevel.IntValue / 3), Ability.Constitution, 9))
         {
             if (Game.GetDirectionNoAim(out int direction))
             {
-                int y = Game.MapY.Value + Game.KeypadDirectionYOffset[direction];
-                int x = Game.MapX.Value + Game.KeypadDirectionXOffset[direction];
+                int y = Game.MapY.IntValue + Game.KeypadDirectionYOffset[direction];
+                int x = Game.MapX.IntValue + Game.KeypadDirectionXOffset[direction];
                 GridTile tile = Game.Map.Grid[y][x];
                 if (tile.MonsterIndex == 0)
                 {
@@ -106,10 +106,10 @@ internal class VampireRace : Race
                 else
                 {
                     Game.MsgPrint("You grin and bare your fangs...");
-                    int dummy = Game.ExperienceLevel.Value + (Game.DieRoll(Game.ExperienceLevel.Value) * Math.Max(1, Game.ExperienceLevel.Value / 10));
+                    int dummy = Game.ExperienceLevel.IntValue + (Game.DieRoll(Game.ExperienceLevel.IntValue) * Math.Max(1, Game.ExperienceLevel.IntValue / 10));
                     if (Game.DrainLife(direction, dummy))
                     {
-                        if (Game.Food.Value < Constants.PyFoodFull)
+                        if (Game.Food.IntValue < Constants.PyFoodFull)
                         {
                             Game.RestoreHealth(dummy);
                         }
@@ -117,8 +117,8 @@ internal class VampireRace : Race
                         {
                             Game.MsgPrint("You were not hungry.");
                         }
-                        dummy = Game.Food.Value + Math.Min(5000, 100 * dummy);
-                        if (Game.Food.Value < Constants.PyFoodMax)
+                        dummy = Game.Food.IntValue + Math.Min(5000, 100 * dummy);
+                        if (Game.Food.IntValue < Constants.PyFoodMax)
                         {
                             Game.SetFood(dummy >= Constants.PyFoodMax ? Constants.PyFoodMax - 1 : dummy);
                         }
@@ -142,7 +142,7 @@ internal class VampireRace : Race
             Game.InvulnerabilityTimer.Value == 0 &&
             Game.IsLight)
         {
-            if (Game.Map.Grid[Game.MapY.Value][Game.MapX.Value].SelfLit)
+            if (Game.Map.Grid[Game.MapY.IntValue][Game.MapX.IntValue].SelfLit)
             {
                 Game.MsgPrint("The sun's rays scorch your undead flesh!");
                 Game.TakeHit(1, "sunlight");

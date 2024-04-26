@@ -27,7 +27,7 @@ internal class TelekinesisProjectile : Projectile
             obvious = true;
         }
         int doDist = 7;
-        int doStun = Game.DiceRoll((Game.ExperienceLevel.Value / 10) + 3, dam) + 1;
+        int doStun = Game.DiceRoll((Game.ExperienceLevel.IntValue / 10) + 3, dam) + 1;
         if (rPtr.Unique || rPtr.Level > 5 + Game.DieRoll(dam))
         {
             doStun = 0;

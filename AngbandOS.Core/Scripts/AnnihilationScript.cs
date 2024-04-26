@@ -18,7 +18,7 @@ internal class AnnihilationScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        Game.Mana.Value -= 100;
+        Game.Mana.IntValue -= 100;
         for (int i = 1; i < Game.MMax; i++)
         {
             Monster mPtr = Game.Monsters[i];
@@ -37,12 +37,12 @@ internal class AnnihilationScript : Script, IScript
             }
             Game.DeleteMonsterByIndex(i, true);
             Game.TakeHit(Game.DieRoll(4), "the strain of casting Annihilation");
-            Game.Mana.Value++;
-            Game.MainForm.MoveCursorTo(Game.MapY.Value, Game.MapX.Value);
+            Game.Mana.IntValue++;
+            Game.MainForm.MoveCursorTo(Game.MapY.IntValue, Game.MapX.IntValue);
             Game.HandleStuff();
             Game.UpdateScreen();
             Game.Pause(Constants.DelayFactorInMilliseconds);
         }
-        Game.Mana.Value += 100;
+        Game.Mana.IntValue += 100;
     }
 }

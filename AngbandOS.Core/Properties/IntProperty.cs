@@ -14,7 +14,7 @@ internal abstract class IntProperty : Property, IIntValue
 
     private int _value;
 
-    public int Value
+    public int IntValue
     {
         get
         {
@@ -35,8 +35,6 @@ internal abstract class IntProperty : Property, IIntValue
             OnAfterSet();
         }
     }
-
-    public int IntValue => Value;
 
     protected virtual void OnBeforeSet() { }
     protected virtual void OnAfterSet() { }

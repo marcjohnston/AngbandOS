@@ -29,7 +29,7 @@ internal abstract class ExpAttackEffect : AttackEffect
         }
         else
         {
-            int d = Game.DiceRoll(10, 6) + (Game.ExperiencePoints.Value / 100 * Constants.MonDrainLife);
+            int d = Game.DiceRoll(10, 6) + (Game.ExperiencePoints.IntValue / 100 * Constants.MonDrainLife);
             if (Game.HasHoldLife)
             {
                 Game.MsgPrint("You feel your life slipping away!");

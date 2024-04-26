@@ -18,8 +18,8 @@ internal class MeteorStormScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        int x = Game.MapX.Value;
-        int y = Game.MapY.Value;
+        int x = Game.MapX.IntValue;
+        int y = Game.MapY.IntValue;
         int count = 0;
         int b = 10 + Game.DieRoll(10);
         for (int i = 0; i < b; i++)
@@ -32,10 +32,10 @@ internal class MeteorStormScript : Script, IScript
                 {
                     break;
                 }
-                x = Game.MapX.Value - 5 + Game.DieRoll(10);
-                y = Game.MapY.Value - 5 + Game.DieRoll(10);
-                int dx = Game.MapX.Value > x ? Game.MapX.Value - x : x - Game.MapX.Value;
-                int dy = Game.MapY.Value > y ? Game.MapY.Value - y : y - Game.MapY.Value;
+                x = Game.MapX.IntValue - 5 + Game.DieRoll(10);
+                y = Game.MapY.IntValue - 5 + Game.DieRoll(10);
+                int dx = Game.MapX.IntValue > x ? Game.MapX.IntValue - x : x - Game.MapX.IntValue;
+                int dy = Game.MapY.IntValue > y ? Game.MapY.IntValue - y : y - Game.MapY.IntValue;
                 d = dy > dx ? dy + (dx >> 1) : dx + (dy >> 1);
             } while (d > 5 || !Game.PlayerHasLosBold(y, x));
             if (count > 1000)
@@ -43,7 +43,7 @@ internal class MeteorStormScript : Script, IScript
                 break;
             }
             count = 0;
-            Game.Project(0, 2, y, x, Game.ExperienceLevel.Value * 3 / 2, Game.SingletonRepository.Projectiles.Get(nameof(MeteorProjectile)), ProjectionFlag.ProjectKill | ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem);
+            Game.Project(0, 2, y, x, Game.ExperienceLevel.IntValue * 3 / 2, Game.SingletonRepository.Projectiles.Get(nameof(MeteorProjectile)), ProjectionFlag.ProjectKill | ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem);
         }
     }
 }

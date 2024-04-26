@@ -15,5 +15,5 @@ internal class SorcerySpellLightArea : Spell
 
     public override string Name => "Light Area";
 
-    protected override string LearnedDetails => $"dam {10 + (Game.ExperienceLevel.Value / 2)}";
+    protected override string LearnedDetails => $"dam {10 + (Game.ExperienceLevel.IntValue / 2)}";
 }

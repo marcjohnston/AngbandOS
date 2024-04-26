@@ -18,23 +18,23 @@ internal class PrecognitionTalent : Talent
 
     public override void Use()
     {
-        if (Game.ExperienceLevel.Value > 44)
+        if (Game.ExperienceLevel.IntValue > 44)
         {
             Game.RunScript(nameof(LightScript));
         }
-        else if (Game.ExperienceLevel.Value > 19)
+        else if (Game.ExperienceLevel.IntValue > 19)
         {
             Game.RunScript(nameof(MapAreaScript));
         }
         bool b;
-        if (Game.ExperienceLevel.Value < 30)
+        if (Game.ExperienceLevel.IntValue < 30)
         {
             b = Game.RunSuccessfulScript(nameof(DetectNormalMonstersScript));
-            if (Game.ExperienceLevel.Value > 14)
+            if (Game.ExperienceLevel.IntValue > 14)
             {
                 b |= Game.DetectMonstersInvis();
             }
-            if (Game.ExperienceLevel.Value > 4)
+            if (Game.ExperienceLevel.IntValue > 4)
             {
                 b |= Game.DetectTraps();
             }
@@ -43,9 +43,9 @@ internal class PrecognitionTalent : Talent
         {
             b = Game.RunSuccessfulScript(nameof(DetectionScript));
         }
-        if (Game.ExperienceLevel.Value > 24 && Game.ExperienceLevel.Value < 40)
+        if (Game.ExperienceLevel.IntValue > 24 && Game.ExperienceLevel.IntValue < 40)
         {
-            Game.TelepathyTimer.AddTimer(Game.ExperienceLevel.Value);
+            Game.TelepathyTimer.AddTimer(Game.ExperienceLevel.IntValue);
         }
         if (!b)
         {

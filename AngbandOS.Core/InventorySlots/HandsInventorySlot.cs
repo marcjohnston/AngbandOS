@@ -18,7 +18,7 @@ internal class HandsInventorySlot : EquipmentInventorySlot
     public override string MentionUse(int? index) => "On hands";
     public override string DescribeWieldLocation(int index) => "wearing on your hands";
     public override string DescribeItemLocation(Item oPtr) => "wearing on your hands";
-    public override int BareArmorClassBonus => Game.ExperienceLevel.Value > 4 ? Game.ExperienceLevel.Value / 2 : 0;
+    public override int BareArmorClassBonus => Game.ExperienceLevel.IntValue > 4 ? Game.ExperienceLevel.IntValue / 2 : 0;
     public override bool IsWeightRestricting => true;
     public override bool IsArmor => true;
     public override int SortOrder => 12;

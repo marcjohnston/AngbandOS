@@ -21,8 +21,8 @@ internal class BanishActiveMutation : Mutation
         {
             return;
         }
-        int y = Game.MapY.Value + Game.KeypadDirectionYOffset[dir];
-        int x = Game.MapX.Value + Game.KeypadDirectionXOffset[dir];
+        int y = Game.MapY.IntValue + Game.KeypadDirectionYOffset[dir];
+        int x = Game.MapX.IntValue + Game.KeypadDirectionXOffset[dir];
         GridTile cPtr = Game.Map.Grid[y][x];
         if (cPtr.MonsterIndex == 0)
         {

@@ -46,13 +46,13 @@ internal class ResearchSpellScript : Script, IScript, IStoreScript
             return;
         }
         // We can only learn new spells if we have spare slots
-        if (Game.SpareSpellSlots.Value == 0)
+        if (Game.SpareSpellSlots.IntValue == 0)
         {
             Game.MsgPrint($"You cannot learn any new {spellType}s!");
             return;
         }
-        string plural = Game.SpareSpellSlots.Value == 1 ? "" : "s";
-        Game.MsgPrint($"You can learn {Game.SpareSpellSlots.Value} new {spellType}{plural}.");
+        string plural = Game.SpareSpellSlots.IntValue == 1 ? "" : "s";
+        Game.MsgPrint($"You can learn {Game.SpareSpellSlots.IntValue} new {spellType}{plural}.");
         Game.MsgPrint(null);
         // Get the spell books we have
         if (!Game.SelectItem(out Item? item, "Study which book? ", false, true, true, Game.SingletonRepository.ItemFilters.Get(nameof(IsUsableSpellBookItemFilter))))
@@ -122,12 +122,12 @@ internal class ResearchSpellScript : Script, IScript, IStoreScript
         // Let the player know they've learned a spell
         Game.MsgPrint($"You have learned the {spellType} of {spell.Name}.");
         Game.PlaySound(SoundEffectEnum.Study);
-        Game.SpareSpellSlots.Value--;
-        if (Game.SpareSpellSlots.Value != 0)
+        Game.SpareSpellSlots.IntValue--;
+        if (Game.SpareSpellSlots.IntValue != 0)
         {
-            plural = Game.SpareSpellSlots.Value != 1 ? "s" : "";
-            Game.MsgPrint($"You can learn {Game.SpareSpellSlots.Value} more {spellType}{plural}.");
+            plural = Game.SpareSpellSlots.IntValue != 1 ? "s" : "";
+            Game.MsgPrint($"You can learn {Game.SpareSpellSlots.IntValue} more {spellType}{plural}.");
         }
-        Game.OldSpareSpellSlots = Game.SpareSpellSlots.Value;
+        Game.OldSpareSpellSlots = Game.SpareSpellSlots.IntValue;
     }
 }

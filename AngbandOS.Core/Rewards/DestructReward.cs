@@ -15,6 +15,6 @@ internal class DestructReward : Reward
     {
         Game.MsgPrint($"The voice of {patron.ShortName} booms out:");
         Game.MsgPrint("'Death and destruction! This pleaseth me!'");
-        Game.DestroyArea(Game.MapY.Value, Game.MapX.Value, 25);
+        Game.DestroyArea(Game.MapY.IntValue, Game.MapX.IntValue, 25);
     }
 }
