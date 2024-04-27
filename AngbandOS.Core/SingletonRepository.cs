@@ -5,6 +5,11 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Reflection;
+using Timer = AngbandOS.Core.Timers.Timer;
+
 namespace AngbandOS.Core;
 
 [Serializable]
@@ -98,6 +103,115 @@ internal class SingletonRepository
     public WidgetsRepository Widgets;
     public WorshipPlayerAttacksRepository WorshipPlayerAttacks;
 
+    private Dictionary<string, Dictionary<string, object>> _repositoryDictionary = new Dictionary<string, Dictionary<string, object>>();
+
+    public void AddInterfaceRepository<T>()
+    {
+        string typeName = typeof(T).Name;
+        if (_repositoryDictionary.TryGetValue(typeName, out Dictionary<string, object>? loadAndBindList))
+        {
+            throw new Exception("AddInterface duplicate {typeName}");
+        }
+        loadAndBindList = new Dictionary<string, object>();
+        _repositoryDictionary.Add(typeName, loadAndBindList);
+    }
+
+    public T? GetOrDefault<T>(string? key) where T : class
+    {
+        if (key == null)
+        {
+            return null;
+        }
+
+        string typeName = typeof(T).Name;
+
+        // Check to see if the dictionary has a dictionary for this type of object.
+        if (!_repositoryDictionary.TryGetValue(typeName, out Dictionary<string, object>? loadAndBindList))
+        {
+            return null;
+        }
+
+        // Retrieve the singleton by key name.
+        if (!loadAndBindList.TryGetValue(key, out object? singleton))
+        {
+            return null;
+        }
+        return (T)singleton;
+    }
+
+    public T Get<T>(string key) where T : class
+    {
+        T? singleton = GetOrDefault<T>(key);
+        if (singleton == null)
+        {
+            throw new Exception($"The singleton {typeof(T).Name}.{key} does not exist.");
+        }
+        return singleton;
+    }
+
+    private void LoadAllAssemblyTypes()
+    {
+        Assembly assembly = Assembly.GetExecutingAssembly();
+        Type[] types = assembly.GetTypes();
+        foreach (Type type in types)
+        {
+            // Ensure the type is not abstract and inherits the IGetKey interface.
+            if (!type.IsAbstract)
+            {
+                // Ensure it only has one constructor.
+                ConstructorInfo[] constructors = type.GetConstructors(BindingFlags.NonPublic | BindingFlags.Instance);
+                if (constructors.Length == 1)
+                {
+                    // We will only instantiate the singleton, if we are storing it.
+                    object? singleton = null;
+
+                    // Place the singleton into the respective dictionary repositories.
+                    List<Type> interfaceTypeNames = new List<Type>();
+                    interfaceTypeNames.AddRange(type.GetInterfaces());
+                    Type? baseType = type.BaseType;
+                    while (baseType != null)
+                    {
+                        interfaceTypeNames.Add(baseType);
+                        baseType = baseType.BaseType;
+                    }
+
+                    foreach (Type interfaceType in interfaceTypeNames)
+                    {
+                        string typeName = interfaceType.Name;
+
+                        // Check to see if there is a repository that is registered for this type.
+                        if (_repositoryDictionary.TryGetValue(typeName, out Dictionary<string, object>? typeRepositoryDictionary))
+                        {
+                            // We only instantiate the object once and only if we are storing it.
+                            if (singleton == null)
+                            {
+                                singleton = constructors[0].Invoke(new object[] { Game });
+                            }
+                            
+                            // Ensure the singleton implements the IGetKey interface and get the key from the singleton.
+                            string key;
+                            switch (singleton)
+                            {
+                                case IGetKey getKeySingle:
+                                    key = getKeySingle.GetKey;
+                                    break;
+                                default:
+                                    throw new Exception($"The singleton {type.Name} does not implement the IGetKey interface.");
+                            }
+
+                            // Ensure there isn't already a singleton with the same name.
+                            if (typeRepositoryDictionary.TryGetValue(key, out _))
+                            {
+                                throw new Exception($"Cannot add duplicate {type.Name} singleton with the key {key}.");
+                            }
+                            typeRepositoryDictionary.Add(key, singleton);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     public SingletonRepository(Game game)
     {
         Game = game;
@@ -132,6 +246,15 @@ internal class SingletonRepository
     /// <param name="game"></param>
     public void Load()
     {
+        // These are the types to load from the assembly.
+        AddInterfaceRepository<IIntValue>();
+        AddInterfaceRepository<Property>();
+        AddInterfaceRepository<Timer>();
+        AddInterfaceRepository<Function>();
+        AddInterfaceRepository<Activation>();
+        LoadAllAssemblyTypes();
+
+
         // Create all of the repositories.  All of the repositories will be empty and have an instance to the save game.
         Activations = AddRepository<ActivationsRepository>(new ActivationsRepository(Game));
         Alignments = AddRepository<AlignmentsRepository>(new AlignmentsRepository(Game));

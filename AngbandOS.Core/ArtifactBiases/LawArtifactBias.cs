@@ -47,15 +47,15 @@ internal class LawArtifactBias : ArtifactBias
     {
         if (Game.DieRoll(8) == 1)
         {
-            return Game.SingletonRepository.Activations.Get(nameof(BanishEvilEvery250p1d250Activation));
+            return Game.SingletonRepository.Get<Activation>(nameof(BanishEvilEvery250p1d250Activation));
         }
         else if (Game.DieRoll(4) == 1)
         {
-            return Game.SingletonRepository.Activations.Get(nameof(DispelEvil5xEvery300p1d300Activation));
+            return Game.SingletonRepository.Get<Activation>(nameof(DispelEvil5xEvery300p1d300Activation));
         }
         else
         {
-            return Game.SingletonRepository.Activations.Get(nameof(ProtectionFromEvilActivation));
+            return Game.SingletonRepository.Get<Activation>(nameof(ProtectionFromEvilActivation));
         }
     }
 }

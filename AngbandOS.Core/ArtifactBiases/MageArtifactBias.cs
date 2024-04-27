@@ -30,19 +30,19 @@ internal class MageArtifactBias : ArtifactBias
     {
         if (Game.DieRoll(20) == 1)
         {
-            return Game.SingletonRepository.Activations.Get(nameof(SummonElementalActivation));
+            return Game.SingletonRepository.Get<Activation>(nameof(SummonElementalActivation));
         }
         else if (Game.DieRoll(10) == 1)
         {
-            return Game.SingletonRepository.Activations.Get(nameof(SummonPhantomActivation));
+            return Game.SingletonRepository.Get<Activation>(nameof(SummonPhantomActivation));
         }
         else if (Game.DieRoll(5) == 1)
         {
-            return Game.SingletonRepository.Activations.Get(nameof(RuneExploActivation));
+            return Game.SingletonRepository.Get<Activation>(nameof(RuneExploActivation));
         }
         else
         {
-            return Game.SingletonRepository.Activations.Get(nameof(TemporaryEsp20p1d30Every200Activation));
+            return Game.SingletonRepository.Get<Activation>(nameof(TemporaryEsp20p1d30Every200Activation));
         }
     }
 }

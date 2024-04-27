@@ -75,11 +75,11 @@ internal class ChaosArtifactBias : ArtifactBias
     {
         if (Game.DieRoll(6) == 1)
         {
-            return Game.SingletonRepository.Activations.Get(nameof(SummonDemonActivation));
+            return Game.SingletonRepository.Get<Activation>(nameof(SummonDemonActivation));
         }
         else
         {
-            return Game.SingletonRepository.Activations.Get(nameof(CallChaosEvery350Activation));
+            return Game.SingletonRepository.Get<Activation>(nameof(CallChaosEvery350Activation));
         }
     }
 }

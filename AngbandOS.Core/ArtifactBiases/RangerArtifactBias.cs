@@ -72,27 +72,27 @@ internal class RangerArtifactBias : ArtifactBias
     {
         if (Game.DieRoll(20) == 1)
         {
-            return Game.SingletonRepository.Activations.Get(nameof(CharmAnimalEvery500Activation));
+            return Game.SingletonRepository.Get<Activation>(nameof(CharmAnimalEvery500Activation));
         }
         else if (Game.DieRoll(7) == 1)
         {
-            return Game.SingletonRepository.Activations.Get(nameof(SummonAnimalActivation));
+            return Game.SingletonRepository.Get<Activation>(nameof(SummonAnimalActivation));
         }
         else if (Game.DieRoll(6) == 1)
         {
-            return Game.SingletonRepository.Activations.Get(nameof(CharmAnimal1xEvery300Activation));
+            return Game.SingletonRepository.Get<Activation>(nameof(CharmAnimal1xEvery300Activation));
         }
         else if (Game.DieRoll(4) == 1)
         {
-            return Game.SingletonRepository.Activations.Get(nameof(ResistAll40p1d40Activation));
+            return Game.SingletonRepository.Get<Activation>(nameof(ResistAll40p1d40Activation));
         }
         else if (Game.DieRoll(3) == 1)
         {
-            return Game.SingletonRepository.Activations.Get(nameof(SatiateActivation));
+            return Game.SingletonRepository.Get<Activation>(nameof(SatiateActivation));
         }
         else
         {
-            return Game.SingletonRepository.Activations.Get(nameof(RemoveFearAndPoisonEvery5Activation));
+            return Game.SingletonRepository.Get<Activation>(nameof(RemoveFearAndPoisonEvery5Activation));
         }
     }
 }

@@ -69,15 +69,15 @@ internal class FireArtifactBias : ArtifactBias
     {
         if (Game.DieRoll(3) != 1)
         {
-            return Game.SingletonRepository.Activations.Get(nameof(FireBolt9d8Every8p1d8Activation));
+            return Game.SingletonRepository.Get<Activation>(nameof(FireBolt9d8Every8p1d8Activation));
         }
         else if (Game.DieRoll(5) != 1)
         {
-            return Game.SingletonRepository.Activations.Get(nameof(BallOfFire72r2Every400Activation));
+            return Game.SingletonRepository.Get<Activation>(nameof(BallOfFire72r2Every400Activation));
         }
         else
         {
-            return Game.SingletonRepository.Activations.Get(nameof(FireBall120r3Every225p1d225Activation));
+            return Game.SingletonRepository.Get<Activation>(nameof(FireBall120r3Every225p1d225Activation));
         }
     }
 }

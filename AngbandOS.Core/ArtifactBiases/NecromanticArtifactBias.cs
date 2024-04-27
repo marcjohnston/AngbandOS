@@ -68,35 +68,35 @@ internal class NecromanticArtifactBias : ArtifactBias
     {
         if (Game.DieRoll(66) == 1)
         {
-            return Game.SingletonRepository.Activations.Get(nameof(WraithActivation));
+            return Game.SingletonRepository.Get<Activation>(nameof(WraithActivation));
         }
         else if (Game.DieRoll(13) == 1)
         {
-            return Game.SingletonRepository.Activations.Get(nameof(DispelGood5xEvery300p1d300Activation));
+            return Game.SingletonRepository.Get<Activation>(nameof(DispelGood5xEvery300p1d300Activation));
         }
         else if (Game.DieRoll(9) == 1)
         {
-            return Game.SingletonRepository.Activations.Get(nameof(MassCarnageActivation));
+            return Game.SingletonRepository.Get<Activation>(nameof(MassCarnageActivation));
         }
         else if (Game.DieRoll(8) == 1)
         {
-            return Game.SingletonRepository.Activations.Get(nameof(GenocideEvery500Activation));
+            return Game.SingletonRepository.Get<Activation>(nameof(GenocideEvery500Activation));
         }
         else if (Game.DieRoll(13) == 1)
         {
-            return Game.SingletonRepository.Activations.Get(nameof(SummonUndeadActivation));
+            return Game.SingletonRepository.Get<Activation>(nameof(SummonUndeadActivation));
         }
         else if (Game.DieRoll(9) == 1)
         {
-            return Game.SingletonRepository.Activations.Get(nameof(Vampire2Activation));
+            return Game.SingletonRepository.Get<Activation>(nameof(Vampire2Activation));
         }
         else if (Game.DieRoll(6) == 1)
         {
-            return Game.SingletonRepository.Activations.Get(nameof(EnslaveUndead1xEvery333Activation));
+            return Game.SingletonRepository.Get<Activation>(nameof(EnslaveUndead1xEvery333Activation));
         }
         else
         {
-            return Game.SingletonRepository.Activations.Get(nameof(Vampire1Activation));
+            return Game.SingletonRepository.Get<Activation>(nameof(Vampire1Activation));
         }
     }
 }

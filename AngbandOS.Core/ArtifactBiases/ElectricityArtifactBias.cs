@@ -60,15 +60,15 @@ internal class ElectricityArtifactBias : ArtifactBias
     {
         if (Game.DieRoll(3) != 1)
         {
-            return Game.SingletonRepository.Activations.Get(nameof(LightningBolt4d8Every6p1d6Activation));
+            return Game.SingletonRepository.Get<Activation>(nameof(LightningBolt4d8Every6p1d6Activation));
         }
         else if (Game.DieRoll(5) != 1)
         {
-            return Game.SingletonRepository.Activations.Get(nameof(BallOfLightning100r3Every500Activation));
+            return Game.SingletonRepository.Get<Activation>(nameof(BallOfLightning100r3Every500Activation));
         }
         else
         {
-            return Game.SingletonRepository.Activations.Get(nameof(LargeLightningBall250Every425p1d425Activation));
+            return Game.SingletonRepository.Get<Activation>(nameof(LargeLightningBall250Every425p1d425Activation));
         }
     }
 }

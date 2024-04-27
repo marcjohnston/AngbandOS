@@ -24,36 +24,6 @@ internal class DictionaryRepository<TValue> : ListRepository<TValue> where TValu
     /// </summary>
     public override string Name => Game.Pluralize(typeof(TValue).Name);
 
-    public TValue Bind(string scriptName)
-    {
-        return Get(scriptName);
-    }
-
-    public TValue? BindNullable(string? scriptName)
-    {
-        if (scriptName == null)
-        {
-            return default;
-        }
-        return Get(scriptName);
-    }
-
-    public TValue? BindNullable<T>(string? scriptName)
-    {
-        if (scriptName == null)
-        {
-            return default;
-        }
-        TValue item = Get(scriptName);
-        switch (item)
-        {
-            case T:
-                return item;
-            default:
-                throw new Exception($"The {scriptName.ToString()} script cannot bind to the {typeof(T).Name} interface.");
-        }
-    }
-
     public TValue? BindNullable<T, T2>(string? scriptName)
     {
         if (scriptName == null)

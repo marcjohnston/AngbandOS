@@ -5,8 +5,6 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-using Timer = AngbandOS.Core.Timers.Timer;
-
 namespace AngbandOS.Core.Widgets;
 
 [Serializable]
@@ -27,30 +25,6 @@ internal abstract class IntWidget : TextWidget
     public override void Bind()
     {
         base.Bind();
-        Property? property = Game.SingletonRepository.Properties.TryGet(IntValueName);
-        if (property != null)
-        {
-            IntValue = (IIntValue)property;
-        }
-        else
-        {
-            Timer? timer = Game.SingletonRepository.Timers.TryGet(IntValueName);
-            if (timer != null)
-            {
-                IntValue = (IIntValue)timer;
-            }
-            else
-            {
-                Function? function = Game.SingletonRepository.Functions.TryGet(IntValueName);
-                if (function != null)
-                {
-                    IntValue = (IIntValue)function;
-                }
-                else
-                {
-                    throw new Exception($"The {IntValueName} property does not specify a valid {nameof(Property)}, {nameof(Timer)} or {nameof(Function)}.");
-                }
-            }
-        }
+        IntValue = Game.SingletonRepository.Get<IIntValue>(IntValueName);
     }
 }

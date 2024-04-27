@@ -15,7 +15,7 @@ namespace AngbandOS.Core.Repositories;
 /// </summary>
 /// <typeparam name="T"></typeparam>
 [Serializable]
-internal abstract class Repository<T> : IEnumerable<T>, ILoadAndBind
+internal abstract class Repository<T> : IEnumerable<T>, ILoadAndBind where T : notnull
 {
     protected readonly Game Game;
 
