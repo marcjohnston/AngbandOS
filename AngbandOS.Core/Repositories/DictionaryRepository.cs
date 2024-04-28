@@ -40,11 +40,6 @@ internal class DictionaryRepository<TValue> : ListRepository<TValue> where TValu
         Game.CorePersistentStorage.PersistEntities(Name, jsonEntityList.ToArray());
     }
 
-    public override string SerializeEntity(TValue entity)
-    {
-        return entity.ToJson();
-    }
-
     public virtual TValue Get(string key)
     {
         if (!dictionary.TryGetValue(key, out TValue? value))

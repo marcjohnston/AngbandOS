@@ -26,9 +26,4 @@ internal abstract class StringListRepository : ListRepository<string>
         string json = JsonSerializer.Serialize(values);
         Game.CorePersistentStorage.PersistEntity(Name, json);
     }
-
-    public override string SerializeEntity(string entity)
-    {
-        return entity;
-    }
 }

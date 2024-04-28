@@ -24,8 +24,6 @@ internal abstract class Repository<T> : IEnumerable<T>, ILoadAndBind where T : n
         Game = game;
     }
 
-    public abstract string SerializeEntity(T entity);
-
     public abstract IEnumerator<T> GetEnumerator();
 
     IEnumerator IEnumerable.GetEnumerator()
