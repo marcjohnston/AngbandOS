@@ -8,8 +8,6 @@
 
 namespace AngbandOS.Core.Functions;
 
-using Timer = AngbandOS.Core.Timers.Timer;
-
 [Serializable]
 internal abstract class Function : IGetKey, IChangeTracker
 {

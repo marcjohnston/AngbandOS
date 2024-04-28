@@ -5,8 +5,6 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-using Timer = AngbandOS.Core.Timers.Timer;
-
 namespace AngbandOS.Core.Widgets;
 
 [Serializable]
@@ -19,31 +17,7 @@ internal abstract class BoolWidget : TextWidget
     public override void Bind()
     {
         base.Bind();
-        Property? property = Game.SingletonRepository.Properties.TryGet(BoolValueName);
-        if (property != null)
-        {
-            BoolValue = (IBoolValue)property;
-        }
-        else
-        {
-            Timer? timer = Game.SingletonRepository.Timers.TryGet(BoolValueName);
-            if (timer != null)
-            {
-                BoolValue = (IBoolValue)timer;
-            }
-            else
-            {
-                Function? function = Game.SingletonRepository.Functions.TryGet(BoolValueName);
-                if (function != null)
-                {
-                    BoolValue = (IBoolValue)function;
-                }
-                else
-                {
-                    throw new Exception($"The {nameof(BoolValueName)} property does not specify a valid {nameof(Property)}, {nameof(Timer)} or {nameof(Function)}.");
-                }
-            }
-        }
+        BoolValue = Game.SingletonRepository.Get<IBoolValue>(BoolValueName);
     }
 
     public abstract string TrueValue { get; }

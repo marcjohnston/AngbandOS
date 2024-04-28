@@ -266,6 +266,7 @@ internal class SingletonRepository
     public void Load()
     {
         // These are the types to load from the assembly.
+        AddInterfaceRepository<IBoolValue>();
         AddInterfaceRepository<IIntValue>();
         AddInterfaceRepository<ICastScript>();
         AddInterfaceRepository<IChangeTracker>();
