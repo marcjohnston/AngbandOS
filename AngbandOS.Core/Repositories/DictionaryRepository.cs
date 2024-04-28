@@ -24,26 +24,6 @@ internal class DictionaryRepository<TValue> : ListRepository<TValue> where TValu
     /// </summary>
     public override string Name => Game.Pluralize(typeof(TValue).Name);
 
-    public TValue? BindNullable<T, T2>(string? scriptName)
-    {
-        if (scriptName == null)
-        {
-            return default;
-        }
-        TValue item = Get(scriptName);
-        switch (item)
-        {
-            case T:
-                return item;
-            case T2:
-                return item;
-            default:
-                throw new Exception($"The {scriptName.ToString()} script cannot bind to the {typeof(T).Name} or {typeof(T2).Name} interface.");
-        }
-    }
-
-    //public bool Contains(TValue item) => dictionary.ContainsKey(item.GetKey);
-
     /// <summary>
     /// Persist the entities to the core persistent storage medium.  This method is only being used to generate database entities from objects.
     /// </summary>
