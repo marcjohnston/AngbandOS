@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class SellScript : Script, IStoreScript
+internal class SellScript : Script, IScriptStore
 {
     private SellScript(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class SellScript : Script, IStoreScript
     /// Allows an item to be sold to the store.  Does not modify any of the store flags.
     /// </summary>
     /// <returns></returns>
-    public void ExecuteStoreScript(StoreCommandEvent storeCommandEvent)
+    public void ExecuteScriptStore(StoreCommandEvent storeCommandEvent)
     {
         if (!storeCommandEvent.Store.StoreFactory.StoreMaintainsInventory)
         {

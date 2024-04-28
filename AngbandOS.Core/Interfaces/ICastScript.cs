@@ -7,7 +7,9 @@
 
 namespace AngbandOS.Core.Interfaces;
 
-internal interface ISpellScript
+/// <summary>
+/// Represents an interface for script that can be cast via spells.  The IScript and IScriptSpell interfaces implement this interface.
+/// </summary>
+internal interface ICastScript
 {
-    void ExecuteSpellScript(Spell spell);
 }

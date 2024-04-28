@@ -5,19 +5,12 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.Scripts;
+namespace AngbandOS.Core.Interfaces;
 
-[Serializable]
-internal class LeaveStoreScript : Script, IScriptStore
+/// <summary>
+/// Represents the interface a script needs to implement for it available when the player is in a store.
+/// </summary>
+internal interface IScriptStore
 {
-    private LeaveStoreScript(Game game) : base(game) { }
-
-    /// <summary>
-    /// Sets the leave store flag.
-    /// </summary>
-    /// <returns></returns>
-    public void ExecuteScriptStore(StoreCommandEvent storeCommandEvent)
-    {
-        storeCommandEvent.LeaveStore = true;
-    }
+    void ExecuteScriptStore(StoreCommandEvent storeCommandEvent);
 }

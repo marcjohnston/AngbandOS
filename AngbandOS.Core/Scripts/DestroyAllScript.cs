@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class DestroyAllScript : Script, IScript, IRepeatableScript, IStoreScript
+internal class DestroyAllScript : Script, IScript, IRepeatableScript, IScriptStore
 {
     private DestroyAllScript(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class DestroyAllScript : Script, IScript, IRepeatableScript, IStoreScri
     /// Executes the destroy all script.  Does not modify any of the store flags.
     /// </summary>
     /// <returns></returns>
-    public void ExecuteStoreScript(StoreCommandEvent storeCommandEvent)
+    public void ExecuteScriptStore(StoreCommandEvent storeCommandEvent)
     {
         ExecuteScript();
     }

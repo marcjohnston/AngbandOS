@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class QuerySymbolScript : Script, IScript, IRepeatableScript, IStoreScript
+internal class QuerySymbolScript : Script, IScript, IRepeatableScript, IScriptStore
 {
     private QuerySymbolScript(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class QuerySymbolScript : Script, IScript, IRepeatableScript, IStoreScr
     /// Executes the query symbol script.  Does not modify any of the store flags.
     /// </summary>
     /// <returns></returns>
-    public void ExecuteStoreScript(StoreCommandEvent storeCommandEvent)
+    public void ExecuteScriptStore(StoreCommandEvent storeCommandEvent)
     {
         ExecuteScript();
     }

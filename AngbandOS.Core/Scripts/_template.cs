@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class _template : Script, IScript, IRepeatableScript, ISuccessfulScript, IStoreScript
+internal class _template : Script, IScript, IRepeatableScript, ISuccessfulScript, IScriptStore
 {
     private _template(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class _template : Script, IScript, IRepeatableScript, ISuccessfulScript
     /// Executes the script.  Does not modify any of the store flags.
     /// </summary>
     /// <returns></returns>
-    public void ExecuteStoreScript(StoreCommandEvent storeCommandEvent)
+    public void ExecuteScriptStore(StoreCommandEvent storeCommandEvent)
     {
     }
 

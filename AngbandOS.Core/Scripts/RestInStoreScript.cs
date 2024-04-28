@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class RestInStoreScript : Script, IScript, IStoreScript
+internal class RestInStoreScript : Script, IScript, IScriptStore
 {
     private RestInStoreScript(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class RestInStoreScript : Script, IScript, IStoreScript
     /// Executes the rest in store script.  Does not modify any of the store flags.
     /// </summary>
     /// <returns></returns>
-    public void ExecuteStoreScript(StoreCommandEvent storeCommandEvent)
+    public void ExecuteScriptStore(StoreCommandEvent storeCommandEvent)
     {
         ExecuteScript();
     }

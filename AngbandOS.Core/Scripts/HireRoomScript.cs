@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class HireRoomScript : Script, IStoreScript
+internal class HireRoomScript : Script, IScriptStore
 {
     private HireRoomScript(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class HireRoomScript : Script, IStoreScript
     /// Offers and sells a room.  When sold the player wakes up the next day fully rested.  Does not modify any of the store flags.
     /// </summary>
     /// <returns></returns>
-    public void ExecuteStoreScript(StoreCommandEvent storeCommandEvent)
+    public void ExecuteScriptStore(StoreCommandEvent storeCommandEvent)
     {
         int price;
         if (Game.PoisonTimer.Value > 0 || Game.BleedingTimer.Value > 0)

@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class HireAnEscortScript : Script, IScript, IStoreScript, ISuccessfulScript
+internal class HireAnEscortScript : Script, IScript, IScriptStore, ISuccessfulScript
 {
     private HireAnEscortScript(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class HireAnEscortScript : Script, IScript, IStoreScript, ISuccessfulSc
     /// Executes the hire escort script successful script and sets the leave store flag to true, if the script was successful.
     /// </summary>
     /// <param name="storeCommandEvent"></param>
-    public void ExecuteStoreScript(StoreCommandEvent storeCommandEvent)
+    public void ExecuteScriptStore(StoreCommandEvent storeCommandEvent)
     {
         storeCommandEvent.LeaveStore = ExecuteSuccessfulScript();
     }

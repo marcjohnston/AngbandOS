@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class RemoveCurseScript : Script, IScript, IStoreScript, ISuccessfulScript
+internal class RemoveCurseScript : Script, IScript, IScriptStore, ISuccessfulScript
 {
     private RemoveCurseScript(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class RemoveCurseScript : Script, IScript, IStoreScript, ISuccessfulScr
     /// Allows the player to purchase the remove curse for 500 gold.  Does not modify any of the store flags.
     /// </summary>
     /// <returns></returns>
-    public void ExecuteStoreScript(StoreCommandEvent storeCommandEvent)
+    public void ExecuteScriptStore(StoreCommandEvent storeCommandEvent)
     {
         if (!Game.ServiceHaggle(500, out int price))
         {

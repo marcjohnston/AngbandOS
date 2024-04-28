@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class BuyHouseScript : Script, IScript, IStoreScript
+internal class BuyHouseScript : Script, IScript, IScriptStore
 {
     private BuyHouseScript(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class BuyHouseScript : Script, IScript, IStoreScript
     /// Executes the buy house script.  Does not modify any of the store flags.
     /// </summary>
     /// <returns></returns>
-    public void ExecuteStoreScript(StoreCommandEvent storeCommandEvent)
+    public void ExecuteScriptStore(StoreCommandEvent storeCommandEvent)
     {
         ExecuteScript();
     }

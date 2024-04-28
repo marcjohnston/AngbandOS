@@ -8,11 +8,11 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class WildDeathMagicScript : Script, ISpellScript
+internal class WildDeathMagicScript : Script, IScriptSpell
 {
     private WildDeathMagicScript(Game game) : base(game) { }
 
-    public void ExecuteSpellScript(Spell spell)
+    public void ExecuteScriptSpell(Spell spell)
     {
         int bookIndex = spell.BookItemFactory.BookIndex;
         int spellIndex= spell.SpellIndex;

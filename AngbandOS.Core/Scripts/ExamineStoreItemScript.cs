@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class ExamineStoreItemScript : Script, IStoreScript
+internal class ExamineStoreItemScript : Script, IScriptStore
 {
     private ExamineStoreItemScript(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class ExamineStoreItemScript : Script, IStoreScript
     /// Allows the selection of an item in the store and renders a detailed description of the item.  Does not modify any of the store flags.
     /// </summary>
     /// <returns></returns>
-    public void ExecuteStoreScript(StoreCommandEvent storeCommandEvent)
+    public void ExecuteScriptStore(StoreCommandEvent storeCommandEvent)
     {
         if (storeCommandEvent.Store.StoreInventoryList.Count <= 0)
         {

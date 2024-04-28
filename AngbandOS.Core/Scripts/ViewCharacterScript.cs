@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class ViewCharacterScript : Script, IScript, IRepeatableScript, IStoreScript
+internal class ViewCharacterScript : Script, IScript, IRepeatableScript, IScriptStore
 {
     private ViewCharacterScript(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class ViewCharacterScript : Script, IScript, IRepeatableScript, IStoreS
     /// Executes the view character script and sets the requires rerendering flag.
     /// </summary>
     /// <returns></returns>
-    public void ExecuteStoreScript(StoreCommandEvent storeCommandEvent)
+    public void ExecuteScriptStore(StoreCommandEvent storeCommandEvent)
     {
         ExecuteScript();
         storeCommandEvent.RequiresRerendering = true;

@@ -10,7 +10,7 @@ using System.Xml.Linq;
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class JournalScript : Script, IScript, IRepeatableScript, IStoreScript
+internal class JournalScript : Script, IScript, IRepeatableScript, IScriptStore
 {
     private readonly ColorEnum[] _menuColors = new ColorEnum[128];
     private readonly int[] _menuIndices = new int[128];
@@ -23,7 +23,7 @@ internal class JournalScript : Script, IScript, IRepeatableScript, IStoreScript
     /// Executes the journal script and sets the RequiresRerendering flag.
     /// </summary>
     /// <returns></returns>
-    public void ExecuteStoreScript(StoreCommandEvent storeCommandEvent)
+    public void ExecuteScriptStore(StoreCommandEvent storeCommandEvent)
     {
         ExecuteScript();
         storeCommandEvent.RequiresRerendering = true;

@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class PurchaseStoreItemScript : Script, IStoreScript
+internal class PurchaseStoreItemScript : Script, IScriptStore
 {
     private PurchaseStoreItemScript(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class PurchaseStoreItemScript : Script, IStoreScript
     /// Allows the selection of and purchase of an item from the store.  Does not modify any of the store flags.
     /// </summary>
     /// <returns></returns>
-    public void ExecuteStoreScript(StoreCommandEvent storeCommandEvent)
+    public void ExecuteScriptStore(StoreCommandEvent storeCommandEvent)
     {
         int itemNew;
         string oName;

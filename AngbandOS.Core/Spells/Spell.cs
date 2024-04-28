@@ -50,8 +50,8 @@ internal abstract class Spell : IGetKey
 
     public void Bind()
     {
-        CastScript = Game.SingletonRepository.Scripts.BindNullable<ISpellScript, IScript>(CastScriptName);
-        CastFailedScript = Game.SingletonRepository.Scripts.BindNullable<ISpellScript, IScript>(CastFailedScriptName);
+        CastScript = Game.SingletonRepository.GetNullable<ICastScript>(CastScriptName);
+        CastFailedScript = Game.SingletonRepository.GetNullable<ICastScript>(CastFailedScriptName);
     }
 
     /// <summary>
@@ -84,17 +84,17 @@ internal abstract class Spell : IGetKey
     protected virtual string? CastScriptName => null;
     protected virtual string? CastFailedScriptName => null;
 
-    private Script? CastScript { get; set; }
-    private Script? CastFailedScript { get; set; }
+    private ICastScript? CastScript { get; set; }
+    private ICastScript? CastFailedScript { get; set; }
 
-    private void ExecuteScript(Script? script)
+    private void ExecuteScript(ICastScript? script)
     {
         switch (script)
         {
             case null:
                 break;
-            case ISpellScript asSpellScript:
-                asSpellScript.ExecuteSpellScript(this);
+            case IScriptSpell asSpellScript:
+                asSpellScript.ExecuteScriptSpell(this);
                 break;
             case IScript asScript:
                 asScript.ExecuteScript();

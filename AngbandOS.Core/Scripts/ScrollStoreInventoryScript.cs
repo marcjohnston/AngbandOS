@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class ScrollStoreInventoryScript : Script, IStoreScript
+internal class ScrollStoreInventoryScript : Script, IScriptStore
 {
     private ScrollStoreInventoryScript(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class ScrollStoreInventoryScript : Script, IStoreScript
     /// Scrolls the store inventory script up or down one item or one page.  Does not modify any of the store flags.
     /// </summary>
     /// <returns></returns>
-    public void ExecuteStoreScript(StoreCommandEvent storeCommandEvent)
+    public void ExecuteScriptStore(StoreCommandEvent storeCommandEvent)
     {
         char ch = Game.Inkey(true);
         switch (ch)

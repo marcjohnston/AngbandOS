@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class RestorationScript : Script, IScript, IStoreScript
+internal class RestorationScript : Script, IScript, IScriptStore
 {
     private RestorationScript(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class RestorationScript : Script, IScript, IStoreScript
     /// Allows the player to purchase the restoration for 750 gold.  Does not modify any of the store flags.
     /// </summary>
     /// <returns></returns>
-    public void ExecuteStoreScript(StoreCommandEvent storeCommandEvent)
+    public void ExecuteScriptStore(StoreCommandEvent storeCommandEvent)
     {
         if (!Game.ServiceHaggle(750, out int price))
         {

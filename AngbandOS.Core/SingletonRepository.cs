@@ -116,7 +116,7 @@ internal class SingletonRepository
         _repositoryDictionary.Add(typeName, loadAndBindList);
     }
 
-    public T? GetOrDefault<T>(string? key) where T : class
+    public T? GetNullable<T>(string? key) where T : class
     {
         if (key == null)
         {
@@ -128,20 +128,20 @@ internal class SingletonRepository
         // Check to see if the dictionary has a dictionary for this type of object.
         if (!_repositoryDictionary.TryGetValue(typeName, out Dictionary<string, object>? loadAndBindList))
         {
-            return null;
+            throw new Exception($"The {typeof(T).Name} singleton interface was not registered.");
         }
 
         // Retrieve the singleton by key name.
         if (!loadAndBindList.TryGetValue(key, out object? singleton))
         {
-            return null;
+            throw new Exception($"The singleton {typeof(T).Name}.{key} does not exist.");
         }
         return (T)singleton;
     }
 
     public T Get<T>(string key) where T : class
     {
-        T? singleton = GetOrDefault<T>(key);
+        T? singleton = GetNullable<T>(key);
         if (singleton == null)
         {
             throw new Exception($"The singleton {typeof(T).Name}.{key} does not exist.");
@@ -248,6 +248,7 @@ internal class SingletonRepository
     {
         // These are the types to load from the assembly.
         AddInterfaceRepository<IIntValue>();
+        AddInterfaceRepository<ICastScript>();
         AddInterfaceRepository<Property>();
         AddInterfaceRepository<Timer>();
         AddInterfaceRepository<Function>();

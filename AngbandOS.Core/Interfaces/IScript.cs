@@ -7,7 +7,7 @@
 
 namespace AngbandOS.Core.Interfaces;
 
-internal interface IScript
+internal interface IScript : ICastScript
 {
     /// <summary>
     /// Execute the script.

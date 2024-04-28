@@ -8,9 +8,9 @@
 namespace AngbandOS.Core.Interfaces;
 
 /// <summary>
-/// Represents the interface a script needs to implement for it available when the player is in a store.
+/// Represents an interface for a script to execute that accepts a 
 /// </summary>
-internal interface IStoreScript
+internal interface IScriptSpell : ICastScript
 {
-    void ExecuteStoreScript(StoreCommandEvent storeCommandEvent);
+    void ExecuteScriptSpell(Spell spell);
 }

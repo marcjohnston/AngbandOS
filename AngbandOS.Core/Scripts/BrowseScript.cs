@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class BrowseScript : Script, IScript, IRepeatableScript, ISuccessfulScript, IStoreScript
+internal class BrowseScript : Script, IScript, IRepeatableScript, ISuccessfulScript, IScriptStore
 {
     private BrowseScript(Game game) : base(game) { }
 
@@ -16,7 +16,7 @@ internal class BrowseScript : Script, IScript, IRepeatableScript, ISuccessfulScr
     /// Executes the browse script.  Does not modify any of the store flags.
     /// </summary>
     /// <returns></returns>
-    public void ExecuteStoreScript(StoreCommandEvent storeCommandEvent)
+    public void ExecuteScriptStore(StoreCommandEvent storeCommandEvent)
     {
         ExecuteScript();
     }
