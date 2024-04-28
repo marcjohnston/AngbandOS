@@ -44,49 +44,11 @@ internal abstract class Widget : IGetKey
         IsInvalid = true;
     }
 
-    /// <summary>
-    /// Returns an array of conditionals that need to be met for the widget to rendered; or null, if there are no conditions.  All conditions must return true for the widget
-    /// to be enabled.
-    /// </summary>
-    [Obsolete("Use ConditionalWidget")]
-    public (IBoolValue conditional, bool isTrue)[]? Enabled { get; private set; }
-
-    [Obsolete("Use ConditionalWidget")]
-    public virtual (string conditionalName, bool isTrue)[]? EnabledNames => null;
-
     public virtual string Key => GetType().Name;
 
     public string GetKey => Key;
 
-    public virtual void Bind()
-    {
-        if (EnabledNames == null)
-        {
-            Enabled = null;
-        }
-        else
-        {
-            List<(IBoolValue, bool)> conditionalList = new();
-            foreach ((string enabledName, bool isTrue) in EnabledNames)
-            {
-                Property? property = Game.SingletonRepository.Properties.TryGet(enabledName);
-                if (property != null)
-                {
-                    conditionalList.Add(((IBoolValue)property, isTrue));
-                } 
-                else
-                { 
-                    Function? function = Game.SingletonRepository.Functions.TryGet(enabledName);
-                    if (function == null)
-                    {
-                        throw new Exception($"The {enabledName} enabled dependency cannot be found as a {nameof(Property)} or {nameof(Function)}.");
-                    }
-                    conditionalList.Add(((IBoolValue)function, isTrue));
-                }
-            }
-            Enabled = conditionalList.ToArray();
-        }
-    }
+    public virtual void Bind() { }
 
     public string ToJson()
     {
@@ -104,12 +66,6 @@ internal abstract class Widget : IGetKey
     /// </summary>
     public virtual void Update()
     {
-        // Check to see if the widget is enabled.  All conditionals must be true.
-        if (Enabled != null && Enabled.Any(_conditions => _conditions.conditional.BoolValue != _conditions.isTrue))
-        {
-            return;
-        }
-
         if (IsInvalid)
         {
             Paint();

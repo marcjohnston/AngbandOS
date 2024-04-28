@@ -15,8 +15,4 @@ internal class MaxManaLabelTextWidget : TextWidget
     public override int X => 0;
     public override int Y => 25;
     public override string Text => "Max SP";
-    public override (string, bool)[]? EnabledNames => new (string, bool)[]
-    {
-        (nameof(UsesManaFunction), true)
-    };
 }

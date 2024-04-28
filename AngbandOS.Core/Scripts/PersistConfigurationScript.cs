@@ -5,6 +5,9 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+
+using Timer = AngbandOS.Core.Timers.Timer;
+
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
@@ -95,7 +98,7 @@ internal class PersistConfigurationScript : Script, IScript
             Game.SingletonRepository.Symbols.PersistEntities();
             Game.SingletonRepository.Talents.PersistEntities();
             Game.SingletonRepository.Tiles.PersistEntities();
-            Game.SingletonRepository.Timers.PersistEntities();
+            Game.SingletonRepository.PersistEntities<Timer>();
             Game.SingletonRepository.Towns.PersistEntities();
             Game.SingletonRepository.Vaults.PersistEntities();
             Game.SingletonRepository.WandReadableFlavors.PersistEntities();

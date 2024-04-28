@@ -24,31 +24,7 @@ internal abstract class RangedWidget : TextWidget
 
     public override void Bind()
     {
-        Property? property = Game.SingletonRepository.Properties.TryGet(IntValueName);
-        if (property != null)
-        {
-            IntValue = (IIntValue)property;
-        }
-        else
-        {
-            Timer? timer = Game.SingletonRepository.Timers.TryGet(IntValueName);
-            if (timer != null)
-            {
-                IntValue = (IIntValue)timer;
-            }
-            else
-            {
-                Function? function = Game.SingletonRepository.Functions.TryGet(IntValueName);
-                if (function != null)
-                {
-                    IntValue = (IIntValue)function;
-                }
-                else
-                {
-                    throw new Exception($"The {IntValueName} property does not specify a valid {nameof(Property)}, {nameof(Timer)} or {nameof(Function)}.");
-                }
-            }
-        }
+        IntValue = Game.SingletonRepository.Get<IIntValue>(IntValueName);
         base.Bind();
     }
 

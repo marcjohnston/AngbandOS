@@ -5,6 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using AngbandOS.Core.Interfaces;
 using Timer = AngbandOS.Core.Timers.Timer;
 
 namespace AngbandOS.Core.Widgets;
@@ -19,31 +20,7 @@ internal abstract class TimeWidget : TextWidget
     public override void Bind()
     {
         base.Bind();
-        Property? property = Game.SingletonRepository.Properties.TryGet(DateAndTimeValueName);
-        if (property != null)
-        {
-            DateAndTimeValue = (IDateAndTimeValue)property;
-        }
-        else
-        {
-            Timer? timer= Game.SingletonRepository.Timers.TryGet(DateAndTimeValueName);
-            if (timer != null)
-            {
-                DateAndTimeValue = (IDateAndTimeValue)timer;
-            }
-            else
-            {
-                Function? function = Game.SingletonRepository.Functions.TryGet(DateAndTimeValueName);
-                if (function != null)
-                {
-                    DateAndTimeValue = (IDateAndTimeValue)function;
-                }
-                else
-                {
-                    throw new Exception($"The {nameof(DateAndTimeValueName)} property does not specify a valid {nameof(Property)}, {nameof(Timer)} or {nameof(Function)}.");
-                }
-            }
-        } 
+        DateAndTimeValue = Game.SingletonRepository.Get<IDateAndTimeValue>(DateAndTimeValueName);
     }
 
     public override string Text => DateAndTimeValue.DateAndTimeValue.ToString("h:mmtt");

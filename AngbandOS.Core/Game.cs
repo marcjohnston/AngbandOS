@@ -671,55 +671,55 @@ internal class Game
         Debug.Print($"Singleton repository load took {elapsedTime.TotalSeconds.ToString()} seconds.");
 
         Quests = new List<Quest>();
-        Gold = (GoldIntProperty)SingletonRepository.Properties.Get(nameof(GoldIntProperty));
-        Mana = (ManaIntProperty)SingletonRepository.Properties.Get(nameof(ManaIntProperty));
-        MaxMana = (MaxManaIntProperty)SingletonRepository.Properties.Get(nameof(MaxManaIntProperty));
-        ExperiencePoints = (ExperiencePointsIntProperty)SingletonRepository.Properties.Get(nameof(ExperiencePointsIntProperty));
-        DisplayedArmorClassBonus = (DisplayedArmorClassBonusIntProperty)SingletonRepository.Properties.Get(nameof(DisplayedArmorClassBonusIntProperty));
-        DisplayedBaseArmorClass = (DisplayedBaseArmorClassIntProperty)SingletonRepository.Properties.Get(nameof(DisplayedBaseArmorClassIntProperty));
-        Food = (FoodIntProperty)SingletonRepository.Properties.Get(nameof(FoodIntProperty));
-        Health = (HealthPointsIntProperty)SingletonRepository.Properties.Get(nameof(HealthPointsIntProperty));
-        Speed = (SpeedIntProperty)SingletonRepository.Properties.Get(nameof(SpeedIntProperty));
-        MaxHealth = (MaxHealthPointsIntProperty)SingletonRepository.Properties.Get(nameof(MaxHealthPointsIntProperty));
-        SpareSpellSlots = (SpareSpellSlotsIntProperty)SingletonRepository.Properties.Get(nameof(SpareSpellSlotsIntProperty));
-        ExperienceLevel = (ExperienceLevelIntProperty)SingletonRepository.Properties.Get(nameof(ExperienceLevelIntProperty));
-        ExperienceMultiplier = (ExperienceMultiplierIntProperty)SingletonRepository.Properties.Get(nameof(ExperienceMultiplierIntProperty));
-        IsWinner = (IsWinnerBoolProperty)SingletonRepository.Properties.Get(nameof(IsWinnerBoolProperty));
-        IsWizard = (IsWizardBoolProperty)SingletonRepository.Properties.Get(nameof(IsWizardBoolProperty));
-        PlayerName = (PlayerNameStringProperty)SingletonRepository.Properties.Get(nameof(PlayerNameStringProperty));
-        CurrentGameDateTime = (CurrentGameDateTimeProperty)SingletonRepository.Properties.Get(nameof(CurrentGameDateTimeProperty));
-        RefreshMap = (RefreshMapProperty)SingletonRepository.Properties.Get(nameof(RefreshMapProperty));
-        TrackedMonsterChanged = (TrackedMonsterChangedProperty)SingletonRepository.Properties.Get(nameof(TrackedMonsterChangedProperty));
-        MapX = (MapXIntProperty)SingletonRepository.Properties.Get(nameof(MapXIntProperty));
-        MapY = (MapYIntProperty)SingletonRepository.Properties.Get(nameof(MapYIntProperty));
-        MaxExperienceGained = (MaxExperiencePointsGainedIntProperty)SingletonRepository.Properties.Get(nameof(MaxExperiencePointsGainedIntProperty));
-        TrackedMonster = (TrackedMonsterNullableMonsterProperty)SingletonRepository.Properties.Get(nameof(TrackedMonsterNullableMonsterProperty));
+        Gold = (GoldIntProperty)SingletonRepository.Get<Property>(nameof(GoldIntProperty));
+        Mana = (ManaIntProperty)SingletonRepository.Get<Property>(nameof(ManaIntProperty));
+        MaxMana = (MaxManaIntProperty)SingletonRepository.Get<Property>(nameof(MaxManaIntProperty));
+        ExperiencePoints = (ExperiencePointsIntProperty)SingletonRepository.Get<Property>(nameof(ExperiencePointsIntProperty));
+        DisplayedArmorClassBonus = (DisplayedArmorClassBonusIntProperty)SingletonRepository.Get<Property>(nameof(DisplayedArmorClassBonusIntProperty));
+        DisplayedBaseArmorClass = (DisplayedBaseArmorClassIntProperty)SingletonRepository.Get<Property>(nameof(DisplayedBaseArmorClassIntProperty));
+        Food = (FoodIntProperty)SingletonRepository.Get<Property>(nameof(FoodIntProperty));
+        Health = (HealthPointsIntProperty)SingletonRepository.Get<Property>(nameof(HealthPointsIntProperty));
+        Speed = (SpeedIntProperty)SingletonRepository.Get<Property>(nameof(SpeedIntProperty));
+        MaxHealth = (MaxHealthPointsIntProperty)SingletonRepository.Get<Property>(nameof(MaxHealthPointsIntProperty));
+        SpareSpellSlots = (SpareSpellSlotsIntProperty)SingletonRepository.Get<Property>(nameof(SpareSpellSlotsIntProperty));
+        ExperienceLevel = (ExperienceLevelIntProperty)SingletonRepository.Get<Property>(nameof(ExperienceLevelIntProperty));
+        ExperienceMultiplier = (ExperienceMultiplierIntProperty)SingletonRepository.Get<Property>(nameof(ExperienceMultiplierIntProperty));
+        IsWinner = (IsWinnerBoolProperty)SingletonRepository.Get<Property>(nameof(IsWinnerBoolProperty));
+        IsWizard = (IsWizardBoolProperty)SingletonRepository.Get<Property>(nameof(IsWizardBoolProperty));
+        PlayerName = (PlayerNameStringProperty)SingletonRepository.Get<Property>(nameof(PlayerNameStringProperty));
+        CurrentGameDateTime = (CurrentGameDateTimeProperty)SingletonRepository.Get<Property>(nameof(CurrentGameDateTimeProperty));
+        RefreshMap = (RefreshMapProperty)SingletonRepository.Get<Property>(nameof(RefreshMapProperty));
+        TrackedMonsterChanged = (TrackedMonsterChangedProperty)SingletonRepository.Get<Property>(nameof(TrackedMonsterChangedProperty));
+        MapX = (MapXIntProperty)SingletonRepository.Get<Property>(nameof(MapXIntProperty));
+        MapY = (MapYIntProperty)SingletonRepository.Get<Property>(nameof(MapYIntProperty));
+        MaxExperienceGained = (MaxExperiencePointsGainedIntProperty)SingletonRepository.Get<Property>(nameof(MaxExperiencePointsGainedIntProperty));
+        TrackedMonster = (TrackedMonsterNullableMonsterProperty)SingletonRepository.Get<Property>(nameof(TrackedMonsterNullableMonsterProperty));
 
-        AcidResistanceTimer = (AcidResistanceTimer)SingletonRepository.Timers.Get(nameof(Timers.AcidResistanceTimer));
-        BleedingTimer = (BleedingTimer)SingletonRepository.Timers.Get(nameof(Timers.BleedingTimer));
-        BlessingTimer = (BlessingTimer)SingletonRepository.Timers.Get(nameof(Timers.BlessingTimer));
-        BlindnessTimer = (BlindnessTimer)SingletonRepository.Timers.Get(nameof(Timers.BlindnessTimer));
-        ColdResistanceTimer = (ColdResistanceTimer)SingletonRepository.Timers.Get(nameof(Timers.ColdResistanceTimer));
-        ConfusedTimer = (ConfusedTimer)SingletonRepository.Timers.Get(nameof(Timers.ConfusedTimer));
-        EtherealnessTimer = (EtherealnessTimer)SingletonRepository.Timers.Get(nameof(Timers.EtherealnessTimer));
-        FearTimer = (FearTimer)SingletonRepository.Timers.Get(nameof(Timers.FearTimer));
-        FireResistanceTimer = (FireResistanceTimer)SingletonRepository.Timers.Get(nameof(Timers.FireResistanceTimer));
-        HallucinationsTimer = (HallucinationsTimer)SingletonRepository.Timers.Get(nameof(Timers.HallucinationsTimer));
-        HasteTimer = (HasteTimer)SingletonRepository.Timers.Get(nameof(Timers.HasteTimer));
-        HeroismTimer = (HeroismTimer)SingletonRepository.Timers.Get(nameof(Timers.HeroismTimer));
-        InfravisionTimer = (InfravisionTimer)SingletonRepository.Timers.Get(nameof(Timers.InfravisionTimer));
-        InvulnerabilityTimer = (InvulnerabilityTimer)SingletonRepository.Timers.Get(nameof(Timers.InvulnerabilityTimer));
-        LightningResistanceTimer = (LightningResistanceTimer)SingletonRepository.Timers.Get(nameof(Timers.LightningResistanceTimer));
-        ParalysisTimer = (ParalysisTimer)SingletonRepository.Timers.Get(nameof(Timers.ParalysisTimer));
-        PoisonTimer = (PoisonedTimer)SingletonRepository.Timers.Get(nameof(Timers.PoisonedTimer));
-        PoisonResistanceTimer = (PoisonResistanceTimer)SingletonRepository.Timers.Get(nameof(Timers.PoisonResistanceTimer));
-        ProtectionFromEvilTimer = (ProtectionFromEvilTimer)SingletonRepository.Timers.Get(nameof(Timers.ProtectionFromEvilTimer));
-        SeeInvisibilityTimer = (SeeInvisibilityTimer)SingletonRepository.Timers.Get(nameof(Timers.SeeInvisibilityTimer));
-        SlowTimer = (SlowTimer)SingletonRepository.Timers.Get(nameof(Timers.SlowTimer));
-        StoneskinTimer = (StoneskinTimer)SingletonRepository.Timers.Get(nameof(Timers.StoneskinTimer));
-        StunTimer = (StunnedTimer)SingletonRepository.Timers.Get(nameof(Timers.StunnedTimer));
-        SuperheroismTimer = (SuperHeroismTimer)SingletonRepository.Timers.Get(nameof(SuperHeroismTimer));
-        TelepathyTimer = (TelepathyTimer)SingletonRepository.Timers.Get(nameof(Timers.TelepathyTimer));
+        AcidResistanceTimer = (AcidResistanceTimer)SingletonRepository.Get<Timer>(nameof(Timers.AcidResistanceTimer));
+        BleedingTimer = (BleedingTimer)SingletonRepository.Get<Timer>(nameof(Timers.BleedingTimer));
+        BlessingTimer = (BlessingTimer)SingletonRepository.Get<Timer>(nameof(Timers.BlessingTimer));
+        BlindnessTimer = (BlindnessTimer)SingletonRepository.Get<Timer>(nameof(Timers.BlindnessTimer));
+        ColdResistanceTimer = (ColdResistanceTimer)SingletonRepository.Get<Timer>(nameof(Timers.ColdResistanceTimer));
+        ConfusedTimer = (ConfusedTimer)SingletonRepository.Get<Timer>(nameof(Timers.ConfusedTimer));
+        EtherealnessTimer = (EtherealnessTimer)SingletonRepository.Get<Timer>(nameof(Timers.EtherealnessTimer));
+        FearTimer = (FearTimer)SingletonRepository.Get<Timer>(nameof(Timers.FearTimer));
+        FireResistanceTimer = (FireResistanceTimer)SingletonRepository.Get<Timer>(nameof(Timers.FireResistanceTimer));
+        HallucinationsTimer = (HallucinationsTimer)SingletonRepository.Get<Timer>(nameof(Timers.HallucinationsTimer));
+        HasteTimer = (HasteTimer)SingletonRepository.Get<Timer>(nameof(Timers.HasteTimer));
+        HeroismTimer = (HeroismTimer)SingletonRepository.Get<Timer>(nameof(Timers.HeroismTimer));
+        InfravisionTimer = (InfravisionTimer)SingletonRepository.Get<Timer>(nameof(Timers.InfravisionTimer));
+        InvulnerabilityTimer = (InvulnerabilityTimer)SingletonRepository.Get<Timer>(nameof(Timers.InvulnerabilityTimer));
+        LightningResistanceTimer = (LightningResistanceTimer)SingletonRepository.Get<Timer>(nameof(Timers.LightningResistanceTimer));
+        ParalysisTimer = (ParalysisTimer)SingletonRepository.Get<Timer>(nameof(Timers.ParalysisTimer));
+        PoisonTimer = (PoisonedTimer)SingletonRepository.Get<Timer>(nameof(Timers.PoisonedTimer));
+        PoisonResistanceTimer = (PoisonResistanceTimer)SingletonRepository.Get<Timer>(nameof(Timers.PoisonResistanceTimer));
+        ProtectionFromEvilTimer = (ProtectionFromEvilTimer)SingletonRepository.Get<Timer>(nameof(Timers.ProtectionFromEvilTimer));
+        SeeInvisibilityTimer = (SeeInvisibilityTimer)SingletonRepository.Get<Timer>(nameof(Timers.SeeInvisibilityTimer));
+        SlowTimer = (SlowTimer)SingletonRepository.Get<Timer>(nameof(Timers.SlowTimer));
+        StoneskinTimer = (StoneskinTimer)SingletonRepository.Get<Timer>(nameof(Timers.StoneskinTimer));
+        StunTimer = (StunnedTimer)SingletonRepository.Get<Timer>(nameof(Timers.StunnedTimer));
+        SuperheroismTimer = (SuperHeroismTimer)SingletonRepository.Get<Timer>(nameof(SuperHeroismTimer));
+        TelepathyTimer = (TelepathyTimer)SingletonRepository.Get<Timer>(nameof(Timers.TelepathyTimer));
 
         MainForm = (MainForm)SingletonRepository.Forms.Get(nameof(MainForm));
 
@@ -4067,10 +4067,9 @@ internal class Game
         SingletonRepository.FlaggedActions.Get(nameof(RedrawSpeedFlaggedAction)).Check();
 
         // Clear the change tracking flags.
-        // TODO: Other types will need to do this like functions
-        foreach (Property property in SingletonRepository.Properties)
+        foreach (IChangeTracker changeTracker in SingletonRepository.Get<IChangeTracker>())
         {
-            property.ClearChangedFlag();
+            changeTracker.ClearChangedFlag();
         }
     }
 

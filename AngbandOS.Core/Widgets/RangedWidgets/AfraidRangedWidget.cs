@@ -13,7 +13,9 @@ namespace AngbandOS.Core.Widgets;
 [Serializable]
 internal class AfraidRangedWidget : RangedWidget
 {
-    private AfraidRangedWidget(Game game) : base(game) { } // This object is a singleton.
+    private AfraidRangedWidget(Game game) : base(game)
+    {
+    } // This object is a singleton.
     public override int X => 25;
     public override int Y => 44;
     public override int Width => 6;

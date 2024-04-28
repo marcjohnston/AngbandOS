@@ -44,57 +44,8 @@ internal abstract class MaxRangedWidget : TextWidget
 
     public override void Bind()
     {
-        Property? maxProperty = Game.SingletonRepository.Properties.TryGet(MaxIntValueName);
-        if (maxProperty != null)
-        {
-            MaxIntValue = (IIntValue)maxProperty;
-        }
-        else
-        {
-            Timer? timer = Game.SingletonRepository.Timers.TryGet(MaxIntValueName);
-            if (timer != null)
-            {
-                MaxIntValue = (IIntValue)timer;
-            }
-            else
-            {
-                Function? function = Game.SingletonRepository.Functions.TryGet(MaxIntValueName);
-                if (function != null)
-                {
-                    MaxIntValue = (IIntValue)function;
-                }
-                else
-                {
-                    throw new Exception($"The {MaxIntValueName} property does not specify a valid {nameof(Property)}, {nameof(Timer)} or {nameof(Function)}.");
-                }
-            }
-        }
-
-        Property? property = Game.SingletonRepository.Properties.TryGet(IntValueName);
-        if (property != null)
-        {
-            IntValue = (IIntValue)property;
-        }
-        else
-        {
-            Timer? timer = Game.SingletonRepository.Timers.TryGet(IntValueName);
-            if (timer != null)
-            {
-                IntValue = (IIntValue)timer;
-            }
-            else
-            {
-                Function? function = Game.SingletonRepository.Functions.TryGet(IntValueName);
-                if (function != null)
-                {
-                    IntValue = (IIntValue)function;
-                }
-                else
-                {
-                    throw new Exception($"The {IntValueName} property does not specify a valid {nameof(Property)}, {nameof(Timer)} or {nameof(Function)}.");
-                }
-            }
-        }
+        IntValue = Game.SingletonRepository.Get<IIntValue>(IntValueName);
+        MaxIntValue = Game.SingletonRepository.Get<IIntValue>(MaxIntValueName);
         base.Bind();
     }
 

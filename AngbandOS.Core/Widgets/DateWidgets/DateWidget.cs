@@ -19,31 +19,7 @@ internal abstract class DateWidget : TextWidget
     public override void Bind()
     {
         base.Bind();
-        Property? property = Game.SingletonRepository.Properties.TryGet(DateValueName);
-        if (property != null)
-        {
-            DateValue = (IDateAndTimeValue)property;
-        }
-        else
-        {
-            Timer? timer= Game.SingletonRepository.Timers.TryGet(DateValueName);
-            if (timer != null)
-            {
-                DateValue = (IDateAndTimeValue)timer;
-            }
-            else
-            {
-                Function? function = Game.SingletonRepository.Functions.TryGet(DateValueName);
-                if (function != null)
-                {
-                    DateValue = (IDateAndTimeValue)function;
-                }
-                else
-                {
-                    throw new Exception($"The {nameof(DateValueName)} property does not specify a valid {nameof(Property)}, {nameof(Timer)} or {nameof(Function)}.");
-                }
-            }
-        } 
+        DateValue = Game.SingletonRepository.Get<IDateAndTimeValue>(DateValueName);
     }
 
     public override string Text => DateValue.DateAndTimeValue.ToString("MMM d");

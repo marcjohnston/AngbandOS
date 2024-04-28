@@ -34,7 +34,7 @@ internal abstract class Form : IGetKey
         List<Widget> widgetList = new List<Widget>();
         foreach (string widgetName in WidgetNames)
         {
-            widgetList.Add(Game.SingletonRepository.Widgets.Get(widgetName));
+            widgetList.Add(Game.SingletonRepository.Get<Widget>(widgetName));
         }
         Widgets = widgetList.ToArray();
     }

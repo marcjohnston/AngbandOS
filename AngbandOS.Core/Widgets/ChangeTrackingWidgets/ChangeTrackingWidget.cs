@@ -70,50 +70,9 @@ internal abstract class ChangeTrackingWidget : Widget
     {
         base.Bind();
 
-        List<IChangeTracker> changeTrackersList = new List<IChangeTracker>();
-        foreach (string changeTrackingName in ChangeTrackerNames)
-        {
-            Property? property = Game.SingletonRepository.Properties.TryGet(changeTrackingName);
-            if (property != null)
-            {
-                changeTrackersList.Add((IChangeTracker)property);
-            }
-            else
-            {
-                Timer? timer = Game.SingletonRepository.Timers.TryGet(changeTrackingName);
-                if (timer != null)
-                {
-                    changeTrackersList.Add((IChangeTracker)timer);
-                }
-                else
-                {
-                    Function? function = Game.SingletonRepository.Functions.TryGet(changeTrackingName);
-                    if (function != null)
-                    {
-                        changeTrackersList.Add((IChangeTracker)function);
-                    }
-                    else
-                    {
-                        throw new Exception($"The {ChangeTrackerNames} property does not specify a valid {nameof(Property)}, {nameof(Timer)} or {nameof(Function)}.");
-                    }
-                }
-            }
-        }
-        ChangeTrackers = changeTrackersList.ToArray();
-
-        List<Widget> widgetList = new List<Widget>();
-        List<Widget> pokeableWidgetList = new List<Widget>();
-        foreach (string widgetName in WidgetNames)
-        {
-            Widget widget = Game.SingletonRepository.Widgets.Get(widgetName);
-            widgetList.Add(widget);
-            if (widget.CanPoke)
-            {
-                pokeableWidgetList.Add(widget);
-            }
-        }
-        Widgets = widgetList.ToArray();
-        PokeableWidgets = pokeableWidgetList.ToArray();
+        ChangeTrackers = Game.SingletonRepository.Get<IChangeTracker>(ChangeTrackerNames);
+        Widgets = Game.SingletonRepository.Get<Widget>(WidgetNames);
+        PokeableWidgets = Widgets.Where(_widget => _widget.CanPoke).ToArray();
         _hasPokeableWidgets = PokeableWidgets.Length > 0;
     }
 

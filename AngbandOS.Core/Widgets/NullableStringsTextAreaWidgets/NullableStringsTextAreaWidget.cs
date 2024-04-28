@@ -5,6 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using AngbandOS.Core.Interfaces;
 using Timer = AngbandOS.Core.Timers.Timer;
 
 namespace AngbandOS.Core.Widgets;
@@ -20,30 +21,6 @@ internal abstract class NullableStringsTextAreaWidget : NullableTextAreaWidget
     public override void Bind()
     {
         base.Bind();
-        Property? property = Game.SingletonRepository.Properties.TryGet(NullableTextAreaValueName);
-        if (property != null)
-        {
-            NullableTextAreaValue = (INullableStringsValue)property;
-        }
-        else
-        {
-            Timer? timer = Game.SingletonRepository.Timers.TryGet(NullableTextAreaValueName);
-            if (timer != null)
-            {
-                NullableTextAreaValue = (INullableStringsValue)timer;
-            }
-            else
-            {
-                Function? function = Game.SingletonRepository.Functions.TryGet(NullableTextAreaValueName);
-                if (function != null)
-                {
-                    NullableTextAreaValue = (INullableStringsValue)function;
-                }
-                else
-                {
-                    throw new Exception($"The {nameof(NullableTextAreaValueName)} property does not specify a valid {nameof(Property)}, {nameof(Timer)} or {nameof(Function)}.");
-                }
-            }
-        }
+        NullableTextAreaValue = Game.SingletonRepository.Get<INullableStringsValue>(NullableTextAreaValueName);
     }
 }

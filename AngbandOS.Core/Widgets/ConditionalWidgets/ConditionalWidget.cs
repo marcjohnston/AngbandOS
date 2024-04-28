@@ -59,42 +59,12 @@ internal abstract class ConditionalWidget : Widget
         List<(IBoolValue, bool, int)> conditionalList = new();
         foreach ((string enabledName, bool isTrue, int term) in EnabledNames)
         {
-            Property? property = Game.SingletonRepository.Properties.TryGet(enabledName);
-            if (property != null)
-            {
-                conditionalList.Add(((IBoolValue)property, isTrue, term));
-            }
-            else
-            {
-                Function? function = Game.SingletonRepository.Functions.TryGet(enabledName);
-                if (function == null)
-                {
-                    throw new Exception($"The {enabledName} enabled dependency cannot be found as a {nameof(Property)} or {nameof(Function)}.");
-                }
-                conditionalList.Add(((IBoolValue)function, isTrue, term));
-            }
+            IBoolValue boolValue = Game.SingletonRepository.Get<IBoolValue>(enabledName);
+            conditionalList.Add((boolValue, isTrue, term));
         }
         Enabled = conditionalList.ToArray();
-
-        List<Widget> trueWidgetList = new List<Widget>();
-        if (TrueWidgetNames != null)
-        {
-            foreach (string widgetName in TrueWidgetNames)
-            {
-                trueWidgetList.Add(Game.SingletonRepository.Widgets.Get(widgetName));
-            }
-        }
-        TrueWidgets = trueWidgetList.ToArray();
-
-        List<Widget> falseWidgetList = new List<Widget>();
-        if (FalseWidgetNames != null)
-        {
-            foreach (string widgetName in FalseWidgetNames)
-            {
-                falseWidgetList.Add(Game.SingletonRepository.Widgets.Get(widgetName));
-            }
-        }
-        FalseWidgets = falseWidgetList.ToArray();
+        TrueWidgets = Game.SingletonRepository.GetNullable<Widget>(TrueWidgetNames);
+        FalseWidgets = Game.SingletonRepository.GetNullable<Widget>(FalseWidgetNames);
     }
 
     /// <summary>

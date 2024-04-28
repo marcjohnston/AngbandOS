@@ -5,6 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using AngbandOS.Core.Interfaces;
 using Timer = AngbandOS.Core.Timers.Timer;
 
 namespace AngbandOS.Core.Widgets;
@@ -19,31 +20,7 @@ internal abstract class StringWidget : TextWidget
     public override void Bind()
     {
         base.Bind();
-        Property? property = Game.SingletonRepository.Properties.TryGet(StringValueName);
-        if (property != null)
-        {
-            StringValue = (IStringValue)property;
-        }
-        else
-        {
-            Timer? timer = Game.SingletonRepository.Timers.TryGet(StringValueName);
-            if (timer != null)
-            {
-                StringValue = (IStringValue)timer;
-            }
-            else
-            {
-                Function? function = Game.SingletonRepository.Functions.TryGet(StringValueName);
-                if (function != null)
-                {
-                    StringValue = (IStringValue)function;
-                }
-                else
-                {
-                    throw new Exception($"The {nameof(StringValueName)} property does not specify a valid {nameof(Property)}, {nameof(Timer)} or {nameof(Function)}.");
-                }
-            }
-        }
+        StringValue = Game.SingletonRepository.Get<IStringValue>(StringValueName);
     }
 
     public override string Text => StringValue.StringValue;

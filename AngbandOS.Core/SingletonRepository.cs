@@ -5,12 +5,17 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.Reflection;
 using Timer = AngbandOS.Core.Timers.Timer;
 
 namespace AngbandOS.Core;
+
+[Serializable]
+internal class GenericRepository
+{
+    public Dictionary<string, object> Dictionary = new Dictionary<string, object>();
+    public List<object> List = new List<object>();    
+}
 
 [Serializable]
 /// <summary>
@@ -41,7 +46,6 @@ internal class SingletonRepository
     public FixedArtifactsRepository FixedArtifacts;
     public FlaggedActionsRepository FlaggedActions;
     public FormsRepository Forms;
-    public FunctionsRepository Functions;
     public FunnyCommentsRepository FunnyComments;
     public FunnyDescriptionsRepository FunnyDescriptions;
     public GameCommandsRepository GameCommands;
@@ -69,7 +73,6 @@ internal class SingletonRepository
     public PowersRepository Powers;
     public ProjectileGraphicsRepository ProjectileGraphics;
     public ProjectilesRepository Projectiles;
-    public PropertiesRepository Properties;
     public RacesRepository Races;
     public RareItemsRepository RareItems;
     public RealmsRepository Realms;
@@ -94,16 +97,19 @@ internal class SingletonRepository
     public SymbolsRepository Symbols;
     public TalentsRepository Talents;
     public TilesRepository Tiles;
-    public TimersRepository Timers;
     public TownsRepository Towns;
     public UnreadableFlavorSyllablesRepository UnreadableFlavorSyllables;
     public VaultsRepository Vaults;
     public WandReadableFlavorsRepository WandReadableFlavors;
     public WizardCommandsRepository WizardCommands;
-    public WidgetsRepository Widgets;
     public WorshipPlayerAttacksRepository WorshipPlayerAttacks;
 
     private Dictionary<string, Dictionary<string, object>> _repositoryDictionary = new Dictionary<string, Dictionary<string, object>>();
+
+    /// <summary>
+    /// Returns a list of all singletons.  This is used to track all of the loaded singletons so that they can be bound quickly and only once.
+    /// </summary>
+    private List<IGetKey> _singletons = new List<IGetKey>();
 
     public void AddInterfaceRepository<T>()
     {
@@ -126,13 +132,13 @@ internal class SingletonRepository
         string typeName = typeof(T).Name;
 
         // Check to see if the dictionary has a dictionary for this type of object.
-        if (!_repositoryDictionary.TryGetValue(typeName, out Dictionary<string, object>? loadAndBindList))
+        if (!_repositoryDictionary.TryGetValue(typeName, out Dictionary<string, object>? dictionary))
         {
             throw new Exception($"The {typeof(T).Name} singleton interface was not registered.");
         }
 
         // Retrieve the singleton by key name.
-        if (!loadAndBindList.TryGetValue(key, out object? singleton))
+        if (!dictionary.TryGetValue(key, out object? singleton))
         {
             throw new Exception($"The singleton {typeof(T).Name}.{key} does not exist.");
         }
@@ -146,6 +152,17 @@ internal class SingletonRepository
             return null;
         }
         return Get<T>(keys);
+    }
+
+    public T[] Get<T>() where T : class
+    {
+        string typeName = typeof(T).Name;
+        List<T> resultList = new List<T>();
+        foreach (object singleton in _repositoryDictionary[typeName].Values)
+        {
+            resultList.Add((T)singleton);
+        }
+        return resultList.ToArray();
     }
 
     public T[] Get<T>(string[] keys) where T : class
@@ -208,22 +225,25 @@ internal class SingletonRepository
                             }
                             
                             // Ensure the singleton implements the IGetKey interface and get the key from the singleton.
-                            string key;
                             switch (singleton)
                             {
-                                case IGetKey getKeySingle:
-                                    key = getKeySingle.GetKey;
+                                case IGetKey getKeySingleton:
+                                    string key = getKeySingleton.GetKey;
+
+                                    // Add the singleton to the list of singletons so that they can be bound.
+                                    _singletons.Add(getKeySingleton);
+
+                                    // Ensure there isn't already a singleton with the same name.
+                                    if (typeRepositoryDictionary.TryGetValue(key, out _))
+                                    {
+                                        throw new Exception($"Cannot add duplicate {type.Name} singleton with the key {key}.");
+                                    }
+                                    typeRepositoryDictionary.Add(key, singleton);
                                     break;
                                 default:
                                     throw new Exception($"The singleton {type.Name} does not implement the IGetKey interface.");
                             }
 
-                            // Ensure there isn't already a singleton with the same name.
-                            if (typeRepositoryDictionary.TryGetValue(key, out _))
-                            {
-                                throw new Exception($"Cannot add duplicate {type.Name} singleton with the key {key}.");
-                            }
-                            typeRepositoryDictionary.Add(key, singleton);
                         }
                     }
                 }
@@ -259,6 +279,23 @@ internal class SingletonRepository
     }
 
     /// <summary>
+    /// Persist the entities to the core persistent storage medium.  This method is only being used to generate database entities from objects.
+    /// </summary>
+    /// <param name="corePersistentStorage"></param>
+    public void PersistEntities<T>() where T : class, IGetKey
+    {
+        List<KeyValuePair<string, string>> jsonEntityList = new();
+        foreach (T entity in Get<T>())
+        {
+            string key = entity.GetKey.ToString(); // TODO: The use of .ToString is because TKey needs to be strings
+            string serializedEntity = entity.ToJson();
+            jsonEntityList.Add(new KeyValuePair<string, string>(key, serializedEntity));
+        }
+        string pluralName = Game.Pluralize(typeof(T).Name);
+        Game.CorePersistentStorage.PersistEntities(pluralName, jsonEntityList.ToArray());
+    }
+
+    /// <summary>
     /// Performs the load phase of the singleton repository.  This phase reads all of the types from the assembly and adds it into its respective
     /// collection--if the ExcludeFromRepository property returns false.  If the ExcludeFromRepository is true, the singleton object will be discarded.
     /// </summary>
@@ -270,11 +307,26 @@ internal class SingletonRepository
         AddInterfaceRepository<IIntValue>();
         AddInterfaceRepository<ICastScript>();
         AddInterfaceRepository<IChangeTracker>();
+        AddInterfaceRepository<IDateAndTimeValue>();
+        AddInterfaceRepository<INullableStringsValue>();
+        AddInterfaceRepository<IStringValue>();
         AddInterfaceRepository<Property>();
         AddInterfaceRepository<Timer>();
         AddInterfaceRepository<Function>();
         AddInterfaceRepository<Activation>();
+        AddInterfaceRepository<Widget>();
+
+        // This is the load phase for assembly.
         LoadAllAssemblyTypes();
+
+        AddInterfaceRepository<GameCommand>();
+        
+        // Now load the configuration singletons.
+
+        //foreach (GameCommandDefinition gameCommandDefinition in Game.Configuration.GameCommands)
+        //{
+        //    Add(new GenericGameCommand(Game, gameCommandDefinition));
+        //}
 
 
         // Create all of the repositories.  All of the repositories will be empty and have an instance to the save game.
@@ -298,7 +350,6 @@ internal class SingletonRepository
         FixedArtifacts = AddRepository<FixedArtifactsRepository>(new FixedArtifactsRepository(Game));
         FlaggedActions = AddRepository<FlaggedActionsRepository>(new FlaggedActionsRepository(Game));
         Forms = AddRepository<FormsRepository>(new FormsRepository(Game));
-        Functions = AddRepository<FunctionsRepository>(new FunctionsRepository(Game));
         FunnyComments = AddRepository<FunnyCommentsRepository>(new FunnyCommentsRepository(Game));
         FunnyDescriptions = AddRepository<FunnyDescriptionsRepository>(new FunnyDescriptionsRepository(Game));
         GameCommands = AddRepository<GameCommandsRepository>(new GameCommandsRepository(Game));
@@ -326,7 +377,6 @@ internal class SingletonRepository
         Powers = AddRepository<PowersRepository>(new PowersRepository(Game));
         ProjectileGraphics = AddRepository<ProjectileGraphicsRepository>(new ProjectileGraphicsRepository(Game));
         Projectiles = AddRepository<ProjectilesRepository>(new ProjectilesRepository(Game));
-        Properties = AddRepository<PropertiesRepository>(new PropertiesRepository(Game));
         Races = AddRepository<RacesRepository>(new RacesRepository(Game));
         RareItems = AddRepository<RareItemsRepository>(new RareItemsRepository(Game));
         Realms = AddRepository<RealmsRepository>(new RealmsRepository(Game));
@@ -351,17 +401,21 @@ internal class SingletonRepository
         Symbols = AddRepository<SymbolsRepository>(new SymbolsRepository(Game));
         Talents = AddRepository<TalentsRepository>(new TalentsRepository(Game));
         Tiles = AddRepository<TilesRepository>(new TilesRepository(Game));
-        Timers = AddRepository<TimersRepository>(new TimersRepository(Game));
         Towns = AddRepository<TownsRepository>(new TownsRepository(Game));
         UnreadableFlavorSyllables = AddRepository<UnreadableFlavorSyllablesRepository>(new UnreadableFlavorSyllablesRepository(Game));
         Vaults = AddRepository<VaultsRepository>(new VaultsRepository(Game));
         WandReadableFlavors = AddRepository<WandReadableFlavorsRepository>(new WandReadableFlavorsRepository(Game));
         WizardCommands = AddRepository<WizardCommandsRepository>(new WizardCommandsRepository(Game));
-        Widgets = AddRepository<WidgetsRepository>(new WidgetsRepository(Game));
         WorshipPlayerAttacks = AddRepository<WorshipPlayerAttacksRepository>(new WorshipPlayerAttacksRepository(Game));
 
         // Load all of the objects into each repository.  This is where the assembly will be scanned or the database will be read.
         LoadRepositoryItems();
         BindRepositoryItems();
+
+        // Bind all of the singletons now.
+        foreach (IGetKey singleton in _singletons)
+        {
+            singleton.Bind();
+        }
     }
 }
