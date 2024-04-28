@@ -47,7 +47,7 @@ internal class PersistConfigurationScript : Script, IScript
             Game.SingletonRepository.WorshipPlayerAttacks.PersistEntities();
 
             // Dictionary repositories.
-            Game.SingletonRepository.Activations.PersistEntities();
+            Game.SingletonRepository.PersistEntities<Activation>();
             Game.SingletonRepository.AlterActions.PersistEntities();
             Game.SingletonRepository.AmuletReadableFlavors.PersistEntities();
             Game.SingletonRepository.Animations.PersistEntities();
@@ -62,7 +62,7 @@ internal class PersistConfigurationScript : Script, IScript
             Game.SingletonRepository.DungeonGuardians.PersistEntities();
             Game.SingletonRepository.Dungeons.PersistEntities();
             Game.SingletonRepository.FixedArtifacts.PersistEntities();
-            Game.SingletonRepository.GameCommands.PersistEntities();
+            Game.SingletonRepository.PersistEntities<GameCommand>();
             Game.SingletonRepository.Genders.PersistEntities();
             Game.SingletonRepository.Gods.PersistEntities();
             Game.SingletonRepository.HelpGroups.PersistEntities();

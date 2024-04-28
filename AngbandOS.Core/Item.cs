@@ -2771,7 +2771,7 @@ internal sealed class Item : IComparable<Item>
             int chance = 0;
             while (type == null || Game.DieRoll(100) >= chance)
             {
-                type = Game.SingletonRepository.Activations.ToWeightedRandom().ChooseOrDefault();
+                type = Game.SingletonRepository.ToWeightedRandom<Activation>().ChooseOrDefault();
                 chance = type.RandomChance;
             }
         }

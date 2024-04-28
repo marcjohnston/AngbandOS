@@ -45,7 +45,7 @@ internal class StayScript : Script, IScript, IRepeatableScript
         if (tile.FeatureType.IsShop)
         {
             Game.Disturb(false);
-            Game._artificialKeyBuffer += Game.SingletonRepository.GameCommands.Get(nameof(EnterStoreGameCommand)).KeyChar;
+            Game._artificialKeyBuffer += Game.SingletonRepository.Get<GameCommand>(nameof(EnterStoreGameCommand)).KeyChar;
         }
     }
 }

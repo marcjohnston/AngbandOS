@@ -5,17 +5,11 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using System;
 using System.Reflection;
 using Timer = AngbandOS.Core.Timers.Timer;
 
 namespace AngbandOS.Core;
-
-[Serializable]
-internal class GenericRepository
-{
-    public Dictionary<string, object> Dictionary = new Dictionary<string, object>();
-    public List<object> List = new List<object>();    
-}
 
 [Serializable]
 /// <summary>
@@ -26,7 +20,6 @@ internal class SingletonRepository
     private readonly Game Game;
     private readonly List<ILoadAndBind> _repositories = new();
 
-    public ActivationsRepository Activations;
     public AlignmentsRepository Alignments;
     public AlterActionsRepository AlterActions;
     public AmuletReadableFlavorsRepository AmuletReadableFlavors;
@@ -48,7 +41,6 @@ internal class SingletonRepository
     public FormsRepository Forms;
     public FunnyCommentsRepository FunnyComments;
     public FunnyDescriptionsRepository FunnyDescriptions;
-    public GameCommandsRepository GameCommands;
     public GendersRepository Genders;
     public GodsRepository Gods;
     public HelpGroupsRepository HelpGroups;
@@ -104,22 +96,29 @@ internal class SingletonRepository
     public WizardCommandsRepository WizardCommands;
     public WorshipPlayerAttacksRepository WorshipPlayerAttacks;
 
-    private Dictionary<string, Dictionary<string, object>> _repositoryDictionary = new Dictionary<string, Dictionary<string, object>>();
+    private Dictionary<string, GenericRepository> _repositoryDictionary = new Dictionary<string, GenericRepository>();
 
     /// <summary>
     /// Returns a list of all singletons.  This is used to track all of the loaded singletons so that they can be bound quickly and only once.
     /// </summary>
     private List<IGetKey> _singletons = new List<IGetKey>();
 
+    public WeightedRandom<T> ToWeightedRandom<T>(Func<T, bool>? predicate = null)
+    {
+        string typeName = typeof(T).Name;
+        T[] list = _repositoryDictionary[typeName].Get<T>();
+        return new WeightedRandom<T>(Game, list, predicate);
+    }
+
     public void AddInterfaceRepository<T>()
     {
         string typeName = typeof(T).Name;
-        if (_repositoryDictionary.TryGetValue(typeName, out Dictionary<string, object>? loadAndBindList))
+        if (_repositoryDictionary.TryGetValue(typeName, out GenericRepository? genericRepository))
         {
             throw new Exception("AddInterface duplicate {typeName}");
         }
-        loadAndBindList = new Dictionary<string, object>();
-        _repositoryDictionary.Add(typeName, loadAndBindList);
+        genericRepository = new GenericRepository();
+        _repositoryDictionary.Add(typeName, genericRepository);
     }
 
     public T? GetNullable<T>(string? key) where T : class
@@ -132,13 +131,13 @@ internal class SingletonRepository
         string typeName = typeof(T).Name;
 
         // Check to see if the dictionary has a dictionary for this type of object.
-        if (!_repositoryDictionary.TryGetValue(typeName, out Dictionary<string, object>? dictionary))
+        if (!_repositoryDictionary.TryGetValue(typeName, out GenericRepository? genericRepository))
         {
             throw new Exception($"The {typeof(T).Name} singleton interface was not registered.");
         }
 
         // Retrieve the singleton by key name.
-        if (!dictionary.TryGetValue(key, out object? singleton))
+        if (!genericRepository.Dictionary.TryGetValue(key, out object? singleton))
         {
             throw new Exception($"The singleton {typeof(T).Name}.{key} does not exist.");
         }
@@ -157,12 +156,7 @@ internal class SingletonRepository
     public T[] Get<T>() where T : class
     {
         string typeName = typeof(T).Name;
-        List<T> resultList = new List<T>();
-        foreach (object singleton in _repositoryDictionary[typeName].Values)
-        {
-            resultList.Add((T)singleton);
-        }
-        return resultList.ToArray();
+        return _repositoryDictionary[typeName].Get<T>();
     }
 
     public T[] Get<T>(string[] keys) where T : class
@@ -183,6 +177,12 @@ internal class SingletonRepository
             throw new Exception($"The singleton {typeof(T).Name}.{key} does not exist.");
         }
         return singleton;
+    }
+
+    public T Get<T>(int index) where T : class
+    {
+        string typeName = typeof(T).Name;
+        return (T)_repositoryDictionary[typeName].List[index];
     }
 
     private void LoadAllAssemblyTypes()
@@ -215,8 +215,8 @@ internal class SingletonRepository
                     {
                         string typeName = interfaceType.Name;
 
-                        // Check to see if there is a repository that is registered for this type.
-                        if (_repositoryDictionary.TryGetValue(typeName, out Dictionary<string, object>? typeRepositoryDictionary))
+                        // Check to see if there is a repository that is registered for this type.  There is no else; we simple ignore this interface.
+                        if (_repositoryDictionary.TryGetValue(typeName, out GenericRepository? genericRepository))
                         {
                             // We only instantiate the object once and only if we are storing it.
                             if (singleton == null)
@@ -234,11 +234,11 @@ internal class SingletonRepository
                                     _singletons.Add(getKeySingleton);
 
                                     // Ensure there isn't already a singleton with the same name.
-                                    if (typeRepositoryDictionary.TryGetValue(key, out _))
+                                    if (genericRepository.Dictionary.TryGetValue(key, out _))
                                     {
                                         throw new Exception($"Cannot add duplicate {type.Name} singleton with the key {key}.");
                                     }
-                                    typeRepositoryDictionary.Add(key, singleton);
+                                    genericRepository.Add(key, singleton);
                                     break;
                                 default:
                                     throw new Exception($"The singleton {type.Name} does not implement the IGetKey interface.");
@@ -295,6 +295,27 @@ internal class SingletonRepository
         Game.CorePersistentStorage.PersistEntities(pluralName, jsonEntityList.ToArray());
     }
 
+    private void LoadFromConfiguration<T, TDefinition, TGeneric>(TDefinition[]? definitions) where T : IGetKey where TGeneric : T
+    {
+        string typeName = typeof(T).Name;
+        GenericRepository gameCommands = _repositoryDictionary[typeName];
+        if (definitions != null)
+        {
+            ConstructorInfo[] constructors = typeof(TGeneric).GetConstructors(BindingFlags.Public | BindingFlags.Instance);
+            if (constructors.Length != 1)
+            {
+                throw new Exception($"Invalid number of constructors for {typeof(TGeneric)}.");
+            }
+            foreach (TDefinition definition in definitions)
+            {
+                T gameCommand = (T)constructors[0].Invoke(new object[] { Game, definition });
+                string key = gameCommand.GetKey;
+                gameCommands.Add(key, gameCommand);
+                _singletons.Add(gameCommand);
+            }
+        }
+    }
+
     /// <summary>
     /// Performs the load phase of the singleton repository.  This phase reads all of the types from the assembly and adds it into its respective
     /// collection--if the ExcludeFromRepository property returns false.  If the ExcludeFromRepository is true, the singleton object will be discarded.
@@ -320,17 +341,11 @@ internal class SingletonRepository
         LoadAllAssemblyTypes();
 
         AddInterfaceRepository<GameCommand>();
-        
+
         // Now load the configuration singletons.
-
-        //foreach (GameCommandDefinition gameCommandDefinition in Game.Configuration.GameCommands)
-        //{
-        //    Add(new GenericGameCommand(Game, gameCommandDefinition));
-        //}
-
+        LoadFromConfiguration<GameCommand, GameCommandDefinition, GenericGameCommand>(Game.Configuration.GameCommands);
 
         // Create all of the repositories.  All of the repositories will be empty and have an instance to the save game.
-        Activations = AddRepository<ActivationsRepository>(new ActivationsRepository(Game));
         Alignments = AddRepository<AlignmentsRepository>(new AlignmentsRepository(Game));
         AlterActions = AddRepository<AlterActionsRepository>(new AlterActionsRepository(Game));
         AmuletReadableFlavors = AddRepository<AmuletReadableFlavorsRepository>(new AmuletReadableFlavorsRepository(Game));
@@ -352,7 +367,6 @@ internal class SingletonRepository
         Forms = AddRepository<FormsRepository>(new FormsRepository(Game));
         FunnyComments = AddRepository<FunnyCommentsRepository>(new FunnyCommentsRepository(Game));
         FunnyDescriptions = AddRepository<FunnyDescriptionsRepository>(new FunnyDescriptionsRepository(Game));
-        GameCommands = AddRepository<GameCommandsRepository>(new GameCommandsRepository(Game));
         Genders = AddRepository<GendersRepository>(new GendersRepository(Game));
         Gods = AddRepository<GodsRepository>(new GodsRepository(Game));
         HelpGroups = AddRepository<HelpGroupsRepository>(new HelpGroupsRepository(Game));

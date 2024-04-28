@@ -214,7 +214,7 @@ public class GameServer
                 //ClassSpells = RetrieveEntities<ClassSpellDefinition>(persistentStorage, "ClassSpells"),
                 //DungeonGuardians = RetrieveEntities<DungeonGuardianDefinition>(persistentStorage, "DungeonGuardians"),
                 //Dungeons = RetrieveEntities<DungeonDefinition>(persistentStorage, "Dungeons"),
-                //GameCommands = RetrieveEntities<GameCommandDefinition>(persistentStorage, "GameCommands"),
+                GameCommands = RetrieveEntities<GameCommandDefinition>(persistentStorage, "GameCommands"),
                 //Gods = RetrieveEntities<GodDefinition>(persistentStorage, "Gods"),
                 //HelpGroups = RetrieveEntities<HelpGroupDefinition>(persistentStorage, "HelpGroups"),
                 //MonsterRaces = RetrieveEntities<MonsterRaceDefinition>(persistentStorage, "MonsterRaces"),

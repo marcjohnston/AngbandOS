@@ -27,11 +27,11 @@ internal class RunRandomActivationScript : Script, IScript
 
             Game.Screen.Clear();
             int index = 0;
-            foreach (Activation activationPower in Game.SingletonRepository.Activations)
+            foreach (Activation activation in Game.SingletonRepository.Get<Activation>())
             {
                 int row = 2 + (index % 40);
                 int col = 30 * (index / 40);
-                Game.Screen.PrintLine($"{index + 1}. {activationPower.Name}", row, col);
+                Game.Screen.PrintLine($"{index + 1}. {activation.Name}", row, col);
                 index++;
             }
             if (!Game.GetString("Activation power?", out selection, "", 3))
@@ -51,12 +51,12 @@ internal class RunRandomActivationScript : Script, IScript
             return;
         }
         selectedIndex--;
-        if (selectedIndex < 0 || selectedIndex > Game.SingletonRepository.Activations.Count)
+        if (selectedIndex < 0 || selectedIndex > Game.SingletonRepository.Get<Activation>().Length)
         {
             return;
         }
 
-        Activation activation = Game.SingletonRepository.Activations[selectedIndex];
-        //activation.Activate();
+        Activation selectedActivation = Game.SingletonRepository.Get<Activation>(selectedIndex);
+        //selectedActivation.Activate(); // TODO: Wizard command does not work
     }
 }

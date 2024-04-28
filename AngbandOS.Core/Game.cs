@@ -5977,7 +5977,7 @@ internal class Game
         char c = CurrentCommand;
 
         // Process commands
-        foreach (GameCommand command in SingletonRepository.GameCommands)
+        foreach (GameCommand command in SingletonRepository.Get<GameCommand>())
         {
             // TODO: The IF statement below can be converted into a dictionary with the applicable object 
             // attached for improved performance.
@@ -6915,7 +6915,7 @@ internal class Game
         if (tile.FeatureType.IsShop)
         {
             Disturb(false);
-            _artificialKeyBuffer += SingletonRepository.GameCommands.Get(nameof(EnterStoreGameCommand)).KeyChar;
+            _artificialKeyBuffer += SingletonRepository.Get<GameCommand>(nameof(EnterStoreGameCommand)).KeyChar;
         }
         // If we've just stepped on an unknown trap then activate it
         else if (tile.FeatureType is InvisibleTile)
