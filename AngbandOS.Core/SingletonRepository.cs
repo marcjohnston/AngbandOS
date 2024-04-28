@@ -139,6 +139,25 @@ internal class SingletonRepository
         return (T)singleton;
     }
 
+    public T[]? GetNullable<T>(string[]? keys) where T : class
+    {
+        if (keys == null)
+        {
+            return null;
+        }
+        return Get<T>(keys);
+    }
+
+    public T[] Get<T>(string[] keys) where T : class
+    {
+        List<T> changeTrackerList = new();
+        foreach (string key in keys)
+        {
+            changeTrackerList.Add(Get<T>(key));
+        }
+        return changeTrackerList.ToArray();
+    }
+
     public T Get<T>(string key) where T : class
     {
         T? singleton = GetNullable<T>(key);
@@ -249,6 +268,7 @@ internal class SingletonRepository
         // These are the types to load from the assembly.
         AddInterfaceRepository<IIntValue>();
         AddInterfaceRepository<ICastScript>();
+        AddInterfaceRepository<IChangeTracker>();
         AddInterfaceRepository<Property>();
         AddInterfaceRepository<Timer>();
         AddInterfaceRepository<Function>();

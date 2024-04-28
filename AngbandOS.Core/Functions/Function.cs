@@ -43,43 +43,6 @@ internal abstract class Function : IGetKey, IChangeTracker
 
     public void Bind()
     {
-        if (DependencyNames == null)
-        {
-            Dependencies = null;
-        }
-        else
-        {
-            List<IChangeTracker> conditionalList = new();
-            foreach (string dependencyName in DependencyNames)
-            {
-                Property? property = Game.SingletonRepository.Properties.TryGet(dependencyName);
-                if (property != null)
-                {
-                    conditionalList.Add(property);
-                }
-                else
-                {
-                    Function? function = Game.SingletonRepository.Functions.TryGet(dependencyName);
-                    if (function != null)
-                    {
-                        conditionalList.Add(function);
-                    }
-                    else
-                    {
-                        Timer? timer = Game.SingletonRepository.Timers.TryGet(dependencyName);
-                        if (timer != null)
-                        {
-                            conditionalList.Add(timer);
-                        }
-                        else
-                        {
-                            throw new Exception($"{dependencyName} dependency not found as {nameof(Property)}, {nameof(Timer)} or {nameof(Function)}.");
-                        }
-                    }
-                }
-            }
-            Dependencies = conditionalList.ToArray();
-        }
-
+        Dependencies = Game.SingletonRepository.GetNullable<IChangeTracker>(DependencyNames);
     }
 }
