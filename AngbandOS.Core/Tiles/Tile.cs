@@ -66,6 +66,8 @@ internal abstract class Tile : IGetKey
             IsWall = IsWall,
             IsWater = IsWater,
             IsWildPath = IsWildPath,
+            IsDownStaircase = IsDownStaircase,
+            IsUpStaircase = IsUpStaircase,
             Key = Key,
             LockLevel = LockLevel,
             MapPriority = MapPriority,
@@ -147,6 +149,22 @@ internal abstract class Tile : IGetKey
     public virtual bool IsBorder => false;
 
     public virtual bool IsMagma => false;
+
+    /// <summary>
+    /// The tile is a down staircase.
+    /// </summary>
+    public virtual bool IsDownStaircase => false;
+
+    /// <summary>
+    /// The tile is a up staircase.
+    /// </summary>
+    public virtual bool IsUpStaircase => false;
+
+    /// <summary>
+    /// The tile is grass.
+    /// </summary>
+    public virtual bool IsGrass => false;
+
     /// <summary>
     /// Returns a single action to perform on the tile.
     /// </summary>

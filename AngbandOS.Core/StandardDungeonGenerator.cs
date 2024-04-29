@@ -113,7 +113,7 @@ internal class StandardDungeonGenerator : DungeonGenerator
         ResetGuardians();
         if (Game.IsQuest(Game.CurrentDepth))
         {
-            Game.SingletonRepository.MonsterRaces[GetQuestMonster()].Guardian = true;
+            Game.SingletonRepository.Get<MonsterRace>(GetQuestMonster()).Guardian = true;
         }
         if (Game.PercentileRoll(4) && !Game.CurDungeon.Tower)
         {
@@ -125,10 +125,10 @@ internal class StandardDungeonGenerator : DungeonGenerator
         }
 
         // Generate downstairs.
-        AllocStairs(Game.SingletonRepository.Tiles.Get(nameof(DownStaircaseTile)), Game.RandomBetween(3, 4), 3);
+        AllocStairs(Game.DownStaircaseTile, Game.RandomBetween(3, 4), 3);
 
         // Generate upstairs.
-        AllocStairs(Game.SingletonRepository.Tiles.Get(nameof(UpStaircaseTile)), Game.RandomBetween(1, 2), 3);
+        AllocStairs(Game.UpStaircaseTile, Game.RandomBetween(1, 2), 3);
 
         // Choose a spot for the player.
         if (!Game.NewPlayerSpot())
@@ -149,7 +149,7 @@ internal class StandardDungeonGenerator : DungeonGenerator
         {
             int rIdx = GetQuestMonster();
             int qIdx = Game.GetQuestNumber();
-            while (Game.SingletonRepository.MonsterRaces[rIdx].CurNum < (Game.Quests[qIdx].ToKill - Game.Quests[qIdx].Killed))
+            while (Game.SingletonRepository.Get<MonsterRace>(rIdx).CurNum < (Game.Quests[qIdx].ToKill - Game.Quests[qIdx].Killed))
             {
                 PutQuestMonster(Game.Quests[qIdx].RIdx);
             }
@@ -415,7 +415,7 @@ internal class StandardDungeonGenerator : DungeonGenerator
 
     private void ResetGuardians()
     {
-        foreach (MonsterRace race in Game.SingletonRepository.MonsterRaces)
+        foreach (MonsterRace race in Game.SingletonRepository.Get<MonsterRace>())
         {
             race.Guardian = false;
         }
@@ -464,11 +464,11 @@ internal class StandardDungeonGenerator : DungeonGenerator
                     GridTile cPtr = Game.Map.Grid[y][x];
                     if (Game.CurrentDepth <= 0)
                     {
-                        cPtr.SetFeature(Game.SingletonRepository.Tiles.Get(nameof(DownStaircaseTile)));
+                        cPtr.SetFeature(Game.DownStaircaseTile);
                     }
                     else if (Game.IsQuest(Game.CurrentDepth) || Game.CurrentDepth == Game.CurDungeon.MaxLevel)
                     {
-                        cPtr.SetFeature(Game.CurDungeon.Tower ? Game.SingletonRepository.Tiles.Get(nameof(DownStaircaseTile)) : Game.SingletonRepository.Tiles.Get(nameof(UpStaircaseTile)));
+                        cPtr.SetFeature(Game.CurDungeon.Tower ? Game.DownStaircaseTile : Game.UpStaircaseTile);
                     }
                     else
                     {
@@ -499,9 +499,9 @@ internal class StandardDungeonGenerator : DungeonGenerator
     private void PutQuestMonster(int rIdx)
     {
         int y, x;
-        if (Game.SingletonRepository.MonsterRaces[rIdx].MaxNum == 0)
+        if (Game.SingletonRepository.Get<MonsterRace>(rIdx).MaxNum == 0)
         {
-            Game.SingletonRepository.MonsterRaces[rIdx].MaxNum++;
+            Game.SingletonRepository.Get<MonsterRace>(rIdx).MaxNum++;
             Game.MsgPrint("Resurrecting guardian to fix corrupted savefile...");
         }
         do

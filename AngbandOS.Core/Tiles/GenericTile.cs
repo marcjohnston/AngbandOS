@@ -46,6 +46,9 @@ internal class GenericTile : Tile
         IsWall = tileDefinition.IsWall;
         IsWater = tileDefinition.IsWater;
         IsWildPath = tileDefinition.IsWildPath;
+        IsGrass = tileDefinition.IsGrass;
+        IsDownStaircase = tileDefinition.IsDownStaircase;
+        IsUpStaircase = tileDefinition.IsUpStaircase;
         Key = tileDefinition.Key;
         LockLevel = tileDefinition.LockLevel;
         MapPriority = tileDefinition.MapPriority;
@@ -78,6 +81,10 @@ internal class GenericTile : Tile
     public override ColorEnum Color { get; } = ColorEnum.White;
 
     public override bool IsWildPath { get; } = false;
+
+    public override bool IsGrass { get; } = false;
+    public override bool IsUpStaircase { get; } = false;
+    public override bool IsDownStaircase { get; } = false;
 
     /// <summary>
     /// Returns true for all path tiles; false, otherwise.  Returns false, by default.  PathBase, PathBorderEW, PathBorderNS, PathEW, PathJunction and PathNS return true.

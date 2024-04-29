@@ -36,7 +36,7 @@ internal abstract class DungeonGuardian : IGetKey
 
     public void Bind()
     {
-        MonsterRace = Game.SingletonRepository.MonsterRaces.Get(MonsterRaceName);
+        MonsterRace = Game.SingletonRepository.Get<MonsterRace>(MonsterRaceName);
     }
 
     public string ToJson()

@@ -1637,7 +1637,7 @@ internal class Game
 
     private void ResetUniqueOnlyGuardianStatus()
     {
-        foreach (MonsterRace race in SingletonRepository.MonsterRaces)
+        foreach (MonsterRace race in SingletonRepository.Get<MonsterRace>())
         {
             race.OnlyGuardian = false;
         }
@@ -1815,9 +1815,9 @@ internal class Game
         {
             kPtr.Tried = false;
         }
-        for (int i = 1; i < SingletonRepository.MonsterRaces.Count; i++)
+        for (int i = 1; i < SingletonRepository.Get<MonsterRace>().Length; i++)
         {
-            MonsterRace rPtr = SingletonRepository.MonsterRaces[i];
+            MonsterRace rPtr = SingletonRepository.Get<MonsterRace>(i);
             rPtr.CurNum = 0;
             rPtr.MaxNum = 100;
             if (rPtr.Unique)
@@ -1826,7 +1826,7 @@ internal class Game
             }
             rPtr.Knowledge.RPkills = 0;
         }
-        SingletonRepository.MonsterRaces[SingletonRepository.MonsterRaces.Count - 1].MaxNum = 0;
+        SingletonRepository.Get<MonsterRace>(SingletonRepository.Get<MonsterRace>().Length - 1).MaxNum = 0;
         Food.IntValue = Constants.PyFoodFull - 1;
         IsWizard.BoolValue = false;
         IsWinner.BoolValue = false;
@@ -2748,7 +2748,7 @@ internal class Game
                 }
                 DeleteObject(y, x);
                 MsgPrint("A magical stairway appears...");
-                CaveSetFeat(y, x, CurDungeon.Tower ? SingletonRepository.Tiles.Get(nameof(UpStaircaseTile)) : SingletonRepository.Tiles.Get(nameof(DownStaircaseTile)));
+                CaveSetFeat(y, x, CurDungeon.Tower ? UpStaircaseTile : DownStaircaseTile);
                 SingletonRepository.FlaggedActions.Get(nameof(UpdateScentFlaggedAction)).Set();
                 SingletonRepository.FlaggedActions.Get(nameof(UpdateMonstersFlaggedAction)).Set();
                 SingletonRepository.FlaggedActions.Get(nameof(UpdateLightFlaggedAction)).Set();
@@ -3376,9 +3376,9 @@ internal class Game
         aux = new int[Constants.MaxDepth];
         num = new int[Constants.MaxDepth];
         AllocRaceSize = 0;
-        for (i = 1; i < SingletonRepository.MonsterRaces.Count - 1; i++)
+        for (i = 1; i < SingletonRepository.Get<MonsterRace>().Length - 1; i++)
         {
-            rPtr = SingletonRepository.MonsterRaces[i];
+            rPtr = SingletonRepository.Get<MonsterRace>(i);
             if (rPtr.Rarity != 0)
             {
                 AllocRaceSize++;
@@ -3399,9 +3399,9 @@ internal class Game
             AllocRaceTable[k] = new AllocationEntry();
         }
         table = AllocRaceTable;
-        for (i = 1; i < SingletonRepository.MonsterRaces.Count - 1; i++)
+        for (i = 1; i < SingletonRepository.Get<MonsterRace>().Length - 1; i++)
         {
-            rPtr = SingletonRepository.MonsterRaces[i];
+            rPtr = SingletonRepository.Get<MonsterRace>(i);
             if (rPtr.Rarity != 0)
             {
                 int x = rPtr.Level;
@@ -5326,7 +5326,7 @@ internal class Game
             {
                 break;
             }
-            rPtr = SingletonRepository.MonsterRaces[r];
+            rPtr = SingletonRepository.Get<MonsterRace>(r);
             if (rPtr.Unique)
             {
                 continue;
@@ -7354,7 +7354,7 @@ internal class Game
                         {
                             MsgPrint($"{monsterName} changes!");
                             DeleteMonsterByIndex(tile.MonsterIndex, true);
-                            MonsterRace newRace = SingletonRepository.MonsterRaces[newRaceIndex];
+                            MonsterRace newRace = SingletonRepository.Get<MonsterRace>(newRaceIndex);
                             PlaceMonsterAux(y, x, newRace, false, false, false);
                             monster = Monsters[tile.MonsterIndex];
                             monsterName = monster.Name;
@@ -10581,6 +10581,45 @@ internal class Game
         }
     }
 
+    private Tile? _downStaircaseTile = null;
+    public Tile DownStaircaseTile
+    {
+        get
+        {
+            if (_downStaircaseTile == null)
+            {
+                _downStaircaseTile = SingletonRepository.Tiles.Single(_tile => _tile.IsDownStaircase);
+            }
+            return _downStaircaseTile;
+        }
+    }
+
+    private Tile? _upStaircaseTile = null;
+    public Tile UpStaircaseTile
+    {
+        get
+        {
+            if (_upStaircaseTile == null)
+            {
+                _upStaircaseTile = SingletonRepository.Tiles.Single(_tile => _tile.IsDownStaircase);
+            }
+            return _upStaircaseTile;
+        }
+    }
+
+    private Tile? _grassStaircaseTile = null;
+    public Tile GetGrassTile
+    {
+        get
+        {
+            if (_grassStaircaseTile == null)
+            {
+                _grassStaircaseTile = SingletonRepository.Tiles.Single(_tile => _tile.IsGrass);
+            }
+            return _grassStaircaseTile;
+        }
+    }
+
     private void MakeDungeonEntrance(int left, int top, int width, int height, out int stairX, out int stairY)
     {
         int dummy = 0;
@@ -10602,7 +10641,7 @@ internal class Game
         Map.Grid[y - 1][x + 1].RevertToBackground();
         Map.Grid[y][x - 2].RevertToBackground();
         Map.Grid[y][x - 1].RevertToBackground();
-        Map.Grid[y][x].SetFeature(SingletonRepository.Tiles.Get(nameof(DownStaircaseTile)));
+        Map.Grid[y][x].SetFeature(DownStaircaseTile);
         stairX = x;
         stairY = y;
         Map.Grid[y][x + 1].RevertToBackground();
@@ -10619,73 +10658,73 @@ internal class Game
         int midY = top + (height / 2);
         for (int y = midY - 3; y < midY + 3; y++)
         {
-            Map.Grid[y][midX - 7].SetBackgroundFeature(SingletonRepository.Tiles.Get(nameof(GrassTile)));
-            Map.Grid[y][midX - 7].SetFeature(SingletonRepository.Tiles.Get(nameof(GrassTile)));
+            Map.Grid[y][midX - 7].SetBackgroundFeature(GetGrassTile);
+            Map.Grid[y][midX - 7].SetFeature(GetGrassTile);
         }
         for (int y = midY - 5; y < midY + 5; y++)
         {
-            Map.Grid[y][midX - 6].SetBackgroundFeature(SingletonRepository.Tiles.Get(nameof(GrassTile)));
-            Map.Grid[y][midX - 6].SetFeature(SingletonRepository.Tiles.Get(nameof(GrassTile)));
+            Map.Grid[y][midX - 6].SetBackgroundFeature(GetGrassTile);
+            Map.Grid[y][midX - 6].SetFeature(GetGrassTile);
         }
         for (int y = midY - 6; y < midY + 6; y++)
         {
-            Map.Grid[y][midX - 5].SetBackgroundFeature(SingletonRepository.Tiles.Get(nameof(GrassTile)));
-            Map.Grid[y][midX - 5].SetFeature(SingletonRepository.Tiles.Get(nameof(GrassTile)));
+            Map.Grid[y][midX - 5].SetBackgroundFeature(GetGrassTile);
+            Map.Grid[y][midX - 5].SetFeature(GetGrassTile);
         }
         for (int y = midY - 6; y < midY + 6; y++)
         {
-            Map.Grid[y][midX - 4].SetBackgroundFeature(SingletonRepository.Tiles.Get(nameof(GrassTile)));
-            Map.Grid[y][midX - 4].SetFeature(SingletonRepository.Tiles.Get(nameof(GrassTile)));
+            Map.Grid[y][midX - 4].SetBackgroundFeature(GetGrassTile);
+            Map.Grid[y][midX - 4].SetFeature(GetGrassTile);
         }
         for (int y = midY - 7; y < midY + 6; y++)
         {
-            Map.Grid[y][midX - 3].SetBackgroundFeature(SingletonRepository.Tiles.Get(nameof(GrassTile)));
-            Map.Grid[y][midX - 3].SetFeature(SingletonRepository.Tiles.Get(nameof(GrassTile)));
+            Map.Grid[y][midX - 3].SetBackgroundFeature(GetGrassTile);
+            Map.Grid[y][midX - 3].SetFeature(GetGrassTile);
         }
         for (int y = midY - 7; y < midY + 6; y++)
         {
-            Map.Grid[y][midX - 2].SetBackgroundFeature(SingletonRepository.Tiles.Get(nameof(GrassTile)));
-            Map.Grid[y][midX - 2].SetFeature(SingletonRepository.Tiles.Get(nameof(GrassTile)));
+            Map.Grid[y][midX - 2].SetBackgroundFeature(GetGrassTile);
+            Map.Grid[y][midX - 2].SetFeature(GetGrassTile);
         }
         for (int y = midY - 6; y < midY + 6; y++)
         {
-            Map.Grid[y][midX - 1].SetBackgroundFeature(SingletonRepository.Tiles.Get(nameof(GrassTile)));
-            Map.Grid[y][midX - 1].SetFeature(SingletonRepository.Tiles.Get(nameof(GrassTile)));
+            Map.Grid[y][midX - 1].SetBackgroundFeature(GetGrassTile);
+            Map.Grid[y][midX - 1].SetFeature(GetGrassTile);
         }
         for (int y = midY - 7; y < midY + 6; y++)
         {
-            Map.Grid[y][midX].SetBackgroundFeature(SingletonRepository.Tiles.Get(nameof(GrassTile)));
-            Map.Grid[y][midX].SetFeature(SingletonRepository.Tiles.Get(nameof(GrassTile)));
+            Map.Grid[y][midX].SetBackgroundFeature(GetGrassTile);
+            Map.Grid[y][midX].SetFeature(GetGrassTile);
         }
         for (int y = midY - 7; y < midY + 6; y++)
         {
-            Map.Grid[y][midX + 1].SetBackgroundFeature(SingletonRepository.Tiles.Get(nameof(GrassTile)));
-            Map.Grid[y][midX + 1].SetFeature(SingletonRepository.Tiles.Get(nameof(GrassTile)));
+            Map.Grid[y][midX + 1].SetBackgroundFeature(GetGrassTile);
+            Map.Grid[y][midX + 1].SetFeature(GetGrassTile);
         }
         for (int y = midY - 6; y < midY + 6; y++)
         {
-            Map.Grid[y][midX + 2].SetBackgroundFeature(SingletonRepository.Tiles.Get(nameof(GrassTile)));
-            Map.Grid[y][midX + 2].SetFeature(SingletonRepository.Tiles.Get(nameof(GrassTile)));
+            Map.Grid[y][midX + 2].SetBackgroundFeature(GetGrassTile);
+            Map.Grid[y][midX + 2].SetFeature(GetGrassTile);
         }
         for (int y = midY - 7; y < midY + 6; y++)
         {
-            Map.Grid[y][midX + 3].SetBackgroundFeature(SingletonRepository.Tiles.Get(nameof(GrassTile)));
-            Map.Grid[y][midX + 3].SetFeature(SingletonRepository.Tiles.Get(nameof(GrassTile)));
+            Map.Grid[y][midX + 3].SetBackgroundFeature(GetGrassTile);
+            Map.Grid[y][midX + 3].SetFeature(GetGrassTile);
         }
         for (int y = midY - 6; y < midY + 6; y++)
         {
-            Map.Grid[y][midX + 4].SetBackgroundFeature(SingletonRepository.Tiles.Get(nameof(GrassTile)));
-            Map.Grid[y][midX + 4].SetFeature(SingletonRepository.Tiles.Get(nameof(GrassTile)));
+            Map.Grid[y][midX + 4].SetBackgroundFeature(GetGrassTile);
+            Map.Grid[y][midX + 4].SetFeature(GetGrassTile);
         }
         for (int y = midY - 5; y < midY + 5; y++)
         {
-            Map.Grid[y][midX + 5].SetBackgroundFeature(SingletonRepository.Tiles.Get(nameof(GrassTile)));
-            Map.Grid[y][midX + 5].SetFeature(SingletonRepository.Tiles.Get(nameof(GrassTile)));
+            Map.Grid[y][midX + 5].SetBackgroundFeature(GetGrassTile);
+            Map.Grid[y][midX + 5].SetFeature(GetGrassTile);
         }
         for (int y = midY - 3; y < midY + 3; y++)
         {
-            Map.Grid[y][midX + 6].SetBackgroundFeature(SingletonRepository.Tiles.Get(nameof(GrassTile)));
-            Map.Grid[y][midX + 6].SetFeature(SingletonRepository.Tiles.Get(nameof(GrassTile)));
+            Map.Grid[y][midX + 6].SetBackgroundFeature(GetGrassTile);
+            Map.Grid[y][midX + 6].SetFeature(GetGrassTile);
         }
         Map.Grid[midY - 6][midX].SetFeature(SingletonRepository.Tiles.Get(nameof(RockTile)));
         Map.Grid[midY - 6][midX - 1].SetFeature(SingletonRepository.Tiles.Get(nameof(RockTile)));
@@ -10733,8 +10772,8 @@ internal class Game
                 }
                 else if (rounded == 3)
                 {
-                    cPtr.SetBackgroundFeature(SingletonRepository.Tiles.Get(nameof(GrassTile)));
-                    cPtr.SetFeature(SingletonRepository.Tiles.Get(nameof(GrassTile)));
+                    cPtr.SetBackgroundFeature(GetGrassTile);
+                    cPtr.SetFeature(GetGrassTile);
                 }
             }
         }
@@ -11071,7 +11110,7 @@ internal class Game
             }
         } while (true);
         cPtr = Map.Grid[y][x];
-        cPtr.SetFeature(SingletonRepository.Tiles.Get(nameof(DownStaircaseTile)));
+        cPtr.SetFeature(DownStaircaseTile);
         cPtr.PlayerMemorized = true;
         return new GridCoordinate(x, y);
     }
@@ -11454,15 +11493,15 @@ internal class Game
         {
             return;
         }
-        Map.Grid[midY - 1][midX - 1].SetFeature(SingletonRepository.Tiles.Get(nameof(GrassTile)));
-        Map.Grid[midY - 1][midX].SetFeature(SingletonRepository.Tiles.Get(nameof(GrassTile)));
-        Map.Grid[midY - 1][midX + 1].SetFeature(SingletonRepository.Tiles.Get(nameof(GrassTile)));
-        Map.Grid[midY][midX - 1].SetFeature(SingletonRepository.Tiles.Get(nameof(GrassTile)));
+        Map.Grid[midY - 1][midX - 1].SetFeature(GetGrassTile);
+        Map.Grid[midY - 1][midX].SetFeature(GetGrassTile);
+        Map.Grid[midY - 1][midX + 1].SetFeature(GetGrassTile);
+        Map.Grid[midY][midX - 1].SetFeature(GetGrassTile);
         Map.Grid[midY][midX].SetFeature(SingletonRepository.Tiles.Get(nameof(PathBaseTile)));
-        Map.Grid[midY][midX + 1].SetFeature(SingletonRepository.Tiles.Get(nameof(GrassTile)));
-        Map.Grid[midY + 1][midX - 1].SetFeature(SingletonRepository.Tiles.Get(nameof(GrassTile)));
-        Map.Grid[midY + 1][midX].SetFeature(SingletonRepository.Tiles.Get(nameof(GrassTile)));
-        Map.Grid[midY + 1][midX + 1].SetFeature(SingletonRepository.Tiles.Get(nameof(GrassTile)));
+        Map.Grid[midY][midX + 1].SetFeature(GetGrassTile);
+        Map.Grid[midY + 1][midX - 1].SetFeature(GetGrassTile);
+        Map.Grid[midY + 1][midX].SetFeature(GetGrassTile);
+        Map.Grid[midY + 1][midX + 1].SetFeature(GetGrassTile);
         if ((Wilderness[wildy][wildx].RoadMap & Constants.RoadUp) != 0)
         {
             x = 0;
@@ -11482,12 +11521,12 @@ internal class Game
                 }
                 if (!Map.Grid[y][midX - 1 + x].FeatureType.IsWildPath)
                 {
-                    Map.Grid[y][midX - 1 + x].SetFeature(SingletonRepository.Tiles.Get(nameof(GrassTile)));
+                    Map.Grid[y][midX - 1 + x].SetFeature(GetGrassTile);
                 }
                 Map.Grid[y][midX + x].SetFeature(SingletonRepository.Tiles.Get(nameof(WildPathNSTile)));
                 if (!Map.Grid[y][midX + 1 + x].FeatureType.IsWildPath)
                 {
-                    Map.Grid[y][midX + 1 + x].SetFeature(SingletonRepository.Tiles.Get(nameof(GrassTile)));
+                    Map.Grid[y][midX + 1 + x].SetFeature(GetGrassTile);
                 }
             }
         }
@@ -11510,12 +11549,12 @@ internal class Game
                 }
                 if (!Map.Grid[y][midX - 1 + x].FeatureType.IsWildPath)
                 {
-                    Map.Grid[y][midX - 1 + x].SetFeature(SingletonRepository.Tiles.Get(nameof(GrassTile)));
+                    Map.Grid[y][midX - 1 + x].SetFeature(GetGrassTile);
                 }
                 Map.Grid[y][midX + x].SetFeature(SingletonRepository.Tiles.Get(nameof(WildPathNSTile)));
                 if (!Map.Grid[y][midX + 1 + x].FeatureType.IsWildPath)
                 {
-                    Map.Grid[y][midX + 1 + x].SetFeature(SingletonRepository.Tiles.Get(nameof(GrassTile)));
+                    Map.Grid[y][midX + 1 + x].SetFeature(GetGrassTile);
                 }
             }
         }
@@ -11538,12 +11577,12 @@ internal class Game
                 }
                 if (!Map.Grid[midY - 1 + y][x].FeatureType.IsWildPath)
                 {
-                    Map.Grid[midY - 1 + y][x].SetFeature(SingletonRepository.Tiles.Get(nameof(GrassTile)));
+                    Map.Grid[midY - 1 + y][x].SetFeature(GetGrassTile);
                 }
                 Map.Grid[midY + y][x].SetFeature(SingletonRepository.Tiles.Get(nameof(WildPathEWTile)));
                 if (!Map.Grid[midY + 1 + y][x].FeatureType.IsWildPath)
                 {
-                    Map.Grid[midY + 1 + y][x].SetFeature(SingletonRepository.Tiles.Get(nameof(GrassTile)));
+                    Map.Grid[midY + 1 + y][x].SetFeature(GetGrassTile);
                 }
             }
         }
@@ -11566,12 +11605,12 @@ internal class Game
                 }
                 if (!Map.Grid[midY - 1 + y][x].FeatureType.IsWildPath)
                 {
-                    Map.Grid[midY - 1 + y][x].SetFeature(SingletonRepository.Tiles.Get(nameof(GrassTile)));
+                    Map.Grid[midY - 1 + y][x].SetFeature(GetGrassTile);
                 }
                 Map.Grid[midY + y][x].SetFeature(SingletonRepository.Tiles.Get(nameof(WildPathEWTile)));
                 if (!Map.Grid[midY + 1 + y][x].FeatureType.IsWildPath)
                 {
-                    Map.Grid[midY + 1 + y][x].SetFeature(SingletonRepository.Tiles.Get(nameof(GrassTile)));
+                    Map.Grid[midY + 1 + y][x].SetFeature(GetGrassTile);
                 }
             }
         }
@@ -11993,7 +12032,7 @@ internal class Game
                 Tile featureTile = SingletonRepository.Tiles.Get(nameof(WaterTile));
                 if (elevation > 0)
                 {
-                    floorTile = SingletonRepository.Tiles.Get(nameof(GrassTile));
+                    floorTile = GetGrassTile;
                     if (DieRoll(10) < elevation)
                     {
                         if (DieRoll(10) < elevation)
@@ -12007,7 +12046,7 @@ internal class Game
                     }
                     else
                     {
-                        featureTile = SingletonRepository.Tiles.Get(nameof(GrassTile));
+                        featureTile = GetGrassTile;
                     }
                 }
                 Map.Grid[y][x].SetFeature(featureTile);
@@ -12037,7 +12076,7 @@ internal class Game
         {
             x = DieRoll(CurWid - 2);
             y = DieRoll(CurHgt - 2);
-            if (Map.Grid[y][x].FeatureType is not GrassTile)
+            if (!Map.Grid[y][x].FeatureType.IsGrass)
             {
                 continue;
             }
@@ -12732,7 +12771,7 @@ internal class Game
     public void SummonNamedMonster(bool slp)
     {
         int rIdx = CommandArgument;
-        if (rIdx >= SingletonRepository.MonsterRaces.Count - 1)
+        if (rIdx >= SingletonRepository.Get<MonsterRace>().Length - 1)
         {
             return;
         }
@@ -12754,7 +12793,7 @@ internal class Game
     public void DoCmdWizNamedFriendly(bool slp)
     {
         int rIdx = CommandArgument;
-        if (rIdx >= SingletonRepository.MonsterRaces.Count - 1)
+        if (rIdx >= SingletonRepository.Get<MonsterRace>().Length - 1)
         {
             return;
         }
@@ -12829,7 +12868,7 @@ internal class Game
             {
                 Quests[questIndex].Level = dungeonGuardian.LevelFound;
                 Quests[questIndex].RIdx = dungeonGuardian.MonsterRace.Index;
-                SingletonRepository.MonsterRaces[Quests[questIndex].RIdx].OnlyGuardian = true;
+                SingletonRepository.Get<MonsterRace>(Quests[questIndex].RIdx).OnlyGuardian = true;
                 Quests[questIndex].Dungeon = SingletonRepository.Get<Dungeon>(i);
                 Quests[questIndex].ToKill = 1;
                 Quests[questIndex].Killed = 0;
@@ -12852,7 +12891,7 @@ internal class Game
                     } while (Quests[questIndex].RIdx == 0);
 
                     // Assign the quest level as the level of the monster that was chosen.
-                    Quests[questIndex].Level = SingletonRepository.MonsterRaces[Quests[questIndex].RIdx].Level;
+                    Quests[questIndex].Level = SingletonRepository.Get<MonsterRace>(Quests[questIndex].RIdx).Level;
 
                     // Adjust the quest level between 2 and 1/6 the quest levels.
                     Quests[questIndex].Level -= RandomBetween(2, 3 + (Quests[questIndex].Level / 6));
@@ -12870,9 +12909,9 @@ internal class Game
                 } while (sameLevel);
 
                 // If the monster race select is a unique, turn on the only guardian flag.
-                if (SingletonRepository.MonsterRaces[Quests[questIndex].RIdx].Unique)
+                if (SingletonRepository.Get<MonsterRace>(Quests[questIndex].RIdx).Unique)
                 {
-                    SingletonRepository.MonsterRaces[Quests[questIndex].RIdx].OnlyGuardian = true;
+                    SingletonRepository.Get<MonsterRace>(Quests[questIndex].RIdx).OnlyGuardian = true;
                 }
 
                 // We need to attach the quest to a dungeon.  To do this, we need to find a qualifying dungeon.  To qualify, a dungeon:
@@ -12921,7 +12960,7 @@ internal class Game
     public void PrintQuestMessage()
     {
         int qIdx = GetQuestNumber();
-        MonsterRace rPtr = SingletonRepository.MonsterRaces[Quests[qIdx].RIdx];
+        MonsterRace rPtr = SingletonRepository.Get<MonsterRace>(Quests[qIdx].RIdx);
         string name = rPtr.FriendlyName;
         int qNum = Quests[qIdx].ToKill - Quests[qIdx].Killed;
         if (Quests[qIdx].ToKill == 1)
@@ -12942,7 +12981,7 @@ internal class Game
     private void QuestDiscovery()
     {
         int qIdx = GetQuestNumber();
-        MonsterRace rPtr = SingletonRepository.MonsterRaces[Quests[qIdx].RIdx];
+        MonsterRace rPtr = SingletonRepository.Get<MonsterRace>(Quests[qIdx].RIdx);
         string name = rPtr.FriendlyName;
         int qNum = Quests[qIdx].ToKill;
         MsgPrint(SingletonRepository.FindQuests.ToWeightedRandom().ChooseOrDefault());
@@ -12961,11 +13000,11 @@ internal class Game
 
     private int GetNumberMonster(int i)
     {
-        if (SingletonRepository.MonsterRaces[Quests[i].RIdx].Unique || SingletonRepository.MonsterRaces[Quests[i].RIdx].Multiply)
+        if (SingletonRepository.Get<MonsterRace>(Quests[i].RIdx).Unique || SingletonRepository.Get<MonsterRace>(Quests[i].RIdx).Multiply)
         {
             return 1;
         }
-        int num = SingletonRepository.MonsterRaces[Quests[i].RIdx].Friends ? 10 : 5;
+        int num = SingletonRepository.Get<MonsterRace>(Quests[i].RIdx).Friends ? 10 : 5;
         num += RandomBetween(1, (Quests[i].Level / 3) + 5);
         return num;
     }
@@ -12973,17 +13012,17 @@ internal class Game
     private int GetRandomQuestMonster(int qIdx)
     {
         // Pick a minimum monster index and 1/3 of the monsters.
-        int minIndex = SingletonRepository.MonsterRaces.Count / 3;
+        int minIndex = SingletonRepository.Get<MonsterRace>().Length / 3;
 
         // Do not allow monster zero.
         if (minIndex == 0)
         {
             minIndex = 1;
         }
-        int rIdx = RandomBetween(minIndex, SingletonRepository.MonsterRaces.Count - 2); // TODO: We need to -1 the nobody monster
+        int rIdx = RandomBetween(minIndex, SingletonRepository.Get<MonsterRace>().Length - 2); // TODO: We need to -1 the nobody monster
 
         // Do not allow a monster that can multiply.
-        if (SingletonRepository.MonsterRaces[rIdx].Multiply)
+        if (SingletonRepository.Get<MonsterRace>(rIdx).Multiply)
         {
             return 0;
         }
@@ -15395,8 +15434,8 @@ internal class Game
 
     private void ImageMonster(out ColorEnum ap, out char cp)
     {
-        cp = SingletonRepository.MonsterRaces[DieRoll(SingletonRepository.MonsterRaces.Count - 2)].Symbol.Character;
-        ap = SingletonRepository.MonsterRaces[DieRoll(SingletonRepository.MonsterRaces.Count - 2)].Color;
+        cp = SingletonRepository.Get<MonsterRace>(DieRoll(SingletonRepository.Get<MonsterRace>().Length - 2)).Symbol.Character;
+        ap = SingletonRepository.Get<MonsterRace>(DieRoll(SingletonRepository.Get<MonsterRace>().Length - 2)).Color;
     }
 
     private void ImageObject(out ColorEnum ap, out char cp)
@@ -15647,7 +15686,7 @@ internal class Game
         }
         if (y == MapY.IntValue && x == MapX.IntValue)
         {
-            MonsterRace rPtr = SingletonRepository.MonsterRaces[0];
+            MonsterRace rPtr = SingletonRepository.Get<MonsterRace>(0);
             a = rPtr.Color;
             c = rPtr.Symbol.Character;
             color = a;
@@ -15666,7 +15705,7 @@ internal class Game
             {
                 return false;
             }
-            rPtr = SingletonRepository.MonsterRaces[rIdx];
+            rPtr = SingletonRepository.Get<MonsterRace>(rIdx);
             if (!rPtr.Unique && !rPtr.EscortsGroup)
             {
                 break;
@@ -15998,7 +16037,7 @@ internal class Game
                 continue;
             }
             int rIdx = table[i].Index;
-            MonsterRace rPtr = SingletonRepository.MonsterRaces[rIdx];
+            MonsterRace rPtr = SingletonRepository.Get<MonsterRace>(rIdx);
 
             // Do not allow more than 1 unique of this type to be created.
             if (rPtr.Unique && rPtr.CurNum >= rPtr.MaxNum)
@@ -16335,7 +16374,7 @@ internal class Game
                 {
                     break;
                 }
-                MonsterRace race = SingletonRepository.MonsterRaces[z];
+                MonsterRace race = SingletonRepository.Get<MonsterRace>(z);
                 PlaceMonsterOne(ny, nx, race, slp, charm);
                 if (race.Friends ||
                     rPtr.EscortsGroup)
@@ -16357,7 +16396,7 @@ internal class Game
 
     public bool PlaceMonsterByIndex(int y, int x, int index, bool slp, bool grp, bool charm)
     {
-        return PlaceMonsterAux(y, x, SingletonRepository.MonsterRaces[index], slp, grp, charm);
+        return PlaceMonsterAux(y, x, SingletonRepository.Get<MonsterRace>(index), slp, grp, charm);
     }
 
     public void ReplacePet(int y1, int x1, Monster monster)
@@ -16433,7 +16472,7 @@ internal class Game
         {
             return false;
         }
-        MonsterRace race = SingletonRepository.MonsterRaces[rIdx];
+        MonsterRace race = SingletonRepository.Get<MonsterRace>(rIdx);
         if (!PlaceMonsterAux(y, x, race, false, groupOk, false))
         {
             return false;
@@ -16473,7 +16512,7 @@ internal class Game
         {
             return false;
         }
-        MonsterRace race = SingletonRepository.MonsterRaces[rIdx];
+        MonsterRace race = SingletonRepository.Get<MonsterRace>(rIdx);
         if (!PlaceMonsterAux(y, x, race, false, groupOk, true))
         {
             return false;
@@ -16749,7 +16788,7 @@ internal class Game
 
     private void PlaceMonsterGroup(int y, int x, int rIdx, bool slp, bool charm)
     {
-        MonsterRace rPtr = SingletonRepository.MonsterRaces[rIdx];
+        MonsterRace rPtr = SingletonRepository.Get<MonsterRace>(rIdx);
         int extra = 0;
         int[] hackY = new int[Constants.GroupMax];
         int[] hackX = new int[Constants.GroupMax];

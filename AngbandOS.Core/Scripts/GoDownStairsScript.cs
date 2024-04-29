@@ -35,7 +35,7 @@ internal class GoDownStairsScript : Script, IScript, IRepeatableScript
             isTrapDoor = true;
         }
         // Need to be on a staircase or trapdoor
-        if (tile.FeatureType is not DownStaircaseTile && !isTrapDoor)
+        if (!tile.FeatureType.IsDownStaircase && !isTrapDoor)
         {
             Game.MsgPrint("I see no down staircase here.");
             Game.EnergyUse = 0;

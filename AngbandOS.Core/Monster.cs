@@ -365,7 +365,7 @@ internal class Monster : IItemContainer
             MonsterRace halluRace;
             do
             {
-                halluRace = Game.SingletonRepository.MonsterRaces[Game.DieRoll(Game.SingletonRepository.MonsterRaces.Count - 2)];
+                halluRace = Game.SingletonRepository.Get<MonsterRace>(Game.DieRoll(Game.SingletonRepository.Get<MonsterRace>().Length - 2));
             } while (halluRace.Unique);
             string sillyName = halluRace.FriendlyName;
             name = sillyName;

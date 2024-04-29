@@ -46,7 +46,6 @@ internal class SingletonRepository
     public MartialArtsAttacksRepository MartialArtsAttacks;
     public MoanPlayerAttacksRepository MoanPlayerAttacks;
     public MonsterFiltersRepository MonsterFilters;
-    public MonsterRacesRepository MonsterRaces;
     public MonsterSpellsRepository MonsterSpells;
     public MushroomReadableFlavorsRepository MushroomReadableFlavors;
     public MutationsRepository Mutations;
@@ -342,6 +341,7 @@ internal class SingletonRepository
         AddInterfaceRepository<GameCommand>();
         AddInterfaceRepository<God>();
         AddInterfaceRepository<HelpGroup>();
+        AddInterfaceRepository<MonsterRace>();
 
         // Now load the configuration singletons.
         LoadFromConfiguration<AmuletReadableFlavor, ReadableFlavorDefinition, GenericAmuletReadableFlavor>(Game.Configuration.AmuletReadableFlavors);
@@ -353,6 +353,12 @@ internal class SingletonRepository
         LoadFromConfiguration<GameCommand, GameCommandDefinition, GenericGameCommand>(Game.Configuration.GameCommands);
         LoadFromConfiguration<God, GodDefinition, GenericGod>(Game.Configuration.Gods);
         LoadFromConfiguration<HelpGroup, HelpGroupDefinition, GenericHelpGroup>(Game.Configuration.HelpGroups);
+        LoadFromConfiguration<MonsterRace, MonsterRaceDefinition, GenericMonsterRace>(Game.Configuration.MonsterRaces);
+
+        MonsterRace[] monsterRaces = Get<MonsterRace>();
+        MonsterRace[] sortedMonsterRaces = monsterRaces.OrderBy(_monsterRace => _monsterRace.LevelFound).ToArray();
+        _repositoryDictionary["MonsterRace"].List.Clear();
+        _repositoryDictionary["MonsterRace"].List.AddRange(sortedMonsterRaces);
 
         // Create all of the repositories.  All of the repositories will be empty and have an instance to the save game.
         ArtifactBiases = AddRepository<ArtifactBiasesRepository>(new ArtifactBiasesRepository(Game));
@@ -380,7 +386,6 @@ internal class SingletonRepository
         MartialArtsAttacks = AddRepository<MartialArtsAttacksRepository>(new MartialArtsAttacksRepository(Game));
         MoanPlayerAttacks = AddRepository<MoanPlayerAttacksRepository>(new MoanPlayerAttacksRepository(Game));
         MonsterFilters = AddRepository<MonsterFiltersRepository>(new MonsterFiltersRepository(Game));
-        MonsterRaces = AddRepository<MonsterRacesRepository>(new MonsterRacesRepository(Game));
         MonsterSpells = AddRepository<MonsterSpellsRepository>(new MonsterSpellsRepository(Game));
         MushroomReadableFlavors = AddRepository<MushroomReadableFlavorsRepository>(new MushroomReadableFlavorsRepository(Game));
         Mutations = AddRepository<MutationsRepository>(new MutationsRepository(Game));

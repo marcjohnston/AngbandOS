@@ -59,7 +59,7 @@ internal class OldPolyProjectile : Projectile
                 note = " changes!";
                 dam = 0;
                 Game.DeleteMonsterByIndex(cPtr.MonsterIndex, true);
-                MonsterRace race = Game.SingletonRepository.MonsterRaces[tmp];
+                MonsterRace race = Game.SingletonRepository.Get<MonsterRace>(tmp);
                 Game.PlaceMonsterAux(mPtr.MapY, mPtr.MapX, race, false, false, charm);
                 mPtr = Game.Monsters[cPtr.MonsterIndex];
             }

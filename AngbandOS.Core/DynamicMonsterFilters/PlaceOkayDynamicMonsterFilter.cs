@@ -20,7 +20,7 @@ internal class PlaceOkayDynamicMonsterFilter : IMonsterFilter
 
     public bool Matches(MonsterRace rPtr)
     {
-        MonsterRace pPtr = Game.SingletonRepository.MonsterRaces[_placeMonsterIdx];
+        MonsterRace pPtr = Game.SingletonRepository.Get<MonsterRace>(_placeMonsterIdx);
         if (rPtr.Symbol.Character != pPtr.Symbol.Character)
         {
             return false;

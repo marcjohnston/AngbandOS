@@ -18,6 +18,7 @@ internal class DownStaircaseTile : Tile
     public override bool IsInteresting => true;
     public override bool IsPassable => true;
     public override bool IsPermanent => true;
+    public override bool IsDownStaircase => true;
     public override int MapPriority => 25;
 
     /// <summary>

@@ -26,7 +26,7 @@ internal class SpawnMonsterScript : Script, IScript
         try
         {
             ConsoleTable table = new ConsoleTable("Name", "Character", "Level");
-            MonsterRace[] monsterRaces = Game.SingletonRepository.MonsterRaces.OrderBy(_monsterRace => _monsterRace.FriendlyName).ToArray();
+            MonsterRace[] monsterRaces = Game.SingletonRepository.Get<MonsterRace>().OrderBy(_monsterRace => _monsterRace.FriendlyName).ToArray();
             foreach (MonsterRace monsterRace in monsterRaces)
             {
                 ConsoleTableRow tableRow = table.AddRow();

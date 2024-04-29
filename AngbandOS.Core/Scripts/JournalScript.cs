@@ -196,7 +196,7 @@ internal class JournalScript : Script, IScript, IRepeatableScript, IScriptStore
     {
         foreach (Symbol symbol in Game.SingletonRepository.Symbols)
         {
-            if (symbol.Character == Game.SingletonRepository.MonsterRaces[rIdx].Symbol.Character)
+            if (symbol.Character == Game.SingletonRepository.Get<MonsterRace>(rIdx).Symbol.Character)
             {
                 string name = symbol.Name;
                 string buf = $"Monster Type: {name} ({num + 1} of {of})";
@@ -208,12 +208,12 @@ internal class JournalScript : Script, IScript, IRepeatableScript, IScriptStore
         Game.Screen.Goto(5, 0);
         DisplayMonsterHeader(rIdx);
         Game.Screen.Goto(6, 0);
-        Game.SingletonRepository.MonsterRaces[rIdx].Knowledge.DisplayBody(ColorEnum.Brown);
+        Game.SingletonRepository.Get<MonsterRace>(rIdx).Knowledge.DisplayBody(ColorEnum.Brown);
     }
 
     private void DisplayMonsterHeader(int rIdx)
     {
-        MonsterRace rPtr = Game.SingletonRepository.MonsterRaces[rIdx];
+        MonsterRace rPtr = Game.SingletonRepository.Get<MonsterRace>(rIdx);
         char c1 = rPtr.Symbol.Character;
         ColorEnum a1 = rPtr.Color;
         if (!rPtr.Unique)
@@ -447,14 +447,14 @@ internal class JournalScript : Script, IScript, IRepeatableScript, IScriptStore
 
     private void JournalKills()
     {
-        string[] names = new string[Game.SingletonRepository.MonsterRaces.Count];
-        int[] counts = new int[Game.SingletonRepository.MonsterRaces.Count];
-        bool[] unique = new bool[Game.SingletonRepository.MonsterRaces.Count];
+        string[] names = new string[Game.SingletonRepository.Get<MonsterRace>().Length];
+        int[] counts = new int[Game.SingletonRepository.Get<MonsterRace>().Length];
+        bool[] unique = new bool[Game.SingletonRepository.Get<MonsterRace>().Length];
         int maxCount = 0;
         int total = 0;
-        for (int i = 0; i < Game.SingletonRepository.MonsterRaces.Count - 1; i++)
+        for (int i = 0; i < Game.SingletonRepository.Get<MonsterRace>().Length - 1; i++)
         {
-            MonsterRace monster = Game.SingletonRepository.MonsterRaces[i];
+            MonsterRace monster = Game.SingletonRepository.Get<MonsterRace>(i);
             if (monster.Unique)
             {
                 bool dead = monster.MaxNum == 0;
@@ -565,8 +565,8 @@ internal class JournalScript : Script, IScript, IRepeatableScript, IScriptStore
 
     private void JournalMonsters()
     {
-        int[] seen = new int[Game.SingletonRepository.MonsterRaces.Count];
-        int[] filtered = new int[Game.SingletonRepository.MonsterRaces.Count];
+        int[] seen = new int[Game.SingletonRepository.Get<MonsterRace>().Length];
+        int[] filtered = new int[Game.SingletonRepository.Get<MonsterRace>().Length];
         int maxSeen = 0;
         bool[] filterMask = new bool[256];
         int[] filterLookup = new int[256];
@@ -576,13 +576,13 @@ internal class JournalScript : Script, IScript, IRepeatableScript, IScriptStore
         {
             filterMask[i] = false;
         }
-        for (int i = 1; i < Game.SingletonRepository.MonsterRaces.Count; i++)
+        for (int i = 1; i < Game.SingletonRepository.Get<MonsterRace>().Length; i++)
         {
-            if (Game.SingletonRepository.MonsterRaces[i].Knowledge.RSights != 0 || Game.IsWizard.BoolValue)
+            if (Game.SingletonRepository.Get<MonsterRace>(i).Knowledge.RSights != 0 || Game.IsWizard.BoolValue)
             {
                 seen[maxSeen] = i;
                 maxSeen++;
-                char symbol = Game.SingletonRepository.MonsterRaces[i].Symbol.Character;
+                char symbol = Game.SingletonRepository.Get<MonsterRace>(i).Symbol.Character;
                 if (!filterMask[symbol])
                 {
                     filterMask[symbol] = true;
@@ -618,7 +618,7 @@ internal class JournalScript : Script, IScript, IRepeatableScript, IScriptStore
             int maxFiltered = 0;
             for (int i = 0; i < maxSeen; i++)
             {
-                if (Game.SingletonRepository.MonsterRaces[seen[i]].Symbol.Character == currentFilter)
+                if (Game.SingletonRepository.Get<MonsterRace>(seen[i]).Symbol.Character == currentFilter)
                 {
                     filtered[maxFiltered] = seen[i];
                     maxFiltered++;
@@ -882,12 +882,12 @@ internal class JournalScript : Script, IScript, IRepeatableScript, IScriptStore
 
     private void JournalUniques()
     {
-        string[] names = new string[Game.SingletonRepository.MonsterRaces.Count];
-        bool[] alive = new bool[Game.SingletonRepository.MonsterRaces.Count];
+        string[] names = new string[Game.SingletonRepository.Get<MonsterRace>().Length];
+        bool[] alive = new bool[Game.SingletonRepository.Get<MonsterRace>().Length];
         int maxCount = 0;
-        for (int i = 0; i < Game.SingletonRepository.MonsterRaces.Count - 1; i++)
+        for (int i = 0; i < Game.SingletonRepository.Get<MonsterRace>().Length - 1; i++)
         {
-            MonsterRace monster = Game.SingletonRepository.MonsterRaces[i];
+            MonsterRace monster = Game.SingletonRepository.Get<MonsterRace>(i);
             if (monster.Unique &&
                 (monster.Knowledge.RSights > 0 || Game.IsWizard.BoolValue))
             {

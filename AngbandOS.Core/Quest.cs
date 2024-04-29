@@ -31,7 +31,7 @@ internal class Quest
     public string Describe()
     {
         string buf;
-        MonsterRace rPtr = Game.SingletonRepository.MonsterRaces[RIdx];
+        MonsterRace rPtr = Game.SingletonRepository.Get<MonsterRace>(RIdx);
         string name = rPtr.FriendlyName;
         int qNum = ToKill;
         string dunName = Dungeon.Name;

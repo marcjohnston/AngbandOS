@@ -129,6 +129,21 @@ public class TileDefinition : IPoco
     public virtual bool IsWall { get; set; } = false;
 
     /// <summary>
+    /// The tile is a down staircase.
+    /// </summary>
+    public virtual bool IsDownStaircase { get; set; } = false;
+
+    /// <summary>
+    /// The tile is a up staircase.
+    /// </summary>
+    public virtual bool IsUpStaircase { get; set; } = false;
+
+    /// <summary>
+    /// The tile is grass.
+    /// </summary>
+    public virtual bool IsGrass { get; set; } = false;
+
+    /// <summary>
     /// Returns true, if the tile is water; false, otherwise.  Returns false, by default.  The WaterBorder and the Water tiles both return true.
     /// </summary>
     public virtual bool IsWater { get; set; } = false;

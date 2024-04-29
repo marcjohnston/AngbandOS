@@ -20,4 +20,5 @@ internal class GrassTile : Tile
     public override int MapPriority => 0;
     public override bool RunPast => true;
     public override bool YellowInTorchlight => true;
+    public override bool IsGrass => true;
 }

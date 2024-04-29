@@ -109,11 +109,9 @@ internal class Type6RoomLayout : RoomLayout
                 int _templateRace;
                 do
                 {
-                    _templateRace = Game.DieRoll(Game.SingletonRepository.MonsterRaces.Count - 2);
-                } while (Game.SingletonRepository.MonsterRaces[_templateRace].Unique ||
-                         Game.SingletonRepository.MonsterRaces[_templateRace].Level + Game.DieRoll(5) >
-                         Game.Difficulty + Game.DieRoll(5));
-                getMonNumHook = new SymbolDynamicMonsterFilter(Game, Game.SingletonRepository.MonsterRaces[_templateRace].Symbol.Character);
+                    _templateRace = Game.DieRoll(Game.SingletonRepository.Get<MonsterRace>().Length - 2);
+                } while (Game.SingletonRepository.Get<MonsterRace>(_templateRace).Unique || Game.SingletonRepository.Get<MonsterRace>(_templateRace).Level + Game.DieRoll(5) > Game.Difficulty + Game.DieRoll(5));
+                getMonNumHook = new SymbolDynamicMonsterFilter(Game, Game.SingletonRepository.Get<MonsterRace>(_templateRace).Symbol.Character);
             }
             else
             {
@@ -185,8 +183,8 @@ internal class Type6RoomLayout : RoomLayout
             {
                 int i1 = j;
                 int i2 = j + 1;
-                int p1 = Game.SingletonRepository.MonsterRaces[what[i1]].Level;
-                int p2 = Game.SingletonRepository.MonsterRaces[what[i2]].Level;
+                int p1 = Game.SingletonRepository.Get<MonsterRace>(what[i1]).Level;
+                int p2 = Game.SingletonRepository.Get<MonsterRace>(what[i2]).Level;
                 if (p1 > p2)
                 {
                     tmp = what[i1];

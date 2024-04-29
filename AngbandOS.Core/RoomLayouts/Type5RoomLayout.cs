@@ -96,17 +96,15 @@ internal class Type5RoomLayout : RoomLayout
 
             do
             {
-                _templateRace = Game.DieRoll(Game.SingletonRepository.MonsterRaces.Count - 2);
-            } while (Game.SingletonRepository.MonsterRaces[_templateRace].Unique ||
-                     Game.SingletonRepository.MonsterRaces[_templateRace].Level + Game.DieRoll(5) >
-                     Game.Difficulty + Game.DieRoll(5));
+                _templateRace = Game.DieRoll(Game.SingletonRepository.Get<MonsterRace>().Length - 2);
+            } while (Game.SingletonRepository.Get<MonsterRace>(_templateRace).Unique || Game.SingletonRepository.Get<MonsterRace>(_templateRace).Level + Game.DieRoll(5) > Game.Difficulty + Game.DieRoll(5));
             if (Game.DieRoll(2) != 1 && Game.Difficulty >= 25 + Game.DieRoll(15))
             {
-                getMonNumHook = new SymbolDynamicMonsterFilter(Game, Game.SingletonRepository.MonsterRaces[_templateRace].Symbol.Character);
+                getMonNumHook = new SymbolDynamicMonsterFilter(Game, Game.SingletonRepository.Get<MonsterRace>(_templateRace).Symbol.Character);
             }
             else
             {
-                getMonNumHook = new CloneDynamicMonsterFilter(Game, Game.SingletonRepository.MonsterRaces[_templateRace]);
+                getMonNumHook = new CloneDynamicMonsterFilter(Game, Game.SingletonRepository.Get<MonsterRace>(_templateRace));
             }
         }
         else if (tmp < 25)
@@ -161,7 +159,7 @@ internal class Type5RoomLayout : RoomLayout
             for (x = xval - 9; x <= xval + 9; x++)
             {
                 int rIdx = what[Game.RandomLessThan(64)];
-                MonsterRace race = Game.SingletonRepository.MonsterRaces[rIdx];
+                MonsterRace race = Game.SingletonRepository.Get<MonsterRace>(rIdx);
                 Game.PlaceMonsterAux(y, x, race, false, false, false);
             }
         }

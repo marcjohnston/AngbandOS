@@ -24,7 +24,7 @@ internal class Map
     public void Initialize()
     {
         TrapsDetectedProperty trapsDetectedProperty = (TrapsDetectedProperty)Game.SingletonRepository.Get<Property>(nameof(TrapsDetectedProperty));
-        Tile grassTile = Game.SingletonRepository.Tiles.Get(nameof(GrassTile));
+        Tile grassTile = Game.GetGrassTile;
         Tile dungeonFloorTile = Game.SingletonRepository.Tiles.Get(nameof(DungeonFloorTile));
         Tile towerFloorTile = Game.SingletonRepository.Tiles.Get(nameof(TowerFloorTile));
         Tile nothingTile = Game.SingletonRepository.Tiles.Get(nameof(NothingTile));

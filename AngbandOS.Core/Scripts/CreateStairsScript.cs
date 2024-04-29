@@ -26,19 +26,19 @@ internal class CreateStairsScript : Script, IScript
         Game.DeleteObject(Game.MapY.IntValue, Game.MapX.IntValue);
         if (Game.CurrentDepth <= 0)
         {
-            Game.CaveSetFeat(Game.MapY.IntValue, Game.MapX.IntValue, Game.SingletonRepository.Tiles.Get(nameof(DownStaircaseTile)));
+            Game.CaveSetFeat(Game.MapY.IntValue, Game.MapX.IntValue, Game.DownStaircaseTile);
         }
         else if (Game.IsQuest(Game.CurrentDepth) || Game.CurrentDepth >= Game.CurDungeon.MaxLevel)
         {
-            Game.CaveSetFeat(Game.MapY.IntValue, Game.MapX.IntValue, Game.CurDungeon.Tower ? Game.SingletonRepository.Tiles.Get(nameof(DownStaircaseTile)) : Game.SingletonRepository.Tiles.Get(nameof(UpStaircaseTile)));
+            Game.CaveSetFeat(Game.MapY.IntValue, Game.MapX.IntValue, Game.CurDungeon.Tower ? Game.DownStaircaseTile : Game.UpStaircaseTile);
         }
         else if (Game.RandomLessThan(100) < 50)
         {
-            Game.CaveSetFeat(Game.MapY.IntValue, Game.MapX.IntValue, Game.SingletonRepository.Tiles.Get(nameof(DownStaircaseTile)));
+            Game.CaveSetFeat(Game.MapY.IntValue, Game.MapX.IntValue, Game.DownStaircaseTile);
         }
         else
         {
-            Game.CaveSetFeat(Game.MapY.IntValue, Game.MapX.IntValue, Game.SingletonRepository.Tiles.Get(nameof(UpStaircaseTile)));
+            Game.CaveSetFeat(Game.MapY.IntValue, Game.MapX.IntValue, Game.UpStaircaseTile);
         }
     }
 }
