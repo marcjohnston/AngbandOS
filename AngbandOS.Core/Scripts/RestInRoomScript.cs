@@ -35,7 +35,7 @@ internal class RestInRoomScript : Script, IScript
         Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateHealthFlaggedAction)).Set();
         Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateManaFlaggedAction)).Set();
         Game.SetFood(Constants.PyFoodMax - 1);
-        foreach (Town town in Game.SingletonRepository.Towns)
+        foreach (Town town in Game.SingletonRepository.Get<Town>())
         {
             foreach (Store store in town.Stores)
             {

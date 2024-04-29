@@ -66,7 +66,6 @@ internal class SingletonRepository
     public SpellResistantDetectionsRepository SpellResistantDetections;
     public StoreFactoriesRepository StoreFactories;
     public TalentsRepository Talents;
-    public TownsRepository Towns;
     public UnreadableFlavorSyllablesRepository UnreadableFlavorSyllables;
     public VaultsRepository Vaults;
     public WandReadableFlavorsRepository WandReadableFlavors;
@@ -395,6 +394,7 @@ internal class SingletonRepository
         RegisterRepository<StoreCommand>();
         RegisterRepository<Symbol>();
         RegisterRepository<Tile>();
+        RegisterRepository<Town>();
 
         // This is the load phase for assembly.
         LoadAllAssemblyTypes();
@@ -424,6 +424,7 @@ internal class SingletonRepository
         LoadFromConfiguration<StoreCommand, StoreCommandDefinition, GenericStoreCommand>(Game.Configuration.StoreCommands);
         LoadFromConfiguration<Symbol, SymbolDefinition, GenericSymbol>(Game.Configuration.Symbols);
         LoadFromConfiguration<Tile, TileDefinition, GenericTile>(Game.Configuration.Tiles);
+        LoadFromConfiguration<Town, TownDefinition, GenericTown>(Game.Configuration.Towns);
 
         MonsterRace[] monsterRaces = Get<MonsterRace>();
         MonsterRace[] sortedMonsterRaces = monsterRaces.OrderBy(_monsterRace => _monsterRace.LevelFound).ToArray();
@@ -476,7 +477,6 @@ internal class SingletonRepository
         SpellResistantDetections = AddRepository<SpellResistantDetectionsRepository>(new SpellResistantDetectionsRepository(Game));
         StoreFactories = AddRepository<StoreFactoriesRepository>(new StoreFactoriesRepository(Game));
         Talents = AddRepository<TalentsRepository>(new TalentsRepository(Game));
-        Towns = AddRepository<TownsRepository>(new TownsRepository(Game));
         UnreadableFlavorSyllables = AddRepository<UnreadableFlavorSyllablesRepository>(new UnreadableFlavorSyllablesRepository(Game));
         Vaults = AddRepository<VaultsRepository>(new VaultsRepository(Game));
         WandReadableFlavors = AddRepository<WandReadableFlavorsRepository>(new WandReadableFlavorsRepository(Game));

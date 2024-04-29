@@ -1888,7 +1888,7 @@ internal class Game
         CurrentDepth = 0;
         if (StartupTownName != null)
         {
-            Town? startupTown = SingletonRepository.Towns.Get(StartupTownName);
+            Town? startupTown = SingletonRepository.Get<Town>(StartupTownName);
             if (startupTown == null)
             {
                 throw new Exception("The configured startup town does not exist.");
@@ -1897,11 +1897,18 @@ internal class Game
         }
         else
         {
-            CurTown = SingletonRepository.Towns.ToWeightedRandom().ChooseOrDefault();
-            while (!CurTown.AllowStartupTown)
+            Town[] townsAllowedToStartup = SingletonRepository.Get<Town>().Where(_town => _town.AllowStartupTown).ToArray();
+            if (townsAllowedToStartup.Length == 0)
             {
-                CurTown = SingletonRepository.Towns[RandomLessThan(SingletonRepository.Towns.Count)];
+                throw new Exception("There are no towns marked for startup");
             }
+            WeightedRandom<Town> weightedRandomOfTownsAllowedToStartup = new WeightedRandom<Town>(this, townsAllowedToStartup);
+            Town? town = weightedRandomOfTownsAllowedToStartup.ChooseOrDefault();
+            if (town == null)
+            {
+                throw new Exception("No startup town.");
+            }
+            CurTown = town;
         }
         CurDungeon = CurTown.Dungeon;
         RecallDungeon = CurDungeon;
@@ -2155,8 +2162,8 @@ internal class Game
             string buffer;
             if (dungeon.Visited)
             {
-                buffer = y < SingletonRepository.Towns.Count
-                    ? $"{dungeon.MapSymbol} = {SingletonRepository.Towns[y].Name} (L:{depth}, D:{difficulty}, Q:{activeQuestCount})"
+                buffer = y < SingletonRepository.Get<Town>().Length
+                    ? $"{dungeon.MapSymbol} = {SingletonRepository.Get<Town>(y).Name} (L:{depth}, D:{difficulty}, Q:{activeQuestCount})"
                     : $"{dungeon.MapSymbol} = {dungeon.Name} (L:{depth}, D:{difficulty}, Q:{activeQuestCount})";
             }
             else
@@ -2164,7 +2171,7 @@ internal class Game
                 buffer = $"? = {dungeon.Name} (L:{depth}, D:{difficulty}, Q:{activeQuestCount})";
             }
             ColorEnum keyAttr = ColorEnum.Brown;
-            if (y < SingletonRepository.Towns.Count)
+            if (y < SingletonRepository.Get<Town>().Length)
             {
                 keyAttr = ColorEnum.Grey;
             }
@@ -2942,7 +2949,7 @@ internal class Game
         }
 
         // Initialize the towns first and remove the associated dungeons from the list.
-        foreach (Town town in SingletonRepository.Towns)
+        foreach (Town town in SingletonRepository.Get<Town>())
         {
             town.Initialize();
 
@@ -3006,12 +3013,12 @@ internal class Game
         }
 
         // Create walkway paths between the towns.
-        for (int i = 0; i < SingletonRepository.Towns.Count - 1; i++)
+        for (int i = 0; i < SingletonRepository.Get<Town>().Length - 1; i++)
         {
-            int curX = SingletonRepository.Towns[i].X;
-            int curY = SingletonRepository.Towns[i].Y;
-            int destX = SingletonRepository.Towns[i + 1].X;
-            int destY = SingletonRepository.Towns[i + 1].Y;
+            int curX = SingletonRepository.Get<Town>(i).X;
+            int curY = SingletonRepository.Get<Town>(i).Y;
+            int destX = SingletonRepository.Get<Town>(i + 1).X;
+            int destY = SingletonRepository.Get<Town>(i + 1).Y;
             while (true)
             {
                 int xDisp = destX - curX;
@@ -3680,7 +3687,7 @@ internal class Game
             DecayFavour();
             SingletonRepository.FlaggedActions.Get(nameof(UpdateHealthFlaggedAction)).Set();
             SingletonRepository.FlaggedActions.Get(nameof(UpdateManaFlaggedAction)).Set();
-            foreach (Town town in SingletonRepository.Towns)
+            foreach (Town town in SingletonRepository.Get<Town>())
             {
                 foreach (Store store in town.Stores)
                 {
@@ -3689,9 +3696,9 @@ internal class Game
             }
             if (RandomLessThan(Constants.StoreShuffle) == 0)
             {
-                int town = RandomLessThan(SingletonRepository.Towns.Count);
+                int town = RandomLessThan(SingletonRepository.Get<Town>().Length);
                 int store = RandomLessThan(12);
-                SingletonRepository.Towns[town].Stores[store].StoreShuffle();
+                SingletonRepository.Get<Town>(town).Stores[store].StoreShuffle();
             }
         }
         if (!IsTurnTen)

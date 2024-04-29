@@ -37,7 +37,7 @@ internal class HireAnEscortScript : Script, IScript, IScriptStore, ISuccessfulSc
     public bool ExecuteSuccessfulScript()
     {
         var validTowns = new Dictionary<char, Town>();
-        foreach (Town town in Game.SingletonRepository.Towns)
+        foreach (Town town in Game.SingletonRepository.Get<Town>())
         {
             if (town.Visited && town.Name != Game.CurTown.Name && town.CanBeEscortedHere)
             {
