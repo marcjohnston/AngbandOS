@@ -61,7 +61,6 @@ internal class SingletonRepository
     public ShopkeeperBargainCommentsRepository ShopkeeperBargainComments;
     public ShopkeeperGoodCommentsRepository ShopkeeperGoodComments;
     public ShopkeeperLessThanGuessCommentsRepository ShopkeeperLessThanGuessComments;
-    public ShopkeepersRepository Shopkeepers;
     public ShopkeeperWorthlessCommentsRepository ShopkeeperWorthlessComments;
     public SingingPlayerAttacksRepository SingingPlayerAttacks;
     public SpellResistantDetectionsRepository SpellResistantDetections;
@@ -395,6 +394,7 @@ internal class SingletonRepository
         RegisterRepository<RingReadableFlavor>();
         RegisterRepository<RodReadableFlavor>();
         RegisterRepository<ScrollReadableFlavor>();
+        RegisterRepository<Shopkeeper>();
 
         // This is the load phase for assembly.
         LoadAllAssemblyTypes();
@@ -418,6 +418,7 @@ internal class SingletonRepository
         LoadFromConfiguration<RingReadableFlavor, ReadableFlavorDefinition, GenericRingReadableFlavor>(Game.Configuration.RingReadableFlavors);
         LoadFromConfiguration<RodReadableFlavor, ReadableFlavorDefinition, GenericRodReadableFlavor>(Game.Configuration.RodReadableFlavors);
         LoadFromConfiguration<ScrollReadableFlavor, ReadableFlavorDefinition, GenericScrollReadableFlavor>(Game.Configuration.ScrollReadableFlavors);
+        LoadFromConfiguration<Shopkeeper, ShopkeeperDefinition, GenericShopkeeper>(Game.Configuration.Shopkeepers);
 
         MonsterRace[] monsterRaces = Get<MonsterRace>();
         MonsterRace[] sortedMonsterRaces = monsterRaces.OrderBy(_monsterRace => _monsterRace.LevelFound).ToArray();
@@ -465,7 +466,6 @@ internal class SingletonRepository
         ShopkeeperBargainComments = AddRepository<ShopkeeperBargainCommentsRepository>(new ShopkeeperBargainCommentsRepository(Game));
         ShopkeeperGoodComments = AddRepository<ShopkeeperGoodCommentsRepository>(new ShopkeeperGoodCommentsRepository(Game));
         ShopkeeperLessThanGuessComments = AddRepository<ShopkeeperLessThanGuessCommentsRepository>(new ShopkeeperLessThanGuessCommentsRepository(Game));
-        Shopkeepers = AddRepository<ShopkeepersRepository>(new ShopkeepersRepository(Game));
         ShopkeeperWorthlessComments = AddRepository<ShopkeeperWorthlessCommentsRepository>(new ShopkeeperWorthlessCommentsRepository(Game));
         SingingPlayerAttacks = AddRepository<SingingPlayerAttacksRepository>(new SingingPlayerAttacksRepository(Game));
         SpellResistantDetections = AddRepository<SpellResistantDetectionsRepository>(new SpellResistantDetectionsRepository(Game));

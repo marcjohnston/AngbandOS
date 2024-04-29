@@ -86,12 +86,7 @@ internal abstract class StoreFactory : IItemFilter, IGetKey
         AdvertisedStoreCommand5 = AdvertisedStoreCommand5Name == null ? null : Game.SingletonRepository.StoreCommands.Get(AdvertisedStoreCommand5Name);
 
         // Bind the store owners.
-        List<Shopkeeper> shopkeepersList = new();
-        foreach (string shopkeeperName in ShopkeeperNames)
-        {
-            shopkeepersList.Add(Game.SingletonRepository.Shopkeepers.Get(shopkeeperName));
-        }
-        Shopkeepers = shopkeepersList.ToArray();
+        Shopkeepers = Game.SingletonRepository.Get<Shopkeeper>(ShopkeeperNames);
 
         // Bind the symbol.
         Tile = Game.SingletonRepository.Tiles.Get(TileName);
