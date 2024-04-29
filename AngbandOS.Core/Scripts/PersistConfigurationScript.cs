@@ -100,7 +100,7 @@ internal class PersistConfigurationScript : Script, IScript
             Game.SingletonRepository.PersistEntities<Tile>();
             Game.SingletonRepository.PersistEntities<Timer>();
             Game.SingletonRepository.PersistEntities<Town>();
-            Game.SingletonRepository.Vaults.PersistEntities();
+            Game.SingletonRepository.PersistEntities<Vault>();
             Game.SingletonRepository.WandReadableFlavors.PersistEntities();
             Game.SingletonRepository.WizardCommands.PersistEntities();
         }

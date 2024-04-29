@@ -19,12 +19,12 @@ internal class Type7RoomLayout : RoomLayout
     public override int Level => 10;
     public override void Build(int yval, int xval)
     {
-        Vault vPtr = Game.SingletonRepository.Vaults[0];
+        Vault vPtr = Game.SingletonRepository.Get<Vault>(0);
         int dummy = 0;
         while (dummy < Game.SafeMaxAttempts)
         {
             dummy++;
-            vPtr = Game.SingletonRepository.Vaults.ToWeightedRandom().ChooseOrDefault();
+            vPtr = Game.SingletonRepository.ToWeightedRandom<Vault>().ChooseOrDefault();
             if (vPtr.Category == 7)
             {
                 var minX = xval - (vPtr.Width / 2);

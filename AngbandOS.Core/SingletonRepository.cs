@@ -67,7 +67,6 @@ internal class SingletonRepository
     public StoreFactoriesRepository StoreFactories;
     public TalentsRepository Talents;
     public UnreadableFlavorSyllablesRepository UnreadableFlavorSyllables;
-    public VaultsRepository Vaults;
     public WandReadableFlavorsRepository WandReadableFlavors;
     public WizardCommandsRepository WizardCommands;
     public WorshipPlayerAttacksRepository WorshipPlayerAttacks;
@@ -395,6 +394,7 @@ internal class SingletonRepository
         RegisterRepository<Symbol>();
         RegisterRepository<Tile>();
         RegisterRepository<Town>();
+        RegisterRepository<Vault>();
 
         // This is the load phase for assembly.
         LoadAllAssemblyTypes();
@@ -425,6 +425,7 @@ internal class SingletonRepository
         LoadFromConfiguration<Symbol, SymbolDefinition, GenericSymbol>(Game.Configuration.Symbols);
         LoadFromConfiguration<Tile, TileDefinition, GenericTile>(Game.Configuration.Tiles);
         LoadFromConfiguration<Town, TownDefinition, GenericTown>(Game.Configuration.Towns);
+        LoadFromConfiguration<Vault, VaultDefinition, GenericVault>(Game.Configuration.Vaults);
 
         MonsterRace[] monsterRaces = Get<MonsterRace>();
         MonsterRace[] sortedMonsterRaces = monsterRaces.OrderBy(_monsterRace => _monsterRace.LevelFound).ToArray();
@@ -478,7 +479,6 @@ internal class SingletonRepository
         StoreFactories = AddRepository<StoreFactoriesRepository>(new StoreFactoriesRepository(Game));
         Talents = AddRepository<TalentsRepository>(new TalentsRepository(Game));
         UnreadableFlavorSyllables = AddRepository<UnreadableFlavorSyllablesRepository>(new UnreadableFlavorSyllablesRepository(Game));
-        Vaults = AddRepository<VaultsRepository>(new VaultsRepository(Game));
         WandReadableFlavors = AddRepository<WandReadableFlavorsRepository>(new WandReadableFlavorsRepository(Game));
         WizardCommands = AddRepository<WizardCommandsRepository>(new WizardCommandsRepository(Game));
         WorshipPlayerAttacks = AddRepository<WorshipPlayerAttacksRepository>(new WorshipPlayerAttacksRepository(Game));

@@ -19,12 +19,12 @@ internal class Type8RoomLayout : RoomLayout
     public override int Level => 1;
     public override void Build(int yval, int xval)
     {
-        Vault vault = Game.SingletonRepository.Vaults[0];
+        Vault vault = Game.SingletonRepository.Get<Vault>(0);
         int dummy = 0;
         while (dummy < Game.SafeMaxAttempts)
         {
             dummy++;
-            vault = Game.SingletonRepository.Vaults.ToWeightedRandom().ChooseOrDefault();
+            vault = Game.SingletonRepository.ToWeightedRandom<Vault>().ChooseOrDefault();
             if (vault.Category == 8)
             {
                 var minX = xval - (vault.Width / 2);
