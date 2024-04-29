@@ -341,6 +341,7 @@ internal class SingletonRepository
         AddInterfaceRepository<Dungeon>();
         AddInterfaceRepository<GameCommand>();
         AddInterfaceRepository<God>();
+        AddInterfaceRepository<HelpGroup>();
 
         // Now load the configuration singletons.
         LoadFromConfiguration<AmuletReadableFlavor, ReadableFlavorDefinition, GenericAmuletReadableFlavor>(Game.Configuration.AmuletReadableFlavors);
@@ -351,6 +352,7 @@ internal class SingletonRepository
         LoadFromConfiguration<Dungeon, DungeonDefinition, GenericDungeon>(Game.Configuration.Dungeons);
         LoadFromConfiguration<GameCommand, GameCommandDefinition, GenericGameCommand>(Game.Configuration.GameCommands);
         LoadFromConfiguration<God, GodDefinition, GenericGod>(Game.Configuration.Gods);
+        LoadFromConfiguration<HelpGroup, HelpGroupDefinition, GenericHelpGroup>(Game.Configuration.HelpGroups);
 
         // Create all of the repositories.  All of the repositories will be empty and have an instance to the save game.
         ArtifactBiases = AddRepository<ArtifactBiasesRepository>(new ArtifactBiasesRepository(Game));
@@ -367,7 +369,6 @@ internal class SingletonRepository
         FunnyComments = AddRepository<FunnyCommentsRepository>(new FunnyCommentsRepository(Game));
         FunnyDescriptions = AddRepository<FunnyDescriptionsRepository>(new FunnyDescriptionsRepository(Game));
         Genders = AddRepository<GendersRepository>(new GendersRepository(Game));
-        HelpGroups = AddRepository<HelpGroupsRepository>(new HelpGroupsRepository(Game));
         HorrificDescriptions = AddRepository<HorrificDescriptionsRepository>(new HorrificDescriptionsRepository(Game));
         InsultPlayerAttacks = AddRepository<InsultPlayerAttacksRepository>(new InsultPlayerAttacksRepository(Game));
         InventorySlots = AddRepository<InventorySlotsRepository>(new InventorySlotsRepository(Game));

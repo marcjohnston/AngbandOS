@@ -65,7 +65,7 @@ internal class PersistConfigurationScript : Script, IScript
             Game.SingletonRepository.PersistEntities<GameCommand>();
             Game.SingletonRepository.Genders.PersistEntities();
             Game.SingletonRepository.PersistEntities<God>();
-            Game.SingletonRepository.HelpGroups.PersistEntities();
+            Game.SingletonRepository.PersistEntities<HelpGroup>();
             Game.SingletonRepository.InventorySlots.PersistEntities();
             Game.SingletonRepository.ItemClasses.PersistEntities();
             Game.SingletonRepository.ItemFactories.PersistEntities();
