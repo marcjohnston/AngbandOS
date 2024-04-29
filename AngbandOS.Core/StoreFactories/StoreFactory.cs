@@ -79,11 +79,11 @@ internal abstract class StoreFactory : IItemFilter, IGetKey
     public void Bind()
     {
         // Bind the advertised commands.
-        AdvertisedStoreCommand1 = AdvertisedStoreCommand1Name == null ? null : Game.SingletonRepository.StoreCommands.Get(AdvertisedStoreCommand1Name);
-        AdvertisedStoreCommand2 = AdvertisedStoreCommand2Name == null ? null : Game.SingletonRepository.StoreCommands.Get(AdvertisedStoreCommand2Name);
-        AdvertisedStoreCommand3 = AdvertisedStoreCommand3Name == null ? null : Game.SingletonRepository.StoreCommands.Get(AdvertisedStoreCommand3Name);
-        AdvertisedStoreCommand4 = AdvertisedStoreCommand4Name == null ? null : Game.SingletonRepository.StoreCommands.Get(AdvertisedStoreCommand4Name);
-        AdvertisedStoreCommand5 = AdvertisedStoreCommand5Name == null ? null : Game.SingletonRepository.StoreCommands.Get(AdvertisedStoreCommand5Name);
+        AdvertisedStoreCommand1 = AdvertisedStoreCommand1Name == null ? null : Game.SingletonRepository.Get<StoreCommand>(AdvertisedStoreCommand1Name);
+        AdvertisedStoreCommand2 = AdvertisedStoreCommand2Name == null ? null : Game.SingletonRepository.Get<StoreCommand>(AdvertisedStoreCommand2Name);
+        AdvertisedStoreCommand3 = AdvertisedStoreCommand3Name == null ? null : Game.SingletonRepository.Get<StoreCommand>(AdvertisedStoreCommand3Name);
+        AdvertisedStoreCommand4 = AdvertisedStoreCommand4Name == null ? null : Game.SingletonRepository.Get<StoreCommand>(AdvertisedStoreCommand4Name);
+        AdvertisedStoreCommand5 = AdvertisedStoreCommand5Name == null ? null : Game.SingletonRepository.Get<StoreCommand>(AdvertisedStoreCommand5Name);
 
         // Bind the store owners.
         Shopkeepers = Game.SingletonRepository.Get<Shopkeeper>(ShopkeeperNames);

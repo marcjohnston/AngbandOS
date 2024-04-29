@@ -64,7 +64,6 @@ internal class SingletonRepository
     public ShopkeeperWorthlessCommentsRepository ShopkeeperWorthlessComments;
     public SingingPlayerAttacksRepository SingingPlayerAttacks;
     public SpellResistantDetectionsRepository SpellResistantDetections;
-    public StoreCommandsRepository StoreCommands;
     public StoreFactoriesRepository StoreFactories;
     public SymbolsRepository Symbols;
     public TalentsRepository Talents;
@@ -395,6 +394,7 @@ internal class SingletonRepository
         RegisterRepository<Shopkeeper>();
         RegisterRepository<Spell>();
         RegisterRepository<StaffReadableFlavor>();
+        RegisterRepository<StoreCommand>();
 
         // This is the load phase for assembly.
         LoadAllAssemblyTypes();
@@ -421,6 +421,7 @@ internal class SingletonRepository
         LoadFromConfiguration<Shopkeeper, ShopkeeperDefinition, GenericShopkeeper>(Game.Configuration.Shopkeepers);
         LoadFromConfiguration<Spell, SpellDefinition, GenericSpell>(Game.Configuration.Spells);
         LoadFromConfiguration<StaffReadableFlavor, ReadableFlavorDefinition, GenericStaffReadableFlavor>(Game.Configuration.StaffReadableFlavors);
+        LoadFromConfiguration<StoreCommand, StoreCommandDefinition, GenericStoreCommand>(Game.Configuration.StoreCommands);
 
         MonsterRace[] monsterRaces = Get<MonsterRace>();
         MonsterRace[] sortedMonsterRaces = monsterRaces.OrderBy(_monsterRace => _monsterRace.LevelFound).ToArray();
@@ -471,7 +472,6 @@ internal class SingletonRepository
         ShopkeeperWorthlessComments = AddRepository<ShopkeeperWorthlessCommentsRepository>(new ShopkeeperWorthlessCommentsRepository(Game));
         SingingPlayerAttacks = AddRepository<SingingPlayerAttacksRepository>(new SingingPlayerAttacksRepository(Game));
         SpellResistantDetections = AddRepository<SpellResistantDetectionsRepository>(new SpellResistantDetectionsRepository(Game));
-        StoreCommands = AddRepository<StoreCommandsRepository>(new StoreCommandsRepository(Game));
         StoreFactories = AddRepository<StoreFactoriesRepository>(new StoreFactoriesRepository(Game));
         Symbols = AddRepository<SymbolsRepository>(new SymbolsRepository(Game));
         Talents = AddRepository<TalentsRepository>(new TalentsRepository(Game));

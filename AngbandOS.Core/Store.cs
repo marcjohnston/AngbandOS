@@ -333,7 +333,7 @@ internal class Store
         bool matchingCommandFound = false;
 
         // Process commands
-        foreach (StoreCommand command in Game.SingletonRepository.StoreCommands)
+        foreach (StoreCommand command in Game.SingletonRepository.Get<StoreCommand>())
         {
             // TODO: The IF statement below can be converted into a dictionary with the applicable object 
             // attached for improved performance.
