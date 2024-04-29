@@ -2364,7 +2364,7 @@ internal sealed class Item : IComparable<Item>
         {
             return false;
         }
-        foreach (FixedArtifact aPtr in Game.SingletonRepository.FixedArtifacts)
+        foreach (FixedArtifact aPtr in Game.SingletonRepository.Get<FixedArtifact>())
         {
             if (aPtr.HasOwnType)
             {

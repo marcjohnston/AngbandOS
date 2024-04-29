@@ -19,18 +19,18 @@ internal class CreateNamedArtifactScript : Script, IScript
     public void ExecuteScript()
     {
         int aIdx = Game.CommandArgument;
-        if (aIdx < 0 || aIdx >= Game.SingletonRepository.FixedArtifacts.Count)
+        if (aIdx < 0 || aIdx >= Game.SingletonRepository.Get<FixedArtifact>().Length)
         {
             return;
         }
-        FixedArtifact aPtr = Game.SingletonRepository.FixedArtifacts[aIdx];
+        FixedArtifact aPtr = Game.SingletonRepository.Get<FixedArtifact>(aIdx);
         if (aPtr.CurNum > 0)
         {
             return;
         }
         aPtr.CurNum = 1;
         Item qPtr = aPtr.BaseItemFactory.CreateItem();
-        qPtr.FixedArtifact = Game.SingletonRepository.FixedArtifacts[aIdx];
+        qPtr.FixedArtifact = Game.SingletonRepository.Get<FixedArtifact>(aIdx);
         qPtr.TypeSpecificValue = aPtr.Pval;
         qPtr.BaseArmorClass = aPtr.Ac;
         qPtr.DamageDice = aPtr.Dd;

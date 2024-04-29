@@ -36,7 +36,6 @@ internal class SingletonRepository
     public UnreadableFlavorSyllablesRepository UnreadableFlavorSyllables;
     public WorshipPlayerAttacksRepository WorshipPlayerAttacks;
 
-    public FixedArtifactsRepository FixedArtifacts;
     public FlaggedActionsRepository FlaggedActions;
     public FormsRepository Forms;
     public GendersRepository Genders;
@@ -465,7 +464,6 @@ internal class SingletonRepository
 
         // Create all of the repositories.  All of the repositories will be empty and have an instance to the save game.
         ElvishText = AddRepository<ElvishTextRepository>(new ElvishTextRepository(Game));
-        FixedArtifacts = AddRepository<FixedArtifactsRepository>(new FixedArtifactsRepository(Game));
         FlaggedActions = AddRepository<FlaggedActionsRepository>(new FlaggedActionsRepository(Game));
         Forms = AddRepository<FormsRepository>(new FormsRepository(Game));
         FunnyComments = AddRepository<FunnyCommentsRepository>(new FunnyCommentsRepository(Game));

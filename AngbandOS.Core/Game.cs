@@ -1537,7 +1537,7 @@ internal class Game
 
     private Item? MakeFixedArtifact()
     {
-        foreach (FixedArtifact aPtr in SingletonRepository.FixedArtifacts)
+        foreach (FixedArtifact aPtr in SingletonRepository.Get<FixedArtifact>())
         {
             if (!aPtr.HasOwnType)
             {
@@ -1807,7 +1807,7 @@ internal class Game
         }
         WeightCarried = 0;
 
-        foreach (FixedArtifact aPtr in SingletonRepository.FixedArtifacts)
+        foreach (FixedArtifact aPtr in SingletonRepository.Get<FixedArtifact>())
         {
             aPtr.CurNum = 0;
         }
