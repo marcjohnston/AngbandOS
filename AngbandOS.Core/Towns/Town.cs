@@ -116,6 +116,9 @@ internal abstract class Town : IGetKey
             HousePrice = HousePrice,
             Name = Name,
             Char = Char,
+            AllowStartupTown = AllowStartupTown,
+            CanBeEscortedHere = CanBeEscortedHere,
+            UnusedStoreLotsAreGraveyards = UnusedStoreLotsAreGraveyards,
             StoreFactoryNames = Stores.Select(_store => _store.StoreFactory.Key).ToArray(),
         };
         return JsonSerializer.Serialize<TownDefinition>(townDefinition);

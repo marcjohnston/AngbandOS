@@ -47,7 +47,6 @@ internal class SingletonRepository
     public MoanPlayerAttacksRepository MoanPlayerAttacks;
     public MonsterFiltersRepository MonsterFilters;
     public MonsterSpellsRepository MonsterSpells;
-    public MushroomReadableFlavorsRepository MushroomReadableFlavors;
     public MutationsRepository Mutations;
     public PatronsRepository Patrons;
     public PluralsRepository Plurals;
@@ -167,6 +166,24 @@ internal class SingletonRepository
             throw new Exception($"The singleton {typeof(T).Name}.{key} does not exist.");
         }
         return singleton;
+    }
+
+    public T? TryGet<T>(string key) where T : class
+    {
+        string typeName = typeof(T).Name;
+
+        // Check to see if the dictionary has a dictionary for this type of object.
+        if (!_repositoryDictionary.TryGetValue(typeName, out GenericRepository? genericRepository))
+        {
+            throw new Exception($"The {typeof(T).Name} singleton interface was not registered.");
+        }
+
+        // Retrieve the singleton by key name.
+        if (!genericRepository.Dictionary.TryGetValue(key, out object? singleton))
+        {
+            return null;
+        }
+        return (T)singleton;
     }
 
     public T Get<T>(int index) where T : class
@@ -339,6 +356,8 @@ internal class SingletonRepository
         AddInterfaceRepository<God>();
         AddInterfaceRepository<HelpGroup>();
         AddInterfaceRepository<MonsterRace>();
+        AddInterfaceRepository<MushroomReadableFlavor>();
+
         // This is the load phase for assembly.
         LoadAllAssemblyTypes();
 
@@ -354,6 +373,7 @@ internal class SingletonRepository
         LoadFromConfiguration<God, GodDefinition, GenericGod>(Game.Configuration.Gods);
         LoadFromConfiguration<HelpGroup, HelpGroupDefinition, GenericHelpGroup>(Game.Configuration.HelpGroups);
         LoadFromConfiguration<MonsterRace, MonsterRaceDefinition, GenericMonsterRace>(Game.Configuration.MonsterRaces);
+        LoadFromConfiguration<MushroomReadableFlavor, ReadableFlavorDefinition, GenericMushroomReadableFlavor>(Game.Configuration.MushroomReadableFlavors);
 
         MonsterRace[] monsterRaces = Get<MonsterRace>();
         MonsterRace[] sortedMonsterRaces = monsterRaces.OrderBy(_monsterRace => _monsterRace.LevelFound).ToArray();
@@ -387,10 +407,8 @@ internal class SingletonRepository
         MoanPlayerAttacks = AddRepository<MoanPlayerAttacksRepository>(new MoanPlayerAttacksRepository(Game));
         MonsterFilters = AddRepository<MonsterFiltersRepository>(new MonsterFiltersRepository(Game));
         MonsterSpells = AddRepository<MonsterSpellsRepository>(new MonsterSpellsRepository(Game));
-        MushroomReadableFlavors = AddRepository<MushroomReadableFlavorsRepository>(new MushroomReadableFlavorsRepository(Game));
         Mutations = AddRepository<MutationsRepository>(new MutationsRepository(Game));
         Patrons = AddRepository<PatronsRepository>(new PatronsRepository(Game));
-        Plurals = AddRepository<PluralsRepository>(new PluralsRepository(Game));
         PotionReadableFlavors = AddRepository<PotionReadableFlavorsRepository>(new PotionReadableFlavorsRepository(Game));
         Powers = AddRepository<PowersRepository>(new PowersRepository(Game));
         ProjectileGraphics = AddRepository<ProjectileGraphicsRepository>(new ProjectileGraphicsRepository(Game));

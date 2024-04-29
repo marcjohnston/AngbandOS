@@ -28,7 +28,7 @@ internal abstract class MushroomFoodItemFactory : FoodItemFactory, IFlavorFactor
     /// <summary>
     /// Returns the mushroom flavors repository because mushrooms have flavors that need to be identified.
     /// </summary>
-    public IEnumerable<Flavor>? GetFlavorRepository() => Game.SingletonRepository.MushroomReadableFlavors;
+    public IEnumerable<Flavor>? GetFlavorRepository() => Game.SingletonRepository.Get<MushroomReadableFlavor>();
 
     /// <inheritdoc/>
     public Flavor Flavor { get; set; }

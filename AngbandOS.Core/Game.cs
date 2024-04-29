@@ -17434,7 +17434,7 @@ internal class Game
 
     public string Pluralize(string singular)
     {
-        Plural? plural = SingletonRepository.Plurals.TryGet(singular);
+        Plural? plural = SingletonRepository.TryGet<Plural>(singular);
         if (plural != null)
         {
             return plural.PluralForm;

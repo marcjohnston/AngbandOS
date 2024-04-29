@@ -73,10 +73,10 @@ internal class PersistConfigurationScript : Script, IScript
             Game.SingletonRepository.MonsterFilters.PersistEntities();
             Game.SingletonRepository.PersistEntities<MonsterRace>();
             Game.SingletonRepository.MonsterSpells.PersistEntities();
-            Game.SingletonRepository.MushroomReadableFlavors.PersistEntities();
+            Game.SingletonRepository.PersistEntities<MushroomReadableFlavor>();
             Game.SingletonRepository.Mutations.PersistEntities();
             Game.SingletonRepository.Patrons.PersistEntities();
-            Game.SingletonRepository.Plurals.PersistEntities();
+            Game.SingletonRepository.PersistEntities<Plural>();
             Game.SingletonRepository.PotionReadableFlavors.PersistEntities();
             Game.SingletonRepository.ProjectileGraphics.PersistEntities();
             Game.SingletonRepository.Projectiles.PersistEntities();
