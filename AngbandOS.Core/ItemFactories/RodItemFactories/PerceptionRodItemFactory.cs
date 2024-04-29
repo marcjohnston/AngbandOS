@@ -13,7 +13,7 @@ internal class PerceptionRodItemFactory : RodItemFactory
     private PerceptionRodItemFactory(Game game) : base(game) { } // This object is a singleton.
 
     public override bool RequiresAiming => false;
-    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(MinusSignSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(MinusSignSymbol));
     public override string Name => "Perception";
 
     public override int[] Chance => new int[] { 8, 8, 0, 0 };

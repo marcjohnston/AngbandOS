@@ -12,7 +12,7 @@ internal class CreateRandomArtifactScrollItemFactory : ScrollItemFactory
 {
     private CreateRandomArtifactScrollItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(QuestionMarkSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(QuestionMarkSymbol));
     public override string Name => "Artifact Creation";
 
     public override int[] Chance => new int[] { 16, 0, 0, 0 };

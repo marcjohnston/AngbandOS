@@ -12,7 +12,7 @@ internal class MinorMagicksFolkBookItemFactory : FolkBookItemFactory
 {
     private MinorMagicksFolkBookItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(QuestionMarkSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(QuestionMarkSymbol));
     public override ColorEnum Color => ColorEnum.BrightPurple;
     public override string Name => "[Minor Magicks]";
 

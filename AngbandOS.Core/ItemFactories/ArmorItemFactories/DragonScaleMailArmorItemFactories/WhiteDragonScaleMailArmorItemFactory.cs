@@ -23,7 +23,7 @@ internal class WhiteDragonScaleMailArmorItemFactory : DragonScaleMailArmorItemFa
         item.RechargeTimeLeft = Game.RandomLessThan(450) + 450;
     }
     public override string? DescribeActivationEffect => "breathe frost (110) every 450+d450 turns";
-    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(OpenBraceSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(OpenBraceSymbol));
     public override string Name => "White Dragon Scale Mail";
 
     public override int Ac => 30;

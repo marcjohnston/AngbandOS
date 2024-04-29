@@ -12,7 +12,7 @@ internal class SpecialEnchantWeaponScrollItemFactory : ScrollItemFactory
 {
     private SpecialEnchantWeaponScrollItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(QuestionMarkSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(QuestionMarkSymbol));
     public override string Name => "*Enchant Weapon*";
 
     public override int[] Chance => new int[] { 1, 0, 0, 0 };

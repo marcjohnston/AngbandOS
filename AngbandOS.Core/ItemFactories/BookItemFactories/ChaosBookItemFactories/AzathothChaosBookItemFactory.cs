@@ -17,7 +17,7 @@ internal class AzathothChaosBookItemFactory : ChaosBookItemFactory
     /// Returns a divisor of 1 because this is the most powerful book for this realm of magic.  Destroying this book provides the most experience.
     /// </summary>
     public override int ExperienceGainDivisorForDestroying => 1;
-    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(QuestionMarkSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(QuestionMarkSymbol));
     public override ColorEnum Color => ColorEnum.Red;
     public override string Name => "[The Book of Azathoth]";
 

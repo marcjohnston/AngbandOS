@@ -15,7 +15,7 @@ internal class WeaponDefenderRareItem : RareItem
     {
         item.RandomPower = Game.SingletonRepository.Powers.ToWeightedRandom(_power => _power.IsSustain == true).Choose();
     }
-    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(VerticalBarSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(VerticalBarSymbol));
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "Weapon (Defender)";
     public override int Cost => 15000;

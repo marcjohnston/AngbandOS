@@ -88,7 +88,7 @@ internal abstract class Tile : IGetKey
         OnJammedTile = OnJammedTileName == null ? null : Game.SingletonRepository.Tiles.Get(OnJammedTileName);
         VisibleTreasureForTile = VisibleTreasureForTileName == null ? null : Game.SingletonRepository.Tiles.Get(VisibleTreasureForTileName);
         AlterAction = AlterActionName == null ? null : Game.SingletonRepository.Get<AlterAction>(AlterActionName);
-        Symbol = Game.SingletonRepository.Symbols.Get(SymbolName);
+        Symbol = Game.SingletonRepository.Get<Symbol>(SymbolName);
         StepOnScript = StepOnScriptName == null ? null : (IScript)Game.SingletonRepository.Scripts.Get(StepOnScriptName);
     }
 

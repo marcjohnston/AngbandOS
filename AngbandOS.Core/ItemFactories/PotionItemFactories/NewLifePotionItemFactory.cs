@@ -12,7 +12,7 @@ internal class NewLifePotionItemFactory : PotionItemFactory
 {
     private NewLifePotionItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(ExclamationPointSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(ExclamationPointSymbol));
     public override string Name => "New Life";
 
     public override int[] Chance => new int[] { 20, 10, 5, 0 };

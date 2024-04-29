@@ -12,7 +12,7 @@ internal class RobeSoftArmorItemFactory : SoftArmorItemFactory
 {
     private RobeSoftArmorItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(OpenParenthesisSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(OpenParenthesisSymbol));
     public override ColorEnum Color => ColorEnum.Blue;
     public override string Name => "Robe";
 

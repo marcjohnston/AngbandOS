@@ -23,7 +23,7 @@ internal class GoldDragonScaleMailArmorItemFactory : DragonScaleMailArmorItemFac
         item.RechargeTimeLeft = Game.RandomLessThan(450) + 450;
     }
     public override string? DescribeActivationEffect => "breathe sound (130) every 450+d450 turns";
-    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(OpenBraceSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(OpenBraceSymbol));
     public override ColorEnum Color => ColorEnum.Gold;
     public override string Name => "Gold Dragon Scale Mail";
 

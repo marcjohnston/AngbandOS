@@ -16,7 +16,7 @@ internal class TeleportationStaffItemFactory : StaffItemFactory
     {
         item.TypeSpecificValue = Game.DieRoll(4) + 5;
     }
-    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(UnderscoreSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(UnderscoreSymbol));
     public override string Name => "Teleportation";
 
     public override int[] Chance => new int[] { 1, 0, 0, 0 };

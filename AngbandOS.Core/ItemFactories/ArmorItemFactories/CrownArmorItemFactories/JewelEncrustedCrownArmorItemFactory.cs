@@ -12,7 +12,7 @@ internal class JewelEncrustedCrownArmorItemFactory : CrownArmorItemFactory
 {
     private JewelEncrustedCrownArmorItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(CloseBraceSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(CloseBraceSymbol));
     public override ColorEnum Color => ColorEnum.Purple;
     public override string Name => "Jewel Encrusted Crown";
 

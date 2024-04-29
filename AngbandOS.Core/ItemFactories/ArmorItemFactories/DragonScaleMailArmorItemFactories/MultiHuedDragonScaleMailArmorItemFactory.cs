@@ -45,7 +45,7 @@ internal class MultiHuedDragonScaleMailArmorItemFactory : DragonScaleMailArmorIt
         item.RechargeTimeLeft = Game.RandomLessThan(225) + 225;
     }
     public override string? DescribeActivationEffect => "breathe multi-hued (250) every 225+d225 turns";
-    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(OpenBraceSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(OpenBraceSymbol));
     public override ColorEnum Color => ColorEnum.Purple;
     public override string Name => "Multi-Hued Dragon Scale Mail";
 

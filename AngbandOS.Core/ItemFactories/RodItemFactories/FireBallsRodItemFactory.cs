@@ -13,7 +13,7 @@ internal class FireBallsRodItemFactory : RodItemFactory
     private FireBallsRodItemFactory(Game game) : base(game) { } // This object is a singleton.
 
     public override bool RequiresAiming => true;
-    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(MinusSignSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(MinusSignSymbol));
     public override string Name => "Fire Balls";
 
     public override int[] Chance => new int[] { 1, 0, 0, 0 };

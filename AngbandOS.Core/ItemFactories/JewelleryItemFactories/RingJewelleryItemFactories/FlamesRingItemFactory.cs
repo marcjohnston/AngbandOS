@@ -24,7 +24,7 @@ internal class FlamesRingItemFactory : RingItemFactory, IItemsCanBeActivated
     }
 
     public override string? DescribeActivationEffect => "ball of fire and resist fire";
-    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(EqualSignSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(EqualSignSymbol));
     public override string Name => "Flames";
 
     public override void ApplyMagic(Item item, int level, int power, Store? store)

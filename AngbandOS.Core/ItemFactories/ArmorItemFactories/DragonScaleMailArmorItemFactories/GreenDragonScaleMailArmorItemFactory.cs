@@ -23,7 +23,7 @@ internal class GreenDragonScaleMailArmorItemFactory : DragonScaleMailArmorItemFa
         item.RechargeTimeLeft = Game.RandomLessThan(450) + 450;
     }
     public override string? DescribeActivationEffect => "breathe poison gas (150) every 450+d450 turns";
-    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(OpenBraceSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(OpenBraceSymbol));
     public override ColorEnum Color => ColorEnum.Green;
     public override string Name => "Green Dragon Scale Mail";
 

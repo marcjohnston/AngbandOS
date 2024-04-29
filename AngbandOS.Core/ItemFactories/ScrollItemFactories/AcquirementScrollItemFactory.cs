@@ -12,7 +12,7 @@ internal class AcquirementScrollItemFactory : ScrollItemFactory
 {
     private AcquirementScrollItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(QuestionMarkSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(QuestionMarkSymbol));
     public override string Name => "Acquirement";
 
     public override int[] Chance => new int[] { 8, 0, 0, 0 };

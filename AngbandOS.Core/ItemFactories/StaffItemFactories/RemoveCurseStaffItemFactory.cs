@@ -12,7 +12,7 @@ internal class RemoveCurseStaffItemFactory : StaffItemFactory
 {
     private RemoveCurseStaffItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(UnderscoreSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(UnderscoreSymbol));
     public override string Name => "Remove Curse";
 
     public override int[] Chance => new int[] { 1, 0, 0, 0 };

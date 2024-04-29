@@ -19,7 +19,7 @@ internal class AntiMagicAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
             item.IdentCursed = true;
         }
     }
-    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(DoubleQuoteSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(DoubleQuoteSymbol));
     public override string Name => "Anti-Magic";
 
     public override int[] Chance => new int[] { 4, 0, 0, 0 };

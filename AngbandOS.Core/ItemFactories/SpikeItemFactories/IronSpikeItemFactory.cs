@@ -12,7 +12,7 @@ internal class IronSpikeItemFactory : SpikeItemFactory
 {
     private IronSpikeItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(TildeSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(TildeSymbol));
     public override ColorEnum Color => ColorEnum.Black;
     public override string Name => "Iron Spike";
 

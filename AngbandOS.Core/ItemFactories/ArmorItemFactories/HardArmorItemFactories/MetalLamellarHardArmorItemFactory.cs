@@ -12,7 +12,7 @@ internal class MetalLamellarHardArmorItemFactory : HardArmorItemFactory
 {
     private MetalLamellarHardArmorItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(OpenBraceSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(OpenBraceSymbol));
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "Metal Lamellar Armor";
 

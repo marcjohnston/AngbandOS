@@ -12,7 +12,7 @@ internal class MaceOfDisruptionHaftedWeaponItemFactory : HaftedWeaponItemFactory
 {
     private MaceOfDisruptionHaftedWeaponItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(BackSlashSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(BackSlashSymbol));
     public override ColorEnum Color => ColorEnum.Purple;
     public override string Name => "Mace of Disruption";
 

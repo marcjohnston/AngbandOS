@@ -12,7 +12,7 @@ internal class PerceptionStaffItemFactory : StaffItemFactory
 {
     private PerceptionStaffItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(UnderscoreSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(UnderscoreSymbol));
     public override string Name => "Perception";
 
     public override void ApplyMagic(Item item, int level, int power, Store? store)

@@ -23,7 +23,7 @@ internal class GemstoneLightSourceItemFactory : LightSourceItemFactory
             }
         }
     }
-    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(AsteriskSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(AsteriskSymbol));
     public override ColorEnum Color => ColorEnum.Diamond;
     public override string Name => "Gemstone";
 

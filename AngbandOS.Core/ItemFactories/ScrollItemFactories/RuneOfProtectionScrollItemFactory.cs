@@ -12,7 +12,7 @@ internal class RuneOfProtectionScrollItemFactory : ScrollItemFactory
 {
     private RuneOfProtectionScrollItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(QuestionMarkSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(QuestionMarkSymbol));
     public override string Name => "Rune of Protection";
 
     public override int[] Chance => new int[] { 2, 4, 0, 0 };

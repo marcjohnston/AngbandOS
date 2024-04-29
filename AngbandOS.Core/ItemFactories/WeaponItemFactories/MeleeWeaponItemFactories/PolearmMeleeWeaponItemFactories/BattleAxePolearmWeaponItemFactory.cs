@@ -12,7 +12,7 @@ internal class BattleAxePolearmWeaponItemFactory : PolearmWeaponItemFactory
 {
     private BattleAxePolearmWeaponItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(ForwardSlashSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(ForwardSlashSymbol));
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "Battle Axe";
 

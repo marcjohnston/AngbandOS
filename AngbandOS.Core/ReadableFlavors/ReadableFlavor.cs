@@ -47,7 +47,7 @@ internal abstract class ReadableFlavor : Flavor, IGetKey
 
     public void Bind()
     {
-        _symbol = Game.SingletonRepository.Symbols.Get(SymbolName);
+        _symbol = Game.SingletonRepository.Get<Symbol>(SymbolName);
     }
 
     /// <summary>

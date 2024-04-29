@@ -16,7 +16,7 @@ internal class AnnihilationWandItemFactory : WandItemFactory
     {
         item.TypeSpecificValue = Game.DieRoll(2) + 1;
     }
-    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(MinusSignSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(MinusSignSymbol));
     public override string Name => "Annihilation";
 
     public override int[] Chance => new int[] { 4, 0, 0, 0 };

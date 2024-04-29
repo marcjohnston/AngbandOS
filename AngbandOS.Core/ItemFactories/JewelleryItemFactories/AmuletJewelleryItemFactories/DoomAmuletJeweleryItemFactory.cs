@@ -12,7 +12,7 @@ internal class DoomAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
 {
     private DoomAmuletJeweleryItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(DoubleQuoteSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(DoubleQuoteSymbol));
     public override string Name => "DOOM";
 
     public override void ApplyMagic(Item item, int level, int power, Store? store)

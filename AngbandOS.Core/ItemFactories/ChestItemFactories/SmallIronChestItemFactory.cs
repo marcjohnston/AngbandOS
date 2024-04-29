@@ -12,7 +12,7 @@ internal class SmallIronChestItemFactory : ChestItemFactory
 {
     private SmallIronChestItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(TildeSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(TildeSymbol));
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "Small iron chest";
 

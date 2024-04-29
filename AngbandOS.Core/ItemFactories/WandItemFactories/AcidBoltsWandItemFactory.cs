@@ -16,7 +16,7 @@ internal class AcidBoltsWandItemFactory : WandItemFactory
     {
         item.TypeSpecificValue = Game.DieRoll(8) + 6;
     }
-    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(MinusSignSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(MinusSignSymbol));
     public override string Name => "Acid Bolts";
 
     public override int[] Chance => new int[] { 1, 0, 0, 0 };

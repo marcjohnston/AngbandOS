@@ -12,7 +12,7 @@ internal class WoeRingItemFactory : RingItemFactory
 {
     private WoeRingItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(EqualSignSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(EqualSignSymbol));
     public override string Name => "Woe";
 
     public override void ApplyMagic(Item item, int level, int power, Store? store)

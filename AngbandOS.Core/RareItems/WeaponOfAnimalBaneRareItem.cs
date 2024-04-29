@@ -11,7 +11,7 @@ namespace AngbandOS.Core.RareItems;
 internal class WeaponOfAnimalBaneRareItem : RareItem
 {
     private WeaponOfAnimalBaneRareItem(Game game) : base(game) { } // This object is a singleton.
-    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(VerticalBarSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(VerticalBarSymbol));
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "Weapon of Animal Bane";
     public override int Cost => 6000;

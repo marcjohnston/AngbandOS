@@ -12,7 +12,7 @@ internal class DoubleChainMailHardArmorItemFactory : HardArmorItemFactory
 {
     private DoubleChainMailHardArmorItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(OpenBraceSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(OpenBraceSymbol));
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "Double Chain Mail";
 

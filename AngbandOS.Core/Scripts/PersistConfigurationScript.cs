@@ -95,7 +95,7 @@ internal class PersistConfigurationScript : Script, IScript
             Game.SingletonRepository.PersistEntities<StaffReadableFlavor>();
             Game.SingletonRepository.PersistEntities<StoreCommand>();
             Game.SingletonRepository.StoreFactories.PersistEntities();
-            Game.SingletonRepository.Symbols.PersistEntities();
+            Game.SingletonRepository.PersistEntities<Symbol>();
             Game.SingletonRepository.Talents.PersistEntities();
             Game.SingletonRepository.Tiles.PersistEntities();
             Game.SingletonRepository.PersistEntities<Timer>();

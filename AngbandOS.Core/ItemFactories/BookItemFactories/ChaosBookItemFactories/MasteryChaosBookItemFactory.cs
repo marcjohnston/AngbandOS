@@ -12,7 +12,7 @@ internal class MasteryChaosBookItemFactory : ChaosBookItemFactory
 {
     private MasteryChaosBookItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(QuestionMarkSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(QuestionMarkSymbol));
     public override ColorEnum Color => ColorEnum.BrightRed;
     public override string Name => "[Chaos Mastery]";
 

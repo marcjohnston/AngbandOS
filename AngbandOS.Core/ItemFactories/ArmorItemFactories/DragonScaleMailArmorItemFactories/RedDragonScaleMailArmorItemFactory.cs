@@ -23,7 +23,7 @@ internal class RedDragonScaleMailArmorItemFactory : DragonScaleMailArmorItemFact
         item.RechargeTimeLeft = Game.RandomLessThan(450) + 450;
     }
     public override string? DescribeActivationEffect => "breathe fire (200) every 450+d450 turns";
-    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(OpenBraceSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(OpenBraceSymbol));
     public override ColorEnum Color => ColorEnum.Red;
     public override string Name => "Red Dragon Scale Mail";
 

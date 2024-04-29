@@ -12,7 +12,7 @@ internal class WonderWandItemFactory : WandItemFactory
 {
     private WonderWandItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(MinusSignSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(MinusSignSymbol));
     public override string Name => "Wonder";
 
     public override void ApplyMagic(Item item, int level, int power, Store? store)

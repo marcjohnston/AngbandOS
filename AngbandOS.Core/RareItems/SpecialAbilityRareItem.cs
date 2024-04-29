@@ -11,7 +11,7 @@ namespace AngbandOS.Core.RareItems;
 internal class SpecialAbilityRareItem : RareItem
 {
     private SpecialAbilityRareItem(Game game) : base(game) { } // This object is a singleton.
-    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(LowerXSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(LowerXSymbol));
     public override string Name => "Special Ability";
     public override int Cost => 0;
     public override string FriendlyName => "";

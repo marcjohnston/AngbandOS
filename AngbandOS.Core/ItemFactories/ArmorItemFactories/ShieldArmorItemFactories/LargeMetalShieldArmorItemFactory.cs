@@ -12,7 +12,7 @@ internal class LargeMetalShieldArmorItemFactory : ShieldArmorItemFactory
 {
     private LargeMetalShieldArmorItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(CloseParenthesisSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(CloseParenthesisSymbol));
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "Large Metal Shield";
 

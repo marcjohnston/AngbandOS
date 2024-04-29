@@ -12,7 +12,7 @@ internal class ShardOfPotteryJunkItemFactory : JunkItemFactory
 {
     private ShardOfPotteryJunkItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(TildeSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(TildeSymbol));
     public override ColorEnum Color => ColorEnum.Red;
     public override string Name => "Shard of Pottery";
 

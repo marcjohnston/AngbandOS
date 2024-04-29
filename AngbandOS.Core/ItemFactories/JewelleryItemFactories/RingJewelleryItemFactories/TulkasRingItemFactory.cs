@@ -12,7 +12,7 @@ internal class TulkasRingItemFactory : RingItemFactory
 {
     private TulkasRingItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(EqualSignSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(EqualSignSymbol));
     public override string Name => "Tulkas";
 
     public override int Cost => 150000;

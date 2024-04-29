@@ -16,7 +16,7 @@ internal class CureLightWoundsStaffItemFactory : StaffItemFactory
     {
         item.TypeSpecificValue = Game.DieRoll(5) + 6;
     }
-    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(UnderscoreSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(UnderscoreSymbol));
     public override string Name => "Cure Light Wounds";
 
     public override int[] Chance => new int[] { 1, 0, 0, 0 };

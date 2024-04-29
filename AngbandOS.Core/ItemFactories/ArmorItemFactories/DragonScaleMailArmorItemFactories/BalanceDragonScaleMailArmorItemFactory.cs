@@ -25,7 +25,7 @@ internal class BalanceDragonScaleMailArmorItemFactory : DragonScaleMailArmorItem
     private BalanceDragonScaleMailArmorItemFactory(Game game) : base(game) { } // This object is a singleton.
 
     public override string? DescribeActivationEffect => "You breathe balance (250) every 300+d300 turns";
-    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(OpenBraceSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(OpenBraceSymbol));
     public override ColorEnum Color => ColorEnum.Silver;
     public override string Name => "Balance Dragon Scale Mail";
 

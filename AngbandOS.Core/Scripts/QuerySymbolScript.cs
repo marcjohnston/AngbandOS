@@ -45,7 +45,7 @@ internal class QuerySymbolScript : Script, IScript, IRepeatableScript, IScriptSt
 
         // Run through the identification array till we find the symbol.
         bool found = false;
-        foreach (Symbol symbol in Game.SingletonRepository.Symbols)
+        foreach (Symbol symbol in Game.SingletonRepository.Get<Symbol>())
         {
             if (querySymbol == symbol.Character || querySymbol == symbol.QueryCharacter)
             {

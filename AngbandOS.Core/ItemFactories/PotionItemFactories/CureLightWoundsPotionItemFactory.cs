@@ -12,7 +12,7 @@ internal class CureLightWoundsPotionItemFactory : PotionItemFactory
 {
     private CureLightWoundsPotionItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(ExclamationPointSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(ExclamationPointSymbol));
     public override string Name => "Cure Light Wounds";
 
     public override int[] Chance => new int[] { 1, 1, 1, 0 };

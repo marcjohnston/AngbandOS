@@ -12,7 +12,7 @@ internal class BladeOfChaosWeaponItemFactory : SwordWeaponItemFactory
 {
     private BladeOfChaosWeaponItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(VerticalBarSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(VerticalBarSymbol));
     public override ColorEnum Color => ColorEnum.Purple;
     public override string Name => "Blade of Chaos";
 

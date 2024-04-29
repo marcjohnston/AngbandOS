@@ -12,7 +12,7 @@ internal class SaltWaterPotionItemFactory : PotionItemFactory
 {
     private SaltWaterPotionItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(ExclamationPointSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(ExclamationPointSymbol));
     public override string Name => "Salt Water";
 
     public override int[] Chance => new int[] { 1, 0, 0, 0 };

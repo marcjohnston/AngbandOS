@@ -11,7 +11,7 @@ namespace AngbandOS.Core.RareItems;
 internal class ArmorOfYithRareItem : RareItem
 {
     private ArmorOfYithRareItem(Game game) : base(game) { } // This object is a singleton.
-    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(OpenBraceSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(OpenBraceSymbol));
     public override void ApplyMagic(Item item)
     {
         item.RandomPower = Game.SingletonRepository.Powers.ToWeightedRandom(_power => _power.IsResistance == true).Choose();

@@ -65,7 +65,6 @@ internal class SingletonRepository
     public SingingPlayerAttacksRepository SingingPlayerAttacks;
     public SpellResistantDetectionsRepository SpellResistantDetections;
     public StoreFactoriesRepository StoreFactories;
-    public SymbolsRepository Symbols;
     public TalentsRepository Talents;
     public TilesRepository Tiles;
     public TownsRepository Towns;
@@ -395,6 +394,7 @@ internal class SingletonRepository
         RegisterRepository<Spell>();
         RegisterRepository<StaffReadableFlavor>();
         RegisterRepository<StoreCommand>();
+        RegisterRepository<Symbol>();
 
         // This is the load phase for assembly.
         LoadAllAssemblyTypes();
@@ -422,6 +422,7 @@ internal class SingletonRepository
         LoadFromConfiguration<Spell, SpellDefinition, GenericSpell>(Game.Configuration.Spells);
         LoadFromConfiguration<StaffReadableFlavor, ReadableFlavorDefinition, GenericStaffReadableFlavor>(Game.Configuration.StaffReadableFlavors);
         LoadFromConfiguration<StoreCommand, StoreCommandDefinition, GenericStoreCommand>(Game.Configuration.StoreCommands);
+        LoadFromConfiguration<Symbol, SymbolDefinition, GenericSymbol>(Game.Configuration.Symbols);
 
         MonsterRace[] monsterRaces = Get<MonsterRace>();
         MonsterRace[] sortedMonsterRaces = monsterRaces.OrderBy(_monsterRace => _monsterRace.LevelFound).ToArray();
@@ -473,7 +474,6 @@ internal class SingletonRepository
         SingingPlayerAttacks = AddRepository<SingingPlayerAttacksRepository>(new SingingPlayerAttacksRepository(Game));
         SpellResistantDetections = AddRepository<SpellResistantDetectionsRepository>(new SpellResistantDetectionsRepository(Game));
         StoreFactories = AddRepository<StoreFactoriesRepository>(new StoreFactoriesRepository(Game));
-        Symbols = AddRepository<SymbolsRepository>(new SymbolsRepository(Game));
         Talents = AddRepository<TalentsRepository>(new TalentsRepository(Game));
         Tiles = AddRepository<TilesRepository>(new TilesRepository(Game));
         Towns = AddRepository<TownsRepository>(new TownsRepository(Game));

@@ -12,7 +12,7 @@ internal class SoftLeatherBootsArmorItemFactory : BootsArmorItemFactory
 {
     private SoftLeatherBootsArmorItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(CloseBraceSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(CloseBraceSymbol));
     public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "Pair of Soft Leather Boots";
 

@@ -12,7 +12,7 @@ internal class RustyChainMailHardArmorItemFactory : HardArmorItemFactory
 {
     private RustyChainMailHardArmorItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(OpenBraceSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(OpenBraceSymbol));
     public override ColorEnum Color => ColorEnum.Red;
     public override string Name => "Rusty Chain Mail";
 

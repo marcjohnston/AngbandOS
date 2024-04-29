@@ -12,7 +12,7 @@ internal class SatisfyHungerScrollItemFactory : ScrollItemFactory
 {
     private SatisfyHungerScrollItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(QuestionMarkSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(QuestionMarkSymbol));
     public override string Name => "Satisfy Hunger";
 
     public override int[] Chance => new int[] { 1, 1, 1, 1 };

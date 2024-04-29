@@ -12,7 +12,7 @@ internal class SustainIntelligenceRingItemFactory : RingItemFactory
 {
     private SustainIntelligenceRingItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(EqualSignSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(EqualSignSymbol));
     public override string Name => "Sustain Intelligence";
 
     public override int[] Chance => new int[] { 1, 0, 0, 0 };

@@ -15,7 +15,7 @@ internal class ArmorOfPermanenceRareItem : RareItem
     {
         item.RandomPower = Game.SingletonRepository.Powers.ToWeightedRandom(_power => _power.IsResistance == true).Choose();
     }
-    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(OpenBraceSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(OpenBraceSymbol));
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "Armor of Permanence";
     public override int Cost => 30000;

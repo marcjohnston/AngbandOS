@@ -12,7 +12,7 @@ internal class GauntletGlovesArmorItemFactory : GlovesArmorItemFactory
 {
     private GauntletGlovesArmorItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(CloseBraceSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(CloseBraceSymbol));
     public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "Set of Gauntlets";
 

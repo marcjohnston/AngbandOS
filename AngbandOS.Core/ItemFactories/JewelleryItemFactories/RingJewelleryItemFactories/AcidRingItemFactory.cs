@@ -27,7 +27,7 @@ internal class AcidRingItemFactory : RingItemFactory, IItemsCanBeActivated
         item.BonusArmorClass = 5 + Game.DieRoll(5) + item.GetBonusValue(10, level);
     }
     public override string? DescribeActivationEffect => "ball of acid and resist acid";
-    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(EqualSignSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(EqualSignSymbol));
     public override string Name => "Acid";
 
     public override bool Activate => true;

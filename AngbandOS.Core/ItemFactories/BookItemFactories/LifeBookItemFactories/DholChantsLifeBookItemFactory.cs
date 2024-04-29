@@ -12,7 +12,7 @@ internal class DholChantsLifeBookItemFactory : LifeBookItemFactory
 {
     private DholChantsLifeBookItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(QuestionMarkSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(QuestionMarkSymbol));
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "[Dhol Chants]";
 

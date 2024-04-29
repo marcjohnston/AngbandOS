@@ -368,7 +368,7 @@ internal abstract class MonsterRace : IMonsterCharacteristics, IGetKey
         }
 
         // Bind the symbol.
-        Symbol = Game.SingletonRepository.Symbols.Get(SymbolName);
+        Symbol = Game.SingletonRepository.Get<Symbol>(SymbolName);
 
         // Bind the monster attacks.
         List<MonsterAttack> attackList = new();

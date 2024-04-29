@@ -194,7 +194,7 @@ internal class JournalScript : Script, IScript, IRepeatableScript, IScriptStore
 
     private void DisplayMonster(int rIdx, int num, int of)
     {
-        foreach (Symbol symbol in Game.SingletonRepository.Symbols)
+        foreach (Symbol symbol in Game.SingletonRepository.Get<Symbol>())
         {
             if (symbol.Character == Game.SingletonRepository.Get<MonsterRace>(rIdx).Symbol.Character)
             {

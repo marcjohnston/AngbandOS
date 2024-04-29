@@ -25,7 +25,7 @@ internal class BlueDragonScaleMailArmorItemFactory : DragonScaleMailArmorItemFac
     //public override Activation? ActivationPower => Game.SingletonRepository.Get<Activation>(nameof(BreatheLightingActivation));
     public override string? DescribeActivationEffect =>"breathe lightning (100) every 450+d450 turns";
 
-    public override Symbol Symbol => Game.SingletonRepository.Symbols.Get(nameof(OpenBraceSymbol));
+    public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(OpenBraceSymbol));
     public override ColorEnum Color => ColorEnum.Blue;
     public override string Name => "Blue Dragon Scale Mail";
 
