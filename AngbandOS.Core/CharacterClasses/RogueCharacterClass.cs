@@ -75,7 +75,7 @@ internal class RogueCharacterClass : BaseCharacterClass
     public override bool DoesNotGainSpellLevelsUntilFirstSpellLevel => true;
     public override int SpellStat => Ability.Intelligence;
     public override int MaximumWeight => 30;
-    public override IArtifactBias? ArtifactBias => Game.SingletonRepository.ArtifactBiases.Get(nameof(RogueArtifactBias));
+    public override IArtifactBias? ArtifactBias => Game.SingletonRepository.Get<ArtifactBias>(nameof(RogueArtifactBias));
     public override int FromScrollWarriorArtifactBiasPercentageChance => 25;
     public override bool SenseInventoryTest(int level) => (0 != Game.RandomLessThan(20000 / ((level * level) + 40)));
     public override bool DetailedSenseInventory => true;

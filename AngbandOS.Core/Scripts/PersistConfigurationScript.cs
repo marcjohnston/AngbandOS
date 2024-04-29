@@ -51,7 +51,7 @@ internal class PersistConfigurationScript : Script, IScript
             Game.SingletonRepository.PersistEntities<AlterAction>();
             Game.SingletonRepository.PersistEntities<AmuletReadableFlavor>();
             Game.SingletonRepository.PersistEntities<Animation>();
-            Game.SingletonRepository.ArtifactBiases.PersistEntities();
+            Game.SingletonRepository.PersistEntities<ArtifactBias>();
             Game.SingletonRepository.AttackEffects.PersistEntities();
             Game.SingletonRepository.PersistEntities<Attack>();
             Game.SingletonRepository.BirthStages.PersistEntities();

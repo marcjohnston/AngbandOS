@@ -20,23 +20,32 @@ internal class SingletonRepository
     private readonly Game Game;
     private readonly List<ILoadAndBind> _repositories = new();
 
-    public ArtifactBiasesRepository ArtifactBiases;
+    public ElvishTextRepository ElvishText;
+    public FunnyCommentsRepository FunnyComments;
+    public FunnyDescriptionsRepository FunnyDescriptions;
+    public HorrificDescriptionsRepository HorrificDescriptions;
+    public InsultPlayerAttacksRepository InsultPlayerAttacks;
+    public MoanPlayerAttacksRepository MoanPlayerAttacks;
+    public ShopkeeperAcceptedCommentsRepository ShopkeeperAcceptedComments;
+    public ShopkeeperBargainCommentsRepository ShopkeeperBargainComments;
+    public ShopkeeperGoodCommentsRepository ShopkeeperGoodComments;
+    public ShopkeeperLessThanGuessCommentsRepository ShopkeeperLessThanGuessComments;
+    public ShopkeeperWorthlessCommentsRepository ShopkeeperWorthlessComments;
+    public SingingPlayerAttacksRepository SingingPlayerAttacks;
+    public UnreadableFlavorSyllablesRepository UnreadableFlavorSyllables;
+    public WorshipPlayerAttacksRepository WorshipPlayerAttacks;
+
     public AttackEffectsRepository AttackEffects;
     public BirthStagesRepository BirthStages;
     public CharacterClassesRepository CharacterClasses;
     public ChestTrapConfigurationsRepository ChestTrapConfigurations;
     public ChestTrapsRepository ChestTraps;
-    public ElvishTextRepository ElvishText;
     public FindQuestsRepository FindQuests;
     public FixedArtifactsRepository FixedArtifacts;
     public FlaggedActionsRepository FlaggedActions;
     public FormsRepository Forms;
-    public FunnyCommentsRepository FunnyComments;
-    public FunnyDescriptionsRepository FunnyDescriptions;
     public GendersRepository Genders;
     public HelpGroupsRepository HelpGroups;
-    public HorrificDescriptionsRepository HorrificDescriptions;
-    public InsultPlayerAttacksRepository InsultPlayerAttacks;
     public InventorySlotsRepository InventorySlots;
     public ItemClassesRepository ItemClasses;
     public ItemFactoriesRepository ItemFactories;
@@ -44,7 +53,6 @@ internal class SingletonRepository
     public ItemQualityRatingsRepository ItemQualityRatings;
     public JustificationsRepository Justifications;
     public MartialArtsAttacksRepository MartialArtsAttacks;
-    public MoanPlayerAttacksRepository MoanPlayerAttacks;
     public MonsterFiltersRepository MonsterFilters;
     public MonsterSpellsRepository MonsterSpells;
     public MutationsRepository Mutations;
@@ -57,17 +65,9 @@ internal class SingletonRepository
     public RewardsRepository Rewards;
     public RoomLayoutsRepository RoomLayouts;
     public ScriptsRepository Scripts;
-    public ShopkeeperAcceptedCommentsRepository ShopkeeperAcceptedComments;
-    public ShopkeeperBargainCommentsRepository ShopkeeperBargainComments;
-    public ShopkeeperGoodCommentsRepository ShopkeeperGoodComments;
-    public ShopkeeperLessThanGuessCommentsRepository ShopkeeperLessThanGuessComments;
-    public ShopkeeperWorthlessCommentsRepository ShopkeeperWorthlessComments;
-    public SingingPlayerAttacksRepository SingingPlayerAttacks;
     public SpellResistantDetectionsRepository SpellResistantDetections;
     public StoreFactoriesRepository StoreFactories;
     public TalentsRepository Talents;
-    public UnreadableFlavorSyllablesRepository UnreadableFlavorSyllables;
-    public WorshipPlayerAttacksRepository WorshipPlayerAttacks;
 
     private Dictionary<string, GenericRepository> _repositoryDictionary = new Dictionary<string, GenericRepository>();
 
@@ -367,6 +367,7 @@ internal class SingletonRepository
         RegisterRepository<Widget>();
         RegisterRepository<AlterAction>();
         RegisterRepository<Alignment>();
+        RegisterRepository<ArtifactBias>();
 
         RegisterRepository<AmuletReadableFlavor>();
         RegisterRepository<Animation>();
@@ -435,7 +436,6 @@ internal class SingletonRepository
         _repositoryDictionary["MonsterRace"].List.AddRange(sortedMonsterRaces);
 
         // Create all of the repositories.  All of the repositories will be empty and have an instance to the save game.
-        ArtifactBiases = AddRepository<ArtifactBiasesRepository>(new ArtifactBiasesRepository(Game));
         AttackEffects = AddRepository<AttackEffectsRepository>(new AttackEffectsRepository(Game));
         BirthStages = AddRepository<BirthStagesRepository>(new BirthStagesRepository(Game));
         CharacterClasses = AddRepository<CharacterClassesRepository>(new CharacterClassesRepository(Game));
