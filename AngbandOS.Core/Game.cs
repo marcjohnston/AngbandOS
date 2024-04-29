@@ -3302,8 +3302,8 @@ internal class Game
                 }
                 if (okay)
                 {
-                    int index = RandomLessThan(SingletonRepository.ScrollReadableFlavors.Count);
-                    ScrollReadableFlavor baseFlavor = SingletonRepository.ScrollReadableFlavors[index];
+                    int index = RandomLessThan(SingletonRepository.Get<ScrollReadableFlavor>().Length);
+                    ScrollReadableFlavor baseFlavor = SingletonRepository.Get<ScrollReadableFlavor>(index);
                     UnreadableScrollFlavor flavor = new UnreadableScrollFlavor(this, baseFlavor.Symbol, baseFlavor.Color, name);
                     UnreadableScrollFlavors.Add(flavor);
                     break;

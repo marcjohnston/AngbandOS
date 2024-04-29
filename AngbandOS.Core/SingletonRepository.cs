@@ -55,11 +55,8 @@ internal class SingletonRepository
     public RareItemsRepository RareItems;
     public RealmsRepository Realms;
     public RewardsRepository Rewards;
-    public RingReadableFlavorsRepository RingReadableFlavors;
-    public RodReadableFlavorsRepository RodReadableFlavors;
     public RoomLayoutsRepository RoomLayouts;
     public ScriptsRepository Scripts;
-    public ScrollReadableFlavorsRepository ScrollReadableFlavors;
     public ShopkeeperAcceptedCommentsRepository ShopkeeperAcceptedComments;
     public ShopkeeperBargainCommentsRepository ShopkeeperBargainComments;
     public ShopkeeperGoodCommentsRepository ShopkeeperGoodComments;
@@ -89,6 +86,12 @@ internal class SingletonRepository
     /// </summary>
     private List<IGetKey> _singletons = new List<IGetKey>();
 
+    /// <summary>
+    /// Returns a <see cref="WeightedRandom"/> object with all of the entities in the <typeparamref name="T""Tx"/> repository.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="predicate"></param>
+    /// <returns></returns>
     public WeightedRandom<T> ToWeightedRandom<T>(Func<T, bool>? predicate = null)
     {
         string typeName = typeof(T).Name;
@@ -96,7 +99,12 @@ internal class SingletonRepository
         return new WeightedRandom<T>(Game, list, predicate);
     }
 
-    public void AddInterfaceRepository<T>()
+    /// <summary>
+    /// Registers a repository for all singletons that implement the interface specified by <typeparamref name="T"/>.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <exception cref="Exception"></exception>
+    private void RegisterRepository<T>()
     {
         string typeName = typeof(T).Name;
         if (_repositoryDictionary.TryGetValue(typeName, out GenericRepository? genericRepository))
@@ -107,6 +115,13 @@ internal class SingletonRepository
         _repositoryDictionary.Add(typeName, genericRepository);
     }
 
+    /// <summary>
+    /// Returns the singleton from the repository specified by the <typeparamref name="T"/> type referenced by the unique key identifier <paramref name="key"/> or null if <paramref name="key"/> is null.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="key"></param>
+    /// <returns></returns>
+    /// <exception cref="Exception"></exception>
     public T? GetNullable<T>(string? key) where T : class
     {
         if (key == null)
@@ -130,6 +145,14 @@ internal class SingletonRepository
         return (T)singleton;
     }
 
+    /// <summary>
+    /// Returns an array of singletons from the repository specified by the <typeparamref name="T"/> type that are references by the unique key
+    /// identifiers <paramref name="keys"/> or null if <paramref name="keys"/> is null.  If any of the singletons do not exist, an exception is thrown.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="key"></param>
+    /// <returns></returns>
+    /// <exception cref="Exception"></exception>
     public T[]? GetNullable<T>(string[]? keys) where T : class
     {
         if (keys == null)
@@ -139,12 +162,24 @@ internal class SingletonRepository
         return Get<T>(keys);
     }
 
+    /// <summary>
+    /// Returns an array of all of the singletons from the repository specified by the <typeparamref name="T"/> type.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <returns></returns>
     public T[] Get<T>() where T : class
     {
         string typeName = typeof(T).Name;
         return _repositoryDictionary[typeName].Get<T>();
     }
 
+    /// <summary>
+    /// Returns an array of singletons from the repository specified by the <typeparamref name="T"/> type referenced by the unique key identifiers <paramref name="keys"/>.  If any the singletons do not exist, an exception is thrown.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="key"></param>
+    /// <returns></returns>
+    /// <exception cref="Exception"></exception>
     public T[] Get<T>(string[] keys) where T : class
     {
         List<T> changeTrackerList = new();
@@ -328,35 +363,38 @@ internal class SingletonRepository
     public void Load()
     {
         // These are the types to load from the assembly.  The interfaces that are not registered here will be registered just before the configuration is loaded.
-        AddInterfaceRepository<IBoolValue>();
-        AddInterfaceRepository<IIntValue>();
-        AddInterfaceRepository<ICastScript>();
-        AddInterfaceRepository<IChangeTracker>();
-        AddInterfaceRepository<IDateAndTimeValue>();
-        AddInterfaceRepository<INullableStringsValue>();
-        AddInterfaceRepository<IStringValue>();
-        AddInterfaceRepository<Property>();
-        AddInterfaceRepository<Timer>();
-        AddInterfaceRepository<Function>();
-        AddInterfaceRepository<Activation>();
-        AddInterfaceRepository<Widget>();
-        AddInterfaceRepository<AlterAction>();
-        AddInterfaceRepository<Alignment>();
+        RegisterRepository<IBoolValue>();
+        RegisterRepository<IIntValue>();
+        RegisterRepository<ICastScript>();
+        RegisterRepository<IChangeTracker>();
+        RegisterRepository<IDateAndTimeValue>();
+        RegisterRepository<INullableStringsValue>();
+        RegisterRepository<IStringValue>();
+        RegisterRepository<Property>();
+        RegisterRepository<Timer>();
+        RegisterRepository<Function>();
+        RegisterRepository<Activation>();
+        RegisterRepository<Widget>();
+        RegisterRepository<AlterAction>();
+        RegisterRepository<Alignment>();
 
-        AddInterfaceRepository<AmuletReadableFlavor>();
-        AddInterfaceRepository<Animation>();
-        AddInterfaceRepository<Attack>();
-        AddInterfaceRepository<ClassSpell>();
-        AddInterfaceRepository<DungeonGuardian>();
-        AddInterfaceRepository<Dungeon>();
-        AddInterfaceRepository<GameCommand>();
-        AddInterfaceRepository<God>();
-        AddInterfaceRepository<HelpGroup>();
-        AddInterfaceRepository<MonsterRace>();
-        AddInterfaceRepository<MushroomReadableFlavor>();
-        AddInterfaceRepository<Plural>();
-        AddInterfaceRepository<PotionReadableFlavor>();
-        AddInterfaceRepository<ProjectileGraphic>();
+        RegisterRepository<AmuletReadableFlavor>();
+        RegisterRepository<Animation>();
+        RegisterRepository<Attack>();
+        RegisterRepository<ClassSpell>();
+        RegisterRepository<DungeonGuardian>();
+        RegisterRepository<Dungeon>();
+        RegisterRepository<GameCommand>();
+        RegisterRepository<God>();
+        RegisterRepository<HelpGroup>();
+        RegisterRepository<MonsterRace>();
+        RegisterRepository<MushroomReadableFlavor>();
+        RegisterRepository<Plural>();
+        RegisterRepository<PotionReadableFlavor>();
+        RegisterRepository<ProjectileGraphic>();
+        RegisterRepository<RingReadableFlavor>();
+        RegisterRepository<RodReadableFlavor>();
+        RegisterRepository<ScrollReadableFlavor>();
 
         // This is the load phase for assembly.
         LoadAllAssemblyTypes();
@@ -377,6 +415,9 @@ internal class SingletonRepository
         LoadFromConfiguration<Plural, PluralDefinition, GenericPlural>(Game.Configuration.Plurals);
         LoadFromConfiguration<PotionReadableFlavor, ReadableFlavorDefinition, GenericPotionReadableFlavor>(Game.Configuration.PotionReadableFlavors);
         LoadFromConfiguration<ProjectileGraphic, ProjectileGraphicDefinition, GenericProjectileGraphic>(Game.Configuration.ProjectileGraphics);
+        LoadFromConfiguration<RingReadableFlavor, ReadableFlavorDefinition, GenericRingReadableFlavor>(Game.Configuration.RingReadableFlavors);
+        LoadFromConfiguration<RodReadableFlavor, ReadableFlavorDefinition, GenericRodReadableFlavor>(Game.Configuration.RodReadableFlavors);
+        LoadFromConfiguration<ScrollReadableFlavor, ReadableFlavorDefinition, GenericScrollReadableFlavor>(Game.Configuration.ScrollReadableFlavors);
 
         MonsterRace[] monsterRaces = Get<MonsterRace>();
         MonsterRace[] sortedMonsterRaces = monsterRaces.OrderBy(_monsterRace => _monsterRace.LevelFound).ToArray();
@@ -418,11 +459,8 @@ internal class SingletonRepository
         RareItems = AddRepository<RareItemsRepository>(new RareItemsRepository(Game));
         Realms = AddRepository<RealmsRepository>(new RealmsRepository(Game));
         Rewards = AddRepository<RewardsRepository>(new RewardsRepository(Game));
-        RingReadableFlavors = AddRepository<RingReadableFlavorsRepository>(new RingReadableFlavorsRepository(Game));
-        RodReadableFlavors = AddRepository<RodReadableFlavorsRepository>(new RodReadableFlavorsRepository(Game));
         RoomLayouts = AddRepository<RoomLayoutsRepository>(new RoomLayoutsRepository(Game));
         Scripts = AddRepository<ScriptsRepository>(new ScriptsRepository(Game));
-        ScrollReadableFlavors = AddRepository<ScrollReadableFlavorsRepository>(new ScrollReadableFlavorsRepository(Game));
         ShopkeeperAcceptedComments = AddRepository<ShopkeeperAcceptedCommentsRepository>(new ShopkeeperAcceptedCommentsRepository(Game));
         ShopkeeperBargainComments = AddRepository<ShopkeeperBargainCommentsRepository>(new ShopkeeperBargainCommentsRepository(Game));
         ShopkeeperGoodComments = AddRepository<ShopkeeperGoodCommentsRepository>(new ShopkeeperGoodCommentsRepository(Game));

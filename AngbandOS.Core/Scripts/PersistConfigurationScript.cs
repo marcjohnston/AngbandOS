@@ -84,11 +84,11 @@ internal class PersistConfigurationScript : Script, IScript
             Game.SingletonRepository.RareItems.PersistEntities();
             Game.SingletonRepository.Realms.PersistEntities();
             Game.SingletonRepository.Rewards.PersistEntities();
-            Game.SingletonRepository.RingReadableFlavors.PersistEntities();
-            Game.SingletonRepository.RodReadableFlavors.PersistEntities();
+            Game.SingletonRepository.PersistEntities<RingReadableFlavor>();
+            Game.SingletonRepository.PersistEntities<RodReadableFlavor>();
             Game.SingletonRepository.RoomLayouts.PersistEntities();
             Game.SingletonRepository.Scripts.PersistEntities();
-            Game.SingletonRepository.ScrollReadableFlavors.PersistEntities();
+            Game.SingletonRepository.PersistEntities<ScrollReadableFlavor>();
             Game.SingletonRepository.Shopkeepers.PersistEntities();
             Game.SingletonRepository.SpellResistantDetections.PersistEntities();
             Game.SingletonRepository.Spells.PersistEntities();

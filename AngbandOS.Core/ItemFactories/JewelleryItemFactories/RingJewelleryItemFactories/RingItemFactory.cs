@@ -48,7 +48,7 @@ internal abstract class RingItemFactory : JewelleryItemFactory, IFlavorFactory
     /// <summary>
     /// Returns the ring flavors repository because rings have flavors that need to be identified.
     /// </summary>
-    public IEnumerable<Flavor> GetFlavorRepository() => Game.SingletonRepository.RingReadableFlavors;
+    public IEnumerable<Flavor> GetFlavorRepository() => Game.SingletonRepository.Get<RingReadableFlavor>();
 
     /// <inheritdoc/>
     public Flavor Flavor { get; set; }

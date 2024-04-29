@@ -40,7 +40,7 @@ internal abstract class RodItemFactory : ItemFactory, IFlavorFactory
     /// <summary>
     /// Returns the rod flavors repository because rods have flavors that need to be identified.
     /// </summary>
-    public IEnumerable<Flavor>? GetFlavorRepository() => Game.SingletonRepository.RodReadableFlavors;
+    public IEnumerable<Flavor>? GetFlavorRepository() => Game.SingletonRepository.Get<RodReadableFlavor>();
     public override bool IsRechargable => true;
     public override bool CanBeZapped => true;
 
