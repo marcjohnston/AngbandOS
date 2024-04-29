@@ -129,6 +129,16 @@ public class TileDefinition : IPoco
     public virtual bool IsWall { get; set; } = false;
 
     /// <summary>
+    /// The tile is water.
+    /// </summary>
+    public virtual bool IsWater { get; set; } = false;
+
+    /// <summary>
+    /// The tile is rock.
+    /// </summary>
+    public virtual bool IsRock { get; set; } = false;
+
+    /// <summary>
     /// The tile is a down staircase.
     /// </summary>
     public virtual bool IsDownStaircase { get; set; } = false;
@@ -146,7 +156,7 @@ public class TileDefinition : IPoco
     /// <summary>
     /// Returns true, if the tile is water; false, otherwise.  Returns false, by default.  The WaterBorder and the Water tiles both return true.
     /// </summary>
-    public virtual bool IsWater { get; set; } = false;
+    public virtual bool HasWater { get; set; } = false;
     /// <summary>
     /// The priority on the map.
     /// </summary>

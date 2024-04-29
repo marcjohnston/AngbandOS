@@ -44,7 +44,9 @@ internal class GenericTile : Tile
         IsVisibleDoor = tileDefinition.IsVisibleDoor;
         IsVisibleTreasure = tileDefinition.IsVisibleTreasure;
         IsWall = tileDefinition.IsWall;
+        IsRock = tileDefinition.IsRock;
         IsWater = tileDefinition.IsWater;
+        HasWater = tileDefinition.HasWater;
         IsWildPath = tileDefinition.IsWildPath;
         IsGrass = tileDefinition.IsGrass;
         IsDownStaircase = tileDefinition.IsDownStaircase;
@@ -92,6 +94,9 @@ internal class GenericTile : Tile
     public override bool IsPath { get; } = false;
 
     public override bool IsTreasure { get; } = false;
+
+    public override bool IsRock { get; } = false;
+    public override bool IsWater { get; } = false;
 
     /// <summary>
     /// Returns true, if the tile type blocks the scent trail.  Defaults to return true, if the tile type blocks line of sight; false, otherwise.  Secret doors typically block line of sight but will allow
@@ -187,7 +192,7 @@ internal class GenericTile : Tile
     /// <summary>
     /// Returns true, if the tile is water; false, otherwise.  Returns false, by default.  The WaterBorder and the Water tiles both return true.
     /// </summary>
-    public override bool IsWater { get; } = false;
+    public override bool HasWater { get; } = false;
     /// <summary>
     /// The priority on the map.
     /// </summary>

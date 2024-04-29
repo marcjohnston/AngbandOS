@@ -30,7 +30,7 @@ internal class MinorDisplacementTalent : Talent
                 return;
             }
             Game.Energy -= 60 - Game.ExperienceLevel.IntValue;
-            if (!Game.GridPassableNoCreature(j, i) || Game.Map.Grid[j][i].InVault || Game.Map.Grid[j][i].FeatureType is not WaterTile || Game.Distance(j, i, Game.MapY.IntValue, Game.MapX.IntValue) > Game.ExperienceLevel.IntValue + 2 || Game.RandomLessThan(Game.ExperienceLevel.IntValue * Game.ExperienceLevel.IntValue / 2) == 0)
+            if (!Game.GridPassableNoCreature(j, i) || Game.Map.Grid[j][i].InVault || !Game.Map.Grid[j][i].FeatureType.IsWater || Game.Distance(j, i, Game.MapY.IntValue, Game.MapX.IntValue) > Game.ExperienceLevel.IntValue + 2 || Game.RandomLessThan(Game.ExperienceLevel.IntValue * Game.ExperienceLevel.IntValue / 2) == 0)
             {
                 Game.MsgPrint("Something disrupts your concentration!");
                 Game.Energy -= 100;

@@ -2748,7 +2748,7 @@ internal class Game
                 }
                 DeleteObject(y, x);
                 MsgPrint("A magical stairway appears...");
-                CaveSetFeat(y, x, CurDungeon.Tower ? UpStaircaseTile : DownStaircaseTile);
+                CaveSetFeat(y, x, CurDungeon.Tower ? GetUpStaircaseTile : GetDownStaircaseTile);
                 SingletonRepository.FlaggedActions.Get(nameof(UpdateScentFlaggedAction)).Set();
                 SingletonRepository.FlaggedActions.Get(nameof(UpdateMonstersFlaggedAction)).Set();
                 SingletonRepository.FlaggedActions.Get(nameof(UpdateLightFlaggedAction)).Set();
@@ -3137,7 +3137,7 @@ internal class Game
             if (CaveValidBold(MapY.IntValue, MapX.IntValue))
             {
                 DeleteObject(MapY.IntValue, MapX.IntValue);
-                CaveSetFeat(MapY.IntValue, MapX.IntValue, CreateDownStair ? SingletonRepository.Tiles.Get(nameof(DownStaircaseTile)) : SingletonRepository.Tiles.Get(nameof(UpStaircaseTile)));
+                CaveSetFeat(MapY.IntValue, MapX.IntValue, CreateDownStair ? GetDownStaircaseTile : GetUpStaircaseTile);
             }
             CreateDownStair = false;
             CreateUpStair = false;
@@ -6719,7 +6719,7 @@ internal class Game
                     tile.PlayerMemorized = true;
                     MainForm.RefreshMapLocation(newY, newX);
                 }
-                else if (tile.FeatureType.IsWater)
+                else if (tile.FeatureType.HasWater)
                 {
                     MsgPrint("Your way seems to be blocked by water.");
                     tile.PlayerMemorized = true;
@@ -6800,7 +6800,7 @@ internal class Game
                     tile.PlayerMemorized = true;
                     MainForm.RefreshMapLocation(newY, newX);
                 }
-                else if (tile.FeatureType.IsWater)
+                else if (tile.FeatureType.HasWater)
                 {
                     MsgPrint("You cannot swim.");
                     tile.PlayerMemorized = true;
@@ -8018,7 +8018,7 @@ internal class Game
             }
         }
         // We can't tunnel through water
-        else if (tile.FeatureType is WaterTile)
+        else if (tile.FeatureType.IsWater)
         {
             MsgPrint("The water fills up your tunnel as quickly as you dig!");
         }
@@ -10582,7 +10582,7 @@ internal class Game
     }
 
     private Tile? _downStaircaseTile = null;
-    public Tile DownStaircaseTile
+    public Tile GetDownStaircaseTile
     {
         get
         {
@@ -10595,7 +10595,7 @@ internal class Game
     }
 
     private Tile? _upStaircaseTile = null;
-    public Tile UpStaircaseTile
+    public Tile GetUpStaircaseTile
     {
         get
         {
@@ -10607,16 +10607,42 @@ internal class Game
         }
     }
 
-    private Tile? _grassStaircaseTile = null;
+    private Tile? _grassTile = null;
     public Tile GetGrassTile
     {
         get
         {
-            if (_grassStaircaseTile == null)
+            if (_grassTile == null)
             {
-                _grassStaircaseTile = SingletonRepository.Tiles.Single(_tile => _tile.IsGrass);
+                _grassTile = SingletonRepository.Tiles.Single(_tile => _tile.IsGrass);
             }
-            return _grassStaircaseTile;
+            return _grassTile;
+        }
+    }
+
+    private Tile? _rockTile = null;
+    public Tile GetRockTile
+    {
+        get
+        {
+            if (_rockTile == null)
+            {
+                _rockTile = SingletonRepository.Tiles.Single(_tile => _tile.IsRock);
+            }
+            return _rockTile;
+        }
+    }
+
+    private Tile? _waterTile = null;
+    public Tile GetWaterTile
+    {
+        get
+        {
+            if (_waterTile == null)
+            {
+                _waterTile = SingletonRepository.Tiles.Single(_tile => _tile.IsWater);
+            }
+            return _waterTile;
         }
     }
 
@@ -10641,7 +10667,7 @@ internal class Game
         Map.Grid[y - 1][x + 1].RevertToBackground();
         Map.Grid[y][x - 2].RevertToBackground();
         Map.Grid[y][x - 1].RevertToBackground();
-        Map.Grid[y][x].SetFeature(DownStaircaseTile);
+        Map.Grid[y][x].SetFeature(GetDownStaircaseTile);
         stairX = x;
         stairY = y;
         Map.Grid[y][x + 1].RevertToBackground();
@@ -10726,22 +10752,22 @@ internal class Game
             Map.Grid[y][midX + 6].SetBackgroundFeature(GetGrassTile);
             Map.Grid[y][midX + 6].SetFeature(GetGrassTile);
         }
-        Map.Grid[midY - 6][midX].SetFeature(SingletonRepository.Tiles.Get(nameof(RockTile)));
-        Map.Grid[midY - 6][midX - 1].SetFeature(SingletonRepository.Tiles.Get(nameof(RockTile)));
-        Map.Grid[midY - 5][midX - 4].SetFeature(SingletonRepository.Tiles.Get(nameof(RockTile)));
-        Map.Grid[midY - 4][midX - 5].SetFeature(SingletonRepository.Tiles.Get(nameof(RockTile)));
-        Map.Grid[midY - 1][midX - 6].SetFeature(SingletonRepository.Tiles.Get(nameof(RockTile)));
-        Map.Grid[midY][midX - 6].SetFeature(SingletonRepository.Tiles.Get(nameof(RockTile)));
-        Map.Grid[midY + 3][midX - 5].SetFeature(SingletonRepository.Tiles.Get(nameof(RockTile)));
-        Map.Grid[midY + 4][midX - 4].SetFeature(SingletonRepository.Tiles.Get(nameof(RockTile)));
-        Map.Grid[midY + 5][midX - 1].SetFeature(SingletonRepository.Tiles.Get(nameof(RockTile)));
-        Map.Grid[midY + 5][midX].SetFeature(SingletonRepository.Tiles.Get(nameof(RockTile)));
-        Map.Grid[midY + 4][midX + 3].SetFeature(SingletonRepository.Tiles.Get(nameof(RockTile)));
-        Map.Grid[midY + 3][midX + 4].SetFeature(SingletonRepository.Tiles.Get(nameof(RockTile)));
-        Map.Grid[midY][midX + 5].SetFeature(SingletonRepository.Tiles.Get(nameof(RockTile)));
-        Map.Grid[midY - 1][midX + 5].SetFeature(SingletonRepository.Tiles.Get(nameof(RockTile)));
-        Map.Grid[midY - 4][midX + 4].SetFeature(SingletonRepository.Tiles.Get(nameof(RockTile)));
-        Map.Grid[midY - 5][midX + 3].SetFeature(SingletonRepository.Tiles.Get(nameof(RockTile)));
+        Map.Grid[midY - 6][midX].SetFeature(GetRockTile);
+        Map.Grid[midY - 6][midX - 1].SetFeature(GetRockTile);
+        Map.Grid[midY - 5][midX - 4].SetFeature(GetRockTile);
+        Map.Grid[midY - 4][midX - 5].SetFeature(GetRockTile);
+        Map.Grid[midY - 1][midX - 6].SetFeature(GetRockTile);
+        Map.Grid[midY][midX - 6].SetFeature(GetRockTile);
+        Map.Grid[midY + 3][midX - 5].SetFeature(GetRockTile);
+        Map.Grid[midY + 4][midX - 4].SetFeature(GetRockTile);
+        Map.Grid[midY + 5][midX - 1].SetFeature(GetRockTile);
+        Map.Grid[midY + 5][midX].SetFeature(GetRockTile);
+        Map.Grid[midY + 4][midX + 3].SetFeature(GetRockTile);
+        Map.Grid[midY + 3][midX + 4].SetFeature(GetRockTile);
+        Map.Grid[midY][midX + 5].SetFeature(GetRockTile);
+        Map.Grid[midY - 1][midX + 5].SetFeature(GetRockTile);
+        Map.Grid[midY - 4][midX + 4].SetFeature(GetRockTile);
+        Map.Grid[midY - 5][midX + 3].SetFeature(GetRockTile);
     }
 
     private void MakeLake(int minX, int minY, int width, int height)
@@ -10767,8 +10793,8 @@ internal class Game
                 int rounded = (int)(v * 10);
                 if (rounded > 3)
                 {
-                    cPtr.SetBackgroundFeature(SingletonRepository.Tiles.Get(nameof(WaterTile)));
-                    cPtr.SetFeature(SingletonRepository.Tiles.Get(nameof(WaterTile)));
+                    cPtr.SetBackgroundFeature(GetWaterTile);
+                    cPtr.SetFeature(GetWaterTile);
                 }
                 else if (rounded == 3)
                 {
@@ -10876,7 +10902,7 @@ internal class Game
             Map.Grid[y - 14][x + i].PlayerMemorized = true;
             Map.Grid[y - 14][x + i].SelfLit = true;
         }
-        Map.Grid[y][x].SetFeature(SingletonRepository.Tiles.Get(nameof(UpStaircaseTile)));
+        Map.Grid[y][x].SetFeature(GetUpStaircaseTile);
         Map.Grid[y][x].PlayerMemorized = true;
         Map.Grid[y][x].SelfLit = true;
         for (i = -3; i < 4; i++)
@@ -11031,7 +11057,7 @@ internal class Game
             cPtr = Map.Grid[y][x];
             if (cPtr.FeatureType == cPtr.BackgroundFeature)
             {
-                cPtr.SetFeature(SingletonRepository.Tiles.Get(nameof(RockTile)));
+                cPtr.SetFeature(GetRockTile);
                 cPtr.PlayerMemorized = true;
             }
         }
@@ -11110,7 +11136,7 @@ internal class Game
             }
         } while (true);
         cPtr = Map.Grid[y][x];
-        cPtr.SetFeature(DownStaircaseTile);
+        cPtr.SetFeature(GetDownStaircaseTile);
         cPtr.PlayerMemorized = true;
         return new GridCoordinate(x, y);
     }
@@ -12028,8 +12054,8 @@ internal class Game
             for (x = 0; x < CurWid; x++)
             {
                 byte elevation = Elevation(WildernessY, WildernessX, y, x);
-                Tile floorTile = SingletonRepository.Tiles.Get(nameof(WaterTile));
-                Tile featureTile = SingletonRepository.Tiles.Get(nameof(WaterTile));
+                Tile floorTile = GetWaterTile;
+                Tile featureTile = GetWaterTile;
                 if (elevation > 0)
                 {
                     floorTile = GetGrassTile;
@@ -12056,16 +12082,16 @@ internal class Game
         for (x = 0; x < CurWid; x++)
         {
             GridTile cPtr = Map.Grid[0][x];
-            cPtr.SetFeature(cPtr.BackgroundFeature.IsWater ? SingletonRepository.Tiles.Get(nameof(WaterBorderTile)) : SingletonRepository.Tiles.Get(nameof(WildBorderTile)));
+            cPtr.SetFeature(cPtr.BackgroundFeature.HasWater ? SingletonRepository.Tiles.Get(nameof(WaterBorderTile)) : SingletonRepository.Tiles.Get(nameof(WildBorderTile)));
             cPtr = Map.Grid[CurHgt - 1][x];
-            cPtr.SetFeature(cPtr.BackgroundFeature.IsWater ? SingletonRepository.Tiles.Get(nameof(WaterBorderTile)) : SingletonRepository.Tiles.Get(nameof(WildBorderTile)));
+            cPtr.SetFeature(cPtr.BackgroundFeature.HasWater ? SingletonRepository.Tiles.Get(nameof(WaterBorderTile)) : SingletonRepository.Tiles.Get(nameof(WildBorderTile)));
         }
         for (y = 0; y < CurHgt; y++)
         {
             GridTile cPtr = Map.Grid[y][0];
-            cPtr.SetFeature(cPtr.BackgroundFeature.IsWater ? SingletonRepository.Tiles.Get(nameof(WaterBorderTile)) : SingletonRepository.Tiles.Get(nameof(WildBorderTile)));
+            cPtr.SetFeature(cPtr.BackgroundFeature.HasWater ? SingletonRepository.Tiles.Get(nameof(WaterBorderTile)) : SingletonRepository.Tiles.Get(nameof(WildBorderTile)));
             cPtr = Map.Grid[y][CurWid - 1];
-            cPtr.SetFeature(cPtr.BackgroundFeature.IsWater ? SingletonRepository.Tiles.Get(nameof(WaterBorderTile)) : SingletonRepository.Tiles.Get(nameof(WildBorderTile)));
+            cPtr.SetFeature(cPtr.BackgroundFeature.HasWater ? SingletonRepository.Tiles.Get(nameof(WaterBorderTile)) : SingletonRepository.Tiles.Get(nameof(WildBorderTile)));
         }
         MakeWildernessWalls(this.WildernessX, this.WildernessY);
         MakeCornerTowers(this.WildernessX, this.WildernessY);
@@ -12080,7 +12106,7 @@ internal class Game
             {
                 continue;
             }
-            Map.Grid[y][x].SetFeature(SingletonRepository.Tiles.Get(nameof(RockTile)));
+            Map.Grid[y][x].SetFeature(GetRockTile);
         }
         UseFixed = false;
         if (CameFrom == LevelStart.StartRandom)
@@ -12094,7 +12120,7 @@ internal class Game
         }
         else if (CameFrom == LevelStart.StartWalk)
         {
-            if (Map.Grid[this.MapY.IntValue][this.MapX.IntValue].FeatureType.IsTree || Map.Grid[this.MapY.IntValue][this.MapX.IntValue].FeatureType is WaterTile)
+            if (Map.Grid[this.MapY.IntValue][this.MapX.IntValue].FeatureType.IsTree || Map.Grid[this.MapY.IntValue][this.MapX.IntValue].FeatureType.IsWater)
             {
                 Map.Grid[this.MapY.IntValue][this.MapX.IntValue].RevertToBackground();
             }

@@ -16,5 +16,6 @@ internal class WaterTile : Tile
     public override string Description => "water";
     public override bool DimsOutsideLOS => true;
     public override int MapPriority => 0;
+    public override bool HasWater => true;
     public override bool IsWater => true;
 }

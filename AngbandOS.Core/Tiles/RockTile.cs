@@ -18,4 +18,5 @@ internal class RockTile : Tile
     public override bool DimsOutsideLOS => true;
     public override int MapPriority => 0;
     public override bool YellowInTorchlight => true;
+    public override bool IsRock => true;
 }

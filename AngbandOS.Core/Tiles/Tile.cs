@@ -64,7 +64,7 @@ internal abstract class Tile : IGetKey
             IsVisibleDoor = IsVisibleDoor,
             IsVisibleTreasure = IsVisibleTreasure,
             IsWall = IsWall,
-            IsWater = IsWater,
+            HasWater = HasWater,
             IsWildPath = IsWildPath,
             IsDownStaircase = IsDownStaircase,
             IsUpStaircase = IsUpStaircase,
@@ -249,9 +249,20 @@ internal abstract class Tile : IGetKey
     public virtual bool IsWall => false;
 
     /// <summary>
-    /// Returns true, if the tile is water; false, otherwise.  Returns false, by default.  The WaterBorder and the Water tiles both return true.
+    /// The tile is rock.
+    /// </summary>
+    public virtual bool IsRock => false;
+
+    /// <summary>
+    /// The tile is water.
     /// </summary>
     public virtual bool IsWater => false;
+
+    /// <summary>
+    /// Returns true, if the tile has water; false, otherwise.  Returns false, by default.  The WaterBorder and the Water tiles both return true.
+    /// </summary>
+    public virtual bool HasWater => false;
+
     /// <summary>
     /// The priority on the map.
     /// </summary>

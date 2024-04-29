@@ -336,13 +336,13 @@ internal class Type4RoomLayout : RoomLayout
     private void PlaceDownStairs(int y, int x)
     {
         GridTile cPtr = Game.Map.Grid[y][x];
-        cPtr.SetFeature(Game.DownStaircaseTile);
+        cPtr.SetFeature(Game.GetDownStaircaseTile);
     }
 
     private void PlaceUpStairs(int y, int x)
     {
         GridTile cPtr = Game.Map.Grid[y][x];
-        cPtr.SetFeature(Game.UpStaircaseTile);
+        cPtr.SetFeature(Game.GetUpStaircaseTile);
     }
 
     private void VaultObjects(int y, int x, int num)

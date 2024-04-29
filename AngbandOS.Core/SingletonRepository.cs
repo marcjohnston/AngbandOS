@@ -329,9 +329,6 @@ internal class SingletonRepository
         AddInterfaceRepository<AlterAction>();
         AddInterfaceRepository<Alignment>();
 
-        // This is the load phase for assembly.
-        LoadAllAssemblyTypes();
-
         AddInterfaceRepository<AmuletReadableFlavor>();
         AddInterfaceRepository<Animation>();
         AddInterfaceRepository<Attack>();
@@ -342,6 +339,9 @@ internal class SingletonRepository
         AddInterfaceRepository<God>();
         AddInterfaceRepository<HelpGroup>();
         AddInterfaceRepository<MonsterRace>();
+        // This is the load phase for assembly.
+        LoadAllAssemblyTypes();
+
 
         // Now load the configuration singletons.
         LoadFromConfiguration<AmuletReadableFlavor, ReadableFlavorDefinition, GenericAmuletReadableFlavor>(Game.Configuration.AmuletReadableFlavors);

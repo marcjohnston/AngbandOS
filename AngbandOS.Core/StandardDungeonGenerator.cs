@@ -125,10 +125,10 @@ internal class StandardDungeonGenerator : DungeonGenerator
         }
 
         // Generate downstairs.
-        AllocStairs(Game.DownStaircaseTile, Game.RandomBetween(3, 4), 3);
+        AllocStairs(Game.GetDownStaircaseTile, Game.RandomBetween(3, 4), 3);
 
         // Generate upstairs.
-        AllocStairs(Game.UpStaircaseTile, Game.RandomBetween(1, 2), 3);
+        AllocStairs(Game.GetUpStaircaseTile, Game.RandomBetween(1, 2), 3);
 
         // Choose a spot for the player.
         if (!Game.NewPlayerSpot())
@@ -464,11 +464,11 @@ internal class StandardDungeonGenerator : DungeonGenerator
                     GridTile cPtr = Game.Map.Grid[y][x];
                     if (Game.CurrentDepth <= 0)
                     {
-                        cPtr.SetFeature(Game.DownStaircaseTile);
+                        cPtr.SetFeature(Game.GetDownStaircaseTile);
                     }
                     else if (Game.IsQuest(Game.CurrentDepth) || Game.CurrentDepth == Game.CurDungeon.MaxLevel)
                     {
-                        cPtr.SetFeature(Game.CurDungeon.Tower ? Game.DownStaircaseTile : Game.UpStaircaseTile);
+                        cPtr.SetFeature(Game.CurDungeon.Tower ? Game.GetDownStaircaseTile : Game.GetUpStaircaseTile);
                     }
                     else
                     {

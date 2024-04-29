@@ -26,19 +26,19 @@ internal class CreateStairsScript : Script, IScript
         Game.DeleteObject(Game.MapY.IntValue, Game.MapX.IntValue);
         if (Game.CurrentDepth <= 0)
         {
-            Game.CaveSetFeat(Game.MapY.IntValue, Game.MapX.IntValue, Game.DownStaircaseTile);
+            Game.CaveSetFeat(Game.MapY.IntValue, Game.MapX.IntValue, Game.GetDownStaircaseTile);
         }
         else if (Game.IsQuest(Game.CurrentDepth) || Game.CurrentDepth >= Game.CurDungeon.MaxLevel)
         {
-            Game.CaveSetFeat(Game.MapY.IntValue, Game.MapX.IntValue, Game.CurDungeon.Tower ? Game.DownStaircaseTile : Game.UpStaircaseTile);
+            Game.CaveSetFeat(Game.MapY.IntValue, Game.MapX.IntValue, Game.CurDungeon.Tower ? Game.GetDownStaircaseTile : Game.GetUpStaircaseTile);
         }
         else if (Game.RandomLessThan(100) < 50)
         {
-            Game.CaveSetFeat(Game.MapY.IntValue, Game.MapX.IntValue, Game.DownStaircaseTile);
+            Game.CaveSetFeat(Game.MapY.IntValue, Game.MapX.IntValue, Game.GetDownStaircaseTile);
         }
         else
         {
-            Game.CaveSetFeat(Game.MapY.IntValue, Game.MapX.IntValue, Game.UpStaircaseTile);
+            Game.CaveSetFeat(Game.MapY.IntValue, Game.MapX.IntValue, Game.GetUpStaircaseTile);
         }
     }
 }
