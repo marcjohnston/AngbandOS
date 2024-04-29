@@ -10601,7 +10601,7 @@ internal class Game
         {
             if (_upStaircaseTile == null)
             {
-                _upStaircaseTile = SingletonRepository.Tiles.Single(_tile => _tile.IsDownStaircase);
+                _upStaircaseTile = SingletonRepository.Tiles.Single(_tile => _tile.IsUpStaircase);
             }
             return _upStaircaseTile;
         }

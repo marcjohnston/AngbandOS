@@ -77,7 +77,7 @@ internal class PersistConfigurationScript : Script, IScript
             Game.SingletonRepository.Mutations.PersistEntities();
             Game.SingletonRepository.Patrons.PersistEntities();
             Game.SingletonRepository.PersistEntities<Plural>();
-            Game.SingletonRepository.PotionReadableFlavors.PersistEntities();
+            Game.SingletonRepository.PersistEntities<PotionReadableFlavor>();
             Game.SingletonRepository.ProjectileGraphics.PersistEntities();
             Game.SingletonRepository.Projectiles.PersistEntities();
             Game.SingletonRepository.Races.PersistEntities();

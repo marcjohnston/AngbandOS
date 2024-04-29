@@ -50,7 +50,7 @@ internal abstract class PotionItemFactory : ItemFactory, IFlavorFactory
     /// Returns the potions flavors repository because potions have flavors that need to be identified.  The Apple Juice, Water and Slime-Mold
     /// potions override this
     /// </summary>
-    public virtual IEnumerable<Flavor>? GetFlavorRepository() => Game.SingletonRepository.PotionReadableFlavors;
+    public virtual IEnumerable<Flavor>? GetFlavorRepository() => Game.SingletonRepository.Get<PotionReadableFlavor>();
 
     public override int PercentageBreakageChance => 100;
     public override bool CanBeQuaffed => true;

@@ -50,7 +50,6 @@ internal class SingletonRepository
     public MutationsRepository Mutations;
     public PatronsRepository Patrons;
     public PluralsRepository Plurals;
-    public PotionReadableFlavorsRepository PotionReadableFlavors;
     public PowersRepository Powers;
     public ProjectileGraphicsRepository ProjectileGraphics;
     public ProjectilesRepository Projectiles;
@@ -357,6 +356,8 @@ internal class SingletonRepository
         AddInterfaceRepository<HelpGroup>();
         AddInterfaceRepository<MonsterRace>();
         AddInterfaceRepository<MushroomReadableFlavor>();
+        AddInterfaceRepository<Plural>();
+        AddInterfaceRepository<PotionReadableFlavor>();
 
         // This is the load phase for assembly.
         LoadAllAssemblyTypes();
@@ -374,6 +375,8 @@ internal class SingletonRepository
         LoadFromConfiguration<HelpGroup, HelpGroupDefinition, GenericHelpGroup>(Game.Configuration.HelpGroups);
         LoadFromConfiguration<MonsterRace, MonsterRaceDefinition, GenericMonsterRace>(Game.Configuration.MonsterRaces);
         LoadFromConfiguration<MushroomReadableFlavor, ReadableFlavorDefinition, GenericMushroomReadableFlavor>(Game.Configuration.MushroomReadableFlavors);
+        LoadFromConfiguration<Plural, PluralDefinition, GenericPlural>(Game.Configuration.Plurals);
+        LoadFromConfiguration<PotionReadableFlavor, ReadableFlavorDefinition, GenericPotionReadableFlavor>(Game.Configuration.PotionReadableFlavors);
 
         MonsterRace[] monsterRaces = Get<MonsterRace>();
         MonsterRace[] sortedMonsterRaces = monsterRaces.OrderBy(_monsterRace => _monsterRace.LevelFound).ToArray();
@@ -409,7 +412,6 @@ internal class SingletonRepository
         MonsterSpells = AddRepository<MonsterSpellsRepository>(new MonsterSpellsRepository(Game));
         Mutations = AddRepository<MutationsRepository>(new MutationsRepository(Game));
         Patrons = AddRepository<PatronsRepository>(new PatronsRepository(Game));
-        PotionReadableFlavors = AddRepository<PotionReadableFlavorsRepository>(new PotionReadableFlavorsRepository(Game));
         Powers = AddRepository<PowersRepository>(new PowersRepository(Game));
         ProjectileGraphics = AddRepository<ProjectileGraphicsRepository>(new ProjectileGraphicsRepository(Game));
         Projectiles = AddRepository<ProjectilesRepository>(new ProjectilesRepository(Game));
