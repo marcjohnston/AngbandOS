@@ -86,7 +86,7 @@ internal abstract class Town : IGetKey
         }
         StoreFactories = storeFactoryList.ToArray();
 
-        Dungeon = Game.SingletonRepository.Dungeons.Get(DungeonName);
+        Dungeon = Game.SingletonRepository.Get<Dungeon>(DungeonName);
     }
 
     public void Initialize()

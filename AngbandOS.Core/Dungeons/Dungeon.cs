@@ -40,7 +40,7 @@ internal abstract class Dungeon : IGetKey
         {
             foreach (string dungeonGuardianName in DungeonGuardianNames)
             {
-                dungeonGuardianList.Add(Game.SingletonRepository.DungeonGuardians.Get(dungeonGuardianName));
+                dungeonGuardianList.Add(Game.SingletonRepository.Get<DungeonGuardian>(dungeonGuardianName));
             }
         }
         DungeonGuardians = dungeonGuardianList.ToArray();

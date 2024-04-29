@@ -46,14 +46,14 @@ internal class GetRumourScript : Script, IScript, IRepeatableScript
         for (int i = 0; i < Game.DungeonCount; i++)
         {
             // Add a rumour for each dungeon we don't know the depth of
-            if (!Game.SingletonRepository.Dungeons[i].KnownDepth)
+            if (!Game.SingletonRepository.Get<Dungeon>(i).KnownDepth)
             {
                 rumorType[maxRumor] = 'd';
                 rumorIndex[maxRumor] = i;
                 maxRumor++;
             }
             //Add a rumour for each dungeon we don't know the offset of
-            if (!Game.SingletonRepository.Dungeons[i].KnownOffset)
+            if (!Game.SingletonRepository.Get<Dungeon>(i).KnownOffset)
             {
                 rumorType[maxRumor] = 'o';
                 rumorIndex[maxRumor] = i;
@@ -86,7 +86,7 @@ internal class GetRumourScript : Script, IScript, IRepeatableScript
         else if (type == 'd')
         {
             // The rumour describes a dungeon depth
-            Dungeon d = Game.SingletonRepository.Dungeons[index];
+            Dungeon d = Game.SingletonRepository.Get<Dungeon>(index);
             rumor = d.Tower
                 ? $"They say that {d.Name} has {d.MaxLevel} floors."
                 : $"They say that {d.Name} has {d.MaxLevel} levels.";
@@ -95,7 +95,7 @@ internal class GetRumourScript : Script, IScript, IRepeatableScript
         else
         {
             // The rumour describes a dungeon difficulty
-            Dungeon d = Game.SingletonRepository.Dungeons[index];
+            Dungeon d = Game.SingletonRepository.Get<Dungeon>(index);
             rumor = $"They say that {d.Name} has a relative difficulty of {d.Offset}.";
             d.KnownOffset = true;
         }

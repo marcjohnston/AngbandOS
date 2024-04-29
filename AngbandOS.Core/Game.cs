@@ -1880,7 +1880,7 @@ internal class Game
 
         _seedFlavor = RandomLessThan(int.MaxValue);
         CreateWorld();
-        foreach (var dungeon in SingletonRepository.Dungeons)
+        foreach (var dungeon in SingletonRepository.Get<Dungeon>())
         {
             dungeon.RandomiseOffset();
         }
@@ -2148,20 +2148,20 @@ internal class Game
         Screen.Print(ColorEnum.Purple, "+------------+", 14, 1);
         for (y = 0; y < DungeonCount; y++)
         {
-            Dungeon dungeon = SingletonRepository.Dungeons[y];
+            Dungeon dungeon = SingletonRepository.Get<Dungeon>(y);
             int activeQuestCount = dungeon.ActiveQuestCount();
-            string depth = SingletonRepository.Dungeons[y].KnownDepth ? $"{dungeon.MaxLevel}" : "?";
-            string difficulty = SingletonRepository.Dungeons[y].KnownOffset ? $"{dungeon.Offset}" : "?";
+            string depth = dungeon.KnownDepth ? $"{dungeon.MaxLevel}" : "?";
+            string difficulty = dungeon.KnownOffset ? $"{dungeon.Offset}" : "?";
             string buffer;
             if (dungeon.Visited)
             {
                 buffer = y < SingletonRepository.Towns.Count
-                    ? $"{SingletonRepository.Dungeons[y].MapSymbol} = {SingletonRepository.Towns[y].Name} (L:{depth}, D:{difficulty}, Q:{activeQuestCount})"
-                    : $"{SingletonRepository.Dungeons[y].MapSymbol} = {SingletonRepository.Dungeons[y].Name} (L:{depth}, D:{difficulty}, Q:{activeQuestCount})";
+                    ? $"{dungeon.MapSymbol} = {SingletonRepository.Towns[y].Name} (L:{depth}, D:{difficulty}, Q:{activeQuestCount})"
+                    : $"{dungeon.MapSymbol} = {dungeon.Name} (L:{depth}, D:{difficulty}, Q:{activeQuestCount})";
             }
             else
             {
-                buffer = $"? = {SingletonRepository.Dungeons[y].Name} (L:{depth}, D:{difficulty}, Q:{activeQuestCount})";
+                buffer = $"? = {dungeon.Name} (L:{depth}, D:{difficulty}, Q:{activeQuestCount})";
             }
             ColorEnum keyAttr = ColorEnum.Brown;
             if (y < SingletonRepository.Towns.Count)
@@ -2932,7 +2932,7 @@ internal class Game
         MakeIslandContours();
 
         // The game world automatically gets a single instance of every town.  Initialize each town now.
-        List<Dungeon> dungeonList = SingletonRepository.Dungeons.ToList();
+        List<Dungeon> dungeonList = SingletonRepository.Get<Dungeon>().ToList();
 
         // Reset the position for each dungeon.
         foreach (Dungeon dungeon in dungeonList)
@@ -12825,12 +12825,12 @@ internal class Game
         // These are the fixed quests
         for (int i = 0; i < DungeonCount; i++)
         {
-            foreach (DungeonGuardian dungeonGuardian in SingletonRepository.Dungeons[i].DungeonGuardians)
+            foreach (DungeonGuardian dungeonGuardian in SingletonRepository.Get<Dungeon>(i).DungeonGuardians)
             {
                 Quests[questIndex].Level = dungeonGuardian.LevelFound;
                 Quests[questIndex].RIdx = dungeonGuardian.MonsterRace.Index;
                 SingletonRepository.MonsterRaces[Quests[questIndex].RIdx].OnlyGuardian = true;
-                Quests[questIndex].Dungeon = SingletonRepository.Dungeons[i];
+                Quests[questIndex].Dungeon = SingletonRepository.Get<Dungeon>(i);
                 Quests[questIndex].ToKill = 1;
                 Quests[questIndex].Killed = 0;
                 questIndex++;
@@ -12882,7 +12882,7 @@ internal class Game
 
                 // Determine which dungeons are still available to choose from.
                 List<Dungeon> dungeonList = new List<Dungeon>();
-                foreach (Dungeon dungeon in SingletonRepository.Dungeons)
+                foreach (Dungeon dungeon in SingletonRepository.Get<Dungeon>())
                 {
                     if (Quests[questIndex].Level <= dungeon.Offset)
                     {
@@ -13587,7 +13587,7 @@ internal class Game
     public int GetScore(Game game)
     {
         int score = (MaxLevelGained - 1) * 100;
-        foreach (Dungeon dungeon in SingletonRepository.Dungeons)
+        foreach (Dungeon dungeon in SingletonRepository.Get<Dungeon>())
         {
             if (dungeon.RecallLevel > 0)
             {

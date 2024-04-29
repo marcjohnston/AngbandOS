@@ -831,9 +831,9 @@ internal class JournalScript : Script, IScript, IRepeatableScript, IScriptStore
         Game.Screen.Print(ColorEnum.Blue, "Outstanding Quests", 0, 1);
         Game.Screen.Print(ColorEnum.Blue, "==================", 1, 1);
         int row = 3;
-        for (int i = 0; i < Game.DungeonCount; i++)
+        foreach (Dungeon dungeon in Game.SingletonRepository.Get<Dungeon>())
         {
-            int firstQuest = Game.SingletonRepository.Dungeons[i].FirstQuest();
+            int firstQuest = dungeon.FirstQuest();
             if (firstQuest != -1)
             {
                 string line = Game.Quests[firstQuest].Describe();
