@@ -37,9 +37,6 @@ internal class SingletonRepository
     public WorshipPlayerAttacksRepository WorshipPlayerAttacks;
 
     public FlaggedActionsRepository FlaggedActions;
-    public FormsRepository Forms;
-    public GendersRepository Genders;
-    public HelpGroupsRepository HelpGroups;
     public InventorySlotsRepository InventorySlots;
     public ItemClassesRepository ItemClasses;
     public ItemFactoriesRepository ItemFactories;
@@ -49,9 +46,6 @@ internal class SingletonRepository
     public MartialArtsAttacksRepository MartialArtsAttacks;
     public MonsterFiltersRepository MonsterFilters;
     public MonsterSpellsRepository MonsterSpells;
-    public MutationsRepository Mutations;
-    public PatronsRepository Patrons;
-    public PowersRepository Powers;
     public ProjectilesRepository Projectiles;
     public RacesRepository Races;
     public RareItemsRepository RareItems;
@@ -465,10 +459,8 @@ internal class SingletonRepository
         // Create all of the repositories.  All of the repositories will be empty and have an instance to the save game.
         ElvishText = AddRepository<ElvishTextRepository>(new ElvishTextRepository(Game));
         FlaggedActions = AddRepository<FlaggedActionsRepository>(new FlaggedActionsRepository(Game));
-        Forms = AddRepository<FormsRepository>(new FormsRepository(Game));
         FunnyComments = AddRepository<FunnyCommentsRepository>(new FunnyCommentsRepository(Game));
         FunnyDescriptions = AddRepository<FunnyDescriptionsRepository>(new FunnyDescriptionsRepository(Game));
-        Genders = AddRepository<GendersRepository>(new GendersRepository(Game));
         HorrificDescriptions = AddRepository<HorrificDescriptionsRepository>(new HorrificDescriptionsRepository(Game));
         InsultPlayerAttacks = AddRepository<InsultPlayerAttacksRepository>(new InsultPlayerAttacksRepository(Game));
         InventorySlots = AddRepository<InventorySlotsRepository>(new InventorySlotsRepository(Game));
@@ -481,9 +473,6 @@ internal class SingletonRepository
         MoanPlayerAttacks = AddRepository<MoanPlayerAttacksRepository>(new MoanPlayerAttacksRepository(Game));
         MonsterFilters = AddRepository<MonsterFiltersRepository>(new MonsterFiltersRepository(Game));
         MonsterSpells = AddRepository<MonsterSpellsRepository>(new MonsterSpellsRepository(Game));
-        Mutations = AddRepository<MutationsRepository>(new MutationsRepository(Game));
-        Patrons = AddRepository<PatronsRepository>(new PatronsRepository(Game));
-        Powers = AddRepository<PowersRepository>(new PowersRepository(Game));
         Projectiles = AddRepository<ProjectilesRepository>(new ProjectilesRepository(Game));
         Races = AddRepository<RacesRepository>(new RacesRepository(Game));
         RareItems = AddRepository<RareItemsRepository>(new RareItemsRepository(Game));

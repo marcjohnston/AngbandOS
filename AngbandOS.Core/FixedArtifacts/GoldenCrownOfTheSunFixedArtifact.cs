@@ -19,7 +19,7 @@ internal class GoldenCrownOfTheSunFixedArtifact : FixedArtifact
 
     public override void ApplyResistances(Item item)
     {
-        item.RandomPower = Game.SingletonRepository.Powers.ToWeightedRandom(_power => _power.IsAbility == true).Choose();
+        item.RandomPower = Game.SingletonRepository.ToWeightedRandom<Power>(_power => _power.IsAbility == true).Choose();
 
         IArtifactBias artifactBias = null;
         item.ApplyRandomResistance(ref artifactBias, Game.DieRoll(22) + 16);

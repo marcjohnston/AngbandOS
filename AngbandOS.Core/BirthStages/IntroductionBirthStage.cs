@@ -109,7 +109,7 @@ internal class IntroductionBirthStage : BirthStage
                 Game.God = Game.BaseCharacterClass.DefaultDeity(Game.SecondaryRealm);
             }
 
-            Gender[] availableRandomGenders = Game.SingletonRepository.Genders.Where(_gender => _gender.CanBeRandomlySelected).ToArray();
+            Gender[] availableRandomGenders = Game.SingletonRepository.Get<Gender>().Where(_gender => _gender.CanBeRandomlySelected).ToArray();
             int genderIndex = Game.RandomBetween(0, availableRandomGenders.Length - 1);
             Game.Gender = availableRandomGenders[genderIndex];
             Game.PlayerName.StringValue = Game.Race.CreateRandomName();

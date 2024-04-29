@@ -13,7 +13,7 @@ internal class ArmorOfPermanenceRareItem : RareItem
     private ArmorOfPermanenceRareItem(Game game) : base(game) { } // This object is a singleton.
     public override void ApplyMagic(Item item)
     {
-        item.RandomPower = Game.SingletonRepository.Powers.ToWeightedRandom(_power => _power.IsResistance == true).Choose();
+        item.RandomPower = Game.SingletonRepository.ToWeightedRandom<Power>(_power => _power.IsResistance == true).Choose();
     }
     public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(OpenBraceSymbol));
     public override ColorEnum Color => ColorEnum.Grey;

@@ -18,7 +18,7 @@ internal class QuarterstaffOfAtalFixedArtifact : FixedArtifact
     protected override string? ActivationName => nameof(ProbingDetectionAndFullIdEvery1000Activation);
     public override void ApplyResistances(Item item)
     {
-        item.RandomPower = Game.SingletonRepository.Powers.ToWeightedRandom(_power => _power.IsAbility == true).Choose();
+        item.RandomPower = Game.SingletonRepository.ToWeightedRandom<Power>(_power => _power.IsAbility == true).Choose();
     }
 
     public override ColorEnum Color => ColorEnum.BrightBrown;

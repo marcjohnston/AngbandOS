@@ -15,7 +15,7 @@ internal class GenderSelectionBirthStage : BirthStage
     public override BirthStage? Render()
     {
         DisplayPartialCharacter();
-        string[]? menuItems = Game.SingletonRepository.Genders
+        string[]? menuItems = Game.SingletonRepository.Get<Gender>()
             .Select(_gender => _gender.Title)
             .ToArray();
         Game.Screen.Print(ColorEnum.Orange, "[Use up and down to select an option, right to confirm, or left to go back.]", 43, 1);
@@ -57,7 +57,7 @@ internal class GenderSelectionBirthStage : BirthStage
     }
     private BirthStage? GoForward(int index)
     {
-        Game.Gender = Game.SingletonRepository.Genders[index];
+        Game.Gender = Game.SingletonRepository.Get<Gender>(index);
         return Game.SingletonRepository.Get<BirthStage>(nameof(ConfirmationBirthStage));
     }
 

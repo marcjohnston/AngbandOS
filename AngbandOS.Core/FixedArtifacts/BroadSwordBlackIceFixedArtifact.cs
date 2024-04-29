@@ -24,7 +24,7 @@ internal class BroadSwordBlackIceFixedArtifact : FixedArtifact
         }
         else
         {
-            item.RandomPower = Game.SingletonRepository.Powers.ToWeightedRandom(_power => _power.IsAbility == true).Choose();
+            item.RandomPower = Game.SingletonRepository.ToWeightedRandom<Power>(_power => _power.IsAbility == true).Choose();
         }
     }
     public override ColorEnum Color => ColorEnum.BrightWhite;
