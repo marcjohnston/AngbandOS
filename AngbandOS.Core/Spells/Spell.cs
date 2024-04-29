@@ -179,7 +179,7 @@ internal abstract class Spell : IGetKey
     public void Initialize(BookItemFactory bookItemFactory, int spellIndex)
     {
         BaseCharacterClass characterClass = Game.BaseCharacterClass;
-        ClassSpell = Game.SingletonRepository.ClassSpells.Get($"{characterClass.Key}.{this.Key}");
+        ClassSpell = Game.SingletonRepository.Get<ClassSpell>($"{characterClass.Key}.{this.Key}");
         SpellIndex = spellIndex;
         BookItemFactory = bookItemFactory;
     }

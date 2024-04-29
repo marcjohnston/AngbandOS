@@ -22,12 +22,10 @@ internal class SingletonRepository
 
     public ArtifactBiasesRepository ArtifactBiases;
     public AttackEffectsRepository AttackEffects;
-    public AttacksRepository Attacks;
     public BirthStagesRepository BirthStages;
     public CharacterClassesRepository CharacterClasses;
     public ChestTrapConfigurationsRepository ChestTrapConfigurations;
     public ChestTrapsRepository ChestTraps;
-    public ClassSpellsRepository ClassSpells;
     public DungeonGuardiansRepository DungeonGuardians;
     public DungeonsRepository Dungeons;
     public ElvishTextRepository ElvishText;
@@ -341,21 +339,23 @@ internal class SingletonRepository
         AddInterfaceRepository<AmuletReadableFlavor>();
         AddInterfaceRepository<GameCommand>();
         AddInterfaceRepository<Animation>();
+        AddInterfaceRepository<Attack>();
+        AddInterfaceRepository<ClassSpell>();
 
         // Now load the configuration singletons.
         LoadFromConfiguration<AmuletReadableFlavor, ReadableFlavorDefinition, GenericAmuletReadableFlavor>(Game.Configuration.AmuletReadableFlavors);
         LoadFromConfiguration<GameCommand, GameCommandDefinition, GenericGameCommand>(Game.Configuration.GameCommands);
         LoadFromConfiguration<Animation, AnimationDefinition, GenericAnimation>(Game.Configuration.Animations);
+        LoadFromConfiguration<Attack, AttackDefinition, GenericAttack>(Game.Configuration.Attacks);
+        LoadFromConfiguration<ClassSpell, ClassSpellDefinition, GenericClassSpell>(Game.Configuration.ClassSpells);
 
         // Create all of the repositories.  All of the repositories will be empty and have an instance to the save game.
         ArtifactBiases = AddRepository<ArtifactBiasesRepository>(new ArtifactBiasesRepository(Game));
         AttackEffects = AddRepository<AttackEffectsRepository>(new AttackEffectsRepository(Game));
-        Attacks = AddRepository<AttacksRepository>(new AttacksRepository(Game));
         BirthStages = AddRepository<BirthStagesRepository>(new BirthStagesRepository(Game));
         CharacterClasses = AddRepository<CharacterClassesRepository>(new CharacterClassesRepository(Game));
         ChestTrapConfigurations = AddRepository<ChestTrapConfigurationsRepository>(new ChestTrapConfigurationsRepository(Game));
         ChestTraps = AddRepository<ChestTrapsRepository>(new ChestTrapsRepository(Game));
-        ClassSpells = AddRepository<ClassSpellsRepository>(new ClassSpellsRepository(Game));
         DungeonGuardians = AddRepository<DungeonGuardiansRepository>(new DungeonGuardiansRepository(Game));
         Dungeons = AddRepository<DungeonsRepository>(new DungeonsRepository(Game));
         ElvishText = AddRepository<ElvishTextRepository>(new ElvishTextRepository(Game));

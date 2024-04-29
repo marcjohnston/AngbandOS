@@ -376,7 +376,7 @@ internal abstract class MonsterRace : IMonsterCharacteristics, IGetKey
         {
             foreach (MonsterAttackDefinition monsterAttackDefinition in AttackDefinitions)
             {
-                Attack attack = Game.SingletonRepository.Attacks.Get(monsterAttackDefinition.MethodName);
+                Attack attack = Game.SingletonRepository.Get<Attack>(monsterAttackDefinition.MethodName);
                 AttackEffect? attackEffect = null;
                 if (monsterAttackDefinition.EffectName != null)
                 {

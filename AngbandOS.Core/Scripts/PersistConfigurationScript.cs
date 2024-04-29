@@ -53,12 +53,12 @@ internal class PersistConfigurationScript : Script, IScript
             Game.SingletonRepository.PersistEntities<Animation>();
             Game.SingletonRepository.ArtifactBiases.PersistEntities();
             Game.SingletonRepository.AttackEffects.PersistEntities();
-            Game.SingletonRepository.Attacks.PersistEntities();
+            Game.SingletonRepository.PersistEntities<Attack>();
             Game.SingletonRepository.BirthStages.PersistEntities();
             Game.SingletonRepository.CharacterClasses.PersistEntities();
             Game.SingletonRepository.ChestTrapConfigurations.PersistEntities();
             Game.SingletonRepository.ChestTraps.PersistEntities();
-            Game.SingletonRepository.ClassSpells.PersistEntities();
+            Game.SingletonRepository.PersistEntities<ClassSpell>();
             Game.SingletonRepository.DungeonGuardians.PersistEntities();
             Game.SingletonRepository.Dungeons.PersistEntities();
             Game.SingletonRepository.FixedArtifacts.PersistEntities();
