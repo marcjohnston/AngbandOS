@@ -58,7 +58,7 @@ internal class GenderSelectionBirthStage : BirthStage
     private BirthStage? GoForward(int index)
     {
         Game.Gender = Game.SingletonRepository.Genders[index];
-        return Game.SingletonRepository.BirthStages.Get(nameof(ConfirmationBirthStage));
+        return Game.SingletonRepository.Get<BirthStage>(nameof(ConfirmationBirthStage));
     }
 
     private BirthStage? GoBack()
@@ -67,12 +67,12 @@ internal class GenderSelectionBirthStage : BirthStage
         int remainingAvailableSecondaryRealmCount = Game.BaseCharacterClass.RemainingAvailableSecondaryRealms().Length;
         if (remainingAvailableSecondaryRealmCount <= 1 && availablePrimaryRealmCount <= 1)
         {
-            return Game.SingletonRepository.BirthStages.Get(nameof(RaceSelectionBirthStage));
+            return Game.SingletonRepository.Get<BirthStage>(nameof(RaceSelectionBirthStage));
         }
         else if (remainingAvailableSecondaryRealmCount <= 1)
         {
-            return Game.SingletonRepository.BirthStages.Get(nameof(Realm1SelectionBirthStage));
+            return Game.SingletonRepository.Get<BirthStage>(nameof(Realm1SelectionBirthStage));
         }
-        return Game.SingletonRepository.BirthStages.Get(nameof(Realm2SelectionBirthStage));
+        return Game.SingletonRepository.Get<BirthStage>(nameof(Realm2SelectionBirthStage));
     }
 }

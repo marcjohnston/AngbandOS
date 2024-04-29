@@ -63,9 +63,9 @@ internal class ConfirmationBirthStage : BirthStage
             switch (c)
             {
                 case (char)13:
-                    return Game.SingletonRepository.BirthStages.Get(nameof(NamingBirthStage));
+                    return Game.SingletonRepository.Get<BirthStage>(nameof(NamingBirthStage));
                 case '4':
-                    return Game.SingletonRepository.BirthStages.Get(nameof(GenderSelectionBirthStage));
+                    return Game.SingletonRepository.Get<BirthStage>(nameof(GenderSelectionBirthStage));
                 case 'h':
                     Game.ShowManual();
                     break;

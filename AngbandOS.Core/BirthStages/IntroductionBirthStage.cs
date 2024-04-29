@@ -90,7 +90,7 @@ internal class IntroductionBirthStage : BirthStage
         Game.God = null;
         if (index == 1) // Random
         {
-            Game.BaseCharacterClass = Game.SingletonRepository.CharacterClasses.ToWeightedRandom().ChooseOrDefault();
+            Game.BaseCharacterClass = Game.SingletonRepository.ToWeightedRandom<BaseCharacterClass>().ChooseOrDefault();
             do
             {
                 int raceIndex = Game.RandomLessThan(Game.SingletonRepository.Races.Count);
@@ -114,7 +114,7 @@ internal class IntroductionBirthStage : BirthStage
             Game.Gender = availableRandomGenders[genderIndex];
             Game.PlayerName.StringValue = Game.Race.CreateRandomName();
             Game.Generation = 1;
-            return Game.SingletonRepository.BirthStages.Get(nameof(ConfirmationBirthStage));
+            return Game.SingletonRepository.Get<BirthStage>(nameof(ConfirmationBirthStage));
         }
         else if (index == 2) // Previous
         {
@@ -127,7 +127,7 @@ internal class IntroductionBirthStage : BirthStage
             Game.Gender = Game._prevSex;
             Game.PlayerName.StringValue = Game._prevName;
             Game.Generation = Game._prevGeneration + 1;
-            return Game.SingletonRepository.BirthStages.Get(nameof(ConfirmationBirthStage));
+            return Game.SingletonRepository.Get<BirthStage>(nameof(ConfirmationBirthStage));
         }
         else
         {
@@ -139,6 +139,6 @@ internal class IntroductionBirthStage : BirthStage
             Game.PrimaryRealm = null; // Wait until the player has selected a primary realm.
             Game.SecondaryRealm = null; // Wait until the player has selected secondary realm.
         }
-        return Game.SingletonRepository.BirthStages.Get(nameof(ClassSelectionBirthStage));
+        return Game.SingletonRepository.Get<BirthStage>(nameof(ClassSelectionBirthStage));
     }
 }

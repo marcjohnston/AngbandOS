@@ -52,12 +52,12 @@ internal class PersistConfigurationScript : Script, IScript
             Game.SingletonRepository.PersistEntities<AmuletReadableFlavor>();
             Game.SingletonRepository.PersistEntities<Animation>();
             Game.SingletonRepository.PersistEntities<ArtifactBias>();
-            Game.SingletonRepository.AttackEffects.PersistEntities();
+            Game.SingletonRepository.PersistEntities<AttackEffect>();
             Game.SingletonRepository.PersistEntities<Attack>();
-            Game.SingletonRepository.BirthStages.PersistEntities();
-            Game.SingletonRepository.CharacterClasses.PersistEntities();
-            Game.SingletonRepository.ChestTrapConfigurations.PersistEntities();
-            Game.SingletonRepository.ChestTraps.PersistEntities();
+            Game.SingletonRepository.PersistEntities<BirthStage>();
+            Game.SingletonRepository.PersistEntities<BaseCharacterClass>();
+            Game.SingletonRepository.PersistEntities<ChestTrapConfiguration>();
+            Game.SingletonRepository.PersistEntities<ChestTrap>();
             Game.SingletonRepository.PersistEntities<ClassSpell>();
             Game.SingletonRepository.PersistEntities<DungeonGuardian>();
             Game.SingletonRepository.PersistEntities<Dungeon>();

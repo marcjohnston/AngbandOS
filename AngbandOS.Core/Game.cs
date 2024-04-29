@@ -1842,7 +1842,7 @@ internal class Game
         {
             _prevSex = SingletonRepository.Genders.Get(nameof(FemaleGender));
             _prevRace = SingletonRepository.Races.Get(nameof(HumanRace));
-            _prevCharacterClass = SingletonRepository.CharacterClasses.Get(nameof(WarriorCharacterClass));
+            _prevCharacterClass = SingletonRepository.Get<BaseCharacterClass>(nameof(WarriorCharacterClass));
             _prevPrimaryRealm = null;
             _prevSecondaryRealm = null;
             _prevName = "Xena";
@@ -1852,7 +1852,7 @@ internal class Game
         {
             _prevSex = ExPlayer.Gender;
             _prevRace = ExPlayer.RaceAtBirth;
-            _prevCharacterClass = SingletonRepository.CharacterClasses.Get(ExPlayer.CharacterClassName);
+            _prevCharacterClass = SingletonRepository.Get<BaseCharacterClass>(ExPlayer.CharacterClassName);
             _prevPrimaryRealm = ExPlayer.PrimaryRealm;
             _prevSecondaryRealm = ExPlayer.SecondaryRealm;
             _prevName = ExPlayer.Name;
@@ -1860,7 +1860,7 @@ internal class Game
         }
 
         Screen.Clear();
-        BirthStage? birthStage = SingletonRepository.BirthStages.Get(nameof(IntroductionBirthStage));
+        BirthStage? birthStage = SingletonRepository.Get<BirthStage>(nameof(IntroductionBirthStage));
         while (birthStage != null && !Shutdown)
         {
             birthStage = birthStage.Render();
@@ -2113,7 +2113,7 @@ internal class Game
         {
             return;
         }
-        ChestTrapConfiguration trap = SingletonRepository.ChestTrapConfigurations[chestItem.TypeSpecificValue];
+        ChestTrapConfiguration trap = SingletonRepository.Get<ChestTrapConfiguration>(chestItem.TypeSpecificValue);
         trap.Activate(this, chestItem);
     }
 
@@ -6194,7 +6194,7 @@ internal class Game
                 continue;
             }
             // If we're only interested in trapped chests, skip those that aren't
-            if (trappedOnly && (!chestItem.IsKnown() || SingletonRepository.ChestTrapConfigurations[chestItem.TypeSpecificValue].NotTrapped))
+            if (trappedOnly && (!chestItem.IsKnown() || SingletonRepository.Get<ChestTrapConfiguration>(chestItem.TypeSpecificValue).NotTrapped))
             {
                 continue;
             }
@@ -6435,7 +6435,7 @@ internal class Game
             MsgPrint("The chest is not trapped.");
         }
         // If it has a null trap then there's nothing to disarm
-        else if (SingletonRepository.ChestTrapConfigurations[chestItem.TypeSpecificValue].NotTrapped)
+        else if (SingletonRepository.Get<ChestTrapConfiguration>(chestItem.TypeSpecificValue).NotTrapped)
         {
             MsgPrint("The chest is not trapped.");
         }

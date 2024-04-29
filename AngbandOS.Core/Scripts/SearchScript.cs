@@ -83,7 +83,7 @@ internal class SearchScript : Script, IScript, IRepeatableScript
                         {
                             continue;
                         }
-                        if (Game.SingletonRepository.ChestTrapConfigurations[item.TypeSpecificValue].NotTrapped)
+                        if (Game.SingletonRepository.Get<ChestTrapConfiguration>(item.TypeSpecificValue).NotTrapped)
                         {
                             continue;
                         }

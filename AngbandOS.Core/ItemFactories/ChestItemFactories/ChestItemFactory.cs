@@ -33,7 +33,7 @@ internal abstract class ChestItemFactory : ItemFactory
         }
         else
         {
-            if (Game.SingletonRepository.ChestTrapConfigurations[item.TypeSpecificValue].Traps.Length == 0)
+            if (Game.SingletonRepository.Get<ChestTrapConfiguration>(item.TypeSpecificValue).Traps.Length == 0)
             {
                 return Stompable[StompableType.Good];
             }
@@ -56,7 +56,7 @@ internal abstract class ChestItemFactory : ItemFactory
         }
         else if (item.TypeSpecificValue < 0)
         {
-            if (Game.SingletonRepository.ChestTrapConfigurations[-item.TypeSpecificValue].IsTrapped)
+            if (Game.SingletonRepository.Get<ChestTrapConfiguration>(-item.TypeSpecificValue).IsTrapped)
             {
                 s += " (disarmed)";
             }
@@ -67,7 +67,7 @@ internal abstract class ChestItemFactory : ItemFactory
         }
         else
         {
-            s += $" {Game.SingletonRepository.ChestTrapConfigurations[item.TypeSpecificValue].Description}";
+            s += $" {Game.SingletonRepository.Get<ChestTrapConfiguration>(item.TypeSpecificValue).Description}";
         }
 
         // Chests do not have Mods, Damage or Bonus.  We are omitting the description for those features.
@@ -92,7 +92,7 @@ internal abstract class ChestItemFactory : ItemFactory
             item.TypeSpecificValue = Game.DieRoll(item.Factory.LevelNormallyFound);
             if (item.TypeSpecificValue > 55)
             {
-                int chestTrapConfigurationCount = Game.SingletonRepository.ChestTrapConfigurations.Count;
+                int chestTrapConfigurationCount = Game.SingletonRepository.Get<ChestTrapConfiguration>().Length;
                 int randomRemaining = chestTrapConfigurationCount - 55;
                 item.TypeSpecificValue = (55 + Game.RandomLessThan(randomRemaining));
             }

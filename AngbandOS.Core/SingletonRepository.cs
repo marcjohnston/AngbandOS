@@ -21,6 +21,7 @@ internal class SingletonRepository
     private readonly List<ILoadAndBind> _repositories = new();
 
     public ElvishTextRepository ElvishText;
+    public FindQuestsRepository FindQuests;
     public FunnyCommentsRepository FunnyComments;
     public FunnyDescriptionsRepository FunnyDescriptions;
     public HorrificDescriptionsRepository HorrificDescriptions;
@@ -35,12 +36,6 @@ internal class SingletonRepository
     public UnreadableFlavorSyllablesRepository UnreadableFlavorSyllables;
     public WorshipPlayerAttacksRepository WorshipPlayerAttacks;
 
-    public AttackEffectsRepository AttackEffects;
-    public BirthStagesRepository BirthStages;
-    public CharacterClassesRepository CharacterClasses;
-    public ChestTrapConfigurationsRepository ChestTrapConfigurations;
-    public ChestTrapsRepository ChestTraps;
-    public FindQuestsRepository FindQuests;
     public FixedArtifactsRepository FixedArtifacts;
     public FlaggedActionsRepository FlaggedActions;
     public FormsRepository Forms;
@@ -368,6 +363,12 @@ internal class SingletonRepository
         RegisterRepository<AlterAction>();
         RegisterRepository<Alignment>();
         RegisterRepository<ArtifactBias>();
+        RegisterRepository<AttackEffect>();
+        RegisterRepository<BirthStage>();
+        RegisterRepository<BaseCharacterClass>();
+        RegisterRepository<ChestTrapConfiguration>();
+        RegisterRepository<ChestTrap>();
+
 
         RegisterRepository<AmuletReadableFlavor>();
         RegisterRepository<Animation>();
@@ -436,13 +437,7 @@ internal class SingletonRepository
         _repositoryDictionary["MonsterRace"].List.AddRange(sortedMonsterRaces);
 
         // Create all of the repositories.  All of the repositories will be empty and have an instance to the save game.
-        AttackEffects = AddRepository<AttackEffectsRepository>(new AttackEffectsRepository(Game));
-        BirthStages = AddRepository<BirthStagesRepository>(new BirthStagesRepository(Game));
-        CharacterClasses = AddRepository<CharacterClassesRepository>(new CharacterClassesRepository(Game));
-        ChestTrapConfigurations = AddRepository<ChestTrapConfigurationsRepository>(new ChestTrapConfigurationsRepository(Game));
-        ChestTraps = AddRepository<ChestTrapsRepository>(new ChestTrapsRepository(Game));
         ElvishText = AddRepository<ElvishTextRepository>(new ElvishTextRepository(Game));
-        FindQuests = AddRepository<FindQuestsRepository>(new FindQuestsRepository(Game));
         FixedArtifacts = AddRepository<FixedArtifactsRepository>(new FixedArtifactsRepository(Game));
         FlaggedActions = AddRepository<FlaggedActionsRepository>(new FlaggedActionsRepository(Game));
         Forms = AddRepository<FormsRepository>(new FormsRepository(Game));

@@ -380,7 +380,7 @@ internal abstract class MonsterRace : IMonsterCharacteristics, IGetKey
                 AttackEffect? attackEffect = null;
                 if (monsterAttackDefinition.EffectName != null)
                 {
-                    attackEffect = Game.SingletonRepository.AttackEffects.Get(monsterAttackDefinition.EffectName);
+                    attackEffect = Game.SingletonRepository.Get<AttackEffect>(monsterAttackDefinition.EffectName);
                 }
                 attackList.Add(new MonsterAttack(attack, attackEffect, monsterAttackDefinition.DDice, monsterAttackDefinition.DSide));
             }

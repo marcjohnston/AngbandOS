@@ -15,7 +15,7 @@ internal class ClassSelectionBirthStage : BirthStage
     public override BirthStage? Render()
     {
         DisplayPartialCharacter();
-        string[]? menuItems = Game.SingletonRepository.CharacterClasses
+        string[]? menuItems = Game.SingletonRepository.Get<BaseCharacterClass>()
             .OrderBy(_characterClass => _characterClass.Title)
             .Select(_characterClass => _characterClass.Title)
             .ToArray(); ;
@@ -58,7 +58,7 @@ internal class ClassSelectionBirthStage : BirthStage
 
     private bool RenderSelection(int index)
     {
-        BaseCharacterClass[] classes = Game.SingletonRepository.CharacterClasses
+        BaseCharacterClass[] classes = Game.SingletonRepository.Get<BaseCharacterClass>()
             .OrderBy(_characterClass => _characterClass.Title)
             .ToArray();
 
@@ -111,16 +111,16 @@ internal class ClassSelectionBirthStage : BirthStage
     }
     private BirthStage? GoForward(int index)
     {
-        BaseCharacterClass[] classes = Game.SingletonRepository.CharacterClasses
+        BaseCharacterClass[] classes = Game.SingletonRepository.Get<BaseCharacterClass>()
             .OrderBy(_characterClass => _characterClass.Title)
             .ToArray();
 
         Game.BaseCharacterClass = classes[index];
-        return Game.SingletonRepository.BirthStages.Get(nameof(RaceSelectionBirthStage));
+        return Game.SingletonRepository.Get<BirthStage>(nameof(RaceSelectionBirthStage));
     }
 
     private BirthStage? GoBack()
     {
-        return Game.SingletonRepository.BirthStages.Get(nameof(IntroductionBirthStage));
+        return Game.SingletonRepository.Get<BirthStage>(nameof(IntroductionBirthStage));
     }
 }
