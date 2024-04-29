@@ -14,7 +14,7 @@ internal class LightProjectile : Projectile
 
     protected override ProjectileGraphic? BoltProjectileGraphic => Game.SingletonRepository.ProjectileGraphics.Get(nameof(BrightWhiteBoltProjectileGraphic));
 
-    protected override Animation EffectAnimation => Game.SingletonRepository.Animations.Get(nameof(BrightWhiteCloudAnimation));
+    protected override Animation EffectAnimation => Game.SingletonRepository.Get<Animation>(nameof(BrightWhiteCloudAnimation));
 
     protected override bool AffectFloor(int y, int x)
     {

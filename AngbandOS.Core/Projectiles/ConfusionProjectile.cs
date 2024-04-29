@@ -14,7 +14,7 @@ internal class ConfusionProjectile : Projectile
 
     protected override ProjectileGraphic? BoltProjectileGraphic => Game.SingletonRepository.ProjectileGraphics.Get(nameof(GreySplatProjectileGraphic));
 
-    protected override Animation EffectAnimation => Game.SingletonRepository.Animations.Get(nameof(GreyQuestionAnimation));
+    protected override Animation EffectAnimation => Game.SingletonRepository.Get<Animation>(nameof(GreyQuestionAnimation));
 
     protected override bool AffectMonster(int who, Monster mPtr, int dam, int r)
     {

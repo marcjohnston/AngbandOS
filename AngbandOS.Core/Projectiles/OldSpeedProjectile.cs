@@ -14,7 +14,7 @@ internal class OldSpeedProjectile : Projectile
 
     protected override ProjectileGraphic? BoltProjectileGraphic => Game.SingletonRepository.ProjectileGraphics.Get(nameof(BrightBlueBulletProjectileGraphic));
 
-    protected override Animation EffectAnimation => Game.SingletonRepository.Animations.Get(nameof(BrightBlueSwirlAnimation));
+    protected override Animation EffectAnimation => Game.SingletonRepository.Get<Animation>(nameof(BrightBlueSwirlAnimation));
 
     protected override bool ProjectileAngersMonster(Monster mPtr)
     {

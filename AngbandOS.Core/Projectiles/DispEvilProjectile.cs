@@ -14,7 +14,7 @@ internal class DispEvilProjectile : Projectile
 
     protected override ProjectileGraphic? BoltProjectileGraphic => Game.SingletonRepository.ProjectileGraphics.Get(nameof(RedSplatProjectileGraphic));
 
-    protected override Animation EffectAnimation => Game.SingletonRepository.Animations.Get(nameof(RedExpandAnimation));
+    protected override Animation EffectAnimation => Game.SingletonRepository.Get<Animation>(nameof(RedExpandAnimation));
 
     protected override bool ProjectileAngersMonster(Monster mPtr)
     {

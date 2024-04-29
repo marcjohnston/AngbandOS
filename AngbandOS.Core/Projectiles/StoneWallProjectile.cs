@@ -12,7 +12,7 @@ internal class StoneWallProjectile : Projectile
 {
     private StoneWallProjectile(Game game) : base(game) { }
 
-    protected override Animation EffectAnimation => Game.SingletonRepository.Animations.Get(nameof(BrightGreySparkleAnimation));
+    protected override Animation EffectAnimation => Game.SingletonRepository.Get<Animation>(nameof(BrightGreySparkleAnimation));
 
     protected override bool AffectFloor(int y, int x)
     {

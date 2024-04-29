@@ -12,7 +12,7 @@ internal class DominationProjectile : Projectile
 {
     private DominationProjectile(Game game) : base(game) { }
 
-    protected override Animation EffectAnimation => Game.SingletonRepository.Animations.Get(nameof(WhiteControlAnimation));
+    protected override Animation EffectAnimation => Game.SingletonRepository.Get<Animation>(nameof(WhiteControlAnimation));
 
     protected override bool ProjectileAngersMonster(Monster mPtr)
     {

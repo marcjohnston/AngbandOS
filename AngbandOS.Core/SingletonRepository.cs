@@ -20,10 +20,6 @@ internal class SingletonRepository
     private readonly Game Game;
     private readonly List<ILoadAndBind> _repositories = new();
 
-    public AlignmentsRepository Alignments;
-    public AlterActionsRepository AlterActions;
-    public AmuletReadableFlavorsRepository AmuletReadableFlavors;
-    public AnimationsRepository Animations;
     public ArtifactBiasesRepository ArtifactBiases;
     public AttackEffectsRepository AttackEffects;
     public AttacksRepository Attacks;
@@ -284,7 +280,7 @@ internal class SingletonRepository
     /// <param name="corePersistentStorage"></param>
     public void PersistEntities<T>() where T : class, IGetKey
     {
-        List<KeyValuePair<string, string>> jsonEntityList = new();
+        List<KeyValuePair<string, string>> jsonEntityList = new List<KeyValuePair<string, string>>();
         foreach (T entity in Get<T>())
         {
             string key = entity.GetKey.ToString(); // TODO: The use of .ToString is because TKey needs to be strings
@@ -323,7 +319,7 @@ internal class SingletonRepository
     /// <param name="game"></param>
     public void Load()
     {
-        // These are the types to load from the assembly.
+        // These are the types to load from the assembly.  The interfaces that are not registered here will be registered just before the configuration is loaded.
         AddInterfaceRepository<IBoolValue>();
         AddInterfaceRepository<IIntValue>();
         AddInterfaceRepository<ICastScript>();
@@ -336,20 +332,22 @@ internal class SingletonRepository
         AddInterfaceRepository<Function>();
         AddInterfaceRepository<Activation>();
         AddInterfaceRepository<Widget>();
+        AddInterfaceRepository<AlterAction>();
+        AddInterfaceRepository<Alignment>();
 
         // This is the load phase for assembly.
         LoadAllAssemblyTypes();
 
+        AddInterfaceRepository<AmuletReadableFlavor>();
         AddInterfaceRepository<GameCommand>();
+        AddInterfaceRepository<Animation>();
 
         // Now load the configuration singletons.
+        LoadFromConfiguration<AmuletReadableFlavor, ReadableFlavorDefinition, GenericAmuletReadableFlavor>(Game.Configuration.AmuletReadableFlavors);
         LoadFromConfiguration<GameCommand, GameCommandDefinition, GenericGameCommand>(Game.Configuration.GameCommands);
+        LoadFromConfiguration<Animation, AnimationDefinition, GenericAnimation>(Game.Configuration.Animations);
 
         // Create all of the repositories.  All of the repositories will be empty and have an instance to the save game.
-        Alignments = AddRepository<AlignmentsRepository>(new AlignmentsRepository(Game));
-        AlterActions = AddRepository<AlterActionsRepository>(new AlterActionsRepository(Game));
-        AmuletReadableFlavors = AddRepository<AmuletReadableFlavorsRepository>(new AmuletReadableFlavorsRepository(Game));
-        Animations = AddRepository<AnimationsRepository>(new AnimationsRepository(Game));
         ArtifactBiases = AddRepository<ArtifactBiasesRepository>(new ArtifactBiasesRepository(Game));
         AttackEffects = AddRepository<AttackEffectsRepository>(new AttackEffectsRepository(Game));
         Attacks = AddRepository<AttacksRepository>(new AttacksRepository(Game));

@@ -14,7 +14,7 @@ internal class PsiDrainProjectile : Projectile
 
     protected override ProjectileGraphic? BoltProjectileGraphic => Game.SingletonRepository.ProjectileGraphics.Get(nameof(BeigeBoltProjectileGraphic));
 
-    protected override Animation EffectAnimation => Game.SingletonRepository.Animations.Get(nameof(BeigeContractAnimation));
+    protected override Animation EffectAnimation => Game.SingletonRepository.Get<Animation>(nameof(BeigeContractAnimation));
 
     protected override bool ProjectileAngersMonster(Monster mPtr)
     {

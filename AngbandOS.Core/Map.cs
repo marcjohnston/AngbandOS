@@ -24,10 +24,10 @@ internal class Map
     public void Initialize()
     {
         TrapsDetectedProperty trapsDetectedProperty = (TrapsDetectedProperty)Game.SingletonRepository.Get<Property>(nameof(TrapsDetectedProperty));
-        GrassTile grassTile = (GrassTile)Game.SingletonRepository.Tiles.Get(nameof(GrassTile));
-        DungeonFloorTile dungeonFloorTile = (DungeonFloorTile)Game.SingletonRepository.Tiles.Get(nameof(DungeonFloorTile));
-        TowerFloorTile towerFloorTile = (TowerFloorTile)Game.SingletonRepository.Tiles.Get(nameof(TowerFloorTile));
-        NothingTile nothingTile = (NothingTile)Game.SingletonRepository.Tiles.Get(nameof(NothingTile));
+        Tile grassTile = Game.SingletonRepository.Tiles.Get(nameof(GrassTile));
+        Tile dungeonFloorTile = Game.SingletonRepository.Tiles.Get(nameof(DungeonFloorTile));
+        Tile towerFloorTile = Game.SingletonRepository.Tiles.Get(nameof(TowerFloorTile));
+        Tile nothingTile = Game.SingletonRepository.Tiles.Get(nameof(NothingTile));
         bool isTower = Game.Wilderness[Game.WildernessY][Game.WildernessX].Dungeon.Tower;
 
         for (int y = 0; y < Game.MaxHgt; y++)

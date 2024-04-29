@@ -12,7 +12,7 @@ internal class MakeDoorProjectile : Projectile
 {
     private MakeDoorProjectile(Game game) : base(game) { }
 
-    protected override Animation EffectAnimation => Game.SingletonRepository.Animations.Get(nameof(BrightBrownSparkleAnimation));
+    protected override Animation EffectAnimation => Game.SingletonRepository.Get<Animation>(nameof(BrightBrownSparkleAnimation));
 
     protected override bool AffectFloor(int y, int x)
     {

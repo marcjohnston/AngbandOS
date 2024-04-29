@@ -14,7 +14,7 @@ internal class OldPolyProjectile : Projectile
 
     protected override ProjectileGraphic? BoltProjectileGraphic => Game.SingletonRepository.ProjectileGraphics.Get(nameof(PurpleSplatProjectileGraphic));
 
-    protected override Animation EffectAnimation => Game.SingletonRepository.Animations.Get(nameof(PurpleSparkleAnimation));
+    protected override Animation EffectAnimation => Game.SingletonRepository.Get<Animation>(nameof(PurpleSparkleAnimation));
 
     protected override bool ProjectileAngersMonster(Monster mPtr)
     {

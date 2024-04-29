@@ -14,7 +14,7 @@ internal class HolyFireProjectile : Projectile
 
     protected override ProjectileGraphic? BoltProjectileGraphic => Game.SingletonRepository.ProjectileGraphics.Get(nameof(BrightRedSplatProjectileGraphic));
 
-    protected override Animation EffectAnimation => Game.SingletonRepository.Animations.Get(nameof(RedWhiteFlashAnimation));
+    protected override Animation EffectAnimation => Game.SingletonRepository.Get<Animation>(nameof(RedWhiteFlashAnimation));
 
     protected override bool AffectItem(int who, int y, int x)
     {

@@ -12,7 +12,7 @@ internal class KillTrapProjectile : Projectile
 {
     private KillTrapProjectile(Game game) : base(game) { }
 
-    protected override Animation EffectAnimation => Game.SingletonRepository.Animations.Get(nameof(RedSwirlAnimation));
+    protected override Animation EffectAnimation => Game.SingletonRepository.Get<Animation>(nameof(RedSwirlAnimation));
 
     protected override bool AffectFloor(int y, int x)
     {

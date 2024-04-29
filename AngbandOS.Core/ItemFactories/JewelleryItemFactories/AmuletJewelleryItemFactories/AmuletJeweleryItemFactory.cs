@@ -44,7 +44,7 @@ internal abstract class AmuletJeweleryItemFactory : JewelleryItemFactory, IFlavo
     /// <summary>
     /// Returns the amulet flavors repository because amulets have flavors that need to be identified.
     /// </summary>
-    public IEnumerable<Flavor>? GetFlavorRepository() => Game.SingletonRepository.AmuletReadableFlavors;
+    public IEnumerable<Flavor>? GetFlavorRepository() => Game.SingletonRepository.Get<AmuletReadableFlavor>();
 
     /// <inheritdoc/>
     public Flavor Flavor { get; set; }

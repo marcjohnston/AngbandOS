@@ -14,7 +14,7 @@ internal class ControlAnimalProjectile : Projectile
 
     protected override ProjectileGraphic? BoltProjectileGraphic => Game.SingletonRepository.ProjectileGraphics.Get(nameof(GreenBulletProjectileGraphic));
 
-    protected override Animation EffectAnimation => Game.SingletonRepository.Animations.Get(nameof(GreenControlAnimation));
+    protected override Animation EffectAnimation => Game.SingletonRepository.Get<Animation>(nameof(GreenControlAnimation));
 
     protected override bool ProjectileAngersMonster(Monster mPtr)
     {

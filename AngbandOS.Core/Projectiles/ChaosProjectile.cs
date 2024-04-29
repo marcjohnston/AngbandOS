@@ -16,7 +16,7 @@ internal class ChaosProjectile : Projectile
 
     protected override ProjectileGraphic? ImpactProjectileGraphic => Game.SingletonRepository.ProjectileGraphics.Get(nameof(PurpleSplatProjectileGraphic));
 
-    protected override Animation? EffectAnimation => Game.SingletonRepository.Animations.Get(nameof(PinkPurpleFlashAnimation));
+    protected override Animation? EffectAnimation => Game.SingletonRepository.Get<Animation>(nameof(PinkPurpleFlashAnimation));
 
     protected override bool AffectFloor(int y, int x) => true;
 

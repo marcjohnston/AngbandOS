@@ -14,7 +14,7 @@ internal class NukeProjectile : Projectile
 
     protected override ProjectileGraphic? BoltProjectileGraphic => Game.SingletonRepository.ProjectileGraphics.Get(nameof(BrightChartreuseSplatProjectileGraphic));
 
-    protected override Animation EffectAnimation => Game.SingletonRepository.Animations.Get(nameof(ChartreuseFlashAnimation));
+    protected override Animation EffectAnimation => Game.SingletonRepository.Get<Animation>(nameof(ChartreuseFlashAnimation));
 
     protected override bool AffectMonster(int who, Monster mPtr, int dam, int r)
     {

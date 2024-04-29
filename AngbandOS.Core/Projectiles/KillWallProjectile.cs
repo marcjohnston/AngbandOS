@@ -12,7 +12,7 @@ internal class KillWallProjectile : Projectile
 {
     private KillWallProjectile(Game game) : base(game) { }
 
-    protected override Animation EffectAnimation => Game.SingletonRepository.Animations.Get(nameof(BrownSwirlAnimation));
+    protected override Animation EffectAnimation => Game.SingletonRepository.Get<Animation>(nameof(BrownSwirlAnimation));
 
     protected override bool AffectFloor(int y, int x)
     {

@@ -14,7 +14,7 @@ internal class OldCloneProjectile : Projectile
 
     protected override ProjectileGraphic? BoltProjectileGraphic => Game.SingletonRepository.ProjectileGraphics.Get(nameof(CopperBoltProjectileGraphic));
 
-    protected override Animation EffectAnimation => Game.SingletonRepository.Animations.Get(nameof(CopperExpandAnimation));
+    protected override Animation EffectAnimation => Game.SingletonRepository.Get<Animation>(nameof(CopperExpandAnimation));
 
     protected override bool ProjectileAngersMonster(Monster mPtr)
     {

@@ -12,7 +12,7 @@ internal class PsiProjectile : Projectile
 {
     private PsiProjectile(Game game) : base(game) { }
 
-    protected override Animation EffectAnimation => Game.SingletonRepository.Animations.Get(nameof(DiamondSparkleAnimation));
+    protected override Animation EffectAnimation => Game.SingletonRepository.Get<Animation>(nameof(DiamondSparkleAnimation));
 
     protected override bool ProjectileAngersMonster(Monster mPtr)
     {

@@ -14,7 +14,7 @@ internal class DeathRayProjectile : Projectile
 
     protected override ProjectileGraphic? BoltProjectileGraphic => Game.SingletonRepository.ProjectileGraphics.Get(nameof(CopperBoltProjectileGraphic));
 
-    protected override Animation EffectAnimation => Game.SingletonRepository.Animations.Get(nameof(CopperContractAnimation));
+    protected override Animation EffectAnimation => Game.SingletonRepository.Get<Animation>(nameof(CopperContractAnimation));
 
     protected override bool AffectMonster(int who, Monster mPtr, int dam, int r)
     {

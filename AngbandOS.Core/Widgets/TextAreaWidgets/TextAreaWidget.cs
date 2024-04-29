@@ -70,7 +70,7 @@ internal abstract class TextAreaWidget : Widget
     {
         base.Bind();
         Justification = Game.SingletonRepository.Justifications.Get(JustificationName);
-        Alignment = Game.SingletonRepository.Alignments.Get(AlignmentName);
+        Alignment = Game.SingletonRepository.Get<Alignment>(AlignmentName);
     }
 
     /// <summary>
