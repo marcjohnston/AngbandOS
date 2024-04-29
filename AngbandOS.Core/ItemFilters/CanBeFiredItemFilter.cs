@@ -12,7 +12,7 @@ namespace AngbandOS.Core.ItemFilters;
 /// Represents an item filter for items that can be fired, regardless of their value.
 /// </summary>
 [Serializable]
-internal class CanBeFiredItemFilter : AllItemsItemFilter
+internal class CanBeFiredItemFilter : ItemFilter
 {
     private CanBeFiredItemFilter(Game game) : base(game) { } // This object is a singleton.
 

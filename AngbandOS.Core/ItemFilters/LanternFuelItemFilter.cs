@@ -11,7 +11,7 @@ namespace AngbandOS.Core.ItemFilters;
 /// Represents an item filter for items that are considered fuel for lanterns regardless of their value.
 /// </summary>
 [Serializable]
-internal class LanternFuelItemFilter : AllItemsItemFilter
+internal class LanternFuelItemFilter : ItemFilter
 {
     private LanternFuelItemFilter(Game game) : base(game) { } // This object is a singleton.
     public override bool? IsLanternFuel => true;

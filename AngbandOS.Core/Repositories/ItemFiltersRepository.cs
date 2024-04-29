@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.Repositories;
 
 [Serializable]
-internal class ItemFiltersRepository : DictionaryRepository<AllItemsItemFilter>
+internal class ItemFiltersRepository : DictionaryRepository<ItemFilter>
 {
     public ItemFiltersRepository(Game game) : base(game) { }
 }

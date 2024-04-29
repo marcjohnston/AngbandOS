@@ -11,7 +11,7 @@ namespace AngbandOS.Core.ItemFilters;
 /// Represents an item filter for all items considered to be armor, regardless of their value.
 /// </summary>
 [Serializable]
-internal class ArmorItemFilter : AllItemsItemFilter
+internal class ArmorItemFilter : ItemFilter
 {
     private ArmorItemFilter(Game game) : base(game) { } // This object is a singleton.
     public override bool? IsArmor => true;

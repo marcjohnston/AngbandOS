@@ -11,7 +11,7 @@ namespace AngbandOS.Core.ItemFilters;
 /// Represents an item filter for items that can be recharges, regardless of their value.
 /// </summary>
 [Serializable]
-internal class CanBeRechargedItemFilter : AllItemsItemFilter
+internal class CanBeRechargedItemFilter : ItemFilter
 {
     private CanBeRechargedItemFilter(Game game) : base(game) { } // This object is a singleton.
     public override bool? IsRechargable => true;

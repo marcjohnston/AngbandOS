@@ -94,7 +94,7 @@ internal class SingletonRepository
         string typeName = typeof(T).Name;
         if (_repositoryDictionary.TryGetValue(typeName, out GenericRepository? genericRepository))
         {
-            throw new Exception("AddInterface duplicate {typeName}");
+            throw new Exception($"{typeName} repository already registered.");
         }
         genericRepository = new GenericRepository();
         _repositoryDictionary.Add(typeName, genericRepository);
@@ -355,21 +355,48 @@ internal class SingletonRepository
         RegisterRepository<IDateAndTimeValue>();
         RegisterRepository<INullableStringsValue>();
         RegisterRepository<IStringValue>();
-        RegisterRepository<Property>();
-        RegisterRepository<Timer>();
-        RegisterRepository<Function>();
+
         RegisterRepository<Activation>();
-        RegisterRepository<Widget>();
         RegisterRepository<AlterAction>();
         RegisterRepository<Alignment>();
         RegisterRepository<ArtifactBias>();
         RegisterRepository<AttackEffect>();
-        RegisterRepository<BirthStage>();
         RegisterRepository<BaseCharacterClass>();
+        RegisterRepository<BaseInventorySlot>();
+        RegisterRepository<BirthStage>();
         RegisterRepository<ChestTrapConfiguration>();
         RegisterRepository<ChestTrap>();
+        RegisterRepository<FixedArtifact>();
+        RegisterRepository<FlaggedAction>();
+        RegisterRepository<Form>();
+        RegisterRepository<Function>();
+        RegisterRepository<Gender>();
+        RegisterRepository<ItemClass>();
+        RegisterRepository<ItemFactory>();
+        RegisterRepository<ItemFilter>();
+        RegisterRepository<ItemQualityRating>();
+        RegisterRepository<Justification>();
+        RegisterRepository<MartialArtsAttack>();
+        RegisterRepository<MonsterFilter>();
+        RegisterRepository<MonsterSpell>();
+        RegisterRepository<Mutation>();
+        RegisterRepository<Patron>();
+        RegisterRepository<Power>();
+        RegisterRepository<Projectile>();
+        RegisterRepository<Property>();
+        RegisterRepository<Race>();
+        RegisterRepository<RareItem>();
+        RegisterRepository<Realm>();
+        RegisterRepository<Reward>();
+        RegisterRepository<RoomLayout>();
+        RegisterRepository<Script>();
+        RegisterRepository<SpellResistantDetection>();
+        RegisterRepository<StoreFactory>();
+        RegisterRepository<Talent>();
+        RegisterRepository<Timer>();
+        RegisterRepository<Widget>();
 
-
+        // These are already capable of Json serialization.
         RegisterRepository<AmuletReadableFlavor>();
         RegisterRepository<Animation>();
         RegisterRepository<Attack>();

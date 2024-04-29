@@ -11,7 +11,7 @@ namespace AngbandOS.Core.ItemFilters;
 /// Represents an item filter for items that can be eaten, regardless of their value.
 /// </summary>
 [Serializable]
-internal class CanBeEatenItemFilter : AllItemsItemFilter
+internal class CanBeEatenItemFilter : ItemFilter
 {
     private CanBeEatenItemFilter(Game game) : base(game) { } // This object is a singleton.
 

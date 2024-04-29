@@ -92,7 +92,7 @@ internal abstract class StoreFactory : IItemFilter, IGetKey
         Tile = Game.SingletonRepository.Get<Tile>(TileName);
 
         // Bind the item filters.
-        List<AllItemsItemFilter> itemFilters = new();
+        List<ItemFilter> itemFilters = new();
         foreach (string itemFilterName in ItemFilterNames)
         {
             itemFilters.Add(Game.SingletonRepository.ItemFilters.Get(itemFilterName));
@@ -143,7 +143,7 @@ internal abstract class StoreFactory : IItemFilter, IGetKey
     public bool ItemMatches(Item item)
     {
         // Loop through all of the item filters.  If the filter matches, then the item matches.
-        foreach (AllItemsItemFilter itemFilter in ItemFilters)
+        foreach (ItemFilter itemFilter in ItemFilters)
         {
             if (itemFilter.ItemMatches(item))
             {
@@ -153,7 +153,7 @@ internal abstract class StoreFactory : IItemFilter, IGetKey
         return false;
     }
 
-    public AllItemsItemFilter[] ItemFilters { get; private set; }
+    public ItemFilter[] ItemFilters { get; private set; }
 
     /// <summary>
     /// Returns the names of the item matching criterion used to determine which items the store buys.  Returns an empty arrary, by default, to

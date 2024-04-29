@@ -11,7 +11,7 @@ namespace AngbandOS.Core.ItemFilters;
 /// Represents an item filter for items that can be worn, regardless of their value.
 /// </summary>
 [Serializable]
-internal class CanBeWornItemFilter : AllItemsItemFilter
+internal class CanBeWornItemFilter : ItemFilter
 {
     private CanBeWornItemFilter(Game game) : base(game) { } // This object is a singleton.
     public override bool? IsWearable => true;

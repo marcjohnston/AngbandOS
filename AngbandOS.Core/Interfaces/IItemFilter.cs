@@ -5,7 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.ItemFilters;
+namespace AngbandOS.Core.Interfaces;
 
 /// <summary>
 /// Represents an interface that an object must implement to handle ItemFiltering.  ItemFilters and stores implement this interface.

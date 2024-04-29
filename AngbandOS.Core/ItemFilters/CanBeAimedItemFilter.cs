@@ -11,7 +11,7 @@ namespace AngbandOS.Core.ItemFilters;
 /// Represents an item filter for wands regardless of their value.
 /// </summary>
 [Serializable]
-internal class CanBeAimedItemFilter : AllItemsItemFilter
+internal class CanBeAimedItemFilter : ItemFilter
 {
     private CanBeAimedItemFilter(Game game) : base(game) { } // This object is a singleton.
     public override bool? CanBeAimed => true;

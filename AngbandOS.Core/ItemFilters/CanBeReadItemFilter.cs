@@ -11,7 +11,7 @@ namespace AngbandOS.Core.ItemFilters;
 /// Returns an item filter for items that can be read, regardless of their value.
 /// </summary>
 [Serializable]
-internal class CanBeReadItemFilter : AllItemsItemFilter
+internal class CanBeReadItemFilter : ItemFilter
 {
     private CanBeReadItemFilter(Game game) : base(game) { } // This object is a singleton.
 

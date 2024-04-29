@@ -11,7 +11,7 @@ namespace AngbandOS.Core.ItemFilters;
 /// Represents an item filter for items that can be used as fuel for torches, regardless of their value.
 /// </summary>
 [Serializable]
-internal class TorchFuelItemFilter : AllItemsItemFilter
+internal class TorchFuelItemFilter : ItemFilter
 {
     private TorchFuelItemFilter(Game game) : base(game) { } // This object is a singleton.
     public override bool? IsFuelForTorch => true;

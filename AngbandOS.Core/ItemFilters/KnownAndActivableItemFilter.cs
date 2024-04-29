@@ -11,7 +11,7 @@ namespace AngbandOS.Core.ItemFilters;
 /// Represents an item filter for items that are both known and can be activated, regardless of their value.
 /// </summary>
 [Serializable]
-internal class KnownAndActivableItemFilter : AllItemsItemFilter
+internal class KnownAndActivableItemFilter : ItemFilter
 {
     private KnownAndActivableItemFilter(Game game) : base(game) { } // This object is a singleton.
     public override bool? IsKnown => true;
