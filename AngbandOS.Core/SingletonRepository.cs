@@ -67,7 +67,6 @@ internal class SingletonRepository
     public StoreFactoriesRepository StoreFactories;
     public TalentsRepository Talents;
     public UnreadableFlavorSyllablesRepository UnreadableFlavorSyllables;
-    public WandReadableFlavorsRepository WandReadableFlavors;
     public WizardCommandsRepository WizardCommands;
     public WorshipPlayerAttacksRepository WorshipPlayerAttacks;
 
@@ -395,6 +394,7 @@ internal class SingletonRepository
         RegisterRepository<Tile>();
         RegisterRepository<Town>();
         RegisterRepository<Vault>();
+        RegisterRepository<WandReadableFlavor>();
 
         // This is the load phase for assembly.
         LoadAllAssemblyTypes();
@@ -426,6 +426,7 @@ internal class SingletonRepository
         LoadFromConfiguration<Tile, TileDefinition, GenericTile>(Game.Configuration.Tiles);
         LoadFromConfiguration<Town, TownDefinition, GenericTown>(Game.Configuration.Towns);
         LoadFromConfiguration<Vault, VaultDefinition, GenericVault>(Game.Configuration.Vaults);
+        LoadFromConfiguration<WandReadableFlavor, ReadableFlavorDefinition, GenericWandReadableFlavor>(Game.Configuration.WandReadableFlavors);
 
         MonsterRace[] monsterRaces = Get<MonsterRace>();
         MonsterRace[] sortedMonsterRaces = monsterRaces.OrderBy(_monsterRace => _monsterRace.LevelFound).ToArray();
@@ -479,7 +480,6 @@ internal class SingletonRepository
         StoreFactories = AddRepository<StoreFactoriesRepository>(new StoreFactoriesRepository(Game));
         Talents = AddRepository<TalentsRepository>(new TalentsRepository(Game));
         UnreadableFlavorSyllables = AddRepository<UnreadableFlavorSyllablesRepository>(new UnreadableFlavorSyllablesRepository(Game));
-        WandReadableFlavors = AddRepository<WandReadableFlavorsRepository>(new WandReadableFlavorsRepository(Game));
         WizardCommands = AddRepository<WizardCommandsRepository>(new WizardCommandsRepository(Game));
         WorshipPlayerAttacks = AddRepository<WorshipPlayerAttacksRepository>(new WorshipPlayerAttacksRepository(Game));
 

@@ -101,7 +101,7 @@ internal class PersistConfigurationScript : Script, IScript
             Game.SingletonRepository.PersistEntities<Timer>();
             Game.SingletonRepository.PersistEntities<Town>();
             Game.SingletonRepository.PersistEntities<Vault>();
-            Game.SingletonRepository.WandReadableFlavors.PersistEntities();
+            Game.SingletonRepository.PersistEntities<WandReadableFlavor>();
             Game.SingletonRepository.WizardCommands.PersistEntities();
         }
         catch (NotImplementedException)
