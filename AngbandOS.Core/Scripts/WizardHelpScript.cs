@@ -29,7 +29,7 @@ internal class WizardHelpScript : Script, IScript
             Game.Screen.Print(ColorEnum.Red, "===============", 2, 31);
 
             List<IHelpCommand> allCommands = new List<IHelpCommand>();
-            foreach (IHelpCommand command in Game.SingletonRepository.WizardCommands)
+            foreach (IHelpCommand command in Game.SingletonRepository.Get<WizardCommand>())
             {
                 if (command.IsEnabled && command.HelpGroup != null && !String.IsNullOrEmpty(command.HelpDescription))
                 {

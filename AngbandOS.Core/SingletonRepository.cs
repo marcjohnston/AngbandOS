@@ -67,7 +67,6 @@ internal class SingletonRepository
     public StoreFactoriesRepository StoreFactories;
     public TalentsRepository Talents;
     public UnreadableFlavorSyllablesRepository UnreadableFlavorSyllables;
-    public WizardCommandsRepository WizardCommands;
     public WorshipPlayerAttacksRepository WorshipPlayerAttacks;
 
     private Dictionary<string, GenericRepository> _repositoryDictionary = new Dictionary<string, GenericRepository>();
@@ -395,6 +394,7 @@ internal class SingletonRepository
         RegisterRepository<Town>();
         RegisterRepository<Vault>();
         RegisterRepository<WandReadableFlavor>();
+        RegisterRepository<WizardCommand>();
 
         // This is the load phase for assembly.
         LoadAllAssemblyTypes();
@@ -427,6 +427,7 @@ internal class SingletonRepository
         LoadFromConfiguration<Town, TownDefinition, GenericTown>(Game.Configuration.Towns);
         LoadFromConfiguration<Vault, VaultDefinition, GenericVault>(Game.Configuration.Vaults);
         LoadFromConfiguration<WandReadableFlavor, ReadableFlavorDefinition, GenericWandReadableFlavor>(Game.Configuration.WandReadableFlavors);
+        LoadFromConfiguration<WizardCommand, WizardCommandDefinition, GenericWizardCommand>(Game.Configuration.WizardCommands);
 
         MonsterRace[] monsterRaces = Get<MonsterRace>();
         MonsterRace[] sortedMonsterRaces = monsterRaces.OrderBy(_monsterRace => _monsterRace.LevelFound).ToArray();
@@ -480,7 +481,6 @@ internal class SingletonRepository
         StoreFactories = AddRepository<StoreFactoriesRepository>(new StoreFactoriesRepository(Game));
         Talents = AddRepository<TalentsRepository>(new TalentsRepository(Game));
         UnreadableFlavorSyllables = AddRepository<UnreadableFlavorSyllablesRepository>(new UnreadableFlavorSyllablesRepository(Game));
-        WizardCommands = AddRepository<WizardCommandsRepository>(new WizardCommandsRepository(Game));
         WorshipPlayerAttacks = AddRepository<WorshipPlayerAttacksRepository>(new WorshipPlayerAttacksRepository(Game));
 
         // Load all of the objects into each repository.  This is where the assembly will be scanned or the database will be read.

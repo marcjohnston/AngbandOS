@@ -31,7 +31,7 @@ internal class EnterWizardModeScript : Script, IScript, IRepeatableScript
         if (Game.IsWizard.BoolValue)
         {
             Game.GetCom("Wizard Command: ", out char cmd);
-            foreach (WizardCommand wizardCommand in Game.SingletonRepository.WizardCommands)
+            foreach (WizardCommand wizardCommand in Game.SingletonRepository.Get<WizardCommand>())
             {
                 if (wizardCommand.IsEnabled && wizardCommand.KeyChar == cmd)
                 {
