@@ -41,7 +41,7 @@ internal class PoisonPitScript : Script, IScript
                 {
                     Game.MsgPrint("The poison does not affect you!");
                 }
-                else if (Game.DieRoll(10) <= Game.SingletonRepository.Gods.Get(nameof(HagargRyonisGod)).AdjustedFavour)
+                else if (Game.DieRoll(10) <= Game.SingletonRepository.Get<God>(nameof(HagargRyonisGod)).AdjustedFavour)
                 {
                     Game.MsgPrint("Hagarg Ryonis's favour protects you!");
                 }

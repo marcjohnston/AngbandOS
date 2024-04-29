@@ -102,7 +102,7 @@ internal class SacrificeItemScript : Script, IScriptStore
             //var deities = Game.GetAllDeities();
             var names = new List<string>();
             var keys = new List<char>();
-            foreach (God god in Game.SingletonRepository.Gods)
+            foreach (God god in Game.SingletonRepository.Get<God>())
             {
                 names.Add(god.LongName);
                 keys.Add(god.LongName[0]);
@@ -122,7 +122,7 @@ internal class SacrificeItemScript : Script, IScriptStore
                 {
                     if (choice == c)
                     {
-                        foreach (God god in Game.SingletonRepository.Gods)
+                        foreach (God god in Game.SingletonRepository.Get<God>())
                         {
                             if (god.ShortName.StartsWith(choice.ToString()))
                             {

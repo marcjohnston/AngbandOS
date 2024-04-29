@@ -13956,7 +13956,7 @@ internal class Game
         }
         if (Health.IntValue < 0)
         {
-            if (DieRoll(10) <= SingletonRepository.Gods.Get(nameof(ZoKalarGod)).AdjustedFavour)
+            if (DieRoll(10) <= SingletonRepository.Get<God>(nameof(ZoKalarGod)).AdjustedFavour)
             {
                 MsgPrint("Zo-Kalar's favour saves you from death!");
                 Health.IntValue += damage;
@@ -14043,7 +14043,7 @@ internal class Game
             MsgPrint($"You feel {Constants.DescStatNeg[stat]} for a moment, but the feeling passes.");
             return true;
         }
-        if (DieRoll(10) <= SingletonRepository.Gods.Get(nameof(LobonGod)).AdjustedFavour)
+        if (DieRoll(10) <= SingletonRepository.Get<God>(nameof(LobonGod)).AdjustedFavour)
         {
             MsgPrint($"You feel {Constants.DescStatNeg[stat]} for a moment, but Lobon's favour protects you.");
             return true;
@@ -17409,7 +17409,7 @@ internal class Game
     {
         if (God == null)
         {
-            foreach (God god in SingletonRepository.Gods)
+            foreach (God god in SingletonRepository.Get<God>())
             {
                 god.IsPatron = false;
                 god.RestingFavor = 0;
@@ -17418,7 +17418,7 @@ internal class Game
         }
         else
         {
-            foreach (God god in SingletonRepository.Gods)
+            foreach (God god in SingletonRepository.Get<God>())
             {
                 if (god == God)
                 {
@@ -17438,7 +17438,7 @@ internal class Game
 
     public void AddFavor(God god, int amount)
     {
-        foreach (God thisGod in SingletonRepository.Gods)
+        foreach (God thisGod in SingletonRepository.Get<God>())
         {
             if (god == thisGod)
             {
@@ -17455,7 +17455,7 @@ internal class Game
     {
         var max = 0;
         God? isMax = null;
-        foreach (God god in SingletonRepository.Gods)
+        foreach (God god in SingletonRepository.Get<God>())
         {
             if (god.Favor - god.RestingFavor > max)
             {

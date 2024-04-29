@@ -78,7 +78,7 @@ internal class WastingRandomMutation : Mutation
             return;
         }
         Game.Disturb(false);
-        if (base.Game.DieRoll(10) <= Game.SingletonRepository.Gods.Get(nameof(LobonGod)).AdjustedFavour)
+        if (base.Game.DieRoll(10) <= Game.SingletonRepository.Get<God>(nameof(LobonGod)).AdjustedFavour)
         {
             Game.MsgPrint("Lobon's favour protects you from wasting away!");
             Game.MsgPrint(null);

@@ -354,7 +354,7 @@ internal class JournalScript : Script, IScript, IRepeatableScript, IScriptStore
         Game.Screen.Print(ColorEnum.Blue, "======================", 1, 1);
         int row = 3;
         God patron = null;
-        foreach (var deity in Game.SingletonRepository.Gods)
+        foreach (var deity in Game.SingletonRepository.Get<God>())
         {
             var text = deity.ShortName;
             if (deity.IsPatron)

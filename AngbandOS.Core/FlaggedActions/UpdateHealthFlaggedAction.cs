@@ -27,7 +27,7 @@ internal class UpdateHealthFlaggedAction : FlaggedAction
         {
             mhp += 30;
         }
-        var mult = Game.SingletonRepository.Gods.Get(nameof(NathHorthahGod)).AdjustedFavour + 10;
+        var mult = Game.SingletonRepository.Get<God>(nameof(NathHorthahGod)).AdjustedFavour + 10;
         mhp *= mult;
         mhp /= 10;
         if (Game.MaxHealth.IntValue != mhp)

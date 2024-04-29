@@ -71,7 +71,7 @@ internal class PoisProjectile : Projectile
         Game.TakeHit(dam, killer);
         if (!(Game.HasPoisonResistance || Game.PoisonResistanceTimer.Value != 0))
         {
-            if (Game.DieRoll(10) <= Game.SingletonRepository.Gods.Get(nameof(HagargRyonisGod)).AdjustedFavour)
+            if (Game.DieRoll(10) <= Game.SingletonRepository.Get<God>(nameof(HagargRyonisGod)).AdjustedFavour)
             {
                 Game.MsgPrint("Hagarg Ryonis's favour protects you!");
             }

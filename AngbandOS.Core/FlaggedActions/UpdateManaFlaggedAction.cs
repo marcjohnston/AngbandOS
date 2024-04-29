@@ -83,7 +83,7 @@ internal class UpdateManaFlaggedAction : FlaggedAction
             msp = 0;
         }
 
-        var mult = Game.SingletonRepository.Gods.Get(nameof(TamashGod)).AdjustedFavour + 10;
+        var mult = Game.SingletonRepository.Get<God>(nameof(TamashGod)).AdjustedFavour + 10;
         msp *= mult;
         msp /= 10;
         if (Game.MaxMana.IntValue != msp)

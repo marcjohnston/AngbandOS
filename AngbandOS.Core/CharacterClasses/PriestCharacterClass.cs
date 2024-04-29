@@ -100,19 +100,19 @@ internal class PriestCharacterClass : BaseCharacterClass
         switch (realm)
         {
             case NatureRealm:
-                return Game.SingletonRepository.Gods.Get(nameof(HagargRyonisGod));
+                return Game.SingletonRepository.Get<God>(nameof(HagargRyonisGod));
 
             case FolkRealm:
-                return Game.SingletonRepository.Gods.Get(nameof(ZoKalarGod));
+                return Game.SingletonRepository.Get<God>(nameof(ZoKalarGod));
 
             case ChaosRealm:
-                return Game.SingletonRepository.Gods.Get(nameof(NathHorthahGod));
+                return Game.SingletonRepository.Get<God>(nameof(NathHorthahGod));
 
             case CorporealRealm:
-                return Game.SingletonRepository.Gods.Get(nameof(LobonGod));
+                return Game.SingletonRepository.Get<God>(nameof(LobonGod));
 
             case TarotRealm:
-                return Game.SingletonRepository.Gods.Get(nameof(TamashGod));
+                return Game.SingletonRepository.Get<God>(nameof(TamashGod));
 
             default:
                 return null;
