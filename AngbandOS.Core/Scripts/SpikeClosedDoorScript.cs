@@ -61,7 +61,7 @@ internal class SpikeClosedDoorScript : Script, IScript, IRepeatableScript
                     // Replace the door feature with a jammed door
                     if (tile.FeatureType.IsVisibleDoor)
                     {
-                        Tile? jammedTile = Game.SingletonRepository.Tiles.Get(nameof(JammedDoor0Tile));
+                        Tile? jammedTile = Game.SingletonRepository.Get<Tile>(nameof(JammedDoor0Tile));
                         if (jammedTile == null)
                         {
                             throw new Exception("No jammed door specified.");

@@ -20,7 +20,7 @@ internal class StoneWallProjectile : Projectile
         {
             return false;
         }
-        Game.CaveSetFeat(y, x, Game.SingletonRepository.Tiles.Get(nameof(WallBasicTile)));
+        Game.CaveSetFeat(y, x, Game.SingletonRepository.Get<Tile>(nameof(WallBasicTile)));
         return false;
     }
 

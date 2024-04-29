@@ -89,7 +89,7 @@ internal abstract class StoreFactory : IItemFilter, IGetKey
         Shopkeepers = Game.SingletonRepository.Get<Shopkeeper>(ShopkeeperNames);
 
         // Bind the symbol.
-        Tile = Game.SingletonRepository.Tiles.Get(TileName);
+        Tile = Game.SingletonRepository.Get<Tile>(TileName);
 
         // Bind the item filters.
         List<AllItemsItemFilter> itemFilters = new();

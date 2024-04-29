@@ -23,6 +23,6 @@ internal class ElderSignScript : Script, IScript
             Game.MsgPrint("The object resists the spell.");
             return;
         }
-        Game.CaveSetFeat(Game.MapY.IntValue, Game.MapX.IntValue, Game.SingletonRepository.Tiles.Get(nameof(ElderSignSigilTile)));
+        Game.CaveSetFeat(Game.MapY.IntValue, Game.MapX.IntValue, Game.SingletonRepository.Get<Tile>(nameof(ElderSignSigilTile)));
     }
 }

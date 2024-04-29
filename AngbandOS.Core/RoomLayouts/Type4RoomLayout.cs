@@ -39,7 +39,7 @@ internal class Type4RoomLayout : RoomLayout
                 }
             }
         }
-        Tile wallOuterTile = Game.SingletonRepository.Tiles.Get(nameof(WallOuterTile));
+        Tile wallOuterTile = Game.SingletonRepository.Get<Tile>(nameof(WallOuterTile));
         for (y = y1 - 1; y <= y2 + 1; y++)
         {
             cPtr = Game.Map.Grid[y][x1 - 1];
@@ -58,7 +58,7 @@ internal class Type4RoomLayout : RoomLayout
         y2 -= 2;
         x1 += 2;
         x2 -= 2;
-        Tile wallInnerTile = Game.SingletonRepository.Tiles.Get(nameof(WallInnerTile));
+        Tile wallInnerTile = Game.SingletonRepository.Get<Tile>(nameof(WallInnerTile));
         for (y = y1 - 1; y <= y2 + 1; y++)
         {
             cPtr = Game.Map.Grid[y][x1 - 1];
@@ -385,14 +385,14 @@ internal class Type4RoomLayout : RoomLayout
     {
         GridTile cPtr = Game.Map.Grid[y][x];
         WeightedRandom<Tile> tiles = new WeightedRandom<Tile>(Game);
-        tiles.Add(1, Game.SingletonRepository.Tiles.Get(nameof(LockedDoor0Tile)));
-        tiles.Add(1, Game.SingletonRepository.Tiles.Get(nameof(LockedDoor1Tile)));
-        tiles.Add(1, Game.SingletonRepository.Tiles.Get(nameof(LockedDoor2Tile)));
-        tiles.Add(1, Game.SingletonRepository.Tiles.Get(nameof(LockedDoor3Tile)));
-        tiles.Add(1, Game.SingletonRepository.Tiles.Get(nameof(LockedDoor4Tile)));
-        tiles.Add(1, Game.SingletonRepository.Tiles.Get(nameof(LockedDoor5Tile)));
-        tiles.Add(1, Game.SingletonRepository.Tiles.Get(nameof(LockedDoor6Tile)));
-        tiles.Add(1, Game.SingletonRepository.Tiles.Get(nameof(LockedDoor7Tile)));
+        tiles.Add(1, Game.SingletonRepository.Get<Tile>(nameof(LockedDoor0Tile)));
+        tiles.Add(1, Game.SingletonRepository.Get<Tile>(nameof(LockedDoor1Tile)));
+        tiles.Add(1, Game.SingletonRepository.Get<Tile>(nameof(LockedDoor2Tile)));
+        tiles.Add(1, Game.SingletonRepository.Get<Tile>(nameof(LockedDoor3Tile)));
+        tiles.Add(1, Game.SingletonRepository.Get<Tile>(nameof(LockedDoor4Tile)));
+        tiles.Add(1, Game.SingletonRepository.Get<Tile>(nameof(LockedDoor5Tile)));
+        tiles.Add(1, Game.SingletonRepository.Get<Tile>(nameof(LockedDoor6Tile)));
+        tiles.Add(1, Game.SingletonRepository.Get<Tile>(nameof(LockedDoor7Tile)));
         Tile tile = tiles.Choose();
         cPtr.SetFeature(tile);
     }

@@ -20,7 +20,7 @@ internal class MakeElderSignProjectile : Projectile
         {
             return false;
         }
-        Game.CaveSetFeat(y, x, Game.SingletonRepository.Tiles.Get(nameof(ElderSignSigilTile)));
+        Game.CaveSetFeat(y, x, Game.SingletonRepository.Get<Tile>(nameof(ElderSignSigilTile)));
         return false;
     }
 

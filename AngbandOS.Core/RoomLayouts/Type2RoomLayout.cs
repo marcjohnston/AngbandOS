@@ -56,7 +56,7 @@ internal class Type2RoomLayout : RoomLayout
                 }
             }
         }
-        Tile wallOuter = Game.SingletonRepository.Tiles.Get(nameof(WallOuterTile));
+        Tile wallOuter = Game.SingletonRepository.Get<Tile>(nameof(WallOuterTile));
         for (y = y1A - 1; y <= y2A + 1; y++)
         {
             cPtr = Game.Map.Grid[y][x1A - 1];

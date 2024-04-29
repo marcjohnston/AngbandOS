@@ -30,7 +30,7 @@ internal class KillTrapProjectile : Projectile
         }
         else if (cPtr.FeatureType.IsSecretDoor || cPtr.FeatureType.IsClosedDoor)
         {
-            Game.CaveSetFeat(y, x, Game.SingletonRepository.Tiles.Get(nameof(LockedDoor0Tile)));
+            Game.CaveSetFeat(y, x, Game.SingletonRepository.Get<Tile>(nameof(LockedDoor0Tile)));
             if (Game.PlayerHasLosBold(y, x))
             {
                 Game.MsgPrint("Click!");

@@ -70,9 +70,9 @@ internal abstract class RoomLayout : IGetKey
         int dx, dy, x, y;
         char t;
         int index = 0;
-        Tile wallOuter = Game.SingletonRepository.Tiles.Get(nameof(WallOuterTile));
-        Tile wallInner = Game.SingletonRepository.Tiles.Get(nameof(WallInnerTile));
-        Tile wallPermInner = Game.SingletonRepository.Tiles.Get(nameof(WallPermanentInnerTile));
+        Tile wallOuter = Game.SingletonRepository.Get<Tile>(nameof(WallOuterTile));
+        Tile wallInner = Game.SingletonRepository.Get<Tile>(nameof(WallInnerTile));
+        Tile wallPermInner = Game.SingletonRepository.Get<Tile>(nameof(WallPermanentInnerTile));
         for (dy = 0; dy < ymax; dy++)
         {
             for (dx = 0; dx < xmax; dx++)
@@ -257,6 +257,6 @@ internal abstract class RoomLayout : IGetKey
     protected void PlaceSecretDoor(int y, int x)
     {
         GridTile cPtr = Game.Map.Grid[y][x];
-        cPtr.SetFeature(Game.SingletonRepository.Tiles.Get(nameof(SecretDoorTile)));
+        cPtr.SetFeature(Game.SingletonRepository.Get<Tile>(nameof(SecretDoorTile)));
     }
 }

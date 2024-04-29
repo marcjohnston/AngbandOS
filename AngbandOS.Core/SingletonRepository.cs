@@ -66,7 +66,6 @@ internal class SingletonRepository
     public SpellResistantDetectionsRepository SpellResistantDetections;
     public StoreFactoriesRepository StoreFactories;
     public TalentsRepository Talents;
-    public TilesRepository Tiles;
     public TownsRepository Towns;
     public UnreadableFlavorSyllablesRepository UnreadableFlavorSyllables;
     public VaultsRepository Vaults;
@@ -395,6 +394,7 @@ internal class SingletonRepository
         RegisterRepository<StaffReadableFlavor>();
         RegisterRepository<StoreCommand>();
         RegisterRepository<Symbol>();
+        RegisterRepository<Tile>();
 
         // This is the load phase for assembly.
         LoadAllAssemblyTypes();
@@ -423,6 +423,7 @@ internal class SingletonRepository
         LoadFromConfiguration<StaffReadableFlavor, ReadableFlavorDefinition, GenericStaffReadableFlavor>(Game.Configuration.StaffReadableFlavors);
         LoadFromConfiguration<StoreCommand, StoreCommandDefinition, GenericStoreCommand>(Game.Configuration.StoreCommands);
         LoadFromConfiguration<Symbol, SymbolDefinition, GenericSymbol>(Game.Configuration.Symbols);
+        LoadFromConfiguration<Tile, TileDefinition, GenericTile>(Game.Configuration.Tiles);
 
         MonsterRace[] monsterRaces = Get<MonsterRace>();
         MonsterRace[] sortedMonsterRaces = monsterRaces.OrderBy(_monsterRace => _monsterRace.LevelFound).ToArray();
@@ -475,7 +476,6 @@ internal class SingletonRepository
         SpellResistantDetections = AddRepository<SpellResistantDetectionsRepository>(new SpellResistantDetectionsRepository(Game));
         StoreFactories = AddRepository<StoreFactoriesRepository>(new StoreFactoriesRepository(Game));
         Talents = AddRepository<TalentsRepository>(new TalentsRepository(Game));
-        Tiles = AddRepository<TilesRepository>(new TilesRepository(Game));
         Towns = AddRepository<TownsRepository>(new TownsRepository(Game));
         UnreadableFlavorSyllables = AddRepository<UnreadableFlavorSyllablesRepository>(new UnreadableFlavorSyllablesRepository(Game));
         Vaults = AddRepository<VaultsRepository>(new VaultsRepository(Game));

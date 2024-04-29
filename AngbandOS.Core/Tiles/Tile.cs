@@ -83,10 +83,10 @@ internal abstract class Tile : IGetKey
     public string GetKey => Key;
     public void Bind()
     {
-        MimicTile = MimicTileName == null ? null : Game.SingletonRepository.Tiles.Get(MimicTileName);
-        HiddenTreasureForTile = HiddenTreasureForTileName == null ? null : Game.SingletonRepository.Tiles.Get(HiddenTreasureForTileName);
-        OnJammedTile = OnJammedTileName == null ? null : Game.SingletonRepository.Tiles.Get(OnJammedTileName);
-        VisibleTreasureForTile = VisibleTreasureForTileName == null ? null : Game.SingletonRepository.Tiles.Get(VisibleTreasureForTileName);
+        MimicTile = MimicTileName == null ? null : Game.SingletonRepository.Get<Tile>(MimicTileName);
+        HiddenTreasureForTile = HiddenTreasureForTileName == null ? null : Game.SingletonRepository.Get<Tile>(HiddenTreasureForTileName);
+        OnJammedTile = OnJammedTileName == null ? null : Game.SingletonRepository.Get<Tile>(OnJammedTileName);
+        VisibleTreasureForTile = VisibleTreasureForTileName == null ? null : Game.SingletonRepository.Get<Tile>(VisibleTreasureForTileName);
         AlterAction = AlterActionName == null ? null : Game.SingletonRepository.Get<AlterAction>(AlterActionName);
         Symbol = Game.SingletonRepository.Get<Symbol>(SymbolName);
         StepOnScript = StepOnScriptName == null ? null : (IScript)Game.SingletonRepository.Scripts.Get(StepOnScriptName);

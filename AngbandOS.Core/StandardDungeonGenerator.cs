@@ -237,9 +237,9 @@ internal class StandardDungeonGenerator : DungeonGenerator
 
     private void DestroyLevel()
     {
-        Tile wallBasicTile = Game.SingletonRepository.Tiles.Get(nameof(WallBasicTile));
-        Tile quartzTile = Game.SingletonRepository.Tiles.Get(nameof(QuartzTile));
-        Tile magmaTile = Game.SingletonRepository.Tiles.Get(nameof(MagmaTile));
+        Tile wallBasicTile = Game.SingletonRepository.Get<Tile>(nameof(WallBasicTile));
+        Tile quartzTile = Game.SingletonRepository.Get<Tile>(nameof(QuartzTile));
+        Tile magmaTile = Game.SingletonRepository.Get<Tile>(nameof(MagmaTile));
         for (int n = 0; n < Game.DieRoll(5); n++)
         {
             int x1 = Game.RandomBetween(5, Game.CurWid - 1 - 5);
@@ -371,41 +371,41 @@ internal class StandardDungeonGenerator : DungeonGenerator
                 int rounded = (int)(v * 10);
                 if (rounded < 2 || rounded > 5)
                 {
-                    cPtr.SetFeature(Game.SingletonRepository.Tiles.Get(nameof(WallBasicTile)));
+                    cPtr.SetFeature(Game.SingletonRepository.Get<Tile>(nameof(WallBasicTile)));
                 }
                 else
                 {
-                    cPtr.SetFeature(Game.SingletonRepository.Tiles.Get(nameof(DungeonFloorTile)));
+                    cPtr.SetFeature(Game.SingletonRepository.Get<Tile>(nameof(DungeonFloorTile)));
                 }
             }
         }
         for (int i = 0; i < _dunStrMag; i++)
         {
-            BuildStreamer(Game.SingletonRepository.Tiles.Get(nameof(MagmaTile)), _dunStrMc);
+            BuildStreamer(Game.SingletonRepository.Get<Tile>(nameof(MagmaTile)), _dunStrMc);
         }
         for (int i = 0; i < _dunStrQua; i++)
         {
-            BuildStreamer(Game.SingletonRepository.Tiles.Get(nameof(QuartzTile)), _dunStrQc);
+            BuildStreamer(Game.SingletonRepository.Get<Tile>(nameof(QuartzTile)), _dunStrQc);
         }
         for (int x = 0; x < Game.CurWid; x++)
         {
             GridTile cPtr = Game.Map.Grid[0][x];
-            cPtr.SetFeature(Game.SingletonRepository.Tiles.Get(nameof(WallPermentSolidTile)));
+            cPtr.SetFeature(Game.SingletonRepository.Get<Tile>(nameof(WallPermentSolidTile)));
         }
         for (int x = 0; x < Game.CurWid; x++)
         {
             GridTile cPtr = Game.Map.Grid[Game.CurHgt - 1][x];
-            cPtr.SetFeature(Game.SingletonRepository.Tiles.Get(nameof(WallPermentSolidTile)));
+            cPtr.SetFeature(Game.SingletonRepository.Get<Tile>(nameof(WallPermentSolidTile)));
         }
         for (int y = 0; y < Game.CurHgt; y++)
         {
             GridTile cPtr = Game.Map.Grid[y][0];
-            cPtr.SetFeature(Game.SingletonRepository.Tiles.Get(nameof(WallPermentSolidTile)));
+            cPtr.SetFeature(Game.SingletonRepository.Get<Tile>(nameof(WallPermentSolidTile)));
         }
         for (int y = 0; y < Game.CurHgt; y++)
         {
             GridTile cPtr = Game.Map.Grid[y][Game.CurWid - 1];
-            cPtr.SetFeature(Game.SingletonRepository.Tiles.Get(nameof(WallPermentSolidTile)));
+            cPtr.SetFeature(Game.SingletonRepository.Get<Tile>(nameof(WallPermentSolidTile)));
         }
         if (Game.DieRoll(_darkEmpty) != 1 || Game.DieRoll(100) > Game.Difficulty)
         {
@@ -527,7 +527,7 @@ internal class StandardDungeonGenerator : DungeonGenerator
     private void PlaceRubble(int y, int x)
     {
         GridTile cPtr = Game.Map.Grid[y][x];
-        cPtr.SetFeature(Game.SingletonRepository.Tiles.Get(nameof(RubbleTile)));
+        cPtr.SetFeature(Game.SingletonRepository.Get<Tile>(nameof(RubbleTile)));
     }
 
     private void AllocObject(int set, int typ, int num)
@@ -755,7 +755,7 @@ internal class StandardDungeonGenerator : DungeonGenerator
                     {
                         if (Game.Map.Grid[y][x].FeatureType is WallOuterTile)
                         {
-                            Game.Map.Grid[y][x].SetFeature(Game.SingletonRepository.Tiles.Get(nameof(WallSolidTile)));
+                            Game.Map.Grid[y][x].SetFeature(Game.SingletonRepository.Get<Tile>(nameof(WallSolidTile)));
                         }
                     }
                 }
@@ -894,7 +894,7 @@ internal class StandardDungeonGenerator : DungeonGenerator
                 }
                 else
                 {
-                    cPtr.SetFeature(Game.SingletonRepository.Tiles.Get(nameof(WallBasicTile)));
+                    cPtr.SetFeature(Game.SingletonRepository.Get<Tile>(nameof(WallBasicTile)));
                 }
             }
         }
@@ -997,22 +997,22 @@ internal class StandardDungeonGenerator : DungeonGenerator
         for (x = 0; x < Game.CurWid; x++)
         {
             GridTile cPtr = Game.Map.Grid[0][x];
-            cPtr.SetFeature(Game.SingletonRepository.Tiles.Get(nameof(WallPermentSolidTile)));
+            cPtr.SetFeature(Game.SingletonRepository.Get<Tile>(nameof(WallPermentSolidTile)));
         }
         for (x = 0; x < Game.CurWid; x++)
         {
             GridTile cPtr = Game.Map.Grid[Game.CurHgt - 1][x];
-            cPtr.SetFeature(Game.SingletonRepository.Tiles.Get(nameof(WallPermentSolidTile)));
+            cPtr.SetFeature(Game.SingletonRepository.Get<Tile>(nameof(WallPermentSolidTile)));
         }
         for (y = 0; y < Game.CurHgt; y++)
         {
             GridTile cPtr = Game.Map.Grid[y][0];
-            cPtr.SetFeature(Game.SingletonRepository.Tiles.Get(nameof(WallPermentSolidTile)));
+            cPtr.SetFeature(Game.SingletonRepository.Get<Tile>(nameof(WallPermentSolidTile)));
         }
         for (y = 0; y < Game.CurHgt; y++)
         {
             GridTile cPtr = Game.Map.Grid[y][Game.CurWid - 1];
-            cPtr.SetFeature(Game.SingletonRepository.Tiles.Get(nameof(WallPermentSolidTile)));
+            cPtr.SetFeature(Game.SingletonRepository.Get<Tile>(nameof(WallPermentSolidTile)));
         }
         for (int i = 0; i < CentN; i++)
         {
@@ -1050,11 +1050,11 @@ internal class StandardDungeonGenerator : DungeonGenerator
         }
         for (int i = 0; i < _dunStrMag; i++)
         {
-            BuildStreamer(Game.SingletonRepository.Tiles.Get(nameof(MagmaTile)), _dunStrMc);
+            BuildStreamer(Game.SingletonRepository.Get<Tile>(nameof(MagmaTile)), _dunStrMc);
         }
         for (int i = 0; i < _dunStrQua; i++)
         {
-            BuildStreamer(Game.SingletonRepository.Tiles.Get(nameof(QuartzTile)), _dunStrQc);
+            BuildStreamer(Game.SingletonRepository.Get<Tile>(nameof(QuartzTile)), _dunStrQc);
         }
         if (destroyed)
         {

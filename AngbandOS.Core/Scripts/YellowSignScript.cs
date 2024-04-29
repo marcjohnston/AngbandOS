@@ -23,6 +23,6 @@ internal class YellowSignScript : Script, IScript
             Game.MsgPrint("The object resists the spell.");
             return;
         }
-        Game.CaveSetFeat(Game.MapY.IntValue, Game.MapX.IntValue, Game.SingletonRepository.Tiles.Get(nameof(YellowSignSigilTile)));
+        Game.CaveSetFeat(Game.MapY.IntValue, Game.MapX.IntValue, Game.SingletonRepository.Get<Tile>(nameof(YellowSignSigilTile)));
     }
 }

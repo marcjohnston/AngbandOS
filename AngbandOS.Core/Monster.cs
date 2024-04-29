@@ -1041,7 +1041,7 @@ internal class Monster : IItemContainer
                         int k = tile.FeatureType.LockLevel;
                         if (Game.RandomLessThan(Health / 10) > k)
                         {
-                            Game.CaveSetFeat(newY, newX, Game.SingletonRepository.Tiles.Get("LockedDoor0"));
+                            Game.CaveSetFeat(newY, newX, Game.SingletonRepository.Get<Tile>("LockedDoor0"));
                             mayBash = false;
                         }
                     }
@@ -1064,11 +1064,11 @@ internal class Monster : IItemContainer
                 {
                     if (didBashDoor && Game.RandomLessThan(100) < 50)
                     {
-                        Game.CaveSetFeat(newY, newX, Game.SingletonRepository.Tiles.Get(nameof(BrokenDoorTile)));
+                        Game.CaveSetFeat(newY, newX, Game.SingletonRepository.Get<Tile>(nameof(BrokenDoorTile)));
                     }
                     else
                     {
-                        Game.CaveSetFeat(newY, newX, Game.SingletonRepository.Tiles.Get(nameof(OpenDoorTile)));
+                        Game.CaveSetFeat(newY, newX, Game.SingletonRepository.Get<Tile>(nameof(OpenDoorTile)));
                     }
                     // If the player can see, remind ourselves to update the view later
                     if (Game.PlayerHasLosBold(newY, newX))

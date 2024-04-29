@@ -97,7 +97,7 @@ internal class PersistConfigurationScript : Script, IScript
             Game.SingletonRepository.StoreFactories.PersistEntities();
             Game.SingletonRepository.PersistEntities<Symbol>();
             Game.SingletonRepository.Talents.PersistEntities();
-            Game.SingletonRepository.Tiles.PersistEntities();
+            Game.SingletonRepository.PersistEntities<Tile>();
             Game.SingletonRepository.PersistEntities<Timer>();
             Game.SingletonRepository.Towns.PersistEntities();
             Game.SingletonRepository.Vaults.PersistEntities();
