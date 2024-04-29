@@ -91,7 +91,7 @@ internal class PersistConfigurationScript : Script, IScript
             Game.SingletonRepository.PersistEntities<ScrollReadableFlavor>();
             Game.SingletonRepository.PersistEntities<Shopkeeper>();
             Game.SingletonRepository.SpellResistantDetections.PersistEntities();
-            Game.SingletonRepository.Spells.PersistEntities();
+            Game.SingletonRepository.PersistEntities<Spell>();
             Game.SingletonRepository.StaffReadableFlavors.PersistEntities();
             Game.SingletonRepository.StoreCommands.PersistEntities();
             Game.SingletonRepository.StoreFactories.PersistEntities();

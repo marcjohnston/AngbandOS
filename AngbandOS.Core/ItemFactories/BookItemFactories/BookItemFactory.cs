@@ -21,7 +21,7 @@ internal abstract class BookItemFactory : ItemFactory
         List<Spell> spellList = new List<Spell>();
         foreach (string spellName in SpellNames)
         {
-            Spell spell = Game.SingletonRepository.Spells.Get(spellName);
+            Spell spell = Game.SingletonRepository.Get<Spell>(spellName);
             spellList.Add(spell);
         }
         Spells = spellList.ToArray();
