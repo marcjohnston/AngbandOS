@@ -12,7 +12,7 @@ internal class OldHealProjectile : Projectile
 {
     private OldHealProjectile(Game game) : base(game) { }
 
-    protected override ProjectileGraphic? BoltProjectileGraphic => Game.SingletonRepository.ProjectileGraphics.Get(nameof(WhiteBulletProjectileGraphic));
+    protected override ProjectileGraphic? BoltProjectileGraphic => Game.SingletonRepository.Get<ProjectileGraphic>(nameof(WhiteBulletProjectileGraphic));
 
     protected override Animation EffectAnimation => Game.SingletonRepository.Get<Animation>(nameof(WhiteSparkleAnimation));
 

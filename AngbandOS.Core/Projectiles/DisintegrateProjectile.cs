@@ -12,7 +12,7 @@ internal class DisintegrateProjectile : Projectile
 {
     private DisintegrateProjectile(Game game) : base(game) { }
 
-    protected override ProjectileGraphic? BoltProjectileGraphic => Game.SingletonRepository.ProjectileGraphics.Get(nameof(GreenBoltProjectileGraphic));
+    protected override ProjectileGraphic? BoltProjectileGraphic => Game.SingletonRepository.Get<ProjectileGraphic>(nameof(GreenBoltProjectileGraphic));
 
     protected override Animation EffectAnimation => Game.SingletonRepository.Get<Animation>(nameof(GreenContractAnimation));
 

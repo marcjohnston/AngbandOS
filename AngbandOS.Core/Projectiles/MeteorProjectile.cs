@@ -12,7 +12,7 @@ internal class MeteorProjectile : Projectile
 {
     private MeteorProjectile(Game game) : base(game) { }
 
-    protected override ProjectileGraphic? BoltProjectileGraphic => Game.SingletonRepository.ProjectileGraphics.Get(nameof(BrightRedSplatProjectileGraphic));
+    protected override ProjectileGraphic? BoltProjectileGraphic => Game.SingletonRepository.Get<ProjectileGraphic>(nameof(BrightRedSplatProjectileGraphic));
 
     protected override Animation EffectAnimation => Game.SingletonRepository.Get<Animation>(nameof(RedOrangeFlashAnimation));
 

@@ -12,7 +12,7 @@ internal class OldSlowProjectile : Projectile
 {
     private OldSlowProjectile(Game game) : base(game) { }
 
-    protected override ProjectileGraphic? BoltProjectileGraphic => Game.SingletonRepository.ProjectileGraphics.Get(nameof(BlueBulletProjectileGraphic));
+    protected override ProjectileGraphic? BoltProjectileGraphic => Game.SingletonRepository.Get<ProjectileGraphic>(nameof(BlueBulletProjectileGraphic));
 
     protected override Animation EffectAnimation => Game.SingletonRepository.Get<Animation>(nameof(BlueSwirlAnimation));
 

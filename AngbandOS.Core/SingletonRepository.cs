@@ -49,9 +49,7 @@ internal class SingletonRepository
     public MonsterSpellsRepository MonsterSpells;
     public MutationsRepository Mutations;
     public PatronsRepository Patrons;
-    public PluralsRepository Plurals;
     public PowersRepository Powers;
-    public ProjectileGraphicsRepository ProjectileGraphics;
     public ProjectilesRepository Projectiles;
     public RacesRepository Races;
     public RareItemsRepository RareItems;
@@ -358,6 +356,7 @@ internal class SingletonRepository
         AddInterfaceRepository<MushroomReadableFlavor>();
         AddInterfaceRepository<Plural>();
         AddInterfaceRepository<PotionReadableFlavor>();
+        AddInterfaceRepository<ProjectileGraphic>();
 
         // This is the load phase for assembly.
         LoadAllAssemblyTypes();
@@ -377,6 +376,7 @@ internal class SingletonRepository
         LoadFromConfiguration<MushroomReadableFlavor, ReadableFlavorDefinition, GenericMushroomReadableFlavor>(Game.Configuration.MushroomReadableFlavors);
         LoadFromConfiguration<Plural, PluralDefinition, GenericPlural>(Game.Configuration.Plurals);
         LoadFromConfiguration<PotionReadableFlavor, ReadableFlavorDefinition, GenericPotionReadableFlavor>(Game.Configuration.PotionReadableFlavors);
+        LoadFromConfiguration<ProjectileGraphic, ProjectileGraphicDefinition, GenericProjectileGraphic>(Game.Configuration.ProjectileGraphics);
 
         MonsterRace[] monsterRaces = Get<MonsterRace>();
         MonsterRace[] sortedMonsterRaces = monsterRaces.OrderBy(_monsterRace => _monsterRace.LevelFound).ToArray();
@@ -413,7 +413,6 @@ internal class SingletonRepository
         Mutations = AddRepository<MutationsRepository>(new MutationsRepository(Game));
         Patrons = AddRepository<PatronsRepository>(new PatronsRepository(Game));
         Powers = AddRepository<PowersRepository>(new PowersRepository(Game));
-        ProjectileGraphics = AddRepository<ProjectileGraphicsRepository>(new ProjectileGraphicsRepository(Game));
         Projectiles = AddRepository<ProjectilesRepository>(new ProjectilesRepository(Game));
         Races = AddRepository<RacesRepository>(new RacesRepository(Game));
         RareItems = AddRepository<RareItemsRepository>(new RareItemsRepository(Game));
