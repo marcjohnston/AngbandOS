@@ -35,7 +35,6 @@ internal class SingletonRepository
     public UnreadableFlavorSyllablesRepository UnreadableFlavorSyllables;
     public WorshipPlayerAttacksRepository WorshipPlayerAttacks;
 
-    public ItemFactoriesRepository ItemFactories;
     public ItemFiltersRepository ItemFilters;
     public ItemQualityRatingsRepository ItemQualityRatings;
     public JustificationsRepository Justifications;
@@ -450,7 +449,6 @@ internal class SingletonRepository
         FunnyDescriptions = AddRepository<FunnyDescriptionsRepository>(new FunnyDescriptionsRepository(Game));
         HorrificDescriptions = AddRepository<HorrificDescriptionsRepository>(new HorrificDescriptionsRepository(Game));
         InsultPlayerAttacks = AddRepository<InsultPlayerAttacksRepository>(new InsultPlayerAttacksRepository(Game));
-        ItemFactories = AddRepository<ItemFactoriesRepository>(new ItemFactoriesRepository(Game));
         ItemFilters = AddRepository<ItemFiltersRepository>(new ItemFiltersRepository(Game));
         ItemQualityRatings = AddRepository<ItemQualityRatingsRepository>(new ItemQualityRatingsRepository(Game));
         Justifications = AddRepository<JustificationsRepository>(new JustificationsRepository(Game));

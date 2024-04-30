@@ -20,83 +20,83 @@ internal class ChaosWpReward : Reward
         {
             case 1:
             case 2:
-                reward = Game.SingletonRepository.ItemFactories.Get(nameof(DaggerWeaponItemFactory));
+                reward = Game.SingletonRepository.Get<ItemFactory>(nameof(DaggerWeaponItemFactory));
                 break;
 
             case 3:
             case 4:
-                reward = Game.SingletonRepository.ItemFactories.Get(nameof(MainGaucheWeaponItemFactory));
+                reward = Game.SingletonRepository.Get<ItemFactory>(nameof(MainGaucheWeaponItemFactory));
                 break;
 
             case 5:
             case 6:
-                reward = Game.SingletonRepository.ItemFactories.Get(nameof(RapierWeaponItemFactory));
+                reward = Game.SingletonRepository.Get<ItemFactory>(nameof(RapierWeaponItemFactory));
                 break;
 
             case 7:
             case 8:
-                reward = Game.SingletonRepository.ItemFactories.Get(nameof(SmallSwordWeaponItemFactory));
+                reward = Game.SingletonRepository.Get<ItemFactory>(nameof(SmallSwordWeaponItemFactory));
                 break;
 
             case 9:
             case 10:
-                reward = Game.SingletonRepository.ItemFactories.Get(nameof(ShortSwordWeaponItemFactory));
+                reward = Game.SingletonRepository.Get<ItemFactory>(nameof(ShortSwordWeaponItemFactory));
                 break;
 
             case 11:
             case 12:
             case 13:
-                reward = Game.SingletonRepository.ItemFactories.Get(nameof(SabreWeaponItemFactory));
+                reward = Game.SingletonRepository.Get<ItemFactory>(nameof(SabreWeaponItemFactory));
                 break;
 
             case 14:
             case 15:
             case 16:
-                reward = Game.SingletonRepository.ItemFactories.Get(nameof(CutlassWeaponItemFactory));
+                reward = Game.SingletonRepository.Get<ItemFactory>(nameof(CutlassWeaponItemFactory));
                 break;
 
             case 17:
-                reward = Game.SingletonRepository.ItemFactories.Get(nameof(TulwarWeaponItemFactory));
+                reward = Game.SingletonRepository.Get<ItemFactory>(nameof(TulwarWeaponItemFactory));
                 break;
 
             case 18:
             case 19:
             case 20:
-                reward = Game.SingletonRepository.ItemFactories.Get(nameof(BroadSwordWeaponItemFactory));
+                reward = Game.SingletonRepository.Get<ItemFactory>(nameof(BroadSwordWeaponItemFactory));
                 break;
 
             case 21:
             case 22:
             case 23:
-                reward = Game.SingletonRepository.ItemFactories.Get(nameof(LongSwordWeaponItemFactory));
+                reward = Game.SingletonRepository.Get<ItemFactory>(nameof(LongSwordWeaponItemFactory));
                 break;
 
             case 24:
             case 25:
             case 26:
-                reward = Game.SingletonRepository.ItemFactories.Get(nameof(ScimitarWeaponItemFactory));
+                reward = Game.SingletonRepository.Get<ItemFactory>(nameof(ScimitarWeaponItemFactory));
                 break;
 
             case 27:
-                reward = Game.SingletonRepository.ItemFactories.Get(nameof(KatanaWeaponItemFactory));
+                reward = Game.SingletonRepository.Get<ItemFactory>(nameof(KatanaWeaponItemFactory));
                 break;
 
             case 28:
             case 29:
-                reward = Game.SingletonRepository.ItemFactories.Get(nameof(BastardSwordSwordWeaponItemFactory));
+                reward = Game.SingletonRepository.Get<ItemFactory>(nameof(BastardSwordSwordWeaponItemFactory));
                 break;
 
             case 30:
             case 31:
-                reward = Game.SingletonRepository.ItemFactories.Get(nameof(TwoHandedSwordWeaponItemFactory));
+                reward = Game.SingletonRepository.Get<ItemFactory>(nameof(TwoHandedSwordWeaponItemFactory));
                 break;
 
             case 32:
-                reward = Game.SingletonRepository.ItemFactories.Get(nameof(ExecutionersSwordWeaponItemFactory));
+                reward = Game.SingletonRepository.Get<ItemFactory>(nameof(ExecutionersSwordWeaponItemFactory));
                 break;
 
             default:
-                reward = Game.SingletonRepository.ItemFactories.Get(nameof(BladeOfChaosWeaponItemFactory));
+                reward = Game.SingletonRepository.Get<ItemFactory>(nameof(BladeOfChaosWeaponItemFactory));
                 break;
         }
         Item qPtr = reward.CreateItem();

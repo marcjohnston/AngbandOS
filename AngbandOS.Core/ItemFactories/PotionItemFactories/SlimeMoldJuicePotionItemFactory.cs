@@ -66,99 +66,99 @@ internal class SlimeMoldJuicePotionItemFactory : PotionItemFactory
         switch (Game.DieRoll(48))
         {
             case 1:
-                return (PotionItemFactory)game.SingletonRepository.ItemFactories.Get(nameof(WaterPotionItemFactory));
+                return (PotionItemFactory)game.SingletonRepository.Get<ItemFactory>(nameof(WaterPotionItemFactory));
             case 2:
-                return (PotionItemFactory)game.SingletonRepository.ItemFactories.Get(nameof(AppleJuicePotionItemFactory));
+                return (PotionItemFactory)game.SingletonRepository.Get<ItemFactory>(nameof(AppleJuicePotionItemFactory));
             case 3:
-                return (PotionItemFactory)game.SingletonRepository.ItemFactories.Get(nameof(SlownessPotionItemFactory));
+                return (PotionItemFactory)game.SingletonRepository.Get<ItemFactory>(nameof(SlownessPotionItemFactory));
             case 4:
-                return (PotionItemFactory)game.SingletonRepository.ItemFactories.Get(nameof(SaltWaterPotionItemFactory));
+                return (PotionItemFactory)game.SingletonRepository.Get<ItemFactory>(nameof(SaltWaterPotionItemFactory));
             case 5:
-                return (PotionItemFactory)game.SingletonRepository.ItemFactories.Get(nameof(PoisonPotionItemFactory));
+                return (PotionItemFactory)game.SingletonRepository.Get<ItemFactory>(nameof(PoisonPotionItemFactory));
             case 6:
-                return (PotionItemFactory)game.SingletonRepository.ItemFactories.Get(nameof(BlindnessPotionItemFactory));
+                return (PotionItemFactory)game.SingletonRepository.Get<ItemFactory>(nameof(BlindnessPotionItemFactory));
             case 7:
-                return (PotionItemFactory)game.SingletonRepository.ItemFactories.Get(nameof(BoozePotionItemFactory));
+                return (PotionItemFactory)game.SingletonRepository.Get<ItemFactory>(nameof(BoozePotionItemFactory));
             case 8:
-                return (PotionItemFactory)game.SingletonRepository.ItemFactories.Get(nameof(SleepPotionItemFactory));
+                return (PotionItemFactory)game.SingletonRepository.Get<ItemFactory>(nameof(SleepPotionItemFactory));
             case 9:
-                return (PotionItemFactory)game.SingletonRepository.ItemFactories.Get(nameof(InfravisionPotionItemFactory));
+                return (PotionItemFactory)game.SingletonRepository.Get<ItemFactory>(nameof(InfravisionPotionItemFactory));
             case 10:
-                return (PotionItemFactory)game.SingletonRepository.ItemFactories.Get(nameof(DetectInvisiblePotionItemFactory));
+                return (PotionItemFactory)game.SingletonRepository.Get<ItemFactory>(nameof(DetectInvisiblePotionItemFactory));
             case 11:
-                return (PotionItemFactory)game.SingletonRepository.ItemFactories.Get(nameof(SlowPoisonPotionItemFactory));
+                return (PotionItemFactory)game.SingletonRepository.Get<ItemFactory>(nameof(SlowPoisonPotionItemFactory));
             case 12:
-                return (PotionItemFactory)game.SingletonRepository.ItemFactories.Get(nameof(NeutralizePoisonPotionItemFactory));
+                return (PotionItemFactory)game.SingletonRepository.Get<ItemFactory>(nameof(NeutralizePoisonPotionItemFactory));
             case 13:
-                return (PotionItemFactory)game.SingletonRepository.ItemFactories.Get(nameof(BoldnessPotionItemFactory));
+                return (PotionItemFactory)game.SingletonRepository.Get<ItemFactory>(nameof(BoldnessPotionItemFactory));
             case 14:
-                return (PotionItemFactory)game.SingletonRepository.ItemFactories.Get(nameof(SpeedPotionItemFactory));
+                return (PotionItemFactory)game.SingletonRepository.Get<ItemFactory>(nameof(SpeedPotionItemFactory));
             case 15:
-                return (PotionItemFactory)game.SingletonRepository.ItemFactories.Get(nameof(ResistHeatPotionItemFactory));
+                return (PotionItemFactory)game.SingletonRepository.Get<ItemFactory>(nameof(ResistHeatPotionItemFactory));
             case 16:
-                return (PotionItemFactory)game.SingletonRepository.ItemFactories.Get(nameof(ResistColdPotionItemFactory));
+                return (PotionItemFactory)game.SingletonRepository.Get<ItemFactory>(nameof(ResistColdPotionItemFactory));
             case 17:
-                return (PotionItemFactory)game.SingletonRepository.ItemFactories.Get(nameof(HeroismPotionItemFactory));
+                return (PotionItemFactory)game.SingletonRepository.Get<ItemFactory>(nameof(HeroismPotionItemFactory));
             case 18:
-                return (PotionItemFactory)game.SingletonRepository.ItemFactories.Get(nameof(BerserkStrengthPotionItemFactory));
+                return (PotionItemFactory)game.SingletonRepository.Get<ItemFactory>(nameof(BerserkStrengthPotionItemFactory));
             case 19:
-                return (PotionItemFactory)game.SingletonRepository.ItemFactories.Get(nameof(CureLightWoundsPotionItemFactory));
+                return (PotionItemFactory)game.SingletonRepository.Get<ItemFactory>(nameof(CureLightWoundsPotionItemFactory));
             case 20:
-                return (PotionItemFactory)game.SingletonRepository.ItemFactories.Get(nameof(CureSeriousWoundsPotionItemFactory));
+                return (PotionItemFactory)game.SingletonRepository.Get<ItemFactory>(nameof(CureSeriousWoundsPotionItemFactory));
             case 21:
-                return (PotionItemFactory)game.SingletonRepository.ItemFactories.Get(nameof(CureCriticalWoundsPotionItemFactory));
+                return (PotionItemFactory)game.SingletonRepository.Get<ItemFactory>(nameof(CureCriticalWoundsPotionItemFactory));
             case 22:
-                return (PotionItemFactory)game.SingletonRepository.ItemFactories.Get(nameof(HealingPotionItemFactory));
+                return (PotionItemFactory)game.SingletonRepository.Get<ItemFactory>(nameof(HealingPotionItemFactory));
             case 23:
-                return (PotionItemFactory)game.SingletonRepository.ItemFactories.Get(nameof(SpecialHealingPotionItemFactory));
+                return (PotionItemFactory)game.SingletonRepository.Get<ItemFactory>(nameof(SpecialHealingPotionItemFactory));
             case 24:
-                return (PotionItemFactory)game.SingletonRepository.ItemFactories.Get(nameof(LifePotionItemFactory));
+                return (PotionItemFactory)game.SingletonRepository.Get<ItemFactory>(nameof(LifePotionItemFactory));
             case 25:
-                return (PotionItemFactory)game.SingletonRepository.ItemFactories.Get(nameof(RestoreManaPotionItemFactory));
+                return (PotionItemFactory)game.SingletonRepository.Get<ItemFactory>(nameof(RestoreManaPotionItemFactory));
             case 26:
-                return (PotionItemFactory)game.SingletonRepository.ItemFactories.Get(nameof(RestoreLifeLevelsPotionItemFactory));
+                return (PotionItemFactory)game.SingletonRepository.Get<ItemFactory>(nameof(RestoreLifeLevelsPotionItemFactory));
             case 27:
-                return (PotionItemFactory)game.SingletonRepository.ItemFactories.Get(nameof(RestoreStrengthPotionItemFactory));
+                return (PotionItemFactory)game.SingletonRepository.Get<ItemFactory>(nameof(RestoreStrengthPotionItemFactory));
             case 28:
-                return (PotionItemFactory)game.SingletonRepository.ItemFactories.Get(nameof(RestoreIntelligencePotionItemFactory));
+                return (PotionItemFactory)game.SingletonRepository.Get<ItemFactory>(nameof(RestoreIntelligencePotionItemFactory));
             case 29:
-                return (PotionItemFactory)game.SingletonRepository.ItemFactories.Get(nameof(RestoreWisdomPotionItemFactory));
+                return (PotionItemFactory)game.SingletonRepository.Get<ItemFactory>(nameof(RestoreWisdomPotionItemFactory));
             case 30:
-                return (PotionItemFactory)game.SingletonRepository.ItemFactories.Get(nameof(RestoreDexterityPotionItemFactory));
+                return (PotionItemFactory)game.SingletonRepository.Get<ItemFactory>(nameof(RestoreDexterityPotionItemFactory));
             case 31:
-                return (PotionItemFactory)game.SingletonRepository.ItemFactories.Get(nameof(RestoreConstitutionPotionItemFactory));
+                return (PotionItemFactory)game.SingletonRepository.Get<ItemFactory>(nameof(RestoreConstitutionPotionItemFactory));
             case 32:
-                return (PotionItemFactory)game.SingletonRepository.ItemFactories.Get(nameof(RestoreCharismaPotionItemFactory));
+                return (PotionItemFactory)game.SingletonRepository.Get<ItemFactory>(nameof(RestoreCharismaPotionItemFactory));
             case 33:
-                return (PotionItemFactory)game.SingletonRepository.ItemFactories.Get(nameof(StrengthPotionItemFactory));
+                return (PotionItemFactory)game.SingletonRepository.Get<ItemFactory>(nameof(StrengthPotionItemFactory));
             case 34:
-                return (PotionItemFactory)game.SingletonRepository.ItemFactories.Get(nameof(IntelligencePotionItemFactory));
+                return (PotionItemFactory)game.SingletonRepository.Get<ItemFactory>(nameof(IntelligencePotionItemFactory));
             case 35:
-                return (PotionItemFactory)game.SingletonRepository.ItemFactories.Get(nameof(WisdomPotionItemFactory));
+                return (PotionItemFactory)game.SingletonRepository.Get<ItemFactory>(nameof(WisdomPotionItemFactory));
             case 36:
-                return (PotionItemFactory)game.SingletonRepository.ItemFactories.Get(nameof(DexterityPotionItemFactory));
+                return (PotionItemFactory)game.SingletonRepository.Get<ItemFactory>(nameof(DexterityPotionItemFactory));
             case 37:
-                return (PotionItemFactory)game.SingletonRepository.ItemFactories.Get(nameof(ConstitutionPotionItemFactory));
+                return (PotionItemFactory)game.SingletonRepository.Get<ItemFactory>(nameof(ConstitutionPotionItemFactory));
             case 38:
-                return (PotionItemFactory)game.SingletonRepository.ItemFactories.Get(nameof(CharismaPotionItemFactory));
+                return (PotionItemFactory)game.SingletonRepository.Get<ItemFactory>(nameof(CharismaPotionItemFactory));
             case 39:
-                return (PotionItemFactory)game.SingletonRepository.ItemFactories.Get(nameof(AugmentationPotionItemFactory));
+                return (PotionItemFactory)game.SingletonRepository.Get<ItemFactory>(nameof(AugmentationPotionItemFactory));
             case 40:
-                return (PotionItemFactory)game.SingletonRepository.ItemFactories.Get(nameof(EnlightenmentPotionItemFactory));
+                return (PotionItemFactory)game.SingletonRepository.Get<ItemFactory>(nameof(EnlightenmentPotionItemFactory));
             case 41:
-                return (PotionItemFactory)game.SingletonRepository.ItemFactories.Get(nameof(SpecialEnlightenmentPotionItemFactory));
+                return (PotionItemFactory)game.SingletonRepository.Get<ItemFactory>(nameof(SpecialEnlightenmentPotionItemFactory));
             case 42:
-                return (PotionItemFactory)game.SingletonRepository.ItemFactories.Get(nameof(SelfKnowledgePotionItemFactory));
+                return (PotionItemFactory)game.SingletonRepository.Get<ItemFactory>(nameof(SelfKnowledgePotionItemFactory));
             case 43:
-                return (PotionItemFactory)game.SingletonRepository.ItemFactories.Get(nameof(ExperiencePotionItemFactory));
+                return (PotionItemFactory)game.SingletonRepository.Get<ItemFactory>(nameof(ExperiencePotionItemFactory));
             case 44:
-                return (PotionItemFactory)game.SingletonRepository.ItemFactories.Get(nameof(ResistancePotionItemFactory));
+                return (PotionItemFactory)game.SingletonRepository.Get<ItemFactory>(nameof(ResistancePotionItemFactory));
             case 45:
-                return (PotionItemFactory)game.SingletonRepository.ItemFactories.Get(nameof(CuringPotionItemFactory));
+                return (PotionItemFactory)game.SingletonRepository.Get<ItemFactory>(nameof(CuringPotionItemFactory));
             case 46:
-                return (PotionItemFactory)game.SingletonRepository.ItemFactories.Get(nameof(InvulnerabilityPotionItemFactory));
+                return (PotionItemFactory)game.SingletonRepository.Get<ItemFactory>(nameof(InvulnerabilityPotionItemFactory));
             case 47:
-                return (PotionItemFactory)game.SingletonRepository.ItemFactories.Get(nameof(NewLifePotionItemFactory));
+                return (PotionItemFactory)game.SingletonRepository.Get<ItemFactory>(nameof(NewLifePotionItemFactory));
             default:
                 throw new Exception("Invalid random potion chosen.");
         }

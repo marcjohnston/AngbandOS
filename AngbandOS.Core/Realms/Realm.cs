@@ -35,7 +35,7 @@ internal abstract class Realm : IGetKey
         List<BookItemFactory> bookItemFactoryList = new List<BookItemFactory>();
         foreach (string bookItemFactoryName in SpellBookNames)
         {
-            BookItemFactory bookItemFactory = (BookItemFactory)Game.SingletonRepository.ItemFactories.Get(bookItemFactoryName);
+            BookItemFactory bookItemFactory = (BookItemFactory)Game.SingletonRepository.Get<ItemFactory>(bookItemFactoryName);
             bookItemFactoryList.Add(bookItemFactory);
         }
         SpellBooks = bookItemFactoryList.ToArray();

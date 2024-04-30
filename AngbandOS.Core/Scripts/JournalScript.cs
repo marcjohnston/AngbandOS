@@ -1141,9 +1141,9 @@ internal class JournalScript : Script, IScript, IRepeatableScript, IScriptStore
     private void WorthlessItemTypeSelection(ItemClass tval)
     {
         _menuLength = 0;
-        for (int i = 0; i < Game.SingletonRepository.ItemFactories.Count; i++)
+        for (int i = 0; i < Game.SingletonRepository.Get<ItemFactory>().Length; i++)
         {
-            ItemFactory kPtr = Game.SingletonRepository.ItemFactories[i];
+            ItemFactory kPtr = Game.SingletonRepository.Get<ItemFactory>(i);
             if (kPtr.ItemClass == tval)
             {
                 if (kPtr.InstaArt)
@@ -1183,14 +1183,14 @@ internal class JournalScript : Script, IScript, IRepeatableScript, IScriptStore
                 }
                 if (c == '6')
                 {
-                    ItemFactory kPtr = Game.SingletonRepository.ItemFactories[_menuIndices[menu]];
+                    ItemFactory kPtr = Game.SingletonRepository.Get<ItemFactory>(_menuIndices[menu]);
                     if (kPtr.HasQuality)
                     {
                         WorthlessItemQualitySelection(kPtr);
                         _menuLength = 0;
-                        for (int i = 0; i < Game.SingletonRepository.ItemFactories.Count; i++)
+                        for (int i = 0; i < Game.SingletonRepository.Get<ItemFactory>().Length; i++)
                         {
-                            kPtr = Game.SingletonRepository.ItemFactories[i];
+                            kPtr = Game.SingletonRepository.Get<ItemFactory>(i);
                             if (kPtr.ItemClass == tval)
                             {
                                 if (kPtr.InstaArt)
@@ -1215,9 +1215,9 @@ internal class JournalScript : Script, IScript, IRepeatableScript, IScriptStore
                     {
                         WorthlessItemChestSelection(kPtr);
                         _menuLength = 0;
-                        for (int i = 0; i < Game.SingletonRepository.ItemFactories.Count; i++)
+                        for (int i = 0; i < Game.SingletonRepository.Get<ItemFactory>().Length; i++)
                         {
-                            kPtr = Game.SingletonRepository.ItemFactories[i];
+                            kPtr = Game.SingletonRepository.Get<ItemFactory>(i);
                             if (kPtr.ItemClass == tval)
                             {
                                 if (kPtr.InstaArt)

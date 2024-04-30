@@ -44,7 +44,7 @@ internal abstract class FixedArtifact : IItemCharacteristics, IGetKey
 
     public void Bind()
     {
-        BaseItemFactory = Game.SingletonRepository.ItemFactories.Get(BaseItemFactoryName);
+        BaseItemFactory = Game.SingletonRepository.Get<ItemFactory>(BaseItemFactoryName);
         Activation = Game.SingletonRepository.GetNullable<Activation>(ActivationName);
     }
 

@@ -336,7 +336,7 @@ internal abstract class BaseCharacterClass : IGetKey
         List<ItemFactory> outfitItemFactories = new();
         foreach (string outfitItemFactoryName in OutfitItemFactoryNames)
         {
-            outfitItemFactories.Add(Game.SingletonRepository.ItemFactories.Get(outfitItemFactoryName));
+            outfitItemFactories.Add(Game.SingletonRepository.Get<ItemFactory>(outfitItemFactoryName));
         }
         OutfitItemFactories = outfitItemFactories.ToArray();
     }

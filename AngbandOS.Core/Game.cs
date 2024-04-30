@@ -1626,7 +1626,7 @@ internal class Game
         }
 
         // Get a list of all of the item classes that are considered gold.  Sort them by the cost.
-        ItemFactory[] goldItemFactories = SingletonRepository.ItemFactories.Where(_itemClass => _itemClass.TryCast<GoldItemFactory>() != null).OrderBy(_goldItemClass => _goldItemClass.Cost).ToArray();
+        ItemFactory[] goldItemFactories = SingletonRepository.Get<ItemFactory>().Where(_itemClass => _itemClass.TryCast<GoldItemFactory>() != null).OrderBy(_goldItemClass => _goldItemClass.Cost).ToArray();
 
         if (goldType >= goldItemFactories.Length)
         {
@@ -1672,7 +1672,7 @@ internal class Game
             }
             table[i].FinalProbability = 0;
             int kIdx = table[i].Index;
-            ItemFactory kPtr = SingletonRepository.ItemFactories[kIdx];
+            ItemFactory kPtr = SingletonRepository.Get<ItemFactory>(kIdx);
             if (doNotAllowChestToBeCreated && kPtr.CategoryEnum == ItemTypeEnum.Chest)
             {
                 continue;
@@ -1731,7 +1731,7 @@ internal class Game
                 i = j;
             }
         }
-        return SingletonRepository.ItemFactories[table[i].Index];
+        return SingletonRepository.Get<ItemFactory>(table[i].Index);
     }
 
     public void MessageBoxShow(string message)
@@ -1762,7 +1762,7 @@ internal class Game
 
     private void ResetStompability()
     {
-        foreach (ItemFactory item in SingletonRepository.ItemFactories)
+        foreach (ItemFactory item in SingletonRepository.Get<ItemFactory>())
         {
             if (item.HasQuality)
             {
@@ -1811,7 +1811,7 @@ internal class Game
         {
             aPtr.CurNum = 0;
         }
-        foreach (ItemFactory kPtr in SingletonRepository.ItemFactories)
+        foreach (ItemFactory kPtr in SingletonRepository.Get<ItemFactory>())
         {
             kPtr.Tried = false;
         }
@@ -2830,7 +2830,7 @@ internal class Game
     private void ApplyFlavorVisuals()
     {
         Dictionary<Type, IEnumerator<Flavor>> currentFlavorIndex = new Dictionary<Type, IEnumerator<Flavor>>();
-        foreach (ItemFactory kPtr in SingletonRepository.ItemFactories)
+        foreach (ItemFactory kPtr in SingletonRepository.Get<ItemFactory>())
         {
             if (kPtr.HasFlavor)
             {
@@ -3320,7 +3320,7 @@ internal class Game
 
         // Enumerate all of the item factories and turn on the FlavorAware flag for all item factories that do not have flavors.
         UseFixed = false;
-        foreach (ItemFactory kPtr in SingletonRepository.ItemFactories)
+        foreach (ItemFactory kPtr in SingletonRepository.Get<ItemFactory>())
         {
             kPtr.FlavorAware = !kPtr.HasFlavor;
         }
@@ -3334,9 +3334,9 @@ internal class Game
         int[] num = new int[Constants.MaxDepth];
         int[] aux = new int[Constants.MaxDepth];
         AllocKindSize = 0;
-        for (i = 1; i < SingletonRepository.ItemFactories.Count; i++)
+        for (i = 1; i < SingletonRepository.Get<ItemFactory>().Length; i++)
         {
-            kPtr = SingletonRepository.ItemFactories[i];
+            kPtr = SingletonRepository.Get<ItemFactory>(i);
             for (j = 0; j < 4; j++)
             {
                 if (kPtr.Chance[j] != 0)
@@ -3360,9 +3360,9 @@ internal class Game
             AllocKindTable[k] = new AllocationEntry();
         }
         AllocationEntry[] table = AllocKindTable;
-        for (i = 1; i < SingletonRepository.ItemFactories.Count; i++)
+        for (i = 1; i < SingletonRepository.Get<ItemFactory>().Length; i++)
         {
-            kPtr = SingletonRepository.ItemFactories[i];
+            kPtr = SingletonRepository.Get<ItemFactory>(i);
             for (j = 0; j < 4; j++)
             {
                 if (kPtr.Chance[j] != 0)
@@ -9452,7 +9452,7 @@ internal class Game
     {
         if (Race.OutfitsWithScrollsOfSatisfyHunger)
         {
-            ItemFactory scrollSatisfyHungerItemClass = SingletonRepository.ItemFactories.Get(nameof(SatisfyHungerScrollItemFactory));
+            ItemFactory scrollSatisfyHungerItemClass = SingletonRepository.Get<ItemFactory>(nameof(SatisfyHungerScrollItemFactory));
             Item item = scrollSatisfyHungerItemClass.CreateItem();
             item.Count = (char)RandomBetween(2, 5);
             item.BecomeFlavorAware();
@@ -9462,7 +9462,7 @@ internal class Game
         }
         else
         {
-            ItemFactory rationFoodItemClass = SingletonRepository.ItemFactories.Get(nameof(RationFoodItemFactory));
+            ItemFactory rationFoodItemClass = SingletonRepository.Get<ItemFactory>(nameof(RationFoodItemFactory));
             Item item = rationFoodItemClass.CreateItem();
             item.Count = RandomBetween(3, 7);
             item.BecomeFlavorAware();
@@ -9471,7 +9471,7 @@ internal class Game
         }
         if (Race.OutfitsWithScrollsOfLight || BaseCharacterClass.OutfitsWithScrollsOfLight)
         {
-            ItemFactory scrollLightItemClass = SingletonRepository.ItemFactories.Get(nameof(LightScrollItemFactory));
+            ItemFactory scrollLightItemClass = SingletonRepository.Get<ItemFactory>(nameof(LightScrollItemFactory));
             Item item = scrollLightItemClass .CreateItem();
             item.Count = RandomBetween(3, 7);
             item.BecomeFlavorAware();
@@ -9481,7 +9481,7 @@ internal class Game
         }
         else
         {
-            ItemFactory woodenTorchItemClass = SingletonRepository.ItemFactories.Get(nameof(WoodenTorchLightSourceItemFactory));
+            ItemFactory woodenTorchItemClass = SingletonRepository.Get<ItemFactory>(nameof(WoodenTorchLightSourceItemFactory));
             Item item = woodenTorchItemClass.CreateItem();
             item.Count = RandomBetween(3, 7);
             item.TypeSpecificValue = RandomBetween(3, 7) * 500;
@@ -15473,8 +15473,8 @@ internal class Game
 
     private void ImageObject(out ColorEnum ap, out char cp)
     {
-        cp = SingletonRepository.ItemFactories[DieRoll(SingletonRepository.ItemFactories.Count - 1)].FlavorSymbol.Character;
-        ap = SingletonRepository.ItemFactories[DieRoll(SingletonRepository.ItemFactories.Count - 1)].FlavorColor;
+        cp = SingletonRepository.Get<ItemFactory>(DieRoll(SingletonRepository.Get<ItemFactory>().Length - 1)).FlavorSymbol.Character;
+        ap = SingletonRepository.Get<ItemFactory>(DieRoll(SingletonRepository.Get<ItemFactory>().Length - 1)).FlavorColor;
     }
 
     private void ImageRandom(out ColorEnum ap, out char cp)

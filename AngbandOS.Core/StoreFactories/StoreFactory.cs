@@ -104,7 +104,7 @@ internal abstract class StoreFactory : IItemFilter, IGetKey
         if (StoreStockManifestDefinitions != null) {
             foreach (StoreStockManifestDefinition storeStockManifestDefinition in StoreStockManifestDefinitions)
             {
-                ItemFactory itemFactory = Game.SingletonRepository.ItemFactories.Get(storeStockManifestDefinition.ItemFactoryName);
+                ItemFactory itemFactory = Game.SingletonRepository.Get<ItemFactory>(storeStockManifestDefinition.ItemFactoryName);
                 storeStockManifestList.Add(new StoreStockManifest(itemFactory, storeStockManifestDefinition.Weight));
             }
         }

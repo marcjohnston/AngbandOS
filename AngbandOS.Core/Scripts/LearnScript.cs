@@ -18,7 +18,7 @@ internal class LearnScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        foreach (ItemFactory kPtr in Game.SingletonRepository.ItemFactories)
+        foreach (ItemFactory kPtr in Game.SingletonRepository.Get<ItemFactory>())
         {
             if (kPtr.LevelNormallyFound <= Game.CommandArgument)
             {

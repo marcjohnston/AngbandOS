@@ -77,7 +77,7 @@ internal class TchoTchoRace : Race
     {
         if (itemClass is FearResistanceRingItemFactory)
         {
-            return Game.SingletonRepository.ItemFactories.Get(nameof(SustainStrengthRingItemFactory));
+            return Game.SingletonRepository.Get<ItemFactory>(nameof(SustainStrengthRingItemFactory));
         }
         return itemClass;
     }

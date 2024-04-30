@@ -35,7 +35,7 @@ internal class CreateItemScript : Script, IScript
         {
             return;
         }
-        ItemFactory itemFactory = Game.SingletonRepository.ItemFactories[kIdx];
+        ItemFactory itemFactory = Game.SingletonRepository.Get<ItemFactory>(kIdx);
         Item qPtr = itemFactory.CreateItem();
 
         if (!Game.GetBool($"Ok Item (0=False, 1=True)? ", out bool ok))
@@ -101,9 +101,9 @@ internal class CreateItemScript : Script, IScript
         const int maxLetters = 26;
         const int maxNumbers = 10;
         const int maxCount = maxLetters * 2 + maxNumbers; // 26 lower case, 26 uppercase, 10 numbers
-        for (num = 0, i = 1; num < maxCount && i < Game.SingletonRepository.ItemFactories.Count; i++)
+        for (num = 0, i = 1; num < maxCount && i < Game.SingletonRepository.Get<ItemFactory>().Length; i++)
         {
-            ItemFactory kPtr = Game.SingletonRepository.ItemFactories[i];
+            ItemFactory kPtr = Game.SingletonRepository.Get<ItemFactory>(i);
             if (kPtr.ItemClass == selectedItemClass)
             {
                 row = 2 + (num % maxLetters);
