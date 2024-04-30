@@ -16,7 +16,7 @@ internal class OpalsGoldItemFactory : GoldItemFactory
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "opals";
 
-    public override int Cost => 18;
+    public override int GoldValue => 18;
     public override string FriendlyName => "opals";
     public override int LevelNormallyFound => 1;
     public override Item CreateItem() => new Item(Game, this);

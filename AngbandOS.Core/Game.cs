@@ -6956,8 +6956,8 @@ internal class Game
             // We always pick up gold
             if (item.Category == ItemTypeEnum.Gold)
             {
-                MsgPrint($"You collect {item.TypeSpecificValue} gold pieces worth of {itemName}.");
-                Gold.IntValue += item.TypeSpecificValue;
+                MsgPrint($"You collect {item.GoldPieces} gold pieces worth of {itemName}.");
+                Gold.IntValue += item.GoldPieces;
                 DeleteObject(item);
             }
             else

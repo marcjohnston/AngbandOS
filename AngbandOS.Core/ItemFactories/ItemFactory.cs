@@ -878,6 +878,8 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey
     /// </summary>
     public virtual int InitialNutritionalValue => 0;
 
+    public virtual int InitialGoldPieces => 0;
+
     public virtual bool Reflect { get; set; } = false;
     public virtual bool Regen { get; set; } = false;
     public virtual bool ResAcid { get; set; } = false;

@@ -15,7 +15,7 @@ internal class SomeGarnetsGoldItemFactory : GoldItemFactory
     public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(DollarSignSymbol));
     public override ColorEnum Color => ColorEnum.Red;
     public override string Name => "some garnets";
-    public override int Cost => 9;
+    public override int GoldValue => 9;
     public override string FriendlyName => "some garnets";
     public override int LevelNormallyFound => 1;
     public override Item CreateItem() => new Item(Game, this);

@@ -16,7 +16,7 @@ internal class Silver2GoldItemFactory : GoldItemFactory
     public override ColorEnum Color => ColorEnum.Silver;
     public override string Name => "silver**";
 
-    public override int Cost => 8;
+    public override int GoldValue => 8;
     public override string FriendlyName => "silver";
     public override int LevelNormallyFound => 1;
     public override Item CreateItem() => new Item(Game, this);

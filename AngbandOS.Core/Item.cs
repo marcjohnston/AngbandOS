@@ -22,6 +22,11 @@ internal sealed class Item : IComparable<Item>
     public int TurnsOfLightRemaining = 0;
 
     /// <summary>
+    /// Returns the number of gold pieces the item contains.  Applies to gold.
+    /// </summary>
+    public int GoldPieces = 0;
+
+    /// <summary>
     /// Returns true, if the item has already been identify sensed.  This property used to be a flag in the IdentifyFlags.
     /// </summary>
     public bool IdentSense;
@@ -268,6 +273,7 @@ internal sealed class Item : IComparable<Item>
         TypeSpecificValue = Factory.InitialTypeSpecificValue;
         TurnsOfLightRemaining = Factory.InitialTurnsOfLight;
         NutritionalValue = Factory.InitialNutritionalValue;
+        GoldPieces = Factory.InitialGoldPieces;
         Count = 1;
         Weight = Factory.Weight;
         BonusToHit = Factory.ToH;
