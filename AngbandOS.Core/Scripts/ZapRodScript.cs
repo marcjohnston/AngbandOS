@@ -28,7 +28,7 @@ internal class ZapRodScript : Script, IScript, IRepeatableScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        if (!Game.SelectItem(out Item? item, "Zap which rod? ", false, true, true, Game.SingletonRepository.ItemFilters.Get(nameof(CanBeZappedItemFilter))))
+        if (!Game.SelectItem(out Item? item, "Zap which rod? ", false, true, true, Game.SingletonRepository.Get<ItemFilter>(nameof(CanBeZappedItemFilter))))
         {
             Game.MsgPrint("You have no rod to zap.");
             return;
@@ -38,7 +38,7 @@ internal class ZapRodScript : Script, IScript, IRepeatableScript
             return;
         }
         // Make sure the item is actually a rod
-        if (!Game.ItemMatchesFilter(item, Game.SingletonRepository.ItemFilters.Get(nameof(CanBeZappedItemFilter))))
+        if (!Game.ItemMatchesFilter(item, Game.SingletonRepository.Get<ItemFilter>(nameof(CanBeZappedItemFilter))))
         {
             Game.MsgPrint("That is not a rod!");
             return;

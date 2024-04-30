@@ -45,7 +45,7 @@ internal abstract class BaseCharacterClass : IGetKey
             Game.MsgPrint("You are too confused!");
             return;
         }
-        if (!Game.SelectItem(out Item? oPtr, "Use which book? ", false, true, true, Game.SingletonRepository.ItemFilters.Get(nameof(IsUsableSpellBookItemFilter))))
+        if (!Game.SelectItem(out Item? oPtr, "Use which book? ", false, true, true, Game.SingletonRepository.Get<ItemFilter>(nameof(IsUsableSpellBookItemFilter))))
         {
             Game.MsgPrint($"You have no {prayer} books!");
             return;

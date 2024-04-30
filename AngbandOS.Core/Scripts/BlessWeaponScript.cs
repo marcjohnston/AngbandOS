@@ -18,7 +18,7 @@ internal class BlessWeaponScript : Script, IScript, ISuccessfulScript
     /// <returns></returns>
     public bool ExecuteSuccessfulScript()
     {
-        if (!Game.SelectItem(out Item? oPtr, "Bless which weapon? ", true, true, true, Game.SingletonRepository.ItemFilters.Get(nameof(WeaponsItemFilter))))
+        if (!Game.SelectItem(out Item? oPtr, "Bless which weapon? ", true, true, true, Game.SingletonRepository.Get<ItemFilter>(nameof(WeaponsItemFilter))))
         {
             Game.MsgPrint("You have no weapon to bless.");
             return false;

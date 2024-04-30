@@ -24,7 +24,6 @@ internal class HallStoreFactory : StoreFactory
     /// </summary>
     protected override string[] ItemFilterNames => new string[] { };
 
-
     public override bool MaintainsStockLevels => false;
     public override bool StoreMaintainsInventory => false;
     public override bool ShufflesOwnersAndPricing => false;

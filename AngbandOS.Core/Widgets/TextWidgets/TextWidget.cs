@@ -56,7 +56,7 @@ internal abstract class TextWidget : Widget
     public override void Bind()
     {
         base.Bind();
-        Justification = Game.SingletonRepository.Justifications.Get(JustificationName);
+        Justification = Game.SingletonRepository.Get<Justification>(JustificationName);
     }
 
     /// <summary>

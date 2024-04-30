@@ -5122,7 +5122,7 @@ internal class Game
     public bool EnchantItem(int numHit, int numDam, int numAc)
     {
         bool okay = false;
-        IItemFilter itemFilter = numAc != 0 ? SingletonRepository.ItemFilters.Get(nameof(ArmorItemFilter)) : SingletonRepository.ItemFilters.Get(nameof(WeaponsItemFilter));
+        IItemFilter itemFilter = numAc != 0 ? SingletonRepository.Get<ItemFilter>(nameof(ArmorItemFilter)) : SingletonRepository.Get<ItemFilter>(nameof(WeaponsItemFilter));
         if (!SelectItem(out Item? oPtr, "Enchant which item? ", true, true, true, itemFilter))
         {
             MsgPrint("You have nothing to enchant.");
@@ -7111,7 +7111,7 @@ internal class Game
                     int specialEffect = 0;
                     int stunEffect = 0;
                     int times;
-                    MartialArtsAttack martialArtsAttack = SingletonRepository.MartialArtsAttacks.Single(_martialArtsAttack => _martialArtsAttack.IsDefault);
+                    MartialArtsAttack martialArtsAttack = SingletonRepository.Get<MartialArtsAttack>().Single(_martialArtsAttack => _martialArtsAttack.IsDefault);
                     MartialArtsAttack oldMartialArtsAttack = martialArtsAttack;
                     // Monsters of various types resist being stunned by martial arts
                     int resistStun = 0;
@@ -7138,7 +7138,7 @@ internal class Game
                         // high level or we fail a chance roll
                         do
                         {
-                            martialArtsAttack = SingletonRepository.MartialArtsAttacks.ToWeightedRandom().ChooseOrDefault();
+                            martialArtsAttack = SingletonRepository.ToWeightedRandom<MartialArtsAttack>().ChooseOrDefault();
                         } while (martialArtsAttack.MinLevel > ExperienceLevel.IntValue || DieRoll(ExperienceLevel.IntValue) < martialArtsAttack.Chance);
                         // We've chosen an attack, use it if it's better than the previous
                         // choice (unless we're stunned or confused in which case we're stuck

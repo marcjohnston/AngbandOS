@@ -19,7 +19,7 @@ internal class CreateRandomArtifactScript : Script, IScript
     public void ExecuteScript()
     {
         bool okay;
-        if (!Game.SelectItem(out Item? oPtr, "Enchant which item? ", true, true, true, Game.SingletonRepository.ItemFilters.Get(nameof(WeaponsItemFilter))))
+        if (!Game.SelectItem(out Item? oPtr, "Enchant which item? ", true, true, true, Game.SingletonRepository.Get<ItemFilter>(nameof(WeaponsItemFilter))))
         {
             Game.MsgPrint("You have nothing to enchant.");
             return;

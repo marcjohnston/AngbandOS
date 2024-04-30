@@ -95,7 +95,7 @@ internal abstract class StoreFactory : IItemFilter, IGetKey
         List<ItemFilter> itemFilters = new();
         foreach (string itemFilterName in ItemFilterNames)
         {
-            itemFilters.Add(Game.SingletonRepository.ItemFilters.Get(itemFilterName));
+            itemFilters.Add(Game.SingletonRepository.Get<ItemFilter>(itemFilterName));
         }
         ItemFilters = itemFilters.ToArray();
 

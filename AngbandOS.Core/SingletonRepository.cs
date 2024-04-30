@@ -35,10 +35,6 @@ internal class SingletonRepository
     public UnreadableFlavorSyllablesRepository UnreadableFlavorSyllables;
     public WorshipPlayerAttacksRepository WorshipPlayerAttacks;
 
-    public ItemFiltersRepository ItemFilters;
-    public ItemQualityRatingsRepository ItemQualityRatings;
-    public JustificationsRepository Justifications;
-    public MartialArtsAttacksRepository MartialArtsAttacks;
     public MonsterFiltersRepository MonsterFilters;
     public MonsterSpellsRepository MonsterSpells;
     public ProjectilesRepository Projectiles;
@@ -449,10 +445,6 @@ internal class SingletonRepository
         FunnyDescriptions = AddRepository<FunnyDescriptionsRepository>(new FunnyDescriptionsRepository(Game));
         HorrificDescriptions = AddRepository<HorrificDescriptionsRepository>(new HorrificDescriptionsRepository(Game));
         InsultPlayerAttacks = AddRepository<InsultPlayerAttacksRepository>(new InsultPlayerAttacksRepository(Game));
-        ItemFilters = AddRepository<ItemFiltersRepository>(new ItemFiltersRepository(Game));
-        ItemQualityRatings = AddRepository<ItemQualityRatingsRepository>(new ItemQualityRatingsRepository(Game));
-        Justifications = AddRepository<JustificationsRepository>(new JustificationsRepository(Game));
-        MartialArtsAttacks = AddRepository<MartialArtsAttacksRepository>(new MartialArtsAttacksRepository(Game));
         MoanPlayerAttacks = AddRepository<MoanPlayerAttacksRepository>(new MoanPlayerAttacksRepository(Game));
         MonsterFilters = AddRepository<MonsterFiltersRepository>(new MonsterFiltersRepository(Game));
         MonsterSpells = AddRepository<MonsterSpellsRepository>(new MonsterSpellsRepository(Game));

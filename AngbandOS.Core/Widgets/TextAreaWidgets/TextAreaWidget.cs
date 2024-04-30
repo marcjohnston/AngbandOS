@@ -69,7 +69,7 @@ internal abstract class TextAreaWidget : Widget
     public override void Bind()
     {
         base.Bind();
-        Justification = Game.SingletonRepository.Justifications.Get(JustificationName);
+        Justification = Game.SingletonRepository.Get<Justification>(JustificationName);
         Alignment = Game.SingletonRepository.Get<Alignment>(AlignmentName);
     }
 

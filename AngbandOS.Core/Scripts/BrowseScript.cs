@@ -53,7 +53,7 @@ internal class BrowseScript : Script, IScript, IRepeatableScript, ISuccessfulScr
             return false;
         }
         // Get a book to read if we don't already have one
-        if (!Game.SelectItem(out Item? item, "Browse which book? ", false, true, true, Game.SingletonRepository.ItemFilters.Get(nameof(IsUsableSpellBookItemFilter))))
+        if (!Game.SelectItem(out Item? item, "Browse which book? ", false, true, true, Game.SingletonRepository.Get<ItemFilter>(nameof(IsUsableSpellBookItemFilter))))
         {
             Game.MsgPrint("You have no books that you can read.");
             return false;
@@ -63,7 +63,7 @@ internal class BrowseScript : Script, IScript, IRepeatableScript, ISuccessfulScr
             return false;
         }
         // Check that the book is useable by the player
-        if (!Game.ItemMatchesFilter(item, Game.SingletonRepository.ItemFilters.Get(nameof(IsUsableSpellBookItemFilter))))
+        if (!Game.ItemMatchesFilter(item, Game.SingletonRepository.Get<ItemFilter>(nameof(IsUsableSpellBookItemFilter))))
         {
             Game.MsgPrint("You can't read that.");
             return false;

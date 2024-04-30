@@ -28,7 +28,7 @@ internal class QuaffScript : Script, IScript, IRepeatableScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        if (!Game.SelectItem(out Item? item, "Quaff which potion? ", false, true, true, Game.SingletonRepository.ItemFilters.Get(nameof(CanBeQuaffedItemFilter))))
+        if (!Game.SelectItem(out Item? item, "Quaff which potion? ", false, true, true, Game.SingletonRepository.Get<ItemFilter>(nameof(CanBeQuaffedItemFilter))))
         {
             Game.MsgPrint("You have no potions to quaff.");
             return;
@@ -38,7 +38,7 @@ internal class QuaffScript : Script, IScript, IRepeatableScript
             return;
         }
         // Make sure the item is a potion
-        if (!Game.ItemMatchesFilter(item, Game.SingletonRepository.ItemFilters.Get(nameof(CanBeQuaffedItemFilter))))
+        if (!Game.ItemMatchesFilter(item, Game.SingletonRepository.Get<ItemFilter>(nameof(CanBeQuaffedItemFilter))))
         {
             Game.MsgPrint("That is not a potion!");
             return;

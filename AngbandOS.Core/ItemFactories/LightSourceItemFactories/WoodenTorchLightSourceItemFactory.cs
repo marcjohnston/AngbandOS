@@ -71,7 +71,7 @@ internal class WoodenTorchLightSourceItemFactory : LightSourceItemFactory
     public override void Refill(Game game, Item item)
     {
         // Get an item if we don't already have one
-        if (!game.SelectItem(out Item? fuelSource, "Refuel with which torch? ", false, true, true, Game.SingletonRepository.ItemFilters.Get(nameof(TorchFuelItemFilter))))
+        if (!game.SelectItem(out Item? fuelSource, "Refuel with which torch? ", false, true, true, Game.SingletonRepository.Get<ItemFilter>(nameof(TorchFuelItemFilter))))
         {
             game.MsgPrint("You have no extra torches.");
             return;
@@ -82,7 +82,7 @@ internal class WoodenTorchLightSourceItemFactory : LightSourceItemFactory
         }
 
         // Check that our fuel is suitable
-        if (!game.ItemMatchesFilter(fuelSource, Game.SingletonRepository.ItemFilters.Get(nameof(TorchFuelItemFilter))))
+        if (!game.ItemMatchesFilter(fuelSource, Game.SingletonRepository.Get<ItemFilter>(nameof(TorchFuelItemFilter))))
         {
             game.MsgPrint("You can't refill a torch with that!");
             return;

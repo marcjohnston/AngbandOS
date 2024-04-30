@@ -44,7 +44,7 @@ internal class ReadScrollScript : Script, IScript, IRepeatableScript
             Game.MsgPrint("You are too confused!");
             return;
         }
-        if (!Game.SelectItem(out Item? item, "Read which scroll? ", false, true, true, Game.SingletonRepository.ItemFilters.Get(nameof(CanBeReadItemFilter))))
+        if (!Game.SelectItem(out Item? item, "Read which scroll? ", false, true, true, Game.SingletonRepository.Get<ItemFilter>(nameof(CanBeReadItemFilter))))
         {
             Game.MsgPrint("You have no scrolls to read.");
             return;
@@ -54,7 +54,7 @@ internal class ReadScrollScript : Script, IScript, IRepeatableScript
             return;
         }
         // Make sure the item is actually a scroll
-        if (!Game.ItemMatchesFilter(item, Game.SingletonRepository.ItemFilters.Get(nameof(CanBeReadItemFilter))))
+        if (!Game.ItemMatchesFilter(item, Game.SingletonRepository.Get<ItemFilter>(nameof(CanBeReadItemFilter))))
         {
             Game.MsgPrint("That is not a scroll!");
             return;

@@ -15,7 +15,7 @@ internal class RechargeItemScript : Script, IScript, ISuccessfulScriptInt
     public bool ExecuteSuccessfulScriptInt(int num)
     {
         int i, t;
-        if (!Game.SelectItem(out Item? oPtr, "Recharge which item? ", false, true, true, Game.SingletonRepository.ItemFilters.Get(nameof(CanBeRechargedItemFilter))))
+        if (!Game.SelectItem(out Item? oPtr, "Recharge which item? ", false, true, true, Game.SingletonRepository.Get<ItemFilter>(nameof(CanBeRechargedItemFilter))))
         {
             Game.MsgPrint("You have nothing to recharge.");
             return false;

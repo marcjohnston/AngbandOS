@@ -40,7 +40,7 @@ internal class ActivateScript : Script, IScript, IRepeatableScript, ISuccessfulS
     public bool ExecuteSuccessfulScript()
     {
         // No item passed in, so get one; filtering to activatable items only
-        if (!Game.SelectItem(out Item? item, "Activate which item? ", true, true, false, Game.SingletonRepository.ItemFilters.Get(nameof(KnownAndActivableItemFilter))))
+        if (!Game.SelectItem(out Item? item, "Activate which item? ", true, true, false, Game.SingletonRepository.Get<ItemFilter>(nameof(KnownAndActivableItemFilter))))
         {
             Game.MsgPrint("You have nothing to activate.");
             return false;

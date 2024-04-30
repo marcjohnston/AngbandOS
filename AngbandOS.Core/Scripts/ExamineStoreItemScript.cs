@@ -38,7 +38,7 @@ internal class ExamineStoreItemScript : Script, IScriptStore
         BookItemFactory? bookItemFactory = oPtr.TryGetFactory<BookItemFactory>();
         if (bookItemFactory != null)
         {
-            if (Game.SingletonRepository.ItemFilters.Get(nameof(IsUsableSpellBookItemFilter)).ItemMatches(oPtr))
+            if (Game.SingletonRepository.Get<ItemFilter>(nameof(IsUsableSpellBookItemFilter)).ItemMatches(oPtr))
             {
                 DoStoreBrowse(oPtr);
             }

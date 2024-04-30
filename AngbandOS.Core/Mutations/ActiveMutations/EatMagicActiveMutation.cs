@@ -13,7 +13,7 @@ internal class EatMagicActiveMutation : Mutation
     private EatMagicActiveMutation(Game game) : base(game) { }
     public override void Activate()
     {
-        if (!Game.SelectItem(out Item? oPtr, "Drain which item? ", false, true, true, Game.SingletonRepository.ItemFilters.Get(nameof(CanBeRechargedItemFilter))))
+        if (!Game.SelectItem(out Item? oPtr, "Drain which item? ", false, true, true, Game.SingletonRepository.Get<ItemFilter>(nameof(CanBeRechargedItemFilter))))
         {
             Game.MsgPrint("You have nothing appropriate to eat.");
             return;

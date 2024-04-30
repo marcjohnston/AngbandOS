@@ -1157,35 +1157,35 @@ internal sealed class Item : IComparable<Item>
         {
             if (IsCursed() || IsBroken())
             {
-                return Game.SingletonRepository.ItemQualityRatings.Get(nameof(TerribleItemQualityRating));
+                return Game.SingletonRepository.Get<ItemQualityRating>(nameof(TerribleItemQualityRating));
             }
-            return Game.SingletonRepository.ItemQualityRatings.Get(nameof(SpecialItemQualityRating));
+            return Game.SingletonRepository.Get<ItemQualityRating>(nameof(SpecialItemQualityRating));
         }
         if (IsRare())
         {
             if (IsCursed() || IsBroken())
             {
-                return Game.SingletonRepository.ItemQualityRatings.Get(nameof(WorthlessItemQualityRating));
+                return Game.SingletonRepository.Get<ItemQualityRating>(nameof(WorthlessItemQualityRating));
             }
-            return Game.SingletonRepository.ItemQualityRatings.Get(nameof(ExcellentItemQualityRating));
+            return Game.SingletonRepository.Get<ItemQualityRating>(nameof(ExcellentItemQualityRating));
         }
         if (IsCursed())
         {
-            return Game.SingletonRepository.ItemQualityRatings.Get(nameof(CursedItemQualityRating));
+            return Game.SingletonRepository.Get<ItemQualityRating>(nameof(CursedItemQualityRating));
         }
         if (IsBroken())
         {
-            return Game.SingletonRepository.ItemQualityRatings.Get(nameof(BrokenItemQualityRating));
+            return Game.SingletonRepository.Get<ItemQualityRating>(nameof(BrokenItemQualityRating));
         }
         if (BonusArmorClass > 0)
         {
-            return Game.SingletonRepository.ItemQualityRatings.Get(nameof(GoodItemQualityRating));
+            return Game.SingletonRepository.Get<ItemQualityRating>(nameof(GoodItemQualityRating));
         }
         if (BonusToHit + BonusDamage > 0)
         {
-            return Game.SingletonRepository.ItemQualityRatings.Get(nameof(GoodItemQualityRating));
+            return Game.SingletonRepository.Get<ItemQualityRating>(nameof(GoodItemQualityRating));
         }
-        return Game.SingletonRepository.ItemQualityRatings.Get(nameof(AverageItemQualityRating));
+        return Game.SingletonRepository.Get<ItemQualityRating>(nameof(AverageItemQualityRating));
     }
 
     public string GetDetailedFeeling()
@@ -1232,27 +1232,27 @@ internal sealed class Item : IComparable<Item>
     { 
         if (IsCursed())
         {
-            return Game.SingletonRepository.ItemQualityRatings.Get(nameof(CursedItemQualityRating));
+            return Game.SingletonRepository.Get<ItemQualityRating>(nameof(CursedItemQualityRating));
         }
         if (IsBroken())
         {
-            return Game.SingletonRepository.ItemQualityRatings.Get(nameof(BrokenItemQualityRating));
+            return Game.SingletonRepository.Get<ItemQualityRating>(nameof(BrokenItemQualityRating));
         }
         if (IsArtifact)
         {
-            return Game.SingletonRepository.ItemQualityRatings.Get(nameof(SpecialItemQualityRating));
+            return Game.SingletonRepository.Get<ItemQualityRating>(nameof(SpecialItemQualityRating));
         }
         if (IsRare())
         {
-            return Game.SingletonRepository.ItemQualityRatings.Get(nameof(GoodItemQualityRating));
+            return Game.SingletonRepository.Get<ItemQualityRating>(nameof(GoodItemQualityRating));
         }
         if (BonusArmorClass > 0)
         {
-            return Game.SingletonRepository.ItemQualityRatings.Get(nameof(GoodItemQualityRating));
+            return Game.SingletonRepository.Get<ItemQualityRating>(nameof(GoodItemQualityRating));
         }
         if (BonusToHit + BonusDamage > 0)
         {
-            return Game.SingletonRepository.ItemQualityRatings.Get(nameof(GoodItemQualityRating));
+            return Game.SingletonRepository.Get<ItemQualityRating>(nameof(GoodItemQualityRating));
         }
         return null;
     }

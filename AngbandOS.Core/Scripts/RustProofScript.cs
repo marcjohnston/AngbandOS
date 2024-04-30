@@ -18,7 +18,7 @@ internal class RustProofScript : Script, IScript
     public void ExecuteScript()
     {
         // Get a piece of armor
-        if (!Game.SelectItem(out Item? item, "Rustproof which piece of armor? ", true, true, true, Game.SingletonRepository.ItemFilters.Get(nameof(ArmorItemFilter))))
+        if (!Game.SelectItem(out Item? item, "Rustproof which piece of armor? ", true, true, true, Game.SingletonRepository.Get<ItemFilter>(nameof(ArmorItemFilter))))
         {
             Game.MsgPrint("You have nothing to rustproof.");
             return;
