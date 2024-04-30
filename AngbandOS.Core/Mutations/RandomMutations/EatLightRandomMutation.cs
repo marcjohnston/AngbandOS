@@ -38,24 +38,24 @@ internal class EatLightRandomMutation : Mutation
         if (oPtr != null)
         {
             LightSourceItemFactory? lightSourceItemFactory = oPtr.TryGetFactory<LightSourceItemFactory>();
-            if (lightSourceItemFactory != null && lightSourceItemFactory.BurnRate > 0 && oPtr.TypeSpecificValue > 0)
+            if (lightSourceItemFactory != null && lightSourceItemFactory.BurnRate > 0 && oPtr.TurnsOfLightRemaining > 0)
             {
-                Game.RestoreHealth(oPtr.TypeSpecificValue / 20);
-                oPtr.TypeSpecificValue /= 2;
+                Game.RestoreHealth(oPtr.TurnsOfLightRemaining / 20);
+                oPtr.TurnsOfLightRemaining /= 2;
                 Game.MsgPrint("You absorb energy from your light!");
                 if (Game.BlindnessTimer.Value != 0)
                 {
-                    if (oPtr.TypeSpecificValue == 0)
+                    if (oPtr.TurnsOfLightRemaining == 0)
                     {
-                        oPtr.TypeSpecificValue++;
+                        oPtr.TurnsOfLightRemaining++;
                     }
                 }
-                else if (oPtr.TypeSpecificValue == 0)
+                else if (oPtr.TurnsOfLightRemaining == 0)
                 {
                     Game.Disturb(true);
                     Game.MsgPrint("Your light has gone out!");
                 }
-                else if (oPtr.TypeSpecificValue < 100 && oPtr.TypeSpecificValue % 10 == 0)
+                else if (oPtr.TurnsOfLightRemaining < 100 && oPtr.TurnsOfLightRemaining % 10 == 0)
                 {
                     Game.Disturb(true);
                     Game.MsgPrint("Your light is growing faint.");

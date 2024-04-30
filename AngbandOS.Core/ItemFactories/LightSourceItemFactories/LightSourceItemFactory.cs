@@ -17,14 +17,14 @@ internal abstract class LightSourceItemFactory : ItemFactory
     public LightSourceItemFactory(Game game) : base(game) { }
     public override ItemClass ItemClass => Game.SingletonRepository.Get<ItemClass>(nameof(LightSourcesItemClass));
     public override BaseInventorySlot BaseWieldSlot => Game.SingletonRepository.Get<BaseInventorySlot>(nameof(LightsourceInventorySlot));
-    public override bool IsWorthless(Item item) => item.TypeSpecificValue < 0;
+    public override bool IsWorthless(Item item) => item.TurnsOfLightRemaining < 0;
 
     public override string GetVerboseDescription(Item item)
     {
         string s = "";
         if (BurnRate > 0)
         {
-            s += $" (with {item.TypeSpecificValue} {Game.CountPluralize("turn", item.TypeSpecificValue)} of light)";
+            s += $" (with {item.TurnsOfLightRemaining} {Game.CountPluralize("turn", item.TurnsOfLightRemaining)} of light)";
         }
         s += base.GetVerboseDescription(item);
         return s;

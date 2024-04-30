@@ -487,6 +487,12 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey
         {
             return false;
         }
+
+        // Items that have turns of light need to have the same number of turns, to be mergable.  E.g. 5 Wooden Torches (2500 turns)
+        if (a.TurnsOfLightRemaining != b.TurnsOfLightRemaining)
+        {
+            return false;
+        }
         if (a.IsArtifact != b.IsArtifact)
         {
             return false;
@@ -512,10 +518,6 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey
             return false;
         }
         if (a.DamageDiceSides != b.DamageDiceSides)
-        {
-            return false;
-        }
-        if (a.TypeSpecificValue != b.TypeSpecificValue)
         {
             return false;
         }

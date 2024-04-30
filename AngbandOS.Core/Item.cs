@@ -7,6 +7,10 @@
 
 namespace AngbandOS.Core;
 
+/// <summary>
+/// Represents an instance of an item.  This item object is universally capable of being any type of object in the game but it also has a
+/// single parent (or factory) that controls what type of object the item is.
+/// </summary>
 [Serializable]
 internal sealed class Item : IComparable<Item>
 {
@@ -14,6 +18,8 @@ internal sealed class Item : IComparable<Item>
     /// Returns a sort order index for sorting items in a pack.  Lower numbers show before higher numbers.
     /// </summary>
     public int PackSort => Factory.PackSort;
+
+    public int TurnsOfLightRemaining = 0;
 
     /// <summary>
     /// Returns true, if the item has already been identify sensed.  This property used to be a flag in the IdentifyFlags.
@@ -163,7 +169,7 @@ internal sealed class Item : IComparable<Item>
 
     public void ProcessWorld()
     {
-        if (Category == ItemTypeEnum.Rod && TypeSpecificValue != 0)
+        if (Category == ItemTypeEnum.Rod && TypeSpecificValue != 0) // TODO: Ensure this is happening twice ... the inventory pack process rods too
         {
             TypeSpecificValue--;
         }
@@ -209,7 +215,7 @@ internal sealed class Item : IComparable<Item>
     /// <summary>
     /// Returns the factory that created this item.
     /// </summary>
-    public ItemFactory Factory { get; private set; }
+    public ItemFactory Factory { get; private set; } // TODO: This should be private ... and force the item to call the factory methods.
 
     /// <summary>
     /// Tests an item to determine if it belongs to an Item type and returns a the item casted into that type; or null, if the item doesn't belong to the type.
@@ -409,6 +415,7 @@ internal sealed class Item : IComparable<Item>
         clonedItem.Inscription = Inscription;
         clonedItem.Count = newCount ?? Count;
         clonedItem.TypeSpecificValue = TypeSpecificValue;
+        clonedItem.TurnsOfLightRemaining = TurnsOfLightRemaining;
         clonedItem.RechargeTimeLeft = RechargeTimeLeft;
         clonedItem.BonusArmorClass = BonusArmorClass;
         clonedItem.BonusDamage = BonusDamage;
@@ -2303,8 +2310,7 @@ internal sealed class Item : IComparable<Item>
                 do
                 {
                     TypeSpecificValue++;
-                } while (TypeSpecificValue < Game.DieRoll(5) ||
-                         Game.DieRoll(TypeSpecificValue) == 1);
+                } while (TypeSpecificValue < Game.DieRoll(5) || Game.DieRoll(TypeSpecificValue) == 1);
             }
             if (TypeSpecificValue > 4 && Game.DieRoll(Constants.WeirdLuck) != 1)
             {

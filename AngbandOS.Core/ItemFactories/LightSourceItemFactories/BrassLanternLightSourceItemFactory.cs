@@ -16,11 +16,11 @@ internal class BrassLanternLightSourceItemFactory : LightSourceItemFactory
     {
         if (store != null)
         {
-            item.TypeSpecificValue = Constants.FuelLamp / 2;
+            item.TurnsOfLightRemaining = Constants.FuelLamp / 2;
         }
-        else if (item.TypeSpecificValue != 0)
+        else if (item.TurnsOfLightRemaining != 0)
         {
-            item.TypeSpecificValue = Game.DieRoll(item.TypeSpecificValue);
+            item.TurnsOfLightRemaining = Game.DieRoll(item.TurnsOfLightRemaining);
         }
     }
 
@@ -32,7 +32,7 @@ internal class BrassLanternLightSourceItemFactory : LightSourceItemFactory
     /// <returns></returns>
     public override int CalculateTorch(Item item)
     {
-        return base.CalculateTorch(item) + item.TypeSpecificValue > 0 ? 2 : 0;
+        return base.CalculateTorch(item) + item.TurnsOfLightRemaining > 0 ? 2 : 0;
     }
 
     /// <summary>
@@ -63,7 +63,7 @@ internal class BrassLanternLightSourceItemFactory : LightSourceItemFactory
     public override bool IgnoreFire => true;
     public override int LevelNormallyFound => 3;
     public override int[] Locale => new int[] { 3, 0, 0, 0 };
-    public override int InitialTypeSpecificValue => 7500;
+    public int InitialTurnsOfLight => 7500;
     public override int Weight => 50;
 
     /// <summary>
@@ -95,13 +95,13 @@ internal class BrassLanternLightSourceItemFactory : LightSourceItemFactory
         game.EnergyUse = 50;
 
         // Add the fuel
-        item.TypeSpecificValue += fuelSource.TypeSpecificValue;
+        item.TurnsOfLightRemaining += fuelSource.TurnsOfLightRemaining;
         game.MsgPrint("You fuel your lamp.");
 
         // Check for overfilling
-        if (item.TypeSpecificValue >= Constants.FuelLamp)
+        if (item.TurnsOfLightRemaining >= Constants.FuelLamp)
         {
-            item.TypeSpecificValue = Constants.FuelLamp;
+            item.TurnsOfLightRemaining = Constants.FuelLamp;
             game.MsgPrint("Your lamp is full.");
         }
 
@@ -111,5 +111,10 @@ internal class BrassLanternLightSourceItemFactory : LightSourceItemFactory
         fuelSource.ItemOptimize();
         Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateTorchRadiusFlaggedAction)).Set();
     }
-    public override Item CreateItem() => new Item(Game, this);
+    public override Item CreateItem()
+    {
+        Item newItem = new Item(Game, this);
+        newItem.TurnsOfLightRemaining = InitialTurnsOfLight;
+        return newItem;
+    }
 }

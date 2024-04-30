@@ -53,7 +53,7 @@ internal class RefillScript : Script, IScript, IRepeatableScript
             return;
         }
 
-        LightSourceItemFactory lightSourceItem = (LightSourceItemFactory)lightSource.Factory;
-        lightSourceItem.Refill(Game, lightSource);
+        LightSourceItemFactory lightSourceItemFactory = (LightSourceItemFactory)lightSource.Factory;
+        lightSourceItemFactory.Refill(Game, lightSource);
     }
 }

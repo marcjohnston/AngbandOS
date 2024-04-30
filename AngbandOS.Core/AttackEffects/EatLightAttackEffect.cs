@@ -26,14 +26,16 @@ internal class EatLightAttackEffect : AttackEffect
             return;
         }
 
-        // Choose an item in from the inventory slot.
+        // Choose an item from the inventory slot.
         int? i = chosenLightSourceInventorySlot.WeightedRandom.ChooseOrDefault();
 
+        // Ensure an item was chosen.
         if (i == null)
         {
             return;
         }
 
+        // Get the item.
         Item? item = Game.GetInventoryItem(i.Value);
         if (item == null)
         {
@@ -41,12 +43,12 @@ internal class EatLightAttackEffect : AttackEffect
         }
 
         // Only dim lights that consume fuel
-        if (item.TypeSpecificValue > 0 && item.FixedArtifact == null)
+        if (item.TurnsOfLightRemaining > 0 && item.FixedArtifact == null)
         {
-            item.TypeSpecificValue -= 250 + Game.DieRoll(250);
-            if (item.TypeSpecificValue < 1)
+            item.TurnsOfLightRemaining -= 250 + Game.DieRoll(250);
+            if (item.TurnsOfLightRemaining < 1)
             {
-                item.TypeSpecificValue = 1;
+                item.TurnsOfLightRemaining = 1;
             }
             if (Game.BlindnessTimer.Value == 0)
             {
