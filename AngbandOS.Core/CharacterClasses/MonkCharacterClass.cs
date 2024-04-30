@@ -95,9 +95,9 @@ internal class MonkCharacterClass : BaseCharacterClass
     public override IArtifactBias? ArtifactBias => Game.SingletonRepository.Get<ArtifactBias>(nameof(PriestlyArtifactBias));
     public override bool SenseInventoryTest(int level) => (0 != Game.RandomLessThan(20000 / ((level * level) + 40)));
     public override Realm[] AvailablePrimaryRealms => new Realm[] {
-        Game.SingletonRepository.Realms.Get(nameof(ChaosRealm)),
-        Game.SingletonRepository.Realms.Get(nameof(TarotRealm)),
-        Game.SingletonRepository.Realms.Get(nameof(CorporealRealm))
+        Game.SingletonRepository.Get<Realm>(nameof(ChaosRealm)),
+        Game.SingletonRepository.Get<Realm>(nameof(TarotRealm)),
+        Game.SingletonRepository.Get<Realm>(nameof(CorporealRealm))
     };
 
     protected override string[] OutfitItemFactoryNames => new string[]

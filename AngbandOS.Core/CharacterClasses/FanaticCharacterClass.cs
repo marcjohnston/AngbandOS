@@ -77,7 +77,7 @@ internal class FanaticCharacterClass : BaseCharacterClass
     public override bool SenseInventoryTest(int level) => (0 != Game.RandomLessThan(80000 / ((level * level) + 40)));
     public override bool DetailedSenseInventory => true;
     public override Realm[] AvailablePrimaryRealms => new Realm[] {
-        Game.SingletonRepository.Realms.Get(nameof(ChaosRealm))
+        Game.SingletonRepository.Get<Realm>(nameof(ChaosRealm))
     };
 
     protected override string[] OutfitItemFactoryNames => new string[]

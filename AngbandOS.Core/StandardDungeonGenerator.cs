@@ -852,7 +852,7 @@ internal class StandardDungeonGenerator : DungeonGenerator
         ColRooms = Game.CurWid / _blockWid;
 
         // The dungeon must be large enough to support at least one type-1 room.
-        Type1RoomLayout type1RoomLayout = (Type1RoomLayout)Game.SingletonRepository.RoomLayouts.Get(nameof(Type1RoomLayout));
+        Type1RoomLayout type1RoomLayout = (Type1RoomLayout)Game.SingletonRepository.Get<RoomLayout>(nameof(Type1RoomLayout));
         if (RowRooms < type1RoomLayout.Height)
         {
             Game.CurHgt = type1RoomLayout.Height * _blockHgt;
@@ -934,7 +934,7 @@ internal class StandardDungeonGenerator : DungeonGenerator
             }
             if (destroyed)
             {
-                if (RoomBuild(y, x, Game.SingletonRepository.RoomLayouts.Get(nameof(Type1RoomLayout)), Game.Difficulty))
+                if (RoomBuild(y, x, Game.SingletonRepository.Get<RoomLayout>(nameof(Type1RoomLayout)), Game.Difficulty))
                 {
                 }
                 continue;
@@ -948,7 +948,7 @@ internal class StandardDungeonGenerator : DungeonGenerator
                     {
                         if (maxVaultOk > 1)
                         {
-                            if (RoomBuild(y, x, Game.SingletonRepository.RoomLayouts.Get(nameof(Type8RoomLayout)), Game.Difficulty))
+                            if (RoomBuild(y, x, Game.SingletonRepository.Get<RoomLayout>(nameof(Type8RoomLayout)), Game.Difficulty))
                             {
                                 continue;
                             }
@@ -958,35 +958,35 @@ internal class StandardDungeonGenerator : DungeonGenerator
                     {
                         if (maxVaultOk > 0)
                         {
-                            if (RoomBuild(y, x, Game.SingletonRepository.RoomLayouts.Get(nameof(Type7RoomLayout)), Game.Difficulty))
+                            if (RoomBuild(y, x, Game.SingletonRepository.Get<RoomLayout>(nameof(Type7RoomLayout)), Game.Difficulty))
                             {
                                 continue;
                             }
                         }
                     }
-                    if (k < 40 && RoomBuild(y, x, Game.SingletonRepository.RoomLayouts.Get(nameof(Type5RoomLayout)), Game.Difficulty))
+                    if (k < 40 && RoomBuild(y, x, Game.SingletonRepository.Get<RoomLayout>(nameof(Type5RoomLayout)), Game.Difficulty))
                     {
                         continue;
                     }
-                    if (k < 55 && RoomBuild(y, x, Game.SingletonRepository.RoomLayouts.Get(nameof(Type6RoomLayout)), Game.Difficulty))
+                    if (k < 55 && RoomBuild(y, x, Game.SingletonRepository.Get<RoomLayout>(nameof(Type6RoomLayout)), Game.Difficulty))
                     {
                         continue;
                     }
                 }
-                if (k < 25 && RoomBuild(y, x, Game.SingletonRepository.RoomLayouts.Get(nameof(Type4RoomLayout)), Game.Difficulty))
+                if (k < 25 && RoomBuild(y, x, Game.SingletonRepository.Get<RoomLayout>(nameof(Type4RoomLayout)), Game.Difficulty))
                 {
                     continue;
                 }
-                if (k < 50 && RoomBuild(y, x, Game.SingletonRepository.RoomLayouts.Get(nameof(Type3RoomLayout)), Game.Difficulty))
+                if (k < 50 && RoomBuild(y, x, Game.SingletonRepository.Get<RoomLayout>(nameof(Type3RoomLayout)), Game.Difficulty))
                 {
                     continue;
                 }
-                if (k < 100 && RoomBuild(y, x, Game.SingletonRepository.RoomLayouts.Get(nameof(Type2RoomLayout)), Game.Difficulty))
+                if (k < 100 && RoomBuild(y, x, Game.SingletonRepository.Get<RoomLayout>(nameof(Type2RoomLayout)), Game.Difficulty))
                 {
                     continue;
                 }
             }
-            if (RoomBuild(y, x, Game.SingletonRepository.RoomLayouts.Get(nameof(Type1RoomLayout)), Game.Difficulty))
+            if (RoomBuild(y, x, Game.SingletonRepository.Get<RoomLayout>(nameof(Type1RoomLayout)), Game.Difficulty))
             {
             }
         }

@@ -61,17 +61,17 @@ internal class WarriorMageCharacterClass : BaseCharacterClass
     public override int FromScrollWarriorArtifactBiasPercentageChance => 40;
     public override bool SenseInventoryTest(int level) => (0 != Game.RandomLessThan(75000 / ((level * level) + 40)));
     public override Realm[] AvailablePrimaryRealms => new Realm[] {
-        Game.SingletonRepository.Realms.Get(nameof(NatureRealm))
+        Game.SingletonRepository.Get<Realm>(nameof(NatureRealm))
     };
     public override Realm[] AvailableSecondaryRealms => new Realm[] {
-        Game.SingletonRepository.Realms.Get(nameof(LifeRealm)),
-        Game.SingletonRepository.Realms.Get(nameof(SorceryRealm)),
-        Game.SingletonRepository.Realms.Get(nameof(NatureRealm)),
-        Game.SingletonRepository.Realms.Get(nameof(ChaosRealm)),
-        Game.SingletonRepository.Realms.Get(nameof(DeathRealm)),
-        Game.SingletonRepository.Realms.Get(nameof(TarotRealm)),
-        Game.SingletonRepository.Realms.Get(nameof(FolkRealm)),
-        Game.SingletonRepository.Realms.Get(nameof(CorporealRealm))
+        Game.SingletonRepository.Get<Realm>(nameof(LifeRealm)),
+        Game.SingletonRepository.Get<Realm>(nameof(SorceryRealm)),
+        Game.SingletonRepository.Get<Realm>(nameof(NatureRealm)),
+        Game.SingletonRepository.Get<Realm>(nameof(ChaosRealm)),
+        Game.SingletonRepository.Get<Realm>(nameof(DeathRealm)),
+        Game.SingletonRepository.Get<Realm>(nameof(TarotRealm)),
+        Game.SingletonRepository.Get<Realm>(nameof(FolkRealm)),
+        Game.SingletonRepository.Get<Realm>(nameof(CorporealRealm))
     };
     public override bool WorshipsADeity => true;
 

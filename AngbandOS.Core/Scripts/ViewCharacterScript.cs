@@ -45,7 +45,7 @@ internal class ViewCharacterScript : Script, IScript, IRepeatableScript, IScript
         // Load the character viewer
         while (!Game.Shutdown)
         {
-            RenderCharacterScript showCharacterSheet = (RenderCharacterScript)Game.SingletonRepository.Scripts.Get(nameof(RenderCharacterScript));
+            RenderCharacterScript showCharacterSheet = (RenderCharacterScript)Game.SingletonRepository.Get<Script>(nameof(RenderCharacterScript));
             showCharacterSheet.ExecuteScript();
             Game.Screen.Print(ColorEnum.Orange, "[Press 'c' to change name, or ESC]", 43, 23);
             char keyPress = Game.Inkey();

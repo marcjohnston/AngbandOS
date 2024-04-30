@@ -73,7 +73,7 @@ internal class DruidCharacterClass : BaseCharacterClass
     public override IArtifactBias? ArtifactBias => Game.SingletonRepository.Get<ArtifactBias>(nameof(PriestlyArtifactBias));
     public override bool SenseInventoryTest(int level) => (0 != Game.RandomLessThan(10000 / ((level * level) + 40)));
     public override Realm[] AvailablePrimaryRealms => new Realm[] {
-        Game.SingletonRepository.Realms.Get(nameof(NatureRealm))
+        Game.SingletonRepository.Get<Realm>(nameof(NatureRealm))
     };
 
     protected override string[] OutfitItemFactoryNames => new string[]

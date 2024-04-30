@@ -61,8 +61,8 @@ internal class PaladinCharacterClass : BaseCharacterClass
     public override bool SenseInventoryTest(int level) => (0 != Game.RandomLessThan(77777 / ((level * level) + 40)));
     public override bool DetailedSenseInventory => true;
     public override Realm[] AvailablePrimaryRealms => new Realm[] {
-        Game.SingletonRepository.Realms.Get(nameof(LifeRealm)),
-        Game.SingletonRepository.Realms.Get(nameof(DeathRealm))
+        Game.SingletonRepository.Get<Realm>(nameof(LifeRealm)),
+        Game.SingletonRepository.Get<Realm>(nameof(DeathRealm))
     };
 
     public override void ItemDestroyed(Item item, int amount)

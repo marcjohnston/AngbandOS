@@ -23,7 +23,7 @@ internal abstract class GameCommand : IGetKey
     public string GetKey => Key;
     public void Bind()
     {
-        ExecuteScript = ExecuteScriptName == null ? null : (IRepeatableScript)Game.SingletonRepository.Scripts.Get(ExecuteScriptName);
+        ExecuteScript = ExecuteScriptName == null ? null : (IRepeatableScript)Game.SingletonRepository.Get<Script>(ExecuteScriptName);
     }
 
     public abstract char KeyChar { get; }

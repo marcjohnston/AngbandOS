@@ -80,10 +80,10 @@ internal class RogueCharacterClass : BaseCharacterClass
     public override bool SenseInventoryTest(int level) => (0 != Game.RandomLessThan(20000 / ((level * level) + 40)));
     public override bool DetailedSenseInventory => true;
     public override Realm[] AvailablePrimaryRealms => new Realm[] {
-        Game.SingletonRepository.Realms.Get(nameof(SorceryRealm)),
-        Game.SingletonRepository.Realms.Get(nameof(DeathRealm)),
-        Game.SingletonRepository.Realms.Get(nameof(TarotRealm)),
-        Game.SingletonRepository.Realms.Get(nameof(FolkRealm))
+        Game.SingletonRepository.Get<Realm>(nameof(SorceryRealm)),
+        Game.SingletonRepository.Get<Realm>(nameof(DeathRealm)),
+        Game.SingletonRepository.Get<Realm>(nameof(TarotRealm)),
+        Game.SingletonRepository.Get<Realm>(nameof(FolkRealm))
     };
 
     protected override string[] OutfitItemFactoryNames => new string[]

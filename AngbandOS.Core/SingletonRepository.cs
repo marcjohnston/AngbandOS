@@ -47,10 +47,6 @@ internal class SingletonRepository
     public ProjectilesRepository Projectiles;
     public RacesRepository Races;
     public RareItemsRepository RareItems;
-    public RealmsRepository Realms;
-    public RewardsRepository Rewards;
-    public RoomLayoutsRepository RoomLayouts;
-    public ScriptsRepository Scripts;
     public SpellResistantDetectionsRepository SpellResistantDetections;
     public StoreFactoriesRepository StoreFactories;
     public TalentsRepository Talents;
@@ -473,10 +469,6 @@ internal class SingletonRepository
         Projectiles = AddRepository<ProjectilesRepository>(new ProjectilesRepository(Game));
         Races = AddRepository<RacesRepository>(new RacesRepository(Game));
         RareItems = AddRepository<RareItemsRepository>(new RareItemsRepository(Game));
-        Realms = AddRepository<RealmsRepository>(new RealmsRepository(Game));
-        Rewards = AddRepository<RewardsRepository>(new RewardsRepository(Game));
-        RoomLayouts = AddRepository<RoomLayoutsRepository>(new RoomLayoutsRepository(Game));
-        Scripts = AddRepository<ScriptsRepository>(new ScriptsRepository(Game));
         ShopkeeperAcceptedComments = AddRepository<ShopkeeperAcceptedCommentsRepository>(new ShopkeeperAcceptedCommentsRepository(Game));
         ShopkeeperBargainComments = AddRepository<ShopkeeperBargainCommentsRepository>(new ShopkeeperBargainCommentsRepository(Game));
         ShopkeeperGoodComments = AddRepository<ShopkeeperGoodCommentsRepository>(new ShopkeeperGoodCommentsRepository(Game));

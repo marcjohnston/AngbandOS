@@ -7784,14 +7784,14 @@ internal class Game
     public void RunTileScript(string scriptName, GridTile tile)
     {
         // Get the script from the singleton repository.
-        ITileScript? script = (ITileScript)SingletonRepository.Scripts.Get(scriptName);
+        ITileScript? script = (ITileScript)SingletonRepository.Get<Script>(scriptName);
         script.ExecuteTileScript(tile);
     }
 
     public void RunScript(string scriptName)
     {
         // Get the script from the singleton repository.
-        Script? script = SingletonRepository.Scripts.Get(scriptName);
+        Script? script = SingletonRepository.Get<Script>(scriptName);
 
         if (script == null)
         {
@@ -7808,7 +7808,7 @@ internal class Game
     public void RunScriptInt(string scriptName, int value)
     {
         // Get the script from the singleton repository.
-        Script? script = SingletonRepository.Scripts.Get(scriptName);
+        Script? script = SingletonRepository.Get<Script>(scriptName);
 
         if (script == null)
         {
@@ -7825,7 +7825,7 @@ internal class Game
     public void RunScriptBool(string scriptName, bool value)
     {
         // Get the script from the singleton repository.
-        Script? script = SingletonRepository.Scripts.Get(scriptName);
+        Script? script = SingletonRepository.Get<Script>(scriptName);
 
         if (script == null)
         {
@@ -7842,7 +7842,7 @@ internal class Game
     public void RunScriptIntInt(string scriptName, int value1, int value2)
     {
         // Get the script from the singleton repository.
-        Script? script = SingletonRepository.Scripts.Get(scriptName);
+        Script? script = SingletonRepository.Get<Script>(scriptName);
 
         if (script == null)
         {
@@ -7859,7 +7859,7 @@ internal class Game
     public bool RunSuccessfulScript(string scriptName)
     {
         // Get the script from the singleton repository.
-        Script? script = SingletonRepository.Scripts.Get(scriptName);
+        Script? script = SingletonRepository.Get<Script>(scriptName);
 
         if (script == null)
         {
@@ -7876,21 +7876,21 @@ internal class Game
     public bool RunCancellableScript(string scriptName)
     {
         // Get the script from the singleton repository.
-        ICancellableScript? castedScript = (ICancellableScript)SingletonRepository.Scripts.Get(scriptName);
+        ICancellableScript? castedScript = (ICancellableScript)SingletonRepository.Get<Script>(scriptName);
         return castedScript.ExecuteCancellableScript();
     }
 
     public bool RunNoticeableScript(string scriptName)
     {
         // Get the script from the singleton repository.
-        INoticeableScript? castedScript = (INoticeableScript)SingletonRepository.Scripts.Get(scriptName);
+        INoticeableScript? castedScript = (INoticeableScript)SingletonRepository.Get<Script>(scriptName);
         return castedScript.ExecuteNoticeableScript();
     }
 
     public bool RunSuccessfulScriptInt(string scriptName, int value)
     {
         // Get the script from the singleton repository.
-        Script? script = SingletonRepository.Scripts.Get(scriptName);
+        Script? script = SingletonRepository.Get<Script>(scriptName);
 
         if (script == null)
         {
