@@ -273,6 +273,23 @@ internal class SingletonRepository
         }
     }
 
+    public void PersistSingletons()
+    {
+        foreach (KeyValuePair<string, GenericRepository> typeNameAndRepository in _singletonsDictionary)
+        {
+            List<KeyValuePair<string, string>> jsonEntityList = new List<KeyValuePair<string, string>>();
+            foreach (KeyValuePair<string, object> keyAndEntity in typeNameAndRepository.Value.Dictionary)
+            {
+                string key = keyAndEntity.Key; // entity.GetKey.ToString(); // TODO: The use of .ToString is because TKey needs to be strings
+                IGetKey entity = (IGetKey)keyAndEntity.Value;
+                string serializedEntity =  entity.ToJson();
+                jsonEntityList.Add(new KeyValuePair<string, string>(key, serializedEntity));
+            }
+            string pluralName = Game.Pluralize(typeNameAndRepository.Key);
+            Game.CorePersistentStorage.PersistEntities(pluralName, jsonEntityList.ToArray());
+        }
+    }
+
     /// <summary>
     /// Persist the entities to the core persistent storage medium.  This method is only being used to generate database entities from objects.
     /// </summary>
@@ -436,6 +453,7 @@ internal class SingletonRepository
 
         // Create all of the repositories.  All of the repositories will be empty and have an instance to the save game.
         ElvishText = AddRepository<ElvishTextRepository>(new ElvishTextRepository(Game));
+        FindQuests = AddRepository<FindQuestsRepository>(new FindQuestsRepository(Game));
         FunnyComments = AddRepository<FunnyCommentsRepository>(new FunnyCommentsRepository(Game));
         FunnyDescriptions = AddRepository<FunnyDescriptionsRepository>(new FunnyDescriptionsRepository(Game));
         HorrificDescriptions = AddRepository<HorrificDescriptionsRepository>(new HorrificDescriptionsRepository(Game));
