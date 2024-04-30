@@ -53,7 +53,7 @@ internal class QuaffScript : Script, IScript, IRepeatableScript
 
         // Skeletons are messy drinkers
         Game.Race.Quaff(potion);
-        Game.SingletonRepository.FlaggedActions.Get(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
+        Game.SingletonRepository.Get<FlaggedAction>(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
         // We may now know the potion's type
         item.ObjectTried();
         if (identified && !item.IsFlavorAware())

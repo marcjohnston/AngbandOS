@@ -57,12 +57,12 @@ internal abstract class RingItemFactory : JewelleryItemFactory, IFlavorFactory
     {
         get
         {
-            BaseInventorySlot rightHand = Game.SingletonRepository.InventorySlots.Get(nameof(RightHandInventorySlot));
+            BaseInventorySlot rightHand = Game.SingletonRepository.Get<BaseInventorySlot>(nameof(RightHandInventorySlot));
             if (rightHand.Count == 0)
             {
                 return rightHand;
             }
-            return Game.SingletonRepository.InventorySlots.Get(nameof(LeftHandInventorySlot));
+            return Game.SingletonRepository.Get<BaseInventorySlot>(nameof(LeftHandInventorySlot));
         }
     }
     public override int PackSort => 16;

@@ -33,7 +33,7 @@ internal class TeleportLevelMonsterSpell : MonsterSpell
         {
             base.Game.RunScript(nameof(Scripts.TeleportLevelScript));
         }
-        Game.UpdateSmartLearn(monster, base.Game.SingletonRepository.SpellResistantDetections.Get(nameof(SpellResistantDetections.NexusSpellResistantDetection)));
+        Game.UpdateSmartLearn(monster, base.Game.SingletonRepository.Get<SpellResistantDetection>(nameof(NexusSpellResistantDetection)));
     }
 
     public override void ExecuteOnMonster(Monster monster, Monster target) // TODO: Not implemented

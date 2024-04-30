@@ -15,8 +15,8 @@ internal class PrBasicRedrawActionGroupSetFlaggedAction : GroupSetFlaggedAction
     public override void Bind()
     {
         RedrawActions = new FlaggedAction[] {
-            Game.SingletonRepository.FlaggedActions.Get(nameof(RedrawStatsFlaggedAction)),
-            Game.SingletonRepository.FlaggedActions.Get(nameof(RedrawSpeedFlaggedAction))
+            Game.SingletonRepository.Get<FlaggedAction>(nameof(RedrawStatsFlaggedAction)),
+            Game.SingletonRepository.Get<FlaggedAction>(nameof(RedrawSpeedFlaggedAction))
         };
     }
 }

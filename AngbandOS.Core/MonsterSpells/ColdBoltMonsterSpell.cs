@@ -22,5 +22,5 @@ internal class ColdBoltMonsterSpell : BoltProjectileMonsterSpell
         return Game.DiceRoll(6, 8) + (monsterLevel / 3);
     }
     protected override Projectile Projectile(Game game) => game.SingletonRepository.Projectiles.Get(nameof(ColdProjectile));
-    public override SpellResistantDetection[] SmartLearn => new SpellResistantDetection[] { Game.SingletonRepository.SpellResistantDetections.Get(nameof(ColdSpellResistantDetection)), Game.SingletonRepository.SpellResistantDetections.Get(nameof(ReflectSpellResistantDetection)) };
+    public override SpellResistantDetection[] SmartLearn => new SpellResistantDetection[] { Game.SingletonRepository.Get<SpellResistantDetection>(nameof(ColdSpellResistantDetection)), Game.SingletonRepository.Get<SpellResistantDetection>(nameof(ReflectSpellResistantDetection)) };
 }

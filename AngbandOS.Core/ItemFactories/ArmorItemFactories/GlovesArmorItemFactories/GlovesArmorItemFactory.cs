@@ -100,7 +100,7 @@ internal abstract class GlovesArmorItemFactory : ArmorItemFactory
         }
     }
     public override int PackSort => 26;
-    public override BaseInventorySlot BaseWieldSlot => Game.SingletonRepository.InventorySlots.Get(nameof(HandsInventorySlot));
+    public override BaseInventorySlot BaseWieldSlot => Game.SingletonRepository.Get<BaseInventorySlot>(nameof(HandsInventorySlot));
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Gloves;
     public override bool HatesFire => true;
     public override bool HatesAcid => true;

@@ -37,7 +37,7 @@ internal class ParalyzeAttackEffect : AttackEffect
                 obvious = true;
             }
         }
-        Game.UpdateSmartLearn(monster, Game.SingletonRepository.SpellResistantDetections.Get(nameof(FreeSpellResistantDetection)));
+        Game.UpdateSmartLearn(monster, Game.SingletonRepository.Get<SpellResistantDetection>(nameof(FreeSpellResistantDetection)));
     }
     public override void ApplyToMonster(Monster monster, int armorClass, ref int damage, ref Projectile? pt, ref bool blinked)
     {

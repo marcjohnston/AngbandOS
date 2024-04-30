@@ -15,5 +15,5 @@ internal class BreatheDarkMonsterSpell : BreatheProjectileMonsterSpell
     protected override string ElementName => "darkness";
     protected override Projectile Projectile(Game game) => game.SingletonRepository.Projectiles.Get(nameof(DarkProjectile));
     protected override int Damage(Monster monster) => monster.Health / 6 > 400 ? 400 : monster.Health / 6;
-    public override SpellResistantDetection[] SmartLearn => new SpellResistantDetection[] { Game.SingletonRepository.SpellResistantDetections.Get(nameof(DarkSpellResistantDetection)) };
+    public override SpellResistantDetection[] SmartLearn => new SpellResistantDetection[] { Game.SingletonRepository.Get<SpellResistantDetection>(nameof(DarkSpellResistantDetection)) };
 }

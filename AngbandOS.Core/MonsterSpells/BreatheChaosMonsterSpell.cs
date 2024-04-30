@@ -15,5 +15,5 @@ internal class BreatheChaosMonsterSpell : BreatheProjectileMonsterSpell
     protected override string ElementName => "chaos";
     protected override Projectile Projectile(Game game) => game.SingletonRepository.Projectiles.Get(nameof(ChaosProjectile));
     protected override int Damage(Monster monster) => monster.Health / 6 > 600 ? 600 : monster.Health / 6;
-    public override SpellResistantDetection[] SmartLearn => new SpellResistantDetection[] { Game.SingletonRepository.SpellResistantDetections.Get(nameof(ChaosSpellResistantDetection)) };
+    public override SpellResistantDetection[] SmartLearn => new SpellResistantDetection[] { Game.SingletonRepository.Get<SpellResistantDetection>(nameof(ChaosSpellResistantDetection)) };
 }

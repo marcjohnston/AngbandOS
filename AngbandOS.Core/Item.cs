@@ -83,7 +83,7 @@ internal sealed class Item : IComparable<Item>
     public IItemContainer GetContainer()
     {
         // Check to see if the item is in the players inventory.
-        foreach (BaseInventorySlot inventorySlot in Game.SingletonRepository.InventorySlots)
+        foreach (BaseInventorySlot inventorySlot in Game.SingletonRepository.Get<BaseInventorySlot>())
         {
             foreach (int slot in inventorySlot.InventorySlots)
             {

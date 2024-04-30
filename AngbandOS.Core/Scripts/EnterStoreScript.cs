@@ -43,8 +43,8 @@ internal class EnterStoreScript : Script, IScript, IRepeatableScript
             return;
         }
         // Switch from the normal game interface to the store interface
-        Game.SingletonRepository.FlaggedActions.Get(nameof(RemoveLightFlaggedAction)).Check(true);
-        Game.SingletonRepository.FlaggedActions.Get(nameof(RemoveViewFlaggedAction)).Check(true);
+        Game.SingletonRepository.Get<FlaggedAction>(nameof(RemoveLightFlaggedAction)).Check(true);
+        Game.SingletonRepository.Get<FlaggedAction>(nameof(RemoveViewFlaggedAction)).Check(true);
         Game.FullScreenOverlay = true;
         Game.CommandArgument = 0;
         which.EnterStore();

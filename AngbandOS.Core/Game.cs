@@ -1841,7 +1841,7 @@ internal class Game
         if (ExPlayer == null)
         {
             _prevSex = SingletonRepository.Get<Gender>(nameof(FemaleGender));
-            _prevRace = SingletonRepository.Races.Get(nameof(HumanRace));
+            _prevRace = SingletonRepository.Get<Race>(nameof(HumanRace));
             _prevCharacterClass = SingletonRepository.Get<BaseCharacterClass>(nameof(WarriorCharacterClass));
             _prevPrimaryRealm = null;
             _prevSecondaryRealm = null;
@@ -1980,8 +1980,8 @@ internal class Game
                 RedrawStuff();
                 TargetWho = null;
                 HealthTrack(null);
-                SingletonRepository.FlaggedActions.Get(nameof(RemoveLightFlaggedAction)).Check(true);
-                SingletonRepository.FlaggedActions.Get(nameof(RemoveViewFlaggedAction)).Check(true);
+                SingletonRepository.Get<FlaggedAction>(nameof(RemoveLightFlaggedAction)).Check(true);
+                SingletonRepository.Get<FlaggedAction>(nameof(RemoveViewFlaggedAction)).Check(true);
                 if (!Playing && !IsDead)
                 {
                     break;
@@ -2196,23 +2196,23 @@ internal class Game
         if (CommandRepeat != 0)
         {
             CommandRepeat = 0;
-            SingletonRepository.FlaggedActions.Get(nameof(RedrawStateFlaggedAction)).Set();
+            SingletonRepository.Get<FlaggedAction>(nameof(RedrawStateFlaggedAction)).Set();
         }
         if (Resting != 0)
         {
             Resting = 0;
-            SingletonRepository.FlaggedActions.Get(nameof(RedrawStateFlaggedAction)).Set();
+            SingletonRepository.Get<FlaggedAction>(nameof(RedrawStateFlaggedAction)).Set();
         }
         if (Running != 0)
         {
             Running = 0;
-            SingletonRepository.FlaggedActions.Get(nameof(UpdateTorchRadiusFlaggedAction)).Set();
+            SingletonRepository.Get<FlaggedAction>(nameof(UpdateTorchRadiusFlaggedAction)).Set();
         }
         if (stopSearch && IsSearching)
         {
             IsSearching = false;
-            SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
-            SingletonRepository.FlaggedActions.Get(nameof(RedrawStateFlaggedAction)).Set();
+            SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
+            SingletonRepository.Get<FlaggedAction>(nameof(RedrawStateFlaggedAction)).Set();
         }
     }
 
@@ -2315,7 +2315,7 @@ internal class Game
         }
         if (canChooseFromEquipment)
         {
-            foreach (BaseInventorySlot inventorySlot in SingletonRepository.InventorySlots.Where(_inventorySlot => _inventorySlot.IsEquipment))
+            foreach (BaseInventorySlot inventorySlot in SingletonRepository.Get<BaseInventorySlot>().Where(_inventorySlot => _inventorySlot.IsEquipment))
             {
                 foreach (int ii in inventorySlot.InventorySlots)
                 {
@@ -2756,10 +2756,10 @@ internal class Game
                 DeleteObject(y, x);
                 MsgPrint("A magical stairway appears...");
                 CaveSetFeat(y, x, CurDungeon.Tower ? GetUpStaircaseTile : GetDownStaircaseTile);
-                SingletonRepository.FlaggedActions.Get(nameof(UpdateScentFlaggedAction)).Set();
-                SingletonRepository.FlaggedActions.Get(nameof(UpdateMonstersFlaggedAction)).Set();
-                SingletonRepository.FlaggedActions.Get(nameof(UpdateLightFlaggedAction)).Set();
-                SingletonRepository.FlaggedActions.Get(nameof(UpdateViewFlaggedAction)).Set();
+                SingletonRepository.Get<FlaggedAction>(nameof(UpdateScentFlaggedAction)).Set();
+                SingletonRepository.Get<FlaggedAction>(nameof(UpdateMonstersFlaggedAction)).Set();
+                SingletonRepository.Get<FlaggedAction>(nameof(UpdateLightFlaggedAction)).Set();
+                SingletonRepository.Get<FlaggedAction>(nameof(UpdateViewFlaggedAction)).Set();
             }
         }
     }
@@ -2770,8 +2770,8 @@ internal class Game
 
     public void NoticeStuff()
     {
-        SingletonRepository.FlaggedActions.Get(nameof(NoticeCombineFlaggedAction)).Check();
-        SingletonRepository.FlaggedActions.Get(nameof(NoticeReorderFlaggedAction)).Check();
+        SingletonRepository.Get<FlaggedAction>(nameof(NoticeCombineFlaggedAction)).Check();
+        SingletonRepository.Get<FlaggedAction>(nameof(NoticeReorderFlaggedAction)).Check();
     }
 
     public void OpenChest(int y, int x, Item chestItem)
@@ -2809,22 +2809,22 @@ internal class Game
 
     public void UpdateStuff()
     {
-        SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Check();
-        SingletonRepository.FlaggedActions.Get(nameof(UpdateTorchRadiusFlaggedAction)).Check();
-        SingletonRepository.FlaggedActions.Get(nameof(UpdateHealthFlaggedAction)).Check();
-        SingletonRepository.FlaggedActions.Get(nameof(UpdateManaFlaggedAction)).Check();
-        SingletonRepository.FlaggedActions.Get(nameof(UpdateSpellsFlaggedAction)).Check();
+        SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Check();
+        SingletonRepository.Get<FlaggedAction>(nameof(UpdateTorchRadiusFlaggedAction)).Check();
+        SingletonRepository.Get<FlaggedAction>(nameof(UpdateHealthFlaggedAction)).Check();
+        SingletonRepository.Get<FlaggedAction>(nameof(UpdateManaFlaggedAction)).Check();
+        SingletonRepository.Get<FlaggedAction>(nameof(UpdateSpellsFlaggedAction)).Check();
         if (FullScreenOverlay)
         {
             return;
         }
-        SingletonRepository.FlaggedActions.Get(nameof(RemoveLightFlaggedAction)).Check();
-        SingletonRepository.FlaggedActions.Get(nameof(RemoveViewFlaggedAction)).Check();
-        SingletonRepository.FlaggedActions.Get(nameof(UpdateViewFlaggedAction)).Check();
-        SingletonRepository.FlaggedActions.Get(nameof(UpdateLightFlaggedAction)).Check();
-        SingletonRepository.FlaggedActions.Get(nameof(UpdateScentFlaggedAction)).Check();
-        SingletonRepository.FlaggedActions.Get(nameof(UpdateDistancesFlaggedAction)).Check();
-        SingletonRepository.FlaggedActions.Get(nameof(UpdateMonstersFlaggedAction)).Check();
+        SingletonRepository.Get<FlaggedAction>(nameof(RemoveLightFlaggedAction)).Check();
+        SingletonRepository.Get<FlaggedAction>(nameof(RemoveViewFlaggedAction)).Check();
+        SingletonRepository.Get<FlaggedAction>(nameof(UpdateViewFlaggedAction)).Check();
+        SingletonRepository.Get<FlaggedAction>(nameof(UpdateLightFlaggedAction)).Check();
+        SingletonRepository.Get<FlaggedAction>(nameof(UpdateScentFlaggedAction)).Check();
+        SingletonRepository.Get<FlaggedAction>(nameof(UpdateDistancesFlaggedAction)).Check();
+        SingletonRepository.Get<FlaggedAction>(nameof(UpdateMonstersFlaggedAction)).Check();
     }
 
     private void ApplyFlavorVisuals()
@@ -3158,24 +3158,24 @@ internal class Game
         MainForm.Invalidate();
 
         // TOSO: These flagged actions are not part of the main form yet
-        SingletonRepository.FlaggedActions.Get(nameof(RedrawEquippyFlaggedAction)).Set();
-        SingletonRepository.FlaggedActions.Get(nameof(PrExtraRedrawActionGroupSetFlaggedAction)).Set();
-        SingletonRepository.FlaggedActions.Get(nameof(PrBasicRedrawActionGroupSetFlaggedAction)).Set();
-        SingletonRepository.FlaggedActions.Get(nameof(UpdateHealthFlaggedAction)).Set();
-        SingletonRepository.FlaggedActions.Get(nameof(UpdateManaFlaggedAction)).Set();
-        SingletonRepository.FlaggedActions.Get(nameof(UpdateSpellsFlaggedAction)).Set();
-        SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
-        SingletonRepository.FlaggedActions.Get(nameof(UpdateTorchRadiusFlaggedAction)).Set();
-        SingletonRepository.FlaggedActions.Get(nameof(UpdateScentFlaggedAction)).Set();
-        SingletonRepository.FlaggedActions.Get(nameof(UpdateDistancesFlaggedAction)).Set();
-        SingletonRepository.FlaggedActions.Get(nameof(UpdateLightFlaggedAction)).Set();
-        SingletonRepository.FlaggedActions.Get(nameof(UpdateViewFlaggedAction)).Set();
+        SingletonRepository.Get<FlaggedAction>(nameof(RedrawEquippyFlaggedAction)).Set();
+        SingletonRepository.Get<FlaggedAction>(nameof(PrExtraRedrawActionGroupSetFlaggedAction)).Set();
+        SingletonRepository.Get<FlaggedAction>(nameof(PrBasicRedrawActionGroupSetFlaggedAction)).Set();
+        SingletonRepository.Get<FlaggedAction>(nameof(UpdateHealthFlaggedAction)).Set();
+        SingletonRepository.Get<FlaggedAction>(nameof(UpdateManaFlaggedAction)).Set();
+        SingletonRepository.Get<FlaggedAction>(nameof(UpdateSpellsFlaggedAction)).Set();
+        SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
+        SingletonRepository.Get<FlaggedAction>(nameof(UpdateTorchRadiusFlaggedAction)).Set();
+        SingletonRepository.Get<FlaggedAction>(nameof(UpdateScentFlaggedAction)).Set();
+        SingletonRepository.Get<FlaggedAction>(nameof(UpdateDistancesFlaggedAction)).Set();
+        SingletonRepository.Get<FlaggedAction>(nameof(UpdateLightFlaggedAction)).Set();
+        SingletonRepository.Get<FlaggedAction>(nameof(UpdateViewFlaggedAction)).Set();
         CharacterXtra = false;
-        SingletonRepository.FlaggedActions.Get(nameof(UpdateHealthFlaggedAction)).Set();
-        SingletonRepository.FlaggedActions.Get(nameof(UpdateManaFlaggedAction)).Set();
-        SingletonRepository.FlaggedActions.Get(nameof(UpdateSpellsFlaggedAction)).Set();
-        SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
-        SingletonRepository.FlaggedActions.Get(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
+        SingletonRepository.Get<FlaggedAction>(nameof(UpdateHealthFlaggedAction)).Set();
+        SingletonRepository.Get<FlaggedAction>(nameof(UpdateManaFlaggedAction)).Set();
+        SingletonRepository.Get<FlaggedAction>(nameof(UpdateSpellsFlaggedAction)).Set();
+        SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
+        SingletonRepository.Get<FlaggedAction>(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
         NoticeStuff();
         UpdateStuff();
         RedrawStuff();
@@ -3544,7 +3544,7 @@ internal class Game
                 if (Resting > 0)
                 {
                     Resting--;
-                    SingletonRepository.FlaggedActions.Get(nameof(RedrawStateFlaggedAction)).Set();
+                    SingletonRepository.Get<FlaggedAction>(nameof(RedrawStateFlaggedAction)).Set();
                 }
                 EnergyUse = 100;
             }
@@ -3555,7 +3555,7 @@ internal class Game
             else if (CommandRepeat != 0)
             {
                 CommandRepeat--;
-                SingletonRepository.FlaggedActions.Get(nameof(RedrawStateFlaggedAction)).Set();
+                SingletonRepository.Get<FlaggedAction>(nameof(RedrawStateFlaggedAction)).Set();
                 RedrawStuff();
                 MsgClear();
                 ProcessCommand(true);
@@ -3679,14 +3679,14 @@ internal class Game
                     }
                 }
             }
-            SingletonRepository.FlaggedActions.Get(nameof(UpdateMonstersFlaggedAction)).Set();
+            SingletonRepository.Get<FlaggedAction>(nameof(UpdateMonstersFlaggedAction)).Set();
             RefreshMap.SetChangedFlag(); // TODO: Needs to convert to dependencies in the MapWidget.  In this case, the Grid array was modified.
         }
         if (IsMidnight)
         {
             DecayFavour();
-            SingletonRepository.FlaggedActions.Get(nameof(UpdateHealthFlaggedAction)).Set();
-            SingletonRepository.FlaggedActions.Get(nameof(UpdateManaFlaggedAction)).Set();
+            SingletonRepository.Get<FlaggedAction>(nameof(UpdateHealthFlaggedAction)).Set();
+            SingletonRepository.Get<FlaggedAction>(nameof(UpdateManaFlaggedAction)).Set();
             foreach (Town town in SingletonRepository.Get<Town>())
             {
                 foreach (Store store in town.Stores)
@@ -3720,7 +3720,7 @@ internal class Game
         bool caveNoRegen = false;
 
         // Allow all inventory slots access to the process world.
-        foreach (BaseInventorySlot inventorySlot in SingletonRepository.InventorySlots)
+        foreach (BaseInventorySlot inventorySlot in SingletonRepository.Get<BaseInventorySlot>())
         {
             ProcessWorldEventArgs inventorySlotProcessWorldEventArgs = new ProcessWorldEventArgs();
             inventorySlot.ProcessWorldHook(inventorySlotProcessWorldEventArgs);
@@ -3926,7 +3926,7 @@ internal class Game
         BleedingTimer.ProcessWorld();
         HallucinationsTimer.ProcessWorld();
 
-        SingletonRepository.FlaggedActions.Get(nameof(UpdateTorchRadiusFlaggedAction)).Set();
+        SingletonRepository.Get<FlaggedAction>(nameof(UpdateTorchRadiusFlaggedAction)).Set();
         if (HasExperienceDrain)
         {
             if (RandomLessThan(100) < 10 && ExperiencePoints.IntValue > 0)
@@ -3992,7 +3992,7 @@ internal class Game
         }
         if (combineFlags)
         {
-            SingletonRepository.FlaggedActions.Get(nameof(NoticeCombineFlaggedAction)).Set();
+            SingletonRepository.Get<FlaggedAction>(nameof(NoticeCombineFlaggedAction)).Set();
         }
         RunScript(nameof(SenseInventoryScript));
         for (int y = 1; y < CurHgt - 1; y++)
@@ -4068,10 +4068,10 @@ internal class Game
             widget.Update();
         }
 
-        SingletonRepository.FlaggedActions.Get(nameof(RedrawEquippyFlaggedAction)).Check();
-        SingletonRepository.FlaggedActions.Get(nameof(RedrawStatsFlaggedAction)).Check();
-        SingletonRepository.FlaggedActions.Get(nameof(RedrawStateFlaggedAction)).Check();
-        SingletonRepository.FlaggedActions.Get(nameof(RedrawSpeedFlaggedAction)).Check();
+        SingletonRepository.Get<FlaggedAction>(nameof(RedrawEquippyFlaggedAction)).Check();
+        SingletonRepository.Get<FlaggedAction>(nameof(RedrawStatsFlaggedAction)).Check();
+        SingletonRepository.Get<FlaggedAction>(nameof(RedrawStateFlaggedAction)).Check();
+        SingletonRepository.Get<FlaggedAction>(nameof(RedrawSpeedFlaggedAction)).Check();
 
         // Clear the change tracking flags.
         foreach (IChangeTracker changeTracker in SingletonRepository.Get<IChangeTracker>())
@@ -4467,12 +4467,12 @@ internal class Game
                 BlindnessTimer.AddTimer(10 + DieRoll(10));
             }
         }
-        SingletonRepository.FlaggedActions.Get(nameof(RemoveLightFlaggedAction)).Set();
-        SingletonRepository.FlaggedActions.Get(nameof(RemoveViewFlaggedAction)).Set();
-        SingletonRepository.FlaggedActions.Get(nameof(UpdateScentFlaggedAction)).Set();
-        SingletonRepository.FlaggedActions.Get(nameof(UpdateLightFlaggedAction)).Set();
-        SingletonRepository.FlaggedActions.Get(nameof(UpdateViewFlaggedAction)).Set();
-        SingletonRepository.FlaggedActions.Get(nameof(UpdateMonstersFlaggedAction)).Set();
+        SingletonRepository.Get<FlaggedAction>(nameof(RemoveLightFlaggedAction)).Set();
+        SingletonRepository.Get<FlaggedAction>(nameof(RemoveViewFlaggedAction)).Set();
+        SingletonRepository.Get<FlaggedAction>(nameof(UpdateScentFlaggedAction)).Set();
+        SingletonRepository.Get<FlaggedAction>(nameof(UpdateLightFlaggedAction)).Set();
+        SingletonRepository.Get<FlaggedAction>(nameof(UpdateViewFlaggedAction)).Set();
+        SingletonRepository.Get<FlaggedAction>(nameof(UpdateMonstersFlaggedAction)).Set();
         RefreshMap.SetChangedFlag(); // TODO: Needs to convert to dependencies in the MapWidget.  In this case, the grid was modified.
     }
 
@@ -4945,12 +4945,12 @@ internal class Game
                 }
             }
         }
-        SingletonRepository.FlaggedActions.Get(nameof(RemoveLightFlaggedAction)).Set();
-        SingletonRepository.FlaggedActions.Get(nameof(RemoveViewFlaggedAction)).Set();
-        SingletonRepository.FlaggedActions.Get(nameof(UpdateScentFlaggedAction)).Set();
-        SingletonRepository.FlaggedActions.Get(nameof(UpdateLightFlaggedAction)).Set();
-        SingletonRepository.FlaggedActions.Get(nameof(UpdateViewFlaggedAction)).Set();
-        SingletonRepository.FlaggedActions.Get(nameof(UpdateDistancesFlaggedAction)).Set();
+        SingletonRepository.Get<FlaggedAction>(nameof(RemoveLightFlaggedAction)).Set();
+        SingletonRepository.Get<FlaggedAction>(nameof(RemoveViewFlaggedAction)).Set();
+        SingletonRepository.Get<FlaggedAction>(nameof(UpdateScentFlaggedAction)).Set();
+        SingletonRepository.Get<FlaggedAction>(nameof(UpdateLightFlaggedAction)).Set();
+        SingletonRepository.Get<FlaggedAction>(nameof(UpdateViewFlaggedAction)).Set();
+        SingletonRepository.Get<FlaggedAction>(nameof(UpdateDistancesFlaggedAction)).Set();
         RefreshMap.SetChangedFlag(); // TODO: Needs to convert to dependencies in the MapWidget
     }
 
@@ -5114,8 +5114,8 @@ internal class Game
         {
             return false;
         }
-        SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
-        SingletonRepository.FlaggedActions.Get(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
+        SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
+        SingletonRepository.Get<FlaggedAction>(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
         return true;
     }
 
@@ -5296,8 +5296,8 @@ internal class Game
             oPtr.IdentKnown = false;
             oPtr.IdentSense = false;
         }
-        SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
-        SingletonRepository.FlaggedActions.Get(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
+        SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
+        SingletonRepository.Get<FlaggedAction>(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
         RunScript(nameof(DarkScript));
         return true;
     }
@@ -5550,10 +5550,10 @@ internal class Game
         MainForm.RefreshMapLocation(oy, ox);
         MainForm.RefreshMapLocation(MapY.IntValue, MapX.IntValue);
         RecenterScreenAroundPlayer();
-        SingletonRepository.FlaggedActions.Get(nameof(UpdateScentFlaggedAction)).Set();
-        SingletonRepository.FlaggedActions.Get(nameof(UpdateLightFlaggedAction)).Set();
-        SingletonRepository.FlaggedActions.Get(nameof(UpdateViewFlaggedAction)).Set();
-        SingletonRepository.FlaggedActions.Get(nameof(UpdateDistancesFlaggedAction)).Set();
+        SingletonRepository.Get<FlaggedAction>(nameof(UpdateScentFlaggedAction)).Set();
+        SingletonRepository.Get<FlaggedAction>(nameof(UpdateLightFlaggedAction)).Set();
+        SingletonRepository.Get<FlaggedAction>(nameof(UpdateViewFlaggedAction)).Set();
+        SingletonRepository.Get<FlaggedAction>(nameof(UpdateDistancesFlaggedAction)).Set();
         HandleStuff();
     }
 
@@ -5601,10 +5601,10 @@ internal class Game
                 MainForm.RefreshMapLocation(ty, tx);
                 MainForm.RefreshMapLocation(MapY.IntValue, MapX.IntValue);
                 RecenterScreenAroundPlayer();
-                SingletonRepository.FlaggedActions.Get(nameof(UpdateScentFlaggedAction)).Set();
-                SingletonRepository.FlaggedActions.Get(nameof(UpdateLightFlaggedAction)).Set();
-                SingletonRepository.FlaggedActions.Get(nameof(UpdateViewFlaggedAction)).Set();
-                SingletonRepository.FlaggedActions.Get(nameof(UpdateDistancesFlaggedAction)).Set();
+                SingletonRepository.Get<FlaggedAction>(nameof(UpdateScentFlaggedAction)).Set();
+                SingletonRepository.Get<FlaggedAction>(nameof(UpdateLightFlaggedAction)).Set();
+                SingletonRepository.Get<FlaggedAction>(nameof(UpdateViewFlaggedAction)).Set();
+                SingletonRepository.Get<FlaggedAction>(nameof(UpdateDistancesFlaggedAction)).Set();
                 HandleStuff();
             }
         }
@@ -5846,7 +5846,7 @@ internal class Game
     private bool MinusAc()
     {
         // Generate a weighted random for armor inventory slots.
-        WeightedRandom<BaseInventorySlot> inventorySlotsWeightedRandom = new WeightedRandom<BaseInventorySlot>(this, SingletonRepository.InventorySlots, _inventorySlot => _inventorySlot.IsArmor);
+        WeightedRandom<BaseInventorySlot> inventorySlotsWeightedRandom = SingletonRepository.ToWeightedRandom<BaseInventorySlot>(_inventorySlot => _inventorySlot.IsArmor);
 
         // Choose one of those inventory slots.
         BaseInventorySlot? inventorySlot = inventorySlotsWeightedRandom.ChooseOrDefault();
@@ -5874,7 +5874,7 @@ internal class Game
         }
         MsgPrint($"Your {oName} is damaged!");
         oPtr.BonusArmorClass--;
-        SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
+        SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
         return true;
     }
 
@@ -5943,7 +5943,7 @@ internal class Game
                 oPtr.RandomArtifactItemCharacteristics.HeavyCurse = false;
             }
             oPtr.Inscription = "uncursed";
-            SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
+            SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
             cnt++;
         }
         return cnt > 0;
@@ -6010,7 +6010,7 @@ internal class Game
                 if (CommandArgument > 0)
                 {
                     CommandRepeat = CommandArgument - 1;
-                    SingletonRepository.FlaggedActions.Get(nameof(RedrawStateFlaggedAction)).Set();
+                    SingletonRepository.Get<FlaggedAction>(nameof(RedrawStateFlaggedAction)).Set();
                     CommandArgument = 0;
                 }
 
@@ -6046,9 +6046,9 @@ internal class Game
             CaveSetFeat(y, x, RandomLessThan(100) < 50 ? SingletonRepository.Get<Tile>(nameof(BrokenDoorTile)) : SingletonRepository.Get<Tile>(nameof(OpenDoorTile)));
             PlaySound(SoundEffectEnum.OpenDoor);
             MovePlayer(y, x, false);
-            SingletonRepository.FlaggedActions.Get(nameof(UpdateLightFlaggedAction)).Set();
-            SingletonRepository.FlaggedActions.Get(nameof(UpdateViewFlaggedAction)).Set();
-            SingletonRepository.FlaggedActions.Get(nameof(UpdateDistancesFlaggedAction)).Set();
+            SingletonRepository.Get<FlaggedAction>(nameof(UpdateLightFlaggedAction)).Set();
+            SingletonRepository.Get<FlaggedAction>(nameof(UpdateViewFlaggedAction)).Set();
+            SingletonRepository.Get<FlaggedAction>(nameof(UpdateDistancesFlaggedAction)).Set();
         }
         else if (RandomLessThan(100) < AbilityScores[Ability.Dexterity].DexTheftAvoidance + ExperienceLevel.IntValue)
         {
@@ -6158,9 +6158,9 @@ internal class Game
         else
         {
             CaveSetFeat(y, x, SingletonRepository.Get<Tile>(nameof(LockedDoor0Tile)));
-            SingletonRepository.FlaggedActions.Get(nameof(UpdateMonstersFlaggedAction)).Set();
-            SingletonRepository.FlaggedActions.Get(nameof(UpdateLightFlaggedAction)).Set();
-            SingletonRepository.FlaggedActions.Get(nameof(UpdateViewFlaggedAction)).Set();
+            SingletonRepository.Get<FlaggedAction>(nameof(UpdateMonstersFlaggedAction)).Set();
+            SingletonRepository.Get<FlaggedAction>(nameof(UpdateLightFlaggedAction)).Set();
+            SingletonRepository.Get<FlaggedAction>(nameof(UpdateViewFlaggedAction)).Set();
             PlaySound(SoundEffectEnum.ShutDoor);
         }
         return false;
@@ -6313,7 +6313,7 @@ internal class Game
     /// <returns> true if there was armor to curse, false otherwise </returns>
     public bool CurseArmor()
     {
-        BaseInventorySlot? inventorySlot = SingletonRepository.InventorySlots.ToWeightedRandom(_inventorySlot => _inventorySlot.CanBeCursed).ChooseOrDefault();
+        BaseInventorySlot? inventorySlot = SingletonRepository.ToWeightedRandom<BaseInventorySlot>(_inventorySlot => _inventorySlot.CanBeCursed).ChooseOrDefault();
 
         // Check to see if there are any slots capable of cursing.
         if (inventorySlot == null)
@@ -6350,8 +6350,8 @@ internal class Game
             item.RandomArtifactItemCharacteristics.Clear();
             item.IdentCursed = true;
             item.IdentBroken = true;
-            SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
-            SingletonRepository.FlaggedActions.Get(nameof(UpdateManaFlaggedAction)).Set();
+            SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
+            SingletonRepository.Get<FlaggedAction>(nameof(UpdateManaFlaggedAction)).Set();
         }
         return true;
     }
@@ -6389,8 +6389,8 @@ internal class Game
             item.RandomArtifactItemCharacteristics.Clear();
             item.IdentCursed = true;
             item.IdentBroken = true;
-            SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
-            SingletonRepository.FlaggedActions.Get(nameof(UpdateManaFlaggedAction)).Set();
+            SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
+            SingletonRepository.Get<FlaggedAction>(nameof(UpdateManaFlaggedAction)).Set();
         }
         return true;
     }
@@ -6902,10 +6902,10 @@ internal class Game
         // Recenter the screen if we have to
         RecenterScreenAroundPlayer();
         // We'll need to update and redraw various things
-        SingletonRepository.FlaggedActions.Get(nameof(UpdateScentFlaggedAction)).Set();
-        SingletonRepository.FlaggedActions.Get(nameof(UpdateLightFlaggedAction)).Set();
-        SingletonRepository.FlaggedActions.Get(nameof(UpdateViewFlaggedAction)).Set();
-        SingletonRepository.FlaggedActions.Get(nameof(UpdateDistancesFlaggedAction)).Set();
+        SingletonRepository.Get<FlaggedAction>(nameof(UpdateScentFlaggedAction)).Set();
+        SingletonRepository.Get<FlaggedAction>(nameof(UpdateLightFlaggedAction)).Set();
+        SingletonRepository.Get<FlaggedAction>(nameof(UpdateViewFlaggedAction)).Set();
+        SingletonRepository.Get<FlaggedAction>(nameof(UpdateDistancesFlaggedAction)).Set();
         RefreshMap.SetChangedFlag(); // TODO: Needs to convert to dependencies in the MapWidget
         // If we're not actively searching, then have a chance of doing it passively
         if (SkillSearchFrequency >= 50 || 0 == RandomLessThan(50 - SkillSearchFrequency))
@@ -7481,7 +7481,7 @@ internal class Game
                 Disturb(false);
                 return;
             }
-            SingletonRepository.FlaggedActions.Get(nameof(UpdateTorchRadiusFlaggedAction)).Set();
+            SingletonRepository.Get<FlaggedAction>(nameof(UpdateTorchRadiusFlaggedAction)).Set();
             // Initialise our navigation state
             StartRun(direction);
         }
@@ -8127,10 +8127,10 @@ internal class Game
         // If we successfully made the tunnel,
         if (!GridPassable(y, x))
         {
-            SingletonRepository.FlaggedActions.Get(nameof(UpdateScentFlaggedAction)).Set();
-            SingletonRepository.FlaggedActions.Get(nameof(UpdateMonstersFlaggedAction)).Set();
-            SingletonRepository.FlaggedActions.Get(nameof(UpdateLightFlaggedAction)).Set();
-            SingletonRepository.FlaggedActions.Get(nameof(UpdateViewFlaggedAction)).Set();
+            SingletonRepository.Get<FlaggedAction>(nameof(UpdateScentFlaggedAction)).Set();
+            SingletonRepository.Get<FlaggedAction>(nameof(UpdateMonstersFlaggedAction)).Set();
+            SingletonRepository.Get<FlaggedAction>(nameof(UpdateLightFlaggedAction)).Set();
+            SingletonRepository.Get<FlaggedAction>(nameof(UpdateViewFlaggedAction)).Set();
         }
         if (!more)
         {
@@ -8179,9 +8179,9 @@ internal class Game
             {
                 MsgPrint("You have picked the lock.");
                 CaveSetFeat(y, x, SingletonRepository.Get<Tile>(nameof(OpenDoorTile)));
-                SingletonRepository.FlaggedActions.Get(nameof(UpdateMonstersFlaggedAction)).Set();
-                SingletonRepository.FlaggedActions.Get(nameof(UpdateLightFlaggedAction)).Set();
-                SingletonRepository.FlaggedActions.Get(nameof(UpdateViewFlaggedAction)).Set();
+                SingletonRepository.Get<FlaggedAction>(nameof(UpdateMonstersFlaggedAction)).Set();
+                SingletonRepository.Get<FlaggedAction>(nameof(UpdateLightFlaggedAction)).Set();
+                SingletonRepository.Get<FlaggedAction>(nameof(UpdateViewFlaggedAction)).Set();
                 PlaySound(SoundEffectEnum.LockpickSuccess);
                 GainExperience(1);
             }
@@ -8196,9 +8196,9 @@ internal class Game
         else
         {
             CaveSetFeat(y, x, SingletonRepository.Get<Tile>(nameof(OpenDoorTile)));
-            SingletonRepository.FlaggedActions.Get(nameof(UpdateMonstersFlaggedAction)).Set();
-            SingletonRepository.FlaggedActions.Get(nameof(UpdateLightFlaggedAction)).Set();
-            SingletonRepository.FlaggedActions.Get(nameof(UpdateViewFlaggedAction)).Set();
+            SingletonRepository.Get<FlaggedAction>(nameof(UpdateMonstersFlaggedAction)).Set();
+            SingletonRepository.Get<FlaggedAction>(nameof(UpdateLightFlaggedAction)).Set();
+            SingletonRepository.Get<FlaggedAction>(nameof(UpdateViewFlaggedAction)).Set();
             PlaySound(SoundEffectEnum.OpenDoor);
         }
         return false;
@@ -8360,10 +8360,10 @@ internal class Game
         // Clear the tile
         tile.PlayerMemorized = false;
         RevertTileToBackground(y, x);
-        SingletonRepository.FlaggedActions.Get(nameof(UpdateScentFlaggedAction)).Set();
-        SingletonRepository.FlaggedActions.Get(nameof(UpdateMonstersFlaggedAction)).Set();
-        SingletonRepository.FlaggedActions.Get(nameof(UpdateLightFlaggedAction)).Set();
-        SingletonRepository.FlaggedActions.Get(nameof(UpdateViewFlaggedAction)).Set();
+        SingletonRepository.Get<FlaggedAction>(nameof(UpdateScentFlaggedAction)).Set();
+        SingletonRepository.Get<FlaggedAction>(nameof(UpdateMonstersFlaggedAction)).Set();
+        SingletonRepository.Get<FlaggedAction>(nameof(UpdateLightFlaggedAction)).Set();
+        SingletonRepository.Get<FlaggedAction>(nameof(UpdateViewFlaggedAction)).Set();
         return true;
     }
 
@@ -9489,7 +9489,7 @@ internal class Game
             item.BecomeKnown();
             InvenCarry(item);
             Item carried = item.Clone(1);
-            LightsourceInventorySlot lightsourceInventorySlot = (LightsourceInventorySlot)SingletonRepository.InventorySlots.Get(nameof(LightsourceInventorySlot));
+            LightsourceInventorySlot lightsourceInventorySlot = (LightsourceInventorySlot)SingletonRepository.Get<BaseInventorySlot>(nameof(LightsourceInventorySlot));
             SetInventoryItem(lightsourceInventorySlot.WeightedRandom.ChooseOrDefault(), carried);
             WeightCarried += carried.Weight;
         }
@@ -12764,7 +12764,7 @@ internal class Game
         {
             return false;
         }
-        foreach (BaseInventorySlot inventorySlot in SingletonRepository.InventorySlots)
+        foreach (BaseInventorySlot inventorySlot in SingletonRepository.Get<BaseInventorySlot>())
         {
             if (inventorySlot.IsArmor)
             {
@@ -13080,7 +13080,7 @@ internal class Game
     public void DisplayPlayerEquippy(int screenRow, int screenCol)
     {
         int column = 0;
-        foreach (BaseInventorySlot inventorySlot in SingletonRepository.InventorySlots.Where(_inventorySlot => _inventorySlot.IsEquipment).OrderBy(_inventorySlot => _inventorySlot.SortOrder))
+        foreach (BaseInventorySlot inventorySlot in SingletonRepository.Get<BaseInventorySlot>().Where(_inventorySlot => _inventorySlot.IsEquipment).OrderBy(_inventorySlot => _inventorySlot.SortOrder))
         {
             foreach (int index in inventorySlot.InventorySlots)
             {
@@ -13130,7 +13130,7 @@ internal class Game
         PanelRowMin = prowMin;
         PanelColMin = pcolMin;
         PanelBoundsCenter();
-        SingletonRepository.FlaggedActions.Get(nameof(UpdateMonstersFlaggedAction)).Set();
+        SingletonRepository.Get<FlaggedAction>(nameof(UpdateMonstersFlaggedAction)).Set();
         RefreshMap.SetChangedFlag(); // TODO: Needs to convert to dependencies in the MapWidget
     }
 
@@ -13163,8 +13163,8 @@ internal class Game
         }
         CheckExperience();
         MaxLevelGained = ExperienceLevel.IntValue;
-        SingletonRepository.FlaggedActions.Get(nameof(PrBasicRedrawActionGroupSetFlaggedAction)).Set();
-        SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
+        SingletonRepository.Get<FlaggedAction>(nameof(PrBasicRedrawActionGroupSetFlaggedAction)).Set();
+        SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
         HandleStuff();
     }
 
@@ -13197,10 +13197,10 @@ internal class Game
         {
             ExperienceLevel.IntValue--;
             MainForm.RefreshMapLocation(MapY.IntValue, MapX.IntValue);
-            SingletonRepository.FlaggedActions.Get(nameof(UpdateHealthFlaggedAction)).Set();
-            SingletonRepository.FlaggedActions.Get(nameof(UpdateManaFlaggedAction)).Set();
-            SingletonRepository.FlaggedActions.Get(nameof(UpdateSpellsFlaggedAction)).Set();
-            SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
+            SingletonRepository.Get<FlaggedAction>(nameof(UpdateHealthFlaggedAction)).Set();
+            SingletonRepository.Get<FlaggedAction>(nameof(UpdateManaFlaggedAction)).Set();
+            SingletonRepository.Get<FlaggedAction>(nameof(UpdateSpellsFlaggedAction)).Set();
+            SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
             HandleStuff();
         }
         while (ExperienceLevel.IntValue < Constants.PyMaxLevel && ExperiencePoints.IntValue >= Constants.PlayerExp[ExperienceLevel.IntValue - 1] * ExperienceMultiplier.IntValue / 100L)
@@ -13228,10 +13228,10 @@ internal class Game
             }
             PlaySound(SoundEffectEnum.LevelGain);
             MsgPrint($"Welcome to level {ExperienceLevel.IntValue}.");
-            SingletonRepository.FlaggedActions.Get(nameof(UpdateHealthFlaggedAction)).Set();
-            SingletonRepository.FlaggedActions.Get(nameof(UpdateManaFlaggedAction)).Set();
-            SingletonRepository.FlaggedActions.Get(nameof(UpdateSpellsFlaggedAction)).Set();
-            SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
+            SingletonRepository.Get<FlaggedAction>(nameof(UpdateHealthFlaggedAction)).Set();
+            SingletonRepository.Get<FlaggedAction>(nameof(UpdateManaFlaggedAction)).Set();
+            SingletonRepository.Get<FlaggedAction>(nameof(UpdateSpellsFlaggedAction)).Set();
+            SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
             HandleStuff();
             if (levelReward)
             {
@@ -13396,14 +13396,14 @@ internal class Game
         {
             AbilityScores[stat].Innate = cur;
             AbilityScores[stat].InnateMax = max;
-            SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
+            SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
         }
         return res;
     }
 
     public string DescribeWieldLocation(int index)
     {
-        BaseInventorySlot inventorySlot = SingletonRepository.InventorySlots.Single(_inventorySlot => _inventorySlot.InventorySlots.Contains(index));
+        BaseInventorySlot inventorySlot = SingletonRepository.Get<BaseInventorySlot>().Single(_inventorySlot => _inventorySlot.InventorySlots.Contains(index));
         return inventorySlot.DescribeWieldLocation(index);
     }
 
@@ -13800,7 +13800,7 @@ internal class Game
         if (AbilityScores[stat].Innate != AbilityScores[stat].InnateMax)
         {
             AbilityScores[stat].Innate = AbilityScores[stat].InnateMax;
-            SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
+            SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
             return true;
         }
         return false;
@@ -13953,7 +13953,7 @@ internal class Game
             return false;
         }
         Disturb(false);
-        SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
+        SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
         HandleStuff();
         return true;
     }
@@ -13973,7 +13973,7 @@ internal class Game
         AbilityScores[ii].Innate = cur2;
         AbilityScores[jj].InnateMax = max1;
         AbilityScores[jj].Innate = cur1;
-        SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
+        SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
     }
 
     public bool SpellOkay(Spell sPtr, bool known)
@@ -14187,7 +14187,7 @@ internal class Game
             {
                 AbilityScores[which].InnateMax = value;
             }
-            SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
+            SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
             return true;
         }
         return false;
@@ -14218,7 +14218,7 @@ internal class Game
             {
                 jPtr.Absorb(oPtr);
                 WeightCarried += oPtr.Count * oPtr.Weight;
-                SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
+                SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
                 return j;
             }
         }
@@ -14265,8 +14265,8 @@ internal class Game
         oPtr.HoldingMonsterIndex = 0;
         WeightCarried += oPtr.Count * oPtr.Weight;
         _invenCnt++;
-        SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
-        SingletonRepository.FlaggedActions.Get(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
+        SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
+        SingletonRepository.Get<FlaggedAction>(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
         return i;
     }
 
@@ -14406,9 +14406,9 @@ internal class Game
         {
             oPtr.Count += num;
             WeightCarried += num * oPtr.Weight;
-            SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
-            SingletonRepository.FlaggedActions.Get(nameof(UpdateManaFlaggedAction)).Set();
-            SingletonRepository.FlaggedActions.Get(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
+            SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
+            SingletonRepository.Get<FlaggedAction>(nameof(UpdateManaFlaggedAction)).Set();
+            SingletonRepository.Get<FlaggedAction>(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
         }
     }
 
@@ -14436,9 +14436,9 @@ internal class Game
         else
         {
             SetInventoryItem(item, null);
-            SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
-            SingletonRepository.FlaggedActions.Get(nameof(UpdateTorchRadiusFlaggedAction)).Set();
-            SingletonRepository.FlaggedActions.Get(nameof(UpdateManaFlaggedAction)).Set();
+            SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
+            SingletonRepository.Get<FlaggedAction>(nameof(UpdateTorchRadiusFlaggedAction)).Set();
+            SingletonRepository.Get<FlaggedAction>(nameof(UpdateManaFlaggedAction)).Set();
         }
     }
 
@@ -14543,7 +14543,7 @@ internal class Game
             options = new ShowInventoryOptions();
         }
 
-        BaseInventorySlot[] inventorySlots = SingletonRepository.InventorySlots
+        BaseInventorySlot[] inventorySlots = SingletonRepository.Get<BaseInventorySlot>()
             .Where(_inventorySlot => inventorySlotPredicate(_inventorySlot))
             .OrderBy(_inventorySlot => _inventorySlot.SortOrder)
             .ToArray();
@@ -17395,7 +17395,7 @@ internal class Game
             MutationsNotPossessed.Add(mutation);
             MsgPrint(mutation.LoseMessage);
         } while (MutationsPossessed.Count > 0);
-        SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
+        SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
         HandleStuff();
     }
 
@@ -17427,7 +17427,7 @@ internal class Game
             return;
         }
         MsgPrint("Oops! Fell out of mutation list!");
-        SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
+        SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
         HandleStuff();
     }
 

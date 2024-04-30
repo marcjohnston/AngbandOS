@@ -22,5 +22,5 @@ internal class NetherBoltMonsterSpell : BoltProjectileMonsterSpell
         return 30 + Game.DiceRoll(5, 5) + (monsterLevel * 3 / 2);
     }
     protected override Projectile Projectile(Game game) => game.SingletonRepository.Projectiles.Get(nameof(NetherProjectile));
-    public override SpellResistantDetection[] SmartLearn => new SpellResistantDetection[] { Game.SingletonRepository.SpellResistantDetections.Get(nameof(NethSpellResistantDetection)), Game.SingletonRepository.SpellResistantDetections.Get(nameof(ReflectSpellResistantDetection)) };
+    public override SpellResistantDetection[] SmartLearn => new SpellResistantDetection[] { Game.SingletonRepository.Get<SpellResistantDetection>(nameof(NethSpellResistantDetection)), Game.SingletonRepository.Get<SpellResistantDetection>(nameof(ReflectSpellResistantDetection)) };
 }

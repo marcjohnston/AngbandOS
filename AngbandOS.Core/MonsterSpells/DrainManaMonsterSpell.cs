@@ -65,7 +65,7 @@ internal class DrainManaMonsterSpell : MonsterSpell
                 }
             }
         }
-        Game.UpdateSmartLearn(monster, base.Game.SingletonRepository.SpellResistantDetections.Get(nameof(SpellResistantDetections.ManaSpellResistantDetection)));
+        Game.UpdateSmartLearn(monster, base.Game.SingletonRepository.Get<SpellResistantDetection>(nameof(ManaSpellResistantDetection)));
     }
 
     public override void ExecuteOnMonster(Monster monster, Monster target)

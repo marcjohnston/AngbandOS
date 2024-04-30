@@ -32,7 +32,7 @@ internal abstract class DiggingWeaponItemFactory : WeaponItemFactory
             item.TypeSpecificValue = 0 - item.TypeSpecificValue;
         }
     }
-    public override BaseInventorySlot BaseWieldSlot => Game.SingletonRepository.InventorySlots.Get(nameof(DiggerInventorySlot));
+    public override BaseInventorySlot BaseWieldSlot => Game.SingletonRepository.Get<BaseInventorySlot>(nameof(DiggerInventorySlot));
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Digging;
     public override int PackSort => 31;
     public override ColorEnum Color => ColorEnum.Grey;

@@ -87,7 +87,7 @@ internal class UseStaffScript : Script, IScript, IRepeatableScript
         // Do the specific effect for the type of staff
         staffItem.UseStaff(useStaffEventArgs);
 
-        Game.SingletonRepository.FlaggedActions.Get(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
+        Game.SingletonRepository.Get<FlaggedAction>(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
         // We might now know what the staff does
         item.ObjectTried();
         if (useStaffEventArgs.Identified && !item.IsFlavorAware())

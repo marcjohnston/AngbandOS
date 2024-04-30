@@ -24,5 +24,5 @@ internal class MagicMissileMonsterSpell : BoltProjectileMonsterSpell
 
     protected override Projectile Projectile(Game game) => game.SingletonRepository.Projectiles.Get(nameof(MissileProjectile));
 
-    public override SpellResistantDetection[] SmartLearn => new SpellResistantDetection[] { Game.SingletonRepository.SpellResistantDetections.Get(nameof(ReflectSpellResistantDetection)) };
+    public override SpellResistantDetection[] SmartLearn => new SpellResistantDetection[] { Game.SingletonRepository.Get<SpellResistantDetection>(nameof(ReflectSpellResistantDetection)) };
 }

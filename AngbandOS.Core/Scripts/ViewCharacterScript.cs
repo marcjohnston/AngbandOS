@@ -66,9 +66,9 @@ internal class ViewCharacterScript : Script, IScript, IRepeatableScript, IScript
         Game.Screen.Restore(savedScreen);
         Game.FullScreenOverlay = false;
         Game.RefreshMap.SetChangedFlag(); // TODO: Needs to convert to dependencies in the MapWidget
-        Game.SingletonRepository.FlaggedActions.Get(nameof(RedrawEquippyFlaggedAction)).Set();
-        Game.SingletonRepository.FlaggedActions.Get(nameof(PrExtraRedrawActionGroupSetFlaggedAction)).Set();
-        Game.SingletonRepository.FlaggedActions.Get(nameof(PrBasicRedrawActionGroupSetFlaggedAction)).Set();
+        Game.SingletonRepository.Get<FlaggedAction>(nameof(RedrawEquippyFlaggedAction)).Set();
+        Game.SingletonRepository.Get<FlaggedAction>(nameof(PrExtraRedrawActionGroupSetFlaggedAction)).Set();
+        Game.SingletonRepository.Get<FlaggedAction>(nameof(PrBasicRedrawActionGroupSetFlaggedAction)).Set();
 
         // Invalidate the main screen.
         Game.MainForm.Invalidate();

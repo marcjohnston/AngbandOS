@@ -21,7 +21,7 @@ internal class StoneskinTimer : Timer
     }
     protected override void Noticed()
     {
-        Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
+        Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
         base.Noticed();
     }
 }

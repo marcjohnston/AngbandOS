@@ -29,7 +29,7 @@ internal class PoisonAttackEffect : AttackEffect
                 obvious = true;
             }
         }
-        Game.UpdateSmartLearn(monster, Game.SingletonRepository.SpellResistantDetections.Get(nameof(PoisSpellResistantDetection)));
+        Game.UpdateSmartLearn(monster, Game.SingletonRepository.Get<SpellResistantDetection>(nameof(PoisSpellResistantDetection)));
     }
     public override void ApplyToMonster(Monster monster, int armorClass, ref int damage, ref Projectile? pt, ref bool blinked)
     {

@@ -29,8 +29,8 @@ internal class ToggleSearchScript : Script, IScript, IRepeatableScript
     public void ExecuteScript()
     {
         Game.IsSearching = !Game.IsSearching;
-        Game.SingletonRepository.FlaggedActions.Get(nameof(RedrawSpeedFlaggedAction)).Set();
-        Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
-        Game.SingletonRepository.FlaggedActions.Get(nameof(RedrawStateFlaggedAction)).Set();
+        Game.SingletonRepository.Get<FlaggedAction>(nameof(RedrawSpeedFlaggedAction)).Set();
+        Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
+        Game.SingletonRepository.Get<FlaggedAction>(nameof(RedrawStateFlaggedAction)).Set();
     }
 }

@@ -41,7 +41,7 @@ internal class RerollHitPointsScript : Script, IScript
         {
             Game.PlayerHp[i] = Game.PlayerHp[i - 1] + Game.PlayerHp[i];
         }
-        Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateHealthFlaggedAction)).Set();
+        Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateHealthFlaggedAction)).Set();
         Game.HandleStuff();
     }
 }

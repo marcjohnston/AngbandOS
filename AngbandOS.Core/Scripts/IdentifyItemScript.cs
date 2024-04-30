@@ -32,8 +32,8 @@ internal class IdentifyItemScript : Script, IScript, ISuccessfulScript
         }
         oPtr.BecomeFlavorAware();
         oPtr.BecomeKnown();
-        Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
-        Game.SingletonRepository.FlaggedActions.Get(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
+        Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
+        Game.SingletonRepository.Get<FlaggedAction>(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
         string oName = oPtr.Description(true, 3);
 
         Game.MsgPrint($"{oPtr.DescribeLocation()}: {oName} ({oPtr.Label}).");

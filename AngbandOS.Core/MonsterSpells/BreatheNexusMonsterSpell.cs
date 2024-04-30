@@ -15,5 +15,5 @@ internal class BreatheNexusMonsterSpell : BreatheProjectileMonsterSpell
     protected override string ElementName => "nexus";
     protected override Projectile Projectile(Game game) => game.SingletonRepository.Projectiles.Get(nameof(NexusProjectile));
     protected override int Damage(Monster monster) => monster.Health / 3 > 250 ? 250 : monster.Health / 3;
-    public override SpellResistantDetection[] SmartLearn => new SpellResistantDetection[] { Game.SingletonRepository.SpellResistantDetections.Get(nameof(NexusSpellResistantDetection)) };
+    public override SpellResistantDetection[] SmartLearn => new SpellResistantDetection[] { Game.SingletonRepository.Get<SpellResistantDetection>(nameof(NexusSpellResistantDetection)) };
 }

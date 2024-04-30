@@ -27,7 +27,7 @@ internal class AlcoholRandomMutation : Mutation
             return;
         }
         Game.Disturb(false);
-        Game.SingletonRepository.FlaggedActions.Get(nameof(PrExtraRedrawActionGroupSetFlaggedAction)).Set();
+        Game.SingletonRepository.Get<FlaggedAction>(nameof(PrExtraRedrawActionGroupSetFlaggedAction)).Set();
         Game.MsgPrint("You feel a SSSCHtupor cOmINg over yOu... *HIC*!");
         if (base.Game.DieRoll(20) == 1)
         {

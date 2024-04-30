@@ -78,7 +78,7 @@ internal class SellScript : Script, IScriptStore
                 oPtr.BecomeFlavorAware();
                 oPtr.BecomeKnown();
             }
-            Game.SingletonRepository.FlaggedActions.Get(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
+            Game.SingletonRepository.Get<FlaggedAction>(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
             qPtr = oPtr.Clone();
             qPtr.Count = amt;
             int value;

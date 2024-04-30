@@ -67,7 +67,7 @@ internal class AlchemyScript : Script, IScript, ICancellableScript
             }
             oPtr.Inscription = feel;
             oPtr.IdentSense = true;
-            Game.SingletonRepository.FlaggedActions.Get(nameof(NoticeCombineFlaggedAction)).Set();
+            Game.SingletonRepository.Get<FlaggedAction>(nameof(NoticeCombineFlaggedAction)).Set();
             return true;
         }
         int price = oPtr.RealValue();

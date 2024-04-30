@@ -162,7 +162,7 @@ internal class TarotDrawScript : Script, IScript
             {
                 Game.MsgPrint("You are cured of all mutations.");
                 Game.LoseAllMutations();
-                Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
+                Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
                 Game.HandleStuff();
             }
         }

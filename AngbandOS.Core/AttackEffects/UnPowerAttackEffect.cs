@@ -19,7 +19,7 @@ internal class UnPowerAttackEffect : AttackEffect
         Game.TakeHit(damage, monsterDescription);
         for (int k = 0; k < 10; k++)
         {
-            BaseInventorySlot packInventorySlot = Game.SingletonRepository.InventorySlots.Get(nameof(PackInventorySlot));
+            BaseInventorySlot packInventorySlot = Game.SingletonRepository.Get<BaseInventorySlot>(nameof(PackInventorySlot));
             int i = packInventorySlot.WeightedRandom.Choose();
             Item? item = Game.GetInventoryItem(i);
             if (item != null && (item.Category == ItemTypeEnum.Staff || item.Category == ItemTypeEnum.Wand) && item.TypeSpecificValue != 0)
@@ -33,7 +33,7 @@ internal class UnPowerAttackEffect : AttackEffect
                     monster.Health = monster.MaxHealth;
                 }
                 item.TypeSpecificValue = 0;
-                Game.SingletonRepository.FlaggedActions.Get(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
+                Game.SingletonRepository.Get<FlaggedAction>(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
                 return;
             }
         }

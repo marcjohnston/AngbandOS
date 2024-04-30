@@ -23,7 +23,7 @@ internal class ConfuseAttackEffect : AttackEffect
                 obvious = true;
             }
         }
-        Game.UpdateSmartLearn(monster, Game.SingletonRepository.SpellResistantDetections.Get(nameof(ConfSpellResistantDetection)));
+        Game.UpdateSmartLearn(monster, Game.SingletonRepository.Get<SpellResistantDetection>(nameof(ConfSpellResistantDetection)));
     }
     public override void ApplyToMonster(Monster monster, int armorClass, ref int damage, ref Projectile? pt, ref bool blinked)
     {

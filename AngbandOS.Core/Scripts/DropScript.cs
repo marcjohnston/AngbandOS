@@ -67,7 +67,7 @@ internal class DropScript : Script, IScript, IRepeatableScript, ISuccessfulScrip
         Game.EnergyUse = 50;
         // Drop it
         Game.InvenDrop(item, amount);
-        Game.SingletonRepository.FlaggedActions.Get(nameof(RedrawEquippyFlaggedAction)).Set();
+        Game.SingletonRepository.Get<FlaggedAction>(nameof(RedrawEquippyFlaggedAction)).Set();
         return true;
     }
 }

@@ -30,7 +30,7 @@ internal class SenseInventoryScript : Script, IScript
         bool detailed = Game.BaseCharacterClass.DetailedSenseInventory;
 
         // Enumerate each of the inventory slots.
-        foreach (BaseInventorySlot inventorySlot in Game.SingletonRepository.InventorySlots)
+        foreach (BaseInventorySlot inventorySlot in Game.SingletonRepository.Get<BaseInventorySlot>())
         {
             // Enumerate each of the items in the inventory slot.
             foreach (int i in inventorySlot)
@@ -70,7 +70,7 @@ internal class SenseInventoryScript : Script, IScript
                 {
                     item.Inscription = qualityRating.Description;
                 }
-                Game.SingletonRepository.FlaggedActions.Get(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
+                Game.SingletonRepository.Get<FlaggedAction>(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
             }
         }
     }

@@ -100,8 +100,8 @@ internal class DestroyScript : Script, IScript, IRepeatableScript, IScriptStore
             }
             item.Inscription = feel;
             item.IdentSense = true;
-            Game.SingletonRepository.FlaggedActions.Get(nameof(NoticeCombineFlaggedAction)).Set();
-            Game.SingletonRepository.FlaggedActions.Get(nameof(RedrawEquippyFlaggedAction)).Set();
+            Game.SingletonRepository.Get<FlaggedAction>(nameof(NoticeCombineFlaggedAction)).Set();
+            Game.SingletonRepository.Get<FlaggedAction>(nameof(RedrawEquippyFlaggedAction)).Set();
             return;
         }
         Game.MsgPrint($"You destroy {itemName}.");

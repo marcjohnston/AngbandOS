@@ -41,7 +41,7 @@ internal class SlowMonsterSpell : MonsterSpell
         {
             Game.SlowTimer.AddTimer(base.Game.RandomLessThan(4) + 4);
         }
-        Game.UpdateSmartLearn(monster, base.Game.SingletonRepository.SpellResistantDetections.Get(nameof(SpellResistantDetections.FreeSpellResistantDetection)));
+        Game.UpdateSmartLearn(monster, base.Game.SingletonRepository.Get<SpellResistantDetection>(nameof(FreeSpellResistantDetection)));
     }
 
     public override void ExecuteOnMonster(Monster monster, Monster target)

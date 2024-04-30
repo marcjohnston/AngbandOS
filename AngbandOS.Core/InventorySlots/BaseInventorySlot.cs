@@ -61,9 +61,9 @@ internal abstract class BaseInventorySlot : IEnumerable<int>, IItemContainer, IG
         {
             oPtr.Count += num;
             Game.WeightCarried += num * oPtr.Weight;
-            Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
-            Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateManaFlaggedAction)).Set();
-            Game.SingletonRepository.FlaggedActions.Get(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
+            Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
+            Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateManaFlaggedAction)).Set();
+            Game.SingletonRepository.Get<FlaggedAction>(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
         }
     }
 
@@ -98,7 +98,7 @@ internal abstract class BaseInventorySlot : IEnumerable<int>, IItemContainer, IG
     [Obsolete("Use InventorySlot.Items WIP")]
     protected int FindInventorySlot(Item oPtr)
     {
-        foreach (BaseInventorySlot inventorySlot in Game.SingletonRepository.InventorySlots)
+        foreach (BaseInventorySlot inventorySlot in Game.SingletonRepository.Get<BaseInventorySlot>())
         {
             foreach (int slot in inventorySlot.InventorySlots)
             {

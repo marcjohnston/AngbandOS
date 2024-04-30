@@ -15,5 +15,5 @@ internal class BreatheSoundMonsterSpell : BreatheProjectileMonsterSpell
     protected override string ElementName => "sound";
     protected override Projectile Projectile(Game game) => game.SingletonRepository.Projectiles.Get(nameof(SoundProjectile));
     protected override int Damage(Monster monster) => monster.Health / 6 > 400 ? 400 : monster.Health / 6;
-    public override SpellResistantDetection[] SmartLearn => new SpellResistantDetection[] { Game.SingletonRepository.SpellResistantDetections.Get(nameof(SoundSpellResistantDetection)) };
+    public override SpellResistantDetection[] SmartLearn => new SpellResistantDetection[] { Game.SingletonRepository.Get<SpellResistantDetection>(nameof(SoundSpellResistantDetection)) };
 }

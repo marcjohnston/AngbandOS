@@ -339,7 +339,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                 Game.HasSustainCharisma = true;
             }
         }
-        foreach (BaseInventorySlot inventorySlot in Game.SingletonRepository.InventorySlots.Where(_inventorySlot => _inventorySlot.IsEquipment))
+        foreach (BaseInventorySlot inventorySlot in Game.SingletonRepository.Get<BaseInventorySlot>().Where(_inventorySlot => _inventorySlot.IsEquipment))
         {
             foreach (int i in inventorySlot.InventorySlots)
             {
@@ -617,7 +617,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         }
         if ((Game.BaseCharacterClass.ID == CharacterClass.Monk || Game.BaseCharacterClass.ID == CharacterClass.Mystic) && !Game.MartialArtistHeavyArmor())
         {
-            foreach (BaseInventorySlot inventorySlot in Game.SingletonRepository.InventorySlots)
+            foreach (BaseInventorySlot inventorySlot in Game.SingletonRepository.Get<BaseInventorySlot>())
             {
                 if (inventorySlot.Count == 0)
                 {
@@ -639,7 +639,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
             if (Game.AbilityScores[i].AdjustedMax != top)
             {
                 Game.AbilityScores[i].AdjustedMax = top;
-                Game.SingletonRepository.FlaggedActions.Get(nameof(RedrawStatsFlaggedAction)).Set();
+                Game.SingletonRepository.Get<FlaggedAction>(nameof(RedrawStatsFlaggedAction)).Set();
             }
             int use = Game.AbilityScores[i]
                 .ModifyStatValue(Game.AbilityScores[i].Innate, Game.AbilityScores[i].Bonus);
@@ -653,7 +653,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
             if (Game.AbilityScores[i].Adjusted != use)
             {
                 Game.AbilityScores[i].Adjusted = use;
-                Game.SingletonRepository.FlaggedActions.Get(nameof(RedrawStatsFlaggedAction)).Set();
+                Game.SingletonRepository.Get<FlaggedAction>(nameof(RedrawStatsFlaggedAction)).Set();
             }
             if (use <= 18)
             {
@@ -672,30 +672,30 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                 Game.AbilityScores[i].TableIndex = ind;
                 if (i == Ability.Constitution)
                 {
-                    Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateHealthFlaggedAction)).Set();
+                    Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateHealthFlaggedAction)).Set();
                 }
                 else if (i == Ability.Intelligence)
                 {
                     if (Game.BaseCharacterClass.SpellStat == Ability.Intelligence)
                     {
-                        Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateManaFlaggedAction)).Set();
-                        Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateSpellsFlaggedAction)).Set();
+                        Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateManaFlaggedAction)).Set();
+                        Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateSpellsFlaggedAction)).Set();
                     }
                 }
                 else if (i == Ability.Wisdom)
                 {
                     if (Game.BaseCharacterClass.SpellStat == Ability.Wisdom)
                     {
-                        Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateManaFlaggedAction)).Set();
-                        Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateSpellsFlaggedAction)).Set();
+                        Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateManaFlaggedAction)).Set();
+                        Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateSpellsFlaggedAction)).Set();
                     }
                 }
                 else if (i == Ability.Charisma)
                 {
                     if (Game.BaseCharacterClass.SpellStat == Ability.Charisma)
                     {
-                        Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateManaFlaggedAction)).Set();
-                        Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateSpellsFlaggedAction)).Set();
+                        Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateManaFlaggedAction)).Set();
+                        Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateSpellsFlaggedAction)).Set();
                     }
                 }
             }
@@ -783,11 +783,11 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         }
         if (Game.HasTelepathy != oldTelepathy)
         {
-            Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateMonstersFlaggedAction)).Set();
+            Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateMonstersFlaggedAction)).Set();
         }
         if (Game.HasSeeInvisibility != oldSeeInv)
         {
-            Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateMonstersFlaggedAction)).Set();
+            Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateMonstersFlaggedAction)).Set();
         }
         int j = Game.WeightCarried;
 
@@ -808,7 +808,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         }
         if (Game.Speed.IntValue != oldSpeed)
         {
-            Game.SingletonRepository.FlaggedActions.Get(nameof(RedrawSpeedFlaggedAction)).Set();
+            Game.SingletonRepository.Get<FlaggedAction>(nameof(RedrawSpeedFlaggedAction)).Set();
         }
         Game.ArmorClassBonus += Game.AbilityScores[Ability.Dexterity].DexArmorClassBonus;
         Game.DamageBonus += Game.AbilityScores[Ability.Strength].StrDamageBonus;
@@ -819,7 +819,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         Game.DisplayedAttackBonus += Game.AbilityScores[Ability.Dexterity].DexAttackBonus;
         Game.DisplayedAttackBonus += Game.AbilityScores[Ability.Strength].StrAttackBonus;
         int hold = Game.AbilityScores[Ability.Strength].StrMaxWeaponWeight;
-        foreach (BaseInventorySlot rangedWeaponInventorySlot in Game.SingletonRepository.InventorySlots.Where(_inventorySlot => _inventorySlot.IsRangedWeapon))
+        foreach (BaseInventorySlot rangedWeaponInventorySlot in Game.SingletonRepository.Get<BaseInventorySlot>().Where(_inventorySlot => _inventorySlot.IsRangedWeapon))
         {
             foreach (int index in rangedWeaponInventorySlot.InventorySlots)
             {
@@ -871,7 +871,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
             }
         }
 
-        foreach (BaseInventorySlot meleeWeaponInventorySlot in Game.SingletonRepository.InventorySlots.Where(_inventorySlot => _inventorySlot.IsMeleeWeapon))
+        foreach (BaseInventorySlot meleeWeaponInventorySlot in Game.SingletonRepository.Get<BaseInventorySlot>().Where(_inventorySlot => _inventorySlot.IsMeleeWeapon))
         {
             foreach (int index in meleeWeaponInventorySlot.InventorySlots)
             {
@@ -1027,7 +1027,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
             {
                 Game.MsgPrint("You have trouble wielding such a heavy bow.");
             }
-            else if (Game.SingletonRepository.InventorySlots.Get(nameof(RangedWeaponInventorySlot)).Count > 0)
+            else if (Game.SingletonRepository.Get<BaseInventorySlot>(nameof(RangedWeaponInventorySlot)).Count > 0)
             {
                 Game.MsgPrint("You have no trouble wielding your bow.");
             }
@@ -1043,7 +1043,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
             {
                 Game.MsgPrint("You have trouble wielding such a heavy weapon.");
             }
-            else if (Game.SingletonRepository.InventorySlots.Get(nameof(MeleeWeaponInventorySlot)).Count > 0)
+            else if (Game.SingletonRepository.Get<BaseInventorySlot>(nameof(MeleeWeaponInventorySlot)).Count > 0)
             {
                 Game.MsgPrint("You have no trouble wielding your weapon.");
             }

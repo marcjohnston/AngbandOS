@@ -29,7 +29,7 @@ internal class FireItemScript : Script, IScript, IRepeatableScript
     public void ExecuteScript()
     {
         // Check that we're actually wielding a ranged weapon
-        RangedWeaponInventorySlot rangedWeaponInventorySlot = (RangedWeaponInventorySlot)Game.SingletonRepository.InventorySlots.Get(nameof(RangedWeaponInventorySlot));
+        RangedWeaponInventorySlot rangedWeaponInventorySlot = (RangedWeaponInventorySlot)Game.SingletonRepository.Get<BaseInventorySlot>(nameof(RangedWeaponInventorySlot));
         WeightedRandom<int> weightedRandom = rangedWeaponInventorySlot.WeightedRandom;
         Item? missileWeapon = Game.GetInventoryItem(weightedRandom.ChooseOrDefault());
         if (missileWeapon == null || missileWeapon.Category == 0)

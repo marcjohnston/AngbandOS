@@ -15,5 +15,5 @@ internal class BreatheShardsMonsterSpell : BreatheProjectileMonsterSpell
     protected override string ElementName => "shards";
     protected override Projectile Projectile(Game game) => game.SingletonRepository.Projectiles.Get(nameof(ExplodeProjectile));
     protected override int Damage(Monster monster) => monster.Health / 6 > 400 ? 400 : monster.Health / 6;
-    public override SpellResistantDetection[] SmartLearn => new SpellResistantDetection[] { Game.SingletonRepository.SpellResistantDetections.Get(nameof(ShardSpellResistantDetection)) };
+    public override SpellResistantDetection[] SmartLearn => new SpellResistantDetection[] { Game.SingletonRepository.Get<SpellResistantDetection>(nameof(ShardSpellResistantDetection)) };
 }

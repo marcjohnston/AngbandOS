@@ -68,7 +68,7 @@ internal class ReadScrollScript : Script, IScript, IRepeatableScript
         ReadScrollEvent readScrollEventArgs = new ReadScrollEvent();
         scrollItem.Read(readScrollEventArgs);
 
-        Game.SingletonRepository.FlaggedActions.Get(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
+        Game.SingletonRepository.Get<FlaggedAction>(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
         // We might have just identified the scroll
         item.ObjectTried();
         if (readScrollEventArgs.Identified && !item.IsFlavorAware())

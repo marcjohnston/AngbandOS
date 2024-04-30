@@ -82,7 +82,7 @@ internal abstract class Town : IGetKey
         List<StoreFactory> storeFactoryList = new List<StoreFactory>();
         foreach (string storeName in StoreFactoryNames)
         {
-            storeFactoryList.Add(Game.SingletonRepository.StoreFactories.Get(storeName));
+            storeFactoryList.Add(Game.SingletonRepository.Get<StoreFactory>(storeName));
         }
         StoreFactories = storeFactoryList.ToArray();
 

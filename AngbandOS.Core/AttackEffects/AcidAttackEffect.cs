@@ -18,7 +18,7 @@ internal class AcidAttackEffect : AttackEffect
         obvious = true;
         Game.MsgPrint("You are covered in acid!");
         Game.AcidDam(damage, monsterDescription);
-        Game.UpdateSmartLearn(monster, Game.SingletonRepository.SpellResistantDetections.Get(nameof(AcidSpellResistantDetection)));
+        Game.UpdateSmartLearn(monster, Game.SingletonRepository.Get<SpellResistantDetection>(nameof(AcidSpellResistantDetection)));
     }
     public override void ApplyToMonster(Monster monster, int armorClass, ref int damage, ref Projectile? pt, ref bool blinked)
     {

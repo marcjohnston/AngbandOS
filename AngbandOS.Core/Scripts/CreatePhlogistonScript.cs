@@ -18,7 +18,7 @@ internal class CreatePhlogistonScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        LightsourceInventorySlot lightsourceInventorySlot = (LightsourceInventorySlot)Game.SingletonRepository.InventorySlots.Get(nameof(LightsourceInventorySlot));
+        LightsourceInventorySlot lightsourceInventorySlot = (LightsourceInventorySlot)Game.SingletonRepository.Get<BaseInventorySlot>(nameof(LightsourceInventorySlot));
         Item? item = Game.GetInventoryItem(lightsourceInventorySlot.WeightedRandom.ChooseOrDefault());
         if (item == null)
         {
@@ -59,6 +59,6 @@ internal class CreatePhlogistonScript : Script, IScript
         }
 
         // We need to update our light after this
-        Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateTorchRadiusFlaggedAction)).Set();
+        Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateTorchRadiusFlaggedAction)).Set();
     }
 }

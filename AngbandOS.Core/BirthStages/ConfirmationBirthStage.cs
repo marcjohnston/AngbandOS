@@ -22,7 +22,7 @@ internal class ConfirmationBirthStage : BirthStage
         Game.RefreshGods();
 
         Game.Talents = new List<Talent>();
-        foreach (Talent talent in Game.SingletonRepository.Talents)
+        foreach (Talent talent in Game.SingletonRepository.Get<Talent>())
         {
             Game.Talents.Add(talent);
         }
@@ -48,8 +48,8 @@ internal class ConfirmationBirthStage : BirthStage
         Game.SpellOrder.Clear();
 
         Game.GooPatron = Game.SingletonRepository.ToWeightedRandom<Patron>().ChooseOrDefault();
-        Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateHealthFlaggedAction)).Set();
-        Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
+        Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateHealthFlaggedAction)).Set();
+        Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
         Game.UpdateStuff();
         Game.Health.IntValue = Game.MaxHealth.IntValue;
         Game.Mana.IntValue = Game.MaxMana.IntValue;

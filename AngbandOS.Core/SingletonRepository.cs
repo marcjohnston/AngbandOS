@@ -35,8 +35,6 @@ internal class SingletonRepository
     public UnreadableFlavorSyllablesRepository UnreadableFlavorSyllables;
     public WorshipPlayerAttacksRepository WorshipPlayerAttacks;
 
-    public FlaggedActionsRepository FlaggedActions;
-    public InventorySlotsRepository InventorySlots;
     public ItemFactoriesRepository ItemFactories;
     public ItemFiltersRepository ItemFilters;
     public ItemQualityRatingsRepository ItemQualityRatings;
@@ -45,11 +43,7 @@ internal class SingletonRepository
     public MonsterFiltersRepository MonsterFilters;
     public MonsterSpellsRepository MonsterSpells;
     public ProjectilesRepository Projectiles;
-    public RacesRepository Races;
     public RareItemsRepository RareItems;
-    public SpellResistantDetectionsRepository SpellResistantDetections;
-    public StoreFactoriesRepository StoreFactories;
-    public TalentsRepository Talents;
 
     private Dictionary<string, GenericRepository> _repositoryDictionary = new Dictionary<string, GenericRepository>();
 
@@ -452,12 +446,10 @@ internal class SingletonRepository
 
         // Create all of the repositories.  All of the repositories will be empty and have an instance to the save game.
         ElvishText = AddRepository<ElvishTextRepository>(new ElvishTextRepository(Game));
-        FlaggedActions = AddRepository<FlaggedActionsRepository>(new FlaggedActionsRepository(Game));
         FunnyComments = AddRepository<FunnyCommentsRepository>(new FunnyCommentsRepository(Game));
         FunnyDescriptions = AddRepository<FunnyDescriptionsRepository>(new FunnyDescriptionsRepository(Game));
         HorrificDescriptions = AddRepository<HorrificDescriptionsRepository>(new HorrificDescriptionsRepository(Game));
         InsultPlayerAttacks = AddRepository<InsultPlayerAttacksRepository>(new InsultPlayerAttacksRepository(Game));
-        InventorySlots = AddRepository<InventorySlotsRepository>(new InventorySlotsRepository(Game));
         ItemFactories = AddRepository<ItemFactoriesRepository>(new ItemFactoriesRepository(Game));
         ItemFilters = AddRepository<ItemFiltersRepository>(new ItemFiltersRepository(Game));
         ItemQualityRatings = AddRepository<ItemQualityRatingsRepository>(new ItemQualityRatingsRepository(Game));
@@ -467,7 +459,6 @@ internal class SingletonRepository
         MonsterFilters = AddRepository<MonsterFiltersRepository>(new MonsterFiltersRepository(Game));
         MonsterSpells = AddRepository<MonsterSpellsRepository>(new MonsterSpellsRepository(Game));
         Projectiles = AddRepository<ProjectilesRepository>(new ProjectilesRepository(Game));
-        Races = AddRepository<RacesRepository>(new RacesRepository(Game));
         RareItems = AddRepository<RareItemsRepository>(new RareItemsRepository(Game));
         ShopkeeperAcceptedComments = AddRepository<ShopkeeperAcceptedCommentsRepository>(new ShopkeeperAcceptedCommentsRepository(Game));
         ShopkeeperBargainComments = AddRepository<ShopkeeperBargainCommentsRepository>(new ShopkeeperBargainCommentsRepository(Game));
@@ -475,9 +466,6 @@ internal class SingletonRepository
         ShopkeeperLessThanGuessComments = AddRepository<ShopkeeperLessThanGuessCommentsRepository>(new ShopkeeperLessThanGuessCommentsRepository(Game));
         ShopkeeperWorthlessComments = AddRepository<ShopkeeperWorthlessCommentsRepository>(new ShopkeeperWorthlessCommentsRepository(Game));
         SingingPlayerAttacks = AddRepository<SingingPlayerAttacksRepository>(new SingingPlayerAttacksRepository(Game));
-        SpellResistantDetections = AddRepository<SpellResistantDetectionsRepository>(new SpellResistantDetectionsRepository(Game));
-        StoreFactories = AddRepository<StoreFactoriesRepository>(new StoreFactoriesRepository(Game));
-        Talents = AddRepository<TalentsRepository>(new TalentsRepository(Game));
         UnreadableFlavorSyllables = AddRepository<UnreadableFlavorSyllablesRepository>(new UnreadableFlavorSyllablesRepository(Game));
         WorshipPlayerAttacks = AddRepository<WorshipPlayerAttacksRepository>(new WorshipPlayerAttacksRepository(Game));
 

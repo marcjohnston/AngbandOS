@@ -32,8 +32,8 @@ internal class RestInRoomScript : Script, IScript
             Game.MsgPrint("You eat a hearty breakfast.");
         }
         Game.DecayFavour();
-        Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateHealthFlaggedAction)).Set();
-        Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateManaFlaggedAction)).Set();
+        Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateHealthFlaggedAction)).Set();
+        Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateManaFlaggedAction)).Set();
         Game.SetFood(Constants.PyFoodMax - 1);
         foreach (Town town in Game.SingletonRepository.Get<Town>())
         {

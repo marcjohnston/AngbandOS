@@ -23,7 +23,7 @@ internal class HallucinationsTimer : Timer
     protected override void Noticed()
     {
         Game.RefreshMap.SetChangedFlag(); // TODO: Needs to convert to dependencies in the MapWidget
-        Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateMonstersFlaggedAction)).Set();
+        Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateMonstersFlaggedAction)).Set();
         base.Noticed();
     }
 }

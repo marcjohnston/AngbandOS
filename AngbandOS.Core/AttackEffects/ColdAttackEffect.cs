@@ -18,7 +18,7 @@ internal class ColdAttackEffect : AttackEffect
         obvious = true;
         Game.MsgPrint("You are covered with frost!");
         Game.ColdDam(damage, monsterDescription);
-        Game.UpdateSmartLearn(monster, Game.SingletonRepository.SpellResistantDetections.Get(nameof(ColdSpellResistantDetection)));
+        Game.UpdateSmartLearn(monster, Game.SingletonRepository.Get<SpellResistantDetection>(nameof(ColdSpellResistantDetection)));
     }
     public override void ApplyToMonster(Monster monster, int armorClass, ref int damage, ref Projectile? pt, ref bool blinked)
     {

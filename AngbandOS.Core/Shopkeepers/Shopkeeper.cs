@@ -49,7 +49,7 @@ internal abstract class Shopkeeper : IGetKey
         }
         else
         {
-            OwnerRace = Game.SingletonRepository.Races.Get(RaceName);
+            OwnerRace = Game.SingletonRepository.Get<Race>(RaceName);
         }
     }
 

@@ -269,7 +269,7 @@ internal class RenderCharacterScript : Script, IScript, IRepeatableScript
         int col = statCol + 44;
         Game.Screen.Print(ColorEnum.Blue, "abcdefghijklm@", row - 1, col);
         Game.Screen.Print(ColorEnum.Blue, "Modifications", row + 6, col);
-        foreach (BaseInventorySlot inventorySlot in Game.SingletonRepository.InventorySlots.Where(_inventorySlot => _inventorySlot.IsEquipment))
+        foreach (BaseInventorySlot inventorySlot in Game.SingletonRepository.Get<BaseInventorySlot>().Where(_inventorySlot => _inventorySlot.IsEquipment))
         {
             foreach (int i in inventorySlot.InventorySlots)
             {
@@ -346,7 +346,7 @@ internal class RenderCharacterScript : Script, IScript, IRepeatableScript
     {
         int showTohit = Game.DisplayedAttackBonus;
         int showTodam = Game.DisplayedDamageBonus;
-        MeleeWeaponInventorySlot meeleeWeaponInventorySlot = (MeleeWeaponInventorySlot)Game.SingletonRepository.InventorySlots.Get(nameof(MeleeWeaponInventorySlot));
+        MeleeWeaponInventorySlot meeleeWeaponInventorySlot = (MeleeWeaponInventorySlot)Game.SingletonRepository.Get<BaseInventorySlot>(nameof(MeleeWeaponInventorySlot));
         Item? item = Game.GetInventoryItem(meeleeWeaponInventorySlot.WeightedRandom.ChooseOrDefault());
         // Only show bonuses if we know them
         if (item != null && item.IsKnown())
@@ -420,7 +420,7 @@ internal class RenderCharacterScript : Script, IScript, IRepeatableScript
     /// </summary>
     private void DisplayPlayerSkills()
     {
-        MeleeWeaponInventorySlot meeleeWeaponInventorySlot = (MeleeWeaponInventorySlot)Game.SingletonRepository.InventorySlots.Get(nameof(MeleeWeaponInventorySlot));
+        MeleeWeaponInventorySlot meeleeWeaponInventorySlot = (MeleeWeaponInventorySlot)Game.SingletonRepository.Get<BaseInventorySlot>(nameof(MeleeWeaponInventorySlot));
         int index = meeleeWeaponInventorySlot.WeightedRandom.ChooseOrDefault();
         Item? meeleeItem = Game.GetInventoryItem(index);
 
@@ -441,7 +441,7 @@ internal class RenderCharacterScript : Script, IScript, IRepeatableScript
             }
         }
 
-        RangedWeaponInventorySlot rangedWeaponInventorySlot = (RangedWeaponInventorySlot)Game.SingletonRepository.InventorySlots.Get(nameof(RangedWeaponInventorySlot));
+        RangedWeaponInventorySlot rangedWeaponInventorySlot = (RangedWeaponInventorySlot)Game.SingletonRepository.Get<BaseInventorySlot>(nameof(RangedWeaponInventorySlot));
         Item? rangedItem = Game.GetInventoryItem(rangedWeaponInventorySlot.WeightedRandom.ChooseOrDefault());
         int shooting = Game.SkillRanged + (Game.AttackBonus * Constants.BthPlusAdj);
         if (rangedItem != null)

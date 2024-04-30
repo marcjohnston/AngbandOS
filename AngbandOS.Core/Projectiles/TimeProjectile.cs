@@ -115,7 +115,7 @@ internal class TimeProjectile : Projectile
                         {
                             Game.AbilityScores[k].Innate = 3;
                         }
-                        Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
+                        Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
                         break;
                     }
                 case 10:
@@ -129,7 +129,7 @@ internal class TimeProjectile : Projectile
                                 Game.AbilityScores[k].Innate = 3;
                             }
                         }
-                        Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
+                        Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
                         break;
                     }
             }

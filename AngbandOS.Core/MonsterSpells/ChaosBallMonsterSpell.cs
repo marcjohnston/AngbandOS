@@ -29,5 +29,5 @@ internal class ChaosBallMonsterSpell : BallProjectileMonsterSpell
         return (monsterLevel * 2) + Game.DiceRoll(10, 10);
     }
     protected override int Radius => 4;
-    public override SpellResistantDetection[] SmartLearn => new SpellResistantDetection[] { Game.SingletonRepository.SpellResistantDetections.Get(nameof(ChaosSpellResistantDetection)) };
+    public override SpellResistantDetection[] SmartLearn => new SpellResistantDetection[] { Game.SingletonRepository.Get<SpellResistantDetection>(nameof(ChaosSpellResistantDetection)) };
 }

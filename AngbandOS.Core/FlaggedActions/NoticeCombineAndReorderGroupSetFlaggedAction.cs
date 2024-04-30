@@ -14,8 +14,8 @@ internal class NoticeCombineAndReorderGroupSetFlaggedAction : GroupSetFlaggedAct
     public override void Bind()
     {
         RedrawActions = new FlaggedAction[] {
-            Game.SingletonRepository.FlaggedActions.Get(nameof(NoticeCombineFlaggedAction)),
-            Game.SingletonRepository.FlaggedActions.Get(nameof(NoticeReorderFlaggedAction))
+            Game.SingletonRepository.Get<FlaggedAction>(nameof(NoticeCombineFlaggedAction)),
+            Game.SingletonRepository.Get<FlaggedAction>(nameof(NoticeReorderFlaggedAction))
         };
     }
 }

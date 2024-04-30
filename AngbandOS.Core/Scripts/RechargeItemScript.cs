@@ -78,7 +78,7 @@ internal class RechargeItemScript : Script, IScript, ISuccessfulScriptInt
                 oPtr.IdentEmpty = false;
             }
         }
-        Game.SingletonRepository.FlaggedActions.Get(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
+        Game.SingletonRepository.Get<FlaggedAction>(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
         return true;
     }
 

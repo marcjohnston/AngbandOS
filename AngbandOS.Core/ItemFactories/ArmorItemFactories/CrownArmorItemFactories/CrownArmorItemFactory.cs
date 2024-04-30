@@ -107,7 +107,7 @@ internal abstract class CrownArmorItemFactory : ArmorItemFactory
             }
         }
     }
-    public override BaseInventorySlot BaseWieldSlot => Game.SingletonRepository.InventorySlots.Get(nameof(HeadInventorySlot));
+    public override BaseInventorySlot BaseWieldSlot => Game.SingletonRepository.Get<BaseInventorySlot>(nameof(HeadInventorySlot));
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Crown;
     public override bool HatesAcid => true;
 

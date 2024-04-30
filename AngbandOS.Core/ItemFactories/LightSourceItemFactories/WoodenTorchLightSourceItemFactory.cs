@@ -109,7 +109,7 @@ internal class WoodenTorchLightSourceItemFactory : LightSourceItemFactory
         fuelSource.ItemIncrease(-1);
         fuelSource.ItemDescribe();
         fuelSource.ItemOptimize();
-        Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateTorchRadiusFlaggedAction)).Set();
+        Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateTorchRadiusFlaggedAction)).Set();
     }
 
     /// <summary>

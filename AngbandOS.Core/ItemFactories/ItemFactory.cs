@@ -663,7 +663,7 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey
     /// <summary>
     /// Returns the inventory slot where the item is wielded.  Returns the pack, by default.
     /// </summary>
-    public virtual BaseInventorySlot BaseWieldSlot => Game.SingletonRepository.InventorySlots.Get(nameof(PackInventorySlot));
+    public virtual BaseInventorySlot BaseWieldSlot => Game.SingletonRepository.Get<BaseInventorySlot>(nameof(PackInventorySlot));
 
     /// <summary>
     /// Returns true, if items of this type are stompable (based on the known "feeling" of (Broken, Average, Good & Excellent)).

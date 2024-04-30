@@ -18,7 +18,7 @@ internal class UpdateTorchRadiusFlaggedAction : FlaggedAction
     protected override void Execute()
     {
         Game.LightLevel = 0;
-        foreach (BaseInventorySlot inventorySlot in Game.SingletonRepository.InventorySlots.Where(_inventorySlot => _inventorySlot.IsEquipment))
+        foreach (BaseInventorySlot inventorySlot in Game.SingletonRepository.Get<BaseInventorySlot>().Where(_inventorySlot => _inventorySlot.IsEquipment))
         {
             foreach (int i in inventorySlot.InventorySlots)
             {
@@ -39,8 +39,8 @@ internal class UpdateTorchRadiusFlaggedAction : FlaggedAction
         }
         if (OldLightLevel != Game.LightLevel)
         {
-            Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateLightFlaggedAction)).Set();
-            Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateMonstersFlaggedAction)).Set();
+            Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateLightFlaggedAction)).Set();
+            Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateMonstersFlaggedAction)).Set();
             OldLightLevel = Game.LightLevel;
         }
     }

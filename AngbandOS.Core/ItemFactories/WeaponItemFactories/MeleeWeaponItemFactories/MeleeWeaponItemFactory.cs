@@ -19,7 +19,7 @@ internal abstract class MeleeWeaponItemFactory : WeaponItemFactory
     public override int WieldSlot => InventorySlot.MeleeWeapon;
 
     public MeleeWeaponItemFactory(Game game) : base(game) { }
-    public override BaseInventorySlot BaseWieldSlot => Game.SingletonRepository.InventorySlots.Get(nameof(MeleeWeaponInventorySlot));
+    public override BaseInventorySlot BaseWieldSlot => Game.SingletonRepository.Get<BaseInventorySlot>(nameof(MeleeWeaponInventorySlot));
     public override bool GetsDamageMultiplier => true;
 
     protected virtual bool CanBeWeaponOfLaw => false;

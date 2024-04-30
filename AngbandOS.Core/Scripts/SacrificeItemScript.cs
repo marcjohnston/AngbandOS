@@ -90,8 +90,8 @@ internal class SacrificeItemScript : Script, IScriptStore
         {
             Game.MsgPrint($"{deityName} is delighted by your sacrifice!");
         }
-        Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateHealthFlaggedAction)).Set();
-        Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateManaFlaggedAction)).Set();
+        Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateHealthFlaggedAction)).Set();
+        Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateManaFlaggedAction)).Set();
     }
 
     private God? GetDestinationTown()

@@ -35,7 +35,7 @@ internal abstract class DragonScaleMailArmorItemFactory : ArmorItemFactory
 
     public DragonScaleMailArmorItemFactory(Game game) : base(game) { }
     public override ItemClass ItemClass => Game.SingletonRepository.Get<ItemClass>(nameof(DragonScaleMailsItemClass));
-    public override BaseInventorySlot BaseWieldSlot => Game.SingletonRepository.InventorySlots.Get(nameof(OnBodyInventorySlot));
+    public override BaseInventorySlot BaseWieldSlot => Game.SingletonRepository.Get<BaseInventorySlot>(nameof(OnBodyInventorySlot));
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.DragArmor;
     public override int PackSort => 19;
     public override bool HatesAcid => true;

@@ -79,8 +79,8 @@ internal class RestInPlaceScript : Script, IScript, IRepeatableScript
         Game.EnergyUse = 100;
         Game.Resting = Game.CommandArgument;
         Game.IsSearching = false;
-        Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
-        Game.SingletonRepository.FlaggedActions.Get(nameof(RedrawStateFlaggedAction)).Set();
+        Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
+        Game.SingletonRepository.Get<FlaggedAction>(nameof(RedrawStateFlaggedAction)).Set();
         Game.HandleStuff();
         Game.UpdateScreen();
         return true; // This can and should repeated.

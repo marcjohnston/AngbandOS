@@ -93,7 +93,7 @@ internal class WieldScript : Script, IScript, IRepeatableScript, IScriptStore
         Game.WeightCarried += wornItem.Weight;
 
         // Inform us what we did
-        BaseInventorySlot inventorySlot = Game.SingletonRepository.InventorySlots.Single(_inventorySlot => _inventorySlot.InventorySlots.Contains(slot));
+        BaseInventorySlot inventorySlot = Game.SingletonRepository.Get<BaseInventorySlot>().Single(_inventorySlot => _inventorySlot.InventorySlots.Contains(slot));
         string wieldPhrase = inventorySlot.WieldPhrase;
         string itemName = wornItem.Description(true, 3);
         Game.MsgPrint($"{wieldPhrase} {itemName} ({slot.IndexToLabel()}).");
@@ -103,9 +103,9 @@ internal class WieldScript : Script, IScript, IRepeatableScript, IScriptStore
             Game.MsgPrint("Oops! It feels deathly cold!");
             wornItem.IdentSense = true;
         }
-        Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
-        Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateTorchRadiusFlaggedAction)).Set();
-        Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateManaFlaggedAction)).Set();
-        Game.SingletonRepository.FlaggedActions.Get(nameof(RedrawEquippyFlaggedAction)).Set();
+        Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
+        Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateTorchRadiusFlaggedAction)).Set();
+        Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateManaFlaggedAction)).Set();
+        Game.SingletonRepository.Get<FlaggedAction>(nameof(RedrawEquippyFlaggedAction)).Set();
     }
 }

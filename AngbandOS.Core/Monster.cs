@@ -657,7 +657,7 @@ internal class Monster : IItemContainer
         }
         this.Game.MsgPrint("The exposure to eldritch forces warps you.");
         Game.RunScript(nameof(GainMutationScript));
-        this.Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
+        this.Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
         this.Game.HandleStuff();
     }
 
@@ -1318,10 +1318,10 @@ internal class Monster : IItemContainer
         // Update the view if necessary
         if (doView)
         {
-            Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateScentFlaggedAction)).Set();
-            Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateMonstersFlaggedAction)).Set();
-            Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateLightFlaggedAction)).Set();
-            Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateViewFlaggedAction)).Set();
+            Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateScentFlaggedAction)).Set();
+            Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateMonstersFlaggedAction)).Set();
+            Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateLightFlaggedAction)).Set();
+            Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateViewFlaggedAction)).Set();
         }
         // If we did something unusual and the player saw, let them remember we can do that
         if (IsVisible)

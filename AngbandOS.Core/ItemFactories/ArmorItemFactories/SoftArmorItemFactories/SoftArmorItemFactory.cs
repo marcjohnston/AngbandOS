@@ -38,7 +38,7 @@ internal abstract class SoftArmorItemFactory : ArmorItemFactory
 
     public SoftArmorItemFactory(Game game) : base(game) { }
     public override ItemClass ItemClass => Game.SingletonRepository.Get<ItemClass>(nameof(SoftArmorsItemClass));
-    public override BaseInventorySlot BaseWieldSlot => Game.SingletonRepository.InventorySlots.Get(nameof(OnBodyInventorySlot));
+    public override BaseInventorySlot BaseWieldSlot => Game.SingletonRepository.Get<BaseInventorySlot>(nameof(OnBodyInventorySlot));
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.SoftArmor;
     public override int PackSort => 21;
     public override bool HatesFire => true;

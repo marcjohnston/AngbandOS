@@ -18,7 +18,7 @@ internal class DetCurseActiveMutation : Mutation
             return;
         }
 
-        foreach (BaseInventorySlot inventorySlot in Game.SingletonRepository.InventorySlots)
+        foreach (BaseInventorySlot inventorySlot in Game.SingletonRepository.Get<BaseInventorySlot>())
         {
             foreach (int slot in inventorySlot.InventorySlots)
             {

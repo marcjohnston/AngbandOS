@@ -30,8 +30,8 @@ internal class IdentifyItemFullyScript : Script, IScript, ISuccessfulScript
         oPtr.BecomeFlavorAware();
         oPtr.BecomeKnown();
         oPtr.IdentMental = true;
-        Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
-        Game.SingletonRepository.FlaggedActions.Get(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
+        Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
+        Game.SingletonRepository.Get<FlaggedAction>(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
         Game.HandleStuff();
         string oName = oPtr.Description(true, 3);
 

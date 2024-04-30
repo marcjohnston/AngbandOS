@@ -21,7 +21,7 @@ internal class UpdateLightFlaggedAction : FlaggedAction
     {
         if (Game.LightLevel <= 0)
         {
-            Game.SingletonRepository.FlaggedActions.Get(nameof(RemoveLightFlaggedAction)).Check(true);
+            Game.SingletonRepository.Get<FlaggedAction>(nameof(RemoveLightFlaggedAction)).Check(true);
             Game.MainForm.RefreshMapLocation(Game.MapY.IntValue, Game.MapX.IntValue);
             return;
         }

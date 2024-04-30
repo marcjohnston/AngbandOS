@@ -35,7 +35,7 @@ internal abstract class AmuletJeweleryItemFactory : JewelleryItemFactory, IFlavo
     }
 
     public override ItemClass ItemClass => Game.SingletonRepository.Get<ItemClass>(nameof(AmuletsItemClass));
-    public override BaseInventorySlot BaseWieldSlot => Game.SingletonRepository.InventorySlots.Get(nameof(NeckInventorySlot));
+    public override BaseInventorySlot BaseWieldSlot => Game.SingletonRepository.Get<BaseInventorySlot>(nameof(NeckInventorySlot));
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Amulet;
     public override int PackSort => 17;
     public override int BaseValue => 45;

@@ -22,5 +22,5 @@ internal abstract class ArrowProjectileMonsterSpell : BoltProjectileMonsterSpell
     public override string? VsPlayerBlindMessage => $"You hear a strange noise.";
     protected override string ActionName => "fires an arrow";
     protected override Projectile Projectile(Game game) => game.SingletonRepository.Projectiles.Get(nameof(ArrowProjectile));
-    public override SpellResistantDetection[] SmartLearn => new SpellResistantDetection[] { Game.SingletonRepository.SpellResistantDetections.Get(nameof(ReflectSpellResistantDetection)) };
+    public override SpellResistantDetection[] SmartLearn => new SpellResistantDetection[] { Game.SingletonRepository.Get<SpellResistantDetection>(nameof(ReflectSpellResistantDetection)) };
 }

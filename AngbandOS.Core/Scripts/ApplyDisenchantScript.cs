@@ -19,7 +19,7 @@ internal class ApplyDisenchantScript : Script, IScript, ISuccessfulScript
     public bool ExecuteSuccessfulScript()
     {
         // Select an inventory slot where items can be disenchanted.
-        BaseInventorySlot? inventorySlot = Game.SingletonRepository.InventorySlots.ToWeightedRandom(_inventorySlot => _inventorySlot.CanBeDisenchanted).ChooseOrDefault();
+        BaseInventorySlot? inventorySlot = Game.SingletonRepository.ToWeightedRandom<BaseInventorySlot>(_inventorySlot => _inventorySlot.CanBeDisenchanted).ChooseOrDefault();
         if (inventorySlot == null)
         {
             // There are no inventory slots capable of being disenchanted.
@@ -73,7 +73,7 @@ internal class ApplyDisenchantScript : Script, IScript, ISuccessfulScript
         }
         s = oPtr.Count != 1 ? "were" : "was";
         Game.MsgPrint($"Your {oName} ({i.IndexToLabel()}) {s} disenchanted!");
-        Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
+        Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
         return true;
     }
 

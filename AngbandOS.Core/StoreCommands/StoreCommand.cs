@@ -48,7 +48,7 @@ internal abstract class StoreCommand : IGetKey, IToJson
             List<StoreFactory> storeFactoryList = new();
             foreach (string storeName in ValidStoreFactoryNames)
             {
-                storeFactoryList.Add(Game.SingletonRepository.StoreFactories.Get(storeName));
+                storeFactoryList.Add(Game.SingletonRepository.Get<StoreFactory>(storeName));
             }
             ValidStoreFactories = storeFactoryList.ToArray();
         }

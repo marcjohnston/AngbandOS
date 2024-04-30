@@ -41,7 +41,7 @@ internal class BlessWeaponScript : Script, IScript, ISuccessfulScript
             oPtr.IdentCursed = false;
             oPtr.IdentSense = true;
             oPtr.Inscription = "uncursed";
-            Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
+            Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
         }
         if (oPtr.Characteristics.Blessed)
         {
@@ -93,7 +93,7 @@ internal class BlessWeaponScript : Script, IScript, ISuccessfulScript
                 Game.MsgPrint($"{your} {oName} {s} disenchanted!");
             }
         }
-        Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
+        Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
         return true;
     }
 

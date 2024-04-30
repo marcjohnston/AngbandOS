@@ -18,7 +18,7 @@ internal class EatLightAttackEffect : AttackEffect
         Game.TakeHit(damage, monsterDescription);
 
         // Choose an inventory slot for lights.
-        BaseInventorySlot? chosenLightSourceInventorySlot = Game.SingletonRepository.InventorySlots.ToWeightedRandom(inventorySlot => inventorySlot.ProvidesLight).ChooseOrDefault();
+        BaseInventorySlot? chosenLightSourceInventorySlot = Game.SingletonRepository.ToWeightedRandom<BaseInventorySlot>(inventorySlot => inventorySlot.ProvidesLight).ChooseOrDefault();
 
         // Check to see if there are no slots.
         if (chosenLightSourceInventorySlot == null)

@@ -60,7 +60,7 @@ internal class GainMutationScript : Script, IScript
             Game.MutationsPossessed.Add(mutation);
             mutation.OnGain();
             Game.MsgPrint(mutation.GainMessage);
-            Game.SingletonRepository.FlaggedActions.Get(nameof(UpdateBonusesFlaggedAction)).Set();
+            Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
             Game.HandleStuff();
             return;
         }

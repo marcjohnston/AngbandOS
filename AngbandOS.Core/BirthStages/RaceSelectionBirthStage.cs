@@ -15,7 +15,7 @@ internal class RaceSelectionBirthStage : BirthStage
     public override BirthStage? Render()
     {
         DisplayPartialCharacter();
-        string[]? menuItems = Game.SingletonRepository.Races
+        string[]? menuItems = Game.SingletonRepository.Get<Race>()
             .OrderBy((Race race) => race.Title)
             .Select((Race race) => race.Title)
             .ToArray(); ;
@@ -53,7 +53,7 @@ internal class RaceSelectionBirthStage : BirthStage
 
     private bool RenderSelection(int index)
     {
-        Race[] races = Game.SingletonRepository.Races
+        Race[] races = Game.SingletonRepository.Get<Race>()
             .OrderBy((Race race) => race.Title)
             .ToArray();
         Race race = races[index];
@@ -111,7 +111,7 @@ internal class RaceSelectionBirthStage : BirthStage
     }
     private BirthStage? GoForward(int index)
     {
-        Race[] races = Game.SingletonRepository.Races
+        Race[] races = Game.SingletonRepository.Get<Race>()
             .OrderBy((Race race) => race.Title)
             .ToArray();
         Game.Race = races[index];
