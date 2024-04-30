@@ -22,7 +22,7 @@ internal class MagicMissile2d6Every2Activation : DirectionalActivation
 
     protected override bool Activate(int direction)
     {
-        Game.FireBolt(Game.SingletonRepository.Projectiles.Get(nameof(MissileProjectile)), direction, Game.DiceRoll(2, 6));
+        Game.FireBolt(Game.SingletonRepository.Get<Projectile>(nameof(MissileProjectile)), direction, Game.DiceRoll(2, 6));
         return true;
     }
 

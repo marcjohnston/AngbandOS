@@ -22,7 +22,7 @@ internal class HellfireScript : Script, IScript
         {
             return;
         }
-        Game.FireBall(Game.SingletonRepository.Projectiles.Get(nameof(HellfireProjectile)), dir, 666, 3);
+        Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(HellfireProjectile)), dir, 666, 3);
         Game.TakeHit(50 + Game.DieRoll(50), "the strain of casting Hellfire");
     }
 }

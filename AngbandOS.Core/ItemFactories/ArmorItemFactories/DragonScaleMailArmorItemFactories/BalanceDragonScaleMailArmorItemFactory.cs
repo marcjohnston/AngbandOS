@@ -19,7 +19,7 @@ internal class BalanceDragonScaleMailArmorItemFactory : DragonScaleMailArmorItem
         int chance = Game.RandomLessThan(4);
         string element = chance == 1 ? "chaos" : (chance == 2 ? "disenchantment" : (chance == 3 ? "sound" : "shards"));
         Game.MsgPrint($"You breathe {element}.");
-        Game.FireBall(chance == 1 ? Game.SingletonRepository.Projectiles.Get(nameof(ChaosProjectile)) : (chance == 2 ? Game.SingletonRepository.Projectiles.Get(nameof(DisenchantProjectile)) : (chance == 3 ? (Projectile)Game.SingletonRepository.Projectiles.Get(nameof(SoundProjectile)) : Game.SingletonRepository.Projectiles.Get(nameof(ExplodeProjectile)))), dir, 250, -2);
+        Game.FireBall(chance == 1 ? Game.SingletonRepository.Get<Projectile>(nameof(ChaosProjectile)) : (chance == 2 ? Game.SingletonRepository.Get<Projectile>(nameof(DisenchantProjectile)) : (chance == 3 ? (Projectile)Game.SingletonRepository.Get<Projectile>(nameof(SoundProjectile)) : Game.SingletonRepository.Get<Projectile>(nameof(ExplodeProjectile)))), dir, 250, -2);
         item.RechargeTimeLeft = Game.RandomLessThan(300) + 300;
     }
     private BalanceDragonScaleMailArmorItemFactory(Game game) : base(game) { } // This object is a singleton.

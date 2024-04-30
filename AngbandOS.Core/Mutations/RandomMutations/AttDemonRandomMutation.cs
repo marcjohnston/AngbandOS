@@ -25,11 +25,11 @@ internal class AttDemonRandomMutation : Mutation
         bool dSummon;
         if (base.Game.DieRoll(6) == 1)
         {
-            dSummon = Game.SummonSpecificFriendly(Game.MapY.IntValue, Game.MapX.IntValue, Game.Difficulty, Game.SingletonRepository.MonsterFilters.Get(nameof(DemonMonsterFilter)), true);
+            dSummon = Game.SummonSpecificFriendly(Game.MapY.IntValue, Game.MapX.IntValue, Game.Difficulty, Game.SingletonRepository.Get<MonsterFilter>(nameof(DemonMonsterFilter)), true);
         }
         else
         {
-            dSummon = Game.SummonSpecific(Game.MapY.IntValue, Game.MapX.IntValue, Game.Difficulty, Game.SingletonRepository.MonsterFilters.Get(nameof(DemonMonsterFilter)));
+            dSummon = Game.SummonSpecific(Game.MapY.IntValue, Game.MapX.IntValue, Game.Difficulty, Game.SingletonRepository.Get<MonsterFilter>(nameof(DemonMonsterFilter)));
         }
         if (!dSummon)
         {

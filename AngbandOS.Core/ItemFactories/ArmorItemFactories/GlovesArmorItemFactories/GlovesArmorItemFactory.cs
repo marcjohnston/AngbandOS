@@ -29,20 +29,20 @@ internal abstract class GlovesArmorItemFactory : ArmorItemFactory
             case 2:
             case 3:
             case 4:
-                item.RareItem = Game.SingletonRepository.RareItems.Get(nameof(GlovesOfFreeActionRareItem));
+                item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(GlovesOfFreeActionRareItem));
                 break;
             case 5:
             case 6:
             case 7:
-                item.RareItem = Game.SingletonRepository.RareItems.Get(nameof(GlovesOfSlayingRareItem));
+                item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(GlovesOfSlayingRareItem));
                 break;
             case 8:
             case 9:
-                item.RareItem = Game.SingletonRepository.RareItems.Get(nameof(GlovesOfAgilityRareItem));
+                item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(GlovesOfAgilityRareItem));
                 break;
             case 10:
                 IArtifactBias artifactBias = null;
-                item.RareItem = Game.SingletonRepository.RareItems.Get(nameof(GlovesOfPowerRareItem));
+                item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(GlovesOfPowerRareItem));
                 item.ApplyRandomResistance(ref artifactBias, Game.DieRoll(22) + 16);
                 break;
         }
@@ -58,12 +58,12 @@ internal abstract class GlovesArmorItemFactory : ArmorItemFactory
         {
             case 1:
                 {
-                    item.RareItem = Game.SingletonRepository.RareItems.Get(nameof(GlovesOfClumsinessRareItem));
+                    item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(GlovesOfClumsinessRareItem));
                     break;
                 }
             default:
                 {
-                    item.RareItem = Game.SingletonRepository.RareItems.Get(nameof(GlovesOfWeaknessRareItem));
+                    item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(GlovesOfWeaknessRareItem));
                     break;
                 }
         }

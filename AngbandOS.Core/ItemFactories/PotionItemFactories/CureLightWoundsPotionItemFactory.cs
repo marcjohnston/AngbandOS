@@ -40,7 +40,7 @@ internal class CureLightWoundsPotionItemFactory : PotionItemFactory
 
     public override bool Smash(int who, int y, int x)
     {
-        Game.Project(who, 2, y, x, Game.DiceRoll(2, 3), Game.SingletonRepository.Projectiles.Get(nameof(OldHealProjectile)), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
+        Game.Project(who, 2, y, x, Game.DiceRoll(2, 3), Game.SingletonRepository.Get<Projectile>(nameof(OldHealProjectile)), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
         return false;
     }
     public override Item CreateItem() => new Item(Game, this);

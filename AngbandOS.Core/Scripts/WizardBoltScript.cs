@@ -35,6 +35,6 @@ internal class WizardBoltScript : Script, IScript
                 ty = target.Y;
             }
         }
-        Game.Project(0, 0, ty, tx, 1000000, Game.SingletonRepository.Projectiles.Get(nameof(WizardBoltProjectile)), flg);
+        Game.Project(0, 0, ty, tx, 1000000, Game.SingletonRepository.Get<Projectile>(nameof(WizardBoltProjectile)), flg);
     }
 }

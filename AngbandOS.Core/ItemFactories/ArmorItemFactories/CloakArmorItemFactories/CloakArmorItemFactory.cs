@@ -18,11 +18,11 @@ internal abstract class CloakArmorItemFactory : ArmorItemFactory
     protected override void ApplyRandomGoodRareCharacteristics(Item item)
     {
         WeightedRandom<RareItem> weightedRandom = new WeightedRandom<RareItem>(Game);
-        weightedRandom.Add(8, Game.SingletonRepository.RareItems.Get(nameof(CloakOfProtectionRareItem)));
-        weightedRandom.Add(8, Game.SingletonRepository.RareItems.Get(nameof(CloakOfStealthRareItem)));
-        weightedRandom.Add(1, Game.SingletonRepository.RareItems.Get(nameof(CloakOfAmanRareItem)));
-        weightedRandom.Add(1, Game.SingletonRepository.RareItems.Get(nameof(CloakOfElectricityRareItem)));
-        weightedRandom.Add(1, Game.SingletonRepository.RareItems.Get(nameof(CloakOfImmolationRareItem)));
+        weightedRandom.Add(8, Game.SingletonRepository.Get<RareItem>(nameof(CloakOfProtectionRareItem)));
+        weightedRandom.Add(8, Game.SingletonRepository.Get<RareItem>(nameof(CloakOfStealthRareItem)));
+        weightedRandom.Add(1, Game.SingletonRepository.Get<RareItem>(nameof(CloakOfAmanRareItem)));
+        weightedRandom.Add(1, Game.SingletonRepository.Get<RareItem>(nameof(CloakOfElectricityRareItem)));
+        weightedRandom.Add(1, Game.SingletonRepository.Get<RareItem>(nameof(CloakOfImmolationRareItem)));
         item.RareItem = weightedRandom.ChooseOrDefault();
     }
 
@@ -31,13 +31,13 @@ internal abstract class CloakArmorItemFactory : ArmorItemFactory
         switch (Game.DieRoll(3))
         {
             case 1:
-                item.RareItem = Game.SingletonRepository.RareItems.Get(nameof(CloakOfIrritationRareItem));
+                item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(CloakOfIrritationRareItem));
                 break;
             case 2:
-                item.RareItem = Game.SingletonRepository.RareItems.Get(nameof(CloakOfVulnerabilityRareItem));
+                item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(CloakOfVulnerabilityRareItem));
                 break;
             case 3:
-                item.RareItem = Game.SingletonRepository.RareItems.Get(nameof(CloakOfEnvelopingRareItem));
+                item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(CloakOfEnvelopingRareItem));
                 break;
         }
     }

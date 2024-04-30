@@ -22,7 +22,7 @@ internal class FireBall120r3Every225p1d225Activation : DirectionalActivation
 
     protected override bool Activate(int direction)
     {
-        Game.FireBall(Game.SingletonRepository.Projectiles.Get(nameof(FireProjectile)), direction, 120, 3);
+        Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(FireProjectile)), direction, 120, 3);
         return true;
     }
 

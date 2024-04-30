@@ -52,19 +52,19 @@ internal abstract class HelmArmorItemFactory : ArmorItemFactory
         {
             case 1:
             case 2:
-                item.RareItem = Game.SingletonRepository.RareItems.Get(nameof(HatOfIntelligenceRareItem));
+                item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(HatOfIntelligenceRareItem));
                 break;
             case 3:
             case 4:
-                item.RareItem = Game.SingletonRepository.RareItems.Get(nameof(HatOfWisdomRareItem));
+                item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(HatOfWisdomRareItem));
                 break;
             case 5:
             case 6:
-                item.RareItem = Game.SingletonRepository.RareItems.Get(nameof(HatOfBeautyRareItem));
+                item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(HatOfBeautyRareItem));
                 break;
             case 7:
             case 8:
-                item.RareItem = Game.SingletonRepository.RareItems.Get(nameof(HatOfSeeingRareItem));
+                item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(HatOfSeeingRareItem));
                 if (Game.DieRoll(7) == 1)
                 {
                     item.RandomArtifactItemCharacteristics.Telepathy = true;
@@ -72,13 +72,13 @@ internal abstract class HelmArmorItemFactory : ArmorItemFactory
                 break;
             case 9:
             case 10:
-                item.RareItem = Game.SingletonRepository.RareItems.Get(nameof(HatOfLightRareItem));
+                item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(HatOfLightRareItem));
                 break;
             case 11:
             case 12:
             case 13:
             case 14:
-                item.RareItem = Game.SingletonRepository.RareItems.Get(nameof(HatOfInfravisionRareItem));
+                item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(HatOfInfravisionRareItem));
                 break;
         }
     }
@@ -90,20 +90,20 @@ internal abstract class HelmArmorItemFactory : ArmorItemFactory
         {
             case 1:
             case 2:
-                item.RareItem = Game.SingletonRepository.RareItems.Get(nameof(HatOfStupidityRareItem));
+                item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(HatOfStupidityRareItem));
                 break;
             case 3:
             case 4:
-                item.RareItem = Game.SingletonRepository.RareItems.Get(nameof(HatOfNaivetyRareItem));
+                item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(HatOfNaivetyRareItem));
                 break;
             case 5:
-                item.RareItem = Game.SingletonRepository.RareItems.Get(nameof(HatOfUglinessRareItem));
+                item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(HatOfUglinessRareItem));
                 break;
             case 6:
-                item.RareItem = Game.SingletonRepository.RareItems.Get(nameof(HatOfSicklinessRareItem));
+                item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(HatOfSicklinessRareItem));
                 break;
             case 7:
-                item.RareItem = Game.SingletonRepository.RareItems.Get(nameof(HatOfTeleportationRareItem));
+                item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(HatOfTeleportationRareItem));
                 break;
         }
     }

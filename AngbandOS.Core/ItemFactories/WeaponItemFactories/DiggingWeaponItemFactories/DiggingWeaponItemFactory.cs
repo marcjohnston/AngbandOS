@@ -21,7 +21,7 @@ internal abstract class DiggingWeaponItemFactory : WeaponItemFactory
         base.ApplyMagic(item, level, power, null);
         if (power > 1)
         {
-            item.RareItem = Game.SingletonRepository.RareItems.Get(nameof(WeaponOfDiggingRareItem));
+            item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(WeaponOfDiggingRareItem));
         }
         else if (power < -1)
         {

@@ -15,5 +15,5 @@ internal class SummonUndeadMonsterSpell : SummonMonsterSpell
 
     protected override int MaximumSummonCount => 1;
 
-    protected override MonsterFilter? MonsterSelector(Monster monster) => Game.SingletonRepository.MonsterFilters.Get(nameof(UndeadMonsterFilter));
+    protected override MonsterFilter? MonsterSelector(Monster monster) => Game.SingletonRepository.Get<MonsterFilter>(nameof(UndeadMonsterFilter));
 }

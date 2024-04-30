@@ -19,7 +19,7 @@ internal class LargeBallFire72Every100Activation : DirectionalActivation
 
     protected override bool Activate(int direction)
     {
-        Game.FireBall(Game.SingletonRepository.Projectiles.Get(nameof(FireProjectile)), direction, 72, 3);
+        Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(FireProjectile)), direction, 72, 3);
         return true;
     }
 

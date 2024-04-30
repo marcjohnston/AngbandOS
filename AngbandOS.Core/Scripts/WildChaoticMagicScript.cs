@@ -100,7 +100,7 @@ internal class WildChaoticMagicScript : Script, IScriptSpell
                 break;
 
             case 32:
-                Game.FireBall(Game.SingletonRepository.Projectiles.Get(nameof(ChaosProjectile)), 0, spellIndex + 5, 1 + (spellIndex / 10));
+                Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(ChaosProjectile)), 0, spellIndex + 5, 1 + (spellIndex / 10));
                 break;
 
             case 33:

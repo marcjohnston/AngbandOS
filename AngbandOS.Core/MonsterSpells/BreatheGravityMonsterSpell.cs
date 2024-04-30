@@ -12,6 +12,6 @@ internal class BreatheGravityMonsterSpell : BreatheProjectileMonsterSpell
 {
     private BreatheGravityMonsterSpell(Game game) : base(game) { }
     protected override string ElementName => "gravity";
-    protected override Projectile Projectile(Game game) => game.SingletonRepository.Projectiles.Get(nameof(GravityProjectile));
+    protected override Projectile Projectile(Game game) => game.SingletonRepository.Get<Projectile>(nameof(GravityProjectile));
     protected override int Damage(Monster monster) => monster.Health / 3 > 200 ? 200 : monster.Health / 3;
 }

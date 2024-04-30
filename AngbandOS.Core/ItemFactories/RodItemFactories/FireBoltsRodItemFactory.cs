@@ -26,7 +26,7 @@ internal class FireBoltsRodItemFactory : RodItemFactory
     public override int Weight => 15;
     public override void Execute(ZapRodEvent zapRodEvent)
     {
-        Game.FireBoltOrBeam(10, Game.SingletonRepository.Projectiles.Get(nameof(FireProjectile)), zapRodEvent.Dir.Value, Game.DiceRoll(8, 8));
+        Game.FireBoltOrBeam(10, Game.SingletonRepository.Get<Projectile>(nameof(FireProjectile)), zapRodEvent.Dir.Value, Game.DiceRoll(8, 8));
         zapRodEvent.Identified = true;
         zapRodEvent.Item.TypeSpecificValue = 15;
     }

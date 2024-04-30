@@ -22,7 +22,7 @@ internal class PulveriseTalent : Talent
         {
             return;
         }
-        Game.FireBall(Game.SingletonRepository.Projectiles.Get(nameof(SoundProjectile)), dir,
+        Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(SoundProjectile)), dir,
             Game.DiceRoll(8 + ((Game.ExperienceLevel.IntValue - 5) / 4), 8), Game.ExperienceLevel.IntValue > 20 ? ((Game.ExperienceLevel.IntValue - 20) / 8) + 1 : 0);
     }
 

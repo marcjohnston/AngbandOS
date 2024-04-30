@@ -28,6 +28,6 @@ internal class ProdManaRandomMutation : Mutation
 
         // Get a direction.  We do not care if the player cancels the direction, we will release the energy anyway.
         Game.GetDirectionWithAim(out int dire);
-        Game.FireBall(Game.SingletonRepository.Projectiles.Get(nameof(ManaProjectile)), dire, Game.ExperienceLevel.IntValue * 2, 3);
+        Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(ManaProjectile)), dire, Game.ExperienceLevel.IntValue * 2, 3);
     }
 }

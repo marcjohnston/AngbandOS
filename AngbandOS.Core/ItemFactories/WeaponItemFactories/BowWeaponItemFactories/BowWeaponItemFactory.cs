@@ -88,13 +88,13 @@ internal abstract class BowWeaponItemFactory : WeaponItemFactory // TODO: Should
             {
                 case 1:
                 case 11:
-                    item.RareItem = Game.SingletonRepository.RareItems.Get(nameof(BowOfExtraMightRareItem));
+                    item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(BowOfExtraMightRareItem));
                     IArtifactBias artifactBias = null;
                     item.ApplyRandomResistance(ref artifactBias, Game.DieRoll(34) + 4);
                     break;
                 case 2:
                 case 12:
-                    item.RareItem = Game.SingletonRepository.RareItems.Get(nameof(BowOfExtraShotsRareItem));
+                    item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(BowOfExtraShotsRareItem));
                     break;
                 case 3:
                 case 4:
@@ -104,7 +104,7 @@ internal abstract class BowWeaponItemFactory : WeaponItemFactory // TODO: Should
                 case 14:
                 case 15:
                 case 16:
-                    item.RareItem = Game.SingletonRepository.RareItems.Get(nameof(BowOfVelocityRareItem));
+                    item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(BowOfVelocityRareItem));
                     break;
                 case 7:
                 case 8:
@@ -114,7 +114,7 @@ internal abstract class BowWeaponItemFactory : WeaponItemFactory // TODO: Should
                 case 18:
                 case 19:
                 case 20:
-                    item.RareItem = Game.SingletonRepository.RareItems.Get(nameof(BowOfAccuracyRareItem));
+                    item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(BowOfAccuracyRareItem));
                     break;
                 case 21:
                     item.CreateRandomArtifact(false);

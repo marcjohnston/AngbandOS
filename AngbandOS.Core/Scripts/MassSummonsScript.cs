@@ -24,7 +24,7 @@ internal class MassSummonsScript : Script, IScript
         {
             if (Game.DieRoll(10) > 3)
             {
-                if (Game.SummonSpecificFriendly(Game.MapY.IntValue, Game.MapX.IntValue, Game.ExperienceLevel.IntValue, Game.SingletonRepository.MonsterFilters.Get(nameof(NoUniquesMonsterFilter)), false))
+                if (Game.SummonSpecificFriendly(Game.MapY.IntValue, Game.MapX.IntValue, Game.ExperienceLevel.IntValue, Game.SingletonRepository.Get<MonsterFilter>(nameof(NoUniquesMonsterFilter)), false))
                 {
                     noneCame = false;
                 }

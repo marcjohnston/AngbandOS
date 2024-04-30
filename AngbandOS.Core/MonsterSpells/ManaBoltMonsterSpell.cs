@@ -19,6 +19,6 @@ internal class ManaBoltMonsterSpell : BoltProjectileMonsterSpell
         int monsterLevel = monster.Race.Level >= 1 ? monster.Race.Level : 1;
         return Game.DieRoll(monsterLevel * 7 / 2) + 50;
     }
-    protected override Projectile Projectile(Game game) => game.SingletonRepository.Projectiles.Get(nameof(ManaProjectile));
+    protected override Projectile Projectile(Game game) => game.SingletonRepository.Get<Projectile>(nameof(ManaProjectile));
     public override SpellResistantDetection[] SmartLearn => new SpellResistantDetection[] { Game.SingletonRepository.Get<SpellResistantDetection>(nameof(ReflectSpellResistantDetection)) };
 }

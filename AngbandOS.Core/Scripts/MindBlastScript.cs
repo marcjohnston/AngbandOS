@@ -37,6 +37,6 @@ internal class MindBlastScript : Script, IScript
         {
             return;
         }
-        Game.FireBoltOrBeam(beam - 10, Game.SingletonRepository.Projectiles.Get(nameof(PsiProjectile)), dir, Game.DiceRoll(3 + ((Game.ExperienceLevel.IntValue - 1) / 5), 3));
+        Game.FireBoltOrBeam(beam - 10, Game.SingletonRepository.Get<Projectile>(nameof(PsiProjectile)), dir, Game.DiceRoll(3 + ((Game.ExperienceLevel.IntValue - 1) / 5), 3));
     }
 }

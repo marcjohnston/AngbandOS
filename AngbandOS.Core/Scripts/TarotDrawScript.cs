@@ -36,7 +36,7 @@ internal class TarotDrawScript : Script, IScript
         else if (die < 14)
         {
             Game.MsgPrint("Oh no! It's the Devil!");
-            Game.SummonSpecific(Game.MapY.IntValue, Game.MapX.IntValue, Game.Difficulty, Game.SingletonRepository.MonsterFilters.Get(nameof(DemonMonsterFilter)));
+            Game.SummonSpecific(Game.MapY.IntValue, Game.MapX.IntValue, Game.Difficulty, Game.SingletonRepository.Get<MonsterFilter>(nameof(DemonMonsterFilter)));
         }
         else if (die < 18)
         {
@@ -111,7 +111,7 @@ internal class TarotDrawScript : Script, IScript
         else if (die < 82)
         {
             Game.MsgPrint("It's a picture of a friendly monster.");
-            if (!Game.SummonSpecificFriendly(Game.MapY.IntValue, Game.MapX.IntValue, Game.Difficulty * 3 / 2, Game.SingletonRepository.MonsterFilters.Get(nameof(Bizarre1MonsterFilter)), false))
+            if (!Game.SummonSpecificFriendly(Game.MapY.IntValue, Game.MapX.IntValue, Game.Difficulty * 3 / 2, Game.SingletonRepository.Get<MonsterFilter>(nameof(Bizarre1MonsterFilter)), false))
             {
                 noneCame = true;
             }
@@ -119,7 +119,7 @@ internal class TarotDrawScript : Script, IScript
         else if (die < 84)
         {
             Game.MsgPrint("It's a picture of a friendly monster.");
-            if (!Game.SummonSpecificFriendly(Game.MapY.IntValue, Game.MapX.IntValue, Game.Difficulty * 3 / 2, Game.SingletonRepository.MonsterFilters.Get(nameof(Bizarre2MonsterFilter)), false))
+            if (!Game.SummonSpecificFriendly(Game.MapY.IntValue, Game.MapX.IntValue, Game.Difficulty * 3 / 2, Game.SingletonRepository.Get<MonsterFilter>(nameof(Bizarre2MonsterFilter)), false))
             {
                 noneCame = true;
             }
@@ -127,7 +127,7 @@ internal class TarotDrawScript : Script, IScript
         else if (die < 86)
         {
             Game.MsgPrint("It's a picture of a friendly monster.");
-            if (!Game.SummonSpecificFriendly(Game.MapY.IntValue, Game.MapX.IntValue, Game.Difficulty * 3 / 2, Game.SingletonRepository.MonsterFilters.Get(nameof(Bizarre4MonsterFilter)), false))
+            if (!Game.SummonSpecificFriendly(Game.MapY.IntValue, Game.MapX.IntValue, Game.Difficulty * 3 / 2, Game.SingletonRepository.Get<MonsterFilter>(nameof(Bizarre4MonsterFilter)), false))
             {
                 noneCame = true;
             }
@@ -135,7 +135,7 @@ internal class TarotDrawScript : Script, IScript
         else if (die < 88)
         {
             Game.MsgPrint("It's a picture of a friendly monster.");
-            if (!Game.SummonSpecificFriendly(Game.MapY.IntValue, Game.MapX.IntValue, Game.Difficulty * 3 / 2, Game.SingletonRepository.MonsterFilters.Get(nameof(Bizarre5MonsterFilter)), false))
+            if (!Game.SummonSpecificFriendly(Game.MapY.IntValue, Game.MapX.IntValue, Game.Difficulty * 3 / 2, Game.SingletonRepository.Get<MonsterFilter>(nameof(Bizarre5MonsterFilter)), false))
             {
                 noneCame = true;
             }
@@ -272,7 +272,7 @@ internal class TarotDrawScript : Script, IScript
                 break;
 
             case 32:
-                Game.FireBall(Game.SingletonRepository.Projectiles.Get(nameof(ChaosProjectile)), 0, spell + 5, 1 + (spell / 10));
+                Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(ChaosProjectile)), 0, spell + 5, 1 + (spell / 10));
                 break;
 
             case 33:

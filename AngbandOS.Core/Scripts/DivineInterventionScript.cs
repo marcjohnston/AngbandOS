@@ -18,14 +18,14 @@ internal class DivineInterventionScript : Script, IScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        Game.Project(0, 1, Game.MapY.IntValue, Game.MapX.IntValue, 777, Game.SingletonRepository.Projectiles.Get(nameof(HolyFireProjectile)), ProjectionFlag.ProjectKill);
+        Game.Project(0, 1, Game.MapY.IntValue, Game.MapX.IntValue, 777, Game.SingletonRepository.Get<Projectile>(nameof(HolyFireProjectile)), ProjectionFlag.ProjectKill);
         Game.DispelMonsters(Game.ExperienceLevel.IntValue * 4);
         Game.RunScript(nameof(SlowMonstersScript));
         Game.StunMonsters(Game.ExperienceLevel.IntValue * 4);
         Game.ConfuseMonsters(Game.ExperienceLevel.IntValue * 4);
         Game.TurnMonsters(Game.ExperienceLevel.IntValue * 4);
         Game.StasisMonsters(Game.ExperienceLevel.IntValue * 4);
-        Game.SummonSpecificFriendly(Game.MapY.IntValue, Game.MapX.IntValue, Game.ExperienceLevel.IntValue, Game.SingletonRepository.MonsterFilters.Get(nameof(CthuloidMonsterFilter)), true);
+        Game.SummonSpecificFriendly(Game.MapY.IntValue, Game.MapX.IntValue, Game.ExperienceLevel.IntValue, Game.SingletonRepository.Get<MonsterFilter>(nameof(CthuloidMonsterFilter)), true);
         Game.SuperheroismTimer.AddTimer(Game.DieRoll(25) + 25);
         Game.RestoreHealth(300);
         if (Game.HasteTimer.Value == 0)

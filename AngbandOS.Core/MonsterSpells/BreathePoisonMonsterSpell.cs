@@ -13,7 +13,7 @@ internal class BreathePoisonMonsterSpell : BreatheProjectileMonsterSpell
     private BreathePoisonMonsterSpell(Game game) : base(game) { }
     public override bool UsesPoison => true;
     protected override string ElementName => "gas";
-    protected override Projectile Projectile(Game game) => game.SingletonRepository.Projectiles.Get(nameof(PoisProjectile));
+    protected override Projectile Projectile(Game game) => game.SingletonRepository.Get<Projectile>(nameof(PoisProjectile));
     protected override int Damage(Monster monster) => monster.Health / 3 > 800 ? 800 : monster.Health / 3;
     public override SpellResistantDetection[] SmartLearn => new SpellResistantDetection[] { Game.SingletonRepository.Get<SpellResistantDetection>(nameof(PoisSpellResistantDetection)) };
 }

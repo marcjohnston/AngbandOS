@@ -23,19 +23,19 @@ internal class SummonBizarreMonsterScript : Script, IScript
         switch (Game.DieRoll(4))
         {
             case 1:
-                summonType = Game.SingletonRepository.MonsterFilters.Get(nameof(Bizarre1MonsterFilter));
+                summonType = Game.SingletonRepository.Get<MonsterFilter>(nameof(Bizarre1MonsterFilter));
                 break;
 
             case 2:
-                summonType = Game.SingletonRepository.MonsterFilters.Get(nameof(Bizarre2MonsterFilter));
+                summonType = Game.SingletonRepository.Get<MonsterFilter>(nameof(Bizarre2MonsterFilter));
                 break;
 
             case 3:
-                summonType = Game.SingletonRepository.MonsterFilters.Get(nameof(Bizarre4MonsterFilter));
+                summonType = Game.SingletonRepository.Get<MonsterFilter>(nameof(Bizarre4MonsterFilter));
                 break;
 
             case 4:
-                summonType = Game.SingletonRepository.MonsterFilters.Get(nameof(Bizarre5MonsterFilter));
+                summonType = Game.SingletonRepository.Get<MonsterFilter>(nameof(Bizarre5MonsterFilter));
                 break;
         }
         if (Game.DieRoll(2) == 1)

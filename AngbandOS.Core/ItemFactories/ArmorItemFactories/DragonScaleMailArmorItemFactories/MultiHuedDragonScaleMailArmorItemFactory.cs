@@ -24,22 +24,22 @@ internal class MultiHuedDragonScaleMailArmorItemFactory : DragonScaleMailArmorIt
         switch (chance)
         {
             case 0:
-                Game.FireBall(Game.SingletonRepository.Projectiles.Get(nameof(FireProjectile)), dir, 250, -2);
+                Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(FireProjectile)), dir, 250, -2);
                 return;
             case 1:
-                Game.FireBall(Game.SingletonRepository.Projectiles.Get(nameof(ElecProjectile)), dir, 250, -2);
+                Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(ElecProjectile)), dir, 250, -2);
                 return;
 
             case 2:
-                Game.FireBall(Game.SingletonRepository.Projectiles.Get(nameof(ColdProjectile)), dir, 250, -2);
+                Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(ColdProjectile)), dir, 250, -2);
                 return;
 
             case 3:
-                Game.FireBall(Game.SingletonRepository.Projectiles.Get(nameof(AcidProjectile)), dir, 250, -2);
+                Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(AcidProjectile)), dir, 250, -2);
                 return;
 
             case 4:
-                Game.FireBall(Game.SingletonRepository.Projectiles.Get(nameof(PoisProjectile)), dir, 250, -2);
+                Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(PoisProjectile)), dir, 250, -2);
                 return;
         }
         item.RechargeTimeLeft = Game.RandomLessThan(225) + 225;

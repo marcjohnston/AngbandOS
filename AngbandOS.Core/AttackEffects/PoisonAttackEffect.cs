@@ -33,6 +33,6 @@ internal class PoisonAttackEffect : AttackEffect
     }
     public override void ApplyToMonster(Monster monster, int armorClass, ref int damage, ref Projectile? pt, ref bool blinked)
     {
-        pt = Game.SingletonRepository.Projectiles.Get(nameof(PoisProjectile));
+        pt = Game.SingletonRepository.Get<Projectile>(nameof(PoisProjectile));
     }
 }

@@ -18,7 +18,7 @@ internal class BanishMonsters4xScript : Script, IScriptInt, IScript
     /// <returns></returns>
     public void ExecuteScriptInt(int dist)
     {
-        Game.ProjectAtAllInLos(Game.SingletonRepository.Projectiles.Get(nameof(TeleportAwayAllProjectile)), dist);
+        Game.ProjectAtAllInLos(Game.SingletonRepository.Get<Projectile>(nameof(TeleportAwayAllProjectile)), dist);
     }
 
     /// <summary>

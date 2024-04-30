@@ -15,5 +15,5 @@ internal class SummonHiDragonMonsterSpell : SummonMonsterSpell
 
     protected override int MaximumSummonCount => 8;
 
-    protected override MonsterFilter? MonsterSelector(Monster monster) => Game.SingletonRepository.MonsterFilters.Get(nameof(HiDragonMonsterFilter));
+    protected override MonsterFilter? MonsterSelector(Monster monster) => Game.SingletonRepository.Get<MonsterFilter>(nameof(HiDragonMonsterFilter));
 }

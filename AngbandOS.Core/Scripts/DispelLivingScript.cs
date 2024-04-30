@@ -18,7 +18,7 @@ internal class DispelLivingScript : Script, IScript, IScriptInt
     /// <returns></returns>
     public void ExecuteScriptInt(int dam)
     {
-        Game.ProjectAtAllInLos(Game.SingletonRepository.Projectiles.Get(nameof(DispLivingProjectile)), dam);
+        Game.ProjectAtAllInLos(Game.SingletonRepository.Get<Projectile>(nameof(DispLivingProjectile)), dam);
     }
 
     /// <summary>

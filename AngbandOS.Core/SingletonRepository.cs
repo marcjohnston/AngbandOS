@@ -35,11 +35,6 @@ internal class SingletonRepository
     public UnreadableFlavorSyllablesRepository UnreadableFlavorSyllables;
     public WorshipPlayerAttacksRepository WorshipPlayerAttacks;
 
-    public MonsterFiltersRepository MonsterFilters;
-    public MonsterSpellsRepository MonsterSpells;
-    public ProjectilesRepository Projectiles;
-    public RareItemsRepository RareItems;
-
     private Dictionary<string, GenericRepository> _repositoryDictionary = new Dictionary<string, GenericRepository>();
 
     /// <summary>
@@ -446,10 +441,6 @@ internal class SingletonRepository
         HorrificDescriptions = AddRepository<HorrificDescriptionsRepository>(new HorrificDescriptionsRepository(Game));
         InsultPlayerAttacks = AddRepository<InsultPlayerAttacksRepository>(new InsultPlayerAttacksRepository(Game));
         MoanPlayerAttacks = AddRepository<MoanPlayerAttacksRepository>(new MoanPlayerAttacksRepository(Game));
-        MonsterFilters = AddRepository<MonsterFiltersRepository>(new MonsterFiltersRepository(Game));
-        MonsterSpells = AddRepository<MonsterSpellsRepository>(new MonsterSpellsRepository(Game));
-        Projectiles = AddRepository<ProjectilesRepository>(new ProjectilesRepository(Game));
-        RareItems = AddRepository<RareItemsRepository>(new RareItemsRepository(Game));
         ShopkeeperAcceptedComments = AddRepository<ShopkeeperAcceptedCommentsRepository>(new ShopkeeperAcceptedCommentsRepository(Game));
         ShopkeeperBargainComments = AddRepository<ShopkeeperBargainCommentsRepository>(new ShopkeeperBargainCommentsRepository(Game));
         ShopkeeperGoodComments = AddRepository<ShopkeeperGoodCommentsRepository>(new ShopkeeperGoodCommentsRepository(Game));

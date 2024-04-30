@@ -119,7 +119,7 @@ internal class RingOfSetFixedArtifact : FixedArtifact, IFixedArtifactActivatible
             case 6:
                 {
                     // Do a 300 damage mana ball
-                    Game.FireBall(Game.SingletonRepository.Projectiles.Get(nameof(ManaProjectile)), direction, 300, 3);
+                    Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(ManaProjectile)), direction, 300, 3);
                     break;
                 }
             case 7:
@@ -128,7 +128,7 @@ internal class RingOfSetFixedArtifact : FixedArtifact, IFixedArtifactActivatible
             case 10:
                 {
                     // Do a 250 damage mana bolt
-                    Game.FireBolt(Game.SingletonRepository.Projectiles.Get(nameof(ManaProjectile)), direction, 250);
+                    Game.FireBolt(Game.SingletonRepository.Get<Projectile>(nameof(ManaProjectile)), direction, 250);
                     break;
                 }
         }

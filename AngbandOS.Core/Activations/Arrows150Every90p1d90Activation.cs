@@ -22,7 +22,7 @@ internal class Arrows150Every90p1d90Activation : DirectionalActivation
 
     protected override bool Activate(int direction)
     {
-        Game.FireBolt(Game.SingletonRepository.Projectiles.Get(nameof(ArrowProjectile)), direction, 150);
+        Game.FireBolt(Game.SingletonRepository.Get<Projectile>(nameof(ArrowProjectile)), direction, 150);
         return true;
     }
 

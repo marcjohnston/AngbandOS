@@ -18,7 +18,7 @@ internal class FlamesRingItemFactory : RingItemFactory, IItemsCanBeActivated
         {
             return;
         }
-        Game.FireBall(Game.SingletonRepository.Projectiles.Get(nameof(FireProjectile)), dir, 50, 2);
+        Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(FireProjectile)), dir, 50, 2);
         Game.FireResistanceTimer.AddTimer(Game.DieRoll(20) + 20);
         item.RechargeTimeLeft = Game.RandomLessThan(50) + 50;
     }

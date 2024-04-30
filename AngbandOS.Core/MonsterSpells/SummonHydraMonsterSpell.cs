@@ -13,5 +13,5 @@ internal class SummonHydraMonsterSpell : SummonMonsterSpell
     private SummonHydraMonsterSpell(Game game) : base(game) { }
     protected override string SummonName(Monster monster) => "hydras";
 
-    protected override MonsterFilter? MonsterSelector(Monster monster) => Game.SingletonRepository.MonsterFilters.Get(nameof(HydraMonsterFilter));
+    protected override MonsterFilter? MonsterSelector(Monster monster) => Game.SingletonRepository.Get<MonsterFilter>(nameof(HydraMonsterFilter));
 }

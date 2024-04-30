@@ -78,11 +78,11 @@ internal class KlackonRace : Race
                 Game.MsgPrint("You spit acid.");
                 if (Game.ExperienceLevel.IntValue < 25)
                 {
-                    Game.FireBolt(Game.SingletonRepository.Projectiles.Get(nameof(AcidProjectile)), direction, Game.ExperienceLevel.IntValue);
+                    Game.FireBolt(Game.SingletonRepository.Get<Projectile>(nameof(AcidProjectile)), direction, Game.ExperienceLevel.IntValue);
                 }
                 else
                 {
-                    Game.FireBall(Game.SingletonRepository.Projectiles.Get(nameof(AcidProjectile)), direction, Game.ExperienceLevel.IntValue, 2);
+                    Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(AcidProjectile)), direction, Game.ExperienceLevel.IntValue, 2);
                 }
             }
         }

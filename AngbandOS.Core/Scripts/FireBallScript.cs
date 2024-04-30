@@ -22,6 +22,6 @@ internal class FireBallScript : Script, IScript
         {
             return;
         }
-        Game.FireBall(Game.SingletonRepository.Projectiles.Get(nameof(FireProjectile)), dir, 55 + Game.ExperienceLevel.IntValue, 2);
+        Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(FireProjectile)), dir, 55 + Game.ExperienceLevel.IntValue, 2);
     }
 }

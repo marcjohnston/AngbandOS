@@ -24,7 +24,7 @@ internal abstract class ShieldArmorItemFactory : ArmorItemFactory
         {
             case 1:
             case 11:
-                item.RareItem = Game.SingletonRepository.RareItems.Get(nameof(ShieldOfResistAcidRareItem));
+                item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(ShieldOfResistAcidRareItem));
                 break;
             case 2:
             case 3:
@@ -32,13 +32,13 @@ internal abstract class ShieldArmorItemFactory : ArmorItemFactory
             case 12:
             case 13:
             case 14:
-                item.RareItem = Game.SingletonRepository.RareItems.Get(nameof(ShieldOfResistLightningRareItem));
+                item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(ShieldOfResistLightningRareItem));
                 break;
             case 5:
             case 6:
             case 15:
             case 16:
-                item.RareItem = Game.SingletonRepository.RareItems.Get(nameof(ShieldOfResistFireRareItem));
+                item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(ShieldOfResistFireRareItem));
                 break;
             case 7:
             case 8:
@@ -46,7 +46,7 @@ internal abstract class ShieldArmorItemFactory : ArmorItemFactory
             case 17:
             case 18:
             case 19:
-                item.RareItem = Game.SingletonRepository.RareItems.Get(nameof(ShieldOfResistColdRareItem));
+                item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(ShieldOfResistColdRareItem));
                 break;
             case 10:
             case 20:
@@ -56,11 +56,11 @@ internal abstract class ShieldArmorItemFactory : ArmorItemFactory
                 {
                     item.RandomArtifactItemCharacteristics.ResPois = true;
                 }
-                item.RareItem = Game.SingletonRepository.RareItems.Get(nameof(ShieldOfResistanceRareItem));
+                item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(ShieldOfResistanceRareItem));
                 break;
             case 21:
             case 22:
-                item.RareItem = Game.SingletonRepository.RareItems.Get(nameof(ShieldOfReflectionRareItem));
+                item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(ShieldOfReflectionRareItem));
                 break;
             case 23:
                 item.CreateRandomArtifact(false);

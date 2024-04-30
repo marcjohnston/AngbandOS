@@ -29,12 +29,12 @@ internal class BrandWeaponWithFireOrIceScript : Script, IScript
             if (Game.RandomLessThan(100) < 25)
             {
                 act = "is covered in a fiery shield!";
-                item.RareItem = Game.SingletonRepository.RareItems.Get(nameof(WeaponOfBurningRareItem));
+                item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(WeaponOfBurningRareItem));
             }
             else
             {
                 act = "glows deep, icy blue!";
-                item.RareItem = Game.SingletonRepository.RareItems.Get(nameof(WeaponOfFreezingRareItem));
+                item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(WeaponOfFreezingRareItem));
             }
 
             // Let the player know what happened

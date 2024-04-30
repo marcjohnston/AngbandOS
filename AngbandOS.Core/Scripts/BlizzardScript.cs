@@ -22,6 +22,6 @@ internal class BlizzardScript : Script, IScript
         {
             return;
         }
-        Game.FireBall(Game.SingletonRepository.Projectiles.Get(nameof(ColdProjectile)), dir, 70 + Game.ExperienceLevel.IntValue, (Game.ExperienceLevel.IntValue / 12) + 1);
+        Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(ColdProjectile)), dir, 70 + Game.ExperienceLevel.IntValue, (Game.ExperienceLevel.IntValue / 12) + 1);
     }
 }

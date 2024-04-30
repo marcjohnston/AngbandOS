@@ -37,6 +37,6 @@ internal class FrostBoltScript : Script, IScript
         {
             return;
         }
-        Game.FireBoltOrBeam(beam - 10, Game.SingletonRepository.Projectiles.Get(nameof(ColdProjectile)), dir, Game.DiceRoll(5 + ((Game.ExperienceLevel.IntValue - 5) / 4), 8));
+        Game.FireBoltOrBeam(beam - 10, Game.SingletonRepository.Get<Projectile>(nameof(ColdProjectile)), dir, Game.DiceRoll(5 + ((Game.ExperienceLevel.IntValue - 5) / 4), 8));
     }
 }

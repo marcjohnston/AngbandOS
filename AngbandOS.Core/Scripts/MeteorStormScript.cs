@@ -43,7 +43,7 @@ internal class MeteorStormScript : Script, IScript
                 break;
             }
             count = 0;
-            Game.Project(0, 2, y, x, Game.ExperienceLevel.IntValue * 3 / 2, Game.SingletonRepository.Projectiles.Get(nameof(MeteorProjectile)), ProjectionFlag.ProjectKill | ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem);
+            Game.Project(0, 2, y, x, Game.ExperienceLevel.IntValue * 3 / 2, Game.SingletonRepository.Get<Projectile>(nameof(MeteorProjectile)), ProjectionFlag.ProjectKill | ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem);
         }
     }
 }

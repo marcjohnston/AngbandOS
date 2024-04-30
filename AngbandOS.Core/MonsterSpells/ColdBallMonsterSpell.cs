@@ -15,7 +15,7 @@ internal class ColdBallMonsterSpell : BallProjectileMonsterSpell
     public override bool IsAttack => true;
 
     protected override string ActionName => "casts a frost ball";
-    protected override Projectile Projectile(Game game) => game.SingletonRepository.Projectiles.Get(nameof(ColdProjectile));
+    protected override Projectile Projectile(Game game) => game.SingletonRepository.Get<Projectile>(nameof(ColdProjectile));
     protected override int Damage(Monster monster)
     {
         int monsterLevel = monster.Race.Level >= 1 ? monster.Race.Level : 1;

@@ -24,7 +24,7 @@ internal class StarBall150Every1000p1d325Activation : DirectionalActivation
     {
         for (int i = 0; i < 8; i++)
         {
-            Game.FireBall(Game.SingletonRepository.Projectiles.Get(nameof(ElecProjectile)), Game.OrderedDirection[i], 150, 3);
+            Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(ElecProjectile)), Game.OrderedDirection[i], 150, 3);
         }
         return true;
     }

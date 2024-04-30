@@ -13,7 +13,7 @@ internal class BreatheShardsMonsterSpell : BreatheProjectileMonsterSpell
     private BreatheShardsMonsterSpell(Game game) : base(game) { }
     public override bool UsesShards => true;
     protected override string ElementName => "shards";
-    protected override Projectile Projectile(Game game) => game.SingletonRepository.Projectiles.Get(nameof(ExplodeProjectile));
+    protected override Projectile Projectile(Game game) => game.SingletonRepository.Get<Projectile>(nameof(ExplodeProjectile));
     protected override int Damage(Monster monster) => monster.Health / 6 > 400 ? 400 : monster.Health / 6;
     public override SpellResistantDetection[] SmartLearn => new SpellResistantDetection[] { Game.SingletonRepository.Get<SpellResistantDetection>(nameof(ShardSpellResistantDetection)) };
 }

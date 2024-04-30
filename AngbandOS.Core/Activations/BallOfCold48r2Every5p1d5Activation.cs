@@ -22,7 +22,7 @@ internal class BallOfCold48r2Every5p1d5Activation : DirectionalActivation
 
     protected override bool Activate(int direction)
     {
-        Game.FireBall(Game.SingletonRepository.Projectiles.Get(nameof(ColdProjectile)), direction, 48, 2);
+        Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(ColdProjectile)), direction, 48, 2);
         return true;
     }
 

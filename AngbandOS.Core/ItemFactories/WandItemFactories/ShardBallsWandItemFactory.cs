@@ -35,7 +35,7 @@ internal class ShardBallsWandItemFactory : WandItemFactory
 
     public override bool ExecuteActivation(Game game, int dir)
     {
-        game.FireBall(game.SingletonRepository.Projectiles.Get(nameof(ShardProjectile)), dir, 75 + Game.DieRoll(50), 2);
+        game.FireBall(game.SingletonRepository.Get<Projectile>(nameof(ShardProjectile)), dir, 75 + Game.DieRoll(50), 2);
         return true;
     }
     public override Item CreateItem() => new Item(Game, this);

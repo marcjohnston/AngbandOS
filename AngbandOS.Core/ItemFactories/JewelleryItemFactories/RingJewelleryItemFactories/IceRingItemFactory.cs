@@ -18,7 +18,7 @@ internal class IceRingItemFactory : RingItemFactory, IItemsCanBeActivated
         {
             return;
         }
-        Game.FireBall(Game.SingletonRepository.Projectiles.Get(nameof(ColdProjectile)), dir, 50, 2);
+        Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(ColdProjectile)), dir, 50, 2);
         Game.ColdResistanceTimer.AddTimer(Game.DieRoll(20) + 20);
         item.RechargeTimeLeft = Game.RandomLessThan(50) + 50;
     }

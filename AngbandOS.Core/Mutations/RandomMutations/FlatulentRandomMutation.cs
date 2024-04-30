@@ -23,7 +23,7 @@ internal class FlatulentRandomMutation : Mutation
             Game.Disturb(false);
             Game.MsgPrint("BRRAAAP! Oops.");
             Game.MsgPrint(null);
-            Game.FireBall(Game.SingletonRepository.Projectiles.Get(nameof(PoisProjectile)), 0, Game.ExperienceLevel.IntValue, 3);
+            Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(PoisProjectile)), 0, Game.ExperienceLevel.IntValue, 3);
         }
     }
 }

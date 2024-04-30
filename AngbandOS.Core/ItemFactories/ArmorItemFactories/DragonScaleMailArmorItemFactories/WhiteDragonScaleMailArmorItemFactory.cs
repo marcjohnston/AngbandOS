@@ -19,7 +19,7 @@ internal class WhiteDragonScaleMailArmorItemFactory : DragonScaleMailArmorItemFa
             return;
         }
         Game.MsgPrint("You breathe frost.");
-        Game.FireBall(Game.SingletonRepository.Projectiles.Get(nameof(ColdProjectile)), dir, 110, -2);
+        Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(ColdProjectile)), dir, 110, -2);
         item.RechargeTimeLeft = Game.RandomLessThan(450) + 450;
     }
     public override string? DescribeActivationEffect => "breathe frost (110) every 450+d450 turns";

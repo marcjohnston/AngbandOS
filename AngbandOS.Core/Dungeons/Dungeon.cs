@@ -32,7 +32,7 @@ internal abstract class Dungeon : IGetKey
     {
         if (BiasMonsterFilterName != null)
         {
-            BiasMonsterFilter = Game.SingletonRepository.MonsterFilters.Get(BiasMonsterFilterName);
+            BiasMonsterFilter = Game.SingletonRepository.Get<MonsterFilter>(BiasMonsterFilterName);
         }
 
         List<DungeonGuardian> dungeonGuardianList = new List<DungeonGuardian>();

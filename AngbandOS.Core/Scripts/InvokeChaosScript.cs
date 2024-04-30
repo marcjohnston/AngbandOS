@@ -22,6 +22,6 @@ internal class InvokeChaosScript : Script, IScript
         {
             return;
         }
-        Game.FireBall(Game.SingletonRepository.Projectiles.Get(nameof(ChaosProjectile)), dir, 66 + Game.ExperienceLevel.IntValue, Game.ExperienceLevel.IntValue / 5);
+        Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(ChaosProjectile)), dir, 66 + Game.ExperienceLevel.IntValue, Game.ExperienceLevel.IntValue / 5);
     }
 }

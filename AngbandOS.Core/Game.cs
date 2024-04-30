@@ -805,17 +805,17 @@ internal class Game
         switch (DieRoll(6))
         {
             case 1:
-                return SingletonRepository.MonsterFilters.Get(nameof(Bizarre1MonsterFilter));
+                return SingletonRepository.Get<MonsterFilter>(nameof(Bizarre1MonsterFilter));
             case 2:
-                return SingletonRepository.MonsterFilters.Get(nameof(Bizarre2MonsterFilter));
+                return SingletonRepository.Get<MonsterFilter>(nameof(Bizarre2MonsterFilter));
             case 3:
-                return SingletonRepository.MonsterFilters.Get(nameof(Bizarre3MonsterFilter));
+                return SingletonRepository.Get<MonsterFilter>(nameof(Bizarre3MonsterFilter));
             case 4:
-                return SingletonRepository.MonsterFilters.Get(nameof(Bizarre4MonsterFilter));
+                return SingletonRepository.Get<MonsterFilter>(nameof(Bizarre4MonsterFilter));
             case 5:
-                return SingletonRepository.MonsterFilters.Get(nameof(Bizarre5MonsterFilter));
+                return SingletonRepository.Get<MonsterFilter>(nameof(Bizarre5MonsterFilter));
             default:
-                return SingletonRepository.MonsterFilters.Get(nameof(Bizarre6MonsterFilter));
+                return SingletonRepository.Get<MonsterFilter>(nameof(Bizarre6MonsterFilter));
         }
     }
 
@@ -3645,7 +3645,7 @@ internal class Game
         if (IsHalloween)
         {
             MsgPrint("All Hallows Eve and the ghouls come out to play...");
-            SummonSpecific(MapY.IntValue, MapX.IntValue, Difficulty, SingletonRepository.MonsterFilters.Get(nameof(UndeadMonsterFilter)));
+            SummonSpecific(MapY.IntValue, MapX.IntValue, Difficulty, SingletonRepository.Get<MonsterFilter>(nameof(UndeadMonsterFilter)));
         }
         if (CurrentDepth <= 0)
         {
@@ -4162,66 +4162,66 @@ internal class Game
             {
                 case 1:
                 case 2:
-                    SummonSpecific(MapY.IntValue, MapX.IntValue, Difficulty, SingletonRepository.MonsterFilters.Get(nameof(AntMonsterFilter)));
+                    SummonSpecific(MapY.IntValue, MapX.IntValue, Difficulty, SingletonRepository.Get<MonsterFilter>(nameof(AntMonsterFilter)));
                     break;
 
                 case 3:
                 case 4:
-                    SummonSpecific(MapY.IntValue, MapX.IntValue, Difficulty, SingletonRepository.MonsterFilters.Get(nameof(SpiderMonsterFilter)));
+                    SummonSpecific(MapY.IntValue, MapX.IntValue, Difficulty, SingletonRepository.Get<MonsterFilter>(nameof(SpiderMonsterFilter)));
                     break;
 
                 case 5:
                 case 6:
-                    SummonSpecific(MapY.IntValue, MapX.IntValue, Difficulty, SingletonRepository.MonsterFilters.Get(nameof(HoundMonsterFilter)));
+                    SummonSpecific(MapY.IntValue, MapX.IntValue, Difficulty, SingletonRepository.Get<MonsterFilter>(nameof(HoundMonsterFilter)));
                     break;
 
                 case 7:
                 case 8:
-                    SummonSpecific(MapY.IntValue, MapX.IntValue, Difficulty, SingletonRepository.MonsterFilters.Get(nameof(HydraMonsterFilter)));
+                    SummonSpecific(MapY.IntValue, MapX.IntValue, Difficulty, SingletonRepository.Get<MonsterFilter>(nameof(HydraMonsterFilter)));
                     break;
 
                 case 9:
                 case 10:
-                    SummonSpecific(MapY.IntValue, MapX.IntValue, Difficulty, SingletonRepository.MonsterFilters.Get(nameof(CthuloidMonsterFilter)));
+                    SummonSpecific(MapY.IntValue, MapX.IntValue, Difficulty, SingletonRepository.Get<MonsterFilter>(nameof(CthuloidMonsterFilter)));
                     break;
 
                 case 11:
                 case 12:
-                    SummonSpecific(MapY.IntValue, MapX.IntValue, Difficulty, SingletonRepository.MonsterFilters.Get(nameof(UndeadMonsterFilter)));
+                    SummonSpecific(MapY.IntValue, MapX.IntValue, Difficulty, SingletonRepository.Get<MonsterFilter>(nameof(UndeadMonsterFilter)));
                     break;
 
                 case 13:
                 case 14:
-                    SummonSpecific(MapY.IntValue, MapX.IntValue, Difficulty, SingletonRepository.MonsterFilters.Get(nameof(DragonMonsterFilter)));
+                    SummonSpecific(MapY.IntValue, MapX.IntValue, Difficulty, SingletonRepository.Get<MonsterFilter>(nameof(DragonMonsterFilter)));
                     break;
 
                 case 15:
                 case 16:
-                    SummonSpecific(MapY.IntValue, MapX.IntValue, Difficulty, SingletonRepository.MonsterFilters.Get(nameof(DemonMonsterFilter)));
+                    SummonSpecific(MapY.IntValue, MapX.IntValue, Difficulty, SingletonRepository.Get<MonsterFilter>(nameof(DemonMonsterFilter)));
                     break;
 
                 case 17:
-                    SummonSpecific(MapY.IntValue, MapX.IntValue, Difficulty, SingletonRepository.MonsterFilters.Get(nameof(GooMonsterFilter)));
+                    SummonSpecific(MapY.IntValue, MapX.IntValue, Difficulty, SingletonRepository.Get<MonsterFilter>(nameof(GooMonsterFilter)));
                     break;
 
                 case 18:
                 case 19:
-                    SummonSpecific(MapY.IntValue, MapX.IntValue, Difficulty, SingletonRepository.MonsterFilters.Get(nameof(UniqueMonsterFilter)));
+                    SummonSpecific(MapY.IntValue, MapX.IntValue, Difficulty, SingletonRepository.Get<MonsterFilter>(nameof(UniqueMonsterFilter)));
                     break;
 
                 case 20:
                 case 21:
-                    SummonSpecific(MapY.IntValue, MapX.IntValue, Difficulty, SingletonRepository.MonsterFilters.Get(nameof(HiUndeadMonsterFilter)));
+                    SummonSpecific(MapY.IntValue, MapX.IntValue, Difficulty, SingletonRepository.Get<MonsterFilter>(nameof(HiUndeadMonsterFilter)));
                     break;
 
                 case 22:
                 case 23:
-                    SummonSpecific(MapY.IntValue, MapX.IntValue, Difficulty, SingletonRepository.MonsterFilters.Get(nameof(HiDragonMonsterFilter)));
+                    SummonSpecific(MapY.IntValue, MapX.IntValue, Difficulty, SingletonRepository.Get<MonsterFilter>(nameof(HiDragonMonsterFilter)));
                     break;
 
                 case 24:
                 case 25:
-                    SummonSpecific(MapY.IntValue, MapX.IntValue, 100, SingletonRepository.MonsterFilters.Get(nameof(ReaverMonsterFilter)));
+                    SummonSpecific(MapY.IntValue, MapX.IntValue, 100, SingletonRepository.Get<MonsterFilter>(nameof(ReaverMonsterFilter)));
                     break;
 
                 default:
@@ -4336,25 +4336,25 @@ internal class Game
 
     public bool BanishEvil(int dist)
     {
-        return ProjectAtAllInLos(SingletonRepository.Projectiles.Get(nameof(TeleportAwayEvilProjectile)), dist);
+        return ProjectAtAllInLos(SingletonRepository.Get<Projectile>(nameof(TeleportAwayEvilProjectile)), dist);
     }
 
     public void CharmAnimal(int dir, int plev)
     {
         ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;
-        TargetedProject(SingletonRepository.Projectiles.Get(nameof(ControlAnimalProjectile)), dir, plev, flg);
+        TargetedProject(SingletonRepository.Get<Projectile>(nameof(ControlAnimalProjectile)), dir, plev, flg);
     }
 
     public bool CharmMonster(int dir, int plev)
     {
         ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;
-        return TargetedProject(SingletonRepository.Projectiles.Get(nameof(CharmProjectile)), dir, plev, flg);
+        return TargetedProject(SingletonRepository.Get<Projectile>(nameof(CharmProjectile)), dir, plev, flg);
     }
 
     public bool CloneMonster(int dir)
     {
         ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;
-        return TargetedProject(SingletonRepository.Projectiles.Get(nameof(OldCloneProjectile)), dir, 0, flg);
+        return TargetedProject(SingletonRepository.Get<Projectile>(nameof(OldCloneProjectile)), dir, 0, flg);
     }
 
     public void ColdDam(int dam, string kbStr)
@@ -4390,18 +4390,18 @@ internal class Game
     public bool ConfuseMonster(int dir, int plev)
     {
         ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;
-        return TargetedProject(SingletonRepository.Projectiles.Get(nameof(OldConfProjectile)), dir, plev, flg);
+        return TargetedProject(SingletonRepository.Get<Projectile>(nameof(OldConfProjectile)), dir, plev, flg);
     }
 
     public void ConfuseMonsters(int dam)
     {
-        ProjectAtAllInLos(SingletonRepository.Projectiles.Get(nameof(OldConfProjectile)), dam);
+        ProjectAtAllInLos(SingletonRepository.Get<Projectile>(nameof(OldConfProjectile)), dam);
     }
 
     public void ControlOneUndead(int dir, int plev)
     {
         ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;
-        TargetedProject(SingletonRepository.Projectiles.Get(nameof(ControlUndeadProjectile)), dir, plev, flg);
+        TargetedProject(SingletonRepository.Get<Projectile>(nameof(ControlUndeadProjectile)), dir, plev, flg);
     }
 
     public void DestroyArea(int y1, int x1, int r)
@@ -4479,7 +4479,7 @@ internal class Game
     public bool DestroyDoor(int dir)
     {
         ProjectionFlag flg = ProjectionFlag.ProjectBeam | ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem;
-        return TargetedProject(SingletonRepository.Projectiles.Get(nameof(KillDoorProjectile)), dir, 0, flg);
+        return TargetedProject(SingletonRepository.Get<Projectile>(nameof(KillDoorProjectile)), dir, 0, flg);
     }
 
     public bool DetectDoors()
@@ -4660,22 +4660,22 @@ internal class Game
     public bool DisarmTrap(int dir)
     {
         ProjectionFlag flg = ProjectionFlag.ProjectBeam | ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem;
-        return TargetedProject(SingletonRepository.Projectiles.Get(nameof(KillTrapProjectile)), dir, 0, flg);
+        return TargetedProject(SingletonRepository.Get<Projectile>(nameof(KillTrapProjectile)), dir, 0, flg);
     }
 
     public void DispelDemons(int dam)
     {
-        ProjectAtAllInLos(SingletonRepository.Projectiles.Get(nameof(DispDemonProjectile)), dam);
+        ProjectAtAllInLos(SingletonRepository.Get<Projectile>(nameof(DispDemonProjectile)), dam);
     }
 
     public bool DispelMonsters(int dam)
     {
-        return ProjectAtAllInLos(SingletonRepository.Projectiles.Get(nameof(DispAllProjectile)), dam);
+        return ProjectAtAllInLos(SingletonRepository.Get<Projectile>(nameof(DispAllProjectile)), dam);
     }
 
     public bool DispelUndead(int dam)
     {
-        return ProjectAtAllInLos(SingletonRepository.Projectiles.Get(nameof(DispUndeadProjectile)), dam);
+        return ProjectAtAllInLos(SingletonRepository.Get<Projectile>(nameof(DispUndeadProjectile)), dam);
     }
 
     /// <summary>
@@ -4687,7 +4687,7 @@ internal class Game
     public bool DrainLife(int dir, int dam)
     {
         ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;
-        return TargetedProject(SingletonRepository.Projectiles.Get(nameof(OldDrainProjectile)), dir, dam, flg);
+        return TargetedProject(SingletonRepository.Get<Projectile>(nameof(OldDrainProjectile)), dir, dam, flg);
     }
 
     public void Earthquake(int cy, int cx, int r)
@@ -5158,7 +5158,7 @@ internal class Game
     public bool FearMonster(int dir, int plev)
     {
         ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;
-        return TargetedProject(SingletonRepository.Projectiles.Get(nameof(TurnAllProjectile)), dir, plev, flg);
+        return TargetedProject(SingletonRepository.Get<Projectile>(nameof(TurnAllProjectile)), dir, plev, flg);
     }
 
     /// <summary>
@@ -5243,13 +5243,13 @@ internal class Game
 
     public bool HasteMonsters()
     {
-        return ProjectAtAllInLos(SingletonRepository.Projectiles.Get(nameof(OldSpeedProjectile)), ExperienceLevel.IntValue);
+        return ProjectAtAllInLos(SingletonRepository.Get<Projectile>(nameof(OldSpeedProjectile)), ExperienceLevel.IntValue);
     }
 
     public bool HealMonster(int dir)
     {
         ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;
-        return TargetedProject(SingletonRepository.Projectiles.Get(nameof(OldHealProjectile)), dir, DiceRoll(4, 6), flg);
+        return TargetedProject(SingletonRepository.Get<Projectile>(nameof(OldHealProjectile)), dir, DiceRoll(4, 6), flg);
     }
 
     public bool LightArea(int dam, int rad)
@@ -5259,7 +5259,7 @@ internal class Game
         {
             MsgPrint("You are surrounded by a white light.");
         }
-        Project(0, rad, MapY.IntValue, MapX.IntValue, dam, SingletonRepository.Projectiles.Get(nameof(LightWeakProjectile)), flg);
+        Project(0, rad, MapY.IntValue, MapX.IntValue, dam, SingletonRepository.Get<Projectile>(nameof(LightWeakProjectile)), flg);
         LightRoom(MapY.IntValue, MapX.IntValue);
         return true;
     }
@@ -5267,7 +5267,7 @@ internal class Game
     public void LightLine(int dir)
     {
         ProjectionFlag flg = ProjectionFlag.ProjectBeam | ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectKill;
-        TargetedProject(SingletonRepository.Projectiles.Get(nameof(LightWeakProjectile)), dir, DiceRoll(6, 8), flg);
+        TargetedProject(SingletonRepository.Get<Projectile>(nameof(LightWeakProjectile)), dir, DiceRoll(6, 8), flg);
     }
 
     public bool LoseAllInfo()
@@ -5308,13 +5308,13 @@ internal class Game
 
     public void MindblastMonsters(int dam)
     {
-        ProjectAtAllInLos(SingletonRepository.Projectiles.Get(nameof(PsiProjectile)), dam);
+        ProjectAtAllInLos(SingletonRepository.Get<Projectile>(nameof(PsiProjectile)), dam);
     }
 
     public bool PolyMonster(int dir)
     {
         ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;
-        return TargetedProject(SingletonRepository.Projectiles.Get(nameof(OldPolyProjectile)), dir, ExperienceLevel.IntValue, flg);
+        return TargetedProject(SingletonRepository.Get<Projectile>(nameof(OldPolyProjectile)), dir, ExperienceLevel.IntValue, flg);
     }
 
     public int PolymorphMonster(MonsterRace rPtr)
@@ -5455,47 +5455,47 @@ internal class Game
     public bool SleepMonster(int dir)
     {
         ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;
-        return TargetedProject(SingletonRepository.Projectiles.Get(nameof(OldSleepProjectile)), dir, ExperienceLevel.IntValue, flg);
+        return TargetedProject(SingletonRepository.Get<Projectile>(nameof(OldSleepProjectile)), dir, ExperienceLevel.IntValue, flg);
     }
 
     public void SleepMonstersTouch()
     {
         ProjectionFlag flg = ProjectionFlag.ProjectKill | ProjectionFlag.ProjectHide;
-        Project(0, 1, MapY.IntValue, MapX.IntValue, ExperienceLevel.IntValue, SingletonRepository.Projectiles.Get(nameof(OldSleepProjectile)), flg);
+        Project(0, 1, MapY.IntValue, MapX.IntValue, ExperienceLevel.IntValue, SingletonRepository.Get<Projectile>(nameof(OldSleepProjectile)), flg);
     }
 
     public bool SlowMonster(int dir)
     {
         ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;
-        return TargetedProject(SingletonRepository.Projectiles.Get(nameof(OldSlowProjectile)), dir, ExperienceLevel.IntValue, flg);
+        return TargetedProject(SingletonRepository.Get<Projectile>(nameof(OldSlowProjectile)), dir, ExperienceLevel.IntValue, flg);
     }
 
     public bool SpeedMonster(int dir)
     {
         ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;
-        return TargetedProject(SingletonRepository.Projectiles.Get(nameof(OldSpeedProjectile)), dir, ExperienceLevel.IntValue, flg);
+        return TargetedProject(SingletonRepository.Get<Projectile>(nameof(OldSpeedProjectile)), dir, ExperienceLevel.IntValue, flg);
     }
 
     public void StasisMonster(int dir)
     {
         ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;
-        TargetedProject(SingletonRepository.Projectiles.Get(nameof(StasisProjectile)), dir, ExperienceLevel.IntValue, flg);
+        TargetedProject(SingletonRepository.Get<Projectile>(nameof(StasisProjectile)), dir, ExperienceLevel.IntValue, flg);
     }
 
     public void StasisMonsters(int dam)
     {
-        ProjectAtAllInLos(SingletonRepository.Projectiles.Get(nameof(StasisProjectile)), dam);
+        ProjectAtAllInLos(SingletonRepository.Get<Projectile>(nameof(StasisProjectile)), dam);
     }
 
     public void StunMonster(int dir, int plev)
     {
         ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;
-        TargetedProject(SingletonRepository.Projectiles.Get(nameof(StunProjectile)), dir, plev, flg);
+        TargetedProject(SingletonRepository.Get<Projectile>(nameof(StunProjectile)), dir, plev, flg);
     }
 
     public void StunMonsters(int dam)
     {
-        ProjectAtAllInLos(SingletonRepository.Projectiles.Get(nameof(StunProjectile)), dam);
+        ProjectAtAllInLos(SingletonRepository.Get<Projectile>(nameof(StunProjectile)), dam);
     }
 
     public void SummonReaver()
@@ -5503,14 +5503,14 @@ internal class Game
         int maxReaver = (Difficulty / 50) + DieRoll(6);
         for (int i = 0; i < maxReaver; i++)
         {
-            SummonSpecific(MapY.IntValue, MapX.IntValue, 100, SingletonRepository.MonsterFilters.Get(nameof(ReaverMonsterFilter)));
+            SummonSpecific(MapY.IntValue, MapX.IntValue, 100, SingletonRepository.Get<MonsterFilter>(nameof(ReaverMonsterFilter)));
         }
     }
 
     public bool TeleportMonster(int dir)
     {
         ProjectionFlag flg = ProjectionFlag.ProjectBeam | ProjectionFlag.ProjectKill;
-        return TargetedProject(SingletonRepository.Projectiles.Get(nameof(TeleportAwayAllProjectile)), dir, Constants.MaxSight * 5, flg);
+        return TargetedProject(SingletonRepository.Get<Projectile>(nameof(TeleportAwayAllProjectile)), dir, Constants.MaxSight * 5, flg);
     }
 
     public void TeleportPlayerTo(int ny, int nx)
@@ -5613,17 +5613,17 @@ internal class Game
     public bool TrapCreation()
     {
         ProjectionFlag flg = ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectHide;
-        return Project(0, 1, MapY.IntValue, MapX.IntValue, 0, SingletonRepository.Projectiles.Get(nameof(MakeTrapProjectile)), flg);
+        return Project(0, 1, MapY.IntValue, MapX.IntValue, 0, SingletonRepository.Get<Projectile>(nameof(MakeTrapProjectile)), flg);
     }
 
     public void TurnEvil(int dam)
     {
-        ProjectAtAllInLos(SingletonRepository.Projectiles.Get(nameof(TurnEvilProjectile)), dam);
+        ProjectAtAllInLos(SingletonRepository.Get<Projectile>(nameof(TurnEvilProjectile)), dam);
     }
 
     public void TurnMonsters(int dam)
     {
-        ProjectAtAllInLos(SingletonRepository.Projectiles.Get(nameof(TurnAllProjectile)), dam);
+        ProjectAtAllInLos(SingletonRepository.Get<Projectile>(nameof(TurnAllProjectile)), dam);
     }
 
     public bool UnlightArea(int dam, int rad)
@@ -5633,7 +5633,7 @@ internal class Game
         {
             MsgPrint("Darkness surrounds you.");
         }
-        Project(0, rad, MapY.IntValue, MapX.IntValue, dam, SingletonRepository.Projectiles.Get(nameof(DarkWeakProjectile)), flg);
+        Project(0, rad, MapY.IntValue, MapX.IntValue, dam, SingletonRepository.Get<Projectile>(nameof(DarkWeakProjectile)), flg);
         UnlightRoom(MapY.IntValue, MapX.IntValue);
         return true;
     }
@@ -5695,13 +5695,13 @@ internal class Game
     public bool WallToMud(int dir)
     {
         ProjectionFlag flg = ProjectionFlag.ProjectBeam | ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill;
-        return TargetedProject(SingletonRepository.Projectiles.Get(nameof(KillWallProjectile)), dir, 20 + DieRoll(30), flg);
+        return TargetedProject(SingletonRepository.Get<Projectile>(nameof(KillWallProjectile)), dir, 20 + DieRoll(30), flg);
     }
 
     public void WizardLock(int dir)
     {
         ProjectionFlag flg = ProjectionFlag.ProjectBeam | ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill;
-        TargetedProject(SingletonRepository.Projectiles.Get(nameof(JamDoorProjectile)), dir, 20 + DieRoll(30), flg);
+        TargetedProject(SingletonRepository.Get<Projectile>(nameof(JamDoorProjectile)), dir, 20 + DieRoll(30), flg);
     }
 
     private void CaveTempRoomAux(int y, int x)
@@ -6340,7 +6340,7 @@ internal class Game
             // Completely remake the armor into a set of blasted armor
             MsgPrint($"A terrible black aura blasts your {itemName}!");
             item.FixedArtifact = null;
-            item.RareItem = SingletonRepository.RareItems.Get(nameof(ArmorBlastedRareItem));
+            item.RareItem = SingletonRepository.Get<RareItem>(nameof(ArmorBlastedRareItem));
             item.BonusArmorClass = 0 - DieRoll(5) - DieRoll(5);
             item.BonusToHit = 0;
             item.BonusDamage = 0;
@@ -6379,7 +6379,7 @@ internal class Game
             // Completely remake the item into a shattered weapon
             MsgPrint($"A terrible black aura blasts your {itemName}!");
             item.FixedArtifact = null;
-            item.RareItem = SingletonRepository.RareItems.Get(nameof(WeaponShatteredRareItem));
+            item.RareItem = SingletonRepository.Get<RareItem>(nameof(WeaponShatteredRareItem));
             item.BonusToHit = 0 - DieRoll(5) - DieRoll(5);
             item.BonusDamage = 0 - DieRoll(5) - DieRoll(5);
             item.BonusArmorClass = 0;
@@ -8324,12 +8324,12 @@ internal class Game
 
                 case MutationAttackType.Poison:
                     Project(0, 0, monster.MapY, monster.MapX, damage,
-                        SingletonRepository.Projectiles.Get(nameof(PoisProjectile)), ProjectionFlag.ProjectKill);
+                        SingletonRepository.Get<Projectile>(nameof(PoisProjectile)), ProjectionFlag.ProjectKill);
                     break;
 
                 case MutationAttackType.Hellfire:
                     Project(0, 0, monster.MapY, monster.MapX, damage,
-                        SingletonRepository.Projectiles.Get(nameof(HellfireProjectile)), ProjectionFlag.ProjectKill);
+                        SingletonRepository.Get<Projectile>(nameof(HellfireProjectile)), ProjectionFlag.ProjectKill);
                     break;
             }
             // The monster might hurt when we touch it
@@ -10179,7 +10179,7 @@ internal class Game
                     if (Wilderness[WildernessY][WildernessX].Town.Char == 'K')
                     {
                         DungeonDifficulty = 35;
-                        DunBias = SingletonRepository.MonsterFilters.Get(nameof(CthuloidMonsterFilter));
+                        DunBias = SingletonRepository.Get<MonsterFilter>(nameof(CthuloidMonsterFilter));
                     }
                 }
                 else if (Wilderness[WildernessY][WildernessX].Dungeon != null)
@@ -10194,7 +10194,7 @@ internal class Game
                 else
                 {
                     DungeonDifficulty = 2;
-                    DunBias = SingletonRepository.MonsterFilters.Get(nameof(AnimalMonsterFilter));
+                    DunBias = SingletonRepository.Get<MonsterFilter>(nameof(AnimalMonsterFilter));
                 }
                 CurHgt = Constants.PlayableScreenHeight;
                 CurWid = Constants.PlayableScreenWidth;

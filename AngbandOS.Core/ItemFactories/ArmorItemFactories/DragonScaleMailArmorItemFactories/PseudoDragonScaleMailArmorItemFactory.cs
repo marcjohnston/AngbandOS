@@ -21,7 +21,7 @@ internal class PseudoDragonScaleMailArmorItemFactory : DragonScaleMailArmorItemF
         int chance = Game.RandomLessThan(2);
         string element = chance == 0 ? "light" : "darkness";
         Game.MsgPrint($"You breathe {element}.");
-        Game.FireBall(chance == 0 ? (Projectile)Game.SingletonRepository.Projectiles.Get(nameof(LightProjectile)) : Game.SingletonRepository.Projectiles.Get(nameof(DarkProjectile)), dir, 200, -2);
+        Game.FireBall(chance == 0 ? (Projectile)Game.SingletonRepository.Get<Projectile>(nameof(LightProjectile)) : Game.SingletonRepository.Get<Projectile>(nameof(DarkProjectile)), dir, 200, -2);
         item.RechargeTimeLeft = Game.RandomLessThan(300) + 300;
     }
     public override string? DescribeActivationEffect => "breathe light/darkness (200) every 300+d300 turns";

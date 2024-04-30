@@ -108,12 +108,12 @@ internal class DraconianRace : Race
         // Default to being randomly fire (66% chance) or cold (33% chance)
         if (Game.DieRoll(3) == 1)
         {
-            projectile = Game.SingletonRepository.Projectiles.Get(nameof(ColdProjectile));
+            projectile = Game.SingletonRepository.Get<Projectile>(nameof(ColdProjectile));
             projectileDescription = "cold";
         }
         else
         {
-            projectile = Game.SingletonRepository.Projectiles.Get(nameof(FireProjectile));
+            projectile = Game.SingletonRepository.Get<Projectile>(nameof(FireProjectile));
             projectileDescription = "fire";
         }
 
@@ -128,12 +128,12 @@ internal class DraconianRace : Race
                 case CharacterClass.ChosenOne:
                     if (Game.DieRoll(3) == 1)
                     {
-                        projectile = Game.SingletonRepository.Projectiles.Get(nameof(MissileProjectile));
+                        projectile = Game.SingletonRepository.Get<Projectile>(nameof(MissileProjectile));
                         projectileDescription = "the elements";
                     }
                     else
                     {
-                        projectile = Game.SingletonRepository.Projectiles.Get(nameof(ExplodeProjectile));
+                        projectile = Game.SingletonRepository.Get<Projectile>(nameof(ExplodeProjectile));
                         projectileDescription = "shards";
                     }
                     break;
@@ -144,12 +144,12 @@ internal class DraconianRace : Race
                 case CharacterClass.Channeler:
                     if (Game.DieRoll(3) == 1)
                     {
-                        projectile = Game.SingletonRepository.Projectiles.Get(nameof(ManaProjectile));
+                        projectile = Game.SingletonRepository.Get<Projectile>(nameof(ManaProjectile));
                         projectileDescription = "mana";
                     }
                     else
                     {
-                        projectile = Game.SingletonRepository.Projectiles.Get(nameof(DisenchantProjectile));
+                        projectile = Game.SingletonRepository.Get<Projectile>(nameof(DisenchantProjectile));
                         projectileDescription = "disenchantment";
                     }
                     break;
@@ -158,12 +158,12 @@ internal class DraconianRace : Race
                 case CharacterClass.Cultist:
                     if (Game.DieRoll(3) != 1)
                     {
-                        projectile = Game.SingletonRepository.Projectiles.Get(nameof(ConfusionProjectile));
+                        projectile = Game.SingletonRepository.Get<Projectile>(nameof(ConfusionProjectile));
                         projectileDescription = "confusion";
                     }
                     else
                     {
-                        projectile = Game.SingletonRepository.Projectiles.Get(nameof(ChaosProjectile));
+                        projectile = Game.SingletonRepository.Get<Projectile>(nameof(ChaosProjectile));
                         projectileDescription = "chaos";
                     }
                     break;
@@ -171,12 +171,12 @@ internal class DraconianRace : Race
                 case CharacterClass.Monk:
                     if (Game.DieRoll(3) != 1)
                     {
-                        projectile = Game.SingletonRepository.Projectiles.Get(nameof(ConfusionProjectile));
+                        projectile = Game.SingletonRepository.Get<Projectile>(nameof(ConfusionProjectile));
                         projectileDescription = "confusion";
                     }
                     else
                     {
-                        projectile = Game.SingletonRepository.Projectiles.Get(nameof(SoundProjectile));
+                        projectile = Game.SingletonRepository.Get<Projectile>(nameof(SoundProjectile));
                         projectileDescription = "sound";
                     }
                     break;
@@ -185,12 +185,12 @@ internal class DraconianRace : Race
                 case CharacterClass.Mystic:
                     if (Game.DieRoll(3) != 1)
                     {
-                        projectile = Game.SingletonRepository.Projectiles.Get(nameof(ConfusionProjectile));
+                        projectile = Game.SingletonRepository.Get<Projectile>(nameof(ConfusionProjectile));
                         projectileDescription = "confusion";
                     }
                     else
                     {
-                        projectile = Game.SingletonRepository.Projectiles.Get(nameof(PsiProjectile));
+                        projectile = Game.SingletonRepository.Get<Projectile>(nameof(PsiProjectile));
                         projectileDescription = "mental energy";
                     }
                     break;
@@ -199,12 +199,12 @@ internal class DraconianRace : Race
                 case CharacterClass.Paladin:
                     if (Game.DieRoll(3) == 1)
                     {
-                        projectile = Game.SingletonRepository.Projectiles.Get(nameof(HellfireProjectile));
+                        projectile = Game.SingletonRepository.Get<Projectile>(nameof(HellfireProjectile));
                         projectileDescription = "hellfire";
                     }
                     else
                     {
-                        projectile = Game.SingletonRepository.Projectiles.Get(nameof(HolyFireProjectile));
+                        projectile = Game.SingletonRepository.Get<Projectile>(nameof(HolyFireProjectile));
                         projectileDescription = "holy fire";
                     }
                     break;
@@ -212,12 +212,12 @@ internal class DraconianRace : Race
                 case CharacterClass.Rogue:
                     if (Game.DieRoll(3) == 1)
                     {
-                        projectile = Game.SingletonRepository.Projectiles.Get(nameof(DarkProjectile));
+                        projectile = Game.SingletonRepository.Get<Projectile>(nameof(DarkProjectile));
                         projectileDescription = "darkness";
                     }
                     else
                     {
-                        projectile = Game.SingletonRepository.Projectiles.Get(nameof(PoisProjectile));
+                        projectile = Game.SingletonRepository.Get<Projectile>(nameof(PoisProjectile));
                         projectileDescription = "poison";
                     }
                     break;

@@ -15,7 +15,7 @@ internal class FireBallMonsterSpell : BallProjectileMonsterSpell
 
     public override bool IsAttack => true;
     protected override string ActionName => "casts a fire ball";
-    protected override Projectile Projectile(Game game) => game.SingletonRepository.Projectiles.Get(nameof(FireProjectile));
+    protected override Projectile Projectile(Game game) => game.SingletonRepository.Get<Projectile>(nameof(FireProjectile));
     protected override int Damage(Monster monster)
     {
         int monsterLevel = monster.Race.Level >= 1 ? monster.Race.Level : 1;

@@ -19,7 +19,7 @@ internal class BlueDragonScaleMailArmorItemFactory : DragonScaleMailArmorItemFac
             return;
         }
         Game.MsgPrint("You breathe lightning.");
-        Game.FireBall(Game.SingletonRepository.Projectiles.Get(nameof(ElecProjectile)), dir, 100, -2);
+        Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(ElecProjectile)), dir, 100, -2);
         item.RechargeTimeLeft = Game.RandomLessThan(450) + 450;
     }
     //public override Activation? ActivationPower => Game.SingletonRepository.Get<Activation>(nameof(BreatheLightingActivation));

@@ -19,7 +19,7 @@ internal class BlackDragonScaleMailArmorItemFactory : DragonScaleMailArmorItemFa
             return;
         }
         Game.MsgPrint("You breathe acid.");
-        Game.FireBall(Game.SingletonRepository.Projectiles.Get(nameof(AcidProjectile)), dir, 130, -2);
+        Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(AcidProjectile)), dir, 130, -2);
         item.RechargeTimeLeft = Game.RandomLessThan(450) + 450;
         return;
     }

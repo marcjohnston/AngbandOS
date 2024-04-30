@@ -22,7 +22,7 @@ internal class LightningBolt4d8Every6p1d6Activation : DirectionalActivation
 
     protected override bool Activate(int direction)
     {
-        Game.FireBolt(Game.SingletonRepository.Projectiles.Get(nameof(ElecProjectile)), direction, Game.DiceRoll(4, 8));
+        Game.FireBolt(Game.SingletonRepository.Get<Projectile>(nameof(ElecProjectile)), direction, Game.DiceRoll(4, 8));
         return true;
     }
 

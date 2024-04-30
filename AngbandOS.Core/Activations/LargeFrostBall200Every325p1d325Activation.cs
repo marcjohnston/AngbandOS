@@ -22,7 +22,7 @@ internal class LargeFrostBall200Every325p1d325Activation : DirectionalActivation
 
     protected override bool Activate(int direction)
     {
-        Game.FireBall(Game.SingletonRepository.Projectiles.Get(nameof(ColdProjectile)), direction, 200, 3);
+        Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(ColdProjectile)), direction, 200, 3);
         return true;
     }
 

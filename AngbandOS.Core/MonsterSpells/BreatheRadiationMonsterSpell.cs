@@ -13,7 +13,7 @@ internal class BreatheRadiationMonsterSpell : BreatheProjectileMonsterSpell
     private BreatheRadiationMonsterSpell(Game game) : base(game) { }
     public override bool UsesRadiation => true;
     protected override string ElementName => "toxic waste";
-    protected override Projectile Projectile(Game game) => game.SingletonRepository.Projectiles.Get(nameof(NukeProjectile));
+    protected override Projectile Projectile(Game game) => game.SingletonRepository.Get<Projectile>(nameof(NukeProjectile));
     protected override int Damage(Monster monster) => monster.Health / 3 > 800 ? 800 : monster.Health / 3;
     public override SpellResistantDetection[] SmartLearn => new SpellResistantDetection[] { Game.SingletonRepository.Get<SpellResistantDetection>(nameof(PoisSpellResistantDetection)) };
 }

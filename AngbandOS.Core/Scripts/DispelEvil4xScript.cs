@@ -18,7 +18,7 @@ internal class DispelEvil4xScript : Script, ISuccessfulScriptInt, IScriptInt, IS
     /// <returns></returns>
     public bool ExecuteSuccessfulScriptInt(int dam)
     {
-        return Game.ProjectAtAllInLos(Game.SingletonRepository.Projectiles.Get(nameof(DispEvilProjectile)), dam);
+        return Game.ProjectAtAllInLos(Game.SingletonRepository.Get<Projectile>(nameof(DispEvilProjectile)), dam);
     }
 
     /// <summary>

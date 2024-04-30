@@ -1111,7 +1111,7 @@ internal class Monster : IItemContainer
                         if (newY == Game.MapY.IntValue && newX == Game.MapX.IntValue)
                         {
                             Game.MsgPrint("The rune explodes!");
-                            Game.FireBall(Game.SingletonRepository.Projectiles.Get(nameof(ManaProjectile)), 0, 2 * ((Game.ExperienceLevel.IntValue / 2) + Game.DiceRoll(7, 7)), 2);
+                            Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(ManaProjectile)), 0, 2 * ((Game.ExperienceLevel.IntValue / 2) + Game.DiceRoll(7, 7)), 2);
                         }
                         else
                         {
@@ -1445,7 +1445,7 @@ internal class Monster : IItemContainer
                 obvious = true;
                 damage = this.Game.DiceRoll(dDice, dSide);
                 // Default to a missile attack
-                Projectile pt = Game.SingletonRepository.Projectiles.Get(nameof(MissileProjectile));
+                Projectile pt = Game.SingletonRepository.Get<Projectile>(nameof(MissileProjectile));
                 // Choose the correct type of attack to display, as well as any other special
                 // effects for the attack
                 if (effect == null)
@@ -1476,7 +1476,7 @@ internal class Monster : IItemContainer
                                     targetRace.Knowledge.Characteristics.FireAura = true;
                                 }
                             }
-                            Game.Project(targetIndex, 0, MapY, MapX, this.Game.DiceRoll(1 + (targetRace.Level / 26), 1 + (targetRace.Level / 17)), Game.SingletonRepository.Projectiles.Get(nameof(Projection.FireProjectile)), ProjectionFlag.ProjectKill | ProjectionFlag.ProjectStop);
+                            Game.Project(targetIndex, 0, MapY, MapX, this.Game.DiceRoll(1 + (targetRace.Level / 26), 1 + (targetRace.Level / 17)), Game.SingletonRepository.Get<Projectile>(nameof(Projection.FireProjectile)), ProjectionFlag.ProjectKill | ProjectionFlag.ProjectStop);
                         }
                         if (targetRace.LightningAura && !Race.ImmuneLightning)
                         {
@@ -1492,7 +1492,7 @@ internal class Monster : IItemContainer
                                 }
                             }
                             Game.Project(targetIndex, 0, MapY, MapX, this.Game.DiceRoll(1 + (targetRace.Level / 26), 1 + (targetRace.Level / 17)),
-                                Game.SingletonRepository.Projectiles.Get(nameof(Projection.ElecProjectile)), ProjectionFlag.ProjectKill | ProjectionFlag.ProjectStop);
+                                Game.SingletonRepository.Get<Projectile>(nameof(Projection.ElecProjectile)), ProjectionFlag.ProjectKill | ProjectionFlag.ProjectStop);
                         }
                     }
                 }

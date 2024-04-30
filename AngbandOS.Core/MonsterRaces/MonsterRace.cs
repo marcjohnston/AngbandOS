@@ -363,7 +363,7 @@ internal abstract class MonsterRace : IMonsterCharacteristics, IGetKey
         {
             foreach (string spellName in SpellNames)
             {
-                Spells.Add(Game.SingletonRepository.MonsterSpells.Get(spellName));
+                Spells.Add(Game.SingletonRepository.Get<MonsterSpell>(spellName));
             }
         }
 

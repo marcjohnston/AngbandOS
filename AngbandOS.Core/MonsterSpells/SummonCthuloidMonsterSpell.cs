@@ -15,5 +15,5 @@ internal class SummonCthuloidMonsterSpell : SummonMonsterSpell
 
     protected override int MaximumSummonCount => 1;
 
-    protected override MonsterFilter? MonsterSelector(Monster monster) => Game.SingletonRepository.MonsterFilters.Get(nameof(CthuloidMonsterFilter));
+    protected override MonsterFilter? MonsterSelector(Monster monster) => Game.SingletonRepository.Get<MonsterFilter>(nameof(CthuloidMonsterFilter));
 }

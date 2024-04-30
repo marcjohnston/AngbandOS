@@ -22,7 +22,7 @@ internal class SetOfCestiOfCombatFixedArtifact : FixedArtifact, IFixedArtifactAc
         {
             return;
         }
-        Game.FireBolt(Game.SingletonRepository.Projectiles.Get(nameof(ArrowProjectile)), dir, 150);
+        Game.FireBolt(Game.SingletonRepository.Get<Projectile>(nameof(ArrowProjectile)), dir, 150);
         item.RechargeTimeLeft = base.Game.RandomLessThan(90) + 90;
     }
     public override void ApplyResistances(Item item)

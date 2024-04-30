@@ -28,7 +28,7 @@ internal class ChaosScrollItemFactory : ScrollItemFactory
 
     public override void Read(ReadScrollEvent eventArgs)
     {
-        Game.FireBall(Game.SingletonRepository.Projectiles.Get(nameof(ChaosProjectile)), 0, 222, 4);
+        Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(ChaosProjectile)), 0, 222, 4);
         if (!Game.HasChaosResistance)
         {
             Game.TakeHit(111 + Game.DieRoll(111), "a Scroll of Chaos");

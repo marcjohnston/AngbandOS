@@ -23,5 +23,5 @@ internal class SummonMonstersMonsterSpell : SummonMonsterSpell
     /// </summary>
     protected override MonsterFilter? MonsterSelector(Monster monster) => null;
 
-    protected override MonsterFilter? FriendlyMonsterSelector(Monster monster) => Game.SingletonRepository.MonsterFilters.Get(nameof(NoUniquesMonsterFilter));
+    protected override MonsterFilter? FriendlyMonsterSelector(Monster monster) => Game.SingletonRepository.Get<MonsterFilter>(nameof(NoUniquesMonsterFilter));
 }

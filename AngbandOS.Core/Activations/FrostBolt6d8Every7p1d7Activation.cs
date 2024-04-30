@@ -22,7 +22,7 @@ internal class FrostBolt6d8Every7p1d7Activation : DirectionalActivation
 
     protected override bool Activate(int direction)
     {
-        Game.FireBolt(Game.SingletonRepository.Projectiles.Get(nameof(ColdProjectile)), direction, Game.DiceRoll(6, 8));
+        Game.FireBolt(Game.SingletonRepository.Get<Projectile>(nameof(ColdProjectile)), direction, Game.DiceRoll(6, 8));
         return true;
     }
 

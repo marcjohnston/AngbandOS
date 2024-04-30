@@ -14,7 +14,7 @@ internal class LightningBallMonsterSpell : BallProjectileMonsterSpell
     public override bool UsesLightning => true;
     public override bool IsAttack => true;
     protected override string ActionName => "casts a lightning ball";
-    protected override Projectile Projectile(Game game) => game.SingletonRepository.Projectiles.Get(nameof(ElecProjectile));
+    protected override Projectile Projectile(Game game) => game.SingletonRepository.Get<Projectile>(nameof(ElecProjectile));
     protected override int Damage(Monster monster)
     {
         int monsterLevel = monster.Race.Level >= 1 ? monster.Race.Level : 1;

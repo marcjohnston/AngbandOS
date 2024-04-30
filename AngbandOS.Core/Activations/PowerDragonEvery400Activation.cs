@@ -19,7 +19,7 @@ internal class PowerDragonEvery400Activation : DirectionalActivation
 
     protected override bool Activate(int direction)
     {
-        Game.FireBall(Game.SingletonRepository.Projectiles.Get(nameof(MissileProjectile)), direction, 300, 4);
+        Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(MissileProjectile)), direction, 300, 4);
         Game.MsgPrint("Your armor glows many colors...");
         Game.FearTimer.ResetTimer();
         Game.SuperheroismTimer.AddTimer(base.Game.DieRoll(50) + 50);

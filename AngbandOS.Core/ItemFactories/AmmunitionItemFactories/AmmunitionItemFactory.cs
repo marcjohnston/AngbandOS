@@ -62,30 +62,30 @@ internal abstract class AmmunitionItemFactory : WeaponItemFactory
                 case 1:
                 case 2:
                 case 3:
-                    item.RareItem = Game.SingletonRepository.RareItems.Get(nameof(AmmoOfWoundingRareItem));
+                    item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(AmmoOfWoundingRareItem));
                     break;
                 case 4:
-                    item.RareItem = Game.SingletonRepository.RareItems.Get(nameof(AmmoOfFlameRareItem));
+                    item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(AmmoOfFlameRareItem));
                     break;
                 case 5:
-                    item.RareItem = Game.SingletonRepository.RareItems.Get(nameof(AmmoOfFrostRareItem));
+                    item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(AmmoOfFrostRareItem));
                     break;
                 case 6:
                 case 7:
-                    item.RareItem = Game.SingletonRepository.RareItems.Get(nameof(AmmoOfHurtAnimalRareItem));
+                    item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(AmmoOfHurtAnimalRareItem));
                     break;
                 case 8:
                 case 9:
-                    item.RareItem = Game.SingletonRepository.RareItems.Get(nameof(AmmoOfHurtEvilRareItem));
+                    item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(AmmoOfHurtEvilRareItem));
                     break;
                 case 10:
-                    item.RareItem = Game.SingletonRepository.RareItems.Get(nameof(AmmoOfHurtDragonRareItem));
+                    item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(AmmoOfHurtDragonRareItem));
                     break;
                 case 11:
-                    item.RareItem = Game.SingletonRepository.RareItems.Get(nameof(AmmoOfShockingRareItem));
+                    item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(AmmoOfShockingRareItem));
                     break;
                 case 12:
-                    item.RareItem = Game.SingletonRepository.RareItems.Get(nameof(AmmoOfSlayingRareItem));
+                    item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(AmmoOfSlayingRareItem));
                     item.DamageDice++;
                     break;
             }
@@ -102,7 +102,7 @@ internal abstract class AmmunitionItemFactory : WeaponItemFactory
         {
             if (Game.RandomLessThan(Constants.MaxDepth) < level)
             {
-                item.RareItem = Game.SingletonRepository.RareItems.Get(nameof(AmmoOfBackbitingRareItem));
+                item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(AmmoOfBackbitingRareItem));
             }
         }
     }

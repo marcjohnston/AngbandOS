@@ -22,6 +22,6 @@ internal class WhirlpoolScript : Script, IScript
         {
             return;
         }
-        Game.FireBall(Game.SingletonRepository.Projectiles.Get(nameof(WaterProjectile)), dir, 100 + Game.ExperienceLevel.IntValue, (Game.ExperienceLevel.IntValue / 12) + 1);
+        Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(WaterProjectile)), dir, 100 + Game.ExperienceLevel.IntValue, (Game.ExperienceLevel.IntValue / 12) + 1);
     }
 }

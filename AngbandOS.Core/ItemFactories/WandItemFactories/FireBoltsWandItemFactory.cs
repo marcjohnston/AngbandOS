@@ -29,7 +29,7 @@ internal class FireBoltsWandItemFactory : WandItemFactory
     public override int Weight => 10;
     public override bool ExecuteActivation(Game game, int dir)
     {
-        game.FireBoltOrBeam(20, game.SingletonRepository.Projectiles.Get(nameof(FireProjectile)), dir, Game.DiceRoll(6, 8));
+        game.FireBoltOrBeam(20, game.SingletonRepository.Get<Projectile>(nameof(FireProjectile)), dir, Game.DiceRoll(6, 8));
         return true;
     }
     public override Item CreateItem() => new Item(Game, this);

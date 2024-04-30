@@ -38,11 +38,11 @@ internal class WonderWandItemFactory : WandItemFactory
         {
             case 0:
                 // Acid ball
-                game.FireBall(game.SingletonRepository.Projectiles.Get(nameof(AcidProjectile)), dir, 60, 2);
+                game.FireBall(game.SingletonRepository.Get<Projectile>(nameof(AcidProjectile)), dir, 60, 2);
                 return true;
             case 1:
                 // Acid bolt
-                game.FireBoltOrBeam(20, game.SingletonRepository.Projectiles.Get(nameof(AcidProjectile)), dir, Game.DiceRoll(3, 8));
+                game.FireBoltOrBeam(20, game.SingletonRepository.Get<Projectile>(nameof(AcidProjectile)), dir, Game.DiceRoll(3, 8));
                 return true;
             case 2:
                 // CharmMonster
@@ -52,11 +52,11 @@ internal class WonderWandItemFactory : WandItemFactory
                 return game.CloneMonster(dir);
             case 4:
                 // ColdBall
-                game.FireBall(game.SingletonRepository.Projectiles.Get(nameof(ColdProjectile)), dir, 48, 2);
+                game.FireBall(game.SingletonRepository.Get<Projectile>(nameof(ColdProjectile)), dir, 48, 2);
                 return true;
             case 5:
                 // ColdBolt
-                game.FireBoltOrBeam(20, game.SingletonRepository.Projectiles.Get(nameof(ColdProjectile)), dir, Game.DiceRoll(3, 8));
+                game.FireBoltOrBeam(20, game.SingletonRepository.Get<Projectile>(nameof(ColdProjectile)), dir, Game.DiceRoll(3, 8));
                 return true;
             case 6:
                 // ConfuseMonster
@@ -69,18 +69,18 @@ internal class WonderWandItemFactory : WandItemFactory
                 return game.DrainLife(dir, 75);
             case 9:
                 // ElecBall
-                game.FireBall(game.SingletonRepository.Projectiles.Get(nameof(ElecProjectile)), dir, 32, 2);
+                game.FireBall(game.SingletonRepository.Get<Projectile>(nameof(ElecProjectile)), dir, 32, 2);
                 return true;
             case 10:
                 // FearMonster
                 return game.FearMonster(dir, 10);
             case 11:
                 // FireBall
-                game.FireBall(game.SingletonRepository.Projectiles.Get(nameof(FireProjectile)), dir, 72, 2);
+                game.FireBall(game.SingletonRepository.Get<Projectile>(nameof(FireProjectile)), dir, 72, 2);
                 return true;
             case 12:
                 // FireBolt
-                game.FireBoltOrBeam(20, game.SingletonRepository.Projectiles.Get(nameof(FireProjectile)), dir, Game.DiceRoll(6, 8));
+                game.FireBoltOrBeam(20, game.SingletonRepository.Get<Projectile>(nameof(FireProjectile)), dir, Game.DiceRoll(6, 8));
                 return true;
             case 13:
                 // HasteMonster
@@ -95,7 +95,7 @@ internal class WonderWandItemFactory : WandItemFactory
                 return true;
             case 16:
                 // MagicMissile
-                game.FireBoltOrBeam(20, game.SingletonRepository.Projectiles.Get(nameof(MissileProjectile)), dir, Game.DiceRoll(2, 6));
+                game.FireBoltOrBeam(20, game.SingletonRepository.Get<Projectile>(nameof(MissileProjectile)), dir, Game.DiceRoll(2, 6));
                 return true;
             case 17:
                 // Polymorph
@@ -108,7 +108,7 @@ internal class WonderWandItemFactory : WandItemFactory
                 return game.SlowMonster(dir);
             case 20:
                 // StinkingCloud
-                game.FireBall(game.SingletonRepository.Projectiles.Get(nameof(PoisProjectile)), dir, 12, 2);
+                game.FireBall(game.SingletonRepository.Get<Projectile>(nameof(PoisProjectile)), dir, 12, 2);
                 return true;
             case 21:
                 // StoneToMud

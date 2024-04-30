@@ -22,7 +22,7 @@ internal class StinkingCloud12Every4p1d4Activation : DirectionalActivation
 
     protected override bool Activate(int direction)
     {
-        Game.FireBall(Game.SingletonRepository.Projectiles.Get(nameof(PoisProjectile)), direction, 12, 3);
+        Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(PoisProjectile)), direction, 12, 3);
         return true;
     }
 

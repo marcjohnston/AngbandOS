@@ -22,7 +22,7 @@ internal class BallOfLightning100r3Every500Activation : DirectionalActivation
 
     protected override bool Activate(int direction)
     {
-        Game.FireBall(Game.SingletonRepository.Projectiles.Get(nameof(ElecProjectile)), direction, 100, 3);
+        Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(ElecProjectile)), direction, 100, 3);
         return true;
     }
 

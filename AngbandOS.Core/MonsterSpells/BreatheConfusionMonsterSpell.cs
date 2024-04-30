@@ -13,7 +13,7 @@ internal class BreatheConfusionMonsterSpell : BreatheProjectileMonsterSpell
     private BreatheConfusionMonsterSpell(Game game) : base(game) { }
     public override bool UsesConfusion => true;
     protected override string ElementName => "confusion";
-    protected override Projectile Projectile(Game game) => game.SingletonRepository.Projectiles.Get(nameof(ConfusionProjectile));
+    protected override Projectile Projectile(Game game) => game.SingletonRepository.Get<Projectile>(nameof(ConfusionProjectile));
     protected override int Damage(Monster monster) => monster.Health / 6 > 400 ? 400 : monster.Health / 6;
     public override SpellResistantDetection[] SmartLearn => new SpellResistantDetection[] { Game.SingletonRepository.Get<SpellResistantDetection>(nameof(ConfSpellResistantDetection)) };
 }

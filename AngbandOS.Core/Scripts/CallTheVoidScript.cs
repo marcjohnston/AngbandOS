@@ -30,21 +30,21 @@ internal class CallTheVoidScript : Script, IScript
             {
                 if (i - 5 != 0)
                 {
-                    Game.FireBall(Game.SingletonRepository.Projectiles.Get(nameof(ShardProjectile)), i, 175, 2);
+                    Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(ShardProjectile)), i, 175, 2);
                 }
             }
             for (i = 1; i < 10; i++)
             {
                 if (i - 5 != 0)
                 {
-                    Game.FireBall(Game.SingletonRepository.Projectiles.Get(nameof(ManaProjectile)), i, 175, 3);
+                    Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(ManaProjectile)), i, 175, 3);
                 }
             }
             for (i = 1; i < 10; i++)
             {
                 if (i - 5 != 0)
                 {
-                    Game.FireBall(Game.SingletonRepository.Projectiles.Get(nameof(NukeProjectile)), i, 175, 4);
+                    Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(NukeProjectile)), i, 175, 4);
                 }
             }
         }

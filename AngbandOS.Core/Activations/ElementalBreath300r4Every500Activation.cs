@@ -24,7 +24,7 @@ internal class ElementalBreath300r4Every500Activation : DirectionalActivation
 
     protected override bool Activate(int direction)
     {
-        Game.FireBall(Game.SingletonRepository.Projectiles.Get(nameof(MissileProjectile)), direction, 300, -4);
+        Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(MissileProjectile)), direction, 300, -4);
         return true;
     }
 

@@ -22,7 +22,7 @@ internal class LargeLightningBall250Every425p1d425Activation : DirectionalActiva
 
     protected override bool Activate(int direction)
     {
-        Game.FireBall(Game.SingletonRepository.Projectiles.Get(nameof(ElecProjectile)), direction, 250, 3);
+        Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(ElecProjectile)), direction, 250, 3);
         return true;
     }
 

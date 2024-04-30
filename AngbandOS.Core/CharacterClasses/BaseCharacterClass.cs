@@ -164,7 +164,7 @@ internal abstract class BaseCharacterClass : IGetKey
                 else
                 {
                     Game.MsgPrint("Your mind unleashes its power in an uncontrollable storm!");
-                    Game.Project(1, 2 + (plev / 10), Game.MapY.IntValue, Game.MapX.IntValue, plev * 2, Game.SingletonRepository.Projectiles.Get(nameof(ManaProjectile)), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectKill | ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem);
+                    Game.Project(1, 2 + (plev / 10), Game.MapY.IntValue, Game.MapX.IntValue, plev * 2, Game.SingletonRepository.Get<Projectile>(nameof(ManaProjectile)), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectKill | ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem);
                     Game.Mana.IntValue = Math.Max(0, Game.Mana.IntValue - (plev * Math.Max(1, plev / 10)));
                 }
             }

@@ -22,6 +22,6 @@ internal class DarknessStormScript : Script, IScript
         {
             return;
         }
-        Game.FireBall(Game.SingletonRepository.Projectiles.Get(nameof(DarkProjectile)), dir, 120, 4);
+        Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(DarkProjectile)), dir, 120, 4);
     }
 }

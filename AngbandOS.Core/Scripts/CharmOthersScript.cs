@@ -24,7 +24,7 @@ internal class CharmOthersScript : Script, IScript, IScriptInt, ICancellableScri
 
     public void ExecuteScriptInt(int damage)
     {
-        Game.ProjectAtAllInLos(Game.SingletonRepository.Projectiles.Get(nameof(ControlAnimalProjectile)), damage);
+        Game.ProjectAtAllInLos(Game.SingletonRepository.Get<Projectile>(nameof(ControlAnimalProjectile)), damage);
     }
 
     /// <summary>

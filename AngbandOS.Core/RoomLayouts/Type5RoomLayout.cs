@@ -109,32 +109,32 @@ internal class Type5RoomLayout : RoomLayout
         }
         else if (tmp < 25)
         {
-            getMonNumHook = Game.SingletonRepository.MonsterFilters.Get(nameof(JellyMonsterFilter));
+            getMonNumHook = Game.SingletonRepository.Get<MonsterFilter>(nameof(JellyMonsterFilter));
         }
         else if (tmp < 50)
         {
-            getMonNumHook = Game.SingletonRepository.MonsterFilters.Get(nameof(TreasureMonsterFilter));
+            getMonNumHook = Game.SingletonRepository.Get<MonsterFilter>(nameof(TreasureMonsterFilter));
         }
         else if (tmp < 65)
         {
             if (Game.DieRoll(3) == 1)
             {
-                getMonNumHook = Game.SingletonRepository.MonsterFilters.Get(nameof(KennelMonsterFilter));
+                getMonNumHook = Game.SingletonRepository.Get<MonsterFilter>(nameof(KennelMonsterFilter));
             }
             else
             {
-                getMonNumHook = Game.SingletonRepository.MonsterFilters.Get(nameof(AnimalMonsterFilter));
+                getMonNumHook = Game.SingletonRepository.Get<MonsterFilter>(nameof(AnimalMonsterFilter));
             }
         }
         else
         {
             if (Game.DieRoll(3) == 1)
             {
-                getMonNumHook = Game.SingletonRepository.MonsterFilters.Get(nameof(ChapelMonsterFilter));
+                getMonNumHook = Game.SingletonRepository.Get<MonsterFilter>(nameof(ChapelMonsterFilter));
             }
             else
             {
-                getMonNumHook = Game.SingletonRepository.MonsterFilters.Get(nameof(UndeadMonsterFilter));
+                getMonNumHook = Game.SingletonRepository.Get<MonsterFilter>(nameof(UndeadMonsterFilter));
             }
         }
         for (int i = 0; i < 64; i++)

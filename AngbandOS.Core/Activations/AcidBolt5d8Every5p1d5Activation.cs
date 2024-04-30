@@ -22,7 +22,7 @@ internal class AcidBolt5d8Every5p1d5Activation : DirectionalActivation
 
     protected override bool Activate(int direction)
     {
-        Game.FireBolt(Game.SingletonRepository.Projectiles.Get(nameof(AcidProjectile)), direction, Game.DiceRoll(5, 8));
+        Game.FireBolt(Game.SingletonRepository.Get<Projectile>(nameof(AcidProjectile)), direction, Game.DiceRoll(5, 8));
         return true;
     }
 

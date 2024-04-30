@@ -43,7 +43,7 @@ internal class EditItemScript : Script, IScript
                 {
                     return;
                 }
-                item.RareItem = Game.SingletonRepository.RareItems[val];
+                item.RareItem = Game.SingletonRepository.Get<RareItem>(val);
                 item.ApplyMagic(Game.Difficulty, ok, good, great, null);
                 break;
             }

@@ -25,6 +25,6 @@ internal class ManaBurstScript : Script, IScript
         int experienceDivisor = (Game.BaseCharacterClass.ID == CharacterClass.Mage || Game.BaseCharacterClass.ID == CharacterClass.HighMage ? 2 : 4);
         int damage = Game.DiceRoll(3, 5) + Game.ExperienceLevel.IntValue + (Game.ExperienceLevel.IntValue / experienceDivisor);
         int radius = Game.ExperienceLevel.IntValue < 30 ? 2 : 3;
-        Game.FireBall(Game.SingletonRepository.Projectiles.Get(nameof(MissileProjectile)), dir, damage, radius);
+        Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(MissileProjectile)), dir, damage, radius);
     }
 }
