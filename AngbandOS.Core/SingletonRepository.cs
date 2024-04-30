@@ -35,12 +35,12 @@ internal class SingletonRepository
     public UnreadableFlavorSyllablesRepository UnreadableFlavorSyllables;
     public WorshipPlayerAttacksRepository WorshipPlayerAttacks;
 
-    private Dictionary<string, GenericRepository> _repositoryDictionary = new Dictionary<string, GenericRepository>();
+    private Dictionary<string, GenericRepository> _singletonsDictionary = new Dictionary<string, GenericRepository>();
 
     /// <summary>
     /// Returns a list of all singletons.  This is used to track all of the loaded singletons so that they can be bound quickly and only once.
     /// </summary>
-    private List<IGetKey> _singletons = new List<IGetKey>();
+    private List<IGetKey> _allSingletonsList = new List<IGetKey>();
 
     /// <summary>
     /// Returns a <see cref="WeightedRandom"/> object with all of the entities in the <typeparamref name="T""Tx"/> repository.
@@ -51,7 +51,7 @@ internal class SingletonRepository
     public WeightedRandom<T> ToWeightedRandom<T>(Func<T, bool>? predicate = null)
     {
         string typeName = typeof(T).Name;
-        T[] list = _repositoryDictionary[typeName].Get<T>();
+        T[] list = _singletonsDictionary[typeName].Get<T>();
         return new WeightedRandom<T>(Game, list, predicate);
     }
 
@@ -63,12 +63,12 @@ internal class SingletonRepository
     private void RegisterRepository<T>()
     {
         string typeName = typeof(T).Name;
-        if (_repositoryDictionary.TryGetValue(typeName, out GenericRepository? genericRepository))
+        if (_singletonsDictionary.TryGetValue(typeName, out GenericRepository? genericRepository))
         {
             throw new Exception($"{typeName} repository already registered.");
         }
         genericRepository = new GenericRepository();
-        _repositoryDictionary.Add(typeName, genericRepository);
+        _singletonsDictionary.Add(typeName, genericRepository);
     }
 
     /// <summary>
@@ -88,7 +88,7 @@ internal class SingletonRepository
         string typeName = typeof(T).Name;
 
         // Check to see if the dictionary has a dictionary for this type of object.
-        if (!_repositoryDictionary.TryGetValue(typeName, out GenericRepository? genericRepository))
+        if (!_singletonsDictionary.TryGetValue(typeName, out GenericRepository? genericRepository))
         {
             throw new Exception($"The {typeof(T).Name} singleton interface was not registered.");
         }
@@ -126,7 +126,7 @@ internal class SingletonRepository
     public T[] Get<T>() where T : class
     {
         string typeName = typeof(T).Name;
-        return _repositoryDictionary[typeName].Get<T>();
+        return _singletonsDictionary[typeName].Get<T>();
     }
 
     /// <summary>
@@ -161,7 +161,7 @@ internal class SingletonRepository
         string typeName = typeof(T).Name;
 
         // Check to see if the dictionary has a dictionary for this type of object.
-        if (!_repositoryDictionary.TryGetValue(typeName, out GenericRepository? genericRepository))
+        if (!_singletonsDictionary.TryGetValue(typeName, out GenericRepository? genericRepository))
         {
             throw new Exception($"The {typeof(T).Name} singleton interface was not registered.");
         }
@@ -177,7 +177,7 @@ internal class SingletonRepository
     public T Get<T>(int index) where T : class
     {
         string typeName = typeof(T).Name;
-        return (T)_repositoryDictionary[typeName].List[index];
+        return (T)_singletonsDictionary[typeName].List[index];
     }
 
     private void LoadAllAssemblyTypes()
@@ -211,7 +211,7 @@ internal class SingletonRepository
                         string typeName = interfaceType.Name;
 
                         // Check to see if there is a repository that is registered for this type.  There is no else; we simple ignore this interface.
-                        if (_repositoryDictionary.TryGetValue(typeName, out GenericRepository? genericRepository))
+                        if (_singletonsDictionary.TryGetValue(typeName, out GenericRepository? genericRepository))
                         {
                             // We only instantiate the object once and only if we are storing it.
                             if (singleton == null)
@@ -226,7 +226,7 @@ internal class SingletonRepository
                                     string key = getKeySingleton.GetKey;
 
                                     // Add the singleton to the list of singletons so that they can be bound.
-                                    _singletons.Add(getKeySingleton);
+                                    _allSingletonsList.Add(getKeySingleton);
 
                                     // Ensure there isn't already a singleton with the same name.
                                     if (genericRepository.Dictionary.TryGetValue(key, out _))
@@ -293,7 +293,7 @@ internal class SingletonRepository
     private void LoadFromConfiguration<T, TDefinition, TGeneric>(TDefinition[]? definitions) where T : IGetKey where TGeneric : T
     {
         string typeName = typeof(T).Name;
-        GenericRepository gameCommands = _repositoryDictionary[typeName];
+        GenericRepository gameCommands = _singletonsDictionary[typeName];
         if (definitions != null)
         {
             ConstructorInfo[] constructors = typeof(TGeneric).GetConstructors(BindingFlags.Public | BindingFlags.Instance);
@@ -306,7 +306,7 @@ internal class SingletonRepository
                 T gameCommand = (T)constructors[0].Invoke(new object[] { Game, definition });
                 string key = gameCommand.GetKey;
                 gameCommands.Add(key, gameCommand);
-                _singletons.Add(gameCommand);
+                _allSingletonsList.Add(gameCommand);
             }
         }
     }
@@ -431,8 +431,8 @@ internal class SingletonRepository
 
         MonsterRace[] monsterRaces = Get<MonsterRace>();
         MonsterRace[] sortedMonsterRaces = monsterRaces.OrderBy(_monsterRace => _monsterRace.LevelFound).ToArray();
-        _repositoryDictionary["MonsterRace"].List.Clear();
-        _repositoryDictionary["MonsterRace"].List.AddRange(sortedMonsterRaces);
+        _singletonsDictionary["MonsterRace"].List.Clear();
+        _singletonsDictionary["MonsterRace"].List.AddRange(sortedMonsterRaces);
 
         // Create all of the repositories.  All of the repositories will be empty and have an instance to the save game.
         ElvishText = AddRepository<ElvishTextRepository>(new ElvishTextRepository(Game));
@@ -455,7 +455,7 @@ internal class SingletonRepository
         BindRepositoryItems();
 
         // Bind all of the singletons now.
-        foreach (IGetKey singleton in _singletons)
+        foreach (IGetKey singleton in _allSingletonsList)
         {
             singleton.Bind();
         }
