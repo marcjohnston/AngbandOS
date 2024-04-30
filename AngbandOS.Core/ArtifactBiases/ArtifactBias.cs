@@ -32,7 +32,7 @@ internal abstract class ArtifactBias : IArtifactBias, IGetKey
 
     public virtual string Key => GetType().Name;
 
-    public void Bind() { }
+    public virtual void Bind() { }
 
     /// <inheritdoc/>
     public virtual int ImmunityLuckOneInChance => 20;

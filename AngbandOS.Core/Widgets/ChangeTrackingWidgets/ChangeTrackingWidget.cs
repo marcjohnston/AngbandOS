@@ -69,7 +69,6 @@ internal abstract class ChangeTrackingWidget : Widget
     public override void Bind()
     {
         base.Bind();
-
         ChangeTrackers = Game.SingletonRepository.Get<IChangeTracker>(ChangeTrackerNames);
         Widgets = Game.SingletonRepository.Get<Widget>(WidgetNames);
         PokeableWidgets = Widgets.Where(_widget => _widget.CanPoke).ToArray();

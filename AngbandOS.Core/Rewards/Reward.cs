@@ -28,7 +28,7 @@ internal abstract class Reward : IGetKey
     public virtual string Key => GetType().Name;
 
     public string GetKey => Key;
-    public void Bind() { }
+    public virtual void Bind() { }
 
     public abstract void GetReward(Patron patron);
 }

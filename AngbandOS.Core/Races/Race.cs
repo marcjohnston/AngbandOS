@@ -29,7 +29,7 @@ internal abstract class Race : IGetKey
     public virtual string Key => GetType().Name;
 
     public string GetKey => Key;
-    public void Bind() { }
+    public virtual void Bind() { }
 
     public abstract int[] AbilityBonus { get; } // TODO: This needs to be a dictionary where the keys are stats
     public abstract int AgeRange { get; }

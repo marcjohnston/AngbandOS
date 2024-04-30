@@ -48,5 +48,5 @@ internal abstract class ClassSpell : IGetKey
     /// </summary>
     public string GetKey => $"{CharacterClassName}.{SpellName}";
 
-    public void Bind() { }
+    public virtual void Bind() { }
 }

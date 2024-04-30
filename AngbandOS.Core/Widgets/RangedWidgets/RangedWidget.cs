@@ -24,8 +24,8 @@ internal abstract class RangedWidget : TextWidget
 
     public override void Bind()
     {
-        IntValue = Game.SingletonRepository.Get<IIntValue>(IntValueName);
         base.Bind();
+        IntValue = Game.SingletonRepository.Get<IIntValue>(IntValueName);
     }
 
     /// <summary>

@@ -53,7 +53,7 @@ internal abstract class RareItem : IItemCharacteristics, IGetKey
     public virtual string Key => GetType().Name;
 
     public string GetKey => Key;
-    public void Bind() { }
+    public virtual void Bind() { }
 
     /// <summary>
     /// Returns the symbol to use for rendering.

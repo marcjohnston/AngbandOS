@@ -14,17 +14,8 @@ internal abstract class BookItemFactory : ItemFactory
 
     public override void Bind()
     {
-        // We need the base classes to bind.
         base.Bind();
-
-        // Now bind the spells.
-        List<Spell> spellList = new List<Spell>();
-        foreach (string spellName in SpellNames)
-        {
-            Spell spell = Game.SingletonRepository.Get<Spell>(spellName);
-            spellList.Add(spell);
-        }
-        Spells = spellList.ToArray();
+        Spells = Game.SingletonRepository.Get<Spell>(SpellNames);
     }
 
     public void SetBookIndex(Realm realm, int bookIndex)

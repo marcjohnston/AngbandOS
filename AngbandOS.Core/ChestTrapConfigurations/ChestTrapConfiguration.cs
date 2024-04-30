@@ -28,7 +28,7 @@ internal abstract class ChestTrapConfiguration : IGetKey
     public virtual string Key => GetType().Name;
 
     public string GetKey => Key;
-    public void Bind() { }
+    public virtual void Bind() { }
 
     public abstract ChestTrap[] Traps { get; }
     public bool NotTrapped => Traps.Length == 0;

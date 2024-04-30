@@ -36,5 +36,5 @@ internal abstract class Plural : IGetKey
     public virtual string Key { get; }
 
     public string GetKey => Key;
-    public void Bind() { }
+    public virtual void Bind() { }
 }

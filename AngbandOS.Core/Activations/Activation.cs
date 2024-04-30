@@ -32,7 +32,7 @@ internal abstract class Activation : IGetKey
 
     public string GetKey => Key;
 
-    public void Bind() { }
+    public virtual void Bind() { }
 
     /// <summary>
     /// Returns the unique name for this activation power.

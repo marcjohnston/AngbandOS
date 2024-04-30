@@ -33,5 +33,5 @@ internal abstract class AlterAction : IGetKey
     public virtual string Key => GetType().Name;
 
     public string GetKey => Key;
-    public void Bind() { }
+    public virtual void Bind() { }
 }

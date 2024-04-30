@@ -44,7 +44,7 @@ internal abstract class Attack : IGetKey
     }
 
     public string GetKey => Key;
-    public void Bind() { }
+    public virtual void Bind() { }
 
     /// <summary>
     /// Returns the action message to be displayed, when the attack targets another monster.

@@ -44,9 +44,9 @@ internal abstract class MaxRangedWidget : TextWidget
 
     public override void Bind()
     {
+        base.Bind();
         IntValue = Game.SingletonRepository.Get<IIntValue>(IntValueName);
         MaxIntValue = Game.SingletonRepository.Get<IIntValue>(MaxIntValueName);
-        base.Bind();
     }
 
     private void ValidateRangeSorting()

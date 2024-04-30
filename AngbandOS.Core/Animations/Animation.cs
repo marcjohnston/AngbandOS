@@ -43,7 +43,7 @@ internal abstract class Animation : IGetKey
 
     public string GetKey => Key;
 
-    public void Bind() { }
+    public virtual void Bind() { }
 
     public abstract char Character { get; }
     public abstract ColorEnum Color { get; }

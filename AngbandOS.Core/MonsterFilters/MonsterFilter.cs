@@ -28,7 +28,7 @@ internal abstract class MonsterFilter : IGetKey, IMonsterFilter
         return "";
     }
 
-    public void Bind() { }
+    public virtual void Bind() { }
 
     /// <summary>
     /// Returns true, if a monster matches the selector.

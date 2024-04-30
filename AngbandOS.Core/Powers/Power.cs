@@ -24,7 +24,7 @@ internal abstract class Power : IGetKey
     public virtual bool IsSustain => false;
     public virtual bool IsAbility => false;
 
-    public void Bind() { }
+    public virtual void Bind() { }
 
     public string ToJson()
     {

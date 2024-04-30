@@ -46,7 +46,7 @@ internal abstract class Property : IGetKey, IChangeTracker
         throw new Exception($"ToString override missing for {GetType().Name}.");
     }
 
-    public void Bind() { }
+    public virtual void Bind() { }
 
     public string ToJson()
     {

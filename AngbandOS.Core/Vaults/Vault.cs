@@ -21,7 +21,7 @@ internal abstract class Vault : IGetKey
     public virtual string Key => GetType().Name;
 
     public string GetKey => Key;
-    public void Bind() { }
+    public virtual void Bind() { }
 
     public virtual ColorEnum Color => ColorEnum.White;
     public abstract string Name { get; }

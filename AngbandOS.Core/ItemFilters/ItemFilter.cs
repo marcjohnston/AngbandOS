@@ -122,7 +122,7 @@ internal abstract class ItemFilter : IGetKey, IItemFilter
     public virtual string Key => GetType().Name;
     public string GetKey => Key;
 
-    public void Bind() { }
+    public virtual void Bind() { }
 
     public virtual bool ItemMatches(Item item)
     {

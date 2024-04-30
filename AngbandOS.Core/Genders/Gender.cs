@@ -28,7 +28,7 @@ internal abstract class Gender : IGetKey
     public virtual string Key => GetType().Name;
 
     public string GetKey => Key;
-    public void Bind() { }
+    public virtual void Bind() { }
 
     public abstract string Title { get; }
     public abstract string Winner { get; } // TODO ... this winner title to describe the type of winner is not rendered
