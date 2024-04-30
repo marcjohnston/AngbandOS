@@ -34,7 +34,7 @@ internal class PairOfSoftLeatherBootsOfDancingFixedArtifact : FixedArtifact
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
     public override int Level => 10;
-    public override int Pval => 5;
+    public override int InitialTypeSpecificValue => 5;
     public override int Rarity => 25;
     public override bool ResChaos => true;
     public override bool ResNether => true;

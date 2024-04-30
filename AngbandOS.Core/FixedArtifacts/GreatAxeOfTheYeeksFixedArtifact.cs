@@ -31,7 +31,7 @@ internal class GreatAxeOfTheYeeksFixedArtifact : FixedArtifact
     public override bool IgnoreFire => true;
     public override bool KillDragon => true;
     public override int Level => 30;
-    public override int Pval => 3;
+    public override int InitialTypeSpecificValue => 3;
     public override int Rarity => 90;
     public override bool ResAcid => true;
     public override bool ResChaos => true;

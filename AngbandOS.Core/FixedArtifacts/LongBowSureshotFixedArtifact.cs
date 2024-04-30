@@ -29,7 +29,7 @@ internal class LongBowSureshotFixedArtifact : FixedArtifact
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
     public override int Level => 40;
-    public override int Pval => 3;
+    public override int InitialTypeSpecificValue => 3;
     public override int Rarity => 20;
     public override bool ResDisen => true;
     public override bool ShowMods => true;

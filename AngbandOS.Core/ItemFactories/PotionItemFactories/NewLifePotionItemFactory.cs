@@ -22,7 +22,7 @@ internal class NewLifePotionItemFactory : PotionItemFactory
     public override string FriendlyName => "New Life";
     public override int LevelNormallyFound => 50;
     public override int[] Locale => new int[] { 50, 100, 120, 0 };
-    public override int InitialTypeSpecificValue => 100;
+    public override int InitialNutritionalValue => 100;
     public override int Weight => 4;
     public override bool Quaff()
     {

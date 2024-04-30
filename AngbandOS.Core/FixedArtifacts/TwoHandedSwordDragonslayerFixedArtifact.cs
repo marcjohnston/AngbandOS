@@ -42,7 +42,7 @@ internal class TwoHandedSwordDragonslayerFixedArtifact : FixedArtifact
     public override bool IgnoreFire => true;
     public override bool KillDragon => true;
     public override int Level => 30;
-    public override int Pval => 2;
+    public override int InitialTypeSpecificValue => 2;
     public override int Rarity => 30;
     public override bool Regen => true;
     public override bool ShowMods => true;

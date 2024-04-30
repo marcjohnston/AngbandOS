@@ -20,7 +20,7 @@ internal class SlimeMoldJuicePotionItemFactory : PotionItemFactory
     public override int Dd => 1;
     public override int Ds => 1;
     public override string FriendlyName => "Slime Mold Juice";
-    public override int InitialTypeSpecificValue => 400;
+    public override int InitialNutritionalValue => 400;
     public override int Weight => 4;
     public override bool Quaff()
     {

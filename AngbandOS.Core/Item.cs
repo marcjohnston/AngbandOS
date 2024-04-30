@@ -252,6 +252,9 @@ internal sealed class Item : IComparable<Item>
     /// FOR ALL EQUIMENT - The bonus value for item.characteristic.(str, int, wis, dex, cha, dex, stealth, search, infra, tunnel, speed and blows
     /// </summary>
     public int TypeSpecificValue;
+
+    public int NutritionalValue = 0;
+
     public int Weight;
     public int X;
     public int Y;
@@ -264,6 +267,7 @@ internal sealed class Item : IComparable<Item>
         Factory = factory;
         TypeSpecificValue = Factory.InitialTypeSpecificValue;
         TurnsOfLightRemaining = Factory.InitialTurnsOfLight;
+        NutritionalValue = Factory.InitialNutritionalValue;
         Count = 1;
         Weight = Factory.Weight;
         BonusToHit = Factory.ToH;
@@ -417,6 +421,7 @@ internal sealed class Item : IComparable<Item>
         clonedItem.Count = newCount ?? Count;
         clonedItem.TypeSpecificValue = TypeSpecificValue;
         clonedItem.TurnsOfLightRemaining = TurnsOfLightRemaining;
+        clonedItem.NutritionalValue = NutritionalValue;
         clonedItem.RechargeTimeLeft = RechargeTimeLeft;
         clonedItem.BonusArmorClass = BonusArmorClass;
         clonedItem.BonusDamage = BonusDamage;
@@ -1901,7 +1906,7 @@ internal sealed class Item : IComparable<Item>
         if (FixedArtifact != null)
         {
             FixedArtifact.CurNum = 1;
-            TypeSpecificValue = FixedArtifact.Pval;
+            TypeSpecificValue = FixedArtifact.InitialTypeSpecificValue;
             BaseArmorClass = FixedArtifact.Ac;
             DamageDice = FixedArtifact.Dd;
             DamageDiceSides = FixedArtifact.Ds;

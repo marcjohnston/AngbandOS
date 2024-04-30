@@ -21,7 +21,7 @@ internal class PieceOfElvishWaybreadFoodItemFactory : FoodItemFactory
     public override string FriendlyName => "& Piece~ of Elvish Waybread";
     public override int LevelNormallyFound => 5;
     public override int[] Locale => new int[] { 5, 10, 20, 0 };
-    public override int InitialTypeSpecificValue => 7500;
+    public override int InitialNutritionalValue => 7500;
     public override int Weight => 3;
     public override bool Eat()
     {

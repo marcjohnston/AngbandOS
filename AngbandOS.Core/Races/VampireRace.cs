@@ -81,7 +81,7 @@ internal class VampireRace : Race
     public override void Eat(Item item)
     {
         // Vampires only get 1/10th of the food value
-        Game.SetFood(Game.Food.IntValue + (item.TypeSpecificValue / 10));
+        Game.SetFood(Game.Food.IntValue + (item.NutritionalValue / 10));
         Game.MsgPrint("Mere victuals hold scant sustenance for a being such as yourself.");
         if (Game.Food.IntValue < Constants.PyFoodAlert)
         {

@@ -31,7 +31,7 @@ internal class QuarterstaffFirestaffFixedArtifact : FixedArtifact
     public override bool Int => true;
     public override int Level => 20;
     public override bool Lightsource => true;
-    public override int Pval => 3;
+    public override int InitialTypeSpecificValue => 3;
     public override int Rarity => 18;
     public override bool ResFire => true;
     public override bool ShowMods => true;

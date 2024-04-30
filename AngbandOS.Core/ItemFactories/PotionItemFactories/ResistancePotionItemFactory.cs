@@ -26,7 +26,7 @@ internal class ResistancePotionItemFactory : PotionItemFactory
     public override bool IgnoreFire => true;
     public override int LevelNormallyFound => 20;
     public override int[] Locale => new int[] { 20, 45, 80, 100 };
-    public override int InitialTypeSpecificValue => 100;
+    public override int InitialNutritionalValue => 100;
     public override int Weight => 4;
     public override bool Quaff()
     {

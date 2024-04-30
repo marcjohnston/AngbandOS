@@ -30,7 +30,7 @@ internal class KatanaOfGrooFixedArtifact : FixedArtifact
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
     public override int Level => 30;
-    public override int Pval => 3;
+    public override int InitialTypeSpecificValue => 3;
     public override int Rarity => 25;
     public override bool ShowMods => true;
     public override bool Speed => true;

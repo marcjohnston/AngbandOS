@@ -34,7 +34,7 @@ internal class MultiHuedDragonScaleMailRazorbackFixedArtifact : FixedArtifact
     public override bool ImElec => true;
     public override int Level => 90;
     public override bool Lightsource => true;
-    public override int Pval => 0;
+    public override int InitialTypeSpecificValue => 0;
     public override int Rarity => 9;
     public override bool ResCold => true;
     public override bool ResDark => true;

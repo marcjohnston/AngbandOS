@@ -40,7 +40,7 @@ internal class QuarterstaffOfAtalFixedArtifact : FixedArtifact
     public override bool Int => true;
     public override int Level => 30;
     public override bool Lightsource => true;
-    public override int Pval => 4;
+    public override int InitialTypeSpecificValue => 4;
     public override int Rarity => 105;
     public override bool ResFire => true;
     public override bool ResNether => true;

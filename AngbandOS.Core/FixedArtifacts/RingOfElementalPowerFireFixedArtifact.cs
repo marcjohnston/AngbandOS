@@ -38,7 +38,7 @@ internal class RingOfElementalPowerFireFixedArtifact : FixedArtifact
     public override bool InstaArt => true;
     public override bool Int => true;
     public override int Level => 70;
-    public override int Pval => 1;
+    public override int InitialTypeSpecificValue => 1;
     public override int Rarity => 30;
     public override bool Regen => true;
     public override bool SeeInvis => true;

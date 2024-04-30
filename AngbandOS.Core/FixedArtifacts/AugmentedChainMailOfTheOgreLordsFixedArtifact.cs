@@ -39,7 +39,7 @@ internal class AugmentedChainMailOfTheOgreLordsFixedArtifact : FixedArtifact
     public override bool IgnoreFire => true;
     public override bool Int => true;
     public override int Level => 25;
-    public override int Pval => 3;
+    public override int InitialTypeSpecificValue => 3;
     public override int Rarity => 9;
     public override bool ResAcid => true;
     public override bool ResConf => true;

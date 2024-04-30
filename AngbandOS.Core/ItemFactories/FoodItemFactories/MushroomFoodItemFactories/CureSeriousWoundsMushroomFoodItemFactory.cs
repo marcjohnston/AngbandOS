@@ -20,7 +20,6 @@ internal class CureSeriousWoundsMushroomFoodItemFactory : MushroomFoodItemFactor
     public override string FriendlyName => "Cure Serious Wounds";
     public override int LevelNormallyFound => 15;
     public override int[] Locale => new int[] { 15, 0, 0, 0 };
-    public override int InitialTypeSpecificValue => 500;
     public override int Weight => 2;
     public override bool Eat()
     {

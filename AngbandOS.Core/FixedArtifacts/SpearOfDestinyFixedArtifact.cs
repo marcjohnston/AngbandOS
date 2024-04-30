@@ -48,7 +48,7 @@ internal class SpearOfDestinyFixedArtifact : FixedArtifact, IFixedArtifactActiva
     public override bool Int => true;
     public override int Level => 15;
     public override bool Lightsource => true;
-    public override int Pval => 4;
+    public override int InitialTypeSpecificValue => 4;
     public override int Rarity => 45;
     public override bool ResFear => true;
     public override bool ResFire => true;

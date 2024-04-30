@@ -64,7 +64,7 @@ internal class RingOfSetFixedArtifact : FixedArtifact, IFixedArtifactActivatible
     public override bool Int => true;
     public override int Level => 100;
     public override bool PermaCurse => true;
-    public override int Pval => 5;
+    public override int InitialTypeSpecificValue => 5;
     public override int Rarity => 100;
     public override bool Regen => true;
     public override bool SeeInvis => true;

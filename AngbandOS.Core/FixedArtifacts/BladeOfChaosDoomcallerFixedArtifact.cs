@@ -35,7 +35,7 @@ internal class BladeOfChaosDoomcallerFixedArtifact : FixedArtifact
     public override bool KillDragon => true;
     public override int Level => 70;
     public override bool Lightsource => true;
-    public override int Pval => 0;
+    public override int InitialTypeSpecificValue => 0;
     public override int Rarity => 25;
     public override bool ResAcid => true;
     public override bool ResChaos => true;

@@ -42,7 +42,7 @@ internal class LongSwordVorpalBladeFixedArtifact : FixedArtifact
     public override bool IgnoreFire => true;
     public override int Level => 50;
     public override bool Lightsource => true;
-    public override int Pval => 2;
+    public override int InitialTypeSpecificValue => 2;
     public override int Rarity => 30;
     public override bool Regen => true;
     public override bool SeeInvis => true;

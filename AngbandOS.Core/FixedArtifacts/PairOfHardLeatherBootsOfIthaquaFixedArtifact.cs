@@ -30,7 +30,7 @@ internal class PairOfHardLeatherBootsOfIthaquaFixedArtifact : FixedArtifact
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
     public override int Level => 40;
-    public override int Pval => 15;
+    public override int InitialTypeSpecificValue => 15;
     public override int Rarity => 120;
     public override bool ResNexus => true;
     public override bool Speed => true;

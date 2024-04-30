@@ -47,7 +47,7 @@ internal class LongSwordOfEverflameFixedArtifact : FixedArtifact
     public override bool IgnoreFire => true;
     public override int Level => 20;
     public override bool Lightsource => true;
-    public override int Pval => 4;
+    public override int InitialTypeSpecificValue => 4;
     public override int Rarity => 40;
     public override bool ResFire => true;
     public override bool SeeInvis => true;

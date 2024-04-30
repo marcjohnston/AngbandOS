@@ -20,7 +20,6 @@ internal class RestoringMushroomFoodItemFactory : MushroomFoodItemFactory
     public override string FriendlyName => "Restoring";
     public override int LevelNormallyFound => 20;
     public override int[] Locale => new int[] { 20, 30, 40, 0 };
-    public override int InitialTypeSpecificValue => 500;
     public override int Weight => 1;
     public override bool Eat()
     {

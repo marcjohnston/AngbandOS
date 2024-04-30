@@ -33,7 +33,7 @@ internal class QuarterstaffEririlFixedArtifact : FixedArtifact
     public override bool Int => true;
     public override int Level => 20;
     public override bool Lightsource => true;
-    public override int Pval => 4;
+    public override int InitialTypeSpecificValue => 4;
     public override int Rarity => 18;
     public override bool ResLight => true;
     public override bool SeeInvis => true;

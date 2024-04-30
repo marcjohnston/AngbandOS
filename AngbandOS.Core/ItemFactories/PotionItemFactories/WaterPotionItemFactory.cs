@@ -19,7 +19,7 @@ internal class WaterPotionItemFactory : PotionItemFactory
     public override int Dd => 1;
     public override int Ds => 1;
     public override string FriendlyName => "Water";
-    public override int InitialTypeSpecificValue => 200;
+    public override int InitialNutritionalValue => 200;
     public override int Weight => 4;
 
     public override bool Quaff()

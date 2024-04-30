@@ -32,7 +32,7 @@ internal class LargeMetalShieldOfStabilityFixedArtifact : FixedArtifact
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
     public override int Level => 40;
-    public override int Pval => 0;
+    public override int InitialTypeSpecificValue => 0;
     public override int Rarity => 9;
     public override bool ResAcid => true;
     public override bool ResCold => true;

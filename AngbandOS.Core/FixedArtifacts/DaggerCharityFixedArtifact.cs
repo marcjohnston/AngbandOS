@@ -38,7 +38,7 @@ internal class DaggerCharityFixedArtifact : FixedArtifact
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
     public override int Level => 5;
-    public override int Pval => 0;
+    public override int InitialTypeSpecificValue => 0;
     public override int Rarity => 10;
     public override bool ResElec => true;
     public override bool ShowMods => true;

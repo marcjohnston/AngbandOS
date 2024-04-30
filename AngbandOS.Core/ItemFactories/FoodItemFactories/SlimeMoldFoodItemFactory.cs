@@ -21,7 +21,7 @@ internal class SlimeMoldFoodItemFactory : FoodItemFactory
     public override string FriendlyName => "& Slime Mold~";
     public override int LevelNormallyFound => 1;
     public override int[] Locale => new int[] { 1, 0, 0, 0 };
-    public override int InitialTypeSpecificValue => 3000;
+    public override int InitialNutritionalValue => 3000;
     public override int Weight => 5;
     public override bool Eat()
     {

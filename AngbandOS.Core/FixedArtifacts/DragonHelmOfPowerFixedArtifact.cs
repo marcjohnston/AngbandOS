@@ -34,7 +34,7 @@ internal class DragonHelmOfPowerFixedArtifact : FixedArtifact
     public override bool IgnoreFire => true;
     public override int Level => 40;
     public override bool Lightsource => true;
-    public override int Pval => 4;
+    public override int InitialTypeSpecificValue => 4;
     public override int Rarity => 12;
     public override bool ResAcid => true;
     public override bool ResBlind => true;

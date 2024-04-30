@@ -19,7 +19,7 @@ internal class SleepPotionItemFactory : PotionItemFactory
     public override int Dd => 1;
     public override int Ds => 1;
     public override string FriendlyName => "Sleep";
-    public override int InitialTypeSpecificValue => 100;
+    public override int InitialNutritionalValue => 100;
     public override int Weight => 4;
 
     public override bool Quaff()

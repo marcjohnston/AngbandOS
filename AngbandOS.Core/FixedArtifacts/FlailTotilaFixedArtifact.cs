@@ -32,7 +32,7 @@ internal class FlailTotilaFixedArtifact : FixedArtifact
     public override bool IgnoreFire => true;
     public override int Level => 20;
     public override bool Lightsource => true;
-    public override int Pval => 2;
+    public override int InitialTypeSpecificValue => 2;
     public override int Rarity => 8;
     public override bool ResConf => true;
     public override bool ResFire => true;

@@ -39,7 +39,7 @@ internal class LeadCrownOfTheUniverseFixedArtifact : FixedArtifact
     public override bool Lightsource => true;
     public override bool NoTele => true;
     public override bool PermaCurse => true;
-    public override int Pval => 125;
+    public override int InitialTypeSpecificValue => 125;
     public override int Rarity => 1;
     public override bool ResAcid => true;
     public override bool ResCold => true;

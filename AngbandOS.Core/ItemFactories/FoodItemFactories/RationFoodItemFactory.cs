@@ -20,7 +20,7 @@ internal class RationFoodItemFactory : FoodItemFactory
     public override int Cost => 3;
     public override string FriendlyName => "& Ration~ of Food";
     public override int[] Locale => new int[] { 0, 5, 10, 0 };
-    public override int InitialTypeSpecificValue => 5000;
+    public override int InitialNutritionalValue => 5000;
     public override int Weight => 10;
 
     public override bool Eat()

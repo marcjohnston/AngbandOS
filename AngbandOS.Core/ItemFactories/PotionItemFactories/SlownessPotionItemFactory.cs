@@ -21,7 +21,7 @@ internal class SlownessPotionItemFactory : PotionItemFactory
     public override string FriendlyName => "Slowness";
     public override int LevelNormallyFound => 1;
     public override int[] Locale => new int[] { 1, 0, 0, 0 };
-    public override int InitialTypeSpecificValue => 50;
+    public override int InitialNutritionalValue => 50;
     public override int Weight => 4;
 
     public override bool Quaff()

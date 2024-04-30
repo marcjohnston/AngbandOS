@@ -34,7 +34,7 @@ internal class MaceOfDisruptionDeathwreakerFixedArtifact : FixedArtifact
     public override int Level => 80;
     public override bool Lightsource => true;
     public override bool NoTele => true;
-    public override int Pval => 6;
+    public override int InitialTypeSpecificValue => 6;
     public override int Rarity => 38;
     public override bool ResChaos => true;
     public override bool ResDark => true;

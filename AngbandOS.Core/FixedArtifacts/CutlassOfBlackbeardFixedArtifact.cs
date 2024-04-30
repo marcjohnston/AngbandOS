@@ -30,7 +30,7 @@ internal class CutlassOfBlackbeardFixedArtifact : FixedArtifact
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
     public override int Level => 20;
-    public override int Pval => 3;
+    public override int InitialTypeSpecificValue => 3;
     public override int Rarity => 8;
     public override bool Regen => true;
     public override bool ResAcid => true;

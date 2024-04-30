@@ -19,7 +19,6 @@ internal class ParanoiaMushroomFoodItemFactory : MushroomFoodItemFactory
     public override string FriendlyName => "Paranoia";
     public override int LevelNormallyFound => 5;
     public override int[] Locale => new int[] { 5, 0, 0, 0 };
-    public override int InitialTypeSpecificValue => 500;
     public override int Weight => 1;
 
     public override bool Eat()

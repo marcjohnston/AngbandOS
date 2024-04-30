@@ -386,6 +386,10 @@ internal abstract class StoreFactory : IItemFilter, IGetKey
         {
             return false;
         }
+        if (oPtr.NutritionalValue != jPtr.NutritionalValue)
+        {
+            return false;
+        }
         if (oPtr.BonusToHit != jPtr.BonusToHit)
         {
             return false;

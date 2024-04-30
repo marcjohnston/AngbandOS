@@ -38,7 +38,7 @@ internal class WarHammerMjolnirFixedArtifact : FixedArtifact
     public override bool IgnoreFire => true;
     public override bool KillDragon => true;
     public override int Level => 40;
-    public override int Pval => 4;
+    public override int InitialTypeSpecificValue => 4;
     public override int Rarity => 75;
     public override bool ResAcid => true;
     public override bool ResCold => true;

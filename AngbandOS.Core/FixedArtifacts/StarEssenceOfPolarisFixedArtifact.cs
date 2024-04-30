@@ -39,7 +39,7 @@ internal class StarEssenceOfPolarisFixedArtifact : FixedArtifact, IFixedArtifact
     public override bool IgnoreFire => true;
     public override bool InstaArt => true;
     public override int Level => 1;
-    public override int Pval => 1;
+    public override int InitialTypeSpecificValue => 1;
     public override int Rarity => 1;
     public override bool Search => true;
     public override int ToA => 0;

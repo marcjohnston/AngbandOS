@@ -30,6 +30,11 @@ internal abstract class MushroomFoodItemFactory : FoodItemFactory, IFlavorFactor
     /// </summary>
     public IEnumerable<Flavor>? GetFlavorRepository() => Game.SingletonRepository.Get<MushroomReadableFlavor>();
 
+    /// <summary>
+    /// Returns a nutritional value of 500 turns for all mushrooms.
+    /// </summary>
+    public override int InitialNutritionalValue => 500;
+
     /// <inheritdoc/>
     public Flavor Flavor { get; set; }
 }

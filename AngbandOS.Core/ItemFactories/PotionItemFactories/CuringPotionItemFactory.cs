@@ -22,7 +22,7 @@ internal class CuringPotionItemFactory : PotionItemFactory
     public override string FriendlyName => "Curing";
     public override int LevelNormallyFound => 18;
     public override int[] Locale => new int[] { 18, 40, 0, 0 };
-    public override int InitialTypeSpecificValue => 100;
+    public override int InitialNutritionalValue => 100;
     public override int Weight => 4;
     public override bool Quaff()
     {

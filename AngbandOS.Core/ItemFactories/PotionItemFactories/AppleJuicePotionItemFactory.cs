@@ -23,7 +23,7 @@ internal class AppleJuicePotionItemFactory : PotionItemFactory
     /// <summary>
     /// Returns 250 turns of sustenance for this apply juice food item.
     /// </summary>
-    public override int InitialTypeSpecificValue => 250;
+    public override int InitialNutritionalValue => 250;
 
     public override int Weight => 4;
     public override bool Quaff()

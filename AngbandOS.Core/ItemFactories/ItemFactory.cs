@@ -488,6 +488,12 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey
             return false;
         }
 
+        // Items need to have the same nutritional value.  Normally, this would always be true, but nutritional values may become variable.  Taking a bite of something.
+        if (a.NutritionalValue != b.NutritionalValue)
+        {
+            return false;
+        }
+
         // Items that have turns of light need to have the same number of turns, to be mergable.  E.g. 5 Wooden Torches (2500 turns)
         if (a.TurnsOfLightRemaining != b.TurnsOfLightRemaining)
         {
@@ -866,6 +872,10 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey
     [Obsolete("Being converted to using true type specific values")]
     public virtual int InitialTypeSpecificValue => 0;
     public virtual int InitialTurnsOfLight => 0;
+
+    /// <summary>
+    /// Returns the initial nutritional value that items of this factory will be given.  0 turns is returns by default.
+    /// </summary>
     public virtual int InitialNutritionalValue => 0;
 
     public virtual bool Reflect { get; set; } = false;

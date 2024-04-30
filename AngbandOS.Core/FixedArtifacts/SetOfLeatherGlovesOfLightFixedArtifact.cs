@@ -42,7 +42,7 @@ internal class SetOfLeatherGlovesOfLightFixedArtifact : FixedArtifact, IFixedArt
     public override bool IgnoreFire => true;
     public override int Level => 10;
     public override bool Lightsource => true;
-    public override int Pval => 0;
+    public override int InitialTypeSpecificValue => 0;
     public override int Rarity => 3;
     public override bool ResLight => true;
     public override bool SustCon => true;

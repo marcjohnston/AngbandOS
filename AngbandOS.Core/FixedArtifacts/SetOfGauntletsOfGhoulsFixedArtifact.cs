@@ -41,7 +41,7 @@ internal class SetOfGauntletsOfGhoulsFixedArtifact : FixedArtifact, IFixedArtifa
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
     public override int Level => 10;
-    public override int Pval => 4;
+    public override int InitialTypeSpecificValue => 4;
     public override int Rarity => 20;
     public override bool Regen => true;
     public override bool ResCold => true;

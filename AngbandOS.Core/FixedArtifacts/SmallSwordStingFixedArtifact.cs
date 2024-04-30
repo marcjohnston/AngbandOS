@@ -37,7 +37,7 @@ internal class SmallSwordStingFixedArtifact : FixedArtifact
     public override bool IgnoreFire => true;
     public override int Level => 20;
     public override bool Lightsource => true;
-    public override int Pval => 2;
+    public override int InitialTypeSpecificValue => 2;
     public override int Rarity => 15;
     public override bool ResLight => true;
     public override bool SeeInvis => true;

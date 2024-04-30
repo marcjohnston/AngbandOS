@@ -48,13 +48,13 @@ internal class CreatePhlogistonScript : Script, IScript
         }
 
         // Add half the max fuel of the item to its current fuel
-        item.TypeSpecificValue += maxPhlogiston.Value / 2;
+        item.TurnsOfLightRemaining += maxPhlogiston.Value / 2;
         Game.MsgPrint("You add phlogiston to your light item.");
 
         // Make sure it doesn't overflow
-        if (item.TypeSpecificValue >= maxPhlogiston)
+        if (item.TurnsOfLightRemaining >= maxPhlogiston)
         {
-            item.TypeSpecificValue = maxPhlogiston.Value;
+            item.TurnsOfLightRemaining = maxPhlogiston.Value;
             Game.MsgPrint("Your light item is full.");
         }
 

@@ -40,7 +40,7 @@ internal class SetOfGauntletsOfTheDeadFixedArtifact : FixedArtifact, IFixedArtif
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
     public override int Level => 10;
-    public override int Pval => 0;
+    public override int InitialTypeSpecificValue => 0;
     public override int Rarity => 20;
     public override bool ResAcid => true;
     public override int ToA => 15;

@@ -32,7 +32,7 @@ internal class PikeOfTepesFixedArtifact : FixedArtifact
     public override bool Int => true;
     public override int Level => 20;
     public override bool Lightsource => true;
-    public override int Pval => 2;
+    public override int InitialTypeSpecificValue => 2;
     public override int Rarity => 15;
     public override bool ResCold => true;
     public override bool ResFire => true;

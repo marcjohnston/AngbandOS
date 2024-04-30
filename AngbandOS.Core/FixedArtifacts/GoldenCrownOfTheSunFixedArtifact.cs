@@ -41,7 +41,7 @@ internal class GoldenCrownOfTheSunFixedArtifact : FixedArtifact
     public override bool IgnoreFire => true;
     public override int Level => 40;
     public override bool Lightsource => true;
-    public override int Pval => 3;
+    public override int InitialTypeSpecificValue => 3;
     public override int Rarity => 40;
     public override bool Regen => true;
     public override bool ResBlind => true;

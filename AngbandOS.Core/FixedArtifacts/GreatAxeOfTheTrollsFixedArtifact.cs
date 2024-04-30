@@ -39,7 +39,7 @@ internal class GreatAxeOfTheTrollsFixedArtifact : FixedArtifact
     public override bool ImCold => true;
     public override bool Int => true;
     public override int Level => 30;
-    public override int Pval => 2;
+    public override int InitialTypeSpecificValue => 2;
     public override int Rarity => 120;
     public override bool SeeInvis => true;
     public override bool ShowMods => true;

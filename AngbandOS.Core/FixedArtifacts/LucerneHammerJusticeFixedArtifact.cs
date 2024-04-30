@@ -40,7 +40,7 @@ internal class TheLucerneHammerJusticeFixedArtifact : FixedArtifact
     public override bool Infra => true;
     public override int Level => 20;
     public override bool Lightsource => true;
-    public override int Pval => 4;
+    public override int InitialTypeSpecificValue => 4;
     public override int Rarity => 15;
     public override bool Regen => true;
     public override bool ResCold => true;

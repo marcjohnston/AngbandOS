@@ -49,7 +49,7 @@ internal class RingOfMagicFixedArtifact : FixedArtifact, IFixedArtifactActivatib
     public override bool InstaArt => true;
     public override bool Int => true;
     public override int Level => 50;
-    public override int Pval => 1;
+    public override int InitialTypeSpecificValue => 1;
     public override int Rarity => 25;
     public override bool ResPois => true;
     public override bool Search => true;

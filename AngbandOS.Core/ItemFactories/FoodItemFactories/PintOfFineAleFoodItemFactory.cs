@@ -18,7 +18,7 @@ internal class PintOfFineAleFoodItemFactory : FoodItemFactory
 
     public override int Cost => 1;
     public override string FriendlyName => "& Pint~ of Fine Ale";
-    public override int InitialTypeSpecificValue => 500;
+    public override int InitialNutritionalValue => 500;
     public override int Weight => 5;
     public override bool Eat()
     {

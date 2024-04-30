@@ -41,7 +41,7 @@ internal class BroadSwordBlackIceFixedArtifact : FixedArtifact
     public override bool IgnoreFire => true;
     public override int Level => 20;
     public override bool Lightsource => true;
-    public override int Pval => 3;
+    public override int InitialTypeSpecificValue => 3;
     public override int Rarity => 20;
     public override bool ResCold => true;
     public override bool ShowMods => true;

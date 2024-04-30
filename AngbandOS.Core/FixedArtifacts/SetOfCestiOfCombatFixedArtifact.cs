@@ -47,7 +47,7 @@ internal class SetOfCestiOfCombatFixedArtifact : FixedArtifact, IFixedArtifactAc
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
     public override int Level => 40;
-    public override int Pval => 4;
+    public override int InitialTypeSpecificValue => 4;
     public override int Rarity => 15;
     public override bool ResAcid => true;
     public override bool ShowMods => true;

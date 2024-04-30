@@ -34,7 +34,7 @@ internal class LeatherScaleMailWyvernscaleFixedArtifact : FixedArtifact
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
     public override int Level => 20;
-    public override int Pval => 3;
+    public override int InitialTypeSpecificValue => 3;
     public override int Rarity => 3;
     public override bool ResAcid => true;
     public override bool ResShards => true;

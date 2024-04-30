@@ -43,7 +43,7 @@ internal class ScimitarSoulswordFixedArtifact : FixedArtifact
     public override bool IgnoreFire => true;
     public override bool Int => true;
     public override int Level => 20;
-    public override int Pval => 2;
+    public override int InitialTypeSpecificValue => 2;
     public override int Rarity => 8;
     public override bool ResChaos => true;
     public override bool ResDisen => true;

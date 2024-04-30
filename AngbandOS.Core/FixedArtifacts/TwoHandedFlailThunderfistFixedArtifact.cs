@@ -31,7 +31,7 @@ internal class TwoHandedFlailThunderfistFixedArtifact : FixedArtifact
     public override bool IgnoreFire => true;
     public override int Level => 45;
     public override bool Lightsource => true;
-    public override int Pval => 4;
+    public override int InitialTypeSpecificValue => 4;
     public override int Rarity => 38;
     public override bool ResDark => true;
     public override bool ResElec => true;

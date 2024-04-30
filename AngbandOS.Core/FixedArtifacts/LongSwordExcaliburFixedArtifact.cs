@@ -33,7 +33,7 @@ internal class LongSwordExcaliburFixedArtifact : FixedArtifact
     public override bool IgnoreFire => true;
     public override int Level => 20;
     public override bool Lightsource => true;
-    public override int Pval => 10;
+    public override int InitialTypeSpecificValue => 10;
     public override int Rarity => 120;
     public override bool Regen => true;
     public override bool ResCold => true;

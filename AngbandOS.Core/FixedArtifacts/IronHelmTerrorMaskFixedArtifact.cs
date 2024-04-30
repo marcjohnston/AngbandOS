@@ -55,7 +55,7 @@ internal class IronHelmTerrorMaskFixedArtifact : FixedArtifact
     public override bool Int => true;
     public override int Level => 20;
     public override bool NoMagic => true;
-    public override int Pval => -1;
+    public override int InitialTypeSpecificValue => -1;
     public override int Rarity => 5;
     public override bool ResAcid => true;
     public override bool ResCold => true;

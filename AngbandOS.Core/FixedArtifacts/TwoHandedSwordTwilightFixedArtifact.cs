@@ -34,7 +34,7 @@ internal class TwoHandedSwordTwilightFixedArtifact : FixedArtifact
     public override bool ImFire => true;
     public override int Level => 30;
     public override bool Lightsource => true;
-    public override int Pval => 10;
+    public override int InitialTypeSpecificValue => 10;
     public override int Rarity => 15;
     public override bool ResDisen => true;
     public override bool ResFear => true;

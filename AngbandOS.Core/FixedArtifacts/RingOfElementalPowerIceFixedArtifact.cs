@@ -45,7 +45,7 @@ internal class RingOfElementalPowerIceFixedArtifact : FixedArtifact
     public override bool InstaArt => true;
     public override bool Int => true;
     public override int Level => 80;
-    public override int Pval => 2;
+    public override int InitialTypeSpecificValue => 2;
     public override int Rarity => 40;
     public override bool Regen => true;
     public override bool SeeInvis => true;

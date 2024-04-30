@@ -180,7 +180,7 @@ internal abstract class FixedArtifact : IItemCharacteristics, IGetKey
 
     public virtual bool PermaCurse { get; set; } = false;
 
-    public abstract int Pval { get; }
+    public abstract int InitialTypeSpecificValue { get; }
 
     public abstract int Rarity { get; }
 

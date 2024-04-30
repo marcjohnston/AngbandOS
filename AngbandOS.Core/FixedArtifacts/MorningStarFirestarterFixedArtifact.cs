@@ -32,7 +32,7 @@ internal class MorningStarFirestarterFixedArtifact : FixedArtifact
     public override bool IgnoreFire => true;
     public override int Level => 20;
     public override bool Lightsource => true;
-    public override int Pval => 0;
+    public override int InitialTypeSpecificValue => 0;
     public override int Rarity => 15;
     public override bool ResFire => true;
     public override bool ShowMods => true;

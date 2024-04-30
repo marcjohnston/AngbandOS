@@ -83,7 +83,7 @@ internal class ZombieRace : Race
     {
         // This race only gets 1/20th of the food value
         Game.MsgPrint("The food of mortals is poor sustenance for you.");
-        Game.SetFood(Game.Food.IntValue + (item.TypeSpecificValue / 20));
+        Game.SetFood(Game.Food.IntValue + (item.NutritionalValue / 20));
     }
     public override bool CanBleed(int level) => (level > 11);
 

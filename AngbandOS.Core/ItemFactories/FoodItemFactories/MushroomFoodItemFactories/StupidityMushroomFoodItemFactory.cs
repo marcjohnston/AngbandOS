@@ -19,7 +19,6 @@ internal class StupidityMushroomFoodItemFactory : MushroomFoodItemFactory
     public override string FriendlyName => "Stupidity";
     public override int LevelNormallyFound => 15;
     public override int[] Locale => new int[] { 15, 0, 0, 0 };
-    public override int InitialTypeSpecificValue => 500;
     public override int Weight => 1;
     public override bool Eat()
     {

@@ -35,7 +35,7 @@ internal class LongSwordOfTheDawnFixedArtifact : FixedArtifact
     public override bool Infra => true;
     public override int Level => 40;
     public override bool Lightsource => true;
-    public override int Pval => 3;
+    public override int InitialTypeSpecificValue => 3;
     public override int Rarity => 120;
     public override bool Regen => true;
     public override bool ResBlind => true;

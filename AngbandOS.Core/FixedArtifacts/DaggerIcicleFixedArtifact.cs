@@ -35,7 +35,7 @@ internal class DaggerIcicleFixedArtifact : FixedArtifact
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
     public override int Level => 10;
-    public override int Pval => 2;
+    public override int InitialTypeSpecificValue => 2;
     public override int Rarity => 40;
     public override bool Regen => true;
     public override bool ResCold => true;

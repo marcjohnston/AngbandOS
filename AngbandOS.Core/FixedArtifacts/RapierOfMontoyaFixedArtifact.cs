@@ -29,7 +29,7 @@ internal class RapierOfMontoyaFixedArtifact : FixedArtifact
     public override bool IgnoreFire => true;
     public override int Level => 15;
     public override bool Lightsource => true;
-    public override int Pval => 0;
+    public override int InitialTypeSpecificValue => 0;
     public override int Rarity => 8;
     public override bool ResCold => true;
     public override bool ResLight => true;

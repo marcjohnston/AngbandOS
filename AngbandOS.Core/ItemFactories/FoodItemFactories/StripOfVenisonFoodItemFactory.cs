@@ -18,7 +18,7 @@ internal class StripOfVenisonFoodItemFactory : FoodItemFactory
 
     public override int Cost => 2;
     public override string FriendlyName => "& Strip~ of Venison";
-    public override int InitialTypeSpecificValue => 1500;
+    public override int InitialNutritionalValue => 1500;
     public override int Weight => 2;
     public override bool Eat()
     {

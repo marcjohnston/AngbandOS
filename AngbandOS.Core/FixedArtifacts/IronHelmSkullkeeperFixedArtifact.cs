@@ -32,7 +32,7 @@ internal class IronHelmSkullkeeperFixedArtifact : FixedArtifact
     public override bool IgnoreFire => true;
     public override bool Int => true;
     public override int Level => 20;
-    public override int Pval => 2;
+    public override int InitialTypeSpecificValue => 2;
     public override int Rarity => 5;
     public override bool ResBlind => true;
     public override bool Search => true;

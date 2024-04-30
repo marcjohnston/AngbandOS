@@ -40,7 +40,7 @@ internal class StarEssenceOfXothFixedArtifact : FixedArtifact, IFixedArtifactAct
     public override bool IgnoreFire => true;
     public override bool InstaArt => true;
     public override int Level => 30;
-    public override int Pval => 1;
+    public override int InitialTypeSpecificValue => 1;
     public override int Rarity => 25;
     public override bool SeeInvis => true;
     public override bool Speed => true;

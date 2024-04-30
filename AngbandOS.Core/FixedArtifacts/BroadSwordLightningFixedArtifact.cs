@@ -36,7 +36,7 @@ internal class BroadSwordLightningFixedArtifact : FixedArtifact
     public override bool KillDragon => true;
     public override int Level => 20;
     public override bool Lightsource => true;
-    public override int Pval => 4;
+    public override int InitialTypeSpecificValue => 4;
     public override int Rarity => 90;
     public override bool ResElec => true;
     public override bool ResFear => true;
