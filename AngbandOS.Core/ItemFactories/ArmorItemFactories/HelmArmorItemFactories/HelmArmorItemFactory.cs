@@ -109,7 +109,7 @@ internal abstract class HelmArmorItemFactory : ArmorItemFactory
     }
 
     public HelmArmorItemFactory(Game game) : base(game) { }
-    public override ItemClass ItemClass => Game.SingletonRepository.ItemClasses.Get(nameof(HelmsItemClass));
+    public override ItemClass ItemClass => Game.SingletonRepository.Get<ItemClass>(nameof(HelmsItemClass));
     public override BaseInventorySlot BaseWieldSlot => Game.SingletonRepository.InventorySlots.Get(nameof(HeadInventorySlot));
     public override int PackSort => 25;
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Helm;

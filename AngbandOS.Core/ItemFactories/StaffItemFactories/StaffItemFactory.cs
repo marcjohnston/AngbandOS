@@ -11,7 +11,7 @@ namespace AngbandOS.Core.ItemFactories;
 internal abstract class StaffItemFactory : ItemFactory, IFlavorFactory
 {
     public StaffItemFactory(Game game) : base(game) { }
-    public override ItemClass ItemClass => Game.SingletonRepository.ItemClasses.Get(nameof(StaffsItemClass));
+    public override ItemClass ItemClass => Game.SingletonRepository.Get<ItemClass>(nameof(StaffsItemClass));
 
     /// <summary>
     /// Returns the factory that this item was created by; casted as an IFlavor.

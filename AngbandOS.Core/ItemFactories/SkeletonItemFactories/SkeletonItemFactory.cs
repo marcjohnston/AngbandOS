@@ -11,7 +11,7 @@ namespace AngbandOS.Core.ItemFactories;
 internal abstract class SkeletonItemFactory : ItemFactory
 {
     public SkeletonItemFactory(Game game) : base(game) { }
-    public override ItemClass ItemClass => Game.SingletonRepository.ItemClasses.Get(nameof(SkeletonsItemClass));
+    public override ItemClass ItemClass => Game.SingletonRepository.Get<ItemClass>(nameof(SkeletonsItemClass));
     public override bool EasyKnow => true;
     public override int PackSort => 40;
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Skeleton;

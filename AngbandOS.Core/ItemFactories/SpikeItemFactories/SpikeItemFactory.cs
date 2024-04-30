@@ -11,7 +11,7 @@ namespace AngbandOS.Core.ItemFactories;
 internal abstract class SpikeItemFactory : ItemFactory
 {
     public SpikeItemFactory(Game game) : base(game) { }
-    public override ItemClass ItemClass => Game.SingletonRepository.ItemClasses.Get(nameof(SpikesItemClass));
+    public override ItemClass ItemClass => Game.SingletonRepository.Get<ItemClass>(nameof(SpikesItemClass));
 
     public override int GetAdditionalMassProduceCount(Item item)
     {

@@ -11,7 +11,7 @@ namespace AngbandOS.Core.ItemFactories;
 internal abstract class BoltAmmunitionItemFactory : AmmunitionItemFactory
 {
     public BoltAmmunitionItemFactory(Game game) : base(game) { }
-    public override ItemClass ItemClass => Game.SingletonRepository.ItemClasses.Get(nameof(BoltsItemClass));
+    public override ItemClass ItemClass => Game.SingletonRepository.Get<ItemClass>(nameof(BoltsItemClass));
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Bolt;
     public override int PackSort => 33;
     public override ColorEnum Color => ColorEnum.BrightBrown;

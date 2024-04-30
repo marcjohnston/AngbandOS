@@ -5,7 +5,6 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-using System;
 using System.Reflection;
 using Timer = AngbandOS.Core.Timers.Timer;
 
@@ -38,7 +37,6 @@ internal class SingletonRepository
 
     public FlaggedActionsRepository FlaggedActions;
     public InventorySlotsRepository InventorySlots;
-    public ItemClassesRepository ItemClasses;
     public ItemFactoriesRepository ItemFactories;
     public ItemFiltersRepository ItemFilters;
     public ItemQualityRatingsRepository ItemQualityRatings;
@@ -464,7 +462,6 @@ internal class SingletonRepository
         HorrificDescriptions = AddRepository<HorrificDescriptionsRepository>(new HorrificDescriptionsRepository(Game));
         InsultPlayerAttacks = AddRepository<InsultPlayerAttacksRepository>(new InsultPlayerAttacksRepository(Game));
         InventorySlots = AddRepository<InventorySlotsRepository>(new InventorySlotsRepository(Game));
-        ItemClasses = AddRepository<ItemClassesRepository>(new ItemClassesRepository(Game));
         ItemFactories = AddRepository<ItemFactoriesRepository>(new ItemFactoriesRepository(Game));
         ItemFilters = AddRepository<ItemFiltersRepository>(new ItemFiltersRepository(Game));
         ItemQualityRatings = AddRepository<ItemQualityRatingsRepository>(new ItemQualityRatingsRepository(Game));

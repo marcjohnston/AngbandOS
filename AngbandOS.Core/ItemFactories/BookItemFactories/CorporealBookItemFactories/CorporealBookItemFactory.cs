@@ -11,7 +11,7 @@ namespace AngbandOS.Core.ItemFactories;
 internal abstract class CorporealBookItemFactory : BookItemFactory
 {
     public CorporealBookItemFactory(Game game) : base(game) { }
-    public override ItemClass ItemClass => Game.SingletonRepository.ItemClasses.Get(nameof(CorporealSpellBooksItemClass));
+    public override ItemClass ItemClass => Game.SingletonRepository.Get<ItemClass>(nameof(CorporealSpellBooksItemClass));
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.CorporealBook;
     public override string RealmName => "Corporeal";
     public override int PackSort => 1;

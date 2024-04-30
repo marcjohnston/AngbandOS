@@ -88,7 +88,7 @@ internal abstract class ShieldArmorItemFactory : ArmorItemFactory
         }
     }
     public ShieldArmorItemFactory(Game game) : base(game) { }
-    public override ItemClass ItemClass => Game.SingletonRepository.ItemClasses.Get(nameof(ShieldsItemClass));
+    public override ItemClass ItemClass => Game.SingletonRepository.Get<ItemClass>(nameof(ShieldsItemClass));
     public override BaseInventorySlot BaseWieldSlot => Game.SingletonRepository.InventorySlots.Get(nameof(ArmInventorySlot));
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Shield;
     public override int PackSort => 23;

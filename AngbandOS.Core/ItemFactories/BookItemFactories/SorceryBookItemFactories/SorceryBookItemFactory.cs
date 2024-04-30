@@ -17,7 +17,7 @@ internal abstract class SorceryBookItemFactory : BookItemFactory
     /// </summary>
     public override string DivineTitle => RealmName;
     public override string RealmName => "Sorcery";
-    public override ItemClass ItemClass => Game.SingletonRepository.ItemClasses.Get(nameof(SorcerySpellBooksItemClass));
+    public override ItemClass ItemClass => Game.SingletonRepository.Get<ItemClass>(nameof(SorcerySpellBooksItemClass));
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.SorceryBook;
     public override bool HatesFire => true;
     public override int PackSort => 7;

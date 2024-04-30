@@ -68,7 +68,7 @@ internal abstract class CloakArmorItemFactory : ArmorItemFactory
     }
 
     public CloakArmorItemFactory(Game game) : base(game) { }
-    public override ItemClass ItemClass => Game.SingletonRepository.ItemClasses.Get(nameof(CloaksItemClass));
+    public override ItemClass ItemClass => Game.SingletonRepository.Get<ItemClass>(nameof(CloaksItemClass));
     public override BaseInventorySlot BaseWieldSlot => Game.SingletonRepository.InventorySlots.Get(nameof(AboutBodyInventorySlot));
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Cloak;
     public override bool HatesFire => true;

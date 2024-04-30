@@ -15,7 +15,7 @@ internal abstract class GlovesArmorItemFactory : ArmorItemFactory
     /// </summary>
     public override int WieldSlot => InventorySlot.Hands;
     public GlovesArmorItemFactory(Game game) : base(game) { }
-    public override ItemClass ItemClass => Game.SingletonRepository.ItemClasses.Get(nameof(GlovesItemClass));
+    public override ItemClass ItemClass => Game.SingletonRepository.Get<ItemClass>(nameof(GlovesItemClass));
 
     /// <summary>
     /// Applies a good random rare characteristics to gloves.

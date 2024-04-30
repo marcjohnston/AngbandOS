@@ -947,12 +947,12 @@ internal class JournalScript : Script, IScript, IRepeatableScript, IScriptStore
     private void BuildMenuForForWorthlessItems()
     {
         _menuLength = 0;
-        for (int i = 0; i < Game.SingletonRepository.ItemClasses.Count - 1; i++)
+        for (int i = 0; i < Game.SingletonRepository.Get<ItemClass>().Length - 1; i++)
         {
-            ItemClass itemClass = Game.SingletonRepository.ItemClasses[i];
+            ItemClass itemClass = Game.SingletonRepository.Get<ItemClass>(i);
             if (itemClass.AllowStomp)
             {
-                _menuItem[_menuLength] = Game.Pluralize(Game.SingletonRepository.ItemClasses[i].Name);
+                _menuItem[_menuLength] = Game.Pluralize(Game.SingletonRepository.Get<ItemClass>(i).Name);
                 _menuColors[_menuLength] = ColorEnum.Blue;
                 _menuLength++;
             }
@@ -993,9 +993,9 @@ internal class JournalScript : Script, IScript, IRepeatableScript, IScriptStore
                 }
                 if (c == '6')
                 {
-                    WorthlessItemTypeSelection(Game.SingletonRepository.ItemClasses.First(_itemClass => Game.Pluralize(_itemClass.Name) == _menuItem[menu]));
+                    WorthlessItemTypeSelection(Game.SingletonRepository.Get<ItemClass>().First(_itemClass => Game.Pluralize(_itemClass.Name) == _menuItem[menu]));
                     BuildMenuForForWorthlessItems();
-                    _menuLength = Game.SingletonRepository.ItemClasses.Count - 1;
+                    _menuLength = Game.SingletonRepository.Get<ItemClass>().Length - 1;
                     break;
                 }
                 if (c == '4')

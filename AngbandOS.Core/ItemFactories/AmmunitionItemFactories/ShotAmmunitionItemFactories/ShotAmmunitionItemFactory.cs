@@ -12,7 +12,7 @@ internal abstract class ShotAmmunitionItemFactory : AmmunitionItemFactory
 {
     public ShotAmmunitionItemFactory(Game game) : base(game) { }
 
-    public override ItemClass ItemClass => Game.SingletonRepository.ItemClasses.Get(nameof(ShotsItemClass));
+    public override ItemClass ItemClass => Game.SingletonRepository.Get<ItemClass>(nameof(ShotsItemClass));
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Shot;
     public override int PackSort => 35;
     public override ColorEnum Color => ColorEnum.BrightBrown;

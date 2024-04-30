@@ -28,7 +28,7 @@ internal class EatMagicActiveMutation : Mutation
         }
 
         int lev = oPtr.Factory.LevelNormallyFound;
-        if (oPtr.Factory.ItemClass == Game.SingletonRepository.ItemClasses.Get(nameof(RodsItemClass)))
+        if (oPtr.Factory.ItemClass == Game.SingletonRepository.Get<ItemClass>(nameof(RodsItemClass)))
         {
             if (oPtr.TypeSpecificValue > 0)
             {

@@ -12,7 +12,7 @@ internal abstract class HaftedWeaponItemFactory : MeleeWeaponItemFactory
 {
     public HaftedWeaponItemFactory(Game game) : base(game) { }
     protected override bool CanBeWeaponOfLaw => true;
-    public override ItemClass ItemClass => Game.SingletonRepository.ItemClasses.Get(nameof(HaftedWeaponsItemClass));
+    public override ItemClass ItemClass => Game.SingletonRepository.Get<ItemClass>(nameof(HaftedWeaponsItemClass));
     public override int PackSort => 30;
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Hafted;
     public override bool HatesFire => true;

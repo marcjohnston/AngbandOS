@@ -65,9 +65,9 @@ internal class CreateItemScript : Script, IScript
         char ch;
         int[] choice = new int[60];
         Game.Screen.Clear();
-        for (num = 0; num < 60 && num < Game.SingletonRepository.ItemClasses.Count; num++)
+        for (num = 0; num < 60 && num < Game.SingletonRepository.Get<ItemClass>().Length; num++)
         {
-            ItemClass itemClass = Game.SingletonRepository.ItemClasses[num];
+            ItemClass itemClass = Game.SingletonRepository.Get<ItemClass>(num);
             row = 2 + (num % 20);
             col = 30 * (num / 20);
             ch = (char)(_head[num / 20] + (char)(num % 20));
@@ -95,7 +95,7 @@ internal class CreateItemScript : Script, IScript
         {
             return 0;
         }
-        ItemClass selectedItemClass = Game.SingletonRepository.ItemClasses[num];
+        ItemClass selectedItemClass = Game.SingletonRepository.Get<ItemClass>(num);
         string tvalDesc = Game.Pluralize(selectedItemClass.Name);
         Game.Screen.Clear();
         const int maxLetters = 26;

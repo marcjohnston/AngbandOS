@@ -15,7 +15,7 @@ internal abstract class LightSourceItemFactory : ItemFactory
     /// </summary>
     public override int WieldSlot => InventorySlot.Lightsource;
     public LightSourceItemFactory(Game game) : base(game) { }
-    public override ItemClass ItemClass => Game.SingletonRepository.ItemClasses.Get(nameof(LightSourcesItemClass));
+    public override ItemClass ItemClass => Game.SingletonRepository.Get<ItemClass>(nameof(LightSourcesItemClass));
     public override BaseInventorySlot BaseWieldSlot => Game.SingletonRepository.InventorySlots.Get(nameof(LightsourceInventorySlot));
     public override bool IsWorthless(Item item) => item.TypeSpecificValue < 0;
 

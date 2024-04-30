@@ -11,7 +11,7 @@ namespace AngbandOS.Core.ItemFactories;
 internal abstract class FlaskItemFactory : ItemFactory
 {
     public FlaskItemFactory(Game game) : base(game) { }
-    public override ItemClass ItemClass => Game.SingletonRepository.ItemClasses.Get(nameof(FlasksItemClass));
+    public override ItemClass ItemClass => Game.SingletonRepository.Get<ItemClass>(nameof(FlasksItemClass));
     public override bool EasyKnow => true;
     public override int GetAdditionalMassProduceCount(Item item)
     {
