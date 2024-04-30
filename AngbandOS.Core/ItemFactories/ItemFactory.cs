@@ -863,7 +863,10 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey
     /// Returns the initial value to be assigned to the type specific value.  Most items will override a default value.  Gold will
     /// compute a value based on the cost property.
     /// </summary>
+    [Obsolete("Being converted to using true type specific values")]
     public virtual int InitialTypeSpecificValue => 0;
+    public virtual int InitialTurnsOfLight => 0;
+    public virtual int InitialNutritionalValue => 0;
 
     public virtual bool Reflect { get; set; } = false;
     public virtual bool Regen { get; set; } = false;

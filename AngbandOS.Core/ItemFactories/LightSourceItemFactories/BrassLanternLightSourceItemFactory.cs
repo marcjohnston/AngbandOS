@@ -63,7 +63,7 @@ internal class BrassLanternLightSourceItemFactory : LightSourceItemFactory
     public override bool IgnoreFire => true;
     public override int LevelNormallyFound => 3;
     public override int[] Locale => new int[] { 3, 0, 0, 0 };
-    public int InitialTurnsOfLight => 7500;
+    public override int InitialTurnsOfLight => 7500;
     public override int Weight => 50;
 
     /// <summary>
@@ -111,10 +111,5 @@ internal class BrassLanternLightSourceItemFactory : LightSourceItemFactory
         fuelSource.ItemOptimize();
         Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateTorchRadiusFlaggedAction)).Set();
     }
-    public override Item CreateItem()
-    {
-        Item newItem = new Item(Game, this);
-        newItem.TurnsOfLightRemaining = InitialTurnsOfLight;
-        return newItem;
-    }
+    public override Item CreateItem() => new Item(Game, this);
 }

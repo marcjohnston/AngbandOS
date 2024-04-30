@@ -62,7 +62,7 @@ internal class WoodenTorchLightSourceItemFactory : LightSourceItemFactory
     public override string FriendlyName => "& Wooden Torch~";
     public override int LevelNormallyFound => 1;
     public override int[] Locale => new int[] { 1, 0, 0, 0 };
-    public int InitialTurnsOfLight => 4000;
+    public override int InitialTurnsOfLight => 4000;
     public override int Weight => 30;
     /// <summary>
     /// Refill a torch from another torch
@@ -116,12 +116,7 @@ internal class WoodenTorchLightSourceItemFactory : LightSourceItemFactory
     /// Returns a new WoodenTorchLightSourceItem.
     /// </summary>
     /// <returns></returns>
-    public override Item CreateItem()
-    {
-        Item newItem = new Item(Game, this);
-        newItem.TurnsOfLightRemaining = InitialTurnsOfLight;
-        return newItem;
-    }
+    public override Item CreateItem() => new Item(Game, this);
 
     /// <summary>
     /// Returns a radius of 1 because a torch provides light shorter than the default 2 radius for a typical light source.

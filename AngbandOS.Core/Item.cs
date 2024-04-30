@@ -263,6 +263,7 @@ internal sealed class Item : IComparable<Item>
         Game = game;
         Factory = factory;
         TypeSpecificValue = Factory.InitialTypeSpecificValue;
+        TurnsOfLightRemaining = Factory.InitialTurnsOfLight;
         Count = 1;
         Weight = Factory.Weight;
         BonusToHit = Factory.ToH;
