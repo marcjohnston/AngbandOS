@@ -26,6 +26,8 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey
         return "";
     }
 
+    public virtual void Recharge(Item item, int num) { }
+
     /// <summary>
     /// Processes a world turn for an item that is on the dungeon floor.  Does nothing, by default.
     /// </summary>
@@ -503,6 +505,12 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey
             return false;
         }
         if (a.TypeSpecificValue != b.TypeSpecificValue)
+        {
+            return false;
+        }
+
+        // TODO: Each of these belong to the factory
+        if (a.WandChargesRemaining!= b.WandChargesRemaining)
         {
             return false;
         }

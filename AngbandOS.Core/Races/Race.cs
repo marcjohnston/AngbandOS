@@ -146,7 +146,7 @@ internal abstract class Race : IGetKey
     public virtual bool IsDamagedByDarkness => true;
 
     /// <summary>
-    /// Allow the race to consume food.  The full value of the food item is gained, by default.
+    /// Allow the race to consume food.  The full value of the food item is gained, by default.  Vampires and spectres override this for lower than full nutritional value.
     /// </summary>
     /// <param name="game"></param>
     /// <param name="item"></param>

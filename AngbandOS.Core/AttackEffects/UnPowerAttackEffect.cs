@@ -22,7 +22,7 @@ internal class UnPowerAttackEffect : AttackEffect
             BaseInventorySlot packInventorySlot = Game.SingletonRepository.Get<BaseInventorySlot>(nameof(PackInventorySlot));
             int i = packInventorySlot.WeightedRandom.Choose();
             Item? item = Game.GetInventoryItem(i);
-            if (item != null && (item.Category == ItemTypeEnum.Staff || item.Category == ItemTypeEnum.Wand) && item.TypeSpecificValue != 0)
+            if (item != null && item.Category == ItemTypeEnum.Staff && item.TypeSpecificValue != 0)
             {
                 Game.MsgPrint("Energy drains from your pack!");
                 obvious = true;
@@ -33,6 +33,20 @@ internal class UnPowerAttackEffect : AttackEffect
                     monster.Health = monster.MaxHealth;
                 }
                 item.TypeSpecificValue = 0;
+                Game.SingletonRepository.Get<FlaggedAction>(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
+                return;
+            }
+            if (item != null && item.Category == ItemTypeEnum.Wand && item.WandChargesRemaining != 0)
+            {
+                Game.MsgPrint("Energy drains from your pack!");
+                obvious = true;
+                int j = monsterLevel;
+                monster.Health += j * item.WandChargesRemaining * item.Count;
+                if (monster.Health > monster.MaxHealth)
+                {
+                    monster.Health = monster.MaxHealth;
+                }
+                item.WandChargesRemaining = 0;
                 Game.SingletonRepository.Get<FlaggedAction>(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
                 return;
             }

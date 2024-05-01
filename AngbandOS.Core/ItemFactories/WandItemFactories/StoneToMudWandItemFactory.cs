@@ -15,11 +15,7 @@ internal class StoneToMudWandItemFactory : WandItemFactory
     public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(MinusSignSymbol));
     public override string Name => "Stone to Mud";
 
-    public override void ApplyMagic(Item item, int level, int power, Store? store)
-    {
-        item.TypeSpecificValue = Game.DieRoll(8) + 3;
-    }
-
+    public override int RodChargeCount => Game.DieRoll(8) + 3;
     public override int[] Chance => new int[] { 1, 1, 1, 0 };
     public override int Cost => 300;
     public override int Dd => 1;

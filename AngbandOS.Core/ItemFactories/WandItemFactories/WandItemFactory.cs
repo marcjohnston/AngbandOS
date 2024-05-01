@@ -5,6 +5,8 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using System;
+
 namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
@@ -18,23 +20,57 @@ internal abstract class WandItemFactory : ItemFactory, IFlavorFactory
     /// </summary>
     public IFlavorFactory FlavorFactory => (IFlavorFactory)this;
 
+    public override void ApplyMagic(Item item, int level, int power, Store? store)
+    {
+        item.WandChargesRemaining = RodChargeCount;
+    }
+    public abstract int RodChargeCount { get; }
+
     public override string GetVerboseDescription(Item item)
     {
         string s = "";
         if (item.IsKnown())
         {
-            s += $" ({item.TypeSpecificValue} {Game.CountPluralize("charge", item.TypeSpecificValue)})";
+            s += $" ({item.WandChargesRemaining} {Game.CountPluralize("charge", item.WandChargesRemaining)})";
         }
         s += base.GetVerboseDescription(item);
         return s;
     }
 
+    public override void Recharge(Item oPtr, int num)
+    {
+        int i, t;
+        i = (num + 100 - LevelNormallyFound - (10 * oPtr.TypeSpecificValue)) / 15;
+        if (i < 1)
+        {
+            i = 1;
+        }
+        if (Game.RandomLessThan(i) == 0)
+        {
+            Game.MsgPrint("There is a bright flash of light.");
+            oPtr.ItemIncrease(-999);
+            oPtr.ItemDescribe();
+            oPtr.ItemOptimize();
+        }
+        else
+        {
+            t = (num / (LevelNormallyFound + 2)) + 1;
+            if (t > 0)
+            {
+                oPtr.TypeSpecificValue += 2 + Game.DieRoll(t);
+            }
+            oPtr.IdentKnown = false;
+            oPtr.IdentEmpty = false;
+        }
+        Game.SingletonRepository.Get<FlaggedAction>(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
+    }
+
     public override void EatMagic(Item oPtr)
     {
-        if (oPtr.TypeSpecificValue > 0)
+        if (oPtr.WandChargesRemaining > 0)
         {
-            Game.Mana.IntValue += oPtr.TypeSpecificValue * LevelNormallyFound;
-            oPtr.TypeSpecificValue = 0;
+            Game.Mana.IntValue += oPtr.WandChargesRemaining * LevelNormallyFound;
+            oPtr.WandChargesRemaining = 0;
         }
         else
         {
@@ -53,7 +89,7 @@ internal abstract class WandItemFactory : ItemFactory, IFlavorFactory
 
     public override int? GetBonusRealValue(Item item, int value)
     {
-        return value / 20 * item.TypeSpecificValue;
+        return value / 20 * item.WandChargesRemaining;
     }
 
     /// <summary>

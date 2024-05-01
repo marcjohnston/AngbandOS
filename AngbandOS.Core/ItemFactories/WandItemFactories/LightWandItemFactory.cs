@@ -13,10 +13,7 @@ internal class LightWandItemFactory : WandItemFactory
     private LightWandItemFactory(Game game) : base(game) { } // This object is a singleton.
 
     public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(MinusSignSymbol));
-    public override void ApplyMagic(Item item, int level, int power, Store? store)
-    {
-        item.TypeSpecificValue = Game.DieRoll(10) + 6;
-    }
+    public override int RodChargeCount => Game.DieRoll(10) + 6;
     public override string Name => "Light";
 
     public override int[] Chance => new int[] { 1, 0, 0, 0 };

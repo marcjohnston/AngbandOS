@@ -289,11 +289,11 @@ internal class RenderCharacterScript : Script, IScript, IRepeatableScript
                     typeSpecificValue = item.TypeSpecificValue;
                 }
                 ShowBonus(itemCharacteristics.SustStr, itemCharacteristics.Str, typeSpecificValue, row + 0, col);
-                ShowBonus(itemCharacteristics.SustStr, itemCharacteristics.Int, typeSpecificValue, row + 1, col);
-                ShowBonus(itemCharacteristics.SustStr, itemCharacteristics.Wis, typeSpecificValue, row + 2, col);
-                ShowBonus(itemCharacteristics.SustStr, itemCharacteristics.Dex, typeSpecificValue, row + 3, col);
-                ShowBonus(itemCharacteristics.SustStr, itemCharacteristics.Con, typeSpecificValue, row + 4, col);
-                ShowBonus(itemCharacteristics.SustStr, itemCharacteristics.Cha, typeSpecificValue, row + 5, col);
+                ShowBonus(itemCharacteristics.SustInt, itemCharacteristics.Int, typeSpecificValue, row + 1, col);
+                ShowBonus(itemCharacteristics.SustWis, itemCharacteristics.Wis, typeSpecificValue, row + 2, col);
+                ShowBonus(itemCharacteristics.SustDex, itemCharacteristics.Dex, typeSpecificValue, row + 3, col);
+                ShowBonus(itemCharacteristics.SustCon, itemCharacteristics.Con, typeSpecificValue, row + 4, col);
+                ShowBonus(itemCharacteristics.SustCha, itemCharacteristics.Cha, typeSpecificValue, row + 5, col);
                 col++;
             }
         }

@@ -15,10 +15,7 @@ internal class HasteMonsterWandItemFactory : WandItemFactory
     public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(MinusSignSymbol));
     public override string Name => "Haste Monster";
 
-    public override void ApplyMagic(Item item, int level, int power, Store? store)
-    {
-        item.TypeSpecificValue = Game.DieRoll(20) + 8;
-    }
+    public override int RodChargeCount => Game.DieRoll(20) + 8;
     public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int Dd => 1;
     public override int Ds => 1;

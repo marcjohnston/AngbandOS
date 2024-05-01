@@ -15,10 +15,7 @@ internal class ScareMonsterWandItemFactory : WandItemFactory
     public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(MinusSignSymbol));
     public override string Name => "Scare Monster";
 
-    public override void ApplyMagic(Item item, int level, int power, Store? store)
-    {
-        item.TypeSpecificValue = Game.DieRoll(5) + 3;
-    }
+    public override int RodChargeCount => Game.DieRoll(5) + 3;
     public override int[] Chance => new int[] { 4, 0, 0, 0 };
     public override int Cost => 500;
     public override int Dd => 1;

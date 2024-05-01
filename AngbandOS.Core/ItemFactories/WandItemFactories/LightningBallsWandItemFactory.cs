@@ -15,10 +15,7 @@ internal class LightningBallsWandItemFactory : WandItemFactory
     public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(MinusSignSymbol));
     public override string Name => "Lightning Balls";
 
-    public override void ApplyMagic(Item item, int level, int power, Store? store)
-    {
-        item.TypeSpecificValue = Game.DieRoll(8) + 4;
-    }
+    public override int RodChargeCount => Game.DieRoll(8) + 4;
     public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int Cost => 1200;
     public override int Dd => 1;

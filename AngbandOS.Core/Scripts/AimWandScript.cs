@@ -87,7 +87,7 @@ internal class AimWandScript : Script, IScript, IRepeatableScript, ISuccessfulSc
             return false;
         }
         // Make sure we have charges
-        if (item.TypeSpecificValue <= 0)
+        if (item.WandChargesRemaining <= 0)
         {
             Game.MsgPrint("The wand has no charges left.");
             item.IdentEmpty = true;
@@ -118,12 +118,12 @@ internal class AimWandScript : Script, IScript, IRepeatableScript, ISuccessfulSc
         // We didn't use mana, so decrease the wand's charges
         if (!channeled)
         {
-            item.TypeSpecificValue--;
+            item.WandChargesRemaining--;
             // If the wand is part of a stack, split it off from the others
             if (item.IsInInventory && item.Count > 1)
             {
                 Item splitItem = item.Clone(1);
-                item.TypeSpecificValue++;
+                item.WandChargesRemaining++;
                 item.Count--;
                 Game.WeightCarried -= splitItem.Weight;
                 Game.InvenCarry(splitItem);
@@ -134,11 +134,11 @@ internal class AimWandScript : Script, IScript, IRepeatableScript, ISuccessfulSc
             {
                 if (item.IsInInventory)
                 {
-                    Game.MsgPrint(item.TypeSpecificValue != 1 ? $"You have {item.TypeSpecificValue} charges remaining." : $"You have {item.TypeSpecificValue} charge remaining.");
+                    Game.MsgPrint(item.WandChargesRemaining != 1 ? $"You have {item.WandChargesRemaining} charges remaining." : $"You have {item.WandChargesRemaining} charge remaining.");
                 }
                 else
                 {
-                    Game.MsgPrint(item.TypeSpecificValue != 1 ? $"There are {item.TypeSpecificValue} charges remaining." : $"There is {item.TypeSpecificValue} charge remaining.");
+                    Game.MsgPrint(item.WandChargesRemaining != 1 ? $"There are {item.WandChargesRemaining} charges remaining." : $"There is {item.WandChargesRemaining} charge remaining.");
                 }
             }
         }

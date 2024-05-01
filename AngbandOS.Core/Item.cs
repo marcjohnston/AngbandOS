@@ -270,6 +270,8 @@ internal sealed class Item : IComparable<Item>
     /// </summary>
     public int TypeSpecificValue;
 
+    public int WandChargesRemaining = 0;
+
     public int RodRechargeTimeRemaining = 0;
 
     public int NutritionalValue = 0;
@@ -284,9 +286,11 @@ internal sealed class Item : IComparable<Item>
     {
         Game = game;
         Factory = factory;
+
+        // TODO: The below statements should be in the ApplyMagic method for each factory.
         TypeSpecificValue = Factory.InitialTypeSpecificValue;
         TurnsOfLightRemaining = Factory.InitialTurnsOfLight;
-        NutritionalValue = Factory.InitialNutritionalValue;
+        NutritionalValue = Factory.InitialNutritionalValue;        
         GoldPieces = Factory.InitialGoldPieces;
         Count = 1;
         Weight = Factory.Weight;
@@ -304,6 +308,11 @@ internal sealed class Item : IComparable<Item>
         {
             IdentCursed = true;
         }
+    }
+
+    public void Recharge(int num)
+    {
+        Factory.Recharge(this, num);
     }
 
     /// <summary>
@@ -422,7 +431,9 @@ internal sealed class Item : IComparable<Item>
     // TODO: There is no way to ensure a cloned gets all of the properties
     public Item Clone(int? newCount = null)
     {
+        // TODO: The assignments below need to be performed by each factory.  This can be integrated into the CreateItem.
         Item clonedItem = Factory.CreateItem();
+
         clonedItem.BaseArmorClass = BaseArmorClass;
         clonedItem.RandomArtifactItemCharacteristics.Copy(RandomArtifactItemCharacteristics);
         clonedItem.RandomArtifactName = RandomArtifactName;
@@ -452,6 +463,7 @@ internal sealed class Item : IComparable<Item>
         clonedItem.NutritionalValue = NutritionalValue;
         clonedItem.RingsArmorActivationAndFixedArtifactsRechargeTimeLeft = RingsArmorActivationAndFixedArtifactsRechargeTimeLeft;
         clonedItem.RodRechargeTimeRemaining = RodRechargeTimeRemaining;
+        clonedItem.WandChargesRemaining = WandChargesRemaining;
         clonedItem.GoldPieces = GoldPieces;
         clonedItem.BonusArmorClass = BonusArmorClass;
         clonedItem.BonusDamage = BonusDamage;

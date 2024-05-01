@@ -15,11 +15,7 @@ internal class ShardBallsWandItemFactory : WandItemFactory
     public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(MinusSignSymbol));
     public override string Name => "Shard Balls";
 
-    public override void ApplyMagic(Item item, int level, int power, Store? store)
-    {
-        item.TypeSpecificValue = Game.DieRoll(2) + 1;
-    }
-
+    public override int RodChargeCount => Game.DieRoll(2) + 1;
     public override int[] Chance => new int[] { 4, 0, 0, 0 };
     public override int Cost => 95000;
     public override int Dd => 1;

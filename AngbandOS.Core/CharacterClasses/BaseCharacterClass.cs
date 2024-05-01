@@ -486,7 +486,7 @@ internal abstract class BaseCharacterClass : IGetKey
             Item item = outfitItem.CreateItem();
             if (outfitItem.CategoryEnum == ItemTypeEnum.Wand)
             {
-                item.TypeSpecificValue = 1;
+                item.WandChargesRemaining = 1;
             }
             Game.OutfitPlayerWithItem(item);
 

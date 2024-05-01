@@ -5,6 +5,8 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using System;
+
 namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
@@ -25,6 +27,37 @@ internal abstract class RodItemFactory : ItemFactory, IFlavorFactory
                 Game.SingletonRepository.Get<FlaggedAction>(nameof(NoticeCombineFlaggedAction)).Set();
             }
         }
+    }
+
+    public override void Recharge(Item oPtr, int num)
+    {
+        int i, t;
+        i = (100 - LevelNormallyFound + num) / 5;
+        if (i < 1)
+        {
+            i = 1;
+        }
+        if (Game.RandomLessThan(i) == 0)
+        {
+            Game.MsgPrint("The recharge backfires, draining the rod further!");
+            if (oPtr.RodRechargeTimeRemaining < 10000)
+            {
+                oPtr.RodRechargeTimeRemaining = (oPtr.RodRechargeTimeRemaining + 100) * 2;
+            }
+        }
+        else
+        {
+            t = num * Game.DiceRoll(2, 4);
+            if (oPtr.RodRechargeTimeRemaining > t)
+            {
+                oPtr.RodRechargeTimeRemaining -= t;
+            }
+            else
+            {
+                oPtr.RodRechargeTimeRemaining = 0;
+            }
+        }
+        Game.SingletonRepository.Get<FlaggedAction>(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
     }
 
     public override void GridProcessWorld(Item item, GridTile gridTile)

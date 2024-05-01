@@ -15,10 +15,7 @@ internal class WonderWandItemFactory : WandItemFactory
     public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(MinusSignSymbol));
     public override string Name => "Wonder";
 
-    public override void ApplyMagic(Item item, int level, int power, Store? store)
-    {
-        item.TypeSpecificValue = Game.DieRoll(15) + 8;
-    }
+    public override int RodChargeCount => Game.DieRoll(15) + 8;
 
     public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int Cost => 250;

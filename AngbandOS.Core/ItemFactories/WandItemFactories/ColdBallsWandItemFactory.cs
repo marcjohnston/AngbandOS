@@ -15,10 +15,7 @@ internal class ColdBallsWandItemFactory : WandItemFactory
     public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(MinusSignSymbol));
     public override string Name => "Cold Balls";
 
-    public override void ApplyMagic(Item item, int level, int power, Store? store)
-    {
-        item.TypeSpecificValue = Game.DieRoll(6) + 2;
-    }
+    public override int RodChargeCount => Game.DieRoll(6) + 2;
     public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int Cost => 1500;
     public override int Dd => 1;

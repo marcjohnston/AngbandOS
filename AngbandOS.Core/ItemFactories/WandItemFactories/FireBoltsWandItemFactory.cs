@@ -15,10 +15,7 @@ internal class FireBoltsWandItemFactory : WandItemFactory
     public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(MinusSignSymbol));
     public override string Name => "Fire Bolts";
 
-    public override void ApplyMagic(Item item, int level, int power, Store? store)
-    {
-        item.TypeSpecificValue = Game.DieRoll(8) + 6;
-    }
+    public override int RodChargeCount => Game.DieRoll(8) + 6;
     public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int Cost => 1000;
     public override int Dd => 1;

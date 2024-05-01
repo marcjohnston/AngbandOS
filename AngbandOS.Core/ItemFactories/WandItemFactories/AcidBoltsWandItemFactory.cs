@@ -12,10 +12,7 @@ internal class AcidBoltsWandItemFactory : WandItemFactory
 {
     private AcidBoltsWandItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override void ApplyMagic(Item item, int level, int power, Store? store)
-    {
-        item.TypeSpecificValue = Game.DieRoll(8) + 6;
-    }
+    public override int RodChargeCount => Game.DieRoll(8) + 6;
     public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(MinusSignSymbol));
     public override string Name => "Acid Bolts";
 

@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.ItemFilters;
 
 /// <summary>
-/// Represents an item filter for items that can be recharges, regardless of their value.
+/// Represents an item filter for items that can be recharged, regardless of their value.  Wands, staves and rods can be recharged.
 /// </summary>
 [Serializable]
 internal class CanBeRechargedItemFilter : ItemFilter
