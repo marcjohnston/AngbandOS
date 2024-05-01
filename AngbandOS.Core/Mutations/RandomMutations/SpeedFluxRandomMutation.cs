@@ -16,7 +16,7 @@ internal class SpeedFluxRandomMutation : Mutation
     public override string HaveMessage => "You move faster or slower randomly.";
     public override string LoseMessage => "You are firmly anchored in time.";
 
-    public override void OnProcessWorld()
+    public override void ProcessWorld()
     {
         if (base.Game.DieRoll(6000) == 1)
         {

@@ -16,7 +16,7 @@ internal class InvulnRandomMutation : Mutation
     public override string HaveMessage => "You occasionally feel invincible.";
     public override string LoseMessage => "You are no longer blessed with fits of invulnerability.";
 
-    public override void OnProcessWorld()
+    public override void ProcessWorld()
     {
         if (!Game.HasAntiMagic && base.Game.DieRoll(5000) == 1)
         {

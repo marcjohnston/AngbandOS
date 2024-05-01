@@ -16,7 +16,7 @@ internal class HpToSpRandomMutation : Mutation
     public override string HaveMessage => "Your blood sometimes rushes to your head.";
     public override string LoseMessage => "You are no longer subject to fits of painful clarity.";
 
-    public override void OnProcessWorld()
+    public override void ProcessWorld()
     {
         if (Game.HasAntiMagic || base.Game.DieRoll(4000) != 1)
         {

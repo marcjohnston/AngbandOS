@@ -16,7 +16,7 @@ internal class AttDragonRandomMutation : Mutation
     public override string HaveMessage => "You attract dragons.";
     public override string LoseMessage => "You stop attracting dragons.";
 
-    public override void OnProcessWorld()
+    public override void ProcessWorld()
     {
         if (Game.HasAntiMagic || base.Game.DieRoll(3000) != 13)
         {

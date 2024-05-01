@@ -16,7 +16,7 @@ internal class DisarmRandomMutation : Mutation
     public override string HaveMessage => "You occasionally stumble and drop things.";
     public override string LoseMessage => "Your feet shrink to their former size.";
 
-    public override void OnProcessWorld()
+    public override void ProcessWorld()
     {
         if (base.Game.DieRoll(10000) != 1)
         {

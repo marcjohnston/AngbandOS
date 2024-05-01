@@ -17,7 +17,7 @@ internal class CowardiceRandomMutation : Mutation
     public override string LoseMessage => "You are no longer an incredible coward!";
     public override MutationGroup Group => MutationGroup.Bravery;
 
-    public override void OnProcessWorld()
+    public override void ProcessWorld()
     {
         if (base.Game.DieRoll(3000) != 13)
         {

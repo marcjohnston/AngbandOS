@@ -16,7 +16,7 @@ internal class BersRageRandomMutation : Mutation
     public override string HaveMessage => "You are subject to berserker fits.";
     public override string LoseMessage => "You are no longer subject to fits of berserk rage!";
 
-    public override void OnProcessWorld()
+    public override void ProcessWorld()
     {
         if (base.Game.DieRoll(3000) != 1)
         {

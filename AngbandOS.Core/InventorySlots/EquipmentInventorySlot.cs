@@ -39,9 +39,9 @@ internal abstract class EquipmentInventorySlot : BaseInventorySlot
     /// Allows wielded equipment items to process world.  By default, initiates the hook for all items in the inventory slot to perform processing during the ProcessWorld event through
     /// the EquipmentProcessWorld method.
     /// </summary>
-    public override void ProcessWorldHook(ProcessWorldEventArgs processWorldEventArgs)
+    public override void ProcessWorld(ProcessWorldEventArgs processWorldEventArgs)
     {
-        base.ProcessWorldHook(processWorldEventArgs);
+        base.ProcessWorld(processWorldEventArgs);
 
         // Allow the base functionality to process items.
         foreach (int index in InventorySlots)

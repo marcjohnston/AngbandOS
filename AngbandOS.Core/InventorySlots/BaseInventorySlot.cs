@@ -129,7 +129,7 @@ internal abstract class BaseInventorySlot : IEnumerable<int>, IItemContainer, IG
     /// Hooks into the ProcessWorld event.  All inventory slots receive this event and can perform additional processing based on the items being carried, either in a pack or by being
     /// worn/wielded.  Does nothing, by default.
     /// </summary>
-    public virtual void ProcessWorldHook(ProcessWorldEventArgs processWorldEventArgs) { }
+    public virtual void ProcessWorld(ProcessWorldEventArgs processWorldEventArgs) { }
 
     /// <summary>
     /// Returns the zero-based sort order when displayed in a list with other inventory slots.  Lower numbers show before higher numbers.

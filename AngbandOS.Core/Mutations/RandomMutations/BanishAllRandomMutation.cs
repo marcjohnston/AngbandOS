@@ -16,7 +16,7 @@ internal class BanishAllRandomMutation : Mutation
     public override string HaveMessage => "You sometimes cause nearby creatures to vanish.";
     public override string LoseMessage => "You no longer feel a terrifying power lurking behind you.";
 
-    public override void OnProcessWorld()
+    public override void ProcessWorld()
     {
         if (base.Game.DieRoll(9000) != 1)
         {

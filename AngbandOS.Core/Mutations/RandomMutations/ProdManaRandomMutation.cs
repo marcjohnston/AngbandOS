@@ -16,7 +16,7 @@ internal class ProdManaRandomMutation : Mutation
     public override string HaveMessage => "You are producing magical energy uncontrollably.";
     public override string LoseMessage => "You stop producing magical energy uncontrollably.";
 
-    public override void OnProcessWorld()
+    public override void ProcessWorld()
     {
         if (Game.HasAntiMagic || base.Game.DieRoll(9000) != 1)
         {

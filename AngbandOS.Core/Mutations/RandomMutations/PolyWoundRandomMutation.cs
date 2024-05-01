@@ -16,7 +16,7 @@ internal class PolyWoundRandomMutation : Mutation
     public override string HaveMessage => "Your health is subject to chaotic forces.";
     public override string LoseMessage => "You feel forces of chaos departing your old scars.";
 
-    public override void OnProcessWorld()
+    public override void ProcessWorld()
     {
         if (base.Game.DieRoll(3000) == 1)
         {

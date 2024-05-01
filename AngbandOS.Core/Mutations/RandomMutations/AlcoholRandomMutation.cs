@@ -16,7 +16,7 @@ internal class AlcoholRandomMutation : Mutation
     public override string HaveMessage => "Your body produces alcohol.";
     public override string LoseMessage => "Your body stops producing alcohol!";
 
-    public override void OnProcessWorld()
+    public override void ProcessWorld()
     {
         if (base.Game.DieRoll(6400) != 321)
         {

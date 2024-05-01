@@ -67,9 +67,9 @@ internal class PackInventorySlot : BaseInventorySlot
     /// Allows items being carried in a pack to hook into the ProcessWorld event.  By default, this method initiates the hook for all items in the inventory slot to perform processing 
     /// during the ProcessWorld event through the PackProcessWorld method.
     /// </summary>
-    public override void ProcessWorldHook(ProcessWorldEventArgs processWorldEventArgs)
+    public override void ProcessWorld(ProcessWorldEventArgs processWorldEventArgs)
     {
-        base.ProcessWorldHook(processWorldEventArgs);
+        base.ProcessWorld(processWorldEventArgs);
 
         foreach (int index in InventorySlots)
         {

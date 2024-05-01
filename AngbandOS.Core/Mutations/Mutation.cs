@@ -51,5 +51,5 @@ internal abstract class Mutation : IGetKey
 
     public virtual void OnLose() { }
 
-    public virtual void OnProcessWorld() { }
+    public virtual void ProcessWorld() { }
 }

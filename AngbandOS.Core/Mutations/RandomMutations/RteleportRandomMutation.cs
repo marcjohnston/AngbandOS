@@ -16,7 +16,7 @@ internal class RteleportRandomMutation : Mutation
     public override string HaveMessage => "You are teleporting randomly.";
     public override string LoseMessage => "Your position seems more certain.";
 
-    public override void OnProcessWorld()
+    public override void ProcessWorld()
     {
         if (base.Game.DieRoll(5000) != 88)
         {

@@ -16,7 +16,7 @@ internal class NormalityRandomMutation : Mutation
     public override string HaveMessage => "You may be chaotic, but you're recovering.";
     public override string LoseMessage => "You feel normally strange.";
 
-    public override void OnProcessWorld()
+    public override void ProcessWorld()
     {
         if (base.Game.DieRoll(5000) == 1)
         {

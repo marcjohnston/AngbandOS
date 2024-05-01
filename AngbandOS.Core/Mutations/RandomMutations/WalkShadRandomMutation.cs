@@ -16,7 +16,7 @@ internal class WalkShadRandomMutation : Mutation
     public override string HaveMessage => "You occasionally stumble into other shadows.";
     public override string LoseMessage => "You feel like you're trapped in reality.";
 
-    public override void OnProcessWorld()
+    public override void ProcessWorld()
     {
         if (!Game.HasAntiMagic && base.Game.DieRoll(12000) == 1)
         {

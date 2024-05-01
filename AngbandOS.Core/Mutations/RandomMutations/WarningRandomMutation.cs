@@ -16,7 +16,7 @@ internal class WarningRandomMutation : Mutation
     public override string HaveMessage => "You receive warnings about your foes.";
     public override string LoseMessage => "You no longer feel paranoid.";
 
-    public override void OnProcessWorld()
+    public override void ProcessWorld()
     {
         if (base.Game.DieRoll(1000) != 1)
         {

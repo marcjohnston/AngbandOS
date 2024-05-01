@@ -16,7 +16,7 @@ internal class SpToHpRandomMutation : Mutation
     public override string HaveMessage => "Your blood sometimes rushes to your muscles.";
     public override string LoseMessage => "You are no longer subject to fits of magical healing.";
 
-    public override void OnProcessWorld()
+    public override void ProcessWorld()
     {
         if (base.Game.DieRoll(2000) != 1)
         {

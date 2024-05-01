@@ -16,7 +16,7 @@ internal class AttAnimalRandomMutation : Mutation
     public override string HaveMessage => "You attract animals.";
     public override string LoseMessage => "You stop attracting animals.";
 
-    public override void OnProcessWorld()
+    public override void ProcessWorld()
     {
         if (Game.HasAntiMagic || base.Game.DieRoll(7000) != 1)
         {

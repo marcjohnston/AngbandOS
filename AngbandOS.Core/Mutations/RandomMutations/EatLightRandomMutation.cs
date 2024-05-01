@@ -16,7 +16,7 @@ internal class EatLightRandomMutation : Mutation
     public override string HaveMessage => "You sometimes feed off of the light around you.";
     public override string LoseMessage => "You feel the world's a brighter place.";
 
-    public override void OnProcessWorld()
+    public override void ProcessWorld()
     {
         if (base.Game.DieRoll(3000) != 1)
         {

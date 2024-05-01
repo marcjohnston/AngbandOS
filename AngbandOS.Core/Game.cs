@@ -3726,7 +3726,7 @@ internal class Game
         foreach (BaseInventorySlot inventorySlot in SingletonRepository.Get<BaseInventorySlot>())
         {
             ProcessWorldEventArgs inventorySlotProcessWorldEventArgs = new ProcessWorldEventArgs();
-            inventorySlot.ProcessWorldHook(inventorySlotProcessWorldEventArgs);
+            inventorySlot.ProcessWorld(inventorySlotProcessWorldEventArgs);
             if (inventorySlotProcessWorldEventArgs.DisableRegeneration)
             {
                 caveNoRegen = true;
@@ -3899,37 +3899,12 @@ internal class Game
         {
             GooPatron.MultiRew = false;
         }
-        //foreach (TimedAction timedAction in SingletonRepository.TimedActions)
-        //{
-        //    timedAction.ProcessWorld();
-        //}
 
         // Every timer gets to process the world event.
-        BlindnessTimer.ProcessWorld();
-        SeeInvisibilityTimer.ProcessWorld();
-        TelepathyTimer.ProcessWorld();
-        InfravisionTimer.ProcessWorld();
-        ParalysisTimer.ProcessWorld();
-        ConfusedTimer.ProcessWorld();
-        FearTimer.ProcessWorld();
-        HasteTimer.ProcessWorld();
-        SlowTimer.ProcessWorld();
-        ProtectionFromEvilTimer.ProcessWorld();
-        InvulnerabilityTimer.ProcessWorld();
-        EtherealnessTimer.ProcessWorld();
-        HeroismTimer.ProcessWorld();
-        SuperheroismTimer.ProcessWorld();
-        BlessingTimer.ProcessWorld();
-        StoneskinTimer.ProcessWorld();
-        AcidResistanceTimer.ProcessWorld();
-        LightningResistanceTimer.ProcessWorld();
-        FireResistanceTimer.ProcessWorld();
-        ColdResistanceTimer.ProcessWorld();
-        PoisonResistanceTimer.ProcessWorld();
-        PoisonTimer.ProcessWorld();
-        StunTimer.ProcessWorld();
-        BleedingTimer.ProcessWorld();
-        HallucinationsTimer.ProcessWorld();
+        foreach (Timer timer in SingletonRepository.Get<Timer>())
+        {
+            timer.ProcessWorld();
+        }
 
         SingletonRepository.Get<FlaggedAction>(nameof(UpdateTorchRadiusFlaggedAction)).Set();
         if (HasExperienceDrain)
@@ -3968,7 +3943,6 @@ internal class Game
                     }
                 }
             }
-            OnProcessWorld();
             if (oPtr == null)
             {
                 continue;
@@ -3981,6 +3955,12 @@ internal class Game
                     SingletonRepository.Get<FlaggedAction>(nameof(NoticeCombineFlaggedAction)).Set();
                 }
             }
+        }
+
+        // Mutations get to proces the world turn.
+        foreach (Mutation mutation in MutationsPossessed.ToArray()) // The list may be modified.  Use the ToArray to prevent an issue.
+        {
+            mutation.ProcessWorld();
         }
 
         RunScript(nameof(SenseInventoryScript));
@@ -17407,14 +17387,6 @@ internal class Game
         MsgPrint("Oops! Fell out of mutation list!");
         SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
         HandleStuff();
-    }
-
-    public void OnProcessWorld()
-    {
-        foreach (Mutation mutation in MutationsPossessed.ToArray()) // The list may be modified.  Use the ToArray to prevent an issue.
-        {
-            mutation.OnProcessWorld();
-        }
     }
 
     public string Pluralize(string singular)

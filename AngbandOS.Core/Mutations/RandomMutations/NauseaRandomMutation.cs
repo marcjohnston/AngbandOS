@@ -16,7 +16,7 @@ internal class NauseaRandomMutation : Mutation
     public override string HaveMessage => "You have a seriously upset stomach.";
     public override string LoseMessage => "Your stomach stops roiling.";
 
-    public override void OnProcessWorld()
+    public override void ProcessWorld()
     {
         if (Game.HasSlowDigestion || base.Game.DieRoll(9000) != 1)
         {

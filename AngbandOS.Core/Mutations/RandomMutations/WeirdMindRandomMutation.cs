@@ -16,7 +16,7 @@ internal class WeirdMindRandomMutation : Mutation
     public override string HaveMessage => "Your mind randomly expands and contracts.";
     public override string LoseMessage => "Your thoughts return to boring paths.";
 
-    public override void OnProcessWorld()
+    public override void ProcessWorld()
     {
         if (Game.HasAntiMagic || base.Game.DieRoll(3000) != 1)
         {

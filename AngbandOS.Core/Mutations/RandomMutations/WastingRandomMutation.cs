@@ -16,7 +16,7 @@ internal class WastingRandomMutation : Mutation
     public override string HaveMessage => "You have a horrible wasting disease.";
     public override string LoseMessage => "You are cured of the horrible wasting disease!";
 
-    public override void OnProcessWorld()
+    public override void ProcessWorld()
     {
         if (base.Game.DieRoll(3000) != 13)
         {

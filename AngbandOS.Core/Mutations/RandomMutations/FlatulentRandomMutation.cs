@@ -16,7 +16,7 @@ internal class FlatulentRandomMutation : Mutation
     public override string HaveMessage => "You are subject to uncontrollable flatulence.";
     public override string LoseMessage => "You are no longer subject to uncontrollable flatulence.";
 
-    public override void OnProcessWorld()
+    public override void ProcessWorld()
     {
         if (base.Game.DieRoll(3000) == 13)
         {

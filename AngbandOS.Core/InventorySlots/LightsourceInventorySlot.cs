@@ -26,10 +26,10 @@ internal class LightsourceInventorySlot : EquipmentInventorySlot
     /// Consumes a turn of light during the ProcessWorldHook event.  Base inventory slot ProcessWorldHook processing occurs first, allowing light source items to process the event first.
     /// </summary>
     /// <param name="processWorldEventArgs"></param>
-    public override void ProcessWorldHook(ProcessWorldEventArgs processWorldEventArgs)
+    public override void ProcessWorld(ProcessWorldEventArgs processWorldEventArgs)
     {
         // Allow base processing to process the event.
-        base.ProcessWorldHook(processWorldEventArgs);
+        base.ProcessWorld(processWorldEventArgs);
 
         // Consume a turn of light.  The number of available turns of light is reduced by one for every item of light being wielded.
         bool hadLight = false; // True, if the player had light during the turn.

@@ -16,7 +16,7 @@ internal class HalluRandomMutation : Mutation
     public override string HaveMessage => "You have a hallucinatory insanity.";
     public override string LoseMessage => "You are no longer afflicted by a hallucinatory insanity!";
 
-    public override void OnProcessWorld()
+    public override void ProcessWorld()
     {
         if (base.Game.DieRoll(6400) != 42)
         {

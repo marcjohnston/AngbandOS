@@ -16,7 +16,7 @@ internal class AttDemonRandomMutation : Mutation
     public override string HaveMessage => "You attract demons.";
     public override string LoseMessage => "You stop attracting demons.";
 
-    public override void OnProcessWorld()
+    public override void ProcessWorld()
     {
         if (Game.HasAntiMagic || base.Game.DieRoll(6666) != 666)
         {

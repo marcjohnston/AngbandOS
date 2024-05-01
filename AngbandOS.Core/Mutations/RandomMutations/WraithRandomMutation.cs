@@ -16,7 +16,7 @@ internal class WraithRandomMutation : Mutation
     public override string HaveMessage => "You fade in and out of physical reality.";
     public override string LoseMessage => "You are firmly in the physical world.";
 
-    public override void OnProcessWorld()
+    public override void ProcessWorld()
     {
         if (Game.HasAntiMagic || Game.DieRoll(3000) != 13)
         {

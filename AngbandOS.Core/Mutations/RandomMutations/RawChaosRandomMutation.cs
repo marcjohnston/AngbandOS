@@ -16,7 +16,7 @@ internal class RawChaosRandomMutation : Mutation
     public override string HaveMessage => "You occasionally are surrounded with raw chaos.";
     public override string LoseMessage => "You feel the universe is more stable around you.";
 
-    public override void OnProcessWorld()
+    public override void ProcessWorld()
     {
         if (Game.HasAntiMagic || base.Game.DieRoll(8000) != 1)
         {
