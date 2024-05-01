@@ -24,11 +24,12 @@ internal class DetectionRodItemFactory : RodItemFactory
     public override int LevelNormallyFound => 30;
     public override int[] Locale => new int[] { 30, 0, 0, 0 };
     public override int Weight => 15;
+    public override int RodRechargeTime => 99;
     public override void Execute(ZapRodEvent zapRodEvent)
     {
         Game.RunScript(nameof(DetectionScript));
         zapRodEvent.Identified = true;
-        zapRodEvent.Item.TypeSpecificValue = 99;
+        zapRodEvent.Item.RodRechargeTimeRemaining = RodRechargeTime;
     }
     public override Item CreateItem() => new Item(Game, this);
 }

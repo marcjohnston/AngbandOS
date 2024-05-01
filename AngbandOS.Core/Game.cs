@@ -2647,7 +2647,7 @@ internal class Game
         if (mPtr.StolenGold > 0)
         {
             Item oPtr = MakeGold(10);
-            oPtr.TypeSpecificValue = mPtr.StolenGold;
+            oPtr.GoldPieces = mPtr.StolenGold;
             DropNear(oPtr, -1, y, x);
         }
         mPtr.Items.Clear();
@@ -3629,6 +3629,9 @@ internal class Game
         }
     }
 
+    /// <summary>
+    /// Processes a single world turn.
+    /// </summary>
     private void ProcessWorld()
     {
         if (IsBirthday)
@@ -3900,6 +3903,8 @@ internal class Game
         //{
         //    timedAction.ProcessWorld();
         //}
+
+        // Every timer gets to process the world event.
         BlindnessTimer.ProcessWorld();
         SeeInvisibilityTimer.ProcessWorld();
         TelepathyTimer.ProcessWorld();
@@ -3936,7 +3941,6 @@ internal class Game
                 CheckExperience();
             }
         }
-        bool combineFlags = false;
         for (int i = InventorySlot.MeleeWeapon; i < InventorySlot.Total; i++)
         {
             Item? oPtr = GetInventoryItem(i);
@@ -3974,27 +3978,14 @@ internal class Game
                 oPtr.RechargeTimeLeft--;
                 if (oPtr.RechargeTimeLeft == 0)
                 {
-                    combineFlags = true;
+                    SingletonRepository.Get<FlaggedAction>(nameof(NoticeCombineFlaggedAction)).Set();
                 }
             }
         }
-        for (int i = 0; i < InventorySlot.PackCount; i++)
-        {
-            Item? oPtr = GetInventoryItem(i);
-            if (oPtr != null && oPtr.Category == ItemTypeEnum.Rod && oPtr.TypeSpecificValue != 0)
-            {
-                oPtr.TypeSpecificValue--;
-                if (oPtr.TypeSpecificValue == 0)
-                {
-                    combineFlags = true;
-                }
-            }
-        }
-        if (combineFlags)
-        {
-            SingletonRepository.Get<FlaggedAction>(nameof(NoticeCombineFlaggedAction)).Set();
-        }
+
         RunScript(nameof(SenseInventoryScript));
+
+        // Every dungeon grid gets to process the world event.
         for (int y = 1; y < CurHgt - 1; y++)
         {
             for (int x = 1; x < CurWid - 1; x++)
@@ -4003,6 +3994,8 @@ internal class Game
                 cPtr.ProcessWorld();
             }
         }
+
+        // Every monster gets to process the world event.
         foreach (Monster monster in Monsters)
         {
             monster.ProcessWorld();
@@ -7766,21 +7759,6 @@ internal class Game
         DropNear(missile, chanceToBreak, y, x);
     }
 
-    public void ReportChargeUsage(Item item)
-    {
-        if (item.IsKnown())
-        {
-            if (item.IsInInventory)
-            {
-                MsgPrint(item.TypeSpecificValue != 1 ? $"You have {item.TypeSpecificValue} charges remaining." : $"You have {item.TypeSpecificValue} charge remaining.");
-            }
-            else
-            {
-                MsgPrint(item.TypeSpecificValue != 1 ? $"There are {item.TypeSpecificValue} charges remaining." : $"There is {item.TypeSpecificValue} charge remaining.");
-            }
-        }
-    }
-
     public void RunTileScript(string scriptName, GridTile tile)
     {
         // Get the script from the singleton repository.
@@ -9377,7 +9355,7 @@ internal class Game
         }
     }
 
-    public void GetMoney()
+    public void GetStartingGold()
     {
         int gold = (SocialClass * 6) + DieRoll(100) + 300;
         for (int i = 0; i < 6; i++)
@@ -9484,7 +9462,7 @@ internal class Game
             ItemFactory woodenTorchItemClass = SingletonRepository.Get<ItemFactory>(nameof(WoodenTorchLightSourceItemFactory));
             Item item = woodenTorchItemClass.CreateItem();
             item.Count = RandomBetween(3, 7);
-            item.TypeSpecificValue = RandomBetween(3, 7) * 500;
+            item.TurnsOfLightRemaining = RandomBetween(3, 7) * 500;
             item.BecomeFlavorAware();
             item.BecomeKnown();
             InvenCarry(item);

@@ -24,13 +24,14 @@ internal class DrainLifeRodItemFactory : RodItemFactory
     public override int LevelNormallyFound => 75;
     public override int[] Locale => new int[] { 75, 0, 0, 0 };
     public override int Weight => 15;
+    public override int RodRechargeTime => 23;
     public override void Execute(ZapRodEvent zapRodEvent)
     {
         if (Game.DrainLife(zapRodEvent.Dir.Value, 75))
         {
             zapRodEvent.Identified = true;
         }
-        zapRodEvent.Item.TypeSpecificValue = 23;
+        zapRodEvent.Item.RodRechargeTimeRemaining = RodRechargeTime;
     }
     public override Item CreateItem() => new Item(Game, this);
 }

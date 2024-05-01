@@ -24,13 +24,14 @@ internal class IlluminationRodItemFactory : RodItemFactory
     public override int LevelNormallyFound => 20;
     public override int[] Locale => new int[] { 20, 0, 0, 0 };
     public override int Weight => 15;
+    public override int RodRechargeTime => 10 + Game.DieRoll(11);
     public override void Execute(ZapRodEvent zapRodEvent)
     {
         if (Game.LightArea(Game.DiceRoll(2, 8), 2))
         {
             zapRodEvent.Identified = true;
         }
-        zapRodEvent.Item.TypeSpecificValue = 10 + Game.DieRoll(11);
+        zapRodEvent.Item.RodRechargeTimeRemaining = RodRechargeTime;
     }
     public override Item CreateItem() => new Item(Game, this);
 }

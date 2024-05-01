@@ -24,6 +24,7 @@ internal class SpeedRodItemFactory : RodItemFactory
     public override int LevelNormallyFound => 95;
     public override int[] Locale => new int[] { 95, 0, 0, 0 };
     public override int Weight => 15;
+    public override int RodRechargeTime => 99;
     public override void Execute(ZapRodEvent zapRodEvent)
     {
         if (Game.HasteTimer.Value == 0)
@@ -37,7 +38,7 @@ internal class SpeedRodItemFactory : RodItemFactory
         {
             Game.HasteTimer.AddTimer(5);
         }
-        zapRodEvent.Item.TypeSpecificValue = 99;
+        zapRodEvent.Item.RodRechargeTimeRemaining = RodRechargeTime;
     }
     public override Item CreateItem() => new Item(Game, this);
 }

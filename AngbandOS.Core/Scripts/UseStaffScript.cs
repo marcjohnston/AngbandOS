@@ -121,7 +121,17 @@ internal class UseStaffScript : Script, IScript, IRepeatableScript
                 Game.MsgPrint("You unstack your staff.");
             }
             // Let the player know what happened
-            Game.ReportChargeUsage(item);
+            if (item.IsKnown())
+            {
+                if (item.IsInInventory)
+                {
+                    Game.MsgPrint(item.TypeSpecificValue != 1 ? $"You have {item.TypeSpecificValue} charges remaining." : $"You have {item.TypeSpecificValue} charge remaining.");
+                }
+                else
+                {
+                    Game.MsgPrint(item.TypeSpecificValue != 1 ? $"There are {item.TypeSpecificValue} charges remaining." : $"There is {item.TypeSpecificValue} charge remaining.");
+                }
+            }
         }
     }
 }

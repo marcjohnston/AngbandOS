@@ -24,13 +24,14 @@ internal class SlowMonsterRodItemFactory : RodItemFactory
     public override int LevelNormallyFound => 30;
     public override int[] Locale => new int[] { 30, 0, 0, 0 };
     public override int Weight => 15;
+    public override int RodRechargeTime => 20;
     public override void Execute(ZapRodEvent zapRodEvent)
     {
         if (Game.SlowMonster(zapRodEvent.Dir.Value))
         {
             zapRodEvent.Identified = true;
         }
-        zapRodEvent.Item.TypeSpecificValue = 20;
+        zapRodEvent.Item.RodRechargeTimeRemaining = RodRechargeTime;
     }
     public override Item CreateItem() => new Item(Game, this);
 }

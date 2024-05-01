@@ -24,13 +24,14 @@ internal class TeleportOtherRodItemFactory : RodItemFactory
     public override int LevelNormallyFound => 45;
     public override int[] Locale => new int[] { 45, 0, 0, 0 };
     public override int Weight => 15;
+    public override int RodRechargeTime => 25;
     public override void Execute(ZapRodEvent zapRodEvent)
     {
         if (Game.TeleportMonster(zapRodEvent.Dir.Value))
         {
             zapRodEvent.Identified = true;
         }
-        zapRodEvent.Item.TypeSpecificValue = 25;
+        zapRodEvent.Item.RodRechargeTimeRemaining = RodRechargeTime;
     }
     public override Item CreateItem() => new Item(Game, this);
 }

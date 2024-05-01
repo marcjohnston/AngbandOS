@@ -135,12 +135,14 @@ internal class VampireRace : Race
     public override bool OutfitsWithScrollsOfLight => true;
     public override int ChanceOfSanityBlastImmunity(int level) => level + 25;
 
+    /// <summary>
+    /// Vampire races that are not invulnerable, do not have resistance to light and are on the town level or deeper during the daytime will take a hit when the grid tile is
+    /// self-lit.
+    /// </summary>
+    /// <param name="processWorldEventArgs"></param>
     public override void ProcessWorld(ProcessWorldEventArgs processWorldEventArgs)
     {
-        if (Game.CurrentDepth <= 0 && 
-            !Game.HasLightResistance &&
-            Game.InvulnerabilityTimer.Value == 0 &&
-            Game.IsLight)
+        if (Game.CurrentDepth <= 0 && !Game.HasLightResistance && Game.InvulnerabilityTimer.Value == 0 && Game.IsLight)
         {
             if (Game.Map.Grid[Game.MapY.IntValue][Game.MapX.IntValue].SelfLit)
             {

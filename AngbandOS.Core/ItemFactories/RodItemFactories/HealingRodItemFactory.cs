@@ -24,6 +24,7 @@ internal class HealingRodItemFactory : RodItemFactory
     public override int LevelNormallyFound => 80;
     public override int[] Locale => new int[] { 80, 0, 0, 0 };
     public override int Weight => 15;
+    public override int RodRechargeTime => 999;
     public override void Execute(ZapRodEvent zapRodEvent)
     {
         if (Game.RestoreHealth(500))
@@ -38,7 +39,7 @@ internal class HealingRodItemFactory : RodItemFactory
         {
             zapRodEvent.Identified = true;
         }
-        zapRodEvent.Item.TypeSpecificValue = 999;
+        zapRodEvent.Item.RodRechargeTimeRemaining = RodRechargeTime;
     }
     public override Item CreateItem() => new Item(Game, this);
 }

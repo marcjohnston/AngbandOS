@@ -171,7 +171,7 @@ internal class GridTile : IItemContainer
     {
         foreach (Item oPtr in Items)
         {
-            oPtr.ProcessWorld();
+            oPtr.GridProcessWorld(this);
         }
     }
 

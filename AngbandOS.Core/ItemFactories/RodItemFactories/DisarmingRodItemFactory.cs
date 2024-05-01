@@ -24,13 +24,14 @@ internal class DisarmingRodItemFactory : RodItemFactory
     public override int LevelNormallyFound => 35;
     public override int[] Locale => new int[] { 35, 0, 0, 0 };
     public override int Weight => 15;
+    public override int RodRechargeTime => 15 + Game.DieRoll(15);
     public override void Execute(ZapRodEvent zapRodEvent)
     {
         if (Game.DisarmTrap(zapRodEvent.Dir.Value))
         {
             zapRodEvent.Identified = true;
         }
-        zapRodEvent.Item.TypeSpecificValue = 15 + Game.DieRoll(15);
+        zapRodEvent.Item.RodRechargeTimeRemaining = RodRechargeTime;
     }
     public override Item CreateItem() => new Item(Game, this);
 }

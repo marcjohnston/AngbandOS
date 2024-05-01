@@ -422,6 +422,10 @@ internal abstract class StoreFactory : IItemFilter, IGetKey
         {
             return false;
         }
+        if (oPtr.RodRechargeTimeRemaining != 0 || jPtr.RodRechargeTimeRemaining != 0)
+        {
+            return false;
+        }
         if (oPtr.BaseArmorClass != jPtr.BaseArmorClass)
         {
             return false;

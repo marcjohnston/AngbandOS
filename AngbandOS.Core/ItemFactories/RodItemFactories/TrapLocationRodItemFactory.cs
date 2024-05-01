@@ -24,13 +24,14 @@ internal class TrapLocationRodItemFactory : RodItemFactory
     public override int LevelNormallyFound => 5;
     public override int[] Locale => new int[] { 5, 0, 0, 0 };
     public override int Weight => 15;
+    public override int RodRechargeTime => 10 + Game.DieRoll(10);
     public override void Execute(ZapRodEvent zapRodEvent)
     {
         if (Game.DetectTraps())
         {
             zapRodEvent.Identified = true;
         }
-        zapRodEvent.Item.TypeSpecificValue = 10 + Game.DieRoll(10);
+        zapRodEvent.Item.RodRechargeTimeRemaining = RodRechargeTime;
     }
     public override Item CreateItem() => new Item(Game, this);
 }

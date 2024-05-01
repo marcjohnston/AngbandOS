@@ -24,11 +24,12 @@ internal class ColdBallsRodItemFactory : RodItemFactory
     public override int LevelNormallyFound => 60;
     public override int[] Locale => new int[] { 60, 0, 0, 0 };
     public override int Weight => 15;
+    public override int RodRechargeTime => 25;
     public override void Execute(ZapRodEvent zapRodEvent)
     {
         Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(ColdProjectile)), zapRodEvent.Dir.Value, 48, 2);
         zapRodEvent.Identified = true;
-        zapRodEvent.Item.TypeSpecificValue = 25;
+        zapRodEvent.Item.RodRechargeTimeRemaining = RodRechargeTime;
     }
     public override Item CreateItem() => new Item(Game, this);
 }

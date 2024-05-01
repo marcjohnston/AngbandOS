@@ -41,7 +41,7 @@ internal class CreatePhlogistonScript : Script, IScript
         }
 
         // Item is already full
-        if (item.TypeSpecificValue >= maxPhlogiston)
+        if (item.TurnsOfLightRemaining >= maxPhlogiston)
         {
             Game.MsgPrint("No more phlogiston can be put in this item.");
             return;

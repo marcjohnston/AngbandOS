@@ -28,31 +28,7 @@ internal class EatMagicActiveMutation : Mutation
         }
 
         int lev = oPtr.Factory.LevelNormallyFound;
-        if (oPtr.Factory.ItemClass == Game.SingletonRepository.Get<ItemClass>(nameof(RodsItemClass)))
-        {
-            if (oPtr.TypeSpecificValue > 0)
-            {
-                Game.MsgPrint("You can't absorb energy from a discharged rod.");
-            }
-            else
-            {
-                Game.Mana.IntValue += 2 * lev;
-                oPtr.TypeSpecificValue = 500;
-            }
-        }
-        else
-        { // Light? Wands? Staves, Food??
-            if (oPtr.TypeSpecificValue > 0)
-            {
-                Game.Mana.IntValue += oPtr.TypeSpecificValue * lev;
-                oPtr.TypeSpecificValue = 0;
-            }
-            else
-            {
-                Game.MsgPrint("There's no energy there to absorb!");
-            }
-            oPtr.IdentEmpty = true;
-        }
+        oPtr.EatMagic();
         if (Game.Mana.IntValue > Game.MaxMana.IntValue)
         {
             Game.Mana.IntValue = Game.MaxMana.IntValue;

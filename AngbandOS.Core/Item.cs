@@ -172,12 +172,24 @@ internal sealed class Item : IComparable<Item>
         container.ItemOptimize(this);
     }
 
-    public void ProcessWorld()
+    public void GridProcessWorld(GridTile gridTile)
     {
-        if (Category == ItemTypeEnum.Rod && TypeSpecificValue != 0) // TODO: Ensure this is happening twice ... the inventory pack process rods too
-        {
-            TypeSpecificValue--;
-        }
+        Factory.GridProcessWorld(this, gridTile);
+    }
+
+    public void PackProcessWorld()
+    {
+        Factory.PackProcessWorld(this);
+    }
+
+    public void EquipmentProcessWorld()
+    {
+        Factory.EquipmentProcessWorld(this);
+    }
+
+    public void MonsterProcessWorld(Monster mPtr)
+    {
+        Factory.MonsterProcessWorld(this, mPtr);
     }
 
     /// <summary>
@@ -258,6 +270,8 @@ internal sealed class Item : IComparable<Item>
     /// </summary>
     public int TypeSpecificValue;
 
+    public int RodRechargeTimeRemaining = 0;
+
     public int NutritionalValue = 0;
 
     public int Weight;
@@ -290,6 +304,14 @@ internal sealed class Item : IComparable<Item>
         {
             IdentCursed = true;
         }
+    }
+
+    /// <summary>
+    /// Consume magic of a rechargeable item.  Rods, staves and wands are supported.
+    /// </summary>
+    public void EatMagic()
+    {
+        Factory.EatMagic(this);
     }
 
     /// <summary>
@@ -429,6 +451,8 @@ internal sealed class Item : IComparable<Item>
         clonedItem.TurnsOfLightRemaining = TurnsOfLightRemaining;
         clonedItem.NutritionalValue = NutritionalValue;
         clonedItem.RechargeTimeLeft = RechargeTimeLeft;
+        clonedItem.RodRechargeTimeRemaining = RodRechargeTimeRemaining;
+        clonedItem.GoldPieces = GoldPieces;
         clonedItem.BonusArmorClass = BonusArmorClass;
         clonedItem.BonusDamage = BonusDamage;
         clonedItem.BonusToHit = BonusToHit;

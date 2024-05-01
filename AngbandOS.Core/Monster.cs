@@ -290,7 +290,7 @@ internal class Monster : IItemContainer
     {
         foreach (Item item in Items)
         {
-            item.ProcessWorld();
+            item.MonsterProcessWorld(this);
         }
     }
 

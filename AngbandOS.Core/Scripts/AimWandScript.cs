@@ -130,7 +130,17 @@ internal class AimWandScript : Script, IScript, IRepeatableScript, ISuccessfulSc
                 Game.MsgPrint("You unstack your wand.");
             }
             // Let us know we have used a charge
-            Game.ReportChargeUsage(item);
+            if (item.IsKnown())
+            {
+                if (item.IsInInventory)
+                {
+                    Game.MsgPrint(item.TypeSpecificValue != 1 ? $"You have {item.TypeSpecificValue} charges remaining." : $"You have {item.TypeSpecificValue} charge remaining.");
+                }
+                else
+                {
+                    Game.MsgPrint(item.TypeSpecificValue != 1 ? $"There are {item.TypeSpecificValue} charges remaining." : $"There is {item.TypeSpecificValue} charge remaining.");
+                }
+            }
         }
         return true;
     }

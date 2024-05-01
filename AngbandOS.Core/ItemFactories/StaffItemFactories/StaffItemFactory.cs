@@ -29,6 +29,20 @@ internal abstract class StaffItemFactory : ItemFactory, IFlavorFactory
         return s;
     }
 
+    public override void EatMagic(Item oPtr)
+    {
+        if (oPtr.TypeSpecificValue > 0)
+        {
+            Game.Mana.IntValue += oPtr.TypeSpecificValue * LevelNormallyFound;
+            oPtr.TypeSpecificValue = 0;
+        }
+        else
+        {
+            Game.MsgPrint("There's no energy there to absorb!");
+        }
+        oPtr.IdentEmpty = true;
+    }
+
     public override string GetDescription(Item item, bool includeCountPrefix, bool isFlavorAware)
     {
         string flavor = item.IdentityIsStoreBought ? "" : $"{FlavorFactory.Flavor.Name} ";

@@ -25,6 +25,7 @@ internal class DoorStairLocationRodItemFactory : RodItemFactory
     public override int[] Locale => new int[] { 15, 0, 0, 0 };
     public override int Weight => 15;
 
+    public override int RodRechargeTime => 70;
     public override void Execute(ZapRodEvent zapRodEvent)
     {
         if (Game.DetectDoors())
@@ -35,7 +36,7 @@ internal class DoorStairLocationRodItemFactory : RodItemFactory
         {
             zapRodEvent.Identified = true;
         }
-        zapRodEvent.Item.TypeSpecificValue = 70;
+        zapRodEvent.Item.RodRechargeTimeRemaining = RodRechargeTime;
     }
     public override Item CreateItem() => new Item(Game, this);
 }

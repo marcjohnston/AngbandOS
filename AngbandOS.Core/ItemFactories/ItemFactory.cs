@@ -26,6 +26,25 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey
         return "";
     }
 
+    /// <summary>
+    /// Processes a world turn for an item that is on the dungeon floor.  Does nothing, by default.
+    /// </summary>
+    /// <param name="item"></param>
+    /// <param name="gridTile"></param>
+    public virtual void GridProcessWorld(Item item, GridTile gridTile) { }
+
+    /// <summary>
+    /// Processes the world turn for an item being held by a monster.  Does nothing, by default.
+    /// </summary>
+    /// <param name="item"></param>
+    /// <param name="mPtr"></param>
+    public virtual void MonsterProcessWorld(Item item, Monster mPtr) { }
+
+    /// <summary>
+    /// Consumes the magic of a rechargeable item.  Does nothing, by default.  Rods, staves and wands are supported.
+    /// </summary>
+    public virtual void EatMagic(Item item) { }
+
     public string UniqueId = Guid.NewGuid().ToString();
 
     /// <summary>
@@ -407,13 +426,13 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey
     /// Hook into the ProcessWorld, when the item is being carried in a pack inventory slot.  Does nothing, by default..
     /// </summary>
     /// <param name="game"></param>
-    public virtual void PackProcessWorldHook() { }
+    public virtual void PackProcessWorld(Item item) { }
 
     /// <summary>
-    /// Hook into the ProcessWorld, when the item is being worn/wielded.  Does nothing, by default.
+    /// Processes the world turn, when the item is being worn/wielded.  Does nothing, by default.  Gemstones of light drain from the player.
     /// </summary>
     /// <param name="game"></param>
-    public virtual void EquipmentProcessWorldHook() { }
+    public virtual void EquipmentProcessWorld(Item item) { }
 
     /// <summary>
     /// Returns the inventory slot where the item is wielded.  Returns the pack, by default.
@@ -512,6 +531,10 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey
             return false;
         }
         if (a.RechargeTimeLeft != 0 || b.RechargeTimeLeft != 0)
+        {
+            return false;
+        }
+        if (a.RodRechargeTimeRemaining != 0 || b.RodRechargeTimeRemaining != 0)
         {
             return false;
         }

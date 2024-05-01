@@ -18,7 +18,7 @@ internal class ConfirmationBirthStage : BirthStage
         Game.GetExtra();
         Game.GetAhw();
         Game.GetHistory();
-        Game.GetMoney();
+        Game.GetStartingGold();
         Game.RefreshGods();
 
         Game.Talents = new List<Talent>();

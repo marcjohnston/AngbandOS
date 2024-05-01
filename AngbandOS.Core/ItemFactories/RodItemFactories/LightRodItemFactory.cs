@@ -24,12 +24,13 @@ internal class LightRodItemFactory : RodItemFactory
     public override int LevelNormallyFound => 10;
     public override int[] Locale => new int[] { 10, 0, 0, 0 };
     public override int Weight => 15;
+    public override int RodRechargeTime => 9;
     public override void Execute(ZapRodEvent zapRodEvent)
     {
         Game.MsgPrint("A line of blue shimmering light appears.");
         Game.LightLine(zapRodEvent.Dir.Value);
         zapRodEvent.Identified = true;
-        zapRodEvent.Item.TypeSpecificValue = 9;
+        zapRodEvent.Item.RodRechargeTimeRemaining = RodRechargeTime;
     }
     public override Item CreateItem() => new Item(Game, this);
 }

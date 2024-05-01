@@ -13,15 +13,62 @@ internal abstract class RodItemFactory : ItemFactory, IFlavorFactory
     public RodItemFactory(Game game) : base(game) { }
     public override ItemClass ItemClass => Game.SingletonRepository.Get<ItemClass>(nameof(RodsItemClass));
 
+    public abstract int RodRechargeTime { get; }
+
+    private void ProcessWorld(Item oPtr)
+    {
+        if (oPtr.RodRechargeTimeRemaining != 0)
+        {
+            oPtr.RodRechargeTimeRemaining--;
+            if (oPtr.RodRechargeTimeRemaining == 0)
+            {
+                Game.SingletonRepository.Get<FlaggedAction>(nameof(NoticeCombineFlaggedAction)).Set();
+            }
+        }
+    }
+
+    public override void GridProcessWorld(Item item, GridTile gridTile)
+    {
+        ProcessWorld(item);
+    }
+
+    public override void MonsterProcessWorld(Item item, Monster mPtr)
+    {
+        ProcessWorld(item);
+    }
+
+    public override void EquipmentProcessWorld(Item item)
+    {
+        ProcessWorld(item);
+    }
+
+    public override void PackProcessWorld(Item item)
+    {
+        ProcessWorld(item);
+    }
+
     /// <summary>
     /// Returns the factory that this item was created by; casted as an IFlavor.
     /// </summary>
     public IFlavorFactory FlavorFactory => (IFlavorFactory)this;
 
+    public override void EatMagic(Item oPtr)
+    {
+        if (oPtr.RodRechargeTimeRemaining > 0)
+        {
+            Game.MsgPrint("You can't absorb energy from a discharged rod.");
+        }
+        else
+        {
+            Game.Mana.IntValue += 2 * LevelNormallyFound;
+            oPtr.RodRechargeTimeRemaining = 500;
+        }
+    }
+
     public override string GetVerboseDescription(Item item)
     {
         string s = "";
-        if (item.IsKnown() && item.TypeSpecificValue != 0)
+        if (item.IsKnown() && item.RodRechargeTimeRemaining != 0)
         {
             s += $" (charging)";
         }

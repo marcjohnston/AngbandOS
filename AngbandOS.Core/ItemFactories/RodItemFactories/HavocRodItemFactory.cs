@@ -24,11 +24,12 @@ internal class HavocRodItemFactory : RodItemFactory
     public override int LevelNormallyFound => 95;
     public override int[] Locale => new int[] { 100, 0, 0, 0 };
     public override int Weight => 15;
+    public override int RodRechargeTime => 250;
     public override void Execute(ZapRodEvent zapRodEvent)
     {
         Game.RunScript(nameof(CallChaosScript));
         zapRodEvent.Identified = true;
-        zapRodEvent.Item.TypeSpecificValue = 250;
+        zapRodEvent.Item.RodRechargeTimeRemaining = RodRechargeTime;
     }
     public override Item CreateItem() => new Item(Game, this);
 }

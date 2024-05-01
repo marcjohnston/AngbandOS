@@ -24,13 +24,14 @@ internal class PolymorphRodItemFactory : RodItemFactory
     public override int LevelNormallyFound => 35;
     public override int[] Locale => new int[] { 35, 0, 0, 0 };
     public override int Weight => 15;
+    public override int RodRechargeTime => 25;
     public override void Execute(ZapRodEvent zapRodEvent)
     {
         if (Game.PolyMonster(zapRodEvent.Dir.Value))
         {
             zapRodEvent.Identified = true;
         }
-        zapRodEvent.Item.TypeSpecificValue = 25;
+        zapRodEvent.Item.RodRechargeTimeRemaining = RodRechargeTime;
     }
     public override Item CreateItem() => new Item(Game, this);
 }

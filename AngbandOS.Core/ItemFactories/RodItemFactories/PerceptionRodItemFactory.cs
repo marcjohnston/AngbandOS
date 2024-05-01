@@ -24,6 +24,7 @@ internal class PerceptionRodItemFactory : RodItemFactory
     public override int LevelNormallyFound => 50;
     public override int[] Locale => new int[] { 50, 100, 0, 0 };
     public override int Weight => 15;
+    public override int RodRechargeTime => 10;
     public override void Execute(ZapRodEvent zapRodEvent)
     {
         zapRodEvent.Identified = true;
@@ -31,7 +32,7 @@ internal class PerceptionRodItemFactory : RodItemFactory
         {
             zapRodEvent.UseCharge = false;
         }
-        zapRodEvent.Item.TypeSpecificValue = 10;
+        zapRodEvent.Item.RodRechargeTimeRemaining = RodRechargeTime;
     }
     public override Item CreateItem() => new Item(Game, this);
 }

@@ -24,11 +24,12 @@ internal class LightningBallsRodItemFactory : RodItemFactory
     public override int LevelNormallyFound => 55;
     public override int[] Locale => new int[] { 55, 0, 0, 0 };
     public override int Weight => 15;
+    public override int RodRechargeTime => 23;
     public override void Execute(ZapRodEvent zapRodEvent)
     {
         Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(ElecProjectile)), zapRodEvent.Dir.Value, 32, 2);
         zapRodEvent.Identified = true;
-        zapRodEvent.Item.TypeSpecificValue = 23;
+        zapRodEvent.Item.RodRechargeTimeRemaining = RodRechargeTime;
     }
     public override Item CreateItem() => new Item(Game, this);
 }

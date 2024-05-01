@@ -135,7 +135,7 @@ internal abstract class Race : IGetKey
     public virtual bool IsBurnedBySunlight => false;
 
     /// <summary>
-    /// Allows the race to process world.  Does nothing by default.
+    /// Allows the race to process world.  Does nothing by default.  Vampire races override this method to take a hit when exposed to sunlight.
     /// </summary>
     /// <param name="processWorldEventArgs"></param>
     public virtual void ProcessWorld(ProcessWorldEventArgs processWorldEventArgs) { }
