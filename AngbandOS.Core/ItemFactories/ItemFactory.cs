@@ -510,6 +510,11 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey
         }
 
         // TODO: Each of these belong to the factory
+        if (a.StaffChargesRemaining != b.StaffChargesRemaining)
+        {
+            return false;
+        }
+
         if (a.WandChargesRemaining!= b.WandChargesRemaining)
         {
             return false;

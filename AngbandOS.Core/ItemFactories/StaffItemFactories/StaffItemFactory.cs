@@ -15,6 +15,13 @@ internal abstract class StaffItemFactory : ItemFactory, IFlavorFactory
     public StaffItemFactory(Game game) : base(game) { }
     public override ItemClass ItemClass => Game.SingletonRepository.Get<ItemClass>(nameof(StaffsItemClass));
 
+    public abstract int StaffChargeCount { get; }
+
+    public override void ApplyMagic(Item item, int level, int power, Store? store)
+    {
+        item.StaffChargesRemaining = StaffChargeCount;
+    }
+
     /// <summary>
     /// Returns the factory that this item was created by; casted as an IFlavor.
     /// </summary>
@@ -31,21 +38,21 @@ internal abstract class StaffItemFactory : ItemFactory, IFlavorFactory
         if (Game.RandomLessThan(i) == 0)
         {
             Game.MsgPrint("The recharge backfires, draining the rod further!");
-            if (oPtr.TypeSpecificValue < 10000)
+            if (oPtr.StaffChargesRemaining < 10000)
             {
-                oPtr.TypeSpecificValue = (oPtr.TypeSpecificValue + 100) * 2;
+                oPtr.StaffChargesRemaining = (oPtr.StaffChargesRemaining + 100) * 2;
             }
         }
         else
         {
             t = num * Game.DiceRoll(2, 4);
-            if (oPtr.TypeSpecificValue > t)
+            if (oPtr.StaffChargesRemaining > t)
             {
-                oPtr.TypeSpecificValue -= t;
+                oPtr.StaffChargesRemaining -= t;
             }
             else
             {
-                oPtr.TypeSpecificValue = 0;
+                oPtr.StaffChargesRemaining = 0;
             }
         }
         Game.SingletonRepository.Get<FlaggedAction>(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
@@ -53,19 +60,19 @@ internal abstract class StaffItemFactory : ItemFactory, IFlavorFactory
 
     public override bool DrainChargesMonsterAttack(Item item, Monster monster, ref bool obvious) // TODO: obvious needs to be in an event 
     {
-        if (item.TypeSpecificValue == 0)
+        if (item.StaffChargesRemaining == 0)
         {
             return false;
         }
         Game.MsgPrint("Energy drains from your pack!");
         obvious = true;
         int j = monster.Level;
-        monster.Health += j * item.TypeSpecificValue * item.Count;
+        monster.Health += j * item.StaffChargesRemaining * item.Count;
         if (monster.Health > monster.MaxHealth)
         {
             monster.Health = monster.MaxHealth;
         }
-        item.TypeSpecificValue = 0;
+        item.StaffChargesRemaining = 0;
         Game.SingletonRepository.Get<FlaggedAction>(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
         return true;
     }
@@ -75,7 +82,7 @@ internal abstract class StaffItemFactory : ItemFactory, IFlavorFactory
         string s = "";
         if (item.IsKnown())
         {
-            s += $" ({item.TypeSpecificValue} {Game.CountPluralize("charge", item.TypeSpecificValue)})";
+            s += $" ({item.StaffChargesRemaining} {Game.CountPluralize("charge", item.StaffChargesRemaining)})";
         }
         s += base.GetVerboseDescription(item);
         return s;
@@ -83,10 +90,10 @@ internal abstract class StaffItemFactory : ItemFactory, IFlavorFactory
 
     public override void EatMagic(Item oPtr)
     {
-        if (oPtr.TypeSpecificValue > 0)
+        if (oPtr.StaffChargesRemaining > 0)
         {
-            Game.Mana.IntValue += oPtr.TypeSpecificValue * LevelNormallyFound;
-            oPtr.TypeSpecificValue = 0;
+            Game.Mana.IntValue += oPtr.StaffChargesRemaining * LevelNormallyFound;
+            oPtr.StaffChargesRemaining = 0;
         }
         else
         {
@@ -105,7 +112,7 @@ internal abstract class StaffItemFactory : ItemFactory, IFlavorFactory
 
     public override int? GetBonusRealValue(Item item, int value)
     {
-        return value / 20 * item.TypeSpecificValue;
+        return value / 20 * item.StaffChargesRemaining;
     }
 
     /// <summary>

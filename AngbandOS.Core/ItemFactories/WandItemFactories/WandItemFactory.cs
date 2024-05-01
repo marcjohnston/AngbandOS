@@ -60,7 +60,7 @@ internal abstract class WandItemFactory : ItemFactory, IFlavorFactory
     public override void Recharge(Item oPtr, int num)
     {
         int i, t;
-        i = (num + 100 - LevelNormallyFound - (10 * oPtr.TypeSpecificValue)) / 15;
+        i = (num + 100 - LevelNormallyFound - (10 * oPtr.WandChargesRemaining)) / 15;
         if (i < 1)
         {
             i = 1;
@@ -77,7 +77,7 @@ internal abstract class WandItemFactory : ItemFactory, IFlavorFactory
             t = (num / (LevelNormallyFound + 2)) + 1;
             if (t > 0)
             {
-                oPtr.TypeSpecificValue += 2 + Game.DieRoll(t);
+                oPtr.WandChargesRemaining += 2 + Game.DieRoll(t);
             }
             oPtr.IdentKnown = false;
             oPtr.IdentEmpty = false;

@@ -75,7 +75,7 @@ internal class UseStaffScript : Script, IScript, IRepeatableScript
             return;
         }
         // Make sure it has charges left
-        if (item.TypeSpecificValue <= 0)
+        if (item.StaffChargesRemaining <= 0)
         {
             Game.MsgPrint("The staff has no charges left.");
             item.IdentEmpty = true;
@@ -109,12 +109,12 @@ internal class UseStaffScript : Script, IScript, IRepeatableScript
         if (!channeled)
         {
             // Use the actual charge
-            item.TypeSpecificValue--;
+            item.StaffChargesRemaining--;
             // If the staff was part of a stack, separate it from the rest
             if (item.IsInInventory && item.Count > 1)
             {
                 Item singleStaff = item.Clone(1);
-                item.TypeSpecificValue++;
+                item.StaffChargesRemaining++;
                 item.Count--;
                 Game.WeightCarried -= singleStaff.Weight;
                 Game.InvenCarry(singleStaff);
@@ -125,11 +125,11 @@ internal class UseStaffScript : Script, IScript, IRepeatableScript
             {
                 if (item.IsInInventory)
                 {
-                    Game.MsgPrint(item.TypeSpecificValue != 1 ? $"You have {item.TypeSpecificValue} charges remaining." : $"You have {item.TypeSpecificValue} charge remaining.");
+                    Game.MsgPrint(item.StaffChargesRemaining != 1 ? $"You have {item.StaffChargesRemaining} charges remaining." : $"You have {item.StaffChargesRemaining} charge remaining.");
                 }
                 else
                 {
-                    Game.MsgPrint(item.TypeSpecificValue != 1 ? $"There are {item.TypeSpecificValue} charges remaining." : $"There is {item.TypeSpecificValue} charge remaining.");
+                    Game.MsgPrint(item.StaffChargesRemaining != 1 ? $"There are {item.StaffChargesRemaining} charges remaining." : $"There is {item.StaffChargesRemaining} charge remaining.");
                 }
             }
         }

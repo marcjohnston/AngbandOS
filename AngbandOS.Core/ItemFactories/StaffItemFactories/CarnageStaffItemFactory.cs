@@ -12,10 +12,7 @@ internal class CarnageStaffItemFactory : StaffItemFactory
 {
     private CarnageStaffItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override void ApplyMagic(Item item, int level, int power, Store? store)
-    {
-        item.TypeSpecificValue = Game.DieRoll(2) + 1;
-    }
+    public override int StaffChargeCount => Game.DieRoll(2) + 1;
     public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(UnderscoreSymbol));
     public override string Name => "Carnage";
 

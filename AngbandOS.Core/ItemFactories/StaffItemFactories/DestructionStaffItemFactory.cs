@@ -15,10 +15,7 @@ internal class DestructionStaffItemFactory : StaffItemFactory
     public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(UnderscoreSymbol));
     public override string Name => "*Destruction*";
 
-    public override void ApplyMagic(Item item, int level, int power, Store? store)
-    {
-        item.TypeSpecificValue = Game.DieRoll(3) + 1;
-    }
+    public override int StaffChargeCount => Game.DieRoll(3) + 1;
 
     public override int[] Chance => new int[] { 1, 1, 0, 0 };
     public override int Cost => 2500;

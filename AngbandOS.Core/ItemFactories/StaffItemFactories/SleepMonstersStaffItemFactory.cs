@@ -24,10 +24,7 @@ internal class SleepMonstersStaffItemFactory : StaffItemFactory
     public override int[] Locale => new int[] { 10, 0, 0, 0 };
     public override int Weight => 50;
 
-    public override void ApplyMagic(Item item, int level, int power, Store? store)
-    {
-        item.TypeSpecificValue = Game.DieRoll(5) + 6;
-    }
+    public override int StaffChargeCount => Game.DieRoll(5) + 6;
 
     public override void UseStaff(UseStaffEvent eventArgs)
     {

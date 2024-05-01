@@ -270,6 +270,8 @@ internal sealed class Item : IComparable<Item>
     /// </summary>
     public int TypeSpecificValue;
 
+    public int StaffChargesRemaining = 0;
+
     public int WandChargesRemaining = 0;
 
     public int RodRechargeTimeRemaining = 0;
@@ -402,16 +404,13 @@ internal sealed class Item : IComparable<Item>
         }
 
         // Seventh level sort (rods with shortest recharge time).
-        if (Category == ItemTypeEnum.Rod && oPtr.Category == ItemTypeEnum.Rod)
+        if (RodRechargeTimeRemaining < oPtr.RodRechargeTimeRemaining)
         {
-            if (TypeSpecificValue < oPtr.TypeSpecificValue)
-            {
-                return -1;
-            }
-            if (TypeSpecificValue > oPtr.TypeSpecificValue)
-            {
-                return 1;
-            }
+            return -1;
+        }
+        if (RodRechargeTimeRemaining > oPtr.RodRechargeTimeRemaining)
+        {
+            return 1;
         }
 
         // Eigth level sort (greater value over less value).
@@ -474,6 +473,7 @@ internal sealed class Item : IComparable<Item>
         clonedItem.NutritionalValue = NutritionalValue;
         clonedItem.RingsArmorActivationAndFixedArtifactsRechargeTimeLeft = RingsArmorActivationAndFixedArtifactsRechargeTimeLeft;
         clonedItem.RodRechargeTimeRemaining = RodRechargeTimeRemaining;
+        clonedItem.StaffChargesRemaining = StaffChargesRemaining;
         clonedItem.WandChargesRemaining = WandChargesRemaining;
         clonedItem.GoldPieces = GoldPieces;
         clonedItem.BonusArmorClass = BonusArmorClass;

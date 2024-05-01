@@ -15,10 +15,7 @@ internal class HealingStaffItemFactory : StaffItemFactory
     public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(UnderscoreSymbol));
     public override string Name => "Healing";
 
-    public override void ApplyMagic(Item item, int level, int power, Store? store)
-    {
-        item.TypeSpecificValue = Game.DieRoll(2) + 1;
-    }
+    public override int StaffChargeCount => Game.DieRoll(2) + 1;
     public override int[] Chance => new int[] { 2, 0, 0, 0 };
     public override int Cost => 5000;
     public override int Dd => 1;

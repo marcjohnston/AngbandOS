@@ -390,6 +390,10 @@ internal abstract class StoreFactory : IItemFilter, IGetKey
         {
             return false;
         }
+        if (oPtr.StaffChargesRemaining != jPtr.StaffChargesRemaining)
+        {
+            return false;
+        }
         if (oPtr.NutritionalValue != jPtr.NutritionalValue)
         {
             return false;

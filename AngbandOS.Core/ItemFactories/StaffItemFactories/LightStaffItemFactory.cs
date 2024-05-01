@@ -15,10 +15,7 @@ internal class LightStaffItemFactory : StaffItemFactory
     public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(UnderscoreSymbol));
     public override string Name => "Light";
 
-    public override void ApplyMagic(Item item, int level, int power, Store? store)
-    {
-        item.TypeSpecificValue = Game.DieRoll(20) + 8;
-    }
+    public override int StaffChargeCount => Game.DieRoll(20) + 8;
     public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int Cost => 250;
     public override int Dd => 1;
