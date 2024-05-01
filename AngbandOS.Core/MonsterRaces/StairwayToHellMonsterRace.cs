@@ -23,7 +23,7 @@ internal class StairwayToHellMonsterRace : MonsterRace
     public override int ArmorClass => 40;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
-        new MonsterAttackDefinition(nameof(WailAttack), nameof(UnBonusAttackEffect), 0, 0),
+        new MonsterAttackDefinition(nameof(WailAttack), nameof(DisenchantAttackEffect), 0, 0),
         new MonsterAttackDefinition(nameof(WailAttack), nameof(Exp20AttackEffect), 0, 0),
         new MonsterAttackDefinition(nameof(WailAttack), nameof(EatGoldAttackEffect), 0, 0),
         new MonsterAttackDefinition(nameof(WailAttack), nameof(EatItemAttackEffect), 0, 0)

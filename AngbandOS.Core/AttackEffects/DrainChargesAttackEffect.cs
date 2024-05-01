@@ -8,36 +8,32 @@
 namespace AngbandOS.Core.AttackEffects;
 
 [Serializable]
-internal class EatFoodAttackEffect : AttackEffect
+internal class DrainChargesAttackEffect : AttackEffect
 {
-    private EatFoodAttackEffect(Game game) : base(game) { }
-    public override int Power => 5;
-    public override string Description => "eat your food";
-    public override void ApplyToPlayer(Monster monster, ref bool obvious, ref int damage, ref bool blinked)
+    private DrainChargesAttackEffect(Game game) : base(game) { }
+    public override int Power => 15;
+    public override string Description => "drain charges";
+
+    public override void ApplyToPlayer(Monster monster, ref bool obvious, ref int damage, ref bool blinked) // TODO: These need to be in an event
     {
+        // Unpower might drain charges from our items
         Game.TakeHit(damage, monster.IndefiniteVisibleName);
-        // Have ten tries at grabbing a food item from the player
+
+        // We will attempt up to 10 selections on items.
         for (int k = 0; k < 10; k++)
         {
             BaseInventorySlot packInventorySlot = Game.SingletonRepository.Get<BaseInventorySlot>(nameof(PackInventorySlot));
             int i = packInventorySlot.WeightedRandom.Choose();
             Item? item = Game.GetInventoryItem(i);
-            if (item != null && item.Factory.CanBeEatenByMonsters)
+            if (item != null && item.DrainChargesMonsterAttack(monster, ref obvious))
             {
-                // Note that the monster doesn't actually get the food item - it's gone
-                string itemName = item.Description(false, 0);
-                string y = item.Count > 1 ? "One of y" : "Y";
-                Game.MsgPrint($"{y}our {itemName} ({i.IndexToLabel()}) was eaten!");
-                Game.InvenItemIncrease(i, -1);
-                Game.InvenItemOptimize(i);
-                obvious = true;
                 return;
             }
         }
     }
+
     public override void ApplyToMonster(Monster monster, int armorClass, ref int damage, ref Projectile? pt, ref bool blinked)
     {
-        pt = null;
-        damage = 0;
+        pt = Game.SingletonRepository.Get<Projectile>(nameof(DisenchantProjectile));
     }
 }

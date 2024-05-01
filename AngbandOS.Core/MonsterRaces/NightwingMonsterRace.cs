@@ -31,8 +31,8 @@ internal class NightwingMonsterRace : MonsterRace
     {
         new MonsterAttackDefinition(nameof(TouchAttack), nameof(PoisonAttackEffect), 3, 5),
         new MonsterAttackDefinition(nameof(TouchAttack), nameof(PoisonAttackEffect), 3, 5),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(UnBonusAttackEffect), 6, 8),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(UnBonusAttackEffect), 6, 8)
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(DisenchantAttackEffect), 6, 8),
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(DisenchantAttackEffect), 6, 8)
     };
     public override bool BashDoor => true;
     public override bool ColdBlood => true;

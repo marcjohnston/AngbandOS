@@ -22,7 +22,7 @@ internal class DisenchanterMoldMonsterRace : MonsterRace
     public override int ArmorClass => 20;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
-        new MonsterAttackDefinition(nameof(TouchAttack), nameof(UnBonusAttackEffect), 1, 6),
+        new MonsterAttackDefinition(nameof(TouchAttack), nameof(DisenchantAttackEffect), 1, 6),
     };
     public override bool AttrMulti => true;
     public override string Description => "It is a strange glowing growth on the dungeon floor.";

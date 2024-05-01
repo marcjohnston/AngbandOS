@@ -13,11 +13,12 @@ internal class ShatterAttackEffect : AttackEffect
     private ShatterAttackEffect(Game game) : base(game) { }
     public override int Power => 60;
     public override string Description => "shatter";
-    public override void ApplyToPlayer(int monsterLevel, int armorClass, string monsterDescription, Monster monster, ref bool obvious, ref int damage, ref bool blinked)
+    public override void ApplyToPlayer(Monster monster, ref bool obvious, ref int damage, ref bool blinked)
     {
         obvious = true;
+        int armorClass = Game.BaseArmorClass + Game.ArmorClassBonus;
         damage -= damage * (armorClass < 150 ? armorClass : 150) / 250;
-        Game.TakeHit(damage, monsterDescription);
+        Game.TakeHit(damage, monster.IndefiniteVisibleName);
         // Do an earthquake only if we did enough damage on the hit
         if (damage > 23)
         {

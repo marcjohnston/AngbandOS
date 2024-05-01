@@ -35,7 +35,7 @@ internal class BeholderMonsterRace : MonsterRace
         new MonsterAttackDefinition(nameof(GazeAttack), nameof(Exp20AttackEffect), 2, 4),
         new MonsterAttackDefinition(nameof(GazeAttack), nameof(ParalyzeAttackEffect), 2, 4),
         new MonsterAttackDefinition(nameof(GazeAttack), nameof(LoseIntAttackEffect), 2, 6),
-        new MonsterAttackDefinition(nameof(GazeAttack), nameof(UnPowerAttackEffect), 2, 6)
+        new MonsterAttackDefinition(nameof(GazeAttack), nameof(DrainChargesAttackEffect), 2, 6)
     };
     public override bool BashDoor => true;
     public override string Description => "A disembodied eye, surrounded by twelve smaller eyes on stalks.";

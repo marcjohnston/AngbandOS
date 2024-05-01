@@ -229,6 +229,11 @@ internal class Monster : IItemContainer
         Game = game;
     }
 
+    /// <summary>
+    /// Returns the level of the monster.  The Player and the NobodyGhost show as level 1.
+    /// </summary>
+    public int Level => Race.Level >= 1 ? Race.Level : 1;
+
     public string DescribeItemLocation(Item oPtr) => $"being held by {Race.FriendlyName}";
 
     public string Label(Item oPtr) => ""; // TODO: Items held by a monster cannot be selected.
@@ -2839,10 +2844,7 @@ internal class Monster : IItemContainer
             return;
         }
 
-        int armorClass = Game.BaseArmorClass + Game.ArmorClassBonus;
-        int monsterLevel = Race.Level >= 1 ? Race.Level : 1;
         string monsterName = Name;
-        string monsterDescription = IndefiniteVisibleName;
         bool blinked = false;
         // Monsters get up to four attacks
         for (attackNumber = 0; attackNumber < Race.Attacks.Length; attackNumber++)
@@ -2872,11 +2874,11 @@ internal class Monster : IItemContainer
             }
                 
             // Check if the monster actually hits us
-            if (effect == null || MonsterCheckHitOnPlayer(power, monsterLevel))
+            if (effect == null || MonsterCheckHitOnPlayer(power))
             {
                 Game.Disturb(true);
                 // Protection From Evil might repel the attack
-                if (Game.ProtectionFromEvilTimer.Value > 0 && Race.Evil && Game.ExperienceLevel.IntValue >= monsterLevel && this.Game.RandomLessThan(100) + Game.ExperienceLevel.IntValue > 50)
+                if (Game.ProtectionFromEvilTimer.Value > 0 && Race.Evil && Game.ExperienceLevel.IntValue >= Level && this.Game.RandomLessThan(100) + Game.ExperienceLevel.IntValue > 50)
                 {
                     if (IsVisible)
                     {
@@ -2904,7 +2906,7 @@ internal class Monster : IItemContainer
                 }
                 else
                 {
-                    effect.ApplyToPlayer(monsterLevel, armorClass, monsterDescription, this, ref obvious, ref damage, ref blinked);
+                    effect.ApplyToPlayer(this, ref obvious, ref damage, ref blinked);
                 }
 
                 // Be nice and don't let us be both stunned and cut by the same blow
@@ -3444,7 +3446,7 @@ internal class Monster : IItemContainer
     /// <param name="attackPower"> The power of the attack </param>
     /// <param name="monsterLevel"> The level of the monster making the attack </param>
     /// <returns> True if the attack hit, false if not </returns>
-    private bool MonsterCheckHitOnPlayer(int attackPower, int monsterLevel)
+    private bool MonsterCheckHitOnPlayer(int attackPower)
     {
         // Straight five percent chance of hit or miss
         int k = this.Game.RandomLessThan(100);
@@ -3453,7 +3455,7 @@ internal class Monster : IItemContainer
             return k < 5;
         }
         // Otherwise, compare the power and level to the player's armor class
-        int i = attackPower + (monsterLevel * 3);
+        int i = attackPower + (Level * 3);
         int ac = Game.BaseArmorClass + Game.ArmorClassBonus;
         return i > 0 && this.Game.DieRoll(i) > ac * 3 / 4;
     }

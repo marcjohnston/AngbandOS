@@ -48,8 +48,8 @@ internal class NyarlathotepMonsterRace : MonsterRace
     public override int ArmorClass => 165;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(UnBonusAttackEffect), 12, 12),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(UnPowerAttackEffect), 12, 12),
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(DisenchantAttackEffect), 12, 12),
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(DrainChargesAttackEffect), 12, 12),
         new MonsterAttackDefinition(nameof(HitAttack), nameof(ConfuseAttackEffect), 10, 2),
         new MonsterAttackDefinition(nameof(HitAttack), nameof(BlindAttackEffect), 3, 2)
     };

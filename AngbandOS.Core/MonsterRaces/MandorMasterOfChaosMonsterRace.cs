@@ -33,8 +33,8 @@ internal class MandorMasterOfChaosMonsterRace : MonsterRace
     {
         new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 5, 5),
         new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 5, 5),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(UnPowerAttackEffect), 5, 5),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(UnBonusAttackEffect), 5, 5)
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(DrainChargesAttackEffect), 5, 5),
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(DisenchantAttackEffect), 5, 5)
     };
     public override bool BashDoor => true;
     public override string Description => "Mandor is one of the greatest chaos Masters, a formidable magician.";

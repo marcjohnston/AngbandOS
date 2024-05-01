@@ -33,8 +33,8 @@ internal class KascheiTheImmortalMonsterRace : MonsterRace
     public override int ArmorClass => 100;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(UnBonusAttackEffect), 6, 8),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(UnBonusAttackEffect), 6, 8),
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(DisenchantAttackEffect), 6, 8),
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(DisenchantAttackEffect), 6, 8),
         new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 5, 5),
         new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 5, 5)
     };

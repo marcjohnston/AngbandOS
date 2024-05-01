@@ -27,7 +27,7 @@ internal class HagenSonOfAlberichMonsterRace : MonsterRace
         new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 3, 7),
         new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 3, 7),
         new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 3, 7),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(UnBonusAttackEffect), 0, 0)
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(DisenchantAttackEffect), 0, 0)
     };
     public override bool BashDoor => true;
     public override string Description => "Alberich's son, born of a mortal woman won with gold.";

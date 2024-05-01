@@ -27,8 +27,8 @@ internal class AlberichTheNibelungKingMonsterRace : MonsterRace
     public override int ArmorClass => 80;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(UnBonusAttackEffect), 3, 12),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(UnBonusAttackEffect), 3, 12),
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(DisenchantAttackEffect), 3, 12),
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(DisenchantAttackEffect), 3, 12),
         new MonsterAttackDefinition(nameof(TouchAttack), nameof(EatGoldAttackEffect), 0, 0),
         new MonsterAttackDefinition(nameof(TouchAttack), nameof(EatGoldAttackEffect), 0, 0)
     };

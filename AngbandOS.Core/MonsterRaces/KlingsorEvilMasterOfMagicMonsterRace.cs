@@ -35,10 +35,10 @@ internal class KlingsorEvilMasterOfMagicMonsterRace : MonsterRace
     public override int ArmorClass => 100;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(UnBonusAttackEffect), 6, 8),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(UnBonusAttackEffect), 6, 8),
-        new MonsterAttackDefinition(nameof(TouchAttack), nameof(UnPowerAttackEffect), 0, 0),
-        new MonsterAttackDefinition(nameof(TouchAttack), nameof(UnPowerAttackEffect), 0, 0)
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(DisenchantAttackEffect), 6, 8),
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(DisenchantAttackEffect), 6, 8),
+        new MonsterAttackDefinition(nameof(TouchAttack), nameof(DrainChargesAttackEffect), 0, 0),
+        new MonsterAttackDefinition(nameof(TouchAttack), nameof(DrainChargesAttackEffect), 0, 0)
     };
     public override bool BashDoor => true;
     public override string Description => "Klingsor, whose hopeless effort to join the Knights of the Grail was thwarted, turned to black magic and became a deadly necromancer.";

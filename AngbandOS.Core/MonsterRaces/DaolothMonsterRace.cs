@@ -25,7 +25,7 @@ internal class DaolothMonsterRace : MonsterRace
     public override int ArmorClass => 180;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(UnBonusAttackEffect), 6, 8),
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(DisenchantAttackEffect), 6, 8),
         new MonsterAttackDefinition(nameof(HitAttack), nameof(AcidAttackEffect), 4, 6),
         new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 10, 10),
         new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 10, 10)

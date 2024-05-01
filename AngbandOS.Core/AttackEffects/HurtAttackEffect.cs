@@ -13,12 +13,13 @@ internal class HurtAttackEffect : AttackEffect
     private HurtAttackEffect(Game game) : base(game) { }
     public override int Power => 60;
     public override string Description => "attack";
-    public override void ApplyToPlayer(int monsterLevel, int armorClass, string monsterDescription, Monster monster, ref bool obvious, ref int damage, ref bool blinked)
+    public override void ApplyToPlayer(Monster monster, ref bool obvious, ref int damage, ref bool blinked)
     {
         // Normal damage is reduced by armor
+        int armorClass = Game.BaseArmorClass + Game.ArmorClassBonus;
         obvious = true;
         damage -= damage * (armorClass < 150 ? armorClass : 150) / 250;
-        Game.TakeHit(damage, monsterDescription);
+        Game.TakeHit(damage, monster.IndefiniteVisibleName);
     }
 
     public override void ApplyToMonster(Monster monster, int armorClass, ref int damage, ref Projectile? pt, ref bool blinked)

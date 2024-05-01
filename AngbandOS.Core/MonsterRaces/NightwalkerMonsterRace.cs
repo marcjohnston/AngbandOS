@@ -28,10 +28,10 @@ internal class NightwalkerMonsterRace : MonsterRace
     public override int ArmorClass => 175;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(UnBonusAttackEffect), 10, 10),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(UnBonusAttackEffect), 10, 10),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(UnBonusAttackEffect), 7, 7),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(UnBonusAttackEffect), 7, 7)
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(DisenchantAttackEffect), 10, 10),
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(DisenchantAttackEffect), 10, 10),
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(DisenchantAttackEffect), 7, 7),
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(DisenchantAttackEffect), 7, 7)
     };
     public override bool BashDoor => true;
     public override bool ColdBlood => true;

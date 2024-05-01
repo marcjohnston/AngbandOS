@@ -13,10 +13,10 @@ internal class PoisonAttackEffect : AttackEffect
     private PoisonAttackEffect(Game game) : base(game) { }
     public override int Power => 5;
     public override string Description => "poison";
-    public override void ApplyToPlayer(int monsterLevel, int armorClass, string monsterDescription, Monster monster, ref bool obvious, ref int damage, ref bool blinked)
+    public override void ApplyToPlayer(Monster monster, ref bool obvious, ref int damage, ref bool blinked)
     {
         // Poison does additional damage
-        Game.TakeHit(damage, monsterDescription);
+        Game.TakeHit(damage, monster.IndefiniteVisibleName);
         if (!(Game.HasPoisonResistance || Game.PoisonResistanceTimer.Value != 0))
         {
             // Hagarg Ryonis might save us from the additional damage
@@ -24,7 +24,7 @@ internal class PoisonAttackEffect : AttackEffect
             {
                 Game.MsgPrint("Hagarg Ryonis's favour protects you!");
             }
-            else if (Game.PoisonTimer.AddTimer(Game.DieRoll(monsterLevel) + 5))
+            else if (Game.PoisonTimer.AddTimer(Game.DieRoll(monster.Level) + 5))
             {
                 obvious = true;
             }

@@ -18,9 +18,9 @@ internal class DeathMoldMonsterRace : MonsterRace
     public override int ArmorClass => 60;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(UnBonusAttackEffect), 7, 7),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(UnBonusAttackEffect), 7, 7),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(UnBonusAttackEffect), 7, 7),
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(DisenchantAttackEffect), 7, 7),
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(DisenchantAttackEffect), 7, 7),
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(DisenchantAttackEffect), 7, 7),
         new MonsterAttackDefinition(nameof(HitAttack), nameof(Exp80AttackEffect), 5, 5)
     };
     public override string Description => "It is the epitome of all that is evil, in a mold. Its lifeless form draws power from sucking the souls of those that approach it, a nimbus of pure evil surrounds it. Luckily for you, it can't move.";

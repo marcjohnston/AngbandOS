@@ -22,7 +22,7 @@ internal class DisenchanterEyeMonsterRace : MonsterRace
     public override int ArmorClass => 10;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
-        new MonsterAttackDefinition(nameof(GazeAttack), nameof(UnBonusAttackEffect), 0, 0),
+        new MonsterAttackDefinition(nameof(GazeAttack), nameof(DisenchantAttackEffect), 0, 0),
     };
     public override bool AttrAny => true;
     public override bool AttrMulti => true;

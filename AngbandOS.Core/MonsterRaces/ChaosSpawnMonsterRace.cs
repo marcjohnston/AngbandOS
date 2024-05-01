@@ -19,7 +19,7 @@ internal class ChaosSpawnMonsterRace : MonsterRace
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
         new MonsterAttackDefinition(nameof(GazeAttack), nameof(ParalyzeAttackEffect), 0, 0),
-        new MonsterAttackDefinition(nameof(GazeAttack), nameof(UnBonusAttackEffect), 0, 0),
+        new MonsterAttackDefinition(nameof(GazeAttack), nameof(DisenchantAttackEffect), 0, 0),
         new MonsterAttackDefinition(nameof(GazeAttack), nameof(Exp40AttackEffect), 0, 0),
         new MonsterAttackDefinition(nameof(GazeAttack), nameof(HurtAttackEffect), 10, 6)
     };

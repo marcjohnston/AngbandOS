@@ -13,10 +13,10 @@ internal class LoseAllAttackEffect : AttackEffect
     private LoseAllAttackEffect(Game game) : base(game) { }
     public override int Power => 2;
     public override string Description => "reduce all stats";
-    public override void ApplyToPlayer(int monsterLevel, int armorClass, string monsterDescription, Monster monster, ref bool obvious, ref int damage, ref bool blinked)
+    public override void ApplyToPlayer(Monster monster, ref bool obvious, ref int damage, ref bool blinked)
     {
         // Try to decrease all six ability scores
-        Game.TakeHit(damage, monsterDescription);
+        Game.TakeHit(damage, monster.IndefiniteVisibleName);
         if (Game.TryDecreasingAbilityScore(Ability.Strength))
         {
             obvious = true;

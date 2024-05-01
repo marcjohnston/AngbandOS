@@ -6,6 +6,7 @@
 // copies. Other copyrights may also apply.”
 
 using System;
+using System.Threading;
 
 namespace AngbandOS.Core.ItemFactories;
 
@@ -25,6 +26,25 @@ internal abstract class WandItemFactory : ItemFactory, IFlavorFactory
         item.WandChargesRemaining = RodChargeCount;
     }
     public abstract int RodChargeCount { get; }
+
+    public override bool DrainChargesMonsterAttack(Item item, Monster monster, ref bool obvious) // TODO: obvious needs to be in an event 
+    {
+        if (item.WandChargesRemaining == 0)
+        {
+            return false;
+        }
+        Game.MsgPrint("Energy drains from your pack!");
+        obvious = true;
+        int j = monster.Level;
+        monster.Health += j * item.WandChargesRemaining * item.Count;
+        if (monster.Health > monster.MaxHealth)
+        {
+            monster.Health = monster.MaxHealth;
+        }
+        item.WandChargesRemaining = 0;
+        Game.SingletonRepository.Get<FlaggedAction>(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
+        return true;
+    }
 
     public override string GetVerboseDescription(Item item)
     {

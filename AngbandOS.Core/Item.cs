@@ -232,7 +232,7 @@ internal sealed class Item : IComparable<Item>
     /// <summary>
     /// Returns the factory that created this item.
     /// </summary>
-    public ItemFactory Factory { get; private set; } // TODO: This should be private ... and force the item to call the factory methods.
+    public ItemFactory Factory { get; private set; } // TODO: This should be protected ... and force the item to call the factory methods.
 
     /// <summary>
     /// Tests an item to determine if it belongs to an Item type and returns a the item casted into that type; or null, if the item doesn't belong to the type.
@@ -426,6 +426,17 @@ internal sealed class Item : IComparable<Item>
 
         // They are equal.
         return 0;
+    }
+
+    /// <summary>
+    /// Drains charges from the item and returns true, if charges were drained.
+    /// </summary>
+    /// <param name="monster"></param>
+    /// <param name="obvious"></param>
+    /// <returns></returns>
+    public bool DrainChargesMonsterAttack(Monster monster, ref bool obvious) // TODO: obvious needs to be in an event 
+    {
+        return Factory.DrainChargesMonsterAttack(this, monster, ref obvious); // TODO: obvious needs to be in an event 
     }
 
     // TODO: There is no way to ensure a cloned gets all of the properties

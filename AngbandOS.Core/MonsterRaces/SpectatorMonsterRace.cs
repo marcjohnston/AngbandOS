@@ -27,7 +27,7 @@ internal class SpectatorMonsterRace : MonsterRace
     {
         new MonsterAttackDefinition(nameof(GazeAttack), nameof(ParalyzeAttackEffect), 1, 4),
         new MonsterAttackDefinition(nameof(GazeAttack), nameof(ConfuseAttackEffect), 1, 4),
-        new MonsterAttackDefinition(nameof(GazeAttack), nameof(UnBonusAttackEffect), 0, 0),
+        new MonsterAttackDefinition(nameof(GazeAttack), nameof(DisenchantAttackEffect), 0, 0),
     };
     public override string Description => "It has three small eyestalks and a large central eye.";
     public override bool EmptyMind => true;

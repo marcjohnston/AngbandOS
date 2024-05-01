@@ -5,6 +5,8 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
+using System.Threading;
+
 namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
@@ -47,6 +49,25 @@ internal abstract class StaffItemFactory : ItemFactory, IFlavorFactory
             }
         }
         Game.SingletonRepository.Get<FlaggedAction>(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
+    }
+
+    public override bool DrainChargesMonsterAttack(Item item, Monster monster, ref bool obvious) // TODO: obvious needs to be in an event 
+    {
+        if (item.TypeSpecificValue == 0)
+        {
+            return false;
+        }
+        Game.MsgPrint("Energy drains from your pack!");
+        obvious = true;
+        int j = monster.Level;
+        monster.Health += j * item.TypeSpecificValue * item.Count;
+        if (monster.Health > monster.MaxHealth)
+        {
+            monster.Health = monster.MaxHealth;
+        }
+        item.TypeSpecificValue = 0;
+        Game.SingletonRepository.Get<FlaggedAction>(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
+        return true;
     }
 
     public override string GetVerboseDescription(Item item)

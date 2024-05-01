@@ -8,15 +8,15 @@
 namespace AngbandOS.Core.AttackEffects;
 
 [Serializable]
-internal class UnBonusAttackEffect : AttackEffect
+internal class DisenchantAttackEffect : AttackEffect
 {
-    private UnBonusAttackEffect(Game game) : base(game) { }
+    private DisenchantAttackEffect(Game game) : base(game) { }
     public override int Power => 20;
     public override string Description => "disenchant";
-    public override void ApplyToPlayer(int monsterLevel, int armorClass, string monsterDescription, Monster monster, ref bool obvious, ref int damage, ref bool blinked)
+    public override void ApplyToPlayer(Monster monster, ref bool obvious, ref int damage, ref bool blinked)
     {
         // Disenchantment might ruin our items
-        Game.TakeHit(damage, monsterDescription);
+        Game.TakeHit(damage, monster.IndefiniteVisibleName);
         if (!Game.HasDisenchantResistance)
         {
             if (Game.RunSuccessfulScript(nameof(ApplyDisenchantScript)))

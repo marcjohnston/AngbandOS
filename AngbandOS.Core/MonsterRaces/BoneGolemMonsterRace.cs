@@ -32,8 +32,8 @@ internal class BoneGolemMonsterRace : MonsterRace
     public override int ArmorClass => 170;
     protected override MonsterAttackDefinition[]? AttackDefinitions => new MonsterAttackDefinition[]
     {
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(UnBonusAttackEffect), 6, 8),
-        new MonsterAttackDefinition(nameof(HitAttack), nameof(UnBonusAttackEffect), 6, 8),
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(DisenchantAttackEffect), 6, 8),
+        new MonsterAttackDefinition(nameof(HitAttack), nameof(DisenchantAttackEffect), 6, 8),
         new MonsterAttackDefinition(nameof(HitAttack), nameof(LoseStrAttackEffect), 4, 6),
         new MonsterAttackDefinition(nameof(HitAttack), nameof(LoseStrAttackEffect), 4, 6)
     };

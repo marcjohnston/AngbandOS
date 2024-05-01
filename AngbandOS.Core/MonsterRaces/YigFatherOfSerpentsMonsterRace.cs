@@ -27,7 +27,7 @@ internal class YigFatherOfSerpentsMonsterRace : MonsterRace
         new MonsterAttackDefinition(nameof(ClawAttack), nameof(PoisonAttackEffect), 5, 10),
         new MonsterAttackDefinition(nameof(ClawAttack), nameof(PoisonAttackEffect), 5, 10),
         new MonsterAttackDefinition(nameof(BiteAttack), nameof(HurtAttackEffect), 20, 10),
-        new MonsterAttackDefinition(nameof(CrushAttack), nameof(UnBonusAttackEffect), 5, 12)
+        new MonsterAttackDefinition(nameof(CrushAttack), nameof(DisenchantAttackEffect), 5, 12)
     };
     public override bool BashDoor => true;
     public override string Description => "A humanoid snake, Yig is one of the most poisonous entities in existance.";

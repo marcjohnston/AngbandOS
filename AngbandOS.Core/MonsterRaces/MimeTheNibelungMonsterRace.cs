@@ -26,7 +26,7 @@ internal class MimeTheNibelungMonsterRace : MonsterRace
     {
         new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 3, 6),
         new MonsterAttackDefinition(nameof(HitAttack), nameof(HurtAttackEffect), 3, 6),
-        new MonsterAttackDefinition(nameof(TouchAttack), nameof(UnBonusAttackEffect), 0, 0),
+        new MonsterAttackDefinition(nameof(TouchAttack), nameof(DisenchantAttackEffect), 0, 0),
         new MonsterAttackDefinition(nameof(TouchAttack), nameof(EatGoldAttackEffect), 0, 0)
     };
     public override bool BashDoor => true;
