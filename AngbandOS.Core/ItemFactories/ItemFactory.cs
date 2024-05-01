@@ -172,7 +172,7 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey
             }
             s += ")";
         }
-        if (item.IsKnown() && item.RechargeTimeLeft != 0)
+        if (item.IsKnown() && item.RingsArmorActivationAndFixedArtifactsRechargeTimeLeft != 0)
         {
             s += " (charging)";
         }
@@ -530,7 +530,7 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey
         {
             return false;
         }
-        if (a.RechargeTimeLeft != 0 || b.RechargeTimeLeft != 0)
+        if (a.RingsArmorActivationAndFixedArtifactsRechargeTimeLeft != 0 || b.RingsArmorActivationAndFixedArtifactsRechargeTimeLeft != 0)
         {
             return false;
         }

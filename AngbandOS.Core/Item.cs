@@ -253,7 +253,7 @@ internal sealed class Item : IComparable<Item>
 
     public bool Marked;
 
-    public int RechargeTimeLeft;
+    public int RingsArmorActivationAndFixedArtifactsRechargeTimeLeft;
 
     /// <summary>
     /// Returns a value that is specific to the item class.
@@ -450,7 +450,7 @@ internal sealed class Item : IComparable<Item>
         clonedItem.TypeSpecificValue = TypeSpecificValue;
         clonedItem.TurnsOfLightRemaining = TurnsOfLightRemaining;
         clonedItem.NutritionalValue = NutritionalValue;
-        clonedItem.RechargeTimeLeft = RechargeTimeLeft;
+        clonedItem.RingsArmorActivationAndFixedArtifactsRechargeTimeLeft = RingsArmorActivationAndFixedArtifactsRechargeTimeLeft;
         clonedItem.RodRechargeTimeRemaining = RodRechargeTimeRemaining;
         clonedItem.GoldPieces = GoldPieces;
         clonedItem.BonusArmorClass = BonusArmorClass;
@@ -2819,7 +2819,7 @@ internal sealed class Item : IComparable<Item>
         }
         RandomArtifactActivation = type;
         RandomArtifactItemCharacteristics.Activate = true;
-        RechargeTimeLeft = 0;
+        RingsArmorActivationAndFixedArtifactsRechargeTimeLeft = 0;
     }
 
     public int GetBonusValue(int max, int level)

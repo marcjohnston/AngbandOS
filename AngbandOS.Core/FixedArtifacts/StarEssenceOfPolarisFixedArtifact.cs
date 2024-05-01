@@ -19,7 +19,7 @@ internal class StarEssenceOfPolarisFixedArtifact : FixedArtifact, IFixedArtifact
     {
         Game.MsgPrint("The essence wells with clear light...");
         Game.LightArea(base.Game.DiceRoll(2, 15), 3);
-        item.RechargeTimeLeft = base.Game.RandomLessThan(10) + 10;
+        item.RingsArmorActivationAndFixedArtifactsRechargeTimeLeft = base.Game.RandomLessThan(10) + 10;
     }
 
     public string DescribeActivationEffect => "illumination every 10+d10 turns";

@@ -42,7 +42,7 @@ internal class MultiHuedDragonScaleMailArmorItemFactory : DragonScaleMailArmorIt
                 Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(PoisProjectile)), dir, 250, -2);
                 return;
         }
-        item.RechargeTimeLeft = Game.RandomLessThan(225) + 225;
+        item.RingsArmorActivationAndFixedArtifactsRechargeTimeLeft = Game.RandomLessThan(225) + 225;
     }
     public override string? DescribeActivationEffect => "breathe multi-hued (250) every 225+d225 turns";
     public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(OpenBraceSymbol));

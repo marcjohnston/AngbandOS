@@ -20,7 +20,7 @@ internal class AcidRingItemFactory : RingItemFactory, IItemsCanBeActivated
         }
         Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(AcidProjectile)), dir, 50, 2);
         Game.AcidResistanceTimer.AddTimer(Game.DieRoll(20) + 20);
-        item.RechargeTimeLeft = Game.RandomLessThan(50) + 50;
+        item.RingsArmorActivationAndFixedArtifactsRechargeTimeLeft = Game.RandomLessThan(50) + 50;
     }
     public override void ApplyMagic(Item item, int level, int power, Store? store)
     {

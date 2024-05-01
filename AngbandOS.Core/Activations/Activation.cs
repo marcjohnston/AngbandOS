@@ -72,7 +72,7 @@ internal abstract class Activation : IGetKey
         }
         if (OnActivate(item))
         {
-            item.RechargeTimeLeft = RechargeTime();
+            item.RingsArmorActivationAndFixedArtifactsRechargeTimeLeft = RechargeTime();
             return true;
         }
         return false;

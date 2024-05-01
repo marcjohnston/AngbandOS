@@ -43,12 +43,43 @@ internal abstract class EquipmentInventorySlot : BaseInventorySlot
     {
         base.ProcessWorld(processWorldEventArgs);
 
-        // Allow the base functionality to process items.
+        // Allow each item in this inventory slot to process the world turn.
         foreach (int index in InventorySlots)
         {
             Item? oPtr = Game.GetInventoryItem(index);
             if (oPtr != null)
             {
+                // Perform some universal actions for items that are worn.
+                oPtr.RefreshFlagBasedProperties();
+                if (oPtr.Characteristics.DreadCurse && Game.DieRoll(100) == 1)
+                {
+                    Game.ActivateDreadCurse();
+                }
+                if (oPtr.Characteristics.Teleport && Game.RandomLessThan(100) < 1)
+                {
+                    if (oPtr.IdentCursed && !Game.HasAntiTeleport)
+                    {
+                        Game.Disturb(true);
+                        Game.RunScriptInt(nameof(TeleportSelfScript), 40);
+                    }
+                    else
+                    {
+                        if (Game.GetCheck("Teleport? "))
+                        {
+                            Game.Disturb(false);
+                            Game.RunScriptInt(nameof(TeleportSelfScript), 50);
+                        }
+                    }
+                }
+                if (oPtr.RingsArmorActivationAndFixedArtifactsRechargeTimeLeft > 0)
+                {
+                    oPtr.RingsArmorActivationAndFixedArtifactsRechargeTimeLeft--;
+                    if (oPtr.RingsArmorActivationAndFixedArtifactsRechargeTimeLeft == 0)
+                    {
+                        Game.SingletonRepository.Get<FlaggedAction>(nameof(NoticeCombineFlaggedAction)).Set();
+                    }
+                }
+
                 oPtr.EquipmentProcessWorld();
             }
         }

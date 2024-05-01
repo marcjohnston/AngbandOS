@@ -22,7 +22,7 @@ internal class LawDragonScaleMailArmorItemFactory : DragonScaleMailArmorItemFact
         string element = chance == 1 ? "sound" : "shards";
         Game.MsgPrint($"You breathe {element}.");
         Game.FireBall(chance == 1 ? (Projectile)Game.SingletonRepository.Get<Projectile>(nameof(SoundProjectile)) : Game.SingletonRepository.Get<Projectile>(nameof(ExplodeProjectile)), dir, 230, -2);
-        item.RechargeTimeLeft = Game.RandomLessThan(300) + 300;
+        item.RingsArmorActivationAndFixedArtifactsRechargeTimeLeft = Game.RandomLessThan(300) + 300;
     }
     public override string? DescribeActivationEffect => "breathe sound/shards (230) every 300+d300 turns";
     public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(OpenBraceSymbol));

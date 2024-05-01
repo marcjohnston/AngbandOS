@@ -20,7 +20,7 @@ internal class RedDragonScaleMailArmorItemFactory : DragonScaleMailArmorItemFact
         }
         Game.MsgPrint("You breathe fire.");
         Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(FireProjectile)), dir, 200, -2);
-        item.RechargeTimeLeft = Game.RandomLessThan(450) + 450;
+        item.RingsArmorActivationAndFixedArtifactsRechargeTimeLeft = Game.RandomLessThan(450) + 450;
     }
     public override string? DescribeActivationEffect => "breathe fire (200) every 450+d450 turns";
     public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(OpenBraceSymbol));

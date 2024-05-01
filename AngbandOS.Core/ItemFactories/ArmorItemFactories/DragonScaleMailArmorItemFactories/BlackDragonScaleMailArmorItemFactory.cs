@@ -20,7 +20,7 @@ internal class BlackDragonScaleMailArmorItemFactory : DragonScaleMailArmorItemFa
         }
         Game.MsgPrint("You breathe acid.");
         Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(AcidProjectile)), dir, 130, -2);
-        item.RechargeTimeLeft = Game.RandomLessThan(450) + 450;
+        item.RingsArmorActivationAndFixedArtifactsRechargeTimeLeft = Game.RandomLessThan(450) + 450;
         return;
     }
     public override string? DescribeActivationEffect => "breathe acid (130) every 450+d450 turns";

@@ -23,7 +23,7 @@ internal class SpearGungnirFixedArtifact : FixedArtifact, IFixedArtifactActivati
             return;
         }
         Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(ElecProjectile)), dir, 100, 3);
-        item.RechargeTimeLeft = 500;
+        item.RingsArmorActivationAndFixedArtifactsRechargeTimeLeft = 500;
     }
     public string DescribeActivationEffect => "lightning ball (100) every 500 turns";
 

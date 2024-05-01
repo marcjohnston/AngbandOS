@@ -23,7 +23,7 @@ internal class RingOfSetFixedArtifact : FixedArtifact, IFixedArtifactActivatible
             return;
         }
         RingOfSetPower(dir);
-        item.RechargeTimeLeft = base.Game.RandomLessThan(450) + 450;
+        item.RingsArmorActivationAndFixedArtifactsRechargeTimeLeft = base.Game.RandomLessThan(450) + 450;
     }
     public string DescribeActivationEffect => "bizarre things every 450+d450 turns";
     public override void ApplyResistances(Item item)

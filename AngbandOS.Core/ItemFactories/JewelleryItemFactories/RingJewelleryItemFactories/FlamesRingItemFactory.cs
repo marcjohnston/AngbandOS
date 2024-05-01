@@ -20,7 +20,7 @@ internal class FlamesRingItemFactory : RingItemFactory, IItemsCanBeActivated
         }
         Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(FireProjectile)), dir, 50, 2);
         Game.FireResistanceTimer.AddTimer(Game.DieRoll(20) + 20);
-        item.RechargeTimeLeft = Game.RandomLessThan(50) + 50;
+        item.RingsArmorActivationAndFixedArtifactsRechargeTimeLeft = Game.RandomLessThan(50) + 50;
     }
 
     public override string? DescribeActivationEffect => "ball of fire and resist fire";

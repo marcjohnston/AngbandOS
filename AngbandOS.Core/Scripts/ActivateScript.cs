@@ -85,7 +85,7 @@ internal class ActivateScript : Script, IScript, IRepeatableScript, ISuccessfulS
         }
 
         // If the item is still recharging, then just tell us and quit
-        if (item.RechargeTimeLeft != 0)
+        if (item.RingsArmorActivationAndFixedArtifactsRechargeTimeLeft != 0)
         {
             Game.MsgPrint("It whines, glows and fades...");
             return false;

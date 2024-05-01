@@ -22,7 +22,7 @@ internal class ChaosDragonScaleMailArmorItemFactory : DragonScaleMailArmorItemFa
         string element = chance == 1 ? "chaos" : "disenchantment";
         Game.MsgPrint($"You breathe {element}.");
         Game.FireBall(projectile: chance == 1 ? (Projectile)Game.SingletonRepository.Get<Projectile>(nameof(ChaosProjectile)) : Game.SingletonRepository.Get<Projectile>(nameof(DisenchantProjectile)), dir: dir, dam: 220, rad: -2);
-        item.RechargeTimeLeft = Game.RandomLessThan(300) + 300;
+        item.RingsArmorActivationAndFixedArtifactsRechargeTimeLeft = Game.RandomLessThan(300) + 300;
     }
     public override string? DescribeActivationEffect => "breathe chaos/disenchant (220) every 300+d300 turns";
     public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(OpenBraceSymbol));

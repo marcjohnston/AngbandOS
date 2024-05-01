@@ -25,7 +25,7 @@ internal class RingOfMagicFixedArtifact : FixedArtifact, IFixedArtifactActivatib
         }
         if (Game.DrainLife(dir, 100))
         {
-            item.RechargeTimeLeft = base.Game.RandomLessThan(100) + 100;
+            item.RingsArmorActivationAndFixedArtifactsRechargeTimeLeft = base.Game.RandomLessThan(100) + 100;
         }
     }
     public string DescribeActivationEffect => " every 100+d100 turns";

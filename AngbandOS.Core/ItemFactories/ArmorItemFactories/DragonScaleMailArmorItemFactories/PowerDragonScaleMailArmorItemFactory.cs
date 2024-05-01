@@ -20,7 +20,7 @@ internal class PowerDragonScaleMailArmorItemFactory : DragonScaleMailArmorItemFa
         }
         Game.MsgPrint("You breathe the elements.");
         Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(MissileProjectile)), dir, 300, -3);
-        item.RechargeTimeLeft = Game.RandomLessThan(300) + 300;
+        item.RingsArmorActivationAndFixedArtifactsRechargeTimeLeft = Game.RandomLessThan(300) + 300;
     }
     public override string? DescribeActivationEffect => "breathe the elements (300) every 300+d300 turns";
     public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(OpenBraceSymbol));

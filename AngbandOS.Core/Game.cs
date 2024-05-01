@@ -3916,46 +3916,6 @@ internal class Game
                 CheckExperience();
             }
         }
-        for (int i = InventorySlot.MeleeWeapon; i < InventorySlot.Total; i++)
-        {
-            Item? oPtr = GetInventoryItem(i);
-            if (oPtr != null)
-            {
-                oPtr.RefreshFlagBasedProperties();
-                if (oPtr.Characteristics.DreadCurse && DieRoll(100) == 1)
-                {
-                    ActivateDreadCurse();
-                }
-                if (oPtr.Characteristics.Teleport && RandomLessThan(100) < 1)
-                {
-                    if (oPtr.IdentCursed && !HasAntiTeleport)
-                    {
-                        Disturb(true);
-                        RunScriptInt(nameof(TeleportSelfScript), 40);
-                    }
-                    else
-                    {
-                        if (GetCheck("Teleport? "))
-                        {
-                            Disturb(false);
-                            RunScriptInt(nameof(TeleportSelfScript), 50);
-                        }
-                    }
-                }
-            }
-            if (oPtr == null)
-            {
-                continue;
-            }
-            if (oPtr.RechargeTimeLeft > 0)
-            {
-                oPtr.RechargeTimeLeft--;
-                if (oPtr.RechargeTimeLeft == 0)
-                {
-                    SingletonRepository.Get<FlaggedAction>(nameof(NoticeCombineFlaggedAction)).Set();
-                }
-            }
-        }
 
         // Mutations get to proces the world turn.
         foreach (Mutation mutation in MutationsPossessed.ToArray()) // The list may be modified.  Use the ToArray to prevent an issue.

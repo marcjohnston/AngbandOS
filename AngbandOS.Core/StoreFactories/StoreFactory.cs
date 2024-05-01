@@ -418,7 +418,7 @@ internal abstract class StoreFactory : IItemFilter, IGetKey
         {
             return false;
         }
-        if (oPtr.RechargeTimeLeft != 0 || jPtr.RechargeTimeLeft != 0)
+        if (oPtr.RingsArmorActivationAndFixedArtifactsRechargeTimeLeft != 0 || jPtr.RingsArmorActivationAndFixedArtifactsRechargeTimeLeft != 0)
         {
             return false;
         }
