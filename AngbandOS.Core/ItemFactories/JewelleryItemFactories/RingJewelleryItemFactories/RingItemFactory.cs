@@ -43,7 +43,7 @@ internal abstract class RingItemFactory : JewelleryItemFactory, IFlavorFactory
     }
 
     public RingItemFactory(Game game) : base(game) { }
-    public override ItemClass ItemClass => Game.SingletonRepository.Get<ItemClass>(nameof(RingsItemClass));
+    protected override string ItemClassName => nameof(RingsItemClass);
 
     /// <summary>
     /// Returns the ring flavors repository because rings have flavors that need to be identified.

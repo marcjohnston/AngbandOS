@@ -13,7 +13,7 @@ namespace AngbandOS.Core.ItemFactories;
 internal abstract class RodItemFactory : ItemFactory, IFlavorFactory
 {
     public RodItemFactory(Game game) : base(game) { }
-    public override ItemClass ItemClass => Game.SingletonRepository.Get<ItemClass>(nameof(RodsItemClass));
+    protected override string ItemClassName => nameof(RodsItemClass);
 
     public abstract int RodRechargeTime { get; }
 

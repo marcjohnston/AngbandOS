@@ -14,7 +14,7 @@ internal abstract class SwordWeaponItemFactory : MeleeWeaponItemFactory
     protected override bool CanBeWeaponOfLaw => true;
     protected override bool CanBeWeaponOfSharpness => true;
     protected override bool CapableOfVorpalSlaying => true;
-    public override ItemClass ItemClass => Game.SingletonRepository.Get<ItemClass>(nameof(SwordsItemClass));
+    protected override string ItemClassName => nameof(SwordsItemClass);
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Sword;
     public override bool HatesAcid => true;
     public override int PackSort => 28;

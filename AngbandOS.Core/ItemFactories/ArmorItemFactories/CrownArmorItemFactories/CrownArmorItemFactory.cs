@@ -75,7 +75,7 @@ internal abstract class CrownArmorItemFactory : ArmorItemFactory
     }
 
     public CrownArmorItemFactory(Game game) : base(game) { }
-    public override ItemClass ItemClass => Game.SingletonRepository.Get<ItemClass>(nameof(CrownsItemClass));
+    protected override string ItemClassName => nameof(CrownsItemClass);
 
     /// <summary>
     /// Applies standard magic to crowns.

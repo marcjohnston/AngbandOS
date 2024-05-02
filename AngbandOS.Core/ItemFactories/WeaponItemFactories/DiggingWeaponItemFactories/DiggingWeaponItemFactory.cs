@@ -15,7 +15,7 @@ internal abstract class DiggingWeaponItemFactory : WeaponItemFactory
     /// </summary>
     public override int WieldSlot => InventorySlot.Digger;
     public DiggingWeaponItemFactory(Game game) : base(game) { }
-    public override ItemClass ItemClass => Game.SingletonRepository.Get<ItemClass>(nameof(DiggersItemClass));
+    protected override string ItemClassName => nameof(DiggersItemClass);
     public override void ApplyMagic(Item item, int level, int power, Store? store)
     {
         base.ApplyMagic(item, level, power, null);

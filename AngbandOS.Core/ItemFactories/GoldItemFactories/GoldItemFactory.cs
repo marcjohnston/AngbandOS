@@ -12,7 +12,7 @@ namespace AngbandOS.Core.ItemFactories;
 internal abstract class GoldItemFactory : ItemFactory
 {
     public GoldItemFactory(Game game) : base(game) { }
-    public override ItemClass ItemClass => Game.SingletonRepository.Get<ItemClass>(nameof(GoldItemClass));
+    protected override string ItemClassName => nameof(GoldItemClass);
     public override int PackSort => 0;
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Gold;
 

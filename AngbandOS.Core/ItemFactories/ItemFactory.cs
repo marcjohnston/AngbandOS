@@ -689,11 +689,14 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey
     public virtual void Bind()
     {
         Symbol = Game.SingletonRepository.Get<Symbol>(SymbolName);
+        ItemClass = Game.SingletonRepository.Get<ItemClass>(ItemClassName);
         FlavorSymbol = Symbol;
         FlavorColor = Color;
     }
 
-    public abstract ItemClass ItemClass { get; }
+    protected abstract string ItemClassName { get; }
+
+    public ItemClass ItemClass { get; private set; }
 
     /// <summary>
     /// Returns a description of the activation effect for the item or null, if the item cannot be activated.  Returns null by default.

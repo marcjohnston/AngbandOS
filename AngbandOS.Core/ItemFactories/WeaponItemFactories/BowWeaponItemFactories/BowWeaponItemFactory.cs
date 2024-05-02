@@ -124,7 +124,7 @@ internal abstract class BowWeaponItemFactory : WeaponItemFactory // TODO: Should
     }
 
     public BowWeaponItemFactory(Game game) : base(game) { }
-    public override ItemClass ItemClass => Game.SingletonRepository.Get<ItemClass>(nameof(BowsItemClass));
+    protected override string ItemClassName => nameof(BowsItemClass);
     public override BaseInventorySlot BaseWieldSlot => Game.SingletonRepository.Get<BaseInventorySlot>(nameof(RangedWeaponInventorySlot));
     public override bool CanApplyBlowsBonus => true;
     /// <summary>

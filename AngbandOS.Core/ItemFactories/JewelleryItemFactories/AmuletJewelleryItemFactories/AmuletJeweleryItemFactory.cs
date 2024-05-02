@@ -34,7 +34,7 @@ internal abstract class AmuletJeweleryItemFactory : JewelleryItemFactory, IFlavo
         return includeCountPrefix ? GetPrefixCount(true, name, item.Count, item.IsKnownArtifact) : name;
     }
 
-    public override ItemClass ItemClass => Game.SingletonRepository.Get<ItemClass>(nameof(AmuletsItemClass));
+    protected override string ItemClassName => nameof(AmuletsItemClass);
     public override BaseInventorySlot BaseWieldSlot => Game.SingletonRepository.Get<BaseInventorySlot>(nameof(NeckInventorySlot));
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Amulet;
     public override int PackSort => 17;

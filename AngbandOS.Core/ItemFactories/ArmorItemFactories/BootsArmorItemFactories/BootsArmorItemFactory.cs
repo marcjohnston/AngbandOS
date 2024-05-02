@@ -16,7 +16,7 @@ internal abstract class BootsArmorItemFactory : ArmorItemFactory
     public override int WieldSlot => InventorySlot.Feet;
 
     public BootsArmorItemFactory(Game game) : base(game) { }
-    public override ItemClass ItemClass => Game.SingletonRepository.Get<ItemClass>(nameof(BootsItemClass));
+    protected override string ItemClassName => nameof(BootsItemClass);
     public override BaseInventorySlot BaseWieldSlot => Game.SingletonRepository.Get<BaseInventorySlot>(nameof(FeetInventorySlot));
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Boots;
     public override bool HatesFire => true;

@@ -11,7 +11,7 @@ namespace AngbandOS.Core.ItemFactories;
 internal abstract class LifeBookItemFactory : BookItemFactory
 {
     public LifeBookItemFactory(Game game) : base(game) { }
-    public override ItemClass ItemClass => Game.SingletonRepository.Get<ItemClass>(nameof(LifeSpellBooksItemClass));
+    protected override string ItemClassName => nameof(LifeSpellBooksItemClass);
     public override string RealmName => "Life";
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.LifeBook;
     public override bool HatesFire => true;
