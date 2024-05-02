@@ -23,7 +23,7 @@ internal class GemstoneLightSourceItemFactory : LightSourceItemFactory
             Game.TakeHit(Math.Min(Game.ExperienceLevel.IntValue, 50), "the Jewel of Judgement");
         }
     }
-    public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(AsteriskSymbol));
+    protected override string SymbolName => nameof(AsteriskSymbol);
     public override ColorEnum Color => ColorEnum.Diamond;
     public override string Name => "Gemstone";
 

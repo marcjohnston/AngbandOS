@@ -13,7 +13,7 @@ internal class AnnihilationWandItemFactory : WandItemFactory
     private AnnihilationWandItemFactory(Game game) : base(game) { } // This object is a singleton.
 
     public override int RodChargeCount => Game.DieRoll(2) + 1;
-    public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(MinusSignSymbol));
+    protected override string SymbolName => nameof(MinusSignSymbol);
     public override string Name => "Annihilation";
 
     public override int[] Chance => new int[] { 4, 0, 0, 0 };

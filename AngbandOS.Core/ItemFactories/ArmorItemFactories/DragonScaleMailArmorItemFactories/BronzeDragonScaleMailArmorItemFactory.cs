@@ -23,7 +23,7 @@ internal class BronzeDragonScaleMailArmorItemFactory : DragonScaleMailArmorItemF
         item.RingsArmorActivationAndFixedArtifactsRechargeTimeLeft = Game.RandomLessThan(450) + 450;
     }
     public override string? DescribeActivationEffect => "breathe confusion (120) every 450+d450 turns";
-    public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(OpenBraceSymbol));
+    protected override string SymbolName => nameof(OpenBraceSymbol);
     public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "Bronze Dragon Scale Mail";
 

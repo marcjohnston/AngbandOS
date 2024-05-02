@@ -13,7 +13,7 @@ internal class RecallRodItemFactory : RodItemFactory
     private RecallRodItemFactory(Game game) : base(game) { } // This object is a singleton.
 
     public override bool RequiresAiming => false;
-    public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(MinusSignSymbol));
+    protected override string SymbolName => nameof(MinusSignSymbol);
     public override string Name => "Recall";
 
     public override int[] Chance => new int[] { 4, 0, 0, 0 };

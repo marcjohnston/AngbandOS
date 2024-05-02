@@ -12,7 +12,7 @@ internal class MagicMissileWandItemFactory : WandItemFactory
 {
     private MagicMissileWandItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(MinusSignSymbol));
+    protected override string SymbolName => nameof(MinusSignSymbol);
     public override string Name => "Magic Missile";
 
     public override int RodChargeCount => Game.DieRoll(10) + 6;

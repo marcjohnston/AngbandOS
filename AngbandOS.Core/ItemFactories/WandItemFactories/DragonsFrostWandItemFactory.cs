@@ -12,7 +12,7 @@ internal class DragonsFrostWandItemFactory : WandItemFactory
 {
     private DragonsFrostWandItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(MinusSignSymbol));
+    protected override string SymbolName => nameof(MinusSignSymbol);
     public override string Name => "Dragon's Frost";
 
     public override int RodChargeCount => Game.DieRoll(3) + 1;

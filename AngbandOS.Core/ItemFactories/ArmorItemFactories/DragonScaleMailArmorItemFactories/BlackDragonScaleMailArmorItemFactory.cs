@@ -24,7 +24,7 @@ internal class BlackDragonScaleMailArmorItemFactory : DragonScaleMailArmorItemFa
         return;
     }
     public override string? DescribeActivationEffect => "breathe acid (130) every 450+d450 turns";
-    public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(OpenBraceSymbol));
+    protected override string SymbolName => nameof(OpenBraceSymbol);
     public override ColorEnum Color => ColorEnum.Black;
     public override string Name => "Black Dragon Scale Mail";
 

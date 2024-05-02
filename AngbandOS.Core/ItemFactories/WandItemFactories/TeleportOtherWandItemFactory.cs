@@ -12,7 +12,7 @@ internal class TeleportOtherWandItemFactory : WandItemFactory
 {
     private TeleportOtherWandItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(MinusSignSymbol));
+    protected override string SymbolName => nameof(MinusSignSymbol);
     public override string Name => "Teleport Other";
 
     public override int RodChargeCount => Game.DieRoll(5) + 6;

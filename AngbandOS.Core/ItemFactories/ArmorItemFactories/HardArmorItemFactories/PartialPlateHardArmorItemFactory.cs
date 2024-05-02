@@ -12,7 +12,7 @@ internal class PartialPlateHardArmorItemFactory : HardArmorItemFactory
 {
     private PartialPlateHardArmorItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(OpenBraceSymbol));
+    protected override string SymbolName => nameof(OpenBraceSymbol);
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "Partial Plate Armor";
 

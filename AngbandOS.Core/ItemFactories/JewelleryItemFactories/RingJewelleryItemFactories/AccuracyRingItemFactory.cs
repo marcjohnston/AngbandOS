@@ -26,7 +26,7 @@ internal class AccuracyRingItemFactory : RingItemFactory
             item.BonusToHit = 0 - item.BonusToHit;
         }
     }
-    public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(EqualSignSymbol));
+    protected override string SymbolName => nameof(EqualSignSymbol);
     public override string Name => "Accuracy";
 
     public override int[] Chance => new int[] { 1, 0, 0, 0 };

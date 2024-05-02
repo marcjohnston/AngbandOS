@@ -12,7 +12,7 @@ internal class LightScrollItemFactory : ScrollItemFactory
 {
     private LightScrollItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(QuestionMarkSymbol));
+    protected override string SymbolName => nameof(QuestionMarkSymbol);
     public override string Name => "Light";
 
     public override int[] Chance => new int[] { 1, 1, 1, 0 };

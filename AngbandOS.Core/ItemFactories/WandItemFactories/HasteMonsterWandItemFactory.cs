@@ -12,7 +12,7 @@ internal class HasteMonsterWandItemFactory : WandItemFactory
 {
     private HasteMonsterWandItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(MinusSignSymbol));
+    protected override string SymbolName => nameof(MinusSignSymbol);
     public override string Name => "Haste Monster";
 
     public override int RodChargeCount => Game.DieRoll(20) + 8;

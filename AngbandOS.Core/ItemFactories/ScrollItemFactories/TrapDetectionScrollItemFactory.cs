@@ -12,7 +12,7 @@ internal class TrapDetectionScrollItemFactory : ScrollItemFactory
 {
     private TrapDetectionScrollItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(QuestionMarkSymbol));
+    protected override string SymbolName => nameof(QuestionMarkSymbol);
     public override string Name => "Trap Detection";
 
     public override int[] Chance => new int[] { 1, 1, 0, 0 };

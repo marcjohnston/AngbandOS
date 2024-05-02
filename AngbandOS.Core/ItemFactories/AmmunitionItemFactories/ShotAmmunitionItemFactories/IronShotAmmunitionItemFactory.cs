@@ -12,7 +12,7 @@ internal class IronShotAmmunitionItemFactory : ShotAmmunitionItemFactory
 {
     private IronShotAmmunitionItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(OpenBracketSymbol));
+    protected override string SymbolName => nameof(OpenBracketSymbol);
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "Iron Shot";
 

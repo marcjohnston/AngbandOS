@@ -12,7 +12,7 @@ internal class ClothCloakCloakArmorItemFactory : CloakArmorItemFactory
 {
     private ClothCloakCloakArmorItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(OpenParenthesisSymbol));
+    protected override string SymbolName => nameof(OpenParenthesisSymbol);
     public override ColorEnum Color => ColorEnum.Green;
     public override string Name => "Cloak";
 

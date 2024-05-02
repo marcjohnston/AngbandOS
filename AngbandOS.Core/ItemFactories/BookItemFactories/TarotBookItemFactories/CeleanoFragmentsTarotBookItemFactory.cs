@@ -18,7 +18,7 @@ internal class CeleanoFragmentsTarotBookItemFactory : TarotBookItemFactory
     /// </summary>
     public override int ExperienceGainDivisorForDestroying => 1;
 
-    public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(QuestionMarkSymbol));
+    protected override string SymbolName => nameof(QuestionMarkSymbol);
     public override ColorEnum Color => ColorEnum.Pink;
     public override string Name => "[Celeano Fragments]";
 

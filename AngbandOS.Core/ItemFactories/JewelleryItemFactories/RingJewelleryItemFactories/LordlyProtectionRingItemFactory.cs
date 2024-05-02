@@ -12,7 +12,7 @@ internal class LordlyProtectionRingItemFactory : RingItemFactory
 {
     private LordlyProtectionRingItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(EqualSignSymbol));
+    protected override string SymbolName => nameof(EqualSignSymbol);
     public override string Name => "Lordly Protection";
 
     public override void ApplyMagic(Item item, int level, int power, Store? store)

@@ -12,7 +12,7 @@ internal class ProtectionRingItemFactory : RingItemFactory
 {
     private ProtectionRingItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(EqualSignSymbol));
+    protected override string SymbolName => nameof(EqualSignSymbol);
     public override void ApplyMagic(Item item, int level, int power, Store? store)
     {
         if (power == 0 && Game.RandomLessThan(100) < 50)

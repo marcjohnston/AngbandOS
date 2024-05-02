@@ -12,7 +12,7 @@ internal class OrcishPickDiggingWeaponItemFactory : DiggingWeaponItemFactory
 {
     private OrcishPickDiggingWeaponItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(BackSlashSymbol));
+    protected override string SymbolName => nameof(BackSlashSymbol);
     public override ColorEnum Color => ColorEnum.Green;
     public override string Name => "Orcish Pick";
 

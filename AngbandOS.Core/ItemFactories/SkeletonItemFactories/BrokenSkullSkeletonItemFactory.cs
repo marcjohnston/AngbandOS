@@ -12,7 +12,7 @@ internal class BrokenSkullSkeletonItemFactory : SkeletonItemFactory
 {
     private BrokenSkullSkeletonItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(TildeSymbol));
+    protected override string SymbolName => nameof(TildeSymbol);
     public override ColorEnum Color => ColorEnum.Beige;
     public override string Name => "Broken Skull";
 

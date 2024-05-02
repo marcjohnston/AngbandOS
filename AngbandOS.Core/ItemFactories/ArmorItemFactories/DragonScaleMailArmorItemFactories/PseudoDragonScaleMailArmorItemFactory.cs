@@ -25,7 +25,7 @@ internal class PseudoDragonScaleMailArmorItemFactory : DragonScaleMailArmorItemF
         item.RingsArmorActivationAndFixedArtifactsRechargeTimeLeft = Game.RandomLessThan(300) + 300;
     }
     public override string? DescribeActivationEffect => "breathe light/darkness (200) every 300+d300 turns";
-    public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(OpenBraceSymbol));
+    protected override string SymbolName => nameof(OpenBraceSymbol);
     public override ColorEnum Color => ColorEnum.Pink;
     public override string Name => "Pseudo Dragon Scale Mail";
 

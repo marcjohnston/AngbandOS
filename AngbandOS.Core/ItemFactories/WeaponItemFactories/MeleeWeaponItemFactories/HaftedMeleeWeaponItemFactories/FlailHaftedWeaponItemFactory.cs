@@ -12,7 +12,7 @@ internal class FlailHaftedWeaponItemFactory : HaftedWeaponItemFactory
 {
     private FlailHaftedWeaponItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(BackSlashSymbol));
+    protected override string SymbolName => nameof(BackSlashSymbol);
     public override ColorEnum Color => ColorEnum.Black;
     public override string Name => "Flail";
 

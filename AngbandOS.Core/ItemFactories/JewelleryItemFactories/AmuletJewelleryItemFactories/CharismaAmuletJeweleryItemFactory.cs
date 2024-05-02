@@ -12,7 +12,7 @@ internal class CharismaAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
 {
     private CharismaAmuletJeweleryItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(DoubleQuoteSymbol));
+    protected override string SymbolName => nameof(DoubleQuoteSymbol);
     public override string Name => "Charisma";
 
     public override void ApplyMagic(Item item, int level, int power, Store? store)

@@ -12,7 +12,7 @@ internal class GharneFragmentsChaosBookItemFactory : ChaosBookItemFactory
 {
     private GharneFragmentsChaosBookItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(QuestionMarkSymbol));
+    protected override string SymbolName => nameof(QuestionMarkSymbol);
     public override ColorEnum Color => ColorEnum.Red;
     public override string Name => "[G'harne Fragments]";
 

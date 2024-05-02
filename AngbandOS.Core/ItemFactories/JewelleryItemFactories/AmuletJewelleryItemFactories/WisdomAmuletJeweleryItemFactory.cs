@@ -23,7 +23,7 @@ internal class WisdomAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
             item.TypeSpecificValue = 0 - item.TypeSpecificValue;
         }
     }
-    public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(DoubleQuoteSymbol));
+    protected override string SymbolName => nameof(DoubleQuoteSymbol);
     public override string Name => "Wisdom";
     public override bool Wis => true;
     public override int[] Chance => new int[] { 1, 0, 0, 0 };

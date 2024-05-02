@@ -12,7 +12,7 @@ internal class ParanoiaMushroomFoodItemFactory : MushroomFoodItemFactory
 {
     private ParanoiaMushroomFoodItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(CommaSymbol));
+    protected override string SymbolName => nameof(CommaSymbol);
     public override string Name => "Paranoia";
 
     public override int[] Chance => new int[] { 1, 0, 0, 0 };

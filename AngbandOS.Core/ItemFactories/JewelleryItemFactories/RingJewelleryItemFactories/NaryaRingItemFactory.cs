@@ -12,7 +12,7 @@ internal class NaryaRingItemFactory : RingItemFactory
 {
     private NaryaRingItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(EqualSignSymbol));
+    protected override string SymbolName => nameof(EqualSignSymbol);
     public override string Name => "Narya";
 
     public override int Cost => 100000;

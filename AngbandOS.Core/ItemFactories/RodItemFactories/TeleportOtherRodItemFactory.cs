@@ -13,7 +13,7 @@ internal class TeleportOtherRodItemFactory : RodItemFactory
     private TeleportOtherRodItemFactory(Game game) : base(game) { } // This object is a singleton.
 
     public override bool RequiresAiming => true;
-    public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(MinusSignSymbol));
+    protected override string SymbolName => nameof(MinusSignSymbol);
     public override string Name => "Teleport Other";
 
     public override int[] Chance => new int[] { 2, 0, 0, 0 };

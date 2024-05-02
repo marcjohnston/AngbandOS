@@ -12,7 +12,7 @@ internal class QuarterstaffHaftedWeaponItemFactory : HaftedWeaponItemFactory
 {
     private QuarterstaffHaftedWeaponItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(BackSlashSymbol));
+    protected override string SymbolName => nameof(BackSlashSymbol);
     public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "Quarterstaff";
 

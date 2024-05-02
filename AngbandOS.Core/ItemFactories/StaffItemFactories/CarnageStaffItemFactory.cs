@@ -13,7 +13,7 @@ internal class CarnageStaffItemFactory : StaffItemFactory
     private CarnageStaffItemFactory(Game game) : base(game) { } // This object is a singleton.
 
     public override int StaffChargeCount => Game.DieRoll(2) + 1;
-    public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(UnderscoreSymbol));
+    protected override string SymbolName => nameof(UnderscoreSymbol);
     public override string Name => "Carnage";
 
     public override int[] Chance => new int[] { 4, 0, 0, 0 };

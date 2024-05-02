@@ -12,7 +12,7 @@ internal class SlownessPotionItemFactory : PotionItemFactory
 {
     private SlownessPotionItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(ExclamationPointSymbol));
+    protected override string SymbolName => nameof(ExclamationPointSymbol);
     public override string Name => "Slowness";
 
     public override int[] Chance => new int[] { 1, 0, 0, 0 };

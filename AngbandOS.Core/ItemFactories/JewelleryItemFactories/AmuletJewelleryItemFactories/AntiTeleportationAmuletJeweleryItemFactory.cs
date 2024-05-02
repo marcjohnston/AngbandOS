@@ -19,7 +19,7 @@ internal class AntiTeleportationAmuletJeweleryItemFactory : AmuletJeweleryItemFa
             item.IdentCursed = true;
         }
     }
-    public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(DoubleQuoteSymbol));
+    protected override string SymbolName => nameof(DoubleQuoteSymbol);
     public override string Name => "Anti-Teleportation";
 
     public override int[] Chance => new int[] { 4, 0, 0, 0 };

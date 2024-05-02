@@ -12,7 +12,7 @@ internal class OfTheMagiStaffItemFactory : StaffItemFactory
 {
     private OfTheMagiStaffItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(UnderscoreSymbol));
+    protected override string SymbolName => nameof(UnderscoreSymbol);
     public override string Name => "the Magi";
 
     public override int StaffChargeCount => Game.DieRoll(2) + 2;

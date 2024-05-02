@@ -12,7 +12,7 @@ internal class SmallLeatherShieldArmorItemFactory : ShieldArmorItemFactory
 {
     private SmallLeatherShieldArmorItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(CloseParenthesisSymbol));
+    protected override string SymbolName => nameof(CloseParenthesisSymbol);
     public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "Small Leather Shield";
 

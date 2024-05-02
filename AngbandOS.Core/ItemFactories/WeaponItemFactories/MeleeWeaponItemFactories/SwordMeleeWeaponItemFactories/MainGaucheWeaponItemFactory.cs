@@ -12,7 +12,7 @@ internal class MainGaucheWeaponItemFactory : SwordWeaponItemFactory
 {
     private MainGaucheWeaponItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(VerticalBarSymbol));
+    protected override string SymbolName => nameof(VerticalBarSymbol);
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "Main Gauche";
 

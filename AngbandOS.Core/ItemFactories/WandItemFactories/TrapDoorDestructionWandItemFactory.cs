@@ -12,7 +12,7 @@ internal class TrapDoorDestructionWandItemFactory : WandItemFactory
 {
     private TrapDoorDestructionWandItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(MinusSignSymbol));
+    protected override string SymbolName => nameof(MinusSignSymbol);
     public override string Name => "Trap/Door Destruction";
 
     public override int RodChargeCount => Game.DieRoll(8) + 6;

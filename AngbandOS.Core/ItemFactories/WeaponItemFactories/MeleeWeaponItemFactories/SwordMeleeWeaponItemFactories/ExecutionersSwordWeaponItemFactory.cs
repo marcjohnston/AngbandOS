@@ -12,7 +12,7 @@ internal class ExecutionersSwordWeaponItemFactory : SwordWeaponItemFactory
 {
     private ExecutionersSwordWeaponItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(VerticalBarSymbol));
+    protected override string SymbolName => nameof(VerticalBarSymbol);
     public override ColorEnum Color => ColorEnum.Red;
     public override string Name => "Executioner's Sword";
 

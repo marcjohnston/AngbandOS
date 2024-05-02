@@ -13,7 +13,7 @@ internal class TrapLocationRodItemFactory : RodItemFactory
     private TrapLocationRodItemFactory(Game game) : base(game) { } // This object is a singleton.
 
     public override bool RequiresAiming => false;
-    public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(MinusSignSymbol));
+    protected override string SymbolName => nameof(MinusSignSymbol);
     public override string Name => "Trap Location";
 
     public override int[] Chance => new int[] { 1, 0, 0, 0 };

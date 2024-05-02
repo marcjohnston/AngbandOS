@@ -688,6 +688,7 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey
 
     public virtual void Bind()
     {
+        Symbol = Game.SingletonRepository.Get<Symbol>(SymbolName);
         FlavorSymbol = Symbol;
         FlavorColor = Color;
     }
@@ -789,11 +790,13 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey
     /// </summary>
     public bool Tried;
 
+    protected abstract string SymbolName { get; }
+
     /// <summary>
     /// Returns the symbol to use for rendering. This symbol will be initially used to set the FlavorCharacter and item
     /// categories that have flavor may change the FlavorCharacter based on the flavor.
     /// </summary>
-    public abstract Symbol Symbol { get; }
+    public Symbol Symbol { get; private set; }
 
     /// <summary>
     /// Returns the color that items of this type should be rendered with.  This color will be initially used to set the FlavorColor and item categories

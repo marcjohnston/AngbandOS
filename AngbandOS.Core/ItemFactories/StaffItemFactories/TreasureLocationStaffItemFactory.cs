@@ -12,7 +12,7 @@ internal class TreasureLocationStaffItemFactory : StaffItemFactory
 {
     private TreasureLocationStaffItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(UnderscoreSymbol));
+    protected override string SymbolName => nameof(UnderscoreSymbol);
     public override string Name => "Treasure Location";
 
     public override int StaffChargeCount => Game.DieRoll(20) + 8;

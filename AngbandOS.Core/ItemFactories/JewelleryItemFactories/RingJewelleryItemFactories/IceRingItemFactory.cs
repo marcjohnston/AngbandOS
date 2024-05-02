@@ -27,7 +27,7 @@ internal class IceRingItemFactory : RingItemFactory, IItemsCanBeActivated
         item.BonusArmorClass = 5 + Game.DieRoll(5) + item.GetBonusValue(10, level);
     }
     public override string? DescribeActivationEffect => "ball of cold and resist cold";
-    public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(EqualSignSymbol));
+    protected override string SymbolName => nameof(EqualSignSymbol);
     public override string Name => "Ice";
 
     public override bool Activate => true;

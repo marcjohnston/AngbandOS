@@ -12,7 +12,7 @@ internal class ShovelDiggingWeaponItemFactory : DiggingWeaponItemFactory
 {
     private ShovelDiggingWeaponItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(BackSlashSymbol));
+    protected override string SymbolName => nameof(BackSlashSymbol);
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "Shovel";
 

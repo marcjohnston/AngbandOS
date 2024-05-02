@@ -12,7 +12,7 @@ internal class Silver1GoldItemFactory : GoldItemFactory
 {
     private Silver1GoldItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(DollarSignSymbol));
+    protected override string SymbolName => nameof(DollarSignSymbol);
     public override ColorEnum Color => ColorEnum.Silver;
     public override string Name => "silver*";
 

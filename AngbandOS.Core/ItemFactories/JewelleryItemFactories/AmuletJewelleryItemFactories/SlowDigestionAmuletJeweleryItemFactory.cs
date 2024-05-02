@@ -12,7 +12,7 @@ internal class SlowDigestionAmuletJeweleryItemFactory : AmuletJeweleryItemFactor
 {
     private SlowDigestionAmuletJeweleryItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(DoubleQuoteSymbol));
+    protected override string SymbolName => nameof(DoubleQuoteSymbol);
     public override string Name => "Slow Digestion";
 
     public override int[] Chance => new int[] { 1, 0, 0, 0 };

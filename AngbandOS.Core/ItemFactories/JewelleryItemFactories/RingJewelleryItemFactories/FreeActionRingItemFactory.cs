@@ -12,7 +12,7 @@ internal class FreeActionRingItemFactory : RingItemFactory
 {
     private FreeActionRingItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override Symbol Symbol => Game.SingletonRepository.Get<Symbol>(nameof(EqualSignSymbol));
+    protected override string SymbolName => nameof(EqualSignSymbol);
     public override string Name => "Free Action";
 
     public override int[] Chance => new int[] { 1, 0, 0, 0 };
