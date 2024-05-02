@@ -48,9 +48,9 @@ internal class KillTrapProjectile : Projectile
         {
             if (oPtr.Category == ItemTypeEnum.Chest)
             {
-                if (oPtr.TypeSpecificValue > 0)
+                if (!oPtr.ChestIsOpen && oPtr.ChestTrapConfiguration != null)
                 {
-                    oPtr.TypeSpecificValue = 0 - oPtr.TypeSpecificValue;
+                    oPtr.ChestTrapConfiguration = null;
                     oPtr.BecomeKnown();
                     if (oPtr.Marked)
                     {

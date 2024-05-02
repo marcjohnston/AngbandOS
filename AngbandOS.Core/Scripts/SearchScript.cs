@@ -79,11 +79,11 @@ internal class SearchScript : Script, IScript, IRepeatableScript
                         {
                             continue;
                         }
-                        if (item.TypeSpecificValue <= 0)
+                        if (item.ChestIsOpen || item.ChestTrapConfiguration == null)
                         {
                             continue;
                         }
-                        if (Game.SingletonRepository.Get<ChestTrapConfiguration>(item.TypeSpecificValue).NotTrapped)
+                        if (item.ChestTrapConfiguration.NotTrapped)
                         {
                             continue;
                         }

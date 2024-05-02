@@ -87,7 +87,7 @@ internal class OpenScript : Script, IScript, IRepeatableScript
         // Opening a chest takes an action
         Game.EnergyUse = 100;
         // If the chest is locked, we may need to pick it
-        if (chestItem.TypeSpecificValue > 0)
+        if (!chestItem.ChestIsOpen && chestItem.ChestTrapConfiguration != null)
         {
             openedSuccessfully = false;
             // Our disable traps skill also doubles up as a lockpicking skill
@@ -103,7 +103,7 @@ internal class OpenScript : Script, IScript, IRepeatableScript
                 i /= 10;
             }
             // Some locks are harder to pick than others
-            int j = i - chestItem.TypeSpecificValue;
+            int j = i - chestItem.ChestLevel;
             if (j < 2)
             {
                 j = 2;

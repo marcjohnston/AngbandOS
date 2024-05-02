@@ -386,6 +386,18 @@ internal abstract class StoreFactory : IItemFilter, IGetKey
         {
             return false;
         }
+        if (oPtr.ChestIsOpen != jPtr.ChestIsOpen)
+        {
+            return false;
+        }
+        if (oPtr.ChestLevel != jPtr.ChestLevel)
+        {
+            return false;
+        }
+        if (oPtr.ChestTrapConfiguration != null || jPtr.ChestTrapConfiguration != null)
+        {
+            return false;
+        }
         if (oPtr.WandChargesRemaining != jPtr.WandChargesRemaining)
         {
             return false;

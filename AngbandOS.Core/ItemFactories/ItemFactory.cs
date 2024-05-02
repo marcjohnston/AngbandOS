@@ -508,6 +508,18 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey
         {
             return false;
         }
+        if (a.ChestIsOpen != b.ChestIsOpen)
+        {
+            return false;
+        }
+        if (a.ChestTrapConfiguration != null || b.ChestTrapConfiguration != null)
+        {
+            return false;
+        }
+        if (a.ChestLevel != b.ChestLevel)
+        {
+            return false;
+        }
 
         // TODO: Each of these belong to the factory
         if (a.StaffChargesRemaining != b.StaffChargesRemaining)

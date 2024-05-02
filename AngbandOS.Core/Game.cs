@@ -2109,11 +2109,11 @@ internal class Game
 
     public void ActivateChestTrap(int y, int x, Item chestItem)
     {
-        if (chestItem.TypeSpecificValue <= 0)
+        if (chestItem.ChestIsOpen || chestItem.ChestTrapConfiguration == null)
         {
             return;
         }
-        ChestTrapConfiguration trap = SingletonRepository.Get<ChestTrapConfiguration>(chestItem.TypeSpecificValue);
+        ChestTrapConfiguration trap = chestItem.ChestTrapConfiguration;
         trap.Activate(this, chestItem);
     }
 
@@ -2776,26 +2776,25 @@ internal class Game
 
     public void OpenChest(int y, int x, Item chestItem)
     {
-        ChestItemFactory chest = (ChestItemFactory)chestItem.Factory;
-        bool small = chest.IsSmall;
-        int number = chest.NumberOfItemsContained;
+        ChestItemFactory chestItemFactory = (ChestItemFactory)chestItem.Factory;
+        int number = chestItemFactory.NumberOfItemsContained;
 
         // Check to see if there is anything in the chest.  A chest trap will set this to zero, if it explodes.
-        if (chestItem.TypeSpecificValue == 0)
+        if (chestItem.ChestIsOpen)
         {
             number = 0;
         }
-        ObjectLevel = Math.Abs(chestItem.TypeSpecificValue) + 10;
+        ObjectLevel = chestItem.ChestLevel + 10;
         for (; number > 0; --number)
         {
-            if (small && RandomLessThan(100) < 75)
+            if (chestItemFactory.IsSmall && RandomLessThan(100) < 75)
             {
                 Item qPtr = MakeGold();
                 DropNear(qPtr, -1, y, x);
             }
             else
             {
-                Item qPtr = this.MakeObject(false, false, true);
+                Item qPtr = MakeObject(false, false, true);
                 if (qPtr != null)
                 {
                     DropNear(qPtr, -1, y, x);
@@ -2803,7 +2802,7 @@ internal class Game
             }
         }
         ObjectLevel = Difficulty;
-        chestItem.TypeSpecificValue = 0;
+        chestItem.ChestIsOpen = true;
         chestItem.BecomeKnown();
     }
 
@@ -6100,8 +6099,7 @@ internal class Game
     }
 
     /// <summary>
-    /// Count the number of chests adjacent to the player, filling in a map coordinate with the
-    /// location of the last one found
+    /// Count the number of chests adjacent to the player, filling in a map coordinate with the location of the last one found.
     /// </summary>
     /// <param name="mapCoordinate"> The coordinate to fill in with the location </param>
     /// <param name="trappedOnly"> True if we're only interested in trapped chests </param>
@@ -6122,12 +6120,12 @@ internal class Game
                 continue;
             }
             // Get the actual item from the index
-            if (chestItem.TypeSpecificValue == 0)
+            if (chestItem.ChestIsOpen)
             {
                 continue;
             }
             // If we're only interested in trapped chests, skip those that aren't
-            if (trappedOnly && (!chestItem.IsKnown() || SingletonRepository.Get<ChestTrapConfiguration>(chestItem.TypeSpecificValue).NotTrapped))
+            if (trappedOnly && (!chestItem.IsKnown() || chestItem.ChestTrapConfiguration.NotTrapped))
             {
                 continue;
             }
@@ -6352,7 +6350,7 @@ internal class Game
             i /= 10;
         }
         // Penalty for difficulty of trap
-        int j = i - chestItem.TypeSpecificValue;
+        int j = i - chestItem.ChestLevel;
         if (j < 2)
         {
             j = 2;
@@ -6363,12 +6361,12 @@ internal class Game
             MsgPrint("I don't see any traps.");
         }
         // If it has no traps there's nothing to disarm
-        else if (chestItem.TypeSpecificValue <= 0)
+        else if (chestItem.ChestIsOpen || chestItem.ChestTrapConfiguration == null)
         {
             MsgPrint("The chest is not trapped.");
         }
         // If it has a null trap then there's nothing to disarm
-        else if (SingletonRepository.Get<ChestTrapConfiguration>(chestItem.TypeSpecificValue).NotTrapped)
+        else if (chestItem.ChestTrapConfiguration.NotTrapped)
         {
             MsgPrint("The chest is not trapped.");
         }
@@ -6376,8 +6374,8 @@ internal class Game
         else if (RandomLessThan(100) < j)
         {
             MsgPrint("You have disarmed the chest.");
-            GainExperience(chestItem.TypeSpecificValue);
-            chestItem.TypeSpecificValue = 0 - chestItem.TypeSpecificValue;
+            GainExperience(chestItem.ChestLevel);
+            chestItem.ChestTrapConfiguration = SingletonRepository.Get<ChestTrapConfiguration>().First(_chestTrapConfiguration => _chestTrapConfiguration.Traps.Length == 0);
         }
         // If we failed to disarm it there's a chance it goes off
         else if (i > 5 && DieRoll(i) > 5)

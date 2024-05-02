@@ -257,18 +257,26 @@ internal sealed class Item : IComparable<Item>
 
     /// <summary>
     /// Returns a value that is specific to the item class.
-    /// Gold - The amount of gold.
-    /// Light - The number of turns remaining.
-    /// Rod - Recharge time remaining.
-    /// Wand - Number of charges remaining.
-    /// Chest - The number of items in the chest.
-    /// Food - The amount of sustenence the food provides.
-    /// Potion - The amount of sustenence the potion provides.
-    /// Staff - The number of charges remaining.
+    /// Chest - The number of items in the chest. 
+    ///   <0 => Average ... untrapped with ABS value being the level of objects +10 
+    ///   0  => empty or opened
+    ///   >0 => the index of the chest trap configuration and the level of the items + 10
+    /// Ring?
     /// Weapons (Blows) - The weapon attacks
     /// FOR ALL EQUIMENT - The bonus value for item.characteristic.(str, int, wis, dex, cha, dex, stealth, search, infra, tunnel, speed and blows
     /// </summary>
     public int TypeSpecificValue;
+
+    /// <summary>
+    /// Returns the configuration of the trapped chest.
+    /// </summary>
+    public ChestTrapConfiguration? ChestTrapConfiguration = null;
+
+    /// <summary>
+    /// Returns the level of the objects contained in the chest.
+    /// </summary>
+    public int ChestLevel = 0;
+    public bool ChestIsOpen = false;
 
     public int StaffChargesRemaining = 0;
 
@@ -472,6 +480,9 @@ internal sealed class Item : IComparable<Item>
         clonedItem.TurnsOfLightRemaining = TurnsOfLightRemaining;
         clonedItem.NutritionalValue = NutritionalValue;
         clonedItem.RingsArmorActivationAndFixedArtifactsRechargeTimeLeft = RingsArmorActivationAndFixedArtifactsRechargeTimeLeft;
+        clonedItem.ChestIsOpen = ChestIsOpen;
+        clonedItem.ChestLevel = ChestLevel;
+        clonedItem.ChestTrapConfiguration = ChestTrapConfiguration;
         clonedItem.RodRechargeTimeRemaining = RodRechargeTimeRemaining;
         clonedItem.StaffChargesRemaining = StaffChargesRemaining;
         clonedItem.WandChargesRemaining = WandChargesRemaining;
