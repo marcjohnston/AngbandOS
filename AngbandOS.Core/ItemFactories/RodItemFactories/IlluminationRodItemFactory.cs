@@ -17,8 +17,8 @@ internal class IlluminationRodItemFactory : RodItemFactory
     public override string Name => "Illumination";
 
     public override int Cost => 1000;
-    public override int Dd => 1;
-    public override int Ds => 1;
+    public override int DamageDice => 1;
+    public override int DamageSides => 1;
     public override string FriendlyName => "Illumination";
     public override int LevelNormallyFound => 20;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

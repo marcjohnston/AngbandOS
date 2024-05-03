@@ -16,7 +16,7 @@ internal class ShadowCloakArmorItemFactory : CloakArmorItemFactory
     public override ColorEnum Color => ColorEnum.Black;
     public override string Name => "Shadow Cloak";
 
-    public override int Ac => 6;
+    public override int ArmorClass => 6;
     public override int Cost => 7500;
     public override string FriendlyName => "& Shadow Cloak~";
     public override int LevelNormallyFound => 60;
@@ -26,7 +26,7 @@ internal class ShadowCloakArmorItemFactory : CloakArmorItemFactory
     };
     public override bool ResDark => true;
     public override bool ResLight => true;
-    public override int ToA => 4;
+    public override int BonusArmorClass => 4;
     public override int Weight => 5;
     public override Item CreateItem() => new Item(Game, this);
 }

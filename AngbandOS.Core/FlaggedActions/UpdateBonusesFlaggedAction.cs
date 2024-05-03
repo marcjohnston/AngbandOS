@@ -591,8 +591,8 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                     {
                         Game.HasSustainCharisma = true;
                     }
-                    Game.BaseArmorClass += oPtr.BaseArmorClass;
-                    Game.DisplayedBaseArmorClass.IntValue += oPtr.BaseArmorClass;
+                    Game.BaseArmorClass += oPtr.ArmorClass;
+                    Game.DisplayedBaseArmorClass.IntValue += oPtr.ArmorClass;
                     Game.ArmorClassBonus += oPtr.BonusArmorClass;
                     if (oPtr.IsKnown())
                     {
@@ -602,11 +602,11 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                     {
                         continue;
                     }
-                    Game.AttackBonus += oPtr.BonusToHit;
+                    Game.AttackBonus += oPtr.BonusHit;
                     Game.DamageBonus += oPtr.BonusDamage;
                     if (oPtr.IsKnown())
                     {
-                        Game.DisplayedAttackBonus += oPtr.BonusToHit;
+                        Game.DisplayedAttackBonus += oPtr.BonusHit;
                     }
                     if (oPtr.IsKnown())
                     {

@@ -17,7 +17,7 @@ internal class HardLeatherCapHelmArmorItemFactory
     public override ColorEnum Color => ColorEnum.Brown;
     public override string Name => "Hard Leather Cap";
 
-    public override int Ac => 2;
+    public override int ArmorClass => 2;
     public override int Cost => 12;
     public override string FriendlyName => "& Hard Leather Cap~";
     public override int LevelNormallyFound => 3;

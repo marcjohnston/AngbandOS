@@ -410,7 +410,7 @@ internal abstract class StoreFactory : IItemFilter, IGetKey
         {
             return false;
         }
-        if (oPtr.BonusToHit != jPtr.BonusToHit)
+        if (oPtr.BonusHit != jPtr.BonusHit)
         {
             return false;
         }
@@ -446,7 +446,7 @@ internal abstract class StoreFactory : IItemFilter, IGetKey
         {
             return false;
         }
-        if (oPtr.BaseArmorClass != jPtr.BaseArmorClass)
+        if (oPtr.ArmorClass != jPtr.ArmorClass)
         {
             return false;
         }
@@ -454,7 +454,7 @@ internal abstract class StoreFactory : IItemFilter, IGetKey
         {
             return false;
         }
-        if (oPtr.DamageDiceSides != jPtr.DamageDiceSides)
+        if (oPtr.DamageSides != jPtr.DamageSides)
         {
             return false;
         }

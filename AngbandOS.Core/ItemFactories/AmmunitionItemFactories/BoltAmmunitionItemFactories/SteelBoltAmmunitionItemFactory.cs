@@ -17,8 +17,8 @@ internal class SteelBoltAmmunitionItemFactory : BoltAmmunitionItemFactory
     public override string Name => "Bolt";
 
     public override int Cost => 2;
-    public override int Dd => 1;
-    public override int Ds => 5;
+    public override int DamageDice => 1;
+    public override int DamageSides => 5;
     public override string FriendlyName => "& Bolt~";
     public override int LevelNormallyFound => 3;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

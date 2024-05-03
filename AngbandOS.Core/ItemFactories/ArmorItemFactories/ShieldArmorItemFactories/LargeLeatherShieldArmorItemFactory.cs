@@ -16,10 +16,10 @@ internal class LargeLeatherShieldArmorItemFactory : ShieldArmorItemFactory
     public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "Large Leather Shield";
 
-    public override int Ac => 4;
+    public override int ArmorClass => 4;
     public override int Cost => 120;
-    public override int Dd => 1;
-    public override int Ds => 2;
+    public override int DamageDice => 1;
+    public override int DamageSides => 2;
     public override string FriendlyName => "& Large Leather Shield~";
     public override int LevelNormallyFound => 15;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

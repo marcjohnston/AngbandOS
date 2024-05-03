@@ -16,10 +16,10 @@ internal class MithrilChainMailHardArmorItemFactory : HardArmorItemFactory
     public override ColorEnum Color => ColorEnum.BrightBlue;
     public override string Name => "Mithril Chain Mail";
 
-    public override int Ac => 28;
+    public override int ArmorClass => 28;
     public override int Cost => 7000;
-    public override int Dd => 1;
-    public override int Ds => 4;
+    public override int DamageDice => 1;
+    public override int DamageSides => 4;
     public override string FriendlyName => "Mithril Chain Mail~";
     public override bool IgnoreAcid => true;
     public override int LevelNormallyFound => 55;
@@ -27,7 +27,7 @@ internal class MithrilChainMailHardArmorItemFactory : HardArmorItemFactory
     {
         (55, 4)
     };
-    public override int ToH => -1;
+    public override int BonusHit => -1;
     public override int Weight => 150;
     public override Item CreateItem() => new Item(Game, this);
 }

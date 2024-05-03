@@ -17,8 +17,8 @@ internal class ProbingStaffItemFactory : StaffItemFactory
 
     public override int StaffChargeCount => Game.DieRoll(6) + 2;
     public override int Cost => 2000;
-    public override int Dd => 1;
-    public override int Ds => 2;
+    public override int DamageDice => 1;
+    public override int DamageSides => 2;
     public override string FriendlyName => "Probing";
     public override int LevelNormallyFound => 30;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

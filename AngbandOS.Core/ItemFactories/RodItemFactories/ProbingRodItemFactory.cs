@@ -17,8 +17,8 @@ internal class ProbingRodItemFactory : RodItemFactory
     public override string Name => "Probing";
 
     public override int Cost => 4000;
-    public override int Dd => 1;
-    public override int Ds => 1;
+    public override int DamageDice => 1;
+    public override int DamageSides => 1;
     public override string FriendlyName => "Probing";
     public override int LevelNormallyFound => 40;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

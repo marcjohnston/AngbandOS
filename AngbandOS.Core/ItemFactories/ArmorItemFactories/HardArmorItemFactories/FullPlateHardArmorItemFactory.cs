@@ -16,17 +16,17 @@ internal class FullPlateHardArmorItemFactory : HardArmorItemFactory
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "Full Plate Armor";
 
-    public override int Ac => 25;
+    public override int ArmorClass => 25;
     public override int Cost => 1350;
-    public override int Dd => 2;
-    public override int Ds => 4;
+    public override int DamageDice => 2;
+    public override int DamageSides => 4;
     public override string FriendlyName => "Full Plate Armor~";
     public override int LevelNormallyFound => 45;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {
         (45, 1)
     };
-    public override int ToH => -3;
+    public override int BonusHit => -3;
     public override int Weight => 380;
     public override Item CreateItem() => new Item(Game, this);
 }

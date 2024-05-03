@@ -17,8 +17,8 @@ internal class CallOfTheWildNatureBookItemFactory : NatureBookItemFactory
     public override string Name => "[Call of the Wild]";
 
     public override int Cost => 100;
-    public override int Dd => 1;
-    public override int Ds => 1;
+    public override int DamageDice => 1;
+    public override int DamageSides => 1;
     public override string FriendlyName => "[Call of the Wild]";
     public override int LevelNormallyFound => 10;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

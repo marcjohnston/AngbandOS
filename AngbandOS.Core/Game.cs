@@ -4933,23 +4933,23 @@ internal class Game
             int chance;
             if ((eflag & Constants.EnchTohit) != 0)
             {
-                if (oPtr.BonusToHit < 0)
+                if (oPtr.BonusHit < 0)
                 {
                     chance = 0;
                 }
-                else if (oPtr.BonusToHit > 15)
+                else if (oPtr.BonusHit > 15)
                 {
                     chance = 1000;
                 }
                 else
                 {
-                    chance = EnchantTable[oPtr.BonusToHit];
+                    chance = EnchantTable[oPtr.BonusHit];
                 }
                 if (DieRoll(1000) > chance && (!isArtifact || RandomLessThan(100) < 50))
                 {
-                    oPtr.BonusToHit++;
+                    oPtr.BonusHit++;
                     res = true;
-                    if (oPtr.IsCursed() && !oPtr.Characteristics.PermaCurse && oPtr.BonusToHit >= 0 && RandomLessThan(100) < 25)
+                    if (oPtr.IsCursed() && !oPtr.Characteristics.PermaCurse && oPtr.BonusHit >= 0 && RandomLessThan(100) < 25)
                     {
                         MsgPrint("The curse is broken!");
                         oPtr.IdentCursed = false;
@@ -5789,7 +5789,7 @@ internal class Game
         {
             return false;
         }
-        if (oPtr.BaseArmorClass + oPtr.BonusArmorClass <= 0)
+        if (oPtr.ArmorClass + oPtr.BonusArmorClass <= 0)
         {
             return false;
         }
@@ -6269,11 +6269,11 @@ internal class Game
             item.FixedArtifact = null;
             item.RareItem = SingletonRepository.Get<RareItem>(nameof(ArmorBlastedRareItem));
             item.BonusArmorClass = 0 - DieRoll(5) - DieRoll(5);
-            item.BonusToHit = 0;
+            item.BonusHit = 0;
             item.BonusDamage = 0;
-            item.BaseArmorClass = 0;
+            item.ArmorClass = 0;
             item.DamageDice = 0;
-            item.DamageDiceSides = 0;
+            item.DamageSides = 0;
             item.RandomArtifactItemCharacteristics.Clear();
             item.IdentCursed = true;
             item.IdentBroken = true;
@@ -6307,12 +6307,12 @@ internal class Game
             MsgPrint($"A terrible black aura blasts your {itemName}!");
             item.FixedArtifact = null;
             item.RareItem = SingletonRepository.Get<RareItem>(nameof(WeaponShatteredRareItem));
-            item.BonusToHit = 0 - DieRoll(5) - DieRoll(5);
+            item.BonusHit = 0 - DieRoll(5) - DieRoll(5);
             item.BonusDamage = 0 - DieRoll(5) - DieRoll(5);
             item.BonusArmorClass = 0;
-            item.BaseArmorClass = 0;
+            item.ArmorClass = 0;
             item.DamageDice = 0;
-            item.DamageDiceSides = 0;
+            item.DamageSides = 0;
             item.RandomArtifactItemCharacteristics.Clear();
             item.IdentCursed = true;
             item.IdentBroken = true;
@@ -6979,7 +6979,7 @@ internal class Game
         Item? meleeItem = GetInventoryItem(InventorySlot.MeleeWeapon);
         if (meleeItem != null)
         {
-            bonus += meleeItem.BonusToHit;
+            bonus += meleeItem.BonusHit;
         }
         int chance = SkillMelee + (bonus * Constants.BthPlusAdj);
         // Attacking uses a full turn
@@ -7150,7 +7150,7 @@ internal class Game
                 else if (meleeItem != null)
                 {
                     // Roll damage for the weapon
-                    totalDamage = DiceRoll(meleeItem.DamageDice, meleeItem.DamageDiceSides);
+                    totalDamage = DiceRoll(meleeItem.DamageDice, meleeItem.DamageSides);
                     totalDamage = meleeItem.AdjustDamageForMonsterType(totalDamage, monster);
                     // Extra damage for backstabbing
                     if (backstab)
@@ -7168,7 +7168,7 @@ internal class Game
                         chaosEffect = false;
                     }
                     // Check if we did a critical
-                    totalDamage = PlayerCriticalMelee(meleeItem.Weight, meleeItem.BonusToHit, totalDamage);
+                    totalDamage = PlayerCriticalMelee(meleeItem.Weight, meleeItem.BonusHit, totalDamage);
 
                     int extraDamage1InChance = meleeItem.FixedArtifact == null ? 2 : meleeItem.FixedArtifact.VorpalExtraDamage1InChance;
 
@@ -7545,7 +7545,7 @@ internal class Game
             throwDistance = 10;
         }
         // Work out the damage done
-        int damage = DiceRoll(missile.DamageDice, missile.DamageDiceSides) + missile.BonusDamage;
+        int damage = DiceRoll(missile.DamageDice, missile.DamageSides) + missile.BonusDamage;
         damage *= damageMultiplier;
         int chance = SkillThrowing + (AttackBonus * Constants.BthPlusAdj);
         // Throwing something always uses a full turn, even if you can make multiple missile attacks
@@ -7637,7 +7637,7 @@ internal class Game
                     }
                     // Adjust the damage for the particular monster type
                     damage = missile.AdjustDamageForMonsterType(damage, monster);
-                    damage = PlayerCriticalRanged(missile.Weight, missile.BonusToHit, damage);
+                    damage = PlayerCriticalRanged(missile.Weight, missile.BonusHit, damage);
                     if (damage < 0)
                     {
                         damage = 0;

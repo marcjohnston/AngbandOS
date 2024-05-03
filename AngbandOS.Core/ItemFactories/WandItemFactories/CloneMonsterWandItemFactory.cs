@@ -17,8 +17,8 @@ internal class CloneMonsterWandItemFactory : WandItemFactory
 
     public override int RodChargeCount => Game.DieRoll(5) + 3;
 
-    public override int Dd => 1;
-    public override int Ds => 1;
+    public override int DamageDice => 1;
+    public override int DamageSides => 1;
     public override string FriendlyName => "Clone Monster";
     public override int LevelNormallyFound => 15;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

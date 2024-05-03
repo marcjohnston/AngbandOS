@@ -16,7 +16,7 @@ internal class LeatherGlovesArmorItemFactory : GlovesArmorItemFactory
     public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "Set of Leather Gloves";
 
-    public override int Ac => 1;
+    public override int ArmorClass => 1;
     public override int Cost => 3;
     public override string FriendlyName => "& Set~ of Leather Gloves";
     public override int LevelNormallyFound => 1;

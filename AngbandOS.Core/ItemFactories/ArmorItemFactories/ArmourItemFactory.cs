@@ -26,13 +26,13 @@ internal abstract class ArmorItemFactory : ItemFactory
         if (item.IsKnown())
         {
             item.RefreshFlagBasedProperties();
-            if (ShowMods || item.BonusToHit != 0 && item.BonusDamage != 0)
+            if (ShowMods || item.BonusHit != 0 && item.BonusDamage != 0)
             {
-                s += $" ({GetSignedValue(item.BonusToHit)},{GetSignedValue(item.BonusDamage)})";
+                s += $" ({GetSignedValue(item.BonusHit)},{GetSignedValue(item.BonusDamage)})";
             }
-            else if (item.BonusToHit != 0)
+            else if (item.BonusHit != 0)
             {
-                s += $" ({GetSignedValue(item.BonusToHit)})";
+                s += $" ({GetSignedValue(item.BonusHit)})";
             }
             else if (item.BonusDamage != 0)
             {
@@ -40,11 +40,11 @@ internal abstract class ArmorItemFactory : ItemFactory
             }
 
             // Add base armor class for all types of armor and when the base armor class is greater than zero.
-            s += $" [{item.BaseArmorClass},{GetSignedValue(item.BonusArmorClass)}]";
+            s += $" [{item.ArmorClass},{GetSignedValue(item.BonusArmorClass)}]";
         }
-        else if (item.BaseArmorClass != 0)
+        else if (item.ArmorClass != 0)
         {
-            s += $" [{item.BaseArmorClass}]";
+            s += $" [{item.ArmorClass}]";
         }
         return s;
     }
@@ -79,7 +79,7 @@ internal abstract class ArmorItemFactory : ItemFactory
         if (item.BonusArmorClass < 0)
             return null;
 
-        return (item.BonusToHit + item.BonusDamage + item.BonusArmorClass) * 100;
+        return (item.BonusHit + item.BonusDamage + item.BonusArmorClass) * 100;
     }
 
     public override bool IsWorthless(Item item)
@@ -213,5 +213,5 @@ internal abstract class ArmorItemFactory : ItemFactory
     /// <summary>
     /// Returns true, for all armor where the armor class (ToA) is greater than or equal to zero.
     /// </summary>
-    public override bool KindIsGood => ToA >= 0;
+    public override bool KindIsGood => BonusArmorClass >= 0;
 }

@@ -17,8 +17,8 @@ internal class DrainLifeRodItemFactory : RodItemFactory
     public override string Name => "Drain Life";
 
     public override int Cost => 3600;
-    public override int Dd => 1;
-    public override int Ds => 1;
+    public override int DamageDice => 1;
+    public override int DamageSides => 1;
     public override string FriendlyName => "Drain Life";
     public override int LevelNormallyFound => 75;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

@@ -16,10 +16,10 @@ internal class HardLeatherBootsArmorItemFactory : BootsArmorItemFactory
     public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "Pair of Hard Leather Boots";
 
-    public override int Ac => 3;
+    public override int ArmorClass => 3;
     public override int Cost => 12;
-    public override int Dd => 1;
-    public override int Ds => 1;
+    public override int DamageDice => 1;
+    public override int DamageSides => 1;
     public override string FriendlyName => "& Pair~ of Hard Leather Boots";
     public override int LevelNormallyFound => 5;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

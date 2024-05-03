@@ -17,8 +17,8 @@ internal class MainGaucheWeaponItemFactory : SwordWeaponItemFactory
     public override string Name => "Main Gauche";
 
     public override int Cost => 25;
-    public override int Dd => 1;
-    public override int Ds => 5;
+    public override int DamageDice => 1;
+    public override int DamageSides => 5;
     public override string FriendlyName => "& Main Gauche~";
     public override int LevelNormallyFound => 3;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

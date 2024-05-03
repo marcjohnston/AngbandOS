@@ -17,8 +17,8 @@ internal class GlaivePolearmWeaponItemFactory : PolearmWeaponItemFactory
     public override string Name => "Glaive";
 
     public override int Cost => 363;
-    public override int Dd => 2;
-    public override int Ds => 6;
+    public override int DamageDice => 2;
+    public override int DamageSides => 6;
     public override string FriendlyName => "& Glaive~";
     public override int LevelNormallyFound => 20;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

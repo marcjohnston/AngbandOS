@@ -17,8 +17,8 @@ internal class ExecutionersSwordWeaponItemFactory : SwordWeaponItemFactory
     public override string Name => "Executioner's Sword";
 
     public override int Cost => 850;
-    public override int Dd => 4;
-    public override int Ds => 5;
+    public override int DamageDice => 4;
+    public override int DamageSides => 5;
     public override string FriendlyName => "& Executioner's Sword~";
     public override int LevelNormallyFound => 40;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

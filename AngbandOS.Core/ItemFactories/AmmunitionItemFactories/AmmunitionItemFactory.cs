@@ -41,13 +41,13 @@ internal abstract class AmmunitionItemFactory : WeaponItemFactory
     }
     public override int? GetBonusRealValue(Item item, int value)
     {
-        if (item.BonusToHit + item.BonusDamage < 0)
+        if (item.BonusHit + item.BonusDamage < 0)
             return null;
 
-        int bonusValue = (item.BonusToHit + item.BonusDamage) * 5;
-        if (item.DamageDice > Dd && item.DamageDiceSides == Ds)
+        int bonusValue = (item.BonusHit + item.BonusDamage) * 5;
+        if (item.DamageDice > DamageDice && item.DamageSides == DamageSides)
         {
-            bonusValue += (item.DamageDice - Dd) * item.DamageDiceSides * 5;
+            bonusValue += (item.DamageDice - DamageDice) * item.DamageSides * 5;
         }
         return bonusValue;
     }
@@ -89,7 +89,7 @@ internal abstract class AmmunitionItemFactory : WeaponItemFactory
                     item.DamageDice++;
                     break;
             }
-            while (Game.RandomLessThan(10 * item.DamageDice * item.DamageDiceSides) == 0)
+            while (Game.RandomLessThan(10 * item.DamageDice * item.DamageSides) == 0)
             {
                 item.DamageDice++;
             }

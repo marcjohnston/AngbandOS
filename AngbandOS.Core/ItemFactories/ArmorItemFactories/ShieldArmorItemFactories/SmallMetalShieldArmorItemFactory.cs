@@ -16,10 +16,10 @@ internal class SmallMetalShieldArmorItemFactory : ShieldArmorItemFactory
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "Small Metal Shield";
 
-    public override int Ac => 3;
+    public override int ArmorClass => 3;
     public override int Cost => 50;
-    public override int Dd => 1;
-    public override int Ds => 2;
+    public override int DamageDice => 1;
+    public override int DamageSides => 2;
     public override string FriendlyName => "& Small Metal Shield~";
     public override int LevelNormallyFound => 10;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

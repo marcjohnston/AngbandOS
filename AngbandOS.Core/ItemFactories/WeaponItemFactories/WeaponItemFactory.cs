@@ -20,15 +20,15 @@ internal abstract class WeaponItemFactory : ItemFactory
     public override string GetDetailedDescription(Item item)
     {
         string s = "";
-        s += $" ({item.DamageDice}d{item.DamageDiceSides})";
+        s += $" ({item.DamageDice}d{item.DamageSides})";
         if (item.IsKnown())
         {
-            s += $" ({GetSignedValue(item.BonusToHit)},{GetSignedValue(item.BonusDamage)})";
+            s += $" ({GetSignedValue(item.BonusHit)},{GetSignedValue(item.BonusDamage)})";
 
-            if (item.BaseArmorClass != 0)
+            if (item.ArmorClass != 0)
             {
                 // Add base armor class for all types of armor and when the base armor class is greater than zero.
-                s += $" [{item.BaseArmorClass},{GetSignedValue(item.BonusArmorClass)}]";
+                s += $" [{item.ArmorClass},{GetSignedValue(item.BonusArmorClass)}]";
             }
             else if (item.BonusArmorClass != 0)
             {
@@ -36,9 +36,9 @@ internal abstract class WeaponItemFactory : ItemFactory
                 s += $" [{GetSignedValue(item.BonusArmorClass)}]";
             }
         }
-        else if (item.BaseArmorClass != 0)
+        else if (item.ArmorClass != 0)
         {
-            s += $" [{item.BaseArmorClass}]";
+            s += $" [{item.ArmorClass}]";
         }
         return s;
     }
@@ -70,20 +70,20 @@ internal abstract class WeaponItemFactory : ItemFactory
 
     public override void ApplyRandartBonus(Item item)
     {
-        item.BonusToHit += Game.DieRoll(item.BonusToHit > 19 ? 1 : 20 - item.BonusToHit);
+        item.BonusHit += Game.DieRoll(item.BonusHit > 19 ? 1 : 20 - item.BonusHit);
         item.BonusDamage += Game.DieRoll(item.BonusDamage > 19 ? 1 : 20 - item.BonusDamage);
     }
 
     public override int? GetBonusRealValue(Item item, int value)
     {
-        if (item.BonusToHit + item.BonusDamage < 0)
+        if (item.BonusHit + item.BonusDamage < 0)
             return null;
 
         int bonusValue = 0;
-        bonusValue += (item.BonusToHit + item.BonusDamage + item.BonusArmorClass) * 100;
-        if (item.DamageDice > Dd && item.DamageDiceSides == Ds)
+        bonusValue += (item.BonusHit + item.BonusDamage + item.BonusArmorClass) * 100;
+        if (item.DamageDice > DamageDice && item.DamageSides == DamageSides)
         {
-            bonusValue += (item.DamageDice - Dd) * item.DamageDiceSides * 100;
+            bonusValue += (item.DamageDice - DamageDice) * item.DamageSides * 100;
         }
         return bonusValue;
     }
@@ -94,7 +94,7 @@ internal abstract class WeaponItemFactory : ItemFactory
         {
             return true;
         }
-        if (item.BonusToHit + item.BonusDamage < 0)
+        if (item.BonusHit + item.BonusDamage < 0)
         {
             return true;
         }
@@ -114,24 +114,24 @@ internal abstract class WeaponItemFactory : ItemFactory
         int todam2 = item.GetBonusValue(10, level);
         if (power > 0)
         {
-            item.BonusToHit += tohit1;
+            item.BonusHit += tohit1;
             item.BonusDamage += todam1;
             if (power > 1)
             {
-                item.BonusToHit += tohit2;
+                item.BonusHit += tohit2;
                 item.BonusDamage += todam2;
             }
         }
         else if (power < 0)
         {
-            item.BonusToHit -= tohit1;
+            item.BonusHit -= tohit1;
             item.BonusDamage -= todam1;
             if (power < -1)
             {
-                item.BonusToHit -= tohit2;
+                item.BonusHit -= tohit2;
                 item.BonusDamage -= todam2;
             }
-            if (item.BonusToHit + item.BonusDamage < 0)
+            if (item.BonusHit + item.BonusDamage < 0)
             {
                 item.IdentCursed = true;
             }
@@ -149,11 +149,11 @@ internal abstract class WeaponItemFactory : ItemFactory
     {
         get
         {
-            if (ToH < 0)
+            if (BonusHit < 0)
             {
                 return false;
             }
-            if (ToD < 0)
+            if (BonusDamage < 0)
             {
                 return false;
             }

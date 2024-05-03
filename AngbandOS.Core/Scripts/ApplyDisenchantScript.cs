@@ -35,7 +35,7 @@ internal class ApplyDisenchantScript : Script, IScript, ISuccessfulScript
         {
             return false;
         }
-        if (oPtr.BonusToHit <= 0 && oPtr.BonusDamage <= 0 && oPtr.BonusArmorClass <= 0)
+        if (oPtr.BonusHit <= 0 && oPtr.BonusDamage <= 0 && oPtr.BonusArmorClass <= 0)
         {
             return false;
         }
@@ -47,13 +47,13 @@ internal class ApplyDisenchantScript : Script, IScript, ISuccessfulScript
             Game.MsgPrint($"Your {oName} ({i.IndexToLabel()}) resist{s} disenchantment!");
             return true;
         }
-        if (oPtr.BonusToHit > 0)
+        if (oPtr.BonusHit > 0)
         {
-            oPtr.BonusToHit--;
+            oPtr.BonusHit--;
         }
-        if (oPtr.BonusToHit > 5 && Game.RandomLessThan(100) < 20)
+        if (oPtr.BonusHit > 5 && Game.RandomLessThan(100) < 20)
         {
-            oPtr.BonusToHit--;
+            oPtr.BonusHit--;
         }
         if (oPtr.BonusDamage > 0)
         {

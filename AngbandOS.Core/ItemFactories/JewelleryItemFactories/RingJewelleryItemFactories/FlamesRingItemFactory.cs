@@ -41,7 +41,7 @@ internal class FlamesRingItemFactory : RingItemFactory, IItemsCanBeActivated
         (50, 1)
     };
     public override bool ResFire => true;
-    public override int ToA => 15;
+    public override int BonusArmorClass => 15;
     public override int Weight => 2;
     public override Item CreateItem() => new Item(Game, this);
 }

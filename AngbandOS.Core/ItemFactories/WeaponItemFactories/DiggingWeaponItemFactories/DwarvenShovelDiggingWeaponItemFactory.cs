@@ -17,8 +17,8 @@ internal class DwarvenShovelDiggingWeaponItemFactory : DiggingWeaponItemFactory
     public override string Name => "Dwarven Shovel";
 
     public override int Cost => 200;
-    public override int Dd => 1;
-    public override int Ds => 3;
+    public override int DamageDice => 1;
+    public override int DamageSides => 3;
     public override string FriendlyName => "& Dwarven Shovel~";
     public override int LevelNormallyFound => 40;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

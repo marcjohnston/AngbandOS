@@ -55,8 +55,8 @@ internal class WoodenTorchLightSourceItemFactory : LightSourceItemFactory
     public override int? MaxPhlogiston => 5000;
 
     public override int Cost => 2;
-    public override int Dd => 1;
-    public override int Ds => 1;
+    public override int DamageDice => 1;
+    public override int DamageSides => 1;
     public override bool EasyKnow => true;
     public override string FriendlyName => "& Wooden Torch~";
     public override int LevelNormallyFound => 1;

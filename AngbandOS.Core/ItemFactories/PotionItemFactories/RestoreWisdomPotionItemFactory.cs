@@ -16,8 +16,8 @@ internal class RestoreWisdomPotionItemFactory : PotionItemFactory
     public override string Name => "Restore Wisdom";
 
     public override int Cost => 300;
-    public override int Dd => 1;
-    public override int Ds => 1;
+    public override int DamageDice => 1;
+    public override int DamageSides => 1;
     public override string FriendlyName => "Restore Wisdom";
     public override int LevelNormallyFound => 25;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

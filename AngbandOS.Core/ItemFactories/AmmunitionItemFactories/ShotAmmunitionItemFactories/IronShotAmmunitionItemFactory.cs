@@ -17,8 +17,8 @@ internal class IronShotAmmunitionItemFactory : ShotAmmunitionItemFactory
     public override string Name => "Iron Shot";
 
     public override int Cost => 2;
-    public override int Dd => 1;
-    public override int Ds => 3;
+    public override int DamageDice => 1;
+    public override int DamageSides => 3;
     public override string FriendlyName => "& Iron Shot~";
     public override int LevelNormallyFound => 3;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

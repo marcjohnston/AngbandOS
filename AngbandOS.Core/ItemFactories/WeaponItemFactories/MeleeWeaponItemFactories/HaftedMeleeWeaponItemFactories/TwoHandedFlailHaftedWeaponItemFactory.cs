@@ -17,8 +17,8 @@ internal class TwoHandedFlailHaftedWeaponItemFactory : HaftedWeaponItemFactory
     public override string Name => "Two-Handed Flail";
 
     public override int Cost => 590;
-    public override int Dd => 3;
-    public override int Ds => 6;
+    public override int DamageDice => 3;
+    public override int DamageSides => 6;
     public override string FriendlyName => "& Two-Handed Flail~";
     public override int LevelNormallyFound => 45;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

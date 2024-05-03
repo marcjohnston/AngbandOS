@@ -16,8 +16,8 @@ internal class DiseaseMushroomFoodItemFactory : MushroomFoodItemFactory
     public override string Name => "Disease";
 
     public override int Cost => 50;
-    public override int Dd => 10;
-    public override int Ds => 10;
+    public override int DamageDice => 10;
+    public override int DamageSides => 10;
     public override string FriendlyName => "Disease";
     public override int LevelNormallyFound => 20;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

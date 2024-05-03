@@ -16,9 +16,9 @@ internal class RemoveCurseStaffItemFactory : StaffItemFactory
     public override string Name => "Remove Curse";
 
     public override int Cost => 500;
-    public override int Dd => 1;
+    public override int DamageDice => 1;
     public override int StaffChargeCount => Game.DieRoll(3) + 4;
-    public override int Ds => 2;
+    public override int DamageSides => 2;
     public override string FriendlyName => "Remove Curse";
     public override int LevelNormallyFound => 40;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

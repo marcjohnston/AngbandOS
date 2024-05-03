@@ -32,11 +32,11 @@ internal class CreateNamedArtifactScript : Script, IScript
         Item qPtr = aPtr.BaseItemFactory.CreateItem();
         qPtr.FixedArtifact = Game.SingletonRepository.Get<FixedArtifact>(aIdx);
         qPtr.TypeSpecificValue = aPtr.InitialTypeSpecificValue;
-        qPtr.BaseArmorClass = aPtr.Ac;
+        qPtr.ArmorClass = aPtr.Ac;
         qPtr.DamageDice = aPtr.Dd;
-        qPtr.DamageDiceSides = aPtr.Ds;
+        qPtr.DamageSides = aPtr.Ds;
         qPtr.BonusArmorClass = aPtr.ToA;
-        qPtr.BonusToHit = aPtr.ToH;
+        qPtr.BonusHit = aPtr.ToH;
         qPtr.BonusDamage = aPtr.ToD;
         qPtr.Weight = aPtr.Weight;
         if (aPtr.Cursed)

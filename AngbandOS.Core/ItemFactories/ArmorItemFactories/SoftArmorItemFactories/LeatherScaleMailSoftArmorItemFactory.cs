@@ -16,17 +16,17 @@ internal class LeatherScaleMailSoftArmorItemFactory : SoftArmorItemFactory
     public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "Leather Scale Mail";
 
-    public override int Ac => 11;
+    public override int ArmorClass => 11;
     public override int Cost => 450;
-    public override int Dd => 1;
-    public override int Ds => 1;
+    public override int DamageDice => 1;
+    public override int DamageSides => 1;
     public override string FriendlyName => "Leather Scale Mail~";
     public override int LevelNormallyFound => 15;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {
         (15, 1)
     };
-    public override int ToH => -1;
+    public override int BonusHit => -1;
     public override int Weight => 140;
     public override Item CreateItem() => new Item(Game, this);
 }

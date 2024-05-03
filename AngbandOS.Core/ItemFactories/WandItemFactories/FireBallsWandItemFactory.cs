@@ -17,8 +17,8 @@ internal class FireBallsWandItemFactory : WandItemFactory
 
     public override int RodChargeCount => Game.DieRoll(4) + 2;
     public override int Cost => 1800;
-    public override int Dd => 1;
-    public override int Ds => 1;
+    public override int DamageDice => 1;
+    public override int DamageSides => 1;
     public override string FriendlyName => "Fire Balls";
     public override bool IgnoreFire => true;
     public override int LevelNormallyFound => 50;

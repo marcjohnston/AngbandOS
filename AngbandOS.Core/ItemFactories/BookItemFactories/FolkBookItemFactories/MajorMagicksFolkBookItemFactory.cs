@@ -17,8 +17,8 @@ internal class MajorMagicksFolkBookItemFactory : FolkBookItemFactory
     public override string Name => "[Major Magicks]";
 
     public override int Cost => 1000;
-    public override int Dd => 1;
-    public override int Ds => 1;
+    public override int DamageDice => 1;
+    public override int DamageSides => 1;
     public override string FriendlyName => "[Major Magicks]";
     public override int LevelNormallyFound => 10;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

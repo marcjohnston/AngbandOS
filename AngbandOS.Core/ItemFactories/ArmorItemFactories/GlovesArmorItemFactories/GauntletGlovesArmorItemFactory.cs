@@ -16,10 +16,10 @@ internal class GauntletGlovesArmorItemFactory : GlovesArmorItemFactory
     public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "Set of Gauntlets";
 
-    public override int Ac => 2;
+    public override int ArmorClass => 2;
     public override int Cost => 35;
-    public override int Dd => 1;
-    public override int Ds => 1;
+    public override int DamageDice => 1;
+    public override int DamageSides => 1;
     public override string FriendlyName => "& Set~ of Gauntlets";
     public override int LevelNormallyFound => 10;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

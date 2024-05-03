@@ -16,10 +16,10 @@ internal class AdamantitePlateMailHardArmorItemFactory : HardArmorItemFactory
     public override ColorEnum Color => ColorEnum.BrightGreen;
     public override string Name => "Adamantite Plate Mail";
 
-    public override int Ac => 40;
+    public override int ArmorClass => 40;
     public override int Cost => 20000;
-    public override int Dd => 2;
-    public override int Ds => 4;
+    public override int DamageDice => 2;
+    public override int DamageSides => 4;
     public override string FriendlyName => "Adamantite Plate Mail~";
     public override bool IgnoreAcid => true;
     public override int LevelNormallyFound => 75;
@@ -27,7 +27,7 @@ internal class AdamantitePlateMailHardArmorItemFactory : HardArmorItemFactory
     {
         (75, 8)
     };
-    public override int ToH => -4;
+    public override int BonusHit => -4;
     public override int Weight => 420;
     public override Item CreateItem() => new Item(Game, this);
 }

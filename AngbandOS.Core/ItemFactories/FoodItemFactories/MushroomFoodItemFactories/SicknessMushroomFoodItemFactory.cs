@@ -15,8 +15,8 @@ internal class SicknessMushroomFoodItemFactory : MushroomFoodItemFactory
     protected override string SymbolName => nameof(CommaSymbol);
     public override string Name => "Sickness";
 
-    public override int Dd => 4;
-    public override int Ds => 4;
+    public override int DamageDice => 4;
+    public override int DamageSides => 4;
     public override string FriendlyName => "Sickness";
     public override int LevelNormallyFound => 10;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

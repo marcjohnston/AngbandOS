@@ -18,7 +18,7 @@ internal abstract class JewelleryItemFactory : ItemFactory
 
     public override bool IsStompable(Item item)
     {
-        if (item.BonusDamage < 0 || item.BonusArmorClass < 0 || item.BonusToHit < 0 || item.TypeSpecificValue < 0)
+        if (item.BonusDamage < 0 || item.BonusArmorClass < 0 || item.BonusHit < 0 || item.TypeSpecificValue < 0)
         {
             return true;
         }
@@ -32,15 +32,15 @@ internal abstract class JewelleryItemFactory : ItemFactory
 
     public override int? GetBonusRealValue(Item item, int value)
     {
-        if (item.BonusArmorClass < 0 || item.BonusToHit < 0 || item.BonusDamage < 0)
+        if (item.BonusArmorClass < 0 || item.BonusHit < 0 || item.BonusDamage < 0)
             return 0;
 
-        return (item.BonusToHit + item.BonusDamage + item.BonusArmorClass) * 100;
+        return (item.BonusHit + item.BonusDamage + item.BonusArmorClass) * 100;
     }
 
     public override bool IsWorthless(Item item)
     {
-        if (item.TypeSpecificValue < 0 || item.BonusArmorClass < 0 || item.BonusToHit < 0 || item.BonusDamage < 0)
+        if (item.TypeSpecificValue < 0 || item.BonusArmorClass < 0 || item.BonusHit < 0 || item.BonusDamage < 0)
         {
             return true;
         }

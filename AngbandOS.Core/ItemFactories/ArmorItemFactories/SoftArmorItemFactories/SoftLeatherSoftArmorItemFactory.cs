@@ -16,7 +16,7 @@ internal class SoftLeatherSoftArmorItemFactory : SoftArmorItemFactory
     public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "Soft Leather Armor";
 
-    public override int Ac => 4;
+    public override int ArmorClass => 4;
     public override int Cost => 18;
     public override string FriendlyName => "Soft Leather Armor~";
     public override int LevelNormallyFound => 3;

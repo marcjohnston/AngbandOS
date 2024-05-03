@@ -16,17 +16,17 @@ internal class MetalBrigandineHardArmorItemFactory : HardArmorItemFactory
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "Metal Brigandine Armor";
 
-    public override int Ac => 19;
+    public override int ArmorClass => 19;
     public override int Cost => 1100;
-    public override int Dd => 1;
-    public override int Ds => 4;
+    public override int DamageDice => 1;
+    public override int DamageSides => 4;
     public override string FriendlyName => "Metal Brigandine Armor~";
     public override int LevelNormallyFound => 35;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {
         (35, 1)
     };
-    public override int ToH => -3;
+    public override int BonusHit => -3;
     public override int Weight => 290;
     public override Item CreateItem() => new Item(Game, this);
 }

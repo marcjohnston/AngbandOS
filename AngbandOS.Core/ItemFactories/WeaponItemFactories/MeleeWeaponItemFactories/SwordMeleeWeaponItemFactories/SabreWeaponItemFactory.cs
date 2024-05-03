@@ -17,8 +17,8 @@ internal class SabreWeaponItemFactory : SwordWeaponItemFactory
     public override string Name => "Sabre";
 
     public override int Cost => 50;
-    public override int Dd => 1;
-    public override int Ds => 7;
+    public override int DamageDice => 1;
+    public override int DamageSides => 7;
     public override string FriendlyName => "& Sabre~";
     public override int LevelNormallyFound => 5;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

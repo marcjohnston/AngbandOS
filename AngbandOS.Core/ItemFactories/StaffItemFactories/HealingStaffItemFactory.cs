@@ -17,8 +17,8 @@ internal class HealingStaffItemFactory : StaffItemFactory
 
     public override int StaffChargeCount => Game.DieRoll(2) + 1;
     public override int Cost => 5000;
-    public override int Dd => 1;
-    public override int Ds => 2;
+    public override int DamageDice => 1;
+    public override int DamageSides => 2;
     public override string FriendlyName => "Healing";
     public override int LevelNormallyFound => 70;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

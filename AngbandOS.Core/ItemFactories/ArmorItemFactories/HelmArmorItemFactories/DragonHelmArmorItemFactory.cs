@@ -30,10 +30,10 @@ internal class DragonHelmArmorItemFactory : HelmArmorItemFactory
         Game.TreasureRating += 5;
         ApplyDragonscaleResistance(item);
     }
-    public override int Ac => 8;
+    public override int ArmorClass => 8;
     public override int Cost => 10000;
-    public override int Dd => 1;
-    public override int Ds => 3;
+    public override int DamageDice => 1;
+    public override int DamageSides => 3;
     public override string FriendlyName => "& Dragon Helm~";
     public override bool IgnoreAcid => true;
     public override bool IgnoreCold => true;
@@ -44,7 +44,7 @@ internal class DragonHelmArmorItemFactory : HelmArmorItemFactory
     {
         (80, 4)
     };
-    public override int ToA => 10;
+    public override int BonusArmorClass => 10;
     public override int Weight => 50;
     public override Item CreateItem() => new Item(Game, this);
 }

@@ -16,17 +16,17 @@ internal class MetalScaleMailHardArmorItemFactory : HardArmorItemFactory
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "Metal Scale Mail";
 
-    public override int Ac => 13;
+    public override int ArmorClass => 13;
     public override int Cost => 550;
-    public override int Dd => 1;
-    public override int Ds => 4;
+    public override int DamageDice => 1;
+    public override int DamageSides => 4;
     public override string FriendlyName => "Metal Scale Mail~";
     public override int LevelNormallyFound => 25;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {
         (25, 1)
     };
-    public override int ToH => -2;
+    public override int BonusHit => -2;
     public override int Weight => 250;
     public override Item CreateItem() => new Item(Game, this);
 }

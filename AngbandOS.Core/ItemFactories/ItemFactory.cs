@@ -100,23 +100,23 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey
         if (item.IsKnown())
         {
             item.RefreshFlagBasedProperties();
-            if (ShowMods || item.BonusToHit != 0 && item.BonusDamage != 0)
+            if (ShowMods || item.BonusHit != 0 && item.BonusDamage != 0)
             {
-                s += $" ({GetSignedValue(item.BonusToHit)},{GetSignedValue(item.BonusDamage)})";
+                s += $" ({GetSignedValue(item.BonusHit)},{GetSignedValue(item.BonusDamage)})";
             }
-            else if (item.BonusToHit != 0)
+            else if (item.BonusHit != 0)
             {
-                s += $" ({GetSignedValue(item.BonusToHit)})";
+                s += $" ({GetSignedValue(item.BonusHit)})";
             }
             else if (item.BonusDamage != 0)
             {
                 s += $" ({GetSignedValue(item.BonusDamage)})";
             }
 
-            if (item.BaseArmorClass != 0)
+            if (item.ArmorClass != 0)
             {
                 // Add base armor class for all types of armor and when the base armor class is greater than zero.
-                s += $" [{item.BaseArmorClass},{GetSignedValue(item.BonusArmorClass)}]";
+                s += $" [{item.ArmorClass},{GetSignedValue(item.BonusArmorClass)}]";
             }
             else if (item.BonusArmorClass != 0)
             {
@@ -492,7 +492,7 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey
         {
             return false;
         }
-        if (a.BonusToHit != b.BonusToHit)
+        if (a.BonusHit != b.BonusHit)
         {
             return false;
         }
@@ -563,7 +563,7 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey
         {
             return false;
         }
-        if (a.BaseArmorClass != b.BaseArmorClass)
+        if (a.ArmorClass != b.ArmorClass)
         {
             return false;
         }
@@ -571,7 +571,7 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey
         {
             return false;
         }
-        if (a.DamageDiceSides != b.DamageDiceSides)
+        if (a.DamageSides != b.DamageSides)
         {
             return false;
         }
@@ -812,7 +812,7 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey
     /// </summary>
     public abstract string Name { get; }
 
-    public virtual int Ac => 0;
+    public virtual int ArmorClass => 0;
 
     /// <summary>
     /// Returns true, if items of this factory can be activated.  Returns true for all dragon scale mail and rings of ice, acid and flames.  Returns false, by default.  Items produced
@@ -879,7 +879,7 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey
     public virtual int Cost => 0;
 
     public virtual bool Cursed { get; set; } = false;
-    public virtual int Dd => 0;
+    public virtual int DamageDice => 0;
 
     /// <summary>
     /// Returns whether or not the item affects the dexterity of the player when being worn.
@@ -887,7 +887,7 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey
     public virtual bool Dex { get; set; } = false;
     public virtual bool DrainExp { get; set; } = false;
     public virtual bool DreadCurse { get; set; } = false;
-    public virtual int Ds => 0;
+    public virtual int DamageSides => 0;
     public virtual bool EasyKnow { get; set; } = false;
     public virtual bool Feather { get; set; } = false;
     public virtual bool FreeAct { get; set; } = false;
@@ -1026,9 +1026,9 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey
     public virtual bool SustWis { get; set; } = false;
     public virtual bool Telepathy { get; set; } = false;
     public virtual bool Teleport { get; set; } = false;
-    public virtual int ToA => 0;
-    public virtual int ToD => 0;
-    public virtual int ToH => 0;
+    public virtual int BonusArmorClass => 0;
+    public virtual int BonusDamage => 0;
+    public virtual int BonusHit => 0;
 
     /// <summary>
     /// Returns whether or not the item affects the tunneling capabilities of the player when being worn.

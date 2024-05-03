@@ -17,8 +17,8 @@ internal class EnlightenmentStaffItemFactory : StaffItemFactory
 
     public override int StaffChargeCount => Game.DieRoll(5) + 5;
     public override int Cost => 750;
-    public override int Dd => 1;
-    public override int Ds => 2;
+    public override int DamageDice => 1;
+    public override int DamageSides => 2;
     public override string FriendlyName => "Enlightenment";
     public override int LevelNormallyFound => 20;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

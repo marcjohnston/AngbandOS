@@ -22,12 +22,12 @@ internal class SlayingRingItemFactory : RingItemFactory
             power = -1;
         }
         item.BonusDamage = Game.DieRoll(7) + item.GetBonusValue(10, level);
-        item.BonusToHit = Game.DieRoll(7) + item.GetBonusValue(10, level);
+        item.BonusHit = Game.DieRoll(7) + item.GetBonusValue(10, level);
         if (power < 0)
         {
             item.IdentBroken = true;
             item.IdentCursed = true;
-            item.BonusToHit = 0 - item.BonusToHit;
+            item.BonusHit = 0 - item.BonusHit;
             item.BonusDamage = 0 - item.BonusDamage;
         }
     }

@@ -17,8 +17,8 @@ internal class LancePolearmWeaponItemFactory : PolearmWeaponItemFactory
     public override string Name => "Lance";
 
     public override int Cost => 230;
-    public override int Dd => 2;
-    public override int Ds => 8;
+    public override int DamageDice => 2;
+    public override int DamageSides => 8;
     public override string FriendlyName => "& Lance~";
     public override int LevelNormallyFound => 10;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

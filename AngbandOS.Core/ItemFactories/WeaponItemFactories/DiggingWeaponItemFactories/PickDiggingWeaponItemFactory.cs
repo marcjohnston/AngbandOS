@@ -17,8 +17,8 @@ internal class PickDiggingWeaponItemFactory : DiggingWeaponItemFactory
     public override string Name => "Pick";
 
     public override int Cost => 50;
-    public override int Dd => 1;
-    public override int Ds => 3;
+    public override int DamageDice => 1;
+    public override int DamageSides => 3;
     public override string FriendlyName => "& Pick~";
     public override int LevelNormallyFound => 5;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

@@ -17,8 +17,8 @@ internal class BallAndChainHaftedWeaponItemFactory : HaftedWeaponItemFactory
     public override string Name => "Ball-and-Chain";
 
     public override int Cost => 200;
-    public override int Dd => 2;
-    public override int Ds => 4;
+    public override int DamageDice => 2;
+    public override int DamageSides => 4;
     public override string FriendlyName => "& Ball-and-Chain~";
     public override int LevelNormallyFound => 20;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

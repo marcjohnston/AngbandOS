@@ -16,8 +16,8 @@ internal class SlowPoisonPotionItemFactory : PotionItemFactory
     public override string Name => "Slow Poison";
 
     public override int Cost => 25;
-    public override int Dd => 1;
-    public override int Ds => 1;
+    public override int DamageDice => 1;
+    public override int DamageSides => 1;
     public override string FriendlyName => "Slow Poison";
     public override int LevelNormallyFound => 1;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

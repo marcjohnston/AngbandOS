@@ -17,8 +17,8 @@ internal class AcidBallsRodItemFactory : RodItemFactory
     public override string Name => "Acid Balls";
 
     public override int Cost => 5500;
-    public override int Dd => 1;
-    public override int Ds => 1;
+    public override int DamageDice => 1;
+    public override int DamageSides => 1;
     public override string FriendlyName => "Acid Balls";
     public override int LevelNormallyFound => 70;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

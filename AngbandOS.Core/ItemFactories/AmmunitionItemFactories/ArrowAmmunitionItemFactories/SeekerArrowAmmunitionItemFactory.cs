@@ -17,8 +17,8 @@ internal class SeekerArrowAmmunitionItemFactory : ArrowAmmunitionItemFactory
     public override string Name => "Seeker Arrow";
 
     public override int Cost => 20;
-    public override int Dd => 4;
-    public override int Ds => 4;
+    public override int DamageDice => 4;
+    public override int DamageSides => 4;
     public override string FriendlyName => "& Seeker Arrow~";
     public override int LevelNormallyFound => 55;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

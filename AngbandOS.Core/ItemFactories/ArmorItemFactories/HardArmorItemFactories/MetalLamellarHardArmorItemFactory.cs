@@ -16,17 +16,17 @@ internal class MetalLamellarHardArmorItemFactory : HardArmorItemFactory
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "Metal Lamellar Armor";
 
-    public override int Ac => 23;
+    public override int ArmorClass => 23;
     public override int Cost => 1250;
-    public override int Dd => 1;
-    public override int Ds => 6;
+    public override int DamageDice => 1;
+    public override int DamageSides => 6;
     public override string FriendlyName => "Metal Lamellar Armor~";
     public override int LevelNormallyFound => 45;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {
         (45, 1)
     };
-    public override int ToH => -3;
+    public override int BonusHit => -3;
     public override int Weight => 340;
     public override Item CreateItem() => new Item(Game, this);
 }

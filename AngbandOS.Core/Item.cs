@@ -69,7 +69,7 @@ internal sealed class Item : IComparable<Item>
     public bool IdentBroken;
 
     public readonly ItemCharacteristics RandomArtifactItemCharacteristics = new ItemCharacteristics();
-    public int BaseArmorClass;
+    public int ArmorClass;
     public int BonusArmorClass;
     public int BonusDamage;
     public Activation? RandomArtifactActivation = null;
@@ -79,10 +79,10 @@ internal sealed class Item : IComparable<Item>
     /// </summary>
     public Power? RandomPower = null;
 
-    public int BonusToHit;
+    public int BonusHit;
     public int Count;
     public int DamageDice;
-    public int DamageDiceSides;
+    public int DamageSides;
     public int Discount;
     public FixedArtifact? FixedArtifact; // If this item is a fixed artifact, this will be not null.
     public int HoldingMonsterIndex;
@@ -284,6 +284,9 @@ internal sealed class Item : IComparable<Item>
 
     public int RodRechargeTimeRemaining = 0;
 
+    /// <summary>
+    /// Returns the nutritional value in turns provided to the player, when eaten.
+    /// </summary>
     public int NutritionalValue = 0;
 
     public int Weight;
@@ -304,12 +307,12 @@ internal sealed class Item : IComparable<Item>
         GoldPieces = Factory.InitialGoldPieces;
         Count = 1;
         Weight = Factory.Weight;
-        BonusToHit = Factory.ToH;
-        BonusDamage = Factory.ToD;
-        BonusArmorClass = Factory.ToA;
-        BaseArmorClass = Factory.Ac;
-        DamageDice = Factory.Dd;
-        DamageDiceSides = Factory.Ds;
+        BonusHit = Factory.BonusHit;
+        BonusDamage = Factory.BonusDamage;
+        BonusArmorClass = Factory.BonusArmorClass;
+        ArmorClass = Factory.ArmorClass;
+        DamageDice = Factory.DamageDice;
+        DamageSides = Factory.DamageSides;
         if (Factory.Cost <= 0)
         {
             IdentBroken = true;
@@ -452,12 +455,12 @@ internal sealed class Item : IComparable<Item>
         // TODO: The assignments below need to be performed by each factory.  This can be integrated into the CreateItem.
         Item clonedItem = Factory.CreateItem();
 
-        clonedItem.BaseArmorClass = BaseArmorClass;
+        clonedItem.ArmorClass = ArmorClass;
         clonedItem.RandomArtifactItemCharacteristics.Copy(RandomArtifactItemCharacteristics);
         clonedItem.RandomArtifactName = RandomArtifactName;
         clonedItem.DamageDice = DamageDice;
         clonedItem.Discount = Discount;
-        clonedItem.DamageDiceSides = DamageDiceSides;
+        clonedItem.DamageSides = DamageSides;
         clonedItem.HoldingMonsterIndex = HoldingMonsterIndex;
 
         clonedItem.IdentSense = IdentSense;
@@ -489,7 +492,7 @@ internal sealed class Item : IComparable<Item>
         clonedItem.GoldPieces = GoldPieces;
         clonedItem.BonusArmorClass = BonusArmorClass;
         clonedItem.BonusDamage = BonusDamage;
-        clonedItem.BonusToHit = BonusToHit;
+        clonedItem.BonusHit = BonusHit;
         clonedItem.Weight = Weight;
         clonedItem.RandomPower = RandomPower;
         clonedItem.RandomArtifactActivation = RandomArtifactActivation;
@@ -1258,7 +1261,7 @@ internal sealed class Item : IComparable<Item>
         {
             return Game.SingletonRepository.Get<ItemQualityRating>(nameof(GoodItemQualityRating));
         }
-        if (BonusToHit + BonusDamage > 0)
+        if (BonusHit + BonusDamage > 0)
         {
             return Game.SingletonRepository.Get<ItemQualityRating>(nameof(GoodItemQualityRating));
         }
@@ -1327,7 +1330,7 @@ internal sealed class Item : IComparable<Item>
         {
             return Game.SingletonRepository.Get<ItemQualityRating>(nameof(GoodItemQualityRating));
         }
-        if (BonusToHit + BonusDamage > 0)
+        if (BonusHit + BonusDamage > 0)
         {
             return Game.SingletonRepository.Get<ItemQualityRating>(nameof(GoodItemQualityRating));
         }
@@ -1971,11 +1974,11 @@ internal sealed class Item : IComparable<Item>
         {
             FixedArtifact.CurNum = 1;
             TypeSpecificValue = FixedArtifact.InitialTypeSpecificValue;
-            BaseArmorClass = FixedArtifact.Ac;
+            ArmorClass = FixedArtifact.Ac;
             DamageDice = FixedArtifact.Dd;
-            DamageDiceSides = FixedArtifact.Ds;
+            DamageSides = FixedArtifact.Ds;
             BonusArmorClass = FixedArtifact.ToA;
-            BonusToHit = FixedArtifact.ToH;
+            BonusHit = FixedArtifact.ToH;
             BonusDamage = FixedArtifact.ToD;
             Weight = FixedArtifact.Weight;
             if (FixedArtifact.Cost == 0)
@@ -2014,7 +2017,7 @@ internal sealed class Item : IComparable<Item>
             {
                 if (RareItem.MaxToH != 0)
                 {
-                    BonusToHit -= Game.DieRoll(RareItem.MaxToH);
+                    BonusHit -= Game.DieRoll(RareItem.MaxToH);
                 }
                 if (RareItem.MaxToD != 0)
                 {
@@ -2033,7 +2036,7 @@ internal sealed class Item : IComparable<Item>
             {
                 if (RareItem.MaxToH != 0)
                 {
-                    BonusToHit += Game.DieRoll(RareItem.MaxToH);
+                    BonusHit += Game.DieRoll(RareItem.MaxToH);
                 }
                 if (RareItem.MaxToD != 0)
                 {
@@ -2745,7 +2748,7 @@ internal sealed class Item : IComparable<Item>
             case 28:
             case 29:
                 RandomArtifactItemCharacteristics.ShowMods = true;
-                BonusToHit += 4 + Game.DieRoll(11);
+                BonusHit += 4 + Game.DieRoll(11);
                 BonusDamage += 4 + Game.DieRoll(11);
                 break;
 
@@ -2769,9 +2772,9 @@ internal sealed class Item : IComparable<Item>
         {
             BonusArmorClass = 0 - (BonusArmorClass + Game.DieRoll(4));
         }
-        if (BonusToHit != 0)
+        if (BonusHit != 0)
         {
-            BonusToHit = 0 - (BonusToHit + Game.DieRoll(4));
+            BonusHit = 0 - (BonusHit + Game.DieRoll(4));
         }
         if (BonusDamage != 0)
         {

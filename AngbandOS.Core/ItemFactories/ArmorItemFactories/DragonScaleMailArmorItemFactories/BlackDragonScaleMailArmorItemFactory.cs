@@ -28,11 +28,11 @@ internal class BlackDragonScaleMailArmorItemFactory : DragonScaleMailArmorItemFa
     public override ColorEnum Color => ColorEnum.Black;
     public override string Name => "Black Dragon Scale Mail";
 
-    public override int Ac => 30;
+    public override int ArmorClass => 30;
     public override bool Activate => true;
     public override int Cost => 30000;
-    public override int Dd => 2;
-    public override int Ds => 4;
+    public override int DamageDice => 2;
+    public override int DamageSides => 4;
     public override string FriendlyName => "Black Dragon Scale Mail~";
     public override bool IgnoreAcid => true;
     public override bool IgnoreCold => true;
@@ -44,8 +44,8 @@ internal class BlackDragonScaleMailArmorItemFactory : DragonScaleMailArmorItemFa
         (60, 8)
     };
     public override bool ResAcid => true;
-    public override int ToA => 10;
-    public override int ToH => -2;
+    public override int BonusArmorClass => 10;
+    public override int BonusHit => -2;
     public override int Weight => 200;
     public override Item CreateItem() => new Item(Game, this);
 }

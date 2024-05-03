@@ -17,8 +17,8 @@ internal class TwoHandedSwordWeaponItemFactory : SwordWeaponItemFactory
     public override string Name => "Two-Handed Sword";
 
     public override int Cost => 775;
-    public override int Dd => 3;
-    public override int Ds => 6;
+    public override int DamageDice => 3;
+    public override int DamageSides => 6;
     public override string FriendlyName => "& Two-Handed Sword~";
     public override int LevelNormallyFound => 30;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

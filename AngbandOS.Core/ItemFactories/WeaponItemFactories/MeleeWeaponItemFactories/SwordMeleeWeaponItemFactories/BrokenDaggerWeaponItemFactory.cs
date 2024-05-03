@@ -21,12 +21,12 @@ internal class BrokenDaggerWeaponItemFactory : SwordWeaponItemFactory
         (0, 1)
     };
     public override int Cost => 1;
-    public override int Dd => 1;
-    public override int Ds => 1;
+    public override int DamageDice => 1;
+    public override int DamageSides => 1;
     public override string FriendlyName => "& Broken Dagger~";
     public override bool ShowMods => true;
-    public override int ToD => -4;
-    public override int ToH => -2;
+    public override int BonusDamage => -4;
+    public override int BonusHit => -2;
     public override int Weight => 5;
     public override Item CreateItem() => new Item(Game, this);
 }

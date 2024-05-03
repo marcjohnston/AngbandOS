@@ -16,14 +16,14 @@ internal class FilthyRagSoftArmorItemFactory : SoftArmorItemFactory
     public override ColorEnum Color => ColorEnum.Black;
     public override string Name => "Filthy Rag";
 
-    public override int Ac => 1;
+    public override int ArmorClass => 1;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {
         (0, 1)
     };
     public override int Cost => 1;
     public override string FriendlyName => "& Filthy Rag~";
-    public override int ToA => -1;
+    public override int BonusArmorClass => -1;
     public override int Weight => 20;
     public override Item CreateItem() => new Item(Game, this);
 }

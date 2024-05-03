@@ -18,12 +18,12 @@ internal class AccuracyRingItemFactory : RingItemFactory
         {
             power = -1;
         }
-        item.BonusToHit = 5 + Game.DieRoll(8) + item.GetBonusValue(10, level);
+        item.BonusHit = 5 + Game.DieRoll(8) + item.GetBonusValue(10, level);
         if (power < 0)
         {
             item.IdentBroken = true;
             item.IdentCursed = true;
-            item.BonusToHit = 0 - item.BonusToHit;
+            item.BonusHit = 0 - item.BonusHit;
         }
     }
     protected override string SymbolName => nameof(EqualSignSymbol);

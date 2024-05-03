@@ -17,8 +17,8 @@ internal class PikePolearmWeaponItemFactory : PolearmWeaponItemFactory
     public override string Name => "Pike";
 
     public override int Cost => 358;
-    public override int Dd => 2;
-    public override int Ds => 5;
+    public override int DamageDice => 2;
+    public override int DamageSides => 5;
     public override string FriendlyName => "& Pike~";
     public override int LevelNormallyFound => 15;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

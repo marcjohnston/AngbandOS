@@ -16,17 +16,17 @@ internal class AugmentedChainMailHardArmorItemFactory : HardArmorItemFactory
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "Augmented Chain Mail";
 
-    public override int Ac => 16;
+    public override int ArmorClass => 16;
     public override int Cost => 900;
-    public override int Dd => 1;
-    public override int Ds => 4;
+    public override int DamageDice => 1;
+    public override int DamageSides => 4;
     public override string FriendlyName => "Augmented Chain Mail~";
     public override int LevelNormallyFound => 30;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {
         (30, 1)
     };
-    public override int ToH => -2;
+    public override int BonusHit => -2;
     public override int Weight => 270;
     public override Item CreateItem() => new Item(Game, this);
 }

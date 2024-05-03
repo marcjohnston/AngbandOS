@@ -16,8 +16,8 @@ internal class RodentSkeletonSkeletonItemFactory : SkeletonItemFactory
     public override ColorEnum Color => ColorEnum.Beige;
     public override string Name => "Rodent Skeleton";
 
-    public override int Dd => 1;
-    public override int Ds => 1;
+    public override int DamageDice => 1;
+    public override int DamageSides => 1;
     public override string FriendlyName => "& Rodent Skeleton~";
     public override int LevelNormallyFound => 1;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

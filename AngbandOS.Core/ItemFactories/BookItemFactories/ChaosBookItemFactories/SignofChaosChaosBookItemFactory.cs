@@ -17,8 +17,8 @@ internal class SignOfChaosChaosBookItemFactory : ChaosBookItemFactory
     public override string Name => "[Sign of Chaos]";
 
     public override int Cost => 100;
-    public override int Dd => 1;
-    public override int Ds => 1;
+    public override int DamageDice => 1;
+    public override int DamageSides => 1;
     public override string FriendlyName => "[Sign of Chaos]";
     public override int LevelNormallyFound => 10;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

@@ -16,10 +16,10 @@ internal class SteelHelmArmorItemFactory : HelmArmorItemFactory
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "Steel Helm";
 
-    public override int Ac => 6;
+    public override int ArmorClass => 6;
     public override int Cost => 200;
-    public override int Dd => 1;
-    public override int Ds => 3;
+    public override int DamageDice => 1;
+    public override int DamageSides => 3;
     public override string FriendlyName => "& Steel Helm~";
     public override int LevelNormallyFound => 40;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

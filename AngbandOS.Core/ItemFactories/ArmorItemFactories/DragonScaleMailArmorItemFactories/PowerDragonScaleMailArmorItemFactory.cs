@@ -27,11 +27,11 @@ internal class PowerDragonScaleMailArmorItemFactory : DragonScaleMailArmorItemFa
     public override ColorEnum Color => ColorEnum.Yellow;
     public override string Name => "Power Dragon Scale Mail";
 
-    public override int Ac => 40;
+    public override int ArmorClass => 40;
     public override bool Activate => true;
     public override int Cost => 350000;
-    public override int Dd => 2;
-    public override int Ds => 4;
+    public override int DamageDice => 2;
+    public override int DamageSides => 4;
     public override string FriendlyName => "Power Dragon Scale Mail~";
     public override bool IgnoreAcid => true;
     public override bool IgnoreCold => true;
@@ -56,8 +56,8 @@ internal class PowerDragonScaleMailArmorItemFactory : DragonScaleMailArmorItemFa
     public override bool ResPois => true;
     public override bool ResShards => true;
     public override bool ResSound => true;
-    public override int ToA => 15;
-    public override int ToH => -3;
+    public override int BonusArmorClass => 15;
+    public override int BonusHit => -3;
     public override int Weight => 250;
     public override Item CreateItem() => new Item(Game, this);
 }

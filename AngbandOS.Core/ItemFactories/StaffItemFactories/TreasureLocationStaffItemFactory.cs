@@ -18,8 +18,8 @@ internal class TreasureLocationStaffItemFactory : StaffItemFactory
     public override int StaffChargeCount => Game.DieRoll(20) + 8;
 
     public override int Cost => 200;
-    public override int Dd => 1;
-    public override int Ds => 2;
+    public override int DamageDice => 1;
+    public override int DamageSides => 2;
     public override string FriendlyName => "Treasure Location";
     public override int LevelNormallyFound => 5;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

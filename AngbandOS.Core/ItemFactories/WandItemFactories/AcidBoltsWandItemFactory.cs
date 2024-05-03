@@ -17,8 +17,8 @@ internal class AcidBoltsWandItemFactory : WandItemFactory
     public override string Name => "Acid Bolts";
 
     public override int Cost => 950;
-    public override int Dd => 1;
-    public override int Ds => 1;
+    public override int DamageDice => 1;
+    public override int DamageSides => 1;
     public override string FriendlyName => "Acid Bolts";
     public override int LevelNormallyFound => 30;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

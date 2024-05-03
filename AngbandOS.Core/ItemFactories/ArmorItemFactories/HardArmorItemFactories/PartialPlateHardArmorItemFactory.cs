@@ -16,17 +16,17 @@ internal class PartialPlateHardArmorItemFactory : HardArmorItemFactory
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "Partial Plate Armor";
 
-    public override int Ac => 22;
+    public override int ArmorClass => 22;
     public override int Cost => 1200;
-    public override int Dd => 1;
-    public override int Ds => 6;
+    public override int DamageDice => 1;
+    public override int DamageSides => 6;
     public override string FriendlyName => "Partial Plate Armor~";
     public override int LevelNormallyFound => 45;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {
         (45, 1)
     };
-    public override int ToH => -3;
+    public override int BonusHit => -3;
     public override int Weight => 260;
     public override Item CreateItem() => new Item(Game, this);
 }

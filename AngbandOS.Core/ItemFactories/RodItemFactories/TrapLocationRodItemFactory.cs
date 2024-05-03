@@ -17,8 +17,8 @@ internal class TrapLocationRodItemFactory : RodItemFactory
     public override string Name => "Trap Location";
 
     public override int Cost => 100;
-    public override int Dd => 1;
-    public override int Ds => 1;
+    public override int DamageDice => 1;
+    public override int DamageSides => 1;
     public override string FriendlyName => "Trap Location";
     public override int LevelNormallyFound => 5;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

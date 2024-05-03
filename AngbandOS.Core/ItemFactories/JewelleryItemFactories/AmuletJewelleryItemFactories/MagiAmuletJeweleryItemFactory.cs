@@ -41,7 +41,7 @@ internal class MagiAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
     };
     public override bool Search => true;
     public override bool SeeInvis => true;
-    public override int ToA => 3;
+    public override int BonusArmorClass => 3;
     public override int Weight => 3;
 
     public override bool KindIsGood => true;

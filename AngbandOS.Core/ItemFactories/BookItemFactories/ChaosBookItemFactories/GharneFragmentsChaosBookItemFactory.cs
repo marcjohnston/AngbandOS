@@ -17,8 +17,8 @@ internal class GharneFragmentsChaosBookItemFactory : ChaosBookItemFactory
     public override string Name => "[G'harne Fragments]";
 
     public override int Cost => 25000;
-    public override int Dd => 1;
-    public override int Ds => 1;
+    public override int DamageDice => 1;
+    public override int DamageSides => 1;
     public override string FriendlyName => "[G'harne Fragments]";
     public override bool IgnoreAcid => true;
     public override bool IgnoreCold => true;

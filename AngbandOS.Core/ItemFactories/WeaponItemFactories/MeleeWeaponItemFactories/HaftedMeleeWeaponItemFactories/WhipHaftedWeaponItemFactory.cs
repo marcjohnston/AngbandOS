@@ -17,8 +17,8 @@ internal class WhipHaftedWeaponItemFactory : HaftedWeaponItemFactory
     public override string Name => "Whip";
 
     public override int Cost => 30;
-    public override int Dd => 1;
-    public override int Ds => 6;
+    public override int DamageDice => 1;
+    public override int DamageSides => 6;
     public override string FriendlyName => "& Whip~";
     public override int LevelNormallyFound => 3;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

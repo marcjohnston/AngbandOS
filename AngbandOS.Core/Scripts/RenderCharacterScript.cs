@@ -351,7 +351,7 @@ internal class RenderCharacterScript : Script, IScript, IRepeatableScript
         // Only show bonuses if we know them
         if (item != null && item.IsKnown())
         {
-            showTohit += item.BonusToHit;
+            showTohit += item.BonusHit;
             showTodam += item.BonusDamage;
         }
         // Print some basics
@@ -431,9 +431,9 @@ internal class RenderCharacterScript : Script, IScript, IRepeatableScript
         int fighting = Game.SkillMelee + (Game.AttackBonus * Constants.BthPlusAdj);
         if (meeleeItem != null)
         {
-            fighting += meeleeItem.BonusToHit * Constants.BthPlusAdj;
+            fighting += meeleeItem.BonusHit * Constants.BthPlusAdj;
             damdice += meeleeItem.DamageDice;
-            damsides += meeleeItem.DamageDiceSides;
+            damsides += meeleeItem.DamageSides;
 
             if (meeleeItem.IsKnown())
             {
@@ -446,7 +446,7 @@ internal class RenderCharacterScript : Script, IScript, IRepeatableScript
         int shooting = Game.SkillRanged + (Game.AttackBonus * Constants.BthPlusAdj);
         if (rangedItem != null)
         {
-            shooting += rangedItem.BonusToHit * Constants.BthPlusAdj;
+            shooting += rangedItem.BonusHit * Constants.BthPlusAdj;
         }
 
         int attacksPerRound = Game.MeleeAttacksPerRound;

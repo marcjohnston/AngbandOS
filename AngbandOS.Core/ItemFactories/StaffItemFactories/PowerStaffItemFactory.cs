@@ -17,8 +17,8 @@ internal class PowerStaffItemFactory : StaffItemFactory
 
     public override int StaffChargeCount => Game.DieRoll(3) + 1;
     public override int Cost => 4000;
-    public override int Dd => 1;
-    public override int Ds => 2;
+    public override int DamageDice => 1;
+    public override int DamageSides => 2;
     public override string FriendlyName => "Power";
     public override int LevelNormallyFound => 70;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

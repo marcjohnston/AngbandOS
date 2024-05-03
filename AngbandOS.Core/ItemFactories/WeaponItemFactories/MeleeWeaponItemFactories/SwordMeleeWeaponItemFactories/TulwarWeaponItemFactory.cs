@@ -17,8 +17,8 @@ internal class TulwarWeaponItemFactory : SwordWeaponItemFactory
     public override string Name => "Tulwar";
 
     public override int Cost => 200;
-    public override int Dd => 2;
-    public override int Ds => 4;
+    public override int DamageDice => 2;
+    public override int DamageSides => 4;
     public override string FriendlyName => "& Tulwar~";
     public override int LevelNormallyFound => 5;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

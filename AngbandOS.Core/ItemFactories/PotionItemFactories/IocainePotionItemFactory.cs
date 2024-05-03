@@ -15,8 +15,8 @@ internal class IocainePotionItemFactory : PotionItemFactory
     protected override string SymbolName => nameof(ExclamationPointSymbol);
     public override string Name => "Iocaine";
 
-    public override int Dd => 20;
-    public override int Ds => 20;
+    public override int DamageDice => 20;
+    public override int DamageSides => 20;
     public override string FriendlyName => "Iocaine";
     public override int LevelNormallyFound => 55;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

@@ -16,10 +16,10 @@ internal class MetalCapHelmArmorFactory : HelmArmorItemFactory
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "Metal Cap";
 
-    public override int Ac => 3;
+    public override int ArmorClass => 3;
     public override int Cost => 30;
-    public override int Dd => 1;
-    public override int Ds => 1;
+    public override int DamageDice => 1;
+    public override int DamageSides => 1;
     public override string FriendlyName => "& Metal Cap~";
     public override int LevelNormallyFound => 10;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

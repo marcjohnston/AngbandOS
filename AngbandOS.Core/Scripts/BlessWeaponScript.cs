@@ -59,14 +59,14 @@ internal class BlessWeaponScript : Script, IScript, ISuccessfulScript
         {
             bool disHappened = false;
             Game.MsgPrint("The artifact resists your blessing!");
-            if (oPtr.BonusToHit > 0)
+            if (oPtr.BonusHit > 0)
             {
-                oPtr.BonusToHit--;
+                oPtr.BonusHit--;
                 disHappened = true;
             }
-            if (oPtr.BonusToHit > 5 && Game.RandomLessThan(100) < 33)
+            if (oPtr.BonusHit > 5 && Game.RandomLessThan(100) < 33)
             {
-                oPtr.BonusToHit--;
+                oPtr.BonusHit--;
             }
             if (oPtr.BonusDamage > 0)
             {

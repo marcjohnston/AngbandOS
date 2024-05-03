@@ -17,8 +17,8 @@ internal class MagicMissileWandItemFactory : WandItemFactory
 
     public override int RodChargeCount => Game.DieRoll(10) + 6;
     public override int Cost => 200;
-    public override int Dd => 1;
-    public override int Ds => 1;
+    public override int DamageDice => 1;
+    public override int DamageSides => 1;
     public override string FriendlyName => "Magic Missile";
     public override int LevelNormallyFound => 2;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

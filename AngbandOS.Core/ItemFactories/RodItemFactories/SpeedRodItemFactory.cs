@@ -17,8 +17,8 @@ internal class SpeedRodItemFactory : RodItemFactory
     public override string Name => "Speed";
 
     public override int Cost => 50000;
-    public override int Dd => 1;
-    public override int Ds => 1;
+    public override int DamageDice => 1;
+    public override int DamageSides => 1;
     public override string FriendlyName => "Speed";
     public override int LevelNormallyFound => 95;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

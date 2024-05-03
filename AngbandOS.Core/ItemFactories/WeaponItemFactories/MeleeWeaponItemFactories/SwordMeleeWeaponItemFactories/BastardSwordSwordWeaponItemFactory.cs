@@ -17,8 +17,8 @@ internal class BastardSwordSwordWeaponItemFactory : SwordWeaponItemFactory
     public override string Name => "Bastard Sword";
 
     public override int Cost => 350;
-    public override int Dd => 3;
-    public override int Ds => 4;
+    public override int DamageDice => 3;
+    public override int DamageSides => 4;
     public override string FriendlyName => "& Bastard Sword~";
     public override int LevelNormallyFound => 15;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

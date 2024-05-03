@@ -17,8 +17,8 @@ internal class LightWandItemFactory : WandItemFactory
     public override string Name => "Light";
 
     public override int Cost => 200;
-    public override int Dd => 1;
-    public override int Ds => 1;
+    public override int DamageDice => 1;
+    public override int DamageSides => 1;
     public override string FriendlyName => "Light";
     public override int LevelNormallyFound => 3;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

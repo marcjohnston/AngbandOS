@@ -16,17 +16,17 @@ internal class HardLeatherSoftArmorItemFactory : SoftArmorItemFactory
     public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "Hard Leather Armor";
 
-    public override int Ac => 6;
+    public override int ArmorClass => 6;
     public override int Cost => 150;
-    public override int Dd => 1;
-    public override int Ds => 1;
+    public override int DamageDice => 1;
+    public override int DamageSides => 1;
     public override string FriendlyName => "Hard Leather Armor~";
     public override int LevelNormallyFound => 5;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {
         (5, 1)
     };
-    public override int ToH => -1;
+    public override int BonusHit => -1;
     public override int Weight => 100;
     public override Item CreateItem() => new Item(Game, this);
 }

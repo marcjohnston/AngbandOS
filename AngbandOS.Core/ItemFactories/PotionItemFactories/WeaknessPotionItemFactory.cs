@@ -15,8 +15,8 @@ internal class WeaknessPotionItemFactory : PotionItemFactory
     protected override string SymbolName => nameof(ExclamationPointSymbol);
     public override string Name => "Weakness";
 
-    public override int Dd => 3;
-    public override int Ds => 12;
+    public override int DamageDice => 3;
+    public override int DamageSides => 12;
     public override string FriendlyName => "Weakness";
     public override int LevelNormallyFound => 3;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

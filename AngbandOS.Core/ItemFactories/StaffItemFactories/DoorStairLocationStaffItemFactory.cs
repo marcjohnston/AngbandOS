@@ -17,8 +17,8 @@ internal class DoorStairLocationStaffItemFactory : StaffItemFactory
 
     public override int StaffChargeCount => Game.DieRoll(8) + 6;
     public override int Cost => 350;
-    public override int Dd => 1;
-    public override int Ds => 2;
+    public override int DamageDice => 1;
+    public override int DamageSides => 2;
     public override string FriendlyName => "Door/Stair Location";
     public override int LevelNormallyFound => 10;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

@@ -16,7 +16,7 @@ internal class ClothCloakCloakArmorItemFactory : CloakArmorItemFactory
     public override ColorEnum Color => ColorEnum.Green;
     public override string Name => "Cloak";
 
-    public override int Ac => 1;
+    public override int ArmorClass => 1;
     public override int Cost => 3;
     public override string FriendlyName => "& Cloak~";
     public override int LevelNormallyFound => 1;

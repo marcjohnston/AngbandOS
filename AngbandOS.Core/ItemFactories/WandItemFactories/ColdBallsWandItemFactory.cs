@@ -17,8 +17,8 @@ internal class ColdBallsWandItemFactory : WandItemFactory
 
     public override int RodChargeCount => Game.DieRoll(6) + 2;
     public override int Cost => 1500;
-    public override int Dd => 1;
-    public override int Ds => 1;
+    public override int DamageDice => 1;
+    public override int DamageSides => 1;
     public override string FriendlyName => "Cold Balls";
     public override bool IgnoreCold => true;
     public override int LevelNormallyFound => 40;

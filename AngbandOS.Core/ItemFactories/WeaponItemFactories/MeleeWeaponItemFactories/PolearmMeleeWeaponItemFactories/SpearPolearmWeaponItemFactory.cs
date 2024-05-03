@@ -17,8 +17,8 @@ internal class SpearPolearmWeaponItemFactory : PolearmWeaponItemFactory
     public override string Name => "Spear";
 
     public override int Cost => 36;
-    public override int Dd => 1;
-    public override int Ds => 6;
+    public override int DamageDice => 1;
+    public override int DamageSides => 6;
     public override string FriendlyName => "& Spear~";
     public override int LevelNormallyFound => 5;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

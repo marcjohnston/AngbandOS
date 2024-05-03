@@ -17,8 +17,8 @@ internal class TridentPolearmWeaponItemFactory : PolearmWeaponItemFactory
     public override string Name => "Trident";
 
     public override int Cost => 120;
-    public override int Dd => 1;
-    public override int Ds => 8;
+    public override int DamageDice => 1;
+    public override int DamageSides => 8;
     public override string FriendlyName => "& Trident~";
     public override int LevelNormallyFound => 5;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

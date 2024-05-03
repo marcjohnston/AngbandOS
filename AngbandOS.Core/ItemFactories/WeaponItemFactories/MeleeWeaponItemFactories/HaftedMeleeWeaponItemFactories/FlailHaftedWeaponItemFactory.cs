@@ -17,8 +17,8 @@ internal class FlailHaftedWeaponItemFactory : HaftedWeaponItemFactory
     public override string Name => "Flail";
 
     public override int Cost => 353;
-    public override int Dd => 2;
-    public override int Ds => 6;
+    public override int DamageDice => 2;
+    public override int DamageSides => 6;
     public override string FriendlyName => "& Flail~";
     public override int LevelNormallyFound => 10;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

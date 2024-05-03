@@ -17,8 +17,8 @@ internal class BeakedAxePolearmWeaponItemFactory : PolearmWeaponItemFactory
     public override string Name => "Beaked Axe";
 
     public override int Cost => 408;
-    public override int Dd => 2;
-    public override int Ds => 6;
+    public override int DamageDice => 2;
+    public override int DamageSides => 6;
     public override string FriendlyName => "& Beaked Axe~";
     public override int LevelNormallyFound => 15;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

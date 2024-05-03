@@ -45,7 +45,7 @@ internal class RobeSoftArmorItemFactory : SoftArmorItemFactory
         }
     }
 
-    public override int Ac => 2;
+    public override int ArmorClass => 2;
     public override int Cost => 4;
     public override string FriendlyName => "& Robe~";
     public override int LevelNormallyFound => 1;

@@ -55,8 +55,8 @@ internal class BrassLanternLightSourceItemFactory : LightSourceItemFactory
     public override string Name => "Brass Lantern";
 
     public override int Cost => 35;
-    public override int Dd => 1;
-    public override int Ds => 1;
+    public override int DamageDice => 1;
+    public override int DamageSides => 1;
     public override bool EasyKnow => true;
     public override string FriendlyName => "& Brass Lantern~";
     public override bool IgnoreFire => true;

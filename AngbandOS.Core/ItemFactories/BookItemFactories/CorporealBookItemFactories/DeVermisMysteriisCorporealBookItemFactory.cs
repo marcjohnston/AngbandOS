@@ -17,8 +17,8 @@ internal class DeVermisMysteriisCorporealBookItemFactory : CorporealBookItemFact
     public override string Name => "[De Vermis Mysteriis]";
 
     public override int Cost => 25000;
-    public override int Dd => 1;
-    public override int Ds => 1;
+    public override int DamageDice => 1;
+    public override int DamageSides => 1;
     public override string FriendlyName => "[De Vermis Mysteriis]";
     public override bool IgnoreAcid => true;
     public override bool IgnoreCold => true;

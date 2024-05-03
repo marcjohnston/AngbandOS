@@ -17,8 +17,8 @@ internal class TeleportationStaffItemFactory : StaffItemFactory
     public override string Name => "Teleportation";
 
     public override int Cost => 2000;
-    public override int Dd => 1;
-    public override int Ds => 2;
+    public override int DamageDice => 1;
+    public override int DamageSides => 2;
     public override string FriendlyName => "Teleportation";
     public override int LevelNormallyFound => 20;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

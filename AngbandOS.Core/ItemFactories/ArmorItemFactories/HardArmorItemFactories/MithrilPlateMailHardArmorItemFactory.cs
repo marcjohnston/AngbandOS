@@ -16,10 +16,10 @@ internal class MithrilPlateMailHardArmorItemFactory : HardArmorItemFactory
     public override ColorEnum Color => ColorEnum.BrightBlue;
     public override string Name => "Mithril Plate Mail";
 
-    public override int Ac => 35;
+    public override int ArmorClass => 35;
     public override int Cost => 15000;
-    public override int Dd => 2;
-    public override int Ds => 4;
+    public override int DamageDice => 2;
+    public override int DamageSides => 4;
     public override string FriendlyName => "Mithril Plate Mail~";
     public override bool IgnoreAcid => true;
     public override int LevelNormallyFound => 60;
@@ -27,7 +27,7 @@ internal class MithrilPlateMailHardArmorItemFactory : HardArmorItemFactory
     {
         (60, 4)
     };
-    public override int ToH => -3;
+    public override int BonusHit => -3;
     public override int Weight => 300;
     public override Item CreateItem() => new Item(Game, this);
 }

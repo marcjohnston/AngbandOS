@@ -16,8 +16,8 @@ internal class GnomeSkeletonSkeletonItemFactory : SkeletonItemFactory
     public override ColorEnum Color => ColorEnum.Beige;
     public override string Name => "Gnome Skeleton";
 
-    public override int Dd => 1;
-    public override int Ds => 2;
+    public override int DamageDice => 1;
+    public override int DamageSides => 2;
     public override string FriendlyName => "& Gnome Skeleton~";
     public override int LevelNormallyFound => 5;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

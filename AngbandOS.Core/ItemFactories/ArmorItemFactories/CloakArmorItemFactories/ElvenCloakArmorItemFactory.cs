@@ -43,7 +43,7 @@ internal class ElvenCloakArmorItemFactory : CloakArmorItemFactory
         }
     }
 
-    public override int Ac => 4;
+    public override int ArmorClass => 4;
     public override int Cost => 1500;
     public override string FriendlyName => "& Elven Cloak~";
     public override bool IgnoreAcid => true;
@@ -57,7 +57,7 @@ internal class ElvenCloakArmorItemFactory : CloakArmorItemFactory
     };
     public override bool Search => true;
     public override bool Stealth => true;
-    public override int ToA => 4;
+    public override int BonusArmorClass => 4;
     public override int Weight => 5;
     public override Item CreateItem() => new Item(Game, this);
 }

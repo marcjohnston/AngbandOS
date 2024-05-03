@@ -17,8 +17,8 @@ internal class CarnageStaffItemFactory : StaffItemFactory
     public override string Name => "Carnage";
 
     public override int Cost => 3500;
-    public override int Dd => 1;
-    public override int Ds => 2;
+    public override int DamageDice => 1;
+    public override int DamageSides => 2;
     public override string FriendlyName => "Carnage";
     public override int LevelNormallyFound => 70;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

@@ -17,8 +17,8 @@ internal class MaceOfDisruptionHaftedWeaponItemFactory : HaftedWeaponItemFactory
     public override string Name => "Mace of Disruption";
 
     public override int Cost => 4300;
-    public override int Dd => 5;
-    public override int Ds => 8;
+    public override int DamageDice => 5;
+    public override int DamageSides => 8;
     public override string FriendlyName => "& Mace~ of Disruption";
     public override int LevelNormallyFound => 80;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

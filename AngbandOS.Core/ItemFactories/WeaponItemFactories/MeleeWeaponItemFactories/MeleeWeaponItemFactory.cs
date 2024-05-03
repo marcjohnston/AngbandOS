@@ -169,8 +169,8 @@ internal abstract class MeleeWeaponItemFactory : WeaponItemFactory
                         } while (Game.DieRoll(item.DamageDice) == 1);
                         do
                         {
-                            item.DamageDiceSides++;
-                        } while (Game.DieRoll(item.DamageDiceSides) == 1);
+                            item.DamageSides++;
+                        } while (Game.DieRoll(item.DamageSides) == 1);
                     }
                     if (Game.DieRoll(5) == 1)
                     {
@@ -224,7 +224,7 @@ internal abstract class MeleeWeaponItemFactory : WeaponItemFactory
                     }
                     break;
             }
-            while (Game.RandomLessThan(10 * item.DamageDice * item.DamageDiceSides) == 0)
+            while (Game.RandomLessThan(10 * item.DamageDice * item.DamageSides) == 0)
             {
                 item.DamageDice++;
             }

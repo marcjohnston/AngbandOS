@@ -21,8 +21,8 @@ internal class RoundedPebbleShotAmmunitionItemFactory : ShotAmmunitionItemFactor
         (0, 1)
     };
     public override int Cost => 1;
-    public override int Dd => 1;
-    public override int Ds => 2;
+    public override int DamageDice => 1;
+    public override int DamageSides => 2;
     public override string FriendlyName => "& Rounded Pebble~";
     public override bool ShowMods => true;
     public override int Weight => 4;

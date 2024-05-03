@@ -17,8 +17,8 @@ internal class HalberdPolearmWeaponItemFactory : PolearmWeaponItemFactory
     public override string Name => "Halberd";
 
     public override int Cost => 430;
-    public override int Dd => 3;
-    public override int Ds => 5;
+    public override int DamageDice => 3;
+    public override int DamageSides => 5;
     public override string FriendlyName => "& Halberd~";
     public override int LevelNormallyFound => 25;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

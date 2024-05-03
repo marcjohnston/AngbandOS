@@ -17,8 +17,8 @@ internal class AwlPikePolearmWeaponItemFactory : PolearmWeaponItemFactory
     public override string Name => "Awl-Pike";
 
     public override int Cost => 340;
-    public override int Dd => 1;
-    public override int Ds => 8;
+    public override int DamageDice => 1;
+    public override int DamageSides => 8;
     public override string FriendlyName => "& Awl-Pike~";
     public override int LevelNormallyFound => 10;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

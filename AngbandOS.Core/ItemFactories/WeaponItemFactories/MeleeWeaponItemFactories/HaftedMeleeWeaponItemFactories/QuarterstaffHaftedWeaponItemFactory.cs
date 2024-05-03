@@ -17,8 +17,8 @@ internal class QuarterstaffHaftedWeaponItemFactory : HaftedWeaponItemFactory
     public override string Name => "Quarterstaff";
 
     public override int Cost => 200;
-    public override int Dd => 1;
-    public override int Ds => 9;
+    public override int DamageDice => 1;
+    public override int DamageSides => 9;
     public override string FriendlyName => "& Quarterstaff~";
     public override int LevelNormallyFound => 10;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

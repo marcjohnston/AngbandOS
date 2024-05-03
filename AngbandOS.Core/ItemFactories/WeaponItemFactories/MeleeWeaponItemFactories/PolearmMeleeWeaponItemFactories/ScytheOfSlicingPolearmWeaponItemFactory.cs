@@ -17,8 +17,8 @@ internal class ScytheOfSlicingPolearmWeaponItemFactory : PolearmWeaponItemFactor
     public override string Name => "Scythe of Slicing";
 
     public override int Cost => 3500;
-    public override int Dd => 8;
-    public override int Ds => 4;
+    public override int DamageDice => 8;
+    public override int DamageSides => 4;
     public override string FriendlyName => "& Scythe~ of Slicing";
     public override int LevelNormallyFound => 60;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

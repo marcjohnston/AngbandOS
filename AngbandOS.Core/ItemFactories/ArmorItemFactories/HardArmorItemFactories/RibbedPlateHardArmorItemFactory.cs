@@ -16,17 +16,17 @@ internal class RibbedPlateHardArmorItemFactory : HardArmorItemFactory
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "Ribbed Plate Armor";
 
-    public override int Ac => 28;
+    public override int ArmorClass => 28;
     public override int Cost => 1500;
-    public override int Dd => 2;
-    public override int Ds => 4;
+    public override int DamageDice => 2;
+    public override int DamageSides => 4;
     public override string FriendlyName => "Ribbed Plate Armor~";
     public override int LevelNormallyFound => 50;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {
         (50, 1)
     };
-    public override int ToH => -3;
+    public override int BonusHit => -3;
     public override int Weight => 380;
     public override Item CreateItem() => new Item(Game, this);
 }

@@ -17,8 +17,8 @@ internal class MightyHammerHaftedWeaponItemFactory : HaftedWeaponItemFactory
     public override string Name => "Mighty Hammer";
 
     public override int Cost => 1000;
-    public override int Dd => 3;
-    public override int Ds => 9;
+    public override int DamageDice => 3;
+    public override int DamageSides => 9;
     public override string FriendlyName => "& Mighty Hammer~"; // TODO: This appears to cause a defect in identification
     public override bool InstaArt => true;
     public override int LevelNormallyFound => 15;

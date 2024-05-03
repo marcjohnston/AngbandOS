@@ -37,7 +37,7 @@ internal class DetectMagicalObjectsScript : Script, IScript
                         tv == ItemTypeEnum.Potion || tv == ItemTypeEnum.LifeBook || tv == ItemTypeEnum.SorceryBook ||
                         tv == ItemTypeEnum.NatureBook || tv == ItemTypeEnum.ChaosBook || tv == ItemTypeEnum.DeathBook ||
                         tv == ItemTypeEnum.CorporealBook || tv == ItemTypeEnum.TarotBook || tv == ItemTypeEnum.FolkBook ||
-                        oPtr.BonusArmorClass > 0 || oPtr.BonusToHit + oPtr.BonusDamage > 0)
+                        oPtr.BonusArmorClass > 0 || oPtr.BonusHit + oPtr.BonusDamage > 0)
                     {
                         oPtr.Marked = true;
                         Game.MainForm.RefreshMapLocation(y, x);

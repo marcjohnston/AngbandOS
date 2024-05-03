@@ -27,12 +27,12 @@ internal abstract class BowWeaponItemFactory : WeaponItemFactory // TODO: Should
         basenm += $" (x{power})";
         if (item.IsKnown())
         {
-            basenm += $" ({GetSignedValue(item.BonusToHit)},{GetSignedValue(item.BonusDamage)})";
+            basenm += $" ({GetSignedValue(item.BonusHit)},{GetSignedValue(item.BonusDamage)})";
 
-            if (item.BaseArmorClass != 0)
+            if (item.ArmorClass != 0)
             {
                 // Add base armor class for all types of armor and when the base armor class is greater than zero.
-                basenm += $" [{item.BaseArmorClass},{GetSignedValue(item.BonusArmorClass)}]";
+                basenm += $" [{item.ArmorClass},{GetSignedValue(item.BonusArmorClass)}]";
             }
             else if (item.BonusArmorClass != 0)
             {
@@ -40,9 +40,9 @@ internal abstract class BowWeaponItemFactory : WeaponItemFactory // TODO: Should
                 basenm += $" [{GetSignedValue(item.BonusArmorClass)}]";
             }
         }
-        else if (item.BaseArmorClass != 0)
+        else if (item.ArmorClass != 0)
         {
-            basenm += $" [{item.BaseArmorClass}]";
+            basenm += $" [{item.ArmorClass}]";
         }
         return basenm;
     }
