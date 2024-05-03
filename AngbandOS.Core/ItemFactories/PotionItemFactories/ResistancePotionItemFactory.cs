@@ -43,5 +43,4 @@ internal class ResistancePotionItemFactory : PotionItemFactory
         Game.PoisonResistanceTimer.AddTimer(Game.DieRoll(20) + 20);
         return true;
     }
-    public override Item CreateItem() => new Item(Game, this);
 }

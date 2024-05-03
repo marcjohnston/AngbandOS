@@ -27,5 +27,4 @@ internal class SpearPolearmWeaponItemFactory : PolearmWeaponItemFactory
     };
     public override bool ShowMods => true;
     public override int Weight => 50;
-    public override Item CreateItem() => new Item(Game, this);
 }

@@ -37,5 +37,4 @@ internal class PerceptionRodItemFactory : RodItemFactory
         }
         zapRodEvent.Item.RodRechargeTimeRemaining = RodRechargeTime;
     }
-    public override Item CreateItem() => new Item(Game, this);
 }

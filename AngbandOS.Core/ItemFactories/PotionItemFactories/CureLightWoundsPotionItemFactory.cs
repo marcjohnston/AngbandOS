@@ -47,5 +47,4 @@ internal class CureLightWoundsPotionItemFactory : PotionItemFactory
         Game.Project(who, 2, y, x, Game.DiceRoll(2, 3), Game.SingletonRepository.Get<Projectile>(nameof(OldHealProjectile)), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
         return false;
     }
-    public override Item CreateItem() => new Item(Game, this);
 }

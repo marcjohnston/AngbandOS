@@ -39,5 +39,4 @@ internal class LoseMemoriesPotionItemFactory : PotionItemFactory
     {
         return true;
     }
-    public override Item CreateItem() => new Item(Game, this);
 }

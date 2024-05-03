@@ -32,5 +32,4 @@ internal class DexterityPotionItemFactory : PotionItemFactory
         // Dexterity increases your dexterity
         return Game.TryIncreasingAbilityScore(Ability.Dexterity);
     }
-    public override Item CreateItem() => new Item(Game, this);
 }

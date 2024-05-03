@@ -28,5 +28,4 @@ internal class MetalBrigandineHardArmorItemFactory : HardArmorItemFactory
     };
     public override int BonusHit => -3;
     public override int Weight => 290;
-    public override Item CreateItem() => new Item(Game, this);
 }

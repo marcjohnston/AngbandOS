@@ -25,5 +25,4 @@ internal class SoundResistanceRingItemFactory : RingItemFactory
     };
     public override bool ResSound => true;
     public override int Weight => 2;
-    public override Item CreateItem() => new Item(Game, this);
 }

@@ -40,5 +40,4 @@ internal class ConstitutionRingItemFactory : RingItemFactory
         (30, 1)
     };
     public override int Weight => 2;
-    public override Item CreateItem() => new Item(Game, this);
 }

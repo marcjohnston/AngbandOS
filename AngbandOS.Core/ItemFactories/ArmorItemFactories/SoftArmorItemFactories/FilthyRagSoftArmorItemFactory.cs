@@ -25,5 +25,4 @@ internal class FilthyRagSoftArmorItemFactory : SoftArmorItemFactory
     public override string FriendlyName => "& Filthy Rag~";
     public override int BonusArmorClass => -1;
     public override int Weight => 20;
-    public override Item CreateItem() => new Item(Game, this);
 }

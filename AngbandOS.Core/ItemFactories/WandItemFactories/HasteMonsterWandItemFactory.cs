@@ -29,5 +29,4 @@ internal class HasteMonsterWandItemFactory : WandItemFactory
     {
         return game.SpeedMonster(dir);
     }
-    public override Item CreateItem() => new Item(Game, this);
 }

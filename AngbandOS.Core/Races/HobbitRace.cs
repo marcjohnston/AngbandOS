@@ -71,7 +71,7 @@ internal class HobbitRace : Race
         if (Game.CheckIfRacialPowerWorks(15, 10, Ability.Intelligence, 10))
         {
             ItemFactory foodItemFactory = Game.SingletonRepository.Get<ItemFactory>(nameof(RationFoodItemFactory));
-            Item item = foodItemFactory.CreateItem();
+            Item item = new Item(Game, foodItemFactory);
             Game.DropNear(item, -1, Game.MapY.IntValue, Game.MapX.IntValue);
             Game.MsgPrint("You cook some food.");
         }

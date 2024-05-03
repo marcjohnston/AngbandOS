@@ -34,5 +34,4 @@ internal class EnlightenmentPotionItemFactory : PotionItemFactory
         Game.RunScript(nameof(LightScript));
         return true;
     }
-    public override Item CreateItem() => new Item(Game, this);
 }

@@ -32,5 +32,4 @@ internal class StupidityRingItemFactory : RingItemFactory
     };
     public override int InitialTypeSpecificValue => -5;
     public override int Weight => 2;
-    public override Item CreateItem() => new Item(Game, this);
 }

@@ -27,5 +27,4 @@ internal class ShortBowWeaponItemFactory : BowWeaponItemFactory
     public override int Weight => 30;
     public override int MissileDamageMultiplier => 2;
     public override ItemTypeEnum AmmunitionItemCategory => ItemTypeEnum.Arrow;
-    public override Item CreateItem() => new Item(Game, this);
 }

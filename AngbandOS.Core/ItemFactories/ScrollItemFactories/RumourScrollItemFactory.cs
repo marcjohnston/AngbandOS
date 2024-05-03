@@ -31,5 +31,4 @@ internal class RumourScrollItemFactory : ScrollItemFactory
         Game.RunScript(nameof(GetRumourScript));
         eventArgs.Identified = true;
     }
-    public override Item CreateItem() => new Item(Game, this);
 }

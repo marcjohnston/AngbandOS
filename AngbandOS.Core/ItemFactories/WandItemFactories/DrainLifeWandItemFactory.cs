@@ -30,5 +30,4 @@ internal class DrainLifeWandItemFactory : WandItemFactory
     {
         return game.DrainLife(dir, 75);
     }
-    public override Item CreateItem() => new Item(Game, this);
 }

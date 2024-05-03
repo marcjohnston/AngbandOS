@@ -30,5 +30,4 @@ internal class DetectInvisiblePotionItemFactory : PotionItemFactory
         // Detect invisible gives you times see invisibility
         return Game.SeeInvisibilityTimer.AddTimer(12 + Game.DieRoll(12));
     }
-    public override Item CreateItem() => new Item(Game, this);
 }

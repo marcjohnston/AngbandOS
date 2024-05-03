@@ -32,5 +32,4 @@ internal class LightningBallsWandItemFactory : WandItemFactory
         game.FireBall(game.SingletonRepository.Get<Projectile>(nameof(ElecProjectile)), dir, 32, 2);
         return true;
     }
-    public override Item CreateItem() => new Item(Game, this);
 }

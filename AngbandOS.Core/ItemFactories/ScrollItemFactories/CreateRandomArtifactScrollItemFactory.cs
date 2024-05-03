@@ -29,5 +29,4 @@ internal class CreateRandomArtifactScrollItemFactory : ScrollItemFactory
         Game.RunScript(nameof(CreateRandomArtifactScript));
         eventArgs.Identified = true;
     }
-    public override Item CreateItem() => new Item(Game, this);
 }

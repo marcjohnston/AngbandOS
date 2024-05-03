@@ -46,5 +46,4 @@ internal class PieceOfWarpstoneFoodItemFactory : FoodItemFactory
     /// Returns true because warpstones vanish when a skeleton tries to eat it.
     /// </summary>
     public override bool VanishesWhenEatenBySkeletons => true;
-    public override Item CreateItem() => new Item(Game, this);
 }

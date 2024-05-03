@@ -37,5 +37,4 @@ internal class IocainePotionItemFactory : PotionItemFactory
         Game.Project(who, 1, y, x, 0, Game.SingletonRepository.Get<Projectile>(nameof(DeathRayProjectile)), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
         return true;
     }
-    public override Item CreateItem() => new Item(Game, this);
 }

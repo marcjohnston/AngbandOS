@@ -32,5 +32,4 @@ internal class DiseaseMushroomFoodItemFactory : MushroomFoodItemFactory
         Game.TryDecreasingAbilityScore(Ability.Strength);
         return true;
     }
-    public override Item CreateItem() => new Item(Game, this);
 }

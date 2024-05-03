@@ -26,5 +26,4 @@ internal class ResistFireRingItemFactory : RingItemFactory
     };
     public override bool ResFire => true;
     public override int Weight => 2;
-    public override Item CreateItem() => new Item(Game, this);
 }

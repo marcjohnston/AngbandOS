@@ -31,5 +31,4 @@ internal class StinkingCloudWandItemFactory : WandItemFactory
         game.FireBall(game.SingletonRepository.Get<Projectile>(nameof(PoisProjectile)), dir, 12, 2);
         return true;
     }
-    public override Item CreateItem() => new Item(Game, this);
 }

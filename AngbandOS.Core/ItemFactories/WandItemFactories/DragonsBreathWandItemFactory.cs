@@ -54,5 +54,4 @@ internal class DragonsBreathWandItemFactory : WandItemFactory
         }
         return true;
     }
-    public override Item CreateItem() => new Item(Game, this);
 }

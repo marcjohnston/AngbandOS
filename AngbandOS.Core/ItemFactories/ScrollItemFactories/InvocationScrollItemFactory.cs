@@ -33,5 +33,4 @@ internal class InvocationScrollItemFactory : ScrollItemFactory
         patron.GetReward();
         eventArgs.Identified = true;
     }
-    public override Item CreateItem() => new Item(Game, this);
 }

@@ -32,5 +32,4 @@ internal class EnlightenmentStaffItemFactory : StaffItemFactory
         Game.RunScript(nameof(MapAreaScript));
         eventArgs.Identified = true;
     }
-    public override Item CreateItem() => new Item(Game, this);
 }

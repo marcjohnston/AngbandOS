@@ -33,5 +33,4 @@ internal class SelfKnowledgePotionItemFactory : PotionItemFactory
         Game.RunScript(nameof(SelfKnowledgeScript));
         return true;
     }
-    public override Item CreateItem() => new Item(Game, this);
 }

@@ -29,5 +29,4 @@ internal class AugmentationPotionItemFactory : PotionItemFactory
     {
         return Game.RunNoticeableScript(nameof(AugmentScript));
     }
-    public override Item CreateItem() => new Item(Game, this);
 }

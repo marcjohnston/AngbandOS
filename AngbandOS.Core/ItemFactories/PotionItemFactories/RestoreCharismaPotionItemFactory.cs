@@ -31,5 +31,4 @@ internal class RestoreCharismaPotionItemFactory : PotionItemFactory
         // Restore charisma restores your charisma
         return Game.TryRestoringAbilityScore(Ability.Charisma);
     }
-    public override Item CreateItem() => new Item(Game, this);
 }

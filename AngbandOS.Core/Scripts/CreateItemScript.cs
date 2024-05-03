@@ -36,7 +36,7 @@ internal class CreateItemScript : Script, IScript
             return;
         }
         ItemFactory itemFactory = Game.SingletonRepository.Get<ItemFactory>(kIdx);
-        Item qPtr = itemFactory.CreateItem();
+        Item qPtr = new Item(Game, itemFactory);
 
         if (!Game.GetBool($"Ok Item (0=False, 1=True)? ", out bool ok))
         {

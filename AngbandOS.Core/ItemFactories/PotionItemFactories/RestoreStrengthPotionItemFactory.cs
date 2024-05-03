@@ -30,5 +30,4 @@ internal class RestoreStrengthPotionItemFactory : PotionItemFactory
         // Restore strength restores your strength
         return Game.TryRestoringAbilityScore(Ability.Strength);
     }
-    public override Item CreateItem() => new Item(Game, this);
 }

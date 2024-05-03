@@ -29,5 +29,4 @@ internal class DwarvenShovelDiggingWeaponItemFactory : DiggingWeaponItemFactory
     public override bool ShowMods => true;
     public override bool Tunnel => true;
     public override int Weight => 120;
-    public override Item CreateItem() => new Item(Game, this);
 }

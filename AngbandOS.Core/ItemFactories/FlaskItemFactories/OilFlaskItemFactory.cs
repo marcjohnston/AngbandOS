@@ -29,12 +29,6 @@ internal class OilFlaskItemFactory : FlaskItemFactory
     {
         (1, 1)
     };
-    public int InitialTurnsOfLight => 7500;
+    public override int InitialTurnsOfLight => 7500;
     public override int Weight => 10;
-    public override Item CreateItem()
-    {
-        Item newItem = new Item(Game, this);
-        newItem.TurnsOfLightRemaining = InitialTurnsOfLight;
-        return newItem;
-    }
 }

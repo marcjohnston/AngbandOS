@@ -19,5 +19,4 @@ internal class MithrilGoldItemFactory : GoldItemFactory
     public override int GoldValue => 40;
     public override string FriendlyName => "mithril";
     public override int LevelNormallyFound => 1;
-    public override Item CreateItem() => new Item(Game, this);
 }

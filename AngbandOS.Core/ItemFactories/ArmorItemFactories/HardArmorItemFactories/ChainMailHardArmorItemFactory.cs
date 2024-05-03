@@ -28,5 +28,4 @@ internal class ChainMailHardArmorItemFactory : HardArmorItemFactory
     };
     public override int BonusHit => -2;
     public override int Weight => 220;
-    public override Item CreateItem() => new Item(Game, this);
 }

@@ -33,5 +33,4 @@ internal class SummonMonsterScrollItemFactory : ScrollItemFactory
             }
         }
     }
-    public override Item CreateItem() => new Item(Game, this);
 }

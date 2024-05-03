@@ -25,5 +25,4 @@ internal class DwarfSkeletonSkeletonItemFactory : SkeletonItemFactory
         (5, 1)
     };
     public override int Weight => 50;
-    public override Item CreateItem() => new Item(Game, this);
 }

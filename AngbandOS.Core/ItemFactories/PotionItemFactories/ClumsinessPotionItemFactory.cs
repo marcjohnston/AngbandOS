@@ -33,5 +33,4 @@ internal class ClumsinessPotionItemFactory : PotionItemFactory
     {
         return true;
     }
-    public override Item CreateItem() => new Item(Game, this);
 }

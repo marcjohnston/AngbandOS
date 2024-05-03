@@ -59,5 +59,4 @@ internal class ElvenCloakArmorItemFactory : CloakArmorItemFactory
     public override bool Stealth => true;
     public override int BonusArmorClass => 4;
     public override int Weight => 5;
-    public override Item CreateItem() => new Item(Game, this);
 }

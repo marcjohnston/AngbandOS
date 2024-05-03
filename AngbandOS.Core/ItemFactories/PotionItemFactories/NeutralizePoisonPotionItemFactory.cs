@@ -30,5 +30,4 @@ internal class NeutralizePoisonPotionItemFactory : PotionItemFactory
         // Cure poison removes any poison you have
         return Game.PoisonTimer.ResetTimer();
     }
-    public override Item CreateItem() => new Item(Game, this);
 }

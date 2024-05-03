@@ -26,5 +26,4 @@ internal class ResistColdRingItemFactory : RingItemFactory
     };
     public override bool ResCold => true;
     public override int Weight => 2;
-    public override Item CreateItem() => new Item(Game, this);
 }

@@ -27,5 +27,4 @@ internal class BroadAxePolearmWeaponItemFactory : PolearmWeaponItemFactory
     };
     public override bool ShowMods => true;
     public override int Weight => 160;
-    public override Item CreateItem() => new Item(Game, this);
 }

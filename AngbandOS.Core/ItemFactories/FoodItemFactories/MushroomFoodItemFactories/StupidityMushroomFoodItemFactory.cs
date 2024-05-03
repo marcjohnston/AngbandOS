@@ -29,5 +29,4 @@ internal class StupidityMushroomFoodItemFactory : MushroomFoodItemFactory
         Game.TryDecreasingAbilityScore(Ability.Intelligence);
         return true;
     }
-    public override Item CreateItem() => new Item(Game, this);
 }

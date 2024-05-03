@@ -46,5 +46,4 @@ internal class DragonHelmArmorItemFactory : HelmArmorItemFactory
     };
     public override int BonusArmorClass => 10;
     public override int Weight => 50;
-    public override Item CreateItem() => new Item(Game, this);
 }

@@ -42,5 +42,4 @@ internal class ExperiencePotionItemFactory : PotionItemFactory
         }
         return false;
     }
-    public override Item CreateItem() => new Item(Game, this);
 }

@@ -31,5 +31,4 @@ internal class CloneMonsterWandItemFactory : WandItemFactory
     {
         return game.CloneMonster(dir);
     }
-    public override Item CreateItem() => new Item(Game, this);
 }

@@ -36,5 +36,4 @@ internal class CharismaAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
     };
     public override int Weight => 3;
 
-    public override Item CreateItem() => new Item(Game, this);
 }

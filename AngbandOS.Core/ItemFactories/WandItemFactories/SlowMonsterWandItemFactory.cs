@@ -31,5 +31,4 @@ internal class SlowMonsterWandItemFactory : WandItemFactory
     {
         return game.SlowMonster(dir);
     }
-    public override Item CreateItem() => new Item(Game, this);
 }

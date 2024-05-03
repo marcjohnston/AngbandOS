@@ -25,5 +25,4 @@ internal class SeeInvisibleRingItemFactory : RingItemFactory
     };
     public override bool SeeInvis => true;
     public override int Weight => 2;
-    public override Item CreateItem() => new Item(Game, this);
 }

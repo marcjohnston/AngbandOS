@@ -32,5 +32,4 @@ internal class ConstitutionPotionItemFactory : PotionItemFactory
         // Constitution increases your constitution
         return Game.TryIncreasingAbilityScore(Ability.Constitution);
     }
-    public override Item CreateItem() => new Item(Game, this);
 }

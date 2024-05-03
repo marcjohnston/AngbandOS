@@ -480,11 +480,11 @@ internal abstract class BaseCharacterClass : IGetKey
         foreach (ItemFactory itemFactory in OutfitItemFactories)
         {
             // Allow the race to modify the item as the race sees fit.
-            ItemFactory outfitItem = Game.Race.OutfitItemClass(itemFactory);
+            ItemFactory outfitItemFactory = Game.Race.OutfitItemClass(itemFactory);
 
             // Create an item from the factory.
-            Item item = outfitItem.CreateItem();
-            if (outfitItem.CategoryEnum == ItemTypeEnum.Wand)
+            Item item = new Item(Game, outfitItemFactory);
+            if (outfitItemFactory.CategoryEnum == ItemTypeEnum.Wand)
             {
                 item.WandChargesRemaining = 1;
             }

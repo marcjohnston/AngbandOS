@@ -27,5 +27,4 @@ internal class GauntletGlovesArmorItemFactory : GlovesArmorItemFactory
         (10, 1)
     };
     public override int Weight => 25;
-    public override Item CreateItem() => new Item(Game, this);
 }

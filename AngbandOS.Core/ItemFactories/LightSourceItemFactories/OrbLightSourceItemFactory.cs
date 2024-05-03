@@ -41,5 +41,4 @@ internal class OrbLightSourceItemFactory : LightSourceItemFactory
     public override int Weight => 50;
 
     public override bool HasQuality => true;
-    public override Item CreateItem() => new Item(Game, this);
 }

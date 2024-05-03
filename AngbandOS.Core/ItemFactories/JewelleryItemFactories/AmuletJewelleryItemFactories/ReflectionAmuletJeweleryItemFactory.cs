@@ -29,5 +29,4 @@ internal class ReflectionAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
     };
     public override bool Reflect => true;
     public override int Weight => 3;
-    public override Item CreateItem() => new Item(Game, this);
 }

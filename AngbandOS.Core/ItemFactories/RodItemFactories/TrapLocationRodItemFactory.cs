@@ -35,5 +35,4 @@ internal class TrapLocationRodItemFactory : RodItemFactory
         }
         zapRodEvent.Item.RodRechargeTimeRemaining = RodRechargeTime;
     }
-    public override Item CreateItem() => new Item(Game, this);
 }

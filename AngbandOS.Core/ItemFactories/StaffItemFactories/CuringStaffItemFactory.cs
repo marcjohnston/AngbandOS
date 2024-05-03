@@ -55,5 +55,4 @@ internal class CuringStaffItemFactory : StaffItemFactory
             eventArgs.Identified = true;
         }
     }
-    public override Item CreateItem() => new Item(Game, this);
 }

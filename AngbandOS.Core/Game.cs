@@ -1568,7 +1568,7 @@ internal class Game
                     continue;
                 }
             }
-            Item item = kIdx.CreateItem();
+            Item item = new Item(this, kIdx);
             item.FixedArtifact = aPtr;
             return item;
         }
@@ -1596,7 +1596,7 @@ internal class Game
             {
                 return null;
             }
-            item = kIdx.CreateItem();
+            item = new Item(this, kIdx);
         }
         item.ApplyMagic(ObjectLevel, true, good, great, null);
         item.Count = item.Factory.MakeObjectCount;
@@ -1632,7 +1632,7 @@ internal class Game
         {
             goldType = goldItemFactories.Length - 1;
         }
-        return goldItemFactories[goldType.Value].CreateItem();
+        return new Item(this, goldItemFactories[goldType.Value]);
     }
 
     private void ResetUniqueOnlyGuardianStatus()
@@ -9365,7 +9365,7 @@ internal class Game
         if (Race.OutfitsWithScrollsOfSatisfyHunger)
         {
             ItemFactory scrollSatisfyHungerItemClass = SingletonRepository.Get<ItemFactory>(nameof(SatisfyHungerScrollItemFactory));
-            Item item = scrollSatisfyHungerItemClass.CreateItem();
+            Item item = new Item(this, scrollSatisfyHungerItemClass);
             item.Count = (char)RandomBetween(2, 5);
             item.BecomeFlavorAware();
             item.BecomeKnown();
@@ -9375,7 +9375,7 @@ internal class Game
         else
         {
             ItemFactory rationFoodItemClass = SingletonRepository.Get<ItemFactory>(nameof(RationFoodItemFactory));
-            Item item = rationFoodItemClass.CreateItem();
+            Item item = new Item(this, rationFoodItemClass);
             item.Count = RandomBetween(3, 7);
             item.BecomeFlavorAware();
             item.BecomeKnown();
@@ -9384,7 +9384,7 @@ internal class Game
         if (Race.OutfitsWithScrollsOfLight || BaseCharacterClass.OutfitsWithScrollsOfLight)
         {
             ItemFactory scrollLightItemClass = SingletonRepository.Get<ItemFactory>(nameof(LightScrollItemFactory));
-            Item item = scrollLightItemClass .CreateItem();
+            Item item = new Item(this, scrollLightItemClass);
             item.Count = RandomBetween(3, 7);
             item.BecomeFlavorAware();
             item.BecomeKnown();
@@ -9394,7 +9394,7 @@ internal class Game
         else
         {
             ItemFactory woodenTorchItemClass = SingletonRepository.Get<ItemFactory>(nameof(WoodenTorchLightSourceItemFactory));
-            Item item = woodenTorchItemClass.CreateItem();
+            Item item = new Item(this, woodenTorchItemClass);
             item.Count = RandomBetween(3, 7);
             item.TurnsOfLightRemaining = RandomBetween(3, 7) * 500;
             item.BecomeFlavorAware();

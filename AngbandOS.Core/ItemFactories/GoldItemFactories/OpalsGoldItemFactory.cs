@@ -19,5 +19,4 @@ internal class OpalsGoldItemFactory : GoldItemFactory
     public override int GoldValue => 18;
     public override string FriendlyName => "opals";
     public override int LevelNormallyFound => 1;
-    public override Item CreateItem() => new Item(Game, this);
 }

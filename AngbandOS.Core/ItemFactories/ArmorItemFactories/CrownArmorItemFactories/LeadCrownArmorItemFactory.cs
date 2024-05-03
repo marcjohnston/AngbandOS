@@ -23,5 +23,4 @@ internal class LeadCrownArmorItemFactory : CrownArmorItemFactory
     public override bool InstaArt => true;
     public override int LevelNormallyFound => 44;
     public override int Weight => 20;
-    public override Item CreateItem() => new Item(Game, this);
 }

@@ -29,5 +29,4 @@ internal class NaivetyMushroomFoodItemFactory : MushroomFoodItemFactory
         Game.TryDecreasingAbilityScore(Ability.Wisdom);
         return true;
     }
-    public override Item CreateItem() => new Item(Game, this);
 }

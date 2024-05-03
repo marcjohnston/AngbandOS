@@ -27,5 +27,4 @@ internal class ScimitarWeaponItemFactory : SwordWeaponItemFactory
     };
     public override bool ShowMods => true;
     public override int Weight => 130;
-    public override Item CreateItem() => new Item(Game, this);
 }

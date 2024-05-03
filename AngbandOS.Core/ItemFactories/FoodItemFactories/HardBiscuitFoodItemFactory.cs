@@ -32,5 +32,4 @@ internal class HardBiscuitFoodItemFactory : FoodItemFactory
     /// </summary>
     public override bool VanishesWhenEatenBySkeletons => true;
 
-    public override Item CreateItem() => new Item(Game, this);
 }

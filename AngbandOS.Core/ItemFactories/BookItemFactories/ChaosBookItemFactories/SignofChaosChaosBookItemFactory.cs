@@ -40,5 +40,4 @@ internal class SignOfChaosChaosBookItemFactory : ChaosBookItemFactory
         nameof(ChaosSpellTeleportSelf)
     };
 
-    public override Item CreateItem() => new Item(Game, this);
 }

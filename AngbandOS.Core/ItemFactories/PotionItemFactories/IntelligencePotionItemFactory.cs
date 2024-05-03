@@ -32,5 +32,4 @@ internal class IntelligencePotionItemFactory : PotionItemFactory
         // Intelligence increases your intelligence
         return Game.TryIncreasingAbilityScore(Ability.Intelligence);
     }
-    public override Item CreateItem() => new Item(Game, this);
 }

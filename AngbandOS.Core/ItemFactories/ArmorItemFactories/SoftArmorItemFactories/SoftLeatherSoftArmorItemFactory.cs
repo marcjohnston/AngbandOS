@@ -25,5 +25,4 @@ internal class SoftLeatherSoftArmorItemFactory : SoftArmorItemFactory
         (3, 1)
     };
     public override int Weight => 80;
-    public override Item CreateItem() => new Item(Game, this);
 }

@@ -241,7 +241,7 @@ internal class Store
                 {
                     continue;
                 }
-                newItem = itemFactory.CreateItem();
+                newItem = new Item(Game, itemFactory);
             }
             else
             {
@@ -252,7 +252,7 @@ internal class Store
                 level = Game.RandomBetween(1, Constants.StoreObjLevel);
 
                 // Create the item.
-                newItem = itemFactory.CreateItem();
+                newItem = new Item(Game, itemFactory);
             }
 
             // Apply magic to the item.

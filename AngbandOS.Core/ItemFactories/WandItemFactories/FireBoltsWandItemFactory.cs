@@ -31,5 +31,4 @@ internal class FireBoltsWandItemFactory : WandItemFactory
         game.FireBoltOrBeam(20, game.SingletonRepository.Get<Projectile>(nameof(FireProjectile)), dir, Game.DiceRoll(6, 8));
         return true;
     }
-    public override Item CreateItem() => new Item(Game, this);
 }

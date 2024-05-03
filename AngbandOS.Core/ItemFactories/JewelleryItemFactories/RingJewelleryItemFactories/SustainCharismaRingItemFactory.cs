@@ -25,5 +25,4 @@ internal class SustainCharismaRingItemFactory : RingItemFactory
     };
     public override bool SustCha => true;
     public override int Weight => 2;
-    public override Item CreateItem() => new Item(Game, this);
 }

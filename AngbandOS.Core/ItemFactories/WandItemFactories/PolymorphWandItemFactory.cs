@@ -30,5 +30,4 @@ internal class PolymorphWandItemFactory : WandItemFactory
     {
         return game.PolyMonster(dir);
     }
-    public override Item CreateItem() => new Item(Game, this);
 }

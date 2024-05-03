@@ -48,5 +48,4 @@ internal class PoisonPotionItemFactory : PotionItemFactory
         Game.Project(who, 2, y, x, 3, Game.SingletonRepository.Get<Projectile>(nameof(PoisProjectile)), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
         return true;
     }
-    public override Item CreateItem() => new Item(Game, this);
 }

@@ -32,5 +32,4 @@ internal class StrengthPotionItemFactory : PotionItemFactory
         // Strength increases your strength
         return Game.TryIncreasingAbilityScore(Ability.Strength);
     }
-    public override Item CreateItem() => new Item(Game, this);
 }

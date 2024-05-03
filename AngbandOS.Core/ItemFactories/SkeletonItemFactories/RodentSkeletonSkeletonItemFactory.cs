@@ -25,5 +25,4 @@ internal class RodentSkeletonSkeletonItemFactory : SkeletonItemFactory
         (1, 1)
     };
     public override int Weight => 10;
-    public override Item CreateItem() => new Item(Game, this);
 }

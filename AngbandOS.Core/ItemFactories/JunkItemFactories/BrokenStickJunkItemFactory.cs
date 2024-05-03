@@ -24,5 +24,4 @@ internal class BrokenStickJunkItemFactory : JunkItemFactory
     public override int DamageSides => 1;
     public override string FriendlyName => "& Broken Stick~";
     public override int Weight => 3;
-    public override Item CreateItem() => new Item(Game, this);
 }

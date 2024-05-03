@@ -29,5 +29,4 @@ internal class AggravateMonsterScrollItemFactory : ScrollItemFactory
         Game.AggravateMonsters();
         eventArgs.Identified = true;
     }
-    public override Item CreateItem() => new Item(Game, this);
 }

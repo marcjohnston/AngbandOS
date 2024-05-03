@@ -25,5 +25,4 @@ internal class SlowDigestionAmuletJeweleryItemFactory : AmuletJeweleryItemFactor
     };
     public override bool SlowDigest => true;
     public override int Weight => 3;
-    public override Item CreateItem() => new Item(Game, this);
 }

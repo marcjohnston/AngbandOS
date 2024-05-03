@@ -20,5 +20,4 @@ internal class NenyaRingItemFactory : RingItemFactory
     public override bool InstaArt => true;
     public override int LevelNormallyFound => 90;
     public override int Weight => 2;
-    public override Item CreateItem() => new Item(Game, this);
 }

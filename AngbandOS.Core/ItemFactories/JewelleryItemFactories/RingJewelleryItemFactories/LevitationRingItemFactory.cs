@@ -25,5 +25,4 @@ internal class LevitationRingItemFactory : RingItemFactory
         (5, 1)
     };
     public override int Weight => 2;
-    public override Item CreateItem() => new Item(Game, this);
 }

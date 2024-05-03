@@ -28,5 +28,4 @@ internal class BrokenDaggerWeaponItemFactory : SwordWeaponItemFactory
     public override int BonusDamage => -4;
     public override int BonusHit => -2;
     public override int Weight => 5;
-    public override Item CreateItem() => new Item(Game, this);
 }

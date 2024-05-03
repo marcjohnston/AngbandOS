@@ -26,5 +26,4 @@ internal class PintOfFineWineFoodItemFactory : FoodItemFactory
         Game.MsgPrint("That tastes good.");
         return true;
     }
-    public override Item CreateItem() => new Item(Game, this);
 }

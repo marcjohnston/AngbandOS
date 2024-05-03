@@ -29,5 +29,4 @@ internal class AdamantitePlateMailHardArmorItemFactory : HardArmorItemFactory
     };
     public override int BonusHit => -4;
     public override int Weight => 420;
-    public override Item CreateItem() => new Item(Game, this);
 }

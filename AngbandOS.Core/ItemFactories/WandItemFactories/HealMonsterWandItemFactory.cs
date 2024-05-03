@@ -29,5 +29,4 @@ internal class HealMonsterWandItemFactory : WandItemFactory
     {
         return game.HealMonster(dir);
     }
-    public override Item CreateItem() => new Item(Game, this);
 }

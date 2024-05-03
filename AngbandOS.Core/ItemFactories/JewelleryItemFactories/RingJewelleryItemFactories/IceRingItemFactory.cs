@@ -42,5 +42,4 @@ internal class IceRingItemFactory : RingItemFactory, IItemsCanBeActivated
     public override bool ResCold => true;
     public override int BonusArmorClass => 15;
     public override int Weight => 2;
-    public override Item CreateItem() => new Item(Game, this);
 }

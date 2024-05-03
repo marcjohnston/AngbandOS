@@ -35,5 +35,4 @@ internal class HallucinationMushroomFoodItemFactory : MushroomFoodItemFactory
         }
         return false;
     }
-    public override Item CreateItem() => new Item(Game, this);
 }

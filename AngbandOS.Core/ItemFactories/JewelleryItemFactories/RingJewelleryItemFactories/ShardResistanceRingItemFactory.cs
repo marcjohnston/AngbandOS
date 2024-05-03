@@ -25,5 +25,4 @@ internal class ShardResistanceRingItemFactory : RingItemFactory
     };
     public override bool ResShards => true;
     public override int Weight => 2;
-    public override Item CreateItem() => new Item(Game, this);
 }

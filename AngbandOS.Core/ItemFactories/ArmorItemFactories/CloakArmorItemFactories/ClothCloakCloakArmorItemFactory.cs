@@ -26,5 +26,4 @@ internal class ClothCloakCloakArmorItemFactory : CloakArmorItemFactory
         (20, 1)
     };
     public override int Weight => 10;
-    public override Item CreateItem() => new Item(Game, this);
 }

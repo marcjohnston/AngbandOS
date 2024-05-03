@@ -36,5 +36,4 @@ internal class SearchingAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
     };
     public override bool Search => true;
     public override int Weight => 3;
-    public override Item CreateItem() => new Item(Game, this);
 }

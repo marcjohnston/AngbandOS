@@ -30,5 +30,4 @@ internal class MassCarnageScrollItemFactory : ScrollItemFactory
         Game.RunScriptBool(nameof(MassCarnageScript), true);
         eventArgs.Identified = true;
     }
-    public override Item CreateItem() => new Item(Game, this);
 }

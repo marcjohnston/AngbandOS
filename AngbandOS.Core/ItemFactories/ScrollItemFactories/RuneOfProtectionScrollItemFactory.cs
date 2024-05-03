@@ -30,5 +30,4 @@ internal class RuneOfProtectionScrollItemFactory : ScrollItemFactory
         Game.RunScript(nameof(ElderSignScript));
         eventArgs.Identified = true;
     }
-    public override Item CreateItem() => new Item(Game, this);
 }

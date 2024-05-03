@@ -27,5 +27,4 @@ internal class TulwarWeaponItemFactory : SwordWeaponItemFactory
     };
     public override bool ShowMods => true;
     public override int Weight => 100;
-    public override Item CreateItem() => new Item(Game, this);
 }

@@ -31,5 +31,4 @@ internal class MagicMissileWandItemFactory : WandItemFactory
         game.FireBoltOrBeam(20, game.SingletonRepository.Get<Projectile>(nameof(MissileProjectile)), dir, Game.DiceRoll(2, 6));
         return true;
     }
-    public override Item CreateItem() => new Item(Game, this);
 }

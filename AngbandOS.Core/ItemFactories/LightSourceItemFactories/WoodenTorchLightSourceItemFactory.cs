@@ -118,7 +118,6 @@ internal class WoodenTorchLightSourceItemFactory : LightSourceItemFactory
     /// Returns a new WoodenTorchLightSourceItem.
     /// </summary>
     /// <returns></returns>
-    public override Item CreateItem() => new Item(Game, this);
 
     /// <summary>
     /// Returns a radius of 1 because a torch provides light shorter than the default 2 radius for a typical light source.

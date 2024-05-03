@@ -27,5 +27,4 @@ internal class SlingBowWeaponItemFactory : BowWeaponItemFactory
     public override int Weight => 5;
     public override int MissileDamageMultiplier => 2;
     public override ItemTypeEnum AmmunitionItemCategory => ItemTypeEnum.Shot;
-    public override Item CreateItem() => new Item(Game, this);
 }

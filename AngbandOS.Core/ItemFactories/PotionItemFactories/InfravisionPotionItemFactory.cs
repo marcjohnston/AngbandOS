@@ -30,5 +30,4 @@ internal class InfravisionPotionItemFactory : PotionItemFactory
         // Infravision gives you timed infravision
         return Game.InfravisionTimer.AddTimer(100 + Game.DieRoll(100));
     }
-    public override Item CreateItem() => new Item(Game, this);
 }

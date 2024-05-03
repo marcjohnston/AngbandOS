@@ -28,5 +28,4 @@ internal class MaceOfDisruptionHaftedWeaponItemFactory : HaftedWeaponItemFactory
     public override bool ShowMods => true;
     public override bool SlayUndead => true;
     public override int Weight => 400;
-    public override Item CreateItem() => new Item(Game, this);
 }

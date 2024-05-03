@@ -27,5 +27,4 @@ internal class LargeLeatherShieldArmorItemFactory : ShieldArmorItemFactory
         (15, 1)
     };
     public override int Weight => 100;
-    public override Item CreateItem() => new Item(Game, this);
 }

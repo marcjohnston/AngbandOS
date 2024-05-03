@@ -28,5 +28,4 @@ internal class TwoHandedSwordWeaponItemFactory : SwordWeaponItemFactory
     };
     public override bool ShowMods => true;
     public override int Weight => 200;
-    public override Item CreateItem() => new Item(Game, this);
 }

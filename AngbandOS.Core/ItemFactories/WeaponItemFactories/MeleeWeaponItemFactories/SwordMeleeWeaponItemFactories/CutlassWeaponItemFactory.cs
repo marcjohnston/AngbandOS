@@ -27,5 +27,4 @@ internal class CutlassWeaponItemFactory : SwordWeaponItemFactory
     };
     public override bool ShowMods => true;
     public override int Weight => 110;
-    public override Item CreateItem() => new Item(Game, this);
 }

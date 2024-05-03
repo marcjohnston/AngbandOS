@@ -45,5 +45,4 @@ internal class ResistanceAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
     public override bool ResFire => true;
     public override int Weight => 3;
     public override bool KindIsGood => true;
-    public override Item CreateItem() => new Item(Game, this);
 }

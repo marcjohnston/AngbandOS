@@ -37,5 +37,4 @@ internal class GemstoneLightSourceItemFactory : LightSourceItemFactory
 
     public override bool ProvidesSunlight => true;
 
-    public override Item CreateItem() => new Item(Game, this);
 }

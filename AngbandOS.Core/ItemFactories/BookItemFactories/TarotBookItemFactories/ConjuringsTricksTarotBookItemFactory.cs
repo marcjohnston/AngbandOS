@@ -27,7 +27,6 @@ internal class ConjuringsTricksTarotBookItemFactory : TarotBookItemFactory
     };
     public override int Weight => 30;
     public override bool KindIsGood => false;
-    public override Item CreateItem() => new Item(Game, this);
 
     protected override string[] SpellNames => new string[]
     {

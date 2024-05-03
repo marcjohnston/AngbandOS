@@ -30,5 +30,4 @@ internal class BoldnessPotionItemFactory : PotionItemFactory
         // Boldness stops you being afraid
         return Game.FearTimer.ResetTimer();
     }
-    public override Item CreateItem() => new Item(Game, this);
 }

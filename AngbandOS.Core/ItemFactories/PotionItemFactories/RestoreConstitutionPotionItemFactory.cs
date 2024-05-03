@@ -30,5 +30,4 @@ internal class RestoreConstitutionPotionItemFactory : PotionItemFactory
         // Restore constitution restores your constitution
         return Game.TryRestoringAbilityScore(Ability.Constitution);
     }
-    public override Item CreateItem() => new Item(Game, this);
 }

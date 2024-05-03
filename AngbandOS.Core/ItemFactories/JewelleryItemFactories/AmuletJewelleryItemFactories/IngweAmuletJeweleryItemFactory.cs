@@ -20,5 +20,4 @@ internal class IngweAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
     public override bool InstaArt => true;
     public override int LevelNormallyFound => 60;
     public override int Weight => 3;
-    public override Item CreateItem() => new Item(Game, this);
 }

@@ -28,5 +28,4 @@ internal class PartialPlateHardArmorItemFactory : HardArmorItemFactory
     };
     public override int BonusHit => -3;
     public override int Weight => 260;
-    public override Item CreateItem() => new Item(Game, this);
 }

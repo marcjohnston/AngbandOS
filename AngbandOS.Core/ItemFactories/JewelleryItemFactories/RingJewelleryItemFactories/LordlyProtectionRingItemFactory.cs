@@ -37,5 +37,4 @@ internal class LordlyProtectionRingItemFactory : RingItemFactory
     public override bool ResDisen => true;
     public override bool ResPois => true;
     public override int Weight => 2;
-    public override Item CreateItem() => new Item(Game, this);
 }

@@ -29,5 +29,4 @@ internal class WordOfRecallScrollItemFactory : ScrollItemFactory
         Game.RunScript(nameof(ToggleRecallScript));
         eventArgs.Identified = true;
     }
-    public override Item CreateItem() => new Item(Game, this);
 }

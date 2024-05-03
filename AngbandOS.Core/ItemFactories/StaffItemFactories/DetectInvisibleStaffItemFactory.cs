@@ -34,5 +34,4 @@ internal class DetectInvisibleStaffItemFactory : StaffItemFactory
             eventArgs.Identified = true;
         }
     }
-    public override Item CreateItem() => new Item(Game, this);
 }

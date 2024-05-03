@@ -55,5 +55,4 @@ internal class RestoringMushroomFoodItemFactory : MushroomFoodItemFactory
         }
         return ident;
     }
-    public override Item CreateItem() => new Item(Game, this);
 }

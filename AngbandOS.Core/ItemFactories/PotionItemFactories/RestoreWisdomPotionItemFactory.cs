@@ -30,5 +30,4 @@ internal class RestoreWisdomPotionItemFactory : PotionItemFactory
         // Restore wisdom restores your wisdom
         return Game.TryRestoringAbilityScore(Ability.Wisdom);
     }
-    public override Item CreateItem() => new Item(Game, this);
 }

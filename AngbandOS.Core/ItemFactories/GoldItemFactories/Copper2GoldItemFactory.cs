@@ -19,5 +19,4 @@ internal class Copper2GoldItemFactory : GoldItemFactory
     public override int GoldValue => 5;
     public override string FriendlyName => "copper";
     public override int LevelNormallyFound => 1;
-    public override Item CreateItem() => new Item(Game, this);
 }

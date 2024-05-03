@@ -20,5 +20,4 @@ internal class AdamantiteGoldItemFactory : GoldItemFactory
     public override string FriendlyName => "adamantite";
     public override int LevelNormallyFound => 1;
 
-    public override Item CreateItem() => new Item(Game, this);
 }

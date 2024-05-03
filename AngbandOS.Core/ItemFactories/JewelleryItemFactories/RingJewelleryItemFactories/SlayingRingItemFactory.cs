@@ -41,5 +41,4 @@ internal class SlayingRingItemFactory : RingItemFactory
     };
     public override bool ShowMods => true;
     public override int Weight => 2;
-    public override Item CreateItem() => new Item(Game, this);
 }

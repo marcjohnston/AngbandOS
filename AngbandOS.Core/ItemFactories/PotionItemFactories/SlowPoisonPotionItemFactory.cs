@@ -30,5 +30,4 @@ internal class SlowPoisonPotionItemFactory : PotionItemFactory
         // Slow poison halves the remaining duration of any poison you have
         return Game.PoisonTimer.SetTimer(Game.PoisonTimer.Value / 2);
     }
-    public override Item CreateItem() => new Item(Game, this);
 }

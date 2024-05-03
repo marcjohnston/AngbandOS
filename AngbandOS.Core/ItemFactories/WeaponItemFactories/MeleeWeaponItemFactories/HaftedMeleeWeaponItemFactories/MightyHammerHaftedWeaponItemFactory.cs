@@ -24,5 +24,4 @@ internal class MightyHammerHaftedWeaponItemFactory : HaftedWeaponItemFactory
     public override int LevelNormallyFound => 15;
     public override bool ShowMods => true;
     public override int Weight => 200;
-    public override Item CreateItem() => new Item(Game, this);
 }

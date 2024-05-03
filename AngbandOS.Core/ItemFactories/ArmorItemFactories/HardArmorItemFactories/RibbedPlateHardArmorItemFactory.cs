@@ -28,5 +28,4 @@ internal class RibbedPlateHardArmorItemFactory : HardArmorItemFactory
     };
     public override int BonusHit => -3;
     public override int Weight => 380;
-    public override Item CreateItem() => new Item(Game, this);
 }

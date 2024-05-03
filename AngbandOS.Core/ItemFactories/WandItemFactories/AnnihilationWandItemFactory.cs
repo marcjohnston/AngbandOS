@@ -34,5 +34,4 @@ internal class AnnihilationWandItemFactory : WandItemFactory
     {
         return game.DrainLife(dir, 125);
     }
-    public override Item CreateItem() => new Item(Game, this);
 }

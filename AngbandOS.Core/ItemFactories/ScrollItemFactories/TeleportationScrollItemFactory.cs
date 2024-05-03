@@ -28,5 +28,4 @@ internal class TeleportationScrollItemFactory : ScrollItemFactory
         Game.RunScriptInt(nameof(TeleportSelfScript), 100);
         eventArgs.Identified = true;
     }
-    public override Item CreateItem() => new Item(Game, this);
 }

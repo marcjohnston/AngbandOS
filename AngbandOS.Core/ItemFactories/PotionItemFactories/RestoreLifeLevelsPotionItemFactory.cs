@@ -30,5 +30,4 @@ internal class RestoreLifeLevelsPotionItemFactory : PotionItemFactory
         // Restore life levels restores any lost experience
         return Game.RunSuccessfulScript(nameof(RestoreLevelScript));
     }
-    public override Item CreateItem() => new Item(Game, this);
 }

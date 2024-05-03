@@ -42,5 +42,4 @@ internal class SpeedStaffItemFactory : StaffItemFactory
             Game.HasteTimer.AddTimer(5);
         }
     }
-    public override Item CreateItem() => new Item(Game, this);
 }

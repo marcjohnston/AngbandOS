@@ -61,5 +61,4 @@ internal class RestorationRodItemFactory : RodItemFactory
         // The rod needs 999 turns to regenerate.
         zapRodEvent.Item.RodRechargeTimeRemaining = RodRechargeTime;
     }
-    public override Item CreateItem() => new Item(Game, this);
 }

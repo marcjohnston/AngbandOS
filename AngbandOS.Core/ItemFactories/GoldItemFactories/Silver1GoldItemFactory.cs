@@ -19,5 +19,4 @@ internal class Silver1GoldItemFactory : GoldItemFactory
     public override int GoldValue => 7;
     public override string FriendlyName => "silver";
     public override int LevelNormallyFound => 1;
-    public override Item CreateItem() => new Item(Game, this);
 }

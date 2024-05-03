@@ -62,5 +62,4 @@ internal class SlimeMoldJuicePotionItemFactory : PotionItemFactory
         return true;
     }
 
-    public override Item CreateItem() => new Item(Game, this);
 }

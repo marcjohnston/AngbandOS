@@ -36,5 +36,4 @@ internal class AntiTeleportationAmuletJeweleryItemFactory : AmuletJeweleryItemFa
     public override bool NoTele => true;
     public override int Weight => 3;
 
-    public override Item CreateItem() => new Item(Game, this);
 }

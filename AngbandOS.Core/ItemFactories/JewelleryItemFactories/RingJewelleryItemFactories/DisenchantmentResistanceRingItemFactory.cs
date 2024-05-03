@@ -25,5 +25,4 @@ internal class DisenchantmentResistanceRingItemFactory : RingItemFactory
     };
     public override bool ResDisen => true;
     public override int Weight => 2;
-    public override Item CreateItem() => new Item(Game, this);
 }

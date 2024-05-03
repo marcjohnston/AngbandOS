@@ -32,5 +32,4 @@ internal class ColdBallsWandItemFactory : WandItemFactory
         game.FireBall(game.SingletonRepository.Get<Projectile>(nameof(ColdProjectile)), dir, 48, 2);
         return true;
     }
-    public override Item CreateItem() => new Item(Game, this);
 }

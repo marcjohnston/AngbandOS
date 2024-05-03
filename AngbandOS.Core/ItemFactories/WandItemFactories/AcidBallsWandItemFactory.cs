@@ -32,5 +32,4 @@ internal class AcidBallsWandItemFactory : WandItemFactory
         game.FireBall(game.SingletonRepository.Get<Projectile>(nameof(AcidProjectile)), dir, 60, 2);
         return true;
     }
-    public override Item CreateItem() => new Item(Game, this);
 }

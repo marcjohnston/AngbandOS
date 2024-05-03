@@ -29,5 +29,4 @@ internal class RustyChainMailHardArmorItemFactory : HardArmorItemFactory
     public override int BonusArmorClass => -8;
     public override int BonusHit => -5;
     public override int Weight => 200;
-    public override Item CreateItem() => new Item(Game, this);
 }

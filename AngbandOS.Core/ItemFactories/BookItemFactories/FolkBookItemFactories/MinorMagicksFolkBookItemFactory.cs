@@ -40,5 +40,4 @@ internal class MinorMagicksFolkBookItemFactory : FolkBookItemFactory
         nameof(FolkSpellResistFire)
     };
 
-    public override Item CreateItem() => new Item(Game, this);
 }

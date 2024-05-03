@@ -32,5 +32,4 @@ internal class LightWandItemFactory : WandItemFactory
         game.LightLine(dir);
         return true;
     }
-    public override Item CreateItem() => new Item(Game, this);
 }

@@ -25,5 +25,4 @@ internal class SustainConstitutionRingItemFactory : RingItemFactory
     };
     public override bool SustCon => true;
     public override int Weight => 2;
-    public override Item CreateItem() => new Item(Game, this);
 }

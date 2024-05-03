@@ -30,5 +30,4 @@ internal class ResistHeatPotionItemFactory : PotionItemFactory
         // Resist heat gives you timed fire resistance
         return Game.FireResistanceTimer.AddTimer(Game.DieRoll(10) + 10);
     }
-    public override Item CreateItem() => new Item(Game, this);
 }

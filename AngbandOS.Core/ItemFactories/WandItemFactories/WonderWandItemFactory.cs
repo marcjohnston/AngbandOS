@@ -122,5 +122,4 @@ internal class WonderWandItemFactory : WandItemFactory
                 throw new Exception("Internal error.");
         }
     }
-    public override Item CreateItem() => new Item(Game, this);
 }

@@ -27,5 +27,4 @@ internal class LeadFilledMaceHaftedWeaponItemFactory : HaftedWeaponItemFactory
     };
     public override bool ShowMods => true;
     public override int Weight => 180;
-    public override Item CreateItem() => new Item(Game, this);
 }

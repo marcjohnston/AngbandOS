@@ -50,5 +50,4 @@ internal class SpeedRingItemFactory : RingItemFactory
     public override int Weight => 2;
 
     public override bool KindIsGood => true;
-    public override Item CreateItem() => new Item(Game, this);
 }

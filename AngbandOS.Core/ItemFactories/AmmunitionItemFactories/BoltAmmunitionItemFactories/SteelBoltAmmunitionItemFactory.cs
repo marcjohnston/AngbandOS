@@ -28,5 +28,4 @@ internal class SteelBoltAmmunitionItemFactory : BoltAmmunitionItemFactory
     };
     public override bool ShowMods => true;
     public override int Weight => 3;
-    public override Item CreateItem() => new Item(Game, this);
 }

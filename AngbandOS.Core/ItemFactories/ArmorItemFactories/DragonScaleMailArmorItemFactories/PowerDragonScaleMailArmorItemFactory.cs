@@ -59,5 +59,4 @@ internal class PowerDragonScaleMailArmorItemFactory : DragonScaleMailArmorItemFa
     public override int BonusArmorClass => 15;
     public override int BonusHit => -3;
     public override int Weight => 250;
-    public override Item CreateItem() => new Item(Game, this);
 }

@@ -26,5 +26,4 @@ internal class ResistAcidAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
     };
     public override bool ResAcid => true;
     public override int Weight => 3;
-    public override Item CreateItem() => new Item(Game, this);
 }

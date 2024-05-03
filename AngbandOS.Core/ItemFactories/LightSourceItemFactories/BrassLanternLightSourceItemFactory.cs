@@ -113,5 +113,4 @@ internal class BrassLanternLightSourceItemFactory : LightSourceItemFactory
         fuelSource.ItemOptimize();
         Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateTorchRadiusFlaggedAction)).Set();
     }
-    public override Item CreateItem() => new Item(Game, this);
 }

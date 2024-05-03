@@ -29,5 +29,4 @@ internal class UglinessPotionItemFactory : PotionItemFactory
         // Ugliness tries to reduce your charisma
         return Game.TryDecreasingAbilityScore(Ability.Charisma);
     }
-    public override Item CreateItem() => new Item(Game, this);
 }

@@ -35,5 +35,4 @@ internal class ParalysisMushroomFoodItemFactory : MushroomFoodItemFactory
         }
         return false;
     }
-    public override Item CreateItem() => new Item(Game, this);
 }

@@ -26,5 +26,4 @@ internal class ChaosResistanceRingItemFactory : RingItemFactory
     public override bool ResChaos => true;
     public override bool ResConf => true;
     public override int Weight => 2;
-    public override Item CreateItem() => new Item(Game, this);
 }

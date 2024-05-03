@@ -30,5 +30,4 @@ internal class TeleportOtherWandItemFactory : WandItemFactory
     {
         return game.TeleportMonster(dir);
     }
-    public override Item CreateItem() => new Item(Game, this);
 }

@@ -38,5 +38,4 @@ internal class PieceOfDwarfBreadFoodItemFactory : FoodItemFactory
         Game.MsgPrint("You look at the dwarf bread, and don't feel quite so hungry anymore.");
         return true;
     }
-    public override Item CreateItem() => new Item(Game, this);
 }

@@ -29,5 +29,4 @@ internal class BerserkStrengthPotionItemFactory : PotionItemFactory
     {
         return Game.RunNoticeableScript(nameof(SuperHeroism25p1d25ResetFearAndHeal30Script));
     }
-    public override Item CreateItem() => new Item(Game, this);
 }

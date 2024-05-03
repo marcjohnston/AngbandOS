@@ -43,5 +43,4 @@ internal class HeroismPotionItemFactory : PotionItemFactory
         }
         return identified;
     }
-    public override Item CreateItem() => new Item(Game, this);
 }

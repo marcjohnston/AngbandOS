@@ -29,5 +29,4 @@ internal class DaggerWeaponItemFactory : SwordWeaponItemFactory
     };
     public override bool ShowMods => true;
     public override int Weight => 12;
-    public override Item CreateItem() => new Item(Game, this);
 }

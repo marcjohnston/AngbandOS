@@ -27,5 +27,4 @@ internal class HalberdPolearmWeaponItemFactory : PolearmWeaponItemFactory
     };
     public override bool ShowMods => true;
     public override int Weight => 190;
-    public override Item CreateItem() => new Item(Game, this);
 }

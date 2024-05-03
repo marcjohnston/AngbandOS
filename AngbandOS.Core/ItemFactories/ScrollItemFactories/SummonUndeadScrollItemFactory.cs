@@ -33,5 +33,4 @@ internal class SummonUndeadScrollItemFactory : ScrollItemFactory
             }
         }
     }
-    public override Item CreateItem() => new Item(Game, this);
 }

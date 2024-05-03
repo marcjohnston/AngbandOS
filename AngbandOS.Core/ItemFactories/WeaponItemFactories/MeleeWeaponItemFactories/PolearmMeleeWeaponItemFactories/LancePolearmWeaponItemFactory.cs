@@ -27,5 +27,4 @@ internal class LancePolearmWeaponItemFactory : PolearmWeaponItemFactory
     };
     public override bool ShowMods => true;
     public override int Weight => 300;
-    public override Item CreateItem() => new Item(Game, this);
 }

@@ -35,5 +35,4 @@ internal class WisdomAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
         (20, 1)
     };
     public override int Weight => 3;
-    public override Item CreateItem() => new Item(Game, this);
 }

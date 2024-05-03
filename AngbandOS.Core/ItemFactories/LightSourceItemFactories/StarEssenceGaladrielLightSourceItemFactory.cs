@@ -24,5 +24,4 @@ internal class StarEssenceGaladrielLightSourceItemFactory : LightSourceItemFacto
     public override int LevelNormallyFound => 1;
     public override int Weight => 10;
     public override bool ProvidesSunlight => true;
-    public override Item CreateItem() => new Item(Game, this);
 }

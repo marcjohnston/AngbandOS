@@ -26,5 +26,4 @@ internal class RoundedPebbleShotAmmunitionItemFactory : ShotAmmunitionItemFactor
     public override string FriendlyName => "& Rounded Pebble~";
     public override bool ShowMods => true;
     public override int Weight => 4;
-    public override Item CreateItem() => new Item(Game, this);
 }

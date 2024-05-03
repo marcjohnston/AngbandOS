@@ -29,5 +29,4 @@ internal class AcquirementScrollItemFactory : ScrollItemFactory
         Game.Acquirement(Game.MapY.IntValue, Game.MapX.IntValue, 1, true);
         eventArgs.Identified = true;
     }
-    public override Item CreateItem() => new Item(Game, this);
 }

@@ -30,5 +30,4 @@ internal class DisarmingWandItemFactory : WandItemFactory
     {
         return game.DisarmTrap(dir);
     }
-    public override Item CreateItem() => new Item(Game, this);
 }

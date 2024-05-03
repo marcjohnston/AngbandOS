@@ -55,5 +55,4 @@ internal class NecronomiconDeathBookItemFactory : DeathBookItemFactory
         nameof(DeathSpellWraithform)
     };
 
-    public override Item CreateItem() => new Item(Game, this);
 }

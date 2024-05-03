@@ -32,5 +32,4 @@ internal class SpecialRemoveCurseScrollItemFactory : ScrollItemFactory
         Game.RunScript(nameof(RemoveAllCurseScript));
         eventArgs.Identified = true;
     }
-    public override Item CreateItem() => new Item(Game, this);
 }

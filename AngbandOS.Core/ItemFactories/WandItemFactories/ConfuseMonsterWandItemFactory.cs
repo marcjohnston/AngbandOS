@@ -30,5 +30,4 @@ internal class ConfuseMonsterWandItemFactory : WandItemFactory
     {
         return game.ConfuseMonster(dir, 10);
     }
-    public override Item CreateItem() => new Item(Game, this);
 }

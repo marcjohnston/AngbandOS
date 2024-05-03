@@ -40,5 +40,4 @@ internal class SearchingRingItemFactory : RingItemFactory
     };
     public override bool Search => true;
     public override int Weight => 2;
-    public override Item CreateItem() => new Item(Game, this);
 }

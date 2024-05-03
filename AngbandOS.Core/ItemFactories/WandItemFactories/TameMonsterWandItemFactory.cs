@@ -30,5 +30,4 @@ internal class TameMonsterWandItemFactory : WandItemFactory
     {
         return game.CharmMonster(dir, 45);
     }
-    public override Item CreateItem() => new Item(Game, this);
 }

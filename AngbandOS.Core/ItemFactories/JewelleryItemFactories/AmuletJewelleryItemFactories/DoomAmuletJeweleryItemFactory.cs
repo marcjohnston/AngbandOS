@@ -38,5 +38,4 @@ internal class DoomAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
     public override bool Str => true;
     public override int Weight => 3;
     public override bool Wis => true;
-    public override Item CreateItem() => new Item(Game, this);
 }

@@ -37,5 +37,4 @@ internal class AccuracyRingItemFactory : RingItemFactory
         (20, 1)
     };
     public override int Weight => 2;
-    public override Item CreateItem() => new Item(Game, this);
 }

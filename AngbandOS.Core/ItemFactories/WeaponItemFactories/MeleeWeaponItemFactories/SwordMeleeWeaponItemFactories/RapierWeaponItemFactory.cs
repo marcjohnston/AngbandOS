@@ -27,5 +27,4 @@ internal class RapierWeaponItemFactory : SwordWeaponItemFactory
     };
     public override bool ShowMods => true;
     public override int Weight => 40;
-    public override Item CreateItem() => new Item(Game, this);
 }

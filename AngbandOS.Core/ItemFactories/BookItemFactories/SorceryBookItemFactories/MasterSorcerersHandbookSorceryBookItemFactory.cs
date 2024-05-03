@@ -27,7 +27,6 @@ internal class MasterSorcerersHandbookSorceryBookItemFactory : SorceryBookItemFa
     };
     public override int Weight => 30;
     public override bool KindIsGood => false;
-    public override Item CreateItem() => new Item(Game, this);
 
     protected override string[] SpellNames => new string[]
     {

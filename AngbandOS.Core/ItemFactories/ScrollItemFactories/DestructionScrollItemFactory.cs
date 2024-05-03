@@ -28,5 +28,4 @@ internal class DestructionScrollItemFactory : ScrollItemFactory
         Game.DestroyArea(Game.MapY.IntValue, Game.MapX.IntValue, 15);
         eventArgs.Identified = true;
     }
-    public override Item CreateItem() => new Item(Game, this);
 }

@@ -30,5 +30,4 @@ internal class CarnageScrollItemFactory : ScrollItemFactory
         Game.RunScript(nameof(GenocideScript));
         eventArgs.Identified = true;
     }
-    public override Item CreateItem() => new Item(Game, this);
 }

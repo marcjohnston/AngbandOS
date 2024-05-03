@@ -27,5 +27,4 @@ internal class LargeMetalShieldArmorItemFactory : ShieldArmorItemFactory
         (30, 1)
     };
     public override int Weight => 120;
-    public override Item CreateItem() => new Item(Game, this);
 }

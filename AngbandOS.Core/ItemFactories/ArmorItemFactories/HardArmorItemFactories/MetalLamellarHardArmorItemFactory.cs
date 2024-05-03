@@ -28,5 +28,4 @@ internal class MetalLamellarHardArmorItemFactory : HardArmorItemFactory
     };
     public override int BonusHit => -3;
     public override int Weight => 340;
-    public override Item CreateItem() => new Item(Game, this);
 }

@@ -716,11 +716,6 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey
     public abstract int PackSort { get; }
 
     /// <summary>
-    /// Returns a new item.
-    /// </summary>
-    public abstract Item CreateItem();
-
-    /// <summary>
     /// Drains charges from the item and returns true, if charges were drained; false, otherwise.  Returns false, by default.
     /// </summary>
     /// <param name="monster"></param>

@@ -45,5 +45,4 @@ internal class MagiAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
     public override int Weight => 3;
 
     public override bool KindIsGood => true;
-    public override Item CreateItem() => new Item(Game, this);
 }

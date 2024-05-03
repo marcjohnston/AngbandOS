@@ -29,7 +29,7 @@ internal class CreateNamedArtifactScript : Script, IScript
             return;
         }
         aPtr.CurNum = 1;
-        Item qPtr = aPtr.BaseItemFactory.CreateItem();
+        Item qPtr = new Item(Game, aPtr.BaseItemFactory);
         qPtr.FixedArtifact = Game.SingletonRepository.Get<FixedArtifact>(aIdx);
         qPtr.TypeSpecificValue = aPtr.InitialTypeSpecificValue;
         qPtr.ArmorClass = aPtr.Ac;

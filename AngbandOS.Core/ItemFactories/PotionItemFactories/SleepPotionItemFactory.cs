@@ -43,5 +43,4 @@ internal class SleepPotionItemFactory : PotionItemFactory
         Game.Project(who, 2, y, x, 0, Game.SingletonRepository.Get<Projectile>(nameof(OldSleepProjectile)), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
         return true;
     }
-    public override Item CreateItem() => new Item(Game, this);
 }

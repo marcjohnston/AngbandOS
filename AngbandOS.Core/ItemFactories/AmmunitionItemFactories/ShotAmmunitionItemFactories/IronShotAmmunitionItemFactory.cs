@@ -27,5 +27,4 @@ internal class IronShotAmmunitionItemFactory : ShotAmmunitionItemFactory
     };
     public override bool ShowMods => true;
     public override int Weight => 5;
-    public override Item CreateItem() => new Item(Game, this);
 }

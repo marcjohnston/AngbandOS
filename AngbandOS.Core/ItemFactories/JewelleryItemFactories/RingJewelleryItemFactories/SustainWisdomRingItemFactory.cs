@@ -25,5 +25,4 @@ internal class SustainWisdomRingItemFactory : RingItemFactory
     };
     public override bool SustWis => true;
     public override int Weight => 2;
-    public override Item CreateItem() => new Item(Game, this);
 }

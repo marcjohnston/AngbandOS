@@ -42,7 +42,6 @@ internal class CeleanoFragmentsTarotBookItemFactory : TarotBookItemFactory
     public override bool IsHighLevelBook => true;
     public override int Weight => 30;
     public override bool KindIsGood => true;
-    public override Item CreateItem() => new Item(Game, this);
 
     protected override string[] SpellNames => new string[]
     {

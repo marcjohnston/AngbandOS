@@ -27,5 +27,4 @@ internal class SteelHelmArmorItemFactory : HelmArmorItemFactory
         (40, 1)
     };
     public override int Weight => 60;
-    public override Item CreateItem() => new Item(Game, this);
 }

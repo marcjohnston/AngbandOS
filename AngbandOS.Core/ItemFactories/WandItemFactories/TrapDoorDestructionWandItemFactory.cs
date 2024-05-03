@@ -30,5 +30,4 @@ internal class TrapDoorDestructionWandItemFactory : WandItemFactory
     {
         return game.DestroyDoor(dir);
     }
-    public override Item CreateItem() => new Item(Game, this);
 }

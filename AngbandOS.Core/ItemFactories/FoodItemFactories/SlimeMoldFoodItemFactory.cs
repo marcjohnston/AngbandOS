@@ -32,5 +32,4 @@ internal class SlimeMoldFoodItemFactory : FoodItemFactory
         slimeMold.Quaff();
         return true;
     }
-    public override Item CreateItem() => new Item(Game, this);
 }

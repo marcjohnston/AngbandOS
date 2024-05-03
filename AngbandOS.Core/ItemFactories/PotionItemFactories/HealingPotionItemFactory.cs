@@ -66,5 +66,4 @@ internal class HealingPotionItemFactory : PotionItemFactory
         Game.Project(who, 2, y, x, Game.DiceRoll(10, 10), Game.SingletonRepository.Get<Projectile>(nameof(OldHealProjectile)), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
         return false;
     }
-    public override Item CreateItem() => new Item(Game, this);
 }

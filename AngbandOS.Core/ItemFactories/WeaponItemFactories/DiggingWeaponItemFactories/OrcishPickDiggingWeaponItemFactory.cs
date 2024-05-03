@@ -29,5 +29,4 @@ internal class OrcishPickDiggingWeaponItemFactory : DiggingWeaponItemFactory
     public override bool ShowMods => true;
     public override bool Tunnel => true;
     public override int Weight => 150;
-    public override Item CreateItem() => new Item(Game, this);
 }

@@ -28,5 +28,4 @@ internal class HardStuddedLeatherSoftArmorItemFactory : SoftArmorItemFactory
     };
     public override int BonusHit => -1;
     public override int Weight => 110;
-    public override Item CreateItem() => new Item(Game, this);
 }

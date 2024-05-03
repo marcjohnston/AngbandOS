@@ -33,5 +33,4 @@ internal class LightningBallsRodItemFactory : RodItemFactory
         zapRodEvent.Identified = true;
         zapRodEvent.Item.RodRechargeTimeRemaining = RodRechargeTime;
     }
-    public override Item CreateItem() => new Item(Game, this);
 }

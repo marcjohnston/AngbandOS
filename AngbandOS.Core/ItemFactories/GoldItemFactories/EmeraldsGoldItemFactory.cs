@@ -19,5 +19,4 @@ internal class EmeraldsGoldItemFactory : GoldItemFactory
     public override int GoldValue => 32;
     public override string FriendlyName => "emeralds";
     public override int LevelNormallyFound => 1;
-    public override Item CreateItem() => new Item(Game, this);
 }

@@ -37,5 +37,4 @@ internal class SummoningStaffItemFactory : StaffItemFactory
             }
         }
     }
-    public override Item CreateItem() => new Item(Game, this);
 }

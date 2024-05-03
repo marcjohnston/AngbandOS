@@ -28,5 +28,4 @@ internal class DoubleChainMailHardArmorItemFactory : HardArmorItemFactory
     };
     public override int BonusHit => -2;
     public override int Weight => 250;
-    public override Item CreateItem() => new Item(Game, this);
 }

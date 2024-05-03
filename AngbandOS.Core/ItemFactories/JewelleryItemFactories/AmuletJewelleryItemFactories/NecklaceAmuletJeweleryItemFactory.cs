@@ -20,5 +20,4 @@ internal class NecklaceAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
     public override bool InstaArt => true;
     public override int LevelNormallyFound => 70;
     public override int Weight => 3;
-    public override Item CreateItem() => new Item(Game, this);
 }

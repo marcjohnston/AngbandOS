@@ -25,5 +25,4 @@ internal class SustainStrengthRingItemFactory : RingItemFactory
     };
     public override bool SustStr => true;
     public override int Weight => 2;
-    public override Item CreateItem() => new Item(Game, this);
 }

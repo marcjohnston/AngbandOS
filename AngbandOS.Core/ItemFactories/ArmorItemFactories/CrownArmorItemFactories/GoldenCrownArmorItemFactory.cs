@@ -27,5 +27,4 @@ internal class GoldenCrownArmorItemFactory : CrownArmorItemFactory
         (45, 1)
     };
     public override int Weight => 30;
-    public override Item CreateItem() => new Item(Game, this);
 }

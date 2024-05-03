@@ -27,5 +27,4 @@ internal class HardLeatherBootsArmorItemFactory : BootsArmorItemFactory
         (5, 1)
     };
     public override int Weight => 40;
-    public override Item CreateItem() => new Item(Game, this);
 }

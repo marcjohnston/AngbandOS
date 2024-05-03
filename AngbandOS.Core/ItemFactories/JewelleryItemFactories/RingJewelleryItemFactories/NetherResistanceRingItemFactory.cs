@@ -26,5 +26,4 @@ internal class NetherResistanceRingItemFactory : RingItemFactory
     };
     public override bool ResNether => true;
     public override int Weight => 2;
-    public override Item CreateItem() => new Item(Game, this);
 }

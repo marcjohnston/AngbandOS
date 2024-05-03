@@ -30,5 +30,4 @@ internal class ResistColdPotionItemFactory : PotionItemFactory
         // Resist cold gives you timed frost resistance
         return Game.ColdResistanceTimer.AddTimer(Game.DieRoll(10) + 10);
     }
-    public override Item CreateItem() => new Item(Game, this);
 }

@@ -35,5 +35,4 @@ internal class SpecialIdentifyScrollItemFactory : ScrollItemFactory
             eventArgs.UsedUp = false;
         }
     }
-    public override Item CreateItem() => new Item(Game, this);
 }

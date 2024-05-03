@@ -37,5 +37,4 @@ internal class SlownessPotionItemFactory : PotionItemFactory
         Game.Project(who, 2, y, x, 5, Game.SingletonRepository.Get<Projectile>(nameof(OldSlowProjectile)), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
         return true;
     }
-    public override Item CreateItem() => new Item(Game, this);
 }

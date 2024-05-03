@@ -44,5 +44,4 @@ internal class RuinationPotionItemFactory : PotionItemFactory
         Game.Project(who, 2, y, x, Game.DiceRoll(25, 25), Game.SingletonRepository.Get<Projectile>(nameof(ExplodeProjectile)), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
         return true;
     }
-    public override Item CreateItem() => new Item(Game, this);
 }

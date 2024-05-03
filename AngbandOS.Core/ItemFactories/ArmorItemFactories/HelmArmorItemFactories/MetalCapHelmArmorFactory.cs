@@ -27,5 +27,4 @@ internal class MetalCapHelmArmorFactory : HelmArmorItemFactory
         (10, 1)
     };
     public override int Weight => 20;
-    public override Item CreateItem() => new Item(Game, this);
 }

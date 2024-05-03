@@ -27,5 +27,4 @@ internal class MetalShodBootsArmorItemFactory : BootsArmorItemFactory
         (20, 1)
     };
     public override int Weight => 80;
-    public override Item CreateItem() => new Item(Game, this);
 }

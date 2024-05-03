@@ -27,5 +27,4 @@ internal class HeavyCrossbowBowWeaponItemFactory : BowWeaponItemFactory
     public override int Weight => 200;
     public override int MissileDamageMultiplier => 4;
     public override ItemTypeEnum AmmunitionItemCategory => ItemTypeEnum.Bolt;
-    public override Item CreateItem() => new Item(Game, this);
 }

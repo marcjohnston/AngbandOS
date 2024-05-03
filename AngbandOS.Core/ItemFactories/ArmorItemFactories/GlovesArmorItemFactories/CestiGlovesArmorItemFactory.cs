@@ -27,5 +27,4 @@ internal class CestiGlovesArmorItemFactory : GlovesArmorItemFactory
         (50, 1)
     };
     public override int Weight => 40;
-    public override Item CreateItem() => new Item(Game, this);
 }

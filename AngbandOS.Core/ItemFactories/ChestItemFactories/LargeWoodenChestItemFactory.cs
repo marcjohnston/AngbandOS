@@ -28,5 +28,4 @@ internal class LargeWoodenChestItemFactory : ChestItemFactory
     public override int Weight => 500;
     public override bool IsSmall => false;
     public override int NumberOfItemsContained => 2;
-    public override Item CreateItem() => new Item(Game, this);
 }

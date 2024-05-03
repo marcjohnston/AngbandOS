@@ -32,5 +32,4 @@ internal class StoneToMudWandItemFactory : WandItemFactory
     {
         return game.WallToMud(dir);
     }
-    public override Item CreateItem() => new Item(Game, this);
 }

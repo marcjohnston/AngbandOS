@@ -42,5 +42,4 @@ internal class SpeedRodItemFactory : RodItemFactory
         }
         zapRodEvent.Item.RodRechargeTimeRemaining = RodRechargeTime;
     }
-    public override Item CreateItem() => new Item(Game, this);
 }

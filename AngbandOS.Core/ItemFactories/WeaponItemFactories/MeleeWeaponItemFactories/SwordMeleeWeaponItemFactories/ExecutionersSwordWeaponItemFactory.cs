@@ -27,5 +27,4 @@ internal class ExecutionersSwordWeaponItemFactory : SwordWeaponItemFactory
     };
     public override bool ShowMods => true;
     public override int Weight => 260;
-    public override Item CreateItem() => new Item(Game, this);
 }

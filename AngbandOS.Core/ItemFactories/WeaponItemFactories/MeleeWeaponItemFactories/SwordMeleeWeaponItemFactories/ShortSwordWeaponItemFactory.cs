@@ -27,5 +27,4 @@ internal class ShortSwordWeaponItemFactory : SwordWeaponItemFactory
     };
     public override bool ShowMods => true;
     public override int Weight => 80;
-    public override Item CreateItem() => new Item(Game, this);
 }

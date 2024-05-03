@@ -29,5 +29,4 @@ internal class PhaseDoorScrollItemFactory : ScrollItemFactory
         Game.RunScript(nameof(PhaseDoorScript));
         eventArgs.Identified = true;
     }
-    public override Item CreateItem() => new Item(Game, this);
 }

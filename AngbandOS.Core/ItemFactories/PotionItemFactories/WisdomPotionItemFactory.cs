@@ -32,5 +32,4 @@ internal class WisdomPotionItemFactory : PotionItemFactory
         // Wisdom increases your wisdom
         return Game.TryIncreasingAbilityScore(Ability.Wisdom);
     }
-    public override Item CreateItem() => new Item(Game, this);
 }

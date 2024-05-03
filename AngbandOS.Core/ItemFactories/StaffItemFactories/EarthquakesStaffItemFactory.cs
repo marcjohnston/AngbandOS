@@ -31,5 +31,4 @@ internal class EarthquakesStaffItemFactory : StaffItemFactory
         Game.Earthquake(Game.MapY.IntValue, Game.MapX.IntValue, 10);
         eventArgs.Identified = true;
     }
-    public override Item CreateItem() => new Item(Game, this);
 }

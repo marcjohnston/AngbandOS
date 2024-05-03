@@ -302,9 +302,9 @@ internal sealed class Item : IComparable<Item>
 
         // TODO: The below statements should be in the ApplyMagic method for each factory.
         TypeSpecificValue = Factory.InitialTypeSpecificValue;
-        TurnsOfLightRemaining = Factory.InitialTurnsOfLight;
         NutritionalValue = Factory.InitialNutritionalValue;        
         GoldPieces = Factory.InitialGoldPieces;
+        TurnsOfLightRemaining = Factory.InitialTurnsOfLight;
         Count = 1;
         Weight = Factory.Weight;
         BonusHit = Factory.BonusHit;
@@ -453,7 +453,7 @@ internal sealed class Item : IComparable<Item>
     public Item Clone(int? newCount = null)
     {
         // TODO: The assignments below need to be performed by each factory.  This can be integrated into the CreateItem.
-        Item clonedItem = Factory.CreateItem();
+        Item clonedItem = new Item(Game, Factory);
 
         clonedItem.ArmorClass = ArmorClass;
         clonedItem.RandomArtifactItemCharacteristics.Copy(RandomArtifactItemCharacteristics);

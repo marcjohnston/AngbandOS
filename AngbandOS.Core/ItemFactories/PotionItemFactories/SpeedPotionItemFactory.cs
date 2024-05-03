@@ -49,5 +49,4 @@ internal class SpeedPotionItemFactory : PotionItemFactory
         Game.Project(who, 2, y, x, 0, Game.SingletonRepository.Get<Projectile>(nameof(OldSpeedProjectile)), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
         return false;
     }
-    public override Item CreateItem() => new Item(Game, this);
 }

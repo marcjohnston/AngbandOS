@@ -35,5 +35,4 @@ internal class BlindnessMushroomFoodItemFactory : MushroomFoodItemFactory
         }
         return false;
     }
-    public override Item CreateItem() => new Item(Game, this);
 }

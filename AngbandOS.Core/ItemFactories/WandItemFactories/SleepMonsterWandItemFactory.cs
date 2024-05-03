@@ -30,5 +30,4 @@ internal class SleepMonsterWandItemFactory : WandItemFactory
     {
         return game.SleepMonster(dir);
     }
-    public override Item CreateItem() => new Item(Game, this);
 }

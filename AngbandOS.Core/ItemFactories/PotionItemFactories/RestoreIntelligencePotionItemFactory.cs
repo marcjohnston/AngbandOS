@@ -30,5 +30,4 @@ internal class RestoreIntelligencePotionItemFactory : PotionItemFactory
         // Restore intelligence restores your intelligence
         return Game.TryRestoringAbilityScore(Ability.Intelligence);
     }
-    public override Item CreateItem() => new Item(Game, this);
 }

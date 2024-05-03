@@ -25,5 +25,4 @@ internal class BlindnessResistanceRingItemFactory : RingItemFactory
     };
     public override bool ResBlind => true;
     public override int Weight => 2;
-    public override Item CreateItem() => new Item(Game, this);
 }

@@ -43,5 +43,4 @@ internal class RestoreManaPotionItemFactory : PotionItemFactory
         Game.Project(who, 1, y, x, Game.DiceRoll(10, 10), Game.SingletonRepository.Get<Projectile>(nameof(ManaProjectile)), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
         return false;
     }
-    public override Item CreateItem() => new Item(Game, this);
 }

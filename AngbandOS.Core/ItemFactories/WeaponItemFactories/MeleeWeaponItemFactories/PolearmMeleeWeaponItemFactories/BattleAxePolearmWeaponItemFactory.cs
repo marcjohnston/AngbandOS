@@ -27,5 +27,4 @@ internal class BattleAxePolearmWeaponItemFactory : PolearmWeaponItemFactory
     };
     public override bool ShowMods => true;
     public override int Weight => 170;
-    public override Item CreateItem() => new Item(Game, this);
 }

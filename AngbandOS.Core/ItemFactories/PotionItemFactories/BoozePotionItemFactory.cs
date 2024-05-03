@@ -70,5 +70,4 @@ internal class BoozePotionItemFactory : PotionItemFactory
         Game.Project(who, 2, y, x, 0, Game.SingletonRepository.Get<Projectile>(nameof(OldConfProjectile)), ProjectionFlag.ProjectJump | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill);
         return true;
     }
-    public override Item CreateItem() => new Item(Game, this);
 }

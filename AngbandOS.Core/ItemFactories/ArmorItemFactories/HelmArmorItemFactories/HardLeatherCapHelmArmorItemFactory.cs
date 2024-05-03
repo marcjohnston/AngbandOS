@@ -26,5 +26,4 @@ internal class HardLeatherCapHelmArmorItemFactory
         (3, 1)
     };
     public override int Weight => 15;
-    public override Item CreateItem() => new Item(Game, this);
 }

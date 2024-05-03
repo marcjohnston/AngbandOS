@@ -31,5 +31,4 @@ internal class ProbingStaffItemFactory : StaffItemFactory
         Game.Probing();
         eventArgs.Identified = true;
     }
-    public override Item CreateItem() => new Item(Game, this);
 }

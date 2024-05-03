@@ -89,7 +89,7 @@ internal class SkeletonRace : Race
         else
         {
             // Spawn a new food item on the floor to make up for the one that will be destroyed
-            Item floorItem = item.Factory.CreateItem(); // TODO: Will this lose a special characteristic of the food?
+            Item floorItem = new Item(Game, item.Factory); // TODO: Will this lose a special characteristic of the food?
             Game.MsgPrint("The food falls through your jaws!");
             Game.DropNear(floorItem, -1, Game.MapY.IntValue, Game.MapX.IntValue);
         }

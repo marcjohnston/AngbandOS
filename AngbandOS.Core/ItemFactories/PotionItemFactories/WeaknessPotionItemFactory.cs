@@ -33,5 +33,4 @@ internal class WeaknessPotionItemFactory : PotionItemFactory
     {
         return true;
     }
-    public override Item CreateItem() => new Item(Game, this);
 }

@@ -35,5 +35,4 @@ internal class DragonsFrostWandItemFactory : WandItemFactory
         game.FireBall(game.SingletonRepository.Get<Projectile>(nameof(ColdProjectile)), dir, 80, 3);
         return true;
     }
-    public override Item CreateItem() => new Item(Game, this);
 }
