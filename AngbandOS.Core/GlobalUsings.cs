@@ -82,6 +82,7 @@ global using AngbandOS.Core.Tiles;
 global using AngbandOS.Core.Timers;
 global using AngbandOS.Core.Towns;
 global using AngbandOS.Core.Vaults;
+global using AngbandOS.Core.WeightedRandoms;
 global using AngbandOS.Core.Widgets;
 global using AngbandOS.Core.WizardCommands;
 

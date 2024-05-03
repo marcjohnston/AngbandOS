@@ -382,6 +382,7 @@ internal class SingletonRepository
         RegisterRepository<StoreFactory>();
         RegisterRepository<Talent>();
         RegisterRepository<Timer>();
+        RegisterRepository<ItemFactoryWeightedRandom>();
         RegisterRepository<Widget>();
 
         // These are already capable of Json serialization.

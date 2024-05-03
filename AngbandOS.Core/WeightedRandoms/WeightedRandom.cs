@@ -5,7 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core;
+namespace AngbandOS.Core.WeightedRandoms;
 
 /// <summary>
 /// Represents an object capable of picking items from a weighted list.  The items in the list can be added specify varying and specific weights.  This object stores the weights
@@ -39,7 +39,7 @@ namespace AngbandOS.Core;
 /// <typeparam name="T"></typeparam>
 internal class WeightedRandom<T>
 {
-    private readonly Game Game;
+    protected readonly Game Game;
     private readonly List<KeyValuePair<int, T>> _list = new List<KeyValuePair<int, T>>();
     private int _sum = 0;
 
