@@ -21,8 +21,11 @@ internal class DarknessStaffItemFactory : StaffItemFactory
     public override int Ds => 2;
     public override string FriendlyName => "Darkness";
     public override int LevelNormallyFound => 5;
-    public override int[] Chance => new int[] { 1, 1, 0, 0 };
-    public override int[] Locale => new int[] { 5, 50, 0, 0 };
+    public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
+    {
+        (5, 1),
+        (50, 1)
+    };
     public override int Weight => 50;
 
     public override void UseStaff(UseStaffEvent eventArgs)

@@ -28,8 +28,10 @@ internal class WoeRingItemFactory : RingItemFactory
     public override string FriendlyName => "Woe";
     public override bool HideType => true;
     public override int LevelNormallyFound => 50;
-    public override int[] Chance => new int[] { 1, 0, 0, 0 };
-    public override int[] Locale => new int[] { 50, 0, 0, 0 };
+    public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
+    {
+        (50, 1)
+    };
     public override int InitialTypeSpecificValue => -5;
     public override bool Teleport => true;
     public override int Weight => 2;

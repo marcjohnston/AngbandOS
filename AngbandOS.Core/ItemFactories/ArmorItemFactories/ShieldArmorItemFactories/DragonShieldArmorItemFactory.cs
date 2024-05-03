@@ -42,8 +42,10 @@ internal class DragonShieldArmorItemFactory : ShieldArmorItemFactory
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
     public override int LevelNormallyFound => 70;
-    public override int[] Chance => new int[] { 4, 0, 0, 0 };
-    public override int[] Locale => new int[] { 80, 0, 0, 0 };
+    public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
+    {
+        (80, 4)
+    };
     public override int ToA => 10;
     public override int Weight => 100;
     public override Item CreateItem() => new Item(Game, this);

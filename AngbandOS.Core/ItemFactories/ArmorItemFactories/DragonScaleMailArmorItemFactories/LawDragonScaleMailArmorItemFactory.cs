@@ -40,8 +40,10 @@ internal class LawDragonScaleMailArmorItemFactory : DragonScaleMailArmorItemFact
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
     public override int LevelNormallyFound => 80;
-    public override int[] Chance => new int[] { 16, 0, 0, 0 };
-    public override int[] Locale => new int[] { 80, 0, 0, 0 };
+    public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
+    {
+        (80, 16)
+    };
     public override bool ResShards => true;
     public override bool ResSound => true;
     public override int ToA => 10;

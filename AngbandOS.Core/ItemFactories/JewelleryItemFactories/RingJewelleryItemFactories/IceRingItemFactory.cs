@@ -35,8 +35,10 @@ internal class IceRingItemFactory : RingItemFactory, IItemsCanBeActivated
     public override string FriendlyName => "Ice";
     public override bool IgnoreCold => true;
     public override int LevelNormallyFound => 50;
-    public override int[] Chance => new int[] { 1, 0, 0, 0 };
-    public override int[] Locale => new int[] { 50, 0, 0, 0 };
+    public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
+    {
+        (50, 1)
+    };
     public override bool ResCold => true;
     public override int ToA => 15;
     public override int Weight => 2;

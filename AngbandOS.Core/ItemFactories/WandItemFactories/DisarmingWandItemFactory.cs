@@ -21,8 +21,10 @@ internal class DisarmingWandItemFactory : WandItemFactory
     public override int Ds => 1;
     public override string FriendlyName => "Disarming";
     public override int LevelNormallyFound => 20;
-    public override int[] Chance => new int[] { 1, 0, 0, 0 };
-    public override int[] Locale => new int[] { 20, 0, 0, 0 };
+    public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
+    {
+        (20, 1)
+    };
     public override int Weight => 10;
     public override bool ExecuteActivation(Game game, int dir)
     {

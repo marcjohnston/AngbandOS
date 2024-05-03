@@ -29,8 +29,10 @@ internal class AntiMagicAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
     public override int LevelNormallyFound => 40;
-    public override int[] Chance => new int[] { 4, 0, 0, 0 };
-    public override int[] Locale => new int[] { 40, 0, 0, 0 };
+    public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
+    {
+        (40, 4)
+    };
     public override bool NoMagic => true;
     public override int Weight => 3;
 

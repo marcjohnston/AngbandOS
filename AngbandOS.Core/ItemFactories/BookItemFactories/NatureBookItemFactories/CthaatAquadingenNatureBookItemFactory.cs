@@ -31,8 +31,10 @@ internal class CthaatAquadingenNatureBookItemFactory : NatureBookItemFactory
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
     public override int LevelNormallyFound => 80;
-    public override int[] Chance => new int[] { 2, 0, 0, 0 };
-    public override int[] Locale => new int[] { 80, 0, 0, 0 };
+    public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
+    {
+        (80, 2)
+    };
 
     /// <summary>
     /// Returns true, because this book is a high level book.

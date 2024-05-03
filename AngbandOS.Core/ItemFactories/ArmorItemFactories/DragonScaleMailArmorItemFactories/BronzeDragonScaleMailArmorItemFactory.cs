@@ -38,8 +38,10 @@ internal class BronzeDragonScaleMailArmorItemFactory : DragonScaleMailArmorItemF
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
     public override int LevelNormallyFound => 55;
-    public override int[] Chance => new int[] { 8, 0, 0, 0 };
-    public override int[] Locale => new int[] { 55, 0, 0, 0 };
+    public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
+    {
+        (55, 8)
+    };
     public override bool ResConf => true;
     public override int ToA => 10;
     public override int ToH => -2;

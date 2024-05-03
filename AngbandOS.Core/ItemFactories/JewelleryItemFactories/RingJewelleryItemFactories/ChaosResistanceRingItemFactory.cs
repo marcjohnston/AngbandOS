@@ -19,8 +19,10 @@ internal class ChaosResistanceRingItemFactory : RingItemFactory
     public override bool EasyKnow => true;
     public override string FriendlyName => "Chaos Resistance";
     public override int LevelNormallyFound => 50;
-    public override int[] Chance => new int[] { 2, 0, 0, 0 };
-    public override int[] Locale => new int[] { 50, 0, 0, 0 };
+    public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
+    {
+        (50, 2)
+    };
     public override bool ResChaos => true;
     public override bool ResConf => true;
     public override int Weight => 2;

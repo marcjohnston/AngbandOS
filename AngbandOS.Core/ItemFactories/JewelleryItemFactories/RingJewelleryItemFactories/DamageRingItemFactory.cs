@@ -33,8 +33,10 @@ internal class DamageRingItemFactory : RingItemFactory
     public override int Cost => 500;
     public override string FriendlyName => "Damage";
     public override int LevelNormallyFound => 20;
-    public override int[] Chance => new int[] { 1, 0, 0, 0 };
-    public override int[] Locale => new int[] { 20, 0, 0, 0 };
+    public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
+    {
+        (20, 1)
+    };
     public override int Weight => 2;
     public override Item CreateItem() => new Item(Game, this);
 }

@@ -21,8 +21,10 @@ internal class StinkingCloudWandItemFactory : WandItemFactory
     public override int Ds => 1;
     public override string FriendlyName => "Stinking Cloud";
     public override int LevelNormallyFound => 5;
-    public override int[] Chance => new int[] { 1, 0, 0, 0 };
-    public override int[] Locale => new int[] { 5, 0, 0, 0 };
+    public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
+    {
+        (5, 1)
+    };
     public override int Weight => 10;
     public override bool ExecuteActivation(Game game, int dir)
     {

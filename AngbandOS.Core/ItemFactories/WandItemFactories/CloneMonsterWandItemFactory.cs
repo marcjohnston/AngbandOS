@@ -21,8 +21,11 @@ internal class CloneMonsterWandItemFactory : WandItemFactory
     public override int Ds => 1;
     public override string FriendlyName => "Clone Monster";
     public override int LevelNormallyFound => 15;
-    public override int[] Chance => new int[] { 1, 1, 0, 0 };
-    public override int[] Locale => new int[] { 15, 50, 0, 0 };
+    public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
+    {
+        (15, 1),
+        (50, 1)
+    };
     public override int Weight => 10;
     public override bool ExecuteActivation(Game game, int dir)
     {

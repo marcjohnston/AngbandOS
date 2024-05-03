@@ -16,8 +16,10 @@ internal class RoundedPebbleShotAmmunitionItemFactory : ShotAmmunitionItemFactor
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "Rounded Pebble";
 
-    public override int[] Chance => new int[] { 1, 0, 0, 0 };
-    public virtual int[] Locale => new int[] { 0, 0, 0, 0 };
+    public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
+    {
+        (0, 1)
+    };
     public override int Cost => 1;
     public override int Dd => 1;
     public override int Ds => 2;

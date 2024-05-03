@@ -25,8 +25,10 @@ internal class OilFlaskItemFactory : FlaskItemFactory
     public override int Ds => 6;
     public override string FriendlyName => "& Flask~ of oil";
     public override int LevelNormallyFound => 1;
-    public override int[] Chance => new int[] { 1, 0, 0, 0 };
-    public override int[] Locale => new int[] { 1, 0, 0, 0 };
+    public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
+    {
+        (1, 1)
+    };
     public int InitialTurnsOfLight => 7500;
     public override int Weight => 10;
     public override Item CreateItem()

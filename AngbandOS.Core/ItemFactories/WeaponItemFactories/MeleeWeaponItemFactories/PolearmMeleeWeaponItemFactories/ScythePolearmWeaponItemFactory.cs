@@ -21,8 +21,10 @@ internal class ScythePolearmWeaponItemFactory : PolearmWeaponItemFactory
     public override int Ds => 3;
     public override string FriendlyName => "& Scythe~";
     public override int LevelNormallyFound => 45;
-    public override int[] Chance => new int[] { 1, 0, 0, 0 };
-    public override int[] Locale => new int[] { 45, 0, 0, 0 };
+    public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
+    {
+        (45, 1)
+    };
     public override bool ShowMods => true;
     public override int Weight => 250;
     public override Item CreateItem() => new Item(Game, this);

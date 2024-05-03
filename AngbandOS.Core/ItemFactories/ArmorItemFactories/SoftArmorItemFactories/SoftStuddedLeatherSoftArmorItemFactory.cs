@@ -22,8 +22,10 @@ internal class SoftStuddedLeatherSoftArmorItemFactory : SoftArmorItemFactory
     public override int Ds => 1;
     public override string FriendlyName => "Soft Studded Leather~";
     public override int LevelNormallyFound => 3;
-    public override int[] Chance => new int[] { 1, 0, 0, 0 };
-    public override int[] Locale => new int[] { 3, 0, 0, 0 };
+    public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
+    {
+        (3, 1)
+    };
     public override int Weight => 90;
     public override Item CreateItem() => new Item(Game, this);
 }

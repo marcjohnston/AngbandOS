@@ -20,8 +20,10 @@ internal class LeatherGlovesArmorItemFactory : GlovesArmorItemFactory
     public override int Cost => 3;
     public override string FriendlyName => "& Set~ of Leather Gloves";
     public override int LevelNormallyFound => 1;
-    public override int[] Chance => new int[] { 1, 0, 0, 0 };
-    public override int[] Locale => new int[] { 1, 0, 0, 0 };
+    public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
+    {
+        (1, 1)
+    };
     public override int Weight => 5;
     public override Item CreateItem() => new Item(Game, this);
 }

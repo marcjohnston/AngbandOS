@@ -20,8 +20,12 @@ internal class NewLifePotionItemFactory : PotionItemFactory
     public override int Ds => 1;
     public override string FriendlyName => "New Life";
     public override int LevelNormallyFound => 50;
-    public override int[] Chance => new int[] { 20, 10, 5, 0 };
-    public override int[] Locale => new int[] { 50, 100, 120, 0 };
+    public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
+    {
+        (50, 20),
+        (100, 10),
+        (120, 5)
+    };
     public override int InitialNutritionalValue => 100;
     public override int Weight => 4;
     public override bool Quaff()

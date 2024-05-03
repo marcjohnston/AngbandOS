@@ -22,8 +22,10 @@ internal class DoubleChainMailHardArmorItemFactory : HardArmorItemFactory
     public override int Ds => 4;
     public override string FriendlyName => "Double Chain Mail~";
     public override int LevelNormallyFound => 30;
-    public override int[] Chance => new int[] { 1, 0, 0, 0 };
-    public override int[] Locale => new int[] { 30, 0, 0, 0 };
+    public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
+    {
+        (30, 1)
+    };
     public override int ToH => -2;
     public override int Weight => 250;
     public override Item CreateItem() => new Item(Game, this);

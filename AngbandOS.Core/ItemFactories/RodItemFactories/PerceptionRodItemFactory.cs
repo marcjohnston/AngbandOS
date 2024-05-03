@@ -21,8 +21,11 @@ internal class PerceptionRodItemFactory : RodItemFactory
     public override int Ds => 1;
     public override string FriendlyName => "Perception";
     public override int LevelNormallyFound => 50;
-    public override int[] Chance => new int[] { 8, 8, 0, 0 };
-    public override int[] Locale => new int[] { 50, 100, 0, 0 };
+    public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
+    {
+        (50, 8),
+        (100, 8)
+    };
     public override int Weight => 15;
     public override int RodRechargeTime => 10;
     public override void Execute(ZapRodEvent zapRodEvent)

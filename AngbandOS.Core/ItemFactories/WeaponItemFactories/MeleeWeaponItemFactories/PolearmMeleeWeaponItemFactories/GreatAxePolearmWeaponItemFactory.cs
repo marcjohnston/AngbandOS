@@ -21,8 +21,10 @@ internal class GreatAxePolearmWeaponItemFactory : PolearmWeaponItemFactory
     public override int Ds => 4;
     public override string FriendlyName => "& Great Axe~";
     public override int LevelNormallyFound => 40;
-    public override int[] Chance => new int[] { 1, 0, 0, 0 };
-    public override int[] Locale => new int[] { 40, 0, 0, 0 };
+    public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
+    {
+        (40, 1)
+    };
     public override bool ShowMods => true;
     public override int Weight => 230;
     public override Item CreateItem() => new Item(Game, this);

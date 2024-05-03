@@ -19,8 +19,10 @@ internal class IocainePotionItemFactory : PotionItemFactory
     public override int Ds => 20;
     public override string FriendlyName => "Iocaine";
     public override int LevelNormallyFound => 55;
-    public override int[] Chance => new int[] { 4, 0, 0, 0 };
-    public override int[] Locale => new int[] { 55, 0, 0, 0 };
+    public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
+    {
+        (55, 4)
+    };
     public override int Weight => 4;
     public override bool Quaff()
     {

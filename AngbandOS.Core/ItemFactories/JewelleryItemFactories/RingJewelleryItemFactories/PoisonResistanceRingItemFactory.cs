@@ -19,8 +19,10 @@ internal class PoisonResistanceRingItemFactory : RingItemFactory
     public override bool EasyKnow => true;
     public override string FriendlyName => "Poison Resistance";
     public override int LevelNormallyFound => 60;
-    public override int[] Chance => new int[] { 2, 0, 0, 0 };
-    public override int[] Locale => new int[] { 60, 0, 0, 0 };
+    public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
+    {
+        (60, 2)
+    };
     public override bool ResPois => true;
     public override int Weight => 2;
     public override Item CreateItem() => new Item(Game, this);

@@ -21,8 +21,10 @@ internal class HolinessStaffItemFactory : StaffItemFactory
     public override int Ds => 2;
     public override string FriendlyName => "Holiness";
     public override int LevelNormallyFound => 70;
-    public override int[] Chance => new int[] { 2, 0, 0, 0 };
-    public override int[] Locale => new int[] { 70, 0, 0, 0 };
+    public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
+    {
+        (70, 2)
+    };
     public override int Weight => 50;
     public override void UseStaff(UseStaffEvent eventArgs)
     {

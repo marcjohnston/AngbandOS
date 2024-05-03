@@ -18,8 +18,10 @@ internal class HolyPrayerScrollItemFactory : ScrollItemFactory
     public override int Cost => 80;
     public override string FriendlyName => "Holy Prayer";
     public override int LevelNormallyFound => 25;
-    public override int[] Chance => new int[] { 1, 0, 0, 0 };
-    public override int[] Locale => new int[] { 25, 0, 0, 0 };
+    public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
+    {
+        (25, 1)
+    };
     public override int Weight => 5;
 
     public override void Read(ReadScrollEvent eventArgs)

@@ -25,8 +25,10 @@ internal class DeVermisMysteriisCorporealBookItemFactory : CorporealBookItemFact
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
     public override int LevelNormallyFound => 40;
-    public override int[] Chance => new int[] { 1, 0, 0, 0 };
-    public override int[] Locale => new int[] { 40, 0, 0, 0 };
+    public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
+    {
+        (40, 1)
+    };
 
     /// <summary>
     /// Returns true, because this book is a high level book.

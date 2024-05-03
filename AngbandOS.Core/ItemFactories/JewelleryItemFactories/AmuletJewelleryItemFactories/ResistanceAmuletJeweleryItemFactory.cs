@@ -35,8 +35,10 @@ internal class ResistanceAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
     public override int LevelNormallyFound => 50;
-    public override int[] Chance => new int[] { 4, 0, 0, 0 };
-    public override int[] Locale => new int[] { 50, 0, 0, 0 };
+    public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
+    {
+        (50, 4)
+    };
     public override bool ResAcid => true;
     public override bool ResCold => true;
     public override bool ResElec => true;

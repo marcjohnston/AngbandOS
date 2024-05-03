@@ -34,8 +34,11 @@ internal class MagiAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
     public override int LevelNormallyFound => 50;
-    public override int[] Chance => new int[] { 4, 3, 0, 0 };
-    public override int[] Locale => new int[] { 50, 80, 0, 0 };
+    public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
+    {
+        (50, 4),
+        (80, 3)
+    };
     public override bool Search => true;
     public override bool SeeInvis => true;
     public override int ToA => 3;

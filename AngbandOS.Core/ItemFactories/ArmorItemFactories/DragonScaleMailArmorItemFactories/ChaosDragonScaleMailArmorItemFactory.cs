@@ -40,8 +40,10 @@ internal class ChaosDragonScaleMailArmorItemFactory : DragonScaleMailArmorItemFa
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
     public override int LevelNormallyFound => 75;
-    public override int[] Chance => new int[] { 16, 0, 0, 0 };
-    public override int[] Locale => new int[] { 75, 0, 0, 0 };
+    public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
+    {
+        (75, 16)
+    };
     public override bool ResChaos => true;
     public override bool ResDisen => true;
     public override int ToA => 10;

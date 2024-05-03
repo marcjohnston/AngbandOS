@@ -18,8 +18,13 @@ internal class SpecialRemoveCurseScrollItemFactory : ScrollItemFactory
     public override int Cost => 8000;
     public override string FriendlyName => "*Remove Curse*";
     public override int LevelNormallyFound => 50;
-    public override int[] Chance => new int[] { 2, 2, 2, 1 };
-    public override int[] Locale => new int[] { 50, 75, 85, 95 };
+    public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
+    {
+        (50, 2),
+        (75, 2),
+        (85, 2),
+        (95, 1)
+    };
     public override int Weight => 5;
 
     public override void Read(ReadScrollEvent eventArgs)

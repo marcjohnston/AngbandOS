@@ -31,8 +31,10 @@ internal class AzathothChaosBookItemFactory : ChaosBookItemFactory
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
     public override int LevelNormallyFound => 100;
-    public override int[] Chance => new int[] { 3, 0, 0, 0 };
-    public override int[] Locale => new int[] { 100, 0, 0, 0 };
+    public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
+    {
+        (100, 3)
+    };
 
     /// <summary>
     /// Returns true, because this book is a high level book.

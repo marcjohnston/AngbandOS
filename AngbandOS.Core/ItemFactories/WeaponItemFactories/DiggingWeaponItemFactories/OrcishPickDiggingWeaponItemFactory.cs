@@ -21,8 +21,10 @@ internal class OrcishPickDiggingWeaponItemFactory : DiggingWeaponItemFactory
     public override int Ds => 3;
     public override string FriendlyName => "& Orcish Pick~";
     public override int LevelNormallyFound => 30;
-    public override int[] Chance => new int[] { 4, 0, 0, 0 };
-    public override int[] Locale => new int[] { 30, 0, 0, 0 };
+    public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
+    {
+        (30, 4)
+    };
     public override int InitialTypeSpecificValue => 2;
     public override bool ShowMods => true;
     public override bool Tunnel => true;

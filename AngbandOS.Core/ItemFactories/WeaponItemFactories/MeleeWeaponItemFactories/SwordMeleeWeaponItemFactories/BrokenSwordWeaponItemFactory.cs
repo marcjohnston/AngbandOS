@@ -16,8 +16,10 @@ internal class BrokenSwordWeaponItemFactory : SwordWeaponItemFactory
     public override ColorEnum Color => ColorEnum.Black;
     public override string Name => "Broken Sword";
 
-    public override int[] Chance => new int[] { 1, 0, 0, 0 };
-    public override int[] Locale => new int[] { 0, 0, 0, 0 };
+    public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
+    {
+        (0, 1)
+    };
     public override int Cost => 2;
     public override int Dd => 1;
     public override int Ds => 2;

@@ -18,8 +18,10 @@ internal class TeleportLevelScrollItemFactory : ScrollItemFactory
     public override int Cost => 50;
     public override string FriendlyName => "Teleport Level";
     public override int LevelNormallyFound => 20;
-    public override int[] Chance => new int[] { 1, 0, 0, 0 };
-    public override int[] Locale => new int[] { 20, 0, 0, 0 };
+    public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
+    {
+        (20, 1)
+    };
     public override int Weight => 5;
     public override void Read(ReadScrollEvent eventArgs)
     {

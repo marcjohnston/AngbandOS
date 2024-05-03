@@ -19,8 +19,10 @@ internal class LightAndDarknessResistanceRingItemFactory : RingItemFactory
     public override bool EasyKnow => true;
     public override string FriendlyName => "Light and Darkness Resistance";
     public override int LevelNormallyFound => 30;
-    public override int[] Chance => new int[] { 2, 0, 0, 0 };
-    public override int[] Locale => new int[] { 30, 0, 0, 0 };
+    public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
+    {
+        (30, 2)
+    };
     public override bool ResDark => true;
     public override bool ResLight => true;
     public override int Weight => 2;

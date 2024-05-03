@@ -61,8 +61,10 @@ internal class BrassLanternLightSourceItemFactory : LightSourceItemFactory
     public override string FriendlyName => "& Brass Lantern~";
     public override bool IgnoreFire => true;
     public override int LevelNormallyFound => 3;
-    public override int[] Chance => new int[] { 1, 0, 0, 0 };
-    public override int[] Locale => new int[] { 3, 0, 0, 0 };
+    public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
+    {
+        (3, 1)
+    };
     public override int InitialTurnsOfLight => 7500;
     public override int Weight => 50;
 

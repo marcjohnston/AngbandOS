@@ -21,8 +21,10 @@ internal class PickDiggingWeaponItemFactory : DiggingWeaponItemFactory
     public override int Ds => 3;
     public override string FriendlyName => "& Pick~";
     public override int LevelNormallyFound => 5;
-    public override int[] Chance => new int[] { 16, 0, 0, 0 };
-    public override int[] Locale => new int[] { 10, 0, 0, 0 };
+    public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
+    {
+        (10, 16)
+    };
     public override int InitialTypeSpecificValue => 1;
     public override bool ShowMods => true;
     public override bool Tunnel => true;

@@ -21,8 +21,11 @@ internal class WoodenArrowAmmunitionItemFactory : ArrowAmmunitionItemFactory
     public override int Ds => 4;
     public override string FriendlyName => "& Arrow~";
     public override int LevelNormallyFound => 3;
-    public override int[] Chance => new int[] { 1, 1, 0, 0 };
-    public override int[] Locale => new int[] { 3, 15, 0, 0 };
+    public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
+    {
+        (3, 1),
+        (15, 1)
+    };
     public override bool ShowMods => true;
     public override int Weight => 2;
     public override Item CreateItem() => new Item(Game, this);

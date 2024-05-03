@@ -21,8 +21,10 @@ internal class DwarvenPickDiggingWeaponItemFactory : DiggingWeaponItemFactory
     public override int Ds => 4;
     public override string FriendlyName => "& Dwarven Pick~";
     public override int LevelNormallyFound => 50;
-    public override int[] Chance => new int[] { 1, 0, 0, 0 };
-    public override int[] Locale => new int[] { 50, 0, 0, 0 };
+    public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
+    {
+        (50, 1)
+    };
     public override int InitialTypeSpecificValue => 3;
     public override bool ShowMods => true;
     public override bool Tunnel => true;

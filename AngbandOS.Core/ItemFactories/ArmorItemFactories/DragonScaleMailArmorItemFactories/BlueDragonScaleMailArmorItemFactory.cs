@@ -40,8 +40,10 @@ internal class BlueDragonScaleMailArmorItemFactory : DragonScaleMailArmorItemFac
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
     public override int LevelNormallyFound => 40;
-    public override int[] Chance => new int[] { 8, 0, 0, 0 };
-    public override int[] Locale => new int[] { 40, 0, 0, 0 };
+    public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
+    {
+        (40, 8)
+    };
     public override bool ResElec => true;
     public override int ToA => 10;
     public override int ToH => -2;

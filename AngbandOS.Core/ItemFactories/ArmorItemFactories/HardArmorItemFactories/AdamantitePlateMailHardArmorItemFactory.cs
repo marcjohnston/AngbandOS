@@ -23,8 +23,10 @@ internal class AdamantitePlateMailHardArmorItemFactory : HardArmorItemFactory
     public override string FriendlyName => "Adamantite Plate Mail~";
     public override bool IgnoreAcid => true;
     public override int LevelNormallyFound => 75;
-    public override int[] Chance => new int[] { 8, 0, 0, 0 };
-    public override int[] Locale => new int[] { 75, 0, 0, 0 };
+    public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
+    {
+        (75, 8)
+    };
     public override int ToH => -4;
     public override int Weight => 420;
     public override Item CreateItem() => new Item(Game, this);

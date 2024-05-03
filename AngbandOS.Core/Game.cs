@@ -1643,14 +1643,6 @@ internal class Game
         }
     }
 
-    public void Quit(string reason)
-    {
-        if (!string.IsNullOrEmpty(reason))
-        {
-            MessageBoxShow(reason);
-        }
-    }
-
     public ItemFactory? RandomItemType(int level, bool doNotAllowChestToBeCreated, bool good)
     {
         int i;
@@ -1732,11 +1724,6 @@ internal class Game
             }
         }
         return SingletonRepository.Get<ItemFactory>(table[i].Index);
-    }
-
-    public void MessageBoxShow(string message)
-    {
-        // MessageBox.Show(reason, Constants.VersionName, MessageBoxButtons.OK, MessageBoxIcon.Error);
     }
 
     /// <summary>
@@ -3327,75 +3314,87 @@ internal class Game
 
     private void InitializeAllocationTables()
     {
-        MonsterRace rPtr;
-        int[] num = new int[Constants.MaxDepth];
+        int[] itemCountPerLevel = new int[Constants.MaxDepth];
         int[] aux = new int[Constants.MaxDepth];
         AllocKindSize = 0;
+
+        // Enumerate all items.
         foreach (ItemFactory kPtr in SingletonRepository.Get<ItemFactory>())
         {
-            for (int j = 0; j < 4; j++)
+            if (kPtr.DepthsFoundAndChances != null)
             {
-                if (kPtr.Chance[j] != 0)
+                // For each depth and chance found, increment the depth table.
+                foreach ((int depth, int chance) in kPtr.DepthsFoundAndChances)
                 {
                     AllocKindSize++;
-                    num[kPtr.Locale[j]]++;
+                    itemCountPerLevel[depth]++;
                 }
             }
         }
+
+        // Increment the number of items that can be found at each level cumulatively.
         for (int i = 1; i < Constants.MaxDepth; i++)
         {
-            num[i] += num[i - 1];
+            itemCountPerLevel[i] += itemCountPerLevel[i - 1];
         }
-        if (num[0] == 0)
-        {
-            Quit("No town objects!");
-        }
+
+        // TODO: We shouldn't need this.
+        //if (itemCountPerLevel[0] == 0)
+        //{
+        //    throw new Exception("No town objects!");
+        //}
+
+        // For every item and every depth, create an allocation entry.
         AllocKindTable = new AllocationEntry[AllocKindSize];
         for (int k = 0; k < AllocKindSize; k++)
         {
             AllocKindTable[k] = new AllocationEntry();
         }
         AllocationEntry[] table = AllocKindTable;
+
         for (int i = 1; i < SingletonRepository.Get<ItemFactory>().Length; i++)
         {
             ItemFactory kPtr = SingletonRepository.Get<ItemFactory>(i);
-            for (int j = 0; j < 4; j++)
+
+            if (kPtr.DepthsFoundAndChances != null)
             {
-                if (kPtr.Chance[j] != 0)
+                // For each depth and chance found, increment the depth table.
+                foreach ((int depth, int chance) in kPtr.DepthsFoundAndChances)
                 {
-                    int x = kPtr.Locale[j];
-                    int p = 100 / kPtr.Chance[j];
-                    int y = x > 0 ? num[x - 1] : 0;
-                    int z = y + aux[x];
+                    int p = 100 / chance;
+                    int y = depth > 0 ? itemCountPerLevel[depth - 1] : 0;
+                    int z = y + aux[depth];
                     table[z].Index = i;
-                    table[z].Level = x;
+                    table[z].Level = depth;
                     table[z].BaseProbability = p;
                     table[z].FilteredProbabiity = p;
                     table[z].FinalProbability = p;
-                    aux[x]++;
+                    aux[depth]++;
                 }
             }
         }
         aux = new int[Constants.MaxDepth];
-        num = new int[Constants.MaxDepth];
+        itemCountPerLevel = new int[Constants.MaxDepth];
         AllocRaceSize = 0;
         for (int i = 1; i < SingletonRepository.Get<MonsterRace>().Length - 1; i++)
         {
-            rPtr = SingletonRepository.Get<MonsterRace>(i);
+            MonsterRace rPtr = SingletonRepository.Get<MonsterRace>(i);
             if (rPtr.Rarity != 0)
             {
                 AllocRaceSize++;
-                num[rPtr.Level]++;
+                itemCountPerLevel[rPtr.Level]++;
             }
         }
         for (int i = 1; i < Constants.MaxDepth; i++)
         {
-            num[i] += num[i - 1];
+            itemCountPerLevel[i] += itemCountPerLevel[i - 1];
         }
-        if (num[0] == 0)
-        {
-            Quit("No town monsters!");
-        }
+
+        // TODO: This shouldn't be needed.
+        //if (itemCountPerLevel[0] == 0)
+        //{
+        //    throw new Exception("No town monsters!");
+        //}
         AllocRaceTable = new AllocationEntry[AllocRaceSize];
         for (int k = 0; k < AllocRaceSize; k++)
         {
@@ -3404,12 +3403,12 @@ internal class Game
         table = AllocRaceTable;
         for (int i = 1; i < SingletonRepository.Get<MonsterRace>().Length - 1; i++)
         {
-            rPtr = SingletonRepository.Get<MonsterRace>(i);
+            MonsterRace rPtr = SingletonRepository.Get<MonsterRace>(i);
             if (rPtr.Rarity != 0)
             {
                 int x = rPtr.Level;
                 int p = 100 / rPtr.Rarity;
-                int y = x > 0 ? num[x - 1] : 0;
+                int y = x > 0 ? itemCountPerLevel[x - 1] : 0;
                 int z = y + aux[x];
                 table[z].Index = i;
                 table[z].Level = x;

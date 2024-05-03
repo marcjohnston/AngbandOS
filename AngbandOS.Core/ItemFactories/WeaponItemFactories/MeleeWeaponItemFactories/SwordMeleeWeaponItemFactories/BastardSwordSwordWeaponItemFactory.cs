@@ -21,8 +21,10 @@ internal class BastardSwordSwordWeaponItemFactory : SwordWeaponItemFactory
     public override int Ds => 4;
     public override string FriendlyName => "& Bastard Sword~";
     public override int LevelNormallyFound => 15;
-    public override int[] Chance => new int[] { 1, 0, 0, 0 };
-    public override int[] Locale => new int[] { 15, 0, 0, 0 };
+    public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
+    {
+        (15, 1)
+    };
     public override bool ShowMods => true;
     public override int Weight => 140;
     public override Item CreateItem() => new Item(Game, this);

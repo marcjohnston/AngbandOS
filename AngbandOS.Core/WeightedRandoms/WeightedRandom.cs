@@ -37,6 +37,7 @@ namespace AngbandOS.Core.WeightedRandoms;
 /// The last item in the list is guaranteed to have a value greater than the max choice.
 /// </remarks>
 /// <typeparam name="T"></typeparam>
+[Serializable]
 internal class WeightedRandom<T>
 {
     protected readonly Game Game;

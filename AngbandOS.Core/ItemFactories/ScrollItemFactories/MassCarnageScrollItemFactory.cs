@@ -18,8 +18,11 @@ internal class MassCarnageScrollItemFactory : ScrollItemFactory
     public override int Cost => 1000;
     public override string FriendlyName => "Mass Carnage";
     public override int LevelNormallyFound => 50;
-    public override int[] Chance => new int[] { 4, 4, 0, 0 };
-    public override int[] Locale => new int[] { 50, 100, 0, 0 };
+    public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
+    {
+        (50, 4),
+        (100, 4)
+    };
     public override int Weight => 5;
 
     public override void Read(ReadScrollEvent eventArgs)

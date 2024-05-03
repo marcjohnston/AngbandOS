@@ -18,8 +18,12 @@ internal class RationFoodItemFactory : FoodItemFactory
 
     public override int Cost => 3;
     public override string FriendlyName => "& Ration~ of Food";
-    public override int[] Chance => new int[] { 1, 1, 1, 0 };
-    public override int[] Locale => new int[] { 0, 5, 10, 0 };
+    public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
+    {
+        (0, 1),
+        (5, 1),
+        (10, 1)
+    };
     public override int InitialNutritionalValue => 5000;
     public override int Weight => 10;
 

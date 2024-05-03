@@ -30,8 +30,10 @@ internal class LordlyProtectionRingItemFactory : RingItemFactory
     public override string FriendlyName => "Lordly Protection";
     public override bool HoldLife => true;
     public override int LevelNormallyFound => 100;
-    public override int[] Chance => new int[] { 5, 0, 0, 0 };
-    public override int[] Locale => new int[] { 100, 0, 0, 0 };
+    public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
+    {
+        (100, 5)
+    };
     public override bool ResDisen => true;
     public override bool ResPois => true;
     public override int Weight => 2;

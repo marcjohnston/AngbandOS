@@ -19,8 +19,10 @@ internal class WeaknessRingItemFactory : RingItemFactory
     public override string FriendlyName => "Weakness";
     public override bool HideType => true;
     public override int LevelNormallyFound => 5;
-    public override int[] Chance => new int[] { 1, 0, 0, 0 };
-    public override int[] Locale => new int[] { 5, 0, 0, 0 };
+    public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
+    {
+        (5, 1)
+    };
     public override int InitialTypeSpecificValue => -5;
     public override bool Str => true;
     public override int Weight => 2;

@@ -19,8 +19,10 @@ internal class FearResistanceRingItemFactory : RingItemFactory
     public override bool EasyKnow => true;
     public override string FriendlyName => "Fear Resistance";
     public override int LevelNormallyFound => 10;
-    public override int[] Chance => new int[] { 2, 0, 0, 0 };
-    public override int[] Locale => new int[] { 10, 0, 0, 0 };
+    public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
+    {
+        (10, 2)
+    };
     public override bool ResFear => true;
     public override int Weight => 2;
     public override Item CreateItem() => new Item(Game, this);

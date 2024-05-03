@@ -25,8 +25,10 @@ internal class ShardBallsWandItemFactory : WandItemFactory
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
     public override int LevelNormallyFound => 75;
-    public override int[] Chance => new int[] { 4, 0, 0, 0 };
-    public override int[] Locale => new int[] { 75, 0, 0, 0 };
+    public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
+    {
+        (75, 4)
+    };
     public override int Weight => 10;
 
     public override bool ExecuteActivation(Game game, int dir)

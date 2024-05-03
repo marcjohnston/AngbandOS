@@ -40,8 +40,10 @@ internal class BalanceDragonScaleMailArmorItemFactory : DragonScaleMailArmorItem
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
     public override int LevelNormallyFound => 90;
-    public override int[] Chance => new int[] { 16, 0, 0, 0 };
-    public override int[] Locale => new int[] { 90, 0, 0, 0 };
+    public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
+    {
+        (90, 16)
+    };
     public override bool ResChaos => true;
     public override bool ResDisen => true;
     public override bool ResShards => true;

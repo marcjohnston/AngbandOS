@@ -21,8 +21,10 @@ internal class PieceOfDwarfBreadFoodItemFactory : FoodItemFactory
     public override int Ds => 6;
     public override string FriendlyName => "& Piece~ of Dwarf Bread";
     public override int LevelNormallyFound => 15;
-    public override int[] Chance => new int[] { 1, 0, 0, 0 };
-    public override int[] Locale => new int[] { 15, 0, 0, 0 };
+    public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
+    {
+        (15, 1)
+    };
     public override int InitialNutritionalValue => 7500;
     public override int Weight => 3;
 

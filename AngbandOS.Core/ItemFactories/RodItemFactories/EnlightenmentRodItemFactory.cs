@@ -21,8 +21,10 @@ internal class EnlightenmentRodItemFactory : RodItemFactory
     public override int Ds => 1;
     public override string FriendlyName => "Enlightenment";
     public override int LevelNormallyFound => 65;
-    public override int[] Chance => new int[] { 4, 0, 0, 0 };
-    public override int[] Locale => new int[] { 65, 0, 0, 0 };
+    public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
+    {
+        (65, 4)
+    };
     public override int Weight => 15;
     public override int RodRechargeTime => 99;
     public override void Execute(ZapRodEvent zapRodEvent)

@@ -20,8 +20,10 @@ internal class TeleportationRingItemFactory : RingItemFactory
     public override bool EasyKnow => true;
     public override string FriendlyName => "Teleportation";
     public override int LevelNormallyFound => 5;
-    public override int[] Chance => new int[] { 1, 0, 0, 0 };
-    public override int[] Locale => new int[] { 5, 0, 0, 0 };
+    public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
+    {
+        (5, 1)
+    };
     public override bool Teleport => true;
     public override int Weight => 2;
     public override Item CreateItem() => new Item(Game, this);

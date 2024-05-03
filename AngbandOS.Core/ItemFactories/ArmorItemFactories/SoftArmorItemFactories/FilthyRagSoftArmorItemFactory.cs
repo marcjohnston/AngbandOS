@@ -17,8 +17,10 @@ internal class FilthyRagSoftArmorItemFactory : SoftArmorItemFactory
     public override string Name => "Filthy Rag";
 
     public override int Ac => 1;
-    public override int[] Chance => new int[] { 1, 0, 0, 0 };
-    public override int[] Locale => new int[] { 0, 0, 0, 0 };
+    public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
+    {
+        (0, 1)
+    };
     public override int Cost => 1;
     public override string FriendlyName => "& Filthy Rag~";
     public override int ToA => -1;

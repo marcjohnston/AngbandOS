@@ -21,8 +21,10 @@ internal class PerceptionStaffItemFactory : StaffItemFactory
     public override int Ds => 2;
     public override string FriendlyName => "Perception";
     public override int LevelNormallyFound => 10;
-    public override int[] Chance => new int[] { 1, 0, 0, 0 };
-    public override int[] Locale => new int[] { 10, 0, 0, 0 };
+    public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
+    {
+        (10, 1)
+    };
     public override int Weight => 50;
 
     public override void UseStaff(UseStaffEvent eventArgs)

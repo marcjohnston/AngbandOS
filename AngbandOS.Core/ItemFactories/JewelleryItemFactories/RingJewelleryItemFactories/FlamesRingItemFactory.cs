@@ -36,8 +36,10 @@ internal class FlamesRingItemFactory : RingItemFactory, IItemsCanBeActivated
     public override string FriendlyName => "Flames";
     public override bool IgnoreFire => true;
     public override int LevelNormallyFound => 50;
-    public override int[] Chance => new int[] { 1, 0, 0, 0 };
-    public override int[] Locale => new int[] { 50, 0, 0, 0 };
+    public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
+    {
+        (50, 1)
+    };
     public override bool ResFire => true;
     public override int ToA => 15;
     public override int Weight => 2;

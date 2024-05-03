@@ -15,8 +15,10 @@ internal class TreasureDetectionScrollItemFactory : ScrollItemFactory
     protected override string SymbolName => nameof(QuestionMarkSymbol);
     public override string Name => "Treasure Detection";
 
-    public override int[] Chance => new int[] { 1, 0, 0, 0 };
-    public override int[] Locale => new int[] { 0, 0, 0, 0 };
+    public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
+    {
+        (0, 1)
+    };
     public override int Cost => 15;
     public override string FriendlyName => "Treasure Detection";
     public override int Weight => 5;

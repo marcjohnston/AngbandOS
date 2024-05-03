@@ -21,8 +21,10 @@ internal class CutlassWeaponItemFactory : SwordWeaponItemFactory
     public override int Ds => 7;
     public override string FriendlyName => "& Cutlass~";
     public override int LevelNormallyFound => 5;
-    public override int[] Chance => new int[] { 1, 0, 0, 0 };
-    public override int[] Locale => new int[] { 5, 0, 0, 0 };
+    public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
+    {
+        (5, 1)
+    };
     public override bool ShowMods => true;
     public override int Weight => 110;
     public override Item CreateItem() => new Item(Game, this);

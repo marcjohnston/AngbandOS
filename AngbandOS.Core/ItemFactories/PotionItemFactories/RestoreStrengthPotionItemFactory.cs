@@ -20,8 +20,10 @@ internal class RestoreStrengthPotionItemFactory : PotionItemFactory
     public override int Ds => 1;
     public override string FriendlyName => "Restore Strength";
     public override int LevelNormallyFound => 25;
-    public override int[] Chance => new int[] { 1, 0, 0, 0 };
-    public override int[] Locale => new int[] { 25, 0, 0, 0 };
+    public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
+    {
+        (25, 1)
+    };
     public override int Weight => 4;
     public override bool Quaff()
     {

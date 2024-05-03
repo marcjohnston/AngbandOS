@@ -20,8 +20,12 @@ internal class WisdomPotionItemFactory : PotionItemFactory
     public override int Ds => 1;
     public override string FriendlyName => "Wisdom";
     public override int LevelNormallyFound => 20;
-    public override int[] Chance => new int[] { 6, 3, 1, 0 };
-    public override int[] Locale => new int[] { 20, 25, 30, 0 };
+    public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
+    {
+        (20, 6),
+        (25, 3),
+        (30, 1)
+    };
     public override int Weight => 4;
     public override bool Quaff()
     {

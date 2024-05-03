@@ -22,8 +22,10 @@ internal class FullPlateHardArmorItemFactory : HardArmorItemFactory
     public override int Ds => 4;
     public override string FriendlyName => "Full Plate Armor~";
     public override int LevelNormallyFound => 45;
-    public override int[] Chance => new int[] { 1, 0, 0, 0 };
-    public override int[] Locale => new int[] { 45, 0, 0, 0 };
+    public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
+    {
+        (45, 1)
+    };
     public override int ToH => -3;
     public override int Weight => 380;
     public override Item CreateItem() => new Item(Game, this);

@@ -16,8 +16,10 @@ internal class BrokenSkullSkeletonItemFactory : SkeletonItemFactory
     public override ColorEnum Color => ColorEnum.Beige;
     public override string Name => "Broken Skull";
 
-    public override int[] Chance => new int[] { 1, 0, 0, 0 };
-    public override int[] Locale => new int[] { 0, 0, 0, 0 };
+    public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
+    {
+        (0, 1)
+    };
     public override int Dd => 1;
     public override int Ds => 1;
     public override string FriendlyName => "& Broken Skull~";

@@ -21,8 +21,12 @@ internal class StoneToMudWandItemFactory : WandItemFactory
     public override int Ds => 1;
     public override string FriendlyName => "Stone to Mud";
     public override int LevelNormallyFound => 10;
-    public override int[] Chance => new int[] { 1, 1, 1, 0 };
-    public override int[] Locale => new int[] { 10, 40, 80, 0 };
+    public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
+    {
+        (10, 1),
+        (40, 1),
+        (80, 1)
+    };
     public override int Weight => 10;
     public override bool ExecuteActivation(Game game, int dir)
     {

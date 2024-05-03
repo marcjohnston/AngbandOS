@@ -21,8 +21,10 @@ internal class SmallIronChestItemFactory : ChestItemFactory
     public override int Ds => 4;
     public override string FriendlyName => "& Small iron chest~";
     public override int LevelNormallyFound => 25;
-    public override int[] Chance => new int[] { 1, 0, 0, 0 };
-    public override int[] Locale => new int[] { 25, 0, 0, 0 };
+    public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
+    {
+        (25, 1)
+    };
     public override int Weight => 300;
     public override bool IsSmall => true;
     public override int NumberOfItemsContained => 4;

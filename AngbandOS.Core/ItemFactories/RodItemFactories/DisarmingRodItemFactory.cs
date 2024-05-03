@@ -21,8 +21,10 @@ internal class DisarmingRodItemFactory : RodItemFactory
     public override int Ds => 1;
     public override string FriendlyName => "Disarming";
     public override int LevelNormallyFound => 35;
-    public override int[] Chance => new int[] { 1, 0, 0, 0 };
-    public override int[] Locale => new int[] { 35, 0, 0, 0 };
+    public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
+    {
+        (35, 1)
+    };
     public override int Weight => 15;
     public override int RodRechargeTime => 15 + Game.DieRoll(15);
     public override void Execute(ZapRodEvent zapRodEvent)

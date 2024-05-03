@@ -20,8 +20,10 @@ internal class ResistFireRingItemFactory : RingItemFactory
     public override string FriendlyName => "Resist Fire";
     public override bool IgnoreFire => true;
     public override int LevelNormallyFound => 10;
-    public override int[] Chance => new int[] { 1, 0, 0, 0 };
-    public override int[] Locale => new int[] { 10, 0, 0, 0 };
+    public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
+    {
+        (10, 1)
+    };
     public override bool ResFire => true;
     public override int Weight => 2;
     public override Item CreateItem() => new Item(Game, this);

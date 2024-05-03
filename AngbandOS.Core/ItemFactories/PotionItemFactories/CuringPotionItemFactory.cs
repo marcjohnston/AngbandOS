@@ -20,8 +20,11 @@ internal class CuringPotionItemFactory : PotionItemFactory
     public override int Ds => 1;
     public override string FriendlyName => "Curing";
     public override int LevelNormallyFound => 18;
-    public override int[] Chance => new int[] { 1, 1, 0, 0 };
-    public override int[] Locale => new int[] { 18, 40, 0, 0 };
+    public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
+    {
+        (18, 1),
+        (40, 1)
+    };
     public override int InitialNutritionalValue => 100;
     public override int Weight => 4;
     public override bool Quaff()

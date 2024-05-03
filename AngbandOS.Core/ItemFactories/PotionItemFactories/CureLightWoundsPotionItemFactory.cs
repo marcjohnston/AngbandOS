@@ -19,8 +19,12 @@ internal class CureLightWoundsPotionItemFactory : PotionItemFactory
     public override int Dd => 1;
     public override int Ds => 1;
     public override string FriendlyName => "Cure Light Wounds";
-    public override int[] Chance => new int[] { 1, 1, 1, 0 };
-    public override int[] Locale => new int[] { 0, 1, 3, 0 };
+    public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
+    {
+        (0, 1),
+        (1, 1),
+        (3, 1)
+    };
     public override int InitialNutritionalValue => 50;
     public override int Weight => 4;
     public override bool Quaff()

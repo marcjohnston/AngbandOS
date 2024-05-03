@@ -22,8 +22,10 @@ internal class LargeMetalShieldArmorItemFactory : ShieldArmorItemFactory
     public override int Ds => 3;
     public override string FriendlyName => "& Large Metal Shield~";
     public override int LevelNormallyFound => 30;
-    public override int[] Chance => new int[] { 1, 0, 0, 0 };
-    public override int[] Locale => new int[] { 30, 0, 0, 0 };
+    public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
+    {
+        (30, 1)
+    };
     public override int Weight => 120;
     public override Item CreateItem() => new Item(Game, this);
 }

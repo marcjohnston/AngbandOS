@@ -42,8 +42,10 @@ internal class SpeedRingItemFactory : RingItemFactory
     public override string FriendlyName => "Speed";
     public override bool HideType => true;
     public override int LevelNormallyFound => 80;
-    public override int[] Chance => new int[] { 1, 0, 0, 0 };
-    public override int[] Locale => new int[] { 80, 0, 0, 0 };
+    public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
+    {
+        (80, 1)
+    };
     public override bool Speed => true;
     public override int Weight => 2;
 

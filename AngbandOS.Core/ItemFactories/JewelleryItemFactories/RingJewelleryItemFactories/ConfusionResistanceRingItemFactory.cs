@@ -19,8 +19,10 @@ internal class ConfusionResistanceRingItemFactory : RingItemFactory
     public override bool EasyKnow => true;
     public override string FriendlyName => "Confusion Resistance";
     public override int LevelNormallyFound => 22;
-    public override int[] Chance => new int[] { 2, 0, 0, 0 };
-    public override int[] Locale => new int[] { 22, 0, 0, 0 };
+    public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
+    {
+        (22, 2)
+    };
     public override bool ResConf => true;
     public override int Weight => 2;
     public override Item CreateItem() => new Item(Game, this);

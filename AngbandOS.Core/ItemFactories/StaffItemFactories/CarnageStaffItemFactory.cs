@@ -21,8 +21,10 @@ internal class CarnageStaffItemFactory : StaffItemFactory
     public override int Ds => 2;
     public override string FriendlyName => "Carnage";
     public override int LevelNormallyFound => 70;
-    public override int[] Chance => new int[] { 4, 0, 0, 0 };
-    public override int[] Locale => new int[] { 70, 0, 0, 0 };
+    public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
+    {
+        (70, 4)
+    };
     public override int Weight => 50;
     public override void UseStaff(UseStaffEvent eventArgs)
     {

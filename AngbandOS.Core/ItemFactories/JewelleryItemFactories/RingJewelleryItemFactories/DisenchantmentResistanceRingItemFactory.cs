@@ -19,8 +19,10 @@ internal class DisenchantmentResistanceRingItemFactory : RingItemFactory
     public override bool EasyKnow => true;
     public override string FriendlyName => "Disenchantment Resistance";
     public override int LevelNormallyFound => 90;
-    public override int[] Chance => new int[] { 10, 0, 0, 0 };
-    public override int[] Locale => new int[] { 90, 0, 0, 0 };
+    public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
+    {
+        (90, 10)
+    };
     public override bool ResDisen => true;
     public override int Weight => 2;
     public override Item CreateItem() => new Item(Game, this);

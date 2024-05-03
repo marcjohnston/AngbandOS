@@ -19,8 +19,10 @@ internal class SeeInvisibleRingItemFactory : RingItemFactory
     public override bool EasyKnow => true;
     public override string FriendlyName => "See Invisible";
     public override int LevelNormallyFound => 30;
-    public override int[] Chance => new int[] { 1, 0, 0, 0 };
-    public override int[] Locale => new int[] { 30, 0, 0, 0 };
+    public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
+    {
+        (30, 1)
+    };
     public override bool SeeInvis => true;
     public override int Weight => 2;
     public override Item CreateItem() => new Item(Game, this);

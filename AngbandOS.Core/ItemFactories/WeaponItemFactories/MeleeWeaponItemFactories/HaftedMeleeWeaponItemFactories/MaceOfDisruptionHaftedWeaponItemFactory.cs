@@ -21,8 +21,10 @@ internal class MaceOfDisruptionHaftedWeaponItemFactory : HaftedWeaponItemFactory
     public override int Ds => 8;
     public override string FriendlyName => "& Mace~ of Disruption";
     public override int LevelNormallyFound => 80;
-    public override int[] Chance => new int[] { 8, 0, 0, 0 };
-    public override int[] Locale => new int[] { 80, 0, 0, 0 };
+    public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
+    {
+        (80, 8)
+    };
     public override bool ShowMods => true;
     public override bool SlayUndead => true;
     public override int Weight => 400;

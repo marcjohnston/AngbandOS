@@ -21,8 +21,11 @@ internal class TwoHandedSwordWeaponItemFactory : SwordWeaponItemFactory
     public override int Ds => 6;
     public override string FriendlyName => "& Two-Handed Sword~";
     public override int LevelNormallyFound => 30;
-    public override int[] Chance => new int[] { 1, 1, 0, 0 };
-    public override int[] Locale => new int[] { 30, 40, 0, 0 };
+    public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
+    {
+        (30, 1),
+        (40, 1)
+    };
     public override bool ShowMods => true;
     public override int Weight => 200;
     public override Item CreateItem() => new Item(Game, this);

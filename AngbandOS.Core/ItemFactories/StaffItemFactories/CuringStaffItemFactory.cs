@@ -22,8 +22,10 @@ internal class CuringStaffItemFactory : StaffItemFactory
     public override int Ds => 2;
     public override string FriendlyName => "Curing";
     public override int LevelNormallyFound => 25;
-    public override int[] Chance => new int[] { 1, 0, 0, 0 };
-    public override int[] Locale => new int[] { 25, 0, 0, 0 };
+    public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
+    {
+        (25, 1)
+    };
     public override int Weight => 50;
 
     public override void UseStaff(UseStaffEvent eventArgs)

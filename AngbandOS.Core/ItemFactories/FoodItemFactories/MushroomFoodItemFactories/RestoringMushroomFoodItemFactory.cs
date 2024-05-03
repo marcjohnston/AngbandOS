@@ -18,8 +18,12 @@ internal class RestoringMushroomFoodItemFactory : MushroomFoodItemFactory
     public override int Cost => 1000;
     public override string FriendlyName => "Restoring";
     public override int LevelNormallyFound => 20;
-    public override int[] Chance => new int[] { 8, 4, 1, 0 };
-    public override int[] Locale => new int[] { 20, 30, 40, 0 };
+    public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
+    {
+        (20, 8),
+        (30, 4),
+        (40, 1)
+    };
     public override int Weight => 1;
     public override bool Eat()
     {

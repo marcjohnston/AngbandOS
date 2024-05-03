@@ -20,8 +20,13 @@ internal class DaggerWeaponItemFactory : SwordWeaponItemFactory
     public override int Dd => 1;
     public override int Ds => 4;
     public override string FriendlyName => "& Dagger~";
-    public override int[] Chance => new int[] { 1, 1, 1, 1 };
-    public override int[] Locale => new int[] { 0, 5, 10, 20 };
+    public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
+    {
+        (0, 1),
+        (5, 1),
+        (10, 1),
+        (20, 1)
+    };
     public override bool ShowMods => true;
     public override int Weight => 12;
     public override Item CreateItem() => new Item(Game, this);

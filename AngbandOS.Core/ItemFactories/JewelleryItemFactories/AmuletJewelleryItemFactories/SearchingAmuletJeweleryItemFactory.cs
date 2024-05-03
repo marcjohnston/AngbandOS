@@ -30,8 +30,10 @@ internal class SearchingAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
     public override string FriendlyName => "Searching";
     public override bool HideType => true;
     public override int LevelNormallyFound => 30;
-    public override int[] Chance => new int[] { 4, 0, 0, 0 };
-    public override int[] Locale => new int[] { 30, 0, 0, 0 };
+    public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
+    {
+        (30, 4)
+    };
     public override bool Search => true;
     public override int Weight => 3;
     public override Item CreateItem() => new Item(Game, this);

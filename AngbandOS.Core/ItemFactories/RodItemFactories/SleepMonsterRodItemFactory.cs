@@ -21,8 +21,10 @@ internal class SleepMonsterRodItemFactory : RodItemFactory
     public override int Ds => 1;
     public override string FriendlyName => "Sleep Monster";
     public override int LevelNormallyFound => 30;
-    public override int[] Chance => new int[] { 1, 0, 0, 0 };
-    public override int[] Locale => new int[] { 30, 0, 0, 0 };
+    public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
+    {
+        (30, 1)
+    };
     public override int Weight => 15;
     public override int RodRechargeTime => 18;
     public override void Execute(ZapRodEvent zapRodEvent)

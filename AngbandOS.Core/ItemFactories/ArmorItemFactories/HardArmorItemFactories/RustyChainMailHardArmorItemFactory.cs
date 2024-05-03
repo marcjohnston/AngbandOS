@@ -22,8 +22,10 @@ internal class RustyChainMailHardArmorItemFactory : HardArmorItemFactory
     public override int Ds => 4;
     public override string FriendlyName => "Rusty Chain Mail~";
     public override int LevelNormallyFound => 25;
-    public override int[] Chance => new int[] { 1, 0, 0, 0 };
-    public override int[] Locale => new int[] { 25, 0, 0, 0 };
+    public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
+    {
+        (25, 1)
+    };
     public override int ToA => -8;
     public override int ToH => -5;
     public override int Weight => 200;

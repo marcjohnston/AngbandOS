@@ -21,8 +21,10 @@ internal class HavocRodItemFactory : RodItemFactory
     public override int Ds => 1;
     public override string FriendlyName => "Havoc";
     public override int LevelNormallyFound => 95;
-    public override int[] Chance => new int[] { 16, 0, 0, 0 };
-    public override int[] Locale => new int[] { 100, 0, 0, 0 };
+    public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
+    {
+        (100, 16)
+    };
     public override int Weight => 15;
     public override int RodRechargeTime => 250;
     public override void Execute(ZapRodEvent zapRodEvent)

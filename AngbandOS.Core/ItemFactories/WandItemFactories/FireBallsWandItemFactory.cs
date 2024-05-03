@@ -22,8 +22,10 @@ internal class FireBallsWandItemFactory : WandItemFactory
     public override string FriendlyName => "Fire Balls";
     public override bool IgnoreFire => true;
     public override int LevelNormallyFound => 50;
-    public override int[] Chance => new int[] { 1, 0, 0, 0 };
-    public override int[] Locale => new int[] { 50, 0, 0, 0 };
+    public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
+    {
+        (50, 1)
+    };
     public override int Weight => 10;
     public override bool ExecuteActivation(Game game, int dir)
     {

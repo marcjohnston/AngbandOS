@@ -18,8 +18,10 @@ internal class SpecialAcquirementScrollItemFactory : ScrollItemFactory
     public override int Cost => 200000;
     public override string FriendlyName => "*Acquirement*";
     public override int LevelNormallyFound => 60;
-    public override int[] Chance => new int[] { 16, 0, 0, 0 };
-    public override int[] Locale => new int[] { 60, 0, 0, 0 };
+    public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
+    {
+        (60, 16)
+    };
     public override int Weight => 5;
 
     public override void Read(ReadScrollEvent eventArgs)

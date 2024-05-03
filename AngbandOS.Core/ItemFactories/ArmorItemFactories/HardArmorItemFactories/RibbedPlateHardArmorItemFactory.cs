@@ -22,8 +22,10 @@ internal class RibbedPlateHardArmorItemFactory : HardArmorItemFactory
     public override int Ds => 4;
     public override string FriendlyName => "Ribbed Plate Armor~";
     public override int LevelNormallyFound => 50;
-    public override int[] Chance => new int[] { 1, 0, 0, 0 };
-    public override int[] Locale => new int[] { 50, 0, 0, 0 };
+    public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
+    {
+        (50, 1)
+    };
     public override int ToH => -3;
     public override int Weight => 380;
     public override Item CreateItem() => new Item(Game, this);

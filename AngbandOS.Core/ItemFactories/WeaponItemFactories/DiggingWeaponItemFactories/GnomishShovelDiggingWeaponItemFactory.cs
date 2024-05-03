@@ -21,8 +21,10 @@ internal class GnomishShovelDiggingWeaponItemFactory : DiggingWeaponItemFactory
     public override int Ds => 2;
     public override string FriendlyName => "& Gnomish Shovel~";
     public override int LevelNormallyFound => 20;
-    public override int[] Chance => new int[] { 4, 0, 0, 0 };
-    public override int[] Locale => new int[] { 20, 0, 0, 0 };
+    public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
+    {
+        (20, 4)
+    };
     public override int InitialTypeSpecificValue => 2;
     public override bool ShowMods => true;
     public override bool Tunnel => true;

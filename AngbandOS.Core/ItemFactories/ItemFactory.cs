@@ -858,10 +858,10 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey
     /// </summary>
     public virtual bool Cha { get; set; } = false;
 
-    [Obsolete($"Now using {nameof(LevelsFoundAndChances)}")]
-    public virtual int[] Chance => new int[] { 0, 0, 0, 0 };
-
-    public virtual (int level, int chance)? LevelsFoundAndChances => null;
+    /// <summary>
+    /// Returns the depth and 1-in probably for where the item can be found; or null, if the item is not found naturally.  Returns null, by definition.
+    /// </summary>
+    public virtual (int level, int chance)[]? DepthsFoundAndChances => null;
 
     /// <summary>
     /// Returns whether or not the item produced chaotic effects when being wielded.
@@ -928,9 +928,6 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey
     public virtual bool KindIsGood => false;
     public virtual int LevelNormallyFound => 0;
     public virtual bool Lightsource { get; set; } = false;
-
-    [Obsolete($"Now using {nameof(LevelsFoundAndChances)}")]
-    public virtual int[] Locale => new int[] { 0, 0, 0, 0 };
 
     public virtual bool NoMagic { get; set; } = false;
     public virtual bool NoTele { get; set; } = false;

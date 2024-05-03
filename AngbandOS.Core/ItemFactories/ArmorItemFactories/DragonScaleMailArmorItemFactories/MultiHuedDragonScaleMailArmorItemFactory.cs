@@ -60,8 +60,10 @@ internal class MultiHuedDragonScaleMailArmorItemFactory : DragonScaleMailArmorIt
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
     public override int LevelNormallyFound => 100;
-    public override int[] Chance => new int[] { 16, 0, 0, 0 };
-    public override int[] Locale => new int[] { 100, 0, 0, 0 };
+    public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
+    {
+        (100, 16)
+    };
     public override bool ResAcid => true;
     public override bool ResCold => true;
     public override bool ResElec => true;

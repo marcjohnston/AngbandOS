@@ -21,8 +21,10 @@ internal class FrostBoltsRodItemFactory : RodItemFactory
     public override int Ds => 1;
     public override string FriendlyName => "Frost Bolts";
     public override int LevelNormallyFound => 25;
-    public override int[] Chance => new int[] { 1, 0, 0, 0 };
-    public override int[] Locale => new int[] { 25, 0, 0, 0 };
+    public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
+    {
+        (25, 1)
+    };
     public override int Weight => 15;
     public override int RodRechargeTime => 13;
     public override void Execute(ZapRodEvent zapRodEvent)

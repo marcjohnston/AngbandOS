@@ -17,8 +17,10 @@ internal class RuinedChestItemFactory : ChestItemFactory
     public override string Name => "Ruined chest";
 
     public override string FriendlyName => "& Ruined chest~";
-    public override int[] Chance => new int[] { 1, 0, 0, 0 };
-    public override int[] Locale => new int[] { 75, 0, 0, 0 };
+    public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
+    {
+        (75, 1)
+    };
     public override int Weight => 250;
     public override bool IsSmall => true;
     public override int NumberOfItemsContained => 0;

@@ -17,8 +17,10 @@ internal class AggravateMonsterScrollItemFactory : ScrollItemFactory
     public override string FriendlyName => "Aggravate Monster";
     public override int LevelNormallyFound => 5;
     // AngbandOS: 2022 Marc Johnston
-    public override int[] Chance => new int[] { 1, 0, 0, 0 };
-    public override int[] Locale => new int[] { 5, 0, 0, 0 };
+    public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
+    {
+        (5, 1)
+    };
     public override int Weight => 5;
 
     public override void Read(ReadScrollEvent eventArgs)
