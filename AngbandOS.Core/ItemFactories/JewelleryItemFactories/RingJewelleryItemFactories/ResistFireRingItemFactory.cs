@@ -15,12 +15,12 @@ internal class ResistFireRingItemFactory : RingItemFactory
     protected override string SymbolName => nameof(EqualSignSymbol);
     public override string Name => "Resist Fire";
 
-    public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int Cost => 250;
     public override bool EasyKnow => true;
     public override string FriendlyName => "Resist Fire";
     public override bool IgnoreFire => true;
     public override int LevelNormallyFound => 10;
+    public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int[] Locale => new int[] { 10, 0, 0, 0 };
     public override bool ResFire => true;
     public override int Weight => 2;

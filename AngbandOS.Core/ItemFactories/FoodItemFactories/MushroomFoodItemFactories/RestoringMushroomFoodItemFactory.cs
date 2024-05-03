@@ -15,10 +15,10 @@ internal class RestoringMushroomFoodItemFactory : MushroomFoodItemFactory
     protected override string SymbolName => nameof(CommaSymbol);
     public override string Name => "Restoring";
 
-    public override int[] Chance => new int[] { 8, 4, 1, 0 };
     public override int Cost => 1000;
     public override string FriendlyName => "Restoring";
     public override int LevelNormallyFound => 20;
+    public override int[] Chance => new int[] { 8, 4, 1, 0 };
     public override int[] Locale => new int[] { 20, 30, 40, 0 };
     public override int Weight => 1;
     public override bool Eat()

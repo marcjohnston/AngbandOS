@@ -15,12 +15,12 @@ internal class ExperiencePotionItemFactory : PotionItemFactory
     protected override string SymbolName => nameof(ExclamationPointSymbol);
     public override string Name => "Experience";
 
-    public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int Cost => 25000;
     public override int Dd => 1;
     public override int Ds => 1;
     public override string FriendlyName => "Experience";
     public override int LevelNormallyFound => 65;
+    public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int[] Locale => new int[] { 65, 0, 0, 0 };
     public override int Weight => 4;
     public override bool Quaff()

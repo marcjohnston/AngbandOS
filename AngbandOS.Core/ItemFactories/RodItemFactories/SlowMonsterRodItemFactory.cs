@@ -16,12 +16,12 @@ internal class SlowMonsterRodItemFactory : RodItemFactory
     protected override string SymbolName => nameof(MinusSignSymbol);
     public override string Name => "Slow Monster";
 
-    public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int Cost => 1500;
     public override int Dd => 1;
     public override int Ds => 1;
     public override string FriendlyName => "Slow Monster";
     public override int LevelNormallyFound => 30;
+    public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int[] Locale => new int[] { 30, 0, 0, 0 };
     public override int Weight => 15;
     public override int RodRechargeTime => 20;

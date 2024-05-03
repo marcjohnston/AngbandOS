@@ -15,10 +15,10 @@ internal class RuneOfProtectionScrollItemFactory : ScrollItemFactory
     protected override string SymbolName => nameof(QuestionMarkSymbol);
     public override string Name => "Rune of Protection";
 
-    public override int[] Chance => new int[] { 2, 4, 0, 0 };
     public override int Cost => 500;
     public override string FriendlyName => "Rune of Protection";
     public override int LevelNormallyFound => 50;
+    public override int[] Chance => new int[] { 2, 4, 0, 0 };
     public override int[] Locale => new int[] { 50, 90, 0, 0 };
     public override int Weight => 5;
 

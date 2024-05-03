@@ -16,12 +16,12 @@ internal class PowerStaffItemFactory : StaffItemFactory
     public override string Name => "Power";
 
     public override int StaffChargeCount => Game.DieRoll(3) + 1;
-    public override int[] Chance => new int[] { 2, 0, 0, 0 };
     public override int Cost => 4000;
     public override int Dd => 1;
     public override int Ds => 2;
     public override string FriendlyName => "Power";
     public override int LevelNormallyFound => 70;
+    public override int[] Chance => new int[] { 2, 0, 0, 0 };
     public override int[] Locale => new int[] { 70, 0, 0, 0 };
     public override int Weight => 50;
     public override void UseStaff(UseStaffEvent eventArgs)

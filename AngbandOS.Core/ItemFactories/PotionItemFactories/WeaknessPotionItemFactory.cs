@@ -15,11 +15,11 @@ internal class WeaknessPotionItemFactory : PotionItemFactory
     protected override string SymbolName => nameof(ExclamationPointSymbol);
     public override string Name => "Weakness";
 
-    public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int Dd => 3;
     public override int Ds => 12;
     public override string FriendlyName => "Weakness";
     public override int LevelNormallyFound => 3;
+    public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int[] Locale => new int[] { 3, 0, 0, 0 };
     public override int Weight => 4;
     public override bool Quaff()

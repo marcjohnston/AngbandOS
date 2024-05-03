@@ -44,7 +44,6 @@ internal class ElvenCloakArmorItemFactory : CloakArmorItemFactory
     }
 
     public override int Ac => 4;
-    public override int[] Chance => new int[] { 4, 0, 0, 0 };
     public override int Cost => 1500;
     public override string FriendlyName => "& Elven Cloak~";
     public override bool IgnoreAcid => true;
@@ -52,6 +51,7 @@ internal class ElvenCloakArmorItemFactory : CloakArmorItemFactory
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
     public override int LevelNormallyFound => 30;
+    public override int[] Chance => new int[] { 4, 0, 0, 0 };
     public override int[] Locale => new int[] { 30, 0, 0, 0 };
     public override bool Search => true;
     public override bool Stealth => true;

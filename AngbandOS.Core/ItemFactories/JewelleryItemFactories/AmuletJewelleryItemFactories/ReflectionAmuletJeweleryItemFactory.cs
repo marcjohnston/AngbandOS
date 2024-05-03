@@ -15,7 +15,6 @@ internal class ReflectionAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
     protected override string SymbolName => nameof(DoubleQuoteSymbol);
     public override string Name => "Reflection";
 
-    public override int[] Chance => new int[] { 4, 0, 0, 0 };
     public override int Cost => 30000;
     public override bool EasyKnow => true;
     public override string FriendlyName => "Reflection";
@@ -24,6 +23,7 @@ internal class ReflectionAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
     public override int LevelNormallyFound => 60;
+    public override int[] Chance => new int[] { 4, 0, 0, 0 };
     public override int[] Locale => new int[] { 60, 0, 0, 0 };
     public override bool Reflect => true;
     public override int Weight => 3;

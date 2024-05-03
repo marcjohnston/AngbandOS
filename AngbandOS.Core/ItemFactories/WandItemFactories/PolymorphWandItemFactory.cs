@@ -16,12 +16,12 @@ internal class PolymorphWandItemFactory : WandItemFactory
     public override string Name => "Polymorph";
 
     public override int RodChargeCount => Game.DieRoll(8) + 6;
-    public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int Cost => 400;
     public override int Dd => 1;
     public override int Ds => 1;
     public override string FriendlyName => "Polymorph";
     public override int LevelNormallyFound => 20;
+    public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int[] Locale => new int[] { 20, 0, 0, 0 };
     public override int Weight => 10;
     public override bool ExecuteActivation(Game game, int dir)

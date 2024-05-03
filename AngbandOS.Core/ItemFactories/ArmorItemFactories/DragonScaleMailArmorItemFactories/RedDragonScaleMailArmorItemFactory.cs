@@ -29,7 +29,6 @@ internal class RedDragonScaleMailArmorItemFactory : DragonScaleMailArmorItemFact
 
     public override int Ac => 30;
     public override bool Activate => true;
-    public override int[] Chance => new int[] { 8, 0, 0, 0 };
     public override int Cost => 100000;
     public override int Dd => 2;
     public override int Ds => 4;
@@ -39,6 +38,7 @@ internal class RedDragonScaleMailArmorItemFactory : DragonScaleMailArmorItemFact
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
     public override int LevelNormallyFound => 80;
+    public override int[] Chance => new int[] { 8, 0, 0, 0 };
     public override int[] Locale => new int[] { 80, 0, 0, 0 };
     public override bool ResFire => true;
     public override int ToA => 10;

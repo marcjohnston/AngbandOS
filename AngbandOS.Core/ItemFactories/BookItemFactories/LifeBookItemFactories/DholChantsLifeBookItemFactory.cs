@@ -16,7 +16,6 @@ internal class DholChantsLifeBookItemFactory : LifeBookItemFactory
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "[Dhol Chants]";
 
-    public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int Cost => 25000;
     public override int Dd => 1;
     public override int Ds => 1;
@@ -26,6 +25,7 @@ internal class DholChantsLifeBookItemFactory : LifeBookItemFactory
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
     public override int LevelNormallyFound => 40;
+    public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int[] Locale => new int[] { 40, 0, 0, 0 };
 
     /// <summary>

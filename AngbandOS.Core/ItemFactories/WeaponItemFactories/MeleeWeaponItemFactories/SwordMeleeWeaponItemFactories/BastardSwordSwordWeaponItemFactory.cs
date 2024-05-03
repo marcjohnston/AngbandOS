@@ -16,12 +16,12 @@ internal class BastardSwordSwordWeaponItemFactory : SwordWeaponItemFactory
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "Bastard Sword";
 
-    public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int Cost => 350;
     public override int Dd => 3;
     public override int Ds => 4;
     public override string FriendlyName => "& Bastard Sword~";
     public override int LevelNormallyFound => 15;
+    public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int[] Locale => new int[] { 15, 0, 0, 0 };
     public override bool ShowMods => true;
     public override int Weight => 140;

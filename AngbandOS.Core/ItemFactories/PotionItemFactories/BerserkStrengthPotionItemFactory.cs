@@ -15,12 +15,12 @@ internal class BerserkStrengthPotionItemFactory : PotionItemFactory
     protected override string SymbolName => nameof(ExclamationPointSymbol);
     public override string Name => "Berserk Strength";
 
-    public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int Cost => 100;
     public override int Dd => 1;
     public override int Ds => 1;
     public override string FriendlyName => "Berserk Strength";
     public override int LevelNormallyFound => 3;
+    public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int[] Locale => new int[] { 3, 0, 0, 0 };
     public override int Weight => 4;
     public override bool Quaff()

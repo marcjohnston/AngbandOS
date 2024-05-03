@@ -29,10 +29,10 @@ internal class AccuracyRingItemFactory : RingItemFactory
     protected override string SymbolName => nameof(EqualSignSymbol);
     public override string Name => "Accuracy";
 
-    public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int Cost => 500;
     public override string FriendlyName => "Accuracy";
     public override int LevelNormallyFound => 20;
+    public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int[] Locale => new int[] { 20, 0, 0, 0 };
     public override int Weight => 2;
     public override Item CreateItem() => new Item(Game, this);

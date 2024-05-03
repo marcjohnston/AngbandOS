@@ -16,12 +16,12 @@ internal class WhipHaftedWeaponItemFactory : HaftedWeaponItemFactory
     public override ColorEnum Color => ColorEnum.Black;
     public override string Name => "Whip";
 
-    public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int Cost => 30;
     public override int Dd => 1;
     public override int Ds => 6;
     public override string FriendlyName => "& Whip~";
     public override int LevelNormallyFound => 3;
+    public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int[] Locale => new int[] { 3, 0, 0, 0 };
     public override bool ShowMods => true;
     public override int Weight => 30;

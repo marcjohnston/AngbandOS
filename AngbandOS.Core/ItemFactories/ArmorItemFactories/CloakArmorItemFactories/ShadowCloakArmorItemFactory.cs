@@ -17,10 +17,10 @@ internal class ShadowCloakArmorItemFactory : CloakArmorItemFactory
     public override string Name => "Shadow Cloak";
 
     public override int Ac => 6;
-    public override int[] Chance => new int[] { 5, 0, 0, 0 };
     public override int Cost => 7500;
     public override string FriendlyName => "& Shadow Cloak~";
     public override int LevelNormallyFound => 60;
+    public override int[] Chance => new int[] { 5, 0, 0, 0 };
     public override int[] Locale => new int[] { 75, 0, 0, 0 };
     public override bool ResDark => true;
     public override bool ResLight => true;

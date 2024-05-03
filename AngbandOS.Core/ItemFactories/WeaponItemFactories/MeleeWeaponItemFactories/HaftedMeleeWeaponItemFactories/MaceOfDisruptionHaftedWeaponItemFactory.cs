@@ -16,12 +16,12 @@ internal class MaceOfDisruptionHaftedWeaponItemFactory : HaftedWeaponItemFactory
     public override ColorEnum Color => ColorEnum.Purple;
     public override string Name => "Mace of Disruption";
 
-    public override int[] Chance => new int[] { 8, 0, 0, 0 };
     public override int Cost => 4300;
     public override int Dd => 5;
     public override int Ds => 8;
     public override string FriendlyName => "& Mace~ of Disruption";
     public override int LevelNormallyFound => 80;
+    public override int[] Chance => new int[] { 8, 0, 0, 0 };
     public override int[] Locale => new int[] { 80, 0, 0, 0 };
     public override bool ShowMods => true;
     public override bool SlayUndead => true;

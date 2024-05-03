@@ -15,10 +15,10 @@ internal class SatisfyHungerScrollItemFactory : ScrollItemFactory
     protected override string SymbolName => nameof(QuestionMarkSymbol);
     public override string Name => "Satisfy Hunger";
 
-    public override int[] Chance => new int[] { 1, 1, 1, 1 };
     public override int Cost => 10;
     public override string FriendlyName => "Satisfy Hunger";
     public override int LevelNormallyFound => 5;
+    public override int[] Chance => new int[] { 1, 1, 1, 1 };
     public override int[] Locale => new int[] { 5, 20, 50, 75 };
     public override int Weight => 5;
 

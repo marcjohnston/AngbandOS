@@ -1,4 +1,3 @@
-// AngbandOS: 2022 Marc Johnston
 //
 // This game is released under the “Angband License”, defined as: “© 1997 Ben Harrison, James E.
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
@@ -15,9 +14,10 @@ internal class AggravateMonsterScrollItemFactory : ScrollItemFactory
     protected override string SymbolName => nameof(QuestionMarkSymbol);
     public override string Name => "Aggravate Monster";
 
-    public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override string FriendlyName => "Aggravate Monster";
     public override int LevelNormallyFound => 5;
+    // AngbandOS: 2022 Marc Johnston
+    public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int[] Locale => new int[] { 5, 0, 0, 0 };
     public override int Weight => 5;
 

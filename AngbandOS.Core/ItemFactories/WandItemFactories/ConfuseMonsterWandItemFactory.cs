@@ -16,12 +16,12 @@ internal class ConfuseMonsterWandItemFactory : WandItemFactory
     public override string Name => "Confuse Monster";
 
     public override int RodChargeCount => Game.DieRoll(12) + 6;
-    public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int Cost => 500;
     public override int Dd => 1;
     public override int Ds => 1;
     public override string FriendlyName => "Confuse Monster";
     public override int LevelNormallyFound => 5;
+    public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int[] Locale => new int[] { 3, 0, 0, 0 };
     public override int Weight => 10;
     public override bool ExecuteActivation(Game game, int dir)

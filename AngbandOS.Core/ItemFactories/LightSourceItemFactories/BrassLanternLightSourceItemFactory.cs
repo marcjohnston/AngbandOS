@@ -54,7 +54,6 @@ internal class BrassLanternLightSourceItemFactory : LightSourceItemFactory
     public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "Brass Lantern";
 
-    public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int Cost => 35;
     public override int Dd => 1;
     public override int Ds => 1;
@@ -62,6 +61,7 @@ internal class BrassLanternLightSourceItemFactory : LightSourceItemFactory
     public override string FriendlyName => "& Brass Lantern~";
     public override bool IgnoreFire => true;
     public override int LevelNormallyFound => 3;
+    public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int[] Locale => new int[] { 3, 0, 0, 0 };
     public override int InitialTurnsOfLight => 7500;
     public override int Weight => 50;

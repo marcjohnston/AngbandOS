@@ -17,6 +17,7 @@ internal class BrokenStickJunkItemFactory : JunkItemFactory
     public override string Name => "Broken Stick";
 
     public override int[] Chance => new int[] { 1, 0, 0, 0 };
+    public override int[] Locale => new int[] { 0, 0, 0, 0 };
     public override int Dd => 1;
     public override int Ds => 1;
     public override string FriendlyName => "& Broken Stick~";

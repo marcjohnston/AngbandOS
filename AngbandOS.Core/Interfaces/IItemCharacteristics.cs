@@ -12,101 +12,97 @@ namespace AngbandOS.Core.Interfaces;
 /// that they implement the same ItemCharacteristics.
 /// </summary>
 /// <remarks>
-/// It would have been nice if we could have made this interface immutable but there are numerous places where the we set the properties one at a time.  This
-/// is mostly present in the Randart.  Due to that implementation, we will will take quite care not to make this into a hybrid of storing state and using
-/// instantiation.  As a result, we will instantiate instances of this class as readonly and manipulate only the properties.  Therefore, the associated methods
-/// will reflect such.
 /// </remarks>
 internal interface IItemCharacteristics
 {
-    bool Blows { get; set; }
-    bool BrandAcid { get; set; }
-    bool BrandCold { get; set; }
-    bool BrandElec { get; set; }
-    bool BrandFire { get; set; }
-    bool BrandPois { get; set; }
-    bool Cha { get; set; }
-    bool Chaotic { get; set; }
-    bool Con { get; set; }
-    bool Dex { get; set; }
-    bool Impact { get; set; }
-    bool Infra { get; set; }
-    bool Int { get; set; }
-    bool KillDragon { get; set; }
-    bool Search { get; set; }
-    bool SlayAnimal { get; set; }
-    bool SlayDemon { get; set; }
-    bool SlayDragon { get; set; }
-    bool SlayEvil { get; set; }
-    bool SlayGiant { get; set; }
-    bool SlayOrc { get; set; }
-    bool SlayTroll { get; set; }
-    bool SlayUndead { get; set; }
-    bool Speed { get; set; }
-    bool Stealth { get; set; }
-    bool Str { get; set; }
-    bool Tunnel { get; set; }
-    bool Vampiric { get; set; }
-    bool Vorpal { get; set; }
-    bool Wis { get; set; }
-    bool FreeAct { get; set; }
-    bool HoldLife { get; set; }
-    bool ImAcid { get; set; }
-    bool ImCold { get; set; }
-    bool ImElec { get; set; }
-    bool ImFire { get; set; }
-    bool Reflect { get; set; }
-    bool ResAcid { get; set; }
-    bool ResBlind { get; set; }
-    bool ResChaos { get; set; }
-    bool ResCold { get; set; }
-    bool ResConf { get; set; }
-    bool ResDark { get; set; }
-    bool ResDisen { get; set; }
-    bool ResElec { get; set; }
-    bool ResFear { get; set; }
-    bool ResFire { get; set; }
-    bool ResLight { get; set; }
-    bool ResNether { get; set; }
-    bool ResNexus { get; set; }
-    bool ResPois { get; set; }
-    bool ResShards { get; set; }
-    bool ResSound { get; set; }
-    bool SustCha { get; set; }
-    bool SustCon { get; set; }
-    bool SustDex { get; set; }
-    bool SustInt { get; set; }
-    bool SustStr { get; set; }
-    bool SustWis { get; set; }
-    bool AntiTheft { get; set; }
-    bool Activate { get; set; }
-    bool Aggravate { get; set; }
-    bool Blessed { get; set; }
-    bool Cursed { get; set; }
-    bool DrainExp { get; set; }
-    bool DreadCurse { get; set; }
-    bool EasyKnow { get; set; }
-    bool Feather { get; set; }
-    bool HeavyCurse { get; set; }
-    bool HideType { get; set; }
-    bool IgnoreAcid { get; set; }
-    bool IgnoreCold { get; set; }
-    bool IgnoreElec { get; set; }
-    bool IgnoreFire { get; set; }
-    bool InstaArt { get; set; }
-    bool Lightsource { get; set; }
-    bool NoMagic { get; set; }
-    bool NoTele { get; set; }
-    bool PermaCurse { get; set; }
-    bool Regen { get; set; }
-    bool SeeInvis { get; set; }
-    bool ShElec { get; set; }
-    bool ShFire { get; set; }
-    bool ShowMods { get; set; }
-    bool SlowDigest { get; set; }
-    bool Telepathy { get; set; }
-    bool Teleport { get; set; }
-    bool Wraith { get; set; }
-    bool XtraMight { get; set; }
-    bool XtraShots { get; set; }
+    bool Activate { get; }
+    bool Aggravate { get; }
+    bool AntiTheft { get; }
+    bool Blessed { get; }
+    bool Blows { get; }
+    bool BrandAcid { get; }
+    bool BrandCold { get; }
+    bool BrandElec { get; }
+    bool BrandFire { get; }
+    bool BrandPois { get; }
+    bool Cha { get; }
+    bool Chaotic { get; }
+    bool Con { get; }
+    bool Cursed { get; }
+    bool Dex { get; }
+    bool DrainExp { get; }
+    bool DreadCurse { get; }
+    bool EasyKnow { get; }
+    bool Feather { get; }
+    bool FreeAct { get; }
+    bool HeavyCurse { get; }
+    bool HideType { get; }
+    bool HoldLife { get; }
+    bool IgnoreAcid { get; }
+    bool IgnoreCold { get; }
+    bool IgnoreElec { get; }
+    bool IgnoreFire { get; }
+    bool ImAcid { get; }
+    bool ImCold { get; }
+    bool ImElec { get; }
+    bool ImFire { get; }
+    bool Impact { get; }
+    bool Infra { get; }
+    bool InstaArt { get; }
+    bool Int { get; }
+    bool KillDragon { get; }
+    bool Lightsource { get; }
+    bool NoMagic { get; }
+    bool NoTele { get; }
+    bool PermaCurse { get; }
+    bool Reflect { get; }
+    bool Regen { get; }
+    bool ResAcid { get; }
+    bool ResBlind { get; }
+    bool ResChaos { get; }
+    bool ResCold { get; }
+    bool ResConf { get; }
+    bool ResDark { get; }
+    bool ResDisen { get; }
+    bool ResElec { get; }
+    bool ResFear { get; }
+    bool ResFire { get; }
+    bool ResLight { get; }
+    bool ResNether { get; }
+    bool ResNexus { get; }
+    bool ResPois { get; }
+    bool ResShards { get; }
+    bool ResSound { get; }
+    bool Search { get; }
+    bool SeeInvis { get; }
+    bool ShElec { get; }
+    bool ShFire { get; }
+    bool ShowMods { get; }
+    bool SlayAnimal { get; }
+    bool SlayDemon { get; }
+    bool SlayDragon { get; }
+    bool SlayEvil { get; }
+    bool SlayGiant { get; }
+    bool SlayOrc { get; }
+    bool SlayTroll { get; }
+    bool SlayUndead { get; }
+    bool SlowDigest { get; }
+    bool Speed { get; }
+    bool Stealth { get; }
+    bool Str { get; }
+    bool SustCha { get; }
+    bool SustCon { get; }
+    bool SustDex { get; }
+    bool SustInt { get; }
+    bool SustStr { get; }
+    bool SustWis { get; }
+    bool Telepathy { get; }
+    bool Teleport { get; }
+    bool Tunnel { get; }
+    bool Vampiric { get; }
+    bool Vorpal { get; }
+    bool Wis { get; }
+    bool Wraith { get; }
+    bool XtraMight { get; }
+    bool XtraShots { get; }
 }

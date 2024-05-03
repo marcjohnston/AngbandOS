@@ -15,11 +15,11 @@ internal class CureLightWoundsPotionItemFactory : PotionItemFactory
     protected override string SymbolName => nameof(ExclamationPointSymbol);
     public override string Name => "Cure Light Wounds";
 
-    public override int[] Chance => new int[] { 1, 1, 1, 0 };
     public override int Cost => 15;
     public override int Dd => 1;
     public override int Ds => 1;
     public override string FriendlyName => "Cure Light Wounds";
+    public override int[] Chance => new int[] { 1, 1, 1, 0 };
     public override int[] Locale => new int[] { 0, 1, 3, 0 };
     public override int InitialNutritionalValue => 50;
     public override int Weight => 4;

@@ -15,12 +15,12 @@ internal class AugmentationPotionItemFactory : PotionItemFactory
     protected override string SymbolName => nameof(ExclamationPointSymbol);
     public override string Name => "Augmentation";
 
-    public override int[] Chance => new int[] { 16, 0, 0, 0 };
     public override int Cost => 60000;
     public override int Dd => 1;
     public override int Ds => 1;
     public override string FriendlyName => "Augmentation";
     public override int LevelNormallyFound => 40;
+    public override int[] Chance => new int[] { 16, 0, 0, 0 };
     public override int[] Locale => new int[] { 40, 0, 0, 0 };
     public override int Weight => 4;
     public override bool Quaff()

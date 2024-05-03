@@ -21,12 +21,12 @@ internal class StupidityRingItemFactory : RingItemFactory
         item.IdentCursed = true;
         item.TypeSpecificValue = 0 - (1 + item.GetBonusValue(5, level));
     }
-    public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override bool Cursed => true;
     public override string FriendlyName => "Stupidity";
     public override bool HideType => true;
     public override bool Int => true;
     public override int LevelNormallyFound => 5;
+    public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int[] Locale => new int[] { 5, 0, 0, 0 };
     public override int InitialTypeSpecificValue => -5;
     public override int Weight => 2;

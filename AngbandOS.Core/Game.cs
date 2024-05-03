@@ -3327,16 +3327,13 @@ internal class Game
 
     private void InitializeAllocationTables()
     {
-        int i, j;
-        ItemFactory kPtr;
         MonsterRace rPtr;
         int[] num = new int[Constants.MaxDepth];
         int[] aux = new int[Constants.MaxDepth];
         AllocKindSize = 0;
-        for (i = 1; i < SingletonRepository.Get<ItemFactory>().Length; i++)
+        foreach (ItemFactory kPtr in SingletonRepository.Get<ItemFactory>())
         {
-            kPtr = SingletonRepository.Get<ItemFactory>(i);
-            for (j = 0; j < 4; j++)
+            for (int j = 0; j < 4; j++)
             {
                 if (kPtr.Chance[j] != 0)
                 {
@@ -3345,7 +3342,7 @@ internal class Game
                 }
             }
         }
-        for (i = 1; i < Constants.MaxDepth; i++)
+        for (int i = 1; i < Constants.MaxDepth; i++)
         {
             num[i] += num[i - 1];
         }
@@ -3359,10 +3356,10 @@ internal class Game
             AllocKindTable[k] = new AllocationEntry();
         }
         AllocationEntry[] table = AllocKindTable;
-        for (i = 1; i < SingletonRepository.Get<ItemFactory>().Length; i++)
+        for (int i = 1; i < SingletonRepository.Get<ItemFactory>().Length; i++)
         {
-            kPtr = SingletonRepository.Get<ItemFactory>(i);
-            for (j = 0; j < 4; j++)
+            ItemFactory kPtr = SingletonRepository.Get<ItemFactory>(i);
+            for (int j = 0; j < 4; j++)
             {
                 if (kPtr.Chance[j] != 0)
                 {
@@ -3382,7 +3379,7 @@ internal class Game
         aux = new int[Constants.MaxDepth];
         num = new int[Constants.MaxDepth];
         AllocRaceSize = 0;
-        for (i = 1; i < SingletonRepository.Get<MonsterRace>().Length - 1; i++)
+        for (int i = 1; i < SingletonRepository.Get<MonsterRace>().Length - 1; i++)
         {
             rPtr = SingletonRepository.Get<MonsterRace>(i);
             if (rPtr.Rarity != 0)
@@ -3391,7 +3388,7 @@ internal class Game
                 num[rPtr.Level]++;
             }
         }
-        for (i = 1; i < Constants.MaxDepth; i++)
+        for (int i = 1; i < Constants.MaxDepth; i++)
         {
             num[i] += num[i - 1];
         }
@@ -3405,7 +3402,7 @@ internal class Game
             AllocRaceTable[k] = new AllocationEntry();
         }
         table = AllocRaceTable;
-        for (i = 1; i < SingletonRepository.Get<MonsterRace>().Length - 1; i++)
+        for (int i = 1; i < SingletonRepository.Get<MonsterRace>().Length - 1; i++)
         {
             rPtr = SingletonRepository.Get<MonsterRace>(i);
             if (rPtr.Rarity != 0)

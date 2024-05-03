@@ -16,7 +16,6 @@ internal class RevelationsOfGlaakiNatureBookItemFactory : NatureBookItemFactory
     public override ColorEnum Color => ColorEnum.Green;
     public override string Name => "[Revelations of Glaaki]";
 
-    public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int Cost => 25000;
     public override int Dd => 1;
     public override int Ds => 1;
@@ -26,6 +25,7 @@ internal class RevelationsOfGlaakiNatureBookItemFactory : NatureBookItemFactory
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
     public override int LevelNormallyFound => 50;
+    public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int[] Locale => new int[] { 50, 0, 0, 0 };
 
     /// <summary>

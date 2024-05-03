@@ -23,7 +23,6 @@ internal class DoomAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
         item.BonusArmorClass = 0 - (Game.DieRoll(5) + item.GetBonusValue(5, level));
     }
     public override bool Cha => true;
-    public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override bool Con => true;
     public override bool Cursed => true;
     public override bool Dex => true;
@@ -31,6 +30,7 @@ internal class DoomAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
     public override bool HideType => true;
     public override bool Int => true;
     public override int LevelNormallyFound => 50;
+    public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int[] Locale => new int[] { 50, 0, 0, 0 };
     public override int InitialTypeSpecificValue => -5;
     public override bool Str => true;

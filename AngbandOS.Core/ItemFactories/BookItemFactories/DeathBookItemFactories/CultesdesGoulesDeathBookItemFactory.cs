@@ -16,7 +16,6 @@ internal class CultesdesGoulesDeathBookItemFactory : DeathBookItemFactory
     public override ColorEnum Color => ColorEnum.Black;
     public override string Name => "[Cultes des Goules]";
 
-    public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int Cost => 25000;
     public override int Dd => 1;
     public override int Ds => 1;
@@ -26,6 +25,7 @@ internal class CultesdesGoulesDeathBookItemFactory : DeathBookItemFactory
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
     public override int LevelNormallyFound => 50;
+    public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int[] Locale => new int[] { 50, 0, 0, 0 };
 
     /// <summary>

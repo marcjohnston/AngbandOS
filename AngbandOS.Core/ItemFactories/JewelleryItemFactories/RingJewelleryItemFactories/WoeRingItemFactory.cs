@@ -24,11 +24,11 @@ internal class WoeRingItemFactory : RingItemFactory
     }
 
     public override bool Cha => true;
-    public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override bool Cursed => true;
     public override string FriendlyName => "Woe";
     public override bool HideType => true;
     public override int LevelNormallyFound => 50;
+    public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int[] Locale => new int[] { 50, 0, 0, 0 };
     public override int InitialTypeSpecificValue => -5;
     public override bool Teleport => true;

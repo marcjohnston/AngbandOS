@@ -18,10 +18,10 @@ internal class HardLeatherCapHelmArmorItemFactory
     public override string Name => "Hard Leather Cap";
 
     public override int Ac => 2;
-    public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int Cost => 12;
     public override string FriendlyName => "& Hard Leather Cap~";
     public override int LevelNormallyFound => 3;
+    public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int[] Locale => new int[] { 3, 0, 0, 0 };
     public override int Weight => 15;
     public override Item CreateItem() => new Item(Game, this);

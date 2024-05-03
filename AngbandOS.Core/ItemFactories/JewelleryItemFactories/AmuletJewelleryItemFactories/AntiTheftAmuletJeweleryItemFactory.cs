@@ -16,7 +16,6 @@ internal class AntiTheftAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
     public override string Name => "Anti-Theft";
 
     public override bool AntiTheft => true;
-    public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int Cost => 1000;
     public override string FriendlyName => "Anti-Theft";
     public override bool IgnoreAcid => true;
@@ -24,6 +23,7 @@ internal class AntiTheftAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
     public override int LevelNormallyFound => 20;
+    public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int[] Locale => new int[] { 20, 0, 0, 0 };
     public override int Weight => 3;
     public override Item CreateItem() => new Item(Game, this);

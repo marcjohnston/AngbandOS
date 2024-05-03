@@ -30,10 +30,10 @@ internal class ProtectionRingItemFactory : RingItemFactory
 
     public override string Name => "Protection";
 
-    public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int Cost => 500;
     public override string FriendlyName => "Protection";
     public override int LevelNormallyFound => 10;
+    public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int[] Locale => new int[] { 10, 0, 0, 0 };
     public override int Weight => 2;
     public override Item CreateItem() => new Item(Game, this);

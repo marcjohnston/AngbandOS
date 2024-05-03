@@ -15,12 +15,12 @@ internal class LevitationRingItemFactory : RingItemFactory
     protected override string SymbolName => nameof(EqualSignSymbol);
     public override string Name => "Levitation";
 
-    public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int Cost => 200;
     public override bool EasyKnow => true;
     public override bool Feather => true;
     public override string FriendlyName => "Levitation";
     public override int LevelNormallyFound => 5;
+    public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int[] Locale => new int[] { 5, 0, 0, 0 };
     public override int Weight => 2;
     public override Item CreateItem() => new Item(Game, this);

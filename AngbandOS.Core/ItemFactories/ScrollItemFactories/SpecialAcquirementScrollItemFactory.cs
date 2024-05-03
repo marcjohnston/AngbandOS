@@ -15,10 +15,10 @@ internal class SpecialAcquirementScrollItemFactory : ScrollItemFactory
     protected override string SymbolName => nameof(QuestionMarkSymbol);
     public override string Name => "*Acquirement*";
 
-    public override int[] Chance => new int[] { 16, 0, 0, 0 };
     public override int Cost => 200000;
     public override string FriendlyName => "*Acquirement*";
     public override int LevelNormallyFound => 60;
+    public override int[] Chance => new int[] { 16, 0, 0, 0 };
     public override int[] Locale => new int[] { 60, 0, 0, 0 };
     public override int Weight => 5;
 

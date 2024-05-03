@@ -255,7 +255,7 @@ internal class Store
                 newItem = itemFactory.CreateItem();
             }
 
-                // Apply magic to the item.
+            // Apply magic to the item.
             newItem.ApplyMagic(level.Value, false, false, false, this);
             newItem.BecomeKnown();
             newItem.IdentityIsStoreBought = true;

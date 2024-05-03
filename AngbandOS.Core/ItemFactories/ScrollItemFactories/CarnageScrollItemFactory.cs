@@ -15,10 +15,10 @@ internal class CarnageScrollItemFactory : ScrollItemFactory
     protected override string SymbolName => nameof(QuestionMarkSymbol);
     public override string Name => "Carnage";
 
-    public override int[] Chance => new int[] { 4, 4, 0, 0 };
     public override int Cost => 750;
     public override string FriendlyName => "Carnage";
     public override int LevelNormallyFound => 40;
+    public override int[] Chance => new int[] { 4, 4, 0, 0 };
     public override int[] Locale => new int[] { 40, 80, 0, 0 };
     public override int Weight => 5;
 

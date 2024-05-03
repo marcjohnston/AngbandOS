@@ -15,9 +15,9 @@ internal class SummonMonsterScrollItemFactory : ScrollItemFactory
     protected override string SymbolName => nameof(QuestionMarkSymbol);
     public override string Name => "Summon Monster";
 
-    public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override string FriendlyName => "Summon Monster";
     public override int LevelNormallyFound => 1;
+    public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int[] Locale => new int[] { 1, 0, 0, 0 };
     public override int Weight => 5;
 

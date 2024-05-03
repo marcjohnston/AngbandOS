@@ -16,12 +16,12 @@ internal class MainGaucheWeaponItemFactory : SwordWeaponItemFactory
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "Main Gauche";
 
-    public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int Cost => 25;
     public override int Dd => 1;
     public override int Ds => 5;
     public override string FriendlyName => "& Main Gauche~";
     public override int LevelNormallyFound => 3;
+    public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int[] Locale => new int[] { 3, 0, 0, 0 };
     public override bool ShowMods => true;
     public override int Weight => 30;

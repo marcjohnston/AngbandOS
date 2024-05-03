@@ -16,13 +16,13 @@ internal class ColdBallsWandItemFactory : WandItemFactory
     public override string Name => "Cold Balls";
 
     public override int RodChargeCount => Game.DieRoll(6) + 2;
-    public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int Cost => 1500;
     public override int Dd => 1;
     public override int Ds => 1;
     public override string FriendlyName => "Cold Balls";
     public override bool IgnoreCold => true;
     public override int LevelNormallyFound => 40;
+    public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int[] Locale => new int[] { 40, 0, 0, 0 };
     public override int Weight => 10;
     public override bool ExecuteActivation(Game game, int dir)

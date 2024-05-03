@@ -15,10 +15,10 @@ internal class SpecialEnchantWeaponScrollItemFactory : ScrollItemFactory
     protected override string SymbolName => nameof(QuestionMarkSymbol);
     public override string Name => "*Enchant Weapon*";
 
-    public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int Cost => 500;
     public override string FriendlyName => "*Enchant Weapon*";
     public override int LevelNormallyFound => 50;
+    public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int[] Locale => new int[] { 50, 0, 0, 0 };
     public override int Weight => 5;
 

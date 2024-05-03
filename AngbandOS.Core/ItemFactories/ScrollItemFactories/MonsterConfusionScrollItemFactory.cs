@@ -15,10 +15,10 @@ internal class MonsterConfusionScrollItemFactory : ScrollItemFactory
     protected override string SymbolName => nameof(QuestionMarkSymbol);
     public override string Name => "Monster Confusion";
 
-    public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int Cost => 30;
     public override string FriendlyName => "Monster Confusion";
     public override int LevelNormallyFound => 5;
+    public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int[] Locale => new int[] { 5, 0, 0, 0 };
     public override int Weight => 5;
 

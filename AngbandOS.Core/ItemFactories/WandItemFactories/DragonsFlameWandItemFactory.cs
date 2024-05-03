@@ -15,7 +15,6 @@ internal class DragonsFlameWandItemFactory : WandItemFactory
     protected override string SymbolName => nameof(MinusSignSymbol);
     public override string Name => "Dragon's Flame";
 
-    public override int[] Chance => new int[] { 4, 0, 0, 0 };
     public override int RodChargeCount => Game.DieRoll(3) + 1;
     public override int Cost => 2400;
     public override int Dd => 1;
@@ -26,6 +25,7 @@ internal class DragonsFlameWandItemFactory : WandItemFactory
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
     public override int LevelNormallyFound => 50;
+    public override int[] Chance => new int[] { 4, 0, 0, 0 };
     public override int[] Locale => new int[] { 50, 0, 0, 0 };
     public override int Weight => 10;
     public override bool ExecuteActivation(Game game, int dir)

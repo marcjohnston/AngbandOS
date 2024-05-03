@@ -17,7 +17,6 @@ internal class WonderWandItemFactory : WandItemFactory
 
     public override int RodChargeCount => Game.DieRoll(15) + 8;
 
-    public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int Cost => 250;
     public override int Dd => 1;
     public override int Ds => 1;
@@ -27,6 +26,7 @@ internal class WonderWandItemFactory : WandItemFactory
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
     public override int LevelNormallyFound => 3;
+    public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int[] Locale => new int[] { 3, 0, 0, 0 };
     public override int Weight => 10;
     public override bool ExecuteActivation(Game game, int dir)

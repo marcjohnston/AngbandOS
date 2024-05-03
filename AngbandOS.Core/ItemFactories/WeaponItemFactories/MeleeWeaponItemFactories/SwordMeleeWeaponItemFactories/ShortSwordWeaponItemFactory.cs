@@ -16,12 +16,12 @@ internal class ShortSwordWeaponItemFactory : SwordWeaponItemFactory
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "Short Sword";
 
-    public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int Cost => 90;
     public override int Dd => 1;
     public override int Ds => 7;
     public override string FriendlyName => "& Short Sword~";
     public override int LevelNormallyFound => 5;
+    public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int[] Locale => new int[] { 5, 0, 0, 0 };
     public override bool ShowMods => true;
     public override int Weight => 80;

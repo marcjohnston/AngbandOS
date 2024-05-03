@@ -16,12 +16,12 @@ internal class GreatAxePolearmWeaponItemFactory : PolearmWeaponItemFactory
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "Great Axe";
 
-    public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int Cost => 500;
     public override int Dd => 4;
     public override int Ds => 4;
     public override string FriendlyName => "& Great Axe~";
     public override int LevelNormallyFound => 40;
+    public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int[] Locale => new int[] { 40, 0, 0, 0 };
     public override bool ShowMods => true;
     public override int Weight => 230;

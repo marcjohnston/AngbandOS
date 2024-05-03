@@ -15,10 +15,10 @@ internal class TrapDetectionScrollItemFactory : ScrollItemFactory
     protected override string SymbolName => nameof(QuestionMarkSymbol);
     public override string Name => "Trap Detection";
 
-    public override int[] Chance => new int[] { 1, 1, 0, 0 };
     public override int Cost => 35;
     public override string FriendlyName => "Trap Detection";
     public override int LevelNormallyFound => 5;
+    public override int[] Chance => new int[] { 1, 1, 0, 0 };
     public override int[] Locale => new int[] { 5, 10, 0, 0 };
     public override int Weight => 5;
 

@@ -16,13 +16,13 @@ internal class GoldenCrownArmorItemFactory : CrownArmorItemFactory
     public override ColorEnum Color => ColorEnum.Gold;
     public override string Name => "Golden Crown";
 
-    public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int Cost => 1000;
     public override int Dd => 1;
     public override int Ds => 1;
     public override string FriendlyName => "& Golden Crown~";
     public override bool IgnoreAcid => true;
     public override int LevelNormallyFound => 45;
+    public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int[] Locale => new int[] { 45, 0, 0, 0 };
     public override int Weight => 30;
     public override Item CreateItem() => new Item(Game, this);

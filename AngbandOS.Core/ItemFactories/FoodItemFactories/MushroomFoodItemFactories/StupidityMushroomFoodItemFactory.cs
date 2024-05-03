@@ -15,9 +15,9 @@ internal class StupidityMushroomFoodItemFactory : MushroomFoodItemFactory
     protected override string SymbolName => nameof(CommaSymbol);
     public override string Name => "Stupidity";
 
-    public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override string FriendlyName => "Stupidity";
     public override int LevelNormallyFound => 15;
+    public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int[] Locale => new int[] { 15, 0, 0, 0 };
     public override int Weight => 1;
     public override bool Eat()

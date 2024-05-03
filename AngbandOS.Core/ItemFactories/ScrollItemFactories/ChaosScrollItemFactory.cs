@@ -15,7 +15,6 @@ internal class ChaosScrollItemFactory : ScrollItemFactory
     protected override string SymbolName => nameof(QuestionMarkSymbol);
     public override string Name => "Chaos";
 
-    public override int[] Chance => new int[] { 8, 0, 0, 0 };
     public override int Cost => 10000;
     public override string FriendlyName => "Chaos";
     public override bool IgnoreAcid => true;
@@ -23,6 +22,7 @@ internal class ChaosScrollItemFactory : ScrollItemFactory
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
     public override int LevelNormallyFound => 100;
+    public override int[] Chance => new int[] { 8, 0, 0, 0 };
     public override int[] Locale => new int[] { 100, 0, 0, 0 };
     public override int Weight => 5;
 

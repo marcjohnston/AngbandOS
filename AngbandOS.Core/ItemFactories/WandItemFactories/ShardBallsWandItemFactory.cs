@@ -16,7 +16,6 @@ internal class ShardBallsWandItemFactory : WandItemFactory
     public override string Name => "Shard Balls";
 
     public override int RodChargeCount => Game.DieRoll(2) + 1;
-    public override int[] Chance => new int[] { 4, 0, 0, 0 };
     public override int Cost => 95000;
     public override int Dd => 1;
     public override int Ds => 1;
@@ -26,6 +25,7 @@ internal class ShardBallsWandItemFactory : WandItemFactory
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
     public override int LevelNormallyFound => 75;
+    public override int[] Chance => new int[] { 4, 0, 0, 0 };
     public override int[] Locale => new int[] { 75, 0, 0, 0 };
     public override int Weight => 10;
 

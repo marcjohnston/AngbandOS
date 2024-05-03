@@ -15,12 +15,12 @@ internal class CuringPotionItemFactory : PotionItemFactory
     protected override string SymbolName => nameof(ExclamationPointSymbol);
     public override string Name => "Curing";
 
-    public override int[] Chance => new int[] { 1, 1, 0, 0 };
     public override int Cost => 250;
     public override int Dd => 1;
     public override int Ds => 1;
     public override string FriendlyName => "Curing";
     public override int LevelNormallyFound => 18;
+    public override int[] Chance => new int[] { 1, 1, 0, 0 };
     public override int[] Locale => new int[] { 18, 40, 0, 0 };
     public override int InitialNutritionalValue => 100;
     public override int Weight => 4;

@@ -22,7 +22,6 @@ internal class CthaatAquadingenNatureBookItemFactory : NatureBookItemFactory
 
     public override string Name => "[Cthaat Aquadingen]";
 
-    public override int[] Chance => new int[] { 2, 0, 0, 0 };
     public override int Cost => 100000;
     public override int Dd => 1;
     public override int Ds => 1;
@@ -32,6 +31,7 @@ internal class CthaatAquadingenNatureBookItemFactory : NatureBookItemFactory
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
     public override int LevelNormallyFound => 80;
+    public override int[] Chance => new int[] { 2, 0, 0, 0 };
     public override int[] Locale => new int[] { 80, 0, 0, 0 };
 
     /// <summary>

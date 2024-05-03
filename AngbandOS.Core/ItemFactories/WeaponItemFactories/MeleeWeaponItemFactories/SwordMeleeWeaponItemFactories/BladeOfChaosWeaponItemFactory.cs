@@ -17,12 +17,12 @@ internal class BladeOfChaosWeaponItemFactory : SwordWeaponItemFactory
     public override string Name => "Blade of Chaos";
 
     public override bool Chaotic => true;
-    public override int[] Chance => new int[] { 8, 0, 0, 0 };
     public override int Cost => 4000;
     public override int Dd => 6;
     public override int Ds => 5;
     public override string FriendlyName => "& Blade~ of Chaos";
     public override int LevelNormallyFound => 70;
+    public override int[] Chance => new int[] { 8, 0, 0, 0 };
     public override int[] Locale => new int[] { 70, 0, 0, 0 };
     public override bool ResChaos => true;
     public override bool ShowMods => true;

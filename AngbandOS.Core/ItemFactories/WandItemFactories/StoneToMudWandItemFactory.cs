@@ -16,12 +16,12 @@ internal class StoneToMudWandItemFactory : WandItemFactory
     public override string Name => "Stone to Mud";
 
     public override int RodChargeCount => Game.DieRoll(8) + 3;
-    public override int[] Chance => new int[] { 1, 1, 1, 0 };
     public override int Cost => 300;
     public override int Dd => 1;
     public override int Ds => 1;
     public override string FriendlyName => "Stone to Mud";
     public override int LevelNormallyFound => 10;
+    public override int[] Chance => new int[] { 1, 1, 1, 0 };
     public override int[] Locale => new int[] { 10, 40, 80, 0 };
     public override int Weight => 10;
     public override bool ExecuteActivation(Game game, int dir)

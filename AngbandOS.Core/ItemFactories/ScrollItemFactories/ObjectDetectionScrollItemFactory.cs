@@ -16,6 +16,7 @@ internal class ObjectDetectionScrollItemFactory : ScrollItemFactory
     public override string Name => "Object Detection";
 
     public override int[] Chance => new int[] { 1, 0, 0, 0 };
+    public override int[] Locale => new int[] { 0, 0, 0, 0 };
     public override int Cost => 15;
     public override string FriendlyName => "Object Detection";
     public override int Weight => 5;

@@ -16,12 +16,12 @@ internal class WoodenArrowAmmunitionItemFactory : ArrowAmmunitionItemFactory
     public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "Arrow";
 
-    public override int[] Chance => new int[] { 1, 1, 0, 0 };
     public override int Cost => 1;
     public override int Dd => 1;
     public override int Ds => 4;
     public override string FriendlyName => "& Arrow~";
     public override int LevelNormallyFound => 3;
+    public override int[] Chance => new int[] { 1, 1, 0, 0 };
     public override int[] Locale => new int[] { 3, 15, 0, 0 };
     public override bool ShowMods => true;
     public override int Weight => 2;

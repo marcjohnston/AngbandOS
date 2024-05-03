@@ -70,8 +70,8 @@ internal class HobbitRace : Race
         // Hobbits can cook food
         if (Game.CheckIfRacialPowerWorks(15, 10, Ability.Intelligence, 10))
         {
-            ItemFactory foodItemClass = Game.SingletonRepository.Get<ItemFactory>(nameof(RationFoodItemFactory));
-            Item item = foodItemClass.CreateItem();
+            ItemFactory foodItemFactory = Game.SingletonRepository.Get<ItemFactory>(nameof(RationFoodItemFactory));
+            Item item = foodItemFactory.CreateItem();
             Game.DropNear(item, -1, Game.MapY.IntValue, Game.MapX.IntValue);
             Game.MsgPrint("You cook some food.");
         }

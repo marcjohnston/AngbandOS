@@ -16,8 +16,8 @@ internal class RuinedChestItemFactory : ChestItemFactory
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "Ruined chest";
 
-    public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override string FriendlyName => "& Ruined chest~";
+    public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int[] Locale => new int[] { 75, 0, 0, 0 };
     public override int Weight => 250;
     public override bool IsSmall => true;

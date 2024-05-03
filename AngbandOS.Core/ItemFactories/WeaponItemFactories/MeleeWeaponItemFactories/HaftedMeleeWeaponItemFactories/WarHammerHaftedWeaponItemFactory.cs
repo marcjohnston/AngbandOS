@@ -16,12 +16,12 @@ internal class WarHammerHaftedWeaponItemFactory : HaftedWeaponItemFactory
     public override ColorEnum Color => ColorEnum.Black;
     public override string Name => "War Hammer";
 
-    public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int Cost => 225;
     public override int Dd => 3;
     public override int Ds => 3;
     public override string FriendlyName => "& War Hammer~";
     public override int LevelNormallyFound => 5;
+    public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int[] Locale => new int[] { 5, 0, 0, 0 };
     public override bool ShowMods => true;
     public override int Weight => 120;

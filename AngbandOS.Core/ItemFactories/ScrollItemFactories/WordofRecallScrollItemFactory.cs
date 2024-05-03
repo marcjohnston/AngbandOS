@@ -15,10 +15,10 @@ internal class WordOfRecallScrollItemFactory : ScrollItemFactory
     protected override string SymbolName => nameof(QuestionMarkSymbol);
     public override string Name => "Word of Recall";
 
-    public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int Cost => 150;
     public override string FriendlyName => "Word of Recall";
     public override int LevelNormallyFound => 5;
+    public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int[] Locale => new int[] { 5, 0, 0, 0 };
     public override int Weight => 5;
 

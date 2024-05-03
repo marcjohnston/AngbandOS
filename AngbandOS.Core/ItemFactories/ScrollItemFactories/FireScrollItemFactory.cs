@@ -15,11 +15,11 @@ internal class FireScrollItemFactory : ScrollItemFactory
     protected override string SymbolName => nameof(QuestionMarkSymbol);
     public override string Name => "Fire";
 
-    public override int[] Chance => new int[] { 4, 0, 0, 0 };
     public override int Cost => 1000;
     public override string FriendlyName => "Fire";
     public override bool IgnoreFire => true;
     public override int LevelNormallyFound => 50;
+    public override int[] Chance => new int[] { 4, 0, 0, 0 };
     public override int[] Locale => new int[] { 50, 0, 0, 0 };
     public override int Weight => 5;
 

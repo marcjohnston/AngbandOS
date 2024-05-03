@@ -15,12 +15,12 @@ internal class SpeedPotionItemFactory : PotionItemFactory
     protected override string SymbolName => nameof(ExclamationPointSymbol);
     public override string Name => "Speed";
 
-    public override int[] Chance => new int[] { 1, 1, 1, 0 };
     public override int Cost => 75;
     public override int Dd => 1;
     public override int Ds => 1;
     public override string FriendlyName => "Speed";
     public override int LevelNormallyFound => 1;
+    public override int[] Chance => new int[] { 1, 1, 1, 0 };
     public override int[] Locale => new int[] { 1, 40, 60, 0 };
     public override int Weight => 4;
     public override bool Quaff()

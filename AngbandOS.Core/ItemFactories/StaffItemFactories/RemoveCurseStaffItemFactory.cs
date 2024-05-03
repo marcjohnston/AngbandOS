@@ -15,13 +15,13 @@ internal class RemoveCurseStaffItemFactory : StaffItemFactory
     protected override string SymbolName => nameof(UnderscoreSymbol);
     public override string Name => "Remove Curse";
 
-    public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int Cost => 500;
     public override int Dd => 1;
     public override int StaffChargeCount => Game.DieRoll(3) + 4;
     public override int Ds => 2;
     public override string FriendlyName => "Remove Curse";
     public override int LevelNormallyFound => 40;
+    public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int[] Locale => new int[] { 40, 0, 0, 0 };
     public override int Weight => 50;
 

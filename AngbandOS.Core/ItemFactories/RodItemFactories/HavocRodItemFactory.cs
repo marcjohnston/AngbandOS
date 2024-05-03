@@ -16,12 +16,12 @@ internal class HavocRodItemFactory : RodItemFactory
     protected override string SymbolName => nameof(MinusSignSymbol);
     public override string Name => "Havoc";
 
-    public override int[] Chance => new int[] { 16, 0, 0, 0 };
     public override int Cost => 150000;
     public override int Dd => 1;
     public override int Ds => 1;
     public override string FriendlyName => "Havoc";
     public override int LevelNormallyFound => 95;
+    public override int[] Chance => new int[] { 16, 0, 0, 0 };
     public override int[] Locale => new int[] { 100, 0, 0, 0 };
     public override int Weight => 15;
     public override int RodRechargeTime => 250;

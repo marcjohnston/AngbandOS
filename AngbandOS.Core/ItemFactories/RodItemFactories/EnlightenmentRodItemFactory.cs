@@ -16,12 +16,12 @@ internal class EnlightenmentRodItemFactory : RodItemFactory
     protected override string SymbolName => nameof(MinusSignSymbol);
     public override string Name => "Enlightenment";
 
-    public override int[] Chance => new int[] { 4, 0, 0, 0 };
     public override int Cost => 10000;
     public override int Dd => 1;
     public override int Ds => 1;
     public override string FriendlyName => "Enlightenment";
     public override int LevelNormallyFound => 65;
+    public override int[] Chance => new int[] { 4, 0, 0, 0 };
     public override int[] Locale => new int[] { 65, 0, 0, 0 };
     public override int Weight => 15;
     public override int RodRechargeTime => 99;

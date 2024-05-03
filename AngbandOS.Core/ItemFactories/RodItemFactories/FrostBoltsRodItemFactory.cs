@@ -16,12 +16,12 @@ internal class FrostBoltsRodItemFactory : RodItemFactory
     protected override string SymbolName => nameof(MinusSignSymbol);
     public override string Name => "Frost Bolts";
 
-    public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int Cost => 2500;
     public override int Dd => 1;
     public override int Ds => 1;
     public override string FriendlyName => "Frost Bolts";
     public override int LevelNormallyFound => 25;
+    public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int[] Locale => new int[] { 25, 0, 0, 0 };
     public override int Weight => 15;
     public override int RodRechargeTime => 13;

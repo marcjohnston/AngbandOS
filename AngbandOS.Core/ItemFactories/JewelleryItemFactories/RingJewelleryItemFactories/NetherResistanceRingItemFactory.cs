@@ -15,12 +15,12 @@ internal class NetherResistanceRingItemFactory : RingItemFactory
     protected override string SymbolName => nameof(EqualSignSymbol);
     public override string Name => "Nether Resistance";
 
-    public override int[] Chance => new int[] { 2, 0, 0, 0 };
     public override int Cost => 14500;
     public override bool EasyKnow => true;
     public override string FriendlyName => "Nether Resistance";
     public override bool HoldLife => true;
     public override int LevelNormallyFound => 34;
+    public override int[] Chance => new int[] { 2, 0, 0, 0 };
     public override int[] Locale => new int[] { 34, 0, 0, 0 };
     public override bool ResNether => true;
     public override int Weight => 2;

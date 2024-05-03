@@ -22,7 +22,6 @@ internal class CeleanoFragmentsTarotBookItemFactory : TarotBookItemFactory
     public override ColorEnum Color => ColorEnum.Pink;
     public override string Name => "[Celeano Fragments]";
 
-    public override int[] Chance => new int[] { 3, 0, 0, 0 };
     public override int Cost => 100000;
     public override int Dd => 1;
     public override int Ds => 1;
@@ -32,6 +31,7 @@ internal class CeleanoFragmentsTarotBookItemFactory : TarotBookItemFactory
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
     public override int LevelNormallyFound => 90;
+    public override int[] Chance => new int[] { 3, 0, 0, 0 };
     public override int[] Locale => new int[] { 90, 0, 0, 0 };
 
     /// <summary>

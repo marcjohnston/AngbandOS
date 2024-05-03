@@ -16,12 +16,12 @@ internal class TrapLocationRodItemFactory : RodItemFactory
     protected override string SymbolName => nameof(MinusSignSymbol);
     public override string Name => "Trap Location";
 
-    public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int Cost => 100;
     public override int Dd => 1;
     public override int Ds => 1;
     public override string FriendlyName => "Trap Location";
     public override int LevelNormallyFound => 5;
+    public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int[] Locale => new int[] { 5, 0, 0, 0 };
     public override int Weight => 15;
     public override int RodRechargeTime => 10 + Game.DieRoll(10);

@@ -26,7 +26,6 @@ internal class MagiAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
         Game.TreasureRating += 25;
     }
 
-    public override int[] Chance => new int[] { 4, 3, 0, 0 };
     public override int Cost => 30000;
     public override bool FreeAct => true;
     public override string FriendlyName => "the Magi";
@@ -35,6 +34,7 @@ internal class MagiAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
     public override int LevelNormallyFound => 50;
+    public override int[] Chance => new int[] { 4, 3, 0, 0 };
     public override int[] Locale => new int[] { 50, 80, 0, 0 };
     public override bool Search => true;
     public override bool SeeInvis => true;

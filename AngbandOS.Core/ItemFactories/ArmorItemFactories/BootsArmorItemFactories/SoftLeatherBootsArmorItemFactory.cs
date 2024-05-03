@@ -17,12 +17,12 @@ internal class SoftLeatherBootsArmorItemFactory : BootsArmorItemFactory
     public override string Name => "Pair of Soft Leather Boots";
 
     public override int Ac => 2;
-    public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int Cost => 7;
     public override int Dd => 1;
     public override int Ds => 1;
     public override string FriendlyName => "& Pair~ of Soft Leather Boots";
     public override int LevelNormallyFound => 3;
+    public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int[] Locale => new int[] { 3, 0, 0, 0 };
     public override int Weight => 20;
     public override Item CreateItem() => new Item(Game, this);

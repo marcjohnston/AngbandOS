@@ -28,7 +28,6 @@ internal class ResistanceAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
         }
     }
 
-    public override int[] Chance => new int[] { 4, 0, 0, 0 };
     public override int Cost => 25000;
     public override string FriendlyName => "Resistance";
     public override bool IgnoreAcid => true;
@@ -36,6 +35,7 @@ internal class ResistanceAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
     public override int LevelNormallyFound => 50;
+    public override int[] Chance => new int[] { 4, 0, 0, 0 };
     public override int[] Locale => new int[] { 50, 0, 0, 0 };
     public override bool ResAcid => true;
     public override bool ResCold => true;

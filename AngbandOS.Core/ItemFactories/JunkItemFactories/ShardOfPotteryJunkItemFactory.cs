@@ -17,6 +17,7 @@ internal class ShardOfPotteryJunkItemFactory : JunkItemFactory
     public override string Name => "Shard of Pottery";
 
     public override int[] Chance => new int[] { 1, 0, 0, 0 };
+    public override int[] Locale => new int[] { 0, 0, 0, 0 };
     public override int Dd => 1;
     public override int Ds => 1;
     public override string FriendlyName => "& Shard~ of Pottery";

@@ -17,12 +17,12 @@ internal class LargeLeatherShieldArmorItemFactory : ShieldArmorItemFactory
     public override string Name => "Large Leather Shield";
 
     public override int Ac => 4;
-    public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int Cost => 120;
     public override int Dd => 1;
     public override int Ds => 2;
     public override string FriendlyName => "& Large Leather Shield~";
     public override int LevelNormallyFound => 15;
+    public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int[] Locale => new int[] { 15, 0, 0, 0 };
     public override int Weight => 100;
     public override Item CreateItem() => new Item(Game, this);

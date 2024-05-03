@@ -15,12 +15,12 @@ internal class CommonPrayerLifeBookItemFactory : LifeBookItemFactory
     protected override string SymbolName => nameof(QuestionMarkSymbol);
     public override string Name => "[Book of Common Prayer]";
 
-    public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int Cost => 100;
     public override int Dd => 1;
     public override int Ds => 1;
     public override string FriendlyName => "[Book of Common Prayer]";
     public override int LevelNormallyFound => 10;
+    public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int[] Locale => new int[] { 10, 0, 0, 0 };
     public override int Weight => 30;
     public override bool KindIsGood => false;

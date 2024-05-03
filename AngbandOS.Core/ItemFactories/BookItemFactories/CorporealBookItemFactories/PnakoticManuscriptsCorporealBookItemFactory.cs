@@ -22,7 +22,6 @@ internal class PnakoticManuscriptsCorporealBookItemFactory : CorporealBookItemFa
     /// </summary>
     public override int ExperienceGainDivisorForDestroying => 1;
 
-    public override int[] Chance => new int[] { 3, 0, 0, 0 };
     public override int Cost => 100000;
     public override int Dd => 1;
     public override int Ds => 1;
@@ -32,6 +31,7 @@ internal class PnakoticManuscriptsCorporealBookItemFactory : CorporealBookItemFa
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
     public override int LevelNormallyFound => 90;
+    public override int[] Chance => new int[] { 3, 0, 0, 0 };
     public override int[] Locale => new int[] { 90, 0, 0, 0 };
 
     /// <summary>

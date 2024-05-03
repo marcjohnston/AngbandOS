@@ -15,11 +15,11 @@ internal class IceScrollItemFactory : ScrollItemFactory
     protected override string SymbolName => nameof(QuestionMarkSymbol);
     public override string Name => "Ice";
 
-    public override int[] Chance => new int[] { 6, 0, 0, 0 };
     public override int Cost => 5000;
     public override string FriendlyName => "Ice";
     public override bool IgnoreCold => true;
     public override int LevelNormallyFound => 75;
+    public override int[] Chance => new int[] { 6, 0, 0, 0 };
     public override int[] Locale => new int[] { 75, 0, 0, 0 };
     public override int Weight => 5;
 

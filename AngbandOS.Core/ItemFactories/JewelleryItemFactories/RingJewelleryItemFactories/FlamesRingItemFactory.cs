@@ -32,11 +32,11 @@ internal class FlamesRingItemFactory : RingItemFactory, IItemsCanBeActivated
         item.BonusArmorClass = 5 + Game.DieRoll(5) + item.GetBonusValue(10, level);
     }
     public override bool Activate => true;
-    public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int Cost => 3000;
     public override string FriendlyName => "Flames";
     public override bool IgnoreFire => true;
     public override int LevelNormallyFound => 50;
+    public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int[] Locale => new int[] { 50, 0, 0, 0 };
     public override bool ResFire => true;
     public override int ToA => 15;

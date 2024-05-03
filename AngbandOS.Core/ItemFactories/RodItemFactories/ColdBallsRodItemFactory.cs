@@ -16,12 +16,12 @@ internal class ColdBallsRodItemFactory : RodItemFactory
     protected override string SymbolName => nameof(MinusSignSymbol);
     public override string Name => "Cold Balls";
 
-    public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int Cost => 4500;
     public override int Dd => 1;
     public override int Ds => 1;
     public override string FriendlyName => "Cold Balls";
     public override int LevelNormallyFound => 60;
+    public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int[] Locale => new int[] { 60, 0, 0, 0 };
     public override int Weight => 15;
     public override int RodRechargeTime => 25;

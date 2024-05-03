@@ -16,12 +16,12 @@ internal class FireBoltsWandItemFactory : WandItemFactory
     public override string Name => "Fire Bolts";
 
     public override int RodChargeCount => Game.DieRoll(8) + 6;
-    public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int Cost => 1000;
     public override int Dd => 1;
     public override int Ds => 1;
     public override string FriendlyName => "Fire Bolts";
     public override int LevelNormallyFound => 30;
+    public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int[] Locale => new int[] { 30, 0, 0, 0 };
     public override int Weight => 10;
     public override bool ExecuteActivation(Game game, int dir)

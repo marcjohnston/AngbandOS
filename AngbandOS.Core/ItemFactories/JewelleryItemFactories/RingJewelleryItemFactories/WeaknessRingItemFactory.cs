@@ -15,11 +15,11 @@ internal class WeaknessRingItemFactory : RingItemFactory
     protected override string SymbolName => nameof(EqualSignSymbol);
     public override string Name => "Weakness";
 
-    public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override bool Cursed => true;
     public override string FriendlyName => "Weakness";
     public override bool HideType => true;
     public override int LevelNormallyFound => 5;
+    public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int[] Locale => new int[] { 5, 0, 0, 0 };
     public override int InitialTypeSpecificValue => -5;
     public override bool Str => true;

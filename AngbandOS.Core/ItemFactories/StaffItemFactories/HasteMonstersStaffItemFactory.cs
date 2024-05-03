@@ -16,11 +16,11 @@ internal class HasteMonstersStaffItemFactory : StaffItemFactory
     public override string Name => "Haste Monsters";
 
     public override int StaffChargeCount => Game.DieRoll(8) + 8;
-    public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int Dd => 1;
     public override int Ds => 2;
     public override string FriendlyName => "Haste Monsters";
     public override int LevelNormallyFound => 10;
+    public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int[] Locale => new int[] { 10, 0, 0, 0 };
     public override int Weight => 50;
 

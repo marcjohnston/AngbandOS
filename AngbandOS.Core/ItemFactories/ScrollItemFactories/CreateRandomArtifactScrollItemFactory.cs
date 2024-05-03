@@ -15,10 +15,10 @@ internal class CreateRandomArtifactScrollItemFactory : ScrollItemFactory
     protected override string SymbolName => nameof(QuestionMarkSymbol);
     public override string Name => "Artifact Creation";
 
-    public override int[] Chance => new int[] { 16, 0, 0, 0 };
     public override int Cost => 200000;
     public override string FriendlyName => "Artifact Creation";
     public override int LevelNormallyFound => 70;
+    public override int[] Chance => new int[] { 16, 0, 0, 0 };
     public override int[] Locale => new int[] { 70, 0, 0, 0 };
     public override int Weight => 5;
 

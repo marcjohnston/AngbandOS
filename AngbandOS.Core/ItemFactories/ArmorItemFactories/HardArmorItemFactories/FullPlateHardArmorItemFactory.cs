@@ -17,12 +17,12 @@ internal class FullPlateHardArmorItemFactory : HardArmorItemFactory
     public override string Name => "Full Plate Armor";
 
     public override int Ac => 25;
-    public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int Cost => 1350;
     public override int Dd => 2;
     public override int Ds => 4;
     public override string FriendlyName => "Full Plate Armor~";
     public override int LevelNormallyFound => 45;
+    public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int[] Locale => new int[] { 45, 0, 0, 0 };
     public override int ToH => -3;
     public override int Weight => 380;

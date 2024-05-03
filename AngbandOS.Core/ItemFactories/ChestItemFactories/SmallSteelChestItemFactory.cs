@@ -16,12 +16,12 @@ internal class SmallSteelChestItemFactory : ChestItemFactory
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "Small steel chest";
 
-    public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int Cost => 200;
     public override int Dd => 2;
     public override int Ds => 4;
     public override string FriendlyName => "& Small steel chest~";
     public override int LevelNormallyFound => 45;
+    public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int[] Locale => new int[] { 45, 0, 0, 0 };
     public override int Weight => 500;
     public override bool IsSmall => true;

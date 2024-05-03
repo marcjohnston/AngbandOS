@@ -16,12 +16,12 @@ internal class RapierWeaponItemFactory : SwordWeaponItemFactory
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "Rapier";
 
-    public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int Cost => 42;
     public override int Dd => 1;
     public override int Ds => 6;
     public override string FriendlyName => "& Rapier~";
     public override int LevelNormallyFound => 5;
+    public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int[] Locale => new int[] { 5, 0, 0, 0 };
     public override bool ShowMods => true;
     public override int Weight => 40;

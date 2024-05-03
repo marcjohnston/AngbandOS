@@ -15,12 +15,12 @@ internal class InfravisionPotionItemFactory : PotionItemFactory
     protected override string SymbolName => nameof(ExclamationPointSymbol);
     public override string Name => "Infra-vision";
 
-    public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int Cost => 20;
     public override int Dd => 1;
     public override int Ds => 1;
     public override string FriendlyName => "Infra-vision";
     public override int LevelNormallyFound => 3;
+    public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int[] Locale => new int[] { 3, 0, 0, 0 };
     public override int Weight => 4;
     public override bool Quaff()

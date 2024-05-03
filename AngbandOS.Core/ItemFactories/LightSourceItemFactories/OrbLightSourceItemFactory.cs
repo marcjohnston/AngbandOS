@@ -28,13 +28,13 @@ internal class OrbLightSourceItemFactory : LightSourceItemFactory
     }
 
     public override bool IdentityCanBeSensed => true;
-    public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int Cost => 1000;
     public override int Dd => 1;
 
     public override int Ds => 1;
     public override string FriendlyName => "& Orb~";
     public override int LevelNormallyFound => 10;
+    public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int[] Locale => new int[] { 10, 0, 0, 0 };
     public override int Weight => 50;
 

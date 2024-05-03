@@ -15,11 +15,11 @@ internal class FearResistanceRingItemFactory : RingItemFactory
     protected override string SymbolName => nameof(EqualSignSymbol);
     public override string Name => "Fear Resistance";
 
-    public override int[] Chance => new int[] { 2, 0, 0, 0 };
     public override int Cost => 300;
     public override bool EasyKnow => true;
     public override string FriendlyName => "Fear Resistance";
     public override int LevelNormallyFound => 10;
+    public override int[] Chance => new int[] { 2, 0, 0, 0 };
     public override int[] Locale => new int[] { 10, 0, 0, 0 };
     public override bool ResFear => true;
     public override int Weight => 2;

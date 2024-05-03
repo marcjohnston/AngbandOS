@@ -16,12 +16,12 @@ internal class FlailHaftedWeaponItemFactory : HaftedWeaponItemFactory
     public override ColorEnum Color => ColorEnum.Black;
     public override string Name => "Flail";
 
-    public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int Cost => 353;
     public override int Dd => 2;
     public override int Ds => 6;
     public override string FriendlyName => "& Flail~";
     public override int LevelNormallyFound => 10;
+    public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int[] Locale => new int[] { 10, 0, 0, 0 };
     public override bool ShowMods => true;
     public override int Weight => 150;

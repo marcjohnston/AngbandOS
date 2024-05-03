@@ -15,10 +15,10 @@ internal class SpecialRemoveCurseScrollItemFactory : ScrollItemFactory
     protected override string SymbolName => nameof(QuestionMarkSymbol);
     public override string Name => "*Remove Curse*";
 
-    public override int[] Chance => new int[] { 2, 2, 2, 1 };
     public override int Cost => 8000;
     public override string FriendlyName => "*Remove Curse*";
     public override int LevelNormallyFound => 50;
+    public override int[] Chance => new int[] { 2, 2, 2, 1 };
     public override int[] Locale => new int[] { 50, 75, 85, 95 };
     public override int Weight => 5;
 

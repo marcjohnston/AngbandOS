@@ -15,11 +15,11 @@ internal class ConfusionResistanceRingItemFactory : RingItemFactory
     protected override string SymbolName => nameof(EqualSignSymbol);
     public override string Name => "Confusion Resistance";
 
-    public override int[] Chance => new int[] { 2, 0, 0, 0 };
     public override int Cost => 3000;
     public override bool EasyKnow => true;
     public override string FriendlyName => "Confusion Resistance";
     public override int LevelNormallyFound => 22;
+    public override int[] Chance => new int[] { 2, 0, 0, 0 };
     public override int[] Locale => new int[] { 22, 0, 0, 0 };
     public override bool ResConf => true;
     public override int Weight => 2;

@@ -16,12 +16,12 @@ internal class TridentPolearmWeaponItemFactory : PolearmWeaponItemFactory
     public override ColorEnum Color => ColorEnum.Yellow;
     public override string Name => "Trident";
 
-    public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int Cost => 120;
     public override int Dd => 1;
     public override int Ds => 8;
     public override string FriendlyName => "& Trident~";
     public override int LevelNormallyFound => 5;
+    public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int[] Locale => new int[] { 5, 0, 0, 0 };
     public override bool ShowMods => true;
     public override int Weight => 70;

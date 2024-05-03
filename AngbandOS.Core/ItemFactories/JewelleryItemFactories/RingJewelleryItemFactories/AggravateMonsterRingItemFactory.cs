@@ -16,11 +16,11 @@ internal class AggravateMonsterRingItemFactory : RingItemFactory
     public override string Name => "Aggravate Monster";
 
     public override bool Aggravate => true;
-    public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override bool Cursed => true;
     public override bool EasyKnow => true;
     public override string FriendlyName => "Aggravate Monster";
     public override int LevelNormallyFound => 5;
+    public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int[] Locale => new int[] { 5, 0, 0, 0 };
     public override int Weight => 2;
     public override Item CreateItem() => new Item(Game, this);

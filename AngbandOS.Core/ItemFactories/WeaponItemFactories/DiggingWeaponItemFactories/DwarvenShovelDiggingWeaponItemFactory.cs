@@ -16,12 +16,12 @@ internal class DwarvenShovelDiggingWeaponItemFactory : DiggingWeaponItemFactory
     public override ColorEnum Color => ColorEnum.BrightBlue;
     public override string Name => "Dwarven Shovel";
 
-    public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int Cost => 200;
     public override int Dd => 1;
     public override int Ds => 3;
     public override string FriendlyName => "& Dwarven Shovel~";
     public override int LevelNormallyFound => 40;
+    public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int[] Locale => new int[] { 40, 0, 0, 0 };
     public override int InitialTypeSpecificValue => 3;
     public override bool ShowMods => true;

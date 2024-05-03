@@ -15,10 +15,10 @@ internal class CureSeriousWoundsMushroomFoodItemFactory : MushroomFoodItemFactor
     protected override string SymbolName => nameof(CommaSymbol);
     public override string Name => "Cure Serious Wounds";
 
-    public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int Cost => 75;
     public override string FriendlyName => "Cure Serious Wounds";
     public override int LevelNormallyFound => 15;
+    public override int[] Chance => new int[] { 1, 0, 0, 0 };
     public override int[] Locale => new int[] { 15, 0, 0, 0 };
     public override int Weight => 2;
     public override bool Eat()

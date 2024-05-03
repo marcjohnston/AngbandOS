@@ -46,10 +46,10 @@ internal class RobeSoftArmorItemFactory : SoftArmorItemFactory
     }
 
     public override int Ac => 2;
-    public override int[] Chance => new int[] { 1, 1, 0, 0 };
     public override int Cost => 4;
     public override string FriendlyName => "& Robe~";
     public override int LevelNormallyFound => 1;
+    public override int[] Chance => new int[] { 1, 1, 0, 0 };
     public override int[] Locale => new int[] { 1, 50, 0, 0 };
     public override int Weight => 20;
     public override Item CreateItem() => new Item(Game, this);
