@@ -52,26 +52,7 @@ internal abstract class CrownArmorItemFactory : ArmorItemFactory
 
     protected override void ApplyRandomPoorRareCharacteristics(Item item)
     {
-        switch (Game.DieRoll(7))
-        {
-            case 1:
-            case 2:
-                item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(HatOfStupidityRareItem));
-                break;
-            case 3:
-            case 4:
-                item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(HatOfNaivetyRareItem));
-                break;
-            case 5:
-                item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(HatOfUglinessRareItem));
-                break;
-            case 6:
-                item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(HatOfSicklinessRareItem));
-                break;
-            case 7:
-                item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(HatOfTeleportationRareItem));
-                break;
-        }
+        item.RareItem = Game.SingletonRepository.Get<RareItemWeightedRandom>(nameof(CrownPoorRareItemWeightedRandom)).ChooseOrDefault();
     }
 
     public CrownArmorItemFactory(Game game) : base(game) { }

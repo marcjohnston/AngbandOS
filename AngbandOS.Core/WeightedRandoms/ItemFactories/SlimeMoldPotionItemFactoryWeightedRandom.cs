@@ -7,6 +7,7 @@
 
 namespace AngbandOS.Core.WeightedRandoms;
 
+
 [Serializable]
 internal class SlimeMoldPotionItemFactoryWeightedRandom : ItemFactoryWeightedRandom
 {
