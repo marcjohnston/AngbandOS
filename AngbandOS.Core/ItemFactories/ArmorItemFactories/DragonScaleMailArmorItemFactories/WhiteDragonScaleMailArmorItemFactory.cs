@@ -12,16 +12,8 @@ internal class WhiteDragonScaleMailArmorItemFactory : DragonScaleMailArmorItemFa
 {
     private WhiteDragonScaleMailArmorItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public void ActivateItem(Item item)
-    {
-        if (!Game.GetDirectionWithAim(out int dir))
-        {
-            return;
-        }
-        Game.MsgPrint("You breathe frost.");
-        Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(ColdProjectile)), dir, 110, -2);
-        item.RingsArmorActivationAndFixedArtifactsRechargeTimeLeft = Game.RandomLessThan(450) + 450;
-    }
+    protected override string ActivationScriptName => nameof(BreatheFrostScript);
+    public override int ActivationRechargeTime => Game.RandomLessThan(450) + 450;
     public override string? DescribeActivationEffect => "breathe frost (110) every 450+d450 turns";
     protected override string SymbolName => nameof(OpenBraceSymbol);
     public override string Name => "White Dragon Scale Mail";

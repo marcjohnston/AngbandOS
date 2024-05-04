@@ -12,38 +12,8 @@ internal class MultiHuedDragonScaleMailArmorItemFactory : DragonScaleMailArmorIt
 {
     private MultiHuedDragonScaleMailArmorItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public void ActivateItem(Item item)
-    {
-        if (!Game.GetDirectionWithAim(out int dir))
-        {
-            return;
-        }
-        int chance = Game.RandomLessThan(5);
-        string element = chance == 1 ? "lightning" : (chance == 2 ? "frost" : (chance == 3 ? "acid" : (chance == 4 ? "poison gas" : "fire")));
-        Game.MsgPrint($"You breathe {element}.");
-        switch (chance)
-        {
-            case 0:
-                Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(FireProjectile)), dir, 250, -2);
-                return;
-            case 1:
-                Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(ElecProjectile)), dir, 250, -2);
-                return;
-
-            case 2:
-                Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(ColdProjectile)), dir, 250, -2);
-                return;
-
-            case 3:
-                Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(AcidProjectile)), dir, 250, -2);
-                return;
-
-            case 4:
-                Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(PoisProjectile)), dir, 250, -2);
-                return;
-        }
-        item.RingsArmorActivationAndFixedArtifactsRechargeTimeLeft = Game.RandomLessThan(225) + 225;
-    }
+    protected override string ActivationScriptName => nameof(BreatheLightningFrostAcidPoisonGasOrFireScript);
+    public override int ActivationRechargeTime => Game.RandomLessThan(225) + 225;
     public override string? DescribeActivationEffect => "breathe multi-hued (250) every 225+d225 turns";
     protected override string SymbolName => nameof(OpenBraceSymbol);
     public override ColorEnum Color => ColorEnum.Purple;

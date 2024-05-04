@@ -12,16 +12,9 @@ internal class BlueDragonScaleMailArmorItemFactory : DragonScaleMailArmorItemFac
 {
     private BlueDragonScaleMailArmorItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public void ActivateItem(Item item)
-    {
-        if (!Game.GetDirectionWithAim(out int dir))
-        {
-            return;
-        }
-        Game.MsgPrint("You breathe lightning.");
-        Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(ElecProjectile)), dir, 100, -2);
-        item.RingsArmorActivationAndFixedArtifactsRechargeTimeLeft = Game.RandomLessThan(450) + 450;
-    }
+    protected override string ActivationScriptName => nameof(BreatheLightningScript);
+    public override int ActivationRechargeTime => Game.RandomLessThan(450) + 450;
+
     //public override Activation? ActivationPower => Game.SingletonRepository.Get<Activation>(nameof(BreatheLightingActivation));
     public override string? DescribeActivationEffect =>"breathe lightning (100) every 450+d450 turns";
 

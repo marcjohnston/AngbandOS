@@ -12,16 +12,8 @@ internal class GoldDragonScaleMailArmorItemFactory : DragonScaleMailArmorItemFac
 {
     private GoldDragonScaleMailArmorItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public void ActivateItem(Item item)
-    {
-        if (!Game.GetDirectionWithAim(out int dir))
-        {
-            return;
-        }
-        Game.MsgPrint("You breathe sound.");
-        Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(SoundProjectile)), dir, 130, -2);
-        item.RingsArmorActivationAndFixedArtifactsRechargeTimeLeft = Game.RandomLessThan(450) + 450;
-    }
+    protected override string ActivationScriptName => nameof(BreatheSoundScript);
+    public override int ActivationRechargeTime => Game.RandomLessThan(450) + 450;
     public override string? DescribeActivationEffect => "breathe sound (130) every 450+d450 turns";
     protected override string SymbolName => nameof(OpenBraceSymbol);
     public override ColorEnum Color => ColorEnum.Gold;

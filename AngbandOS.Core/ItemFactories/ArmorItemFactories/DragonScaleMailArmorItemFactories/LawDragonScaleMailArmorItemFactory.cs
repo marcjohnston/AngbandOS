@@ -12,18 +12,8 @@ internal class LawDragonScaleMailArmorItemFactory : DragonScaleMailArmorItemFact
 {
     private LawDragonScaleMailArmorItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public void ActivateItem(Item item)
-    {
-        if (!Game.GetDirectionWithAim(out int dir))
-        {
-            return;
-        }
-        int chance = Game.RandomLessThan(2);
-        string element = chance == 1 ? "sound" : "shards";
-        Game.MsgPrint($"You breathe {element}.");
-        Game.FireBall(chance == 1 ? (Projectile)Game.SingletonRepository.Get<Projectile>(nameof(SoundProjectile)) : Game.SingletonRepository.Get<Projectile>(nameof(ExplodeProjectile)), dir, 230, -2);
-        item.RingsArmorActivationAndFixedArtifactsRechargeTimeLeft = Game.RandomLessThan(300) + 300;
-    }
+    protected override string ActivationScriptName => nameof(BreatheSoundOrShardsScript);
+    public override int ActivationRechargeTime => Game.RandomLessThan(300) + 300;
     public override string? DescribeActivationEffect => "breathe sound/shards (230) every 300+d300 turns";
     protected override string SymbolName => nameof(OpenBraceSymbol);
     public override ColorEnum Color => ColorEnum.Grey;

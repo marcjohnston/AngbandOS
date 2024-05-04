@@ -12,16 +12,8 @@ internal class BronzeDragonScaleMailArmorItemFactory : DragonScaleMailArmorItemF
 {
     private BronzeDragonScaleMailArmorItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public void ActivateItem(Item item)
-    {
-        if (!Game.GetDirectionWithAim(out int dir))
-        {
-            return;
-        }
-        Game.MsgPrint("You breathe confusion.");
-        Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(ConfusionProjectile)), dir, 120, -2);
-        item.RingsArmorActivationAndFixedArtifactsRechargeTimeLeft = Game.RandomLessThan(450) + 450;
-    }
+    protected override string ActivationScriptName => nameof(BreatheConfusionScript);
+    public override int ActivationRechargeTime => Game.RandomLessThan(450) + 450;
     public override string? DescribeActivationEffect => "breathe confusion (120) every 450+d450 turns";
     protected override string SymbolName => nameof(OpenBraceSymbol);
     public override ColorEnum Color => ColorEnum.BrightBrown;

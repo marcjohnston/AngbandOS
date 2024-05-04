@@ -8,13 +8,31 @@
 namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
-internal abstract class DragonScaleMailArmorItemFactory : ArmorItemFactory 
+internal abstract class DragonScaleMailArmorItemFactory : ArmorItemFactory, IItemsCanBeActivated
 {
     /// <summary>
     /// Returns the on-body inventory slot for scale mail.
     /// </summary>
     public override int WieldSlot => InventorySlot.OnBody;
 
+    public abstract int ActivationRechargeTime { get; }
+
+    protected abstract string ActivationScriptName { get; }
+
+    public IScript ActivationScript { get; private set; }
+
+    public void ActivateItem(Item item)
+    {
+        ActivationScript.ExecuteScript();
+        item.RingsArmorActivationAndFixedArtifactsRechargeTimeLeft = ActivationRechargeTime;
+        return;
+    }
+
+    public override void Bind()
+    {
+        base.Bind();
+        ActivationScript = Game.SingletonRepository.Get<IScript>(ActivationScriptName);
+    }
 
     /// <summary>
     /// Applies special magic to dragon scale mail armor.

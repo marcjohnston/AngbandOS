@@ -343,6 +343,7 @@ internal class SingletonRepository
         RegisterRepository<IDateAndTimeValue>();
         RegisterRepository<INullableStringsValue>();
         RegisterRepository<IStringValue>();
+        RegisterRepository<IScript>();
 
         RegisterRepository<Activation>();
         RegisterRepository<AlterAction>();

@@ -12,18 +12,8 @@ internal class ChaosDragonScaleMailArmorItemFactory : DragonScaleMailArmorItemFa
 {
     private ChaosDragonScaleMailArmorItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public void ActivateItem(Item item)
-    {
-        if (!Game.GetDirectionWithAim(out int dir))
-        {
-            return;
-        }
-        int chance = Game.RandomLessThan(2);
-        string element = chance == 1 ? "chaos" : "disenchantment";
-        Game.MsgPrint($"You breathe {element}.");
-        Game.FireBall(projectile: chance == 1 ? (Projectile)Game.SingletonRepository.Get<Projectile>(nameof(ChaosProjectile)) : Game.SingletonRepository.Get<Projectile>(nameof(DisenchantProjectile)), dir: dir, dam: 220, rad: -2);
-        item.RingsArmorActivationAndFixedArtifactsRechargeTimeLeft = Game.RandomLessThan(300) + 300;
-    }
+    protected override string ActivationScriptName => nameof(BreatheChaosOrDisenchantmentScript);
+    public override int ActivationRechargeTime => Game.RandomLessThan(300) + 300;
     public override string? DescribeActivationEffect => "breathe chaos/disenchant (220) every 300+d300 turns";
     protected override string SymbolName => nameof(OpenBraceSymbol);
     public override ColorEnum Color => ColorEnum.Purple;

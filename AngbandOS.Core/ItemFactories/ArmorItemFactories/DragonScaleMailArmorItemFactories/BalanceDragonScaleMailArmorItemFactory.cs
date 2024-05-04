@@ -8,20 +8,10 @@
 namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
-internal class BalanceDragonScaleMailArmorItemFactory : DragonScaleMailArmorItemFactory, IItemsCanBeActivated
+internal class BalanceDragonScaleMailArmorItemFactory : DragonScaleMailArmorItemFactory
 {
-    public void ActivateItem(Item item)
-    {
-        if (!Game.GetDirectionWithAim(out int dir))
-        {
-            return;
-        }
-        int chance = Game.RandomLessThan(4);
-        string element = chance == 1 ? "chaos" : (chance == 2 ? "disenchantment" : (chance == 3 ? "sound" : "shards"));
-        Game.MsgPrint($"You breathe {element}.");
-        Game.FireBall(chance == 1 ? Game.SingletonRepository.Get<Projectile>(nameof(ChaosProjectile)) : (chance == 2 ? Game.SingletonRepository.Get<Projectile>(nameof(DisenchantProjectile)) : (chance == 3 ? (Projectile)Game.SingletonRepository.Get<Projectile>(nameof(SoundProjectile)) : Game.SingletonRepository.Get<Projectile>(nameof(ExplodeProjectile)))), dir, 250, -2);
-        item.RingsArmorActivationAndFixedArtifactsRechargeTimeLeft = Game.RandomLessThan(300) + 300;
-    }
+    public override int ActivationRechargeTime => Game.RandomLessThan(300) + 300;
+    protected override string ActivationScriptName => nameof(BreatheChaosDisenchantSoundOrShardsScript);
     private BalanceDragonScaleMailArmorItemFactory(Game game) : base(game) { } // This object is a singleton.
 
     public override string? DescribeActivationEffect => "You breathe balance (250) every 300+d300 turns";

@@ -12,18 +12,8 @@ internal class PseudoDragonScaleMailArmorItemFactory : DragonScaleMailArmorItemF
 {
     private PseudoDragonScaleMailArmorItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public void ActivateItem(Item item)
-    {
-        if (!Game.GetDirectionWithAim(out int dir))
-        {
-            return;
-        }
-        int chance = Game.RandomLessThan(2);
-        string element = chance == 0 ? "light" : "darkness";
-        Game.MsgPrint($"You breathe {element}.");
-        Game.FireBall(chance == 0 ? (Projectile)Game.SingletonRepository.Get<Projectile>(nameof(LightProjectile)) : Game.SingletonRepository.Get<Projectile>(nameof(DarkProjectile)), dir, 200, -2);
-        item.RingsArmorActivationAndFixedArtifactsRechargeTimeLeft = Game.RandomLessThan(300) + 300;
-    }
+    protected override string ActivationScriptName => nameof(BreatheLightOrDarknessScript);
+    public override int ActivationRechargeTime => Game.RandomLessThan(300) + 300;
     public override string? DescribeActivationEffect => "breathe light/darkness (200) every 300+d300 turns";
     protected override string SymbolName => nameof(OpenBraceSymbol);
     public override ColorEnum Color => ColorEnum.Pink;
