@@ -54,19 +54,7 @@ internal abstract class GlovesArmorItemFactory : ArmorItemFactory
     /// <param name="item"></param>
     protected override void ApplyRandomPoorRareCharacteristics(Item item)
     {
-        switch (Game.DieRoll(2))
-        {
-            case 1:
-                {
-                    item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(GlovesOfClumsinessRareItem));
-                    break;
-                }
-            default:
-                {
-                    item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(GlovesOfWeaknessRareItem));
-                    break;
-                }
-        }
+        item.RareItem = Game.SingletonRepository.Get<RareItemWeightedRandom>(nameof(GlovesPoorRareItemWeightedRandom)).ChooseOrDefault();
     }
 
     /// <summary>
