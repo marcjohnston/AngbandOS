@@ -52,8 +52,6 @@ internal class ConsoleTable : ConsoleElement
         }
     }
 
-    public ConsoleAlignment? Alignment { get; set; } = null;
-
     private int ColumnWidth(string columnName)
     {
         int maxWidth = 0;
