@@ -69,17 +69,14 @@ internal class SelectItemAndEatScript : Script, IScript, IRepeatableScript
         Game.Race.Eat(item);
 
         // Dwarf bread isn't actually eaten so return early
-        if (!foodItemFactory.IsConsumedWhenEaten)
+        if (foodItemFactory.IsConsumedWhenEaten)
         {
-            return;
+            // Use up the item (if it fell to the floor this will have already been dealt with)
+            IItemContainer container = item.GetContainer();
+            item.ItemIncrease(-1);
+            item.ItemOptimize();
+            string containerDescription = container.DescribeContainer(item);
+            Game.MsgPrint(containerDescription);
         }
-
-        // Use up the item (if it fell to the floor this will have already been dealt with)
-        IItemContainer container = item.GetContainer();
-        item.ItemIncrease(-1);
-        item.ItemOptimize();
-        string containerDescription = container.DescribeContainer(item);
-        Game.MsgPrint(containerDescription);
-        return;
     }
 }
