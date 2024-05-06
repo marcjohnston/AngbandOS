@@ -49,6 +49,14 @@ internal abstract class FoodItemFactory : ItemFactory
     public virtual bool IsConsumedWhenEaten => true;
 
     public abstract bool Eat();
+
+    /// <summary>
+    /// Returns true, because food items can be eaten by monsters.
+    /// </summary>
     public override bool CanBeEatenByMonsters => true;
+
+    /// <summary>
+    /// Returns true, because food items can be eaten by the player.
+    /// </summary>
     public override bool CanBeEaten => true;
 }
