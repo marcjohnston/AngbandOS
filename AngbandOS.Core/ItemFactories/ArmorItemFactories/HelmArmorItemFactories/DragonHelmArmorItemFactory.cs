@@ -17,6 +17,11 @@ internal class DragonHelmArmorItemFactory : HelmArmorItemFactory
     public override string Name => "Dragon Helm";
 
     /// <summary>
+    /// Returns the base dragon scale mail rating plus 5 for helms of dragon scale mail.
+    /// </summary>
+    public override int TreasureRating => base.TreasureRating + 5;
+
+    /// <summary>
     /// Applies special magic to this dragon helm.
     /// </summary>
     /// <param name="item"></param>
@@ -27,7 +32,6 @@ internal class DragonHelmArmorItemFactory : HelmArmorItemFactory
         // Apply the standard armor characteristics, regardless of the power.
         base.ApplyMagic(item, level, power, null);
 
-        Game.TreasureRating += 5;
         ApplyDragonscaleResistance(item);
     }
     public override int ArmorClass => 8;

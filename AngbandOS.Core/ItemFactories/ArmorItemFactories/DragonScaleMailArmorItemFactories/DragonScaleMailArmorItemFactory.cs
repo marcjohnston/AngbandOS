@@ -35,6 +35,11 @@ internal abstract class DragonScaleMailArmorItemFactory : ArmorItemFactory, IIte
     }
 
     /// <summary>
+    /// Returns a treasure rating of 30 for dragon scale mail items.
+    /// </summary>
+    public override int TreasureRating => 30;
+
+    /// <summary>
     /// Applies special magic to dragon scale mail armor.
     /// </summary>
     /// <param name="item"></param>
@@ -47,7 +52,6 @@ internal abstract class DragonScaleMailArmorItemFactory : ArmorItemFactory, IIte
             // Apply the standard armor characteristics.
             base.ApplyMagic(item, level, power, null);
 
-            Game.TreasureRating += 30;
         }
     }
 

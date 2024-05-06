@@ -15,6 +15,11 @@ internal class MagiAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
     protected override string SymbolName => nameof(DoubleQuoteSymbol);
     public override string Name => "the Magi";
 
+    /// <summary>
+    /// Returns the base amulet treasure rating plus 25 for the amulet of the magi.
+    /// </summary>
+    public override int TreasureRating => base.TreasureRating + 25;
+
     public override void ApplyMagic(Item item, int level, int power, Store? store)
     {
         item.TypeSpecificValue = Game.DieRoll(5) + item.GetBonusValue(5, level);
@@ -23,7 +28,6 @@ internal class MagiAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
         {
             item.RandomArtifactItemCharacteristics.SlowDigest = true;
         }
-        Game.TreasureRating += 25;
     }
 
     public override int Cost => 30000;

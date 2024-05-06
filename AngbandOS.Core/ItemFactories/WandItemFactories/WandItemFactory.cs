@@ -21,12 +21,6 @@ internal abstract class WandItemFactory : ItemFactory, IFlavorFactory
     /// </summary>
     public IFlavorFactory FlavorFactory => (IFlavorFactory)this;
 
-    public override void ApplyMagic(Item item, int level, int power, Store? store)
-    {
-        item.WandChargesRemaining = RodChargeCount;
-    }
-    public abstract int RodChargeCount { get; }
-
     public override bool DrainChargesMonsterAttack(Item item, Monster monster, ref bool obvious) // TODO: obvious needs to be in an event 
     {
         if (item.WandChargesRemaining == 0)

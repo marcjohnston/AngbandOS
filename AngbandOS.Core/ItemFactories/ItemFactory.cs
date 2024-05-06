@@ -26,7 +26,13 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey
         return "";
     }
 
+    /// <summary>
+    /// Returns a value to add to the treasure rating.  Returns 0, by default.
+    /// </summary>
+    public virtual int TreasureRating => 0;
+
     public virtual void Recharge(Item item, int num) { }
+    public abstract int RodChargeCount { get; }
 
     /// <summary>
     /// Processes a world turn for an item that is on the dungeon floor.  Does nothing, by default.

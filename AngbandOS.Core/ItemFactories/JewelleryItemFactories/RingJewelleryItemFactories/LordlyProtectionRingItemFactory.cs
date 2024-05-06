@@ -15,6 +15,11 @@ internal class LordlyProtectionRingItemFactory : RingItemFactory
     protected override string SymbolName => nameof(EqualSignSymbol);
     public override string Name => "Lordly Protection";
 
+    /// <summary>
+    /// Returns the base ring treasure rating plus 5 for rings of lordly protection.
+    /// </summary>
+    public override int TreasureRating => base.TreasureRating + 5;
+
     public override void ApplyMagic(Item item, int level, int power, Store? store)
     {
         IArtifactBias artifactBias = null;
@@ -23,7 +28,6 @@ internal class LordlyProtectionRingItemFactory : RingItemFactory
             item.ApplyRandomResistance(ref artifactBias, Game.DieRoll(20) + 18);
         } while (Game.DieRoll(4) == 1);
         item.BonusArmorClass = 10 + Game.DieRoll(5) + item.GetBonusValue(10, level);
-        Game.TreasureRating += 5;
     }
     public override int Cost => 100000;
     public override bool FreeAct => true;

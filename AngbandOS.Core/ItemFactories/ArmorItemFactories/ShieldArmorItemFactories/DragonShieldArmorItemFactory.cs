@@ -16,6 +16,10 @@ internal class DragonShieldArmorItemFactory : ShieldArmorItemFactory
     public override ColorEnum Color => ColorEnum.BrightGreen;
     public override string Name => "Dragon Shield";
 
+    /// <summary>
+    /// Returns the base dragon scale mail rating plus 5 for shields of dragon scale mail.
+    /// </summary>
+    public override int TreasureRating => base.TreasureRating + 5;
 
     /// <summary>
     /// Applies special magic to this dragon shield.
@@ -28,7 +32,6 @@ internal class DragonShieldArmorItemFactory : ShieldArmorItemFactory
         // Apply the standard armor characteristics, regardless of the power level.
         base.ApplyMagic(item, level, power, null);
 
-        Game.TreasureRating += 5;
         ApplyDragonscaleResistance(item);
     }
 

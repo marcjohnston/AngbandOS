@@ -313,6 +313,7 @@ internal sealed class Item : IComparable<Item>
         NutritionalValue = Factory.InitialNutritionalValue;        
         GoldPieces = Factory.InitialGoldPieces;
         TurnsOfLightRemaining = Factory.InitialTurnsOfLight;
+        WandChargesRemaining = Factory.RodChargeCount;
         Count = 1;
         Weight = Factory.Weight;
         BonusHit = Factory.BonusHit;
@@ -2001,6 +2002,7 @@ internal sealed class Item : IComparable<Item>
             return;
         }
         Factory.ApplyMagic(this, lev, power, store);
+        Game.TreasureRating += Factory.TreasureRating;
         if (IsRandomArtifact)
         {
             Game.TreasureRating += 40;

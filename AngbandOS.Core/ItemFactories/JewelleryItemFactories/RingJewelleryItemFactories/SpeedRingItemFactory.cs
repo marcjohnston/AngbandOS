@@ -15,6 +15,11 @@ internal class SpeedRingItemFactory : RingItemFactory
     protected override string SymbolName => nameof(EqualSignSymbol);
     public override string Name => "Speed";
 
+    /// <summary>
+    /// Returns the base ring treasure rating plus 25 for a ring of speed.
+    /// </summary>
+    public override int TreasureRating => base.TreasureRating + 25;
+
     public override void ApplyMagic(Item item, int level, int power, Store? store)
     {
         if (power == 0 && Game.RandomLessThan(100) < 50)
@@ -31,10 +36,6 @@ internal class SpeedRingItemFactory : RingItemFactory
             item.IdentBroken = true;
             item.IdentCursed = true;
             item.TypeSpecificValue = 0 - item.TypeSpecificValue;
-        }
-        else
-        {
-            Game.TreasureRating += 25;
         }
     }
 
