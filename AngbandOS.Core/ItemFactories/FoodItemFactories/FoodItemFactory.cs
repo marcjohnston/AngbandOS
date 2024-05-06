@@ -44,7 +44,7 @@ internal abstract class FoodItemFactory : ItemFactory
 
     /// <summary>
     /// Returns true, if the food item is completely consumed when eaten.  Consumed food items are removed once eaten.  Returns true, by default because 
-    /// all food items except for dwarf bread.  Dwarf bread returns false.
+    /// all food items are consumed except for dwarf bread.  Dwarf bread returns false.
     /// </summary>
     public virtual bool IsConsumedWhenEaten => true;
 
