@@ -344,7 +344,16 @@ internal class SingletonRepository
         RegisterRepository<INullableStringsValue>();
         RegisterRepository<IStringValue>();
         RegisterRepository<IScript>();
-
+        RegisterRepository<IIdentifableScript>();
+        RegisterRepository<ICancellableScript>();
+        RegisterRepository<INoticeableScript>();
+        RegisterRepository<ISuccessfulScriptInt>();
+        RegisterRepository<ISuccessfulScript>();
+        RegisterRepository<IScriptIntInt>();
+        RegisterRepository<IScriptBool>();
+        RegisterRepository<IScriptInt>();
+        RegisterRepository<ITileScript>();
+        
         RegisterRepository<Activation>();
         RegisterRepository<AlterAction>();
         RegisterRepository<Alignment>();

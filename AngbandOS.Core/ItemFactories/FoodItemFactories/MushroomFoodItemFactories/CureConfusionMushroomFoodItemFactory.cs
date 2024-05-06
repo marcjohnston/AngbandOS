@@ -25,11 +25,6 @@ internal class CureConfusionMushroomFoodItemFactory : MushroomFoodItemFactory
     public override int Weight => 1;
     public override bool Eat()
     {
-        Game.PlaySound(SoundEffectEnum.Eat);
-        if (Game.ConfusedTimer.ResetTimer())
-        {
-            return true;
-        }
-        return false;
+        return Game.RunIdentifableScript(nameof(EatCureConfusionScript));
     }
 }

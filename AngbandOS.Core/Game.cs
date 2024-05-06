@@ -7696,123 +7696,70 @@ internal class Game
     public void RunTileScript(string scriptName, GridTile tile)
     {
         // Get the script from the singleton repository.
-        ITileScript? script = (ITileScript)SingletonRepository.Get<Script>(scriptName);
-        script.ExecuteTileScript(tile);
+        ITileScript castedScript = (ITileScript)SingletonRepository.Get<ITileScript>(scriptName);
+        castedScript.ExecuteTileScript(tile);
     }
 
     public void RunScript(string scriptName)
     {
         // Get the script from the singleton repository.
-        Script? script = SingletonRepository.Get<Script>(scriptName);
-
-        if (script == null)
-        {
-            throw new Exception($"The {scriptName} script specified to run does not exist.");
-        }
-        if (!typeof(IScript).IsInstanceOfType(script))
-        {
-            throw new Exception($"The {scriptName} script specified to run does not implement the {nameof(IScript)} interface.");
-        }
-        IScript castedScript = (IScript)script;
+        IScript castedScript = SingletonRepository.Get<IScript>(scriptName);
         castedScript.ExecuteScript();
     }
 
     public void RunScriptInt(string scriptName, int value)
     {
         // Get the script from the singleton repository.
-        Script? script = SingletonRepository.Get<Script>(scriptName);
-
-        if (script == null)
-        {
-            throw new Exception($"The {scriptName} script specified to run does not exist.");
-        }
-        if (!typeof(IScriptInt).IsInstanceOfType(script))
-        {
-            throw new Exception($"The {scriptName} script specified to run does not implement the {nameof(IScriptInt)} interface.");
-        }
-        IScriptInt castedScript = (IScriptInt)script;
+        IScriptInt castedScript = SingletonRepository.Get<IScriptInt>(scriptName);
         castedScript.ExecuteScriptInt(value);
     }
 
     public void RunScriptBool(string scriptName, bool value)
     {
         // Get the script from the singleton repository.
-        Script? script = SingletonRepository.Get<Script>(scriptName);
-
-        if (script == null)
-        {
-            throw new Exception($"The {scriptName} script specified to run does not exist.");
-        }
-        if (!typeof(IScriptBool).IsInstanceOfType(script))
-        {
-            throw new Exception($"The {scriptName} script specified to run does not implement the {nameof(IScriptBool)} interface.");
-        }
-        IScriptBool castedScript = (IScriptBool)script;
+        IScriptBool castedScript = SingletonRepository.Get<IScriptBool>(scriptName);
         castedScript.ExecuteScriptBool(value);
     }
 
     public void RunScriptIntInt(string scriptName, int value1, int value2)
     {
         // Get the script from the singleton repository.
-        Script? script = SingletonRepository.Get<Script>(scriptName);
-
-        if (script == null)
-        {
-            throw new Exception($"The {scriptName} script specified to run does not exist.");
-        }
-        if (!typeof(IScriptIntInt).IsInstanceOfType(script))
-        {
-            throw new Exception($"The {scriptName} script specified to run does not implement the {nameof(IScriptIntInt)} interface.");
-        }
-        IScriptIntInt castedScript = (IScriptIntInt)script;
+        IScriptIntInt castedScript = SingletonRepository.Get<IScriptIntInt>(scriptName);
         castedScript.ExecuteScriptIntInt(value1, value2);
     }
 
     public bool RunSuccessfulScript(string scriptName)
     {
         // Get the script from the singleton repository.
-        Script? script = SingletonRepository.Get<Script>(scriptName);
-
-        if (script == null)
-        {
-            throw new Exception($"The {scriptName} script specified to run does not exist.");
-        }
-        if (!typeof(ISuccessfulScript).IsInstanceOfType(script))
-        {
-            throw new Exception($"The {scriptName} script specified to run does not implement the {nameof(ISuccessfulScript)} interface.");
-        }
-        ISuccessfulScript castedScript = (ISuccessfulScript)script;
+        ISuccessfulScript castedScript = SingletonRepository.Get<ISuccessfulScript>(scriptName);
         return castedScript.ExecuteSuccessfulScript();
     }
 
     public bool RunCancellableScript(string scriptName)
     {
         // Get the script from the singleton repository.
-        ICancellableScript? castedScript = (ICancellableScript)SingletonRepository.Get<Script>(scriptName);
+        ICancellableScript castedScript = (ICancellableScript)SingletonRepository.Get<ICancellableScript>(scriptName);
         return castedScript.ExecuteCancellableScript();
+    }
+
+    public bool RunIdentifableScript(string scriptName)
+    {
+        // Get the script from the singleton repository.
+        IIdentifableScript? castedScript = (IIdentifableScript)SingletonRepository.Get<IIdentifableScript>(scriptName);
+        return castedScript.ExecuteIdentifableScript();
     }
 
     public bool RunNoticeableScript(string scriptName)
     {
         // Get the script from the singleton repository.
-        INoticeableScript? castedScript = (INoticeableScript)SingletonRepository.Get<Script>(scriptName);
+        INoticeableScript castedScript = (INoticeableScript)SingletonRepository.Get<INoticeableScript>(scriptName);
         return castedScript.ExecuteNoticeableScript();
     }
 
     public bool RunSuccessfulScriptInt(string scriptName, int value)
     {
         // Get the script from the singleton repository.
-        Script? script = SingletonRepository.Get<Script>(scriptName);
-
-        if (script == null)
-        {
-            throw new Exception($"The {scriptName} script specified to run does not exist.");
-        }
-        if (!typeof(ISuccessfulScriptInt).IsInstanceOfType(script))
-        {
-            throw new Exception($"The {scriptName} script specified to run does not implement the {nameof(ISuccessfulScriptInt)} interface.");
-        }
-        ISuccessfulScriptInt castedScript = (ISuccessfulScriptInt)script;
+        ISuccessfulScriptInt castedScript = SingletonRepository.Get<ISuccessfulScriptInt>(scriptName);
         return castedScript.ExecuteSuccessfulScriptInt(value);
     }
 

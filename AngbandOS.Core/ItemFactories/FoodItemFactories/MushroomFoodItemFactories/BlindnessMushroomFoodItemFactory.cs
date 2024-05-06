@@ -25,14 +25,6 @@ internal class BlindnessMushroomFoodItemFactory : MushroomFoodItemFactory
 
     public override bool Eat()
     {
-        Game.PlaySound(SoundEffectEnum.Eat);
-        if (!Game.HasBlindnessResistance)
-        {
-            if (Game.BlindnessTimer.AddTimer(Game.RandomLessThan(200) + 200))
-            {
-                return true;
-            }
-        }
-        return false;
+        return Game.RunIdentifableScript(nameof(EatBlindnessScript));
     }
 }

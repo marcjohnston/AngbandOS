@@ -26,11 +26,6 @@ internal class CureBlindnessMushroomFoodItemFactory : MushroomFoodItemFactory
 
     public override bool Eat()
     {
-        Game.PlaySound(SoundEffectEnum.Eat);
-        if (Game.BlindnessTimer.ResetTimer())
-        {
-            return true;
-        }
-        return false;
+        return Game.RunIdentifableScript(nameof(EatCureBlindnessScript));
     }
 }
