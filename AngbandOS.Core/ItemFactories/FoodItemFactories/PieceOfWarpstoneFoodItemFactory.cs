@@ -28,18 +28,7 @@ internal class PieceOfWarpstoneFoodItemFactory : FoodItemFactory
     public override int Weight => 1;
     public override bool Eat()
     {
-        Game.PlaySound(SoundEffectEnum.Eat);
-        Game.MsgPrint("That tastes... funky.");
-        Game.RunScript(nameof(GainMutationScript));
-        if (Game.DieRoll(3) == 1)
-        {
-            Game.RunScript(nameof(GainMutationScript));
-        }
-        if (Game.DieRoll(3) == 1)
-        {
-            Game.RunScript(nameof(GainMutationScript));
-        }
-        return true;
+        return Game.RunIdentifableScript(nameof(EatWarpstoneScript));
     }
 
     /// <summary>

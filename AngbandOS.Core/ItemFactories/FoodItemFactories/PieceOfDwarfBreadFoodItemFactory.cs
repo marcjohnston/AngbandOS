@@ -35,7 +35,6 @@ internal class PieceOfDwarfBreadFoodItemFactory : FoodItemFactory
 
     public override bool Eat()
     {
-        Game.MsgPrint("You look at the dwarf bread, and don't feel quite so hungry anymore.");
-        return true;
+        return Game.RunIdentifableScript(nameof(EatDwarfBreadScript));
     }
 }

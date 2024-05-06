@@ -25,14 +25,6 @@ internal class HallucinationMushroomFoodItemFactory : MushroomFoodItemFactory
 
     public override bool Eat()
     {
-        Game.PlaySound(SoundEffectEnum.Eat);
-        if (!Game.HasChaosResistance)
-        {
-            if (Game.HallucinationsTimer.AddTimer(Game.RandomLessThan(250) + 250))
-            {
-                return true;
-            }
-        }
-        return false;
+        return Game.RunIdentifableScript(nameof(EatHallucinationsScript));
     }
 }

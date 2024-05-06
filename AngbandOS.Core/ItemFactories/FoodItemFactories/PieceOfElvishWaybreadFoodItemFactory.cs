@@ -29,11 +29,7 @@ internal class PieceOfElvishWaybreadFoodItemFactory : FoodItemFactory
     public override int Weight => 3;
     public override bool Eat()
     {
-        Game.PlaySound(SoundEffectEnum.Eat);
-        Game.MsgPrint("That tastes good.");
-        Game.PoisonTimer.ResetTimer();
-        Game.RestoreHealth(Game.DiceRoll(4, 8));
-        return true;
+        return Game.RunIdentifableScript(nameof(EatElvenBreadScript));
     }
 
     /// <summary>

@@ -22,8 +22,6 @@ internal class PintOfFineAleFoodItemFactory : FoodItemFactory
     public override int Weight => 5;
     public override bool Eat()
     {
-        Game.PlaySound(SoundEffectEnum.Eat);
-        Game.MsgPrint("That tastes good.");
-        return true;
+        return Game.RunIdentifableScript(nameof(EatGoodFoodScript));
     }
 }

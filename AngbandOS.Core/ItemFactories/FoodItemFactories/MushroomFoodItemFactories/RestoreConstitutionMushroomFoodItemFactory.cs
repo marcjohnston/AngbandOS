@@ -25,11 +25,6 @@ internal class RestoreConstitutionMushroomFoodItemFactory : MushroomFoodItemFact
     public override int Weight => 1;
     public override bool Eat()
     {
-        Game.PlaySound(SoundEffectEnum.Eat);
-        if (Game.TryRestoringAbilityScore(Ability.Constitution))
-        {
-            return true;
-        }
-        return false;
+        return Game.RunIdentifableScript(nameof(EatRestoreConstitutionScript));
     }
 }

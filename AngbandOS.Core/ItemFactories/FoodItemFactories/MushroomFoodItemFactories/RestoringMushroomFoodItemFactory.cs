@@ -27,32 +27,6 @@ internal class RestoringMushroomFoodItemFactory : MushroomFoodItemFactory
     public override int Weight => 1;
     public override bool Eat()
     {
-        Game.PlaySound(SoundEffectEnum.Eat);
-        bool ident = false;
-        if (Game.TryRestoringAbilityScore(Ability.Strength))
-        {
-            ident = true;
-        }
-        if (Game.TryRestoringAbilityScore(Ability.Intelligence))
-        {
-            ident = true;
-        }
-        if (Game.TryRestoringAbilityScore(Ability.Wisdom))
-        {
-            ident = true;
-        }
-        if (Game.TryRestoringAbilityScore(Ability.Dexterity))
-        {
-            ident = true;
-        }
-        if (Game.TryRestoringAbilityScore(Ability.Constitution))
-        {
-            ident = true;
-        }
-        if (Game.TryRestoringAbilityScore(Ability.Charisma))
-        {
-            ident = true;
-        }
-        return ident;
+        return Game.RunIdentifableScript(nameof(EatRestoringScript));
     }
 }

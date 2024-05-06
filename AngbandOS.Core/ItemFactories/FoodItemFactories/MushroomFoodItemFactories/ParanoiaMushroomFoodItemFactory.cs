@@ -25,14 +25,6 @@ internal class ParanoiaMushroomFoodItemFactory : MushroomFoodItemFactory
 
     public override bool Eat()
     {
-        Game.PlaySound(SoundEffectEnum.Eat);
-        if (!Game.HasFearResistance)
-        {
-            if (Game.FearTimer.AddTimer(Game.RandomLessThan(10) + 10))
-            {
-                return true;
-            }
-        }
-        return false;
+        return Game.RunIdentifableScript(nameof(EatParanoiaScript));
     }
 }

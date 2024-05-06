@@ -8,9 +8,9 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class EatBlindnessScript : Script, IIdentifableScript
+internal class EatWarpstoneScript : Script, IIdentifableScript
 {
-    private EatBlindnessScript(Game game) : base(game) { }
+    private EatWarpstoneScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script and returns false.
@@ -19,13 +19,16 @@ internal class EatBlindnessScript : Script, IIdentifableScript
     public bool ExecuteIdentifableScript()
     {
         Game.PlaySound(SoundEffectEnum.Eat);
-        if (!Game.HasBlindnessResistance)
+        Game.MsgPrint("That tastes... funky.");
+        Game.RunScript(nameof(GainMutationScript));
+        if (Game.DieRoll(3) == 1)
         {
-            if (Game.BlindnessTimer.AddTimer(Game.RandomLessThan(200) + 200))
-            {
-                return true;
-            }
+            Game.RunScript(nameof(GainMutationScript));
         }
-        return false;
+        if (Game.DieRoll(3) == 1)
+        {
+            Game.RunScript(nameof(GainMutationScript));
+        }
+        return true;
     }
 }
