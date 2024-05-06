@@ -14,6 +14,22 @@ namespace AngbandOS.Core;
 [Serializable]
 internal sealed class Item : IComparable<Item>
 {
+    public ItemCharacteristics Characteristics = new ItemCharacteristics();
+
+    /// <summary>
+    /// Returns the factory that created this item.
+    /// </summary>
+    public ItemFactory Factory { get; private set; } // TODO: This should be protected ... and force the item to call the factory methods.
+
+    public FixedArtifact? FixedArtifact; // If this item is a fixed artifact, this will be not null.
+
+    /// <summary>
+    /// Returns the rare item, if the item is a rare item; or null, if the item is not rare.
+    /// </summary>
+    public RareItem? RareItem = null;
+
+    public readonly ItemCharacteristics RandomArtifactItemCharacteristics = new ItemCharacteristics();
+
     /// <summary>
     /// Returns a sort order index for sorting items in a pack.  Lower numbers show before higher numbers.
     /// </summary>
@@ -68,7 +84,6 @@ internal sealed class Item : IComparable<Item>
     /// </summary>
     public bool IdentBroken;
 
-    public readonly ItemCharacteristics RandomArtifactItemCharacteristics = new ItemCharacteristics();
     public int ArmorClass;
     public int BonusArmorClass;
     public int BonusDamage;
@@ -84,7 +99,6 @@ internal sealed class Item : IComparable<Item>
     public int DamageDice;
     public int DamageSides;
     public int Discount;
-    public FixedArtifact? FixedArtifact; // If this item is a fixed artifact, this will be not null.
     public int HoldingMonsterIndex;
     public string Inscription = "";
 
@@ -230,11 +244,6 @@ internal sealed class Item : IComparable<Item>
     }
 
     /// <summary>
-    /// Returns the factory that created this item.
-    /// </summary>
-    public ItemFactory Factory { get; private set; } // TODO: This should be protected ... and force the item to call the factory methods.
-
-    /// <summary>
     /// Tests an item to determine if it belongs to an Item type and returns a the item casted into that type; or null, if the item doesn't belong to the type.
     /// </summary>
     /// <typeparam name="T"></typeparam>
@@ -293,7 +302,6 @@ internal sealed class Item : IComparable<Item>
     public int X;
     public int Y;
     private readonly Game Game;
-    public ItemCharacteristics Characteristics = new ItemCharacteristics();
 
     public Item(Game game, ItemFactory factory)
     {
@@ -510,11 +518,6 @@ internal sealed class Item : IComparable<Item>
     public bool IsArtifact => FixedArtifact != null || IsRandomArtifact;
 
     public string RandomArtifactName = "";
-
-    /// <summary>
-    /// Returns the rare item, if the item is a rare item; or null, if the item is not rare.
-    /// </summary>
-    public RareItem? RareItem = null;
 
     /// <summary>
     /// Returns true, if the item is a random artifact; false, otherwise.
