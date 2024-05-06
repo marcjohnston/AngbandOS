@@ -1803,6 +1803,9 @@ internal sealed class Item : IComparable<Item>
         return Characteristics;
     }
 
+    /// <summary>
+    /// Indicate that the item has been tried.
+    /// </summary>
     public void ObjectTried()
     {
         Factory.Tried = true;
