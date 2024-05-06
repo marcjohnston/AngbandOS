@@ -32,7 +32,11 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey
     public virtual int TreasureRating => 0;
 
     public virtual void Recharge(Item item, int num) { }
-    public abstract int RodChargeCount { get; }
+
+    /// <summary>
+    /// Returns the number of charges to assign to an item that is a rod.  A value of 0 is returned, by default.
+    /// </summary>
+    public virtual int RodChargeCount => 0;
 
     /// <summary>
     /// Processes a world turn for an item that is on the dungeon floor.  Does nothing, by default.

@@ -16,6 +16,7 @@ internal class ElvenCloakArmorItemFactory : CloakArmorItemFactory
     public override ColorEnum Color => ColorEnum.BrightGreen;
     public override string Name => "Elven Cloak";
 
+    public override int InitialTypeSpecificValue => Game.DieRoll(4);
 
     public override void ApplyMagic(Item item, int level, int power, Store? store)
     {
@@ -24,7 +25,6 @@ internal class ElvenCloakArmorItemFactory : CloakArmorItemFactory
             // Apply the standard armor characteristics.
             base.ApplyMagic(item, level, power, null);
 
-            item.TypeSpecificValue = Game.DieRoll(4);
             if (power > 1)
             {
                 if (Game.DieRoll(20) == 1)
