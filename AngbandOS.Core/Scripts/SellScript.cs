@@ -41,7 +41,7 @@ internal class SellScript : Script, IScriptStore
         int amt = 1;
         if (oPtr.Count > 1)
         {
-            amt = Game.GetQuantity(null, oPtr.Count, true);
+            amt = Game.GetQuantity(oPtr.Count, true);
             if (amt <= 0)
             {
                 return;

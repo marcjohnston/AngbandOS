@@ -58,7 +58,7 @@ internal class PurchaseStoreItemScript : Script, IScriptStore
             }
             else
             {
-                amt = Game.GetQuantity(null, maxBuy, false);
+                amt = Game.GetQuantity(maxBuy, false);
                 if (amt <= 0)
                 {
                     return;

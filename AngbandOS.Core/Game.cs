@@ -8617,7 +8617,7 @@ internal class Game
         return d;
     }
 
-    public int GetQuantity(string prompt, int max, bool allbydefault)
+    public int GetQuantity(int max, bool allbydefault)
     {
         int amt;
         if (CommandArgument != 0)
@@ -8630,18 +8630,14 @@ internal class Game
             }
             return amt;
         }
-        if (string.IsNullOrEmpty(prompt))
-        {
-            string tmp = $"Quantity (1-{max}): ";
-            prompt = tmp;
-        }
+
         amt = 1;
         if (allbydefault)
         {
             amt = max;
         }
         string def = amt.ToString();
-        if (!GetString(prompt, out string buf, def, 6))
+        if (!GetString($"Quantity (1-{max}): ", out string buf, def, 6))
         {
             return 0;
         }

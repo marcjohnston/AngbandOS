@@ -52,7 +52,7 @@ internal class DestroyScript : Script, IScript, IRepeatableScript, IScriptStore
         // If we have more than one we might not want to destroy all of them
         if (item.Count > 1)
         {
-            amount = Game.GetQuantity(null, item.Count, true);
+            amount = Game.GetQuantity(item.Count, true);
             if (amount <= 0)
             {
                 return;
