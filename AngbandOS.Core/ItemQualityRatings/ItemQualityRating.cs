@@ -18,6 +18,11 @@ internal abstract class ItemQualityRating : IGetKey
 
     public abstract string Description { get; }
 
+    /// <summary>
+    /// Returns the index into the Stompable for which the item pertains; or null, if the item is special and should never be stomped.
+    /// </summary>
+    public abstract int? StompIndex { get; }
+
     public virtual string Key => GetType().Name;
 
     public string GetKey => Key;

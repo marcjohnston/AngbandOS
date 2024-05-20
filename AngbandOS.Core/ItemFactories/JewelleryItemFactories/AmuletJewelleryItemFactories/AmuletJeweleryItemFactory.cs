@@ -12,6 +12,7 @@ internal abstract class AmuletJeweleryItemFactory : JewelleryItemFactory, IFlavo
 {
     public AmuletJeweleryItemFactory(Game game) : base(game) { }
 
+    public override bool IsWearable => true;
     /// <summary>
     /// Returns the neck inventory slot for amulets.
     /// </summary>

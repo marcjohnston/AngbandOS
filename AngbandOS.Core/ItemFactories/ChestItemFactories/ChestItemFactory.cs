@@ -23,17 +23,17 @@ internal abstract class ChestItemFactory : ItemFactory
         {
             return false;
         }
-        else if (item.ChestIsOpen)
+        else if (item.ContainerIsOpen)
         {
             return Stompable[StompableType.Broken]; // Empty
         }
-        else if (item.ChestTrapConfiguration == null)
+        else if (item.ContainerTrapConfiguration == null)
         {
             return Stompable[StompableType.Average];
         }
         else
         {
-            if (item.ChestTrapConfiguration.Traps.Length == 0)
+            if (item.ContainerTrapConfiguration.Traps.Length == 0)
             {
                 return Stompable[StompableType.Good];
             }
@@ -50,21 +50,21 @@ internal abstract class ChestItemFactory : ItemFactory
         if (!item.IsKnown())
         {
         }
-        else if (item.ChestIsOpen)
+        else if (item.ContainerIsOpen)
         {
             s += " (empty)";
         }
-        else if (item.ChestTrapConfiguration == null)
+        else if (item.ContainerTrapConfiguration == null)
         {
             s += " (unlocked)";
         }
-        else if (!item.ChestTrapConfiguration.IsTrapped)
+        else if (!item.ContainerTrapConfiguration.IsTrapped)
         {
             s += " (disarmed)";
         }
         else
         {
-            s += $" {item.ChestTrapConfiguration.Description}";
+            s += $" {item.ContainerTrapConfiguration.Description}";
         }
 
         // Chests do not have Mods, Damage or Bonus.  We are omitting the description for those features.
@@ -87,7 +87,7 @@ internal abstract class ChestItemFactory : ItemFactory
         if (item.Factory.LevelNormallyFound > 0)
         {
             int chestType = Game.DieRoll(item.Factory.LevelNormallyFound);
-            item.ChestIsOpen = false;
+            item.ContainerIsOpen = false;
             int chestTrapConfigurationCount = Game.SingletonRepository.Get<ChestTrapConfiguration>().Length;
             int eightFivePercent = chestTrapConfigurationCount * 100 / 85;
             if (chestType > eightFivePercent)
@@ -95,8 +95,8 @@ internal abstract class ChestItemFactory : ItemFactory
                 int randomRemaining = chestTrapConfigurationCount - eightFivePercent;
                 chestType = eightFivePercent + Game.RandomLessThan(randomRemaining);
             }
-            item.ChestTrapConfiguration = Game.SingletonRepository.Get<ChestTrapConfiguration>(chestType);
-            item.ChestLevel = chestType;
+            item.ContainerTrapConfiguration = Game.SingletonRepository.Get<ChestTrapConfiguration>(chestType);
+            item.LevelOfObjectsInContainer = chestType;
         }
     }
 

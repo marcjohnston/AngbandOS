@@ -61,7 +61,7 @@ internal abstract class ChestTrapConfiguration : IGetKey
             if (eventArgs.DestroysContents)
             {
                 Game.MsgPrint("Everything inside the chest is destroyed!");
-                chestItem.ChestIsOpen = true;
+                chestItem.ContainerIsOpen = true;
             }
         }
     }

@@ -12,4 +12,5 @@ internal class SpecialItemQualityRating : ItemQualityRating
 {
     private SpecialItemQualityRating(Game game) : base(game) { } // This object is a singleton
     public override string Description => "special";
+    public override int? StompIndex => null;
 }

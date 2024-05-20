@@ -12,4 +12,5 @@ internal class GoodItemQualityRating : ItemQualityRating
 {
     private GoodItemQualityRating(Game game) : base(game) { } // This object is a singleton
     public override string Description => "good";
+    public override int? StompIndex => StompableType.Good;
 }

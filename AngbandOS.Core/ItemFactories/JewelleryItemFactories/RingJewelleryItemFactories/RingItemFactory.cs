@@ -15,6 +15,7 @@ internal abstract class RingItemFactory : JewelleryItemFactory, IFlavorFactory
     /// </summary>
     public IFlavorFactory FlavorFactory => (IFlavorFactory)this;
 
+    public override bool IsWearable => true;
     public override string GetDescription(Item item, bool includeCountPrefix, bool isFlavorAware)
     {
         if (item.FixedArtifact != null && isFlavorAware)

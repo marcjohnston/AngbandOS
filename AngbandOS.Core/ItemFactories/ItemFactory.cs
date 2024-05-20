@@ -68,29 +68,13 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey
     {
         if (HasQuality)
         {
-            switch (item.GetDetailedFeeling()) // TODO: This is poor
+            ItemQualityRating itemQualityRating = item.GetQualityRating();
+            int? stompableIndex = itemQualityRating.StompIndex;
+            if (stompableIndex == null)
             {
-                case "terrible":
-                case "worthless":
-                case "cursed":
-                case "broken":
-                    return Stompable[StompableType.Broken];
-
-                case "average":
-                    return Stompable[StompableType.Average];
-
-                case "good":
-                    return Stompable[StompableType.Good];
-
-                case "excellent":
-                    return Stompable[StompableType.Excellent];
-
-                case "special":
-                    return false;
-
-                default:
-                    throw new InvalidDataException($"Unrecognised item quality ({item.GetDetailedFeeling()})");
+                return false;
             }
+            return Stompable[stompableIndex.Value];
         }
         return Stompable[StompableType.Broken];
     }
@@ -518,15 +502,15 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey
         {
             return false;
         }
-        if (a.ChestIsOpen != b.ChestIsOpen)
+        if (a.ContainerIsOpen != b.ContainerIsOpen)
         {
             return false;
         }
-        if (a.ChestTrapConfiguration != null || b.ChestTrapConfiguration != null)
+        if (a.ContainerTrapConfiguration != null || b.ContainerTrapConfiguration != null)
         {
             return false;
         }
-        if (a.ChestLevel != b.ChestLevel)
+        if (a.LevelOfObjectsInContainer != b.LevelOfObjectsInContainer)
         {
             return false;
         }

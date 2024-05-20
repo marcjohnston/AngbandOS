@@ -386,15 +386,15 @@ internal abstract class StoreFactory : IItemFilter, IGetKey
         {
             return false;
         }
-        if (oPtr.ChestIsOpen != jPtr.ChestIsOpen)
+        if (oPtr.ContainerIsOpen != jPtr.ContainerIsOpen)
         {
             return false;
         }
-        if (oPtr.ChestLevel != jPtr.ChestLevel)
+        if (oPtr.LevelOfObjectsInContainer != jPtr.LevelOfObjectsInContainer)
         {
             return false;
         }
-        if (oPtr.ChestTrapConfiguration != null || jPtr.ChestTrapConfiguration != null)
+        if (oPtr.ContainerTrapConfiguration != null || jPtr.ContainerTrapConfiguration != null)
         {
             return false;
         }

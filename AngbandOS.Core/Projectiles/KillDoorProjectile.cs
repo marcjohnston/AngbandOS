@@ -45,9 +45,9 @@ internal class KillDoorProjectile : Projectile
         {
             if (oPtr.Category == ItemTypeEnum.Chest)
             {
-                if (!oPtr.ChestIsOpen && oPtr.ChestTrapConfiguration != null)
+                if (!oPtr.ContainerIsOpen && oPtr.ContainerTrapConfiguration != null)
                 {
-                    oPtr.ChestTrapConfiguration = null;
+                    oPtr.ContainerTrapConfiguration = null;
                     oPtr.BecomeKnown();
                     if (oPtr.Marked)
                     {

@@ -79,11 +79,11 @@ internal class SearchScript : Script, IScript, IRepeatableScript
                         {
                             continue;
                         }
-                        if (item.ChestIsOpen || item.ChestTrapConfiguration == null)
+                        if (item.ContainerIsOpen || item.ContainerTrapConfiguration == null)
                         {
                             continue;
                         }
-                        if (item.ChestTrapConfiguration.NotTrapped)
+                        if (item.ContainerTrapConfiguration.NotTrapped)
                         {
                             continue;
                         }

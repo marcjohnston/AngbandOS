@@ -14,7 +14,6 @@ namespace AngbandOS.Core.ItemFactories;
 internal abstract class JewelleryItemFactory : ItemFactory
 {
     public JewelleryItemFactory(Game game) : base(game) { }
-    public override bool IsWearable => true;
 
     public override bool IsStompable(Item item)
     {

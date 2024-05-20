@@ -279,13 +279,13 @@ internal sealed class Item : IComparable<Item>
     /// <summary>
     /// Returns the configuration of the trapped chest.
     /// </summary>
-    public ChestTrapConfiguration? ChestTrapConfiguration = null;
+    public ChestTrapConfiguration? ContainerTrapConfiguration = null;
 
     /// <summary>
     /// Returns the level of the objects contained in the chest.
     /// </summary>
-    public int ChestLevel = 0;
-    public bool ChestIsOpen = false;
+    public int LevelOfObjectsInContainer = 0;
+    public bool ContainerIsOpen = false;
 
     public int StaffChargesRemaining = 0;
 
@@ -492,9 +492,9 @@ internal sealed class Item : IComparable<Item>
         clonedItem.TurnsOfLightRemaining = TurnsOfLightRemaining;
         clonedItem.NutritionalValue = NutritionalValue;
         clonedItem.RingsArmorActivationAndFixedArtifactsRechargeTimeLeft = RingsArmorActivationAndFixedArtifactsRechargeTimeLeft;
-        clonedItem.ChestIsOpen = ChestIsOpen;
-        clonedItem.ChestLevel = ChestLevel;
-        clonedItem.ChestTrapConfiguration = ChestTrapConfiguration;
+        clonedItem.ContainerIsOpen = ContainerIsOpen;
+        clonedItem.LevelOfObjectsInContainer = LevelOfObjectsInContainer;
+        clonedItem.ContainerTrapConfiguration = ContainerTrapConfiguration;
         clonedItem.RodRechargeTimeRemaining = RodRechargeTimeRemaining;
         clonedItem.StaffChargesRemaining = StaffChargesRemaining;
         clonedItem.WandChargesRemaining = WandChargesRemaining;

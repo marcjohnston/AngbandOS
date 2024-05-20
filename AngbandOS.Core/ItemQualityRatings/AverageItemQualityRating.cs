@@ -12,4 +12,5 @@ internal class AverageItemQualityRating : ItemQualityRating
 {
     private AverageItemQualityRating(Game game) : base(game) { } // This object is a singleton
     public override string Description => "average";
+    public override int? StompIndex => StompableType.Average;
 }
