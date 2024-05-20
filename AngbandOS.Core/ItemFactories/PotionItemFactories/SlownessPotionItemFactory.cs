@@ -12,6 +12,10 @@ internal class SlownessPotionItemFactory : PotionItemFactory
 {
     private SlownessPotionItemFactory(Game game) : base(game) { } // This object is a singleton.
 
+    /// <summary>
+    /// Returns true because this is a broken item. 
+    /// </summary>
+    public override bool InitialBrokenStomp => true;
     protected override string SymbolName => nameof(ExclamationPointSymbol);
     public override string Name => "Slowness";
 

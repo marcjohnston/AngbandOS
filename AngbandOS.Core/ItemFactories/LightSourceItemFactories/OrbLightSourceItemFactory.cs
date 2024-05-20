@@ -12,6 +12,11 @@ internal class OrbLightSourceItemFactory : LightSourceItemFactory
 {
     private OrbLightSourceItemFactory(Game game) : base(game) { } // This object is a singleton.
 
+    /// <summary>
+    /// Returns true because orbs of light should be stomped automatically. 
+    /// </summary>
+    public override bool InitialBrokenStomp => true;
+
     protected override string SymbolName => nameof(TildeSymbol);
     public override ColorEnum Color => ColorEnum.BrightYellow;
     public override string Name => "Orb";

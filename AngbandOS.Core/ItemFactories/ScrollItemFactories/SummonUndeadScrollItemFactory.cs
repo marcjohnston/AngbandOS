@@ -12,6 +12,10 @@ internal class SummonUndeadScrollItemFactory : ScrollItemFactory
 {
     private SummonUndeadScrollItemFactory(Game game) : base(game) { } // This object is a singleton.
 
+    /// <summary>
+    /// Returns true because this is a broken item. 
+    /// </summary>
+    public override bool InitialBrokenStomp => true;
     protected override string SymbolName => nameof(QuestionMarkSymbol);
     public override string Name => "Summon Undead";
 

@@ -27,6 +27,30 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey
     }
 
     /// <summary>
+    /// Returns true, if items of this factory that have a broken quality should default to being stomped; false, otherwise.  This value is used to initially set the stomp type for broken items of this factory.  
+    /// Returns false, by default.  Weapons, armor, orbs of light and broken items (items that negatively affect the player) return true.
+    /// </summary>
+    public virtual bool InitialBrokenStomp => false;
+
+    /// <summary>
+    /// Returns true, if items of this factory that have a broken quality should default to being stomped; false, otherwise.  This value is used to initially set the stomp type for broken items of this factory.
+    /// Returns false, by default.
+    /// </summary>
+    public virtual bool InitialAverageStomp => false;
+
+    /// <summary>
+    /// Returns true, if items of this factory that have a broken quality should default to being stomped; false, otherwise.  This value is used to initially set the stomp type for broken items of this factory.
+    /// Returns false, by default.
+    /// </summary>
+    public virtual bool InitialGoodStomp => false;
+
+    /// <summary>
+    /// Returns true, if items of this factory that have a broken quality should default to being stomped; false, otherwise.  This value is used to initially set the stomp type for broken items of this factory.
+    /// Returns false, by default.
+    /// </summary>
+    public virtual bool InitialExcellentStomp => false;
+
+    /// <summary>
     /// Returns a value to add to the treasure rating.  Returns 0, by default.
     /// </summary>
     public virtual int TreasureRating => 0;

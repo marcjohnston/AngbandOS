@@ -12,6 +12,10 @@ internal class RuinedChestItemFactory : ChestItemFactory
 {
     private RuinedChestItemFactory(Game game) : base(game) { } // This object is a singleton.
 
+    /// <summary>
+    /// Returns true because this is a broken item. 
+    /// </summary>
+    public override bool InitialBrokenStomp => true;
     protected override string SymbolName => nameof(TildeSymbol);
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "Ruined chest";

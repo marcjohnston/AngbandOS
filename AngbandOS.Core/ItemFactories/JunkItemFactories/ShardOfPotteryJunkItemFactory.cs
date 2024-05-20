@@ -12,6 +12,10 @@ internal class ShardOfPotteryJunkItemFactory : JunkItemFactory
 {
     private ShardOfPotteryJunkItemFactory(Game game) : base(game) { } // This object is a singleton.
 
+    /// <summary>
+    /// Returns true because this is a broken item. 
+    /// </summary>
+    public override bool InitialBrokenStomp => true;
     protected override string SymbolName => nameof(TildeSymbol);
     public override ColorEnum Color => ColorEnum.Red;
     public override string Name => "Shard of Pottery";

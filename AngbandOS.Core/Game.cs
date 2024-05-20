@@ -1749,22 +1749,12 @@ internal class Game
 
     private void ResetStompability()
     {
-        foreach (ItemFactory item in SingletonRepository.Get<ItemFactory>())
+        foreach (ItemFactory itemFactory in SingletonRepository.Get<ItemFactory>())
         {
-            if (item.HasQuality)
-            {
-                item.Stompable[0] = true;
-                item.Stompable[1] = false;
-                item.Stompable[2] = false;
-                item.Stompable[3] = false;
-            }
-            else
-            {
-                item.Stompable[0] = item.Cost <= 0;
-                item.Stompable[1] = false;
-                item.Stompable[2] = false;
-                item.Stompable[3] = false;
-            }
+            itemFactory.Stompable[StompableType.Broken] = itemFactory.InitialBrokenStomp;
+            itemFactory.Stompable[StompableType.Average] = itemFactory.InitialAverageStomp;
+            itemFactory.Stompable[StompableType.Good] = itemFactory.InitialGoodStomp;
+            itemFactory.Stompable[StompableType.Excellent] = itemFactory.InitialExcellentStomp;
         }
     }
 

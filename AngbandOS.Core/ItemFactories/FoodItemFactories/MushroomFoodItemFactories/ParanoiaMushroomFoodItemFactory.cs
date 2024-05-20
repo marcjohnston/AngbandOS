@@ -12,6 +12,10 @@ internal class ParanoiaMushroomFoodItemFactory : MushroomFoodItemFactory
 {
     private ParanoiaMushroomFoodItemFactory(Game game) : base(game) { } // This object is a singleton.
 
+    /// <summary>
+    /// Returns true because this is a broken item. 
+    /// </summary>
+    public override bool InitialBrokenStomp => true;
     protected override string SymbolName => nameof(CommaSymbol);
     public override string Name => "Paranoia";
 
