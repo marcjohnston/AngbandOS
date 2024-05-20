@@ -25,7 +25,7 @@ internal abstract class WeaponItemFactory : ItemFactory
     /// </summary>
     public override bool AskDestroyAll => false;
 
-    public override bool HasQuality => true;
+    public override bool HasQualityRatings => true;
     public override bool CanApplyBonusArmorClassMiscPower => true;
 
     public override string GetDetailedDescription(Item item)

@@ -1143,21 +1143,21 @@ internal class JournalScript : Script, IScript, IRepeatableScript, IScriptStore
         _menuLength = 0;
         for (int i = 0; i < Game.SingletonRepository.Get<ItemFactory>().Length; i++)
         {
-            ItemFactory kPtr = Game.SingletonRepository.Get<ItemFactory>(i);
-            if (kPtr.ItemClass == tval)
+            ItemFactory itemFactory = Game.SingletonRepository.Get<ItemFactory>(i);
+            if (itemFactory.ItemClass == tval)
             {
-                if (kPtr.InstaArt)
+                if (itemFactory.InstaArt)
                 {
                     continue;
                 }
-                _menuItem[_menuLength] = StripDownName(kPtr.FriendlyName);
-                if (kPtr.HasQuality || kPtr.CategoryEnum == ItemTypeEnum.Chest)
+                _menuItem[_menuLength] = StripDownName(itemFactory.FriendlyName);
+                if (!itemFactory.AskDestroyAll)
                 {
                     _menuColors[_menuLength] = ColorEnum.Blue;
                 }
                 else
                 {
-                    _menuColors[_menuLength] = kPtr.Stompable[0] ? ColorEnum.Red : ColorEnum.Green;
+                    _menuColors[_menuLength] = itemFactory.Stompable[0] ? ColorEnum.Red : ColorEnum.Green;
                 }
                 _menuIndices[_menuLength] = i;
                 _menuLength++;
@@ -1183,56 +1183,22 @@ internal class JournalScript : Script, IScript, IRepeatableScript, IScriptStore
                 }
                 if (c == '6')
                 {
-                    ItemFactory kPtr = Game.SingletonRepository.Get<ItemFactory>(_menuIndices[menu]);
-                    if (kPtr.HasQuality)
+                    ItemFactory itemFactory = Game.SingletonRepository.Get<ItemFactory>(_menuIndices[menu]);
+                    if (!itemFactory.AskDestroyAll)
                     {
-                        WorthlessItemQualitySelection(kPtr);
+                        WorthlessItemQualitySelection(itemFactory);
                         _menuLength = 0;
                         for (int i = 0; i < Game.SingletonRepository.Get<ItemFactory>().Length; i++)
                         {
-                            kPtr = Game.SingletonRepository.Get<ItemFactory>(i);
-                            if (kPtr.ItemClass == tval)
+                            itemFactory = Game.SingletonRepository.Get<ItemFactory>(i);
+                            if (itemFactory.ItemClass == tval)
                             {
-                                if (kPtr.InstaArt)
+                                if (itemFactory.InstaArt)
                                 {
                                     continue;
                                 }
-                                _menuItem[_menuLength] = StripDownName(kPtr.FriendlyName);
-                                if (kPtr.HasQuality)
-                                {
-                                    _menuColors[_menuLength] = ColorEnum.Blue;
-                                }
-                                else
-                                {
-                                    _menuColors[_menuLength] = kPtr.Stompable[0] ? ColorEnum.Red : ColorEnum.Green;
-                                }
-                                _menuIndices[_menuLength] = i;
-                                _menuLength++;
-                            }
-                        }
-                    }
-                    else if (kPtr.CategoryEnum == ItemTypeEnum.Chest)
-                    {
-                        WorthlessItemChestSelection(kPtr);
-                        _menuLength = 0;
-                        for (int i = 0; i < Game.SingletonRepository.Get<ItemFactory>().Length; i++)
-                        {
-                            kPtr = Game.SingletonRepository.Get<ItemFactory>(i);
-                            if (kPtr.ItemClass == tval)
-                            {
-                                if (kPtr.InstaArt)
-                                {
-                                    continue;
-                                }
-                                _menuItem[_menuLength] = StripDownName(kPtr.FriendlyName);
-                                if (kPtr.CategoryEnum == ItemTypeEnum.Chest)
-                                {
-                                    _menuColors[_menuLength] = ColorEnum.Blue;
-                                }
-                                else
-                                {
-                                    _menuColors[_menuLength] = kPtr.Stompable[0] ? ColorEnum.Red : ColorEnum.Green;
-                                }
+                                _menuItem[_menuLength] = StripDownName(itemFactory.FriendlyName);
+                                _menuColors[_menuLength] = ColorEnum.Blue;
                                 _menuIndices[_menuLength] = i;
                                 _menuLength++;
                             }
@@ -1240,8 +1206,8 @@ internal class JournalScript : Script, IScript, IRepeatableScript, IScriptStore
                     }
                     else
                     {
-                        kPtr.Stompable[0] = !kPtr.Stompable[0];
-                        _menuColors[menu] = kPtr.Stompable[0] ? ColorEnum.Red : ColorEnum.Green;
+                        itemFactory.Stompable[0] = !itemFactory.Stompable[0];
+                        _menuColors[menu] = itemFactory.Stompable[0] ? ColorEnum.Red : ColorEnum.Green;
                     }
                     break;
                 }

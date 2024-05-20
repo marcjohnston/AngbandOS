@@ -50,5 +50,5 @@ internal class OrbLightSourceItemFactory : LightSourceItemFactory
     /// </summary>
     public override bool AskDestroyAll => false;
 
-    public override bool HasQuality => true;
+    public override bool HasQualityRatings => true;
 }

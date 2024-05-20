@@ -214,7 +214,7 @@ internal abstract class ArmorItemFactory : ItemFactory
     /// </summary>
     public override bool AskDestroyAll => false;
 
-    public override bool HasQuality => true;
+    public override bool HasQualityRatings => true;
     public override bool IsArmor => true;
     public override bool IdentityCanBeSensed => true;
     public override bool IsWearable => true;

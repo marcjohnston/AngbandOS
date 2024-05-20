@@ -1237,6 +1237,11 @@ internal sealed class Item : IComparable<Item>
 
     public ItemQualityRating GetQualityRating()
     {
+        if (!Factory.HasQualityRatings)
+        {
+            return Game.SingletonRepository.Get<ItemQualityRating>(nameof(BrokenItemQualityRating));
+        }
+
         if (IsArtifact)
         {
             if (IsCursed() || IsBroken())
@@ -1253,22 +1258,27 @@ internal sealed class Item : IComparable<Item>
             }
             return Game.SingletonRepository.Get<ItemQualityRating>(nameof(ExcellentItemQualityRating));
         }
+
         if (IsCursed())
         {
             return Game.SingletonRepository.Get<ItemQualityRating>(nameof(CursedItemQualityRating));
         }
+
         if (IsBroken())
         {
             return Game.SingletonRepository.Get<ItemQualityRating>(nameof(BrokenItemQualityRating));
         }
+
         if (BonusArmorClass > 0)
         {
             return Game.SingletonRepository.Get<ItemQualityRating>(nameof(GoodItemQualityRating));
         }
+
         if (BonusHit + BonusDamage > 0)
         {
             return Game.SingletonRepository.Get<ItemQualityRating>(nameof(GoodItemQualityRating));
         }
+
         return Game.SingletonRepository.Get<ItemQualityRating>(nameof(AverageItemQualityRating));
     }
 

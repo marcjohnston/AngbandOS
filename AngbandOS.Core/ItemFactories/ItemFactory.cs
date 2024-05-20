@@ -90,17 +90,13 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey
     /// <returns></returns>
     public virtual bool IsStompable(Item item)
     {
-        if (HasQuality)
+        ItemQualityRating itemQualityRating = item.GetQualityRating();
+        int? stompableIndex = itemQualityRating.StompIndex;
+        if (stompableIndex == null)
         {
-            ItemQualityRating itemQualityRating = item.GetQualityRating();
-            int? stompableIndex = itemQualityRating.StompIndex;
-            if (stompableIndex == null)
-            {
-                return false;
-            }
-            return Stompable[stompableIndex.Value];
+            return false;
         }
-        return Stompable[StompableType.Broken];
+        return Stompable[stompableIndex.Value];
     }
 
     /// <summary>
@@ -793,9 +789,11 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey
     public virtual bool AskDestroyAll => true;
 
     /// <summary>
-    /// Returns true, if the object has quality.  Returns false, by default.  Armor, weapons and orbs of light return true.  All others types return false.
+    /// Returns true, if the object have different quality ratings; false, if items of the factory all have the same quality rating.  Returns false, by default.  
+    /// Armor, weapons and orbs of light return true.  Items without quality rating will always use the Broken stomp type.  Items with quality will use various
+    /// item properties to determine their quality.
     /// </summary>
-    public virtual bool HasQuality => false;
+    public virtual bool HasQualityRatings => false;
 
     /// <summary>
     /// Returns true, if the object type has flavors.  Returns false, by default.
