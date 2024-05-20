@@ -16,6 +16,7 @@ internal abstract class WeaponItemFactory : ItemFactory
     public WeaponItemFactory(Game game) : base(game) { }
 
     /// <summary>
+    public override bool InitialBrokenStomp => false;
     /// Returns false, because the player shouldn't be asked to stomp all Weapons. 
     /// </summary>
     public override bool AskDestroyAll => false;

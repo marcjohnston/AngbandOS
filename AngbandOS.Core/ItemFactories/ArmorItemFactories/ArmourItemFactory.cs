@@ -15,6 +15,7 @@ internal abstract class ArmorItemFactory : ItemFactory
 {
     public ArmorItemFactory(Game game) : base(game) { }
 
+    /// Returns true because broken armor should be stomped automatically. 
     public override int? GetTypeSpecificRealValue(Item item, int value)
     {
         return item.ComputeTypeSpecificRealValue(value);
