@@ -17,6 +17,11 @@ internal abstract class ChestItemFactory : ItemFactory
     public override bool HatesFire => true;
     public override bool HatesAcid => true;
 
+    /// <summary>
+    /// Returns false, because the player shouldn't be asked to stomp all Chests. 
+    /// </summary>
+    public override bool AskDestroyAll => false;
+
     public override bool IsStompable(Item item)
     {
         if (!item.IsKnown())

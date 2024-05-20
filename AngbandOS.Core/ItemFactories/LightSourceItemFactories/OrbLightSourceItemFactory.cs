@@ -40,5 +40,10 @@ internal class OrbLightSourceItemFactory : LightSourceItemFactory
     };
     public override int Weight => 50;
 
+    /// <summary>
+    /// Returns false, because the player shouldn't be asked to stomp all Orbs of light. 
+    /// </summary>
+    public override bool AskDestroyAll => false;
+
     public override bool HasQuality => true;
 }

@@ -763,6 +763,12 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey
     }
 
     /// <summary>
+    /// Returns true, if the destroy script should ask the player if known items from this factory should be destroyed by setting the applicable 
+    /// broken stomp type to true; false, otherwise.  Returns true, by default.  Chests, weapons, armor and orbs of light return false.
+    /// </summary>
+    public virtual bool AskDestroyAll => true;
+
+    /// <summary>
     /// Returns true, if the object has quality.  Returns false, by default.  Armor, weapons and orbs of light return true.  All others types return false.
     /// </summary>
     public virtual bool HasQuality => false;

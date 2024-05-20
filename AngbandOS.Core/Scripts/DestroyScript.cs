@@ -72,15 +72,13 @@ internal class DestroyScript : Script, IScript, IRepeatableScript, IScriptStore
                 {
                     return;
                 }
+
                 // If it was something we might want to destroy again, ask
-                if (!item.Factory.HasQuality && item.Factory.CategoryEnum != ItemTypeEnum.Chest)
+                if (item.IsKnown() && item.Factory.AskDestroyAll)
                 {
-                    if (item.IsKnown())
+                    if (Game.GetCheck($"Always destroy {itemName}?"))
                     {
-                        if (Game.GetCheck($"Always destroy {itemName}?"))
-                        {
-                            item.Factory.Stompable[0] = true;
-                        }
+                        item.Factory.Stompable[0] = true;
                     }
                 }
             }

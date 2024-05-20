@@ -204,6 +204,11 @@ internal abstract class ArmorItemFactory : ItemFactory
         }
     }
 
+    /// <summary>
+    /// Returns false, because the player shouldn't be asked to stomp all Armor. 
+    /// </summary>
+    public override bool AskDestroyAll => false;
+
     public override bool HasQuality => true;
     public override bool IsArmor => true;
     public override bool IdentityCanBeSensed => true;
