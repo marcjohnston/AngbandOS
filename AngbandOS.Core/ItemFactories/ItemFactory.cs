@@ -234,13 +234,48 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey
     public virtual int? GetTypeSpecificRealValue(Item item, int value) => 0;
 
     /// <summary>
+    /// Returns an array of tuples that define the mass produce for items of this factory.  These tuples define a Roll that is applied for additional items to be produced
+    /// for items of a cost value or less; or null, if no additional items should be produced based on any cost.  Returns null, by default.  This property is used
+    /// to bind the <see cref="MassProduceTuples"/> property during the bind phase.  The tuples must be sorted by cost and are checked during the bind phase.
+    /// </summary>
+    protected virtual (int, string)[]? MassProduceTupleNames => null;
+
+    public (int, Roll)[]? MassProduceTuples { get; private set; }
+
+    /// <summary>
     /// Returns the number of additional items to be produced, when the item is mass produced for a store.  Returns 0, by default.  When an item
     /// is created for stores, this mass produce count can be used to create additional stores of the item based on the value of the item.  An item
-    /// with a high value may not produce as many as other items of lower value.
+    /// with a high value may not produce as many as other items of lower value.  This property is bound using the <see cref="MassProduceTupleNames"/> property during
+    /// the bind phase.
     /// </summary>
     /// <param name="item"></param>
     /// <returns></returns>
-    public virtual int GetAdditionalMassProduceCount(Item item) => 0;
+    public int GetAdditionalMassProduceCount(Item item)
+    {
+        // Rare items will not mass produce.
+        if (item.RareItem != null)
+        {
+            return 0;
+        }
+
+        // Determine the cost of the item.
+        int itemCost = item.Value();
+
+        // Get the Random to be used.
+        Random random = Game.UseRandom;
+
+        if (MassProduceTuples != null)
+        {
+            foreach ((int cost, Roll roll) in MassProduceTuples)
+            {
+                if (itemCost <= cost)
+                {
+                    return roll.Get(random);
+                }
+            }
+        }
+        return 0;
+    }
 
     /// <summary>
     /// Applies an additional bonus to random artifacts.  Does nothing by default.
@@ -706,6 +741,28 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey
         ItemClass = Game.SingletonRepository.Get<ItemClass>(ItemClassName);
         FlavorSymbol = Symbol;
         FlavorColor = Color;
+
+        // Bind the MassProduceTuples
+        if (MassProduceTupleNames == null)
+        {
+            MassProduceTuples = null;
+        }
+        else
+        {
+            List<(int, Roll)> massProduceTuplesList = new List<(int, Roll)>();
+            foreach ((int cost, string rollSyntax) in MassProduceTupleNames)
+            {
+                (int, Roll) newTuple = (cost, Roll.Parse(Game, rollSyntax));
+                massProduceTuplesList.Add(newTuple);
+            }
+            MassProduceTuples = massProduceTuplesList.ToArray();
+
+            // Validate the MassProduceTuples sorting.
+            if (!Game.ValidateTupleSorting<(int cost, Roll roll)>(MassProduceTuples, (a, b) => a.cost < b.cost))
+            {
+                throw new Exception($"The MassProduceTupleNames specified for the {GetType().Name} are not sorted in ascending order by cost.");
+            }
+        }
     }
 
     protected abstract string ItemClassName { get; }

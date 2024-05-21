@@ -13,6 +13,13 @@ internal class EmptyBottleItemFactory : BottleItemFactory
     private EmptyBottleItemFactory(Game game) : base(game) { } // This object is a singleton.
 
     protected override string SymbolName => nameof(ExclamationPointSymbol);
+    protected override string ItemClassName => nameof(BottlesItemClass);
+    public override bool EasyKnow => true;
+    public override int PackSort => 39;
+    public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Bottle;
+    public override bool HatesCold => true;
+    public override int PercentageBreakageChance => 100;
+    public override bool HatesAcid => true;
     public override string Name => "Empty Bottle";
 
     public override int Cost => 1;

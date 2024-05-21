@@ -11,6 +11,11 @@ namespace AngbandOS.Core.ItemFactories;
 internal abstract class PolearmWeaponItemFactory : MeleeWeaponItemFactory
 {
     public PolearmWeaponItemFactory(Game game) : base(game) { }
+    protected override (int, string)[]? MassProduceTupleNames => new (int, string)[]
+    {
+        (100, "3d5-3")
+    };
+
     protected override string ItemClassName => nameof(PolearmsItemClass);
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Polearm;
     public override bool HatesFire => true;

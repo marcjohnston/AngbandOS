@@ -12,6 +12,11 @@ internal abstract class SwordWeaponItemFactory : MeleeWeaponItemFactory
 {
     public SwordWeaponItemFactory(Game game) : base(game) { }
     protected override bool CanBeWeaponOfLaw => true;
+    protected override (int, string)[]? MassProduceTupleNames => new (int, string)[]
+    {
+        (100, "3d5-3")
+    };
+
     protected override bool CanBeWeaponOfSharpness => true;
     protected override bool CapableOfVorpalSlaying => true;
     protected override string ItemClassName => nameof(SwordsItemClass);

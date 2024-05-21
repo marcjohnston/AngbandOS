@@ -2979,6 +2979,12 @@ internal sealed class Item : IComparable<Item>
         return bonusValue;
     }
 
+    /// <summary>
+    /// Returns a random number similar to a dice roll diceDsides but this mass roll uses 
+    /// </summary>
+    /// <param name="num"></param>
+    /// <param name="max"></param>
+    /// <returns></returns>
     public int MassRoll(int num, int max)
     {
         int t = 0;

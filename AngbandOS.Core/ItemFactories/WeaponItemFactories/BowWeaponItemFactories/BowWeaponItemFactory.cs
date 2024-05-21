@@ -15,6 +15,11 @@ internal abstract class BowWeaponItemFactory : WeaponItemFactory // TODO: Should
     /// </summary>
     public override int WieldSlot => InventorySlot.RangedWeapon;
 
+    protected override (int, string)[]? MassProduceTupleNames => new (int, string)[]
+    {
+        (100, "3d5-3")
+    };
+
     public override string GetDetailedDescription(Item item)
     {
         string basenm = "";

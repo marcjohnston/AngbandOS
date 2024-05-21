@@ -12,7 +12,6 @@ namespace AngbandOS.Core.Widgets;
 [Serializable]
 internal abstract class RangedWidget : TextWidget
 {
-    private bool _sortValidated = false;
     private string _text;
     private ColorEnum _color;
 
@@ -26,6 +25,12 @@ internal abstract class RangedWidget : TextWidget
     {
         base.Bind();
         IntValue = Game.SingletonRepository.Get<IIntValue>(IntValueName);
+
+        // Validate the sort order for the Ranges; from smallest startValue to largest.
+        if (!Game.ValidateTupleSorting<(int startValue, string text, ColorEnum color)>(Ranges, (a, b) => a.startValue > b.startValue))
+        {
+            throw new Exception($"The ranges specified for the {GetType().Name} are not sorted in descending order by startValue.");
+        }
     }
 
     /// <summary>
@@ -52,28 +57,8 @@ internal abstract class RangedWidget : TextWidget
 
     public sealed override ColorEnum Color => _color;
 
-    private void ValidateRangeSorting()
-    {
-        if (!_sortValidated)
-        {
-            int? previousMaxValue = null;
-            foreach ((int startValue, string text, ColorEnum color) in Ranges)
-            {
-                if (previousMaxValue != null && startValue >= previousMaxValue.Value)
-                {
-                    throw new Exception($"The ranges specified for the {GetType().Name} are not sorted property.");
-                }
-                previousMaxValue = startValue;
-            }
-            _sortValidated = true;
-        }
-    }
-
     public override void Update()
     {
-        // Now that we need to check the ranges, validate that the ranges are properly sorted in descending order.  We only do this once.
-        ValidateRangeSorting();
-
         // Grab a copy of the value so that we do not retrieve it for every range.
         int intValue = IntValue.IntValue;
 

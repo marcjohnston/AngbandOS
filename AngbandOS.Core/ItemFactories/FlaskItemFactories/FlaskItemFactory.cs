@@ -13,25 +13,11 @@ internal abstract class FlaskItemFactory : ItemFactory
     public FlaskItemFactory(Game game) : base(game) { }
     protected override string ItemClassName => nameof(FlasksItemClass);
     public override bool EasyKnow => true;
-    public override int GetAdditionalMassProduceCount(Item item)
+    protected override (int, string)[]? MassProduceTupleNames => new (int, string)[]
     {
-        // Rare items will not mass produce.
-        if (item.RareItem != null)
-        {
-            return 0;
-        }
+        (20, "3d5-3")
+    };
 
-        int cost = item.Value();
-        if (cost <= 5)
-        {
-            return item.MassRoll(3, 5);
-        }
-        if (cost <= 20)
-        {
-            return item.MassRoll(3, 5);
-        }
-        return 0;
-    }
     public override int PercentageBreakageChance => 100;
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Flask;
     public override bool HatesCold => true;

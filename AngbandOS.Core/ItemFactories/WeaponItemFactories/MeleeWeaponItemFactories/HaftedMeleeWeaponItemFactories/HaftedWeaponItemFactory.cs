@@ -12,6 +12,11 @@ internal abstract class HaftedWeaponItemFactory : MeleeWeaponItemFactory
 {
     public HaftedWeaponItemFactory(Game game) : base(game) { }
     protected override bool CanBeWeaponOfLaw => true;
+    protected override (int, string)[]? MassProduceTupleNames => new (int, string)[]
+    {
+        (100, "3d5-3")
+    };
+
     protected override string ItemClassName => nameof(HaftedWeaponsItemClass);
     public override int PackSort => 30;
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Hafted;

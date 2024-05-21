@@ -13,6 +13,11 @@ internal abstract class ArrowAmmunitionItemFactory : AmmunitionItemFactory
 {
     public ArrowAmmunitionItemFactory(Game game) : base(game) { }
     protected override string ItemClassName => nameof(ArrowsItemClass);
+    protected override (int, string)[]? MassProduceTupleNames => new (int, string)[]
+    {
+        (500, "5d5-5")
+    };
+
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Arrow;
     public override int PackSort => 34;
     public override bool HatesFire => true;

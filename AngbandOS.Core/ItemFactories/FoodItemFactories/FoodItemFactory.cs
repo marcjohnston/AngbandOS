@@ -16,25 +16,10 @@ internal abstract class FoodItemFactory : ItemFactory
     public override bool EasyKnow => true;
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Food;
 
-    public override int GetAdditionalMassProduceCount(Item item)
+    protected override (int, string)[]? MassProduceTupleNames => new (int, string)[] 
     {
-        // Rare items will not mass produce.
-        if (item.RareItem != null)
-        {
-            return 0;
-        }
-
-        int cost = item.Value();
-        if (cost <= 5)
-        {
-            return item.MassRoll(3, 5);
-        }
-        if (cost <= 20)
-        {
-            return item.MassRoll(3, 5);
-        }
-        return 0;
-    }
+        (20, "3d5-3")
+    };
 
     public override int PackSort => 9;
     public override int BaseValue => 5;

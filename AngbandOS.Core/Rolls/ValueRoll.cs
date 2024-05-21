@@ -5,11 +5,14 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.ItemFactories;
+namespace AngbandOS.Core.Rolls;
 
-[Serializable]
-internal abstract class BottleItemFactory : ItemFactory
+internal class ValueRoll : Roll
 {
-    public BottleItemFactory(Game game) : base(game) { }
-
+    public ValueRoll(Game game, int value) : base(game)
+    {
+        Value = value;
+    }
+    public int Value { get; }
+    public override int Get(Random random) => Value;
 }

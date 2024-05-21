@@ -16859,10 +16859,24 @@ internal class Game
     }
 
     [NonSerialized]
-    private Random _mainSequence;// = new Random(); If the generation of a new game needs non-fixed randoms, this could be uncommented.
+    private Random _mainSequence;
 
     [NonSerialized]
-    private Random _fixed; // = new Random();
+    private Random _fixed;
+
+    public Random UseRandom => UseFixed ? _fixed : _mainSequence;
+
+    public static bool ValidateTupleSorting<T>(T[] items, Func<T, T, bool> testPredicate)
+    {
+        for (int i = 0; i < items.Length - 1; i++)
+        {
+            if (!testPredicate(items[i], items[i + 1]))
+            {
+                return false;
+            }
+        }
+        return true;
+    }
 
     /// <summary>
     /// Set true to use the fixed seed, and false to use the generic randomiser

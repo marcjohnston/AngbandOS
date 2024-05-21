@@ -50,25 +50,11 @@ internal abstract class BookItemFactory : ItemFactory
         return includeCountPrefix ? GetPrefixCount(true, name, item.Count, item.IsKnownArtifact) : name;
     }
 
-    public override int GetAdditionalMassProduceCount(Item item)
+    protected override (int, string)[]? MassProduceTupleNames => new (int, string)[]
     {
-        // Rare items will not mass produce.
-        if (item.RareItem != null)
-        {
-            return 0;
-        }
-
-        int cost = item.Value();
-        if (cost <= 50)
-        {
-            return item.MassRoll(2, 3) + 1;
-        }
-        if (cost <= 500)
-        {
-            return item.MassRoll(1, 3) + 1;
-        }
-        return 0;
-    }
+        (50, "2d3-2"),
+        (500, "1d3-2")
+    };
 
     /// <summary>
     /// Returns the singleton realm that this book factory belongs to.

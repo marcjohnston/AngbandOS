@@ -31,25 +31,11 @@ internal abstract class ScrollItemFactory : ItemFactory, IFlavorFactory
     /// </summary>
     public IEnumerable<Flavor>? GetFlavorRepository() => Game.UnreadableScrollFlavors;
 
-    public override int GetAdditionalMassProduceCount(Item item)
+    protected override (int, string)[]? MassProduceTupleNames => new (int, string)[]
     {
-        // Rare items will not mass produce.
-        if (item.RareItem != null)
-        {
-            return 0;
-        }
-
-        int cost = item.Value();
-        if (cost <= 60)
-        {
-            return item.MassRoll(3, 5);
-        }
-        if (cost <= 240)
-        {
-            return item.MassRoll(1, 5);
-        }
-        return 0;
-    }
+        (60, "3d5-3"),
+        (240, "1d5-1")
+    };
 
     public override int PercentageBreakageChance => 50;
     public override bool CanBeRead => true;

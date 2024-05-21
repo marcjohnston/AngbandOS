@@ -16,6 +16,11 @@ internal abstract class BoltAmmunitionItemFactory : AmmunitionItemFactory
     public override int PackSort => 33;
     public override ColorEnum Color => ColorEnum.BrightBrown;
 
+    protected override (int, string)[]? MassProduceTupleNames => new (int, string)[]
+    {
+        (500, "5d5-5")
+    };
+
     /// <summary>
     /// Returns true for all bolts.
     /// </summary>

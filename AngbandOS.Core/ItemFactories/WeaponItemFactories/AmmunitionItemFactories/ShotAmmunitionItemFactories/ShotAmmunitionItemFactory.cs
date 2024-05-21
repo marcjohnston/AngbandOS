@@ -13,6 +13,11 @@ internal abstract class ShotAmmunitionItemFactory : AmmunitionItemFactory
     public ShotAmmunitionItemFactory(Game game) : base(game) { }
 
     protected override string ItemClassName => nameof(ShotsItemClass);
+    protected override (int, string)[]? MassProduceTupleNames => new (int, string)[]
+    {
+        (500, "5d5-5")
+    };
+
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Shot;
     public override int PackSort => 35;
     public override ColorEnum Color => ColorEnum.BrightBrown;

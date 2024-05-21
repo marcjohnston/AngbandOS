@@ -54,25 +54,10 @@ internal abstract class ArmorItemFactory : ItemFactory
         return s;
     }
 
-    public override int GetAdditionalMassProduceCount(Item item)
+    protected override (int, string)[]? MassProduceTupleNames => new (int, string)[]
     {
-        // Rare items will not mass produce.
-        if (item.RareItem != null)
-        {
-            return 0;
-        }
-
-        int cost = item.Value();
-        if (cost <= 10)
-        {
-            return item.MassRoll(3, 5);
-        }
-        if (cost <= 100)
-        {
-            return item.MassRoll(3, 5);
-        }
-        return 0;
-    }
+        (100, "3d5-3")
+    };
 
     public override void ApplyRandartBonus(Item item)
     {

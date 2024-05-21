@@ -13,29 +13,10 @@ internal abstract class SpikeItemFactory : ItemFactory
     public SpikeItemFactory(Game game) : base(game) { }
     protected override string ItemClassName => nameof(SpikesItemClass);
 
-    public override int GetAdditionalMassProduceCount(Item item)
+    protected override (int, string)[]? MassProduceTupleNames => new (int, string)[]
     {
-        // Rare items will not mass produce.
-        if (item.RareItem != null)
-        {
-            return 0;
-        }
-
-        int cost = item.Value();
-        if (cost <= 5)
-        {
-            return item.MassRoll(5, 5);
-        }
-        if (cost <= 50)
-        {
-            return item.MassRoll(5, 5);
-        }
-        if (cost <= 500)
-        {
-            return item.MassRoll(5, 5);
-        }
-        return 0;
-    }
+        (500, "5d5-5")
+    };
 
     public override int MakeObjectCount => Game.DiceRoll(6, 7);
     public override bool EasyKnow => true;

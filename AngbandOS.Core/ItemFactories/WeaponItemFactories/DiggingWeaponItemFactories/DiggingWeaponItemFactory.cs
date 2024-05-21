@@ -16,6 +16,11 @@ internal abstract class DiggingWeaponItemFactory : WeaponItemFactory
     public override int WieldSlot => InventorySlot.Digger;
     public DiggingWeaponItemFactory(Game game) : base(game) { }
     protected override string ItemClassName => nameof(DiggersItemClass);
+    protected override (int, string)[]? MassProduceTupleNames => new (int, string)[]
+    {
+        (100, "3d5-3")
+    };
+
     public override void ApplyMagic(Item item, int level, int power, Store? store)
     {
         base.ApplyMagic(item, level, power, null);

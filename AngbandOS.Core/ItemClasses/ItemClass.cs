@@ -1,5 +1,8 @@
 namespace AngbandOS.Core.ItemClasses;
 
+/// <summary>
+/// Represents a class of items factories that are similar.  These classes define a distinct class name and stomp setting.
+/// </summary>
 [Serializable]
 internal abstract class ItemClass : IGetKey
 {

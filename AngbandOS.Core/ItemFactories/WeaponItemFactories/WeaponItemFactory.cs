@@ -54,26 +54,6 @@ internal abstract class WeaponItemFactory : ItemFactory
         return s;
     }
 
-    public override int GetAdditionalMassProduceCount(Item item)
-    {
-        // Rare items will not mass produce.
-        if (item.RareItem != null)
-        {
-            return 0;
-        }
-
-        int cost = item.Value();
-        if (cost <= 10)
-        {
-            return item.MassRoll(3, 5);
-        }
-        if (cost <= 100)
-        {
-            return item.MassRoll(3, 5);
-        }
-        return 0;
-    }
-
     public override int? GetTypeSpecificRealValue(Item item, int value)
     {
         return item.ComputeTypeSpecificRealValue(value);
