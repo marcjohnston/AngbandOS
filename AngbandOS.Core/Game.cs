@@ -1627,7 +1627,8 @@ internal class Game
         }
 
         // Get a list of all of the item classes that are considered gold.  Sort them by the cost.
-        ItemFactory[] goldItemFactories = SingletonRepository.Get<ItemFactory>().Where(_itemClass => _itemClass.TryCast<GoldItemFactory>() != null).OrderBy(_goldItemClass => _goldItemClass.Cost).ToArray();
+        ItemClass goldItemClass = SingletonRepository.Get<ItemClass>(nameof(GoldItemClass));
+        ItemFactory[] goldItemFactories = SingletonRepository.Get<ItemFactory>().Where(_itemFactory => _itemFactory.ItemClass.Key == goldItemClass.Key).OrderBy(_goldItemFactory => _goldItemFactory.InitialGoldPiecesRoll.MaximumValue).ToArray();
 
         if (goldType >= goldItemFactories.Length)
         {

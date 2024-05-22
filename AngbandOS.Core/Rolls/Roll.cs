@@ -7,6 +7,7 @@
 
 namespace AngbandOS.Core.Rolls;
 
+[Serializable]
 internal abstract class Roll
 {
     protected readonly Game Game;
@@ -16,4 +17,10 @@ internal abstract class Roll
     }
 
     public abstract int Get(Random random);
+
+    /// <summary>
+    /// Returns the maximum value of any possible roll.  This maximum value is used to sort gold item factories
+    /// from least to most during the <see cref="Game.MakeGold"/> method.
+    /// </summary>
+    public int MaximumValue { get; protected set; }
 }

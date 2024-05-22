@@ -7,6 +7,7 @@
 
 namespace AngbandOS.Core.Rolls;
 
+[Serializable]
 internal class DiceRoll : Roll
 {
     public DiceRoll(Game game, int dieCount, int sideCount, int multiplier, int bonus) : this(game, dieCount, sideCount, multiplier, bonus, false) { }
@@ -20,13 +21,14 @@ internal class DiceRoll : Roll
         {
             throw new Exception("Die roll multiplier cannot be 0.");
         }
-        QuantityDice = dieCount;
+        DieCount = dieCount;
         SideCount = sideCount;
         MultiplierIsDivisor = multiplierIsDivisor;
         Multiplier = multiplierOrDivisor;
         Bonus = bonus;
+        MaximumValue = MultiplierIsDivisor ? DieCount * SideCount / Multiplier + Bonus : DieCount * SideCount * Multiplier + Bonus;
     }
-    public int QuantityDice { get; }
+    public int DieCount { get; }
     public int SideCount { get; }
     public bool MultiplierIsDivisor { get; }
     public int Multiplier { get; }
@@ -34,7 +36,7 @@ internal class DiceRoll : Roll
     public override int Get(Random random)
     {
         int sum = 0;
-        for (int i = 0; i < QuantityDice; i++)
+        for (int i = 0; i < DieCount; i++)
         {
             int roll = random.Next(SideCount) + 1;
             sum += roll;

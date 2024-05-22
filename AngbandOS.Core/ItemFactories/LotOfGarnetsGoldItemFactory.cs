@@ -8,14 +8,19 @@
 namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
-internal class SomeGarnetsGoldItemFactory : GoldItemFactory
+internal class LotOfGarnetsGoldItemFactory : ItemFactory
 {
-    private SomeGarnetsGoldItemFactory(Game game) : base(game) { } // This object is a singleton.
+    private LotOfGarnetsGoldItemFactory(Game game) : base(game) { } // This object is a singleton.
 
     protected override string SymbolName => nameof(DollarSignSymbol);
     public override ColorEnum Color => ColorEnum.Red;
-    public override string Name => "some garnets";
-    protected override string InitialGoldPieces => "2d9x4";
-    public override string FriendlyName => "some garnets";
+    public override string Name => "lot of garnets";
+
+    protected override string InitialGoldPieces => "2d10x4";
+    public override string FriendlyName => "lot of garnets";
     public override int LevelNormallyFound => 1;
+    protected override string ItemClassName => nameof(GoldItemClass);
+    public override int PackSort => 0;
+    public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Gold;
+    public override bool IsIgnoredByMonsters => true;
 }

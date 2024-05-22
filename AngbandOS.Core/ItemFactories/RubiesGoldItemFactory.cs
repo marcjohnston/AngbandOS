@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
-internal class RubiesGoldItemFactory : GoldItemFactory
+internal class RubiesGoldItemFactory : ItemFactory
 {
     private RubiesGoldItemFactory(Game game) : base(game) { } // This object is a singleton.
 
@@ -19,4 +19,8 @@ internal class RubiesGoldItemFactory : GoldItemFactory
     protected override string InitialGoldPieces => "2d24x4";
     public override string FriendlyName => "rubies";
     public override int LevelNormallyFound => 1;
+    protected override string ItemClassName => nameof(GoldItemClass);
+    public override int PackSort => 0;
+    public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Gold;
+    public override bool IsIgnoredByMonsters => true;
 }

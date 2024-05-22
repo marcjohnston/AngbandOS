@@ -8,15 +8,19 @@
 namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
-internal class Silver2GoldItemFactory : GoldItemFactory
+internal class PieceOfSilverGoldItemFactory : ItemFactory
 {
-    private Silver2GoldItemFactory(Game game) : base(game) { } // This object is a singleton.
+    private PieceOfSilverGoldItemFactory(Game game) : base(game) { } // This object is a singleton.
 
     protected override string SymbolName => nameof(DollarSignSymbol);
     public override ColorEnum Color => ColorEnum.Silver;
-    public override string Name => "silver**";
+    public override string Name => "piece of silver";
 
-    protected override string InitialGoldPieces => "2d8x4";
-    public override string FriendlyName => "silver";
+    protected override string InitialGoldPieces => "2d6x4";
+    public override string FriendlyName => "piece of silver";
     public override int LevelNormallyFound => 1;
+    protected override string ItemClassName => nameof(GoldItemClass);
+    public override int PackSort => 0;
+    public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Gold;
+    public override bool IsIgnoredByMonsters => true;
 }

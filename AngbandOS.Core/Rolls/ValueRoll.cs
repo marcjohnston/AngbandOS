@@ -7,11 +7,13 @@
 
 namespace AngbandOS.Core.Rolls;
 
+[Serializable]
 internal class ValueRoll : Roll
 {
     public ValueRoll(Game game, int value) : base(game)
     {
         Value = value;
+        MaximumValue = value;
     }
     public int Value { get; }
     public override int Get(Random random) => Value;
