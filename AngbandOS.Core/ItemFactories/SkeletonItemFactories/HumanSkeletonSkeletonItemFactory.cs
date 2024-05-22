@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
-internal class HumanSkeletonSkeletonItemFactory : SkeletonItemFactory
+internal class HumanSkeletonSkeletonItemFactory : ItemFactory
 {
     private HumanSkeletonSkeletonItemFactory(Game game) : base(game) { } // This object is a singleton.
 
@@ -29,4 +29,10 @@ internal class HumanSkeletonSkeletonItemFactory : SkeletonItemFactory
         (5, 1)
     };
     public override int Weight => 60;
+    protected override string ItemClassName => nameof(SkeletonsItemClass);
+    public override bool EasyKnow => true;
+    public override int PackSort => 40;
+    public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Skeleton;
+    public override int PercentageBreakageChance => 50;
+    public override bool HatesAcid => true;
 }

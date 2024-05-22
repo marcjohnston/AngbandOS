@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
-internal class DwarfSkeletonSkeletonItemFactory : SkeletonItemFactory
+internal class DwarfSkeletonSkeletonItemFactory : ItemFactory
 {
     private DwarfSkeletonSkeletonItemFactory(Game game) : base(game) { } // This object is a singleton.
 
@@ -29,4 +29,10 @@ internal class DwarfSkeletonSkeletonItemFactory : SkeletonItemFactory
         (5, 1)
     };
     public override int Weight => 50;
+    protected override string ItemClassName => nameof(SkeletonsItemClass);
+    public override bool EasyKnow => true;
+    public override int PackSort => 40;
+    public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Skeleton;
+    public override int PercentageBreakageChance => 50;
+    public override bool HatesAcid => true;
 }
