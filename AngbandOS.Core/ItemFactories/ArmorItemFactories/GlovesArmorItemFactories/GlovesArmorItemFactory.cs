@@ -10,13 +10,7 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal abstract class GlovesArmorItemFactory : ArmorItemFactory
 {
-    /// <summary>
-    /// Returns the hands inventory slots for gloves.
-    /// </summary>
-    public override int WieldSlot => InventorySlot.Hands;
     public GlovesArmorItemFactory(Game game) : base(game) { }
-    protected override string ItemClassName => nameof(GlovesItemClass);
-
     /// <summary>
     /// Applies a good random rare characteristics to gloves.
     /// </summary>
@@ -87,12 +81,4 @@ internal abstract class GlovesArmorItemFactory : ArmorItemFactory
             }
         }
     }
-    public override int PackSort => 26;
-    public override BaseInventorySlot BaseWieldSlot => Game.SingletonRepository.Get<BaseInventorySlot>(nameof(HandsInventorySlot));
-    public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Gloves;
-    public override bool HatesFire => true;
-    public override bool HatesAcid => true;
-
-    public override ColorEnum Color => ColorEnum.BrightBrown;
-
 }

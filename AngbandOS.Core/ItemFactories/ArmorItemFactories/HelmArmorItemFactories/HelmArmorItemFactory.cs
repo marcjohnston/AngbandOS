@@ -41,11 +41,6 @@ internal abstract class HelmArmorItemFactory : ArmorItemFactory
             }
         }
     }
-
-    /// <summary>
-    /// Returns the head inventory slot for helms.
-    /// </summary>
-    public override int WieldSlot => InventorySlot.Head;
     protected override void ApplyRandomGoodRareCharacteristics(Item item)
     {
         switch (Game.DieRoll(14))
@@ -83,19 +78,10 @@ internal abstract class HelmArmorItemFactory : ArmorItemFactory
         }
     }
 
+    public HelmArmorItemFactory(Game game) : base(game) { }
 
     protected override void ApplyRandomPoorRareCharacteristics(Item item)
     {
         item.RareItem = Game.SingletonRepository.Get<RareItemWeightedRandom>(nameof(HelmPoorRareItemWeightedRandom)).ChooseOrDefault();
     }
-
-    public HelmArmorItemFactory(Game game) : base(game) { }
-    protected override string ItemClassName => nameof(HelmsItemClass);
-    public override BaseInventorySlot BaseWieldSlot => Game.SingletonRepository.Get<BaseInventorySlot>(nameof(HeadInventorySlot));
-    public override int PackSort => 25;
-    public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Helm;
-    public override bool HatesAcid => true;
-
-    public override ColorEnum Color => ColorEnum.BrightBrown;
-    public override bool CanReflectBoltsAndArrows => true;
 }

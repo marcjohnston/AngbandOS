@@ -11,12 +11,6 @@ namespace AngbandOS.Core.ItemFactories;
 internal abstract class SoftArmorItemFactory : ArmorItemFactory
 {
     /// <summary>
-    /// Returns the on-body inventory slot for soft armor.
-    /// </summary>
-    public override int WieldSlot => InventorySlot.OnBody;
-
-
-    /// <summary>
     /// Applies standard magic to soft armor.
     /// </summary>
     /// <param name="item"></param>
@@ -37,17 +31,4 @@ internal abstract class SoftArmorItemFactory : ArmorItemFactory
     }
 
     public SoftArmorItemFactory(Game game) : base(game) { }
-    protected override string ItemClassName => nameof(SoftArmorsItemClass);
-    public override BaseInventorySlot BaseWieldSlot => Game.SingletonRepository.Get<BaseInventorySlot>(nameof(OnBodyInventorySlot));
-    public override ItemTypeEnum CategoryEnum => ItemTypeEnum.SoftArmor;
-    public override int PackSort => 21;
-    public override bool HatesFire => true;
-    public override bool HatesAcid => true;
-
-    public override ColorEnum Color => ColorEnum.Grey;
-
-    public override bool CanProvideSheathOfElectricity => true;
-
-    public override bool CanProvideSheathOfFire => true;
-    public override bool CanApplyArtifactBiasResistance => true;
 }

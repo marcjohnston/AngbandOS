@@ -11,11 +11,6 @@ namespace AngbandOS.Core.ItemFactories;
 internal abstract class ShieldArmorItemFactory : ArmorItemFactory
 {
     /// <summary>
-    /// Returns the arm inventory slot for shields.
-    /// </summary>
-    public override int WieldSlot => InventorySlot.Arm;
-
-    /// <summary>
     /// Applies a good random rare characteristics to a shield.
     /// </summary>
     protected override void ApplyRandomGoodRareCharacteristics(Item item)
@@ -88,13 +83,4 @@ internal abstract class ShieldArmorItemFactory : ArmorItemFactory
         }
     }
     public ShieldArmorItemFactory(Game game) : base(game) { }
-    protected override string ItemClassName => nameof(ShieldsItemClass);
-    public override BaseInventorySlot BaseWieldSlot => Game.SingletonRepository.Get<BaseInventorySlot>(nameof(ArmInventorySlot));
-    public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Shield;
-    public override int PackSort => 23;
-    public override bool HatesAcid => true;
-
-    public override ColorEnum Color => ColorEnum.BrightBrown;
-
-    public override bool CanReflectBoltsAndArrows => true;
 }

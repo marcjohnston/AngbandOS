@@ -27,4 +27,38 @@ internal class LargeMetalShieldArmorItemFactory : ShieldArmorItemFactory
         (30, 1)
     };
     public override int Weight => 120;
+
+    /// <summary>
+    /// Returns the arm inventory slot for shields.
+    /// </summary>
+    public override int WieldSlot => InventorySlot.Arm;
+
+    protected override string ItemClassName => nameof(ShieldsItemClass);
+    public override BaseInventorySlot BaseWieldSlot => Game.SingletonRepository.Get<BaseInventorySlot>(nameof(ArmInventorySlot));
+    public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Shield;
+    public override int PackSort => 23;
+    public override bool HatesAcid => true;
+
+    public override bool CanReflectBoltsAndArrows => true;
+
+    /// <summary>
+    /// Returns true because broken armor should be stomped automatically. 
+    /// </summary>
+    public override bool InitialBrokenStomp => true;
+
+    /// <summary>
+    /// Returns false, because the player shouldn't be asked to stomp all Armor. 
+    /// </summary>
+    public override bool AskDestroyAll => false;
+
+    public override bool HasQualityRatings => true;
+    public override bool IsArmor => true;
+    public override bool IdentityCanBeSensed => true;
+    public override bool IsWearable => true;
+    public override int RandartActivationChance => base.RandartActivationChance * 2;
+
+    /// <summary>
+    /// Returns true, for all armor where the armor class (ToA) is greater than or equal to zero.
+    /// </summary>
+    public override bool KindIsGood => BonusArmorClass >= 0;
 }
