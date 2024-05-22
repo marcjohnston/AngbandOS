@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
-internal class IronSpikeItemFactory : SpikeItemFactory
+internal class IronSpikeItemFactory : ItemFactory
 {
     private IronSpikeItemFactory(Game game) : base(game) { } // This object is a singleton.
 
@@ -26,4 +26,15 @@ internal class IronSpikeItemFactory : SpikeItemFactory
         (1, 1)
     };
     public override int Weight => 10;
+    protected override string ItemClassName => nameof(SpikesItemClass);
+
+    protected override (int, string)[]? MassProduceTupleNames => new (int, string)[]
+    {
+        (500, "5d5-5")
+    };
+
+    public override int MakeObjectCount => Game.DiceRoll(6, 7);
+    public override bool EasyKnow => true;
+    public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Spike;
+    public override int PackSort => 37;
 }
