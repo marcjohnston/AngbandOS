@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
-internal class SteelBoltAmmunitionItemFactory : BoltAmmunitionItemFactory
+internal class SteelBoltAmmunitionItemFactory : AmmunitionItemFactory
 {
     private SteelBoltAmmunitionItemFactory(Game game) : base(game) { } // This object is a singleton.
 
@@ -28,4 +28,27 @@ internal class SteelBoltAmmunitionItemFactory : BoltAmmunitionItemFactory
     };
     public override bool ShowMods => true;
     public override int Weight => 3;
+    protected override string ItemClassName => nameof(BoltsItemClass);
+    public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Bolt;
+    public override int PackSort => 33;
+
+    protected override (int, string)[]? MassProduceTupleNames => new (int, string)[]
+    {
+        (500, "5d5-5")
+    };
+
+    /// <summary>
+    /// Returns true for all bolts.
+    /// </summary>
+    public override bool KindIsGood => true;
+
+
+    public override bool HatesAcid => true;
+    public override int MakeObjectCount => Game.DiceRoll(6, 7);
+    public override int PercentageBreakageChance => 25;
+
+    public override bool IsWeapon => true;
+    public override bool CanBeFired => true;
+    public override bool IdentityCanBeSensed => true;
+    public override bool GetsDamageMultiplier => true;
 }

@@ -1,20 +1,35 @@
-ï»¿// AngbandOS: 2022 Marc Johnston
+// AngbandOS: 2022 Marc Johnston
 //
-// This game is released under the â€œAngband Licenseâ€, defined as: â€œÂ© 1997 Ben Harrison, James E.
+// This game is released under the “Angband License”, defined as: “© 1997 Ben Harrison, James E.
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
-// copies. Other copyrights may also apply.â€
+// copies. Other copyrights may also apply.”
 
 namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
-internal abstract class BoltAmmunitionItemFactory : AmmunitionItemFactory
+internal class SeekerBoltAmmunitionItemFactory : AmmunitionItemFactory
 {
-    public BoltAmmunitionItemFactory(Game game) : base(game) { }
+    private SeekerBoltAmmunitionItemFactory(Game game) : base(game) { } // This object is a singleton.
+
+    protected override string SymbolName => nameof(OpenBracketSymbol);
+    public override ColorEnum Color => ColorEnum.BrightBlue;
+    public override string Name => "Seeker Bolt";
+
+    public override int Cost => 25;
+    public override int DamageDice => 4;
+    public override int DamageSides => 5;
+    public override string FriendlyName => "& Seeker Bolt~";
+    public override int LevelNormallyFound => 65;
+    public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
+    {
+        (65, 4)
+    };
+    public override bool ShowMods => true;
+    public override int Weight => 3;
     protected override string ItemClassName => nameof(BoltsItemClass);
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Bolt;
     public override int PackSort => 33;
-    public override ColorEnum Color => ColorEnum.BrightBrown;
 
     protected override (int, string)[]? MassProduceTupleNames => new (int, string)[]
     {

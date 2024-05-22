@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
-internal class SeekerArrowAmmunitionItemFactory : ArrowAmmunitionItemFactory
+internal class SeekerArrowAmmunitionItemFactory : AmmunitionItemFactory
 {
     private SeekerArrowAmmunitionItemFactory(Game game) : base(game) { } // This object is a singleton.
 
@@ -27,4 +27,27 @@ internal class SeekerArrowAmmunitionItemFactory : ArrowAmmunitionItemFactory
     };
     public override bool ShowMods => true;
     public override int Weight => 2;
+    protected override string ItemClassName => nameof(ArrowsItemClass);
+    protected override (int, string)[]? MassProduceTupleNames => new (int, string)[]
+    {
+        (500, "5d5-5")
+    };
+
+    public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Arrow;
+    public override int PackSort => 34;
+    public override bool HatesFire => true;
+    public override bool HatesAcid => true;
+
+    /// <summary>
+    /// Returns true, for all arrows.
+    /// </summary>
+    public override bool KindIsGood => true;
+
+    public override int MakeObjectCount => Game.DiceRoll(6, 7);
+    public override int PercentageBreakageChance => 25;
+
+    public override bool IsWeapon => true;
+    public override bool CanBeFired => true;
+    public override bool IdentityCanBeSensed => true;
+    public override bool GetsDamageMultiplier => true;
 }
