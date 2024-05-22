@@ -1,0 +1,47 @@
+// AngbandOS: 2022 Marc Johnston
+//
+// This game is released under the “Angband License”, defined as: “© 1997 Ben Harrison, James E.
+// Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
+// and not for profit purposes provided that this copyright and statement are included in all such
+// copies. Other copyrights may also apply.”
+
+namespace AngbandOS.Core.ItemFactories;
+
+[Serializable]
+internal class BladeOfChaosWeaponItemFactory : MeleeWeaponItemFactory
+{
+    private BladeOfChaosWeaponItemFactory(Game game) : base(game) { } // This object is a singleton.
+
+    protected override string SymbolName => nameof(VerticalBarSymbol);
+    public override ColorEnum Color => ColorEnum.Purple;
+    public override string Name => "Blade of Chaos";
+
+    public override bool Chaotic => true;
+    public override int Cost => 4000;
+    public override int DamageDice => 6;
+    public override int DamageSides => 5;
+    public override string FriendlyName => "& Blade~ of Chaos";
+    public override int LevelNormallyFound => 70;
+    public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
+    {
+        (70, 8)
+    };
+    public override bool ResChaos => true;
+    public override bool ShowMods => true;
+    public override int Weight => 180;
+    protected override bool CanBeWeaponOfLaw => true;
+    protected override (int, string)[]? MassProduceTupleNames => new (int, string)[]
+    {
+        (100, "3d5-3")
+    };
+
+    protected override bool CanBeWeaponOfSharpness => true;
+    protected override bool CapableOfVorpalSlaying => true;
+    protected override string ItemClassName => nameof(SwordsItemClass);
+    public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Sword;
+    public override bool HatesAcid => true;
+    public override int PackSort => 28;
+
+    public override bool CanApplyBlessedArtifactBias => true;
+    public override bool CanVorpalSlay => true;
+}
