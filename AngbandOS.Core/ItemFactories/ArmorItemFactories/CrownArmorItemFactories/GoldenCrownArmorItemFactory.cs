@@ -27,4 +27,17 @@ internal class GoldenCrownArmorItemFactory : CrownArmorItemFactory
         (45, 1)
     };
     public override int Weight => 30;
+
+    /// <summary>
+    /// Returns the head inventory slot, for crowns.
+    /// </summary>
+    public override int WieldSlot => InventorySlot.Head;
+
+    protected override string ItemClassName => nameof(CrownsItemClass);
+
+    public override BaseInventorySlot BaseWieldSlot => Game.SingletonRepository.Get<BaseInventorySlot>(nameof(HeadInventorySlot));
+    public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Crown;
+    public override bool HatesAcid => true;
+
+    public override int PackSort => 24;
 }

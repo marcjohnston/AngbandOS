@@ -28,4 +28,25 @@ internal class ShadowCloakArmorItemFactory : CloakArmorItemFactory
     public override bool ResLight => true;
     public override int BonusArmorClass => 4;
     public override int Weight => 5;
+
+    /// <summary>
+    /// Returns the about body inventory slot for cloaks.
+    /// </summary>
+    public override int WieldSlot => InventorySlot.AboutBody;
+
+    protected override string ItemClassName => nameof(CloaksItemClass);
+    public override BaseInventorySlot BaseWieldSlot => Game.SingletonRepository.Get<BaseInventorySlot>(nameof(AboutBodyInventorySlot));
+    public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Cloak;
+    public override bool HatesFire => true;
+    public override bool HatesAcid => true;
+
+    public override int PackSort => 22;
+
+    public override bool CanProvideSheathOfElectricity => true;
+
+    public override bool CanProvideSheathOfFire => true;
+
+    public override bool CanReflectBoltsAndArrows => true;
+
+    public override bool CanApplyArtifactBiasResistance => true;
 }

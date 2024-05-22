@@ -10,11 +10,6 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal abstract class CrownArmorItemFactory : ArmorItemFactory
 {
-    /// <summary>
-    /// Returns the head inventory slot, for crowns.
-    /// </summary>
-    public override int WieldSlot => InventorySlot.Head;
-
     protected override void ApplyRandomGoodRareCharacteristics(Item item)
     {
         IArtifactBias artifactBias = null;
@@ -56,8 +51,6 @@ internal abstract class CrownArmorItemFactory : ArmorItemFactory
     }
 
     public CrownArmorItemFactory(Game game) : base(game) { }
-    protected override string ItemClassName => nameof(CrownsItemClass);
-
     /// <summary>
     /// Applies standard magic to crowns.
     /// </summary>
@@ -88,10 +81,4 @@ internal abstract class CrownArmorItemFactory : ArmorItemFactory
             }
         }
     }
-    public override BaseInventorySlot BaseWieldSlot => Game.SingletonRepository.Get<BaseInventorySlot>(nameof(HeadInventorySlot));
-    public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Crown;
-    public override bool HatesAcid => true;
-
-    public override int PackSort => 24;
-    public override ColorEnum Color => ColorEnum.BrightBrown;
 }

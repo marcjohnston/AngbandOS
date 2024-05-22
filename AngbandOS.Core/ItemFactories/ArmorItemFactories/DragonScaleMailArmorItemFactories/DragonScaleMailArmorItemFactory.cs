@@ -10,17 +10,8 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal abstract class DragonScaleMailArmorItemFactory : ArmorItemFactory, IItemsCanBeActivated
 {
-    /// <summary>
-    /// Returns the on-body inventory slot for scale mail.
-    /// </summary>
-    public override int WieldSlot => InventorySlot.OnBody;
-
-    public abstract int ActivationRechargeTime { get; }
-
-    protected abstract string ActivationScriptName { get; }
 
     public IScript ActivationScript { get; private set; }
-
     public void ActivateItem(Item item)
     {
         ActivationScript.ExecuteScript();
@@ -33,11 +24,6 @@ internal abstract class DragonScaleMailArmorItemFactory : ArmorItemFactory, IIte
         base.Bind();
         ActivationScript = Game.SingletonRepository.Get<IScript>(ActivationScriptName);
     }
-
-    /// <summary>
-    /// Returns a treasure rating of 30 for dragon scale mail items.
-    /// </summary>
-    public override int TreasureRating => 30;
 
     /// <summary>
     /// Applies special magic to dragon scale mail armor.
@@ -56,11 +42,8 @@ internal abstract class DragonScaleMailArmorItemFactory : ArmorItemFactory, IIte
     }
 
     public DragonScaleMailArmorItemFactory(Game game) : base(game) { }
-    protected override string ItemClassName => nameof(DragonScaleMailsItemClass);
-    public override BaseInventorySlot BaseWieldSlot => Game.SingletonRepository.Get<BaseInventorySlot>(nameof(OnBodyInventorySlot));
-    public override ItemTypeEnum CategoryEnum => ItemTypeEnum.DragArmor;
-    public override int PackSort => 19;
-    public override bool HatesAcid => true;
 
-    public override ColorEnum Color => ColorEnum.Grey;
+    public abstract int ActivationRechargeTime { get; }
+
+    protected abstract string ActivationScriptName { get; }
 }

@@ -84,7 +84,7 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey
     public string UniqueId = Guid.NewGuid().ToString();
 
     /// <summary>
-    /// Returns true, if the item can be stomped.  Returns the stompable status based on the item "Feeling", by default.
+    /// Returns true, if the item can be stomped.  Returns the stompable status based on the item quality rating, by default.
     /// </summary>
     /// <param name="item"></param>
     /// <returns></returns>

@@ -15,15 +15,6 @@ internal abstract class JewelleryItemFactory : ItemFactory
 {
     public JewelleryItemFactory(Game game) : base(game) { }
 
-    public override bool IsStompable(Item item)
-    {
-        if (item.BonusDamage < 0 || item.BonusArmorClass < 0 || item.BonusHit < 0 || item.TypeSpecificValue < 0)
-        {
-            return true;
-        }
-        return base.IsStompable(item);
-    }
-
     public override int? GetTypeSpecificRealValue(Item item, int value)
     {
         return item.ComputeTypeSpecificRealValue(value);

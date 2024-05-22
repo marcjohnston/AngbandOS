@@ -10,20 +10,7 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal abstract class BootsArmorItemFactory : ArmorItemFactory
 {
-    /// <summary>
-    /// Returns the feet inventory slot for boots.
-    /// </summary>
-    public override int WieldSlot => InventorySlot.Feet;
-
     public BootsArmorItemFactory(Game game) : base(game) { }
-    protected override string ItemClassName => nameof(BootsItemClass);
-    public override BaseInventorySlot BaseWieldSlot => Game.SingletonRepository.Get<BaseInventorySlot>(nameof(FeetInventorySlot));
-    public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Boots;
-    public override bool HatesFire => true;
-    public override bool HatesAcid => true;
-    public override int PackSort => 27;
-
-    public override ColorEnum Color => ColorEnum.BrightBrown;
 
     /// <summary>
     /// Applies standard magic to boots.

@@ -51,4 +51,19 @@ internal class PowerDragonScaleMailArmorItemFactory : DragonScaleMailArmorItemFa
     public override int BonusArmorClass => 15;
     public override int BonusHit => -3;
     public override int Weight => 250;
+
+    /// <summary>
+    /// Returns the on-body inventory slot for scale mail.
+    /// </summary>
+    public override int WieldSlot => InventorySlot.OnBody;
+
+    /// <summary>
+    /// Returns a treasure rating of 30 for dragon scale mail items.
+    /// </summary>
+    public override int TreasureRating => 30;
+    protected override string ItemClassName => nameof(DragonScaleMailsItemClass);
+    public override BaseInventorySlot BaseWieldSlot => Game.SingletonRepository.Get<BaseInventorySlot>(nameof(OnBodyInventorySlot));
+    public override ItemTypeEnum CategoryEnum => ItemTypeEnum.DragArmor;
+    public override int PackSort => 19;
+    public override bool HatesAcid => true;
 }

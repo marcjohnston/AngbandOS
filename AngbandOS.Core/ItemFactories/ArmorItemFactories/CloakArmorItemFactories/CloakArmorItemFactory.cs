@@ -10,11 +10,7 @@ namespace AngbandOS.Core.ItemFactories;
 [Serializable]
 internal abstract class CloakArmorItemFactory : ArmorItemFactory
 {
-    /// <summary>
-    /// Returns the about body inventory slot for cloaks.
-    /// </summary>
-    public override int WieldSlot => InventorySlot.AboutBody;
-
+    public CloakArmorItemFactory(Game game) : base(game) { }
     protected override void ApplyRandomGoodRareCharacteristics(Item item)
     {
         item.RareItem = Game.SingletonRepository.Get<RareItemWeightedRandom>(nameof(CloakGoodRareItemWeightedRandom)).ChooseOrDefault();
@@ -49,22 +45,4 @@ internal abstract class CloakArmorItemFactory : ArmorItemFactory
             }
         }
     }
-
-    public CloakArmorItemFactory(Game game) : base(game) { }
-    protected override string ItemClassName => nameof(CloaksItemClass);
-    public override BaseInventorySlot BaseWieldSlot => Game.SingletonRepository.Get<BaseInventorySlot>(nameof(AboutBodyInventorySlot));
-    public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Cloak;
-    public override bool HatesFire => true;
-    public override bool HatesAcid => true;
-
-    public override ColorEnum Color => ColorEnum.BrightBrown;
-    public override int PackSort => 22;
-
-    public override bool CanProvideSheathOfElectricity => true;
-
-    public override bool CanProvideSheathOfFire => true;
-
-    public override bool CanReflectBoltsAndArrows => true;
-
-    public override bool CanApplyArtifactBiasResistance => true;
 }

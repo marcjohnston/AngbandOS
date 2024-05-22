@@ -23,4 +23,16 @@ internal class LeadCrownArmorItemFactory : CrownArmorItemFactory
     public override bool InstaArt => true;
     public override int LevelNormallyFound => 44;
     public override int Weight => 20;
+    /// <summary>
+    /// Returns the head inventory slot, for crowns.
+    /// </summary>
+    public override int WieldSlot => InventorySlot.Head;
+
+    protected override string ItemClassName => nameof(CrownsItemClass);
+
+    public override BaseInventorySlot BaseWieldSlot => Game.SingletonRepository.Get<BaseInventorySlot>(nameof(HeadInventorySlot));
+    public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Crown;
+    public override bool HatesAcid => true;
+
+    public override int PackSort => 24;
 }

@@ -1264,17 +1264,12 @@ internal sealed class Item : IComparable<Item>
             return Game.SingletonRepository.Get<ItemQualityRating>(nameof(CursedItemQualityRating));
         }
 
-        if (IsBroken())
+        if (IsBroken() || BonusDamage < 0 || BonusHit < 0 || BonusArmorClass < 0)
         {
             return Game.SingletonRepository.Get<ItemQualityRating>(nameof(BrokenItemQualityRating));
         }
 
-        if (BonusArmorClass > 0)
-        {
-            return Game.SingletonRepository.Get<ItemQualityRating>(nameof(GoodItemQualityRating));
-        }
-
-        if (BonusHit + BonusDamage > 0)
+        if (BonusArmorClass > 0 || BonusHit + BonusDamage > 0)
         {
             return Game.SingletonRepository.Get<ItemQualityRating>(nameof(GoodItemQualityRating));
         }
