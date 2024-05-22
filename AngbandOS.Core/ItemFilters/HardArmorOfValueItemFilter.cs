@@ -11,8 +11,9 @@ namespace AngbandOS.Core.ItemFilters;
 /// Represents an item filer for hard armor items that have value.
 /// </summary>
 [Serializable]
-internal class HardArmorOfValueItemFilter : ItemFilter<HardArmorItemFactory>
+internal class HardArmorOfValueItemFilter : ItemFilter
 {
     private HardArmorOfValueItemFilter(Game game) : base(game) { } // This object is a singleton.
+    public override string? FactoryItemClassKey => Game.SingletonRepository.Get<ItemClass>(nameof(HardArmorsItemClass)).Key;
     public override bool? HasValue => true;
 }

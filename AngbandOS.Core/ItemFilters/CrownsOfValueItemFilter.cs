@@ -7,12 +7,10 @@
 
 namespace AngbandOS.Core.ItemFilters;
 
-/// <summary>
-/// Represents an item filter for dragon scale mail armor that has value.
-/// </summary>
 [Serializable]
-internal class DragonScaleMailItemFilter : ItemFilter<DragonScaleMailArmorItemFactory>
+internal class CrownsOfValueItemFilter : ItemFilter
 {
-    private DragonScaleMailItemFilter(Game game) : base(game) { } // This object is a singleton.
+    private CrownsOfValueItemFilter(Game game) : base(game) { } // This object is a singleton.
+    public override string? FactoryItemClassKey => Game.SingletonRepository.Get<ItemClass>(nameof(CrownsItemClass)).Key;
     public override bool? HasValue => true;
 }

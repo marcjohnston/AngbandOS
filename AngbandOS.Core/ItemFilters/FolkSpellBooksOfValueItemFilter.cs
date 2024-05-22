@@ -8,11 +8,12 @@
 namespace AngbandOS.Core.ItemFilters;
 
 /// <summary>
-/// Represents an item filter for nature books that have value.
+/// Represents an item filter for folk books that have value.
 /// </summary>
 [Serializable]
-internal class NatureBooksOfValueItemFilter : ItemFilter<NatureBookItemFactory>
+internal class FolkSpellBooksOfValueItemFilter : ItemFilter
 {
-    private NatureBooksOfValueItemFilter(Game game) : base(game) { } // This object is a singleton.
+    private FolkSpellBooksOfValueItemFilter(Game game) : base(game) { } // This object is a singleton.
+    public override string? FactoryItemClassKey => Game.SingletonRepository.Get<ItemClass>(nameof(FolkSpellBooksItemClass)).Key;
     public override bool? HasValue => true;
 }

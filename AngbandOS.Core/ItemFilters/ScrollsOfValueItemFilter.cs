@@ -11,8 +11,9 @@ namespace AngbandOS.Core.ItemFilters;
 /// Represents an item filter for scrolls that have value.
 /// </summary>
 [Serializable]
-internal class ScrollsOfValueItemFilter : ItemFilter<ScrollItemFactory>
+internal class ScrollsOfValueItemFilter : ItemFilter
 {
     private ScrollsOfValueItemFilter(Game game) : base(game) { } // This object is a singleton.
+    public override string? FactoryItemClassKey => Game.SingletonRepository.Get<ItemClass>(nameof(ScrollsItemClass)).Key;
     public override bool? HasValue => true;
 }

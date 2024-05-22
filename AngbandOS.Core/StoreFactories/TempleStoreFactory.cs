@@ -71,7 +71,7 @@ internal partial class TempleStoreFactory : StoreFactory
         nameof(LifeBooksOfValueItemFilter),
         nameof(ScrollsOfValueItemFilter),
         nameof(PotionsOfValueItemFilter),
-        nameof(HaftedItemsOfValueFilter),
+        nameof(HaftedWeaponsOfValueItemFilter),
         nameof(BlessedPolearmsOfValueItemFilter),
         nameof(BlessedSwordsOfValueItemFilter)
     };

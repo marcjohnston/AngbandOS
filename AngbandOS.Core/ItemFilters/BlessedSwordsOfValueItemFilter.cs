@@ -11,9 +11,10 @@ namespace AngbandOS.Core.ItemFilters;
 /// Represents an item filter for all swords that are blessed and have value.
 /// </summary>
 [Serializable]
-internal class BlessedSwordsOfValueItemFilter : ItemFilter<SwordWeaponItemFactory>
+internal class BlessedSwordsOfValueItemFilter : ItemFilter
 {
     private BlessedSwordsOfValueItemFilter(Game game) : base(game) { } // This object is a singleton.
+    public override string? FactoryItemClassKey => Game.SingletonRepository.Get<ItemClass>(nameof(SwordsItemClass)).Key;
     public override bool? IsBlessed => true;
     public override bool? HasValue => true;
 }

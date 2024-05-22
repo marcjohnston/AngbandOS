@@ -11,8 +11,9 @@ namespace AngbandOS.Core.ItemFilters;
 /// Represents an item filter for polearms that have value.
 /// </summary>
 [Serializable]
-internal class PolearmsOfValueItemFilter : ItemFilter<PolearmWeaponItemFactory>
+internal class PolearmsOfValueItemFilter : ItemFilter
 {
     private PolearmsOfValueItemFilter(Game game) : base(game) { } // This object is a singleton.
+    public override string? FactoryItemClassKey => Game.SingletonRepository.Get<ItemClass>(nameof(PolearmsItemClass)).Key;
     public override bool? HasValue => true;
 }

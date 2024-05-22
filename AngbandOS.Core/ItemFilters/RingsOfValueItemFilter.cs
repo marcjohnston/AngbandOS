@@ -11,8 +11,9 @@ namespace AngbandOS.Core.ItemFilters;
 /// Represents an item filter for rings that have value.
 /// </summary>
 [Serializable]
-internal class RingsOfValueItemFilter : ItemFilter<RingItemFactory>
+internal class RingsOfValueItemFilter : ItemFilter
 {
     private RingsOfValueItemFilter(Game game) : base(game) { } // This object is a singleton.
+    public override string? FactoryItemClassKey => Game.SingletonRepository.Get<ItemClass>(nameof(RingsItemClass)).Key;
     public override bool? HasValue => true;
 }

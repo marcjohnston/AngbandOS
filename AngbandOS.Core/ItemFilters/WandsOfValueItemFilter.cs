@@ -11,8 +11,9 @@ namespace AngbandOS.Core.ItemFilters;
 /// Represents an item filter for wands that have value.
 /// </summary>
 [Serializable]
-internal class WandsOfValueItemFilter : ItemFilter<WandItemFactory>
+internal class WandsOfValueItemFilter : ItemFilter
 {
     private WandsOfValueItemFilter(Game game) : base(game) { } // This object is a singleton.
+    public override string? FactoryItemClassKey => Game.SingletonRepository.Get<ItemClass>(nameof(WandsItemClass)).Key;
     public override bool? HasValue => true;
 }

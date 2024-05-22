@@ -11,8 +11,9 @@ namespace AngbandOS.Core.ItemFilters;
 /// Represents an item filter for rods that have value.
 /// </summary>
 [Serializable]
-internal class RodsOfValueItemFilter : ItemFilter<RodItemFactory>
+internal class RodsOfValueItemFilter : ItemFilter
 {
     private RodsOfValueItemFilter(Game game) : base(game) { } // This object is a singleton.
+    public override string? FactoryItemClassKey => Game.SingletonRepository.Get<ItemClass>(nameof(RodsItemClass)).Key;
     public override bool? HasValue => true;
 }

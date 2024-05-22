@@ -11,8 +11,9 @@ namespace AngbandOS.Core.ItemFilters;
 /// Represents an item filter for cloaks that have value.
 /// </summary>
 [Serializable]
-internal class CloaksOfValueItemFilter : ItemFilter<CloakArmorItemFactory>
+internal class CloaksOfValueItemFilter : ItemFilter
 {
     private CloaksOfValueItemFilter(Game game) : base(game) { } // This object is a singleton.
+    public override string? FactoryItemClassKey => Game.SingletonRepository.Get<ItemClass>(nameof(CloaksItemClass)).Key;
     public override bool? HasValue => true;
 }

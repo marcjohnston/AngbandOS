@@ -11,8 +11,9 @@ namespace AngbandOS.Core.ItemFilters;
 /// Represents an item filter for spikes that have value.
 /// </summary>
 [Serializable]
-internal class SpikeOfValueItemFilter : ItemFilter<SpikeItemFactory>
+internal class SpikeOfValueItemFilter : ItemFilter
 {
     private SpikeOfValueItemFilter(Game game) : base(game) { } // This object is a singleton.
+    public override string? FactoryItemClassKey => Game.SingletonRepository.Get<ItemClass>(nameof(SpikesItemClass)).Key;
     public override bool? HasValue => true;
 }

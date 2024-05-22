@@ -11,8 +11,10 @@ namespace AngbandOS.Core.ItemFilters;
 /// Represents an item filter for boots that have value.
 /// </summary>
 [Serializable]
-internal class BootsOfValueItemFilter : ItemFilter<BootsArmorItemFactory>
+internal class BootsOfValueItemFilter : ItemFilter
 {
     private BootsOfValueItemFilter(Game game) : base(game) { } // This object is a singleton.
+    public override string? FactoryItemClassKey => Game.SingletonRepository.Get<ItemClass>(nameof(BootsItemClass)).Key;
+    public override bool? HasValue => true;
 }
 

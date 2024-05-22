@@ -11,8 +11,9 @@ namespace AngbandOS.Core.ItemFilters;
 /// Represents an item filter for items that can act as a source of light, regardless of their value.
 /// </summary>
 [Serializable]
-internal class LightSourcesOfValueFilter : ItemFilter<LightSourceItemFactory>
+internal class LightSourcesOfValueFilter : ItemFilter
 {
     private LightSourcesOfValueFilter(Game game) : base(game) { } // This object is a singleton.
+    public override string? FactoryItemClassKey => Game.SingletonRepository.Get<ItemClass>(nameof(LightSourcesItemClass)).Key;
     public override bool? HasValue => true;
 }

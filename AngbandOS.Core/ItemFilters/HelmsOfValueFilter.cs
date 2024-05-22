@@ -11,7 +11,9 @@ namespace AngbandOS.Core.ItemFilters;
 /// Represents helms that have value.
 /// </summary>
 [Serializable]
-internal class HelmsOfValueFilter : ItemFilter<HelmArmorItemFactory>
+internal class HelmsOfValueFilter : ItemFilter
 {
     private HelmsOfValueFilter(Game game) : base(game) { } // This object is a singleton.
+    public override string? FactoryItemClassKey => Game.SingletonRepository.Get<ItemClass>(nameof(HelmsItemClass)).Key;
+    public override bool? HasValue => true;
 }

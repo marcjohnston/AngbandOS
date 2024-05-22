@@ -11,8 +11,9 @@ namespace AngbandOS.Core.ItemFilters;
 /// Represents an item filter for gloves that have value.
 /// </summary>
 [Serializable]
-internal class GlovesOfValueItemFilter : ItemFilter<GlovesArmorItemFactory>
+internal class GlovesOfValueItemFilter : ItemFilter
 {
     private GlovesOfValueItemFilter(Game game) : base(game) { } // This object is a singleton.
+    public override string? FactoryItemClassKey => Game.SingletonRepository.Get<ItemClass>(nameof(GlovesItemClass)).Key;
     public override bool? HasValue => true;
 }

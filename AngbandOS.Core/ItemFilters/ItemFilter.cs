@@ -119,6 +119,11 @@ internal abstract class ItemFilter : IGetKey, IItemFilter
     /// </summary>
     public virtual bool? CanBeFired => null;
 
+    /// <summary>
+    /// Returns the key for the ItemClass that the ItemFactory must belong to; or null, if indifferent.  Returns null, by default.
+    /// </summary>
+    public virtual string? FactoryItemClassKey => null;
+
     public virtual string Key => GetType().Name;
     public string GetKey => Key;
 
@@ -127,6 +132,10 @@ internal abstract class ItemFilter : IGetKey, IItemFilter
     public virtual bool ItemMatches(Item item)
     {
         item.RefreshFlagBasedProperties();
+        if (FactoryItemClassKey != null && FactoryItemClassKey != item.Factory.ItemClass.Key)
+        {
+            return false;
+        }
         if (IsBlessed != null && item.Characteristics.Blessed != IsBlessed)
         {
             return false;

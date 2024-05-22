@@ -11,9 +11,10 @@ namespace AngbandOS.Core.ItemFilters;
 /// Represents an item filter for all polearms that are blessed and have value.
 /// </summary>
 [Serializable]
-internal class BlessedPolearmsOfValueItemFilter : ItemFilter<PolearmWeaponItemFactory>
+internal class BlessedPolearmsOfValueItemFilter : ItemFilter
 {
     private BlessedPolearmsOfValueItemFilter(Game game) : base(game) { } // This object is a singleton.
+    public override string? FactoryItemClassKey => Game.SingletonRepository.Get<ItemClass>(nameof(PolearmsItemClass)).Key;
     public override bool? IsBlessed => true;
     public override bool? HasValue => true;
 

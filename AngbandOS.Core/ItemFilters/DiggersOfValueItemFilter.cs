@@ -11,8 +11,9 @@ namespace AngbandOS.Core.ItemFilters;
 /// Represents an item filter for items that can be used for digging and have value.
 /// </summary>
 [Serializable]
-internal class DiggingItemsOfValueItemFilter : ItemFilter<DiggingWeaponItemFactory>
+internal class DiggersOfValueItemFilter : ItemFilter
 {
-    private DiggingItemsOfValueItemFilter(Game game) : base(game) { } // This object is a singleton.
+    private DiggersOfValueItemFilter(Game game) : base(game) { } // This object is a singleton.
+    public override string? FactoryItemClassKey => Game.SingletonRepository.Get<ItemClass>(nameof(DiggersItemClass)).Key;
     public override bool? HasValue => true;
 }

@@ -11,8 +11,9 @@ namespace AngbandOS.Core.ItemFilters;
 /// Represents an item filter for potions that have value.
 /// </summary>
 [Serializable]
-internal class PotionsOfValueItemFilter : ItemFilter<PotionItemFactory>
+internal class PotionsOfValueItemFilter : ItemFilter
 {
     private PotionsOfValueItemFilter(Game game) : base(game) { } // This object is a singleton.
+    public override string? FactoryItemClassKey => Game.SingletonRepository.Get<ItemClass>(nameof(PotionsItemClass)).Key;
     public override bool? HasValue => true;
 }

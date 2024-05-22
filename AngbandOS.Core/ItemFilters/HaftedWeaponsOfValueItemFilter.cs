@@ -8,11 +8,12 @@
 namespace AngbandOS.Core.ItemFilters;
 
 /// <summary>
-/// Represents an item filter for all corporeal books that have value.
+/// Represents an item filter for hafted weapons that have value.
 /// </summary>
 [Serializable]
-internal class CorporealBooksOfValueItemFilter : ItemFilter<CorporealBookItemFactory>
+internal class HaftedWeaponsOfValueItemFilter : ItemFilter
 {
-    private CorporealBooksOfValueItemFilter(Game game) : base(game) { } // This object is a singleton.
+    private HaftedWeaponsOfValueItemFilter(Game game) : base(game) { } // This object is a singleton.
+    public override string? FactoryItemClassKey => Game.SingletonRepository.Get<ItemClass>(nameof(HaftedWeaponsItemClass)).Key;
     public override bool? HasValue => true;
 }

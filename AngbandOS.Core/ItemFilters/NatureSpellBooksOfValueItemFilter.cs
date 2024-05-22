@@ -7,9 +7,13 @@
 
 namespace AngbandOS.Core.ItemFilters;
 
+/// <summary>
+/// Represents an item filter for nature books that have value.
+/// </summary>
 [Serializable]
-internal class CrownArmorOfValueItemFilter : ItemFilter<CrownArmorItemFactory>
+internal class NatureSpellBooksOfValueItemFilter : ItemFilter
 {
-    private CrownArmorOfValueItemFilter(Game game) : base(game) { } // This object is a singleton.
+    private NatureSpellBooksOfValueItemFilter(Game game) : base(game) { } // This object is a singleton.
+    public override string? FactoryItemClassKey => Game.SingletonRepository.Get<ItemClass>(nameof(NatureSpellBooksItemClass)).Key;
     public override bool? HasValue => true;
 }

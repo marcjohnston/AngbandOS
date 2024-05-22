@@ -8,11 +8,12 @@
 namespace AngbandOS.Core.ItemFilters;
 
 /// <summary>
-/// Represents an item filter for staves that have value.
+/// Represents an item filter for chaos books that have value.
 /// </summary>
 [Serializable]
-internal class StavesOfValueItemFilter : ItemFilter<StaffItemFactory>
+internal class ChaosSpellBooksOfValueItemFilter : ItemFilter
 {
-    private StavesOfValueItemFilter(Game game) : base(game) { } // This object is a singleton.
+    private ChaosSpellBooksOfValueItemFilter(Game game) : base(game) { } // This object is a singleton.
+    public override string? FactoryItemClassKey => Game.SingletonRepository.Get<ItemClass>(nameof(ChaosSpellBooksItemClass)).Key;
     public override bool? HasValue => true;
 }

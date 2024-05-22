@@ -11,8 +11,9 @@ namespace AngbandOS.Core.ItemFilters;
 /// Represents an item filter for shields that have value.
 /// </summary>
 [Serializable]
-internal class ShieldsOfValueItemFilter : ItemFilter<ShieldArmorItemFactory>
+internal class ShieldsOfValueItemFilter : ItemFilter
 {
     private ShieldsOfValueItemFilter(Game game) : base(game) { } // This object is a singleton.
+    public override string? FactoryItemClassKey => Game.SingletonRepository.Get<ItemClass>(nameof(ShieldsItemClass)).Key;
     public override bool? HasValue => true;
 }

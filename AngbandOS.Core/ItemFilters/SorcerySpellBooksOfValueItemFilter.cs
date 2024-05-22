@@ -8,11 +8,12 @@
 namespace AngbandOS.Core.ItemFilters;
 
 /// <summary>
-/// Represents an item filter for death books that have value.
+/// Represents an item filter for sorcery books that have value.
 /// </summary>
 [Serializable]
-internal class DeathBookItemFilter : ItemFilter<DeathBookItemFactory>
+internal class SorcerySpellBooksOfValueItemFilter : ItemFilter
 {
-    private DeathBookItemFilter(Game game) : base(game) { } // This object is a singleton.
+    private SorcerySpellBooksOfValueItemFilter(Game game) : base(game) { } // This object is a singleton.
+    public override string? FactoryItemClassKey => Game.SingletonRepository.Get<ItemClass>(nameof(SorcerySpellBooksItemClass)).Key;
     public override bool? HasValue => true;
 }

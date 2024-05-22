@@ -8,11 +8,12 @@
 namespace AngbandOS.Core.ItemFilters;
 
 /// <summary>
-/// Represents an item filter for chaos books that have value.
+/// Represents an item filter for flasks that have value.
 /// </summary>
 [Serializable]
-internal class ChaosBooksOfValueItemFilter : ItemFilter<ChaosBookItemFactory>
+internal class FlasksOfValueItemFilter : ItemFilter
 {
-    private ChaosBooksOfValueItemFilter(Game game) : base(game) { } // This object is a singleton.
+    private FlasksOfValueItemFilter(Game game) : base(game) { } // This object is a singleton.
+    public override string? FactoryItemClassKey => Game.SingletonRepository.Get<ItemClass>(nameof(FlasksItemClass)).Key;
     public override bool? HasValue => true;
 }

@@ -8,11 +8,12 @@
 namespace AngbandOS.Core.ItemFilters;
 
 /// <summary>
-/// Represents an item filter for tarot books that have value.
+/// Represents an item filter for dragon scale mail armor that has value.
 /// </summary>
 [Serializable]
-internal class TarotBooksOfValueItemFilter : ItemFilter<TarotBookItemFactory>
+internal class DragonScaleMailOfValueItemFilter : ItemFilter
 {
-    private TarotBooksOfValueItemFilter(Game game) : base(game) { } // This object is a singleton.
+    private DragonScaleMailOfValueItemFilter(Game game) : base(game) { } // This object is a singleton.
+    public override string? FactoryItemClassKey => Game.SingletonRepository.Get<ItemClass>(nameof(DragonScaleMailsItemClass)).Key;
     public override bool? HasValue => true;
 }

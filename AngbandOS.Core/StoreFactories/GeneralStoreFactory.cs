@@ -71,14 +71,14 @@ internal class GeneralStoreFactory : StoreFactory
     /// </summary>
     protected override string[] ItemFilterNames => new string[]
 {
-        nameof(FoodItemFilter),
+        nameof(FoodOfValueItemFilter),
         nameof(LightSourcesOfValueFilter),
-        nameof(FlaskItemFilter),
+        nameof(FlasksOfValueItemFilter),
         nameof(SpikeOfValueItemFilter),
         nameof(ShotsOfValueItemFilter),
         nameof(ArrowsOfValueItemFilter),
         nameof(BoltsOfValueItemFilter),
-        nameof(DiggingItemsOfValueItemFilter),
+        nameof(DiggersOfValueItemFilter),
         nameof(CloaksOfValueItemFilter),
         nameof(BottlesOfValueItemFilter)
     };

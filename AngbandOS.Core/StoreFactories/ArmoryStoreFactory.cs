@@ -74,13 +74,13 @@ internal class ArmoryStoreFactory : StoreFactory
 {
         nameof(BootsOfValueItemFilter),
         nameof(GlovesOfValueItemFilter),
-        nameof(CrownArmorOfValueItemFilter),
+        nameof(CrownsOfValueItemFilter),
         nameof(HelmsOfValueFilter),
         nameof(ShieldsOfValueItemFilter),
         nameof(CloaksOfValueItemFilter),
         nameof(SoftArmorOfValueItemFilter),
         nameof(HardArmorOfValueItemFilter),
-        nameof(DragonScaleMailItemFilter)
+        nameof(DragonScaleMailOfValueItemFilter)
     };
 
     protected override string? AdvertisedStoreCommand4Name => nameof(EnchantArmorStoreCommand);

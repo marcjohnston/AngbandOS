@@ -11,8 +11,9 @@ namespace AngbandOS.Core.ItemFilters;
 /// Represents an item filter for life books that have value.
 /// </summary>
 [Serializable]
-internal class LifeBooksOfValueItemFilter : ItemFilter<LifeBookItemFactory>
+internal class LifeBooksOfValueItemFilter : ItemFilter
 {
     private LifeBooksOfValueItemFilter(Game game) : base(game) { } // This object is a singleton.
+    public override string? FactoryItemClassKey => Game.SingletonRepository.Get<ItemClass>(nameof(LifeSpellBooksItemClass)).Key;
     public override bool? HasValue => true;
 }

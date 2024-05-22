@@ -11,8 +11,9 @@ namespace AngbandOS.Core.ItemFilters;
 /// Represents an item filter for shots that have value.
 /// </summary>
 [Serializable]
-internal class ShotsOfValueItemFilter : ItemFilter<ShotAmmunitionItemFactory>
+internal class ShotsOfValueItemFilter : ItemFilter
 {
     private ShotsOfValueItemFilter(Game game) : base(game) { } // This object is a singleton.
+    public override string? FactoryItemClassKey => Game.SingletonRepository.Get<ItemClass>(nameof(ShotsItemClass)).Key;
     public override bool? HasValue => true;
 }

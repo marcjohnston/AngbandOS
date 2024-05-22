@@ -11,9 +11,10 @@ namespace AngbandOS.Core.ItemFilters;
 /// Represents an item filter for soft armor that has value.
 /// </summary>
 [Serializable]
-internal class SoftArmorOfValueItemFilter : ItemFilter<SoftArmorItemFactory>
+internal class SoftArmorOfValueItemFilter : ItemFilter
 {
     private SoftArmorOfValueItemFilter(Game game) : base(game) { } // This object is a singleton.
+    public override string? FactoryItemClassKey => Game.SingletonRepository.Get<ItemClass>(nameof(SoftArmorsItemClass)).Key;
     public override bool? HasValue => true;
 }
 

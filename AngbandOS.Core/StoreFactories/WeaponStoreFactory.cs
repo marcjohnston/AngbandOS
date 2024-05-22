@@ -84,8 +84,8 @@ internal partial class WeaponStoreFactory : StoreFactory
         nameof(BoltsOfValueItemFilter),
         nameof(ArrowsOfValueItemFilter),
         nameof(BowsOfValueItemFilter),
-        nameof(DiggingItemsOfValueItemFilter),
-        nameof(HaftedItemsOfValueFilter),
+        nameof(DiggersOfValueItemFilter),
+        nameof(HaftedWeaponsOfValueItemFilter),
         nameof(PolearmsOfValueItemFilter),
         nameof(SwordsOfValueItemFilter)
     };

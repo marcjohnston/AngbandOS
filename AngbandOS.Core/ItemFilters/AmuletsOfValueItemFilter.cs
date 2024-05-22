@@ -11,8 +11,9 @@ namespace AngbandOS.Core.ItemFilters;
 /// Represents an item filter for all amulets of value.
 /// </summary>
 [Serializable]
-internal class AmuletsOfValueItemFilter : ItemFilter<AmuletJeweleryItemFactory>
+internal class AmuletsOfValueItemFilter : ItemFilter
 {
     private AmuletsOfValueItemFilter(Game game) : base(game) { } // This object is a singleton.
     public override bool? HasValue => true;
+    public override string? FactoryItemClassKey => Game.SingletonRepository.Get<ItemClass>(nameof(AmuletsItemClass)).Key;
 }

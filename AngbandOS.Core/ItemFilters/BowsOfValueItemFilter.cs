@@ -11,8 +11,9 @@ namespace AngbandOS.Core.ItemFilters;
 /// Represents an item filter for bows that have value.
 /// </summary>
 [Serializable]
-internal class BowsOfValueItemFilter : ItemFilter<BowWeaponItemFactory>
+internal class BowsOfValueItemFilter : ItemFilter
 {
     private BowsOfValueItemFilter(Game game) : base(game) { } // This object is a singleton.
+    public override string? FactoryItemClassKey => Game.SingletonRepository.Get<ItemClass>(nameof(BowsItemClass)).Key;
     public override bool? HasValue => true;
 }
