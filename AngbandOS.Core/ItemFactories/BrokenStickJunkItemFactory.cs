@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
-internal class BrokenStickJunkItemFactory : JunkItemFactory
+internal class BrokenStickJunkItemFactory : ItemFactory
 {
     private BrokenStickJunkItemFactory(Game game) : base(game) { } // This object is a singleton.
 
@@ -28,4 +28,10 @@ internal class BrokenStickJunkItemFactory : JunkItemFactory
     public override int DamageSides => 1;
     public override string FriendlyName => "& Broken Stick~";
     public override int Weight => 3;
+    protected override string ItemClassName => nameof(JunkItemClass);
+    public override int PackSort => 38;
+    public override bool EasyKnow => true;
+    public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Junk;
+    public override int PercentageBreakageChance => 100;
+    public override bool HatesAcid => true;
 }
