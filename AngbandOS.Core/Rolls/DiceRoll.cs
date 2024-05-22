@@ -7,10 +7,10 @@
 
 namespace AngbandOS.Core.Rolls;
 
-internal class DieRoll : Roll
+internal class DiceRoll : Roll
 {
-    public DieRoll(Game game, int dieCount, int sideCount, int multiplier, int bonus) : this(game, dieCount, sideCount, multiplier, bonus, false) { }
-    public DieRoll(Game game, int dieCount, int sideCount, int multiplierOrDivisor, int bonus, bool multiplierIsDivisor) : base(game)
+    public DiceRoll(Game game, int dieCount, int sideCount, int multiplier, int bonus) : this(game, dieCount, sideCount, multiplier, bonus, false) { }
+    public DiceRoll(Game game, int dieCount, int sideCount, int multiplierOrDivisor, int bonus, bool multiplierIsDivisor) : base(game)
     {
         if (dieCount == 0)
         {
@@ -22,7 +22,7 @@ internal class DieRoll : Roll
         }
         QuantityDice = dieCount;
         SideCount = sideCount;
-        MultiplierIsDivisor = true;
+        MultiplierIsDivisor = multiplierIsDivisor;
         Multiplier = multiplierOrDivisor;
         Bonus = bonus;
     }

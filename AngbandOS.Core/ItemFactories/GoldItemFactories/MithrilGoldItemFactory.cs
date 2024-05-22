@@ -16,7 +16,7 @@ internal class MithrilGoldItemFactory : GoldItemFactory
     public override ColorEnum Color => ColorEnum.BrightBlue;
     public override string Name => "mithril";
 
-    public override int GoldValue => 40;
+    protected override string InitialGoldPieces => "2d40x4";
     public override string FriendlyName => "mithril";
     public override int LevelNormallyFound => 1;
 }

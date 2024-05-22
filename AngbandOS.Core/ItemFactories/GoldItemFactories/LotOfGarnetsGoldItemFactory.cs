@@ -16,7 +16,7 @@ internal class LotOfGarnetsGoldItemFactory : GoldItemFactory
     public override ColorEnum Color => ColorEnum.Red;
     public override string Name => "lot of garnets";
 
-    public override int GoldValue => 10;
+    protected override string InitialGoldPieces => "2d10x4";
     public override string FriendlyName => "lot of garnets";
     public override int LevelNormallyFound => 1;
 }

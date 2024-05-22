@@ -311,7 +311,7 @@ internal sealed class Item : IComparable<Item>
         // TODO: The below statements should be in the ApplyMagic method for each factory.
         TypeSpecificValue = Factory.InitialTypeSpecificValue;
         NutritionalValue = Factory.InitialNutritionalValue;        
-        GoldPieces = Factory.InitialGoldPieces;
+        GoldPieces = Factory.InitialGoldPiecesRoll.Get(Game.UseRandom);
         TurnsOfLightRemaining = Factory.InitialTurnsOfLight;
         WandChargesRemaining = Factory.RodChargeCount;
         Count = 1;

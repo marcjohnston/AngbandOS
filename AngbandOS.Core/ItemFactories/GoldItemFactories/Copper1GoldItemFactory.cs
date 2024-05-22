@@ -16,7 +16,7 @@ internal class Copper1GoldItemFactory : GoldItemFactory
     public override ColorEnum Color => ColorEnum.Copper;
     public override string Name => "copper*";
 
-    public override int GoldValue => 4;
+    protected override string InitialGoldPieces => "2d4x4";
     public override string FriendlyName => "copper";
     public override int LevelNormallyFound => 1;
 }

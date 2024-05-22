@@ -16,7 +16,7 @@ internal class SomeGoldGoldItemFactory : GoldItemFactory
     public override ColorEnum Color => ColorEnum.Gold;
     public override string Name => "some gold";
 
-    public override int GoldValue => 14;
+    protected override string InitialGoldPieces => "2d14x4";
     public override string FriendlyName => "some gold";
     public override int LevelNormallyFound => 1;
 }

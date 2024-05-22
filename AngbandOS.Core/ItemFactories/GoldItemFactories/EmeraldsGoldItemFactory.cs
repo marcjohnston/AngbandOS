@@ -16,7 +16,7 @@ internal class EmeraldsGoldItemFactory : GoldItemFactory
     public override ColorEnum Color => ColorEnum.Green;
     public override string Name => "emeralds";
 
-    public override int GoldValue => 32;
+    protected override string InitialGoldPieces => "2d32x4";
     public override string FriendlyName => "emeralds";
     public override int LevelNormallyFound => 1;
 }

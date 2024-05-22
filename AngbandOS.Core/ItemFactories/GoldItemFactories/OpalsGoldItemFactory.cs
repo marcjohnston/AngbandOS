@@ -16,7 +16,7 @@ internal class OpalsGoldItemFactory : GoldItemFactory
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "opals";
 
-    public override int GoldValue => 18;
+    protected override string InitialGoldPieces => "2d18x4";
     public override string FriendlyName => "opals";
     public override int LevelNormallyFound => 1;
 }

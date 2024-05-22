@@ -16,7 +16,7 @@ internal class SapphiresGoldItemFactory : GoldItemFactory
     public override ColorEnum Color => ColorEnum.Blue;
     public override string Name => "sapphires";
 
-    public override int GoldValue => 20;
+    protected override string InitialGoldPieces => "2d20x4";
     public override string FriendlyName => "sapphires";
     public override int LevelNormallyFound => 1;
 }
