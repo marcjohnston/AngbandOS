@@ -53,7 +53,7 @@ internal class GeneralStoreFactory : StoreFactory
         new StoreStockManifestDefinition(nameof(ClothCloakCloakArmorItemFactory), 3),
         new StoreStockManifestDefinition(nameof(PickDiggingWeaponItemFactory)),
         new StoreStockManifestDefinition(nameof(ShovelDiggingWeaponItemFactory), 2),
-        new StoreStockManifestDefinition(nameof(OilFlaskItemFactory), 10),
+        new StoreStockManifestDefinition(nameof(FlaskOfOilItemFactory), 10),
         new StoreStockManifestDefinition(nameof(HardBiscuitFoodItemFactory)),
         new StoreStockManifestDefinition(nameof(PintOfFineAleFoodItemFactory)),
         new StoreStockManifestDefinition(nameof(PintOfFineWineFoodItemFactory)),

@@ -8,9 +8,9 @@
 namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
-internal class OilFlaskItemFactory : FlaskItemFactory
+internal class FlaskOfOilItemFactory : ItemFactory
 {
-    private OilFlaskItemFactory(Game game) : base(game) { } // This object is a singleton.
+    private FlaskOfOilItemFactory(Game game) : base(game) { } // This object is a singleton.
 
     /// <summary>
     /// Returns true because a flask of oil is valid as fuel for lanterns.
@@ -31,4 +31,15 @@ internal class OilFlaskItemFactory : FlaskItemFactory
     };
     public override int InitialTurnsOfLight => 7500;
     public override int Weight => 10;
+    protected override string ItemClassName => nameof(FlasksItemClass);
+    public override bool EasyKnow => true;
+    protected override (int, string)[]? MassProduceTupleNames => new (int, string)[]
+    {
+        (20, "3d5-3")
+    };
+
+    public override int PercentageBreakageChance => 100;
+    public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Flask;
+    public override bool HatesCold => true;
+    public override int PackSort => 10;
 }
