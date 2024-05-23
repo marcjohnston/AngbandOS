@@ -22,7 +22,7 @@ internal class PowerRingItemFactory : RingItemFactory
         {
             return base.GetDescription(item, includeCountPrefix, isFlavorAware);
         }
-        string flavor = item.IdentityIsStoreBought ? "" : $"{FlavorFactory.Flavor.Name} ";
+        string flavor = item.IdentityIsStoreBought ? "" : $"{Flavor.Name} ";
         if (!isFlavorAware)
         {
             flavor = "Plain Gold ";

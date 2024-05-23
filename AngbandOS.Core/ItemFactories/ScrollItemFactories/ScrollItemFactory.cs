@@ -8,19 +8,14 @@
 namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
-internal abstract class ScrollItemFactory : ItemFactory, IFlavorFactory
+internal abstract class ScrollItemFactory : ItemFactory
 {
     public ScrollItemFactory(Game game) : base(game) { }
     protected override string ItemClassName => nameof(ScrollsItemClass);
 
-    /// <summary>
-    /// Returns the factory that this item was created by; casted as an IFlavor.
-    /// </summary>
-    public IFlavorFactory FlavorFactory => (IFlavorFactory)this;
-
     public override string GetDescription(Item item, bool includeCountPrefix, bool isFlavorAware)
     {
-        string flavor = item.IdentityIsStoreBought ? "" : $" titled \"{FlavorFactory.Flavor.Name}\"";
+        string flavor = item.IdentityIsStoreBought ? "" : $" titled \"{Flavor.Name}\"";
         string ofName = isFlavorAware ? $" of {FriendlyName}" : "";
         string name = $"{Game.CountPluralize("Scroll", item.Count)}{flavor}{ofName}";
         return includeCountPrefix ? GetPrefixCount(true, name, item.Count, item.IsKnownArtifact) : name;
@@ -29,7 +24,7 @@ internal abstract class ScrollItemFactory : ItemFactory, IFlavorFactory
     /// <summary>
     /// Returns the scroll flavors repository because scrolls have flavors that need to be identified.
     /// </summary>
-    public IEnumerable<Flavor>? GetFlavorRepository() => Game.UnreadableScrollFlavors;
+    public override IEnumerable<Flavor>? GetFlavorRepository => Game.UnreadableScrollFlavors;
 
     protected override (int, string)[]? MassProduceTupleNames => new (int, string)[]
     {
@@ -39,9 +34,6 @@ internal abstract class ScrollItemFactory : ItemFactory, IFlavorFactory
 
     public override int PercentageBreakageChance => 50;
     public override bool CanBeRead => true;
-
-    /// <inheritdoc/>
-    public Flavor Flavor { get; set; }
 
     public override bool EasyKnow => true;
     public override int PackSort => 12;

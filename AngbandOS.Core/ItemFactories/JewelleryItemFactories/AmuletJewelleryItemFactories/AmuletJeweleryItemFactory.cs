@@ -8,9 +8,10 @@
 namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
-internal abstract class AmuletJeweleryItemFactory : JewelleryItemFactory, IFlavorFactory
+internal abstract class AmuletJeweleryItemFactory : JewelleryItemFactory
 {
     public AmuletJeweleryItemFactory(Game game) : base(game) { }
+    public override bool HasFlavor => true;
 
     public override bool IsWearable => true;
     /// <summary>
@@ -18,18 +19,13 @@ internal abstract class AmuletJeweleryItemFactory : JewelleryItemFactory, IFlavo
     /// </summary>
     public override int WieldSlot => InventorySlot.Neck;
 
-    /// <summary>
-    /// Returns the factory that this item was created by; casted as an IFlavor.
-    /// </summary>
-    public IFlavorFactory FlavorFactory => (IFlavorFactory)this;
-
     public override string GetDescription(Item item, bool includeCountPrefix, bool isFlavorAware)
     {
         if (item.FixedArtifact != null && isFlavorAware)
         {
             return base.GetDescription(item, includeCountPrefix, isFlavorAware);
         }
-        string flavor = item.IdentityIsStoreBought ? "" : $"{FlavorFactory.Flavor.Name} ";
+        string flavor = item.IdentityIsStoreBought ? "" : $"{Flavor.Name} ";
         string ofName = isFlavorAware ? $" of {FriendlyName}" : "";
         string name = $"{flavor}{Game.CountPluralize("Amulet", item.Count)}{ofName}";
         return includeCountPrefix ? GetPrefixCount(true, name, item.Count, item.IsKnownArtifact) : name;
@@ -45,8 +41,5 @@ internal abstract class AmuletJeweleryItemFactory : JewelleryItemFactory, IFlavo
     /// <summary>
     /// Returns the amulet flavors repository because amulets have flavors that need to be identified.
     /// </summary>
-    public IEnumerable<Flavor>? GetFlavorRepository() => Game.SingletonRepository.Get<AmuletReadableFlavor>();
-
-    /// <inheritdoc/>
-    public Flavor Flavor { get; set; }
+    public override IEnumerable<Flavor>? GetFlavorRepository => Game.SingletonRepository.Get<AmuletReadableFlavor>();
 }

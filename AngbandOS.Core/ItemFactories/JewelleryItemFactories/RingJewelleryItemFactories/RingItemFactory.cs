@@ -8,13 +8,8 @@
 namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
-internal abstract class RingItemFactory : JewelleryItemFactory, IFlavorFactory
+internal abstract class RingItemFactory : JewelleryItemFactory
 {
-    /// <summary>
-    /// Returns the factory that this item was created by; casted as an IFlavor.
-    /// </summary>
-    public IFlavorFactory FlavorFactory => (IFlavorFactory)this;
-
     public override bool IsWearable => true;
     public override string GetDescription(Item item, bool includeCountPrefix, bool isFlavorAware)
     {
@@ -22,11 +17,12 @@ internal abstract class RingItemFactory : JewelleryItemFactory, IFlavorFactory
         {
             return base.GetDescription(item, includeCountPrefix, isFlavorAware);
         }
-        string flavor = item.IdentityIsStoreBought ? "" : $"{FlavorFactory.Flavor.Name} ";
+        string flavor = item.IdentityIsStoreBought ? "" : $"{Flavor.Name} ";
         string ofName = isFlavorAware ? $" of {FriendlyName}" : "";
         string name = $"{flavor}{Game.CountPluralize("Ring", item.Count)}{ofName}";
         return includeCountPrefix ? GetPrefixCount(true, name, item.Count, item.IsKnownArtifact) : name;
     }
+    public override bool HasFlavor => true;
 
     /// <summary>
     /// Returns either the right or left hand inventory slot for rings.
@@ -49,10 +45,7 @@ internal abstract class RingItemFactory : JewelleryItemFactory, IFlavorFactory
     /// <summary>
     /// Returns the ring flavors repository because rings have flavors that need to be identified.
     /// </summary>
-    public IEnumerable<Flavor> GetFlavorRepository() => Game.SingletonRepository.Get<RingReadableFlavor>();
-
-    /// <inheritdoc/>
-    public Flavor Flavor { get; set; }
+    public override IEnumerable<Flavor> GetFlavorRepository => Game.SingletonRepository.Get<RingReadableFlavor>();
 
     public override BaseInventorySlot BaseWieldSlot
     {

@@ -32,13 +32,22 @@ internal class WaterPotionItemFactory : PotionItemFactory
         return true;
     }
 
+    public override void Bind()
+    {
+        base.Bind();
+        Flavor = Game.SingletonRepository.Get<PotionReadableFlavor>(nameof(ClearPotionReadableFlavor));
+    }
+
     /// <summary>
     /// Returns null because water potions are always clear flavor.
     /// </summary>
-    public override IEnumerable<ReadableFlavor>? GetFlavorRepository()
+    public override IEnumerable<ReadableFlavor>? GetFlavorRepository
     {
-        Flavor = Game.SingletonRepository.Get<PotionReadableFlavor>(nameof(ClearPotionReadableFlavor));
-        return null;
+        get
+        {
+//            Flavor = Game.SingletonRepository.Get<PotionReadableFlavor>(nameof(ClearPotionReadableFlavor));
+            return null;
+        }
     }
 
     public override bool Smash(int who, int y, int x)

@@ -11,15 +11,11 @@ using System.Threading;
 namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
-internal abstract class WandItemFactory : ItemFactory, IFlavorFactory
+internal abstract class WandItemFactory : ItemFactory
 {
     public WandItemFactory(Game game) : base(game) { }
     protected override string ItemClassName => nameof(WandsItemClass);
-
-    /// <summary>
-    /// Returns the factory that this item was created by; casted as an IFlavor.
-    /// </summary>
-    public IFlavorFactory FlavorFactory => (IFlavorFactory)this;
+    public override bool HasFlavor => true;
 
     public override bool DrainChargesMonsterAttack(Item item, Monster monster, ref bool obvious) // TODO: obvious needs to be in an event 
     {
@@ -95,7 +91,7 @@ internal abstract class WandItemFactory : ItemFactory, IFlavorFactory
 
     public override string GetDescription(Item item, bool includeCountPrefix, bool isFlavorAware)
     {
-        string flavor = item.IdentityIsStoreBought ? "" : $"{FlavorFactory.Flavor.Name} ";
+        string flavor = item.IdentityIsStoreBought ? "" : $"{Flavor.Name} ";
         string ofName = isFlavorAware ? $" of {FriendlyName}" : "";
         string name = $"{flavor}{Game.CountPluralize("Wand", item.Count)}{ofName}";
         return includeCountPrefix ? GetPrefixCount(true, name, item.Count, item.IsKnownArtifact) : name;
@@ -109,10 +105,8 @@ internal abstract class WandItemFactory : ItemFactory, IFlavorFactory
     /// <summary>
     /// Returns the want flavors repository because wands have flavors that need to be identified.
     /// </summary>
-    public IEnumerable<Flavor>? GetFlavorRepository() => Game.SingletonRepository.Get<WandReadableFlavor>();
+    public override IEnumerable<Flavor>? GetFlavorRepository => Game.SingletonRepository.Get<WandReadableFlavor>();
 
-    /// <inheritdoc/>
-    public Flavor Flavor { get; set; }
     public override int PercentageBreakageChance => 25;
     public override bool IsRechargable => true;
 

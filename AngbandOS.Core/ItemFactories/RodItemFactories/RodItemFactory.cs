@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
-internal abstract class RodItemFactory : ItemFactory, IFlavorFactory
+internal abstract class RodItemFactory : ItemFactory
 {
     public RodItemFactory(Game game) : base(game) { }
     protected override string ItemClassName => nameof(RodsItemClass);
@@ -26,6 +26,7 @@ internal abstract class RodItemFactory : ItemFactory, IFlavorFactory
             }
         }
     }
+    public override bool HasFlavor => true;
 
     public override void Recharge(Item oPtr, int num)
     {
@@ -78,11 +79,6 @@ internal abstract class RodItemFactory : ItemFactory, IFlavorFactory
         ProcessWorld(item);
     }
 
-    /// <summary>
-    /// Returns the factory that this item was created by; casted as an IFlavor.
-    /// </summary>
-    public IFlavorFactory FlavorFactory => (IFlavorFactory)this;
-
     public override void EatMagic(Item oPtr)
     {
         if (oPtr.RodRechargeTimeRemaining > 0)
@@ -109,7 +105,7 @@ internal abstract class RodItemFactory : ItemFactory, IFlavorFactory
 
     public override string GetDescription(Item item, bool includeCountPrefix, bool isFlavorAware)
     {
-        string flavor = item.IdentityIsStoreBought ? "" : $"{FlavorFactory.Flavor.Name} ";
+        string flavor = item.IdentityIsStoreBought ? "" : $"{Flavor.Name} ";
         string ofName = isFlavorAware ? $" of {FriendlyName}" : "";
         string name = $"{flavor}{Game.CountPluralize("Rod", item.Count)}{ofName}";
         return includeCountPrefix ? GetPrefixCount(true, name, item.Count, item.IsKnownArtifact) : name;
@@ -118,12 +114,9 @@ internal abstract class RodItemFactory : ItemFactory, IFlavorFactory
     /// <summary>
     /// Returns the rod flavors repository because rods have flavors that need to be identified.
     /// </summary>
-    public IEnumerable<Flavor>? GetFlavorRepository() => Game.SingletonRepository.Get<RodReadableFlavor>();
+    public override IEnumerable<Flavor>? GetFlavorRepository => Game.SingletonRepository.Get<RodReadableFlavor>();
     public override bool IsRechargable => true;
     public override bool CanBeZapped => true;
-
-    /// <inheritdoc/>
-    public Flavor Flavor { get; set; }
 
     public abstract bool RequiresAiming { get; }
     public override bool EasyKnow => true;

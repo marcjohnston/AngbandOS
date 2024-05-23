@@ -14,6 +14,11 @@ internal class AppleJuicePotionItemFactory : PotionItemFactory
     protected override string SymbolName => nameof(ExclamationPointSymbol);
     public override string Name => "Apple Juice";
 
+    public override void Bind()
+    {
+        base.Bind();
+        Flavor = Game.SingletonRepository.Get<PotionReadableFlavor>(nameof(LightBrownPotionReadableFlavor));
+    }
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {
         (0, 1)
@@ -38,10 +43,13 @@ internal class AppleJuicePotionItemFactory : PotionItemFactory
     /// <summary>
     /// Returns null because the Apple Juice potion is always a light brown flavor.
     /// </summary>
-    public override IEnumerable<ReadableFlavor>? GetFlavorRepository()
+    public override IEnumerable<ReadableFlavor>? GetFlavorRepository
     {
-        Flavor = Game.SingletonRepository.Get<PotionReadableFlavor>(nameof(LightBrownPotionReadableFlavor));
-        return null;
+        get
+        {
+     //       Flavor = Game.SingletonRepository.Get<PotionReadableFlavor>(nameof(LightBrownPotionReadableFlavor));
+            return null;
+        }
     }
 
     public override bool Smash(int who, int y, int x)

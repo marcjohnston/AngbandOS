@@ -2812,11 +2812,8 @@ internal class Game
         {
             if (kPtr.HasFlavor)
             {
-                // Convert the factory into the IFlavor type.
-                IFlavorFactory flavorFactory = (IFlavorFactory)kPtr;
-
                 // Get the repository for the flavors.
-                IEnumerable<Flavor>? flavorRepository = flavorFactory.GetFlavorRepository();
+                IEnumerable<Flavor>? flavorRepository = kPtr.GetFlavorRepository;
 
                 // Check to see if the repository indicates that the flavors need to be assigned.
                 if (flavorRepository != null)
@@ -2845,11 +2842,11 @@ internal class Game
                     Flavor flavor = flavorEnumerator.Current;
 
                     // Assign the flavor details.
-                    flavorFactory.Flavor = flavor;
+                    kPtr.Flavor = flavor;
                 }
 
-                kPtr.FlavorSymbol = flavorFactory.Flavor.Symbol;
-                kPtr.FlavorColor = flavorFactory.Flavor.Color;
+                kPtr.FlavorSymbol = kPtr.Flavor.Symbol;
+                kPtr.FlavorColor = kPtr.Flavor.Color;
             }
         }
     }
@@ -3298,9 +3295,9 @@ internal class Game
 
         // Enumerate all of the item factories and turn on the FlavorAware flag for all item factories that do not have flavors.
         UseFixed = false;
-        foreach (ItemFactory kPtr in SingletonRepository.Get<ItemFactory>())
+        foreach (ItemFactory itemFactory in SingletonRepository.Get<ItemFactory>())
         {
-            kPtr.FlavorAware = !kPtr.HasFlavor;
+            itemFactory.FlavorAware = !itemFactory.HasFlavor;
         }
     }
 

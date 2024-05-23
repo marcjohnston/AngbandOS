@@ -231,6 +231,12 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey
         return ApplyGetPrefixCountMacro(includeCountPrefix, pluralizedName, item.Count, item.IsKnownArtifact);
     }
 
+    public virtual string GetDescription2(Item item, bool includeCountPrefix, bool isFlavorAware)
+    {
+        string pluralizedName = ApplyPlurizationMacro(FriendlyName, item.Count);
+        return ApplyGetPrefixCountMacro(includeCountPrefix, pluralizedName, item.Count, item.IsKnownArtifact);
+    }
+
     public virtual int? GetTypeSpecificRealValue(Item item, int value) => 0;
 
     /// <summary>
@@ -854,10 +860,18 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey
     /// </summary>
     public virtual bool HasQualityRatings => false;
 
+    public virtual bool HasFlavor => false;
+
     /// <summary>
-    /// Returns true, if the object type has flavors.  Returns false, by default.
+    /// Returns the repository to use for the issuance of the flavors or null, if the factory shouldn't be issued a flavor.  Null is returned
+    /// when an item has a predefined flavor.  Apple juice, water and slime-mold item factories use pre-defined flavors. 
     /// </summary>
-    public bool HasFlavor => typeof(IFlavorFactory).IsAssignableFrom(this.GetType());
+    public virtual IEnumerable<Flavor>? GetFlavorRepository => null;
+
+    /// <summary>
+    /// Returns the flavor that was issued to the item factory.
+    /// </summary>
+    public Flavor? Flavor { get; set; }
 
     /// <summary>
     /// Applies random flavor visuals to the items.  This method is called if the HasFlavor property returns true when creating a new game.
