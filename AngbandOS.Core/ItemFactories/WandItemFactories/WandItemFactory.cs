@@ -15,7 +15,6 @@ internal abstract class WandItemFactory : ItemFactory
 {
     public WandItemFactory(Game game) : base(game) { }
     protected override string ItemClassName => nameof(WandsItemClass);
-    public override bool HasFlavor => true;
 
     public override bool DrainChargesMonsterAttack(Item item, Monster monster, ref bool obvious) // TODO: obvious needs to be in an event 
     {
@@ -101,11 +100,6 @@ internal abstract class WandItemFactory : ItemFactory
     {
         return value / 20 * item.WandChargesRemaining;
     }
-
-    /// <summary>
-    /// Returns the want flavors repository because wands have flavors that need to be identified.
-    /// </summary>
-    public override IEnumerable<Flavor>? GetFlavorRepository => Game.SingletonRepository.Get<WandReadableFlavor>();
 
     public override int PercentageBreakageChance => 25;
     public override bool IsRechargable => true;

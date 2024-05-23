@@ -23,6 +23,14 @@ internal abstract class ItemClass : IGetKey
     /// </summary>
     public virtual bool AllowStomp => true;
 
+    public virtual bool HasFlavor => false;
+
+    /// <summary>
+    /// Returns the repository to use for the issuance of the flavors or null, if the factory shouldn't be issued a flavor.  Null is returned
+    /// when an item has a predefined flavor.  Apple juice, water and slime-mold item factories use pre-defined flavors. 
+    /// </summary>
+    public virtual IEnumerable<Flavor>? GetFlavorRepository => null;
+
     /// <summary>
     /// Returns the entity serialized into a Json string.
     /// </summary>

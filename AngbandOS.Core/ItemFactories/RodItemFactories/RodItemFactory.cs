@@ -26,8 +26,6 @@ internal abstract class RodItemFactory : ItemFactory
             }
         }
     }
-    public override bool HasFlavor => true;
-
     public override void Recharge(Item oPtr, int num)
     {
         int i, t;
@@ -111,10 +109,6 @@ internal abstract class RodItemFactory : ItemFactory
         return includeCountPrefix ? GetPrefixCount(true, name, item.Count, item.IsKnownArtifact) : name;
     }
 
-    /// <summary>
-    /// Returns the rod flavors repository because rods have flavors that need to be identified.
-    /// </summary>
-    public override IEnumerable<Flavor>? GetFlavorRepository => Game.SingletonRepository.Get<RodReadableFlavor>();
     public override bool IsRechargable => true;
     public override bool CanBeZapped => true;
 

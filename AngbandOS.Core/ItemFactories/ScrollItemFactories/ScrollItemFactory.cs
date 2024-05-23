@@ -21,11 +21,6 @@ internal abstract class ScrollItemFactory : ItemFactory
         return includeCountPrefix ? GetPrefixCount(true, name, item.Count, item.IsKnownArtifact) : name;
     }
 
-    /// <summary>
-    /// Returns the scroll flavors repository because scrolls have flavors that need to be identified.
-    /// </summary>
-    public override IEnumerable<Flavor>? GetFlavorRepository => Game.UnreadableScrollFlavors;
-
     protected override (int, string)[]? MassProduceTupleNames => new (int, string)[]
     {
         (60, "3d5-3"),

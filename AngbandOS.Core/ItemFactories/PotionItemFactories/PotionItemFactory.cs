@@ -20,19 +20,12 @@ internal abstract class PotionItemFactory : ItemFactory
         string name = $"{flavor}{Game.CountPluralize("Potion", item.Count)}{ofName}";
         return includeCountPrefix ? GetPrefixCount(true, name, item.Count, item.IsKnownArtifact) : name;
     }
-    public override bool HasFlavor => true;
 
     protected override (int, string)[]? MassProduceTupleNames => new (int, string)[]
     {
         (60, "3d5-3"),
         (240, "1d5-1")
     };
-
-    /// <summary>
-    /// Returns the potions flavors repository because potions have flavors that need to be identified.  The Apple Juice, Water and Slime-Mold
-    /// potions override this
-    /// </summary>
-    public override IEnumerable<Flavor>? GetFlavorRepository => Game.SingletonRepository.Get<PotionReadableFlavor>();
 
     public override int PercentageBreakageChance => 100;
     public override bool CanBeQuaffed => true;

@@ -22,8 +22,6 @@ internal abstract class RingItemFactory : JewelleryItemFactory
         string name = $"{flavor}{Game.CountPluralize("Ring", item.Count)}{ofName}";
         return includeCountPrefix ? GetPrefixCount(true, name, item.Count, item.IsKnownArtifact) : name;
     }
-    public override bool HasFlavor => true;
-
     /// <summary>
     /// Returns either the right or left hand inventory slot for rings.
     /// </summary>
@@ -41,11 +39,6 @@ internal abstract class RingItemFactory : JewelleryItemFactory
 
     public RingItemFactory(Game game) : base(game) { }
     protected override string ItemClassName => nameof(RingsItemClass);
-
-    /// <summary>
-    /// Returns the ring flavors repository because rings have flavors that need to be identified.
-    /// </summary>
-    public override IEnumerable<Flavor> GetFlavorRepository => Game.SingletonRepository.Get<RingReadableFlavor>();
 
     public override BaseInventorySlot BaseWieldSlot
     {

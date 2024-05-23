@@ -11,7 +11,6 @@ namespace AngbandOS.Core.ItemFactories;
 internal abstract class AmuletJeweleryItemFactory : JewelleryItemFactory
 {
     public AmuletJeweleryItemFactory(Game game) : base(game) { }
-    public override bool HasFlavor => true;
 
     public override bool IsWearable => true;
     /// <summary>
@@ -37,9 +36,4 @@ internal abstract class AmuletJeweleryItemFactory : JewelleryItemFactory
     public override int PackSort => 17;
     public override int BaseValue => 45;
     public override ColorEnum Color => ColorEnum.Orange;
-
-    /// <summary>
-    /// Returns the amulet flavors repository because amulets have flavors that need to be identified.
-    /// </summary>
-    public override IEnumerable<Flavor>? GetFlavorRepository => Game.SingletonRepository.Get<AmuletReadableFlavor>();
 }

@@ -1866,7 +1866,7 @@ internal sealed class Item : IComparable<Item>
     {
         if (!IsKnown())
         {
-            if (Factory.HasFlavor)
+            if (Factory.ItemClass.HasFlavor)
             {
                 if (IsFlavorAware())
                 {

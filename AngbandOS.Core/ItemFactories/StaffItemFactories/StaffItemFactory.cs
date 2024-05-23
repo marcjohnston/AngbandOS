@@ -110,11 +110,6 @@ internal abstract class StaffItemFactory : ItemFactory
         return value / 20 * item.StaffChargesRemaining;
     }
 
-    /// <summary>
-    /// Returns the staff flavors repository because staves have flavors that need to be identified.
-    /// </summary>
-    public override IEnumerable<Flavor>? GetFlavorRepository => Game.SingletonRepository.Get<StaffReadableFlavor>();
-
     public override bool CanBeUsed => true;
 
     public override bool IsRechargable => true;

@@ -2810,13 +2810,13 @@ internal class Game
         Dictionary<Type, IEnumerator<Flavor>> currentFlavorIndex = new Dictionary<Type, IEnumerator<Flavor>>();
         foreach (ItemFactory kPtr in SingletonRepository.Get<ItemFactory>())
         {
-            if (kPtr.HasFlavor)
+            if (kPtr.ItemClass.HasFlavor)
             {
                 // Get the repository for the flavors.
-                IEnumerable<Flavor>? flavorRepository = kPtr.GetFlavorRepository;
+                IEnumerable<Flavor>? flavorRepository = kPtr.ItemClass.GetFlavorRepository;
 
-                // Check to see if the repository indicates that the flavors need to be assigned.
-                if (flavorRepository != null)
+                // Check to see if the repository indicates that the flavors need to be assigned and a predefined flavor hasn't already been bound.
+                if (flavorRepository != null && kPtr.Flavor == null)
                 {
                     // The dictionary for the enumerator is using the type as the key.
                     Type factoryType = flavorRepository.GetType();
@@ -3297,7 +3297,7 @@ internal class Game
         UseFixed = false;
         foreach (ItemFactory itemFactory in SingletonRepository.Get<ItemFactory>())
         {
-            itemFactory.FlavorAware = !itemFactory.HasFlavor;
+            itemFactory.FlavorAware = !itemFactory.ItemClass.HasFlavor;
         }
     }
 

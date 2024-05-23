@@ -12,7 +12,7 @@ internal abstract class MushroomFoodItemFactory : FoodItemFactory
 {
     public MushroomFoodItemFactory(Game game) : base(game) { }
 
-    public override bool HasFlavor => true;
+    protected override string ItemClassName => nameof(MushroomItemClass);
     public override string GetDescription(Item item, bool includeCountPrefix, bool isFlavorAware)
     {
         string flavor = item.IdentityIsStoreBought ? "" : $"{Flavor.Name} ";
@@ -20,11 +20,6 @@ internal abstract class MushroomFoodItemFactory : FoodItemFactory
         string name = $"{flavor}{Game.CountPluralize("Mushroom", item.Count)}{ofName}";
         return includeCountPrefix ? GetPrefixCount(true, name, item.Count, item.IsKnownArtifact) : name;
     }
-
-    /// <summary>
-    /// Returns the mushroom flavors repository because mushrooms have flavors that need to be identified.
-    /// </summary>
-    public override IEnumerable<Flavor>? GetFlavorRepository => Game.SingletonRepository.Get<MushroomReadableFlavor>();
 
     /// <summary>
     /// Returns a nutritional value of 500 turns for all mushrooms.
