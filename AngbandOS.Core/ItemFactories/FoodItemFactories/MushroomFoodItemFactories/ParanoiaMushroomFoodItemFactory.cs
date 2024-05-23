@@ -27,8 +27,5 @@ internal class ParanoiaMushroomFoodItemFactory : MushroomFoodItemFactory
     };
     public override int Weight => 1;
 
-    public override bool Eat()
-    {
-        return Game.RunIdentifableScript(nameof(EatParanoiaScript));
-    }
+    public override string? EatScriptName => nameof(EatParanoiaScript);
 }

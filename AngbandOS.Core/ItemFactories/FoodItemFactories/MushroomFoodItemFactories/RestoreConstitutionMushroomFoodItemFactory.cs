@@ -23,8 +23,5 @@ internal class RestoreConstitutionMushroomFoodItemFactory : MushroomFoodItemFact
         (20, 1)
     };
     public override int Weight => 1;
-    public override bool Eat()
-    {
-        return Game.RunIdentifableScript(nameof(EatRestoreConstitutionScript));
-    }
+    public override string? EatScriptName => nameof(EatRestoreConstitutionScript);
 }

@@ -23,7 +23,7 @@ internal abstract class FoodItemFactory : ItemFactory
 
     public override int PackSort => 9;
     public override int BaseValue => 5;
-    //public override bool CanBeConsumed => true;
+
     public override ColorEnum Color => ColorEnum.Green;
     public virtual bool VanishesWhenEatenBySkeletons => false;
 
@@ -32,8 +32,6 @@ internal abstract class FoodItemFactory : ItemFactory
     /// all food items are consumed except for dwarf bread.  Dwarf bread returns false.
     /// </summary>
     public virtual bool IsConsumedWhenEaten => true;
-
-    public abstract bool Eat();
 
     /// <summary>
     /// Returns true, because food items can be eaten by monsters.

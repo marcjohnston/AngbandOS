@@ -23,8 +23,5 @@ internal class CureSeriousWoundsMushroomFoodItemFactory : MushroomFoodItemFactor
         (15, 1)
     };
     public override int Weight => 2;
-    public override bool Eat()
-    {
-        return Game.RunIdentifableScript(nameof(EatCureSeriousWoundsScript));
-    }
+    public override string? EatScriptName => nameof(EatCureSeriousWoundsScript);
 }

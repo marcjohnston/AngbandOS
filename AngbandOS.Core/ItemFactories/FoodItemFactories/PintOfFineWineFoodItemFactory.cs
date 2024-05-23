@@ -20,8 +20,5 @@ internal class PintOfFineWineFoodItemFactory : FoodItemFactory
     public override string FriendlyName => "& Pint~ of Fine Wine";
     public override int InitialNutritionalValue => 1000;
     public override int Weight => 10;
-    public override bool Eat()
-    {
-        return Game.RunIdentifableScript(nameof(EatGoodFoodScript));
-    }
+    public override string? EatScriptName => nameof(EatGoodFoodScript);
 }

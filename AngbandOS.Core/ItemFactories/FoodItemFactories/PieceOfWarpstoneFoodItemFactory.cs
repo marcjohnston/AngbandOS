@@ -26,10 +26,7 @@ internal class PieceOfWarpstoneFoodItemFactory : FoodItemFactory
         (50, 1)
     };
     public override int Weight => 1;
-    public override bool Eat()
-    {
-        return Game.RunIdentifableScript(nameof(EatWarpstoneScript));
-    }
+    public override string? EatScriptName => nameof(EatWarpstoneScript);
 
     /// <summary>
     /// Returns true because warpstones vanish when a skeleton tries to eat it.

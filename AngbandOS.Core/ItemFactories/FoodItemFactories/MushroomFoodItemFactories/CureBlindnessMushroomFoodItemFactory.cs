@@ -24,8 +24,5 @@ internal class CureBlindnessMushroomFoodItemFactory : MushroomFoodItemFactory
     };
     public override int Weight => 1;
 
-    public override bool Eat()
-    {
-        return Game.RunIdentifableScript(nameof(EatCureBlindnessScript));
-    }
+    public override string? EatScriptName => nameof(EatCureBlindnessScript);
 }

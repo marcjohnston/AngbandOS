@@ -20,10 +20,7 @@ internal class HardBiscuitFoodItemFactory : FoodItemFactory
     public override string FriendlyName => "& Hard Biscuit~";
     public override int InitialNutritionalValue => 500;
     public override int Weight => 2;
-    public override bool Eat()
-    {
-        return Game.RunIdentifableScript(nameof(EatGoodFoodScript));
-    }
+    public override string? EatScriptName => nameof(EatGoodFoodScript);
 
     /// <summary>
     /// Returns true because biscuits vanish when a skeleton tries to eat it.

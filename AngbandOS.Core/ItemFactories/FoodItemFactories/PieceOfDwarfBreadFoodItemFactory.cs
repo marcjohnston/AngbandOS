@@ -33,8 +33,5 @@ internal class PieceOfDwarfBreadFoodItemFactory : FoodItemFactory
     /// </summary>
     public override bool IsConsumedWhenEaten => false;
 
-    public override bool Eat()
-    {
-        return Game.RunIdentifableScript(nameof(EatDwarfBreadScript));
-    }
+    public override string? EatScriptName => nameof(EatDwarfBreadScript);
 }

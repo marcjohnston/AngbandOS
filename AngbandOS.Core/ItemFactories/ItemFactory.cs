@@ -228,7 +228,7 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey
     ///// Returns a coded name for divine character classes for known items; null, if there is no divine name.  Returns null, by default.  Spellbooks have a different
     ///// divine title.  Druid, Fanatic, Monk, Priest and Ranger classes are divine character classes.
     ///// </summary>
-    public virtual string? CodedDivineName => null;
+    public virtual string? CodedDivineName => null; // TODO: This coded divine name has hard-coded realm names when realm is set at run-time.
 
     /// <summary>
     /// Returns a description for the item.  Returns a macro processed description, by default.
@@ -808,6 +808,7 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey
         }
 
         InitialGoldPiecesRoll = Game.ParseRoll(InitialGoldPieces);
+        EatScript = Game.SingletonRepository.GetNullable<IIdentifableScript>(EatScriptName);
     }
 
     protected abstract string ItemClassName { get; }
@@ -1013,7 +1014,7 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey
 
     [Obsolete("Use CodedName")]
     public abstract string FriendlyName { get; } 
-    public virtual string CodedName => FriendlyName;
+    public virtual string CodedName => FriendlyName; // TODO: Books use a hard-coded realm name when the realm is set at run-time.
     public virtual bool HeavyCurse { get; set; } = false;
     public virtual bool HideType { get; set; } = false;
     public virtual bool HoldLife { get; set; } = false;
@@ -1266,4 +1267,16 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey
     /// Returns true, if an item of this factory can be eaten by a monster with the eat food attack effect.  Returns false for all items except food items; which return true.
     /// </summary>
     public virtual bool CanBeEatenByMonsters => false;
+
+    /// <summary>
+    /// Returns the script to be run when an item of this factory is eaten; or null, if items cannot be eaten.  This property is bound from the <see cref="EatScriptName"/> property
+    /// during the bind phase.
+    /// </summary>
+    public IIdentifableScript? EatScript { get; private set; }
+
+    /// <summary>
+    /// Returns the name of the script to be run when an item of this factory is eaten; or null, if items cannot be eaten.  Returns null, by default.  This property
+    /// is used to bind the <see cref="EatScript"/> property during the bind phase.
+    /// </summary>
+    public virtual string? EatScriptName => null;
 }

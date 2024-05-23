@@ -25,8 +25,5 @@ internal class SlimeMoldFoodItemFactory : FoodItemFactory
     };
     public override int InitialNutritionalValue => 3000;
     public override int Weight => 5;
-    public override bool Eat()
-    {
-        return Game.RunIdentifableScript(nameof(EatSlimeMoldScript));
-    }
+    public override string? EatScriptName => nameof(EatSlimeMoldScript);
 }

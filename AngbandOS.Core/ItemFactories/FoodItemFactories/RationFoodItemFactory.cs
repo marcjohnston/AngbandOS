@@ -27,8 +27,5 @@ internal class RationFoodItemFactory : FoodItemFactory
     public override int InitialNutritionalValue => 5000;
     public override int Weight => 10;
 
-    public override bool Eat()
-    {
-        return Game.RunIdentifableScript(nameof(EatGoodFoodScript));
-    }
+    public override string? EatScriptName => nameof(EatGoodFoodScript);
 }

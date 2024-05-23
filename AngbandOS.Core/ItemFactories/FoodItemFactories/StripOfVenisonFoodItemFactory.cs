@@ -20,8 +20,5 @@ internal class StripOfVenisonFoodItemFactory : FoodItemFactory
     public override string FriendlyName => "& Strip~ of Venison";
     public override int InitialNutritionalValue => 1500;
     public override int Weight => 2;
-    public override bool Eat()
-    {
-        return Game.RunIdentifableScript(nameof(EatGoodFoodScript));
-    }
+    public override string? EatScriptName => nameof(EatGoodFoodScript);
 }

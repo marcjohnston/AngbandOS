@@ -29,8 +29,5 @@ internal class WeaknessMushroomFoodItemFactory : MushroomFoodItemFactory
     };
     public override int Weight => 1;
 
-    public override bool Eat()
-    {
-        return Game.RunIdentifableScript(nameof(EatWeaknessScript));
-    }
+    public override string? EatScriptName => nameof(EatWeaknessScript);
 }

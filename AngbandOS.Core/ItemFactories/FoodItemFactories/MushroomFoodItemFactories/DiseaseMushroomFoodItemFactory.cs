@@ -25,8 +25,5 @@ internal class DiseaseMushroomFoodItemFactory : MushroomFoodItemFactory
         (20, 1)
     };
     public override int Weight => 1;
-    public override bool Eat()
-    {
-        return Game.RunIdentifableScript(nameof(EatDiseaseScript));
-    }
+    public override string? EatScriptName => nameof(EatDiseaseScript);
 }

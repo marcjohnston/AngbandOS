@@ -27,10 +27,7 @@ internal class PieceOfElvishWaybreadFoodItemFactory : FoodItemFactory
     };
     public override int InitialNutritionalValue => 7500;
     public override int Weight => 3;
-    public override bool Eat()
-    {
-        return Game.RunIdentifableScript(nameof(EatElvenBreadScript));
-    }
+    public override string? EatScriptName => nameof(EatElvenBreadScript);
 
     /// <summary>
     /// Returns true because waybread vanishes when a skeleton tries to eat it.

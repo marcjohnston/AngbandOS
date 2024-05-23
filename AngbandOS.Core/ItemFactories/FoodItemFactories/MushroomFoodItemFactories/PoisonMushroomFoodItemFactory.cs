@@ -30,8 +30,5 @@ internal class PoisonMushroomFoodItemFactory : MushroomFoodItemFactory
     };
     public override int Weight => 1;
 
-    public override bool Eat()
-    {
-        return Game.RunIdentifableScript(nameof(EatPoisonScript));
-    }
+    public override string? EatScriptName => nameof(EatPoisonScript);
 }

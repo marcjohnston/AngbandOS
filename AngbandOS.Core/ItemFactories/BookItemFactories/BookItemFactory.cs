@@ -36,8 +36,6 @@ internal abstract class BookItemFactory : ItemFactory
     /// </summary>
     public override bool EasyKnow => true;
 
- //   public abstract string RealmName { get; }
-
     /// <summary>
     /// Returns the divine title for the book to be returned as the description.  The divine title defaults to the realm name with a "Magic" suffix.
     /// </summary>
@@ -50,7 +48,8 @@ internal abstract class BookItemFactory : ItemFactory
     };
 
     /// <summary>
-    /// Returns the singleton realm that this book factory belongs to.
+    /// Returns the singleton realm that this book factory belongs to.  This is needed because realms define books--books do not define what realm they belong to.
+    /// For this reason, the Realm the book belongs to is set at run-time.
     /// </summary>
     public Realm Realm { get; private set; }
 
