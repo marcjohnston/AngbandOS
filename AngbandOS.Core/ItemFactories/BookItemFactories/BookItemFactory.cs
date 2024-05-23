@@ -36,11 +36,6 @@ internal abstract class BookItemFactory : ItemFactory
     /// </summary>
     public override bool EasyKnow => true;
 
-    /// <summary>
-    /// Returns the divine title for the book to be returned as the description.  The divine title defaults to the realm name with a "Magic" suffix.
-    /// </summary>
-//    public override string DivineTitle => $"{RealmName} Magic";
-
     protected override (int, string)[]? MassProduceTupleNames => new (int, string)[]
     {
         (50, "2d3-2"),
