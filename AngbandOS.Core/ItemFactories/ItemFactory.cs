@@ -239,6 +239,20 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey
     /// <returns></returns>
     public string GetDescription(Item item, bool includeCountPrefix, bool isFlavorAware)
     {
+        string codedName;
+
+        // Check to see if this known item has a divine title.
+        if (AlternateCodedName != null && Game.BaseCharacterClass.UseAlternateItemNames)
+        {
+            codedName = AlternateCodedName;
+        }
+        else
+        {
+            codedName = CodedName;
+        }
+
+        codedName = codedName.Replace("$Name$", Name, StringComparison.OrdinalIgnoreCase);
+
         // Check if the item is flavored, is not fixed artifacts and is still unknown.
         if (ItemClass.HasFlavor && (item.FixedArtifact == null || !isFlavorAware))
         {
@@ -258,20 +272,13 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey
                     preNameFlavor = $"{Flavor.Name} ";
                 }
             }
-            string ofName = isFlavorAware ? $" of {CodedName}" : "";
+            string ofName = isFlavorAware ? $" of {codedName}" : "";
             // TODO: The ItemClass.Name brings in the item class name but only for items that have flavor.  This needs to be coded into the factory CodedName.  The Game.CountPluralize can be converted to use the ApplyPlurizationMacro.
             string pluralizedFlavorName = $"{preNameFlavor}{Game.CountPluralize(ItemClass.Name, item.Count)}{postNameFlavor}{ofName}";
             return includeCountPrefix ? GetPrefixCount(true, pluralizedFlavorName, item.Count, item.IsKnownArtifact) : pluralizedFlavorName;
         }
 
-        // Check to see if this known item has a divine title.
-        string name = CodedName;
-        if (AlternateCodedName != null && Game.BaseCharacterClass.UseAlternateItemNames)
-        {
-            name = AlternateCodedName;
-        }
-
-        string pluralizedName = ApplyPlurizationMacro(name, item.Count);
+        string pluralizedName = ApplyPlurizationMacro(codedName, item.Count);
         return ApplyGetPrefixCountMacro(includeCountPrefix, pluralizedName, item.Count, item.IsKnownArtifact);
     }
 

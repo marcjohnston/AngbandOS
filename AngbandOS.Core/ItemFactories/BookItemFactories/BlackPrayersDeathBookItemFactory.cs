@@ -15,8 +15,8 @@ internal class BlackPrayersDeathBookItemFactory : BookItemFactory
     protected override string SymbolName => nameof(QuestionMarkSymbol);
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "[Black Prayers]";
-    public override string CodedName => "& Death Spellbook~ [Black Prayers]";
-    public override string? AlternateCodedName => $"& Book~ of Death Magic [Black Prayers]";
+    public override string CodedName => "& Death Spellbook~ $Name$";
+    public override string? AlternateCodedName => $"& Book~ of Death Magic $Name$";
 
     public override int Cost => 100;
     public override int DamageDice => 1;

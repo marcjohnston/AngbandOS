@@ -15,8 +15,8 @@ internal class BlackMassDeathBookItemFactory : BookItemFactory
     protected override string SymbolName => nameof(QuestionMarkSymbol);
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "[Black Mass]";
-    public override string CodedName => "& Death Spellbook~ [Black Mass]";
-    public override string? AlternateCodedName => $"& Book~ of Death Magic [Black Mass]";
+    public override string CodedName => "& Death Spellbook~ $Name$";
+    public override string? AlternateCodedName => $"& Book~ of Death Magic $Name$";
     public override int Cost => 1000;
     public override int DamageDice => 1;
     public override int DamageSides => 1;

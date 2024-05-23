@@ -19,8 +19,8 @@ internal class AzathothChaosBookItemFactory : BookItemFactory
     protected override string SymbolName => nameof(QuestionMarkSymbol);
     public override ColorEnum Color => ColorEnum.Red;
     public override string Name => "[The Book of Azathoth]";
-    public override string CodedName => "& Chaos Spellbook~ [The Book of Azathoth]";
-    public override string? AlternateCodedName => $"& Book~ of Chaos Magic [The Book of Azathoth]";
+    public override string CodedName => "& Chaos Spellbook~ $Name$";
+    public override string? AlternateCodedName => $"& Book~ of Chaos Magic $Name$";
 
     public override int Cost => 100000;
     public override int DamageDice => 1;

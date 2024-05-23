@@ -15,8 +15,8 @@ internal class NecronomiconDeathBookItemFactory : BookItemFactory
     protected override string SymbolName => nameof(QuestionMarkSymbol);
     public override ColorEnum Color => ColorEnum.Black;
     public override string Name => "[Necronomicon]";
-    public override string CodedName => "& Death Spellbook~ [Necronomicon]";
-    public override string? AlternateCodedName => $"& Book~ of Death Magic [Necronomicon]";
+    public override string CodedName => "& Death Spellbook~ $Name$";
+    public override string? AlternateCodedName => $"& Book~ of Death Magic $Name$";
 
 
     /// <summary>

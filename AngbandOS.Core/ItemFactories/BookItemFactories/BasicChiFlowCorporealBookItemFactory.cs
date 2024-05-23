@@ -15,8 +15,8 @@ internal class BasicChiFlowCorporealBookItemFactory : BookItemFactory
     protected override string SymbolName => nameof(QuestionMarkSymbol);
     public override ColorEnum Color => ColorEnum.Yellow;
     public override string Name => "[Basic Chi Flow]";
-    public override string CodedName => "& Corporeal Spellbook~ [Basic Chi Flow]";
-    public override string? AlternateCodedName => "& Book~ of Corporeal Magic [Basic Chi Flow]";
+    public override string CodedName => "& Corporeal Spellbook~ $Name$";
+    public override string? AlternateCodedName => "& Book~ of Corporeal Magic $Name$";
 
     public override int Cost => 100;
     public override int DamageDice => 1;

@@ -21,8 +21,8 @@ internal class CeleanoFragmentsTarotBookItemFactory : BookItemFactory
     protected override string SymbolName => nameof(QuestionMarkSymbol);
     public override ColorEnum Color => ColorEnum.Pink;
     public override string Name => "[Celeano Fragments]";
-    public override string CodedName => "& Tarot Spellbook~ [Celeano Fragments]";
-    public override string? AlternateCodedName => $"& Book~ of Tarot Magic [Celeano Fragments]";
+    public override string CodedName => "& Tarot Spellbook~ $Name$";
+    public override string? AlternateCodedName => $"& Book~ of Tarot Magic $Name$";
 
     public override int Cost => 100000;
     public override int DamageDice => 1;

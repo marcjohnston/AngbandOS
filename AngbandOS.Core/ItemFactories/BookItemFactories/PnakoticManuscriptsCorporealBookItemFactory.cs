@@ -15,8 +15,8 @@ internal class PnakoticManuscriptsCorporealBookItemFactory : BookItemFactory
     protected override string SymbolName => nameof(QuestionMarkSymbol);
     public override ColorEnum Color => ColorEnum.BrightYellow;
     public override string Name => "[Pnakotic Manuscripts]";
-    public override string CodedName => "& Corporeal Spellbook~ [Pnakotic Manuscripts]";
-    public override string? AlternateCodedName => "& Book~ of Corporeal Magic [Pnakotic Manuscripts]";
+    public override string CodedName => "& Corporeal Spellbook~ $Name$";
+    public override string? AlternateCodedName => "& Book~ of Corporeal Magic $Name$";
 
 
     /// <summary>

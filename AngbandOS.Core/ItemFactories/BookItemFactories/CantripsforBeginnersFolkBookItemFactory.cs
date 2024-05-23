@@ -15,8 +15,8 @@ internal class CantripsforBeginnersFolkBookItemFactory : BookItemFactory
     protected override string SymbolName => nameof(QuestionMarkSymbol);
     public override ColorEnum Color => ColorEnum.BrightPurple;
     public override string Name => "[Cantrips for Beginners]";
-    public override string CodedName => "& Folk Spellbook~ [Cantrips for Beginners]";
-    public override string? AlternateCodedName => $"& Book~ of Folk Magic [Cantrips for Beginners]";
+    public override string CodedName => "& Folk Spellbook~ $Name$";
+    public override string? AlternateCodedName => $"& Book~ of Folk Magic $Name$";
 
     public override int Cost => 100;
     public override int DamageDice => 1;

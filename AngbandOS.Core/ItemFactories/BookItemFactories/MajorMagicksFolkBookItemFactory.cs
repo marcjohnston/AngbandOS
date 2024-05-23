@@ -15,8 +15,8 @@ internal class MajorMagicksFolkBookItemFactory : BookItemFactory
     protected override string SymbolName => nameof(QuestionMarkSymbol);
     public override ColorEnum Color => ColorEnum.BrightPurple;
     public override string Name => "[Major Magicks]";
-    public override string CodedName => "& Folk Spellbook~ [Major Magicks]";
-    public override string? AlternateCodedName => $"& Book~ of Folk Magic [Major Magicks]";
+    public override string CodedName => "& Folk Spellbook~ $Name$";
+    public override string? AlternateCodedName => $"& Book~ of Folk Magic $Name$";
 
     public override int Cost => 1000;
     public override int DamageDice => 1;

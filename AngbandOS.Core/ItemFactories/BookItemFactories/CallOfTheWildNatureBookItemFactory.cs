@@ -15,8 +15,8 @@ internal class CallOfTheWildNatureBookItemFactory : BookItemFactory
     protected override string SymbolName => nameof(QuestionMarkSymbol);
     public override ColorEnum Color => ColorEnum.BrightGreen;
     public override string Name => "[Call of the Wild]";
-    public override string CodedName => "& Nature Spellbook~ [Call of the Wild]";
-    public override string? AlternateCodedName => $"& Book~ of Nature Magic [Call of the Wild]";
+    public override string CodedName => "& Nature Spellbook~ $Name$";
+    public override string? AlternateCodedName => $"& Book~ of Nature Magic $Name$";
 
     public override int Cost => 100;
     public override int DamageDice => 1;

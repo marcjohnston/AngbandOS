@@ -15,8 +15,8 @@ internal class EltdownShardsTarotBookItemFactory : BookItemFactory
     protected override string SymbolName => nameof(QuestionMarkSymbol);
     public override ColorEnum Color => ColorEnum.Pink;
     public override string Name => "[Eltdown Shards]";
-    public override string CodedName => "& Tarot Spellbook~ [Eltdown Shards]";
-    public override string? AlternateCodedName => $"& Book~ of Tarot Magic [Eltdown Shards]";
+    public override string CodedName => "& Tarot Spellbook~ $Name$";
+    public override string? AlternateCodedName => $"& Book~ of Tarot Magic $Name$";
 
     public override int Cost => 25000;
     public override int DamageDice => 1;

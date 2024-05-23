@@ -15,8 +15,8 @@ internal class UnaussprechlichenKultenSorceryBookItemFactory : BookItemFactory
     protected override string SymbolName => nameof(QuestionMarkSymbol);
     public override ColorEnum Color => ColorEnum.Blue;
     public override string Name => "[Unaussprechlichen Kulten]";
-    public override string CodedName => "& Sorcery Spellbook~ [Unaussprechlichen Kulten]";
-    public override string? AlternateCodedName => $"& Book~ of Sorcery [Unaussprechlichen Kulten]";
+    public override string CodedName => "& Sorcery Spellbook~ $Name$";
+    public override string? AlternateCodedName => $"& Book~ of Sorcery $Name$";
 
     public override int Cost => 25000;
     public override int DamageDice => 1;

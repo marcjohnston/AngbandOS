@@ -15,8 +15,8 @@ internal class BeginnersHandbookSorceryBookItemFactory : BookItemFactory
     protected override string SymbolName => nameof(QuestionMarkSymbol);
     public override ColorEnum Color => ColorEnum.BrightBlue;
     public override string Name => "[Beginner's Handbook]";
-    public override string CodedName => "& Sorcery Spellbook~ [Beginner's Handbook]";
-    public override string? AlternateCodedName => $"& Book~ of Sorcery [Beginner's Handbook]";
+    public override string CodedName => "& Sorcery Spellbook~ $Name$";
+    public override string? AlternateCodedName => $"& Book~ of Sorcery $Name$";
 
     public override int Cost => 100;
     public override int DamageDice => 1;

@@ -15,8 +15,8 @@ internal class PonapeScriptureLifeBookItemFactory : BookItemFactory
     protected override string SymbolName => nameof(QuestionMarkSymbol);
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "[Ponape Scripture]";
-    public override string CodedName => "& Life Spellbook~ [Ponape Scriptures]";
-    public override string? AlternateCodedName => $"& Book~ of Life Magic [Ponape Scriptures]";
+    public override string CodedName => "& Life Spellbook~ $Name$";
+    public override string? AlternateCodedName => $"& Book~ of Life Magic $Name$";
 
 
     /// <summary>
