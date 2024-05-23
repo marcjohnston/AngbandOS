@@ -18,7 +18,7 @@ internal class RestoreDexterityPotionItemFactory : PotionItemFactory
     public override int Cost => 300;
     public override int DamageDice => 1;
     public override int DamageSides => 1;
-    public override string FriendlyName => "Restore Dexterity";
+    public override string CodedName => "Restore Dexterity";
     public override int LevelNormallyFound => 25;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

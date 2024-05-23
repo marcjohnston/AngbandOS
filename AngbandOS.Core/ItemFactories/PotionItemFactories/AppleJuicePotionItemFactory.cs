@@ -26,7 +26,7 @@ internal class AppleJuicePotionItemFactory : PotionItemFactory
     public override int Cost => 1;
     public override int DamageDice => 1;
     public override int DamageSides => 1;
-    public override string FriendlyName => "Apple Juice";
+    public override string CodedName => "Apple Juice";
 
     /// <summary>
     /// Returns 250 turns of sustenance for this apply juice food item.

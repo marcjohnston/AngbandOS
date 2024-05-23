@@ -19,7 +19,6 @@ internal class MasterSorcerersHandbookSorceryBookItemFactory : BookItemFactory
     public override int Cost => 1000;
     public override int DamageDice => 1;
     public override int DamageSides => 1;
-    public override string FriendlyName => "[Master Sorcerer's Handbook]";
     public override string CodedName => "& Sorcery Spellbook~ [Master Sorcerer's Handbook]";
     public override int LevelNormallyFound => 20;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

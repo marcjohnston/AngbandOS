@@ -18,7 +18,7 @@ internal class HeroismPotionItemFactory : PotionItemFactory
     public override int Cost => 35;
     public override int DamageDice => 1;
     public override int DamageSides => 1;
-    public override string FriendlyName => "Heroism";
+    public override string CodedName => "Heroism";
     public override int LevelNormallyFound => 1;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

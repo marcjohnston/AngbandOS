@@ -17,7 +17,7 @@ internal class PintOfFineAleFoodItemFactory : ItemFactory
     public override string Name => "Pint of Fine Ale";
 
     public override int Cost => 1;
-    public override string FriendlyName => "& Pint~ of Fine Ale";
+    public override string CodedName => "& Pint~ of Fine Ale";
     public override int InitialNutritionalValue => 500;
     public override int Weight => 5;
     public override string? EatScriptName => nameof(EatGoodFoodScript);

@@ -16,7 +16,7 @@ internal class IceScrollItemFactory : ScrollItemFactory
     public override string Name => "Ice";
 
     public override int Cost => 5000;
-    public override string FriendlyName => "Ice";
+    public override string CodedName => "Ice";
     public override bool IgnoreCold => true;
     public override int LevelNormallyFound => 75;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

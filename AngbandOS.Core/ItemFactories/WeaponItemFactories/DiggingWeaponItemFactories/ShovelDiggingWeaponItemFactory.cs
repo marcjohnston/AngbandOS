@@ -19,7 +19,7 @@ internal class ShovelDiggingWeaponItemFactory : DiggingWeaponItemFactory
     public override int Cost => 10;
     public override int DamageDice => 1;
     public override int DamageSides => 2;
-    public override string FriendlyName => "& Shovel~";
+    public override string CodedName => "& Shovel~";
     public override int LevelNormallyFound => 1;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

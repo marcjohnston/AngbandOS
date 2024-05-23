@@ -19,7 +19,7 @@ internal class DarknessScrollItemFactory : ScrollItemFactory
     protected override string SymbolName => nameof(QuestionMarkSymbol);
     public override string Name => "Darkness";
 
-    public override string FriendlyName => "Darkness";
+    public override string CodedName => "Darkness";
     public override int LevelNormallyFound => 1;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

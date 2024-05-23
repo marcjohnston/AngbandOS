@@ -31,7 +31,7 @@ internal class LordlyProtectionRingItemFactory : RingItemFactory
     }
     public override int Cost => 100000;
     public override bool FreeAct => true;
-    public override string FriendlyName => "Lordly Protection";
+    public override string CodedName => "Lordly Protection";
     public override bool HoldLife => true;
     public override int LevelNormallyFound => 100;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

@@ -18,7 +18,7 @@ internal class FreeActionRingItemFactory : RingItemFactory
     public override int Cost => 1500;
     public override bool EasyKnow => true;
     public override bool FreeAct => true;
-    public override string FriendlyName => "Free Action";
+    public override string CodedName => "Free Action";
     public override int LevelNormallyFound => 20;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

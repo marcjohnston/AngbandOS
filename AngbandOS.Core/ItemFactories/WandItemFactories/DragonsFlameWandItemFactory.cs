@@ -19,7 +19,7 @@ internal class DragonsFlameWandItemFactory : WandItemFactory
     public override int Cost => 2400;
     public override int DamageDice => 1;
     public override int DamageSides => 1;
-    public override string FriendlyName => "Dragon's Flame";
+    public override string CodedName => "Dragon's Flame";
     public override bool IgnoreAcid => true;
     public override bool IgnoreCold => true;
     public override bool IgnoreElec => true;

@@ -17,7 +17,7 @@ internal class ReflectionAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
 
     public override int Cost => 30000;
     public override bool EasyKnow => true;
-    public override string FriendlyName => "Reflection";
+    public override string CodedName => "Reflection";
     public override bool IgnoreAcid => true;
     public override bool IgnoreCold => true;
     public override bool IgnoreElec => true;

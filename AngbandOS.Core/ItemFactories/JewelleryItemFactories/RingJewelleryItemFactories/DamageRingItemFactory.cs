@@ -31,7 +31,7 @@ internal class DamageRingItemFactory : RingItemFactory
     }
 
     public override int Cost => 500;
-    public override string FriendlyName => "Damage";
+    public override string CodedName => "Damage";
     public override int LevelNormallyFound => 20;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

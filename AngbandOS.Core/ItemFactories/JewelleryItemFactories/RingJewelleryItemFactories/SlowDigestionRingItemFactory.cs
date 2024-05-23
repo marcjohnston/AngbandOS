@@ -17,7 +17,7 @@ internal class SlowDigestionRingItemFactory : RingItemFactory
 
     public override int Cost => 250;
     public override bool EasyKnow => true;
-    public override string FriendlyName => "Slow Digestion";
+    public override string CodedName => "Slow Digestion";
     public override int LevelNormallyFound => 5;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

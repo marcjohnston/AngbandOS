@@ -25,7 +25,6 @@ internal class MagicksOfMasteryFolkBookItemFactory : BookItemFactory
     public override int Cost => 2500;
     public override int DamageDice => 1;
     public override int DamageSides => 1;
-    public override string FriendlyName => "[Magicks of Mastery]";
     public override string CodedName => "& Folk Spellbook~ [Magicks of Mastery]";
     public override int LevelNormallyFound => 20;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

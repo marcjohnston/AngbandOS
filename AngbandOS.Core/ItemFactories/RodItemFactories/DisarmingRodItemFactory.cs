@@ -19,7 +19,7 @@ internal class DisarmingRodItemFactory : RodItemFactory
     public override int Cost => 2100;
     public override int DamageDice => 1;
     public override int DamageSides => 1;
-    public override string FriendlyName => "Disarming";
+    public override string CodedName => "Disarming";
     public override int LevelNormallyFound => 35;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

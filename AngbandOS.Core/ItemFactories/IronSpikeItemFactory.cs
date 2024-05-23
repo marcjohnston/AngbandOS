@@ -19,7 +19,7 @@ internal class IronSpikeItemFactory : ItemFactory
     public override int Cost => 1;
     public override int DamageDice => 1;
     public override int DamageSides => 1;
-    public override string FriendlyName => "& Iron Spike~";
+    public override string CodedName => "& Iron Spike~";
     public override int LevelNormallyFound => 1;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

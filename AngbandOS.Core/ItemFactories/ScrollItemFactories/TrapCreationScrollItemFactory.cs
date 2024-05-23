@@ -19,7 +19,7 @@ internal class TrapCreationScrollItemFactory : ScrollItemFactory
     protected override string SymbolName => nameof(QuestionMarkSymbol);
     public override string Name => "Trap Creation";
 
-    public override string FriendlyName => "Trap Creation";
+    public override string CodedName => "Trap Creation";
     public override int LevelNormallyFound => 10;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

@@ -25,7 +25,7 @@ internal class SaltWaterPotionItemFactory : PotionItemFactory
     };
     public override int DamageDice => 1;
     public override int DamageSides => 1;
-    public override string FriendlyName => "Salt Water";
+    public override string CodedName => "Salt Water";
     public override int Weight => 4;
 
     public override bool Quaff()

@@ -18,7 +18,7 @@ internal class NeutralizePoisonPotionItemFactory : PotionItemFactory
     public override int Cost => 75;
     public override int DamageDice => 1;
     public override int DamageSides => 1;
-    public override string FriendlyName => "Neutralize Poison";
+    public override string CodedName => "Neutralize Poison";
     public override int LevelNormallyFound => 5;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

@@ -19,7 +19,7 @@ internal class LeadCrownArmorItemFactory : CrownArmorItemFactory
     public override int Cost => 1000;
     public override int DamageDice => 1;
     public override int DamageSides => 1;
-    public override string FriendlyName => "& Lead Crown~"; // TODO: This appears to cause a defect in identification
+    public override string CodedName => "& Lead Crown~"; // TODO: This appears to cause a defect in identification
     public override bool InstaArt => true;
     public override int LevelNormallyFound => 44;
     public override int Weight => 20;

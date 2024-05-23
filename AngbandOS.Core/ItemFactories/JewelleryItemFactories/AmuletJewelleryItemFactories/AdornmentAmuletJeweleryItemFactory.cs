@@ -17,7 +17,7 @@ internal class AdornmentAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
 
     public override int Cost => 20;
     public override bool EasyKnow => true;
-    public override string FriendlyName => "Adornment";
+    public override string CodedName => "Adornment";
     public override int LevelNormallyFound => 15;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

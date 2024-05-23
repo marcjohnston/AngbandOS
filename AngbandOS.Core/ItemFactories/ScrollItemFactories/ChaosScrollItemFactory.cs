@@ -16,7 +16,7 @@ internal class ChaosScrollItemFactory : ScrollItemFactory
     public override string Name => "Chaos";
 
     public override int Cost => 10000;
-    public override string FriendlyName => "Chaos";
+    public override string CodedName => "Chaos";
     public override bool IgnoreAcid => true;
     public override bool IgnoreCold => true;
     public override bool IgnoreElec => true;

@@ -19,7 +19,7 @@ internal class DoorStairLocationStaffItemFactory : StaffItemFactory
     public override int Cost => 350;
     public override int DamageDice => 1;
     public override int DamageSides => 2;
-    public override string FriendlyName => "Door/Stair Location";
+    public override string CodedName => "Door/Stair Location";
     public override int LevelNormallyFound => 10;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

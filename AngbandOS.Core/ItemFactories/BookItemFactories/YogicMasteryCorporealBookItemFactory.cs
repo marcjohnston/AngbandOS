@@ -19,7 +19,6 @@ internal class YogicMasteryCorporealBookItemFactory : BookItemFactory
     public override int Cost => 1000;
     public override int DamageDice => 1;
     public override int DamageSides => 1;
-    public override string FriendlyName => "[Yogic Mastery]";
     public override string CodedName => "& Corporeal Spellbook~ [Yogic Mastery]";
     public override int LevelNormallyFound => 20;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

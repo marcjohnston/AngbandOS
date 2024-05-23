@@ -21,7 +21,7 @@ internal class StupidityPotionItemFactory : PotionItemFactory
 
     public override int DamageDice => 1;
     public override int DamageSides => 1;
-    public override string FriendlyName => "Stupidity";
+    public override string CodedName => "Stupidity";
     public override int LevelNormallyFound => 20;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

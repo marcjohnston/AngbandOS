@@ -17,7 +17,7 @@ internal class Copper1GoldItemFactory : ItemFactory
     public override string Name => "copper*";
 
     protected override string InitialGoldPieces => "2d4x4";
-    public override string FriendlyName => "copper";
+    public override string CodedName => "copper";
     public override int LevelNormallyFound => 1;
     protected override string ItemClassName => nameof(GoldItemClass);
     public override int PackSort => 0;

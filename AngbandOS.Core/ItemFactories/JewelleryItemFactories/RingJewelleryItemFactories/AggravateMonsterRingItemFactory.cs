@@ -22,7 +22,7 @@ internal class AggravateMonsterRingItemFactory : RingItemFactory
     public override bool Aggravate => true;
     public override bool Cursed => true;
     public override bool EasyKnow => true;
-    public override string FriendlyName => "Aggravate Monster";
+    public override string CodedName => "Aggravate Monster";
     public override int LevelNormallyFound => 5;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

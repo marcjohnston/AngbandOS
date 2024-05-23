@@ -19,7 +19,7 @@ internal class ProbingStaffItemFactory : StaffItemFactory
     public override int Cost => 2000;
     public override int DamageDice => 1;
     public override int DamageSides => 2;
-    public override string FriendlyName => "Probing";
+    public override string CodedName => "Probing";
     public override int LevelNormallyFound => 30;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

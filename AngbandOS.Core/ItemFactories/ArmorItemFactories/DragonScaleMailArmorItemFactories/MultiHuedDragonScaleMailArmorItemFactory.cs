@@ -24,7 +24,7 @@ internal class MultiHuedDragonScaleMailArmorItemFactory : DragonScaleMailArmorIt
     public override int Cost => 150000;
     public override int DamageDice => 2;
     public override int DamageSides => 4;
-    public override string FriendlyName => "Multi-Hued Dragon Scale Mail~";
+    public override string CodedName => "Multi-Hued Dragon Scale Mail~";
     public override bool IgnoreAcid => true;
     public override bool IgnoreCold => true;
     public override bool IgnoreElec => true;

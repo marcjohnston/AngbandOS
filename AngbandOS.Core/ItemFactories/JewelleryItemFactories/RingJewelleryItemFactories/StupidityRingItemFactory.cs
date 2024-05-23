@@ -26,7 +26,7 @@ internal class StupidityRingItemFactory : RingItemFactory
         item.TypeSpecificValue = 0 - (1 + item.GetBonusValue(5, level));
     }
     public override bool Cursed => true;
-    public override string FriendlyName => "Stupidity";
+    public override string CodedName => "Stupidity";
     public override bool HideType => true;
     public override bool Int => true;
     public override int LevelNormallyFound => 5;

@@ -21,7 +21,7 @@ internal class RuinationPotionItemFactory : PotionItemFactory
 
     public override int DamageDice => 20;
     public override int DamageSides => 20;
-    public override string FriendlyName => "Ruination";
+    public override string CodedName => "Ruination";
     public override int LevelNormallyFound => 40;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

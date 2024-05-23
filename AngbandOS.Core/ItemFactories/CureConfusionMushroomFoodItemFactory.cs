@@ -16,7 +16,7 @@ internal class CureConfusionMushroomFoodItemFactory : ItemFactory
     public override string Name => "Cure Confusion";
 
     public override int Cost => 50;
-    public override string FriendlyName => "Cure Confusion";
+    public override string CodedName => "Cure Confusion";
     public override int LevelNormallyFound => 10;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

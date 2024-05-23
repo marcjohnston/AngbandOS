@@ -16,7 +16,7 @@ internal class DoorStairLocationScrollItemFactory : ScrollItemFactory
     public override string Name => "Door/Stair Location";
 
     public override int Cost => 35;
-    public override string FriendlyName => "Door/Stair Location";
+    public override string CodedName => "Door/Stair Location";
     public override int LevelNormallyFound => 5;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

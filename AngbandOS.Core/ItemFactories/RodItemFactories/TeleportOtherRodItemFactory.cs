@@ -19,7 +19,7 @@ internal class TeleportOtherRodItemFactory : RodItemFactory
     public override int Cost => 1400;
     public override int DamageDice => 1;
     public override int DamageSides => 1;
-    public override string FriendlyName => "Teleport Other";
+    public override string CodedName => "Teleport Other";
     public override int LevelNormallyFound => 45;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

@@ -30,7 +30,7 @@ internal class AccuracyRingItemFactory : RingItemFactory
     public override string Name => "Accuracy";
 
     public override int Cost => 500;
-    public override string FriendlyName => "Accuracy";
+    public override string CodedName => "Accuracy";
     public override int LevelNormallyFound => 20;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

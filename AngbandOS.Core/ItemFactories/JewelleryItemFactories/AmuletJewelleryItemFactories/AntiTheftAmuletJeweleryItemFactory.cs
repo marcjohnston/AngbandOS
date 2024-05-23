@@ -17,7 +17,7 @@ internal class AntiTheftAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
 
     public override bool AntiTheft => true;
     public override int Cost => 1000;
-    public override string FriendlyName => "Anti-Theft";
+    public override string CodedName => "Anti-Theft";
     public override bool IgnoreAcid => true;
     public override bool IgnoreCold => true;
     public override bool IgnoreElec => true;

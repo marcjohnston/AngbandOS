@@ -23,7 +23,7 @@ internal class BrokenDaggerWeaponItemFactory : MeleeWeaponItemFactory
     public override int Cost => 1;
     public override int DamageDice => 1;
     public override int DamageSides => 1;
-    public override string FriendlyName => "& Broken Dagger~";
+    public override string CodedName => "& Broken Dagger~";
     public override bool ShowMods => true;
     public override int BonusDamage => -4;
     public override int BonusHit => -2;

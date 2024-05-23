@@ -20,7 +20,7 @@ internal class RustyChainMailHardArmorItemFactory : HardArmorItemFactory
     public override int Cost => 550;
     public override int DamageDice => 1;
     public override int DamageSides => 4;
-    public override string FriendlyName => "Rusty Chain Mail~";
+    public override string CodedName => "Rusty Chain Mail~";
     public override int LevelNormallyFound => 25;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

@@ -19,7 +19,7 @@ internal class DetectInvisibleStaffItemFactory : StaffItemFactory
     public override int Cost => 200;
     public override int DamageDice => 1;
     public override int DamageSides => 2;
-    public override string FriendlyName => "Detect Invisible";
+    public override string CodedName => "Detect Invisible";
     public override int LevelNormallyFound => 5;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

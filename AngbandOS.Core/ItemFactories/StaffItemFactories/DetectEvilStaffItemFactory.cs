@@ -19,7 +19,7 @@ internal class DetectEvilStaffItemFactory : StaffItemFactory
     public override int Cost => 350;
     public override int DamageDice => 1;
     public override int DamageSides => 2;
-    public override string FriendlyName => "Detect Evil";
+    public override string CodedName => "Detect Evil";
     public override int LevelNormallyFound => 20;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

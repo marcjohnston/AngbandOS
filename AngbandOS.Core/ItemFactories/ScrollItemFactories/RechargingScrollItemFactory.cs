@@ -16,7 +16,7 @@ internal class RechargingScrollItemFactory : ScrollItemFactory
     public override string Name => "Recharging";
 
     public override int Cost => 200;
-    public override string FriendlyName => "Recharging";
+    public override string CodedName => "Recharging";
     public override int LevelNormallyFound => 40;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

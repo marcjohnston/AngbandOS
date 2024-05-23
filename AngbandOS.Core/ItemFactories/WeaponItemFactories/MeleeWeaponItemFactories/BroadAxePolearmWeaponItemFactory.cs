@@ -19,7 +19,7 @@ internal class BroadAxePolearmWeaponItemFactory : MeleeWeaponItemFactory
     public override int Cost => 304;
     public override int DamageDice => 2;
     public override int DamageSides => 6;
-    public override string FriendlyName => "& Broad Axe~";
+    public override string CodedName => "& Broad Axe~";
     public override int LevelNormallyFound => 15;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

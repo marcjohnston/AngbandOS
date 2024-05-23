@@ -16,7 +16,7 @@ internal class InvocationScrollItemFactory : ScrollItemFactory
     public override string Name => "Invocation";
 
     public override int Cost => 200;
-    public override string FriendlyName => "Invocation";
+    public override string CodedName => "Invocation";
     public override int LevelNormallyFound => 10;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

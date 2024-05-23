@@ -19,7 +19,7 @@ internal class WarHammerHaftedWeaponItemFactory : MeleeWeaponItemFactory
     public override int Cost => 225;
     public override int DamageDice => 3;
     public override int DamageSides => 3;
-    public override string FriendlyName => "& War Hammer~";
+    public override string CodedName => "& War Hammer~";
     public override int LevelNormallyFound => 5;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

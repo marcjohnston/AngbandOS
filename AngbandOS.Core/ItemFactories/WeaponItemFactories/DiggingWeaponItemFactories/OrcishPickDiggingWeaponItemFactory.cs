@@ -19,7 +19,7 @@ internal class OrcishPickDiggingWeaponItemFactory : DiggingWeaponItemFactory
     public override int Cost => 300;
     public override int DamageDice => 1;
     public override int DamageSides => 3;
-    public override string FriendlyName => "& Orcish Pick~";
+    public override string CodedName => "& Orcish Pick~";
     public override int LevelNormallyFound => 30;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

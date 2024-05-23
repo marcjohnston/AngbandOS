@@ -17,7 +17,7 @@ internal class SeeInvisibleRingItemFactory : RingItemFactory
 
     public override int Cost => 340;
     public override bool EasyKnow => true;
-    public override string FriendlyName => "See Invisible";
+    public override string CodedName => "See Invisible";
     public override int LevelNormallyFound => 30;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

@@ -32,7 +32,7 @@ internal class DexterityRingItemFactory : RingItemFactory
 
     public override int Cost => 500;
     public override bool Dex => true;
-    public override string FriendlyName => "Dexterity";
+    public override string CodedName => "Dexterity";
     public override bool HideType => true;
     public override int LevelNormallyFound => 30;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

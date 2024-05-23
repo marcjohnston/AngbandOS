@@ -22,7 +22,7 @@ internal class OfDeflectionShieldArmorItemFactory : ShieldArmorItemFactory
     public override int DamageSides => 1;
     public override bool IgnoreAcid => true;
     public override int LevelNormallyFound => 70;
-    public override string FriendlyName => "& Shield~ of Deflection";
+    public override string CodedName => "& Shield~ of Deflection";
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {
         (70, 8)

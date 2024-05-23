@@ -23,7 +23,6 @@ internal class AzathothChaosBookItemFactory : BookItemFactory
     public override int Cost => 100000;
     public override int DamageDice => 1;
     public override int DamageSides => 1;
-    public override string FriendlyName => "[The Book of Azathoth]";
     public override string CodedName => "& Chaos Spellbook~ [The Book of Azathoth]";
     public override bool IgnoreAcid => true;
     public override bool IgnoreCold => true;

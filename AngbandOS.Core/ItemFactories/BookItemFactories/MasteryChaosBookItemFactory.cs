@@ -19,7 +19,6 @@ internal class MasteryChaosBookItemFactory : BookItemFactory
     public override int Cost => 1000;
     public override int DamageDice => 1;
     public override int DamageSides => 1;
-    public override string FriendlyName => "[Chaos Mastery]";
     public override string CodedName => "& Chaos Spellbook~ [Chaos Mastery]";
     public override int LevelNormallyFound => 20;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

@@ -17,7 +17,7 @@ internal class SoundResistanceRingItemFactory : RingItemFactory
 
     public override int Cost => 3000;
     public override bool EasyKnow => true;
-    public override string FriendlyName => "Sound Resistance";
+    public override string CodedName => "Sound Resistance";
     public override int LevelNormallyFound => 26;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

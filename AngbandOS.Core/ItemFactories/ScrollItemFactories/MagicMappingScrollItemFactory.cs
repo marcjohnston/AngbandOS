@@ -16,7 +16,7 @@ internal class MagicMappingScrollItemFactory : ScrollItemFactory
     public override string Name => "Magic Mapping";
 
     public override int Cost => 40;
-    public override string FriendlyName => "Magic Mapping";
+    public override string CodedName => "Magic Mapping";
     public override int LevelNormallyFound => 5;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

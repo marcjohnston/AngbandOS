@@ -16,7 +16,7 @@ internal class SpecialAcquirementScrollItemFactory : ScrollItemFactory
     public override string Name => "*Acquirement*";
 
     public override int Cost => 200000;
-    public override string FriendlyName => "*Acquirement*";
+    public override string CodedName => "*Acquirement*";
     public override int LevelNormallyFound => 60;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

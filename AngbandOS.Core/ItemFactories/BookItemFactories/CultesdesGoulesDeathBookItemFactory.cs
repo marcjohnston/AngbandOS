@@ -19,7 +19,6 @@ internal class CultesdesGoulesDeathBookItemFactory : BookItemFactory
     public override int Cost => 25000;
     public override int DamageDice => 1;
     public override int DamageSides => 1;
-    public override string FriendlyName => "[Cultes des Goules]";
     public override string CodedName => "& Death Spellbook~ [Cultes des Goules]";
     public override bool IgnoreAcid => true;
     public override bool IgnoreCold => true;

@@ -17,7 +17,7 @@ internal class SustainIntelligenceRingItemFactory : RingItemFactory
 
     public override int Cost => 600;
     public override bool EasyKnow => true;
-    public override string FriendlyName => "Sustain Intelligence";
+    public override string CodedName => "Sustain Intelligence";
     public override int LevelNormallyFound => 30;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

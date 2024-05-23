@@ -16,7 +16,7 @@ internal class MonsterConfusionScrollItemFactory : ScrollItemFactory
     public override string Name => "Monster Confusion";
 
     public override int Cost => 30;
-    public override string FriendlyName => "Monster Confusion";
+    public override string CodedName => "Monster Confusion";
     public override int LevelNormallyFound => 5;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

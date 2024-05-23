@@ -18,7 +18,7 @@ internal class CuringPotionItemFactory : PotionItemFactory
     public override int Cost => 250;
     public override int DamageDice => 1;
     public override int DamageSides => 1;
-    public override string FriendlyName => "Curing";
+    public override string CodedName => "Curing";
     public override int LevelNormallyFound => 18;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

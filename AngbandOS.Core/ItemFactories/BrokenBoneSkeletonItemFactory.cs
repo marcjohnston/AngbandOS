@@ -26,7 +26,7 @@ internal class BrokenBoneSkeletonItemFactory : ItemFactory
     };
     public override int DamageDice => 1;
     public override int DamageSides => 1;
-    public override string FriendlyName => "& Broken Bone~";
+    public override string CodedName => "& Broken Bone~";
     public override int Weight => 2;
     protected override string ItemClassName => nameof(SkeletonsItemClass);
     public override bool EasyKnow => true;

@@ -17,7 +17,7 @@ internal class ResistColdRingItemFactory : RingItemFactory
 
     public override int Cost => 250;
     public override bool EasyKnow => true;
-    public override string FriendlyName => "Resist Cold";
+    public override string CodedName => "Resist Cold";
     public override bool IgnoreCold => true;
     public override int LevelNormallyFound => 10;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

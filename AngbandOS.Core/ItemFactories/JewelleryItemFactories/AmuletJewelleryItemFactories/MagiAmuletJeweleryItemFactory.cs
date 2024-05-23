@@ -32,7 +32,7 @@ internal class MagiAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
 
     public override int Cost => 30000;
     public override bool FreeAct => true;
-    public override string FriendlyName => "the Magi";
+    public override string CodedName => "the Magi";
     public override bool IgnoreAcid => true;
     public override bool IgnoreCold => true;
     public override bool IgnoreElec => true;

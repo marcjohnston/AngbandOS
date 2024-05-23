@@ -19,7 +19,7 @@ internal class LightningBallsWandItemFactory : WandItemFactory
     public override int Cost => 1200;
     public override int DamageDice => 1;
     public override int DamageSides => 1;
-    public override string FriendlyName => "Lightning Balls";
+    public override string CodedName => "Lightning Balls";
     public override bool IgnoreElec => true;
     public override int LevelNormallyFound => 35;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

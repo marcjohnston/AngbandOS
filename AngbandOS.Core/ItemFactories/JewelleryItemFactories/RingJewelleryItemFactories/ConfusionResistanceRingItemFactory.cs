@@ -17,7 +17,7 @@ internal class ConfusionResistanceRingItemFactory : RingItemFactory
 
     public override int Cost => 3000;
     public override bool EasyKnow => true;
-    public override string FriendlyName => "Confusion Resistance";
+    public override string CodedName => "Confusion Resistance";
     public override int LevelNormallyFound => 22;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

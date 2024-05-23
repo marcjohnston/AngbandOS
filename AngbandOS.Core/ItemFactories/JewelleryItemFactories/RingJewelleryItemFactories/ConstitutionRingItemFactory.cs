@@ -32,7 +32,7 @@ internal class ConstitutionRingItemFactory : RingItemFactory
 
     public override bool Con => true;
     public override int Cost => 500;
-    public override string FriendlyName => "Constitution";
+    public override string CodedName => "Constitution";
     public override bool HideType => true;
     public override int LevelNormallyFound => 30;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

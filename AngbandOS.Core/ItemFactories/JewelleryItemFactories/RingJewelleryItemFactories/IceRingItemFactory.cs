@@ -32,7 +32,7 @@ internal class IceRingItemFactory : RingItemFactory, IItemsCanBeActivated
 
     public override bool Activate => true;
     public override int Cost => 3000;
-    public override string FriendlyName => "Ice";
+    public override string CodedName => "Ice";
     public override bool IgnoreCold => true;
     public override int LevelNormallyFound => 50;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

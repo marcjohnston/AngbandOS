@@ -21,7 +21,7 @@ internal class PoisonMushroomFoodItemFactory : ItemFactory
 
     public override int DamageDice => 4;
     public override int DamageSides => 4;
-    public override string FriendlyName => "Poison";
+    public override string CodedName => "Poison";
     public override int LevelNormallyFound => 5;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

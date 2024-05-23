@@ -19,7 +19,7 @@ internal class SeekerBoltAmmunitionItemFactory : AmmunitionItemFactory
     public override int Cost => 25;
     public override int DamageDice => 4;
     public override int DamageSides => 5;
-    public override string FriendlyName => "& Seeker Bolt~";
+    public override string CodedName => "& Seeker Bolt~";
     public override int LevelNormallyFound => 65;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

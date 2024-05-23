@@ -16,7 +16,7 @@ internal class DestructionScrollItemFactory : ScrollItemFactory
     public override string Name => "*Destruction*";
 
     public override int Cost => 250;
-    public override string FriendlyName => "*Destruction*";
+    public override string CodedName => "*Destruction*";
     public override int LevelNormallyFound => 40;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

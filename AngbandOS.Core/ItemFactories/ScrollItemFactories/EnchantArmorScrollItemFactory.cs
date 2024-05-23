@@ -16,7 +16,7 @@ internal class EnchantArmorScrollItemFactory : ScrollItemFactory
     public override string Name => "Enchant Armor";
 
     public override int Cost => 125;
-    public override string FriendlyName => "Enchant Armor";
+    public override string CodedName => "Enchant Armor";
     public override int LevelNormallyFound => 15;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

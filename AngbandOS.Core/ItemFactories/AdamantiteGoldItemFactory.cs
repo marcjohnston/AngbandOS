@@ -17,7 +17,7 @@ internal class AdamantiteGoldItemFactory : ItemFactory
     public override string Name => "adamantite";
 
     protected override string InitialGoldPieces => "2d80x4";
-    public override string FriendlyName => "adamantite";
+    public override string CodedName => "adamantite";
     public override int LevelNormallyFound => 1;
     protected override string ItemClassName => nameof(GoldItemClass);
     public override int PackSort => 0;

@@ -18,7 +18,7 @@ internal class TeleportationAmuletJeweleryItemFactory : AmuletJeweleryItemFactor
     public override int Cost => 250;
     public override bool Cursed => true;
     public override bool EasyKnow => true;
-    public override string FriendlyName => "Teleportation";
+    public override string CodedName => "Teleportation";
     public override int LevelNormallyFound => 15;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

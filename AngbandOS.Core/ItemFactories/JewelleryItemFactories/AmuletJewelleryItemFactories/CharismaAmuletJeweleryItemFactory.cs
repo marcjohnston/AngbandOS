@@ -27,7 +27,7 @@ internal class CharismaAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
     }
     public override bool Cha => true;
     public override int Cost => 500;
-    public override string FriendlyName => "Charisma";
+    public override string CodedName => "Charisma";
     public override bool HideType => true;
     public override int LevelNormallyFound => 20;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

@@ -16,7 +16,7 @@ internal class TrapDetectionScrollItemFactory : ScrollItemFactory
     public override string Name => "Trap Detection";
 
     public override int Cost => 35;
-    public override string FriendlyName => "Trap Detection";
+    public override string CodedName => "Trap Detection";
     public override int LevelNormallyFound => 5;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

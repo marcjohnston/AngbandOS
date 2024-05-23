@@ -19,7 +19,7 @@ internal class FrostBoltsWandItemFactory : WandItemFactory
     public override int Cost => 800;
     public override int DamageDice => 1;
     public override int DamageSides => 1;
-    public override string FriendlyName => "Frost Bolts";
+    public override string CodedName => "Frost Bolts";
     public override int LevelNormallyFound => 20;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

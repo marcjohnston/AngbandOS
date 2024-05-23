@@ -17,7 +17,7 @@ internal class LightCrossbowBowWeaponItemFactory : BowWeaponItemFactory
     public override string Name => "Light Crossbow";
 
     public override int Cost => 140;
-    public override string FriendlyName => "& Light Crossbow~";
+    public override string CodedName => "& Light Crossbow~";
     public override int LevelNormallyFound => 15;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

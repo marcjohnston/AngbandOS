@@ -20,7 +20,7 @@ internal class SlowMonstersStaffItemFactory : StaffItemFactory
     public override int Cost => 800;
     public override int DamageDice => 1;
     public override int DamageSides => 2;
-    public override string FriendlyName => "Slow Monsters";
+    public override string CodedName => "Slow Monsters";
     public override int LevelNormallyFound => 10;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

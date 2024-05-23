@@ -19,7 +19,7 @@ internal class SmallWoodenChestItemFactory : ChestItemFactory
     public override int Cost => 20;
     public override int DamageDice => 2;
     public override int DamageSides => 3;
-    public override string FriendlyName => "& Small wooden chest~";
+    public override string CodedName => "& Small wooden chest~";
     public override int LevelNormallyFound => 5;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

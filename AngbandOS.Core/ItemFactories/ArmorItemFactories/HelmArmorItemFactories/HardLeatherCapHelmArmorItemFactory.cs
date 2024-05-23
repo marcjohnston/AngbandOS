@@ -19,7 +19,7 @@ internal class HardLeatherCapHelmArmorItemFactory
 
     public override int ArmorClass => 2;
     public override int Cost => 12;
-    public override string FriendlyName => "& Hard Leather Cap~";
+    public override string CodedName => "& Hard Leather Cap~";
     public override int LevelNormallyFound => 3;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

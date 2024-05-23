@@ -19,7 +19,7 @@ internal class PolymorphRodItemFactory : RodItemFactory
     public override int Cost => 1200;
     public override int DamageDice => 1;
     public override int DamageSides => 1;
-    public override string FriendlyName => "Polymorph";
+    public override string CodedName => "Polymorph";
     public override int LevelNormallyFound => 35;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

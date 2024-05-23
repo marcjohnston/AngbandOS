@@ -16,7 +16,7 @@ internal class FireScrollItemFactory : ScrollItemFactory
     public override string Name => "Fire";
 
     public override int Cost => 1000;
-    public override string FriendlyName => "Fire";
+    public override string CodedName => "Fire";
     public override bool IgnoreFire => true;
     public override int LevelNormallyFound => 50;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

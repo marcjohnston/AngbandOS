@@ -19,7 +19,7 @@ internal class LongSwordWeaponItemFactory : MeleeWeaponItemFactory
     public override int Cost => 300;
     public override int DamageDice => 2;
     public override int DamageSides => 5;
-    public override string FriendlyName => "& Long Sword~";
+    public override string CodedName => "& Long Sword~";
     public override int LevelNormallyFound => 10;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

@@ -30,7 +30,7 @@ internal class IntelligenceRingItemFactory : RingItemFactory
         }
     }
     public override int Cost => 500;
-    public override string FriendlyName => "Intelligence";
+    public override string CodedName => "Intelligence";
     public override bool HideType => true;
     public override bool Int => true;
     public override int LevelNormallyFound => 30;

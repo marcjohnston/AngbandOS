@@ -40,7 +40,7 @@ internal class SpeedRingItemFactory : RingItemFactory
     }
 
     public override int Cost => 100000;
-    public override string FriendlyName => "Speed";
+    public override string CodedName => "Speed";
     public override bool HideType => true;
     public override int LevelNormallyFound => 80;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

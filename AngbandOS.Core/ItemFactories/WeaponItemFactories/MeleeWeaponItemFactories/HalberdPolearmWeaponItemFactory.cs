@@ -19,7 +19,7 @@ internal class HalberdPolearmWeaponItemFactory : MeleeWeaponItemFactory
     public override int Cost => 430;
     public override int DamageDice => 3;
     public override int DamageSides => 5;
-    public override string FriendlyName => "& Halberd~";
+    public override string CodedName => "& Halberd~";
     public override int LevelNormallyFound => 25;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

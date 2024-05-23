@@ -20,7 +20,7 @@ internal class FullPlateHardArmorItemFactory : HardArmorItemFactory
     public override int Cost => 1350;
     public override int DamageDice => 2;
     public override int DamageSides => 4;
-    public override string FriendlyName => "Full Plate Armor~";
+    public override string CodedName => "Full Plate Armor~";
     public override int LevelNormallyFound => 45;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

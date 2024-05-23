@@ -20,7 +20,7 @@ internal class HardLeatherBootsArmorItemFactory : BootsArmorItemFactory
     public override int Cost => 12;
     public override int DamageDice => 1;
     public override int DamageSides => 1;
-    public override string FriendlyName => "& Pair~ of Hard Leather Boots";
+    public override string CodedName => "& Pair~ of Hard Leather Boots";
     public override int LevelNormallyFound => 5;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

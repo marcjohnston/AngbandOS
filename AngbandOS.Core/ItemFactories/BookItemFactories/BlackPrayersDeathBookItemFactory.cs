@@ -19,7 +19,6 @@ internal class BlackPrayersDeathBookItemFactory : BookItemFactory
     public override int Cost => 100;
     public override int DamageDice => 1;
     public override int DamageSides => 1;
-    public override string FriendlyName => "[Black Prayers]";
     public override string CodedName => "& Death Spellbook~ [Black Prayers]";
     public override int LevelNormallyFound => 10;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

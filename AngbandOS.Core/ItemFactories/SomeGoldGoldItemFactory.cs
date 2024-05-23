@@ -17,7 +17,7 @@ internal class SomeGoldGoldItemFactory : ItemFactory
     public override string Name => "some gold";
 
     protected override string InitialGoldPieces => "2d14x4";
-    public override string FriendlyName => "some gold";
+    public override string CodedName => "some gold";
     public override int LevelNormallyFound => 1;
     protected override string ItemClassName => nameof(GoldItemClass);
     public override int PackSort => 0;

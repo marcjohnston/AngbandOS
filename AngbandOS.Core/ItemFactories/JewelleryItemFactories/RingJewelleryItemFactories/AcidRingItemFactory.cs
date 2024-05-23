@@ -32,7 +32,7 @@ internal class AcidRingItemFactory : RingItemFactory, IItemsCanBeActivated
 
     public override bool Activate => true;
     public override int Cost => 3000;
-    public override string FriendlyName => "Acid";
+    public override string CodedName => "Acid";
     public override bool IgnoreAcid => true;
     public override int LevelNormallyFound => 50;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

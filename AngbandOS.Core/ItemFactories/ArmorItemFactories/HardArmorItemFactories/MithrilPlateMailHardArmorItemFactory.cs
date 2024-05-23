@@ -20,7 +20,7 @@ internal class MithrilPlateMailHardArmorItemFactory : HardArmorItemFactory
     public override int Cost => 15000;
     public override int DamageDice => 2;
     public override int DamageSides => 4;
-    public override string FriendlyName => "Mithril Plate Mail~";
+    public override string CodedName => "Mithril Plate Mail~";
     public override bool IgnoreAcid => true;
     public override int LevelNormallyFound => 60;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

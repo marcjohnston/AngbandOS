@@ -20,7 +20,7 @@ internal class SlowMonsterWandItemFactory : WandItemFactory
     public override int Cost => 500;
     public override int DamageDice => 1;
     public override int DamageSides => 1;
-    public override string FriendlyName => "Slow Monster";
+    public override string CodedName => "Slow Monster";
     public override int LevelNormallyFound => 5;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

@@ -17,7 +17,7 @@ internal class ResistFireRingItemFactory : RingItemFactory
 
     public override int Cost => 250;
     public override bool EasyKnow => true;
-    public override string FriendlyName => "Resist Fire";
+    public override string CodedName => "Resist Fire";
     public override bool IgnoreFire => true;
     public override int LevelNormallyFound => 10;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

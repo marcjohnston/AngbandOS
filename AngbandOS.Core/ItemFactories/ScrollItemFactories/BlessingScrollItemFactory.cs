@@ -16,7 +16,7 @@ internal class BlessingScrollItemFactory : ScrollItemFactory
     public override string Name => "Blessing";
 
     public override int Cost => 15;
-    public override string FriendlyName => "Blessing";
+    public override string CodedName => "Blessing";
     public override int LevelNormallyFound => 1;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

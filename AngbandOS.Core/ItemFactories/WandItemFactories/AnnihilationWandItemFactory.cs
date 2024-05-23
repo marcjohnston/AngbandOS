@@ -19,7 +19,7 @@ internal class AnnihilationWandItemFactory : WandItemFactory
     public override int Cost => 3000;
     public override int DamageDice => 1;
     public override int DamageSides => 1;
-    public override string FriendlyName => "Annihilation";
+    public override string CodedName => "Annihilation";
     public override bool IgnoreAcid => true;
     public override bool IgnoreCold => true;
     public override bool IgnoreElec => true;

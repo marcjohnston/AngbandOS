@@ -16,7 +16,7 @@ internal class SpecialIdentifyScrollItemFactory : ScrollItemFactory
     public override string Name => "*Identify*";
 
     public override int Cost => 1000;
-    public override string FriendlyName => "*Identify*";
+    public override string CodedName => "*Identify*";
     public override int LevelNormallyFound => 30;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

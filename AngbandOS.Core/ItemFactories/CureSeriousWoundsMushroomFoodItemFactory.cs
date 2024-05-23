@@ -16,7 +16,7 @@ internal class CureSeriousWoundsMushroomFoodItemFactory : ItemFactory
     public override string Name => "Cure Serious Wounds";
 
     public override int Cost => 75;
-    public override string FriendlyName => "Cure Serious Wounds";
+    public override string CodedName => "Cure Serious Wounds";
     public override int LevelNormallyFound => 15;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

@@ -20,7 +20,7 @@ internal class MetalScaleMailHardArmorItemFactory : HardArmorItemFactory
     public override int Cost => 550;
     public override int DamageDice => 1;
     public override int DamageSides => 4;
-    public override string FriendlyName => "Metal Scale Mail~";
+    public override string CodedName => "Metal Scale Mail~";
     public override int LevelNormallyFound => 25;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

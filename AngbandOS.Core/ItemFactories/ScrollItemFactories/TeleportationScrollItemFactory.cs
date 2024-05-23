@@ -16,7 +16,7 @@ internal class TeleportationScrollItemFactory : ScrollItemFactory
     public override string Name => "Teleportation";
 
     public override int Cost => 40;
-    public override string FriendlyName => "Teleportation";
+    public override string CodedName => "Teleportation";
     public override int LevelNormallyFound => 10;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

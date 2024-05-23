@@ -17,7 +17,7 @@ internal class SlingBowWeaponItemFactory : BowWeaponItemFactory
     public override string Name => "Sling";
 
     public override int Cost => 5;
-    public override string FriendlyName => "& Sling~";
+    public override string CodedName => "& Sling~";
     public override int LevelNormallyFound => 1;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

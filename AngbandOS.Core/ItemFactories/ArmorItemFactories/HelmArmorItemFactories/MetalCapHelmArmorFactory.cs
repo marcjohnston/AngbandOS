@@ -20,7 +20,7 @@ internal class MetalCapHelmArmorFactory : HelmArmorItemFactory
     public override int Cost => 30;
     public override int DamageDice => 1;
     public override int DamageSides => 1;
-    public override string FriendlyName => "& Metal Cap~";
+    public override string CodedName => "& Metal Cap~";
     public override int LevelNormallyFound => 10;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

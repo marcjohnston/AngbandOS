@@ -19,7 +19,7 @@ internal class LeadFilledMaceHaftedWeaponItemFactory : MeleeWeaponItemFactory
     public override int Cost => 502;
     public override int DamageDice => 3;
     public override int DamageSides => 4;
-    public override string FriendlyName => "& Lead-Filled Mace~";
+    public override string CodedName => "& Lead-Filled Mace~";
     public override int LevelNormallyFound => 15;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

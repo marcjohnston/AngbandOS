@@ -19,7 +19,7 @@ internal class ConfusionMushroomFoodItemFactory : ItemFactory
     protected override string SymbolName => nameof(CommaSymbol);
     public override string Name => "Confusion";
 
-    public override string FriendlyName => "Confusion";
+    public override string CodedName => "Confusion";
     public override int LevelNormallyFound => 5;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

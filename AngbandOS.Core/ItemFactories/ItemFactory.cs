@@ -1012,9 +1012,12 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey
     public virtual bool Feather { get; set; } = false;
     public virtual bool FreeAct { get; set; } = false;
 
-    [Obsolete("Use CodedName")]
-    public abstract string FriendlyName { get; } 
-    public virtual string CodedName => FriendlyName; // TODO: Books use a hard-coded realm name when the realm is set at run-time.
+    /// <summary>
+    /// Returns a coded name that is used to generate the description of the item.  The and symbol '&' is used to represent the article (a, an or a number) and the
+    /// tilde symbol '~' used to place the 's', 'es', or 'ies' plural form of the noun.
+    /// </summary>
+    public abstract string CodedName { get; } // TODO: Books use a hard-coded realm name when the realm is set at run-time.
+
     public virtual bool HeavyCurse { get; set; } = false;
     public virtual bool HideType { get; set; } = false;
     public virtual bool HoldLife { get; set; } = false;

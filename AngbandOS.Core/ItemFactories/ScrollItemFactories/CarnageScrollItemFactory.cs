@@ -16,7 +16,7 @@ internal class CarnageScrollItemFactory : ScrollItemFactory
     public override string Name => "Carnage";
 
     public override int Cost => 750;
-    public override string FriendlyName => "Carnage";
+    public override string CodedName => "Carnage";
     public override int LevelNormallyFound => 40;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

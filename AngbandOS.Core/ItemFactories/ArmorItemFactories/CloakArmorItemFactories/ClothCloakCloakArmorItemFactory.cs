@@ -18,7 +18,7 @@ internal class ClothCloakCloakArmorItemFactory : CloakArmorItemFactory
 
     public override int ArmorClass => 1;
     public override int Cost => 3;
-    public override string FriendlyName => "& Cloak~";
+    public override string CodedName => "& Cloak~";
     public override int LevelNormallyFound => 1;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

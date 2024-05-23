@@ -19,7 +19,7 @@ internal class SummonUndeadScrollItemFactory : ScrollItemFactory
     protected override string SymbolName => nameof(QuestionMarkSymbol);
     public override string Name => "Summon Undead";
 
-    public override string FriendlyName => "Summon Undead";
+    public override string CodedName => "Summon Undead";
     public override int LevelNormallyFound => 15;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

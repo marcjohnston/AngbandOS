@@ -31,7 +31,7 @@ internal class ProtectionRingItemFactory : RingItemFactory
     public override string Name => "Protection";
 
     public override int Cost => 500;
-    public override string FriendlyName => "Protection";
+    public override string CodedName => "Protection";
     public override int LevelNormallyFound => 10;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

@@ -19,7 +19,7 @@ internal class SleepMonsterRodItemFactory : RodItemFactory
     public override int Cost => 1500;
     public override int DamageDice => 1;
     public override int DamageSides => 1;
-    public override string FriendlyName => "Sleep Monster";
+    public override string CodedName => "Sleep Monster";
     public override int LevelNormallyFound => 30;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

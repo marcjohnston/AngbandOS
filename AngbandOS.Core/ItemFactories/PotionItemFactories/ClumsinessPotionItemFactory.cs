@@ -21,7 +21,7 @@ internal class ClumsinessPotionItemFactory : PotionItemFactory
 
     public override int DamageDice => 1;
     public override int DamageSides => 1;
-    public override string FriendlyName => "Clumsiness";
+    public override string CodedName => "Clumsiness";
     public override int LevelNormallyFound => 5;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

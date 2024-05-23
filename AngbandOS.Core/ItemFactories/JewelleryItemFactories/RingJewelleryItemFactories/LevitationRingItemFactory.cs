@@ -18,7 +18,7 @@ internal class LevitationRingItemFactory : RingItemFactory
     public override int Cost => 200;
     public override bool EasyKnow => true;
     public override bool Feather => true;
-    public override string FriendlyName => "Levitation";
+    public override string CodedName => "Levitation";
     public override int LevelNormallyFound => 5;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

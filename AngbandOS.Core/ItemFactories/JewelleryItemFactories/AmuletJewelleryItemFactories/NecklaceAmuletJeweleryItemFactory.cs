@@ -16,7 +16,7 @@ internal class NecklaceAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
     public override string Name => "Dwarves";
 
     public override int Cost => 75000;
-    public override string FriendlyName => "& Necklace~"; // TODO: This appears to cause a defect in identification
+    public override string CodedName => "& Necklace~"; // TODO: This appears to cause a defect in identification
     public override bool InstaArt => true;
     public override int LevelNormallyFound => 70;
     public override int Weight => 3;

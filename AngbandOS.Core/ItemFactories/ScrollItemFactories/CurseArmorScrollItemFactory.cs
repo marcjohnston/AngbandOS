@@ -19,7 +19,7 @@ internal class CurseArmorScrollItemFactory : ScrollItemFactory
     protected override string SymbolName => nameof(QuestionMarkSymbol);
     public override string Name => "Curse Armor";
 
-    public override string FriendlyName => "Curse Armor";
+    public override string CodedName => "Curse Armor";
     public override int LevelNormallyFound => 50;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

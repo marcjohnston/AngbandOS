@@ -22,7 +22,7 @@ internal class HasteMonstersStaffItemFactory : StaffItemFactory
     public override int StaffChargeCount => Game.DieRoll(8) + 8;
     public override int DamageDice => 1;
     public override int DamageSides => 2;
-    public override string FriendlyName => "Haste Monsters";
+    public override string CodedName => "Haste Monsters";
     public override int LevelNormallyFound => 10;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

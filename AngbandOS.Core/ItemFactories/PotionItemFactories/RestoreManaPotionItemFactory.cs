@@ -18,7 +18,7 @@ internal class RestoreManaPotionItemFactory : PotionItemFactory
     public override int Cost => 350;
     public override int DamageDice => 1;
     public override int DamageSides => 1;
-    public override string FriendlyName => "Restore Mana";
+    public override string CodedName => "Restore Mana";
     public override int LevelNormallyFound => 25;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

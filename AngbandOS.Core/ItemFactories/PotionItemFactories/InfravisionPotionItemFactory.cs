@@ -18,7 +18,7 @@ internal class InfravisionPotionItemFactory : PotionItemFactory
     public override int Cost => 20;
     public override int DamageDice => 1;
     public override int DamageSides => 1;
-    public override string FriendlyName => "Infra-vision";
+    public override string CodedName => "Infra-vision";
     public override int LevelNormallyFound => 3;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

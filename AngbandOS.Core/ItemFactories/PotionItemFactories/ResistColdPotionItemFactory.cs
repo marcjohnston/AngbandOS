@@ -18,7 +18,7 @@ internal class ResistColdPotionItemFactory : PotionItemFactory
     public override int Cost => 30;
     public override int DamageDice => 1;
     public override int DamageSides => 1;
-    public override string FriendlyName => "Resist Cold";
+    public override string CodedName => "Resist Cold";
     public override int LevelNormallyFound => 1;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

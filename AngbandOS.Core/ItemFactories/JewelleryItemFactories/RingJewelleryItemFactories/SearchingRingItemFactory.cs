@@ -31,7 +31,7 @@ internal class SearchingRingItemFactory : RingItemFactory
     }
 
     public override int Cost => 250;
-    public override string FriendlyName => "Searching";
+    public override string CodedName => "Searching";
     public override bool HideType => true;
     public override int LevelNormallyFound => 5;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

@@ -17,7 +17,7 @@ internal class NetherResistanceRingItemFactory : RingItemFactory
 
     public override int Cost => 14500;
     public override bool EasyKnow => true;
-    public override string FriendlyName => "Nether Resistance";
+    public override string CodedName => "Nether Resistance";
     public override bool HoldLife => true;
     public override int LevelNormallyFound => 34;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

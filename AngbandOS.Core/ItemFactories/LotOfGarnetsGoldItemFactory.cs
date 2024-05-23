@@ -17,7 +17,7 @@ internal class LotOfGarnetsGoldItemFactory : ItemFactory
     public override string Name => "lot of garnets";
 
     protected override string InitialGoldPieces => "2d10x4";
-    public override string FriendlyName => "lot of garnets";
+    public override string CodedName => "lot of garnets";
     public override int LevelNormallyFound => 1;
     protected override string ItemClassName => nameof(GoldItemClass);
     public override int PackSort => 0;

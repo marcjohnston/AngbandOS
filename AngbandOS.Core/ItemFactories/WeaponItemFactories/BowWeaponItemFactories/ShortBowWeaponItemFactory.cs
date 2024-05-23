@@ -17,7 +17,7 @@ internal class ShortBowWeaponItemFactory : BowWeaponItemFactory
     public override string Name => "Short Bow";
 
     public override int Cost => 50;
-    public override string FriendlyName => "& Short Bow~";
+    public override string CodedName => "& Short Bow~";
     public override int LevelNormallyFound => 3;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

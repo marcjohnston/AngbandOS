@@ -17,7 +17,7 @@ internal class EmeraldsGoldItemFactory : ItemFactory
     public override string Name => "emeralds";
 
     protected override string InitialGoldPieces => "2d32x4";
-    public override string FriendlyName => "emeralds";
+    public override string CodedName => "emeralds";
     public override int LevelNormallyFound => 1;
     protected override string ItemClassName => nameof(GoldItemClass);
     public override int PackSort => 0;

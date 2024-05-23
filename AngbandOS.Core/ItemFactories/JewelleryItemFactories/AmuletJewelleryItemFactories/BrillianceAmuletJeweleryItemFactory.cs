@@ -16,7 +16,7 @@ internal class BrillianceAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
     public override string Name => "Brilliance";
 
     public override int Cost => 500;
-    public override string FriendlyName => "Brilliance";
+    public override string CodedName => "Brilliance";
     public override bool HideType => true;
     public override bool Int => true;
     public override int LevelNormallyFound => 20;

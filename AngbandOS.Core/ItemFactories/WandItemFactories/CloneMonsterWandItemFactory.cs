@@ -23,7 +23,7 @@ internal class CloneMonsterWandItemFactory : WandItemFactory
 
     public override int DamageDice => 1;
     public override int DamageSides => 1;
-    public override string FriendlyName => "Clone Monster";
+    public override string CodedName => "Clone Monster";
     public override int LevelNormallyFound => 15;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

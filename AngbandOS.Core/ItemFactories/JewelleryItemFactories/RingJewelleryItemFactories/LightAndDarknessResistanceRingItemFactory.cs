@@ -17,7 +17,7 @@ internal class LightAndDarknessResistanceRingItemFactory : RingItemFactory
 
     public override int Cost => 3000;
     public override bool EasyKnow => true;
-    public override string FriendlyName => "Light and Darkness Resistance";
+    public override string CodedName => "Light and Darkness Resistance";
     public override int LevelNormallyFound => 30;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

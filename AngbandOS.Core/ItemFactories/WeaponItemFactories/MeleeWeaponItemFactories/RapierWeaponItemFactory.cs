@@ -19,7 +19,7 @@ internal class RapierWeaponItemFactory : MeleeWeaponItemFactory
     public override int Cost => 42;
     public override int DamageDice => 1;
     public override int DamageSides => 6;
-    public override string FriendlyName => "& Rapier~";
+    public override string CodedName => "& Rapier~";
     public override int LevelNormallyFound => 5;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

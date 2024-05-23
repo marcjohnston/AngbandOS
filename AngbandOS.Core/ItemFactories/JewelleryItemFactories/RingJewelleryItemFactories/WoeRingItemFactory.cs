@@ -30,7 +30,7 @@ internal class WoeRingItemFactory : RingItemFactory
 
     public override bool Cha => true;
     public override bool Cursed => true;
-    public override string FriendlyName => "Woe";
+    public override string CodedName => "Woe";
     public override bool HideType => true;
     public override int LevelNormallyFound => 50;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

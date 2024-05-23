@@ -36,7 +36,7 @@ internal class ExtraAttacksRingItemFactory : RingItemFactory
 
     public override bool Blows => true;
     public override int Cost => 100000;
-    public override string FriendlyName => "Extra Attacks";
+    public override string CodedName => "Extra Attacks";
     public override int LevelNormallyFound => 50;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

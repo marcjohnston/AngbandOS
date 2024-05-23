@@ -19,7 +19,7 @@ internal class PerceptionRodItemFactory : RodItemFactory
     public override int Cost => 13000;
     public override int DamageDice => 1;
     public override int DamageSides => 1;
-    public override string FriendlyName => "Perception";
+    public override string CodedName => "Perception";
     public override int LevelNormallyFound => 50;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

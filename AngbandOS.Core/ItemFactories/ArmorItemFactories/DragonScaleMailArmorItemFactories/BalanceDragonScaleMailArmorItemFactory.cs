@@ -24,7 +24,7 @@ internal class BalanceDragonScaleMailArmorItemFactory : DragonScaleMailArmorItem
     public override int Cost => 100000;
     public override int DamageDice => 2;
     public override int DamageSides => 4;
-    public override string FriendlyName => "Balance Dragon Scale Mail~";
+    public override string CodedName => "Balance Dragon Scale Mail~";
     public override bool IgnoreAcid => true;
     public override bool IgnoreCold => true;
     public override bool IgnoreElec => true;

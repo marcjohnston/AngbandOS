@@ -29,7 +29,7 @@ internal class ResistanceAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
     }
 
     public override int Cost => 25000;
-    public override string FriendlyName => "Resistance";
+    public override string CodedName => "Resistance";
     public override bool IgnoreAcid => true;
     public override bool IgnoreCold => true;
     public override bool IgnoreElec => true;

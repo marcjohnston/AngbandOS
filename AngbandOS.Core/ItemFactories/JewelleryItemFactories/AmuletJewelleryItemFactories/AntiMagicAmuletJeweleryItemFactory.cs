@@ -23,7 +23,7 @@ internal class AntiMagicAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
     public override string Name => "Anti-Magic";
 
     public override int Cost => 30000;
-    public override string FriendlyName => "Anti-Magic";
+    public override string CodedName => "Anti-Magic";
     public override bool IgnoreAcid => true;
     public override bool IgnoreCold => true;
     public override bool IgnoreElec => true;

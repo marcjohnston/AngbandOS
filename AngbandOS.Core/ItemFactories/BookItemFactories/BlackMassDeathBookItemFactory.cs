@@ -19,7 +19,6 @@ internal class BlackMassDeathBookItemFactory : BookItemFactory
     public override int Cost => 1000;
     public override int DamageDice => 1;
     public override int DamageSides => 1;
-    public override string FriendlyName => "[Black Mass]";
     public override string CodedName => "& Death Spellbook~ [Black Mass]";
     public override int LevelNormallyFound => 20;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

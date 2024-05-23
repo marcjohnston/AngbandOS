@@ -16,7 +16,7 @@ internal class RestoreConstitutionMushroomFoodItemFactory : ItemFactory
     public override string Name => "Restore Constitution";
 
     public override int Cost => 350;
-    public override string FriendlyName => "Restore Constitution";
+    public override string CodedName => "Restore Constitution";
     public override int LevelNormallyFound => 20;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

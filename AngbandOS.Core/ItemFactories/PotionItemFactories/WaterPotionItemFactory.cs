@@ -21,7 +21,7 @@ internal class WaterPotionItemFactory : PotionItemFactory
     public override int Cost => 1;
     public override int DamageDice => 1;
     public override int DamageSides => 1;
-    public override string FriendlyName => "Water";
+    public override string CodedName => "Water";
     public override int InitialNutritionalValue => 200;
     public override int Weight => 4;
 

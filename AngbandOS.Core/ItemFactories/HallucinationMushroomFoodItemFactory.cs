@@ -19,7 +19,7 @@ internal class HallucinationMushroomFoodItemFactory : ItemFactory
     protected override string SymbolName => nameof(CommaSymbol);
     public override string Name => "Hallucination";
 
-    public override string FriendlyName => "Hallucination";
+    public override string CodedName => "Hallucination";
     public override int LevelNormallyFound => 10;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

@@ -21,7 +21,7 @@ internal class LoseMemoriesPotionItemFactory : PotionItemFactory
 
     public override int DamageDice => 1;
     public override int DamageSides => 1;
-    public override string FriendlyName => "Lose Memories";
+    public override string CodedName => "Lose Memories";
     public override int LevelNormallyFound => 10;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

@@ -17,7 +17,7 @@ internal class FearResistanceRingItemFactory : RingItemFactory
 
     public override int Cost => 300;
     public override bool EasyKnow => true;
-    public override string FriendlyName => "Fear Resistance";
+    public override string CodedName => "Fear Resistance";
     public override int LevelNormallyFound => 10;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

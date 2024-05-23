@@ -20,7 +20,7 @@ internal class TreasureDetectionScrollItemFactory : ScrollItemFactory
         (0, 1)
     };
     public override int Cost => 15;
-    public override string FriendlyName => "Treasure Detection";
+    public override string CodedName => "Treasure Detection";
     public override int Weight => 5;
 
     public override void Read(ReadScrollEvent eventArgs)

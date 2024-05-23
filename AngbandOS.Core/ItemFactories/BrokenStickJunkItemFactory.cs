@@ -26,7 +26,7 @@ internal class BrokenStickJunkItemFactory : ItemFactory
     };
     public override int DamageDice => 1;
     public override int DamageSides => 1;
-    public override string FriendlyName => "& Broken Stick~";
+    public override string CodedName => "& Broken Stick~";
     public override int Weight => 3;
     protected override string ItemClassName => nameof(JunkItemClass);
     public override int PackSort => 38;

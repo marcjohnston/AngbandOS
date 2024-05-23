@@ -19,7 +19,6 @@ internal class EltdownShardsTarotBookItemFactory : BookItemFactory
     public override int Cost => 25000;
     public override int DamageDice => 1;
     public override int DamageSides => 1;
-    public override string FriendlyName => "[Eltdown Shards]";
     public override string CodedName => "& Tarot Spellbook~ [Eltdown Shards]";
     public override bool IgnoreAcid => true;
     public override bool IgnoreCold => true;

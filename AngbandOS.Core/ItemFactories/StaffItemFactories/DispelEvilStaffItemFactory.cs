@@ -19,7 +19,7 @@ internal class DispelEvilStaffItemFactory : StaffItemFactory
     public override int Cost => 1200;
     public override int DamageDice => 1;
     public override int DamageSides => 2;
-    public override string FriendlyName => "Dispel Evil";
+    public override string CodedName => "Dispel Evil";
     public override int LevelNormallyFound => 50;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

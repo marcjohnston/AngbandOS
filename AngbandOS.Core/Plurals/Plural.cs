@@ -1,6 +1,7 @@
 using System.Text.Json;
 
 namespace AngbandOS.Core.Plurals;
+
 [Serializable]
 internal abstract class Plural : IGetKey
 {

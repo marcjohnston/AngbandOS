@@ -24,7 +24,7 @@ internal class PseudoDragonScaleMailArmorItemFactory : DragonScaleMailArmorItemF
     public override int Cost => 60000;
     public override int DamageDice => 2;
     public override int DamageSides => 4;
-    public override string FriendlyName => "Pseudo Dragon Scale Mail~";
+    public override string CodedName => "Pseudo Dragon Scale Mail~";
     public override bool IgnoreAcid => true;
     public override bool IgnoreCold => true;
     public override bool IgnoreElec => true;

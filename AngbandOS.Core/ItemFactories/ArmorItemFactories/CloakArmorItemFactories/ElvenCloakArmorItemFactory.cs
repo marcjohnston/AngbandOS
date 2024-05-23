@@ -45,7 +45,7 @@ internal class ElvenCloakArmorItemFactory : CloakArmorItemFactory
 
     public override int ArmorClass => 4;
     public override int Cost => 1500;
-    public override string FriendlyName => "& Elven Cloak~";
+    public override string CodedName => "& Elven Cloak~";
     public override bool IgnoreAcid => true;
     public override bool IgnoreCold => true;
     public override bool IgnoreElec => true;

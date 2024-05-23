@@ -25,7 +25,7 @@ internal class BlindnessPotionItemFactory : PotionItemFactory
     };
     public override int DamageDice => 1;
     public override int DamageSides => 1;
-    public override string FriendlyName => "Blindness";
+    public override string CodedName => "Blindness";
     public override int Weight => 4;
 
     public override bool Quaff()

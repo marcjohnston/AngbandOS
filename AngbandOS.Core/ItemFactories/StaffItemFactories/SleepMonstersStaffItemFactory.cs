@@ -18,7 +18,7 @@ internal class SleepMonstersStaffItemFactory : StaffItemFactory
     public override int Cost => 700;
     public override int DamageDice => 1;
     public override int DamageSides => 2;
-    public override string FriendlyName => "Sleep Monsters";
+    public override string CodedName => "Sleep Monsters";
     public override int LevelNormallyFound => 10;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

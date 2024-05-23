@@ -19,7 +19,7 @@ internal class MaceHaftedWeaponItemFactory : MeleeWeaponItemFactory
     public override int Cost => 130;
     public override int DamageDice => 2;
     public override int DamageSides => 4;
-    public override string FriendlyName => "& Mace~";
+    public override string CodedName => "& Mace~";
     public override int LevelNormallyFound => 5;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

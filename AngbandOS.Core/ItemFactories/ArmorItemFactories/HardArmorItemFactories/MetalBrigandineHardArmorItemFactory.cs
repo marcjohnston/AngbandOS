@@ -20,7 +20,7 @@ internal class MetalBrigandineHardArmorItemFactory : HardArmorItemFactory
     public override int Cost => 1100;
     public override int DamageDice => 1;
     public override int DamageSides => 4;
-    public override string FriendlyName => "Metal Brigandine Armor~";
+    public override string CodedName => "Metal Brigandine Armor~";
     public override int LevelNormallyFound => 35;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

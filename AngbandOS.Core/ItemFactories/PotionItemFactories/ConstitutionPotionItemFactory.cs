@@ -18,7 +18,7 @@ internal class ConstitutionPotionItemFactory : PotionItemFactory
     public override int Cost => 8000;
     public override int DamageDice => 1;
     public override int DamageSides => 1;
-    public override string FriendlyName => "Constitution";
+    public override string CodedName => "Constitution";
     public override int LevelNormallyFound => 20;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

@@ -19,7 +19,7 @@ internal class HealingStaffItemFactory : StaffItemFactory
     public override int Cost => 5000;
     public override int DamageDice => 1;
     public override int DamageSides => 2;
-    public override string FriendlyName => "Healing";
+    public override string CodedName => "Healing";
     public override int LevelNormallyFound => 70;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

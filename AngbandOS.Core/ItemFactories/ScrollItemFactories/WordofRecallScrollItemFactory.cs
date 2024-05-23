@@ -16,7 +16,7 @@ internal class WordOfRecallScrollItemFactory : ScrollItemFactory
     public override string Name => "Word of Recall";
 
     public override int Cost => 150;
-    public override string FriendlyName => "Word of Recall";
+    public override string CodedName => "Word of Recall";
     public override int LevelNormallyFound => 5;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

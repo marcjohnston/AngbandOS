@@ -19,7 +19,7 @@ internal class SmallSwordWeaponItemFactory : MeleeWeaponItemFactory
     public override int Cost => 48;
     public override int DamageDice => 1;
     public override int DamageSides => 6;
-    public override string FriendlyName => "& Small Sword~";
+    public override string CodedName => "& Small Sword~";
     public override int LevelNormallyFound => 5;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

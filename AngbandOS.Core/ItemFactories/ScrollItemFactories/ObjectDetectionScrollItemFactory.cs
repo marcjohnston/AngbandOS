@@ -20,7 +20,7 @@ internal class ObjectDetectionScrollItemFactory : ScrollItemFactory
         (0, 1)
     };
     public override int Cost => 15;
-    public override string FriendlyName => "Object Detection";
+    public override string CodedName => "Object Detection";
     public override int Weight => 5;
 
     public override void Read(ReadScrollEvent eventArgs)

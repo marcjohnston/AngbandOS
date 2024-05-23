@@ -16,7 +16,7 @@ internal class DispelUndeadScrollItemFactory : ScrollItemFactory
     public override string Name => "Dispel Undead";
 
     public override int Cost => 200;
-    public override string FriendlyName => "Dispel Undead";
+    public override string CodedName => "Dispel Undead";
     public override int LevelNormallyFound => 40;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

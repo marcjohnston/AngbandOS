@@ -17,7 +17,7 @@ internal class ResistAcidAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
 
     public override int Cost => 300;
     public override bool EasyKnow => true;
-    public override string FriendlyName => "Resist Acid";
+    public override string CodedName => "Resist Acid";
     public override bool IgnoreAcid => true;
     public override int LevelNormallyFound => 20;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

@@ -19,7 +19,7 @@ internal class JewelEncrustedCrownArmorItemFactory : CrownArmorItemFactory
     public override int Cost => 2000;
     public override int DamageDice => 1;
     public override int DamageSides => 1;
-    public override string FriendlyName => "& Jewel Encrusted Crown~";
+    public override string CodedName => "& Jewel Encrusted Crown~";
     public override bool IgnoreAcid => true;
     public override int LevelNormallyFound => 50;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

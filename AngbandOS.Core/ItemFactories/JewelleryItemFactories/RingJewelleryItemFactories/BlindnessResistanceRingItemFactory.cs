@@ -17,7 +17,7 @@ internal class BlindnessResistanceRingItemFactory : RingItemFactory
 
     public override int Cost => 7500;
     public override bool EasyKnow => true;
-    public override string FriendlyName => "Blindness Resistance";
+    public override string CodedName => "Blindness Resistance";
     public override int LevelNormallyFound => 60;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

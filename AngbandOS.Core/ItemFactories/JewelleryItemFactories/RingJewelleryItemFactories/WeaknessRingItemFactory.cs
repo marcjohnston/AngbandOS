@@ -20,7 +20,7 @@ internal class WeaknessRingItemFactory : RingItemFactory
     public override string Name => "Weakness";
 
     public override bool Cursed => true;
-    public override string FriendlyName => "Weakness";
+    public override string CodedName => "Weakness";
     public override bool HideType => true;
     public override int LevelNormallyFound => 5;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

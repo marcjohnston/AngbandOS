@@ -19,7 +19,7 @@ internal class RecallRodItemFactory : RodItemFactory
     public override int Cost => 4000;
     public override int DamageDice => 1;
     public override int DamageSides => 1;
-    public override string FriendlyName => "Recall";
+    public override string CodedName => "Recall";
     public override int LevelNormallyFound => 30;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

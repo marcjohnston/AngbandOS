@@ -20,7 +20,7 @@ internal class AdamantitePlateMailHardArmorItemFactory : HardArmorItemFactory
     public override int Cost => 20000;
     public override int DamageDice => 2;
     public override int DamageSides => 4;
-    public override string FriendlyName => "Adamantite Plate Mail~";
+    public override string CodedName => "Adamantite Plate Mail~";
     public override bool IgnoreAcid => true;
     public override int LevelNormallyFound => 75;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

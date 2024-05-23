@@ -17,7 +17,7 @@ internal class PoisonResistanceRingItemFactory : RingItemFactory
 
     public override int Cost => 16000;
     public override bool EasyKnow => true;
-    public override string FriendlyName => "Poison Resistance";
+    public override string CodedName => "Poison Resistance";
     public override int LevelNormallyFound => 60;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

@@ -19,7 +19,7 @@ internal class HavocRodItemFactory : RodItemFactory
     public override int Cost => 150000;
     public override int DamageDice => 1;
     public override int DamageSides => 1;
-    public override string FriendlyName => "Havoc";
+    public override string CodedName => "Havoc";
     public override int LevelNormallyFound => 95;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

@@ -23,7 +23,7 @@ internal class PowerRingItemFactory : RingItemFactory
     }
 
     public override int Cost => 5000000;
-    public override string FriendlyName => "Power";
+    public override string CodedName => "Power";
     public override bool InstaArt => true;
     public override int LevelNormallyFound => 110;
     public override int Weight => 2;

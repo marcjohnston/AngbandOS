@@ -19,7 +19,7 @@ internal class ObjectLocationStaffItemFactory : StaffItemFactory
     public override int Cost => 200;
     public override int DamageDice => 1;
     public override int DamageSides => 2;
-    public override string FriendlyName => "Object Location";
+    public override string CodedName => "Object Location";
     public override int LevelNormallyFound => 5;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

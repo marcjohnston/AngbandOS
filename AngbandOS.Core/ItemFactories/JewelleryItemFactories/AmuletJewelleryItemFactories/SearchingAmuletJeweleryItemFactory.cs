@@ -27,7 +27,7 @@ internal class SearchingAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
         }
     }
     public override int Cost => 600;
-    public override string FriendlyName => "Searching";
+    public override string CodedName => "Searching";
     public override bool HideType => true;
     public override int LevelNormallyFound => 30;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

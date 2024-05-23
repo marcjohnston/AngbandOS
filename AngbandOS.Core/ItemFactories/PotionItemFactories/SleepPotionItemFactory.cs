@@ -25,7 +25,7 @@ internal class SleepPotionItemFactory : PotionItemFactory
     };
     public override int DamageDice => 1;
     public override int DamageSides => 1;
-    public override string FriendlyName => "Sleep";
+    public override string CodedName => "Sleep";
     public override int InitialNutritionalValue => 100;
     public override int Weight => 4;
 

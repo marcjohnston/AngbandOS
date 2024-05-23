@@ -27,7 +27,7 @@ internal class SlimeMoldJuicePotionItemFactory : PotionItemFactory
     public override int Cost => 2;
     public override int DamageDice => 1;
     public override int DamageSides => 1;
-    public override string FriendlyName => "Slime Mold Juice";
+    public override string CodedName => "Slime Mold Juice";
     public override int InitialNutritionalValue => 400;
     public override int Weight => 4;
     public override bool Quaff()

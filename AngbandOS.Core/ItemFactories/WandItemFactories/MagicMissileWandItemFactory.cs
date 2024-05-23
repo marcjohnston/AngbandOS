@@ -19,7 +19,7 @@ internal class MagicMissileWandItemFactory : WandItemFactory
     public override int Cost => 200;
     public override int DamageDice => 1;
     public override int DamageSides => 1;
-    public override string FriendlyName => "Magic Missile";
+    public override string CodedName => "Magic Missile";
     public override int LevelNormallyFound => 2;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

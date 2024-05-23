@@ -16,7 +16,7 @@ internal class DetectInvisibleScrollItemFactory : ScrollItemFactory
     public override string Name => "Detect Invisible";
 
     public override int Cost => 15;
-    public override string FriendlyName => "Detect Invisible";
+    public override string CodedName => "Detect Invisible";
     public override int LevelNormallyFound => 1;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

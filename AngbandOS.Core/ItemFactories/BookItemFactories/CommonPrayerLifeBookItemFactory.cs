@@ -18,7 +18,6 @@ internal class CommonPrayerLifeBookItemFactory : BookItemFactory
     public override int Cost => 100;
     public override int DamageDice => 1;
     public override int DamageSides => 1;
-    public override string FriendlyName => "[Book of Common Prayer]";
     public override string CodedName => "& Life Spellbook~ [Book of Common Prayer]";
     public override int LevelNormallyFound => 10;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

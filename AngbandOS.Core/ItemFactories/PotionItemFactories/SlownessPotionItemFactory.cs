@@ -21,7 +21,7 @@ internal class SlownessPotionItemFactory : PotionItemFactory
 
     public override int DamageDice => 1;
     public override int DamageSides => 1;
-    public override string FriendlyName => "Slowness";
+    public override string CodedName => "Slowness";
     public override int LevelNormallyFound => 1;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

@@ -17,7 +17,7 @@ internal class NexusResistanceRingItemFactory : RingItemFactory
 
     public override int Cost => 3000;
     public override bool EasyKnow => true;
-    public override string FriendlyName => "Nexus Resistance";
+    public override string CodedName => "Nexus Resistance";
     public override int LevelNormallyFound => 24;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

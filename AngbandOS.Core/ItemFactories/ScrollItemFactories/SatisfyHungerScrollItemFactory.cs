@@ -16,7 +16,7 @@ internal class SatisfyHungerScrollItemFactory : ScrollItemFactory
     public override string Name => "Satisfy Hunger";
 
     public override int Cost => 10;
-    public override string FriendlyName => "Satisfy Hunger";
+    public override string CodedName => "Satisfy Hunger";
     public override int LevelNormallyFound => 5;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

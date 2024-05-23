@@ -30,7 +30,7 @@ internal class GemstoneLightSourceItemFactory : LightSourceItemFactory
     public override int Cost => 60000;
     public override int DamageDice => 1;
     public override int DamageSides => 1;
-    public override string FriendlyName => "& Gemstone~"; // TODO: This appears to cause a defect in identification
+    public override string CodedName => "& Gemstone~"; // TODO: This appears to cause a defect in identification
     public override bool InstaArt => true;
     public override int LevelNormallyFound => 60;
     public override int Weight => 5;

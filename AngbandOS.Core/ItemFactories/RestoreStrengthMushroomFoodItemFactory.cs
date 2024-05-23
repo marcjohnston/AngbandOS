@@ -16,7 +16,7 @@ internal class RestoreStrengthMushroomFoodItemFactory : ItemFactory
     public override string Name => "Restore Strength";
 
     public override int Cost => 350;
-    public override string FriendlyName => "Restore Strength";
+    public override string CodedName => "Restore Strength";
     public override int LevelNormallyFound => 20;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

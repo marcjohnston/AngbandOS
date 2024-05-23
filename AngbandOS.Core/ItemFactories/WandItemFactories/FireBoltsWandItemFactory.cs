@@ -19,7 +19,7 @@ internal class FireBoltsWandItemFactory : WandItemFactory
     public override int Cost => 1000;
     public override int DamageDice => 1;
     public override int DamageSides => 1;
-    public override string FriendlyName => "Fire Bolts";
+    public override string CodedName => "Fire Bolts";
     public override int LevelNormallyFound => 30;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

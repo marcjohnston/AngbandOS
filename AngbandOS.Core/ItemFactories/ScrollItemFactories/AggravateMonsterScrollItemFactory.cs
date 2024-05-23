@@ -18,7 +18,7 @@ internal class AggravateMonsterScrollItemFactory : ScrollItemFactory
     protected override string SymbolName => nameof(QuestionMarkSymbol);
     public override string Name => "Aggravate Monster";
 
-    public override string FriendlyName => "Aggravate Monster";
+    public override string CodedName => "Aggravate Monster";
     public override int LevelNormallyFound => 5;
     // AngbandOS: 2022 Marc Johnston
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

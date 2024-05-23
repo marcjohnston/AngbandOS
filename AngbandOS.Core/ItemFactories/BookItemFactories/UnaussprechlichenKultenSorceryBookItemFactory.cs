@@ -19,7 +19,6 @@ internal class UnaussprechlichenKultenSorceryBookItemFactory : BookItemFactory
     public override int Cost => 25000;
     public override int DamageDice => 1;
     public override int DamageSides => 1;
-    public override string FriendlyName => "[Unaussprechlichen Kulten]";
     public override string CodedName => "& Sorcery Spellbook~ [Unaussprechlichen Kulten]";
     public override bool IgnoreAcid => true;
     public override bool IgnoreCold => true;

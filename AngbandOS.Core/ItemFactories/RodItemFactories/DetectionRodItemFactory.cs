@@ -19,7 +19,7 @@ internal class DetectionRodItemFactory : RodItemFactory
     public override int Cost => 5000;
     public override int DamageDice => 1;
     public override int DamageSides => 1;
-    public override string FriendlyName => "Detection";
+    public override string CodedName => "Detection";
     public override int LevelNormallyFound => 30;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

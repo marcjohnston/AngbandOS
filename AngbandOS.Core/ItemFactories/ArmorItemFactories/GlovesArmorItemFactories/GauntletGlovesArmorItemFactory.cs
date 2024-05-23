@@ -20,7 +20,7 @@ internal class GauntletGlovesArmorItemFactory : GlovesArmorItemFactory
     public override int Cost => 35;
     public override int DamageDice => 1;
     public override int DamageSides => 1;
-    public override string FriendlyName => "& Set~ of Gauntlets";
+    public override string CodedName => "& Set~ of Gauntlets";
     public override int LevelNormallyFound => 10;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

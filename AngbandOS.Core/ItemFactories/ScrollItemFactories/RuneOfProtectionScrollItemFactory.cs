@@ -16,7 +16,7 @@ internal class RuneOfProtectionScrollItemFactory : ScrollItemFactory
     public override string Name => "Rune of Protection";
 
     public override int Cost => 500;
-    public override string FriendlyName => "Rune of Protection";
+    public override string CodedName => "Rune of Protection";
     public override int LevelNormallyFound => 50;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

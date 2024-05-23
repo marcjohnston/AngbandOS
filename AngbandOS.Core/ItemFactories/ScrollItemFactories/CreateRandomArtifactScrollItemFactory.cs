@@ -16,7 +16,7 @@ internal class CreateRandomArtifactScrollItemFactory : ScrollItemFactory
     public override string Name => "Artifact Creation";
 
     public override int Cost => 200000;
-    public override string FriendlyName => "Artifact Creation";
+    public override string CodedName => "Artifact Creation";
     public override int LevelNormallyFound => 70;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

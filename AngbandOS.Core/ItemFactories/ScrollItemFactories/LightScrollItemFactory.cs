@@ -16,7 +16,7 @@ internal class LightScrollItemFactory : ScrollItemFactory
     public override string Name => "Light";
 
     public override int Cost => 15;
-    public override string FriendlyName => "Light";
+    public override string CodedName => "Light";
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {
         (0, 1),

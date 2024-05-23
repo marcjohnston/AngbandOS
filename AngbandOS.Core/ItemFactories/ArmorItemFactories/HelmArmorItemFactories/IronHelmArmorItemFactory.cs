@@ -20,7 +20,7 @@ internal class IronHelmArmorItemFactory : HelmArmorItemFactory
     public override int Cost => 75;
     public override int DamageDice => 1;
     public override int DamageSides => 3;
-    public override string FriendlyName => "& Iron Helm~";
+    public override string CodedName => "& Iron Helm~";
     public override int LevelNormallyFound => 20;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

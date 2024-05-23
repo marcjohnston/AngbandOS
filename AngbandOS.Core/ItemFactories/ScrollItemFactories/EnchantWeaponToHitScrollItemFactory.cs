@@ -16,7 +16,7 @@ internal class EnchantWeaponToHitScrollItemFactory : ScrollItemFactory
     public override string Name => "Enchant Weapon To-Hit";
 
     public override int Cost => 125;
-    public override string FriendlyName => "Enchant Weapon To-Hit";
+    public override string CodedName => "Enchant Weapon To-Hit";
     public override int LevelNormallyFound => 15;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

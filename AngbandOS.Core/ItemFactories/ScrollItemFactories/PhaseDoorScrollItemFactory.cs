@@ -16,7 +16,7 @@ internal class PhaseDoorScrollItemFactory : ScrollItemFactory
     public override string Name => "Phase Door";
 
     public override int Cost => 15;
-    public override string FriendlyName => "Phase Door";
+    public override string CodedName => "Phase Door";
     public override int LevelNormallyFound => 1;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

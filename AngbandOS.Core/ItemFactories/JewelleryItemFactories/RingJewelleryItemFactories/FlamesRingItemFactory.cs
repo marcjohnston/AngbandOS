@@ -33,7 +33,7 @@ internal class FlamesRingItemFactory : RingItemFactory, IItemsCanBeActivated
     }
     public override bool Activate => true;
     public override int Cost => 3000;
-    public override string FriendlyName => "Flames";
+    public override string CodedName => "Flames";
     public override bool IgnoreFire => true;
     public override int LevelNormallyFound => 50;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

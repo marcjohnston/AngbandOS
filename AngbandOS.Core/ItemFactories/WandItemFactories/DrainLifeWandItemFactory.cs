@@ -19,7 +19,7 @@ internal class DrainLifeWandItemFactory : WandItemFactory
     public override int Cost => 1200;
     public override int DamageDice => 1;
     public override int DamageSides => 1;
-    public override string FriendlyName => "Drain Life";
+    public override string CodedName => "Drain Life";
     public override int LevelNormallyFound => 50;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

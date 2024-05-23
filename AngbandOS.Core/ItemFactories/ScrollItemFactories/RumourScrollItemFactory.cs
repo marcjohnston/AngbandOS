@@ -16,7 +16,7 @@ internal class RumourScrollItemFactory : ScrollItemFactory
     public override string Name => "Rumour";
 
     public override int Cost => 10;
-    public override string FriendlyName => "Rumour";
+    public override string CodedName => "Rumour";
     public override int LevelNormallyFound => 1;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

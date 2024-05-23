@@ -20,7 +20,7 @@ internal class RibbedPlateHardArmorItemFactory : HardArmorItemFactory
     public override int Cost => 1500;
     public override int DamageDice => 2;
     public override int DamageSides => 4;
-    public override string FriendlyName => "Ribbed Plate Armor~";
+    public override string CodedName => "Ribbed Plate Armor~";
     public override int LevelNormallyFound => 50;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

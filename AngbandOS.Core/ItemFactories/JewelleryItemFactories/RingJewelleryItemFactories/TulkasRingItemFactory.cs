@@ -16,7 +16,7 @@ internal class TulkasRingItemFactory : RingItemFactory
     public override string Name => "Tulkas";
 
     public override int Cost => 150000;
-    public override string FriendlyName => "& Ring~"; // TODO: This appears to cause a defect in identification
+    public override string CodedName => "& Ring~"; // TODO: This appears to cause a defect in identification
     public override bool InstaArt => true;
     public override int LevelNormallyFound => 90;
     public override int Weight => 2;

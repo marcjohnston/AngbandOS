@@ -16,7 +16,7 @@ internal class ProtectionfromEvilScrollItemFactory : ScrollItemFactory
     public override string Name => "Protection from Evil";
 
     public override int Cost => 250;
-    public override string FriendlyName => "Protection from Evil";
+    public override string CodedName => "Protection from Evil";
     public override int LevelNormallyFound => 30;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {
