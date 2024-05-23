@@ -995,7 +995,7 @@ internal class JournalScript : Script, IScript, IRepeatableScript, IScriptStore
                 {
                     WorthlessItemTypeSelection(Game.SingletonRepository.Get<ItemClass>().First(_itemClass => Game.Pluralize(_itemClass.Name) == _menuItem[menu]));
                     BuildMenuForForWorthlessItems();
-                    _menuLength = Game.SingletonRepository.Get<ItemClass>().Length - 1;
+                    //_menuLength = Game.SingletonRepository.Get<ItemClass>().Length - 1;
                     break;
                 }
                 if (c == '4')
@@ -1044,14 +1044,6 @@ internal class JournalScript : Script, IScript, IRepeatableScript, IScriptStore
             Game.Screen.Print(a, _menuItem[i], row, 2);
         }
         Game.Screen.Print(descColor, desc, 25, 33);
-    }
-
-    private string StripDownName(string name)
-    {
-        string val = name.Replace("~", "");
-        val = val.Replace("%", "");
-        val = val.Replace("&", "");
-        return val.Trim();
     }
 
     private void WorthlessItemChestSelection(ItemFactory kPtr)
@@ -1150,7 +1142,7 @@ internal class JournalScript : Script, IScript, IRepeatableScript, IScriptStore
                 {
                     continue;
                 }
-                _menuItem[_menuLength] = StripDownName(itemFactory.FriendlyName);
+                _menuItem[_menuLength] = itemFactory.Name; 
                 if (!itemFactory.AskDestroyAll)
                 {
                     _menuColors[_menuLength] = ColorEnum.Blue;
@@ -1197,7 +1189,7 @@ internal class JournalScript : Script, IScript, IRepeatableScript, IScriptStore
                                 {
                                     continue;
                                 }
-                                _menuItem[_menuLength] = StripDownName(itemFactory.FriendlyName);
+                                _menuItem[_menuLength] = itemFactory.Name;
                                 _menuColors[_menuLength] = ColorEnum.Blue;
                                 _menuIndices[_menuLength] = i;
                                 _menuLength++;
