@@ -36,19 +36,12 @@ internal abstract class BookItemFactory : ItemFactory
     /// </summary>
     public override bool EasyKnow => true;
 
-    public abstract string RealmName { get; }
+ //   public abstract string RealmName { get; }
 
     /// <summary>
     /// Returns the divine title for the book to be returned as the description.  The divine title defaults to the realm name with a "Magic" suffix.
     /// </summary>
-    public virtual string DivineTitle => $"{RealmName} Magic";
-
-    public override string GetDescription(Item item, bool includeCountPrefix, bool isFlavorAware)
-    {
-        string name = Game.BaseCharacterClass.GetBookTitle(item);
-        name = $"{name} {FriendlyName}";
-        return includeCountPrefix ? GetPrefixCount(true, name, item.Count, item.IsKnownArtifact) : name;
-    }
+//    public override string DivineTitle => $"{RealmName} Magic";
 
     protected override (int, string)[]? MassProduceTupleNames => new (int, string)[]
     {

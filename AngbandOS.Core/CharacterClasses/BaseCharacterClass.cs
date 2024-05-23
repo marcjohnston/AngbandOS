@@ -16,11 +16,11 @@ internal abstract class BaseCharacterClass : IGetKey
         Game = game;
     }
 
-    public virtual string GetBookTitle(Item bookItem)
-    {
-        BookItemFactory bookItemFactory = (BookItemFactory)bookItem.Factory;
-        return $"{bookItemFactory.RealmName} {Game.CountPluralize("Spellbook", bookItem.Count)}";
-    }
+    /// <summary>
+    /// Returns true, for classes that are divine; false, otherwise.  Returns false, by default. Divine classes may render item descriptions differently for
+    /// some items.  Druid, Fanatic, Monk, Priest and Ranger classes are return true.  Spellbooks are rendered differently for divine classes.
+    /// </summary>
+    public virtual bool IsDivine => false;
 
     public virtual void Cast() => CastSpell();
 

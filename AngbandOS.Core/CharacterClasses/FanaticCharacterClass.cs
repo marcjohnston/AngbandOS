@@ -63,11 +63,10 @@ internal class FanaticCharacterClass : BaseCharacterClass
     /// </summary>
     public override string CastVerb => "recite";
 
-    public override string GetBookTitle(Item bookItem)
-    {
-        BookItemFactory bookItemFactory = (BookItemFactory)bookItem.Factory;
-        return $"{Game.CountPluralize("Book", bookItem.Count)} of {bookItemFactory.DivineTitle}";
-    }
+    /// <summary>
+    /// Returns true, because the Fanatic class is divine and spellbooks should render as a simple book.
+    /// </summary>
+    public override bool IsDivine => true;
 
     public override int SpellStat => Ability.Intelligence;
     public override int MaximumWeight => 30;

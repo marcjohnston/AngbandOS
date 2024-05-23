@@ -20,6 +20,7 @@ internal class GharneFragmentsChaosBookItemFactory : BookItemFactory
     public override int DamageDice => 1;
     public override int DamageSides => 1;
     public override string FriendlyName => "[G'harne Fragments]";
+    public override string CodedName => "& Chaos Spellbook~ [G'harne Fragments]";
     public override bool IgnoreAcid => true;
     public override bool IgnoreCold => true;
     public override bool IgnoreElec => true;
@@ -50,7 +51,7 @@ internal class GharneFragmentsChaosBookItemFactory : BookItemFactory
         nameof(ChaosSpellSummonDemon)
     };
     protected override string ItemClassName => nameof(ChaosSpellBooksItemClass);
-    public override string RealmName => "Chaos";
+    public override string? CodedDivineName => $"& Book~ of Chaos Magic";
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.ChaosBook;
     public override int PackSort => 5;
     public override bool HatesFire => true;

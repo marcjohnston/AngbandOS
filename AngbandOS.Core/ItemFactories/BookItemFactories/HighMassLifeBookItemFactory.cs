@@ -19,6 +19,7 @@ internal class HighMassLifeBookItemFactory : BookItemFactory
     public override int DamageDice => 1;
     public override int DamageSides => 1;
     public override string FriendlyName => "[High Mass]";
+    public override string CodedName => "& Life Spellbook~ [High Mass]";
     public override int LevelNormallyFound => 20;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {
@@ -39,7 +40,7 @@ internal class HighMassLifeBookItemFactory : BookItemFactory
         nameof(LifeSpellElderSign)
     };
     protected override string ItemClassName => nameof(LifeSpellBooksItemClass);
-    public override string RealmName => "Life";
+    public override string? CodedDivineName => $"& Book~ of Life Magic";
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.LifeBook;
     public override bool HatesFire => true;
     public override int PackSort => 8;

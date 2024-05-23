@@ -20,6 +20,7 @@ internal class NatureMasteryNatureBookItemFactory : BookItemFactory
     public override int DamageDice => 1;
     public override int DamageSides => 1;
     public override string FriendlyName => "[Nature Mastery]";
+    public override string CodedName => "& Nature Spellbook~ [Nature Mastery]";
     public override int LevelNormallyFound => 20;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {
@@ -41,7 +42,7 @@ internal class NatureMasteryNatureBookItemFactory : BookItemFactory
     };
     protected override string ItemClassName => nameof(NatureSpellBooksItemClass);
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.NatureBook;
-    public override string RealmName => "Nature";
+    public override string? CodedDivineName => $"& Book~ of Nature Magic";
 
     public override int PackSort => 6;
     public override bool HatesFire => true;

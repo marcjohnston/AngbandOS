@@ -20,6 +20,7 @@ internal class SignOfChaosChaosBookItemFactory : BookItemFactory
     public override int DamageDice => 1;
     public override int DamageSides => 1;
     public override string FriendlyName => "[Sign of Chaos]";
+    public override string CodedName => "& Chaos Spellbook~ [Sign of Chaos]";
     public override int LevelNormallyFound => 10;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {
@@ -40,7 +41,7 @@ internal class SignOfChaosChaosBookItemFactory : BookItemFactory
         nameof(ChaosSpellTeleportSelf)
     };
     protected override string ItemClassName => nameof(ChaosSpellBooksItemClass);
-    public override string RealmName => "Chaos";
+    public override string? CodedDivineName => $"& Book~ of Chaos Magic";
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.ChaosBook;
     public override int PackSort => 5;
     public override bool HatesFire => true;

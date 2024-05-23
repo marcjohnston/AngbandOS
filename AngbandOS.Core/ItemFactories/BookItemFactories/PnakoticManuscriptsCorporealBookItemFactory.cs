@@ -26,6 +26,7 @@ internal class PnakoticManuscriptsCorporealBookItemFactory : BookItemFactory
     public override int DamageDice => 1;
     public override int DamageSides => 1;
     public override string FriendlyName => "[Pnakotic Manuscripts]";
+    public override string CodedName => "& Corporeal Spellbook~ [Pnakotic Manuscripts]";
     public override bool IgnoreAcid => true;
     public override bool IgnoreCold => true;
     public override bool IgnoreElec => true;
@@ -56,7 +57,7 @@ internal class PnakoticManuscriptsCorporealBookItemFactory : BookItemFactory
    };
     protected override string ItemClassName => nameof(CorporealSpellBooksItemClass);
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.CorporealBook;
-    public override string RealmName => "Corporeal";
+    public override string? CodedDivineName => "& Book~ of Corporeal Magic";
     public override int PackSort => 1;
     public override bool HatesFire => true;
 }

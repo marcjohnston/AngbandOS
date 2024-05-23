@@ -219,21 +219,58 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey
     }
 
     /// <summary>
+    /// Returns true, if an flavor unknown item is titled with the flavor; false, otherwise.  Returns false, by default.  All flavored items are typically 
+    /// identified as "a flavor item" (e.g. an adamite ring).  Item factories with items titled with flavor read like scrolls (e.g. a scroll titled 'ads adds-dgg').
+    /// </summary>
+    public virtual bool ItemIsTitledWithFlavor => false;
+
+    ///// <summary>
+    ///// Returns a coded name for divine character classes for known items; null, if there is no divine name.  Returns null, by default.  Spellbooks have a different
+    ///// divine title.  Druid, Fanatic, Monk, Priest and Ranger classes are divine character classes.
+    ///// </summary>
+    public virtual string? CodedDivineName => null;
+
+    /// <summary>
     /// Returns a description for the item.  Returns a macro processed description, by default.
     /// </summary>
     /// <param name="item"></param>
     /// <param name="includeCountPrefix">Specify true, to include the number of items as the prefix; false, to excluse the count.  Pluralization will still
     /// occur when the count is not included.</param>
     /// <returns></returns>
-    public virtual string GetDescription(Item item, bool includeCountPrefix, bool isFlavorAware)
+    public string GetDescription(Item item, bool includeCountPrefix, bool isFlavorAware)
     {
-        string pluralizedName = ApplyPlurizationMacro(FriendlyName, item.Count);
-        return ApplyGetPrefixCountMacro(includeCountPrefix, pluralizedName, item.Count, item.IsKnownArtifact);
-    }
+        // Check if the item is flavored, is not fixed artifacts and is still unknown.
+        if (ItemClass.HasFlavor && (item.FixedArtifact == null || !isFlavorAware))
+        {
+            string preNameFlavor = "";
+            string postNameFlavor = "";
 
-    public virtual string GetDescription2(Item item, bool includeCountPrefix, bool isFlavorAware)
-    {
-        string pluralizedName = ApplyPlurizationMacro(FriendlyName, item.Count);
+            // Items bought from the store have been identified, but the player cannot use this knowledge to identify items found in the dungeon.
+            if (!item.IdentityIsStoreBought)
+            {
+                // Check to see if the flavor is printed on the item.
+                if (ItemIsTitledWithFlavor)
+                {
+                    postNameFlavor = $" titled \"{Flavor.Name}\"";
+                }
+                else
+                {
+                    preNameFlavor = $"{Flavor.Name} ";
+                }
+            }
+            string ofName = isFlavorAware ? $" of {CodedName}" : "";
+            string pluralizedFlavorName = $"{preNameFlavor}{Game.CountPluralize(ItemClass.Name, item.Count)}{postNameFlavor}{ofName}";
+            return includeCountPrefix ? GetPrefixCount(true, pluralizedFlavorName, item.Count, item.IsKnownArtifact) : pluralizedFlavorName;
+        }
+
+        // Check to see if this known item has a divine title.
+        string name = CodedName;
+        if (CodedDivineName != null && Game.BaseCharacterClass.IsDivine)
+        {
+            name = CodedDivineName;
+        }
+
+        string pluralizedName = ApplyPlurizationMacro(name, item.Count);
         return ApplyGetPrefixCountMacro(includeCountPrefix, pluralizedName, item.Count, item.IsKnownArtifact);
     }
 
@@ -973,7 +1010,10 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey
     public virtual bool EasyKnow { get; set; } = false;
     public virtual bool Feather { get; set; } = false;
     public virtual bool FreeAct { get; set; } = false;
-    public abstract string FriendlyName { get; }
+
+    [Obsolete("Use CodedName")]
+    public abstract string FriendlyName { get; } 
+    public virtual string CodedName => FriendlyName;
     public virtual bool HeavyCurse { get; set; } = false;
     public virtual bool HideType { get; set; } = false;
     public virtual bool HoldLife { get; set; } = false;

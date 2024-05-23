@@ -20,6 +20,7 @@ internal class MajorMagicksFolkBookItemFactory : BookItemFactory
     public override int DamageDice => 1;
     public override int DamageSides => 1;
     public override string FriendlyName => "[Major Magicks]";
+    public override string CodedName => "& Folk Spellbook~ [Major Magicks]";
     public override int LevelNormallyFound => 10;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {
@@ -44,7 +45,7 @@ internal class MajorMagicksFolkBookItemFactory : BookItemFactory
         nameof(FolkSpellSeeInvisible)
     };
     protected override string ItemClassName => nameof(FolkSpellBooksItemClass);
-    public override string RealmName => "Folk";
+    public override string? CodedDivineName => $"& Book~ of Folk Magic";
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.FolkBook;
     public override int PackSort => 2;
     public override bool HatesFire => true;

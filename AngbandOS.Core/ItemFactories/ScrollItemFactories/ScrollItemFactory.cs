@@ -13,13 +13,7 @@ internal abstract class ScrollItemFactory : ItemFactory
     public ScrollItemFactory(Game game) : base(game) { }
     protected override string ItemClassName => nameof(ScrollsItemClass);
 
-    public override string GetDescription(Item item, bool includeCountPrefix, bool isFlavorAware)
-    {
-        string flavor = item.IdentityIsStoreBought ? "" : $" titled \"{Flavor.Name}\"";
-        string ofName = isFlavorAware ? $" of {FriendlyName}" : "";
-        string name = $"{Game.CountPluralize("Scroll", item.Count)}{flavor}{ofName}";
-        return includeCountPrefix ? GetPrefixCount(true, name, item.Count, item.IsKnownArtifact) : name;
-    }
+    public override bool ItemIsTitledWithFlavor => true;
 
     protected override (int, string)[]? MassProduceTupleNames => new (int, string)[]
     {

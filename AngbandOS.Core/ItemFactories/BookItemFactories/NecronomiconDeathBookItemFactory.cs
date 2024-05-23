@@ -26,6 +26,7 @@ internal class NecronomiconDeathBookItemFactory : BookItemFactory
     public override int DamageDice => 1;
     public override int DamageSides => 1;
     public override string FriendlyName => "[Necronomicon]";
+    public override string CodedName => "& Death Spellbook~ [Necronomicon]";
     public override bool IgnoreAcid => true;
     public override bool IgnoreCold => true;
     public override bool IgnoreElec => true;
@@ -55,7 +56,7 @@ internal class NecronomiconDeathBookItemFactory : BookItemFactory
         nameof(DeathSpellWraithform)
     };
     protected override string ItemClassName => nameof(DeathSpellBooksItemClass);
-    public override string RealmName => "Death";
+    public override string? CodedDivineName => $"& Book~ of Death Magic";
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.DeathBook;
     public override bool HatesFire => true;
     public override int PackSort => 4;

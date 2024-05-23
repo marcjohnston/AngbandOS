@@ -5,17 +5,12 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-namespace AngbandOS.Core.ItemFactories;
+namespace AngbandOS.Core.Flavors;
 
 [Serializable]
-internal abstract class MushroomFoodItemFactory : FoodItemFactory
+internal class PlainGoldRingReadableFlavor : RingReadableFlavor
 {
-    public MushroomFoodItemFactory(Game game) : base(game) { }
-
-    protected override string ItemClassName => nameof(MushroomItemClass);
-
-    /// <summary>
-    /// Returns a nutritional value of 500 turns for all mushrooms.
-    /// </summary>
-    public override int InitialNutritionalValue => 500;
+    private PlainGoldRingReadableFlavor(Game game) : base(game) { } // This object is a singleton.
+    protected override string SymbolName => nameof(EqualSignSymbol);
+    public override string Name => "Plain Gold";
 }

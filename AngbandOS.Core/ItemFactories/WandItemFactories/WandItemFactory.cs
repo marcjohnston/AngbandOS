@@ -88,14 +88,6 @@ internal abstract class WandItemFactory : ItemFactory
         oPtr.IdentEmpty = true;
     }
 
-    public override string GetDescription(Item item, bool includeCountPrefix, bool isFlavorAware)
-    {
-        string flavor = item.IdentityIsStoreBought ? "" : $"{Flavor.Name} ";
-        string ofName = isFlavorAware ? $" of {FriendlyName}" : "";
-        string name = $"{flavor}{Game.CountPluralize("Wand", item.Count)}{ofName}";
-        return includeCountPrefix ? GetPrefixCount(true, name, item.Count, item.IsKnownArtifact) : name;
-    }
-
     public override int? GetBonusRealValue(Item item, int value)
     {
         return value / 20 * item.WandChargesRemaining;

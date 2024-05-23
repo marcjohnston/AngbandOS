@@ -20,6 +20,7 @@ internal class BlackMassDeathBookItemFactory : BookItemFactory
     public override int DamageDice => 1;
     public override int DamageSides => 1;
     public override string FriendlyName => "[Black Mass]";
+    public override string CodedName => "& Death Spellbook~ [Black Mass]";
     public override int LevelNormallyFound => 20;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {
@@ -40,7 +41,7 @@ internal class BlackMassDeathBookItemFactory : BookItemFactory
         nameof(DeathSpellRestoreLife)
     };
     protected override string ItemClassName => nameof(DeathSpellBooksItemClass);
-    public override string RealmName => "Death";
+    public override string? CodedDivineName => $"& Book~ of Death Magic";
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.DeathBook;
     public override bool HatesFire => true;
     public override int PackSort => 4;

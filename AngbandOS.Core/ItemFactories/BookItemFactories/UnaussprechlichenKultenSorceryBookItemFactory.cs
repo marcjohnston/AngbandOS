@@ -20,6 +20,7 @@ internal class UnaussprechlichenKultenSorceryBookItemFactory : BookItemFactory
     public override int DamageDice => 1;
     public override int DamageSides => 1;
     public override string FriendlyName => "[Unaussprechlichen Kulten]";
+    public override string CodedName => "& Sorcery Spellbook~ [Unaussprechlichen Kulten]";
     public override bool IgnoreAcid => true;
     public override bool IgnoreCold => true;
     public override bool IgnoreElec => true;
@@ -51,8 +52,7 @@ internal class UnaussprechlichenKultenSorceryBookItemFactory : BookItemFactory
     /// <summary>
     /// Returns just the realm name because Sorcery automatically assumes magic--so we omit the "Magic" suffix from the divine title.
     /// </summary>
-    public override string DivineTitle => RealmName;
-    public override string RealmName => "Sorcery";
+    public override string? CodedDivineName => $"& Book~ of Sorcery Magic";
     protected override string ItemClassName => nameof(SorcerySpellBooksItemClass);
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.SorceryBook;
     public override bool HatesFire => true;

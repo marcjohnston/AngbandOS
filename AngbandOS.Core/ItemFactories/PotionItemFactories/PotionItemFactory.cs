@@ -13,14 +13,6 @@ internal abstract class PotionItemFactory : ItemFactory
     public PotionItemFactory(Game game) : base(game) { }
     protected override string ItemClassName => nameof(PotionsItemClass);
 
-    public override string GetDescription(Item item, bool includeCountPrefix, bool isFlavorAware)
-    {
-        string flavor = item.IdentityIsStoreBought ? "" : $"{Flavor.Name} ";
-        string ofName = isFlavorAware ? $" of {FriendlyName}" : "";
-        string name = $"{flavor}{Game.CountPluralize("Potion", item.Count)}{ofName}";
-        return includeCountPrefix ? GetPrefixCount(true, name, item.Count, item.IsKnownArtifact) : name;
-    }
-
     protected override (int, string)[]? MassProduceTupleNames => new (int, string)[]
     {
         (60, "3d5-3"),

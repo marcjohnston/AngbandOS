@@ -24,6 +24,7 @@ internal class AzathothChaosBookItemFactory : BookItemFactory
     public override int DamageDice => 1;
     public override int DamageSides => 1;
     public override string FriendlyName => "[The Book of Azathoth]";
+    public override string CodedName => "& Chaos Spellbook~ [The Book of Azathoth]";
     public override bool IgnoreAcid => true;
     public override bool IgnoreCold => true;
     public override bool IgnoreElec => true;
@@ -54,8 +55,8 @@ internal class AzathothChaosBookItemFactory : BookItemFactory
         nameof(ChaosSpellCallTheVoid)
     };
     protected override string ItemClassName => nameof(ChaosSpellBooksItemClass);
-    public override string RealmName => "Chaos";
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.ChaosBook;
+    public override string? CodedDivineName => $"& Book~ of Chaos Magic";
     public override int PackSort => 5;
     public override bool HatesFire => true;
 }

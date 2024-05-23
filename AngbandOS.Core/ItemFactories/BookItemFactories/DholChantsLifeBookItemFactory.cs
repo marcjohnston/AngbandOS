@@ -20,6 +20,7 @@ internal class DholChantsLifeBookItemFactory : BookItemFactory
     public override int DamageDice => 1;
     public override int DamageSides => 1;
     public override string FriendlyName => "[Dhol Chants]";
+    public override string CodedName => "& Life Spellbook~ [Dhol Chants]";
     public override bool IgnoreAcid => true;
     public override bool IgnoreCold => true;
     public override bool IgnoreElec => true;
@@ -49,7 +50,7 @@ internal class DholChantsLifeBookItemFactory : BookItemFactory
         nameof(LifeSpellWardingTrue)
     };
     protected override string ItemClassName => nameof(LifeSpellBooksItemClass);
-    public override string RealmName => "Life";
+    public override string? CodedDivineName => $"& Book~ of Life Magic";
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.LifeBook;
     public override bool HatesFire => true;
     public override int PackSort => 8;

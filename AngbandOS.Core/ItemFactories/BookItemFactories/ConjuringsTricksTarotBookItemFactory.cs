@@ -20,6 +20,7 @@ internal class ConjuringsTricksTarotBookItemFactory : BookItemFactory
     public override int DamageDice => 1;
     public override int DamageSides => 1;
     public override string FriendlyName => "[Conjurings & Tricks]";
+    public override string CodedName => "& Tarot Spellbook~ [Conjurings & Tricks]";
     public override int LevelNormallyFound => 10;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {
@@ -41,7 +42,7 @@ internal class ConjuringsTricksTarotBookItemFactory : BookItemFactory
     };
     protected override string ItemClassName => nameof(TarotSpellBooksItemClass);
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.TarotBook;
-    public override string RealmName => "Tarot";
+    public override string? CodedDivineName => $"& Book~ of Tarot Magic";
     public override int PackSort => 3;
     public override bool HatesFire => true;
 }

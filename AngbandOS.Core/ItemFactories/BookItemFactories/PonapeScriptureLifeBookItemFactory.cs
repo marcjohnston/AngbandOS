@@ -26,6 +26,7 @@ internal class PonapeScriptureLifeBookItemFactory : BookItemFactory
     public override int DamageDice => 1;
     public override int DamageSides => 1;
     public override string FriendlyName => "[Ponape Scripture]";
+    public override string CodedName => "& Life Spellbook~ [Ponape Scriptures]";
     public override bool IgnoreAcid => true;
     public override bool IgnoreCold => true;
     public override bool IgnoreElec => true;
@@ -55,7 +56,7 @@ internal class PonapeScriptureLifeBookItemFactory : BookItemFactory
         nameof(LifeSpellHolyInvulnerability)
     };
     protected override string ItemClassName => nameof(LifeSpellBooksItemClass);
-    public override string RealmName => "Life";
+    public override string? CodedDivineName => $"& Book~ of Life Magic";
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.LifeBook;
     public override bool HatesFire => true;
     public override int PackSort => 8;

@@ -20,6 +20,7 @@ internal class RevelationsOfGlaakiNatureBookItemFactory : BookItemFactory
     public override int DamageDice => 1;
     public override int DamageSides => 1;
     public override string FriendlyName => "[Revelations of Glaaki]";
+    public override string CodedName => "& Nature Spellbook~ [Revelations of Glaaki]";
     public override bool IgnoreAcid => true;
     public override bool IgnoreCold => true;
     public override bool IgnoreElec => true;
@@ -50,7 +51,7 @@ internal class RevelationsOfGlaakiNatureBookItemFactory : BookItemFactory
     };
     protected override string ItemClassName => nameof(NatureSpellBooksItemClass);
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.NatureBook;
-    public override string RealmName => "Nature";
+    public override string? CodedDivineName => $"& Book~ of Nature Magic";
 
     public override int PackSort => 6;
     public override bool HatesFire => true;

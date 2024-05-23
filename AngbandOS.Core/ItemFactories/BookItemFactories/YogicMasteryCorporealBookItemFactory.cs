@@ -20,6 +20,7 @@ internal class YogicMasteryCorporealBookItemFactory : BookItemFactory
     public override int DamageDice => 1;
     public override int DamageSides => 1;
     public override string FriendlyName => "[Yogic Mastery]";
+    public override string CodedName => "& Corporeal Spellbook~ [Yogic Mastery]";
     public override int LevelNormallyFound => 20;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {
@@ -41,7 +42,7 @@ internal class YogicMasteryCorporealBookItemFactory : BookItemFactory
     };
     protected override string ItemClassName => nameof(CorporealSpellBooksItemClass);
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.CorporealBook;
-    public override string RealmName => "Corporeal";
+    public override string? CodedDivineName => "& Book~ of Corporeal Magic";
     public override int PackSort => 1;
     public override bool HatesFire => true;
 }

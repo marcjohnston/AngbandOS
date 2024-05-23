@@ -18,18 +18,6 @@ internal abstract class AmuletJeweleryItemFactory : JewelleryItemFactory
     /// </summary>
     public override int WieldSlot => InventorySlot.Neck;
 
-    public override string GetDescription(Item item, bool includeCountPrefix, bool isFlavorAware)
-    {
-        if (item.FixedArtifact != null && isFlavorAware)
-        {
-            return base.GetDescription(item, includeCountPrefix, isFlavorAware);
-        }
-        string flavor = item.IdentityIsStoreBought ? "" : $"{Flavor.Name} ";
-        string ofName = isFlavorAware ? $" of {FriendlyName}" : "";
-        string name = $"{flavor}{Game.CountPluralize("Amulet", item.Count)}{ofName}";
-        return includeCountPrefix ? GetPrefixCount(true, name, item.Count, item.IsKnownArtifact) : name;
-    }
-
     protected override string ItemClassName => nameof(AmuletsItemClass);
     public override BaseInventorySlot BaseWieldSlot => Game.SingletonRepository.Get<BaseInventorySlot>(nameof(NeckInventorySlot));
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Amulet;

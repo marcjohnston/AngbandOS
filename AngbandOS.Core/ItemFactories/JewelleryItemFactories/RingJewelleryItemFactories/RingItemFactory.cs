@@ -11,17 +11,7 @@ namespace AngbandOS.Core.ItemFactories;
 internal abstract class RingItemFactory : JewelleryItemFactory
 {
     public override bool IsWearable => true;
-    public override string GetDescription(Item item, bool includeCountPrefix, bool isFlavorAware)
-    {
-        if (item.FixedArtifact != null && isFlavorAware)
-        {
-            return base.GetDescription(item, includeCountPrefix, isFlavorAware);
-        }
-        string flavor = item.IdentityIsStoreBought ? "" : $"{Flavor.Name} ";
-        string ofName = isFlavorAware ? $" of {FriendlyName}" : "";
-        string name = $"{flavor}{Game.CountPluralize("Ring", item.Count)}{ofName}";
-        return includeCountPrefix ? GetPrefixCount(true, name, item.Count, item.IsKnownArtifact) : name;
-    }
+
     /// <summary>
     /// Returns either the right or left hand inventory slot for rings.
     /// </summary>
