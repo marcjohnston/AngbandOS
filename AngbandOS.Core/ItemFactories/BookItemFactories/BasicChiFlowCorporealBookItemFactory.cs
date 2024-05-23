@@ -15,11 +15,12 @@ internal class BasicChiFlowCorporealBookItemFactory : BookItemFactory
     protected override string SymbolName => nameof(QuestionMarkSymbol);
     public override ColorEnum Color => ColorEnum.Yellow;
     public override string Name => "[Basic Chi Flow]";
+    public override string CodedName => "& Corporeal Spellbook~ [Basic Chi Flow]";
+    public override string? AlternateCodedName => "& Book~ of Corporeal Magic [Basic Chi Flow]";
 
     public override int Cost => 100;
     public override int DamageDice => 1;
     public override int DamageSides => 1;
-    public override string CodedName => "& Corporeal Spellbook~ [Basic Chi Flow]";
     public override int LevelNormallyFound => 10;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {
@@ -41,7 +42,6 @@ internal class BasicChiFlowCorporealBookItemFactory : BookItemFactory
     };
     protected override string ItemClassName => nameof(CorporealSpellBooksItemClass);
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.CorporealBook;
-    public override string? CodedDivineName => "& Book~ of Corporeal Magic";
 
     public override int PackSort => 1;
     public override bool HatesFire => true;

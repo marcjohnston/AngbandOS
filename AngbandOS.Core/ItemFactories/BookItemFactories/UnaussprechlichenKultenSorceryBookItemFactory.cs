@@ -15,11 +15,12 @@ internal class UnaussprechlichenKultenSorceryBookItemFactory : BookItemFactory
     protected override string SymbolName => nameof(QuestionMarkSymbol);
     public override ColorEnum Color => ColorEnum.Blue;
     public override string Name => "[Unaussprechlichen Kulten]";
+    public override string CodedName => "& Sorcery Spellbook~ [Unaussprechlichen Kulten]";
+    public override string? AlternateCodedName => $"& Book~ of Sorcery [Unaussprechlichen Kulten]";
 
     public override int Cost => 25000;
     public override int DamageDice => 1;
     public override int DamageSides => 1;
-    public override string CodedName => "& Sorcery Spellbook~ [Unaussprechlichen Kulten]";
     public override bool IgnoreAcid => true;
     public override bool IgnoreCold => true;
     public override bool IgnoreElec => true;
@@ -48,10 +49,7 @@ internal class UnaussprechlichenKultenSorceryBookItemFactory : BookItemFactory
         nameof(SorcerySpellTeleportLevel),
         nameof(SorcerySpellWordOfRecall)
     };
-    /// <summary>
-    /// Returns just the realm name because Sorcery automatically assumes magic--so we omit the "Magic" suffix from the divine title.
-    /// </summary>
-    public override string? CodedDivineName => $"& Book~ of Sorcery Magic";
+
     protected override string ItemClassName => nameof(SorcerySpellBooksItemClass);
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.SorceryBook;
     public override bool HatesFire => true;

@@ -66,7 +66,7 @@ internal class FanaticCharacterClass : BaseCharacterClass
     /// <summary>
     /// Returns true, because the Fanatic class is divine and spellbooks should render as a simple book.
     /// </summary>
-    public override bool IsDivine => true;
+    public override bool UseAlternateItemNames => true;
 
     public override int SpellStat => Ability.Intelligence;
     public override int MaximumWeight => 30;

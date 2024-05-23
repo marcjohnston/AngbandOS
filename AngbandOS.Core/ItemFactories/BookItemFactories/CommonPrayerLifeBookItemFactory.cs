@@ -14,11 +14,12 @@ internal class CommonPrayerLifeBookItemFactory : BookItemFactory
 
     protected override string SymbolName => nameof(QuestionMarkSymbol);
     public override string Name => "[Book of Common Prayer]";
+    public override string CodedName => "& Life Spellbook~ [Book of Common Prayer]";
+    public override string? AlternateCodedName => $"& Book~ of Life Magic [Book of Common Prayer]";
 
     public override int Cost => 100;
     public override int DamageDice => 1;
     public override int DamageSides => 1;
-    public override string CodedName => "& Life Spellbook~ [Book of Common Prayer]";
     public override int LevelNormallyFound => 10;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {
@@ -39,7 +40,6 @@ internal class CommonPrayerLifeBookItemFactory : BookItemFactory
         nameof(LifeSpellSatisfyHunger)
    };
     protected override string ItemClassName => nameof(LifeSpellBooksItemClass);
-    public override string? CodedDivineName => $"& Book~ of Life Magic";
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.LifeBook;
     public override bool HatesFire => true;
     public override int PackSort => 8;

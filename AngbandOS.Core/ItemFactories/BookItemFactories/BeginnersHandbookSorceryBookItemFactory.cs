@@ -15,11 +15,12 @@ internal class BeginnersHandbookSorceryBookItemFactory : BookItemFactory
     protected override string SymbolName => nameof(QuestionMarkSymbol);
     public override ColorEnum Color => ColorEnum.BrightBlue;
     public override string Name => "[Beginner's Handbook]";
+    public override string CodedName => "& Sorcery Spellbook~ [Beginner's Handbook]";
+    public override string? AlternateCodedName => $"& Book~ of Sorcery [Beginner's Handbook]";
 
     public override int Cost => 100;
     public override int DamageDice => 1;
     public override int DamageSides => 1;
-    public override string CodedName => "& Sorcery Spellbook~ [Beginner's Handbook]";
     public override int LevelNormallyFound => 10;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {
@@ -42,7 +43,6 @@ internal class BeginnersHandbookSorceryBookItemFactory : BookItemFactory
     /// <summary>
     /// Returns just the realm name because Sorcery automatically assumes magic--so we omit the "Magic" suffix from the divine title.
     /// </summary>
-    public override string? CodedDivineName => $"& Book~ of Sorcery Magic";
     protected override string ItemClassName => nameof(SorcerySpellBooksItemClass);
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.SorceryBook;
     public override bool HatesFire => true;

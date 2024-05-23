@@ -15,11 +15,12 @@ internal class BlackPrayersDeathBookItemFactory : BookItemFactory
     protected override string SymbolName => nameof(QuestionMarkSymbol);
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "[Black Prayers]";
+    public override string CodedName => "& Death Spellbook~ [Black Prayers]";
+    public override string? AlternateCodedName => $"& Book~ of Death Magic [Black Prayers]";
 
     public override int Cost => 100;
     public override int DamageDice => 1;
     public override int DamageSides => 1;
-    public override string CodedName => "& Death Spellbook~ [Black Prayers]";
     public override int LevelNormallyFound => 10;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {
@@ -40,7 +41,6 @@ internal class BlackPrayersDeathBookItemFactory : BookItemFactory
         nameof(DeathSpellEnslaveUndead)
     };
     protected override string ItemClassName => nameof(DeathSpellBooksItemClass);
-    public override string? CodedDivineName => $"& Book~ of Death Magic";
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.DeathBook;
     public override bool HatesFire => true;
     public override int PackSort => 4;

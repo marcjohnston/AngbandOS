@@ -15,11 +15,12 @@ internal class CallOfTheWildNatureBookItemFactory : BookItemFactory
     protected override string SymbolName => nameof(QuestionMarkSymbol);
     public override ColorEnum Color => ColorEnum.BrightGreen;
     public override string Name => "[Call of the Wild]";
+    public override string CodedName => "& Nature Spellbook~ [Call of the Wild]";
+    public override string? AlternateCodedName => $"& Book~ of Nature Magic [Call of the Wild]";
 
     public override int Cost => 100;
     public override int DamageDice => 1;
     public override int DamageSides => 1;
-    public override string CodedName => "& Nature Spellbook~ [Call of the Wild]";
     public override int LevelNormallyFound => 10;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {
@@ -41,7 +42,6 @@ internal class CallOfTheWildNatureBookItemFactory : BookItemFactory
     };
     protected override string ItemClassName => nameof(NatureSpellBooksItemClass);
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.NatureBook;
-    public override string? CodedDivineName => $"& Book~ of Nature Magic";
 
     public override int PackSort => 6;
     public override bool HatesFire => true;

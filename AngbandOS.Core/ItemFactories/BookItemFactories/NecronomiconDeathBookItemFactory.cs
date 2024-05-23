@@ -15,6 +15,8 @@ internal class NecronomiconDeathBookItemFactory : BookItemFactory
     protected override string SymbolName => nameof(QuestionMarkSymbol);
     public override ColorEnum Color => ColorEnum.Black;
     public override string Name => "[Necronomicon]";
+    public override string CodedName => "& Death Spellbook~ [Necronomicon]";
+    public override string? AlternateCodedName => $"& Book~ of Death Magic [Necronomicon]";
 
 
     /// <summary>
@@ -25,7 +27,6 @@ internal class NecronomiconDeathBookItemFactory : BookItemFactory
     public override int Cost => 100000;
     public override int DamageDice => 1;
     public override int DamageSides => 1;
-    public override string CodedName => "& Death Spellbook~ [Necronomicon]";
     public override bool IgnoreAcid => true;
     public override bool IgnoreCold => true;
     public override bool IgnoreElec => true;
@@ -55,7 +56,6 @@ internal class NecronomiconDeathBookItemFactory : BookItemFactory
         nameof(DeathSpellWraithform)
     };
     protected override string ItemClassName => nameof(DeathSpellBooksItemClass);
-    public override string? CodedDivineName => $"& Book~ of Death Magic";
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.DeathBook;
     public override bool HatesFire => true;
     public override int PackSort => 4;

@@ -15,11 +15,12 @@ internal class EltdownShardsTarotBookItemFactory : BookItemFactory
     protected override string SymbolName => nameof(QuestionMarkSymbol);
     public override ColorEnum Color => ColorEnum.Pink;
     public override string Name => "[Eltdown Shards]";
+    public override string CodedName => "& Tarot Spellbook~ [Eltdown Shards]";
+    public override string? AlternateCodedName => $"& Book~ of Tarot Magic [Eltdown Shards]";
 
     public override int Cost => 25000;
     public override int DamageDice => 1;
     public override int DamageSides => 1;
-    public override string CodedName => "& Tarot Spellbook~ [Eltdown Shards]";
     public override bool IgnoreAcid => true;
     public override bool IgnoreCold => true;
     public override bool IgnoreElec => true;
@@ -50,7 +51,6 @@ internal class EltdownShardsTarotBookItemFactory : BookItemFactory
     };
     protected override string ItemClassName => nameof(TarotSpellBooksItemClass);
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.TarotBook;
-    public override string? CodedDivineName => $"& Book~ of Tarot Magic";
     public override int PackSort => 3;
     public override bool HatesFire => true;
 }

@@ -15,11 +15,12 @@ internal class SignOfChaosChaosBookItemFactory : BookItemFactory
     protected override string SymbolName => nameof(QuestionMarkSymbol);
     public override ColorEnum Color => ColorEnum.BrightRed;
     public override string Name => "[Sign of Chaos]";
+    public override string CodedName => "& Chaos Spellbook~ [Sign of Chaos]";
+    public override string? AlternateCodedName => $"& Book~ of Chaos Magic [Sign of Chaos]";
 
     public override int Cost => 100;
     public override int DamageDice => 1;
     public override int DamageSides => 1;
-    public override string CodedName => "& Chaos Spellbook~ [Sign of Chaos]";
     public override int LevelNormallyFound => 10;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {
@@ -40,7 +41,6 @@ internal class SignOfChaosChaosBookItemFactory : BookItemFactory
         nameof(ChaosSpellTeleportSelf)
     };
     protected override string ItemClassName => nameof(ChaosSpellBooksItemClass);
-    public override string? CodedDivineName => $"& Book~ of Chaos Magic";
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.ChaosBook;
     public override int PackSort => 5;
     public override bool HatesFire => true;

@@ -15,11 +15,11 @@ internal class BlackMassDeathBookItemFactory : BookItemFactory
     protected override string SymbolName => nameof(QuestionMarkSymbol);
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "[Black Mass]";
-
+    public override string CodedName => "& Death Spellbook~ [Black Mass]";
+    public override string? AlternateCodedName => $"& Book~ of Death Magic [Black Mass]";
     public override int Cost => 1000;
     public override int DamageDice => 1;
     public override int DamageSides => 1;
-    public override string CodedName => "& Death Spellbook~ [Black Mass]";
     public override int LevelNormallyFound => 20;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {
@@ -40,7 +40,6 @@ internal class BlackMassDeathBookItemFactory : BookItemFactory
         nameof(DeathSpellRestoreLife)
     };
     protected override string ItemClassName => nameof(DeathSpellBooksItemClass);
-    public override string? CodedDivineName => $"& Book~ of Death Magic";
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.DeathBook;
     public override bool HatesFire => true;
     public override int PackSort => 4;

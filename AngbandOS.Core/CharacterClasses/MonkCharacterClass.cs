@@ -85,7 +85,7 @@ internal class MonkCharacterClass : BaseCharacterClass
     /// <summary>
     /// Returns true, because the Monk class is divine and spellbooks should render as a simple book.
     /// </summary>
-    public override bool IsDivine => true;
+    public override bool UseAlternateItemNames => true;
 
     public override int SpellStat => Ability.Wisdom;
     public override int MaximumMeleeAttacksPerRound(int level) => level < 40 ? 3 : 4;

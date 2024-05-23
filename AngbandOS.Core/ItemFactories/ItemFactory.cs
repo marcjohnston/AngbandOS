@@ -225,10 +225,10 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey
     public virtual bool ItemIsTitledWithFlavor => false;
 
     ///// <summary>
-    ///// Returns a coded name for divine character classes for known items; null, if there is no divine name.  Returns null, by default.  Spellbooks have a different
-    ///// divine title.  Druid, Fanatic, Monk, Priest and Ranger classes are divine character classes.
+    ///// Returns an alternate coded name for some character classes for known items; null, if there is no altername name.  Returns null, by default.  Spellbooks have a alternate
+    ///// names.  Druid, Fanatic, Monk, Priest and Ranger character classes use alternate names.
     ///// </summary>
-    public virtual string? CodedDivineName => null; // TODO: This coded divine name has hard-coded realm names when realm is set at run-time.
+    public virtual string? AlternateCodedName => null; // TODO: This coded divine name has hard-coded realm names when realm is set at run-time.
 
     /// <summary>
     /// Returns a description for the item.  Returns a macro processed description, by default.
@@ -266,19 +266,13 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey
 
         // Check to see if this known item has a divine title.
         string name = CodedName;
-        if (CodedDivineName != null && Game.BaseCharacterClass.IsDivine)
+        if (AlternateCodedName != null && Game.BaseCharacterClass.UseAlternateItemNames)
         {
-            name = CodedDivineName;
+            name = AlternateCodedName;
         }
 
         string pluralizedName = ApplyPlurizationMacro(name, item.Count);
         return ApplyGetPrefixCountMacro(includeCountPrefix, pluralizedName, item.Count, item.IsKnownArtifact);
-    }
-
-    public string GetName()
-    {
-        string pluralizedName = ApplyPlurizationMacro(CodedName, 1);
-        return ApplyGetPrefixCountMacro(false, pluralizedName, 1, false);
     }
 
     public virtual int? GetTypeSpecificRealValue(Item item, int value) => 0;

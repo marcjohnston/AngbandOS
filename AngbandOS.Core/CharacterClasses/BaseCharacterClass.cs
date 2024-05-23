@@ -17,10 +17,10 @@ internal abstract class BaseCharacterClass : IGetKey
     }
 
     /// <summary>
-    /// Returns true, for classes that are divine; false, otherwise.  Returns false, by default. Divine classes may render item descriptions differently for
-    /// some items.  Druid, Fanatic, Monk, Priest and Ranger classes are return true.  Spellbooks are rendered differently for divine classes.
+    /// Returns true, for classes that should use the alternate name for items; false, otherwise.  Returns false, by default. Some classes may render item descriptions differently for
+    /// some items.  Druid, Fanatic, Monk, Priest and Ranger classes are return true.  Spellbooks are rendered differently for these classes.
     /// </summary>
-    public virtual bool IsDivine => false;
+    public virtual bool UseAlternateItemNames => false;
 
     public virtual void Cast() => CastSpell();
 

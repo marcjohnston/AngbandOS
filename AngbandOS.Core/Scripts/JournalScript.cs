@@ -1142,7 +1142,7 @@ internal class JournalScript : Script, IScript, IRepeatableScript, IScriptStore
                 {
                     continue;
                 }
-                _menuItem[_menuLength] = itemFactory.GetName();
+                _menuItem[_menuLength] = itemFactory.Name;
                 if (!itemFactory.AskDestroyAll)
                 {
                     _menuColors[_menuLength] = ColorEnum.Blue;
@@ -1189,7 +1189,7 @@ internal class JournalScript : Script, IScript, IRepeatableScript, IScriptStore
                                 {
                                     continue;
                                 }
-                                _menuItem[_menuLength] = itemFactory.GetName();
+                                _menuItem[_menuLength] = itemFactory.Name;
                                 _menuColors[_menuLength] = ColorEnum.Blue;
                                 _menuIndices[_menuLength] = i;
                                 _menuLength++;

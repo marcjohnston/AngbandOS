@@ -76,7 +76,7 @@ internal class PriestCharacterClass : BaseCharacterClass
     /// <summary>
     /// Returns true, because the Priest class is divine and spellbooks should render as a simple book.
     /// </summary>
-    public override bool IsDivine => true;
+    public override bool UseAlternateItemNames => true;
 
     public override int SpellStat => Ability.Wisdom;
     public override IArtifactBias? ArtifactBias => Game.SingletonRepository.Get<ArtifactBias>(nameof(PriestlyArtifactBias));

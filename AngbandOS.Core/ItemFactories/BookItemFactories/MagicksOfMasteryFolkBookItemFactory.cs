@@ -15,6 +15,8 @@ internal class MagicksOfMasteryFolkBookItemFactory : BookItemFactory
     protected override string SymbolName => nameof(QuestionMarkSymbol);
     public override ColorEnum Color => ColorEnum.BrightPurple;
     public override string Name => "[Magicks of Mastery]";
+    public override string CodedName => "& Folk Spellbook~ [Magicks of Mastery]";
+    public override string? AlternateCodedName => $"& Book~ of Folk Magic [Magicks of Mastery]";
 
 
     /// <summary>
@@ -25,7 +27,6 @@ internal class MagicksOfMasteryFolkBookItemFactory : BookItemFactory
     public override int Cost => 2500;
     public override int DamageDice => 1;
     public override int DamageSides => 1;
-    public override string CodedName => "& Folk Spellbook~ [Magicks of Mastery]";
     public override int LevelNormallyFound => 20;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {
@@ -50,7 +51,6 @@ internal class MagicksOfMasteryFolkBookItemFactory : BookItemFactory
         nameof(FolkSpellClairvoyance)
     };
     protected override string ItemClassName => nameof(FolkSpellBooksItemClass);
-    public override string? CodedDivineName => $"& Book~ of Folk Magic";
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.FolkBook;
     public override int PackSort => 2;
     public override bool HatesFire => true;

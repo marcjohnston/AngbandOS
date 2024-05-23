@@ -15,11 +15,12 @@ internal class CardMasteryTarotBookItemFactory : BookItemFactory
     protected override string SymbolName => nameof(QuestionMarkSymbol);
     public override ColorEnum Color => ColorEnum.BrightPink;
     public override string Name => "[Card Mastery]";
+    public override string CodedName => "& Tarot Spellbook~ [Card Mastery]";
+    public override string? AlternateCodedName => $"& Book~ of Tarot Magic [Card Mastery]";
 
     public override int Cost => 1000;
     public override int DamageDice => 1;
     public override int DamageSides => 1;
-    public override string CodedName => "& Tarot Spellbook~ [Card Mastery]";
     public override int LevelNormallyFound => 20;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {
@@ -42,7 +43,6 @@ internal class CardMasteryTarotBookItemFactory : BookItemFactory
     };
     protected override string ItemClassName => nameof(TarotSpellBooksItemClass);
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.TarotBook;
-    public override string? CodedDivineName => $"& Book~ of Tarot Magic";
     public override int PackSort => 3;
     public override bool HatesFire => true;
 }
