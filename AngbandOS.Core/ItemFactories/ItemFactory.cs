@@ -259,6 +259,7 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey
                 }
             }
             string ofName = isFlavorAware ? $" of {CodedName}" : "";
+            // TODO: The ItemClass.Name brings in the item class name but only for items that have flavor.  This needs to be coded into the factory CodedName.  The Game.CountPluralize can be converted to use the ApplyPlurizationMacro.
             string pluralizedFlavorName = $"{preNameFlavor}{Game.CountPluralize(ItemClass.Name, item.Count)}{postNameFlavor}{ofName}";
             return includeCountPrefix ? GetPrefixCount(true, pluralizedFlavorName, item.Count, item.IsKnownArtifact) : pluralizedFlavorName;
         }
@@ -272,6 +273,12 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey
 
         string pluralizedName = ApplyPlurizationMacro(name, item.Count);
         return ApplyGetPrefixCountMacro(includeCountPrefix, pluralizedName, item.Count, item.IsKnownArtifact);
+    }
+
+    public string GetName()
+    {
+        string pluralizedName = ApplyPlurizationMacro(CodedName, 1);
+        return ApplyGetPrefixCountMacro(false, pluralizedName, 1, false);
     }
 
     public virtual int? GetTypeSpecificRealValue(Item item, int value) => 0;

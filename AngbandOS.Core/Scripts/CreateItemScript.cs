@@ -109,7 +109,7 @@ internal class CreateItemScript : Script, IScript
                 row = 2 + (num % maxLetters);
                 col = 30 * (num / maxLetters);
                 ch = (char)(_head[num / maxLetters] + (char)(num % maxLetters));
-                string itemName = kPtr.Name.Trim().Replace("$", "").Replace("~", "");
+                string itemName = kPtr.GetName();
 
                 Game.Screen.PrintLine($"[{ch}] {itemName}", row, col);
                 choice[num++] = i;
