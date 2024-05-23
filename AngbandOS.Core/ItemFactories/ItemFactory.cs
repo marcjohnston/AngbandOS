@@ -1279,4 +1279,12 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey
     /// is used to bind the <see cref="EatScript"/> property during the bind phase.
     /// </summary>
     public virtual string? EatScriptName => null;
+
+    public virtual bool VanishesWhenEatenBySkeletons => false;
+
+    /// <summary>
+    /// Returns true, if the food item is completely consumed when eaten.  Consumed food items are removed once eaten.  Returns true, by default because 
+    /// all food items are consumed except for dwarf bread.  Dwarf bread returns false.
+    /// </summary>
+    public virtual bool IsConsumedWhenEaten => true;
 }

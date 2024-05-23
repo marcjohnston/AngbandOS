@@ -8,7 +8,7 @@
 namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
-internal class PieceOfDwarfBreadFoodItemFactory : FoodItemFactory
+internal class PieceOfDwarfBreadFoodItemFactory : ItemFactory
 {
     private PieceOfDwarfBreadFoodItemFactory(Game game) : base(game) { } // This object is a singleton.
 
@@ -34,4 +34,26 @@ internal class PieceOfDwarfBreadFoodItemFactory : FoodItemFactory
     public override bool IsConsumedWhenEaten => false;
 
     public override string? EatScriptName => nameof(EatDwarfBreadScript);
+    protected override string ItemClassName => nameof(FoodItemClass);
+    public override int PercentageBreakageChance => 100;
+    public override bool EasyKnow => true;
+    public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Food;
+
+    protected override (int, string)[]? MassProduceTupleNames => new (int, string)[]
+    {
+        (20, "3d5-3")
+    };
+
+    public override int PackSort => 9;
+    public override int BaseValue => 5;
+
+    /// <summary>
+    /// Returns true, because food items can be eaten by monsters.
+    /// </summary>
+    public override bool CanBeEatenByMonsters => true;
+
+    /// <summary>
+    /// Returns true, because food items can be eaten by the player.
+    /// </summary>
+    public override bool CanBeEaten => true;
 }

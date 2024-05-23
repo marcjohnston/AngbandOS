@@ -39,8 +39,7 @@ internal class SelectItemAndEatScript : Script, IScript, IRepeatableScript
         }
 
         // Make sure the item is edible
-        FoodItemFactory? foodItemFactory = item.TryGetFactory<FoodItemFactory>();
-        if (foodItemFactory == null)
+        if (item.Factory.EatScript == null)
         {
             Game.MsgPrint("You can't eat that!");
             return;
@@ -69,7 +68,7 @@ internal class SelectItemAndEatScript : Script, IScript, IRepeatableScript
         Game.Race.Eat(item);
 
         // Dwarf bread isn't actually eaten so return early
-        if (foodItemFactory.IsConsumedWhenEaten)
+        if (item.Factory.IsConsumedWhenEaten)
         {
             // Use up the item (if it fell to the floor this will have already been dealt with)
             IItemContainer container = item.GetContainer();

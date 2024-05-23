@@ -80,8 +80,7 @@ internal class SkeletonRace : Race
     public override void Eat(Item item)
     {
         // Check to see if the food item is a waybread, warpstones or a biscuit.
-        FoodItemFactory foodItemFactory = (FoodItemFactory)item.Factory;
-        if (foodItemFactory.VanishesWhenEatenBySkeletons)
+        if (item.Factory.VanishesWhenEatenBySkeletons)
         {
             // These magical food types vanish.
             Game.MsgPrint("The food falls through your jaws and vanishes!");

@@ -1,22 +1,42 @@
-ï»¿// AngbandOS: 2022 Marc Johnston
+// AngbandOS: 2022 Marc Johnston
 //
-// This game is released under the â€œAngband Licenseâ€, defined as: â€œÂ© 1997 Ben Harrison, James E.
+// This game is released under the “Angband License”, defined as: “© 1997 Ben Harrison, James E.
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
-// copies. Other copyrights may also apply.â€
+// copies. Other copyrights may also apply.”
 
 namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
-internal abstract class FoodItemFactory : ItemFactory
+internal class UnhealthMushroomFoodItemFactory : ItemFactory
 {
-    public FoodItemFactory(Game game) : base(game) { }
-    protected override string ItemClassName => nameof(FoodItemClass);
+    private UnhealthMushroomFoodItemFactory(Game game) : base(game) { } // This object is a singleton.
+
+    protected override string SymbolName => nameof(CommaSymbol);
+    public override string Name => "Unhealth";
+
+    public override int Cost => 50;
+    public override int DamageDice => 10;
+    public override int DamageSides => 10;
+    public override string FriendlyName => "Unhealth";
+    public override int LevelNormallyFound => 15;
+    public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
+    {
+        (15, 1)
+    };
+    public override int Weight => 1;
+    public override string? EatScriptName => nameof(EatUnhealthScript);
+    protected override string ItemClassName => nameof(MushroomItemClass);
+
+    /// <summary>
+    /// Returns a nutritional value of 500 turns for all mushrooms.
+    /// </summary>
+    public override int InitialNutritionalValue => 500;
     public override int PercentageBreakageChance => 100;
     public override bool EasyKnow => true;
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Food;
 
-    protected override (int, string)[]? MassProduceTupleNames => new (int, string)[] 
+    protected override (int, string)[]? MassProduceTupleNames => new (int, string)[]
     {
         (20, "3d5-3")
     };
