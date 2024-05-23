@@ -53,7 +53,7 @@ internal abstract class BookItemFactory : ItemFactory
     protected override (int, string)[]? MassProduceTupleNames => new (int, string)[]
     {
         (50, "2d3-2"),
-        (500, "1d3-2")
+        (500, "1d3-1")
     };
 
     /// <summary>

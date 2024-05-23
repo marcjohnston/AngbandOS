@@ -43,8 +43,16 @@ internal class DiceRoll : Roll
         }
         if (MultiplierIsDivisor)
         {
-            return sum / Multiplier + Bonus;
+            sum = sum / Multiplier + Bonus;
         }
-        return sum * Multiplier + Bonus;
+        else
+        {
+            sum = sum * Multiplier + Bonus;
+        }
+        if (sum < 0)
+        {
+            throw new Exception("Invalid roll syntax produced value less than zero.");
+        }
+        return sum;
     }
 }
