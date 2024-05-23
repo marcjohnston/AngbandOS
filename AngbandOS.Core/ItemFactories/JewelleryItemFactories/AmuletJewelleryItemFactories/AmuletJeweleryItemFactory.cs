@@ -30,7 +30,7 @@ internal abstract class AmuletJeweleryItemFactory : JewelleryItemFactory, IFlavo
             return base.GetDescription(item, includeCountPrefix, isFlavorAware);
         }
         string flavor = item.IdentityIsStoreBought ? "" : $"{FlavorFactory.Flavor.Name} ";
-        string ofName = isFlavorAware ? $" of {item.Factory.FriendlyName}" : "";
+        string ofName = isFlavorAware ? $" of {FriendlyName}" : "";
         string name = $"{flavor}{Game.CountPluralize("Amulet", item.Count)}{ofName}";
         return includeCountPrefix ? GetPrefixCount(true, name, item.Count, item.IsKnownArtifact) : name;
     }
