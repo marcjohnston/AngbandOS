@@ -5,7 +5,6 @@ internal class PotionsItemClass : ItemClass
 {
     private PotionsItemClass(Game game) : base(game) { }
     public override string Name => "Potion";
-    public override bool HasFlavor => true;
 
     /// <summary>
     /// Returns the potions flavors repository because potions have flavors that need to be identified.  The Apple Juice, Water and Slime-Mold

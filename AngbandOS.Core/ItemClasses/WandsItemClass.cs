@@ -5,7 +5,6 @@ internal class WandsItemClass : ItemClass
 {
     private WandsItemClass(Game game) : base(game) { }
     public override string Name => "Wand";
-    public override bool HasFlavor => true;
 
     /// <summary>
     /// Returns the want flavors repository because wands have flavors that need to be identified.

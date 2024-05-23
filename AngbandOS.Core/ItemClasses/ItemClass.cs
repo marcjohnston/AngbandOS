@@ -23,7 +23,7 @@ internal abstract class ItemClass : IGetKey
     /// </summary>
     public virtual bool AllowStomp => true;
 
-    public virtual bool HasFlavor => false;
+    public bool HasFlavor => (GetFlavorRepository != null);
 
     /// <summary>
     /// Returns the repository to use for the issuance of the flavors or null, if the factory shouldn't be issued a flavor.  Null is returned
