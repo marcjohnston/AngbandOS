@@ -56,7 +56,7 @@ internal class ZapRodScript : Script, IScript, IRepeatableScript
         // would ask for a direction.
         RodItemFactory rodItemCategory = (RodItemFactory)item.Factory;
         int? dir = 5;
-        if (rodItemCategory.RequiresAiming || !item.IsFlavorAware())
+        if (rodItemCategory.RequiresAiming || !item.Factory.IsFlavorAware)
         {
             if (!Game.GetDirectionWithAim(out int direction))
             {
@@ -107,7 +107,7 @@ internal class ZapRodScript : Script, IScript, IRepeatableScript
 
         // We may have just discovered what the rod does
         item.ObjectTried();
-        if (identified && !item.IsFlavorAware())
+        if (identified && !item.Factory.IsFlavorAware)
         {
             item.BecomeFlavorAware();
             Game.GainExperience((itemLevel + (Game.ExperienceLevel.IntValue >> 1)) / Game.ExperienceLevel.IntValue);

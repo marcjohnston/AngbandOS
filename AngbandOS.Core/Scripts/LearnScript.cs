@@ -22,7 +22,7 @@ internal class LearnScript : Script, IScript
         {
             if (kPtr.LevelNormallyFound <= Game.CommandArgument)
             {
-                kPtr.FlavorAware = true;
+                kPtr.IsFlavorAware = true;
             }
         }
     }

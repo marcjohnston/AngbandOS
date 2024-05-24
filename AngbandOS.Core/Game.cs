@@ -3297,7 +3297,7 @@ internal class Game
         UseFixed = false;
         foreach (ItemFactory itemFactory in SingletonRepository.Get<ItemFactory>())
         {
-            itemFactory.FlavorAware = !itemFactory.ItemClass.HasFlavor;
+            itemFactory.IsFlavorAware = !itemFactory.ItemClass.HasFlavor;
         }
     }
 

@@ -104,7 +104,7 @@ internal class AimWandScript : Script, IScript, IRepeatableScript, ISuccessfulSc
         // Mark the wand as having been tried
         item.ObjectTried();
         // If we just discovered the item's flavor, mark it as so
-        if (ident && !item.IsFlavorAware())
+        if (ident && !item.Factory.IsFlavorAware)
         {
             item.BecomeFlavorAware();
             Game.GainExperience((itemLevel + (Game.ExperienceLevel.IntValue >> 1)) / Game.ExperienceLevel.IntValue);

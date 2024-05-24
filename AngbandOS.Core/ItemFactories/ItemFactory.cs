@@ -865,7 +865,7 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey
     /// <summary>
     /// The special flavor of the item has been identified. (e.g. "of seeing")
     /// </summary>
-    public bool FlavorAware;
+    public bool IsFlavorAware;
 
     /// <summary>
     /// Returns the character to be displayed for items of this type.  This character is initially set from the BaseItemCategory, but item categories

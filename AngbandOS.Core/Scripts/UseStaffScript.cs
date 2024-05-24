@@ -90,7 +90,7 @@ internal class UseStaffScript : Script, IScript, IRepeatableScript
         Game.SingletonRepository.Get<FlaggedAction>(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
         // We might now know what the staff does
         item.ObjectTried();
-        if (useStaffEventArgs.Identified && !item.IsFlavorAware())
+        if (useStaffEventArgs.Identified && !item.Factory.IsFlavorAware)
         {
             item.BecomeFlavorAware();
             Game.GainExperience((itemLevel + (Game.ExperienceLevel.IntValue >> 1)) / Game.ExperienceLevel.IntValue);

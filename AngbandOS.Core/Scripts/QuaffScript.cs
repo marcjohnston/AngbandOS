@@ -56,7 +56,7 @@ internal class QuaffScript : Script, IScript, IRepeatableScript
         Game.SingletonRepository.Get<FlaggedAction>(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
         // We may now know the potion's type
         item.ObjectTried();
-        if (identified && !item.IsFlavorAware())
+        if (identified && !item.Factory.IsFlavorAware)
         {
             item.BecomeFlavorAware();
             Game.GainExperience((itemLevel + (Game.ExperienceLevel.IntValue >> 1)) / Game.ExperienceLevel.IntValue);

@@ -393,11 +393,11 @@ internal sealed class Item : IComparable<Item>
 
         // Fourth level sort (FlavorAware before those unidentified)
         // Flavor aware items sort before those not identified.
-        if (IsFlavorAware() && !oPtr.IsFlavorAware())
+        if (Factory.IsFlavorAware && !oPtr.Factory.IsFlavorAware)
         {
             return -1;
         }
-        if (!IsFlavorAware() && oPtr.IsFlavorAware())
+        if (!Factory.IsFlavorAware && oPtr.Factory.IsFlavorAware)
         {
             return 1;
         }
@@ -761,7 +761,7 @@ internal sealed class Item : IComparable<Item>
 
     public void BecomeFlavorAware()
     {
-        Factory.FlavorAware = true;
+        Factory.IsFlavorAware = true;
     }
 
     public void BecomeKnown()
@@ -804,7 +804,7 @@ internal sealed class Item : IComparable<Item>
         // Provide a default value for the isFlavorAware parameter.
         if (isFlavorAware == null)
         {
-            isFlavorAware = IsFlavorAware();
+            isFlavorAware = Factory.IsFlavorAware;
         }
 
         string basenm = Factory.GetDescription(this, includeCountPrefix, isFlavorAware.Value);
@@ -1776,18 +1776,13 @@ internal sealed class Item : IComparable<Item>
         return IdentCursed;
     }
 
-    public bool IsFlavorAware()
-    {
-        return Factory.FlavorAware;
-    }
-
     public bool IsKnown()
     {
         if (IdentKnown)
         {
             return true;
         }
-        if (Factory.EasyKnow && Factory.FlavorAware)
+        if (Factory.EasyKnow && Factory.IsFlavorAware)
         {
             return true;
         }
@@ -1868,7 +1863,7 @@ internal sealed class Item : IComparable<Item>
         {
             if (Factory.ItemClass.HasFlavor)
             {
-                if (IsFlavorAware())
+                if (Factory.IsFlavorAware)
                 {
                     return Factory.Stompable[StompableType.Broken];
                 }
@@ -1916,7 +1911,7 @@ internal sealed class Item : IComparable<Item>
             {
                 return 0;
             }
-            if (IsFlavorAware())
+            if (Factory.IsFlavorAware)
             {
                 return Factory.Cost;
             }
@@ -3010,7 +3005,7 @@ internal sealed class Item : IComparable<Item>
         {
             tmpVal2 = "empty";
         }
-        else if (!IsFlavorAware() && Factory.Tried)
+        else if (!Factory.IsFlavorAware && Factory.Tried)
         {
             tmpVal2 = "tried";
         }
