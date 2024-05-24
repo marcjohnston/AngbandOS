@@ -237,7 +237,7 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey
     /// <param name="includeCountPrefix">Specify true, to include the number of items as the prefix; false, to excluse the count.  Pluralization will still
     /// occur when the count is not included.</param>
     /// <returns></returns>
-    public string GetDescription(Item item, bool includeCountPrefix, bool isFlavorAware)
+    public string GetDescription(Item item, bool includeCountPrefix, bool suppressFlavors)
     {
         string codedName;
 
@@ -253,8 +253,8 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey
 
         codedName = codedName.Replace("$Name$", Name, StringComparison.OrdinalIgnoreCase);
 
-        // Check if the item is flavored, is not fixed artifacts and is still unknown.
-        if (ItemClass.HasFlavor && (item.FixedArtifact == null || !isFlavorAware))
+        // Check if the item is flavored and needs to be described with flavor.  
+        if (!suppressFlavors && ItemClass.HasFlavor && !IsFlavorAware)
         {
             string preNameFlavor = "";
             string postNameFlavor = "";
@@ -272,7 +272,7 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey
                     preNameFlavor = $"{Flavor.Name} ";
                 }
             }
-            string ofName = isFlavorAware ? $" of {codedName}" : "";
+            string ofName = suppressFlavors ? $" of {codedName}" : "";
             // TODO: The ItemClass.Name brings in the item class name but only for items that have flavor.  This needs to be coded into the factory CodedName.  The Game.CountPluralize can be converted to use the ApplyPlurizationMacro.
             string pluralizedFlavorName = $"{preNameFlavor}{Game.CountPluralize(ItemClass.Name, item.Count)}{postNameFlavor}{ofName}";
             return includeCountPrefix ? GetPrefixCount(true, pluralizedFlavorName, item.Count, item.IsKnownArtifact) : pluralizedFlavorName;
@@ -863,7 +863,8 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey
     public readonly bool[] Stompable = new bool[4];
 
     /// <summary>
-    /// The special flavor of the item has been identified. (e.g. "of seeing")
+    /// Returns true, if the flavor for the factory has been identified or the factory doesn't use flavors; false, when the factory uses flavors and
+    /// the flavor still hasn't been identified by the player.  The <see cref="Game.FlavorInit"/> method is used to re-initialize this variable.
     /// </summary>
     public bool IsFlavorAware;
 

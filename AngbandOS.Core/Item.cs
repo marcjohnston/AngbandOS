@@ -799,15 +799,14 @@ internal sealed class Item : IComparable<Item>
     /// false, otherwise (e.g. Brown Dragon Scale Mails).  When false, the item will still be pluralized (e.g. stole one of your Brown Dragon Scale Mails).</param>
     /// <param name="mode"></param>
     /// <returns></returns>
-    public string Description(bool includeCountPrefix, int mode, bool? isFlavorAware = null)
+    public string Description(bool includeCountPrefix, int mode, bool suppressFlavors = false)
     {
-        // Provide a default value for the isFlavorAware parameter.
-        if (isFlavorAware == null)
+        // Fixed artifacts that are known will hide their flavor.
+        if (FixedArtifact != null && Factory.IsFlavorAware)
         {
-            isFlavorAware = Factory.IsFlavorAware;
+            suppressFlavors = true;
         }
-
-        string basenm = Factory.GetDescription(this, includeCountPrefix, isFlavorAware.Value);
+        string basenm = Factory.GetDescription(this, includeCountPrefix, suppressFlavors);
         if (IsKnown())
         {
             if (IsRandomArtifact)
