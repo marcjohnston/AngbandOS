@@ -15,7 +15,9 @@ internal class PowerRingItemFactory : RingItemFactory
     protected override string SymbolName => nameof(EqualSignSymbol);
     public override ColorEnum Color => ColorEnum.Yellow;
     public override string Name => "Power";
-
+    protected override string? DescriptionSyntax => "& $Flavor$ Ring~ of $Name$";
+    protected override string? FlavorUnknownDescriptionSyntax => "& $Flavor$ Ring~";
+    protected override string? FlavorSuppressedDescriptionSyntax => "& Ring~ of $Name$";
     public override void Bind()
     {
         base.Bind();
@@ -23,7 +25,6 @@ internal class PowerRingItemFactory : RingItemFactory
     }
 
     public override int Cost => 5000000;
-    public override string CodedName => "Power";
     public override bool InstaArt => true;
     public override int LevelNormallyFound => 110;
     public override int Weight => 2;

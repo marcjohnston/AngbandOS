@@ -219,65 +219,54 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey
     }
 
     /// <summary>
-    /// Returns true, if an flavor unknown item is titled with the flavor; false, otherwise.  Returns false, by default.  All flavored items are typically 
-    /// identified as "a flavor item" (e.g. an adamite ring).  Item factories with items titled with flavor read like scrolls (e.g. a scroll titled 'ads adds-dgg').
-    /// </summary>
-    public virtual bool ItemIsTitledWithFlavor => false;
-
-    ///// <summary>
-    ///// Returns an alternate coded name for some character classes for known items; null, if there is no altername name.  Returns null, by default.  Spellbooks have a alternate
-    ///// names.  Druid, Fanatic, Monk, Priest and Ranger character classes use alternate names.
-    ///// </summary>
-    public virtual string? AlternateCodedName => null; // TODO: This coded divine name has hard-coded realm names when realm is set at run-time.
-
-    /// <summary>
     /// Returns a description for the item.  Returns a macro processed description, by default.
     /// </summary>
     /// <param name="item"></param>
     /// <param name="includeCountPrefix">Specify true, to include the number of items as the prefix; false, to excluse the count.  Pluralization will still
     /// occur when the count is not included.</param>
     /// <returns></returns>
-    public string GetDescription(Item item, bool includeCountPrefix, bool suppressFlavors)
+    public string GetDescription(Item item, bool includeCountPrefix)
     {
         string codedName;
 
-        // Check to see if this known item has a divine title.
-        if (AlternateCodedName != null && Game.BaseCharacterClass.UseAlternateItemNames)
+        // Check to see if this factory has flavors.
+        if (ItemClass.HasFlavor)
         {
-            codedName = AlternateCodedName;
+            // Check if this item flavor needs to be suppressed, is unknown or known.
+            if (item.IdentityIsStoreBought)
+            {
+                // The item was bought from the store or if we need to suppress flavors because we are in a store.
+                codedName = Game.BaseCharacterClass.UseAlternateItemNames ? _alternateFlavorSuppressedDescriptionSyntax : _flavorSuppressedDescriptionSyntax;
+
+                // This syntax is allowed to use the Name macro but not the Flavor macro.
+                codedName = codedName.Replace("$Name$", Name, StringComparison.OrdinalIgnoreCase);
+            }
+            else if (!IsFlavorAware)
+            {
+                // The flavor for this item is still unknown.
+                codedName = Game.BaseCharacterClass.UseAlternateItemNames ? _alternateFlavorUnknownDescriptionSyntax : _flavorUnknownDescriptionSyntax;
+
+                // This syntax is allowed to use the flavor macro.
+                codedName = codedName.Replace("$Flavor$", Flavor.Name, StringComparison.OrdinalIgnoreCase);
+            }
+            else
+            {
+                // This item has a known flavor.
+                codedName = Game.BaseCharacterClass.UseAlternateItemNames ? _alternateDescriptionSyntax : _descriptionSyntax;
+
+                // This syntax is allowed to use the name and flavor macros.
+                codedName = codedName.Replace("$Name$", Name, StringComparison.OrdinalIgnoreCase);
+                codedName = codedName.Replace("$Flavor$", Flavor.Name, StringComparison.OrdinalIgnoreCase);
+            }
         }
         else
         {
-            codedName = CodedName;
+            // This item is flavorless.
+            codedName = Game.BaseCharacterClass.UseAlternateItemNames ? _alternateDescriptionSyntax : _descriptionSyntax;
+
+            // This syntax is allowed to use the name macro.
+            codedName = codedName.Replace("$Name$", Name, StringComparison.OrdinalIgnoreCase);
         }
-
-        codedName = codedName.Replace("$Name$", Name, StringComparison.OrdinalIgnoreCase);
-
-        // Check if the item is flavored and needs to be described with flavor.  
-        if (!suppressFlavors && ItemClass.HasFlavor && !IsFlavorAware)
-        {
-            string preNameFlavor = "";
-            string postNameFlavor = "";
-
-            // Items bought from the store have been identified, but the player cannot use this knowledge to identify items found in the dungeon.
-            if (!item.IdentityIsStoreBought)
-            {
-                // Check to see if the flavor is printed on the item.
-                if (ItemIsTitledWithFlavor)
-                {
-                    postNameFlavor = $" titled \"{Flavor.Name}\"";
-                }
-                else
-                {
-                    preNameFlavor = $"{Flavor.Name} ";
-                }
-            }
-            string ofName = suppressFlavors ? $" of {codedName}" : "";
-            // TODO: The ItemClass.Name brings in the item class name but only for items that have flavor.  This needs to be coded into the factory CodedName.  The Game.CountPluralize can be converted to use the ApplyPlurizationMacro.
-            string pluralizedFlavorName = $"{preNameFlavor}{Game.CountPluralize(ItemClass.Name, item.Count)}{postNameFlavor}{ofName}";
-            return includeCountPrefix ? GetPrefixCount(true, pluralizedFlavorName, item.Count, item.IsKnownArtifact) : pluralizedFlavorName;
-        }
-
         string pluralizedName = ApplyPlurizationMacro(codedName, item.Count);
         return ApplyGetPrefixCountMacro(includeCountPrefix, pluralizedName, item.Count, item.IsKnownArtifact);
     }
@@ -695,6 +684,10 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey
         {
             return false;
         }
+        if (a.IdentityIsStoreBought != b.IdentityIsStoreBought)
+        {
+            return false;
+        }
 
         int total = a.Count + b.Count;
         return total < Constants.MaxStackSize;
@@ -786,6 +779,46 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey
 
     public string GetKey => Key;
 
+    /// <summary>
+    /// Returns the name of the item as it applies to the factory class.  In other words, the name does not include the factory class name.  E.g. The factory class of scrolls would
+    /// have names like "light", "magic mapping" and "identify".  This name should be able to uniquely identify the item from other items within the same factory class.
+    /// </summary>
+    public abstract string Name { get; }
+
+    /// <summary>
+    /// Returns the syntax for the description of the item.  The and symbol '&' is used to represent the article (a, an or a number) and the
+    /// tilde symbol '~' used to place the 's', 'es', or 'ies' plural form of the noun.
+    /// </summary>
+    protected virtual string? DescriptionSyntax => null; // TODO: Books use a hard-coded realm name when the realm is set at run-time.
+
+    /// <summary>
+    /// Returns an alternate coded name for some character classes for known items; null, if there is no altername name; in which the <see cref="DescriptionSyntax"/> property will
+    /// be used.  Returns null, by default.  Spellbooks have a alternate names.  Druid, Fanatic, Monk, Priest and Ranger character classes use alternate names.  Character
+    /// classes will use alternate naming conventions when <see cref="BaseCharacterClass.UseAlternateItemNames"/> property returns true.
+    /// </summary>
+    protected virtual string? AlternateDescriptionSyntax => null; // TODO: This coded divine name has hard-coded realm names when realm is set at run-time.
+
+    protected virtual string? FlavorSuppressedDescriptionSyntax => null;
+    protected virtual string? AlternateFlavorSuppressedDescriptionSyntax => null;
+
+    protected virtual string? FlavorUnknownDescriptionSyntax => null;
+
+    protected virtual string? AlternateFlavorUnknownDescriptionSyntax => null;
+
+    /// <summary>
+    /// Returns the CodedName value to render the item descriptions.  
+    /// </summary>
+    private string _descriptionSyntax;
+
+    /// <summary>
+    /// Returns the AlternateCodedName value to render for item descriptions.
+    /// </summary>
+    private string _alternateDescriptionSyntax;
+    private string _flavorSuppressedDescriptionSyntax;
+    private string _alternateFlavorSuppressedDescriptionSyntax;
+    private string _flavorUnknownDescriptionSyntax;
+    private string _alternateFlavorUnknownDescriptionSyntax;
+
     public virtual void Bind()
     {
         Symbol = Game.SingletonRepository.Get<Symbol>(SymbolName);
@@ -817,6 +850,19 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey
 
         InitialGoldPiecesRoll = Game.ParseRoll(InitialGoldPieces);
         EatScript = Game.SingletonRepository.GetNullable<IIdentifableScript>(EatScriptName);
+
+        // Flavorless items will default to simply use the item name.
+        _descriptionSyntax = DescriptionSyntax != null ? DescriptionSyntax : Name;
+
+        // If the flavorless item doesn't have an altername, default to the non-alternate version.
+        _alternateDescriptionSyntax = AlternateDescriptionSyntax != null ? AlternateDescriptionSyntax : _descriptionSyntax;
+
+        // Flavored items that are still unknown will default to using the flavorless syntaxes.
+        _flavorUnknownDescriptionSyntax = FlavorUnknownDescriptionSyntax != null ? FlavorUnknownDescriptionSyntax : _descriptionSyntax;
+        _alternateFlavorUnknownDescriptionSyntax = AlternateFlavorUnknownDescriptionSyntax != null ? AlternateFlavorUnknownDescriptionSyntax : _flavorUnknownDescriptionSyntax;
+
+        _flavorSuppressedDescriptionSyntax = FlavorSuppressedDescriptionSyntax != null ? FlavorSuppressedDescriptionSyntax : _descriptionSyntax;
+        _alternateFlavorSuppressedDescriptionSyntax = AlternateFlavorSuppressedDescriptionSyntax != null ? AlternateFlavorSuppressedDescriptionSyntax : _flavorSuppressedDescriptionSyntax;
     }
 
     protected abstract string ItemClassName { get; }
@@ -936,11 +982,6 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey
     /// </summary>
     public virtual ColorEnum Color => ColorEnum.White;
 
-    /// <summary>
-    /// A unique identifier for the entity
-    /// </summary>
-    public abstract string Name { get; }
-
     public virtual int ArmorClass => 0;
 
     /// <summary>
@@ -1020,12 +1061,6 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey
     public virtual bool EasyKnow { get; set; } = false;
     public virtual bool Feather { get; set; } = false;
     public virtual bool FreeAct { get; set; } = false;
-
-    /// <summary>
-    /// Returns a coded name that is used to generate the description of the item.  The and symbol '&' is used to represent the article (a, an or a number) and the
-    /// tilde symbol '~' used to place the 's', 'es', or 'ies' plural form of the noun.
-    /// </summary>
-    public abstract string CodedName { get; } // TODO: Books use a hard-coded realm name when the realm is set at run-time.
 
     public virtual bool HeavyCurse { get; set; } = false;
     public virtual bool HideType { get; set; } = false;

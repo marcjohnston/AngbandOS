@@ -14,9 +14,10 @@ internal class MonsterConfusionScrollItemFactory : ScrollItemFactory
 
     protected override string SymbolName => nameof(QuestionMarkSymbol);
     public override string Name => "Monster Confusion";
-
+    protected override string? DescriptionSyntax => "& Scroll~ titled \"$Flavor$\" of $Name$";
+    protected override string? FlavorUnknownDescriptionSyntax => "& Scroll~ titled \"$Flavor$\"";
+    protected override string? FlavorSuppressedDescriptionSyntax => "& Scroll~ of $Name$";
     public override int Cost => 30;
-    public override string CodedName => "Monster Confusion";
     public override int LevelNormallyFound => 5;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

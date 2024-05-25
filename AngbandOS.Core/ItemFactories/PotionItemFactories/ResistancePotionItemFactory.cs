@@ -14,11 +14,12 @@ internal class ResistancePotionItemFactory : PotionItemFactory
 
     protected override string SymbolName => nameof(ExclamationPointSymbol);
     public override string Name => "Resistance";
-
+    protected override string? DescriptionSyntax => "& $Flavor$ Potion~ of $Name$";
+    protected override string? FlavorUnknownDescriptionSyntax => "& $Flavor$ Potion~";
+    protected override string? FlavorSuppressedDescriptionSyntax => "& Potion~ of $Name$";
     public override int Cost => 250;
     public override int DamageDice => 1;
     public override int DamageSides => 1;
-    public override string CodedName => "Resistance";
     public override bool IgnoreAcid => true;
     public override bool IgnoreCold => true;
     public override bool IgnoreElec => true;

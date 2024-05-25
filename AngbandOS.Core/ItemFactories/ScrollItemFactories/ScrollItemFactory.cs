@@ -13,8 +13,6 @@ internal abstract class ScrollItemFactory : ItemFactory
     public ScrollItemFactory(Game game) : base(game) { }
     protected override string ItemClassName => nameof(ScrollsItemClass);
 
-    public override bool ItemIsTitledWithFlavor => true;
-
     protected override (int, string)[]? MassProduceTupleNames => new (int, string)[]
     {
         (60, "3d5-3"),

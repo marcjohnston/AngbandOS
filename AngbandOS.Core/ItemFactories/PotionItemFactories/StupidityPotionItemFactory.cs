@@ -18,10 +18,11 @@ internal class StupidityPotionItemFactory : PotionItemFactory
     public override bool InitialBrokenStomp => true;
     protected override string SymbolName => nameof(ExclamationPointSymbol);
     public override string Name => "Stupidity";
-
+    protected override string? DescriptionSyntax => "& $Flavor$ Potion~ of $Name$";
+    protected override string? FlavorUnknownDescriptionSyntax => "& $Flavor$ Potion~";
+    protected override string? FlavorSuppressedDescriptionSyntax => "& Potion~ of $Name$";
     public override int DamageDice => 1;
     public override int DamageSides => 1;
-    public override string CodedName => "Stupidity";
     public override int LevelNormallyFound => 20;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

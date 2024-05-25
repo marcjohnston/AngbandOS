@@ -19,7 +19,7 @@ internal class CutlassWeaponItemFactory : MeleeWeaponItemFactory
     public override int Cost => 85;
     public override int DamageDice => 1;
     public override int DamageSides => 7;
-    public override string CodedName => "& Cutlass~";
+    protected override string? DescriptionSyntax  => "& Cutlass~";
     public override int LevelNormallyFound => 5;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

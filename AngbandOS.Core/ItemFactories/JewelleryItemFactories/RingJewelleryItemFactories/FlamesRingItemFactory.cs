@@ -26,14 +26,15 @@ internal class FlamesRingItemFactory : RingItemFactory, IItemsCanBeActivated
     public override string? DescribeActivationEffect => "ball of fire and resist fire";
     protected override string SymbolName => nameof(EqualSignSymbol);
     public override string Name => "Flames";
-
+    protected override string? DescriptionSyntax => "& $Flavor$ Ring~ of $Name$";
+    protected override string? FlavorUnknownDescriptionSyntax => "& $Flavor$ Ring~";
+    protected override string? FlavorSuppressedDescriptionSyntax => "& Ring~ of $Name$";
     public override void ApplyMagic(Item item, int level, int power, Store? store)
     {
         item.BonusArmorClass = 5 + Game.DieRoll(5) + item.GetBonusValue(10, level);
     }
     public override bool Activate => true;
     public override int Cost => 3000;
-    public override string CodedName => "Flames";
     public override bool IgnoreFire => true;
     public override int LevelNormallyFound => 50;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

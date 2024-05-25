@@ -15,11 +15,12 @@ internal class SpeedRodItemFactory : RodItemFactory
     public override bool RequiresAiming => false;
     protected override string SymbolName => nameof(MinusSignSymbol);
     public override string Name => "Speed";
-
+    protected override string? DescriptionSyntax => "& $Flavor$ Rod~ of $Name$";
+    protected override string? FlavorUnknownDescriptionSyntax => "& $Flavor$ Rod~";
+    protected override string? FlavorSuppressedDescriptionSyntax => "& Rod~ of $Name$";
     public override int Cost => 50000;
     public override int DamageDice => 1;
     public override int DamageSides => 1;
-    public override string CodedName => "Speed";
     public override int LevelNormallyFound => 95;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

@@ -44,7 +44,7 @@ internal partial class WeaponStoreFactory : StoreFactory
 
     protected override StoreStockManifestDefinition[]? StoreStockManifestDefinitions => new[]
     {
-        new StoreStockManifestDefinition(nameof(WoodenArrowAmmunitionItemFactory), 4),
+        new StoreStockManifestDefinition(nameof(ArrowAmmunitionItemFactory), 4),
         new StoreStockManifestDefinition(nameof(SteelBoltAmmunitionItemFactory), 4),
         new StoreStockManifestDefinition(nameof(LightCrossbowBowWeaponItemFactory), 2),
         new StoreStockManifestDefinition(nameof(LongBowWeaponItemFactory), 2),

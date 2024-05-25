@@ -14,13 +14,14 @@ internal class StarlightStaffItemFactory : StaffItemFactory
 
     protected override string SymbolName => nameof(UnderscoreSymbol);
     public override string Name => "Starlight";
-
+    protected override string? DescriptionSyntax => "& $Flavor$ Staff~ of $Name$";
+    protected override string? FlavorUnknownDescriptionSyntax => "& $Flavor$ Staff~";
+    protected override string? FlavorSuppressedDescriptionSyntax => "& Staff~ of $Name$";
     public override int StaffChargeCount => Game.DieRoll(5) + 6;
 
     public override int Cost => 800;
     public override int DamageDice => 1;
     public override int DamageSides => 2;
-    public override string CodedName => "Starlight";
     public override int LevelNormallyFound => 20;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

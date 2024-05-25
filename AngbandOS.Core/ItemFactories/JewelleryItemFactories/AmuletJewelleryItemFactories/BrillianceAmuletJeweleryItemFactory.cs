@@ -14,9 +14,10 @@ internal class BrillianceAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
 
     protected override string SymbolName => nameof(DoubleQuoteSymbol);
     public override string Name => "Brilliance";
-
+    protected override string? DescriptionSyntax => "& $Flavor$ Amulet~ of $Name$";
+    protected override string? FlavorUnknownDescriptionSyntax => "& $Flavor$ Amulet~";
+    protected override string? FlavorSuppressedDescriptionSyntax => "& Amulet~ of $Name$";
     public override int Cost => 500;
-    public override string CodedName => "Brilliance";
     public override bool HideType => true;
     public override bool Int => true;
     public override int LevelNormallyFound => 20;

@@ -15,9 +15,8 @@ internal class CardMasteryTarotBookItemFactory : BookItemFactory
     protected override string SymbolName => nameof(QuestionMarkSymbol);
     public override ColorEnum Color => ColorEnum.BrightPink;
     public override string Name => "[Card Mastery]";
-    public override string CodedName => "& Tarot Spellbook~ $Name$";
-    public override string? AlternateCodedName => $"& Book~ of Tarot Magic $Name$";
-
+    protected override string? DescriptionSyntax => "& Tarot Spellbook~ $Name$";
+    protected override string? AlternateDescriptionSyntax => $"& Book~ of Tarot Magic $Name$";
     public override int Cost => 1000;
     public override int DamageDice => 1;
     public override int DamageSides => 1;

@@ -14,10 +14,11 @@ internal class PoisonResistanceRingItemFactory : RingItemFactory
 
     protected override string SymbolName => nameof(EqualSignSymbol);
     public override string Name => "Poison Resistance";
-
+    protected override string? DescriptionSyntax => "& $Flavor$ Ring~ of $Name$";
+    protected override string? FlavorUnknownDescriptionSyntax => "& $Flavor$ Ring~";
+    protected override string? FlavorSuppressedDescriptionSyntax => "& Ring~ of $Name$";
     public override int Cost => 16000;
     public override bool EasyKnow => true;
-    public override string CodedName => "Poison Resistance";
     public override int LevelNormallyFound => 60;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

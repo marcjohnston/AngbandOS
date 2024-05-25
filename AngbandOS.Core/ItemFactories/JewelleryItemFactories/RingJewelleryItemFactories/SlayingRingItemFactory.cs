@@ -14,7 +14,9 @@ internal class SlayingRingItemFactory : RingItemFactory
 
     protected override string SymbolName => nameof(EqualSignSymbol);
     public override string Name => "Slaying";
-
+    protected override string? DescriptionSyntax => "& $Flavor$ Ring~ of $Name$";
+    protected override string? FlavorUnknownDescriptionSyntax => "& $Flavor$ Ring~";
+    protected override string? FlavorSuppressedDescriptionSyntax => "& Ring~ of $Name$";
     public override void ApplyMagic(Item item, int level, int power, Store? store)
     {
         if (power == 0 && Game.RandomLessThan(100) < 50)
@@ -33,7 +35,6 @@ internal class SlayingRingItemFactory : RingItemFactory
     }
 
     public override int Cost => 1000;
-    public override string CodedName => "Slaying";
     public override int LevelNormallyFound => 40;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

@@ -14,7 +14,9 @@ internal class CharismaAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
 
     protected override string SymbolName => nameof(DoubleQuoteSymbol);
     public override string Name => "Charisma";
-
+    protected override string? DescriptionSyntax => "& $Flavor$ Amulet~ of $Name$";
+    protected override string? FlavorUnknownDescriptionSyntax => "& $Flavor$ Amulet~";
+    protected override string? FlavorSuppressedDescriptionSyntax => "& Amulet~ of $Name$";
     public override void ApplyMagic(Item item, int level, int power, Store? store)
     {
         item.TypeSpecificValue = 1 + item.GetBonusValue(5, level);
@@ -27,7 +29,6 @@ internal class CharismaAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
     }
     public override bool Cha => true;
     public override int Cost => 500;
-    public override string CodedName => "Charisma";
     public override bool HideType => true;
     public override int LevelNormallyFound => 20;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

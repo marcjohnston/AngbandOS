@@ -14,11 +14,12 @@ internal class NewLifePotionItemFactory : PotionItemFactory
 
     protected override string SymbolName => nameof(ExclamationPointSymbol);
     public override string Name => "New Life";
-
+    protected override string? DescriptionSyntax => "& $Flavor$ Potion~ of $Name$";
+    protected override string? FlavorUnknownDescriptionSyntax => "& $Flavor$ Potion~";
+    protected override string? FlavorSuppressedDescriptionSyntax => "& Potion~ of $Name$";
     public override int Cost => 750000;
     public override int DamageDice => 1;
     public override int DamageSides => 1;
-    public override string CodedName => "New Life";
     public override int LevelNormallyFound => 50;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

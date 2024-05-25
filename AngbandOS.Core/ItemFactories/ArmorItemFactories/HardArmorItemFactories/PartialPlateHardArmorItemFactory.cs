@@ -20,7 +20,7 @@ internal class PartialPlateHardArmorItemFactory : HardArmorItemFactory
     public override int Cost => 1200;
     public override int DamageDice => 1;
     public override int DamageSides => 6;
-    public override string CodedName => "Partial Plate Armor~";
+    protected override string? DescriptionSyntax  => "Partial Plate Armor~";
     public override int LevelNormallyFound => 45;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

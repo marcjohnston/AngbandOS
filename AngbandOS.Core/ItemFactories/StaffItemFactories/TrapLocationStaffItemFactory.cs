@@ -14,13 +14,14 @@ internal class TrapLocationStaffItemFactory : StaffItemFactory
 
     protected override string SymbolName => nameof(UnderscoreSymbol);
     public override string Name => "Trap Location";
-
+    protected override string? DescriptionSyntax => "& $Flavor$ Staff~ of $Name$";
+    protected override string? FlavorUnknownDescriptionSyntax => "& $Flavor$ Staff~";
+    protected override string? FlavorSuppressedDescriptionSyntax => "& Staff~ of $Name$";
     public override int StaffChargeCount => Game.DieRoll(5) + 6;
 
     public override int Cost => 350;
     public override int DamageDice => 1;
     public override int DamageSides => 2;
-    public override string CodedName => "Trap Location";
     public override int LevelNormallyFound => 10;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

@@ -19,7 +19,7 @@ internal class GreatAxePolearmWeaponItemFactory : MeleeWeaponItemFactory
     public override int Cost => 500;
     public override int DamageDice => 4;
     public override int DamageSides => 4;
-    public override string CodedName => "& Great Axe~";
+    protected override string? DescriptionSyntax  => "& Great Axe~";
     public override int LevelNormallyFound => 40;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

@@ -14,9 +14,10 @@ internal class VilyaRingItemFactory : RingItemFactory
 
     protected override string SymbolName => nameof(EqualSignSymbol);
     public override string Name => "Vilya";
-
+    protected override string? DescriptionSyntax => "& $Flavor$ Ring~ of $Name$";
+    protected override string? FlavorUnknownDescriptionSyntax => "& $Flavor$ Ring~";
+    protected override string? FlavorSuppressedDescriptionSyntax => "& Ring~ of $Name$";
     public override int Cost => 300000;
-    public override string CodedName => "& Ring~"; // TODO: This appears to cause a defect in identification
     public override bool InstaArt => true;
     public override int LevelNormallyFound => 100;
     public override int Weight => 2;

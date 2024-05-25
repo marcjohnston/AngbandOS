@@ -19,7 +19,9 @@ internal class WoeRingItemFactory : RingItemFactory
 
     protected override string SymbolName => nameof(EqualSignSymbol);
     public override string Name => "Woe";
-
+    protected override string? DescriptionSyntax => "& $Flavor$ Ring~ of $Name$";
+    protected override string? FlavorUnknownDescriptionSyntax => "& $Flavor$ Ring~";
+    protected override string? FlavorSuppressedDescriptionSyntax => "& Ring~ of $Name$";
     public override void ApplyMagic(Item item, int level, int power, Store? store)
     {
         item.IdentBroken = true;
@@ -30,7 +32,6 @@ internal class WoeRingItemFactory : RingItemFactory
 
     public override bool Cha => true;
     public override bool Cursed => true;
-    public override string CodedName => "Woe";
     public override bool HideType => true;
     public override int LevelNormallyFound => 50;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

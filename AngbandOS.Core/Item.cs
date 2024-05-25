@@ -791,7 +791,6 @@ internal sealed class Item : IComparable<Item>
         return Factory.ItemsCanBeMerged(this, other);
     }
 
-
     /// <summary>
     /// 
     /// </summary>
@@ -799,14 +798,9 @@ internal sealed class Item : IComparable<Item>
     /// false, otherwise (e.g. Brown Dragon Scale Mails).  When false, the item will still be pluralized (e.g. stole one of your Brown Dragon Scale Mails).</param>
     /// <param name="mode"></param>
     /// <returns></returns>
-    public string Description(bool includeCountPrefix, int mode, bool suppressFlavors = false)
+    public string Description(bool includeCountPrefix, int mode)
     {
-        // Fixed artifacts that are known will hide their flavor.
-        if (FixedArtifact != null && Factory.IsFlavorAware)
-        {
-            suppressFlavors = true;
-        }
-        string basenm = Factory.GetDescription(this, includeCountPrefix, suppressFlavors);
+        string basenm = Factory.GetDescription(this, includeCountPrefix);
         if (IsKnown())
         {
             if (IsRandomArtifact)

@@ -20,7 +20,7 @@ internal class SoftStuddedLeatherSoftArmorItemFactory : SoftArmorItemFactory
     public override int Cost => 35;
     public override int DamageDice => 1;
     public override int DamageSides => 1;
-    public override string CodedName => "Soft Studded Leather~";
+    protected override string? DescriptionSyntax  => "Soft Studded Leather~";
     public override int LevelNormallyFound => 3;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

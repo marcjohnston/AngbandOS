@@ -19,7 +19,7 @@ internal class ScimitarWeaponItemFactory : MeleeWeaponItemFactory
     public override int Cost => 250;
     public override int DamageDice => 2;
     public override int DamageSides => 5;
-    public override string CodedName => "& Scimitar~";
+    protected override string? DescriptionSyntax  => "& Scimitar~";
     public override int LevelNormallyFound => 10;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

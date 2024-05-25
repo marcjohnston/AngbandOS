@@ -14,9 +14,10 @@ internal class ProtectionfromEvilScrollItemFactory : ScrollItemFactory
 
     protected override string SymbolName => nameof(QuestionMarkSymbol);
     public override string Name => "Protection from Evil";
-
+    protected override string? DescriptionSyntax => "& Scroll~ titled \"$Flavor$\" of $Name$";
+    protected override string? FlavorUnknownDescriptionSyntax => "& Scroll~ titled \"$Flavor$\"";
+    protected override string? FlavorSuppressedDescriptionSyntax => "& Scroll~ of $Name$";
     public override int Cost => 250;
-    public override string CodedName => "Protection from Evil";
     public override int LevelNormallyFound => 30;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

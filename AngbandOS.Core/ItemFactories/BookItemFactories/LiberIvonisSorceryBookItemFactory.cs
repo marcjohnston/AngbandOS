@@ -21,9 +21,8 @@ internal class LiberIvonisSorceryBookItemFactory : BookItemFactory
     public override int ExperienceGainDivisorForDestroying => 1;
 
     public override string Name => "[Liber Ivonis]";
-    public override string CodedName => "& Sorcery Spellbook~ $Name$";
-    public override string? AlternateCodedName => $"& Book~ of Sorcery $Name$";
-
+    protected override string? DescriptionSyntax => "& Sorcery Spellbook~ $Name$";
+    protected override string? AlternateDescriptionSyntax => $"& Book~ of Sorcery $Name$";
     public override int Cost => 100000;
     public override int DamageDice => 1;
     public override int DamageSides => 1;

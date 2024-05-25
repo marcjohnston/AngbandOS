@@ -17,7 +17,7 @@ internal class HardBiscuitFoodItemFactory : ItemFactory
     public override string Name => "Hard Biscuit";
 
     public override int Cost => 1;
-    public override string CodedName => "& Hard Biscuit~";
+    protected override string? DescriptionSyntax  => "& Hard Biscuit~";
     public override int InitialNutritionalValue => 500;
     public override int Weight => 2;
     public override string? EatScriptName => nameof(EatGoodFoodScript);

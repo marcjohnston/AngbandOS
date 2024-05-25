@@ -20,7 +20,7 @@ internal class BarChainMailHardArmorItemFactory : HardArmorItemFactory
     public override int Cost => 950;
     public override int DamageDice => 1;
     public override int DamageSides => 4;
-    public override string CodedName => "Bar Chain Mail~";
+    protected override string? DescriptionSyntax  => "Bar Chain Mail~";
     public override int LevelNormallyFound => 35;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

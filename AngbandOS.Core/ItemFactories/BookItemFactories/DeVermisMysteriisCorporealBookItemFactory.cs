@@ -15,9 +15,8 @@ internal class DeVermisMysteriisCorporealBookItemFactory : BookItemFactory
     protected override string SymbolName => nameof(QuestionMarkSymbol);
     public override ColorEnum Color => ColorEnum.BrightYellow;
     public override string Name => "[De Vermis Mysteriis]";
-    public override string CodedName => "& Corporeal Spellbook~ $Name$";
-    public override string? AlternateCodedName => "& Book~ of Corporeal Magic $Name$";
-
+    protected override string? DescriptionSyntax => "& Corporeal Spellbook~ $Name$";
+    protected override string? AlternateDescriptionSyntax => $"& Book~ of Corporeal Magic $Name$";
     public override int Cost => 25000;
     public override int DamageDice => 1;
     public override int DamageSides => 1;

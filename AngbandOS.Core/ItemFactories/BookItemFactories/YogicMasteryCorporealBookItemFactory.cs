@@ -15,9 +15,8 @@ internal class YogicMasteryCorporealBookItemFactory : BookItemFactory
     protected override string SymbolName => nameof(QuestionMarkSymbol);
     public override ColorEnum Color => ColorEnum.Yellow;
     public override string Name => "[Yogic Mastery]";
-    public override string CodedName => "& Corporeal Spellbook~ $Name$";
-    public override string? AlternateCodedName => "& Book~ of Corporeal Magic $Name$";
-
+    protected override string? DescriptionSyntax => "& Corporeal Spellbook~ $Name$";
+    protected override string? AlternateDescriptionSyntax => $"& Book~ of Corporeal Magic $Name$";
     public override int Cost => 1000;
     public override int DamageDice => 1;
     public override int DamageSides => 1;

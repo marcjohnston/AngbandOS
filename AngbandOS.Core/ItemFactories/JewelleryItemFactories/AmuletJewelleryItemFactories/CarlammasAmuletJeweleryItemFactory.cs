@@ -14,9 +14,10 @@ internal class CarlammasAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
 
     protected override string SymbolName => nameof(DoubleQuoteSymbol);
     public override string Name => "Carlammas";
-
+    protected override string? DescriptionSyntax => "& $Flavor$ Amulet~ of $Name$";
+    protected override string? FlavorUnknownDescriptionSyntax => "& $Flavor$ Amulet~";
+    protected override string? FlavorSuppressedDescriptionSyntax => "& Amulet~ of $Name$";
     public override int Cost => 60000;
-    public override string CodedName => "& Amulet~"; // TODO: This appears to cause a defect in identification
     public override bool InstaArt => true;
     public override int LevelNormallyFound => 50;
     public override int Weight => 3;

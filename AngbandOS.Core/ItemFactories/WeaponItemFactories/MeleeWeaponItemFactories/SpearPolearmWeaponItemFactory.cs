@@ -19,7 +19,7 @@ internal class SpearPolearmWeaponItemFactory : MeleeWeaponItemFactory
     public override int Cost => 36;
     public override int DamageDice => 1;
     public override int DamageSides => 6;
-    public override string CodedName => "& Spear~";
+    protected override string? DescriptionSyntax  => "& Spear~";
     public override int LevelNormallyFound => 5;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

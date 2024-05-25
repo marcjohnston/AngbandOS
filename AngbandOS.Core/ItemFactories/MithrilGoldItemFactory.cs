@@ -17,7 +17,6 @@ internal class MithrilGoldItemFactory : ItemFactory
     public override string Name => "mithril";
 
     protected override string InitialGoldPieces => "2d40x4";
-    public override string CodedName => "mithril";
     public override int LevelNormallyFound => 1;
     protected override string ItemClassName => nameof(GoldItemClass);
     public override int PackSort => 0;

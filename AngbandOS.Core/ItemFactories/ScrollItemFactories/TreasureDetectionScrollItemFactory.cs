@@ -14,13 +14,14 @@ internal class TreasureDetectionScrollItemFactory : ScrollItemFactory
 
     protected override string SymbolName => nameof(QuestionMarkSymbol);
     public override string Name => "Treasure Detection";
-
+    protected override string? DescriptionSyntax => "& Scroll~ titled \"$Flavor$\" of $Name$";
+    protected override string? FlavorUnknownDescriptionSyntax => "& Scroll~ titled \"$Flavor$\"";
+    protected override string? FlavorSuppressedDescriptionSyntax => "& Scroll~ of $Name$";
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {
         (0, 1)
     };
     public override int Cost => 15;
-    public override string CodedName => "Treasure Detection";
     public override int Weight => 5;
 
     public override void Read(ReadScrollEvent eventArgs)

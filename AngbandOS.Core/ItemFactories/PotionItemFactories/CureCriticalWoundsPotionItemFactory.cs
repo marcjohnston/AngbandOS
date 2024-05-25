@@ -14,11 +14,12 @@ internal class CureCriticalWoundsPotionItemFactory : PotionItemFactory
 
     protected override string SymbolName => nameof(ExclamationPointSymbol);
     public override string Name => "Cure Critical Wounds";
-
+    protected override string? DescriptionSyntax => "& $Flavor$ Potion~ of $Name$";
+    protected override string? FlavorUnknownDescriptionSyntax => "& $Flavor$ Potion~";
+    protected override string? FlavorSuppressedDescriptionSyntax => "& Potion~ of $Name$";
     public override int Cost => 100;
     public override int DamageDice => 1;
     public override int DamageSides => 1;
-    public override string CodedName => "Cure Critical Wounds";
     public override int LevelNormallyFound => 5;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

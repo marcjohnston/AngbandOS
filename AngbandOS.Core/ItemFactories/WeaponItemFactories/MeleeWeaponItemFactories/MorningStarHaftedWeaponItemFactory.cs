@@ -19,7 +19,7 @@ internal class MorningStarHaftedWeaponItemFactory : MeleeWeaponItemFactory
     public override int Cost => 396;
     public override int DamageDice => 2;
     public override int DamageSides => 6;
-    public override string CodedName => "& Morning Star~";
+    protected override string? DescriptionSyntax  => "& Morning Star~";
     public override int LevelNormallyFound => 10;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

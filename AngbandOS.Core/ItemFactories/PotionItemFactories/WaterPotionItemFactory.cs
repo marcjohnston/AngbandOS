@@ -13,7 +13,9 @@ internal class WaterPotionItemFactory : PotionItemFactory
     private WaterPotionItemFactory(Game game) : base(game) { } // This object is a singleton
     protected override string SymbolName => nameof(ExclamationPointSymbol);
     public override string Name => "Water";
-
+    protected override string? DescriptionSyntax => "& $Flavor$ Potion~ of $Name$";
+    protected override string? FlavorUnknownDescriptionSyntax => "& $Flavor$ Potion~";
+    protected override string? FlavorSuppressedDescriptionSyntax => "& Potion~ of $Name$";
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {
         (0, 1)
@@ -21,7 +23,6 @@ internal class WaterPotionItemFactory : PotionItemFactory
     public override int Cost => 1;
     public override int DamageDice => 1;
     public override int DamageSides => 1;
-    public override string CodedName => "Water";
     public override int InitialNutritionalValue => 200;
     public override int Weight => 4;
 

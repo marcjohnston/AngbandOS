@@ -20,7 +20,7 @@ internal class MetalLamellarHardArmorItemFactory : HardArmorItemFactory
     public override int Cost => 1250;
     public override int DamageDice => 1;
     public override int DamageSides => 6;
-    public override string CodedName => "Metal Lamellar Armor~";
+    protected override string? DescriptionSyntax  => "Metal Lamellar Armor~";
     public override int LevelNormallyFound => 45;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

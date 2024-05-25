@@ -14,7 +14,9 @@ internal class SpeedRingItemFactory : RingItemFactory
 
     protected override string SymbolName => nameof(EqualSignSymbol);
     public override string Name => "Speed";
-
+    protected override string? DescriptionSyntax => "& $Flavor$ Ring~ of $Name$";
+    protected override string? FlavorUnknownDescriptionSyntax => "& $Flavor$ Ring~";
+    protected override string? FlavorSuppressedDescriptionSyntax => "& Ring~ of $Name$";
     /// <summary>
     /// Returns the base ring treasure rating plus 25 for a ring of speed.
     /// </summary>
@@ -40,7 +42,6 @@ internal class SpeedRingItemFactory : RingItemFactory
     }
 
     public override int Cost => 100000;
-    public override string CodedName => "Speed";
     public override bool HideType => true;
     public override int LevelNormallyFound => 80;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

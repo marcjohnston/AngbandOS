@@ -14,11 +14,12 @@ internal class TeleportationAmuletJeweleryItemFactory : AmuletJeweleryItemFactor
 
     protected override string SymbolName => nameof(DoubleQuoteSymbol);
     public override string Name => "Teleportation";
-
+    protected override string? DescriptionSyntax => "& $Flavor$ Amulet~ of $Name$";
+    protected override string? FlavorUnknownDescriptionSyntax => "& $Flavor$ Amulet~";
+    protected override string? FlavorSuppressedDescriptionSyntax => "& Amulet~ of $Name$";
     public override int Cost => 250;
     public override bool Cursed => true;
     public override bool EasyKnow => true;
-    public override string CodedName => "Teleportation";
     public override int LevelNormallyFound => 15;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

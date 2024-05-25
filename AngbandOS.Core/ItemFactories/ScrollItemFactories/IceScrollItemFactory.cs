@@ -14,9 +14,10 @@ internal class IceScrollItemFactory : ScrollItemFactory
 
     protected override string SymbolName => nameof(QuestionMarkSymbol);
     public override string Name => "Ice";
-
+    protected override string? DescriptionSyntax => "& Scroll~ titled \"$Flavor$\" of $Name$";
+    protected override string? FlavorUnknownDescriptionSyntax => "& Scroll~ titled \"$Flavor$\"";
+    protected override string? FlavorSuppressedDescriptionSyntax => "& Scroll~ of $Name$";
     public override int Cost => 5000;
-    public override string CodedName => "Ice";
     public override bool IgnoreCold => true;
     public override int LevelNormallyFound => 75;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

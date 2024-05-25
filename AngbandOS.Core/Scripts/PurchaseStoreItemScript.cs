@@ -82,7 +82,7 @@ internal class PurchaseStoreItemScript : Script, IScriptStore
             }
             else
             {
-                oName = storeCommandEvent.Store.StoreFactory.GetItemDescription(jPtr);
+                oName = jPtr.Description(true, 3);
                 Game.MsgPrint($"Buying {oName} ({letterIndex.IndexToLetter()}).");
                 Game.MsgPrint(null);
                 choice = PurchaseHaggle(storeCommandEvent.Store, jPtr, out price);
@@ -95,10 +95,10 @@ internal class PurchaseStoreItemScript : Script, IScriptStore
                     Game.PlaySound(SoundEffectEnum.StoreTransaction);
                     Game.Gold.IntValue -= price;
                     Game.StorePrtGold();
-                    if (storeCommandEvent.Store.StoreFactory.StoreIdentifiesItems)
-                    {
-                        jPtr.BecomeFlavorAware();
-                    }
+                    //if (storeCommandEvent.Store.StoreFactory.StoreIdentifiesItems)
+                    //{
+                    //    jPtr.BecomeFlavorAware();
+                    //}
                     jPtr.IdentFixed = false;
                     oName = jPtr.Description(true, 3);
                     

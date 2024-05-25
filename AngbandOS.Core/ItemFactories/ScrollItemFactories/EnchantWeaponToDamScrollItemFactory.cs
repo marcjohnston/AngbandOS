@@ -14,9 +14,10 @@ internal class EnchantWeaponToDamScrollItemFactory : ScrollItemFactory
 
     protected override string SymbolName => nameof(QuestionMarkSymbol);
     public override string Name => "Enchant Weapon To-Dam";
-
+    protected override string? DescriptionSyntax => "& Scroll~ titled \"$Flavor$\" of $Name$";
+    protected override string? FlavorUnknownDescriptionSyntax => "& Scroll~ titled \"$Flavor$\"";
+    protected override string? FlavorSuppressedDescriptionSyntax => "& Scroll~ of $Name$";
     public override int Cost => 125;
-    public override string CodedName => "Enchant Weapon To-Dam";
     public override int LevelNormallyFound => 15;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

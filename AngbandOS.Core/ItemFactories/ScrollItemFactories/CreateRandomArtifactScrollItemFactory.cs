@@ -14,9 +14,10 @@ internal class CreateRandomArtifactScrollItemFactory : ScrollItemFactory
 
     protected override string SymbolName => nameof(QuestionMarkSymbol);
     public override string Name => "Artifact Creation";
-
+    protected override string? DescriptionSyntax => "& Scroll~ titled \"$Flavor$\" of $Name$";
+    protected override string? FlavorUnknownDescriptionSyntax => "& Scroll~ titled \"$Flavor$\"";
+    protected override string? FlavorSuppressedDescriptionSyntax => "& Scroll~ of $Name$";
     public override int Cost => 200000;
-    public override string CodedName => "Artifact Creation";
     public override int LevelNormallyFound => 70;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

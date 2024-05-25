@@ -19,7 +19,7 @@ internal class PickDiggingWeaponItemFactory : DiggingWeaponItemFactory
     public override int Cost => 50;
     public override int DamageDice => 1;
     public override int DamageSides => 3;
-    public override string CodedName => "& Pick~";
+    protected override string? DescriptionSyntax  => "& Pick~";
     public override int LevelNormallyFound => 5;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

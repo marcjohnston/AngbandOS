@@ -15,9 +15,8 @@ internal class DholChantsLifeBookItemFactory : BookItemFactory
     protected override string SymbolName => nameof(QuestionMarkSymbol);
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "[Dhol Chants]";
-    public override string CodedName => "& Life Spellbook~ $Name$";
-    public override string? AlternateCodedName => $"& Book~ of Life Magic $Name$";
-
+    protected override string? DescriptionSyntax => "& Life Spellbook~ $Name$";
+    protected override string? AlternateDescriptionSyntax => $"& Book~ of Life Magic $Name$";
     public override int Cost => 25000;
     public override int DamageDice => 1;
     public override int DamageSides => 1;

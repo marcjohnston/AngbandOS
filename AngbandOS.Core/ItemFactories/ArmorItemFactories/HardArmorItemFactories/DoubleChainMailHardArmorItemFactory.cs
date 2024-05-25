@@ -20,7 +20,7 @@ internal class DoubleChainMailHardArmorItemFactory : HardArmorItemFactory
     public override int Cost => 850;
     public override int DamageDice => 1;
     public override int DamageSides => 4;
-    public override string CodedName => "Double Chain Mail~";
+    protected override string? DescriptionSyntax  => "Double Chain Mail~";
     public override int LevelNormallyFound => 30;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

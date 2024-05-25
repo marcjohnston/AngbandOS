@@ -22,7 +22,7 @@ internal class GnomeSkeletonSkeletonItemFactory : ItemFactory
 
     public override int DamageDice => 1;
     public override int DamageSides => 2;
-    public override string CodedName => "& Gnome Skeleton~";
+    protected override string? DescriptionSyntax  => "& Gnome Skeleton~";
     public override int LevelNormallyFound => 5;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

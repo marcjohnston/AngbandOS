@@ -14,10 +14,11 @@ internal class SlowDigestionAmuletJeweleryItemFactory : AmuletJeweleryItemFactor
 
     protected override string SymbolName => nameof(DoubleQuoteSymbol);
     public override string Name => "Slow Digestion";
-
+    protected override string? DescriptionSyntax => "& $Flavor$ Amulet~ of $Name$";
+    protected override string? FlavorUnknownDescriptionSyntax => "& $Flavor$ Amulet~";
+    protected override string? FlavorSuppressedDescriptionSyntax => "& Amulet~ of $Name$";
     public override int Cost => 200;
     public override bool EasyKnow => true;
-    public override string CodedName => "Slow Digestion";
     public override int LevelNormallyFound => 15;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

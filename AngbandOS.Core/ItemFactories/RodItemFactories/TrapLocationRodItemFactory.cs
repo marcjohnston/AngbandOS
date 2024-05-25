@@ -15,11 +15,12 @@ internal class TrapLocationRodItemFactory : RodItemFactory
     public override bool RequiresAiming => false;
     protected override string SymbolName => nameof(MinusSignSymbol);
     public override string Name => "Trap Location";
-
+    protected override string? DescriptionSyntax => "& $Flavor$ Rod~ of $Name$";
+    protected override string? FlavorUnknownDescriptionSyntax => "& $Flavor$ Rod~";
+    protected override string? FlavorSuppressedDescriptionSyntax => "& Rod~ of $Name$";
     public override int Cost => 100;
     public override int DamageDice => 1;
     public override int DamageSides => 1;
-    public override string CodedName => "Trap Location";
     public override int LevelNormallyFound => 5;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

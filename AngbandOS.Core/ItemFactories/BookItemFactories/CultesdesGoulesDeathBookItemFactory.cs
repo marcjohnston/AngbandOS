@@ -15,9 +15,8 @@ internal class CultesdesGoulesDeathBookItemFactory : BookItemFactory
     protected override string SymbolName => nameof(QuestionMarkSymbol);
     public override ColorEnum Color => ColorEnum.Black;
     public override string Name => "[Cultes des Goules]";
-    public override string CodedName => "& Death Spellbook~ $Name$";
-    public override string? AlternateCodedName => $"& Book~ of Death Magic $Name$";
-
+    protected override string? DescriptionSyntax => "& Death Spellbook~ $Name$";
+    protected override string? AlternateDescriptionSyntax => $"& Book~ of Death Magic $Name$";
     public override int Cost => 25000;
     public override int DamageDice => 1;
     public override int DamageSides => 1;

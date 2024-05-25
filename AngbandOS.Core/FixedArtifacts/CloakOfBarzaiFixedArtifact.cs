@@ -12,7 +12,7 @@ internal class CloakOfBarzaiFixedArtifact : FixedArtifact
 {
     private CloakOfBarzaiFixedArtifact(Game game) : base(game) { }
 
-    protected override string BaseItemFactoryName => nameof(ClothCloakCloakArmorItemFactory);
+    protected override string BaseItemFactoryName => nameof(ClothCloakArmorItemFactory);
 
     // Cloak of Barzai gives resistances
     protected override string? ActivationName => nameof(ResistAll20p1d20Activation);

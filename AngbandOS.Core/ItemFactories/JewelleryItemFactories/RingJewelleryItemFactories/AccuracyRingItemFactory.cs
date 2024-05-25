@@ -28,9 +28,10 @@ internal class AccuracyRingItemFactory : RingItemFactory
     }
     protected override string SymbolName => nameof(EqualSignSymbol);
     public override string Name => "Accuracy";
-
+    protected override string? DescriptionSyntax => "& $Flavor$ Ring~ of $Name$";
+    protected override string? FlavorUnknownDescriptionSyntax => "& $Flavor$ Ring~";
+    protected override string? FlavorSuppressedDescriptionSyntax => "& Ring~ of $Name$";
     public override int Cost => 500;
-    public override string CodedName => "Accuracy";
     public override int LevelNormallyFound => 20;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

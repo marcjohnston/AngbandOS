@@ -19,7 +19,7 @@ internal class LancePolearmWeaponItemFactory : MeleeWeaponItemFactory
     public override int Cost => 230;
     public override int DamageDice => 2;
     public override int DamageSides => 8;
-    public override string CodedName => "& Lance~";
+    protected override string? DescriptionSyntax  => "& Lance~";
     public override int LevelNormallyFound => 10;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

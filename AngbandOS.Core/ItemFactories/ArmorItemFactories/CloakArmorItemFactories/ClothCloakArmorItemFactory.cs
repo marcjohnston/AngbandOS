@@ -8,17 +8,17 @@
 namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
-internal class ClothCloakCloakArmorItemFactory : CloakArmorItemFactory
+internal class ClothCloakArmorItemFactory : CloakArmorItemFactory
 {
-    private ClothCloakCloakArmorItemFactory(Game game) : base(game) { } // This object is a singleton.
+    private ClothCloakArmorItemFactory(Game game) : base(game) { } // This object is a singleton.
 
     protected override string SymbolName => nameof(OpenParenthesisSymbol);
     public override ColorEnum Color => ColorEnum.Green;
-    public override string Name => "Cloak";
+    public override string Name => "Cloth";
+    protected override string DescriptionSyntax => "& Cloak~";
 
     public override int ArmorClass => 1;
     public override int Cost => 3;
-    public override string CodedName => "& Cloak~";
     public override int LevelNormallyFound => 1;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

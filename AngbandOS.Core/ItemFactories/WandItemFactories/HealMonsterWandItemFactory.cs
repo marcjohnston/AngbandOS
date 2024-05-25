@@ -18,11 +18,12 @@ internal class HealMonsterWandItemFactory : WandItemFactory
     public override bool InitialBrokenStomp => true;
     protected override string SymbolName => nameof(MinusSignSymbol);
     public override string Name => "Heal Monster";
-
+    protected override string? DescriptionSyntax => "& $Flavor$ Wand~ of $Name$";
+    protected override string? FlavorUnknownDescriptionSyntax => "& $Flavor$ Wand~";
+    protected override string? FlavorSuppressedDescriptionSyntax => "& Wand~ of $Name$";
     public override int RodChargeCount => Game.DieRoll(20) + 8;
     public override int DamageDice => 1;
     public override int DamageSides => 1;
-    public override string CodedName => "Heal Monster";
     public override int LevelNormallyFound => 2;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

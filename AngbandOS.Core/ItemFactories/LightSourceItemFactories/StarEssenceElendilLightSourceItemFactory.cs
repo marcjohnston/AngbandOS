@@ -19,7 +19,7 @@ internal class StarEssenceElendilLightSourceItemFactory : LightSourceItemFactory
     public override int Cost => 25000;
     public override int DamageDice => 1;
     public override int DamageSides => 1;
-    public override string CodedName => "& Star Essence~"; // TODO: This appears to cause a defect in identification
+    protected override string? DescriptionSyntax  => "& Star Essence~"; // TODO: This appears to cause a defect in identification
     public override bool InstaArt => true;
     public override int LevelNormallyFound => 30;
     public override int Weight => 5;

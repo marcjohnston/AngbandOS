@@ -20,7 +20,7 @@ internal class LargeLeatherShieldArmorItemFactory : ShieldArmorItemFactory
     public override int Cost => 120;
     public override int DamageDice => 1;
     public override int DamageSides => 2;
-    public override string CodedName => "& Large Leather Shield~";
+    protected override string? DescriptionSyntax  => "& Large Leather Shield~";
     public override int LevelNormallyFound => 15;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

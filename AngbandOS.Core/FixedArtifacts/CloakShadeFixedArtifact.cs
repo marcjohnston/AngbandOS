@@ -12,7 +12,7 @@ internal class CloakShadeFixedArtifact : FixedArtifact
 {
     private CloakShadeFixedArtifact(Game game) : base(game) { }
 
-    protected override string BaseItemFactoryName => nameof(ClothCloakCloakArmorItemFactory);
+    protected override string BaseItemFactoryName => nameof(ClothCloakArmorItemFactory);
 
 
     public override ColorEnum Color => ColorEnum.Green;

@@ -18,10 +18,11 @@ internal class WeaknessPotionItemFactory : PotionItemFactory
     public override bool InitialBrokenStomp => true;
     protected override string SymbolName => nameof(ExclamationPointSymbol);
     public override string Name => "Weakness";
-
+    protected override string? DescriptionSyntax => "& $Flavor$ Potion~ of $Name$";
+    protected override string? FlavorUnknownDescriptionSyntax => "& $Flavor$ Potion~";
+    protected override string? FlavorSuppressedDescriptionSyntax => "& Potion~ of $Name$";
     public override int DamageDice => 3;
     public override int DamageSides => 12;
-    public override string CodedName => "Weakness";
     public override int LevelNormallyFound => 3;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

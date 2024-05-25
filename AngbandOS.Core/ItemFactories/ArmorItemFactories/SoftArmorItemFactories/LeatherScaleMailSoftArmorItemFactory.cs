@@ -20,7 +20,7 @@ internal class LeatherScaleMailSoftArmorItemFactory : SoftArmorItemFactory
     public override int Cost => 450;
     public override int DamageDice => 1;
     public override int DamageSides => 1;
-    public override string CodedName => "Leather Scale Mail~";
+    protected override string? DescriptionSyntax  => "Leather Scale Mail~";
     public override int LevelNormallyFound => 15;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

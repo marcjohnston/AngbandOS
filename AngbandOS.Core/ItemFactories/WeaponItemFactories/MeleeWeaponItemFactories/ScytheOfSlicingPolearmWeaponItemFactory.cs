@@ -19,7 +19,7 @@ internal class ScytheOfSlicingPolearmWeaponItemFactory : MeleeWeaponItemFactory
     public override int Cost => 3500;
     public override int DamageDice => 8;
     public override int DamageSides => 4;
-    public override string CodedName => "& Scythe~ of Slicing";
+    protected override string? DescriptionSyntax  => "& Scythe~ of Slicing";
     public override int LevelNormallyFound => 60;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

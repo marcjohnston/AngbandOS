@@ -22,7 +22,7 @@ internal class DwarfSkeletonSkeletonItemFactory : ItemFactory
 
     public override int DamageDice => 1;
     public override int DamageSides => 2;
-    public override string CodedName => "& Dwarf Skeleton~";
+    protected override string? DescriptionSyntax  => "& Dwarf Skeleton~";
     public override int LevelNormallyFound => 5;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

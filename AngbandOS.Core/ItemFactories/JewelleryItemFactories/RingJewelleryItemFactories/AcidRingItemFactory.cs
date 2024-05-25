@@ -29,10 +29,11 @@ internal class AcidRingItemFactory : RingItemFactory, IItemsCanBeActivated
     public override string? DescribeActivationEffect => "ball of acid and resist acid";
     protected override string SymbolName => nameof(EqualSignSymbol);
     public override string Name => "Acid";
-
+    protected override string? DescriptionSyntax => "& $Flavor$ Ring~ of $Name$";
+    protected override string? FlavorUnknownDescriptionSyntax => "& $Flavor$ Ring~";
+    protected override string? FlavorSuppressedDescriptionSyntax => "& Ring~ of $Name$";
     public override bool Activate => true;
     public override int Cost => 3000;
-    public override string CodedName => "Acid";
     public override bool IgnoreAcid => true;
     public override int LevelNormallyFound => 50;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

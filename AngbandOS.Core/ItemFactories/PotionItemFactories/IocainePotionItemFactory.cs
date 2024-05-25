@@ -18,10 +18,11 @@ internal class IocainePotionItemFactory : PotionItemFactory
     public override bool InitialBrokenStomp => true;
     protected override string SymbolName => nameof(ExclamationPointSymbol);
     public override string Name => "Iocaine";
-
+    protected override string? DescriptionSyntax => "& $Flavor$ Potion~ of $Name$";
+    protected override string? FlavorUnknownDescriptionSyntax => "& $Flavor$ Potion~";
+    protected override string? FlavorSuppressedDescriptionSyntax => "& Potion~ of $Name$";
     public override int DamageDice => 20;
     public override int DamageSides => 20;
-    public override string CodedName => "Iocaine";
     public override int LevelNormallyFound => 55;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

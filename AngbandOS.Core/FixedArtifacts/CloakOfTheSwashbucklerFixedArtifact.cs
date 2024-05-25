@@ -12,7 +12,7 @@ internal class CloakOfTheSwashbucklerFixedArtifact : FixedArtifact
 {
     private CloakOfTheSwashbucklerFixedArtifact(Game game) : base(game) { }
 
-    protected override string BaseItemFactoryName => nameof(ClothCloakCloakArmorItemFactory);
+    protected override string BaseItemFactoryName => nameof(ClothCloakArmorItemFactory);
 
     // Swashbuckler recharges items
     protected override string? ActivationName => nameof(RechargeActivation);

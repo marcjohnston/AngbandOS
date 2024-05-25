@@ -14,11 +14,12 @@ internal class ConstitutionPotionItemFactory : PotionItemFactory
 
     protected override string SymbolName => nameof(ExclamationPointSymbol);
     public override string Name => "Constitution";
-
+    protected override string? DescriptionSyntax => "& $Flavor$ Potion~ of $Name$";
+    protected override string? FlavorUnknownDescriptionSyntax => "& $Flavor$ Potion~";
+    protected override string? FlavorSuppressedDescriptionSyntax => "& Potion~ of $Name$";
     public override int Cost => 8000;
     public override int DamageDice => 1;
     public override int DamageSides => 1;
-    public override string CodedName => "Constitution";
     public override int LevelNormallyFound => 20;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

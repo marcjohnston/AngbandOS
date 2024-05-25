@@ -18,7 +18,9 @@ internal class DoomAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
     public override bool InitialBrokenStomp => true;
     protected override string SymbolName => nameof(DoubleQuoteSymbol);
     public override string Name => "DOOM";
-
+    protected override string? DescriptionSyntax => "& $Flavor$ Amulet~ of $Name$";
+    protected override string? FlavorUnknownDescriptionSyntax => "& $Flavor$ Amulet~";
+    protected override string? FlavorSuppressedDescriptionSyntax => "& Amulet~ of $Name$";
     public override void ApplyMagic(Item item, int level, int power, Store? store)
     {
         item.IdentBroken = true;
@@ -30,7 +32,6 @@ internal class DoomAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
     public override bool Con => true;
     public override bool Cursed => true;
     public override bool Dex => true;
-    public override string CodedName => "DOOM";
     public override bool HideType => true;
     public override bool Int => true;
     public override int LevelNormallyFound => 50;

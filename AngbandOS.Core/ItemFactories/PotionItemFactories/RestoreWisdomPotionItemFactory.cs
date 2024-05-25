@@ -14,11 +14,12 @@ internal class RestoreWisdomPotionItemFactory : PotionItemFactory
 
     protected override string SymbolName => nameof(ExclamationPointSymbol);
     public override string Name => "Restore Wisdom";
-
+    protected override string? DescriptionSyntax => "& $Flavor$ Potion~ of $Name$";
+    protected override string? FlavorUnknownDescriptionSyntax => "& $Flavor$ Potion~";
+    protected override string? FlavorSuppressedDescriptionSyntax => "& Potion~ of $Name$";
     public override int Cost => 300;
     public override int DamageDice => 1;
     public override int DamageSides => 1;
-    public override string CodedName => "Restore Wisdom";
     public override int LevelNormallyFound => 25;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

@@ -20,7 +20,7 @@ internal class MithrilChainMailHardArmorItemFactory : HardArmorItemFactory
     public override int Cost => 7000;
     public override int DamageDice => 1;
     public override int DamageSides => 4;
-    public override string CodedName => "Mithril Chain Mail~";
+    protected override string? DescriptionSyntax  => "Mithril Chain Mail~";
     public override bool IgnoreAcid => true;
     public override int LevelNormallyFound => 55;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

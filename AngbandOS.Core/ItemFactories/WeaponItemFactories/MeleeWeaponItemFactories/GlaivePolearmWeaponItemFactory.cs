@@ -19,7 +19,7 @@ internal class GlaivePolearmWeaponItemFactory : MeleeWeaponItemFactory
     public override int Cost => 363;
     public override int DamageDice => 2;
     public override int DamageSides => 6;
-    public override string CodedName => "& Glaive~";
+    protected override string? DescriptionSyntax  => "& Glaive~";
     public override int LevelNormallyFound => 20;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

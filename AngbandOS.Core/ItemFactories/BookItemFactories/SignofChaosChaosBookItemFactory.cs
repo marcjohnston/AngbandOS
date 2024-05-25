@@ -15,9 +15,8 @@ internal class SignOfChaosChaosBookItemFactory : BookItemFactory
     protected override string SymbolName => nameof(QuestionMarkSymbol);
     public override ColorEnum Color => ColorEnum.BrightRed;
     public override string Name => "[Sign of Chaos]";
-    public override string CodedName => "& Chaos Spellbook~ $Name$";
-    public override string? AlternateCodedName => $"& Book~ of Chaos Magic $Name$";
-
+    protected override string? DescriptionSyntax => "& Chaos Spellbook~ $Name$";
+    protected override string? AlternateDescriptionSyntax => $"& Book~ of Chaos Magic $Name$";
     public override int Cost => 100;
     public override int DamageDice => 1;
     public override int DamageSides => 1;

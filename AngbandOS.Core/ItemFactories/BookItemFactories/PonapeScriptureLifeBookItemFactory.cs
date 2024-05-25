@@ -15,9 +15,8 @@ internal class PonapeScriptureLifeBookItemFactory : BookItemFactory
     protected override string SymbolName => nameof(QuestionMarkSymbol);
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "[Ponape Scripture]";
-    public override string CodedName => "& Life Spellbook~ $Name$";
-    public override string? AlternateCodedName => $"& Book~ of Life Magic $Name$";
-
+    protected override string? DescriptionSyntax => "& Life Spellbook~ $Name$";
+    protected override string? AlternateDescriptionSyntax => $"& Book~ of Life Magic $Name$";
 
     /// <summary>
     /// Returns a divisor of 1 because this is the most powerful book for this realm of magic.  Destroying this book provides the most experience.

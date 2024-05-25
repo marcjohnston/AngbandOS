@@ -14,8 +14,9 @@ internal class SearchingAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
 
     protected override string SymbolName => nameof(DoubleQuoteSymbol);
     public override string Name => "Searching";
-
-
+    protected override string? DescriptionSyntax => "& $Flavor$ Amulet~ of $Name$";
+    protected override string? FlavorUnknownDescriptionSyntax => "& $Flavor$ Amulet~";
+    protected override string? FlavorSuppressedDescriptionSyntax => "& Amulet~ of $Name$";
     public override void ApplyMagic(Item item, int level, int power, Store? store)
     {
         item.TypeSpecificValue = Game.DieRoll(5) + item.GetBonusValue(5, level);
@@ -27,7 +28,6 @@ internal class SearchingAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
         }
     }
     public override int Cost => 600;
-    public override string CodedName => "Searching";
     public override bool HideType => true;
     public override int LevelNormallyFound => 30;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

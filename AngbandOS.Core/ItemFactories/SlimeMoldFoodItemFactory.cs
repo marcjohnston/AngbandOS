@@ -17,7 +17,7 @@ internal class SlimeMoldFoodItemFactory : ItemFactory
     public override string Name => "Slime Mold";
 
     public override int Cost => 2;
-    public override string CodedName => "& Slime Mold~";
+    protected override string? DescriptionSyntax  => "& Slime Mold~";
     public override int LevelNormallyFound => 1;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

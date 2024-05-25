@@ -17,7 +17,6 @@ internal class SapphiresGoldItemFactory : ItemFactory
     public override string Name => "sapphires";
 
     protected override string InitialGoldPieces => "2d20x4";
-    public override string CodedName => "sapphires";
     public override int LevelNormallyFound => 1;
     protected override string ItemClassName => nameof(GoldItemClass);
     public override int PackSort => 0;

@@ -15,9 +15,8 @@ internal class MagicksOfMasteryFolkBookItemFactory : BookItemFactory
     protected override string SymbolName => nameof(QuestionMarkSymbol);
     public override ColorEnum Color => ColorEnum.BrightPurple;
     public override string Name => "[Magicks of Mastery]";
-    public override string CodedName => "& Folk Spellbook~ $Name$";
-    public override string? AlternateCodedName => $"& Book~ of Folk Magic $Name$";
-
+    protected override string? DescriptionSyntax => "& Folk Spellbook~ $Name$";
+    protected override string? AlternateDescriptionSyntax => $"& Book~ of Folk Magic $Name$";
 
     /// <summary>
     /// Returns a divisor of 1 because this is the most powerful book for this realm of magic.  Destroying this book provides the most experience.

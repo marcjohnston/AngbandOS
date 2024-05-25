@@ -14,12 +14,13 @@ internal class FrostBoltsWandItemFactory : WandItemFactory
 
     protected override string SymbolName => nameof(MinusSignSymbol);
     public override string Name => "Frost Bolts";
-
+    protected override string? DescriptionSyntax => "& $Flavor$ Wand~ of $Name$";
+    protected override string? FlavorUnknownDescriptionSyntax => "& $Flavor$ Wand~";
+    protected override string? FlavorSuppressedDescriptionSyntax => "& Wand~ of $Name$";
     public override int RodChargeCount => Game.DieRoll(5) + 6;
     public override int Cost => 800;
     public override int DamageDice => 1;
     public override int DamageSides => 1;
-    public override string CodedName => "Frost Bolts";
     public override int LevelNormallyFound => 20;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

@@ -18,9 +18,10 @@ internal class WeaknessRingItemFactory : RingItemFactory
     public override bool InitialBrokenStomp => true;
     protected override string SymbolName => nameof(EqualSignSymbol);
     public override string Name => "Weakness";
-
+    protected override string? DescriptionSyntax => "& $Flavor$ Ring~ of $Name$";
+    protected override string? FlavorUnknownDescriptionSyntax => "& $Flavor$ Ring~";
+    protected override string? FlavorSuppressedDescriptionSyntax => "& Ring~ of $Name$";
     public override bool Cursed => true;
-    public override string CodedName => "Weakness";
     public override bool HideType => true;
     public override int LevelNormallyFound => 5;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

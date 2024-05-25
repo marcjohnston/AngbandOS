@@ -20,7 +20,7 @@ internal class LargeMetalShieldArmorItemFactory : ShieldArmorItemFactory
     public override int Cost => 200;
     public override int DamageDice => 1;
     public override int DamageSides => 3;
-    public override string CodedName => "& Large Metal Shield~";
+    protected override string? DescriptionSyntax  => "& Large Metal Shield~";
     public override int LevelNormallyFound => 30;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

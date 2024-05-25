@@ -26,7 +26,7 @@ internal class ShardOfPotteryJunkItemFactory : ItemFactory
     };
     public override int DamageDice => 1;
     public override int DamageSides => 1;
-    public override string CodedName => "& Shard~ of Pottery";
+    protected override string? DescriptionSyntax  => "& Shard~ of Pottery";
     public override int Weight => 5;
     protected override string ItemClassName => nameof(JunkItemClass);
     public override int PackSort => 38;

@@ -14,12 +14,13 @@ internal class DetectInvisibleStaffItemFactory : StaffItemFactory
 
     protected override string SymbolName => nameof(UnderscoreSymbol);
     public override string Name => "Detect Invisible";
-
+    protected override string? DescriptionSyntax => "& $Flavor$ Staff~ of $Name$";
+    protected override string? FlavorUnknownDescriptionSyntax => "& $Flavor$ Staff~";
+    protected override string? FlavorSuppressedDescriptionSyntax => "& Staff~ of $Name$";
     public override int StaffChargeCount => Game.DieRoll(15) + 8;
     public override int Cost => 200;
     public override int DamageDice => 1;
     public override int DamageSides => 2;
-    public override string CodedName => "Detect Invisible";
     public override int LevelNormallyFound => 5;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

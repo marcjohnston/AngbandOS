@@ -14,9 +14,9 @@ internal class IdentifyScrollItemFactory : ScrollItemFactory
 
     protected override string SymbolName => nameof(QuestionMarkSymbol);
     public override string Name => "Identify";
-
-    public override int Cost => 50;
-    public override string CodedName => "Identify";
+    protected override string? DescriptionSyntax => "& Scroll~ titled \"$Flavor$\" of $Name$";
+    protected override string? FlavorUnknownDescriptionSyntax => "& Scroll~ titled \"$Flavor$\"";
+    protected override string? FlavorSuppressedDescriptionSyntax => "& Scroll~ of $Name$";    public override int Cost => 50;
     public override int LevelNormallyFound => 1;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

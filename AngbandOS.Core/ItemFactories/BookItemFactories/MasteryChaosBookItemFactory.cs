@@ -15,9 +15,8 @@ internal class MasteryChaosBookItemFactory : BookItemFactory
     protected override string SymbolName => nameof(QuestionMarkSymbol);
     public override ColorEnum Color => ColorEnum.BrightRed;
     public override string Name => "[Chaos Mastery]";
-    public override string CodedName => "& Chaos Spellbook~ $Name$";
-    public override string? AlternateCodedName => $"& Book~ of Chaos Magic $Name$";
-
+    protected override string? DescriptionSyntax => "& Chaos Spellbook~ $Name$";
+    protected override string? AlternateDescriptionSyntax => $"& Book~ of Chaos Magic $Name$";
     public override int Cost => 1000;
     public override int DamageDice => 1;
     public override int DamageSides => 1;

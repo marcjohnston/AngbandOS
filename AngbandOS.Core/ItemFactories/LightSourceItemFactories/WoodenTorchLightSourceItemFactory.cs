@@ -58,7 +58,7 @@ internal class WoodenTorchLightSourceItemFactory : LightSourceItemFactory
     public override int DamageDice => 1;
     public override int DamageSides => 1;
     public override bool EasyKnow => true;
-    public override string CodedName => "& Wooden Torch~";
+    protected override string? DescriptionSyntax  => "& Wooden Torch~";
     public override int LevelNormallyFound => 1;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

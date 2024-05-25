@@ -14,12 +14,13 @@ internal class FireBallsWandItemFactory : WandItemFactory
 
     protected override string SymbolName => nameof(MinusSignSymbol);
     public override string Name => "Fire Balls";
-
+    protected override string? DescriptionSyntax => "& $Flavor$ Wand~ of $Name$";
+    protected override string? FlavorUnknownDescriptionSyntax => "& $Flavor$ Wand~";
+    protected override string? FlavorSuppressedDescriptionSyntax => "& Wand~ of $Name$";
     public override int RodChargeCount => Game.DieRoll(4) + 2;
     public override int Cost => 1800;
     public override int DamageDice => 1;
     public override int DamageSides => 1;
-    public override string CodedName => "Fire Balls";
     public override bool IgnoreFire => true;
     public override int LevelNormallyFound => 50;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

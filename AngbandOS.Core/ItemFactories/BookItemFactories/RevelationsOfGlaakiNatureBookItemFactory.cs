@@ -15,9 +15,8 @@ internal class RevelationsOfGlaakiNatureBookItemFactory : BookItemFactory
     protected override string SymbolName => nameof(QuestionMarkSymbol);
     public override ColorEnum Color => ColorEnum.Green;
     public override string Name => "[Revelations of Glaaki]";
-    public override string CodedName => "& Nature Spellbook~ $Name$";
-    public override string? AlternateCodedName => $"& Book~ of Nature Magic $Name$";
-
+    protected override string? DescriptionSyntax => "& Nature Spellbook~ $Name$";
+    protected override string? AlternateDescriptionSyntax => $"& Book~ of Nature Magic $Name$";
     public override int Cost => 25000;
     public override int DamageDice => 1;
     public override int DamageSides => 1;

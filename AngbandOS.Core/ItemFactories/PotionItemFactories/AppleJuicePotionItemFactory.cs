@@ -13,7 +13,9 @@ internal class AppleJuicePotionItemFactory : PotionItemFactory
     private AppleJuicePotionItemFactory(Game game) : base(game) { } // This object is a singleton
     protected override string SymbolName => nameof(ExclamationPointSymbol);
     public override string Name => "Apple Juice";
-
+    protected override string? DescriptionSyntax => "& $Flavor$ Potion~ of $Name$";
+    protected override string? FlavorUnknownDescriptionSyntax => "& $Flavor$ Potion~";
+    protected override string? FlavorSuppressedDescriptionSyntax => "& Potion~ of $Name$";
     public override void Bind()
     {
         base.Bind();
@@ -26,7 +28,6 @@ internal class AppleJuicePotionItemFactory : PotionItemFactory
     public override int Cost => 1;
     public override int DamageDice => 1;
     public override int DamageSides => 1;
-    public override string CodedName => "Apple Juice";
 
     /// <summary>
     /// Returns 250 turns of sustenance for this apply juice food item.

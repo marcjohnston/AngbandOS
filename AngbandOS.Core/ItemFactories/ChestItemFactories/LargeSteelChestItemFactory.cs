@@ -19,7 +19,7 @@ internal class LargeSteelChestItemFactory : ChestItemFactory
     public override int Cost => 250;
     public override int DamageDice => 2;
     public override int DamageSides => 6;
-    public override string CodedName => "& Large steel chest~";
+    protected override string? DescriptionSyntax  => "& Large steel chest~";
     public override int LevelNormallyFound => 55;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

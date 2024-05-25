@@ -14,7 +14,9 @@ internal class LordlyProtectionRingItemFactory : RingItemFactory
 
     protected override string SymbolName => nameof(EqualSignSymbol);
     public override string Name => "Lordly Protection";
-
+    protected override string? DescriptionSyntax => "& $Flavor$ Ring~ of $Name$";
+    protected override string? FlavorUnknownDescriptionSyntax => "& $Flavor$ Ring~";
+    protected override string? FlavorSuppressedDescriptionSyntax => "& Ring~ of $Name$";
     /// <summary>
     /// Returns the base ring treasure rating plus 5 for rings of lordly protection.
     /// </summary>
@@ -31,7 +33,6 @@ internal class LordlyProtectionRingItemFactory : RingItemFactory
     }
     public override int Cost => 100000;
     public override bool FreeAct => true;
-    public override string CodedName => "Lordly Protection";
     public override bool HoldLife => true;
     public override int LevelNormallyFound => 100;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

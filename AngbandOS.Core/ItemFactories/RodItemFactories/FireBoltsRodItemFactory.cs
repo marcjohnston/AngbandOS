@@ -15,11 +15,12 @@ internal class FireBoltsRodItemFactory : RodItemFactory
     public override bool RequiresAiming => true;
     protected override string SymbolName => nameof(MinusSignSymbol);
     public override string Name => "Fire Bolts";
-
+    protected override string? DescriptionSyntax => "& $Flavor$ Rod~ of $Name$";
+    protected override string? FlavorUnknownDescriptionSyntax => "& $Flavor$ Rod~";
+    protected override string? FlavorSuppressedDescriptionSyntax => "& Rod~ of $Name$";
     public override int Cost => 3000;
     public override int DamageDice => 1;
     public override int DamageSides => 1;
-    public override string CodedName => "Fire Bolts";
     public override int LevelNormallyFound => 30;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

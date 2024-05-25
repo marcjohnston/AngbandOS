@@ -58,7 +58,7 @@ internal class BrassLanternLightSourceItemFactory : LightSourceItemFactory
     public override int DamageDice => 1;
     public override int DamageSides => 1;
     public override bool EasyKnow => true;
-    public override string CodedName => "& Brass Lantern~";
+    protected override string? DescriptionSyntax  => "& Brass Lantern~";
     public override bool IgnoreFire => true;
     public override int LevelNormallyFound => 3;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

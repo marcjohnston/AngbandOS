@@ -14,12 +14,13 @@ internal class DragonsFlameWandItemFactory : WandItemFactory
 
     protected override string SymbolName => nameof(MinusSignSymbol);
     public override string Name => "Dragon's Flame";
-
+    protected override string? DescriptionSyntax => "& $Flavor$ Wand~ of $Name$";
+    protected override string? FlavorUnknownDescriptionSyntax => "& $Flavor$ Wand~";
+    protected override string? FlavorSuppressedDescriptionSyntax => "& Wand~ of $Name$";
     public override int RodChargeCount => Game.DieRoll(3) + 1;
     public override int Cost => 2400;
     public override int DamageDice => 1;
     public override int DamageSides => 1;
-    public override string CodedName => "Dragon's Flame";
     public override bool IgnoreAcid => true;
     public override bool IgnoreCold => true;
     public override bool IgnoreElec => true;

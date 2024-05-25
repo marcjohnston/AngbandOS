@@ -14,11 +14,12 @@ internal class DiseaseMushroomFoodItemFactory : ItemFactory
 
     protected override string SymbolName => nameof(CommaSymbol);
     public override string Name => "Disease";
-
+    protected override string? DescriptionSyntax => "& $Flavor$ Mushroom~ of $Name$";
+    protected override string? FlavorUnknownDescriptionSyntax => "& $Flavor$ Mushroom~";
+    protected override string? FlavorSuppressedDescriptionSyntax => "& Mushroom~ of $Name$";
     public override int Cost => 50;
     public override int DamageDice => 10;
     public override int DamageSides => 10;
-    public override string CodedName => "Disease";
     public override int LevelNormallyFound => 20;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

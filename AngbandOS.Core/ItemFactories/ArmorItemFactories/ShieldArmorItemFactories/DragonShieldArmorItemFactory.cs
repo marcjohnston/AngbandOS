@@ -39,7 +39,7 @@ internal class DragonShieldArmorItemFactory : ShieldArmorItemFactory
     public override int Cost => 10000;
     public override int DamageDice => 1;
     public override int DamageSides => 3;
-    public override string CodedName => "& Dragon Shield~";
+    protected override string? DescriptionSyntax  => "& Dragon Shield~";
     public override bool IgnoreAcid => true;
     public override bool IgnoreCold => true;
     public override bool IgnoreElec => true;

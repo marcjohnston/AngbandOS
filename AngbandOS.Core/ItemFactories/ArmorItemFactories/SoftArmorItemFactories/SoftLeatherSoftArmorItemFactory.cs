@@ -18,7 +18,7 @@ internal class SoftLeatherSoftArmorItemFactory : SoftArmorItemFactory
 
     public override int ArmorClass => 4;
     public override int Cost => 18;
-    public override string CodedName => "Soft Leather Armor~";
+    protected override string? DescriptionSyntax  => "Soft Leather Armor~";
     public override int LevelNormallyFound => 3;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

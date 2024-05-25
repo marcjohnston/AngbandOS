@@ -19,7 +19,7 @@ internal class BallAndChainHaftedWeaponItemFactory : MeleeWeaponItemFactory
     public override int Cost => 200;
     public override int DamageDice => 2;
     public override int DamageSides => 4;
-    public override string CodedName => "& Ball-and-Chain~";
+    protected override string? DescriptionSyntax  => "& Ball-and-Chain~";
     public override int LevelNormallyFound => 20;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {
