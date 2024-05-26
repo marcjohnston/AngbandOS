@@ -31,24 +31,24 @@ internal class DragonsBreathWandItemFactory : WandItemFactory
         (60, 4)
     };
     public override int Weight => 10;
-    public override bool ExecuteActivation(Game game, int dir)
+    public override bool ActivateWand(int dir)
     {
         switch (Game.RandomLessThan(5))
         {
             case 0:
-                game.FireBall(game.SingletonRepository.Get<Projectile>(nameof(AcidProjectile)), dir, 100, -3);
+                Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(AcidProjectile)), dir, 100, -3);
                 break;
             case 1:
-                game.FireBall(game.SingletonRepository.Get<Projectile>(nameof(ElecProjectile)), dir, 80, -3);
+                Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(ElecProjectile)), dir, 80, -3);
                 break;
             case 2:
-                game.FireBall(game.SingletonRepository.Get<Projectile>(nameof(FireProjectile)), dir, 100, -3);
+                Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(FireProjectile)), dir, 100, -3);
                 break;
             case 3:
-                game.FireBall(game.SingletonRepository.Get<Projectile>(nameof(ColdProjectile)), dir, 80, -3);
+                Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(ColdProjectile)), dir, 80, -3);
                 break;
             case 4:
-                game.FireBall(game.SingletonRepository.Get<Projectile>(nameof(PoisProjectile)), dir, 60, -3);
+                Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(PoisProjectile)), dir, 60, -3);
                 break;
             default:
                 throw new Exception("Internal error.");

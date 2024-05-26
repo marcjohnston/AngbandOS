@@ -98,7 +98,7 @@ internal abstract class WandItemFactory : ItemFactory
 
     public override int PackSort => 14;
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Wand;
-    public abstract bool ExecuteActivation(Game game, int dir);
+    public abstract bool ActivateWand(int dir);
     public override int BaseValue => 50;
     public override bool CanBeAimed => true;
     public override bool HatesElectricity => true;

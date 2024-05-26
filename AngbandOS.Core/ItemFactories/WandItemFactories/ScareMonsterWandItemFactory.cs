@@ -27,8 +27,8 @@ internal class ScareMonsterWandItemFactory : WandItemFactory
         (10, 4)
     };
     public override int Weight => 10;
-    public override bool ExecuteActivation(Game game, int dir)
+    public override bool ActivateWand(int dir)
     {
-        return game.FearMonster(dir, 10);
+        return Game.FearMonster(dir, 10);
     }
 }

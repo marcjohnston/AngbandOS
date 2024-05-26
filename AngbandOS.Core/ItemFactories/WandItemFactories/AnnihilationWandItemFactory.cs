@@ -31,8 +31,8 @@ internal class AnnihilationWandItemFactory : WandItemFactory
         (60, 4)
     };
     public override int Weight => 10;
-    public override bool ExecuteActivation(Game game, int dir)
+    public override bool ActivateWand(int dir)
     {
-        return game.DrainLife(dir, 125);
+        return Game.DrainLife(dir, 125);
     }
 }

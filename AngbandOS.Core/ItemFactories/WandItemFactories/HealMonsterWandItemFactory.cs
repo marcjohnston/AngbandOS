@@ -30,8 +30,8 @@ internal class HealMonsterWandItemFactory : WandItemFactory
         (2, 1)
     };
     public override int Weight => 10;
-    public override bool ExecuteActivation(Game game, int dir)
+    public override bool ActivateWand(int dir)
     {
-        return game.HealMonster(dir);
+        return Game.HealMonster(dir);
     }
 }

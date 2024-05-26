@@ -95,7 +95,7 @@ internal class AimWandScript : Script, IScript, IRepeatableScript, ISuccessfulSc
         }
         Game.PlaySound(SoundEffectEnum.ZapRod);
         WandItemFactory activateableItem = (WandItemFactory)item.Factory;
-        if (activateableItem.ExecuteActivation(Game, dir))
+        if (activateableItem.ActivateWand(dir))
         {
             ident = true;
         }

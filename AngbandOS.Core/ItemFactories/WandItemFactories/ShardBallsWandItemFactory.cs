@@ -32,9 +32,9 @@ internal class ShardBallsWandItemFactory : WandItemFactory
     };
     public override int Weight => 10;
 
-    public override bool ExecuteActivation(Game game, int dir)
+    public override bool ActivateWand(int dir)
     {
-        game.FireBall(game.SingletonRepository.Get<Projectile>(nameof(ShardProjectile)), dir, 75 + Game.DieRoll(50), 2);
+        Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(ShardProjectile)), dir, 75 + Game.DieRoll(50), 2);
         return true;
     }
 }

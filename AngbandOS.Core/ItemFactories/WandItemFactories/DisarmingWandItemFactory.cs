@@ -27,8 +27,8 @@ internal class DisarmingWandItemFactory : WandItemFactory
         (20, 1)
     };
     public override int Weight => 10;
-    public override bool ExecuteActivation(Game game, int dir)
+    public override bool ActivateWand(int dir)
     {
-        return game.DisarmTrap(dir);
+        return Game.DisarmTrap(dir);
     }
 }

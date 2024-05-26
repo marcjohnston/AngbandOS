@@ -27,8 +27,8 @@ internal class TrapDoorDestructionWandItemFactory : WandItemFactory
         (10, 1)
     };
     public override int Weight => 10;
-    public override bool ExecuteActivation(Game game, int dir)
+    public override bool ActivateWand(int dir)
     {
-        return game.DestroyDoor(dir);
+        return Game.DestroyDoor(dir);
     }
 }

@@ -32,8 +32,8 @@ internal class CloneMonsterWandItemFactory : WandItemFactory
         (50, 1)
     };
     public override int Weight => 10;
-    public override bool ExecuteActivation(Game game, int dir)
+    public override bool ActivateWand(int dir)
     {
-        return game.CloneMonster(dir);
+        return Game.CloneMonster(dir);
     }
 }

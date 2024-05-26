@@ -27,8 +27,8 @@ internal class ConfuseMonsterWandItemFactory : WandItemFactory
         (3, 1)
     };
     public override int Weight => 10;
-    public override bool ExecuteActivation(Game game, int dir)
+    public override bool ActivateWand(int dir)
     {
-        return game.ConfuseMonster(dir, 10);
+        return Game.ConfuseMonster(dir, 10);
     }
 }

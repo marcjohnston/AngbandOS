@@ -27,9 +27,9 @@ internal class FrostBoltsWandItemFactory : WandItemFactory
         (20, 1)
     };
     public override int Weight => 10;
-    public override bool ExecuteActivation(Game game, int dir)
+    public override bool ActivateWand(int dir)
     {
-        game.FireBoltOrBeam(20, game.SingletonRepository.Get<Projectile>(nameof(ColdProjectile)), dir, Game.DiceRoll(3, 8));
+        Game.FireBoltOrBeam(20, Game.SingletonRepository.Get<Projectile>(nameof(ColdProjectile)), dir, Game.DiceRoll(3, 8));
         return true;
     }
 }

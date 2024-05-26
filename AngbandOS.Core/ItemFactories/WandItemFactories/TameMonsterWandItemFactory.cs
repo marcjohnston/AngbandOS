@@ -27,8 +27,8 @@ internal class TameMonsterWandItemFactory : WandItemFactory
         (30, 2)
     };
     public override int Weight => 10;
-    public override bool ExecuteActivation(Game game, int dir)
+    public override bool ActivateWand(int dir)
     {
-        return game.CharmMonster(dir, 45);
+        return Game.CharmMonster(dir, 45);
     }
 }
