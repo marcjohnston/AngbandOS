@@ -3508,7 +3508,7 @@ internal class Game
             { 
                 Disturb(false);
                 MsgPrint("Your pack overflows!");
-                string oName = oPtr.Description(true, 3);
+                string oName = oPtr.GetFullDescription(true);
                 MsgPrint($"You drop {oName} ({item.IndexToLabel()}).");
                 DropNear(oPtr, 0, MapY.IntValue, MapX.IntValue);
                 InvenItemIncrease(item, -255);
@@ -4029,7 +4029,7 @@ internal class Game
 
     private bool Verify(string prompt, Item item)
     {
-        string oName = item.Description(true, 3);
+        string oName = item.GetFullDescription(true);
         string outVal = $"{prompt} {oName}? ";
         return GetCheck(outVal);
     }
@@ -5049,7 +5049,7 @@ internal class Game
         {
             return false;
         }
-        string oName = oPtr.Description(false, 0);
+        string oName = oPtr.GetDescription(false);
         string your = oPtr.IsInInventory ? "Your" : "The";
         string s = oPtr.Count > 1 ? "" : "s"; // TODO: this plural looks wrong
         MsgPrint($"{your} {oName} glow{s} brightly!"); // TODO: this plural looks wrong
@@ -5782,7 +5782,7 @@ internal class Game
         {
             return false;
         }
-        string oName = oPtr.Description(false, 0);
+        string oName = oPtr.GetDescription(false);
         oPtr.RefreshFlagBasedProperties();
         if (oPtr.Characteristics.IgnoreAcid)
         {
@@ -6246,7 +6246,7 @@ internal class Game
             return false;
         }
         // Artifacts can't be cursed, and normal armor has a chance to save
-        string itemName = item.Description(false, 3);
+        string itemName = item.GetFullDescription(false);
         if (item.IsArtifact && RandomLessThan(100) < 50)
         {
             MsgPrint($"A terrible black aura tries to surround your armor, but your {itemName} resists the effects!");
@@ -6284,7 +6284,7 @@ internal class Game
         {
             return false;
         }
-        string itemName = item.Description(false, 3);
+        string itemName = item.GetFullDescription(false);
         // Artifacts can't be cursed, and other items have a chance to resist
         if (item.IsArtifact && RandomLessThan(100) < 50)
         {
@@ -6867,7 +6867,7 @@ internal class Game
         GridTile tile = Map.Grid[MapY.IntValue][MapX.IntValue];
         foreach (Item item in tile.Items.ToArray()) // We need a ToArray to prevent the collection from being modified error
         {
-            string itemName = item.Description(true, 3);
+            string itemName = item.GetFullDescription(true);
             Disturb(false);
             // We always pick up gold
             if (item.Category == ItemTypeEnum.Gold)
@@ -6903,7 +6903,7 @@ internal class Game
                     {
                         throw new Exception("Unable to locate picked up item in the inventory."); // TODO: Clean this up
                     }
-                    itemName = inventoryItem.Description(true, 3);
+                    itemName = inventoryItem.GetFullDescription(true);
                     MsgPrint($"You have {itemName} ({slot.IndexToLabel()}).");
                     DeleteObject(item);
                 }
@@ -7522,7 +7522,7 @@ internal class Game
             item.ItemDescribe();
         }
         item.ItemOptimize();
-        string missileName = missile.Description(false, 3);
+        string missileName = missile.GetFullDescription(false);
         ColorEnum missileColor = missile.Factory.FlavorColor;
         char missileCharacter = missile.Factory.FlavorSymbol.Character;
         // Thrown distance is based on the weight of the missile
@@ -12458,7 +12458,7 @@ internal class Game
                     bool exitWhile = false;
                     foreach (Item oPtr in mPtr.Items) 
                     {
-                        string oName = oPtr.Description(true, 3);
+                        string oName = oPtr.GetFullDescription(true);
                         outVal = $"{s1}{s2}{s3}{oName} [{info}]";
                         Screen.PrintLine(outVal, 0, 0);
                         Screen.UpdateScreen();
@@ -12489,7 +12489,7 @@ internal class Game
                 if (oPtr.Marked)
                 {
                     boring = false;
-                    string oName = oPtr.Description(true, 3);
+                    string oName = oPtr.GetFullDescription(true);
                     outVal = $"{s1}{s2}{s3}{oName} [{info}]";
                     Screen.PrintLine(outVal, 0, 0);
                     MainForm.MoveCursorTo(y, x);
@@ -13106,7 +13106,7 @@ internal class Game
         oPtr.RefreshFlagBasedProperties();
         if (oPtr.Characteristics.Blessed && DieRoll(888) > chance)
         {
-            string oName = oPtr.Description(false, 0);
+            string oName = oPtr.GetDescription(false);
             string s = oPtr.Count > 1 ? "" : "s";
             MsgPrint($"Your {oName} resist{s} cursing!");
             return;
@@ -14154,7 +14154,7 @@ internal class Game
                 }
                 if (amt != 0)
                 {
-                    string oName = oPtr.Description(false, 3);
+                    string oName = oPtr.GetFullDescription(false);
                     string y = oPtr.Count > 1 ? (amt == oPtr.Count ? "All of y" : (amt > 1 ? "Some of y" : "One of y")) : "Y";
                     string w = amt > 1 ? "were" : "was";
                     MsgPrint($"{y}our {oName} ({i.IndexToLabel()}) {w} destroyed!");
@@ -14199,7 +14199,7 @@ internal class Game
             }
         }
         Item qPtr = oPtr.Clone(amt);
-        string oName = qPtr.Description(true, 3);
+        string oName = qPtr.GetFullDescription(true);
         MsgPrint($"You drop {oName} ({oPtr.Label}).");
         DropNear(qPtr, 0, MapY.IntValue, MapX.IntValue);
         oPtr.ItemIncrease(-amt);
@@ -14225,7 +14225,7 @@ internal class Game
         {
             return;
         }
-        string oName = oPtr.Description(true, 3);
+        string oName = oPtr.GetFullDescription(true);
         MsgPrint($"You have {oName}.");
     }
 
@@ -14298,7 +14298,7 @@ internal class Game
             amt = oPtr.Count;
         }
         Item qPtr = oPtr.Clone(amt);
-        string oName = qPtr.Description(true, 3);
+        string oName = qPtr.GetFullDescription(true);
         act = oPtr.TakeOffMessage;
         oPtr.ItemIncrease(-amt);
         oPtr.ItemOptimize();
@@ -14421,7 +14421,7 @@ internal class Game
                     consoleRow["usage"] = new ConsoleString(ColorEnum.White, $"{inventorySlot.MentionUse(index)}:");
 
                     ColorEnum color = oPtr.Factory.Color;
-                    consoleRow["description"] = new ConsoleString(color, oPtr.Description(true, 3));
+                    consoleRow["description"] = new ConsoleString(color, oPtr.GetFullDescription(true));
 
                     int wgt = oPtr.Weight * oPtr.Count;
                     consoleRow["weight"] = new ConsoleString(ColorEnum.White, $"{wgt / 10}.{wgt % 10} lb");
@@ -14571,7 +14571,7 @@ internal class Game
         bool flag = false;
         bool done = false;
         bool plural = jPtr.Count != 1;
-        string oName = jPtr.Description(false, 0);
+        string oName = jPtr.GetDescription(false);
         if (!jPtr.IsArtifact && RandomLessThan(100) < chance)
         {
             string p = plural ? "" : "s";

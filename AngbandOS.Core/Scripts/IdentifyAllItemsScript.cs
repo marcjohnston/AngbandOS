@@ -54,7 +54,7 @@ internal class IdentifyAllItemsScript : Script, IScript, IScriptStore
             oPtr.BecomeKnown();
             if (oPtr.Stompable())
             {
-                string itemName = oPtr.Description(true, 3);
+                string itemName = oPtr.GetFullDescription(true);
                 Game.MsgPrint($"You destroy {itemName}.");
                 int amount = oPtr.Count;
                 Game.InvenItemIncrease(i, -amount);

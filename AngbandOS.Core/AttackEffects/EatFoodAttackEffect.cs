@@ -25,7 +25,7 @@ internal class EatFoodAttackEffect : AttackEffect
             if (item != null && item.Factory.CanBeEatenByMonsters)
             {
                 // Note that the monster doesn't actually get the food item - it's gone
-                string itemName = item.Description(false, 0);
+                string itemName = item.GetDescription(false);
                 string y = item.Count > 1 ? "One of y" : "Y";
                 Game.MsgPrint($"{y}our {itemName} ({i.IndexToLabel()}) was eaten!");
                 Game.InvenItemIncrease(i, -1);

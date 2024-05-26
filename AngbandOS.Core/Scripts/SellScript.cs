@@ -49,7 +49,7 @@ internal class SellScript : Script, IScriptStore
         }
         Item qPtr = oPtr.Clone();
         qPtr.Count = amt;
-        string oName = qPtr.Description(true, 3);
+        string oName = qPtr.GetFullDescription(true);
         if (!storeCommandEvent.Store.StoreFactory.StoreMaintainsInscription)
         {
             qPtr.Inscription = "";
@@ -89,7 +89,7 @@ internal class SellScript : Script, IScriptStore
             else
             {
                 value = qPtr.Value() * qPtr.Count;
-                oName = qPtr.Description(true, 3);
+                oName = qPtr.GetFullDescription(true);
             }
             Game.MsgPrint($"You {storeCommandEvent.Store.StoreFactory.BoughtVerb} {oName} for {price} gold.");
             PurchaseAnalyze(price, value, guess);

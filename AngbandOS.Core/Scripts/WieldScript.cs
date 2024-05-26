@@ -55,7 +55,7 @@ internal class WieldScript : Script, IScript, IRepeatableScript, IScriptStore
         Item? wieldingItem = Game.GetInventoryItem(slot);
         if (wieldingItem != null && wieldingItem.IsCursed())
         {
-            string cursedItemName = wieldingItem.Description(false, 0);
+            string cursedItemName = wieldingItem.GetDescription(false);
             Game.MsgPrint($"The {cursedItemName} you are {Game.DescribeWieldLocation(slot)} appears to be cursed.");
             return;
         }
@@ -63,7 +63,7 @@ internal class WieldScript : Script, IScript, IRepeatableScript, IScriptStore
         // If we know the item to be cursed, confirm its wearing
         if (item.IsCursed() && (item.IsKnown() || item.IdentSense))
         {
-            string cursedItemName = item.Description(false, 0);
+            string cursedItemName = item.GetDescription(false);
             string dummy = $"Really use the {cursedItemName} {{cursed}}? ";
             if (!Game.GetCheck(dummy))
             {
@@ -95,7 +95,7 @@ internal class WieldScript : Script, IScript, IRepeatableScript, IScriptStore
         // Inform us what we did
         BaseInventorySlot inventorySlot = Game.SingletonRepository.Get<BaseInventorySlot>().Single(_inventorySlot => _inventorySlot.InventorySlots.Contains(slot));
         string wieldPhrase = inventorySlot.WieldPhrase;
-        string itemName = wornItem.Description(true, 3);
+        string itemName = wornItem.GetFullDescription(true);
         Game.MsgPrint($"{wieldPhrase} {itemName} ({slot.IndexToLabel()}).");
         // Let us know if it's cursed
         if (wornItem.IsCursed())

@@ -27,7 +27,7 @@ internal class RustProofScript : Script, IScript
         {
             return;
         }
-        string itenName = item.Description(false, 0);
+        string itenName = item.GetDescription(false);
         // Set the ignore acid flag
         item.RandomArtifactItemCharacteristics.IgnoreAcid = true;
         // Make sure the grammar of the message is correct

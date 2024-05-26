@@ -135,7 +135,7 @@ internal class Store
         ColorEnum a = oPtr.Factory.FlavorColor;
         char c = oPtr.Factory.FlavorSymbol.Character;
         Game.Screen.Print(a, c.ToString(), row, 3);
-        string oName = oPtr.Description(true, 3);
+        string oName = oPtr.GetFullDescription(true);
 
         if (maxwid < oName.Length)
         {
@@ -667,7 +667,7 @@ internal class Store
                 {
                     Game.MsgPrint("Your pack overflows!");
                     Item qPtr = oPtr.Clone();
-                    string oName = qPtr.Description(true, 3);
+                    string oName = qPtr.GetFullDescription(true);
                     Game.MsgPrint($"You drop {oName} ({itemIndex.IndexToLabel()}).");
                     Game.InvenItemIncrease(itemIndex, -255);
                     Game.InvenItemDescribe(itemIndex);

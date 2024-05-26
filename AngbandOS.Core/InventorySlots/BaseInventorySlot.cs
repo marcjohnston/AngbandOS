@@ -91,7 +91,7 @@ internal abstract class BaseInventorySlot : IEnumerable<int>, IItemContainer, IG
     /// <param name="item"></param>
     public string DescribeContainer(Item oPtr)
     {
-        string oName = oPtr.Description(true, 3);
+        string oName = oPtr.GetFullDescription(true);
         return $"You have {oName}.";
     }
 

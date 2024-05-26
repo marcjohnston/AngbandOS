@@ -46,7 +46,7 @@ internal class FireProjectile : Projectile
                 if (oPtr.Marked)
                 {
                     obvious = true;
-                    oName = oPtr.Description(false, 0);
+                    oName = oPtr.GetDescription(false);
                 }
                 if (oPtr.IsArtifact || ignore)
                 {

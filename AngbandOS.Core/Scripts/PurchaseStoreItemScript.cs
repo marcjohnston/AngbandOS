@@ -82,7 +82,7 @@ internal class PurchaseStoreItemScript : Script, IScriptStore
             }
             else
             {
-                oName = jPtr.Description(true, 3);
+                oName = jPtr.GetFullDescription(true);
                 Game.MsgPrint($"Buying {oName} ({letterIndex.IndexToLetter()}).");
                 Game.MsgPrint(null);
                 choice = PurchaseHaggle(storeCommandEvent.Store, jPtr, out price);
@@ -100,7 +100,7 @@ internal class PurchaseStoreItemScript : Script, IScriptStore
                     //    jPtr.BecomeFlavorAware();
                     //}
                     jPtr.IdentFixed = false;
-                    oName = jPtr.Description(true, 3);
+                    oName = jPtr.GetFullDescription(true);
                     
                     if (storeCommandEvent.Store.StoreFactory.BoughtMessageAsBoughtBack)
                     {
@@ -117,7 +117,7 @@ internal class PurchaseStoreItemScript : Script, IScriptStore
                     {
                         return; // TODO: This should never be.
                     }
-                    oName = newItemInInventory.Description(true, 3);
+                    oName = newItemInInventory.GetFullDescription(true);
                     Game.MsgPrint($"You have {oName} ({itemNew.IndexToLabel()}).");
                     Game.HandleStuff();
                     i = storeCommandEvent.Store.StoreInventoryList.Count;
@@ -165,7 +165,7 @@ internal class PurchaseStoreItemScript : Script, IScriptStore
             {
                 return; // TODO: This should never be.
             }
-            oName = newItemInInventory.Description(true, 3);
+            oName = newItemInInventory.GetFullDescription(true);
             Game.MsgPrint($"You have {oName} ({itemNew.IndexToLabel()}).");
             Game.HandleStuff();
             i = storeCommandEvent.Store.StoreInventoryList.Count;

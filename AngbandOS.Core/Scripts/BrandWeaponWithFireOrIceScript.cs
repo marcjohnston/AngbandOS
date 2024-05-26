@@ -23,7 +23,7 @@ internal class BrandWeaponWithFireOrIceScript : Script, IScript
         if (item != null && !item.IsArtifact && !item.IsRare() && !item.IsCursed())
         {
             string act;
-            string itemName = item.Description(false, 0);
+            string itemName = item.GetDescription(false);
 
             // Make it a fire or ice weapon
             if (Game.RandomLessThan(100) < 25)

@@ -44,7 +44,7 @@ internal class AlchemyScript : Script, IScript, ICancellableScript
         }
         int oldNumber = oPtr.Count;
         oPtr.Count = amt;
-        string oName = oPtr.Description(true, 3);
+        string oName = oPtr.GetFullDescription(true);
         oPtr.Count = oldNumber;
         if (!force)
         {

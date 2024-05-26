@@ -63,7 +63,7 @@ internal class FireItemScript : Script, IScript, IRepeatableScript
         ammunitionStack.ItemOptimize();
         Game.PlaySound(SoundEffectEnum.Shoot);
         // Get the details of the shot
-        string missileName = individualAmmunition.Description(false, 3);
+        string missileName = individualAmmunition.GetFullDescription(false);
         ColorEnum missileColor = individualAmmunition.Factory.FlavorColor;
         char missileCharacter = individualAmmunition.Factory.FlavorSymbol.Character;
         int shotSpeed = Game.MissileAttacksPerRound;

@@ -23,7 +23,7 @@ internal class BrandWeaponWithPoisonScript : Script, IScript
         // We must have a non-rare, non-artifact weapon that isn't cursed
         if (item != null && !item.IsArtifact && !item.IsRare() && !item.IsCursed())
         {
-            string itemName = item.Description(false, 0);
+            string itemName = item.GetDescription(false);
 
             // Make it a poison brand
             item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(WeaponOfPoisoningRareItem));

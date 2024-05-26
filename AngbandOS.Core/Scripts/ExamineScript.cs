@@ -53,7 +53,7 @@ internal class ExamineScript : Script, IScript, IRepeatableScript, IScriptStore
             Game.MsgPrint("You have no special knowledge about that item.");
             return;
         }
-        string itemName = item.Description(true, 3);
+        string itemName = item.GetFullDescription(true);
         Game.MsgPrint($"Examining {itemName}...");
         // We're not actually identifying it, because it's already itentified, but we want to
         // repeat the identification text

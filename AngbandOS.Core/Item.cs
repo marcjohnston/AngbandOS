@@ -798,7 +798,7 @@ internal sealed class Item : IComparable<Item>
     /// false, otherwise (e.g. Brown Dragon Scale Mails).  When false, the item will still be pluralized (e.g. stole one of your Brown Dragon Scale Mails).</param>
     /// <param name="mode"></param>
     /// <returns></returns>
-    public string Description(bool includeCountPrefix, int mode)
+    public string GetDescription(bool includeCountPrefix)
     {
         string basenm = Factory.GetDescription(this, includeCountPrefix);
         if (IsKnown())
@@ -819,28 +819,46 @@ internal sealed class Item : IComparable<Item>
                 basenm += RareItem.FriendlyName; // This used to be oPtr.Name ... but Long Bow Bow of Velocity is wrong
             }
         }
-        if (mode < 1)
-        {
-            return basenm;
-        }
+        return basenm;
+    }
 
-        // This is the detailed description.
+    /// <summary>
+    /// Returns an additional description to fully identify the item that is appended to the verbode description, when needed.  
+    /// By default, returns the description for inscriptions, cursed, empty, tried and on discount.
+    /// </summary>
+    /// <returns></returns>
+    public string GetFullDescription(bool includeCountPrefix)
+    {
+        string basenm = GetDescription(includeCountPrefix);
         basenm += Factory.GetDetailedDescription(this);
-        if (mode < 2)
-        {
-            return basenm;
-        }
-
         basenm += Factory.GetVerboseDescription(this);
 
-        // This is the verbose description.
-        if (mode < 3)
-        {
-            return basenm;
-        }
-
         // This is the full description.
-        basenm += GetFullDescription();
+        string fullDescription = "";
+        if (!string.IsNullOrEmpty(Inscription))
+        {
+            fullDescription = Inscription;
+        }
+        else if (IsCursed() && (IsKnown() || IdentSense))
+        {
+            fullDescription = "cursed";
+        }
+        else if (!IsKnown() && IdentEmpty)
+        {
+            fullDescription = "empty";
+        }
+        else if (!Factory.IsFlavorAware && Factory.Tried)
+        {
+            fullDescription = "tried";
+        }
+        else if (Discount != 0)
+        {
+            fullDescription = $"{Discount}% off";
+        }
+        if (!string.IsNullOrEmpty(fullDescription))
+        {
+            basenm += $" {{{fullDescription}}}";
+        }
 
         // We can only render 75 characters max ... we are forced to truncate.
         if (basenm.Length > 75)
@@ -1876,7 +1894,7 @@ internal sealed class Item : IComparable<Item>
     /// <remarks>There may not be any references in code but this method is very useful for debugging.</remarks>
     public override string ToString()
     {
-        return Description(false, 0);
+        return GetDescription(false);
     }
 
     public int Value()
@@ -2976,41 +2994,5 @@ internal sealed class Item : IComparable<Item>
             t += Game.RandomLessThan(max);
         }
         return t;
-    }
-
-    /// <summary>
-    /// Returns an additional description to fully identify the item that is appended to the verbode description, when needed.  
-    /// By default, returns the description for inscriptions, cursed, empty, tried and on discount.
-    /// </summary>
-    /// <returns></returns>
-    public string GetFullDescription()
-    {
-        string tmpVal2 = "";
-        if (!string.IsNullOrEmpty(Inscription))
-        {
-            tmpVal2 = Inscription;
-        }
-        else if (IsCursed() && (IsKnown() || IdentSense))
-        {
-            tmpVal2 = "cursed";
-        }
-        else if (!IsKnown() && IdentEmpty)
-        {
-            tmpVal2 = "empty";
-        }
-        else if (!Factory.IsFlavorAware && Factory.Tried)
-        {
-            tmpVal2 = "tried";
-        }
-        else if (Discount != 0)
-        {
-            tmpVal2 = Discount.ToString();
-            tmpVal2 += "% off";
-        }
-        if (!string.IsNullOrEmpty(tmpVal2))
-        {
-            tmpVal2 = $" {{{tmpVal2}}}";
-        }
-        return tmpVal2;
     }
 }

@@ -28,7 +28,7 @@ internal class CreateRandomArtifactScript : Script, IScript
         {
             return;
         }
-        string oName = oPtr.Description(false, 0);
+        string oName = oPtr.GetDescription(false);
         string your = oPtr.IsInInventory ? "Your" : "The";
         string s = oPtr.Count > 1 ? "" : "s";
         Game.MsgPrint($"{your} {oName} radiate{s} a blinding light!");

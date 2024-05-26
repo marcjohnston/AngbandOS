@@ -39,7 +39,7 @@ internal class ApplyDisenchantScript : Script, IScript, ISuccessfulScript
         {
             return false;
         }
-        string oName = oPtr.Description(false, 0);
+        string oName = oPtr.GetDescription(false);
         string s;
         if (oPtr.IsArtifact && Game.RandomLessThan(100) < 71)
         {

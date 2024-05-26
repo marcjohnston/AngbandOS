@@ -274,7 +274,7 @@ internal class Monster : IItemContainer
     /// <param name="item"></param>
     public string DescribeContainer(Item oPtr)
     {
-        string oName = oPtr.Description(true, 3);
+        string oName = oPtr.GetFullDescription(true);
         return $"You see {oName}.";
     }
 
@@ -1226,7 +1226,7 @@ internal class Monster : IItemContainer
                     {
                         bool willHurt = false;
                         item.RefreshFlagBasedProperties();
-                        string itemName = item.Description(true, 3);
+                        string itemName = item.GetFullDescription(true);
                         string monsterName = IndefiniteWhenHiddenName;
                         if (item.Characteristics.KillDragon && Race.Dragon)
                         {

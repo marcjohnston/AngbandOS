@@ -32,7 +32,7 @@ internal class EatItemAttackEffect : AttackEffect
             Item? item = Game.GetInventoryItem(i);
             if (item != null && !item.IsArtifact)
             {
-                string itemName = item.Description(false, 3);
+                string itemName = item.GetFullDescription(false);
                 string y = item.Count > 1 ? "One of y" : "Y";
                 Game.MsgPrint($"{y}our {itemName} ({i.IndexToLabel()}) was stolen!");
 

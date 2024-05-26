@@ -50,7 +50,7 @@ internal class PsychometryTalent : Talent
             return;
         }
         string feel = oPtr.GetDetailedFeeling();
-        string oName = oPtr.Description(false, 0);
+        string oName = oPtr.GetDescription(false);
         if (string.IsNullOrEmpty(feel))
         {
             Game.MsgPrint($"You do not perceive anything unusual about the {oName}.");

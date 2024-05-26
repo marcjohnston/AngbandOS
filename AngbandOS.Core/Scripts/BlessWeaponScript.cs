@@ -28,7 +28,7 @@ internal class BlessWeaponScript : Script, IScript, ISuccessfulScript
             return false;
         }
         string your = oPtr.IsInInventory ? "your" : "the"; ;
-        string oName = oPtr.Description(false, 0);
+        string oName = oPtr.GetDescription(false);
         oPtr.RefreshFlagBasedProperties();
         if (oPtr.IdentCursed)
         {

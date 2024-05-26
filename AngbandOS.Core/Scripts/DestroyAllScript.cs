@@ -51,7 +51,7 @@ internal class DestroyAllScript : Script, IScript, IRepeatableScript, IScriptSto
             {
                 continue;
             }
-            string itemName = item.Description(true, 3);
+            string itemName = item.GetFullDescription(true);
             Game.MsgPrint($"You destroy {itemName}.");
             count++;
             int amount = item.Count;

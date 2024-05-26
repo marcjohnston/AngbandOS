@@ -34,14 +34,14 @@ internal class IdentifyItemScript : Script, IScript, ISuccessfulScript
         oPtr.BecomeKnown();
         Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
         Game.SingletonRepository.Get<FlaggedAction>(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
-        string oName = oPtr.Description(true, 3);
+        string oName = oPtr.GetFullDescription(true);
 
         Game.MsgPrint($"{oPtr.DescribeLocation()}: {oName} ({oPtr.Label}).");
 
         // Check to see if the player is carrying the item and it is stompable.
         if (oPtr.IsInInventory && oPtr.Stompable())
         {
-            string itemName = oPtr.Description(true, 3);
+            string itemName = oPtr.GetFullDescription(true);
             Game.MsgPrint($"You destroy {oName}.");
             int amount = oPtr.Count;
             oPtr.ItemIncrease(-amount);

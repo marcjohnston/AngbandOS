@@ -53,7 +53,7 @@ internal class ExamineStoreItemScript : Script, IScriptStore
             Game.MsgPrint("You have no special knowledge about that item.");
             return;
         }
-        string oName = oPtr.Description(true, 3);
+        string oName = oPtr.GetFullDescription(true);
         Game.MsgPrint($"Examining {oName}...");
         if (!oPtr.IdentifyFully())
         {

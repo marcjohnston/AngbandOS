@@ -140,7 +140,7 @@ internal class GridTile : IItemContainer
     /// <param name="item"></param>
     public string DescribeContainer(Item oPtr)
     {
-        string oName = oPtr.Description(true, 3);
+        string oName = oPtr.GetFullDescription(true);
         return $"You see {oName}.";
     }
 

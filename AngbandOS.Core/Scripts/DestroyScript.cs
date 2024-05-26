@@ -60,7 +60,7 @@ internal class DestroyScript : Script, IScript, IRepeatableScript, IScriptStore
         }
         int oldNumber = item.Count;
         item.Count = amount;
-        string itemName = item.Description(true, 3);
+        string itemName = item.GetFullDescription(true);
         item.Count = oldNumber;
         //Only confirm if it's not a worthless item
         if (!force)

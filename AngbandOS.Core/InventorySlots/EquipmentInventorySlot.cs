@@ -91,10 +91,10 @@ internal abstract class EquipmentInventorySlot : BaseInventorySlot
                 Item? oPtr = Game.GetInventoryItem(index);
                 if (oPtr != null && oPtr.Factory.ProvidesSunlight && !Game.HasLightResistance)
                 {
-                    string oName = oPtr.Description(false, 0);
+                    string oName = oPtr.GetDescription(false);
                     Game.MsgPrint($"The {oName} scorches your undead flesh!");
                     processWorldEventArgs.DisableRegeneration = true;
-                    oName = oPtr.Description(true, 0);
+                    oName = oPtr.GetDescription(true);
                     string ouch = $"wielding {oName}";
                     if (Game.InvulnerabilityTimer.Value == 0)
                     {
