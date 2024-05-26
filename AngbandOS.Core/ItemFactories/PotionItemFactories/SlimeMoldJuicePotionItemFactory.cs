@@ -14,9 +14,9 @@ internal class SlimeMoldJuicePotionItemFactory : PotionItemFactory
 
     protected override string SymbolName => nameof(ExclamationPointSymbol);
     public override string Name => "Slime Mold Juice";
-    protected override string? DescriptionSyntax => "& $Flavor$ Potion~ of $Name$";
-    protected override string? FlavorUnknownDescriptionSyntax => "& $Flavor$ Potion~";
-    protected override string? FlavorSuppressedDescriptionSyntax => "& Potion~ of $Name$";
+    protected override string? DescriptionSyntax => "$Flavor$ Potion~ of $Name$";
+    protected override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Potion~";
+    protected override string? FlavorSuppressedDescriptionSyntax => "Potion~ of $Name$";
     public override void Bind()
     {
         base.Bind();

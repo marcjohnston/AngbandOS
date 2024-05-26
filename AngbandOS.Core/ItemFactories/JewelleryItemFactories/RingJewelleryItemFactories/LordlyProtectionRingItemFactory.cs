@@ -14,9 +14,9 @@ internal class LordlyProtectionRingItemFactory : RingItemFactory
 
     protected override string SymbolName => nameof(EqualSignSymbol);
     public override string Name => "Lordly Protection";
-    protected override string? DescriptionSyntax => "& $Flavor$ Ring~ of $Name$";
-    protected override string? FlavorUnknownDescriptionSyntax => "& $Flavor$ Ring~";
-    protected override string? FlavorSuppressedDescriptionSyntax => "& Ring~ of $Name$";
+    protected override string? DescriptionSyntax => "$Flavor$ Ring~ of $Name$";
+    protected override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Ring~";
+    protected override string? FlavorSuppressedDescriptionSyntax => "Ring~ of $Name$";
     /// <summary>
     /// Returns the base ring treasure rating plus 5 for rings of lordly protection.
     /// </summary>

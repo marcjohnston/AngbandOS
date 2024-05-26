@@ -15,8 +15,8 @@ internal class PnakoticManuscriptsCorporealBookItemFactory : BookItemFactory
     protected override string SymbolName => nameof(QuestionMarkSymbol);
     public override ColorEnum Color => ColorEnum.BrightYellow;
     public override string Name => "[Pnakotic Manuscripts]";
-    protected override string? DescriptionSyntax => "& Corporeal Spellbook~ $Name$";
-    protected override string? AlternateDescriptionSyntax => $"& Book~ of Corporeal Magic $Name$";
+    protected override string? DescriptionSyntax => "Corporeal Spellbook~ $Name$";
+    protected override string? AlternateDescriptionSyntax => "Book~ of Corporeal Magic $Name$";
 
     /// <summary>
     /// Returns a divisor of 1 because this is the most powerful book for this realm of magic.  Destroying this book provides the most experience.

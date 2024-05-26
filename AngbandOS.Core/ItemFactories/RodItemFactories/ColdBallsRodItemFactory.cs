@@ -15,9 +15,9 @@ internal class ColdBallsRodItemFactory : RodItemFactory
     public override bool RequiresAiming => true;
     protected override string SymbolName => nameof(MinusSignSymbol);
     public override string Name => "Cold Balls";
-    protected override string? DescriptionSyntax => "& $Flavor$ Rod~ of $Name$";
-    protected override string? FlavorUnknownDescriptionSyntax => "& $Flavor$ Rod~";
-    protected override string? FlavorSuppressedDescriptionSyntax => "& Rod~ of $Name$";
+    protected override string? DescriptionSyntax => "$Flavor$ Rod~ of $Name$";
+    protected override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Rod~";
+    protected override string? FlavorSuppressedDescriptionSyntax => "Rod~ of $Name$";
     public override int Cost => 4500;
     public override int DamageDice => 1;
     public override int DamageSides => 1;

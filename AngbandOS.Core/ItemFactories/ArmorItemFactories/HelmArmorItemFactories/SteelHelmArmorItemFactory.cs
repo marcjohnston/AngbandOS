@@ -20,7 +20,7 @@ internal class SteelHelmArmorItemFactory : HelmArmorItemFactory
     public override int Cost => 200;
     public override int DamageDice => 1;
     public override int DamageSides => 3;
-    protected override string? DescriptionSyntax  => "& Steel Helm~";
+    protected override string? DescriptionSyntax => "Steel Helm~";
     public override int LevelNormallyFound => 40;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

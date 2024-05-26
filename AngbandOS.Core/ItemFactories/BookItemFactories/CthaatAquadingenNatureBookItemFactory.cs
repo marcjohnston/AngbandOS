@@ -21,8 +21,8 @@ internal class CthaatAquadingenNatureBookItemFactory : BookItemFactory
     public override int ExperienceGainDivisorForDestroying => 1;
 
     public override string Name => "[Cthaat Aquadingen]";
-    protected override string? DescriptionSyntax => "& Nature Spellbook~ $Name$";
-    protected override string? AlternateDescriptionSyntax => $"& Book~ of Nature Magic $Name$";
+    protected override string? DescriptionSyntax => "Nature Spellbook~ $Name$";
+    protected override string? AlternateDescriptionSyntax => "Book~ of Nature Magic $Name$";
     public override int Cost => 100000;
     public override int DamageDice => 1;
     public override int DamageSides => 1;

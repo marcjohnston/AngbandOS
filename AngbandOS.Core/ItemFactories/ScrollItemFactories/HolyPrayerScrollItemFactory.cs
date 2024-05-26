@@ -14,9 +14,9 @@ internal class HolyPrayerScrollItemFactory : ScrollItemFactory
 
     protected override string SymbolName => nameof(QuestionMarkSymbol);
     public override string Name => "Holy Prayer";
-    protected override string? DescriptionSyntax => "& Scroll~ titled \"$Flavor$\" of $Name$";
-    protected override string? FlavorUnknownDescriptionSyntax => "& Scroll~ titled \"$Flavor$\"";
-    protected override string? FlavorSuppressedDescriptionSyntax => "& Scroll~ of $Name$";
+    protected override string? DescriptionSyntax => "Scroll~ titled \"$Flavor$\" of $Name$";
+    protected override string? FlavorUnknownDescriptionSyntax => "Scroll~ titled \"$Flavor$\"";
+    protected override string? FlavorSuppressedDescriptionSyntax => "Scroll~ of $Name$";
     public override int Cost => 80;
     public override int LevelNormallyFound => 25;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

@@ -14,8 +14,8 @@ internal class HighMassLifeBookItemFactory : BookItemFactory
 
     protected override string SymbolName => nameof(QuestionMarkSymbol);
     public override string Name => "[High Mass]";
-    protected override string? DescriptionSyntax => "& Life Spellbook~ $Name$";
-    protected override string? AlternateDescriptionSyntax => $"& Book~ of Life Magic $Name$";
+    protected override string? DescriptionSyntax => "Life Spellbook~ $Name$";
+    protected override string? AlternateDescriptionSyntax => "Book~ of Life Magic $Name$";
     public override int Cost => 1000;
     public override int DamageDice => 1;
     public override int DamageSides => 1;

@@ -20,7 +20,7 @@ internal class BladeOfChaosWeaponItemFactory : MeleeWeaponItemFactory
     public override int Cost => 4000;
     public override int DamageDice => 6;
     public override int DamageSides => 5;
-    protected override string? DescriptionSyntax  => "& Blade~ of Chaos";
+    protected override string? DescriptionSyntax => "Blade~ of Chaos";
     public override int LevelNormallyFound => 70;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

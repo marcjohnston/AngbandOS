@@ -20,7 +20,7 @@ internal class MetalShodBootsArmorItemFactory : BootsArmorItemFactory
     public override int Cost => 50;
     public override int DamageDice => 1;
     public override int DamageSides => 1;
-    protected override string? DescriptionSyntax  => "& Pair~ of Metal Shod Boots";
+    protected override string? DescriptionSyntax => "Pair~ of Metal Shod Boots";
     public override int LevelNormallyFound => 20;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

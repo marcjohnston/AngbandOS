@@ -19,7 +19,7 @@ internal class PikePolearmWeaponItemFactory : MeleeWeaponItemFactory
     public override int Cost => 358;
     public override int DamageDice => 2;
     public override int DamageSides => 5;
-    protected override string? DescriptionSyntax  => "& Pike~";
+    protected override string? DescriptionSyntax => "Pike~";
     public override int LevelNormallyFound => 15;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

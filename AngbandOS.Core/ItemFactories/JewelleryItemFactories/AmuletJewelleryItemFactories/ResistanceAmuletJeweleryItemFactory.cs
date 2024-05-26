@@ -14,9 +14,9 @@ internal class ResistanceAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
 
     protected override string SymbolName => nameof(DoubleQuoteSymbol);
     public override string Name => "Resistance";
-    protected override string? DescriptionSyntax => "& $Flavor$ Amulet~ of $Name$";
-    protected override string? FlavorUnknownDescriptionSyntax => "& $Flavor$ Amulet~";
-    protected override string? FlavorSuppressedDescriptionSyntax => "& Amulet~ of $Name$";
+    protected override string? DescriptionSyntax => "$Flavor$ Amulet~ of $Name$";
+    protected override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Amulet~";
+    protected override string? FlavorSuppressedDescriptionSyntax => "Amulet~ of $Name$";
     public override void ApplyMagic(Item item, int level, int power, Store? store)
     {
         if (Game.DieRoll(3) == 1)

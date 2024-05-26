@@ -15,8 +15,8 @@ internal class NatureMasteryNatureBookItemFactory : BookItemFactory
     protected override string SymbolName => nameof(QuestionMarkSymbol);
     public override ColorEnum Color => ColorEnum.BrightGreen;
     public override string Name => "[Nature Mastery]";
-    protected override string? DescriptionSyntax => "& Nature Spellbook~ $Name$";
-    protected override string? AlternateDescriptionSyntax => $"& Book~ of Nature Magic $Name$";
+    protected override string? DescriptionSyntax => "Nature Spellbook~ $Name$";
+    protected override string? AlternateDescriptionSyntax => "Book~ of Nature Magic $Name$";
     public override int Cost => 1000;
     public override int DamageDice => 1;
     public override int DamageSides => 1;

@@ -254,45 +254,21 @@ internal static class Extensions
         return roman.ToString();
     }
 
-    public static string GetPrefixCount(bool includeSingularPrefix, string singularNoun, int count, bool isKnownArtifact)
-    {
-        if (count <= 0)
-        {
-            return $"no more {singularNoun}";
-        }
-        else if (count > 1)
-        {
-            return $"{count} {singularNoun}";
-        }
-        else if (isKnownArtifact)
-        {
-            return $"The {singularNoun}";
-        }
-        else if (includeSingularPrefix)
-        {
-            if (singularNoun[0].IsVowel())
-            {
-                return $"an {singularNoun}";
-            }
-            else
-            {
-                return $"a {singularNoun}";
-            }
-        }
-        else
-        {
-            return singularNoun;
-        }
-    }
-
+    /// <summary>
+    /// Returns a value (converted to a string) with a leading positive or negative symbol depending on the value.
+    /// </summary>
+    /// <param name="value"></param>
+    /// <returns></returns>
     public static string GetSignedValue(int value)
     {
         if (value >= 0)
         {
+            // Positive values will not render with a plus-symbol.  We need to manually add one.
             return $"+{value}";
         }
         else
         {
+            // Negative values will automatically have the negative value rendered.  We do not need to manually add it.
             return $"{value}";
         }
     }

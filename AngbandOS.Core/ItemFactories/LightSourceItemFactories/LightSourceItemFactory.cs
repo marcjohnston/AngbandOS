@@ -24,7 +24,7 @@ internal abstract class LightSourceItemFactory : ItemFactory
         string s = "";
         if (BurnRate > 0)
         {
-            s += $" (with {item.TurnsOfLightRemaining} {Game.CountPluralize("turn", item.TurnsOfLightRemaining)} of light)";
+            s += $" (with {item.TurnsOfLightRemaining} {Game.Pluralize("turn", item.TurnsOfLightRemaining)} of light)";
         }
         s += base.GetVerboseDescription(item);
         return s;

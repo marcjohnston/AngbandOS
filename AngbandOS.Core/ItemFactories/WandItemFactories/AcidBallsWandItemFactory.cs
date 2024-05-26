@@ -15,9 +15,9 @@ internal class AcidBallsWandItemFactory : WandItemFactory
     public override int RodChargeCount => Game.DieRoll(5) + 2;
     protected override string SymbolName => nameof(MinusSignSymbol);
     public override string Name => "Acid Balls";
-    protected override string? DescriptionSyntax => "& $Flavor$ Wand~ of $Name$";
-    protected override string? FlavorUnknownDescriptionSyntax => "& $Flavor$ Wand~";
-    protected override string? FlavorSuppressedDescriptionSyntax => "& Wand~ of $Name$";
+    protected override string? DescriptionSyntax => "$Flavor$ Wand~ of $Name$";
+    protected override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Wand~";
+    protected override string? FlavorSuppressedDescriptionSyntax => "Wand~ of $Name$";
     public override int Cost => 1650;
     public override int DamageDice => 1;
     public override int DamageSides => 1;

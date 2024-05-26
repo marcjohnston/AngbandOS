@@ -47,7 +47,7 @@ internal class RobeSoftArmorItemFactory : SoftArmorItemFactory
 
     public override int ArmorClass => 2;
     public override int Cost => 4;
-    protected override string? DescriptionSyntax  => "& Robe~";
+    protected override string? DescriptionSyntax => "Robe~";
     public override int LevelNormallyFound => 1;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

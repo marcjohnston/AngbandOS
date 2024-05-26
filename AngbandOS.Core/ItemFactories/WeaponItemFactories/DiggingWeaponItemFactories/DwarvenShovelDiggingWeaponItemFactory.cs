@@ -19,7 +19,7 @@ internal class DwarvenShovelDiggingWeaponItemFactory : DiggingWeaponItemFactory
     public override int Cost => 200;
     public override int DamageDice => 1;
     public override int DamageSides => 3;
-    protected override string? DescriptionSyntax  => "& Dwarven Shovel~";
+    protected override string? DescriptionSyntax => "Dwarven Shovel~";
     public override int LevelNormallyFound => 40;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

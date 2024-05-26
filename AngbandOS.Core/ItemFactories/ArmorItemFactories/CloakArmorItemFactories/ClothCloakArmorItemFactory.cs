@@ -15,7 +15,7 @@ internal class ClothCloakArmorItemFactory : CloakArmorItemFactory
     protected override string SymbolName => nameof(OpenParenthesisSymbol);
     public override ColorEnum Color => ColorEnum.Green;
     public override string Name => "Cloth";
-    protected override string DescriptionSyntax => "& Cloak~";
+    protected override string DescriptionSyntax => "Cloak~";
 
     public override int ArmorClass => 1;
     public override int Cost => 3;

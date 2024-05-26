@@ -40,7 +40,7 @@ internal abstract class WandItemFactory : ItemFactory
         string s = "";
         if (item.IsKnown())
         {
-            s += $" ({item.WandChargesRemaining} {Game.CountPluralize("charge", item.WandChargesRemaining)})";
+            s += $" ({item.WandChargesRemaining} {Game.Pluralize("charge", item.WandChargesRemaining)})";
         }
         s += base.GetVerboseDescription(item);
         return s;

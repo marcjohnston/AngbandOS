@@ -17,7 +17,7 @@ internal class RationFoodItemFactory : ItemFactory
     public override string Name => "Ration of Food";
 
     public override int Cost => 3;
-    protected override string? DescriptionSyntax  => "& Ration~ of Food";
+    protected override string? DescriptionSyntax => "Ration~ of Food";
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {
         (0, 1),

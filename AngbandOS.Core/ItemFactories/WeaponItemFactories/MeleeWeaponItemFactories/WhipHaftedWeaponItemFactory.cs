@@ -19,7 +19,7 @@ internal class WhipHaftedWeaponItemFactory : MeleeWeaponItemFactory
     public override int Cost => 30;
     public override int DamageDice => 1;
     public override int DamageSides => 6;
-    protected override string? DescriptionSyntax  => "& Whip~";
+    protected override string? DescriptionSyntax => "Whip~";
     public override int LevelNormallyFound => 3;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

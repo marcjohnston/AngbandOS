@@ -19,7 +19,7 @@ internal class FlailHaftedWeaponItemFactory : MeleeWeaponItemFactory
     public override int Cost => 353;
     public override int DamageDice => 2;
     public override int DamageSides => 6;
-    protected override string? DescriptionSyntax  => "& Flail~";
+    protected override string? DescriptionSyntax => "Flail~";
     public override int LevelNormallyFound => 10;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

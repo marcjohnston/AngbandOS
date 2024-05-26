@@ -14,9 +14,9 @@ internal class MagiAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
 
     protected override string SymbolName => nameof(DoubleQuoteSymbol);
     public override string Name => "the Magi";
-    protected override string? DescriptionSyntax => "& $Flavor$ Amulet~ of $Name$";
-    protected override string? FlavorUnknownDescriptionSyntax => "& $Flavor$ Amulet~";
-    protected override string? FlavorSuppressedDescriptionSyntax => "& Amulet~ of $Name$";
+    protected override string? DescriptionSyntax => "$Flavor$ Amulet~ of $Name$";
+    protected override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Amulet~";
+    protected override string? FlavorSuppressedDescriptionSyntax => "Amulet~ of $Name$";
 
     /// <summary>
     /// Returns the base amulet treasure rating plus 25 for the amulet of the magi.

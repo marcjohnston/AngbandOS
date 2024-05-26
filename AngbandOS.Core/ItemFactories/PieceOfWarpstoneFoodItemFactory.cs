@@ -19,7 +19,7 @@ internal class PieceOfWarpstoneFoodItemFactory : ItemFactory
     public override int Cost => 1000;
     public override int DamageDice => 1;
     public override int DamageSides => 1;
-    protected override string? DescriptionSyntax  => "& Piece~ of Warpstone";
+    protected override string? DescriptionSyntax => "Piece~ of Warpstone";
     public override int LevelNormallyFound => 30;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

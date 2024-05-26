@@ -17,7 +17,7 @@ internal class LongBowWeaponItemFactory : BowWeaponItemFactory
     public override string Name => "Long Bow";
 
     public override int Cost => 120;
-    protected override string? DescriptionSyntax  => "& Long Bow~";
+    protected override string? DescriptionSyntax => "Long Bow~";
     public override int LevelNormallyFound => 10;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

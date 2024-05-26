@@ -23,7 +23,7 @@ internal class BrokenDaggerWeaponItemFactory : MeleeWeaponItemFactory
     public override int Cost => 1;
     public override int DamageDice => 1;
     public override int DamageSides => 1;
-    protected override string? DescriptionSyntax  => "& Broken Dagger~";
+    protected override string? DescriptionSyntax => "Broken Dagger~";
     public override bool ShowMods => true;
     public override int BonusDamage => -4;
     public override int BonusHit => -2;

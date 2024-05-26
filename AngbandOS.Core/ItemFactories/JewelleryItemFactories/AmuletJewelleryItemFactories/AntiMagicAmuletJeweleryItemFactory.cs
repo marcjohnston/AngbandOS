@@ -21,9 +21,9 @@ internal class AntiMagicAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
     }
     protected override string SymbolName => nameof(DoubleQuoteSymbol);
     public override string Name => "Anti-Magic";
-    protected override string? DescriptionSyntax => "& $Flavor$ Amulet~ of $Name$";
-    protected override string? FlavorUnknownDescriptionSyntax => "& $Flavor$ Amulet~";
-    protected override string? FlavorSuppressedDescriptionSyntax => "& Amulet~ of $Name$";
+    protected override string? DescriptionSyntax => "$Flavor$ Amulet~ of $Name$";
+    protected override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Amulet~";
+    protected override string? FlavorSuppressedDescriptionSyntax => "Amulet~ of $Name$";
     public override int Cost => 30000;
     public override bool IgnoreAcid => true;
     public override bool IgnoreCold => true;

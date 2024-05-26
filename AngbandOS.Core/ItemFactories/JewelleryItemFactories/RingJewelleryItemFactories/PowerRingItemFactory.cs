@@ -15,9 +15,9 @@ internal class PowerRingItemFactory : RingItemFactory
     protected override string SymbolName => nameof(EqualSignSymbol);
     public override ColorEnum Color => ColorEnum.Yellow;
     public override string Name => "Power";
-    protected override string? DescriptionSyntax => "& $Flavor$ Ring~ of $Name$";
-    protected override string? FlavorUnknownDescriptionSyntax => "& $Flavor$ Ring~";
-    protected override string? FlavorSuppressedDescriptionSyntax => "& Ring~ of $Name$";
+    protected override string? DescriptionSyntax => "$Flavor$ Ring~ of $Name$";
+    protected override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Ring~";
+    protected override string? FlavorSuppressedDescriptionSyntax => "Ring~ of $Name$";
     public override void Bind()
     {
         base.Bind();

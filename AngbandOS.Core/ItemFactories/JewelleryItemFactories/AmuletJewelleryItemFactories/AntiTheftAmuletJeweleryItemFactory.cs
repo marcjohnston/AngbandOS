@@ -14,9 +14,9 @@ internal class AntiTheftAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
 
     protected override string SymbolName => nameof(DoubleQuoteSymbol);
     public override string Name => "Anti-Theft";
-    protected override string? DescriptionSyntax => "& $Flavor$ Amulet~ of $Name$";
-    protected override string? FlavorUnknownDescriptionSyntax => "& $Flavor$ Amulet~";
-    protected override string? FlavorSuppressedDescriptionSyntax => "& Amulet~ of $Name$";
+    protected override string? DescriptionSyntax => "$Flavor$ Amulet~ of $Name$";
+    protected override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Amulet~";
+    protected override string? FlavorSuppressedDescriptionSyntax => "Amulet~ of $Name$";
     public override bool AntiTheft => true;
     public override int Cost => 1000;
     public override bool IgnoreAcid => true;

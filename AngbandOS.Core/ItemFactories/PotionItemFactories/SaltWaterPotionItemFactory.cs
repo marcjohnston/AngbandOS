@@ -18,9 +18,9 @@ internal class SaltWaterPotionItemFactory : PotionItemFactory
     public override bool InitialBrokenStomp => true;
     protected override string SymbolName => nameof(ExclamationPointSymbol);
     public override string Name => "Salt Water";
-    protected override string? DescriptionSyntax => "& $Flavor$ Potion~ of $Name$";
-    protected override string? FlavorUnknownDescriptionSyntax => "& $Flavor$ Potion~";
-    protected override string? FlavorSuppressedDescriptionSyntax => "& Potion~ of $Name$";
+    protected override string? DescriptionSyntax => "$Flavor$ Potion~ of $Name$";
+    protected override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Potion~";
+    protected override string? FlavorSuppressedDescriptionSyntax => "Potion~ of $Name$";
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {
         (0, 1)

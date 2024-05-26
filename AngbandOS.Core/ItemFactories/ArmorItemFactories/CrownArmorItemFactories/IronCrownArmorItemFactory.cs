@@ -19,7 +19,7 @@ internal class IronCrownArmorItemFactory : CrownArmorItemFactory
     public override int Cost => 500;
     public override int DamageDice => 1;
     public override int DamageSides => 1;
-    protected override string? DescriptionSyntax  => "& Iron Crown~";
+    protected override string? DescriptionSyntax => "Iron Crown~";
     public override int LevelNormallyFound => 45;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

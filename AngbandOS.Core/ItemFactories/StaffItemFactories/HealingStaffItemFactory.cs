@@ -14,9 +14,9 @@ internal class HealingStaffItemFactory : StaffItemFactory
 
     protected override string SymbolName => nameof(UnderscoreSymbol);
     public override string Name => "Healing";
-    protected override string? DescriptionSyntax => "& $Flavor$ Staff~ of $Name$";
-    protected override string? FlavorUnknownDescriptionSyntax => "& $Flavor$ Staff~";
-    protected override string? FlavorSuppressedDescriptionSyntax => "& Staff~ of $Name$";
+    protected override string? DescriptionSyntax => "$Flavor$ Staff~ of $Name$";
+    protected override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Staff~";
+    protected override string? FlavorSuppressedDescriptionSyntax => "Staff~ of $Name$";
     public override int StaffChargeCount => Game.DieRoll(2) + 1;
     public override int Cost => 5000;
     public override int DamageDice => 1;

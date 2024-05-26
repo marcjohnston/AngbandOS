@@ -17,7 +17,7 @@ internal class HeavyCrossbowBowWeaponItemFactory : BowWeaponItemFactory
     public override string Name => "Heavy Crossbow";
 
     public override int Cost => 300;
-    protected override string? DescriptionSyntax  => "& Heavy Crossbow~";
+    protected override string? DescriptionSyntax => "Heavy Crossbow~";
     public override int LevelNormallyFound => 30;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

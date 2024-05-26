@@ -14,9 +14,9 @@ internal class ConfuseMonsterWandItemFactory : WandItemFactory
 
     protected override string SymbolName => nameof(MinusSignSymbol);
     public override string Name => "Confuse Monster";
-    protected override string? DescriptionSyntax => "& $Flavor$ Wand~ of $Name$";
-    protected override string? FlavorUnknownDescriptionSyntax => "& $Flavor$ Wand~";
-    protected override string? FlavorSuppressedDescriptionSyntax => "& Wand~ of $Name$";
+    protected override string? DescriptionSyntax => "$Flavor$ Wand~ of $Name$";
+    protected override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Wand~";
+    protected override string? FlavorSuppressedDescriptionSyntax => "Wand~ of $Name$";
     public override int RodChargeCount => Game.DieRoll(12) + 6;
     public override int Cost => 500;
     public override int DamageDice => 1;

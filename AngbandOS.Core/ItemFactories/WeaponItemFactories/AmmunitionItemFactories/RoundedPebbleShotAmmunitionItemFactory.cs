@@ -23,7 +23,7 @@ internal class RoundedPebbleShotAmmunitionItemFactory : AmmunitionItemFactory
     public override int Cost => 1;
     public override int DamageDice => 1;
     public override int DamageSides => 2;
-    protected override string? DescriptionSyntax  => "& Rounded Pebble~";
+    protected override string? DescriptionSyntax => "Rounded Pebble~";
     public override bool ShowMods => true;
     public override int Weight => 4;
     protected override string ItemClassName => nameof(ShotsItemClass);

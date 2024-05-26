@@ -22,7 +22,7 @@ internal class FilthyRagSoftArmorItemFactory : SoftArmorItemFactory
         (0, 1)
     };
     public override int Cost => 1;
-    protected override string? DescriptionSyntax  => "& Filthy Rag~";
+    protected override string? DescriptionSyntax => "Filthy Rag~";
     public override int BonusArmorClass => -1;
     public override int Weight => 20;
 

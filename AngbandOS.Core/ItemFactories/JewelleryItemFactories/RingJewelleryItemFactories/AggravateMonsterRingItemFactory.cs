@@ -18,9 +18,9 @@ internal class AggravateMonsterRingItemFactory : RingItemFactory
     public override bool InitialBrokenStomp => true;
     protected override string SymbolName => nameof(EqualSignSymbol);
     public override string Name => "Aggravate Monster";
-    protected override string? DescriptionSyntax => "& $Flavor$ Ring~ of $Name$";
-    protected override string? FlavorUnknownDescriptionSyntax => "& $Flavor$ Ring~";
-    protected override string? FlavorSuppressedDescriptionSyntax => "& Ring~ of $Name$";
+    protected override string? DescriptionSyntax => "$Flavor$ Ring~ of $Name$";
+    protected override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Ring~";
+    protected override string? FlavorSuppressedDescriptionSyntax => "Ring~ of $Name$";
     public override bool Aggravate => true;
     public override bool Cursed => true;
     public override bool EasyKnow => true;

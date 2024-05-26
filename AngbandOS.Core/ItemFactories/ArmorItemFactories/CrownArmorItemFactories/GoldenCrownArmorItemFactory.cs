@@ -19,7 +19,7 @@ internal class GoldenCrownArmorItemFactory : CrownArmorItemFactory
     public override int Cost => 1000;
     public override int DamageDice => 1;
     public override int DamageSides => 1;
-    protected override string? DescriptionSyntax  => "& Golden Crown~";
+    protected override string? DescriptionSyntax => "Golden Crown~";
     public override bool IgnoreAcid => true;
     public override int LevelNormallyFound => 45;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

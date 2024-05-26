@@ -15,8 +15,8 @@ internal class GharneFragmentsChaosBookItemFactory : BookItemFactory
     protected override string SymbolName => nameof(QuestionMarkSymbol);
     public override ColorEnum Color => ColorEnum.Red;
     public override string Name => "[G'harne Fragments]";
-    protected override string? DescriptionSyntax => "& Chaos Spellbook~ $Name$";
-    protected override string? AlternateDescriptionSyntax => $"& Book~ of Chaos Magic $Name$";
+    protected override string? DescriptionSyntax => "Chaos Spellbook~ $Name$";
+    protected override string? AlternateDescriptionSyntax => "Book~ of Chaos Magic $Name$";
     public override int Cost => 25000;
     public override int DamageDice => 1;
     public override int DamageSides => 1;

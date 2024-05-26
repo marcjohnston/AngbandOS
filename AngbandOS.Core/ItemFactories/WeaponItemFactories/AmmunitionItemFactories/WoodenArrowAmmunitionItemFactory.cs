@@ -19,7 +19,7 @@ internal class WoodenArrowAmmunitionItemFactory : AmmunitionItemFactory
     public override int Cost => 1;
     public override int DamageDice => 1;
     public override int DamageSides => 4;
-    protected override string? DescriptionSyntax  => "& Arrow~";
+    protected override string? DescriptionSyntax => "Arrow~";
     public override int LevelNormallyFound => 3;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

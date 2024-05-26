@@ -18,7 +18,7 @@ internal class LeatherGlovesArmorItemFactory : GlovesArmorItemFactory
 
     public override int ArmorClass => 1;
     public override int Cost => 3;
-    protected override string? DescriptionSyntax  => "& Set~ of Leather Gloves";
+    protected override string? DescriptionSyntax => "Set~ of Leather Gloves";
     public override int LevelNormallyFound => 1;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

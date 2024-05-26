@@ -14,9 +14,9 @@ internal class SleepMonstersStaffItemFactory : StaffItemFactory
 
     protected override string SymbolName => nameof(UnderscoreSymbol);
     public override string Name => "Sleep Monsters";
-    protected override string? DescriptionSyntax => "& $Flavor$ Staff~ of $Name$";
-    protected override string? FlavorUnknownDescriptionSyntax => "& $Flavor$ Staff~";
-    protected override string? FlavorSuppressedDescriptionSyntax => "& Staff~ of $Name$";
+    protected override string? DescriptionSyntax => "$Flavor$ Staff~ of $Name$";
+    protected override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Staff~";
+    protected override string? FlavorSuppressedDescriptionSyntax => "Staff~ of $Name$";
     public override int Cost => 700;
     public override int DamageDice => 1;
     public override int DamageSides => 2;

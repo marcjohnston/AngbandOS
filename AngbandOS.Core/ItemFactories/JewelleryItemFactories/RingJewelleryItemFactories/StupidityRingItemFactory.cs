@@ -18,9 +18,9 @@ internal class StupidityRingItemFactory : RingItemFactory
     public override bool InitialBrokenStomp => true;
     protected override string SymbolName => nameof(EqualSignSymbol);
     public override string Name => "Stupidity";
-    protected override string? DescriptionSyntax => "& $Flavor$ Ring~ of $Name$";
-    protected override string? FlavorUnknownDescriptionSyntax => "& $Flavor$ Ring~";
-    protected override string? FlavorSuppressedDescriptionSyntax => "& Ring~ of $Name$";
+    protected override string? DescriptionSyntax => "$Flavor$ Ring~ of $Name$";
+    protected override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Ring~";
+    protected override string? FlavorSuppressedDescriptionSyntax => "Ring~ of $Name$";
     public override void ApplyMagic(Item item, int level, int power, Store? store)
     {
         item.IdentBroken = true;

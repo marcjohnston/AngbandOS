@@ -14,9 +14,9 @@ internal class RemoveCurseStaffItemFactory : StaffItemFactory
 
     protected override string SymbolName => nameof(UnderscoreSymbol);
     public override string Name => "Remove Curse";
-    protected override string? DescriptionSyntax => "& $Flavor$ Staff~ of $Name$";
-    protected override string? FlavorUnknownDescriptionSyntax => "& $Flavor$ Staff~";
-    protected override string? FlavorSuppressedDescriptionSyntax => "& Staff~ of $Name$";
+    protected override string? DescriptionSyntax => "$Flavor$ Staff~ of $Name$";
+    protected override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Staff~";
+    protected override string? FlavorSuppressedDescriptionSyntax => "Staff~ of $Name$";
     public override int Cost => 500;
     public override int DamageDice => 1;
     public override int StaffChargeCount => Game.DieRoll(3) + 4;

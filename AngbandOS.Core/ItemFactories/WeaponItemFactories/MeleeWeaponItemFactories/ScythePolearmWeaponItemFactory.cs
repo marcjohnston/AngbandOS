@@ -19,7 +19,7 @@ internal class ScythePolearmWeaponItemFactory : MeleeWeaponItemFactory
     public override int Cost => 800;
     public override int DamageDice => 5;
     public override int DamageSides => 3;
-    protected override string? DescriptionSyntax  => "& Scythe~";
+    protected override string? DescriptionSyntax => "Scythe~";
     public override int LevelNormallyFound => 45;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

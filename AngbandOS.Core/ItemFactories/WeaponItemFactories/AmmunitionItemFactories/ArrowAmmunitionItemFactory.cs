@@ -15,7 +15,7 @@ internal class ArrowAmmunitionItemFactory : AmmunitionItemFactory
     protected override string SymbolName => nameof(OpenBracketSymbol);
     public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "Arrow";
-    protected override string? DescriptionSyntax => "& Arrow~";
+    protected override string? DescriptionSyntax => "Arrow~";
     public override int Cost => 1;
     public override int DamageDice => 1;
     public override int DamageSides => 4;

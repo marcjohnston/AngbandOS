@@ -14,9 +14,9 @@ internal class LifePotionItemFactory : PotionItemFactory
 
     protected override string SymbolName => nameof(ExclamationPointSymbol);
     public override string Name => "Life";
-    protected override string? DescriptionSyntax => "& $Flavor$ Potion~ of $Name$";
-    protected override string? FlavorUnknownDescriptionSyntax => "& $Flavor$ Potion~";
-    protected override string? FlavorSuppressedDescriptionSyntax => "& Potion~ of $Name$";
+    protected override string? DescriptionSyntax => "$Flavor$ Potion~ of $Name$";
+    protected override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Potion~";
+    protected override string? FlavorSuppressedDescriptionSyntax => "Potion~ of $Name$";
     public override int Cost => 5000;
     public override int DamageDice => 1;
     public override int DamageSides => 1;

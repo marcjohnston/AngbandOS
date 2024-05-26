@@ -15,9 +15,9 @@ internal class DetectionRodItemFactory : RodItemFactory
     public override bool RequiresAiming => false;
     protected override string SymbolName => nameof(MinusSignSymbol);
     public override string Name => "Detection";
-    protected override string? DescriptionSyntax => "& $Flavor$ Rod~ of $Name$";
-    protected override string? FlavorUnknownDescriptionSyntax => "& $Flavor$ Rod~";
-    protected override string? FlavorSuppressedDescriptionSyntax => "& Rod~ of $Name$";
+    protected override string? DescriptionSyntax => "$Flavor$ Rod~ of $Name$";
+    protected override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Rod~";
+    protected override string? FlavorSuppressedDescriptionSyntax => "Rod~ of $Name$";
     public override int Cost => 5000;
     public override int DamageDice => 1;
     public override int DamageSides => 1;

@@ -19,7 +19,7 @@ internal class LochaberAxePolearmWeaponItemFactory : MeleeWeaponItemFactory
     public override int Cost => 750;
     public override int DamageDice => 3;
     public override int DamageSides => 8;
-    protected override string? DescriptionSyntax  => "& Lochaber Axe~";
+    protected override string? DescriptionSyntax => "Lochaber Axe~";
     public override int LevelNormallyFound => 45;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

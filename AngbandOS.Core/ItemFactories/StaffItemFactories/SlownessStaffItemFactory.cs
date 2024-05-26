@@ -18,9 +18,9 @@ internal class SlownessStaffItemFactory : StaffItemFactory
     public override bool InitialBrokenStomp => true;
     protected override string SymbolName => nameof(UnderscoreSymbol);
     public override string Name => "Slowness";
-    protected override string? DescriptionSyntax => "& $Flavor$ Staff~ of $Name$";
-    protected override string? FlavorUnknownDescriptionSyntax => "& $Flavor$ Staff~";
-    protected override string? FlavorSuppressedDescriptionSyntax => "& Staff~ of $Name$";
+    protected override string? DescriptionSyntax => "$Flavor$ Staff~ of $Name$";
+    protected override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Staff~";
+    protected override string? FlavorSuppressedDescriptionSyntax => "Staff~ of $Name$";
     public override int StaffChargeCount => Game.DieRoll(8) + 8;
 
     public override int DamageDice => 1;

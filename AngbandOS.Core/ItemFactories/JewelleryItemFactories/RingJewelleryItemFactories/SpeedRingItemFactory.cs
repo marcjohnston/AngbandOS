@@ -14,9 +14,9 @@ internal class SpeedRingItemFactory : RingItemFactory
 
     protected override string SymbolName => nameof(EqualSignSymbol);
     public override string Name => "Speed";
-    protected override string? DescriptionSyntax => "& $Flavor$ Ring~ of $Name$";
-    protected override string? FlavorUnknownDescriptionSyntax => "& $Flavor$ Ring~";
-    protected override string? FlavorSuppressedDescriptionSyntax => "& Ring~ of $Name$";
+    protected override string? DescriptionSyntax => "$Flavor$ Ring~ of $Name$";
+    protected override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Ring~";
+    protected override string? FlavorSuppressedDescriptionSyntax => "Ring~ of $Name$";
     /// <summary>
     /// Returns the base ring treasure rating plus 25 for a ring of speed.
     /// </summary>

@@ -200,22 +200,12 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey
         int pos = name.IndexOf("~");
         if (pos >= 0)
         {
-            return $"{Game.CountPluralize(name.Substring(0, pos), count)}{name.Substring(pos + 1)}";
+            return $"{Game.Pluralize(name.Substring(0, pos), count)}{name.Substring(pos + 1)}";
         }
         else
         {
             return name;
         }
-    }
-
-    private string ApplyGetPrefixCountMacro(bool includeCountPrefix, string name, int count, bool isKnownArtifact)
-    {
-        bool includeSingularPrefix = (name[0] == '&');
-        if (includeSingularPrefix)
-        {
-            name = name.Substring(2);
-        }
-        return includeCountPrefix ? GetPrefixCount(includeSingularPrefix, name, count, isKnownArtifact) : name;
     }
 
     /// <summary>
@@ -227,7 +217,7 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey
     /// <returns></returns>
     public string GetDescription(Item item, bool includeCountPrefix)
     {
-        string codedName;
+        string descriptionSyntax;
 
         // Check to see if this factory has flavors.
         if (ItemClass.HasFlavor)
@@ -236,39 +226,67 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey
             if (item.IdentityIsStoreBought)
             {
                 // The item was bought from the store or if we need to suppress flavors because we are in a store.
-                codedName = Game.BaseCharacterClass.UseAlternateItemNames ? _alternateFlavorSuppressedDescriptionSyntax : _flavorSuppressedDescriptionSyntax;
+                descriptionSyntax = Game.BaseCharacterClass.UseAlternateItemNames ? _alternateFlavorSuppressedDescriptionSyntax : _flavorSuppressedDescriptionSyntax;
 
                 // This syntax is allowed to use the Name macro but not the Flavor macro.
-                codedName = codedName.Replace("$Name$", Name, StringComparison.OrdinalIgnoreCase);
+                descriptionSyntax = descriptionSyntax.Replace("$Name$", Name, StringComparison.OrdinalIgnoreCase);
             }
             else if (!IsFlavorAware)
             {
                 // The flavor for this item is still unknown.
-                codedName = Game.BaseCharacterClass.UseAlternateItemNames ? _alternateFlavorUnknownDescriptionSyntax : _flavorUnknownDescriptionSyntax;
+                descriptionSyntax = Game.BaseCharacterClass.UseAlternateItemNames ? _alternateFlavorUnknownDescriptionSyntax : _flavorUnknownDescriptionSyntax;
 
                 // This syntax is allowed to use the flavor macro.
-                codedName = codedName.Replace("$Flavor$", Flavor.Name, StringComparison.OrdinalIgnoreCase);
+                descriptionSyntax = descriptionSyntax.Replace("$Flavor$", Flavor.Name, StringComparison.OrdinalIgnoreCase);
             }
             else
             {
                 // This item has a known flavor.
-                codedName = Game.BaseCharacterClass.UseAlternateItemNames ? _alternateDescriptionSyntax : _descriptionSyntax;
+                descriptionSyntax = Game.BaseCharacterClass.UseAlternateItemNames ? _alternateDescriptionSyntax : _descriptionSyntax;
 
                 // This syntax is allowed to use the name and flavor macros.
-                codedName = codedName.Replace("$Name$", Name, StringComparison.OrdinalIgnoreCase);
-                codedName = codedName.Replace("$Flavor$", Flavor.Name, StringComparison.OrdinalIgnoreCase);
+                descriptionSyntax = descriptionSyntax.Replace("$Name$", Name, StringComparison.OrdinalIgnoreCase);
+                descriptionSyntax = descriptionSyntax.Replace("$Flavor$", Flavor.Name, StringComparison.OrdinalIgnoreCase);
             }
         }
         else
         {
             // This item is flavorless.
-            codedName = Game.BaseCharacterClass.UseAlternateItemNames ? _alternateDescriptionSyntax : _descriptionSyntax;
+            descriptionSyntax = Game.BaseCharacterClass.UseAlternateItemNames ? _alternateDescriptionSyntax : _descriptionSyntax;
 
             // This syntax is allowed to use the name macro.
-            codedName = codedName.Replace("$Name$", Name, StringComparison.OrdinalIgnoreCase);
+            descriptionSyntax = descriptionSyntax.Replace("$Name$", Name, StringComparison.OrdinalIgnoreCase);
         }
-        string pluralizedName = ApplyPlurizationMacro(codedName, item.Count);
-        return ApplyGetPrefixCountMacro(includeCountPrefix, pluralizedName, item.Count, item.IsKnownArtifact);
+        string pluralizedName = ApplyPlurizationMacro(descriptionSyntax, item.Count);
+
+        if (!includeCountPrefix)
+        {
+            return pluralizedName;
+        }
+
+        if (item.Count <= 0)
+        {
+            return $"no more {pluralizedName}";
+        }
+        else if (item.Count > 1)
+        {
+            return $"{item.Count} {pluralizedName}";
+        }
+        else if (item.IsKnownArtifact)
+        {
+            return $"The {pluralizedName}";
+        }
+        else
+        {
+            if (pluralizedName[0].IsVowel())
+            {
+                return $"an {pluralizedName}";
+            }
+            else
+            {
+                return $"a {pluralizedName}";
+            }
+        }
     }
 
     public virtual int? GetTypeSpecificRealValue(Item item, int value) => 0;

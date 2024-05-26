@@ -17,7 +17,7 @@ internal class PieceOfElvishWaybreadFoodItemFactory : ItemFactory
     public override string Name => "Piece of Elvish Waybread";
 
     public override int Cost => 10;
-    protected override string? DescriptionSyntax  => "& Piece~ of Elvish Waybread";
+    protected override string? DescriptionSyntax => "Piece~ of Elvish Waybread";
     public override int LevelNormallyFound => 5;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

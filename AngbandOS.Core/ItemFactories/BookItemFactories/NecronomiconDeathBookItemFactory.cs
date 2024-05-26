@@ -15,8 +15,8 @@ internal class NecronomiconDeathBookItemFactory : BookItemFactory
     protected override string SymbolName => nameof(QuestionMarkSymbol);
     public override ColorEnum Color => ColorEnum.Black;
     public override string Name => "[Necronomicon]";
-    protected override string? DescriptionSyntax => "& Death Spellbook~ $Name$";
-    protected override string? AlternateDescriptionSyntax => $"& Book~ of Death Magic $Name$";
+    protected override string? DescriptionSyntax => "Death Spellbook~ $Name$";
+    protected override string? AlternateDescriptionSyntax => "Book~ of Death Magic $Name$";
 
     /// <summary>
     /// Returns a divisor of 1 because this is the most powerful book for this realm of magic.  Destroying this book provides the most experience.

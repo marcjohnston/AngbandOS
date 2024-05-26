@@ -19,7 +19,7 @@ internal class GnomishShovelDiggingWeaponItemFactory : DiggingWeaponItemFactory
     public override int Cost => 100;
     public override int DamageDice => 1;
     public override int DamageSides => 2;
-    protected override string? DescriptionSyntax  => "& Gnomish Shovel~";
+    protected override string? DescriptionSyntax => "Gnomish Shovel~";
     public override int LevelNormallyFound => 20;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

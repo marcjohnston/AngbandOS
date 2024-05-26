@@ -38,7 +38,7 @@ internal class DragonHelmArmorItemFactory : HelmArmorItemFactory
     public override int Cost => 10000;
     public override int DamageDice => 1;
     public override int DamageSides => 3;
-    protected override string? DescriptionSyntax  => "& Dragon Helm~";
+    protected override string? DescriptionSyntax => "Dragon Helm~";
     public override bool IgnoreAcid => true;
     public override bool IgnoreCold => true;
     public override bool IgnoreElec => true;

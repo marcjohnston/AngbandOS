@@ -20,7 +20,7 @@ internal class RuinedChestItemFactory : ChestItemFactory
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "Ruined chest";
 
-    protected override string? DescriptionSyntax  => "& Ruined chest~";
+    protected override string? DescriptionSyntax => "Ruined chest~";
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {
         (75, 1)

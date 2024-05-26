@@ -22,7 +22,7 @@ internal class CanineSkeletonSkeletonItemFactory : ItemFactory
 
     public override int DamageDice => 1;
     public override int DamageSides => 1;
-    protected override string? DescriptionSyntax  => "& Canine Skeleton~";
+    protected override string? DescriptionSyntax => "Canine Skeleton~";
     public override int LevelNormallyFound => 1;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

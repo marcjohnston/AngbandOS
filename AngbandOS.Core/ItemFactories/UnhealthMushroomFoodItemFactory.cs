@@ -14,9 +14,9 @@ internal class UnhealthMushroomFoodItemFactory : ItemFactory
 
     protected override string SymbolName => nameof(CommaSymbol);
     public override string Name => "Unhealth";
-    protected override string? DescriptionSyntax => "& $Flavor$ Mushroom~ of $Name$";
-    protected override string? FlavorUnknownDescriptionSyntax => "& $Flavor$ Mushroom~";
-    protected override string? FlavorSuppressedDescriptionSyntax => "& Mushroom~ of $Name$";
+    protected override string? DescriptionSyntax => "$Flavor$ Mushroom~ of $Name$";
+    protected override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Mushroom~";
+    protected override string? FlavorSuppressedDescriptionSyntax => "Mushroom~ of $Name$";
     public override int Cost => 50;
     public override int DamageDice => 10;
     public override int DamageSides => 10;

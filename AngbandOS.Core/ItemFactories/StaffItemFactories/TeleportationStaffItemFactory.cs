@@ -15,9 +15,9 @@ internal class TeleportationStaffItemFactory : StaffItemFactory
     public override int StaffChargeCount => Game.DieRoll(4) + 5;
     protected override string SymbolName => nameof(UnderscoreSymbol);
     public override string Name => "Teleportation";
-    protected override string? DescriptionSyntax => "& $Flavor$ Staff~ of $Name$";
-    protected override string? FlavorUnknownDescriptionSyntax => "& $Flavor$ Staff~";
-    protected override string? FlavorSuppressedDescriptionSyntax => "& Staff~ of $Name$";
+    protected override string? DescriptionSyntax => "$Flavor$ Staff~ of $Name$";
+    protected override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Staff~";
+    protected override string? FlavorSuppressedDescriptionSyntax => "Staff~ of $Name$";
     public override int Cost => 2000;
     public override int DamageDice => 1;
     public override int DamageSides => 2;

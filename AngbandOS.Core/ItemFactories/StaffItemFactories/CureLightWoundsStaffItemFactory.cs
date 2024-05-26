@@ -15,9 +15,9 @@ internal class CureLightWoundsStaffItemFactory : StaffItemFactory
     public override int StaffChargeCount => Game.DieRoll(5) + 6;
     protected override string SymbolName => nameof(UnderscoreSymbol);
     public override string Name => "Cure Light Wounds";
-    protected override string? DescriptionSyntax => "& $Flavor$ Staff~ of $Name$";
-    protected override string? FlavorUnknownDescriptionSyntax => "& $Flavor$ Staff~";
-    protected override string? FlavorSuppressedDescriptionSyntax => "& Staff~ of $Name$";
+    protected override string? DescriptionSyntax => "$Flavor$ Staff~ of $Name$";
+    protected override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Staff~";
+    protected override string? FlavorSuppressedDescriptionSyntax => "Staff~ of $Name$";
     public override int Cost => 350;
     public override int DamageDice => 1;
     public override int DamageSides => 2;

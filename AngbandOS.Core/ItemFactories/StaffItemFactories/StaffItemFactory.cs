@@ -77,7 +77,7 @@ internal abstract class StaffItemFactory : ItemFactory
         string s = "";
         if (item.IsKnown())
         {
-            s += $" ({item.StaffChargesRemaining} {Game.CountPluralize("charge", item.StaffChargesRemaining)})";
+            s += $" ({item.StaffChargesRemaining} {Game.Pluralize("charge", item.StaffChargesRemaining)})";
         }
         s += base.GetVerboseDescription(item);
         return s;

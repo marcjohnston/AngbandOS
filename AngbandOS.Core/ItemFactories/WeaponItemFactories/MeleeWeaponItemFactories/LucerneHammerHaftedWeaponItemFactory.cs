@@ -19,7 +19,7 @@ internal class LucerneHammerHaftedWeaponItemFactory : MeleeWeaponItemFactory
     public override int Cost => 376;
     public override int DamageDice => 2;
     public override int DamageSides => 5;
-    protected override string? DescriptionSyntax  => "& Lucerne Hammer~";
+    protected override string? DescriptionSyntax => "Lucerne Hammer~";
     public override int LevelNormallyFound => 10;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

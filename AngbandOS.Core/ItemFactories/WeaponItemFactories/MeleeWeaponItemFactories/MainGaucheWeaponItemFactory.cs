@@ -19,7 +19,7 @@ internal class MainGaucheWeaponItemFactory : MeleeWeaponItemFactory
     public override int Cost => 25;
     public override int DamageDice => 1;
     public override int DamageSides => 5;
-    protected override string? DescriptionSyntax  => "& Main Gauche~";
+    protected override string? DescriptionSyntax => "Main Gauche~";
     public override int LevelNormallyFound => 3;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

@@ -17291,27 +17291,10 @@ internal class Game
 
     public string Pluralize(string singular)
     {
-        Plural? plural = SingletonRepository.TryGet<Plural>(singular);
-        if (plural != null)
-        {
-            return plural.PluralForm;
-        }
-
-        if ("sh".IndexOf(singular[singular.Length - 1]) >= 0)
-        {
-            return $"{singular}es";
-        }
-        else if (singular.EndsWith("y"))
-        {
-            return $"{singular.Substring(0, singular.Length - 1)}ies";
-        }
-        else
-        {
-            return $"{singular}s";
-        }
+        return Pluralize(singular, 1);
     }
 
-    public string CountPluralize(string singular, int count)
+    public string Pluralize(string singular, int count)
     {
         if (count == 1)
         {
@@ -17319,7 +17302,24 @@ internal class Game
         }
         else
         {
-            return Pluralize(singular);
+            Plural? plural = SingletonRepository.TryGet<Plural>(singular);
+            if (plural != null)
+            {
+                return plural.PluralForm;
+            }
+
+            if ("sh".IndexOf(singular[singular.Length - 1]) >= 0)
+            {
+                return $"{singular}es";
+            }
+            else if (singular.EndsWith("y"))
+            {
+                return $"{singular.Substring(0, singular.Length - 1)}ies";
+            }
+            else
+            {
+                return $"{singular}s";
+            }
         }
     }
 

@@ -20,7 +20,7 @@ internal class CestiGlovesArmorItemFactory : GlovesArmorItemFactory
     public override int Cost => 100;
     public override int DamageDice => 1;
     public override int DamageSides => 1;
-    protected override string? DescriptionSyntax  => "& Set~ of Cesti";
+    protected override string? DescriptionSyntax => "Set~ of Cesti";
     public override int LevelNormallyFound => 50;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

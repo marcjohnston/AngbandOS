@@ -17,7 +17,7 @@ internal class StripOfVenisonFoodItemFactory : ItemFactory
     public override string Name => "Strip of Venison";
 
     public override int Cost => 2;
-    protected override string? DescriptionSyntax  => "& Strip~ of Venison";
+    protected override string? DescriptionSyntax => "Strip~ of Venison";
     public override int InitialNutritionalValue => 1500;
     public override int Weight => 2;
     public override string? EatScriptName => nameof(EatGoodFoodScript);

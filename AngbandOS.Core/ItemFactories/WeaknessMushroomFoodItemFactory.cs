@@ -18,9 +18,9 @@ internal class WeaknessMushroomFoodItemFactory : ItemFactory
     public override bool InitialBrokenStomp => true;
     protected override string SymbolName => nameof(CommaSymbol);
     public override string Name => "Weakness";
-    protected override string? DescriptionSyntax => "& $Flavor$ Mushroom~ of $Name$";
-    protected override string? FlavorUnknownDescriptionSyntax => "& $Flavor$ Mushroom~";
-    protected override string? FlavorSuppressedDescriptionSyntax => "& Mushroom~ of $Name$";
+    protected override string? DescriptionSyntax => "$Flavor$ Mushroom~ of $Name$";
+    protected override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Mushroom~";
+    protected override string? FlavorSuppressedDescriptionSyntax => "Mushroom~ of $Name$";
     public override int DamageDice => 5;
     public override int DamageSides => 5;
     public override int LevelNormallyFound => 10;

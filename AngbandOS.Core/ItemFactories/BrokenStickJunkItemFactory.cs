@@ -26,7 +26,7 @@ internal class BrokenStickJunkItemFactory : ItemFactory
     };
     public override int DamageDice => 1;
     public override int DamageSides => 1;
-    protected override string? DescriptionSyntax  => "& Broken Stick~";
+    protected override string? DescriptionSyntax => "Broken Stick~";
     public override int Weight => 3;
     protected override string ItemClassName => nameof(JunkItemClass);
     public override int PackSort => 38;

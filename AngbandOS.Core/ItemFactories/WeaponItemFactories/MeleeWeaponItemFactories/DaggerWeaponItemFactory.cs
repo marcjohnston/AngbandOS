@@ -19,7 +19,7 @@ internal class DaggerWeaponItemFactory : MeleeWeaponItemFactory
     public override int Cost => 10;
     public override int DamageDice => 1;
     public override int DamageSides => 4;
-    protected override string? DescriptionSyntax  => "& Dagger~";
+    protected override string? DescriptionSyntax => "Dagger~";
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {
         (0, 1),

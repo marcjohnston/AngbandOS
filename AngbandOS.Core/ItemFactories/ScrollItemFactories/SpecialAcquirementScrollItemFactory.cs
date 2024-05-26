@@ -14,9 +14,9 @@ internal class SpecialAcquirementScrollItemFactory : ScrollItemFactory
 
     protected override string SymbolName => nameof(QuestionMarkSymbol);
     public override string Name => "*Acquirement*";
-    protected override string? DescriptionSyntax => "& Scroll~ titled \"$Flavor$\" of $Name$";
-    protected override string? FlavorUnknownDescriptionSyntax => "& Scroll~ titled \"$Flavor$\"";
-    protected override string? FlavorSuppressedDescriptionSyntax => "& Scroll~ of $Name$";
+    protected override string? DescriptionSyntax => "Scroll~ titled \"$Flavor$\" of $Name$";
+    protected override string? FlavorUnknownDescriptionSyntax => "Scroll~ titled \"$Flavor$\"";
+    protected override string? FlavorSuppressedDescriptionSyntax => "Scroll~ of $Name$";
     public override int Cost => 200000;
     public override int LevelNormallyFound => 60;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
