@@ -407,7 +407,7 @@ internal abstract class BaseCharacterClass : IGetKey
     public virtual int MaximumMeleeAttacksPerRound(int level) => 5;
     public virtual int MaximumWeight => 35;
     public virtual int AttackSpeedMultiplier => 3;
-    public virtual IArtifactBias? ArtifactBias => null;
+    public virtual ArtifactBias? ArtifactBias => null;
     public virtual int FromScrollWarriorArtifactBiasPercentageChance => 0;
     public virtual bool SenseInventoryTest(int level) => false;
     public virtual bool DetailedSenseInventory => false;

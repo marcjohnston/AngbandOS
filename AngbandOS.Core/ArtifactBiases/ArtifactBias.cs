@@ -11,7 +11,7 @@ namespace AngbandOS.Core.ArtifactBiases;
 /// Represents the bias used when applying special abilities to an artifact.
 /// </summary>
 [Serializable]
-internal abstract class ArtifactBias : IArtifactBias, IGetKey
+internal abstract class ArtifactBias : IGetKey
 {
     protected readonly Game Game;
     public string GetKey => Key;
@@ -34,24 +34,48 @@ internal abstract class ArtifactBias : IArtifactBias, IGetKey
 
     public virtual void Bind() { }
 
-    /// <inheritdoc/>
+    /// <summary>
+    /// Returns the chance that the object will have immunity resistance.  The chance relates to a 1-in-chance value.
+    /// </summary>
     public virtual int ImmunityLuckOneInChance => 20;
 
-    /// <inheritdoc/>
+    /// <summary>
+    /// Apply bonuses to the item and returns true, if additional bonuses can be applied.  By default, no bonuses are applied and false is returned.
+    /// </summary>
+    /// <param name="item"></param>
+    /// <returns></returns>
     public virtual bool ApplyBonuses(Item item) => false;
 
-    /// <inheritdoc/>
+    /// <summary>
+    /// Apply resistances to the item and returns true, if additional resistances can applied.  By default, no resistances are applied and false is returned.
+    /// </summary>
+    /// <param name="item"></param>
+    /// <returns></returns>
     public virtual bool ApplyRandomResistances(Item item) => false;
 
-    /// <inheritdoc/>
+    /// <summary>
+    /// Apply powers to the item and returns true, if additional powers can applied.  By default, no powers are applied and false is returned.
+    /// </summary>
+    /// <param name="item"></param>
+    /// <returns></returns>
     public virtual bool ApplyMiscPowers(Item item) => false;
 
-    /// <inheritdoc/>
+    /// <summary>
+    /// Apply slaying to the item and returns true, if additional slaying can applied.  By default, no slaying is applied and false is returned.
+    /// </summary>
+    /// <param name="item"></param>
+    /// <returns></returns>
     public virtual bool ApplySlaying(Item item) => false;
 
-    /// <inheritdoc/>
+    /// <summary>
+    /// Returns an activation type to be applied for the item or null when there is no biased activation type.  By default, null is returned.
+    /// </summary>
+    /// <param name="item"></param>
+    /// <returns></returns>
     public virtual Activation GetActivationPowerType(Item item) => null;
 
-    /// <inheritdoc/>
+    /// <summary>
+    /// Returns the chance that an activation power is assigned.  A value greater than 100 (e.g. 101) guarantees activation power will be assigned.
+    /// </summary>
     public virtual int ActivationPowerChance => 101;
 }

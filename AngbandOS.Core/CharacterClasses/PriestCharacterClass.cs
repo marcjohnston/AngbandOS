@@ -79,7 +79,7 @@ internal class PriestCharacterClass : BaseCharacterClass
     public override bool UseAlternateItemNames => true;
 
     public override int SpellStat => Ability.Wisdom;
-    public override IArtifactBias? ArtifactBias => Game.SingletonRepository.Get<ArtifactBias>(nameof(PriestlyArtifactBias));
+    public override ArtifactBias? ArtifactBias => Game.SingletonRepository.Get<ArtifactBias>(nameof(PriestlyArtifactBias));
     public override bool SenseInventoryTest(int level) => (0 != Game.RandomLessThan(10000 / ((level * level) + 40)));
     public override Realm[] AvailablePrimaryRealms => new Realm[] {
         Game.SingletonRepository.Get<Realm>(nameof(LifeRealm)),

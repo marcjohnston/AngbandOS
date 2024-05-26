@@ -21,7 +21,7 @@ internal class ResistanceAmuletJeweleryItemFactory : AmuletJeweleryItemFactory
     {
         if (Game.DieRoll(3) == 1)
         {
-            IArtifactBias? artifactBias = null;
+            ArtifactBias? artifactBias = null;
             item.ApplyRandomResistance(ref artifactBias, Game.DieRoll(34) + 4);
         }
         if (Game.DieRoll(5) == 1)

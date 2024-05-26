@@ -58,7 +58,7 @@ internal class MageCharacterClass : BaseCharacterClass
     public override int MaximumMeleeAttacksPerRound(int level) => 4;
     public override int MaximumWeight => 40;
     public override int AttackSpeedMultiplier => 2;
-    public override IArtifactBias? ArtifactBias => Game.SingletonRepository.Get<ArtifactBias>(nameof(MageArtifactBias));
+    public override ArtifactBias? ArtifactBias => Game.SingletonRepository.Get<ArtifactBias>(nameof(MageArtifactBias));
     public override bool SenseInventoryTest(int level) => (0 != Game.RandomLessThan(240000 / (level + 5)));
     public override Realm[] AvailablePrimaryRealms => new Realm[] {
         Game.SingletonRepository.Get<Realm>(nameof(LifeRealm)),

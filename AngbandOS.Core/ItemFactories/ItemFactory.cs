@@ -341,7 +341,7 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey
     /// <returns></returns>
     public virtual int? GetBonusRealValue(Item item, int value) => 0;
 
-    public virtual void ApplyRandomSlaying(Item item, ref IArtifactBias? artifactBias)
+    public virtual void ApplyRandomSlaying(Item item, ref ArtifactBias? artifactBias)
     {
         if (artifactBias != null)
         {

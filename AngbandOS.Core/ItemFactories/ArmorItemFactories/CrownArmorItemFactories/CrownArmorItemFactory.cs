@@ -12,7 +12,7 @@ internal abstract class CrownArmorItemFactory : ArmorItemFactory
 {
     protected override void ApplyRandomGoodRareCharacteristics(Item item)
     {
-        IArtifactBias? artifactBias = null;
+        ArtifactBias? artifactBias = null;
         switch (Game.DieRoll(8))
         {
             case 1:

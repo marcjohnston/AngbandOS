@@ -19,7 +19,7 @@ internal class DaggerCharityFixedArtifact : FixedArtifact
 
     public override void ApplyResistances(Item item)
     {
-        IArtifactBias? artifactBias = null;
+        ArtifactBias? artifactBias = null;
         item.ApplyRandomResistance(ref artifactBias, Game.DieRoll(22) + 16);
     }
     public string DescribeActivationEffect => "lightning bolt (4d8) every 6+d6 turns";

@@ -755,7 +755,7 @@ internal sealed class Item : IComparable<Item>
 
     public void ApplyRandomResistance(int specific)
     {
-        IArtifactBias? artifactBias = null;
+        ArtifactBias? artifactBias = null;
         ApplyRandomResistance(ref artifactBias, specific); // TODO: We has to inject 0 for the ArtifactBias because the constructor would have initialized the _artifactBias to 0.
     }
 
@@ -2068,7 +2068,7 @@ internal sealed class Item : IComparable<Item>
         }
     }
 
-    public void ApplyRandomResistance(ref IArtifactBias? artifactBias, int specific)
+    public void ApplyRandomResistance(ref ArtifactBias? artifactBias, int specific)
     {
         if (specific == 0 && artifactBias != null)
         {
@@ -2316,7 +2316,7 @@ internal sealed class Item : IComparable<Item>
         int powers = Game.DieRoll(5) + 1;
         bool aCursed = false;
         int warriorArtifactBias = 0;
-        IArtifactBias? artifactBias = null;
+        ArtifactBias? artifactBias = null;
         if (fromScroll && Game.DieRoll(4) == 1)
         {
             artifactBias = Game.BaseCharacterClass.ArtifactBias;
@@ -2480,7 +2480,7 @@ internal sealed class Item : IComparable<Item>
         return false;
     }
 
-    private void ApplyRandomBonuses(ref IArtifactBias? artifactBias)
+    private void ApplyRandomBonuses(ref ArtifactBias? artifactBias)
     {
         if (artifactBias != null)
         {
@@ -2619,7 +2619,7 @@ internal sealed class Item : IComparable<Item>
         }
     }
 
-    private void ApplyRandomMiscPower(ref IArtifactBias? artifactBias)
+    private void ApplyRandomMiscPower(ref ArtifactBias? artifactBias)
     {
         if (artifactBias != null)
         {
@@ -2836,7 +2836,7 @@ internal sealed class Item : IComparable<Item>
         return "'" + outString.Substring(0, 1).ToUpper() + outString.Substring(1) + "'";
     }
 
-    private void GiveActivationPower(ref IArtifactBias artifactBias)
+    private void GiveActivationPower(ref ArtifactBias artifactBias)
     {
         Activation type = null;
         if (artifactBias != null)

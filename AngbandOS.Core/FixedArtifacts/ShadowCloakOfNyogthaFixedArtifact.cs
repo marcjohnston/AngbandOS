@@ -24,7 +24,7 @@ internal class ShadowCloakOfNyogthaFixedArtifact : FixedArtifact, IFixedArtifact
     public string DescribeActivationEffect => "restore life levels every 450 turns";
     public override void ApplyResistances(Item item)
     {
-        IArtifactBias? artifactBias = null;
+        ArtifactBias? artifactBias = null;
         item.ApplyRandomResistance(ref artifactBias, Game.DieRoll(22) + 16);
     }
 
