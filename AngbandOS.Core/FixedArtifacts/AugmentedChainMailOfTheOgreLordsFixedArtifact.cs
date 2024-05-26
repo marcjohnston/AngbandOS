@@ -19,7 +19,7 @@ internal class AugmentedChainMailOfTheOgreLordsFixedArtifact : FixedArtifact
 
     public override void ApplyResistances(Item item)
     {
-        IArtifactBias artifactBias = null;
+        IArtifactBias? artifactBias = null;
         item.ApplyRandomResistance(ref artifactBias, Game.DieRoll(22) + 16);
     }
 

@@ -30,7 +30,7 @@ internal abstract class MeleeWeaponItemFactory : WeaponItemFactory
         base.ApplyMagic(item, level, power, null);
         if (power > 1)
         {
-            IArtifactBias artifactBias = null;
+            IArtifactBias? artifactBias = null;
             switch (Game.DieRoll(CanBeWeaponOfLaw || CanBeWeaponOfSharpness ? 42 : 40))
             {
                 case 1:

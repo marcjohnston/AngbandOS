@@ -19,7 +19,7 @@ internal class WarHammerMjolnirFixedArtifact : FixedArtifact
     {
         item.RandomPower = Game.SingletonRepository.ToWeightedRandom<Power>(_power => _power.IsAbility == true).Choose();
 
-        IArtifactBias artifactBias = null;
+        IArtifactBias? artifactBias = null;
         item.ApplyRandomResistance(ref artifactBias, Game.DieRoll(22) + 16);
     }
     public override ColorEnum Color => ColorEnum.Black;

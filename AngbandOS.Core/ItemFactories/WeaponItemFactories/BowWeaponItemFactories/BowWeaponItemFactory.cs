@@ -94,7 +94,7 @@ internal abstract class BowWeaponItemFactory : WeaponItemFactory // TODO: Should
                 case 1:
                 case 11:
                     item.RareItem = Game.SingletonRepository.Get<RareItem>(nameof(BowOfExtraMightRareItem));
-                    IArtifactBias artifactBias = null;
+                    IArtifactBias? artifactBias = null;
                     item.ApplyRandomResistance(ref artifactBias, Game.DieRoll(34) + 4);
                     break;
                 case 2:

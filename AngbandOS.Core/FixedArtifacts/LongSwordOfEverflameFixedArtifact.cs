@@ -21,7 +21,7 @@ internal class LongSwordOfEverflameFixedArtifact : FixedArtifact
     {
         if (Game.DieRoll(2) == 1)
         {
-            IArtifactBias artifactBias = null;
+            IArtifactBias? artifactBias = null;
             item.ApplyRandomResistance(ref artifactBias, Game.DieRoll(22) + 16);
         }
         else

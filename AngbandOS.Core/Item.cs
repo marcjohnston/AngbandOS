@@ -755,7 +755,7 @@ internal sealed class Item : IComparable<Item>
 
     public void ApplyRandomResistance(int specific)
     {
-        IArtifactBias artifactBias = null;
+        IArtifactBias? artifactBias = null;
         ApplyRandomResistance(ref artifactBias, specific); // TODO: We has to inject 0 for the ArtifactBias because the constructor would have initialized the _artifactBias to 0.
     }
 
@@ -2068,7 +2068,7 @@ internal sealed class Item : IComparable<Item>
         }
     }
 
-    public void ApplyRandomResistance(ref IArtifactBias artifactBias, int specific)
+    public void ApplyRandomResistance(ref IArtifactBias? artifactBias, int specific)
     {
         if (specific == 0 && artifactBias != null)
         {
@@ -2480,7 +2480,7 @@ internal sealed class Item : IComparable<Item>
         return false;
     }
 
-    private void ApplyRandomBonuses(ref IArtifactBias artifactBias)
+    private void ApplyRandomBonuses(ref IArtifactBias? artifactBias)
     {
         if (artifactBias != null)
         {
@@ -2619,7 +2619,7 @@ internal sealed class Item : IComparable<Item>
         }
     }
 
-    private void ApplyRandomMiscPower(ref IArtifactBias artifactBias)
+    private void ApplyRandomMiscPower(ref IArtifactBias? artifactBias)
     {
         if (artifactBias != null)
         {

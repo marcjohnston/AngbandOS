@@ -24,7 +24,7 @@ internal class LordlyProtectionRingItemFactory : RingItemFactory
 
     public override void ApplyMagic(Item item, int level, int power, Store? store)
     {
-        IArtifactBias artifactBias = null;
+        IArtifactBias? artifactBias = null;
         do
         {
             item.ApplyRandomResistance(ref artifactBias, Game.DieRoll(20) + 18);
