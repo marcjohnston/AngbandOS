@@ -141,6 +141,27 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey
         return s;
     }
 
+    public virtual void Refill(Game game, Item item)
+    {
+        game.MsgPrint("Your light cannot be refilled.");
+    }
+
+    /// <summary>
+    /// Returns the maximum fuel that can be used for phlogiston.  Returns null, by default, meaning that the light source cannot be used to create a phlogiston.
+    /// </summary>
+    public virtual int? MaxPhlogiston => null;
+
+    /// <summary>
+    /// Returns the number of turns of light that consumeds for each world turn.  Defaults to zero; which means there is no consumption and that the light source lasts forever.
+    /// Torches and laterns have burn rates greater than zero.
+    /// </summary>
+    public virtual int BurnRate => 0;
+
+    /// <summary>
+    /// Returns the radius that the light source illuminates.  Default radius is 2.
+    /// </summary>
+    public virtual int Radius => 2;
+
     /// <summary>
     /// Returns an additional description of the item that is appended to the detailed description, when needed.  
     /// By default, empty is returned, if the item is known; otherwise, the HideType, Speed, Blows, Stealth, Search, Infra, Tunnel and recharging time characteristics are returned.
@@ -149,6 +170,11 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey
     public virtual string GetVerboseDescription(Item item)
     {
         string s = "";
+        if (BurnRate > 0)
+        {
+            s += $" (with {item.TurnsOfLightRemaining} {Game.Pluralize("turn", item.TurnsOfLightRemaining)} of light)";
+        }
+
         item.RefreshFlagBasedProperties();
         if (item.IsKnown() && HasAnyPvalMask)
         {

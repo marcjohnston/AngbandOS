@@ -19,17 +19,6 @@ internal abstract class LightSourceItemFactory : ItemFactory
     public override BaseInventorySlot BaseWieldSlot => Game.SingletonRepository.Get<BaseInventorySlot>(nameof(LightsourceInventorySlot));
     public override bool IsWorthless(Item item) => item.TurnsOfLightRemaining < 0;
 
-    public override string GetVerboseDescription(Item item)
-    {
-        string s = "";
-        if (BurnRate > 0)
-        {
-            s += $" (with {item.TurnsOfLightRemaining} {Game.Pluralize("turn", item.TurnsOfLightRemaining)} of light)";
-        }
-        s += base.GetVerboseDescription(item);
-        return s;
-    }
-
     protected override (int, string)[]? MassProduceTupleNames => new (int, string)[]
     {
         (20, "3d5-3")
@@ -172,27 +161,6 @@ internal abstract class LightSourceItemFactory : ItemFactory
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Light;
     public override bool HatesFire => true;
     public override ColorEnum Color => ColorEnum.BrightYellow;
-
-    public virtual void Refill(Game game, Item item)
-    {
-        game.MsgPrint("Your light cannot be refilled.");
-    }
-
-    /// <summary>
-    /// Returns the maximum fuel that can be used for phlogiston.  Returns null, by default, meaning that the light source cannot be used to create a phlogiston.
-    /// </summary>
-    public virtual int? MaxPhlogiston => null;
-
-    /// <summary>
-    /// Returns the number of turns of light that consumeds for each world turn.  Defaults to zero; which means there is no consumption and that the light source lasts forever.
-    /// Torches and laterns have burn rates greater than zero.
-    /// </summary>
-    public virtual int BurnRate => 0;
-
-    /// <summary>
-    /// Returns the radius that the light source illuminates.  Default radius is 2.
-    /// </summary>
-    public virtual int Radius => 2;
 
     /// <summary>
     /// Returns true, because all light sources can be worn/wielded.

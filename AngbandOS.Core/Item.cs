@@ -248,6 +248,7 @@ internal sealed class Item : IComparable<Item>
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <returns></returns>
+    [Obsolete]
     public T? TryGetFactory<T>() where T : ItemFactory
     {
         if (typeof(T).IsAssignableFrom(Factory.GetType()))

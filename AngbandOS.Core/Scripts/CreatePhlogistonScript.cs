@@ -25,13 +25,9 @@ internal class CreatePhlogistonScript : Script, IScript
             Game.MsgPrint("You are not wielding a light source.");
             return;
         }
-        LightSourceItemFactory? lightSourceItemFactory = item.TryGetFactory<LightSourceItemFactory>();
-        if (lightSourceItemFactory == null)
-        {
-            return;
-        }
+
         // Maximum phlogiston is the capacity of the light source
-        int? maxPhlogiston = lightSourceItemFactory.MaxPhlogiston;
+        int? maxPhlogiston = item.Factory.MaxPhlogiston;
 
         // Probably using an orb or a star essence (or maybe not holding a light source at all)
         if (maxPhlogiston == null)
