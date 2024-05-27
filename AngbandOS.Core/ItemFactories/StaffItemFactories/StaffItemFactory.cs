@@ -119,6 +119,5 @@ internal abstract class StaffItemFactory : ItemFactory
     public override bool HatesFire => true;
     public override bool HatesAcid => true;
 
-    //public override bool IsCharged => true;
     public override ColorEnum Color => ColorEnum.Purple;
 }
