@@ -170,6 +170,11 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey
     public virtual string GetVerboseDescription(Item item)
     {
         string s = "";
+        if (item.IsKnown() && CanBeAimed)
+        {
+            s += $" ({item.WandChargesRemaining} {Game.Pluralize("charge", item.WandChargesRemaining)})";
+        }
+
         if (BurnRate > 0)
         {
             s += $" (with {item.TurnsOfLightRemaining} {Game.Pluralize("turn", item.TurnsOfLightRemaining)} of light)";

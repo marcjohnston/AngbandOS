@@ -32,17 +32,6 @@ internal abstract class WandItemFactory : ItemFactory
         return true;
     }
 
-    public override string GetVerboseDescription(Item item)
-    {
-        string s = "";
-        if (item.IsKnown())
-        {
-            s += $" ({item.WandChargesRemaining} {Game.Pluralize("charge", item.WandChargesRemaining)})";
-        }
-        s += base.GetVerboseDescription(item);
-        return s;
-    }
-
     public override void Recharge(Item oPtr, int num)
     {
         int i, t;
