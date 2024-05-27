@@ -27,10 +27,5 @@ internal class LightWandItemFactory : WandItemFactory
         (3, 1)
     };
     public override int Weight => 10;
-    public override bool ActivateWand(int dir)
-    {
-        Game.MsgPrint("A line of blue shimmering light appears.");
-        Game.LightLine(dir);
-        return true;
-    }
+    protected override string? ActivateWandScriptName => nameof(DirectionalLineOfLight);
 }

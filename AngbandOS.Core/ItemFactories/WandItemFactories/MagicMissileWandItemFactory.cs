@@ -27,9 +27,5 @@ internal class MagicMissileWandItemFactory : WandItemFactory
         (2, 1)
     };
     public override int Weight => 10;
-    public override bool ActivateWand(int dir)
-    {
-        Game.FireBoltOrBeam(20, Game.SingletonRepository.Get<Projectile>(nameof(MissileProjectile)), dir, Game.DiceRoll(2, 6));
-        return true;
-    }
+    protected override string? ActivateWandScriptName => nameof(DirectionalMagicMissle2D6);
 }

@@ -22,6 +22,6 @@ internal class TrapAndDoorDestructionScript : Script, IScript
         {
             return;
         }
-        Game.DestroyDoor(dir);
+        Game.DestroyTrapOrDoor(dir);
     }
 }

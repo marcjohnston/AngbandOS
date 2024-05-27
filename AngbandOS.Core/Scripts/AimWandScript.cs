@@ -66,7 +66,6 @@ internal class AimWandScript : Script, IScript, IRepeatableScript, ISuccessfulSc
         }
         // Using a wand takes 100 energy
         Game.EnergyUse = 100;
-        bool ident = false;
         int itemLevel = item.Factory.LevelNormallyFound;
         // Chance of success is your skill - item level, with item level capped at 50 and your
         // skill halved if you're confused
@@ -95,10 +94,7 @@ internal class AimWandScript : Script, IScript, IRepeatableScript, ISuccessfulSc
         }
         Game.PlaySound(SoundEffectEnum.ZapRod);
         WandItemFactory activateableItem = (WandItemFactory)item.Factory;
-        if (activateableItem.ActivateWand(dir))
-        {
-            ident = true;
-        }
+        bool ident = activateableItem.ActivateWand(dir);
 
         Game.SingletonRepository.Get<FlaggedAction>(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
         // Mark the wand as having been tried

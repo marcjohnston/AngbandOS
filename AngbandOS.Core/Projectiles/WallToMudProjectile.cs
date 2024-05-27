@@ -8,9 +8,9 @@
 namespace AngbandOS.Core.Projection;
 
 [Serializable]
-internal class KillWallProjectile : Projectile
+internal class WallToMudProjectile : Projectile
 {
-    private KillWallProjectile(Game game) : base(game) { }
+    private WallToMudProjectile(Game game) : base(game) { }
 
     protected override Animation EffectAnimation => Game.SingletonRepository.Get<Animation>(nameof(BrownSwirlAnimation));
 

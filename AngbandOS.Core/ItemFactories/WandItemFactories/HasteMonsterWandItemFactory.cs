@@ -30,8 +30,5 @@ internal class HasteMonsterWandItemFactory : WandItemFactory
         (2, 1)
     };
     public override int Weight => 10;
-    public override bool ActivateWand(int dir)
-    {
-        return Game.SpeedMonster(dir);
-    }
+    protected override string? ActivateWandScriptName => nameof(DirectionalHasteMonster);
 }

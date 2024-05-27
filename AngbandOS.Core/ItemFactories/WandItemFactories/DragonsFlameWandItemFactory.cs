@@ -31,9 +31,5 @@ internal class DragonsFlameWandItemFactory : WandItemFactory
         (50, 4)
     };
     public override int Weight => 10;
-    public override bool ActivateWand(int dir)
-    {
-        Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(FireProjectile)), dir, 100, 3);
-        return true;
-    }
+    protected override string? ActivateWandScriptName => nameof(DirectionalFireBall100R3);
 }

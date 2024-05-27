@@ -5,9 +5,6 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-using System;
-using System.Threading;
-
 namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
@@ -98,9 +95,8 @@ internal abstract class WandItemFactory : ItemFactory
 
     public override int PackSort => 14;
     public override ItemTypeEnum CategoryEnum => ItemTypeEnum.Wand;
-    public abstract bool ActivateWand(int dir);
+
     public override int BaseValue => 50;
-    public override bool CanBeAimed => true;
     public override bool HatesElectricity => true;
 
     //public override bool IsCharged => true;

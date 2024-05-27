@@ -22,7 +22,7 @@ internal class HorrifyScript : Script, IScript
         {
             return;
         }
-        Game.FearMonster(dir, Game.ExperienceLevel.IntValue);
+        Game.ScareMonster(dir, Game.ExperienceLevel.IntValue);
         Game.StunMonster(dir, Game.ExperienceLevel.IntValue);
     }
 }

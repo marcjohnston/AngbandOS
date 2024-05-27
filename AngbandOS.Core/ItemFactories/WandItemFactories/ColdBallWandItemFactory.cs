@@ -8,27 +8,25 @@
 namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
-internal class TrapDoorDestructionWandItemFactory : WandItemFactory
+internal class ColdBallWandItemFactory : WandItemFactory
 {
-    private TrapDoorDestructionWandItemFactory(Game game) : base(game) { } // This object is a singleton.
+    private ColdBallWandItemFactory(Game game) : base(game) { } // This object is a singleton.
 
     protected override string SymbolName => nameof(MinusSignSymbol);
-    public override string Name => "Trap/Door Destruction";
+    public override string Name => "Cold Balls";
     protected override string? DescriptionSyntax => "$Flavor$ Wand~ of $Name$";
     protected override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Wand~";
     protected override string? FlavorSuppressedDescriptionSyntax => "Wand~ of $Name$";
-    public override int RodChargeCount => Game.DieRoll(8) + 6;
-    public override int Cost => 100;
+    public override int RodChargeCount => Game.DieRoll(6) + 2;
+    public override int Cost => 1500;
     public override int DamageDice => 1;
     public override int DamageSides => 1;
-    public override int LevelNormallyFound => 10;
+    public override bool IgnoreCold => true;
+    public override int LevelNormallyFound => 40;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {
-        (10, 1)
+        (40, 1)
     };
     public override int Weight => 10;
-    public override bool ActivateWand(int dir)
-    {
-        return Game.DestroyDoor(dir);
-    }
+    protected override string? ActivateWandScriptName => nameof(DirectionalColdBall48R2);
 }

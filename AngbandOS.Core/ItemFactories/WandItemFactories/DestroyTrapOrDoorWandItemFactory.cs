@@ -8,29 +8,24 @@
 namespace AngbandOS.Core.ItemFactories;
 
 [Serializable]
-internal class AcidBallsWandItemFactory : WandItemFactory
+internal class DestroyTrapOrDoorWandItemFactory : WandItemFactory
 {
-    private AcidBallsWandItemFactory(Game game) : base(game) { } // This object is a singleton.
+    private DestroyTrapOrDoorWandItemFactory(Game game) : base(game) { } // This object is a singleton.
 
-    public override int RodChargeCount => Game.DieRoll(5) + 2;
     protected override string SymbolName => nameof(MinusSignSymbol);
-    public override string Name => "Acid Balls";
+    public override string Name => "Trap/Door Destruction";
     protected override string? DescriptionSyntax => "$Flavor$ Wand~ of $Name$";
     protected override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Wand~";
     protected override string? FlavorSuppressedDescriptionSyntax => "Wand~ of $Name$";
-    public override int Cost => 1650;
+    public override int RodChargeCount => Game.DieRoll(8) + 6;
+    public override int Cost => 100;
     public override int DamageDice => 1;
     public override int DamageSides => 1;
-    public override bool IgnoreAcid => true;
-    public override int LevelNormallyFound => 50;
+    public override int LevelNormallyFound => 10;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {
-        (50, 1)
+        (10, 1)
     };
     public override int Weight => 10;
-    public override bool ActivateWand(int dir)
-    {
-        Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(AcidProjectile)), dir, 60, 2);
-        return true;
-    }
+    protected override string? ActivateWandScriptName => nameof(DirectionalDestroyTrapOrDoor);
 }

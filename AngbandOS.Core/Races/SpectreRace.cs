@@ -104,7 +104,7 @@ internal class SpectreRace : Race
             Game.MsgPrint("You emit an eldritch howl!");
             if (Game.GetDirectionWithAim(out int direction))
             {
-                Game.FearMonster(direction, Game.ExperienceLevel.IntValue);
+                Game.ScareMonster(direction, Game.ExperienceLevel.IntValue);
             }
         }
     }

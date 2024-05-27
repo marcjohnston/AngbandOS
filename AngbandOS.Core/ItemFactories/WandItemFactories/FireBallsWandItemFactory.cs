@@ -28,9 +28,5 @@ internal class FireBallsWandItemFactory : WandItemFactory
         (50, 1)
     };
     public override int Weight => 10;
-    public override bool ActivateWand(int dir)
-    {
-        Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(FireProjectile)), dir, 72, 2);
-        return true;
-    }
+    protected override string? ActivateWandScriptName => nameof(DirectionalFireBall72R2);
 }

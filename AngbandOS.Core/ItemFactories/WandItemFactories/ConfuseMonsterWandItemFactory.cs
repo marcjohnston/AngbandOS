@@ -27,8 +27,5 @@ internal class ConfuseMonsterWandItemFactory : WandItemFactory
         (3, 1)
     };
     public override int Weight => 10;
-    public override bool ActivateWand(int dir)
-    {
-        return Game.ConfuseMonster(dir, 10);
-    }
+    protected override string? ActivateWandScriptName => nameof(DirectionalConfuseMonster10);
 }

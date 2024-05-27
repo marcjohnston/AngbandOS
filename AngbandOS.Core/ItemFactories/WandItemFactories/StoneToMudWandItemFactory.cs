@@ -29,8 +29,5 @@ internal class StoneToMudWandItemFactory : WandItemFactory
         (80, 1)
     };
     public override int Weight => 10;
-    public override bool ActivateWand(int dir)
-    {
-        return Game.WallToMud(dir);
-    }
+    protected override string? ActivateWandScriptName => nameof(DirectionalStoneToMud);
 }

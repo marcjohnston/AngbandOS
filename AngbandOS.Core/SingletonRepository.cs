@@ -345,6 +345,7 @@ internal class SingletonRepository
         RegisterRepository<IStringValue>();
         RegisterRepository<IScript>();
         RegisterRepository<IIdentifableScript>();
+        RegisterRepository<IIdentifableDirectionalScript>();
         RegisterRepository<ICancellableScript>();
         RegisterRepository<INoticeableScript>();
         RegisterRepository<ISuccessfulScriptInt>();

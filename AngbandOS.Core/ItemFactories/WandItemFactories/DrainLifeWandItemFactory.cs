@@ -27,8 +27,5 @@ internal class DrainLifeWandItemFactory : WandItemFactory
         (50, 1)
     };
     public override int Weight => 10;
-    public override bool ActivateWand(int dir)
-    {
-        return Game.DrainLife(dir, 75);
-    }
+    protected override string? ActivateWandScriptName => nameof(DirectionalDrainLife75);
 }

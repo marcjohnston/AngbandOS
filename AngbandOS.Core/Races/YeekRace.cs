@@ -78,7 +78,7 @@ internal class YeekRace : Race
             if (Game.GetDirectionWithAim(out int direction))
             {
                 Game.MsgPrint("You make a horrible scream!");
-                Game.FearMonster(direction, Game.ExperienceLevel.IntValue);
+                Game.ScareMonster(direction, Game.ExperienceLevel.IntValue);
             }
         }
     }

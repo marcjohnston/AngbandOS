@@ -27,8 +27,5 @@ internal class SleepMonsterWandItemFactory : WandItemFactory
         (5, 1)
     };
     public override int Weight => 10;
-    public override bool ActivateWand(int dir)
-    {
-        return Game.SleepMonster(dir);
-    }
+    protected override string? ActivateWandScriptName => nameof(DirectionalSleepMonster);
 }

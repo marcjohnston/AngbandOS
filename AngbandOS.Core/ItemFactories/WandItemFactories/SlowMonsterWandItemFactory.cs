@@ -28,8 +28,5 @@ internal class SlowMonsterWandItemFactory : WandItemFactory
         (2, 1)
     };
     public override int Weight => 10;
-    public override bool ActivateWand(int dir)
-    {
-        return Game.SlowMonster(dir);
-    }
+    protected override string? ActivateWandScriptName => nameof(DirectionalSlowMonster);
 }

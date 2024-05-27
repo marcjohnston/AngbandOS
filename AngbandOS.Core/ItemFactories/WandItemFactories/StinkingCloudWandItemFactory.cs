@@ -27,9 +27,5 @@ internal class StinkingCloudWandItemFactory : WandItemFactory
         (5, 1)
     };
     public override int Weight => 10;
-    public override bool ActivateWand(int dir)
-    {
-        Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(PoisProjectile)), dir, 12, 2);
-        return true;
-    }
+    protected override string? ActivateWandScriptName => nameof(DirectionalStinkingCloud12R2);
 }

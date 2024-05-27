@@ -28,9 +28,5 @@ internal class LightningBallsWandItemFactory : WandItemFactory
         (35, 1)
     };
     public override int Weight => 10;
-    public override bool ActivateWand(int dir)
-    {
-        Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(ElecProjectile)), dir, 32, 2);
-        return true;
-    }
+    protected override string? ActivateWandScriptName => nameof(DirectionalLightningBall32R2);
 }

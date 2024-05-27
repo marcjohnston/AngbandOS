@@ -768,11 +768,6 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey
     public virtual bool IsWearable => false;
 
     /// <summary>
-    /// Returns true, if the item can be aimed.
-    /// </summary>
-    public virtual bool CanBeAimed => false;
-
-    /// <summary>
     /// Returns true, if the item can be eaten.
     /// </summary>
     public virtual bool CanBeEaten => false;
@@ -907,6 +902,8 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey
 
         _flavorSuppressedDescriptionSyntax = FlavorSuppressedDescriptionSyntax != null ? FlavorSuppressedDescriptionSyntax : _descriptionSyntax;
         _alternateFlavorSuppressedDescriptionSyntax = AlternateFlavorSuppressedDescriptionSyntax != null ? AlternateFlavorSuppressedDescriptionSyntax : _flavorSuppressedDescriptionSyntax;
+
+        ActivateWandScript = Game.SingletonRepository.GetNullable<IIdentifableDirectionalScript>(ActivateWandScriptName);
     }
 
     protected abstract string ItemClassName { get; }
@@ -1378,4 +1375,26 @@ internal abstract class ItemFactory : IItemCharacteristics, IGetKey
     /// all food items are consumed except for dwarf bread.  Dwarf bread returns false.
     /// </summary>
     public virtual bool IsConsumedWhenEaten => true;
+
+    /// <summary>
+    /// Returns the name of the activation script for wands when aimed; or null, if the item cannot be aimed.  Returns null, by default.  This property is used to bind the <see cref="ActivateWandScript"/> 
+    /// property during the bind phase.
+    /// </summary>
+    protected virtual string? ActivateWandScriptName => null;
+
+    /// <summary>
+    /// Returns the activation script for wands when aimed; or null, if the item cannot be aimed.  This property is bound from the <see cref="ActivateWandScriptName"/> property during the bind phase.
+    /// </summary>
+    private IIdentifableDirectionalScript? ActivateWandScript { get; set; }
+
+    public bool ActivateWand(int dir)
+    {
+        if (ActivateWandScript == null)
+        {
+            throw new Exception("Cannot activate wand with null script.");
+        }
+        return ActivateWandScript.ExecuteIdentifableDirectionalScript(dir);
+    }
+
+    public bool CanBeAimed => ActivateWandScript != null;
 }

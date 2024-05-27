@@ -32,9 +32,5 @@ internal class ShardBallsWandItemFactory : WandItemFactory
     };
     public override int Weight => 10;
 
-    public override bool ActivateWand(int dir)
-    {
-        Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(ShardProjectile)), dir, 75 + Game.DieRoll(50), 2);
-        return true;
-    }
+    protected override string? ActivateWandScriptName => nameof(DirectionalShardBall1D50P75R2);
 }

@@ -32,8 +32,5 @@ internal class CloneMonsterWandItemFactory : WandItemFactory
         (50, 1)
     };
     public override int Weight => 10;
-    public override bool ActivateWand(int dir)
-    {
-        return Game.CloneMonster(dir);
-    }
+    protected override string? ActivateWandScriptName => nameof(DirectionalCloneMonster);
 }

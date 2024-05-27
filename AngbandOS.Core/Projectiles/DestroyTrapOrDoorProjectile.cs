@@ -8,34 +8,31 @@
 namespace AngbandOS.Core.Projection;
 
 [Serializable]
-internal class KillTrapProjectile : Projectile
+internal class DestroyTrapOrDoorProjectile : Projectile
 {
-    private KillTrapProjectile(Game game) : base(game) { }
+    private DestroyTrapOrDoorProjectile(Game game) : base(game) { }
 
-    protected override Animation EffectAnimation => Game.SingletonRepository.Get<Animation>(nameof(RedSwirlAnimation));
+    protected override Animation EffectAnimation => Game.SingletonRepository.Get<Animation>(nameof(BrightYellowSwirlAnimation));
 
     protected override bool AffectFloor(int y, int x)
     {
         GridTile cPtr = Game.Map.Grid[y][x];
         bool obvious = false;
-        if (cPtr.FeatureType.IsUnidentifiedTrap || cPtr.FeatureType.IsTrap)
+        if (cPtr.FeatureType.IsVisibleDoor || cPtr.FeatureType.IsOpenDoor || cPtr.FeatureType.IsUnidentifiedTrap || cPtr.FeatureType.IsTrap)
         {
             if (Game.PlayerHasLosBold(y, x))
             {
                 Game.MsgPrint("There is a bright flash of light!");
                 obvious = true;
+                if (cPtr.FeatureType.IsVisibleDoor)
+                {
+                    Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateMonstersFlaggedAction)).Set();
+                    Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateLightFlaggedAction)).Set();
+                    Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateViewFlaggedAction)).Set();
+                }
             }
             cPtr.PlayerMemorized = false;
             Game.RevertTileToBackground(y, x);
-        }
-        else if (cPtr.FeatureType.IsSecretDoor || cPtr.FeatureType.IsClosedDoor)
-        {
-            Game.CaveSetFeat(y, x, Game.SingletonRepository.Get<Tile>(nameof(LockedDoor0Tile)));
-            if (Game.PlayerHasLosBold(y, x))
-            {
-                Game.MsgPrint("Click!");
-                obvious = true;
-            }
         }
         return obvious;
     }

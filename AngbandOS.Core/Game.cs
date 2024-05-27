@@ -4393,10 +4393,10 @@ internal class Game
         RefreshMap.SetChangedFlag(); // TODO: Needs to convert to dependencies in the MapWidget.  In this case, the grid was modified.
     }
 
-    public bool DestroyDoor(int dir)
+    public bool DestroyTrapOrDoor(int dir)
     {
         ProjectionFlag flg = ProjectionFlag.ProjectBeam | ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem;
-        return TargetedProject(SingletonRepository.Get<Projectile>(nameof(KillDoorProjectile)), dir, 0, flg);
+        return TargetedProject(SingletonRepository.Get<Projectile>(nameof(DestroyTrapOrDoorProjectile)), dir, 0, flg);
     }
 
     public bool DetectDoors()
@@ -4577,7 +4577,7 @@ internal class Game
     public bool DisarmTrap(int dir)
     {
         ProjectionFlag flg = ProjectionFlag.ProjectBeam | ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem;
-        return TargetedProject(SingletonRepository.Get<Projectile>(nameof(KillTrapProjectile)), dir, 0, flg);
+        return TargetedProject(SingletonRepository.Get<Projectile>(nameof(DestroyTrapProjectile)), dir, 0, flg);
     }
 
     public void DispelDemons(int dam)
@@ -5072,7 +5072,7 @@ internal class Game
         return true;
     }
 
-    public bool FearMonster(int dir, int plev)
+    public bool ScareMonster(int dir, int plev)
     {
         ProjectionFlag flg = ProjectionFlag.ProjectStop | ProjectionFlag.ProjectKill;
         return TargetedProject(SingletonRepository.Get<Projectile>(nameof(TurnAllProjectile)), dir, plev, flg);
@@ -5612,7 +5612,7 @@ internal class Game
     public bool WallToMud(int dir)
     {
         ProjectionFlag flg = ProjectionFlag.ProjectBeam | ProjectionFlag.ProjectGrid | ProjectionFlag.ProjectItem | ProjectionFlag.ProjectKill;
-        return TargetedProject(SingletonRepository.Get<Projectile>(nameof(KillWallProjectile)), dir, 20 + DieRoll(30), flg);
+        return TargetedProject(SingletonRepository.Get<Projectile>(nameof(WallToMudProjectile)), dir, 20 + DieRoll(30), flg);
     }
 
     public void WizardLock(int dir)
