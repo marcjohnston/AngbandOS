@@ -8,9 +8,9 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class AcquirementIdentifableAndUsedScript : Script, IIdentifableAndUsedScript
+internal class SatisfyHungerIdentifableAndUsedScript : Script, IIdentifableAndUsedScript
 {
-    private AcquirementIdentifableAndUsedScript(Game game) : base(game) { }
+    private SatisfyHungerIdentifableAndUsedScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script and returns false.
@@ -18,7 +18,11 @@ internal class AcquirementIdentifableAndUsedScript : Script, IIdentifableAndUsed
     /// <returns></returns>
     public (bool identified, bool used) ExecuteIdentifableAndUsedScript()
     {
-        Game.Acquirement(Game.MapY.IntValue, Game.MapX.IntValue, 1, true);
+        if (!Game.SetFood(Constants.PyFoodMax - 1))
+        {
+            return (false, true);
+        }
         return (true, true);
     }
 }
+

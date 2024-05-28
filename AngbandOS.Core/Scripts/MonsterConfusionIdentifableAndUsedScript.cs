@@ -8,9 +8,9 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class AcquirementIdentifableAndUsedScript : Script, IIdentifableAndUsedScript
+internal class MonsterConfusionIdentifableAndUsedScript : Script, IIdentifableAndUsedScript
 {
-    private AcquirementIdentifableAndUsedScript(Game game) : base(game) { }
+    private MonsterConfusionIdentifableAndUsedScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script and returns false.
@@ -18,7 +18,13 @@ internal class AcquirementIdentifableAndUsedScript : Script, IIdentifableAndUsed
     /// <returns></returns>
     public (bool identified, bool used) ExecuteIdentifableAndUsedScript()
     {
-        Game.Acquirement(Game.MapY.IntValue, Game.MapX.IntValue, 1, true);
+        if (Game.HasConfusingTouch)
+        {
+            return (false, true);
+        }
+        Game.MsgPrint("Your hands begin to glow.");
+        Game.HasConfusingTouch = true;
         return (true, true);
     }
 }
+

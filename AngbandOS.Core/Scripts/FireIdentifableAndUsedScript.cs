@@ -8,9 +8,9 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class AcquirementIdentifableAndUsedScript : Script, IIdentifableAndUsedScript
+internal class FireIdentifableAndUsedScript : Script, IIdentifableAndUsedScript
 {
-    private AcquirementIdentifableAndUsedScript(Game game) : base(game) { }
+    private FireIdentifableAndUsedScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script and returns false.
@@ -18,7 +18,12 @@ internal class AcquirementIdentifableAndUsedScript : Script, IIdentifableAndUsed
     /// <returns></returns>
     public (bool identified, bool used) ExecuteIdentifableAndUsedScript()
     {
-        Game.Acquirement(Game.MapY.IntValue, Game.MapX.IntValue, 1, true);
+        Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(FireProjectile)), 0, 150, 4);
+        if (!(Game.FireResistanceTimer.Value != 0 || Game.HasFireResistance || Game.HasFireImmunity))
+        {
+            Game.TakeHit(50 + Game.DieRoll(50), "a Scroll of Fire");
+        }
         return (true, true);
     }
 }
+

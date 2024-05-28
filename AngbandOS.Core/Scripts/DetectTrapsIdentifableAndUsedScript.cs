@@ -8,9 +8,9 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class AcquirementIdentifableAndUsedScript : Script, IIdentifableAndUsedScript
+internal class DetectTrapsIdentifableAndUsedScript : Script, IIdentifableAndUsedScript
 {
-    private AcquirementIdentifableAndUsedScript(Game game) : base(game) { }
+    private DetectTrapsIdentifableAndUsedScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script and returns false.
@@ -18,7 +18,11 @@ internal class AcquirementIdentifableAndUsedScript : Script, IIdentifableAndUsed
     /// <returns></returns>
     public (bool identified, bool used) ExecuteIdentifableAndUsedScript()
     {
-        Game.Acquirement(Game.MapY.IntValue, Game.MapX.IntValue, 1, true);
+        if (!Game.DetectTraps())
+        {
+            return (false, true);
+        }
         return (true, true);
     }
 }
+

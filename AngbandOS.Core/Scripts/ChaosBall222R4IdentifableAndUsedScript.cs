@@ -8,9 +8,9 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class AcquirementIdentifableAndUsedScript : Script, IIdentifableAndUsedScript
+internal class ChaosBall222R4IdentifableAndUsedScript : Script, IIdentifableAndUsedScript
 {
-    private AcquirementIdentifableAndUsedScript(Game game) : base(game) { }
+    private ChaosBall222R4IdentifableAndUsedScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script and returns false.
@@ -18,7 +18,12 @@ internal class AcquirementIdentifableAndUsedScript : Script, IIdentifableAndUsed
     /// <returns></returns>
     public (bool identified, bool used) ExecuteIdentifableAndUsedScript()
     {
-        Game.Acquirement(Game.MapY.IntValue, Game.MapX.IntValue, 1, true);
+        Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(ChaosProjectile)), 0, 222, 4);
+        if (!Game.HasChaosResistance)
+        {
+            Game.TakeHit(111 + Game.DieRoll(111), "a Scroll of Chaos");
+        }
         return (true, true);
     }
 }
+

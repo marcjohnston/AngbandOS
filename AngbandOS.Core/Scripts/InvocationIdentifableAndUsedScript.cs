@@ -8,9 +8,9 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class AcquirementIdentifableAndUsedScript : Script, IIdentifableAndUsedScript
+internal class InvocationIdentifableAndUsedScript : Script, IIdentifableAndUsedScript
 {
-    private AcquirementIdentifableAndUsedScript(Game game) : base(game) { }
+    private InvocationIdentifableAndUsedScript(Game game) : base(game) { }
 
     /// <summary>
     /// Executes the script and returns false.
@@ -18,7 +18,14 @@ internal class AcquirementIdentifableAndUsedScript : Script, IIdentifableAndUsed
     /// <returns></returns>
     public (bool identified, bool used) ExecuteIdentifableAndUsedScript()
     {
-        Game.Acquirement(Game.MapY.IntValue, Game.MapX.IntValue, 1, true);
+        Patron patron = Game.SingletonRepository.ToWeightedRandom<Patron>().ChooseOrDefault();
+        if (patron == null)
+        {
+            throw new Exception("There are no Patrons configured to invoke.");
+        }
+        Game.MsgPrint($"You invoke the secret name of {patron.LongName}.");
+        patron.GetReward();
         return (true, true);
     }
 }
+
